@@ -4,7 +4,7 @@
 **Phase 1: Foundation - Week 1 - 100% COMPLETE ✅**
 
 ## Current Task
-Phase 1 Final Refinements ✅ COMPLETE
+Phase 1 Complete + BDB Scholarly Enhancement ✅ COMPLETE
 - [x] Refinement 1: Case-insensitive figurative language search
 - [x] Refinement 2: Full verse context in figurative instances
 - [x] Refinement 3: Phrase search (already implemented)
@@ -13,6 +13,10 @@ Phase 1 Final Refinements ✅ COMPLETE
 - [x] Integration testing with all refinements
 - [x] Psalm 27:1 demo verified improvements
 - [x] Documentation updated
+- [x] **BDB Scholarly Enhancement**: Switched to BDB Dictionary + Klein (8.3x more data!)
+- [x] HTML stripping for clean definitions
+- [x] Klein etymology extraction (Ugaritic cognates, Egyptian borrowings)
+- [x] Division of labor: BDB for semantics, Concordance for usage
 
 ## Progress
 - **Overall**: 11% complete (Day 5 of 45 complete)
@@ -67,10 +71,13 @@ Phase 1 Final Refinements ✅ COMPLETE
 - ✅ Total agent code: ~1,890 lines (including docs and CLIs)
 
 ✅ **Phase 1, Day 5: Integration & Documentation** (100% COMPLETE)
-- ✅ **Enhancement 1**: Fixed BDB Librarian Sefaria API integration
-  - Returns comprehensive lexicon data from 3 sources (BDB, Jastrow, Klein)
-  - Added homograph disambiguation metadata (vocalization, Strong's numbers, transliteration)
-  - Architectural decision: Scholar filters meanings (not Librarian) - saves $2.40/project
+- ✅ **Enhancement 1**: BDB Librarian Scholarly Upgrade
+  - Switched from "BDB Augmented Strong" (150 chars) → "BDB Dictionary" (1,247 chars)
+  - Added Klein Dictionary with etymology extraction (Ugaritic, Egyptian cognates)
+  - HTML stripping for clean definitions
+  - Added morphology, etymology_notes, derivatives fields
+  - Division of labor: NO usage examples (Concordance Librarian's job)
+  - Result: 8.3x more scholarly data per word
 - ✅ **Enhancement 2**: Comprehensive logging system (~470 LOC)
   - Dual output: human-readable console + machine-readable JSON
   - Specialized methods: research_request, librarian_query, librarian_results, phrase_variations
@@ -205,8 +212,8 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 6. **Analysis approach**: Three-pass telescopic (macro → micro → synthesis)
 
 ## Quick Links
-- **Last session**: 2025-10-16 (Day 5 - Integration & Documentation COMPLETE ✅)
-- **Last session topic**: Day 5 enhancements, documentation, integration testing
+- **Last session**: 2025-10-16 (Day 5 Final - BDB Scholarly Enhancement COMPLETE ✅)
+- **Last session topic**: BDB Librarian upgrade to full scholarly lexicons (BDB Dictionary + Klein)
 - **Current code location**:
   - src/agents/ (all librarians + assembler)
   - src/utils/ (logging system)
