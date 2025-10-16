@@ -1,0 +1,1388 @@
+{
+  "psalm_chapter": 27,
+  "lexicon": {
+    "entries": [
+      {
+        "word": "אור",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "to be or become light,  shine\n    to become light (day)\n    to shine (of the sun)\n    to become bright\n    to be illuminated\n    to become lighted up\n    to give light,  shine (of sun,  moon,  and stars)\n    to illumine,  light up,  cause to shine,  shine\n    to kindle,  light (candle,  wood)\n    lighten (of the eyes,  his law,  etc)\n    to make shine (of the face)",
+        "headword": "אוֹר",
+        "strong_number": "215",
+        "transliteration": "ʼôwr"
+      },
+      {
+        "word": "אור",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "light\n  light of day\n  light of heavenly luminaries (moon,  sun, stars)\n  day-break,  dawn,  morning light\n  daylight\n  lightning\n  light of lamp\n  light of life\n  light of prosperity\n  light of instruction\n  light of face (fig.)\n  Jehovah as Israel's light",
+        "headword": "אוֹר",
+        "strong_number": "216",
+        "transliteration": "ʼôwr"
+      },
+      {
+        "word": "אור",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "flame,  light of fire",
+        "headword": "אוּר",
+        "strong_number": "217",
+        "transliteration": "ʼûwr"
+      },
+      {
+        "word": "אור",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "Ur = \"flame\"\ncity in southern Babylonia,  city of the Chaldeans,  centre of moon worship,  home of Abraham's father,  Terah,  and departure point for the Abraham's migration to Mesopotamia and Canaan",
+        "headword": "אוּר",
+        "strong_number": "218",
+        "transliteration": "ʼÛwr"
+      },
+      {
+        "word": "ישע",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "deliverance,  salvation,  rescue,  safety,  welfare\n  safety,  welfare,  prosperity\n  salvation\n  victory",
+        "headword": "יֶשַׁע",
+        "strong_number": "3468",
+        "transliteration": "yeshaʻ"
+      },
+      {
+        "word": "ירא",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "to fear,  revere,  be afraid\n    to fear,  be afraid\n    to stand in awe of,  be awed\n    to fear,  reverence,  honour,  respect\n    to be fearful,  be dreadful,  be feared\n    to cause astonishment and awe,  be held in awe\n    to inspire reverence or godly fear or awe\n   to make afraid,  terrify\n(TWOT) to shoot,  pour",
+        "headword": "יָרֵא",
+        "strong_number": "3372",
+        "transliteration": "yârêʼ"
+      },
+      {
+        "word": "ירא",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "fearing,  reverent,  afraid",
+        "headword": "יָרֵא",
+        "strong_number": "3373",
+        "transliteration": "yârêʼ"
+      },
+      {
+        "word": "ירא",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "to see,  look at,  inspect,  perceive,  consider\n    to see\n    to see,  perceive\n    to see,  have vision\n    to look at,  see,  regard,  look after,  see after,  learn about,  observe,  watch,  look upon,  look out,  find out\n    to see,  observe,  consider,  look at,  give attention to, discern,  distinguish\n    to look at,  gaze at\n    to appear,  present oneself\n    to be seen\n    to be visible\n   to be seen\n    to cause to see,  show\n    to cause to look intently at,  behold,  cause to gaze at\n    to be caused to see,  be shown\n    to be exhibited to\n   to look at each other,  face",
+        "headword": "רָאָה",
+        "strong_number": "7200",
+        "transliteration": "râʼâh"
+      },
+      {
+        "word": "ירא",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "bird of prey\n  perhaps kite or hawk",
+        "headword": "רָאָה",
+        "strong_number": "7201",
+        "transliteration": "râʼâh"
+      },
+      {
+        "word": "מעוז",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "place or means of safety,  protection,  refuge,  stronghold\n  place of safety,  fastness,  harbour,  stronghold\n  refuge (of God) (fig.)\n  human protection (fig.)",
+        "headword": "מָעוֹז",
+        "strong_number": "4581",
+        "transliteration": "mâʻôwz"
+      },
+      {
+        "word": "פחד",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "to fear,  tremble,  revere,  dread,  be in awe or dread\n    to be in dread\n    to be in awe\n   to be in great dread\n   to cause to dread",
+        "headword": "פָּחַד",
+        "strong_number": "6342",
+        "transliteration": "pâchad"
+      },
+      {
+        "word": "פחד",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "terror,  dread\n  dread\n  object of dread",
+        "headword": "פַּחַד",
+        "strong_number": "6343",
+        "transliteration": "pachad"
+      },
+      {
+        "word": "פחד",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "thigh",
+        "headword": "פַּחַד",
+        "strong_number": "6344",
+        "transliteration": "pachad"
+      }
+    ],
+    "requests": [
+      {
+        "word": "אור",
+        "notes": null
+      },
+      {
+        "word": "ישע",
+        "notes": null
+      },
+      {
+        "word": "ירא",
+        "notes": null
+      },
+      {
+        "word": "מעוז",
+        "notes": null
+      },
+      {
+        "word": "פחד",
+        "notes": null
+      }
+    ]
+  },
+  "concordance": [
+    {
+      "results": [
+        {
+          "reference": "Psalms 4:7",
+          "book": "Psalms",
+          "chapter": 4,
+          "verse": 7,
+          "hebrew": "רַבִּ֥ים אֹמְרִים֮ מִֽי־יַרְאֵ֢נ֫וּ ט֥וֹב נְֽסָה־עָ֭לֵינוּ א֨וֹר פָּנֶ֬יךָ יְהֹוָֽה׃",
+          "english": "Many say, “O for good days!”cLit. “Lift up the light of Your countenance upon us”; cf. Num. 6.25 f.Bestow Your favor on us,-c O LORD.",
+          "matched_word": "א֨וֹר",
+          "position": 5
+        },
+        {
+          "reference": "Psalms 97:11",
+          "book": "Psalms",
+          "chapter": 97,
+          "verse": 11,
+          "hebrew": "א֭וֹר זָרֻ֣עַ לַצַּדִּ֑יק וּֽלְיִשְׁרֵי־לֵ֥ב שִׂמְחָֽה׃",
+          "english": "Light is sown for the righteous,radiancebOthers “joy.” for the upright.",
+          "matched_word": "א֭וֹר",
+          "position": 0
+        },
+        {
+          "reference": "Psalms 112:4",
+          "book": "Psalms",
+          "chapter": 112,
+          "verse": 4,
+          "hebrew": "זָ֘רַ֤ח בַּחֹ֣שֶׁךְ א֭וֹר לַיְשָׁרִ֑ים חַנּ֖וּן וְרַח֣וּם וְצַדִּֽיק׃",
+          "english": "aOr “He shines as a light.”A light shines-a for the upright in the darkness;he is gracious, compassionate, and beneficent.",
+          "matched_word": "א֭וֹר",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 139:11",
+          "book": "Psalms",
+          "chapter": 139,
+          "verse": 11,
+          "hebrew": "וָ֭אֹמַר אַךְ־חֹ֣שֶׁךְ יְשׁוּפֵ֑נִי וְ֝לַ֗יְלָה א֣וֹר בַּעֲדֵֽנִי׃",
+          "english": "If I say, “Surely darkness bCf. Rashi, Ibn Ezra; meaning of Heb. uncertain.will conceal me,night will provide me with cover,”-b",
+          "matched_word": "א֣וֹר",
+          "position": 4
+        },
+        {
+          "reference": "Psalms 148:3",
+          "book": "Psalms",
+          "chapter": 148,
+          "verse": 3,
+          "hebrew": "הַֽ֭לְלוּהוּ שֶׁ֣מֶשׁ וְיָרֵ֑חַ הַֽ֝לְל֗וּהוּ כׇּל־כּ֥וֹכְבֵי אֽוֹר׃",
+          "english": "Praise Him, sun and moon,praise Him, all bright stars.",
+          "matched_word": "אֽוֹר׃",
+          "position": 5
+        },
+        {
+          "reference": "Psalms 56:14",
+          "book": "Psalms",
+          "chapter": 56,
+          "verse": 14,
+          "hebrew": "כִּ֤י הִצַּ֪לְתָּ נַפְשִׁ֡י מִמָּוֶת֮ הֲלֹ֥א רַגְלַ֗י מִ֫דֶּ֥חִי לְ֭הִֽתְהַלֵּךְ לִפְנֵ֣י אֱלֹהִ֑ים בְּ֝א֗וֹר הַחַיִּֽים׃ {פ}",
+          "english": "For You have saved me from death,my foot from stumbling,that I may walk before God in the light of life.",
+          "matched_word": "בְּ֝א֗וֹר",
+          "position": 10
+        },
+        {
+          "reference": "Psalms 78:14",
+          "book": "Psalms",
+          "chapter": 78,
+          "verse": 14,
+          "hebrew": "וַיַּנְחֵ֣ם בֶּעָנָ֣ן יוֹמָ֑ם וְכׇל־הַ֝לַּ֗יְלָה בְּא֣וֹר אֵֽשׁ׃",
+          "english": "He led them with a cloud by day,and throughout the night by the light of fire.",
+          "matched_word": "בְּא֣וֹר",
+          "position": 4
+        },
+        {
+          "reference": "Psalms 44:4",
+          "book": "Psalms",
+          "chapter": 44,
+          "verse": 4,
+          "hebrew": "כִּ֤י לֹ֪א בְחַרְבָּ֡ם יָ֥רְשׁוּ אָ֗רֶץ וּזְרוֹעָם֮ לֹא־הוֹשִׁ֢יעָ֫ה לָּ֥מוֹ כִּֽי־יְמִינְךָ֣ וּ֭זְרוֹעֲךָ וְא֥וֹר פָּנֶ֗יךָ כִּ֣י רְצִיתָֽם׃",
+          "english": "It was not by their sword that they took the land,their arm did not give them victory,but Your right hand, Your arm, and Your goodwill,for You favored them.",
+          "matched_word": "וְא֥וֹר",
+          "position": 10
+        },
+        {
+          "reference": "Psalms 119:105",
+          "book": "Psalms",
+          "chapter": 119,
+          "verse": 105,
+          "hebrew": "נֵר־לְרַגְלִ֥י דְבָרֶ֑ךָ וְ֝א֗וֹר לִנְתִיבָתִֽי׃",
+          "english": "Your word is a lamp to my feet,a light for my path.",
+          "matched_word": "וְ֝א֗וֹר",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 37:6",
+          "book": "Psalms",
+          "chapter": 37,
+          "verse": 6,
+          "hebrew": "וְהוֹצִ֣יא כָא֣וֹר צִדְקֶ֑ךָ וּ֝מִשְׁפָּטֶ֗ךָ כַּֽצׇּהֳרָֽיִם׃",
+          "english": "He will cause your vindication to shine forth like the light,the justice of your case, like the noonday sun.",
+          "matched_word": "כָא֣וֹר",
+          "position": 1
+        },
+        {
+          "reference": "Psalms 74:16",
+          "book": "Psalms",
+          "chapter": 74,
+          "verse": 16,
+          "hebrew": "לְךָ֣ י֭וֹם אַף־לְךָ֥ לָ֑יְלָה אַתָּ֥ה הֲ֝כִינ֗וֹתָ מָא֥וֹר וָשָֽׁמֶשׁ׃",
+          "english": "the day is Yours, the night also;it was You who set in place the orb of the sun;",
+          "matched_word": "מָא֥וֹר",
+          "position": 6
+        }
+      ],
+      "total_results": 11,
+      "variations_searched": [
+        "אור",
+        "באור",
+        "בהאור",
+        "האור",
+        "ואור",
+        "ובאור",
+        "ובהאור",
+        "והאור",
+        "וכאור",
+        "וכהאור",
+        "ולאור",
+        "ולהאור",
+        "ומאור",
+        "ומהאור",
+        "כאור",
+        "כהאור",
+        "לאור",
+        "להאור",
+        "מאור",
+        "מהאור"
+      ],
+      "request": {
+        "query": "אור",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "include_variations": true
+      }
+    },
+    {
+      "results": [
+        {
+          "reference": "Psalms 28:8",
+          "book": "Psalms",
+          "chapter": 28,
+          "verse": 8,
+          "hebrew": "יְהֹוָ֥ה עֹֽז־לָ֑מוֹ וּמָ֘ע֤וֹז יְשׁוּע֖וֹת מְשִׁיח֣וֹ הֽוּא׃",
+          "english": "The LORD is cSeptuagint, Saadia, and others render, and some mss. read, ‘oz le‘ammo, “the strength of His people.”their strength;-cHe is a stronghold for the deliverance of His anointed.",
+          "matched_word": "וּמָ֘ע֤וֹז",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 60:9",
+          "book": "Psalms",
+          "chapter": 60,
+          "verse": 9,
+          "hebrew": "לִ֤י גִלְעָ֨ד ׀ וְלִ֬י מְנַשֶּׁ֗ה וְ֭אֶפְרַיִם מָע֣וֹז רֹאשִׁ֑י יְ֝הוּדָ֗ה מְחֹֽקְקִֽי׃",
+          "english": "Gilead and Manasseh would be mine,Ephraim my chief stronghold,Judah my scepter;",
+          "matched_word": "מָע֣וֹז",
+          "position": 6
+        },
+        {
+          "reference": "Psalms 108:9",
+          "book": "Psalms",
+          "chapter": 108,
+          "verse": 9,
+          "hebrew": "לִ֤י גִלְעָ֨ד ׀ לִ֤י מְנַשֶּׁ֗ה וְ֭אֶפְרַיִם מָע֣וֹז רֹאשִׁ֑י יְ֝הוּדָ֗ה מְחֹקְקִֽי׃",
+          "english": "Gilead and Manasseh would be mine,Ephraim my chief stronghold,Judah my scepter;",
+          "matched_word": "מָע֣וֹז",
+          "position": 6
+        }
+      ],
+      "total_results": 3,
+      "variations_searched": [
+        "בהמעוז",
+        "במעוז",
+        "המעוז",
+        "ובהמעוז",
+        "ובמעוז",
+        "והמעוז",
+        "וכהמעוז",
+        "וכמעוז",
+        "ולהמעוז",
+        "ולמעוז",
+        "ומהמעוז",
+        "וממעוז",
+        "ומעוז",
+        "כהמעוז",
+        "כמעוז",
+        "להמעוז",
+        "למעוז",
+        "מהמעוז",
+        "ממעוז",
+        "מעוז"
+      ],
+      "request": {
+        "query": "מעוז",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "include_variations": true
+      }
+    }
+  ],
+  "figurative": [
+    {
+      "instances": [
+        {
+          "reference": "Psalms 27:1",
+          "book": "Psalms",
+          "chapter": 27,
+          "verse": 1,
+          "hebrew_text": "לְדָוִ֨ד&thinsp;׀ יְהֹוָ֤ה&thinsp;׀ אוֹרִ֣י וְ֭יִשְׁעִי מִמִּ֣י אִירָ֑א יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י מִמִּ֥י אֶפְחָֽד",
+          "english_text": "Of David.The LORD is my light and my help;whom should I fear?The LORD is the stronghold of my life,whom should I dread?",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "The LORD is my light",
+          "figurative_text_hebrew": "יְהֹוָ֤ה׀ אוֹרִ֣י",
+          "explanation": "God's role as a source of guidance, salvation, and protection is metaphorically compared to physical light, which dispels darkness and provides clarity and safety.",
+          "metadata": {
+            "target": [
+              "God's protective presence",
+              "Divine guidance",
+              "Spiritual support",
+              "Deity"
+            ],
+            "vehicle": [
+              "Physical light",
+              "Illumination source",
+              "Natural phenomenon"
+            ],
+            "ground": [
+              "Guidance",
+              "Salvation",
+              "Protection",
+              "Clarity",
+              "Deliverance from distress"
+            ],
+            "posture": [
+              "Trust",
+              "Confidence",
+              "Praise",
+              "Positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "David",
+            "purpose": "To express absolute trust and confidence in God's ability to provide safety, guidance, and salvation."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"The LORD is my light\" (יְהֹוָ֤ה&thinsp;׀ אוֹרִ֣י)**:\n    *   **Considered**: If this phrase might be a metaphor.\n    *   **Reasoning**: God is not literally a physical source of light. Instead, the concept of \"light\" (אוֹר) is used to represent God's role in providing guidance, salvation, well-being, and protection from distress or danger (darkness). This is a clear cross-domain comparison where an abstract quality or function of God is likened to a concrete physical phenomenon. Therefore, it is included as a metaphor.\n    *   **Borderline cases**: None; this is a straightforward metaphor.\n\n2.  **\"and my help/salvation\" (וְ֭יִשְׁעִי)**:\n    *   **Considered**: If this phrase might be figurative.\n    *   **Reasoning**: This describes God's direct attribute or action as a source of salvation or help. It is a literal statement about God's function and character, not a comparison to something else. Therefore, it is excluded.\n\n3.  **\"whom should I fear?\" (מִמִּ֣י אִירָ֑א)**:\n    *   **Considered**: If this phrase might be an idiom or another type of figurative language.\n    *   **Reasoning**: This is a rhetorical question, a stylistic device used for emphasis, implying \"no one.\" While it is a figure of speech, it does not fit the specific categories of metaphor, simile, personification, or a fixed biblical idiom with a non-literal meaning as defined by the instructions. The instructions specifically ask to mark \"clear metaphors, personification, obvious similes, and figurative idioms.\" Rhetorical questions are not explicitly included in these types. Therefore, it is excluded.\n\n4.  **\"The LORD is the stronghold of my life\" (יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י)**:\n    *   **Considered**: If this phrase might be a metaphor.\n    *   **Reasoning**: God is not literally a physical fortress or stronghold. The term \"stronghold\" (מָעוֹז) refers to a fortified place that provides security, refuge, and defense. This phrase metaphorically compares God's protective power, reliability, and ability to provide security to a physical stronghold. This is a clear cross-domain comparison. Therefore, it is included as a metaphor.\n    *   **Borderline cases**: None; this is a straightforward metaphor.\n\n5.  **\"whom should I dread?\" (מִמִּ֥י אֶפְחָֽד)**:\n    *   **Considered**: If this phrase might be an idiom or another type of figurative language.\n    *   **Reasoning**: Similar to \"whom should I fear?\", this is a rhetorical question for emphasis, implying \"no one.\" It is a stylistic device but does not fall under the specified categories for marking figurative language (metaphor, simile, personification, or figurative idiom). Therefore, it is excluded.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 27:1",
+          "book": "Psalms",
+          "chapter": 27,
+          "verse": 1,
+          "hebrew_text": "לְדָוִ֨ד&thinsp;׀ יְהֹוָ֤ה&thinsp;׀ אוֹרִ֣י וְ֭יִשְׁעִי מִמִּ֣י אִירָ֑א יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י מִמִּ֥י אֶפְחָֽד",
+          "english_text": "Of David.The LORD is my light and my help;whom should I fear?The LORD is the stronghold of my life,whom should I dread?",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "The LORD is the stronghold of my life",
+          "figurative_text_hebrew": "יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י",
+          "explanation": "God's protective power and reliability are metaphorically compared to a physical stronghold or fortress, which offers security and refuge from danger.",
+          "metadata": {
+            "target": [
+              "God's protective power",
+              "Divine refuge",
+              "Spiritual security",
+              "Deity"
+            ],
+            "vehicle": [
+              "Physical stronghold",
+              "Fortress",
+              "Defensive structure",
+              "Architectural element"
+            ],
+            "ground": [
+              "Security",
+              "Protection",
+              "Refuge",
+              "Defense",
+              "Stability"
+            ],
+            "posture": [
+              "Trust",
+              "Confidence",
+              "Praise",
+              "Positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "David",
+            "purpose": "To express absolute trust and confidence in God's ability to provide ultimate security and defense against all threats."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"The LORD is my light\" (יְהֹוָ֤ה&thinsp;׀ אוֹרִ֣י)**:\n    *   **Considered**: If this phrase might be a metaphor.\n    *   **Reasoning**: God is not literally a physical source of light. Instead, the concept of \"light\" (אוֹר) is used to represent God's role in providing guidance, salvation, well-being, and protection from distress or danger (darkness). This is a clear cross-domain comparison where an abstract quality or function of God is likened to a concrete physical phenomenon. Therefore, it is included as a metaphor.\n    *   **Borderline cases**: None; this is a straightforward metaphor.\n\n2.  **\"and my help/salvation\" (וְ֭יִשְׁעִי)**:\n    *   **Considered**: If this phrase might be figurative.\n    *   **Reasoning**: This describes God's direct attribute or action as a source of salvation or help. It is a literal statement about God's function and character, not a comparison to something else. Therefore, it is excluded.\n\n3.  **\"whom should I fear?\" (מִמִּ֣י אִירָ֑א)**:\n    *   **Considered**: If this phrase might be an idiom or another type of figurative language.\n    *   **Reasoning**: This is a rhetorical question, a stylistic device used for emphasis, implying \"no one.\" While it is a figure of speech, it does not fit the specific categories of metaphor, simile, personification, or a fixed biblical idiom with a non-literal meaning as defined by the instructions. The instructions specifically ask to mark \"clear metaphors, personification, obvious similes, and figurative idioms.\" Rhetorical questions are not explicitly included in these types. Therefore, it is excluded.\n\n4.  **\"The LORD is the stronghold of my life\" (יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י)**:\n    *   **Considered**: If this phrase might be a metaphor.\n    *   **Reasoning**: God is not literally a physical fortress or stronghold. The term \"stronghold\" (מָעוֹז) refers to a fortified place that provides security, refuge, and defense. This phrase metaphorically compares God's protective power, reliability, and ability to provide security to a physical stronghold. This is a clear cross-domain comparison. Therefore, it is included as a metaphor.\n    *   **Borderline cases**: None; this is a straightforward metaphor.\n\n5.  **\"whom should I dread?\" (מִמִּ֥י אֶפְחָֽד)**:\n    *   **Considered**: If this phrase might be an idiom or another type of figurative language.\n    *   **Reasoning**: Similar to \"whom should I fear?\", this is a rhetorical question for emphasis, implying \"no one.\" It is a stylistic device but does not fall under the specified categories for marking figurative language (metaphor, simile, personification, or figurative idiom). Therefore, it is excluded.",
+            "tagging": ""
+          }
+        }
+      ],
+      "total_results": 2,
+      "request": {
+        "book": "Psalms",
+        "chapter": 27,
+        "verse_range": "1-1",
+        "filters": {
+          "types": [
+            "metaphor"
+          ],
+          "target": null,
+          "vehicle": null,
+          "ground": null,
+          "posture": null
+        }
+      }
+    },
+    {
+      "instances": [
+        {
+          "reference": "Psalms 9:10",
+          "book": "Psalms",
+          "chapter": 9,
+          "verse": 10,
+          "hebrew_text": "וִ֘יהִ֤י יְהֹוָ֣ה מִשְׂגָּ֣ב לַדָּ֑ךְ מִ֝שְׂגָּ֗ב לְעִתּ֥וֹת בַּצָּרָֽה",
+          "english_text": "The LORD is a haven for the oppressed,a haven in times of trouble.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "The LORD is a haven for the oppressed, a haven in times of trouble.",
+          "figurative_text_hebrew": "וִ֘יהִ֤י יְהֹוָ֣ה מִשְׂגָּ֣ב לַדָּ֑ךְ מִ֝שְׂגָּ֗ב לְעִתּ֥וֹת בַּצָּרָֽה",
+          "explanation": "The divine being, YHWH, is metaphorically described as a 'haven' or 'stronghold' (מִשְׂגָּב). YHWH is not a physical structure, but provides protection and security akin to a fortified refuge.",
+          "metadata": {
+            "target": [
+              "YHWH",
+              "God of Israel",
+              "Divine Protector",
+              "Deity"
+            ],
+            "vehicle": [
+              "Haven",
+              "Stronghold",
+              "Fortress",
+              "Place of Refuge",
+              "Protective Structure",
+              "Physical Structure"
+            ],
+            "ground": [
+              "Protection",
+              "Security",
+              "Safety",
+              "Deliverance",
+              "Divine Attributes",
+              "Benevolent Action",
+              "Support"
+            ],
+            "posture": [
+              "Affirmation of Divine Power",
+              "Expression of Trust",
+              "Praise",
+              "Declaration of Faith",
+              "Positive Sentiment",
+              "Religious Devotion"
+            ],
+            "confidence": 1.0,
+            "speaker": "Narrator",
+            "purpose": "To convey the absolute security and protection that YHWH provides to those who are vulnerable and in distress, emphasizing His role as a divine deliverer."
+          },
+          "ai_deliberations": {
+            "detection": "I have analyzed the verse \"וִ֘יהִ֤י יְהֹוָ֣ה מִשְׂגָּ֣ב לַדָּ֑ךְ מִ֝שְׂגָּ֗ב לְעִתּ֥וֹת בַּצָּרָֽה\" (The LORD is a haven for the oppressed, a haven in times of trouble) for figurative language.\n\n1.  **\"וִ֘יהִ֤י יְהֹוָ֣ה מִשְׂגָּ֣ב\" (The LORD is a haven/stronghold):**\n    *   **Consideration:** I considered if \"מִשְׂגָּב\" (misgav), meaning a high place, stronghold, or haven, is used literally or figuratively in relation to YHWH.\n    *   **Reasoning:** YHWH is a divine, non-physical being, not a literal physical structure, fortress, or elevated place. Therefore, stating that YHWH *is* a \"מִשְׂגָּב\" involves a cross-domain comparison where a divine entity is likened to a physical place of refuge. This is a clear metaphor. The quality being highlighted is the protection, security, and safety that YHWH provides, similar to how a physical stronghold protects those within it.\n    *   **Borderline cases:** None; this is a straightforward metaphor.\n\n2.  **\"לַדָּ֑ךְ\" (for the oppressed):**\n    *   **Consideration:** I considered if \"oppressed\" is figurative.\n    *   **Reasoning:** This term literally describes the state of individuals who are downtrodden or afflicted. It is a literal description of a group of people.\n\n3.  **\"מִ֝שְׂגָּ֗ב לְעִתּ֥וֹת בַּצָּרָֽה\" (a haven in times of trouble):**\n    *   **Consideration:** This phrase repeats the term \"מִשְׂגָּב\" and applies it to \"times of trouble.\"\n    *   **Reasoning:** This is a reiteration and elaboration of the metaphor established in the first clause. While \"YHWH\" is not explicitly repeated, the grammatical structure implies that YHWH is still the subject of this second \"מִשְׂגָּב.\" It reinforces the metaphorical comparison of YHWH to a protective stronghold, specifically emphasizing this role during periods of distress. Thus, it continues the same metaphor.\n    *   **Borderline cases:** None; it's a direct continuation of the initial metaphor.\n\nBased on this analysis, the core figurative element is the metaphor of YHWH as a \"מִשְׂגָּב\" (haven/stronghold).",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 18:3",
+          "book": "Psalms",
+          "chapter": 18,
+          "verse": 3,
+          "hebrew_text": "יְהֹוָ֤ה&thinsp;׀ סַ֥לְעִ֥י וּמְצוּדָתִ֗י וּמְפַ֫לְטִ֥י אֵלִ֣י צ֭וּרִי אֶֽחֱסֶה־בּ֑וֹ מָֽגִנִּ֥י וְקֶֽרֶן־יִ֝שְׁעִ֗י מִשְׂגַּבִּֽי",
+          "english_text": "O LORD, my crag, my fortress, my rescuer,my God, my rock in whom I seek refuge,my shield, my cLit. “horn of rescue.”mighty champion,-c my haven.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "my haven",
+          "figurative_text_hebrew": "מִשְׂגַּבִּֽי",
+          "explanation": "God is not a literal haven or stronghold; the term is used metaphorically to describe God as a secure, high place of refuge and safety.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Refuge",
+              "Deity"
+            ],
+            "vehicle": [
+              "haven",
+              "stronghold",
+              "place of safety"
+            ],
+            "ground": [
+              "refuge",
+              "safety",
+              "security",
+              "inaccessibility"
+            ],
+            "posture": [
+              "praise",
+              "trust",
+              "positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "David",
+            "purpose": "To express God's role as an ultimate and secure place of retreat and protection from danger."
+          },
+          "ai_deliberations": {
+            "detection": "I have analyzed each phrase in the provided text for potential figurative language:\n\n1.  **יְהֹוָ֤ה (O LORD):** This is a direct address to God. I considered if it could be a form of apostrophe, but in biblical context, direct address to God is standard and literal, not a rhetorical figure in the sense of personification or addressing an absent entity. Therefore, it is not marked as figurative.\n\n2.  **סַ֥לְעִ֥י (my crag):** I considered this as a metaphor. God is not a literal physical crag. The comparison is made to highlight God's protective, unyielding, and secure nature. This is a clear cross-domain comparison. Therefore, it is marked as a metaphor.\n\n3.  **וּמְצוּדָתִ֗י (my fortress):** Similar to \"my crag,\" God is not a literal physical fortress. This is a metaphor comparing God to a defensive structure, emphasizing His role as a secure refuge and protector. This is a clear cross-domain comparison. Therefore, it is marked as a metaphor.\n\n4.  **וּמְפַ֫לְטִ֥י (my rescuer):** I considered if this might be figurative. However, the instructions state: \"NEVER MARK AS FIGURATIVE: Comparisons of role or function.\" \"My rescuer\" describes God's direct role and function in the speaker's life. It is a literal description of God's action. Therefore, it is not marked as figurative.\n\n5.  **אֵלִ֣י (my God):** This is a direct identification of God. It is a literal statement of relationship. Therefore, it is not marked as figurative.\n\n6.  **צ֭וּרִי (my rock):** Similar to \"my crag,\" God is not a literal physical rock. This is a metaphor comparing God to a rock, signifying stability, strength, and a firm foundation. This is a clear cross-domain comparison. Therefore, it is marked as a metaphor.\n\n7.  **אֶֽחֱסֶה־בּ֑וֹ (in whom I seek refuge):** This describes the speaker's action and relationship with God. It is a literal statement of trust and dependence. Therefore, it is not marked as figurative.\n\n8.  **מָֽגִנִּ֥י (my shield):** God is not a literal physical shield. This is a metaphor comparing God to a defensive weapon, emphasizing His protective power against harm. This is a clear cross-domain comparison. Therefore, it is marked as a metaphor.\n\n9.  **וְקֶֽרֶן־יִ֝שְׁעִ֗י (my horn of rescue):** I considered this as both a metaphor and an idiom. A \"horn\" (קרן) in biblical literature is a well-established symbol of strength, power, and salvation/deliverance. God is not a literal horn. The phrase \"horn of salvation/rescue\" is a recognized biblical idiom that functions metaphorically. It clearly involves a cross-domain comparison (God's power to an animal's horn or a symbol of strength). Therefore, it is marked as both a metaphor and an idiom.\n\n10. **מִשְׂגַּבִּֽי (my haven / my stronghold):** The Hebrew מִשְׂגָּב (misgav) means \"high place, stronghold, refuge.\" God is not a literal physical high place or stronghold. This is a metaphor comparing God to a secure, elevated place of safety, emphasizing His role as a protector and refuge. This is a clear cross-domain comparison. Therefore, it is marked as a metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 28:8",
+          "book": "Psalms",
+          "chapter": 28,
+          "verse": 8,
+          "hebrew_text": "יְהֹוָ֥ה עֹֽז־לָ֑מוֹ וּמָ֘ע֤וֹז יְשׁוּע֖וֹת מְשִׁיח֣וֹ הֽוּא",
+          "english_text": "The LORD is cSeptuagint, Saadia, and others render, and some mss. read, ‘oz le‘ammo, “the strength of His people.”their strength;-cHe is a stronghold for the deliverance of His anointed.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "a stronghold",
+          "figurative_text_hebrew": "מָ֘ע֤וֹז",
+          "explanation": "God is metaphorically described as a 'stronghold' to emphasize His role as a secure refuge and source of protection for His anointed.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Spiritual Entity"
+            ],
+            "vehicle": [
+              "Stronghold",
+              "Fortress",
+              "Defensive Structure"
+            ],
+            "ground": [
+              "Protection",
+              "Security",
+              "Refuge",
+              "Unassailability"
+            ],
+            "posture": [
+              "Affirmation",
+              "Praise",
+              "Positive Sentiment",
+              "Theological Statement"
+            ],
+            "confidence": 0.98,
+            "speaker": "Narrator",
+            "purpose": "To highlight God's unwavering protection and security for His chosen one."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **Phrase/Concept:** יְהֹוָ֥ה עֹֽז־לָ֑מוֹ (The LORD is their strength)\n    *   **Considered:** I considered if \"The LORD is their strength\" is a literal statement of God's attribute, a comparison of function, or a metaphor.\n    *   **Reasoning for including it as metaphor:** While God inherently possesses strength and provides it, the phrasing \"He *is* strength\" (rather than \"He *has* strength\" or \"He *gives* strength\") equates the divine being with an abstract quality or a protective force. This constitutes a clear cross-domain comparison where God (a divine entity) is identified with \"strength\" (an abstract concept of power and protection). This identification highlights His role as the ultimate source of power, protection, and sustenance for His people. It is not a literal physical description, nor is it merely a comparison of role or function (like \"a prophet like myself\"). This fits the definition of a clear metaphor.\n    *   **Borderline cases:** One might argue it's a statement of divine attribute, but the direct identification implied by the copula (even if unstated in Hebrew) elevates it beyond simple attribution to a metaphorical equation.\n\n2.  **Phrase/Concept:** וּמָ֘ע֤וֹז (and a stronghold) in the clause וּמָ֘ע֤וֹז יְשׁוּע֖וֹת מְשִׁיח֣וֹ הֽוּא (and a stronghold for the deliverance of His anointed is He).\n    *   **Considered:** I considered if \"stronghold\" (מָעוֹז) when applied to God is a literal description, an anthropomorphism, or a metaphor.\n    *   **Reasoning for including it as metaphor:** God is not a physical, fortified structure. A \"stronghold\" is a tangible, defensive edifice designed for protection and security. Likening God (an immaterial, divine being) to a physical \"stronghold\" is a direct cross-domain comparison. The purpose of this comparison is to convey God's protective, secure, and unassailable nature, emphasizing that He provides refuge and safety for His anointed. This is a clear metaphor. It does not refer to God's body, nor is it an idiom that isn't also fundamentally metaphorical.\n    *   **Borderline cases:** None. This is a very common and unambiguous metaphor in biblical literature.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 31:22",
+          "book": "Psalms",
+          "chapter": 31,
+          "verse": 22,
+          "hebrew_text": "בָּר֥וּךְ יְהֹוָ֑ה כִּ֥י הִפְלִ֘יא־חַסְדּ֥וֹ לִ֝֗י בְּעִ֣יר מָצֽוֹר",
+          "english_text": "Blessed is the LORD,for He has been wondrously faithful to me,a veritable bastion.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "a veritable bastion",
+          "figurative_text_hebrew": "בְּעִ֣יר מָצֽוֹר",
+          "explanation": "God's faithfulness is metaphorically described as a 'fortified city' or 'bastion,' implying strength, protection, and security for the speaker. The Hebrew 'עִיר מָצוֹר' (city of matsor) can refer to a fortified city or stronghold, not just a city under siege, fitting the context of divine protection.",
+          "metadata": {
+            "target": [
+              "God's faithfulness",
+              "divine attribute",
+              "abstract concept",
+              "divine action"
+            ],
+            "vehicle": [
+              "fortified city",
+              "bastion",
+              "stronghold",
+              "protective structure",
+              "architectural element"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "strength",
+              "defense",
+              "reliability"
+            ],
+            "posture": [
+              "praise",
+              "gratitude",
+              "positive sentiment",
+              "worship"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To emphasize the profound, protective, and unwavering nature of God's faithfulness to the speaker, providing a vivid image of security."
+          },
+          "ai_deliberations": {
+            "detection": "*   **\"בָּר֥וּךְ יְהֹוָ֑ה\" (Blessed is the LORD):** I considered if this phrase might be figurative, perhaps an idiom or hyperbole. Reasoning: This is a standard declaration of praise and worship, a literal statement of blessing God. It does not involve a cross-domain comparison, exaggeration, or non-literal meaning. Therefore, it is not figurative.\n*   **\"כִּ֥י הִפְלִ֘יא־חַסְדּ֥וֹ לִ֝֗י\" (for He has been wondrously faithful to me):** I considered if \"wondrously faithful\" (הִפְלִיא חַסְדּוֹ) could be hyperbole or a metaphor. Reasoning: \"הִפְלִיא\" means \"to make wonderful,\" \"to do a wonder,\" or \"to be extraordinary.\" It describes the exceptional nature and degree of God's faithfulness, but it is a literal description of an extraordinary divine act or quality, not an exaggeration beyond belief or a comparison to something else. Therefore, it is not figurative.\n*   **\"בְּעִ֣יר מָצֽוֹר\" (bəʿîr māṣôr - in a city of siege / a veritable bastion):**\n    *   **Initial Consideration:** I first considered if this phrase could be a literal statement of location, meaning God showed faithfulness to the speaker *while the speaker was physically in a besieged city*.\n    *   **Reasoning for Exclusion of Literal Location:** While grammatically possible, the immediate context—praise for God's *wondrous faithfulness to the speaker*—suggests that \"בְּעִ֣יר מָצֽוֹר\" describes the *nature* or *effect* of that faithfulness, rather than merely a circumstantial location. If it were a literal location, one might expect more narrative detail about the speaker's situation.\n    *   **Reasoning for Inclusion as Metaphor:** The Hebrew term \"מָצוֹר\" (matsor) can mean \"siege\" but also \"fortification,\" \"bulwark,\" or \"stronghold.\" Thus, \"עִיר מָצוֹר\" can be interpreted not just as a \"city under siege\" (a place of vulnerability) but also as a \"fortified city\" or \"stronghold\" (a place of defense and security). In this context of praising God's wondrous faithfulness, the latter interpretation is far more fitting. The phrase then functions as a metaphor where God's abstract quality of faithfulness is directly identified with or compared to a concrete, protective structure—a fortified city or bastion. The preposition \"בְּ\" (bə) here can be understood as indicating the *manner* or *nature* of God's faithfulness, effectively meaning \"as a fortified city\" or \"as a bastion.\" This is a clear cross-domain comparison (abstract divine attribute to concrete architectural structure) to convey strength, protection, and reliability. This phrase is marked as a metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 37:39",
+          "book": "Psalms",
+          "chapter": 37,
+          "verse": 39,
+          "hebrew_text": "וּתְשׁוּעַ֣ת צַ֭דִּיקִים מֵיְהֹוָ֑ה מָ֝עוּזָּ֗ם בְּעֵ֣ת צָרָֽה",
+          "english_text": "The deliverance of the righteous comes from the LORD,their stronghold in time of trouble.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "their stronghold",
+          "figurative_text_hebrew": "מָ֝עוּזָּ֗ם",
+          "explanation": "The LORD is metaphorically described as a 'stronghold,' a fortified place of refuge and safety, to convey His protective nature and reliability for the righteous in times of distress.",
+          "metadata": {
+            "target": [
+              "The LORD",
+              "God",
+              "divine being"
+            ],
+            "vehicle": [
+              "stronghold",
+              "fortified place",
+              "protective structure"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "refuge",
+              "safety",
+              "defense"
+            ],
+            "posture": [
+              "affirmation",
+              "praise",
+              "positive sentiment",
+              "theological statement"
+            ],
+            "confidence": 0.95,
+            "speaker": "Narrator",
+            "purpose": "To emphasize God's role as the ultimate protector and source of security for the righteous, especially during periods of trouble and adversity."
+          },
+          "ai_deliberations": {
+            "detection": "I examined the entire verse for potential figurative language.\n\n1.  **\"וּתְשׁוּעַ֣ת צַ֭דִּיקִים מֵיְהֹוָ֑ה\" / \"The deliverance of the righteous comes from the LORD\"**: I considered if the concept of \"deliverance coming from the LORD\" might be figurative, perhaps metonymy for divine action. However, this is a direct theological statement about the source of deliverance. It describes a literal relationship between God and the righteous in terms of salvation and aid. Therefore, I excluded it as figurative language.\n\n2.  **\"מָ֝עוּזָּ֗ם בְּעֵ֣ת צָרָֽה\" / \"their stronghold in time of trouble\"**:\n    *   **What I considered**: I considered if \"stronghold\" (מָעוּז) when referring to the LORD is a metaphor. A stronghold is a physical, fortified place of defense and refuge.\n    *   **Reasoning for inclusion**: The LORD is clearly not a literal, physical structure. Instead, the qualities and functions of a physical stronghold (protection, security, refuge, defense from enemies/trouble) are being attributed to the LORD. This is a cross-domain mapping where an abstract concept (God's protective nature) is described using a concrete image (a fortified place). This is a classic example of a metaphor, identifying the LORD *as* the stronghold, rather than merely *like* one.\n    *   **Borderline cases**: None. This is a very common and clear metaphorical usage in biblical literature for God's protective role.\n    *   **Conclusion**: This is a metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 43:2",
+          "book": "Psalms",
+          "chapter": 43,
+          "verse": 2,
+          "hebrew_text": "כִּי־אַתָּ֤ה&thinsp;׀ אֱלֹהֵ֣י מָעוּזִּי֮ לָמָ֢ה זְנַ֫חְתָּ֥נִי לָֽמָּה־קֹדֵ֥ר אֶתְהַלֵּ֗ךְ בְּלַ֣חַץ אוֹיֵֽב",
+          "english_text": "For You are my God, my stronghold;why have You rejected me?Why must I walk in gloom,oppressed by the enemy?",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "my stronghold",
+          "figurative_text_hebrew": "מָעוּזִּי",
+          "explanation": "God is metaphorically described as a stronghold, a fortified place, to emphasize His role as a source of protection, security, and strength for the speaker.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Divine Being"
+            ],
+            "vehicle": [
+              "stronghold",
+              "fortress",
+              "protective structure"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "strength",
+              "refuge"
+            ],
+            "posture": [
+              "reliance",
+              "trust",
+              "positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "Speaker",
+            "purpose": "To express profound trust in God's protective power and to lament His perceived absence."
+          },
+          "ai_deliberations": {
+            "detection": "I have analyzed each phrase in the provided text for potential figurative language, adhering to the specified conservative guidelines for narrative text and divine anthropomorphisms.\n\n1.  **\"אֱלֹהֵ֣י מָעוּזִּי\" (Elohei ma'uzzi) - \"my God, my stronghold\"**:\n    *   **Considered**: I considered whether \"my stronghold\" (מָעוּזִּי) is a metaphor. A stronghold (מָעוּז) is literally a fortified place, a refuge, or a source of physical strength and protection.\n    *   **Reasoning**: God is not a literal physical fortress or building. By calling God \"my stronghold,\" the speaker is making a direct cross-domain comparison, likening God to a physical structure that provides security, defense, and refuge. The quality being highlighted is God's protective nature and the security He provides. This is a clear metaphorical expression.\n    *   **Decision**: Included as a metaphor.\n\n2.  **\"לָמָ֢ה זְנַ֫חְתָּ֥נִי\" (lamah z'naḥtani) - \"why have You rejected me?\"**:\n    *   **Considered**: I considered if \"rejected me\" constitutes a figurative anthropomorphism or a literal divine action.\n    *   **Reasoning**: The instructions state that divine anthropomorphisms (e.g., God was angry, God watched) are to be considered LITERAL in the ANE context unless they refer to God's body parts. \"To reject\" (זָנַח) describes an action or an attitude of God towards the speaker, not a physical body part. Therefore, it is understood as a direct, literal description of God's perceived action or stance.\n    *   **Decision**: Excluded as literal.\n\n3.  **\"לָֽמָּה־קֹדֵ֥ר אֶתְהַלֵּ֗ךְ\" (lamah qoder ethallekh) - \"Why must I walk in gloom\"**:\n    *   **Considered**: I considered whether \"walk in gloom\" is a metaphor for an emotional state. The verb קָדַר (qadar) means to be dark, gloomy, or mournful.\n    *   **Reasoning**: The speaker is not literally walking *inside* a physical substance called \"gloom.\" Instead, \"walking in gloom\" is a metaphorical expression describing the speaker's pervasive emotional state of deep sadness, distress, or mourning. The physical act of \"walking\" is used to convey the continuous experience of this internal, gloomy state. It's a cross-domain comparison where an abstract emotional state is described as a physical environment or manner of movement.\n    *   **Decision**: Included as a metaphor.\n\n4.  **\"בְּלַ֣חַץ אוֹיֵֽב\" (b'laḥaṣ oyev) - \"oppressed by the enemy\"**:\n    *   **Considered**: I considered if \"oppressed\" (לַחַץ) is figurative.\n    *   **Reasoning**: \"Oppressed\" (לַחַץ) refers to pressure, distress, or actual oppression. This is a direct and literal description of the speaker's difficult situation caused by the enemy. There is no cross-domain comparison or non-literal meaning intended here.\n    *   **Decision**: Excluded as literal.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 59:10",
+          "book": "Psalms",
+          "chapter": 59,
+          "verse": 10,
+          "hebrew_text": "עֻ֭זּוֹ אֵלֶ֣יךָ אֶשְׁמֹ֑רָה כִּֽי־אֱ֝לֹהִ֗ים מִשְׂגַּבִּֽי",
+          "english_text": "O mycWith several mss.; cf. v. 18; lit. “His.” strength, I wait for You;for God is my haven.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "God is my haven",
+          "figurative_text_hebrew": "אֱלֹהִ֗ים מִשְׂגַּבִּֽי",
+          "explanation": "God is directly identified as a 'haven' or 'stronghold,' implying God provides ultimate protection, refuge, and security, though God is not a physical place.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Spiritual Entity"
+            ],
+            "vehicle": [
+              "haven",
+              "stronghold",
+              "place of refuge",
+              "protective structure"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "safety"
+            ],
+            "posture": [
+              "trust",
+              "security",
+              "positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To express confidence in God's protective power and to affirm God as the ultimate source of safety and refuge."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **Phrase/Concept:** `עֻזּוֹ` (O my strength)\n    *   **Considered:** I considered if this phrase, as rendered in the English \"O my strength,\" constitutes a metaphor. The Hebrew `עֻזּוֹ` literally means \"His strength,\" but the provided English translation interprets it as a vocative address to God, identifying God as the speaker's strength.\n    *   **Reasoning for inclusion:** By addressing God as \"my strength,\" the speaker is not literally stating that God is a physical force or muscle. Instead, God is being equated with the abstract concept of strength, implying that God is the source, embodiment, and provider of the speaker's power, resilience, and ability to endure. This is a clear cross-domain comparison where an abstract quality (strength) is used as a direct identifier for God, making it a metaphor. It is not a comparison of role or function, but an identification.\n    *   **Borderline cases:** The primary debate here is the interpretation of `עֻזּוֹ` itself (His strength vs. My strength/O my strength). However, given the explicit English translation \"O my strength\" provided for analysis, the metaphorical reading is strongly supported.\n\n2.  **Phrase/Concept:** `אֵלֶ֣יךָ אֶשְׁמֹ֑רָה` (I wait for You)\n    *   **Considered:** I considered if \"waiting for God\" could be interpreted figuratively, perhaps as personification or an idiom.\n    *   **Reasoning for exclusion:** \"Waiting for God\" is a standard biblical expression denoting expectation, trust, and reliance on God's intervention or provision. While it describes a spiritual and mental posture rather than a literal physical act of waiting in a specific location, it is a conventional and non-figurative way to express a common religious attitude. It does not involve a cross-domain comparison, personification of a non-human entity, or an obscure idiomatic meaning beyond its direct sense of hopeful anticipation and dependence.\n\n3.  **Phrase/Concept:** `אֱלֹהִ֗ים מִשְׂגַּבִּֽי` (God is my haven)\n    *   **Considered:** I considered if identifying God as a \"haven\" is a metaphor.\n    *   **Reasoning for inclusion:** A \"haven\" (`מִשְׂגָּב`) literally refers to a high, inaccessible place, a stronghold, or a refuge that provides physical protection from enemies or danger. God is not a physical structure, a geographical location, or a literal fortress. By calling God \"my haven,\" the speaker is comparing God to a physical place of ultimate safety and security, implying that God provides protection, refuge, and defense in times of trouble. This is a clear cross-domain comparison (God compared to a physical place of refuge) and thus a metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 59:17",
+          "book": "Psalms",
+          "chapter": 59,
+          "verse": 17,
+          "hebrew_text": "וַאֲנִ֤י&thinsp;׀ אָשִׁ֣יר עֻזֶּךָ֮ וַאֲרַנֵּ֥ן לַבֹּ֗קֶר חַ֫סְדֶּ֥ךָ כִּֽי־הָיִ֣יתָ מִשְׂגָּ֣ב לִ֑י וּ֝מָנ֗וֹס בְּי֣וֹם צַר־לִֽי",
+          "english_text": "But I will sing of Your strength,extol each morning Your faithfulness;for You have been my haven,a refuge in time of trouble.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "my haven",
+          "figurative_text_hebrew": "מִשְׂגָּ֣ב לִ֑י",
+          "explanation": "God is not literally a physical haven or stronghold. This is a metaphor comparing God's protective nature to a secure, defensive structure.",
+          "metadata": {
+            "target": [
+              "God's protective role",
+              "divine protector",
+              "God"
+            ],
+            "vehicle": [
+              "haven",
+              "stronghold",
+              "fortress",
+              "protective structure"
+            ],
+            "ground": [
+              "security",
+              "protection",
+              "safety",
+              "defense"
+            ],
+            "posture": [
+              "praise",
+              "trust",
+              "reliance",
+              "positive sentiment"
+            ],
+            "confidence": 0.95,
+            "speaker": "The psalmist/speaker",
+            "purpose": "To express God's role as a source of ultimate security and protection."
+          },
+          "ai_deliberations": {
+            "detection": "*   **\"אָשִׁ֣יר עֻזֶּךָ\" (sing of Your strength) and \"אֲרַנֵּ֥ן לַבֹּ֗קֶר חַ֫סְדֶּ֥ךָ\" (extol each morning Your faithfulness):**\n    *   **Considered:** If these phrases might be metonymy (where an attribute stands for the actions demonstrating it) or a figurative idiom.\n    *   **Reasoning:** While one does not literally sing or extol an abstract quality like \"strength\" or \"faithfulness\" in a physical sense, these are conventional and standard expressions in both Hebrew and English for praising or celebrating an attribute of a person or deity. They do not involve a clear cross-domain comparison that would classify them as a metaphor or simile, nor do they represent a non-literal meaning beyond the conventional usage of praise. Given the instruction to be conservative with \"standard narrative language\" and \"biblical idioms and set phrases\" unless they are \"figurative idioms\" with a clear non-literal meaning, these are considered standard expressions of praise rather than figurative language. Therefore, I will not mark them as figurative.\n\n*   **\"כִּֽי־הָיִ֣יתָ מִשְׂגָּ֣ב לִ֑י\" (for You have been my haven / stronghold):**\n    *   **Considered:** If \"מִשְׂגָּ֣ב\" (misgav, haven/stronghold) is a metaphor for God.\n    *   **Reasoning:** God is not literally a physical fortress, high place, or stronghold. The text uses a concrete, physical structure known for providing security, defense, and protection (a stronghold/haven) to describe God's abstract role and character as a source of safety and security for the speaker. This is a clear cross-domain comparison (divine being vs. physical structure) where God is implicitly likened to a stronghold. Therefore, it is a metaphor.\n\n*   **\"וּ֝מָנ֗וֹס בְּי֣וֹם צַר־לִֽי\" (a refuge in time of trouble):**\n    *   **Considered:** If \"מָנ֗וֹס\" (manos, refuge/place of escape) is a metaphor for God.\n    *   **Reasoning:** Similar to \"misgav,\" God is not literally a physical place of refuge or escape. The text employs the image of a physical location that offers safety and escape from danger (a refuge) to describe God's abstract function and character as a provider of safety and deliverance during times of distress. This is another clear cross-domain comparison (divine being vs. physical location) where God is implicitly likened to a refuge. Therefore, it is a metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 59:18",
+          "book": "Psalms",
+          "chapter": 59,
+          "verse": 18,
+          "hebrew_text": "עֻ֭זִּי אֵלֶ֣יךָ אֲזַמֵּ֑רָה כִּֽי־אֱלֹהִ֥ים מִ֝שְׂגַּבִּ֗י אֱלֹהֵ֥י חַסְדִּֽי&nbsp;{פ}",
+          "english_text": "O my strength, to You I sing hymns;for God is my haven, my faithful God.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "God is my haven",
+          "figurative_text_hebrew": "אֱלֹהִ֥ים מִ֝שְׂגַּבִּ֗י",
+          "explanation": "God is directly identified as a protective refuge, like a high fortress or stronghold, providing security and safety.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Deity"
+            ],
+            "vehicle": [
+              "haven",
+              "stronghold",
+              "fortress",
+              "protective structure"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "safety",
+              "refuge",
+              "divine attribute"
+            ],
+            "posture": [
+              "praise",
+              "trust",
+              "positive sentiment",
+              "reliance"
+            ],
+            "confidence": 0.95,
+            "speaker": "Speaker",
+            "purpose": "To express trust in God's protection and praise Him as a source of security."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **עֻ֭זִּי (ʿuzzī) - \"O my strength\"**:\n    *   **Considered**: I considered if \"my strength\" was a literal description of the speaker's physical power or a metaphorical address to God.\n    *   **Reasoning**: The phrase is an address (\"O my strength\") directed towards God, as indicated by the subsequent clause \"to You I sing hymns.\" God is not literally the speaker's physical strength or muscle power. Instead, God is being identified as the source and embodiment of the speaker's power, resilience, and support. This direct identification of God with an abstract quality (strength) that God provides, rather than literally *being* that quality, constitutes a metaphor.\n    *   **Decision**: Included as a metaphor.\n\n2.  **אֵלֶ֣יךָ אֲזַמֵּ֑רָה (ʾēleḵā ʾazammērāh) - \"to You I sing hymns\"**:\n    *   **Considered**: I considered if \"singing hymns\" could be figurative, perhaps for general praise or worship without literal singing.\n    *   **Reasoning**: While \"singing\" can sometimes be used broadly, in this context, it refers to the literal act of offering musical praise or poetic worship. There is no indication of a cross-domain comparison or non-literal meaning.\n    *   **Decision**: Excluded; this is a literal action.\n\n3.  **כִּֽי־אֱלֹהִ֥ים מִ֝שְׂגַּבִּ֗י (kī ʾĕlōhīm miśgabbī) - \"for God is my haven\" / \"for God is my stronghold\"**:\n    *   **Considered**: I considered if \"my haven\" (מִשְׂגַּבִּי, literally \"my high place/stronghold\") was a literal physical refuge or a metaphorical description of God's protective role.\n    *   **Reasoning**: God is not a physical structure like a fortress, a high tower, or a literal haven. The term \"haven\" or \"stronghold\" (מִשְׂגָּב) is used to describe the protective qualities God provides. God acts *like* a haven, offering security and refuge, but is directly identified *as* the haven. This direct identification of God with a protective structure, where God is not literally that structure, is a clear metaphor.\n    *   **Decision**: Included as a metaphor.\n\n4.  **אֱלֹהֵ֥י חַסְדִּֽי (ʾĕlōhēy ḥasdī) - \"my faithful God\" / \"God of my steadfast love\"**:\n    *   **Considered**: I considered if \"God of my steadfast love\" (אֱלֹהֵ֥י חַסְדִּֽי) contained any figurative elements.\n    *   **Reasoning**: This phrase literally translates to \"God of my *ḥesed*.\" It describes God's attribute and relationship to the speaker in a direct manner, indicating that God is the source or embodiment of the steadfast love/faithfulness shown to the speaker. It is a descriptive title or statement of relationship, not a comparison, personification, or other figurative device.\n    *   **Decision**: Excluded; this is a literal description of God's character and relationship.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 62:3",
+          "book": "Psalms",
+          "chapter": 62,
+          "verse": 3,
+          "hebrew_text": "אַךְ־ה֣וּא צ֭וּרִי וִישׁוּעָתִ֑י מִ֝שְׂגַּבִּ֗י לֹא־אֶמּ֥וֹט רַבָּֽה",
+          "english_text": "Truly He is my rock and deliverance,my haven; I shall never be shaken.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "my haven",
+          "figurative_text_hebrew": "מִ֝שְׂגַּבִּ֗י",
+          "explanation": "God is metaphorically described as a high stronghold or haven, signifying His role as a secure refuge and source of protection from danger.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Refuge",
+              "Deity"
+            ],
+            "vehicle": [
+              "stronghold",
+              "fortress",
+              "place of refuge",
+              "architectural structure"
+            ],
+            "ground": [
+              "security",
+              "protection",
+              "safety",
+              "inaccessibility"
+            ],
+            "posture": [
+              "praise",
+              "trust",
+              "affirmation",
+              "positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To convey God's ability to provide ultimate safety and security."
+          },
+          "ai_deliberations": {
+            "detection": "I examined the phrase \"אַךְ־ה֣וּא צ֭וּרִי\" (Truly He is my rock). I considered if \"rock\" might be a literal geological feature. However, God is not literally a physical rock. This is a clear cross-domain comparison, where God's attributes of strength, stability, and protection are likened to those of a rock. Therefore, I classified it as a metaphor.\n\nNext, I considered \"וִישׁוּעָתִ֑י\" (and my deliverance). I considered if this might be figurative. However, \"deliverance\" (ישועה) describes a direct action or state provided by God. It is a statement of God's role and function as a deliverer, not a comparison to another entity or concept. As per instructions, comparisons of role or function are not marked as figurative. Therefore, I excluded it.\n\nThen, I analyzed \"מִ֝שְׂגַּבִּ֗י\" (my haven/stronghold). I considered if \"haven\" or \"stronghold\" might be literal. Similar to \"rock,\" God is not a literal physical fortress or high place of refuge. This phrase metaphorically describes God as a source of security, protection, and inaccessibility from danger, drawing a comparison to a fortified structure. Therefore, I classified it as a metaphor.\n\nFinally, I examined \"לֹא־אֶמּ֥וֹט רַבָּֽה\" (I shall never be shaken). I considered if \"to be shaken\" (מוט) could be literal physical movement. However, in the context of God being a \"rock\" and \"haven,\" the speaker's inability to be \"shaken\" refers to their emotional, spiritual, or existential steadfastness and security, not physical instability. It is a metaphorical extension of a physical concept to describe an internal state of being. Therefore, I classified it as a metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 62:7",
+          "book": "Psalms",
+          "chapter": 62,
+          "verse": 7,
+          "hebrew_text": "אַךְ־ה֣וּא צ֭וּרִי וִישׁוּעָתִ֑י מִ֝שְׂגַּבִּ֗י לֹ֣א אֶמּֽוֹט",
+          "english_text": "He is my rock and deliverance,my haven; I shall not be shaken.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "my haven",
+          "figurative_text_hebrew": "מִ֝שְׂגַּבִּ֗י",
+          "explanation": "God is metaphorically described as a 'haven' or 'stronghold' to convey His role as a secure, inaccessible refuge and protector from danger.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Deity"
+            ],
+            "vehicle": [
+              "haven",
+              "stronghold",
+              "fortress",
+              "place of refuge"
+            ],
+            "ground": [
+              "security",
+              "protection",
+              "refuge",
+              "inaccessibility",
+              "safety"
+            ],
+            "posture": [
+              "trust",
+              "security",
+              "praise",
+              "positive sentiment"
+            ],
+            "confidence": 0.95,
+            "speaker": "Speaker (Psalmist)",
+            "purpose": "To articulate deep reliance on God for safety and security against all threats."
+          },
+          "ai_deliberations": {
+            "detection": "I have analyzed every potential figurative element in the verse: \"אַךְ־ה֣וּא צ֭וּרִי וִישׁוּעָתִ֑י מִ֝שְׂגַּבִּ֗י לֹ֣א אֶמּֽוֹט\" (He is my rock and deliverance, my haven; I shall not be shaken).\n\n1.  **\"צ֭וּרִי / my rock\"**:\n    *   **Considered:** If 'rock' might be a literal description of God or a metaphorical comparison.\n    *   **Reasoning:** God is not a literal geological rock formation. In biblical literature, \"rock\" (צוּר) is a well-established metaphor for God, emphasizing His attributes of strength, stability, protection, and reliability. It's a clear cross-domain comparison (God, a spiritual entity, likened to an inanimate, strong object).\n    *   **Decision:** Included as a metaphor.\n\n2.  **\"וִישׁוּעָתִ֑י / and deliverance\"**:\n    *   **Considered:** If 'deliverance' might be figurative.\n    *   **Reasoning:** \"Deliverance\" (יְשׁוּעָה) refers to the act or state of being saved or rescued. This is a direct description of God's role, function, and attribute. It is a literal theological concept describing what God *is* or *does*, rather than a comparison to something else.\n    *   **Decision:** Excluded as not figurative.\n\n3.  **\"מִ֝שְׂגַּבִּ֗י / my haven\"**:\n    *   **Considered:** If 'haven' (or 'stronghold') might be a literal physical place or a metaphorical comparison for God.\n    *   **Reasoning:** God is not a literal physical fortress, high tower, or inaccessible place. \"מִשְׂגָּב\" (misgav) denotes a high, secure place of refuge or a stronghold. This is a clear metaphor, comparing God to such a place to convey His protective nature, security, and inaccessibility to enemies. It's a cross-domain comparison.\n    *   **Decision:** Included as a metaphor.\n\n4.  **\"לֹ֣א אֶמּֽוֹט / I shall not be shaken\"**:\n    *   **Considered:** If 'shaken' refers to literal physical movement or a figurative state of being.\n    *   **Reasoning:** While \"to be shaken\" (מוּט) can literally describe physical instability, in this context, following the declarations of God as rock and haven, it refers to the speaker's spiritual, emotional, or existential stability and security. It means \"I shall not falter,\" \"I shall not be moved from my secure position,\" or \"I shall not stumble or fall\" in the face of adversity. This is a metaphorical extension of physical stability to an inner state of being. Furthermore, \"לֹא אֶמּוֹט\" is a common idiomatic expression in biblical Hebrew, particularly in the Psalms, to convey steadfastness and unwavering trust.\n    *   **Decision:** Included as both a metaphor (due to the cross-domain application of physical action to an internal state) and an idiom (as a set phrase with a non-literal meaning).",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 84:6",
+          "book": "Psalms",
+          "chapter": 84,
+          "verse": 6,
+          "hebrew_text": "אַשְׁרֵ֣י אָ֭דָם עֽוֹז־ל֥וֹ בָ֑ךְ מְ֝סִלּ֗וֹת בִּלְבָבָֽם",
+          "english_text": "Happy is the man who finds refuge in You,whose mind is on the [pilgrim] highways.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "finds refuge in You",
+          "figurative_text_hebrew": "עֽוֹז־ל֥וֹ בָ֑ךְ",
+          "explanation": "God is metaphorically conceptualized as a fortress or place of refuge where one can find strength and safety",
+          "metadata": {
+            "target": [
+              "worshipper seeking God",
+              "faithful person",
+              "human being"
+            ],
+            "vehicle": [
+              "fortress refuge",
+              "stronghold",
+              "protective structure"
+            ],
+            "ground": [
+              "spiritual protection",
+              "security",
+              "safety"
+            ],
+            "posture": [
+              "blessing declaration",
+              "praise",
+              "positive sentiment"
+            ],
+            "confidence": 0.85,
+            "speaker": "Psalmist",
+            "purpose": "To express the security and strength found in divine relationship"
+          },
+          "ai_deliberations": {
+            "detection": "I need to analyze each phrase in this verse for potential figurative language:\n\n1. **\"אַשְׁרֵ֣י אָ֭דָם\" (Happy is the man)** - This is a standard beatitude formula, literal blessing language. Not figurative.\n\n2. **\"עֽוֹז־ל֥וֹ בָ֑ךְ\" (finds refuge/strength in You)** - Considered if this might be metaphorical. The Hebrew \"עֽוֹז\" can mean strength, refuge, or stronghold. In the context of finding refuge \"in\" God, this appears to be a metaphorical concept - God is being conceptualized as a place of refuge or fortress where one can find safety. This is a cross-domain mapping from physical refuge/fortress to spiritual protection.\n\n3. **\"מְ֝סִלּ֗וֹת בִּלְבָבָֽם\" (highways in their hearts)** - This is clearly figurative. Physical highways/roads cannot literally exist in human hearts. This is a metaphor where the heart (mind/inner being) is conceptualized as containing paths or roads, likely referring to the pilgrim roads to Jerusalem being internalized as spiritual pathways or desires. The vehicle is physical highways, the target is mental/spiritual orientation, and the ground is the directed movement toward a destination.\n\nBoth phrases 2 and 3 contain figurative language that should be included in the [TRUNCATION DETECTED DESPITE FALLBACK]",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 91:2",
+          "book": "Psalms",
+          "chapter": 91,
+          "verse": 2,
+          "hebrew_text": "אֹמַ֗ר לַ֭יהֹוָה מַחְסִ֣י וּמְצוּדָתִ֑י אֱ֝לֹהַ֗י אֶבְטַח־בּֽוֹ",
+          "english_text": "I say of the LORD, my refuge and stronghold,my God in whom I trust,",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "and stronghold",
+          "figurative_text_hebrew": "וּמְצוּדָתִ֑י",
+          "explanation": "God is described as a 'stronghold,' a fortified place. This is a metaphor, as God is not a literal fortress but provides defense and security like one.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Defender",
+              "Divine Being"
+            ],
+            "vehicle": [
+              "stronghold",
+              "fortress",
+              "defensive structure",
+              "physical structure"
+            ],
+            "ground": [
+              "defense",
+              "security",
+              "protection",
+              "divine attribute"
+            ],
+            "posture": [
+              "trust",
+              "reliance",
+              "praise",
+              "positive sentiment",
+              "devotional stance"
+            ],
+            "confidence": 0.95,
+            "speaker": "Narrator (or speaker of the psalm)",
+            "purpose": "To express the speaker's absolute reliance on God for defense and security."
+          },
+          "ai_deliberations": {
+            "detection": "I considered the phrase \"אֹמַ֗ר לַ֭יהֹוָה\" (I say of the LORD) and determined it is standard narrative language describing the speaker's direct address or declaration concerning God, thus not figurative.\n\nNext, I considered \"מַחְסִ֣י\" (my refuge). I considered if this might be a metaphor. God is not a literal physical structure or place of shelter. The term \"refuge\" (מַחְסֶה) typically refers to a physical place of safety from danger or pursuit. Applying this term to God, who is an incorporeal divine being, constitutes a cross-domain comparison. The speaker is likening God's protective function to that of a physical refuge. Therefore, I am including this as a metaphor.\n\nSimilarly, I considered \"וּמְצוּדָתִ֑י\" (and stronghold). I considered if this might be a metaphor. A \"stronghold\" (מְצוּדָה) is a fortified place, a fortress, offering defense and security. Like \"refuge,\" this is a physical entity. Attributing this quality to God, who is not a physical structure, is a clear cross-domain comparison. God provides defense and security *like* a stronghold. Therefore, I am including this as a metaphor.\n\nFinally, I considered \"אֱ֝לֹהַ֗י אֶבְטַח־בּֽוֹ\" (my God in whom I trust). This is a direct statement of faith and relationship with God. It describes the speaker's literal trust in God, without employing any non-literal comparisons or personifications. Thus, I determined it is not figurative.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 94:22",
+          "book": "Psalms",
+          "chapter": 94,
+          "verse": 22,
+          "hebrew_text": "וַיְהִ֬י יְהֹוָ֣ה לִ֣י לְמִשְׂגָּ֑ב וֵ֝אלֹהַ֗י לְצ֣וּר מַחְסִֽי",
+          "english_text": "But the LORD is my haven;my God is my sheltering rock.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "the LORD is my haven",
+          "figurative_text_hebrew": "יְהֹוָ֣ה לִ֣י לְמִשְׂגָּ֑ב",
+          "explanation": "God, a divine being, is directly equated with a physical stronghold or haven, emphasizing His role as a source of protection and security.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Divine Being"
+            ],
+            "vehicle": [
+              "haven",
+              "stronghold",
+              "place of refuge",
+              "physical structure",
+              "security provider"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "refuge",
+              "safety",
+              "support"
+            ],
+            "posture": [
+              "trust",
+              "praise",
+              "reliance",
+              "positive sentiment"
+            ],
+            "confidence": 1.0,
+            "speaker": "Narrator",
+            "purpose": "To express profound trust and reliance on God's protective power."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"יְהֹוָה לִ֣י לְמִשְׂגָּ֑ב\" (The LORD is my haven):**\n    *   **Considered:** I considered if \"haven\" (מִשְׂגָּב, literally \"high place,\" \"stronghold,\" \"refuge\") is a literal description of God.\n    *   **Reasoning:** God is a divine, non-physical being, not a literal physical structure or place of refuge. The statement equates God with a stronghold or haven, which is a physical entity providing safety. This is a clear cross-domain comparison where God (the target) is likened to a physical place of security (the vehicle). It is not a simile as it uses a direct identification (\"is\") rather than a comparison (\"like\" or \"as\"). It is not personification as it does not attribute human qualities to God, but rather a protective function associated with a physical structure. It is not an idiom in the sense of a fixed phrase with a non-literal meaning that is commonly understood as such, but rather a direct metaphorical statement.\n    *   **Decision:** Metaphor.\n\n2.  **\"אֱלֹהַ֗י לְצ֣וּר מַחְסִֽי\" (my God is my sheltering rock):**\n    *   **Considered:** I considered if \"rock\" (צוּר) and \"sheltering\" (מַחְסִֽי, \"my refuge\") are literal descriptions of God.\n    *   **Reasoning:** God is not a literal geological formation. The statement equates God with a \"rock\" that provides \"shelter\" or \"refuge.\" A rock is a physical object known for its stability, strength, and ability to provide cover. This is another clear cross-domain comparison where God (the target) is likened to a physical object (the vehicle) that offers protection and stability. Similar to the first phrase, it is a direct identification (\"is\") rather than a comparison, making it a metaphor, not a simile. It does not attribute human qualities (personification) nor is it a fixed idiom.\n    *   **Decision:** Metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 118:9",
+          "book": "Psalms",
+          "chapter": 118,
+          "verse": 9,
+          "hebrew_text": "ט֗וֹב לַחֲס֥וֹת בַּיהֹוָ֑ה מִ֝בְּטֹ֗חַ בִּנְדִיבִֽים",
+          "english_text": "it is better to take refuge in the LORDthan to trust in the great.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "to take refuge in the LORD",
+          "figurative_text_hebrew": "לַחֲס֥וֹת בַּיהֹוָ֑ה",
+          "explanation": "The LORD is metaphorically presented as a physical refuge or shelter, providing safety and protection from danger, rather than being a literal physical structure one can enter.",
+          "metadata": {
+            "target": [
+              "divine protection",
+              "God's security",
+              "spiritual safety",
+              "divine attribute"
+            ],
+            "vehicle": [
+              "physical shelter",
+              "stronghold",
+              "safe haven",
+              "protective structure"
+            ],
+            "ground": [
+              "security",
+              "safety",
+              "reliability",
+              "protection"
+            ],
+            "posture": [
+              "instruction",
+              "wisdom",
+              "guidance",
+              "positive affirmation"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To emphasize the superior security and reliability found in God compared to human sources, encouraging reliance on divine providence."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"ט֗וֹב לַחֲס֥וֹת בַּיהֹוָ֑ה\" (it is better to take refuge in the LORD):**\n    *   **Considered:** I considered if \"to take refuge in the LORD\" is a metaphor.\n    *   **Reasoning:** The verb חסה (chasah) literally means to seek shelter or protection, often in a physical sense (e.g., under the wings of a bird, in a rock). When applied to the LORD, it is not meant literally that one physically enters or hides within God as if God were a building or a physical object. Instead, God's protective nature and provision of security are being compared to the function of a physical refuge or shelter. This is a clear cross-domain comparison: the abstract concept of divine protection is understood through the concrete image of a physical place of safety. While divine anthropomorphisms of action (like God going or being angry) are considered literal in ANE context, God *being* a refuge is a conceptual metaphor, not a literal physical action or body part. Therefore, it is a metaphor.\n    *   **Decision:** Mark as metaphor.\n\n2.  **\"מִ֝בְּטֹ֗חַ בִּנְדִיבִֽים\" (than to trust in the great):**\n    *   **Considered:** I considered if \"to trust in the great\" contains any figurative language.\n    *   **Reasoning:** The verb בטח (batach) means to trust or rely, which is a literal human action. \"The great\" (נדיבים, nedivim) refers literally to nobles, princes, or powerful human beings. The phrase describes a straightforward comparison between placing trust in God versus placing trust in human leaders. There is no cross-domain comparison, personification, or idiomatic usage here.\n    *   **Decision:** Not figurative.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 144:2",
+          "book": "Psalms",
+          "chapter": 144,
+          "verse": 2,
+          "hebrew_text": "חַסְדִּ֥י וּמְצוּדָתִי֮ מִשְׂגַּבִּ֢י וּֽמְפַלְטִ֫י־לִ֥י מָ֭גִנִּי וּב֣וֹ חָסִ֑יתִי הָרוֹדֵ֖ד עַמִּ֣י תַחְתָּֽי",
+          "english_text": "my faithful one, my fortress,my haven and my deliverer,my shield, in whom I take shelter,who makes peoplesaSo Targum, Saadia; others “my people.” subject to me.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "my haven",
+          "figurative_text_hebrew": "מִשְׂגַּבִּ֢י",
+          "explanation": "God is metaphorically described as a haven or stronghold, comparing God's role as a source of refuge and safety to a secure place.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Refuge",
+              "Spiritual Entity"
+            ],
+            "vehicle": [
+              "haven",
+              "stronghold",
+              "refuge",
+              "place of safety",
+              "physical location"
+            ],
+            "ground": [
+              "refuge",
+              "safety",
+              "security",
+              "shelter"
+            ],
+            "posture": [
+              "trust",
+              "reliance",
+              "security",
+              "positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "King/Psalmist",
+            "purpose": "To express profound trust in God's ability to provide safety and shelter from danger."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **חַסְדִּ֥י / my faithful one**: I considered if this appellation for God might be figurative. However, \"faithful one\" (from חֶסֶד, steadfast love/faithfulness) is a direct descriptor of God's inherent character and relationship with the speaker. It attributes a core quality to God rather than comparing God to something from a different domain. Therefore, it is not marked as figurative.\n2.  **וּמְצוּדָתִי֮ / my fortress**: I considered this phrase as a potential metaphor. A fortress is a physical, defensive structure. God is not a literal, physical fortress. The speaker is using the image of a fortress to describe God's role as a source of protection, security, and defense. This is a clear cross-domain comparison, where God (an abstract, divine entity) is likened to a physical structure. This is a metaphor.\n3.  **מִשְׂגַּבִּ֢י / my haven**: I considered this phrase as a potential metaphor. מִשְׂגָּב (misgav) means a high place, stronghold, or refuge. Similar to \"fortress,\" a haven or stronghold is a physical place of safety and refuge. God is not a literal physical haven or stronghold. The speaker is comparing God's role as a source of safety, refuge, and security to a physical place of shelter. This is a clear cross-domain comparison. This is a metaphor.\n4.  **וּֽמְפַלְטִ֫י־לִ֥י / and my deliverer**: I considered if \"deliverer\" is figurative. This term directly describes God's action and function as one who rescues or saves. It is a literal description of God's role and activity, not a comparison to something else. Therefore, it is not marked as figurative.\n5.  **מָ֭גִנִּי / my shield**: I considered this phrase as a potential metaphor. A shield is a physical object used for protection in battle. God is not a literal, physical shield. The speaker is using the image of a shield to describe God's role as a protector and defender. This is a clear cross-domain comparison, where God (an abstract, divine entity) is likened to a physical object. This is a metaphor.\n6.  **וּב֣וֹ חָסִ֑יתִי / in whom I take shelter**: I considered if \"take shelter\" is figurative. While \"taking shelter\" can be a physical act, here it describes the speaker's act of trusting and seeking refuge in God. This is a literal description of the speaker's reliance and faith, which is the *ground* for the preceding metaphors of God as a fortress, haven, and shield. It describes the speaker's response to God's protective nature, rather than being a figurative comparison itself. Therefore, it is not marked as figurative.\n7.  **הָרוֹדֵ֖ד עַמִּ֣י תַחְתָּֽי / who makes peoples subject to me**: I considered if this description of God's action is figurative. This phrase describes a literal act of subjugation or making peoples subservient, often attributed to God working through a king. It is a direct statement of power and control, not a figurative comparison or personification. Therefore, it is not marked as figurative.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 150:1",
+          "book": "Psalms",
+          "chapter": 150,
+          "verse": 1,
+          "hebrew_text": "הַ֥לְלוּ־יָ֨הּ&thinsp;׀ הַֽלְלוּ־אֵ֥ל בְּקׇדְשׁ֑וֹ הַֽ֝לְל֗וּהוּ בִּרְקִ֥יעַ עֻזּֽוֹ",
+          "english_text": "Hallelujah.Praise God in His sanctuary;praise Him in the sky, His stronghold.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "in the sky, His stronghold",
+          "figurative_text_hebrew": "בִּרְקִ֥יעַ עֻזּֽוֹ",
+          "explanation": "The sky is metaphorically described as God's 'stronghold,' likening the vastness and power of the heavens, where God's might is displayed, to a fortified place of strength and security.",
+          "metadata": {
+            "target": [
+              "God's power in the heavens",
+              "divine might",
+              "celestial domain",
+              "God's attributes"
+            ],
+            "vehicle": [
+              "fortress",
+              "stronghold",
+              "place of security",
+              "architectural structure"
+            ],
+            "ground": [
+              "strength",
+              "security",
+              "majesty",
+              "power",
+              "impregnability",
+              "divine attributes"
+            ],
+            "posture": [
+              "praise",
+              "awe",
+              "reverence",
+              "positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To emphasize God's immense power and majesty, inspiring worship and awe by using a familiar image of earthly strength and defense."
+          },
+          "ai_deliberations": {
+            "detection": "I examined each phrase in the provided text for potential figurative language.\n\n1.  **\"הַ֥לְלוּ־יָ֨הּ\" (Hallelujah):** I considered if this exclamation of praise might be an idiom or a form of figurative language. However, \"Hallelujah\" is a direct imperative (\"Praise Yah\") and a literal call to worship. It functions as a direct command and an expression of adoration, not a figurative comparison or an indirect statement. Therefore, I excluded it.\n\n2.  **\"הַֽלְלוּ־אֵ֥ל\" (Praise God):** Similar to the above, this is a direct command to praise God. It is a literal instruction and expression of worship. I excluded it.\n\n3.  **\"בְּקׇדְשׁ֑וֹ\" (in His sanctuary):** I considered if \"sanctuary\" might be used metaphorically for God's presence rather than a physical place. However, \"sanctuary\" (קֹדֶשׁ) can refer to a literal sacred space (like the Temple) or a spiritual realm of holiness. In the ANE context, the concept of a divine sanctuary, whether earthly or heavenly, was understood literally as a dwelling place or sphere of divine activity. There is no clear cross-domain comparison here that would make it figurative. I excluded it.\n\n4.  **\"הַֽ֝לְל֗וּהוּ\" (praise Him):** This is another direct command, a literal instruction. I excluded it.\n\n5.  **\"בִּרְקִ֥יעַ עֻזּֽוֹ\" (in the sky, His stronghold):**\n    *   **What I considered:** I considered if \"sky, His stronghold\" is a metaphor. The Hebrew word עֹז (oz) means strength, might, or power, and by extension, can refer to a place of strength or a stronghold.\n    *   **Reasoning for inclusion:** The \"sky\" (רָקִיעַ) is not literally a fortified building or a physical stronghold with walls and defenses. By describing the sky as God's \"stronghold,\" the text is making a cross-domain comparison. It likens the vast, powerful, and seemingly impregnable expanse of the heavens, where God's might is displayed, to a human-made fortress or a place of ultimate security and power. This is a clear conceptual mapping from the domain of human architecture/military defense to the celestial realm and divine power. It emphasizes God's immense strength, security, and majesty by using a concrete, familiar image. This fits the definition of a metaphor.\n    *   **Borderline cases:** One might argue that \"עֻזּֽוֹ\" simply means \"His strength\" and the sky is where His strength is *manifested*, making it less figurative. However, the construct \"רְקִיעַ עֻזּוֹ\" (sky of His strength/stronghold) strongly implies that the sky *itself* functions as or is perceived as His stronghold. The English translation \"His stronghold\" captures this metaphorical sense well. The sky is not literally a stronghold, but it *is* a stronghold in a figurative sense, representing God's unassailable power and dominion.",
+            "tagging": ""
+          }
+        }
+      ],
+      "total_results": 17,
+      "request": {
+        "book": "Psalms",
+        "chapter": null,
+        "verse_range": null,
+        "filters": {
+          "types": [],
+          "target": null,
+          "vehicle": "stronghold",
+          "ground": null,
+          "posture": null
+        }
+      }
+    }
+  ],
+  "summary": {
+    "lexicon_entries": 13,
+    "concordance_searches": 2,
+    "concordance_results": 14,
+    "figurative_searches": 2,
+    "figurative_instances": 19
+  }
+}
