@@ -62,26 +62,59 @@ def clean_html_text(text: str) -> str:
 
 
 @dataclass
-class PsalmVerse:
-    """Represents a single verse from a Psalm."""
+class Verse:
+    """Represents a single verse from any biblical book."""
+    book: str
     chapter: int
     verse: int
     hebrew: str
     english: str
-    reference: str  # e.g., "Psalms 23:1"
+    reference: str  # e.g., "Genesis 1:1" or "Psalms 23:1"
 
 
 @dataclass
-class PsalmText:
-    """Complete text of a Psalm with metadata."""
+class PsalmVerse(Verse):
+    """Represents a single verse from a Psalm (for backward compatibility)."""
+    def __init__(self, chapter: int, verse: int, hebrew: str, english: str, reference: str):
+        super().__init__(
+            book="Psalms",
+            chapter=chapter,
+            verse=verse,
+            hebrew=hebrew,
+            english=english,
+            reference=reference
+        )
+
+
+@dataclass
+class BookText:
+    """Complete text of a biblical book chapter with metadata."""
+    book: str
     chapter: int
     title_hebrew: str
     title_english: str
-    verses: List[PsalmVerse]
+    verses: List[Verse]
     verse_count: int
 
     def __repr__(self):
-        return f"PsalmText(chapter={self.chapter}, verses={self.verse_count})"
+        return f"BookText(book={self.book}, chapter={self.chapter}, verses={self.verse_count})"
+
+
+@dataclass
+class PsalmText(BookText):
+    """Complete text of a Psalm (for backward compatibility)."""
+    def __init__(self, chapter: int, title_hebrew: str, title_english: str,
+                 verses: List[PsalmVerse], verse_count: int):
+        super().__init__(
+            book="Psalms",
+            chapter=chapter,
+            title_hebrew=title_hebrew,
+            title_english=title_english,
+            verses=verses,
+            verse_count=verse_count
+        )
+        # Store original chapter for backward compatibility
+        self.chapter = chapter
 
 
 @dataclass
@@ -330,6 +363,77 @@ class SefariaClient:
         """
         ref = f"Psalms.{chapter}"
         return self._make_request(f"index/{ref}")
+
+    def fetch_book_chapter(self, book: str, chapter: int) -> BookText:
+        """
+        Fetch a complete chapter from any biblical book.
+
+        Args:
+            book: Book name (e.g., "Genesis", "Isaiah", "Psalms")
+            chapter: Chapter number
+
+        Returns:
+            BookText object with all verses
+
+        Raises:
+            requests.RequestException: If API request fails
+        """
+        logger.info(f"Fetching {book} {chapter} from Sefaria...")
+
+        # Fetch text
+        ref = f"{book}.{chapter}"
+        data = self._make_request(f"texts/{ref}", params={
+            'context': 0,
+            'commentary': 0,
+            'pad': 0
+        })
+
+        # Parse response
+        hebrew_verses = data.get('he', [])
+        english_verses = data.get('text', [])
+
+        # Handle nested structure (Sefaria sometimes returns nested arrays)
+        if hebrew_verses and isinstance(hebrew_verses[0], list):
+            hebrew_verses = [v for sublist in hebrew_verses for v in sublist]
+        if english_verses and isinstance(english_verses[0], list):
+            english_verses = [v for sublist in english_verses for v in sublist]
+
+        # Create verse objects
+        verses = []
+        for i, (heb, eng) in enumerate(zip(hebrew_verses, english_verses), start=1):
+            verse = Verse(
+                book=book,
+                chapter=chapter,
+                verse=i,
+                hebrew=clean_html_text(heb) if heb else "",
+                english=clean_html_text(eng) if eng else "",
+                reference=f"{book} {chapter}:{i}"
+            )
+            verses.append(verse)
+
+        book_text = BookText(
+            book=book,
+            chapter=chapter,
+            title_hebrew=data.get('heTitle', f'{book} {chapter}'),
+            title_english=data.get('title', f'{book} {chapter}'),
+            verses=verses,
+            verse_count=len(verses)
+        )
+
+        logger.info(f"Successfully fetched {book} {chapter} ({book_text.verse_count} verses)")
+        return book_text
+
+    def get_book_metadata(self, book: str) -> Dict[str, Any]:
+        """
+        Fetch metadata about a book (chapter count, categories, etc.).
+
+        Args:
+            book: Book name (e.g., "Genesis", "Isaiah")
+
+        Returns:
+            Metadata dictionary including chapter count
+        """
+        return self._make_request(f"index/{book}")
 
 
 def main():

@@ -28,15 +28,68 @@ import sys
 if __name__ == '__main__':
     # Running as script - add parent to path
     sys.path.insert(0, str(Path(__file__).parent.parent))
-    from data_sources.sefaria_client import PsalmText, PsalmVerse, SefariaClient
+    from data_sources.sefaria_client import PsalmText, PsalmVerse, Verse, BookText, SefariaClient
 else:
     # Running as module - use relative import
-    from .sefaria_client import PsalmText, PsalmVerse, SefariaClient
+    from .sefaria_client import PsalmText, PsalmVerse, Verse, BookText, SefariaClient
 
 logger = logging.getLogger(__name__)
 
 # Default database location
 DEFAULT_DB_PATH = Path(__file__).parent.parent.parent / "database" / "tanakh.db"
+
+# Tanakh structure: book names and chapter counts
+# Based on Hebrew Bible (Tanakh) structure
+TANAKH_BOOKS = {
+    # Torah (5 books)
+    'Torah': [
+        ('Genesis', 'בראשית', 50),
+        ('Exodus', 'שמות', 40),
+        ('Leviticus', 'ויקרא', 27),
+        ('Numbers', 'במדבר', 36),
+        ('Deuteronomy', 'דברים', 34),
+    ],
+    # Nevi'im - Prophets (21 books)
+    'Prophets': [
+        ('Joshua', 'יהושע', 24),
+        ('Judges', 'שופטים', 21),
+        ('I Samuel', 'שמואל א', 31),
+        ('II Samuel', 'שמואל ב', 24),
+        ('I Kings', 'מלכים א', 22),
+        ('II Kings', 'מלכים ב', 25),
+        ('Isaiah', 'ישעיהו', 66),
+        ('Jeremiah', 'ירמיהו', 52),
+        ('Ezekiel', 'יחזקאל', 48),
+        ('Hosea', 'הושע', 14),
+        ('Joel', 'יואל', 4),
+        ('Amos', 'עמוס', 9),
+        ('Obadiah', 'עובדיה', 1),
+        ('Jonah', 'יונה', 4),
+        ('Micah', 'מיכה', 7),
+        ('Nahum', 'נחום', 3),
+        ('Habakkuk', 'חבקוק', 3),
+        ('Zephaniah', 'צפניה', 3),
+        ('Haggai', 'חגי', 2),
+        ('Zechariah', 'זכריה', 14),
+        ('Malachi', 'מלאכי', 3),
+    ],
+    # Ketuvim - Writings (13 books)
+    'Writings': [
+        ('Psalms', 'תהלים', 150),
+        ('Proverbs', 'משלי', 31),
+        ('Job', 'איוב', 42),
+        ('Song of Songs', 'שיר השירים', 8),
+        ('Ruth', 'רות', 4),
+        ('Lamentations', 'איכה', 5),
+        ('Ecclesiastes', 'קהלת', 12),
+        ('Esther', 'אסתר', 10),
+        ('Daniel', 'דניאל', 12),
+        ('Ezra', 'עזרא', 10),
+        ('Nehemiah', 'נחמיה', 13),
+        ('I Chronicles', 'דברי הימים א', 29),
+        ('II Chronicles', 'דברי הימים ב', 36),
+    ]
+}
 
 
 class TanakhDatabase:
@@ -118,6 +171,23 @@ class TanakhDatabase:
             )
         """)
 
+        # Concordance table - word-level index for fast Hebrew searching
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS concordance (
+                concordance_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                word TEXT NOT NULL,              -- Original word with all diacritics
+                word_consonantal TEXT NOT NULL,  -- Consonants only (for flexible search)
+                word_voweled TEXT NOT NULL,      -- Consonants + vowels (for precise search)
+                book_name TEXT NOT NULL,
+                chapter INTEGER NOT NULL,
+                verse INTEGER NOT NULL,
+                position INTEGER NOT NULL,       -- Word position in verse (0-indexed)
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (book_name, chapter, verse)
+                    REFERENCES verses(book_name, chapter, verse)
+            )
+        """)
+
         # Create indices for faster lookups
         cursor.execute("""
             CREATE INDEX IF NOT EXISTS idx_verses_reference
@@ -129,8 +199,71 @@ class TanakhDatabase:
             ON lexicon_cache(word, lexicon)
         """)
 
+        # Concordance indices - critical for fast Hebrew word searches
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_concordance_consonantal
+            ON concordance(word_consonantal)
+        """)
+
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_concordance_voweled
+            ON concordance(word_voweled)
+        """)
+
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_concordance_exact
+            ON concordance(word)
+        """)
+
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_concordance_reference
+            ON concordance(book_name, chapter, verse)
+        """)
+
         self.conn.commit()
         logger.info(f"Database schema created at {self.db_path}")
+
+    def store_book_chapter(self, book_text: BookText, category: str = None) -> int:
+        """
+        Store a complete chapter from any biblical book.
+
+        Args:
+            book_text: BookText object to store
+            category: Book category (Torah, Prophets, Writings)
+
+        Returns:
+            Number of verses stored
+        """
+        cursor = self.conn.cursor()
+
+        # Ensure book exists
+        cursor.execute("""
+            INSERT OR IGNORE INTO books (name, hebrew_name, category)
+            VALUES (?, ?, ?)
+        """, (book_text.book, book_text.title_hebrew, category or "Unknown"))
+
+        # Store chapter metadata
+        cursor.execute("""
+            INSERT OR REPLACE INTO chapters
+            (book_name, chapter_number, verse_count, title_english, title_hebrew)
+            VALUES (?, ?, ?, ?, ?)
+        """, (book_text.book, book_text.chapter, book_text.verse_count,
+              book_text.title_english, book_text.title_hebrew))
+
+        # Store verses
+        stored_count = 0
+        for verse in book_text.verses:
+            cursor.execute("""
+                INSERT OR REPLACE INTO verses
+                (book_name, chapter, verse, hebrew, english, reference)
+                VALUES (?, ?, ?, ?, ?, ?)
+            """, (book_text.book, verse.chapter, verse.verse,
+                  verse.hebrew, verse.english, verse.reference))
+            stored_count += 1
+
+        self.conn.commit()
+        logger.debug(f"Stored {book_text.book} {book_text.chapter} ({stored_count} verses)")
+        return stored_count
 
     def store_psalm(self, psalm: PsalmText) -> int:
         """
@@ -142,36 +275,7 @@ class TanakhDatabase:
         Returns:
             Number of verses stored
         """
-        cursor = self.conn.cursor()
-
-        # Ensure book exists
-        cursor.execute("""
-            INSERT OR IGNORE INTO books (name, hebrew_name, category)
-            VALUES (?, ?, ?)
-        """, ("Psalms", "תהלים", "Writings"))
-
-        # Store chapter metadata
-        cursor.execute("""
-            INSERT OR REPLACE INTO chapters
-            (book_name, chapter_number, verse_count, title_english, title_hebrew)
-            VALUES (?, ?, ?, ?, ?)
-        """, ("Psalms", psalm.chapter, psalm.verse_count,
-              psalm.title_english, psalm.title_hebrew))
-
-        # Store verses
-        stored_count = 0
-        for verse in psalm.verses:
-            cursor.execute("""
-                INSERT OR REPLACE INTO verses
-                (book_name, chapter, verse, hebrew, english, reference)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, ("Psalms", verse.chapter, verse.verse,
-                  verse.hebrew, verse.english, verse.reference))
-            stored_count += 1
-
-        self.conn.commit()
-        logger.info(f"Stored Psalm {psalm.chapter} ({stored_count} verses)")
-        return stored_count
+        return self.store_book_chapter(psalm, category="Writings")
 
     def get_verse(self, book: str, chapter: int, verse: int) -> Optional[PsalmVerse]:
         """
@@ -331,6 +435,188 @@ class TanakhDatabase:
 
         return stats
 
+    def download_entire_tanakh(self, force: bool = False) -> Dict[str, Any]:
+        """
+        Download the entire Tanakh (Hebrew Bible) from Sefaria.
+
+        Args:
+            force: If True, re-download even if already in database
+
+        Returns:
+            Statistics about the download
+        """
+        client = SefariaClient()
+        stats = {
+            'downloaded_chapters': 0,
+            'skipped_chapters': 0,
+            'failed_chapters': [],
+            'total_verses': 0,
+            'books_processed': 0
+        }
+
+        logger.info("Starting download of entire Tanakh...")
+
+        for category, books in TANAKH_BOOKS.items():
+            logger.info(f"\n=== Processing {category} ===")
+
+            for book_name, hebrew_name, chapter_count in books:
+                logger.info(f"Downloading {book_name} ({chapter_count} chapters)...")
+
+                for chapter in range(1, chapter_count + 1):
+                    try:
+                        # Check if chapter already exists
+                        cursor = self.conn.cursor()
+                        cursor.execute("""
+                            SELECT COUNT(*) as count
+                            FROM chapters
+                            WHERE book_name = ? AND chapter_number = ?
+                        """, (book_name, chapter))
+
+                        if not force and cursor.fetchone()['count'] > 0:
+                            logger.debug(f"{book_name} {chapter} already exists, skipping")
+                            stats['skipped_chapters'] += 1
+                            continue
+
+                        # Fetch chapter
+                        book_text = client.fetch_book_chapter(book_name, chapter)
+
+                        # Store in database
+                        verse_count = self.store_book_chapter(book_text, category=category)
+
+                        stats['downloaded_chapters'] += 1
+                        stats['total_verses'] += verse_count
+
+                        # Progress update every 20 chapters
+                        if stats['downloaded_chapters'] % 20 == 0:
+                            logger.info(f"Progress: {stats['downloaded_chapters']} chapters, "
+                                       f"{stats['total_verses']} verses downloaded")
+
+                    except Exception as e:
+                        logger.error(f"Failed to download {book_name} {chapter}: {e}")
+                        stats['failed_chapters'].append(f"{book_name} {chapter}")
+
+                stats['books_processed'] += 1
+                logger.info(f"Completed {book_name} ({chapter_count} chapters)")
+
+        logger.info(f"\n=== Tanakh Download Complete ===")
+        logger.info(f"Downloaded: {stats['downloaded_chapters']} chapters")
+        logger.info(f"Skipped: {stats['skipped_chapters']} chapters")
+        logger.info(f"Total verses: {stats['total_verses']}")
+        logger.info(f"Books processed: {stats['books_processed']}")
+
+        if stats['failed_chapters']:
+            logger.warning(f"Failed chapters ({len(stats['failed_chapters'])}): {stats['failed_chapters'][:10]}")
+
+        return stats
+
+    def build_concordance_index(self, force: bool = False) -> Dict[str, Any]:
+        """
+        Build concordance index from all verses in the database.
+        Parses each verse into words and stores normalized forms.
+
+        Args:
+            force: If True, rebuild even if concordance already exists
+
+        Returns:
+            Statistics about the indexing process
+        """
+        # Import here to avoid circular dependency
+        if __name__ == '__main__':
+            sys.path.insert(0, str(Path(__file__).parent.parent))
+            from concordance.hebrew_text_processor import split_words, normalize_for_search
+        else:
+            from ..concordance.hebrew_text_processor import split_words, normalize_for_search
+
+        cursor = self.conn.cursor()
+
+        # Check if concordance already exists
+        cursor.execute("SELECT COUNT(*) as count FROM concordance")
+        existing_count = cursor.fetchone()['count']
+
+        if existing_count > 0 and not force:
+            logger.info(f"Concordance already exists with {existing_count} entries. Use force=True to rebuild.")
+            return {
+                'skipped': True,
+                'existing_entries': existing_count
+            }
+
+        # Clear existing concordance if rebuilding
+        if force:
+            logger.info("Clearing existing concordance...")
+            cursor.execute("DELETE FROM concordance")
+            self.conn.commit()
+
+        logger.info("Building concordance index from all verses...")
+
+        stats = {
+            'verses_processed': 0,
+            'words_indexed': 0,
+            'failed_verses': []
+        }
+
+        # Get all verses
+        cursor.execute("""
+            SELECT book_name, chapter, verse, hebrew
+            FROM verses
+            ORDER BY book_name, chapter, verse
+        """)
+
+        verses = cursor.fetchall()
+        total_verses = len(verses)
+
+        for i, row in enumerate(verses):
+            try:
+                book_name = row['book_name']
+                chapter = row['chapter']
+                verse_num = row['verse']
+                hebrew_text = row['hebrew']
+
+                # Skip empty verses
+                if not hebrew_text or not hebrew_text.strip():
+                    continue
+
+                # Split into words
+                words = split_words(hebrew_text)
+
+                # Index each word
+                for position, word in enumerate(words):
+                    # Normalize at different levels
+                    word_consonantal = normalize_for_search(word, 'consonantal')
+                    word_voweled = normalize_for_search(word, 'voweled')
+
+                    # Insert into concordance
+                    cursor.execute("""
+                        INSERT INTO concordance
+                        (word, word_consonantal, word_voweled, book_name, chapter, verse, position)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """, (word, word_consonantal, word_voweled, book_name, chapter, verse_num, position))
+
+                    stats['words_indexed'] += 1
+
+                stats['verses_processed'] += 1
+
+                # Progress update
+                if (i + 1) % 1000 == 0:
+                    self.conn.commit()  # Commit periodically
+                    logger.info(f"Progress: {i + 1}/{total_verses} verses processed, "
+                               f"{stats['words_indexed']} words indexed")
+
+            except Exception as e:
+                logger.error(f"Failed to index {book_name} {chapter}:{verse_num}: {e}")
+                stats['failed_verses'].append(f"{book_name} {chapter}:{verse_num}")
+
+        # Final commit
+        self.conn.commit()
+
+        logger.info(f"Concordance indexing complete!")
+        logger.info(f"  Verses processed: {stats['verses_processed']}/{total_verses}")
+        logger.info(f"  Words indexed: {stats['words_indexed']}")
+
+        if stats['failed_verses']:
+            logger.warning(f"  Failed verses: {len(stats['failed_verses'])}")
+
+        return stats
+
     def get_statistics(self) -> Dict[str, Any]:
         """Get database statistics."""
         cursor = self.conn.cursor()
@@ -338,19 +624,23 @@ class TanakhDatabase:
         cursor.execute("SELECT COUNT(*) as count FROM books")
         book_count = cursor.fetchone()['count']
 
-        cursor.execute("SELECT COUNT(*) as count FROM chapters WHERE book_name = 'Psalms'")
-        psalm_count = cursor.fetchone()['count']
+        cursor.execute("SELECT COUNT(*) as count FROM chapters")
+        chapter_count = cursor.fetchone()['count']
 
-        cursor.execute("SELECT COUNT(*) as count FROM verses WHERE book_name = 'Psalms'")
+        cursor.execute("SELECT COUNT(*) as count FROM verses")
         verse_count = cursor.fetchone()['count']
 
         cursor.execute("SELECT COUNT(*) as count FROM lexicon_cache")
         lexicon_count = cursor.fetchone()['count']
 
+        cursor.execute("SELECT COUNT(*) as count FROM concordance")
+        concordance_count = cursor.fetchone()['count']
+
         return {
             'books': book_count,
-            'psalms': psalm_count,
+            'chapters': chapter_count,
             'verses': verse_count,
+            'concordance_words': concordance_count,
             'lexicon_entries': lexicon_count,
             'db_path': str(self.db_path)
         }
@@ -379,14 +669,25 @@ def main():
     parser = argparse.ArgumentParser(description='Manage Tanakh database')
     parser.add_argument('--download-all', action='store_true',
                        help='Download all 150 Psalms from Sefaria')
+    parser.add_argument('--download-tanakh', action='store_true',
+                       help='Download entire Tanakh (all books)')
+    parser.add_argument('--build-concordance', action='store_true',
+                       help='Build concordance index from all verses')
     parser.add_argument('--force', action='store_true',
-                       help='Force re-download even if already exists')
+                       help='Force re-download/rebuild even if already exists')
     parser.add_argument('--stats', action='store_true',
                        help='Show database statistics')
     parser.add_argument('--get-psalm', type=int,
                        help='Retrieve a specific Psalm')
 
     args = parser.parse_args()
+
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%H:%M:%S'
+    )
 
     db = TanakhDatabase()
 
@@ -395,6 +696,34 @@ def main():
         print("\n=== Database Statistics ===")
         for key, value in stats.items():
             print(f"{key}: {value}")
+
+    elif args.build_concordance:
+        print("\n=== Building Concordance Index ===")
+        print("This will index all Hebrew words in the database.")
+        print("Estimated time: 2-3 minutes\n")
+        stats = db.build_concordance_index(force=args.force)
+        if stats.get('skipped'):
+            print(f"Concordance already exists with {stats['existing_entries']} entries.")
+            print("Use --force to rebuild.")
+        else:
+            print(f"\n=== Concordance Build Complete ===")
+            print(f"Verses processed: {stats['verses_processed']}")
+            print(f"Words indexed: {stats['words_indexed']}")
+            if stats.get('failed_verses'):
+                print(f"Failed: {len(stats['failed_verses'])} verses")
+
+    elif args.download_tanakh:
+        print("\n=== Downloading Entire Tanakh ===")
+        print("This will download all books of the Hebrew Bible.")
+        print("Estimated time: 5-10 minutes\n")
+        stats = db.download_entire_tanakh(force=args.force)
+        print(f"\n=== Download Complete ===")
+        print(f"Chapters downloaded: {stats['downloaded_chapters']}")
+        print(f"Chapters skipped: {stats['skipped_chapters']}")
+        print(f"Total verses: {stats['total_verses']}")
+        print(f"Books processed: {stats['books_processed']}")
+        if stats['failed_chapters']:
+            print(f"Failed: {len(stats['failed_chapters'])} chapters")
 
     elif args.download_all:
         stats = db.download_all_psalms(force=args.force)
