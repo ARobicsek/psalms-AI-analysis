@@ -17,9 +17,10 @@ For complete coverage, integrate OSHB morphology database:
 https://github.com/openscriptures/morphhb
 """
 
-from typing import List, Set
+from typing import List, Set, Optional
 from dataclasses import dataclass
 from enum import Enum
+import re
 
 
 class Gender(Enum):
@@ -78,12 +79,25 @@ class MorphologyVariationGenerator:
     - Pattern-based suffixes for gender/number
     - Prefix patterns for verb stems
     - Prefix patterns for imperfect tense
+    - Final letter form conversion for orthographic correctness
 
     Future Enhancement:
     - Integrate OSHB morphhb database for complete coverage
     - Add root-specific patterns (hollow, geminate, etc.)
     - Add proper vowel insertion/deletion rules
     """
+
+    # Hebrew final forms mapping (medial → final)
+    FINAL_FORMS = {
+        'כ': 'ך',  # Kaf
+        'מ': 'ם',  # Mem
+        'נ': 'ן',  # Nun
+        'פ': 'ף',  # Pe
+        'צ': 'ץ'   # Tsadi
+    }
+
+    # Reverse mapping (final → medial) for normalization
+    MEDIAL_FORMS = {v: k for k, v in FINAL_FORMS.items()}
 
     # Common suffix patterns
     SUFFIX_PATTERNS = {
@@ -148,6 +162,69 @@ class MorphologyVariationGenerator:
         """Initialize the morphology variation generator."""
         pass
 
+    @staticmethod
+    def normalize_to_medial(root: str) -> str:
+        """
+        Convert any final forms in root to medial forms for generation.
+
+        When a user provides a root like ברך, we need to normalize it to ברך
+        (all medial forms) before generating variations. This ensures that when
+        we add suffixes, the letters are in the correct medial form.
+
+        Args:
+            root: Hebrew root (may contain final forms)
+
+        Returns:
+            Root with all final forms converted to medial
+
+        Example:
+            >>> normalize_to_medial("ברך")
+            "ברכ"  # Final ך → medial כ for generation
+        """
+        if not root:
+            return root
+
+        result = []
+        for char in root:
+            if char in MorphologyVariationGenerator.MEDIAL_FORMS:
+                result.append(MorphologyVariationGenerator.MEDIAL_FORMS[char])
+            else:
+                result.append(char)
+        return ''.join(result)
+
+    @staticmethod
+    def apply_final_forms(word: str) -> str:
+        """
+        Convert medial letters to final forms at end of word.
+
+        Hebrew has five letters with special final forms that must be used
+        when the letter appears at the end of a word:
+        - כ → ך (Kaf)
+        - מ → ם (Mem)
+        - נ → ן (Nun)
+        - פ → ף (Pe)
+        - צ → ץ (Tsadi)
+
+        Args:
+            word: Hebrew word (may contain diacritics)
+
+        Returns:
+            Word with final form applied if needed
+
+        Example:
+            >>> apply_final_forms("ברכו")
+            "ברכו"  # כ stays medial, ו at end
+            >>> apply_final_forms("ברכ")
+            "ברך"  # כ at end becomes final ך
+        """
+        if not word:
+            return word
+
+        last_char = word[-1]
+        if last_char in MorphologyVariationGenerator.FINAL_FORMS:
+            return word[:-1] + MorphologyVariationGenerator.FINAL_FORMS[last_char]
+        return word
+
     def generate_variations(self,
                           root: str,
                           include_gender: bool = True,
@@ -156,6 +233,13 @@ class MorphologyVariationGenerator:
         """
         Generate morphological variations of a Hebrew root.
 
+        All generated forms are automatically corrected for final letter forms
+        (כ→ך, מ→ם, נ→ן, פ→ף, צ→ץ at word end).
+
+        IMPORTANT: The root should be provided in consonantal form. If final
+        forms are present (e.g., ברך), they will be normalized to medial forms
+        (ברכ) for generation, then final forms applied only at word end.
+
         Args:
             root: Hebrew root (consonantal, 2-4 letters typically)
             include_gender: Generate gender variations
@@ -163,21 +247,27 @@ class MorphologyVariationGenerator:
             include_verb_forms: Generate verb tense/stem variations
 
         Returns:
-            List of possible word forms
+            List of possible word forms with final letters corrected
 
         Example:
             >>> gen = MorphologyVariationGenerator()
-            >>> variations = gen.generate_variations("שמר")
-            >>> len(variations)
-            50+  # Many variations generated
+            >>> variations = gen.generate_variations("ברך")
+            >>> # Returns: ברך, ברכו, ברכים (correct medial/final usage)
         """
-        variations = {root}  # Always include the base form
+        # Step 1: Normalize root to medial forms for generation
+        medial_root = self.normalize_to_medial(root)
+
+        # Step 2: Generate variations using medial root
+        variations = {medial_root}  # Always include the base form
 
         if include_gender and include_number:
-            variations.update(self._generate_noun_variations(root))
+            variations.update(self._generate_noun_variations(medial_root))
 
         if include_verb_forms:
-            variations.update(self._generate_verb_variations(root))
+            variations.update(self._generate_verb_variations(medial_root))
+
+        # Step 3: Apply final letter forms ONLY to the last character
+        variations = {self.apply_final_forms(v) for v in variations}
 
         return sorted(list(variations))
 
@@ -221,6 +311,15 @@ class MorphologyVariationGenerator:
         """
         Generate verb variations (stems, tenses).
 
+        This method creates mutually-exclusive pattern sets to avoid
+        linguistically impossible forms like יהָרעה (imperfect + Hophal prefix).
+
+        Verb forms generated:
+        1. Perfect forms: stem prefix + root + suffixes
+        2. Imperfect forms: person prefix + root (no stem prefix - vowel pattern differs)
+        3. Participles: participle prefix + root
+        4. Imperative: root only (or with suffixes)
+
         Args:
             root: Consonantal root (typically 3 letters)
 
@@ -229,22 +328,20 @@ class MorphologyVariationGenerator:
         """
         variations = set()
 
-        # Generate stem variations with prefixes
+        # 1. Perfect forms: stem prefix + root (Qal, Niphal, Hiphil, Hophal, Hithpael)
         for stem, prefixes in self.STEM_PREFIXES.items():
             for prefix in prefixes:
                 variations.add(prefix + root)
 
-        # Generate imperfect forms (prefix + root)
+        # 2. Imperfect forms: person prefix + root ONLY (no stem prefix stacking)
+        # In Hebrew, imperfect already contains stem information via vowel patterns,
+        # not prefix stacking. E.g.:
+        # - Qal imperfect: יִקְטֹל (not י + base)
+        # - Hiphil imperfect: יַקְטִיל (different vowels, not י + ה + base)
         for person, prefix in self.IMPERFECT_PREFIXES.items():
             variations.add(prefix + root)
 
-            # Also with stem prefixes
-            for stem, stem_prefixes in self.STEM_PREFIXES.items():
-                for stem_prefix in stem_prefixes:
-                    if stem_prefix:  # Skip empty prefix for Qal
-                        variations.add(prefix + stem_prefix + root)
-
-        # Add participle patterns
+        # 3. Participle patterns (מ prefix forms)
         for stem, patterns in self.PARTICIPLE_PATTERNS.items():
             for pattern_prefix in patterns:
                 # Extract prefix from pattern (before root placeholder)
@@ -281,6 +378,142 @@ class MorphologyVariationGenerator:
             'additional_forms': morphology_variations - prefix_variations,
             'improvement_ratio': morphology_variations / prefix_variations
         }
+
+
+class MorphologyValidator:
+    """
+    Validates whether a discovered word form is plausibly derived from a root.
+
+    This validator is used in Phase 2 of the hybrid search strategy to filter
+    substring search results. It checks whether a word could reasonably be
+    derived from a given root, filtering out spurious matches.
+
+    Validation checks:
+    1. Root consonants appear in the correct order
+    2. Only valid affixes added (prefixes/suffixes from known patterns)
+    3. Length is reasonable (root + 0-4 affixes typically)
+    4. No impossible prefix combinations (e.g., יהָ)
+
+    This is a FOUNDATION implementation. For production use, integrate with
+    OSHB morphology database for definitive validation.
+    """
+
+    # Valid Hebrew prefixes (from grammar)
+    VALID_PREFIXES = {
+        # Articles and conjunctions
+        'ה', 'ו', 'וה',
+        # Prepositions
+        'ב', 'כ', 'ל', 'מ',
+        # Combinations
+        'וב', 'וכ', 'ול', 'ומ', 'בה', 'כה', 'לה', 'מה',
+        # Verb stems
+        'נ', 'הת', 'הִת', 'מ', 'מת',
+        # Imperfect
+        'א', 'ת', 'י', 'נ'
+    }
+
+    # Valid Hebrew suffixes
+    VALID_SUFFIXES = {
+        # Gender/number
+        'ה', 'ת', 'ית', 'ים', 'ות', 'יים',
+        # Pronominal
+        'י', 'ני', 'ך', 'ו', 'הו', 'ה', 'הּ', 'נו', 'כם', 'ם', 'הם', 'ן', 'הן'
+    }
+
+    def __init__(self, root: str):
+        """
+        Initialize validator for a specific root.
+
+        Args:
+            root: Hebrew consonantal root (2-4 letters typically)
+        """
+        self.root = root
+        self.root_letters = list(root)
+
+    def is_plausible(self, word: str) -> bool:
+        """
+        Check if a word is plausibly derived from the root.
+
+        Args:
+            word: Hebrew word to validate
+
+        Returns:
+            True if word could plausibly derive from root
+
+        Example:
+            >>> validator = MorphologyValidator("שמר")
+            >>> validator.is_plausible("ישמרו")  # True
+            >>> validator.is_plausible("דבר")    # False (different root)
+        """
+        if not word:
+            return False
+
+        # Check 1: Root consonants must appear in order
+        if not self._contains_root_in_order(word):
+            return False
+
+        # Check 2: Length must be reasonable (root + 0-4 affixes typically)
+        if len(word) > len(self.root) + 6:  # Allow some flexibility
+            return False
+
+        # Check 3: No impossible prefix combinations (e.g., יהָ, יהִת)
+        if self._has_impossible_prefix_combination(word):
+            return False
+
+        return True
+
+    def _contains_root_in_order(self, word: str) -> bool:
+        """
+        Check if root consonants appear in order within word.
+
+        Args:
+            word: Word to check
+
+        Returns:
+            True if all root letters appear in order
+        """
+        root_index = 0
+        for char in word:
+            if root_index < len(self.root_letters) and char == self.root_letters[root_index]:
+                root_index += 1
+            if root_index == len(self.root_letters):
+                return True
+        return root_index == len(self.root_letters)
+
+    def _has_impossible_prefix_combination(self, word: str) -> bool:
+        """
+        Check for linguistically impossible prefix combinations.
+
+        Impossible combinations include:
+        - Imperfect prefix + stem prefix (יה, יהת, תה, אה, נה)
+
+        Args:
+            word: Word to check
+
+        Returns:
+            True if word has impossible prefix combination
+        """
+        # Check for imperfect + stem prefix combinations
+        impossible_patterns = [
+            'יה',   # Imperfect + Hiphil/Hophal (should use vowel pattern)
+            'יהת',  # Imperfect + Hithpael
+            'תה',   # Imperfect + Hiphil/Hophal
+            'תהת',  # Imperfect + Hithpael
+            'אה',   # Imperfect + Hiphil/Hophal
+            'אהת',  # Imperfect + Hithpael
+            'נה',   # Imperfect + Hiphil/Hophal (נ alone is valid for Niphal)
+        ]
+
+        for pattern in impossible_patterns:
+            if word.startswith(pattern):
+                # Check if it's truly the pattern we're concerned about
+                # (not just coincidental letters)
+                if len(word) > len(pattern):
+                    # If the root starts right after, it's likely impossible
+                    if word[len(pattern):].startswith(self.root[0]):
+                        return True
+
+        return False
 
 
 # CLI for testing

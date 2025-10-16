@@ -1,20 +1,21 @@
 # Project Status - Updated 2025-10-16
 
 ## Current Phase
-**Phase 1: Foundation - Week 1, Day 4 COMPLETE**
+**Phase 1: Foundation - Week 1, Day 5 COMPLETE ✅**
 
 ## Current Task
-Day 4: Librarian Agents ✅ COMPLETE
-- [x] Created BDB Librarian for lexicon lookups via Sefaria
-- [x] Created Concordance Librarian with automatic phrase variation search
-- [x] Created Figurative Language Librarian with hierarchical Target/Vehicle/Ground queries
-- [x] Created Research Bundle Assembler to coordinate all three librarians
-- [x] Integration testing with sample research requests - PASSED ✅
-- [x] Generated Markdown-formatted research bundles for LLM consumption
+Day 5: Integration & Documentation ✅ COMPLETE
+- [x] Fixed BDB Librarian with homograph disambiguation
+- [x] Implemented comprehensive logging system (JSON + text)
+- [x] Created morphological variation generator (3.3x improvement)
+- [x] Refined morphology (final letters, hybrid search, validator)
+- [x] Updated ARCHITECTURE.md with complete librarian documentation
+- [x] Created usage examples (LIBRARIAN_USAGE_EXAMPLES.md)
+- [x] Full integration test - PASSED ✅
 
 ## Progress
-- **Overall**: 9% complete (Day 4 of 45 complete)
-- **Current phase**: 80% complete (Days 1-4 of 5 days COMPLETE ✅)
+- **Overall**: 11% complete (Day 5 of 45 complete)
+- **Current phase**: 100% complete (Days 1-5 of 5 days COMPLETE ✅)
 
 ## Completed
 ✅ **Phase 1, Day 1: Project Structure Setup** (100% COMPLETE)
@@ -64,59 +65,70 @@ Day 4: Librarian Agents ✅ COMPLETE
 - ✅ Integration tested with Psalm 23 research request - PASSED ✅
 - ✅ Total agent code: ~1,890 lines (including docs and CLIs)
 
+✅ **Phase 1, Day 5: Integration & Documentation** (100% COMPLETE)
+- ✅ **Enhancement 1**: Fixed BDB Librarian Sefaria API integration
+  - Returns comprehensive lexicon data from 3 sources (BDB, Jastrow, Klein)
+  - Added homograph disambiguation metadata (vocalization, Strong's numbers, transliteration)
+  - Architectural decision: Scholar filters meanings (not Librarian) - saves $2.40/project
+- ✅ **Enhancement 2**: Comprehensive logging system (~470 LOC)
+  - Dual output: human-readable console + machine-readable JSON
+  - Specialized methods: research_request, librarian_query, librarian_results, phrase_variations
+  - Event tracking and performance metrics
+- ✅ **Enhancement 3**: Morphological variation system (~500 LOC)
+  - Generated 66 variations (3.3x improvement over 20 prefix-only)
+  - Noun forms: gender, number, pronominal suffixes
+  - Verb forms: perfect/imperfect tenses, 7 stems (Qal, Niphal, Piel, Pual, Hiphil, Hophal, Hithpael)
+  - Final letter forms: כ→ך, מ→ם, נ→ן, פ→ף, צ→ץ (applied automatically)
+  - Fixed nonsense forms, hybrid search with validator
+  - Estimated 99%+ recall
+- ✅ Updated ARCHITECTURE.md with complete librarian documentation (400+ lines added)
+- ✅ Created LIBRARIAN_USAGE_EXAMPLES.md
+- ✅ Full integration test with all enhancements - PASSED ✅
+- ✅ Total enhancement code: ~1,100 LOC (logger, morphology, tests)
+
 ## In Progress
-🔄 **Ready for Phase 1, Day 5**: Integration & Documentation
+🔄 **Ready for Phase 2**: Scholar Agents (Week 2)
 
 ## Upcoming Phases
 - ✅ **Phase 1, Day 1**: Project structure (COMPLETE)
 - ✅ **Phase 1, Day 2**: Sefaria API client (COMPLETE)
 - ✅ **Phase 1, Day 3**: Hebrew concordance + Full Tanakh (COMPLETE)
 - ✅ **Phase 1, Day 4**: Librarian agents (COMPLETE)
-- ⏳ **Phase 1, Day 5**: Integration & documentation ← NEXT
+- ✅ **Phase 1, Day 5**: Integration & documentation (COMPLETE)
+- ⏳ **Phase 2, Day 6+**: Scholar Agents ← NEXT
 
 ## Blockers
 None currently.
 
 ## Next Steps
-**Day 5: Integration & Documentation (ENHANCED PLAN)**
+**Phase 2: Scholar Agents** (Week 2)
 
-### Pre-Day 5 Enhancements
-1. **Troubleshoot BDB Librarian**
-   - Investigate Sefaria lexicon API endpoint
-   - Test alternative API paths for BDB entries
-   - Consider fallback to OSHB morphology data
-   - Document workarounds if API remains limited
+### Day 6-10: Scholar-Researcher Agent
+- [ ] Design Scholar-Researcher prompt (generates research requests)
+- [ ] Implement agent with Claude Haiku 4.5
+- [ ] Test research request generation for various Psalm types
+- [ ] Integrate with Research Bundle Assembler
+- [ ] End-to-end test: Macro Overview → Research Request → Research Bundle
 
-2. **Implement Comprehensive Logging System**
-   - Log what Scholar agent requested (research request JSON)
-   - Log what each librarian searched (queries, parameters)
-   - Log what each librarian returned (result counts, sample data)
-   - Create structured log format (JSON or formatted text)
-   - Add logging levels (DEBUG, INFO, WARNING, ERROR)
-   - Store logs for debugging and analysis
+### Day 11-15: Scholar-Writer Agent (Pass 1: Macro Analysis)
+- [ ] Design Macro Analysis prompt (chapter-level thesis)
+- [ ] Implement agent with Claude Sonnet 4.5
+- [ ] Test with diverse Psalms (lament, praise, wisdom, royal)
+- [ ] Quality metrics: thesis specificity, structural insights
 
-3. **Enhance Concordance Search with Morphological Variations**
-   - **Gender variations**: masculine, feminine
-   - **Number variations**: singular, plural, dual
-   - **Verb tenses**: perfect, imperfect, imperative, infinitive, participle
-   - **Verb stems (binyanim)**:
-     - Qal (Paal) - simple active
-     - Niphal - simple passive/reflexive
-     - Piel - intensive active
-     - Pual - intensive passive
-     - Hiphil - causative active
-     - Hophal - causative passive
-     - Hithpael - reflexive/reciprocal
-   - **Strategy**: Use pattern-based generation or integrate OSHB morphology database
-   - **Goal**: Increase recall from 95% → 99%+ of relevant occurrences
+### Day 16-20: Scholar-Writer Agent (Pass 2: Micro Analysis)
+- [ ] Design Micro Analysis prompt (verse-by-verse commentary)
+- [ ] Integrate research bundles from librarians
+- [ ] Test telescopic integration (macro thesis → micro details)
+- [ ] Quality metrics: textual support, poetic awareness
 
-### Original Day 5 Tasks
-4. Update ARCHITECTURE.md with librarian agent documentation
-5. Create usage examples and API documentation
-6. Test end-to-end workflow with all agents
-7. Performance optimization (if needed)
-8. Code cleanup and refactoring
-9. Prepare for Scholar agents (Pass 0-3)
+### Day 21-25: Scholar-Writer Agent (Pass 3: Synthesis)
+- [ ] Design Synthesis prompt (coherent essay)
+- [ ] Implement Critic agent (quality feedback)
+- [ ] Implement Revision loop
+- [ ] Full pipeline test: Psalm 1-2 complete generation
+
+See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 
 ## Metrics
 - **Tanakh books downloaded**: 39/39 ✅
@@ -192,11 +204,15 @@ None currently.
 6. **Analysis approach**: Three-pass telescopic (macro → micro → synthesis)
 
 ## Quick Links
-- **Last session**: 2025-10-16 (Day 4 - Librarian Agents COMPLETE)
-- **Last session topic**: All three librarian agents + Research Bundle Assembler
-- **Current code location**: src/agents/ (bdb_librarian.py, concordance_librarian.py, figurative_librarian.py, research_assembler.py)
-- **Next milestone**: Day 5 - Integration & Documentation
-- **Git HEAD**: Need to commit Day 3 + Day 4 work
+- **Last session**: 2025-10-16 (Day 5 - Integration & Documentation COMPLETE ✅)
+- **Last session topic**: Day 5 enhancements, documentation, integration testing
+- **Current code location**:
+  - src/agents/ (all librarians + assembler)
+  - src/utils/ (logging system)
+  - src/concordance/ (morphology variations)
+  - docs/ (ARCHITECTURE.md, LIBRARIAN_USAGE_EXAMPLES.md)
+- **Next milestone**: Phase 2 - Scholar Agents
+- **Git HEAD**: Ready to commit Day 5 completion
 
 ## Notes
 - Project based on existing figurative language work in Bible project
