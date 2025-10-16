@@ -1,0 +1,35 @@
+{
+  "psalm_chapter": 23,
+  "notes": "Sample research request for Psalm 23 - testing all three librarian agents",
+  "lexicon": [
+    {
+      "word": "רעה",
+      "notes": "Shepherd verb - key metaphor in v.1"
+    }
+  ],
+  "concordance": [
+    {
+      "query": "רעה",
+      "scope": "Psalms",
+      "level": "consonantal",
+      "include_variations": true,
+      "max_results": 10,
+      "notes": "Find all shepherd/pasture references in Psalms"
+    }
+  ],
+  "figurative": [
+    {
+      "book": "Psalms",
+      "chapter": 23,
+      "metaphor": true,
+      "max_results": 10,
+      "notes": "All metaphors in Psalm 23"
+    },
+    {
+      "book": "Psalms",
+      "vehicle_contains": "shepherd",
+      "max_results": 5,
+      "notes": "Other shepherd metaphors across Psalms"
+    }
+  ]
+}
