@@ -1,0 +1,114 @@
+
+================================================================================
+  PSALM 27:1 - LIBRARIAN AGENTS DEMO
+================================================================================
+
+VERSE (Hebrew):
+לְדָוִד ׀ יְהֹוָה ׀ אוֹרִי וְיִשְׁעִי מִמִּי אִירָא יְהֹוָה מָעוֹז־חַיַּי מִמִּי אֶפְחָד׃
+
+VERSE (English):
+Of David. The LORD is my light and my salvation; whom shall I fear?
+The LORD is the stronghold of my life; of whom shall I be afraid?
+
+SCHOLAR'S RESEARCH REQUEST:
+  Words to investigate: אורי, וישעי, איראֿ, מעוז־חיי, אפחד
+  Figurative interest: 'stronghold' metaphor
+
+================================================================================
+  LIBRARIAN 1: BDB LEXICON (Hebrew Definitions)
+================================================================================
+
+
+--- Looking up: אור ---
+
+1. BDB Augmented Strong
+   Vocalized: אוֹר
+   Strong's: 215
+   Pronunciation: ʼôwr
+   Definition: to be or become light,  shine     to become light (day)     to shine (of the sun)     to become bright     to be illuminated     to become lighted up ...
+
+2. BDB Augmented Strong
+   Vocalized: אוֹר
+   Strong's: 216
+   Pronunciation: ʼôwr
+   Definition: light   light of day   light of heavenly luminaries (moon,  sun, stars)   day-break,  dawn,  morning light   daylight   lightning   light of lamp   li...
+
+   ... and 2 more meanings
+
+
+--- Looking up: ישע ---
+
+1. BDB Augmented Strong
+   Vocalized: יֶשַׁע
+   Strong's: 3468
+   Pronunciation: yeshaʻ
+   Definition: deliverance,  salvation,  rescue,  safety,  welfare   safety,  welfare,  prosperity   salvation   victory...
+
+
+--- Looking up: ירא ---
+
+1. BDB Augmented Strong
+   Vocalized: יָרֵא
+   Strong's: 3372
+   Pronunciation: yârêʼ
+   Definition: to fear,  revere,  be afraid     to fear,  be afraid     to stand in awe of,  be awed     to fear,  reverence,  honour,  respect     to be fearful,  b...
+
+2. BDB Augmented Strong
+   Vocalized: יָרֵא
+   Strong's: 3373
+   Pronunciation: yârêʼ
+   Definition: fearing,  reverent,  afraid...
+
+   ... and 2 more meanings
+
+
+--- Looking up: מעוז ---
+
+1. BDB Augmented Strong
+   Vocalized: מָעוֹז
+   Strong's: 4581
+   Pronunciation: mâʻôwz
+   Definition: place or means of safety,  protection,  refuge,  stronghold   place of safety,  fastness,  harbour,  stronghold   refuge (of God) (fig.)   human prote...
+
+
+--- Looking up: פחד ---
+
+1. BDB Augmented Strong
+   Vocalized: פָּחַד
+   Strong's: 6342
+   Pronunciation: pâchad
+   Definition: to fear,  tremble,  revere,  dread,  be in awe or dread     to be in dread     to be in awe    to be in great dread    to cause to dread...
+
+2. BDB Augmented Strong
+   Vocalized: פַּחַד
+   Strong's: 6343
+   Pronunciation: pachad
+   Definition: terror,  dread   dread   object of dread...
+
+   ... and 1 more meanings
+
+
+================================================================================
+  LIBRARIAN 2: CONCORDANCE (Where else do these words appear?)
+================================================================================
+
+
+--- Searching: אור (light) ---
+
+Variations searched: 20
+Results found: 11
+Sample variations: אור, באור, בהאור, האור, ואור, ובאור, ובהאור, והאור...
+
+Top matches:
+
+  Psalms 4:7
+    Hebrew: רַבִּ֥ים אֹמְרִים֮ מִֽי־יַרְאֵ֢נ֫וּ ט֥וֹב נְֽסָה־עָ֭לֵינוּ א...
+    English: Many say, “O for good days!”cLit. “Lift up the light of Your...
+Traceback (most recent call last):
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\scripts\demo_psalm_27_1.py", line 302, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\scripts\demo_psalm_27_1.py", line 128, in main
+    print(f"    Matched: {result.matched_word} (position {result.position})")
+                                                          ^^^^^^^^^^^^^^^
+AttributeError: 'SearchResult' object has no attribute 'position'

@@ -407,48 +407,67 @@ All librarian agents are **pure Python scripts** - no LLM calls. They retrieve d
 
 #### 1. BDB Librarian
 
-**Purpose**: Hebrew lexicon lookups via Sefaria API
+**Purpose**: Scholarly Hebrew lexicon lookups via Sefaria API
 
 **Module**: `src/agents/bdb_librarian.py`
 
+**Lexicon Sources** (default: "scholarly"):
+- **BDB Dictionary** (Brown-Driver-Briggs): Full scholarly entry with extensive semantic ranges, parallel words, usage contexts (avg. 1000+ characters per entry)
+- **Klein Dictionary**: Etymology, linguistic notes, cognates, derivatives
+
+**Note**: Excludes "BDB Augmented Strong" (concise version) in favor of full BDB Dictionary for maximum scholarly richness.
+
 **Capabilities**:
-- Fetches lexicon entries from multiple sources:
-  - BDB Augmented Strong (Open Scriptures)
-  - Jastrow Dictionary (Talmudic Hebrew)
-  - Klein Dictionary (Modern Hebrew)
-- **Homograph disambiguation**: Returns vocalization, Strong's numbers, transliteration
-- Recursive definition parsing from nested Sefaria response structure
+- **Semantic depth**: Full BDB definitions with morphological forms, parallel terminology (‖ עָנִי, ‖ דַּל), semantic ranges
+- **Etymology**: Klein provides root connections, Ugaritic/Egyptian cognates, historical linguistics
+- **Homograph disambiguation**: Returns vocalization, Strong's numbers, transliteration for multiple meanings
+- **Clean HTML stripping**: Converts Sefaria's HTML markup to scholar-ready clean text
+- **Division of labor**: NO biblical usage examples (Concordance Librarian's responsibility)
 
 **Data Structure**:
 ```python
 @dataclass
 class LexiconEntry:
-    word: str                           # רעה (consonantal)
-    lexicon_name: str                   # "BDB Augmented Strong"
-    entry_text: str                     # Full definition
+    word: str                           # אֶבְיוֹן (consonantal)
+    lexicon_name: str                   # "BDB Dictionary" or "Klein Dictionary"
+    entry_text: str                     # Full definition (HTML-stripped)
     # Disambiguation metadata for homographs
-    headword: Optional[str]             # רַע vs רָעָה (vocalized)
-    strong_number: Optional[str]        # "7451" vs "7462"
-    transliteration: Optional[str]      # "raʻ" vs "râʻâh"
+    headword: Optional[str]             # אֶבְיוֹן (vocalized)
+    strong_number: Optional[str]        # "34"
+    transliteration: Optional[str]      # "ʼebyôwn"
+    morphology: Optional[str]           # "adj.", "m.n.", "v.", etc.
+    # Klein-specific fields
+    etymology_notes: Optional[str]      # "[Prob. from אבה meaning 'desirous'...]"
+    derivatives: Optional[str]          # "Derivative: אבין"
 ```
 
-**Homograph Strategy**:
-- Returns ALL meanings for a consonantal word
-- Scholar agent filters based on context (cheaper, better quality)
-- Preserves wordplay and deliberate ambiguity in Hebrew poetry
+**Example Output** (אֶבְיוֹן "poor, needy"):
+
+*Klein Dictionary*:
+- Definition: "needy, poor."
+- Morphology: m.n.
+- Etymology: "[Prob. from אבה and orig. meaning 'desirous, longing, yearning'. cp. Ugar. 'bjn. Late Egypt. and Coptic ebiēn are borrowed from Hebrew.]"
+- Derivatives: "Derivative: אבין."
+
+*BDB Dictionary*:
+- Entry: "adj. in want, needy, poor,—so, always abs., Dt 15:4 + 40 times; אֶבְיֹנְךָ Ex 23:6 Dt 15:11; אֶבְיוֹנִים Am 4:1 + 14 times... needy, chiefly poor (in material things); as adj. Dt 15:7(×2), 9; 24:14 ψ 109:16 (both ‖ עָנִי); subj. to oppression & abuse Am 2:6; 5:12 (both ‖ צַדִּיק)... cared for by God Je 20:13 ψ 107:41; 132:15 Jb 5:15; 1 S 2:8 = ψ 113:7... [1247 characters total]"
 
 **Usage**:
 ```python
 from src.agents.bdb_librarian import BDBLibrarian
 
 librarian = BDBLibrarian()
-entries = librarian.fetch_entry("רעה")
-# Returns 5 entries: evil (7451), shepherd (7462), friend (7463), etc.
+
+# Default: scholarly lexicons (BDB Dictionary + Klein)
+entries = librarian.fetch_entry("אֶבְיוֹן")  # Returns 2-3 entries
+
+# Specific lexicon
+entries = librarian.fetch_entry("אֶבְיוֹן", lexicon="BDB Dictionary")
 ```
 
 **CLI**:
 ```bash
-python src/agents/bdb_librarian.py "רעה"
+python src/agents/bdb_librarian.py אֶבְיוֹן
 ```
 
 ---

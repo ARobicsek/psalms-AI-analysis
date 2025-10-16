@@ -288,15 +288,18 @@ class SefariaClient:
         )
 
     @lru_cache(maxsize=1000)
-    def fetch_lexicon_entry(self, word: str, lexicon: str = "BDB Augmented Strong") -> List[LexiconEntry]:
+    def fetch_lexicon_entry(self, word: str, lexicon: str = "scholarly") -> List[LexiconEntry]:
         """
         Fetch lexicon entries for a Hebrew word from multiple lexicons.
 
         Args:
             word: Hebrew word (can be vocalized or unvocalized)
-            lexicon: Preferred lexicon name (default: "BDB Augmented Strong")
-                     Other options: "Jastrow Dictionary", "Klein Dictionary"
-                     Use "all" to get entries from all available lexicons.
+            lexicon: Lexicon filter (default: "scholarly")
+                     - "scholarly": BDB Dictionary + Klein Dictionary (rich academic content)
+                     - "BDB Dictionary": Only BDB (most comprehensive)
+                     - "Klein Dictionary": Only Klein (etymological)
+                     - "Jastrow Dictionary": Talmudic Hebrew
+                     - "all": All available lexicons
 
         Returns:
             List of LexiconEntry objects (may be from multiple lexicons)
@@ -304,7 +307,9 @@ class SefariaClient:
 
         Note:
             Results are cached to avoid repeated lookups of same words.
-            The API returns entries from multiple lexicons for disambiguation.
+            Default "scholarly" filter returns BDB Dictionary + Klein for maximum
+            semantic/etymological richness without biblical usage examples
+            (which are provided by Concordance Librarian).
         """
         logger.info(f"Fetching lexicon entries for: {word}")
 
@@ -322,12 +327,18 @@ class SefariaClient:
 
             entries = []
 
+            # Define scholarly lexicon set
+            scholarly_lexicons = {"BDB Dictionary", "Klein Dictionary"}
+
             # Parse each lexicon entry from response
             for entry_data in data:
                 lexicon_name = entry_data.get('parent_lexicon', 'Unknown')
 
-                # Filter by requested lexicon if not "all"
-                if lexicon != "all" and lexicon_name != lexicon:
+                # Filter by requested lexicon
+                if lexicon == "scholarly":
+                    if lexicon_name not in scholarly_lexicons:
+                        continue
+                elif lexicon != "all" and lexicon_name != lexicon:
                     continue
 
                 # Extract definition from nested content structure
@@ -339,6 +350,9 @@ class SefariaClient:
 
                 if not definition:
                     definition = 'No definition available'
+
+                # Strip HTML tags for clean text (BDB Dictionary has extensive markup)
+                definition = clean_html_text(definition)
 
                 entry = LexiconEntry(
                     word=word,

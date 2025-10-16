@@ -2513,3 +2513,197 @@ Showing only figurative snippets loses poetic parallelism. Full verses preserve 
 ### Session Complete
 11:45 PM - Phase 1 finished at 100%. Ready for Phase 2: Scholar Agents! 🚀
 
+---
+
+## 2025-10-16 - Day 5 Final Session: BDB Librarian Scholarly Enhancement
+
+### Session Started
+10:30 PM - Post-Phase 1 refinement: Analyzing BDB search process for scholarly depth
+
+### Tasks Completed
+✅ Deep analysis of Sefaria API lexicon endpoints
+✅ Enhanced BDB Librarian to use full scholarly lexicons
+✅ Added Klein Dictionary etymology extraction
+✅ Implemented HTML stripping for clean definitions
+✅ Updated ARCHITECTURE.md documentation
+✅ Established clean division of labor between librarians
+
+### Problem Identified
+
+**User Request**: "Walk me through our BDB search process with אֶבְיוֹן"
+
+**Discovery**: BDB Librarian was returning insufficient data:
+- Using "BDB Augmented Strong" (concise, ~150 characters)
+- Missing the rich "BDB Dictionary" entry (~1,247 characters)
+- Not extracting Klein's etymology notes
+- HTML tags cluttering definitions
+
+### Investigation Process
+
+Traced through complete Sefaria API response for אֶבְיוֹן (poor, needy):
+
+1. **API returns 5 lexicon entries**:
+   - BDB Augmented Strong (concise)
+   - Jastrow Dictionary (Talmudic)
+   - Klein Dictionary (with etymology!)
+   - **BDB Dictionary** (full scholarly entry)
+   - BDB Dictionary (cross-reference)
+
+2. **Problem**: Default filter excluded BDB Dictionary
+   - Code: `lexicon="BDB Augmented Strong"` (default)
+   - Filter logic: `if lexicon_name != lexicon: continue`
+   - Result: Only got concise version, missed 1,247-character scholarly entry
+
+3. **Missing data**: Klein etymology in `notes` field
+   ```json
+   "notes": "[Prob. from אבה and orig. meaning 'desirous, longing, yearning'.
+             cp. Ugar. 'bjn. Late Egypt. and Coptic ebiēn are borrowed from Hebrew.]"
+   ```
+
+### Solution Implemented
+
+#### Change 1: Scholarly Lexicon Set (sefaria_client.py)
+```python
+# Before
+def fetch_lexicon_entry(word, lexicon="BDB Augmented Strong"):
+    if lexicon != "all" and lexicon_name != lexicon:
+        continue
+
+# After
+def fetch_lexicon_entry(word, lexicon="scholarly"):
+    scholarly_lexicons = {"BDB Dictionary", "Klein Dictionary"}
+    if lexicon == "scholarly":
+        if lexicon_name not in scholarly_lexicons:
+            continue
+```
+
+**Result**: Now returns BDB Dictionary + Klein Dictionary by default
+
+#### Change 2: HTML Stripping
+```python
+# Strip HTML tags for clean text (BDB Dictionary has extensive markup)
+definition = clean_html_text(definition)
+```
+
+**Example**:
+- Before: `<strong>adj. in want</strong>, <a data-ref="Dt 15:4">Dt 15:4</a>`
+- After: `adj. in want, Dt 15:4`
+
+#### Change 3: Klein Etymology Extraction (bdb_librarian.py)
+```python
+# Extract Klein-specific fields
+raw_etymology = sefaria_entry.raw_data.get('notes', '')
+raw_derivatives = sefaria_entry.raw_data.get('derivatives', '')
+etymology_notes = strip_html(raw_etymology)
+derivatives = strip_html(raw_derivatives)
+```
+
+Added to LexiconEntry dataclass:
+- `etymology_notes: Optional[str]`
+- `derivatives: Optional[str]`
+- `morphology: Optional[str]`
+
+#### Change 4: Removed Usage Examples
+**Rationale**: Clean division of labor
+- BDB Librarian: Semantic/etymological knowledge
+- Concordance Librarian: Biblical usage examples
+
+Removed:
+- `extract_biblical_citations()` function
+- `usage_examples` field from LexiconEntry
+
+### Testing Results
+
+**Test word**: אֶבְיוֹן (poor, needy)
+
+**Output** (3 entries):
+
+1. **Klein Dictionary**
+   - Morphology: m.n.
+   - Definition: "needy, poor."
+   - Etymology: "[Prob. from אבה and orig. meaning 'desirous, longing, yearning'. cp. Ugar. 'bjn. Late Egypt. and Coptic ebiēn are borrowed from Hebrew.]"
+   - Derivatives: "Derivative: אבין."
+
+2. **BDB Dictionary** (Primary entry)
+   - Definition: 1,247 characters of scholarly depth!
+   - Morphological forms: אֶבְיֹנְךָ, אֶבְיוֹנִים, אֶבְיוֹנֵי, אֶבְיוֹנֶיהָ
+   - Frequency: "Dt 15:4 + 40 times; mostly poet., 23 times ψ"
+   - Semantic ranges:
+     - "needy, chiefly poor (in material things)"
+     - "subj. to oppression & abuse Am 2:6; 5:12"
+     - "cared for by God Je 20:13 ψ 107:41"
+   - Parallel words: ‖ עָנִי (afflicted), ‖ דַּל (poor), ‖ צַדִּיק (righteous)
+
+3. **BDB Dictionary** (Cross-reference)
+   - Definition: "v. I. אָבָה." (links to root verb)
+
+### Key Improvements
+
+**Before** (BDB Augmented Strong):
+- 150 characters
+- 4 basic senses
+- No context, no parallels, no usage notes
+
+**After** (BDB Dictionary + Klein):
+- 1,247 characters (BDB) + rich etymology (Klein)
+- Full morphological paradigm
+- Semantic ranges with biblical references embedded in definition
+- Parallel terminology (‖ עָנִי, ‖ דַּל)
+- Etymology with Ugaritic cognates, Egyptian borrowings
+- Clean HTML-stripped text
+
+**Information density**: 8.3x improvement (150 → 1,247 characters)
+
+### Division of Labor Strategy
+
+**Principle**: Each librarian has one job
+
+| Librarian | Provides | Does NOT Provide |
+|-----------|----------|------------------|
+| **BDB** | Semantic ranges, etymology, morphology, parallel words | Biblical usage examples |
+| **Concordance** | All biblical citations, usage patterns, frequency | Word meanings |
+| **Figurative** | Metaphor analysis, target/vehicle/ground | Lexical definitions |
+
+**Benefit**: No redundancy, clean separation, Scholar gets exactly what it needs from each source
+
+### Documentation Updates
+
+Updated `docs/ARCHITECTURE.md`:
+- Revised BDB Librarian section with scholarly lexicon approach
+- Added Klein Dictionary etymology examples
+- Documented HTML stripping process
+- Clarified division of labor principle
+
+### Code Quality Notes
+
+**Elegance**: The HTML stripping solution is simple (regex `r'<[^>]+>'`) but effective. No need for BeautifulSoup dependency.
+
+**Extensibility**: The lexicon filter system (`lexicon="scholarly"`) makes it trivial to add new lexicon sets later (e.g., `lexicon="talmudic"` → Jastrow only).
+
+**Performance**: No performance impact - same API call, just different filtering and field extraction.
+
+### Key Learnings
+
+#### 1. API Responses Often Contain Hidden Treasures
+Sefaria's `/api/words/` endpoint returns FIVE lexicon entries, but we were only using one. Always inspect full API responses.
+
+#### 2. Default Parameters Matter
+The default `lexicon="BDB Augmented Strong"` seemed reasonable but excluded the scholarly goldmine. Defaults should optimize for the 80% use case.
+
+#### 3. Division of Labor Beats Duplication
+Originally tried to extract biblical citations from BDB text. Realized: Concordance Librarian already does this better. Delete 73 lines of code, get cleaner architecture.
+
+#### 4. Etymology is Scholarly Gold
+Klein's etymology notes connect Hebrew to Ugaritic, Egyptian, and historical linguistics. This is exactly what a Scholar agent needs for deep analysis.
+
+### Next Steps Confirmed
+
+Phase 2: Scholar-Researcher Agent implementation begins next session with:
+- Full BDB Dictionary semantic depth ✅
+- Klein etymology for linguistic insights ✅
+- Clean separation from concordance data ✅
+- HTML-free, LLM-ready text ✅
+
+### Session Complete
+11:35 PM - BDB Librarian now returns scholarly-grade lexicon data. Phase 1 enhancements 100% complete! 🎯
+

@@ -12,7 +12,9 @@
       "Bash(git config:*)",
       "Bash(source venv/Scripts/activate)",
       "Bash(pip install:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(tee:*)",
+      "Bash(timeout 120 python:*)"
     ],
     "deny": [],
     "ask": []
