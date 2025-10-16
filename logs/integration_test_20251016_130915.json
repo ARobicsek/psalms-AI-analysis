@@ -1,0 +1,55 @@
+[
+  {
+    "level": "INFO",
+    "message": "Research request received for Psalm 23",
+    "event_type": "research_request",
+    "psalm_chapter": 23,
+    "request": {
+      "psalm_chapter": 23,
+      "lexicon": [
+        {
+          "word": "רעה"
+        },
+        {
+          "word": "צלמות"
+        }
+      ],
+      "concordance": [
+        {
+          "query": "רעה",
+          "scope": "Psalms",
+          "level": "consonantal"
+        },
+        {
+          "query": "ירא",
+          "scope": "Psalms",
+          "level": "consonantal"
+        }
+      ],
+      "figurative": [
+        {
+          "book": "Psalms",
+          "chapter": 23,
+          "metaphor": true
+        },
+        {
+          "vehicle_contains": "shepherd",
+          "book": "Psalms"
+        }
+      ]
+    },
+    "timestamp": "2025-10-16T13:09:15.649062",
+    "agent": "integration_test"
+  },
+  {
+    "level": "ERROR",
+    "message": "integration_test failed: AttributeError - 'ConcordanceBundle' object has no attribute 'unique_verses'",
+    "event_type": "error_detail",
+    "operation": "integration_test",
+    "error_type": "AttributeError",
+    "error_message": "'ConcordanceBundle' object has no attribute 'unique_verses'",
+    "stack_trace": "Traceback (most recent call last):\n  File \"C:\\Users\\ariro\\OneDrive\\Documents\\Psalms\\scripts\\test_integration_day5.py\", line 124, in main\n    print(f\"  Unique verses: {cb.unique_verses}\")\n                              ^^^^^^^^^^^^^^^^\nAttributeError: 'ConcordanceBundle' object has no attribute 'unique_verses'\n",
+    "timestamp": "2025-10-16T13:09:17.766580",
+    "agent": "integration_test"
+  }
+]

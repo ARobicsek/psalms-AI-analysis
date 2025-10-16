@@ -26,20 +26,41 @@ else:
 
 @dataclass
 class LexiconEntry:
-    """A single lexicon entry from BDB."""
+    """
+    A single lexicon entry from BDB.
+
+    For homographs (words with same consonants but different meanings),
+    multiple entries will be returned with disambiguation metadata:
+    - headword: Vocalized form (e.g., רַע vs רָעָה)
+    - strong_number: Unique identifier (e.g., 7451 vs 7462)
+    - transliteration: Pronunciation guide (e.g., raʻ vs râʻâh)
+    """
     word: str
     lexicon_name: str
     entry_text: str
     url: Optional[str] = None
+    # Disambiguation metadata for homographs
+    headword: Optional[str] = None  # Vocalized form (רַע, רָעָה, etc.)
+    strong_number: Optional[str] = None  # Strong's number (7451, 7462, etc.)
+    transliteration: Optional[str] = None  # Pronunciation (raʻ, râʻâh, etc.)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
-        return {
+        result = {
             'word': self.word,
             'lexicon': self.lexicon_name,
             'entry': self.entry_text,
-            'url': self.url
         }
+        # Include optional disambiguation fields if present
+        if self.headword:
+            result['headword'] = self.headword
+        if self.strong_number:
+            result['strong_number'] = self.strong_number
+        if self.transliteration:
+            result['transliteration'] = self.transliteration
+        if self.url:
+            result['url'] = self.url
+        return result
 
 
 @dataclass
@@ -126,7 +147,11 @@ class BDBLibrarian:
                     word=word,
                     lexicon_name=sefaria_entry.raw_data.get('parent_lexicon', 'Unknown'),
                     entry_text=sefaria_entry.definition,
-                    url=sefaria_entry.raw_data.get('url')
+                    url=sefaria_entry.raw_data.get('url'),
+                    # Add disambiguation metadata for homographs
+                    headword=sefaria_entry.raw_data.get('headword'),
+                    strong_number=sefaria_entry.raw_data.get('strong_number'),
+                    transliteration=sefaria_entry.raw_data.get('transliteration')
                 )
                 entries.append(entry)
 
@@ -245,9 +270,22 @@ def main():
             return
 
         print(f"\n=== Lexicon Entries for {args.word} ===\n")
+        if len(entries) > 1:
+            print(f"Note: Found {len(entries)} different meanings (homographs)")
+            print()
+
         for i, entry in enumerate(entries, 1):
             print(f"{i}. {entry.lexicon_name}")
-            print(f"   {entry.entry_text}")
+
+            # Show disambiguation metadata for homographs
+            if entry.headword:
+                print(f"   Vocalized: {entry.headword}")
+            if entry.strong_number:
+                print(f"   Strong's: {entry.strong_number}")
+            if entry.transliteration:
+                print(f"   Pronunciation: {entry.transliteration}")
+
+            print(f"   Definition: {entry.entry_text}")
             if entry.url:
                 print(f"   URL: {entry.url}")
             print()

@@ -1,0 +1,1008 @@
+{
+  "psalm_chapter": 23,
+  "lexicon": {
+    "entries": [
+      {
+        "word": "רעה",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "adj\nbad,  evil\n  bad,  disagreeable,  malignant\n  bad,  unpleasant,  evil (giving pain,  unhappiness,  misery)\n  evil,  displeasing\n  bad (of its kind-land,  water,  etc)\n  bad (of value)\n  worse than,  worst (comparison)\n  sad,  unhappy\n  evil (hurtful)\n  bad,  unkind (vicious in disposition)\n  bad,  evil,  wicked (ethically)\n    in general,  of persons,  of thoughts\n    deeds,  actions\nn m\nevil,  distress,  misery,  injury,  calamity\n  evil,  distress,  adversity\n  evil,  injury,  wrong\n  evil (ethical)\nn f\nevil,  misery,  distress,  injury\n  evil,  misery,  distress\n  evil,  injury,  wrong\n  evil (ethical)",
+        "headword": "רַע",
+        "strong_number": "7451",
+        "transliteration": "raʻ"
+      },
+      {
+        "word": "רעה",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "to pasture,  tend,  graze, feed\n    to tend,  pasture\n      to shepherd\n      of ruler,  teacher (fig)\n      of people as flock (fig)\n      shepherd,  herdsman (subst)\n    to  feed,  graze\n      of cows,  sheep etc (literal)\n      of idolater,  Israel as flock (fig)\n   shepherd,  shepherdess\nto associate with,  be a friend of (meaning probable)\n   to associate with\n   to be companions\n to be a special friend",
+        "headword": "רָעָה",
+        "strong_number": "7462",
+        "transliteration": "râʻâh"
+      },
+      {
+        "word": "רעה",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "friend,  friend of the king (technical sense)",
+        "headword": "רֵעֶה",
+        "strong_number": "7463",
+        "transliteration": "rêʻeh"
+      },
+      {
+        "word": "רעה",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "broken",
+        "headword": "רֹעָה",
+        "strong_number": "7465",
+        "transliteration": "rôʻâh"
+      },
+      {
+        "word": "רעה",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "to be bad,  be evil\n    to be displeasing\n    to be sad\n    to be injurious,  be evil\n    to be wicked,  be evil (ethically)\n    to do an injury or hurt\n    to do evil or wickedly\n    mischief (participle)\nto break,  shatter\n    to break\n    broken (participle)\n    to be broken\n   to be broken,  be broken in pieces,  be broken asunder",
+        "headword": "רָעַע",
+        "strong_number": "7489",
+        "transliteration": "râʻaʻ"
+      },
+      {
+        "word": "צלמות",
+        "lexicon": "BDB Augmented Strong",
+        "entry": "death-shadow,  deep shadow,  deep darkness,  shadow of death\n  death-shadow\n  death-shadow,  deep shadow,  darkness\n  death-shadow (of distress,  extreme danger) (fig)\n  death-shadow (of place of the dead) (fig)",
+        "headword": "צַלְמָוֶת",
+        "strong_number": "6757",
+        "transliteration": "tsalmâveth"
+      }
+    ],
+    "requests": [
+      {
+        "word": "רעה",
+        "notes": null
+      },
+      {
+        "word": "צלמות",
+        "notes": null
+      }
+    ]
+  },
+  "concordance": [
+    {
+      "results": [
+        {
+          "reference": "Psalms 50:19",
+          "book": "Psalms",
+          "chapter": 50,
+          "verse": 19,
+          "hebrew": "פִּ֭יךָ שָׁלַ֣חְתָּ בְרָעָ֑ה וּ֝לְשׁוֹנְךָ֗ תַּצְמִ֥יד מִרְמָֽה׃",
+          "english": "you devote your mouth to evil,and yoke your tongue to deceit;",
+          "matched_word": "בְרָעָ֑ה",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 52:3",
+          "book": "Psalms",
+          "chapter": 52,
+          "verse": 3,
+          "hebrew": "מַה־תִּתְהַלֵּ֣ל בְּ֭רָעָה הַגִּבּ֑וֹר חֶ֥סֶד אֵ֝֗ל כׇּל־הַיּֽוֹם׃",
+          "english": "Why do you boast of your evil, brave fellow?God’s faithfulness bLit. “is all the day.”never ceases.-b",
+          "matched_word": "בְּ֭רָעָה",
+          "position": 1
+        },
+        {
+          "reference": "Psalms 107:26",
+          "book": "Psalms",
+          "chapter": 107,
+          "verse": 26,
+          "hebrew": "׆ יַעֲל֣וּ שָׁ֭מַיִם יֵרְד֣וּ תְהוֹמ֑וֹת נַ֝פְשָׁ֗ם בְּרָעָ֥ה תִתְמוֹגָֽג׃",
+          "english": "Mounting up to the heaven,plunging down to the depths,disgorging in their misery,",
+          "matched_word": "בְּרָעָ֥ה",
+          "position": 6
+        },
+        {
+          "reference": "Psalms 28:3",
+          "book": "Psalms",
+          "chapter": 28,
+          "verse": 3,
+          "hebrew": "אַל־תִּמְשְׁכֵ֣נִי עִם־רְשָׁעִים֮ וְעִם־פֹּ֢עֲלֵ֫י אָ֥וֶן דֹּבְרֵ֣י שָׁ֭לוֹם עִם־רֵעֵיהֶ֑ם וְ֝רָעָ֗ה בִּלְבָבָֽם׃",
+          "english": "Do not aOr “drag me off”; Meaning of Heb. uncertain.count me-a with the wicked and evildoerswho profess goodwill toward their fellowswhile malice is in their heart.",
+          "matched_word": "וְ֝רָעָ֗ה",
+          "position": 7
+        },
+        {
+          "reference": "Psalms 37:3",
+          "book": "Psalms",
+          "chapter": 37,
+          "verse": 3,
+          "hebrew": "בְּטַ֣ח בַּ֭יהֹוָה וַעֲשֵׂה־ט֑וֹב שְׁכׇן־אֶ֝֗רֶץ וּרְעֵ֥ה אֱמוּנָֽה׃",
+          "english": "Trust in the LORD and do good,abide in the land and remain loyal.",
+          "matched_word": "וּרְעֵ֥ה",
+          "position": 4
+        },
+        {
+          "reference": "Psalms 15:3",
+          "book": "Psalms",
+          "chapter": 15,
+          "verse": 3,
+          "hebrew": "לֹֽא־רָגַ֨ל ׀ עַל־לְשֹׁנ֗וֹ לֹא־עָשָׂ֣ה לְרֵעֵ֣הוּ רָעָ֑ה וְ֝חֶרְפָּ֗ה לֹא־נָשָׂ֥א עַל־קְרֹבֽוֹ׃",
+          "english": "aMeaning of Heb. uncertain; or “who has no slander upon his tongue.”whose tongue is not given to evil;-awho has never done harm to his fellow,or borne reproach for [his acts toward] his neighbor;",
+          "matched_word": "רָעָ֑ה",
+          "position": 5
+        },
+        {
+          "reference": "Psalms 21:12",
+          "book": "Psalms",
+          "chapter": 21,
+          "verse": 12,
+          "hebrew": "כִּי־נָט֣וּ עָלֶ֣יךָ רָעָ֑ה חָֽשְׁב֥וּ מְ֝זִמָּ֗ה בַּל־יוּכָֽלוּ׃",
+          "english": "For they schemed against You;they laid plans,but could not succeed.",
+          "matched_word": "רָעָ֑ה",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 27:5",
+          "book": "Psalms",
+          "chapter": 27,
+          "verse": 5,
+          "hebrew": "כִּ֤י יִצְפְּנֵ֨נִי ׀ בְּסֻכֹּה֮ בְּי֢וֹם רָ֫עָ֥ה יַ֭סְתִּרֵנִי בְּסֵ֣תֶר אׇהֳל֑וֹ בְּ֝צ֗וּר יְרוֹמְמֵֽנִי׃",
+          "english": "He will shelter me in His pavilionon an evil day,grant me the protection of His tent,raise me high upon a rock.",
+          "matched_word": "רָ֫עָ֥ה",
+          "position": 5
+        },
+        {
+          "reference": "Psalms 34:22",
+          "book": "Psalms",
+          "chapter": 34,
+          "verse": 22,
+          "hebrew": "תְּמוֹתֵ֣ת רָשָׁ֣ע רָעָ֑ה וְשֹׂנְאֵ֖י צַדִּ֣יק יֶאְשָֽׁמוּ׃",
+          "english": "One misfortune is the deathblow of the wicked;the foes of the righteous shall be ruined.",
+          "matched_word": "רָעָ֑ה",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 35:12",
+          "book": "Psalms",
+          "chapter": 35,
+          "verse": 12,
+          "hebrew": "יְשַׁלְּמ֣וּנִי רָ֭עָה תַּ֥חַת טוֹבָ֗ה שְׁכ֣וֹל לְנַפְשִֽׁי׃",
+          "english": "They repay me evil for good,[seeking] my bereavement.",
+          "matched_word": "רָ֭עָה",
+          "position": 1
+        },
+        {
+          "reference": "Psalms 37:19",
+          "book": "Psalms",
+          "chapter": 37,
+          "verse": 19,
+          "hebrew": "לֹֽא־יֵ֭בֹשׁוּ בְּעֵ֣ת רָעָ֑ה וּבִימֵ֖י רְעָב֣וֹן יִשְׂבָּֽעוּ׃",
+          "english": "they shall not come to grief in bad times;in famine, they shall eat their fill.",
+          "matched_word": "רָעָ֑ה",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 38:21",
+          "book": "Psalms",
+          "chapter": 38,
+          "verse": 21,
+          "hebrew": "וּמְשַׁלְּמֵ֣י רָ֭עָה תַּ֣חַת טוֹבָ֑ה יִ֝שְׂטְנ֗וּנִי תַּ֣חַת (רדופי) [רׇֽדְפִי־]טֽוֹב׃",
+          "english": "Those who repay evil for goodharass me for pursuing good.",
+          "matched_word": "רָ֭עָה",
+          "position": 1
+        },
+        {
+          "reference": "Psalms 41:2",
+          "book": "Psalms",
+          "chapter": 41,
+          "verse": 2,
+          "hebrew": "אַ֭שְׁרֵי מַשְׂכִּ֣יל אֶל־דָּ֑ל בְּי֥וֹם רָ֝עָ֗ה יְֽמַלְּטֵ֥הוּ יְהֹוָֽה׃",
+          "english": "Happy is he who is thoughtful of the wretched;in bad times may the LORD keep him from harm.",
+          "matched_word": "רָ֝עָ֗ה",
+          "position": 4
+        },
+        {
+          "reference": "Psalms 41:8",
+          "book": "Psalms",
+          "chapter": 41,
+          "verse": 8,
+          "hebrew": "יַ֗חַד עָלַ֣י יִ֭תְלַחֲשׁוּ כׇּל־שֹׂנְאָ֑י עָלַ֓י ׀ יַחְשְׁב֖וּ רָעָ֣ה לִֽי׃",
+          "english": "All my enemies whisper together against me,imagining the worst for me.",
+          "matched_word": "רָעָ֣ה",
+          "position": 7
+        },
+        {
+          "reference": "Psalms 80:2",
+          "book": "Psalms",
+          "chapter": 80,
+          "verse": 2,
+          "hebrew": "רֹ֘עֵ֤ה יִשְׂרָאֵ֨ל ׀ הַאֲזִ֗ינָה נֹהֵ֣ג כַּצֹּ֣אן יוֹסֵ֑ף יֹשֵׁ֖ב הַכְּרוּבִ֣ים הוֹפִֽיעָה׃",
+          "english": "Give ear, O shepherd of Israelwho leads Joseph like a flock!Appear, You who are enthroned on the cherubim,",
+          "matched_word": "רֹ֘עֵ֤ה",
+          "position": 0
+        },
+        {
+          "reference": "Psalms 90:15",
+          "book": "Psalms",
+          "chapter": 90,
+          "verse": 15,
+          "hebrew": "שַׂ֭מְּחֵנוּ כִּימ֣וֹת עִנִּיתָ֑נוּ שְׁ֝נ֗וֹת רָאִ֥ינוּ רָעָֽה׃",
+          "english": "Give us joy for as long as You have afflicted us,for the years we have suffered misfortune.",
+          "matched_word": "רָעָֽה׃",
+          "position": 5
+        },
+        {
+          "reference": "Psalms 91:10",
+          "book": "Psalms",
+          "chapter": 91,
+          "verse": 10,
+          "hebrew": "לֹא־תְאֻנֶּ֣ה אֵלֶ֣יךָ רָעָ֑ה וְ֝נֶ֗גַע לֹא־יִקְרַ֥ב בְּאׇהֳלֶֽךָ׃",
+          "english": "no harm will befall you,no disease touch your tent.",
+          "matched_word": "רָעָ֑ה",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 107:39",
+          "book": "Psalms",
+          "chapter": 107,
+          "verse": 39,
+          "hebrew": "וַיִּמְעֲט֥וּ וַיָּשֹׁ֑חוּ מֵעֹ֖צֶר רָעָ֣ה וְיָגֽוֹן׃",
+          "english": "after they had been few and crushedby oppression, misery, and sorrow.",
+          "matched_word": "רָעָ֣ה",
+          "position": 3
+        },
+        {
+          "reference": "Psalms 109:5",
+          "book": "Psalms",
+          "chapter": 109,
+          "verse": 5,
+          "hebrew": "וַיָּ֘שִׂ֤ימוּ עָלַ֣י רָ֭עָה תַּ֣חַת טוֹבָ֑ה וְ֝שִׂנְאָ֗ה תַּ֣חַת אַהֲבָתִֽי׃",
+          "english": "They repay me with evil for good,with hatred for my love.",
+          "matched_word": "רָ֭עָה",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 112:7",
+          "book": "Psalms",
+          "chapter": 112,
+          "verse": 7,
+          "hebrew": "מִשְּׁמוּעָ֣ה רָ֭עָה לֹ֣א יִירָ֑א נָכ֥וֹן לִ֝בּ֗וֹ בָּטֻ֥חַ בַּיהֹוָֽה׃",
+          "english": "He is not afraid of evil tidings;his heart is firm, he trusts in the LORD.",
+          "matched_word": "רָ֭עָה",
+          "position": 1
+        },
+        {
+          "reference": "Psalms 144:10",
+          "book": "Psalms",
+          "chapter": 144,
+          "verse": 10,
+          "hebrew": "הַנּוֹתֵ֥ן תְּשׁוּעָ֗ה לַמְּלָ֫כִ֥ים הַ֭פּוֹצֶה אֶת־דָּוִ֥ד עַבְדּ֗וֹ מֵחֶ֥רֶב רָעָֽה׃",
+          "english": "to You who give victory to kings,who rescue His servant David from the deadly sword.",
+          "matched_word": "רָעָֽה׃",
+          "position": 7
+        }
+      ],
+      "total_results": 21,
+      "variations_searched": [
+        "בהרעה",
+        "ברעה",
+        "הרעה",
+        "ובהרעה",
+        "וברעה",
+        "והרעה",
+        "וכהרעה",
+        "וכרעה",
+        "ולהרעה",
+        "ולרעה",
+        "ומהרעה",
+        "ומרעה",
+        "ורעה",
+        "כהרעה",
+        "כרעה",
+        "להרעה",
+        "לרעה",
+        "מהרעה",
+        "מרעה",
+        "רעה"
+      ],
+      "request": {
+        "query": "רעה",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "include_variations": true
+      }
+    },
+    {
+      "results": [
+        {
+          "reference": "Psalms 106:44",
+          "book": "Psalms",
+          "chapter": 106,
+          "verse": 44,
+          "hebrew": "וַ֭יַּרְא בַּצַּ֣ר לָהֶ֑ם בְּ֝שׇׁמְע֗וֹ אֶת־רִנָּתָֽם׃",
+          "english": "When He saw that they were in distress,when He heard their cry,",
+          "matched_word": "וַ֭יַּרְא",
+          "position": 0
+        },
+        {
+          "reference": "Psalms 25:12",
+          "book": "Psalms",
+          "chapter": 25,
+          "verse": 12,
+          "hebrew": "מִי־זֶ֣ה הָ֭אִישׁ יְרֵ֣א יְהֹוָ֑ה י֝וֹרֶ֗נּוּ בְּדֶ֣רֶךְ יִבְחָֽר׃",
+          "english": "Whoever fears the LORD,he shall be shown what path to choose.",
+          "matched_word": "יְרֵ֣א",
+          "position": 2
+        },
+        {
+          "reference": "Psalms 112:1",
+          "book": "Psalms",
+          "chapter": 112,
+          "verse": 1,
+          "hebrew": "הַ֥לְלוּ־יָ֨הּ ׀ אַשְׁרֵי־אִ֭ישׁ יָרֵ֣א אֶת־יְהֹוָ֑ה בְּ֝מִצְוֺתָ֗יו חָפֵ֥ץ מְאֹֽד׃",
+          "english": "Hallelujah.Happy is the man who fears the LORD,who is ardently devoted to His commandments.",
+          "matched_word": "יָרֵ֣א",
+          "position": 3
+        },
+        {
+          "reference": "Psalms 128:4",
+          "book": "Psalms",
+          "chapter": 128,
+          "verse": 4,
+          "hebrew": "הִנֵּ֣ה כִי־כֵ֭ן יְבֹ֥רַךְ גָּ֗בֶר יְרֵ֣א יְהֹוָֽה׃",
+          "english": "So shall the man who fears the LORD be blessed.",
+          "matched_word": "יְרֵ֣א",
+          "position": 4
+        }
+      ],
+      "total_results": 4,
+      "variations_searched": [
+        "בהירא",
+        "בירא",
+        "הירא",
+        "ובהירא",
+        "ובירא",
+        "והירא",
+        "וירא",
+        "וכהירא",
+        "וכירא",
+        "ולהירא",
+        "ולירא",
+        "ומהירא",
+        "ומירא",
+        "ירא",
+        "כהירא",
+        "כירא",
+        "להירא",
+        "לירא",
+        "מהירא",
+        "מירא"
+      ],
+      "request": {
+        "query": "ירא",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "include_variations": true
+      }
+    }
+  ],
+  "figurative": [
+    {
+      "instances": [
+        {
+          "reference": "Psalms 23:6",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 6,
+          "hebrew_text": "אַ֤ךְ&thinsp;׀ ט֤וֹב וָחֶ֣סֶד יִ֭רְדְּפוּנִי כׇּל־יְמֵ֣י חַיָּ֑י וְשַׁבְתִּ֥י בְּבֵית־יְ֝הֹוָ֗ה לְאֹ֣רֶךְ יָמִֽים&nbsp;{פ}",
+          "english_text": "Only goodness and steadfast love shall pursue meall the days of my life,and I shall dwell in the house of the LORDfor many long years.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": true,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "goodness and steadfast love shall pursue me",
+          "figurative_text_hebrew": "טוֹב וָחֶ֣סֶד יִ֭רְדְּפוּנִי",
+          "explanation": "Abstract concepts of 'goodness' and 'steadfast love' are personified as active agents that 'pursue' the speaker, an action typically associated with living beings. This conveys the idea that these divine attributes are actively and relentlessly present in the speaker's life.",
+          "metadata": {
+            "target": [
+              "speaker's experience of divine favor",
+              "divine attributes in action",
+              "spiritual experience"
+            ],
+            "vehicle": [
+              "pursuers",
+              "active agents",
+              "dynamic forces"
+            ],
+            "ground": [
+              "active presence",
+              "relentless pursuit",
+              "divine providence",
+              "blessedness"
+            ],
+            "posture": [
+              "confidence in divine provision",
+              "gratitude",
+              "positive sentiment",
+              "spiritual assurance"
+            ],
+            "confidence": 0.9,
+            "speaker": "The Psalmist",
+            "purpose": "To emphasize the active, persistent, and inescapable nature of God's goodness and steadfast love in the speaker's life, assuring continuous divine favor and protection."
+          },
+          "ai_deliberations": {
+            "detection": "I examined the phrase \"טוֹב וָחֶ֣סֶד יִ֭רְדְּפוּנִי\" (goodness and steadfast love shall pursue me). I considered if this might be personification or metaphor. My reasoning for including it as figurative is that \"goodness\" and \"steadfast love\" are abstract concepts, yet they are attributed the action of \"pursuing\" (יִרְדְּפוּנִי), which is typically performed by living, active agents (people or animals). This is a clear cross-domain comparison where abstract qualities are given human-like agency, thus qualifying as personification.\n\nI considered \"כׇּל־יְמֵ֣י חַיָּ֑י\" (all the days of my life). I reasoned that this is a standard temporal phrase indicating duration throughout one's entire life. It is a literal statement of time and not a figurative idiom or metaphor.\n\nI considered \"וְשַׁבְתִּ֥י בְּבֵית־יְ֝הֹוָ֗ה\" (and I shall dwell in the house of the LORD). I considered if \"house of the LORD\" could be a metaphor for God's spiritual presence or protection, rather than the literal Temple. However, given the conservative instructions to treat standard narrative language and biblical idioms/set phrases literally unless they refer to God's body, and recognizing that \"house of the LORD\" is a well-established term for the physical Temple in Jerusalem, which was considered the literal dwelling place of God's presence in the ANE context, I decided to exclude it as figurative. While the *experience* of dwelling there implies spiritual communion, the phrase itself refers to a concrete, physical location.\n\nI considered \"לְאֹ֣רֶךְ יָמִֽים\" (for many long years). I considered if this might be hyperbole or an idiom. My reasoning for excluding it as figurative is that this is a common Hebrew expression denoting a long, indefinite period or perpetuity. It is a literal statement of extended duration, not an exaggeration meant to be understood non-literally, nor an idiom with a meaning distinct from its constituent words.\n\nTherefore, only the personification of goodness and steadfast love pursuing the speaker is marked as figurative.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 23:1",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 1,
+          "hebrew_text": "מִזְמ֥וֹר לְדָוִ֑ד יְהֹוָ֥ה רֹ֝עִ֗י לֹ֣א אֶחְסָֽר",
+          "english_text": "A psalm of David.The LORD is my shepherd;I lack nothing.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "The LORD is my shepherd",
+          "figurative_text_hebrew": "יְהֹוָ֥ה רֹ֝עִ֗י",
+          "explanation": "The LORD is directly identified with a shepherd, implying divine care, guidance, and provision, without using a comparative particle. This is a cross-domain comparison.",
+          "metadata": {
+            "target": [
+              "The LORD",
+              "God",
+              "Divine Being"
+            ],
+            "vehicle": [
+              "shepherd",
+              "pastoral caregiver",
+              "human occupation"
+            ],
+            "ground": [
+              "provision",
+              "guidance",
+              "protection",
+              "care",
+              "leadership",
+              "benevolence",
+              "sustenance",
+              "security"
+            ],
+            "posture": [
+              "trust",
+              "reliance",
+              "affirmation",
+              "positive sentiment",
+              "devotion"
+            ],
+            "confidence": 0.9,
+            "speaker": "David",
+            "purpose": "To express profound trust and reliance on God's comprehensive care and provision, likening it to the intimate and protective relationship between a shepherd and his flock."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **מִזְמ֥וֹר לְדָוִ֑ד (A psalm of David):**\n    *   **Considered:** If this phrase might contain any figurative elements.\n    *   **Reasoning:** This is a literal superscription, indicating authorship or dedication. It is not figurative.\n\n2.  **יְהֹוָ֥ה רֹ֝עִ֗י (The LORD is my shepherd):**\n    *   **Considered:** If this is a metaphor, simile, personification, idiom, or anthropomorphism.\n    *   **Reasoning:**\n        *   **Metaphor:** This is a clear metaphor. The LORD, a divine being, is directly identified with a human occupation (a shepherd) without using a comparative particle like \"like\" or \"as.\" This creates a cross-domain comparison where the qualities of a shepherd (guidance, protection, provision, care) are attributed to God.\n        *   **Simile:** It is not a simile because it lacks a comparative particle (e.g., \"The LORD is *like* my shepherd\").\n        *   **Personification:** It is not personification because a shepherd is already a human entity; rather, a divine entity is being compared to a human role.\n        *   **Idiom:** While \"God as shepherd\" is a common biblical image, the phrase itself is not an idiom in the sense of a fixed expression whose meaning is entirely non-literal or culturally specific in a way that obscures its component parts (like \"mouth of the sword\"). The meaning is derived directly from the metaphorical identification.\n        *   **Divine Anthropomorphism:** The prompt states that divine anthropomorphisms (e.g., God went, God was angry) are literal unless they refer to God's body. However, \"The LORD is my shepherd\" is not describing God *doing* a human action or expressing a human emotion, but rather *being* or *identifying* as a human role. The prompt also states that \"Comparisons of role or function, such as 'a prophet like myself' (כָּמֹנִי) or 'a prophet like yourself' (כָּמוֹךָ)\" are literal. Crucially, these examples use the comparative particle \"like.\" In contrast, \"The LORD *is* my shepherd\" is a direct identification (\"X is Y\"), which is the hallmark of a metaphor, not a \"like\" comparison. Therefore, despite being a comparison of role/function, the direct identification makes it a metaphor rather than a literal statement of equivalence.\n    *   **Borderline Cases:** The instruction regarding \"Comparisons of role or function\" was carefully considered. The key distinction is that the prompt's examples for literal comparisons of role/function use \"like\" (כָּמֹנִי, כָּמוֹךָ). The phrase \"יְהֹוָ֥ה רֹ֝עִ֗י\" (The LORD *is* my shepherd) does not use \"like,\" but rather directly equates the LORD with a shepherd. This direct identification is the defining characteristic of a metaphor, making it distinct from the \"literal statements of equivalence or similarity in function\" described in the \"NEVER MARK AS FIGURATIVE\" section, which explicitly refer to \"like\" comparisons.\n\n3.  **לֹ֣א אֶחְסָֽר (I lack nothing):**\n    *   **Considered:** If this statement of outcome might be hyperbole or another figurative type.\n    *   **Reasoning:** This is a literal statement of the consequence of the LORD being the speaker's shepherd. It expresses complete provision and satisfaction, but it is a direct, factual claim within the context of the speaker's experience of divine care, not an exaggeration or other figurative device.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 23:2",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 2,
+          "hebrew_text": "בִּנְא֣וֹת דֶּ֭שֶׁא יַרְבִּיצֵ֑נִי עַל־מֵ֖י מְנֻח֣וֹת יְנַהֲלֵֽנִי",
+          "english_text": "He makes me lie down in green pastures;He leads me to aOthers “still waters.”water in places of repose;-a",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "He makes me lie down in green pastures",
+          "figurative_text_hebrew": "בִּנְא֣וֹת דֶּ֭שֶׁא יַרְבִּיצֵ֑נִי",
+          "explanation": "The speaker, a human, is implicitly likened to a sheep, and God's provision and care are likened to a shepherd leading his flock to lush, safe grazing grounds. 'Green pastures' specifically represents abundant provision and a place of rest.",
+          "metadata": {
+            "target": [
+              "human believer",
+              "person under divine care",
+              "human being"
+            ],
+            "vehicle": [
+              "sheep in green pastures",
+              "flock grazing",
+              "animal in natural habitat"
+            ],
+            "ground": [
+              "divine provision",
+              "sustenance",
+              "security",
+              "rest",
+              "well-being"
+            ],
+            "posture": [
+              "trust",
+              "dependence",
+              "positive sentiment",
+              "praise"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To convey God's comprehensive and benevolent care, providing for all needs, both physical and spiritual, and ensuring peace and security."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"He makes me lie down\" (יַרְבִּיצֵ֑נִי):**\n    *   **Considered:** If this verb, when applied to a human speaker, is figurative.\n    *   **Reasoning:** This verb describes a literal action of a shepherd making sheep lie down. While the speaker is a human, the verb itself is literal within the metaphorical scenario where God is the shepherd and the speaker is a sheep. The figurative element is not the verb's action, but the *application* of the entire shepherd-sheep scenario to a human's experience of divine care. Therefore, the verb itself is not marked as figurative, but it is an integral part of the larger metaphor.\n\n2.  **\"in green pastures\" (בִּנְא֣וֹת דֶּ֭שֶׁא):**\n    *   **Considered:** If \"green pastures\" is a literal location or a metaphor for provision and rest.\n    *   **Reasoning:** For a literal sheep, green pastures are a physical place of sustenance and repose. However, for the human speaker, \"green pastures\" functions as a vehicle within the overarching shepherd-sheep metaphor. It represents the abundant provision, sustenance, and peaceful environment that God provides for the speaker's life. This is a clear cross-domain comparison (physical grazing ground for sheep vs. spiritual/material provision for humans), making it a metaphor.\n\n3.  **\"He leads me\" (יְנַהֲלֵֽנִי):**\n    *   **Considered:** If this verb, when applied to a human speaker, is figurative.\n    *   **Reasoning:** Similar to \"He makes me lie down,\" this verb describes a literal action of a shepherd guiding sheep. For the human speaker, it signifies God's guidance and direction. As with the previous verb, it is not the verb itself that is figurative, but its role within the extended metaphor where God is the shepherd and the speaker is the sheep.\n\n4.  **\"to still waters\" (עַל־מֵ֖י מְנֻח֣וֹת):**\n    *   **Considered:** If \"still waters\" is a literal body of water or a metaphor for peace and refreshment.\n    *   **Reasoning:** For a literal sheep, \"still waters\" (מֵי מְנֻחֹות, literally \"waters of rest/repose\") are a literal source of safe drinking and refreshment. For the human speaker, \"still waters\" functions as a vehicle within the shepherd-sheep metaphor. It represents the tranquility, refreshment, and peace that God provides, both spiritually and emotionally. This is a clear cross-domain comparison (physical water for sheep vs. spiritual/emotional peace for humans), making it a metaphor.\n\n**Borderline cases:** The verbs \"makes me lie down\" and \"leads me\" are literal actions within the metaphorical framework. The figurative nature arises from the *identification* of the human speaker with a sheep and God with a shepherd. I have chosen to mark the specific images (\"green pastures,\" \"still waters\") as the core metaphorical vehicles, as they are the concrete elements carrying the cross-domain comparison of provision and peace. The entire scenario is an extended metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 23:2",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 2,
+          "hebrew_text": "בִּנְא֣וֹת דֶּ֭שֶׁא יַרְבִּיצֵ֑נִי עַל־מֵ֖י מְנֻח֣וֹת יְנַהֲלֵֽנִי",
+          "english_text": "He makes me lie down in green pastures;He leads me to aOthers “still waters.”water in places of repose;-a",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "He leads me to still waters",
+          "figurative_text_hebrew": "עַל־מֵ֖י מְנֻח֣וֹת יְנַהֲלֵֽנִי",
+          "explanation": "Continuing the shepherd-sheep metaphor, God's guidance and provision of peace are likened to a shepherd leading his sheep to calm, refreshing waters. 'Still waters' specifically represents tranquility, refreshment, and peace.",
+          "metadata": {
+            "target": [
+              "human believer",
+              "person under divine guidance",
+              "human being"
+            ],
+            "vehicle": [
+              "sheep at still waters",
+              "flock drinking",
+              "animal in natural habitat"
+            ],
+            "ground": [
+              "divine guidance",
+              "peace",
+              "refreshment",
+              "tranquility",
+              "spiritual renewal"
+            ],
+            "posture": [
+              "trust",
+              "dependence",
+              "positive sentiment",
+              "praise"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To emphasize God's role in providing inner peace, spiritual refreshment, and calm guidance amidst life's challenges."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"He makes me lie down\" (יַרְבִּיצֵ֑נִי):**\n    *   **Considered:** If this verb, when applied to a human speaker, is figurative.\n    *   **Reasoning:** This verb describes a literal action of a shepherd making sheep lie down. While the speaker is a human, the verb itself is literal within the metaphorical scenario where God is the shepherd and the speaker is a sheep. The figurative element is not the verb's action, but the *application* of the entire shepherd-sheep scenario to a human's experience of divine care. Therefore, the verb itself is not marked as figurative, but it is an integral part of the larger metaphor.\n\n2.  **\"in green pastures\" (בִּנְא֣וֹת דֶּ֭שֶׁא):**\n    *   **Considered:** If \"green pastures\" is a literal location or a metaphor for provision and rest.\n    *   **Reasoning:** For a literal sheep, green pastures are a physical place of sustenance and repose. However, for the human speaker, \"green pastures\" functions as a vehicle within the overarching shepherd-sheep metaphor. It represents the abundant provision, sustenance, and peaceful environment that God provides for the speaker's life. This is a clear cross-domain comparison (physical grazing ground for sheep vs. spiritual/material provision for humans), making it a metaphor.\n\n3.  **\"He leads me\" (יְנַהֲלֵֽנִי):**\n    *   **Considered:** If this verb, when applied to a human speaker, is figurative.\n    *   **Reasoning:** Similar to \"He makes me lie down,\" this verb describes a literal action of a shepherd guiding sheep. For the human speaker, it signifies God's guidance and direction. As with the previous verb, it is not the verb itself that is figurative, but its role within the extended metaphor where God is the shepherd and the speaker is the sheep.\n\n4.  **\"to still waters\" (עַל־מֵ֖י מְנֻח֣וֹת):**\n    *   **Considered:** If \"still waters\" is a literal body of water or a metaphor for peace and refreshment.\n    *   **Reasoning:** For a literal sheep, \"still waters\" (מֵי מְנֻחֹות, literally \"waters of rest/repose\") are a literal source of safe drinking and refreshment. For the human speaker, \"still waters\" functions as a vehicle within the shepherd-sheep metaphor. It represents the tranquility, refreshment, and peace that God provides, both spiritually and emotionally. This is a clear cross-domain comparison (physical water for sheep vs. spiritual/emotional peace for humans), making it a metaphor.\n\n**Borderline cases:** The verbs \"makes me lie down\" and \"leads me\" are literal actions within the metaphorical framework. The figurative nature arises from the *identification* of the human speaker with a sheep and God with a shepherd. I have chosen to mark the specific images (\"green pastures,\" \"still waters\") as the core metaphorical vehicles, as they are the concrete elements carrying the cross-domain comparison of provision and peace. The entire scenario is an extended metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 23:4",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 4,
+          "hebrew_text": "גַּ֤ם כִּֽי־אֵלֵ֨ךְ בְּגֵ֪יא צַלְמָ֡וֶת לֹא־אִ֘ירָ֤א רָ֗ע כִּי־אַתָּ֥ה עִמָּדִ֑י שִׁבְטְךָ֥ וּ֝מִשְׁעַנְתֶּ֗ךָ הֵ֣מָּה יְנַֽחֲמֻֽנִי",
+          "english_text": "Though I walk through bOthers “the valley of the shadow of death.”a valley of deepest darkness,-bI fear no harm, for You are with me;Your rod and Your staff—they comfort me.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": true,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "the valley of the shadow of death",
+          "figurative_text_hebrew": "בְּגֵ֪יא צַלְמָ֡וֶת",
+          "explanation": "The phrase 'shadow of death' (צַלְמָוֶת) is a metaphor for extreme peril, deep distress, or a life-threatening situation, not a literal shadow. It functions as a well-known biblical idiom for such a state. The 'valley' itself is literal, but its qualification by 'shadow of death' makes the entire phrase metaphorical for a dangerous passage.",
+          "metadata": {
+            "target": [
+              "life-threatening situation",
+              "extreme danger",
+              "human experience",
+              "existential threat"
+            ],
+            "vehicle": [
+              "dark valley",
+              "ominous shadow",
+              "physical environment",
+              "natural phenomenon"
+            ],
+            "ground": [
+              "peril",
+              "darkness",
+              "difficulty",
+              "vulnerability"
+            ],
+            "posture": [
+              "vulnerability",
+              "dependence",
+              "human condition",
+              "emotional state"
+            ],
+            "confidence": 0.95,
+            "speaker": "Psalmist (David)",
+            "purpose": "To vividly describe a state of extreme danger or distress from which God provides deliverance."
+          },
+          "ai_deliberations": {
+            "detection": "I have analyzed the provided text for potential figurative language, focusing on phrases that deviate from literal meaning or involve cross-domain comparisons, personification, or established idioms.\n\n1.  **\"בְּגֵ֪יא צַלְמָ֡וֶת\" (the valley of the shadow of death):**\n    *   **Considered:** Metaphor, idiom.\n    *   **Reasoning:** The term \"valley\" (גֵּיא) is literal, referring to a geographical feature. However, the compound noun \"צַלְמָוֶת\" (shadow of death) is highly figurative. It does not refer to a literal shadow cast by death, but rather serves as a powerful metaphor for extreme peril, deep distress, or a life-threatening situation. It evokes a sense of overwhelming darkness and danger. This phrase is also a well-established biblical idiom for such a state of profound adversity. Therefore, I am including it as both a metaphor and an idiom.\n\n2.  **\"לֹא־אִ֘ירָ֤א רָ֗ע\" (I fear no harm):**\n    *   **Considered:** Literal statement.\n    *   **Reasoning:** This is a direct and literal expression of the speaker's emotional state (lack of fear) in the face of potential danger. No figurative language is present here.\n\n3.  **\"כִּי־אַתָּ֥ה עִמָּדִ֑י\" (for You are with me):**\n    *   **Considered:** Literal statement, divine anthropomorphism.\n    *   **Reasoning:** This is a literal statement affirming God's presence. While God's presence is spiritual, the statement itself is direct and not figurative in the sense of a metaphor or simile. It falls under the category of divine anthropomorphism (God being \"with\" someone), which the instructions state should be treated as literal in the ANE context unless referring to God's body.\n\n4.  **\"שִׁבְטְךָ֥ וּמִשְׁעַנְתֶּ֗ךָ\" (Your rod and Your staff):**\n    *   **Considered:** Metaphor, metonymy.\n    *   **Reasoning:** A rod (שֵׁבֶט) and a staff (מִשְׁעֶנֶת) are literal tools used by a shepherd for protection, guidance, and support. However, in the context of the psalm, where God is implicitly portrayed as a shepherd (a common biblical motif), these objects are not merely physical implements. They function as metaphors for God's protective power (the rod, used for defense and discipline) and His guiding, supporting, and comforting presence (the staff, used for leading and leaning on). They represent abstract divine attributes and actions through concrete objects. While one could argue for metonymy (the tools standing for the actions performed with them), the primary function is that the objects *themselves* are symbolic representations of God's comprehensive care. Thus, it is primarily a metaphor.\n\n5.  **\"הֵ֣מָּה יְנַֽחֲמֻֽנִי\" (they comfort me):**\n    *   **Considered:** Personification.\n    *   **Reasoning:** The subject of this verb is \"Your rod and Your staff.\" Inanimate objects like a rod and a staff cannot literally provide comfort in the human sense. Attributing the human action of \"comforting\" to these non-human entities is a clear instance of personification. This further emphasizes the metaphorical role of the rod and staff as representations of God's active and consoling care.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 23:4",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 4,
+          "hebrew_text": "גַּ֤ם כִּֽי־אֵלֵ֨ךְ בְּגֵ֪יא צַלְמָ֡וֶת לֹא־אִ֘ירָ֤א רָ֗ע כִּי־אַתָּ֥ה עִמָּדִ֑י שִׁבְטְךָ֥ וּ֝מִשְׁעַנְתֶּ֗ךָ הֵ֣מָּה יְנַֽחֲמֻֽנִי",
+          "english_text": "Though I walk through bOthers “the valley of the shadow of death.”a valley of deepest darkness,-bI fear no harm, for You are with me;Your rod and Your staff—they comfort me.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "Your rod and Your staff",
+          "figurative_text_hebrew": "שִׁבְטְךָ֥ וּמִשְׁעַנְתֶּ֗ךָ",
+          "explanation": "The shepherd's rod (for protection/discipline) and staff (for guidance/support) are metaphors for God's protective power, guidance, and comforting presence. They are concrete objects representing abstract divine attributes and actions.",
+          "metadata": {
+            "target": [
+              "God's protection and guidance",
+              "divine care",
+              "divine attributes",
+              "spiritual support"
+            ],
+            "vehicle": [
+              "shepherd's tools",
+              "pastoral implements",
+              "physical objects",
+              "agricultural instruments"
+            ],
+            "ground": [
+              "security",
+              "direction",
+              "comfort",
+              "authority",
+              "care"
+            ],
+            "posture": [
+              "trust",
+              "reliance",
+              "positive sentiment",
+              "faith"
+            ],
+            "confidence": 0.95,
+            "speaker": "Psalmist (David)",
+            "purpose": "To express trust in God's active care and provision, using familiar imagery of a shepherd."
+          },
+          "ai_deliberations": {
+            "detection": "I have analyzed the provided text for potential figurative language, focusing on phrases that deviate from literal meaning or involve cross-domain comparisons, personification, or established idioms.\n\n1.  **\"בְּגֵ֪יא צַלְמָ֡וֶת\" (the valley of the shadow of death):**\n    *   **Considered:** Metaphor, idiom.\n    *   **Reasoning:** The term \"valley\" (גֵּיא) is literal, referring to a geographical feature. However, the compound noun \"צַלְמָוֶת\" (shadow of death) is highly figurative. It does not refer to a literal shadow cast by death, but rather serves as a powerful metaphor for extreme peril, deep distress, or a life-threatening situation. It evokes a sense of overwhelming darkness and danger. This phrase is also a well-established biblical idiom for such a state of profound adversity. Therefore, I am including it as both a metaphor and an idiom.\n\n2.  **\"לֹא־אִ֘ירָ֤א רָ֗ע\" (I fear no harm):**\n    *   **Considered:** Literal statement.\n    *   **Reasoning:** This is a direct and literal expression of the speaker's emotional state (lack of fear) in the face of potential danger. No figurative language is present here.\n\n3.  **\"כִּי־אַתָּ֥ה עִמָּדִ֑י\" (for You are with me):**\n    *   **Considered:** Literal statement, divine anthropomorphism.\n    *   **Reasoning:** This is a literal statement affirming God's presence. While God's presence is spiritual, the statement itself is direct and not figurative in the sense of a metaphor or simile. It falls under the category of divine anthropomorphism (God being \"with\" someone), which the instructions state should be treated as literal in the ANE context unless referring to God's body.\n\n4.  **\"שִׁבְטְךָ֥ וּמִשְׁעַנְתֶּ֗ךָ\" (Your rod and Your staff):**\n    *   **Considered:** Metaphor, metonymy.\n    *   **Reasoning:** A rod (שֵׁבֶט) and a staff (מִשְׁעֶנֶת) are literal tools used by a shepherd for protection, guidance, and support. However, in the context of the psalm, where God is implicitly portrayed as a shepherd (a common biblical motif), these objects are not merely physical implements. They function as metaphors for God's protective power (the rod, used for defense and discipline) and His guiding, supporting, and comforting presence (the staff, used for leading and leaning on). They represent abstract divine attributes and actions through concrete objects. While one could argue for metonymy (the tools standing for the actions performed with them), the primary function is that the objects *themselves* are symbolic representations of God's comprehensive care. Thus, it is primarily a metaphor.\n\n5.  **\"הֵ֣מָּה יְנַֽחֲמֻֽנִי\" (they comfort me):**\n    *   **Considered:** Personification.\n    *   **Reasoning:** The subject of this verb is \"Your rod and Your staff.\" Inanimate objects like a rod and a staff cannot literally provide comfort in the human sense. Attributing the human action of \"comforting\" to these non-human entities is a clear instance of personification. This further emphasizes the metaphorical role of the rod and staff as representations of God's active and consoling care.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 23:3",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 3,
+          "hebrew_text": "נַפְשִׁ֥י יְשׁוֹבֵ֑ב יַֽנְחֵ֥נִי בְמַעְגְּלֵי־צֶ֝֗דֶק לְמַ֣עַן שְׁמֽוֹ",
+          "english_text": "He renews my life;He guides me in right pathsas befits His name.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "in right paths",
+          "figurative_text_hebrew": "בְמַעְגְּלֵי־צֶ֝֗דֶק",
+          "explanation": "The physical concept of 'paths' is used metaphorically to represent a moral course of conduct or a way of life.",
+          "metadata": {
+            "target": [
+              "moral conduct",
+              "way of life",
+              "human behavior",
+              "spiritual journey"
+            ],
+            "vehicle": [
+              "physical paths",
+              "roadways",
+              "routes",
+              "journey"
+            ],
+            "ground": [
+              "direction",
+              "guidance",
+              "progression",
+              "manner of living"
+            ],
+            "posture": [
+              "affirmation",
+              "guidance",
+              "positive instruction",
+              "divine care"
+            ],
+            "confidence": 0.95,
+            "speaker": "Narrator",
+            "purpose": "To describe God's guidance in the moral and spiritual life of the individual."
+          },
+          "ai_deliberations": {
+            "detection": "I analyzed the verse נַפְשִׁ֥י יְשׁוֹבֵ֑ב יַֽנְחֵ֥נִי בְמַעְגְּלֵי־צֶ֝֗דֶק לְמַ֣עַן שְׁמֽוֹ (He renews my life; He guides me in right paths as befits His name) for figurative language.\n\n1.  **נַפְשִׁ֥י יְשׁוֹבֵ֑ב (He renews my life/soul):**\n    *   **Considered:** I considered if \"נַפְשִׁ֥י\" (my soul/life) might be a metonymy for the whole person or if \"יְשׁוֹבֵ֑ב\" (renews/restores) was used metaphorically.\n    *   **Reasoning:** While *nefesh* can sometimes function metonymically for the entire person, in the context of \"restoring\" or \"reviving,\" it often refers to the inner vitality, spirit, or very being of a person. The verb describes a direct action upon this internal state. It is not a cross-domain comparison where one thing is explicitly likened to another. It describes a profound internal or spiritual restoration directly, rather than figuratively. Therefore, I excluded it as a distinct figurative element.\n\n2.  **יַֽנְחֵ֥נִי בְמַעְגְּלֵי־צֶ֝֗דֶק (He guides me in right paths):**\n    *   **Considered:** I considered if \"בְמַעְגְּלֵי־צֶ֝֗דֶק\" (in right paths) constitutes a metaphor.\n    *   **Reasoning:** The term \"מַעְגְּלֵי\" (paths/tracks) is clearly used metaphorically here. Physical paths (the vehicle) are employed to represent a course of conduct, a way of life, or moral direction (the target). This is a classic cross-domain comparison where a physical journey represents a moral or spiritual journey. The qualification \"צֶ֝֗דֶק\" (righteousness) further solidifies its metaphorical use for ethical living. Therefore, I included this as a metaphor.\n\n3.  **לְמַ֣עַן שְׁמֽוֹ (as befits His name/for His name's sake):**\n    *   **Considered:** I considered if \"שְׁמֽוֹ\" (His name) is a metonymy and if the entire phrase is an idiom.\n    *   **Reasoning:** In biblical Hebrew, \"שֵׁם\" (name) frequently serves as a metonymy for the person, character, reputation, or honor of an individual, especially God. The phrase \"לְמַ֣עַן שְׁמֽוֹ\" (for His name's sake) is a well-established biblical idiom signifying \"for the sake of His glory, character, or reputation.\" It is a common set phrase that uses metonymy. Therefore, I included this as both an idiom and a metonymy.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 23:5",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 5,
+          "hebrew_text": "תַּעֲרֹ֬ךְ לְפָנַ֨י&thinsp;׀ שֻׁלְחָ֗ן נֶ֥גֶד צֹרְרָ֑י דִּשַּׁ֥נְתָּ בַשֶּׁ֥מֶן רֹ֝אשִׁ֗י כּוֹסִ֥י רְוָיָֽה",
+          "english_text": "You spread a table for me in full view of my enemies;You anoint my head with oil;my drink is abundant.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "You spread a table for me in full view of my enemies; You anoint my head with oil; my drink is abundant.",
+          "figurative_text_hebrew": "תַּעֲרֹ֬ךְ לְפָנַ֨י&thinsp;׀ שֻׁלְחָ֗ן נֶ֥גֶד צֹרְרָ֑י דִּשַּׁ֥נְתָּ בַשֶּׁ֥מֶן רֹ֝אשִׁ֗י כּוֹסִ֥י רְוָיָֽה",
+          "explanation": "This verse presents an extended metaphor where God is depicted as a gracious and powerful host. The actions of spreading a table, anointing with oil, and providing an overflowing cup are not literal events but metaphorical representations of God's lavish provision, honor, protection, and abundant blessing for the psalmist, even in the face of opposition.",
+          "metadata": {
+            "target": [
+              "God's provision, protection, and blessing for the psalmist",
+              "divine care and vindication",
+              "theology, relationship with God"
+            ],
+            "vehicle": [
+              "a gracious host providing a lavish banquet",
+              "Ancient Near Eastern hospitality, feast",
+              "human social customs, sustenance"
+            ],
+            "ground": [
+              "abundance, honor, security, vindication",
+              "generosity, protection, blessing",
+              "positive experience, well-being"
+            ],
+            "posture": [
+              "gratitude, confidence, praise",
+              "worship, positive sentiment",
+              "devotional expression"
+            ],
+            "confidence": 1.0,
+            "speaker": "The Psalmist (traditionally David)",
+            "purpose": "To express profound trust and gratitude for God's complete care, which includes not just basic needs (like a shepherd) but also honor, joy, and vindication (like a host), even amidst adversity."
+          },
+          "ai_deliberations": {
+            "detection": "- **`תַּעֲרֹ֬ךְ לְפָנַ֨י&thinsp;׀ שֻׁלְחָ֗ן נֶ֥גֶד צֹרְרָ֑י` (You spread a table for me in full view of my enemies):** I considered whether this is a literal action of God. I concluded it is metaphorical. The entire psalm employs overarching metaphors for God's care (shepherd, and now host). A shepherd does not literally set a banquet table for a sheep. This imagery shifts to portray God as a gracious and powerful host. The \"table\" is not a piece of furniture but a symbol of lavish provision, security, and public vindication. The action of setting the table is an anthropomorphism, but it occurs within a non-literal, metaphorical scene. Therefore, the entire clause is part of a larger metaphor.\n\n- **`דִּשַּׁ֥נְתָּ בַשֶּׁ֥מֶן רֹ֝אשִׁ֗י` (You anoint my head with oil):** I considered this as a literal anointing. However, it is an integral part of the banquet metaphor established in the previous clause. Anointing a guest's head with oil was a customary act of honor and hospitality in the Ancient Near East. Here, it is not a physical act but a metaphorical depiction of God bestowing honor, joy, and blessing upon the psalmist as a cherished guest.\n\n- **`כּוֹסִ֥י רְוָיָֽה` (my cup is overflowing / my drink is abundant):** I considered if this refers to a literal, overflowing cup. I determined it is metaphorical. The \"cup\" (`כּוֹס`) is a common biblical symbol for one's lot, destiny, or experience. Within the banquet scene, the overflowing cup represents the superabundance of God's blessings in the psalmist's life. It is the culminating image of the host's boundless generosity. While it has metonymic qualities (cup for its contents/blessings), its primary function is to complete the extended metaphor of the divine host.\n\n- **Overall Assessment:** The entire verse functions as a single, coherent, and extended metaphor. It shifts the psalm's controlling image from God as a shepherd to God as a host. Each clause contributes to this central metaphor of a divine banquet, which symbolizes God's provision, protection, honor, and abundant blessing. I will therefore mark the entire verse as one instance of metaphor.",
+            "tagging": ""
+          }
+        }
+      ],
+      "total_results": 8,
+      "request": {
+        "book": "Psalms",
+        "chapter": 23,
+        "verse_range": null,
+        "filters": {
+          "types": [
+            "metaphor"
+          ],
+          "target": null,
+          "vehicle": null,
+          "ground": null,
+          "posture": null
+        }
+      }
+    },
+    {
+      "instances": [
+        {
+          "reference": "Psalms 23:1",
+          "book": "Psalms",
+          "chapter": 23,
+          "verse": 1,
+          "hebrew_text": "מִזְמ֥וֹר לְדָוִ֑ד יְהֹוָ֥ה רֹ֝עִ֗י לֹ֣א אֶחְסָֽר",
+          "english_text": "A psalm of David.The LORD is my shepherd;I lack nothing.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "The LORD is my shepherd",
+          "figurative_text_hebrew": "יְהֹוָ֥ה רֹ֝עִ֗י",
+          "explanation": "The LORD is directly identified with a shepherd, implying divine care, guidance, and provision, without using a comparative particle. This is a cross-domain comparison.",
+          "metadata": {
+            "target": [
+              "The LORD",
+              "God",
+              "Divine Being"
+            ],
+            "vehicle": [
+              "shepherd",
+              "pastoral caregiver",
+              "human occupation"
+            ],
+            "ground": [
+              "provision",
+              "guidance",
+              "protection",
+              "care",
+              "leadership",
+              "benevolence",
+              "sustenance",
+              "security"
+            ],
+            "posture": [
+              "trust",
+              "reliance",
+              "affirmation",
+              "positive sentiment",
+              "devotion"
+            ],
+            "confidence": 0.9,
+            "speaker": "David",
+            "purpose": "To express profound trust and reliance on God's comprehensive care and provision, likening it to the intimate and protective relationship between a shepherd and his flock."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **מִזְמ֥וֹר לְדָוִ֑ד (A psalm of David):**\n    *   **Considered:** If this phrase might contain any figurative elements.\n    *   **Reasoning:** This is a literal superscription, indicating authorship or dedication. It is not figurative.\n\n2.  **יְהֹוָ֥ה רֹ֝עִ֗י (The LORD is my shepherd):**\n    *   **Considered:** If this is a metaphor, simile, personification, idiom, or anthropomorphism.\n    *   **Reasoning:**\n        *   **Metaphor:** This is a clear metaphor. The LORD, a divine being, is directly identified with a human occupation (a shepherd) without using a comparative particle like \"like\" or \"as.\" This creates a cross-domain comparison where the qualities of a shepherd (guidance, protection, provision, care) are attributed to God.\n        *   **Simile:** It is not a simile because it lacks a comparative particle (e.g., \"The LORD is *like* my shepherd\").\n        *   **Personification:** It is not personification because a shepherd is already a human entity; rather, a divine entity is being compared to a human role.\n        *   **Idiom:** While \"God as shepherd\" is a common biblical image, the phrase itself is not an idiom in the sense of a fixed expression whose meaning is entirely non-literal or culturally specific in a way that obscures its component parts (like \"mouth of the sword\"). The meaning is derived directly from the metaphorical identification.\n        *   **Divine Anthropomorphism:** The prompt states that divine anthropomorphisms (e.g., God went, God was angry) are literal unless they refer to God's body. However, \"The LORD is my shepherd\" is not describing God *doing* a human action or expressing a human emotion, but rather *being* or *identifying* as a human role. The prompt also states that \"Comparisons of role or function, such as 'a prophet like myself' (כָּמֹנִי) or 'a prophet like yourself' (כָּמוֹךָ)\" are literal. Crucially, these examples use the comparative particle \"like.\" In contrast, \"The LORD *is* my shepherd\" is a direct identification (\"X is Y\"), which is the hallmark of a metaphor, not a \"like\" comparison. Therefore, despite being a comparison of role/function, the direct identification makes it a metaphor rather than a literal statement of equivalence.\n    *   **Borderline Cases:** The instruction regarding \"Comparisons of role or function\" was carefully considered. The key distinction is that the prompt's examples for literal comparisons of role/function use \"like\" (כָּמֹנִי, כָּמוֹךָ). The phrase \"יְהֹוָ֥ה רֹ֝עִ֗י\" (The LORD *is* my shepherd) does not use \"like,\" but rather directly equates the LORD with a shepherd. This direct identification is the defining characteristic of a metaphor, making it distinct from the \"literal statements of equivalence or similarity in function\" described in the \"NEVER MARK AS FIGURATIVE\" section, which explicitly refer to \"like\" comparisons.\n\n3.  **לֹ֣א אֶחְסָֽר (I lack nothing):**\n    *   **Considered:** If this statement of outcome might be hyperbole or another figurative type.\n    *   **Reasoning:** This is a literal statement of the consequence of the LORD being the speaker's shepherd. It expresses complete provision and satisfaction, but it is a direct, factual claim within the context of the speaker's experience of divine care, not an exaggeration or other figurative device.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 49:15",
+          "book": "Psalms",
+          "chapter": 49,
+          "verse": 15,
+          "hebrew_text": "כַּצֹּ֤אן&thinsp;׀ לִ֥שְׁא֣וֹל שַׁתּוּ֮ מָ֤וֶת יִ֫רְעֵ֥ם וַיִּרְדּ֘וּ־בָ֤ם יְשָׁרִ֨ים&thinsp;׀ לַבֹּ֗קֶר (וצירם) [וְ֭צוּרָם] לְבַלּ֥וֹת שְׁא֗וֹל מִזְּבֻ֥ל לֽוֹ",
+          "english_text": "Sheeplike they head for Sheol,with Death as their shepherd.The upright shall rule over them at daybreak,dMeaning of Heb. uncertain.and their form shall waste away in Sheoltill its nobility be gone.-d",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": true,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "with Death as their shepherd",
+          "figurative_text_hebrew": "מָ֤וֶת יִ֫רְעֵ֥ם",
+          "explanation": "Death, an abstract concept, is personified as a shepherd, actively leading and controlling the wicked. This also functions as a metaphor, comparing Death's role to that of a shepherd.",
+          "metadata": {
+            "target": [
+              "Death",
+              "abstract concept",
+              "force of destruction"
+            ],
+            "vehicle": [
+              "shepherd",
+              "leader",
+              "guide",
+              "human role"
+            ],
+            "ground": [
+              "guidance",
+              "control",
+              "leading to destruction",
+              "dominion"
+            ],
+            "posture": [
+              "condemnation",
+              "warning",
+              "negative sentiment",
+              "judgment"
+            ],
+            "confidence": 0.95,
+            "speaker": "Narrator",
+            "purpose": "To vividly portray Death as an active, controlling force that inevitably leads the wicked to their demise, emphasizing their inescapable fate."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **Phrase/Concept**: כַּצֹּ֤אן (kaṣṣōʾn) / \"Sheeplike\"\n    *   **What I considered**: I considered if this phrase, introduced by the comparative particle כְּ (kə-), constitutes a simile.\n    *   **Reasoning for inclusion**: This is an explicit comparison of the wicked (the implied subject of \"they head for Sheol\") to sheep. The instruction explicitly states to mark \"obvious similes.\" The comparison highlights their passive, perhaps unwitting, movement towards destruction, similar to sheep being led to slaughter or simply following a path without understanding their ultimate fate.\n    *   **Borderline cases debated**: None; this is a clear and direct simile.\n\n2.  **Phrase/Concept**: לִ֥שְׁא֣וֹל שַׁתּוּ֮ (lišʾōl šattū) / \"they head for Sheol\"\n    *   **What I considered**: I considered if \"Sheol\" or the act of \"heading for Sheol\" might be figurative (e.g., metonymy for death, or Sheol personified).\n    *   **Reasoning for exclusion**: In the biblical worldview, Sheol is understood as the literal realm of the dead, the destination for all who die. Therefore, \"heading for Sheol\" is a literal description of the process of dying and entering the afterlife, not a figurative expression. While the *nature* of Sheol is conceptual, the *action* of going there is treated as a literal event in the narrative.\n\n3.  **Phrase/Concept**: מָ֤וֶת יִ֫רְעֵ֥ם (māwet yirʿēm) / \"Death as their shepherd\"\n    *   **What I considered**: I considered if this phrase represents personification, metaphor, or both.\n    *   **Reasoning for inclusion**: \"Death\" (מָוֶת) is an abstract concept, not a living entity. Attributing the action of \"shepherding\" (יִרְעֵם, from רָעָה, \"to shepherd, feed\") to Death is a clear instance of personification, giving a non-human entity human-like agency and a specific role. Furthermore, it functions as a metaphor, comparing Death's controlling and guiding role over the wicked to that of a shepherd leading his flock. The ground of the comparison is the idea of leading, guiding, and ultimately controlling the destiny of the \"flock.\"\n    *   **Borderline cases debated**: None; this is a clear case of personification and metaphor.\n\n4.  **Phrase/Concept**: וַיִּרְדּ֘וּ־בָ֤ם יְשָׁרִ֨ים&thinsp;׀ לַבֹּ֗קֶר (wayyirddū-vām yəšārîm labōqer) / \"The upright shall rule over them at daybreak\"\n    *   **What I considered**: I considered if \"daybreak\" might be a metaphor for a new era or a sudden change, or if \"rule over them\" might be hyperbolic.\n    *   **Reasoning for exclusion**: \"Daybreak\" (לַבֹּקֶר) is a specific time of day, often associated with new beginnings or divine intervention in a literal sense (e.g., God acting in the morning). While it carries symbolic weight, the phrase itself describes a literal future event: the upright gaining dominion over the wicked at a specific, albeit prophetically described, time. There is no clear cross-domain comparison or exaggeration beyond what is expected in prophetic language.\n\n5.  **Phrase/Concept**: וְ֭צוּרָם לְבַלּ֥וֹת שְׁא֗וֹל (wəṣûrām ləvallōt šəʾôl) / \"and their form shall waste away in Sheol\"\n    *   **What I considered**: I considered if \"form\" (צוּרָם) or \"waste away\" (לְבַלּוֹת) could be figurative.\n    *   **Reasoning for exclusion**: \"Form\" refers to the physical body, and \"waste away\" describes the literal process of decay. This is a straightforward description of physical decomposition after death within Sheol.\n\n6.  **Phrase/Concept**: מִזְּבֻ֥ל לֽוֹ (mizzəvul lô) / \"till its nobility be gone.\"\n    *   **What I considered**: I considered if \"nobility\" (זְבֻל) could be a metaphor for something else, or if \"be gone\" was figurative.\n    *   **Reasoning for exclusion**: Given the textual uncertainty noted in the English translation (\"Meaning of Heb. uncertain\"), and the conservative instruction, interpreting זְבֻל as \"nobility\" or \"exalted dwelling\" leads to a literal description of the loss of status or the decay of Sheol's \"dwelling.\" There is no clear cross-domain comparison or personification. It describes a state of being or a characteristic literally ceasing to exist.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 80:2",
+          "book": "Psalms",
+          "chapter": 80,
+          "verse": 2,
+          "hebrew_text": "רֹ֘עֵ֤ה יִשְׂרָאֵ֨ל&thinsp;׀ הַאֲזִ֗ינָה נֹהֵ֣ג כַּצֹּ֣אן יוֹסֵ֑ף יֹשֵׁ֖ב הַכְּרוּבִ֣ים הוֹפִֽיעָה",
+          "english_text": "Give ear, O shepherd of Israelwho leads Joseph like a flock!Appear, You who are enthroned on the cherubim,",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "O shepherd of Israel",
+          "figurative_text_hebrew": "רֹעֵה יִשְׂרָאֵל",
+          "explanation": "God is metaphorically called a 'shepherd' to describe His role as leader, protector, and provider for the nation of Israel.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Being",
+              "Deity"
+            ],
+            "vehicle": [
+              "shepherd",
+              "pastoral leader",
+              "caretaker"
+            ],
+            "ground": [
+              "guidance",
+              "protection",
+              "provision",
+              "leadership",
+              "care"
+            ],
+            "posture": [
+              "invocation",
+              "supplication",
+              "reverence",
+              "dependence"
+            ],
+            "confidence": 0.95,
+            "speaker": "Narrator (addressing God)",
+            "purpose": "To invoke God's protective and guiding nature for Israel."
+          },
+          "ai_deliberations": {
+            "detection": "I examined several phrases for potential figurative language:\n\n1.  **\"רֹעֵה יִשְׂרָאֵל\" (shepherd of Israel):**\n    *   **Considered:** If this phrase functions as a metaphor.\n    *   **Reasoning:** God is not literally a shepherd. The term \"shepherd\" (רֹעֵה) is applied to God to describe His role in guiding, protecting, and providing for Israel, much like a human shepherd cares for his flock. This is a clear cross-domain comparison where God (the target) is likened to a shepherd (the vehicle) based on shared qualities of leadership, care, and provision. Therefore, I am including it as a metaphor.\n\n2.  **\"נֹהֵ֣ג כַּצֹּ֣אן יוֹסֵ֑ף\" (who leads Joseph like a flock):**\n    *   **Considered:** If this phrase constitutes a simile.\n    *   **Reasoning:** The presence of the comparative particle \"כַּ\" (like/as) explicitly signals a simile. Joseph (representing the tribes descended from him, particularly the northern kingdom) is directly compared to a \"flock\" (צֹאן) in the context of being led. This comparison highlights the people's dependence and God's guiding role, reinforcing the \"shepherd\" metaphor for God. Therefore, I am including it as a simile.\n\n3.  **\"יֹשֵׁ֖ב הַכְּרוּבִ֣ים\" (You who are enthroned on the cherubim):**\n    *   **Considered:** If this phrase, particularly \"enthroned,\" should be marked as figurative (e.g., anthropomorphism, metaphor).\n    *   **Reasoning:** The instructions state that \"Divine anthropomorphisms (e.g. God went, God was angry, God watched, God fought) - these are LITERAL in the ANE context unless they refer to God's body (God's finger).\" The phrase \"enthroned on the cherubim\" describes God's position, authority, and mode of divine presence, not a physical body part. In the ANE worldview, God's dwelling or reigning from above/between the cherubim was considered a literal aspect of His divine reality and sovereignty. It is not a cross-domain comparison in the same way \"shepherd\" is, but rather a description of God's perceived literal dwelling place and royal posture. Therefore, I am excluding it as figurative language based on the provided guidelines for divine anthropomorphisms.",
+            "tagging": ""
+          }
+        }
+      ],
+      "total_results": 3,
+      "request": {
+        "book": "Psalms",
+        "chapter": null,
+        "verse_range": null,
+        "filters": {
+          "types": [],
+          "target": null,
+          "vehicle": "shepherd",
+          "ground": null,
+          "posture": null
+        }
+      }
+    }
+  ],
+  "summary": {
+    "lexicon_entries": 6,
+    "concordance_searches": 2,
+    "concordance_results": 25,
+    "figurative_searches": 2,
+    "figurative_instances": 11
+  }
+}
