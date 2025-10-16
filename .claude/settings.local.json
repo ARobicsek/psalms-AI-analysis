@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/ariro/OneDrive/Documents/Bible/**)",
+      "Read(//c/Users/ariro/OneDrive/Documents/Bible/docs/**)",
+      "Bash(sqlite3:*)",
+      "Bash(python:*)",
+      "Bash(mkdir:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(rm:*)",
+      "Bash(git config:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

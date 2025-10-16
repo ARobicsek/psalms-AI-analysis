@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Project-specific
+*.db-journal
+*.db-wal
+*.db-shm
+.env
+*.log
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Output (may want to keep these, adjust as needed)
+# output/*.docx
+
+# API keys and secrets
+.anthropic_key
+.sefaria_key
+secrets/
