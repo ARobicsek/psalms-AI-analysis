@@ -55,13 +55,15 @@ Day 2: Sefaria API Client & Database ✅ COMPLETE
 None currently.
 
 ## Next Steps
-**Day 3: Hebrew Concordance Data Model**
-1. Create src/concordance/hebrew_text_processor.py
-2. Implement strip_cantillation() function
-3. Implement strip_vowels() function
-4. Create 4-layer normalization system
-5. Design concordance database schema
-6. Test with sample Hebrew verses
+**Day 3: Hebrew Concordance Data Model + Full Tanakh Download**
+1. Download entire Tanakh to database (all books, ~23,000 verses)
+2. Create src/concordance/hebrew_text_processor.py
+3. Implement strip_cantillation() function
+4. Implement strip_vowels() function
+5. Create 4-layer normalization system (consonantal, voweled, exact, lemma)
+6. Design concordance database schema
+7. Add phrase search support (multi-word Hebrew phrases)
+8. Test with sample Hebrew words and phrases
 
 ## Metrics
 - **Psalms downloaded**: 150/150 ✅

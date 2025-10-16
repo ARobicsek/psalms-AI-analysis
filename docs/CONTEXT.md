@@ -82,10 +82,11 @@ python scripts/cost_report.py
    - Addresses critic's feedback
    - Refines final output
 
-## Hebrew Concordance: 4-Layer Search
+## Hebrew Concordance: 4-Layer Search + Phrase Support
 
 Our concordance supports multiple search modes for flexibility:
 
+### Word/Root Search
 1. **Consonantal Root Search** (most flexible)
    - Strips ALL diacritics (vowels + cantillation)
    - Example: שמר → finds שָׁמַר, שֹׁמֵר, שׁוֹמְרִים, etc.
@@ -103,6 +104,13 @@ Our concordance supports multiple search modes for flexibility:
 4. **Lemma-Based Search** (linguistic)
    - Search by dictionary form
    - Use: "All instances regardless of inflection"
+
+### Phrase Search
+5. **Multi-Word Phrase Search**
+   - Search for sequences of Hebrew words
+   - Example: "יְהוָה רֹעִי" → finds "The LORD is my shepherd"
+   - Supports all 4 normalization levels for phrases
+   - Use: "Find this exact expression across Tanakh"
 
 ## Cost Estimates
 

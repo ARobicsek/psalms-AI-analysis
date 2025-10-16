@@ -437,12 +437,20 @@ with TanakhDatabase() as db:
 3. ✅ Database schema created with proper indices
 4. ✅ UTF-8 handling for Hebrew text
 
-**Ready for Day 3**: Hebrew Concordance Data Model
+**Ready for Day 3**: Hebrew Concordance Data Model + Full Tanakh
+- Download entire Tanakh (~23,000 verses) for comprehensive concordance
 - Build 4-layer normalization system (consonantal, voweled, exact, lemma)
+- Add phrase search support (multi-word Hebrew expressions)
 - Create Hebrew text processing utilities
 - Implement strip_cantillation() and strip_vowels()
 - Design concordance database schema
 - Integration with existing Pentateuch_Psalms_fig_language.db
+
+**Scope Expansion Decision** (#decision-log):
+- Concordance will cover entire Tanakh, not just Psalms
+- Rationale: Enables cross-reference searches, richer linguistic analysis
+- Phrase search added for finding exact Hebrew expressions
+- Estimated download: ~23,000 verses (vs 2,527 for Psalms only)
 
 ### Notes
 - Sefaria API is excellent - well-documented, reliable, no auth needed
