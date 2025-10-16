@@ -78,13 +78,45 @@ Day 4: Librarian Agents ✅ COMPLETE
 None currently.
 
 ## Next Steps
-**Day 5: Integration & Documentation**
-1. Update ARCHITECTURE.md with librarian agent documentation
-2. Create usage examples and API documentation
-3. Test end-to-end workflow with all agents
-4. Performance optimization (if needed)
-5. Code cleanup and refactoring
-6. Prepare for Scholar agents (Pass 0-3)
+**Day 5: Integration & Documentation (ENHANCED PLAN)**
+
+### Pre-Day 5 Enhancements
+1. **Troubleshoot BDB Librarian**
+   - Investigate Sefaria lexicon API endpoint
+   - Test alternative API paths for BDB entries
+   - Consider fallback to OSHB morphology data
+   - Document workarounds if API remains limited
+
+2. **Implement Comprehensive Logging System**
+   - Log what Scholar agent requested (research request JSON)
+   - Log what each librarian searched (queries, parameters)
+   - Log what each librarian returned (result counts, sample data)
+   - Create structured log format (JSON or formatted text)
+   - Add logging levels (DEBUG, INFO, WARNING, ERROR)
+   - Store logs for debugging and analysis
+
+3. **Enhance Concordance Search with Morphological Variations**
+   - **Gender variations**: masculine, feminine
+   - **Number variations**: singular, plural, dual
+   - **Verb tenses**: perfect, imperfect, imperative, infinitive, participle
+   - **Verb stems (binyanim)**:
+     - Qal (Paal) - simple active
+     - Niphal - simple passive/reflexive
+     - Piel - intensive active
+     - Pual - intensive passive
+     - Hiphil - causative active
+     - Hophal - causative passive
+     - Hithpael - reflexive/reciprocal
+   - **Strategy**: Use pattern-based generation or integrate OSHB morphology database
+   - **Goal**: Increase recall from 95% → 99%+ of relevant occurrences
+
+### Original Day 5 Tasks
+4. Update ARCHITECTURE.md with librarian agent documentation
+5. Create usage examples and API documentation
+6. Test end-to-end workflow with all agents
+7. Performance optimization (if needed)
+8. Code cleanup and refactoring
+9. Prepare for Scholar agents (Pass 0-3)
 
 ## Metrics
 - **Tanakh books downloaded**: 39/39 ✅

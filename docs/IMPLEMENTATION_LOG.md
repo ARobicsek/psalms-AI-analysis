@@ -1093,6 +1093,37 @@ def to_markdown(self) -> str:
 - SQLite JSON functions: https://www.sqlite.org/json1.html
 - Hebrew prefix reference: https://www.hebrew4christians.com/Grammar/Unit_One/Prefixes/prefixes.html
 
+### For Next Session
+**IMPORTANT**: Before proceeding with Day 5, implement these enhancements:
+
+1. **Troubleshoot BDB Librarian**
+   - Test Sefaria API endpoints thoroughly
+   - Try alternative paths: `/api/words/{word}`, `/api/lexicon/{lexicon}/{word}`
+   - Consider integrating OSHB (Open Scriptures Hebrew Bible) morphology data
+   - Document what works and what doesn't
+
+2. **Implement Comprehensive Logging**
+   - Create `src/utils/logger.py` with structured logging
+   - Log research requests (what Scholar asks for)
+   - Log librarian searches (what queries are run)
+   - Log librarian returns (how many results, what was found)
+   - Use Python's `logging` module with custom formatters
+   - Store logs in `logs/` directory with timestamps
+
+3. **Enhance Concordance with Morphological Variations**
+   - Current: Prefix variations (ה, ו, ב, כ, ל, מ) → 20 variations
+   - **Add**: Gender (m/f), Number (s/p/dual), Tenses, Verb stems (Qal, Niphal, Piel, Pual, Hiphil, Hophal, Hithpael)
+   - **Strategy Options**:
+     - Pattern-based: Programmatic suffix/prefix rules for common patterns
+     - Data-driven: Integrate OSHB morphology database (preferred)
+     - Hybrid: Pattern-based with OSHB validation
+   - **Expected impact**: 95% → 99%+ recall
+   - **Resources**:
+     - OSHB: https://github.com/openscriptures/morphhb
+     - Hebrew morphology: https://en.wikipedia.org/wiki/Hebrew_verb_conjugation
+
+**Goal**: Make librarian agents production-ready with full observability and maximum recall
+
 ---
 
 ---
