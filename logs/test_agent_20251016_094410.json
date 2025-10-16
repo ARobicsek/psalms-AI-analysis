@@ -1,0 +1,85 @@
+[
+  {
+    "level": "INFO",
+    "message": "Research request received for Psalm 23",
+    "event_type": "research_request",
+    "psalm_chapter": 23,
+    "request": {
+      "lexicon": [
+        {
+          "word": "רעה",
+          "notes": "shepherd/evil"
+        }
+      ],
+      "concordance": [
+        {
+          "query": "רעה",
+          "scope": "Psalms"
+        }
+      ]
+    },
+    "timestamp": "2025-10-16T09:44:10.545393",
+    "agent": "test_agent"
+  },
+  {
+    "level": "INFO",
+    "message": "Concordance Librarian query: רעה",
+    "event_type": "librarian_query",
+    "librarian_type": "concordance",
+    "query": "רעה",
+    "params": {
+      "scope": "Psalms",
+      "level": "consonantal"
+    },
+    "timestamp": "2025-10-16T09:44:10.546462",
+    "agent": "test_agent"
+  },
+  {
+    "level": "DEBUG",
+    "message": "Generated 20 variations for 'רעה'",
+    "event_type": "phrase_variations",
+    "original_phrase": "רעה",
+    "variations": [
+      "רעה",
+      "והרעה",
+      "הרעה",
+      "ברעה"
+    ],
+    "variation_count": 20,
+    "timestamp": "2025-10-16T09:44:10.547020",
+    "agent": "test_agent"
+  },
+  {
+    "level": "INFO",
+    "message": "Concordance Librarian returned 15 results for 'רעה'",
+    "event_type": "librarian_results",
+    "librarian_type": "concordance",
+    "query": "רעה",
+    "result_count": 15,
+    "sample_results": [
+      {
+        "reference": "Psalms 23:1",
+        "matched_word": "רֹעִי"
+      },
+      {
+        "reference": "Psalms 49:15",
+        "matched_word": "ירעם"
+      }
+    ],
+    "timestamp": "2025-10-16T09:44:10.547462",
+    "agent": "test_agent"
+  },
+  {
+    "level": "DEBUG",
+    "message": "concordance_search completed in 45.20ms",
+    "event_type": "performance_metric",
+    "operation": "concordance_search",
+    "duration_ms": 45.2,
+    "metadata": {
+      "result_count": 15,
+      "variations_tried": 20
+    },
+    "timestamp": "2025-10-16T09:44:10.547980",
+    "agent": "test_agent"
+  }
+]

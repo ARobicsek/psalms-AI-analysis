@@ -288,48 +288,104 @@ class SefariaClient:
         )
 
     @lru_cache(maxsize=1000)
-    def fetch_lexicon_entry(self, word: str, lexicon: str = "BDB") -> Optional[LexiconEntry]:
+    def fetch_lexicon_entry(self, word: str, lexicon: str = "BDB Augmented Strong") -> List[LexiconEntry]:
         """
-        Fetch lexicon entry for a Hebrew word.
+        Fetch lexicon entries for a Hebrew word from multiple lexicons.
 
         Args:
             word: Hebrew word (can be vocalized or unvocalized)
-            lexicon: Lexicon name (default: "BDB" - Brown-Driver-Briggs)
+            lexicon: Preferred lexicon name (default: "BDB Augmented Strong")
+                     Other options: "Jastrow Dictionary", "Klein Dictionary"
+                     Use "all" to get entries from all available lexicons.
 
         Returns:
-            LexiconEntry object if found, None otherwise
+            List of LexiconEntry objects (may be from multiple lexicons)
+            Empty list if no entries found.
 
         Note:
             Results are cached to avoid repeated lookups of same words.
+            The API returns entries from multiple lexicons for disambiguation.
         """
-        logger.info(f"Fetching {lexicon} entry for: {word}")
+        logger.info(f"Fetching lexicon entries for: {word}")
 
         try:
             # Sefaria lexicon lookup endpoint
             # Format: /api/words/{word}?lookup_ref=Psalms.1.1
+            # Returns a LIST of entries from different lexicons
             data = self._make_request(f"words/{word}", params={
                 'lookup_ref': 'Psalms.1.1'  # Reference context for disambiguation
             })
 
-            # Parse BDB entry from response
-            if lexicon in data:
-                entry_data = data[lexicon]
-                if isinstance(entry_data, list) and len(entry_data) > 0:
-                    entry_data = entry_data[0]
+            if not isinstance(data, list):
+                logger.warning(f"Unexpected response format for {word}: {type(data)}")
+                return []
 
-                return LexiconEntry(
+            entries = []
+
+            # Parse each lexicon entry from response
+            for entry_data in data:
+                lexicon_name = entry_data.get('parent_lexicon', 'Unknown')
+
+                # Filter by requested lexicon if not "all"
+                if lexicon != "all" and lexicon_name != lexicon:
+                    continue
+
+                # Extract definition from nested content structure
+                content = entry_data.get('content', {})
+                senses = content.get('senses', [])
+
+                # Build definition text from senses
+                definition = self._extract_definition_from_senses(senses)
+
+                if not definition:
+                    definition = 'No definition available'
+
+                entry = LexiconEntry(
                     word=word,
                     headword=entry_data.get('headword', word),
-                    definition=entry_data.get('content', {}).get('text', 'No definition available'),
+                    definition=definition,
                     raw_data=entry_data
                 )
+                entries.append(entry)
 
-            logger.warning(f"No {lexicon} entry found for: {word}")
-            return None
+            if not entries:
+                logger.warning(f"No {lexicon} entries found for: {word}")
+
+            return entries
 
         except requests.RequestException as e:
             logger.error(f"Error fetching lexicon entry for {word}: {e}")
-            return None
+            return []
+
+    def _extract_definition_from_senses(self, senses: List[Dict], depth: int = 0) -> str:
+        """
+        Recursively extract definition text from nested senses structure.
+
+        Args:
+            senses: List of sense dictionaries (possibly nested)
+            depth: Current recursion depth (for indentation)
+
+        Returns:
+            Formatted definition string
+        """
+        if not senses:
+            return ""
+
+        definitions = []
+        for sense in senses:
+            if isinstance(sense, dict):
+                # Get direct definition if present
+                if 'definition' in sense:
+                    indent = "  " * depth
+                    definitions.append(f"{indent}{sense['definition']}")
+
+                # Recurse into nested senses
+                if 'senses' in sense and isinstance(sense['senses'], list):
+                    nested_def = self._extract_definition_from_senses(sense['senses'], depth + 1)
+                    if nested_def:
+                        definitions.append(nested_def)
+
+        return "\n".join(definitions)
 
     def fetch_multiple_psalms(self, chapters: List[int]) -> List[PsalmText]:
         """
@@ -460,11 +516,14 @@ def main():
 
     if args.word:
         # Lexicon lookup
-        entry = client.fetch_lexicon_entry(args.word)
-        if entry:
-            print(f"\n=== BDB Entry for {args.word} ===")
-            print(f"Headword: {entry.headword}")
-            print(f"Definition: {entry.definition[:200]}...")
+        entries = client.fetch_lexicon_entry(args.word, lexicon="all")
+        if entries:
+            print(f"\n=== Lexicon Entries for {args.word} ===\n")
+            for entry in entries:
+                print(f"--- {entry.raw_data.get('parent_lexicon', 'Unknown')} ---")
+                print(f"Headword: {entry.headword}")
+                print(f"Definition:\n{entry.definition[:500]}...")
+                print()
         else:
             print(f"No entry found for: {args.word}")
 

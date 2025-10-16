@@ -96,15 +96,17 @@ class BDBLibrarian:
         """
         self.client = client or SefariaClient()
 
-    def fetch_entry(self, word: str) -> List[LexiconEntry]:
+    def fetch_entry(self, word: str, lexicon: str = "BDB Augmented Strong") -> List[LexiconEntry]:
         """
         Fetch lexicon entry for a single Hebrew word.
 
         Args:
             word: Hebrew word to look up
+            lexicon: Preferred lexicon name (default: "BDB Augmented Strong")
+                     Options: "BDB Augmented Strong", "Jastrow Dictionary", "Klein Dictionary", "all"
 
         Returns:
-            List of LexiconEntry objects (may be multiple lexicons)
+            List of LexiconEntry objects (may be from multiple lexicons)
 
         Example:
             >>> librarian = BDBLibrarian()
@@ -115,27 +117,16 @@ class BDBLibrarian:
         entries = []
 
         try:
-            # Fetch from Sefaria API
-            response = self.client.fetch_lexicon_entry(word)
+            # Fetch from Sefaria API (now returns list of LexiconEntry objects)
+            sefaria_entries = self.client.fetch_lexicon_entry(word, lexicon=lexicon)
 
-            # Sefaria returns a list of entries from different lexicons
-            if isinstance(response, list):
-                for item in response:
-                    entry = LexiconEntry(
-                        word=word,
-                        lexicon_name=item.get('lexicon', 'Unknown'),
-                        entry_text=item.get('content', {}).get('senses', [{}])[0].get('definition', ''),
-                        url=item.get('url')
-                    )
-                    entries.append(entry)
-
-            elif isinstance(response, dict):
-                # Single entry format
+            # Convert SefariaClient.LexiconEntry to BDBLibrarian.LexiconEntry
+            for sefaria_entry in sefaria_entries:
                 entry = LexiconEntry(
                     word=word,
-                    lexicon_name=response.get('lexicon', 'Unknown'),
-                    entry_text=response.get('content', {}).get('senses', [{}])[0].get('definition', ''),
-                    url=response.get('url')
+                    lexicon_name=sefaria_entry.raw_data.get('parent_lexicon', 'Unknown'),
+                    entry_text=sefaria_entry.definition,
+                    url=sefaria_entry.raw_data.get('url')
                 )
                 entries.append(entry)
 
