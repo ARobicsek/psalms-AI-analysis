@@ -243,7 +243,8 @@ class ConcordanceSearch:
         Args:
             query: SQL query string
             params: Query parameters list
-            scope: Scope to filter by
+            scope: Scope to filter by - can be 'Tanakh', 'Torah', 'Prophets', 'Writings',
+                   a single book name, or comma-separated book names (e.g., 'Genesis,Psalms,Proverbs')
 
         Returns:
             Tuple of (modified_query, modified_params)
@@ -259,8 +260,15 @@ class ConcordanceSearch:
             query += f" AND c.book_name IN ({placeholders})"
             params.extend(books_in_category)
 
+        elif ',' in scope:
+            # Multiple books specified (e.g., "Genesis,Psalms,Proverbs")
+            books = [book.strip() for book in scope.split(',')]
+            placeholders = ','.join('?' * len(books))
+            query += f" AND c.book_name IN ({placeholders})"
+            params.extend(books)
+
         else:
-            # Assume it's a book name
+            # Assume it's a single book name
             query += " AND c.book_name = ?"
             params.append(scope)
 

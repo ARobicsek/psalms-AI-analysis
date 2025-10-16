@@ -578,6 +578,114 @@
           }
         },
         {
+          "reference": "Psalms 27:5",
+          "book": "Psalms",
+          "chapter": 27,
+          "verse": 5,
+          "hebrew_text": "כִּ֤י יִצְפְּנֵ֨נִי&thinsp;׀ בְּסֻכֹּה֮ בְּי֢וֹם רָ֫עָ֥ה יַ֭סְתִּרֵנִי בְּסֵ֣תֶר אׇהֳל֑וֹ בְּ֝צ֗וּר יְרוֹמְמֵֽנִי",
+          "english_text": "He will shelter me in His pavilionon an evil day,grant me the protection of His tent,raise me high upon a rock.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "upon a rock",
+          "figurative_text_hebrew": "בְּ֝צ֗וּר",
+          "explanation": "Being raised 'upon a rock' is a metaphor for God elevating the psalmist to an unassailable, secure, and prominent position, safe from enemies and danger. A rock symbolizes a fortress or stronghold.",
+          "metadata": {
+            "target": [
+              "psalmist's security",
+              "divine elevation",
+              "safety from enemies",
+              "human experience"
+            ],
+            "vehicle": [
+              "high rock",
+              "fortress",
+              "elevated stronghold",
+              "natural formation"
+            ],
+            "ground": [
+              "stability",
+              "security",
+              "invulnerability",
+              "exaltation",
+              "divine power"
+            ],
+            "posture": [
+              "trust",
+              "confidence",
+              "positive sentiment",
+              "faith"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator (Psalmist)",
+            "purpose": "To convey God's power to establish the psalmist in a position of ultimate safety and triumph over adversaries."
+          },
+          "ai_deliberations": {
+            "detection": "I considered the phrase \"יִצְפְּנֵ֨נִי&thinsp;׀ בְּסֻכֹּה֮\" (He will shelter me in His pavilion). I considered if \"His pavilion\" (בְּסֻכֹּה) might be a metaphor. My reasoning for including it as a metaphor is that God does not literally possess a physical pavilion where a person can hide. A pavilion (סֻכָּה) is a physical structure providing shelter. Here, it is used to represent God's protective presence and secure care, making it a clear cross-domain comparison between a physical dwelling and divine protection.\n\nI considered the phrase \"בְּי֢וֹם רָ֫עָ֥ה\" (on an evil day). I considered if \"evil day\" might be figurative. My reasoning for excluding it is that \"evil day\" (יוֹם רָעָה) is a standard biblical idiom or set phrase referring to a time of trouble, distress, or calamity. While \"evil\" is an abstract concept, the phrase itself functions as a direct, albeit idiomatic, description of a difficult period rather than a metaphor, simile, or personification. It falls under standard narrative language for a period of adversity.\n\nI considered the phrase \"יַ֭סְתִּרֵנִי בְּסֵ֣תֶר אׇהֳל֑וֹ\" (He will hide me in the hiding place of His tent). I considered if \"His tent\" (אׇהֳלוֹ) and \"hiding place of His tent\" (סֵתֶר אׇהֳלוֹ) might be a metaphor. My reasoning for including it as a metaphor is similar to the pavilion. God does not literally have a physical tent with a hiding place. A tent (אֹהֶל) provides shelter and security. The phrase \"hiding place of His tent\" functions as a metaphor for the intimate, secure, and concealed protection God provides, shielding the psalmist from harm.\n\nI considered the phrase \"בְּ֝צ֗וּר יְרוֹמְמֵֽנִי\" (raise me high upon a rock). I considered if \"upon a rock\" (בְּצוּר) might be a metaphor. My reasoning for including it as a metaphor is that while one could literally be raised onto a high rock, in the context of God's divine protection, it is a metaphor. A rock (צוּר), especially a high one, symbolizes an unassailable fortress, a place of ultimate safety and elevation above danger. God is not literally placing the psalmist on a physical rock, but rather establishing him in an invulnerable, secure, and prominent position beyond the reach of adversaries. The action \"raise me high\" (יְרוֹמְמֵנִי) reinforces this metaphorical elevation to safety and prominence.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 27:1",
+          "book": "Psalms",
+          "chapter": 27,
+          "verse": 1,
+          "hebrew_text": "לְדָוִ֨ד&thinsp;׀ יְהֹוָ֤ה&thinsp;׀ אוֹרִ֣י וְ֭יִשְׁעִי מִמִּ֣י אִירָ֑א יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י מִמִּ֥י אֶפְחָֽד",
+          "english_text": "Of David.The LORD is my light and my help;whom should I fear?The LORD is the stronghold of my life,whom should I dread?",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "The LORD is the stronghold of my life",
+          "figurative_text_hebrew": "יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י",
+          "explanation": "God's protective power and reliability are metaphorically compared to a physical stronghold or fortress, which offers security and refuge from danger.",
+          "metadata": {
+            "target": [
+              "God's protective power",
+              "Divine refuge",
+              "Spiritual security",
+              "Deity"
+            ],
+            "vehicle": [
+              "Physical stronghold",
+              "Fortress",
+              "Defensive structure",
+              "Architectural element"
+            ],
+            "ground": [
+              "Security",
+              "Protection",
+              "Refuge",
+              "Defense",
+              "Stability"
+            ],
+            "posture": [
+              "Trust",
+              "Confidence",
+              "Praise",
+              "Positive sentiment"
+            ],
+            "confidence": 0.9,
+            "speaker": "David",
+            "purpose": "To express absolute trust and confidence in God's ability to provide ultimate security and defense against all threats."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"The LORD is my light\" (יְהֹוָ֤ה&thinsp;׀ אוֹרִ֣י)**:\n    *   **Considered**: If this phrase might be a metaphor.\n    *   **Reasoning**: God is not literally a physical source of light. Instead, the concept of \"light\" (אוֹר) is used to represent God's role in providing guidance, salvation, well-being, and protection from distress or danger (darkness). This is a clear cross-domain comparison where an abstract quality or function of God is likened to a concrete physical phenomenon. Therefore, it is included as a metaphor.\n    *   **Borderline cases**: None; this is a straightforward metaphor.\n\n2.  **\"and my help/salvation\" (וְ֭יִשְׁעִי)**:\n    *   **Considered**: If this phrase might be figurative.\n    *   **Reasoning**: This describes God's direct attribute or action as a source of salvation or help. It is a literal statement about God's function and character, not a comparison to something else. Therefore, it is excluded.\n\n3.  **\"whom should I fear?\" (מִמִּ֣י אִירָ֑א)**:\n    *   **Considered**: If this phrase might be an idiom or another type of figurative language.\n    *   **Reasoning**: This is a rhetorical question, a stylistic device used for emphasis, implying \"no one.\" While it is a figure of speech, it does not fit the specific categories of metaphor, simile, personification, or a fixed biblical idiom with a non-literal meaning as defined by the instructions. The instructions specifically ask to mark \"clear metaphors, personification, obvious similes, and figurative idioms.\" Rhetorical questions are not explicitly included in these types. Therefore, it is excluded.\n\n4.  **\"The LORD is the stronghold of my life\" (יְהֹוָ֥ה מָעוֹז־חַ֝יַּ֗י)**:\n    *   **Considered**: If this phrase might be a metaphor.\n    *   **Reasoning**: God is not literally a physical fortress or stronghold. The term \"stronghold\" (מָעוֹז) refers to a fortified place that provides security, refuge, and defense. This phrase metaphorically compares God's protective power, reliability, and ability to provide security to a physical stronghold. This is a clear cross-domain comparison. Therefore, it is included as a metaphor.\n    *   **Borderline cases**: None; this is a straightforward metaphor.\n\n5.  **\"whom should I dread?\" (מִמִּ֥י אֶפְחָֽד)**:\n    *   **Considered**: If this phrase might be an idiom or another type of figurative language.\n    *   **Reasoning**: Similar to \"whom should I fear?\", this is a rhetorical question for emphasis, implying \"no one.\" It is a stylistic device but does not fall under the specified categories for marking figurative language (metaphor, simile, personification, or figurative idiom). Therefore, it is excluded.",
+            "tagging": ""
+          }
+        },
+        {
           "reference": "Psalms 28:8",
           "book": "Psalms",
           "chapter": 28,
@@ -625,6 +733,110 @@
           },
           "ai_deliberations": {
             "detection": "1.  **Phrase/Concept:** יְהֹוָ֥ה עֹֽז־לָ֑מוֹ (The LORD is their strength)\n    *   **Considered:** I considered if \"The LORD is their strength\" is a literal statement of God's attribute, a comparison of function, or a metaphor.\n    *   **Reasoning for including it as metaphor:** While God inherently possesses strength and provides it, the phrasing \"He *is* strength\" (rather than \"He *has* strength\" or \"He *gives* strength\") equates the divine being with an abstract quality or a protective force. This constitutes a clear cross-domain comparison where God (a divine entity) is identified with \"strength\" (an abstract concept of power and protection). This identification highlights His role as the ultimate source of power, protection, and sustenance for His people. It is not a literal physical description, nor is it merely a comparison of role or function (like \"a prophet like myself\"). This fits the definition of a clear metaphor.\n    *   **Borderline cases:** One might argue it's a statement of divine attribute, but the direct identification implied by the copula (even if unstated in Hebrew) elevates it beyond simple attribution to a metaphorical equation.\n\n2.  **Phrase/Concept:** וּמָ֘ע֤וֹז (and a stronghold) in the clause וּמָ֘ע֤וֹז יְשׁוּע֖וֹת מְשִׁיח֣וֹ הֽוּא (and a stronghold for the deliverance of His anointed is He).\n    *   **Considered:** I considered if \"stronghold\" (מָעוֹז) when applied to God is a literal description, an anthropomorphism, or a metaphor.\n    *   **Reasoning for including it as metaphor:** God is not a physical, fortified structure. A \"stronghold\" is a tangible, defensive edifice designed for protection and security. Likening God (an immaterial, divine being) to a physical \"stronghold\" is a direct cross-domain comparison. The purpose of this comparison is to convey God's protective, secure, and unassailable nature, emphasizing that He provides refuge and safety for His anointed. This is a clear metaphor. It does not refer to God's body, nor is it an idiom that isn't also fundamentally metaphorical.\n    *   **Borderline cases:** None. This is a very common and unambiguous metaphor in biblical literature.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 31:3",
+          "book": "Psalms",
+          "chapter": 31,
+          "verse": 3,
+          "hebrew_text": "הַטֵּ֤ה אֵלַ֨י&thinsp;׀ אׇזְנְךָ֮ מְהֵרָ֢ה הַצִּ֫ילֵ֥נִי הֱיֵ֤ה לִ֨י&thinsp;׀ לְֽצוּר־מָ֭עוֹז לְבֵ֥ית מְצוּד֗וֹת לְהוֹשִׁיעֵֽנִי",
+          "english_text": "Incline Your ear to me;be quick to save me;be a rock, a stronghold for me,a citadel, for my deliverance.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "be a rock, a stronghold for me",
+          "figurative_text_hebrew": "הֱיֵ֤ה לִ֨י׀ לְֽצוּר־מָ֭עוֹז",
+          "explanation": "God is not literally a rock or a stronghold. These are metaphors identifying God as a source of stability, protection, refuge, and security for the supplicant.",
+          "metadata": {
+            "target": [
+              "God",
+              "divine protector",
+              "divine being"
+            ],
+            "vehicle": [
+              "protective rock",
+              "secure stronghold",
+              "physical refuge",
+              "defensive structure"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "stability",
+              "refuge",
+              "deliverance"
+            ],
+            "posture": [
+              "pleading",
+              "supplication",
+              "dependent stance",
+              "trusting reliance"
+            ],
+            "confidence": 0.99,
+            "speaker": "Supplicant",
+            "purpose": "To express a plea for divine protection and security, emphasizing God's unwavering reliability as a source of safety and defense."
+          },
+          "ai_deliberations": {
+            "detection": "I examined the phrase \"הַטֵּ֤ה אֵלַ֨י&thinsp;׀ אׇזְנְךָ֮ / Incline Your ear to me\" for figurative language. I considered if this was a literal anthropomorphism or an idiom. The instruction states that divine anthropomorphisms are literal in the ANE context unless they refer to God's body (e.g., \"God's finger\"). While \"ear\" is a body part, the *action* \"incline your ear\" is a well-established biblical idiom for \"listen attentively\" or \"pay attention.\" The instructions explicitly state to classify biblical idioms as \"idiom\" type. Therefore, despite involving an anthropomorphic image, the phrase functions as a figurative idiom conveying a request for divine attentiveness, not a literal physical bending of an ear by God.\n\nNext, I analyzed \"הֱיֵ֤ה לִ֨י&thinsp;׀ לְֽצוּר־מָ֭עוֹז / be a rock, a stronghold for me.\" I considered if God is literally a rock or a stronghold. My reasoning is that God is not a physical rock or a man-made stronghold. Instead, these physical entities are used to describe God's attributes and role. This is a clear cross-domain comparison where God is identified *as* these protective structures, making it a metaphor. The preposition לְ (l-) here functions to introduce this metaphorical identification.\n\nFinally, I examined \"לְבֵ֥ית מְצוּד֗וֹת / a citadel\" (literally \"house of fortresses\"). Similar to the previous phrase, I considered if God is literally a citadel. My reasoning is that this phrase continues the metaphorical identification of God as a source of protection and security. A \"citadel\" is a fortified place, and God is being likened to such a place, not literally being one. This is another clear metaphor, parallel to \"rock, a stronghold,\" emphasizing God's role as a refuge and deliverer.\n\nAll three identified elements are included in the",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 31:4",
+          "book": "Psalms",
+          "chapter": 31,
+          "verse": 4,
+          "hebrew_text": "כִּֽי־סַלְעִ֣י וּמְצוּדָתִ֣י אָ֑תָּה וּלְמַ֥עַן שִׁ֝מְךָ֗ תַּֽנְחֵ֥נִי וּֽתְנַהֲלֵֽנִי",
+          "english_text": "For You are my rock and my fortress;You lead me and guide me as befits Your name.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "my rock",
+          "figurative_text_hebrew": "סַלְעִ֣י",
+          "explanation": "God is not literally a rock; the term is used metaphorically to describe His attributes of strength, stability, and protection.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Deity"
+            ],
+            "vehicle": [
+              "rock",
+              "natural stronghold",
+              "geological feature"
+            ],
+            "ground": [
+              "strength",
+              "stability",
+              "protection",
+              "steadfastness"
+            ],
+            "posture": [
+              "trust",
+              "praise",
+              "reliance",
+              "positive sentiment"
+            ],
+            "confidence": 0.95,
+            "speaker": "Speaker (likely David)",
+            "purpose": "To express trust and praise for God's protective and unchangeable nature."
+          },
+          "ai_deliberations": {
+            "detection": "*   **\"סַלְעִ֣י\" (my rock)**: I considered if this phrase was a literal description or a metaphor. God is not a physical rock. The comparison is made to convey qualities of God, such as strength, stability, protection, and refuge. This is a clear cross-domain comparison where God (the target) is likened to a rock (the vehicle) to highlight specific attributes (the ground). Therefore, I am including it as a metaphor.\n\n*   **\"וּמְצוּדָתִ֣י\" (and my fortress)**: Similar to \"my rock,\" I considered if this was a literal description or a metaphor. God is not a physical fortress. A fortress provides defense, security, and a place of safety from enemies. This is another clear cross-domain comparison, likening God to a fortress to emphasize His role as a protector and source of security. Therefore, I am including it as a metaphor.\n\n*   **\"תַּֽנְחֵ֥נִי וּֽתְנַהֲלֵֽנִי\" (You lead me and guide me)**: I considered if these verbs, describing God's actions, might be figurative, perhaps personification if God were a non-human entity, or a metaphor for a less direct form of guidance. However, in biblical theology, God's leading and guiding are often presented as direct, albeit spiritual, actions. These are standard verbs for direction and management, and applying them to God's interaction with humans is a literal description of His providential care and instruction, not a cross-domain comparison or an obvious simile. It describes God's function. Therefore, I am excluding it as figurative.\n\n*   **\"וּלְמַ֥עַן שִׁ֝מְךָ֗\" (as befits Your name / for the sake of Your name)**: I considered if \"name\" here was literal or a metonymy/idiom. In biblical Hebrew, \"name\" (שֵׁם) frequently stands for the person's character, reputation, authority, or presence. To act \"for the sake of Your name\" means to act in a way that upholds God's character, glory, and covenant faithfulness. This is a well-established biblical idiom where a part (the name) stands for the whole (the person/character). Therefore, I am including it as an idiom and a type of metonymy.",
             "tagging": ""
           }
         },
@@ -680,6 +892,59 @@
           },
           "ai_deliberations": {
             "detection": "*   **\"בָּר֥וּךְ יְהֹוָ֑ה\" (Blessed is the LORD):** I considered if this phrase might be figurative, perhaps an idiom or hyperbole. Reasoning: This is a standard declaration of praise and worship, a literal statement of blessing God. It does not involve a cross-domain comparison, exaggeration, or non-literal meaning. Therefore, it is not figurative.\n*   **\"כִּ֥י הִפְלִ֘יא־חַסְדּ֥וֹ לִ֝֗י\" (for He has been wondrously faithful to me):** I considered if \"wondrously faithful\" (הִפְלִיא חַסְדּוֹ) could be hyperbole or a metaphor. Reasoning: \"הִפְלִיא\" means \"to make wonderful,\" \"to do a wonder,\" or \"to be extraordinary.\" It describes the exceptional nature and degree of God's faithfulness, but it is a literal description of an extraordinary divine act or quality, not an exaggeration beyond belief or a comparison to something else. Therefore, it is not figurative.\n*   **\"בְּעִ֣יר מָצֽוֹר\" (bəʿîr māṣôr - in a city of siege / a veritable bastion):**\n    *   **Initial Consideration:** I first considered if this phrase could be a literal statement of location, meaning God showed faithfulness to the speaker *while the speaker was physically in a besieged city*.\n    *   **Reasoning for Exclusion of Literal Location:** While grammatically possible, the immediate context—praise for God's *wondrous faithfulness to the speaker*—suggests that \"בְּעִ֣יר מָצֽוֹר\" describes the *nature* or *effect* of that faithfulness, rather than merely a circumstantial location. If it were a literal location, one might expect more narrative detail about the speaker's situation.\n    *   **Reasoning for Inclusion as Metaphor:** The Hebrew term \"מָצוֹר\" (matsor) can mean \"siege\" but also \"fortification,\" \"bulwark,\" or \"stronghold.\" Thus, \"עִיר מָצוֹר\" can be interpreted not just as a \"city under siege\" (a place of vulnerability) but also as a \"fortified city\" or \"stronghold\" (a place of defense and security). In this context of praising God's wondrous faithfulness, the latter interpretation is far more fitting. The phrase then functions as a metaphor where God's abstract quality of faithfulness is directly identified with or compared to a concrete, protective structure—a fortified city or bastion. The preposition \"בְּ\" (bə) here can be understood as indicating the *manner* or *nature* of God's faithfulness, effectively meaning \"as a fortified city\" or \"as a bastion.\" This is a clear cross-domain comparison (abstract divine attribute to concrete architectural structure) to convey strength, protection, and reliability. This phrase is marked as a metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 34:23",
+          "book": "Psalms",
+          "chapter": 34,
+          "verse": 23,
+          "hebrew_text": "פֹּדֶ֣ה יְ֭הֹוָה נֶ֣פֶשׁ עֲבָדָ֑יו וְלֹ֥א יֶ֝אְשְׁמ֗וּ כׇּֽל־הַחֹסִ֥ים בּֽוֹ&nbsp;{פ}",
+          "english_text": "The LORD redeems the life of His servants;all who take refuge in Him shall not be ruined.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": true,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "all who take refuge in Him",
+          "figurative_text_hebrew": "כׇּֽל־הַחֹסִ֥ים בּֽוֹ",
+          "explanation": "The act of 'taking refuge' (חסה) is literally associated with seeking physical shelter. When applied to God, who is not a physical entity, it functions as a metaphor, comparing God to a protective stronghold or shelter. It is also a common biblical idiom for trusting in God's protection.",
+          "metadata": {
+            "target": [
+              "trusting God",
+              "spiritual reliance",
+              "human faith",
+              "religious devotion"
+            ],
+            "vehicle": [
+              "seeking physical shelter",
+              "fleeing to a safe place",
+              "finding a stronghold",
+              "physical protection"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "safety from harm",
+              "deliverance"
+            ],
+            "posture": [
+              "reassurance",
+              "divine promise",
+              "positive affirmation",
+              "encouragement"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To emphasize God's role as protector and the security of those who trust Him."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **פֹּדֶ֣ה יְ֭הֹוָה (The LORD redeems):**\n    *   **Considered:** If \"redeems\" might be a metaphor for a spiritual act, or if it has a broader figurative meaning beyond its literal sense.\n    *   **Reasoning:** The verb \"redeem\" (פדה) has a concrete, literal meaning in ancient Israelite society, referring to the act of buying back, ransoming, or delivering from bondage, danger, or debt, often involving a payment or substitution. When applied to God, it describes His direct action of delivering His people from various forms of peril (e.g., slavery, death, sin). While it carries profound theological significance, the action itself is understood as a direct, albeit divine, act of deliverance, not a cross-domain comparison. Therefore, it is considered literal in this context.\n\n2.  **נֶ֣פֶשׁ עֲבָדָ֑יו (the life of His servants):**\n    *   **Considered:** If \"life\" (נפש) here is a metonymy or synecdoche for the person themselves, or if it's a literal reference to their vital existence.\n    *   **Reasoning:** In Hebrew, `nefesh` can refer to the whole person, the breath, or the inner being. \"Redeems the life\" is a common and direct way to express saving a person from death, destruction, or peril. While `nefesh` can sometimes function as a synecdoche for the person, in this context, \"redeeming the life\" is a very straightforward statement about preserving the existence and well-being of the servants. It does not involve a cross-domain comparison or a substitution of an attribute for the whole in a way that is clearly figurative beyond standard linguistic usage. It is therefore considered literal. \"His servants\" is a literal description of their relationship to God.\n\n3.  **כׇּֽל־הַחֹסִ֥ים בּֽוֹ (all who take refuge in Him):**\n    *   **Considered:** If \"take refuge in Him\" is a metaphor, an idiom, or a literal action.\n    *   **Reasoning:** The verb חסה (chasah), \"to take refuge,\" literally refers to seeking shelter in a physical place (e.g., a cave, a fortress, under wings). However, when the object of refuge is \"Him\" (בּֽוֹ), referring to God, it is clearly not a literal physical action. God is not a physical structure one can enter or hide within. Instead, the concept of seeking physical protection in a safe place is transferred to the spiritual and relational domain, where God is implicitly compared to a protective shelter or stronghold. This constitutes a **metaphor**, as it involves a cross-domain comparison (God as a refuge). Furthermore, \"taking refuge in God\" is a very common and established expression in biblical Hebrew, particularly in the Psalms, functioning as a **biblical idiom** to convey trust, dependence, and reliance on God for protection and safety. It is a figurative idiom because the literal action of taking refuge is applied to a non-physical entity (God) to describe a spiritual reality.\n\n4.  **לֹ֥א יֶ֝אְשְׁמ֗וּ (shall not be ruined/held guilty):**\n    *   **Considered:** If \"shall not be ruined\" (or \"held guilty\") is figurative.\n    *   **Reasoning:** This is a direct statement of consequence for those who take refuge in God. It describes their state of being or their fate. There is no cross-domain comparison, personification, or other figurative device at play. It is a literal statement about their protection and vindication.",
             "tagging": ""
           }
         },
@@ -782,6 +1047,109 @@
           },
           "ai_deliberations": {
             "detection": "I have analyzed each phrase in the provided text for potential figurative language, adhering to the specified conservative guidelines for narrative text and divine anthropomorphisms.\n\n1.  **\"אֱלֹהֵ֣י מָעוּזִּי\" (Elohei ma'uzzi) - \"my God, my stronghold\"**:\n    *   **Considered**: I considered whether \"my stronghold\" (מָעוּזִּי) is a metaphor. A stronghold (מָעוּז) is literally a fortified place, a refuge, or a source of physical strength and protection.\n    *   **Reasoning**: God is not a literal physical fortress or building. By calling God \"my stronghold,\" the speaker is making a direct cross-domain comparison, likening God to a physical structure that provides security, defense, and refuge. The quality being highlighted is God's protective nature and the security He provides. This is a clear metaphorical expression.\n    *   **Decision**: Included as a metaphor.\n\n2.  **\"לָמָ֢ה זְנַ֫חְתָּ֥נִי\" (lamah z'naḥtani) - \"why have You rejected me?\"**:\n    *   **Considered**: I considered if \"rejected me\" constitutes a figurative anthropomorphism or a literal divine action.\n    *   **Reasoning**: The instructions state that divine anthropomorphisms (e.g., God was angry, God watched) are to be considered LITERAL in the ANE context unless they refer to God's body parts. \"To reject\" (זָנַח) describes an action or an attitude of God towards the speaker, not a physical body part. Therefore, it is understood as a direct, literal description of God's perceived action or stance.\n    *   **Decision**: Excluded as literal.\n\n3.  **\"לָֽמָּה־קֹדֵ֥ר אֶתְהַלֵּ֗ךְ\" (lamah qoder ethallekh) - \"Why must I walk in gloom\"**:\n    *   **Considered**: I considered whether \"walk in gloom\" is a metaphor for an emotional state. The verb קָדַר (qadar) means to be dark, gloomy, or mournful.\n    *   **Reasoning**: The speaker is not literally walking *inside* a physical substance called \"gloom.\" Instead, \"walking in gloom\" is a metaphorical expression describing the speaker's pervasive emotional state of deep sadness, distress, or mourning. The physical act of \"walking\" is used to convey the continuous experience of this internal, gloomy state. It's a cross-domain comparison where an abstract emotional state is described as a physical environment or manner of movement.\n    *   **Decision**: Included as a metaphor.\n\n4.  **\"בְּלַ֣חַץ אוֹיֵֽב\" (b'laḥaṣ oyev) - \"oppressed by the enemy\"**:\n    *   **Considered**: I considered if \"oppressed\" (לַחַץ) is figurative.\n    *   **Reasoning**: \"Oppressed\" (לַחַץ) refers to pressure, distress, or actual oppression. This is a direct and literal description of the speaker's difficult situation caused by the enemy. There is no cross-domain comparison or non-literal meaning intended here.\n    *   **Decision**: Excluded as literal.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 46:2",
+          "book": "Psalms",
+          "chapter": 46,
+          "verse": 2,
+          "hebrew_text": "אֱלֹהִ֣ים לָ֭נוּ מַחֲסֶ֣ה וָעֹ֑ז עֶזְרָ֥ה בְ֝צָר֗וֹת נִמְצָ֥א מְאֹֽד",
+          "english_text": "God is our refuge and stronghold,a help in trouble, very near.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "God is our refuge and stronghold",
+          "figurative_text_hebrew": "אֱלֹהִ֣ים לָ֭נוּ מַחֲסֶ֣ה וָעֹ֑ז",
+          "explanation": "God is metaphorically described as a physical refuge and stronghold, emphasizing His role as a source of protection, security, and strength for His people.",
+          "metadata": {
+            "target": [
+              "God",
+              "Divine Protector",
+              "Spiritual Entity"
+            ],
+            "vehicle": [
+              "refuge and stronghold",
+              "fortified structure",
+              "physical shelter",
+              "defensive architecture"
+            ],
+            "ground": [
+              "protection",
+              "security",
+              "strength",
+              "safety",
+              "defense",
+              "support"
+            ],
+            "posture": [
+              "affirmation",
+              "praise",
+              "trust",
+              "positive sentiment"
+            ],
+            "confidence": 0.95,
+            "speaker": "Narrator",
+            "purpose": "To convey God's protective and empowering nature in vivid, relatable terms, inspiring trust and confidence in His presence and aid."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"אֱלֹהִ֣ים לָ֭נוּ מַחֲסֶ֣ה וָעֹ֑ז\" (God is our refuge and stronghold)**\n    *   **Considered:** I considered if \"מַחֲסֶה\" (refuge) and \"וָעֹז\" (stronghold) might be literal descriptions of God or metaphorical.\n    *   **Reasoning:** God is not a physical structure, a literal shelter, or a fortified building. These terms are drawn from the concrete domain of physical safety and defense (e.g., a rock, a fortress, a walled city) and are applied to God to describe His abstract, divine nature and role. This constitutes a clear cross-domain comparison where an abstract entity (God) is described using concrete, physical terms. Therefore, this is a metaphor. It highlights God's role as a source of security, protection, and strength for His people, much like a physical refuge or stronghold provides safety from enemies or danger.\n\n2.  **\"עֶזְרָ֥ה בְ֝צָר֗וֹת נִמְצָ֥א מְאֹֽד\" (a help in trouble, very near / readily found)**\n    *   **Considered:** I considered if \"עֶזְרָה\" (help) or \"נִמְצָא מְאֹד\" (very near / readily found) might be figurative, such as a metonymy or hyperbole.\n    *   **Reasoning:** \"עֶזְרָה\" (help) is a direct and literal description of God's function and action. God provides assistance. This is not a comparison to something else, nor is it an indirect reference. Similarly, \"נִמְצָא מְאֹד\" (readily found or very near) describes the accessibility and effectiveness of God's help. It is a literal statement about the quality and availability of His assistance, not an exaggeration (hyperbole) or a substitution (metonymy). These phrases describe God's attributes and actions directly and literally.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 52:9",
+          "book": "Psalms",
+          "chapter": 52,
+          "verse": 9,
+          "hebrew_text": "הִנֵּ֤ה הַגֶּ֗בֶר לֹ֤א יָשִׂ֥ים אֱלֹהִ֗ים מָ֫עוּזּ֥וֹ וַ֭יִּבְטַח בְּרֹ֣ב עׇשְׁר֑וֹ יָ֝עֹ֗ז בְּהַוָּתֽוֹ",
+          "english_text": "“Here was a fellow who did not make God his refuge,but trusted in his great wealth,relied upon his mischief.”",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "God his refuge",
+          "figurative_text_hebrew": "אֱלֹהִ֗ים מָ֫עוּזּ֥וֹ",
+          "explanation": "God is metaphorically described as a physical refuge or stronghold, emphasizing His role as a source of protection and security. The man is condemned for not seeking this divine protection.",
+          "metadata": {
+            "target": [
+              "God's protective role",
+              "divine attribute",
+              "spiritual concept"
+            ],
+            "vehicle": [
+              "physical refuge",
+              "fortress, stronghold",
+              "place of safety"
+            ],
+            "ground": [
+              "security",
+              "protection, safety",
+              "reliability"
+            ],
+            "posture": [
+              "condemnation",
+              "disapproval",
+              "negative judgment"
+            ],
+            "confidence": 0.95,
+            "speaker": "Narrator",
+            "purpose": "To highlight the man's misplaced trust by contrasting it with the proper object of trust (God's protection)."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **הִנֵּ֤ה הַגֶּ֗בֶר** (Here was a fellow):\n    *   Considered: This is a standard narrative introductory phrase.\n    *   Reasoning: It is a literal statement introducing the subject of the narrative. Not figurative.\n\n2.  **לֹ֤א יָשִׂ֥ים אֱלֹהִ֗ים מָ֫עוּזּ֥וֹ** (did not make God his refuge):\n    *   Considered: If \"God his refuge\" (אֱלֹהִים מָעוּזּוֹ) is a literal statement or a metaphor. A refuge (מָעוּז) is a physical stronghold, fortress, or place of safety.\n    *   Reasoning: God is not a physical structure or place. Therefore, comparing God to a refuge is a clear cross-domain comparison where God's protective and secure nature is likened to the physical protection offered by a stronghold. This is a common and well-established metaphor in biblical literature for divine protection and security.\n    *   Decision: Mark as metaphor.\n\n3.  **וַ֭יִּבְטַח בְּרֹ֣ב עׇשְׁר֑וֹ** (but trusted in his great wealth):\n    *   Considered: If \"trusted in his great wealth\" is figurative.\n    *   Reasoning: This is a literal description of where the man placed his confidence and reliance. Wealth is a tangible asset, and trusting in it is a direct action. Not figurative.\n\n4.  **יָ֝עֹ֗ז בְּהַוָּתֽוֹ** (relied upon his mischief / was strong in his mischief):\n    *   Considered: If \"relied upon his mischief\" (יָעֹז בְּהַוָּתֽוֹ) is a literal statement or a metaphor. The verb יָעֹז means \"to be strong, mighty.\" הַוָּה refers to mischief, wickedness, or ruin.\n    *   Reasoning: One cannot literally \"be strong in\" an abstract concept like mischief or wickedness in the same way one is strong in a physical sense. Instead, the man's mischief or destructive behavior is presented as the *source* or *foundation* of his strength, power, or confidence. This implies a metaphorical equivalence where an abstract quality (mischief) functions as a tangible resource or basis for power, akin to a physical asset or weapon. It's a conceptual metaphor.\n    *   Borderline cases: It could be argued as a literal description of his character where his wickedness *is* his strength. However, the phrasing \"be strong *in* X\" when X is an abstract concept often implies X *acting as* the strength, which is metaphorical.\n    *   Decision: Mark as metaphor.",
             "tagging": ""
           }
         },
@@ -941,6 +1309,55 @@
           }
         },
         {
+          "reference": "Psalms 60:9",
+          "book": "Psalms",
+          "chapter": 60,
+          "verse": 9,
+          "hebrew_text": "לִ֤י גִלְעָ֨ד&thinsp;׀ וְלִ֬י מְנַשֶּׁ֗ה וְ֭אֶפְרַיִם מָע֣וֹז רֹאשִׁ֑י יְ֝הוּדָ֗ה מְחֹֽקְקִֽי",
+          "english_text": "Gilead and Manasseh would be mine,Ephraim my chief stronghold,Judah my scepter;",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "Ephraim my chief stronghold",
+          "figurative_text_hebrew": "אֶפְרַיִם מָע֣וֹז רֹאשִׁ֑י",
+          "explanation": "The tribe of Ephraim is metaphorically described as a 'stronghold,' equating its military and strategic importance to a defensive fortress.",
+          "metadata": {
+            "target": [
+              "Ephraim",
+              "tribe of Israel",
+              "people, territory"
+            ],
+            "vehicle": [
+              "chief stronghold",
+              "fortress, defensive structure",
+              "physical object, military defense"
+            ],
+            "ground": [
+              "strength, protection, strategic importance",
+              "military power, security",
+              "support, defense"
+            ],
+            "posture": [
+              "declaration of power",
+              "assertion of dominion",
+              "authoritative statement"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To emphasize the military strength and strategic importance of Ephraim within the nation."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **\"לִ֤י גִלְעָ֨ד&thinsp;׀ וְלִ֬י מְנַשֶּׁ֗ה\" (Gilead and Manasseh would be mine)**\n    *   **What I considered:** I considered if the use of \"Gilead\" and \"Manasseh\" might be a form of metonymy or synecdoche, where the geographical region or tribal name stands for the people inhabiting it or the territory itself.\n    *   **Reasoning for excluding:** In biblical narrative and poetic contexts, referring to tribes or regions by their names is standard linguistic practice. While it implicitly includes the people and resources, it is not a cross-domain comparison, personification, or a specific idiom in the sense of a fixed figurative phrase. The instructions advise conservatism with standard narrative language and historical/geographical information. Therefore, this is treated as a literal statement of possession over these entities.\n\n2.  **\"וְ֭אֶפְרַיִם מָע֣וֹז רֹאשִׁ֑י\" (Ephraim my chief stronghold / Ephraim is the strength of my head)**\n    *   **What I considered:** I considered if \"Ephraim\" itself was metonymy and if \"מָע֣וֹז רֹאשִׁ֑י\" (my chief stronghold) constituted a metaphor.\n    *   **Reasoning for \"Ephraim\":** Similar to Gilead and Manasseh, \"Ephraim\" is understood as a direct reference to the tribe/territory and is not marked as figurative based on the conservative guidelines.\n    *   **Reasoning for \"מָע֣וֹז רֹאשִׁ֑י\" (my chief stronghold):** This phrase is a clear metaphor. The tribe of Ephraim (an entity comprising people and territory) is directly equated with a \"stronghold\" (a physical defensive structure). The term \"רֹאשִׁי\" (ro'shi), meaning \"my head\" or \"my chief,\" further emphasizes its primary importance as a source of defense and strategic power. This is a cross-domain comparison where the abstract concept of a tribe's military and strategic importance is described using a concrete, defensive object. This fits the criteria for a clear metaphor.\n\n3.  **\"יְ֝הוּדָ֗ה מְחֹֽקְקִֽי\" (Judah my scepter / Judah is my lawgiver)**\n    *   **What I considered:** I considered if \"Judah\" was metonymy and if \"מְחֹֽקְקִֽי\" (my scepter/lawgiver) was a metaphor or a literal description of Judah's function.\n    *   **Reasoning for \"Judah\":** Similar to other tribes, \"Judah\" is understood as a direct reference to the tribe/territory and is not marked as figurative based on the conservative guidelines.\n    *   **Reasoning for \"מְחֹֽקְקִֽי\" (my scepter/lawgiver):** The Hebrew term מְחֹקֵק (meḥoqeq) can refer to a \"lawgiver\" or \"ruler,\" but also to the \"scepter\" itself as a symbol of royal authority (as seen in Genesis 49:10). The English translation \"my scepter\" highlights the symbolic interpretation. If Judah (the tribe/people) *is* the scepter, then it is a metaphor. The tribe is not literally a scepter, but it is equated with this object that symbolizes its destined role as the source of royal authority and governance. This is a cross-domain comparison where the tribe is identified with a symbolic object representing its preeminent function. While \"lawgiver\" could be interpreted as a literal description of function, the symbolic weight of \"scepter\" in this context, especially in parallelism with \"stronghold\" for Ephraim, strongly indicates a metaphorical usage. This fits the criteria for a clear metaphor.",
+            "tagging": ""
+          }
+        },
+        {
           "reference": "Psalms 62:3",
           "book": "Psalms",
           "chapter": 62,
@@ -1042,6 +1459,55 @@
           },
           "ai_deliberations": {
             "detection": "I have analyzed every potential figurative element in the verse: \"אַךְ־ה֣וּא צ֭וּרִי וִישׁוּעָתִ֑י מִ֝שְׂגַּבִּ֗י לֹ֣א אֶמּֽוֹט\" (He is my rock and deliverance, my haven; I shall not be shaken).\n\n1.  **\"צ֭וּרִי / my rock\"**:\n    *   **Considered:** If 'rock' might be a literal description of God or a metaphorical comparison.\n    *   **Reasoning:** God is not a literal geological rock formation. In biblical literature, \"rock\" (צוּר) is a well-established metaphor for God, emphasizing His attributes of strength, stability, protection, and reliability. It's a clear cross-domain comparison (God, a spiritual entity, likened to an inanimate, strong object).\n    *   **Decision:** Included as a metaphor.\n\n2.  **\"וִישׁוּעָתִ֑י / and deliverance\"**:\n    *   **Considered:** If 'deliverance' might be figurative.\n    *   **Reasoning:** \"Deliverance\" (יְשׁוּעָה) refers to the act or state of being saved or rescued. This is a direct description of God's role, function, and attribute. It is a literal theological concept describing what God *is* or *does*, rather than a comparison to something else.\n    *   **Decision:** Excluded as not figurative.\n\n3.  **\"מִ֝שְׂגַּבִּ֗י / my haven\"**:\n    *   **Considered:** If 'haven' (or 'stronghold') might be a literal physical place or a metaphorical comparison for God.\n    *   **Reasoning:** God is not a literal physical fortress, high tower, or inaccessible place. \"מִשְׂגָּב\" (misgav) denotes a high, secure place of refuge or a stronghold. This is a clear metaphor, comparing God to such a place to convey His protective nature, security, and inaccessibility to enemies. It's a cross-domain comparison.\n    *   **Decision:** Included as a metaphor.\n\n4.  **\"לֹ֣א אֶמּֽוֹט / I shall not be shaken\"**:\n    *   **Considered:** If 'shaken' refers to literal physical movement or a figurative state of being.\n    *   **Reasoning:** While \"to be shaken\" (מוּט) can literally describe physical instability, in this context, following the declarations of God as rock and haven, it refers to the speaker's spiritual, emotional, or existential stability and security. It means \"I shall not falter,\" \"I shall not be moved from my secure position,\" or \"I shall not stumble or fall\" in the face of adversity. This is a metaphorical extension of physical stability to an inner state of being. Furthermore, \"לֹא אֶמּוֹט\" is a common idiomatic expression in biblical Hebrew, particularly in the Psalms, to convey steadfastness and unwavering trust.\n    *   **Decision:** Included as both a metaphor (due to the cross-domain application of physical action to an internal state) and an idiom (as a set phrase with a non-literal meaning).",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 71:1",
+          "book": "Psalms",
+          "chapter": 71,
+          "verse": 1,
+          "hebrew_text": "בְּךָֽ־יְהֹוָ֥ה חָסִ֑יתִי אַל־אֵב֥וֹשָׁה לְעוֹלָֽם",
+          "english_text": "I seek refuge in You, O LORD;may I never be disappointed.",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": true,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "I seek refuge in You, O LORD",
+          "figurative_text_hebrew": "בְּךָֽ־יְהֹוָ֥ה חָסִ֑יתִי",
+          "explanation": "The act of seeking refuge in God implicitly compares God to a physical shelter or stronghold, providing safety and protection. God is not literally a physical place of refuge, but functions as one for the worshiper's spiritual and physical security. This is also a common theological idiom for expressing trust.",
+          "metadata": {
+            "target": [
+              "God's protection",
+              "Divine care",
+              "Theological concept, Divine attributes"
+            ],
+            "vehicle": [
+              "physical shelter",
+              "stronghold, sanctuary",
+              "place of safety, protective structure"
+            ],
+            "ground": [
+              "safety, security",
+              "protection, deliverance",
+              "reliability, trustworthiness"
+            ],
+            "posture": [
+              "supplication, prayer",
+              "trust, reliance",
+              "faith, devotion"
+            ],
+            "confidence": 0.9,
+            "speaker": "Worshiper",
+            "purpose": "To express profound trust and reliance on God for protection and security, emphasizing God's role as the ultimate source of safety and to articulate a plea for divine faithfulness."
+          },
+          "ai_deliberations": {
+            "detection": "1.  **Phrase/Concept:** \"בְּךָֽ־יְהֹוָ֥ה חָסִ֑יתִי\" (I seek refuge in You, O LORD)\n    *   **Considered:** If the act of \"seeking refuge in God\" constitutes a metaphor and/or an idiom.\n    *   **Reasoning:** The verb חָסָה (chasah) literally means \"to take shelter\" or \"to flee for protection\" in a physical sense (e.g., under wings, in a stronghold). When this action is directed \"in You, O LORD,\" it implies that God functions as a protective shelter or stronghold. God is not literally a physical structure or place of hiding. Therefore, comparing God's protective nature and the worshiper's reliance on Him to the act of taking shelter in a physical refuge is a clear metaphor, involving a cross-domain comparison (divine/spiritual protection vs. physical shelter). Furthermore, this expression is a very common and established theological phrase in the Psalms, functioning as a set way to articulate trust and reliance on God. As such, it also qualifies as a figurative idiom, where the metaphorical meaning has become a conventional expression.\n    *   **Borderline:** The primary debate was whether to classify it solely as a metaphor or also as an idiom. Given the instruction to classify \"figurative idioms as 'idiom' type\" and its frequent, almost formulaic use in expressing trust, it fits both categories.\n\n2.  **Phrase/Concept:** \"אַל־אֵב֥וֹשָׁה לְעוֹלָֽם\" (may I never be disappointed/put to shame)\n    *   **Considered:** If \"being disappointed\" or \"put to shame\" is figurative language.\n    *   **Reasoning:** This is a direct and literal expression of a desired emotional state and outcome. \"Ashamed\" (בּוֹשׁ) refers to the feeling of humiliation or the state of being disgraced, often resulting from one's hopes or trust being unfulfilled. There is no cross-domain comparison, personification, hyperbole, or other figurative device at play here. It is a straightforward statement about avoiding a negative consequence.",
             "tagging": ""
           }
         },
@@ -1198,6 +1664,56 @@
           },
           "ai_deliberations": {
             "detection": "1.  **\"יְהֹוָה לִ֣י לְמִשְׂגָּ֑ב\" (The LORD is my haven):**\n    *   **Considered:** I considered if \"haven\" (מִשְׂגָּב, literally \"high place,\" \"stronghold,\" \"refuge\") is a literal description of God.\n    *   **Reasoning:** God is a divine, non-physical being, not a literal physical structure or place of refuge. The statement equates God with a stronghold or haven, which is a physical entity providing safety. This is a clear cross-domain comparison where God (the target) is likened to a physical place of security (the vehicle). It is not a simile as it uses a direct identification (\"is\") rather than a comparison (\"like\" or \"as\"). It is not personification as it does not attribute human qualities to God, but rather a protective function associated with a physical structure. It is not an idiom in the sense of a fixed phrase with a non-literal meaning that is commonly understood as such, but rather a direct metaphorical statement.\n    *   **Decision:** Metaphor.\n\n2.  **\"אֱלֹהַ֗י לְצ֣וּר מַחְסִֽי\" (my God is my sheltering rock):**\n    *   **Considered:** I considered if \"rock\" (צוּר) and \"sheltering\" (מַחְסִֽי, \"my refuge\") are literal descriptions of God.\n    *   **Reasoning:** God is not a literal geological formation. The statement equates God with a \"rock\" that provides \"shelter\" or \"refuge.\" A rock is a physical object known for its stability, strength, and ability to provide cover. This is another clear cross-domain comparison where God (the target) is likened to a physical object (the vehicle) that offers protection and stability. Similar to the first phrase, it is a direct identification (\"is\") rather than a comparison, making it a metaphor, not a simile. It does not attribute human qualities (personification) nor is it a fixed idiom.\n    *   **Decision:** Metaphor.",
+            "tagging": ""
+          }
+        },
+        {
+          "reference": "Psalms 108:9",
+          "book": "Psalms",
+          "chapter": 108,
+          "verse": 9,
+          "hebrew_text": "לִ֤י גִלְעָ֨ד&thinsp;׀ לִ֤י מְנַשֶּׁ֗ה וְ֭אֶפְרַיִם מָע֣וֹז רֹאשִׁ֑י יְ֝הוּדָ֗ה מְחֹקְקִֽי",
+          "english_text": "Gilead and Manasseh would be mine,Ephraim my chief stronghold,Judah my scepter;",
+          "types": {
+            "simile": false,
+            "metaphor": true,
+            "personification": false,
+            "idiom": false,
+            "hyperbole": false,
+            "metonymy": false,
+            "other": false
+          },
+          "figurative_text": "Ephraim my chief stronghold",
+          "figurative_text_hebrew": "אֶפְרַיִם מָעוֹז רֹאשִׁי",
+          "explanation": "The tribe of Ephraim is metaphorically described as a 'stronghold,' comparing its protective and defensive capabilities to a fortified place.",
+          "metadata": {
+            "target": [
+              "Ephraim",
+              "Israelite tribe",
+              "people/entity"
+            ],
+            "vehicle": [
+              "chief stronghold",
+              "fortified place",
+              "defensive structure"
+            ],
+            "ground": [
+              "strength",
+              "protection",
+              "security",
+              "support"
+            ],
+            "posture": [
+              "declaration",
+              "prophecy",
+              "positive expectation"
+            ],
+            "confidence": 0.9,
+            "speaker": "Narrator",
+            "purpose": "To emphasize Ephraim's future role as a primary source of strength and defense."
+          },
+          "ai_deliberations": {
+            "detection": "I considered each phrase for potential figurative language.\n\n1.  **\"לִ֤י גִלְעָ֨ד&thinsp;׀ לִ֤י מְנַשֶּׁ֗ה\" (Gilead and Manasseh would be mine):** I considered if \"Gilead\" and \"Manasseh\" might be metonymy for the inhabitants or territory. However, in biblical narrative, referring to a tribe or its territory by the tribal name is standard practice and not considered a cross-domain comparison or a non-literal representation of the entity itself. It is a direct reference to the tribal entities/territories. Therefore, I am excluding this as figurative language.\n\n2.  **\"וְ֭אֶפְרַיִם מָע֣וֹז רֹאשִׁ֑י\" (Ephraim my chief stronghold):** I considered if \"Ephraim\" is metonymy for the tribe/territory, and \"מָע֣וֹז רֹאשִׁ֑י\" (my chief stronghold) is a metaphor. \"Ephraim\" itself, like Gilead and Manasseh, refers to the tribe/territory and is literal. However, likening the tribe of Ephraim (a people/territory) to a \"stronghold\" (a fortified place, a source of defense and security) is a clear cross-domain comparison. A tribe is not literally a physical stronghold. The comparison highlights Ephraim's future role as a primary source of strength and protection. This is a metaphor.\n\n3.  **\"יְ֝הוּדָ֗ה מְחֹקְקִֽי\" (Judah my scepter):** I considered if \"Judah\" is metonymy for the tribe/territory, and \"מְחֹקְקִֽי\" (my scepter/lawgiver) is a metaphor or metonymy. \"Judah\" refers to the tribe/territory and is literal. The term מְחֹקֵק (meḥoqeq) can mean \"lawgiver\" or \"scepter\" (as a symbol of authority). Given the context of tribal blessings and prophecies, especially in parallel with Genesis 49:10 where the \"scepter\" is explicitly linked to Judah's future rule, interpreting it as \"scepter\" is highly probable. Likening the tribe of Judah (a people/entity) to a \"scepter\" (a physical object symbolizing royal authority and rule) is a clear cross-domain comparison. Judah is not literally a scepter, but it embodies the authority that a scepter represents. This is a metaphor.",
             "tagging": ""
           }
         },
@@ -1363,7 +1879,7 @@
           }
         }
       ],
-      "total_results": 17,
+      "total_results": 27,
       "request": {
         "book": "Psalms",
         "chapter": null,
@@ -1383,6 +1899,6 @@
     "concordance_searches": 2,
     "concordance_results": 14,
     "figurative_searches": 2,
-    "figurative_instances": 19
+    "figurative_instances": 29
   }
 }
