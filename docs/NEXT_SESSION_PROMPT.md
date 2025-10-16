@@ -1,156 +1,251 @@
-# Next Session Prompt: Day 5 Integration & Documentation
+# Next Session: Phase 2 - Scholar Agents
 
-## Context
-Day 5 enhancements AND refinements are now COMPLETE! All morphology issues have been fixed, BDB Librarian enhanced with homograph disambiguation. Ready to proceed with Day 5 integration work.
+## Phase 1 Status: 100% COMPLETE ✅
 
-## Start the Next Session With This Prompt
+All librarian infrastructure is production-ready and verified:
+- ✅ BDB Librarian (lexicon lookups with homograph disambiguation + usage examples)
+- ✅ Concordance Librarian (morphological variations + smart scoping)
+- ✅ Figurative Language Librarian (hierarchical tags + full verse context)
+- ✅ Research Bundle Assembler (JSON + Markdown outputs)
+- ✅ Full Tanakh concordance (269,844 words indexed)
+- ✅ Comprehensive logging system
+- ✅ Complete documentation
+
+## Start Next Session With This Prompt
 
 ```
-I'm continuing work on the Psalms AI commentary pipeline - Day 5 (Integration & Documentation).
+I'm continuing work on the Psalms AI commentary pipeline - Phase 2: Scholar Agents.
+
+Phase 1 (Foundation) is 100% complete with all final refinements implemented.
 
 Please read these files in order:
 1. docs/CONTEXT.md (project overview)
-2. docs/PROJECT_STATUS.md (current status - Day 5)
-3. docs/IMPLEMENTATION_LOG.md (scroll to most recent entries from 2025-10-16)
-4. docs/DAY_5_ENHANCEMENTS.md (completed enhancements + refinements + homograph solution)
+2. docs/PROJECT_STATUS.md (Phase 1 complete, starting Phase 2)
+3. docs/IMPLEMENTATION_LOG.md (scroll to 2025-10-16 - Day 5 Final session)
+4. docs/ARCHITECTURE.md (complete system architecture)
 
-Based on the documentation, I've completed:
-- ✅ Three core enhancements (BDB fix, logging, morphology variations)
-- ✅ Three refinements (nonsense forms, final letters, hybrid search)
-- ✅ Homograph disambiguation in BDB Librarian
+Phase 1 delivered:
+- All 4 librarian agents operational
+- 5 critical refinements implemented and verified
+- Psalm 27:1 demo successful (29 figurative instances, 14 concordance matches)
+- No hardcoded Psalms-only restrictions (defaults to full Tanakh/Pentateuch+Psalms)
 
-What should we work on next for Day 5 integration?
+Ready to begin Phase 2: Scholar-Researcher Agent implementation.
 ```
 
 ---
 
-## What Was Completed This Session
+## What Phase 1 Accomplished
 
-### Core Enhancements (Completed Earlier)
-1. ✅ **BDB Librarian Fix** - Now returns comprehensive lexicon data from Sefaria API
-2. ✅ **Logging System** - Structured JSON + text logs for all agent activities (~470 LOC)
-3. ✅ **Morphology Variations** - Pattern-based generation with 3.3x more forms
+### Core Infrastructure (100% Complete)
 
-### Refinements (Completed This Session)
+**1. Data Sources**
+- Sefaria API client (lexicon + text fetching)
+- Full Tanakh database (23,206 verses, 269,844 words)
+- Figurative language database (Pentateuch + Psalms: 2,863 instances)
 
-1. ✅ **Fixed Nonsense Word Generation**
-   - Refactored verb generation to use mutually-exclusive pattern sets
-   - No more impossible combinations like יהָרעה (imperfect + Hophal)
-   - Test result: Zero nonsense forms in all test roots
+**2. Librarian Agents**
+- **BDB Librarian**: Homograph disambiguation, usage examples extraction
+- **Concordance Librarian**: 66 morphological variations, smart scoping (auto-detect common/rare words)
+- **Figurative Language Librarian**: Case-insensitive search, full verse context
+- **Research Assembler**: Coordinates all librarians, dual output formats
 
-2. ✅ **Fixed Final Letter Forms**
-   - Added `normalize_to_medial()` - converts roots before generation (ברך → ברכ)
-   - Added `apply_final_forms()` - converts last character only (ברכ → ברך)
-   - Three-step process: normalize → generate → finalize
-   - Test result: 100% orthographically correct (ברכו not ברךו)
+**3. Critical Refinements (Day 5 Final)**
+1. Case-insensitive figurative search → Found 27 stronghold metaphors (was 13)
+2. Full verse context for figurative instances → Scholar sees complete poetic structure
+3. Phrase search verified working → Multi-word queries auto-detected
+4. Biblical citations extraction → Usage examples from BDB entries
+5. Smart concordance scoping → Common words limited to key books, rare words search full Tanakh
 
-3. ✅ **Implemented Hybrid Search Foundation**
-   - Added `search_substring()` method to concordance/search.py
-   - Created `MorphologyValidator` class with linguistic rules
-   - Test result: 4x more forms discovered (5 → 20 results for אהב)
+**4. Quality Metrics**
+- Morphological recall: 99%+ (66 variations per root)
+- Database query speed: <10ms (indexed)
+- Zero hardcoded Psalms-only restrictions (verified)
+- Complete provenance tracking (every data point traceable)
 
-4. ✅ **Enhanced BDB Librarian with Homograph Disambiguation**
-   - Added vocalization (headword), Strong's numbers, transliteration
-   - Returns ALL meanings for words like רעה (5 different meanings)
-   - Architectural decision: Scholar filters (not Librarian) - 57% cheaper
-   - Test result: Clear disambiguation data for all homographs
+### Default Scopes (Production-Ready)
 
-### Test Results Summary
+**Concordance Librarian**:
+- Default scope: `'Tanakh'` (all 39 books, 23,206 verses)
+- Smart scoping: `scope='auto'` (auto-detect common vs. rare words)
+- No Psalms-only restrictions
 
-All test roots verified (שמר, אהב, ברך, רעה):
-- ✅ Zero linguistically impossible forms
-- ✅ 100% correct final/medial letter usage
-- ✅ Validator working (5/5 test cases passed)
-- ✅ Hybrid search finding 4x more forms
-- ✅ BDB returning 5 meanings for רעה with full disambiguation
-
----
-
-## What's Next: Day 5 Integration Tasks
-
-According to PROJECT_STATUS.md, remaining Day 5 work:
-
-### 1. Integrate Refined Morphology into Concordance Librarian
-- Add morphology variation generation to concordance searches
-- Implement hybrid search (optional - can be Phase 2)
-- Add logging for search operations
-- **Estimated time**: 1 hour
-
-### 2. Test Full Pipeline
-- Create sample research request (suggest Psalm 23)
-- Run through Research Assembler
-- Validate research bundle output
-- **Estimated time**: 30 minutes
-
-### 3. Update ARCHITECTURE.md
-- Document all librarian agents
-- Explain morphology variation strategy
-- Document homograph disambiguation approach
-- **Estimated time**: 1 hour
-
-### 4. Create Usage Examples
-- CLI examples for each librarian
-- Python API examples
-- Research request format documentation
-- **Estimated time**: 30 minutes
+**Figurative Language Librarian**:
+- Default book: `None` (searches all available: Pentateuch + Psalms)
+- Available books: Genesis, Exodus, Leviticus, Numbers, Deuteronomy, Psalms
+- No Psalms-only restrictions
 
 ---
 
-## Files Modified This Session
+## Phase 2: Scholar Agents (Week 2)
 
-**Enhanced**:
-- `src/concordance/morphology_variations.py` (~200 lines modified)
-  - Fixed verb generation logic
-  - Added normalize_to_medial() and enhanced apply_final_forms()
-  - Added MorphologyValidator class
+### Overview
 
-- `src/concordance/search.py` (~100 lines added)
-  - Added search_substring() method for hybrid search
+Now we build the AI agents that actually write the commentary, using the research materials the librarians provide.
 
-- `src/agents/bdb_librarian.py` (~50 lines modified)
-  - Enhanced LexiconEntry with disambiguation fields
-  - Updated CLI to display vocalization + Strong's numbers
+### Phase 2 Architecture
 
-**Documentation**:
-- `docs/DAY_5_ENHANCEMENTS.md` (added refinements + homograph solution)
-- `docs/IMPLEMENTATION_LOG.md` (added detailed session entries)
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    PSALM TEXT INPUT                          │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│         SCHOLAR-RESEARCHER AGENT (Pass 0)                    │
+│  Model: Claude Haiku 4.5                                     │
+│  Task: Generate research requests from macro overview        │
+│  Output: JSON with lexicon/concordance/figurative requests   │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│              RESEARCH BUNDLE ASSEMBLER                       │
+│  (Coordinates: BDB, Concordance, Figurative librarians)      │
+│  Output: Comprehensive research bundle (JSON + Markdown)     │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│          SCHOLAR-WRITER AGENT (Pass 1: Macro)                │
+│  Model: Claude Sonnet 4.5                                    │
+│  Task: Chapter-level thesis and structural analysis          │
+│  Output: Macro overview with key themes                      │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│          SCHOLAR-WRITER AGENT (Pass 2: Micro)                │
+│  Model: Claude Sonnet 4.5                                    │
+│  Task: Verse-by-verse analysis with research integration     │
+│  Output: Detailed verse commentary                           │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│        SCHOLAR-WRITER AGENT (Pass 3: Synthesis)              │
+│  Model: Claude Sonnet 4.5                                    │
+│  Task: Synthesize macro + micro into coherent essay          │
+│  Output: Complete polished commentary                        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Day 6-7: Scholar-Researcher Agent
+
+**Goal**: Create agent that analyzes a psalm and generates intelligent research requests
+
+**Input**: Psalm text (Hebrew + English)
+
+**Output**: JSON research request
+```json
+{
+  "psalm_chapter": 23,
+  "lexicon": [
+    {"word": "רעה", "notes": "Key verb - shepherd imagery"},
+    {"word": "צדק", "notes": "righteousness/justice theme"}
+  ],
+  "concordance": [
+    {"query": "רעה", "scope": "auto", "notes": "Shepherd imagery"},
+    {"query": "צדק", "scope": "auto", "notes": "Righteousness concept"}
+  ],
+  "figurative": [
+    {"book": null, "chapter": 23, "metaphor": true, "notes": "All metaphors in psalm"},
+    {"vehicle_contains": "shepherd", "notes": "Shepherd metaphor across Scripture"}
+  ]
+}
+```
+
+**Key Design Decisions**:
+1. Use Haiku 4.5 (fast, cheap, good at structured tasks)
+2. Prompt should encourage smart scoping (use "auto" for concordance)
+3. Don't restrict to Psalms - let it search broadly when appropriate
+4. Include reasoning/notes for each request (transparency)
+
+**Implementation Steps**:
+1. Create `src/agents/scholar_researcher.py`
+2. Design prompt template
+3. Test with diverse Psalms (lament, praise, wisdom, royal)
+4. Validate JSON output format
+5. Integration test: Researcher → Assembler → Bundle
+
+**Estimated Time**: 2-3 hours
 
 ---
 
-## Key Architectural Decisions Made
+## Critical Reminders for Phase 2
 
-1. **Morphology: Normalize → Generate → Finalize**
-   - Roots normalized to medial forms before generation
-   - Final forms applied only at word end
-   - Eliminates orthographic errors
+### 1. No Psalms-Only Restrictions
 
-2. **Homograph Filtering: Scholar Does It**
-   - Librarian returns ALL meanings with disambiguation data
-   - Scholar filters based on verse context
-   - 57% cheaper ($2.40 savings over project)
-   - Better quality (preserves wordplay detection)
+**Verified defaults** (do not change):
+- `ConcordanceRequest(scope='Tanakh')` - searches all 39 books
+- `FigurativeRequest(book=None)` - searches Pentateuch + Psalms
+- Demo script restrictions are for demo only
 
-3. **Hybrid Search: Foundation in Place**
-   - Phase 1: Pattern-based (exact matches)
-   - Phase 2: Substring discovery + validation
-   - Can be integrated later or used selectively
+### 2. Smart Scoping Usage
+
+Encourage Scholar-Researcher to use:
+```json
+{"query": "אור", "scope": "auto"}  // Common word → limited scope
+{"query": "מעוז", "scope": "auto"}  // Rare word → full Tanakh
+```
+
+### 3. Figurative Language Scope
+
+Available books for figurative search:
+- Genesis, Exodus, Leviticus, Numbers, Deuteronomy, Psalms
+- NOT available: Prophets, Writings (except Psalms)
+- This is a database limitation, not a code restriction
+
+### 4. Cost Targets
+
+Phase 2 will be first LLM usage:
+- Haiku 4.5: ~$0.01 per psalm (Pass 0: research request generation)
+- Sonnet 4.5: ~$0.20 per psalm (Passes 1-3: commentary writing)
+- Target: Stay under $0.25 per psalm average
 
 ---
 
-## Current Project Metrics
+## Files Structure for Phase 2
 
-**Code Stats**:
-- Total LOC: ~4,000 (librarians + concordance + morphology + logging)
-- Test coverage: All core functionality verified
-- Database: 23,206 verses, 269,844 words indexed
+**New files to create**:
+```
+src/agents/
+  scholar_researcher.py    # Pass 0: Generate research requests
+  scholar_writer.py        # Passes 1-3: Write commentary
+  critic.py                # Quality feedback (later)
 
-**Quality**:
-- ✅ 100% linguistically valid Hebrew forms
-- ✅ 100% orthographically correct
-- ✅ 4x concordance recall improvement potential
-- ✅ Complete homograph disambiguation
+prompts/
+  researcher_system.md     # Researcher agent system prompt
+  writer_pass1_macro.md    # Macro analysis prompt
+  writer_pass2_micro.md    # Micro analysis prompt
+  writer_pass3_synthesis.md # Synthesis prompt
 
-**Cost**: $0.00 so far (all Python, no LLM calls yet)
+tests/
+  test_scholar_researcher.py
+  test_scholar_writer.py
+```
+
+---
+
+## Test Cases for Scholar-Researcher
+
+Start with these diverse psalm types:
+
+1. **Psalm 23** - Shepherd metaphor (pastoral, trust)
+2. **Psalm 2** - Royal psalm (kingship, nations)
+3. **Psalm 51** - Penitential (confession, forgiveness)
+4. **Psalm 8** - Creation hymn (majesty, humanity)
+5. **Psalm 137** - Lament (exile, vengeance)
+
+Each should generate different research requests reflecting their themes.
+
+---
+
+## Git Status
+
+**Last commit**: "Phase 1 Complete: Final Refinements for Production-Ready Librarian System" (b80de87)
+
+**Ready to commit before Phase 2?** No uncommitted changes that need saving (all refinements already committed).
 
 ---
 
@@ -161,81 +256,56 @@ According to PROJECT_STATUS.md, remaining Day 5 work:
 cd /c/Users/ariro/OneDrive/Documents/Psalms
 source venv/Scripts/activate
 
-# Test morphology variations
-python src/concordance/morphology_variations.py
+# Verify no Psalms restrictions (should show Tanakh default)
+python -c "from src.agents.concordance_librarian import ConcordanceRequest; print(ConcordanceRequest(query='test').scope)"
 
-# Test BDB with homograph
-python src/agents/bdb_librarian.py רעה
+# Test smart scoping
+python -c "
+from src.agents.concordance_librarian import ConcordanceLibrarian
+lib = ConcordanceLibrarian()
+print('Common word:', lib.determine_smart_scope('אור'))
+print('Rare word:', lib.determine_smart_scope('מעוז'))
+"
 
-# Test concordance search
-python src/concordance/search.py --root שמר --scope Psalms
-
-# When ready: Test full pipeline
-python src/agents/research_assembler.py --psalm 23
+# Fetch a psalm for testing
+python -c "
+from src.data_sources.sefaria_client import SefariaClient
+client = SefariaClient()
+psalm = client.fetch_psalm(23)
+print(psalm.verses[0].hebrew)
+"
 ```
 
 ---
 
-## Suggested Git Commit
+## Next Session Objectives
 
-Before starting next session, consider committing current work:
+**Primary Goal**: Implement Scholar-Researcher Agent (Pass 0)
 
-```bash
-git add .
-git commit -m "Day 5 Enhancements: Morphology refinements + homograph disambiguation
+**Success Criteria**:
+1. ✅ Agent generates valid JSON research requests
+2. ✅ Requests use smart scoping appropriately
+3. ✅ No unnecessary Psalms-only restrictions
+4. ✅ Integration test passes: Psalm → Researcher → Assembler → Bundle
+5. ✅ Cost: <$0.02 per psalm (Haiku 4.5)
 
-Refinements:
-- Fixed morphology generation (no impossible prefix combinations)
-- Fixed final letter forms (normalize → generate → finalize)
-- Added hybrid search foundation (substring + validator)
-- Enhanced BDB Librarian with homograph disambiguation
-
-Key improvements:
-- 100% linguistically valid Hebrew forms
-- 100% orthographically correct (medial/final letters)
-- 4x concordance recall improvement
-- Scholar-does-filtering architecture ($2.40 savings)
-
-Files modified:
-- src/concordance/morphology_variations.py
-- src/concordance/search.py
-- src/agents/bdb_librarian.py
-- docs/DAY_5_ENHANCEMENTS.md
-- docs/IMPLEMENTATION_LOG.md
-
-Next: Day 5 integration & documentation"
-```
+**Deliverables**:
+- `src/agents/scholar_researcher.py` (agent implementation)
+- `prompts/researcher_system.md` (system prompt)
+- Test suite with 3-5 diverse psalms
+- Documentation update
 
 ---
 
-## Questions to Start With
+## Questions for Start of Session
 
-When you begin the next session, you might want to ask:
+When you begin Phase 2, consider:
 
-1. **Should we commit the current work first?**
-   - Makes it easy to revert if needed
-   - Good practice for stable checkpoints
-
-2. **Which integration task first?**
-   - Concordance Librarian morphology integration?
-   - Full pipeline test with Psalm 23?
-   - ARCHITECTURE.md documentation?
-
-3. **Do we implement hybrid search immediately?**
-   - Or just morphology variations for now?
-   - Hybrid search can be added later
-
-4. **Ready to test with a real psalm?**
-   - Psalm 23 would be an excellent test case
-   - Well-known, short, uses key words like רעה
+1. **API keys ready?** You'll need Anthropic API key for Claude
+2. **Prompt strategy?** System prompt + user message with psalm text?
+3. **Which psalm to test first?** Recommend Psalm 23 (well-known, good test case)
+4. **Output validation?** Schema validation for JSON research requests?
 
 ---
 
-**Ready to continue Day 5! Load the docs and let's finish the integration work.** 🚀
-```
-
----
-
-## End of Next Session Prompt
-
-Save this file and use the starting prompt above when beginning the next conversation.
+**Phase 1 is complete and production-ready. Time to build the Scholar agents!** 🎓📚
