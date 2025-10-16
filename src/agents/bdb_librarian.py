@@ -8,9 +8,11 @@ The BDB Librarian provides:
 - Word definitions and etymologies
 - Semantic ranges and usage notes
 - Biblical Hebrew lexicography
+- Usage examples (biblical citations extracted from entries)
 """
 
 import sys
+import re
 from pathlib import Path
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
@@ -24,6 +26,52 @@ else:
     from ..data_sources.sefaria_client import SefariaClient
 
 
+# Biblical reference pattern for extracting citations from BDB entries
+# Matches patterns like: "Genesis 1:1", "Ps 119:105", "1 Samuel 15:29", "Isaiah 25:4"
+BIBLICAL_REFERENCE_PATTERN = re.compile(
+    r'\b([1-3]?\s?(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|'
+    r'Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Ps|Proverbs?|Pr|Ecclesiastes|Song|Isaiah|Is|'
+    r'Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|'
+    r'Zephaniah|Haggai|Zechariah|Malachi))\s+(\d+):(\d+)',
+    re.IGNORECASE
+)
+
+
+def extract_biblical_citations(text: str) -> List[str]:
+    """
+    Extract biblical citations from BDB entry text.
+
+    Args:
+        text: BDB entry text containing biblical references
+
+    Returns:
+        List of citation strings (e.g., ["Genesis 1:1", "Psalm 119:105"])
+
+    Example:
+        >>> extract_biblical_citations("appears in Genesis 1:1 and Psalms 23:1")
+        ['Genesis 1:1', 'Psalms 23:1']
+    """
+    matches = BIBLICAL_REFERENCE_PATTERN.findall(text)
+    citations = []
+
+    for match in matches:
+        book, chapter, verse = match
+        # Normalize book name
+        book = book.strip()
+        if book.lower() in ['ps', 'psalm']:
+            book = 'Psalms'
+        elif book.lower() in ['pr', 'proverb']:
+            book = 'Proverbs'
+        elif book.lower() == 'is':
+            book = 'Isaiah'
+
+        citation = f"{book} {chapter}:{verse}"
+        if citation not in citations:  # Avoid duplicates
+            citations.append(citation)
+
+    return citations
+
+
 @dataclass
 class LexiconEntry:
     """
@@ -34,6 +82,7 @@ class LexiconEntry:
     - headword: Vocalized form (e.g., רַע vs רָעָה)
     - strong_number: Unique identifier (e.g., 7451 vs 7462)
     - transliteration: Pronunciation guide (e.g., raʻ vs râʻâh)
+    - usage_examples: Biblical citations extracted from entry (e.g., ["Genesis 1:1", "Psalms 119:105"])
     """
     word: str
     lexicon_name: str
@@ -43,6 +92,7 @@ class LexiconEntry:
     headword: Optional[str] = None  # Vocalized form (רַע, רָעָה, etc.)
     strong_number: Optional[str] = None  # Strong's number (7451, 7462, etc.)
     transliteration: Optional[str] = None  # Pronunciation (raʻ, râʻâh, etc.)
+    usage_examples: Optional[List[str]] = None  # Biblical citations from entry
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -60,6 +110,8 @@ class LexiconEntry:
             result['transliteration'] = self.transliteration
         if self.url:
             result['url'] = self.url
+        if self.usage_examples:
+            result['usage_examples'] = self.usage_examples
         return result
 
 
@@ -143,6 +195,9 @@ class BDBLibrarian:
 
             # Convert SefariaClient.LexiconEntry to BDBLibrarian.LexiconEntry
             for sefaria_entry in sefaria_entries:
+                # Extract biblical citations from entry text
+                usage_examples = extract_biblical_citations(sefaria_entry.definition)
+
                 entry = LexiconEntry(
                     word=word,
                     lexicon_name=sefaria_entry.raw_data.get('parent_lexicon', 'Unknown'),
@@ -151,7 +206,9 @@ class BDBLibrarian:
                     # Add disambiguation metadata for homographs
                     headword=sefaria_entry.raw_data.get('headword'),
                     strong_number=sefaria_entry.raw_data.get('strong_number'),
-                    transliteration=sefaria_entry.raw_data.get('transliteration')
+                    transliteration=sefaria_entry.raw_data.get('transliteration'),
+                    # Add usage examples
+                    usage_examples=usage_examples if usage_examples else None
                 )
                 entries.append(entry)
 
@@ -286,6 +343,13 @@ def main():
                 print(f"   Pronunciation: {entry.transliteration}")
 
             print(f"   Definition: {entry.entry_text}")
+
+            # Show usage examples if found
+            if entry.usage_examples:
+                print(f"   Usage examples: {', '.join(entry.usage_examples[:5])}")
+                if len(entry.usage_examples) > 5:
+                    print(f"                   ... and {len(entry.usage_examples) - 5} more")
+
             if entry.url:
                 print(f"   URL: {entry.url}")
             print()

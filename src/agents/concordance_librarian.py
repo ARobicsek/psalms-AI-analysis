@@ -42,11 +42,12 @@ else:
 class ConcordanceRequest:
     """A request for concordance search."""
     query: str  # Hebrew word or phrase
-    scope: str = 'Tanakh'  # Psalms, Torah, Prophets, Writings, or Tanakh
+    scope: str = 'Tanakh'  # Psalms, Torah, Prophets, Writings, Tanakh, or 'auto'
     level: str = 'consonantal'  # exact, voweled, or consonantal
     include_variations: bool = True  # Auto-search phrase variations
     notes: Optional[str] = None  # Why this search is being requested
     max_results: int = 50  # Limit results per variation
+    auto_scope_threshold: int = 30  # If 'auto' scope: words with >N results get limited scope
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'ConcordanceRequest':
@@ -57,7 +58,8 @@ class ConcordanceRequest:
             level=data.get('level', 'consonantal'),
             include_variations=data.get('include_variations', True),
             notes=data.get('notes'),
-            max_results=data.get('max_results', 50)
+            max_results=data.get('max_results', 50),
+            auto_scope_threshold=data.get('auto_scope_threshold', 30)
         )
 
 
@@ -138,6 +140,50 @@ class ConcordanceLibrarian:
         """
         self.db = db or TanakhDatabase()
         self.search = ConcordanceSearch(self.db)
+
+    def determine_smart_scope(self, query: str, level: str = 'consonantal', threshold: int = 30) -> str:
+        """
+        Determine optimal search scope based on word frequency.
+
+        Common words (high frequency) → Limited scope: Genesis, Psalms, Proverbs
+        Rare words (low frequency) → Full scope: Entire Tanakh
+
+        Args:
+            query: Hebrew word or phrase
+            level: Normalization level
+            threshold: Frequency threshold (default: 30 occurrences)
+
+        Returns:
+            Recommended scope: 'Tanakh' or comma-separated book list
+
+        Example:
+            >>> determine_smart_scope("אור")  # "light" - very common
+            'Genesis,Psalms,Proverbs'
+            >>> determine_smart_scope("מעוז")  # "stronghold" - rare
+            'Tanakh'
+        """
+        # Quick frequency check in Tanakh
+        words = split_words(query)
+        if len(words) > 1:
+            # For phrases, check first word frequency
+            query = words[0]
+
+        # Search for word in entire Tanakh to get frequency
+        results = self.search.search_word(
+            word=query,
+            level=level,
+            scope='Tanakh',
+            limit=threshold + 1  # Just need to know if it exceeds threshold
+        )
+
+        frequency = len(results)
+
+        if frequency > threshold:
+            # Common word - limit to key books
+            return 'Genesis,Psalms,Proverbs'
+        else:
+            # Rare word - search entire Tanakh
+            return 'Tanakh'
 
     def generate_phrase_variations(self, phrase: str, level: str = 'consonantal') -> List[str]:
         """
@@ -230,6 +276,9 @@ class ConcordanceLibrarian:
         """
         Search concordance with automatic phrase variations.
 
+        Supports smart scoping: Set scope='auto' to automatically limit common words
+        to Genesis/Psalms/Proverbs while searching rare words across full Tanakh.
+
         Args:
             request: ConcordanceRequest specifying query and parameters
 
@@ -239,7 +288,7 @@ class ConcordanceLibrarian:
         Example:
             >>> req = ConcordanceRequest(
             ...     query="רעה",
-            ...     scope="Psalms",
+            ...     scope="auto",  # Smart scoping based on frequency
             ...     level="consonantal",
             ...     include_variations=True
             ... )
@@ -249,6 +298,15 @@ class ConcordanceLibrarian:
         """
         all_results = []
         variations_searched = []
+
+        # Determine actual scope (handle 'auto' smart scoping)
+        actual_scope = request.scope
+        if request.scope == 'auto':
+            actual_scope = self.determine_smart_scope(
+                request.query,
+                request.level,
+                request.auto_scope_threshold
+            )
 
         # Generate variations if requested
         if request.include_variations:
@@ -270,14 +328,14 @@ class ConcordanceLibrarian:
                 results = self.search.search_phrase(
                     phrase=query,
                     level=request.level,
-                    scope=request.scope
+                    scope=actual_scope  # Use actual_scope (may be auto-determined)
                 )
             else:
                 # Word search
                 results = self.search.search_word(
                     word=query,
                     level=request.level,
-                    scope=request.scope
+                    scope=actual_scope  # Use actual_scope (may be auto-determined)
                 )
 
             # Add results, deduplicating by verse reference

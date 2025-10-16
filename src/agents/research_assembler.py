@@ -114,8 +114,25 @@ class ResearchBundle:
             md += "## Hebrew Lexicon Entries (BDB)\n\n"
             for entry in self.lexicon_bundle.entries:
                 md += f"### {entry.word}\n"
-                md += f"**Lexicon**: {entry.lexicon_name}\n\n"
-                md += f"{entry.entry_text}\n\n"
+                md += f"**Lexicon**: {entry.lexicon_name}\n"
+
+                # Show disambiguation metadata
+                if entry.headword:
+                    md += f"**Vocalized**: {entry.headword}  \n"
+                if entry.strong_number:
+                    md += f"**Strong's**: {entry.strong_number}  \n"
+                if entry.transliteration:
+                    md += f"**Pronunciation**: {entry.transliteration}  \n"
+
+                md += f"\n{entry.entry_text}\n\n"
+
+                # Show usage examples if found
+                if entry.usage_examples:
+                    md += f"**Usage examples**: {', '.join(entry.usage_examples[:10])}  \n"
+                    if len(entry.usage_examples) > 10:
+                        md += f"*...and {len(entry.usage_examples) - 10} more*  \n"
+                    md += "\n"
+
                 if entry.url:
                     md += f"[View on Sefaria]({entry.url})\n\n"
                 md += "---\n\n"
@@ -172,9 +189,16 @@ class ResearchBundle:
                         types = ', '.join([t for t in ['simile', 'metaphor', 'personification', 'idiom', 'hyperbole', 'metonymy']
                                           if getattr(inst, f'is_{t}')])
                         md += f"**{inst.reference}** ({types})  \n"
-                        md += f"*Text*: {inst.figurative_text}  \n"
+                        md += f"*Figurative phrase*: {inst.figurative_text}  \n\n"
+
+                        # Include full verse context
+                        if inst.hebrew_text:
+                            md += f"**Full verse (Hebrew)**: {inst.hebrew_text}  \n"
+                        if inst.english_text:
+                            md += f"**Full verse (English)**: {inst.english_text}  \n\n"
+
                         if inst.figurative_text_hebrew:
-                            md += f"*Hebrew*: {inst.figurative_text_hebrew}  \n"
+                            md += f"*Hebrew phrase*: {inst.figurative_text_hebrew}  \n"
                         md += f"*Explanation*: {inst.explanation[:200]}...  \n"
 
                         if inst.target:

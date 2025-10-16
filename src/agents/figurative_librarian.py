@@ -326,21 +326,22 @@ class FigurativeLibrarian:
             query += " AND (" + " OR ".join(type_conditions) + ")"
 
         # Hierarchical metadata filters (use LIKE to match within JSON array)
+        # Now supports case-insensitive partial matching for flexibility
         if request.target_contains:
-            query += " AND f.target LIKE ?"
-            params.append(f'%"{request.target_contains}"%')
+            query += " AND (f.target LIKE ? COLLATE NOCASE)"
+            params.append(f'%{request.target_contains}%')
 
         if request.vehicle_contains:
-            query += " AND f.vehicle LIKE ?"
-            params.append(f'%"{request.vehicle_contains}"%')
+            query += " AND (f.vehicle LIKE ? COLLATE NOCASE)"
+            params.append(f'%{request.vehicle_contains}%')
 
         if request.ground_contains:
-            query += " AND f.ground LIKE ?"
-            params.append(f'%"{request.ground_contains}"%')
+            query += " AND (f.ground LIKE ? COLLATE NOCASE)"
+            params.append(f'%{request.ground_contains}%')
 
         if request.posture_contains:
-            query += " AND f.posture LIKE ?"
-            params.append(f'%"{request.posture_contains}"%')
+            query += " AND (f.posture LIKE ? COLLATE NOCASE)"
+            params.append(f'%{request.posture_contains}%')
 
         # Text search in figurative_text or explanation
         if request.text_search:
