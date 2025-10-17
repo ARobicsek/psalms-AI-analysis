@@ -26,6 +26,7 @@ class RAGContext:
     analytical_framework: str = ""
     psalm_function: Optional[Dict[str, Any]] = None
     ugaritic_parallels: List[Dict[str, Any]] = None
+    lxx_text: Optional[str] = None  # Septuagint (Greek) translation
 
     def __post_init__(self):
         if self.ugaritic_parallels is None:
@@ -189,12 +190,28 @@ class RAGManager:
         Returns:
             RAGContext object with all relevant documents
         """
+        # Fetch LXX text (Septuagint Greek translation)
+        from ..data_sources.sefaria_client import SefariaClient
+        sefaria = SefariaClient()
+
+        lxx_verses = sefaria.fetch_lxx_psalm(psalm_number)
+
+        # If verse_number specified, get that verse only
+        if verse_number and lxx_verses and verse_number <= len(lxx_verses):
+            lxx_text = f"v{verse_number}: {lxx_verses[verse_number - 1]}"
+        elif lxx_verses:
+            # Full psalm - format as multi-line with verse numbers
+            lxx_text = "\n".join([f"v{i}: {v}" for i, v in enumerate(lxx_verses, 1) if v])
+        else:
+            lxx_text = None
+
         context = RAGContext(
             psalm_number=psalm_number,
             verse_number=verse_number,
             analytical_framework=self.load_analytical_framework(),
             psalm_function=self.get_psalm_function(psalm_number),
-            ugaritic_parallels=self.get_ugaritic_parallels(psalm_number, verse_number)
+            ugaritic_parallels=self.get_ugaritic_parallels(psalm_number, verse_number),
+            lxx_text=lxx_text
         )
 
         return context
@@ -222,7 +239,13 @@ class RAGManager:
                 sections.append(f"  - {line}")
             sections.append(f"\nKeywords: {', '.join(pf['keywords'])}")
 
-        # Section 2: Ugaritic Parallels (if any)
+        # Section 2: LXX Translation (Septuagint)
+        if context.lxx_text:
+            sections.append("\n## LXX (SEPTUAGINT - GREEK TRANSLATION)")
+            sections.append("Ancient Greek translation (3rd-2nd century BCE) showing early interpretive tradition:")
+            sections.append(context.lxx_text)
+
+        # Section 3: Ugaritic Parallels (if any)
         if context.ugaritic_parallels:
             sections.append("\n## UGARITIC & ANCIENT NEAR EASTERN PARALLELS")
             for i, parallel in enumerate(context.ugaritic_parallels, 1):
@@ -245,7 +268,7 @@ class RAGManager:
                 sections.append(f"\nLinguistic Analysis:\n{parallel.get('linguistic_analysis')}")
                 sections.append(f"\nConceptual Analysis:\n{parallel.get('conceptual_analysis')}")
 
-        # Section 3: Analytical Framework (optional, can be large)
+        # Section 4: Analytical Framework (optional, can be large)
         if include_framework:
             sections.append("\n## ANALYTICAL FRAMEWORK FOR BIBLICAL POETRY")
             sections.append(context.analytical_framework)

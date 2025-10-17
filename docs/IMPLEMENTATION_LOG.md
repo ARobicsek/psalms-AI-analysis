@@ -3719,3 +3719,189 @@ This makes serialization painless and consistent.
 MacroAnalyst agent successfully implemented and tested. Excellent results with Psalm 29. Architecture refined to 5-pass system with LXX integration planned. Ready for Phase 3b.
 
 ---
+## Session 4: Phase 3b - MicroAnalyst v2 Redesign (2025-10-17)
+
+**Duration**: ~3 hours
+**Focus**: LXX Integration + Complete MicroAnalyst Redesign
+
+### What Was Built
+
+#### 1. LXX (Septuagint) Integration ✅
+**Files Modified**: `src/agents/rag_manager.py`
+
+- Added `lxx_text` field to RAGContext dataclass
+- Updated `get_rag_context()` to fetch Greek Septuagint from Bolls.life API
+- Updated `format_for_prompt()` to include LXX section with context
+- Tested successfully: Psalm 29 loads 11 verses of Greek translation
+- LXX now auto-available to all agents in pipeline
+
+**Why LXX Matters**:
+- Shows how ancient translators (3rd-2nd century BCE) interpreted ambiguous Hebrew
+- Provides early interpretive tradition
+- Illuminates difficult passages through Greek word choices
+
+#### 2. MicroAnalyst v2 - Complete Redesign ✅
+**Files Created**: `src/agents/micro_analyst_v2.py` (~535 LOC)
+
+**NEW PHILOSOPHY** (user-requested redesign):
+- **CURIOSITY-DRIVEN** rather than thesis-driven
+- Focus on what's INTERESTING, PUZZLING, SURPRISING in the text
+- Don't force everything to support macro thesis (thesis may be wrong!)
+- Look for linguistic puzzles, poetic cleverness, theological depth
+
+**THREE-STAGE ARCHITECTURE**:
+
+**Stage 1: Quick Verse-by-Verse Discovery Pass**
+- Read each verse with fresh eyes
+- Notice patterns, surprises, puzzles, curious word choices
+- Identify figurative language and poetic devices
+- Keep macro thesis in peripheral vision only
+- Output: Discoveries for each verse
+
+**Stage 2: Generate Research Requests**
+- Based ONLY on discoveries from Stage 1
+- Request BDB lexicon for curious/significant words
+- Request concordances for interesting patterns
+- Request figurative analysis for metaphorical verses
+- Request commentary for interpretive puzzles
+- Output: Targeted research requests (20-40 BDB, 5-10 concordances, etc.)
+
+**Stage 3: Assemble Research Bundle**
+- Call Research Assembler with requests
+- Return discoveries + comprehensive research
+- Output: MicroAnalysis (lightweight discovery notes) + ResearchBundle (heavy research data)
+
+**KEY DESIGN CHANGE**:
+- MicroAnalyst NO LONGER does heavy verse-by-verse analysis
+- It only does DISCOVERY and RESEARCH REQUEST generation
+- The heavy analysis work moves to **SynthesisWriter (Pass 3)**
+- This allows SynthesisWriter to decide what to focus on, potentially challenge the thesis, etc.
+
+#### 3. Comprehensive Input Logging ✅
+**Feature**: All agents now log what they receive
+
+Example log output:
+```
+INPUTS RECEIVED:
+  Psalm Number: 29
+  Macro Thesis: Psalm 29 functions as a liturgical polemic...
+  Structural Divisions: 3
+  Poetic Devices: 6
+  Research Questions: 5
+  Psalm Verses: 11
+  RAG Genre: Hymn of Praise
+  Ugaritic Parallels: 4
+  LXX Available: Yes ✓
+  LXX Verses: 11 ✓
+```
+
+This transparency makes debugging easier and confirms data flow.
+
+#### 4. Output Documentation ✅
+**Files Created**:
+- `output/phase3_test/psalm_029_micro_v2.md` - Discovery notes (human-readable)
+- `output/phase3_test/psalm_029_micro_v2.json` - Structured data
+- `output/phase3_test/psalm_029_research_v2.md` - Research bundle
+- `output/phase3_test/psalm_029_research_requests.md` - Detailed request log with reasons
+
+### Test Results (Psalm 29)
+
+**Performance**:
+- Stage 1 (Discovery): ~90 seconds
+- Stage 2 (Research Requests): ~45 seconds
+- Stage 3 (Research Assembly): ~30 seconds
+- **Total**: ~2.5 minutes
+- **Cost**: ~$0.10 (two Sonnet 4.5 calls with extended thinking)
+
+**Research Generated**:
+- 31 BDB lexicon requests (focused on curious words)
+- 7 concordance searches (strategic patterns)
+- 11 figurative language checks (all metaphorical verses)
+- 4 commentary requests (interpretive puzzles)
+- **Assembled**: 113 lexicon entries, 11 concordance results, 5 figurative instances, 23 commentaries
+
+**Quality Observations**:
+- Discoveries show genuine curiosity (not confirmation bias)
+- Noticed surprising details: "mountains skipping like calves", rare mabbûl term
+- Flagged real puzzles: divine council language, birth imagery for wilderness
+- Research requests well-justified with reasons
+
+### Issues Encountered
+
+#### Issue 1: Original MicroAnalyst Too Thesis-Focused
+**Problem**: First version tried to analyze all verses AND prove macro thesis simultaneously
+**User Feedback**: "Don't be overly prescriptive trying to support the thesis - the thesis may be wrong!"
+**Solution**: Complete redesign - MicroAnalyst now discovers, SynthesisWriter analyzes
+
+#### Issue 2: PsalmText Dataclass vs Dict
+**Problem**: `get_psalm()` returns PsalmText object but code treated it as dict
+**Solution**: Changed `psalm['verses']` to `psalm.verses` throughout
+
+#### Issue 3: Invalid Concordance Level
+**Problem**: Sonnet generated "root" level but only "consonantal/voweled/exact/lemma" valid
+**Solution**: Updated prompt to explicitly list valid levels
+
+#### Issue 4: Test Output Timeouts
+**Problem**: Old v1 tests timing out after 5 minutes (too much analysis in one pass)
+**Solution**: v2 architecture completes in ~2.5 minutes (lighter per-stage work)
+
+### Architecture Decisions
+
+#### Decision 1: Discovery Before Research
+**Rationale**: Can't know what to research until you see what's actually interesting
+**Implementation**: Stage 1 → Stage 2 dependency enforced in code
+
+#### Decision 2: Minimal MicroAnalysis Output
+**Rationale**: Pass comprehensive data forward; let SynthesisWriter do heavy lifting
+**Implementation**: MicroAnalysis stores discoveries (not full analysis)
+
+#### Decision 3: Research Request Transparency
+**Rationale**: User wants to see WHY each research request was made
+**Implementation**: Created separate `psalm_029_research_requests.md` with reasons
+
+### File Changes Summary
+
+**New Files**:
+- `src/agents/micro_analyst_v2.py` (535 LOC)
+- `output/phase3_test/psalm_029_research_requests.md`
+
+**Modified Files**:
+- `src/agents/rag_manager.py` - Added LXX integration
+- `src/agents/micro_analyst.py` - Fixed PsalmText issues (deprecated in favor of v2)
+
+**Deprecated**:
+- `src/agents/micro_analyst.py` (v1) - Replaced by v2 architecture
+
+### Performance Metrics
+
+**MicroAnalyst v2 (Psalm 29)**:
+- Input tokens: ~15K (psalm + macro + RAG + LXX)
+- Output tokens (Stage 1): ~2K (discoveries JSON)
+- Output tokens (Stage 2): ~1K (research requests JSON)
+- Thinking tokens: ~420 (Stage 1), ~200 (Stage 2)
+- Processing time: ~2.5 minutes total
+- Cost: ~$0.10 per psalm
+- Quality: Excellent - genuine curiosity-driven discoveries ✅
+
+**LXX Integration**:
+- Adds ~1K tokens per psalm (Greek text)
+- Minimal cost increase (~$0.01)
+- High value: early interpretive tradition
+
+### Session End
+
+**Status**: Phase 3b COMPLETE ✅
+
+**Deliverables**:
+- LXX integration working across all agents
+- MicroAnalyst v2 with curiosity-driven discovery architecture
+- Comprehensive logging of agent inputs
+- Clear output documentation structure
+- Successful test run with Psalm 29
+
+**Code Stats**:
+- micro_analyst_v2.py: 535 LOC
+- rag_manager.py: +30 LOC (LXX integration)
+- Total new/modified: ~565 LOC
+
+**Ready for**: Phase 3c (SynthesisWriter agent)

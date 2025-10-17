@@ -1,0 +1,572 @@
+"""
+MicroAnalyst Agent v2 - Pass 2 of Five-Pass Scholar-Writer Architecture
+
+REDESIGNED PHILOSOPHY (2025-10-17):
+- CURIOSITY-DRIVEN rather than thesis-driven
+- DISCOVERY MODE: Find what's interesting, puzzling, surprising
+- Quick verse-by-verse FIRST PASS to identify research opportunities
+- Smart research requests based on actual discoveries
+- MINIMAL ANALYSIS: Pass comprehensive research forward to SynthesisWriter
+
+THREE-STAGE PROCESS:
+Stage 1: Quick Verse-by-Verse Discovery Pass
+    - Read each verse with fresh eyes
+    - Notice patterns, surprises, puzzles, curious word choices
+    - Identify verses with figurative language
+    - Note interesting poetic devices
+    - Keep macro thesis in peripheral vision (not central focus)
+    - Log observations for each verse
+
+Stage 2: Generate Research Requests
+    - Based on discoveries from Stage 1
+    - Request lexicon entries for curious/important words
+    - Request concordances for interesting patterns
+    - Request figurative analysis for metaphorical verses
+    - Request commentary for puzzling/complex verses
+
+Stage 3: Assemble Research Bundle
+    - Call Research Assembler with requests
+    - Return MicroAnalysis (discovery notes) + ResearchBundle
+
+Model: Claude Sonnet 4.5 with extended thinking
+Input: MacroAnalysis + Psalm text (Hebrew/English/LXX) + RAG context
+Output: MicroAnalysis (discovery notes) + ResearchBundle
+
+Author: Claude (Anthropic)
+Date: 2025-10-17 (Phase 3b redesign)
+"""
+
+import sys
+import os
+import json
+from pathlib import Path
+from typing import Tuple, Optional
+import anthropic
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Handle imports for both module and script usage
+if __name__ == '__main__':
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+    from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary
+    from src.agents.rag_manager import RAGManager
+    from src.agents.research_assembler import ResearchAssembler, ResearchRequest, ResearchBundle
+    from src.agents.scholar_researcher import ScholarResearchRequest
+    from src.data_sources.tanakh_database import TanakhDatabase
+    from src.utils.logger import get_logger
+else:
+    from ..schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary
+    from .rag_manager import RAGManager
+    from .research_assembler import ResearchAssembler, ResearchRequest, ResearchBundle
+    from .scholar_researcher import ScholarResearchRequest
+    from ..data_sources.tanakh_database import TanakhDatabase
+    from ..utils.logger import get_logger
+
+
+# Stage 1: Quick Discovery Pass Prompt
+DISCOVERY_PASS_PROMPT = """You are conducting a QUICK DISCOVERY PASS of Psalm {psalm_number}.
+
+Your goal: Find what's INTERESTING, CURIOUS, PUZZLING, or SURPRISING in each verse.
+
+MACRO CONTEXT (for peripheral awareness - NOT your primary focus):
+
+{macro_analysis}
+
+---
+
+PSALM TEXT (Hebrew, English, LXX Greek):
+
+{psalm_text_with_lxx}
+
+---
+
+RAG SCHOLARLY CONTEXT:
+
+{rag_context}
+
+---
+
+DISCOVERY TASK:
+
+Read through each verse with FRESH EYES. For each verse, note:
+
+1. **Curious Word Choices**: Rare words? Unexpected vocabulary? Interesting verbs/nouns?
+2. **Poetic Patterns**: Parallelism? Wordplay? Sound patterns? Repetition?
+3. **Figurative Language**: Metaphors? Similes? Personification? What images are used?
+4. **Puzzles/Conundrums**: Ambiguous phrasing? Interpretive challenges? Strange syntax?
+5. **Surprises**: Anything unexpected given the genre/context?
+6. **LXX Insights**: How did ancient Greek translators interpret the Hebrew? Any revealing choices?
+7. **Connections**: Does this verse relate to macro thesis? If so, how? If NOT, what else is interesting?
+
+IMPORTANT PRINCIPLES:
+- Be CURIOUS, not confirmatory
+- Notice what's ACTUALLY in the text, not what you expect
+- The macro thesis may be WRONG or incomplete - find what's genuinely interesting
+- Look for LINGUISTIC puzzles, poetic cleverness, theological depth
+- Don't force everything to "support the thesis" - find intrinsic interest
+
+OUTPUT FORMAT: Return ONLY valid JSON:
+
+{{
+  "verse_discoveries": [
+    {{
+      "verse_number": 1,
+      "observations": "Quick summary of what's interesting/curious in this verse (2-4 sentences). Focus on discoveries, not analysis.",
+      "curious_words": ["קוֹל", "בְּנֵי אֵלִים"],  // Hebrew words worth investigating
+      "poetic_features": ["anaphora setup", "divine council imagery"],
+      "figurative_elements": ["sons of gods - metaphor or literal?"],
+      "puzzles": ["Why 'sons of gods' (plural) in monotheistic psalm?"],
+      "lxx_insights": "LXX uses 'υἱοὶ θεοῦ' - shows early plural divine beings interpretation",
+      "macro_relation": "Supports divine council framework from thesis" // OR "Interesting independent of thesis: ..."
+    }},
+    {{
+      "verse_number": 2,
+      "observations": "...",
+      ...
+    }},
+    ... (all {verse_count} verses)
+  ],
+  "overall_patterns": [
+    "Sevenfold 'voice of LORD' anaphora - completeness symbolism worth exploring",
+    "Geographic progression (waters → Lebanon → wilderness → temple) - cosmological journey?",
+    "Shift from imperative (vv.1-2) to descriptive (vv.3-9) to blessing (vv.10-11) - rhetorical strategy"
+  ],
+  "research_priorities": [
+    "LEXICON: Focus on storm vocabulary, divine epithets, rare geographical terms",
+    "CONCORDANCE: Track 'voice of LORD' formula, divine council language, geographic patterns",
+    "FIGURATIVE: All verses with water/storm/nature imagery",
+    "COMMENTARY: Verses with interpretive puzzles (e.g., mabbul, divine council)"
+  ]
+}}
+
+Return ONLY the JSON object, no additional text.
+"""
+
+
+# Stage 2: Research Request Generation Prompt
+RESEARCH_REQUEST_PROMPT = """Based on your verse-by-verse discoveries, generate targeted research requests.
+
+DISCOVERIES FROM STAGE 1:
+
+{discoveries}
+
+---
+
+GENERATE RESEARCH REQUESTS:
+
+1. **BDB LEXICON** - Hebrew words worth deep investigation
+   - Curious/rare words from discoveries
+   - Theologically rich terms
+   - Words with ambiguous meanings
+   - Key verbs and nouns central to verses
+   - 20-40 requests expected
+
+2. **CONCORDANCE SEARCHES** - Patterns to trace across Scripture
+   - Repeated phrases from discoveries
+   - Thematic roots identified
+   - VALID LEVELS: "consonantal" (all root forms), "voweled" (distinguish homographs), "exact" (specific vocalization), "lemma" (lexical form)
+   - 5-10 strategic searches
+
+3. **FIGURATIVE LANGUAGE** - Verses with metaphor/imagery
+   - All verses flagged in discoveries
+   - Specify vehicle (main image) and synonyms
+
+4. **COMMENTARY** - Verses with interpretive puzzles
+   - Complex/ambiguous verses from discoveries
+   - 3-6 key verses
+
+OUTPUT FORMAT: Return ONLY valid JSON:
+
+{{
+  "bdb_requests": [
+    {{"word": "קוֹל", "reason": "Central to sevenfold anaphora - need semantic range and theological uses"}},
+    {{"word": "בְּנֵי אֵלִים", "reason": "Divine council puzzle - etymology and comparative ANE usage"}},
+    ... (20-40 requests)
+  ],
+  "concordance_searches": [
+    {{"query": "קוֹל יְהוָה", "level": "exact", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns"}},
+    {{"query": "בני אלים", "level": "exact", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible"}},
+    ... (5-10 searches)
+  ],
+  "figurative_checks": [
+    {{"verse": 3, "likely_type": "metaphor", "reason": "Waters as primordial chaos imagery", "vehicle": "waters", "vehicle_synonyms": ["sea", "deep", "flood", "ocean"]}},
+    {{"verse": 5, "likely_type": "personification", "reason": "Voice 'breaking' cedars - storm force personified", "vehicle": "breaking", "vehicle_synonyms": ["shatter", "split", "fracture"]}},
+    ... (all figurative verses)
+  ],
+  "commentary_requests": [
+    {{"verse": 1, "reason": "Divine council interpretation - how do traditional commentators handle 'sons of gods'?"}},
+    {{"verse": 10, "reason": "Mabbul (flood) term - rare word needing classical commentary context"}},
+    ... (3-6 key verses)
+  ]
+}}
+
+Return ONLY the JSON object, no additional text.
+"""
+
+
+class MicroAnalystV2:
+    """
+    MicroAnalyst Agent v2 - Curiosity-driven discovery and research.
+
+    Three stages:
+    1. Quick verse-by-verse discovery pass
+    2. Generate research requests based on discoveries
+    3. Assemble research bundle
+    """
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        db_path: str = "data/tanakh.db",
+        docs_dir: str = "docs",
+        logger=None
+    ):
+        """Initialize MicroAnalyst v2 agent."""
+        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+        if not self.api_key:
+            raise ValueError("Anthropic API key required")
+
+        self.client = anthropic.Anthropic(api_key=self.api_key)
+        self.model = "claude-sonnet-4-20250514"  # Sonnet 4.5
+        self.rag_manager = RAGManager(docs_dir)
+        self.db = TanakhDatabase(Path(db_path))
+        self.research_assembler = ResearchAssembler()
+        self.logger = logger or get_logger("micro_analyst_v2")
+
+    def analyze_psalm(
+        self,
+        psalm_number: int,
+        macro_analysis: MacroAnalysis
+    ) -> Tuple[MicroAnalysis, ResearchBundle]:
+        """
+        Perform three-stage micro analysis.
+
+        Args:
+            psalm_number: Psalm number (1-150)
+            macro_analysis: MacroAnalysis object from Pass 1
+
+        Returns:
+            Tuple of (MicroAnalysis with discoveries, ResearchBundle)
+        """
+        self.logger.info(f"=" * 80)
+        self.logger.info(f"MICROANALYST V2: Psalm {psalm_number}")
+        self.logger.info(f"=" * 80)
+
+        # Log what we're receiving
+        self._log_inputs(psalm_number, macro_analysis)
+
+        # Stage 1: Quick discovery pass
+        self.logger.info("\n[STAGE 1] Quick Verse-by-Verse Discovery Pass")
+        discoveries = self._discovery_pass(psalm_number, macro_analysis)
+        self._log_discoveries(discoveries)
+
+        # Stage 2: Generate research requests
+        self.logger.info("\n[STAGE 2] Generating Research Requests from Discoveries")
+        research_request = self._generate_research_requests(discoveries, psalm_number)
+        self._log_research_requests(research_request)
+
+        # Stage 3: Assemble research bundle
+        self.logger.info("\n[STAGE 3] Assembling Research Bundle")
+        research_bundle = self.research_assembler.assemble(research_request)
+        self._log_research_bundle(research_bundle)
+
+        # Create MicroAnalysis from discoveries
+        micro_analysis = self._create_micro_analysis(psalm_number, discoveries)
+
+        self.logger.info(f"\n{'=' * 80}")
+        self.logger.info(f"MICROANALYST V2 COMPLETE")
+        self.logger.info(f"{'=' * 80}\n")
+
+        return micro_analysis, research_bundle
+
+    def _log_inputs(self, psalm_number: int, macro_analysis: MacroAnalysis):
+        """Log comprehensive input information."""
+        self.logger.info("\nINPUTS RECEIVED:")
+        self.logger.info(f"  Psalm Number: {psalm_number}")
+        self.logger.info(f"  Macro Thesis: {macro_analysis.thesis_statement[:100]}...")
+        self.logger.info(f"  Structural Divisions: {len(macro_analysis.structural_outline)}")
+        self.logger.info(f"  Poetic Devices: {len(macro_analysis.poetic_devices)}")
+        self.logger.info(f"  Research Questions: {len(macro_analysis.research_questions)}")
+
+        # Check psalm text availability
+        psalm = self.db.get_psalm(psalm_number)
+        self.logger.info(f"  Psalm Verses: {len(psalm.verses)}")
+
+        # Check RAG/LXX availability
+        rag_context = self.rag_manager.get_rag_context(psalm_number)
+        self.logger.info(f"  RAG Genre: {rag_context.psalm_function['genre'] if rag_context.psalm_function else 'N/A'}")
+        self.logger.info(f"  Ugaritic Parallels: {len(rag_context.ugaritic_parallels)}")
+        self.logger.info(f"  LXX Available: {'Yes' if rag_context.lxx_text else 'No'}")
+        if rag_context.lxx_text:
+            lxx_verses = rag_context.lxx_text.count('\n') + 1
+            self.logger.info(f"  LXX Verses: {lxx_verses}")
+
+    def _discovery_pass(
+        self,
+        psalm_number: int,
+        macro_analysis: MacroAnalysis
+    ) -> dict:
+        """Stage 1: Quick discovery pass through all verses."""
+        # Fetch psalm with LXX
+        psalm = self.db.get_psalm(psalm_number)
+        if not psalm:
+            raise ValueError(f"Psalm {psalm_number} not found in database")
+
+        # Get RAG context
+        rag_context = self.rag_manager.get_rag_context(psalm_number)
+
+        # Format inputs
+        psalm_text_with_lxx = self._format_psalm_with_lxx(psalm, rag_context)
+        rag_formatted = self.rag_manager.format_for_prompt(rag_context, include_framework=False)
+        verse_count = len(psalm.verses)
+
+        # Build prompt
+        prompt = DISCOVERY_PASS_PROMPT.format(
+            psalm_number=psalm_number,
+            macro_analysis=macro_analysis.to_markdown(),
+            psalm_text_with_lxx=psalm_text_with_lxx,
+            rag_context=rag_formatted,
+            verse_count=verse_count
+        )
+
+        # Call Sonnet 4.5
+        self.logger.info("  Calling Sonnet 4.5 with extended thinking...")
+        try:
+            response = self.client.messages.create(
+                model=self.model,
+                max_tokens=8192,
+                thinking={
+                    "type": "enabled",
+                    "budget_tokens": 5000
+                },
+                messages=[{
+                    "role": "user",
+                    "content": prompt
+                }]
+            )
+
+            # Extract and parse JSON
+            response_text = self._extract_json_from_response(response)
+            discoveries = json.loads(response_text)
+
+            self.logger.info(f"  ✓ Discovery pass complete")
+            return discoveries
+
+        except json.JSONDecodeError as e:
+            self.logger.error(f"Failed to parse discovery JSON: {e}")
+            raise ValueError(f"Invalid JSON from discovery pass: {e}")
+        except Exception as e:
+            self.logger.error(f"Error in discovery pass: {e}")
+            raise
+
+    def _generate_research_requests(
+        self,
+        discoveries: dict,
+        psalm_number: int
+    ) -> ResearchRequest:
+        """Stage 2: Generate research requests from discoveries."""
+        # Build prompt
+        prompt = RESEARCH_REQUEST_PROMPT.format(
+            discoveries=json.dumps(discoveries, ensure_ascii=False, indent=2)
+        )
+
+        # Call Sonnet 4.5
+        self.logger.info("  Calling Sonnet 4.5 for research request generation...")
+        try:
+            response = self.client.messages.create(
+                model=self.model,
+                max_tokens=4096,
+                thinking={
+                    "type": "enabled",
+                    "budget_tokens": 3000
+                },
+                messages=[{
+                    "role": "user",
+                    "content": prompt
+                }]
+            )
+
+            # Extract and parse JSON
+            response_text = self._extract_json_from_response(response)
+            data = json.loads(response_text)
+
+            # Convert to ResearchRequest via ScholarResearchRequest
+            scholar_request = ScholarResearchRequest.from_dict(data)
+            request_dict = scholar_request.to_research_request(psalm_number)
+            research_request = ResearchRequest.from_dict(request_dict)
+
+            self.logger.info(f"  ✓ Research requests generated")
+            return research_request
+
+        except json.JSONDecodeError as e:
+            self.logger.error(f"Failed to parse research request JSON: {e}")
+            raise ValueError(f"Invalid JSON from research generation: {e}")
+        except Exception as e:
+            self.logger.error(f"Error generating research requests: {e}")
+            raise
+
+    def _create_micro_analysis(
+        self,
+        psalm_number: int,
+        discoveries: dict
+    ) -> MicroAnalysis:
+        """Create MicroAnalysis object from discoveries."""
+        # Convert discoveries to VerseCommentary objects
+        verse_commentaries = []
+        for disc in discoveries.get('verse_discoveries', []):
+            vc = VerseCommentary(
+                verse_number=disc['verse_number'],
+                commentary=disc.get('observations', ''),
+                lexical_insights=disc.get('curious_words', []),
+                figurative_analysis=disc.get('figurative_elements', []),
+                thesis_connection=disc.get('macro_relation', '')
+            )
+            verse_commentaries.append(vc)
+
+        # Create MicroAnalysis
+        micro = MicroAnalysis(
+            psalm_number=psalm_number,
+            verse_commentaries=verse_commentaries,
+            thematic_threads=discoveries.get('overall_patterns', []),
+            synthesis_notes="\n".join(discoveries.get('research_priorities', []))
+        )
+
+        return micro
+
+    def _log_discoveries(self, discoveries: dict):
+        """Log discovery pass results."""
+        self.logger.info(f"\n  DISCOVERIES:")
+        verse_discoveries = discoveries.get('verse_discoveries', [])
+        self.logger.info(f"    Verses analyzed: {len(verse_discoveries)}")
+
+        # Sample first verse
+        if verse_discoveries:
+            v1 = verse_discoveries[0]
+            self.logger.info(f"\n    Sample (v{v1['verse_number']}):")
+            self.logger.info(f"      Observations: {v1.get('observations', '')[:80]}...")
+            self.logger.info(f"      Curious words: {len(v1.get('curious_words', []))}")
+            self.logger.info(f"      Poetic features: {len(v1.get('poetic_features', []))}")
+
+        overall_patterns = discoveries.get('overall_patterns', [])
+        self.logger.info(f"\n    Overall patterns identified: {len(overall_patterns)}")
+        for pattern in overall_patterns[:2]:
+            self.logger.info(f"      - {pattern[:80]}...")
+
+    def _log_research_requests(self, request: ResearchRequest):
+        """Log research request summary."""
+        self.logger.info(f"\n  RESEARCH REQUESTS:")
+        self.logger.info(f"    BDB lexicon: {len(request.lexicon_requests)}")
+        self.logger.info(f"    Concordance: {len(request.concordance_requests)}")
+        self.logger.info(f"    Figurative: {len(request.figurative_requests)}")
+        self.logger.info(f"    Commentary: {len(request.commentary_requests or [])}")
+
+    def _log_research_bundle(self, bundle: ResearchBundle):
+        """Log research bundle assembly results."""
+        summary = bundle.to_dict()['summary']
+        self.logger.info(f"\n  RESEARCH BUNDLE ASSEMBLED:")
+        self.logger.info(f"    Lexicon entries: {summary['lexicon_entries']}")
+        self.logger.info(f"    Concordance results: {summary['concordance_results']}")
+        self.logger.info(f"    Figurative instances: {summary['figurative_instances']}")
+        self.logger.info(f"    Commentary entries: {summary['commentary_entries']}")
+
+    def _extract_json_from_response(self, response) -> str:
+        """Extract JSON from Anthropic API response."""
+        for block in response.content:
+            if block.type == "text":
+                return block.text.strip()
+        raise ValueError("No text content found in response")
+
+    def _format_psalm_with_lxx(self, psalm, rag_context) -> str:
+        """Format psalm text with LXX translation."""
+        lines = [f"Psalm {psalm.chapter}\n"]
+
+        # Parse LXX verses
+        lxx_verses = {}
+        if rag_context and rag_context.lxx_text:
+            for line in rag_context.lxx_text.split('\n'):
+                if line.startswith('v'):
+                    parts = line.split(':', 1)
+                    if len(parts) == 2:
+                        verse_num = int(parts[0][1:])
+                        lxx_verses[verse_num] = parts[1].strip()
+
+        for verse in psalm.verses:
+            v_num = verse.verse
+            lines.append(f"v{v_num}")
+            lines.append(f"  Hebrew: {verse.hebrew}")
+            lines.append(f"  English: {verse.english}")
+            if v_num in lxx_verses:
+                lines.append(f"  LXX (Greek): {lxx_verses[v_num]}")
+            lines.append("")
+
+        return "\n".join(lines)
+
+
+def main():
+    """CLI for MicroAnalyst v2."""
+    import argparse
+
+    if sys.platform == 'win32':
+        sys.stdout.reconfigure(encoding='utf-8')
+
+    parser = argparse.ArgumentParser(description='MicroAnalyst v2: Discovery-driven analysis')
+    parser.add_argument('psalm_number', type=int, help='Psalm number (1-150)')
+    parser.add_argument('macro_analysis_file', type=str, help='Path to MacroAnalysis JSON')
+    parser.add_argument('--output-dir', type=str, default='output/phase3_test',
+                       help='Output directory')
+    parser.add_argument('--db-path', type=str, default='data/tanakh.db',
+                       help='Database path')
+
+    args = parser.parse_args()
+
+    try:
+        # Load macro analysis
+        from src.schemas.analysis_schemas import load_macro_analysis, save_analysis
+        macro_analysis = load_macro_analysis(args.macro_analysis_file)
+
+        print(f"\nMICROANALYST V2 - Psalm {args.psalm_number}")
+        print("=" * 80)
+
+        # Initialize
+        analyst = MicroAnalystV2(db_path=args.db_path)
+
+        # Analyze
+        micro_analysis, research_bundle = analyst.analyze_psalm(
+            args.psalm_number,
+            macro_analysis
+        )
+
+        # Save outputs
+        output_dir = Path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        micro_json = output_dir / f"psalm_{args.psalm_number:03d}_micro_v2.json"
+        micro_md = output_dir / f"psalm_{args.psalm_number:03d}_micro_v2.md"
+        bundle_md = output_dir / f"psalm_{args.psalm_number:03d}_research_v2.md"
+
+        save_analysis(micro_analysis, str(micro_json), format="json")
+        save_analysis(micro_analysis, str(micro_md), format="markdown")
+
+        with open(bundle_md, 'w', encoding='utf-8') as f:
+            f.write(research_bundle.to_markdown())
+
+        print(f"\n{'=' * 80}")
+        print("OUTPUT FILES:")
+        print(f"  {micro_json}")
+        print(f"  {micro_md}")
+        print(f"  {bundle_md}")
+        print(f"{'=' * 80}\n")
+
+        return 0
+
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
+if __name__ == '__main__':
+    sys.exit(main())
