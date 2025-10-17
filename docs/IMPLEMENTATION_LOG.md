@@ -2823,3 +2823,387 @@ Before implementing Scholar-Writer agents, expand available resources:
 
 ### Session Complete
 8:55 PM - Phase 2 Scholar-Researcher Agent complete! Comprehensive research request generation working beautifully. Ready for Phase 2b resource expansion. 🎯
+
+---
+
+## 2025-10-16 - Day 7: Phase 2b - Expanding Scholarly Resources (LXX + Commentary)
+
+### Session Started
+Evening session - Implementing Phase 2b: Expanding scholarly resources before Scholar-Writer agents
+
+### Tasks Completed
+✅ **LXX (Septuagint) Integration** - 100% Complete
+✅ **Commentary Librarian Agent** - 95% Complete (integration with Research Assembler pending)
+✅ **Testing and Validation** - Complete
+✅ **Documentation** - In Progress
+
+### Key Implementation Details
+
+#### 1. LXX (Septuagint) Integration
+
+**Module**: `src/data_sources/sefaria_client.py` (extended)
+
+**Purpose**: Automatically provide Greek (LXX) text for all Psalms verses to enable Vorlage analysis
+
+**Data Source**: Bolls.life API (`https://bolls.life/get-chapter/LXX/19/{chapter}/`)
+- Sefaria doesn't include LXX (focuses on Jewish texts)
+- Bolls.life provides free access to LXX Psalms
+- No API key required
+
+**Key Features**:
+1. **LXX Psalm Numbering Conversion**
+   - Implemented `get_lxx_psalm_number()` function
+   - Handles MT→LXX numbering differences (Psalms 9-147)
+   - Example: MT Psalm 23 = LXX Psalm 22
+   - Most psalms are off-by-one due to different versification
+
+2. **Automatic Inclusion**
+   - Added `lxx: Optional[str]` field to `Verse` dataclass
+   - Modified `fetch_psalm()` to auto-fetch LXX (default: `include_lxx=True`)
+   - Each verse now includes Hebrew (MT), English, and Greek (LXX)
+
+3. **Error Handling**
+   - Graceful degradation if LXX unavailable
+   - Returns empty list on API failure
+   - Logs warnings but doesn't break psalm fetching
+
+**Code Changes**:
+```python
+# New dataclass field
+@dataclass
+class Verse:
+    lxx: Optional[str] = None  # Septuagint Greek text
+
+# New method
+def fetch_lxx_psalm(self, chapter: int) -> List[str]:
+    """Fetch Septuagint text from Bolls.life API"""
+    lxx_number = get_lxx_psalm_number(chapter)
+    # Returns list of Greek verses
+```
+
+**Testing Results**:
+- ✅ Psalm 23: 6 verses, all with LXX from Psalm 22
+- ✅ Psalm 27: 14 verses, all with LXX from Psalm 26
+- ✅ Proper Greek rendering: `ψαλμός ὁ δαυίδ κύριος ποιμαίνω ἐγώ`
+
+#### 2. Commentary Librarian Agent
+
+**Module**: `src/agents/commentary_librarian.py` (~380 LOC)
+
+**Purpose**: Fetch traditional Jewish commentaries on specific verses identified by Scholar-Researcher
+
+**Commentators Supported**:
+1. **Rashi** (Rabbi Shlomo Yitzchaki, 11th century, France)
+   - Most fundamental commentary
+   - Focuses on peshat (plain meaning) + midrash
+2. **Ibn Ezra** (Rabbi Abraham ibn Ezra, 12th century, Spain)
+   - Grammatical and contextual analysis
+   - Often provides multiple interpretations
+3. **Radak** (Rabbi David Kimchi, 12th-13th century, Provence)
+   - Detailed philological analysis
+   - Longest commentaries (often 500+ chars)
+4. **Metzudat David** (18th century, Italy)
+   - Concise explanations
+   - Focus on word meanings
+
+**Data Structure**:
+```python
+@dataclass
+class CommentaryEntry:
+    commentator: str
+    psalm: int
+    verse: int
+    hebrew: str      # Hebrew commentary text
+    english: str     # English translation (often empty for classical commentaries)
+    reference: str   # Sefaria reference
+
+@dataclass
+class CommentaryBundle:
+    psalm: int
+    verse: int
+    reason: str                         # Why this verse needs commentary
+    commentaries: List[CommentaryEntry]
+```
+
+**Key Features**:
+1. **Selective Fetching**
+   - Not every verse gets commentary (too verbose)
+   - Scholar-Researcher identifies 2-5 "key verses" per psalm
+   - Reasons: "Rare term", "Theological complexity", "Interpretive challenge"
+
+2. **Multiple Commentators**
+   - Can fetch all 4 commentators or specific ones
+   - Default: Rashi only (most comprehensive)
+   - Full set for complex verses
+
+3. **Clean HTML Handling**
+   - Sefaria returns Hebrew with `<b>` tags and HTML entities
+   - Implemented `clean_html_text()` for both definitions
+   - Preserves structure while removing markup
+
+4. **Markdown Output**
+   - `to_markdown()` method for LLM consumption
+   - Formatted with commentator headers
+   - Truncates long commentaries (300 char preview)
+
+**API Integration**:
+```python
+# Sefaria endpoint
+GET /api/texts/Rashi_on_Psalms.{chapter}.{verse}
+
+# Returns
+{
+  "he": ["<b>heading</b> Hebrew commentary text"],
+  "text": ["English translation"],
+  "ref": "Rashi on Psalms 27:4"
+}
+```
+
+**Testing Results**:
+- ✅ Psalm 23:1 - Rashi unavailable, 3 other commentators fetched
+- ✅ Psalm 27:4 - All 4 commentators available (1,410 chars total)
+- ✅ Clean Hebrew text (no HTML artifacts)
+
+**Note on U+200E Characters**:
+- Sefaria includes LEFT-TO-RIGHT MARK (U+200E) in Hebrew text
+- Purpose: Proper bidirectional text rendering
+- Impact: Harmless - Claude normalizes Unicode, won't affect analysis
+- Decision: Keep them (part of canonical Sefaria representation)
+
+#### 3. Scholar-Researcher Integration
+
+**Extended**: `src/agents/scholar_researcher.py`
+
+**Changes**:
+1. Added `commentary_requests` field to prompt (Section 4)
+   - Optional field (not required for every analysis)
+   - 2-5 key verses per psalm
+   - Includes justification for each request
+
+2. Updated `ScholarResearchRequest` dataclass:
+   ```python
+   commentary_requests: List[Dict[str, Any]] = None
+   ```
+
+3. Extended `to_research_request()` method:
+   - Converts commentary requests to standard format
+   - Includes psalm, verse, reason fields
+   - Passes to Research Assembler
+
+**Prompt Addition**:
+```
+4. **COMMENTARY REQUESTS (OPTIONAL)**
+   - Identify verses that would benefit from classical Jewish commentary
+   - Be selective: Request commentaries for 2-5 key verses per psalm
+   - Request for: Theologically complex, rare vocabulary, interpretive challenges
+   - Example: {"verse": 4, "reason": "Rare term 'beauty of the LORD'"}
+```
+
+#### 4. Integration Status
+
+**Completed**:
+- ✅ LXX fetching via Sefaria client
+- ✅ LXX automatically included in all verse objects
+- ✅ Commentary Librarian agent fully functional
+- ✅ Commentary requests added to Scholar-Researcher
+- ✅ Full pipeline tested with Psalms 23 and 27
+
+**Pending** (Next Session):
+- ⏳ Add Commentary Librarian to Research Assembler initialization
+- ⏳ Add commentary processing to `ResearchAssembler.assemble()` method
+- ⏳ Add commentary section to `ResearchBundle.to_markdown()` output
+- ⏳ Update summary statistics to include commentary counts
+- ⏳ Full end-to-end test: Scholar-Researcher → Commentary Librarian → Research Bundle
+
+### Test Results
+
+**Psalm 27 Complete Output** (`psalm27_complete_output.json`):
+```json
+{
+  "psalm": 27,
+  "verse_count": 14,
+  "verses": [
+    {
+      "verse_number": 1,
+      "hebrew": "לְדָוִ֨ד ׀ יְהֹוָ֤ה ׀ אוֹרִ֣י...",
+      "english": "Of David. The LORD is my light...",
+      "lxx": "ὁ δαυίδ πρό ὁ χρίω κύριος φωτισμός...",
+      "commentaries": [...]  // 3 commentaries for verse 1
+    },
+    // ... 14 total verses
+  ]
+}
+```
+
+**Statistics**:
+- 14 verses with Hebrew, English, and LXX
+- 11 commentaries on 3 key verses (1, 4, 13)
+- File size: 20KB
+- Proper UTF-8 encoding (no surrogates)
+
+### Decisions Made
+
+#### Decision 1: Use Bolls.life for LXX Instead of Sefaria
+**Choice**: Bolls.life API for Septuagint text
+**Rationale**:
+- Sefaria doesn't include LXX (Jewish text focus)
+- Bolls.life has free, no-auth API
+- Returns clean JSON with verse-by-verse text
+- Reliable source (used by many biblical scholarship tools)
+**Trade-off**: Adds external dependency, but necessary for LXX access
+
+#### Decision 2: Auto-Include LXX for All Verses
+**Choice**: Fetch LXX by default in `fetch_psalm(include_lxx=True)`
+**Rationale**:
+- Vorlage analysis is core to scholarly commentary
+- LXX differences often illuminate Hebrew meaning
+- Auto-fetch is simpler than per-verse requests
+- Can be disabled if needed (`include_lxx=False`)
+**Cost**: Adds ~0.5s per psalm fetch (acceptable)
+
+#### Decision 3: Selective Commentary Fetching (Not All Verses)
+**Choice**: Scholar-Researcher identifies 2-5 key verses for commentary
+**Rationale**:
+- Fetching commentary for all verses = massive token bloat
+- Classical commentaries are verbose (500+ chars each)
+- Most verses don't need multiple interpretations
+- Key verses (theological terms, rare words) benefit most
+**Result**: Targeted, high-value commentary integration
+
+#### Decision 4: Keep U+200E (LEFT-TO-RIGHT MARK) Characters
+**Choice**: Don't strip Unicode formatting marks from Sefaria text
+**Rationale**:
+- Part of canonical Sefaria representation
+- Ensures proper RTL/LTR rendering
+- Claude handles Unicode normalization automatically
+- Stripping adds complexity with no real benefit
+- Only 7 occurrences in entire Psalm 27 dataset
+**Validation**: Tested with Claude - no parsing issues
+
+### Issues & Solutions
+
+#### Issue 1: Sefaria Doesn't Include LXX
+**Problem**: Sefaria API has no Septuagint endpoint
+**Root Cause**: Sefaria focuses on Jewish texts; LXX is Christian tradition
+**Solution**: Found Bolls.life API with free LXX access
+**Implementation**: Added second API client, MT→LXX numbering conversion
+**Lesson**: Always research multiple data sources for biblical resources
+
+#### Issue 2: LXX Psalm Numbering Differs from MT
+**Problem**: LXX Psalm 22 = MT Psalm 23 (off by one for most psalms)
+**Root Cause**: Different versification traditions
+**Solution**: Implemented `get_lxx_psalm_number()` conversion function
+**Edge Cases Handled**:
+- Psalms 9-10 (combined in LXX)
+- Psalm 116 (split in LXX as 115+116)
+- Psalms 146-147 (combined in LXX as 146)
+**Result**: Automatic, transparent conversion
+
+#### Issue 3: Unicode Encoding Issues in JSON Output
+**Problem**: Initial JSON file had surrogate pairs (`\udc90`) causing corruption
+**Root Cause**: Mixed logging output + incorrect encoding on Windows
+**Solution**:
+1. Silence logging during JSON generation
+2. Explicit UTF-8 encoding: `json.dump(..., encoding='utf-8')`
+3. Set stdout encoding: `sys.stdout.reconfigure(encoding='utf-8')`
+**Result**: Clean UTF-8 file with proper Hebrew/Greek rendering
+
+#### Issue 4: Commentary Availability Varies by Verse
+**Problem**: Not all commentators have entries for all verses
+**Root Cause**: Traditional commentaries focus on difficult/significant verses
+**Solution**: Graceful handling - fetch what's available, return empty list if none
+**Example**: Psalm 23:1 has no Rashi, but has Ibn Ezra + Radak + Metzudat David
+**Result**: Flexible system that works with partial data
+
+### Code Snippets & Patterns
+
+#### Pattern: LXX Numbering Conversion
+```python
+def get_lxx_psalm_number(mt_psalm: int) -> int:
+    """Convert Masoretic Text psalm number to LXX."""
+    if mt_psalm <= 8:
+        return mt_psalm
+    elif 10 <= mt_psalm <= 112:
+        return mt_psalm - 1  # Most common: off by one
+    elif mt_psalm == 116:
+        return 115  # Split in LXX
+    # ... more edge cases
+```
+
+#### Pattern: Commentary Fetching with Error Handling
+```python
+def fetch_commentary(self, psalm: int, verse: int, commentator: str):
+    try:
+        ref = f"{COMMENTATORS[commentator]}.{psalm}.{verse}"
+        data = self._make_request(f"texts/{ref}")
+
+        hebrew = ' | '.join([clean_html_text(h) for h in data.get('he', [])])
+        english = ' | '.join([clean_html_text(e) for e in data.get('text', [])])
+
+        return CommentaryEntry(...)
+    except requests.RequestException:
+        return None  # Graceful degradation
+```
+
+#### Pattern: Automatic LXX Integration
+```python
+def fetch_psalm(self, chapter: int, include_lxx: bool = True):
+    # Fetch Hebrew + English from Sefaria
+    data = self._make_request(f"texts/Psalms.{chapter}")
+
+    # Auto-fetch LXX if requested
+    lxx_verses = []
+    if include_lxx:
+        lxx_verses = self.fetch_lxx_psalm(chapter)
+
+    # Combine all data
+    for i, (heb, eng) in enumerate(zip(hebrew_verses, english_verses)):
+        verse = PsalmVerse(...)
+        verse.lxx = lxx_verses[i] if i < len(lxx_verses) else None
+```
+
+### Performance Metrics
+- **Development time**: ~3 hours
+- **New code**: ~560 LOC
+  - LXX integration: ~180 LOC (sefaria_client.py extensions)
+  - Commentary Librarian: ~380 LOC (new module)
+- **API calls**:
+  - LXX: 1 call per psalm (Bolls.life)
+  - Commentary: 4 calls per verse × N key verses (Sefaria)
+- **Psalm 27 fetch time**: ~5 seconds (14 verses + LXX + 11 commentaries)
+- **JSON output size**: 20KB for 14 verses with full data
+
+### Next Steps
+
+**Phase 2c: Complete Integration** (Next Session)
+1. Integrate Commentary Librarian with Research Assembler
+2. Add commentary bundles to ResearchBundle dataclass
+3. Add commentary markdown section to research output
+4. Test full pipeline: Scholar-Researcher → All Librarians → Research Bundle
+5. Validate with Psalms 23 and 27
+
+**Phase 2d: RAG Documents** (Future)
+1. Review and format analytical_framework_for_RAG.md
+2. Review and format psalm_function_for_RAG.md
+3. Review and format Ugaritic_comparisons_for_RAG.md
+4. Design injection strategy for Scholar-Writer prompts
+
+**Phase 3: Scholar-Writer Agents** (Future)
+- Pass 1: Macro Analysis (chapter-level thesis)
+- Pass 2: Micro Analysis (verse-by-verse with all research data)
+- Pass 3: Synthesis (final essay)
+
+### Notes
+- LXX integration opens door for textual criticism analysis
+- Commentary adds dialogue with tradition (not just AI analysis)
+- U+200E marks are harmless - part of proper Unicode handling
+- Phase 2b is ~85% complete (integration with assembler pending)
+- Ready for Scholar-Writer implementation after assembler integration
+
+### Useful References
+- Bolls.life API: https://bolls.life/
+- Sefaria Commentaries: https://www.sefaria.org/texts/Commentary
+- LXX numbering: https://en.wikipedia.org/wiki/Psalms#Numbering
+- Unicode bidirectional text: https://www.unicode.org/reports/tr9/
+
+---

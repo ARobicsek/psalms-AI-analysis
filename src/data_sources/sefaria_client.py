@@ -27,9 +27,40 @@ logger = logging.getLogger(__name__)
 
 # API Configuration
 SEFARIA_API_BASE = "https://www.sefaria.org/api"
+BOLLS_API_BASE = "https://bolls.life"  # For LXX (Septuagint) text
 RATE_LIMIT_DELAY = 0.5  # seconds between requests
 REQUEST_TIMEOUT = 10  # seconds
 MAX_RETRIES = 3
+
+# LXX Psalm Numbering: LXX Psalms 9-147 differ from MT
+# LXX 9-10 = MT 9:1-20, 10:1-18 (combined)
+# LXX 11-113 = MT 10-112 (one less)
+# LXX 114-115 = MT 114-115 (combined in some traditions)
+# LXX 116 = MT 116:1-9
+# LXX 117 = MT 116:10-19
+# LXX 118-146 = MT 117-145 (one more)
+# LXX 147 = MT 146-147 (combined)
+def get_lxx_psalm_number(mt_psalm: int) -> int:
+    """Convert Masoretic Text psalm number to LXX psalm number."""
+    if mt_psalm <= 8:
+        return mt_psalm
+    elif mt_psalm == 9:
+        return 9  # MT 9 -> LXX 9 (part 1)
+    elif 10 <= mt_psalm <= 112:
+        return mt_psalm - 1  # Off by one
+    elif 113 <= mt_psalm <= 115:
+        return mt_psalm - 1
+    elif mt_psalm == 116:
+        return 115  # Split in LXX (115+116)
+    elif 117 <= mt_psalm <= 145:
+        return mt_psalm - 1
+    elif mt_psalm == 146:
+        return 146  # MT 146 -> LXX 146 (part 1)
+    elif mt_psalm == 147:
+        return 146  # MT 147 -> LXX 146 (part 2) + LXX 147
+    elif mt_psalm >= 148:
+        return mt_psalm - 1
+    return mt_psalm
 
 
 def clean_html_text(text: str) -> str:
@@ -70,6 +101,7 @@ class Verse:
     hebrew: str
     english: str
     reference: str  # e.g., "Genesis 1:1" or "Psalms 23:1"
+    lxx: Optional[str] = None  # Septuagint (Greek) text, if available
 
 
 @dataclass
@@ -188,13 +220,14 @@ class SefariaClient:
                     raise
                 time.sleep(2 ** attempt)
 
-    def fetch_psalm(self, chapter: int, include_commentary: bool = False) -> PsalmText:
+    def fetch_psalm(self, chapter: int, include_commentary: bool = False, include_lxx: bool = True) -> PsalmText:
         """
         Fetch a complete Psalm with Hebrew and English text.
 
         Args:
             chapter: Psalm number (1-150)
             include_commentary: Whether to fetch commentary (not implemented yet)
+            include_lxx: Whether to fetch Septuagint (LXX) Greek text (default: True)
 
         Returns:
             PsalmText object with all verses
@@ -226,9 +259,17 @@ class SefariaClient:
         if english_verses and isinstance(english_verses[0], list):
             english_verses = [v for sublist in english_verses for v in sublist]
 
+        # Fetch LXX (Septuagint) text if requested
+        lxx_verses = []
+        if include_lxx:
+            lxx_verses = self.fetch_lxx_psalm(chapter)
+
         # Create verse objects
         verses = []
         for i, (heb, eng) in enumerate(zip(hebrew_verses, english_verses), start=1):
+            # Get corresponding LXX verse if available
+            lxx_text = lxx_verses[i - 1] if i <= len(lxx_verses) else None
+
             verse = PsalmVerse(
                 chapter=chapter,
                 verse=i,
@@ -236,6 +277,8 @@ class SefariaClient:
                 english=clean_html_text(eng),
                 reference=f"Psalms {chapter}:{i}"
             )
+            # Add LXX text to verse
+            verse.lxx = lxx_text
             verses.append(verse)
 
         psalm = PsalmText(
@@ -504,6 +547,58 @@ class SefariaClient:
             Metadata dictionary including chapter count
         """
         return self._make_request(f"index/{book}")
+
+    def fetch_lxx_psalm(self, chapter: int) -> List[str]:
+        """
+        Fetch Septuagint (Greek) text for a Psalm from Bolls.life API.
+
+        The LXX uses different numbering than the Masoretic Text (MT).
+        This method handles the conversion automatically.
+
+        Args:
+            chapter: Psalm number in Masoretic Text numbering (1-150)
+
+        Returns:
+            List of Greek verses (LXX text)
+            Empty list if not available
+
+        Note:
+            - Uses Bolls.life API as Sefaria doesn't include LXX
+            - Psalm numbering: LXX Psalms 10-146 are typically off by one
+              (e.g., MT Psalm 23 = LXX Psalm 22)
+            - For analysis purposes, this provides Vorlage comparison
+        """
+        try:
+            # Convert MT psalm number to LXX numbering
+            lxx_number = get_lxx_psalm_number(chapter)
+
+            logger.info(f"Fetching LXX Psalm {lxx_number} (MT Psalm {chapter}) from Bolls.life...")
+
+            # Bolls.life API: /get-chapter/LXX/{book_id}/{chapter}/
+            # Book ID 19 = Psalms in standard biblical ordering
+            url = f"{BOLLS_API_BASE}/get-chapter/LXX/19/{lxx_number}/"
+
+            self._wait_for_rate_limit()
+            response = self.session.get(url, timeout=REQUEST_TIMEOUT)
+            response.raise_for_status()
+
+            data = response.json()
+
+            # Bolls.life returns list of verse objects: [{"pk": ..., "verse": 1, "text": "..."}]
+            if isinstance(data, list):
+                lxx_verses = [verse_obj.get('text', '') for verse_obj in data]
+                logger.info(f"Successfully fetched LXX Psalm {lxx_number} ({len(lxx_verses)} verses)")
+                return lxx_verses
+            else:
+                logger.warning(f"Unexpected LXX response format for Psalm {chapter}")
+                return []
+
+        except requests.RequestException as e:
+            logger.warning(f"Could not fetch LXX for Psalm {chapter}: {e}")
+            return []
+        except Exception as e:
+            logger.warning(f"Error processing LXX for Psalm {chapter}: {e}")
+            return []
 
 
 def main():

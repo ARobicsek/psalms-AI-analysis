@@ -4,19 +4,19 @@
 **Phase 2: Scholar Agents - Week 2 - IN PROGRESS** 🔄
 
 ## Current Task
-Phase 2, Day 6: Scholar-Researcher Agent ✅ COMPLETE
-- [x] Scholar-Researcher agent implementation (~550 LOC)
-- [x] Comprehensive BDB request generation (2-4 words/verse)
-- [x] Vehicle identification for figurative language
-- [x] Integration with Research Bundle Assembler
-- [x] Full pipeline testing (Psalms 23 and 27)
-- [x] Prompt engineering for comprehensiveness
+Phase 2b, Day 7: Expanding Scholarly Resources ⏳ 85% COMPLETE
+- [x] LXX (Septuagint) integration via Bolls.life API (~180 LOC)
+- [x] MT→LXX psalm numbering conversion
+- [x] Commentary Librarian agent implementation (~380 LOC)
+- [x] Scholar-Researcher integration (commentary_requests field)
+- [x] Full testing with Psalms 23 and 27
+- [ ] Commentary Librarian integration with Research Assembler (pending)
 
-**Next**: Phase 2b - Expand scholarly resources (LXX, Commentary Librarian, RAG documents)
+**Next**: Phase 2c - Complete Research Assembler integration, then RAG documents
 
 ## Progress
-- **Overall**: 13% complete (Day 6 of 45 complete)
-- **Current phase**: 20% complete (Phase 2: 1/5 tasks done)
+- **Overall**: 16% complete (Day 7 of 45 complete)
+- **Current phase**: Phase 2 - 35% complete (Scholar-Researcher + LXX + Commentary done)
 
 ## Completed
 ✅ **Phase 1, Day 1: Project Structure Setup** (100% COMPLETE)
@@ -100,8 +100,30 @@ Phase 2, Day 6: Scholar-Researcher Agent ✅ COMPLETE
 - ✅ Max tokens: 8,192 (Haiku 3.5 limit)
 - ✅ Cost: ~$0.0003 per psalm request
 
+⏳ **Phase 2b, Day 7: Expanding Scholarly Resources** (85% COMPLETE)
+- ✅ LXX (Septuagint) integration via Bolls.life API
+  - Extended src/data_sources/sefaria_client.py (~180 LOC added)
+  - Added `fetch_lxx_psalm()` method with MT→LXX numbering conversion
+  - Added `lxx` field to Verse dataclass (Optional[str])
+  - Auto-fetches Greek text for all verses by default
+  - Tested: Psalms 23 and 27 with full LXX text
+- ✅ Commentary Librarian agent
+  - Created src/agents/commentary_librarian.py (~380 LOC)
+  - Supports 4 commentators: Rashi, Ibn Ezra, Radak, Metzudat David
+  - Fetches traditional Jewish commentaries from Sefaria API
+  - Clean HTML handling with proper UTF-8 encoding
+  - Tested: Psalm 27 with 11 commentaries on 3 key verses
+- ✅ Scholar-Researcher integration
+  - Added `commentary_requests` field to prompts and dataclass
+  - Extended `to_research_request()` for commentary conversion
+  - Selective fetching (2-5 key verses per psalm)
+- ⏳ Research Assembler integration (pending next session)
+  - Need to add commentary_librarian initialization
+  - Need to process commentary_requests in assemble() method
+  - Need to add commentary section to markdown output
+
 ## In Progress
-🔄 **Phase 2b**: Expanding Scholarly Resources (Next Session)
+🔄 **Phase 2c**: Complete Research Assembler Integration (Next Session)
 
 ## Upcoming Phases
 - ✅ **Phase 1, Day 1**: Project structure (COMPLETE)
@@ -218,8 +240,8 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 6. **Analysis approach**: Three-pass telescopic (macro → micro → synthesis)
 
 ## Quick Links
-- **Last session**: 2025-10-16 (Day 5 Final - BDB Scholarly Enhancement COMPLETE ✅)
-- **Last session topic**: BDB Librarian upgrade to full scholarly lexicons (BDB Dictionary + Klein)
+- **Last session**: 2025-10-16 (Day 7 - Phase 2b: LXX + Commentary 85% COMPLETE ✅)
+- **Last session topic**: Expanded scholarly resources with Septuagint and traditional commentaries
 - **Current code location**:
   - src/agents/ (all librarians + assembler)
   - src/utils/ (logging system)
