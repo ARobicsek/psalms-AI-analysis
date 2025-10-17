@@ -1,0 +1,24 @@
+[
+  {
+    "level": "DEBUG",
+    "message": "Anthropic Claude API call: claude-sonnet-4-20250514 -> 200 (0.00ms)",
+    "event_type": "api_call",
+    "api_name": "Anthropic Claude",
+    "endpoint": "claude-sonnet-4-20250514",
+    "status_code": 200,
+    "response_time_ms": 0,
+    "timestamp": "2025-10-17T14:01:02.601636",
+    "agent": "test_synthesis"
+  },
+  {
+    "level": "DEBUG",
+    "message": "Anthropic Claude API call: claude-sonnet-4-20250514 -> 200 (0.00ms)",
+    "event_type": "api_call",
+    "api_name": "Anthropic Claude",
+    "endpoint": "claude-sonnet-4-20250514",
+    "status_code": 200,
+    "response_time_ms": 0,
+    "timestamp": "2025-10-17T14:03:03.537671",
+    "agent": "test_synthesis"
+  }
+]
