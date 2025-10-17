@@ -167,11 +167,15 @@ Write the introduction essay below in plain text (NOT JSON). Use markdown format
 VERSE_COMMENTARY_PROMPT = """You are a biblical scholar writing **verse-by-verse commentary** for Psalm {psalm_number}.
 
 You have been provided with:
-1. **MacroAnalysis** - Overall thesis and structure
-2. **MicroAnalysis** - Verse-by-verse discoveries
-3. **ResearchBundle** - Lexical, concordance, and research materials
+1. **IntroductionEssay** - The introductory essay already written for this psalm
+2. **MacroAnalysis** - Overall thesis and structure
+3. **MicroAnalysis** - Verse-by-verse discoveries
+4. **ResearchBundle** - Lexical, concordance, and research materials
 
 ## YOUR INPUTS
+
+### INTRODUCTION ESSAY (already written for this psalm)
+{introduction_essay}
 
 ### MACRO THESIS
 {macro_analysis}
@@ -201,6 +205,7 @@ For EACH verse in the psalm, write a commentary annotation of **150-300 words** 
 
 ### IMPORTANT NOTES:
 
+- **Relationship to Introduction Essay**: You have the complete introduction essay. Your verse commentary should COMPLEMENT (not repeat) the introduction. If the introduction discussed a theme at length, you can allude to it briefly but focus on verse-specific details not covered in the introduction.
 - **Independence from macro thesis**: The verse commentary need NOT always relate to the macro thesis
 - **Reader interest**: Focus on what would genuinely interest and inform a reader
 - **Flexibility**: Some verses may focus on poetics, others on vorlage, others on Ugaritic parallels
@@ -322,13 +327,14 @@ class SynthesisWriter:
             max_tokens=max_tokens_intro
         )
 
-        # Step 3: Generate verse commentary
+        # Step 3: Generate verse commentary (now with access to introduction)
         verse_commentary = self._generate_verse_commentary(
             psalm_number=psalm_number,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
             research_bundle=research_bundle,
-            max_tokens=max_tokens_verse
+            max_tokens=max_tokens_verse,
+            introduction_essay=introduction  # Pass the introduction to verse commentary
         )
 
         self.logger.info("Commentary synthesis complete")
@@ -374,10 +380,9 @@ class SynthesisWriter:
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
-        # Truncate research bundle if too long (keep first 50k chars)
-        research_text = research_bundle[:50000]
-        if len(research_bundle) > 50000:
-            research_text += "\n\n[Research bundle truncated for token limits...]"
+        # No truncation needed - Claude Sonnet 4.5 has 200K context window
+        # Full research bundle is ~50K tokens, well within limits
+        research_text = research_bundle
 
         # Build prompt
         prompt = INTRODUCTION_ESSAY_PROMPT.format(
@@ -390,10 +395,11 @@ class SynthesisWriter:
         # Log prompt for debugging (optional)
         if self.logger:
             self.logger.debug(f"Introduction prompt length: {len(prompt)} chars")
-            # Optionally save full prompt to file for inspection
-            # prompt_file = Path(f"output/debug/intro_prompt_psalm_{psalm_number}.txt")
-            # prompt_file.parent.mkdir(parents=True, exist_ok=True)
-            # prompt_file.write_text(prompt, encoding='utf-8')
+            # Save full prompt to file for inspection
+            prompt_file = Path(f"output/debug/intro_prompt_psalm_{psalm_number}.txt")
+            prompt_file.parent.mkdir(parents=True, exist_ok=True)
+            prompt_file.write_text(prompt, encoding='utf-8')
+            self.logger.info(f"Saved introduction prompt to {prompt_file}")
 
         # Call Claude
         try:
@@ -434,7 +440,8 @@ class SynthesisWriter:
         macro_analysis: Dict,
         micro_analysis: Dict,
         research_bundle: str,
-        max_tokens: int
+        max_tokens: int,
+        introduction_essay: str = ""
     ) -> str:
         """Generate verse-by-verse commentary."""
         self.logger.info(f"Generating verse commentary for Psalm {psalm_number}")
@@ -443,18 +450,27 @@ class SynthesisWriter:
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
-        # Truncate research bundle if needed
-        research_text = research_bundle[:100000]
-        if len(research_bundle) > 100000:
-            research_text += "\n\n[Research bundle truncated for token limits...]"
+        # No truncation needed - Claude Sonnet 4.5 has 200K context window
+        # Full research bundle is ~50K tokens, well within limits
+        research_text = research_bundle
 
         # Build prompt
         prompt = VERSE_COMMENTARY_PROMPT.format(
             psalm_number=psalm_number,
+            introduction_essay=introduction_essay,
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             research_bundle=research_text
         )
+
+        # Log prompt for debugging
+        if self.logger:
+            self.logger.debug(f"Verse commentary prompt length: {len(prompt)} chars")
+            # Save full prompt to file for inspection
+            prompt_file = Path(f"output/debug/verse_prompt_psalm_{psalm_number}.txt")
+            prompt_file.parent.mkdir(parents=True, exist_ok=True)
+            prompt_file.write_text(prompt, encoding='utf-8')
+            self.logger.info(f"Saved verse commentary prompt to {prompt_file}")
 
         # Call Claude
         try:
@@ -508,8 +524,12 @@ class SynthesisWriter:
     def _format_micro_for_prompt(self, micro: Dict) -> str:
         """Format MicroAnalysis for prompt."""
         lines = []
-        for verse_data in micro.get('verses', []):
-            verse_num = verse_data.get('verse', 0)
+
+        # Handle both old format ('verses') and new format ('verse_commentaries')
+        verses = micro.get('verse_commentaries', micro.get('verses', []))
+
+        for verse_data in verses:
+            verse_num = verse_data.get('verse_number', verse_data.get('verse', 0))
             commentary = verse_data.get('commentary', '')
             lines.append(f"**Verse {verse_num}**: {commentary}")
 
@@ -523,6 +543,20 @@ class SynthesisWriter:
                 lines.append(f"  Figurative: {', '.join(figurative)}")
 
             lines.append("")
+
+        # Add thematic threads if present
+        threads = micro.get('thematic_threads', [])
+        if threads:
+            lines.append("**Thematic Threads Across Verses:**")
+            for thread in threads:
+                lines.append(f"  - {thread}")
+            lines.append("")
+
+        # Add synthesis notes if present
+        synth_notes = micro.get('synthesis_notes', '')
+        if synth_notes:
+            lines.append("**Synthesis Notes for Research:**")
+            lines.append(synth_notes)
 
         return "\n".join(lines)
 

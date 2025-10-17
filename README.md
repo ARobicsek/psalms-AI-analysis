@@ -93,28 +93,37 @@ psalms-AI-analysis/
 
 ## System Architecture
 
-### Agent Pipeline
+### Agent Pipeline (Current - Phase 3e)
 
 ```
-1. Macro Analysis (Sonnet 4.5)
+1. MacroAnalyst (Sonnet 4.5) → Structural thesis, genre, poetic devices
    ↓
-2. Scholar-Researcher (Haiku 4.5) → Research Requests
+2. MicroAnalyst (Sonnet 4.5) → Verse-by-verse curiosity-driven research
+   ├─→ Generates research questions per verse
+   ├─→ Queries research bundle (lexicon, concordances, LXX, commentary)
+   └─→ Produces verse discoveries + thematic threads
    ↓
-3. Librarians (Python)
-   - BDB Lexicon (Sefaria API)
-   - Hebrew Concordance (Local DB)
-   - Figurative Language (Existing DB)
+3. ResearchBundle Assembly (Python)
+   ├─→ BDB Lexicon entries (Sefaria API)
+   ├─→ Hebrew Concordance (4-layer search: consonantal/voweled/exact/lemma)
+   ├─→ Figurative Language analysis (local DB)
+   └─→ Traditional Commentary excerpts (Rashi, Ibn Ezra, etc.)
    ↓
-4. Micro Analysis (Sonnet 4.5) → Verse Commentary
+4. SynthesisWriter (Sonnet 4.5)
+   ├─→ Introduction Essay (800-1200 words)
+   │   └─→ Uses: MacroAnalysis + MicroAnalysis + ResearchBundle
    ↓
-5. Synthesis (Sonnet 4.5) → Final Essay
+   └─→ Verse Commentary (100-300 words/verse)
+       └─→ Uses: MacroAnalysis + MicroAnalysis + ResearchBundle + Introduction
+           (NEW: Verse commentator sees introduction for better integration)
    ↓
-6. Critic (Haiku 4.5) → Quality Feedback
-   ↓
-7. Revision (Sonnet 4.5) → Polished Commentary
-   ↓
-8. Output: SQLite DB + Word Documents
+5. Print-Ready Formatter (Python)
+   ├─→ Integrates Hebrew/English verse text from database
+   ├─→ Applies divine names modifications (יהוה → ה׳)
+   └─→ Produces publication-ready markdown
 ```
+
+**Key Innovation**: The verse commentary generation now receives the introduction essay as context, ensuring it complements (rather than repeats) the introduction and can focus on technical details, textual variants, and interpretive debates not covered in the introduction.
 
 ### Hebrew Search: 4-Layer System
 

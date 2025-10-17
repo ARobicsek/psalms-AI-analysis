@@ -295,7 +295,10 @@ class MicroAnalystV2:
 
         # Check psalm text availability
         psalm = self.db.get_psalm(psalm_number)
-        self.logger.info(f"  Psalm Verses: {len(psalm.verses)}")
+        if psalm:
+            self.logger.info(f"  Psalm Verses: {len(psalm.verses)}")
+        else:
+            self.logger.warning(f"  Psalm text not available in database")
 
         # Check RAG/LXX availability
         rag_context = self.rag_manager.get_rag_context(psalm_number)
@@ -335,15 +338,11 @@ class MicroAnalystV2:
         )
 
         # Call Sonnet 4.5
-        self.logger.info("  Calling Sonnet 4.5 with extended thinking...")
+        self.logger.info("  Calling Sonnet 4.5...")
         try:
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=8192,
-                thinking={
-                    "type": "enabled",
-                    "budget_tokens": 5000
-                },
                 messages=[{
                     "role": "user",
                     "content": prompt
@@ -352,6 +351,25 @@ class MicroAnalystV2:
 
             # Extract and parse JSON
             response_text = self._extract_json_from_response(response)
+            self.logger.debug(f"Response text preview: {response_text[:500]}")
+
+            # Try to extract JSON from markdown code blocks if present
+            if response_text.startswith("```"):
+                # Extract from code block
+                lines = response_text.split('\n')
+                json_lines = []
+                in_json = False
+                for line in lines:
+                    if line.startswith("```"):
+                        if in_json:
+                            break
+                        in_json = True
+                        continue
+                    if in_json:
+                        json_lines.append(line)
+                response_text = '\n'.join(json_lines)
+                self.logger.debug(f"Extracted from code block, length: {len(response_text)}")
+
             discoveries = json.loads(response_text)
 
             self.logger.info(f"  ✓ Discovery pass complete")
@@ -381,10 +399,6 @@ class MicroAnalystV2:
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=4096,
-                thinking={
-                    "type": "enabled",
-                    "budget_tokens": 3000
-                },
                 messages=[{
                     "role": "user",
                     "content": prompt
@@ -393,6 +407,25 @@ class MicroAnalystV2:
 
             # Extract and parse JSON
             response_text = self._extract_json_from_response(response)
+            self.logger.debug(f"Response text preview: {response_text[:500]}")
+
+            # Try to extract JSON from markdown code blocks if present
+            if response_text.startswith("```"):
+                # Extract from code block
+                lines = response_text.split('\n')
+                json_lines = []
+                in_json = False
+                for line in lines:
+                    if line.startswith("```"):
+                        if in_json:
+                            break
+                        in_json = True
+                        continue
+                    if in_json:
+                        json_lines.append(line)
+                response_text = '\n'.join(json_lines)
+                self.logger.debug(f"Extracted from code block, length: {len(response_text)}")
+
             data = json.loads(response_text)
 
             # Convert to ResearchRequest via ScholarResearchRequest
@@ -476,9 +509,15 @@ class MicroAnalystV2:
 
     def _extract_json_from_response(self, response) -> str:
         """Extract JSON from Anthropic API response."""
-        for block in response.content:
+        # Log all blocks for debugging
+        self.logger.debug(f"Response has {len(response.content)} blocks")
+        for i, block in enumerate(response.content):
+            self.logger.debug(f"Block {i}: type={block.type}")
             if block.type == "text":
-                return block.text.strip()
+                text = block.text.strip()
+                self.logger.debug(f"Block {i} text length: {len(text)}")
+                if text:  # Only return non-empty text
+                    return text
         raise ValueError("No text content found in response")
 
     def _format_psalm_with_lxx(self, psalm, rag_context) -> str:
