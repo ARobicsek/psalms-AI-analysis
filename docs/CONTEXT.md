@@ -42,45 +42,56 @@ python scripts/cost_report.py
 
 ## Agent Architecture
 
-### Three-Pass Telescopic Analysis
-1. **Pass 1: Macro Analysis** (Sonnet 4.5)
-   - Reads entire chapter
-   - Identifies emotional/narrative arc
-   - Proposes thesis and structural outline
-   - Output: Chapter Overview Document (~1,000 tokens)
+### Five-Pass Telescopic Analysis (Phase 3 - CURRENT)
 
-2. **Scholar-Researcher** (Haiku 4.5)
-   - Reviews macro overview
-   - Generates specific research requests
-   - Output: JSON requests for BDB, concordance, figurative language
+**AUTO-AVAILABLE TO ALL AGENTS:**
+- Psalm text (Hebrew + English)
+- LXX translation (Greek Septuagint)
+- RAG context (genre, structure, Ugaritic parallels, analytical framework)
 
-3. **Librarians** (Python scripts - not LLMs!)
-   - **BDB Librarian**: Fetches Hebrew lexicon entries via Sefaria
-   - **Concordance Librarian**: Searches 4-layer Hebrew concordance
-   - **Figurative Librarian**: Queries existing analysis database
-   - Output: Assembled research bundle
+**PASS 1: Macro Analysis** (Sonnet 4.5 + extended thinking) ✅ COMPLETE
+- Reads entire psalm with RAG context
+- Identifies overall thesis and structural divisions
+- Names key poetic devices (anaphora, inclusio, chiasmus, etc.)
+- Generates research questions for Pass 2
+- Output: MacroAnalysis object (~2K tokens)
+- Status: macro_analyst.py (430 LOC) ✅
 
-4. **Pass 2: Micro Analysis** (Sonnet 4.5)
-   - Receives research bundle + macro overview
-   - Analyzes each verse with thesis in mind
-   - Examines poetic devices, word choice, figurative language
-   - Output: Verse-by-verse commentary (~3,000 tokens)
+**PASS 2: Micro Analysis** (Sonnet 4.5 + extended thinking)
+- Receives MacroAnalysis + RAG context
+- **Generates research requests** (25-50 BDB entries, concordance searches, figurative checks, commentary)
+- **Calls Research Assembler** → Librarians fetch data
+- Produces detailed verse-by-verse analysis integrating research
+- Output: MicroAnalysis object + Research Bundle (~8K tokens)
+- Status: TO BUILD
 
-5. **Pass 3: Synthesis** (Sonnet 4.5)
-   - Receives all prior work
-   - Zooms back out to chapter level
-   - Writes final essay showing forest AND trees
-   - Output: Coherent essay (~1,200 tokens)
+**PASS 3: Synthesis Writer** (Sonnet 4.5)
+- Receives MacroAnalysis + MicroAnalysis + Research Bundle
+- Writes **Introduction Essay** (800-1200 words): genre, thesis, structure
+- Writes **Verse-by-Verse Commentary** (detailed): integrates all research
+- Output: SynthesisOutput object (~5K tokens)
+- Status: TO BUILD
 
-6. **Critic** (Haiku 4.5)
-   - Reviews synthesis for telescopic integration
-   - Checks for cliches, unsupported claims
-   - Ensures macro-micro connection
-   - Output: Structured feedback (~800 tokens)
+**PASS 4: Critic** (Haiku 4.5 OR Sonnet 4.5 - TO TEST)
+- Reviews all prior work for quality
+- Checks: factual accuracy, logical coherence, clichés, integration quality
+- Telescopic integration score (1-10)
+- Output: CriticFeedback object (~1K tokens)
+- Status: TO BUILD
 
-7. **Revision** (Sonnet 4.5)
-   - Addresses critic's feedback
-   - Refines final output
+**PASS 5: Final Polisher** (Sonnet 4.5)
+- Addresses critic feedback
+- Refines prose and flow
+- Final quality check
+- Output: Final polished commentary (~5K tokens)
+- Status: TO BUILD
+
+### Librarians (Python - Not LLMs) ✅ COMPLETE
+- **BDB Librarian**: Fetches Hebrew lexicon entries via Sefaria
+- **Concordance Librarian**: Searches 4-layer Hebrew concordance
+- **Figurative Librarian**: Queries 2,863 figurative instances database
+- **Commentary Librarian**: Fetches 6 traditional commentators (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri)
+- **Research Assembler**: Coordinates all librarians, returns structured bundle
 
 ## Hebrew Concordance: 4-Layer Search + Phrase Support
 

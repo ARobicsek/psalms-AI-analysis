@@ -1,24 +1,23 @@
 # Project Status - Updated 2025-10-17
 
 ## Current Phase
-**Phase 2: Scholar Agents - Week 2 - COMPLETE** ✅
+**Phase 3a: Scholar-Writer Agents - Pass 1 (Macro Analysis) - COMPLETE** ✅
 
 ## Current Task
-Phase 2c, Day 7: Commentary Integration COMPLETE ✅
-- [x] LXX (Septuagint) integration via Bolls.life API (~180 LOC)
-- [x] MT→LXX psalm numbering conversion
-- [x] Commentary Librarian agent implementation (~380 LOC)
-- [x] Scholar-Researcher integration (commentary_requests field)
-- [x] Full testing with Psalms 23 and 27
-- [x] Commentary Librarian integration with Research Assembler ✅
-- [x] Added Malbim and Meiri commentators (now 6 total) ✅
-- [x] Default behavior: fetch ALL 6 commentators for comprehensive coverage ✅
+Phase 3a, Day 8: MacroAnalyst Agent Implementation COMPLETE ✅
+- [x] Created analysis_schemas.py with all dataclasses (~340 LOC) ✅
+- [x] Created macro_analyst.py with MacroAnalyst agent (~430 LOC) ✅
+- [x] Integrated with RAG Manager (genre, structure, Ugaritic parallels) ✅
+- [x] Implemented extended thinking mode with Sonnet 4.5 ✅
+- [x] Created comprehensive test suite (~260 LOC) ✅
+- [x] Tested with Psalm 29 - excellent results ✅
+- [x] Documented 5-pass architecture (PHASE3_ARCHITECTURE.md) ✅
 
-**Next**: Phase 3 - Scholar-Writer Agents (Pass 1: Macro Analysis)
+**Next**: Phase 3b - Add LXX to RAG Manager + Build MicroAnalyst
 
 ## Progress
-- **Overall**: 18% complete (Day 7 of 45 complete)
-- **Current phase**: Phase 2 - 100% COMPLETE ✅
+- **Overall**: 20% complete (Day 8 of 45 complete)
+- **Current phase**: Phase 3a - 100% COMPLETE ✅
 
 ## Completed
 ✅ **Phase 1, Day 1: Project Structure Setup** (100% COMPLETE)
@@ -126,8 +125,45 @@ Phase 2c, Day 7: Commentary Integration COMPLETE ✅
   - Added commentary section to markdown output (with truncation at 400 chars) ✅
   - Updated summary statistics with commentary metrics ✅
 
+✅ **Phase 2d, Day 7 (continued): RAG Document Integration** (100% COMPLETE)
+- ✅ Created src/agents/rag_manager.py (~300 LOC)
+- ✅ Three RAG documents integrated:
+  1. Analytical Framework (~1,200 lines) - Poetic analysis methodology
+  2. Psalm Function Database (150 entries) - Genre, structure, keywords per psalm
+  3. Ugaritic Comparisons (27 parallels) - Ancient Near Eastern context
+- ✅ RAGContext dataclass for structured data
+- ✅ format_for_prompt() method for LLM integration
+- ✅ Tested: Psalm 29 returns genre + 3 Ugaritic parallels
+- ✅ Research infrastructure 100% complete
+
+✅ **Phase 3a, Day 8: MacroAnalyst Agent (Pass 1)** (100% COMPLETE)
+- ✅ Created src/schemas/analysis_schemas.py (~340 LOC)
+  - MacroAnalysis, MicroAnalysis, SynthesisOutput, CriticFeedback dataclasses
+  - Full JSON + Markdown serialization support
+  - from_dict() and to_dict() methods for all schemas
+- ✅ Created src/agents/macro_analyst.py (~430 LOC)
+  - Sonnet 4.5 with extended thinking (10K thinking tokens)
+  - Integrated with RAG Manager (genre, Ugaritic, framework)
+  - Generates: thesis, structural divisions, poetic devices, research questions
+  - CLI interface with save functionality
+  - Context manager support for proper cleanup
+- ✅ Created tests/test_macro_analyst.py (~260 LOC)
+  - Schema serialization tests
+  - RAG context verification
+  - Full integration test with Psalm 29
+  - Output validation (thesis, structure, devices)
+- ✅ **Psalm 29 Test Results** (excellent!):
+  - Thesis: "liturgical polemic that systematically transfers Baal's storm-god attributes to YHWH"
+  - 3 structural divisions identified
+  - 5 poetic devices (anaphora, inclusio, climactic parallelism, metaphoric transformation, tonal progression)
+  - 5 sophisticated research questions for Pass 2
+  - Processing time: ~45 seconds
+- ✅ Created docs/PHASE3_ARCHITECTURE.md (comprehensive 5-pass documentation)
+- ✅ Updated docs/NEXT_SESSION_PROMPT.md with refined architecture
+- ✅ Total Phase 3a code: ~1,030 LOC
+
 ## In Progress
-🔄 **Phase 3**: Scholar-Writer Agents (Next Session)
+🔄 **Phase 3b**: Add LXX to RAG Manager + Build MicroAnalyst (Next Session)
 
 ## Upcoming Phases
 - ✅ **Phase 1, Day 1**: Project structure (COMPLETE)

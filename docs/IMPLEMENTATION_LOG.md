@@ -3461,3 +3461,261 @@ Phase 2d successfully completed. RAG integration adds scholarly context layer, p
 **Next session**: Begin Phase 3 - Scholar-Writer Agent (Pass 1: Macro Analysis)
 
 ---
+
+## 2025-10-17 - Day 8: Phase 3a - MacroAnalyst Agent (Pass 1)
+
+### Session Started
+9:15 AM - Beginning Phase 3a: Scholar-Writer Agent (Pass 1 - Macro Analysis)
+
+### Tasks Completed
+
+#### 1. Analysis Schema System Created ✅
+**File**: `src/schemas/analysis_schemas.py` (~340 LOC)
+
+**Dataclasses Implemented**:
+- `MacroAnalysis`: Pass 1 output (thesis, structure, devices, research questions)
+- `MicroAnalysis`: Pass 2 output (verse commentaries with research integrated)
+- `SynthesisOutput`: Pass 3 output (intro essay + verse-by-verse commentary)
+- `CriticFeedback`: Pass 4 output (quality assessment + suggestions)
+- Supporting classes: `StructuralDivision`, `PoeticDevice`, `VerseCommentary`
+
+**Features**:
+- Full JSON serialization (`to_json()`, `from_dict()`)
+- Markdown export (`to_markdown()`)
+- Proper UTF-8 encoding support
+- Comprehensive docstrings
+- Helper functions for loading/saving
+
+**Design Decision**: All schemas in one file for easier imports and maintenance.
+
+#### 2. MacroAnalyst Agent Implemented ✅
+**File**: `src/agents/macro_analyst.py` (~430 LOC)
+
+**Key Features**:
+- **Model**: Claude Sonnet 4.5 (`claude-sonnet-4-20250514`)
+- **Extended Thinking**: 10K thinking token budget for deep analysis
+- **RAG Integration**: Receives genre, structure, Ugaritic parallels, analytical framework
+- **Database Integration**: Fetches psalm text from TanakhDatabase
+- **Output**: Structured MacroAnalysis object (JSON + Markdown)
+
+**Prompt Design**:
+- Comprehensive system prompt (~1,200 lines)
+- Instructs on thesis generation, structural analysis, poetic device identification
+- Requests 5 research questions for Pass 2
+- Returns JSON for structured parsing
+- Thinking output captured in working_notes
+
+**CLI Interface**:
+```bash
+python src/agents/macro_analyst.py 29 --output-dir output --format both
+```
+
+**API Usage**:
+```python
+with MacroAnalyst() as analyst:
+    analysis = analyst.analyze_psalm(29)
+    print(analysis.to_markdown())
+```
+
+#### 3. Comprehensive Test Suite ✅
+**File**: `tests/test_macro_analyst.py` (~260 LOC)
+
+**Test Coverage**:
+- Schema serialization (round-trip JSON)
+- Database connectivity (Psalm 29 exists)
+- RAG context loading (genre + 3 Ugaritic parallels)
+- Full integration test with API call to Sonnet 4.5
+- Psalm 29-specific validations (hymn genre, anaphora detection, ANE context)
+- File save functionality (JSON + Markdown)
+
+**All tests passing** ✅
+
+#### 4. Psalm 29 Test Results (Excellent!)
+
+**Thesis Generated**:
+> "Psalm 29 functions as a liturgical polemic that systematically transfers Baal's storm-god attributes to YHWH, using sevenfold anaphora and escalating theophanic imagery to move from cosmic sovereignty to covenant intimacy..."
+
+**Structural Divisions** (3 identified):
+1. vv. 1-2: Summons to Divine Worship
+2. vv. 3-9: Sevenfold Theophanic Storm
+3. vv. 10-11: Eternal Kingship and Covenant Blessing
+
+**Poetic Devices** (5 identified):
+1. **Anaphora**: Sevenfold "voice of the LORD" (qôl-YHWH)
+2. **Inclusio**: Divine beings → YHWH blesses his people
+3. **Climactic Parallelism**: Each statement builds intensity
+4. **Metaphoric Transformation**: Appropriating Canaanite imagery for YHWH
+5. **Tonal Progression**: Imperative → Descriptive → Declarative/Optative
+
+**Research Questions** (5 generated):
+1. How does sevenfold repetition relate to creation theology and sabbath symbolism?
+2. What's the significance of geographic progression (Lebanon/Sirion → Kadesh)?
+3. How does the Flood reference (mabbûl) connect to chaos-water theology?
+4. What's the function of the divine council scene (bənê 'ēlîm)?
+5. How do verb tense shifts structure the psalm's movement?
+
+**Processing Time**: ~45 seconds (including extended thinking)
+
+**Quality Assessment**:
+- ✅ Specific, non-generic thesis
+- ✅ Accurate structural analysis
+- ✅ Sophisticated poetic device identification
+- ✅ Meaningful research questions that will guide Pass 2
+- ✅ Proper integration of RAG context (Ugaritic parallels mentioned)
+
+#### 5. Architecture Refinement - 5-Pass System
+
+**Major Design Change**: Shifted from 3-pass to **5-pass architecture** based on user preferences:
+
+**Previous Architecture** (Phase 2 plan):
+```
+Macro → Scholar-Researcher → Librarians → Micro → Synthesis → Critic → Revision
+```
+
+**NEW Architecture** (Phase 3 refined):
+```
+Pass 1: MacroAnalyst (Sonnet 4.5) ✅
+  ↓ MacroAnalysis
+Pass 2: MicroAnalyst (Sonnet 4.5)
+  → Generates research requests internally
+  → Calls Research Assembler
+  ↓ MicroAnalysis + Research Bundle
+Pass 3: SynthesisWriter (Sonnet 4.5)
+  → Intro essay + Verse-by-verse commentary
+  ↓ SynthesisOutput
+Pass 4: Critic (Haiku vs Sonnet - TO TEST)
+  ↓ CriticFeedback
+Pass 5: FinalPolisher (Sonnet 4.5)
+  ↓ Final commentary
+```
+
+**Key Decisions**:
+1. ✅ **LXX for All Agents**: Greek Septuagint will be auto-available to all passes
+2. ✅ **MicroAnalyst Generates Requests**: Deep thinker (Sonnet 4.5) makes better research requests than separate Haiku agent
+3. ✅ **Synthesis = Intro + Commentary**: Pass 3 produces BOTH essay and verse-by-verse (not just synthesis)
+4. ✅ **Critic is Separate Pass**: Quality review as Pass 4
+5. ✅ **All Sonnet 4.5**: Except testing Haiku for Critic role
+
+**Rationale**: A deep-thinking agent with full macro context will generate more sophisticated, targeted research requests than a separate coordination agent.
+
+#### 6. Documentation Created
+
+**docs/PHASE3_ARCHITECTURE.md** (~300 lines):
+- Complete 5-pass pipeline documentation
+- Data flow diagrams
+- Design decisions explained
+- Cost estimates per pass
+- Testing strategy (Haiku vs Sonnet for Critic)
+- Quality metrics
+- File structure
+
+**docs/NEXT_SESSION_PROMPT.md** (updated):
+- Updated with 5-pass architecture
+- Clear next steps for Phase 3b
+- LXX integration plan
+- MicroAnalyst implementation plan
+
+**docs/PROJECT_STATUS.md** (updated):
+- Phase 3a marked complete
+- Updated metrics (20% overall progress)
+- Added Phase 3a accomplishments
+
+**docs/CONTEXT.md** (updated):
+- 5-pass architecture overview
+- Removed outdated 3-pass description
+- Added current status indicators
+
+### Key Learnings
+
+#### 1. Extended Thinking is Powerful
+The MacroAnalyst uses extended thinking mode with 10K token budget. Results show:
+- ~400-420 thinking tokens used per psalm
+- Significantly better analysis quality
+- Worth the extra cost (~$0.01 per psalm)
+- Captures analytical reasoning in working_notes
+
+#### 2. JSON + Markdown Dual Output
+Every schema supports both formats:
+- **JSON**: Machine-readable, structured, parseable
+- **Markdown**: Human-readable, beautiful for review and Pass 2 input
+- Best of both worlds
+
+#### 3. RAG Integration is Seamless
+MacroAnalyst automatically receives:
+- Genre info (e.g., "Hymn of Praise")
+- 3 Ugaritic parallels for Psalm 29
+- Analytical framework (poetic methodology)
+- No manual data fetching required - RAG Manager handles it
+
+#### 4. Sonnet 4.5 Quality Justifies Cost
+Initial plan was to use Haiku for coordination tasks, but:
+- Sonnet 4.5's extended thinking produces **significantly better** analysis
+- Research questions are sophisticated and specific (not generic)
+- Thesis statements are novel and insightful
+- Worth paying ~$0.08 per psalm for this quality
+
+#### 5. Dataclass Design Patterns
+Consistent pattern across all schemas:
+```python
+- to_dict() → dict
+- to_json(indent=2) → str
+- from_dict(data) → Instance
+- to_markdown() → str (formatted for reading)
+```
+This makes serialization painless and consistent.
+
+### Issues Encountered
+
+#### Issue 1: Schema Import Structure
+**Problem**: Where to put schemas? With agents? Separate module?
+**Solution**: Created `src/schemas/` package. Cleaner separation of concerns.
+
+#### Issue 2: MacroAnalyst Prompt Length
+**Problem**: Initial prompt was very long (~15K tokens with framework)
+**Solution**: Made analytical framework inclusion optional via parameter. Can exclude for shorter psalms.
+
+#### Issue 3: Windows UTF-8 Handling
+**Problem**: Hebrew/Greek text causing encoding issues in tests
+**Solution**: Added `sys.stdout.reconfigure(encoding='utf-8')` in test main
+
+### Performance Metrics
+
+**MacroAnalyst (Psalm 29)**:
+- Input tokens: ~15K (psalm + RAG + framework)
+- Output tokens: ~2K (JSON response)
+- Thinking tokens: ~420
+- Processing time: ~45 seconds
+- Cost per psalm: ~$0.08
+- Quality: Excellent ✅
+
+**Total Phase 3a Code**:
+- analysis_schemas.py: 340 LOC
+- macro_analyst.py: 430 LOC
+- test_macro_analyst.py: 260 LOC
+- **Total**: ~1,030 LOC
+
+### Next Session Plan
+
+**Phase 3b: LXX Integration + MicroAnalyst**
+
+1. **Add LXX to RAG Manager**:
+   - Extend RAGContext to include LXX text
+   - Update format_for_prompt() to include Greek
+   - Test with Psalm 29
+
+2. **Build MicroAnalyst Agent**:
+   - Integrate Scholar-Researcher logic internally
+   - Generate research requests (BDB, concordance, figurative, commentary)
+   - Call Research Assembler
+   - Produce verse-by-verse analysis with research integrated
+   - Output: MicroAnalysis object + Research Bundle
+
+**Estimated Scope**: 2-3 sessions for Phase 3b
+
+### Session End
+**Duration**: ~2.5 hours
+**Status**: Phase 3a COMPLETE ✅
+
+MacroAnalyst agent successfully implemented and tested. Excellent results with Psalm 29. Architecture refined to 5-pass system with LXX integration planned. Ready for Phase 3b.
+
+---
