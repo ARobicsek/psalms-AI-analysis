@@ -112,6 +112,20 @@ Generate specific research requests in the following categories:
      * GROUND: What quality is described (e.g., "protective guidance")
    - Example: {{"verse": 1, "likely_type": "metaphor", "reason": "Shepherd imagery for divine care", "vehicle": "shepherd", "vehicle_synonyms": ["pastor", "herdsman", "protector"]}}
 
+4. **COMMENTARY REQUESTS (OPTIONAL)**
+   - Identify verses that would benefit from classical Jewish commentary (Rashi, Ibn Ezra, Radak)
+   - Request commentaries for verses that are:
+     * Theologically complex or perplexing
+     * Using rare or unusual vocabulary
+     * Presenting interpretive challenges
+     * Central to the psalm's thesis
+   - Be selective: Request commentaries for 2-5 key verses per psalm (not every verse)
+   - For each verse, specify:
+     * Verse number (integer)
+     * Reason for requesting commentary (why this verse is significant/challenging)
+   - Example: {{"verse": 4, "reason": "Rare term 'beauty of the LORD' - classical interpretation would illuminate meaning"}}
+   - NOTE: Commentaries add significant length to research bundles, so request only for truly significant verses
+
 CRITICAL REQUIREMENTS:
 - Be SPECIFIC. Vague requests waste resources and produce generic results.
 - Justify EVERY request. "It appears" is not a justification.
@@ -179,6 +193,11 @@ OUTPUT FORMAT: Return ONLY a valid JSON object with this exact structure:
     {{"verse": 5, "likely_type": "metaphor", "reason": "Pavilion/booth as divine shelter", "vehicle": "pavilion", "vehicle_synonyms": ["tent", "booth", "tabernacle", "shelter"]}},
     {{"verse": 5, "likely_type": "metaphor", "reason": "Rock as divine stability", "vehicle": "rock", "vehicle_synonyms": ["stone", "cliff", "mountain", "foundation"]}},
     ... (check ALL verses with figurative language)
+  ],
+  "commentary_requests": [
+    {{"verse": 4, "reason": "Rare term 'beauty of the LORD' - need classical interpretation"}},
+    {{"verse": 7, "reason": "Complex request 'hear my voice' with theological implications"}},
+    ... (2-5 key verses maximum)
   ]
 }}
 
@@ -200,6 +219,7 @@ class ScholarResearchRequest:
     bdb_requests: List[Dict[str, str]]  # [{"word": "...", "reason": "..."}]
     concordance_searches: List[Dict[str, str]]  # [{"query": "...", "level": "...", "scope": "...", "purpose": "..."}]
     figurative_checks: List[Dict[str, Any]]  # [{"verse": 1, "likely_type": "...", "reason": "..."}]
+    commentary_requests: List[Dict[str, Any]] = None  # [{"verse": 1, "reason": "..."}] - Optional
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
@@ -215,7 +235,8 @@ class ScholarResearchRequest:
         return cls(
             bdb_requests=data.get('bdb_requests', []),
             concordance_searches=data.get('concordance_searches', []),
-            figurative_checks=data.get('figurative_checks', [])
+            figurative_checks=data.get('figurative_checks', []),
+            commentary_requests=data.get('commentary_requests', [])
         )
 
     def to_research_request(self, psalm_chapter: int) -> Dict[str, Any]:
@@ -299,11 +320,27 @@ class ScholarResearchRequest:
 
             figurative_requests.append(req)
 
+        # Convert commentary requests
+        commentary_reqs = []
+        if self.commentary_requests:
+            for req in self.commentary_requests:
+                psalm = req.get("psalm", psalm_chapter)  # Default to current psalm
+                verse = req.get("verse")
+                reason = req.get("reason", "Requested by Scholar-Researcher")
+
+                if verse:
+                    commentary_reqs.append({
+                        "psalm": psalm,
+                        "verse": verse,
+                        "reason": reason
+                    })
+
         return {
             "psalm_chapter": psalm_chapter,
             "lexicon": lexicon_requests,
             "concordance": concordance_requests,
-            "figurative": figurative_requests
+            "figurative": figurative_requests,
+            "commentary": commentary_reqs
         }
 
 

@@ -26,10 +26,12 @@ if __name__ == '__main__':
     from src.agents.bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from src.agents.concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
+    from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from .figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
+    from .commentary_librarian import CommentaryLibrarian, CommentaryBundle
 
 
 @dataclass
