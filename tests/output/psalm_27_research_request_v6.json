@@ -1,0 +1,214 @@
+{
+  "bdb_requests": [
+    {
+      "word": "אוֹר",
+      "reason": "Light as theological salvation metaphor v.1"
+    },
+    {
+      "word": "יְשָׁעִי",
+      "reason": "Salvation term with military deliverance connotations v.1"
+    },
+    {
+      "word": "מָעוֹז",
+      "reason": "Stronghold metaphor for divine protection v.1"
+    },
+    {
+      "word": "חַיַּי",
+      "reason": "Life - relationship to salvation and stronghold v.1"
+    },
+    {
+      "word": "אִירָא",
+      "reason": "Fear verb - exploring relationship between trust and fear v.1"
+    },
+    {
+      "word": "אֶפְחָד",
+      "reason": "Dread/anxiety term distinct from אִירָא, semantic nuance v.1"
+    },
+    {
+      "word": "בִּקְרֹב",
+      "reason": "Drawing near - spatial metaphor for threat approach v.2"
+    },
+    {
+      "word": "מְרֵעִים",
+      "reason": "Evil-doers specific term beyond generic רַע v.2"
+    },
+    {
+      "word": "לֶאֱכֹל",
+      "reason": "To eat/devour - predatory violence metaphor v.2"
+    },
+    {
+      "word": "בָּשָׂר",
+      "reason": "Flesh - literal violence or metaphorical destruction? v.2"
+    },
+    {
+      "word": "צָרַי",
+      "reason": "Adversaries term with possible legal connotations v.2"
+    },
+    {
+      "word": "אֹיְבַי",
+      "reason": "Enemies - parallel to צָרַי, semantic overlap/distinction v.2"
+    },
+    {
+      "word": "כָשְׁלוּ",
+      "reason": "Stumble verb - defeat metaphor v.2"
+    },
+    {
+      "word": "נָפָלוּ",
+      "reason": "Fall verb - complete defeat imagery v.2"
+    },
+    {
+      "word": "מַחֲנֶה",
+      "reason": "Military camp imagery escalating threat language v.3"
+    },
+    {
+      "word": "מִלְחָמָה",
+      "reason": "War terminology showing existential threat v.3"
+    },
+    {
+      "word": "בוֹטֵחַ",
+      "reason": "Trust/confidence term central to psalm's theology v.3"
+    },
+    {
+      "word": "אַחַת",
+      "reason": "One thing - theological singularity concept v.4"
+    },
+    {
+      "word": "שָׁאַלְתִּי",
+      "reason": "Ask/request verb - prayer language v.4"
+    },
+    {
+      "word": "אֲבַקֵּשׁ",
+      "reason": "Seek verb - intensified seeking parallel to שָׁאַלְתִּי v.4"
+    },
+    {
+      "word": "שִׁבְתִּי",
+      "reason": "Dwelling verb - permanent residence theology v.4"
+    },
+    {
+      "word": "לַחֲזוֹת",
+      "reason": "To gaze/behold - mystical contemplative vision of God v.4"
+    },
+    {
+      "word": "נֹעַם",
+      "reason": "Beauty/pleasantness rare divine attribute term v.4"
+    },
+    {
+      "word": "בַּקֵּר",
+      "reason": "Inquire/visit temple vocabulary with seeking connotations v.4"
+    },
+    {
+      "word": "הֵיכָל",
+      "reason": "Temple/palace term architectural-theological implications v.4"
+    },
+    {
+      "word": "יִצְפְּנֵנִי",
+      "reason": "Hide me verb - divine concealment protection v.5"
+    },
+    {
+      "word": "סֻכָּה",
+      "reason": "Booth/pavilion temporary shelter with ritual overtones v.5"
+    },
+    {
+      "word": "יוֹם רָעָה",
+      "reason": "Day of evil - eschatological/crisis terminology v.5"
+    },
+    {
+      "word": "יַסְתִּרֵנִי",
+      "reason": "Conceal me - double protection verb with יִצְפְּנֵנִי v.5"
+    },
+    {
+      "word": "אֹהֶל",
+      "reason": "Tent - nomadic dwelling imagery for divine presence v.5"
+    },
+    {
+      "word": "צוּר",
+      "reason": "Rock divine epithet with geological metaphor v.5"
+    },
+    {
+      "word": "יְרוֹמְמֵנִי",
+      "reason": "Lift me up - elevation/exaltation spatial metaphor v.5"
+    }
+  ],
+  "concordance_searches": [
+    {
+      "query": "מָעוֹז",
+      "level": "consonantal",
+      "scope": "auto",
+      "purpose": "Track divine protection fortress metaphor"
+    },
+    {
+      "query": "נֹעַם יְהוָה",
+      "level": "exact",
+      "scope": "Tanakh",
+      "purpose": "Rare beauty of LORD phrase"
+    },
+    {
+      "query": "אַל־תַּסְתֵּר פָּנֶיךָ",
+      "level": "exact",
+      "scope": "Psalms",
+      "purpose": "Hiding face lament formula"
+    }
+  ],
+  "figurative_checks": [
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Light as salvation, stronghold as protection",
+      "vehicle": "light",
+      "vehicle_synonyms": [
+        "lamp",
+        "sun",
+        "illumination",
+        "brightness"
+      ]
+    },
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Fortress/stronghold as divine protection",
+      "vehicle": "fortress",
+      "vehicle_synonyms": [
+        "stronghold",
+        "citadel",
+        "refuge",
+        "fortification"
+      ]
+    },
+    {
+      "verse": 2,
+      "likely_type": "metaphor",
+      "reason": "Flesh-devouring as destruction imagery",
+      "vehicle": "predator",
+      "vehicle_synonyms": [
+        "beast",
+        "devourer",
+        "consumer",
+        "enemy"
+      ]
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Pavilion/booth as divine shelter",
+      "vehicle": "pavilion",
+      "vehicle_synonyms": [
+        "tent",
+        "booth",
+        "tabernacle",
+        "shelter"
+      ]
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Rock as divine stability",
+      "vehicle": "rock",
+      "vehicle_synonyms": [
+        "stone",
+        "cliff",
+        "mountain",
+        "foundation"
+      ]
+    }
+  ]
+}

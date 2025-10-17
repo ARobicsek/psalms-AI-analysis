@@ -1,0 +1,63 @@
+MACRO ANALYSIS: PSALM 23
+
+EMOTIONAL/NARRATIVE ARC:
+Psalm 23 begins with confident declaration (v.1) and moves through sustained trust despite danger (vv.2-4), culminating in joyful celebration (vv.5-6). The arc is: confidence → peace → trial → deliverance → abundance → permanence. Unlike lament psalms that move from distress to trust, Psalm 23 starts from a place of already-established trust and demonstrates its stability even when tested.
+
+STRUCTURAL DIVISIONS:
+The psalm divides into two distinct metaphorical scenes:
+
+Section 1 (vv.1-4): The Shepherd
+- God as shepherd, psalmist as sheep
+- Pastoral imagery: pastures, still waters, paths, valley of shadow
+- Focus on guidance and protection
+- Shift at v.4: from third person ("he") to second person ("you")
+
+Section 2 (vv.5-6): The Host
+- God as host, psalmist as honored guest
+- Banquet imagery: table, oil, overflowing cup
+- Focus on provision and honor
+- Presence of enemies highlights vindication
+
+The pivot between sections is subtle but profound: the psalmist moves from being led BY God to being WITH God. The relationship intensifies.
+
+CENTRAL THESIS:
+Psalm 23 argues that divine care is not merely protective (shepherd) but transformative (host), elevating the vulnerable from survival to abundance and from temporary safety to permanent dwelling.
+
+GENRE CLASSIFICATION:
+This is a trust psalm (Vertrauenspsalm) with wisdom elements. Unlike lament psalms that petition for help, trust psalms celebrate an already-experienced relationship with God. The wisdom element appears in the didactic tone—this is a testimony meant to instruct others about the nature of divine care.
+
+Typical features:
+- Declarative statements about God's character
+- Figurative language (extended metaphors)
+- Past experience informing present confidence
+- Future hope grounded in proven faithfulness
+
+POETIC ARCHITECTURE:
+The two extended metaphors (shepherd, host) create a dialectic of intimacy. Shepherds are distant, leading from ahead; hosts are proximate, sitting with guests. The progression suggests that God's care evolves from external guidance to internal presence.
+
+The shift from third person to second person at v.4 ("you are with me") marks the psalm's theological climax—the moment when metaphor gives way to direct address, when the psalmist stops describing God and starts speaking TO God.
+
+The inclusion of enemies (v.5) is striking. This is not a naive psalm of untroubled peace. Divine care is demonstrated precisely IN THE PRESENCE of threat, not in its absence.
+
+QUESTIONS FOR MICRO-ANALYSIS:
+1. What is the precise relationship between שׁמר (guard/keep) vocabulary and the shepherd metaphor?
+2. How does the "valley of the shadow of death" (v.4) function? Is it literal danger or existential dread?
+3. What is the significance of oil and cup (v.5) in ancient Near Eastern hospitality?
+4. Does "dwelling in the house of the LORD" (v.6) refer to temple worship or eschatological hope?
+5. How does the psalm's use of singular ("my shepherd") relate to its communal liturgical context?
+
+HEBREW WORDS DESERVING ATTENTION:
+- רעה (shepherd): Root appears in multiple forms, carries both pastoral and royal connotations
+- נפש (soul/life): What is being "restored" in v.3?
+- צלמות (shadow of death): Compound word with disputed etymology
+- שׁלחן (table): Banquet imagery in wisdom and prophetic literature
+- טוב וחסד (goodness and mercy): Covenant terminology in v.6
+
+FIGURATIVE LANGUAGE TO INVESTIGATE:
+- v.1: Shepherd as metaphor for divine care (TARGET: God's provision, VEHICLE: shepherd's care, GROUND: protective guidance)
+- v.2: "Green pastures" and "still waters" as metaphors for peace/abundance
+- v.4: "Valley of shadow of death" as metaphor for extreme danger or existential threat
+- v.5: Table, oil, cup as metaphors for honor and blessing
+- v.5: "In the presence of my enemies" - is this literal or figurative adversaries?
+
+This psalm's power lies in its ability to hold together vulnerability (sheep, valley, enemies) and security (shepherd, table, house). The research phase should explore how the Hebrew vocabulary encodes this tension.

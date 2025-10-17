@@ -1,0 +1,183 @@
+{
+  "bdb_requests": [
+    {
+      "word": "אוֹר",
+      "reason": "Light as theological salvation metaphor v.1"
+    },
+    {
+      "word": "יְשָׁעִי",
+      "reason": "Salvation term with military deliverance connotations v.1"
+    },
+    {
+      "word": "מָעוֹז",
+      "reason": "Stronghold metaphor for divine protection v.1"
+    },
+    {
+      "word": "אִירָא",
+      "reason": "Fear verb - exploring relationship between trust and fear v.1"
+    },
+    {
+      "word": "אֶפְחָד",
+      "reason": "Dread/anxiety term distinct from אִירָא, semantic nuance v.1"
+    },
+    {
+      "word": "מְרֵעִים",
+      "reason": "Evil-doers specific term beyond generic רַע v.2"
+    },
+    {
+      "word": "בָּשָׂר",
+      "reason": "Flesh - literal violence or metaphorical destruction? v.2"
+    },
+    {
+      "word": "צָרַי",
+      "reason": "Adversaries term with possible legal connotations v.2"
+    },
+    {
+      "word": "כָּשַׁל",
+      "reason": "Stumble verb with potential metaphorical meaning v.2"
+    },
+    {
+      "word": "מַחֲנֶה",
+      "reason": "Military camp imagery escalating threat language v.3"
+    },
+    {
+      "word": "מִלְחָמָה",
+      "reason": "War terminology showing existential threat v.3"
+    },
+    {
+      "word": "בוֹטֵחַ",
+      "reason": "Trust/confidence term central to psalm's theology v.3"
+    },
+    {
+      "word": "אַחַת",
+      "reason": "One thing - theological singularity concept v.4"
+    },
+    {
+      "word": "נֹעַם",
+      "reason": "Beauty/pleasantness rare divine attribute term v.4"
+    },
+    {
+      "word": "בַּקֵּר",
+      "reason": "Inquire/visit temple vocabulary with seeking connotations v.4"
+    },
+    {
+      "word": "הֵיכָל",
+      "reason": "Temple/palace term architectural-theological implications v.4"
+    },
+    {
+      "word": "סֻכָּה",
+      "reason": "Booth/pavilion temporary shelter with ritual overtones v.5"
+    },
+    {
+      "word": "צוּר",
+      "reason": "Rock divine epithet with geological metaphor v.5"
+    },
+    {
+      "word": "רֹאשִׁי",
+      "reason": "Head as metaphorical term of protection v.6"
+    },
+    {
+      "word": "אָקוּמָה",
+      "reason": "Rising/triumph verb with theological implications v.6"
+    },
+    {
+      "word": "שְׁמַע",
+      "reason": "Hearing as active spiritual reception v.7"
+    },
+    {
+      "word": "אֶזְעָק",
+      "reason": "Cry/call with intense emotional-spiritual nuance v.7"
+    },
+    {
+      "word": "פָּנֶיךָ",
+      "reason": "Face as metonymy for divine presence v.9"
+    },
+    {
+      "word": "עָזַב",
+      "reason": "Abandonment term with relational theological depth v.10"
+    },
+    {
+      "word": "אָבִי",
+      "reason": "Parental imagery with metaphorical significance v.10"
+    },
+    {
+      "word": "אֹרַח",
+      "reason": "Path as wisdom and ethical guidance metaphor v.11"
+    },
+    {
+      "word": "מִישׁוֹר",
+      "reason": "Straightness/righteousness in ethical trajectory v.11"
+    },
+    {
+      "word": "נֶפֶשׁ",
+      "reason": "Soul/life term with complex theological meaning v.12"
+    },
+    {
+      "word": "קַוֵּה",
+      "reason": "Waiting as active spiritual posture v.14"
+    }
+  ],
+  "concordance_searches": [
+    {
+      "query": "מָעוֹז",
+      "level": "consonantal",
+      "scope": "auto",
+      "purpose": "Track divine protection fortress metaphor"
+    },
+    {
+      "query": "נֹעַם יְהוָה",
+      "level": "exact",
+      "scope": "Tanakh",
+      "purpose": "Rare beauty of LORD phrase"
+    },
+    {
+      "query": "אַל־תַּסְתֵּר פָּנֶיךָ",
+      "level": "exact",
+      "scope": "Psalms",
+      "purpose": "Hiding face lament formula"
+    },
+    {
+      "query": "קַוֵּה אֶל־יְהוָה",
+      "level": "exact",
+      "scope": "auto",
+      "purpose": "Waiting/hoping theological formula"
+    }
+  ],
+  "figurative_checks": [
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Light as salvation, stronghold as protection"
+    },
+    {
+      "verse": 2,
+      "likely_type": "metaphor",
+      "reason": "Flesh-devouring as destruction imagery"
+    },
+    {
+      "verse": 4,
+      "likely_type": "metaphor",
+      "reason": "Beauty of LORD as divine encounter"
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Pavilion/rock as divine shelter"
+    },
+    {
+      "verse": 9,
+      "likely_type": "metonymy",
+      "reason": "Face representing divine presence"
+    },
+    {
+      "verse": 10,
+      "likely_type": "metaphor",
+      "reason": "Parental abandonment as existential fear"
+    },
+    {
+      "verse": 11,
+      "likely_type": "metaphor",
+      "reason": "Path as spiritual/ethical journey"
+    }
+  ]
+}

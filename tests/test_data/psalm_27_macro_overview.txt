@@ -1,0 +1,122 @@
+MACRO ANALYSIS: PSALM 27
+
+EMOTIONAL/NARRATIVE ARC:
+Psalm 27 moves through three distinct emotional movements: confident trust (vv.1-3) → yearning desire (vv.4-6) → desperate petition (vv.7-14). The arc is striking: it begins with fearless confidence ("whom should I fear?") yet ends with urgent pleas ("Do not hide Your face from me!"). This creates a tension—is this a trust psalm that collapses into lament, or a lament that holds onto trust despite fear?
+
+STRUCTURAL DIVISIONS:
+
+Section 1 (vv.1-3): Confident Declaration
+- God as light, salvation, stronghold (מָעוֹז)
+- Enemies present but defeated (stumble, fall)
+- Military imagery: army, war, siege
+- Tone: fearless, declarative, past tense victories
+- Third-person references to enemies ("they stumbled and fell")
+
+Section 2 (vv.4-6): The One Thing
+- Shift to singular desire: dwelling in God's house
+- Temple imagery: house, beauty, sanctuary, pavilion, tent, rock
+- Purpose clauses: "to gaze," "to inquire," "to shelter"
+- Present/future orientation
+- Transition from battlefield (vv.1-3) to sanctuary (vv.4-6)
+
+Section 3 (vv.7-14): Urgent Petition
+- Abrupt shift to imperative verbs: "Hear!" "Answer!" "Do not hide!"
+- Return of enemies: false witnesses, those who breathe violence
+- Vulnerable language: "Do not abandon me," "Do not cast me off"
+- Parental imagery: father and mother may forsake (v.10)
+- Concluding hope: "Had I not believed..." (v.13-14)
+
+The psalm's structure reveals a psychological complexity—confidence coexists with vulnerability.
+
+CENTRAL THESIS:
+Psalm 27 argues that authentic trust in God is not the absence of fear but the determination to seek God's presence even when fear threatens to overwhelm. The psalmist's confidence (vv.1-3) is real, but so is the danger (vv.7-14). True faith is found in the "one thing" (v.4)—the steadfast pursuit of divine presence despite circumstances.
+
+GENRE CLASSIFICATION:
+This is a **mixed genre psalm**—combining trust psalm (vv.1-6) with individual lament (vv.7-14). The juxtaposition is intentional, not editorial accident. It reflects the dual nature of faith under pressure.
+
+Typical features of trust psalm (vv.1-6):
+- Metaphors for God's protection (light, stronghold, rock)
+- Declaration of confidence ("I will not fear")
+- Temple-centered piety
+
+Typical features of lament (vv.7-14):
+- Imperative petitions to God ("Hear my voice!")
+- Complaint about enemies
+- Expression of abandonment fears
+- Concluding hope/vow of praise
+
+POETIC ARCHITECTURE:
+
+1. **Light vs. Darkness Imagery**: Opens with light metaphor (v.1), transitions through enemies seeking to "devour flesh" (darkness), returns to "seeing God's goodness in the land of the living" (light restored)
+
+2. **Spatial Movement**: Battlefield (vv.1-3) → Temple (vv.4-6) → Return to threat (vv.7-12) → Confidence in future (vv.13-14). The temple is the center, the refuge between two zones of danger.
+
+3. **Military → Cultic → Legal Vocabulary**:
+   - vv.1-3: warfare terms (army, war, enemies)
+   - vv.4-6: temple terms (house, beauty, pavilion, tent)
+   - vv.11-12: judicial terms (false witnesses, path, teach)
+
+4. **The "One Thing"**: v.4 is the psalm's structural and theological hinge. Everything before leads to it; everything after flows from it. "One thing" (אַחַת) contrasts with multiple enemies, multiple fears—singular focus as the antidote to fragmentation.
+
+QUESTIONS FOR MICRO-ANALYSIS:
+
+1. **מָעוֹז (stronghold/fortress)** in v.1—How is this term used elsewhere? Is it military, architectural, or theological metaphor?
+
+2. **"Devour my flesh" (v.2)**—Is this literal violence, slander/accusation, or both? How does בָּשָׂר function here?
+
+3. **The "one thing" (אַחַת, v.4)**—What is the significance of numerical singularity in Hebrew poetry? Compare to Psalm 23:6, Ecclesiastes 3:19.
+
+4. **"Gaze upon the beauty/pleasantness of the LORD" (נֹעַם, v.4)**—What does it mean to see God? Is this mystical, aesthetic, or liturgical?
+
+5. **"Inquire/visit in His temple" (בַּקֵּר, v.4)**—Is this seeking oracles, daily worship, or pilgrimage?
+
+6. **Parental abandonment (v.10)**—Does this reflect personal experience or use family imagery metaphorically?
+
+7. **"The land of the living" (v.13)**—Is this Sheol/death contrast, or simply "in this life" vs. afterlife?
+
+8. **"Wait for the LORD" (קַוֵּה, v.14)**—How does waiting function theologically? Active or passive?
+
+HEBREW WORDS DESERVING ATTENTION:
+
+- **אוֹר** (light, v.1) - Not just physical light; theological/salvation imagery
+- **מָעוֹז** (stronghold, v.1) - Military metaphor for divine protection
+- **מְרֵעִים** (evil ones, v.2) - Related to רַע (evil), etymology worth exploring
+- **אַחַת** (one thing, v.4) - Numerical emphasis, singularity of focus
+- **נֹעַם** (beauty/pleasantness, v.4) - Rare term for divine attribute
+- **בַּקֵּר** (inquire/visit, v.4) - Temple vocabulary, seeking divine guidance
+- **סֻכָּה** (pavilion/booth, v.5) - Shelter, temporary dwelling, Sukkot connection
+- **צוּר** (rock, v.5) - Common divine epithet in Psalms
+- **אֹרַח** (path/way, v.11) - Wisdom vocabulary, ethical path
+- **קַוֵּה** (wait/hope, v.14) - Active waiting, expectant hope
+
+FIGURATIVE LANGUAGE TO INVESTIGATE:
+
+- **v.1**: "Light" as metaphor for salvation/deliverance (TARGET: God's saving power, VEHICLE: light, GROUND: illumination, guidance, life)
+- **v.1**: "Stronghold/fortress" as metaphor for divine protection (TARGET: God's security, VEHICLE: military fortress, GROUND: safety, impregnability)
+- **v.2**: "Devour my flesh" as metaphor for destruction/slander (TARGET: enemies' hostile intent, VEHICLE: predatory animals, GROUND: consumption, violence)
+- **v.4**: "Beauty of the LORD" as metaphor for divine presence (TARGET: encountering God, VEHICLE: aesthetic beauty, GROUND: desire, pleasure, satisfaction)
+- **v.5**: "Pavilion/booth" and "tent" as metaphors for divine shelter (TARGET: God's protection, VEHICLE: temporary dwelling, GROUND: refuge, concealment)
+- **v.5**: "Rock" as metaphor for God's stability (TARGET: divine reliability, VEHICLE: geological formation, GROUND: firmness, height, safety)
+- **v.9**: "Face" as metonymy for divine presence/favor (TARGET: God's attention/response, VEHICLE: face, GROUND: personal encounter, recognition)
+- **v.10**: Parental abandonment as metaphor for ultimate isolation (TARGET: feeling forsaken, VEHICLE: parents forsaking child, GROUND: deepest relational loss)
+
+THEMATIC KEYWORDS FOR CONCORDANCE:
+
+- **מָעוֹז** (stronghold) - How often in Psalms? Is this David's signature term?
+- **נֹעַם יְהוָה** (beauty/pleasantness of the LORD) - Unique phrase or common expression?
+- **בֵּית יְהוָה** (house of the LORD) - Temple theology across Psalms
+- **אַל־תַּסְתֵּר פָּנֶיךָ** (do not hide Your face) - Common lament formula?
+- **קַוֵּה אֶל־יְהוָה** (wait for the LORD) - Wisdom/trust formula frequency
+
+PSYCHOLOGICAL/THEOLOGICAL TENSION:
+The psalm's power lies in its refusal to resolve the tension between confidence and vulnerability. It doesn't move from fear to trust (like Psalm 13) or trust to fear (like Psalm 22). Instead, it holds both together—"even though I am confident, I still cry out." This is mature faith: not naive optimism, but determined trust despite ongoing threat.
+
+The "one thing" is not escape from danger but proximity to God IN danger. The psalmist doesn't ask for enemies to be removed (though God may do that) but to dwell in God's presence regardless. This reframes the entire theology of protection: it's not about absence of threat but presence of God.
+
+RESEARCH FOCUS:
+The micro-analysis should explore:
+1. How the Hebrew vocabulary encodes both military/threat and temple/refuge imagery
+2. The unique phrase "beauty of the LORD"—is this David's mystical theology?
+3. The legal undertones (false witnesses, smooth path)—is there a trial context?
+4. The function of "waiting" as active faith practice
+5. How this psalm's mixed genre reflects authentic spirituality under pressure

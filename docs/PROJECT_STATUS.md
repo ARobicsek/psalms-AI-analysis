@@ -1,26 +1,22 @@
 # Project Status - Updated 2025-10-16
 
 ## Current Phase
-**Phase 1: Foundation - Week 1 - 100% COMPLETE ✅**
+**Phase 2: Scholar Agents - Week 2 - IN PROGRESS** 🔄
 
 ## Current Task
-Phase 1 Complete + BDB Scholarly Enhancement ✅ COMPLETE
-- [x] Refinement 1: Case-insensitive figurative language search
-- [x] Refinement 2: Full verse context in figurative instances
-- [x] Refinement 3: Phrase search (already implemented)
-- [x] Refinement 4: BDB usage examples extraction
-- [x] Refinement 5: Smart concordance scoping (auto-detect common vs. rare words)
-- [x] Integration testing with all refinements
-- [x] Psalm 27:1 demo verified improvements
-- [x] Documentation updated
-- [x] **BDB Scholarly Enhancement**: Switched to BDB Dictionary + Klein (8.3x more data!)
-- [x] HTML stripping for clean definitions
-- [x] Klein etymology extraction (Ugaritic cognates, Egyptian borrowings)
-- [x] Division of labor: BDB for semantics, Concordance for usage
+Phase 2, Day 6: Scholar-Researcher Agent ✅ COMPLETE
+- [x] Scholar-Researcher agent implementation (~550 LOC)
+- [x] Comprehensive BDB request generation (2-4 words/verse)
+- [x] Vehicle identification for figurative language
+- [x] Integration with Research Bundle Assembler
+- [x] Full pipeline testing (Psalms 23 and 27)
+- [x] Prompt engineering for comprehensiveness
+
+**Next**: Phase 2b - Expand scholarly resources (LXX, Commentary Librarian, RAG documents)
 
 ## Progress
-- **Overall**: 11% complete (Day 5 of 45 complete)
-- **Current phase**: 100% complete (Phase 1 FULLY COMPLETE ✅)
+- **Overall**: 13% complete (Day 6 of 45 complete)
+- **Current phase**: 20% complete (Phase 2: 1/5 tasks done)
 
 ## Completed
 ✅ **Phase 1, Day 1: Project Structure Setup** (100% COMPLETE)
@@ -94,8 +90,18 @@ Phase 1 Complete + BDB Scholarly Enhancement ✅ COMPLETE
 - ✅ Full integration test with all enhancements - PASSED ✅
 - ✅ Total enhancement code: ~1,100 LOC (logger, morphology, tests)
 
+✅ **Phase 2, Day 6: Scholar-Researcher Agent** (100% COMPLETE)
+- ✅ Created src/agents/scholar_researcher.py (~550 LOC)
+- ✅ Implemented with Claude 3.5 Haiku (cost-effective coordination)
+- ✅ Comprehensive BDB request generation (2-4 words per verse)
+- ✅ Vehicle identification for figurative language searches
+- ✅ Integration with Research Bundle Assembler
+- ✅ Tested: Psalm 23 (17 BDB requests), Psalm 27 (32 BDB requests)
+- ✅ Max tokens: 8,192 (Haiku 3.5 limit)
+- ✅ Cost: ~$0.0003 per psalm request
+
 ## In Progress
-🔄 **Ready for Phase 2**: Scholar Agents (Week 2)
+🔄 **Phase 2b**: Expanding Scholarly Resources (Next Session)
 
 ## Upcoming Phases
 - ✅ **Phase 1, Day 1**: Project structure (COMPLETE)

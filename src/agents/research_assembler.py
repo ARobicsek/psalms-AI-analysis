@@ -126,12 +126,13 @@ class ResearchBundle:
 
                 md += f"\n{entry.entry_text}\n\n"
 
-                # Show usage examples if found
-                if entry.usage_examples:
-                    md += f"**Usage examples**: {', '.join(entry.usage_examples[:10])}  \n"
-                    if len(entry.usage_examples) > 10:
-                        md += f"*...and {len(entry.usage_examples) - 10} more*  \n"
-                    md += "\n"
+                # Show etymology notes if found (Klein Dictionary)
+                if entry.etymology_notes:
+                    md += f"**Etymology**: {entry.etymology_notes}  \n\n"
+
+                # Show derivatives if found (Klein Dictionary)
+                if entry.derivatives:
+                    md += f"**Derivatives**: {entry.derivatives}  \n\n"
 
                 if entry.url:
                     md += f"[View on Sefaria]({entry.url})\n\n"

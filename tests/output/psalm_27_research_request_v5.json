@@ -1,0 +1,139 @@
+{
+  "bdb_requests": [
+    {
+      "word": "אוֹר",
+      "reason": "Light as theological salvation metaphor representing divine revelation and deliverance v.1"
+    },
+    {
+      "word": "יְשָׁעִי",
+      "reason": "Salvation term with multidimensional rescue connotations v.1"
+    },
+    {
+      "word": "מָעוֹז",
+      "reason": "Stronghold metaphor exploring divine protective power and refuge v.1"
+    },
+    {
+      "word": "חַיַּי",
+      "reason": "Life term exploring existential relationship with divine protection v.1"
+    },
+    {
+      "word": "אִירָא",
+      "reason": "Fear verb investigating psychological tension between terror and trust v.1"
+    },
+    {
+      "word": "מְרֵעִים",
+      "reason": "Evil-doers term with theological and ethical implications v.2"
+    },
+    {
+      "word": "לֶאֱכֹל",
+      "reason": "Consume/devour verb exploring metaphorical violence and destruction v.2"
+    },
+    {
+      "word": "בָּשָׂר",
+      "reason": "Flesh term investigating literal and metaphorical vulnerability v.2"
+    },
+    {
+      "word": "אַחַת",
+      "reason": "One thing - exploring theological concept of singular spiritual focus v.4"
+    },
+    {
+      "word": "נֹעַם",
+      "reason": "Beauty/pleasantness rare divine attribute with mystical implications v.4"
+    },
+    {
+      "word": "בַּקֵּר",
+      "reason": "Inquire/visit verb with temple and spiritual seeking connotations v.4"
+    },
+    {
+      "word": "סֻכָּה",
+      "reason": "Booth/pavilion term with temporary shelter and ritual significance v.5"
+    },
+    {
+      "word": "צוּר",
+      "reason": "Rock divine metaphor representing stability and protection v.5"
+    },
+    {
+      "word": "אָבִי",
+      "reason": "Father term exploring familial and metaphorical abandonment v.10"
+    },
+    {
+      "word": "קַוֵּה",
+      "reason": "Wait/hope verb investigating active spiritual anticipation v.14"
+    }
+  ],
+  "concordance_searches": [
+    {
+      "query": "נֹעַם יְהוָה",
+      "level": "exact",
+      "scope": "Tanakh",
+      "purpose": "Trace divine beauty/pleasantness concept"
+    },
+    {
+      "query": "אַל־תַּסְתֵּר פָּנֶיךָ",
+      "level": "exact",
+      "scope": "Psalms",
+      "purpose": "Analyze divine hiding/concealment lament formula"
+    },
+    {
+      "query": "קַוֵּה אֶל־יְהוָה",
+      "level": "exact",
+      "scope": "auto",
+      "purpose": "Investigate waiting/hoping theological practice"
+    }
+  ],
+  "figurative_checks": [
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Light as salvation imagery",
+      "vehicle": "light",
+      "vehicle_synonyms": [
+        "lamp",
+        "brightness",
+        "illumination"
+      ]
+    },
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Stronghold as divine protection",
+      "vehicle": "fortress",
+      "vehicle_synonyms": [
+        "refuge",
+        "stronghold",
+        "shelter"
+      ]
+    },
+    {
+      "verse": 2,
+      "likely_type": "metaphor",
+      "reason": "Flesh-devouring as destructive intent",
+      "vehicle": "predator",
+      "vehicle_synonyms": [
+        "consumer",
+        "destroyer"
+      ]
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Rock as divine stability",
+      "vehicle": "rock",
+      "vehicle_synonyms": [
+        "foundation",
+        "mountain",
+        "cliff"
+      ]
+    },
+    {
+      "verse": 10,
+      "likely_type": "metaphor",
+      "reason": "Parental abandonment representing ultimate isolation",
+      "vehicle": "parents",
+      "vehicle_synonyms": [
+        "family",
+        "caregivers"
+      ]
+    }
+  ]
+}

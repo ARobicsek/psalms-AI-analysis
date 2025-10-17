@@ -1,0 +1,66 @@
+{
+  "bdb_requests": [
+    {
+      "word": "מָעוֹז",
+      "reason": "Unique divine protection metaphor, exploring martial-theological implications"
+    },
+    {
+      "word": "נֹעַם",
+      "reason": "Rare term describing divine beauty/pleasantness, needs theological nuancing"
+    },
+    {
+      "word": "בַּקֵּר",
+      "reason": "Temple/inquiry verb with complex semantic range"
+    },
+    {
+      "word": "סֻכָּה",
+      "reason": "Temporary shelter term with ritual/theological overtones"
+    },
+    {
+      "word": "קַוֵּה",
+      "reason": "Active waiting verb central to faith psychology"
+    }
+  ],
+  "concordance_searches": [
+    {
+      "query": "אַחַת",
+      "level": "exact",
+      "scope": "Tanakh",
+      "purpose": "Track theological significance of numerical singularity"
+    },
+    {
+      "query": "נֹעַם יְהוָה",
+      "level": "exact",
+      "scope": "Psalms",
+      "purpose": "Trace unique phraseology describing divine aesthetic"
+    },
+    {
+      "query": "אֹרַח",
+      "level": "consonantal",
+      "scope": "auto",
+      "purpose": "Map ethical path/way terminology across wisdom literature"
+    }
+  ],
+  "figurative_checks": [
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Light/stronghold as divine protection imagery"
+    },
+    {
+      "verse": 2,
+      "likely_type": "metaphor",
+      "reason": "Flesh-devouring language suggesting hostile intent"
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Tent/rock as divine shelter conceptualization"
+    },
+    {
+      "verse": 9,
+      "likely_type": "metonymy",
+      "reason": "Face as representation of divine presence"
+    }
+  ]
+}

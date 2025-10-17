@@ -1,0 +1,66 @@
+{
+  "bdb_requests": [
+    {
+      "word": "רעה",
+      "reason": "Root with complex pastoral and royal theological connotations, central to divine leadership metaphor"
+    },
+    {
+      "word": "נפש",
+      "reason": "Multivalent term indicating life/soul/self, critical in understanding spiritual restoration concept"
+    },
+    {
+      "word": "צלמות",
+      "reason": "Unique compound word signifying extreme existential danger, etymology disputed"
+    },
+    {
+      "word": "שׁבת",
+      "reason": "Root in 'dwelling' (v.6) - exploring permanent residence vs. temporary sojourn theological nuance"
+    },
+    {
+      "word": "חסד",
+      "reason": "Covenant love term, pivotal in understanding divine relationship beyond transactional protection"
+    }
+  ],
+  "concordance_searches": [
+    {
+      "query": "רעה",
+      "level": "consonantal",
+      "scope": "auto",
+      "purpose": "Track shepherd imagery across wisdom literature and prophetic texts"
+    },
+    {
+      "query": "בית יהוה",
+      "level": "exact",
+      "scope": "Psalms",
+      "purpose": "Analyze 'house of the LORD' metaphorical usage"
+    },
+    {
+      "query": "שׁלחן",
+      "level": "consonantal",
+      "scope": "auto",
+      "purpose": "Trace banquet/hosting metaphors in theological literature"
+    }
+  ],
+  "figurative_checks": [
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Shepherd as divine governance model"
+    },
+    {
+      "verse": 2,
+      "likely_type": "metaphor",
+      "reason": "Green pastures and still waters as spiritual abundance symbols"
+    },
+    {
+      "verse": 4,
+      "likely_type": "personification",
+      "reason": "Shadow of death as threatening existential entity"
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Banquet imagery representing divine honor and provision"
+    }
+  ]
+}
