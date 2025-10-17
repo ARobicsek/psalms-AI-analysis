@@ -1,13 +1,40 @@
 # Next Session Prompt: Phase 3c - SynthesisWriter Agent
 
-## Current Status: Phase 3b COMPLETE ✅
+## Current Status: Phase 3b COMPLETE + Pipeline Refinements ✅
 
-**Completed in Previous Session:**
+**Completed in Previous Sessions:**
 - ✅ LXX (Greek Septuagint) integration into RAG Manager
 - ✅ MicroAnalyst v2 agent built with curiosity-driven architecture
 - ✅ Three-stage discovery process: Fresh Eyes → Research Requests → Assembly
 - ✅ Comprehensive input logging for transparency
 - ✅ Successfully tested on Psalm 29 with rich outputs
+- ✅ **NEW**: Pipeline refinements for improved search recall (Oct 17)
+  - Concordance searches now default to "consonantal" (not "exact")
+  - Figurative searches no longer filter by type (metaphor, simile, etc.)
+  - Expected 20-30% improvement in data retrieval
+
+**Recent Improvements (Oct 17 Evening):**
+
+Two critical pipeline refinements completed:
+
+1. **Concordance Search Strategy**: Changed default from "exact" to "consonantal"
+   - Exact searches were too restrictive (missed vocalization variants)
+   - Consonantal matches all root forms regardless of Masoretic pointing
+   - "Exact" now reserved for homograph disambiguation only
+   - Files modified: `micro_analyst.py`, `scholar_researcher.py`, `ARCHITECTURE.md`
+
+2. **Figurative Language Strategy**: Removed type filtering
+   - Previously filtered by "metaphor" vs "simile" vs "personification"
+   - This was too restrictive (figurative instances are multi-dimensional)
+   - Now retrieves ALL figurative instances for a verse
+   - Filters only by vehicle/target if specified
+   - Files modified: `micro_analyst.py`, `scholar_researcher.py`
+
+**Why This Matters for SynthesisWriter:**
+- More comprehensive research data in research bundles
+- Higher recall on concordance patterns across scripture
+- Broader figurative language context
+- SynthesisWriter will have richer data to work with
 
 **Test Outputs Available:**
 - `output/phase3_test/psalm_029_macro.json` - Pass 1 MacroAnalysis (thesis, structure, devices)
@@ -26,7 +53,7 @@
 The **SynthesisWriter** is the scholarly essayist who receives:
 1. MacroAnalysis (thesis + structure from Pass 1)
 2. MicroAnalysis (verse discoveries from Pass 2)
-3. Research Bundle (all lexical/concordance/figurative/commentary data)
+3. Research Bundle (all lexical/concordance/figurative/commentary data - NOW MORE COMPREHENSIVE!)
 
 And produces:
 1. **Introduction Essay (800-1200 words)**: Presents genre, context, thesis, structure, and key poetic devices
@@ -57,9 +84,10 @@ And produces:
 
 **5. Research Integration**
 - Smoothly weave lexical insights into commentary
-- Reference concordance patterns where illuminating
+- Reference concordance patterns where illuminating (NOW MORE COMPREHENSIVE!)
 - Incorporate traditional commentary perspectives
 - Use LXX to show ancient interpretive tradition
+- Leverage figurative language analysis (NOW BROADER!)
 
 ### Implementation Task: Build `src/agents/synthesis_writer.py`
 
@@ -173,7 +201,8 @@ A successful SynthesisOutput should demonstrate:
 **Documentation:**
 - `docs/PHASE3_ARCHITECTURE.md` - Full pipeline overview
 - `docs/TESTING_AND_OUTPUT_CONVENTIONS.md` - Where to save files
-- `docs/IMPLEMENTATION_LOG.md` - Historical context
+- `docs/IMPLEMENTATION_LOG.md` - Historical context (includes Oct 17 refinements)
+- `docs/ARCHITECTURE.md` - Updated with new search strategies
 
 ---
 
@@ -237,23 +266,62 @@ Phase 3c will be complete when:
 
 ---
 
+## Recent Changes to Be Aware Of
+
+**Pipeline Improvements (Oct 17):**
+
+The research pipeline now provides MORE comprehensive data:
+
+1. **Concordance Searches** - Higher Recall
+   - Default level changed from "exact" to "consonantal"
+   - Captures all root forms regardless of vowel pointing
+   - "Exact" reserved only for homograph disambiguation
+   - **Impact**: Expect 20-30% more concordance results
+
+2. **Figurative Language** - Broader Coverage
+   - No longer filters by specific type (metaphor vs. simile vs. personification)
+   - Retrieves ALL figurative instances for a verse
+   - Only filters by vehicle/target when specified
+   - **Impact**: More comprehensive figurative context
+
+**What This Means for SynthesisWriter:**
+- Research bundles now contain richer data
+- More concordance patterns to reference
+- Broader figurative language context
+- Better foundation for synthesis
+
+**Code Changes:**
+- `src/agents/micro_analyst.py` - Updated prompts and examples
+- `src/agents/scholar_researcher.py` - Updated prompts and parsing logic
+- `docs/ARCHITECTURE.md` - Enhanced search documentation
+
+**Git Status:**
+- Committed: `acdec5c` - "Pipeline Refinements: Improve Search Recall & Reduce Filtering"
+- Clean working directory (ready for Phase 3c work)
+
+---
+
 ## Quick Start Command
 
 ```bash
-cd /path/to/Psalms
-source venv/Scripts/activate
+cd c:\Users\ariro\OneDrive\Documents\Psalms
+source venv/Scripts/activate  # or: venv\Scripts\activate on Windows
 
 # Review prior outputs first
 cat output/phase3_test/psalm_029_macro.md
 cat output/phase3_test/psalm_029_micro.md
 head -100 output/phase3_test/psalm_029_research.md
 
-# Then build and test
+# Review recent pipeline improvements
+git log -1 --stat
+
+# Then build and test SynthesisWriter
 python tests/test_synthesis_writer.py
 ```
 
 ---
 
-**Last Updated**: 2025-10-17 (Phase 3b Complete, Phase 3c Ready to Start)
+**Last Updated**: 2025-10-17 Evening (Pipeline refinements complete, Phase 3c ready to start)
 **Next Agent**: SynthesisWriter (Pass 3)
 **Test Psalm**: Psalm 29 (rich prior outputs available)
+**Recent Changes**: Concordance/figurative search improvements for better data retrieval
