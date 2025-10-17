@@ -9,6 +9,7 @@ Librarian Agents Coordinated:
 1. BDB Librarian - Hebrew lexicon entries
 2. Concordance Librarian - Word/phrase searches with variations
 3. Figurative Language Librarian - Figurative instances with hierarchical tags
+4. Commentary Librarian - Traditional Jewish commentaries (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri)
 
 Input: JSON research request from Scholar-Researcher
 Output: Complete research bundle ready for Scholar-Writer agents
@@ -46,6 +47,7 @@ class ResearchRequest:
     lexicon_requests: List[LexiconRequest]
     concordance_requests: List[ConcordanceRequest]
     figurative_requests: List[FigurativeRequest]
+    commentary_requests: Optional[List[Dict[str, Any]]] = None  # [{"psalm": 27, "verse": 1, "reason": "..."}]
     notes: Optional[str] = None  # Overall research notes from Scholar
 
     @classmethod
@@ -65,6 +67,7 @@ class ResearchRequest:
                 FigurativeRequest.from_dict(r)
                 for r in data.get('figurative', [])
             ],
+            commentary_requests=data.get('commentary', []),
             notes=data.get('notes')
         )
 
@@ -74,13 +77,14 @@ class ResearchBundle:
     """
     Complete research bundle assembled for a Psalm.
 
-    Contains all lexicon entries, concordance searches, and figurative
-    language instances requested by the Scholar-Researcher.
+    Contains all lexicon entries, concordance searches, figurative
+    language instances, and traditional commentaries requested by the Scholar-Researcher.
     """
     psalm_chapter: int
     lexicon_bundle: Optional[LexiconBundle]
     concordance_bundles: List[ConcordanceBundle]
     figurative_bundles: List[FigurativeBundle]
+    commentary_bundles: Optional[List[CommentaryBundle]]
     request: ResearchRequest
 
     def to_dict(self) -> Dict[str, Any]:
@@ -90,12 +94,15 @@ class ResearchBundle:
             'lexicon': self.lexicon_bundle.to_dict() if self.lexicon_bundle else None,
             'concordance': [c.to_dict() for c in self.concordance_bundles],
             'figurative': [f.to_dict() for f in self.figurative_bundles],
+            'commentary': [c.to_dict() for c in self.commentary_bundles] if self.commentary_bundles else [],
             'summary': {
                 'lexicon_entries': len(self.lexicon_bundle.entries) if self.lexicon_bundle else 0,
                 'concordance_searches': len(self.concordance_bundles),
                 'concordance_results': sum(len(c.results) for c in self.concordance_bundles),
                 'figurative_searches': len(self.figurative_bundles),
-                'figurative_instances': sum(len(f.instances) for f in self.figurative_bundles)
+                'figurative_instances': sum(len(f.instances) for f in self.figurative_bundles),
+                'commentary_verses': len(self.commentary_bundles) if self.commentary_bundles else 0,
+                'commentary_entries': sum(len(c.commentaries) for c in self.commentary_bundles) if self.commentary_bundles else 0
             }
         }
 
@@ -218,6 +225,33 @@ class ResearchBundle:
 
                 md += "---\n\n"
 
+        # Commentary section
+        if self.commentary_bundles:
+            md += "## Traditional Commentaries\n\n"
+            md += "Classical interpretations from traditional Jewish commentators on key verses.\n\n"
+
+            for bundle in self.commentary_bundles:
+                md += f"### Psalms {bundle.psalm}:{bundle.verse}\n"
+                md += f"**Why this verse**: {bundle.reason}  \n\n"
+
+                if bundle.commentaries:
+                    for comm in bundle.commentaries:
+                        md += f"#### {comm.commentator}\n"
+
+                        # Show Hebrew (truncate if too long)
+                        if comm.hebrew:
+                            hebrew_text = comm.hebrew if len(comm.hebrew) <= 400 else f"{comm.hebrew[:400]}..."
+                            md += f"**Hebrew**: {hebrew_text}  \n\n"
+
+                        # Show English (truncate if too long)
+                        if comm.english:
+                            english_text = comm.english if len(comm.english) <= 400 else f"{comm.english[:400]}..."
+                            md += f"**English**: {english_text}  \n\n"
+
+                        md += "---\n\n"
+                else:
+                    md += "*No commentaries available for this verse.*\n\n"
+
         # Summary
         summary = self.to_dict()['summary']
         md += "## Research Summary\n\n"
@@ -226,6 +260,8 @@ class ResearchBundle:
         md += f"- **Concordance results**: {summary['concordance_results']}\n"
         md += f"- **Figurative language searches**: {summary['figurative_searches']}\n"
         md += f"- **Figurative instances found**: {summary['figurative_instances']}\n"
+        md += f"- **Commentary verses**: {summary['commentary_verses']}\n"
+        md += f"- **Commentary entries**: {summary['commentary_entries']}\n"
 
         return md
 
@@ -266,6 +302,7 @@ class ResearchAssembler:
         self.bdb_librarian = BDBLibrarian()
         self.concordance_librarian = ConcordanceLibrarian()
         self.figurative_librarian = FigurativeLibrarian()
+        self.commentary_librarian = CommentaryLibrarian()
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
         """
@@ -301,11 +338,17 @@ class ResearchAssembler:
         if request.figurative_requests:
             figurative_bundles = self.figurative_librarian.search_multiple(request.figurative_requests)
 
+        # Fetch traditional commentaries
+        commentary_bundles = None
+        if request.commentary_requests:
+            commentary_bundles = self.commentary_librarian.process_requests(request.commentary_requests)
+
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,
             lexicon_bundle=lexicon_bundle,
             concordance_bundles=concordance_bundles,
             figurative_bundles=figurative_bundles,
+            commentary_bundles=commentary_bundles,
             request=request
         )
 

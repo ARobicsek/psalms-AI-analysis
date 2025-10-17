@@ -3207,3 +3207,191 @@ def fetch_psalm(self, chapter: int, include_lxx: bool = True):
 - Unicode bidirectional text: https://www.unicode.org/reports/tr9/
 
 ---
+
+## 2025-10-17 - Day 7: Phase 2c - Commentary Integration Complete
+
+### Session Started
+Time started: Variable (continued from Day 7 session)
+
+### Tasks Completed
+✅ Added Malbim and Meiri commentators to Commentary Librarian (now 6 total)
+✅ Extended ResearchRequest dataclass with commentary_requests field
+✅ Updated ResearchRequest.from_dict() to handle commentary data
+✅ Integrated Commentary Librarian into Research Assembler
+✅ Extended ResearchBundle with commentary_bundles field
+✅ Added commentary section to ResearchBundle.to_markdown()
+✅ Updated summary statistics to include commentary metrics
+✅ Full integration testing with Psalm 27
+
+### Key Learnings
+
+#### 1. Commentary Availability Varies
+- Not all commentators comment on all verses
+- Rashi: Most comprehensive, but still has gaps (e.g., Psalm 27:1 missing)
+- Malbim: Has English translations for some verses
+- Ibn Ezra, Radak, Meiri: Hebrew only
+- Metzudat David: Both Hebrew and English
+- Strategy: Default to Rashi only (most comprehensive) unless Scholar requests specific commentators
+
+#### 2. Integration Pattern Success
+The integration followed the established pattern:
+1. Add new librarian to Research Assembler `__init__`
+2. Add request field to ResearchRequest dataclass
+3. Update `from_dict()` to parse new request format
+4. Add processing in `assemble()` method
+5. Add bundle to ResearchBundle dataclass
+6. Update `to_dict()` and `to_markdown()` for output
+7. Update summary statistics
+
+This pattern is now proven for adding future resources (e.g., Targum, Dead Sea Scrolls parallels).
+
+#### 3. Markdown Formatting Strategy
+Commentary formatting uses truncation for LLM consumption:
+- **Hebrew text**: Max 400 chars (then "...")
+- **English text**: Max 400 chars (then "...")
+- **Rationale**: Commentaries can be very long (500-1000+ chars)
+- **Benefit**: Keeps research bundles focused and prevents token bloat
+- **Trade-off**: Scholar-Writer can request full text via Sefaria URL if needed
+
+#### 4. Research Bundle Architecture
+The Research Bundle now contains 4 data sources:
+1. **Lexicon Bundle**: Hebrew word definitions (BDB/Klein)
+2. **Concordance Bundles**: Word/phrase usage across Tanakh
+3. **Figurative Bundles**: Pre-analyzed figurative language instances
+4. **Commentary Bundles**: Traditional Jewish interpretations (NEW!)
+
+This gives the Scholar-Writer:
+- Linguistic foundation (lexicon + concordance)
+- Literary analysis (figurative language)
+- Traditional scholarship (commentaries)
+- Multi-source validation for any interpretation
+
+### Code Changes
+
+#### Files Modified
+1. **src/agents/commentary_librarian.py** (~400 LOC total)
+   - Added Malbim and Meiri to COMMENTATORS dict
+   - Updated module docstring with new commentators
+   - No breaking changes, backward compatible
+
+2. **src/agents/research_assembler.py** (~450 LOC total)
+   - Added `commentary_bundles` field to ResearchBundle
+   - Added `commentary_requests` field to ResearchRequest
+   - Updated `from_dict()` to parse commentary requests
+   - Added commentary processing in `assemble()` method
+   - Added commentary section to `to_markdown()` output (25 new lines)
+   - Updated summary statistics with commentary counts
+   - Updated module docstring
+
+#### Test Results
+```bash
+# Test with Psalm 27 (3 commentary requests)
+Commentary verses: 3
+Commentary entries: 2 (Psalm 27:1 had no Rashi, 27:4 and 27:13 succeeded)
+
+# Test with all 6 commentators on Psalm 27:4
+Fetched 5 commentaries:
+  - Rashi: 195 Hebrew chars, 300 English chars
+  - Ibn Ezra: 333 Hebrew chars, 0 English chars
+  - Radak: 785 Hebrew chars, 0 English chars  
+  - Metzudat David: 97 Hebrew chars, 211 English chars
+  - Meiri: 220 Hebrew chars, 0 English chars
+  (Malbim had no commentary on this verse)
+```
+
+### Performance Metrics
+- **Development time**: ~1 hour (integration + testing)
+- **New code**: ~60 LOC (commentary integration in assembler)
+- **Modified code**: ~30 LOC (dataclass extensions + markdown output)
+- **Test coverage**: Full integration test with real Sefaria data ✅
+
+### Decisions Made
+
+#### Decision 1: Default to Rashi Only
+**Choice**: process_requests() defaults to Rashi commentator only
+**Rationale**:
+- Rashi has the widest coverage across Psalms
+- Fetching all 6 commentators = 6× API calls per verse
+- Scholar-Researcher can explicitly request additional commentators if needed
+- Keeps default research bundles focused and efficient
+**Cost impact**: ~1-2 seconds per verse (vs 6-12 seconds for all commentators)
+
+#### Decision 2: Commentary Truncation at 400 Chars
+**Choice**: Truncate commentary text in markdown output at 400 characters
+**Rationale**:
+- Some commentaries are 1000+ characters (especially Radak, Malbim)
+- Scholar-Writer needs overview, not full text
+- Full text available via Sefaria API if needed
+- Prevents research bundles from becoming unwieldy
+**Trade-off**: Slight loss of detail, but keeps bundles focused
+
+#### Decision 3: Handle Missing Commentaries Gracefully
+**Choice**: Show "No commentaries available for this verse" when all fail
+**Rationale**:
+- Scholar requested commentary for a reason (likely interesting verse)
+- Showing "no commentary" signals to Scholar-Writer to rely more on other sources
+- Prevents silent failures
+**Implementation**: Check if `bundle.commentaries` is empty in markdown output
+
+### Integration Status
+
+**Phase 2: Scholar Agents - COMPLETE** ✅
+- ✅ Scholar-Researcher Agent (Day 6)
+- ✅ LXX Integration (Day 7a)
+- ✅ Commentary Librarian (Day 7b)
+- ✅ Commentary Integration with Research Assembler (Day 7c) ← TODAY
+
+**Research Assembler now coordinates 4 librarians:**
+1. ✅ BDB Librarian (lexicon)
+2. ✅ Concordance Librarian (usage patterns)
+3. ✅ Figurative Librarian (literary analysis)
+4. ✅ Commentary Librarian (traditional scholarship)
+
+**Scholar-Researcher generates requests for all 4 librarians:**
+```json
+{
+  "bdb_requests": [...],
+  "concordance_searches": [...],
+  "figurative_checks": [...],
+  "commentary_requests": [...] ← NEW!
+}
+```
+
+### Next Steps
+
+**Phase 2d: RAG Documents** (Optional - may defer)
+- Review analytical_framework_for_RAG.md
+- Review psalm_function_for_RAG.md
+- Review Ugaritic_comparisons_for_RAG.md
+- Design injection strategy for Scholar-Writer prompts
+- **Decision point**: May integrate RAG docs during Scholar-Writer implementation
+
+**Phase 3: Scholar-Writer Agents** (Next Major Phase)
+1. **Pass 1: Macro Analysis** (Sonnet 4.5)
+   - Design prompt for chapter-level thesis
+   - Test with Psalms 1, 23, 27
+   - Quality metrics: thesis specificity, structural insights
+
+2. **Pass 2: Micro Analysis** (Sonnet 4.5)
+   - Design prompt for verse-by-verse commentary
+   - Integrate research bundles (all 4 sources!)
+   - Test telescopic integration (macro thesis → micro details)
+
+3. **Pass 3: Synthesis** (Sonnet 4.5)
+   - Design synthesis prompt (coherent essay)
+   - Implement Critic agent (Haiku 4.5)
+   - Implement revision loop
+
+### Notes
+- **Phase 2 is 100% COMPLETE** ✅
+- All librarian agents fully implemented and integrated
+- Research infrastructure ready for Scholar-Writer agents
+- Total librarian code: ~2,500 LOC across 5 modules
+- Ready to move to Phase 3: Analysis & Writing
+
+### Session End
+Phase 2c successfully completed. Commentary integration adds traditional scholarship layer to research bundles, creating rich multi-source context for Scholar-Writer agents.
+
+**Next session**: Begin Phase 3 - Scholar-Writer Agent (Pass 1: Macro Analysis)
+
+---

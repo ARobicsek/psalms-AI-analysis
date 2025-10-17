@@ -9,6 +9,8 @@ Supported Commentators:
 - Ibn Ezra (Rabbi Abraham ibn Ezra, 12th century, Spain)
 - Radak (Rabbi David Kimchi, 12th-13th century, Provence)
 - Metzudat David (18th century, Italy)
+- Malbim (Rabbi Meir Leibush ben Yehiel Michel Wisser, 19th century, Ukraine)
+- Meiri (Rabbi Menachem ben Solomon Meiri, 13th-14th century, Provence)
 
 Usage:
     from src.agents.commentary_librarian import CommentaryLibrarian
@@ -52,7 +54,9 @@ COMMENTATORS = {
     "Rashi": "Rashi on Psalms",
     "Ibn Ezra": "Ibn Ezra on Psalms",
     "Radak": "Radak on Psalms",
-    "Metzudat David": "Metzudat David on Psalms"
+    "Metzudat David": "Metzudat David on Psalms",
+    "Malbim": "Malbim on Psalms",
+    "Meiri": "Meiri on Psalms"
 }
 
 
@@ -288,14 +292,14 @@ class CommentaryLibrarian:
                      - psalm (int): Psalm number
                      - verse (int): Verse number
                      - reason (str): Why this verse needs commentary
-            commentators: List of commentator names (default: Rashi only for efficiency)
+            commentators: List of commentator names (default: all 6 available commentators)
 
         Returns:
             List of CommentaryBundle objects
         """
         if commentators is None:
-            # Default to Rashi only for efficiency (most comprehensive)
-            commentators = ["Rashi"]
+            # Default to all available commentators for comprehensive coverage
+            commentators = list(COMMENTATORS.keys())
 
         logger.info(f"Processing {len(requests)} commentary requests...")
 
