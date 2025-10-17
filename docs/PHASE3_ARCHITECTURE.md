@@ -25,21 +25,32 @@ The Phase 3 pipeline produces comprehensive psalm commentary through five sequen
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
-│ PASS 2: MicroAnalyst (Sonnet 4.5 + extended thinking)      │
+│ PASS 2: MicroAnalyst v2 (Sonnet 4.5 + extended thinking) ✅ │
 │                                                              │
 │ INPUT: MacroAnalysis + RAG context + Psalm text + LXX       │
 │                                                              │
-│ PROCESS:                                                     │
-│ 1. Read macro thesis and research questions                 │
-│ 2. Generate research requests:                              │
-│    • BDB lexicon (25-50 Hebrew words)                       │
-│    • Concordance searches (thematic roots/phrases)          │
-│    • Figurative language (verses with metaphors)            │
-│    • Traditional commentary (6 commentators)                │
-│ 3. Call Research Assembler → Librarians fetch data          │
-│ 4. Produce detailed verse-by-verse analysis                 │
+│ PHILOSOPHY: CURIOSITY-DRIVEN (not thesis-confirming)        │
 │                                                              │
-│ OUTPUT: MicroAnalysis object + Research Bundle              │
+│ STAGE 1: Quick Discovery Pass                               │
+│   - Read each verse with fresh eyes                         │
+│   - Notice patterns, surprises, puzzles, curious words      │
+│   - Identify figurative language and poetic devices         │
+│   - Keep macro thesis in peripheral vision only             │
+│                                                              │
+│ STAGE 2: Generate Research Requests                         │
+│   - Based on discoveries (not thesis support)               │
+│   - BDB lexicon (20-40 curious words)                       │
+│   - Concordance searches (5-10 patterns)                    │
+│   - Figurative language (all metaphorical verses)           │
+│   - Traditional commentary (3-6 puzzling verses)            │
+│                                                              │
+│ STAGE 3: Call Research Assembler                            │
+│   - Librarians fetch comprehensive research data            │
+│                                                              │
+│ OUTPUT: MicroAnalysis (discoveries) + Research Bundle       │
+│                                                              │
+│ NOTE: MicroAnalyst does NOT do heavy analysis - it          │
+│ discovers and requests. SynthesisWriter analyzes.           │
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -323,6 +334,7 @@ Commentary must demonstrate:
 
 ---
 
-**Status**: Phase 3a (Pass 1) ✅ COMPLETE
-**Next**: Phase 3b (Add LXX + Build MicroAnalyst)
-**Target Completion**: 6-8 sessions for full Phase 3
+**Status**: Phase 3b (Pass 2) ✅ COMPLETE
+**Completed**: MacroAnalyst ✅ | MicroAnalyst v2 ✅ | LXX Integration ✅
+**Next**: Phase 3c (Build SynthesisWriter - Pass 3)
+**Target Completion**: 4-6 more sessions for full Phase 3
