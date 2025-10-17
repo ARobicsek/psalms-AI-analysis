@@ -3905,3 +3905,96 @@ This transparency makes debugging easier and confirms data flow.
 - Total new/modified: ~565 LOC
 
 **Ready for**: Phase 3c (SynthesisWriter agent)
+
+
+---
+
+## 2025-10-17 - Pipeline Refinements: Search Strategy Improvements
+
+### Session Started
+Time: Evening session
+
+### Tasks Completed
+✅ Updated concordance search default level from "exact" to "consonantal"
+✅ Removed figurative type filtering from research pipeline
+✅ Updated documentation (ARCHITECTURE.md)
+✅ Committed changes with comprehensive documentation
+
+### Issue: Concordance "Exact" Setting Missing Relevant Entries
+
+**Problem**: The MicroAnalyst was instructing agents to use "exact" concordance searches by default, which missed relevant entries because of vocalization differences. For example, searching for קוֹל יְהוָה (exact) would miss קול יהוה with different vowel points.
+
+**Root Cause**: Hebrew vocalizations represent later Masoretic pointing; same words can have different vowel patterns in different contexts. "Exact" searches are too restrictive unless specifically trying to distinguish homographs (same consonants, different meanings).
+
+**Solution**:
+- Updated MicroAnalyst prompt to **default to "consonantal" level**
+- Added explicit guidance: only use "exact" when concerned about homographs
+- Updated all example JSON to use `"level": "consonantal"`
+- Clarified that "consonantal" finds all forms regardless of vocalization
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` (lines 166-172, 191-194)
+- `src/agents/scholar_researcher.py` (example prompt template)
+- `docs/ARCHITECTURE.md` (concordance search documentation)
+
+### Issue: Figurative Type Filtering Too Restrictive
+
+**Problem**: The pipeline was filtering figurative language searches by specific types (metaphor, simile, personification, etc.). This caused misses when a figurative instance was tagged with a different type than expected.
+
+**Root Cause**: The `likely_type` field from MicroAnalyst was being parsed and converted to boolean filters like `metaphor=True`, which would exclude similes, personification, etc. Figurative analysis is nuanced - an instance might legitimately be tagged multiple ways.
+
+**Solution**:
+- Removed `likely_type` field from all examples in MicroAnalyst and ScholarResearcher prompts
+- Added explicit instruction: **"DO NOT filter by specific figuration type"**
+- Removed parsing code that converted `likely_type` to boolean filters
+- Searches now find **all figurative instances** for a verse, filtering only by vehicle if specified
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` (lines 174-177, 196-199)
+- `src/agents/scholar_researcher.py` (lines 98-113, 189-195, 269-310, 221)
+- `docs/ARCHITECTURE.md` (figurative language documentation)
+
+### Architecture Decisions
+
+#### Decision: Consonantal Search as Default
+**Rationale**: Hebrew consonantal roots are semantically stable; vocalizations vary by grammar context. Consonantal search captures the full semantic range of a root while exact search is overly restrictive for most use cases.
+
+**Impact**: Higher recall in concordance searches, better capture of thematic patterns across scripture.
+
+#### Decision: Remove Type Filtering from Figurative Searches
+**Rationale**: Figurative language classification is subtle and multi-dimensional. An image might be simultaneously metaphor and personification. Filtering by type creates false negatives.
+
+**Impact**: More comprehensive figurative data reaches the SynthesisWriter, allowing for richer analysis.
+
+### Code Changes Summary
+
+**Modified Files**:
+1. `src/agents/micro_analyst.py`: Updated prompts and examples
+2. `src/agents/scholar_researcher.py`: Updated prompts, examples, and parsing logic
+3. `docs/ARCHITECTURE.md`: Enhanced search documentation
+
+**Lines Changed**: ~50 lines across 3 files
+
+### Key Learnings
+
+**Learning 1: Vocalization Sensitivity**
+Hebrew vocalizations were added centuries after the text was written. For thematic analysis, consonantal matching is usually more appropriate than exact matching. "Exact" should be reserved for homograph disambiguation (e.g., distinguishing אֵל "God" from אֶל "to").
+
+**Learning 2: Classification Brittleness**
+Pre-filtering data by classification (metaphor vs. simile) introduces brittleness. Better to retrieve broadly and let the synthesis stage make interpretive decisions with full context.
+
+**Learning 3: Default vs. Override Pattern**
+Setting smart defaults ("consonantal" for concordance) with explicit override instructions ("only use exact if...") is better than leaving choices ambiguous. Reduces cognitive load for AI agents making decisions.
+
+### Session End
+
+**Status**: Pipeline refinements COMPLETE ✅
+
+**Deliverables**:
+- Smarter concordance search defaults (consonantal by default)
+- Broader figurative language searches (no type filtering)
+- Updated documentation across 3 files
+- Improved recall for downstream analysis
+
+**Ready for**: Phase 3c (SynthesisWriter agent) with improved research pipeline
+

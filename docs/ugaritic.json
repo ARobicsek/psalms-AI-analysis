@@ -398,5 +398,85 @@
     },
     "linguistic_analysis": "The pair '’ab' (father) // '’um' (mother) is a natural and fundamental pairing. The Hebrew cognates are '’āḇ' and '’ēm'. This pair forms a merism for 'parents' or 'family'.",
     "conceptual_analysis": "This pairing represents the most basic human relationship. In Psalm 27, the potential failure of this foundational human bond is contrasted with the unfailing care of Yahweh. The use of this fundamental pair serves to heighten the contrast and emphasize the depth of God's faithfulness."
+  },
+  {
+    "entry_id": "DE_01",
+    "parallel_type": "Divine Epithet",
+    "ugaritic_source": {
+      "text_reference": "KTU 1.3:39-40 (Baal Cycle)",
+      "transliteration": "rkb 'rpt",
+      "translation": "\"rider on the clouds\""
+    },
+    "hebrew_psalter_source": {
+      "text_reference": "Psalm 68:4 [Eng. 68:3]",
+      "transliteration": "sollu lārōḵēḇ bā‘ārābōṯ",
+      "translation": "\"Extol him who rides upon the clouds.\""
+    },
+    "linguistic_analysis": "The Ugaritic epithet *rkb 'rpt* literally means \"Cloud-Rider\". The Hebrew phrase in Psalm 68:4 uses the cognate root *rkb* (\"to ride\"), here rendered *bā‘ārābōṯ* (traditionally \"deserts\"). However, Ugaritic philology and the interchange of /b/ and /p/ imply an original *bā‘arāp̄ōṯ*, i.e. \"rider of the clouds,\" directly paralleling *rkb 'rpt*.",
+    "conceptual_analysis": "By applying Baal's distinctive cloud-storm epithet to Yahweh, Psalm 68 polemically asserts that the God of Israel, not Baal, controls the rains and fertility. This transference effectively claims Baal's powers for Yahweh. The verse thus proclaims Yahweh the true \"Rider of the Clouds,\" undermining Baal's claim to storm-god status and affirming Yahweh's sovereignty over nature."
+  },
+  {
+    "entry_id": "CC_02",
+    "parallel_type": "Chaoskampf Motif",
+    "ugaritic_source": {
+      "text_reference": "KTU 1.2 (Baal vs Yam)",
+      "transliteration": "Rahab / Lṭn",
+      "translation": "\"Rahab (the sea monster) / Leviathan\""
+    },
+    "hebrew_psalter_source": {
+      "text_reference": "Psalm 89:10-11",
+      "transliteration": "’attâ môleḵ mâroṣê yeẓêr yam, im rahăḇ kammût māṯim, tits‘ênû ’ôvêkha beyad yemînêkha.",
+      "translation": "\"You crushed Rahab like one of the slain; you scattered your enemies with your mighty arm.\""
+    },
+    "linguistic_analysis": "Hebrew *Rahab* in Psalm 89 parallels the mythic sea monster Rahab in Canaanite lore. Both *Rahab* and *Leviathan/Tannin* represent chaotic primeval waters. The shared terminology (Rahab, Yam, Leviathan) indicates that the same ancient chaoskampf imagery is at play in the psalm.",
+    "conceptual_analysis": "By depicting Yahweh as slaying Rahab, Psalm 89 draws on the Canaanite storm-myth tradition where Rahab is a dragon of the sea. In the Bible this act confirms Yahweh’s dominion over chaos. Unlike Baal’s victory that establishes him as king, Yahweh’s conquest of Rahab and Leviathan is narrated as foundational and cosmic. The imagery demonstrates Yahweh as the one who tames chaos itself, reinforcing his unmatched power over all creation."
+  },
+  {
+    "entry_id": "SK_01",
+    "parallel_type": "Divine Theophany",
+    "ugaritic_source": {
+      "text_reference": "RS 24.245 (Baal Cycle)",
+      "transliteration": "N/A",
+      "translation": "\"Baal sat enthroned, with the mountain as his throne...\""
+    },
+    "hebrew_psalter_source": {
+      "text_reference": "Psalm 29:10",
+      "transliteration": "YHWH yashav malka; YHWH yoshev malchut le-olam",
+      "translation": "\"The LORD sat enthroned at the Flood; yes, He sits as King forever.\""
+    },
+    "linguistic_analysis": "Both texts describe a storm-god enthroned on high. In Ugaritic Baal is said to sit enthroned upon his mountain; Psalm 29:10 similarly has Yahweh \"sitting as King forever\" on the cosmic waters. The parallel vocabulary of divine enthronement highlights the shared mythopoetic motif.",
+    "conceptual_analysis": "By paralleling Baal’s enthronement scene, Psalm 29 asserts Yahweh’s supreme kingship. In the Canaanite myth, Baal’s throne atop Zaphon marks his rulership. Psalm 29 transfers that imagery to Yahweh (\"at the Flood\" symbolizing a cosmic mountain). The polemic is that Yahweh, not Baal, holds the divine throne. It appropriates the powerful imagery of a mountain-vaulted king of gods and applies it to Yahweh, framing the Lord as the one true enthroned deity of the cosmos."
+  },
+  {
+    "entry_id": "PW_03",
+    "parallel_type": "Poetic Word Pair",
+    "ugaritic_source": {
+      "text_reference": "KTU 1.x",
+      "transliteration": "ṭrym / ḥrym",
+      "translation": "\"mountains / hills\""
+    },
+    "hebrew_psalter_source": {
+      "text_reference": "Psalm 104:17",
+      "transliteration": "harim ve-ereṣ",
+      "translation": "\"mountains and hills\""
+    },
+    "linguistic_analysis": "Pairs like \"mountains and hills\" are typical in both traditions. Hebrew uses *harim ve-ereṣ* or similar, while Ugaritic also employs *ṭrym* with a word for hills. These words come from the same root and are fixed in poetic parallelism.",
+    "conceptual_analysis": "Words that naturally pair (like mountains/hills) form standard parallel lines. Their occurrence in Ugaritic and Hebrew suggests a common poetic heritage. The psalmists' use of such pairs taps into shared imagery for emphasis and style, reflecting how their poetry belongs to a larger Canaanite milieu of fixed expressions."
+  },
+  {
+    "entry_id": "PW_04",
+    "parallel_type": "Poetic Word Pair",
+    "ugaritic_source": {
+      "text_reference": "KTU 1.x",
+      "transliteration": "wljl / wlt",
+      "translation": "\"day / night\""
+    },
+    "hebrew_psalter_source": {
+      "text_reference": "Psalm 139:12",
+      "transliteration": "hayom / halailah",
+      "translation": "\"day and night\""
+    },
+    "linguistic_analysis": "The pair \"day and night\" is another classic example. Ugaritic texts use cognates (*wy-wlʾyl*, day-night), as does the Hebrew (*yôm u-laylâ*). This parallels the fixed stock found in both poetic traditions.",
+    "conceptual_analysis": "Day and night together represent the whole cycle of time. Using this pair emphasizes completeness. That it appears in both Ugaritic and Hebrew shows how psalmists utilized imagery common to Canaanite poetry to convey universal concepts of God’s presence at all times, echoing a familiar literary device of the ancient Near East."
   }
 ]

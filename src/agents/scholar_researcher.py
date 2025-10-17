@@ -100,17 +100,17 @@ Generate specific research requests in the following categories:
    - Understanding how this figuration is used across the biblical corpus can illuminate the psalm's meaning.
    - For each verse, specify:
      * Verse number (integer)
-     * Likely figurative type (metaphor, simile, personification, metonymy, etc.)
      * Reason for checking this verse
      * **VEHICLE**: What is the comparison/image used? (e.g., "shepherd", "light", "fortress", "rock")
      * **VEHICLE_SYNONYMS**: List 2-4 related terms/synonyms that might appear in the figurative database
        - This helps the Figurative Librarian search effectively
        - Example: If vehicle is "shepherd", synonyms might be ["pastor", "herdsman", "keeper", "guide"]
+   - IMPORTANT: DO NOT filter by specific type (metaphor, simile, etc.) - searches are broad and find all figurative instances
    - REMINDER: Figurative language structure:
      * TARGET: What/who the figure is about (e.g., "God's care")
      * VEHICLE: What it's compared to (e.g., "shepherd")
      * GROUND: What quality is described (e.g., "protective guidance")
-   - Example: {{"verse": 1, "likely_type": "metaphor", "reason": "Shepherd imagery for divine care", "vehicle": "shepherd", "vehicle_synonyms": ["pastor", "herdsman", "protector"]}}
+   - Example: {{"verse": 1, "reason": "Shepherd imagery for divine care", "vehicle": "shepherd", "vehicle_synonyms": ["pastor", "herdsman", "protector"]}}
 
 4. **COMMENTARY REQUESTS (OPTIONAL)**
    - Identify verses that would benefit from classical Jewish commentary (Rashi, Ibn Ezra, Radak)
@@ -187,11 +187,11 @@ OUTPUT FORMAT: Return ONLY a valid JSON object with this exact structure:
     {{"query": "אַל־תַּסְתֵּר פָּנֶיךָ", "level": "exact", "scope": "Psalms", "purpose": "Hiding face lament formula"}}
   ],
   "figurative_checks": [
-    {{"verse": 1, "likely_type": "metaphor", "reason": "Light as salvation, stronghold as protection", "vehicle": "light", "vehicle_synonyms": ["lamp", "sun", "illumination", "brightness"]}},
-    {{"verse": 1, "likely_type": "metaphor", "reason": "Fortress/stronghold as divine protection", "vehicle": "fortress", "vehicle_synonyms": ["stronghold", "citadel", "refuge", "fortification"]}},
-    {{"verse": 2, "likely_type": "metaphor", "reason": "Flesh-devouring as destruction imagery", "vehicle": "predator", "vehicle_synonyms": ["beast", "devourer", "consumer", "enemy"]}},
-    {{"verse": 5, "likely_type": "metaphor", "reason": "Pavilion/booth as divine shelter", "vehicle": "pavilion", "vehicle_synonyms": ["tent", "booth", "tabernacle", "shelter"]}},
-    {{"verse": 5, "likely_type": "metaphor", "reason": "Rock as divine stability", "vehicle": "rock", "vehicle_synonyms": ["stone", "cliff", "mountain", "foundation"]}},
+    {{"verse": 1, "reason": "Light as salvation, stronghold as protection", "vehicle": "light", "vehicle_synonyms": ["lamp", "sun", "illumination", "brightness"]}},
+    {{"verse": 1, "reason": "Fortress/stronghold as divine protection", "vehicle": "fortress", "vehicle_synonyms": ["stronghold", "citadel", "refuge", "fortification"]}},
+    {{"verse": 2, "reason": "Flesh-devouring as destruction imagery", "vehicle": "predator", "vehicle_synonyms": ["beast", "devourer", "consumer", "enemy"]}},
+    {{"verse": 5, "reason": "Pavilion/booth as divine shelter", "vehicle": "pavilion", "vehicle_synonyms": ["tent", "booth", "tabernacle", "shelter"]}},
+    {{"verse": 5, "reason": "Rock as divine stability", "vehicle": "rock", "vehicle_synonyms": ["stone", "cliff", "mountain", "foundation"]}},
     ... (check ALL verses with figurative language)
   ],
   "commentary_requests": [
@@ -218,7 +218,7 @@ class ScholarResearchRequest:
     """
     bdb_requests: List[Dict[str, str]]  # [{"word": "...", "reason": "..."}]
     concordance_searches: List[Dict[str, str]]  # [{"query": "...", "level": "...", "scope": "...", "purpose": "..."}]
-    figurative_checks: List[Dict[str, Any]]  # [{"verse": 1, "likely_type": "...", "reason": "..."}]
+    figurative_checks: List[Dict[str, Any]]  # [{"verse": 1, "reason": "...", "vehicle": "...", "vehicle_synonyms": [...]}]
     commentary_requests: List[Dict[str, Any]] = None  # [{"verse": 1, "reason": "..."}] - Optional
 
     def to_dict(self) -> Dict[str, Any]:
@@ -270,7 +270,6 @@ class ScholarResearchRequest:
         figurative_requests = []
         for check in self.figurative_checks:
             verse = check.get("verse")
-            likely_type = check.get("likely_type", "")
             vehicle = check.get("vehicle", "")
             vehicle_synonyms = check.get("vehicle_synonyms", [])
 
@@ -281,19 +280,9 @@ class ScholarResearchRequest:
                 "verse": verse
             }
 
-            # Add type filters
-            if "metaphor" in likely_type.lower():
-                req["metaphor"] = True
-            if "simile" in likely_type.lower():
-                req["simile"] = True
-            if "personification" in likely_type.lower():
-                req["personification"] = True
-            if "idiom" in likely_type.lower():
-                req["idiom"] = True
-            if "hyperbole" in likely_type.lower():
-                req["hyperbole"] = True
-            if "metonymy" in likely_type.lower():
-                req["metonymy"] = True
+            # NOTE: We do NOT filter by figurative type (metaphor, simile, etc.)
+            # This was too restrictive. We let the search be broad and find all
+            # figurative instances for the verse, then filter by vehicle if specified.
 
             # Add vehicle search if specified
             if vehicle:
