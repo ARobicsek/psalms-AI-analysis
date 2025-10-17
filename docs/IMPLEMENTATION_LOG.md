@@ -2707,3 +2707,119 @@ Phase 2: Scholar-Researcher Agent implementation begins next session with:
 ### Session Complete
 11:35 PM - BDB Librarian now returns scholarly-grade lexicon data. Phase 1 enhancements 100% complete! 🎯
 
+
+
+---
+
+## 2025-10-16 - Day 6: Phase 2 - Scholar-Researcher Agent
+
+### Session Started
+6:50 PM - Beginning Phase 2: Implementing Scholar-Researcher Agent with Claude Haiku 3.5
+
+### Tasks Completed
+✅ **Scholar-Researcher Agent Implementation** (~550 LOC)
+✅ **Comprehensive BDB request generation** (2-4 words per verse)
+✅ **Vehicle identification for figurative language**
+✅ **Integration with Research Bundle Assembler**
+✅ **Full pipeline testing** (Psalms 23 and 27)
+✅ **Prompt engineering for comprehensiveness**
+
+### Key Implementation Details
+
+#### 1. Scholar-Researcher Agent Architecture
+
+**Module**: `src/agents/scholar_researcher.py` (~550 lines)
+
+**Purpose**: Coordination agent that analyzes macro overview and generates specific research requests for librarian agents
+
+**Model**: Claude 3.5 Haiku (`claude-3-5-haiku-20241022`)
+- Cost-effective for pattern recognition tasks
+- $1/M input, $5/M output tokens
+- Max output: 8,192 tokens
+- Average cost per request: ~$0.0003
+
+**Input**: Macro overview from Pass 1 (chapter-level thesis + structure)
+
+**Output**: JSON research request with three categories:
+```json
+{
+  "bdb_requests": [...],           // 15-50 Hebrew words with justifications
+  "concordance_searches": [...],   // 3-10 thematic searches
+  "figurative_checks": [...]       // Verses with vehicle identification
+}
+```
+
+#### 2. Comprehensive BDB Request Generation
+
+**Initial Problem**: Agent was too conservative, requesting only 5 words for 14-verse psalm
+
+**Solution Progression**:
+1. Updated prompt: "1-3 words per verse" → "2-4 words per verse"
+2. Increased max_tokens: 2000 → 4000 → 8000 → 8192 (Haiku max)
+3. Added explicit density examples showing 31 words from 5 verses
+4. Added emphatic closing: "Always err on the side of MORE requests"
+
+**Final Results**:
+- Psalm 23 (6 verses): **17 BDB requests** (2.8 words/verse) ✅
+- Psalm 27 (14 verses): **32 BDB requests** (2.3 words/verse) ✅
+- Includes all significant theological terms, action verbs, metaphorical language
+
+**Example requests (Psalm 27)**:
+- לַחֲזוֹת - "To gaze/behold - mystical contemplative vision of God v.4"
+- יַסְתִּרֵנִי - "Conceal me - double protection verb with יִצְפְּנֵנִי v.5"
+- יְרוֹמְמֵנִי - "Lift me up - elevation/exaltation spatial metaphor v.5"
+
+#### 3. Vehicle Identification for Figurative Language
+
+**Enhancement**: Added vehicle + vehicle_synonyms fields to figurative checks
+
+**Purpose**: Enable precise Figurative Librarian database queries
+
+**Format**:
+```json
+{
+  "verse": 1,
+  "likely_type": "metaphor",
+  "reason": "Light as salvation, stronghold as protection",
+  "vehicle": "light",
+  "vehicle_synonyms": ["lamp", "sun", "illumination", "brightness"]
+}
+```
+
+**Database Integration**:
+- `vehicle` → converted to `vehicle_contains` search parameter
+- `vehicle_synonyms` → stored for comprehensive searching
+- Enables searching: "light" OR "lamp" OR "sun" OR "illumination"
+
+**Benefits**:
+- Figurative Librarian can find all instances of metaphor across biblical corpus
+- Vehicle synonyms catch variant terminology
+- Helps identify if psalm's imagery is common or unique
+
+### Next Steps
+
+**Phase 2b: Expanding Scholarly Resources** (Next Session)
+
+Before implementing Scholar-Writer agents, expand available resources:
+
+1. **Septuagint (LXX) Integration**
+   - Auto-provide LXX text for all verses (no request needed)
+   - Enables Vorlage analysis (e.g., Psalm 22:17 MT vs. LXX)
+   - Source: Sefaria API
+
+2. **Commentary Librarian Agent**
+   - Fetch traditional Jewish commentaries on request (Rashi, Ibn Ezra, Kimchi)
+   - Scholar-Researcher identifies perplexing/interesting verses
+   - Puts AI analysis in dialogue with classical interpretations
+   - Helps Critic agent identify novel vs. established insights
+
+3. **RAG Documents for Scholar-Writer**
+   - Analytical framework for biblical poetics (always provided)
+   - Psalm function/type classification (when available)
+   - Ugaritic-Psalms comparative database (when relevant)
+   - Format documents in /docs for RAG ingestion
+
+**After Phase 2b**: Implement Scholar-Writer agents (Pass 1: Macro, Pass 2: Micro, Pass 3: Synthesis)
+
+### Session Complete
+8:55 PM - Phase 2 Scholar-Researcher Agent complete! Comprehensive research request generation working beautifully. Ready for Phase 2b resource expansion. 🎯

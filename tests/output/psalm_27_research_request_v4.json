@@ -1,0 +1,167 @@
+{
+  "bdb_requests": [
+    {
+      "word": "אוֹר",
+      "reason": "Light as theological salvation metaphor v.1"
+    },
+    {
+      "word": "יְשָׁעִי",
+      "reason": "Salvation term with deliverance connotations v.1"
+    },
+    {
+      "word": "מָעוֹז",
+      "reason": "Stronghold metaphor for divine protection v.1"
+    },
+    {
+      "word": "אִירָא",
+      "reason": "Fear verb exploring relationship between trust and fear v.1"
+    },
+    {
+      "word": "מְרֵעִים",
+      "reason": "Evil-doers specific term beyond generic רַע v.2"
+    },
+    {
+      "word": "בָּשָׂר",
+      "reason": "Flesh - literal violence or metaphorical destruction? v.2"
+    },
+    {
+      "word": "צָרַי",
+      "reason": "Adversaries term with possible legal connotations v.2"
+    },
+    {
+      "word": "מַחֲנֶה",
+      "reason": "Military camp imagery escalating threat language v.3"
+    },
+    {
+      "word": "אַחַת",
+      "reason": "One thing - theological singularity concept v.4"
+    },
+    {
+      "word": "נֹעַם",
+      "reason": "Beauty/pleasantness rare divine attribute term v.4"
+    },
+    {
+      "word": "בַּקֵּר",
+      "reason": "Inquire/visit temple vocabulary with seeking connotations v.4"
+    },
+    {
+      "word": "סֻכָּה",
+      "reason": "Booth/pavilion temporary shelter with ritual overtones v.5"
+    },
+    {
+      "word": "צוּר",
+      "reason": "Rock divine epithet with geological metaphor v.5"
+    },
+    {
+      "word": "אָבִי",
+      "reason": "Father term exploring familial abandonment metaphor v.10"
+    },
+    {
+      "word": "אֵם",
+      "reason": "Mother term in abandonment context v.10"
+    },
+    {
+      "word": "קַוֵּה",
+      "reason": "Wait/hope verb with active trust implications v.14"
+    }
+  ],
+  "concordance_searches": [
+    {
+      "query": "מָעוֹז",
+      "level": "consonantal",
+      "scope": "auto",
+      "purpose": "Track divine protection fortress metaphor"
+    },
+    {
+      "query": "נֹעַם יְהוָה",
+      "level": "exact",
+      "scope": "Tanakh",
+      "purpose": "Rare beauty of LORD phrase"
+    },
+    {
+      "query": "אַל־תַּסְתֵּר פָּנֶיךָ",
+      "level": "exact",
+      "scope": "Psalms",
+      "purpose": "Hiding face lament formula"
+    },
+    {
+      "query": "קַוֵּה אֶל־יְהוָה",
+      "level": "exact",
+      "scope": "Psalms",
+      "purpose": "Waiting/hoping formula in trust literature"
+    }
+  ],
+  "figurative_checks": [
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Light as salvation, stronghold as protection",
+      "vehicle": "light",
+      "vehicle_synonyms": [
+        "lamp",
+        "sun",
+        "illumination",
+        "brightness"
+      ]
+    },
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Fortress/stronghold as divine protection",
+      "vehicle": "fortress",
+      "vehicle_synonyms": [
+        "stronghold",
+        "citadel",
+        "refuge",
+        "fortification"
+      ]
+    },
+    {
+      "verse": 2,
+      "likely_type": "metaphor",
+      "reason": "Flesh-devouring as destruction imagery",
+      "vehicle": "predator",
+      "vehicle_synonyms": [
+        "beast",
+        "devourer",
+        "consumer",
+        "enemy"
+      ]
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Pavilion/booth as divine shelter",
+      "vehicle": "pavilion",
+      "vehicle_synonyms": [
+        "tent",
+        "booth",
+        "tabernacle",
+        "shelter"
+      ]
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Rock as divine stability",
+      "vehicle": "rock",
+      "vehicle_synonyms": [
+        "stone",
+        "cliff",
+        "mountain",
+        "foundation"
+      ]
+    },
+    {
+      "verse": 9,
+      "likely_type": "metonymy",
+      "reason": "Face representing divine presence",
+      "vehicle": "face",
+      "vehicle_synonyms": [
+        "visage",
+        "countenance",
+        "presence"
+      ]
+    }
+  ]
+}

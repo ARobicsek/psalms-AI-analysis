@@ -1,0 +1,138 @@
+{
+  "bdb_requests": [
+    {
+      "word": "יְהוָה",
+      "reason": "Divine name central to psalm's theological understanding"
+    },
+    {
+      "word": "רֹעִי",
+      "reason": "Shepherd metaphor fundamental to divine care imagery"
+    },
+    {
+      "word": "אֶחְסָר",
+      "reason": "Lack/want verb exploring divine provision"
+    },
+    {
+      "word": "דֶּשֶׁא",
+      "reason": "Green pastures metaphorical representation of divine abundance"
+    },
+    {
+      "word": "מְנֻחוֹת",
+      "reason": "Rest/stillness theological concept of divine peace"
+    },
+    {
+      "word": "נַפְשִׁי",
+      "reason": "Soul/life term with deep existential implications"
+    },
+    {
+      "word": "יַנְחֵנִי",
+      "reason": "Lead/guide verb exploring divine guidance"
+    },
+    {
+      "word": "צַלְמָוֶת",
+      "reason": "Shadow of death compound word with complex theological meaning"
+    },
+    {
+      "word": "אִירָא",
+      "reason": "Fear verb contrasting with divine confidence"
+    },
+    {
+      "word": "שִׁבְטְךָ",
+      "reason": "Staff/rod metaphorical instrument of divine protection"
+    },
+    {
+      "word": "מִשְׁעַנְתֶּךָ",
+      "reason": "Support/comfort implement in shepherd imagery"
+    },
+    {
+      "word": "שֻׁלְחָן",
+      "reason": "Table as hospitality and honor metaphor"
+    },
+    {
+      "word": "רֹאשִׁי",
+      "reason": "Head anointing as honor and divine blessing"
+    },
+    {
+      "word": "כּוֹסִי",
+      "reason": "Cup as abundance and divine provision symbol"
+    },
+    {
+      "word": "טוֹב",
+      "reason": "Goodness as theological concept of divine beneficence"
+    },
+    {
+      "word": "חֶסֶד",
+      "reason": "Covenant mercy/loving-kindness fundamental theological term"
+    },
+    {
+      "word": "יְהוָה",
+      "reason": "Repeated divine name emphasizing covenant relationship"
+    }
+  ],
+  "concordance_searches": [
+    {
+      "query": "רֹעִי",
+      "level": "exact",
+      "scope": "auto",
+      "purpose": "Track shepherd metaphor across biblical texts"
+    },
+    {
+      "query": "צַלְמָוֶת",
+      "level": "exact",
+      "scope": "Tanakh",
+      "purpose": "Explore existential danger terminology"
+    },
+    {
+      "query": "שֻׁלְחָן",
+      "level": "consonantal",
+      "scope": "auto",
+      "purpose": "Investigate hospitality and honor imagery"
+    }
+  ],
+  "figurative_checks": [
+    {
+      "verse": 1,
+      "likely_type": "metaphor",
+      "reason": "Shepherd representing divine care",
+      "vehicle": "shepherd",
+      "vehicle_synonyms": [
+        "guide",
+        "protector",
+        "leader"
+      ]
+    },
+    {
+      "verse": 2,
+      "likely_type": "metaphor",
+      "reason": "Green pastures representing divine provision",
+      "vehicle": "pasture",
+      "vehicle_synonyms": [
+        "meadow",
+        "grassland",
+        "feeding place"
+      ]
+    },
+    {
+      "verse": 4,
+      "likely_type": "metaphor",
+      "reason": "Shadow of death representing existential threat",
+      "vehicle": "darkness",
+      "vehicle_synonyms": [
+        "shadow",
+        "gloom",
+        "danger"
+      ]
+    },
+    {
+      "verse": 5,
+      "likely_type": "metaphor",
+      "reason": "Table and cup representing divine honor",
+      "vehicle": "feast",
+      "vehicle_synonyms": [
+        "banquet",
+        "meal",
+        "hospitality"
+      ]
+    }
+  ]
+}
