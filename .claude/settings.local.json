@@ -16,7 +16,17 @@
       "Bash(tee:*)",
       "Bash(timeout 120 python:*)",
       "Bash(echo $ANTHROPIC_API_KEY)",
-      "Bash(iconv:*)"
+      "Bash(iconv:*)",
+      "Bash(timeout 300 python:*)",
+      "Bash(timeout 5 python:*)",
+      "Bash(timeout 10 python:*)",
+      "Bash(timeout 15 python:*)",
+      "Bash(timeout 20 python:*)",
+      "Bash(timeout 30 python:*)",
+      "Bash(timeout 45 python:*)",
+      "Bash(timeout 90 python:*)",
+      "Bash(timeout 60 python:*)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []

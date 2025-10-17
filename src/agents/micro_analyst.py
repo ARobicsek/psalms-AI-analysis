@@ -166,12 +166,15 @@ GENERATE RESEARCH REQUESTS:
 2. **CONCORDANCE SEARCHES** - Patterns to trace across Scripture
    - Repeated phrases from discoveries
    - Thematic roots identified
-   - VALID LEVELS: "consonantal" (all root forms), "voweled" (distinguish homographs), "exact" (specific vocalization), "lemma" (lexical form)
+   - VALID LEVELS: "consonantal" (all root forms), "voweled" (distinguish homographs), "exact" (specific vocalization)
+   - **DEFAULT TO "consonantal"** - Only use "exact" if specifically concerned about homographs (same consonants, different vocalizations)
+   - "consonantal" finds all forms of a root pattern regardless of vocalization
    - 5-10 strategic searches
 
 3. **FIGURATIVE LANGUAGE** - Verses with metaphor/imagery
    - All verses flagged in discoveries
    - Specify vehicle (main image) and synonyms
+   - **DO NOT filter by specific figuration type** (metaphor, simile, etc.) - let the search be broad
 
 4. **COMMENTARY** - Verses with interpretive puzzles
    - Complex/ambiguous verses from discoveries
@@ -186,13 +189,13 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     ... (20-40 requests)
   ],
   "concordance_searches": [
-    {{"query": "קוֹל יְהוָה", "level": "exact", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns"}},
-    {{"query": "בני אלים", "level": "exact", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible"}},
+    {{"query": "קול יהוה", "level": "consonantal", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns"}},
+    {{"query": "בני אלים", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible"}},
     ... (5-10 searches)
   ],
   "figurative_checks": [
-    {{"verse": 3, "likely_type": "metaphor", "reason": "Waters as primordial chaos imagery", "vehicle": "waters", "vehicle_synonyms": ["sea", "deep", "flood", "ocean"]}},
-    {{"verse": 5, "likely_type": "personification", "reason": "Voice 'breaking' cedars - storm force personified", "vehicle": "breaking", "vehicle_synonyms": ["shatter", "split", "fracture"]}},
+    {{"verse": 3, "reason": "Waters as primordial chaos imagery", "vehicle": "waters", "vehicle_synonyms": ["sea", "deep", "flood", "ocean"]}},
+    {{"verse": 5, "reason": "Voice 'breaking' cedars - storm force personified", "vehicle": "breaking", "vehicle_synonyms": ["shatter", "split", "fracture"]}},
     ... (all figurative verses)
   ],
   "commentary_requests": [

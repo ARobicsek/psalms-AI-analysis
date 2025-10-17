@@ -979,12 +979,16 @@ Generate specific research requests in the following categories:
 2. **CONCORDANCE SEARCHES**
    - Identify Hebrew roots or phrases to trace across Psalms
    - What themes or motifs need tracking?
-   - Specify search level for each (consonantal, voweled, exact)
+   - Specify search level for each:
+     * **consonantal** (default): Finds all forms of root regardless of vocalization
+     * **voweled**: Distinguishes homographs (same consonants, different meanings)
+     * **exact**: Specific vocalization (only use when homograph disambiguation needed)
    - Example: "Search root רעה (shepherd) consonantally in Psalms to track pastoral imagery"
 
 3. **FIGURATIVE LANGUAGE CHECKS**
    - Which verses likely contain metaphor, simile, personification?
    - What figurative patterns should we look for?
+   - **Note**: Searches are broad and find all figurative types; do not filter by specific type
 
 OUTPUT FORMAT: JSON structure
 
@@ -998,7 +1002,7 @@ OUTPUT FORMAT: JSON structure
     ...
   ],
   "figurative_checks": [
-    {{"verse": 1, "likely_type": "metaphor", "reason": "Shepherd imagery for divine care"}},
+    {{"verse": 1, "reason": "Shepherd imagery for divine care", "vehicle": "shepherd", "vehicle_synonyms": ["pastor", "herdsman", "protector"]}},
     ...
   ]
 }}
