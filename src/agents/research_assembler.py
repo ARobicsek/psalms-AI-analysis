@@ -28,11 +28,13 @@ if __name__ == '__main__':
     from src.agents.concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle
+    from src.agents.rag_manager import RAGManager, RAGContext
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from .figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from .commentary_librarian import CommentaryLibrarian, CommentaryBundle
+    from .rag_manager import RAGManager, RAGContext
 
 
 @dataclass
@@ -78,13 +80,14 @@ class ResearchBundle:
     Complete research bundle assembled for a Psalm.
 
     Contains all lexicon entries, concordance searches, figurative
-    language instances, and traditional commentaries requested by the Scholar-Researcher.
+    language instances, traditional commentaries, and RAG documents requested by the Scholar-Researcher.
     """
     psalm_chapter: int
     lexicon_bundle: Optional[LexiconBundle]
     concordance_bundles: List[ConcordanceBundle]
     figurative_bundles: List[FigurativeBundle]
     commentary_bundles: Optional[List[CommentaryBundle]]
+    rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
     request: ResearchRequest
 
     def to_dict(self) -> Dict[str, Any]:
@@ -225,6 +228,34 @@ class ResearchBundle:
 
                 md += "---\n\n"
 
+        # RAG Context section (Phase 2d)
+        if self.rag_context:
+            from .rag_manager import RAGManager
+            rag_mgr = RAGManager()
+
+            md += "## Scholarly Context (RAG Documents)\n\n"
+
+            # Psalm Function/Genre
+            if self.rag_context.psalm_function:
+                pf = self.rag_context.psalm_function
+                md += f"### Psalm {pf['psalm']} Function & Genre\n"
+                md += f"**Genre**: {pf['genre']}  \n\n"
+                md += f"**Structure**:  \n"
+                for line in pf['structure']:
+                    md += f"- {line}  \n"
+                md += f"\n**Keywords**: {', '.join(pf['keywords'])}  \n\n"
+
+            # Ugaritic Parallels
+            if self.rag_context.ugaritic_parallels:
+                md += f"### Ugaritic & Ancient Near Eastern Parallels ({len(self.rag_context.ugaritic_parallels)} found)\n\n"
+                for parallel in self.rag_context.ugaritic_parallels:
+                    heb = parallel.get('hebrew_psalter_source', {})
+                    md += f"**{parallel.get('parallel_type')}** ({heb.get('text_reference')})  \n"
+                    md += f"*Conceptual Analysis*: {parallel.get('conceptual_analysis', '')[:300]}...  \n\n"
+
+            md += "*Note: Full analytical framework available to Writer agent*\n\n"
+            md += "---\n\n"
+
         # Commentary section
         if self.commentary_bundles:
             md += "## Traditional Commentaries\n\n"
@@ -303,6 +334,7 @@ class ResearchAssembler:
         self.concordance_librarian = ConcordanceLibrarian()
         self.figurative_librarian = FigurativeLibrarian()
         self.commentary_librarian = CommentaryLibrarian()
+        self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
         """
@@ -343,12 +375,16 @@ class ResearchAssembler:
         if request.commentary_requests:
             commentary_bundles = self.commentary_librarian.process_requests(request.commentary_requests)
 
+        # Fetch RAG context (Phase 2d: Always included for psalm-level research)
+        rag_context = self.rag_manager.get_rag_context(request.psalm_chapter)
+
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,
             lexicon_bundle=lexicon_bundle,
             concordance_bundles=concordance_bundles,
             figurative_bundles=figurative_bundles,
             commentary_bundles=commentary_bundles,
+            rag_context=rag_context,
             request=request
         )
 

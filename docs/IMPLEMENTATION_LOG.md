@@ -3395,3 +3395,69 @@ Phase 2c successfully completed. Commentary integration adds traditional scholar
 **Next session**: Begin Phase 3 - Scholar-Writer Agent (Pass 1: Macro Analysis)
 
 ---
+
+## Phase 2d: RAG Document Integration
+**Date**: 2025-01-XX
+**Duration**: 1 session
+**Goal**: Integrate 3 RAG documents (Analytical Framework, Ugaritic Comparisons, Psalm Function) into research pipeline
+
+### Implementation Summary
+
+#### RAG Manager (`src/agents/rag_manager.py`)
+**Purpose**: Load and filter scholarly RAG documents for Scholar agents
+**Size**: ~310 LOC
+
+**Features**:
+1. **Analytical Framework Loader**
+   - Always included for Scholar-Writer agents
+   - Provides comprehensive poetic analysis methodology
+   - Covers parallelism, imagery, figurative language, macro-structures
+   - ~1,200 lines of scholarly content
+
+2. **Psalm Function Database**
+   - JSON database with 150 entries (one per psalm)
+   - Genre classification (Hymn, Lament, Royal, Wisdom, etc.)
+   - Structural outline for each psalm
+   - Keywords for thematic identification
+   - **Filtering**: By psalm number
+
+3. **Ugaritic Comparisons Database**
+   - JSON database with 27 high-quality parallels
+   - Divine epithets, mythological motifs, poetic word pairs
+   - Linguistic analysis + conceptual/theological analysis
+   - **Filtering**: By psalm:verse reference
+   - Example: Psalm 48:3 → "Mount Zaphon" parallel
+
+**Key Methods**:
+- `get_rag_context(psalm_number, verse_number=None)` → RAGContext
+- `format_for_prompt(context)` → formatted text for LLM
+
+#### Research Assembler Integration
+Updated `ResearchBundle` to include:
+- `rag_context: Optional[RAGContext]`
+- Always fetched for psalm-level research
+- Integrated into markdown output format
+
+#### Testing Results
+✅ All 3 RAG documents loading correctly
+✅ Psalm Function filtering working (150 psalms)
+✅ Ugaritic filtering working:
+  - Psalm 29 → 3 parallels found (Divine Epithet, Divine Council, Poetic Word Pair)
+  - Psalm 29:1 → 1 specific parallel (Divine Council)
+  - Psalm 48:3 → 1 parallel (Cosmic Geography - Mount Zaphon)
+
+### Notes
+- **Phase 2d COMPLETE** ✅
+- RAG documents now seamlessly integrated into research pipeline
+- Scholar-Researcher and Scholar-Writer agents will have access to:
+  1. Poetic analysis methodology (always)
+  2. Genre/structure info (psalm-specific)
+  3. Ancient Near Eastern parallels (verse-specific)
+- Total Phase 2 code: ~2,800 LOC across 6 modules
+
+### Session End
+Phase 2d successfully completed. RAG integration adds scholarly context layer, providing agents with analytical frameworks and ancient comparative data.
+
+**Next session**: Begin Phase 3 - Scholar-Writer Agent (Pass 1: Macro Analysis)
+
+---

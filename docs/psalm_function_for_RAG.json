@@ -1,0 +1,2425 @@
+[
+  {
+    "psalm": 1,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-? : Wisdom instruction or reflection on righteous living vs wickedness",
+      "v. ?-end : Conclusion with moral or trust in God"
+    ],
+    "keywords": [
+      "wisdom",
+      "instruction",
+      "righteous",
+      "wicked",
+      "ethical"
+    ]
+  },
+  {
+    "psalm": 2,
+    "genre": "Royal Psalm",
+    "structure": [
+      "v. 1-? : Address for king's blessing or praise of king's rule",
+      "v. ?-end : Description of king’s just reign and outcomes"
+    ],
+    "keywords": [
+      "royal",
+      "king",
+      "righteousness",
+      "justice",
+      "Messianic"
+    ]
+  },
+  {
+    "psalm": 3,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-? : Lament by the psalmist, expressing fear and plea for help",
+      "v. ?-? : Affirmation of trust in God’s protection",
+      "v. ?-end : Psalmist’s confidence and praise as God grants salvation"
+    ],
+    "keywords": [
+      "lament",
+      "trust",
+      "deliverance",
+      "enemies",
+      "faith"
+    ]
+  },
+  {
+    "psalm": 4,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-? : Evening prayer, plea for God’s answer and safety",
+      "v. ?-? : Instruction to trust and avoid sin",
+      "v. ?-end : Psalmist speaks of blessing and peace for those trusting God"
+    ],
+    "keywords": [
+      "prayer",
+      "evening",
+      "trust",
+      "mercy",
+      "peace"
+    ]
+  },
+  {
+    "psalm": 5,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-? : Morning prayer for guidance and deliverance",
+      "v. ?-? : God’s righteousness contrasted with the wicked",
+      "v. ?-end : God’s protection for the faithful, condemnation of the wicked"
+    ],
+    "keywords": [
+      "prayer",
+      "morning",
+      "righteousness",
+      "wickedness",
+      "mercy"
+    ]
+  },
+  {
+    "psalm": 6,
+    "genre": "Individual Lament (Penitential)",
+    "structure": [
+      "v. 1-? : Petition for mercy and healing amid suffering",
+      "v. ?-? : Deep distress over affliction; plea for God’s attention",
+      "v. ?-end : Assurance of joy and relief as God saves the psalmist"
+    ],
+    "keywords": [
+      "repentance",
+      "affliction",
+      "mercy",
+      "forgiveness",
+      "hope"
+    ]
+  },
+  {
+    "psalm": 7,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-? : Cry to God as a refuge against false accusations",
+      "v. ?-? : Declaration of innocence and plea for vindication",
+      "v. ?-end : Appeal for divine judgment on wicked, ending with praise"
+    ],
+    "keywords": [
+      "lament",
+      "innocence",
+      "enemies",
+      "justice",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 8,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-2: Exaltation of God’s name and majesty",
+      "v. 3-9: Reflection on God’s glory in creation and human significance"
+    ],
+    "keywords": [
+      "creation",
+      "praise",
+      "majesty",
+      "humanity",
+      "worship"
+    ]
+  },
+  {
+    "psalm": 9,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: Thanksgiving and praise for God’s justice",
+      "v. 3-6: Account of God’s judgment on enemies",
+      "v. 7-12: Call to praise God (Zion) for his righteous judgment",
+      "v. 13-20: Plea for help and remembrance of the afflicted"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "judgment",
+      "enemies",
+      "praise",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 10,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Complaint that God seems distant as the wicked prosper",
+      "v. 4-11: Description of the arrogance and cruelty of the wicked",
+      "v. 12-18: Petition for God to act, uphold the weak, and punish the wicked"
+    ],
+    "keywords": [
+      "arrogance",
+      "despair",
+      "justice",
+      "enemies",
+      "prayer"
+    ]
+  },
+  {
+    "psalm": 11,
+    "genre": "Hymn of Trust",
+    "structure": [
+      "v. 1-3: Refusal to flee despite wicked counsel; trusting in God’s protection",
+      "v. 4-7: The Lord’s sovereignty and judgment; assurance that He loves justice"
+    ],
+    "keywords": [
+      "trust",
+      "refuge",
+      "God’s rule",
+      "justice",
+      "courage"
+    ]
+  },
+  {
+    "psalm": 12,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-2: The community cries out that godly men and women have vanished",
+      "v. 3-5: The psalmist criticizes deceitful speech and calls for God’s help",
+      "v. 6-8: God’s pure words are declared, promising He will guard the afflicted"
+    ],
+    "keywords": [
+      "communal lament",
+      "deceit",
+      "purity",
+      "help",
+      "justice"
+    ]
+  },
+  {
+    "psalm": 13,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: Arrogant questionings to God about how long sorrow will last",
+      "v. 3-4: Petition for God’s light and salvation",
+      "v. 5-6: The psalmist resolves to trust and rejoice in God’s salvation"
+    ],
+    "keywords": [
+      "laments",
+      "hope",
+      "trust",
+      "deliverance",
+      "joy"
+    ]
+  },
+  {
+    "psalm": 14,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Description of the fool who denies God; all are corrupt",
+      "v. 4-7: God’s people pray for deliverance and mock the arrogant; righteous rejoice"
+    ],
+    "keywords": [
+      "foolishness",
+      "corruption",
+      "deliverance",
+      "righteous",
+      "joy"
+    ]
+  },
+  {
+    "psalm": 15,
+    "genre": "Hymn of Praise (Temple Liturgy)",
+    "structure": [
+      "v. 1-2: Introductory question and affirmation of who may dwell with God",
+      "v. 3-5: Description of the righteous person’s ethical conduct and reward"
+    ],
+    "keywords": [
+      "holiness",
+      "righteousness",
+      "integrity",
+      "judgment",
+      "fellowship"
+    ]
+  },
+  {
+    "psalm": 16,
+    "genre": "Hymn of Trust",
+    "structure": [
+      "v. 1-4: Prayer of trust in God as refuge and keeper, rejection of false gods",
+      "v. 5-11: Affirmation of God’s portion, joy, and confidence in His protection and presence"
+    ],
+    "keywords": [
+      "trust",
+      "refuge",
+      "joy",
+      "faithfulness",
+      "protection"
+    ]
+  },
+  {
+    "psalm": 17,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-5: Prayer for vindication; affirmation of integrity",
+      "v. 6-9: Plea for God’s attentive ear and protection from enemies",
+      "v. 10-15: Description of the wicked; request for deliverance and vision of God’s face"
+    ],
+    "keywords": [
+      "vindication",
+      "integrity",
+      "enemies",
+      "protection",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 18,
+    "genre": "Royal Psalm (David’s Thanksgiving for Victory)",
+    "structure": [
+      "v. 1-6: David’s cry for help and praise of the Lord as rock and deliverer",
+      "v. 7-15: Description of God’s mighty intervention (storm imagery)",
+      "v. 16-24: God’s rescue of David from enemies and rival Saul",
+      "v. 25-29: Reflection on God’s righteousness and guidance of a blameless life",
+      "v. 30-50: Praise for God’s complete deliverance; celebration of enemies’ defeat"
+    ],
+    "keywords": [
+      "victory",
+      "deliverance",
+      "God’s power",
+      "righteousness",
+      "gratitude"
+    ]
+  },
+  {
+    "psalm": 19,
+    "genre": "Torah Psalm",
+    "structure": [
+      "v. 1-6: The heavens declare God’s glory and handiwork",
+      "v. 7-11: Exaltation of God’s law and its value for life",
+      "v. 12-14: Personal petition for purity and acceptance"
+    ],
+    "keywords": [
+      "creation",
+      "law",
+      "instruction",
+      "purity",
+      "reverence"
+    ]
+  },
+  {
+    "psalm": 20,
+    "genre": "Royal Psalm",
+    "structure": [
+      "v. 1-5: Priestly prayer for the king’s victory and blessings",
+      "v. 6-9: Nation’s confidence and appeal for salvation in the name of the Lord"
+    ],
+    "keywords": [
+      "kingdom",
+      "victory",
+      "prayer",
+      "trust",
+      "God’s help"
+    ]
+  },
+  {
+    "psalm": 21,
+    "genre": "Royal Psalm (Thanksgiving for Victory)",
+    "structure": [
+      "v. 1-4: Celebration of the king’s strength granted by God",
+      "v. 5-9: The king’s joy in God’s salvation; plea for continued victory",
+      "v. 10-13: Confidence that God will exalt the king and punish enemies"
+    ],
+    "keywords": [
+      "victory",
+      "praise",
+      "king",
+      "God’s strength",
+      "enemies"
+    ]
+  },
+  {
+    "psalm": 22,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: Heart-wrenching cry of abandonment by God",
+      "v. 3-5: Recounting God’s past faithfulness to Israel",
+      "v. 6-8: Suffering description and scorn of enemies",
+      "v. 9-11: Plea for God’s presence since birth",
+      "v. 12-18: Imagery of desperate encirclement and physical anguish",
+      "v. 19-21: Prayer for rescue from the mouth of the lion",
+      "v. 22-31: Transition to public praise; vow to declare God’s name to all generations"
+    ],
+    "keywords": [
+      "suffering",
+      "abandonment",
+      "deliverance",
+      "praise",
+      "faithfulness"
+    ]
+  },
+  {
+    "psalm": 23,
+    "genre": "Hymn of Trust",
+    "structure": [
+      "v. 1-3: The Lord as Shepherd providing rest and guidance",
+      "v. 4-6: Confidence in God’s presence through trials and promise of blessing"
+    ],
+    "keywords": [
+      "trust",
+      "shepherd",
+      "provision",
+      "protection",
+      "guidance"
+    ]
+  },
+  {
+    "psalm": 24,
+    "genre": "Hymn of Praise (Temple Liturgy)",
+    "structure": [
+      "v. 1-2: Declaration that the earth belongs to the Lord and His holiness",
+      "v. 3-6: Those who may ascend the holy hill (pure and righteous)",
+      "v. 7-10: Call to gates to lift up eternal King of glory, concluding with praise"
+    ],
+    "keywords": [
+      "holiness",
+      "God’s reign",
+      "righteousness",
+      "temple",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 25,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Invocation of the Lord’s name as refuge and plea for remembrance",
+      "v. 4-7: Request for God’s guidance and forgiveness",
+      "v. 8-15: Confidence in God’s kindness; listing of those who follow Him",
+      "v. 16-22: Appeal for rescue from troubles and enemies"
+    ],
+    "keywords": [
+      "guidance",
+      "forgiveness",
+      "trust",
+      "enemies",
+      "humility"
+    ]
+  },
+  {
+    "psalm": 26,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Declaration of integrity and love for the Lord’s house",
+      "v. 4-6: Resistance to wicked company and love of God’s altar",
+      "v. 7-12: Confirmation of God’s goodness and plea for salvation"
+    ],
+    "keywords": [
+      "integrity",
+      "praise",
+      "purity",
+      "justice",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 27,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-3: Confession of trust in the Lord amid fear",
+      "v. 4-6: Desire to dwell in the house of the Lord",
+      "v. 7-10: Prayers for mercy and affirmation of God’s protection",
+      "v. 11-14: Final exhortation to trust in the Lord and be of good courage"
+    ],
+    "keywords": [
+      "trust",
+      "courage",
+      "worship",
+      "salvation",
+      "protection"
+    ]
+  },
+  {
+    "psalm": 28,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: Plea for the Lord’s strength and response to the psalmist’s cry",
+      "v. 3-5: Contrast between the wicked and the righteous in God’s eyes",
+      "v. 6-9: Thanksgiving for God’s strength and protection of the righteous"
+    ],
+    "keywords": [
+      "petition",
+      "praise",
+      "strength",
+      "justice",
+      "protection"
+    ]
+  },
+  {
+    "psalm": 29,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-2: Call to ascribe glory to God and worship",
+      "v. 3-9: Description of God’s powerful voice in storm (theophany)",
+      "v. 10-11: Declaration of God’s enduring reign and peace for His people"
+    ],
+    "keywords": [
+      "power",
+      "voice",
+      "worship",
+      "majesty",
+      "peace"
+    ]
+  },
+  {
+    "psalm": 30,
+    "genre": "Individual Thanksgiving",
+    "structure": [
+      "v. 1-3: Thanksgiving for being lifted from the brink of death",
+      "v. 4-5: Call to praise because God’s anger is brief",
+      "v. 6-12: Personal testimony of despair and subsequent joy as God’s favor returns",
+      "v. 13-14: Vow to give thanks with music and praise forever"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "healing",
+      "joy",
+      "mourning",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 31,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-5: Trust in God’s steadfast love and deliverance from enemies",
+      "v. 6-8: Praise for refuge, appeal not to let the faithful be ashamed",
+      "v. 9-18: Lament over suffering and pleading for God’s rescue",
+      "v. 19-24: Praise for God’s goodness and exhortation to love and fear the Lord"
+    ],
+    "keywords": [
+      "trust",
+      "refuge",
+      "deliverance",
+      "suffering",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 32,
+    "genre": "Individual Lament (Penitential)",
+    "structure": [
+      "v. 1-2: Blessedness of forgiveness and covered transgression",
+      "v. 3-5: Confession of sin and relief of forgiveness",
+      "v. 6-7: Instruction to righteous to pray; God as hiding place",
+      "v. 8-11: Guidance promise; exhortation to rejoice in the Lord"
+    ],
+    "keywords": [
+      "forgiveness",
+      "confession",
+      "joy",
+      "mercy",
+      "guidance"
+    ]
+  },
+  {
+    "psalm": 33,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-5: Call to sing a new song and worship with righteous praise",
+      "v. 6-9: God’s creative power (earth formed by word)",
+      "v. 10-12: God’s sovereignty and blessing on His people",
+      "v. 13-21: God’s watchful care over the righteous; prayer for mercy"
+    ],
+    "keywords": [
+      "creation",
+      "praise",
+      "God’s sovereignty",
+      "hope",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 34,
+    "genre": "Individual Thanksgiving",
+    "structure": [
+      "v. 1-8: Personal declaration of praise; invitation to rejoice and taste the Lord’s goodness",
+      "v. 9-14: Advice to fear the Lord for protection",
+      "v. 15-22: God’s deliverance of the righteous and the righteous’ rejoicing; ultimate promise of justice"
+    ],
+    "keywords": [
+      "praise",
+      "fear of God",
+      "deliverance",
+      "righteous",
+      "justice"
+    ]
+  },
+  {
+    "psalm": 35,
+    "genre": "Individual Lament (Imprecatory)",
+    "structure": [
+      "v. 1-3: Plea for God to contend with those contending against the psalmist",
+      "v. 4-8: Request for confusion of enemies’ plans; call on angels or Lord’s shield",
+      "v. 9-18: Declaration of praise as God delivers; complaint about deceitful enemies",
+      "v. 19-28: Vow to praise God for justice; desire for enemies to fall in disgrace"
+    ],
+    "keywords": [
+      "vengeance",
+      "enemies",
+      "justice",
+      "deliverance",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 36,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Description of wickedness and arrogance of a man against God",
+      "v. 5-9: God’s steadfast love and faithfulness extending to all; light to righteous",
+      "v. 10-12: Call to trust in God’s justice, promise that God upholds the righteous"
+    ],
+    "keywords": [
+      "mercy",
+      "wickedness",
+      "light",
+      "love",
+      "trust"
+    ]
+  },
+  {
+    "psalm": 37,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-11: Exhortation to trust God and do good, rather than envy the wicked",
+      "v. 12-20: Fate of wicked contrasted with inheritance of the humble righteous",
+      "v. 21-26: God’s care for the righteous; encouragement to trust in Him",
+      "v. 27-40: Final admonition to await the Lord; the wicked will be cut off, the righteous will inherit the land"
+    ],
+    "keywords": [
+      "patience",
+      "justice",
+      "trust",
+      "envy",
+      "inheritance"
+    ]
+  },
+  {
+    "psalm": 38,
+    "genre": "Individual Lament (Penitential)",
+    "structure": [
+      "v. 1-3: Cry of distress; recognition of God’s discipline",
+      "v. 4-8: Acknowledgment of physical and emotional suffering due to sin",
+      "v. 9-11: Isolation and despair; enemies rejoice",
+      "v. 12-22: Plea for pity and deliverance from enemies; confessing repentance"
+    ],
+    "keywords": [
+      "penitence",
+      "suffering",
+      "despair",
+      "mercy",
+      "confession"
+    ]
+  },
+  {
+    "psalm": 39,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Initial resolve to guard speech; reflection on life’s brevity",
+      "v. 4-6: Psalmist’s prayer about understanding life’s end; human life is transient",
+      "v. 7-13: Prayer for relief and acknowledgement of God’s patient correction"
+    ],
+    "keywords": [
+      "mortality",
+      "speech",
+      "suffering",
+      "hope",
+      "forgiveness"
+    ]
+  },
+  {
+    "psalm": 40,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Thanksgiving for rescue from pit and miry clay",
+      "v. 4-5: Blessing for those who trust in God",
+      "v. 6-8: God’s desire for obedience rather than sacrifice (possibly messianic)",
+      "v. 9-10: Declaration of praise and testimony to all",
+      "v. 11-17: Plea for continued mercy and judgment on evil men"
+    ],
+    "keywords": [
+      "rescue",
+      "thanksgiving",
+      "obedience",
+      "testimony",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 41,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Blessing on those who care for the poor; the Lord’s protection",
+      "v. 4-6: Personal illness and plea for healing",
+      "v. 7-9: Envy and betrayal by enemies, even close friend",
+      "v. 10-13: Confidence in the Lord’s mercy and final praise"
+    ],
+    "keywords": [
+      "compassion",
+      "illness",
+      "betrayal",
+      "mercy",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 42,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-4: Desperate longing for God (water-brooks imagery), hearing psalms taunts in captivity",
+      "v. 5-11: Dialogue with self – despair over absence of God, resolve to hope, and praise"
+    ],
+    "keywords": [
+      "thirst",
+      "God’s presence",
+      "despair",
+      "hope",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 43,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-5: Petition to vindicate the psalmist, bring him to God’s altar",
+      "v. 5: Refrain of hope – trust and praise of God"
+    ],
+    "keywords": [
+      "justice",
+      "guidance",
+      "prayer",
+      "hope",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 44,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-3: Recalling God’s mighty acts for Israel (history)",
+      "v. 4-8: Confidence in God as king and saving strength",
+      "v. 9-16: Cry of confusion: now God seems to hide His face; defeats and humiliation",
+      "v. 17-22: Questions of why God allows suffering if Israel was faithful",
+      "v. 23-26: Call for God to awake, avenge and save Israel"
+    ],
+    "keywords": [
+      "history",
+      "disaster",
+      "confusion",
+      "petition",
+      "justice"
+    ]
+  },
+  {
+    "psalm": 45,
+    "genre": "Royal Psalm (Wedding)",
+    "structure": [
+      "v. 1-2: Praise of the king’s beauty and words",
+      "v. 3-5: God’s power and justice on the throne",
+      "v. 6-9: Messiah-like imagery; joy and anointing with oil",
+      "v. 10-15: Address to the bride: beauty and royal presence",
+      "v. 16-17: Prosperity of the king’s line"
+    ],
+    "keywords": [
+      "royalty",
+      "wedding",
+      "beauty",
+      "justice",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 46,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: God as refuge and strength, unshaken despite earth’s turmoil",
+      "v. 4-7: City of God (Zion) has river, God in midst; nations in uproar but God’s help and holiness ensure peace",
+      "v. 8-11: Call to see God’s deeds, conclude that He is exalted among nations; the Lord of hosts is with us"
+    ],
+    "keywords": [
+      "refuge",
+      "Zion",
+      "God’s presence",
+      "peace",
+      "sovereignty"
+    ]
+  },
+  {
+    "psalm": 47,
+    "genre": "Hymn of Praise (Zion Song)",
+    "structure": [
+      "v. 1-4: All nations clap and sing to God, who ascends with a shout",
+      "v. 5-9: God’s kingship over all the earth; tribes choose Zion for God’s dwelling; praise to God who reigns"
+    ],
+    "keywords": [
+      "nations",
+      "God’s reign",
+      "Zion",
+      "ascension",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 48,
+    "genre": "Hymn of Praise (Zion Song)",
+    "structure": [
+      "v. 1-3: God is great; His city (Zion) is lovely, joy of the whole earth",
+      "v. 4-8: God has protected Zion; men flee in panic before the Lord",
+      "v. 9-14: Conclusion – a call to walk about Zion and recount her towers; trust in God’s protection and forever praise"
+    ],
+    "keywords": [
+      "Zion",
+      "God’s protection",
+      "joy",
+      "strength",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 49,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-4: Call for all to hear an important message",
+      "v. 5-12: Riches cannot redeem life; death is fate of all, and the vain trust in wealth",
+      "v. 13-20: The downfall of the proud contrasted with God redeeming the faithful from the grave"
+    ],
+    "keywords": [
+      "wealth",
+      "wisdom",
+      "death",
+      "faithfulness",
+      "hope"
+    ]
+  },
+  {
+    "psalm": 50,
+    "genre": "Wisdom Psalm (Prophetic)",
+    "structure": [
+      "v. 1-6: The Lord summons heavens and earth to a trial; Israel reminded of God’s greatness",
+      "v. 7-15: God’s complaint about lack of thanksgiving among His people; call to sincere worship",
+      "v. 16-23: Rebuke of the wicked who misuse sacrifices; call to repentance and heartfelt praise"
+    ],
+    "keywords": [
+      "judgment",
+      "sacrifice",
+      "thanksgiving",
+      "repentance",
+      "righteousness"
+    ]
+  },
+  {
+    "psalm": 51,
+    "genre": "Individual Lament (Penitential)",
+    "structure": [
+      "v. 1-2: Plea for mercy and cleansing from sin",
+      "v. 3-6: Acknowledgement of sin and guilt; recognition of God’s righteousness",
+      "v. 7-12: Request for purification, restoration of joy, and right spirit",
+      "v. 13-17: Vow to teach sinners; description of desired sacrifice (contrition)",
+      "v. 18-19: Prayer for the prosperity of Zion and restoration after judgment"
+    ],
+    "keywords": [
+      "sin",
+      "repentance",
+      "mercy",
+      "purification",
+      "forgiveness"
+    ]
+  },
+  {
+    "psalm": 52,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-4: Address to the arrogant man’s evil deeds and deceit",
+      "v. 5-7: Confession that the righteous await God’s judgment on the wicked",
+      "v. 8-9: Declaration of rejoicing in God’s steadfast love and strength"
+    ],
+    "keywords": [
+      "deceit",
+      "arrogance",
+      "judgment",
+      "strength",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 53,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: All are corrupt; there is none who does good",
+      "v. 4-6: God looks from heaven; there is no one to seek Him, causing fear to increase; call for salvation for Israel"
+    ],
+    "keywords": [
+      "wickedness",
+      "corruption",
+      "fear",
+      "deliverance",
+      "faith"
+    ]
+  },
+  {
+    "psalm": 54,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Plea for God’s help against betraying enemies",
+      "v. 4-6: Commit petition to God as Him who vindicates the just",
+      "v. 7-7: Assurance of praise for deliverance"
+    ],
+    "keywords": [
+      "betrayal",
+      "prayer",
+      "deliverance",
+      "help",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 55,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Cry to God for help amid threats",
+      "v. 4-8: Turmoil of heart and desire to flee from trouble",
+      "v. 9-15: Confession of fear; lament over betrayal by a friend",
+      "v. 16-23: Trust in God for vengeance; call for mercy"
+    ],
+    "keywords": [
+      "anxiety",
+      "betrayal",
+      "fleeing",
+      "trust",
+      "vengeance"
+    ]
+  },
+  {
+    "psalm": 56,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: Plea for God’s mercy in distress",
+      "v. 3-4: Statement of trust despite fear",
+      "v. 5-11: Torment by enemies; decision to praise God and trust in His word",
+      "v. 12-13: Vow of thanksgiving for deliverance"
+    ],
+    "keywords": [
+      "fear",
+      "trust",
+      "mercy",
+      "deliverance",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 57,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: Prayer to God, highest refuge, to be honored above heavens and earth",
+      "v. 3-4: Cry for mercy in deep waters; enemies surround",
+      "v. 5-11: Praise as God displays mercy; vow to sing and give thanks among the nations"
+    ],
+    "keywords": [
+      "refuge",
+      "mercy",
+      "enemies",
+      "praise",
+      "thanksgiving"
+    ]
+  },
+  {
+    "psalm": 58,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-5: Complaint about unjust judges who practice deceit and violence",
+      "v. 6-8: Call for God to break the teeth of the wicked and let them vanish",
+      "v. 9-11: Statement of hope that the righteous will praise God and the wicked perish"
+    ],
+    "keywords": [
+      "injustice",
+      "judges",
+      "violence",
+      "vengeance",
+      "righteous"
+    ]
+  },
+  {
+    "psalm": 59,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-3: Evening prayer for rescue from violent enemies",
+      "v. 4-8: Description of enemy plotting; confidence that God is above them",
+      "v. 9-13: Call on God to deliver; theme of God as strength of salvation",
+      "v. 14-17: Declaration that the righteous will rejoice in God’s protection and sing of His mercy"
+    ],
+    "keywords": [
+      "enemies",
+      "protection",
+      "deliverance",
+      "mercy",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 60,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-5: Prayer to God about defeat in battle; appeal to show your power",
+      "v. 6-8: God’s promises as heritage to His beloved",
+      "v. 9-12: Petition for help against hostile nations"
+    ],
+    "keywords": [
+      "defeat",
+      "battle",
+      "petition",
+      "God’s promises",
+      "victory"
+    ]
+  },
+  {
+    "psalm": 61,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-4: Prayer for God’s shelter and protection under His wings forever",
+      "v. 5-8: Vow of praise and declaration of God as Rock and support"
+    ],
+    "keywords": [
+      "shelter",
+      "refuge",
+      "praise",
+      "faithfulness",
+      "support"
+    ]
+  },
+  {
+    "psalm": 62,
+    "genre": "Hymn of Trust",
+    "structure": [
+      "v. 1-2: Quiet assurance that God alone is rock and salvation",
+      "v. 3-5: Admonition not to trust in extortion or violence",
+      "v. 6-8: Reaffirmation of trust in God; exhortation to pour out heart before Him",
+      "v. 9-12: Contrast of those trusting in idols and fulfillment of God’s justice"
+    ],
+    "keywords": [
+      "trust",
+      "reliance",
+      "God alone",
+      "patience",
+      "justice"
+    ]
+  },
+  {
+    "psalm": 63,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Thirst for God in dry land; praise for steadfast love",
+      "v. 5-8: Soul satisfied by God; contemplation on God’s presence; confidence in divine help",
+      "v. 9-11: Enemies will perish; God’s favor on the king"
+    ],
+    "keywords": [
+      "thirst",
+      "worship",
+      "satisfaction",
+      "protection",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 64,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-4: Plea for protection from secret slanders",
+      "v. 5-7: Description of conspirators plotting evil",
+      "v. 8-10: Confidence in God capturing the wicked by their own schemes; vow of praise"
+    ],
+    "keywords": [
+      "slander",
+      "conspiracy",
+      "justice",
+      "deliverance",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 65,
+    "genre": "Communal Thanksgiving",
+    "structure": [
+      "v. 1-4: Praise for God’s forgiveness and acceptance of prayer",
+      "v. 5-8: God’s power over creation, including silencing the sea and rising mountains",
+      "v. 9-13: Depiction of God’s provision for the earth (rain, harvest) leading to praise"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "creation",
+      "provision",
+      "praise",
+      "nature"
+    ]
+  },
+  {
+    "psalm": 66,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Call to all earth and nations to shout to God",
+      "v. 5-12: Testimony of God’s power in mighty acts and trials",
+      "v. 13-20: Vow of thanksgiving and sacrifice after deliverance"
+    ],
+    "keywords": [
+      "nation",
+      "shout",
+      "testimony",
+      "deliverance",
+      "sacrifice"
+    ]
+  },
+  {
+    "psalm": 67,
+    "genre": "Communal Thanksgiving",
+    "structure": [
+      "v. 1-2: Prayer for God’s blessing and shining of His face",
+      "v. 3-5: Call for nations to praise God",
+      "v. 6-7: Affirmation that God’s justice and blessing are for all people"
+    ],
+    "keywords": [
+      "blessing",
+      "praise",
+      "nations",
+      "justice",
+      "mercy"
+    ]
+  },
+  {
+    "psalm": 68,
+    "genre": "Communal Hymn (Pilgrimage)",
+    "structure": [
+      "v. 1-6: Call for God to arise; praise God who led righteous exiles",
+      "v. 7-10: Acknowledgment of God’s care for the earth and the needy",
+      "v. 11-18: Victory of God; receiving of gifts by the captive",
+      "v. 19-23: Praise to God for daily care and strength",
+      "v. 24-27: Procession of kings, mention of tribes, safety, and temple personnel",
+      "v. 28-35: Universal call to sing praises to God and His awesome name"
+    ],
+    "keywords": [
+      "victory",
+      "procession",
+      "gifts",
+      "praise",
+      "universal"
+    ]
+  },
+  {
+    "psalm": 69,
+    "genre": "Individual Lament (Imprecatory)",
+    "structure": [
+      "v. 1-12: Cry of anguish (soul in deep distress), noted hypocrisy, and misery",
+      "v. 13-18: Petition for rescue because of God’s fear, recalling God’s commandments",
+      "v. 19-21: Description of suffering and reproach; call to God to act",
+      "v. 22-28: Importunate curse upon enemies; prayer for God’s deliverance",
+      "v. 29-36: Praise in the assembly, God’s salvation and blessing even after suffering"
+    ],
+    "keywords": [
+      "suffering",
+      "reproach",
+      "deliverance",
+      "enemies",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 70,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-5: Urgent appeal for God’s help and shame of those seeking harm",
+      "v. 6-8: Confidence and praise of God for salvation"
+    ],
+    "keywords": [
+      "help",
+      "mercy",
+      "quick",
+      "praise",
+      "enemies"
+    ]
+  },
+  {
+    "psalm": 71,
+    "genre": "Individual Lament (of an older person)",
+    "structure": [
+      "v. 1-8: Prayer for refuge, based on a lifetime of trust",
+      "v. 9-13: Plea for God not to forsake in old age",
+      "v. 14-24: A resolute commitment to continuous hope and praise"
+    ],
+    "keywords": [
+      "lament",
+      "old age",
+      "trust",
+      "hope",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 72,
+    "genre": "Royal Psalm (Prayer for the King)",
+    "structure": [
+      "v. 1-8: Prayer that the king may judge with righteousness and bless the needy",
+      "v. 9-15: Vision of the king’s reign bringing justice to the afflicted and abundance to the land",
+      "v. 16-19: Blessing on the king and his people; eternal praise to God"
+    ],
+    "keywords": [
+      "royal",
+      "king",
+      "justice",
+      "righteousness",
+      "Messianic"
+    ]
+  },
+  {
+    "psalm": 73,
+    "genre": "Wisdom Psalm (with Lament elements)",
+    "structure": [
+      "v. 1-14: The psalmist’s frustrated observation that the wicked prosper despite their wrongdoing",
+      "v. 15-26: A shift in perspective (often in the sanctuary) leads to understanding God’s judgment and the blessing of closeness to God"
+    ],
+    "keywords": [
+      "wisdom",
+      "theodicy",
+      "doubt",
+      "faith",
+      "presence of God"
+    ]
+  },
+  {
+    "psalm": 74,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-11: Community laments the destruction of the sanctuary by enemies",
+      "v. 12-17: The psalmist recalls God’s creative deeds as demonstration of His power",
+      "v. 18-23: Plea for God to remember His covenant and to rise up against His foes"
+    ],
+    "keywords": [
+      "communal lament",
+      "destruction",
+      "sanctuary",
+      "creation",
+      "covenant"
+    ]
+  },
+  {
+    "psalm": 75,
+    "genre": "Communal Thanksgiving (Prophetic)",
+    "structure": [
+      "v. 1-2: Declaration of thanksgiving and recognition of God’s appointed time for judgment",
+      "v. 3-9: The Lord pronounces judgment on the proud",
+      "v. 10-12: Exaltation of the Lord; prediction that all the righteous will praise Him"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "judgment",
+      "praise",
+      "sovereignty",
+      "prophetic"
+    ]
+  },
+  {
+    "psalm": 76,
+    "genre": "Hymn of Praise (Zion Song)",
+    "structure": [
+      "v. 1-3: God is renowned in Judah; He has broken the weapons of war",
+      "v. 4-6: Celebration in the city of God due to His awesome deeds",
+      "v. 7-10: The Lord’s judgment is known; nations bow before Him",
+      "v. 11-12: Call to God to awaken and judge among the peoples; rejoice in God’s might"
+    ],
+    "keywords": [
+      "Zion",
+      "praise",
+      "judgment",
+      "power",
+      "theophany"
+    ]
+  },
+  {
+    "psalm": 77,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-9: The psalmist’s anxious cry and complaint to God during distress, feeling abandoned and questioning",
+      "v. 10-20: Remembering God’s mighty deeds (especially the Exodus) leads to renewed trust and awe of God’s power"
+    ],
+    "keywords": [
+      "lament",
+      "doubt",
+      "remembrance",
+      "Exodus",
+      "redemption"
+    ]
+  },
+  {
+    "psalm": 78,
+    "genre": "Wisdom Psalm (Historical)",
+    "structure": [
+      "v. 1-8: Call to teach coming generations of God’s works",
+      "v. 9-39: Recounting Israel’s rebellion and God’s mercy in the wilderness",
+      "v. 40-55: God’s saving acts in Egypt",
+      "v. 56-72: Israel’s unbelief; God’s choice of David"
+    ],
+    "keywords": [
+      "history",
+      "rebellion",
+      "mercy",
+      "education",
+      "faithfulness"
+    ]
+  },
+  {
+    "psalm": 79,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-5: Lament over Jerusalem’s devastation and people killed; nations ridiculing",
+      "v. 6-10: Plea for God to pour out wrath and remember the afflicted",
+      "v. 11-13: Prayer for God to redeem and praise; closing with a vow to give thanks"
+    ],
+    "keywords": [
+      "destruction",
+      "prayer",
+      "wrath",
+      "repentance",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 80,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-3: Plea for God’s shepherding (presence) to shine forth upon Israel like fire",
+      "v. 4-7: Recounting past deliverances; pleas for attention",
+      "v. 8-19: The vineyard of God (Israel) lamented over decay; plea for restoration and renewal"
+    ],
+    "keywords": [
+      "vineyard",
+      "restoration",
+      "Psalm",
+      "prayer",
+      "renewal"
+    ]
+  },
+  {
+    "psalm": 81,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: Call to praise God with tambourine and harp",
+      "v. 4-5: Announcement of a solemn feast (Feast of Booths)",
+      "v. 6-9: God’s deliverance of Israel from Egypt; reminder to listen to Him",
+      "v. 10-16: Rebuke for hard-heartedness; promise of deliverance if they obey"
+    ],
+    "keywords": [
+      "festival",
+      "deliverance",
+      "obedience",
+      "blessing",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 82,
+    "genre": "Hymn of Praise (Divine Council)",
+    "structure": [
+      "v. 1-4: God presides in divine assembly; calls gods to defend the weak and poor",
+      "v. 5-7: Lament that gods act unjustly; recognition that they will die like humans",
+      "v. 8: Call for the Most High to rise and judge the earth"
+    ],
+    "keywords": [
+      "justice",
+      "gods",
+      "weak",
+      "judgment",
+      "divine council"
+    ]
+  },
+  {
+    "psalm": 83,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-4: Plea for God not to stay silent against hostile neighbors conspiring to annihilate Israel",
+      "v. 5-11: List of nations uniting against Israel",
+      "v. 12-18: Prayer to let them be confounded and perish as at Midian"
+    ],
+    "keywords": [
+      "conspiracy",
+      "enemies",
+      "petition",
+      "justice",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 84,
+    "genre": "Hymn of Praise (Pilgrimage)",
+    "structure": [
+      "v. 1-4: Longing for the courts of the Lord; blessing of those dwelling in His house",
+      "v. 5-7: Blessed are pilgrims; trust in God as a shade or refuge",
+      "v. 8-12: O Lord God of hosts as strength; turning of heart to Zion; prayer for blessing"
+    ],
+    "keywords": [
+      "pilgrimage",
+      "Zion",
+      "longing",
+      "blessing",
+      "worship"
+    ]
+  },
+  {
+    "psalm": 85,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-3: Reminder of past mercy to Israel; prayer to return and forgive",
+      "v. 4-7: Assurance of revival of righteous acts and salvation",
+      "v. 8-13: Vision of peace; righteousness and peace kissing; mutual flourishing"
+    ],
+    "keywords": [
+      "revival",
+      "mercy",
+      "peace",
+      "righteousness",
+      "forgiveness"
+    ]
+  },
+  {
+    "psalm": 86,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-4: Prayer for mercy, aid, and confidence in God’s name",
+      "v. 5-7: Praise of God’s goodness; declaration of love",
+      "v. 8-10: Testimony of God’s uniqueness and deeds",
+      "v. 11-13: Prayer for guidance and thanksgiving"
+    ],
+    "keywords": [
+      "mercy",
+      "guidance",
+      "praise",
+      "forgiveness",
+      "faithfulness"
+    ]
+  },
+  {
+    "psalm": 87,
+    "genre": "Hymn of Praise (Zion Song)",
+    "structure": [
+      "v. 1-3: God loves Zion; foundational city; register of nations born in her",
+      "v. 4-7: Glory ascribed to Zion; blessed are those who dwell in her"
+    ],
+    "keywords": [
+      "Zion",
+      "citizenship",
+      "glory",
+      "birthright",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 88,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-2: Call to God for help; confident prayer from youth",
+      "v. 3-9: Deep despair; cry for deliverance; sense of abandonment",
+      "v. 10-12: Feeling that God has rejected and not listened",
+      "v. 13-18: Continued plea; statement that the psalmist is like one dead"
+    ],
+    "keywords": [
+      "darkness",
+      "despair",
+      "abandonment",
+      "death",
+      "prayer"
+    ]
+  },
+  {
+    "psalm": 89,
+    "genre": "Royal Psalm (Covenant)",
+    "structure": [
+      "v. 1-4: Affirmation of covenant and faithfulness to David",
+      "v. 5-18: Praise for God’s deeds and oath to David; affirmation of God’s supremacy",
+      "v. 19-29: God’s election of David; promise of throne establishment",
+      "v. 30-37: Covenant conditions; promise of enduring throne if obey",
+      "v. 38-51: Complaint over apparent failure of promise; feeling of being rejected",
+      "v. 52: Liturgical conclusion of praise"
+    ],
+    "keywords": [
+      "covenant",
+      "David",
+      "faithfulness",
+      "promise",
+      "lament"
+    ]
+  },
+  {
+    "psalm": 90,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-2: God’s eternity contrasted with human frailty",
+      "v. 3-6: Metaphor of humanity’s transience and God’s wrath",
+      "v. 7-12: Reflection on life span as vanity; prayer for wisdom in numbering days",
+      "v. 13-17: Plea for compassion and favor; desire for joy and the work of our hands"
+    ],
+    "keywords": [
+      "eternity",
+      "mortality",
+      "wrath",
+      "wisdom",
+      "compassion"
+    ]
+  },
+  {
+    "psalm": 91,
+    "genre": "Hymn of Trust",
+    "structure": [
+      "v. 1-4: Assurance of safety under God’s protection (refuge)",
+      "v. 5-13: Metaphoric protections (snare, terror, plagues, beasts); angels uphold",
+      "v. 14-16: God’s promise of rescue and long life to those who love Him"
+    ],
+    "keywords": [
+      "protection",
+      "refuge",
+      "angels",
+      "trust",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 92,
+    "genre": "Individual Thanksgiving",
+    "structure": [
+      "v. 1-4: Declaration that it is good to give thanks to the Lord, with music on a holy day",
+      "v. 5-7: Pride of the wicked contrasted with flourishing of God’s righteousness",
+      "v. 8-10: The righteous flourish; even in old age they bear fruit",
+      "v. 11-15: Exulting over the defeat of foes; proclamation of the Lord’s righteous works"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "goodness",
+      "flourishing",
+      "justice",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 93,
+    "genre": "Royal Psalm (Enthronement)",
+    "structure": [
+      "v. 1-2: The Lord reigns, clothed in majesty and strength; eternal throne",
+      "v. 3-5: Creation praise – floods lifted, but the Lord is mightier; holiness of God"
+    ],
+    "keywords": [
+      "majesty",
+      "throne",
+      "strength",
+      "holiness",
+      "reign"
+    ]
+  },
+  {
+    "psalm": 94,
+    "genre": "Communal Lament",
+    "structure": [
+      "v. 1-7: Invocation of God’s justice against the arrogant oppressors",
+      "v. 8-11: Reminder of God’s knowledge of human folly",
+      "v. 12-15: Blessing of the person God disciplines and advice to seek His law",
+      "v. 16-19: Confidence in God’s help; comfort in the midst of trouble",
+      "v. 20-23: Plea for God to break the wicked; affirmation of God’s justice"
+    ],
+    "keywords": [
+      "justice",
+      "oppressors",
+      "refuge",
+      "discipline",
+      "confidence"
+    ]
+  },
+  {
+    "psalm": 95,
+    "genre": "Hymn of Praise (Zion Song)",
+    "structure": [
+      "v. 1-5: Call to praise the Lord for His greatness and creating power",
+      "v. 6-11: Exhortation to worship and obey; warning from Israel’s past disobedience"
+    ],
+    "keywords": [
+      "worship",
+      "creation",
+      "obedience",
+      "warning",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 96,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: Call for a new song and proclamation of God’s salvation to the world",
+      "v. 4-9: List of reasons to worship – majesty, strength, fairness, uniqueness, glory in nature",
+      "v. 10-13: Declaration of the Lord’s coming to judge; call for the earth to rejoice"
+    ],
+    "keywords": [
+      "worship",
+      "salvation",
+      "majesty",
+      "nature",
+      "judgment"
+    ]
+  },
+  {
+    "psalm": 97,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: The Lord reigns; earth trembles at His presence; darkness and clouds around Him",
+      "v. 4-6: Lightning and hail scatter enemies; mountains melt before God",
+      "v. 7-12: The righteous rejoice; clouds and darkness around Him; call to righteous to love justice"
+    ],
+    "keywords": [
+      "reign",
+      "judgment",
+      "righteousness",
+      "justice",
+      "worship"
+    ]
+  },
+  {
+    "psalm": 98,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: Call to sing a new song; declaration of God’s wonders and salvation",
+      "v. 4-6: All creation to make joyful noise and praise the Lord",
+      "v. 7-9: Announcement of the Lord’s coming to judge; call for earth to rejoice"
+    ],
+    "keywords": [
+      "new song",
+      "salvation",
+      "creation",
+      "judgment",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 99,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: The Lord reigns; He sits enthroned above cherubim; calls for His great name",
+      "v. 4-5: Strength and justice belong to God; exalt Him for holiness",
+      "v. 6-9: Moses, Aaron, Samuel call to Him; He answered them; invite to praise God for mercy"
+    ],
+    "keywords": [
+      "reign",
+      "holiness",
+      "justice",
+      "mercy",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 100,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: Call to all lands to make a joyful noise to the Lord; serve with gladness",
+      "v. 4-5: Enter His gates with thanksgiving; because the Lord is good and faithful"
+    ],
+    "keywords": [
+      "joyful",
+      "serve",
+      "thanksgiving",
+      "goodness",
+      "faithfulness"
+    ]
+  },
+  {
+    "psalm": 101,
+    "genre": "Royal Psalm (Davidic)",
+    "structure": [
+      "v. 1-4: David’s commitment to integrity and reject of evil company",
+      "v. 5-8: The wicked will be destroyed; the faithful would be close to David"
+    ],
+    "keywords": [
+      "integrity",
+      "justice",
+      "wicked",
+      "faithful",
+      "royalty"
+    ]
+  },
+  {
+    "psalm": 102,
+    "genre": "Individual Lament (Penitential)",
+    "structure": [
+      "v. 1-11: In my distress I cry out: pour out prayer; health withers; plea for God’s appearance",
+      "v. 12-18: Prayer for Zion’s rebuilding; God’s words eternal",
+      "v. 19-22: God looks with favor on Zion and the destitute",
+      "v. 23-28: Before God, nations will perish but not He; He is the ancient God"
+    ],
+    "keywords": [
+      "distress",
+      "prayer",
+      "Zion",
+      "eternity",
+      "mercy"
+    ]
+  },
+  {
+    "psalm": 103,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-5: Bless the Lord, who forgives sins and heals; compassionate and gracious",
+      "v. 6-14: God’s righteousness to those who fear Him; He remembers covenant; compassion",
+      "v. 15-18: Human life fleeting, but mercy on those who fear Him to thousands",
+      "v. 19-22: The Lord has established His throne; angels and hosts worship"
+    ],
+    "keywords": [
+      "mercy",
+      "forgiveness",
+      "lovingkindness",
+      "praise",
+      "worship"
+    ]
+  },
+  {
+    "psalm": 104,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-9: The Lord clothed with light; creation of heavens, earth, seas; God’s power in nature",
+      "v. 10-18: God provides water for beasts; trees flourish for birds and humans",
+      "v. 19-23: Sun and moon mark times; sea creatures praise Him",
+      "v. 24-30: Man’s work and God’s provisions, life renewed by God’s Spirit",
+      "v. 31-35: Prayer that the Lord’s glory endures; sinners perish; blessing of God’s praise"
+    ],
+    "keywords": [
+      "creation",
+      "provision",
+      "nature",
+      "providence",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 105,
+    "genre": "Communal Hymn",
+    "structure": [
+      "v. 1-6: Give thanks to God; seek Him; call on His name",
+      "v. 7-11: Remember covenant with Abraham",
+      "v. 12-15: Mention of Joseph; God’s rule over Pharaoh’s heart",
+      "v. 16-45: God’s faithfulness through Joseph, plagues, Exodus, wanderings, conquest"
+    ],
+    "keywords": [
+      "history",
+      "covenant",
+      "gratitude",
+      "deliverance",
+      "faithfulness"
+    ]
+  },
+  {
+    "psalm": 106,
+    "genre": "Communal Hymn",
+    "structure": [
+      "v. 1-5: Praise the Lord; desire to keep His testimonies",
+      "v. 6-12: Recount Israel’s rebellions (Egypt, Red Sea)",
+      "v. 13-23: Golden calf incident",
+      "v. 24-31: Rebellion in wilderness (Taberah, Massah)",
+      "v. 32-39: Further rebellions (Korah, Midian)",
+      "v. 40-48: YHWH’s anger and mercy; pray for salvation; boast in God’s people"
+    ],
+    "keywords": [
+      "history",
+      "rebellion",
+      "mercy",
+      "deliverance",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 107,
+    "genre": "Communal Thanksgiving",
+    "structure": [
+      "v. 1-9: Call to thank the Lord who gathers the dispersed (4 scenarios of deliverance)",
+      "v. 10-22: Deliverance of prisoners and the sick",
+      "v. 23-32: Deliverance of sailors from storm",
+      "v. 33-43: Deliverance of nations from famine, drought",
+      "v. 43: Blessed is he who observes these things"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "deliverance",
+      "redemption",
+      "wilderness",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 108,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-4: Declaration to sing and give thanks; heart is steadfast; awakening to praise",
+      "v. 5-6: Lists God’s qualities among peoples",
+      "v. 7-13: Prayer for the defeat of enemies; plea for God’s help in battle"
+    ],
+    "keywords": [
+      "praise",
+      "trust",
+      "battle",
+      "deliverance",
+      "confidence"
+    ]
+  },
+  {
+    "psalm": 109,
+    "genre": "Individual Lament (Imprecatory)",
+    "structure": [
+      "v. 1-5: Plea for God’s help against lying enemies",
+      "v. 6-19: Imprecatory curses against enemies, including calling down the deceitful on themselves",
+      "v. 20-31: Vow of praise and trust in God’s salvation after enumerating suffering"
+    ],
+    "keywords": [
+      "curse",
+      "enemies",
+      "deliverance",
+      "praise",
+      "justice"
+    ]
+  },
+  {
+    "psalm": 110,
+    "genre": "Royal Psalm (Messianic)",
+    "structure": [
+      "v. 1: The Lord says to my Lord (Messianic) to sit at His right hand",
+      "v. 2-4: The Lord sends the rod of power to rule, priesthood of Melchizedek",
+      "v. 5-7: The Lord’s wrath and judgment; victory on the day of battle"
+    ],
+    "keywords": [
+      "king",
+      "Messiah",
+      "priesthood",
+      "victory",
+      "justice"
+    ]
+  },
+  {
+    "psalm": 111,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Praise for works of the Lord and His glorious power",
+      "v. 5-10: Description of God’s provision, justice, covenant, precepts, and fear; He is praised forever"
+    ],
+    "keywords": [
+      "praise",
+      "works",
+      "covenant",
+      "wisdom",
+      "fear"
+    ]
+  },
+  {
+    "psalm": 112,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-4: Blessing of the man who fears the Lord: his children, wealth, and generosity",
+      "v. 5-9: Description of the righteous as gracious, compassionate; assurance of their stability",
+      "v. 10: Contrast: the wicked see and are vexed"
+    ],
+    "keywords": [
+      "blessing",
+      "righteous",
+      "generosity",
+      "stability",
+      "fear of God"
+    ]
+  },
+  {
+    "psalm": 113,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: Call to praise the Lord from sunrise to sunset",
+      "v. 4-6: The Lord is high above all nations; seated on heaven’s throne",
+      "v. 7-9: He raises the poor; sets the childless woman in a family"
+    ],
+    "keywords": [
+      "praise",
+      "exaltation",
+      "mercy",
+      "humility",
+      "blessing"
+    ]
+  },
+  {
+    "psalm": 114,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Israel’s exodus makes the mountains leap",
+      "v. 5-8: The sea parts and Jordan turns back at God’s presence",
+      "v. 9: Mountains, etc., to tremble at the presence of the Lord"
+    ],
+    "keywords": [
+      "miracle",
+      "exodus",
+      "nature",
+      "power",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 115,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-9: Contrast of idols (worthless) vs. our God (creator)",
+      "v. 10-15: Trust of Israel and priests in God; blessing on those who fear Him",
+      "v. 16-18: The dead cannot praise; we will bless the Lord now and forever"
+    ],
+    "keywords": [
+      "idolatry",
+      "trust",
+      "blessing",
+      "worship",
+      "gratitude"
+    ]
+  },
+  {
+    "psalm": 116,
+    "genre": "Individual Thanksgiving",
+    "structure": [
+      "v. 1-2: Personal declaration of love for the Lord who hears prayers",
+      "v. 3-7: Crisis of death; God’s salvation",
+      "v. 8-11: Return to rest; trust and waiting for help",
+      "v. 12-19: Vows to God (drink water, sacrifices of thanksgiving), with community hymn"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "deliverance",
+      "life",
+      "vows",
+      "praise"
+    ]
+  },
+  {
+    "psalm": 117,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-2: Short praise: all nations, all peoples, praise the Lord for His steadfast love and faithfulness"
+    ],
+    "keywords": [
+      "universal praise",
+      "love",
+      "faithfulness",
+      "short",
+      "song"
+    ]
+  },
+  {
+    "psalm": 118,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Thanksgiving for God’s steadfast love; call of house of Israel",
+      "v. 5-14: Personal cries for help; God’s deliverance",
+      "v. 15-18: Praise in the assembly; God’s right hand brings victory",
+      "v. 19-29: The gates of righteousness; cornerstone of life; call to give thanks to God"
+    ],
+    "keywords": [
+      "lovingkindness",
+      "deliverance",
+      "stone",
+      "victory",
+      "celebration"
+    ]
+  },
+  {
+    "psalm": 119,
+    "genre": "Torah Psalm",
+    "structure": [
+      "v. 1-24: Blessed are those who follow God’s law (aleph–vav)",
+      "v. 25-48: Prayer for revival; delight in God’s decrees (zayin–teth)",
+      "v. 49-72: Assurance in God’s word (yod–yod)",
+      "v. 73-104: Understanding God’s law (kaph–tsade)",
+      "v. 105-144: God’s word as lamp and comfort (qoph–tav)",
+      "v. 145-176: Plea and praise in following the law (end of tav)"
+    ],
+    "keywords": [
+      "law",
+      "statutes",
+      "delight",
+      "Torah",
+      "obedience"
+    ]
+  },
+  {
+    "psalm": 120,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-4: The traveler’s cry for peace and truth in face of deceitful mouths",
+      "v. 5-7: The nemesis will receive suffering due to their violence"
+    ],
+    "keywords": [
+      "peace",
+      "falsehood",
+      "prayer",
+      "journey",
+      "trust"
+    ]
+  },
+  {
+    "psalm": 121,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-2: I lift my eyes to the hills — my help comes from the Lord",
+      "v. 3-8: God watches over Israel; keeps guard day and night"
+    ],
+    "keywords": [
+      "help",
+      "watch",
+      "God’s care",
+      "protection",
+      "faith"
+    ]
+  },
+  {
+    "psalm": 122,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-2: Joy in going to the house of the Lord",
+      "v. 3-5: Jerusalem as a unified city; invitation for all tribes",
+      "v. 6-9: Prayer for peace in Jerusalem and the flourishing of God’s people"
+    ],
+    "keywords": [
+      "Jerusalem",
+      "unity",
+      "peace",
+      "pilgrim",
+      "pray"
+    ]
+  },
+  {
+    "psalm": 123,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-4: Lifted eyes to God, the enthroned mercy; plea for compassion from scornful look"
+    ],
+    "keywords": [
+      "mercy",
+      "look",
+      "plea",
+      "humility",
+      "faith"
+    ]
+  },
+  {
+    "psalm": 124,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-4: If God had not helped us, enemies would have swallowed us alive",
+      "v. 5-8: Glory to God who did not give us over to defeat"
+    ],
+    "keywords": [
+      "deliverance",
+      "enemies",
+      "help",
+      "praise",
+      "God’s protection"
+    ]
+  },
+  {
+    "psalm": 125,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-2: Those trusting in the Lord are like Mount Zion, never shaken",
+      "v. 3-5: The wicked do not stand in judgment; peace on Israel; goodness on upright"
+    ],
+    "keywords": [
+      "trust",
+      "stability",
+      "peace",
+      "upright",
+      "judgment"
+    ]
+  },
+  {
+    "psalm": 126,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-3: When the Lord restored Zion, we were like dreaming",
+      "v. 4-6: Plea for continued restoration; hope and rejoicing"
+    ],
+    "keywords": [
+      "restoration",
+      "joy",
+      "deliverance",
+      "sowing",
+      "reaping"
+    ]
+  },
+  {
+    "psalm": 127,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-2: Unless the Lord builds the house, all labor is in vain; he gives sleep to children",
+      "v. 3-5: Children as heritage and blessing from the Lord"
+    ],
+    "keywords": [
+      "trust",
+      "families",
+      "blessing",
+      "labor",
+      "heritage"
+    ]
+  },
+  {
+    "psalm": 128,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1-2: Blessed is he who fears the Lord; prosperity for his children",
+      "v. 3-6: Wife as fruitful vine; peace on Israel"
+    ],
+    "keywords": [
+      "family",
+      "blessing",
+      "prosperity",
+      "fear of God",
+      "peace"
+    ]
+  },
+  {
+    "psalm": 129,
+    "genre": "Pilgrimage Psalm (Song of Ascents)",
+    "structure": [
+      "v. 1-4: Many afflictions but the Lord’s deliverance has prevailed",
+      "v. 5-8: May all who hate Zion be put to shame"
+    ],
+    "keywords": [
+      "affliction",
+      "deliverance",
+      "Zion",
+      "pride",
+      "vindication"
+    ]
+  },
+  {
+    "psalm": 130,
+    "genre": "Individual Lament (Penitential)",
+    "structure": [
+      "v. 1-4: Out of depths I cry; confession that if You kept record of sins, no one would stand",
+      "v. 5-8: Waiting for the Lord; forgiveness and redemption in His word"
+    ],
+    "keywords": [
+      "depths",
+      "confession",
+      "forgiveness",
+      "hope",
+      "mercy"
+    ]
+  },
+  {
+    "psalm": 131,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: I do not occupy myself with great things; quiet and humble as a weaned child",
+      "v. 3: Israel, hope in the Lord now and forever"
+    ],
+    "keywords": [
+      "humility",
+      "quiet",
+      "hope",
+      "trust",
+      "peace"
+    ]
+  },
+  {
+    "psalm": 132,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-5: Lord remember David’s humility; promises regarding the ark",
+      "v. 6-10: David’s oath about the ark; prayers that God hear and remember Zion",
+      "v. 11-18: God’s oath to David to set his offspring; promise for Zion and priests"
+    ],
+    "keywords": [
+      "covenant",
+      "David",
+      "ark",
+      "promise",
+      "Zion"
+    ]
+  },
+  {
+    "psalm": 133,
+    "genre": "Wisdom Psalm",
+    "structure": [
+      "v. 1: How good and pleasant it is when brothers dwell in unity",
+      "v. 2-3: Oil on Aaron’s beard; dew of Hermon on Zion; blessing of life forever"
+    ],
+    "keywords": [
+      "unity",
+      "blessing",
+      "Aaron",
+      "Zion",
+      "life"
+    ]
+  },
+  {
+    "psalm": 134,
+    "genre": "Hymn of Praise (Temple Liturgy)",
+    "structure": [
+      "v. 1-3: Evening blessing of the Lord; priests who serve in the sanctuary",
+      "v. 3: The Lord from Zion bless you"
+    ],
+    "keywords": [
+      "blessing",
+      "priests",
+      "temple",
+      "Zion",
+      "service"
+    ]
+  },
+  {
+    "psalm": 135,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Praise the Lord; praise His name for good",
+      "v. 5-7: Praise to the Lord who remembers us; acts of the Lord in nature",
+      "v. 8-12: The Lord’s judgments on Egypt and redemption of Israel",
+      "v. 13-21: The Lord’s sovereign actions for Israel; contrast with idols"
+    ],
+    "keywords": [
+      "praise",
+      "redemption",
+      "judgment",
+      "idols",
+      "faithfulness"
+    ]
+  },
+  {
+    "psalm": 136,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-3: Give thanks to the Lord (His mercy endures forever)",
+      "v. 4-22: Narration of God’s deeds (creation, Israel’s history) each ending with covenant refrain",
+      "v. 23-26: Thanksgiving as a result of God’s steadfast love"
+    ],
+    "keywords": [
+      "thanksgiving",
+      "mercy",
+      "creation",
+      "history",
+      "Covenant"
+    ]
+  },
+  {
+    "psalm": 137,
+    "genre": "Individual Lament (Imprecatory)",
+    "structure": [
+      "v. 1-4: Weeping by the rivers of Babylon as exiles; cannot sing Yahweh’s song",
+      "v. 5-6: Remember Jerusalem, voice for joy",
+      "v. 7-9: Impractical curses on Edom and Babylon, calling for vengeance"
+    ],
+    "keywords": [
+      "exile",
+      "remember",
+      "Jerusalem",
+      "sorrow",
+      "vengeance"
+    ]
+  },
+  {
+    "psalm": 138,
+    "genre": "Individual Thanksgiving",
+    "structure": [
+      "v. 1-3: I will praise You with all my heart; at the heavens; before divine assembly",
+      "v. 4-6: For Your steadfast love endures; You have exalted Your name",
+      "v. 7-8: The Lord will fulfill His purpose for me; praise forever"
+    ],
+    "keywords": [
+      "praise",
+      "heart",
+      "love",
+      "providence",
+      "worship"
+    ]
+  },
+  {
+    "psalm": 139,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-6: God’s intimate knowledge of the psalmist",
+      "v. 7-12: Omnipresence of God",
+      "v. 13-18: God’s creation of the psalmist in the womb",
+      "v. 19-24: Impractical curse on the wicked; personal integrity plea"
+    ],
+    "keywords": [
+      "knowledge",
+      "creation",
+      "presence",
+      "searching",
+      "integrity"
+    ]
+  },
+  {
+    "psalm": 140,
+    "genre": "Individual Lament (Imprecatory)",
+    "structure": [
+      "v. 1-3: Prayer for rescue from evil men and violent tongue",
+      "v. 4-6: The Lord God, strong shield; violence in their hearts",
+      "v. 7-9: Confidence in God’s justice; request to casting nets for enemies",
+      "v. 10-12: God is righteous; those who pray to You will inherit the land"
+    ],
+    "keywords": [
+      "rescue",
+      "enemies",
+      "violence",
+      "justice",
+      "inheritance"
+    ]
+  },
+  {
+    "psalm": 141,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-2: Prayer for God to hear and guide feet from evil",
+      "v. 3-5: Guard mouth, heart; do not let me lust after evil",
+      "v. 6-10: Call to God’s justice on wicked; deliver me from the evil man"
+    ],
+    "keywords": [
+      "watch",
+      "temptation",
+      "speech",
+      "evil",
+      "deliverance"
+    ]
+  },
+  {
+    "psalm": 142,
+    "genre": "Individual Lament",
+    "structure": [
+      "v. 1-4: Supplication while in a cave; pouring out complaint",
+      "v. 5-7: Stated trust in God’s refuge; plea for release and people’s care"
+    ],
+    "keywords": [
+      "cave",
+      "supplication",
+      "refuge",
+      "deliverance",
+      "faith"
+    ]
+  },
+  {
+    "psalm": 143,
+    "genre": "Individual Lament (Penitential)",
+    "structure": [
+      "v. 1-4: Prayer for mercy, for I am in distress",
+      "v. 5-6: Prayer from a troubled soul; ask not to come into judgment",
+      "v. 7-10: Plea for God’s answer; guidance; sanctify me",
+      "v. 11-12: Thanksgiving for deliverance; acknowledge God as my rock"
+    ],
+    "keywords": [
+      "mercy",
+      "guidance",
+      "deliverance",
+      "trouble",
+      "rock"
+    ]
+  },
+  {
+    "psalm": 144,
+    "genre": "Hymn of Praise (Royal)",
+    "structure": [
+      "v. 1-2: Praise God who trains hands for war, fingers for battle",
+      "v. 3-5: What is man that God would care; human enemies and deliverance",
+      "v. 6-8: Weary calling to God; saving peace from enemies",
+      "v. 9-15: Desire for blessing (righteousness, safety, prosperity) on God’s people"
+    ],
+    "keywords": [
+      "war",
+      "warrior",
+      "deliverance",
+      "peace",
+      "prosperity"
+    ]
+  },
+  {
+    "psalm": 145,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-7: Exaltation of God’s greatness; mention of His works and wondrous deeds",
+      "v. 8-13: The Lord is gracious, compassionate; near all who call on Him",
+      "v. 14-21: God’s support of the righteous; faithful to all generations; call for all to praise"
+    ],
+    "keywords": [
+      "greatness",
+      "compassion",
+      "praise",
+      "faithfulness",
+      "generations"
+    ]
+  },
+  {
+    "psalm": 146,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-2: Praise the Lord; trust not in mortal man",
+      "v. 3-6: God who made heaven, earth, does not falter",
+      "v. 7-10: God executes justice for oppressed; encourages widows and orphans; final: Zion’s King forever"
+    ],
+    "keywords": [
+      "praise",
+      "trust",
+      "justice",
+      "help",
+      "King"
+    ]
+  },
+  {
+    "psalm": 147,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-6: Praise is good; God builds Jerusalem; heals brokenhearted; great power",
+      "v. 7-11: Call to praise for good word; brooks; no delight in strength but in those who fear Him",
+      "v. 12-20: Praise Jerusalem; word of the Lord is perfect"
+    ],
+    "keywords": [
+      "healing",
+      "strength",
+      "Jerusalem",
+      "fear of God",
+      "word"
+    ]
+  },
+  {
+    "psalm": 148,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-6: Praise from the heavens (angels, hosts, sun, moon, stars)",
+      "v. 7-12: Praise from earth (sea monsters, mountains, beasts, kings, youths, maidens)",
+      "v. 13-14: Israel praised for God; conclusion: praise the Lord"
+    ],
+    "keywords": [
+      "creation",
+      "praise",
+      "angels",
+      "nations",
+      "Lord"
+    ]
+  },
+  {
+    "psalm": 149,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-4: Israel praises in dance and songs; God’s joy in His people",
+      "v. 5-9: Prophecy of vengeance on nations, executing justice on peoples"
+    ],
+    "keywords": [
+      "praise",
+      "dance",
+      "song",
+      "justice",
+      "enemies"
+    ]
+  },
+  {
+    "psalm": 150,
+    "genre": "Hymn of Praise",
+    "structure": [
+      "v. 1-6: Call to praise God with music and dance; everything that has breath praises the Lord"
+    ],
+    "keywords": [
+      "praise",
+      "instruments",
+      "breath",
+      "Lord",
+      "exaltation"
+    ]
+  }
+]
