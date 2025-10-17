@@ -1,22 +1,24 @@
-# Project Status - Updated 2025-10-16
+# Project Status - Updated 2025-10-17
 
 ## Current Phase
-**Phase 2: Scholar Agents - Week 2 - IN PROGRESS** 🔄
+**Phase 2: Scholar Agents - Week 2 - COMPLETE** ✅
 
 ## Current Task
-Phase 2b, Day 7: Expanding Scholarly Resources ⏳ 85% COMPLETE
+Phase 2c, Day 7: Commentary Integration COMPLETE ✅
 - [x] LXX (Septuagint) integration via Bolls.life API (~180 LOC)
 - [x] MT→LXX psalm numbering conversion
 - [x] Commentary Librarian agent implementation (~380 LOC)
 - [x] Scholar-Researcher integration (commentary_requests field)
 - [x] Full testing with Psalms 23 and 27
-- [ ] Commentary Librarian integration with Research Assembler (pending)
+- [x] Commentary Librarian integration with Research Assembler ✅
+- [x] Added Malbim and Meiri commentators (now 6 total) ✅
+- [x] Default behavior: fetch ALL 6 commentators for comprehensive coverage ✅
 
-**Next**: Phase 2c - Complete Research Assembler integration, then RAG documents
+**Next**: Phase 3 - Scholar-Writer Agents (Pass 1: Macro Analysis)
 
 ## Progress
-- **Overall**: 16% complete (Day 7 of 45 complete)
-- **Current phase**: Phase 2 - 35% complete (Scholar-Researcher + LXX + Commentary done)
+- **Overall**: 18% complete (Day 7 of 45 complete)
+- **Current phase**: Phase 2 - 100% COMPLETE ✅
 
 ## Completed
 ✅ **Phase 1, Day 1: Project Structure Setup** (100% COMPLETE)
@@ -100,7 +102,7 @@ Phase 2b, Day 7: Expanding Scholarly Resources ⏳ 85% COMPLETE
 - ✅ Max tokens: 8,192 (Haiku 3.5 limit)
 - ✅ Cost: ~$0.0003 per psalm request
 
-⏳ **Phase 2b, Day 7: Expanding Scholarly Resources** (85% COMPLETE)
+✅ **Phase 2b/2c, Day 7: Expanding Scholarly Resources + Commentary Integration** (100% COMPLETE)
 - ✅ LXX (Septuagint) integration via Bolls.life API
   - Extended src/data_sources/sefaria_client.py (~180 LOC added)
   - Added `fetch_lxx_psalm()` method with MT→LXX numbering conversion
@@ -109,21 +111,23 @@ Phase 2b, Day 7: Expanding Scholarly Resources ⏳ 85% COMPLETE
   - Tested: Psalms 23 and 27 with full LXX text
 - ✅ Commentary Librarian agent
   - Created src/agents/commentary_librarian.py (~380 LOC)
-  - Supports 4 commentators: Rashi, Ibn Ezra, Radak, Metzudat David
+  - Supports 6 commentators: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri ✅
   - Fetches traditional Jewish commentaries from Sefaria API
   - Clean HTML handling with proper UTF-8 encoding
-  - Tested: Psalm 27 with 11 commentaries on 3 key verses
+  - Default behavior: fetch ALL 6 commentators for comprehensive coverage ✅
+  - Tested: Psalm 27 with 15 commentaries on 3 key verses (5 per verse)
 - ✅ Scholar-Researcher integration
   - Added `commentary_requests` field to prompts and dataclass
   - Extended `to_research_request()` for commentary conversion
   - Selective fetching (2-5 key verses per psalm)
-- ⏳ Research Assembler integration (pending next session)
-  - Need to add commentary_librarian initialization
-  - Need to process commentary_requests in assemble() method
-  - Need to add commentary section to markdown output
+- ✅ Research Assembler integration (COMPLETE!)
+  - Added commentary_librarian initialization ✅
+  - Added commentary_requests processing in assemble() method ✅
+  - Added commentary section to markdown output (with truncation at 400 chars) ✅
+  - Updated summary statistics with commentary metrics ✅
 
 ## In Progress
-🔄 **Phase 2c**: Complete Research Assembler Integration (Next Session)
+🔄 **Phase 3**: Scholar-Writer Agents (Next Session)
 
 ## Upcoming Phases
 - ✅ **Phase 1, Day 1**: Project structure (COMPLETE)
@@ -131,7 +135,8 @@ Phase 2b, Day 7: Expanding Scholarly Resources ⏳ 85% COMPLETE
 - ✅ **Phase 1, Day 3**: Hebrew concordance + Full Tanakh (COMPLETE)
 - ✅ **Phase 1, Day 4**: Librarian agents (COMPLETE)
 - ✅ **Phase 1, Day 5**: Integration & documentation (COMPLETE)
-- ⏳ **Phase 2, Day 6+**: Scholar Agents ← NEXT
+- ✅ **Phase 2, Day 6-7**: Scholar-Researcher + Commentary (COMPLETE)
+- ⏳ **Phase 3, Day 8+**: Scholar-Writer Agents ← NEXT
 
 ## Blockers
 None currently.
@@ -172,8 +177,8 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 - **Concordance words indexed**: 269,844
 - **Unique Hebrew roots**: 8,233 (Psalms only)
 - **Figurative instances available**: 2,863+ (Psalms only from Tzafun database)
-- **Librarian agents created**: 3 (BDB, Concordance, Figurative) ✅
-- **Total agent code**: ~1,890 lines (including docs and CLIs)
+- **Librarian agents created**: 4 (BDB, Concordance, Figurative, Commentary) ✅
+- **Total agent code**: ~2,500 lines (including docs and CLIs)
 - **Database size**: ~8 MB (Tanakh + concordance)
 - **Total cost so far**: $0.00 (Sefaria API is free, no LLM calls yet)
 - **API calls made**: 929 (100% success rate)
@@ -240,15 +245,15 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 6. **Analysis approach**: Three-pass telescopic (macro → micro → synthesis)
 
 ## Quick Links
-- **Last session**: 2025-10-16 (Day 7 - Phase 2b: LXX + Commentary 85% COMPLETE ✅)
-- **Last session topic**: Expanded scholarly resources with Septuagint and traditional commentaries
+- **Last session**: 2025-10-17 (Day 7 - Phase 2c: Commentary Integration 100% COMPLETE ✅)
+- **Last session topic**: Integrated Commentary Librarian with Research Assembler, added Malbim & Meiri commentators
 - **Current code location**:
   - src/agents/ (all librarians + assembler)
   - src/utils/ (logging system)
   - src/concordance/ (morphology variations)
   - docs/ (ARCHITECTURE.md, LIBRARIAN_USAGE_EXAMPLES.md)
-- **Next milestone**: Phase 2 - Scholar Agents
-- **Git HEAD**: Ready to commit Day 5 completion
+- **Next milestone**: Phase 3 - Scholar-Writer Agents (Macro Analysis)
+- **Git HEAD**: Ready to commit Day 7 completion (Phase 2 complete!)
 
 ## Notes
 - Project based on existing figurative language work in Bible project
