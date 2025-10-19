@@ -54,7 +54,8 @@ class CommentaryFormatter:
         introduction: str,
         verse_commentary: str,
         psalm_number: int,
-        apply_divine_names: bool = True
+        apply_divine_names: bool = True,
+        models_used: Optional[Dict[str, str]] = None
     ) -> str:
         """
         Format complete print-ready commentary with verse text.
@@ -64,11 +65,24 @@ class CommentaryFormatter:
             verse_commentary: Verse-by-verse commentary text
             psalm_number: Psalm number
             apply_divine_names: Whether to apply divine names modifications
+            models_used: Dictionary with model names for each step:
+                         {'macro': 'model-name', 'micro': 'model-name',
+                          'synthesis': 'model-name', 'editor': 'model-name'}
+                         If None, defaults to current pipeline models.
 
         Returns:
             Formatted commentary markdown
         """
         self.logger.info(f"Formatting print-ready commentary for Psalm {psalm_number}")
+
+        # Default models if not provided
+        if models_used is None:
+            models_used = {
+                'macro': 'Claude Sonnet 4.5',
+                'micro': 'Claude Sonnet 4.5',
+                'synthesis': 'Claude Sonnet 4.5',
+                'editor': 'GPT-5'
+            }
 
         # Get verse data
         verses = self._get_psalm_verses(psalm_number)
@@ -118,6 +132,15 @@ class CommentaryFormatter:
             # Commentary
             output.append(commentary.strip())
             output.append("---")
+
+        # Models footer (using dynamic model information)
+        output.append("## Models Used")
+        output.append("")
+        output.append("This commentary was generated using:")
+        output.append(f"- **Structural Analysis (Macro)**: {models_used.get('macro', 'Unknown')}")
+        output.append(f"- **Verse Discovery (Micro)**: {models_used.get('micro', 'Unknown')}")
+        output.append(f"- **Commentary Synthesis**: {models_used.get('synthesis', 'Unknown')}")
+        output.append(f"- **Editorial Review**: {models_used.get('editor', 'Unknown')}")
 
         # Join into single document
         document = "\n".join(output)
@@ -208,7 +231,8 @@ class CommentaryFormatter:
         verses_file: str,
         psalm_number: int,
         output_file: str,
-        apply_divine_names: bool = True
+        apply_divine_names: bool = True,
+        models_used: Optional[Dict[str, str]] = None
     ) -> None:
         """
         Format commentary from separate intro and verse files.
@@ -219,6 +243,7 @@ class CommentaryFormatter:
             psalm_number: Psalm number
             output_file: Path to output file
             apply_divine_names: Whether to apply divine names modifications
+            models_used: Dictionary with model names for each step (optional)
         """
         # Read input files
         with open(intro_file, 'r', encoding='utf-8') as f:
@@ -232,7 +257,8 @@ class CommentaryFormatter:
             introduction=introduction,
             verse_commentary=verse_commentary,
             psalm_number=psalm_number,
-            apply_divine_names=apply_divine_names
+            apply_divine_names=apply_divine_names,
+            models_used=models_used
         )
 
         # Write output

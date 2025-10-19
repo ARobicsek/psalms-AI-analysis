@@ -27,6 +27,7 @@ Date: 2025-10-18
 import sys
 import os
 import time
+import json
 import argparse
 from pathlib import Path
 import subprocess
@@ -40,6 +41,7 @@ from src.agents.synthesis_writer import SynthesisWriter
 from src.agents.master_editor import MasterEditor
 from src.schemas.analysis_schemas import load_macro_analysis
 from src.utils.logger import get_logger
+from src.utils.pipeline_summary import PipelineSummaryTracker
 
 
 def run_enhanced_pipeline(
@@ -72,6 +74,10 @@ def run_enhanced_pipeline(
     logger.info(f"ENHANCED PIPELINE - Psalm {psalm_number}")
     logger.info(f"=" * 80)
 
+    # Initialize pipeline summary tracker
+    tracker = PipelineSummaryTracker(psalm_number=psalm_number)
+    logger.info("Pipeline summary tracking enabled")
+
     # Create output directory
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -96,12 +102,34 @@ def run_enhanced_pipeline(
         print(f"STEP 1: Macro Analysis (Structural Thesis)")
         print(f"{'='*80}\n")
 
+        step_start = time.time()
+
+        # Get psalm text for input tracking
+        from src.data_sources.tanakh_database import TanakhDatabase
+        db = TanakhDatabase(Path(db_path))
+        psalm = db.get_psalm(psalm_number)
+        if psalm:
+            tracker.track_verse_count(len(psalm.verses))
+            # Track approximate input (psalm text)
+            psalm_text = "\n".join([f"{v.verse}: {v.hebrew} / {v.english}" for v in psalm.verses])
+            tracker.track_step_input("macro_analysis", psalm_text)
+
         macro_analyst = MacroAnalyst()
+        macro_model = macro_analyst.model
         macro_analysis = macro_analyst.analyze_psalm(psalm_number)
 
         # Save macro analysis
         from src.schemas.analysis_schemas import save_analysis
         save_analysis(macro_analysis, str(macro_file), format="json")
+
+        # Track output
+        macro_output = macro_analysis.to_markdown()
+        step_duration = time.time() - step_start
+        tracker.track_step_output("macro_analysis", macro_output, duration=step_duration)
+
+        # Track macro questions
+        if macro_analysis.research_questions:
+            tracker.track_macro_questions(macro_analysis.research_questions)
 
         logger.info(f"✓ Macro analysis saved to {macro_file}")
         print(f"✓ Macro analysis complete: {macro_file}\n")
@@ -111,6 +139,9 @@ def run_enhanced_pipeline(
     else:
         logger.info(f"[STEP 1] Skipping macro analysis (using existing {macro_file})")
         print(f"\nSkipping Step 1 (using existing macro analysis)\n")
+        # Still need to get model name for tracking
+        macro_analyst = MacroAnalyst()
+        macro_model = macro_analyst.model
 
     # Load macro analysis
     macro_analysis = load_macro_analysis(str(macro_file))
@@ -118,13 +149,20 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 2: Micro Analysis (Enhanced Figurative Search)
     # =====================================================================
+    micro_output = ""  # Initialize for later use
     if not skip_micro or not micro_file.exists():
         logger.info("\n[STEP 2] Running MicroAnalyst v2 (with enhanced figurative search)...")
         print(f"\n{'='*80}")
         print(f"STEP 2: Micro Analysis (Discovery + Enhanced Research)")
         print(f"{'='*80}\n")
 
+        step_start = time.time()
+
+        # Track input (macro analysis)
+        tracker.track_step_input("micro_analysis", macro_analysis.to_markdown())
+
         micro_analyst = MicroAnalystV2(db_path=db_path)
+        micro_model = micro_analyst.model
         micro_analysis, research_bundle = micro_analyst.analyze_psalm(
             psalm_number,
             macro_analysis
@@ -137,6 +175,26 @@ def run_enhanced_pipeline(
         with open(research_file, 'w', encoding='utf-8') as f:
             f.write(research_bundle.to_markdown())
 
+        # Track output
+        micro_output = micro_analysis.to_markdown() + "\n\n" + research_bundle.to_markdown()
+        step_duration = time.time() - step_start
+        tracker.track_step_output("micro_analysis", micro_output, duration=step_duration)
+
+        # Track research requests and bundle
+        tracker.track_research_requests(research_bundle.request)
+        tracker.track_research_bundle(research_bundle)
+
+        # Track research bundle size
+        research_bundle_text = research_bundle.to_markdown()
+        tracker.track_research_bundle_size(
+            len(research_bundle_text),
+            len(research_bundle_text) // 3  # Estimate ~3 chars per token
+        )
+
+        # Track micro questions
+        if micro_analysis.interesting_questions:
+            tracker.track_micro_questions(micro_analysis.interesting_questions)
+
         logger.info(f"✓ Micro analysis saved to {micro_file}")
         logger.info(f"✓ Research bundle saved to {research_file}")
         print(f"✓ Micro analysis complete: {micro_file}")
@@ -147,6 +205,19 @@ def run_enhanced_pipeline(
     else:
         logger.info(f"[STEP 2] Skipping micro analysis (using existing {micro_file})")
         print(f"\nSkipping Step 2 (using existing micro analysis)\n")
+        # Still need to get model name for tracking
+        micro_analyst = MicroAnalystV2(db_path=db_path)
+        micro_model = micro_analyst.model
+        # Load existing micro output for synthesis step
+        if micro_file.exists():
+            from src.schemas.analysis_schemas import load_analysis
+            try:
+                with open(micro_file, 'r', encoding='utf-8') as f:
+                    micro_data = json.load(f)
+                    # Approximate micro output from saved file
+                    micro_output = json.dumps(micro_data, ensure_ascii=False)
+            except:
+                pass
 
     # =====================================================================
     # STEP 3: Synthesis (Enhanced Prompts)
@@ -157,7 +228,16 @@ def run_enhanced_pipeline(
         print(f"STEP 3: Synthesis (Introduction + Verse Commentary)")
         print(f"{'='*80}\n")
 
+        step_start = time.time()
+
+        # Track input (macro + micro + research)
+        with open(research_file, 'r', encoding='utf-8') as f:
+            research_content = f.read()
+        synthesis_input = macro_analysis.to_markdown() + "\n\n" + micro_output + "\n\n" + research_content
+        tracker.track_step_input("synthesis", synthesis_input)
+
         synthesis_writer = SynthesisWriter()
+        synthesis_model = synthesis_writer.model
         commentary = synthesis_writer.write_commentary(
             macro_file=macro_file,
             micro_file=micro_file,
@@ -172,6 +252,11 @@ def run_enhanced_pipeline(
         with open(synthesis_verses_file, 'w', encoding='utf-8') as f:
             f.write(commentary['verse_commentary'])
 
+        # Track output
+        synthesis_output = commentary['introduction'] + "\n\n" + commentary['verse_commentary']
+        step_duration = time.time() - step_start
+        tracker.track_step_output("synthesis", synthesis_output, duration=step_duration)
+
         logger.info(f"✓ Introduction saved to {synthesis_intro_file}")
         logger.info(f"✓ Verse commentary saved to {synthesis_verses_file}")
         print(f"✓ Introduction complete: {synthesis_intro_file}")
@@ -182,6 +267,9 @@ def run_enhanced_pipeline(
     else:
         logger.info(f"[STEP 3] Skipping synthesis (using existing {synthesis_intro_file})")
         print(f"\nSkipping Step 3 (using existing synthesis)\n")
+        # Still need to get model name for tracking
+        synthesis_writer = SynthesisWriter()
+        synthesis_model = synthesis_writer.model
 
     # =====================================================================
     # STEP 4: Master Editor (GPT-5) - NEW!
@@ -194,7 +282,58 @@ def run_enhanced_pipeline(
         print("This step uses GPT-5 to elevate the commentary from 'good' to 'excellent'")
         print("Expected duration: 2-5 minutes\n")
 
+        step_start = time.time()
+
+        # Track input (ALL materials provided to master editor)
+        # The master editor receives:
+        # 1. Synthesis output (intro + verses)
+        # 2. Full research bundle
+        # 3. Macro analysis JSON
+        # 4. Micro analysis JSON
+        # 5. Psalm text (Hebrew/English/LXX from database)
+
+        # Load synthesis output
+        with open(synthesis_intro_file, 'r', encoding='utf-8') as f:
+            intro_content = f.read()
+        with open(synthesis_verses_file, 'r', encoding='utf-8') as f:
+            verses_content = f.read()
+
+        # Load research bundle
+        with open(research_file, 'r', encoding='utf-8') as f:
+            research_content = f.read()
+
+        # Load macro and micro analyses (JSON -> string for character count)
+        with open(macro_file, 'r', encoding='utf-8') as f:
+            macro_json_content = f.read()
+        with open(micro_file, 'r', encoding='utf-8') as f:
+            micro_json_content = f.read()
+
+        # Get psalm text (same as master editor does)
+        from src.data_sources.tanakh_database import TanakhDatabase
+        db = TanakhDatabase(Path(db_path))
+        psalm = db.get_psalm(psalm_number)
+        psalm_text_content = ""
+        if psalm:
+            psalm_lines = [f"# Psalm {psalm_number}\n"]
+            for verse in psalm.verses:
+                psalm_lines.append(f"\n## Verse {verse.verse}")
+                psalm_lines.append(f"**Hebrew:** {verse.hebrew}")
+                psalm_lines.append(f"**English:** {verse.english}")
+            psalm_text_content = "\n".join(psalm_lines)
+
+        # Combine ALL inputs that master editor receives
+        editor_input = (
+            intro_content + "\n\n" +
+            verses_content + "\n\n" +
+            research_content + "\n\n" +
+            macro_json_content + "\n\n" +
+            micro_json_content + "\n\n" +
+            psalm_text_content
+        )
+        tracker.track_step_input("master_editor", editor_input)
+
         master_editor = MasterEditor()
+        editor_model = master_editor.model
         result = master_editor.edit_commentary(
             introduction_file=synthesis_intro_file,
             verse_file=synthesis_verses_file,
@@ -215,6 +354,11 @@ def run_enhanced_pipeline(
         with open(edited_verses_file, 'w', encoding='utf-8') as f:
             f.write(result['revised_verses'])
 
+        # Track output
+        editor_output = result['assessment'] + "\n\n" + result['revised_introduction'] + "\n\n" + result['revised_verses']
+        step_duration = time.time() - step_start
+        tracker.track_step_output("master_editor", editor_output, duration=step_duration)
+
         logger.info(f"✓ Editorial assessment saved to {edited_assessment_file}")
         logger.info(f"✓ Revised introduction saved to {edited_intro_file}")
         logger.info(f"✓ Revised verses saved to {edited_verses_file}")
@@ -227,6 +371,9 @@ def run_enhanced_pipeline(
     else:
         logger.info(f"[STEP 4] Skipping master edit (using existing {edited_intro_file})")
         print(f"\nSkipping Step 4 (using existing master-edited files)\n")
+        # Still need to get model name for tracking
+        master_editor = MasterEditor()
+        editor_model = master_editor.model
 
     # =====================================================================
     # STEP 5: Print-Ready Formatting
@@ -246,13 +393,22 @@ def run_enhanced_pipeline(
 
         formatter = CommentaryFormatter(logger=logger)
 
+        # Create models_used dictionary
+        models_used = {
+            'macro': macro_model,
+            'micro': micro_model,
+            'synthesis': synthesis_model,
+            'editor': editor_model
+        }
+
         try:
             formatter.format_from_files(
                 intro_file=str(edited_intro_file),
                 verses_file=str(edited_verses_file),
                 psalm_number=psalm_number,
                 output_file=str(print_ready_file),
-                apply_divine_names=True
+                apply_divine_names=True,
+                models_used=models_used
             )
             result_success = True
         except Exception as e:
@@ -269,11 +425,26 @@ def run_enhanced_pipeline(
         print(f"\nSkipping Step 5 (print-ready formatting)\n")
 
     # =====================================================================
-    # COMPLETE
+    # COMPLETE - Generate Pipeline Summary
     # =====================================================================
     logger.info(f"\n{'=' * 80}")
     logger.info(f"ENHANCED PIPELINE COMPLETE - Psalm {psalm_number}")
     logger.info(f"{'=' * 80}\n")
+
+    # Mark pipeline complete and generate summary
+    tracker.mark_pipeline_complete()
+
+    logger.info("\n[SUMMARY] Generating pipeline summary report...")
+    try:
+        summary_file = tracker.save_report(str(output_path))
+        summary_json = tracker.save_json(str(output_path))
+        logger.info(f"✓ Pipeline summary saved to {summary_file}")
+        logger.info(f"✓ Pipeline statistics saved to {summary_json}")
+        print(f"\n✓ Pipeline summary: {summary_file}")
+        print(f"✓ Pipeline statistics: {summary_json}")
+    except Exception as e:
+        logger.error(f"Error generating pipeline summary: {e}")
+        print(f"\n⚠ Warning: Could not generate pipeline summary: {e}")
 
     print(f"\n{'='*80}")
     print(f"ENHANCED PIPELINE COMPLETE")
@@ -290,7 +461,9 @@ def run_enhanced_pipeline(
         'edited_assessment': edited_assessment_file,
         'edited_intro': edited_intro_file,
         'edited_verses': edited_verses_file,
-        'print_ready': print_ready_file
+        'print_ready': print_ready_file,
+        'pipeline_summary': summary_file if 'summary_file' in locals() else None,
+        'pipeline_stats': summary_json if 'summary_json' in locals() else None
     }
 
 

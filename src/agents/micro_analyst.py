@@ -107,6 +107,20 @@ IMPORTANT PRINCIPLES:
 - Look for LINGUISTIC puzzles, poetic cleverness, theological depth
 - Don't force everything to "support the thesis" - find intrinsic interest
 
+After noting discoveries for each verse, formulate 5 or more **INTERESTING QUESTIONS** about:
+- Unusual word choices and phrases (e.g., why THIS word/phrase and not another?)
+- Striking poetic devices and their function
+- Surprising grammatical or syntactic patterns
+- Puzzling theological or rhetorical moves
+- Interpretive conundrums that merit exploration
+
+Examples of good questions:
+- "Why did the poet choose 'בְּנֵי אֵלִים' (sons of gods) rather than a more monotheistic formulation?"
+- "What is the function of the unusual phrase 'הֲדַר כְּבוֹד הוֹדֶךָ' - is this poetic accumulation or does each word contribute distinct meaning?"
+- "Why does the psalmist shift from perfect tense to imperfect at verse 7?"
+
+These questions should guide the Synthesizer and Editor to address genuinely interesting aspects of the psalm.
+
 OUTPUT FORMAT: Return ONLY valid JSON:
 
 {{
@@ -132,6 +146,13 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     "Sevenfold 'voice of LORD' anaphora - completeness symbolism worth exploring",
     "Geographic progression (waters → Lebanon → wilderness → temple) - cosmological journey?",
     "Shift from imperative (vv.1-2) to descriptive (vv.3-9) to blessing (vv.10-11) - rhetorical strategy"
+  ],
+  "interesting_questions": [
+    "Why did the poet choose the phrase 'בְּנֵי אֵלִים' (sons of gods) rather than a more monotheistic formulation?",
+    "What is the significance of the sevenfold repetition of 'קוֹל יְהוָה' (voice of the LORD)?",
+    "How do the unusual word combinations like 'הֲדַר כְּבוֹד הוֹדֶךָ' function poetically?",
+    "Why does the psalm shift from imperative to descriptive mood at verse 3?",
+    "What does the rare word 'מַבּוּל' (flood) contribute to the cosmological imagery?"
   ],
   "research_priorities": [
     "LEXICON: Focus on storm vocabulary, divine epithets, rare geographical terms",
@@ -486,6 +507,7 @@ class MicroAnalystV2:
             psalm_number=psalm_number,
             verse_commentaries=verse_commentaries,
             thematic_threads=discoveries.get('overall_patterns', []),
+            interesting_questions=discoveries.get('interesting_questions', []),
             synthesis_notes="\n".join(discoveries.get('research_priorities', []))
         )
 

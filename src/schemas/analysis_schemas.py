@@ -146,6 +146,7 @@ class MicroAnalysis:
     psalm_number: int
     verse_commentaries: List[VerseCommentary] = field(default_factory=list)
     thematic_threads: List[str] = field(default_factory=list)  # Themes across verses
+    interesting_questions: List[str] = field(default_factory=list)  # Questions about words, phrases, devices
     synthesis_notes: str = ""  # Notes for Pass 3 synthesis
 
     def to_dict(self) -> Dict[str, Any]:
@@ -168,6 +169,7 @@ class MicroAnalysis:
             psalm_number=data['psalm_number'],
             verse_commentaries=verse_commentaries,
             thematic_threads=data.get('thematic_threads', []),
+            interesting_questions=data.get('interesting_questions', []),
             synthesis_notes=data.get('synthesis_notes', '')
         )
 
@@ -200,6 +202,11 @@ class MicroAnalysis:
             lines.append("\n## Thematic Threads")
             for i, thread in enumerate(self.thematic_threads, 1):
                 lines.append(f"{i}. {thread}")
+
+        if self.interesting_questions:
+            lines.append("\n## Interesting Questions")
+            for i, question in enumerate(self.interesting_questions, 1):
+                lines.append(f"{i}. {question}")
 
         if self.synthesis_notes:
             lines.append("\n## Notes for Synthesis")
