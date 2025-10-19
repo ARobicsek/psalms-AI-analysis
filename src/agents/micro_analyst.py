@@ -157,11 +157,14 @@ DISCOVERIES FROM STAGE 1:
 GENERATE RESEARCH REQUESTS:
 
 1. **BDB LEXICON** - Hebrew words worth deep investigation
-   - Curious/rare words from discoveries
-   - Theologically rich terms
-   - Words with ambiguous meanings
-   - Key verbs and nouns central to verses
-   - 20-40 requests expected
+   - **BE HIGHLY JUDICIOUS**: Only request words that are genuinely puzzling, rare, or theologically significant
+   - **AVOID common words** like יוֹם (day), אִישׁ (man), אֶרֶץ (earth), שָׁמַיִם (heavens), לֵב (heart), יָד (hand), עַיִן (eye), פֶּה (mouth), דֶּרֶךְ (way)
+   - **Focus on**: Rare vocabulary, technical cultic terms, words with ambiguous meanings, theologically loaded terms, hapax legomena
+   - **For psalms >15 verses**: Limit to 12-18 requests (ONLY the most essential words)
+   - **For psalms 10-15 verses**: Limit to 15-22 requests
+   - **For psalms <10 verses**: Up to 25-30 requests acceptable
+   - Examples of GOOD requests: rare verbs, divine epithets, unusual compounds, technical cultic terms, words used in surprising ways
+   - Examples of BAD requests: יוֹם, לֵב, יָד, עַיִן, פֶּה, דֶּרֶךְ, בָּשָׂר (unless used in truly puzzling context)
 
 2. **CONCORDANCE SEARCHES** - Patterns to trace across Scripture
    - Repeated phrases from discoveries
@@ -171,16 +174,26 @@ GENERATE RESEARCH REQUESTS:
    - "consonantal" finds all forms of a root pattern regardless of vocalization
    - 5-10 strategic searches
 
-3. **FIGURATIVE LANGUAGE** - Verses with metaphor/imagery
-   - All verses flagged in discoveries
+3. **FIGURATIVE LANGUAGE** - Verses with notable and interesting figurative speech
+   - **BE SELECTIVE**: Only request searches for VIVID, UNUSUAL, or THEOLOGICALLY RICH figurative language, or language CENTRAL to the psalm
+   - **AVOID very common body part imagery** unless used in surprising ways: hand, eye/gaze, mouth, heart, face, ear
+   - **AVOID very common theological terms** unless central to the psalm: mercy, fear, bless, praise
+   - **FOCUS ON**: Unusual metaphors, nature imagery, architectural imagery, rare verbs of action, surprising personification
+   - **For psalms >15 verses**: Limit to 8-12 figurative searches (most striking imagery only)
+   - **For psalms 10-15 verses**: Limit to 10-15 figurative searches
+   - **For psalms <10 verses**: Up to 12-18 figurative searches acceptable
    - **SEARCH SCOPE**: Default to searching both Psalms AND Pentateuch (not just Psalms)
    - **HIERARCHICAL SEARCH STRATEGY**: For each figurative element:
-     * Specify the specific vehicle (main image, e.g., "stronghold", "shepherd", "water")
-     * Include direct synonyms (e.g., for "stronghold": "fortress", "wall", "citadel")
-     * Include broader category terms (e.g., for "stronghold": "military", "protection", "defense", "safety")
+     * Specify the specific vehicle (main image, e.g., "stronghold", "shepherd", "storm")
+     * Include direct synonyms (e.g., for "stronghold": "fortress", "citadel", "refuge")
+     * Include broader category terms (e.g., for "stronghold": "military", "protection", "defense")
+     * **INCLUDE MORPHOLOGICAL VARIATIONS** where relevant:
+       - Singular AND plural forms (e.g., "banner" AND "banners", "wall" AND "walls")
+       - Base verbs AND gerunds (e.g., "stand" AND "standing", "rise" AND "rising")
+       - Apply this to synonyms too (e.g., if searching "arise", include "arises", "arising")
      * The synthesis and master editor agents will determine which results are most relevant
-   - **DO NOT filter by specific figuration type** (metaphor, simile, etc.) - let the search be broad
-   - **CAST A WIDE NET**: Better to retrieve too many figurative instances than miss important parallels
+   - Examples of GOOD figurative requests: "pour forth" (vivid action), "fathom" (rare concept), "nostril" (specific idiom)
+   - Examples of BAD figurative requests: "hand", "gaze", "mouth", "way", "mercy", "bless" (too common, will return 100s of results)
 
 4. **COMMENTARY** - Verses with interpretive puzzles
    - Complex/ambiguous verses from discoveries
@@ -200,10 +213,10 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     ... (5-10 searches)
   ],
   "figurative_checks": [
-    {{"verse": 3, "reason": "Waters as primordial chaos imagery", "vehicle": "waters", "vehicle_synonyms": ["sea", "deep", "flood", "ocean", "water", "liquid"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch"}},
-    {{"verse": 5, "reason": "Voice 'breaking' cedars - storm force personified", "vehicle": "breaking", "vehicle_synonyms": ["shatter", "split", "fracture", "destroy"], "broader_terms": ["power", "force", "violence", "strength"], "scope": "Psalms+Pentateuch"}},
-    {{"verse": 7, "reason": "Stronghold imagery - divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["fortress", "wall", "citadel", "refuge"], "broader_terms": ["military", "protection", "defense", "safety", "security"], "scope": "Psalms+Pentateuch"}},
-    ... (all figurative verses)
+    {{"verse": 3, "reason": "Waters as primordial chaos imagery - vivid and theologically rich", "vehicle": "waters", "vehicle_synonyms": ["water", "sea", "seas", "deep", "depths", "flood", "floods", "ocean", "oceans"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch"}},
+    {{"verse": 5, "reason": "Voice 'breaking' cedars - unusual storm personification", "vehicle": "breaking", "vehicle_synonyms": ["break", "breaks", "shatter", "shatters", "shattering", "split", "splits", "fracture", "fractures"], "broader_terms": ["power", "force", "destruction"], "scope": "Psalms+Pentateuch"}},
+    {{"verse": 7, "reason": "Stronghold imagery - architectural metaphor for divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["strongholds", "fortress", "fortresses", "citadel", "citadels", "refuge", "refuges"], "broader_terms": ["military", "protection", "defense"], "scope": "Psalms+Pentateuch"}},
+    ... (8-12 most striking figurative elements for psalms >15 verses)
   ],
   "commentary_requests": [
     {{"verse": 1, "reason": "Divine council interpretation - how do traditional commentators handle 'sons of gods'?"}},

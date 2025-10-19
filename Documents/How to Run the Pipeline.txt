@@ -1,0 +1,39 @@
+2. ✓ How to Run the Pipeline on a New Chapter
+The pipeline script is: run_enhanced_pipeline.py Basic Usage:
+python scripts/run_enhanced_pipeline.py PSALM_NUMBER
+Examples:
+# Generate complete commentary for Psalm 23
+python scripts/run_enhanced_pipeline.py 23
+
+# Custom output directory
+python scripts/run_enhanced_pipeline.py 51 --output-dir output/psalm_51
+
+# Resume from synthesis step (skip macro and micro)
+python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro
+
+# Skip master editing (use existing synthesis)
+python scripts/run_enhanced_pipeline.py 2 --skip-master-edit
+
+# Adjust rate limit delay (default is 120 seconds)
+python scripts/run_enhanced_pipeline.py 100 --delay 60
+What the pipeline does:
+STEP 1: Macro Analysis - Structural thesis generation
+STEP 2: Micro Analysis - Discovery-driven research with enhanced figurative language search
+STEP 3: Synthesis - Introduction + verse-by-verse commentary
+STEP 4: Master Editor (GPT-5) - Editorial review and revision to "National Book Award" level
+STEP 5: Print-Ready Formatting - Final output with Hebrew/English text and divine names modifications
+Output files created (in output/test_psalm_NNN/ by default):
+psalm_NNN_macro.json - Structural analysis
+psalm_NNN_micro_v2.json - Discovery notes
+psalm_NNN_research_v2.md - Research bundle (lexicon, concordance, figurative, commentary)
+psalm_NNN_synthesis_intro.md - Introduction (pre-edit)
+psalm_NNN_synthesis_verses.md - Verse commentary (pre-edit)
+psalm_NNN_assessment.md - Editorial assessment
+psalm_NNN_edited_intro.md - Revised introduction
+psalm_NNN_edited_verses.md - Revised verses
+psalm_NNN_print_ready.md - FINAL OUTPUT for Word
+Key features:
+Automatic rate limiting (120-second delays between API-heavy steps by default)
+Skip flags to resume from any step
+All intermediate files saved for review
+UTF-8 handling for Hebrew text

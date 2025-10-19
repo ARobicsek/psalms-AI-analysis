@@ -93,10 +93,9 @@ class CommentaryFormatter:
             hebrew = verse_data['hebrew']
             english = verse_data['english']
 
-            # Format: verse number, Hebrew on one line, English on next line
-            # Line break prevents Word from misinterpreting RTL/LTR text mixing
-            output.append(f"{verse_num}. {hebrew}")
-            output.append(english)
+            # Format: verse number, Hebrew, then three spaces, then English (same line)
+            # Three spaces for visual separation between RTL/LTR text
+            output.append(f"{verse_num}. {hebrew}   {english}")
 
         # Introduction
         output.append("---")

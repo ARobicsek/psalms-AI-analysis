@@ -130,12 +130,20 @@ psalms-AI-analysis/
    └─→ Produces publication-ready markdown
 ```
 
-**Phase 4 Enhancements** (2025-10-18):
+**Phase 4 Enhancements** (2025-10-18 to 2025-10-19):
 1. **Master Editor Agent (GPT-5)** - Final editorial pass for excellence
 2. **Enhanced Figurative Search** - Hierarchical 3-level search (vehicle + synonyms + broader terms), multi-book scope
 3. **Expanded Synthesis Prompts** - 11 categories of scholarly interest, 150-400+ words per verse
+4. **Optimized Research Requests** (2025-10-19):
+   - Judicious lexicon requests (avoiding common words, scaled by psalm length)
+   - Selective figurative searches (avoiding common imagery, focusing on vivid/unusual metaphors)
+   - Intelligent proportional trimming (maintains representation across all search terms)
+   - Fixed trimming bugs (section matching, optimized context limits)
+5. **Print-Ready Formatting** (2025-10-19):
+   - 3-space Hebrew/English separation for RTL/LTR compatibility
+   - Clean single-line verse format
 
-See [docs/PHASE_4_ENHANCEMENTS.md](docs/PHASE_4_ENHANCEMENTS.md) for complete details.
+See [docs/PHASE_4_ENHANCEMENTS.md](docs/PHASE_4_ENHANCEMENTS.md) and [docs/NEXT_SESSION_PROMPT.md](docs/NEXT_SESSION_PROMPT.md) for complete details.
 
 ### Hebrew Search: 4-Layer System
 
@@ -146,9 +154,13 @@ See [docs/PHASE_4_ENHANCEMENTS.md](docs/PHASE_4_ENHANCEMENTS.md) for complete de
 
 ## Cost Estimates
 
-- **Per chapter** (avg 16.8 verses): ~$0.23
-- **Total project** (150 Psalms): ~$25-35 with prompt caching
-- **Psalm 119** (176 verses): ~$2.50
+**Phase 4 with Master Editor (GPT-5):**
+- **Per psalm** (avg): ~$0.57-0.82
+  - Claude Sonnet 4.5: ~$0.07
+  - GPT-5 Master Editor: ~$0.50-0.75
+- **Total project** (150 Psalms): ~$85-123
+- **With Claude Batch API** (50% off): ~$60-96
+- **Psalm 145** (21 verses): Tested successfully with optimized research bundle (259k chars)
 
 ## Quality Metrics
 

@@ -1,0 +1,141 @@
+{
+  "psalm_number": 20,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Standard Davidic superscription but unusually simple - just 'psalm of David' without additional liturgical markers found in other royal psalms. The brevity contrasts with the complex ritual dialogue that follows.",
+      "lexical_insights": [
+        "לַמְנַצֵּחַ"
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Supports royal psalm identification but raises questions about liturgical complexity vs. simple attribution"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Opens with dual protection formula - both answering (יַֽעַנְךָ֣) and keeping safe (יְ֝שַׂגֶּבְךָ֗). The phrase 'name of Jacob's God' rather than 'your God' creates interesting distance - possibly indicating priestly intercession on behalf of king.",
+      "lexical_insights": [
+        "יְ֝שַׂגֶּבְךָ֗",
+        "שֵׁ֤ם",
+        "יַעֲקֹֽב"
+      ],
+      "figurative_analysis": [
+        "'name' as protective agent - personification"
+      ],
+      "thesis_connection": "Establishes 'name theology' central to thesis, but 'Jacob's God' creates interpretive puzzle about liturgical speakers"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Spatial theology emerges - help comes 'from sanctuary' (מִקֹּ֑דֶשׁ) and 'from Zion' (וּ֝מִצִּיּ֗וֹן). The parallelism suggests sanctuary=Zion but creates vertical/horizontal axis tension between earthly and heavenly realms.",
+      "lexical_insights": [
+        "יִשְׁלַֽח",
+        "יִסְעָדֶֽךָּ",
+        "מִקֹּ֑דֶשׁ"
+      ],
+      "figurative_analysis": [
+        "sanctuary as source - metonymy for divine presence"
+      ],
+      "thesis_connection": "Supports spatial movement in thesis but complicates earthly/heavenly sanctuary distinction"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Sacrificial language with technical terms - 'tokens' (אזכרה implied) of meal offerings and 'approve' (יְדַשְּׁנֶ֣ה) burnt offerings. The verb ידשנה is particularly puzzling - root דשן usually means 'fat/fertile', suggesting divine acceptance makes offerings 'fat' or rich.",
+      "lexical_insights": [
+        "יִזְכֹּ֥ר",
+        "מִנְחֹתֶ֑ךָ",
+        "יְדַשְּׁנֶ֣ה"
+      ],
+      "figurative_analysis": [
+        "divine 'remembering' as active intervention"
+      ],
+      "thesis_connection": "Establishes sacrificial prerequisite for military success in thesis, but verb choice creates lexical puzzle"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Culmination of priestly intercession with comprehensive blessing - 'desire' (כִלְבָבֶ֑ךָ - literally 'according to your heart') and 'every plan' (וְֽכׇל־עֲצָתְךָ֥). The progression from specific ritual acts to total fulfillment creates liturgical crescendo.",
+      "lexical_insights": [
+        "כִלְבָבֶ֑ךָ",
+        "עֲצָתְךָ֥",
+        "יְמַלֵּֽא"
+      ],
+      "figurative_analysis": [
+        "heart as seat of desire - metonymy"
+      ],
+      "thesis_connection": "Completes intercession phase of thesis structure, but raises questions about scope of divine involvement in royal planning"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Dramatic shift from 2nd person intercession to 1st person plural participation - 'we' join the king's victory. The phrase 'arrayed by standards' (נִדְגֹּ֑ל) is military but the context is liturgical celebration. 'Name of our God' shifts from 'Jacob's God' - theological progression.",
+      "lexical_insights": [
+        "נְרַנְּנָ֤ה",
+        "נִדְגֹּ֑ל",
+        "בִּ֘ישׁ֤וּעָתֶ֗ךָ"
+      ],
+      "figurative_analysis": [
+        "standards/banners as celebration symbols"
+      ],
+      "thesis_connection": "Supports communal participation in thesis but creates interpretive puzzle about military vs. liturgical celebration"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Sudden prophetic certainty breaks the petition pattern - 'Now I know' (עַתָּ֤ה יָדַ֗עְתִּי) suggests oracular intervention. The king becomes 'His anointed' (מְשִׁ֫יח֥וֹ) and divine response shifts to 'heavenly sanctuary' (מִשְּׁמֵ֣י קׇדְשׁ֑וֹ). 'Mighty victories of His right arm' is military language applied to divine action.",
+      "lexical_insights": [
+        "עַתָּ֤ה",
+        "מְשִׁ֫יח֥וֹ",
+        "בִּ֝גְבֻר֗וֹת",
+        "יֵ֣שַׁע"
+      ],
+      "figurative_analysis": [
+        "divine right arm - anthropomorphic military metaphor"
+      ],
+      "thesis_connection": "Central to thesis as prophetic assurance, but voice identification creates liturgical puzzle"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Famous antithetic parallelism contrasting military technology with divine name theology. The Hebrew has elegant structure: אֵ֣לֶּה...וְאֵ֣לֶּה versus וַאֲנַ֓חְנוּ. The verb נַזְכִּֽיר (remember/mention/invoke) parallels the military 'calling upon' chariots and horses.",
+      "lexical_insights": [
+        "אֵ֣לֶּה",
+        "בָ֭רֶכֶב",
+        "בַסּוּסִ֑ים",
+        "נַזְכִּֽיר"
+      ],
+      "figurative_analysis": [
+        "chariots/horses as trust objects - metonymy for military confidence"
+      ],
+      "thesis_connection": "Perfect embodiment of thesis contrast, but verb choice (זכר) adds liturgical dimension beyond simple trust"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Prophetic perfect verbs describe future victory as accomplished fact - 'they collapsed' (כָּרְע֣וּ) and 'fell' (וְנָפָ֑לוּ) versus 'we arose' (קַּ֝֗מְנוּ) and 'stood firm' (וַנִּתְעוֹדָֽד). The contrast is physical posture - falling versus standing - as metaphor for military outcome.",
+      "lexical_insights": [
+        "כָּרְע֣וּ",
+        "וַנִּתְעוֹדָֽד",
+        "קַּ֝֗מְנוּ"
+      ],
+      "figurative_analysis": [
+        "standing/falling as military success/failure"
+      ],
+      "thesis_connection": "Completes antithetic contrast in thesis, but perfect tense raises questions about liturgical performance vs. prophecy"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Syntactic ambiguity creates interpretive puzzle - is 'the King' (הַ֝מֶּ֗לֶךְ) subject or vocative? Translation options: 'May the King answer us' vs. 'O King, answer us'. The ambiguity may collapse divine/human kingship distinctions at the moment of appeal.",
+      "lexical_insights": [
+        "הוֹשִׁ֑יעָה",
+        "הַ֝מֶּ֗לֶךְ",
+        "יַעֲנֵ֥נוּ"
+      ],
+      "figurative_analysis": [
+        "king as respondent to crisis"
+      ],
+      "thesis_connection": "Culminates thesis by potentially collapsing divine/human authority, but grammatical ambiguity creates interpretive crux"
+    }
+  ],
+  "thematic_threads": [
+    "Progressive divine name theology: 'Jacob's God' → 'our God' → 'LORD our God' - theological and liturgical progression",
+    "Liturgical voice shifts: 2nd person (to king) → 1st plural (community) → 1st singular (prophetic) → ambiguous final voice",
+    "Spatial movement: earthly sanctuary → heavenly sanctuary → name theology transcending space",
+    "Verbal progression: jussive petitions → prophetic certainty → prophetic perfect → concluding imperative",
+    "Military-liturgical fusion: sacrificial language prepares for military imagery culminating in divine warrior theology"
+  ],
+  "synthesis_notes": "LEXICON: יְדַשְּׁנֶ֣ה (v.4), נִדְגֹּ֑ל (v.6), נַזְכִּֽיר (v.8) - technical and rare terms needing precise definition\nCONCORDANCE: Divine name progressions, prophetic certainty formulas (עַתָּ֤ה יָדַ֗עְתִּי), liturgical voice shifts\nSYNTAX: Verse 10 grammatical ambiguity - comprehensive analysis of הַ֝מֶּ֗לֶךְ syntactic possibilities\nCOMMENTARY: Liturgical performance questions - who speaks verses 7 and 10? Temple ritual reconstruction needed"
+}

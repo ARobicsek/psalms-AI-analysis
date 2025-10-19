@@ -1,0 +1,130 @@
+{
+  "psalm_number": 20,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Standard Davidic superscription with 'lamnatzeach' (for the leader/choirmaster) - suggests liturgical performance context. The simplicity contrasts with the complex ritual dialogue that follows.",
+      "lexical_insights": [
+        "לַמְנַצֵּחַ"
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Sets royal psalm context but doesn't reveal the ritual complexity ahead"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Double divine protection formula with 'answer' (יַֽעַנְךָ֣) and 'keep safe' (יְשַׂגֶּבְךָ֗). The specific phrase 'name of Jacob's God' rather than 'God of Israel' is curious - Jacob suggests struggle/wrestling rather than triumph.",
+      "lexical_insights": [
+        "יְשַׂגֶּבְךָ֗",
+        "אֱלֹהֵ֬י יַעֲקֹֽב"
+      ],
+      "figurative_analysis": [
+        "'name' as protective fortress"
+      ],
+      "thesis_connection": "Establishes 'name theology' vs military might contrast, but Jacob reference adds complexity"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Geographic specificity with 'sanctuary' (מִקֹּ֑דֶשׁ) and 'Zion' creates vertical axis from earthly to heavenly help. The pairing of 'send help' and 'sustain' suggests both immediate aid and ongoing support.",
+      "lexical_insights": [
+        "יִסְעָדֶֽךָּ"
+      ],
+      "figurative_analysis": [
+        "sanctuary as source of military aid"
+      ],
+      "thesis_connection": "Spatial movement theme - divine help flows from sacred space to battlefield"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Sacrificial language with technical terms: meal offerings (מִנְחֹתֶ֑ךָ) and burnt offerings (עוֹלָתְךָ֖). The verb 'approve' (יְדַשְּׁנֶ֣ה) literally means 'make fat/rich' - divine satisfaction with sacrifice enables military success.",
+      "lexical_insights": [
+        "יְדַשְּׁנֶ֣ה",
+        "מִנְחֹתֶ֑ךָ"
+      ],
+      "figurative_analysis": [
+        "sacrifice as military preparation"
+      ],
+      "thesis_connection": "Crucial link: proper worship precedes military success - not just 'name' but ritual performance"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Escalation from specific sacrifices to total fulfillment - 'your desire' (כִלְבָבֶ֑ךָ, literally 'according to your heart') and 'every plan' (כׇל־עֲצָתְךָ֥). This moves beyond immediate battle to comprehensive royal success.",
+      "lexical_insights": [
+        "כִלְבָבֶ֑ךָ",
+        "עֲצָתְךָ֥"
+      ],
+      "figurative_analysis": [
+        "heart as seat of royal desire"
+      ],
+      "thesis_connection": "Expands beyond military to total royal ideology - divine backing for all royal initiatives"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Sudden shift to 1st person plural ('we') and military imagery with 'standards' (נִדְגֹּ֑ל). The progression from 'Jacob's God' (v.2) to 'our God' shows communal identification. 'Victory' (יִשׁוּעָתֶ֗ךָ) anticipates the outcome.",
+      "lexical_insights": [
+        "נִדְגֹּ֑ל",
+        "נְרַנְּנָ֤ה"
+      ],
+      "figurative_analysis": [
+        "victory banners/standards"
+      ],
+      "thesis_connection": "Community voice enters - not just individual royal petition but national participation"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Dramatic shift to prophetic certainty with 'Now I know' (עַתָּ֤ה יָדַ֗עְתִּי) - oracular response within liturgy. 'His anointed' (מְשִׁיח֥וֹ) makes royal identity explicit. 'Heavenly sanctuary' elevates from earthly sanctuary (v.3).",
+      "lexical_insights": [
+        "עַתָּה יָדַ֗עְתִּי",
+        "מְשִׁיח֥וֹ",
+        "בִּ֝גְבֻר֗וֹת"
+      ],
+      "figurative_analysis": [
+        "divine right arm as military power"
+      ],
+      "thesis_connection": "Pivotal moment - petition becomes prophetic assurance, human uncertainty becomes divine certainty"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Famous antithesis with elliptical Hebrew - literally 'These in chariots, these in horses, but we in name of LORD our God remember/invoke.' The missing verb (trust? call upon?) forces readers to supply the contrast. Military technology vs. divine name.",
+      "lexical_insights": [
+        "אֵ֣לֶּה",
+        "נַזְכִּֽיר"
+      ],
+      "figurative_analysis": [
+        "chariots/horses as military might"
+      ],
+      "thesis_connection": "Core theological contrast - technological vs. covenantal sources of power"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Military outcome described with perfect tense verbs suggesting completed action: 'they collapsed and fell' vs 'we arose and stood firm.' The contrast is total - enemy defeat, Israeli victory. Verbs suggest both physical and moral/spiritual standing.",
+      "lexical_insights": [
+        "כָּרְע֣וּ",
+        "וַנִּתְעוֹדָֽד"
+      ],
+      "figurative_analysis": [
+        "standing vs falling as military metaphor"
+      ],
+      "thesis_connection": "Theological contrast proven by military results - vindication of 'name' over 'chariots'"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Puzzling conclusion with ambiguous syntax. 'May the King answer us' could refer to God as king or human king. The appeal 'when we call' echoes v.2's 'answer you' but shifts from singular to plural. Completes liturgical cycle but introduces interpretive uncertainty.",
+      "lexical_insights": [
+        "הַ֝מֶּ֗לֶךְ",
+        "יַעֲנֵ֥נוּ"
+      ],
+      "figurative_analysis": [
+        "calling/answering as prayer metaphor"
+      ],
+      "thesis_connection": "Brilliant ambiguity collapses divine/human kingship distinction at moment of crisis appeal"
+    }
+  ],
+  "thematic_threads": [
+    "Progressive divine name evolution: 'Jacob's God' → 'our God' → 'LORD our God' - increasingly intimate covenant language",
+    "Ritual dialogue structure: community petition (vv.2-6) → prophetic oracle (v.7) → theological contrast (vv.8-9) → final appeal (v.10)",
+    "Spatial movement: earthly sanctuary (v.3) → heavenly sanctuary (v.7) - vertical axis of divine help",
+    "Voice shifts: 2nd person (king addressed) → 1st plural (community) → 1st singular (prophet?) → 1st plural (final appeal)",
+    "Tense progression: jussive hopes → prophetic certainty → completed action → renewed petition"
+  ],
+  "synthesis_notes": "LEXICON: יְדַשְּׁנֶ֣ה (approve/fatten), נַזְכִּֽיר (remember/invoke), liturgical terminology\nCONCORDANCE: Divine name theology progression, messianic language (מְשִׁיח֥וֹ), royal psalm parallels\nFIGURATIVE: Military metaphors (standards, chariots, standing/falling), sacrificial-military connections\nCOMMENTARY: Verse 7 speaker identity, verse 10 'King' reference ambiguity, elliptical syntax in verse 8"
+}
