@@ -142,8 +142,27 @@ psalms-AI-analysis/
 5. **Print-Ready Formatting** (2025-10-19):
    - 3-space Hebrew/English separation for RTL/LTR compatibility
    - Clean single-line verse format
+6. **Question-Driven Commentary** (2025-10-19 Session 1):
+   - Micro Analyst generates 5-10 interesting questions per psalm
+   - Questions propagated to Synthesizer and Master Editor
+   - Enhanced emphasis on unusual Hebrew phrases and poetic devices
+7. **GPT-5 Raw Comparison Tool** (2025-10-19 Session 2):
+   - Baseline commentary generation using only GPT-5 + psalm text
+   - Validates research bundle investment
+   - Documented in `docs/GPT5_RAW_COMPARISON.md`
 
-See [docs/PHASE_4_ENHANCEMENTS.md](docs/PHASE_4_ENHANCEMENTS.md) and [docs/NEXT_SESSION_PROMPT.md](docs/NEXT_SESSION_PROMPT.md) for complete details.
+**Planned Enhancements** (Ready for Implementation):
+8. **Phonetic Transcription System** - Prevents phonetic errors by providing accurate pronunciation data
+   - 6 comprehensive design documents created (see `docs/PHONETIC_*.md`)
+   - Will add phonetic transcriptions to all verse discoveries
+   - Master Editor will verify all sound-pattern claims
+9. **Figurative Language Integration Improvements** - Dramatically increase database utilization
+   - Current: 1.2-1.8% utilization (34-51 instances per psalm)
+   - Target: 15-25% utilization (350-600 instances per psalm)
+   - 6 immediate fixes designed (see `docs/FIGURATIVE_LANGUAGE_INTEGRATION_PLAN.md`)
+   - Highest-impact improvement available
+
+See [docs/NEXT_SESSION_PROMPT.md](docs/NEXT_SESSION_PROMPT.md) for complete details and implementation priorities.
 
 ### Hebrew Search: 4-Layer System
 

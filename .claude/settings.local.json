@@ -32,7 +32,12 @@
       "Bash(timeout 10 bash:*)",
       "Bash(timeout 180 python:*)",
       "Bash(git push:*)",
-      "Read(//c/**)"
+      "Read(//c/**)",
+      "Bash(for file in c:/Users/ariro/OneDrive/Documents/Psalms/docs/PHONETIC*.md)",
+      "Bash(head -3 \"$file\")",
+      "Bash(done)",
+      "Bash(dir /B \"C:\\Users\\ariro\\OneDrive\\Documents\\Psalms\\output\")",
+      "Bash(dir /B \"C:\\Users\\ariro\\OneDrive\\Documents\\Psalms\\logs\")"
     ],
     "deny": [],
     "ask": []

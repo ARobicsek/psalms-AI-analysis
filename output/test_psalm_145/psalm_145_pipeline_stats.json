@@ -1,0 +1,33 @@
+{
+  "psalm_number": 145,
+  "pipeline_start": "2025-10-19T18:56:50.559406",
+  "pipeline_end": "2025-10-19T19:04:07.030917",
+  "steps": {
+    "synthesis": {
+      "input_char_count": 425228,
+      "input_token_estimate": 141742,
+      "output_char_count": 52406,
+      "output_token_estimate": 17468,
+      "duration_seconds": 315.4569683074951,
+      "timestamp": "2025-10-19T18:56:51.230673"
+    }
+  },
+  "research": {
+    "lexicon_requests": [],
+    "concordance_requests": [],
+    "figurative_requests": [],
+    "commentary_requests": [],
+    "lexicon_entries_count": 0,
+    "concordance_results": {},
+    "figurative_results": {},
+    "commentary_counts": {},
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 0,
+    "research_bundle_tokens": 0
+  },
+  "analysis": {
+    "macro_questions": [],
+    "micro_questions": [],
+    "verse_count": 0
+  }
+}

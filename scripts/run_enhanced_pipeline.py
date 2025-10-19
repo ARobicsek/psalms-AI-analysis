@@ -149,7 +149,6 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 2: Micro Analysis (Enhanced Figurative Search)
     # =====================================================================
-    micro_output = ""  # Initialize for later use
     if not skip_micro or not micro_file.exists():
         logger.info("\n[STEP 2] Running MicroAnalyst v2 (with enhanced figurative search)...")
         print(f"\n{'='*80}")
@@ -203,21 +202,24 @@ def run_enhanced_pipeline(
         # Rate limit delay
         time.sleep(delay_between_steps)
     else:
-        logger.info(f"[STEP 2] Skipping micro analysis (using existing {micro_file})")
+        logger.info(f"[STEP 2] Skipping micro analysis (loading existing files)")
         print(f"\nSkipping Step 2 (using existing micro analysis)\n")
         # Still need to get model name for tracking
         micro_analyst = MicroAnalystV2(db_path=db_path)
         micro_model = micro_analyst.model
-        # Load existing micro output for synthesis step
-        if micro_file.exists():
-            from src.schemas.analysis_schemas import load_analysis
-            try:
-                with open(micro_file, 'r', encoding='utf-8') as f:
-                    micro_data = json.load(f)
-                    # Approximate micro output from saved file
-                    micro_output = json.dumps(micro_data, ensure_ascii=False)
-            except:
-                pass
+    
+    # Always load the definitive micro_analysis and research_bundle for subsequent steps
+    try:
+        from src.schemas.analysis_schemas import load_micro_analysis
+        micro_analysis = load_micro_analysis(str(micro_file))
+        with open(research_file, 'r', encoding='utf-8') as f:
+            research_bundle_content = f.read()
+        logger.info(f"Successfully loaded {micro_file} and {research_file} for subsequent steps.")
+    except Exception as e:
+        logger.error(f"FATAL: Could not load micro analysis or research file: {e}")
+        print(f"⚠ FATAL: Could not load required analysis files. Exiting.")
+        sys.exit(1)
+
 
     # =====================================================================
     # STEP 3: Synthesis (Enhanced Prompts)
@@ -231,17 +233,15 @@ def run_enhanced_pipeline(
         step_start = time.time()
 
         # Track input (macro + micro + research)
-        with open(research_file, 'r', encoding='utf-8') as f:
-            research_content = f.read()
-        synthesis_input = macro_analysis.to_markdown() + "\n\n" + micro_output + "\n\n" + research_content
+        synthesis_input = macro_analysis.to_markdown() + "\n\n" + micro_analysis.to_markdown() + "\n\n" + research_bundle_content
         tracker.track_step_input("synthesis", synthesis_input)
 
         synthesis_writer = SynthesisWriter()
         synthesis_model = synthesis_writer.model
         commentary = synthesis_writer.write_commentary(
-            macro_file=macro_file,
-            micro_file=micro_file,
-            research_file=research_file,
+            macro_analysis=macro_analysis,
+            micro_analysis=micro_analysis,
+            research_bundle_content=research_bundle_content,
             psalm_number=psalm_number
         )
 
@@ -302,23 +302,40 @@ def run_enhanced_pipeline(
         with open(research_file, 'r', encoding='utf-8') as f:
             research_content = f.read()
 
-        # Load macro and micro analyses (JSON -> string for character count)
+        # Load and format macro and micro analyses to match what the MasterEditor actually receives
+        from src.agents.master_editor import MasterEditor as EditorFormatter
+        formatter = EditorFormatter() # Use a dummy instance for formatting
         with open(macro_file, 'r', encoding='utf-8') as f:
-            macro_json_content = f.read()
+            macro_data = json.load(f)
+            macro_formatted_content = formatter._format_analysis_for_prompt(macro_data, "macro")
         with open(micro_file, 'r', encoding='utf-8') as f:
-            micro_json_content = f.read()
+            micro_data = json.load(f)
+            micro_formatted_content = formatter._format_analysis_for_prompt(micro_data, "micro")
 
         # Get psalm text (same as master editor does)
         from src.data_sources.tanakh_database import TanakhDatabase
+        from src.agents.rag_manager import RAGManager
         db = TanakhDatabase(Path(db_path))
+        rag = RAGManager("docs")
         psalm = db.get_psalm(psalm_number)
+        rag_context = rag.get_rag_context(psalm_number)
         psalm_text_content = ""
         if psalm:
             psalm_lines = [f"# Psalm {psalm_number}\n"]
+            lxx_verses = {}
+            if rag_context and rag_context.lxx_text:
+                for line in rag_context.lxx_text.split('\n'):
+                    if line.startswith('v'):
+                        parts = line.split(':', 1)
+                        if len(parts) == 2:
+                            verse_num = int(parts[0][1:])
+                            lxx_verses[verse_num] = parts[1].strip()
             for verse in psalm.verses:
                 psalm_lines.append(f"\n## Verse {verse.verse}")
                 psalm_lines.append(f"**Hebrew:** {verse.hebrew}")
                 psalm_lines.append(f"**English:** {verse.english}")
+                if verse.verse in lxx_verses:
+                    psalm_lines.append(f"**LXX (Greek):** {lxx_verses[verse.verse]}")
             psalm_text_content = "\n".join(psalm_lines)
 
         # Combine ALL inputs that master editor receives
@@ -326,8 +343,8 @@ def run_enhanced_pipeline(
             intro_content + "\n\n" +
             verses_content + "\n\n" +
             research_content + "\n\n" +
-            macro_json_content + "\n\n" +
-            micro_json_content + "\n\n" +
+            macro_formatted_content + "\n\n" +
+            micro_formatted_content + "\n\n" +
             psalm_text_content
         )
         tracker.track_step_input("master_editor", editor_input)

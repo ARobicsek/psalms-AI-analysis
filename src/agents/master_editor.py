@@ -92,12 +92,15 @@ Review the introduction and verse commentary for these issues:
 - Wrong verse references
 
 ### 2. MISSED OPPORTUNITIES
+- Phonetic transcription data available but not used to analyze sound patterns (alliteration, assonance)
+- Phonetic claims made that CONTRADICT the provided transcription (e.g., claiming "soft f" when transcription shows "p")
 - LXX suggests alternative Vorlage not mentioned
 - Poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
 - Unusual or interesting Hebrew phrases not commented on (e.g., distinctive idioms, unusual word pairings like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
 - Interesting lexical insights in BDB not surfaced
 - Concordance patterns not explored
 - Figurative language not analyzed
+- Figurative language parallels from database not cited or analyzed
 - ANE parallels available but not discussed
 - Comparative textual insights (e.g. MT vs LXX) not addressed
 - Research questions identified by Macro and Micro analysts not answered (even when answerable with available materials)
@@ -153,6 +156,12 @@ First, provide a brief editorial assessment (200-400 words):
 - What interesting questions were asked by the Macro and Micro analysts but not answered, which CAN be answered with the available research materials?
 - Were unusual or interesting Hebrew phrases and poetic devices adequately commented on in the verse-by-verse commentary?
 
+**Figurative Language Assessment:**
+- Are interesting biblical parallels from the figurative language database specifically cited (book:chapter:verse)?
+- Does the commentary analyze usage patterns (frequency, typical contexts)?
+- Does it provide insights beyond generic observations?
+- Are comparisons used to illuminate THIS psalm's distinctive usage?
+
 **Stage 2: Revised Introduction**
 Rewrite the introduction essay to address identified weaknesses. The revised introduction should:
 - Maintain 800-1400 words (can be longer if genuinely warranted by interesting findings and/or length of the psalm)
@@ -165,9 +174,17 @@ Rewrite the introduction essay to address identified weaknesses. The revised int
 
 **Stage 3: Revised Verse Commentary**
 Rewrite the verse-by-verse commentary to address identified weaknesses. For each verse:
-- **Length**: 150-400 words (can and should be longer—400+ words—if there's genuinely interesting material to illuminate, such as unusual Hebrew phrases, complex poetic devices, significant textual variants, or important interpretive questions to address)
+- **Length**: Target 300-500 words per verse. Shorter (200-250 words) is acceptable for simple verses with minimal interesting features. Longer (500-800 words) is ENCOURAGED and often NECESSARY for verses with:
+  * Unusual Hebrew phrases or idioms (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
+  * Complex poetic devices (chiasm, inclusio, intricate parallelism)
+  * Significant textual variants (MT vs LXX differences)
+  * Important interpretive questions that can be answered with research materials
+  * Rich figurative language requiring comparative analysis
+
+  Remember: intelligent lay readers are HUNGRY for substantive analysis of linguistic and literary features. Don't shortchange them!
+
 - **Items of interest to include** (when relevant):
-  * Poetics (parallelism, wordplay, sound patterns, structure)
+  * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided))
   * **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it—explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
   * Literary insights (narrative techniques, rhetorical strategies)
   * Historical and cultic insights (worship setting, historical context)
@@ -178,6 +195,18 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Figurative language analysis (how vehicles/metaphors work across Scripture)
   * Timing/composition clues (vocabulary, theology, historical references)
   * Traditional interpretation (Rashi, Ibn Ezra, Radak, church fathers)
+
+**Figurative Language Integration:**
+For verses with figurative language where research provided biblical parallels:
+- MUST cite at least one specific biblical parallel from the database (book:chapter:verse)
+- MUST analyze the usage pattern (frequency, typical contexts)
+- MUST note how this psalm's use compares to typical usage
+- SHOULD provide insight beyond generic observation
+
+Example of GOOD: "The 'opened hand' (v. 16) echoes Deut 15:8's generosity idiom but uniquely applies human covenant obligation to divine providence—appearing 23x in Scripture primarily in ethics contexts."
+
+Example of BAD: "Verse 16 speaks of God opening his hand. This imagery appears elsewhere in Scripture." (too vague, no specific citations, no pattern analysis)
+
 - **Address interesting questions**: When relevant to specific verses, address answerable questions raised by the Macro and Micro analysts
 - **Complement the introduction**: Don't repeat what the introduction covered in depth; add verse-specific detail
 - **Correct style**: Avoid breathless LLM language; show rather than tell
@@ -509,26 +538,43 @@ class MasterEditor:
             return json.load(f)
 
     def _format_analysis_for_prompt(self, analysis: Dict, type: str) -> str:
-        """Format analysis JSON for inclusion in prompt."""
+        """
+        Format analysis JSON for inclusion in prompt.
+
+        Handles both Pydantic objects and dictionary formats.
+        Extracts phonetic transcription data for micro analysis.
+        """
+        # Helper to get attribute/key value with fallback
+        def get_value(obj, key, default=''):
+            if hasattr(obj, key):
+                return getattr(obj, key, default)
+            elif isinstance(obj, dict):
+                return obj.get(key, default)
+            return default
+
         if type == "macro":
             lines = []
-            lines.append(f"**Thesis**: {analysis.get('thesis_statement', 'N/A')}")
-            lines.append(f"**Genre**: {analysis.get('genre', 'N/A')}")
+            lines.append(f"**Thesis**: {get_value(analysis, 'thesis_statement', 'N/A')}")
+            lines.append(f"**Genre**: {get_value(analysis, 'genre', 'N/A')}")
 
-            structure = analysis.get('structural_outline', [])
+            structure = get_value(analysis, 'structural_outline', [])
             if structure:
                 lines.append("\n**Structure**:")
                 for div in structure:
-                    lines.append(f"  - {div.get('section', '')}: {div.get('theme', '')}")
+                    section = get_value(div, 'section', '')
+                    theme = get_value(div, 'theme', '')
+                    lines.append(f"  - {section}: {theme}")
 
-            devices = analysis.get('poetic_devices', [])
+            devices = get_value(analysis, 'poetic_devices', [])
             if devices:
                 lines.append("\n**Poetic Devices**:")
                 for device in devices:
-                    lines.append(f"  - {device.get('device', '')}: {device.get('description', '')}")
+                    device_name = get_value(device, 'device', '')
+                    description = get_value(device, 'description', '')
+                    lines.append(f"  - {device_name}: {description}")
 
             # Add research questions
-            questions = analysis.get('research_questions', [])
+            questions = get_value(analysis, 'research_questions', [])
             if questions:
                 lines.append("\n**Research Questions** (from Macro Analyst):")
                 for i, q in enumerate(questions, 1):
@@ -538,18 +584,40 @@ class MasterEditor:
 
         elif type == "micro":
             lines = []
-            verses = analysis.get('verse_commentaries', analysis.get('verses', []))
+
+            # Handle both Pydantic object and dict formats
+            # Support both new format ('verse_commentaries') and old format ('verses')
+            if hasattr(analysis, 'verse_commentaries'):
+                # Pydantic MicroAnalysis object
+                verses = analysis.verse_commentaries
+            elif isinstance(analysis, dict):
+                # Dictionary format
+                verses = analysis.get('verse_commentaries', analysis.get('verses', []))
+            else:
+                verses = []
 
             for verse_data in verses[:5]:  # Sample first 5 verses for brevity
-                verse_num = verse_data.get('verse_number', verse_data.get('verse', 0))
-                commentary = verse_data.get('commentary', '')
-                lines.append(f"**Verse {verse_num}**: {commentary[:200]}...")
+                # Get verse number (handle both field names)
+                verse_num = get_value(verse_data, 'verse_number', get_value(verse_data, 'verse', 0))
+
+                # Get commentary
+                commentary = get_value(verse_data, 'commentary', '')
+
+                # CRITICAL: Extract phonetic transcription data
+                phonetic = get_value(verse_data, 'phonetic_transcription', '')
+
+                # Format verse with phonetic data if available
+                lines.append(f"**Verse {verse_num}**")
+                if phonetic:
+                    lines.append(f"**Phonetic**: `{phonetic}`")
+                lines.append(f"{commentary[:200]}...")
+                lines.append("")
 
             if len(verses) > 5:
                 lines.append(f"[... and {len(verses) - 5} more verses]")
 
             # Add interesting questions if present
-            interesting_questions = analysis.get('interesting_questions', [])
+            interesting_questions = get_value(analysis, 'interesting_questions', [])
             if interesting_questions:
                 lines.append("")
                 lines.append("**Interesting Questions** (from Micro Analyst):")
