@@ -85,44 +85,40 @@ class CommentaryFormatter:
 
         # Title
         output.append(f"# Commentary on Psalm {psalm_number}")
-        output.append("")
         output.append("---")
-        output.append("")
+
+        # Psalm Text (Hebrew and English, verse by verse)
+        output.append("## Psalm Text")
+        for verse_num, verse_data in verses.items():
+            hebrew = verse_data['hebrew']
+            english = verse_data['english']
+
+            # Format: verse number, Hebrew on one line, English on next line
+            # Line break prevents Word from misinterpreting RTL/LTR text mixing
+            output.append(f"{verse_num}. {hebrew}")
+            output.append(english)
 
         # Introduction
-        output.append("## Introduction")
-        output.append("")
-        output.append(introduction.strip())
-        output.append("")
         output.append("---")
-        output.append("")
+        output.append("## Introduction")
+        output.append(introduction.strip())
 
         # Verse-by-verse commentary
         output.append("## Verse-by-Verse Commentary")
-        output.append("")
 
         for verse_num, verse_data in verses.items():
             hebrew = verse_data['hebrew']
             english = verse_data['english']
             commentary = commentary_sections.get(verse_num, "[Commentary not found]")
 
-            # Format verse section
+            # Format verse section - no bold labels
             output.append(f"### Verse {verse_num}")
-            output.append("")
-
-            # Hebrew text (RTL)
-            output.append(f"**Hebrew:** {hebrew}")
-            output.append("")
-
-            # English text
-            output.append(f"**English:** {english}")
-            output.append("")
-
+            # Hebrew and English text without labels
+            output.append(f"{hebrew}")
+            output.append(f"{english}")
             # Commentary
             output.append(commentary.strip())
-            output.append("")
             output.append("---")
-            output.append("")
 
         # Join into single document
         document = "\n".join(output)
@@ -138,6 +134,9 @@ class CommentaryFormatter:
     def _get_psalm_verses(self, psalm_number: int) -> Dict[int, Dict[str, str]]:
         """
         Get all verses for a psalm from database.
+
+        English text is already cleaned of Sefaria footnotes when downloaded
+        from the API (via strip_sefaria_footnotes in sefaria_client.py).
 
         Args:
             psalm_number: Psalm number
@@ -159,7 +158,7 @@ class CommentaryFormatter:
             for psalm_verse in psalm.verses:
                 verses[psalm_verse.verse] = {
                     'hebrew': psalm_verse.hebrew,
-                    'english': psalm_verse.english
+                    'english': psalm_verse.english  # Already clean from API fetch
                 }
 
             self.logger.info(f"Retrieved {len(verses)} verses for Psalm {psalm_number}")
