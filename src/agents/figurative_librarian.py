@@ -111,6 +111,7 @@ class FigurativeInstance:
 class FigurativeRequest:
     """A request for figurative language instances."""
     book: Optional[str] = None  # e.g., "Psalms", "Genesis"
+    books: Optional[List[str]] = None  # e.g., ["Psalms", "Pentateuch"] for multi-book search
     chapter: Optional[int] = None
     verse_start: Optional[int] = None
     verse_end: Optional[int] = None
@@ -129,10 +130,13 @@ class FigurativeRequest:
     ground_contains: Optional[str] = None
     posture_contains: Optional[str] = None
 
+    # Hierarchical vehicle search (NEW for Phase 4)
+    vehicle_search_terms: Optional[List[str]] = None  # List of vehicle terms to search (synonyms + broader terms)
+
     # Text search
     text_search: Optional[str] = None  # Search in figurative_text or explanation
 
-    max_results: int = 100
+    max_results: int = 500  # Increased from 100 to capture more results
     notes: Optional[str] = None  # Why this search is being requested
 
     @classmethod
@@ -140,6 +144,7 @@ class FigurativeRequest:
         """Create from dictionary."""
         return cls(
             book=data.get('book'),
+            books=data.get('books'),
             chapter=data.get('chapter'),
             verse_start=data.get('verse_start'),
             verse_end=data.get('verse_end'),
@@ -153,6 +158,7 @@ class FigurativeRequest:
             vehicle_contains=data.get('vehicle_contains'),
             ground_contains=data.get('ground_contains'),
             posture_contains=data.get('posture_contains'),
+            vehicle_search_terms=data.get('vehicle_search_terms'),
             text_search=data.get('text_search'),
             max_results=data.get('max_results', 100),
             notes=data.get('notes')
@@ -288,8 +294,14 @@ class FigurativeLibrarian:
 
         params = []
 
-        # Filter by book
-        if request.book:
+        # Filter by book(s)
+        if request.books:
+            # Multi-book search
+            book_placeholders = ", ".join("?" * len(request.books))
+            query += f" AND v.book IN ({book_placeholders})"
+            params.extend(request.books)
+        elif request.book:
+            # Single book search
             query += " AND v.book = ?"
             params.append(request.book)
 
@@ -331,9 +343,50 @@ class FigurativeLibrarian:
             query += " AND (f.target LIKE ? COLLATE NOCASE)"
             params.append(f'%{request.target_contains}%')
 
-        if request.vehicle_contains:
-            query += " AND (f.vehicle LIKE ? COLLATE NOCASE)"
-            params.append(f'%{request.vehicle_contains}%')
+        # Hierarchical vehicle search: search for ANY of the provided terms
+        if request.vehicle_search_terms and len(request.vehicle_search_terms) > 0:
+            # Build OR conditions for all search terms (specific + synonyms + broader)
+            # Use word-boundary patterns to avoid false positives (e.g., "arm" matching "swarm" or "army")
+            vehicle_conditions = []
+            for term in request.vehicle_search_terms:
+                # Create patterns to match whole words in JSON array, with word boundaries:
+                # JSON format: ["item1", "item2", "item3"]
+                # To prevent false positives (e.g., "arm" matching "army" or "swarm"):
+                # - Match term followed by: " (end of element), space, comma, →
+                # - Match term preceded by: [", ", " (space)
+                # Patterns:
+                # 1. ["term"   - term as complete first element
+                # 2. ["term    - term at start (may have suffix in same element)
+                # 3. ", "term" - term as complete middle/last element
+                # 4. ", "term  - term at start of middle/last element
+                # 5. " term"   - term after space, at end of element
+                # 6. " term    - term after space (in compound)
+                patterns = [
+                    f'%["{term.lower()}"%',    # Matches ["term"
+                    f'%["{term.lower()} %',    # Matches ["term ...
+                    f'%["{term.lower()},% ',   # Matches ["term, (rare but possible)
+                    f'%, "{term.lower()}"%',   # Matches , "term"
+                    f'%, "{term.lower()} %',   # Matches , "term ...
+                    f'%, "{term.lower()},% ',  # Matches , "term, (rare)
+                    f'% {term.lower()}"%',     # Matches  term" (end of compound)
+                    f'% {term.lower()} %',     # Matches  term  (middle of compound)
+                ]
+                # Combine with OR
+                pattern_condition = "(" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(patterns)) + ")"
+                vehicle_conditions.append(pattern_condition)
+                params.extend(patterns)
+            query += " AND (" + " OR ".join(vehicle_conditions) + ")"
+        elif request.vehicle_contains:
+            # Fallback to single vehicle search with word boundaries
+            term = request.vehicle_contains
+            patterns = [
+                f'%["{term.lower()}%',
+                f'%, "{term.lower()}%',
+                f'%"{term.lower()}"%',
+                f'% {term.lower()}%',
+            ]
+            query += " AND (" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(patterns)) + ")"
+            params.extend(patterns)
 
         if request.ground_contains:
             query += " AND (f.ground LIKE ? COLLATE NOCASE)"
