@@ -441,6 +441,168 @@ class SynthesisWriter:
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.read()
 
+    def _trim_figurative_proportionally(self, figurative_section: str, keep_ratio: float) -> str:
+        """
+        Trim figurative language section proportionally across all queries.
+
+        Instead of cutting off entire queries, this keeps a percentage of results
+        from each query, ensuring all search terms are represented.
+
+        Args:
+            figurative_section: The full figurative language section
+            keep_ratio: Proportion to keep (0.0 to 1.0)
+
+        Returns:
+            Trimmed figurative section with proportional representation
+        """
+        import re
+
+        # Split into individual query blocks (### Query N)
+        query_pattern = r'(### Query \d+.*?)(?=### Query \d+|$)'
+        queries = re.findall(query_pattern, figurative_section, re.DOTALL)
+
+        if not queries:
+            # Fallback: simple truncation
+            target_size = int(len(figurative_section) * keep_ratio)
+            return figurative_section[:target_size] + f"\n\n[Trimmed {len(figurative_section) - target_size} chars]"
+
+        trimmed_queries = []
+        total_trimmed = 0
+        total_original = 0
+
+        for query_block in queries:
+            total_original += len(query_block)
+
+            # Extract query header (first few lines before #### Instances:)
+            match = re.match(r'(.*?#### Instances:)(.*)', query_block, re.DOTALL)
+            if not match:
+                # No instances found, keep header only
+                trimmed_queries.append(query_block)
+                continue
+
+            header = match.group(1)
+            instances_text = match.group(2)
+
+            # Split instances by verse markers (**Verse** or similar)
+            instance_pattern = r'(\*\*[^*]+\*\*.*?)(?=\*\*[^*]+\*\*|$)'
+            instances = re.findall(instance_pattern, instances_text, re.DOTALL)
+
+            if not instances:
+                # No clear instances, keep as-is
+                trimmed_queries.append(query_block)
+                continue
+
+            # Keep proportional number of instances
+            keep_count = max(1, int(len(instances) * keep_ratio))  # Keep at least 1
+            kept_instances = instances[:keep_count]
+            omitted_count = len(instances) - keep_count
+
+            # Reassemble
+            trimmed_block = header + '\n' + ''.join(kept_instances)
+            if omitted_count > 0:
+                trimmed_block += f"\n\n[{omitted_count} more instances omitted for space]\n"
+
+            trimmed_queries.append(trimmed_block)
+            total_trimmed += len(trimmed_block)
+
+        result = '## Figurative Language Instances\n\n' + '\n'.join(trimmed_queries)
+
+        self.logger.info(f"Proportional trim: {total_original:,} → {total_trimmed:,} chars ({keep_ratio:.1%} kept)")
+        return result
+
+    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 250000) -> str:
+        """
+        Intelligently trim research bundle to fit within token limits.
+
+        Priority order:
+        1. Keep all lexicon entries (most important for word analysis)
+        2. Keep all figurative language examples (critical for literary analysis)
+        3. Keep all commentary entries (provides interpretive context)
+        4. Trim concordance results (least critical - shows usage patterns)
+
+        Args:
+            research_bundle: Full research bundle markdown
+            max_chars: Maximum characters (~125k tokens with 2 chars/token ratio)
+
+        Returns:
+            Trimmed research bundle
+        """
+        if len(research_bundle) <= max_chars:
+            return research_bundle
+
+        self.logger.warning(f"Research bundle too large ({len(research_bundle)} chars). Trimming to {max_chars} chars...")
+
+        # Split into sections
+        sections = research_bundle.split('\n## ')
+        header = sections[0] if sections else ""
+
+        # Find and separate sections
+        lexicon_section = ""
+        figurative_section = ""
+        commentary_section = ""
+        concordance_section = ""
+
+        for section in sections[1:]:
+            section_name = section.split('\n')[0] if section else ''
+            if 'Lexicon Entries' in section_name:  # Match "Hebrew Lexicon Entries" or "BDB Lexicon Entries"
+                lexicon_section = '## ' + section
+            elif section_name.startswith('Figurative Language Instances'):
+                figurative_section = '## ' + section
+            elif 'Commentaries' in section_name or 'Commentary' in section_name:  # Match "Traditional Commentaries" or "Sefaria Commentary"
+                commentary_section = '## ' + section
+            elif 'Concordance' in section_name:  # Match "Concordance Searches" or "Concordance Results"
+                concordance_section = '## ' + section
+
+        # Calculate sizes
+        header_size = len(header)
+        lexicon_size = len(lexicon_section)
+        figurative_size = len(figurative_section)
+        commentary_size = len(commentary_section)
+        concordance_size = len(concordance_section)
+
+        # Try to keep everything, trim concordance first, then figurative if needed
+        available_for_concordance = max_chars - (header_size + lexicon_size + figurative_size + commentary_size)
+
+        if available_for_concordance < 0:
+            # Even without concordance we're over limit - need to trim figurative too
+            self.logger.warning(f"Research bundle exceeds limit even without concordance. Trimming figurative language proportionally.")
+            # Calculate how much figurative we can keep
+            available_for_figurative = max_chars - (header_size + lexicon_size + commentary_size + 1000)  # Leave 1k for concordance header
+            if available_for_figurative > 0 and figurative_size > 0:
+                trim_ratio = available_for_figurative / figurative_size
+                self.logger.info(f"Trimming figurative proportionally: keeping {trim_ratio:.1%} of each query's results")
+                figurative_section = self._trim_figurative_proportionally(figurative_section, trim_ratio)
+            else:
+                figurative_section = ""
+            # Drop concordance entirely
+            concordance_section = ""
+        elif available_for_concordance < concordance_size:
+            # Trim concordance section
+            self.logger.info(f"Trimming concordance from {concordance_size} to {available_for_concordance} chars")
+            concordance_lines = concordance_section.split('\n')
+            trimmed_concordance = []
+            current_size = 0
+            for line in concordance_lines:
+                if current_size + len(line) + 1 <= available_for_concordance:
+                    trimmed_concordance.append(line)
+                    current_size += len(line) + 1
+                else:
+                    trimmed_concordance.append(f"\n[Concordance results trimmed for context length. {concordance_size - current_size} chars omitted.]")
+                    break
+            concordance_section = '\n'.join(trimmed_concordance)
+
+        # Reassemble
+        result = '\n\n'.join(filter(None, [
+            header,
+            lexicon_section,
+            concordance_section,
+            figurative_section,
+            commentary_section
+        ]))
+
+        self.logger.info(f"Research bundle trimmed: {len(research_bundle)} → {len(result)} chars")
+        return result
+
     def _generate_introduction(
         self,
         psalm_number: int,
@@ -456,9 +618,10 @@ class SynthesisWriter:
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
-        # No truncation needed - Claude Sonnet 4.5 has 200K context window
-        # Full research bundle is ~50K tokens, well within limits
-        research_text = research_bundle
+        # Trim research bundle if needed to fit within 200K token limit
+        # Target: ~330K chars max (~165K tokens with 2:1 ratio)
+        # Conservative: 90% of theoretical max (340k) to leave safety margin
+        research_text = self._trim_research_bundle(research_bundle, max_chars=330000)
 
         # Build prompt
         prompt = INTRODUCTION_ESSAY_PROMPT.format(
@@ -526,9 +689,11 @@ class SynthesisWriter:
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
-        # No truncation needed - Claude Sonnet 4.5 has 200K context window
-        # Full research bundle is ~50K tokens, well within limits
-        research_text = research_bundle
+        # Trim research bundle if needed - verse commentary includes introduction essay
+        # so needs more aggressive trimming than intro generation
+        # Target: ~320K chars max (~160K tokens)
+        # Conservative: 90% of theoretical max (334k) to leave safety margin for intro essay
+        research_text = self._trim_research_bundle(research_bundle, max_chars=320000)
 
         # Build prompt
         prompt = VERSE_COMMENTARY_PROMPT.format(
