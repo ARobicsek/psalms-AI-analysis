@@ -100,7 +100,7 @@ Consider:
 - **Verbal features**: Imperative mood, perfect/imperfect tenses, divine epithets
 
 ### 6. RESEARCH QUESTIONS FOR PASS 2
-- Generate 3-5 specific questions that detailed verse-by-verse analysis should address
+- Generate 5-10 specific questions (more for long psalms) that detailed verse-by-verse analysis should address
 - Focus on areas that need lexical, concordance, or figurative language research
 - Examples:
   * "How does the seven-fold 'voice of the LORD' relate to creation theology?"

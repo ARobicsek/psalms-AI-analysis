@@ -190,28 +190,103 @@ You have been provided with:
 
 ## YOUR TASK: WRITE VERSE-BY-VERSE COMMENTARY
 
-For EACH verse in the psalm, write a commentary annotation of **150-300 words** that draws on diverse scholarly angles:
+For EACH verse in the psalm, write a commentary annotation that draws on diverse scholarly angles:
 
-### SCHOLARLY ANGLES TO CONSIDER (choose what's relevant per verse):
+**LENGTH GUIDELINES:**
+- **Target length**: 150-400 words per verse
+- **Can be longer** (400+ words) if there's a genuinely interesting finding or insight that merits extended illumination
+- Let the content determine the length - don't pad or artificially constrain
 
-1. **Poetics** - Parallelism, wordplay, sound patterns, meter
-2. **Polemics** - Theological debates, Canaanite appropriation, monotheistic claims
-3. **Interpretive Debates** - How have scholars interpreted this verse? What are the controversies? What do classical commentators (rabbinic, patristic, medieval) say?
-4. **Vorlage Insights** - LXX vs MT differences, textual variants, translation challenges
-5. **Ugaritic/ANE Context** - Parallels, loan words, cultural background (cite specific texts like KTU, Enuma Elish, etc.)
-6. **Lexical Depth** - Rare words, semantic ranges, etymologies (draw from BDB, concordances)
-7. **Intertextuality** - Connections to other biblical texts (cite specific verses where similar language appears)
-8. **Theological Significance** - What does this verse reveal about God, humanity, worship?
+### ITEMS OF INTEREST TO ILLUMINATE (when relevant to the verse):
+
+The following areas are of particular interest to intelligent, well-read lay readers who desire poetic, literary, linguistic, and historical insights:
+
+1. **Poetics**
+   - Parallelism types (synonymous, antithetical, synthetic, climactic)
+   - Wordplay (paronomasia, alliteration, assonance)
+   - Sound patterns and phonetic effects
+   - Meter and rhythm
+   - Structural devices (chiasm, inclusio, envelope structure)
+
+2. **Literary Insights**
+   - Narrative techniques and rhetorical strategies
+   - Genre conventions and innovations
+   - Dramatic progression and turning points
+   - Imagery and its function
+   - Irony, hyperbole, understatement
+
+3. **Historical and Cultic Insights**
+   - Liturgical setting and worship context
+   - Historical period indicators (vocabulary, theology, cultural references)
+   - Temple/sanctuary practices
+   - Royal psalms and kingship theology
+   - Festival associations (Sukkot, Passover, New Year, etc.)
+
+4. **Comparative Religion**
+   - Ancient Near Eastern parallels (Ugaritic, Akkadian, Egyptian)
+   - Polemic against Canaanite/Mesopotamian religion
+   - Appropriation and transformation of ANE motifs
+   - Cite specific texts (KTU numbers, Enuma Elish, etc.)
+
+5. **Grammar and Syntax** (when illuminating)
+   - Rare or ambiguous grammatical forms
+   - Verb tenses and aspect (especially jussive, cohortative, imperative)
+   - Word order significance
+   - Difficult constructions that affect meaning
+
+6. **Textual Criticism**
+   - Comparison of Masoretic Text (MT) vs Septuagint (LXX)
+   - What LXX choices reveal about the Vorlage (Hebrew base text)
+   - Textual variants and their implications
+   - Translation challenges and scholarly debates
+
+7. **Lexical Analysis**
+   - Etymology when theologically illuminating
+   - Semantic range of key terms (use BDB data)
+   - Rare vocabulary and hapax legomena
+   - Technical terminology (legal, cultic, military, agricultural)
+
+8. **Comparative Biblical Usage**
+   - Concordance insights: how this word/phrase appears elsewhere
+   - Development of theological concepts across Scripture
+   - Formulaic language and its variations
+   - Quotation and allusion to other biblical texts
+
+9. **Figurative Language**
+   - How vehicles (metaphors, similes) function in this verse
+   - How the same figurative vehicles are used across Scripture
+   - Target-vehicle-ground-posture analysis
+   - Evolution of metaphorical meaning
+
+10. **Timing/Composition Clues**
+    - Vocabulary that suggests dating (Persian loanwords, Aramaisms, etc.)
+    - Theological development indicators
+    - Historical allusions (Babylonian exile, monarchy, etc.)
+    - Liturgical evolution markers
+
+11. **Traditional Interpretation**
+    - Classical Jewish commentary (Rashi, Ibn Ezra, Radak, Kimchi)
+    - Targum renderings
+    - Church fathers (Augustine, Jerome, etc.)
+    - Medieval Christian interpretation
+    - Modern critical scholarship debates
 
 ### IMPORTANT NOTES:
 
 - **Relationship to Introduction Essay**: You have the complete introduction essay. Your verse commentary should COMPLEMENT (not repeat) the introduction. If the introduction discussed a theme at length, you can allude to it briefly but focus on verse-specific details not covered in the introduction.
-- **Independence from macro thesis**: The verse commentary need NOT always relate to the macro thesis
-- **Reader interest**: Focus on what would genuinely interest and inform a reader
-- **Flexibility**: Some verses may focus on poetics, others on vorlage, others on Ugaritic parallels
-- **Depth over breadth**: Better to explore 2-3 angles well than mention everything superficially
-- **Evidence-based**: Ground observations in the research materials provided
-- **Use research bundle effectively**: The research bundle contains concordance data showing where Hebrew terms appear elsewhere in Scripture - cite these parallels! It also contains commentary excerpts - engage with these interpretive traditions!
+- **Independence from macro thesis**: The verse commentary need NOT always relate to the macro thesis - follow what's interesting in each verse
+- **Reader interest**: Focus on what would genuinely interest and inform an intelligent, well-read lay reader who desires poetic, literary, linguistic, and historical insights
+- **Flexibility**: Some verses may focus on poetics, others on Vorlage, others on Ugaritic parallels, others on figurative language patterns - let the verse and research materials guide you
+- **Depth over breadth**: Better to explore 2-3 angles deeply than mention everything superficially
+- **Evidence-based**: Ground all observations in the research materials provided (BDB, concordances, figurative language database, traditional commentaries)
+- **Use research bundle effectively**: The research bundle contains:
+  * BDB lexicon entries with semantic ranges, etymologies, and usage patterns
+  * Concordance data showing where Hebrew terms appear elsewhere in Scripture - cite these parallels!
+  * Figurative language instances showing how vehicles/metaphors are used across the Bible
+  * Traditional commentary excerpts from Rashi, Ibn Ezra, Radak - engage with these interpretive traditions!
+  * LXX text showing ancient Greek interpretation
+- **Define technical terms**: When using jargon (jussive, anaphora, chiasm, inclusio, polemic, theophany, etc.), provide brief, accessible definitions for lay readers
+- **Vary your approach**: Don't use the same scholarly angles for every verse - alternate between poetics, historical context, textual criticism, figurative analysis, etc.
 
 ### FORMAT FOR EACH VERSE:
 
@@ -223,11 +298,12 @@ For EACH verse in the psalm, write a commentary annotation of **150-300 words** 
 ## CRITICAL REQUIREMENTS
 
 - **Cover ALL verses** in the psalm
-- **Length**: 100-300 words per verse (some complex verses may go longer)
-- **Variety**: Don't use the same angles for every verse - vary your approach
-- **Evidence**: Cite Hebrew terms, concordance patterns, research findings
-- **Readability**: Scholarly but not pedantic
-- **Independence**: Don't force connections to the macro thesis if they're not natural
+- **Length**: 150-400 words per verse (can be longer if there's genuinely interesting material to illuminate)
+- **Variety**: Don't use the same angles for every verse - vary your approach across poetics, textual criticism, figurative language, historical context, etc.
+- **Evidence**: Cite Hebrew terms, concordance patterns, research findings, traditional commentators
+- **Readability**: Scholarly but accessible for intelligent lay readers (New Yorker/Atlantic level)
+- **Define terms**: Explain technical terminology when used
+- **Independence**: Don't force connections to the macro thesis if they're not natural - follow what's interesting in each verse
 
 ---
 
@@ -519,6 +595,15 @@ class SynthesisWriter:
         lines.append("**Poetic Devices**:")
         for device in macro.get('poetic_devices', []):
             lines.append(f"  - {device.get('device', '')}: {device.get('description', '')}")
+
+        # Add research questions
+        questions = macro.get('research_questions', [])
+        if questions:
+            lines.append("")
+            lines.append("**Research Questions** (from Macro Analyst):")
+            for i, q in enumerate(questions, 1):
+                lines.append(f"  {i}. {q}")
+
         return "\n".join(lines)
 
     def _format_micro_for_prompt(self, micro: Dict) -> str:

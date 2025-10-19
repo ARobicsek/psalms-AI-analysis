@@ -92,6 +92,64 @@ def clean_html_text(text: str) -> str:
     return text
 
 
+def strip_sefaria_footnotes(text: str) -> str:
+    """
+    Remove Sefaria footnote markers and footnote text from English translations.
+
+    Sefaria embeds footnotes using this pattern:
+    <sup class="footnote-marker">a</sup><i class="footnote">Footnote text here</i>
+
+    This function removes both the marker and the footnote content, leaving
+    only the main translation text for reader-friendly output.
+
+    Args:
+        text: English text with embedded Sefaria footnotes
+
+    Returns:
+        Clean text with footnotes removed
+
+    Examples:
+        >>> text = 'May He receive the tokens<sup class="footnote-marker">a</sup><i class="footnote">Reference to azkara</i> of all'
+        >>> strip_sefaria_footnotes(text)
+        'May He receive the tokens of all'
+
+        >>> text = 'and approve<sup class="footnote-marker">b</sup><i class="footnote">Meaning of Heb. uncertain.</i> your offerings'
+        >>> strip_sefaria_footnotes(text)
+        'and approve your offerings'
+    """
+    if not text:
+        return text
+
+    # Remove footnote markers: <sup class="footnote-marker">x</sup>
+    text = re.sub(r'<sup class="footnote-marker">[^<]+</sup>', '', text)
+
+    # Remove footnote content: <i class="footnote">...</i>
+    text = re.sub(r'<i class="footnote">[^<]*</i>', '', text)
+
+    # Also handle any remaining <sup> or <i> tags (edge cases)
+    text = re.sub(r'</?sup[^>]*>', '', text)
+    text = re.sub(r'</?i[^>]*>', '', text, flags=re.IGNORECASE)
+
+    # Remove <br> tags (line breaks)
+    text = re.sub(r'<br\s*/?>', '\n', text)
+
+    # Remove any other remaining HTML tags
+    text = re.sub(r'<[^>]+>', '', text)
+
+    # Convert HTML entities
+    text = unescape(text)
+
+    # Clean up extra whitespace, but preserve intentional line breaks
+    lines = text.split('\n')
+    lines = [' '.join(line.split()) for line in lines]
+    text = '\n'.join(lines)
+
+    # Final cleanup - remove multiple consecutive newlines
+    text = re.sub(r'\n\n+', '\n', text)
+
+    return text.strip()
+
+
 @dataclass
 class Verse:
     """Represents a single verse from any biblical book."""
@@ -274,7 +332,9 @@ class SefariaClient:
                 chapter=chapter,
                 verse=i,
                 hebrew=clean_html_text(heb),
-                english=clean_html_text(eng),
+                # Use strip_sefaria_footnotes for English to remove footnote content
+                # while preserving the main translation text
+                english=strip_sefaria_footnotes(eng),
                 reference=f"Psalms {chapter}:{i}"
             )
             # Add LXX text to verse
@@ -326,7 +386,7 @@ class SefariaClient:
             chapter=chapter,
             verse=verse,
             hebrew=clean_html_text(hebrew),
-            english=clean_html_text(english),
+            english=strip_sefaria_footnotes(english),
             reference=f"Psalms {chapter}:{verse}"
         )
 
@@ -519,7 +579,7 @@ class SefariaClient:
                 chapter=chapter,
                 verse=i,
                 hebrew=clean_html_text(heb) if heb else "",
-                english=clean_html_text(eng) if eng else "",
+                english=strip_sefaria_footnotes(eng) if eng else "",
                 reference=f"{book} {chapter}:{i}"
             )
             verses.append(verse)
