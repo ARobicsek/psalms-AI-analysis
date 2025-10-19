@@ -93,37 +93,49 @@ psalms-AI-analysis/
 
 ## System Architecture
 
-### Agent Pipeline (Current - Phase 3e)
+### Agent Pipeline (Current - Phase 4)
 
 ```
 1. MacroAnalyst (Sonnet 4.5) → Structural thesis, genre, poetic devices
    ↓
-2. MicroAnalyst (Sonnet 4.5) → Verse-by-verse curiosity-driven research
+2. MicroAnalyst v2 (Sonnet 4.5) → Verse-by-verse curiosity-driven research
    ├─→ Generates research questions per verse
+   ├─→ Enhanced hierarchical figurative language search (vehicle + synonyms + broader terms)
    ├─→ Queries research bundle (lexicon, concordances, LXX, commentary)
    └─→ Produces verse discoveries + thematic threads
    ↓
 3. ResearchBundle Assembly (Python)
    ├─→ BDB Lexicon entries (Sefaria API)
    ├─→ Hebrew Concordance (4-layer search: consonantal/voweled/exact/lemma)
-   ├─→ Figurative Language analysis (local DB)
+   ├─→ Figurative Language analysis (local DB) - NOW: broader multi-book search
    └─→ Traditional Commentary excerpts (Rashi, Ibn Ezra, etc.)
    ↓
 4. SynthesisWriter (Sonnet 4.5)
    ├─→ Introduction Essay (800-1200 words)
    │   └─→ Uses: MacroAnalysis + MicroAnalysis + ResearchBundle
    ↓
-   └─→ Verse Commentary (100-300 words/verse)
+   └─→ Verse Commentary (150-400+ words/verse) - ENHANCED PROMPTS
        └─→ Uses: MacroAnalysis + MicroAnalysis + ResearchBundle + Introduction
-           (NEW: Verse commentator sees introduction for better integration)
+       └─→ 11 categories of scholarly interest (poetics, textual criticism, etc.)
    ↓
-5. Print-Ready Formatter (Python)
+5. MasterEditor (GPT-5 o1) → [NEW IN PHASE 4]
+   ├─→ Critical editorial review (7 categories of issues)
+   ├─→ Identifies: factual errors, missed insights, style problems
+   ├─→ Revises introduction and verse commentary
+   └─→ Elevates from "good" to "National Book Award" level
+   ↓
+6. Print-Ready Formatter (Python)
    ├─→ Integrates Hebrew/English verse text from database
    ├─→ Applies divine names modifications (יהוה → ה׳)
    └─→ Produces publication-ready markdown
 ```
 
-**Key Innovation**: The verse commentary generation now receives the introduction essay as context, ensuring it complements (rather than repeats) the introduction and can focus on technical details, textual variants, and interpretive debates not covered in the introduction.
+**Phase 4 Enhancements** (2025-10-18):
+1. **Master Editor Agent (GPT-5)** - Final editorial pass for excellence
+2. **Enhanced Figurative Search** - Hierarchical 3-level search (vehicle + synonyms + broader terms), multi-book scope
+3. **Expanded Synthesis Prompts** - 11 categories of scholarly interest, 150-400+ words per verse
+
+See [docs/PHASE_4_ENHANCEMENTS.md](docs/PHASE_4_ENHANCEMENTS.md) for complete details.
 
 ### Hebrew Search: 4-Layer System
 
