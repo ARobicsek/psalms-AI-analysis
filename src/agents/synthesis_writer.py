@@ -85,6 +85,7 @@ Write a scholarly introduction essay that:
    - What are the most significant interpretive debates or challenges?
    - What earned this psalm its place in the biblical canon?
    - What is fascinating or unique about this psalm from a literary perspective? From a theological perspective? From a historical perspective?
+   - **IMPORTANT**: The Macro and Micro analysts have identified interesting research questions (see their inputs above). You should attempt to answer any of these questions that can be meaningfully addressed with the available research materials. If a question is answerable, weave the answer into your essay where appropriate.
 
 4. **Engages prior scholarship and classical interpretations**
    - Note relevant traditional rabbinic or patristic readings when available
@@ -207,6 +208,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - Sound patterns and phonetic effects
    - Meter and rhythm
    - Structural devices (chiasm, inclusio, envelope structure)
+   - **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it - explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
 
 2. **Literary Insights**
    - Narrative techniques and rhetorical strategies
@@ -274,6 +276,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
 ### IMPORTANT NOTES:
 
 - **Relationship to Introduction Essay**: You have the complete introduction essay. Your verse commentary should COMPLEMENT (not repeat) the introduction. If the introduction discussed a theme at length, you can allude to it briefly but focus on verse-specific details not covered in the introduction.
+- **Address interesting questions**: The Macro and Micro analysts have identified interesting research questions (see their inputs above). When commenting on specific verses, if any of these questions are relevant to that verse and can be meaningfully answered with the available research materials, address them in your commentary.
 - **Independence from macro thesis**: The verse commentary need NOT always relate to the macro thesis - follow what's interesting in each verse
 - **Reader interest**: Focus on what would genuinely interest and inform an intelligent, well-read lay reader who desires poetic, literary, linguistic, and historical insights
 - **Flexibility**: Some verses may focus on poetics, others on Vorlage, others on Ugaritic parallels, others on figurative language patterns - let the verse and research materials guide you
@@ -287,6 +290,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
   * LXX text showing ancient Greek interpretation
 - **Define technical terms**: When using jargon (jussive, anaphora, chiasm, inclusio, polemic, theophany, etc.), provide brief, accessible definitions for lay readers
 - **Vary your approach**: Don't use the same scholarly angles for every verse - alternate between poetics, historical context, textual criticism, figurative analysis, etc.
+- **Comment on unusual phrases and poetic devices**: When a verse contains interesting or unusual Hebrew phrases, idioms, wordplay, or poetic devices, make sure to comment on them. These linguistic and literary features are precisely what intelligent lay readers find fascinating.
 
 ### FORMAT FOR EACH VERSE:
 
@@ -298,12 +302,13 @@ The following areas are of particular interest to intelligent, well-read lay rea
 ## CRITICAL REQUIREMENTS
 
 - **Cover ALL verses** in the psalm
-- **Length**: 150-400 words per verse (can be longer if there's genuinely interesting material to illuminate)
+- **Length**: 150-400 words per verse (can and should be longer—400+ words—if there's genuinely interesting material to illuminate, such as unusual Hebrew phrases, complex poetic devices, significant textual variants, or important interpretive questions to address)
 - **Variety**: Don't use the same angles for every verse - vary your approach across poetics, textual criticism, figurative language, historical context, etc.
 - **Evidence**: Cite Hebrew terms, concordance patterns, research findings, traditional commentators
 - **Readability**: Scholarly but accessible for intelligent lay readers (New Yorker/Atlantic level)
 - **Define terms**: Explain technical terminology when used
 - **Independence**: Don't force connections to the macro thesis if they're not natural - follow what's interesting in each verse
+- **Emphasize the interesting**: Make sure to comment on unusual turns of phrase, distinctive Hebrew idioms, and poetic devices. These are what make the commentary valuable and engaging.
 
 ---
 
@@ -800,6 +805,15 @@ class SynthesisWriter:
             lines.append("**Thematic Threads Across Verses:**")
             for thread in threads:
                 lines.append(f"  - {thread}")
+            lines.append("")
+
+        # Add interesting questions if present
+        interesting_questions = micro.get('interesting_questions', [])
+        if interesting_questions:
+            lines.append("")
+            lines.append("**Interesting Questions** (from Micro Analyst):")
+            for i, q in enumerate(interesting_questions, 1):
+                lines.append(f"  {i}. {q}")
             lines.append("")
 
         # Add synthesis notes if present

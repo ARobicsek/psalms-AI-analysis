@@ -94,11 +94,13 @@ Review the introduction and verse commentary for these issues:
 ### 2. MISSED OPPORTUNITIES
 - LXX suggests alternative Vorlage not mentioned
 - Poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
+- Unusual or interesting Hebrew phrases not commented on (e.g., distinctive idioms, unusual word pairings like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
 - Interesting lexical insights in BDB not surfaced
 - Concordance patterns not explored
 - Figurative language not analyzed
 - ANE parallels available but not discussed
 - Comparative textual insights (e.g. MT vs LXX) not addressed
+- Research questions identified by Macro and Micro analysts not answered (even when answerable with available materials)
 
 ### 3. STYLISTIC PROBLEMS
 **Too "LLM-ish" or breathless:**
@@ -148,22 +150,25 @@ First, provide a brief editorial assessment (200-400 words):
 - What are the main weaknesses?
 - What specific revisions are needed?
 - What insights from the research bundle were missed?
-- What interesting questions were asked by the researchers but not answered, which CAN be answered?
+- What interesting questions were asked by the Macro and Micro analysts but not answered, which CAN be answered with the available research materials?
+- Were unusual or interesting Hebrew phrases and poetic devices adequately commented on in the verse-by-verse commentary?
 
 **Stage 2: Revised Introduction**
 Rewrite the introduction essay to address identified weaknesses. The revised introduction should:
 - Maintain 800-1400 words (can be longer if genuinely warranted by interesting findings and/or length of the psalm)
 - Correct any factual errors
 - Surface missed insights from research materials
+- Address answerable questions raised by the Macro and Micro analysts (weave answers into the essay where appropriate)
 - Achieve the target style (Alter/Kugel/Bloom level)
 - Define technical terms for lay readers
 - Engage specific texts (Hebrew, LXX) with analysis
 
 **Stage 3: Revised Verse Commentary**
 Rewrite the verse-by-verse commentary to address identified weaknesses. For each verse:
-- **Length**: 150-400 words (can be longer if genuinely warranted by interesting findings)
+- **Length**: 150-400 words (can and should be longer—400+ words—if there's genuinely interesting material to illuminate, such as unusual Hebrew phrases, complex poetic devices, significant textual variants, or important interpretive questions to address)
 - **Items of interest to include** (when relevant):
   * Poetics (parallelism, wordplay, sound patterns, structure)
+  * **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it—explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
   * Literary insights (narrative techniques, rhetorical strategies)
   * Historical and cultic insights (worship setting, historical context)
   * Comparative religion (ANE parallels, theological contrasts)
@@ -173,9 +178,11 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Figurative language analysis (how vehicles/metaphors work across Scripture)
   * Timing/composition clues (vocabulary, theology, historical references)
   * Traditional interpretation (Rashi, Ibn Ezra, Radak, church fathers)
+- **Address interesting questions**: When relevant to specific verses, address answerable questions raised by the Macro and Micro analysts
 - **Complement the introduction**: Don't repeat what the introduction covered in depth; add verse-specific detail
 - **Correct style**: Avoid breathless LLM language; show rather than tell
 - **Define terms**: Explain technical terminology for lay readers
+- **Emphasize the interesting**: Make sure to comment on unusual turns of phrase, distinctive Hebrew idioms, and poetic devices. These linguistic and literary features are precisely what intelligent lay readers find fascinating.
 
 ---
 
@@ -540,6 +547,14 @@ class MasterEditor:
 
             if len(verses) > 5:
                 lines.append(f"[... and {len(verses) - 5} more verses]")
+
+            # Add interesting questions if present
+            interesting_questions = analysis.get('interesting_questions', [])
+            if interesting_questions:
+                lines.append("")
+                lines.append("**Interesting Questions** (from Micro Analyst):")
+                for i, q in enumerate(interesting_questions, 1):
+                    lines.append(f"  {i}. {q}")
 
             return "\n".join(lines)
 
