@@ -173,8 +173,14 @@ GENERATE RESEARCH REQUESTS:
 
 3. **FIGURATIVE LANGUAGE** - Verses with metaphor/imagery
    - All verses flagged in discoveries
-   - Specify vehicle (main image) and synonyms
+   - **SEARCH SCOPE**: Default to searching both Psalms AND Pentateuch (not just Psalms)
+   - **HIERARCHICAL SEARCH STRATEGY**: For each figurative element:
+     * Specify the specific vehicle (main image, e.g., "stronghold", "shepherd", "water")
+     * Include direct synonyms (e.g., for "stronghold": "fortress", "wall", "citadel")
+     * Include broader category terms (e.g., for "stronghold": "military", "protection", "defense", "safety")
+     * The synthesis and master editor agents will determine which results are most relevant
    - **DO NOT filter by specific figuration type** (metaphor, simile, etc.) - let the search be broad
+   - **CAST A WIDE NET**: Better to retrieve too many figurative instances than miss important parallels
 
 4. **COMMENTARY** - Verses with interpretive puzzles
    - Complex/ambiguous verses from discoveries
@@ -194,8 +200,9 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     ... (5-10 searches)
   ],
   "figurative_checks": [
-    {{"verse": 3, "reason": "Waters as primordial chaos imagery", "vehicle": "waters", "vehicle_synonyms": ["sea", "deep", "flood", "ocean"]}},
-    {{"verse": 5, "reason": "Voice 'breaking' cedars - storm force personified", "vehicle": "breaking", "vehicle_synonyms": ["shatter", "split", "fracture"]}},
+    {{"verse": 3, "reason": "Waters as primordial chaos imagery", "vehicle": "waters", "vehicle_synonyms": ["sea", "deep", "flood", "ocean", "water", "liquid"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch"}},
+    {{"verse": 5, "reason": "Voice 'breaking' cedars - storm force personified", "vehicle": "breaking", "vehicle_synonyms": ["shatter", "split", "fracture", "destroy"], "broader_terms": ["power", "force", "violence", "strength"], "scope": "Psalms+Pentateuch"}},
+    {{"verse": 7, "reason": "Stronghold imagery - divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["fortress", "wall", "citadel", "refuge"], "broader_terms": ["military", "protection", "defense", "safety", "security"], "scope": "Psalms+Pentateuch"}},
     ... (all figurative verses)
   ],
   "commentary_requests": [
@@ -497,6 +504,18 @@ class MicroAnalystV2:
         self.logger.info(f"    Concordance: {len(request.concordance_requests)}")
         self.logger.info(f"    Figurative: {len(request.figurative_requests)}")
         self.logger.info(f"    Commentary: {len(request.commentary_requests or [])}")
+
+        # Log detailed figurative requests
+        if request.figurative_requests:
+            self.logger.info(f"\n  FIGURATIVE LANGUAGE REQUESTS (detailed):")
+            for i, fig_req in enumerate(request.figurative_requests, 1):
+                self.logger.info(f"    [{i}] Verse: {fig_req.chapter}:{fig_req.verse_start if hasattr(fig_req, 'verse_start') else 'N/A'}")
+                if hasattr(fig_req, 'vehicle_contains') and fig_req.vehicle_contains:
+                    self.logger.info(f"        vehicle_contains: {fig_req.vehicle_contains}")
+                if hasattr(fig_req, 'vehicle_search_terms') and fig_req.vehicle_search_terms:
+                    self.logger.info(f"        vehicle_search_terms: {fig_req.vehicle_search_terms}")
+                if hasattr(fig_req, 'notes') and fig_req.notes:
+                    self.logger.info(f"        notes: {fig_req.notes[:100]}...")
 
     def _log_research_bundle(self, bundle: ResearchBundle):
         """Log research bundle assembly results."""

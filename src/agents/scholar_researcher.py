@@ -272,17 +272,27 @@ class ScholarResearchRequest:
             verse = check.get("verse")
             vehicle = check.get("vehicle", "")
             vehicle_synonyms = check.get("vehicle_synonyms", [])
+            scope = check.get("scope", "Psalms")  # Default to Psalms only if not specified
 
-            # Build request dict
-            req = {
-                "book": "Psalms",
-                "chapter": psalm_chapter,
-                "verse": verse
-            }
+            # Build request dict based on scope
+            req = {}
+
+            # Parse scope to determine which books to search
+            # NOTE: Our database only contains Psalms + Pentateuch, so we don't support
+            # searching the entire Tanakh even if requested
+            if scope == "Psalms+Pentateuch" or scope == "Pentateuch+Psalms" or scope == "Tanakh":
+                # Search across Psalms and all Pentateuch books (our entire database)
+                req["books"] = ["Psalms", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"]
+            elif scope == "Psalms":
+                # Search only Psalms
+                req["book"] = "Psalms"
+            else:
+                # Unknown scope - default to searching entire database
+                req["books"] = ["Psalms", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"]
 
             # NOTE: We do NOT filter by figurative type (metaphor, simile, etc.)
             # This was too restrictive. We let the search be broad and find all
-            # figurative instances for the verse, then filter by vehicle if specified.
+            # figurative instances, then filter by vehicle if specified.
 
             # Add vehicle search if specified
             if vehicle:
@@ -292,8 +302,8 @@ class ScholarResearchRequest:
             if vehicle_synonyms:
                 # Combine vehicle + synonyms for comprehensive search
                 all_vehicles = [vehicle] + vehicle_synonyms if vehicle else vehicle_synonyms
-                # Store as comma-separated string for notes
-                req["vehicle_search_terms"] = ", ".join(all_vehicles)
+                # Store as LIST (not string) for FigurativeRequest
+                req["vehicle_search_terms"] = all_vehicles
 
             # Add notes
             notes_parts = []
