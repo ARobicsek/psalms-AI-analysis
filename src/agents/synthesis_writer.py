@@ -21,9 +21,8 @@ Date: 2025-10-17 (Phase 3c)
 
 import sys
 import os
-import json
 from pathlib import Path
-from typing import Optional, Dict, List, Any
+from typing import Optional, Dict
 import anthropic
 from dotenv import load_dotenv
 
@@ -202,13 +201,26 @@ For EACH verse in the psalm, write a commentary annotation that draws on diverse
 
 The following areas are of particular interest to intelligent, well-read lay readers who desire poetic, literary, linguistic, and historical insights:
 
-1. **Poetics**
+1. **Phonetics & Sound Patterns (CRITICAL)**
+   - You are provided with an authoritative phonetic transcription for each verse (e.g., `**Phonetic**: po-te-akh et-ya-de-kha`).
+   - **USE THIS DATA**: When discussing alliteration, assonance, or other sound-based poetic devices, you MUST base your claims on this transcription, not on modern pronunciation.
+   - **VERIFY CLAIMS**: For example, before claiming a "soft 'f' sound," check the transcription. If it says `p` (e.g., in `po-te-akh`), your claim is incorrect. The transcription is your ground truth for all phonetic analysis. Distinguish `p` vs `f`, `b` vs `v`, `k` vs `kh`.
+
+2. **Poetics**
    - Parallelism types (synonymous, antithetical, synthetic, climactic)
-   - Wordplay (paronomasia, alliteration, assonance)
-   - Sound patterns and phonetic effects
+   - Wordplay (paronomasia, alliteration, assonance) - *Must be verified with phonetic transcription*
    - Meter and rhythm
    - Structural devices (chiasm, inclusio, envelope structure)
    - **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it - explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
+
+   **Figurative Language Integration (CRITICAL):**
+   For each verse containing figurative language where the research provided relevant biblical parallels:
+   1. **Identify the image** and explain its meaning in this specific context
+   2. **Cite compelling parallel uses** from the figurative language database (at least 1-2 specific references with book/chapter/verse)
+   3. **Analyze the pattern**: How common is this image? How is it typically used across Scripture?
+   4. **Note distinctive features**: How does this psalm's use differ from or extend typical usage?
+
+   Example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11). Psalm 145 distinctively applies this human obligation metaphor to divine providence, transforming covenant ethics into cosmic theology."
 
 2. **Literary Insights**
    - Narrative techniques and rhetorical strategies
@@ -272,6 +284,15 @@ The following areas are of particular interest to intelligent, well-read lay rea
     - Church fathers (Augustine, Jerome, etc.)
     - Medieval Christian interpretation
     - Modern critical scholarship debates
+
+### VALIDATION CHECK - Figurative Language:
+
+Before finalizing, review each verse with figurative language identified in the research:
+- ✓ Does the commentary cite at least ONE specific biblical parallel from the database?
+- ✓ Does it use the comparison to generate an insight about THIS verse?
+- ✓ Does it provide pattern analysis (e.g., "This imagery appears 11x in Psalms, predominantly in contexts of...")?
+
+If any check fails, REVISE to incorporate comparative analysis using the database.
 
 ### IMPORTANT NOTES:
 
@@ -359,52 +380,71 @@ class SynthesisWriter:
 
     def write_commentary(
         self,
-        macro_file: Path,
-        micro_file: Path,
-        research_file: Path,
-        psalm_number: Optional[int] = None,
+        macro_analysis: 'MacroAnalysis',
+        micro_analysis: 'MicroAnalysis',
+        research_bundle_content: str,
+        psalm_number: int,
         max_tokens_intro: int = 4000,
         max_tokens_verse: int = 16000
     ) -> Dict[str, str]:
         """
-        Generate complete commentary from analysis files.
+        Generate complete commentary from analysis objects.
 
         Args:
-            macro_file: Path to MacroAnalysis JSON file
-            micro_file: Path to MicroAnalysis JSON file
-            research_file: Path to Research Bundle markdown file
-            psalm_number: Psalm number (extracted from files if not provided)
+            macro_analysis: MacroAnalysis object
+            micro_analysis: MicroAnalysis object
+            research_bundle_content: Research Bundle markdown content
+            psalm_number: Psalm number
             max_tokens_intro: Max tokens for introduction essay
             max_tokens_verse: Max tokens for verse commentary
 
         Returns:
             Dictionary with 'introduction' and 'verse_commentary' keys
-
-        Raises:
-            ValueError: If files not found or parsing fails
         """
         self.logger.info("Starting commentary synthesis")
 
-        # Step 1: Load input files
-        macro_analysis = self._load_macro_analysis(macro_file)
-        micro_analysis = self._load_micro_analysis(micro_file)
-        research_bundle = self._load_research_bundle(research_file)
-
-        # Extract psalm number
-        if not psalm_number:
-            psalm_number = macro_analysis.get('psalm_number', 0)
-
         self.logger.info(f"Synthesizing commentary for Psalm {psalm_number}")
-        self.logger.info(f"  Macro thesis: {len(str(macro_analysis))} chars")
-        self.logger.info(f"  Micro analysis: {len(str(micro_analysis))} chars")
-        self.logger.info(f"  Research bundle: {len(research_bundle)} chars")
+        self.logger.info(f"  Macro thesis: {len(macro_analysis.to_markdown())} chars")
+        self.logger.info(f"  Micro analysis: {len(micro_analysis.to_markdown())} chars")
+        self.logger.info(f"  Research bundle: {len(research_bundle_content)} chars")
+
+        # Check for phonetic data and log it
+        try:
+            # Handle both Pydantic object and dict formats
+            if hasattr(micro_analysis, 'verse_commentaries'):
+                # Pydantic object
+                verse_commentaries = micro_analysis.verse_commentaries
+                if verse_commentaries and len(verse_commentaries) > 0:
+                    first_verse = verse_commentaries[0]
+                    phonetic = getattr(first_verse, 'phonetic_transcription', None) if hasattr(first_verse, 'phonetic_transcription') else first_verse.get('phonetic_transcription', '') if isinstance(first_verse, dict) else ''
+                    if phonetic:
+                        self.logger.info("✓ Phonetic transcription data FOUND and passed to synthesis writer.")
+                    else:
+                        self.logger.warning("⚠ Phonetic transcription data NOT FOUND in the provided micro_analysis.")
+                else:
+                    self.logger.warning("⚠ No verse commentaries found in micro_analysis.")
+            elif isinstance(micro_analysis, dict):
+                # Dictionary format
+                verses = micro_analysis.get('verse_commentaries', micro_analysis.get('verses', []))
+                if verses and len(verses) > 0:
+                    first_verse = verses[0]
+                    if first_verse.get('phonetic_transcription', ''):
+                        self.logger.info("✓ Phonetic transcription data FOUND and passed to synthesis writer.")
+                    else:
+                        self.logger.warning("⚠ Phonetic transcription data NOT FOUND in the provided micro_analysis.")
+                else:
+                    self.logger.warning("⚠ No verses found in micro_analysis.")
+            else:
+                self.logger.warning("⚠ Could not verify phonetic data presence. Micro analysis format may be unexpected.")
+        except (AttributeError, TypeError, StopIteration) as e:
+            self.logger.warning(f"⚠ Could not verify phonetic data presence: {e}")
 
         # Step 2: Generate introduction essay
         introduction = self._generate_introduction(
             psalm_number=psalm_number,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
-            research_bundle=research_bundle,
+            research_bundle=research_bundle_content,
             max_tokens=max_tokens_intro
         )
 
@@ -413,7 +453,7 @@ class SynthesisWriter:
             psalm_number=psalm_number,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
-            research_bundle=research_bundle,
+            research_bundle=research_bundle_content,
             max_tokens=max_tokens_verse,
             introduction_essay=introduction  # Pass the introduction to verse commentary
         )
@@ -428,23 +468,26 @@ class SynthesisWriter:
             'psalm_number': psalm_number
         }
 
-    def _load_macro_analysis(self, file_path: Path) -> Dict[str, Any]:
-        """Load MacroAnalysis from JSON file."""
-        self.logger.info(f"Loading macro analysis from {file_path}")
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
-
-    def _load_micro_analysis(self, file_path: Path) -> Dict[str, Any]:
-        """Load MicroAnalysis from JSON file."""
-        self.logger.info(f"Loading micro analysis from {file_path}")
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
-
-    def _load_research_bundle(self, file_path: Path) -> str:
-        """Load Research Bundle from markdown file."""
-        self.logger.info(f"Loading research bundle from {file_path}")
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return f.read()
+    
+# This section is removed as file loading is now handled in the pipeline script
+#
+#    def _load_macro_analysis(self, file_path: Path) -> Dict[str, Any]:
+#        """Load MacroAnalysis from JSON file."""
+#        self.logger.info(f"Loading macro analysis from {file_path}")
+#        with open(file_path, 'r', encoding='utf-8') as f:
+#            return json.load(f)
+#
+#    def _load_micro_analysis(self, file_path: Path) -> Dict[str, Any]:
+#        """Load MicroAnalysis from JSON file."""
+#        self.logger.info(f"Loading micro analysis from {file_path}")
+#        with open(file_path, 'r', encoding='utf-8') as f:
+#            return json.load(f)
+#
+#    def _load_research_bundle(self, file_path: Path) -> str:
+#        """Load Research Bundle from markdown file."""
+#        self.logger.info(f"Loading research bundle from {file_path}")
+#        with open(file_path, 'r', encoding='utf-8') as f:
+#            return f.read()
 
     def _trim_figurative_proportionally(self, figurative_section: str, keep_ratio: float) -> str:
         """
@@ -611,12 +654,24 @@ class SynthesisWriter:
     def _generate_introduction(
         self,
         psalm_number: int,
-        macro_analysis: Dict,
-        micro_analysis: Dict,
+        macro_analysis,  # MacroAnalysis object or Dict
+        micro_analysis,  # MicroAnalysis object or Dict
         research_bundle: str,
         max_tokens: int
     ) -> str:
-        """Generate introduction essay."""
+        """
+        Generate introduction essay.
+
+        Args:
+            psalm_number: Psalm number
+            macro_analysis: MacroAnalysis object or dict
+            micro_analysis: MicroAnalysis object or dict
+            research_bundle: Research bundle markdown content
+            max_tokens: Maximum tokens for generation
+
+        Returns:
+            Generated introduction text
+        """
         self.logger.info(f"Generating introduction essay for Psalm {psalm_number}")
 
         # Format inputs
@@ -681,13 +736,26 @@ class SynthesisWriter:
     def _generate_verse_commentary(
         self,
         psalm_number: int,
-        macro_analysis: Dict,
-        micro_analysis: Dict,
+        macro_analysis,  # MacroAnalysis object or Dict
+        micro_analysis,  # MicroAnalysis object or Dict
         research_bundle: str,
         max_tokens: int,
         introduction_essay: str = ""
     ) -> str:
-        """Generate verse-by-verse commentary."""
+        """
+        Generate verse-by-verse commentary.
+
+        Args:
+            psalm_number: Psalm number
+            macro_analysis: MacroAnalysis object or dict
+            micro_analysis: MicroAnalysis object or dict
+            research_bundle: Research bundle markdown content
+            max_tokens: Maximum tokens for generation
+            introduction_essay: Previously generated introduction text
+
+        Returns:
+            Generated verse commentary text
+        """
         self.logger.info(f"Generating verse commentary for Psalm {psalm_number}")
 
         # Format inputs
@@ -751,23 +819,51 @@ class SynthesisWriter:
             self.logger.error(f"Error generating verse commentary: {e}")
             raise
 
-    def _format_macro_for_prompt(self, macro: Dict) -> str:
-        """Format MacroAnalysis for prompt."""
+    def _format_macro_for_prompt(self, macro) -> str:
+        """
+        Format MacroAnalysis for prompt.
+
+        Handles both Pydantic MacroAnalysis objects and dict format.
+
+        Args:
+            macro: MacroAnalysis object or dict
+
+        Returns:
+            Formatted string for prompt
+        """
         lines = []
-        lines.append(f"**Thesis**: {macro.get('thesis_statement', 'N/A')}")
-        lines.append(f"**Genre**: {macro.get('genre', 'N/A')}")
-        lines.append(f"**Context**: {macro.get('historical_context', 'N/A')}")
+
+        # Helper to get attribute/key value with fallback
+        def get_value(obj, key, default='N/A'):
+            if hasattr(obj, key):
+                return getattr(obj, key, default)
+            elif isinstance(obj, dict):
+                return obj.get(key, default)
+            return default
+
+        lines.append(f"**Thesis**: {get_value(macro, 'thesis_statement')}")
+        lines.append(f"**Genre**: {get_value(macro, 'genre')}")
+        lines.append(f"**Context**: {get_value(macro, 'historical_context')}")
         lines.append("")
         lines.append("**Structure**:")
-        for div in macro.get('structural_outline', []):
-            lines.append(f"  - {div.get('section', '')}: {div.get('theme', '')}")
+
+        structural_outline = get_value(macro, 'structural_outline', [])
+        for div in structural_outline:
+            section = get_value(div, 'section', '')
+            theme = get_value(div, 'theme', '')
+            lines.append(f"  - {section}: {theme}")
+
         lines.append("")
         lines.append("**Poetic Devices**:")
-        for device in macro.get('poetic_devices', []):
-            lines.append(f"  - {device.get('device', '')}: {device.get('description', '')}")
+
+        poetic_devices = get_value(macro, 'poetic_devices', [])
+        for device in poetic_devices:
+            device_name = get_value(device, 'device', '')
+            description = get_value(device, 'description', '')
+            lines.append(f"  - {device_name}: {description}")
 
         # Add research questions
-        questions = macro.get('research_questions', [])
+        questions = get_value(macro, 'research_questions', [])
         if questions:
             lines.append("")
             lines.append("**Research Questions** (from Macro Analyst):")
@@ -776,31 +872,69 @@ class SynthesisWriter:
 
         return "\n".join(lines)
 
-    def _format_micro_for_prompt(self, micro: Dict) -> str:
-        """Format MicroAnalysis for prompt."""
+    def _format_micro_for_prompt(self, micro) -> str:
+        """
+        Format MicroAnalysis for prompt.
+
+        Handles both Pydantic MicroAnalysis objects and dict format.
+        Properly extracts phonetic transcription data from VerseCommentary objects.
+
+        Args:
+            micro: MicroAnalysis object or dict
+
+        Returns:
+            Formatted string for prompt including phonetic data
+        """
         lines = []
 
-        # Handle both old format ('verses') and new format ('verse_commentaries')
-        verses = micro.get('verse_commentaries', micro.get('verses', []))
+        # Helper to get attribute/key value with fallback
+        def get_value(obj, key, default=''):
+            if hasattr(obj, key):
+                return getattr(obj, key, default)
+            elif isinstance(obj, dict):
+                return obj.get(key, default)
+            return default
+
+        # Handle both Pydantic object and dict formats
+        # Support both new format ('verse_commentaries') and old format ('verses')
+        if hasattr(micro, 'verse_commentaries'):
+            # Pydantic MicroAnalysis object
+            verses = micro.verse_commentaries
+        elif isinstance(micro, dict):
+            # Dictionary format
+            verses = micro.get('verse_commentaries', micro.get('verses', []))
+        else:
+            verses = []
 
         for verse_data in verses:
-            verse_num = verse_data.get('verse_number', verse_data.get('verse', 0))
-            commentary = verse_data.get('commentary', '')
-            lines.append(f"**Verse {verse_num}**: {commentary}")
+            # Get verse number (handle both field names)
+            verse_num = get_value(verse_data, 'verse_number', get_value(verse_data, 'verse', 0))
+
+            # Get commentary
+            commentary = get_value(verse_data, 'commentary', '')
+
+            # CRITICAL: Extract phonetic transcription data
+            phonetic = get_value(verse_data, 'phonetic_transcription', '')
+
+            # Format verse with phonetic data if available
+            lines.append(f"**Verse {verse_num}**")
+            if phonetic:
+                lines.append(f"**Phonetic**: `{phonetic}`")
+            lines.append(commentary)
 
             # Add discoveries if present
-            lexical = verse_data.get('lexical_insights', [])
+            lexical = get_value(verse_data, 'lexical_insights', [])
             if lexical:
                 lines.append(f"  Lexical: {', '.join(lexical)}")
 
-            figurative = verse_data.get('figurative_analysis', [])
+            figurative = get_value(verse_data, 'figurative_analysis', [])
             if figurative:
                 lines.append(f"  Figurative: {', '.join(figurative)}")
 
             lines.append("")
 
         # Add thematic threads if present
-        threads = micro.get('thematic_threads', [])
+        threads = get_value(micro, 'thematic_threads', [])
         if threads:
             lines.append("**Thematic Threads Across Verses:**")
             for thread in threads:
@@ -808,7 +942,7 @@ class SynthesisWriter:
             lines.append("")
 
         # Add interesting questions if present
-        interesting_questions = micro.get('interesting_questions', [])
+        interesting_questions = get_value(micro, 'interesting_questions', [])
         if interesting_questions:
             lines.append("")
             lines.append("**Interesting Questions** (from Micro Analyst):")
@@ -817,7 +951,7 @@ class SynthesisWriter:
             lines.append("")
 
         # Add synthesis notes if present
-        synth_notes = micro.get('synthesis_notes', '')
+        synth_notes = get_value(micro, 'synthesis_notes', '')
         if synth_notes:
             lines.append("**Synthesis Notes for Research:**")
             lines.append(synth_notes)

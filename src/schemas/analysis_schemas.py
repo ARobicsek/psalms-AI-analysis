@@ -134,6 +134,7 @@ class VerseCommentary:
     lexical_insights: List[str] = field(default_factory=list)  # Key words analyzed
     figurative_analysis: List[str] = field(default_factory=list)  # Metaphors, etc.
     thesis_connection: str = ""  # How this verse supports overall thesis
+    phonetic_transcription: str = ""  # NEW: IPA-like phonetic transcription
 
 
 @dataclass
@@ -183,6 +184,11 @@ class MicroAnalysis:
 
         for vc in self.verse_commentaries:
             lines.append(f"\n### Verse {vc.verse_number}")
+
+            # NEW: Add phonetic transcription before commentary
+            if vc.phonetic_transcription:
+                lines.append(f"\n**Phonetic**: `{vc.phonetic_transcription}`\n")
+
             lines.append(vc.commentary)
 
             if vc.lexical_insights:

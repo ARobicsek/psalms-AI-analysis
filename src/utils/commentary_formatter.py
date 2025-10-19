@@ -204,9 +204,10 @@ class CommentaryFormatter:
         """
         sections = {}
 
-        # Split by verse markers: **Verse N**
-        pattern = r'\*\*Verse (\d+)\*\*'
-        matches = list(re.finditer(pattern, verse_commentary))
+        # Split by verse markers: Verse N (plain or bold, on its own line or inline)
+        # Matches: "Verse 1", "**Verse 1**", "Verse 1\n"
+        pattern = r'(?:^|\n)(?:\*\*)?Verse (\d+)(?:\*\*)?\s*\n'
+        matches = list(re.finditer(pattern, verse_commentary, re.MULTILINE))
 
         for i, match in enumerate(matches):
             verse_num = int(match.group(1))
@@ -220,6 +221,12 @@ class CommentaryFormatter:
 
             # Extract commentary text
             commentary = verse_commentary[start:end].strip()
+
+            # Clean up the commentary text
+            # Remove any trailing separators or extra whitespace
+            commentary = re.sub(r'\s*---\s*$', '', commentary)
+            commentary = commentary.strip()
+
             sections[verse_num] = commentary
 
         self.logger.info(f"Parsed {len(sections)} verse commentary sections")

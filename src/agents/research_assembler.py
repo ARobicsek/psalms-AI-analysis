@@ -196,12 +196,31 @@ class ResearchBundle:
                 md += f"**Filters**: {' | '.join(filters)}  \n"
                 md += f"**Results**: {len(bundle.instances)}  \n\n"
 
+                # Generate pattern summary using FigurativeBundle method
+                pattern_summary = bundle.get_pattern_summary()
+                md += f"{pattern_summary}\n\n"
+
                 if bundle.instances:
-                    md += "#### Instances:\n\n"
+                    # Show top 3 instances flagged with stars
+                    top_instances = bundle.get_top_instances(limit=3)
+                    if len(bundle.instances) > 3:
+                        md += f"**Top {len(top_instances)} Most Relevant** (by confidence):\n"
+                        for idx, inst in enumerate(top_instances, 1):
+                            md += f"{idx}. ⭐ **{inst.book} {inst.chapter}:{inst.verse}** "
+                            md += f"(confidence: {inst.confidence:.2f})"
+
+                            # Show brief explanation (truncated to 100 chars)
+                            if inst.explanation:
+                                explanation_preview = inst.explanation[:100] + "..." if len(inst.explanation) > 100 else inst.explanation
+                                md += f" - {explanation_preview}"
+                            md += "\n"
+                        md += "\n"
+
+                    md += f"#### All Instances ({len(bundle.instances)} total):\n\n"
                     for inst in bundle.instances[:10]:
                         types = ', '.join([t for t in ['simile', 'metaphor', 'personification', 'idiom', 'hyperbole', 'metonymy']
                                           if getattr(inst, f'is_{t}')])
-                        md += f"**{inst.reference}** ({types})  \n"
+                        md += f"**{inst.reference}** ({types}) - confidence: {inst.confidence:.2f}  \n"
                         md += f"*Figurative phrase*: {inst.figurative_text}  \n\n"
 
                         # Include full verse context
@@ -225,6 +244,15 @@ class ResearchBundle:
 
                     if len(bundle.instances) > 10:
                         md += f"*...and {len(bundle.instances) - 10} more instances*\n\n"
+
+                    # Add vehicle frequency analysis if we have many instances
+                    if len(bundle.instances) > 10:
+                        vehicle_freq = bundle.get_vehicle_frequency()
+                        if vehicle_freq and len(vehicle_freq) > 1:
+                            top_3_vehicles = sorted(vehicle_freq.items(), key=lambda x: x[1], reverse=True)[:3]
+                            md += f"**Usage breakdown**: "
+                            md += ", ".join([f"{vehicle} ({count}x)" for vehicle, count in top_3_vehicles])
+                            md += "\n\n"
 
                 md += "---\n\n"
 

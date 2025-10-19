@@ -40,7 +40,7 @@ import sys
 import os
 import json
 from pathlib import Path
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Dict
 import anthropic
 from dotenv import load_dotenv
 
@@ -63,12 +63,13 @@ else:
     from .scholar_researcher import ScholarResearchRequest
     from ..data_sources.tanakh_database import TanakhDatabase
     from ..utils.logger import get_logger
+from .phonetic_analyst import PhoneticAnalyst
 
 
 # Stage 1: Quick Discovery Pass Prompt
 DISCOVERY_PASS_PROMPT = """You are conducting a QUICK DISCOVERY PASS of Psalm {psalm_number}.
 
-Your goal: Find what's INTERESTING, CURIOUS, PUZZLING, or SURPRISING in each verse.
+Your goal: Find what's INTERESTING, CURIOUS, PUZZLING, or SURPRISING in each verse. You have been provided with authoritative phonetic transcriptions to aid in analyzing sound patterns.
 
 MACRO CONTEXT (for peripheral awareness - NOT your primary focus):
 
@@ -76,9 +77,9 @@ MACRO CONTEXT (for peripheral awareness - NOT your primary focus):
 
 ---
 
-PSALM TEXT (Hebrew, English, LXX Greek):
+PSALM TEXT & PHONETIC DATA:
 
-{psalm_text_with_lxx}
+{psalm_text_with_phonetics}
 
 ---
 
@@ -94,6 +95,7 @@ Read through each verse with FRESH EYES. For each verse, note:
 
 1. **Curious Word Choices**: Rare words? Unexpected vocabulary? Interesting verbs/nouns?
 2. **Poetic Patterns**: Parallelism? Wordplay? Sound patterns? Repetition?
+   - **IMPORTANT**: When analyzing sound patterns (alliteration, assonance), you MUST use the provided phonetic transcription as your ground truth. Do not guess at pronunciation.
 3. **Figurative Language**: Metaphors? Similes? Personification? What images are used?
 4. **Puzzles/Conundrums**: Ambiguous phrasing? Interpretive challenges? Strange syntax?
 5. **Surprises**: Anything unexpected given the genre/context?
@@ -121,7 +123,7 @@ Examples of good questions:
 
 These questions should guide the Synthesizer and Editor to address genuinely interesting aspects of the psalm.
 
-OUTPUT FORMAT: Return ONLY valid JSON:
+OUTPUT FORMAT: Return ONLY valid JSON. Do NOT include the phonetic transcription in your output.
 
 {{
   "verse_discoveries": [
@@ -278,6 +280,7 @@ class MicroAnalystV2:
         self.db = TanakhDatabase(Path(db_path))
         self.research_assembler = ResearchAssembler()
         self.logger = logger or get_logger("micro_analyst_v2")
+        self.phonetic_analyst = PhoneticAnalyst()
 
     def analyze_psalm(
         self,
@@ -303,7 +306,11 @@ class MicroAnalystV2:
 
         # Stage 1: Quick discovery pass
         self.logger.info("\n[STAGE 1] Quick Verse-by-Verse Discovery Pass")
-        discoveries = self._discovery_pass(psalm_number, macro_analysis)
+        
+        # First, get phonetic transcriptions for the whole psalm
+        phonetic_data = self._get_phonetic_transcriptions(psalm_number)
+        
+        discoveries = self._discovery_pass(psalm_number, macro_analysis, phonetic_data)
         self._log_discoveries(discoveries)
 
         # Stage 2: Generate research requests
@@ -316,8 +323,8 @@ class MicroAnalystV2:
         research_bundle = self.research_assembler.assemble(research_request)
         self._log_research_bundle(research_bundle)
 
-        # Create MicroAnalysis from discoveries
-        micro_analysis = self._create_micro_analysis(psalm_number, discoveries)
+        # Create MicroAnalysis from discoveries, now including phonetic data
+        micro_analysis = self._create_micro_analysis(psalm_number, discoveries, phonetic_data)
 
         self.logger.info(f"\n{'=' * 80}")
         self.logger.info(f"MICROANALYST V2 COMPLETE")
@@ -353,7 +360,8 @@ class MicroAnalystV2:
     def _discovery_pass(
         self,
         psalm_number: int,
-        macro_analysis: MacroAnalysis
+        macro_analysis: MacroAnalysis,
+        phonetic_data: dict
     ) -> dict:
         """Stage 1: Quick discovery pass through all verses."""
         # Fetch psalm with LXX
@@ -373,7 +381,7 @@ class MicroAnalystV2:
         prompt = DISCOVERY_PASS_PROMPT.format(
             psalm_number=psalm_number,
             macro_analysis=macro_analysis.to_markdown(),
-            psalm_text_with_lxx=psalm_text_with_lxx,
+            psalm_text_with_phonetics=psalm_text_with_lxx,
             rag_context=rag_formatted,
             verse_count=verse_count
         )
@@ -487,7 +495,8 @@ class MicroAnalystV2:
     def _create_micro_analysis(
         self,
         psalm_number: int,
-        discoveries: dict
+        discoveries: dict,
+        phonetic_data: dict
     ) -> MicroAnalysis:
         """Create MicroAnalysis object from discoveries."""
         # Convert discoveries to VerseCommentary objects
@@ -498,7 +507,8 @@ class MicroAnalystV2:
                 commentary=disc.get('observations', ''),
                 lexical_insights=disc.get('curious_words', []),
                 figurative_analysis=disc.get('figurative_elements', []),
-                thesis_connection=disc.get('macro_relation', '')
+                thesis_connection=disc.get('macro_relation', ''),
+                phonetic_transcription=phonetic_data.get(disc['verse_number'], '[Transcription not found]')
             )
             verse_commentaries.append(vc)
 
@@ -598,6 +608,32 @@ class MicroAnalystV2:
             lines.append("")
 
         return "\n".join(lines)
+
+    def _get_phonetic_transcriptions(self, psalm_number: int) -> Dict[int, str]:
+        """Get phonetic transcription for each verse of the psalm."""
+        self.logger.info("  Generating phonetic transcriptions...")
+        psalm = self.db.get_psalm(psalm_number)
+        if not psalm:
+            self.logger.error(f"Could not retrieve psalm {psalm_number} for phonetic transcription.")
+            return {}
+
+        phonetic_data = {}
+        for verse in psalm.verses:
+            try:
+                # Call the phonetic analyst to get the detailed transcription
+                analysis = self.phonetic_analyst.transcribe_verse(verse.hebrew)
+                
+                # Join the transcribed words into a single string for the prompt
+                transcribed_words = [word['transcription'] for word in analysis['words']]
+                verse_transcription = " ".join(transcribed_words)
+                
+                phonetic_data[verse.verse] = verse_transcription
+            except Exception as e:
+                self.logger.error(f"Error transcribing verse {verse.verse}: {e}")
+                phonetic_data[verse.verse] = "[Transcription Error]"
+
+        self.logger.info("  ✓ Phonetic transcriptions generated.")
+        return phonetic_data
 
 
 def main():

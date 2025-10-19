@@ -37,6 +37,14 @@ tmp/
 
 # Output (may want to keep these, adjust as needed)
 # output/*.docx
+logs/*.json
+output/gpt5_raw/
+output/test_enhancements/
+output/*/pipeline_stats.json
+output/*/pipeline_summary.md
+output/*_old.md
+Documents/*old.docx
+Documents/*without*.docx
 
 # API keys and secrets
 .anthropic_key

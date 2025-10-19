@@ -28,6 +28,7 @@ import sqlite3
 from pathlib import Path
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
+from collections import Counter
 import json
 
 # Database path
@@ -194,6 +195,58 @@ class FigurativeBundle:
     def to_json(self) -> str:
         """Convert to JSON string."""
         return json.dumps(self.to_dict(), ensure_ascii=False, indent=2)
+
+    def get_top_instances(self, limit: int = 3) -> List['FigurativeInstance']:
+        """
+        Get top N instances sorted by confidence score.
+
+        Args:
+            limit: Number of top instances to return (default: 3)
+
+        Returns:
+            List of top N FigurativeInstance objects sorted by confidence
+        """
+        sorted_instances = sorted(self.instances, key=lambda x: x.confidence, reverse=True)
+        return sorted_instances[:limit]
+
+    def get_vehicle_frequency(self) -> Dict[str, int]:
+        """
+        Count frequency of each vehicle (first-level vehicle tag).
+
+        Returns:
+            Dictionary mapping vehicle strings to occurrence counts
+        """
+        vehicles = []
+        for inst in self.instances:
+            if inst.vehicle and len(inst.vehicle) > 0:
+                # Get first-level vehicle tag
+                vehicles.append(inst.vehicle[0])
+        return dict(Counter(vehicles))
+
+    def get_pattern_summary(self) -> str:
+        """
+        Generate a brief pattern summary for quick reference.
+
+        Returns:
+            Formatted string describing the core pattern and frequency
+        """
+        total = len(self.instances)
+        if total == 0:
+            return "No instances found"
+
+        vehicle_freq = self.get_vehicle_frequency()
+
+        # Find most common vehicle
+        if vehicle_freq:
+            top_vehicle = max(vehicle_freq.items(), key=lambda x: x[1])
+            top_vehicle_name, top_vehicle_count = top_vehicle
+
+            # Calculate percentage
+            percentage = int((top_vehicle_count / total) * 100)
+
+            return f"**Core pattern**: {top_vehicle_name} metaphor ({top_vehicle_count}/{total} instances, {percentage}%)"
+        else:
+            return f"**Total instances**: {total}"
 
 
 class FigurativeLibrarian:
