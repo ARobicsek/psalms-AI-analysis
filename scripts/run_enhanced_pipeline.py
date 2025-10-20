@@ -401,44 +401,43 @@ def run_enhanced_pipeline(
         print(f"STEP 5: Print-Ready Formatting")
         print(f"{'='*80}\n")
 
-        # Direct Python call instead of subprocess to avoid file naming issues
-        from src.utils.commentary_formatter import CommentaryFormatter
+        # The tracker now saves the JSON summary before this step,
+        # so we can load it.
+        summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+        if not summary_json_file.exists():
+            # If it doesn't exist, generate a temporary one.
+            logger.warning(f"Pipeline summary JSON not found at {summary_json_file}. Generating temporary summary for formatter.")
+            tracker.save_json(str(output_path))
 
-        formatter = CommentaryFormatter(logger=logger)
+        # Define paths for the formatter
+        intro_to_format = edited_intro_file if not skip_master_edit and edited_intro_file.exists() else synthesis_intro_file
+        verses_to_format = edited_verses_file if not skip_master_edit and edited_verses_file.exists() else synthesis_verses_file
 
-        # Determine which model names to use for the footer
-
-        # Create models_used dictionary
-        models_used = {
-            'macro': macro_model,
-            'micro': micro_model,
-            'synthesis': synthesis_model,
-            'editor': editor_model
-        }
+        command = [
+            sys.executable,
+            str(Path(__file__).parent.parent / "src" / "utils" / "commentary_formatter.py"),
+            "--psalm", str(psalm_number),
+            "--intro", str(intro_to_format),
+            "--verses", str(verses_to_format),
+            "--summary", str(summary_json_file),
+            "--output", str(print_ready_file),
+            "--db-path", db_path
+        ]
 
         try:
-            formatter.format_from_files(
-                intro_file=str(edited_intro_file)
-                if not skip_master_edit and edited_intro_file.exists()
-                else str(synthesis_intro_file),
-                verses_file=str(edited_verses_file)
-                if not skip_master_edit and edited_verses_file.exists()
-                else str(synthesis_verses_file),
-                psalm_number=psalm_number,
-                output_file=str(print_ready_file),
-                apply_divine_names=True,
-                models_used=models_used
-            )
-            result_success = True
-        except Exception as e:
-            logger.error(f"Error creating print-ready commentary: {e}")
-            result_success = False
-
-        if result_success:
+            logger.info(f"Running formatter command: {' '.join(command)}")
+            result = subprocess.run(command, check=True, capture_output=True, text=True, encoding='utf-8')
+            logger.info("Formatter stdout:\n" + result.stdout)
+            if result.stderr:
+                logger.warning("Formatter stderr:\n" + result.stderr)
             logger.info(f"✓ Print-ready commentary saved to {print_ready_file}")
             print(f"✓ Print-ready commentary: {print_ready_file}\n")
-        else:
-            print(f"⚠ Error in print-ready formatting (see logs)\n")
+        except Exception as e:
+            logger.error(f"Error creating print-ready commentary: {e}", exc_info=True)
+            if isinstance(e, subprocess.CalledProcessError):
+                logger.error(f"Formatter failed with stdout:\n{e.stdout}")
+                logger.error(f"Formatter failed with stderr:\n{e.stderr}")
+            print(f"⚠ Error in print-ready formatting (see logs for details)\n")
     else:
         logger.info(f"[STEP 5] Skipping print-ready formatting")
         print(f"\nSkipping Step 5 (print-ready formatting)\n")

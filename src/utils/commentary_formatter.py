@@ -1,356 +1,242 @@
 """
 Commentary Formatter
-Formats Psalm commentary with verse text (Hebrew + English) and applies divine names modifications.
+This utility assembles the final, print-ready commentary from the various
+output files of the pipeline. It integrates the introduction, verse commentary,
+and a new bibliographical summary section.
 
-Author: Claude (Anthropic)
-Date: 2025-10-17
+Key Features:
+- Assembles introduction and verse-by-verse commentary.
+- Parses `pipeline_summary.json` to extract key statistics for a bibliographical summary.
+- Applies formatting for clean copy-paste into MS Word (e.g., tabs for RTL/LTR text).
+- Handles divine name modifications.
+
+Author: Claude (Anthropic), with modifications by Gemini Code Assist
+Date: 2025-10-19
 """
 
 import sys
+import json
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, Any
 
 # Handle imports
 if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.data_sources.tanakh_database import TanakhDatabase
-    from src.utils.divine_names_modifier import DivineNamesModifier
     from src.utils.logger import get_logger
+    from src.utils.divine_names_modifier import DivineNamesModifier
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
-    from .divine_names_modifier import DivineNamesModifier
     from .logger import get_logger
+    from .divine_names_modifier import DivineNamesModifier
 
 
 class CommentaryFormatter:
-    """
-    Formats Psalm commentary with verse text and divine names modifications.
-    """
+    """Assembles and formats the final print-ready commentary."""
 
-    def __init__(self, db_path: Optional[str] = None, logger=None):
-        """
-        Initialize formatter.
-
-        Args:
-            db_path: Path to Tanakh database (optional)
-            logger: Logger instance
-        """
+    def __init__(self, logger=None):
         self.logger = logger or get_logger("commentary_formatter")
-
-        # Initialize database
-        if not db_path:
-            # Use default path relative to project
-            project_root = Path(__file__).parent.parent.parent
-            db_path = project_root / "database" / "tanakh.db"
-        elif isinstance(db_path, str):
-            db_path = Path(db_path)
-
-        self.db = TanakhDatabase(db_path)
         self.modifier = DivineNamesModifier(logger=self.logger)
 
-    def format_print_ready_commentary(
+    def format_commentary(
         self,
-        introduction: str,
-        verse_commentary: str,
-        psalm_number: int,
-        apply_divine_names: bool = True,
-        models_used: Optional[Dict[str, str]] = None
+        psalm_num: int,
+        intro_text: str,
+        verses_text: str,
+        summary_data: Dict[str, Any],
+        psalm_text_data: Dict[int, Dict[str, str]]
     ) -> str:
         """
-        Format complete print-ready commentary with verse text.
+        Assembles the full print-ready commentary markdown.
 
         Args:
-            introduction: Introduction essay text
-            verse_commentary: Verse-by-verse commentary text
-            psalm_number: Psalm number
-            apply_divine_names: Whether to apply divine names modifications
-            models_used: Dictionary with model names for each step:
-                         {'macro': 'model-name', 'micro': 'model-name',
-                          'synthesis': 'model-name', 'editor': 'model-name'}
-                         If None, defaults to current pipeline models.
+            psalm_num: The psalm number.
+            intro_text: The introduction essay markdown.
+            verses_text: The verse-by-verse commentary markdown.
+            summary_data: The parsed pipeline summary JSON data.
+            psalm_text_data: A dictionary mapping verse number to its Hebrew/English text.
 
         Returns:
-            Formatted commentary markdown
+            A string containing the complete, formatted commentary.
         """
-        self.logger.info(f"Formatting print-ready commentary for Psalm {psalm_number}")
+        self.logger.info(f"Formatting print-ready commentary for Psalm {psalm_num}...")
 
-        # Default models if not provided
-        if models_used is None:
-            models_used = {
-                'macro': 'Claude Sonnet 4.5',
-                'micro': 'Claude Sonnet 4.5',
-                'synthesis': 'Claude Sonnet 4.5',
-                'editor': 'GPT-5'
-            }
+        # 1. Header
+        header = f"# Commentary on Psalm {psalm_num}\n"
 
-        # Get verse data
-        verses = self._get_psalm_verses(psalm_number)
+        # 2. Introduction
+        introduction_section = f"## Introduction\n{self._format_body_text(intro_text)}\n"
 
-        if not verses:
-            self.logger.error(f"No verses found for Psalm {psalm_number}")
-            return ""
+        # 3. Psalm Text Section
+        psalm_text_section = self._format_psalm_text(psalm_num, psalm_text_data).strip() + "\n"
 
-        # Parse verse commentary sections
-        commentary_sections = self._parse_verse_commentary(verse_commentary)
+        # 4. Verse-by-Verse Commentary
+        verse_commentary_section = f"## Verse-by-Verse Commentary\n{self._format_body_text(verses_text)}\n"
 
-        # Build formatted document
-        output = []
+        # 5. Bibliographical Summary
+        biblio_summary = self._format_bibliographical_summary(summary_data)
 
-        # Title
-        output.append(f"# Commentary on Psalm {psalm_number}")
-        output.append("---")
+        # 6. Models Used
+        models_used = self._format_models_used(summary_data)
 
-        # Psalm Text (Hebrew and English, verse by verse)
-        output.append("## Psalm Text")
-        for verse_num, verse_data in verses.items():
-            hebrew = verse_data['hebrew']
-            english = verse_data['english']
-
-            # Use a Left-to-Right Mark (U+200E) followed by a tab to force separation
-            # when pasting into applications like Microsoft Word.
-            # The LRM signals the start of LTR text, and the tab creates a visible space.
-            lrm = "\u200e"  # Left-to-Right Mark
-            output.append(f"{verse_num}. {hebrew}   {lrm}\t\t{english}")
-
-        # Introduction
-        output.append("---")
-        output.append("## Introduction")
-
-        # Replace double newlines with single newlines in the introduction
-        # to reduce paragraph spacing when pasting into Word.
-        single_spaced_intro = introduction.strip().replace('\n\n', '\n')
-        output.append(single_spaced_intro)
-
-        # Verse-by-verse commentary
-        output.append("## Verse-by-Verse Commentary")
-
-        for verse_num, verse_data in verses.items():
-            hebrew = verse_data['hebrew']
-            english = verse_data['english']
-            commentary = commentary_sections.get(verse_num, "[Commentary not found]")
-
-            # Format verse section - no bold labels
-            output.append(f"### Verse {verse_num}") 
-            # Use a Left-to-Right Mark (U+200E) followed by a tab to force separation
-            # when pasting into applications like Microsoft Word.
-            lrm = "\u200e"
-            output.append(f"{hebrew}   {lrm}\t\t{english}")
-            # Commentary
-            single_spaced_commentary = commentary.strip().replace('\n\n', '\n')
-            output.append(single_spaced_commentary)
-            output.append("---")
-
-        # Models footer (using dynamic model information)
-        output.append("## Models Used")
-        output.append("This commentary was generated using:")
-        output.append(f"**Structural Analysis (Macro)**: {models_used.get('macro', 'Unknown')}")
-        output.append(f"**Verse Discovery (Micro)**: {models_used.get('micro', 'Unknown')}")
-        output.append(f"**Commentary Synthesis**: {models_used.get('synthesis', 'Unknown')}")
-        output.append(f"**Editorial Review**: {models_used.get('editor', 'Unknown')}")
-
-        # Join into single document
-        document = "\n".join(output)
-
-        # Apply divine names modifications if requested
-        if apply_divine_names:
-            self.logger.info("Applying divine names modifications")
-            document = self.modifier.modify_text(document)
-
-        self.logger.info(f"Commentary formatted: {len(document)} chars")
-        return document
-
-    def _get_psalm_verses(self, psalm_number: int) -> Dict[int, Dict[str, str]]:
-        """
-        Get all verses for a psalm from database.
-
-        English text is already cleaned of Sefaria footnotes when downloaded
-        from the API (via strip_sefaria_footnotes in sefaria_client.py).
-
-        Args:
-            psalm_number: Psalm number
-
-        Returns:
-            Dictionary mapping verse number to {'hebrew': ..., 'english': ...}
-        """
-        verses = {}
-
-        try:
-            # Get Psalm from database
-            psalm = self.db.get_psalm(psalm_number)
-
-            if not psalm:
-                self.logger.error(f"Could not retrieve Psalm {psalm_number} from database")
-                return {}
-
-            # Convert to dictionary format
-            for psalm_verse in psalm.verses:
-                verses[psalm_verse.verse] = {
-                    'hebrew': psalm_verse.hebrew,
-                    'english': psalm_verse.english  # Already clean from API fetch
-                }
-
-            self.logger.info(f"Retrieved {len(verses)} verses for Psalm {psalm_number}")
-            return verses
-
-        except Exception as e:
-            self.logger.error(f"Error retrieving verses: {e}")
-            import traceback
-            traceback.print_exc()
-            return {}
-
-    def _parse_verse_commentary(self, verse_commentary: str) -> Dict[int, str]:
-        """
-        Parse verse commentary text into dictionary by verse number.
-
-        Args:
-            verse_commentary: Raw verse commentary markdown
-
-        Returns:
-            Dictionary mapping verse number to commentary text
-        """
-        sections = {}
-
-        # Split by verse markers: Verse N (plain or bold, on its own line or inline)
-        # Matches: "Verse 1", "**Verse 1**", "Verse 1\n"
-        pattern = r'(?:^|\n)(?:\*\*)?Verse (\d+)(?:\*\*)?\s*\n'
-        matches = list(re.finditer(pattern, verse_commentary, re.MULTILINE))
-
-        for i, match in enumerate(matches):
-            verse_num = int(match.group(1))
-            start = match.end()
-
-            # Find end of this verse's commentary (start of next verse or end of text)
-            if i + 1 < len(matches):
-                end = matches[i + 1].start()
-            else:
-                end = len(verse_commentary)
-
-            # Extract commentary text
-            commentary = verse_commentary[start:end].strip()
-
-            # Clean up the commentary text
-            # Remove any trailing separators or extra whitespace
-            commentary = re.sub(r'\s*---\s*$', '', commentary)
-            commentary = commentary.strip()
-
-            sections[verse_num] = commentary
-
-        self.logger.info(f"Parsed {len(sections)} verse commentary sections")
-        return sections
-
-    def format_from_files(
-        self,
-        intro_file: str,
-        verses_file: str,
-        psalm_number: int,
-        output_file: str,
-        apply_divine_names: bool = True,
-        models_used: Optional[Dict[str, str]] = None
-    ) -> None:
-        """
-        Format commentary from separate intro and verse files.
-
-        Args:
-            intro_file: Path to introduction markdown file
-            verses_file: Path to verse commentary markdown file
-            psalm_number: Psalm number
-            output_file: Path to output file
-            apply_divine_names: Whether to apply divine names modifications
-            models_used: Dictionary with model names for each step (optional)
-        """
-        # Read input files
-        with open(intro_file, 'r', encoding='utf-8') as f:
-            introduction = f.read()
-
-        with open(verses_file, 'r', encoding='utf-8') as f:
-            verse_commentary = f.read()
-
-        # Format commentary
-        formatted = self.format_print_ready_commentary(
-            introduction=introduction,
-            verse_commentary=verse_commentary,
-            psalm_number=psalm_number,
-            apply_divine_names=apply_divine_names,
-            models_used=models_used
+        # Assemble the document
+        full_commentary = (
+            header +
+            "---\n" +
+            introduction_section +
+            "---\n" +
+            psalm_text_section +
+            "---\n" +
+            verse_commentary_section +
+            "---\n" +
+            biblio_summary +
+            models_used
         )
 
-        # Write output
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(formatted)
+        self.logger.info("Formatting complete.")
+        return full_commentary
 
-        self.logger.info(f"Print-ready commentary saved to {output_file}")
+    def _format_body_text(self, text: str) -> str:
+        """Applies formatting for body text (intro/commentary) for Word compatibility."""
+        # Normalize line endings to \n
+        normalized_text = text.replace('\r\n', '\n')
+        # Replace any sequence of two or more newlines with a single newline
+        # This converts hard paragraph breaks into soft line breaks for Word.
+        return re.sub(r'\n{2,}', '\n', normalized_text)
+
+    def _format_psalm_text(self, psalm_num: int, psalm_text_data: Dict[int, Dict[str, str]]) -> str:
+        """Formats the full psalm text with Hebrew and English side-by-side."""
+        lines = [f"## Psalm {psalm_num}\n"]
+        for verse_num in sorted(psalm_text_data.keys()):
+            hebrew = psalm_text_data[verse_num].get('hebrew', '')
+            english = psalm_text_data[verse_num].get('english', '')
+            modified_hebrew = self.modifier.modify_text(hebrew)
+            # Use LTR mark and tabs for reliable spacing in Word
+            lines.append(f"{verse_num}. {modified_hebrew}\u200e\t\t{english}")
+        return "\n".join(lines) + "\n\n"
+
+    def _format_bibliographical_summary(self, summary: Dict[str, Any]) -> str:
+        """Creates the 'Methodological & Bibliographical Summary' section."""
+        self.logger.info("Formatting bibliographical summary.")
+        lines = ["## Methodological & Bibliographical Summary\n\n"]
+        
+        # Extracting data with fallbacks
+        verse_count = summary.get('psalm_details', {}).get('verse_count', 'N/A')
+        lines.append(f"- LXX Texts Reviewed: {verse_count}")
+        lines.append(f"- Phonetic Transcriptions Generated: {verse_count}")
+
+        research_summary = summary.get('research_bundle_summary', {})
+        lines.append(f"- Ugaritic Parallels Reviewed: {research_summary.get('ugaritic_parallels', 'N/A')}")
+        lines.append(f"- Lexicon Entries (BDB/Klein) Reviewed: {research_summary.get('lexicon_entries', 'N/A')}")
+        
+        commentaries = research_summary.get('commentary_entries_by_commentator', {})
+        if commentaries:
+            commentary_lines = []
+            for commentator, count in commentaries.items():
+                commentary_lines.append(f"{commentator} ({count})")
+            lines.append(f"- Traditional Commentaries Reviewed: {research_summary.get('commentary_entries', 0)} ({'; '.join(commentary_lines)})")
+        else:
+            lines.append(f"- Traditional Commentaries Reviewed: {research_summary.get('commentary_entries', 'N/A')}")
+
+        lines.append(f"- Concordance Entries Reviewed: {research_summary.get('concordance_results', 'N/A')}")
+        lines.append(f"- Figurative Language Instances Reviewed: {research_summary.get('figurative_instances', 'N/A')}")
+
+        master_editor_stats = summary.get('master_editor_stats', {})
+        prompt_chars = master_editor_stats.get('prompt_chars', 'N/A')
+        if isinstance(prompt_chars, int):
+            lines.append(f"- Master Editor Prompt Size: {prompt_chars:,} characters")
+        else:
+            lines.append(f"- Master Editor Prompt Size: {prompt_chars} characters")
+
+        return "\n".join(lines) + "\n\n"
+
+    def _format_models_used(self, summary: Dict[str, Any]) -> str:
+        """Creates the 'Models Used' section."""
+        self.logger.info("Formatting 'Models Used' section.")
+        lines = ["## Models Used"]
+        models = summary.get('model_usage', {})
+        if not models:
+            # Fallback to a default if model_usage is not in summary
+            lines.append("This commentary was generated using:")
+            lines.append(f"**Structural Analysis (Macro)**: Claude Sonnet 4.5")
+            lines.append(f"**Verse Discovery (Micro)**: Claude Sonnet 4.5")
+            lines.append(f"**Commentary Synthesis**: Claude Sonnet 4.5")
+            lines.append(f"**Editorial Review**: GPT-5")
+            return "\n".join(lines) + "\n"
+
+        for model, usage in models.items():
+            lines.append(f"- {model}: {usage.get('count', 0)} calls")
+        return "\n".join(lines) + "\n"
 
 
 def main():
     """Command-line interface for commentary formatter."""
     import argparse
+    from src.data_sources.tanakh_database import TanakhDatabase
 
     # Ensure UTF-8 for Hebrew output
     if sys.platform == 'win32':
         sys.stdout.reconfigure(encoding='utf-8')
 
-    parser = argparse.ArgumentParser(
-        description='Format Psalm commentary with verse text and divine names modifications'
-    )
-    parser.add_argument('--intro', type=str, required=True,
-                       help='Path to introduction markdown file')
-    parser.add_argument('--verses', type=str, required=True,
-                       help='Path to verse commentary markdown file')
-    parser.add_argument('--psalm', type=int, required=True,
-                       help='Psalm number')
-    parser.add_argument('--output', type=str, required=True,
-                       help='Path to output file')
-    parser.add_argument('--no-divine-names', action='store_true',
-                       help='Skip divine names modifications')
-    parser.add_argument('--db', type=str, default=None,
-                       help='Path to Tanakh database (optional)')
-
+    parser = argparse.ArgumentParser(description="Generate a print-ready commentary file.")
+    parser.add_argument('--psalm', type=int, required=True, help="Psalm number")
+    parser.add_argument('--intro', type=str, required=True, help="Path to the edited introduction markdown file.")
+    parser.add_argument('--verses', type=str, required=True, help="Path to the edited verse-by-verse commentary markdown file.")
+    parser.add_argument('--summary', type=str, required=True, help="Path to the pipeline_summary.json file.")
+    parser.add_argument('--output', type=str, required=True, help="Path for the output print-ready markdown file.")
+    parser.add_argument('--db-path', type=str, default='database/tanakh.db', help="Path to Tanakh database. (Default: database/tanakh.db)")
     args = parser.parse_args()
+    
+    logger = get_logger("formatter_cli")
 
     try:
-        formatter = CommentaryFormatter(db_path=args.db)
+        # Load input files
+        logger.info(f"Loading introduction from: {args.intro}")
+        intro_text = Path(args.intro).read_text('utf-8')
 
-        print("=" * 80)
-        print("COMMENTARY FORMATTER")
-        print("=" * 80)
-        print()
-        print(f"Psalm Number: {args.psalm}")
-        print(f"Introduction: {args.intro}")
-        print(f"Verses:       {args.verses}")
-        print(f"Output:       {args.output}")
-        print(f"Divine Names: {'Modified' if not args.no_divine_names else 'Original'}")
-        print()
-        print("Formatting...")
+        logger.info(f"Loading verse commentary from: {args.verses}")
+        verses_text = Path(args.verses).read_text('utf-8')
 
-        # Create a default models_used dictionary for standalone execution
-        # This ensures the correct formatting path is taken.
-        default_models = {
-            'macro': 'Claude Sonnet 4.5',
-            'micro': 'Claude Sonnet 4.5',
-            'synthesis': 'Claude Sonnet 4.5',
-            'editor': 'GPT-5'
-        }
+        logger.info(f"Loading summary from: {args.summary}")
+        summary_data = json.loads(Path(args.summary).read_text('utf-8'))
 
-        formatter.format_from_files(
-            intro_file=args.intro,
-            verses_file=args.verses,
-            psalm_number=args.psalm,
-            output_file=args.output,
-            apply_divine_names=not args.no_divine_names,
-            models_used=default_models
+        logger.info("Fetching psalm text from database...")
+        db = TanakhDatabase(Path(args.db_path))
+        psalm_data = db.get_psalm(args.psalm)
+        if not psalm_data:
+            raise FileNotFoundError(f"Psalm {args.psalm} not found in database.")
+
+        psalm_text_data = {v.verse: {'hebrew': v.hebrew, 'english': v.english} for v in psalm_data.verses}
+
+        # Format the commentary
+        formatter = CommentaryFormatter(logger)
+        formatted_commentary = formatter.format_commentary(
+            psalm_num=args.psalm,
+            intro_text=intro_text,
+            verses_text=verses_text,
+            summary_data=summary_data,
+            psalm_text_data=psalm_text_data
         )
 
-        print()
-        print("=" * 80)
-        print(f"COMPLETE! Print-ready commentary saved to:")
-        print(f"  {args.output}")
-        print("=" * 80)
+        # Save the output
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        # Apply divine names modifications to the final document
+        final_output = formatter.modifier.modify_text(formatted_commentary)
+        output_path.write_text(final_output, encoding='utf-8')
+        logger.info(f"Successfully created print-ready file: {output_path}")
 
         return 0
 
+    except FileNotFoundError as e:
+        logger.error(f"Input file not found: {e}")
+        return 1
+    except json.JSONDecodeError as e:
+        logger.error(f"Error parsing summary JSON file: {e}")
+        return 1
     except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
+        logger.error(f"An unexpected error occurred: {e}")
         import traceback
         traceback.print_exc()
         return 1
