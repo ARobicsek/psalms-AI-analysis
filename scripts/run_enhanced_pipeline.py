@@ -401,14 +401,12 @@ def run_enhanced_pipeline(
         print(f"STEP 5: Print-Ready Formatting")
         print(f"{'='*80}\n")
 
-        # Call the print-ready script with master-edited files
-        # Note: The script expects files named psalm_NNN_synthesis_intro.md and psalm_NNN_synthesis_verses.md
-        # So we need to temporarily rename our edited files or modify the formatter call
-
         # Direct Python call instead of subprocess to avoid file naming issues
         from src.utils.commentary_formatter import CommentaryFormatter
 
         formatter = CommentaryFormatter(logger=logger)
+
+        # Determine which model names to use for the footer
 
         # Create models_used dictionary
         models_used = {
@@ -420,8 +418,12 @@ def run_enhanced_pipeline(
 
         try:
             formatter.format_from_files(
-                intro_file=str(edited_intro_file),
-                verses_file=str(edited_verses_file),
+                intro_file=str(edited_intro_file)
+                if not skip_master_edit and edited_intro_file.exists()
+                else str(synthesis_intro_file),
+                verses_file=str(edited_verses_file)
+                if not skip_master_edit and edited_verses_file.exists()
+                else str(synthesis_verses_file),
                 psalm_number=psalm_number,
                 output_file=str(print_ready_file),
                 apply_divine_names=True,

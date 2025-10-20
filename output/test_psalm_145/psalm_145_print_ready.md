@@ -1,196 +1,187 @@
 # Commentary on Psalm 145
 ---
 ## Psalm Text
-1. תְּהִלָּ֗ה לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣ אֱלוֹקַ֣י הַמֶּ֑לֶךְ וַאֲבָרְכָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃   A song of praise. Of David.
+1. תְּהִלָּ֗ה לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣ אֱלוֹקַ֣י הַמֶּ֑לֶךְ וַאֲבָרְכָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃   ‎		A song of praise. Of David.
 I will extol You, my God and king,
 and bless Your name forever and ever.
-2. בְּכׇל־י֥וֹם אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃   Every day will I bless You
+2. בְּכׇל־י֥וֹם אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃   ‎		Every day will I bless You
 and praise Your name forever and ever.
-3. גָּ֘ד֤וֹל ה׳ וּמְהֻלָּ֣ל מְאֹ֑ד וְ֝לִגְדֻלָּת֗וֹ אֵ֣ין חֵֽקֶר׃   Great is the LORD and much acclaimed;
+3. גָּ֘ד֤וֹל ה׳ וּמְהֻלָּ֣ל מְאֹ֑ד וְ֝לִגְדֻלָּת֗וֹ אֵ֣ין חֵֽקֶר׃   ‎		Great is the LORD and much acclaimed;
 His greatness cannot be fathomed.
-4. דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ וּגְב֖וּרֹתֶ֣יךָ יַגִּֽידוּ׃   One generation shall laud Your works to another
+4. דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ וּגְב֖וּרֹתֶ֣יךָ יַגִּֽידוּ׃   ‎		One generation shall laud Your works to another
 and declare Your mighty acts.
-5. הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ וְדִבְרֵ֖י נִפְלְאֹתֶ֣יךָ אָשִֽׂיחָה׃   The glorious majesty of Your splendor
+5. הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ וְדִבְרֵ֖י נִפְלְאֹתֶ֣יךָ אָשִֽׂיחָה׃   ‎		The glorious majesty of Your splendor
 and Your wondrous acts-a will I recite.
-6. וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ (וגדלותיך) [וּגְדֻלָּתְךָ֥] אֲסַפְּרֶֽנָּה׃   Men shall talk of the might of Your awesome deeds,
+6. וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ (וגדלותיך) [וּגְדֻלָּתְךָ֥] אֲסַפְּרֶֽנָּה׃   ‎		Men shall talk of the might of Your awesome deeds,
 and I will recount Your greatness.
-7. זֵ֣כֶר רַב־טוּבְךָ֣ יַבִּ֑יעוּ וְצִדְקָתְךָ֥ יְרַנֵּֽנוּ׃   They shall celebrate Your abundant goodness,
+7. זֵ֣כֶר רַב־טוּבְךָ֣ יַבִּ֑יעוּ וְצִדְקָתְךָ֥ יְרַנֵּֽנוּ׃   ‎		They shall celebrate Your abundant goodness,
 and sing joyously of Your beneficence.
-8. חַנּ֣וּן וְרַח֣וּם ה׳ אֶ֥רֶךְ אַ֝פַּ֗יִם וּגְדׇל־חָֽסֶד׃   The LORD is gracious and compassionate,
+8. חַנּ֣וּן וְרַח֣וּם ה׳ אֶ֥רֶךְ אַ֝פַּ֗יִם וּגְדׇל־חָֽסֶד׃   ‎		The LORD is gracious and compassionate,
 slow to anger and abounding in kindness.
-9. טוֹב־ה׳ לַכֹּ֑ל וְ֝רַחֲמָ֗יו עַל־כׇּל־מַעֲשָֽׂיו׃   The LORD is good to all,
+9. טוֹב־ה׳ לַכֹּ֑ל וְ֝רַחֲמָ֗יו עַל־כׇּל־מַעֲשָֽׂיו׃   ‎		The LORD is good to all,
 and His mercy is upon all His works.
-10. יוֹד֣וּךָ ה׳ כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ יְבָרְכֽוּכָה׃   All Your works shall praise You, O LORD,
+10. יוֹד֣וּךָ ה׳ כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ יְבָרְכֽוּכָה׃   ‎		All Your works shall praise You, O LORD,
 and Your faithful ones shall bless You.
-11. כְּב֣וֹד מַלְכוּתְךָ֣ יֹאמֵ֑רוּ וּגְבוּרָתְךָ֥ יְדַבֵּֽרוּ׃   They shall talk of the majesty of Your kingship,
+11. כְּב֣וֹד מַלְכוּתְךָ֣ יֹאמֵ֑רוּ וּגְבוּרָתְךָ֥ יְדַבֵּֽרוּ׃   ‎		They shall talk of the majesty of Your kingship,
 and speak of Your might,
-12. לְהוֹדִ֤יעַ ׀ לִבְנֵ֣י הָ֭אָדָם גְּבוּרֹתָ֑יו וּ֝כְב֗וֹד הֲדַ֣ר מַלְכוּתֽוֹ׃   to make His mighty acts known among men
+12. לְהוֹדִ֤יעַ ׀ לִבְנֵ֣י הָ֭אָדָם גְּבוּרֹתָ֑יו וּ֝כְב֗וֹד הֲדַ֣ר מַלְכוּתֽוֹ׃   ‎		to make His mighty acts known among men
 and the majestic glory of His kingship.
-13. מַֽלְכוּתְךָ֗ מַלְכ֥וּת כׇּל־עֹלָמִ֑ים וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר וָדֹֽר׃   Your kingship is an eternal kingship;
+13. מַֽלְכוּתְךָ֗ מַלְכ֥וּת כׇּל־עֹלָמִ֑ים וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר וָדֹֽר׃   ‎		Your kingship is an eternal kingship;
 Your dominion is for all generations.
-14. סוֹמֵ֣ךְ ה׳ לְכׇל־הַנֹּפְלִ֑ים וְ֝זוֹקֵ֗ף לְכׇל־הַכְּפוּפִֽים׃   The LORD supports all who stumble,
+14. סוֹמֵ֣ךְ ה׳ לְכׇל־הַנֹּפְלִ֑ים וְ֝זוֹקֵ֗ף לְכׇל־הַכְּפוּפִֽים׃   ‎		The LORD supports all who stumble,
 and makes all who are bent stand straight.
-15. עֵֽינֵי־כֹ֭ל אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ וְאַתָּ֤ה נֽוֹתֵן־לָהֶ֖ם אֶת־אׇכְלָ֣ם בְּעִתּֽוֹ׃   The eyes of all look to You expectantly,
+15. עֵֽינֵי־כֹ֭ל אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ וְאַתָּ֤ה נֽוֹתֵן־לָהֶ֖ם אֶת־אׇכְלָ֣ם בְּעִתּֽוֹ׃   ‎		The eyes of all look to You expectantly,
 and You give them their food when it is due.
-16. פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י רָצֽוֹן׃   You give it openhandedly,
+16. פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י רָצֽוֹן׃   ‎		You give it openhandedly,
 feeding every creature to its heart’s content.
-17. צַדִּ֣יק ה׳ בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃   The LORD is beneficent in all His ways
+17. צַדִּ֣יק ה׳ בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃   ‎		The LORD is beneficent in all His ways
 and faithful in all His works.
-18. קָר֣וֹב ה׳ לְכׇל־קֹרְאָ֑יו לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃   The LORD is near to all who call Him,
+18. קָר֣וֹב ה׳ לְכׇל־קֹרְאָ֑יו לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃   ‎		The LORD is near to all who call Him,
 to all who call Him with sincerity.
-19. רְצוֹן־יְרֵאָ֥יו יַעֲשֶׂ֑ה וְֽאֶת־שַׁוְעָתָ֥ם יִ֝שְׁמַ֗ע וְיוֹשִׁיעֵֽם׃   He fulfills the wishes of those who fear Him;
+19. רְצוֹן־יְרֵאָ֥יו יַעֲשֶׂ֑ה וְֽאֶת־שַׁוְעָתָ֥ם יִ֝שְׁמַ֗ע וְיוֹשִׁיעֵֽם׃   ‎		He fulfills the wishes of those who fear Him;
 He hears their cry and delivers them.
-20. שׁוֹמֵ֣ר ה׳ אֶת־כׇּל־אֹהֲבָ֑יו וְאֵ֖ת כׇּל־הָרְשָׁעִ֣ים יַשְׁמִֽיד׃   The LORD watches over all who love Him,
+20. שׁוֹמֵ֣ר ה׳ אֶת־כׇּל־אֹהֲבָ֑יו וְאֵ֖ת כׇּל־הָרְשָׁעִ֣ים יַשְׁמִֽיד׃   ‎		The LORD watches over all who love Him,
 but all the wicked He will destroy.
-21. תְּהִלַּ֥ת ה׳ יְֽדַבֶּ֫ר־פִּ֥י וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ {פ}   My mouth shall utter the praise of the LORD,
+21. תְּהִלַּ֥ת ה׳ יְֽדַבֶּ֫ר־פִּ֥י וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ {פ}   ‎		My mouth shall utter the praise of the LORD,
 and all creatures shall bless His holy name forever and ever.
 ---
 ## Introduction
-Psalm 145 is the only psalm in the Psalter whose superscription is Tehillah—“a praise.” That singular label does not deny that the other poems praise God; rather, it suggests that this acrostic hymn is a worked exemplar of praise—an A‑to‑Z of how Israel names God’s greatness and lives into it. Its artistry is not ornament. The poem’s alphabetic scaffolding orders the movement from an “I” that vows daily blessing (vv. 1–2), to a “they” that hands on testimony (vv. 4–7), to “all” creation which receives and returns God’s bounty (vv. 9–10, 15–21). The poem is, in short, pedagogy: it trains the tongue, and through the tongue the heart.
-
-The acrostic is complete save for the nun line. Ancient Greek translators, perhaps uneasy with the gap, supplied a line after v. 13: “Faithful is the LORD in his words and holy in all his works.” The Masoretic Text leaves the acrostic imperfect. That imperfection, read literarily, fits the psalm’s own confession: “His greatness—there is no searching it” (v. 3). A rosary of letters cannot exhaust the divine. Whether the gap reflects transmission history or design, the received Hebrew form gives the stanza’s cadence a subtle hitch: completeness stretched by what exceeds it.
-
-Two hinge features govern the poem’s thought. First is a creed: “Gracious and compassionate is the LORD, slow to anger and abundant in steadfast love” (v. 8). Drawn from Exodus 34:6, this fourfold formula is Israel’s center of gravity; here it forms the heart of the acrostic (ח), the pivot from God’s unsearchable greatness (vv. 1–7) to God’s broad goodness and near care (vv. 9–21). Second is a refrain of expansiveness marked by kol, “all”: “The LORD is good to all” (v. 9), “His compassion is over all his works” (v. 9), “All your works shall thank you” (v. 10), “all who are falling,” “all who are bowed down” (v. 14), “the eyes of all” (v. 15), “every living thing” (v. 16), “in all his ways…in all his works” (v. 17), “to all who call…all who call in truth” (v. 18), “the desire of those who fear him,” “all who love him,” “all the wicked” (vv. 19–20), and finally “all flesh” (v. 21). The poem’s rhetoric of “all” is not bland universality; it is carefully contoured by “truth” (v. 18), “fear” and “love” (vv. 19–20), and the reality of judgment (v. 20). But its scope is unmistakably wide.
-
-Psalm 145 resolves a tension often caricatured: if God is King, must divine sovereignty be displayed as domination? Verses 11–13 stack royal vocabulary—“glory of your kingdom,” “the majestic glory of his kingdom,” “your kingdom is a kingdom of all ages; your dominion in every generation.” Such formulae draw on shared royal idiom in Israel’s world, where divine reign is celebrated by permanence and reach. The psalm appropriates that idiom but redefines its content. The true King is recognized not by violence, but by nearness and providence. Immediately after the kingship stanza comes the turn: “The LORD supports all who are falling and straightens all who are bent” (v. 14); “The eyes of all look to you…and you open your hand and satisfy the desire of every living thing” (vv. 15–16). The gesture that sums divine rule is an opened hand, not a clenched fist.
-
-Those two images—supporting the falling and opening the hand—concentrate biblical idioms that are worth hearing in their larger register. “Falling” (נפל) is a common Hebrew verb for collapse, defeat, and death. Its use here (v. 14) belongs to a pattern in which God’s care meets creatures in their low estate (cf. Ps 146:8; the idiom “face fell” for dejection in Gen 4:5–6). The “opened hand” in v. 16 draws on the Deuteronomic ethic: “You shall open, yes open your hand to the poor” (Deut 15:8; see also 15:11). Psalm 104:28 already applied that idiom to God—“You open your hand; they are satisfied with good”—and Psalm 145 renews it. Israel’s social instruction is not a mere humanism; it mirrors divine practice.
-
-The poem’s figuration of praise is equally tactile. In v. 7 the verb נבע (“to bubble up, gush”) describes speech as a spring: “They will cause the remembrance of your abundant goodness to gush forth.” Elsewhere this same verb depicts creation’s wordless proclamation (Ps 19:3: “Day to day pours forth speech”), a sage’s instruction (Ps 78:2), or the wicked’s insolence (Ps 94:4). The metaphor is chosen to insist that praise is not a performance but an artesian response: what God pours out returns in kind.
-
-Finally, the psalm’s end makes explicit what its beginning only intimated. It starts in the first person—“I will extol… I will bless”—and closes with a wide summons: “Let all flesh bless his holy name forever and ever” (v. 21). “All flesh” is a deliberately capacious phrase; it gathers not only Israel or “sons of man” (v. 12) but the living order. The logic is consistent: if “his compassion is over all his works” (v. 9), then “all his works” answer in thanksgiving (v. 10), “the eyes of all” wait (v. 15), and “all flesh” blesses (v. 21). The psalm thus teaches not only what to say about God, but how the saying enlarges the speaker, drawing the solitary voice into a chorus. It is indeed a praise—singular—composed to make many.
+Psalm 145 is the sole psalm titled “tehillah”—a praise—though the collection as a whole is called Tehillim. That singular label invites the reader to consider this poem as a crafted summa of praise: not an anthology of topics, but a systematic enactment of praise as speech, memory, and communal practice. The structure itself becomes part of the theology. The poem is an alphabetic acrostic (one verse for each Hebrew letter), a device that belongs to wisdom’s pedagogy and to liturgical ordering. Here, the acrostic does double duty. It trains the mouth—“my mouth shall speak” (v.21)—to traverse the A–Z of praise, and it signals wholeness: from aleph to tav, God’s reign and care encompass all.
+The acrostic is almost complete. The nun-verse is absent from the received Hebrew text (between vv.13 and 14); the ancient Greek (LXX) supplies a line—“Faithful is the LORD in all his words and holy in all his works”—and that line appears in some medieval Hebrew manuscripts and in Jewish liturgy (Ashrei). Whether the nun dropped out or was never written is unprovable; the point is what the poem does with the near-completeness we have. The poem builds a totality of praise through many other devices: an inclusio frames the whole with “forever and ever” (vv.1–2, 21); the refrain of “all” (kol) proliferates across the second half (vv.9–10, 13–16, 20–21); and the voice moves from “I” to “they” to “all flesh.” The acrostic is not a decoration but a scaffold for a comprehensive argument: praise begins as personal vow and overflows into communal witness and universal blessing.
+The psalm’s outline is clear. Verses 1–3 vow daily, lifelong praise and confess God’s unsearchable greatness. Verses 4–7 envision the transmission of that confession “generation to generation,” through acts of recollection and instruction: works and mighty deeds recited, “wonders” meditated upon, praise that “gushes forth.” At the center (v.8) stands the fourfold mercy formula (“gracious and compassionate… slow to anger… abounding in steadfast love”), the classic confession from Exodus 34:6. That line functions as the psalm’s theological hinge. The poem does not merely celebrate divine might; it insists that God’s character—mercy, patience, loyalty—grounds the totality of praise.
+From there the poem expands. Verses 9–13 stretch compassion beyond Israel: “good to all” and “mercies over all his works” (v.9). The royal vocabulary then comes to the fore (vv.10–13): “glory of your kingdom” (kavod malkhutekha), “your dominion” (mimshaltkha), “a kingdom of all ages.” The formula “your kingdom is a kingdom of all ages, and your dominion in every generation” (v.13) resonates with Ancient Near Eastern royal idioms (Ugaritic texts speak of mlk ʿlm, an “eternal king”), yet Psalm 145 uses that language to do two distinct things. First, it reframes royal power as divine, not human, authority: the LORD’s reign extends through time (all ages) and through the succession of human history (“generation and generation”). Second—and here the poem parts company with ancient claims of kingship—the rhetoric pivots immediately to care for the vulnerable.
+Verses 14–16 move from throne to hand. The King “supports all who fall” and “straightens all who are bent” (v.14), the “eyes of all” look toward him in hope (v.15), and he “opens [his] hand” to satisfy every living thing (v.16). These are not generalized pieties. Each image is part of a scriptural lexicon. “Falling” and being lifted (נפל/זקף) recur in contexts of human frailty and divine help (e.g., Ps 37:24; 146:8). “Eyes of all” as a figure for creaturely dependence is a staple of creation praise (Ps 104:27; cf. Ps 123:2). And the “open hand” is a covenantal idiom for generosity in Deuteronomy (15:8, 11), daringly applied here to God himself (cf. Ps 104:28). Psalm 145 gathers these figures into royal theology: true sovereignty is not distance but provision, not extraction but gift.
+The closing section (vv.17–20) tightens the moral lines. God is “righteous in all his ways and faithful/holy [ḥasid] in all his works” (v.17). Nearness is offered “to all who call… in truth” (v.18); God fulfills desire, hears the cry, saves (v.19). Then the psalm articulates judgment without apology: “The LORD guards all who love him, but all the wicked he will destroy” (v.20). The earlier universal mercy (v.9) is not undone; it is focused. There is a distinction between general providence (“good to all”) and protective governance (“guards all who love”). The poem moves through a series of relational terms—those who call (v.18), who fear (v.19), who love (v.20)—that mark degrees of response to the offered nearness. Universal generosity does not mean moral indifference.
+Finally, the psalm closes with a miniature of its entire movement (v.21): “My mouth shall speak the praise of the LORD; and let all flesh bless his holy name forever and ever.” The private vow becomes a universal summons. “All flesh” (cf. Ps 65:3; Isa 40:5) signals creation-wide worship, and “holy name” remembers that divine nearness does not cancel divine otherness. Praise, here, is not mere emotion but a craft of memory and speech, an intergenerational discipline that reforms political imagination: the world belongs to a King whose eternal reign takes visible form in an open hand.
 ## Verse-by-Verse Commentary
 ### Verse 1
-תְּהִלָּ֗ה לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣ אֱלוֹקַ֣י הַמֶּ֑לֶךְ וַאֲבָרְכָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃
-A song of praise. Of David.
+תְּהִלָּ֗ה לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣ אֱלוֹקַ֣י הַמֶּ֑לֶךְ וַאֲבָרְכָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃   ‎		A song of praise. Of David.
 I will extol You, my God and king,
 and bless Your name forever and ever.
-“Tehillah. Of David. I will exalt you, my God the King, and I will bless your name forever and ever.” The rare superscription “Tehillah” marks this psalm as an exemplar of praise. The pairing “my God the King” holds together intimacy and sovereignty. The first person verbs (“I will exalt,” “I will bless”) are in the imperfect, indicating an ongoing vow, and are framed by the temporal merism “forever and ever,” a formula that recurs (vv. 1–2; v. 21) to bind opening and close (an inclusio). The psalm’s acrostic form (each line beginning with successive letters) already signals a program of comprehensiveness; the vow is not ambient devotion but disciplined speech. The address “my God the King” sets the psalm’s paradox from the start: the King is “my God,” not a remote polity. This fusion structures the rest: the “I” becomes “they,” and “they” becomes “all flesh.” That expansion is grounded in v. 1’s claim that even eternal praise begins as a daily, voiced act (cf. v. 2).
+Tehillah leDavid signals an intentional genre: a “praise” that instructs in praise. The vow “I will exalt you” uses the intensive stem of r-w-m (Polel; BDB rûm), a verb of “height,” here transposed into liturgical elevation. The address “my God, the King” (Elohai hamelekh) joins intimacy (“my God”) and sovereignty (“the King”). The coupling sets the psalm’s horizon: devotion within kingship.
+The temporal phrase “forever and ever” (lə‘olam va‘ed) forms part of the psalm’s frame (cf. v.2; v.21) and belongs to the stock of covenantal permanence. The syntax itself enacts praise’s shape: an “I” that binds itself to a daily, lifelong regimen and thereby opens outward to a wider assembly (vv.3–7) and eventually to “all flesh” (v.21). The title’s singularity—only here is a psalm titled tehillah—accompanies the poem’s acrostic form: praise is learned, letter by letter, vow by vow.
+Literarily, the first line is already a micro-parallelism: “I will exalt… and I will bless… forever and ever.” The second colon (“bless your name”) shifts from the transcendence of exaltation to the concreteness of the Name—God known by his deeds and ways. In biblical idiom, to “bless” God is to acknowledge the source of blessing; speaking the Name becomes the authorized mode of that acknowledgment.
 ---
 ### Verse 2
-בְּכׇל־י֥וֹם אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃
-Every day will I bless You
+בְּכׇל־י֥וֹם אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃   ‎		Every day will I bless You
 and praise Your name forever and ever.
-“Every day I will bless you, and I will praise your name forever and ever.” The movement from eternity (v. 1) to the diurnal (“every day”) in v. 2 makes an important point: the eternal scope is realized in habitual practice. The verbs distinguish spheres: to “bless” God often means to acknowledge and thank for concrete benefactions; to “praise” the Name is to publish God’s character and reputation. The coordination of daily blessing with eternal praise renders time porous: ordinary days participate in the “forever.” The repeated “forever and ever” pairs with the later “in every generation” (v. 13) to stretch the poem’s temporal field from the present worshiper through posterity.
+“Every day” (bəkhol-yom) compresses eternity into habit. The psalm insists that the eternal scope (“forever and ever”) does not dissolve the daily; rather, the daily makes the eternal credible. The paired verbs (“I will bless… and I will praise”) exhibit synonymous parallelism—the second colon restates and slightly enlarges the first. The repetition of “forever and ever” is not padding. It forms a rhetorical ladder: eternity vowed (v.1), practiced daily (v.2), consummated universally (v.21).
+The verb hillel (“to praise”) carries, in its Pi‘el, the connotation of celebratory acclamation; BDB notes the root’s association with brightness or loud rejoicing. Coupled with b-r-k (“to bless”), the verse sketches praise’s two axes: acknowledgment (blessing the divine Name) and lauding (praising the divine acts). The effect is to bind time (every day) to theology (forever), making praise a performed confession rather than sporadic enthusiasm.
 ---
 ### Verse 3
-גָּ֘ד֤וֹל ה׳ וּמְהֻלָּ֣ל מְאֹ֑ד וְ֝לִגְדֻלָּת֗וֹ אֵ֣ין חֵֽקֶר׃
-Great is the LORD and much acclaimed;
+גָּ֘ד֤וֹל ה׳ וּמְהֻלָּ֣ל מְאֹ֑ד וְ֝לִגְדֻלָּת֗וֹ אֵ֣ין חֵֽקֶר׃   ‎		Great is the LORD and much acclaimed;
 His greatness cannot be fathomed.
-“Great is the LORD and greatly to be praised; and his greatness—there is no searching it.” The first explicit theological statement in the third person signals the public, proverbial status of what follows. The Pual participle “is praised” suggests an ongoing, communal action owed to God. “No searching” (אין חקר) is a wisdom idiom (cf. Job 5:9; 9:10; Isa 40:28) acknowledging the horizon of human knowledge. The acrostic’s attempt at comprehensiveness thus opens by confessing its own insufficiency. The verse doublets divine greatness and appropriate human response: because his greatness is unsearchable, praise must be continual and communal. Psalm 145 will enact that through its alphabetic form and its expansion from “I” to “all.”
+“Great is the LORD and highly praised; and of his greatness there is no searching.” The shift to third person (“the LORD,” YHWH) broadens the audience; testimony replaces prayer. The last colon introduces a crucial theme: God’s “greatness” (gedullah) outruns inquiry (ḥēqer; cf. Job 5:9; 9:10; Isa 40:28). That limits knowledge, not praise: confession proceeds by recounting God’s works and ways, not by claiming access to essence. The Pual participle mĕhulal (“praised”) expresses a standing reality: God is always already the object of praise. The line’s parallelism is progressive: A is so (“great is YHWH”), and what’s more, B (“his greatness is unfathomable”).
 ---
 ### Verse 4
-דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ וּגְב֖וּרֹתֶ֣יךָ יַגִּֽידוּ׃
-One generation shall laud Your works to another
+דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ וּגְב֖וּרֹתֶ֣יךָ יַגִּֽידוּ׃   ‎		One generation shall laud Your works to another
 and declare Your mighty acts.
-“One generation shall commend your works to another, and your mighty acts they shall declare.” The refrain דּוֹר לְדוֹר (“generation to generation”) names the vehicle of continuity. The paired verbs—“commend/praise” (שבח) and “declare” (נגד)—suggest liturgical testimony and didactic proclamation. “Works” (מעשים) are broad; “mighty acts” (גבורות) are concentrated interventions (creation, deliverance). The verse sketches the psalm’s pedagogy: praise is not only upward address but horizontal transmission. That transmission will culminate at the other horizon—beyond Israel’s generations to “all flesh” (v. 21).
+“Generation to generation shall praise your works, and they shall declare your mighty acts.” The central terms—“works” (ma‘asim) and “mighty acts” (gevurot)—span creation and history (BDB: ma‘aseh for making; gevurah for acts of power, often salvific). The verbs pair spontaneous acclamation (yĕshabbah) with formal proclamation (yaggidu, from n-g-d, “to declare”). The line is pedagogy in miniature: testimony is both exuberant and ordered; it passes from lip to lip, generation to generation. The psalm’s own acrostic serves that transmission: it gives the generations a mnemonic architecture for praise.
 ---
 ### Verse 5
-הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ וְדִבְרֵ֖י נִפְלְאֹתֶ֣יךָ אָשִֽׂיחָה׃
-The glorious majesty of Your splendor
+הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ וְדִבְרֵ֖י נִפְלְאֹתֶ֣יךָ אָשִֽׂיחָה׃   ‎		The glorious majesty of Your splendor
 and Your wondrous acts-a will I recite.
-“On the splendor of the glory of your majesty I will meditate, and on the words of your wonders.” The triple construct הֲדַר כְּבוֹד הוֹדֶךָ (“splendor of the glory of your majesty”) stacks near-synonyms to intensify radiance: hadar (ornamented splendor), kavod (weighty presence), and hod (brilliance). The effect is cumulative: not mere superlatives but facets of manifest dignity. The first person returns with אָשִׂיחָה (“I will meditate/speak”), a verb that elsewhere ranges from complaint to musing (cf. Ps 77:4; 119:15). Here it signals sustained, reflective attention before exuberant proclamation (vv. 6–7). “Words of your wonders” suggests that God’s extraordinary acts (נפלאות) communicate; they are not mute events but deeds that say. The psalm will treat praise as a practiced attentiveness to what divine action means.
+“The splendor of the glory of your majesty, and the words of your wonders I will muse/recite.” The triple stack—hadar, kavod, hod—is rare in its density. Hadar evokes ornamental beauty; kavod suggests “weight” or substantial dignity; hod is royal radiance. Together they press language to its limit to gesture toward the visually overwhelming aspect of rule. The second colon pivots to “wonders” (nifla’ot; BDB palaʾ), the technical term for extraordinary acts of God (Ex 15:11; Ps 78:11). The verb siakh (“to muse, to speak”) can denote inward meditation that issues in speech. The turn is psychologically and theologically apt: faced with inexpressible majesty, the psalmist retreats to recite concrete deeds. Theology proceeds by particularities.
+A note on diction: Psalm 96:6 links “splendor and majesty are before him” (hod v’hadar), and Psalm 29:4 places kavod (glory) with divine voice and power. Psalm 145 fuses this triad, and then immediately grounds it in narrated wonders—a characteristic move of biblical praise.
 ---
 ### Verse 6
-וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ (וגדלותיך) [וּגְדֻלָּתְךָ֥] אֲסַפְּרֶֽנָּה׃
-Men shall talk of the might of Your awesome deeds,
+וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ (וגדלותיך) [וּגְדֻלָּתְךָ֥] אֲסַפְּרֶֽנָּה׃   ‎		Men shall talk of the might of Your awesome deeds,
 and I will recount Your greatness.
-“People will speak of the might of your awesome deeds, and I will recount your greatness.” The stanza alternates communal “they will say” with personal “I will recount,” modeling how public speech and individual testimony reinforce one another. עֱזוּז (“might”) is a rare intensive for strength, paired with “awesome deeds” (נוראות)—acts that evoke fear and awe. A Masoretic note preserves a Qere/Ketiv variant on “your greatness,” reminding us that scribes attended closely to this verse’s wording, perhaps precisely because it was used liturgically. The rhetorical motion is from particular terrifying acts to the abiding, less graspable “greatness.” The liturgy does not stop with the spectacular; it interprets deeds back into character.
+“And they shall speak of the might of your fearsome deeds, and I will recount your greatness.” The rare noun ‘ezuz (might) appears here and in Psalm 68:35, both in contexts of divine power. “Fearsome deeds” (nora’ot) adds the dimension of awe to raw strength. The subject shifts to an unnamed “they”—the praising community—then back to “I.” Praise oscillates between assembly and individual. The verb asapper (from s-p-r, “to recount”) often implies orderly narration (cf. Ps 9:1). Praise is not only exclamation; it is also historiography.
+Textual note: the Masoretic text preserves a Ketiv/Qere variation on “your greatness” in the second colon; the LXX reads straightforwardly “your greatness,” reflecting a Vorlage that matched the vocalized tradition. The instability, modest as it is, occurs exactly where attributes of God are at stake, a place scribes tended to handle conservatively.
 ---
 ### Verse 7
-זֵ֣כֶר רַב־טוּבְךָ֣ יַבִּ֑יעוּ וְצִדְקָתְךָ֥ יְרַנֵּֽנוּ׃
-They shall celebrate Your abundant goodness,
+זֵ֣כֶר רַב־טוּבְךָ֣ יַבִּ֑יעוּ וְצִדְקָתְךָ֥ יְרַנֵּֽנוּ׃   ‎		They shall celebrate Your abundant goodness,
 and sing joyously of Your beneficence.
-“They shall bubble forth the remembrance of your abundant goodness, and shall sing aloud of your righteousness.” The verb יַבִּיעוּ (from נבע, “to gush”) is carefully chosen. Elsewhere it marks the world’s wordless proclamation (Ps 19:3: “day to day pours forth speech”), the psalmist’s teaching (Ps 78:2), and even the wicked’s insolence (Ps 94:4). The pattern suggests force and abundance: speech under pressure, as from a spring. Here the remembrance (זכר) of “abundant goodness” (רב־טוב) is the artesian source of praise. The second colon moves from testimony to song: “they will ring out (ירננו) your righteousness.” Righteousness here is not abstract retributive rectitude; in the psalm’s arc it is the integrity by which God’s actions fit God’s character (see vv. 17–20).
+“They shall cause the remembrance of your abundant goodness to gush forth, and they shall sing of your righteousness.” The verb yabbī‘u (Niph. of n-b-ʿ) literally describes water bubbling or gushing from a spring. Applied to speech, it makes testimony a natural outflow (cf. Ps 19:3 “day to day pours forth speech”; 78:2; 94:4; 119:171; Prov 18:4). The subject is striking: “the remembrance of your abundant goodness.” Memory itself, stored in the community, becomes the spring—the tradition is alive enough to overflow.
+The pairing “goodness” (tuv) and “righteousness” (tsedaqah) refuses an opposition between kindness and justice. Psalmic diction often treats tsedaqah as covenantal rightness (e.g., Ps 36:6), and Radak is right to see God’s righteousness as itself good. Here the parallelism works as a compact credal statement: A is so (“abundant goodness” remembered), and what’s more, B (righteousness sung aloud). The line enacts the move from meditation to festival.
 ---
 ### Verse 8
-חַנּ֣וּן וְרַח֣וּם ה׳ אֶ֥רֶךְ אַ֝פַּ֗יִם וּגְדׇל־חָֽסֶד׃
-The LORD is gracious and compassionate,
+חַנּ֣וּן וְרַח֣וּם ה׳ אֶ֥רֶךְ אַ֝פַּ֗יִם וּגְדׇל־חָֽסֶד׃   ‎		The LORD is gracious and compassionate,
 slow to anger and abounding in kindness.
-“Gracious and compassionate is the LORD, slow to anger and abundant in steadfast love.” This is Israel’s creed (Exod 34:6) placed at the acrostic’s heart. The terms carry weight: חנון (unmerited favor), רחום (compassion with visceral freight), אֶרֶךְ אַפַּיִם (“long of nostrils,” i.e., patient), and רב/גדול חסד (abundant covenant loyalty). The verse functions as hinge: it interprets God’s greatness (vv. 1–7) and grounds what follows (vv. 9–21). Because this is who God is, the “all” of v. 9 can be said without embarrassment, and the “nearness” of v. 18 can be trusted. The psalm will also tether this creed to discernment: compassion does not cancel judgment (v. 20).
+“Gracious and compassionate is the LORD, slow to anger and great in steadfast love.” The creedal formula from Exodus 34:6 (see also Ps 86:15; 103:8; Joel 2:13; Jonah 4:2) is placed near the acrostic’s middle, serving as hinge. Ḥannun (“gracious”) denotes unmerited favor; raḥum (“compassionate”) is linked etymologically to rechem (womb), a metaphor of deep, visceral pity. “Slow to anger” literally is “long of nostrils,” a physiological idiom for patience. Ḥesed is notoriously untranslatable: steadfast love, loyal kindness, covenantal devotion. The psalm’s sequence confirms the point: all that follows (vv.9–21) is a commentary on these attributes.
+Placing the Name (YHWH) in this verse anchors these qualities in Israel’s covenant God, not in an abstract deity. The poem will universalize scope (vv.9, 21) without abandoning this particular identity.
 ---
 ### Verse 9
-טוֹב־ה׳ לַכֹּ֑ל וְ֝רַחֲמָ֗יו עַל־כׇּל־מַעֲשָֽׂיו׃
-The LORD is good to all,
+טוֹב־ה׳ לַכֹּ֑ל וְ֝רַחֲמָ֗יו עַל־כׇּל־מַעֲשָֽׂיו׃   ‎		The LORD is good to all,
 and His mercy is upon all His works.
-“Good is the LORD to all, and his compassions are over all his works.” The double kol (“all”) enlarges the scope from covenant Israel to creation. This is not an erasure of particularity but its expansion: the God who revealed himself to Israel is the maker and carer of all creatures. The phrase “over all his works” is comprehensive, reaching beyond humans to the living order. This sets up v. 10’s personified chorus and v. 16’s comprehensive provision. The tension with v. 20 (the wicked) is real; the psalm resolves it not by retracting this universalism, but by distinguishing kinds of divine action (provision to all creatures, responsive nearness to callers, preservative care for lovers, judgment on persistent wickedness).
+“Good is the LORD to all, and his mercies are over all his works.” The double kol (“to all… all his works”) universalizes provision. The plural “mercies” (raḥamim) suggests manifold expressions of compassion. The preposition ‘al (“over”) evokes a protective canopy (cf. Ps 91:4). The expansiveness stands at the threshold of the kingship section (vv.10–13) and prepares the transition from Israel’s creed to creation’s praise. This is one of the psalm’s boldest lines: it refuses to cage God’s kindness within ethnic bounds.
+This verse also sets up a necessary theological distinction for v.20: universal mercy as creative/providential benevolence is not the same as moral protection. The poem will articulate both without contradiction.
 ---
 ### Verse 10
-יוֹד֣וּךָ ה׳ כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ יְבָרְכֽוּכָה׃
-All Your works shall praise You, O LORD,
+יוֹד֣וּךָ ה׳ כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ יְבָרְכֽוּכָה׃   ‎		All Your works shall praise You, O LORD,
 and Your faithful ones shall bless You.
-“All your works shall thank you, O LORD, and your faithful ones shall bless you.” The first colon personifies creation—“works” that “give thanks”—as in Psalm 148 where entities are summoned to praise. The second names the covenant community (חסידים), those bound in and practicing hesed, as engaging in conscious “blessing.” The coordination is deliberate: the world as world is a chorus of thanks; the faithful give the articulate blessing that befits those who know the Name. The two lines also mirror the psalm’s two “alls”: the created order (vv. 9–10, 15–16, 21) and the moral community (vv. 18–20).
+“All your works shall give you thanks, O LORD; and your ḥasidim shall bless you.” “Works” are personified (cf. Ps 19:1; 98:8); creation itself acknowledges its Maker. The verb yodû (from y-d-h) means “acknowledge” or “give thanks,” the appropriate response of creatures to the Creator’s goodness. Alongside this universal chorus stand the ḥasidim—those marked by covenantal loyalty (from ḥesed). Their verb is “bless”—the speech of the community bound to God. The pairing is carefully drawn: ontology (creation as works) and covenant (community as faithful) converge in praise. Psalm 103:19 (“his kingdom rules over all”) offers a close analogue; Psalm 145 focuses on the mouths that answer that rule.
 ---
 ### Verse 11
-כְּב֣וֹד מַלְכוּתְךָ֣ יֹאמֵ֑רוּ וּגְבוּרָתְךָ֥ יְדַבֵּֽרוּ׃
-They shall talk of the majesty of Your kingship,
+כְּב֣וֹד מַלְכוּתְךָ֣ יֹאמֵ֑רוּ וּגְבוּרָתְךָ֥ יְדַבֵּֽרוּ׃   ‎		They shall talk of the majesty of Your kingship,
 and speak of Your might,
-“They shall speak of the glory of your kingdom and tell of your might.” With v. 11 the royal lexicon intensifies. “Glory of your kingdom” (כבוד מלכותך) fuses presence and rule; “might” (גבורה) names the power by which that rule is enacted. The paired verbs (“say,” “speak/declare”) suggest both spontaneous speech and deliberate proclamation. The kingship language here is not a turn away from creation; it is the theological claim that the one who cares for all exercises enduring rule.
+“They shall speak of the glory of your kingdom and tell of your might.” The royal diction (malkhut, “kingdom”; kavod, “glory”) now dominates. The parallelism is climactic: speech intensifies into proclamation (yĕdabbēru). In ANE royal ideology, kings parade kavod to secure legitimacy; here creation and the faithful freely speak the King’s glory. The line builds on v.10’s “works” and “ḥasidim”: both communities become heralds. The effect is centrifugal: praise turns outward to proclamation among “the children of humanity” in v.12.
 ---
 ### Verse 12
-לְהוֹדִ֤יעַ ׀ לִבְנֵ֣י הָ֭אָדָם גְּבוּרֹתָ֑יו וּ֝כְב֗וֹד הֲדַ֣ר מַלְכוּתֽוֹ׃
-to make His mighty acts known among men
+לְהוֹדִ֤יעַ ׀ לִבְנֵ֣י הָ֭אָדָם גְּבוּרֹתָ֑יו וּ֝כְב֗וֹד הֲדַ֣ר מַלְכוּתֽוֹ׃   ‎		to make His mighty acts known among men
 and the majestic glory of His kingship.
-“To make known to the sons of man his mighty deeds, and the glorious majesty of his kingdom.” The infinitive “to make known” states purpose. The addressees widen: not only Israel but “sons of man” (universal humanity). The triple construct “glory of the majesty of his kingdom” (כבוד הדר מלכותו) heightens v. 11’s diction. The three terms make a ladder: glory (substantial presence), hadar (ornate splendor), and kingdom (the ordered realm of rule). The stanza’s aim is catechetical and missional: to publicize both what God has done (deeds) and who God is (king whose majesty is glorious).
+“To make known to the children of humanity his mighty acts, and the glorious splendor of his kingdom.” The purpose clause (lĕhodia‘) makes the psalm’s missionary vector explicit: praise exists also to make known. The audience is universal (livnē ha’adam). The stacked construct “glory of the splendor of his kingdom” reprises v.5’s triple (hadar, kavod, hod), but now anchors it in malkhut—royal authority as the matrix within which that radiance is truly seen. This is praise as pedagogy: what Israel has celebrated, it communicates.
+Note the rhetorical shift to third person (“his mighty acts… his kingdom”). The line models public speech about God to those not yet inside the assembly’s address.
 ---
 ### Verse 13
-מַֽלְכוּתְךָ֗ מַלְכ֥וּת כׇּל־עֹלָמִ֑ים וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר וָדֹֽר׃
-Your kingship is an eternal kingship;
+מַֽלְכוּתְךָ֗ מַלְכ֥וּת כׇּל־עֹלָמִ֑ים וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר וָדֹֽר׃   ‎		Your kingship is an eternal kingship;
 Your dominion is for all generations.
-“Your kingdom is a kingdom of all ages, and your dominion in every generation.” Permanence and scope define true kingship. “All ages” (כל עולמים) and “every generation” (בכל דור ודור) bridge eternity and history. The LXX adds: “Faithful is the LORD in his words and holy in all his works.” That line, absent in the MT, matches the psalm’s cadence (“in all his works,” cf. v. 17) and supplies the missing nun in the acrostic. Read alongside the MT, it highlights qualities the psalm elsewhere stresses: God’s faithfulness and holy integrity. Whether or not one prints the addition, the Masoretic form achieves a rhetorical surprise: immediately after the proclamation of eternal reign comes the insistence that such reign is known in upholding the fallen and feeding the living (v. 14–16). The psalm’s theology of kingship is thus defined by beneficence, not conquest.
+“Your kingdom is a kingdom of all ages, and your dominion in every generation and generation.” The doublet (malkhut… malkhut; memshalah) stresses both the fact and the exercise of rule. “All ages” (kol ‘olamim) can mean the total sweep of time; coupled with “every generation,” the verse marries eternity to historical succession. ANE parallels speak similarly of the gods’ everlasting rule (cf. Ugaritic mlk ʿlm), but Israel’s psalm attaches that formula to YHWH and immediately (vv.14–16) defines rule as care.
+Textual note: The LXX adds a nun-line after v.13: “Faithful is the LORD in all his words and holy in all his works.” Some Hebrew manuscripts include it, and Jewish liturgy (Ashrei) recites it. Its themes (words/works; faithfulness/holiness) echo v.17 and harmonize with the psalm’s diction. Whether original or early gloss, the line fits Psalm 145’s theology.
 ---
 ### Verse 14
-סוֹמֵ֣ךְ ה׳ לְכׇל־הַנֹּפְלִ֑ים וְ֝זוֹקֵ֗ף לְכׇל־הַכְּפוּפִֽים׃
-The LORD supports all who stumble,
+סוֹמֵ֣ךְ ה׳ לְכׇל־הַנֹּפְלִ֑ים וְ֝זוֹקֵ֗ף לְכׇל־הַכְּפוּפִֽים׃   ‎		The LORD supports all who stumble,
 and makes all who are bent stand straight.
-“The LORD supports all who are falling and straightens all who are bowed down.” This is the sharpest turn in the poem: from cosmic kingship to personal and social vulnerability. “Falling” (נופלים) and “bowed” (כפופים) cover physical, emotional, and economic collapse. The verbs name both sustaining and restoring action (סמך, “to support, uphold”; זקף, “to raise, make straight”). The idiom of falling runs through Scripture as a figure for distress and death (e.g., Exod 32:28; Gen 4:5–6 as “face fell”), but here it names an incipient state—those “about to fall”—met by divine support. This is what royal power looks like when it takes flesh in care.
+“The LORD supports all who are falling and raises up all who are bent.” The participles (“supporting,” “raising”) depict continuous action. The verbs and nouns form a compact figure of human frailty: nophlim (“falling ones”) and kĕfufim (“bent”) are those weighed down by circumstance, sin, or oppression. Elsewhere God “upholds the falling” (cf. Ps 37:24) and “straightens the bent” (Ps 146:8). The syntax reprises v.9’s universality (double kol) but now in the register of need.
+Placed immediately after the kingship climax, the line is a statement about what true kingship looks like. Ancient monarchs often measured glory by subduing the strong; this King’s glory is to lift the weak. The psalm’s theology of rule is ethical.
 ---
 ### Verse 15
-עֵֽינֵי־כֹ֭ל אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ וְאַתָּ֤ה נֽוֹתֵן־לָהֶ֖ם אֶת־אׇכְלָ֣ם בְּעִתּֽוֹ׃
-The eyes of all look to You expectantly,
+עֵֽינֵי־כֹ֭ל אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ וְאַתָּ֤ה נֽוֹתֵן־לָהֶ֖ם אֶת־אׇכְלָ֣ם בְּעִתּֽוֹ׃   ‎		The eyes of all look to You expectantly,
 and You give them their food when it is due.
-“The eyes of all look to you expectantly, and you give them their food in season.” The synecdoche “eyes of all” stands for a creation’s posture of dependence. The verb שבר in this sense (“wait, hope”) is an Aramaizing term that appears in late biblical Hebrew and captures patient expectancy (cf. Ps 104:27; Isa 38:18). The line has a close analogue in Psalm 123:2: “As the eyes of servants look to their master’s hand…so our eyes are toward the LORD our God.” In both texts, the “hand” is the place from which provision is signaled and given. “In its time” guards against a mechanistic reading: the gift is sure but not at our command. The verse returns us to v. 9’s “all”: the entire living order receives daily bread.
+“The eyes of all look to you in hope, and you give them their food in its season.” This is a set piece of creation praise (cf. Ps 104:27). The verb yĕsabbēru (from s-b-r) is an Aramaism meaning “to wait expectantly,” marking likely late Hebrew. The image is deliberately inclusive: not merely human eyes but the eyes of “all”—creatures. Psalm 123:2 uses similar “eyes-to-hand” imagery for dependence on a master’s favor.
+The second colon is liturgically precious and theologically modest: God gives “their food” “in its time.” Provision is ordinary and rhythmic—seasons, cycles, the quiet grace of enough. Psalm 145 thus binds kingship to the natural economy of creaturely life.
 ---
 ### Verse 16
-פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י רָצֽוֹן׃
-You give it openhandedly,
+פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י רָצֽוֹן׃   ‎		You give it openhandedly,
 feeding every creature to its heart’s content.
-“You open your hand and satisfy the desire of every living thing.” The idiom “open your hand” echoes Israel’s social ethic (Deut 15:8, 11) and a closely related praise (Ps 104:28). In Scripture, opening the hand is the image of generosity; here it is applied to God. The verb “satisfy” (שבע) denotes more than sufficiency; it suggests fullness and contentment (cf. Ps 104:13). “Desire” (רצון) leans toward good pleasure or favor; the point is not mere caloric provision but fitting delight. Note the continuity: kingship (v. 13) coincides with this gesture. Divine sovereignty is an opened hand.
+“You open your hand and satisfy every living thing with favor.” The “open hand” is a biblical idiom of generosity applied elsewhere to human ethics (Deut 15:8, 11) and to God’s providence (Ps 104:28). Psalm 145 joins those horizons: the divine hand is the archetype of covenantal openhandedness. “Every living thing” (lĕkhol ḥai) expands vv.15–16 to the full community of life, an ecological vision in miniature. The term ratson (“favor/delight”) suggests not mere subsistence but satisfying goodness.
+By placing this line at the pe stanza (letter pe—also the first letter of “mouth,” peh), the acrostic produces a quiet wordplay: the stanza where “mouth” would be expected speaks instead of God’s hand feeding mouths. Theological wit accompanies the generosity it describes.
+Comparative note: among the figurative usages catalogued in the canon, “open hand” functions chiefly in ethical injunctions (Deut 15) and creation hymns (Ps 104). Psalm 145 gathers those into a royal theology of gift: the King’s power is most truly known by his open hand.
 ---
 ### Verse 17
-צַדִּ֣יק ה׳ בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃
-The LORD is beneficent in all His ways
+צַדִּ֣יק ה׳ בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃   ‎		The LORD is beneficent in all His ways
 and faithful in all His works.
-“Righteous is the LORD in all his ways, and faithful/holy in all his works.” צַדִּיק (righteous/just) asserts moral rectitude; חסיד, when predicated of God, denotes faithful kindness or holy loyalty. The parallel phrases “in all his ways / in all his works” mark comprehensive integrity: the patterns and the particulars align. The LXX renders the second adjective ὅσιος (“holy/faithful”), matching the nuance. This verse addresses a latent question: if God is good to all (v. 9) and near (v. 18), how do we speak about pain? The psalm’s answer is confessional rather than argumentative: whatever else may be said, God’s ways and works are consistent with righteousness and loyal kindness. The following verses will specify how that integrity meets human response.
+“Righteous is the LORD in all his ways, and ḥasid in all his works.” Tsaddiq (“righteous”) here expresses moral fidelity and right ordering; “ways” (derakhim) in Psalms are both patterns and acts. The adjective ḥasid, often naming humans (the ḥasidim of v.10), is here applied to God, which the LXX renders “holy” (hosios). The pairing brings together justice and loyal kindness (cf. Exod 34:6): God’s rightness is not cold legality; God’s ḥesed is not laxity. The psalm will immediately interpret this pairing as nearness offered to the sincere petitioner (v.18).
 ---
 ### Verse 18
-קָר֣וֹב ה׳ לְכׇל־קֹרְאָ֑יו לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃
-The LORD is near to all who call Him,
+קָר֣וֹב ה׳ לְכׇל־קֹרְאָ֑יו לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃   ‎		The LORD is near to all who call Him,
 to all who call Him with sincerity.
-“Near is the LORD to all who call on him, to all who call on him in truth.” Nearness here is relational availability, not spatial geometry. The double “to all” insists on accessibility; the qualifier “in truth” (בֶאֱמֶת) adds moral-spiritual grain—sincerity, reliability, alignment with reality. The psalm’s sequence matters: universal provision (vv. 15–16) is followed by responsive nearness conditioned by truthfulness. This is not a narrowing of compassion but a description of how communion with God is known: by calling in a manner consistent with who God is.
+“Near is the LORD to all who call upon him, to all who call upon him in truth.” The promise is universal in availability (“to all”) yet morally specified: “in truth” (be’emet) signals sincerity and reliability rather than mere utterance. The Psalmist’s diction elsewhere binds ‘emet to covenant faithfulness (e.g., Ps 85:11). Prayer here is not technique but truthful relation. The double use of “call” (qara’) with different forms (participle and imperfect) encompasses habit and fresh appeal.
+The verse also moderates possible misunderstandings from vv.15–16: God’s open hand is not a vending machine; nearness is relational and ethical, offered to those who approach with integrity.
 ---
 ### Verse 19
-רְצוֹן־יְרֵאָ֥יו יַעֲשֶׂ֑ה וְֽאֶת־שַׁוְעָתָ֥ם יִ֝שְׁמַ֗ע וְיוֹשִׁיעֵֽם׃
-He fulfills the wishes of those who fear Him;
+רְצוֹן־יְרֵאָ֥יו יַעֲשֶׂ֑ה וְֽאֶת־שַׁוְעָתָ֥ם יִ֝שְׁמַ֗ע וְיוֹשִׁיעֵֽם׃   ‎		He fulfills the wishes of those who fear Him;
 He hears their cry and delivers them.
-“He does the desire of those who fear him; he hears their cry and saves them.” The vocabulary shifts from “all” to those in reverent relationship: יראיו (“those who fear him”). Fear, in biblical idiom, is not cringing terror but awe and proper regard. The triad of divine actions—fulfills desire, hears cry, saves—moves from ordinary longings to crisis intervention. The pairing of “desire” (רצון; cf. v. 16) with “fear” suggests that human desires are transfigured within reverence. God’s attentiveness (“hears”) culminates in salvation (ישע), a verb of deliverance from danger.
+“The desire of those who fear him he will do; their cry he will hear, and he will save them.” Three verbs trace a pattern: God “does” desire (ratson), “hears” urgent cry (sha‘avah), and “saves” (yasha‘). The order is instructive. The willingness to act on behalf of those who fear him precedes and frames hearing and saving. “Fear” here is reverent loyalty, the obverse of “in truth” (v.18). Together vv.18–19 describe relation from two angles: truth in speech and awe in posture.
+The use of ratson links back to v.16 (satisfying every living thing with favor): divine favor to all creatures and divine fulfillment of the reverent’s desire are aspects of the same benevolence, distinguished by the quality of relation.
 ---
 ### Verse 20
-שׁוֹמֵ֣ר ה׳ אֶת־כׇּל־אֹהֲבָ֑יו וְאֵ֖ת כׇּל־הָרְשָׁעִ֣ים יַשְׁמִֽיד׃
-The LORD watches over all who love Him,
+שׁוֹמֵ֣ר ה׳ אֶת־כׇּל־אֹהֲבָ֑יו וְאֵ֖ת כׇּל־הָרְשָׁעִ֣ים יַשְׁמִֽיד׃   ‎		The LORD watches over all who love Him,
 but all the wicked He will destroy.
-“The LORD guards all who love him; but all the wicked he will destroy.” The progression from “fear” (v. 19) to “love” marks deepened relationship. To love God is to will God’s will and cling to God (cf. Deuteronomic idiom). God “guards” (שומר) lovers—language elsewhere used for vigilant protection (Ps 121). The antithesis is stark: wicked (רשעים)—not simply faulty people but those set against God’s character and the good of the world—are destroyed (ישמיד). This is not a retraction of v. 9’s “good to all.” Rather, it clarifies what universal mercy entails: the removal of what destroys. Divine love for the world includes a will to end the wickedness that deforms it.
+“The LORD guards all who love him, but all the wicked he will destroy.” The psalm’s moral clarity surfaces without apology. The movement across vv.18–20 is noteworthy: callers (v.18) → fearers (v.19) → lovers (v.20). Love is the most intimate term and receives the strongest promise (“guards,” shomer). By contrast, “the wicked” (rĕsha‘im) are not merely flawed; they oppose God’s rule and harm his creatures. The verb yashmid (“destroy”) is strong; it belongs to the lexicon of judgment.
+This does not cancel v.9’s universality. Rather, the psalm distinguishes between general providence (“good to all”) and protective custody for those in communion with the King. A God who refused to oppose wickedness would be neither righteous (v.17) nor compassionate to the vulnerable (v.14).
 ---
 ### Verse 21
-תְּהִלַּ֥ת ה׳ יְֽדַבֶּ֫ר־פִּ֥י וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ {פ}
-My mouth shall utter the praise of the LORD,
+תְּהִלַּ֥ת ה׳ יְֽדַבֶּ֫ר־פִּ֥י וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ {פ}   ‎		My mouth shall utter the praise of the LORD,
 and all creatures shall bless His holy name forever and ever.
-“My mouth will speak the praise of the LORD, and let all flesh bless his holy name forever and ever.” The psalm returns to the first person—“my mouth”—but now that singular voice is explicitly linked to an encompassing wish: “let all flesh” bless. “All flesh” widens even beyond “sons of man” (v. 12) to the living order. The doxology closes the inclusio with “forever and ever.” The pedagogy is complete: personal praise trained by creed (v. 8), expanded by “all,” disciplined by truth (v. 18), and chastened by justice (v. 20) becomes a summons to the world. The poem has achieved what its title promised. It is a praise that makes praisers.
+“My mouth shall speak the praise of the LORD, and let all flesh bless his holy Name forever and ever.” The poem ends where it began—“praise,” “forever and ever”—but the voice has expanded. The individual vow becomes a universal summons (“all flesh,” cf. Ps 65:3; Isa 40:5). The object is “his holy Name”: nearness (v.18) does not erase holiness; it makes reverent speech possible. The line is an inclusio with v.1 and a précis of the psalm’s argument: disciplined, personal praise (acrostic alphabet, daily vow) opens out into cosmic worship of a King whose reign appears as care. In Jewish liturgy, the psalm (as Ashrei) trains that arc, forming mouths to speak what hands of the King already do.
+——
+Textual and liturgical note on v.13 (nun-line): The LXX’s “Faithful is the LORD in all his words and holy in all his works” coheres with vv.17–20 and appears in some medieval Hebrew manuscripts and in standard Jewish prayer. Whether original or not, its inclusion in worship illustrates the psalm’s own logic: praise is transmitted “generation to generation” (v.4), and the tradition’s living voice sometimes supplies the link that the alphabet lacks.
 ---
 ## Models Used
-
 This commentary was generated using:
-- **Structural Analysis (Macro)**: claude-sonnet-4-20250514
-- **Verse Discovery (Micro)**: claude-sonnet-4-20250514
-- **Commentary Synthesis**: claude-sonnet-4-20250514
-- **Editorial Review**: gpt-5
+**Structural Analysis (Macro)**: Claude Sonnet 4.5
+**Verse Discovery (Micro)**: Claude Sonnet 4.5
+**Commentary Synthesis**: Claude Sonnet 4.5
+**Editorial Review**: GPT-5
