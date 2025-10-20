@@ -1,22 +1,54 @@
+## SESSION 9 (2025-10-20): Word Document Generation - COMPLETE ✅
+
+### What Was Accomplished
+
+This session focused on adding a new, robust output format to the pipeline to solve copy-paste formatting issues.
+
+1.  **New Feature: `.docx` Generator**
+    - **Problem**: Copying the print-ready Markdown into Microsoft Word resulted in lost formatting, especially for the bilingual Hebrew/English text.
+    - **Solution**: Created a new script, `src/utils/document_generator.py`, using the `python-docx` library. This script programmatically builds a Word document, ensuring perfect preservation of styles, fonts, and bidirectional text layout.
+
+2.  **Pipeline Integration**
+    - The new document generator was integrated as the final step in `run_enhanced_pipeline.py`.
+    - A `--skip-word-doc` flag was added to control this new step.
+
+3.  **Critical Bug Fix: Statistics Preservation**
+    - **Problem**: Running the pipeline with `--skip` flags would reset the `pipeline_stats.json` file, losing all previously gathered data.
+    - **Fix**: The `PipelineSummaryTracker` and the main pipeline runner were updated to be "resume-aware." If a run is partial, it now loads the existing statistics file instead of starting from scratch, preserving data integrity.
+
+4.  **Formatting Synchronization**
+    - The `.docx` generator was iteratively refined to perfectly mirror the structure and style of the `print_ready.md` file, including headers, paragraph spacing, and the layout of the bibliographical summary.
+
+### Files Modified
+- **`src/utils/document_generator.py`**: New file created for Word document generation.
+- **`scripts/run_enhanced_pipeline.py`**: Integrated the new generator and the statistics-resume logic.
+- **`src/utils/pipeline_summary.py`**: Updated to support loading initial data for resuming runs.
+
+---
+
 # Next Session Prompt - Psalms Commentary Project
 
 **Date**: 2025-10-19 (Updated after Session 7.6)
 **Phase**: Phase 4 - Master Editor Enhancement
 
 ---
- 
-## SESSION 8 (Next Session): Fix Formatter Data Schema
+
+## SESSION 8 (2025-10-20): Formatter Data Schema Fix - COMPLETE ✅
 
 ### Goal
-**CRITICAL BUG FIX**: The `commentary_formatter.py` is once again failing to parse the `pipeline_stats.json` file, resulting in a summary with "N/A" or "0" for all fields. This is a recurring issue caused by the data schema from `pipeline_summary.py` and the parsing logic in `commentary_formatter.py` becoming desynchronized.
+**CRITICAL BUG FIX**: The formatters (`commentary_formatter.py`, `document_generator.py`) were failing to parse the `model_usage` section of `pipeline_stats.json`, resulting in "Model attribution data not available."
 
-### Plan
-1.  **Analyze the Discrepancy**: Compare the latest `psalm_145_pipeline_stats.json` with the data access paths in `commentary_formatter.py`'s `_format_bibliographical_summary` method.
-2.  **Implement a Permanent Fix**: Correct the key paths in `commentary_formatter.py` to match the current, stable JSON schema, specifically for the `model_usage` section.
-3.  **Validate**: Re-run the formatter for both Psalm 20 and Psalm 145 to confirm that all statistics are correctly displayed in the print-ready output.
+### What Was Accomplished
+1.  **Root Cause Identified**: The `pipeline_stats.json` file was correctly saving model usage in a flat dictionary (e.g., `{"macro_analysis": "model_name"}`), but the formatters were expecting an old, nested structure.
+2.  **Fix Implemented**: Updated both `commentary_formatter.py` and `document_generator.py` to parse the new, simpler data schema.
+3.  **Validated**: Confirmed that the "Models Used" section now correctly displays the specific model for each of the four main agents in both the print-ready markdown and the `.docx` file.
+
+### Files Modified
+- `src/utils/commentary_formatter.py`
+- `src/utils/document_generator.py`
 
 ---
-## SESSION 8 (Next Session): Enrich Methodological Summary
+## SESSION 9 (Next Session): Enrich Methodological Summary
 
 ### Goal
 Enhance the "Methodological & Bibliographical Summary" in the print-ready output by adding performance metrics and more detailed model attribution. This will provide a complete, transparent fingerprint of the generation process for each psalm.
@@ -28,16 +60,10 @@ Enhance the "Methodological & Bibliographical Summary" in the print-ready output
     - Extract the total pipeline duration and the duration for each agent step (Macro, Micro, Synthesis, Editor).
     - Add these timings to the "Methodological & Bibliographical Summary" section in a clean, readable format (e.g., "Total Processing Time: 19.9 minutes").
 
-2.  **Refine "Models Used" Section**
-    - The current "Models Used" section lists all models and their call counts.
-    - Enhance this to specify which model was used for each agent/pass (e.g., "Macro Analysis: claude-sonnet-4-20250514").
-    - This provides clearer attribution and is more useful for scholarly review. This data is available in the pipeline runner script and should be passed to the summary tracker.
-
 ### Files to Modify
 
 - **`src/utils/commentary_formatter.py`**: To parse and display the new timing and model data.
-- **`src/utils/pipeline_summary.py`**: To track model usage per agent.
-- **`scripts/run_enhanced_pipeline.py`**: To pass the model names for each agent to the summary tracker.
+- **`src/utils/document_generator.py`**: To add the same information to the Word document for consistency.
 
 ### Expected Outcome
 - The final `psalm_XXX_print_ready.md` file will contain a comprehensive summary including not only the research inputs but also the performance metrics and specific models used for each stage of analysis.

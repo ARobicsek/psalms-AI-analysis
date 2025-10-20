@@ -8,6 +8,9 @@ python scripts/run_enhanced_pipeline.py 23
 # just the print ready compiler
 python scripts/run_formatter.py 145
 
+# just the word output
+python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready
+
 # Custom output directory
 python scripts/run_enhanced_pipeline.py 51 --output-dir output/psalm_51
 

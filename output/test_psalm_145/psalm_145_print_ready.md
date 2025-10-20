@@ -116,5 +116,6 @@ Addendum on structure and text: Reading the nun verse (v. 13b) restores the acro
 - Concordance Entries Reviewed: N/A
 - Figurative Language Instances Reviewed: N/A
 - Master Editor Prompt Size: N/A characters
-## Models Used
+
+### Models Used
 Model attribution data not available.

@@ -53,7 +53,8 @@ def run_enhanced_pipeline(
     skip_micro: bool = False,
     skip_synthesis: bool = False,
     skip_master_edit: bool = False,
-    skip_print_ready: bool = False
+    skip_print_ready: bool = False,
+    skip_word_doc: bool = False
 ):
     """
     Run complete enhanced pipeline for a single psalm.
@@ -68,15 +69,31 @@ def run_enhanced_pipeline(
         skip_synthesis: Skip synthesis (use existing file)
         skip_master_edit: Skip master editing (use existing file)
         skip_print_ready: Skip print-ready formatting
+        skip_word_doc: Skip .docx generation
     """
     logger = get_logger("enhanced_pipeline")
     logger.info(f"=" * 80)
     logger.info(f"ENHANCED PIPELINE - Psalm {psalm_number}")
     logger.info(f"=" * 80)
 
-    # Initialize pipeline summary tracker
-    tracker = PipelineSummaryTracker(psalm_number=psalm_number)
-    logger.info("Pipeline summary tracking enabled")
+    # --- Initialize Pipeline Summary Tracker (with resume capability) ---
+    output_path = Path(output_dir)
+    summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+    
+    # Check if we are resuming a run (any skip flag is true)
+    is_resuming = any([skip_macro, skip_micro, skip_synthesis, skip_master_edit, skip_print_ready, skip_word_doc])
+
+    initial_data = None
+    if is_resuming and summary_json_file.exists():
+        try:
+            logger.info(f"Resuming pipeline run. Loading existing stats from {summary_json_file}")
+            with open(summary_json_file, 'r', encoding='utf-8') as f:
+                initial_data = json.load(f)
+        except (json.JSONDecodeError, IOError) as e:
+            logger.warning(f"Could not load existing stats file, starting fresh. Error: {e}")
+
+    tracker = PipelineSummaryTracker(psalm_number=psalm_number, initial_data=initial_data)
+    logger.info("Pipeline summary tracking enabled.")
 
     # Create output directory
     output_path = Path(output_dir)
@@ -91,7 +108,7 @@ def run_enhanced_pipeline(
     edited_intro_file = output_path / f"psalm_{psalm_number:03d}_edited_intro.md"
     edited_verses_file = output_path / f"psalm_{psalm_number:03d}_edited_verses.md"
     edited_assessment_file = output_path / f"psalm_{psalm_number:03d}_assessment.md"
-    print_ready_file = output_path / f"psalm_{psalm_number:03d}_print_ready.md"
+    docx_output_file = output_path / f"psalm_{psalm_number:03d}_commentary.docx"
 
     # =====================================================================
     # STEP 1: Macro Analysis
@@ -126,6 +143,7 @@ def run_enhanced_pipeline(
         macro_output = macro_analysis.to_markdown()
         step_duration = time.time() - step_start
         tracker.track_step_output("macro_analysis", macro_output, duration=step_duration)
+        tracker.track_model_for_step("macro_analysis", macro_model)
 
         # Track macro questions
         if macro_analysis.research_questions:
@@ -142,6 +160,7 @@ def run_enhanced_pipeline(
         # Still need to get model name for tracking
         macro_analyst = MacroAnalyst()
         macro_model = macro_analyst.model
+        tracker.track_model_for_step("macro_analysis", macro_model)
 
     # Load macro analysis
     macro_analysis = load_macro_analysis(str(macro_file))
@@ -178,6 +197,7 @@ def run_enhanced_pipeline(
         micro_output = micro_analysis.to_markdown() + "\n\n" + research_bundle.to_markdown()
         step_duration = time.time() - step_start
         tracker.track_step_output("micro_analysis", micro_output, duration=step_duration)
+        tracker.track_model_for_step("micro_analysis", micro_model)
 
         # Track research requests and bundle
         tracker.track_research_requests(research_bundle.request)
@@ -207,6 +227,7 @@ def run_enhanced_pipeline(
         # Still need to get model name for tracking
         micro_analyst = MicroAnalystV2(db_path=db_path)
         micro_model = micro_analyst.model
+        tracker.track_model_for_step("micro_analysis", micro_model)
     
     # Always load the definitive micro_analysis and research_bundle for subsequent steps
     try:
@@ -256,6 +277,7 @@ def run_enhanced_pipeline(
         synthesis_output = commentary['introduction'] + "\n\n" + commentary['verse_commentary']
         step_duration = time.time() - step_start
         tracker.track_step_output("synthesis", synthesis_output, duration=step_duration)
+        tracker.track_model_for_step("synthesis", synthesis_model)
 
         logger.info(f"✓ Introduction saved to {synthesis_intro_file}")
         logger.info(f"✓ Verse commentary saved to {synthesis_verses_file}")
@@ -270,6 +292,7 @@ def run_enhanced_pipeline(
         # Still need to get model name for tracking
         synthesis_writer = SynthesisWriter()
         synthesis_model = synthesis_writer.model
+        tracker.track_model_for_step("synthesis", synthesis_model)
 
     # =====================================================================
     # STEP 4: Master Editor (GPT-5) - NEW!
@@ -383,6 +406,7 @@ def run_enhanced_pipeline(
         editor_output = result['assessment'] + "\n\n" + result['revised_introduction'] + "\n\n" + result['revised_verses']
         step_duration = time.time() - step_start
         tracker.track_step_output("master_editor", editor_output, duration=step_duration)
+        tracker.track_model_for_step("master_editor", editor_model)
 
         logger.info(f"✓ Editorial assessment saved to {edited_assessment_file}")
         logger.info(f"✓ Revised introduction saved to {edited_intro_file}")
@@ -399,18 +423,12 @@ def run_enhanced_pipeline(
         # Still need to get model name for tracking
         master_editor = MasterEditor()
         editor_model = master_editor.model
+        tracker.track_model_for_step("master_editor", editor_model)
 
     # =====================================================================
     # STEP 5: Print-Ready Formatting
     # =====================================================================
     if not skip_print_ready:
-        logger.info("\n[STEP 5] Creating print-ready formatted output...")
-        print(f"\n{'='*80}")
-        print(f"STEP 5: Print-Ready Formatting")
-        print(f"{'='*80}\n")
-
-        # The tracker now saves the JSON summary before this step,
-        # so we can load it.
         summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
         if not summary_json_file.exists():
             # If it doesn't exist, generate a temporary one.
@@ -418,8 +436,15 @@ def run_enhanced_pipeline(
             tracker.save_json(str(output_path))
 
         # Define paths for the formatter
-        intro_to_format = edited_intro_file if not skip_master_edit and edited_intro_file.exists() else synthesis_intro_file
-        verses_to_format = edited_verses_file if not skip_master_edit and edited_verses_file.exists() else synthesis_verses_file
+        print_ready_file = output_path / f"psalm_{psalm_number:03d}_print_ready.md"
+
+        logger.info("\n[STEP 5] Creating print-ready formatted output...")
+        print(f"\n{'='*80}")
+        print(f"STEP 5: Print-Ready Formatting")
+        print(f"{'='*80}\n")
+
+        intro_to_format = edited_intro_file if edited_intro_file.exists() else synthesis_intro_file
+        verses_to_format = edited_verses_file if edited_verses_file.exists() else synthesis_verses_file
 
         command = [
             sys.executable,
@@ -448,7 +473,49 @@ def run_enhanced_pipeline(
             print(f"⚠ Error in print-ready formatting (see logs for details)\n")
     else:
         logger.info(f"[STEP 5] Skipping print-ready formatting")
+        print_ready_file = output_path / f"psalm_{psalm_number:03d}_print_ready.md" # Define for return dict
         print(f"\nSkipping Step 5 (print-ready formatting)\n")
+
+    # =====================================================================
+    # STEP 6: Generate .docx Document
+    # =====================================================================
+    if not skip_word_doc:
+        logger.info("\n[STEP 6] Creating .docx document...")
+        print(f"\n{'='*80}")
+        print(f"STEP 6: Generating Word Document (.docx)")
+        print(f"{'='*80}\n")
+
+        from src.utils.document_generator import DocumentGenerator
+
+        summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+
+        # Use the same logic as the print-ready formatter to select input files
+        intro_for_docx = edited_intro_file if edited_intro_file.exists() else synthesis_intro_file
+        verses_for_docx = edited_verses_file if edited_verses_file.exists() else synthesis_verses_file
+
+        if intro_for_docx.exists() and verses_for_docx.exists():
+            try:
+                generator = DocumentGenerator(
+                    psalm_num=psalm_number,
+                    intro_path=intro_for_docx,
+                    verses_path=verses_for_docx,
+                    stats_path=summary_json_file,
+                    output_path=docx_output_file
+                )
+                generator.generate()
+                logger.info(f"Successfully generated Word document for Psalm {psalm_number}.")
+                print(f"✓ Word document commentary: {docx_output_file}\n")
+            except Exception as e:
+                logger.error(f"Failed to generate .docx file for Psalm {psalm_number}: {e}", exc_info=True)
+                print(f"⚠ Error in Word document generation (see logs for details)\n")
+        else:
+            logger.warning("Skipping .docx generation because markdown files were not found.")
+            print(f"⚠ Skipping Word document generation: input files not found.\n")
+    else:
+        logger.info(f"[STEP 6] Skipping .docx generation")
+        print(f"\nSkipping Step 6 (.docx generation)\n")
+
+
 
     # =====================================================================
     # COMPLETE - Generate Pipeline Summary
@@ -488,6 +555,7 @@ def run_enhanced_pipeline(
         'edited_intro': edited_intro_file,
         'edited_verses': edited_verses_file,
         'print_ready': print_ready_file,
+        'word_document': docx_output_file,
         'pipeline_summary': summary_file if 'summary_file' in locals() else None,
         'pipeline_stats': summary_json if 'summary_json' in locals() else None
     }
@@ -535,6 +603,8 @@ Examples:
                        help='Skip master editing (use existing file)')
     parser.add_argument('--skip-print-ready', action='store_true',
                        help='Skip print-ready formatting')
+    parser.add_argument('--skip-word-doc', action='store_true',
+                       help='Skip the final .docx generation step')
 
     args = parser.parse_args()
 
@@ -564,7 +634,8 @@ Examples:
             skip_micro=args.skip_micro,
             skip_synthesis=args.skip_synthesis,
             skip_master_edit=args.skip_master_edit,
-            skip_print_ready=args.skip_print_ready
+            skip_print_ready=args.skip_print_ready,
+            skip_word_doc=args.skip_word_doc
         )
 
         return 0
