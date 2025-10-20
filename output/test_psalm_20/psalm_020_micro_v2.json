@@ -1,0 +1,154 @@
+{
+  "psalm_number": 20,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Standard psalm superscription, but the combination of 'לַמְנַצֵּחַ' (for the leader/conductor) with Davidic attribution suggests formal liturgical performance context. The term 'מְנַצֵּחַ' implies professional musical direction.",
+      "lexical_insights": [
+        "לַמְנַצֵּחַ",
+        "מִזְמוֹר"
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Sets liturgical context supporting thesis about pre-battle ritual",
+      "phonetic_transcription": "lamnatsēkha mizmwōr lədhāwidh"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Opens with jussive יַֽעַנְךָ֣ creating petition mood. Striking parallel between YHWH answering and 'name of Jacob's God' protecting - name itself has protective power. The phrase 'בְּי֣וֹם צָרָ֑ה' (day of trouble) is militarily ambiguous.",
+      "lexical_insights": [
+        "יְשַׂגֶּבְךָ֗",
+        "צָרָ֑ה",
+        "שֵׁ֤ם"
+      ],
+      "figurative_analysis": [
+        "name as protective agent - personification"
+      ],
+      "thesis_connection": "Establishes divine name power vs military might contrast from thesis",
+      "phonetic_transcription": "yaʿankhā yəhōwāh bəywōm tsārāh yəsagevkhā shēm  'elōhēy yaʿaqōv"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Dual spatial sources of help: sanctuary (מִקֹּ֑דֶשׁ) and Zion (מִצִּיּ֗וֹן). The verbs יִשְׁלַֽח and יִסְעָדֶֽךָּ suggest active divine intervention. Creates vertical axis between earthly sanctuary and divine realm.",
+      "lexical_insights": [
+        "יִסְעָדֶֽךָּ",
+        "מִקֹּ֑דֶשׁ"
+      ],
+      "figurative_analysis": [
+        "sanctuary as divine launching point"
+      ],
+      "thesis_connection": "Supports thesis about sacred space vs military space",
+      "phonetic_transcription": "yishlakh-ʿezrkhā miqōdhesh wumitsiyuwōn yisʿādhekhā"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Sacrificial terminology with מִנְחֹתֶ֑ךָ (meal offerings) and עוֹלָתְךָ֖ (burnt offerings). The verb יְדַשְּׁנֶ֣ה is unusual - literally 'make fat/rich' suggesting divine acceptance. Selah pause emphasizes ritual completion.",
+      "lexical_insights": [
+        "יְדַשְּׁנֶ֣ה",
+        "מִנְחֹתֶ֑ךָ"
+      ],
+      "figurative_analysis": [
+        "fattening as divine approval metaphor"
+      ],
+      "thesis_connection": "Shows ritual preparation supporting thesis about liturgical context",
+      "phonetic_transcription": "yizkōr kul-minkhōthekhā wəʿwōlāthəkhā yədhashneh selāh"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Pure petition focusing on heart's desire (כִלְבָבֶ֑ךָ) and counsel/plan (עֲצָתְךָ֥). The pairing suggests both emotional and strategic dimensions of royal wishes. Verbs יִֽתֶּן and יְמַלֵּֽא emphasize divine fulfillment.",
+      "lexical_insights": [
+        "כִלְבָבֶ֑ךָ",
+        "עֲצָתְךָ֥"
+      ],
+      "figurative_analysis": [
+        "heart as desire center"
+      ],
+      "thesis_connection": "Bridges personal desire and military strategy",
+      "phonetic_transcription": "yiten-ləkhā khilvāvekhā wəkhl-ʿatsāthəkhā yəmalē'"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Dramatic shift to communal voice with 'we' (נְרַנְּנָ֤ה). The verb נִדְגֹּ֑ל (raise standards/banners) is military but 'in the name of our God' subverts typical military symbolism. Triple use of divine fulfillment verbs creates crescendo.",
+      "lexical_insights": [
+        "נְרַנְּנָ֤ה",
+        "נִדְגֹּ֑ל",
+        "מִשְׁאֲלוֹתֶֽיךָ"
+      ],
+      "figurative_analysis": [
+        "banners/standards as victory symbols"
+      ],
+      "thesis_connection": "Perfect example of thesis - military imagery transformed by divine name",
+      "phonetic_transcription": "nərannāh  biyshwuʿāthekhā wuvshēm-'elōhēynwu nidhgōl yəmalē' yəhōwāh kul-mish'alwōtheykhā"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Pivotal 'עַתָּ֤ה יָדַ֗עְתִּי' (Now I know) formula marks dramatic shift to confidence. Introduction of מְשִׁ֫יח֥וֹ (His anointed) - first explicit royal reference. Spatial movement to 'heavenly sanctuary' (מִשְּׁמֵ֣י קׇדְשׁ֑וֹ) elevates the scene cosmically.",
+      "lexical_insights": [
+        "עַתָּ֤ה יָדַ֗עְתִּי",
+        "מְשִׁ֫יח֥וֹ",
+        "בִּ֝גְבֻר֗וֹת"
+      ],
+      "figurative_analysis": [
+        "God's right arm as power source"
+      ],
+      "thesis_connection": "Central to thesis - divine intervention certainty vs human military doubt",
+      "phonetic_transcription": "ʿatāh yādhaʿtiy kiy hwōshiyʿa  yəhōwāh məshiykhwō yaʿanēhwu mishmēy qdhəshwō bighvurwōth yēshaʿ yəmiynwō"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Sharp antithetical structure: אֵ֣לֶּה...וְאֵ֣לֶּה...וַאֲנַ֓חְנוּ (These...these...but we). Chariots and horses represent peak ancient military technology. The verb נַזְכִּֽיר (we invoke/remember) with divine name creates liturgical contrast.",
+      "lexical_insights": [
+        "בָ֭רֶכֶב",
+        "בַסּוּסִ֑ים",
+        "נַזְכִּֽיר"
+      ],
+      "figurative_analysis": [
+        "chariots/horses as military might symbols"
+      ],
+      "thesis_connection": "Core of thesis - military technology vs divine name opposition",
+      "phonetic_transcription": "'ēleh vārekhev wə'ēleh vasuwusiym wa'anakhnwu  bəshēm-yəhōwāh 'elōhēynwu nazkiyr"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Continues antithetical pattern with perfect verbs describing completed action: כָּרְע֣וּ וְנָפָ֑לוּ (they bow down and fall) vs קַּ֝֗מְנוּ וַנִּתְעוֹדָֽד (we rise and stand firm). The verb נִּתְעוֹדָֽד is intensive, suggesting not just standing but being strengthened.",
+      "lexical_insights": [
+        "כָּרְע֣וּ",
+        "נִּתְעוֹדָֽד"
+      ],
+      "figurative_analysis": [
+        "falling/rising as defeat/victory metaphor"
+      ],
+      "thesis_connection": "Completes thesis contrast with outcome certainty",
+      "phonetic_transcription": "hēmāh kārəʿwu wənāfālwu wa'anakhnwu qamnwu wanithʿwōdhādh"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Returns to petition but with imperative הוֹשִׁ֑יעָה (save!) creating urgency. Major interpretive crux: who is הַ֝מֶּ֗לֶךְ (the King) - human king or YHWH as king? The verse structure allows both readings. Creates inclusio with v.2 through 'answer' theme.",
+      "lexical_insights": [
+        "הוֹשִׁ֑יעָה",
+        "הַ֝מֶּ֗לֶךְ"
+      ],
+      "figurative_analysis": [
+        "kingship imagery"
+      ],
+      "thesis_connection": "Climactic ambiguity supporting thesis about dual royal theology",
+      "phonetic_transcription": "yəhōwāh hwōshiyʿāh hamelekh yaʿanēnwu vəywōm-qrə'ēnwu f"
+    }
+  ],
+  "thematic_threads": [
+    "Progressive elevation from earthly sanctuary (v.3) to heavenly sanctuary (v.7) - cosmological movement",
+    "Shift from jussive petitions (vv.2-5) to confident declaration (v.7) to antithetical contrast (vv.8-9) - liturgical progression",
+    "Divine name repetition with variation: YHWH, God of Jacob, name of our God, YHWH our God - covenant relationship emphasis",
+    "Military vocabulary systematically paired with divine name/power - consistent subversion pattern",
+    "Speaker ambiguity throughout - priestly voice? royal voice? communal voice? - liturgical flexibility"
+  ],
+  "interesting_questions": [
+    "Why does the psalm use 'God of Jacob' rather than 'God of Israel' in the opening petition?",
+    "What triggers the sudden confidence shift at 'Now I know' in verse 7 - ritual sign, prophetic word, or liturgical convention?",
+    "Is the missing verb in 'These [trust] in chariots' (v.8) deliberate ellipsis to emphasize the contrast?",
+    "Does the final verse's 'the King' deliberately create ambiguity between human and divine kingship?",
+    "How does the rare verb יְדַשְּׁנֶ֣ה (make fat/rich) function in sacrificial acceptance terminology?",
+    "What is the significance of the spatial progression from sanctuary to Zion to heavenly sanctuary?",
+    "Why does the psalm return to petition mode in v.10 after expressing such confidence in vv.7-9?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on sacrificial terminology (יְדַשְּׁנֶ֣ה), military vocabulary (רכב, סוסים), liturgical verbs (נַזְכִּֽיר)\nCONCORDANCE: Track 'Now I know' formula usage, divine name variations, anointed one references\nFIGURATIVE: Military imagery subversion, spatial elevation patterns, name-as-agent personification\nCOMMENTARY: Interpretive cruxes around speaker identity, king referent in v.10, ritual context clues"
+}

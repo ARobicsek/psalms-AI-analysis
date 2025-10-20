@@ -123,32 +123,37 @@ class CommentaryFormatter:
         
         # --- Research & Data Summary ---
         lines.append("### Research & Data Inputs")
-        psalm_details = summary.get('psalm_details', {})
-        verse_count = psalm_details.get('verse_count', 'N/A')
+        analysis_data = summary.get('analysis', {})
+        verse_count = analysis_data.get('verse_count', 'N/A')
         lines.append(f"- Psalm Verses Analyzed: {verse_count}")
         lines.append(f"- LXX (Septuagint) Texts Reviewed: {verse_count}")
         lines.append(f"- Phonetic Transcriptions Generated: {verse_count}")
 
-        research_summary = summary.get('research', {})
-        lines.append(f"- Ugaritic Parallels Reviewed: {research_summary.get('ugaritic_parallels_found', 'N/A')}")
-        lines.append(f"- Lexicon Entries (BDB/Klein) Reviewed: {research_summary.get('lexicon_entries', 'N/A')}")
+        research_data = summary.get('research', {})
+        ugaritic_count = len(research_data.get('ugaritic_parallels', []))
+        lines.append(f"- Ugaritic Parallels Reviewed: {ugaritic_count}")
+        lines.append(f"- Lexicon Entries (BDB/Klein) Reviewed: {research_data.get('lexicon_entries_count', 'N/A')}")
         
-        commentaries = research_summary.get('commentary_counts', {})
-        total_commentaries = sum(commentaries.values()) if commentaries else research_summary.get('total_commentary_entries', 'N/A')
+        commentaries = research_data.get('commentary_counts', {})
+        total_commentaries = sum(commentaries.values()) if commentaries else 'N/A'
 
         if commentaries:
             commentary_lines = []
-            for commentator, count in commentaries.items():
+            for commentator, count in sorted(commentaries.items()):
                 commentary_lines.append(f"{commentator} ({count})")
             lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries} ({'; '.join(commentary_lines)})")
-        else:
-            lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries}")
+        elif total_commentaries != 'N/A':
+             lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries}")
 
-        lines.append(f"- Concordance Entries Reviewed: {research_summary.get('concordance_results', 'N/A')}")
-        lines.append(f"- Figurative Language Instances Reviewed: {research_summary.get('figurative_instances', 'N/A')}")
+        concordance_total = sum(research_data.get('concordance_results', {}).values())
+        lines.append(f"- Concordance Entries Reviewed: {concordance_total if concordance_total > 0 else 'N/A'}")
+        
+        figurative_total = sum(research_data.get('figurative_results', {}).values())
+        lines.append(f"- Figurative Language Instances Reviewed: {figurative_total if figurative_total > 0 else 'N/A'}")
 
-        master_editor_stats = summary.get('master_editor_stats', {})
-        prompt_chars = master_editor_stats.get('prompt_chars', 'N/A')
+        # Get Master Editor prompt size from the 'steps' section
+        master_editor_stats = summary.get('steps', {}).get('master_editor', {})
+        prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
         if isinstance(prompt_chars, int):
             lines.append(f"- Master Editor Prompt Size: {prompt_chars:,} characters")
         else:
