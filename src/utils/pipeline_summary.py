@@ -146,7 +146,7 @@ class PipelineSummaryTracker:
         # Figurative language requests
         for req in research_request.figurative_requests:
             fig_dict = {
-                'verse': getattr(req, 'verse_start', None) or getattr(req, 'chapter', None),
+                'verse': getattr(req, 'verse', None),
                 'reason': getattr(req, 'notes', ''),
             }
 

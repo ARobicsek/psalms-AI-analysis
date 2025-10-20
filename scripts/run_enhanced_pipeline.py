@@ -338,6 +338,13 @@ def run_enhanced_pipeline(
                     psalm_lines.append(f"**LXX (Greek):** {lxx_verses[verse.verse]}")
             psalm_text_content = "\n".join(psalm_lines)
 
+        # Get analytical framework content (same as master editor does)
+        analytical_framework_content = ""
+        try:
+            analytical_framework_content = rag.get_analytical_framework()
+        except Exception as e:
+            logger.warning(f"Could not load analytical framework for tracking: {e}")
+
         # Combine ALL inputs that master editor receives
         editor_input = (
             intro_content + "\n\n" +
@@ -345,7 +352,8 @@ def run_enhanced_pipeline(
             research_content + "\n\n" +
             macro_formatted_content + "\n\n" +
             micro_formatted_content + "\n\n" +
-            psalm_text_content
+            psalm_text_content + "\n\n" +
+            analytical_framework_content
         )
         tracker.track_step_input("master_editor", editor_input)
 
