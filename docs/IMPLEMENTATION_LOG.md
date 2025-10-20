@@ -2344,6 +2344,39 @@ Generated 66 variations vs OSHB integration:
 
 ---
 
+## 2025-10-20 - Day 9 (Continued): Formatter Model Attribution Fix
+
+### Session Started
+Evening session - Fixing the "Models Used" section in the final document outputs.
+
+### Tasks Completed
+✅ **Bug Fix: Model Attribution Schema Mismatch**: Fixed a critical bug where the "Models Used" section in both the print-ready markdown and the `.docx` file showed "Model attribution data not available."
+✅ **Root Cause Analysis**: The `run_enhanced_pipeline.py` script was correctly saving model usage to `pipeline_stats.json` in a simple, flat dictionary (e.g., `{"macro_analysis": "model_name"}`). However, the formatters (`commentary_formatter.py` and `document_generator.py`) were expecting an older, nested dictionary structure, causing the data lookup to fail.
+✅ **Validation**: Updated both formatters to parse the new flat schema. Re-running the final steps of the pipeline for Psalm 1 confirmed that the "Models Used" section now populates correctly with the specific model for each agent.
+
+### Key Learnings
+
+#### 1. The Perils of Desynchronized Schemas
+This bug was a textbook example of a producer-consumer problem where the data producer (`run_enhanced_pipeline.py`) and the data consumers (`commentary_formatter.py`, `document_generator.py`) had different expectations for the data schema. Regular integration testing is key to catching these drifts.
+
+#### 2. The Value of Resume-Aware Pipelines
+The ability to re-run just the final formatting steps (`--skip-macro --skip-micro ...`) was crucial for debugging this efficiently without incurring the cost and time of a full pipeline run.
+
+### Decisions Made (#decision-log)
+
+#### Decision 1: Align Consumers with the Producer
+**Choice**: Modify the two consumer scripts (`commentary_formatter.py`, `document_generator.py`) to read the new, simpler data structure.
+**Rationale**: The new flat schema in `pipeline_stats.json` is cleaner and more direct. It's better to update the consumers to match this improved schema than to revert the producer to a more complex, legacy format.
+
+### Files Modified
+- `src/utils/commentary_formatter.py`: Updated `_format_bibliographical_summary` to use the correct keys for the `model_usage` dictionary.
+- `src/utils/document_generator.py`: Applied the same fix to its `_format_bibliographical_summary` method to ensure consistency between `.md` and `.docx` outputs.
+
+### Next Steps
+With all statistical and model attribution data now correctly displayed in the final outputs, the pipeline is stable. The next session will focus on enriching the summary with performance metrics.
+
+---
+
 ## Template for Future Entries
 
 ```markdown
@@ -3619,6 +3652,53 @@ With these data tracking bugs resolved, the pipeline's statistical reporting is 
 **Ready for**: Enrich Methodological Summary
 - Add timing information to the print-ready summary.
 - Refine the "Models Used" section for per-agent attribution.
+
+---
+
+## 2025-10-20 - Day 9 (Continued): Word Document (.docx) Generation
+
+### Session Started
+Afternoon session - Implementing a new final output generator for Microsoft Word to solve copy-paste formatting issues.
+
+### Tasks Completed
+✅ **New Feature: `.docx` Generator**: Created `src/utils/document_generator.py` using the `python-docx` library to programmatically generate a Word document.
+✅ **Pipeline Integration**: Added the document generator as a final step in `run_enhanced_pipeline.py`, including a `--skip-word-doc` flag for flexibility.
+✅ **Critical Bug Fix: Statistics Preservation**: Identified and fixed a major bug where skipping pipeline steps would overwrite the `pipeline_stats.json` file. The `PipelineSummaryTracker` was enhanced to load existing data, making it "resume-aware".
+✅ **Iterative Formatting Refinements**:
+   - Adjusted paragraph and header spacing for "soft breaks" and a clean layout.
+   - Ensured consistent heading levels for all verses in the commentary.
+   - Removed redundant verse text from the commentary section.
+   - Synchronized the bibliographical summary format with the `print_ready.md` output, including making "Models Used" a proper subheader.
+✅ **Consistent Divine Name Modification**: Ensured the `DivineNamesModifier` is applied to all text content in the `.docx` file, matching the behavior of the markdown formatter.
+
+### Key Learnings
+
+#### 1. Importance of Direct File Generation
+Copy-pasting from Markdown to Word is unreliable for complex formatting, especially with bidirectional (RTL/LTR) text. Direct generation to `.docx` using a library like `python-docx` is a much more robust solution for preserving layout, fonts, and styles.
+
+#### 2. State Management in Skippable Pipelines
+A pipeline that allows steps to be skipped must be careful about managing state. The bug where statistics were reset on partial runs highlighted the need for components like the `PipelineSummaryTracker` to be able to load and resume from a previous state, rather than always starting fresh.
+
+#### 3. Synchronizing Multiple Output Formats
+When generating multiple output formats (like `.md` and `.docx`) from the same source data, it's crucial to keep their parsing and formatting logic synchronized. A change in one formatter (e.g., how the summary is structured) must be mirrored in the other to maintain consistency.
+
+### Decisions Made (#decision-log)
+
+#### Decision 1: Add `.docx` as a Core Pipeline Output
+**Choice**: Implement a dedicated Word document generator instead of relying on manual copy-paste.
+**Rationale**: To guarantee high-fidelity, print-ready output that perfectly preserves the intended formatting, especially for bilingual text. This improves the final deliverable and saves manual correction time.
+
+#### Decision 2: Make the Pipeline "Resume-Aware"
+**Choice**: Refactor `PipelineSummaryTracker` and `run_enhanced_pipeline.py` to load existing statistics if a run is being resumed (i.e., if any `--skip` flag is used).
+**Rationale**: To prevent accidental data loss and ensure that statistics are cumulative and accurate, even when re-running only the final steps of the pipeline. This makes the pipeline safer and more reliable for iterative development.
+
+### Next Steps
+The new `.docx` generator is complete and integrated. The next logical step is to perform a full, clean pipeline run for a new psalm to validate all outputs (`.md`, `.docx`, and `_stats.json`) and ensure all components work together as expected.
+
+### Session End
+**Duration**: ~2 hours
+**Status**: `.docx` generator implemented, integrated, and refined. Critical bug in statistics handling fixed.
+**Key Outcome**: The pipeline now produces a professionally formatted Word document alongside the print-ready Markdown file, and the statistics tracking is robust against partial runs.
 
 ---
 

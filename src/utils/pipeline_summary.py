@@ -96,15 +96,48 @@ class PipelineSummaryTracker:
         tracker.save_report(output_dir)
     """
 
-    def __init__(self, psalm_number: int):
-        """Initialize tracker for a psalm."""
-        self.psalm_number = psalm_number
-        self.steps: Dict[str, StepStats] = {}
-        self.research: ResearchStats = ResearchStats()
-        self.analysis: AnalysisStats = AnalysisStats()
-        self.pipeline_start = datetime.now()
-        self.pipeline_end: Optional[datetime] = None
-        self.model_usage: Dict[str, Dict[str, Any]] = {}
+    def __init__(self, psalm_number: int, initial_data: Optional[Dict[str, Any]] = None):
+        """
+        Initialize the tracker.
+
+        Args:
+            psalm_number: The psalm number being processed.
+            initial_data: Optional dictionary to pre-populate the tracker, for resuming runs.
+        """
+        if initial_data:
+            self.psalm_number = initial_data.get('psalm_number', psalm_number)
+            
+            # Reconstruct StepStats objects
+            self.steps = {}
+            for step_name, step_data in initial_data.get('steps', {}).items():
+                self.steps[step_name] = StepStats(
+                    step_name=step_name,
+                    input_char_count=step_data.get('input_char_count', 0),
+                    input_token_estimate=step_data.get('input_token_estimate', 0),
+                    output_char_count=step_data.get('output_char_count', 0),
+                    output_token_estimate=step_data.get('output_token_estimate', 0),
+                    duration_seconds=step_data.get('duration_seconds'),
+                    timestamp=step_data.get('timestamp')
+                )
+
+            # Reconstruct ResearchStats and AnalysisStats objects
+            self.research = ResearchStats(**initial_data.get('research', {}))
+            self.analysis = AnalysisStats(**initial_data.get('analysis', {}))
+
+            # Load other top-level fields
+            self.pipeline_start = datetime.fromisoformat(initial_data.get('pipeline_start')) if initial_data.get('pipeline_start') else datetime.now()
+            self.pipeline_end = datetime.fromisoformat(initial_data.get('pipeline_end')) if initial_data.get('pipeline_end') else None
+            self.model_usage = initial_data.get('model_usage', {})
+            
+        else:
+            # Initialize fresh
+            self.psalm_number = psalm_number
+            self.steps: Dict[str, StepStats] = {}
+            self.research: ResearchStats = ResearchStats()
+            self.analysis: AnalysisStats = AnalysisStats()
+            self.pipeline_start = datetime.now()
+            self.pipeline_end: Optional[datetime] = None
+            self.model_usage: Dict[str, Any] = {} # Can store simple key-value or complex dict
 
     def track_step_input(self, step_name: str, input_text: str):
         """Track input for a pipeline step."""
@@ -243,6 +276,15 @@ class PipelineSummaryTracker:
         usage['calls'] += 1
         usage['total_input_tokens'] += input_tokens
         usage['total_output_tokens'] += output_tokens
+        
+    def track_model_for_step(self, step_name: str, model_name: str):
+        """
+        Associates a model with a specific pipeline step, used when token counts are not available.
+        This is simpler than track_model_usage and is intended for the skip-step logic.
+        """
+        # This will overwrite any existing complex data from track_model_usage,
+        # but in a skip-step scenario, this is the desired behavior.
+        self.model_usage[step_name] = model_name
 
 
     def generate_markdown_report(self) -> str:

@@ -75,10 +75,7 @@ class CommentaryFormatter:
         verse_commentary_section = f"## Verse-by-Verse Commentary\n{self._format_body_text(verses_text)}\n"
 
         # 5. Bibliographical Summary
-        biblio_summary = self._format_bibliographical_summary(summary_data)
-
-        # 6. Models Used
-        models_used = self._format_models_used(summary_data)
+        biblio_summary_section = self._format_bibliographical_summary(summary_data)
 
         # Assemble the document
         full_commentary = (
@@ -90,8 +87,7 @@ class CommentaryFormatter:
             "---\n" +
             verse_commentary_section +
             "---\n" +
-            biblio_summary +
-            models_used
+            biblio_summary_section
         )
 
         self.logger.info("Formatting complete.")
@@ -163,22 +159,20 @@ class CommentaryFormatter:
         else:
             lines.append(f"- Master Editor Prompt Size: {prompt_chars} characters")
 
-        return "\n".join(lines) + "\n"
-
-    def _format_models_used(self, summary_data: Dict[str, Any]) -> str:
-        """Creates the 'Models Used' section."""
-        self.logger.info("Formatting 'Models Used' section.")
-        lines = ["## Models Used"]
+        lines.append("") # Add a space before the next section
+        
+        # --- Models Used ---
+        lines.append("### Models Used")
         # The key in pipeline_stats.json is 'model_usage', not 'models'.
-        agent_models = summary_data.get('model_usage', {})
+        agent_models = stats.get('model_usage', {})
         if agent_models:
-            lines.append("This commentary was generated using:")
-            lines.append(f"**Structural Analysis (Macro)**: {agent_models.get('macro_analyst', {}).get('model', 'N/A')}")
-            lines.append(f"**Verse Discovery (Micro)**: {agent_models.get('micro_analyst_v2', {}).get('model', 'N/A')}")
-            lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis_writer', {}).get('model', 'N/A')}")
-            lines.append(f"**Editorial Review**: {agent_models.get('master_editor', {}).get('model', 'N/A')}")
+            lines.append(f"**Structural Analysis (Macro)**: {agent_models.get('macro_analysis', 'N/A')}")
+            lines.append(f"**Verse Discovery (Micro)**: {agent_models.get('micro_analysis', 'N/A')}")
+            lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis', 'N/A')}")
+            lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")
         else:
             lines.append("Model attribution data not available.")
+
         return "\n".join(lines) + "\n"
 
 

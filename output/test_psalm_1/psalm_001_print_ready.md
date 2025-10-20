@@ -81,5 +81,9 @@ In sum, Psalm 1’s artistry lies in how it lets a few concrete images carry a t
 - Concordance Entries Reviewed: 15
 - Figurative Language Instances Reviewed: 236
 - Master Editor Prompt Size: 120,232 characters
-## Models Used
-Model attribution data not available.
+
+### Models Used
+**Structural Analysis (Macro)**: claude-sonnet-4-20250514
+**Verse Discovery (Micro)**: claude-sonnet-4-20250514
+**Commentary Synthesis**: claude-sonnet-4-20250514
+**Editorial Review**: gpt-5

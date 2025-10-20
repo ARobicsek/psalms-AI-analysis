@@ -77,12 +77,8 @@ The structure of the psalm can now be seen in outline: A (answer/protect, v. 2) 
 - Lexicon Entries (BDB/Klein) Reviewed: 12
 - Traditional Commentaries Reviewed: 16 (Ibn Ezra (3); Malbim (3); Meiri (2); Metzudat David (3); Radak (3); Rashi (2))
 - Concordance Entries Reviewed: 31
-- Figurative Language Instances Reviewed: 100
+- Figurative Language Instances Reviewed: N/A
 - Master Editor Prompt Size: 112,861 characters
 
-## Models Used
-This commentary was generated using:
-**Structural Analysis (Macro)**: Claude Sonnet 4.5
-**Verse Discovery (Micro)**: Claude Sonnet 4.5
-**Commentary Synthesis**: Claude Sonnet 4.5
-**Editorial Review**: GPT-5
+### Models Used
+Model attribution data not available.
