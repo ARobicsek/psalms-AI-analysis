@@ -119,25 +119,30 @@ class CommentaryFormatter:
     def _format_bibliographical_summary(self, summary: Dict[str, Any]) -> str:
         """Creates the 'Methodological & Bibliographical Summary' section."""
         self.logger.info("Formatting bibliographical summary.")
-        lines = ["## Methodological & Bibliographical Summary\n\n"]
+        lines = ["## Methodological & Bibliographical Summary"]
         
-        # Extracting data with fallbacks
-        verse_count = summary.get('psalm_details', {}).get('verse_count', 'N/A')
-        lines.append(f"- LXX Texts Reviewed: {verse_count}")
+        # --- Research & Data Summary ---
+        lines.append("### Research & Data Inputs")
+        psalm_details = summary.get('psalm_details', {})
+        verse_count = psalm_details.get('verse_count', 'N/A')
+        lines.append(f"- Psalm Verses Analyzed: {verse_count}")
+        lines.append(f"- LXX (Septuagint) Texts Reviewed: {verse_count}")
         lines.append(f"- Phonetic Transcriptions Generated: {verse_count}")
 
-        research_summary = summary.get('research_bundle_summary', {})
-        lines.append(f"- Ugaritic Parallels Reviewed: {research_summary.get('ugaritic_parallels', 'N/A')}")
+        research_summary = summary.get('research', {})
+        lines.append(f"- Ugaritic Parallels Reviewed: {research_summary.get('ugaritic_parallels_found', 'N/A')}")
         lines.append(f"- Lexicon Entries (BDB/Klein) Reviewed: {research_summary.get('lexicon_entries', 'N/A')}")
         
-        commentaries = research_summary.get('commentary_entries_by_commentator', {})
+        commentaries = research_summary.get('commentary_counts', {})
+        total_commentaries = sum(commentaries.values()) if commentaries else research_summary.get('total_commentary_entries', 'N/A')
+
         if commentaries:
             commentary_lines = []
             for commentator, count in commentaries.items():
                 commentary_lines.append(f"{commentator} ({count})")
-            lines.append(f"- Traditional Commentaries Reviewed: {research_summary.get('commentary_entries', 0)} ({'; '.join(commentary_lines)})")
+            lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries} ({'; '.join(commentary_lines)})")
         else:
-            lines.append(f"- Traditional Commentaries Reviewed: {research_summary.get('commentary_entries', 'N/A')}")
+            lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries}")
 
         lines.append(f"- Concordance Entries Reviewed: {research_summary.get('concordance_results', 'N/A')}")
         lines.append(f"- Figurative Language Instances Reviewed: {research_summary.get('figurative_instances', 'N/A')}")
@@ -164,9 +169,9 @@ class CommentaryFormatter:
             lines.append(f"**Commentary Synthesis**: Claude Sonnet 4.5")
             lines.append(f"**Editorial Review**: GPT-5")
             return "\n".join(lines) + "\n"
-
+        # This part is kept for future use if you decide to track models differently
         for model, usage in models.items():
-            lines.append(f"- {model}: {usage.get('count', 0)} calls")
+            lines.append(f"{model}: {usage.get('count', 0)} calls")
         return "\n".join(lines) + "\n"
 
 

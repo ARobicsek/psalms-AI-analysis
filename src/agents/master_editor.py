@@ -112,7 +112,7 @@ Review the introduction and verse commentary for these issues:
 **Too "LLM-ish" or breathless:**
 - Overuse of words like: "masterpiece," "tour de force," "breathtaking," "audacious," "remarkable," "stunning"
 - Telling instead of showing (saying "brilliant" instead of demonstrating brilliance through analysis)
-- Academic jargon dropped in without integration or explanation
+- Academic jargon dropped in WITHOUT integration or explanation (jargon is fine if it's explained)
 - Unnecessarily complex sentence structures that obscure rather than illuminate
 
 **Should conform to this style:**
@@ -122,6 +122,7 @@ Review the introduction and verse commentary for these issues:
 - Vary sentence structure for readability
 - Explain technical terms when needed (e.g., "jussive," "anaphora," "chiasm," "inclusio")
 - Elegant, uncluttered prose for sophisticated lay readers (New Yorker/Atlantic level)
+- AVOID pompous tone and fancy terms that signal you're a professor; prove your erudition through the incisive and original quality of your insights
 
 ### 4. ARGUMENT COHERENCE
 - Introduction thesis unclear or unsupported
