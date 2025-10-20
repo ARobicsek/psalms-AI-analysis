@@ -205,7 +205,8 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - You are provided with an authoritative phonetic transcription for each verse (e.g., `**Phonetic**: po-te-akh et-ya-de-kha`).
    - **USE THIS DATA**: When discussing alliteration, assonance, or other sound-based poetic devices, you MUST base your claims on this transcription, not on modern pronunciation.
    - **VERIFY CLAIMS**: For example, before claiming a "soft 'f' sound," check the transcription. If it says `p` (e.g., in `po-te-akh`), your claim is incorrect. The transcription is your ground truth for all phonetic analysis. Distinguish `p` vs `f`, `b` vs `v`, `k` vs `kh`.
-
+    - if you are ever providing a transcription for ANY reason, you must use the authoritative phonetic transcription provided to you; **do not make it up on your own.**
+   
 2. **Poetics**
    - Parallelism types (synonymous, antithetical, synthetic, climactic)
    - Wordplay (paronomasia, alliteration, assonance) - *Must be verified with phonetic transcription*

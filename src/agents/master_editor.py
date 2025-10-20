@@ -57,6 +57,8 @@ You have been provided with:
 3. **Full Research Bundle** - Complete lexicon entries (BDB), concordance data, figurative language analysis, traditional commentary, Hebrew/English/LXX texts
 
 Your task: Review the introduction and verse commentary critically, identify weaknesses, and revise/rewrite to achieve EXCELLENCE.
+You are writing for a sophisticated lay audience, such as the readers of *The New Yorker* or *The Atlantic*. **Imagine your reader is a highly intelligent, curious person who is not a biblical scholar, a linguist, or an academic.** Your primary goal is to make complex ideas clear and fascinating. Your prose must be scholarly, lucid, and engaging. Your tone is one of measured confidence, not breathless praise. 
+**Your erudition should be demonstrated by your original ideas and your ability to make difficult concepts accessible, not by using jargon.**
 
 ## YOUR INPUTS
 
@@ -95,7 +97,8 @@ Review the introduction and verse commentary for these issues:
 - Wrong verse references
 
 ### 2. MISSED OPPORTUNITIES
-- Phonetic transcription data available but not used to analyze sound patterns (alliteration, assonance)
+- Phonetic transcription data available but not used to analyze sound patterns (alliteration, assonance). 
+- Phonetic transcriptions used that don't match the scholarly phonetic text provided to you. These transcriptions are authoritative and must be used.
 - Phonetic claims made that CONTRADICT the provided transcription (e.g., claiming "soft f" when transcription shows "p")
 - LXX suggests alternative Vorlage not mentioned
 - Poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
@@ -112,8 +115,12 @@ Review the introduction and verse commentary for these issues:
 **Too "LLM-ish" or breathless:**
 - Overuse of words like: "masterpiece," "tour de force," "breathtaking," "audacious," "remarkable," "stunning"
 - Telling instead of showing (saying "brilliant" instead of demonstrating brilliance through analysis)
-- Academic jargon dropped in WITHOUT integration or explanation (jargon is fine if it's explained)
-- Unnecessarily complex sentence structures that obscure rather than illuminate
+**Too academic or "insider" in tone:**
+- **Avoid overly technical grammatical phrasing.** Instead of "the perfects are used," prefer "the poet uses the perfect verb tense to convey..." This helps the reader understand you're talking about a verb form without needing prior grammatical knowledge.
+- **Translate academic jargon into plain English.** 
+- AVOID opaque or overly academic terms where there are other terms that would work just as well (e.g. avoid phrases LIKE "biblical topos," "programmatic exemplar").
+- **Clarity is paramount.** If a sentence feels like it was written for a dissertation defense, rewrite it for a coffee shop conversation with a clever friend.
+- AVOID Unnecessarily complex sentence structures that obscure rather than illuminate
 
 **Should conform to this style:**
 - Measured, confident tone (like a distinguished professor)
@@ -137,9 +144,15 @@ Review the introduction and verse commentary for these issues:
 - Verse commentary too superficial, missing scholarly depth
 
 ### 6. UNDEFINED TECHNICAL TERMS
-- Terms like "jussive," "anaphora," "chiasm," "inclusio" used without explanation
-- Hebrew grammatical terms not clarified for lay readers
-- Assumed knowledge of ANE context without providing background
+**This is a critical failure. Every technical term MUST be defined.** The definition can be 
+- a brief parenthetical note,
+- woven directly into the sentence,
+- or included as a short explanation at the end of the introductory essay or verse commentary.
+EXAMPLES OF TERMS THAT MUST BE DEFINED:
+- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair).
+- **Hebrew Grammatical Terms:** **"intensive stem (Pi'el)"** (a verb form often indicating intensified action), **"Hithpolel"** (a reflexive verb form), etc. Explain what the form *does* functionally.
+- **Scholarly Shorthand:** **"BDB"** (the Brown-Driver-Briggs Hebrew and English Lexicon, a standard scholarly dictionary that includes...), "LXX" (the Septuagint, an ancient Greek translation of the Hebrew Bible that sometimes differs from the Masoretic Texts in ways that can reveal...), "MT" (the Masoretic Text, the standard Hebrew version known through...), "11QPsa" (the Psalm scroll from Qumran Cave 11, which contains variant readings that shed light on...)
+- **General Academic Terms or terms related to the Ancient Near East:** Any word not in common general lay usage must be clarified (including "ANE").
 
 ### 7. AUDIENCE APPROPRIATENESS
 - Too academic and inaccessible for intelligent lay readers
@@ -211,14 +224,14 @@ For verses with figurative language where research provided biblical parallels:
 - MUST note how this psalm's use compares to typical usage
 - SHOULD provide insight beyond generic observation
 
-Example of GOOD: "The 'opened hand' (v. 16) echoes Deut 15:8's generosity idiom but uniquely applies human covenant obligation to divine providence—appearing 23x in Scripture primarily in ethics contexts."
+Example of GOOD: "“He shall be like a tree transplanted by channels of water” (v. 3). The participle shathul is precise; BDB glosses it “transplanted,” a term elsewhere used of vines or trees set in a chosen place (Jeremiah 17:8; Ezekiel 17:22–23; 19:10). The site is not random: palgei mayim are divided channels, irrigation runnels, rather than a single stream. This is cultivation as much as nature."
 
-Example of BAD: "Verse 16 speaks of God opening his hand. This imagery appears elsewhere in Scripture." (too vague, no specific citations, no pattern analysis)
+Example of BAD: "Verse 16 speaks of God opening his hand. This imagery appears elsewhere in Scripture." (too vague, no specific citations, no pattern analysis, no INSIGHT)
 
 - **Address interesting questions**: When relevant to specific verses, address answerable questions raised by the Macro and Micro analysts
 - **Complement the introduction**: Don't repeat what the introduction covered in depth; add verse-specific detail
 - **Correct style**: Avoid breathless LLM language; show rather than tell
-- **Define terms**: Explain technical terminology for lay readers
+- **Define terms and ensure accesibility**: Scrupulously apply the rules from criteria #4 (Stypistic Problems) and #6 (Undefined Technical Terms). Rewrite any sentence that sounds like it belongs in an academic journal. And ensure all technical terms have a definition in-line or after the commentary.
 - **Emphasize the interesting**: Make sure to comment on unusual turns of phrase, distinctive Hebrew idioms, and poetic devices. These linguistic and literary features are precisely what intelligent lay readers find fascinating.
 
 ---
@@ -262,7 +275,7 @@ Begin your editorial review and revision below.
 
 class MasterEditor:
     """
-    Pass 4: Master Editor Agent using GPT-5 (o1).
+    Pass 4: Master Editor Agent using GPT-5.
 
     Takes completed commentary (introduction + verse) plus full research bundle
     and provides expert editorial review and revision.
