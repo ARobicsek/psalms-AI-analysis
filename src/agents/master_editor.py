@@ -78,6 +78,9 @@ Your task: Review the introduction and verse commentary critically, identify wea
 ### MICRO DISCOVERIES (verse-level observations)
 {micro_analysis}
 
+### ANALYTICAL FRAMEWORK (for reference on poetic conventions)
+{analytical_framework}
+
 ---
 
 ## YOUR EDITORIAL REVIEW CRITERIA
@@ -182,6 +185,10 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Rich figurative language requiring comparative analysis
 
   Remember: intelligent lay readers are HUNGRY for substantive analysis of linguistic and literary features. Don't shortchange them!
+
+- **Scholarly Grounding**: Your analysis must be grounded in the provided research bundle and demonstrate awareness of the principles in the **ANALYTICAL FRAMEWORK** document. Use its terminology (e.g., "telescopic analysis," "A is so, and what's more, B") where appropriate to frame your insights.
+
+- **Discretion**: You have full editorial discretion. You are not required to include every detail from the synthesizer's commentary. Your role is to *evaluate* the synthesizer's choices regarding phonetic and figurative language, and then decide whether to retain, enhance, rewrite, or replace them to achieve the highest level of scholarly excellence.
 
 - **Items of interest to include** (when relevant):
   * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided))
@@ -351,6 +358,16 @@ class MasterEditor:
             # Try to extract from database
             psalm_text = self._get_psalm_text(psalm_number)
 
+        # Load analytical framework from RAG
+        try:
+            from src.agents.rag_manager import RAGManager
+            rag_manager = RAGManager("docs")
+            analytical_framework = rag_manager.load_analytical_framework()
+            self.logger.info("✓ Analytical framework loaded successfully for Master Editor.")
+        except Exception as e:
+            self.logger.warning(f"Could not load analytical framework: {e}")
+            analytical_framework = "[Analytical framework not available]"
+
         self.logger.info(f"Editing commentary for Psalm {psalm_number}")
         self.logger.info(f"  Introduction: {len(introduction)} chars")
         self.logger.info(f"  Verse commentary: {len(verse_commentary)} chars")
@@ -364,7 +381,8 @@ class MasterEditor:
             research_bundle=research_bundle,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
-            psalm_text=psalm_text
+            psalm_text=psalm_text,
+            analytical_framework=analytical_framework
         )
 
         self.logger.info("Master editorial review complete")
@@ -382,7 +400,8 @@ class MasterEditor:
         research_bundle: str,
         macro_analysis: Dict,
         micro_analysis: Dict,
-        psalm_text: str
+        psalm_text: str,
+        analytical_framework: str
     ) -> Dict[str, str]:
         """Call GPT-5 for editorial review."""
         self.logger.info(f"Calling GPT-5 (o1) for editorial review of Psalm {psalm_number}")
@@ -399,7 +418,8 @@ class MasterEditor:
             research_bundle=research_bundle,
             psalm_text=psalm_text or "[Psalm text not available]",
             macro_analysis=macro_text,
-            micro_analysis=micro_text
+            micro_analysis=micro_text,
+            analytical_framework=analytical_framework
         )
 
         # Save prompt for debugging
@@ -610,7 +630,7 @@ class MasterEditor:
                 lines.append(f"**Verse {verse_num}**")
                 if phonetic:
                     lines.append(f"**Phonetic**: `{phonetic}`")
-                lines.append(f"{commentary[:200]}...")
+                lines.append(commentary)
                 lines.append("")
 
             if len(verses) > 5:

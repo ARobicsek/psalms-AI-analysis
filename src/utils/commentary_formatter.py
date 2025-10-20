@@ -107,14 +107,20 @@ class CommentaryFormatter:
             hebrew = verse_data['hebrew']
             english = verse_data['english']
 
-            # Format: verse number, Hebrew, then three spaces, then English (same line)
-            # Three spaces for visual separation between RTL/LTR text
-            output.append(f"{verse_num}. {hebrew}   {english}")
+            # Use a Left-to-Right Mark (U+200E) followed by a tab to force separation
+            # when pasting into applications like Microsoft Word.
+            # The LRM signals the start of LTR text, and the tab creates a visible space.
+            lrm = "\u200e"  # Left-to-Right Mark
+            output.append(f"{verse_num}. {hebrew}   {lrm}\t\t{english}")
 
         # Introduction
         output.append("---")
         output.append("## Introduction")
-        output.append(introduction.strip())
+
+        # Replace double newlines with single newlines in the introduction
+        # to reduce paragraph spacing when pasting into Word.
+        single_spaced_intro = introduction.strip().replace('\n\n', '\n')
+        output.append(single_spaced_intro)
 
         # Verse-by-verse commentary
         output.append("## Verse-by-Verse Commentary")
@@ -125,22 +131,23 @@ class CommentaryFormatter:
             commentary = commentary_sections.get(verse_num, "[Commentary not found]")
 
             # Format verse section - no bold labels
-            output.append(f"### Verse {verse_num}")
-            # Hebrew and English text without labels
-            output.append(f"{hebrew}")
-            output.append(f"{english}")
+            output.append(f"### Verse {verse_num}") 
+            # Use a Left-to-Right Mark (U+200E) followed by a tab to force separation
+            # when pasting into applications like Microsoft Word.
+            lrm = "\u200e"
+            output.append(f"{hebrew}   {lrm}\t\t{english}")
             # Commentary
-            output.append(commentary.strip())
+            single_spaced_commentary = commentary.strip().replace('\n\n', '\n')
+            output.append(single_spaced_commentary)
             output.append("---")
 
         # Models footer (using dynamic model information)
         output.append("## Models Used")
-        output.append("")
         output.append("This commentary was generated using:")
-        output.append(f"- **Structural Analysis (Macro)**: {models_used.get('macro', 'Unknown')}")
-        output.append(f"- **Verse Discovery (Micro)**: {models_used.get('micro', 'Unknown')}")
-        output.append(f"- **Commentary Synthesis**: {models_used.get('synthesis', 'Unknown')}")
-        output.append(f"- **Editorial Review**: {models_used.get('editor', 'Unknown')}")
+        output.append(f"**Structural Analysis (Macro)**: {models_used.get('macro', 'Unknown')}")
+        output.append(f"**Verse Discovery (Micro)**: {models_used.get('micro', 'Unknown')}")
+        output.append(f"**Commentary Synthesis**: {models_used.get('synthesis', 'Unknown')}")
+        output.append(f"**Editorial Review**: {models_used.get('editor', 'Unknown')}")
 
         # Join into single document
         document = "\n".join(output)
@@ -316,12 +323,22 @@ def main():
         print()
         print("Formatting...")
 
+        # Create a default models_used dictionary for standalone execution
+        # This ensures the correct formatting path is taken.
+        default_models = {
+            'macro': 'Claude Sonnet 4.5',
+            'micro': 'Claude Sonnet 4.5',
+            'synthesis': 'Claude Sonnet 4.5',
+            'editor': 'GPT-5'
+        }
+
         formatter.format_from_files(
             intro_file=args.intro,
             verses_file=args.verses,
             psalm_number=args.psalm,
             output_file=args.output,
-            apply_divine_names=not args.no_divine_names
+            apply_divine_names=not args.no_divine_names,
+            models_used=default_models
         )
 
         print()

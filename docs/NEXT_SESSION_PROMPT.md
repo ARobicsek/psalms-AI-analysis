@@ -1,10 +1,69 @@
 # Next Session Prompt - Psalms Commentary Project
 
-**Date**: 2025-10-19 (Updated after Session 5)
-**Phase**: Phase 4 - Complete (All Enhancements Implemented)
+**Date**: 2025-10-19 (Updated after Session 7)
+**Phase**: Phase 4 - Master Editor Enhancement
 
 ---
 
+## SESSION 7 (2025-10-19 Evening): Print-Ready Formatting Refinements - COMPLETE ✅
+
+### What Was Accomplished
+
+This session focused on fine-tuning the output of `commentary_formatter.py` to ensure a clean copy-paste experience into Microsoft Word.
+
+1.  **Critical Bug Fix: LTR/RTL Formatting in Word**
+    - **Problem**: When pasting bilingual (Hebrew/English) lines into Word, the text would run together with no separation, and manual spacing attempts failed.
+    - **Fix**: Implemented a robust solution using a Left-to-Right Mark (`\u200e`) followed by two tab characters (`\t\t`) between the Hebrew and English text. This creates a reliable visual space that Word's rendering engine respects. This was applied to both the "Psalm Text" and "Verse-by-Verse Commentary" sections.
+
+2.  **Enhancement: Reduced Paragraph Spacing**
+    - **Problem**: Double newlines in the markdown source created large, undesirable gaps between paragraphs in Word.
+    - **Fix**: Replaced all double newlines (`\n\n`) with single newlines (`\n`) in the introduction and verse commentary sections. This creates "soft breaks" for a tighter, more professional layout.
+
+3.  **Enhancement: "Models Used" Section Cleanup**
+    - Removed the extra blank line after the `## Models Used` header.
+    - Removed the leading hyphens from the model list for a cleaner, non-bulleted appearance.
+
+### Files Modified
+
+- **`src/utils/commentary_formatter.py`**: All formatting changes were implemented here.
+
+### Evidence of Success
+- ✅ Regenerated `psalm_145_print_ready.md` contains the new formatting.
+- ✅ Pasting the content into Word now preserves visual separation and has appropriate paragraph spacing.
+
+---
+
+## SESSION 6 (2025-10-19 Evening): Master Editor Context & Commentary Fix - COMPLETE ✅
+
+### What Was Accomplished
+
+1.  **Critical Bug Fix: Master Editor Commentary Truncation**
+    - **Problem**: The Master Editor was only receiving the first 200 characters of the synthesizer's verse-by-verse commentary, causing it to miss all detailed phonetic and figurative language analysis. This resulted in short, superficial edits.
+    - **Fix**: Removed the `[:200]` truncation in `master_editor.py`. The editor now receives the **full, un-truncated commentary** for the first 5 verses, giving it the complete context for its review.
+
+2.  **Critical Enhancement: Master Editor Scholarly Context**
+    - **Problem**: The Master Editor was not being provided with the `analytical_framework.md` document that guides the other agents on poetic and literary principles.
+    - **Fix**: The `master_editor.py` agent now loads and injects the full analytical framework into its prompt. This gives it the same deep knowledge base as the synthesizer.
+
+3.  **Prompt Enhancement: Informed Discretion**
+    - The Master Editor prompt was updated to explicitly grant it **editorial discretion** over the synthesizer's analysis.
+    - It is now instructed to *evaluate*, *verify*, and *enhance* the phonetic and figurative analysis, rather than just summarizing it. This encourages deeper scholarly engagement.
+
+### Files Modified
+
+- **`src/agents/master_editor.py`**
+  - Lines 188-194: Added new prompt instructions for scholarly grounding and discretion.
+  - Lines 372-378: Added logic to load `analytical_framework.md` via `RAGManager`.
+  - Lines 424-425: Passed the framework to the prompt formatter.
+  - Line 626: Removed the `[:200]` truncation, passing the full commentary.
+
+### Evidence of Success
+
+- ✅ Code changes applied to `master_editor.py`.
+- ✅ Documentation updated in `NEXT_SESSION_PROMPT.md`.
+- 🔄 **Next Step**: Re-run the pipeline from the master editor step for Psalm 145 to validate the fix.
+
+---
 ## SESSION 5 (2025-10-19 Evening): Pydantic Object Handling & Phonetic Data Flow - COMPLETE ✅
 
 ### What Was Accomplished
@@ -194,14 +253,14 @@ Step 6: CommentaryFormatter → Print-ready output (bug fixed)
 
 ---
 
-## Next Priorities
+## Next Priorities (Post-Fix Validation)
 
 ### Immediate (Next Session):
 
-1. **Complete Psalm 23 test run**
-   - Let background Master Editor finish
-   - Generate print-ready output
-   - Compare with Psalm 145 to validate consistency
+1. **Validate Master Editor Fix for Psalm 145**
+   - Re-run the pipeline for Psalm 145, skipping to the `master_editor` step.
+   - Compare the new `psalm_145_edited_verses.md` with `psalm_145_synthesis_verses.md`.
+   - **Expected Outcome**: The editor's commentary should be longer and clearly engage with the phonetic and figurative details provided by the synthesizer.
 
 2. **Validate figurative language improvements across multiple psalms**
    - Run 2-3 more test psalms (recommended: Psalm 1, Psalm 29)
