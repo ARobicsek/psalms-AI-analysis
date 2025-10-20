@@ -227,24 +227,20 @@ OUTPUT FORMAT: Return ONLY valid JSON:
 {{
   "bdb_requests": [
     {{"word": "קוֹל", "reason": "Central to sevenfold anaphora - need semantic range and theological uses"}},
-    {{"word": "בְּנֵי אֵלִים", "reason": "Divine council puzzle - etymology and comparative ANE usage"}},
-    ... (20-40 requests)
+    {{"word": "בְּנֵי אֵלִים", "reason": "Divine council puzzle - etymology and comparative ANE usage"}}
   ],
   "concordance_searches": [
     {{"query": "קול יהוה", "level": "consonantal", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns"}},
-    {{"query": "בני אלים", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible"}},
-    ... (5-10 searches)
+    {{"query": "בני אלים", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible"}}
   ],
   "figurative_checks": [
     {{"verse": 3, "reason": "Waters as primordial chaos imagery - vivid and theologically rich", "vehicle": "waters", "vehicle_synonyms": ["water", "sea", "seas", "deep", "depths", "flood", "floods", "ocean", "oceans"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch"}},
     {{"verse": 5, "reason": "Voice 'breaking' cedars - unusual storm personification", "vehicle": "breaking", "vehicle_synonyms": ["break", "breaks", "shatter", "shatters", "shattering", "split", "splits", "fracture", "fractures"], "broader_terms": ["power", "force", "destruction"], "scope": "Psalms+Pentateuch"}},
-    {{"verse": 7, "reason": "Stronghold imagery - architectural metaphor for divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["strongholds", "fortress", "fortresses", "citadel", "citadels", "refuge", "refuges"], "broader_terms": ["military", "protection", "defense"], "scope": "Psalms+Pentateuch"}},
-    ... (8-12 most striking figurative elements for psalms >15 verses)
+    {{"verse": 7, "reason": "Stronghold imagery - architectural metaphor for divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["strongholds", "fortress", "fortresses", "citadel", "citadels", "refuge", "refuges"], "broader_terms": ["military", "protection", "defense"], "scope": "Psalms+Pentateuch"}}
   ],
   "commentary_requests": [
     {{"verse": 1, "reason": "Divine council interpretation - how do traditional commentators handle 'sons of gods'?"}},
-    {{"verse": 10, "reason": "Mabbul (flood) term - rare word needing classical commentary context"}},
-    ... (3-6 key verses)
+    {{"verse": 10, "reason": "Mabbul (flood) term - rare word needing classical commentary context"}}
   ]
 }}
 

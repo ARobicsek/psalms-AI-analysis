@@ -1,33 +1,292 @@
 {
   "psalm_number": 145,
-  "pipeline_start": "2025-10-19T18:56:50.559406",
-  "pipeline_end": "2025-10-19T19:04:07.030917",
+  "pipeline_start": "2025-10-19T20:02:58.940345",
+  "pipeline_end": "2025-10-19T20:22:20.450700",
   "steps": {
+    "micro_analysis": {
+      "input_char_count": 9160,
+      "input_token_estimate": 3053,
+      "output_char_count": 125730,
+      "output_token_estimate": 41910,
+      "duration_seconds": 198.20668983459473,
+      "timestamp": "2025-10-19T20:02:59.274233"
+    },
     "synthesis": {
-      "input_char_count": 425228,
-      "input_token_estimate": 141742,
-      "output_char_count": 52406,
-      "output_token_estimate": 17468,
-      "duration_seconds": 315.4569683074951,
-      "timestamp": "2025-10-19T18:56:51.230673"
+      "input_char_count": 134892,
+      "input_token_estimate": 44964,
+      "output_char_count": 60148,
+      "output_token_estimate": 20049,
+      "duration_seconds": 384.17406034469604,
+      "timestamp": "2025-10-19T20:08:17.487924"
+    },
+    "master_editor": {
+      "input_char_count": 183364,
+      "input_token_estimate": 61121,
+      "output_char_count": 22387,
+      "output_token_estimate": 7462,
+      "duration_seconds": 218.67511343955994,
+      "timestamp": "2025-10-19T20:16:42.956223"
     }
   },
   "research": {
-    "lexicon_requests": [],
-    "concordance_requests": [],
-    "figurative_requests": [],
-    "commentary_requests": [],
-    "lexicon_entries_count": 0,
-    "concordance_results": {},
-    "figurative_results": {},
-    "commentary_counts": {},
-    "ugaritic_parallels": [],
-    "research_bundle_chars": 0,
-    "research_bundle_tokens": 0
+    "lexicon_requests": [
+      {
+        "word": "תְּהִלָּה",
+        "reason": "Unique psalm superscription - only occurrence as title vs. collection name tehillim"
+      },
+      {
+        "word": "אֲרוֹמִמְךָ",
+        "reason": "Exaltation verb - semantic range and theological usage patterns"
+      },
+      {
+        "word": "מְהֻלָּל",
+        "reason": "Intensive Pual participle - nuanced meaning and grammatical significance"
+      },
+      {
+        "word": "חֵקֶר",
+        "reason": "Rare term for divine incomprehensibility - specific connotations"
+      },
+      {
+        "word": "הֲדַר",
+        "reason": "Glory term in triple accumulation - distinct from כבוד and הוד"
+      },
+      {
+        "word": "אָשִׂיחָה",
+        "reason": "Meditation/recitation verb - cultic vs. personal usage"
+      },
+      {
+        "word": "נִפְלְאֹתֶיךָ",
+        "reason": "Technical term for divine interventions - theological significance"
+      },
+      {
+        "word": "עֱזוּז",
+        "reason": "Strength/might term with textual variants - precise meaning"
+      },
+      {
+        "word": "יַבִּיעוּ",
+        "reason": "Rare overflow verb - spontaneous vs. deliberate connotations"
+      },
+      {
+        "word": "חַנּוּן",
+        "reason": "Divine mercy formula term - relationship to Exodus 34:6"
+      },
+      {
+        "word": "אֶרֶךְ אַפַּיִם",
+        "reason": "Idiom for divine patience - literal nose/nostril metaphor"
+      },
+      {
+        "word": "מַלְכוּת",
+        "reason": "Royal terminology central to psalm - semantic development"
+      },
+      {
+        "word": "מֶמְשַׁלְתְּךָ",
+        "reason": "Dominion term parallel to malkut - distinct meanings"
+      },
+      {
+        "word": "נֹּפְלִים",
+        "reason": "Fallen ones requiring divine support - theological implications"
+      },
+      {
+        "word": "יְשַׂבֵּרוּ",
+        "reason": "Expectant hope verb - trust/dependency connotations"
+      },
+      {
+        "word": "רָצוֹן",
+        "reason": "Favor/delight term - range from desire to divine pleasure"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "תהלה",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Track praise terminology vs. tehillim collection name"
+      },
+      {
+        "query": "לעולם ועד",
+        "scope": "Psalms",
+        "level": "exact",
+        "purpose": "Eternal formula usage patterns and contexts"
+      },
+      {
+        "query": "דור לדור",
+        "scope": "Tanakh",
+        "level": "exact",
+        "purpose": "Generational transmission language across Scripture"
+      },
+      {
+        "query": "חנון ורחום",
+        "scope": "Tanakh",
+        "level": "exact",
+        "purpose": "Divine mercy formula occurrences and variations"
+      },
+      {
+        "query": "בני האדם",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Universal humanity designation usage"
+      },
+      {
+        "query": "מלכות כל עלמים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Eternal kingdom formula - Ugaritic parallels"
+      },
+      {
+        "query": "כל בשר",
+        "scope": "Tanakh",
+        "level": "exact",
+        "purpose": "All flesh universalism contexts"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Triple glory accumulation - rare stacking of divine splendor terms | Vehicle: glory | Related terms: glorious, majesty, majestic, splendor, magnificence",
+        "vehicle": "glory",
+        "vehicle_terms": [
+          "glory",
+          "glorious",
+          "majesty",
+          "majestic",
+          "splendor",
+          "magnificence"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Gushing forth metaphor - spontaneous overflow of praise | Vehicle: gush | Related terms: gushes, gushing, bubble, bubbles, bubbling, overflow, overflows, pour forth",
+        "vehicle": "gush",
+        "vehicle_terms": [
+          "gush",
+          "gushes",
+          "gushing",
+          "bubble",
+          "bubbles",
+          "bubbling",
+          "overflow",
+          "overflows",
+          "pour forth"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Fallen/bent imagery - divine king supporting vulnerable | Vehicle: fallen | Related terms: fall, falling, bent, bending, bowed, collapse, collapsed",
+        "vehicle": "fallen",
+        "vehicle_terms": [
+          "fallen",
+          "fall",
+          "falling",
+          "bent",
+          "bending",
+          "bowed",
+          "collapse",
+          "collapsed"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Eyes of expectation - universal dependency imagery | Vehicle: wait | Related terms: waiting, expect, expecting, hope, hoping, look, looking",
+        "vehicle": "wait",
+        "vehicle_terms": [
+          "wait",
+          "waiting",
+          "expect",
+          "expecting",
+          "hope",
+          "hoping",
+          "look",
+          "looking"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Open hand gesture - divine generosity imagery | Vehicle: open hand | Related terms: opened hand, opening hand, hand opened, generous hand",
+        "vehicle": "open hand",
+        "vehicle_terms": [
+          "open hand",
+          "opened hand",
+          "opening hand",
+          "hand opened",
+          "generous hand"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Divine nearness paradox - transcendence yet accessibility | Vehicle: near | Related terms: close, nearby, approach, approaches, approaching",
+        "vehicle": "near",
+        "vehicle_terms": [
+          "near",
+          "close",
+          "nearby",
+          "approach",
+          "approaches",
+          "approaching"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "145:1",
+        "reason": "Unique tehillah superscription - why this psalm alone bears the title of the entire collection"
+      },
+      {
+        "verse": "145:8",
+        "reason": "Divine mercy formula placement - why center this creedal statement in the acrostic structure"
+      },
+      {
+        "verse": "145:13",
+        "reason": "LXX addition of verse 13a not in Hebrew - textual and theological implications"
+      },
+      {
+        "verse": "145:20",
+        "reason": "Tension between universal mercy (v.9) and destruction of wicked - theological resolution"
+      }
+    ],
+    "lexicon_entries_count": 36,
+    "concordance_results": {
+      "תהלה": 8,
+      "לעולם ועד": 0,
+      "דור לדור": 0,
+      "חנון ורחום": 0,
+      "בני האדם": 11,
+      "מלכות כל עלמים": 0,
+      "כל בשר": 0
+    },
+    "figurative_results": {
+      "vNone:None": 28
+    },
+    "commentary_counts": {
+      "Ibn Ezra": 4,
+      "Radak": 4,
+      "Metzudat David": 3,
+      "Malbim": 3,
+      "Meiri": 4
+    },
+    "ugaritic_parallels": [
+      {
+        "type": "Poetic Word Pair",
+        "reference": "Psalm 145:13",
+        "analysis": "This shared formula for celebrating divine kingship demonstrates a common liturgical and royal vocab..."
+      }
+    ],
+    "research_bundle_chars": 111592,
+    "research_bundle_tokens": 37197
   },
   "analysis": {
     "macro_questions": [],
-    "micro_questions": [],
+    "micro_questions": [
+      "Why is this the only psalm titled 'tehillah' (praise) when the entire collection is 'tehillim'?",
+      "What is the significance of the missing nun in this acrostic - scribal error or theological statement?",
+      "How does the triple glory accumulation 'הֲדַר כְּבוֹד הוֹדֶךָ' function - are these distinct concepts or poetic intensification?",
+      "Why does the LXX add verse 13a ('Faithful is the Lord in his words') not found in Hebrew manuscripts?",
+      "How does the psalm resolve the tension between universal mercy (v.9) and destruction of the wicked (v.20)?",
+      "What is the relationship between 'those who fear him' (v.19) and 'those who love him' (v.20) - same group or progression?",
+      "Why does the psalm shift from cosmic kingship (vv.11-13) to individual care (vv.14-16) - theological strategy or liturgical function?",
+      "How does the rare verb 'yabbi'u' (gush forth, v.7) contribute to the psalm's imagery of spontaneous praise?",
+      "What does the phrase 'in truth' (be'emet, v.18) specifically require for divine accessibility?",
+      "How does the final 'all flesh' (kol-basar) relate to earlier universal terms like 'all works' and 'sons of men'?"
+    ],
     "verse_count": 0
   }
 }
