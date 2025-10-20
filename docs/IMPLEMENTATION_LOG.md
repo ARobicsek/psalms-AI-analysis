@@ -3578,6 +3578,50 @@ With the print-ready formatter now stable and correctly displaying pipeline stat
 
 ## 2025-10-17 - Day 8: Phase 3a - MacroAnalyst Agent (Pass 1)
 
+---
+
+## 2025-10-20 - Day 9: Pipeline Statistics Bug Fixes
+
+### Session Started
+Morning session - Investigating and fixing two subtle data discrepancies in the pipeline summary outputs.
+
+### Tasks Completed
+✅ **Bug Fix 1: `master_editor` Stats Discrepancy**: Fixed a bug where the token statistics for the `master_editor` step were different in the `pipeline_summary.md` and `pipeline_stats.json` files.
+   - **Root Cause**: A classic producer-consumer mismatch. The `run_enhanced_pipeline.py` script (the producer of stats) was not tracking the `analytical_framework.md` file as an input for the Master Editor. However, the `master_editor.py` agent (the consumer) *was* loading and using this file.
+   - **Result**: The `pipeline_stats.json` file had an incorrectly low input token count, while the `pipeline_summary.md` (which used data from the agent's output) had the correct, higher count.
+   - **Fix**: Modified `run_enhanced_pipeline.py` to load the `analytical_framework.md` and include it in the input tracking for the `master_editor` step, synchronizing the stats.
+
+✅ **Bug Fix 2: `None` Verse in Figurative Language Summary**: Fixed a bug where the "Verse" column in the figurative language request table in `pipeline_summary.md` always showed `None`.
+   - **Root Cause**: The `PipelineSummaryTracker` in `src/utils/pipeline_summary.py` was trying to access the wrong attribute on the request object (`verse_start` or `chapter` instead of the correct `verse` attribute).
+   - **Fix**: Updated the tracker to use `getattr(req, 'verse', None)`, which correctly pulls the verse number when available and correctly defaults to `None` for psalm-wide thematic requests.
+
+### Key Learnings
+
+#### 1. External Trackers Must Perfectly Mirror Internal Logic
+The `master_editor` stats bug was a powerful reminder that any external tracking or orchestration script must have a perfect, 1:1 understanding of the inputs an agent uses internally. When an agent independently loads a file (like the analytical framework), the external tracker must do the same to maintain data integrity.
+
+#### 2. Attribute Mismatches are a Common Source of Bugs
+The `None` verse bug was caused by a simple attribute name mismatch between the data object being created by `MicroAnalystV2` and the attribute being read by `PipelineSummaryTracker`. This highlights the value of using shared schemas or dataclasses across the producer-consumer boundary to enforce consistency.
+
+### Decisions Made (#decision-log)
+
+#### Decision 1: Synchronize Pipeline Runner with Agent Logic
+**Choice**: Update `run_enhanced_pipeline.py` to explicitly load and track all files the `MasterEditor` uses.
+**Rationale**: This is the only way to ensure the `pipeline_stats.json` file is an accurate representation of the pipeline's execution. The tracker must be as knowledgeable as the agent it is tracking.
+
+### Files Modified
+- `scripts/run_enhanced_pipeline.py`: To fix the `master_editor` input tracking.
+- `src/utils/pipeline_summary.py`: To fix the figurative language verse attribute lookup.
+
+### Next Steps
+With these data tracking bugs resolved, the pipeline's statistical reporting is more accurate and reliable. The next step is to proceed with the planned enhancements from `NEXT_SESSION_PROMPT.md`.
+
+**Ready for**: Enrich Methodological Summary
+- Add timing information to the print-ready summary.
+- Refine the "Models Used" section for per-agent attribution.
+
+---
+
 ### Session Started
 9:15 AM - Beginning Phase 3a: Scholar-Writer Agent (Pass 1 - Macro Analysis)
 
