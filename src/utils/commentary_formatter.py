@@ -116,67 +116,69 @@ class CommentaryFormatter:
             lines.append(f"{verse_num}. {modified_hebrew}\u200e\t\t{english}")
         return "\n".join(lines) + "\n\n"
 
-    def _format_bibliographical_summary(self, summary: Dict[str, Any]) -> str:
-        """Creates the 'Methodological & Bibliographical Summary' section."""
+    def _format_bibliographical_summary(self, summary_data: Dict[str, Any]) -> str:
+        """Formats the methodological and bibliographical summary."""
         self.logger.info("Formatting bibliographical summary.")
         lines = ["## Methodological & Bibliographical Summary"]
-        
-        # --- Research & Data Summary ---
+
+        # The stats are at the root of the JSON object. Do not look for a 'summary' key.
+        stats = summary_data
+
+        # --- Research Inputs ---
         lines.append("### Research & Data Inputs")
-        analysis_data = summary.get('analysis', {})
+        analysis_data = stats.get('analysis', {}) or {}
         verse_count = analysis_data.get('verse_count', 'N/A')
         lines.append(f"- Psalm Verses Analyzed: {verse_count}")
-        lines.append(f"- LXX (Septuagint) Texts Reviewed: {verse_count}")
-        lines.append(f"- Phonetic Transcriptions Generated: {verse_count}")
+        lines.append(f"- LXX (Septuagint) Texts Reviewed: {verse_count}") # Assumes LXX is reviewed for all verses
+        lines.append(f"- Phonetic Transcriptions Generated: {verse_count}") # Assumes one per verse
 
-        research_data = summary.get('research', {})
+        research_data = stats.get('research', {}) or {}
         ugaritic_count = len(research_data.get('ugaritic_parallels', []))
         lines.append(f"- Ugaritic Parallels Reviewed: {ugaritic_count}")
-        lines.append(f"- Lexicon Entries (BDB/Klein) Reviewed: {research_data.get('lexicon_entries_count', 'N/A')}")
+
+        lexicon_count = research_data.get('lexicon_entries_count', 'N/A')
+        lines.append(f"- Lexicon Entries (BDB/Klein) Reviewed: {lexicon_count}")
         
         commentaries = research_data.get('commentary_counts', {})
         total_commentaries = sum(commentaries.values()) if commentaries else 'N/A'
-
         if commentaries:
-            commentary_lines = []
-            for commentator, count in sorted(commentaries.items()):
-                commentary_lines.append(f"{commentator} ({count})")
+            commentary_lines = [f"{c} ({n})" for c, n in sorted(commentaries.items())]
             lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries} ({'; '.join(commentary_lines)})")
         elif total_commentaries != 'N/A':
-             lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries}")
+            lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries}")
 
-        concordance_total = sum(research_data.get('concordance_results', {}).values())
+        concordance_total = sum((research_data.get('concordance_results', {}) or {}).values())
         lines.append(f"- Concordance Entries Reviewed: {concordance_total if concordance_total > 0 else 'N/A'}")
-        
-        figurative_total = sum(research_data.get('figurative_results', {}).values())
+
+        # The key is 'figurative_results' which contains a dict like {'total_instances_used': 15}
+        figurative_results = research_data.get('figurative_results', {}) or {}
+        figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
         lines.append(f"- Figurative Language Instances Reviewed: {figurative_total if figurative_total > 0 else 'N/A'}")
 
         # Get Master Editor prompt size from the 'steps' section
-        master_editor_stats = summary.get('steps', {}).get('master_editor', {})
+        master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
         if isinstance(prompt_chars, int):
             lines.append(f"- Master Editor Prompt Size: {prompt_chars:,} characters")
         else:
             lines.append(f"- Master Editor Prompt Size: {prompt_chars} characters")
 
-        return "\n".join(lines) + "\n\n"
+        return "\n".join(lines) + "\n"
 
-    def _format_models_used(self, summary: Dict[str, Any]) -> str:
+    def _format_models_used(self, summary_data: Dict[str, Any]) -> str:
         """Creates the 'Models Used' section."""
         self.logger.info("Formatting 'Models Used' section.")
         lines = ["## Models Used"]
-        models = summary.get('model_usage', {})
-        if not models:
-            # Fallback to a default if model_usage is not in summary
+        # The key in pipeline_stats.json is 'model_usage', not 'models'.
+        agent_models = summary_data.get('model_usage', {})
+        if agent_models:
             lines.append("This commentary was generated using:")
-            lines.append(f"**Structural Analysis (Macro)**: Claude Sonnet 4.5")
-            lines.append(f"**Verse Discovery (Micro)**: Claude Sonnet 4.5")
-            lines.append(f"**Commentary Synthesis**: Claude Sonnet 4.5")
-            lines.append(f"**Editorial Review**: GPT-5")
-            return "\n".join(lines) + "\n"
-        # This part is kept for future use if you decide to track models differently
-        for model, usage in models.items():
-            lines.append(f"{model}: {usage.get('count', 0)} calls")
+            lines.append(f"**Structural Analysis (Macro)**: {agent_models.get('macro_analyst', {}).get('model', 'N/A')}")
+            lines.append(f"**Verse Discovery (Micro)**: {agent_models.get('micro_analyst_v2', {}).get('model', 'N/A')}")
+            lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis_writer', {}).get('model', 'N/A')}")
+            lines.append(f"**Editorial Review**: {agent_models.get('master_editor', {}).get('model', 'N/A')}")
+        else:
+            lines.append("Model attribution data not available.")
         return "\n".join(lines) + "\n"
 
 

@@ -1,10 +1,21 @@
 # Next Session Prompt - Psalms Commentary Project
 
-**Date**: 2025-10-19 (Updated after Session 8)
+**Date**: 2025-10-19 (Updated after Session 7.6)
 **Phase**: Phase 4 - Master Editor Enhancement
 
 ---
+ 
+## SESSION 8 (Next Session): Fix Formatter Data Schema
 
+### Goal
+**CRITICAL BUG FIX**: The `commentary_formatter.py` is once again failing to parse the `pipeline_stats.json` file, resulting in a summary with "N/A" or "0" for all fields. This is a recurring issue caused by the data schema from `pipeline_summary.py` and the parsing logic in `commentary_formatter.py` becoming desynchronized.
+
+### Plan
+1.  **Analyze the Discrepancy**: Compare the latest `psalm_145_pipeline_stats.json` with the data access paths in `commentary_formatter.py`'s `_format_bibliographical_summary` method.
+2.  **Implement a Permanent Fix**: Correct the key paths in `commentary_formatter.py` to match the current, stable JSON schema, specifically for the `model_usage` section.
+3.  **Validate**: Re-run the formatter for both Psalm 20 and Psalm 145 to confirm that all statistics are correctly displayed in the print-ready output.
+
+---
 ## SESSION 8 (Next Session): Enrich Methodological Summary
 
 ### Goal
@@ -30,6 +41,27 @@ Enhance the "Methodological & Bibliographical Summary" in the print-ready output
 
 ### Expected Outcome
 - The final `psalm_XXX_print_ready.md` file will contain a comprehensive summary including not only the research inputs but also the performance metrics and specific models used for each stage of analysis.
+
+---
+
+## SESSION 7.6 (2025-10-19 Evening): Formatter Data-Link Bug Fix - PARTIALLY COMPLETE
+
+### What Was Accomplished
+
+This was a debugging session to fix the "Methodological & Bibliographical Summary" section.
+
+1.  **Critical Bug Fix: Summary Data Desynchronization - Numerical Data**
+    - **Problem**: After a full pipeline run, the print-ready summary showed "N/A" or "0" for all fields.
+    - **Root Cause**: The `commentary_formatter.py` script was using outdated keys to parse the `pipeline_stats.json` file.
+    - **Fix**: Updated `commentary_formatter.py` to use the correct keys and data paths for all numerical statistics (Verse Count, Lexicon Entries, Concordance, etc.).
+
+### Files Modified
+
+- **`src/utils/commentary_formatter.py`**: All fixes were applied here to align the script with the current `pipeline_stats.json` schema.
+
+### Evidence of Success
+- ✅ All numerical fields (Verse Count, Lexicon Entries, Concordance, etc.) now display the correct values.
+- ❌ **Remaining Issue**: The "Models Used" section still shows "Model attribution data not available." This indicates a continued schema mismatch for that specific data.
 
 ---
 

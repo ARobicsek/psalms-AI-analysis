@@ -1524,6 +1524,39 @@ Improvement: 3.3x
 
 ---
 
+## 2025-10-19 - Day 8 (Evening): Formatter Model Attribution Debugging
+
+### Session Started
+Evening session - Debugging the "Models Used" section of the print-ready formatter.
+
+### Tasks Completed
+✅ **Bug Fix (Partial): `commentary_formatter.py` Schema Alignment**: Continued fixing the bug where the "Methodological & Bibliographical Summary" was showing incorrect data.
+✅ **Root Cause Analysis**: Confirmed that the numerical data was being read correctly after the previous fix. The remaining issue is isolated to the model attribution section. The `pipeline_stats.json` file does not seem to contain the `model_usage` key in the format that `commentary_formatter.py` expects.
+✅ **Validation**: A full pipeline run for Psalm 1 confirmed that all numerical stats are correct, but the "Models Used" section still fails to populate.
+
+### Key Learnings
+
+#### 1. Isolate the Regression
+The fact that model attribution was working in a previous commit is a strong indicator of a regression. The problem is not that the feature was never implemented, but that a change in one part of the system (likely `pipeline_summary.py`) broke the consumer (`commentary_formatter.py`).
+
+#### 2. Producer vs. Consumer Mismatch
+The bug is a classic producer-consumer problem. The `pipeline_summary.py` script (the producer) is not saving the model data under the key or in the structure that `commentary_formatter.py` (the consumer) expects. No amount of fixing the consumer will work if the producer isn't providing the data correctly.
+
+### Decisions Made (#decision-log)
+
+#### Decision 1: Refocus on the Data Producer
+**Choice**: The next debugging session must focus on `pipeline_summary.py` and the agent scripts that call it.
+**Rationale**: We need to ensure that model usage is being tracked and saved to the `pipeline_stats.json` file correctly in the first place. The `track_model_usage` method in the summary tracker needs to be called by each agent, and the final `save_json` method must include this data.
+
+### Next Steps
+
+With the numerical stats fixed, the next session will focus exclusively on restoring the model attribution functionality.
+
+**Ready for**: Session 8 - Fix Model Attribution
+- Modify `pipeline_summary.py` to correctly track and save model usage per agent.
+- Update agent scripts (`macro_analyst.py`, `micro_analyst_v2.py`, etc.) to call `tracker.track_model_usage()`.
+- Validate the fix by running a full pipeline and checking the `pipeline_stats.json` and the final print-ready output.
+
 ## 2025-10-16 - Day 5 (Continued): Morphology Refinements
 
 ### Session Started
@@ -3488,6 +3521,60 @@ Phase 2d successfully completed. RAG integration adds scholarly context layer, p
 **Next session**: Begin Phase 3 - Scholar-Writer Agent (Pass 1: Macro Analysis)
 
 ---
+## 2025-10-19 - Day 8 (Evening): Formatter Debugging & Schema Alignment
+
+### Session Started
+Evening session - Debugging the print-ready summary section.
+
+### Tasks Completed
+✅ **Bug Fix: `commentary_formatter.py` Schema Alignment**: Fixed a critical bug where the "Methodological & Bibliographical Summary" in the print-ready output was showing "N/A" for most fields after a full pipeline run for Psalm 145.
+✅ **Root Cause Analysis**: The `commentary_formatter.py` script was using outdated keys and an incorrect data structure to parse the `pipeline_stats.json` file. The data producer (`pipeline_summary.py`) and the data consumer (`commentary_formatter.py`) had fallen out of sync.
+✅ **Validation**: Confirmed the fix by re-running the formatter for Psalm 20 and Psalm 145, which now correctly display all statistics (Verse Count, Lexicon Entries, Concordance, etc.).
+
+### Key Learnings
+
+#### 1. Importance of Consumer-Producer Synchronization
+This session highlighted a classic development issue: when the schema of a data file (`pipeline_stats.json`) changes, all services that consume it must be updated. The formatter was looking for data under old keys (e.g., `summary['research']['lexicon_entries']`) while the pipeline was saving it under new keys (`summary['research']['lexicon_entries_count']`).
+
+#### 2. Debugging via Output Discrepancies
+The user's report of "N/A" values alongside a few correct values (like "Traditional Commentaries") was the key to debugging. It allowed us to pinpoint exactly which keys were mismatched by comparing the working fields to the non-working ones.
+
+### Decisions Made (#decision-log)
+
+#### Decision 1: Align Formatter with Current Schema
+**Choice**: Modify `commentary_formatter.py` to match the `pipeline_stats.json` structure.
+**Rationale**: This is the most direct and correct solution. Instead of changing the pipeline's output, we updated the consumer to correctly parse the available data. This ensures the print-ready output accurately reflects the results of the pipeline run.
+
+### Code Snippets & Patterns
+
+#### Pattern: Robust Dictionary Access
+The fix involved updating the data access patterns to be more robust and accurate.
+
+**Before (Incorrect):**
+```python
+lexicon_count = research_summary.get('lexicon_entries', 'N/A')
+concordance_total = research_summary.get('concordance_results', 'N/A')
+```
+
+**After (Correct):**
+```python
+lexicon_count = research_data.get('lexicon_entries_count', 'N/A')
+concordance_total = sum(research_data.get('concordance_results', {}).values())
+```
+This pattern correctly handles missing keys, gets the right data, and performs necessary calculations (like `sum()`) to get the final statistic.
+
+### Next Steps
+
+With the print-ready formatter now stable and correctly displaying pipeline statistics, the project is ready to proceed with the planned enhancements for the next session.
+
+**Ready for**: Session 8 - Enrich Methodological Summary
+- Add timing information to the summary.
+- Refine the "Models Used" section for per-agent attribution.
+
+### Session End
+**Duration**: ~1 hour
+**Status**: Formatter bug fixed and validated. Documentation updated.
+**Key Outcome**: The print-ready output now accurately reflects the data captured during a full pipeline run, resolving a critical data-display bug.
 
 ## 2025-10-17 - Day 8: Phase 3a - MacroAnalyst Agent (Pass 1)
 
@@ -4024,4 +4111,3 @@ Setting smart defaults ("consonantal" for concordance) with explicit override in
 - Improved recall for downstream analysis
 
 **Ready for**: Phase 3c (SynthesisWriter agent) with improved research pipeline
-

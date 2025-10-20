@@ -108,19 +108,13 @@ Addendum on structure and text: Reading the nun verse (v. 13b) restores the acro
 ---
 ## Methodological & Bibliographical Summary
 ### Research & Data Inputs
-- Psalm Verses Analyzed: 21
-- LXX (Septuagint) Texts Reviewed: 21
-- Phonetic Transcriptions Generated: 21
-- Ugaritic Parallels Reviewed: 1
-- Lexicon Entries (BDB/Klein) Reviewed: 28
-- Traditional Commentaries Reviewed: 18 (Ibn Ezra (4); Malbim (3); Meiri (4); Metzudat David (3); Radak (3); Rashi (1))
-- Concordance Entries Reviewed: 8
-- Figurative Language Instances Reviewed: 26
-- Master Editor Prompt Size: 168,761 characters
-
+- Psalm Verses Analyzed: 0
+- LXX (Septuagint) Texts Reviewed: 0
+- Phonetic Transcriptions Generated: 0
+- Ugaritic Parallels Reviewed: 0
+- Lexicon Entries (BDB/Klein) Reviewed: 0
+- Concordance Entries Reviewed: N/A
+- Figurative Language Instances Reviewed: N/A
+- Master Editor Prompt Size: N/A characters
 ## Models Used
-This commentary was generated using:
-**Structural Analysis (Macro)**: Claude Sonnet 4.5
-**Verse Discovery (Micro)**: Claude Sonnet 4.5
-**Commentary Synthesis**: Claude Sonnet 4.5
-**Editorial Review**: GPT-5
+Model attribution data not available.

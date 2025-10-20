@@ -713,6 +713,14 @@ class SynthesisWriter:
 
             self.logger.info(f"Introduction generated: {len(introduction)} chars")
 
+            # Track model usage
+            if hasattr(self, 'tracker') and self.tracker:
+                self.tracker.track_model_usage(
+                    agent_name='synthesis_writer',
+                    model=self.model,
+                    input_tokens=response.usage.input_tokens,
+                    output_tokens=response.usage.output_tokens)
+
             # Log API call
             self.logger.log_api_call(
                 api_name="Anthropic Claude",
@@ -798,6 +806,14 @@ class SynthesisWriter:
                     commentary += block.text
 
             self.logger.info(f"Verse commentary generated: {len(commentary)} chars")
+
+            # Track model usage
+            if hasattr(self, 'tracker') and self.tracker:
+                self.tracker.track_model_usage(
+                    agent_name='synthesis_writer',
+                    model=self.model,
+                    input_tokens=response.usage.input_tokens,
+                    output_tokens=response.usage.output_tokens)
 
             # Log API call
             self.logger.log_api_call(

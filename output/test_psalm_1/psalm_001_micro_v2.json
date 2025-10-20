@@ -1,0 +1,113 @@
+{
+  "psalm_number": 1,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "The triadic negation with progressive verbs (walked-stood-sat) creates an escalating sequence of moral corruption. The word אַשְׁרֵי (ashrei) is plural 'happinesses' not singular. Three distinct groups are specified: wicked (רְשָׁעִים), sinners (חַטָּאִים), and scoffers/insolent (לֵצִים), suggesting a taxonomy of evil.",
+      "lexical_insights": [
+        "אַשְׁרֵי",
+        "לֵצִים",
+        "מוֹשַׁב"
+      ],
+      "figurative_analysis": [
+        "walking/standing/sitting as metaphors for deepening involvement"
+      ],
+      "thesis_connection": "Establishes the negative boundary of righteous identity through systematic avoidance",
+      "phonetic_transcription": "'ashrēy-hā'iysh 'asher  lō' hālakh baʿatsath rəshāʿiym wuvdherekh khatā'iym lō' ʿāmādh wuvmwōshav lētsiym lō' yāshāv"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Sharp contrast marker כִּי אִם creates emphatic opposition. The verb חֶפְצוֹ (delight) suggests emotional pleasure, not mere duty. הֶהְגֶּה (meditate) has broader semantic range including 'mutter/growl' - possibly audible study. יוֹמָם וָלָיְלָה is meristic for totality.",
+      "lexical_insights": [
+        "חֶפְצוֹ",
+        "יֶהְגֶּה",
+        "יוֹמָם"
+      ],
+      "figurative_analysis": [
+        "day and night as totality of existence"
+      ],
+      "thesis_connection": "Positive counterpart establishing Torah as organizing principle of righteous existence",
+      "phonetic_transcription": "kiy 'im-bəthwōrath yəhōwāh kheftswō wuvthwōrāthwō yehgeh ywōmām wālāyəlāh"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Extended metaphor with precise agricultural imagery. שָׁתוּל (transplanted) implies deliberate placement, not natural growth. עַל־פַּלְגֵי־מָיִם suggests irrigation channels. Three-part blessing: fruit in season, unfading leaves, universal success (יַצְלִיחַ).",
+      "lexical_insights": [
+        "שָׁתוּל",
+        "פַּלְגֵי",
+        "יִבּוֹל",
+        "יַצְלִיחַ"
+      ],
+      "figurative_analysis": [
+        "tree as metaphor for righteous person",
+        "streams as divine provision",
+        "fruit/leaves as outcomes"
+      ],
+      "thesis_connection": "Creation imagery suggests righteous life aligns with divine order embedded in nature",
+      "phonetic_transcription": "wəhāyāh kəʿēts shāthwul ʿal-palghēy-māyim 'asher pirywō  yitēn bəʿituwō wəʿālēhwu lō'-yibuwōl wəkhōl 'asher-yaʿaseh yatsliykha"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Abrupt transition with לֹא־כֵן (not so). Single metaphor contrasts with elaborate tree imagery - stark asymmetry. מֹץ (chaff) is agricultural waste. Wind (רוּחַ) as active agent of removal. Economy of description suggests transience.",
+      "lexical_insights": [
+        "לֹא־כֵן",
+        "מֹץ",
+        "תִּדְּפֶנּוּ"
+      ],
+      "figurative_analysis": [
+        "chaff as worthless remnant",
+        "wind as divine judgment agent"
+      ],
+      "thesis_connection": "Natural imagery continues but shows cosmic order rejecting wickedness",
+      "phonetic_transcription": "lō'-khēn hārəshāʿiym kiy 'im-kamōts 'asher-tidfenuwu rwukha"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "עַל־כֵּן (therefore) marks logical consequence. יָקֻמוּ (stand/arise) has legal connotations - judicial standing. מִשְׁפָּט can mean judgment process or verdict. עֲדַת צַדִּיקִים suggests eschatological community assembly.",
+      "lexical_insights": [
+        "עַל־כֵּן",
+        "יָקֻמוּ",
+        "מִשְׁפָּט",
+        "עֲדַת"
+      ],
+      "figurative_analysis": [
+        "standing as judicial competence",
+        "assembly as community belonging"
+      ],
+      "thesis_connection": "Moves from individual piety to communal/cosmic judgment dimension",
+      "phonetic_transcription": "ʿal-kēn  lō'-yāqumwu rəshāʿiym bamishpāt wəkhatā'iym baʿadhath tsadiyqiym"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "יוֹדֵעַ (knows) suggests intimate knowledge, not mere awareness. דֶּרֶךְ (way) appears twice - structural parallelism. תֹּאבֵד (perish) is active destruction, not passive fading. Asymmetric parallel: YHWH knows righteous way, but wicked way simply perishes - no agent specified for destruction.",
+      "lexical_insights": [
+        "יוֹדֵעַ",
+        "דֶּרֶךְ",
+        "תֹּאבֵד"
+      ],
+      "figurative_analysis": [
+        "way as life trajectory",
+        "knowing as relationship"
+      ],
+      "thesis_connection": "Culminates in divine omniscience as foundation of moral order - YHWH's knowledge sustains righteousness",
+      "phonetic_transcription": "kiy-ywōdhēʿa yəhōwāh derekh tsadiyqiym wədherekh rəshāʿiym tō'vēdh f"
+    }
+  ],
+  "thematic_threads": [
+    "Progressive involvement pattern: walk→stand→sit parallels increasing moral corruption",
+    "Asymmetric treatment: elaborate blessing imagery vs compressed judgment imagery",
+    "Agricultural metaphors throughout: counsel/path/seat → tree/chaff → streams/wind",
+    "Temporal progression: present behavior → ongoing blessing → future judgment → eternal destinies",
+    "Divine name progression: absent (v1) → YHWH central (v2) → implied (vv3-5) → YHWH decisive (v6)"
+  ],
+  "interesting_questions": [
+    "Why does the psalm use שָׁתוּל (transplanted) rather than נָטַע (planted) - what theological significance does deliberate relocation have?",
+    "What is the semantic range of יֶהְגֶּה (meditate/mutter) and does it suggest audible Torah study practices?",
+    "Why the stark asymmetry between elaborate tree blessing (3 elements) and compressed chaff curse (1 element)?",
+    "How does the progression walk→stand→sit function psychologically and morally in wisdom literature?",
+    "What is the relationship between YHWH 'knowing' the righteous way and the wicked way 'perishing' - why no divine agent for destruction?",
+    "Why three distinct categories of evildoers (wicked, sinners, scoffers) rather than generic opposition?",
+    "What does עֲדַת צַדִּיקִים (assembly of righteous) suggest about eschatological community formation?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on יֶהְגֶּה semantic field, שָׁתוּל vs נָטַע, יוֹדֵעַ theological usage\nCONCORDANCE: Track progressive verb sequences in wisdom literature, עֲדַת formations, דֶּרֶךְ in moral contexts\nFIGURATIVE: All agricultural metaphors, especially tree/water/fruit imagery in Torah contexts\nCOMMENTARY: Asymmetric parallelism patterns, eschatological judgment vocabulary, Torah meditation practices"
+}
