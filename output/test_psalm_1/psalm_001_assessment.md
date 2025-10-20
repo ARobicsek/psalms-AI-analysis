@@ -1,0 +1,11 @@
+# Editorial Assessment - Psalm 1
+
+What works: The draft rightly treats Psalm 1 as programmatic for the Psalter, connects vv. 1–2 to wisdom discourse, and gives careful attention to the verb sequence walk–stand–sit, to hagah (“mutter/meditate”), and to shathul (“transplanted”). The asymmetric handling of righteous and wicked (tree vs. chaff) is well observed. Traditional Jewish exegesis is usefully integrated.
+
+Main weaknesses: There are a few factual slips and missed opportunities. The claim that the “ashrei” opening formula appears elsewhere only in Psalms 34:9 and 127:5 is misleading: ashrei appears widely; those two are instances of ashrei ha-gever, not ashrei ha-ish. The introduction misses the editorial pairing of Psalms 1–2 (Ps 2 ends with ashrei), a key framing device. The LXX is barely used; yet in v. 1 it renders “seat of scoffers” as “seat of pestilence,” and in v. 6 it supplies an explicit agent of destruction—both exegetically suggestive. Sound art (threefold lo’, parallel u- prepositions) and aspect (the gnomic perfects in v. 1) are under-explored. The essay sometimes leans into generalities (“cosmic order”) without grounding them in specific textual features.
+
+Missed research insights: The database gives robust figurative parallels—Joshua 1:8 (hagah), Jeremiah 17:8 (tree by waters), Psalm 35:5 and Isaiah 17:13 (chaff)—that should be cited and patterned. The repeated ki ’im (“but rather”) in v. 2 and again in v. 4 is a rhetorical hinge worth noting. The unique phrase ‘adat tsaddiqim needs fuller semantic mapping with Psalm 111:1 (“council of the upright”). The idiom “know + way” warrants links to Exodus 33:17; Genesis 18:19; and the verb ’abad (“perish”) to Deuteronomy 8:19–20. 
+
+Figurative language: Parallels are not consistently cited with references or usage patterns. The revision will add specific citations, note frequency/contexts, and show how Psalm 1 both stands within and sharpens those patterns.
+
+Revisions needed: Correct the ashrei claim; integrate the Ps 1–2 frame; use LXX where it illuminates; foreground sound and aspect; analyze “seat, counsel, way” as social locations; treat ki ’im as hinge; and consistently tie figurative language to concrete biblical parallels.

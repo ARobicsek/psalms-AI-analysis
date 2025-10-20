@@ -104,6 +104,7 @@ class PipelineSummaryTracker:
         self.analysis: AnalysisStats = AnalysisStats()
         self.pipeline_start = datetime.now()
         self.pipeline_end: Optional[datetime] = None
+        self.model_usage: Dict[str, Dict[str, Any]] = {}
 
     def track_step_input(self, step_name: str, input_text: str):
         """Track input for a pipeline step."""
@@ -180,12 +181,14 @@ class PipelineSummaryTracker:
             count = len(bundle.results)
             self.research.concordance_results[query] = count
 
-        # Figurative language results
-        for bundle in research_bundle.figurative_bundles:
-            # Use verse number or a description as key
-            verse_key = f"v{bundle.request.chapter}:{bundle.request.verse_start}" if hasattr(bundle.request, 'verse_start') else f"query_{len(self.research.figurative_results)+1}"
-            count = len(bundle.instances)
-            self.research.figurative_results[verse_key] = count
+        # Figurative language results - Count all instances from all bundles
+        # This ensures we count from the full, untrimmed bundle that the MasterEditor sees.
+        total_figurative_instances = 0
+        if research_bundle.figurative_bundles:
+            for bundle in research_bundle.figurative_bundles:
+                total_figurative_instances += len(bundle.instances)
+        
+        self.research.figurative_results['total_instances_used'] = total_figurative_instances
 
         # Commentary results
         if research_bundle.commentary_bundles:
@@ -230,6 +233,17 @@ class PipelineSummaryTracker:
     def mark_pipeline_complete(self):
         """Mark pipeline as complete."""
         self.pipeline_end = datetime.now()
+
+    def track_model_usage(self, agent_name: str, model: str, input_tokens: int, output_tokens: int):
+        """Track model usage for a specific agent."""
+        if agent_name not in self.model_usage:
+            self.model_usage[agent_name] = {'model': model, 'calls': 0, 'total_input_tokens': 0, 'total_output_tokens': 0}
+
+        usage = self.model_usage[agent_name]
+        usage['calls'] += 1
+        usage['total_input_tokens'] += input_tokens
+        usage['total_output_tokens'] += output_tokens
+
 
     def generate_markdown_report(self) -> str:
         """Generate comprehensive markdown report."""
@@ -508,8 +522,9 @@ class PipelineSummaryTracker:
             'analysis': {
                 'macro_questions': self.analysis.macro_questions,
                 'micro_questions': self.analysis.micro_questions,
-                'verse_count': self.analysis.verse_count
-            }
+                'verse_count': self.analysis.verse_count,
+            },
+            'model_usage': self.model_usage
         }
 
     def save_json(self, output_dir: str) -> Path:

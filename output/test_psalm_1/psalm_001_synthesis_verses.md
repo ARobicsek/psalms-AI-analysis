@@ -1,0 +1,61 @@
+**Verse 1**
+
+The psalm's opening gambit reveals sophisticated artistry beneath its deceptively simple facade. The Hebrew `'ashrēy-hā'iysh` employs the consistently plural form `'ashrēy` (literally "happinesses"), suggesting not momentary contentment but accumulated well-being—what the Radak perceptively calls the result of "many good things" rather than a single fortune. This formulaic opening appears elsewhere only in Psalms 34:9 and 127:5, marking this as specialized wisdom discourse.
+
+The triadic progression `hālakh-'āmādh-yāshāv` (walked-stood-sat) creates one of Hebrew poetry's most psychologically astute portraits of moral deterioration. The research confirms this verb sequence appears nowhere else in biblical literature in precisely this configuration, suggesting deliberate artistic construction. Classical commentators recognized the escalation's significance: Ibn Ezra observes that "standing is harder than walking, and sitting is harder than all of them," while the Malbim notes the movement from transient encounter to settled community membership.
+
+The three-fold repetition of `lō'` (not) creates emphatic anaphora, phonetically reinforced by the rhythmic progression of the verbs. More significant is the careful taxonomy of corrupting influences: `rəshā'īm` (the wicked), `khatā'īm` (sinners), and `lētsiym` (scoffers). The BDB lexicon reveals that `lētsiym` carries connotations of intellectual arrogance—those who "delight in scorning" and "cannot find wisdom" (Proverbs 14:6). This isn't merely a list of bad company but a classification of how communal corruption operates through counsel (`'ētsāh`), path (`derek`), and seat (`mōshāv`)—the spheres of decision-making, lifestyle, and established community belonging.
+
+The progression from `'ētsāh` (counsel) to `derek` (way/path) to `mōshāv` (dwelling-place/seat) traces corruption's advance from momentary influence through habitual practice to settled identity. As the Metzudat David explains, it moves from initial temptation through careful avoidance of corrupting encounters to complete separation from compromising associations—"making a fence around a fence."
+
+**Verse 2**
+
+The sharp adversative `kī 'im` (but rather) marks the psalm's theological pivot with dramatic emphasis. Here prohibition transforms into positive delight, introducing the psalm's central paradox: Torah engagement as pleasure rather than duty. The verb `khāfēts` suggests emotional longing—the same term used for divine desire in Isaiah 53:10 and human delight in Proverbs 8:30. This psychological insight anticipates modern understanding that sustainable spiritual practice requires internal motivation, not external compulsion.
+
+The phrase `bəthōrath yhwh kheftswō` creates an elegant chiastic structure around divine teaching, while the possessive suffix emphasizes personal ownership of delight. The traditional commentaries recognize this inward turn: Rashi notes that true engagement comes from the heart, while the Radak observes that delight precedes discipline in spiritual formation.
+
+The verb `yehgeh` (meditates) deserves special attention for its semantic richness. The BDB reveals a range including "mutter," "growl," and "make low sounds"—suggesting audible, perhaps ruminative study. This connects to ancient practices of oral Torah engagement, where learning involved physical utterance. The figurative language database shows similar "utterance" imagery in Joshua 1:8 and Isaiah 59:3, where meditation involves voiced repetition rather than silent contemplation. The psalm thus presents Torah not as distant text but as living speech that fills the practitioner's audible world.
+
+The meristic phrase `yōmām wālāyəlāh` (day and night) encompasses the totality of temporal existence through polar opposites—a common Semitic device for expressing completeness. This extends beyond scheduled study periods to suggest a consciousness permeated by divine instruction, where the boundary between formal learning and lived experience dissolves. The Meiri captures this integration: "His entire occupation and desire is directed toward this noble purpose."
+
+**Verse 3**
+
+The extended simile introduces the psalm's most memorable image through the specific choice of `shāthūl` (transplanted) over the more common `nātūa'` (planted). This lexical precision proves theologically significant: transplanting implies deliberate relocation from one soil to another—precisely the experience of those who move from corruption's influence to Torah's nourishment. The tree doesn't naturally belong by the water; it has been placed there intentionally, suggesting divine or human agency in spiritual formation.
+
+The phrase `'al-palghēy-māyim` (beside streams of water) employs `palghēy` from the root meaning "divide" or "channel"—water that has been directed and controlled rather than randomly flowing. Ancient Near Eastern agricultural imagery consistently associates channeled water with careful cultivation and abundant yield, as seen in Psalm 36:8's "river of your delights" and Isaiah 55:10-11's description of purposeful divine word. The figurative language database reveals this "planted by streams" imagery appears uniquely here and in Jeremiah 17:8, suggesting a specialized metaphor for sustained spiritual vitality.
+
+The agricultural details reveal careful observation: the tree yields `piryō yittēn bə'ittō` (its fruit in its season), emphasizing natural rhythm over forced productivity. The phrase `'ālēhū lō'-yibōl` (its leaves do not wither) employs a verb whose root meaning involves drooping or fading—the tree maintains perpetual vitality through seasons of abundance and scarcity. Rashi's insight proves particularly striking: "Even the inferior part of it serves a purpose," suggesting that in the righteous person, even casual conversation and seemingly minor actions contribute to spiritual and communal benefit.
+
+The promise `kōl 'asher-ya'aśeh yatslīakh` (whatever he does prospers) universalizes the blessing across all endeavors, creating an echo with Genesis 39:3's description of Joseph's success. The Radak notes this comprehensive prosperity reflects alignment with cosmic order rather than mere material accumulation.
+
+**Verse 4**
+
+The psalm's most striking rhetorical shift occurs with the abrupt `lō'-khēn hārəshā'īm` (not so the wicked). Where the righteous received elaborate botanical metaphor across multiple verses, the wicked merit only a single, devastating comparison compressed into half a verse. This asymmetric treatment isn't accidental but artistic—the very imbalance embodies the theological point about substantiality versus emptiness.
+
+The simile `kamōts 'asher-tiddəfennū rūakh` (like chaff that wind blows away) draws from agricultural processing where grain is separated from worthless husks through winnowing. The figurative language database reveals chaff imagery consistently associated with divine judgment across Scripture: Psalm 35:5 describes enemies as "chaff before the wind," while Isaiah 17:13 uses similar language for scattered nations. The pattern suggests not just individual worthlessness but active removal by divine agency—wind here functioning as God's instrument of separation.
+
+The verb `tiddəfennū` (drives/blows away) in the intensive stem suggests violent expulsion rather than gentle drift. Ibn Ezra captures the image's force: "The soul of the righteous is comparable to grain, which stands firm, while the wicked are like straw before the wind." The phonetic structure reinforces the meaning—the harsh consonant cluster `td` followed by the liquid `nn` mimics the sound of scattered debris.
+
+Classical commentators recognized the asymmetry's significance. The Radak observes that detailed description befits substantial reality, while brevity suits transient phenomena. The Malbim extends this insight: corruption receives minimal attention because it lacks genuine existence, being merely the absence of good rather than a substantial reality. This theological sophistication anticipates later philosophical discussions about evil as privation rather than positive force.
+
+**Verse 5**
+
+The logical conjunction `'al-kēn` (therefore) marks the eschatological consequences with judicial precision. The verb `lō'-yāqūmū` (will not stand/arise) employs terminology from legal proceedings—the ability to maintain one's position under cross-examination or in the face of evidence. The concordance data reveals similar forensic usage in Deuteronomy 19:15, where witnesses must "stand" to validate testimony, and Malachi 3:2, asking "who can stand" when divine judgment appears.
+
+The phrase `bamishpāt` (in the judgment) has generated interpretive discussion: does this refer to present moral evaluation or eschatological judgment? Traditional Jewish commentary typically opts for the latter—the Radak explicitly identifies this as "the day of death" when final accounts are settled. The term's legal connotations support this reading, as `mishpāt` frequently denotes judicial proceedings with lasting consequences.
+
+The parallel phrase `baʿ'adat tsaddīqīm` (in the assembly of the righteous) appears uniquely in this psalm, suggesting either post-mortem vindication or historical community formation around Torah observance. The word `'ēdāh` typically denotes a called assembly with specific purpose—not casual gathering but intentional community bound by shared commitment. The figurative language database shows similar "assembly" language in Psalm 82:1's "congregation of El" and Psalm 111:1's "council of the upright," indicating this represents the ultimate social reality for those aligned with divine order.
+
+The verse's structure creates chiastic balance: wicked individuals cannot stand in divine judgment, while sinners cannot participate in righteous community. This suggests both vertical accountability (before God) and horizontal exclusion (from community), making moral choice a matter of ultimate social as well as spiritual consequence.
+
+**Verse 6**
+
+The psalm's conclusion presents perhaps its most profound theological insight through asymmetric parallelism. YHWH `yōdēa'` (knows) the way of the righteous using the intimate knowledge verb that elsewhere describes covenantal relationship—the same term used for divine "knowing" of Moses by name (Exodus 33:17) and Abraham for covenant purposes (Genesis 18:19). The figurative language database confirms this "knowing" pattern appears throughout Scripture as idiom for special recognition and care, not mere intellectual awareness.
+
+But the parallel structure breaks down deliberately: the wicked way simply `tō'vēd` (perishes) with no divine agent specified. This grammatical asymmetry proves theologically significant—righteousness enjoys active divine superintendence, while wickedness contains the seeds of its own destruction. The verb `'āvad` consistently indicates complete disappearance or loss throughout Hebrew Scripture, as seen in Deuteronomy 8:19-20's warnings about covenant violation leading to destruction.
+
+Traditional commentators recognized this asymmetry's importance. Rashi explains that divine knowledge implies active care and protection, while divine hatred leads to removal from sight. The Radak develops this further: righteous souls remain eternally in divine awareness, while wicked souls simply cease to exist. The Malbim offers philosophical sophistication: divine knowledge creates ontological attachment to the eternal, while wickedness lacks substantial being and naturally dissipates.
+
+The word `derek` (way) appears twice, creating structural parallelism while emphasizing different destinies. In Hebrew thought, one's "way" encompasses both moral character and ultimate trajectory—not just individual choices but the entire life pattern and its consequences. The psalm thus concludes not with specific rewards and punishments but with fundamental principles: righteousness aligns with reality's grain and enjoys divine recognition, while wickedness operates against cosmic order and naturally dissolves.
+
+This conclusion transforms the entire psalm from moral exhortation into cosmic theology, presenting ethical choice not as arbitrary divine preference but as alignment with or rebellion against the fundamental structure of reality itself.
