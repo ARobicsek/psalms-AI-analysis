@@ -1,11 +1,39 @@
 # Next Session Prompt - Psalms Commentary Project
 
-**Date**: 2025-10-19 (Updated after Session 7)
+**Date**: 2025-10-19 (Updated after Session 8)
 **Phase**: Phase 4 - Master Editor Enhancement
 
 ---
 
-## SESSION 7 (2025-10-19 Evening): Print-Ready Formatting Refinements - COMPLETE ✅
+## SESSION 8 (Next Session): Enrich Methodological Summary
+
+### Goal
+Enhance the "Methodological & Bibliographical Summary" in the print-ready output by adding performance metrics and more detailed model attribution. This will provide a complete, transparent fingerprint of the generation process for each psalm.
+
+### Plan
+
+1.  **Add Timing Information to Summary**
+    - Modify `commentary_formatter.py` to read the `pipeline_stats.json` file.
+    - Extract the total pipeline duration and the duration for each agent step (Macro, Micro, Synthesis, Editor).
+    - Add these timings to the "Methodological & Bibliographical Summary" section in a clean, readable format (e.g., "Total Processing Time: 19.9 minutes").
+
+2.  **Refine "Models Used" Section**
+    - The current "Models Used" section lists all models and their call counts.
+    - Enhance this to specify which model was used for each agent/pass (e.g., "Macro Analysis: claude-sonnet-4-20250514").
+    - This provides clearer attribution and is more useful for scholarly review. This data is available in the pipeline runner script and should be passed to the summary tracker.
+
+### Files to Modify
+
+- **`src/utils/commentary_formatter.py`**: To parse and display the new timing and model data.
+- **`src/utils/pipeline_summary.py`**: To track model usage per agent.
+- **`scripts/run_enhanced_pipeline.py`**: To pass the model names for each agent to the summary tracker.
+
+### Expected Outcome
+- The final `psalm_XXX_print_ready.md` file will contain a comprehensive summary including not only the research inputs but also the performance metrics and specific models used for each stage of analysis.
+
+---
+
+## SESSION 7 (2025-10-19 Evening): Print-Ready Formatting & Bug Fixes - COMPLETE ✅
 
 ### What Was Accomplished
 
@@ -13,19 +41,19 @@ This session focused on fine-tuning the output of `commentary_formatter.py` to e
 
 1.  **Critical Bug Fix: LTR/RTL Formatting in Word**
     - **Problem**: When pasting bilingual (Hebrew/English) lines into Word, the text would run together with no separation, and manual spacing attempts failed.
-    - **Fix**: Implemented a robust solution using a Left-to-Right Mark (`\u200e`) followed by two tab characters (`\t\t`) between the Hebrew and English text. This creates a reliable visual space that Word's rendering engine respects. This was applied to both the "Psalm Text" and "Verse-by-Verse Commentary" sections.
+    - **Fix**: Implemented a robust solution using a Left-to-Right Mark (`\u200e`) followed by two tab characters (`\t\t`) between the Hebrew and English text. This creates a reliable visual space that Word's rendering engine respects.
 
 2.  **Enhancement: Reduced Paragraph Spacing**
     - **Problem**: Double newlines in the markdown source created large, undesirable gaps between paragraphs in Word.
     - **Fix**: Replaced all double newlines (`\n\n`) with single newlines (`\n`) in the introduction and verse commentary sections. This creates "soft breaks" for a tighter, more professional layout.
 
-3.  **Enhancement: "Models Used" Section Cleanup**
-    - Removed the extra blank line after the `## Models Used` header.
-    - Removed the leading hyphens from the model list for a cleaner, non-bulleted appearance.
+3.  **Enhancement: Bibliographical Summary**
+    - Added a "Methodological & Bibliographical Summary" section to the print-ready output, pulling data from the pipeline statistics file.
 
 ### Files Modified
 
 - **`src/utils/commentary_formatter.py`**: All formatting changes were implemented here.
+- **`scripts/run_formatter.py`**: New convenience script created.
 
 ### Evidence of Success
 - ✅ Regenerated `psalm_145_print_ready.md` contains the new formatting.

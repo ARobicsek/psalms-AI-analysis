@@ -410,32 +410,26 @@ class SynthesisWriter:
 
         # Check for phonetic data and log it
         try:
-            # Handle both Pydantic object and dict formats
-            if hasattr(micro_analysis, 'verse_commentaries'):
-                # Pydantic object
-                verse_commentaries = micro_analysis.verse_commentaries
-                if verse_commentaries and len(verse_commentaries) > 0:
-                    first_verse = verse_commentaries[0]
-                    phonetic = getattr(first_verse, 'phonetic_transcription', None) if hasattr(first_verse, 'phonetic_transcription') else first_verse.get('phonetic_transcription', '') if isinstance(first_verse, dict) else ''
-                    if phonetic:
-                        self.logger.info("✓ Phonetic transcription data FOUND and passed to synthesis writer.")
-                    else:
-                        self.logger.warning("⚠ Phonetic transcription data NOT FOUND in the provided micro_analysis.")
+            verses = []
+            if hasattr(micro_analysis, 'verse_commentaries'): # Pydantic
+                verses = micro_analysis.verse_commentaries
+            elif isinstance(micro_analysis, dict): # Dict
+                verses = micro_analysis.get('verse_commentaries', [])
+
+            if verses:
+                phonetic_found = False
+                # Check the first verse for phonetic data to confirm it's present
+                first_verse = verses[0]
+                if (hasattr(first_verse, 'phonetic_transcription') and first_verse.phonetic_transcription) or \
+                   (isinstance(first_verse, dict) and first_verse.get('phonetic_transcription')):
+                   phonetic_found = True
+
+                if phonetic_found:
+                    self.logger.info("✓ Phonetic transcription data FOUND and passed to synthesis writer.")
                 else:
-                    self.logger.warning("⚠ No verse commentaries found in micro_analysis.")
-            elif isinstance(micro_analysis, dict):
-                # Dictionary format
-                verses = micro_analysis.get('verse_commentaries', micro_analysis.get('verses', []))
-                if verses and len(verses) > 0:
-                    first_verse = verses[0]
-                    if first_verse.get('phonetic_transcription', ''):
-                        self.logger.info("✓ Phonetic transcription data FOUND and passed to synthesis writer.")
-                    else:
-                        self.logger.warning("⚠ Phonetic transcription data NOT FOUND in the provided micro_analysis.")
-                else:
-                    self.logger.warning("⚠ No verses found in micro_analysis.")
+                    self.logger.warning("⚠ Phonetic transcription data NOT FOUND in the provided micro_analysis.")
             else:
-                self.logger.warning("⚠ Could not verify phonetic data presence. Micro analysis format may be unexpected.")
+                self.logger.warning("⚠ No verse commentaries found in micro_analysis to check for phonetic data.")
         except (AttributeError, TypeError, StopIteration) as e:
             self.logger.warning(f"⚠ Could not verify phonetic data presence: {e}")
 
@@ -906,7 +900,7 @@ class SynthesisWriter:
         else:
             verses = []
 
-        for verse_data in verses:
+        for verse_data in verses: # Iterate through all verses
             # Get verse number (handle both field names)
             verse_num = get_value(verse_data, 'verse_number', get_value(verse_data, 'verse', 0))
 

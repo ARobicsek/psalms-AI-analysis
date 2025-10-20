@@ -5,6 +5,9 @@ Examples:
 # Generate complete commentary for Psalm 23
 python scripts/run_enhanced_pipeline.py 23
 
+# just the print ready compiler
+python scripts/run_formatter.py 145
+
 # Custom output directory
 python scripts/run_enhanced_pipeline.py 51 --output-dir output/psalm_51
 
