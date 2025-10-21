@@ -72,6 +72,26 @@ class PhoneticAnalyst:
                     modifiers.append(chars[j])
                     j += 1
 
+                # === NEW: Check if vav is serving as mater lectionis ===
+                if char == 'ו':
+                    # Check for holam (ֹ or ֺ) - vav is vowel marker
+                    if '\u05B9' in modifiers or '\u05BA' in modifiers:
+                        # This is holam male (וֹ) - just transcribe as 'ō'
+                        phonemes.append('ō')
+                        transcription.append('ō')
+                        i = j
+                        continue  # Skip consonant processing
+                    
+                    # Check for shureq (וּ with dagesh)
+                    if '\u05BC' in modifiers:
+                        # This is shureq - just transcribe as 'ū'
+                        phonemes.append('ū')
+                        transcription.append('ū')
+                        i = j
+                        continue  # Skip consonant processing
+                
+                # === END NEW CODE ===
+
                 is_begadkefat = char in self.begadkefat_soft
                 has_dagesh = self.dagesh in modifiers
                 
@@ -194,4 +214,3 @@ if __name__ == '__main__':
     transcription = analyst.transcribe_verse(psalm_145_1)
     import json
     print(json.dumps(transcription, indent=2, ensure_ascii=False))
-
