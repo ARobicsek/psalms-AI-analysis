@@ -72,7 +72,7 @@ class PhoneticAnalyst:
                     modifiers.append(chars[j])
                     j += 1
 
-                # === NEW: Check if vav is serving as mater lectionis ===
+                # === EXISTING: Check if vav is serving as mater lectionis ===
                 if char == 'ו':
                     # Check for holam (ֹ or ֺ) - vav is vowel marker
                     if '\u05B9' in modifiers or '\u05BA' in modifiers:
@@ -90,8 +90,7 @@ class PhoneticAnalyst:
                         i = j
                         continue  # Skip consonant processing
                 
-                # === END NEW CODE ===
-
+                # === EXISTING: Begadkefat and dagesh detection ===
                 is_begadkefat = char in self.begadkefat_soft
                 has_dagesh = self.dagesh in modifiers
                 
@@ -105,12 +104,49 @@ class PhoneticAnalyst:
                     # Default is 'sh', so no change needed for shin_dot
                 
                 # Begadkefat softening (simple version: assume soft unless dagesh)
-                # A proper implementation needs to check if it's post-vocalic
                 if is_begadkefat and not has_dagesh:
                     consonant_sound = self.begadkefat_soft[char]
 
+                # === NEW: Dagesh Forte (Gemination) Detection ===
+                is_geminated = False
+                if has_dagesh:
+                    # Determine if this is dagesh forte (gemination) vs. dagesh lene (hardening)
+                    
+                    if not is_begadkefat:
+                        # Non-begadkefat letters: dagesh is ALWAYS forte (gemination)
+                        # Examples: נּ in חַנּוּן, לּ in הַלְלוּיָהּ
+                        is_geminated = True
+                    else:
+                        # Begadkefat letters: dagesh could be lene OR forte
+                        # Heuristic: If preceded by a vowel (not beginning of word), 
+                        # it's likely forte (gemination)
+                        
+                        # Check if there was a vowel before this consonant
+                        if i > 0:
+                            # Look back for a vowel in previous modifiers
+                            prev_had_vowel = False
+                            k = i - 1
+                            while k >= 0 and unicodedata.category(chars[k]) == 'Mn':
+                                if chars[k] in self.vowel_map:
+                                    prev_had_vowel = True
+                                    break
+                                k -= 1
+                            
+                            # If previous consonant had a vowel, this dagesh is likely forte
+                            if prev_had_vowel and k >= 0 and chars[k] in self.consonant_map:
+                                is_geminated = True
+                        
+                        # Exception: Word-initial position is always dagesh lene (hard)
+                        if i == 0:
+                            is_geminated = False
+
                 phonemes.append(consonant_sound)
                 transcription.append(consonant_sound)
+                
+                # === NEW: If geminated, add the consonant again ===
+                if is_geminated:
+                    phonemes.append(consonant_sound)
+                    transcription.append(consonant_sound)
 
                 # --- Vowel Logic ---
                 vowel_sound = ""
@@ -137,10 +173,15 @@ class PhoneticAnalyst:
                     transcription.append('-')
                 i += 1
 
+        # Syllabify the phonemes
+        syllables = self._syllabify(phonemes)
+        syllable_string = self._format_syllables(syllables)
+
         return {
             "word": unicodedata.normalize('NFC', hebrew_word),
             "transcription": "".join(transcription),
-            "syllables": [], # Placeholder for Step 3
+            "syllables": syllables,  # List of syllables (each is list of phonemes)
+            "syllable_transcription": syllable_string,  # Hyphenated string (e.g., "tə-hil-lāh")
             "phonemes": phonemes
         }
 
@@ -206,11 +247,131 @@ class PhoneticAnalyst:
         # Default to silent if no other rule applies.
         return False
 
+    def _syllabify(self, phonemes: list) -> list:
+        """
+        Divide phonemes into syllables following Biblical Hebrew phonology rules.
+        
+        Rules (based on Gesenius' Hebrew Grammar §26-27):
+        1. Every syllable has exactly one vowel (nucleus)
+        2. Every syllable begins with a consonant (onset) - except word-initial vowels
+        3. Open syllables (CV) are preferred over closed (CVC)
+        4. Geminated consonants split across syllable boundary (VC̩-CV)
+        5. Word-final consonants close the final syllable
+        
+        Args:
+            phonemes: List of phonemes from transcription
+            
+        Returns:
+            List of syllables (each syllable is a list of phonemes)
+        """
+        if not phonemes:
+            return []
+        
+        # Define what counts as a vowel
+        vowels = {'a', 'ā', 'e', 'ē', 'i', 'ī', 'o', 'ō', 'u', 'ū', 'ə'}
+        
+        syllables = []
+        current_syllable = []
+        i = 0
+        
+        while i < len(phonemes):
+            phoneme = phonemes[i]
+            
+            # Add phoneme to current syllable
+            current_syllable.append(phoneme)
+            
+            # Check if this is a vowel (syllable nucleus)
+            if phoneme in vowels:
+                # We have a nucleus. Now determine syllable boundary.
+                
+                # Look ahead to see what comes next
+                if i + 1 < len(phonemes):
+                    next_phoneme = phonemes[i + 1]
+                    
+                    # Case 1: Next is a vowel → close syllable (shouldn't happen in well-formed Hebrew)
+                    if next_phoneme in vowels:
+                        syllables.append(current_syllable)
+                        current_syllable = []
+                        i += 1
+                        continue
+                    
+                    # Case 2: Next is a consonant
+                    # Check if it's followed by another consonant (consonant cluster)
+                    if i + 2 < len(phonemes):
+                        next_next = phonemes[i + 2]
+                        
+                        # Case 2a: Gemination (same consonant twice)
+                        if next_phoneme == next_next:
+                            # Geminated consonant: split across boundary
+                            # Add first half to current syllable (closes it)
+                            current_syllable.append(next_phoneme)
+                            syllables.append(current_syllable)
+                            current_syllable = [next_next]  # Start next syllable with second half
+                            i += 3  # Skip both consonants
+                            continue
+                        
+                        # Case 2b: Consonant cluster (different consonants)
+                        # Check what follows the cluster
+                        if next_next in vowels:
+                            # CC followed by V: divide before the cluster (CV-CCV)
+                            # This keeps syllables open when possible
+                            syllables.append(current_syllable)
+                            current_syllable = []
+                            i += 1
+                            continue
+                        else:
+                            # CC followed by C or end: close syllable with first C (CVC-C...)
+                            current_syllable.append(next_phoneme)
+                            syllables.append(current_syllable)
+                            current_syllable = []
+                            i += 2
+                            continue
+                    
+                    # Case 2c: Single consonant at end of word
+                    else:
+                        # Consonant at word end: add to current syllable (closes it)
+                        current_syllable.append(next_phoneme)
+                        syllables.append(current_syllable)
+                        current_syllable = []
+                        i += 2
+                        continue
+                
+                # Case 3: Vowel at end of word (open syllable)
+                else:
+                    syllables.append(current_syllable)
+                    current_syllable = []
+                    i += 1
+                    continue
+            
+            # If we're here, current phoneme is a consonant without vowel yet
+            # Continue to next iteration
+            i += 1
+        
+        # Handle any remaining phonemes (shouldn't normally happen in well-formed words)
+        if current_syllable:
+            syllables.append(current_syllable)
+        
+        return syllables
+
+
+    def _format_syllables(self, syllables: list) -> str:
+        """
+        Format syllables list into hyphen-separated string.
+        
+        Args:
+            syllables: List of syllables (each syllable is a list of phonemes)
+            
+        Returns:
+            Hyphen-separated string (e.g., "tə-hil-lāh")
+        """
+        syllable_strings = [''.join(syl) for syl in syllables]
+        return '-'.join(syllable_strings)
+
 
 if __name__ == '__main__':
     # Example usage for direct testing
     analyst = PhoneticAnalyst()
-    psalm_145_1 = "תְּהִלָּה לְדָוִד אֲרוֹמִמְךָ אֱלוֹהַי הַמֶּלֶךְ וַאֲבָרְכָה שִׁמְךָ לְעוֹלָם וָעֶד"
+    psalm_145_1 = "תְּהִלָּה לְדָוִד אֲרוֹמִמְךָ אֱלוֹהַי הַמֶּלֶךְ וַאֲבָרְכָה שִׁמְךָ לְעוֹlָם וָעֶד"
     transcription = analyst.transcribe_verse(psalm_145_1)
     import json
     print(json.dumps(transcription, indent=2, ensure_ascii=False))

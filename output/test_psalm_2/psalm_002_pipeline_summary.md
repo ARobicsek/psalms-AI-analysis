@@ -1,6 +1,6 @@
 # Pipeline Summary Report: Psalm 2
 
-**Generated**: 2025-10-21 16:22:09
+**Generated**: 2025-10-21 18:07:40
 **Total Pipeline Duration**: 1086.5 seconds (18.1 minutes)
 
 ---
@@ -19,8 +19,8 @@
 | Step | Input Chars | Input Tokens (est) | Output Chars | Output Tokens (est) | Duration (s) |
 |------|-------------|-------------------|--------------|---------------------|--------------|
 | macro_analysis | 1,890 | 630 | 8,501 | 2,833 | 52.6 |
-| micro_analysis | 8,501 | 2,833 | 118,678 | 39,559 | 129.7 |
-| → research_bundle | — | — | 110,728 | 36,909 | — |
+| micro_analysis | 8,501 | 2,833 | 135,073 | 45,024 | 148.1 |
+| → research_bundle | — | — | 125,028 | 41,676 | — |
 | synthesis | 114,086 | 38,028 | 33,122 | 11,040 | 245.3 |
 | master_editor | 139,859 | 46,619 | 20,145 | 6,715 | 191.3 |
 
@@ -28,7 +28,7 @@
 
 ## Research Requests
 
-### Lexicon Requests (32)
+### Lexicon Requests (34)
 
 | # | Hebrew Word | Reason |
 |---|-------------|--------|
@@ -46,26 +46,28 @@
 | 12 | הַשְׂכִּיל | Be prudent in v.10 - wisdom vocabulary invasion into royal psalm |
 | 13 | הִוָּסֵר | Accept discipline in v.10 - wisdom instruction terminology |
 | 14 | בַר | Son in v.12 textual crux - Aramaic intrusion or Hebrew homograph? |
-| 15 | רָגְשׁוּ | Rare verb for nations' assembly - only appears 4x in Hebrew Bible, need semantic... |
-| 16 | נוֹסְדוּ | Architectural verb used for political conspiracy - unusual metaphorical applicat... |
-| 17 | מוֹסְרוֹתֵימוֹ | Bondage imagery for divine authority - need distinction from עֲבֹתֵימוֹ |
-| 18 | עֲבֹתֵימוֹ | Second bondage term - thick ropes/cords, need semantic precision |
-| 19 | יִשְׂחָק | Divine laughter - theologically striking anthropomorphism, need cultic context |
-| 20 | יִלְעַג | Divine mockery paired with laughter - need distinction and theological implicati... |
-| 21 | חֲרוֹנוֹ | Intensified divine wrath - need distinction from simple אַף anger |
-| 22 | יְבַהֲלֵמוֹ | Divine terrifying action - causative verb, need precise force |
-| 23 | נָסַכְתִּי | Libation verb for royal installation - highly unusual metaphorical use |
-| 24 | חֹק | Divine decree in adoption context - legal/cultic technical term |
-| 25 | יְלִדְתִּיךָ | Divine 'begetting' with ceremonial 'today' - theological precision needed |
-| 26 | שֵׁבֶט | Iron rod/mace - need distinction between shepherd staff and weapon |
-| 27 | תְּרֹעֵם | Shepherd/smash ambiguity - critical wordplay, need both meanings |
-| 28 | הַשְׂכִּילוּ | Wisdom terminology in royal psalm - genre shift significance |
-| 29 | הִוָּסְרוּ | Accept discipline - wisdom instruction context |
-| 30 | בַר | Major textual crux - 'son' or 'purity' or Aramaic intrusion? |
-| 31 | כִּמְעַט | Divine anger timing - 'almost/quickly' kindles, need temporal precision |
-| 32 | חוֹסֵי | Taking refuge - theological term for trust relationship |
+| 15 | רגש | Rare verb in v.1 - uncertain meaning: assembly, tumult, or agitation? |
+| 16 | נוסדו | Unusual verb in v.2 for rulers conspiring together - etymology and usage |
+| 17 | מוסרות | Restraint imagery in v.3 - specific type of bonds vs general עבתים |
+| 18 | עבתים | Second restraint term in v.3 - distinction from מוסרות unclear |
+| 19 | ישחק | Divine laughter in v.4 - emotional range: amusement vs contemptuous mockery |
+| 20 | ילעג | Second divine mockery verb in v.4 - semantic relationship to ישחק |
+| 21 | חרון | Intense anger term in v.5 - escalation from אף, theological implications |
+| 22 | יבהלם | Divine terrifying in v.5 - psychological vs physical effects |
+| 23 | נסכתי | Installation verb in v.6 - connection to pouring/anointing imagery |
+| 24 | ילדתיך | Divine begetting in v.7 - physical birth vs legal adoption in coronation |
+| 25 | חק | Divine decree in v.7 - legal/covenantal framework of adoption formula |
+| 26 | נחלתך | Inheritance terminology in v.8 - legal implications vs military conquest |
+| 27 | אחזתך | Possession term in v.8 - distinction from נחלתך in land tenure |
+| 28 | תרעם | Violent verb in v.9 - LXX has 'shepherd' - which interpretation correct? |
+| 29 | השכילו | Wisdom vocabulary in v.10 - connection to royal prudence vs religious wisdom |
+| 30 | הוסרו | Accept discipline in v.10 - relationship to earlier מוסרות imagery |
+| 31 | רעדה | Trembling in v.11 - paradox with joy, religious experience terminology |
+| 32 | בר | Famous crux in v.12 - son, purity, or something else entirely? |
+| 33 | כמעט | Brief moment in v.12 - divine anger's sudden ignition |
+| 34 | חוסי | Refuge terminology in v.12 - theological concept of divine protection |
 
-### Concordance Searches (13)
+### Concordance Searches (14)
 
 | # | Query | Scope | Level | Purpose |
 |---|-------|-------|-------|---------|
@@ -75,13 +77,14 @@
 | 4 | בני אתן | Tanakh | consonantal | Divine sonship adoption formula |
 | 5 | נשק | Tanakh | consonantal | Kissing/homage gestures in submission contexts |
 | 6 | גיל ברעדה | Tanakh | exact | Paradoxical rejoicing with trembling emotion |
-| 7 | רגש | Tanakh | consonantal | Track rare tumult/agitation verb across Hebrew Bible |
-| 8 | על יהוה ועל משיחו | Tanakh | consonantal | Opposition to YHWH and anointed formula |
-| 9 | ישב בשמים | Tanakh | consonantal | Divine enthronement language patterns |
-| 10 | בני אתה אני היום ילדתיך | Tanakh | consonantal | Adoption formula usage in Hebrew Bible |
-| 11 | שבט ברזל | Tanakh | consonantal | Iron rod/scepter imagery in royal contexts |
-| 12 | עבדו את יהוה ביראה | Tanakh | consonantal | Serving YHWH in fear formula |
-| 13 | אשרי כל חוסי בו | Psalms | consonantal | Beatitude + refuge formula in Psalms |
+| 7 | רגש | Tanakh | consonantal | Find all uses of this rare verb to determine meaning |
+| 8 | משיח יהוה | Tanakh | consonantal | Track anointed of YHWH formula across Scripture |
+| 9 | בני אתה אני היום ילדתיך | Tanakh | consonantal | Divine adoption formula parallels |
+| 10 | שבט ברזל | Tanakh | consonantal | Iron rod imagery - royal vs violent connotations |
+| 11 | יושב בשמים | Tanakh | consonantal | Divine throne room imagery patterns |
+| 12 | אפסי ארץ | Tanakh | consonantal | Ends of earth terminology - universal dominion language |
+| 13 | עבדו ביראה | Psalms | consonantal | Fearful service as religious requirement |
+| 14 | אשרי כל חוסי בו | Psalms | consonantal | Blessed are those who take refuge formula |
 
 ### Figurative Language Searches (12)
 
@@ -92,13 +95,13 @@
 | 3 | None | holy mountain, holy mountain, sacred hil... | Mountain as divine seat - Zion/holy mountain image... |
 | 4 | None | potter, potter, pottery, vessel | Potter's vessel imagery - human fragility metaphor... |
 | 5 | None | iron rod, iron rod, iron scepter, rod | Iron mace/scepter - royal power vs military destru... |
-| 6 | None | rage, rage, raging, tumult | Nations as agitated crowd - violent assembly image... |
-| 7 | None | bonds, bonds, cords, ropes | Divine authority as physical restraints - bondage ... |
-| 8 | None | laugh, laugh, laughs, laughing | Divine laughter as response to rebellion - strikin... |
-| 9 | None | holy mountain, holy mountain, sacred mou... | Sacred geography - holy mountain imagery | Vehicle... |
-| 10 | None | iron, iron, metal, steel | Iron vs pottery - strength/fragility contrast | Ve... |
-| 11 | None | pottery, pottery, vessel, vessels | Pottery smashing - fragility metaphor for nations ... |
-| 12 | None | trembling, trembling, tremble, trembles | Trembling joy paradox - complex religious emotion ... |
+| 6 | None | bonds, bonds, bond, ropes | Breaking bonds/ropes - vivid liberation imagery ce... |
+| 7 | None | laughter, laughter, laugh, laughs | Divine laughter - unusual anthropomorphic response... |
+| 8 | None | pour, pour, poured, pouring | Pouring/installation - coronation imagery connecti... |
+| 9 | None | beget, beget, begotten, begetting | Divine begetting - father-son relationship as roya... |
+| 10 | None | iron rod, iron rod, rod, rods | Iron rod - harsh weapon contrasting with tender so... |
+| 11 | None | potter, potter, pottery, vessel | Potter's vessels - fragility imagery for nations u... |
+| 12 | None | kiss, kiss, kissing, kisses | Kissing as homage - political submission through r... |
 
 ### Commentary Requests (8)
 
@@ -108,10 +111,10 @@
 | 2 | 2:7 | Hayom (this day) temporal reference - coronation moment vs eternal dec... |
 | 3 | 2:11 | Paradoxical 'rejoice with trembling' - theological interpretation of c... |
 | 4 | 2:12 | Major textual crux nashqu-bar - Aramaic 'son' vs Hebrew alternatives, ... |
-| 5 | 2:12 | נַשְּׁקוּ־בַר textual crux - major interpretive puzzle about 'kiss the... |
-| 6 | 2:7 | Adoption formula 'today I have fathered you' - eternal vs. temporal so... |
-| 7 | 2:9 | תְּרֹעֵם shepherd/smash wordplay - how commentators handle the ambigui... |
-| 8 | 2:6 | נָסַכְתִּי libation verb for installation - unusual cultic language fo... |
+| 5 | 2:12 | נשקו־בר interpretive crux - major translations differ radically on mea... |
+| 6 | 2:7 | Divine adoption formula and 'today' reference - coronation theology vs... |
+| 7 | 2:9 | Tension between tender father-son relationship and violent conquest im... |
+| 8 | 2:11 | Paradox of fearful service and trembling joy - psychology of religious... |
 
 ---
 
@@ -119,7 +122,7 @@
 
 ### Lexicon Entries
 
-**Total entries returned**: 36
+**Total entries returned**: 68
 
 ### Concordance Results
 
@@ -131,20 +134,23 @@
 | בני אתן | 0 |
 | נשק | 10 |
 | גיל ברעדה | 0 |
+| משיח יהוה | 5 |
 | בני אתה אני היום ילדתיך | 1 |
 | שבט ברזל | 1 |
-| עבדו את יהוה ביראה | 0 |
+| יושב בשמים | 1 |
+| אפסי ארץ | 0 |
+| עבדו ביראה | 0 |
 | אשרי כל חוסי בו | 0 |
 
-**Total concordance results**: 13
+**Total concordance results**: 19
 
 ### Figurative Language Results
 
 | Query/Verse | Instances Found |
 |-------------|-----------------|
-| total_instances_used | 82 |
+| total_instances_used | 112 |
 
-**Total figurative instances**: 82
+**Total figurative instances**: 112
 
 ### Commentary Results
 
@@ -183,24 +189,26 @@
 7. How do the wisdom terminology and beatitude formula in vv. 10-12 connect this royal psalm to sapiential literature?
 8. What role does the psalm's structure as 'ḥoq' (decree) play in legitimizing royal authority within Israel's covenantal theology?
 
-### MicroAnalyst Interesting Questions (8)
+### MicroAnalyst Interesting Questions (10)
 
-1. Why does the psalm use the rare verb רָגְשׁוּ for nations' assembly rather than more common gathering terms?
-2. What is the significance of using נָסַכְתִּי (libation verb) for royal installation in v.6?
-3. Is the תְּרֹעֵם in v.9 intentionally ambiguous between 'shepherd' and 'smash' - a wordplay on royal duties?
-4. What accounts for the genre shift to wisdom vocabulary in vv.10-12?
-5. How should נַשְּׁקוּ־בַר be understood - is בַר 'son,' 'purity,' or something else?
-6. Why does divine laughter precede divine anger in the response sequence?
-7. What is the function of the 'today' (הַיּוֹם) in the adoption formula - ceremonial moment or eternal decree?
-8. How does the bondage imagery (cords/ropes) in v.3 relate to the iron mace imagery in v.9?
+1. Why does the psalm use the rare verb רגש in v.1 instead of more common assembly vocabulary?
+2. What is the significance of the double restraint imagery (מוסרות and עבתים) in v.3 - are these different types of divine authority?
+3. How does the unusual verb נסכתי (I have installed) in v.6 relate to anointing and coronation practices?
+4. Why does divine laughter (v.4) escalate to anger (v.5) - what triggers this emotional progression?
+5. What does the 'today' in v.7 refer to - eternal decree, coronation day, or something else?
+6. How can the tender father-son relationship (vv.7-8) coexist with violent conquest imagery (v.9)?
+7. What accounts for the genre shift from royal psalm to wisdom instruction in vv.10-12?
+8. What does נשקו־בר actually mean in v.12, and why is this verse so grammatically problematic?
+9. Why does the psalm end with the paradox of fearful service and trembling joy in v.11?
+10. How do the LXX interpretive choices (especially in vv.9,12) reflect early theological concerns about the text?
 
 ---
 
 ## Token Usage Summary
 
 **Total Input Tokens (estimated)**: 88,110
-**Total Output Tokens (estimated)**: 60,147
-**Total Tokens (estimated)**: 148,257
+**Total Output Tokens (estimated)**: 65,612
+**Total Tokens (estimated)**: 153,722
 
 *Note: Token estimates are approximate (character count / 3). Actual API usage may vary.*
 
@@ -208,4 +216,4 @@
 
 
 *Report generated by PipelineSummaryTracker*
-*Psalm 2 - 2025-10-21 16:22:09*
+*Psalm 2 - 2025-10-21 18:07:40*
