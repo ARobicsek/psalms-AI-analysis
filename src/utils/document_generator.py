@@ -349,7 +349,7 @@ Methodological & Bibliographical Summary
             if completion_date_str:
                 from datetime import datetime
                 dt = datetime.fromisoformat(completion_date_str.replace('Z', '+00:00'))
-                date_str = dt.strftime('%Y-%m-%d %H:%M:%S UTC')
+                date_str = dt.strftime('%B %d, %Y')
                 summary_text += f"\n{date_str}"
             else:
                 summary_text += "\nDate not available."

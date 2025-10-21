@@ -15,12 +15,12 @@
 #### 1. Value of Smoke Testing
  The implementation of a `--smoke-test` flag proved immediately useful. It allowed for rapid, iterative testing of the pipeline's structure and data-passing mechanisms, which helped uncover the `ModuleNotFoundError` without needing to run costly API calls.
 
-#### 2. Persistent "Date Produced" Bug
- A bug where the "Date Produced" field is missing from the final output remains, despite attempts to fix it.
-- **Initial Theory**: A redundant `save_json()` call at the end of the script was overwriting the correctly-dated statistics file saved after the Master Editor step.
-- **Action**: The redundant call was removed.
-- **Result**: The bug persists. The final smoke test run still shows "Date not available in statistics file."
-- **Conclusion**: The problem is more subtle than a simple file overwrite. The issue likely lies either within the `PipelineSummaryTracker`'s `mark_pipeline_complete()` or `save_json()` methods, or in how the `commentary_formatter.py` script reads the date key from the JSON file. This requires more targeted debugging in the next session.
+#### 2. "Date Produced" Bug - RESOLVED ✅
+ A bug where the "Date Produced" field was missing from the final output has been successfully fixed.
+- **Root Cause Identified**: The `PipelineSummaryTracker.mark_pipeline_complete()` method was only setting `pipeline_end` but not `steps['master_editor'].completion_date`, which is what the formatters look for.
+- **Fix Implemented**: Updated `mark_pipeline_complete()` to also set `steps["master_editor"].completion_date = self.pipeline_end.isoformat()`.
+- **Date Formatting Enhanced**: Updated both `commentary_formatter.py` and `document_generator.py` to display dates in "January 1, 2015" format without time or bold styling.
+- **Result**: The "Date Produced" field now correctly shows the completion date in a clean, readable format.
 
 ---
 

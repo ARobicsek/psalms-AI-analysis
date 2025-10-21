@@ -181,7 +181,7 @@ class CommentaryFormatter:
         if completion_date_str:
             from datetime import datetime
             dt = datetime.fromisoformat(completion_date_str.replace('Z', '+00:00'))
-            lines.append(dt.strftime('%Y-%m-%d %H:%M:%S UTC'))
+            lines.append(dt.strftime('%B %d, %Y'))
         else:
             lines.append("Date not available in statistics file.")
 
