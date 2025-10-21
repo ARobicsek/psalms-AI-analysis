@@ -39,7 +39,7 @@ from src.agents.macro_analyst import MacroAnalyst
 from src.agents.micro_analyst import MicroAnalystV2
 from src.agents.synthesis_writer import SynthesisWriter
 from src.agents.master_editor import MasterEditor
-from src.schemas.analysis_schemas import load_macro_analysis
+from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
 
@@ -54,7 +54,8 @@ def run_enhanced_pipeline(
     skip_synthesis: bool = False,
     skip_master_edit: bool = False,
     skip_print_ready: bool = False,
-    skip_word_doc: bool = False
+    skip_word_doc: bool = False,
+    smoke_test: bool = False
 ):
     """
     Run complete enhanced pipeline for a single psalm.
@@ -70,10 +71,13 @@ def run_enhanced_pipeline(
         skip_master_edit: Skip master editing (use existing file)
         skip_print_ready: Skip print-ready formatting
         skip_word_doc: Skip .docx generation
+        smoke_test: Run in smoke test mode (generates dummy data, no API calls)
     """
     logger = get_logger("enhanced_pipeline")
     logger.info(f"=" * 80)
     logger.info(f"ENHANCED PIPELINE - Psalm {psalm_number}")
+    if smoke_test:
+        logger.info("SMOKE TEST MODE ENABLED - NO API CALLS WILL BE MADE")
     logger.info(f"=" * 80)
 
     # --- Initialize Pipeline Summary Tracker (with resume capability) ---
@@ -81,7 +85,7 @@ def run_enhanced_pipeline(
     summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
     
     # Check if we are resuming a run (any skip flag is true)
-    is_resuming = any([skip_macro, skip_micro, skip_synthesis, skip_master_edit, skip_print_ready, skip_word_doc])
+    is_resuming = any([skip_macro, skip_micro, skip_synthesis, skip_master_edit, skip_print_ready, skip_word_doc]) and not smoke_test
 
     initial_data = None
     if is_resuming and summary_json_file.exists():
@@ -113,7 +117,36 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 1: Macro Analysis
     # =====================================================================
-    if not skip_macro or not macro_file.exists():
+    if smoke_test:
+        logger.info("\n[STEP 1] SMOKE TEST: Generating dummy MacroAnalyst output...")
+        print(f"\n{'='*80}")
+        print(f"STEP 1: SMOKE TEST - Macro Analysis")
+        print(f"{'='*80}\n")
+        step_start = time.time()
+
+        dummy_macro = MacroAnalysis(
+            psalm_number=psalm_number,
+            thesis_statement="This is a smoke test thesis.",
+            genre="Smoke Test Genre",
+            historical_context="Smoke test historical context.",
+            structural_outline=[StructuralDivision(section="v. 1", theme="Smoke test theme")],
+            research_questions=["Is this a smoke test?"]
+        )
+        from src.schemas.analysis_schemas import save_analysis
+        save_analysis(dummy_macro, str(macro_file), format="json")
+
+        tracker.track_verse_count(5) # Dummy value
+        tracker.track_step_input("macro_analysis", "Smoke test input")
+        macro_output = dummy_macro.to_markdown()
+        step_duration = time.time() - step_start
+        tracker.track_step_output("macro_analysis", macro_output, duration=step_duration)
+        tracker.track_model_for_step("macro_analysis", "smoke-test-model-macro")
+        tracker.track_macro_questions(dummy_macro.research_questions)
+
+        logger.info(f"✓ SMOKE TEST: Dummy macro analysis saved to {macro_file}")
+        print(f"✓ SMOKE TEST: Dummy macro analysis complete: {macro_file}\n")
+
+    elif not skip_macro or not macro_file.exists():
         logger.info("\n[STEP 1] Running MacroAnalyst...")
         print(f"\n{'='*80}")
         print(f"STEP 1: Macro Analysis (Structural Thesis)")
@@ -168,7 +201,44 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 2: Micro Analysis (Enhanced Figurative Search)
     # =====================================================================
-    if not skip_micro or not micro_file.exists():
+    if smoke_test:
+        logger.info("\n[STEP 2] SMOKE TEST: Generating dummy MicroAnalyst output...")
+        print(f"\n{'='*80}")
+        print(f"STEP 2: SMOKE TEST - Micro Analysis")
+        print(f"{'='*80}\n")
+        step_start = time.time()
+
+        dummy_micro = MicroAnalysis(
+            psalm_number=psalm_number,
+            verse_commentaries=[VerseCommentary(verse_number=1, commentary="Smoke test commentary.")],
+            thematic_threads=["Smoke test theme"],
+            interesting_questions=["Is this a smoke test?"]
+        )
+        dummy_research_bundle = "# Smoke Test Research Bundle\n\nThis is a dummy research bundle."
+
+        from src.schemas.analysis_schemas import save_analysis
+        save_analysis(dummy_micro, str(micro_file), format="json")
+        with open(research_file, 'w', encoding='utf-8') as f:
+            f.write(dummy_research_bundle)
+
+        tracker.track_step_input("micro_analysis", "Smoke test input")
+        micro_output = dummy_micro.to_markdown() + "\n\n" + dummy_research_bundle
+        step_duration = time.time() - step_start
+        tracker.track_step_output("micro_analysis", micro_output, duration=step_duration)
+        tracker.track_model_for_step("micro_analysis", "smoke-test-model-micro")
+        # Dummy tracking for research bundle
+        # The following line is commented out because the track_research_bundle expects a ResearchBundle object
+        # and creating one would require more imports and setup. For a smoke test, this is not essential.
+        # tracker.track_research_bundle(dummy_research_bundle) 
+        tracker.track_research_bundle_size(len(dummy_research_bundle), len(dummy_research_bundle) // 3)
+        tracker.track_micro_questions(dummy_micro.interesting_questions)
+
+        logger.info(f"✓ SMOKE TEST: Dummy micro analysis saved to {micro_file}")
+        logger.info(f"✓ SMOKE TEST: Dummy research bundle saved to {research_file}")
+        print(f"✓ SMOKE TEST: Dummy micro analysis complete: {micro_file}")
+        print(f"✓ SMOKE TEST: Dummy research bundle complete: {research_file}\n")
+
+    elif not skip_micro or not micro_file.exists():
         logger.info("\n[STEP 2] Running MicroAnalyst v2 (with enhanced figurative search)...")
         print(f"\n{'='*80}")
         print(f"STEP 2: Micro Analysis (Discovery + Enhanced Research)")
@@ -245,7 +315,33 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 3: Synthesis (Enhanced Prompts)
     # =====================================================================
-    if not skip_synthesis or not synthesis_intro_file.exists():
+    if smoke_test:
+        logger.info("\n[STEP 3] SMOKE TEST: Generating dummy SynthesisWriter output...")
+        print(f"\n{'='*80}")
+        print(f"STEP 3: SMOKE TEST - Synthesis")
+        print(f"{'='*80}\n")
+        step_start = time.time()
+
+        dummy_intro = "# Smoke Test Introduction\n\nThis is a dummy introduction."
+        dummy_verses = "# Smoke Test Verse Commentary\n\nThis is dummy verse commentary."
+
+        with open(synthesis_intro_file, 'w', encoding='utf-8') as f:
+            f.write(dummy_intro)
+        with open(synthesis_verses_file, 'w', encoding='utf-8') as f:
+            f.write(dummy_verses)
+
+        tracker.track_step_input("synthesis", "Smoke test input")
+        synthesis_output = dummy_intro + "\n\n" + dummy_verses
+        step_duration = time.time() - step_start
+        tracker.track_step_output("synthesis", synthesis_output, duration=step_duration)
+        tracker.track_model_for_step("synthesis", "smoke-test-model-synthesis")
+
+        logger.info(f"✓ SMOKE TEST: Dummy introduction saved to {synthesis_intro_file}")
+        logger.info(f"✓ SMOKE TEST: Dummy verse commentary saved to {synthesis_verses_file}")
+        print(f"✓ SMOKE TEST: Dummy introduction complete: {synthesis_intro_file}")
+        print(f"✓ SMOKE TEST: Dummy verse commentary complete: {synthesis_verses_file}\n")
+
+    elif not skip_synthesis or not synthesis_intro_file.exists():
         logger.info("\n[STEP 3] Running SynthesisWriter (with enhanced prompts)...")
         print(f"\n{'='*80}")
         print(f"STEP 3: Synthesis (Introduction + Verse Commentary)")
@@ -297,7 +393,42 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 4: Master Editor (GPT-5) - NEW!
     # =====================================================================
-    if not skip_master_edit or not edited_intro_file.exists():
+    if smoke_test:
+        logger.info("\n[STEP 4] SMOKE TEST: Generating dummy MasterEditor output...")
+        print(f"\n{'='*80}")
+        print(f"STEP 4: SMOKE TEST - Master Editor")
+        print(f"{'='*80}\n")
+        step_start = time.time()
+
+        dummy_assessment = "# Smoke Test Assessment\n\nThis is a dummy assessment."
+        dummy_revised_intro = "# Smoke Test Revised Introduction\n\nThis is a dummy revised introduction."
+        dummy_revised_verses = "# Smoke Test Revised Verse Commentary\n\nThis is dummy revised verse commentary."
+
+        with open(edited_assessment_file, 'w', encoding='utf-8') as f:
+            f.write(dummy_assessment)
+        with open(edited_intro_file, 'w', encoding='utf-8') as f:
+            f.write(dummy_revised_intro)
+        with open(edited_verses_file, 'w', encoding='utf-8') as f:
+            f.write(dummy_revised_verses)
+
+        tracker.track_step_input("master_editor", "Smoke test input")
+        editor_output = dummy_assessment + "\n\n" + dummy_revised_intro + "\n\n" + dummy_revised_verses
+        step_duration = time.time() - step_start
+        tracker.track_step_output("master_editor", editor_output, duration=step_duration)
+        tracker.track_model_for_step("master_editor", "smoke-test-model-editor")
+
+        logger.info(f"✓ SMOKE TEST: Dummy assessment saved to {edited_assessment_file}")
+        logger.info(f"✓ SMOKE TEST: Dummy revised introduction saved to {edited_intro_file}")
+        logger.info(f"✓ SMOKE TEST: Dummy revised verses saved to {edited_verses_file}")
+        print(f"✓ SMOKE TEST: Dummy assessment complete: {edited_assessment_file}")
+        print(f"✓ SMOKE TEST: Dummy revised introduction complete: {edited_intro_file}")
+        print(f"✓ SMOKE TEST: Dummy revised verses complete: {edited_verses_file}\n")
+
+        tracker.mark_pipeline_complete()
+        summary_json_file = tracker.save_json(str(output_path))
+        logger.info(f"Analysis complete. Statistics with completion date saved to {summary_json_file}")
+
+    elif not skip_master_edit or not edited_intro_file.exists():
         logger.info("\n[STEP 4] Running MasterEditor (GPT-5) for final editorial review...")
         print(f"\n{'='*80}")
         print(f"STEP 4: Master Editorial Review (GPT-5)")
@@ -547,9 +678,10 @@ def run_enhanced_pipeline(
     logger.info("\n[SUMMARY] Generating pipeline summary report...")
     try:
         summary_file = tracker.save_report(str(output_path))
-        summary_json = tracker.save_json(str(output_path))
         logger.info(f"✓ Pipeline summary saved to {summary_file}")
-        logger.info(f"✓ Pipeline statistics saved to {summary_json}")
+        # The final stats JSON is already saved in the Master Editor step
+        summary_json = summary_json_file
+        logger.info(f"✓ Pipeline statistics can be found at {summary_json}")
         print(f"\n✓ Pipeline summary: {summary_file}")
         print(f"✓ Pipeline statistics: {summary_json}")
     except Exception as e:
@@ -622,6 +754,8 @@ Examples:
                        help='Skip print-ready formatting')
     parser.add_argument('--skip-word-doc', action='store_true',
                        help='Skip the final .docx generation step')
+    parser.add_argument('--smoke-test', action='store_true',
+                       help='Run in smoke test mode (generates dummy data, no API calls)')
 
     args = parser.parse_args()
 
@@ -652,7 +786,8 @@ Examples:
             skip_synthesis=args.skip_synthesis,
             skip_master_edit=args.skip_master_edit,
             skip_print_ready=args.skip_print_ready,
-            skip_word_doc=args.skip_word_doc
+            skip_word_doc=args.skip_word_doc,
+            smoke_test=args.smoke_test
         )
 
         return 0

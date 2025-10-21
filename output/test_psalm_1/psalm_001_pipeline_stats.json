@@ -1,318 +1,71 @@
 {
   "psalm_number": 1,
-  "pipeline_start": "2025-10-20T20:29:52.638288",
-  "pipeline_end": "2025-10-20T21:17:04.161059",
+  "pipeline_start": "2025-10-20T22:26:57.164856",
+  "pipeline_end": "2025-10-20T22:26:57.188449",
   "steps": {
     "macro_analysis": {
-      "input_char_count": 1270,
-      "input_token_estimate": 423,
-      "output_char_count": 9521,
-      "output_token_estimate": 3173,
-      "duration_seconds": 50.006792306900024,
+      "input_char_count": 16,
+      "input_token_estimate": 5,
+      "output_char_count": 281,
+      "output_token_estimate": 93,
+      "duration_seconds": 0.0006680488586425781,
       "completion_date": null,
-      "timestamp": "2025-10-20T20:29:52.642740"
+      "timestamp": "2025-10-20T22:26:57.177297"
     },
     "micro_analysis": {
-      "input_char_count": 9521,
-      "input_token_estimate": 3173,
-      "output_char_count": 134290,
-      "output_token_estimate": 44763,
-      "duration_seconds": 95.715083360672,
+      "input_char_count": 16,
+      "input_token_estimate": 5,
+      "output_char_count": 247,
+      "output_token_estimate": 82,
+      "duration_seconds": 0.0006656646728515625,
       "completion_date": null,
-      "timestamp": "2025-10-20T20:32:42.672087"
+      "timestamp": "2025-10-20T22:26:57.180584"
     },
     "synthesis": {
-      "input_char_count": 143813,
-      "input_token_estimate": 47937,
-      "output_char_count": 19911,
-      "output_token_estimate": 6637,
-      "duration_seconds": 141.51481437683105,
+      "input_char_count": 16,
+      "input_token_estimate": 5,
+      "output_char_count": 120,
+      "output_token_estimate": 40,
+      "duration_seconds": 0.0008494853973388672,
       "completion_date": null,
-      "timestamp": "2025-10-20T20:36:18.412789"
+      "timestamp": "2025-10-20T22:26:57.185099"
     },
     "master_editor": {
-      "input_char_count": 156106,
-      "input_token_estimate": 52035,
-      "output_char_count": 20255,
-      "output_token_estimate": 6751,
-      "duration_seconds": 212.950838804245,
+      "input_char_count": 16,
+      "input_token_estimate": 5,
+      "output_char_count": 206,
+      "output_token_estimate": 68,
+      "duration_seconds": 0.0013494491577148438,
       "completion_date": null,
-      "timestamp": "2025-10-20T20:40:40.857672"
+      "timestamp": "2025-10-20T22:26:57.187483"
     }
   },
   "research": {
-    "lexicon_requests": [
-      {
-        "word": "אַשְׁרֵי",
-        "reason": "Key theological choice - why happiness language rather than covenant blessing (baruk)?"
-      },
-      {
-        "word": "עֲצַת",
-        "reason": "Council/advice concept - need semantic range for wicked counsel context"
-      },
-      {
-        "word": "לֵצִים",
-        "reason": "Scoffers - final stage of moral degradation, need precise characterization"
-      },
-      {
-        "word": "מוֹשַׁב",
-        "reason": "Dwelling place/seat - intimacy implications in sitting with scoffers"
-      },
-      {
-        "word": "חֶפְצוֹ",
-        "reason": "Delight/pleasure - emotional language rather than duty terminology"
-      },
-      {
-        "word": "יֶהְגֶּה",
-        "reason": "Meditate/mutter - oral recitation vs. mental contemplation vs. study practice"
-      },
-      {
-        "word": "שָׁתוּל",
-        "reason": "Planted - intentional cultivation vs. natural growth, divine agency implications"
-      },
-      {
-        "word": "פַּלְגֵי",
-        "reason": "Streams - unusual plural form, significance of multiple vs. single water source"
-      },
-      {
-        "word": "יִבּוֹל",
-        "reason": "Produce/yield - agricultural terminology in wisdom context"
-      },
-      {
-        "word": "מֹץ",
-        "reason": "Chaff - specific agricultural imagery for worthlessness"
-      },
-      {
-        "word": "תִּדְּפֶנּוּ",
-        "reason": "Drive away/scatter - violent imagery vs. gentle blowing"
-      },
-      {
-        "word": "יָקֻמוּ",
-        "reason": "Stand/rise - legal standing in court vs. resurrection imagery"
-      },
-      {
-        "word": "עֲדַת",
-        "reason": "Assembly/congregation - communal membership dimension"
-      },
-      {
-        "word": "יוֹדֵעַ",
-        "reason": "Knows - intimate knowledge vs. foreknowledge vs. active causation"
-      },
-      {
-        "word": "תֹּאבֵד",
-        "reason": "Perishes - ultimate destruction terminology"
-      }
-    ],
-    "concordance_requests": [
-      {
-        "query": "אשרי",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Track happiness formula usage patterns vs. baruk blessing terminology"
-      },
-      {
-        "query": "יהגה",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Meditation/muttering practices in biblical literature"
-      },
-      {
-        "query": "דרך צדיקים",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Way of righteous formula in wisdom literature"
-      },
-      {
-        "query": "דרך רשעים",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Way of wicked contrasting formula"
-      },
-      {
-        "query": "עץ שתול",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Tree planting imagery in biblical literature"
-      },
-      {
-        "query": "פלגי מים",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Streams of water metaphorical usage"
-      },
-      {
-        "query": "מץ רוח",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Chaff and wind judgment imagery"
-      },
-      {
-        "query": "עדת צדיקים",
-        "scope": "Tanakh",
-        "level": "consonantal",
-        "purpose": "Assembly of righteous communal terminology"
-      }
-    ],
-    "figurative_requests": [
-      {
-        "verse": null,
-        "reason": "Path/way metaphor for life choices - central to wisdom literature | Vehicle: path | Related terms: paths, way, ways, road, roads, journey, journeys",
-        "vehicle": "path",
-        "vehicle_terms": [
-          "path",
-          "paths",
-          "way",
-          "ways",
-          "road",
-          "roads",
-          "journey",
-          "journeys"
-        ]
-      },
-      {
-        "verse": null,
-        "reason": "Tree imagery for stability and fruitfulness - vivid agricultural metaphor | Vehicle: tree | Related terms: trees, planted, planting, plant, plants",
-        "vehicle": "tree",
-        "vehicle_terms": [
-          "tree",
-          "trees",
-          "planted",
-          "planting",
-          "plant",
-          "plants"
-        ]
-      },
-      {
-        "verse": null,
-        "reason": "Streams as divine provision - water imagery for spiritual sustenance | Vehicle: streams | Related terms: stream, water, waters, river, rivers, channel, channels",
-        "vehicle": "streams",
-        "vehicle_terms": [
-          "streams",
-          "stream",
-          "water",
-          "waters",
-          "river",
-          "rivers",
-          "channel",
-          "channels"
-        ]
-      },
-      {
-        "verse": null,
-        "reason": "Chaff imagery for worthlessness - agricultural metaphor for judgment | Vehicle: chaff | Related terms: grain, harvest, winnow, winnowing, sift, sifting",
-        "vehicle": "chaff",
-        "vehicle_terms": [
-          "chaff",
-          "grain",
-          "harvest",
-          "winnow",
-          "winnowing",
-          "sift",
-          "sifting"
-        ]
-      },
-      {
-        "verse": null,
-        "reason": "Wind as divine judgment force - meteorological imagery for God's power | Vehicle: wind | Related terms: winds, blow, blows, blowing, drive, drives, scatter, scatters",
-        "vehicle": "wind",
-        "vehicle_terms": [
-          "wind",
-          "winds",
-          "blow",
-          "blows",
-          "blowing",
-          "drive",
-          "drives",
-          "scatter",
-          "scatters"
-        ]
-      },
-      {
-        "verse": null,
-        "reason": "Standing in court metaphor - judicial imagery for divine judgment | Vehicle: stand | Related terms: standing, stands, rise, rises, rising, court, judgment",
-        "vehicle": "stand",
-        "vehicle_terms": [
-          "stand",
-          "standing",
-          "stands",
-          "rise",
-          "rises",
-          "rising",
-          "court",
-          "judgment"
-        ]
-      }
-    ],
-    "commentary_requests": [
-      {
-        "verse": "1:1",
-        "reason": "Ashrei vs. baruk terminology - how do commentators understand the happiness vs. covenant blessing distinction?"
-      },
-      {
-        "verse": "1:2",
-        "reason": "Hagah meditation practice - what do traditional sources say about this oral/mental activity?"
-      },
-      {
-        "verse": "1:5",
-        "reason": "Standing in judgment interpretation - eschatological vs. present community membership understanding"
-      },
-      {
-        "verse": "1:6",
-        "reason": "Divine knowing asymmetry - why does God 'know' righteous way but wicked way simply 'perishes'?"
-      }
-    ],
-    "lexicon_entries_count": 29,
-    "concordance_results": {
-      "אשרי": 37,
-      "יהגה": 8,
-      "דרך צדיקים": 1,
-      "דרך רשעים": 2,
-      "עץ שתול": 1,
-      "פלגי מים": 0,
-      "מץ רוח": 0,
-      "עדת צדיקים": 1
-    },
-    "figurative_results": {
-      "total_instances_used": 383
-    },
-    "commentary_counts": {
-      "Rashi": 4,
-      "Ibn Ezra": 3,
-      "Radak": 4,
-      "Metzudat David": 4,
-      "Malbim": 4,
-      "Meiri": 4
-    },
+    "lexicon_requests": [],
+    "concordance_requests": [],
+    "figurative_requests": [],
+    "commentary_requests": [],
+    "lexicon_entries_count": 0,
+    "concordance_results": {},
+    "figurative_results": {},
+    "commentary_counts": {},
     "ugaritic_parallels": [],
-    "research_bundle_chars": 128081,
-    "research_bundle_tokens": 42693
+    "research_bundle_chars": 62,
+    "research_bundle_tokens": 20
   },
   "analysis": {
     "macro_questions": [
-      "How does the term 'ashrei' (blessed/happy) function differently from 'baruk' (blessed) and what does this suggest about the psalm's anthropocentric vs. theocentric perspective?",
-      "What is the significance of the tree being 'planted' (shatūl) rather than naturally growing, and how does this relate to divine agency in righteousness?",
-      "How does the concept of 'meditation' (hagah) relate to ancient Near Eastern wisdom practices and what does day-and-night study suggest about Torah piety?",
-      "What is the judicial context implied by 'mishpat' in v. 5 and how does it relate to eschatological vs. historical judgment?",
-      "How do the social degradation terms (wicked, sinners, scoffers) function as a theological taxonomy of evil?",
-      "What is the significance of the contrast between individual righteousness (vv. 1-3) and communal separation/assembly (vv. 4-5)?",
-      "How does the divine 'knowing' (yada') in v. 6 function theologically - as foreknowledge, intimate relationship, or active causation?",
-      "What role does the natural imagery (tree, streams, chaff, wind) play in suggesting cosmic moral order?"
+      "Is this a smoke test?"
     ],
     "micro_questions": [
-      "Why does the psalm use 'ashrei' (happiness/blessing) rather than 'baruk' (covenant blessing) and what does this suggest about the psalm's theological perspective?",
-      "What is the significance of the tree being 'planted' (shatūl) rather than naturally growing - does this imply divine agency in righteousness formation?",
-      "How does the concept of 'meditation' (hagah) function - is this oral recitation, mental contemplation, or scribal study practice?",
-      "What is the precise meaning of 'standing in judgment' (yāqūmū ba-mishpāṭ) - legal proceedings, eschatological judgment, or community membership?",
-      "Why is the final parallelism asymmetrical - God 'knows' the righteous way but the wicked way simply 'perishes'?",
-      "What does the progression from individual morality (vv.1-2) to cosmic imagery (vv.3-4) to communal consequences (v.5) suggest about the psalm's worldview?",
-      "How does the divine 'knowing' (yōdēa') function theologically - as foreknowledge, intimate relationship, or active causation?"
+      "Is this a smoke test?"
     ],
-    "verse_count": 6
+    "verse_count": 5
   },
   "model_usage": {
-    "macro_analysis": "claude-sonnet-4-20250514",
-    "micro_analysis": "claude-sonnet-4-20250514",
-    "synthesis": "claude-sonnet-4-20250514",
-    "master_editor": "gpt-5"
+    "macro_analysis": "smoke-test-model-macro",
+    "micro_analysis": "smoke-test-model-micro",
+    "synthesis": "smoke-test-model-synthesis",
+    "master_editor": "smoke-test-model-editor"
   }
 }

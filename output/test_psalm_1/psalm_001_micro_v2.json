@@ -3,112 +3,18 @@
   "verse_commentaries": [
     {
       "verse_number": 1,
-      "commentary": "The opening 'אַשְׁרֵי' (ashrei) is intriguing - this is happiness/blessedness language rather than covenant blessing (baruk). The triple progression 'walked → stood → sat' with corresponding social degradation 'wicked → sinners → scoffers' creates a sophisticated chiastic pattern. The threefold repetition of 'לֹא' (not) creates strong anaphoric rhythm.",
-      "lexical_insights": [
-        "אַשְׁרֵי",
-        "עֲצַת",
-        "לֵצִים",
-        "מוֹשַׁב"
-      ],
-      "figurative_analysis": [
-        "path/way metaphor for life choices",
-        "sitting as intimacy metaphor"
-      ],
-      "thesis_connection": "Establishes the binary framework but the happiness focus is curious - suggests eudaimonic rather than purely covenantal theology",
-      "phonetic_transcription": "'ashrēy-hā'iysh 'asher  lō' hālakh baʿatsath rəshāʿiym wuvdherekh khatā'iym lō' ʿāmādh wuvmwōshav lētsiym lō' yāshāv"
-    },
-    {
-      "verse_number": 2,
-      "commentary": "The emphatic 'כִּי אִם' (but rather) creates sharp contrast. 'חֶפְצוֹ' (his delight) is emotionally charged - not mere duty but pleasure. The phrase 'יוֹמָם וָלָיְלָה' (day and night) suggests total life integration, and 'יֶהְגֶּה' (meditate/mutter) implies oral recitation, not silent reading.",
-      "lexical_insights": [
-        "חֶפְצוֹ",
-        "יֶהְגֶּה",
-        "תוֹרַת"
-      ],
-      "figurative_analysis": [
-        "day and night as merismus for totality"
-      ],
-      "thesis_connection": "Central to thesis but the delight emphasis suggests affective rather than merely intellectual relationship to torah",
-      "phonetic_transcription": "kiy 'im-bəthwōrath yəhōwāh kheftswō wuvthwōrāthwō yehgeh ywōmām wālāyəlāh"
-    },
-    {
-      "verse_number": 3,
-      "commentary": "The tree is 'שָׁתוּל' (planted) not naturally grown - suggesting intentional cultivation. 'פַּלְגֵי־מָיִם' (streams of water) uses an unusual plural form. The phrase 'בְּעִתּוֹ' (in its season) implies divine timing, and 'יַצְלִיחַ' (prosper) concludes with comprehensive success.",
-      "lexical_insights": [
-        "שָׁתוּל",
-        "פַּלְגֵי",
-        "יִבּוֹל",
-        "יַצְלִיחַ"
-      ],
-      "figurative_analysis": [
-        "tree as stability metaphor",
-        "streams as divine provision",
-        "leaf imagery for perpetual vitality"
-      ],
-      "thesis_connection": "Supports thesis but the cultivation imagery suggests divine agency in righteousness formation",
-      "phonetic_transcription": "wəhāyāh kəʿēts shāthwul ʿal-palghēy-māyim 'asher pirywō  yitēn bəʿituwō wəʿālēhwu lō'-yibuwōl wəkhōl 'asher-yaʿaseh yatsliykha"
-    },
-    {
-      "verse_number": 4,
-      "commentary": "The stark 'לֹא־כֵן' (not so!) creates dramatic reversal. 'מֹץ' (chaff) is worthless grain byproduct - emphasizing uselessness rather than just transience. The wind imagery 'תִּדְּפֶנּוּ רוּחַ' suggests violent scattering, not gentle blowing.",
-      "lexical_insights": [
-        "לֹא־כֵן",
-        "מֹץ",
-        "תִּדְּפֶנּוּ"
-      ],
-      "figurative_analysis": [
-        "chaff as worthlessness/lightness",
-        "wind as divine judgment force"
-      ],
-      "thesis_connection": "Perfect antithesis to tree imagery but the violence of the scattering is noteworthy",
-      "phonetic_transcription": "lō'-khēn hārəshāʿiym kiy 'im-kamōts 'asher-tidfenuwu rwukha"
-    },
-    {
-      "verse_number": 5,
-      "commentary": "'עַל־כֵּן' (therefore) makes consequences explicit. 'לֹא־יָקֻמוּ' (will not stand/rise) could be legal (court) or resurrection imagery. 'מִשְׁפָּט' (judgment) suggests formal judicial proceedings, and 'עֲדַת צַדִּיקִים' (assembly of righteous) implies communal dimension.",
-      "lexical_insights": [
-        "יָקֻמוּ",
-        "מִשְׁפָּט",
-        "עֲדַת"
-      ],
-      "figurative_analysis": [
-        "standing in court metaphor",
-        "assembly as community membership"
-      ],
-      "thesis_connection": "Extends the individual morality to communal/judicial consequences as thesis suggests",
-      "phonetic_transcription": "ʿal-kēn  lō'-yāqumwu rəshāʿiym bamishpāt wəkhatā'iym baʿadhath tsadiyqiym"
-    },
-    {
-      "verse_number": 6,
-      "commentary": "'יוֹדֵעַ' (knows) is intimate knowledge, not mere awareness. The 'דֶרֶךְ' (way) creates inclusio with v.1. 'תֹּאבֵד' (perishes) is emphatic final position - ultimate destruction. The verse provides theological foundation for the entire contrast through divine knowledge.",
-      "lexical_insights": [
-        "יוֹדֵעַ",
-        "דֶרֶךְ",
-        "תֹּאבֵד"
-      ],
-      "figurative_analysis": [
-        "way as life trajectory",
-        "divine knowing as validation"
-      ],
-      "thesis_connection": "Provides theological foundation for thesis but the asymmetry and divine knowing deserves exploration",
-      "phonetic_transcription": "kiy-ywōdhēʿa yəhōwāh derekh tsadiyqiym wədherekh rəshāʿiym tō'vēdh f"
+      "commentary": "Smoke test commentary.",
+      "lexical_insights": [],
+      "figurative_analysis": [],
+      "thesis_connection": "",
+      "phonetic_transcription": ""
     }
   ],
   "thematic_threads": [
-    "Progression from individual choice (v.1) through metaphorical imagery (vv.3-4) to communal consequences (v.5) to divine perspective (v.6)",
-    "Tense progression: perfect tenses in vv.1-3 give way to imperfect/future in vv.4-6, suggesting present choices determine future outcomes",
-    "Inclusio structure with 'way' (derek) framing the psalm in vv.1 and 6",
-    "Binary structure throughout but with asymmetrical elements - divine knowledge of righteous vs. destruction of wicked path",
-    "Movement from social relationships through natural imagery to judicial/cosmic consequences"
+    "Smoke test theme"
   ],
   "interesting_questions": [
-    "Why does the psalm use 'ashrei' (happiness/blessing) rather than 'baruk' (covenant blessing) and what does this suggest about the psalm's theological perspective?",
-    "What is the significance of the tree being 'planted' (shatūl) rather than naturally growing - does this imply divine agency in righteousness formation?",
-    "How does the concept of 'meditation' (hagah) function - is this oral recitation, mental contemplation, or scribal study practice?",
-    "What is the precise meaning of 'standing in judgment' (yāqūmū ba-mishpāṭ) - legal proceedings, eschatological judgment, or community membership?",
-    "Why is the final parallelism asymmetrical - God 'knows' the righteous way but the wicked way simply 'perishes'?",
-    "What does the progression from individual morality (vv.1-2) to cosmic imagery (vv.3-4) to communal consequences (v.5) suggest about the psalm's worldview?",
-    "How does the divine 'knowing' (yōdēa') function theologically - as foreknowledge, intimate relationship, or active causation?"
+    "Is this a smoke test?"
   ],
-  "synthesis_notes": "LEXICON: Focus on ashrei vs baruk, hagah meditation terminology, yada divine knowledge, shatūl planting imagery\nCONCORDANCE: Track 'way' (derek) terminology, mishpat judicial language, tree/chaff metaphors in wisdom literature\nFIGURATIVE: All agricultural and natural imagery - tree, streams, chaff, wind patterns\nCOMMENTARY: Verses with theological puzzles about divine agency, judgment timing, and knowledge terminology"
+  "synthesis_notes": ""
 }
