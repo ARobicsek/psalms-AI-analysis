@@ -371,59 +371,65 @@ def edit(self, psalm_number: int, introduction: str, verse_commentary: str,
 
 ### Psalm 145 (verses 1, 2, 16 shown)
 
-```json
-{
-  "psalm_number": 145,
-  "verse_discoveries": [
+```markdown  ": [
     {
-      "verse_number": 1,
-      "observations": "The title 'תְּהִלָּה' (praise song) is unique among psalms - most use מִזְמוֹר or שִׁיר. The direct address to God as 'my God the King' is immediately personal yet royal.",
-      "curious_words": ["תְּהִלָּה", "הַמֶּלֶךְ"],
-      "poetic_features": ["unique title", "personal + royal address"],
-      "figurative_elements": ["God as personal king"],
-      "puzzles": ["Why unique title תְּהִלָּה?"],
-      "lxx_insights": "LXX uses Αἴνεσις (aínesis, praise) for תְּהִלָּה",
-      "macro_relation": "Establishes divine kingship theme with personal intimacy",
-      "phonetic": "te-hil-la le-da-vid a-ro-mim-kha e-lo-hai ham-me-lekh va-a-va-re-kha shim-kha le-o-lam va-ed"
+      "verse_discoveries": [
+    {
+      "ns": "The title
+      "observations": "The titleque' (praise song) is uniqueמ among psalms - most use מר. Theress to God as direct address to God asediately personal 'my God the King' is immediately personal      "curious["תְּהִלָּהַמֶּלֶךְtic_features"],
+      "poetic_featuresnal": ["unique title", "personalgur + royal address"],
+      "figuralative_elements": ["God as personalng"],
+      "puzzles": ["Whytitle תְּהִלָּה   "lxxX uses_insights": "LXX usesaise) for תις (aínesis, praise) for תִלָּה",
+      "macros divine kingship theme with personal intim kingship theme with personal intim"phonetic":h lə-dhā-wikhā eō-mim-khā e-lō-hay ham-a-me-lekh wa-aim-khə-khā shim-kh-lām wā-ʿe  },
+    {
+      dh"
     },
+    {2,
+      "verse_number": 2,he phrase
+      "observations": "The phrase dailyֹם) creates dailytment. Parallel liturgical commitment. Parallele with v.1 butss' to 'b shifts from 'extol/bless' to 'bords":less/praise'.",
+      "curious_words":es":־יוֹם"],
+      "poetic_features":ric 'forever anithd ever'", "parallelism with
+      "figuraily praise asative_elements": ["daily praise aszzles": [], religious discipline"],
+      "puzzles": [],ἡμέρανκάστην ἡμέρανor ב (each day) for ב  "וֹם",
+      "n": "Personalmacro_relation": "Personalniversal trajectory",
+      "phonetic": " commitment expanding to universal trajectory",
+      "phonetic": "ā lə wā-ʿedh
     {
-      "verse_number": 2,
-      "observations": "The phrase 'every day' (בְּכׇל־יוֹם) creates daily liturgical commitment. Parallel structure with v.1 but shifts from 'extol/bless' to 'bless/praise'.",
-      "curious_words": ["בְּכׇל־יוֹם"],
-      "poetic_features": ["anaphoric 'forever and ever'", "parallelism with v.1"],
-      "figurative_elements": ["daily praise as religious discipline"],
-      "puzzles": [],
-      "lxx_insights": "LXX has καθ᾽ ἑκάστην ἡμέραν (each day) for בְּכׇל־יוֹם",
-      "macro_relation": "Personal commitment expanding to universal trajectory",
-      "phonetic": "be-khol-yom a-va-re-khe-ka va-a-ha-le-la shim-kha le-o-lam va-ed"
+      "
     },
-    {
-      "verse_number": 16,
-      "observations": "The image of God 'opening his hand' is intimate and generous. מַשְׂבִּיעַ (satisfying) and רָצוֹן (desire/will) suggest abundant provision beyond mere survival.",
-      "curious_words": ["פּוֹתֵחַ", "מַשְׂבִּיעַ", "רָצוֹן"],
-      "poetic_features": ["intimate hand imagery"],
-      "figurative_elements": ["divine hand as source of abundance", "satisfied desire as divine gift"],
-      "puzzles": [],
-      "lxx_insights": "LXX ἀνοίγεις (anoígeis, you open) for פּוֹתֵחַ",
-      "macro_relation": "Generous divine provision contrasts with human royal neglect",
-      "phonetic": "po-te-akh et-ya-de-kha u-mas-bi-a le-khol-khai ra-tson"
+    {: 16,
+      "verse_number": 16,e image of God 
+      "observations": "The image of Godous 'opening his hand' is intimate and generousרָצן (desireest abundant/will) suggest abundantsurvival.",
+      "curious_words provision beyond mere survival.",
+      "curious_words_features"],
+      "poetic_features": ["intimate hand imageryents":"],
+      "figurative_elements":asnce", "satisfie source of abundance", "satisfievinezzles": [], gift"],
+      "puzzles": [],"lxx_insights":is, youις (anoígeis, youח open) for פּוֹתֵח",
+      "macro_ous divine provision contrrelation": "Generous divine provision contretic":asts with human royal neglect",
+      "phonetic": lə-khol-khy rā-tsōn"
+  
     }
-  ],
+  ],tterns": [
+    "Ac
   "overall_patterns": [
-    "Acrostic structure with missing nun verse",
-    "Progressive expansion: personal → generational → universal",
-    "Repeated 'all/every' (kol) appearing 17 times"
+    "Acn verserostic structure with missing nun verse → gener",
+    "Progressive expansion: personal → generversal",
+    "Repeateimes"ol) appearing 17 times"estions
   ],
-  "interesting_questions": [
-    "Why unique title 'תְּהִלָּה' instead of standard psalm designation?",
-    "What is significance of missing nun verse in acrostic?",
-    "How does universal compassion (v.9) reconcile with destruction of wicked (v.20)?"
+  "interesting_questionsWhy uniquee 'תְּהִלָstandard psalmּה' instead of standard psalmignation?",
+    "Whatng nun verse in is significance of missing nun verse inowssion (v does universal compassion (vn.9) reconcile with destruction.20)ch?"
   ],
-  "research_priorities": [
-    "LEXICON: Focus on unique praise vocabulary (תְּהִלָּה), rare words (עֱזוּז, חֵקֶר)",
-    "CONCORDANCE: Track 'all/every' (כֹּל) usage pattern",
-    "FIGURATIVE: Hand imagery, pouring forth metaphor"
+  "research "_priorities": [
+    ": Focusise vocabulary ( on unique praise vocabulary (ds (עֱ חֵק
+    "CONCORDֶר)",
+    "CONCORDvery' (ANCE: Track 'all/every' (usage pattern "FIGURmagery, poATIVE: Hand imagery, po ]uring forth metaphor"
   ]
+}
+```
+
+**Key Features in**
+-  Transcriptions:**
+-Syllable breaks.,  with hyphens (e.g.,ā- ✅tion doubled (לּ →  Gemination doubled (לּ →ha-lləowels marked (ā, ✅ Long vowels marked (ā,ctionis handled (וater lectionis handled (וּ → `ū`)gdistinctions (adkefat distinctions ( כ → `k
 }
 ```
 

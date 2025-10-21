@@ -414,3 +414,64 @@ The design is:
 - `מְשִׁיחוֹ` → `məshiykhō`
 
 ---
+---
+
+### 2025-10-21 (Evening): Gemination & Syllabification Enhancements
+
+**Enhancement 1: Dagesh Forte Detection**
+
+**Problem:** The initial implementation did not distinguish dagesh lene (hardening) from dagesh forte (gemination), resulting in underdoubled consonants.
+
+**Examples of underdoubling:**
+- חַנּוּן → `khanūn` (should be `khannūn` with doubled n)
+- תְּהִלָּה → `təhilāh` (should be `təhillāh` with doubled l)
+
+**Fix:** The `_transcribe_word` method now:
+1. Detects when dagesh indicates gemination (not just hardening)
+2. Doubles the consonant in the transcription for geminated cases
+3. Distinguishes contexts:
+   - Non-begadkefat + dagesh = always gemination
+   - Begadkefat + dagesh + post-vocalic = gemination
+   - Begadkefat + dagesh + word-initial = hardening only
+
+**Corrected Transcriptions:**
+- חַנּוּן → `khannūn` (נּ geminated)
+- תְּהִלָּה → `təhillāh` (לּ geminated)
+- הַלְלוּיָהּ → `hallūyāh` (לּ geminated)
+- בְּרֵאשִׁית → `bərēshīt` (בּ word-initial, not geminated)
+
+**Linguistic Basis:** Gesenius' Hebrew Grammar §20, Joüon-Muraoka §18
+
+---
+
+**Enhancement 2: Syllabification**
+
+**Feature:** The phonetic analyst now automatically syllabifies Hebrew words according to Biblical Hebrew phonological rules.
+
+**Implementation:**
+- Follows Gesenius' syllabification principles (GKC §26-27)
+- Detects syllable boundaries based on vowel nuclei
+- Handles gemination splits (VC̩-CV pattern)
+- Prefers open syllables (CV) when possible
+- Closes final syllables with consonants
+
+**Output Format:**
+Each word now includes two new fields:
+- `syllables`: Structured list of syllables (each syllable is a list of phonemes)
+- `syllable_transcription`: Hyphenated string for human reading (e.g., `tə-hil-lāh`)
+
+**Examples:**
+- תְּהִלָּה → syllables: `[['t', 'ə'], ['h', 'i', 'l'], ['l', 'ā', 'h']]` → `tə-hil-lāh`
+- בְּרֵאשִׁית → syllables: `[['b', 'ə'], ['r', 'ē'], ['sh', 'ī', 't']]` → `bə-rē-shīt`
+- חַנּוּן → syllables: `[['kh', 'a', 'n'], ['n', 'ū', 'n']]` → `khan-nūn`
+- מֶלֶךְ → syllables: `[['m', 'e'], ['l', 'e', 'kh']]` → `me-lekh`
+
+**Use Cases:**
+- Enables prosodic analysis in commentary
+- Allows meter and rhythm discussion
+- Supports stress pattern identification
+- Facilitates poetic structure analysis
+
+**Linguistic Basis:** Gesenius' Hebrew Grammar §26-27, Joüon-Muraoka §27
+
+---

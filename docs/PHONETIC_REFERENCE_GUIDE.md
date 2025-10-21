@@ -105,11 +105,120 @@ When words are joined with maqqef (־), transcribe as single unit:
 
 ### Dagesh Forte (Doubling)
 
-When a consonant has dagesh forte (doubling mark), double it:
+### Dagesh Forte (Doubling)
 
-- **הַלְלוּיָהּ** = `hal-lū-yāh` (ל doubled)
-- **חַנּוּן** = `khan-nūn` (נ doubled)
-- **תְּהִלָּה** = `tə-hil-lāh` (ל doubled)
+When a consonant has dagesh forte (doubling mark), the consonant is **geminated** (doubled). The PhoneticAnalyst automatically detects and transcribes gemination.
+
+**Detection Rules:**
+1. **Non-begadkefat letters** with dagesh → always gemination
+   - נּ, מּ, לּ, רּ, etc. → doubled consonants
+2. **Begadkefat letters** with dagesh in post-vocalic position → gemination
+   - Must distinguish from dagesh lene (hardening)
+3. **Word-initial** begadkefat + dagesh → hardening only (not gemination)
+
+**Examples:**
+- **הַלְלוּיָהּ** = `hal-lū-yāh` (לּ doubled: l-l splits across syllables)
+- **חַנּוּן** = `khan-nūn` (נּ doubled: n-n splits across syllables)
+- **תְּהִלָּה** = `tə-hil-lāh` (לּ doubled: l-l splits across syllables)
+- **אַפַּיִם** = `ap-pa-yim` (פּ doubled: p-p splits across syllables)
+- **בְּרֵאשִׁית** = `bə-rē-shīt` (בּ word-initial: hard b, NOT doubled)
+
+**Syllabification Impact:**
+Geminated consonants are **ambisyllabic** (belong to both syllables):
+- חַנּוּן = /xan.nuːn/ → `khan-nūn`
+- The first `n` closes the first syllable
+- The second `n` opens the second syllable
+
+---
+
+## Syllable Structure Rules
+
+Hebrew syllables follow these patterns:
+
+### **Basic Patterns:**
+- **CV**: Open syllable (consonant + vowel) — preferred in Hebrew
+  - שָׁ in שָׁלוֹם → `shā` in `shā-lōm`
+- **CVC**: Closed syllable (consonant + vowel + consonant)
+  - לֶךְ in מֶלֶךְ → `lekh` in `me-lekh`
+
+### **Syllabification Rules:**
+1. **Every syllable has exactly one vowel** (nucleus)
+2. **Every syllable begins with a consonant** (onset) — except word-initial vowels
+3. **Open syllables preferred** over closed when possible
+4. **Geminated consonants split across boundary** (VC̩-CV)
+5. **Final consonants close syllables** (no open final syllables)
+
+### **Examples with Syllable Breaks:**
+
+| Word | Unsyllabified | Syllabified | Pattern |
+|------|---------------|-------------|---------|
+| תְּהִלָּה | təhillāh | **tə-hil-lāh** | CV-CVC-CVC |
+| בְּרֵאשִׁית | bərēshīt | **bə-rē-shīt** | CV-CV-CVC |
+| יְרוּשָׁלַיִם | yərūshālayim | **yə-rū-shā-la-yim** | CV-CV-CV-CV-CVC |
+| שָׁלוֹם | shālōm | **shā-lōm** | CV-CVC |
+| מֶלֶךְ | melekh | **me-lekh** | CV-CVC |
+| חַנּוּן | khannūn | **khan-nūn** | CVC-CVC (gemination) |
+| אֱלֹהִים | elōhīm | **e-lō-hīm** | V-CV-CVC |
+
+### **Gemination and Syllable Boundaries:**
+
+When a consonant is geminated (doubled), it **splits across the syllable boundary**:
+
+חַנּוּן (khannūn) "gracious"
+Phonemes: [kh, a, n, n, ū, n]
+└─────┘ └─────┘
+khan nūn
+Syllabified: khan-nūn
+First 'n' closes first syllable: [kh, a, n]
+Second 'n' opens second syllable: [n, ū, n]
+
+
+This is called **ambisyllabicity** — the geminated consonant belongs to both syllables simultaneously.
+
+---
+
+## Prosodic Analysis Features
+
+The PhoneticAnalyst output now supports advanced prosodic analysis:
+
+### **Output Format:**
+```python
+{
+  "word": "תְּהִלָּה",
+  "transcription": "təhillāh",
+  "syllables": [["t", "ə"], ["h", "i", "l"], ["l", "ā", "h"]],
+  "syllable_transcription": "tə-hil-lāh",
+  "phonemes": ["t", "ə", "h", "i", "l", "l", "ā", "h"]
+}
+```
+
+### **Use Cases in Commentary:**
+
+**1. Meter and Rhythm:**
+> The word *təhillāh* (תְּהִלָּה, "praise") has a three-syllable structure (CV-CVC-CVC), creating a balanced rhythmic pattern.
+
+**2. Syllable Weight:**
+> The geminated lamed (l-l) adds weight to the middle syllable of *təhillāh*, emphasizing the root הלל ("to praise").
+
+**3. Open vs. Closed Syllables:**
+> The predominantly open syllables in *bərēshīt* (בְּרֵאשִׁית, "in the beginning") create a flowing, opening quality appropriate for the creation narrative.
+
+**4. Phonetic Emphasis:**
+> The doubled nun in *khannūn* (חַנּוּן, "gracious") creates an emphatic, sonorous quality that reinforces the theological weight of divine mercy.
+
+---
+
+Use Cases in Commentary:
+1. Meter and Rhythm:
+> The word təhillāh (תְּהִלָּה, "praise") has a three-syllable structure (CV-CVC-CVC), creating a balanced rhythmic pattern.
+2. Syllable Weight:
+> The geminated lamed (l-l) adds weight to the middle syllable of təhillāh, emphasizing the root הלל ("to praise").
+3. Open vs. Closed Syllables:
+> The predominantly open syllables in bərēshīt (בְּרֵאשִׁית, "in the beginning") create a flowing, opening quality appropriate for the creation narrative.
+4. Phonetic Emphasis:
+> The doubled nun in khannūn (חַנּוּן, "gracious") creates an emphatic, sonorous quality that reinforces the theological weight of divine mercy.
+
+
 
 ### Silent & Guttural Letters
 
