@@ -1,0 +1,297 @@
+{
+  "psalm_number": 2,
+  "pipeline_start": "2025-10-21T10:16:54.156859",
+  "pipeline_end": "2025-10-21T10:35:00.662113",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1890,
+      "input_token_estimate": 630,
+      "output_char_count": 8501,
+      "output_token_estimate": 2833,
+      "duration_seconds": 52.62521576881409,
+      "completion_date": null,
+      "timestamp": "2025-10-21T10:16:54.173429"
+    },
+    "micro_analysis": {
+      "input_char_count": 8501,
+      "input_token_estimate": 2833,
+      "output_char_count": 105583,
+      "output_token_estimate": 35194,
+      "duration_seconds": 117.27062463760376,
+      "completion_date": null,
+      "timestamp": "2025-10-21T10:19:46.788600"
+    },
+    "synthesis": {
+      "input_char_count": 114086,
+      "input_token_estimate": 38028,
+      "output_char_count": 33122,
+      "output_token_estimate": 11040,
+      "duration_seconds": 245.30150508880615,
+      "completion_date": null,
+      "timestamp": "2025-10-21T10:23:44.082360"
+    },
+    "master_editor": {
+      "input_char_count": 139859,
+      "input_token_estimate": 46619,
+      "output_char_count": 20145,
+      "output_token_estimate": 6715,
+      "duration_seconds": 191.27109241485596,
+      "completion_date": "2025-10-21T10:35:00.662113",
+      "timestamp": "2025-10-21T10:29:50.484491"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "רָגַשׁ",
+        "reason": "Rare verb in v.1 - why this unusual term for assembly instead of common gathering words?"
+      },
+      {
+        "word": "יִתְיַצְּבוּ",
+        "reason": "Military positioning term in v.2 - precise semantic range for royal rebellion context"
+      },
+      {
+        "word": "נוֹסְדוּ",
+        "reason": "Conspire together in v.2 - technical meaning for formal council gathering"
+      },
+      {
+        "word": "מְשִׁיחוֹ",
+        "reason": "Anointed one in v.2 - early messianic terminology and cultic background"
+      },
+      {
+        "word": "מוֹסְרוֹתֵימוֹ",
+        "reason": "Bonds/cords in v.3 - legal vs physical restraint terminology"
+      },
+      {
+        "word": "עֲבֹתֵימוֹ",
+        "reason": "Thick cords/ropes in v.3 - parallel bondage imagery, semantic distinction"
+      },
+      {
+        "word": "יִלְעַג",
+        "reason": "Divine mockery in v.4 - theological implications of divine derision"
+      },
+      {
+        "word": "יְבַהֲלֵם",
+        "reason": "Terrify in v.5 - psychological rather than physical assault terminology"
+      },
+      {
+        "word": "נָסַךְ",
+        "reason": "Install/pour out in v.6 - libation ceremony vs royal appointment ambiguity"
+      },
+      {
+        "word": "חֹק",
+        "reason": "Decree in v.7 - legal/covenantal document terminology"
+      },
+      {
+        "word": "שֵׁבֶט בַּרְזֶל",
+        "reason": "Iron rod/mace in v.9 - royal scepter vs military weapon distinction"
+      },
+      {
+        "word": "הַשְׂכִּיל",
+        "reason": "Be prudent in v.10 - wisdom vocabulary invasion into royal psalm"
+      },
+      {
+        "word": "הִוָּסֵר",
+        "reason": "Accept discipline in v.10 - wisdom instruction terminology"
+      },
+      {
+        "word": "בַר",
+        "reason": "Son in v.12 textual crux - Aramaic intrusion or Hebrew homograph?"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "רגש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track rare tumultuous assembly verb usage patterns"
+      },
+      {
+        "query": "על יהוה ועל משיחו",
+        "scope": "Tanakh",
+        "level": "exact",
+        "purpose": "Dual opposition formula against YHWH and anointed"
+      },
+      {
+        "query": "ישב בשמים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine heavenly enthronement imagery"
+      },
+      {
+        "query": "בני אתן",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine sonship adoption formula"
+      },
+      {
+        "query": "נשק",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Kissing/homage gestures in submission contexts"
+      },
+      {
+        "query": "גיל ברעדה",
+        "scope": "Tanakh",
+        "level": "exact",
+        "purpose": "Paradoxical rejoicing with trembling emotion"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Bondage imagery - divine authority as physical restraints | Vehicle: bonds | Related terms: bond, cords, cord, ropes, rope, chains, chain, fetters, yoke, yokes",
+        "vehicle": "bonds",
+        "vehicle_terms": [
+          "bonds",
+          "bond",
+          "cords",
+          "cord",
+          "ropes",
+          "rope",
+          "chains",
+          "chain",
+          "fetters",
+          "yoke",
+          "yokes"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Divine laughter - unique anthropomorphic response to rebellion | Vehicle: laugh | Related terms: laughs, laughter, mock, mocks, mockery, scorn, scorns, deride, derides",
+        "vehicle": "laugh",
+        "vehicle_terms": [
+          "laugh",
+          "laughs",
+          "laughter",
+          "mock",
+          "mocks",
+          "mockery",
+          "scorn",
+          "scorns",
+          "deride",
+          "derides"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Mountain as divine seat - Zion/holy mountain imagery | Vehicle: holy mountain | Related terms: sacred hill, divine mountain, mount, hill, heights",
+        "vehicle": "holy mountain",
+        "vehicle_terms": [
+          "holy mountain",
+          "sacred hill",
+          "divine mountain",
+          "mount",
+          "hill",
+          "heights"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Potter's vessel imagery - human fragility metaphor | Vehicle: potter | Related terms: pottery, vessel, vessels, clay, earthenware, jar, jars",
+        "vehicle": "potter",
+        "vehicle_terms": [
+          "potter",
+          "pottery",
+          "vessel",
+          "vessels",
+          "clay",
+          "earthenware",
+          "jar",
+          "jars"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Iron mace/scepter - royal power vs military destruction | Vehicle: iron rod | Related terms: iron scepter, rod, rods, staff, scepter, scepters, mace",
+        "vehicle": "iron rod",
+        "vehicle_terms": [
+          "iron rod",
+          "iron scepter",
+          "rod",
+          "rods",
+          "staff",
+          "scepter",
+          "scepters",
+          "mace"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "2:6",
+        "reason": "Nasak verb puzzle - libation ceremony interpretation vs simple royal installation"
+      },
+      {
+        "verse": "2:7",
+        "reason": "Hayom (this day) temporal reference - coronation moment vs eternal decree ambiguity"
+      },
+      {
+        "verse": "2:11",
+        "reason": "Paradoxical 'rejoice with trembling' - theological interpretation of complex divine-human emotion"
+      },
+      {
+        "verse": "2:12",
+        "reason": "Major textual crux nashqu-bar - Aramaic 'son' vs Hebrew alternatives, LXX divergence"
+      }
+    ],
+    "lexicon_entries_count": 35,
+    "concordance_results": {
+      "רגש": 1,
+      "על יהוה ועל משיחו": 0,
+      "ישב בשמים": 0,
+      "בני אתן": 0,
+      "נשק": 10,
+      "גיל ברעדה": 0
+    },
+    "figurative_results": {
+      "total_instances_used": 96
+    },
+    "commentary_counts": {
+      "Rashi": 4,
+      "Ibn Ezra": 4,
+      "Radak": 4,
+      "Metzudat David": 4,
+      "Meiri": 4,
+      "Malbim": 1
+    },
+    "ugaritic_parallels": [
+      {
+        "type": "Royal Ideology",
+        "reference": "Psalm 2:7",
+        "analysis": "The Israelite ideology of Davidic kingship, articulated in Psalm 2, is deeply rooted in this shared ..."
+      }
+    ],
+    "research_bundle_chars": 97831,
+    "research_bundle_tokens": 32610
+  },
+  "analysis": {
+    "macro_questions": [
+      "How does the Hebrew concept of divine adoptive sonship (v. 7) specifically differ from the Ugaritic 'bn 'il' formula, and what theological boundaries does this distinction maintain?",
+      "What is the precise meaning and significance of 'nāsaḵtî' (I have installed) in v. 6, and how does this verb relate to anointing and coronation practices?",
+      "How does the imagery of Zion as 'har qodšî' (My holy mountain) connect to ancient Near Eastern traditions of sacred mountains as divine dwelling places?",
+      "What is the semantic range of 'našśəqû-var' in v. 12, and how do different translations ('kiss the son' vs. 'pay homage in good faith') affect interpretation?",
+      "How does the progression from 'laughter' (śāḥaq) to 'anger' ('ap) to 'rage' (ḥārôn) in vv. 4-5 reflect Hebrew concepts of divine emotional responses?",
+      "What is the significance of the iron mace (šēbeṭ barzel) imagery in v. 9, and how does it relate to ancient military and royal symbolism?",
+      "How do the wisdom terminology and beatitude formula in vv. 10-12 connect this royal psalm to sapiential literature?",
+      "What role does the psalm's structure as 'ḥoq' (decree) play in legitimizing royal authority within Israel's covenantal theology?"
+    ],
+    "micro_questions": [
+      "Why use the rare verb רגשׁ (tumultuous assembly) instead of common gathering terms in v.1?",
+      "What is the precise meaning of נסכתי (installed) in v.6 - libation ceremony or royal appointment?",
+      "How does the temporal reference היום (this day) in v.7 function - coronation moment or eternal decree?",
+      "Why shift to wisdom genre vocabulary (השׂכילו/הוסרו) at the psalm's climax in v.10?",
+      "What is the correct interpretation of the textual crux נשׁקו־בר in v.12?",
+      "How does divine laughter (v.4) function theologically - amusement, derision, or something else?",
+      "What does the paradoxical phrase 'rejoice with trembling' (v.11) reveal about proper divine-human relationship?",
+      "Why does God use psychological terror (יבהלם) rather than physical destruction in v.5?"
+    ],
+    "verse_count": 12
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-20250514",
+    "micro_analysis": "claude-sonnet-4-20250514",
+    "synthesis": "claude-sonnet-4-20250514",
+    "master_editor": "gpt-5"
+  }
+}

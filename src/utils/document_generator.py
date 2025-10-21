@@ -74,11 +74,18 @@ class DocumentGenerator:
         font.name = 'Times New Roman'
         font.size = Pt(12)
         
-        # Create a new style for the sans-serif body text
+        # Create a new style for the sans-serif body text (intro and commentary)
         style = self.document.styles.add_style('BodySans', 1) # 1 for paragraph style
         style.base_style = self.document.styles['Normal']
         style.font.name = 'Aptos'
-        style.font.size = Pt(11) # Aptos is a bit larger, so 11pt is a good equivalent to 12pt Times
+        style.font.size = Pt(12) # Aptos 12pt for intro and commentary
+
+        # Create a new style for the methodological summary
+        summary_style = self.document.styles.add_style('SummaryText', 1) # 1 for paragraph style
+        summary_style.base_style = self.document.styles['Normal']
+        summary_style.font.name = 'Times New Roman'
+        summary_style.font.size = Pt(9) # Times New Roman 9pt for summary
+        summary_style.paragraph_format.line_spacing = 0.7 # 70% line spacing
 
         # Set spacing for all heading levels to be tighter
         for i in range(1, 5):
@@ -90,6 +97,13 @@ class DocumentGenerator:
         style = self.document.styles['Normal']
         style.paragraph_format.space_before = Pt(0)
         style.paragraph_format.space_after = Pt(8)
+        
+        # Set document margins to 1 inch on all sides
+        for section in self.document.sections:
+            section.top_margin = Pt(72)  # 1 inch = 72 points
+            section.bottom_margin = Pt(72)
+            section.left_margin = Pt(72)
+            section.right_margin = Pt(72)
 
     def _add_paragraph_with_markdown(self, text: str, style: str = 'Normal'):
         """Adds a paragraph, parsing basic markdown for bold/italics."""
@@ -171,8 +185,13 @@ class DocumentGenerator:
     def _parse_verse_commentary(self, content: str, psalm_text_data: Dict[int, Dict[str, str]]) -> List[Dict[str, str]]:
         """Parses the verse-by-verse commentary file."""
         verses = []
-        # Regex to find verse blocks, which start with "**Verse X**"
+        # Try both formats: "**Verse X**" (expected format) and "Verse X" (fallback format)
+        # First try the expected format with bold markdown
         verse_blocks = re.split(r'(?=^\*\*Verse \d+\*\*\n)', content, flags=re.MULTILINE)
+        
+        # If no verses found with bold format, try the fallback format without bold
+        if len(verse_blocks) <= 1:  # Only one block means no splits occurred
+            verse_blocks = re.split(r'(?=^Verse \d+\n)', content, flags=re.MULTILINE)
 
         for block in verse_blocks:
             block = block.strip()
@@ -180,7 +199,12 @@ class DocumentGenerator:
                 continue
 
             lines = block.strip().split('\n', 1)  # Split only on the first newline
+            
+            # Try both formats for verse number matching
             verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*', lines[0])
+            if not verse_num_match:
+                verse_num_match = re.match(r'^Verse (\d+)', lines[0])
+            
             if not verse_num_match:
                 continue
 
@@ -276,7 +300,7 @@ Methodological & Bibliographical Summary
 
     def _add_summary_paragraph(self, line: str):
         """Adds a paragraph to the summary, bolding the label."""
-        p = self.document.add_paragraph()
+        p = self.document.add_paragraph(style='SummaryText')
         if ':' in line:
             label, value = line.split(':', 1)
             p.add_run(label.strip().strip('**')).bold = True
