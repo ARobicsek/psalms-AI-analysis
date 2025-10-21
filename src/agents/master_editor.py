@@ -517,9 +517,8 @@ class MasterEditor:
         return {
             'assessment': assessment,
             'revised_introduction': revised_introduction,
-            'revised_verses': revised_verses,
-            'psalm_number': psalm_number,
-            'completion_date': datetime.utcnow().isoformat()
+            'revised_verses': revised_verses, 
+            'psalm_number': psalm_number
         }
 
     def _get_psalm_text(self, psalm_number: int) -> str:

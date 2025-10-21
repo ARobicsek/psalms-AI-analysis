@@ -417,6 +417,13 @@ def run_enhanced_pipeline(
 
         # Rate limit delay
         time.sleep(delay_between_steps)
+
+        # --- Mark analysis complete and save stats ---
+        # This is the correct place to set the "Date Produced" timestamp,
+        # as the MasterEditor has just finished its work.
+        tracker.mark_pipeline_complete()
+        summary_json_file = tracker.save_json(str(output_path))
+        logger.info(f"Analysis complete. Statistics with completion date saved to {summary_json_file}")
     else:
         logger.info(f"[STEP 4] Skipping master edit (using existing {edited_intro_file})")
         print(f"\nSkipping Step 4 (using existing master-edited files)\n")
@@ -425,6 +432,18 @@ def run_enhanced_pipeline(
         editor_model = master_editor.model
         tracker.track_model_for_step("master_editor", editor_model)
 
+        # If resuming, preserve the original completion date
+        if is_resuming and initial_data:
+            existing_date = initial_data.get('steps', {}).get('master_editor', {}).get('completion_date')
+            if existing_date:
+                logger.info(f"Preserving existing completion date: {existing_date}")
+                tracker.track_completion_date(existing_date)
+
+    # If skipping, we still need to ensure the summary file is defined for later steps
+    if not summary_json_file.exists():
+        logger.warning(f"Stats file {summary_json_file} not found. Saving current tracker state.")
+        summary_json_file = tracker.save_json(str(output_path))
+        
     # =====================================================================
     # STEP 5: Print-Ready Formatting
     # =====================================================================
@@ -493,7 +512,7 @@ def run_enhanced_pipeline(
         intro_for_docx = edited_intro_file if edited_intro_file.exists() else synthesis_intro_file
         verses_for_docx = edited_verses_file if edited_verses_file.exists() else synthesis_verses_file
 
-        if intro_for_docx.exists() and verses_for_docx.exists():
+        if intro_for_docx.exists() and verses_for_docx.exists() and summary_json_file.exists():
             try:
                 generator = DocumentGenerator(
                     psalm_num=psalm_number,
@@ -509,7 +528,7 @@ def run_enhanced_pipeline(
                 logger.error(f"Failed to generate .docx file for Psalm {psalm_number}: {e}", exc_info=True)
                 print(f"⚠ Error in Word document generation (see logs for details)\n")
         else:
-            logger.warning("Skipping .docx generation because markdown files were not found.")
+            logger.warning("Skipping .docx generation because input files (markdown or stats) were not found.")
             print(f"⚠ Skipping Word document generation: input files not found.\n")
     else:
         logger.info(f"[STEP 6] Skipping .docx generation")
@@ -519,13 +538,11 @@ def run_enhanced_pipeline(
 
     # =====================================================================
     # COMPLETE - Generate Pipeline Summary
+    # FINAL REPORTING
     # =====================================================================
     logger.info(f"\n{'=' * 80}")
     logger.info(f"ENHANCED PIPELINE COMPLETE - Psalm {psalm_number}")
     logger.info(f"{'=' * 80}\n")
-
-    # Mark pipeline complete and generate summary
-    tracker.mark_pipeline_complete()
 
     logger.info("\n[SUMMARY] Generating pipeline summary report...")
     try:
@@ -556,8 +573,8 @@ def run_enhanced_pipeline(
         'edited_verses': edited_verses_file,
         'print_ready': print_ready_file,
         'word_document': docx_output_file,
-        'pipeline_summary': summary_file if 'summary_file' in locals() else None,
-        'pipeline_stats': summary_json if 'summary_json' in locals() else None
+        'pipeline_summary': str(summary_json_file).replace('.json', '.md'),
+        'pipeline_stats': str(summary_json_file)
     }
 
 

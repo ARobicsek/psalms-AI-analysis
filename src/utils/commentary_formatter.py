@@ -183,7 +183,7 @@ class CommentaryFormatter:
             dt = datetime.fromisoformat(completion_date_str.replace('Z', '+00:00'))
             lines.append(dt.strftime('%Y-%m-%d %H:%M:%S UTC'))
         else:
-            lines.append("Date not available.")
+            lines.append("Date not available in statistics file.")
 
         return "\n".join(lines) + "\n"
 
