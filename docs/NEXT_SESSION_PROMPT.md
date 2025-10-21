@@ -1,23 +1,29 @@
-## SESSION 9 (2025-10-20): Word Document Generation - COMPLETE ✅
+## SESSION 9 (2025-10-20): Word Document Generation & Refinement - COMPLETE ✅
 
 ### What Was Accomplished
 
 This session focused on adding a new, robust output format to the pipeline to solve copy-paste formatting issues.
 
 1.  **New Feature: `.docx` Generator**
-    - **Problem**: Copying the print-ready Markdown into Microsoft Word resulted in lost formatting, especially for the bilingual Hebrew/English text.
+    - **Problem**: Copying the print-ready Markdown into Word resulted in lost formatting, especially for bilingual text.
     - **Solution**: Created a new script, `src/utils/document_generator.py`, using the `python-docx` library. This script programmatically builds a Word document, ensuring perfect preservation of styles, fonts, and bidirectional text layout.
 
 2.  **Pipeline Integration**
     - The new document generator was integrated as the final step in `run_enhanced_pipeline.py`.
     - A `--skip-word-doc` flag was added to control this new step.
 
-3.  **Critical Bug Fix: Statistics Preservation**
-    - **Problem**: Running the pipeline with `--skip` flags would reset the `pipeline_stats.json` file, losing all previously gathered data.
-    - **Fix**: The `PipelineSummaryTracker` and the main pipeline runner were updated to be "resume-aware." If a run is partial, it now loads the existing statistics file instead of starting from scratch, preserving data integrity.
+3.  **Advanced Formatting Implemented**
+    - **Bilingual Text**: Replaced tab-based layout with a two-column table for perfect Hebrew/English alignment.
+    - **Typography**: Set body text to 'Aptos' and English psalm text to 'Cambria'.
+    - **Layout**: Added page numbers to the footer and implemented soft breaks for verse commentary paragraphs.
+    - **Markup Handling**: Correctly parses backticks (`` `...` ``) for italicized phonetic transcriptions.
 
-4.  **Formatting Synchronization**
-    - The `.docx` generator was iteratively refined to perfectly mirror the structure and style of the `print_ready.md` file, including headers, paragraph spacing, and the layout of the bibliographical summary.
+4.  **Summary Section Polished & Debugged**
+    - **"Date Produced" Added**: The `master_editor.py` now records a completion timestamp, which is displayed in both markdown and `.docx` outputs.
+    - **Formatting Fixed**: Iteratively debugged the summary section to ensure correct ordering, bolded labels without asterisks, and proper headings for all sections.
+
+5.  **Critical Bug Fix: Statistics Preservation**
+    - Fixed an issue where partial pipeline runs would overwrite the `pipeline_stats.json` file. The tracker is now "resume-aware," preserving data integrity across runs.
 
 ### Files Modified
 - **`src/utils/document_generator.py`**: New file created for Word document generation.

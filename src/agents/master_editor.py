@@ -32,6 +32,7 @@ Date: 2025-10-18
 import sys
 import os
 import json
+from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, List, Any, Tuple
 from openai import OpenAI
@@ -121,6 +122,9 @@ Review the introduction and verse commentary for these issues:
 - AVOID opaque or overly academic terms where there are other terms that would work just as well (e.g. avoid phrases LIKE "biblical topos," "programmatic exemplar").
 - **Clarity is paramount.** If a sentence feels like it was written for a dissertation defense, rewrite it for a coffee shop conversation with a clever friend.
 - AVOID Unnecessarily complex sentence structures that obscure rather than illuminate
+
+**Markup for Transliteration**:
+- When you use a transliterated Hebrew word or phrase in your prose, **you MUST enclose it in backticks**. This is how the document generator will identify it for italicization. For example: "The opening line, `ashrei ha’ish`, signals..." or "The verb `ḥafetz` denotes desire...".
 
 **Should conform to this style:**
 - Measured, confident tone (like a distinguished professor)
@@ -514,7 +518,8 @@ class MasterEditor:
             'assessment': assessment,
             'revised_introduction': revised_introduction,
             'revised_verses': revised_verses,
-            'psalm_number': psalm_number
+            'psalm_number': psalm_number,
+            'completion_date': datetime.utcnow().isoformat()
         }
 
     def _get_psalm_text(self, psalm_number: int) -> str:

@@ -123,41 +123,41 @@ class CommentaryFormatter:
         # --- Research Inputs ---
         lines.append("### Research & Data Inputs")
         analysis_data = stats.get('analysis', {}) or {}
-        verse_count = analysis_data.get('verse_count', 'N/A')
-        lines.append(f"- Psalm Verses Analyzed: {verse_count}")
-        lines.append(f"- LXX (Septuagint) Texts Reviewed: {verse_count}") # Assumes LXX is reviewed for all verses
-        lines.append(f"- Phonetic Transcriptions Generated: {verse_count}") # Assumes one per verse
+        verse_count = analysis_data.get('verse_count', 'N/A') 
+        lines.append(f"- **Psalm Verses Analyzed**: {verse_count}")
+        lines.append(f"- **LXX (Septuagint) Texts Reviewed**: {verse_count}") # Assumes LXX is reviewed for all verses
+        lines.append(f"- **Phonetic Transcriptions Generated**: {verse_count}") # Assumes one per verse
 
         research_data = stats.get('research', {}) or {}
         ugaritic_count = len(research_data.get('ugaritic_parallels', []))
-        lines.append(f"- Ugaritic Parallels Reviewed: {ugaritic_count}")
+        lines.append(f"- **Ugaritic Parallels Reviewed**: {ugaritic_count}")
 
         lexicon_count = research_data.get('lexicon_entries_count', 'N/A')
-        lines.append(f"- Lexicon Entries (BDB/Klein) Reviewed: {lexicon_count}")
+        lines.append(f"- **Lexicon Entries (BDB/Klein) Reviewed**: {lexicon_count}")
         
         commentaries = research_data.get('commentary_counts', {})
         total_commentaries = sum(commentaries.values()) if commentaries else 'N/A'
         if commentaries:
             commentary_lines = [f"{c} ({n})" for c, n in sorted(commentaries.items())]
-            lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries} ({'; '.join(commentary_lines)})")
+            lines.append(f"- **Traditional Commentaries Reviewed**: {total_commentaries} ({'; '.join(commentary_lines)})")
         elif total_commentaries != 'N/A':
-            lines.append(f"- Traditional Commentaries Reviewed: {total_commentaries}")
+            lines.append(f"- **Traditional Commentaries Reviewed**: {total_commentaries}")
 
         concordance_total = sum((research_data.get('concordance_results', {}) or {}).values())
-        lines.append(f"- Concordance Entries Reviewed: {concordance_total if concordance_total > 0 else 'N/A'}")
+        lines.append(f"- **Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}")
 
         # The key is 'figurative_results' which contains a dict like {'total_instances_used': 15}
         figurative_results = research_data.get('figurative_results', {}) or {}
         figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
-        lines.append(f"- Figurative Language Instances Reviewed: {figurative_total if figurative_total > 0 else 'N/A'}")
+        lines.append(f"- **Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}")
 
         # Get Master Editor prompt size from the 'steps' section
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
         if isinstance(prompt_chars, int):
-            lines.append(f"- Master Editor Prompt Size: {prompt_chars:,} characters")
+            lines.append(f"- **Master Editor Prompt Size**: {prompt_chars:,} characters")
         else:
-            lines.append(f"- Master Editor Prompt Size: {prompt_chars} characters")
+            lines.append(f"- **Master Editor Prompt Size**: {prompt_chars} characters")
 
         lines.append("") # Add a space before the next section
         
@@ -172,6 +172,18 @@ class CommentaryFormatter:
             lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")
         else:
             lines.append("Model attribution data not available.")
+
+        lines.append("") # Add a space before the next section
+
+        # --- Date Produced ---
+        lines.append("### Date Produced")
+        completion_date_str = master_editor_stats.get('completion_date')
+        if completion_date_str:
+            from datetime import datetime
+            dt = datetime.fromisoformat(completion_date_str.replace('Z', '+00:00'))
+            lines.append(dt.strftime('%Y-%m-%d %H:%M:%S UTC'))
+        else:
+            lines.append("Date not available.")
 
         return "\n".join(lines) + "\n"
 
