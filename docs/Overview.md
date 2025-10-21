@@ -37,8 +37,8 @@ graph TD
         C -- Verse Discoveries & Phonetics --> E;
         B -- MacroAnalysis --> E;
         E -- Draft Commentary --> F{Pass 4: MasterEditor (GPT-5)};
-        F -- Final Commentary --> G[Print-Ready Formatter (Python)];
-        G -- Formatted .md --> H([Final Output]);
+        F -- Final Commentary --> G[Final Formatters (Python)];
+        G -- Formatted .md & .docx --> H([Final Outputs]);
     end
 ```
 
