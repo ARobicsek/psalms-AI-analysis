@@ -11,15 +11,16 @@
 **CRITICAL BUG FIX**: The "Date Produced" field in the final `.docx` and markdown outputs was showing "no date available" or an incorrect date. The timestamp was being recorded at the end of the entire pipeline run, not when the Master Editor finished its work.
 
 ### What Was Accomplished
-1.  **Root Cause Identified**: The `PipelineSummaryTracker.mark_pipeline_complete()` method was being called at the very end of `run_enhanced_pipeline.py`, overwriting the correct timestamp. It was also being called in the `else` block when skipping the master editor, but not when the master editor was actually run.
+1.  **Root Cause Identified**: The `PipelineSummaryTracker.mark_pipeline_complete()` method was only setting `pipeline_end` but not `steps['master_editor'].completion_date`, which is what the formatters look for.
 2.  **Fix Implemented**:
-    *   Moved the `tracker.mark_pipeline_complete()` and `tracker.save_json()` calls to the correct location in `scripts/run_enhanced_pipeline.py`, immediately after the `master_editor` step completes successfully.
-    *   Removed the redundant `tracker.mark_pipeline_complete()` call from the end of the script to prevent the correct timestamp from being overwritten.
-    *   Removed the `tracker.mark_pipeline_complete()` call from the `else` block of the `skip_master_edit` section, as it was causing incorrect behavior.
-3.  **Validated**: The "Date Produced" now correctly reflects the time when the Master Editor step finishes.
+    *   Updated `mark_pipeline_complete()` in `src/utils/pipeline_summary.py` to also set `steps["master_editor"].completion_date = self.pipeline_end.isoformat()`.
+    *   Enhanced date formatting in both `commentary_formatter.py` and `document_generator.py` to display dates in "January 1, 2015" format without time or bold styling.
+3.  **Validated**: The "Date Produced" now correctly reflects the time when the Master Editor step finishes and displays in a clean, readable format.
 
 ### Files Modified
-- `scripts/run_enhanced_pipeline.py`
+- `src/utils/pipeline_summary.py`
+- `src/utils/commentary_formatter.py`
+- `src/utils/document_generator.py`
 
 ---
 

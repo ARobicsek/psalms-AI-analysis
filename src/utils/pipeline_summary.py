@@ -267,6 +267,12 @@ class PipelineSummaryTracker:
         """Mark pipeline as complete."""
         self.pipeline_end = datetime.now()
 
+        # Ensure the completion date is captured where formatters expect it
+        # The print-ready and .docx generators read steps.master_editor.completion_date
+        if "master_editor" not in self.steps:
+            self.steps["master_editor"] = StepStats(step_name="master_editor")
+        self.steps["master_editor"].completion_date = self.pipeline_end.isoformat()
+
     def track_model_usage(self, agent_name: str, model: str, input_tokens: int, output_tokens: int):
         """Track model usage for a specific agent."""
         if agent_name not in self.model_usage:
