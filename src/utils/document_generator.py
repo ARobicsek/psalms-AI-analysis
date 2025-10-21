@@ -85,7 +85,7 @@ class DocumentGenerator:
         summary_style.base_style = self.document.styles['Normal']
         summary_style.font.name = 'Times New Roman'
         summary_style.font.size = Pt(9) # Times New Roman 9pt for summary
-        summary_style.paragraph_format.line_spacing = 0.7 # 70% line spacing
+        summary_style.paragraph_format.line_spacing = 0.8 # 70% line spacing
 
         # Set spacing for all heading levels to be tighter
         for i in range(1, 5):
