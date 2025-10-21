@@ -1,7 +1,30 @@
 # Next Session Prompt - Psalms Commentary Project
 
-**Date**: 2025-10-19 (Updated after Session 7.6)
+**Date**: 2025-10-21
 **Phase**: Phase 4 - Master Editor Enhancement
+
+---
+
+## SESSION 11 (2025-10-21): Phonetic Analyst Bug Fix - Mater Lectionis
+
+### Goal
+**CRITICAL BUG FIX**: The `PhoneticAnalyst` was incorrectly transcribing the Hebrew letter `ו` (vav) as a consonant 'w' in all cases, failing to recognize its function as a vowel marker (*mater lectionis*) for `ō` and `ū`.
+
+### What Was Accomplished
+1.  **Root Cause Identified**: The transcription logic in `src/agents/phonetic_analyst.py` did not check for vowel diacritics (holam and shureq) associated with `ו`.
+2.  **Fix Implemented**:
+    *   Updated the `_transcribe_word` method in `src/agents/phonetic_analyst.py` to check for `וֹ` (holam) and `וּ` (shureq) before treating `ו` as a consonant.
+3.  **Validated**:
+    *   The phonetic transcriptions for words containing `ו` as a vowel are now correct.
+    *   `יִתְיַצְּבוּ` is now correctly transcribed as `yithyatsvū` (not `yithyatsvwu`).
+    *   `נוֹסְדוּ` is now correctly transcribed as `nōsədhū` (not `nwōsədhwu`).
+    *   `מְשִׁיחוֹ` is now correctly transcribed as `məshiykhō` (not `məshiykhwō`).
+    *   Consonantal `ו` (e.g., `וְרוֹזְנִים` → `wərōzəniym`) is still transcribed correctly.
+
+### Files Modified
+- `src/agents/phonetic_analyst.py`
+- `docs/PHONETIC_ENHANCEMENT_SUMMARY.md`
+- `docs/PHONETIC_IMPLEMENTATION_EXAMPLE.md`
 
 ---
 
@@ -196,7 +219,7 @@ This session focused on fine-tuning the output of `commentary_formatter.py` to e
    - synthesis_writer.py now properly extracts `phonetic_transcription` from `verse_commentaries`
    - Phonetic data flows from MicroAnalyst → SynthesisWriter → Claude prompts
    - All verse commentary prompts now include phonetic transcriptions
-   - Format: `**Phonetic**: 	əhilāh lədhāwidh \'arwōmimkhā...`
+   - Format: `**Phonetic**: 	 əhilāh lədhāwidh \'arwōmimkhā...`
 
 3. **Master Editor Phonetic Fix**
    - Applied same Pydantic object handling fix to master_editor.py

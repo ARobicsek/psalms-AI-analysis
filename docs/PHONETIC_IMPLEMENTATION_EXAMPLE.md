@@ -91,10 +91,12 @@ For each verse, provide an ACCURATE PHONETIC TRANSCRIPTION of the Hebrew text.
 - Patakh (ַ◌), Qamets (ָ◌) = **a**
 - Tsere (ֵ◌), Segol (ֶ◌) = **e**
 - Khiriq (ִ◌) = **i**
-- Kholam (ֹ◌, וֹ) = **o**
-- Qibbuts (ֻ◌), Shureq (וּ) = **u**
+- Kholam (ֹ◌) = **o**, Kholam Male (וֹ) = **ō**
+- Qibbuts (ֻ◌) = **u**, Shureq (וּ) = **ū**
 - Vocal shewa (ְ◌) = **e**
 - Khatef vowels (ֲ◌ = a, ֱ◌ = e, ֳ◌ = o)
+
+**Note on `ו` (Vav):** The system now correctly distinguishes between `ו` as a consonant (`w`) and as a vowel marker (*mater lectionis*). `וֹ` is transcribed as `ō` and `וּ` is transcribed as `ū`.
 
 **Formatting**:
 - Syllable breaks: hyphens (`po-te-akh`)
@@ -145,11 +147,14 @@ OUTPUT FORMAT: Return ONLY valid JSON:
   ],
   "overall_patterns": [...],
   "interesting_questions": [...],
-  "research_priorities": [...]
+  "research_priorities": [...] 
 }}
 
 Return ONLY the JSON object, no additional text.
-"""
+""".format(
+        psalm_number=psalm_number,
+        verse_count=self.verse_count # Assuming verse_count is available in this scope
+    )
 ```
 
 ### Update _create_micro_analysis()
@@ -235,7 +240,14 @@ When making claims about sound patterns, rhythm, or phonetic symbolism:
 ---
 
 [... rest of prompt ...]
-"""
+""".format(
+        psalm_number=psalm_number,
+        macro_analysis=macro_analysis.to_markdown(),
+        micro_discoveries=json.dumps(micro_analysis.to_dict(), ensure_ascii=False, indent=2),
+        research_bundle=research_bundle.to_markdown(),
+        psalm_text=self._format_psalm_text(psalm_number), # Assuming this method exists
+        phonetic_section=phonetic_section  # NEW
+    )
 
 # Update the synthesize_verses() call:
 def synthesize_verses(self, psalm_number: int, macro_analysis: MacroAnalysis,
@@ -251,7 +263,7 @@ def synthesize_verses(self, psalm_number: int, macro_analysis: MacroAnalysis,
         macro_analysis=macro_analysis.to_markdown(),
         micro_discoveries=json.dumps(micro_analysis.to_dict(), ensure_ascii=False, indent=2),
         research_bundle=research_bundle.to_markdown(),
-        psalm_text=self._format_psalm_text(psalm_number),
+        psalm_text=self._format_psalm_text(psalm_number), # Assuming this method exists
         phonetic_section=phonetic_section  # NEW
     )
 
@@ -318,7 +330,16 @@ First, provide a brief editorial assessment (200-400 words):
 - What insights from research were missed?
 
 [... rest of stages ...]
-"""
+""".format(
+        psalm_number=psalm_number,
+        introduction_essay=introduction,
+        verse_commentary=verse_commentary,
+        research_bundle=research_bundle.to_markdown(),
+        psalm_text=psalm_text,
+        macro_analysis=macro_analysis.to_markdown(),
+        micro_analysis=micro_analysis.to_markdown(),
+        phonetic_section=phonetic_section  # NEW
+    )
 
 # Update the edit() call:
 def edit(self, psalm_number: int, introduction: str, verse_commentary: str,

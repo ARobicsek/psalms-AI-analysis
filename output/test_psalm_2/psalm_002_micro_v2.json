@@ -3,34 +3,33 @@
   "verse_commentaries": [
     {
       "verse_number": 1,
-      "commentary": "Double rhetorical question opening with unusual verb רגשׁ (ragash) - rare tumultuous assembly term. Hebrew presents the plotting as inherently futile through ריק (riq = vain). Parallel structure emphasizes universality: nations/peoples.",
+      "commentary": "Opening with double rhetorical questions creates incredulity. The verb רָגְשׁוּ (ragšû) is rare and suggests violent agitation/tumult. The word רִיק (rîq) 'vain things' is philosophically loaded - not just futile but empty/meaningless.",
       "lexical_insights": [
         "רָגְשׁוּ",
         "רִיק"
       ],
       "figurative_analysis": [
-        "nations as conspiring entities"
+        "nations portrayed as agitated crowd"
       ],
-      "thesis_connection": "Supports futile rebellion theme but rare vocabulary choice needs exploration",
-      "phonetic_transcription": "lāmāh rāghəshwu ghwōyim wul'umiym yehguwu-riyq"
+      "thesis_connection": "Supports thesis framing of cosmic rebellion as absurd",
+      "phonetic_transcription": "lāmāh rāghəshū ghōyim ūl'umiym yehguū-riyq"
     },
     {
       "verse_number": 2,
-      "commentary": "Escalation from general (nations) to specific (kings/regents). Verb יתיצבו (military positioning) + נוסדו (conspire together) creates formal war council imagery. Critical phrase 'against YHWH and against His anointed' - dual opposition structure.",
+      "commentary": "Escalates from general (nations/peoples) to specific (kings/regents). The verb נוֹסְדוּ (nôsədû) from יסד suggests 'take counsel together' with architectural overtones. Direct confrontation 'against YHWH and against His anointed' is theologically audacious.",
       "lexical_insights": [
-        "יִתְיַצְּבוּ",
         "נוֹסְדוּ",
         "מְשִׁיחוֹ"
       ],
       "figurative_analysis": [
-        "military positioning metaphor"
+        "military/political positioning language"
       ],
-      "thesis_connection": "Central to rebellion theme but military language more specific than expected",
-      "phonetic_transcription": "yithyatsvwu  malkhēy-'erets wərwōzəniym nwōsədhwu-yākhadh ʿal-yəhōwāh wəʿal-məshiykhwō"
+      "thesis_connection": "Demonstrates progression from general to specific rebellion",
+      "phonetic_transcription": "yithyatsvū  malkhēy-'erets wərōzəniym nōsədhū-yākhadh ʿal-yəhōwāh wəʿal-məshiykhō"
     },
     {
       "verse_number": 3,
-      "commentary": "Direct speech from rebels - only their voices heard. Bondage metaphor with double imagery: מוסרותיהם (cords/bonds) and עבתיהם (ropes/thick cords). Cohortative verbs express determined rebellion.",
+      "commentary": "First direct quotation - rebels speak! The imagery shifts to bondage metaphors: מוֹסְרוֹתֵימוֹ (cords/bonds) and עֲבֹתֵימוֹ (ropes). The verbs נְנַתְּקָה and נַשְׁלִיכָה suggest violent breaking and casting away.",
       "lexical_insights": [
         "מוֹסְרוֹתֵימוֹ",
         "עֲבֹתֵימוֹ"
@@ -38,12 +37,12 @@
       "figurative_analysis": [
         "divine authority as physical restraints"
       ],
-      "thesis_connection": "Key imagery reversal setup - bonds here vs iron mace later",
-      "phonetic_transcription": "nənatqāh 'eth-mwōsərwōthēymwō wənashliykhāh mimenuwu ʿavōthēymwō"
+      "thesis_connection": "Sets up imagery reversal - they want to break bonds, but will be broken",
+      "phonetic_transcription": "nənatqāh 'eth-mōsərōthēymō wənashliykhāh mimenuū ʿavōthēymō"
     },
     {
       "verse_number": 4,
-      "commentary": "Dramatic scene shift to heaven. Divine laughter (שׂחק) - unique response to political rebellion. Parallel verbs ישׂחק//ילעג suggest both amusement and derision. השׁמים (heavens) establishes cosmic perspective.",
+      "commentary": "Dramatic scene shift to heaven. Divine laughter (יִשְׂחָק) is theologically striking - God's response to rebellion is mockery, not immediate anger. The participle יוֹשֵׁב emphasizes God's permanent enthronement.",
       "lexical_insights": [
         "יִשְׂחָק",
         "יִלְעַג"
@@ -51,130 +50,134 @@
       "figurative_analysis": [
         "divine anthropomorphism - laughter"
       ],
-      "thesis_connection": "Supports divine response theme but laughter response is unexpected",
-      "phonetic_transcription": "ywōshēv bashāmayim yiskhāq 'adhōnāy yilʿagh-lāmwō"
+      "thesis_connection": "Divine perspective reveals rebellion's absurdity through laughter",
+      "phonetic_transcription": "yōshēv bashāmayim yiskhāq 'adhōnāy yilʿagh-lāmō"
     },
     {
       "verse_number": 5,
-      "commentary": "Emotional escalation: laughter → anger → rage. Triple divine emotion progression with אז (then) marking temporal sequence. Unusual verb יבהלם (terrify) suggests psychological rather than physical assault.",
+      "commentary": "Escalation from laughter to speech to terror. The progression אַף → חָרוֹן shows intensifying divine emotion. The temporal marker אָז creates narrative progression. יְבַהֲלֵם suggests causing panic/terror.",
       "lexical_insights": [
         "חֲרוֹנוֹ",
-        "יְבַהֲלֵם"
+        "יְבַהֲלֵמוֹ"
       ],
       "figurative_analysis": [
-        "divine emotional anthropomorphism"
+        "divine wrath as terrifying force"
       ],
-      "thesis_connection": "Fits divine response escalation but terror focus is psychologically sophisticated",
-      "phonetic_transcription": "'āz yədhabēr 'ēlēymwō və'apuwō wuvakharwōnwō yəvahalēmwō"
+      "thesis_connection": "Shows divine response progression - mockery to decisive action",
+      "phonetic_transcription": "'āz yədhabēr 'ēlēymō və'apuō ūvakharōnō yəvahalēmō"
     },
     {
       "verse_number": 6,
-      "commentary": "First divine speech with strong adversative ואני (But I). Unusual verb נסכתי (installed) - possibly libation/anointing ceremony reference. Zion + holy mountain = double divine claim. Emphatic possessive suffixes.",
+      "commentary": "YHWH's direct speech introduced by וַאֲנִי (emphatic 'But I'). The verb נָסַכְתִּי is unusual - typically used for libations, here meaning 'installed/anointed.' צִיּוֹן הַר־קׇדְשִׁי combines political and religious geography.",
       "lexical_insights": [
         "נָסַכְתִּי",
         "הַר־קׇדְשִׁי"
       ],
       "figurative_analysis": [
-        "mountain as divine seat"
+        "sacred geography - holy mountain"
       ],
-      "thesis_connection": "Central to divine installation theme but ritual verb choice significant",
-      "phonetic_transcription": "wa'aniy nāsakhtiy malkiy ʿal-tsiyuwōn har-qdhəshiy"
+      "thesis_connection": "Divine counter-declaration to rebel plotting",
+      "phonetic_transcription": "wa'aniy nāsakhtiy malkiy ʿal-tsiyuōn har-qdhəshiy"
     },
     {
       "verse_number": 7,
-      "commentary": "King now speaks - third voice in drama. אספרה (let me tell) suggests formal proclamation. חק (decree) indicates legal/covenantal document. Divine sonship formula with היום (this day) emphasizing adoption moment.",
+      "commentary": "King speaks, reporting חֹק (divine decree). The adoption formula 'You are My son' is covenant language. יְלִדְתִּיךָ with 'today' emphasizes ceremonial/legal rather than biological generation.",
       "lexical_insights": [
         "חֹק",
         "יְלִדְתִּיךָ"
       ],
       "figurative_analysis": [
-        "divine fatherhood metaphor"
+        "divine fatherhood - adoptive not biological"
       ],
-      "thesis_connection": "Core adoptive sonship theme but temporal ambiguity creates interpretive tension",
-      "phonetic_transcription": "'asaprāh 'el-khōq yəhōwāh 'āmar-'ēlay bəniy 'atāh 'aniy hayuwōm yəlidhtiykhā"
+      "thesis_connection": "Central theological moment establishing divine-royal relationship",
+      "phonetic_transcription": "'asaprāh 'el-khōq yəhōwāh 'āmar-'ēlay bəniy 'atāh 'aniy hayuōm yəlidhtiykhā"
     },
     {
       "verse_number": 8,
-      "commentary": "Imperative שׁאל (ask) gives king agency in expansion. נחלה (inheritance) vs אחזה (possession) - double legal claim to universal dominion. אפסי־ארץ (ends of earth) = cosmic scope.",
+      "commentary": "Divine invitation to ask for universal dominion. גּוֹיִם נַחֲלָתֶךָ (nations as inheritance) reverses typical inheritance patterns. אַפְסֵי־אָרֶץ (ends of earth) suggests cosmic scope.",
       "lexical_insights": [
         "נַחֲלָתֶךָ",
-        "אַחֻזָּתְךָ"
+        "אַפְסֵי־אָרֶץ"
       ],
       "figurative_analysis": [
-        "inheritance metaphor for world dominion"
+        "inheritance metaphor for political dominion"
       ],
-      "thesis_connection": "Universal dominion theme but conditional asking element adds complexity",
-      "phonetic_transcription": "shə'al mimeniy wə'etnāh ghwōyim nakhalāthekhā wa'akhuzāthəkhā 'afsēy-'ārets"
+      "thesis_connection": "Fulfills divine promise of universal rule through anointed",
+      "phonetic_transcription": "shə'al mimeniy wə'etnāh ghōyim nakhalāthekhā wa'akhuzāthəkhā 'afsēy-'ārets"
     },
     {
       "verse_number": 9,
-      "commentary": "Violent imagery shift: iron mace vs pottery. שׁבט ברזל could be 'rod of iron' or 'iron mace' - royal/military implement. Potter's vessel metaphor suggests fragility of human power.",
+      "commentary": "Violent imagery: שֵׁבֶט בַּרְזֶל (iron mace/rod) and pottery smashing. The verb תְּרֹעֵם can mean 'shepherd' or 'smash' - deliberate ambiguity? Stark contrast to the 'cords' rebels wanted to break.",
       "lexical_insights": [
-        "שֵׁבֶט בַּרְזֶל",
-        "כְּלִי יוֹצֵר"
+        "שֵׁבֶט",
+        "תְּרֹעֵם"
       ],
       "figurative_analysis": [
-        "pottery fragility metaphor"
+        "iron vs pottery - strength contrast",
+        "shepherd/destroyer wordplay"
       ],
-      "thesis_connection": "Perfect imagery reversal from v.3 bonds - supports power inversion theme",
-      "phonetic_transcription": "tərōʿēm bəshēvet barzel kikhliy ywōtsēr tənaptsēm"
+      "thesis_connection": "Imagery reversal - rebels break cords, but will be broken like pottery",
+      "phonetic_transcription": "tərōʿēm bəshēvet barzel kikhliy yōtsēr tənaptsēm"
     },
     {
       "verse_number": 10,
-      "commentary": "Fourth voice - wisdom teacher addressing kings. השׂכילו (be prudent) + הוסרו (accept discipline) = wisdom vocabulary invasion into royal psalm. Direct address to same rebels from vv.1-2.",
+      "commentary": "Wisdom vocabulary appears: הַשְׂכִּילוּ (be prudent) and הִוָּסְרוּ (accept discipline). Direct address to מְלָכִים and שֹׁפְטֵי אָרֶץ. Genre shift from royal psalm to wisdom instruction.",
       "lexical_insights": [
         "הַשְׂכִּילוּ",
         "הִוָּסְרוּ"
       ],
       "figurative_analysis": [
-        "wisdom as royal counsel"
+        "political rulers as students needing instruction"
       ],
-      "thesis_connection": "Supports wisdom appeal but genre shift creates interpretive puzzle",
-      "phonetic_transcription": "wəʿatāh məlākhiym haskiylwu hiwāsərwu shōfətēy 'ārets"
+      "thesis_connection": "Transition from confrontation to instruction - supports thesis wisdom elements",
+      "phonetic_transcription": "wəʿatāh məlākhiym haskiylū hiūsərū shōfətēy 'ārets"
     },
     {
       "verse_number": 11,
-      "commentary": "Paradoxical emotional combination: עבדו ביראה (serve in awe) + גילו ברעדה (rejoice with trembling). Unusual emotional pairing suggests complex divine-human relationship.",
+      "commentary": "Paradox of עִבְדוּ (serve) בְּיִרְאָה (in fear) and גִילוּ (rejoice) בִּרְעָדָה (in trembling). The juxtaposition of joy and fear is theologically sophisticated - proper response to divine majesty.",
       "lexical_insights": [
         "בְּיִרְאָה",
         "בִּרְעָדָה"
       ],
       "figurative_analysis": [
-        "emotional oxymoron"
+        "religious service as fearful joy"
       ],
-      "thesis_connection": "Fits submission theme but emotional complexity adds psychological depth",
-      "phonetic_transcription": "ʿivdhwu 'eth-yəhōwāh bəyir'āh wəghiylwu birʿādhāh"
+      "thesis_connection": "Shows proper response to divine sovereignty - fearful submission",
+      "phonetic_transcription": "ʿivdhū 'eth-yəhōwāh bəyir'āh wəghiylū birʿādhāh"
     },
     {
       "verse_number": 12,
-      "commentary": "Most textually problematic verse. נשׁקו־בר could be 'kiss the son' or 'pay homage purely'. Destruction threat with כמעט (mere flash) emphasizing divine anger's immediacy. Concludes with beatitude formula.",
+      "commentary": "Textual crux: נַשְּׁקוּ־בַר - 'kiss the son' or 'kiss in purity'? The phrase is grammatically puzzling. Ends with אַשְׁרֵי formula (beatitude). Threat of divine anger (אַפּוֹ) echoes v. 5.",
       "lexical_insights": [
         "נַשְּׁקוּ־בַר",
-        "כִּמְעַט"
+        "כִּמְעַט",
+        "חוֹסֵי"
       ],
       "figurative_analysis": [
-        "kissing as homage gesture"
+        "kissing as homage gesture",
+        "refuge imagery"
       ],
-      "thesis_connection": "Conclusion fits submission theme but textual uncertainty creates major interpretive challenge",
-      "phonetic_transcription": "nashqwu-var pen-ye'enaf  wəthō'vədhwu dherekh kiy-yivʿar kimʿat 'apuwō 'ashrēy kul-khwōsēy vwō f"
+      "thesis_connection": "Concludes with blessing for those who trust - contrasts with v.1 vanity",
+      "phonetic_transcription": "nashqū-var pen-ye'enaf  wəthō'vədhū dherekh kiy-yivʿar kimʿat 'apuō 'ashrēy kul-khōsēy vō f"
     }
   ],
   "thematic_threads": [
-    "Four-voice dramatic structure: narrator → rebels → God → king → wisdom teacher",
-    "Emotional escalation: plotting → laughter → anger → rage → terror → instruction → blessing",
-    "Spatial movement: earth → heaven → Zion → ends of earth → back to earth",
-    "Imagery reversal: breaking cords (v.3) vs iron mace shattering pottery (v.9)",
-    "Genre mixing: royal psalm + wisdom instruction + beatitude formula"
+    "Dramatic dialogue structure with multiple voices: narrator, rebels, God, king, wisdom teacher",
+    "Imagery reversal pattern: rebels want to break divine 'cords' but will be broken like 'pottery'",
+    "Spatial movement: earth (rebellion) → heaven (divine response) → Zion → universal dominion → back to earth",
+    "Emotional progression in divine response: laughter → anger → terrifying wrath → decree",
+    "Genre blending: royal psalm + wisdom instruction + theophanic elements",
+    "Sound patterns around guttural consonants in rebellion vocabulary: רָגְשׁוּ, חֹק, יִשְׂחָק"
   ],
   "interesting_questions": [
-    "Why use the rare verb רגשׁ (tumultuous assembly) instead of common gathering terms in v.1?",
-    "What is the precise meaning of נסכתי (installed) in v.6 - libation ceremony or royal appointment?",
-    "How does the temporal reference היום (this day) in v.7 function - coronation moment or eternal decree?",
-    "Why shift to wisdom genre vocabulary (השׂכילו/הוסרו) at the psalm's climax in v.10?",
-    "What is the correct interpretation of the textual crux נשׁקו־בר in v.12?",
-    "How does divine laughter (v.4) function theologically - amusement, derision, or something else?",
-    "What does the paradoxical phrase 'rejoice with trembling' (v.11) reveal about proper divine-human relationship?",
-    "Why does God use psychological terror (יבהלם) rather than physical destruction in v.5?"
+    "Why does the psalm use the rare verb רָגְשׁוּ for nations' assembly rather than more common gathering terms?",
+    "What is the significance of using נָסַכְתִּי (libation verb) for royal installation in v.6?",
+    "Is the תְּרֹעֵם in v.9 intentionally ambiguous between 'shepherd' and 'smash' - a wordplay on royal duties?",
+    "What accounts for the genre shift to wisdom vocabulary in vv.10-12?",
+    "How should נַשְּׁקוּ־בַר be understood - is בַר 'son,' 'purity,' or something else?",
+    "Why does divine laughter precede divine anger in the response sequence?",
+    "What is the function of the 'today' (הַיּוֹם) in the adoption formula - ceremonial moment or eternal decree?",
+    "How does the bondage imagery (cords/ropes) in v.3 relate to the iron mace imagery in v.9?"
   ],
-  "synthesis_notes": "LEXICON: Focus on rare verbs (ragash, nasak), textual crux (nashqu-bar), royal terminology\nCONCORDANCE: Track dramatic voice changes, wisdom vocabulary invasion, divine emotion progression\nFIGURATIVE: Bondage imagery (v.3), pottery metaphors (v.9), paradoxical emotions (v.11)\nCOMMENTARY: Major textual problem in v.12, genre mixing phenomenon, temporal references in v.7"
+  "synthesis_notes": "LEXICON: Focus on rare rebellion vocabulary (רָגְשׁוּ), installation terms (נָסַכְתִּי), and the crux נַשְּׁקוּ־בַר\nCONCORDANCE: Track divine laughter, adoption formulas, wisdom terminology in royal contexts\nFIGURATIVE: Bondage vs. breakage imagery, shepherd/smash wordplay, iron vs. pottery metaphors\nCOMMENTARY: Textual problems in v.12, genre blending issues, dramatic structure analysis"
 }

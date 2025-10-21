@@ -391,3 +391,26 @@ The design is:
 **Author**: Claude (Anthropic)
 **Date**: 2025-10-19
 **Version**: 1.0
+---
+
+## Implementation Updates
+
+### 2025-10-21: Bug Fix - Mater Lectionis Transcription
+
+**Problem:** The initial implementation of the `PhoneticAnalyst` treated the Hebrew letter `ו` (vav) as a consonant 'w' in all cases. This was incorrect, as `ו` can also function as a vowel marker (*mater lectionis*) for `ō` (as in `וֹ`) and `ū` (as in `וּ`).
+
+**Incorrect Transcriptions:**
+- `יִתְיַצְּבוּ` → `yithyatsvwu` (should be `yithyatsvū`)
+- `נוֹסְדוּ` → `nwōsədhwu` (should be `nōsədhū`)
+- `מְשִׁיחוֹ` → `məshiykhwō` (should be `məshiykhō`)
+
+**Fix:** The `_transcribe_word` method in `src/agents/phonetic_analyst.py` was updated to check if `ו` is serving as a vowel marker before transcribing it as a consonant.
+
+**Result:** The phonetic transcription is now more accurate, correctly distinguishing between consonantal `ו` and `ו` as a vowel marker.
+
+**Corrected Transcriptions:**
+- `יִתְיַצְּבוּ` → `yithyatsvū`
+- `נוֹסְדוּ` → `nōsədhū`
+- `מְשִׁיחוֹ` → `məshiykhō`
+
+---
