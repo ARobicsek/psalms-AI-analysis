@@ -286,6 +286,16 @@ class PipelineSummaryTracker:
         # but in a skip-step scenario, this is the desired behavior.
         self.model_usage[step_name] = model_name
 
+    def track_completion_date(self, date_str: str):
+        """
+        Explicitly set the completion date for the master_editor step.
+        Used when resuming a pipeline to preserve the original completion date.
+        """
+        if "master_editor" not in self.steps:
+            self.steps["master_editor"] = StepStats(step_name="master_editor")
+        
+        # This is a bit of a hack, but it ensures the date is stored in the right place.
+        self.steps["master_editor"].completion_date = date_str
 
     def generate_markdown_report(self) -> str:
         """Generate comprehensive markdown report."""
@@ -543,7 +553,8 @@ class PipelineSummaryTracker:
                     'input_token_estimate': step.input_token_estimate,
                     'output_char_count': step.output_char_count,
                     'output_token_estimate': step.output_token_estimate,
-                    'duration_seconds': step.duration_seconds,
+                    'duration_seconds': step.duration_seconds, 
+                    'completion_date': getattr(step, 'completion_date', None),
                     'timestamp': step.timestamp
                 }
                 for name, step in self.steps.items()
