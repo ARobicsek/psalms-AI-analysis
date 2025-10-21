@@ -1,3 +1,29 @@
+## 2025-10-20 - Smoke Test Implementation & Debugging
+
+### Session Started
+[Time recorded in session] - Began implementing a smoke test mode for the pipeline.
+
+### Tasks Completed
+- ✅ **Analysis of Statistics Bug**: Investigated why pipeline statistics were not updating correctly in the final output.
+- ✅ **`--smoke-test` Flag Implemented**: Added a new `--smoke-test` flag to `run_enhanced_pipeline.py` to enable a fast, inexpensive, end-to-end test of the pipeline's data flow.
+- ✅ **Dummy Data Generation**: Implemented logic to generate placeholder dummy files for all four major AI agent steps (Macro, Micro, Synthesis, Master Editor) when running in smoke test mode.
+- ✅ **Dependency Fix**: Identified and resolved a `ModuleNotFoundError` for the `docx` library by installing the missing dependency from `requirements.txt`.
+- 🟡 **Attempted Date Bug Fix**: Removed a redundant `tracker.save_json()` call from the end of the pipeline script in an attempt to fix the missing "Date Produced" timestamp.
+
+### Key Learnings & Issues
+
+#### 1. Value of Smoke Testing
+ The implementation of a `--smoke-test` flag proved immediately useful. It allowed for rapid, iterative testing of the pipeline's structure and data-passing mechanisms, which helped uncover the `ModuleNotFoundError` without needing to run costly API calls.
+
+#### 2. Persistent "Date Produced" Bug
+ A bug where the "Date Produced" field is missing from the final output remains, despite attempts to fix it.
+- **Initial Theory**: A redundant `save_json()` call at the end of the script was overwriting the correctly-dated statistics file saved after the Master Editor step.
+- **Action**: The redundant call was removed.
+- **Result**: The bug persists. The final smoke test run still shows "Date not available in statistics file."
+- **Conclusion**: The problem is more subtle than a simple file overwrite. The issue likely lies either within the `PipelineSummaryTracker`'s `mark_pipeline_complete()` or `save_json()` methods, or in how the `commentary_formatter.py` script reads the date key from the JSON file. This requires more targeted debugging in the next session.
+
+---
+
 # Implementation Log
 
 ## Purpose
@@ -777,7 +803,7 @@ All search modes verified working:
 ### Useful References
 - Unicode Hebrew chart: https://unicode.org/charts/PDF/U0590.pdf
 - Sefaria API docs: https://developers.sefaria.org/
-- SQLite index optimization: https://www.sqlite.org/optoverview.html
+- SQLite index optimization: https://www.sqlite.org/performance.html
 - Hebrew morphology resources: https://github.com/openscriptures/morphhb
 
 ---
