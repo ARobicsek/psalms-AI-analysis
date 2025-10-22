@@ -618,9 +618,10 @@ class MicroAnalystV2:
             try:
                 # Call the phonetic analyst to get the detailed transcription
                 analysis = self.phonetic_analyst.transcribe_verse(verse.hebrew)
-                
-                # Join the transcribed words into a single string for the prompt
-                transcribed_words = [word['transcription'] for word in analysis['words']]
+
+                # Join the syllabified transcriptions into a single string for the prompt
+                # Use 'syllable_transcription' which includes syllable boundaries (e.g., "tə-hil-lāh")
+                transcribed_words = [word['syllable_transcription'] for word in analysis['words']]
                 verse_transcription = " ".join(transcribed_words)
                 
                 phonetic_data[verse.verse] = verse_transcription
