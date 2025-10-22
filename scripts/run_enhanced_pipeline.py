@@ -761,7 +761,7 @@ Examples:
 
     # Set output directory
     if not args.output_dir:
-        args.output_dir = f"output/test_psalm_{args.psalm_number}"
+        args.output_dir = f"output/psalm_{args.psalm_number}"
 
     # Ensure UTF-8 encoding on Windows
     if sys.platform == 'win32':
