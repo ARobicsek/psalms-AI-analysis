@@ -127,8 +127,8 @@ Output: Scholarly Commentary (.docx)
 
 #### Commentary Librarian
 - **Function**: Fetches traditional Jewish commentaries
-- **Sources**: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri
-- **Implementation**: `src/data_sources/sefaria_client.py`
+- **Sources**: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah
+- **Implementation**: `src/agents/commentary_librarian.py`
 - **Key Features**:
   - Multiple commentary integration
   - Historical perspective inclusion

@@ -91,7 +91,7 @@ RAG SCHOLARLY CONTEXT:
 
 DISCOVERY TASK:
 
-Read through each verse with FRESH EYES. For each verse, note:
+Read through each verse ATOMICALLY, with FRESH EYES. For each verse, note:
 
 1. **Curious Word Choices**: Rare words? Unexpected vocabulary? Interesting verbs/nouns?
 2. **Poetic Patterns**: Parallelism? Wordplay? Sound patterns? Repetition?
@@ -168,6 +168,31 @@ Return ONLY the JSON object, no additional text.
 """
 
 
+# Commentary instruction templates
+COMMENTARY_ALL_VERSES = """**REQUEST COMMENTARY FOR EVERY VERSE** in the psalm
+   - All 7 available commentators will be consulted: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah
+   - Provide a brief reason explaining what aspect of each verse merits traditional commentary perspective
+   - This comprehensive approach ensures the Synthesis Writer has classical grounding for every verse
+   - Examples of good reasons:
+     * "Opening invocation - how do commentators frame the psalm's purpose?"
+     * "Key theological claim - traditional interpretation of divine attribute"
+     * "Poetic parallelism - how do commentators explain the relationship between cola?"
+     * "Rare vocabulary - classical exegesis illuminates unusual term"
+     * "Figurative language - traditional understanding of metaphor"
+"""
+
+COMMENTARY_SELECTIVE = """**REQUEST COMMENTARY ONLY FOR VERSES** that are genuinely puzzling, interesting, complex, or merit traditional interpretation
+   - All 7 available commentators will be consulted: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah
+   - Be selective and judicious: only request for SOME verses that would most benefit from classical commentary
+   - Focus on: interpretive puzzles, rare vocabulary, complex syntax, theologically loaded passages, unusual imagery
+   - Provide a brief reason explaining what specific aspect merits traditional commentary
+   - Examples of good reasons:
+     * "Divine council language - how do traditional commentators handle 'sons of gods'?"
+     * "Rare term 'mabbul' - classical exegesis illuminates unusual vocabulary"
+     * "Ambiguous syntax - commentators resolve interpretive challenge"
+     * "Theological claim - traditional understanding of divine attribute"
+"""
+
 # Stage 2: Research Request Generation Prompt
 RESEARCH_REQUEST_PROMPT = """Based on your verse-by-verse discoveries, generate targeted research requests.
 
@@ -218,9 +243,8 @@ GENERATE RESEARCH REQUESTS:
    - Examples of GOOD figurative requests: "pour forth" (vivid action), "fathom" (rare concept), "nostril" (specific idiom)
    - Examples of BAD figurative requests: "hand", "gaze", "mouth", "way", "mercy", "bless" (too common, will return 100s of results)
 
-4. **COMMENTARY** - Verses with interpretive puzzles
-   - Complex/ambiguous verses from discoveries
-   - 3-6 key verses
+4. **COMMENTARY** - Traditional Jewish commentary for verses
+   {commentary_instructions}
 
 OUTPUT FORMAT: Return ONLY valid JSON:
 
@@ -239,8 +263,12 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     {{"verse": 7, "reason": "Stronghold imagery - architectural metaphor for divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["strongholds", "fortress", "fortresses", "citadel", "citadels", "refuge", "refuges"], "broader_terms": ["military", "protection", "defense"], "scope": "Psalms+Pentateuch"}}
   ],
   "commentary_requests": [
-    {{"verse": 1, "reason": "Divine council interpretation - how do traditional commentators handle 'sons of gods'?"}},
-    {{"verse": 10, "reason": "Mabbul (flood) term - rare word needing classical commentary context"}}
+    {{"verse": 1, "reason": "Opening beatitude - how do commentators interpret 'ashrei' and the threefold structure?"}},
+    {{"verse": 2, "reason": "Torah meditation - traditional understanding of 'delight' and day/night study"}},
+    {{"verse": 3, "reason": "Tree metaphor - classical interpretation of 'transplanted' vs. natural growth"}},
+    {{"verse": 4, "reason": "Chaff imagery - how commentators contrast with tree metaphor"}},
+    {{"verse": 5, "reason": "Judgment language - traditional eschatology and assembly of righteous"}},
+    {{"verse": 6, "reason": "Two ways theology - how commentators frame knowing vs. perishing"}}
   ]
 }}
 
@@ -263,12 +291,25 @@ class MicroAnalystV2:
         api_key: Optional[str] = None,
         db_path: str = "data/tanakh.db",
         docs_dir: str = "docs",
-        logger=None
+        logger=None,
+        commentary_mode: str = "all"
     ):
-        """Initialize MicroAnalyst v2 agent."""
+        """Initialize MicroAnalyst v2 agent.
+
+        Args:
+            api_key: Anthropic API key
+            db_path: Path to tanakh database
+            docs_dir: Directory for RAG documents
+            logger: Optional logger instance
+            commentary_mode: "all" (request all 7 commentaries for all verses) or
+                           "selective" (only request commentaries for specific verses)
+        """
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
         if not self.api_key:
             raise ValueError("Anthropic API key required")
+
+        if commentary_mode not in ["all", "selective"]:
+            raise ValueError(f"Invalid commentary_mode: {commentary_mode}. Must be 'all' or 'selective'")
 
         self.client = anthropic.Anthropic(api_key=self.api_key)
         self.model = "claude-sonnet-4-20250514"  # Sonnet 4.5
@@ -277,6 +318,7 @@ class MicroAnalystV2:
         self.research_assembler = ResearchAssembler()
         self.logger = logger or get_logger("micro_analyst_v2")
         self.phonetic_analyst = PhoneticAnalyst()
+        self.commentary_mode = commentary_mode
 
     def analyze_psalm(
         self,
@@ -433,9 +475,19 @@ class MicroAnalystV2:
         psalm_number: int
     ) -> ResearchRequest:
         """Stage 2: Generate research requests from discoveries."""
+        # Select commentary instructions based on mode
+        commentary_instructions = (
+            COMMENTARY_ALL_VERSES if self.commentary_mode == "all"
+            else COMMENTARY_SELECTIVE
+        )
+
+        # Log the commentary mode being used
+        self.logger.info(f"  Commentary mode: {self.commentary_mode}")
+
         # Build prompt
         prompt = RESEARCH_REQUEST_PROMPT.format(
-            discoveries=json.dumps(discoveries, ensure_ascii=False, indent=2)
+            discoveries=json.dumps(discoveries, ensure_ascii=False, indent=2),
+            commentary_instructions=commentary_instructions
         )
 
         # Call Sonnet 4.5
