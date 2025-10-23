@@ -1,0 +1,312 @@
+{
+  "psalm_number": 145,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Opens with 'תְּהִלָּה' (song of praise) - unusual superscription since this is the only psalm called tehillah in its title, giving the whole book its name. The phrase 'אֱלוֹהַי הַמֶּלֶךְ' (my God the king) is striking - personal possessive with royal title creates intimate-yet-majestic tone.",
+      "lexical_insights": [
+        "תְּהִלָּה",
+        "אֱלוֹהַי הַמֶּלֶךְ",
+        "אֲרוֹמִמְךָ"
+      ],
+      "figurative_analysis": [
+        "elevation metaphor in אֲרוֹמִמְךָ"
+      ],
+      "thesis_connection": "Establishes personal-to-universal framework from thesis, but the unique title status is intriguing independent discovery",
+      "phonetic_transcription": "tə-hil-lāh lə-dhā-widh 'a-rō-mim-khā 'e-lō-hay ham-me-lekh wa-'a-vā-rə-khāh shim-khā lə-ʿō-lām wā-ʿedh"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Emphatic 'בְּכׇל־יוֹם' (every single day) intensifies the commitment. The repetition of 'לְעוֹלָם וָעֶד' from v1 creates inclusio structure, but also reveals obsession with temporal permanence that goes beyond typical praise psalms.",
+      "lexical_insights": [
+        "בְּכׇל־יוֹם"
+      ],
+      "figurative_analysis": [
+        "none particularly"
+      ],
+      "thesis_connection": "Supports eternal praise theme but the obsessive quality suggests something beyond standard liturgical commitment",
+      "phonetic_transcription": "bəkh-lyōm 'a-vā-rə-khekh-khā wa-'a-hal-lāh shim-khā lə-ʿō-lām wā-ʿedh"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Shift from personal commitment to objective divine attributes. 'אֵין חֵקֶר' (no investigation/searching out) is philosophically profound - suggests God's greatness transcends human cognitive capacity entirely. The progression from personal address to third-person declaration is abrupt.",
+      "lexical_insights": [
+        "מְהֻלָּל",
+        "חֵקֶר"
+      ],
+      "figurative_analysis": [
+        "searching/investigation metaphor for comprehension"
+      ],
+      "thesis_connection": "Fits transcendence theme from thesis, but the abrupt grammatical shift suggests rhetorical strategy worth exploring",
+      "phonetic_transcription": "gā-dhōl yə-hō-wāh ūm-hul-lāl mə-'ōdh wə-ligh-dhul-lā-thō 'ēy-n khē-qer"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Introduces generational theme with 'דּוֹר לְדוֹר' - but unusually, it's about praising God's 'works' and 'mighty acts' rather than God himself. The focus on divine actions rather than divine being is noteworthy for a praise psalm.",
+      "lexical_insights": [
+        "דּוֹר לְדוֹר",
+        "גְבוּרֹתֶיךָ"
+      ],
+      "figurative_analysis": [
+        "generational chain metaphor"
+      ],
+      "thesis_connection": "Supports generational transmission theme but highlights works-focus rather than character-focus",
+      "phonetic_transcription": "du-ōr lə-dhōr yə-sha-bakh ma-ʿa-sey-khā ūgh-vū-rō-they-khā ya-giy-dhū"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Triple construct chain 'הֲדַר כְּב֣וֹד הוֹדֶךָ' is extraordinarily dense - three glory/majesty words in succession. This poetic piling up of synonyms suggests inadequacy of language to capture divine splendor. The shift to first person 'אָשִׂיחָה' (I will meditate) personalizes the cosmic themes.",
+      "lexical_insights": [
+        "הֲדַר",
+        "כְּבוֹד",
+        "הוֹדֶךָ",
+        "נִפְלְאֹתֶיךָ"
+      ],
+      "figurative_analysis": [
+        "splendor/majesty accumulation"
+      ],
+      "thesis_connection": "Shows inadequacy of language theme not clearly present in thesis - interesting independent discovery",
+      "phonetic_transcription": "ha-dhar kə-vōdh hō-dhe-khā wə-dhiv-rēy nif-l'ō-they-khā 'ā-siy-khāh"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Textual variant in 'וגדלותיך/וּגְדֻלָּתְךָ' - scribal uncertainty about form. 'עֱזוּז נוֹרְאֹתֶיךָ' (strength of your awesome deeds) combines power and fear - unusual pairing. The verse oscillates between what 'they' say and what 'I' will recount.",
+      "lexical_insights": [
+        "עֱזוּז",
+        "נוֹרְאֹתֶיךָ"
+      ],
+      "figurative_analysis": [
+        "strength as quality of deeds rather than God"
+      ],
+      "thesis_connection": "Interesting independent of thesis - suggests compositional or transmission challenges",
+      "phonetic_transcription": "we-ʿe-zūz nō-rə-'ō-they-khā yō'-mē-rū wghdhlwthykh ūgh-dhul-lā-thə-khā 'a-sap-ren-nāh"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "'זֵכֶר' (remembrance/memory) suggests liturgical commemoration rather than abstract recall. 'יַבִּיעוּ' (they will pour forth/gush) is vigorous - divine goodness flows like water. The pairing of 'goodness' and 'righteousness' covers both benevolence and justice.",
+      "lexical_insights": [
+        "זֵכֶר",
+        "יַבִּיעוּ",
+        "יְרַנֵּנוּ"
+      ],
+      "figurative_analysis": [
+        "flowing/gushing goodness",
+        "singing righteousness"
+      ],
+      "thesis_connection": "Supports divine character themes but the memorial aspect suggests cultic dimension not emphasized in thesis",
+      "phonetic_transcription": "zē-kher rav-tūv-khā ya-biy-ʿū wə-tsidh-qā-thə-khā yə-ran-nē-nū"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Classic divine attribute formula from Exodus 34:6 - but notably omits 'abundant in faithfulness and truth'. This selective quotation emphasizes mercy aspects while downplaying covenant fidelity. The theological editing is significant.",
+      "lexical_insights": [
+        "חַנּוּן",
+        "רַחוּם",
+        "אֶרֶךְ אַפַּיִם"
+      ],
+      "figurative_analysis": [
+        "slow anger = long nose metaphor"
+      ],
+      "thesis_connection": "Supports character revelation theme but the selective quotation suggests specific theological emphasis",
+      "phonetic_transcription": "khan-nu-ūn wə-ra-khūm yə-hō-wāh 'e-rekh 'a-pa-yim ūgh-dhlkhā-sedh"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Double 'כׇּל' (all) - universality emphasized. 'טוֹב־יְהֹוָה לַכֹּל' extends divine goodness beyond Israel to all existence. This is radical theological universalism - God's mercy on 'all his works' includes all creation, not just covenant people.",
+      "lexical_insights": [
+        "טוֹב",
+        "כׇּל־מַעֲשָׂיו"
+      ],
+      "figurative_analysis": [
+        "divine works as recipients of mercy"
+      ],
+      "thesis_connection": "Supports universality theme from thesis - this is the theological turning point toward cosmic scope",
+      "phonetic_transcription": "tōv-yə-hō-wāh la-kōl wə-ra-kha-māy-w ʿal-kul-ma-ʿa-sāy-w"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Fascinating distinction between 'all your works' (everything) and 'your faithful ones' (covenant community). The universal creation will praise, but the faithful will bless - different verbs suggest different qualities of response.",
+      "lexical_insights": [
+        "יוֹדוּךָ",
+        "יְבָרְכוּכָה",
+        "חֲסִידֶיךָ"
+      ],
+      "figurative_analysis": [
+        "works as conscious praise-givers"
+      ],
+      "thesis_connection": "Supports creation/covenant tension noted in thesis but the verb distinction adds complexity",
+      "phonetic_transcription": "yō-dhū-khā yə-hō-wāh kul-ma-ʿa-sey-khā wa-kha-siy-dhey-khā yə-vā-rə-khū-khāh"
+    },
+    {
+      "verse_number": 11,
+      "commentary": "Kingship theme emerges prominently with 'כְּבוֹד מַלְכוּתְךָ' and 'גְבוּרָתְךָ'. The pairing of glory and might emphasizes royal power rather than pastoral care - shift in divine imaging toward sovereignty.",
+      "lexical_insights": [
+        "מַלְכוּתְךָ",
+        "גְבוּרָתְךָ"
+      ],
+      "figurative_analysis": [
+        "kingship metaphor dominant"
+      ],
+      "thesis_connection": "Supports kingship theme from thesis - marks clear transition to sovereignty emphasis",
+      "phonetic_transcription": "kə-vōdh mal-khūth-khā yō'-mē-rū ūgh-vū-rā-thə-khā yə-dha-bē-rū"
+    },
+    {
+      "verse_number": 12,
+      "commentary": "'לִבְנֵי הָאָדָם' (to the sons of humanity) - universal audience again, but now the content is God's mighty acts and royal majesty. The purpose is proclamation to all humanity, not just Israel. This missionary dimension is striking.",
+      "lexical_insights": [
+        "לִבְנֵי הָאָדָם",
+        "הֲדַר מַלְכוּתוֹ"
+      ],
+      "figurative_analysis": [
+        "humanity as audience for divine kingship"
+      ],
+      "thesis_connection": "Supports universal scope from thesis but adds missionary/proclamation element not clearly present",
+      "phonetic_transcription": "lə-hō-dhiy-ʿa  liv-nēy hā-'ā-dhām gə-vū-rō-thāy-w ūkh-vōdh ha-dhar mal-khū-thō"
+    },
+    {
+      "verse_number": 13,
+      "commentary": "The Ugaritic parallel noted in context - this is formulaic ANE royal language. But LXX adds verse 13a not in Hebrew MT: 'Faithful is the LORD in his words, holy in all his works.' This suggests textual fluidity and interpretive expansion.",
+      "lexical_insights": [
+        "כׇּל־עֹלָמִים",
+        "כׇּל־דּוֹר וָדֹר"
+      ],
+      "figurative_analysis": [
+        "eternal kingship"
+      ],
+      "thesis_connection": "Supports eternal kingship theme but LXX variation suggests textual/interpretive complexity",
+      "phonetic_transcription": "mal-khūth-khā mal-khūth kul-ʿō-lā-miy-m ū-mem-shal-tkhā bəkh-ldu-ōr wā-dhōr"
+    },
+    {
+      "verse_number": 14,
+      "commentary": "Shift from cosmic kingship to intimate pastoral care - 'supports the fallen, raises the bent.' The physical imagery is striking - God as helper of those with literal bodily struggles. This grounds cosmic theology in practical care.",
+      "lexical_insights": [
+        "סוֹמֵךְ",
+        "נֹפְלִים",
+        "זוֹקֵף",
+        "כְּפוּפִים"
+      ],
+      "figurative_analysis": [
+        "physical falling/bending as metaphor for human condition"
+      ],
+      "thesis_connection": "Fits immanent care theme from thesis but the physical specificity is striking",
+      "phonetic_transcription": "sō-mē-khə yə-hō-wāh ləkh-lhan-nō-fə-liy-m wə-zō-qēf ləkh-lhak-fū-fiy-m"
+    },
+    {
+      "verse_number": 15,
+      "commentary": "'עֵינֵי־כֹל' (eyes of all) - one of most beautiful images in psalms. All creation looking expectantly to God for food 'בְּעִתּוֹ' (in its proper time) - suggests natural order and divine timing rather than arbitrary provision.",
+      "lexical_insights": [
+        "עֵינֵי־כֹל",
+        "יְשַׂבֵּרוּ",
+        "בְּעִתּוֹ"
+      ],
+      "figurative_analysis": [
+        "eyes as symbol of dependence and expectation"
+      ],
+      "thesis_connection": "Beautiful example of immanent care theme but the 'eyes of all' image transcends the thesis categories",
+      "phonetic_transcription": "ʿēy-nēy-khōl 'ē-ley-khā yə-sa-bē-rū wə-'a-tāh nō-thēn-lā-hem 'eth-'khə-lām bə-ʿi-tu-ō"
+    },
+    {
+      "verse_number": 16,
+      "commentary": "'פּוֹתֵחַ אֶת־יָדֶךָ' - opening the hand, generous gesture. 'רָצוֹן' (desire/satisfaction) - God provides not just sustenance but satisfaction, pleasure. This is abundance theology, not mere survival.",
+      "lexical_insights": [
+        "פּוֹתֵחַ",
+        "מַשְׂבִּיעַ",
+        "רָצוֹן"
+      ],
+      "figurative_analysis": [
+        "open hand as generosity symbol"
+      ],
+      "thesis_connection": "Supports divine care theme but the abundance/pleasure aspect goes beyond basic providence",
+      "phonetic_transcription": "pu-ō-thē-kha 'eth-yā-dhe-khā ū-mas-biy-ʿa ləkh-lkhay rā-tsōn"
+    },
+    {
+      "verse_number": 17,
+      "commentary": "Return to universal scope with double 'בְּכׇל' (in all). 'צַדִּיק' and 'חָסִיד' - righteous and faithful - applied to God's ways and works. Divine character pervades divine action completely.",
+      "lexical_insights": [
+        "צַדִּיק",
+        "חָסִיד",
+        "דְּרָכָיו"
+      ],
+      "figurative_analysis": [
+        "ways and works as character expressions"
+      ],
+      "thesis_connection": "Supports divine character theme - shows integration of character and action",
+      "phonetic_transcription": "tsa-diy-q yə-hō-wāh bəkh-ldə-rā-khāy-w wə-khā-siy-dh bəkh-lma-ʿa-sāy-w"
+    },
+    {
+      "verse_number": 18,
+      "commentary": "'קָרוֹב' (near) - divine proximity to those who call. But conditioned: 'בֶאֱמֶת' (in truth/sincerity). This introduces moral qualification - not all calling receives response, only sincere calling.",
+      "lexical_insights": [
+        "קָרוֹב",
+        "קֹרְאָיו",
+        "בֶאֱמֶת"
+      ],
+      "figurative_analysis": [
+        "spatial nearness for relational availability"
+      ],
+      "thesis_connection": "Supports divine accessibility but adds moral qualification not emphasized in thesis",
+      "phonetic_transcription": "qā-rōv yə-hō-wāh ləkh-lqō-rə-'āy-w lə-khōl 'a-sher yiq-rā-'u-hū ve-'e-meth"
+    },
+    {
+      "verse_number": 19,
+      "commentary": "'רְצוֹן־יְרֵאָיו' - desires of those who fear him. God fulfills the wishes of the God-fearing specifically. This is more particular than universal care - covenant relationship brings special privileges.",
+      "lexical_insights": [
+        "רְצוֹן־יְרֵאָיו",
+        "שַׁוְעָתָם"
+      ],
+      "figurative_analysis": [
+        "fear as proper relationship to divine"
+      ],
+      "thesis_connection": "Creates tension with universal themes - suggests covenant particularity alongside cosmic scope",
+      "phonetic_transcription": "rə-tsōn-yə-rē-'āy-w ya-ʿa-seh wə-'eth-shaw-ʿā-thām yish-maʿ wə-yō-shiy-ʿēm"
+    },
+    {
+      "verse_number": 20,
+      "commentary": "Sharp contrast: God 'watches over' (שׁוֹמֵר) those who love him but 'destroys' (יַשְׁמִיד) the wicked. This theodicy element seems to contradict universal mercy themes earlier. The moral universe has consequences.",
+      "lexical_insights": [
+        "שׁוֹמֵר",
+        "אֹהֲבָיו",
+        "יַשְׁמִיד",
+        "רְשָׁעִים"
+      ],
+      "figurative_analysis": [
+        "watching as protective care"
+      ],
+      "thesis_connection": "Creates theological tension with universal themes - theodicy complicates the praise structure",
+      "phonetic_transcription": "shō-mēr yə-hō-wāh 'eth-kul-'ō-ha-vāy-w wə-'ēth kul-hā-rə-shā-ʿiy-m yash-miy-dh"
+    },
+    {
+      "verse_number": 21,
+      "commentary": "Returns to personal commitment 'יְדַבֶּר־פִּי' (my mouth will speak) but expands to universal call 'כׇּל־בָּשָׂר' (all flesh). Perfect inclusio with v1-2 but transformed - what began as personal vow becomes cosmic summons.",
+      "lexical_insights": [
+        "תְּהִלַּת",
+        "כׇּל־בָּשָׂר",
+        "קׇדְשׁוֹ"
+      ],
+      "figurative_analysis": [
+        "flesh as universal humanity"
+      ],
+      "thesis_connection": "Perfect example of personal-to-universal movement from thesis - shows individual worship expanding to cosmic call",
+      "phonetic_transcription": "tə-hil-lath yə-hō-wāh yə-dha-ber-piy wiy-vā-rē-khə kul-bā-sār shēm qdhə-shō lə-ʿō-lām wā-ʿedh f"
+    }
+  ],
+  "thematic_threads": [
+    "Obsessive temporal language - לְעוֹלָם וָעֶד appears 4 times, suggesting temporal anxiety rather than standard eternity formulas",
+    "Universal vocabulary intensifies - כׇל appears 16 times, creating drumbeat of inclusivity that may exceed typical praise psalms",
+    "Grammatical person shifts - moves between first person (personal), third person (objective), and second person (address) in sophisticated pattern",
+    "Creation and covenant tension - universal themes (all creation, all flesh) alongside particular themes (faithful ones, those who fear)",
+    "Moral universe intrudes - teodicy elements (destroying wicked) complicate pure praise structure",
+    "Physical imagery prominent - falling, bending, eyes, hands, mouth - grounds cosmic themes in bodily experience"
+  ],
+  "interesting_questions": [
+    "Why is this the only psalm titled 'תְּהִלָּה' when this word gives the whole psalter its name?",
+    "What is the theological significance of selectively quoting the Exodus 34:6 formula while omitting 'truth and faithfulness'?",
+    "How does the LXX addition in v13a ('Faithful is the LORD in his words...') illuminate early interpretive traditions?",
+    "Is the triple construct chain 'הֲדַר כְּבוֹד הוֹדֶךָ' standard Hebrew syntax or innovative poetic accumulation?",
+    "How do we reconcile 'good to all' (v9) with 'destroys all the wicked' (v20) - is this theological tension intentional?",
+    "Why does the psalm use 'כׇּל־בָּשָׂר' (all flesh) in the conclusion rather than 'all people' or 'all creation'?",
+    "What is the difference between יוֹדוּךָ (praise from all works) and יְבָרְכוּכָה (bless from faithful ones) in v10?",
+    "Does the 'עֵינֵי־כֹל' (eyes of all) image include non-animate creation having metaphorical 'eyes'?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on tehillah vs other praise terms, universal vocabulary (kol, kol-basar), divine attribute formulas\nCONCORDANCE: Track 'eyes of all' formula, temporal language patterns, acrostic completeness markers\nTEXTUAL: LXX additions/variations, especially v13a and interpretive expansions\nTHEOLOGICAL: Creation vs covenant tension, theodicy in praise contexts, universalism in psalmic literature"
+}
