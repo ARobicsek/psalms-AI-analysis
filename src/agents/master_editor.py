@@ -219,7 +219,12 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Comparative biblical usage (concordance insights showing how terms/phrases appear elsewhere)
   * Figurative language analysis (how vehicles/metaphors work across Scripture)
   * Timing/composition clues (vocabulary, theology, historical references)
-  * Traditional interpretation (Rashi, Ibn Ezra, Radak, church fathers)
+  **Interpretation and Reception**, including
+    - *Influence of verses and their use in aggada and halacha by the Mishna, Talum, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
+    - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
+    - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
+    - Church fathers and medieval Christian interpretation if very illuminating
+    - Modern critical scholarship debates
 
 **Figurative Language Integration:**
 For verses with figurative language where research provided biblical parallels:

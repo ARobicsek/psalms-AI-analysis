@@ -1,0 +1,190 @@
+{
+  "psalm_number": 2,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Opens with double rhetorical questions using rare verb 'ragash' (assemble/rage) - creates dramatic interrogation. The parallel structure 'nations/peoples' with 'assemble/plot' escalates from gathering to scheming. The word 'riq' (vain/empty) at the end already hints at futility.",
+      "lexical_insights": [
+        "רָגְשׁוּ",
+        "רִֽיק",
+        "יֶהְגּוּ"
+      ],
+      "figurative_analysis": [
+        "nations personified as conspiring individuals"
+      ],
+      "thesis_connection": "Establishes the dramatic conflict but the opening questions suggest author's confidence in the answer",
+      "phonetic_transcription": "lām-māh rā-ghə-shū ghō-yim ūl-'um-miy-m yeh-gu-ū-riy-q"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Shifts from questions to declarative description with military positioning verbs. The phrase 'take their stand' (yityatsvu) is military terminology. First appearance of 'meshicho' (His anointed) - the key figure around whom conflict revolves.",
+      "lexical_insights": [
+        "יִ֥תְיַצְּב֨וּ",
+        "רוֹזְנִ֥ים",
+        "מְשִׁיחֽוֹ"
+      ],
+      "figurative_analysis": [
+        "political conspiracy as military formation"
+      ],
+      "thesis_connection": "Introduces the anointed king - central figure of divine-human drama",
+      "phonetic_transcription": "yith-yats-tsvū  mal-khēy-'e-rets wə-rō-zə-niy-m nō-sə-dhū-yā-khadh ʿal-yə-hō-wāh wə-ʿal-mə-shiy-khō"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Direct quotation of rebellious speech using bondage metaphors. The imagery of 'cords' and 'ropes' suggests both literal political subjugation and symbolic spiritual authority. Cohortative verbs ('let us') show collective determination.",
+      "lexical_insights": [
+        "מֽוֹסְרוֹתֵ֑ימוֹ",
+        "עֲבֹתֵֽימוֹ",
+        "נְֽ֭נַתְּקָה"
+      ],
+      "figurative_analysis": [
+        "political authority as physical restraints/bondage"
+      ],
+      "thesis_connection": "Reveals the nature of rebellion - rejection of divine/royal authority perceived as oppressive",
+      "phonetic_transcription": "nə-nat-qāh 'eth-mō-sə-rō-thēy-mō wə-nash-liy-khāh mim-men-nu-ū ʿa-vō-thēy-mō"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Dramatic perspective shift to heaven with anthropomorphic divine response. Two verbs of divine amusement: 'laughs' and 'mocks' - suggesting not cruelty but confident superiority. The heavenly throne establishes cosmic perspective.",
+      "lexical_insights": [
+        "יִשְׂחָ֑ק",
+        "יִלְעַג"
+      ],
+      "figurative_analysis": [
+        "God as enthroned king responding to inferior rivals"
+      ],
+      "thesis_connection": "Divine laughter indicates predetermined confidence rather than reactive emotion",
+      "phonetic_transcription": "yō-shēv bash-shā-ma-yim yis-khāq 'a-dhō-nāy yil-ʿagh-lā-mō"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Escalation from laughter to anger with temporal marker 'then' (az). Two parallel expressions for divine wrath with intensifying effect. The verb 'terrify' (yvahalemo) suggests overwhelming psychological impact.",
+      "lexical_insights": [
+        "אָ֤ז",
+        "בַחֲרוֹנ֥וֹ",
+        "יְבַהֲלֵֽמוֹ"
+      ],
+      "figurative_analysis": [
+        "divine emotion as human-like anger"
+      ],
+      "thesis_connection": "Shows divine response progresses from confidence to active intervention",
+      "phonetic_transcription": "'āz yə-dha-bēr 'ē-lēy-mō və-'a-pu-ō ū-va-kha-rō-nō yə-va-ha-lē-mō"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "God speaks in first person with emphatic 'I' (wa'ani) and perfect tense 'have installed' (nasakti) - accomplished fact, not future promise. 'Zion' localizes the universal drama geographically. The verb 'nasak' can mean pour out/install.",
+      "lexical_insights": [
+        "וַ֭אֲנִי",
+        "נָסַ֣כְתִּי",
+        "צִ֝יּ֗וֹן"
+      ],
+      "figurative_analysis": [
+        "king installation as liquid pouring or foundation setting"
+      ],
+      "thesis_connection": "Divine declaration of accomplished fact - king already established despite rebellion",
+      "phonetic_transcription": "wa-'a-niy nā-sakh-tiy mal-kiy ʿal-tsiy-yu-ōn har-qdhə-shiy"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Speaker shifts to the king quoting God's private decree. The formula 'You are my son, today I have begotten you' uses adoption language rather than eternal generation. The word 'chōq' (decree/statute) suggests legal/covenantal framework.",
+      "lexical_insights": [
+        "חֹ֥ק",
+        "בְּנִ֥י",
+        "יְלִדְתִּֽיךָ"
+      ],
+      "figurative_analysis": [
+        "divine sonship as adoption/begetting"
+      ],
+      "thesis_connection": "Theological center - divine sonship legitimates royal authority",
+      "phonetic_transcription": "'a-sap-rāh 'el-khōq yə-hō-wāh 'ā-mar-'ē-lay bə-niy 'a-tāh 'a-niy hay-yu-ōm yə-lidh-tiy-khā"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Divine offer contingent on royal request - 'ask of me' creates conditional structure. The inheritance imagery spans from 'nations' to 'ends of earth' - universal dominion. The parallelism moves from general (nations) to specific (territories).",
+      "lexical_insights": [
+        "שְׁאַ֤ל",
+        "נַחֲלָתֶ֑ךָ",
+        "אַפְסֵי־אָֽרֶץ"
+      ],
+      "figurative_analysis": [
+        "world dominion as family inheritance"
+      ],
+      "thesis_connection": "Universal dominion promise contrasts with local rebellion - cosmic scope",
+      "phonetic_transcription": "shə-'al mim-men-niy wə-'et-nāh ghō-yim na-kha-lā-the-khā wa-'a-khuz-zā-thə-khā 'af-sēy-'ā-rets"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Violent imagery shifts from defensive (establishing king) to offensive (crushing enemies). The metaphor of iron rod breaking pottery emphasizes power differential - strong vs. fragile. The verb 'shepherd' (ro'em) with iron rod creates ironic contrast.",
+      "lexical_insights": [
+        "תְּ֭רֹעֵם",
+        "בַּרְזֶ֑ל",
+        "תְּנַפְּצֵֽם"
+      ],
+      "figurative_analysis": [
+        "royal authority as shepherd's rod, enemies as pottery"
+      ],
+      "thesis_connection": "Divine authority includes power to destroy - not just establish but enforce",
+      "phonetic_transcription": "tə-rō-ʿēm bə-shē-vet bar-zel kikh-liy yō-tsēr tə-nap-tsēm"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Direct address to rebellious kings with wisdom vocabulary. 'Haskilū' (be prudent/wise) and 'hiwāsrū' (accept discipline) come from wisdom tradition. The shift to imperative mood offers alternative to destruction.",
+      "lexical_insights": [
+        "הַשְׂכִּ֑ילוּ",
+        "הִ֝וָּסְר֗וּ",
+        "שֹׁ֣פְטֵי"
+      ],
+      "figurative_analysis": [
+        "political submission as educational discipline"
+      ],
+      "thesis_connection": "Offers path of wisdom as alternative to destruction - divine mercy within judgment",
+      "phonetic_transcription": "wə-ʿa-tāh mə-lā-khiy-m has-kiy-lū hi-ū-sə-rū shō-fə-tēy 'ā-rets"
+    },
+    {
+      "verse_number": 11,
+      "commentary": "Paradoxical combination of 'serve' with 'fear' and 'rejoice' with 'trembling'. The emotions seem contradictory but suggest proper religious response. Both verbs are plural imperatives addressing the kings collectively.",
+      "lexical_insights": [
+        "עִבְד֣וּ",
+        "בְּיִרְאָ֑ה",
+        "בִּרְעָדָֽה"
+      ],
+      "figurative_analysis": [
+        "proper worship as fearful joy"
+      ],
+      "thesis_connection": "Proper response to divine authority involves both awe and joy - complex religious emotion",
+      "phonetic_transcription": "ʿiv-dhū 'eth-yə-hō-wāh bə-yir-'āh wə-ghiy-lū bir-ʿā-dhāh"
+    },
+    {
+      "verse_number": 12,
+      "commentary": "Textually problematic 'kiss the son' (nashqu-bar) - 'bar' is Aramaic for son in Hebrew context. Urgency created by 'lest' warnings and 'flash of anger' imagery. Ends with beatitude blessing those taking refuge - individual piety vs. political rebellion.",
+      "lexical_insights": [
+        "נַשְּׁקוּ־בַ֡ר",
+        "כִּמְעַ֣ط",
+        "ח֥וֹסֵי"
+      ],
+      "figurative_analysis": [
+        "homage as kissing, divine anger as fire"
+      ],
+      "thesis_connection": "Individual refuge contrasts with collective rebellion - personal vs. political response",
+      "phonetic_transcription": "nash-shqū-var pen-ye-'e-naf  wə-thō'-və-dhū dhe-rekh kiy-yiv-ʿar kim-ʿat 'a-pu-ō 'ash-rēy kul-khō-sēy vō f"
+    }
+  ],
+  "thematic_threads": [
+    "Four-part dramatic structure with distinct speakers: narrator (1-3), God (4-6), king (7-9), wisdom teacher (10-12)",
+    "Progression from question to declaration to warning - rhetorical movement from uncertainty to certainty",
+    "Consistent contrast between earthly perspective (rebellion) and heavenly perspective (confidence)",
+    "Shift from plural collective action (nations) to individual response (refuge) at the end",
+    "Integration of royal, wisdom, and prophetic vocabularies in single composition"
+  ],
+  "interesting_questions": [
+    "Why does the psalm use the rare verb 'ragash' for national assembly - does it inherently imply futile agitation?",
+    "What is the significance of the textual problem 'nashqu-bar' in v.12 - scribal error or intentional Aramaic?",
+    "How does the conditional offer 'ask of me' (v.8) relate to the declared accomplished fact 'I have installed' (v.6)?",
+    "Why does divine response progress from laughter to anger to declaration - what triggers each emotional shift?",
+    "What is the function of the paradoxical 'rejoice with trembling' formulation in v.11?",
+    "How does the 'shepherd with iron rod' metaphor work - pastoral care or ironic destruction?",
+    "Why shift from cosmic universal claims to specific geographic 'Zion' localization?",
+    "What is the relationship between the wisdom vocabulary (vv.10-11) and the violent imagery (v.9)?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on 'ragash', 'nasak', 'bar' (Aramaic), and the iron rod/pottery metaphor\nTEXTUAL: Investigate v.12 textual problems and ancient versions' solutions\nCONCORDANCE: Track divine sonship formulas, refuge language, and wisdom terminology in Psalms\nCOMMENTARY: Verses with speaker transitions, conditional vs. accomplished divine acts\nCOMPARATIVE: Ancient Near Eastern royal adoption formulas and vassalage rebellion patterns"
+}

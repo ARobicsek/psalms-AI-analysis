@@ -1,0 +1,109 @@
+{
+  "psalm_number": 1,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "The opening formula 'אַשְֽׁרֵי־הָאִישׁ' (happy is the man) uses a rare construct form. The threefold progression הָלַךְ → עָמָד → יָשָׁב shows increasing levels of commitment/involvement. Three different groups are named with distinct characteristics: רְשָׁעִים (wicked), חַטָּאִים (sinners), לֵצִים (scoffers/insolent ones).",
+      "lexical_insights": [
+        "אַשְֽׁרֵי",
+        "לֵצִים",
+        "מוֹשַׁב"
+      ],
+      "figurative_analysis": [
+        "life as journey metaphor (walked/path)",
+        "social positioning metaphor (stood/sat)"
+      ],
+      "thesis_connection": "Establishes the binary framework through negative definition of righteousness",
+      "phonetic_transcription": "'ash-rēy-hā-'iy-sh 'a-sher  lō' hā-lakh ba-ʿa-tsath rə-shā-ʿiy-m ūv-dhe-rekh khat-tā-'iy-m lō' ʿā-mādh ūv-mō-shav lē-tsiy-m lō' yā-shāv"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Strong adversative כִּי אִם introduces the positive alternative. The phrase בְּתוֹרַת יְהֹוָה uses the construct form, while וּֽבְתוֹרָתוֹ creates a chiastic pattern emphasizing both divine ownership and personal appropriation. The verb יֶהְגֶּה (meditate/mutter) suggests audible study.",
+      "lexical_insights": [
+        "חֶפְצוֹ",
+        "יֶהְגֶּה"
+      ],
+      "figurative_analysis": [
+        "Torah as object of desire/delight",
+        "continuous study as way of life"
+      ],
+      "thesis_connection": "Provides the positive center - Torah devotion as key to righteousness",
+      "phonetic_transcription": "kiy 'im-bə-thō-rath yə-hō-wāh khef-tsō ūv-thō-rā-thō yeh-geh yō-mām wā-lā-yə-lāh"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Extended tree metaphor with specific details: שָׁתוּל (transplanted, not naturally growing), עַֽל־פַּלְגֵי־מָיִם (by channels/streams of water), בְּעִתּוֹ (in its proper time). The final clause וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ extends beyond the tree metaphor to general prosperity.",
+      "lexical_insights": [
+        "שָׁתוּל",
+        "פַּלְגֵי",
+        "יִבּוֹל"
+      ],
+      "figurative_analysis": [
+        "righteous person as transplanted tree",
+        "steady water supply as divine provision"
+      ],
+      "thesis_connection": "Demonstrates the flourishing destiny of Torah-centered living through natural metaphor",
+      "phonetic_transcription": "wə-hā-yāh kə-ʿēts shā-thūl ʿal-pal-ghēy-mā-yim 'a-sher pir-yō  yi-tēn bə-ʿi-tu-ō wə-ʿā-lē-hū lō'-yi-bu-ōl wə-khōl 'a-sher-ya-ʿa-seh yats-liy-kha"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Abrupt contrast with לֹא־כֵן (not so). The chaff metaphor מֹּץ is brief and stark compared to the elaborate tree imagery. The verb תִּדְּפֶנּוּ (drives away) suggests violent removal, and רוּחַ (wind) lacks the definite article, making it indefinite/any wind.",
+      "lexical_insights": [
+        "מֹּץ",
+        "תִּדְּפֶנּוּ"
+      ],
+      "figurative_analysis": [
+        "wicked as agricultural waste",
+        "wind as destructive force"
+      ],
+      "thesis_connection": "Provides the contrasting destiny - instability and removal rather than rootedness",
+      "phonetic_transcription": "lō'-khēn hā-rə-shā-ʿiy-m kiy 'im-kam-mōts 'a-sher-tid-fen-nu-ū rū-kha"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Causal עַל־כֵּן (therefore) connects to v.4. The phrase לֹא־יָקֻמוּ...בַּמִּשְׁפָּט could mean 'stand in judgment' or 'survive judgment'. The second half introduces עֲדַת צַדִּיקִים (assembly of the righteous), suggesting a communal dimension.",
+      "lexical_insights": [
+        "יָקֻמוּ",
+        "מִּשְׁפָּט",
+        "עֲדַת"
+      ],
+      "figurative_analysis": [
+        "standing as survival/vindication",
+        "assembly as community belonging"
+      ],
+      "thesis_connection": "Introduces the judicial/communal consequences of the binary choice",
+      "phonetic_transcription": "ʿal-kēn  lō'-yā-qu-mū rə-shā-ʿiy-m bam-mish-pāt wə-khat-tā-'iy-m ba-ʿa-dhath tsa-diy-qiy-m"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Final verse uses יוֹדֵעַ (knows) - divine knowledge as key. Creates inclusio with דֶּרֶךְ (way) from v.1. The verb תֹּאבֵד (perishes) is singular despite plural 'wicked', and the verse ends with {פ} (petuhah) - open paragraph marker.",
+      "lexical_insights": [
+        "יוֹדֵעַ",
+        "תֹּאבֵד"
+      ],
+      "figurative_analysis": [
+        "divine knowledge as protective care",
+        "way as life path with destination"
+      ],
+      "thesis_connection": "Concludes with divine epistemology as foundation for the binary destinies",
+      "phonetic_transcription": "kiy-yō-dhē-ʿa yə-hō-wāh de-rekh tsa-diy-qiy-m wə-dhe-rekh rə-shā-ʿiy-m tō'-vēdh f"
+    }
+  ],
+  "thematic_threads": [
+    "Binary structure intensifies throughout: individual → community → cosmic/divine level",
+    "Movement from behavioral (v.1) → devotional (v.2) → agricultural (v.3-4) → judicial (v.5) → divine (v.6)",
+    "Inclusio pattern with 'way' terminology frames the entire psalm",
+    "Asymmetrical treatment: elaborate description of righteous (vv.1-3) vs. brief treatment of wicked (v.4)",
+    "Temporal progression: continuous present Torah study → seasonal fruit → eschatological judgment"
+  ],
+  "interesting_questions": [
+    "Why does the psalmist use שָׁתוּל (transplanted) rather than נָטַע (planted) for the righteous tree?",
+    "What is the significance of the threefold progression הָלַךְ → עָמָד → יָשָׁב in moral compromise?",
+    "How does the verb יֶהְגֶּה (meditate/mutter) relate to ancient study practices?",
+    "Why is the treatment of the wicked so brief (one verse) compared to the righteous (three verses)?",
+    "What does YHWH's 'knowing' the way of the righteous imply beyond mere cognition?",
+    "How does the chiastic structure בְּתוֹרַת יְהֹוָה / וּֽבְתוֹרָתוֹ function theologically?",
+    "What is the relationship between individual righteousness (vv.1-4) and community identity (v.5)?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on יֶהְגֶּה (meditation), שָׁתוּל (transplanted), אַשְֽׁרֵי (happiness formula)\nCONCORDANCE: Track 'way' (דֶּרֶךְ) terminology, divine 'knowing' formulae, Torah devotion language\nFIGURATIVE: Agricultural metaphors, judicial language, social positioning imagery\nCOMMENTARY: Binary structure, wisdom genre, programmatic function as Psalm 1"
+}

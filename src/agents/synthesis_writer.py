@@ -279,8 +279,10 @@ The following areas are of particular interest to intelligent, well-read lay rea
     - Historical allusions (Babylonian exile, monarchy, etc.)
     - Liturgical evolution markers
 
-11. **Traditional Interpretation**
-    - Classical Jewish commentary (Rashi, Ibn Ezra, Radak, Kimchi)
+11. **Interpretation and Reception**
+    - *Influence of verse and their use in aggada and halacha by the Mishna, Talum, Midrashim, etc as provided in the Torah Temimah* - MAKE SURE to carefully review the Torah Temimah material in the research bundle
+    - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)* - see research bundle
+    - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)* - see research bundle
     - Targum renderings
     - Church fathers (Augustine, Jerome, etc.)
     - Medieval Christian interpretation
@@ -307,10 +309,10 @@ If any check fails, REVISE to incorporate comparative analysis using the databas
 - **Use research bundle effectively**: The research bundle contains:
   * BDB lexicon entries with semantic ranges, etymologies, and usage patterns
   * Concordance data showing where Hebrew terms appear elsewhere in Scripture - cite these parallels!
-  * Figurative language instances showing how vehicles/metaphors are used across the Bible
+  * Figurative language instances showing how vehicles/metaphors are used across the Bible - use them produce insights about the intent of the poet and their selection of this figuration here
   * Traditional commentary excerpts from Rashi, Ibn Ezra, Radak - engage with these interpretive traditions!
   * LXX text showing ancient Greek interpretation
-- **Define technical terms**: When using jargon (jussive, anaphora, chiasm, inclusio, polemic, theophany, etc.), provide brief, accessible definitions for lay readers
+- **Define technical terms**: When using jargon (jussive, anaphora, chiasm, inclusio, polemic, theophany, hendiadys, etc.), provide brief, accessible definitions for lay readers
 - **Vary your approach**: Don't use the same scholarly angles for every verse - alternate between poetics, historical context, textual criticism, figurative analysis, etc.
 - **Comment on unusual phrases and poetic devices**: When a verse contains interesting or unusual Hebrew phrases, idioms, wordplay, or poetic devices, make sure to comment on them. These linguistic and literary features are precisely what intelligent lay readers find fascinating.
 
@@ -484,19 +486,19 @@ class SynthesisWriter:
 #        with open(file_path, 'r', encoding='utf-8') as f:
 #            return f.read()
 
-    def _trim_figurative_proportionally(self, figurative_section: str, keep_ratio: float) -> str:
+    def _trim_figurative_with_priority(self, figurative_section: str, keep_ratio: float) -> str:
         """
-        Trim figurative language section proportionally across all queries.
+        Intelligently trim figurative language section, prioritizing instances from Psalms.
 
-        Instead of cutting off entire queries, this keeps a percentage of results
-        from each query, ensuring all search terms are represented.
+        Instead of simple proportional trimming, this function categorizes instances
+        by source (Psalms vs. other books) and discards non-Psalms instances first.
 
         Args:
-            figurative_section: The full figurative language section
-            keep_ratio: Proportion to keep (0.0 to 1.0)
+            figurative_section: The full figurative language section markdown.
+            keep_ratio: The proportion of original instances to keep (0.0 to 1.0).
 
         Returns:
-            Trimmed figurative section with proportional representation
+            Trimmed figurative language section with Psalms instances prioritized.
         """
         import re
 
@@ -505,52 +507,70 @@ class SynthesisWriter:
         queries = re.findall(query_pattern, figurative_section, re.DOTALL)
 
         if not queries:
-            # Fallback: simple truncation
+            # Fallback: simple truncation if no queries are found
             target_size = int(len(figurative_section) * keep_ratio)
             return figurative_section[:target_size] + f"\n\n[Trimmed {len(figurative_section) - target_size} chars]"
 
         trimmed_queries = []
-        total_trimmed = 0
-        total_original = 0
+        total_original_instances = 0
+        total_kept_instances = 0
 
         for query_block in queries:
-            total_original += len(query_block)
-
-            # Extract query header (first few lines before #### Instances:)
+            # Extract query header and instances text
             match = re.match(r'(.*?#### Instances:)(.*)', query_block, re.DOTALL)
             if not match:
-                # No instances found, keep header only
                 trimmed_queries.append(query_block)
                 continue
 
             header = match.group(1)
             instances_text = match.group(2)
 
-            # Split instances by verse markers (**Verse** or similar)
+            # Find all individual instances
             instance_pattern = r'(\*\*[^*]+\*\*.*?)(?=\*\*[^*]+\*\*|$)'
             instances = re.findall(instance_pattern, instances_text, re.DOTALL)
 
             if not instances:
-                # No clear instances, keep as-is
                 trimmed_queries.append(query_block)
                 continue
 
-            # Keep proportional number of instances
-            keep_count = max(1, int(len(instances) * keep_ratio))  # Keep at least 1
-            kept_instances = instances[:keep_count]
-            omitted_count = len(instances) - keep_count
+            total_original_instances += len(instances)
 
-            # Reassemble
+            # --- New Prioritization Logic ---
+            psalms_instances = [inst for inst in instances if "Psalms" in inst]
+            other_instances = [inst for inst in instances if "Psalms" not in inst]
+
+            target_keep_count = max(1, int(len(instances) * keep_ratio))
+
+            kept_instances = []
+            # Prioritize keeping instances from Psalms
+            if len(psalms_instances) >= target_keep_count:
+                # If we have enough Psalms instances, take from them
+                kept_instances = psalms_instances[:target_keep_count]
+            else:
+                # If not, take all Psalms instances and fill the rest from other books
+                kept_instances.extend(psalms_instances)
+                remaining_needed = target_keep_count - len(psalms_instances)
+                if remaining_needed > 0:
+                    kept_instances.extend(other_instances[:remaining_needed])
+            
+            total_kept_instances += len(kept_instances)
+            omitted_count = len(instances) - len(kept_instances)
+
+            # Reassemble the query block
             trimmed_block = header + '\n' + ''.join(kept_instances)
             if omitted_count > 0:
                 trimmed_block += f"\n\n[{omitted_count} more instances omitted for space]\n"
 
             trimmed_queries.append(trimmed_block)
-            total_trimmed += len(trimmed_block)
 
         result = '## Figurative Language Instances\n\n' + '\n'.join(trimmed_queries)
-
-        self.logger.info(f"Proportional trim: {total_original:,} → {total_trimmed:,} chars ({keep_ratio:.1%} kept)")
+        
+        original_char_len = len(figurative_section)
+        final_char_len = len(result)
+        
+        self.logger.info(f"Figurative trim (prioritizing Psalms): "
+                        f"{original_char_len:,} → {final_char_len:,} chars. "
+                        f"Instances: {total_original_instances} → {total_kept_instances}.")
         return result
 
     def _trim_research_bundle(self, research_bundle: str, max_chars: int = 250000) -> str:
@@ -613,8 +633,8 @@ class SynthesisWriter:
             available_for_figurative = max_chars - (header_size + lexicon_size + commentary_size + 1000)  # Leave 1k for concordance header
             if available_for_figurative > 0 and figurative_size > 0:
                 trim_ratio = available_for_figurative / figurative_size
-                self.logger.info(f"Trimming figurative proportionally: keeping {trim_ratio:.1%} of each query's results")
-                figurative_section = self._trim_figurative_proportionally(figurative_section, trim_ratio)
+                self.logger.info(f"Trimming figurative with priority for Psalms: keeping {trim_ratio:.1%} of each query's results")
+                figurative_section = self._trim_figurative_with_priority(figurative_section, trim_ratio)
             else:
                 figurative_section = ""
             # Drop concordance entirely

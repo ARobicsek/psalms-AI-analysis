@@ -1,0 +1,273 @@
+{
+  "psalm_number": 1,
+  "pipeline_start": "2025-10-22T21:45:46.982158",
+  "pipeline_end": "2025-10-22T22:00:50.259119",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1270,
+      "input_token_estimate": 423,
+      "output_char_count": 8569,
+      "output_token_estimate": 2856,
+      "duration_seconds": 51.72581672668457,
+      "completion_date": null,
+      "timestamp": "2025-10-22T21:45:46.985968"
+    },
+    "micro_analysis": {
+      "input_char_count": 8569,
+      "input_token_estimate": 2856,
+      "output_char_count": 93201,
+      "output_token_estimate": 31067,
+      "duration_seconds": 92.36304068565369,
+      "completion_date": null,
+      "timestamp": "2025-10-22T21:48:38.767267"
+    },
+    "synthesis": {
+      "input_char_count": 101772,
+      "input_token_estimate": 33924,
+      "output_char_count": 19904,
+      "output_token_estimate": 6634,
+      "duration_seconds": 131.12959027290344,
+      "completion_date": null,
+      "timestamp": "2025-10-22T21:52:11.189244"
+    },
+    "master_editor": {
+      "input_char_count": 115518,
+      "input_token_estimate": 38506,
+      "output_char_count": 20559,
+      "output_token_estimate": 6853,
+      "duration_seconds": 147.93094992637634,
+      "completion_date": "2025-10-22T22:00:50.259119",
+      "timestamp": "2025-10-22T21:56:23.399045"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "אַשְֽׁרֵי",
+        "reason": "Rare construct form of happiness formula - need semantic range vs. other blessing terms"
+      },
+      {
+        "word": "לֵצִים",
+        "reason": "Third category of evildoers - specific connotation vs. wicked/sinners"
+      },
+      {
+        "word": "חֶפְצוֹ",
+        "reason": "Delight/desire in Torah - theological implications of this term choice"
+      },
+      {
+        "word": "יֶהְגֶּה",
+        "reason": "Meditation verb - audible vs. silent, technical study practices"
+      },
+      {
+        "word": "שָׁתוּל",
+        "reason": "Transplanted rather than naturally planted - specific horticultural meaning"
+      },
+      {
+        "word": "פַּלְגֵי",
+        "reason": "Channels/streams - irrigation imagery vs. natural water sources"
+      },
+      {
+        "word": "מֹּץ",
+        "reason": "Chaff metaphor - agricultural waste product, threshing process"
+      },
+      {
+        "word": "תִּדְּפֶנּוּ",
+        "reason": "Wind driving away - violent removal, specific verb semantics"
+      },
+      {
+        "word": "עֲדַת",
+        "reason": "Assembly of righteous - community structure, cultic implications"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "אשרי האיש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track beatitude formula opening patterns across Scripture"
+      },
+      {
+        "query": "תורת יהוה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine Torah possession formula usage"
+      },
+      {
+        "query": "הגה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Meditation/murmuring verb in study contexts"
+      },
+      {
+        "query": "שתל",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Transplanting vs. natural planting imagery"
+      },
+      {
+        "query": "יודע יהוה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine knowing formula - relational knowledge"
+      },
+      {
+        "query": "דרך צדיקים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Way of righteous vs. way of wicked contrasts"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Life as journey - walking/standing/sitting progression metaphor | Vehicle: walking | Related terms: walk, walks, walked, path, paths, journey, journeys",
+        "vehicle": "walking",
+        "vehicle_terms": [
+          "walking",
+          "walk",
+          "walks",
+          "walked",
+          "path",
+          "paths",
+          "journey",
+          "journeys"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Transplanted tree by water channels - agricultural metaphor central to psalm | Vehicle: transplanted | Related terms: transplant, transplants, planted, plant, plants, planting",
+        "vehicle": "transplanted",
+        "vehicle_terms": [
+          "transplanted",
+          "transplant",
+          "transplants",
+          "planted",
+          "plant",
+          "plants",
+          "planting"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Water channels/streams imagery - irrigation and divine provision | Vehicle: streams | Related terms: stream, channels, channel, waterways, rivers, river",
+        "vehicle": "streams",
+        "vehicle_terms": [
+          "streams",
+          "stream",
+          "channels",
+          "channel",
+          "waterways",
+          "rivers",
+          "river"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Chaff driven by wind - agricultural waste metaphor | Vehicle: chaff | Related terms: chaff, husks, husk, straw, stubble",
+        "vehicle": "chaff",
+        "vehicle_terms": [
+          "chaff",
+          "chaff",
+          "husks",
+          "husk",
+          "straw",
+          "stubble"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Standing in judgment - forensic/legal standing metaphor | Vehicle: standing | Related terms: stand, stands, stood, arise, arises, arising",
+        "vehicle": "standing",
+        "vehicle_terms": [
+          "standing",
+          "stand",
+          "stands",
+          "stood",
+          "arise",
+          "arises",
+          "arising"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "1:1",
+        "reason": "Opening beatitude - how do commentators interpret 'ashrei' formula and threefold progression of moral compromise?"
+      },
+      {
+        "verse": "1:2",
+        "reason": "Torah meditation - traditional understanding of 'delight' in Torah and day/night study practices"
+      },
+      {
+        "verse": "1:3",
+        "reason": "Tree metaphor - classical interpretation of 'transplanted' tree and seasonal fruitfulness"
+      },
+      {
+        "verse": "1:4",
+        "reason": "Chaff imagery - how commentators explain the stark contrast and brevity vs. elaborate tree metaphor"
+      },
+      {
+        "verse": "1:5",
+        "reason": "Judgment language - traditional eschatology, forensic standing, and assembly of righteous"
+      },
+      {
+        "verse": "1:6",
+        "reason": "Two ways theology - how commentators frame divine knowing vs. perishing and inclusio structure"
+      }
+    ],
+    "lexicon_entries_count": 18,
+    "concordance_results": {
+      "אשרי האיש": 0,
+      "תורת יהוה": 11,
+      "הגה": 5,
+      "שתל": 0,
+      "יודע יהוה": 1,
+      "דרך צדיקים": 1
+    },
+    "figurative_results": {
+      "total_instances_used": 278
+    },
+    "commentary_counts": {
+      "Rashi": 6,
+      "Ibn Ezra": 5,
+      "Radak": 6,
+      "Metzudat David": 6,
+      "Malbim": 5,
+      "Meiri": 6,
+      "Torah Temimah": 5
+    },
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 87651,
+    "research_bundle_tokens": 29217
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the significance of the three-fold progression 'counsel→path→seat' in v. 1, and how does this relate to Ancient Near Eastern concepts of moral progression?",
+      "How does the tree imagery in v. 3 connect to Ancient Near Eastern and biblical traditions of the cosmic tree or tree of life?",
+      "What specific judicial or legal context is evoked by the language of 'standing in judgment' in v. 5?",
+      "How does the term 'way' (דרך) function in wisdom literature, and what theological implications does it carry?",
+      "What is the relationship between 'Torah of YHWH' and personal appropriation ('his Torah') in v. 2?",
+      "How does the chaff metaphor in v. 4 relate to other biblical and ANE uses of agricultural imagery for judgment?",
+      "What does YHWH's 'knowing' the way of the righteous imply about divine epistemology and covenantal relationship?",
+      "How do the temporal markers ('day and night,' 'in its season') contribute to the psalm's theology of divine timing?",
+      "What is the significance of the 'assembly of the righteous' in v. 5 for understanding community identity?",
+      "How does this psalm's binary worldview relate to other wisdom literature and the broader theology of the Psalter?"
+    ],
+    "micro_questions": [
+      "Why does the psalmist use שָׁתוּל (transplanted) rather than נָטַע (planted) for the righteous tree?",
+      "What is the significance of the threefold progression הָלַךְ → עָמָד → יָשָׁב in moral compromise?",
+      "How does the verb יֶהְגֶּה (meditate/mutter) relate to ancient study practices?",
+      "Why is the treatment of the wicked so brief (one verse) compared to the righteous (three verses)?",
+      "What does YHWH's 'knowing' the way of the righteous imply beyond mere cognition?",
+      "How does the chiastic structure בְּתוֹרַת יְהֹוָה / וּֽבְתוֹרָתוֹ function theologically?",
+      "What is the relationship between individual righteousness (vv.1-4) and community identity (v.5)?"
+    ],
+    "verse_count": 6
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-20250514",
+    "micro_analysis": "claude-sonnet-4-20250514",
+    "synthesis": "claude-sonnet-4-20250514",
+    "master_editor": "gpt-5"
+  }
+}

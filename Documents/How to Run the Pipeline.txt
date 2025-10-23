@@ -11,6 +11,16 @@ python scripts/run_formatter.py 145
 # just the word output
 python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready
 
+#special commands
+--skip_default_commentaries (this will ensure that only traditional commentaries requested by the Micro agent are requested)
+--skip-macro 
+--skip-micro 
+--skip-synthesis 
+--skip-master-edit 
+--skip-print-ready
+--skip-word-doc
+
+
 # run a smoke test
 python scripts/run_enhanced_pipeline.py 1 --smoke-test
 
