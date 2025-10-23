@@ -98,8 +98,8 @@ Review the introduction and verse commentary for these issues:
 - Wrong verse references
 
 ### 2. MISSED OPPORTUNITIES
-- Phonetic transcription data available but not used to analyze sound patterns (alliteration, assonance). 
-- Phonetic transcriptions used that don't match the scholarly phonetic text provided to you. These transcriptions are authoritative and must be used.
+- Phonetic transcription [see above in ### MICRO DISCOVERIES (verse-level observations)] not used to analyze sound patterns (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm). 
+- Phonetic transcriptions used that don't match the scholarly phonetic text provided to you above in ### MICRO DISCOVERIES (verse-level observations). These transcriptions are authoritative and must be used.
 - Phonetic claims made that CONTRADICT the provided transcription (e.g., claiming "soft f" when transcription shows "p")
 - LXX suggests alternative Vorlage not mentioned
 - Poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
@@ -110,6 +110,8 @@ Review the introduction and verse commentary for these issues:
 - Figurative language parallels from database not cited or analyzed
 - ANE parallels available but not discussed
 - Comparative textual insights (e.g. MT vs LXX) not addressed
+- Interesting insights from the Torah Temimah (re rabbiic use/interpretation) not included
+- Illuminating traditional commentary (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) not integrated
 - Research questions identified by Macro and Micro analysts not answered (even when answerable with available materials)
 
 ### 3. STYLISTIC PROBLEMS
@@ -200,6 +202,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Complex poetic devices (chiasm, inclusio, intricate parallelism)
   * Significant textual variants (MT vs LXX differences)
   * Important interpretive questions that can be answered with research materials
+  * Examples of use of the text by aggadic or halachic traditions (see the Torah Temimah); powerful insights into early rabbinic reception and interpretation
   * Rich figurative language requiring comparative analysis
 
   Remember: intelligent lay readers are HUNGRY for substantive analysis of linguistic and literary features. Don't shortchange them!
@@ -209,7 +212,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
 - **Discretion**: You have full editorial discretion. You are not required to include every detail from the synthesizer's commentary. Your role is to *evaluate* the synthesizer's choices regarding phonetic and figurative language, and then decide whether to retain, enhance, rewrite, or replace them to achieve the highest level of scholarly excellence.
 
 - **Items of interest to include** (when relevant):
-  * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided))
+  * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided above))
   * **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it—explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
   * Literary insights (narrative techniques, rhetorical strategies)
   * Historical and cultic insights (worship setting, historical context)
@@ -220,7 +223,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Figurative language analysis (how vehicles/metaphors work across Scripture)
   * Timing/composition clues (vocabulary, theology, historical references)
   **Interpretation and Reception**, including
-    - *Influence of verses and their use in aggada and halacha by the Mishna, Talum, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
+    - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
     - Church fathers and medieval Christian interpretation if very illuminating

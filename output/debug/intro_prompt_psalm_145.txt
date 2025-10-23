@@ -8,193 +8,190 @@ You have been provided with:
 ## YOUR INPUTS
 
 ### MACRO THESIS
-**Thesis**: Psalm 145 presents a sophisticated theology of cosmic praise, structured as a movement from personal vow to universal participation, where God's eternal kingship generates a cascading response across generations and all creation. The psalm uniquely combines royal transcendence with intimate divine care, arguing that proper recognition of God's incomparable greatness naturally leads to inclusive, perpetual praise that encompasses both human generations and all living creatures. This vision of expanding praise circles reflects a mature theological understanding where individual devotion becomes the catalyst for universal worship.
-**Genre**: Hymn of Praise (possibly Acrostic Psalm)
-**Context**: This psalm functions as a liturgical piece for temple worship, emphasizing the pedagogical responsibility to transmit praise across generations. The royal language and eternal kingship themes connect to Ancient Near Eastern court ideology, while the emphasis on care for the vulnerable reflects post-exilic concerns about divine justice. The possible acrostic structure suggests use in teaching and memorization contexts.
+**Thesis**: Psalm 145 presents a comprehensive theology of divine praise that moves from personal commitment to universal recognition, structured around the dynamic tension between God's transcendent greatness (incomprehensible and eternal) and immanent care (gracious provision for all creation). The complete acrostic structure functions as a theological completeness marker, suggesting this psalm encompasses the totality of divine attributes and appropriate human response, making it a summative statement of praise theology that bridges individual devotion and cosmic worship.
+**Genre**: Acrostic Hymn of Praise
+**Context**: This psalm likely functioned as a comprehensive liturgical piece for temple worship, serving as a theological summa of praise literature. Its acrostic structure suggests careful composition for memorization and communal recitation. The royal theology and Ugaritic parallels indicate it draws from broader Ancient Near Eastern traditions of divine kingship while distinctively emphasizing God's universal care and ethical character. It may have served as a concluding doxology in liturgical sequences, given its comprehensive scope.
 
 **Structure**:
-  - vv. 1-3: Personal praise commitment and divine incomparability
-  - vv. 4-7: Intergenerational transmission of praise
-  - vv. 8-9: Divine character attributes
-  - vv. 10-13: Universal praise and eternal kingship
-  - vv. 14-20: Divine care in action
-  - v. 21: Personal-to-universal praise conclusion
+  - vv. 1-2: Personal Vow of Eternal Praise
+  - vv. 3-7: God's Transcendent Greatness and Mighty Works
+  - vv. 8-9: Divine Character Revelation
+  - vv. 10-13: Universal Recognition of Divine Kingship
+  - vv. 14-20: Immanent Divine Care in Action
+  - v. 21: Inclusive Concluding Vow
 
 **Poetic Devices**:
-  - inclusio: Opening and closing with blessing God's name 'forever and ever' creates thematic bookends
-  - anaphora with 'all/every' (כל): Repetitive use of כל creates emphasis on universality
-  - possible acrostic structure: May follow Hebrew alphabetic pattern, though nun verse appears missing
-  - generational parallelism: Repeated phrases about transmission across time
-  - synonymous parallelism: Parallel cola reinforce central ideas through repetition with variation
-  - progressive expansion: Movement from singular to plural subjects, individual to universal scope
+  - acrostic structure: Complete alphabetic acrostic from aleph to tav, with each verse beginning with successive Hebrew letters
+  - inclusio: Eternal praise frames the psalm with 'forever and ever' (לְעוֹלָם וָעֶד)
+  - anaphora of כל: Repeated use of 'all/every' (כל) emphasizing universality
+  - chiastic movement: Overall structure moves from personal (vv. 1-2) to universal (vv. 10-20) back to personal-universal (v. 21)
+  - synonymous parallelism: Dominant parallelism type with second line reinforcing or expanding the first
+  - divine epithet progression: Movement through various divine names and attributes (Elohim, YHWH, King)
+  - generational frame: Emphasis on temporal continuity across generations
 
 **Research Questions** (from Macro Analyst):
-  1. How does the possible missing nun verse affect interpretation of the psalm's acrostic structure and theological completeness?
-  2. What is the significance of the Ugaritic parallel in v. 13 for understanding Israelite royal theology and divine kingship?
-  3. How does the frequent use of כל (all/every) function rhetorically to build the psalm's universalist vision?
-  4. What specific Hebrew terminology is used for divine 'works' (מַעֲשֶׂיךָ) versus 'mighty acts' (גְּבוּרֹתֶיךָ) and how do these categories function theologically?
-  5. How does the generational language (דּ֣וֹר לְ֭דוֹר) relate to covenant theology and the transmission of faith?
-  6. What is the relationship between divine transcendence (vv. 3, 11-13) and immanent care (vv. 14-20) in the psalm's theological structure?
-  7. How does the movement from 'I will bless' to 'all creatures shall bless' function as a model for expanding worship participation?
-  8. What is the significance of the contrast between divine care for the righteous and destruction of the wicked in v. 20?
-  9. How does the psalm's use of traditional divine epithets (v. 8) connect to broader biblical covenantal language?
-  10. What role does creation theology play in the psalm's vision of universal praise?
+  1. How does the complete acrostic structure function theologically beyond literary artistry, and what does it suggest about comprehensive praise?
+  2. What is the significance of the divine epithet progression from 'my God the King' to 'YHWH' throughout the psalm?
+  3. How does the Ugaritic parallel in v. 13 illuminate the relationship between Israelite and broader ANE royal theology?
+  4. What is the theological significance of the movement from God's incomprehensible greatness (v. 3) to intimate care (vv. 15-16)?
+  5. How does the 'eyes of all' imagery (v. 15) function within the broader creation theology of the psalm?
+  6. What is the relationship between the generational transmission theme (vv. 4, 13) and the eternal praise framework?
+  7. How does the theodicy element (v. 20) fit into the comprehensive praise structure without creating tension?
+  8. What is the significance of the progression from 'works' and 'mighty acts' to specific care for the fallen and hungry?
+  9. How does this psalm function as a theological summary of praise literature in relation to other Hallel psalms?
+  10. What is the relationship between covenant (faithful ones, those who fear him) and creation (all flesh, all his works) in the psalm's theological vision?
 
 ### MICRO DISCOVERIES
 **Verse 1**
-**Phonetic**: `təhilāh lədhāwidh 'arwōmimkhā 'elwōhay hamelekh wa'avārəkhāh shimkhā ləʿwōlām wāʿedh`
-Opens with rare superscription 'תְּהִלָּה' (tehillah) - 'song of praise' - unique in Psalter. The verb 'אֲרוֹמִמְךָ' (aromimka) suggests physical elevation/exaltation. Interesting juxtaposition of 'my God' (personal) with 'the king' (cosmic).
-  Lexical: תְּהִלָּה, אֲרוֹמִמְךָ, הַמֶּלֶךְ
-  Figurative: elevation metaphor in 'extol'
+**Phonetic**: `tə-hil-lāh lə-dhā-widh 'a-rō-mim-khā 'e-lō-hay ham-me-lekh wa-'a-vā-rə-khāh shim-khā lə-ʿō-lām wā-ʿedh`
+Opens with 'תְּהִלָּה' (song of praise) - unusual superscription since this is the only psalm called tehillah in its title, giving the whole book its name. The phrase 'אֱלוֹהַי הַמֶּלֶךְ' (my God the king) is striking - personal possessive with royal title creates intimate-yet-majestic tone.
+  Lexical: תְּהִלָּה, אֱלוֹהַי הַמֶּלֶךְ, אֲרוֹמִמְךָ
+  Figurative: elevation metaphor in אֲרוֹמִמְךָ
 
 **Verse 2**
-**Phonetic**: `bəkhl-ywōm 'avārəkhekhā wa'ahallāh shimkhā ləʿwōlām wāʿedh`
-Emphatic 'בְּכׇל־יוֹם' (every single day) - distributive force. Parallel verbs 'bless/praise' with identical temporal phrase creates rhythmic doubling. The repetition of 'forever and ever' from v1 is immediate reinforcement.
+**Phonetic**: `bəkh-lyōm 'a-vā-rə-khekh-khā wa-'a-hal-lāh shim-khā lə-ʿō-lām wā-ʿedh`
+Emphatic 'בְּכׇל־יוֹם' (every single day) intensifies the commitment. The repetition of 'לְעוֹלָם וָעֶד' from v1 creates inclusio structure, but also reveals obsession with temporal permanence that goes beyond typical praise psalms.
   Lexical: בְּכׇל־יוֹם
-  Figurative: daily rhythm as worship metaphor
+  Figurative: none particularly
 
 **Verse 3**
-**Phonetic**: `gādhwōl yəhōwāh wumhulāl mə'ōdh wəlighdhulāthwō 'ēyn khēqer`
-Paradoxical structure: declares God's greatness while simultaneously declaring it incomprehensible. 'מְהֻלָּל מְאֹד' (much acclaimed) - intensive praise language. 'אֵין חֵקֶר' (no investigation/searching) - epistemological limit.
+**Phonetic**: `gā-dhōl yə-hō-wāh ūm-hul-lāl mə-'ōdh wə-ligh-dhul-lā-thō 'ēy-n khē-qer`
+Shift from personal commitment to objective divine attributes. 'אֵין חֵקֶר' (no investigation/searching out) is philosophically profound - suggests God's greatness transcends human cognitive capacity entirely. The progression from personal address to third-person declaration is abrupt.
   Lexical: מְהֻלָּל, חֵקֶר
-  Figurative: unfathomable depth metaphor
+  Figurative: searching/investigation metaphor for comprehension
 
 **Verse 4**
-**Phonetic**: `duwōr lədhwōr yəshabakh maʿaseykhā wughvwurōtheykhā yagiydhwu`
-Generational formula 'דּוֹר לְדוֹר' - transmission language. Two parallel objects: 'works' (מַעֲשֶׂיךָ) vs 'mighty acts' (גְּבוּרֹתֶיךָ) - different categories of divine action. Shift from singular 'I' to plural 'they'.
-  Lexical: דּוֹר, גְּבוּרֹתֶיךָ
-  Figurative: works vs mighty acts - creation vs intervention?
+**Phonetic**: `du-ōr lə-dhōr yə-sha-bakh ma-ʿa-sey-khā ūgh-vū-rō-they-khā ya-giy-dhū`
+Introduces generational theme with 'דּוֹר לְדוֹר' - but unusually, it's about praising God's 'works' and 'mighty acts' rather than God himself. The focus on divine actions rather than divine being is noteworthy for a praise psalm.
+  Lexical: דּוֹר לְדוֹר, גְבוּרֹתֶיךָ
+  Figurative: generational chain metaphor
 
 **Verse 5**
-**Phonetic**: `hadhar kəvwōdh hwōdhekhā wədhivrēy nifl'ōtheykhā 'āsiykhāh`
-Triple accumulation 'הֲדַר כְּבוֹד הוֹדֶךָ' - splendor/glory/majesty - poetic excess or semantic distinction? Returns to first person 'אָשִׂיחָה' (I will recite/meditate). 'נִפְלְאֹתֶיךָ' - wondrous acts, different from v4's categories.
-  Lexical: הֲדַר, הוֹדֶךָ, אָשִׂיחָה, נִפְלְאֹתֶיךָ
-  Figurative: visual splendor imagery
+**Phonetic**: `ha-dhar kə-vōdh hō-dhe-khā wə-dhiv-rēy nif-l'ō-they-khā 'ā-siy-khāh`
+Triple construct chain 'הֲדַר כְּב֣וֹד הוֹדֶךָ' is extraordinarily dense - three glory/majesty words in succession. This poetic piling up of synonyms suggests inadequacy of language to capture divine splendor. The shift to first person 'אָשִׂיחָה' (I will meditate) personalizes the cosmic themes.
+  Lexical: הֲדַר, כְּבוֹד, הוֹדֶךָ, נִפְלְאֹתֶיךָ
+  Figurative: splendor/majesty accumulation
 
 **Verse 6**
-**Phonetic**: `weʿezwuz nwōrə'ōtheykhā yō'mērwu wghdhlwthykh wughdhulāthəkhā 'asaprenāh`
-Textual variant: Qere/Ketiv on 'greatness' - suggests scribal uncertainty. 'נוֹרְאֹתֶיךָ' (awesome deeds) - fourth category of divine acts. Mixed persons: 'they shall say' vs 'I will recount'.
+**Phonetic**: `we-ʿe-zūz nō-rə-'ō-they-khā yō'-mē-rū wghdhlwthykh ūgh-dhul-lā-thə-khā 'a-sap-ren-nāh`
+Textual variant in 'וגדלותיך/וּגְדֻלָּתְךָ' - scribal uncertainty about form. 'עֱזוּז נוֹרְאֹתֶיךָ' (strength of your awesome deeds) combines power and fear - unusual pairing. The verse oscillates between what 'they' say and what 'I' will recount.
   Lexical: עֱזוּז, נוֹרְאֹתֶיךָ
-  Figurative: might/power imagery
+  Figurative: strength as quality of deeds rather than God
 
 **Verse 7**
-**Phonetic**: `zēkher rav-twuvkhā yabiyʿwu wətsidhqāthəkhā yəranēnwu`
-'זֵכֶר רַב־טוּבְךָ' - memory/remembrance of abundant goodness. Verbs 'יַבִּיעוּ' (bubble forth/gush) and 'יְרַנֵּנוּ' (sing joyously) - liquid and musical metaphors combined. 'צִדְקָתְךָ' - righteousness as praiseworthy.
+**Phonetic**: `zē-kher rav-tūv-khā ya-biy-ʿū wə-tsidh-qā-thə-khā yə-ran-nē-nū`
+'זֵכֶר' (remembrance/memory) suggests liturgical commemoration rather than abstract recall. 'יַבִּיעוּ' (they will pour forth/gush) is vigorous - divine goodness flows like water. The pairing of 'goodness' and 'righteousness' covers both benevolence and justice.
   Lexical: זֵכֶר, יַבִּיעוּ, יְרַנֵּנוּ
-  Figurative: gushing/bubbling water imagery, joyous singing
+  Figurative: flowing/gushing goodness, singing righteousness
 
 **Verse 8**
-**Phonetic**: `khanuwun wərakhwum yəhōwāh 'erekh 'apayim wughdhl-khāsedh`
-Classic divine epithet formula from Exodus 34:6. 'חַנּוּן וְרַחוּם' - gracious and compassionate. 'אֶרֶךְ אַפַּיִם' - literally 'long of nostrils' - anthropomorphic anger imagery. Traditional covenantal language.
-  Lexical: חַנּוּן, אֶרֶךְ אַפַּיִם
-  Figurative: nose-length as patience metaphor
+**Phonetic**: `khan-nu-ūn wə-ra-khūm yə-hō-wāh 'e-rekh 'a-pa-yim ūgh-dhlkhā-sedh`
+Classic divine attribute formula from Exodus 34:6 - but notably omits 'abundant in faithfulness and truth'. This selective quotation emphasizes mercy aspects while downplaying covenant fidelity. The theological editing is significant.
+  Lexical: חַנּוּן, רַחוּם, אֶרֶךְ אַפַּיִם
+  Figurative: slow anger = long nose metaphor
 
 **Verse 9**
-**Phonetic**: `twōv-yəhōwāh lakōl wərakhamāyw ʿal-kul-maʿasāyw`
-Universal scope explicit: 'לַכֹּל' (to all). 'וְרַחֲמָיו עַל־כׇּל־מַעֲשָׂיו' - mercy upon ALL His works - radical inclusivity. Moves beyond covenant community to all creation.
-  Lexical: לַכֹּל, כׇּל־מַעֲשָׂיו
-  Figurative: works as recipients of mercy
+**Phonetic**: `tōv-yə-hō-wāh la-kōl wə-ra-kha-māy-w ʿal-kul-ma-ʿa-sāy-w`
+Double 'כׇּל' (all) - universality emphasized. 'טוֹב־יְהֹוָה לַכֹּל' extends divine goodness beyond Israel to all existence. This is radical theological universalism - God's mercy on 'all his works' includes all creation, not just covenant people.
+  Lexical: טוֹב, כׇּל־מַעֲשָׂיו
+  Figurative: divine works as recipients of mercy
 
 **Verse 10**
-**Phonetic**: `ywōdhwukhā yəhōwāh kul-maʿaseykhā wakhasiydheykhā yəvārəkhwukhāh`
-Shift to third person address - 'all Your works shall praise You'. Creates cosmic choir concept. 'חֲסִידֶיךָ' (faithful ones) - specific group within universal works. Two-tier praise structure.
-  Lexical: חֲסִידֶיךָ
-  Figurative: creation as active praise participants
+**Phonetic**: `yō-dhū-khā yə-hō-wāh kul-ma-ʿa-sey-khā wa-kha-siy-dhey-khā yə-vā-rə-khū-khāh`
+Fascinating distinction between 'all your works' (everything) and 'your faithful ones' (covenant community). The universal creation will praise, but the faithful will bless - different verbs suggest different qualities of response.
+  Lexical: יוֹדוּךָ, יְבָרְכוּכָה, חֲסִידֶיךָ
+  Figurative: works as conscious praise-givers
 
 **Verse 11**
-**Phonetic**: `kəvwōdh malkhwuthkhā yō'mērwu wughvwurāthəkhā yədhabērwu`
-Royal language intensifies: 'כְּבוֹד מַלְכוּתְךָ' (glory of Your kingship). Parallel verbs 'speak/talk' - conversational praise. Kingdom becomes topic of human discourse.
-  Lexical: מַלְכוּתְךָ
-  Figurative: kingship as conversation topic
+**Phonetic**: `kə-vōdh mal-khūth-khā yō'-mē-rū ūgh-vū-rā-thə-khā yə-dha-bē-rū`
+Kingship theme emerges prominently with 'כְּבוֹד מַלְכוּתְךָ' and 'גְבוּרָתְךָ'. The pairing of glory and might emphasizes royal power rather than pastoral care - shift in divine imaging toward sovereignty.
+  Lexical: מַלְכוּתְךָ, גְבוּרָתְךָ
+  Figurative: kingship metaphor dominant
 
 **Verse 12**
-**Phonetic**: `ləhwōdhiyʿa  livnēy hā'ādhām gəvwurōthāyw wukhvwōdh hadhar malkhwuthwō`
-Purpose clause: 'לְהוֹדִיעַ לִבְנֵי הָאָדָם' - to make known to humanity. Pedagogical function explicit. 'בְנֵי הָאָדָם' - sons of mankind, universal human scope.
-  Lexical: לְהוֹדִיעַ, בְנֵי הָאָדָם
-  Figurative: teaching/making known metaphor
+**Phonetic**: `lə-hō-dhiy-ʿa  liv-nēy hā-'ā-dhām gə-vū-rō-thāy-w ūkh-vōdh ha-dhar mal-khū-thō`
+'לִבְנֵי הָאָדָם' (to the sons of humanity) - universal audience again, but now the content is God's mighty acts and royal majesty. The purpose is proclamation to all humanity, not just Israel. This missionary dimension is striking.
+  Lexical: לִבְנֵי הָאָדָם, הֲדַר מַלְכוּתוֹ
+  Figurative: humanity as audience for divine kingship
 
 **Verse 13**
-**Phonetic**: `malkhwuthkhā malkhwuth kul-ʿōlāmiym wumemshaltkhā bəkhl-duwōr wādhōr`
-Ugaritic parallel formula! 'מַלְכוּת כׇּל־עֹלָמִים' - kingdom of all ages. LXX adds extra line not in Hebrew MT. This is the theological climax - eternal universal kingship.
-  Lexical: עֹלָמִים, מֶמְשַׁלְתְּךָ
-  Figurative: eternal duration imagery
+**Phonetic**: `mal-khūth-khā mal-khūth kul-ʿō-lā-miy-m ū-mem-shal-tkhā bəkh-ldu-ōr wā-dhōr`
+The Ugaritic parallel noted in context - this is formulaic ANE royal language. But LXX adds verse 13a not in Hebrew MT: 'Faithful is the LORD in his words, holy in all his works.' This suggests textual fluidity and interpretive expansion.
+  Lexical: כׇּל־עֹלָמִים, כׇּל־דּוֹר וָדֹר
+  Figurative: eternal kingship
 
 **Verse 14**
-**Phonetic**: `swōmēkhə yəhōwāh ləkhl-hanōfəliym wəzwōqēf ləkhl-hakfwufiym`
-Concrete care begins - supports 'falling' and 'bent' ones. Physical verbs: 'סוֹמֵךְ' (supports) and 'זוֹקֵף' (straightens). God as physical helper. May correspond to missing nun verse in acrostic.
-  Lexical: סוֹמֵךְ, זוֹקֵף, הַנֹּפְלִים, הַכְּפוּפִים
-  Figurative: falling/bending as vulnerability metaphor
+**Phonetic**: `sō-mē-khə yə-hō-wāh ləkh-lhan-nō-fə-liy-m wə-zō-qēf ləkh-lhak-fū-fiy-m`
+Shift from cosmic kingship to intimate pastoral care - 'supports the fallen, raises the bent.' The physical imagery is striking - God as helper of those with literal bodily struggles. This grounds cosmic theology in practical care.
+  Lexical: סוֹמֵךְ, נֹפְלִים, זוֹקֵף, כְּפוּפִים
+  Figurative: physical falling/bending as metaphor for human condition
 
 **Verse 15**
-**Phonetic**: `ʿēynēy-khōl 'ēleykhā yəsabērwu wə'atāh nwōthēn-lāhem 'eth-'khəlām bəʿituwō`
-'עֵינֵי־כֹל' - eyes of all - visual expectation imagery. 'יְשַׂבֵּרוּ' - hope/wait - temporal tension. 'בְּעִתּוֹ' - in its time - divine timing sovereignty. Creation as dependent looking up.
-  Lexical: יְשַׂבֵּרוּ, בְּעִתּוֹ
-  Figurative: eyes looking up metaphor, timing imagery
+**Phonetic**: `ʿēy-nēy-khōl 'ē-ley-khā yə-sa-bē-rū wə-'a-tāh nō-thēn-lā-hem 'eth-'khə-lām bə-ʿi-tu-ō`
+'עֵינֵי־כֹל' (eyes of all) - one of most beautiful images in psalms. All creation looking expectantly to God for food 'בְּעִתּוֹ' (in its proper time) - suggests natural order and divine timing rather than arbitrary provision.
+  Lexical: עֵינֵי־כֹל, יְשַׂבֵּרוּ, בְּעִתּוֹ
+  Figurative: eyes as symbol of dependence and expectation
 
 **Verse 16**
-**Phonetic**: `puwōthēkha 'eth-yādhekhā wumasbiyʿa ləkhl-khay rātswōn`
-'פּוֹתֵחַ אֶת־יָדֶךָ' - opening Your hand - simple gesture, universal provision. 'מַשְׂבִּיעַ לְכׇל־חַי רָצוֹן' - satisfying every living thing's desire. Radical provision claim.
+**Phonetic**: `pu-ō-thē-kha 'eth-yā-dhe-khā ū-mas-biy-ʿa ləkh-lkhay rā-tsōn`
+'פּוֹתֵחַ אֶת־יָדֶךָ' - opening the hand, generous gesture. 'רָצוֹן' (desire/satisfaction) - God provides not just sustenance but satisfaction, pleasure. This is abundance theology, not mere survival.
   Lexical: פּוֹתֵחַ, מַשְׂבִּיעַ, רָצוֹן
-  Figurative: open hand as generosity
+  Figurative: open hand as generosity symbol
 
 **Verse 17**
-**Phonetic**: `tsadiyq yəhōwāh bəkhl-dərākhāyw wəkhāsiydh bəkhl-maʿasāyw`
-'צַדִּיק' and 'חָסִיד' - righteous and faithful - moral attributes applied to divine ways and works. Universal scope continues with 'בְּכׇל' repetition.
-  Lexical: צַדִּיק, חָסִיד
-  Figurative: ways and works as moral categories
+**Phonetic**: `tsa-diy-q yə-hō-wāh bəkh-ldə-rā-khāy-w wə-khā-siy-dh bəkh-lma-ʿa-sāy-w`
+Return to universal scope with double 'בְּכׇל' (in all). 'צַדִּיק' and 'חָסִיד' - righteous and faithful - applied to God's ways and works. Divine character pervades divine action completely.
+  Lexical: צַדִּיק, חָסִיד, דְּרָכָיו
+  Figurative: ways and works as character expressions
 
 **Verse 18**
-**Phonetic**: `qārwōv yəhōwāh ləkhl-qōrə'āyw ləkhōl 'asher yiqrā'uhwu ve'emeth`
-'קָרוֹב' - near/close - spatial intimacy. Double 'call' with condition 'בֶאֱמֶת' - in truth/faithfulness. Divine accessibility with ethical requirement.
-  Lexical: קָרוֹב, בֶאֱמֶת
-  Figurative: nearness as relationship metaphor
+**Phonetic**: `qā-rōv yə-hō-wāh ləkh-lqō-rə-'āy-w lə-khōl 'a-sher yiq-rā-'u-hū ve-'e-meth`
+'קָרוֹב' (near) - divine proximity to those who call. But conditioned: 'בֶאֱמֶת' (in truth/sincerity). This introduces moral qualification - not all calling receives response, only sincere calling.
+  Lexical: קָרוֹב, קֹרְאָיו, בֶאֱמֶת
+  Figurative: spatial nearness for relational availability
 
 **Verse 19**
-**Phonetic**: `rətswōn-yərē'āyw yaʿaseh wə'eth-shawʿāthām yishmaʿ wəywōshiyʿēm`
-'רְצוֹן־יְרֵאָיו' - desire of those who fear Him. Three-step process: fulfill, hear, deliver. 'יְרֵאָיו' - those who fear - specific group within universal scope.
-  Lexical: רְצוֹן, יְרֵאָיו
-  Figurative: hearing as divine attention
+**Phonetic**: `rə-tsōn-yə-rē-'āy-w ya-ʿa-seh wə-'eth-shaw-ʿā-thām yish-maʿ wə-yō-shiy-ʿēm`
+'רְצוֹן־יְרֵאָיו' - desires of those who fear him. God fulfills the wishes of the God-fearing specifically. This is more particular than universal care - covenant relationship brings special privileges.
+  Lexical: רְצוֹן־יְרֵאָיו, שַׁוְעָתָם
+  Figurative: fear as proper relationship to divine
 
 **Verse 20**
-**Phonetic**: `shwōmēr yəhōwāh 'eth-kul-'ōhavāyw wə'ēth kul-hārəshāʿiym yashmiydh`
-Sharp contrast: guards 'אֹהֲבָיו' (those who love Him) but destroys 'הָרְשָׁעִים' (the wicked). Only explicit judgment language in psalm. Breaks universal harmony.
-  Lexical: שׁוֹמֵר, אֹהֲבָיו, יַשְׁמִיד
-  Figurative: watching over vs destroying
+**Phonetic**: `shō-mēr yə-hō-wāh 'eth-kul-'ō-ha-vāy-w wə-'ēth kul-hā-rə-shā-ʿiy-m yash-miy-dh`
+Sharp contrast: God 'watches over' (שׁוֹמֵר) those who love him but 'destroys' (יַשְׁמִיד) the wicked. This theodicy element seems to contradict universal mercy themes earlier. The moral universe has consequences.
+  Lexical: שׁוֹמֵר, אֹהֲבָיו, יַשְׁמִיד, רְשָׁעִים
+  Figurative: watching as protective care
 
 **Verse 21**
-**Phonetic**: `təhilath yəhōwāh yədhaber-piy wiyvārēkhə kul-bāsār shēm qdhəshwō ləʿwōlām wāʿedh f`
-Returns to first person 'פִּי' (my mouth) but expands to 'כׇּל־בָּשָׂר' (all flesh). 'שֵׁם קׇדְשׁוֹ' - His holy name. Completes inclusio with 'forever and ever'. Individual catalyzes universal.
-  Lexical: כׇּל־בָּשָׂר, קׇדְשׁוֹ
-  Figurative: mouth as praise organ, flesh as universal life
+**Phonetic**: `tə-hil-lath yə-hō-wāh yə-dha-ber-piy wiy-vā-rē-khə kul-bā-sār shēm qdhə-shō lə-ʿō-lām wā-ʿedh f`
+Returns to personal commitment 'יְדַבֶּר־פִּי' (my mouth will speak) but expands to universal call 'כׇּל־בָּשָׂר' (all flesh). Perfect inclusio with v1-2 but transformed - what began as personal vow becomes cosmic summons.
+  Lexical: תְּהִלַּת, כׇּל־בָּשָׂר, קׇדְשׁוֹ
+  Figurative: flesh as universal humanity
 
 **Thematic Threads Across Verses:**
-  - Acrostic structure with apparent missing nun verse (v14 may compensate)
-  - Progressive expansion: I → generation → all works → all flesh
-  - Intensive use of כל (all/every) - appears 16+ times creating universality drumbeat
-  - Movement from transcendence (vv1-3) through attributes (vv8-9) to concrete care (vv14-20)
-  - Tension between universal mercy (v9) and selective judgment (v20)
-  - Triple divine epithets and glory language suggesting liturgical formulation
-  - Ugaritic royal formula (v13) - Ancient Near Eastern theological borrowing
-  - LXX adds extra line at v13 - early interpretive plus
+  - Obsessive temporal language - לְעוֹלָם וָעֶד appears 4 times, suggesting temporal anxiety rather than standard eternity formulas
+  - Universal vocabulary intensifies - כׇל appears 16 times, creating drumbeat of inclusivity that may exceed typical praise psalms
+  - Grammatical person shifts - moves between first person (personal), third person (objective), and second person (address) in sophisticated pattern
+  - Creation and covenant tension - universal themes (all creation, all flesh) alongside particular themes (faithful ones, those who fear)
+  - Moral universe intrudes - teodicy elements (destroying wicked) complicate pure praise structure
+  - Physical imagery prominent - falling, bending, eyes, hands, mouth - grounds cosmic themes in bodily experience
 
 
 **Interesting Questions** (from Micro Analyst):
-  1. Why does the psalm use the unique superscription 'תְּהִלָּה' instead of the common 'מִזְמוֹר'?
-  2. What accounts for the apparent missing nun verse in the acrostic structure - scribal error or theological intention?
-  3. How does the triple accumulation 'הֲדַר כְּבוֹד הוֹדֶךָ' function - semantic distinction or poetic intensification?
-  4. Why does the LXX add an extra line about God's faithfulness after v13?
-  5. How do we reconcile universal divine mercy (v9) with the destruction of the wicked (v20)?
-  6. What distinguishes 'works' (מַעֲשֶׂיךָ) from 'mighty acts' (גְּבוּרֹתֶיךָ) from 'wondrous acts' (נִפְלְאֹתֶיךָ)?
-  7. Does 'all flesh' (כׇּל־בָּשָׂר) in v21 include all living creatures or only humans?
-  8. Why combine liquid metaphor (יַבִּיעוּ - gush forth) with musical imagery (יְרַנֵּנוּ - sing) in v7?
-  9. What does 'calling in truth' (בֶאֱמֶת) mean as a condition for divine nearness?
+  1. Why is this the only psalm titled 'תְּהִלָּה' when this word gives the whole psalter its name?
+  2. What is the theological significance of selectively quoting the Exodus 34:6 formula while omitting 'truth and faithfulness'?
+  3. How does the LXX addition in v13a ('Faithful is the LORD in his words...') illuminate early interpretive traditions?
+  4. Is the triple construct chain 'הֲדַר כְּבוֹד הוֹדֶךָ' standard Hebrew syntax or innovative poetic accumulation?
+  5. How do we reconcile 'good to all' (v9) with 'destroys all the wicked' (v20) - is this theological tension intentional?
+  6. Why does the psalm use 'כׇּל־בָּשָׂר' (all flesh) in the conclusion rather than 'all people' or 'all creation'?
+  7. What is the difference between יוֹדוּךָ (praise from all works) and יְבָרְכוּכָה (bless from faithful ones) in v10?
+  8. Does the 'עֵינֵי־כֹל' (eyes of all) image include non-animate creation having metaphorical 'eyes'?
 
 **Synthesis Notes for Research:**
-LEXICON: Focus on תְּהִלָּה superscription, triple glory terms, categories of divine acts
-CONCORDANCE: Track כל usage patterns, Exodus 34:6 formula appearances, royal terminology
-TEXTUAL: Investigate LXX plus at v13, Qere/Ketiv variants, acrostic structure issues
-FIGURATIVE: Analyze open hand imagery, gushing/singing metaphors, eyes looking up
-COMMENTARY: Address universal mercy vs. selective judgment tension, 'all flesh' scope
+LEXICON: Focus on tehillah vs other praise terms, universal vocabulary (kol, kol-basar), divine attribute formulas
+CONCORDANCE: Track 'eyes of all' formula, temporal language patterns, acrostic completeness markers
+TEXTUAL: LXX additions/variations, especially v13a and interpretive expansions
+THEOLOGICAL: Creation vs covenant tension, theodicy in praise contexts, universalism in psalmic literature
 
 ### RESEARCH MATERIALS
 # Research Bundle for Psalm 145
@@ -267,14 +264,6 @@ vb. denom. be wormy;— Impf. 3 ms. (c. acc. result, Ges§ 121 d N) וַיָּ֫
 
 ---
 
-### חֵקֶר
-**Lexicon**: BDB Dictionary
-**Vocalized**: חֵ֫קֶר  
-
-n.m. Ju 5:16 searching, thing (to be) searched out;—abs. הֵ֫קֶר Jb 5:9 + 8 times; cstr. id. Pr 25:27 + 2 times; pl. cstr. חִקְרֵי Ju 5:16;—חִקְרֵי לֵב Ju 5:16 searchings, questionings of heart; Jb 11:7 canst thou reach ח׳ אֱלוֹהַּ i.e. what is to be explored in him, the whole range of his nature, so ח׳ תהום 38:16 the range of the deep; especially אֵין ח׳ i.e. it is unsearchable Jb 5:9; 9:10 ψ 145:3 Pr 25:3 Is 40:28, cf. לא ח׳ Jb 34:24; 36:26; ח׳ אבותם 8:8 i.e. thing searched out by their fathers.
-
----
-
 ### מְהֻלָּל
 **Lexicon**: Klein Dictionary
 **Vocalized**: מְהֻלָּל  
@@ -301,11 +290,93 @@ vb. be boastful, Pi. praise (Arabic هَلَّ shout, both in joy & (if conject.
 
 ---
 
-### נִפְלְאֹתֶיךָ
+### חֵקֶר
 **Lexicon**: BDB Dictionary
-**Vocalized**: פָּלָא  
+**Vocalized**: חֵ֫קֶר  
 
-vb. denom. Niph. etc., be surpassing, extraordinary (cf. Gerber 212);— Pf. 3 fs. נִפְלָאת ψ 118:23 (Ges§ 44 f); נִפְלְאַ֫תָה 2 S 1:26 (Köi. 610 f., 614 Ges§ 7500); 3 pl. נִפְלְאוּ Pr 30:18; Impf. יִפָּלֵא Dt 17:8 + 6 times; Pt. mpl. נִפְלָאִים ψ 139:14; fs. נִפְלֵאת Dt 30:11; pl. נִפְלָאוֹת Jos 3:5 +; sf. נִפְלְאֹתַי Ex 3:20, etc.;— be beyond one’s power, difficult to do, לעשׂות 2 S 13:2; בְּעֵינֵי פ׳ Zc 8:6(×2); c. מן pers. too difficult for Dt 30:11, for י׳ Gn 18:14 (J) Je 32:17, 27. be difficult to understand; c. מן pers. too difficult for ψ 131:1; Pr 30:18; Jb 42:3, to decide Dt 17:8. Especially be extraordinary, wonderful, 2 S 1:26 ψ 119:18; of God’s acts, נ׳ בְּעֵינֵינוּ 118:23, cf. 139:14. Pt. as subst. marvellous things Jb 37:14 (acts of God), Dn 11:36 (presumptuous words); as adv. wondrously Jb 37:5; Dn 8:24. נִפְלָאוֹת = wonderful acts of י׳ in judgment and redemption, Ex 3:20 (J) Ju 6:13; Je 21:2 1 Ch 16:9, 24 ψ 9:2; 26:7 + 15 times ψψ; also עשׂה נ׳ Ex 34:10; Jos 3:5 (J) Jb 5:9 = 9:10, + 9 times Chr ψψ; הראה נ׳ Mi 7:15 ψ 78:11. Inf. cstr. לְפַלֵּא נֶדֶר make a special votive offering, Lv 22:21 Nu 15:3, 8 (P). Pf. 3 ms. הִפְלִיא ψ 31:22; 2 Ch 26:15; הִפְלִא Is 28:29; וְהִפְלָא consec. Dt 28:59 (Ges§ 7500); Impf. יַפְלִא Lv 27:2; Nu 6:2; Inf. abs. הַפְלֵא Is 29:14; 2 Ch 2:8; cstr. הַפְלִיא Is 29:14; Jo 2:26; Pt. מַפְלִא Ju 13:19;— do a hard or difficult thing: הפ׳ (לִנְדֹּר) נֶדֶר make a hard vow Lv 27:2; Nu 6:2 (cf. Pi.). make wonderful, do wondrously: of God, הפ׳ מַכּוֹת make plagues wonderful (exceptional), Dt 28:59; הפ׳ עֵצָה Is 28:29 make counsel wondrous, 29:14 do wonderfully with people, + הַפְלֵא וָפֶלֶא; עשׂה עמכם לה׳ Jo 2:26 dealt with you doing wondrously; הפ׳ חַסְדּוֹ לִי ψ 31:22; הפ׳ לְהֵעָזֵר 2 Ch 26:15 did marvellously in receiving help; of the temple גָּדוֹל וְהַפְלֵא 2 Ch 2:8 (KöSynt. § 318 e). of God, מַפְלִא לעשׂות Ju 13:19 working wonders in doing. Impf. תִּתְפַּלָּא בִי Jb 10:16 thou dost shew thyself marvellous (act inexplicably) against me.
+n.m. Ju 5:16 searching, thing (to be) searched out;—abs. הֵ֫קֶר Jb 5:9 + 8 times; cstr. id. Pr 25:27 + 2 times; pl. cstr. חִקְרֵי Ju 5:16;—חִקְרֵי לֵב Ju 5:16 searchings, questionings of heart; Jb 11:7 canst thou reach ח׳ אֱלוֹהַּ i.e. what is to be explored in him, the whole range of his nature, so ח׳ תהום 38:16 the range of the deep; especially אֵין ח׳ i.e. it is unsearchable Jb 5:9; 9:10 ψ 145:3 Pr 25:3 Is 40:28, cf. לא ח׳ Jb 34:24; 36:26; ח׳ אבותם 8:8 i.e. thing searched out by their fathers.
+
+---
+
+### דּוֹר
+**Lexicon**: Klein Dictionary
+**Vocalized**: דּוֹר  
+
+generation. period, age.
+
+**Etymology**: [From דור.]  
+
+---
+
+### דּוֹר
+**Lexicon**: BDB Dictionary
+**Vocalized**: דֹּאר  
+
+n.pr. v. sub II. דור.
+
+---
+
+### דּוֹר
+**Lexicon**: BDB Dictionary
+**Vocalized**: דּוֹר  
+
+n.m. Dt 32:5 period, generation, dwelling (cf. sub vb. supr.; also NH דּוֹר, Aramaic (incl. Biblical Aramaic) דָּר, ܕܳܪ, age, generation; Arabic دَوْرٌ gyrus, orbis, periodus; Sab. דר, one time, once, דרם דרם each once in a year DHM in MV)—abs. דּוֹר Gn 7:1 + 68 times; דֹּר Ex 3:15; + 36 textual; cstr. דּוֹר Dt 32:20 + 7 times, דֹּר Ex 3:15; sf. דּוֹרִי Is 38:12, דּוֹרוֹ Is 53:8; pl. דּוֹרִים ψ 72:5 + 2 times, דֹּרוֹת abs. Jb 42:16 Is 41:4; cstr. Ju 3:2; דּוֹרוֹת cstr. Is 51:9, דֹּרֹת Gn 9:12; sf. דֹּרֹתָיו Gn 6:9 Lv 25:30, דּוֹרוֹתֵינוּ Jos 22:27, דֹּרֹתֵינוּ v 28, דּרֹתֵיכֶם Gn 17:12 + 27 times, דֹּרֹתָם Gn 17:7 + 10 times;— period, age, generation, mostly poet.: of duration in the past, former age(s) דּוֹרוֹת עוֹלָמִים Is 51:9 (‖ ימי קדם); שְׁנוֹת דֹּר וָדֹר Dt 32:7 (song; ‖ ימות עולם); בְּדֹר וָדֹר ψ 90:1 (cf. v 2); מוֹסְדֵי דּוֹר־וָדוֹר Is 58:12 (‖ חרבות עולם); שֹׁמֲמוֹת דּוֹר וָדוֹר 61:4 (‖ id.) usually of duration to come, future age(s), לְדֹר דֹּר Ex 3:15 (E; ‖ לעולם) cf. Pr 27:24 Kt (Qr לְדוֹר וָדוֹר; ‖ id.); מִדֹּר דֹּר Ex 17:16 (E), = מִדּוֹר לָדוֹר Is 34:10; לְדֹר וָדֹר ψ 10:6; 33:11 (‖ לעולם) 49:12; 79:13; 85:6; 102:13; 119:90; 135:13; 146:10 Jo 4:20 (all ‖ id.); ψ 89:2 (‖ עולם) 89:5 (‖ עד־עולם) 106:31 (‖ id.) Is 34:17 (‖ id.); ψ 77:9 (‖ לנצח); עַד־דֹּר וָדֹר ψ 100:5 (‖ לעולם) Is 13:20 (‖ לנצח) Je 50:39 (‖ id.); בְּכָל־דֹּר וָדֹר ψ 45:18 (‖ לעולם ועד) cf. Est 9:28; שְׁנוֹתָיו כְּמוֹ דֹר וָדֹר ψ 61:7 cf. שְׁנֵי דּוֹר וָדוֹר Jo 2:2 (‖ העולם); as modifying phrase מְשׂוֹשׂ דּוֹר וָדוֹר Is 60:15 (‖ גאון עולם); further דּוֹר דּוֹרִים ψ 72:5; 102:25; יְשׁוּעָתִי לְדוֹר דּוֹרִים Is 51:8 (‖ לעולם). apparently including both past and future בְּדוֹר דּוֹרִים שְׁנוֹתֶיךָ ψ 102:25; בְּכָל דּוֹר וָדֹר ψ 145:13; לְדוֹר וָדוֹר La 5:19. of men living at a particular time (period, age), generation, as transitory דּוֹר הֹלֵךְ וְדוֹר בָּא Ec 1:4: specific. in the present, and (or) the past Gn 7:1 (J) Ex 1:6 (P) Nu 32:13 (JE) Dt 1:35; 2:14 Ju 2:10(×2) Is 53:8 (cf. Che crit. n.) Je 2:31; also ψ 95:10 Jb 8:8 Is 41:4. Ju 3:2 (present & future); cf. pl. דֹּרֹתָיו Gn 6:9 (i.e. his own gen. and those immediately contiguous, before and after). especially of a future generation Gn 15:16 (JE), with numeral, cf. Dt 23:3, 4, 9; also Dt 29:21 ψ 48:14; 71:18; 78:4, 6; 102:19; 109:13 Jo 1:3 cf. ψ 22:31, 32 (Che crit. n.); of a succession of generations דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ ψ 145:4; בְּכָל־דּוֹר וָדוֹר Est 9:28; usually pl. לְדֹרֹת עוֹלָם Gn 9:12 (P); with num. לְאֶלֶף דּוֹר ψ 105:8 (‖ עולם) = 1 Ch 16:15 (‖ לעולם); Dt 7:9; v. further, of posterity, אַרְבָּעָה דֹּרוֹת Jb 42:16; usually pl. c. sf. Gn 17:7, 9, 12 Ex 12:14, 17, 42; 16:32, 33; 27:21; 29:42; 30:8, 10, 21, 31; 31:13, 16; 40:15 Lv 3:17; 6:11; 7:36; 10:9 (all P); 17:7; 21:17; 22:3; 23:14, 21, 31, 41, 43; 24:3; 25:30 (all H); Nu 9:10; 10:8; 15:14, 15, 21, 23, 38; 18:23; 35:29 Jos 22:27, 28 (all P). generation characterized by quality or condition, class of men: דּוֹר עִקֵּשׁ crooked generation Dt 32:5 (song) cf. v 20 ψ 78:8(×2) Je 7:29; of diff. classes of wicked, Pr 30:11, 12, 13, 14 cf. ψ 12:8; of the righteous, as a class ψ 14:5; 24:6; 73:15 (דּוֹר בָּנֶיךָ) 112:2 (cf. 22:31 MT, but לדור to v 32 cf. supr. sub 2 c); so also דּוֹר אֲבוֹתָיו i.e. the dead ψ 49:20 (so most; yet v. infr. sub 4). dwelling-place, habitation Is 38:12 cf. דּוּר vb., so Saad Ki Ges De Che RVm (Ew life ‖ חַיַּי); so also ψ 49:20 De Witt, cf. CheOP 479.
+
+---
+
+### דּוֹר
+**Lexicon**: BDB Dictionary
+**Vocalized**: דֹּאר²  
+
+n.pr.loc. (Ph. דאר; cuneif. Du’ru KG121 COT on Jos 17:11) city in Manasseh, on Mediterr., S. of Carmel (9 Roman miles N. of Caesarea, cf. LagOnom. 115, 2nd ed. 149), דּוֹר Jos 12:23; דּוֹר וּבְנוֹתֶיהָ Ju 1:27 1 Ch 7:29 = דֹּאר וּב׳ Jos 17:11; נָפַת דּוֹר Jos 12:23 = נָפַת דֹּאר 1 K 4:11; נָפוֹת דּוֹר Jos 11:2 (cf. נפה); mod. Ṭanṭura WilsonLands of Bible ii. 249 vandeVelde Narrat. i. 333 BdPal 233 cf. Di Jos 11:2. On עֵין־דֹּר(דּוֹר) v. sub עַיִן.
+
+---
+
+### הֲדַר
+**Lexicon**: Klein Dictionary
+**Vocalized**: הדר ᴵᴵ  
+
+to return; to repeat. he returned.
+
+**Etymology**: [JAram., related to חזר (= to return), and to חדר ᴵ (= to surround).]  
+
+**Derivatives**: Derivatives: הדר ᴵᴵᴵ, הָדִיר, הֲדִירוּת, מַהֲדוּרָא, מַהֲדֵר.  
+
+---
+
+### הֲדַר
+**Lexicon**: BDB Dictionary
+**Vocalized**: הָדָר  
+
+n.m. ψ 149:9 ornament, splendour, honour (chiefly poet.)—abs. ה׳ Dt 33:17 + 12 times; cstr. הֲדַר Is 2:10 + 7 times; sf. הֲדָרִי Mi 2:9 (but cf. infr.) Ez 16:14; הֲדָרְךָ ψ 45:5; 90:16; הֲדָרֶ֑ךָ ψ 45:4; הֲדָרֵךְ Ez 27:10; הֲדָרָהּ Is 5:14 La 1:6; pl. cstr. הַדְרֵי ψ 110:3 (but read prob. הררי so Symm Jer edd.; Ol Hup Gr Bi Che);— ornament Pr 20:29 (grey hair, for old men; ‖ תִּפְאֶרֶת), Ez 16:14 (fig. of ornaments of Jerus. as bride of י׳); פְּרִי עֵץ הָדָר Lv 23:40 (H) i.e. fruit of goodly (ornamental, beautiful) trees, so AV RV & most, or goodly tree-fruit, 𝔊 καρπὸν ξύλου ὡραῖον, so Di;—here would come also בהדרי קדשׁ ψ 110:3, ref. to sacred, festal garments, according to Thes al. cf. RVm; but read prob. on the holy mountains, vid. supr. splendour, majesty Dt 33:17 of Ephraim under figure of a noble bull (cf. Di); of Jerusalem Is 5:14 cf. La 1:6; of Carmel Is 35:2 (‖ כָּבוֹד); of majesty & dignity conferred by י׳ on man ψ 8:6 (‖ כָּבוֹד), on king 21:6 (‖ id., הוֹד), cf. 45:4 (‖ הוֹד) & v 5 (but text perhaps erron. Checrit. n.); denied of suffering servant of י׳ Is 53:2 (‖ תֹּאַר); of dignity of good & capable woman (אֵשֶׁת חַיִל) Pr 31:25 (‖ עֹז); of splendour due to warlike equipment Ez 27:10; especially of majesty of י׳ 1 Ch 16:27 = ψ 96:6, cf. Jb 40:10 ψ 111:3 (all ‖ הוֹד); also ψ 104:1 (‖ id., under fig. of garment); further ψ 29:4 (‖ כֹּחַ), 90:16 (‖ פֹּעַל); in combination הֲדַר כְּבוֹד הוֹדְךָ ψ 145:5; כְּבוֹד ה׳ v 12; הֲדַר גְּאֹנוֹ Is 2:10, 19, 21. honour, glory ψ 149:9 for saints of י׳; cf. Mi 2:9 of י׳’s glory as possession of his people, lost by exile & slavery: but perhaps textual error; HoffmZAW 182, 103 proposes הַדְּרוֹר, from their children ye take freedom (yet מֵעַל then hardly suitable).
+
+---
+
+### הֲדַר
+**Lexicon**: BDB Dictionary
+**Vocalized**: הֲדַר  
+
+n.pr.m. a king in Edom (Aramaic form) Gn 36:39 = הֲדַד (q.v.) 1 Ch 1:50 (so here Codd., 𝔖 Sam. no doubt rightly, cf. Di).
+
+---
+
+### עֱזוּז
+**Lexicon**: Klein Dictionary
+**Vocalized**: עֱזוּז  
+
+strength, might, force.
+
+**Etymology**: [From עזז.]  
+
+**Derivatives**: Derivative: עֱזוּזִי.  
+
+---
+
+### זֵכֶר
+**Lexicon**: BDB Dictionary
+**Vocalized**: זֵ֫כֶר  
+
+n.m. ψ 9:7 remembrance, memorial (cf. HptHbr. 1885, 230)—ז׳ abs. ψ 111:4, cstr. Dt 25:19 +; זֶכֶר cstr. Ex 17:14 van d. H; sf. זִכְרִי Ex 3:15, זִכְרְךָ Is 26:8 +, זִכְרֶ֑ךָ ψ 6:6, זִכְרוֹ Ho 12:6 +, זִכְרָם Dt 32:26 +:— remembrance, memory: of persons or people, blotted out by their destruction, Ex 17:14 (E; c. מחה) = Dt 25:19, Dt 32:26 (השׁבית) ψ 34:17; 109:15 (both הכרית), ψ 9:7 (אבד), Jb 18:17 (אבד; ‖ שֵׁם), Is 26:14 (אבּד); cf. on other hand ז׳ עוֹלָם as portion of righteous ψ 112:6. of י׳ ψ 6:6; 102:13 (‖ אַתָּה = יהוה). of י׳’s character and works ψ 30:5; 97:12; 111:4; 145:7. remembrance of certain days, i.e. their observance Est 9:28 (יִמֵי הַפּוּרִים). memorial, by which one is remembered: nearly = שֵׁם, ז׳ צַדִּיק לִבְרָכָה Pr 10:7 (‖ שֵׁם), cf. also Ec 9:5 (c. נשׁכח); especially of י׳ Ex 3:15 (E), Ho 12:6 Is 26:8 ψ 135:13 (all ‖ שֵׁם). = renown (of Israel) Ho 14:8 (cf. VB).
 
 ---
 
@@ -373,46 +444,6 @@ adj.m. kind, pious (so, as denoting active practice of חֶסֶד, kindness, The
 
 ---
 
-### מַלְכוּתְךָ
-**Lexicon**: BDB Dictionary
-**Vocalized**: מַלְכוּת  
-
-n.f. royalty, royal power, reign, kingdom (chiefly late);—מ׳ abs. Est 1:9 +; cstr. 1 Ch 12:23 +; sf. מַלְכוּתִי 1 Ch 17:14, etc.; pl. מַלְכֻיּוֹת Dn 8:22;— royal power, dominion Nu 24:7 (c. תִּנַּשֵּׂא), 1 S 20:31 (c. תִּכּוֹן), 1 K 2:12 (c. id.); cf. Je 10:7 Ec 4:14; 1 Ch 11:10; 12:23; 29:30 (‖ גְּבוּרָה), 2 Ch 33:13 Est 1:19, royal (queenly) dignity 4:14; 1 Ch 14:2 (c. נִשֵּׂאת); c. לָכַד Dn 11:21; c. הֵכִין (subj. י׳) 1 Ch 17:11; 28:7; 2 Ch 12:1 (subj. Rehob.); Isr. royalty as belonging to י׳ 1 Ch 17:14; dominion of י׳ ψ 103:19 (c. מָֽשְׁלָה), ψ 145:13(×2); כְּבוֹד מ׳ v 11; כְּבוֹד הֲדַר מ׳ v 12; שֵׁבֶט מ׳ ψ 45:7; כִּסֵּא מ׳ 1 Ch 22:10; 28:5 2 Ch 7:18; of Pers. Est 1:2; 5:1; בַּיִת לְמ׳ 2 Ch 1:18; 2:11; בֵּית מ׳ Est 1:9; 2:16; 5:1 (cf. Assyrian bit šarruti DlHWB 171); יֵין מ׳ royal wine Est 1:7; דְּבַר מ׳ royal command Est 1:19; הוֹד מ׳ royal honour, majesty 1 Ch 29:25 Dn 11:21; so perhaps also הֶדֶר מ׳ Dn 11:20 v. Bev; עשֶׁר כְּבוֹד מ׳ Est 1:4; כֶּתֶר מ׳ royal crown Est 1:11; 2:17; 6:8; לְבוּשׁ מ׳ royal apparel Est 6:8; 8:15; מ׳ (לְבוּשׁ om.) Est 5:1 (queenly attire). reign: 40th year of reign of David 1 Ch 26:31 cf. 2 Ch 3:2; 15:10, 19; 16:1, 12; 35:19 Je 49:34 Dn 1:1; also 2 Ch 29:19; of Babyl. and Pers. kings Je 52:31 (בִּשְׁנַת מ׳ ‖ 2 K 25:27 מָלְכוֹ) Dn 2:1; 8:1 Ezr 4:5, 6(×2) 7:1; 8:1 Ne 12:22 Est 2:16; cf. עַד־מְלֹךְ מַלְכוּת פָּרָס 2 Ch 36:20. kingdom, realm 2 Ch 1:1; 11:17; 20:30 Ne 9:35; especially realm of Babyl. and Pers. 2 Ch 36:22 = Ezr 1:1, Est 1:14, 20; 2:3; 3:6, 8; 5:3, 6; 7:2; 9:30 Dn 1:20; 8:22, 23; 9:1; 10:13; cf. 11:2, 4(×2), 9, 17; v 20 הֶדֶר מ׳ = Jerus. according to Hi, but v. 1 supr.
-
----
-
-### עֹלָמִים
-**Lexicon**: BDB Dictionary
-**Vocalized**: עוֹלָם  
-
-v. עלם.
-
----
-
-### עֹלָמִים
-**Lexicon**: BDB Dictionary
-**Vocalized**: עוֹלָם²  
-
-n.m. long duration, antiquity, futurity;—ע׳ Gn 9:12 + 405 times; עֹלָם 3:22 + 19 times; עֵילוֹם 2 Ch 33:7, read prob. עוֹלָם (for other explan. v. note in KitHpt); sf. עֹלָמוֹ Ec 12:5; pl. עוֹלָמִים Is 26:4 + 7 times, עֹלָמִים ψ 145:13 + 2 times; cstr. עוֹלְמֵי Is 45:17;— of past time: ancient time: יְמֵי ע׳ days of old Is 63:9, 11 Am 9:11 Mi 5:1; 7:14 Mal 3:4; יְמוֹת ע׳ Dt 32:7; עַם ע׳ Is 44:7 ancient people; גּוֹי מֵע׳ Je 5:15; חָרְבוֹת ע׳ old waste places Is 58:12 61:4, cf. Ez 26:20 b; פִּתְחֵי ע׳ ancient gates ψ 24:7, 9; ארח ע׳ Jb 22:15; נתבות ע׳ Je 6:16; שְׁבִילֵי ע׳ 18:15; גבול ע׳ Pr 22:28; 23:10; במות ע׳ Ez 36:2; מִן (םֵ)ע׳ from of old Is 64:3 Je 2:20 Jo 2:2, of the fathers Jos 24:2, the prophets Je 28:8, the ancient נפלים Gn 6:4; (Ez 32:27 𝔊 Co for מערלים; but 1 S 27:8 read מִטֵּלָם for מעולם We Dr HPS); בהם ע׳ long in them Is 64:4 (text dub.). מֵתֵי ע׳ the long dead ψ 143:3 La 3:6; so עַם ע׳ Ez 26:20. of God, מֵע׳: former acts Is 46:9; as redeemer Is 63:16; of love ψ 25:6, judgment 119:52, dominion Is 63:19; long silence 42:14; 57:11*; his wisdom personif. Pr 8:23; his existence ψ 93:2. of things: גבעות ע׳ ancient hills Gn 49:26 (J), Hb 3:6 (‖ הררי־עד), Dt 33:15 (‖ הררי קדם). pl. שְׁנוֹת עולמים ψ 77:6 years of ancient times; דורות עולמים Is 51:9; לעלמים Ec 1:10 in olden times. indef. futurity, c. prep. for ever, always (sometimes = during the lifetime); עֶבֶד עולם slave for ever Dt 15:17; 1 S 27:12; Jb 40:28; עָבַד לע׳ serve for ever Ex 21:6 (E), Lv 25:46; עד ע׳ 1 S 1:22; גְּאֻלַּת ע׳ Lv 25:32 redemption at any time; הֲרַת ע׳ Je 20:17 ever pregnant (womb); כְּלִמַּת ע׳ v 11 of persecutors of Jeremiah; חרפת ע׳ 23:40; שַׁלְוֵי ע׳ ψ 73:12 alway at ease; יְחִי לע׳ (יחיה) may the king live always 1 K 1:31; Ne 2:3; cf. אֹרֶךְ יָמִים עולם ועד ψ 21:5; ישׁב עולם לפני אלהים 61:8; so of the pious, לע׳ לא ימוט 15:5; בל ימוט Pr 10:30, cf. ψ 30:7; other phr.: ψ 37:27, 28 41:13; 55:23; 61:8; 73:26; 121:8 Pr 10:25; ע׳ אשׁירה ψ 89:2 I will sing for ever (as long as I live), cf. 52:10; 115:18; 145:1, 2; הוֹדה לע׳ 30:13; 44:9; 52:11; 79:13; other emotions and activities continuous through life 5:12; 31:2 = 71:1, 75:10; 86:12; 119:44, 93, 98, 111, 112 Mi 4:5, cf. לע׳ 2:9. = continuous existence, (1) of things: the earth, הָאָרֶץ לְעוֹלָם עֹמֶדֶת Ec 1:4; other phr.: ψ 78:69; 104:5, heavens and contents 148:6, ruined cities Is 25:2; 32:14 Ez 26:21; 27:36; 28:19, ruined lands Je 18:16; 25:9, 12; 49:13, 33; 51:26, 62 Ez 35:9 Zp 2:9; לעד עד ע׳ Is 30:8 for a witness for ever, in a book; (2) of nations: לעולם אהיה 47:7 (Babylon loqu.), cf. ψ 81:16 Ob 10; ישׁב לע׳ of Judah Jo 4:20; (3) families ψ 49:12 Is 14:20; the dynasty of Saul 1 S 13:13; house of Eli 2:30; (4) national relations: איבת ע׳ continual enmity Ez 25:15; 35:5; of exclusion from קהל י׳, עד ע׳ Dt 23:4 = Ne 13:1; various relations Is 32:17; 34:10; חרפת ע׳ perpetual reproach ψ 78:66, of dynasty of David 2 S 3:28; 12:10 1 K 2:33, families v 33 2 K 5:27 ψ 106:31 Je 35:6. of divine existence: אל עולם Gn 21:33 (J); אלהי ע׳ Is 40:28; חי אנכי לע׳ Dt 32:40; חֵי הע׳ Dn 12:7; of divine name, זה שׁמי לְע׳ Ex 3:15 (E), cf. 2 Ch 33:7 (v. supr.); blessing and praise of it 2 S 7:26 = 1 Ch 17:24, ψ 72:19; 135:13; of י׳ himself 89:53; attributes, אהבה Je 31:3 1 K 10:9; חסד Is 54:8 ψ 89:2; 138:8; לע׳ חַסְדּוֹ 1 Ch 16:34, 41 2 Ch 5:13; 7:3, 6; 20:21 Ezr 3:11 ψ 100:5; 106:1; 107:1; 118:1, 2, 3, 4, 29; 136:1 + 25 times, Je 33:11; כבוד ψ 104:31; אמת 117:2; 146:6; צדק 119:142; עצה 33:11; reign Ex 15:18 (E), ψ 10:16; 66:7; 92:9; 146:10 Je 10:10 Mi 4:7; יהוה לע׳ ישׁב ψ 9:8; 29:10; 102:13 La 5:19; presence in Zion 1 Ch 23:25; Is 33:14; 60:19, 20 Ez 37:28; 43:7, 9; his salvation Is 51:6, 8; זרעת ע׳ Dt 33:27 everlasting arms; כל אשׁר יעשׂה האלהים יהיה לע׳ Ec 3:14. of God’s covenant: בְּרִית ע׳ everlasting covenant Gn 9:16; 17:7, 13, 19 Ex 31:16 Lv 24:8 Nu 18:19 (all P), 2 S 23:5; 1 Ch 16:17 = ψ 105:10, Is 24:5; 55:3; 61:8 Je 32:40; 50:5; Ez 16:60; 37:26; covenant with Noah, לְדֹרֹת ע׳ Gn 9:12 (P); God remembers it 1 Ch 16:15 = ψ 105:8, ψ 111:5; will not break it, לע׳ Ju 2:1; אוֹת ע׳ Ex 31:17 (P); אוֹת עד ע׳ Dt 28:46. of God’s laws: דבר(ים) Is 59:21 ψ 119:89; משׁפט 119:160; עדות v 144, 152; חק ע׳ Ex 29:28; 30:21 (E), Lv 6:11, 15; 7:34; 10:15; 24:9 Nu 18:8, 11, 19 (P), also Je 5:22 (of bounds of sea); חק עד ע׳ Ex 12:24 (J), חֻקַּת ע׳ v 14, 17; 27:21; 28:43; 29:9 Lv 3:17; 7:36; 10:9; 16:29, 31, 34; 17:7; 23:14, 21, 31, 41; 24:3, 8; Nu 10:8; 15:15; 18:23; 19:10, 21 (P) (most of these in fact specif. Jewish and temporary); temple to bear God’s name, עד ע׳ 1 K 9:3 = 2 Ch 7:16; לע׳ 2 K 21:7 2 Ch 33:4; consecrated לע׳ 30:8; its ceremonies לע׳ 2:3; Levit. priesthood, לשׁרתו עד ע׳ 1 Ch 15:2; Aaronic priesthood, לברך בשׁמי עד ע׳ 23:13(×2). of God’s promises: his word, יקום לע׳ Is 40:8; promised dynasty of David, עד (ה)ע׳ 2 S 7:13, 16(×2), 25 = 1 Ch 17:12, 14(×2), 23 ψ 18:51 = 2 S 22:51; 1 K 2:33, 45 1 Ch 22:10 ψ 89:5; לע׳ 1 K 9:5; 1 Ch 28:4, 7; 2 Ch 13:5 ψ 89:29, 37 2 S 7:29(×2) = 1 Ch 17:27(×2); of holy land 1 Ch 28:8, אֲחֻזַּת ע׳ Gn 17:8; 48:4 Lv 25:34 (P); given לע׳ Ex 32:13 (J) 2 Ch 20:7; עד ע׳ Gn 13:15, inherited לע׳ Is 60:21 ψ 37:18; עד ע׳ Is 34:17; dwelt in עד ע׳ Ez 37:25; other blessings, לע׳ Dt 5:29 Ho 2:21; עד ע׳ Dt 12:28; 2 S 7:24 = 1 Ch 17:22, ψ 133:3; שִׂמְחַת ע׳ Is 35:10; 51:11; 61:7; דֶּרֶךְ ע׳ ψ 139:24; שׁם ע׳ Is 56:5; 63:12; אות ע׳ 55:13; גאון ע׳ 60:15; Jerus. to abide לע׳ Je 17:25 ψ 125:1, cf. Je 31:40; עד ע׳ ψ 48:9. of relations between God and his people, לע׳ 1 Ch 29:18 ψ 45:18; 85:6; 103:9; 145:21; Is 57:16; Je 3:5, 12; La 3:31; Jo 2:26, 27; עד (ה)ע׳ ψ 28:9 Mal 1:4. of Messianic dynasty and king: (ל)ע׳ ψ 110:4; having divine throne 45:7; name endures 72:17; established 89:38; God blesses him 45:3; of his reign, מעתה ועד ע׳ Is 9:6. = indefinite, unending future: live לע׳ Gn 3:22; Jb 7:16; הנביאים הלע׳ יִחְיוּ Zc 1:5 the prophets, can they live for ever? cf. חדל לע׳ ψ 49:9; c. neg. never Ezr 9:12; Pr 27:24. after death: שׁנת ע׳ Je 51:39, 57; בית ע׳ Ec 12:5; חַיֵּי ע׳ Dn 12:2; דראון ע׳ v 2; also v 3 Jon 2:7; Ec 2:16; 9:6. = age (duration) of the world: את העלם נתן בְּלִבָּם Ec 3:11 the age of the world he hath set, etc. (cf. especially NH; others i). pl. intens. everlastingness, eternity: תשׁועת עולמים Is 45:17; צדק עלמים Dn 9:24; צור עולמים Is 26:4 (RVm rock of ages); מלכוּת כל עלמים ψ 145:13; also 61:5; 77:8; 1 K 8:13 = 2 Ch 6:2. special phr.: מ(ה)עולם (ו)עד (ה)עולם (מן) from everlasting to everlasting, of י׳ ψ 90:2, חסד י׳ 103:17; benedictions 1 Ch 16:36 = ψ 106:48, Ne 9:5; 1 Ch 29:10 ψ 41:14; the land given למן עולם ועד עולם Je 7:7; 25:5; מעתה ועד עולם from now and for ever ψ 115:18; 121:8 (i.e. as long as one lives); of people’s hope in God 131:3; dynasty of David Is 9:6; of God’s acts, words, etc. Mi 4:7; Is 59:21 ψ 125:2, cf. 113:2;—v. further i. עַד p. 723.
-
----
-
-### יְשַׂבֵּרוּ
-**Lexicon**: BDB Dictionary
-**Vocalized**: שָׂבַר  
-
-vb. inspect, examine (van d. H. שֹׁבֵר [so 𝔊 συντρίβων], but Mas. שׂ׳ v. Norzi; hence connex. with Arabic سَبَرَ probe a wound, try, examine, improb., and this (according to Frä261) denom. from Aramaic loan-word; improb. also is connex. with Aramaic סְבַר think (cf. foll.), KauAram. im AT, 85);— Pt. שֹׂבֵר, c. ב obj., Ne 2:13, 15 I examined into the wall, inspected it closely.
-
----
-
-### יְשַׂבֵּרוּ
-**Lexicon**: BDB Dictionary
-**Vocalized**: שָׂבַר²  
-
-vb. wait, hope (Aramaism; cf. Aramaic סְבַר think, Pa. hope; ܣܒܰܪ believe, hope, Pa. think, Aph. hope);—Pf. 1 s. שִׂבַּרְתִּי ψ 119:166, 3 pl. שִׂבְּרוּ Est 9:1; Impf. 3 mpl. יְשַׂבְּרוּ Is 38:18, יְשַׂבֵּ֑רוּ ψ 145:15, יְשַׂבֵּר֑וּן ψ 104:27; 2 fpl. תְּשַׂבֵּרְנָה Ru 1:13;— wait + לָהֵן therefor Ru 1:13. hope for, ל rei ψ 119:166, אֶל rei Is 38:18, אֶל pers. ψ 104:27; 145:15; ל inf. Est 9:1 hope to rule.
-
----
-
 ### בֶאֱמֶת
 **Lexicon**: BDB Dictionary
 **Vocalized**: אֱמֶת  
@@ -426,6 +457,26 @@ n.f. firmness, faithfulness, truth (contr. for אֱמֶנֶת, from אָמֵן) 
 **Vocalized**: אֱמֶת²  
 
 v. אמן.
+
+---
+
+### כׇּל־בָּשָׂר
+**Lexicon**: Klein Dictionary
+**Vocalized**: בָּשָׂר  
+
+flesh. meat. body. creature. pulp (of fruit).
+
+**Etymology**: [Related to Aram. בִּשְׂרָא, בִּסֽרָא, Syr. and Mand. בֶּסְרָא, Ugar. bshr, OSArab. בשׂר (= ‘skin’, or ‘flesh’), Arab. bashar, Ethiop. bsr (= skin), Akka. bishru (= blood relation). cp. Egypt. bsz, bsj (= flesh), which is a Sem. loan word.]  
+
+**Derivatives**: Derivatives: בִּשְׂרוֹנוּת, בִּשְׂרוֹנִי, בְּשָׂרִי, בַּשֽׂרָנוּת, בַּשְׂרָנִי.  
+
+---
+
+### כׇּל־בָּשָׂר
+**Lexicon**: BDB Dictionary
+**Vocalized**: בָּשָׂר  
+
+n.m. flesh (cf. Arabic بَشَرٌ skin, Syriac ܒܶܣܪܳܐ, Assyrian bišru, blood-relation, Dl Assyrian Stud. i. 143, cf. Pr 170, Sab. בשר תורם flesh of bulls)—Gn 2:21 + 126 times; cstr. בְּשַׂר Gn 17:11 + 40 times; sf. בְּשָׂרִי etc. ψ 16:9 + 96 times; pl. בְּשָׂרִים Pr 14:30;— of the body: of animals Gn 41:2–19; Ex 21:28; 22:30; Nu 12:12 (E) Nu 11:4–33 (JE) Gn 9:4 + (P 30 times) Dt 12:15 + (D 9 times) Ju 6:19–21; 1 S 2:13, 15; 1 K 17:6; 19:21; Jb 31:31; 41:15 ψ 50:13; Pr 23:20; Is 22:13; 44:16, 19; 65:4; 66:17; Je 7:21; 11:15; Ez 4:14 + 6 times Dn 10:3; Ho 8:13 Mi 3:3; Hg 2:12; Zc 11:9, 16. of men Gn 40:19 (E) 2:21; Ex 4:7 (J) Lv 12:3; 13:2 + 16 times 26:29 (P) Dt 28:53, 55; 32:42; Ju 8:7; 1 S 17:44; 2 K 4:34; 5:10, 14; 6:30; 9:36; Jb 2:5; 4:15; 6:12; 7:5; 10:11; 13:14; 19:20, 22; 21:6; 33:21, 25 ψ 27:2; 38:4, 8; 79:2; 102:6; 109:24; Pr 4:22; 5:11 Is 9:19; 17:4; 49:26; Je 19:9; La 3:4; Ez 32:5; 37:6, 8; 39:17, 18 Dn 1:15; Zc 14:12. The flesh of the body is contrasted with stone Ez 11:19; 36:26. flesh for the body itself (especially in P): על בשׂר אדם לא ייסך upon the body of man it shall not be poured Ex 30:32 (P); מכנסי בד ילבשׁ על בשׂרו linen drawers shall he put on his body Lv 6:3; 16:4 (P); וישׂם שׂק על בשׂרו 1 K 21:27; ורחץ את בשׂרו and he shall bathe his body Lv 14:9; 15:13, 16; 16:24, 26, 28; 17:16; 22:6; Nu 19:7, 8 (P); שׂרט לנפשׁ לא תתנו בכשׂרכם ye shall not put any cutting for any one in your body Lv 19:28; cf. Lv 21:5 (P); והעבירו תער על כל בשׂרם and they shall pass a razor over all their body Nu 8:7 (P). Ec. uses בשׂר only in this sense 2:3; 4:5; 5:5; 11:10; 12:12; elsewhere this usage only in poetry; the body antith. to נפשׁ Jb 14:22; Is 10:18 ψ 63:2; לב ψ 16:9; 84:3; Pr 14:30 (only here emphatic pl. = entire body Bö§ 695, Leiblichkeit De); מִבְּשָׂרִי apart from my body, in disembodied state Jb 19:26; סמר מפחדך בשׂרי my body trembleth for fear of thee ψ 119:120. male organ of generation (euphemism): בְּשַׂר עָרְלַתְכֶם Gn 17:11, 14, 23, 24, 25 (P); בשׂר ערוה Ex 28:42 (P), but בשׂר Gn 17:14; Lv 15:2–19 (P); Ez 16:26; 23:20; 44:7, 9. flesh for kindred, blood-relations: עצם מעצמי ובשׂר מבשׂרי bone of my bone and flesh of my flesh Gn 2:23 (J); והיו לבשׂר אחד and they shall become one flesh Gn 2:24 (J); עצמי ובשׂרי Gn 29:14 (J); Ju 9:2; 2 S 5:1 = 1 Ch 11:1; 19:13, 14; בשׂר with sf. in same sense Gn 37:27 (J); Ne 5:5; Is 58:7, for which שְׁאֵר בשׂרו near of kin, man or woman Lv 18:6; 25:49 (both H; 25:49 ‖ מִשְׁפָּחָה, cf. RSK 149). man over against God as frail or erring Gn 6:3 (J) ψ 56:5; 78:39; eyes of flesh Jb 10:4; arm of flesh 2 Ch 32:8; Je 17:5; horses are flesh not spirit Is 31:3. the phrase כָּל־בָּשָׂר: all living beings Gn 6:17, 19; 7:21; 9:11, 15, 16, 17 Lv 17:14(×3); Nu 18:15 (P); Jb 34:15 ψ 136:25. animals Gn 7:15, 16; 8:17 (P). mankind Gn 6:12, 13; Nu 16:22; 27:16 (P); Dt 5:23 ψ 65:3; 145:21; Is 40:5, 6; 49:26; 66:16, 23, 24; Je 12:12; 25:31; 32:27; 45:5; Ez 21:4, 9, 10; Jo 3:1; Zc 2:17; cf. כל בשׂר אישׁ Jb 12:10.
 
 ---
 
@@ -505,7 +556,23 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 
 ---
 
-### Search 3: כל עולמים
+### Search 3: עיני כל
+**Scope**: Tanakh  
+**Level**: exact  
+**Variations searched**: 12  
+**Results**: 0  
+
+---
+
+### Search 4: לעולם ועד
+**Scope**: Psalms  
+**Level**: exact  
+**Variations searched**: 12  
+**Results**: 0  
+
+---
+
+### Search 5: טוב לכל
 **Scope**: Tanakh  
 **Level**: consonantal  
 **Variations searched**: 12  
@@ -513,31 +580,55 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 
 ---
 
-### Search 4: חנון ורחום
-**Scope**: Tanakh  
-**Level**: exact  
-**Variations searched**: 12  
-**Results**: 0  
-
----
-
-### Search 5: כל בשר
-**Scope**: Tanakh  
-**Level**: exact  
-**Variations searched**: 12  
-**Results**: 0  
-
----
-
-### Search 6: קדש שם
+### Search 6: מלכות
 **Scope**: Psalms  
 **Level**: consonantal  
-**Variations searched**: 12  
-**Results**: 0  
+**Variations searched**: 20  
+**Results**: 6  
+
+#### Top Results:
+
+**Psalms 102:23**  
+Hebrew: בְּהִקָּבֵ֣ץ עַמִּ֣ים יַחְדָּ֑ו וּ֝מַמְלָכ֗וֹת לַעֲבֹ֥ד אֶת־יְהֹוָֽה׃  
+English: when the nations gather together,
+the kingdoms, to serve the LORD.  
+Matched: *וּ֝מַמְלָכ֗וֹת* (position 3)  
+
+**Psalms 145:13**  
+Hebrew: מַֽלְכוּתְךָ֗ מַלְכ֥וּת כׇּל־עֹלָמִ֑ים וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר וָדֹֽר׃  
+English: Your kingship is an eternal kingship;
+Your dominion is for all generations.  
+Matched: *מַלְכ֥וּת* (position 1)  
+
+**Psalms 46:7**  
+Hebrew: הָמ֣וּ ג֭וֹיִם מָ֣טוּ מַמְלָכ֑וֹת נָתַ֥ן בְּ֝קוֹל֗וֹ תָּמ֥וּג אָֽרֶץ׃  
+English: Nations rage, kingdoms topple;
+at the sound of His thunder the earth dissolves.  
+Matched: *מַמְלָכ֑וֹת* (position 3)  
+
+**Psalms 68:33**  
+Hebrew: מַמְלְכ֣וֹת הָ֭אָרֶץ שִׁ֣ירוּ לֵאלֹהִ֑ים זַמְּר֖וּ אֲדֹנָ֣י סֶֽלָה׃  
+English: O kingdoms of the earth,
+sing to God;
+chant hymns to the Lord, selah  
+Matched: *מַמְלְכ֣וֹת* (position 0)  
+
+**Psalms 79:6**  
+Hebrew: שְׁפֹ֤ךְ חֲמָתְךָ֗ אֶֽל־הַגּוֹיִם֮ אֲשֶׁ֢ר לֹא־יְדָ֫ע֥וּךָ וְעַ֥ל מַמְלָכ֑וֹת אֲשֶׁ֥ר בְּ֝שִׁמְךָ֗ לֹ֣א קָרָֽאוּ׃  
+English: Pour out Your fury on the nations that do not know You,
+upon the kingdoms that do not invoke Your name,  
+Matched: *מַמְלָכ֑וֹת* (position 6)  
+
+**Psalms 135:11**  
+Hebrew: לְסִיח֤וֹן ׀ מֶ֤לֶךְ הָאֱמֹרִ֗י וּ֭לְעוֹג מֶ֣לֶךְ הַבָּשָׁ֑ן וּ֝לְכֹ֗ל מַמְלְכ֥וֹת כְּנָֽעַן׃  
+English: Sihon, king of the Amorites,
+Og, king of Bashan,
+and all the royalty of Canaan—  
+Matched: *מַמְלְכ֥וֹת* (position 8)  
 
 ---
 
-### Search 7: עיני כל
+### Search 7: בני האדם
 **Scope**: Tanakh  
 **Level**: exact  
 **Variations searched**: 12  
@@ -548,17 +639,166 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 ## Figurative Language Instances
 
 ### Query 1
-**Filters**: Vehicle contains: gushing  
-**Results**: 37  
+**Filters**: Vehicle contains: investigation  
+**Results**: 15  
 
-**Core pattern**: flowing milk and honey metaphor (3/37 instances, 8%)
+**Core pattern**: physical search metaphor (4/15 instances, 26%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Psalms 40:15** (confidence: 1.00) - The phrase 'בקש נפש' (biqqesh nefesh) is a common biblical idiom meaning 'to seek to kill' or 'to se...
+2. ⭐ **Psalms 86:14** (confidence: 1.00) - This is a common biblical idiom meaning to attempt to kill or mortally harm someone. 'Life' (נפש) he...
+3. ⭐ **Deuteronomy 4:29** (confidence: 0.95) - Seeking and finding God are not literal physical actions of locating a tangible object. These terms ...
+
+#### All Instances (15 total):
+
+**Deuteronomy 4:29** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: But if you search there, you will find your God יהוה, if only you seek Him  
+
+**Full verse (Hebrew)**: וּבִקַּשְׁתֶּ֥ם מִשָּׁ֛ם אֶת־יְהֹוָ֥ה אֱלֹהֶ֖יךָ וּמָצָ֑אתָ כִּ֣י תִדְרְשֶׁ֔נּוּ בְּכׇל־לְבָבְךָ֖ וּבְכׇל־נַפְשֶֽׁךָ  
+**Full verse (English)**: But if you search there, you will find your God יהוה, if only you seek with all your heart and soul—  
+
+*Hebrew phrase*: וּבִקַּשְׁתֶּ֥ם מִשָּׁ֛ם אֶת־יְהֹוָ֥ה אֱלֹהֶ֖יךָ וּמָצָ֑אתָ כִּ֣י תִדְרְשֶׁ֔נּוּ  
+*Explanation*: Seeking and finding God are not literal physical actions of locating a tangible object. These terms are used metaphorically to describe a spiritual pursuit, a quest for a relationship with God, His pr...  
+*Target*: spiritual relationship with God → divine connection → religious devotion  
+*Vehicle*: physical search and discovery → finding a lost object → human action  
+*Ground*: active pursuit → engagement → attainment  
+*Confidence*: 0.95  
+
+**Exodus 4:19** (idiom) - confidence: 0.95  
+*Figurative phrase*: who sought to kill you  
+
+**Full verse (Hebrew)**: וַיֹּ֨אמֶר יְהֹוָ֤ה אֶל־מֹשֶׁה֙ בְּמִדְיָ֔ן לֵ֖ךְ שֻׁ֣ב מִצְרָ֑יִם כִּי־מֵ֙תוּ֙ כׇּל־הָ֣אֲנָשִׁ֔ים הַֽמְבַקְשִׁ֖ים אֶת־נַפְשֶֽׁךָ  
+**Full verse (English)**: יהוה said to Moses in Midian, “Go back to Egypt, for all those who sought to kill you are dead.”  
+
+*Hebrew phrase*: הַֽמְבַקְשִׁ֖ים אֶת־נַפְשֶֽׁךָ  
+*Explanation*: This is a common Hebrew idiom (בִּקֵּשׁ נֶפֶשׁ, biqqesh nefesh) meaning 'to seek to kill' or 'to seek to harm grievously.' It does not refer to a literal search for a person's soul, but rather the int...  
+*Target*: Moses' life → personal existence → human life  
+*Vehicle*: seeking the soul → pursuit of the spirit → abstract search  
+*Ground*: intent to kill → desire for destruction → malicious intent  
+*Confidence*: 0.95  
+
+**Exodus 33:7** (idiom) - confidence: 0.95  
+*Figurative phrase*: sought יהוה  
+
+**Full verse (Hebrew)**: וּמֹשֶׁה֩ יִקַּ֨ח אֶת־הָאֹ֜הֶל וְנָֽטָה־ל֣וֹ&thinsp;׀ מִח֣וּץ לַֽמַּחֲנֶ֗ה הַרְחֵק֙ מִן־הַֽמַּחֲנֶ֔ה וְקָ֥רָא ל֖וֹ אֹ֣הֶל מוֹעֵ֑ד וְהָיָה֙ כׇּל־מְבַקֵּ֣שׁ יְהֹוָ֔ה יֵצֵא֙ אֶל־אֹ֣הֶל מוֹעֵ֔ד אֲשֶׁ֖ר מִח֥וּץ לַֽמַּחֲנֶֽה  
+**Full verse (English)**: Now Moses would take the Tent and pitch it outside the camp, at some distance from the camp. It was called the Tent of Meeting, and whoever sought יהוה would go out to the Tent of Meeting that was outside the camp.  
+
+*Hebrew phrase*: מְבַקֵּ֣שׁ יְהֹוָ֔ה  
+*Explanation*: This is an idiom referring to the act of worship, prayer, or seeking divine guidance and presence, rather than a literal physical search for God. It represents a spiritual or relational pursuit....  
+*Target*: spiritual devotion → religious practice → human-divine interaction  
+*Vehicle*: physical search → quest → human action  
+*Ground*: earnest pursuit → desire for connection → engagement  
+*Confidence*: 0.95  
+
+**Leviticus 25:28** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: lacks sufficient means (literally: his hand did not find enough)  
+
+**Full verse (Hebrew)**: וְאִ֨ם לֹֽא־מָצְאָ֜ה יָד֗וֹ דֵּי֮ הָשִׁ֣יב לוֹ֒ וְהָיָ֣ה מִמְכָּר֗וֹ בְּיַד֙ הַקֹּנֶ֣ה אֹת֔וֹ עַ֖ד שְׁנַ֣ת הַיּוֹבֵ֑ל וְיָצָא֙ בַּיֹּבֵ֔ל וְשָׁ֖ב לַאֲחֻזָּתֽוֹ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: If that person lacks sufficient means to recover it, what was sold shall remain with the purchaser until the jubilee; in the jubilee year it shall be released, so that the person returns to that holding.  
+
+*Hebrew phrase*: לֹֽא־מָצְאָ֜ה יָד֗וֹ דֵּי  
+*Explanation*: The 'hand' (יָד) is used metonymically to represent a person's financial capacity or ability to act. It functions as an idiom for lacking sufficient resources....  
+*Target*: person's financial capacity → financial ability → personal resources  
+*Vehicle*: hand's ability to find → physical action of searching → bodily function  
+*Ground*: lack of resources → inability to act → financial constraint  
+*Confidence*: 0.95  
+
+**Psalms 22:27** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: all who seek the LORD  
+
+**Full verse (Hebrew)**: יֹאכְל֬וּ עֲנָוִ֨ים&thinsp;׀ וְיִשְׂבָּ֗עוּ יְהַֽלְל֣וּ יְ֭הֹוָה דֹּ֣רְשָׁ֑יו יְחִ֖י לְבַבְכֶ֣ם לָעַֽד  
+**Full verse (English)**: Let the lowly eat and be satisfied;let all who seek the LORD praise Him.Always be of good cheer!  
+
+*Hebrew phrase*: דֹּ֣רְשָׁ֑יו  
+*Explanation*: The act of 'seeking the LORD' is a metaphor for spiritual devotion, worship, and obedience, not a literal physical search for a deity....  
+*Target*: spiritual devotion → religious practice → human-divine relationship  
+*Vehicle*: physical search → quest → human action  
+*Ground*: earnest pursuit → intentional engagement → active relationship  
+*Confidence*: 0.95  
+
+**Psalms 35:4** (idiom) - confidence: 0.90  
+*Figurative phrase*: those who seek my life  
+
+**Full verse (Hebrew)**: יֵבֹ֣שׁוּ וְיִכָּלְמוּ֮ מְבַקְשֵׁ֢י נַ֫פְשִׁ֥י יִסֹּ֣גוּ אָח֣וֹר וְיַחְפְּר֑וּ חֹ֝שְׁבֵ֗י רָעָתִֽי  
+**Full verse (English)**: Let those who seek my lifebe frustrated and put to shame;let those who plan to harm mefall back in disgrace.  
+
+*Hebrew phrase*: מְבַקְשֵׁ֢י נַ֫פְשִׁ֥י  
+*Explanation*: The phrase 'to seek one's life' (בקש נפש) is a common biblical idiom meaning 'to seek to kill or harm someone.' It does not refer to a literal search for a physical 'life' entity, but rather an intent...  
+*Target*: enemies' intent to kill → hostile intention → human malice  
+*Vehicle*: searching for life → physical pursuit → human action  
+*Ground*: active pursuit of harm → desire for destruction → malevolent purpose  
+*Confidence*: 0.90  
+
+**Psalms 38:13** (idiom) - confidence: 0.95  
+*Figurative phrase*: those who seek my life  
+
+**Full verse (Hebrew)**: וַיְנַקְשׁ֤וּ&thinsp;׀ מְבַקְשֵׁ֬י נַפְשִׁ֗י וְדֹרְשֵׁ֣י רָ֭עָתִי דִּבְּר֣וּ הַוּ֑וֹת וּ֝מִרְמ֗וֹת כׇּל־הַיּ֥וֹם יֶהְגּֽוּ  
+**Full verse (English)**: Those who seek my life lay traps;those who wish me harm speak malice;they utter deceit all the time.  
+
+*Hebrew phrase*: מְבַקְשֵׁ֬י נַפְשִׁ֗י  
+*Explanation*: This is a common biblical idiom meaning 'to seek to kill' or 'to seek to harm grievously,' rather than a literal search for an abstract 'life.'...  
+*Target*: adversaries' intent to kill → mortal threat → hostile human action  
+*Vehicle*: seeking a person's life → pursuit of existence → literal search  
+*Ground*: intent to kill → lethal purpose → extreme malice  
+*Confidence*: 0.95  
+
+**Psalms 40:15** (idiom) - confidence: 1.00  
+*Figurative phrase*: those who seek my life  
+
+**Full verse (Hebrew)**: יֵ֘בֹ֤שׁוּ וְיַחְפְּר֨וּ&thinsp;׀ יַחַד֮ מְבַקְשֵׁ֥י נַפְשִׁ֗י לִסְפּ֫וֹתָ֥הּ יִסֹּ֣גוּ אָ֭חוֹר וְיִכָּלְמ֑וּ חֲ֝פֵצֵ֗י רָעָתִֽי  
+**Full verse (English)**: Let those who seek to destroy my lifebe frustrated and disgraced;let those who wish me harmfall back in shame.  
+
+*Hebrew phrase*: מְבַקְשֵׁ֥י נַפְשִׁ֗י  
+*Explanation*: The phrase 'בקש נפש' (biqqesh nefesh) is a common biblical idiom meaning 'to seek to kill' or 'to seek to destroy someone's life,' rather than a literal search for a soul or life-force....  
+*Target*: enemies' hostile intent → malicious actions → human behavior  
+*Vehicle*: seeking a soul → searching for life → abstract pursuit  
+*Ground*: desire to end life → intent to kill → active hostility  
+*Confidence*: 1.00  
+
+**Psalms 40:17** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: who seek You  
+
+**Full verse (Hebrew)**: יָ֘שִׂ֤ישׂוּ וְיִשְׂמְח֨וּ&thinsp;׀ בְּךָ֗ כׇּֽל־מְבַ֫קְשֶׁ֥יךָ יֹאמְר֣וּ תָ֭מִיד יִגְדַּ֣ל יְהֹוָ֑ה אֹ֝הֲבֵ֗י תְּשׁוּעָתֶֽךָ  
+**Full verse (English)**: But let all who seek You be glad and rejoice in You;let those who are eager for Your deliverance always say,“Extolled be the LORD!”  
+
+*Hebrew phrase*: מְבַקְשֶׁיךָ  
+*Explanation*: This is a biblical idiom where the physical act of 'seeking' (בָּקַשׁ) is used metonymically to represent the spiritual act of pursuing God's favor, presence, guidance, or righteousness. It does not i...  
+*Target*: spiritual devotion → religious pursuit → human-divine relationship  
+*Vehicle*: physical searching → earnest quest → human action  
+*Ground*: active engagement → earnest desire → pursuit of connection  
+*Confidence*: 0.95  
+
+**Psalms 63:10** (idiom) - confidence: 0.90  
+*Figurative phrase*: seek to destroy my life  
+
+**Full verse (Hebrew)**: וְהֵ֗מָּה לְ֭שׁוֹאָה יְבַקְשׁ֣וּ נַפְשִׁ֑י יָ֝בֹ֗אוּ בְּֽתַחְתִּיּ֥וֹת הָאָֽרֶץ  
+**Full verse (English)**: May those who seek to destroy my lifeenter the depths of the earth.  
+
+*Hebrew phrase*: יְבַקְשׁ֣וּ נַפְשִׁ֑י  
+*Explanation*: This is a standard biblical idiom (בקש נפש) meaning 'to seek to kill' or 'to seek to harm grievously,' rather than literally searching for a person's soul or life force....  
+*Target*: speaker's life → human existence → person  
+*Vehicle*: pursuit of a soul → searching for a life-force → physical quest  
+*Ground*: intent to kill → desire for destruction → mortal threat  
+*Confidence*: 0.90  
+
+*...and 5 more instances*
+
+**Usage breakdown**: physical search (4x), seeking a person's life (2x), physical search and discovery (1x)
+
+---
+
+### Query 2
+**Filters**: Vehicle contains: pour  
+**Results**: 33  
+
+**Core pattern**: flowing milk and honey metaphor (3/33 instances, 9%)
 
 **Top 3 Most Relevant** (by confidence):
 1. ⭐ **Deuteronomy 15:23** (confidence: 1.00) - The act of pouring out the blood is compared to pouring out water, emphasizing the complete, unreser...
 2. ⭐ **Deuteronomy 26:9** (confidence: 1.00) - This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and pro...
 3. ⭐ **Deuteronomy 26:15** (confidence: 1.00) - This is a well-known biblical idiom describing the extraordinary fertility, abundance, and desirabil...
 
-#### All Instances (37 total):
+#### All Instances (33 total):
 
 **Deuteronomy 6:3** (metaphor, idiom) - confidence: 0.90  
 *Figurative phrase*: a land flowing with milk and honey  
@@ -651,19 +891,6 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 *Ground*: fertility → abundance → prosperity  
 *Confidence*: 1.00  
 
-**Deuteronomy 33:28** (metaphor) - confidence: 0.90  
-*Figurative phrase*: Jacob’s abode / fountain  
-
-**Full verse (Hebrew)**: וַיִּשְׁכֹּן֩ יִשְׂרָאֵ֨ל בֶּ֤טַח בָּדָד֙ עֵ֣ין יַֽעֲקֹ֔ב אֶל־אֶ֖רֶץ דָּגָ֣ן וְתִיר֑וֹשׁ אַף־שָׁמָ֖יו יַ֥עַרְפוּ טָֽל  
-**Full verse (English)**: Thus Israel dwells in safety,Untroubled is Jacob’s abode,*abode Others “fountain.” In a land of grain and wine,Under heavens dripping dew.  
-
-*Hebrew phrase*: עֵין יַעֲקֹב  
-*Explanation*: The Hebrew phrase עֵין יַעֲקֹב (ein Ya'akov) is interpreted as 'fountain of Jacob.' This uses a natural image (fountain) as a metaphor for the people of Jacob/Israel, signifying their vitality, prospe...  
-*Target*: The people of Jacob/Israel → Nation, community → Human collective  
-*Vehicle*: Fountain, spring → Water source, natural feature → Nature, physical environment  
-*Ground*: Vitality, source of life, flourishing, sustenance, abundance → Prosperity, well-being → Positive state, quality  
-*Confidence*: 0.90  
-
 **Exodus 3:8** (metaphor, idiom) - confidence: 0.95  
 *Figurative phrase*: a land flowing with milk and honey  
 
@@ -690,163 +917,27 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 *Ground*: fertility → abundance → prosperity  
 *Confidence*: 1.00  
 
-*...and 27 more instances*
+**Exodus 13:5** (metaphor, idiom) - confidence: 1.00  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וְהָיָ֣ה כִֽי־יְבִיאֲךָ֣ יְהֹוָ֡ה אֶל־אֶ֣רֶץ הַֽ֠כְּנַעֲנִ֠י וְהַחִתִּ֨י וְהָאֱמֹרִ֜י וְהַחִוִּ֣י וְהַיְבוּסִ֗י אֲשֶׁ֨ר נִשְׁבַּ֤ע לַאֲבֹתֶ֙יךָ֙ לָ֣תֶת לָ֔ךְ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ וְעָבַדְתָּ֛ אֶת־הָעֲבֹדָ֥ה הַזֹּ֖את בַּחֹ֥דֶשׁ הַזֶּֽה  
+**Full verse (English)**: So, when יהוה has brought you into the land of the Canaanites, the Hittites, the Amorites, the Hivites, and the Jebusites, which was sworn to your fathers to be given you, a land flowing with milk and honey, you shall observe in this month the following practice:  
+
+*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ  
+*Explanation*: This phrase is a well-known biblical idiom and a metaphor describing the extraordinary fertility, abundance, and prosperity of the land. The land itself does not literally 'flow' with milk and honey; ...  
+*Target*: Land of Canaan's fertility → Promised Land's abundance → Agricultural prosperity  
+*Vehicle*: Flowing milk and honey → Abundant sweet provisions → Rich food sources  
+*Ground*: Exceptional fertility → Abundance of resources → Desirability  
+*Confidence*: 1.00  
+
+*...and 23 more instances*
 
 **Usage breakdown**: flowing milk and honey (3x), flowing liquids (3x), pouring liquid (3x)
 
 ---
 
-### Query 2
-**Filters**: Vehicle contains: nostril  
-**Results**: 64  
-
-**Core pattern**: burning nose metaphor (14/64 instances, 21%)
-
-**Top 3 Most Relevant** (by confidence):
-1. ⭐ **Exodus 32:10** (confidence: 1.00) - This is a common biblical idiom for expressing intense anger. 'אַף' (nose/face) is a metonymy for an...
-2. ⭐ **Exodus 32:19** (confidence: 1.00) - This is a common biblical idiom expressing intense anger, literally 'his nose burned' or 'his anger ...
-3. ⭐ **Exodus 34:6** (confidence: 1.00) - This is a common Hebrew idiom. Literally meaning 'long of nostrils' or 'long of face/nose', it figur...
-
-#### All Instances (64 total):
-
-**Deuteronomy 20:16** (metonymy) - confidence: 0.90  
-*Figurative phrase*: a soul  
-
-**Full verse (Hebrew)**: רַ֗ק מֵעָרֵ֤י הָֽעַמִּים֙ הָאֵ֔לֶּה אֲשֶׁר֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ נֹתֵ֥ן לְךָ֖ נַחֲלָ֑ה לֹ֥א תְחַיֶּ֖ה כׇּל־נְשָׁמָֽה  
-**Full verse (English)**: In the towns of the latter peoples, however, which your God יהוה is giving you as a heritage, you shall not let a soul remain alive.  
-
-*Hebrew phrase*: כׇּל־נְשָׁמָֽה  
-*Explanation*: The term 'neshamah' (breath/soul) is used here as a synecdoche to refer to any living person or being, where a part (the breath, representing life) stands for the whole (the individual)....  
-*Target*: living being → person → humanity  
-*Vehicle*: breath → life force → vital essence  
-*Ground*: life → existence → vitality  
-*Confidence*: 0.90  
-
-**Deuteronomy 29:19** (metaphor, idiom, metonymy) - confidence: 0.95  
-*Figurative phrase*: YHWH’s nose will smoke  
-
-**Full verse (Hebrew)**: לֹא־יֹאבֶ֣ה יְהֹוָה֮ סְלֹ֣חַֽ לוֹ֒ כִּ֣י אָ֠ז יֶעְשַׁ֨ן אַף־יְהֹוָ֤ה וְקִנְאָתוֹ֙ בָּאִ֣ישׁ הַה֔וּא וְרָ֤בְצָה בּוֹ֙ כׇּל־הָ֣אָלָ֔ה הַכְּתוּבָ֖ה בַּסֵּ֣פֶר הַזֶּ֑ה וּמָחָ֤ה יְהֹוָה֙ אֶת־שְׁמ֔וֹ מִתַּ֖חַת הַשָּׁמָֽיִם  
-**Full verse (English)**: יהוה will never forgive that party.*that party Moved up from v. 19 for clarity. Rather, יהוה’s anger and passion will rage against them, till every sanction recorded in this book comes down upon them, and יהוה blots out their name from under heaven.  
-
-*Hebrew phrase*: יֶעְשַׁ֨ן אַף־יְהֹוָ֤ה  
-*Explanation*: This is an idiom for intense divine wrath. 'Aph' (nose) is a metonymy for anger, and 'smoking' is a metaphor for the heat and intensity of that anger, creating a vivid image of raging fury....  
-*Target*: YHWH's anger → divine emotion → God's disposition  
-*Vehicle*: smoking nose → physical manifestation of anger → bodily reaction  
-*Ground*: intensity → fierceness → destructive power  
-*Confidence*: 0.95  
-
-**Deuteronomy 29:22** (idiom, metonymy) - confidence: 0.95  
-*Figurative phrase*: in fierce anger  
-
-**Full verse (Hebrew)**: גׇּפְרִ֣ית וָמֶ֘לַח֮ שְׂרֵפָ֣ה כׇל־אַרְצָהּ֒ לֹ֤א תִזָּרַע֙ וְלֹ֣א תַצְמִ֔חַ וְלֹא־יַעֲלֶ֥ה בָ֖הּ כׇּל־עֵ֑שֶׂב כְּֽמַהְפֵּכַ֞ת סְדֹ֤ם וַעֲמֹרָה֙ אַדְמָ֣ה (וצביים) [וּצְבוֹיִ֔ם] אֲשֶׁר֙ הָפַ֣ךְ יְהֹוָ֔ה בְּאַפּ֖וֹ וּבַחֲמָתֽוֹ  
-**Full verse (English)**: all its soil devastated by sulfur and salt, beyond sowing and producing, no grass growing in it, just like the upheaval of Sodom and Gomorrah, Admah and Zeboiim, which יהוה overthrew in fierce anger—  
-
-*Hebrew phrase*: בְּאַפּ֖וֹ וּבַחֲמָתֽוֹ  
-*Explanation*: This is a classic biblical idiom for intense anger. It employs metonymy, where 'אַף' (aph), literally 'nose,' stands for the emotion of anger. The flaring of nostrils is a physical sign of rage, so th...  
-*Target*: God's anger → divine emotion → abstract concept  
-*Vehicle*: nose and heat → physical body parts and states → physical phenomena  
-*Ground*: intensity → fierceness → emotional state  
-*Confidence*: 0.95  
-
-**Deuteronomy 29:26** (idiom) - confidence: 0.90  
-*Figurative phrase*: So יהוה was incensed  
-
-**Full verse (Hebrew)**: וַיִּחַר־אַ֥ף יְהֹוָ֖ה בָּאָ֣רֶץ הַהִ֑וא לְהָבִ֤יא עָלֶ֙יהָ֙ אֶת־כׇּל־הַקְּלָלָ֔ה הַכְּתוּבָ֖ה בַּסֵּ֥פֶר הַזֶּֽה  
-**Full verse (English)**: So יהוה was incensed at that land and brought upon it all the curses recorded in this book.  
-
-*Hebrew phrase*: וַיִּחַר־אַ֥ף יְהֹוָ֖ה  
-*Explanation*: The phrase 'חָרָה אַף' (charah af), literally 'the nose burned,' is a common biblical idiom for expressing intense anger. While God's anger is a literal anthropomorphic attribute, the specific express...  
-*Target*: God's anger → divine emotion → abstract concept  
-*Vehicle*: burning nose → physical sensation → bodily expression  
-*Ground*: intensity → fierceness → strong emotion  
-*Confidence*: 0.90  
-
-**Exodus 4:14** (idiom) - confidence: 0.90  
-*Figurative phrase*: Yahweh became angry  
-
-**Full verse (Hebrew)**: וַיִּֽחַר־אַ֨ף יְהֹוָ֜ה בְּמֹשֶׁ֗ה וַיֹּ֙אמֶר֙ הֲלֹ֨א אַהֲרֹ֤ן אָחִ֙יךָ֙ הַלֵּוִ֔י יָדַ֕עְתִּי כִּֽי־דַבֵּ֥ר יְדַבֵּ֖ר ה֑וּא וְגַ֤ם הִנֵּה־הוּא֙ יֹצֵ֣א לִקְרָאתֶ֔ךָ וְרָאֲךָ֖ וְשָׂמַ֥ח בְּלִבּֽוֹ  
-**Full verse (English)**: יהוה became angry with Moses and said, “There is your brother Aaron the Levite. He, I know, speaks readily. Even now he is setting out to meet you, and he will be happy to see you.  
-
-*Hebrew phrase*: וַיִּֽחַר־אַ֨ף יְהֹוָ֜ה  
-*Explanation*: This is an idiomatic expression 'charah af' (burning nose/anger) commonly used in Biblical Hebrew to denote the onset of intense anger. While the concept of God's anger is literal in the narrative, th...  
-*Target*: God's anger → divine emotion → divine attribute  
-*Vehicle*: burning nose → physical sensation → bodily reaction  
-*Ground*: intensity → fierceness → emotional state  
-*Confidence*: 0.90  
-
-**Exodus 6:9** (metaphor, idiom) - confidence: 0.95  
-*Figurative phrase*: from shortness of spirit  
-
-**Full verse (Hebrew)**: וַיְדַבֵּ֥ר מֹשֶׁ֛ה כֵּ֖ן אֶל־בְּנֵ֣י יִשְׂרָאֵ֑ל וְלֹ֤א שָֽׁמְעוּ֙ אֶל־מֹשֶׁ֔ה מִקֹּ֣צֶר ר֔וּחַ וּמֵעֲבֹדָ֖ה קָשָֽׁה&nbsp;{פ}  
-**Full verse (English)**: But when Moses told this to the Israelites, they would not listen to Moses, their spirits crushed by cruel bondage.  
-
-*Hebrew phrase*: מִקֹּ֣צֶר ר֔וּחַ  
-*Explanation*: The abstract concept of 'spirit' (רוּחַ), representing inner vitality and endurance, is described using the physical dimension of 'shortness' (קֹצֶר). This is a metaphor implying constriction, lack of...  
-*Target*: Israelites' emotional state → human emotion → psychological condition  
-*Vehicle*: shortness of breath → physical limitation → bodily sensation  
-*Ground*: constriction → limitation → inability to cope  
-*Confidence*: 0.95  
-
-**Exodus 12:19** (idiom, metonymy) - confidence: 0.95  
-*Figurative phrase*: that person  
-
-**Full verse (Hebrew)**: שִׁבְעַ֣ת יָמִ֔ים שְׂאֹ֕ר לֹ֥א יִמָּצֵ֖א בְּבָתֵּיכֶ֑ם כִּ֣י&thinsp;׀ כׇּל־אֹכֵ֣ל מַחְמֶ֗צֶת וְנִכְרְתָ֞ה הַנֶּ֤פֶשׁ הַהִוא֙ מֵעֲדַ֣ת יִשְׂרָאֵ֔ל בַּגֵּ֖ר וּבְאֶזְרַ֥ח הָאָֽרֶץ  
-**Full verse (English)**: No leaven shall be found in your houses for seven days. For whoever eats what is leavened, that person—whether a stranger or a citizen of the country—shall be cut off from the community of Israel.  
-
-*Hebrew phrase*: הַנֶּ֤פֶשׁ הַהִוא֙  
-*Explanation*: The Hebrew word `נֶפֶשׁ` (nefesh), literally 'soul' or 'life breath,' is used idiomatically (a form of synecdoche/metonymy) to refer to the entire individual or 'person.' This is a common biblical usa...  
-*Target*: individual → human being → person  
-*Vehicle*: soul → life breath → inner essence  
-*Ground*: identity → existence → self  
-*Confidence*: 0.95  
-
-**Exodus 15:8** (metaphor) - confidence: 0.95  
-*Figurative phrase*: At the blast of Your nostrils  
-
-**Full verse (Hebrew)**: וּבְר֤וּחַ אַפֶּ֙יךָ֙ נֶ֣עֶרְמוּ מַ֔יִם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;נִצְּב֥וּ כְמוֹ־נֵ֖ד נֹזְלִ֑ים&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;קָֽפְא֥וּ תְהֹמֹ֖ת בְּלֶב־יָֽם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: At the blast of Your nostrils the waters piled up,The floods stood straight like a wall;The deeps froze in the heart of the sea.  
-
-*Hebrew phrase*: וּבְר֤וּחַ אַפֶּ֙יךָ֙  
-*Explanation*: This is an anthropomorphic metaphor. God does not literally have nostrils that blast air. It vividly describes God's immense power or anger as a forceful exhalation, causing a dramatic physical effect...  
-*Target*: Divine power → God's active presence → Divine attribute  
-*Vehicle*: Powerful breath from nostrils → Physical exhalation → Natural phenomenon  
-*Ground*: Forcefulness → Destructive capability → Potency  
-*Confidence*: 0.95  
-
-**Exodus 32:10** (metaphor, idiom, metonymy) - confidence: 1.00  
-*Figurative phrase*: that My anger may blaze forth against them  
-
-**Full verse (Hebrew)**: וְעַתָּה֙ הַנִּ֣יחָה לִּ֔י וְיִֽחַר־אַפִּ֥י בָהֶ֖ם וַאֲכַלֵּ֑ם וְאֶֽעֱשֶׂ֥ה אוֹתְךָ֖ לְג֥וֹי גָּדֽוֹל  
-**Full verse (English)**: Now, let Me be, that My anger may blaze forth against them and that I may destroy them, and make of you a great nation.”  
-
-*Hebrew phrase*: וְיִֽחַר־אַפִּ֥י בָהֶ֖ם  
-*Explanation*: This is a common biblical idiom for expressing intense anger. 'אַף' (nose/face) is a metonymy for anger, as physical signs of anger are often visible in the face/nostrils. 'יִחַר' (to burn/be hot) is ...  
-*Target*: God's anger → divine emotion → spiritual attribute  
-*Vehicle*: burning nose → physical sensation → bodily reaction  
-*Ground*: intense wrath → destructive emotion → powerful feeling  
-*Confidence*: 1.00  
-
-**Exodus 32:12** (metaphor, personification, idiom) - confidence: 0.90  
-*Figurative phrase*: from Your blazing anger  
-
-**Full verse (Hebrew)**: לָ֩מָּה֩ יֹאמְר֨וּ מִצְרַ֜יִם לֵאמֹ֗ר בְּרָעָ֤ה הֽוֹצִיאָם֙ לַהֲרֹ֤ג אֹתָם֙ בֶּֽהָרִ֔ים וּ֨לְכַלֹּתָ֔ם מֵעַ֖ל פְּנֵ֣י הָֽאֲדָמָ֑ה שׁ֚וּב מֵחֲר֣וֹן אַפֶּ֔ךָ וְהִנָּחֵ֥ם עַל־הָרָעָ֖ה לְעַמֶּֽךָ  
-**Full verse (English)**: Let not the Egyptians say, ‘It was with evil intent that he delivered them, only to kill them off in the mountains and annihilate them from the face of the earth.’ Turn from Your blazing anger, and renounce the plan to punish Your people.  
-
-*Hebrew phrase*: מֵחֲרוֹן אַפֶּךָ  
-*Explanation*: 'חֲרוֹן אַף' is an idiom for intense anger. 'חֲרוֹן' (burning/blazing) is a metaphor for the intensity of the anger, likening an emotional state to physical heat. 'אַף' (nose/nostril) is an anthropomo...  
-*Target*: God's intense anger → divine emotion → God's disposition  
-*Vehicle*: burning nose → physical heat → human bodily reaction  
-*Ground*: intensity, destructiveness → severity, passion → emotional state  
-*Confidence*: 0.90  
-
-*...and 54 more instances*
-
-**Usage breakdown**: burning nose (14x), breath (9x), soul (5x)
-
----
-
 ### Query 3
-**Filters**: Vehicle contains: falling  
+**Filters**: Vehicle contains: fallen  
 **Results**: 52  
 
 **Core pattern**: physical falling metaphor (5/52 instances, 9%)
@@ -995,151 +1086,151 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 ---
 
 ### Query 4
-**Filters**: Vehicle contains: straightening  
-**Results**: 71  
+**Filters**: Vehicle contains: bent  
+**Results**: 21  
 
-**Core pattern**: lifting eyes metaphor (8/71 instances, 11%)
+**Core pattern**: bent object metaphor (2/21 instances, 9%)
 
 **Top 3 Most Relevant** (by confidence):
-1. ⭐ **Exodus 6:8** (confidence: 1.00) - This is a common biblical idiom for making a solemn oath or swearing, where the physical act of rais...
-2. ⭐ **Exodus 30:12** (confidence: 1.00) - This is a well-established Hebrew idiom (נָשָׂא רֹאשׁ) meaning 'to take a census' or 'to number' peo...
-3. ⭐ **Genesis 14:22** (confidence: 1.00) - This phrase is an idiom where the physical action of lifting one's hand is a conventional gesture si...
+1. ⭐ **Psalms 81:10** (confidence: 1.00) - This is a metonymy where the specific physical act of 'bowing down' (prostration) stands for the ent...
+2. ⭐ **Genesis 9:13** (confidence: 0.95) - The rainbow is directly identified as God's 'bow,' drawing on the visual similarity to an archer's w...
+3. ⭐ **Genesis 37:7** (confidence: 0.95) - Attributes human-like actions (gathering, bowing in submission or homage) to inanimate objects (shea...
 
-#### All Instances (71 total):
+#### All Instances (21 total):
 
-**Deuteronomy 3:27** () - confidence: 0.95  
-*Figurative phrase*: and gaze about / and lift your eyes  
+**Deuteronomy 27:19** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: subverts the rights / bends justice  
 
-**Full verse (Hebrew)**: עֲלֵ֣ה&thinsp;׀ רֹ֣אשׁ הַפִּסְגָּ֗ה וְשָׂ֥א עֵינֶ֛יךָ יָ֧מָּה וְצָפֹ֛נָה וְתֵימָ֥נָה וּמִזְרָ֖חָה וּרְאֵ֣ה בְעֵינֶ֑יךָ כִּי־לֹ֥א תַעֲבֹ֖ר אֶת־הַיַּרְדֵּ֥ן הַזֶּֽה  
-**Full verse (English)**: Go up to the summit of Pisgah and gaze about, to the west, the north, the south, and the east. Look at it well, for you shall not go across yonder Jordan.  
+**Full verse (Hebrew)**: אָר֗וּר מַטֶּ֛ה מִשְׁפַּ֥ט גֵּר־יָת֖וֹם וְאַלְמָנָ֑ה וְאָמַ֥ר כׇּל־הָעָ֖ם אָמֵֽן*(ספק פרשה סתומה בכתר ארם צובה)  
+**Full verse (English)**: Cursed be the one who subverts the rights of the stranger, the fatherless, and the widow.—And all the people shall say, Amen.  
 
-*Hebrew phrase*: וְשָׂ֥א עֵינֶ֛יךָ  
-*Explanation*: This is a common Hebrew idiom meaning 'to look,' 'to gaze,' or 'to direct one's vision,' rather than a literal physical lifting of the eyeballs....  
-*Target*: gazing → observing → visual perception  
-*Vehicle*: lifting eyes → physical action → body movement  
-*Ground*: directing vision → attentive observation → sensory action  
-*Confidence*: 0.95  
-
-**Deuteronomy 10:17** (idiom) - confidence: 0.95  
-*Figurative phrase*: does not lift up faces  
-
-**Full verse (Hebrew)**: כִּ֚י יְהֹוָ֣ה אֱלֹֽהֵיכֶ֔ם ה֚וּא אֱלֹהֵ֣י הָֽאֱלֹהִ֔ים וַאֲדֹנֵ֖י הָאֲדֹנִ֑ים הָאֵ֨ל הַגָּדֹ֤ל הַגִּבֹּר֙ וְהַנּוֹרָ֔א אֲשֶׁר֙ לֹא־יִשָּׂ֣א פָנִ֔ים וְלֹ֥א יִקַּ֖ח שֹֽׁחַד  
-**Full verse (English)**: For your God יהוה is God supreme and Lord supreme,*God supreme and Lord supreme Lit. “the god of gods and the lord of lords.” Heb. ’adon (“lord”) normally denotes a man in a position of authority. Here it is used to claim that Israel’s God is beyond the men who sit atop the social hierarchies of rank and gender. the great, the mighty, and the awesome God, who shows no favor and takes no bribe,  
-
-*Hebrew phrase*: לֹא־יִשָּׂ֣א פָנִ֔ים  
-*Explanation*: This is a common Hebrew idiom, 'nasa' panim' (to lift up faces), which means 'to show partiality' or 'to show favor.' The negative form indicates impartiality, not a literal physical action of lifting...  
-*Target*: God's impartiality → divine justice → divine attribute  
-*Vehicle*: not lifting faces → human judicial action → social interaction  
-*Ground*: impartiality → fairness → ethical conduct  
-*Confidence*: 0.95  
-
-**Deuteronomy 28:50** (idiom) - confidence: 0.90  
-*Figurative phrase*: will not lift up faces  
-
-**Full verse (Hebrew)**: גּ֖וֹי עַ֣ז פָּנִ֑ים אֲשֶׁ֨ר לֹא־יִשָּׂ֤א פָנִים֙ לְזָקֵ֔ן וְנַ֖עַר לֹ֥א יָחֹֽן  
-**Full verse (English)**: a ruthless nation, that will show the influential*influential Taking Heb. zaqen as a term of socioeconomic status; trad. “old.” See the Dictionary under “elder.” no regard and the vulnerable*vulnerable Taking the Heb. term as referring to socioeconomic status; trad. “young.” See previous note and the Dictionary under na‘ar. no mercy.  
-
-*Hebrew phrase*: לֹא־יִשָּׂ֤א פָנִים֙  
-*Explanation*: This is a common biblical idiom meaning 'to show no partiality,' 'to show no favor,' or 'to show no respect.' The literal action of 'not lifting faces' is a fixed expression conveying this meaning....  
-*Target*: nation's behavior → social interaction → interpersonal conduct  
-*Vehicle*: not lifting faces → physical action → human interaction  
-*Ground*: lack of partiality → lack of favor → disregard  
+*Hebrew phrase*: מַטֶּ֛ה מִשְׁפַּ֥ט  
+*Explanation*: The verb 'matteh' (from natah) literally means 'to bend' or 'to turn aside' a physical object. Applying this action to 'mishpat' (justice), an abstract concept, metaphorically represents the distortio...  
+*Target*: justice → legal principle → abstract concept  
+*Vehicle*: bent object → physical distortion → physical action/state  
+*Ground*: deviation from straightness → perversion of integrity → moral corruption  
 *Confidence*: 0.90  
 
-**Exodus 6:8** (idiom) - confidence: 1.00  
-*Figurative phrase*: I swore / raised My hand  
+**Genesis 9:14** (metaphor) - confidence: 0.90  
+*Figurative phrase*: the bow  
 
-**Full verse (Hebrew)**: וְהֵבֵאתִ֤י אֶתְכֶם֙ אֶל־הָאָ֔רֶץ אֲשֶׁ֤ר נָשָׂ֙אתִי֙ אֶת־יָדִ֔י לָתֵ֣ת אֹתָ֔הּ לְאַבְרָהָ֥ם לְיִצְחָ֖ק וּֽלְיַעֲקֹ֑ב וְנָתַתִּ֨י אֹתָ֥הּ לָכֶ֛ם מוֹרָשָׁ֖ה אֲנִ֥י יְהֹוָֽה  
-**Full verse (English)**: I will bring you into the land which I swore*swore Lit. “raised My hand.” to give to Abraham, Isaac, and Jacob, and I will give it to you for a possession, I יהוה.”  
+**Full verse (Hebrew)**: וְהָיָ֕ה בְּעַֽנְנִ֥י עָנָ֖ן עַל־הָאָ֑רֶץ וְנִרְאֲתָ֥ה הַקֶּ֖שֶׁת בֶּעָנָֽן  
+**Full verse (English)**: When I bring clouds over the earth, and the bow appears in the clouds,  
 
-*Hebrew phrase*: נָשָׂאתִי אֶת־יָדִ֔י  
-*Explanation*: This is a common biblical idiom for making a solemn oath or swearing, where the physical act of raising a hand symbolizes the act of taking an oath. It signifies a binding divine commitment....  
-*Target*: oath-taking → solemn promise → divine commitment  
-*Vehicle*: raising a hand → physical gesture → human action  
-*Ground*: solemnity → commitment → assurance  
-*Confidence*: 1.00  
+*Hebrew phrase*: הַקֶּ֖שֶׁת  
+*Explanation*: The Hebrew word 'qeshet' primarily means 'bow' (weapon). Here, it is used metaphorically to describe the rainbow, drawing a comparison based on its arc shape. The rainbow is not literally a weapon....  
+*Target*: rainbow → natural phenomenon → celestial event  
+*Vehicle*: bow (weapon) → weapon → tool  
+*Ground*: arc shape → curved form → visual characteristic  
+*Confidence*: 0.90  
 
-**Exodus 14:10** (idiom) - confidence: 0.95  
-*Figurative phrase*: the Israelites caught sight of the Egyptians / literally 'lifted their eyes'  
+**Genesis 9:13** (metaphor) - confidence: 0.95  
+*Figurative phrase*: My bow  
 
-**Full verse (Hebrew)**: וּפַרְעֹ֖ה הִקְרִ֑יב וַיִּשְׂאוּ֩ בְנֵֽי־יִשְׂרָאֵ֨ל אֶת־עֵינֵיהֶ֜ם וְהִנֵּ֥ה מִצְרַ֣יִם&thinsp;׀ נֹסֵ֣עַ אַחֲרֵיהֶ֗ם וַיִּֽירְאוּ֙ מְאֹ֔ד וַיִּצְעֲק֥וּ בְנֵֽי־יִשְׂרָאֵ֖ל אֶל־יְהֹוָֽה  
-**Full verse (English)**: As Pharaoh drew near, the Israelites caught sight of the Egyptians advancing upon them. Greatly frightened, the Israelites cried out to יהוה.  
+**Full verse (Hebrew)**: אֶת־קַשְׁתִּ֕י נָתַ֖תִּי בֶּֽעָנָ֑ן וְהָֽיְתָה֙ לְא֣וֹת בְּרִ֔ית בֵּינִ֖י וּבֵ֥ין הָאָֽרֶץ  
+**Full verse (English)**: I have set My bow in the clouds, and it shall serve as a sign of the covenant between Me and the earth.  
 
-*Hebrew phrase*: וַיִּשְׂאוּ֩ בְנֵֽי־יִשְׂרָאֵ֨ל אֶת־עֵינֵיהֶ֜ם  
-*Explanation*: This is a common biblical idiom 'נָשָׂא עֵינַיִם' (nasa einayim) meaning 'to look' or 'to see,' rather than a literal, exaggerated physical act of lifting the eyeballs. It describes the act of visual ...  
-*Target*: Israelites' perception → human observation → cognitive action  
-*Vehicle*: lifting eyes → physical action → bodily movement  
-*Ground*: act of seeing → visual perception → sensory input  
+*Hebrew phrase*: קַשְׁתִּ֕י  
+*Explanation*: The rainbow is directly identified as God's 'bow,' drawing on the visual similarity to an archer's weapon but recontextualizing its purpose from destruction to a sign of peace and covenant. This is a ...  
+*Target*: rainbow → atmospheric phenomenon → natural world  
+*Vehicle*: archer's bow → weapon → tool of power  
+*Ground*: curved shape → power/presence → symbol of promise  
 *Confidence*: 0.95  
 
-**Exodus 27:20** (idiom) - confidence: 0.90  
-*Figurative phrase*: for kindling lamps / to cause a lamp to go up  
+**Genesis 19:1** (idiom) - confidence: 0.90  
+*Figurative phrase*: bowing low with his face to the ground  
 
-**Full verse (Hebrew)**: וְאַתָּ֞ה תְּצַוֶּ֣ה&thinsp;׀ אֶת־בְּנֵ֣י יִשְׂרָאֵ֗ל וְיִקְח֨וּ אֵלֶ֜יךָ שֶׁ֣מֶן זַ֥יִת זָ֛ךְ כָּתִ֖ית לַמָּא֑וֹר לְהַעֲלֹ֥ת נֵ֖ר תָּמִֽיד  
-**Full verse (English)**: You shall further instruct the Israelites to bring you clear oil of beaten olives for lighting, for kindling lamps regularly.  
+**Full verse (Hebrew)**: וַ֠יָּבֹ֠אוּ שְׁנֵ֨י הַמַּלְאָכִ֤ים סְדֹ֙מָה֙ בָּעֶ֔רֶב וְל֖וֹט יֹשֵׁ֣ב בְּשַֽׁעַר־סְדֹ֑ם וַיַּרְא־לוֹט֙ וַיָּ֣קׇם לִקְרָאתָ֔ם וַיִּשְׁתַּ֥חוּ אַפַּ֖יִם אָֽרְצָה  
+**Full verse (English)**: The two messengers arrived in Sodom in the evening, as Lot was sitting in the gate of Sodom. When Lot saw them, he rose to greet them and, bowing low with his face to the ground,  
 
-*Hebrew phrase*: לְהַעֲלֹ֥ת נֵ֖ר  
-*Explanation*: The phrase 'לְהַעֲלֹ֥ת נֵ֖ר' (leha'alot ner) literally means 'to cause a lamp to go up,' but it is a conventional idiom in Biblical Hebrew for 'to light a lamp' or 'to make a lamp burn.' The lamp itse...  
-*Target*: lighting a lamp → lamp operation → ritual action  
-*Vehicle*: causing to ascend → raising an object → physical movement  
-*Ground*: initiation of function → activation → process of illumination  
+*Hebrew phrase*: וַיִּשְׁתַּ֥חוּ אַפַּ֖יִם אָֽרְצָה  
+*Explanation*: This is a common biblical Hebrew idiom for prostration, indicating deep respect, reverence, or submission. The dual form אַפַּיִם (literally 'two noses' or 'faces') is used here as a fixed part of the...  
+*Target*: Lot's act of complete prostration → expression of profound deference → human social behavior  
+*Vehicle*: literal phrase 'bowed faces to the ground' → physical description of extreme bowing → linguistic expression  
+*Ground*: utter humility → deep respect → submission  
 *Confidence*: 0.90  
 
-**Exodus 30:12** (idiom) - confidence: 1.00  
-*Figurative phrase*: When you take a census of the Israelite men (lit. "When you lift the head of the sons of Israel")  
+**Genesis 37:7** (personification) - confidence: 0.95  
+*Figurative phrase*: your sheaves gathered around and bowed low to my sheaf  
 
-**Full verse (Hebrew)**: כִּ֣י תִשָּׂ֞א אֶת־רֹ֥אשׁ בְּנֵֽי־יִשְׂרָאֵל֮ לִפְקֻדֵיהֶם֒ וְנָ֨תְנ֜וּ אִ֣ישׁ כֹּ֧פֶר נַפְשׁ֛וֹ לַיהֹוָ֖ה בִּפְקֹ֣ד אֹתָ֑ם וְלֹא־יִהְיֶ֥ה בָהֶ֛ם נֶ֖גֶף בִּפְקֹ֥ד אֹתָֽם  
-**Full verse (English)**: When you take a census of the Israelite men according to their army enrollment, each shall pay יהוה a ransom for himself on being enrolled, that no plague may come upon them through their being enrolled.  
+**Full verse (Hebrew)**: וְ֠הִנֵּ֠ה אֲנַ֜חְנוּ מְאַלְּמִ֤ים אֲלֻמִּים֙ בְּת֣וֹךְ הַשָּׂדֶ֔ה וְהִנֵּ֛ה קָ֥מָה אֲלֻמָּתִ֖י וְגַם־נִצָּ֑בָה וְהִנֵּ֤ה תְסֻבֶּ֙ינָה֙ אֲלֻמֹּ֣תֵיכֶ֔ם וַתִּֽשְׁתַּחֲוֶ֖יןָ לַאֲלֻמָּתִֽי  
+**Full verse (English)**: There we were binding sheaves in the field, when suddenly my sheaf stood up and remained upright; then your sheaves gathered around and bowed low to my sheaf.”  
 
-*Hebrew phrase*: כִּ֣י תִשָּׂ֞א אֶת־רֹ֥אשׁ בְּנֵֽי־יִשְׂרָאֵל֮  
-*Explanation*: This is a well-established Hebrew idiom (נָשָׂא רֹאשׁ) meaning 'to take a census' or 'to number' people. It does not imply a literal physical lifting of heads....  
-*Target*: census → population count → administrative action  
-*Vehicle*: lifting head → physical action → human gesture  
-*Ground*: enumeration → registration → assessment  
-*Confidence*: 1.00  
-
-**Exodus 35:26** (metaphor, idiom, metonymy) - confidence: 0.90  
-*Figurative phrase*: whose heart lifted them up in wisdom  
-
-**Full verse (Hebrew)**: וְכׇ֨ל־הַנָּשִׁ֔ים אֲשֶׁ֨ר נָשָׂ֥א לִבָּ֛ן אֹתָ֖נָה בְּחׇכְמָ֑ה טָו֖וּ אֶת־הָעִזִּֽים  
-**Full verse (English)**: And all the women who excelled in that skill spun the goats’ hair.  
-
-*Hebrew phrase*: נָשָׂ֥א לִבָּ֛ן אֹתָ֖נָה בְּחׇכְמָ֑ה  
-*Explanation*: This is a biblical idiom 'nasa lev' (to lift the heart), signifying inner motivation, skill, or inspiration. 'Heart' is used metonymically for the inner self/will/intellect, and 'lifting' is a metapho...  
-*Target*: women's skill and motivation → human capability → inner disposition  
-*Vehicle*: heart lifting a person → physical action → bodily function  
-*Ground*: inner empowerment by wisdom → intrinsic motivation → skillfulness  
-*Confidence*: 0.90  
-
-**Exodus 35:21** (idiom) - confidence: 0.95  
-*Figurative phrase*: who excelled in ability  
-
-**Full verse (Hebrew)**: וַיָּבֹ֕אוּ כׇּל־אִ֖ישׁ אֲשֶׁר־נְשָׂא֣וֹ לִבּ֑וֹ וְכֹ֡ל אֲשֶׁר֩ נָדְבָ֨ה רוּח֜וֹ אֹת֗וֹ הֵ֠בִ֠יאוּ אֶת־תְּרוּמַ֨ת יְהֹוָ֜ה לִמְלֶ֨אכֶת אֹ֤הֶל מוֹעֵד֙ וּלְכׇל־עֲבֹ֣דָת֔וֹ וּלְבִגְדֵ֖י הַקֹּֽדֶשׁ  
-**Full verse (English)**: And everyone who excelled in ability and everyone whose spirit was moved came, bringing to יהוה an offering for the work of the Tent of Meeting and for all its service and for the sacral vestments.  
-
-*Hebrew phrase*: אֲשֶׁר־נְשָׂא֣וֹ לִבּ֑וֹ  
-*Explanation*: This is an idiom. Literally 'whose heart lifted him,' it signifies inner motivation, courage, or generosity that propels a person to act. The heart does not physically lift a person; it represents the...  
-*Target*: person's motivation → inner drive → human will  
-*Vehicle*: heart lifting → physical action → bodily function  
-*Ground*: willingness → generosity → initiative  
+*Hebrew phrase*: תְסֻבֶּ֙ינָה֙ אֲלֻמֹּ֣תֵיכֶ֔ם וַתִּֽשְׁתַּחֲוֶ֖יןָ לַאֲלֻמָּתִֽי  
+*Explanation*: Attributes human-like actions (gathering, bowing in submission or homage) to inanimate objects (sheaves), signifying deference and subordination....  
+*Target*: brothers' future submission → family hierarchy → social dynamics  
+*Vehicle*: bowing sheaves → submissive agricultural bundles → inanimate objects  
+*Ground*: homage → subordination → acknowledgment of authority  
 *Confidence*: 0.95  
 
-**Genesis 13:14** (idiom) - confidence: 0.90  
-*Figurative phrase*: Raise your eyes  
+**Genesis 48:12** (idiom) - confidence: 0.90  
+*Figurative phrase*: and bowed low with his face to the ground  
 
-**Full verse (Hebrew)**: וַֽיהֹוָ֞ה אָמַ֣ר אֶל־אַבְרָ֗ם אַחֲרֵי֙ הִפָּֽרֶד־ל֣וֹט מֵֽעִמּ֔וֹ שָׂ֣א נָ֤א עֵינֶ֙יךָ֙ וּרְאֵ֔ה מִן־הַמָּק֖וֹם אֲשֶׁר־אַתָּ֣ה שָׁ֑ם צָפֹ֥נָה וָנֶ֖גְבָּה וָקֵ֥דְמָה וָיָֽמָּה  
-**Full verse (English)**: And יהוה said to Abram, after Lot had parted from him, “Raise your eyes and look out from where you are, to the north and south, to the east and west,  
+**Full verse (Hebrew)**: וַיּוֹצֵ֥א יוֹסֵ֛ף אֹתָ֖ם מֵעִ֣ם בִּרְכָּ֑יו וַיִּשְׁתַּ֥חוּ לְאַפָּ֖יו אָֽרְצָה  
+**Full verse (English)**: Joseph then removed them from his knees, and bowed low with his face to the ground.  
 
-*Hebrew phrase*: שָׂ֣א נָ֤א עֵינֶ֙יךָ֙  
-*Explanation*: This is a common biblical Hebrew idiom (נָשָׂא עֵינַיִם) meaning 'to look,' 'to observe,' or 'to survey,' rather than a literal instruction to physically lift one's eyeballs. It directs Abram to visua...  
-*Target*: Abram's visual survey → human perception → cognitive action  
-*Vehicle*: physical act of raising eyes → bodily action → human physiology  
-*Ground*: directing gaze → observing surroundings → visual attention  
+*Hebrew phrase*: וַיִּשְׁתַּ֥חוּ לְאַפָּ֖יו אָֽרְצָה  
+*Explanation*: This is a common biblical idiom for prostration, signifying deep respect, submission, or worship. The phrase 'to his face/nose to the ground' is a conventional way of describing the act of bowing comp...  
+*Target*: prostration → act of submission → expression of reverence  
+*Vehicle*: bowing with face to ground → physical gesture → bodily action  
+*Ground*: deep respect → humility → subservience  
 *Confidence*: 0.90  
 
-*...and 61 more instances*
+**Psalms 18:35** (hyperbole) - confidence: 0.95  
+*Figurative phrase*: my arms can bend a bow of bronze.  
 
-**Usage breakdown**: lifting eyes (8x), physical elevation (5x), lifting a burden (4x)
+**Full verse (Hebrew)**: מְלַמֵּ֣ד יָ֭דַי לַמִּלְחָמָ֑ה וְֽנִחֲתָ֥ה קֶֽשֶׁת־נְ֝חוּשָׁ֗ה זְרוֹעֹתָֽי  
+**Full verse (English)**: who trained my hands for battle;my arms can bend a bow of bronze.  
+
+*Hebrew phrase*: וְֽנִחֲתָ֥ה קֶֽשֶׁת־נְ֝חוּשָׁ֗ה זְרוֹעֹתָֽי  
+*Explanation*: The statement describes the speaker's arms as capable of bending a bow made of bronze. This is an extreme exaggeration (hyperbole) as bronze is a rigid metal, making such a feat humanly impossible. It...  
+*Target*: speaker's strength → human capability → physical attribute  
+*Vehicle*: bending a bronze bow → impossible feat → exaggerated action  
+*Ground*: extraordinary power → superhuman ability → immense strength  
+*Confidence*: 0.95  
+
+**Psalms 37:15** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: and their bows shall be broken  
+
+**Full verse (Hebrew)**: חַ֭רְבָּם תָּב֣וֹא בְלִבָּ֑ם וְ֝קַשְּׁתוֹתָ֗ם תִּשָּׁבַֽרְנָה  
+**Full verse (English)**: Their swords shall pierce their own hearts,and their bows shall be broken.  
+
+*Hebrew phrase*: וְ֝קַשְּׁתוֹתָ֗ם תִּשָּׁבַֽרְנָה  
+*Explanation*: This phrase uses metonymy and functions as an idiom. The 'bows' (instruments of war) represent the military power or ability to wage war of the wicked. 'Broken' signifies the complete loss of this pow...  
+*Target*: wicked people's military defeat → loss of power → cessation of aggression  
+*Vehicle*: broken bows → destroyed weapons → physical objects  
+*Ground*: disarmament → incapacitation → defeat  
+*Confidence*: 0.95  
+
+**Psalms 38:7** (metaphor) - confidence: 0.90  
+*Figurative phrase*: I am all bent and bowed  
+
+**Full verse (Hebrew)**: נַעֲוֵ֣יתִי שַׁחֹ֣תִי עַד־מְאֹ֑ד כׇּל־הַ֝יּ֗וֹם קֹדֵ֥ר הִלָּֽכְתִּי  
+**Full verse (English)**: I am all bent and bowed;I walk about in gloom all day long.  
+
+*Hebrew phrase*: נַעֲוֵ֣יתִי שַׁחֹ֣תִי עַד־מְאֹ֑ד  
+*Explanation*: The physical posture of being 'bent and bowed' is a somatic metaphor representing an internal state of deep distress, humiliation, sorrow, or oppression, rather than merely a literal physical conditio...  
+*Target*: speaker's suffering → emotional distress → human experience  
+*Vehicle*: bent and bowed posture → physical stance → human body  
+*Ground*: oppression, humiliation, sorrow → burdened state → negative condition  
+*Confidence*: 0.90  
+
+**Psalms 43:5** (personification) - confidence: 0.95  
+*Figurative phrase*: Why so downcast, my soul  
+
+**Full verse (Hebrew)**: מַה־תִּשְׁתּ֬וֹחֲחִ֨י&thinsp;׀ נַפְשִׁי֮ וּֽמַה־תֶּהֱמִ֢י עָ֫לָ֥י הוֹחִ֣ילִי לֵ֭אלֹהִים כִּי־ע֣וֹד אוֹדֶ֑נּוּ יְשׁוּעֹ֥ת פָּ֝נַ֗י וֵאלֹהָֽי&nbsp;{פ}  
+**Full verse (English)**: Why so downcast, my soul,why disquieted within me?Have hope in God;I will yet praise Him,my ever-present help, my God.  
+
+*Hebrew phrase*: מַה־תִּשְׁתּ֬וֹחֲחִ֨י&thinsp;׀ נַפְשִׁי֮  
+*Explanation*: The soul, an immaterial entity, is addressed as if it were a person capable of physical posture ('downcast' or 'bowing down') and experiencing emotional distress. This attributes human characteristics...  
+*Target*: my soul → inner self → human psyche  
+*Vehicle*: a person bowing down → a distressed individual → human being  
+*Ground*: emotional distress → sadness → despair  
+*Confidence*: 0.95  
+
+*...and 11 more instances*
+
+**Usage breakdown**: bent object (2x), bow (weapon) (1x), archer's bow (1x)
 
 ---
 
@@ -1225,29 +1316,16 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 
 ### Query 6
 **Filters**: Vehicle contains: opening  
-**Results**: 26  
+**Results**: 23  
 
-**Core pattern**: open hand metaphor (3/26 instances, 11%)
+**Core pattern**: open hand metaphor (3/23 instances, 13%)
 
 **Top 3 Most Relevant** (by confidence):
 1. ⭐ **Exodus 14:9** (confidence: 1.00) - The phrase עַל־פִּי (al-pi), literally 'upon the mouth of,' is a common biblical idiom used to denot...
 2. ⭐ **Exodus 39:23** (confidence: 1.00) - The opening of the robe is explicitly compared to the opening of a coat of mail using the comparativ...
 3. ⭐ **Psalms 5:10** (confidence: 1.00) - This is a powerful metaphor comparing the throat of the wicked, representing their speech, to an ope...
 
-#### All Instances (26 total):
-
-**Deuteronomy 11:9** (idiom) - confidence: 0.90  
-*Figurative phrase*: long endure  
-
-**Full verse (Hebrew)**: וּלְמַ֨עַן תַּאֲרִ֤יכוּ יָמִים֙ עַל־הָ֣אֲדָמָ֔ה אֲשֶׁר֩ נִשְׁבַּ֨ע יְהֹוָ֧ה לַאֲבֹתֵיכֶ֛ם לָתֵ֥ת לָהֶ֖ם וּלְזַרְעָ֑ם אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: and that you may long endure upon the soil that יהוה swore to your fathers to assign to them and to their heirs, a land flowing with milk and honey.  
-
-*Hebrew phrase*: תַּאֲרִ֤יכוּ יָמִים֙  
-*Explanation*: This is a standard Hebrew idiom meaning to live a long life or to have a long duration of existence. It is not a literal prolongation of individual days but an idiomatic way to express longevity....  
-*Target*: longevity → human lifespan → life experience  
-*Vehicle*: prolonging days → extending time → temporal manipulation  
-*Ground*: extended duration → length of life → temporal quality  
-*Confidence*: 0.90  
+#### All Instances (23 total):
 
 **Deuteronomy 15:8** (idiom) - confidence: 0.95  
 *Figurative phrase*: you must open your hand  
@@ -1366,7 +1444,20 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 *Ground*: enabling perception → granting insight → revealing hidden truth  
 *Confidence*: 0.90  
 
-*...and 16 more instances*
+**Genesis 29:31** (idiom) - confidence: 0.95  
+*Figurative phrase*: opened her womb  
+
+**Full verse (Hebrew)**: וַיַּ֤רְא יְהֹוָה֙ כִּֽי־שְׂנוּאָ֣ה לֵאָ֔ה וַיִּפְתַּ֖ח אֶת־רַחְמָ֑הּ וְרָחֵ֖ל עֲקָרָֽה  
+**Full verse (English)**: Seeing that Leah was unloved, יהוה opened her womb; but Rachel was barren.  
+
+*Hebrew phrase*: וַיִּפְתַּ֖ח אֶת־רַחְמָ֑הּ  
+*Explanation*: This is a common biblical idiom for God granting fertility or enabling conception. It does not describe a literal physical opening of the womb....  
+*Target*: Leah's fertility → human reproduction → divine intervention  
+*Vehicle*: womb opening → physical action on an organ → biological process  
+*Ground*: granting fertility → enabling life → divine power  
+*Confidence*: 0.95  
+
+*...and 13 more instances*
 
 **Usage breakdown**: open hand (3x), mouth (2x), coat of mail opening (2x)
 
@@ -1397,8 +1488,269 @@ Matched: *תְּהִלָּ֤ה* (position 4)
 
 Classical interpretations from traditional Jewish commentators on key verses.
 
+### Psalms 145:1
+**Why this verse**: Unique tehillah title - how do commentators explain this psalm's special status?  
+
+#### Ibn Ezra
+**Hebrew**: תהלה לדוד ארוממך - בדבור ובאמונת הלב. | והזכיר המלך – כי הוא המלך באמת וזהו יסוד כל התהלה הזאת. | ואברכה שמך - להוסיף על רוממותיך. והנה הטעם שאדבר שאתה מרומם.  
+
+---
+
+#### Radak
+**Hebrew**: תהילה. אלה הששה מזמורים עד סוף הספר הם כולם תהילת האל יתברך ושבחו לפיכך החל בהם ומשלים בהם בתהילה לגודל התהילה וזה המזמור תחילת הפסוק הראשון תהילה ותחילת הפסוק האחרון תהילה והחמשה הללויה בראש ובסוף והכל לגודל התהילה ומתי תהיה תהילת האל גדולה, בקבוץ גליות שיראו כל העם הנפלאות שיעשה עם ישראל לפיכך הזכיר בהם קיבוץ גליות ובנין ירושלים, המזמור הזה תהילה לאל יתברך לפיכך חיברו באל"ף בי"ת ולא חיבר את הנו"...  
+
+**English**: Tehillah (A Praise): These six psalms until the end of the book are all praises of the Blessed God and His glory. Therefore, they begin and end with praise, reflecting the greatness of praise. This psalm starts with the word "Tehillah" in the first verse and also concludes with "Tehillah" in the last verse. The other five psalms start and end with "Hallelujah," all highlighting the greatness of pr...  
+
+---
+
+#### Metzudat David
+**Hebrew**: תהלה לדוד. לפי שבהמזמור הזה אין בה שום שאלה ובקשה כ״‎א שבחי המקום ולזה אמר תהלה לדוד כי אין בה כ״‎א תהלה ושבח: | ארוממך. אספר רוממותיך:  
+
+---
+
+#### Malbim
+**Hebrew**: ארוממך אלוהי המלך, ה' נעלם מצד עצמו ונגלה מצד פעולותיו, והרוממות הוא מן הצד שהוא מתרומם ונעלם מן ההשגה, ואמר שאתה אלוהי מצד עצמך מרומם מכל ברכה ותהלה, אולם אברכה שמך שמצד שמך שהוא הפרסום שנתפרסמת ע"י ההנהגה, מצד זה אברכך, וגדר הברכה שמברכים את ה' הוא השפע והטוב היורד מאת ה' אל עולמו ע"י צדקת התחתונים, אתה מקור הברכה והטוב, ויציינהו כמלך הנסתר בכבודו מרומם מכל שריו ועבדיו, ובכ"ז יוצא מאתו ברכה וטוב...  
+
+---
+
+#### Meiri
+**Hebrew**: תהלה לדוד. זה המזמור כולו הודאה וספור סדר הנהגתו במציאות והוא מחובר על סדר אלף־בית אלא שחסר אות הנו״ן לא ידענו הסבה לפי הפשט. ואמ׳ ארוממך אלהי המלך ואברכה שמך לעולם ועד ר״ל כל ימי חיי או רומז לחיי העולם הבא.  
+
+---
+
+#### Torah Temimah
+**Hebrew**: תְּהִלָּה לְדָוִד: אמר רבי אלעזר א"ר אבינא כל האומר תהלה לדוד בכל יום שלש פעמים מובטח לו שהוא בן העולם הבא וכו':(ברכות ד ע"ב)  
+
+---
+
+### Psalms 145:2
+**Why this verse**: Daily blessing commitment - traditional understanding of liturgical obligation  
+
+#### Ibn Ezra
+**Hebrew**: בכל יום - יום אחר יום אברכה שמך עד שאהיה מהמהללים תמיד, שמעלתם גדולה מהמברכים.  
+
+---
+
+#### Radak
+**Hebrew**: בכל יום אברכך. בעולם הזה: | ואהללה שמך לעולם ועד. לעולם הבא:  
+
+**English**: Every day I will bless Thee: In this world. | And I will praise Thy name for ever and ever: In the World to Come.  
+
+---
+
+#### Metzudat David
+**Hebrew**: בכל יום. ר״‎ל לפי הראוי בכל יום מעין המאורע:  
+
+---
+
+#### Malbim
+**Hebrew**: בכל יום אברכך, ר"ל והברכה הזאת היא מתמדת ומתחדשת בכל יום, כי מחדש בכל יום מעשה בראשית ומוריד ברכה חדשה, ועי"כ אהללה שמך לעולם ועד, כי התהלה לא תצוייר מצד עצמו כי לו דומיה תהלה, רק מצד הברכה המושפעת ממנו שעל ידה יוכר תהלתו, ואחר שהברכה מתחדשת תמיד כן תתמיד התהלה לעולם ועד:  
+
+---
+
+#### Meiri
+**Hebrew**: וכפל הענין ואמ׳ בכל יום אברכך ואהללה שמך לעולם ועד.  
+
+---
+
+### Psalms 145:3
+**Why this verse**: Divine transcendence claim - how commentators handle epistemological limits  
+
+#### Ibn Ezra
+**Hebrew**: גדול - בעבור שהזכיר ואהללה שמך הזכיר, כי השם גדול מהמהללו, על כן: ומהולל מאד יותר ממהללו ובעבור שאמר שהוא גדול הזכיר כי לגדולתו אין חקר כי כל מלך בלתו, יש לגדולתו ראשית ואחרית ולגדולתו אינו כן.  
+
+---
+
+#### Radak
+**Hebrew**: גדול ה'. ואם אומר אגדלנו ואהללנו הוא גדול ומהולל על כל תהילותיו עד כי: | לגדולתו אין חקר. ולא ישיגנה האדם ברוב החקירה כי אין לה חקר אלא שיהללנו האדם לפי שכלו:  
+
+**English**: Great is the Lord: Even if one says, "I will magnify and praise Him," He is already great and praised beyond all praises to the extent that: | And his greatness is unsearchable: A person cannot comprehend it through much investigation, for it is unsearchable. Nevertheless, a person should praise Him according to their understanding.  
+
+---
+
+#### Metzudat David
+**Hebrew**: ומהולל מאד. יותר ממה שמהללין אותו כי אין חקר לדעת גדולתו ולהללו כפי מה שהוא:  
+
+---
+
+#### Malbim
+**Hebrew**: גדול ה', הגדולה אצל ה' מורה שהוא ראשית כל הסבות ואחרית כל המסובבים שהכל מאתו ועי"כ הוא מהולל מאד, ובכ"ז לגדולתו אין חקר, לא תספיק שום חקירה להכיר גדולתו מצד עצמו, וכל שאנו מוסיפים לחקור בגדולתו, נדע שלא נדע, עד שאמרו החוקרים שהתוארים והמהללים הם שוללות לא מחייבות, ורק.  
+
+---
+
+#### Meiri
+**Hebrew**: וכיוון להודיע שכל תהלת האדם לאל רק כפי שכל האדם לא שיוכל בתהלתו לבוא עד חקר שבחיו ותהלותיו. ואמ׳ גדול ה׳ ומהולל מאד ולגדולתו אין חקר ר״ל שלא ישיגנה האדם ברוב חקירה אבל מצד הקבלה.  
+
+---
+
+### Psalms 145:4
+**Why this verse**: Generational transmission focus - classical interpretation of works vs. character  
+
+#### Rashi
+**Hebrew**: דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ. וְגַם אֲנִי הֲדַר כְּבוֹד הוֹדְךָ אָשִׂיחָה:  
+
+**English**: Generation to generation will praise Your works And I, too, shall speak of the majesty of the glory of Your splendor.  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: דור - עתה פירש טעם ומהולל מאד כי הדור שהלך יספר לדור הבא מעשיך הנוראים יגידו שני הדורות. | וטעם וגבורתך - כי מתהלות המלך היותו גבור.  
+
+---
+
+#### Radak
+**Hebrew**: דור לדור. אפילו אם יהיו חיי בני אדם ארוכים לא יוכל להשיג בכל ימיהם כל שכן שהם קצרים אלא מה יש להם לעשות לפי קוצר ימיהם כי דור הולך ודור בא יספר זה הדור שהולך טרם לכתו לדור אחר המעשים הנוראים שראו בימיהם והגבורות שראו בחייהם לפי שישבחוהו הדור הבא על מה שעבר שלא ראו, אלא שהוגד להם על מה שיראו בימיהם:  
+
+**English**: One generation to another: Even if the lives of human beings were long, they would not be able to comprehend all of His greatness in their lifetimes, especially since their lives are short. What should they do given the brevity of their days? Since one generation passes away and another comes, the departing generation should recount to the next generation the wondrous deeds and mighty acts they wi...  
+
+---
+
+#### Metzudat David
+**Hebrew**: דור לדור. דור זה ישבח מעשיך לדור הבא אחריו: | וגבורותיך יגידו. כפל הדבר במ״‎ש:  
+
+---
+
+#### Malbim
+**Hebrew**: דור לדור ישבח מעשיך, אחר שאין אנו משיגים גדולתו מצד עצמו ישבחו רק מעשיך, שרק על ידם אתה ניכר, ויש הבדל בין שבח ותהלה, שגדר השבח שהדבר משביח יותר ממה שהיה מקודם, ור"ל שכל שיוסיפו דור ודור לעיין במעשי ה' ובסתרי הטבע, יכירו בם חכמות ופליאות שהיו נעלמים מראשונים, וישבחו את מעשיו שיוסיפו בטובם וחכמתם על מה שהיו עד הנה, עד שכל דור הבא יראה שדור הקודם לא הבין את מעשה ה' כראוי, וגברותיך יגידו, חוץ ממה שיש...  
+
+---
+
+#### Meiri
+**Hebrew**: ואמ׳ דור לדור כלומ׳ דור אחר דור ישבח מעשיך ויספרם לדור הבא אחריו ר״ל אבות לבנים ויגידו גבורותיך זה לזה דור אחר דור  
+
+---
+
+### Psalms 145:5
+**Why this verse**: Triple glory construction - how commentators parse the dense Hebrew syntax  
+
+#### Ibn Ezra
+**Hebrew**: הדר - הדורות יגידו גבורותיך הנראות ואני אשיחנו עם לבבי. | הדר כבוד הודך - עקרי כבוד גבורותיך הנראות, גם דברי נפלאותיך שלא יבינום הדורות.  
+
+---
+
+#### Radak
+**Hebrew**: הדר. כמו שאני עושה שאשיחם לבני העולם: | הדר כבוד הודך. פירושו יופי הכבוד עוזך כי בעוזו ובנפלאויו הוא נכבד כמו שאמר ואכבדה בפרעה: | ודברי נפלאותיך. שעשית עמי ויעשו הם גם כן בכל עת שיקבלו חסד האל יאמרו אותו ויספרוהו לרבים:  
+
+**English**: Hadar (Splendour): As I do, I will speak of them to the people of the world. | The glorious splendour of Thy majesty: This means the beauty of the honor of Your strength, for He is honored through His strength and His wonders, as it is said, "I will get me honor upon Pharaoh." | And of Thy wondrous works: That You have done for me, and they too will speak of them whenever they receive the kindness...  
+
+---
+
+#### Malbim
+**Hebrew**: הדר, נגד מ"ש שבני הדורות ישיגו השגה הדרגה מתעלה ומשביח בכל עת במעשיך הטבעיים, ויגידו הגדה חדשה מן גבורותיך, (שגדר הגדה הוא המגיד דבר חדש) אמר, אבל אני בין הדר כבוד הודך של הטבע, ובין דברי נפלאותיך שלמעלה מן הטבע, אשיחה, שגדר השיחה הוא בדברים שאדם מורגל בהם עד שהם לו כשיחה, שהוא הדבור הנפלט מן האדם בלי כונה, כמו שישיח בינו לבין עצמו בדברים רגילים מבלי שימת לב כלל, כי אני רגיל בהם והם לי כשיחה מורגל...  
+
+---
+
+#### Meiri
+**Hebrew**: וכן אני אגיד ואספרה הדר כבוד הודך ודברי נפלאותיך  
+
+---
+
+### Psalms 145:6
+**Why this verse**: Textual variant issue - traditional manuscript and interpretive approaches  
+
+#### Rashi
+**Hebrew**: וְעֱזוּז נוֹרְאוֹתֶיךָ יֹאמֵרוּ. וְגַם אֲנִי גְּדֻלָּתְךָ אֲסַפְּרֶנָּה:  
+
+**English**: And the strength of Your awesome deeds they will tell And I, too, shall recite Your greatness.  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: ועזוז - ואלה הדורות יספרו הנוראות שעשית לעיניהם, כמו אותות מצרים ושאר נפלאות נוראות, רק אני גדולתך שהיא גדולת כבודך, אספר להם אולי יבינו. | והנה טעם נוראותיך - כי כן ראוי להיות המלך נורא.  
+
+---
+
+#### Radak
+**Hebrew**: ועזוז. כמו שאני גדולתך אספרנה כן יאמרו הם גם כן עזוז נוראותיך וכתוב גדולתיך ביו"ד הריבוי שהם רבות אצל המקבל, וקרי גדולתך כי הכל הם אחד אצלו יתברך ואלה שמות הנזכרים בזה המזמור גדולה וגבורה מעשה הוד כבוד וטוב צדקה מלכות נפלאות נוראות הם י', לענין ידוע אבל אינם דוקא כל אחד במקומו הנזכר אלא כל אחד ענינו במקום חבירו גם כן אלא מפני ששנה להם חלקם בשמות משונים זה מזה:  
+
+**English**: And men shall speak of the might of Thy terrible acts: Just as I will declare Your greatness, so too will they speak of the might of Your awe-inspiring acts. The word greatness is written with a yud, indicating plurality, to show that these acts are numerous to those who receive them. It is read as Your greatness in the singular because all are one to Him, the Blessed One. The names mentioned in t...  
+
+---
+
+#### Metzudat David
+**Hebrew**: ועזוז וגו׳‎. ר״‎ל כמו שאני אספר גדולתך כן כולם יאמרו חוזק מעשיך הנוראים:  
+
+---
+
+#### Malbim
+**Hebrew**: ועזוז, אמר עוד הבדל בין השגתי ובין השגת רוב בני אדם ההמונים, שהם יאמרו נוראותיך, היינו המסות והמופתים שעשית להעניש את המורדים בך, כמו מכות שהבאת על המצרים ועדת קרח וכדומה, הוא אצלם עזוז של נוראות, שעי"ז יתיראו מענשך כאלו אתה נורא להעניש, אבל אנכי גדולתך אספרנה, אני אספר זה לא מצד המורא והדין והפחד, רק מצד הגדולה, כי הנוראות אשר עשה הם מצד גדולתו ושרשם במדת החסד והגדולה להיטיב לאוהבי שמו, ועי"כ.  
+
+---
+
+#### Meiri
+**Hebrew**: וגדולתך אשר אמרו האבות זה לזה דור אחר דור אני אספרנה  
+
+---
+
+### Psalms 145:7
+**Why this verse**: Memorial terminology - liturgical vs. personal memory in classical exegesis  
+
+#### Rashi
+**Hebrew**: זֵכֶר רַב טוּבְךָ יַבִּיעוּ. דּוֹר לְדוֹר גְּבוּרָתְךָ יְדַבֵּרוּ זֶה לָזֶה לֵאמֹר: טוֹב לָנוּ לְהוֹדִיעַ לִבְנֵי הָאָדָם גְּבוּרוֹתָיו וּכְבוֹד הֲדַר מַלְכוּתוֹ שֶׁל הַקָּדוֹשׁ בָּרוּךְ הוּא (מצאתי):  
+
+**English**: Of the remembrance of Your abundant goodness they will speak i.e., one generation to another generation. and they will speak of Your might to each other, saying, “It is good for us to make known to the children of men His mighty deeds and the glory of the majesty of the kingdom of the Holy One, blessed be He.” (I found.)  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: זכר - והמלך אם היה טוב כל אדם יביעו טובו ובא רב טובך. והטעם טובך הרב כמו בגדול זרועך שהוא בזרועך הגדול. | וצדקתך ירננו - גם ראוי הוא שיהיה המלך עושה צדק. | ומלת ירננו – בפרהסיא וזה אומרים - [חנון - להושיע המשוע אליו. ורחום – לשמור עבדו שלא יכשל.]  
+
+---
+
+#### Radak
+**Hebrew**: זכר רב טובך. רב הוא שם לא תואר כאילו אמר גודל טובך: | יביעו. ידברו כמו תבענה שפתי: | וצדקתך ירננו. יאמרו אותם בקול רם בפני בני אדם:  
+
+**English**: The fame of Thy great goodness: "Great" is a noun, not an adjective, as if it said, "the greatness of Your goodness." | They shall utter: They shall speak, as in "the lips shall speak." | And shall sing of Thy righteousness: They will proclaim it aloud before people.  
+
+---
+
+#### Metzudat David
+**Hebrew**: רב טובך. מרבית טובך: | וצדקתך. זכרון צדקתך ירננו:  
+
+---
+
+#### Malbim
+**Hebrew**: זכר רב טובך יביעו, ישימו לב לזכר רב טובך, שאתה פועל טוב, כי הנוראות הם מצד ההטבה לא מצד ההרעה, וצדקתך ירננו, ואז ירננו ברנה ושמחה את צדקתך, ומבואר אצלנו כי גדר הצדקה הנאמרת אצל ה' הם המעשים שיעשה שלא בהשקף על מדת המשפט לפי הזכות של בני אדם רק מצד הצדקה העליונה, ר"ל שיכירו שהכל ברוב טוב לפי מדת הצדקה, מצד.  
+
+---
+
+#### Meiri
+**Hebrew**: וזכר רב טובך יביעו וצדקתך ירננו ג״כ ר״ל יכריזו ויספרו ויפרסמו. ורב שם והיה ראוי להנקד בחולם.  
+
+---
+
+### Psalms 145:8
+**Why this verse**: Selective divine attribute quotation - why omit 'truth and faithfulness'?  
+
+#### Ibn Ezra
+**Hebrew**: חנון - להושיע המשוע אליו. | ורחום – לשמור עבדו שלא יכשל.  
+
+---
+
+#### Radak
+**Hebrew**: חנון ורחום. אלה המדות שהם טוב וצדקה מאתו יביעו וירננו כי הוא חנון שחונן הבריות ונותן להם צרכם ורחום שמרחם וחומל עליהם ושומר אותם מן הנזקים ומפגעי העולם: | ארך אפים. שמאריך אפו לרשעים ולא יענשם מיד: | וגדל חסד. הדל"ת בקמ"ץ חטף אמר שהוא גדול חסד שמגדיל חסדו על בני אדם יותר ממה שהם ראויין לקבל: | טוב ה' לכל. אפי' למיני החיות והבהמות והעופות הוא טוב ומרחם וכן ראוי לאדם ללכת בדרכיו אלה ואין לו להשחית ה...  
+
+**English**: Gracious and compassionate: These are the attributes by which He expresses His goodness and righteousness. They shall utter and sing of Him, for He is gracious, granting favor to creatures and providing for their needs, and compassionate, showing mercy and pity towards them, protecting them from harm and the world's afflictions. | Slow to anger: He delays His anger towards the wicked and does not ...  
+
+---
+
+#### Metzudat David
+**Hebrew**: חנון. נותן מתנת חנם: | ארך אפים. אינו ממהר לכעוס: | וגדל חסד. עושה חסדים גדולים:  
+
+---
+
+#### Malbim
+**Hebrew**: שרחום וחנון ה', ושכל מעשיו הם מצד החנינה והרחמים, וגם בענשו את הרשעים הוא ארך אפים, ואינו מעניש תיכף, ורב חסד אם ישובו בתשובה:  
+
+---
+
+#### Meiri
+**Hebrew**: חנון ורחום ה׳ שחונן ומרחם את הבריות לספק להם צורכיהם וארך אפים לרשעים שלא להענישם לשעתם וגדל חסד לגמלם ביותר ממה שאין חוק עליו.  
+
+---
+
 ### Psalms 145:9
-**Why this verse**: Universal mercy scope vs. selective judgment (v20) - how do commentators resolve this theological tension?  
+**Why this verse**: Universal divine goodness - how commentators handle radical inclusivity  
 
 #### Ibn Ezra
 **Hebrew**: טוב - וכל מלך לא יתכן להיותו טוב רק לאנשים מעט והשם לבדו טוב לכל גם המלך לא יתכן לרחם רק על עבדיו הנאהבים, והשם לבדו רחמיו על כל מעשיו.  
@@ -1420,8 +1772,98 @@ Classical interpretations from traditional Jewish commentators on key verses.
 
 ---
 
+#### Torah Temimah
+**Hebrew**: וְרַחֲמָיו עַל כָּל מַעֲשָׂיו: ההוא צדוקי דהוה בשבבותיה דר' יהושע בן לוי הוה קא מצער ליה טובא בקראי יומא חד שקל תרנגולא ואוקמיה בין כרעי' דערסא ועיין ביה סבר כי מטא ההיא שעתא אלטייה כי מטא ההיא שעתא ניים אמר ש"מ לאו אורח ארעא למעבד הכי ורחמיו על כל מעשיו כתיב וכתיב גם ענוש לצדיק לא טוב וכו':(ברכות ז ע"א) | וְרַחֲמָיו עַל כָּל מַעֲשָׂיו: ואפ"ה יסורי דר' אלעזר בר' שמעון עדיפי מדרבי דאילו ר"א בר"ש מא...  
+
+---
+
+### Psalms 145:10
+**Why this verse**: Works vs. faithful distinction - covenant particularism within universalism  
+
+#### Ibn Ezra
+**Hebrew**: יודוך - הנה כל מעשיך יודוך, כי כן אתה וחסידיך יוסיפו להודות לך.  
+
+---
+
+#### Radak
+**Hebrew**: יודוך. אף מיני החיים שאין בהם דעת שתקון יצירתך בהן והכנת מזונותם יודוך האדם המבין בהם והרי הם כאילו יודוך: | וחסידיך יברכוכה. בכתיבת הה"א הנחה אמר ומי הם המודים החסידים שהרי מתבוננים תמיד במעשיך והם יברכוך תמיד, כי בכל עת בראותם החידושים המתחדשים תמיד ביצורים והתיקון אשר בחי ובצומח יברכוכה, וכן תיקנו רז"ל ברכה לכל דבר כפי עניינו כמו שאמרו הרוא' כך וכך מברך כך ואמר וחסידיך כי כל ל' חסד הוא יתרון הד...  
+
+**English**: All Thy works shall praise Thee: Even the various species of living creatures that lack knowledge to recognize the perfection of Your creation and the provision of their sustenance will praise You. Human beings who understand these things will also praise You as if they were all giving You thanks. | And Thy pious ones shall bless Thee: In the script of the "Hei," it is said, "And who are the thank...  
+
+---
+
+#### Metzudat David
+**Hebrew**: כל מעשיך. ר״‎ל מכל מעשה ה׳‎ בא לו הודאה ושבח: | יברכוכה. יברכו אותך:  
+
+---
+
+#### Malbim
+**Hebrew**: יודוך ה' כל מעשיך, כי עשה כל מעשה בתכלית הטוב והשלימות ומשגיח עליהם להחיותם ולתקנם ואין רע במציאות מצד ה' הבורא אותם, וחסידיך יברכוכה, המתנהגים בחסידות ועושים הכל לפנים משורת הדין, הם ימשיכו מאתך שפע הברכה ורב טוב שזה גדר הברכה שמברכים לה':  
+
+---
+
+#### Meiri
+**Hebrew**: ואח״כ בא יודוך ה׳ כל מעשיך ע״ד השמים מספרים כבוד אל לדעת מי שפי׳ בו ענין בחינת האנשים בהם וכן יודוך ה׳ כל מעשיך ר״ל שבני אדם יודוך במה שיראו תקון יצירתם והכנתך מזונותיהם על אופני מה שצריך להם והוא שאמ׳ וחסידיך יברכוך כלומ׳ המבינים בטבע הנמצאות יברכוך ר״ל יודוך בענין סדרי המציאות כלו.  
+
+---
+
+### Psalms 145:11
+**Why this verse**: Royal proclamation theme - kingship theology in praise context  
+
+#### Ibn Ezra
+**Hebrew**: כבוד - ומה היא ברכת חסידיך? שילמדו כבוד מלכותך, לאשר לא ידעוך.  
+
+---
+
+#### Radak
+**Hebrew**: כבוד. באותם הברכות יזכרו כבוד מלכותך וגבורתך כי אתה מלך על כל ובורא הכל ובגבורתך וביכלתך הויות היצורים כולם:  
+
+**English**: Glory (כבוד): In those blessings they shall mention the glory of Your kingdom and Your power, for You are the king over all and the creator of everything, and with Your power and ability, You sustain all creatures.  
+
+---
+
+#### Malbim
+**Hebrew**: כבוד מלכותך יאמרו, והחסידים האלה יאמרו תמיד כבוד מלכותך, שהוא ספור מעשיו הקבועים כפי ההנהגה הטבעיית שיסד מראשית קדומים, שהוא כבוד מלכותו, שבזה ינהיג כמלך הנוהג ע"פ חקי מלכותו, וגם גבורתך ידברו שהוא מה שיעשה ה' אותות ומופתים ומשדד הטבע, שהן הן גבורותיו, וזאת ידברו באורך שזה גדר הדבור:  
+
+---
+
+#### Meiri
+**Hebrew**: וכבוד מלכותך יאמרו ר״ל יספרו וכן גבורתך  
+
+---
+
+### Psalms 145:12
+**Why this verse**: Mission to humanity - universal proclamation purpose  
+
+#### Ibn Ezra
+**Hebrew**: להודיע לבני האדם - שהם קטנים. | וי"ו גבורותיו - שב אל כבוד מלכותך יאמרו ואין טענה איך סמך כבוד הדר מלכותו לכבוד מלכותך, כי הנה כמוהו: עד מלך מלכות פרס ותקנו קדמונינו בתפלה: וימליך מלכותיה. גם כן הכתוב: ומלכותו בכל משלה.  
+
+---
+
+#### Radak
+**Hebrew**: להודיע. וכמו שהם מברכים ומודים בינם לבין עצמם כן צריכין להודיע לבני האדם גבורתך שלא ידעו ולא יכירו בגבורותיו ובכבוד מלכותו:  
+
+**English**: To Make Known (להודיע): And just as they bless and acknowledge among themselves, so they should make known to the sons of men Your mighty acts, which they do not know, and the glorious majesty of Your kingdom.  
+
+---
+
+#### Metzudat David
+**Hebrew**: להודיע. כוונת דבורם יהיה כדי לפרסם לבני אדם גבורות ה׳‎ וגו׳‎:  
+
+---
+
+#### Malbim
+**Hebrew**: להודיע שיעורו כבוד מלכותך יאמרו להודיע לבני אדם כבוד הדר מלכותו, וגבורתך ידברו להודיע לבני האדם גבורותיו, ר"ל מה שיאמרו כבוד מלכותו אינו מצד כי יש יכולת ביד האדם לספר גבורת ה' ותהלתו, כי מי ימלל גבורות ה', וא"א להשיג ממלכותו וגבורתו מאומה, רק זה יעשו כדי להודיע לבני האדם גבורותיו, שלא יגידו הגבורות כמו שהם בעצם האלהות שזה נמנע ההשגה, רק כפי השגת בני אדם בין בגבורותיו שהוא מה שיעשה נגד הטבע, ובין כ...  
+
+---
+
+#### Meiri
+**Hebrew**: להודיע כלומ׳ עד שדבריהם סבה להודיע לכל גבורותיו וכבוד הדר מלכותו ודרך הנבואות לדבר פעם בלשון נסתר ופעם לנמצא.  
+
+---
+
 ### Psalms 145:13
-**Why this verse**: LXX plus line about faithfulness - early interpretive tradition and why it was added  
+**Why this verse**: Eternal kingship formula - ANE background and theological adaptation  
 
 #### Ibn Ezra
 **Hebrew**: מלכותך - כל מלכות תפסק ומלכות השם עומדת לנצח.  
@@ -1450,8 +1892,216 @@ Classical interpretations from traditional Jewish commentators on key verses.
 
 ---
 
+### Psalms 145:14
+**Why this verse**: Physical care imagery - literal vs. metaphorical interpretation of disability  
+
+#### Rashi
+**Hebrew**: נוּ״ן חֲסֵרָה מֵאָלְפָ״א בֵּיתָ״א, לְפִי שֶׁרָאָה דָּוִד בָּהּ מַפָּלָה קָשָׁה: ״נָפְלָה וְלֹא תוֹסִיף קוּם בְּתוּלַת יִשְׂרָאֵל״ (עמוס ה:ב), וְחָזַר וּסְמָכָהּ בְּרוּחַ הַקֹּדֶשׁ: סוֹמֵךְ ה׳ לְכָל הַנּוֹפְלִים (ברכות ד:):  
+
+**English**: supports (The “nun” is missing from the “aleph-beth” because David saw in it a serious downfall [Amos 5:2]: “The virgin of Israel has fallen and shall not continue to rise.” And he returned and supported her with the holy spirit: The Lord supports all those who fall.)  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: סומך - וכל מלך זה ישפיל וזה ירים, זה יסמוך וזה יפול, כי לא יוכל לסמוך ולהרים הכל והשם לבדו הוא סומך הכל.  
+
+---
+
+#### Radak
+**Hebrew**: סומך ה' לכל הנופלים. והכפופים והם העניים המרודים, ברחמיו עליהם סומך וזוקף אותם:  
+
+**English**: The Lord upholds all that fall (סומך ה' לכל הנופלים): The Lord supports all those who fall, and the bowed down, who are the poor and oppressed, He raises up with His compassion.  
+
+---
+
+#### Metzudat David
+**Hebrew**: סומך וגו׳‎. לבל יגיעו עדי ארץ: | לכל הכפופים. לאשר כבר כפפו קומתם עדי ארץ:  
+
+---
+
+#### Malbim
+**Hebrew**: סומך, אולם במקום גדולתו שם ענותנותו, כי השגחתו תתפשט על השפלים והנדכאים, שהוא סומך לכל הנופלים ממעלתם ע"י המערכה ורוע מזלם ה' סומך אותם בל יפלו ומשנה מזלם לטוב, וזוקף לכל הכפופים אלה שהם ענוים וכופפים א"ע, יזקוף אותם שילכו בקומה זקופה, ר"ל ינטלם וינשאם:  
+
+---
+
+#### Meiri
+**Hebrew**: סומך ה׳ לכל הנופלים ר״ל נותן להם יד לסמכם ולעזרם וכן זוקף לכל הכפופים.  
+
+---
+
+#### Torah Temimah
+**Hebrew**: סוֹמֵךְ יְהֹוָה לְכָל הַנֹּפְלִים: אמר רבי יוחנן מפני מה לא נאמר נו"ן באשרי מפני שיש בה מפלתן של שונאי ישראל דכתיב נפלה לא תוסיף קום בתולת ישראל במערבא מתרצי לה הכי נפלה ולא תוסיף לנפול עוד קום בתולת ישראל אמר רב נחמן בר יצחק אפילו הכי חזר דוד וסמכן ברוח הקדש שנא' סומך ה' לכל הנופלים:(ברכות ד ע"ב)  
+
+---
+
+### Psalms 145:15
+**Why this verse**: Eyes of all creation - how commentators handle universal personification  
+
+#### Ibn Ezra
+**Hebrew**: עיני - עם מדינות המלך מפרנסים המלך והשם לבדו מפרנס הכל, לתת לכל אחד מהם מאכלו בעתו.  
+
+---
+
+#### Radak
+**Hebrew**: עיני כל אליך ישברו. וכן אמר כולם אליך ישברון כי כל נבראי מטה החיים בראת אותם ובראת מאכלם כי יש אוכל עשב ויש אוכל זרע ויש אוכל חי כמות וכולם עיניהם תלויות אליך ומקוים איליך ואתה נותן להם את אכלם והוא ע"י השתלשלות הסיבות: ואמר בעתו. לשון יחיד כי כל מין ומין יש לו עת ידוע יזדמן בו מאכלו ואמר אליך ישברו ואע"פ שאין בהם דעת הם ישברו לפי טבעם את חוקם הנתון להם ואנחנו היודעים כי אליך הוא התקוה כי אתה הנות...  
+
+**English**: The eyes of all wait upon Thee (עיני כל אליך ישברו): "The eyes of all look expectantly to You." This means that all living beings, whom You have created, depend on You for their sustenance, for there are those that eat herbs, and those that eat seeds, and those that eat living creatures, like death. And all of them look to You, and hope in You, for You give them their food, and this is done throug...  
+
+---
+
+#### Metzudat David
+**Hebrew**: אליך ישברו. למלאות די מחסורם: | בעתו. לכ״‎א בעת הצריך לו:  
+
+---
+
+#### Malbim
+**Hebrew**: עיני, וגם תתפשט השגחתו לכלכל את ברואיו, שאליך ישברו עיני כל ואתה נותן להם את אכלם בעתו, היינו בעת האוכל, וזה יש שני אופנים, כמ"ש (למעלה ק"ד) תתן להם ילקוטון תפתח ידך ישבעון טוב, שלפעמים יתן להם בצמצום וילקוטון, ולפעמים יפתח ידו ויתן להם בריוח עד שישבעון טוב, בשביעה יתירה, ואמר בצד האחד ואתה נותן להם את אכלם שהיא הנתינה בצמצום, ורק בעתו בעת האוכל נותן לו כפי הצריך להעמדת החי ולא יותר, אמנם לפעמים:  
+
+---
+
+#### Meiri
+**Hebrew**: עיני כל אליך ישברו כלומ׳ שאפי׳ הב״ח שאין בהם דעת ישברו לפי טבעם וישתדלו בחוקם הנתון להם לפי טבעם מאתך ומצדך יזדמן לכל אחד מהם אכלו בעתו המבוקש לו ונמצא שאתה סבה ראשונה לכל  
+
+---
+
+#### Torah Temimah
+**Hebrew**: עֵינֵי כֹל אֵלֶיךָ יְשַׂבֵּרוּ: ההוא דאתא לקמיה דרבי נחמיה אמר ליה במה אתה סועד א"ל בבשר שמן ויין ישן רצונך שתגלגל עמי בעדשים גלגל עמו בעדשים ומת אמר אוי לו לזה שהרגו נחמיה אדרבה אוי לו לנחמיה שהרגו לזה מיבעי ליה אלא איהו הוא דלא איבעי ליה לפנוקי נפשיה כולי האי ההוא דאתא לקמיה דרבא אמר לו במה אתה סועד אמר לו בתרנגולת פטומה ויין ישן אמר ליה ולא חיישת לדוחקא דציבורא א"ל אטו מדידהו קאכילנא מדרחמנא קא...  
+
+---
+
+### Psalms 145:16
+**Why this verse**: Divine satisfaction provision - abundance vs. necessity theology  
+
+#### Rashi
+**Hebrew**: וּמַשְׂבִּיעַ לְכָל חַי רָצוֹן. כְּדֵי פַרְנָסָתוֹ הוּא מַשְׂבִּיעַ אֶת טוּבוֹ וְאֶת רְצוֹנוֹ וְאֶת בִּרְכָתוֹ. רָצוֹן אפיימנ״ט בְּלַעַ״ז:  
+
+**English**: and satisfy every living thing [with] its desire With a sufficiency to sustain him, He satisfies his goodness, his will, and his blessing. desire Heb. רצון, apayement in Old French, propitiation.  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: פותח - ואתה הכתוב בפסוק העליון ישרת גם פה, וככה הוא ואתה פותח את ידך, וככה: כי אלהי אבי בעזרי. | וטעם רצון – מה שיספיק להם.  
+
+**English**: "Open" - and the "you" that's written in the prior verse (Psalm 145:15) is also here, thus [the verse should read] "and You open Your hand," and thus: because the God of my father is my help. | And the meaning of "will" -- what is sufficient for them.  
+
+---
+
+#### Radak
+**Hebrew**: פותח. שאתה נותן להם אכלם בהשפעה שישבעו רצון כל אחד לפי רצונו:  
+
+**English**: Thou openest (פותח): This means that You give them their food abundantly, so that they are satisfied, each according to its desire.  
+
+---
+
+#### Metzudat David
+**Hebrew**: פותח. אתה פותח את ידך ומשביע לכל חי לפי רצונו ותאותו:  
+
+---
+
+#### Malbim
+**Hebrew**: פותח את ידך, שהוא מ"ש תפתח ידך ישבעון טוב, ושיעור הכתוב הרצון פותח את ידך ומשביע לכל חי, מציין את הרצון כעצם מופשט, שהרצון הוא הפותח את ידי ה', שע"י הרצון יפתח ידיהם לתת ולהשפיע בידים פתוחות מלאות טוב, ואז ישביע לכל חי בשביעה יתירה, וזה יהיה בעת רצון שאז הרצון גורם פתיחת הידים ברב טוב ובשביעה:  
+
+---
+
+#### Meiri
+**Hebrew**: ועל כן אמ׳ פותח את ידך ומשביע לכל חי רצון ר״ל מזונו כפי רצונו וטבעו כי המזונות רבים מתחלפים לפי טבע הב״ח זה אוכל עשב וזה אוכל בשר.  
+
+---
+
+#### Torah Temimah
+**Hebrew**: פּוֹתֵחַ אֶת יָדֶךָ: אמר רבי אלעזר א"ר אבינא כל האומר תהלה לדוד בכל יום שלש פעמים מובטח לו שהוא בן העולם הבא מאי טעמא אילימא משום דאתיא באל"ף בי"ת נימא אשרי תמימי דרך דאתיא בתמניא אפין אלא משום דאית ביה פותח את ידך נימא הלל הגדול דכתיב ביה נותן לחם לכל בשר אלא משום דאית ביה תרתי וכו':(ברכות ד ע"ב) | פּוֹתֵחַ אֶת יָדֶךָ: בימי רבי שמואל בר נחמני הוה כפנא ומותנא אמרי היכי נעביד ניבעי רחמי אתרתי לא אפ...  
+
+---
+
+### Psalms 145:17
+**Why this verse**: Character-action integration - how divine ways reflect divine nature  
+
+#### Ibn Ezra
+**Hebrew**: צדיק - אם טען טוען למה יאכיל אחד חטה ואחד שעורים? והנה התשובה: כי הוא יודע הטוב להם כי הוא בראם וידע תולדתם, כמו הרופא המצוה שיאכל כל אדם מה שהוא טוב לו. ועוד: כי השם כל מה שיתן בדרך חסד הוא, כי איננו חיוב עליו על כן: וחסיד.  
+
+---
+
+#### Radak
+**Hebrew**: צדיק. כי בצדק וביושר נותן לכל אחד אוכל ואע"פ שחי טורף את החי ואוכל כמו החתול לעכבר והאריה והדוב והנמר ושאר החיות האוכלות חיות אחרות וכן העופות הדורסים לעופות אחרים הכל צדק מאתו כי גם לחיות ולעופות הטורפים נותן להם גם כן מאכלם בחייהם, אלא שבהגיע קצם למות גזר מקודם שתהיה מיתתם פעמים בהניית בעלי חיים אחרים פעמים יגזור שימות מיתת עצמו: | וחסיד בכל מעשיו. מזמין להם מה שהוא אינו מחוייב לתת והם אינם ראוי...  
+
+**English**: Righteous (צדיק): For with righteousness and fairness, He provides food for everyone. Even though He created living creatures to prey upon each other—like the cat for the mouse, the lion, bear, leopard, and other animals that prey on others, and likewise the birds that swoop down on other birds—everything is just from Him. For He also provides food for the predators during their lives. However, wh...  
+
+---
+
+#### Metzudat David
+**Hebrew**: צדיק. נותן צדקה למי שאין לו זכיות:  
+
+---
+
+#### Malbim
+**Hebrew**: צדיק ה' בכל דרכיו, דרכי הנהגה הם בצדק, שהגם שיש צדיק ורע לו ורשע וטוב לו, בכ"ז הוא צדיק בדרכיו והכל בצדק לשלם לצדיק על חטא קל ולרשע על זכות קל שעשה בעוה"ז, כדי שעקר שכר כל אחד יהיה שמור לעוה"ב. וחסיד בכל מעשיו, כל מה שעשה וברא בעולמו עשה מצד החסד, כמ"ש כי אמרתי עולם חסד יבנה, שמצד חסדו עשה כל נברא ועשהו בתכלית התיקון והטוב הכל מצד החסד:  
+
+---
+
+#### Meiri
+**Hebrew**: צדיק ה׳ בכל דרכיו ר״ל ישר בכל מה שהניח בטבע הנבראים שלא יצא הדבר מגדר טבעו אבל חסיד בכל מעשיו בהמשיכו מציאותם. או נפרש צדיק בכל דרכיו לגמול ולהעניש לתת לאיש כדרכיו וחסיד בכל מעשיו להקל ענשם בתשובה ומחילתו וסליחתו ולהטות כלפי חסד.  
+
+---
+
+#### Torah Temimah
+**Hebrew**: צַדִּיק יְהֹוָה: רב הונא בריה דרב יהושע חלש על רב פפא לשיולי ביה חזייה דחליש ליה עלמא אמר להו צביתו ליה זוודתא לסוף איתפח הוה מיכסיף רב פפא למיחזייה א"ל מאי חזית אמר (ליה) אין הכי הוה ואמר להו הקב"ה הואיל ולא מוקים במיליה לא תקומו בהדיה שנאמר נושא עון ועובר על פשע למי נושא עון לעובר פשע לשארית נחלתו אמר רבי אחא בר חנינא אליה וקוץ בה לשארית נחלתו ולא לכל נחלתו למי שמשים עצמו כשירים רב הונא רמי כתיב...  
+
+---
+
+### Psalms 145:18
+**Why this verse**: Qualified divine accessibility - what constitutes calling 'in truth'?  
+
+#### Ibn Ezra
+**Hebrew**: קרוב - אם המלך יהיה רחוק לא יכול להושיע קוראיו והשם לעולם קרוב הוא, רק לאשר יקראוהו באמת ולא לנסותו ואשר איננו ראוי להושיעו.  
+
+---
+
+#### Radak
+**Hebrew**: קרוב ה' לכל קוראיו. מאיזה עם שיהיה ובלבד שיקראוהו באמת שפיו ולבו שוים:  
+
+**English**: God is close to all who call Him. From whichever people that they may be, provided that they call Him in truth in mouth and heart are equal.  
+
+---
+
+#### Metzudat David
+**Hebrew**: באמת. רוצה לומר בלב שיהיה פיו ולבו שווים ולא יכחיש הלב מאמר פיו:  
+
+---
+
+#### Malbim
+**Hebrew**: קרוב, מביא עוד ראיה על ההשגחה ממה שהוא קרוב לכל קוראיו בתפלה לבד אם יקראוהו באמת בלא לב ולב, והגם ששומע לכל קוראיו מ"מ יש מדרגות באיכות מלואת בקשתם בין העובדים מאהבה להעובדים מיראה, בשני דברים, א. כי.  
+
+**English**: Close, bring more proof regarding the divine providence from the one close to all who call him in prayer alone, if they call Him in Truth and not with a divided heart. And also when God listens to all who call Him from every place, there are levels of the quality of the fullness of their request: Between those who serve from love and the ones who serve from fear…  
+
+---
+
+#### Meiri
+**Hebrew**: קרוב ה׳ לכל קוראיו להעתר להם לכל אשר יקראוהו באמת ר״ל בכונה נבחרת  
+
+---
+
+### Psalms 145:19
+**Why this verse**: God-fearer privileges - covenant benefits within universal framework  
+
+#### Ibn Ezra
+**Hebrew**: רצון - הירא מהמלך יספיק שלא יעשה לו רע, והשם יעשה רצון יראיו.  
+
+---
+
+#### Radak
+**Hebrew**: רצון יראיו. יקראוהו באמת ויעשה רצונם במה שיבקשו ממנו וישמע שועתם ויושיעם מצרה שתבא בעולם או שתבא להם לכפרת עונותם:  
+
+**English**: He will fulfil the desire of those who fear him (רצון יראיו) : He will truly call upon Him and fulfill their desires in what they ask of Him. He will hear their cry and save them from distress that may come upon them in the world or that comes to them to atone for their sins.  
+
+---
+
+#### Malbim
+**Hebrew**: (יט-כ) רצון יריאיו יעשה ואת שועתם ישמע, ואז ויושיעם, רק אחר ששועו לישועה אבל שומר ה' את כל אוהביו, את העובדים מאהבה הוא שומר תמיד בל תבא עליהם צרה, ולא יצטרכו לצעוק, זאת שנית שהעובדים מיראה אם יצעקו מני צר ועל רשעים שבאים להרע להם, אז רק יושיעם לבד, אבל לא ישמיד ויעשה נקמה באויביהם, אבל להעובדים מאהבה גם את הרשעים שרצו להרע להם ישמיד, שכפי מדרגת העבודה והקורבה לאלהים כן מדרגת ההשגחה:  
+
+---
+
 ### Psalms 145:20
-**Why this verse**: Destruction of wicked within universal praise context - limits to divine mercy  
+**Why this verse**: Theodicy tension - destroying wicked vs. universal goodness  
 
 #### Ibn Ezra
 **Hebrew**: שומר - אם באה צרה ליריאיו יושיעם, רק אוהביו הוא ישמור אותם לא תבא להם רעה. | ואת כל הרשעים ישמיד - באחרונה, כי סופם הוא לאבדון והמלך לא יוכל להשמיד רשעי ארצו אולי יקשרו עליו, על כן יפחד או לא יכירם כי לא ידע הנסתרות והשלים כאשר החל.  
@@ -1471,7 +2121,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:21
-**Why this verse**: All flesh scope - does this include all living creatures or only humans in traditional interpretation?  
+**Why this verse**: All flesh conclusion - universal summons and inclusio completion  
 
 #### Rashi
 **Hebrew**: תְּהִלַּת ה׳ יְדַבֶּר פִּי. וְגַם כָּל בָּשָׂר יְבָרֵךְ אֶת שֵׁם קָדְשׁוֹ לְעוֹלָם וָעֶד:  
@@ -1507,15 +2157,20 @@ Classical interpretations from traditional Jewish commentators on key verses.
 
 ---
 
+#### Torah Temimah
+**Hebrew**: תְּהִלַּת יְהֹוָה אמר רב חסדא הללויה סוף פירקא רבה בר רב הונא אמר הללויה ריש פירקא אמר רב חסדא חזינא להו לתילי דבי רב חנין בר רב דכתיב בהו הללויה באמצע פירקא אלמא מספקא ליה אמר רב חנין בר רבא הכל מודים בתהלת ה' ידבר פי ויברך כל בשר שם קדשו לעולם ועד (הללויה) הללויה דבתריה ריש פירקא רשע יראה וכעס שניו יחרק ונמס תאות רשעים תאבד הללויה דבתריה ריש פירקא ושעומדים בבית ה' הללויה דבתריה ריש פירקא קראי מו...  
+
+---
+
 ## Research Summary
 
-- **Lexicon entries**: 28
+- **Lexicon entries**: 33
 - **Concordance searches**: 7
-- **Concordance results**: 8
+- **Concordance results**: 14
 - **Figurative language searches**: 6
-- **Figurative instances found**: 255
-- **Commentary verses**: 4
-- **Commentary entries**: 18
+- **Figurative instances found**: 149
+- **Commentary verses**: 21
+- **Commentary entries**: 111
 
 
 ---

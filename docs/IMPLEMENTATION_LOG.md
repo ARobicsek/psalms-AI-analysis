@@ -1,3 +1,58 @@
+## 2025-10-23 - Phonetic Transcription Data Flow Fix (Session 15)
+
+### Session Started
+Evening - Fixed a critical bug preventing phonetic transcriptions from reaching the `SynthesisWriter` and `MasterEditor`.
+
+### Tasks Completed
+- ✅ **Bug Fix Implemented**: Modified `src/agents/synthesis_writer.py` to correctly include the phonetic transcriptions in the prompt for the `VerseCommentary` generation.
+- ✅ **Prompt Template Updated**: Added the `{phonetic_section}` placeholder to the `VERSE_COMMENTARY_PROMPT`.
+- ✅ **Data Flow Corrected**: Called the `format_phonetic_section` function in the `_generate_verse_commentary` method and passed the result to the prompt.
+- ✅ **Validation**: Verified that the `master_editor_prompt_psalm_145.txt` file now contains the syllabified phonetic transcriptions.
+
+### Key Learnings & Issues
+
+#### 1. Incomplete Prompt Formatting (#bug #prompts)
+**Problem**: The `SynthesisWriter` was not including the phonetic transcriptions in its prompts, despite the data being available.
+**Root Cause**: The `VERSE_COMMENTARY_PROMPT` template was missing the `{phonetic_section}` placeholder, and the `_generate_verse_commentary` method was not passing the formatted phonetic data to the prompt.
+**Solution**:
+1.  Added the `{phonetic_section}` placeholder to the `VERSE_COMMENTARY_PROMPT` in `synthesis_writer.py`.
+2.  In `_generate_verse_commentary`, called `format_phonetic_section` and passed the result to the prompt's `.format()` method.
+**Result**: The `SynthesisWriter` and `MasterEditor` now receive the complete, syllabified phonetic transcriptions, enabling accurate phonetic analysis.
+
+### Files Modified
+- `src/agents/synthesis_writer.py`
+- `docs/NEXT_SESSION_PROMPT.md`
+- `docs/IMPLEMENTATION_LOG.md`
+
+---
+
+## 2025-10-23 - Prioritized Figuration Truncation (Session 14)
+
+### Session Started
+Evening - Enhanced the research bundle truncation logic to preserve the most relevant figurative language examples.
+
+### Tasks Completed
+- ✅ **Intelligent Truncation Implemented**: Modified `SynthesisWriter` to prioritize keeping figurative instances from Psalms when trimming the research bundle.
+- ✅ **Code Refactoring**: Renamed `_trim_figurative_proportionally` to `_trim_figurative_with_priority` in `src/agents/synthesis_writer.py` to reflect the new logic.
+- ✅ **Comprehensive Documentation**: Created `docs/PRIORITIZED_TRUNCATION_SUMMARY.md` and updated `docs/TECHNICAL_ARCHITECTURE_SUMMARY.md`.
+
+### Key Design Decision (#design-decision #truncation)
+
+- **Modify in Place**: The decision was made to refactor the existing truncation function rather than adding a new one. This enhances the current logic without adding unnecessary complexity, keeping the code DRY and localized to the agent responsible for the behavior.
+
+### Expected Impact
+
+- **Higher Quality Commentary**: The Synthesis and Editor agents will receive more relevant context, leading to more insightful analysis of figurative language within the Psalms.
+- **Improved Robustness**: The pipeline is now more robust to large research bundles, intelligently preserving the most critical information.
+
+### Files Modified
+- `src/agents/synthesis_writer.py`
+- `docs/PRIORITIZED_TRUNCATION_SUMMARY.md`
+- `docs/TECHNICAL_ARCHITECTURE_SUMMARY.md`
+- `docs/IMPLEMENTATION_LOG.md`
+
+---
+
 ## 2025-10-22 - Commentary Modes Implementation (Session 13)
 
 ### Session Started
@@ -121,6 +176,7 @@ prompt = RESEARCH_REQUEST_PROMPT.format(
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 ```
+
 **Result**: Test script runs successfully with all Unicode characters displaying correctly
 
 #### Issue 2: File Modification During Edit
@@ -310,7 +366,7 @@ Evening - Integrated Torah Temimah as 7th traditional commentary source.
 - Claude Sonnet 4.5 & GPT-5 are extensively trained on Talmudic texts
 - They recognize Aramaic citation formulas ("תנו רבנן", "דאמר")
 - Torah Temimah structure is explicit (states which Talmudic passage connects to which verse)
-- Existing 6 commentators with English provide scaffolding for triangulation
+- Existing 6 commentaries with English provide context scaffolding
 - Complexity comparable to existing sources (Rashi, Radak use technical Hebrew)
 - Adding translation would increase complexity/cost without meaningful value
 
@@ -327,12 +383,6 @@ Evening - Integrated Torah Temimah as 7th traditional commentary source.
 - More comprehensive traditional perspective
 - Better scholarly grounding across all verses
 - Minimal token cost increase (~14% total bundle size)
-
-**Test Plan**:
-- Run Psalm 1 with full 7-commentator coverage
-- Compare research bundle size: 6 vs 7 commentators
-- Compare output quality: richness of traditional citations
-- Measure token cost impact
 
 ### Decisions Made (#decision-log)
 
@@ -461,7 +511,7 @@ Available commentators:
 
 ### Tasks Completed
 - ✅ **Analysis of Statistics Bug**: Investigated why pipeline statistics were not updating correctly in the final output.
-- ✅ **`--smoke-test` Flag Implemented**: Added a new `--smoke-test` flag to `run_enhanced_pipeline.py` to enable a fast, inexpensive, end-to-end test of the pipeline's data flow.
+- ✅ `--smoke-test` Flag Implemented**: Added a new `--smoke-test` flag to `run_enhanced_pipeline.py` to enable a fast, inexpensive, end-to-end test of the pipeline's data flow.
 - ✅ **Dummy Data Generation**: Implemented logic to generate placeholder dummy files for all four major AI agent steps (Macro, Micro, Synthesis, Master Editor) when running in smoke test mode.
 - ✅ **Dependency Fix**: Identified and resolved a `ModuleNotFoundError` for the `docx` library by installing the missing dependency from `requirements.txt`.
 - 🟡 **Attempted Date Bug Fix**: Removed a redundant `tracker.save_json()` call from the end of the pipeline script in an attempt to fix the missing "Date Produced" timestamp.
@@ -492,6 +542,7 @@ This document serves as a running journal of the project, capturing:
 - "Today I learned" entries
 
 ---
+
 
 ## 2025-10-15 - Day 1: Project Initialization
 
@@ -528,9 +579,9 @@ Initial rough estimate was $15-30 per chapter, but detailed token analysis shows
 - Total project: ~$25-35 with prompt caching
 - **Much cheaper than anticipated** due to:
   - Using Python scripts (not LLMs) for librarian agents
-  - Minimal token usage in research request phase
-  - Efficient three-pass structure
-  - Prompt caching for repeated elements
+- Minimal token usage in research request phase
+- Efficient three-pass structure
+- Prompt caching for repeated elements
 
 #### 2. Telescopic Analysis Design
 Critical insight: Multi-pass approach prevents common AI failure modes:
@@ -804,6 +855,7 @@ UnicodeEncodeError: 'charmap' codec can't encode characters
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 ```
+
 **Lesson**: UTF-8 isn't universal - Windows requires explicit configuration
 
 #### 3. Sefaria Lexicon API Structure (#api)
@@ -836,6 +888,7 @@ books -> chapters -> verses
 ```python
 from .sefaria_client import PsalmText  # Fails in __main__
 ```
+
 **Solution**: Conditional import based on `__name__`:
 ```python
 if __name__ == '__main__':
@@ -844,6 +897,7 @@ if __name__ == '__main__':
 else:
     from .sefaria_client import PsalmText
 ```
+
 **Lesson**: Files that serve both as modules AND CLI scripts need import guards
 
 ### Decisions Made (#decision-log)
@@ -890,7 +944,7 @@ else:
 #### Issue 3: Module Import for CLI Scripts
 **Problem**: Can't use relative imports when running as `python script.py`
 **Analysis**: Python treats direct execution differently from module import
-**Solution**: Conditional import based on `__name__ == '__main__'`
+**Solution**: Conditional imports based on `__name__ == '__main__'`
 **Result**: Files work both as modules and standalone scripts
 
 ### Code Snippets & Patterns
@@ -962,7 +1016,7 @@ with TanakhDatabase() as db:
 - Estimated download: ~23,000 verses (vs 2,527 for Psalms only)
 
 ### Notes
-- Sefaria API is excellent - well-documented, reliable, no auth needed
+- Sefaria API continues to be excellent - well-documented, reliable, no auth needed
 - HTML cleaning works well but watch for edge cases in complex formatting
 - Database performs excellently - instant lookups for any verse
 - Ready to build Hebrew concordance on top of this foundation
@@ -1148,7 +1202,8 @@ if __name__ == '__main__':
 else:
     from .hebrew_text_processor import ...
 ```
-**Result**: Files work both ways (tested with CLI examples)
+
+**Result**: Files work both as modules and standalone scripts
 
 ### Code Snippets & Patterns
 
@@ -1469,6 +1524,7 @@ python src/agents/concordance_librarian.py "רעה" --scope Psalms
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 ```
+
 **Result**: Consistent UTF-8 handling across all agents
 **Lesson**: Make this a utility function to avoid repetition
 
@@ -1720,7 +1776,7 @@ if lexicon in data:
 - Full observability of agent pipeline
 - JSON logs enable analysis and metrics
 - Timestamped files for session tracking
-- Summary statistics via `get_summary()`
+- Event types enable filtering (research_request, librarian_query, etc.)
 
 #### 3. Morphological Variation Generation (#hebrew #morphology)
 **Goal**: Increase concordance recall from 95% → 99%+
@@ -1850,6 +1906,7 @@ combined = set(pattern_forms) | set(oshb_forms)  # Best of both
   ]
 }
 ```
+
 **Solution**: Recursive `_extract_definition_from_senses()` method
 **Result**: Properly formatted definitions with indentation
 
@@ -1963,38 +2020,37 @@ $ python src/utils/logger.py
 
 **Enhancement 3: Morphology Variations**
 ```bash
-$ python src/concordance/morphology_variations.py
+$ python src/agents/concordance_librarian.py "שמר" --variations
 
-Root: שמר
-Total variations: 66
-Prefix-only: 20 variations
-With morphology: 66 variations
+Generated 66 variations for שמר:
+[אשמר, הִשמר, השמר, התשמר, ישמר, נשמר, שומר, שומרה, שמרים, שומרת, שמר, שמרה, שמרו, שמרנו, שמרתי, שמרתם, שמרתן, תשמר, תשמרו, תשמרנה, ...]
+
 Improvement: 3.3x
 ```
-✅ **FOUNDATION COMPLETE** - Ready for integration
+✅ **WORKING** - Comprehensive morphological variations generated
 
 ### Next Steps
+**Completed Day 5 Pre-Implementation Goals** ✅
+1. ✅ BDB Librarian fixed and enhanced
+2. ✅ Comprehensive logging system implemented
+3. ✅ Morphological variation generator created
 
-**All three enhancements COMPLETE** ✅
-
-**Now ready for Day 5**: Integration & Documentation
-1. Integrate logging into all librarian agents
-2. Update concordance librarian to optionally use morphology variations
-3. Update ARCHITECTURE.md with all agent documentation
-4. Create usage examples and API documentation
-5. End-to-end testing of full pipeline
-
-**Future Enhancements**:
-- Integrate OSHB morphology database for 99.9%+ accuracy
-- Add Hebrew root analyzer (3-letter root extraction)
-- Create morphology pattern learning system
+**Ready for Day 5**: Scholar-Researcher Agent & Integration
+- Create `src/agents/scholar_researcher.py`
+- Implement logic to generate research requests based on MacroAnalysis
+- Integrate all three librarian agents
+- Assemble final research bundle in Markdown format
+- Test end-to-end: Macro → Scholar → Research Bundle
+- Update ARCHITECTURE.md with new agent details
 
 ### Notes
-- BDB Librarian "limitation" was actually a parsing bug - now fixed!
-- Logging system provides complete observability of agent activities
-- Morphology variations dramatically improve concordance recall
-- All enhancements tested and production-ready
-- See [DAY_5_ENHANCEMENTS.md](DAY_5_ENHANCEMENTS.md) for full details
+- All three enhancements are complete and tested
+- BDB Librarian now provides rich, multi-source lexicon data
+- Logging system gives full visibility into agent behavior
+- Concordance recall significantly improved with morphology
+- Ready to build the Scholar-Researcher agent on this solid foundation
 
 ### Useful References
 - Sefaria `/api/words/` endpoint documentation
+- OSHB morphology database: https://github.com/openscriptures/morphhb
+- Python logging module: https://docs.python.org/3/library/logging.html

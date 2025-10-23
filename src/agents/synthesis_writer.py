@@ -186,6 +186,10 @@ You have been provided with:
 ### RESEARCH MATERIALS
 {research_bundle}
 
+### PHONETIC TRANSCRIPTIONS
+{phonetic_section}
+
+
 ---
 
 ## YOUR TASK: WRITE VERSE-BY-VERSE COMMENTARY
@@ -310,7 +314,8 @@ If any check fails, REVISE to incorporate comparative analysis using the databas
   * BDB lexicon entries with semantic ranges, etymologies, and usage patterns
   * Concordance data showing where Hebrew terms appear elsewhere in Scripture - cite these parallels!
   * Figurative language instances showing how vehicles/metaphors are used across the Bible - use them produce insights about the intent of the poet and their selection of this figuration here
-  * Traditional commentary excerpts from Rashi, Ibn Ezra, Radak - engage with these interpretive traditions!
+  * Traditional commentary excerpts from Rashi, Ibn Ezra, Radak, Meiri, Metzudat David and Malbim - engage with these interpretive traditions!
+  * The Torah Temimah identifies instances where a given text was mined for aggadic and halachic purposes - make sure to carefully review and incorporate these materials where relevant
   * LXX text showing ancient Greek interpretation
 - **Define technical terms**: When using jargon (jussive, anaphora, chiasm, inclusio, polemic, theophany, hendiadys, etc.), provide brief, accessible definitions for lay readers
 - **Vary your approach**: Don't use the same scholarly angles for every verse - alternate between poetics, historical context, textual criticism, figurative analysis, etc.
@@ -338,6 +343,33 @@ If any check fails, REVISE to incorporate comparative analysis using the databas
 
 Write the verse-by-verse commentary below in plain text (NOT JSON). Use markdown formatting.
 """
+
+
+def format_phonetic_section(micro_analysis: 'MicroAnalysis') -> str:
+    """Format phonetic transcriptions for inclusion in prompts."""
+    lines = ["## PHONETIC TRANSCRIPTIONS\n"]
+    lines.append("*Reference these for accurate phonetic commentary. DO NOT make phonetic claims without consulting these transcriptions.*\n")
+
+    # Helper to get attribute/key value with fallback
+    def get_value(obj, key, default=''):
+        if hasattr(obj, key):
+            return getattr(obj, key, default)
+        elif isinstance(obj, dict):
+            return obj.get(key, default)
+        return default
+
+    verses = []
+    if hasattr(micro_analysis, 'verse_commentaries'): # Pydantic
+        verses = micro_analysis.verse_commentaries
+    elif isinstance(micro_analysis, dict): # Dict
+        verses = micro_analysis.get('verse_commentaries', [])
+
+    for vc in verses:
+        phonetic_transcription = get_value(vc, 'phonetic_transcription')
+        if phonetic_transcription:
+            lines.append(f"**Verse {get_value(vc, 'verse_number')}**: `{phonetic_transcription}`\n")
+
+    return "\n".join(lines)
 
 
 class SynthesisWriter:
@@ -784,6 +816,7 @@ class SynthesisWriter:
         # Format inputs
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
+        phonetic_section = format_phonetic_section(micro_analysis)
 
         # Trim research bundle if needed - verse commentary includes introduction essay
         # so needs more aggressive trimming than intro generation
@@ -797,7 +830,8 @@ class SynthesisWriter:
             introduction_essay=introduction_essay,
             macro_analysis=macro_text,
             micro_analysis=micro_text,
-            research_bundle=research_text
+            research_bundle=research_text,
+            phonetic_section=phonetic_section
         )
 
         # Log prompt for debugging
