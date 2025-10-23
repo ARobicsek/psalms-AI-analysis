@@ -1998,8 +1998,3 @@ Improvement: 3.3x
 
 ### Useful References
 - Sefaria `/api/words/` endpoint documentation
-- OSHB morphology: https://github.com/openscriptures/morphhb
-- Hebrew verb conjugation: https://en.wikipedia.org/wiki/Hebrew_verb_conjugation
-- Python logging best practices: https://docs.python.org/3/howto/logging.html
-
----

@@ -1,0 +1,316 @@
+{
+  "psalm_number": 2,
+  "pipeline_start": "2025-10-22T22:41:18.285793",
+  "pipeline_end": "2025-10-22T23:01:31.800946",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1890,
+      "input_token_estimate": 630,
+      "output_char_count": 8527,
+      "output_token_estimate": 2842,
+      "duration_seconds": 49.98535680770874,
+      "completion_date": null,
+      "timestamp": "2025-10-22T22:41:18.290295"
+    },
+    "micro_analysis": {
+      "input_char_count": 8527,
+      "input_token_estimate": 2842,
+      "output_char_count": 155230,
+      "output_token_estimate": 51743,
+      "duration_seconds": 156.0771689414978,
+      "completion_date": null,
+      "timestamp": "2025-10-22T22:44:08.320217"
+    },
+    "synthesis": {
+      "input_char_count": 163759,
+      "input_token_estimate": 54586,
+      "output_char_count": 44007,
+      "output_token_estimate": 14669,
+      "duration_seconds": 280.22637939453125,
+      "completion_date": null,
+      "timestamp": "2025-10-22T22:48:44.457964"
+    },
+    "master_editor": {
+      "input_char_count": 198898,
+      "input_token_estimate": 66299,
+      "output_char_count": 25038,
+      "output_token_estimate": 8346,
+      "duration_seconds": 247.10959815979004,
+      "completion_date": "2025-10-22T23:01:31.800946",
+      "timestamp": "2025-10-22T22:55:25.630235"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "רָגַש",
+        "reason": "Rare verb for national assembly - semantic range between 'assemble' and 'rage'"
+      },
+      {
+        "word": "נָסַךְ",
+        "reason": "King installation term - etymology uncertain between 'pour out' and 'establish'"
+      },
+      {
+        "word": "בַּר",
+        "reason": "Aramaic 'son' in Hebrew context - textual crux in v.12"
+      },
+      {
+        "word": "רֹזְנִים",
+        "reason": "Political rulers term - precise meaning unclear: regents, princes, counselors?"
+      },
+      {
+        "word": "מוֹסֵרָה",
+        "reason": "Bondage metaphor - relationship to 'avot' (ropes) and political imagery"
+      },
+      {
+        "word": "חֹק",
+        "reason": "Divine decree terminology - legal/covenantal framework significance"
+      },
+      {
+        "word": "יָלַד",
+        "reason": "Divine begetting language - adoption vs. generation in royal context"
+      },
+      {
+        "word": "נַחֲלָה",
+        "reason": "Inheritance imagery for world dominion - theological implications"
+      },
+      {
+        "word": "רָעָה",
+        "reason": "Shepherd with iron rod - pastoral vs. destructive meaning"
+      },
+      {
+        "word": "הִוָּסֵר",
+        "reason": "Wisdom discipline terminology - educational vs. punitive connotations"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "רגש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track usage of rare assembly/rage verb across Scripture"
+      },
+      {
+        "query": "משיח יהוה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine anointed king references in Hebrew Bible"
+      },
+      {
+        "query": "בני אתה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine sonship adoption formulas"
+      },
+      {
+        "query": "שבט ברזל",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Iron rod/scepter imagery across Scripture"
+      },
+      {
+        "query": "חוסי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Refuge language and taking shelter in God"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Military formation imagery - kings and rulers taking battle positions | Vehicle: stand | Related terms: standing, stationed, position, positioned, array, arrayed",
+        "vehicle": "stand",
+        "vehicle_terms": [
+          "stand",
+          "standing",
+          "stationed",
+          "position",
+          "positioned",
+          "array",
+          "arrayed"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Bondage metaphor - cords and ropes as political/spiritual restraints | Vehicle: cords | Related terms: cord, ropes, rope, bonds, bond, chains, chain",
+        "vehicle": "cords",
+        "vehicle_terms": [
+          "cords",
+          "cord",
+          "ropes",
+          "rope",
+          "bonds",
+          "bond",
+          "chains",
+          "chain"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Divine laughter - anthropomorphic response to human rebellion | Vehicle: laugh | Related terms: laughs, laughter, mock, mocks, mockery, deride, derision",
+        "vehicle": "laugh",
+        "vehicle_terms": [
+          "laugh",
+          "laughs",
+          "laughter",
+          "mock",
+          "mocks",
+          "mockery",
+          "deride",
+          "derision"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "King installation as pouring/founding - liquid or architectural metaphor | Vehicle: pour | Related terms: poured, pouring, install, installed, establish, established",
+        "vehicle": "pour",
+        "vehicle_terms": [
+          "pour",
+          "poured",
+          "pouring",
+          "install",
+          "installed",
+          "establish",
+          "established"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Potter's vessel destruction - power differential metaphor | Vehicle: pottery | Related terms: potter, vessel, vessels, clay, earthen, jar, jars",
+        "vehicle": "pottery",
+        "vehicle_terms": [
+          "pottery",
+          "potter",
+          "vessel",
+          "vessels",
+          "clay",
+          "earthen",
+          "jar",
+          "jars"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Trembling with joy paradox - complex religious emotion | Vehicle: trembling | Related terms: tremble, trembles, quaking, quake, shaking, shake",
+        "vehicle": "trembling",
+        "vehicle_terms": [
+          "trembling",
+          "tremble",
+          "trembles",
+          "quaking",
+          "quake",
+          "shaking",
+          "shake"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "2:1",
+        "reason": "Double rhetorical questions - how do commentators interpret the dramatic opening and 'ragash' verb?"
+      },
+      {
+        "verse": "2:2",
+        "reason": "Military conspiracy imagery - traditional understanding of kings and rulers taking counsel together"
+      },
+      {
+        "verse": "2:3",
+        "reason": "Direct quotation of rebellion - classical interpretation of bondage metaphors and rejection of authority"
+      },
+      {
+        "verse": "2:4",
+        "reason": "Divine laughter from heaven - how commentators explain anthropomorphic response without diminishing divine dignity"
+      },
+      {
+        "verse": "2:5",
+        "reason": "Escalation from laughter to anger - traditional understanding of divine emotional progression"
+      },
+      {
+        "verse": "2:6",
+        "reason": "God's first-person declaration - classical interpretation of 'I have installed' as accomplished fact"
+      },
+      {
+        "verse": "2:7",
+        "reason": "Divine sonship formula - how commentators interpret 'today I have begotten you' and adoption language"
+      },
+      {
+        "verse": "2:8",
+        "reason": "Conditional inheritance offer - traditional understanding of 'ask of me' and universal dominion promise"
+      },
+      {
+        "verse": "2:9",
+        "reason": "Iron rod and pottery imagery - classical interpretation of shepherd metaphor with violent destruction"
+      },
+      {
+        "verse": "2:10",
+        "reason": "Wisdom appeal to kings - how commentators explain shift from violence to prudential counsel"
+      },
+      {
+        "verse": "2:11",
+        "reason": "Paradoxical emotions - traditional understanding of serving with fear and rejoicing with trembling"
+      },
+      {
+        "verse": "2:12",
+        "reason": "Textual crux 'kiss the son' - how classical commentators handle Aramaic 'bar' and textual problems"
+      }
+    ],
+    "lexicon_entries_count": 53,
+    "concordance_results": {
+      "רגש": 1,
+      "משיח יהוה": 5,
+      "בני אתה": 1,
+      "שבט ברזל": 1,
+      "חוסי": 0
+    },
+    "figurative_results": {
+      "total_instances_used": 171
+    },
+    "commentary_counts": {
+      "Rashi": 12,
+      "Ibn Ezra": 11,
+      "Radak": 12,
+      "Metzudat David": 12,
+      "Malbim": 7,
+      "Meiri": 12,
+      "Torah Temimah": 6
+    },
+    "ugaritic_parallels": [
+      {
+        "type": "Royal Ideology",
+        "reference": "Psalm 2:7",
+        "analysis": "The Israelite ideology of Davidic kingship, articulated in Psalm 2, is deeply rooted in this shared ..."
+      }
+    ],
+    "research_bundle_chars": 146327,
+    "research_bundle_tokens": 48775
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the specific semantic range of Hebrew 'ragash' (assemble/rage) in v. 1 and how does it differ from other terms for political uprising?",
+      "How does the phrase 'today I have begotten you' (v. 7) function in ancient Near Eastern adoption formulas, and what are its implications for Christological interpretation?",
+      "What is the significance of the metaphor of 'breaking cords' and 'casting off ropes' (v. 3) in ancient political contexts?",
+      "How do the violent imagery of the 'iron mace' and 'potter's ware' (v. 9) relate to ancient Near Eastern conquest metaphors?",
+      "What is the textual and interpretive problem with 'kiss the son' (nashqu-bar) in v. 12, and how do ancient versions resolve it?",
+      "How does the geographic specificity of 'Zion, my holy mountain' (v. 6) function in the psalm's universal claims?",
+      "What is the relationship between this psalm's royal ideology and other Davidic covenant texts (2 Samuel 7, Psalm 89)?",
+      "How does the wisdom vocabulary in vv. 10-12 ('be prudent,' 'accept discipline') connect this psalm to sapiential literature?"
+    ],
+    "micro_questions": [
+      "Why does the psalm use the rare verb 'ragash' for national assembly - does it inherently imply futile agitation?",
+      "What is the significance of the textual problem 'nashqu-bar' in v.12 - scribal error or intentional Aramaic?",
+      "How does the conditional offer 'ask of me' (v.8) relate to the declared accomplished fact 'I have installed' (v.6)?",
+      "Why does divine response progress from laughter to anger to declaration - what triggers each emotional shift?",
+      "What is the function of the paradoxical 'rejoice with trembling' formulation in v.11?",
+      "How does the 'shepherd with iron rod' metaphor work - pastoral care or ironic destruction?",
+      "Why shift from cosmic universal claims to specific geographic 'Zion' localization?",
+      "What is the relationship between the wisdom vocabulary (vv.10-11) and the violent imagery (v.9)?"
+    ],
+    "verse_count": 12
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-20250514",
+    "micro_analysis": "claude-sonnet-4-20250514",
+    "synthesis": "claude-sonnet-4-20250514",
+    "master_editor": "gpt-5"
+  }
+}

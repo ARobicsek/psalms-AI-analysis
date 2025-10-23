@@ -40,7 +40,8 @@ Traditional Commentaries
 •	Metzudat David (17th century)
 •	Malbim (19th century)
 •	Meiri (13th century)
-•	Torah Temimah (19th-20th century)
+•	Torah Temimah (early 20th century)
+
 Comparative Materials
 •	Ugaritic parallels from ancient Near Eastern literature
 •	Analytical framework for psalm interpretation

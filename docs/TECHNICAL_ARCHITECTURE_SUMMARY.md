@@ -299,10 +299,10 @@ FROM concordance
 
 **Challenge**: Research bundles can exceed LLM token limits.
 
-**Solution**: Intelligent trimming strategy
-- Priority: Lexicon > Figurative Language > Commentary > Concordance
-- Proportional reduction for large sections
-- Preservation of critical information
+**Solution**: Intelligent, prioritized trimming strategy
+- **Priority Order**: Lexicon and Commentary sections are always preserved. Concordance results are trimmed first. If more space is needed, the Figurative Language section is trimmed next.
+- **Prioritized Figuration Trimming**: When the Figurative Language section is trimmed, the logic now prioritizes keeping examples from the Book of Psalms. Instances from other biblical books are discarded first, ensuring the most relevant context is preserved for the LLM.
+- **Preservation of Critical Information**: This multi-level strategy ensures that the most critical information (lexicon, commentary, and Psalms-specific figuration) is protected from truncation.
 
 ---
 

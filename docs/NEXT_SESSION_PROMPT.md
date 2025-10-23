@@ -1,5 +1,53 @@
 # Next Session Prompt - Psalms Commentary Project
 
+**Date**: 2025-10-23
+**Phase**: Phase 4 - Commentary Enhancement & Experimentation
+
+---
+
+## SESSION 14 (2025-10-23): Prioritized Figuration Truncation - COMPLETE ✅
+
+### Goal
+Enhance the research bundle truncation logic to preserve the most relevant figurative language examples. When the research bundle exceeds the model's context window, the previous strategy trimmed all sections proportionally, risking the loss of valuable examples from the Book of Psalms.
+
+### What Was Accomplished
+
+1.  **Intelligent Truncation Implemented** ✅
+    - Modified the `SynthesisWriter` agent to adopt a smarter trimming strategy for the figurative language section.
+    - The new logic categorizes figurative instances into "Psalms" and "other books."
+    - It now prioritizes keeping instances from Psalms, only discarding them after all examples from other books have been removed.
+
+2.  **Code Refactoring** ✅
+    - The `_trim_figurative_proportionally` function in `src/agents/synthesis_writer.py` was rewritten and renamed to `_trim_figurative_with_priority` to reflect its new, more intelligent behavior.
+    - The call site within the `_trim_research_bundle` function was updated accordingly.
+
+3.  **Comprehensive Documentation** ✅
+    - Created a new detailed summary document: `docs/PRIORITIZED_TRUNCATION_SUMMARY.md`.
+    - Updated `docs/TECHNICAL_ARCHITECTURE_SUMMARY.md` to describe the new prioritized truncation in the "Context Length Management" section.
+    - Updated `docs/IMPLEMENTATION_LOG.md` with a detailed entry for this session.
+    - Updated this file (`NEXT_SESSION_PROMPT.md`) with the summary of this session.
+
+### Files Modified
+
+-   **`src/agents/synthesis_writer.py`**: Implemented the core logic for prioritized truncation.
+-   **`docs/PRIORITIZED_TRUNCATION_SUMMARY.md`**: New detailed documentation for the feature.
+-   **`docs/TECHNICAL_ARCHITECTURE_SUMMARY.md`**: Updated to reflect the new truncation strategy.
+-   **`docs/IMPLEMENTATION_LOG.md`**: Added entry for Session 14.
+-   **`docs/NEXT_SESSION_PROMPT.md`**: Added this summary.
+
+### Key Design Decision
+
+-   **Modify in Place**: The decision was made to refactor the existing truncation function rather than adding a new one. This enhances the current logic without adding unnecessary complexity, keeping the code DRY and localized to the agent responsible for the behavior.
+
+### Expected Impact
+
+-   **Higher Quality Commentary**: The Synthesis and Editor agents will receive more relevant context, leading to more insightful analysis of figurative language within the Psalms.
+-   **Improved Robustness**: The pipeline is now more robust to large research bundles, intelligently preserving the most critical information.
+
+---
+
+# Next Session Prompt - Psalms Commentary Project
+
 **Date**: 2025-10-22
 **Phase**: Phase 4 - Commentary Enhancement & Experimentation
 
@@ -276,9 +324,9 @@ This session focused on adding a new, robust output format to the pipeline to so
     - Fixed an issue where partial pipeline runs would overwrite the `pipeline_stats.json` file. The tracker is now "resume-aware," preserving data integrity across runs.
 
 ### Files Modified
-- **`src/utils/document_generator.py`**: New file created for Word document generation.
-- **`scripts/run_enhanced_pipeline.py`**: Integrated the new generator and the statistics-resume logic.
-- **`src/utils/pipeline_summary.py`**: Updated to support loading initial data for resuming runs.
+- `src/utils/document_generator.py`: New file created for Word document generation.
+- `scripts/run_enhanced_pipeline.py`: Integrated the new generator and the statistics-resume logic.
+- `src/utils/pipeline_summary.py`: Updated to support loading initial data for resuming runs.
 
 ---
 
@@ -773,7 +821,7 @@ Verse commentary generation overhead:
 - `src/agents/micro_analyst.py` - Discovery + optimized research requests
 - `src/agents/scholar_researcher.py` - Research gathering
 - `src/agents/synthesis_writer.py` - Commentary with figurative language integration
-- `src/agents/master_editor.py` - GPT-5 editorial review with validation
+- `src/agents/master_editor.py` - Editorial review with validation
 
 ### Utilities:
 - `src/utils/commentary_formatter.py` - Print-ready formatting (bug fixed)
