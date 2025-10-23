@@ -11,6 +11,7 @@ Supported Commentators:
 - Metzudat David (18th century, Italy)
 - Malbim (Rabbi Meir Leibush ben Yehiel Michel Wisser, 19th century, Ukraine)
 - Meiri (Rabbi Menachem ben Solomon Meiri, 13th-14th century, Provence)
+- Torah Temimah (Rabbi Baruch Epstein, 19th-20th century, Lithuania/Belarus)
 
 Usage:
     from src.agents.commentary_librarian import CommentaryLibrarian
@@ -56,7 +57,8 @@ COMMENTATORS = {
     "Radak": "Radak on Psalms",
     "Metzudat David": "Metzudat David on Psalms",
     "Malbim": "Malbim on Psalms",
-    "Meiri": "Meiri on Psalms"
+    "Meiri": "Meiri on Psalms",
+    "Torah Temimah": "Torah Temimah on Psalms"
 }
 
 

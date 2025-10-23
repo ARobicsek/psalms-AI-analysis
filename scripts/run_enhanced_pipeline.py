@@ -55,7 +55,8 @@ def run_enhanced_pipeline(
     skip_master_edit: bool = False,
     skip_print_ready: bool = False,
     skip_word_doc: bool = False,
-    smoke_test: bool = False
+    smoke_test: bool = False,
+    skip_default_commentaries: bool = False
 ):
     """
     Run complete enhanced pipeline for a single psalm.
@@ -72,6 +73,7 @@ def run_enhanced_pipeline(
         skip_print_ready: Skip print-ready formatting
         skip_word_doc: Skip .docx generation
         smoke_test: Run in smoke test mode (generates dummy data, no API calls)
+        skip_default_commentaries: Use selective commentary mode (only request for specific verses)
     """
     logger = get_logger("enhanced_pipeline")
     logger.info(f"=" * 80)
@@ -249,7 +251,11 @@ def run_enhanced_pipeline(
         # Track input (macro analysis)
         tracker.track_step_input("micro_analysis", macro_analysis.to_markdown())
 
-        micro_analyst = MicroAnalystV2(db_path=db_path)
+        # Determine commentary mode based on flag
+        commentary_mode = "selective" if skip_default_commentaries else "all"
+        logger.info(f"  Using commentary mode: {commentary_mode}")
+
+        micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode)
         micro_model = micro_analyst.model
         micro_analysis, research_bundle = micro_analyst.analyze_psalm(
             psalm_number,
@@ -295,7 +301,8 @@ def run_enhanced_pipeline(
         logger.info(f"[STEP 2] Skipping micro analysis (loading existing files)")
         print(f"\nSkipping Step 2 (using existing micro analysis)\n")
         # Still need to get model name for tracking
-        micro_analyst = MicroAnalystV2(db_path=db_path)
+        commentary_mode = "selective" if skip_default_commentaries else "all"
+        micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode)
         micro_model = micro_analyst.model
         tracker.track_model_for_step("micro_analysis", micro_model)
     
@@ -756,6 +763,8 @@ Examples:
                        help='Skip the final .docx generation step')
     parser.add_argument('--smoke-test', action='store_true',
                        help='Run in smoke test mode (generates dummy data, no API calls)')
+    parser.add_argument('--skip-default-commentaries', action='store_true',
+                       help='Use selective commentary mode (only request commentaries for specific verses instead of all verses)')
 
     args = parser.parse_args()
 
@@ -787,7 +796,8 @@ Examples:
             skip_master_edit=args.skip_master_edit,
             skip_print_ready=args.skip_print_ready,
             skip_word_doc=args.skip_word_doc,
-            smoke_test=args.smoke_test
+            smoke_test=args.smoke_test,
+            skip_default_commentaries=args.skip_default_commentaries
         )
 
         return 0
