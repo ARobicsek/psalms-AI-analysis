@@ -475,3 +475,100 @@ Each word now includes two new fields:
 **Linguistic Basis:** Gesenius' Hebrew Grammar §26-27, Joüon-Muraoka §27
 
 ---
+
+### 2025-10-23: Bug Fixes - Qamets Qatan, Syllabification, and Ketiv-Qere
+
+**Bug Fix 1: Qamets Qatan Not Recognized**
+
+**Problem:** The vowel map was missing the qamets qatan character (ׇ U+05C7), causing it to be treated as regular qamets (long 'ā') instead of short 'o'.
+
+**Example Error:**
+- בְּכׇל → transcribed as `bə-khāl` (incorrect)
+- Should be: `bə-khol` (correct - short o)
+
+**Fix:** Added qamets qatan to vowel map:
+```python
+'ׇ': 'o'  # Qamets Qatan (U+05C7) - short 'o' not long 'ā'
+```
+
+**Result:** Words with qamets qatan now correctly use short 'o' sound.
+
+---
+
+**Bug Fix 2: Dagesh Incorrectly Mapped as Vowel**
+
+**Problem:** The dagesh diacritic (U+05BC ּ) was incorrectly included in the vowel map as `'ּ': 'u'`, causing spurious 'u' phonemes to appear.
+
+**Example Error:**
+- חַנּוּן → `khannuūn` (incorrect - extra 'u')
+- Should be: `khannūn` (correct)
+
+**Root Cause:** Dagesh is not a vowel - it's a diacritic for:
+1. Hardening (dagesh lene in begadkefat letters)
+2. Gemination (dagesh forte for doubled consonants)
+3. Shureq marker (when in vav: וּ = ū)
+
+**Fix:** Removed dagesh from vowel map entirely. The qubuts vowel (ֻ U+05BB) was already correctly mapped.
+
+**Result:** No more spurious 'u' vowels; shureq (וּ) still correctly produces 'ū' via dedicated logic.
+
+---
+
+**Bug Fix 3: Syllabification with Shewa + Consonant Clusters**
+
+**Problem:** Words with vocal shewa followed by consonant clusters were incorrectly syllabified.
+
+**Example Error:**
+- בְּכׇל־יוֹם → `bəkh-lyōm` (incorrect - 2 syllables)
+- Should be: `bə-khol-yōm` (correct - 3 syllables)
+
+**Fix:** Enhanced syllabification algorithm to close syllables with shewa before consonant clusters:
+```python
+# When we have CV̆ followed by CCV (e.g., bə + khol):
+if phoneme == 'ə':
+    # Close syllable with shewa, start new syllable with consonant cluster
+    syllables.append(current_syllable)
+    current_syllable = []
+```
+
+**Result:** Shewa + consonant cluster words now syllabify correctly.
+
+---
+
+**Enhancement: Ketiv-Qere Handling**
+
+**Feature:** Added support for ketiv-qere (כתיב-קרי) notation, where parenthetical text is what's written (ketiv) and bracketed text is what's read (qere).
+
+**Pattern:** `(וגדלותיך) [וּגְדֻלָּתְךָ֥]`
+- Ketiv (what is written): וגדלותיך - **ignored**
+- Qere (what is read): וּגְדֻלָּתְךָ֥ - **transcribed**
+
+**Implementation:**
+```python
+# Remove parenthetical ketiv (what is written but not read)
+normalized_verse = re.sub(r'\([^)]*\)\s*', '', normalized_verse)
+# Unwrap bracketed qere (what is read)
+normalized_verse = re.sub(r'\[([^\]]*)\]', r'\1', normalized_verse)
+```
+
+**Result:** Only the qere (reading tradition) is phonetically transcribed, matching traditional recitation practice.
+
+---
+
+**Test Results:**
+
+All fixes validated on Psalm 145 verses 1-11:
+
+✅ **Qamets Qatan**: בְּכׇל → `bə-khol` (verse 2)
+✅ **Dagesh Fix**: חַנּוּן → `khannūn` (verse 8)
+✅ **Syllabification**: בְּכׇל־יוֹם → `bə-khol-yōm` (verse 2)
+✅ **Ketiv-Qere**: Only `וּגְדֻלָּתְךָ֥` transcribed (verse 6)
+✅ **Gemination**: תְּהִלָּה → `tə-hil-lāh` (verse 1)
+✅ **Matres Lectionis**: יוֹם → `yōm` (verse 2)
+
+**Files Modified:**
+- `src/agents/phonetic_analyst.py` - All three bug fixes
+
+**Impact:** Phonetic transcription accuracy significantly improved across all tested verses.
+
+---
