@@ -5,6 +5,67 @@
 
 ---
 
+## SESSION 17 (2025-10-23): Phonetic Engine Bug Fixes - COMPLETE ✅
+
+### Goal
+Fix three critical bugs in the phonetic transcription engine discovered during testing: (1) qamets qatan not recognized, (2) dagesh incorrectly mapped as vowel, (3) incorrect syllabification with shewa + consonant clusters. Also add support for ketiv-qere notation.
+
+### What Was Accomplished
+
+1. **Bug Fix: Qamets Qatan Recognition** ✅
+   - Added missing qamets qatan character (ׇ U+05C7) to vowel map
+   - Correctly transcribes as short 'o' instead of long 'ā'
+   - Example: בְּכׇל now produces `bə-khol` (not `bə-khāl`)
+
+2. **Bug Fix: Dagesh Vowel Map Error** ✅
+   - Removed dagesh (U+05BC ּ) from vowel map (it's not a vowel!)
+   - Eliminated spurious 'u' phonemes
+   - Example: חַנּוּן now produces `khannūn` (not `khannuūn`)
+   - Qubuts (ֻ) was already correctly mapped
+
+3. **Bug Fix: Syllabification with Shewa** ✅
+   - Enhanced syllabification algorithm for vocal shewa + consonant clusters
+   - Correctly closes syllable with shewa before starting new syllable
+   - Example: בְּכׇל־יוֹם now produces `bə-khol-yōm` (not `bəkh-lyōm`)
+
+4. **Enhancement: Ketiv-Qere Support** ✅
+   - Added regex-based handling for ketiv-qere notation
+   - Removes parenthetical ketiv (what is written)
+   - Unwraps bracketed qere (what is read)
+   - Example: `(וגדלותיך) [וּגְדֻלָּתְךָ֥]` → only qere transcribed
+
+5. **Comprehensive Testing** ✅
+   - Tested all fixes on Psalm 145 verses 1-11
+   - All patterns validated: qamets qatan, gemination, matres lectionis, ketiv-qere
+   - Created test scripts for regression testing
+
+### Files Modified
+
+- **`src/agents/phonetic_analyst.py`**: All three bug fixes and ketiv-qere support
+  - Added qamets qatan to vowel map (line 37)
+  - Removed dagesh from vowel map (line 26)
+  - Enhanced syllabification logic (lines 320-331)
+  - Added ketiv-qere preprocessing (lines 59-65)
+
+### Test Results
+
+All fixes validated successfully:
+- ✅ Qamets qatan: בְּכׇל → `bə-khol`
+- ✅ Dagesh fix: חַנּוּן → `khannūn`
+- ✅ Syllabification: בְּכׇל־יוֹם → `bə-khol-yōm`
+- ✅ Ketiv-qere: Only bracketed qere transcribed
+- ✅ Gemination: תְּהִלָּה → `tə-hil-lāh`
+- ✅ Matres lectionis: יוֹם → `yōm`
+
+### Expected Impact
+
+- **Higher Accuracy**: Phonetic transcriptions now handle edge cases correctly
+- **Better Syllabification**: Vocal shewa patterns syllabify according to Hebrew phonology
+- **Traditional Compliance**: Ketiv-qere notation handled according to reading tradition
+- **Production Ready**: Engine validated on real psalm text with complex features
+
+---
+
 ## SESSION 16 (2025-10-23): Phonetic Transcription Relocation - COMPLETE ✅
 
 ### Goal

@@ -22,8 +22,20 @@ class PhoneticAnalyst:
             'צ': 'ts', 'ץ': 'ts', 'ק': 'q', 'ר': 'r', 'ש': 'sh', 'ת': 't'
         }
         self.vowel_map = {
-            'ַ': 'a', 'ָ': 'ā', 'ֵ': 'ē', 'ֶ': 'e', 'ִ': 'i', 'ֹ': 'ō', 'ֺ': 'ō',
-            'ֻ': 'u', 'ּ': 'u', 'ְ': 'ə', 'ֲ': 'a', 'ֱ': 'e', 'ֳ': 'o'
+            'ַ': 'a',  # Patah (U+05B7)
+            'ָ': 'ā',  # Qamets Gadol (U+05B8)
+            'ֵ': 'ē',  # Tsere (U+05B5)
+            'ֶ': 'e',  # Segol (U+05B6)
+            'ִ': 'i',  # Hiriq (U+05B4)
+            'ֹ': 'ō',  # Holam (U+05B9)
+            'ֺ': 'ō',  # Holam Haser for Vav (U+05BA)
+            'ֻ': 'u',  # Qubuts (U+05BB)
+            'ְ': 'ə',  # Shewa (U+05B0)
+            'ֲ': 'a',  # Hataf Patah (U+05B2)
+            'ֱ': 'e',  # Hataf Segol (U+05B1)
+            'ֳ': 'o',  # Hataf Qamets (U+05B3)
+            'ׇ': 'o'   # Qamets Qatan (U+05C7) - short 'o' not long 'ā'
+            # NOTE: Dagesh (U+05BC ּ) is NOT a vowel - removed from this map
         }
         self.begadkefat_soft = {
             'ב': 'v', 'ג': 'gh', 'ד': 'dh', 'כ': 'kh', 'פ': 'f', 'ת': 'th'
@@ -39,11 +51,21 @@ class PhoneticAnalyst:
     def transcribe_verse(self, hebrew_verse: str) -> dict:
         """
         Transcribes a full Hebrew verse into a structured phonetic format.
+        Handles ketiv-qere notation: (ketiv) [qere] - only transcribes the qere.
         """
         # Normalize to handle composite characters
         normalized_verse = unicodedata.normalize('NFD', hebrew_verse)
+
+        # Handle ketiv-qere: remove (ketiv) and unwrap [qere]
+        # Pattern: (text) [text] -> keep only the bracketed text
+        import re
+        # Remove parenthetical ketiv (what is written but not read)
+        normalized_verse = re.sub(r'\([^)]*\)\s*', '', normalized_verse)
+        # Unwrap bracketed qere (what is read)
+        normalized_verse = re.sub(r'\[([^\]]*)\]', r'\1', normalized_verse)
+
         words = normalized_verse.split()
-        
+
         analysis = {
             "original_text": hebrew_verse,
             "words": [self._transcribe_word(word) for word in words]
@@ -299,7 +321,7 @@ class PhoneticAnalyst:
                     # Check if it's followed by another consonant (consonant cluster)
                     if i + 2 < len(phonemes):
                         next_next = phonemes[i + 2]
-                        
+
                         # Case 2a: Gemination (same consonant twice)
                         if next_phoneme == next_next:
                             # Geminated consonant: split across boundary
@@ -309,16 +331,25 @@ class PhoneticAnalyst:
                             current_syllable = [next_next]  # Start next syllable with second half
                             i += 3  # Skip both consonants
                             continue
-                        
+
                         # Case 2b: Consonant cluster (different consonants)
                         # Check what follows the cluster
                         if next_next in vowels:
                             # CC followed by V: divide before the cluster (CV-CCV)
-                            # This keeps syllables open when possible
-                            syllables.append(current_syllable)
-                            current_syllable = []
-                            i += 1
-                            continue
+                            # Exception: If current vowel is shewa (ə), prefer to close the syllable
+                            # This handles cases like בְּכׇל (bə-khol not bəkh-ol)
+                            if phoneme == 'ə':
+                                # Close syllable with shewa, start new syllable with consonant cluster
+                                syllables.append(current_syllable)
+                                current_syllable = []
+                                i += 1
+                                continue
+                            else:
+                                # Non-shewa vowel: keep syllable open (CV-CCV)
+                                syllables.append(current_syllable)
+                                current_syllable = []
+                                i += 1
+                                continue
                         else:
                             # CC followed by C or end: close syllable with first C (CVC-C...)
                             current_syllable.append(next_phoneme)
