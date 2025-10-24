@@ -28,31 +28,43 @@ v. II. הלל.
 
 ---
 
-### עֱזוּז
-**Lexicon**: Klein Dictionary
-**Vocalized**: עֱזוּז  
+### אֲרוֹמִמְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רוּם  
 
-strength, might, force.
-
-**Etymology**: [From עזז.]  
-
-**Derivatives**: Derivative: עֱזוּזִי.  
+vb. be high, exalted, rise (OHeb, Ph., Old Aramaic, Palm., all in n.pr.; Sab. in רים epith. dei et regis Fell ZMG liv (1900), 25f. also in n.pr. Mordtm ib. xxx (1876), 36 SabDenkm No. 14, 1. 1; Arabic رام be high, dial. of Oman (JayakarJA xxi. 813, 875) and Zanzibar (PräZMG xxxiv (1880), 218); Ethiopic in deriv.; Aramaic רָם ܪܘܡ (very often in der. spec. and deriv.));— Pf. 3 ms. consec. וְרָם Dt 8:14 +; 3 fs. רָ֫מָה 1 S 2:1 +; וְרָאֲמָה Zc 14:10 v. רָאַם; 3 pl. רָמוּ Pr 30:13 ψ 131:1, רָ֑מּוּ Jb 22:12 (Baer Gi; Ges§ 20 l); Impf. יָרוּם Is 30:18 +, juss. יָרֹם Nu 24:7, וַיָּ֫רָם Ho 13:6 Ez 10:4 [וַיָּרֻם Ex 16:20 v. רמם]; 3 mpl. יְרֻמ֑וּן Is 49:11, etc.; Imv. ms. ר֫וּמָה ψ 21:14 +; Inf. cstr. רוּם Dt 17:20 Ez 10:16, כְּרֻם ψ 12:9 [Bae conj. כֶּרֶם, sf. רוֹמָם Ez 10:17 (Ges§ 72 q); Pt. רָם Is 6:1 +, pl. רָמִים 2:13 +, cstr. רָמֵי 10:33, etc.;— be high, lit. rock (in fig.) ψ 61:3 (מִן comp.); be (set on) high, רָ֑מּוּ Jb 22:12 (of stars), especially pt., = adj., in gen. Is 2:12 (+ גֵּאֶה), of mts. v 14; Dt 12:2, hill Ez 6:13, 20:28; 34:6, throne Is 6:1, trees = tall 2:13 Ez 17:22, cf. (in fig.) Is 10:33 (רָמֵי הַקּוֹמָה); human stature Dt 1:28 (מִן comp.), 2:10, 21; 9:2; רָמִים ψ 78:69 heights (of heaven; ‖ אֶרֶץ); רָמִים of inhab. of heavens Jb 21:22. especially of י׳, רָם וְנִשָּׂא Is 57:15, cf. ψ 138:6, + עַל־כַּל־הָעַמִּים 99:2, גּוֹיִם 113:4. be raised, uplifted: of highway Is 49:11 (made high, put in order); voice, Dt 27:14 (pt. = adj.) uplifted. fig.: of hand, symbol of might, Dt 32:27, + עַל pers. Mi 5:8; of Isr. in Exodus בְּיָד רָמָה Ex 14:8; Nu 33:3 (both P); of י׳’s hand Is 26:11 ψ 89:14 (‖ תָּעֹז); fig. of presumption Nu 15:30 (P); זְרוֹעַ רָמָה of might Jb 38:15; of eyes, fig. of arrogance Pr 6:17; 30:13 ψ 131:1 (‖ גָּבַהּ לִבִּי), so 18:28, but ‖ 2 S 22:28 of pers.; of heart, fig. of reckless elation, Ho 13:6; Dt 8:14; Ez 31:10 (בְּגָבְהוֹ, ‖ גָּבַהְתָּ בְּקוֹמָה) Dn 11:12, + מִן pers. Dt 17:20; of horn, fig. of triumph 1 S 2:1 (song), ψ 89:25 (v 18 see Hiph.), 112:9, so head 27:6 (+ עַל pers.), 140:9 (join ירומו to v 10, but read יָרִימוּ Che, cf. Hup-Now). of pers., be exalted (in fig.), king Nu 24:7 (JE; + מִן comp.; ‖ תִּנַּשֵּׂא); of God (י׳, i.e. shew his exaltation) Is 30:18; 2 S 22:47 = ψ 18:47, ψ 21:14; 46:11(×2), + עַל־(הַ)שָּׁמַיִם 57:6, 12; 108:6; עֶבֶד י׳ Is 52:13, י׳’s people ψ 89:17; rebellious 66:7 (Qr; Kt Hiph.: shew exaltation); worthlessness (personif.) ψ 12:9; foe 13:3; city Pr 11:11. be lifted, rise, of ark, מֵעַל־הארץ Gn 7:17 (J), so of cherubim Ez 10:16, cf. v 17; כְּבוֹד י׳ v 4 (מֵעַל הַכְּרוּב).—Pr 24:7 v. i. רָאמוֹת p. 910b. Pf. 3 fs. sf. רֹמְמָ֑תְהוּ Ez 31:4; 1 s. רוֹמַמְתִּי Is 1:2; 23:4; Impf. 3 ms. יְרוֹמֵם Ho 11:7, sf. יְרוֹמְמֵנִי ψ 27:5, וִירוֹמִמְךָ 37:34; 1 s. sf. וַאֲרֹמְמֶ֑נְהוּ Ex 15:2 (Ges§ 58 i), etc. (אֵרוֹמָם v. Hithpōʿl.); Imv. mpl. רוֹמְמוּ ψ 99:5, 9; Inf. cstr. לְרוֹמֵם Ezr 9:9; Pt. מְרוֹמֵם 1 S 2:7, sf. מְרוֹמְמִי ψ 9:14, f. רוֹמֵמָה 118:16 (מ om., Hup-Now Bae; cf. Köi. 454);— raise, rear, children Is 1:2; 23:4 (both ‖ גִּדֵּל). cause tree to grow, subj. תְּהוֹם Ez 31:4 (‖ גִּדֵּל). rear, erect, temple Ezr 9:9. lift up: in fig., acc. pers., subj. י׳ ψ 27:5 (+ בְּצוּר); + מִן comp. 2 S 22:49 = ψ 18:49, + מִן from 9:14; acc. om. Ho 11:7 (si vera l., cf. We Now). raise waves of sea, subj. wind, ψ 107:25. exalt, acc. pers., subj. י׳ Jb 17:4 (read perhaps תְּרִמֵם, so Bu, cf. Di), ψ 37:34 (+ לָרֶשֶׁת אָ֑רֶץ); acc. om. 1 S 2:7 ψ 118:16 (in victory); subj. wisdom, acc. pers. Pr 4:8, cf. צְדָקָה תְּרוֹמֵם־גּוֹי 14:34. exalt, extol, acc. י׳, ψ 30:2, ‖ אוֹדֶה Is 25:1 ψ 118:28, ‖ הִשְׁתַּחֲווּ 99:5, 9, ‖ הִלֵּל 107:32, ‖ בֵּרַךְ 145:1, ‖ אַנְוֵהוּ Ex 15:2; acc. שֵׁם י׳ ψ 34:4 (‖ גִּדֵּל). Impf. 3 fpl. תְּרוֹמַמְנָה ψ 75:11 be lifted up, of horns (cf. Qal 2 b); Pf. 3 ms. וְרוֹמַם 66:17 and he was extolled (so Ki al.; but v. רוֹמָם infr.); Pt. מְרוֹמַם Ne 9:5 extolled, of י׳’s name (cf. Pōʿlēl 3), + עַל־בְּרָכָה וג׳. Pf. 3 ms. הֵרִים 1 K 11:27 +; 2 ms. הֲרִימוֹתָ 2 K 19:22 ψ 89:43, וַהֲרֵמֹתָ֫ Nu 31:28; 2 mpl. consec. וַהֲרֵמֹתֶם 18:26, etc.; Impf. 3 ms. יָרִים Gn 41:44 +, juss. יָרֵם Nu 17:2; 1 S 2:10, וַיָּ֫רֶם Ex 7:20 +, sf. וַיְרִימֶהָ Gn 31:45, etc.; Imv. ms. הָרֵם Ex 14:16; Is 58:1, הָרִימָה ψ 74:3, etc.; Inf. cstr. הָרִים Is 10:15 +, sf. הֲרִימִי Gn 39:18, etc.; Pt. מֵרִים Ex 35:24 +, etc.;— (1) raise, lift, c. acc., hand Ex 17:11 (E), Nu 20:11 (P), + אֶל־י׳ (in oath) Gn 14:22 cf. (אֶל־הַשָּׁמַיִם) Dn 12:7, + ב pers. against 1 K 11:26, 27; feet; פְּעָמִים ψ 74:3, i.e. run (+ ל dir.); hand or foot Gn 41:44 (E), i.e. make any movement (hyperb.); head ψ 110:7 (Assyrian ullû rêšu DlHWB 62a), cf. יָרִימוּ 140:9 (so read, v. Qal 2 b); face, אֶל־י׳ Ezr 9:6; hand of another, subj. י׳, fig. of giving strength to, ψ 89:43, so head 3:4; c. acc. of rod Is 10:15; Ex 14:16 (P), הֵרִים בַּמַּטֶּה 7:20 (E); rod subj., c. acc. rei Is 10:15. (2) raise poor אֶבְיוֹן, c. מִן loc. 1 S 2:8 ψ 113:7. lift up voice Gn 39:15, 18 (J; both + קָרָא), Is 40:9(×2) (acc. om.), 58:1; Ezr 3:12; + בִּתְרוּעָה Ez 21:27, בַּחֲצֹצְרוֹת 2 Ch 5:13; + ל pers. Is 13:2, לָעָב Jb 38:34, + עָל pers. against 2 K 19:22 = Is 37:23; הֵרִים בְּקוֹל 1 Ch 15:16. (take into one’s hand and) lift, take up, stone Jos 4:5 (JE; עַל־שִׁכְמוֹ), leg (of sacrif. meal) 1 S 9:24, mantle 2 K 2:13, axe 67 (acc. om.), yoke Ho 11:4 (עַל־לְחֵיהֶם), censers Nu 17:2 (P; + מִבֵּין), ashes Lv 6:3. set up, erect, stone as מַצֵּבָה Gn 31:45 (E); standard, + אֶל of people Is 49:22, עַל 62:10. set on high, throne, מִמַּעַל לְכוֹכְבֵי אֵל Is 14:13; nest (subj. נֶשֶׁר) Jb 39:27. lift up, exalt, c. acc. pers., subj. י׳ 1 K 14:7; 16:2 ψ 89:20 (all c. מִן), ψ 75:8 (opp. יַשְׁפִּיל); subj. קָלוֹן Pr 3:35, cf. 14:29; c. acc. קֶרֶן, in both good and bad sense (cf. Qal 2 b) 1 S 2:10; La 2:17 (לַמָּרוֹם), ψ 89:18 (Kt; Qr Qal), 92:11; 148:14 ψ 75:5, 6; but 1 Ch 25:5 sound the horn; inf. = exaltation ψ 75:7; 66:7 v. Qal 2 c. lift up and take away, remove, c. acc. הָעֲטָרָה Ez 21:31; acc. rei + מִן loc. Is 57:14, Lv 2:9; 4:8, 19; 6:8 Nu 18:30, 32; = do away with, גְּרֻשֹׁתֵיכֶם Ez 45:9 (מֵעַל of people), הַתָּמִיד Dn 8:11 (Kt; Qr Hoph.); = set apart, מֶכֶס Nu 31:28 (מִן pers.). lift off and present, contribute, offer: to י׳, c. acc. cogn. תְּרוּמָה, Ez 45:13; 48:8, 20; Nu 15:20(×2) (P), Ex 35:24 (P); + לי׳ Ez 45:1; 48:9; Nu 15:19; 18:19, 24; 31:52; תְּרוּמַת י׳ 18:26 (+ מִן rei), v 28, 29 (all P); ת׳ בֵּית־א׳ Ezr 8:25. c. acc. rei, + לְי׳ Lv 22:15. contribute, acc. rei, ל pers. (for sacrif.), 2 Ch 30:24(×2;) 35:7, 8 (acc. om.), v 9. Pf. 3 ms. הוּרָ֑ם Ex 29:27, הֻרַם Dn 8:11 Qr (Kt Hiph.); Impf. 3 ms. יוּרָם Lv 4:10;—be taken off from (מִן) Lv 4:10 (P), cf. Ex 29:27 (P; ‖ הוּנַף); be abolished Dn 8:11 Qr (cf. Hiph. 2); Bev (after 𝔊) ins. Pt. מוּרָם after הַתָּמִיד v 13. Impf. 3 ms. וַיִתְרוֹמֵם וַיִתְגַּדֵּל עַל־כָּל־אֵל Dn 11:36 and he shall exalt and magnify himself above, etc.; 1 s. (ת assim.) אֵרוֹמָ֔ם Is 33:10 (Ges§ 54c Köi. 454) I will raise myself (+ אָקוּם, אֶנָּשֵׂא).
 
 ---
 
-### חֵקֶר
+### אֲרוֹמִמְךָ
 **Lexicon**: BDB Dictionary
-**Vocalized**: חֵ֫קֶר  
+**Vocalized**: רוּם²  
 
-n.m. Ju 5:16 searching, thing (to be) searched out;—abs. הֵ֫קֶר Jb 5:9 + 8 times; cstr. id. Pr 25:27 + 2 times; pl. cstr. חִקְרֵי Ju 5:16;—חִקְרֵי לֵב Ju 5:16 searchings, questionings of heart; Jb 11:7 canst thou reach ח׳ אֱלוֹהַּ i.e. what is to be explored in him, the whole range of his nature, so ח׳ תהום 38:16 the range of the deep; especially אֵין ח׳ i.e. it is unsearchable Jb 5:9; 9:10 ψ 145:3 Pr 25:3 Is 40:28, cf. לא ח׳ Jb 34:24; 36:26; ח׳ אבותם 8:8 i.e. thing searched out by their fathers.
+n.[m.] height, haughtiness (proposes inf.);—abs. ר׳, height, loftiness, שָׁמַיִם לָר׳ וָאָרֶץ לָעֹמֶק Pr 25:3; cstr. רוּם עֵינַיִם fig. of haughtiness Is 10:12 (‖ גֹּדֶל לֵבָב), Pr 21:4 (‖ רְחַב־לֵב); so רֻם לִבּוֹ Je 48:29 (‖ גַּאֲוָה, גָּאוֹן, גֹּבַתּ); then alone: haughtiness, רוּם אֲנָשִׁים Is 2:11, 17 (both ‖ גַּבְהוּת).
 
 ---
 
-### יַבִּיעוּ
+### אֲרוֹמִמְךָ
 **Lexicon**: BDB Dictionary
-**Vocalized**: נָבַע  
+**Vocalized**: רָם  
 
-vb. flow, spring, bubble up, poet. and late (NH id. (rare); Assyrian nabû, id., DlHWB 442; Arabic نَبَعَ well or issue forth (of water); Aramaic ܢܒܰܥ, נְבַע; Ethiopic ነብዐ ii. weep, አንብዕ tear(s));— Pt. נַ֫חַל נֹבֵעַ Pr 18:4 a flowing wady, metaph. of מְקוֹר חָכְמָה. Impf. יַבִּיעַ ψ 19:3 + 3 times; אַבִּ֫יעָה ψ 78:2 Pr 1:23; יַבִּ֫יעוּ ψ 94:4; 145:7; יַבִּיעוּן ψ 59:8; 3 fpl. תַּבַּ֫עְנָה ψ 119:171;— pour out, emit, cause to bubble, belch forth: pour out, fig. אַבִּיעָה לָכֶם רוּחִי Pr 1:23 (‖ אוֹדִ֫יעָה דְבָרַי אֶתְכֶם). cause to bubble, ferment זְבוּבֵי מָ֫וֶת יַבְאִישׁ יַבִּיעַ שֶׁמֶן רוֹקֵ֑חַ Ec 10:1. fig., usually of speech, pour forth, emit, belch forth, emphat. expression: פִּי רְשָׁעִים יַבִּיעַ רָעוֹת Pr 15:28 (opp. לֵב צַדִּיק יֶהְגֶּה לַעֲנוֹת) i.e. the righteous considers before he speaks, the wicked bursts out with reckless utterance; פִּי כְסִילִים יַבִּיעַ אִוֶּלֶת Pr 15:2 (opp. לְשׁוֹן חֲכָמִים תֵּיטִיב דָּ֑עַת); יַבִּ֫יעוּ יְדַבְּרוּ עָתָק ψ 94:4 (‖ יִתְאַמְּרוּ כָּל־פֹּעֲלֵי אָ֑וֶן); יַבּ׳ בְּפִיהֶם 59:8 (‖ חֲרָבוֹת בְּשִׂפְתוֹתֵיהֶם); in good sense, אַבִּ֫יעָה חִידוֹת 78:2 (‖ אֶפְתְּחָה בְּמָשָׁל פִּי); תַּבַּעְנָה שְׂפָתַי תְּהִלָּה 119:171; זֵכֶר רַב־טוּבְךָ יַבִּ֑יעוּ 145:7 (‖ וְצִדְקָֽתְךָ יְרַנֵּ֑נוּ, cf. also v 6); metaph. יוֹם לְיוֹם יַבּ׳ אֹמֶר 19:3, i.e. though silent, it really pours forth speech.
+n.pr.m. an ancestor of David, Ru 4:19(×2), brother of Jerachmeel 1 Ch 2:9, 10. son of J. 1 Ch 2:25, 27.—Αρραν, Ραμ, etc. name of Elihu’s family, Jb 32:2 (Ραμ[α], Αραμ), dub., cf. Bu.
+
+---
+
+### אֲרוֹמִמְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רָם²  
+
+v. רום.
+
+---
+
+### אֲרוֹמִמְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רָמַם  
+
+vb. denom. be wormy;— Impf. 3 ms. (c. acc. result, Ges§ 121 d N) וַיָּ֫רֻם תּוֹלָעִים Ex 16:20 (Ges§ 67 n; + וַיִּבְאַשׁ).
 
 ---
 
@@ -82,79 +94,201 @@ vb. be boastful, Pi. praise (Arabic هَلَّ shout, both in joy & (if conject.
 
 ---
 
-### אָשִׂיחָה
+### חֵקֶר
 **Lexicon**: BDB Dictionary
-**Vocalized**: שִׂיחַ  
+**Vocalized**: חֵ֫קֶר  
 
-n.m. ψ 104:34 complaint, musing;—abs. שׂ׳ 1 K 18:27; Pr 23:29; sf. שִׂיחִי 1 S 1:16 +, שִׂחִי Jb 23:2, שִׂיחוֹ 2 K 9:11 ψ 102:1;— plaint, complaint: Jb 7:13; 9:27; 10:1 (‖ מר נפשׁ), 21:4; 23:2 Pr 23:29 ψ 55:3 (‖ אָהִימָה); קוֹלִי בְּשִׂיחִי 64:2; שָׁפַךְ שׂ׳ לפני י׳ 102:1; 142:3. Foll. are dub.: musing, 1 K 18:27 (E) of a god, ‖ שִׂיג לוֹ, (so RV; SS ‘nachdenken’; Buhl ‘beschäftigt sein’; AV talk); ψ 104:34 of man (Buhl SS. Bae ‘Rede, oder Gesang’).—Vid. also [שֵׂחַ] infr. anxiety, trouble: מֵרֹב שִׂיחִי 1 S 1:16; (defined in MT by כַּעַס, cf. HPS; so Buhl SS, but perhaps = 1). the way in which he talks: שִׂיחוֹ 2 K 9:11.
+n.m. Ju 5:16 searching, thing (to be) searched out;—abs. הֵ֫קֶר Jb 5:9 + 8 times; cstr. id. Pr 25:27 + 2 times; pl. cstr. חִקְרֵי Ju 5:16;—חִקְרֵי לֵב Ju 5:16 searchings, questionings of heart; Jb 11:7 canst thou reach ח׳ אֱלוֹהַּ i.e. what is to be explored in him, the whole range of his nature, so ח׳ תהום 38:16 the range of the deep; especially אֵין ח׳ i.e. it is unsearchable Jb 5:9; 9:10 ψ 145:3 Pr 25:3 Is 40:28, cf. לא ח׳ Jb 34:24; 36:26; ח׳ אבותם 8:8 i.e. thing searched out by their fathers.
 
 ---
 
-### אָשִׂיחָה
+### יַבִּיעוּ
 **Lexicon**: BDB Dictionary
-**Vocalized**: שִׂיחַ²  
+**Vocalized**: נָבַע  
 
-vb.denom. muse, complain, poet. talk (of);— Impf. 3 ms. יָשִׂיחַ ψ 119:23; 3 fs. sf. תְּשִׂיחֶ֑ךָ Pr 6:22; 1 s. אָשִׂיחַ ψ 119:78 +, etc.; Imv. ms. שִׂיחַ Jb 12:8; mpl. שִׂיחוּ Ju 5:10 +; Inf. cstr. שִׂיחַ ψ 119:148;— complain: ψ 55:18; 77:4 (both ‖ הָמָה), Jb 7:11 (בְּמַר נַפְשִׁי), + ψ 6:7 (read prob. אָשִׂיחָה for אַשְׂחֶה). muse: עִם־לְבָבִי ψ 77:7; c. ב, meditate upon, study, God’s עֲלִילוֹת v 13 (‖ הָגָה); פִּקּוּדִים 119:15, 78; חֻקִּים v 23, 48; נִפְלָאוֹת v 27; אִמְרָה v 148; c. acc. דִּבְרֵי נִפְלְאֹתֶיךָ 145:5. talk (about), sing (of): abs. Ju 5:10 (ode); c. ב rei, ψ 105:2 = 1 Ch 16:9 (‖ שִׁיר, זִמֵּר; so SS Gerber, but poss. = 2, so Dr), ψ 69:13 (ב pers. against; ‖ נְגִינוֹת, of mocking words). c. sf. pers. talk (with) Pr 6:22 (del. Toy); c. לְ speak to Jb 12:8 (Di ‘sprich sinnend’; Hi Bu read שֶׁרֶץ; Kau חַיַּת (so Bu as altern.), Bö al. sub II. שִׂיחַ). Pôlʿel meditate, consider: Impf. 3 ms. יְשׂוֹחֵחַ Is 53:8 (abs.); 1 s. אֲשׂוֹחֵחַ ψ 143:5 (ב rei; ‖ הָגָה).
+vb. flow, spring, bubble up, poet. and late (NH id. (rare); Assyrian nabû, id., DlHWB 442; Arabic نَبَعَ well or issue forth (of water); Aramaic ܢܒܰܥ, נְבַע; Ethiopic ነብዐ ii. weep, አንብዕ tear(s));— Pt. נַ֫חַל נֹבֵעַ Pr 18:4 a flowing wady, metaph. of מְקוֹר חָכְמָה. Impf. יַבִּיעַ ψ 19:3 + 3 times; אַבִּ֫יעָה ψ 78:2 Pr 1:23; יַבִּ֫יעוּ ψ 94:4; 145:7; יַבִּיעוּן ψ 59:8; 3 fpl. תַּבַּ֫עְנָה ψ 119:171;— pour out, emit, cause to bubble, belch forth: pour out, fig. אַבִּיעָה לָכֶם רוּחִי Pr 1:23 (‖ אוֹדִ֫יעָה דְבָרַי אֶתְכֶם). cause to bubble, ferment זְבוּבֵי מָ֫וֶת יַבְאִישׁ יַבִּיעַ שֶׁמֶן רוֹקֵ֑חַ Ec 10:1. fig., usually of speech, pour forth, emit, belch forth, emphat. expression: פִּי רְשָׁעִים יַבִּיעַ רָעוֹת Pr 15:28 (opp. לֵב צַדִּיק יֶהְגֶּה לַעֲנוֹת) i.e. the righteous considers before he speaks, the wicked bursts out with reckless utterance; פִּי כְסִילִים יַבִּיעַ אִוֶּלֶת Pr 15:2 (opp. לְשׁוֹן חֲכָמִים תֵּיטִיב דָּ֑עַת); יַבִּ֫יעוּ יְדַבְּרוּ עָתָק ψ 94:4 (‖ יִתְאַמְּרוּ כָּל־פֹּעֲלֵי אָ֑וֶן); יַבּ׳ בְּפִיהֶם 59:8 (‖ חֲרָבוֹת בְּשִׂפְתוֹתֵיהֶם); in good sense, אַבִּ֫יעָה חִידוֹת 78:2 (‖ אֶפְתְּחָה בְּמָשָׁל פִּי); תַּבַּעְנָה שְׂפָתַי תְּהִלָּה 119:171; זֵכֶר רַב־טוּבְךָ יַבִּ֑יעוּ 145:7 (‖ וְצִדְקָֽתְךָ יְרַנֵּ֑נוּ, cf. also v 6); metaph. יוֹם לְיוֹם יַבּ׳ אֹמֶר 19:3, i.e. though silent, it really pours forth speech.
 
 ---
 
-### אָשִׂיחָה
-**Lexicon**: BDB Dictionary
-**Vocalized**: שִׂיחַ³  
-
-n.[m.] bush, shrub, plant;—שׂ׳ abs. coll. Jb 30:4, cstr. שׂ׳ הַשָּׂדֶה Gn 2:5 (J); pl. שִׂיחִים Jb 30:7, אַחַד הַשִּׂיחִם Gn 21:15 (E).
-
----
-
-### נוֹרְאֹתֶיךָ
-**Lexicon**: BDB Dictionary
-**Vocalized**: יָרֵא  
-
-vb. fear (NH id.; Assyrian îrû, id.; Hpt KAT2 Gloss i., COTGloss)— Pf. יר׳ Gn 19:30 + 14 times; 3 f. יָֽרְאָה Je 3:8 ψ 76:9; יָרֵ֑אָה Gn 18:15; pl. 2 m. יְרֵאתֶם Nu 12:8 + 2 times; + 23 times Pf.; Impf. יִירָא Am 3:8 + 3 times; וַיִּירָא Gn 28:17 + 5 times; וַיִּרָא Je 26:21 + 5 times; pl. יִירְאוּ (יִֽרְאוּ) 23:4 +; יִרָאוּן Dt 13:12, +, etc.; 136 times Impf.; Imv. יְרָא Pr 3:7 + 3 times; יְראוּ Jos 24:14 + 2 times; Inf. cstr. יְרֹא Jos 22:25; לֵרֹא 1 S 18:29 (Ges§ 69, R. i.); לְיִרְאָה Dt 4:10 + 13 times; sf. יִרְאָתוֹ 2 S 3:11; יִרְאָתָם Is 29:13; יְרָאתֶם Jos 4:24 (read יִרְאָתָם Bö§ 1081 a Ew337 b Di etc.); Pt. יָרֵא Gn 32:12 + 15 times; cstr. יְרֵא 22:12 + 10 times; pl. יְרֵאִים Je 42:11 + 6 times; cstr. יִרְאֵי Ex 18:21 + 12 times; f. cstr. יִרְאַת Pr 31:30;— fear, be afraid (not in P): abs. Gn 3:10; 18:15; 32:8; 43:18 Ex 14:10 (J), Gn 20:8; 28:17; 42:35 Ex 2:14 Jos 10:2 (E), Dt 20:8; 31:8 Ju 7:3; 8:20 1 S 4:7; 17:11, 24; 23:3; 28:5; 31:4 = 1 Ch 10:4, 2 K 10:4 2 Ch 20:3 Ne 2:2; 6:13 Is 54:14 Je 3:8; 23:4; 26:21 Am 3:8 Jon 1:5, 10 ψ 27:3; 46:3; 49:6 (but Bae reads ראה) 56:4, 5, 12; 64:5, 10; 76:9; 112:8; 118:6 Pr 14:16 Jb 6:21; 11:15; (וּ, י)אַל־תִּירָא fear not Gn 15:1; 21:17; 35:17; 50:19, 21 Ex 20:20 Jos 10:25 (E), Gn 26:24; 43:23 Ex 14:13 Jos 8:1 (J), Dt 1:21; 20:3; 31:6 Ju 4:18; 6:23 1 S 4:20; 12:20; 22:23; 23:17; 28:13 2 S 9:7; 13:28 1 K 17:13 2 K 6:16 1 Ch 22:13; 28:20 2 Ch 20:17 Is 7:4; 35:4; 40:9; 41:10, 13, 14; 43:1, 5; 44:2; 54:4 Je 30:10; 46:27, 28 Jo 2:21, 22 Zp 3:16 Hg 2:5 Zc 8:13, 15 ψ 49:17 La 3:57 Dn 10:12, 19 Ru 3:11; יִשְׁמְעוּ וי׳ hear and fear Dt 13:12; 17:13; 19:20; 21:21; (י)ראו וי׳ see and fear ψ 40:4; 52:8 Is 41:5 Zc 9:5. c. acc. rei or pers. Nu 14:9(×2) (J), 21:34 (E), Dt 3:2, 22 Ju 6:27 1 S 15:24 2 S 3:11 1 K 1:51 Is 8:12; 51:7; 57:11 Ez 3:9; 11:8 Hb 3:2 (acc. פעלךָ in corrected rhythm), ψ 23:4 Dn 1:10; acc. of God (י׳) 1 S 12:18 2 S 6:9 = 1 Ch 13:12 Is 57:11 Je 5:22 Jon 1:16 Jb 9:35; 37:24. with מִן be afraid of, Dt 1:29; 2:4; 7:18; 20:1; 28:10 Jos 10:8 (D) 1 S 28:20 2 K 25:24 Is 10:24; 51:12 Je 10:5; 42:11, 16 Ez 2:6(×3) Mi 7:17 ψ 3:7; 27:1; 65:9; 91:5; 112:7; 119:120 Pr 3:25; 31:21 Jb 5:21, 22 Ec 12:5; with מִפְּנֵי Dt 5:5; 7:19 Jos 9:24; 11:6 (D), 1 S 7:7; 18:29; 21:13 1 K 1:50 2 K 1:15; 19:6 (= Is 37:6) 25:26 2 Ch 20:15; 32:7 Ne 4:8 Je 1:8; 41:18; 42:11(×2); מִלִּפְנֵי 1 S 18:12, with בְּ because of, for Je 51:46. with inf. and לְ fear to do a thing Gn 19:30; 26:7 (J), Nu 12:8 (E), Ju 7:10 2 S 1:14; 10:19; 12:18; with infin. and מִן, afraid of doing Gn 46:3 Ex 3:6 (E), 1 S 3:15 Je 40:9 Jb 32:6. with פֶּן fear lest Gn 31:31 (E) 32:12 (J). stand in awe of, with מן and inf. וַיִּירְאוּ מִגֶּשֶׁת אֵלָיו Ex 34:30 (P) and they stood in awe of drawing nigh unto him; יִירְאוּ מֵיהוה וגו׳ ψ 33:8 let all the earth stand in awe of Yahweh; וְיָרֵאתָ מֵאֱלהֶיךָ and thou shalt stand in awe of thy God Lv 19:14, 32; 25:17, 36, 43 (all H); with מִפְּנֵי, of the king Solomon 1 K 3:28; מִפְּנֵי י׳ אלהים Ex 9:30 (J?); מפני י׳ Hg 1:12; (אלהים) י׳ מלפני stand in awe before (God) Ec 3:14; 8:12, 13. fear, reverence, honour, e.g. parents Lv 19:3 (H), Moses and Joshua Jos 4:14(×2), the oath 1 S 14:26 Ec 9:2, commandment Pr 13:13, the sanctuary Lv 19:30; 26:2 (H), other gods Ju 6:10 2 K 17:7, 35, 37, 38; elsewhere of God: abs. Je 44:10. with acc. (ה)אלהים Gn 42:18 Ex 1:17, 21; 18:21 (E), Dt 25:18 ψ 55:20; 66:16 Jb 1:1, 8, 9; 2:3 Ec 5:6; 7:18; 8:12; 12:13 Ne 7:2; יר׳ יהוה Ex 14:31 (J), Jos 22:25 (P), 24:14 (E), 1 S 12:14, 24 1 K 18:3, 12 2 K 4:1; 17:25, 28, 32, 33, 34, 41 Is 50:10 Je 26:19 Ho 10:3 Jon 1:9 Mal 3:16(×2) ψ 15:4; 22:24; 25:12; 34:10; 112:1; 115:11, 13; 118:4; 128:1, 4; 135:20 Pr 3:7; 14:2; 24:21; 31:30; יר׳ י׳ אֱלֹהֶיךָ (and other sfs.) Dt 6:2, 13, 24; 10:12, 20; 14:23; 17:19; 31:12, 13 Jos 4:24 (D), 2 K 17:39 Je 5:24; with sfs. referring to Yahweh or Elohim Dt 4:10; 5:26; 8:6; 13:5 1 K 8:40, 43 = 2 Ch 6:31, 33, 2 K 17:36 Is 25:3; 29:13 Je 10:7; 32:39 Mal 2:5; 3:5 Zp 3:7 ψ 22:26; 25:14; 31:20; 33:18; 34:8, 10; 60:6; 67:8; 72:5; 85:10; 103:11, 13, 17; 111:5; 119:63, 74, 79; 145:19; 147:11; הַיָּרֵא אֶת־דְּבַר י׳ Ex 9:20 he that feared the word of Yahweh (J); the name (of Yahweh) Dt 28:58 Is 59:19 Mal 3:20 ψ 61:6; 86:11; 102:16 Ne 1:11. Impf. 2 m. תִּוָּרֵא ψ 130:4; Pt. נוֹרָא Gn 28:17 + 33 times; f. נוֹרָאָה Is 21:1; pl. נוֹרָאוֹת 64:2 + 5 times; נוֹרָאֹת Dt 10:21; נֹרָאוֹת 2 S 7:23; sf. נוֹרְאוֹתֶיךָ ψ 145:6;— be fearful, dreadful, e.g. wilderness Dt 1:19; 8:15, land Is 21:1, people 18:2, 7 Hb 1:7, ice (in sim.) כְּעֵין הַקֶּרַח הנ׳ Ez 1:22 (del. 𝔊 Co). cause astonishment and awe: of Yahweh himself ψ 47:3; 68:36; 76:8; נוֹרָא תְהִלֹּת awe-inspiring in praises Ex 15:11 (song); עַל־אלוהּ נוֹרָא הוֹד awe-inspiring majesty (is) upon Eloah Jb 37:22; c. לְ, to kings of the earth ψ 76:13; c. על of hostile nations Zp 2:11; of י׳’s doings Ex 34:10 (J) ψ 66:3, 5; (ה)נוראות wonderful, glorious things, of Messianic king 45:5; of Yahweh himself Dt 10:21 2 S 7:23 = 1 Ch 17:21 Is 64:2 ψ 106:22; 145:6; נו׳ adverbially in ψ 65:6; 139:14 Ges§ 118. 5. b DaSynt. § 70(b); יוֹם י׳ הגדול והנורא the great and awful day of Yahweh Jo 3:4 Mal 3:23 cf. Jo 2:11. inspire reverence, godly fear, and awe: as attribute of God, לְמַעַן תִּוָּרֵא that thou mightest be revered ψ 130:4; (ה)גָּדוֹל ו(ה)נוֹרָא (the) great and awful (God) Dt 7:21; 10:17 Ne 1:5; 4:8; 9:32 Dn 9:4; with עַל, above all gods ψ 96:4 = 1 Ch 16:25; above the angels round about him ψ 89:8. of the name of Yahweh Dt 28:58 ψ 99:3; 111:9 Mal 1:14. of sacred things: מלאךְ האלהים Ju 13:6; place of theophany Gn 28:17 (E). Pf. 3 m. sf. יֵֽרְאֻנִי 2 S 14:15; Inf. sf. לְיָֽרְאֵנִי Ne 6:19; לְיָֽרְאָם 2 Ch 32:18; Pt. pl. מְיָֽרְאִים Ne 6:9, 14 make afraid, terrify, with acc.
-
----
-
-### נוֹרְאֹתֶיךָ
-**Lexicon**: BDB Dictionary
-**Vocalized**: יָרֵא²  
-
-adj. verb. v. supr. Pt.
-
----
-
-### נוֹרְאֹתֶיךָ
-**Lexicon**: BDB Dictionary
-**Vocalized**: יָרָא  
-
-vb. shoot, pour (Aramaic orthogr. of יָרָה q.v.)— Inf. cstr. לִירוֹא בַּחִצִּים 2 Ch 26:15 shoot with arrows. Impf. וַיֹּרא֯וּ 2 S 11:24 and they shot at (אֶל־); Pt. pl. הַמּוֹרִא֯ים v 24 the shooters, archers; Kt to be read וַיֹּרִאוּ, הַמּוֹרִאִים; but Mas, noting א as superfluous, would read וַיֹּרוּ, הַמּוֹרִים from יָרָה (Bö§ 1083 (8), (9)). Impf. only in וּמַרְוֶה גַּם הוּא יוֹרֶ֑א Pr 11:25 he that watereth shall himself also be watered (Fl De MV al. derive—‘non bene,’ Thes—from √ רוה, q.v., יוֹרֶא for יָרְוֶה; but v. Thes Ew§ 131 f. Bö§ 161 (4) SS Buhl Köi. 585; cf. ירה 4).
-
----
-
-### הֲדַר
+### עֱזוּז
 **Lexicon**: Klein Dictionary
-**Vocalized**: הדר ᴵᴵ  
+**Vocalized**: עֱזוּז  
 
-to return; to repeat. he returned.
+strength, might, force.
 
-**Etymology**: [JAram., related to חזר (= to return), and to חדר ᴵ (= to surround).]  
+**Etymology**: [From עזז.]  
 
-**Derivatives**: Derivatives: הדר ᴵᴵᴵ, הָדִיר, הֲדִירוּת, מַהֲדוּרָא, מַהֲדֵר.  
-
----
-
-### הֲדַר
-**Lexicon**: BDB Dictionary
-**Vocalized**: הָדָר  
-
-n.m. ψ 149:9 ornament, splendour, honour (chiefly poet.)—abs. ה׳ Dt 33:17 + 12 times; cstr. הֲדַר Is 2:10 + 7 times; sf. הֲדָרִי Mi 2:9 (but cf. infr.) Ez 16:14; הֲדָרְךָ ψ 45:5; 90:16; הֲדָרֶ֑ךָ ψ 45:4; הֲדָרֵךְ Ez 27:10; הֲדָרָהּ Is 5:14 La 1:6; pl. cstr. הַדְרֵי ψ 110:3 (but read prob. הררי so Symm Jer edd.; Ol Hup Gr Bi Che);— ornament Pr 20:29 (grey hair, for old men; ‖ תִּפְאֶרֶת), Ez 16:14 (fig. of ornaments of Jerus. as bride of י׳); פְּרִי עֵץ הָדָר Lv 23:40 (H) i.e. fruit of goodly (ornamental, beautiful) trees, so AV RV & most, or goodly tree-fruit, 𝔊 καρπὸν ξύλου ὡραῖον, so Di;—here would come also בהדרי קדשׁ ψ 110:3, ref. to sacred, festal garments, according to Thes al. cf. RVm; but read prob. on the holy mountains, vid. supr. splendour, majesty Dt 33:17 of Ephraim under figure of a noble bull (cf. Di); of Jerusalem Is 5:14 cf. La 1:6; of Carmel Is 35:2 (‖ כָּבוֹד); of majesty & dignity conferred by י׳ on man ψ 8:6 (‖ כָּבוֹד), on king 21:6 (‖ id., הוֹד), cf. 45:4 (‖ הוֹד) & v 5 (but text perhaps erron. Checrit. n.); denied of suffering servant of י׳ Is 53:2 (‖ תֹּאַר); of dignity of good & capable woman (אֵשֶׁת חַיִל) Pr 31:25 (‖ עֹז); of splendour due to warlike equipment Ez 27:10; especially of majesty of י׳ 1 Ch 16:27 = ψ 96:6, cf. Jb 40:10 ψ 111:3 (all ‖ הוֹד); also ψ 104:1 (‖ id., under fig. of garment); further ψ 29:4 (‖ כֹּחַ), 90:16 (‖ פֹּעַל); in combination הֲדַר כְּבוֹד הוֹדְךָ ψ 145:5; כְּבוֹד ה׳ v 12; הֲדַר גְּאֹנוֹ Is 2:10, 19, 21. honour, glory ψ 149:9 for saints of י׳; cf. Mi 2:9 of י׳’s glory as possession of his people, lost by exile & slavery: but perhaps textual error; HoffmZAW 182, 103 proposes הַדְּרוֹר, from their children ye take freedom (yet מֵעַל then hardly suitable).
+**Derivatives**: Derivative: עֱזוּזִי.  
 
 ---
 
-### הֲדַר
-**Lexicon**: BDB Dictionary
-**Vocalized**: הֲדַר  
+### רַב־טוּבְךָ
+**Lexicon**: Klein Dictionary
+**Vocalized**: רַב ᴵ  
 
-n.pr.m. a king in Edom (Aramaic form) Gn 36:39 = הֲדַד (q.v.) 1 Ch 1:50 (so here Codd., 𝔖 Sam. no doubt rightly, cf. Di).
+much, many. large, great. mighty. abounding, abundant. honored, important.
+
+**Etymology**: [From רבב ᴵ, whence also BAram. and Aram.–Syr. רַב, רַבָּא, Ugar. rb (= much, many). cp. רַבָּא.]  
+
+**Derivatives**: Derivatives: רַבָּתִי ᴵ, רַבַּת, רַבִּיב. cp. the first element in רַבְגּוֹנִי, רַבְצֽדָדִי, רַבֽצַלְעוֹן, רַבֽקוֹלִי.  
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: Klein Dictionary
+**Vocalized**: רַב ᴵᴵ  
+
+enough.
+
+**Etymology**: [From רַב ᴵ.]  
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: Klein Dictionary
+**Vocalized**: רַב ᴵᴵᴵ  
+
+lord, chief. master. teacher. ‘Rabbi’ — title of the Babylonian Amoraim. ‘rabbi’ — spiritual head of a congregation. (The pl. is רַבִּים for sense 1, רַבּוֹת for senses 2, 3, 4 — used only with the possessive suffixes, as רַבּוֹתַי - and רַבָּנִים for sense 5.)
+
+**Etymology**: [From רב ᴵ. cp. Aram.-Syr. רַב, רַבָּא (= prince, chief, captain, master, teacher), Ugar. rb (= chief), Akka. rabu (= chief). Arab. rabb (= lord, God) is probably an Aram. loan word.]  
+
+**Derivatives**: Derivatives: רַב◌, רַבִּי, רַבָּן, רַבֵּנוּ. cp. the first element in רַבְשָׁקֵה.  
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: Klein Dictionary
+**Vocalized**: רַב ᴵⱽ  
+
+bowman, archer.
+
+**Etymology**: [From רבב ᴵᴵ.]  
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: Klein Dictionary
+**Vocalized**: רבב ᴵ  
+
+to be or become many or much, to be or become great. (formed from רבה) was much, was great. he increased by ten thousand. was increased by ten thousand (in the Bible occurring only Ps. 144:13 in the f. pl. part. מֽרֻבָּבוֹת). he increased by ten thousand. (The Pi., Pu. and Hiph. are denominated from רְבָבָה). ). ).
+
+**Etymology**: [Related to Aram. רְבַב, Syr. רַב (= was or became great), Arab. rabba (= he reared, increased; orig. ‘he made thick or dense’), Ethiop. rababa (= it expanded, spread). Related to base רבה ᴵ.]  
+
+**Derivatives**: Derivatives: רַב ᴵ, רַב ᴵᴵ, רַב ᴵᴵᴵ, רֹב, רֽבָבָה, רִבּוֹ, רִבּוֹא, רִבּוֹן, רַבִּי, רַבָּן ᴵ, רַבָּן ᴵᴵ, מֵרַב, מְרֻבָּב. cp. רֽבִיבִים, רֵבָּא, אַדְרַבָּא. cp. also שׁרבב.  
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: Klein Dictionary
+**Vocalized**: רבב ᴵᴵ  
+
+to shoot. (= he shot).
+
+**Etymology**: [cp. the collateral base רבה ᴵᴵ. Prob. related to Akka. rabbu (= the Archer — name of a constellation).]  
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: טוּב  
+
+n.m. Jb 20:21 good things, goods, goodness;—ט׳ Gn 24:10 + 17 times; sf. טוּבִי Ex 33:19; Je 31:14; טוּבְךָ ψ 25:7 + 4 times; טוּבוֹ Ho 3:5 + 2times; טוּבָהּ Ne 9:36 Je 2:7; טוּבָם Jb 21:16;—not in H P Chr Ez or postex. proph.— good things, coll., produce of the land to be eaten Gn 45:18, 20, 23 (E), Is 1:19; Je 2:7; Ezr 9:12; Ne 9:35, 36, to be enjoyed; good things of י׳ as given by him Ho 3:5; Je 31:12, 14 ψ 27:13; of house of י׳ ψ 65:5, fig. of spiritual blessings. goods, property Gn 24:10 (J), Dt 6:11; 2 K 8:9; Ne 9:25. abstr.: fairness, beauty, of neck of heifer Ho 10:11; of people of י׳ Zc 9:17; of י׳ himself Ex 33:19 (JE). טוּב לב(ב) joy of heart Dt 28:47 Is 65:14 (v. i. טוֹב 2, ii. ט׳ 7). prosperity Jb 20:21; 21:16; of Jerusalem ψ 128:5; בְּטוּב צַדִּיקִים Pr 11:10 in the prosperity of the righteous the city rejoiceth. goodness of taste, discernment ψ 119:66. abstr., goodness of God: in bestowing good things Ne 9:25. in the salvation of his people Is 63:7 ψ 25:7; 145:7. stored up for his saints ψ 31:20.
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רַב  
+
+v. I. רבב.
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רַב²  
+
+v. II. רבב.
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רַב³  
+
+adj. much, many, great;—ms. abs. ר׳ Gn 24:25 +, רָ֑ב Gn 33:9 +, also רָב֥ 2 Ch 20:2, רָב֖ 28:8, רָב֨ Ezr 10:13, etc.; cstr. רַב Ex 34:6 +; fs. רַבָּה Nu 11:33 +; cstr. רַבַּת Ez 22:5 +, רַבָּ֫תִי (Ges§ 90 k l) La 1:1(×2); mpl. abs. רַבִּים Ex 23:2(×2) +, cstr. v. ii. רב; fpl. abs. רַבּוֹת Gn 30:43 +;—[often both as pred. and as attrib.; as attrib. preceding n. (infl. of usage for numerals? KöSynt. § 334 k Ges§ 132b): רַב Is 63:7 ψ 145:7 (but read prob. רֹב, רָב־; in Is 21:7 ר׳ is pred.), רַבִּים Je 16:16 ψ 32:10; 89:51 (on context BöNÄ Bae, also Hup), Pr 7:26 1 Ch 28:5, רַבּוֹת Ne 9:28 Pr 31:29];— (often opp. מְעַט) (1) much: of substances, gold 1 K 10:2 ψ 19:11, silver (money) 2 K 12:11 = 2 Ch 24:11, bronze 1 Ch 18:8, wine Est 1:7; of other quantities, e.g. spoil 2 S 3:22, property 2 Ch 32:29, seed Dt 28:38, etc.; רַב שֶׁיִּהְיוּ Ec 6:3b be it much that his days amount to; (2) especially of collectives, numerous, עַם־רַב Jos 11:4 2 S 13:34, עֲבֻדָּה רַבָּה Gn 26:14 Jb 1:3, מִקְנֶה רַב Dt 3:19 +, etc. pl. many: pers. Ex 5:5; Ju 8:30; 9:40; 1 K 4:20; 11:1 +, things Gn 30:43 Am 5:12 Dt 31:17 +; n. om. רַבּוֹת Dn 11:41 (sc. lands; read רִבּוֹת myriads Kmp Bev Behrm Marti Prince); יָמִים רַבִּים many days (a long time) Gn 21:34; 37:24 + 28 times, שָׁנִים רַבּוֹת Ne 9:30; Ec 6:3a, אִם עוֹד רַבּוֹת בַּשָּׁנִים Lv 25:51; רַבּוֹת עִתִּים Ne 9:28 many times (v. supr.) = פְּעָמִים רַבּוֹת ψ 106:43 Ec 7:22; מַכָּה רַבָּה Dt 25:3 many blows; מַיִם רַבִּים many waters Nu 20:11; 24:7 + 27 times, cf. Is 8:7; etc. רַב as subst. coll. pers. Ex 19:21, also (opp. מְעַט) 1 S 14:6; Nu 13:18; 26:54, 56; 33:54; 35:8; so רַבַּת (Ges§ 130a) 2 Ch 30:17, 18, and (rei; = much) Ez 24:12; רַב cstr. before abstr. (= רֹב) Is 21:7; 63:7 ψ 145:7; especially pl. רֵבִּים of pers. Ex 23:2(×2) + 37 times + בַּת־רַבִּים Ct 7:5 (v. p. 123). cstr. = abounding in, רַב־בְּרָכוֹת Pr 28:20, רַב־חֶסֶד (v. 1. חֶסֶד 3), רַב־כֹּחַ ψ 147:5, רַב־מְאֵרוֹת Pr 28:27, רַב הַמְּהוּמָה Ez 22:5, רַב־נוֹצָה 17:7, רַב־הָעֲלִילִיָּה Je 32:19, רַב־פְּעָלִים 2 S 23:20 = 1 Ch 11:22, רַב־פָּ֑שַׁע Pr 29:22, רַב־תְּבוּנָה 14:29; רַבַּת אוֹצָרֹת Je 51:13, רַבַּת בָּנִים 1 S 2:5, רַבָּ֫תִי עָם La 1:1 (Ges§ 90 1). + מִן comp. = more numerous than Ex 1:9; Nu 22:15; Jos 10:11; Ju 16:30; 2 K 6:16; Is 54:1; 1 Ch 24:4; 2 Ch 32:7; Dn 11:13; sq. inf., too many to Gn 36:7; Ju 7:2 (cf. v 4); vid. also foll. רַב = abundant, enough Gn 24:25; 33:9; as exclam. enough! Gn 45:28; 2 S 24:16 = 1 Ch 21:15; 1 K 19:4, so (+ מִן inf.) Ex 9:28 (מִן 6 d); רַב־לָךְ (with implication of excess) Dt 3:26 (let it) suffice thee! so רַב־לָכֶם Ez 45:9, also Nu 16:3, 7 = ye assume too much! + inf. it is enough for you to Dt 1:6; 2:3 (i.e. you have done it enough), so + מִן inf. 1 K 12:28, מִן subst. Ez 44:6. as adv. much, exceedingly (only ψψ), רַב ψ 123:3, רָ֜ב ψ 18:15 (Hup De Che al.; HPS 2 S 22:15 conj. רָמָה; om. ‖ 2 S 22:15); רַבָּה ψ 62:3; 78:15; 89:8 (𝔊 Bae רַב הוּא); רַבַּת (Aramaism, cf. Syriac ܪܶܒܰܬ, ܪܰܒܰܬ, Nö§ 155 A WSG 135) ψ 65:10; 120:6 (= long enough), 123:4; 129:1, 2. great: of person ψ 48:3, space 1 S 26:13, the deep Am 7:4 Gn 7:11 Is 51:10 ψ 36:7 (fig.), city La 1:1 (רַבָּ֫תִי בַגּוֹיִם Ges§ 90 1),—v. also צִידוֹן, חֲמָת;—plague Nu 11:33, empire Est 1:20, goodness ψ 31:20, wickedness Gn 6:5, etc. specif. strong (opp. אֵין כֹּחַ) 2 Ch 14:10; רַב לְהוֹשִׁיעַ Is 63:1; so רַבִּים as subst. Is 53:12 (‖ עֲצוּמִים). major natu Gn 25:23 (opp. צָעִיר); רַבִּים as subst. grandævi, Jb 32:9. + מִן comp. greater than Dt 7:1, 17; 9:14; 20:1; too great for Jos 19:9; 1 K 19:7.—Pr 26:10 is hopelessly corrupt, v. Toy.
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רַב⁴  
+
+n.m. chief (Assyrian-Bab. influence, cf. rab DlHWB 609b; Biblical Aramaic רַב);—cstr. ר׳ Je 39:9 +; pl. cstr. רַבֵּי 39:13; 41:1 (but v. infr.);—especially רַב־ טַבָּחִים chief of guardsmen (v. טַבָּח), only as title of Bab. officer Je 39:9, 10 + 15 times Je, 7 times ‖ 2 K 25 (cf. שַׂר הַטּ׳ in Gn [JE]); also †רַב הַחֹבֵל Jon 1:6 chief of the sailors, i.e. captain; †in gen. כָּל־רַב בֵּיתוֹ Est 1:8, †רַב־סָרִיסָיו Dn 1:3 (v. סָרִיס), and so רַבֵּי מֶלֶךְ בָּבֶל Je 39:13, רַבֵּי הַמֶּלֶךְ 41:1 (late gloss; om. 𝔊 and ‖ 2 K 25:25, so Hi Gf Gie). †The foll. titles of Assyrian-Bab. officers are prob. loan-words in Heb.: רַב־מָ֑ג Je 39:3, 13 usually chief soothsayer (v. מָ֑ג), but = rab-mugi [? chief of princes] Pinches Hast. DB. Rab-mag; רַב־סָרִיס (cf. Old Aramaic [Nineveh] רב סרס Lzb366), 2 K 18:17 (Assyrian; not in ‖ Is 36:2), Je 39:3, 13 (Bab.), usually chief eunuch, but = rabû-ša-rêši, chief of the heads (the principal men) Wkl Unters. z. altor. Gesch., 1889, Excurs. v, p. 138 (actually found as rubû-ša-ri-ešu PinchesAcad. June 25, 1892, 618), PinchesHast. DB. Rab-saris; רַב־שָׁקֵה (van d. H. רַבְשָׁקֵה) chief of the officers (?) (so prob. Assyrian rab- ŠAḲ; šaḳû = high one; COT 2 K 18:17 KBii. 23 DlHWB 685a TieleBab.-Assyrian Gesch. 497. 513 PinchesHast. DB. iv. 191), 2 K 18:17, 19, 26, 27, 28, 37; 19:4, 8 = Is 36:2, 4, 11, 12, 13, 22; 37:4, 8.
+
+---
+
+### רַב־טוּבְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: רַב⁵  
+
+n.m. archer;—s. רַב Pr 26:10, pl. רַבִּים Je 50:29 (‖ דֹּרְכֵי קֶשֶׁת), sf. רַבָּיו Jb 16:13 (in fig.; Bö al. רֹבָיו; Vrss. Ew al. his missiles).
+
+---
+
+### אֶרֶךְ
+**Lexicon**: BDB Dictionary
+**Vocalized**: אָרַךְ  
+
+vb. be long, almost always of time (Assyrian arâku COTGloss, Aramaic אֲרַךְ, ܐܶܪܰܟ )— Pf. אָֽרְכוּ Gn 26:8; Impf. יַאַרְכוּ Ez 12:22; 3 fpl. וַתֶּאֱרַכְנָה Ez 31:5 (del. B Co)—be long, subj. הַיָּמִים (i.e. a long time passed Gn 26:8 (J); cf. Assyrian urriku ûmî, days grew long, Creation Tableta v. COT Gn 1:1); of delayed fulfilment of prophecy Ez 12:22; subj. פֹּארֹת Ez 31:5 (but cf. supr.) Pf. הֶאֱרִיךְ Pr 19:11; וְהַאֲרַכְתָּ֫ Dt 22:7, etc.; Impf. יַאֲרִיךְ Dt 17:20 +; יַאֲרִיכוּ Dt 25:15; יַאֲרִכוּן Ex 20:12 cf. Dt 5:16; 6:2; תַּאֲרִיכֻן Dt 4:26; 30:18, etc.; Imv. fs. הַאֲרִיכִי Is 54:2: Inf. cstr. הַאֲרִיךְ Nu 9:19, 22; Pt. מַאֲרִיךְ Ec 7:15; 8:12;— trans. prolong, (a) obj. יָמִים (i.e. live long) Dt 4:26, 40; 5:30; 11:9; 17:20; 22:7; 30:18; 32:47 Jos 24:31 = Ju 2:7 (c. אַחֲרֵי = survive), Pr 28:16; Is 53:10; Ec 8:13; also (late) without ימים Ec 7:15; 8:12; (b) id. 1 K 3:14 י׳ subj. וְהַאֲרַכְתִּי אֶת־יָמֶיךָ I will prolong thy days; (c) postpone anger Is 48:9 cf. Pr 19:11 (i.e. shew oneself slow to anger); v. also Jb 6:11 אַאֲרִיךְ נַפְשִׁי i.e. be patient; (d) lit. (but in fig.) make long furrows (c. ל) ψ 129:3; tentcords Is 54:2; tongue 57:4 (stretch out in mockery). intrans. grow long, continue long (i.e. display length or continuance), subj. יָמִים Ex 20:12 = Dt 5:16; 6:2; 25:15; tarry long Nu 9:19, 22 (subj. הֶעָנָן), last (continue) long, subj. כֵּן Pr 28:2; be long (lit.) of staves of ark 1 K 8:8; 2 Ch 5:9.
+
+---
+
+### אֶרֶךְ
+**Lexicon**: BDB Dictionary
+**Vocalized**: אָרֵךְ  
+
+adj. long—only cstr. אֶ֫רֶךְ Ex 34:6 + 14 times—א׳ הָאֵבֶר long of pinion Ez 17:3 (‖ גְּדוֹל הַכְּנָפַיִם) of eagle, in metaph.; elsewhere always of feelings, as subst. Ec 7:8 א׳ רוּחַ the patient of spirit (opp. גְּבַהּ ר׳); א׳ אַפַּיִם one slow to anger Pr 14:29 (opp. קְצַר־רוּחַ), so 15:18 (opp. אִישׁ חֵמָה), 16:32 (‖ מֹשֵׁל בְּרוּחוֹ); more often of י׳, א׳ אַפַּיִם, Ex 34:6 רַחוּם וְחַנּוּן א׳ אַפַּיִם וְרַב־חֶסֶד וֶאֱמֶת cf. Nu 14:18 Ne 9:17 ψ 86:15; 103:8; 145:8; so + וְנִחָם עַל־הָרָעָה Jo 2:13 cf. Jon 4:2 (where אֵל), א׳ אַפַּיִם וּגְדוֹל כֹּחַ Na 1:3; לְאֶרֶךְ אַפְּךָ only Je 15:15, א׳ appar. noun; read אֹרֶךְ? cf. Pr 25:15.
+
+---
+
+### מַלְכוּתְךָ
+**Lexicon**: BDB Dictionary
+**Vocalized**: מַלְכוּת  
+
+n.f. royalty, royal power, reign, kingdom (chiefly late);—מ׳ abs. Est 1:9 +; cstr. 1 Ch 12:23 +; sf. מַלְכוּתִי 1 Ch 17:14, etc.; pl. מַלְכֻיּוֹת Dn 8:22;— royal power, dominion Nu 24:7 (c. תִּנַּשֵּׂא), 1 S 20:31 (c. תִּכּוֹן), 1 K 2:12 (c. id.); cf. Je 10:7 Ec 4:14; 1 Ch 11:10; 12:23; 29:30 (‖ גְּבוּרָה), 2 Ch 33:13 Est 1:19, royal (queenly) dignity 4:14; 1 Ch 14:2 (c. נִשֵּׂאת); c. לָכַד Dn 11:21; c. הֵכִין (subj. י׳) 1 Ch 17:11; 28:7; 2 Ch 12:1 (subj. Rehob.); Isr. royalty as belonging to י׳ 1 Ch 17:14; dominion of י׳ ψ 103:19 (c. מָֽשְׁלָה), ψ 145:13(×2); כְּבוֹד מ׳ v 11; כְּבוֹד הֲדַר מ׳ v 12; שֵׁבֶט מ׳ ψ 45:7; כִּסֵּא מ׳ 1 Ch 22:10; 28:5 2 Ch 7:18; of Pers. Est 1:2; 5:1; בַּיִת לְמ׳ 2 Ch 1:18; 2:11; בֵּית מ׳ Est 1:9; 2:16; 5:1 (cf. Assyrian bit šarruti DlHWB 171); יֵין מ׳ royal wine Est 1:7; דְּבַר מ׳ royal command Est 1:19; הוֹד מ׳ royal honour, majesty 1 Ch 29:25 Dn 11:21; so perhaps also הֶדֶר מ׳ Dn 11:20 v. Bev; עשֶׁר כְּבוֹד מ׳ Est 1:4; כֶּתֶר מ׳ royal crown Est 1:11; 2:17; 6:8; לְבוּשׁ מ׳ royal apparel Est 6:8; 8:15; מ׳ (לְבוּשׁ om.) Est 5:1 (queenly attire). reign: 40th year of reign of David 1 Ch 26:31 cf. 2 Ch 3:2; 15:10, 19; 16:1, 12; 35:19 Je 49:34 Dn 1:1; also 2 Ch 29:19; of Babyl. and Pers. kings Je 52:31 (בִּשְׁנַת מ׳ ‖ 2 K 25:27 מָלְכוֹ) Dn 2:1; 8:1 Ezr 4:5, 6(×2) 7:1; 8:1 Ne 12:22 Est 2:16; cf. עַד־מְלֹךְ מַלְכוּת פָּרָס 2 Ch 36:20. kingdom, realm 2 Ch 1:1; 11:17; 20:30 Ne 9:35; especially realm of Babyl. and Pers. 2 Ch 36:22 = Ezr 1:1, Est 1:14, 20; 2:3; 3:6, 8; 5:3, 6; 7:2; 9:30 Dn 1:20; 8:22, 23; 9:1; 10:13; cf. 11:2, 4(×2), 9, 17; v 20 הֶדֶר מ׳ = Jerus. according to Hi, but v. 1 supr.
+
+---
+
+### עוֹלָמִים
+**Lexicon**: BDB Dictionary
+**Vocalized**: עוֹלָם  
+
+v. עלם.
+
+---
+
+### עוֹלָמִים
+**Lexicon**: BDB Dictionary
+**Vocalized**: עוֹלָם²  
+
+n.m. long duration, antiquity, futurity;—ע׳ Gn 9:12 + 405 times; עֹלָם 3:22 + 19 times; עֵילוֹם 2 Ch 33:7, read prob. עוֹלָם (for other explan. v. note in KitHpt); sf. עֹלָמוֹ Ec 12:5; pl. עוֹלָמִים Is 26:4 + 7 times, עֹלָמִים ψ 145:13 + 2 times; cstr. עוֹלְמֵי Is 45:17;— of past time: ancient time: יְמֵי ע׳ days of old Is 63:9, 11 Am 9:11 Mi 5:1; 7:14 Mal 3:4; יְמוֹת ע׳ Dt 32:7; עַם ע׳ Is 44:7 ancient people; גּוֹי מֵע׳ Je 5:15; חָרְבוֹת ע׳ old waste places Is 58:12 61:4, cf. Ez 26:20 b; פִּתְחֵי ע׳ ancient gates ψ 24:7, 9; ארח ע׳ Jb 22:15; נתבות ע׳ Je 6:16; שְׁבִילֵי ע׳ 18:15; גבול ע׳ Pr 22:28; 23:10; במות ע׳ Ez 36:2; מִן (םֵ)ע׳ from of old Is 64:3 Je 2:20 Jo 2:2, of the fathers Jos 24:2, the prophets Je 28:8, the ancient נפלים Gn 6:4; (Ez 32:27 𝔊 Co for מערלים; but 1 S 27:8 read מִטֵּלָם for מעולם We Dr HPS); בהם ע׳ long in them Is 64:4 (text dub.). מֵתֵי ע׳ the long dead ψ 143:3 La 3:6; so עַם ע׳ Ez 26:20. of God, מֵע׳: former acts Is 46:9; as redeemer Is 63:16; of love ψ 25:6, judgment 119:52, dominion Is 63:19; long silence 42:14; 57:11*; his wisdom personif. Pr 8:23; his existence ψ 93:2. of things: גבעות ע׳ ancient hills Gn 49:26 (J), Hb 3:6 (‖ הררי־עד), Dt 33:15 (‖ הררי קדם). pl. שְׁנוֹת עולמים ψ 77:6 years of ancient times; דורות עולמים Is 51:9; לעלמים Ec 1:10 in olden times. indef. futurity, c. prep. for ever, always (sometimes = during the lifetime); עֶבֶד עולם slave for ever Dt 15:17; 1 S 27:12; Jb 40:28; עָבַד לע׳ serve for ever Ex 21:6 (E), Lv 25:46; עד ע׳ 1 S 1:22; גְּאֻלַּת ע׳ Lv 25:32 redemption at any time; הֲרַת ע׳ Je 20:17 ever pregnant (womb); כְּלִמַּת ע׳ v 11 of persecutors of Jeremiah; חרפת ע׳ 23:40; שַׁלְוֵי ע׳ ψ 73:12 alway at ease; יְחִי לע׳ (יחיה) may the king live always 1 K 1:31; Ne 2:3; cf. אֹרֶךְ יָמִים עולם ועד ψ 21:5; ישׁב עולם לפני אלהים 61:8; so of the pious, לע׳ לא ימוט 15:5; בל ימוט Pr 10:30, cf. ψ 30:7; other phr.: ψ 37:27, 28 41:13; 55:23; 61:8; 73:26; 121:8 Pr 10:25; ע׳ אשׁירה ψ 89:2 I will sing for ever (as long as I live), cf. 52:10; 115:18; 145:1, 2; הוֹדה לע׳ 30:13; 44:9; 52:11; 79:13; other emotions and activities continuous through life 5:12; 31:2 = 71:1, 75:10; 86:12; 119:44, 93, 98, 111, 112 Mi 4:5, cf. לע׳ 2:9. = continuous existence, (1) of things: the earth, הָאָרֶץ לְעוֹלָם עֹמֶדֶת Ec 1:4; other phr.: ψ 78:69; 104:5, heavens and contents 148:6, ruined cities Is 25:2; 32:14 Ez 26:21; 27:36; 28:19, ruined lands Je 18:16; 25:9, 12; 49:13, 33; 51:26, 62 Ez 35:9 Zp 2:9; לעד עד ע׳ Is 30:8 for a witness for ever, in a book; (2) of nations: לעולם אהיה 47:7 (Babylon loqu.), cf. ψ 81:16 Ob 10; ישׁב לע׳ of Judah Jo 4:20; (3) families ψ 49:12 Is 14:20; the dynasty of Saul 1 S 13:13; house of Eli 2:30; (4) national relations: איבת ע׳ continual enmity Ez 25:15; 35:5; of exclusion from קהל י׳, עד ע׳ Dt 23:4 = Ne 13:1; various relations Is 32:17; 34:10; חרפת ע׳ perpetual reproach ψ 78:66, of dynasty of David 2 S 3:28; 12:10 1 K 2:33, families v 33 2 K 5:27 ψ 106:31 Je 35:6. of divine existence: אל עולם Gn 21:33 (J); אלהי ע׳ Is 40:28; חי אנכי לע׳ Dt 32:40; חֵי הע׳ Dn 12:7; of divine name, זה שׁמי לְע׳ Ex 3:15 (E), cf. 2 Ch 33:7 (v. supr.); blessing and praise of it 2 S 7:26 = 1 Ch 17:24, ψ 72:19; 135:13; of י׳ himself 89:53; attributes, אהבה Je 31:3 1 K 10:9; חסד Is 54:8 ψ 89:2; 138:8; לע׳ חַסְדּוֹ 1 Ch 16:34, 41 2 Ch 5:13; 7:3, 6; 20:21 Ezr 3:11 ψ 100:5; 106:1; 107:1; 118:1, 2, 3, 4, 29; 136:1 + 25 times, Je 33:11; כבוד ψ 104:31; אמת 117:2; 146:6; צדק 119:142; עצה 33:11; reign Ex 15:18 (E), ψ 10:16; 66:7; 92:9; 146:10 Je 10:10 Mi 4:7; יהוה לע׳ ישׁב ψ 9:8; 29:10; 102:13 La 5:19; presence in Zion 1 Ch 23:25; Is 33:14; 60:19, 20 Ez 37:28; 43:7, 9; his salvation Is 51:6, 8; זרעת ע׳ Dt 33:27 everlasting arms; כל אשׁר יעשׂה האלהים יהיה לע׳ Ec 3:14. of God’s covenant: בְּרִית ע׳ everlasting covenant Gn 9:16; 17:7, 13, 19 Ex 31:16 Lv 24:8 Nu 18:19 (all P), 2 S 23:5; 1 Ch 16:17 = ψ 105:10, Is 24:5; 55:3; 61:8 Je 32:40; 50:5; Ez 16:60; 37:26; covenant with Noah, לְדֹרֹת ע׳ Gn 9:12 (P); God remembers it 1 Ch 16:15 = ψ 105:8, ψ 111:5; will not break it, לע׳ Ju 2:1; אוֹת ע׳ Ex 31:17 (P); אוֹת עד ע׳ Dt 28:46. of God’s laws: דבר(ים) Is 59:21 ψ 119:89; משׁפט 119:160; עדות v 144, 152; חק ע׳ Ex 29:28; 30:21 (E), Lv 6:11, 15; 7:34; 10:15; 24:9 Nu 18:8, 11, 19 (P), also Je 5:22 (of bounds of sea); חק עד ע׳ Ex 12:24 (J), חֻקַּת ע׳ v 14, 17; 27:21; 28:43; 29:9 Lv 3:17; 7:36; 10:9; 16:29, 31, 34; 17:7; 23:14, 21, 31, 41; 24:3, 8; Nu 10:8; 15:15; 18:23; 19:10, 21 (P) (most of these in fact specif. Jewish and temporary); temple to bear God’s name, עד ע׳ 1 K 9:3 = 2 Ch 7:16; לע׳ 2 K 21:7 2 Ch 33:4; consecrated לע׳ 30:8; its ceremonies לע׳ 2:3; Levit. priesthood, לשׁרתו עד ע׳ 1 Ch 15:2; Aaronic priesthood, לברך בשׁמי עד ע׳ 23:13(×2). of God’s promises: his word, יקום לע׳ Is 40:8; promised dynasty of David, עד (ה)ע׳ 2 S 7:13, 16(×2), 25 = 1 Ch 17:12, 14(×2), 23 ψ 18:51 = 2 S 22:51; 1 K 2:33, 45 1 Ch 22:10 ψ 89:5; לע׳ 1 K 9:5; 1 Ch 28:4, 7; 2 Ch 13:5 ψ 89:29, 37 2 S 7:29(×2) = 1 Ch 17:27(×2); of holy land 1 Ch 28:8, אֲחֻזַּת ע׳ Gn 17:8; 48:4 Lv 25:34 (P); given לע׳ Ex 32:13 (J) 2 Ch 20:7; עד ע׳ Gn 13:15, inherited לע׳ Is 60:21 ψ 37:18; עד ע׳ Is 34:17; dwelt in עד ע׳ Ez 37:25; other blessings, לע׳ Dt 5:29 Ho 2:21; עד ע׳ Dt 12:28; 2 S 7:24 = 1 Ch 17:22, ψ 133:3; שִׂמְחַת ע׳ Is 35:10; 51:11; 61:7; דֶּרֶךְ ע׳ ψ 139:24; שׁם ע׳ Is 56:5; 63:12; אות ע׳ 55:13; גאון ע׳ 60:15; Jerus. to abide לע׳ Je 17:25 ψ 125:1, cf. Je 31:40; עד ע׳ ψ 48:9. of relations between God and his people, לע׳ 1 Ch 29:18 ψ 45:18; 85:6; 103:9; 145:21; Is 57:16; Je 3:5, 12; La 3:31; Jo 2:26, 27; עד (ה)ע׳ ψ 28:9 Mal 1:4. of Messianic dynasty and king: (ל)ע׳ ψ 110:4; having divine throne 45:7; name endures 72:17; established 89:38; God blesses him 45:3; of his reign, מעתה ועד ע׳ Is 9:6. = indefinite, unending future: live לע׳ Gn 3:22; Jb 7:16; הנביאים הלע׳ יִחְיוּ Zc 1:5 the prophets, can they live for ever? cf. חדל לע׳ ψ 49:9; c. neg. never Ezr 9:12; Pr 27:24. after death: שׁנת ע׳ Je 51:39, 57; בית ע׳ Ec 12:5; חַיֵּי ע׳ Dn 12:2; דראון ע׳ v 2; also v 3 Jon 2:7; Ec 2:16; 9:6. = age (duration) of the world: את העלם נתן בְּלִבָּם Ec 3:11 the age of the world he hath set, etc. (cf. especially NH; others i). pl. intens. everlastingness, eternity: תשׁועת עולמים Is 45:17; צדק עלמים Dn 9:24; צור עולמים Is 26:4 (RVm rock of ages); מלכוּת כל עלמים ψ 145:13; also 61:5; 77:8; 1 K 8:13 = 2 Ch 6:2. special phr.: מ(ה)עולם (ו)עד (ה)עולם (מן) from everlasting to everlasting, of י׳ ψ 90:2, חסד י׳ 103:17; benedictions 1 Ch 16:36 = ψ 106:48, Ne 9:5; 1 Ch 29:10 ψ 41:14; the land given למן עולם ועד עולם Je 7:7; 25:5; מעתה ועד עולם from now and for ever ψ 115:18; 121:8 (i.e. as long as one lives); of people’s hope in God 131:3; dynasty of David Is 9:6; of God’s acts, words, etc. Mi 4:7; Is 59:21 ψ 125:2, cf. 113:2;—v. further i. עַד p. 723.
+
+---
+
+### נֹּפְלִים
+**Lexicon**: BDB Dictionary
+**Vocalized**: נָפַל  
+
+vb. fall, lie (NH = BH, 𝔗 נְפַל, Syriac ܢܦܰܠ; cf. also Arabic نَفَلَ dedit praedam (NöZMG xl (1886), 725 Frä 153 f.), Min. נפל remove Hom Südar. Chrest. 128);— Pf. נ׳ Ju 5:27 +, 3 fs. נָֽפְלָה Gn 15:12 +, etc.; Impf. יִפֹּל 1 S 14:45 +, וַיִּפֹּל Ju 4:16 +; 1 s. אֶפֹּל 1 Ch 21:13 (needless change from 1 pl. נִפְּלָה ‖ 2 S 24:14 We Dr); 3 mpl. יִפְּלוּ Ho 7:16 +, יִפֹּ֑לוּ Is 3:25 +, 3 fpl. תִּפֹּ֫לְנָה Ez 13:11; 30:25, etc.; Imv. mpl. נִפְלוּ Ho 10:8; Je 25:27; Inf. abs. נָפוֹל Est 6:13; cstr. נְפֹל Is 30:25 +; לִנְפֹּל Je 51:49 +; sf. נָפְלוֹ 1 S 29:3, נִפְלוֹ 2 S 1:10, נִפְלָם Je 49:21 (on these forms cf. Ba NB 104); Pt. נֹפֵל Ju 4:22 +; f. נֹפֶ֫לֶת Gn 15:12 +; pl. נֹפְלִים Jos 8:25 + (ins. also 1 S 28:19 b 𝔊 Th We Dr Kit Bu HPS; Klo כֹּרְעִים), etc.;— fall, by accident, וְנ׳־שָׁ֫מָּה Ex 21:33 (E) and there fall into it (a pit) an ox or an ass, cf. Dt 22:4 (בַּדֶּרֶךְ, on the way), bird עַל־פַּח Am 3:5; subj. pers., 1 S 4:18 (from seat, מֵעַל), Dt 22:8(×2) (from roof, מִן); often into (ב) pit (usually fig.) Pr 26:27; 28:10, also (abs.), 22:14, Ec 10:8 ψ 7:16; 57:7 (בְּתוֹךְ), cf. 35:8; 141:10 (net), also, c. אֶל, Is 24:18 = Je 48:44; fall בְּלֵב יַמִּים Ez 27:27 (of Tyrian people); abs. 2 S 4:4 Gn 14:10; Je 25:27; opp. קוּם Je 8:4 cf. Ec 4:10(×2); c. אָחוֹר fall backward Gn 49:17 (poem); c. בְּעַד through 2 K 1:2 cf. (of locusts) Jo 2:8; †נ׳ עַל־חֶרֶב causing death 1 S 31:4, 5 = 1 Ch 10:4, 5; †נ׳ עַל־פָּנָיו אַ֫רְצָה 1 S 17:49 (Goliath); subj. rei, 2 K 2:13, 14 (מֵעַל), 6:5 (אֶל־ into water); v 6 (abs.); c. עַל Lv 11:32, 35, 37, 38, אֶל־ v 33; abs. of tent Ju 7:13 + v 13 (gloss, GFM, Bu); of wall Jos 6:5 (JE), Je 51:44, fig. Ez 13:11 (del. 𝔊 𝔖 Sm Co Berthol), v 12, 14, לְאֶרֶץ Ez 38:20; + תַּחְתֶּיהָ i.e. flat Jos 6:20; נ׳ of bricks Is 9:9 (in fig.), פֶּרֶץ 30:13, towers v 25, foundations Je 50:15; wall fell upon (על) 1 K 20:30, so of house Ju 16:30; Jb 1:19, mts. Ho 10:8; mt. also abs. Jb 14:18 (cf. נָבֵל), height Ez 38:20; tree Ec 11:3(×2) (ב loc.), cf. Is 10:34 (בְ instr., in fig.), Zc 11:2 (abs.); branches Ez 31:12 (fig.); a grain Am 9:9 (אֶרֶץ = to earth); of dew 2 S 17:12 (c. על), hailstones Ez 13:11; blood (אַ֫רְצָה) 1 S 26:20; †hair of head (ארצה) 1 S 14:45 2 S 14:11; 1 K 1:52; horns of altar Am 3:14 (לָאָרֶץ); peg Is 22:25; fruit עַל־פֶּה Na 3:12; crown La 5:16; arm from (מִן) shoulder Jb 31:22; of sword (appar.) 2 S 20:8 (but on text v. Comm.); †fire from heaven, abs. 1 K 18:38 c. מִן Jb 1:16†; †hand of י׳ Ez 8:1 (c. עַל־; but read וַתְּהִי 𝔊 Co Berthol); spirit of י׳ Ez 11:5 (עַל־); of lot (גּוֹרָל) Ez 24:6; Jon 1:7 (both c. עַל), 1 Ch 26:14 (c. לְ; ‖ יָצָא), + Est 3:7 𝔊 Ry Wild (עַל); cf. Hiph. 3; hence (of share, inheritance) fall, be allotted, to (לְ) Ju 18:1 (ב = as: בְּ I 7 c; so Nu 34:2; Ez 47:14), ψ 16:6, abs. Jos 17:5.—On Ez 47:22 b v. Hiph. 3. Especially of violent death (c. 96 times), Ju 5:27(×3) (+ שָׁדוּד), 1 S 4:10; 14:13 2 S 11:17; 21:9, 1 K 22:20 = 2 Ch 18:9, etc.; + וַיָּמָת, etc., 2 S 1:4; 2:23(×2); נ׳ חָלָל fall pierced (fatally) Ju 9:40 1 S 17:52; 31:1 = 1 Ch 10:1 +; חַלְלֵי חֶרֶב Ez 35:8; cf. בְּתוֹךְ חֲלָלִים 32:20; נ׳ תַּחַת הֲרוּגִים Is 10:4; נ׳ פְּגָרִים corpses fall Je 9:21; Nu 14:29 (P), v 32 (JE); by the sword, בַּחֶרֶב Am 7:17; Ho 7:16; 14:1; Is 3:25 2 S 1:12; Ez 5:12; 6:11; Nu 14:3, 43 (JE), (+ בָּרָעָב, בַּדֶּבֶר), etc.; נ׳ לְפִי חֶרֶב †Jos 8:24 (JE), Ju 4:16†; בְּיַד by the hand of †2 S 21:22; 24:14(×2) = 1 Ch 21:13(×2), 1 Ch 5:10; 20:8†; נ׳ תַּחַת רגלי fall under my feet 2 S 22:39 = ψ 18:39. fig. = go to ruin, perish, etc. (c. 30 times); Am 5:2; 8:14 +; often ‖ כָּשַׁל Is 3:8; 8:15 (+ other words), 31:3; Je 8:12; 46:12; 50:32 ψ 5:11; 27:2; Pr 24:17; ‖ כָּרַע ψ 20:9; fig. of earth Is 24:20 (opp. קוּם); Haman falls before (לִפְנֵי) Mordecai Est 6:13(×2); cf. Is 14:12 (abs.); peculiar to Pr are נ׳ בְּרִשְׁעָה Pr 11:5, בְּרַע 13:17, בְּרָעָה 17:20; 28:14. fig. = experience calamity Mi 7:8 (opp. קוּם), ψ 37:34; 145:14; Pr 24:16. fall, of a city Je 51:8 (‖ וַתִּשָּׁבֵר). Fall prostrate, Ju 19:26; 27, + אַ֫רְצָה Jb 1:20; fall at full length (in a faint) וַיִּפֹּל מְלֹא־קוֹמָתוֹ 1 S 28:20; sink down Nu 24:4, 16 (JE; supernat. influence); of arms of Pharaoh Ez 30:25 (opp. חָזַק). fall = prostrate oneself before (לִפְנֵי) man Gn 50:18 (E), 2 S 19:19; Gn 44:14 (J; + אַ֫רְצָה); before י׳ 2 Ch 20:18; נ׳ אֶל־פָּנָיו אַ֫רְצָה before י׳ or his representative Jos 5:14; 7:6 (both JE); also (ארצה om.) Ez 43:3; 44:4; before man 2 S 14:22; more often נ׳ עַל־פָּנָיו, before man 2 S 9:6; 1 K 18:7, 39; Ru 2:10, before י׳ Gn 17:3, 17 + 6 times P, Ez 3:23; 9:8; 11:13; 1 Ch 21:16; Dn 8:17; + אַ֫רְצָה, before man 2 S 14:4, before י׳ Ju 13:20; לְאַפָּיו אַ֫רְצָה 1 S 20:41, לְאַפֵּי דָוִד עַל־פָּנֶיהָ 1 S 25:23, נ׳ ארצה 2 S 1:2 (all before man); נ׳ עַל־רַגְלָיו fall at one’s feet 1 S 25:24; 2 K 4:37, לִפְנֵי ר׳ Est 8:3. Vid. syn. sub קדד. fall upon (עַל) one’s neck, in embrace Gn 33:4; 46:29 (both J), 45:14 (E), עַל־פְּנֵי אָבִיו 50:1 (J). Fall upon (עַל) = attack Je 48:32 (fig.), cf. Is 16:9; c. בְּ Jos 11:7 (D), abs. Jb 1:15; נ׳ אִישׁ אֶל־רֵעֵהוּ Je 46:16. †desert or fall away to, go over to, c. עַל־ 2 K 25:11(×2) = Je 52:15(×2), Je 21:9; 37:14; 39:9; 1 Ch 12:20, 21(×2) (van d. H. v 19, 20(×2)), 2 Ch 15:9, c. אֶל־ 2 K 7:4; Je 37:13; 38:19, abs. 1 S 29:3; Je 39:9. נ׳ בְּיַד fall into the hand (power) of Ju 15:18 La 1:7:—cf. also 2. a. supr. †Fig., of deep sleep, c. עַל Gn 15:12 (J), 1 S 26:12; Jb 4:13; 33:15; face, countenance (in displeasure) Gn 4:5, 6 (J); נ׳ לֵב אָדָם עָלָיו 1 S 17:32 (of sinking heart); וַיִּפְּלוּ בְעֵינֵיהֶם Ne 6:16 and they were cast down in their (own) eyes (cf. Be-Ry, Ryle); †of calamity sq. עַל־ Is 47:11; Ec 9:12; terror, etc., sq. עַל־ Gn 15:12 (J), Jos 2:9 (JE), Ex 15:16 (song), 1 S 11:7; Jb 13:11 ψ 55:5; 105:38; Est 8:17; 9:2, 3; Dn 10:7; reproach, sq. עַל־ ψ 69:10; † = fail to be accomplished Jos 21:45; 23:14(×2) (all D), 1 K 8:56; 2 K 10:10 (+ אַ֫רְצָה); = not to be reckoned Nu 6:12 (P); †of word (דָּבָר) falling into (ב) Isr. Is 9:7; † = fall out, turn out, result Ru 3:18 (subj. דָּבָר). Other idiomatic uses are: נ׳ לְמִשְׁכָּב take to one’s bed Ex 21:18 (E); settle Gn 25:18 (J); = alight quickly, מֵעַל הַגָּמָל Gn 24:64 (J), מֵעַל הַמֶּרְכָּבָה 2 K 5:21; waste away Nu 5:21, 22, 27; = be born Is 26:18 (cf. Hiph. v 19); = be offered, of supplication (לִפְנֵי י׳) Je 36:7; 37:20; 42:2 (cf. Hiph. 6); c. מִן = be inferior to Jb 12:3; 13:2. = lie, of Midianites, etc. (like locusts; ב loc.) Ju 7:12; = lie prostrate, 1 S 19:24; usually pt. Jos 7:10 (JE; עַל־פָּנֶיךָ), 1 S 5:3, 4 (לְפָנָיו), Am 9:11, עַל־הַמִּטָּה Est 7:8; of the dead 1 S 31:8 = 1 Ch 10:8; Dt 21:1; Ez 32:27 (Co conj. נְפִילִים [cf. Gn 6:4], v. also Berthol Toy Hpt); נֹפֵל אַ֫רְצָה מֵת Ju 3:25 cf. 4:22 (om. ארצה); פְּגָרִים נ׳ אַ֫רְצָה 2 Ch 20:24; cf. also Ez 32:22, 23, 24 (del. in v 22 Hi Co Berthol, in v 23 ToyHpt). Pf. הִפִּיל 1 S 3:19 +; 2 ms. sf. הִפַּלְתָּם ψ 73:18; 3 pl. הִפִּילוּ Ju 2:19 +; 1 pl. הִפַּלְנוּ Ne 10:35, etc.; Impf. יַפִּיל Ex 21:27, וַיַּפֵּל Gn 2:21 +, sf. יַפִּלֵם ψ 140:11; 3 mpl. יַפִּילוּ 2 K 3:25 ψ 22:19, יַפִּיל֑וּן Jb 29:24, etc.; Imv. ms. sf. הַפִּלֶהָ Jos 13:6; mpl. הַפִּילוּ 1 S 14:42; Inf. cstr. לְהַפִּיל 1 S 18:25 +; לַנְפִּל Nu 5:22 read לִנְפֹּל (Di Ol§ 78 c Sta§ 114 a, 2 Kö i. 309 Ges§ 66, 2 R 1); Pt. מַפִּיל 2 K 6:5 + 2 times, pl. מַפִּילִים Dn 9:18;— cause to fall, c. acc., lit.: fell tree 2 K 3:19, 25 cf. 6:5. throw down wall 2 S 20:15. knock out tooth Ex 21:27 (E). lay prostrate Dt 25:2 (for bastinado). cast (cedar pillars) into (עַל־) fire Je 22:7; so (c. ב), wicked men ψ 140:11. make sword drop from (מִן) hand Ez 30:22 (fig.), cf. 39:3. cause stone to fall עַל Nu 35:23, flesh ψ 78:28 (בְּקֶרֶב), stars Dn 8:10 (in vision). Of causing death בַּחֶרֶב 2 K 19:7 = Is 37:7, Je 19:7; Ez 32:12 (all י׳ subj.), 2 Ch 32:21 (human subj.); בְּיַד 1 S 18:25; + חֲלָלִים Ez 6:4; Pr 7:26; also ψ 106:26; Dn 11:12 = overthrow, bring to destruction, ψ 37:14; 73:18 (c. ל), 106:27. Especially of casting lot (גּוֹרָל), Is 34:17 (c. לְ for), Ne 10:35 (c. עַל + inf.), 11:1 (c. inf.), 1 Ch 26:14 (c. לְ; so read Kit Hpt cf. 𝔊𝔙 Be Öt), ψ 22:19 (c. עַל), Est 9:24 (c. inf.); abs. Jon 1:7(×2) 1 Ch 24:31; 25:8; 26:13; Est 3:7; + בְּתוֹכֵנוּ Pr 1:14 (i.e. share with us); om. גּוֹרָל 1 S 14:42 (c. בֵּין), Jb 6:27 (c. עַל); hence הִפּ׳ = assign, apportion, by lot, usually c. לְ pers., Jos 13:6; 23:4 (both D), Ez 45:1; 47:22 a + v 22 b (read יַּפִּילוּ 𝔙 𝔗 Hi-Sm Co Berthol), 48:29 (read בְנַחֲלָה for מנ׳, 𝔊 𝔙 Hi-Sm, etc.), ψ 78:55 (cf. Qal 1 end; and בְּ I 7 c). Fig., let drop, cause to fail (cf. Qal 5), Ju 2:19; Est 6:10, + אַ֫רְצָה 1 S 3:19. Cause deep sleep to fall (עַל־) Gn 2:21 (J), Pr 19:15 (abs.), make countenance fall, look displeased at (ב), Je 3:12, cf. Jb 29:24 (obj. אוֹר פָּנַי); cause terror, etc., to fall (עַל־) Je 15:8. Other idioms are: bring to life (proposes drop young) Is 26:19 (fig.); present supplication Je 38:26; 42:9; Dn 9:18, 20 (all c. לִפְנֵי);—on both cf. Qal 6. throw, or prostrate oneself, Inf. cstr. הִתְנַפֵּל throw himself upon (על) Gn 43:18 (J; i.e. attack). Pf. 1 s. הִתְנַפָּ֑לְתִּי Dt 9:25; Impf. 1 s. וָאֶתְנַפַּל Dt 9:18, 25; Pt. מִתְנַפֵּל Ezr 10:1;—prostrate oneself and lie prostrate, לִפְנֵי י׳.—Piʿlēl. וְנִפְלַּל Ez 28:23, read וְנָפַל Hi-Sm Co Berthol.
+
+---
+
+### כְּפוּפִים
+**Lexicon**: BDB Dictionary
+**Vocalized**: כָּפַף  
+
+vb. bend, bend down, be bent, bowed (NH bend, overturn, Assyrian kapâpu, bend, bow, DlHWB 347; Arabic كَفَّ fell a seam, also turn back, avert, كُفَّةٌ selvage, كِفَافٌ circuit, rim; Aramaic כְּפַף, ܟܰܦ bend, curve; Palm. כפתא niche, from כפף curve according to VogNo. 70, p. 50);— Pf. כ׳ נַפְשִׁי ψ 57:7 my soul is bowed down; Inf. cstr. (trans.) לָכֹף כְּאַגְמֹן רֹאשׁוֹ Is 58:5 to bend down, like a rush, his head. Pt. pass. (הַ)כְּפוּפִים those bowed down, in distress, humiliation, etc., ψ 145:14; 146:8. Impf. 1 s. אִכַּף לֵאלֹהֵי מָרוֹם Mi 6:6 with what shall I bow myself (in worship) toward the high God?
 
 ---
 
@@ -194,21 +328,71 @@ n.[m.] goodwill, favour, acceptance, will;—abs. ר׳ Dt 33:23 +; cstr. רְצ�
 
 ---
 
-### כְּפוּפִים
+### בֶאֱמֶת
 **Lexicon**: BDB Dictionary
-**Vocalized**: כָּפַף  
+**Vocalized**: אֱמֶת  
 
-vb. bend, bend down, be bent, bowed (NH bend, overturn, Assyrian kapâpu, bend, bow, DlHWB 347; Arabic كَفَّ fell a seam, also turn back, avert, كُفَّةٌ selvage, كِفَافٌ circuit, rim; Aramaic כְּפַף, ܟܰܦ bend, curve; Palm. כפתא niche, from כפף curve according to VogNo. 70, p. 50);— Pf. כ׳ נַפְשִׁי ψ 57:7 my soul is bowed down; Inf. cstr. (trans.) לָכֹף כְּאַגְמֹן רֹאשׁוֹ Is 58:5 to bend down, like a rush, his head. Pt. pass. (הַ)כְּפוּפִים those bowed down, in distress, humiliation, etc., ψ 145:14; 146:8. Impf. 1 s. אִכַּף לֵאלֹהֵי מָרוֹם Mi 6:6 with what shall I bow myself (in worship) toward the high God?
+n.f. firmness, faithfulness, truth (contr. for אֱמֶנֶת, from אָמֵן) Gn 24:48 + 106 times; sf. אֲמִתּוֹ, אֲמִתְּךָ ψ 91:4 + 18 times reliability, sureness: דֶּרֶךְ אֱמֶת sure way Gn 24:48 (J); שׂכר אמת sure reward Pr 11:18; אות אמת sure token Jos 2:12 (J); זֶרַע אמת Je 2:21. stability, continuance: שָׁלוֹם וֶאֱמֶת peace and stability Is 39:8 (= 2 K 20:19) Est 9:30 Je 33:6 Zc 8:19, cf. שׁלום אמת Je 14:13. faithfulness, reliableness: (a) of men אִישׁ אֱמֶת faithful man Ne 7:2; אנשׁי אמת Ex 18:21 (E); הָלַךְ בֶּאֱמֶת walk in faithfulness, faithfully 1 K 2:4; 3:6 2 K 20:3 Is 38:3 cf. 1 S 12:24; of י׳, בַּאֲמִתֶּ֑ךָ ψ 25:5; 26:3; 86:11; עיר האמת Zc 8:3; of men ψ 45:5; 51:8 2 Ch 31:20; 32:1 Pr 29:14 Is 10:20; 42:3; 48:1; בא׳ ובתמים Ju 9:16, 19 Jos 24:14; חֶסֶד וֶאֱ׳ mercy and faithfulness Pr 3:3; 14:22; 16:6; 20:28 Ho 4:1, & the phrase עשׂה חסד ואמת Gn 24:49; 47:29 Jos 2:14 (J) 2 S 15:20. (b) an attribute of God ψ 54:7; 71:22 Is 38:18, 19; 61:8; נתן אמת Mi 7:20; עשׂה אמת Ez 18:9 Ne 9:33; עשׂה חסד ואמת Gn 32:11 (J) 2 S 2:6; רב חסד ואמת abundant in mercy and faithfulness Ex 34:6 (J) ψ 86:15; these attributes are also associated ψ 40:11, 12; 61:8; 115:1; 138:2 Is 16:5 Gn 24:27 (J); they are messengers of God to men ψ 57:4; 85:11; 89:15 cf. ψ 43:3; כל ארחות י׳ חסד ואמת ψ 25:10; the faithfulness of God endureth for ever ψ 117:2; he keepeth it for ever ψ 146:6; it reacheth unto the skies ψ 57:11; 108:5; it is shield & buckler ψ 91:4; he is אל אמת ψ 31:6 = אלהי אמת 2 Ch 15:3; אֱמֶת is also associated with the divine ישׁר ψ 111:8; צֶדֶק ψ 85:12; צְדָקָה Zc 8:8; מִשְׁפָּט ψ 111:7 Je 4:2; & salvation ψ 69:14. truth (a) as spoken: דבר אמת speak truth 1 K 22:16 2 Ch 18:15 Je 9:4 Zc 8:16 ψ 15:2; דִּבְרֵי א׳ Ec 12:10; אֱמֶת הַדָּבָר the thing is true Dt 22:20 1 K 10:6 2 Ch 9:5 Dn 10:1; אמת נכון הדבר the thing is certainly true Dt 13:15; 17:4; אִמְרֵי אֱמֶת = אמרים אמת Pr 22:21; הגה אמת Pr 8:7; הגיד א׳ Dn 11:2, אֲמִתְּךָ ψ 30:10; שׂפת אמת Pr 12:19; אֱמֶת it is true Is 43:9; האמת אתכם whether truth is with you Gn 42:16 (E) cf. Is 59:14, 15. (b) of testimony and judgment עֵד אֱמֶת true witness Pr 14:25; עד אמת ונאמן Je 42:5; משׁפט אמת Ez 18:8 Zc 7:9; שָׁפַט אמת Zc 8:16. (c) of divine instruction כְּתָב אֱמֶת Dn 10:21; תורת אמת Mal 2:6 cf. Ne 9:13; תורתך אמת ψ 119:142; דבר י׳ בְּפִיךָ אמת 1 K 17:24 cf. 2 S 7:28; משׁפטי י׳ אמת ψ 19:10; ראשׁ דברך אמת ψ 119:160; מצותיך אמת ψ 119:151. (d) truth as a body of ethical or religious knowledge Dn 8:12; להשׂכיל באמתך Dn 9:13. adv. in truth, truly ψ 132:11; יהוה אלהים אמת Yahweh is God in truth, truly Je 10:10; 23:28; elsewhere בֶּאֱמֶת Ju 9:15; ψ 145:18 Je 26:15; 28:9; 32:41.
+
+---
+
+### בֶאֱמֶת
+**Lexicon**: BDB Dictionary
+**Vocalized**: אֱמֶת²  
+
+v. אמן.
 
 ---
 
 ## Concordance Searches
 
-### Search 1: דור לדור
+### Search 1: לעולם ועד
 **Scope**: Psalms  
 **Level**: consonantal  
 **Variations searched**: 12  
-**Results**: 1  
+**Results**: 5  
+
+#### Top Results:
+
+**Psalms 9:6**  
+Hebrew: גָּעַ֣רְתָּ ג֭וֹיִם אִבַּ֣דְתָּ רָשָׁ֑ע שְׁמָ֥ם מָ֝חִ֗יתָ לְעוֹלָ֥ם וָעֶֽד׃  
+English: You blast the nations;
+You destroy the wicked;
+You blot out their name forever.  
+Matched: *לְעוֹלָ֥ם* (position 6)  
+
+**Psalms 119:44**  
+Hebrew: וְאֶשְׁמְרָ֖ה תוֹרָתְךָ֥ תָמִ֗יד לְעוֹלָ֥ם וָעֶֽד׃  
+English: I will always obey Your teaching,
+forever and ever.  
+Matched: *לְעוֹלָ֥ם* (position 3)  
+
+**Psalms 145:1**  
+Hebrew: תְּהִלָּ֗ה לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣ אֱלוֹהַ֣י הַמֶּ֑לֶךְ וַאֲבָרְכָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃  
+English: A song of praise. Of David.
+I will extol You, my God and king,
+and bless Your name forever and ever.  
+Matched: *לְעוֹלָ֥ם* (position 7)  
+
+**Psalms 145:2**  
+Hebrew: בְּכׇל־י֥וֹם אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃  
+English: Every day will I bless You
+and praise Your name forever and ever.  
+Matched: *לְעוֹלָ֥ם* (position 4)  
+
+**Psalms 145:21**  
+Hebrew: תְּהִלַּ֥ת יְהֹוָ֗ה יְֽדַבֶּ֫ר־פִּ֥י וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ {פ}  
+English: My mouth shall utter the praise of the LORD,
+and all creatures shall bless His holy name forever and ever.  
+Matched: *לְעוֹלָ֥ם* (position 7)  
+
+---
+
+### Search 2: דור לדור
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 12  
+**Results**: 2  
 
 #### Top Results:
 
@@ -218,25 +402,14 @@ English: One generation shall laud Your works to another
 and declare Your mighty acts.  
 Matched: *דּ֣וֹר* (position 0)  
 
----
-
-### Search 2: מלכותך מלכות
-**Scope**: Tanakh  
-**Level**: consonantal  
-**Variations searched**: 12  
-**Results**: 1  
-
-#### Top Results:
-
-**Psalms 145:13**  
-Hebrew: מַֽלְכוּתְךָ֗ מַלְכ֥וּת כׇּל־עֹלָמִ֑ים וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר וָדֹֽר׃  
-English: Your kingship is an eternal kingship;
-Your dominion is for all generations.  
-Matched: *מַֽלְכוּתְךָ֗* (position 0)  
+**Isaiah 34:10**  
+Hebrew: לַ֤יְלָה וְיוֹמָם֙ לֹ֣א תִכְבֶּ֔ה לְעוֹלָ֖ם יַעֲלֶ֣ה עֲשָׁנָ֑הּ מִדּ֤וֹר לָדוֹר֙ תֶּחֱרָ֔ב לְנֵ֣צַח נְצָחִ֔ים אֵ֥ין עֹבֵ֖ר בָּֽהּ׃  
+English: Night and day it shall never go out;Its smoke shall rise for all time.Through the ages it shall lie in ruins;Through the aeons none shall traverse it.  
+Matched: *מִדּ֤וֹר* (position 7)  
 
 ---
 
-### Search 3: כל מעשיך
+### Search 3: כל מעשיו
 **Scope**: Psalms  
 **Level**: consonantal  
 **Variations searched**: 12  
@@ -244,15 +417,23 @@ Matched: *מַֽלְכוּתְךָ֗* (position 0)
 
 ---
 
-### Search 4: לעולם ועד
+### Search 4: כל בשר
 **Scope**: Tanakh  
-**Level**: exact  
+**Level**: consonantal  
 **Variations searched**: 12  
 **Results**: 0  
 
 ---
 
-### Search 5: חנון ורחום
+### Search 5: מלכות עולמים
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 12  
+**Results**: 0  
+
+---
+
+### Search 6: חנון ורחום
 **Scope**: Tanakh  
 **Level**: consonantal  
 **Variations searched**: 12  
@@ -285,192 +466,208 @@ Matched: *חַנּ֣וּן* (position 0)
 
 ---
 
-### Search 6: בני האדם
-**Scope**: Psalms  
-**Level**: consonantal  
-**Variations searched**: 12  
-**Results**: 1  
-
-#### Top Results:
-
-**Psalms 145:12**  
-Hebrew: לְהוֹדִ֤יעַ ׀ לִבְנֵ֣י הָ֭אָדָם גְּבוּרֹתָ֑יו וּ֝כְב֗וֹד הֲדַ֣ר מַלְכוּתֽוֹ׃  
-English: to make His mighty acts known among men
-and the majestic glory of His kingship.  
-Matched: *לִבְנֵ֣י* (position 2)  
-
----
-
-### Search 7: קרוב יהוה
+### Search 7: אין חקר
 **Scope**: Tanakh  
 **Level**: consonantal  
 **Variations searched**: 12  
-**Results**: 2  
+**Results**: 3  
 
 #### Top Results:
 
-**Psalms 34:19**  
-Hebrew: קָר֣וֹב יְ֭הֹוָה לְנִשְׁבְּרֵי־לֵ֑ב וְֽאֶת־דַּכְּאֵי־ר֥וּחַ יוֹשִֽׁיעַ׃  
-English: The LORD is close to the brokenhearted;
-those crushed in spirit He delivers.  
-Matched: *קָר֣וֹב* (position 0)  
+**Isaiah 40:28**  
+Hebrew: הֲל֨וֹא יָדַ֜עְתָּ אִם־לֹ֣א שָׁמַ֗עְתָּ אֱלֹהֵ֨י עוֹלָ֤ם ׀ יְהֹוָה֙ בּוֹרֵא֙ קְצ֣וֹת הָאָ֔רֶץ לֹ֥א יִיעַ֖ף וְלֹ֣א יִיגָ֑ע אֵ֥ין חֵ֖קֶר לִתְבוּנָתֽוֹ׃  
+English: Do you not know?Have you not heard? The ETERNAL is God from of old,Creator of the earth from end to end,Who never grows faint or weary,Whose wisdom cannot be fathomed—  
+Matched: *אֵ֥ין* (position 15)  
 
-**Psalms 145:18**  
-Hebrew: קָר֣וֹב יְ֭הֹוָה לְכׇל־קֹרְאָ֑יו לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃  
-English: The LORD is near to all who call Him,
-to all who call Him with sincerity.  
-Matched: *קָר֣וֹב* (position 0)  
+**Proverbs 25:3**  
+Hebrew: שָׁמַ֣יִם לָ֭רוּם וָאָ֣רֶץ לָעֹ֑מֶק וְלֵ֥ב מְ֝לָכִ֗ים אֵ֣ין חֵֽקֶר׃  
+English: Like the heavens in their height, like the earth in its depth,Is the mind of kings—unfathomable.  
+Matched: *אֵ֣ין* (position 6)  
+
+**Psalms 145:3**  
+Hebrew: גָּ֘ד֤וֹל יְהֹוָ֣ה וּמְהֻלָּ֣ל מְאֹ֑ד וְ֝לִגְדֻלָּת֗וֹ אֵ֣ין חֵֽקֶר׃  
+English: Great is the LORD and much acclaimed;
+His greatness cannot be fathomed.  
+Matched: *אֵ֣ין* (position 5)  
+
+---
+
+### Search 8: שם קדשו
+**Scope**: Psalms  
+**Level**: consonantal  
+**Variations searched**: 12  
+**Results**: 3  
+
+#### Top Results:
+
+**Psalms 33:21**  
+Hebrew: כִּי־ב֭וֹ יִשְׂמַ֣ח לִבֵּ֑נוּ כִּ֤י בְשֵׁ֖ם קׇדְשׁ֣וֹ בָטָֽחְנוּ׃  
+English: in Him our hearts rejoice,
+for in His holy name we trust.  
+Matched: *בְשֵׁ֖ם* (position 4)  
+
+**Psalms 105:3**  
+Hebrew: הִֽ֭תְהַלְלוּ בְּשֵׁ֣ם קׇדְשׁ֑וֹ יִ֝שְׂמַ֗ח לֵ֤ב ׀ מְבַקְשֵׁ֬י יְהֹוָֽה׃  
+English: Exult in His holy name;
+let all who seek the LORD rejoice.  
+Matched: *בְּשֵׁ֣ם* (position 1)  
+
+**Psalms 145:21**  
+Hebrew: תְּהִלַּ֥ת יְהֹוָ֗ה יְֽדַבֶּ֫ר־פִּ֥י וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ {פ}  
+English: My mouth shall utter the praise of the LORD,
+and all creatures shall bless His holy name forever and ever.  
+Matched: *שֵׁ֥ם* (position 5)  
 
 ---
 
 ## Figurative Language Instances
 
 ### Query 1
-**Filters**: Vehicle contains: pour forth  
-**Results**: 33  
+**Filters**: Vehicle contains: extol  
+**Results**: 61  
 
-**Core pattern**: flowing milk and honey metaphor (3/33 instances, 9%)
+**Core pattern**: lifting eyes metaphor (8/61 instances, 13%)
 
 **Top 3 Most Relevant** (by confidence):
-1. ⭐ **Deuteronomy 15:23** (confidence: 1.00) - The act of pouring out the blood is compared to pouring out water, emphasizing the complete, unreser...
-2. ⭐ **Deuteronomy 26:9** (confidence: 1.00) - This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and pro...
-3. ⭐ **Deuteronomy 26:15** (confidence: 1.00) - This is a well-known biblical idiom describing the extraordinary fertility, abundance, and desirabil...
+1. ⭐ **Exodus 30:12** (confidence: 1.00) - This is a well-established Hebrew idiom (נָשָׂא רֹאשׁ) meaning 'to take a census' or 'to number' peo...
+2. ⭐ **Genesis 14:22** (confidence: 1.00) - This phrase is an idiom where the physical action of lifting one's hand is a conventional gesture si...
+3. ⭐ **Genesis 19:21** (confidence: 1.00) - This is a well-established biblical idiom meaning to show favor, accept a request, or grant a plea. ...
 
-#### All Instances (33 total):
+#### All Instances (61 total):
 
-**Deuteronomy 6:3** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: a land flowing with milk and honey  
+**Deuteronomy 3:27** () - confidence: 0.95  
+*Figurative phrase*: and gaze about / and lift your eyes  
 
-**Full verse (Hebrew)**: וְשָׁמַעְתָּ֤ יִשְׂרָאֵל֙ וְשָׁמַרְתָּ֣ לַעֲשׂ֔וֹת אֲשֶׁר֙ יִיטַ֣ב לְךָ֔ וַאֲשֶׁ֥ר תִּרְבּ֖וּן מְאֹ֑ד כַּאֲשֶׁר֩ דִּבֶּ֨ר יְהֹוָ֜ה אֱלֹהֵ֤י אֲבֹתֶ֙יךָ֙ לָ֔ךְ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{פ}  
-**Full verse (English)**: Obey, O Israel, willingly and faithfully, that it may go well with you and that you may increase greatly [in] a land flowing with milk and honey,*a land flowing with milk and honey According to Ibn Ezra, this phrase connects with the end of v. 1. as יהוה, the God of your ancestors, spoke to you.  
+**Full verse (Hebrew)**: עֲלֵ֣ה&thinsp;׀ רֹ֣אשׁ הַפִּסְגָּ֗ה וְשָׂ֥א עֵינֶ֛יךָ יָ֧מָּה וְצָפֹ֛נָה וְתֵימָ֥נָה וּמִזְרָ֖חָה וּרְאֵ֣ה בְעֵינֶ֑יךָ כִּי־לֹ֥א תַעֲבֹ֖ר אֶת־הַיַּרְדֵּ֥ן הַזֶּֽה  
+**Full verse (English)**: Go up to the summit of Pisgah and gaze about, to the west, the north, the south, and the east. Look at it well, for you shall not go across yonder Jordan.  
 
-*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
-*Explanation*: This phrase is a metaphor and an idiom describing the extreme fertility, abundance, and prosperity of the Promised Land. The land does not literally 'flow' with milk and honey; rather, it produces the...  
-*Target*: Promised Land → fertile land → geographical entity  
-*Vehicle*: flowing source → abundant stream → natural phenomenon  
-*Ground*: abundance → fertility → prosperity  
-*Confidence*: 0.90  
-
-**Deuteronomy 11:9** (metaphor, idiom) - confidence: 0.95  
-*Figurative phrase*: a land flowing with milk and honey  
-
-**Full verse (Hebrew)**: וּלְמַ֨עַן תַּאֲרִ֤יכוּ יָמִים֙ עַל־הָ֣אֲדָמָ֔ה אֲשֶׁר֩ נִשְׁבַּ֨ע יְהֹוָ֧ה לַאֲבֹתֵיכֶ֛ם לָתֵ֥ת לָהֶ֖ם וּלְזַרְעָ֑ם אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: and that you may long endure upon the soil that יהוה swore to your fathers to assign to them and to their heirs, a land flowing with milk and honey.  
-
-*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
-*Explanation*: This is a classic biblical idiom and metaphor describing a land of extraordinary fertility, prosperity, and abundance, where rich sustenance is readily available. Lands do not literally flow with milk...  
-*Target*: promised land → fertile territory → geographical region  
-*Vehicle*: flowing river of milk and honey → abundant source of sustenance → natural bounty  
-*Ground*: fertility → abundance → prosperity  
+*Hebrew phrase*: וְשָׂ֥א עֵינֶ֛יךָ  
+*Explanation*: This is a common Hebrew idiom meaning 'to look,' 'to gaze,' or 'to direct one's vision,' rather than a literal physical lifting of the eyeballs....  
+*Target*: gazing → observing → visual perception  
+*Vehicle*: lifting eyes → physical action → body movement  
+*Ground*: directing vision → attentive observation → sensory action  
 *Confidence*: 0.95  
 
-**Deuteronomy 12:16** (simile) - confidence: 0.90  
-*Figurative phrase*: like water  
+**Deuteronomy 10:17** (idiom) - confidence: 0.95  
+*Figurative phrase*: does not lift up faces  
 
-**Full verse (Hebrew)**: רַ֥ק הַדָּ֖ם לֹ֣א תֹאכֵ֑לוּ עַל־הָאָ֥רֶץ תִּשְׁפְּכֶ֖נּוּ כַּמָּֽיִם  
-**Full verse (English)**: But you must not partake of the blood; you shall pour it out on the ground like water.  
+**Full verse (Hebrew)**: כִּ֚י יְהֹוָ֣ה אֱלֹֽהֵיכֶ֔ם ה֚וּא אֱלֹהֵ֣י הָֽאֱלֹהִ֔ים וַאֲדֹנֵ֖י הָאֲדֹנִ֑ים הָאֵ֨ל הַגָּדֹ֤ל הַגִּבֹּר֙ וְהַנּוֹרָ֔א אֲשֶׁר֙ לֹא־יִשָּׂ֣א פָנִ֔ים וְלֹ֥א יִקַּ֖ח שֹֽׁחַד  
+**Full verse (English)**: For your God יהוה is God supreme and Lord supreme,*God supreme and Lord supreme Lit. “the god of gods and the lord of lords.” Heb. ’adon (“lord”) normally denotes a man in a position of authority. Here it is used to claim that Israel’s God is beyond the men who sit atop the social hierarchies of rank and gender. the great, the mighty, and the awesome God, who shows no favor and takes no bribe,  
 
-*Hebrew phrase*: כַּמָּֽיִם  
-*Explanation*: The act of pouring out the blood is explicitly compared to pouring out water using the comparative particle 'כַּ' (like/as). This is a direct simile....  
-*Target*: blood disposal → ritual action → religious practice  
-*Vehicle*: water pouring → common liquid disposal → everyday action  
-*Ground*: ease of disposal → completeness of action → ritual requirement  
-*Confidence*: 0.90  
-
-**Deuteronomy 15:23** (simile) - confidence: 1.00  
-*Figurative phrase*: like water  
-
-**Full verse (Hebrew)**: רַ֥ק אֶת־דָּמ֖וֹ לֹ֣א תֹאכֵ֑ל עַל־הָאָ֥רֶץ תִּשְׁפְּכֶ֖נּוּ כַּמָּֽיִם&nbsp;{פ}  
-**Full verse (English)**: Only you must not partake of its blood; you shall pour it out on the ground like water.  
-
-*Hebrew phrase*: כַּמָּֽיִם  
-*Explanation*: The act of pouring out the blood is compared to pouring out water, emphasizing the complete, unreserved, and thorough manner in which the blood is to be disposed of on the ground....  
-*Target*: blood disposal → ritual action → religious practice  
-*Vehicle*: water pouring → liquid disposal → everyday action  
-*Ground*: completeness → unreservedness → thoroughness  
-*Confidence*: 1.00  
-
-**Deuteronomy 26:9** (metaphor, idiom, hyperbole) - confidence: 1.00  
-*Figurative phrase*: a land flowing with milk and honey  
-
-**Full verse (Hebrew)**: וַיְבִאֵ֖נוּ אֶל־הַמָּק֣וֹם הַזֶּ֑ה וַיִּתֶּן־לָ֙נוּ֙ אֶת־הָאָ֣רֶץ הַזֹּ֔את אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
-**Full verse (English)**: bringing us to this place and giving us this land, a land flowing with milk and honey.  
-
-*Hebrew phrase*: אֶרֶץ זָבַת חָלָב וּדְבָשׁ  
-*Explanation*: This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and prosperity. The 'flowing' aspect is a metaphor for the ease and plenitude of these resources, and it al...  
-*Target*: the promised land → land of Canaan → geographical region  
-*Vehicle*: a continuously flowing spring → source of abundant liquid → natural phenomenon  
-*Ground*: extreme fertility → bountiful resources → prosperity  
-*Confidence*: 1.00  
-
-**Deuteronomy 26:15** (metaphor, idiom) - confidence: 1.00  
-*Figurative phrase*: a land flowing with milk and honey  
-
-**Full verse (Hebrew)**: הַשְׁקִ֩יפָה֩ מִמְּע֨וֹן קׇדְשְׁךָ֜ מִן־הַשָּׁמַ֗יִם וּבָרֵ֤ךְ אֶֽת־עַמְּךָ֙ אֶת־יִשְׂרָאֵ֔ל וְאֵת֙ הָאֲדָמָ֔ה אֲשֶׁ֥ר נָתַ֖תָּה לָ֑נוּ כַּאֲשֶׁ֤ר נִשְׁבַּ֙עְתָּ֙ לַאֲבֹתֵ֔ינוּ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: Look down from Your holy abode, from heaven, and bless Your people Israel and the soil You have given us, a land flowing with milk and honey, as You swore to our fathers.”  
-
-*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
-*Explanation*: This is a well-known biblical idiom describing the extraordinary fertility, abundance, and desirability of the Promised Land. It metaphorically conveys richness and prosperity through the image of rea...  
-*Target*: Promised Land's fertility → land's abundance → agricultural prosperity  
-*Vehicle*: flowing milk and honey → rich sustenance → natural resources  
-*Ground*: abundance → richness → desirability  
-*Confidence*: 1.00  
-
-**Deuteronomy 31:20** (metaphor, idiom) - confidence: 1.00  
-*Figurative phrase*: flowing with milk and honey  
-
-**Full verse (Hebrew)**: כִּֽי־אֲבִיאֶ֜נּוּ אֶֽל־הָאֲדָמָ֣ה&thinsp;׀ אֲשֶׁר־נִשְׁבַּ֣עְתִּי לַאֲבֹתָ֗יו זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ וְאָכַ֥ל וְשָׂבַ֖ע וְדָשֵׁ֑ן וּפָנָ֞ה אֶל־אֱלֹהִ֤ים אֲחֵרִים֙ וַעֲבָד֔וּם וְנִ֣אֲצ֔וּנִי וְהֵפֵ֖ר אֶת־בְּרִיתִֽי  
-**Full verse (English)**: When I bring them into the land flowing with milk and honey that I promised on oath to their fathers, and they eat their fill and grow fat and turn to other gods and serve them, spurning Me and breaking My covenant,  
-
-*Hebrew phrase*: זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ  
-*Explanation*: This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and prosperity. The land is not literally a liquid conduit for milk and honey; rather, it is metaphorically...  
-*Target*: land of Israel → promised land → geographical region  
-*Vehicle*: flowing river → abundant liquid source → natural phenomenon  
-*Ground*: fertility → abundance → prosperity  
-*Confidence*: 1.00  
-
-**Exodus 3:8** (metaphor, idiom) - confidence: 0.95  
-*Figurative phrase*: a land flowing with milk and honey  
-
-**Full verse (Hebrew)**: וָאֵרֵ֞ד לְהַצִּיל֣וֹ&thinsp;׀ מִיַּ֣ד מִצְרַ֗יִם וּֽלְהַעֲלֹתוֹ֮ מִן־הָאָ֣רֶץ הַהִוא֒ אֶל־אֶ֤רֶץ טוֹבָה֙ וּרְחָבָ֔ה אֶל־אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ אֶל־מְק֤וֹם הַֽכְּנַעֲנִי֙ וְהַ֣חִתִּ֔י וְהָֽאֱמֹרִי֙ וְהַפְּרִזִּ֔י וְהַחִוִּ֖י וְהַיְבוּסִֽי  
-**Full verse (English)**: I have come down to rescue them from the Egyptians and to bring them out of that land to a good and spacious land, a land flowing with milk and honey, the region of the Canaanites, the Hittites, the Amorites, the Perizzites, the Hivites, and the Jebusites.  
-
-*Hebrew phrase*: אֶרֶץ זָבַת חָלָב וּדְבָשׁ  
-*Explanation*: This is a metaphor and a well-known biblical idiom describing the extraordinary fertility, abundance, and prosperity of the promised land. The land does not literally flow with these substances, but p...  
-*Target*: Promised Land's fertility → national prosperity → divine blessing  
-*Vehicle*: flowing river → abundant liquid source → natural phenomenon  
-*Ground*: abundance → richness → sustenance  
+*Hebrew phrase*: לֹא־יִשָּׂ֣א פָנִ֔ים  
+*Explanation*: This is a common Hebrew idiom, 'nasa' panim' (to lift up faces), which means 'to show partiality' or 'to show favor.' The negative form indicates impartiality, not a literal physical action of lifting...  
+*Target*: God's impartiality → divine justice → divine attribute  
+*Vehicle*: not lifting faces → human judicial action → social interaction  
+*Ground*: impartiality → fairness → ethical conduct  
 *Confidence*: 0.95  
 
-**Exodus 3:17** (metaphor, idiom) - confidence: 1.00  
-*Figurative phrase*: a land flowing with milk and honey  
+**Deuteronomy 28:50** (idiom) - confidence: 0.90  
+*Figurative phrase*: will not lift up faces  
 
-**Full verse (Hebrew)**: וָאֹמַ֗ר אַעֲלֶ֣ה אֶתְכֶם֮ מֵעֳנִ֣י מִצְרַ֒יִם֒ אֶל־אֶ֤רֶץ הַֽכְּנַעֲנִי֙ וְהַ֣חִתִּ֔י וְהָֽאֱמֹרִי֙ וְהַפְּרִזִּ֔י וְהַחִוִּ֖י וְהַיְבוּסִ֑י אֶל־אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
-**Full verse (English)**: and I have declared: I will take you out of the misery of Egypt to the land of the Canaanites, the Hittites, the Amorites, the Perizzites, the Hivites, and the Jebusites, to a land flowing with milk and honey.’  
+**Full verse (Hebrew)**: גּ֖וֹי עַ֣ז פָּנִ֑ים אֲשֶׁ֨ר לֹא־יִשָּׂ֤א פָנִים֙ לְזָקֵ֔ן וְנַ֖עַר לֹ֥א יָחֹֽן  
+**Full verse (English)**: a ruthless nation, that will show the influential*influential Taking Heb. zaqen as a term of socioeconomic status; trad. “old.” See the Dictionary under “elder.” no regard and the vulnerable*vulnerable Taking the Heb. term as referring to socioeconomic status; trad. “young.” See previous note and the Dictionary under na‘ar. no mercy.  
 
-*Hebrew phrase*: אֶרֶץ זָבַת חָלָב וּדְבָשׁ  
-*Explanation*: This phrase is a well-known biblical idiom and metaphor describing the extraordinary fertility, abundance, and prosperity of the promised land. It compares the land's richness to the continuous, effor...  
-*Target*: Promised Land → ideal territory → geographical region  
-*Vehicle*: flowing liquids → abundant sustenance → natural resources  
-*Ground*: fertility → abundance → prosperity  
+*Hebrew phrase*: לֹא־יִשָּׂ֤א פָנִים֙  
+*Explanation*: This is a common biblical idiom meaning 'to show no partiality,' 'to show no favor,' or 'to show no respect.' The literal action of 'not lifting faces' is a fixed expression conveying this meaning....  
+*Target*: nation's behavior → social interaction → interpersonal conduct  
+*Vehicle*: not lifting faces → physical action → human interaction  
+*Ground*: lack of partiality → lack of favor → disregard  
+*Confidence*: 0.90  
+
+**Exodus 14:10** (idiom) - confidence: 0.95  
+*Figurative phrase*: the Israelites caught sight of the Egyptians / literally 'lifted their eyes'  
+
+**Full verse (Hebrew)**: וּפַרְעֹ֖ה הִקְרִ֑יב וַיִּשְׂאוּ֩ בְנֵֽי־יִשְׂרָאֵ֨ל אֶת־עֵינֵיהֶ֜ם וְהִנֵּ֥ה מִצְרַ֣יִם&thinsp;׀ נֹסֵ֣עַ אַחֲרֵיהֶ֗ם וַיִּֽירְאוּ֙ מְאֹ֔ד וַיִּצְעֲק֥וּ בְנֵֽי־יִשְׂרָאֵ֖ל אֶל־יְהֹוָֽה  
+**Full verse (English)**: As Pharaoh drew near, the Israelites caught sight of the Egyptians advancing upon them. Greatly frightened, the Israelites cried out to יהוה.  
+
+*Hebrew phrase*: וַיִּשְׂאוּ֩ בְנֵֽי־יִשְׂרָאֵ֨ל אֶת־עֵינֵיהֶ֜ם  
+*Explanation*: This is a common biblical idiom 'נָשָׂא עֵינַיִם' (nasa einayim) meaning 'to look' or 'to see,' rather than a literal, exaggerated physical act of lifting the eyeballs. It describes the act of visual ...  
+*Target*: Israelites' perception → human observation → cognitive action  
+*Vehicle*: lifting eyes → physical action → bodily movement  
+*Ground*: act of seeing → visual perception → sensory input  
+*Confidence*: 0.95  
+
+**Exodus 30:12** (idiom) - confidence: 1.00  
+*Figurative phrase*: When you take a census of the Israelite men (lit. "When you lift the head of the sons of Israel")  
+
+**Full verse (Hebrew)**: כִּ֣י תִשָּׂ֞א אֶת־רֹ֥אשׁ בְּנֵֽי־יִשְׂרָאֵל֮ לִפְקֻדֵיהֶם֒ וְנָ֨תְנ֜וּ אִ֣ישׁ כֹּ֧פֶר נַפְשׁ֛וֹ לַיהֹוָ֖ה בִּפְקֹ֣ד אֹתָ֑ם וְלֹא־יִהְיֶ֥ה בָהֶ֛ם נֶ֖גֶף בִּפְקֹ֥ד אֹתָֽם  
+**Full verse (English)**: When you take a census of the Israelite men according to their army enrollment, each shall pay יהוה a ransom for himself on being enrolled, that no plague may come upon them through their being enrolled.  
+
+*Hebrew phrase*: כִּ֣י תִשָּׂ֞א אֶת־רֹ֥אשׁ בְּנֵֽי־יִשְׂרָאֵל֮  
+*Explanation*: This is a well-established Hebrew idiom (נָשָׂא רֹאשׁ) meaning 'to take a census' or 'to number' people. It does not imply a literal physical lifting of heads....  
+*Target*: census → population count → administrative action  
+*Vehicle*: lifting head → physical action → human gesture  
+*Ground*: enumeration → registration → assessment  
 *Confidence*: 1.00  
 
-**Exodus 13:5** (metaphor, idiom) - confidence: 1.00  
-*Figurative phrase*: a land flowing with milk and honey  
+**Exodus 35:26** (metaphor, idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: whose heart lifted them up in wisdom  
 
-**Full verse (Hebrew)**: וְהָיָ֣ה כִֽי־יְבִיאֲךָ֣ יְהֹוָ֡ה אֶל־אֶ֣רֶץ הַֽ֠כְּנַעֲנִ֠י וְהַחִתִּ֨י וְהָאֱמֹרִ֜י וְהַחִוִּ֣י וְהַיְבוּסִ֗י אֲשֶׁ֨ר נִשְׁבַּ֤ע לַאֲבֹתֶ֙יךָ֙ לָ֣תֶת לָ֔ךְ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ וְעָבַדְתָּ֛ אֶת־הָעֲבֹדָ֥ה הַזֹּ֖את בַּחֹ֥דֶשׁ הַזֶּֽה  
-**Full verse (English)**: So, when יהוה has brought you into the land of the Canaanites, the Hittites, the Amorites, the Hivites, and the Jebusites, which was sworn to your fathers to be given you, a land flowing with milk and honey, you shall observe in this month the following practice:  
+**Full verse (Hebrew)**: וְכׇ֨ל־הַנָּשִׁ֔ים אֲשֶׁ֨ר נָשָׂ֥א לִבָּ֛ן אֹתָ֖נָה בְּחׇכְמָ֑ה טָו֖וּ אֶת־הָעִזִּֽים  
+**Full verse (English)**: And all the women who excelled in that skill spun the goats’ hair.  
 
-*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ  
-*Explanation*: This phrase is a well-known biblical idiom and a metaphor describing the extraordinary fertility, abundance, and prosperity of the land. The land itself does not literally 'flow' with milk and honey; ...  
-*Target*: Land of Canaan's fertility → Promised Land's abundance → Agricultural prosperity  
-*Vehicle*: Flowing milk and honey → Abundant sweet provisions → Rich food sources  
-*Ground*: Exceptional fertility → Abundance of resources → Desirability  
+*Hebrew phrase*: נָשָׂ֥א לִבָּ֛ן אֹתָ֖נָה בְּחׇכְמָ֑ה  
+*Explanation*: This is a biblical idiom 'nasa lev' (to lift the heart), signifying inner motivation, skill, or inspiration. 'Heart' is used metonymically for the inner self/will/intellect, and 'lifting' is a metapho...  
+*Target*: women's skill and motivation → human capability → inner disposition  
+*Vehicle*: heart lifting a person → physical action → bodily function  
+*Ground*: inner empowerment by wisdom → intrinsic motivation → skillfulness  
+*Confidence*: 0.90  
+
+**Exodus 35:21** (idiom) - confidence: 0.95  
+*Figurative phrase*: who excelled in ability  
+
+**Full verse (Hebrew)**: וַיָּבֹ֕אוּ כׇּל־אִ֖ישׁ אֲשֶׁר־נְשָׂא֣וֹ לִבּ֑וֹ וְכֹ֡ל אֲשֶׁר֩ נָדְבָ֨ה רוּח֜וֹ אֹת֗וֹ הֵ֠בִ֠יאוּ אֶת־תְּרוּמַ֨ת יְהֹוָ֜ה לִמְלֶ֨אכֶת אֹ֤הֶל מוֹעֵד֙ וּלְכׇל־עֲבֹ֣דָת֔וֹ וּלְבִגְדֵ֖י הַקֹּֽדֶשׁ  
+**Full verse (English)**: And everyone who excelled in ability and everyone whose spirit was moved came, bringing to יהוה an offering for the work of the Tent of Meeting and for all its service and for the sacral vestments.  
+
+*Hebrew phrase*: אֲשֶׁר־נְשָׂא֣וֹ לִבּ֑וֹ  
+*Explanation*: This is an idiom. Literally 'whose heart lifted him,' it signifies inner motivation, courage, or generosity that propels a person to act. The heart does not physically lift a person; it represents the...  
+*Target*: person's motivation → inner drive → human will  
+*Vehicle*: heart lifting → physical action → bodily function  
+*Ground*: willingness → generosity → initiative  
+*Confidence*: 0.95  
+
+**Genesis 13:10** (idiom) - confidence: 0.95  
+*Figurative phrase*: Lot looked about him  
+
+**Full verse (Hebrew)**: וַיִּשָּׂא־ל֣וֹט אֶת־עֵינָ֗יו וַיַּרְא֙ אֶת־כׇּל־כִּכַּ֣ר הַיַּרְדֵּ֔ן כִּ֥י כֻלָּ֖הּ מַשְׁקֶ֑ה לִפְנֵ֣י&thinsp;׀ שַׁחֵ֣ת יְהֹוָ֗ה אֶת־סְדֹם֙ וְאֶת־עֲמֹרָ֔ה כְּגַן־יְהֹוָה֙ כְּאֶ֣רֶץ מִצְרַ֔יִם בֹּאֲכָ֖ה צֹֽעַר  
+**Full verse (English)**: Lot looked about him and saw how well watered was the whole plain of the Jordan, all of it—this was before יהוה had destroyed Sodom and Gomorrah—all the way to Zoar, like the garden of יהוה, like the land of Egypt.  
+
+*Hebrew phrase*: וַיִּשָּׂא־ל֣וֹט אֶת־עֵינָ֗יו  
+*Explanation*: The phrase 'to lift one's eyes' (נָשָׂא עֵינַיִם) is a common biblical idiom meaning 'to look' or 'to see,' rather than a literal physical action of the eyeballs....  
+*Target*: Lot's action → visual perception → human action  
+*Vehicle*: lifting eyes → physical action → bodily movement  
+*Ground*: act of seeing → visual attention → perception  
+*Confidence*: 0.95  
+
+**Genesis 14:22** (idiom) - confidence: 1.00  
+*Figurative phrase*: I swear / I lifted my hand  
+
+**Full verse (Hebrew)**: וַיֹּ֥אמֶר אַבְרָ֖ם אֶל־מֶ֣לֶךְ סְדֹ֑ם הֲרִמֹ֨תִי יָדִ֤י אֶל־יְהֹוָה֙ אֵ֣ל עֶלְי֔וֹן קֹנֵ֖ה שָׁמַ֥יִם וָאָֽרֶץ  
+**Full verse (English)**: But Abram said to the king of Sodom, “I swear*swear Lit. “lift up my hand.” to יהוה, God Most High, Creator of heaven and earth:  
+
+*Hebrew phrase*: הֲרִמֹ֨תִי יָדִ֤י  
+*Explanation*: This phrase is an idiom where the physical action of lifting one's hand is a conventional gesture signifying the act of taking a solemn oath or swearing....  
+*Target*: swearing an oath → solemn declaration → verbal commitment  
+*Vehicle*: lifting a hand → physical gesture → body language  
+*Ground*: solemnity → commitment → attestation  
 *Confidence*: 1.00  
 
-*...and 23 more instances*
+**Genesis 18:2** (idiom) - confidence: 0.95  
+*Figurative phrase*: he lifted his eyes / Looking up  
 
-**Usage breakdown**: flowing milk and honey (3x), flowing liquids (3x), pouring liquid (3x)
+**Full verse (Hebrew)**: וַיִּשָּׂ֤א עֵינָיו֙ וַיַּ֔רְא וְהִנֵּה֙ שְׁלֹשָׁ֣ה אֲנָשִׁ֔ים נִצָּבִ֖ים עָלָ֑יו וַיַּ֗רְא וַיָּ֤רׇץ לִקְרָאתָם֙ מִפֶּ֣תַח הָאֹ֔הֶל וַיִּשְׁתַּ֖חוּ אָֽרְצָה  
+**Full verse (English)**: Looking up, he saw three figures*figures Lit. “participants whose involvement defines the depicted situation.” Or “agents [of the divine],” as the notice of the advent of divine communication in v. 1 (see previous note) implies an agency situation that casts these participants in their defining role as agents. Trad. “men.” Cf. Rashbam, Ramban; see further the Dictionary under ’ish; Agent. standing near him. Perceiving this, he ran from the entrance of the tent to greet them and, bowing to the ground,  
+
+*Hebrew phrase*: וַיִּשָּׂ֤א עֵינָיו֙  
+*Explanation*: This is a common Hebrew idiom meaning 'to look up' or 'to direct one's gaze upwards,' rather than a literal physical manipulation of the eyeballs. It describes the act of visual perception....  
+*Target*: looking up → visual perception → human action  
+*Vehicle*: lifting eyes → physical action of eyes → bodily movement  
+*Ground*: directing gaze → focusing vision → attention  
+*Confidence*: 0.95  
+
+*...and 51 more instances*
+
+**Usage breakdown**: lifting eyes (8x), physical elevation (5x), lifting a burden (4x)
 
 ---
 
@@ -624,6 +821,155 @@ Matched: *קָר֣וֹב* (position 0)
 ---
 
 ### Query 3
+**Filters**: Vehicle contains: pour  
+**Results**: 38  
+
+**Core pattern**: flowing milk and honey metaphor (3/38 instances, 7%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Deuteronomy 15:23** (confidence: 1.00) - The act of pouring out the blood is compared to pouring out water, emphasizing the complete, unreser...
+2. ⭐ **Deuteronomy 26:9** (confidence: 1.00) - This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and pro...
+3. ⭐ **Deuteronomy 26:15** (confidence: 1.00) - This is a well-known biblical idiom describing the extraordinary fertility, abundance, and desirabil...
+
+#### All Instances (38 total):
+
+**Deuteronomy 6:3** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וְשָׁמַעְתָּ֤ יִשְׂרָאֵל֙ וְשָׁמַרְתָּ֣ לַעֲשׂ֔וֹת אֲשֶׁר֙ יִיטַ֣ב לְךָ֔ וַאֲשֶׁ֥ר תִּרְבּ֖וּן מְאֹ֑ד כַּאֲשֶׁר֩ דִּבֶּ֨ר יְהֹוָ֜ה אֱלֹהֵ֤י אֲבֹתֶ֙יךָ֙ לָ֔ךְ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{פ}  
+**Full verse (English)**: Obey, O Israel, willingly and faithfully, that it may go well with you and that you may increase greatly [in] a land flowing with milk and honey,*a land flowing with milk and honey According to Ibn Ezra, this phrase connects with the end of v. 1. as יהוה, the God of your ancestors, spoke to you.  
+
+*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
+*Explanation*: This phrase is a metaphor and an idiom describing the extreme fertility, abundance, and prosperity of the Promised Land. The land does not literally 'flow' with milk and honey; rather, it produces the...  
+*Target*: Promised Land → fertile land → geographical entity  
+*Vehicle*: flowing source → abundant stream → natural phenomenon  
+*Ground*: abundance → fertility → prosperity  
+*Confidence*: 0.90  
+
+**Deuteronomy 11:9** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וּלְמַ֨עַן תַּאֲרִ֤יכוּ יָמִים֙ עַל־הָ֣אֲדָמָ֔ה אֲשֶׁר֩ נִשְׁבַּ֨ע יְהֹוָ֧ה לַאֲבֹתֵיכֶ֛ם לָתֵ֥ת לָהֶ֖ם וּלְזַרְעָ֑ם אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: and that you may long endure upon the soil that יהוה swore to your fathers to assign to them and to their heirs, a land flowing with milk and honey.  
+
+*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
+*Explanation*: This is a classic biblical idiom and metaphor describing a land of extraordinary fertility, prosperity, and abundance, where rich sustenance is readily available. Lands do not literally flow with milk...  
+*Target*: promised land → fertile territory → geographical region  
+*Vehicle*: flowing river of milk and honey → abundant source of sustenance → natural bounty  
+*Ground*: fertility → abundance → prosperity  
+*Confidence*: 0.95  
+
+**Deuteronomy 12:16** (simile) - confidence: 0.90  
+*Figurative phrase*: like water  
+
+**Full verse (Hebrew)**: רַ֥ק הַדָּ֖ם לֹ֣א תֹאכֵ֑לוּ עַל־הָאָ֥רֶץ תִּשְׁפְּכֶ֖נּוּ כַּמָּֽיִם  
+**Full verse (English)**: But you must not partake of the blood; you shall pour it out on the ground like water.  
+
+*Hebrew phrase*: כַּמָּֽיִם  
+*Explanation*: The act of pouring out the blood is explicitly compared to pouring out water using the comparative particle 'כַּ' (like/as). This is a direct simile....  
+*Target*: blood disposal → ritual action → religious practice  
+*Vehicle*: water pouring → common liquid disposal → everyday action  
+*Ground*: ease of disposal → completeness of action → ritual requirement  
+*Confidence*: 0.90  
+
+**Deuteronomy 15:23** (simile) - confidence: 1.00  
+*Figurative phrase*: like water  
+
+**Full verse (Hebrew)**: רַ֥ק אֶת־דָּמ֖וֹ לֹ֣א תֹאכֵ֑ל עַל־הָאָ֥רֶץ תִּשְׁפְּכֶ֖נּוּ כַּמָּֽיִם&nbsp;{פ}  
+**Full verse (English)**: Only you must not partake of its blood; you shall pour it out on the ground like water.  
+
+*Hebrew phrase*: כַּמָּֽיִם  
+*Explanation*: The act of pouring out the blood is compared to pouring out water, emphasizing the complete, unreserved, and thorough manner in which the blood is to be disposed of on the ground....  
+*Target*: blood disposal → ritual action → religious practice  
+*Vehicle*: water pouring → liquid disposal → everyday action  
+*Ground*: completeness → unreservedness → thoroughness  
+*Confidence*: 1.00  
+
+**Deuteronomy 26:9** (metaphor, idiom, hyperbole) - confidence: 1.00  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וַיְבִאֵ֖נוּ אֶל־הַמָּק֣וֹם הַזֶּ֑ה וַיִּתֶּן־לָ֙נוּ֙ אֶת־הָאָ֣רֶץ הַזֹּ֔את אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
+**Full verse (English)**: bringing us to this place and giving us this land, a land flowing with milk and honey.  
+
+*Hebrew phrase*: אֶרֶץ זָבַת חָלָב וּדְבָשׁ  
+*Explanation*: This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and prosperity. The 'flowing' aspect is a metaphor for the ease and plenitude of these resources, and it al...  
+*Target*: the promised land → land of Canaan → geographical region  
+*Vehicle*: a continuously flowing spring → source of abundant liquid → natural phenomenon  
+*Ground*: extreme fertility → bountiful resources → prosperity  
+*Confidence*: 1.00  
+
+**Deuteronomy 26:15** (metaphor, idiom) - confidence: 1.00  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: הַשְׁקִ֩יפָה֩ מִמְּע֨וֹן קׇדְשְׁךָ֜ מִן־הַשָּׁמַ֗יִם וּבָרֵ֤ךְ אֶֽת־עַמְּךָ֙ אֶת־יִשְׂרָאֵ֔ל וְאֵת֙ הָאֲדָמָ֔ה אֲשֶׁ֥ר נָתַ֖תָּה לָ֑נוּ כַּאֲשֶׁ֤ר נִשְׁבַּ֙עְתָּ֙ לַאֲבֹתֵ֔ינוּ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: Look down from Your holy abode, from heaven, and bless Your people Israel and the soil You have given us, a land flowing with milk and honey, as You swore to our fathers.”  
+
+*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
+*Explanation*: This is a well-known biblical idiom describing the extraordinary fertility, abundance, and desirability of the Promised Land. It metaphorically conveys richness and prosperity through the image of rea...  
+*Target*: Promised Land's fertility → land's abundance → agricultural prosperity  
+*Vehicle*: flowing milk and honey → rich sustenance → natural resources  
+*Ground*: abundance → richness → desirability  
+*Confidence*: 1.00  
+
+**Deuteronomy 31:20** (metaphor, idiom) - confidence: 1.00  
+*Figurative phrase*: flowing with milk and honey  
+
+**Full verse (Hebrew)**: כִּֽי־אֲבִיאֶ֜נּוּ אֶֽל־הָאֲדָמָ֣ה&thinsp;׀ אֲשֶׁר־נִשְׁבַּ֣עְתִּי לַאֲבֹתָ֗יו זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ וְאָכַ֥ל וְשָׂבַ֖ע וְדָשֵׁ֑ן וּפָנָ֞ה אֶל־אֱלֹהִ֤ים אֲחֵרִים֙ וַעֲבָד֔וּם וְנִ֣אֲצ֔וּנִי וְהֵפֵ֖ר אֶת־בְּרִיתִֽי  
+**Full verse (English)**: When I bring them into the land flowing with milk and honey that I promised on oath to their fathers, and they eat their fill and grow fat and turn to other gods and serve them, spurning Me and breaking My covenant,  
+
+*Hebrew phrase*: זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ  
+*Explanation*: This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and prosperity. The land is not literally a liquid conduit for milk and honey; rather, it is metaphorically...  
+*Target*: land of Israel → promised land → geographical region  
+*Vehicle*: flowing river → abundant liquid source → natural phenomenon  
+*Ground*: fertility → abundance → prosperity  
+*Confidence*: 1.00  
+
+**Deuteronomy 33:23** (metaphor) - confidence: 0.90  
+*Figurative phrase*: And full of יהוה’s blessing  
+
+**Full verse (Hebrew)**: וּלְנַפְתָּלִ֣י אָמַ֔ר נַפְתָּלִי֙ שְׂבַ֣ע רָצ֔וֹן וּמָלֵ֖א בִּרְכַּ֣ת יְהֹוָ֑ה יָ֥ם וְדָר֖וֹם יְרָֽשָׁה&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: And of Naphtali he said:O Naphtali, sated with favorAnd full of יהוה’s blessing,Take possession on the west and south.  
+
+*Hebrew phrase*: וּמָלֵ֖א בִּרְכַּ֣ת יְהֹוָ֑ה  
+*Explanation*: The physical state of being 'full' (like a container) is metaphorically applied to the abstract concept of 'blessing' to convey an overflowing, complete, and abundant reception of God's blessing....  
+*Target*: Naphtali's blessing → tribal prosperity → human condition  
+*Vehicle*: full container → overflowing source → abundant state  
+*Ground*: abundance → completeness → provision  
+*Confidence*: 0.90  
+
+**Exodus 3:8** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וָאֵרֵ֞ד לְהַצִּיל֣וֹ&thinsp;׀ מִיַּ֣ד מִצְרַ֗יִם וּֽלְהַעֲלֹתוֹ֮ מִן־הָאָ֣רֶץ הַהִוא֒ אֶל־אֶ֤רֶץ טוֹבָה֙ וּרְחָבָ֔ה אֶל־אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ אֶל־מְק֤וֹם הַֽכְּנַעֲנִי֙ וְהַ֣חִתִּ֔י וְהָֽאֱמֹרִי֙ וְהַפְּרִזִּ֔י וְהַחִוִּ֖י וְהַיְבוּסִֽי  
+**Full verse (English)**: I have come down to rescue them from the Egyptians and to bring them out of that land to a good and spacious land, a land flowing with milk and honey, the region of the Canaanites, the Hittites, the Amorites, the Perizzites, the Hivites, and the Jebusites.  
+
+*Hebrew phrase*: אֶרֶץ זָבַת חָלָב וּדְבָשׁ  
+*Explanation*: This is a metaphor and a well-known biblical idiom describing the extraordinary fertility, abundance, and prosperity of the promised land. The land does not literally flow with these substances, but p...  
+*Target*: Promised Land's fertility → national prosperity → divine blessing  
+*Vehicle*: flowing river → abundant liquid source → natural phenomenon  
+*Ground*: abundance → richness → sustenance  
+*Confidence*: 0.95  
+
+**Exodus 3:17** (metaphor, idiom) - confidence: 1.00  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וָאֹמַ֗ר אַעֲלֶ֣ה אֶתְכֶם֮ מֵעֳנִ֣י מִצְרַ֒יִם֒ אֶל־אֶ֤רֶץ הַֽכְּנַעֲנִי֙ וְהַ֣חִתִּ֔י וְהָֽאֱמֹרִי֙ וְהַפְּרִזִּ֔י וְהַחִוִּ֖י וְהַיְבוּסִ֑י אֶל־אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
+**Full verse (English)**: and I have declared: I will take you out of the misery of Egypt to the land of the Canaanites, the Hittites, the Amorites, the Perizzites, the Hivites, and the Jebusites, to a land flowing with milk and honey.’  
+
+*Hebrew phrase*: אֶרֶץ זָבַת חָלָב וּדְבָשׁ  
+*Explanation*: This phrase is a well-known biblical idiom and metaphor describing the extraordinary fertility, abundance, and prosperity of the promised land. It compares the land's richness to the continuous, effor...  
+*Target*: Promised Land → ideal territory → geographical region  
+*Vehicle*: flowing liquids → abundant sustenance → natural resources  
+*Ground*: fertility → abundance → prosperity  
+*Confidence*: 1.00  
+
+*...and 28 more instances*
+
+**Usage breakdown**: flowing milk and honey (3x), flowing liquids (3x), pouring liquid (3x)
+
+---
+
+### Query 4
 **Filters**: Vehicle contains: support  
 **Results**: 25  
 
@@ -772,8 +1118,8 @@ Matched: *קָר֣וֹב* (position 0)
 
 ---
 
-### Query 4
-**Filters**: Vehicle contains: raise up  
+### Query 5
+**Filters**: Vehicle contains: straighten  
 **Results**: 67  
 
 **Core pattern**: lifting eyes metaphor (8/67 instances, 11%)
@@ -921,18 +1267,70 @@ Matched: *קָר֣וֹב* (position 0)
 
 ---
 
-### Query 5
-**Filters**: Vehicle contains: wait hopefully  
-**Results**: 10  
+### Query 6
+**Filters**: Vehicle contains: expectant  
+**Results**: 17  
 
-**Core pattern**: physical eyes looking metaphor (2/10 instances, 20%)
+**Core pattern**: guarding metaphor (3/17 instances, 17%)
 
 **Top 3 Most Relevant** (by confidence):
 1. ⭐ **Psalms 71:5** (confidence: 1.00) - God, a divine being, is directly equated with 'hope,' an abstract concept, signifying that God is th...
-2. ⭐ **Psalms 27:14** (confidence: 0.95) - This phrase is an idiom meaning to wait for, hope in, or trust in the LORD, rather than a literal ac...
-3. ⭐ **Psalms 37:9** (confidence: 0.95) - This is an idiom for placing one's hope, trust, and patient expectation in God, rather than a litera...
+2. ⭐ **Psalms 90:4** (confidence: 1.00) - A thousand years, from God's eternal perspective, are likened to the very short duration of a single...
+3. ⭐ **Psalms 25:10** (confidence: 0.98) - The verb 'נָצַר' (natzar), typically meaning 'to guard' or 'to watch over' physically, is used idiom...
 
-#### All Instances (10 total):
+#### All Instances (17 total):
+
+**Deuteronomy 8:11** () - confidence: 0.90  
+*Figurative phrase*: keep His commandments  
+
+**Full verse (Hebrew)**: הִשָּׁ֣מֶר לְךָ֔ פֶּן־תִּשְׁכַּ֖ח אֶת־יְהֹוָ֣ה אֱלֹהֶ֑יךָ לְבִלְתִּ֨י שְׁמֹ֤ר מִצְוֺתָיו֙ וּמִשְׁפָּטָ֣יו וְחֻקֹּתָ֔יו אֲשֶׁ֛ר אָנֹכִ֥י מְצַוְּךָ֖ הַיּֽוֹם  
+**Full verse (English)**: Take care lest you forget your God יהוה and fail to keep the divine commandments, rules, and laws which I enjoin upon you today.  
+
+*Hebrew phrase*: שְׁמֹ֤ר מִצְוֺתָיו֙  
+*Explanation*: The verb 'שמר' (shamar) literally means 'to guard' or 'to watch over.' In the context of commandments, rules, and laws, it is an idiom meaning 'to obey,' 'to observe,' or 'to fulfill' them....  
+*Target*: obedience to divine laws → observance of statutes → human behavior  
+*Vehicle*: guarding → watching over → preserving  
+*Ground*: laws are to be protected and upheld through adherence → the act of guarding implies careful attention and preservation → observance ensures continuity  
+*Confidence*: 0.90  
+
+**Deuteronomy 31:12** (metaphor) - confidence: 0.90  
+*Figurative phrase*: and to observe faithfully  
+
+**Full verse (Hebrew)**: הַקְהֵ֣ל אֶת־הָעָ֗ם הָֽאֲנָשִׁ֤ים וְהַנָּשִׁים֙ וְהַטַּ֔ף וְגֵרְךָ֖ אֲשֶׁ֣ר בִּשְׁעָרֶ֑יךָ לְמַ֨עַן יִשְׁמְע֜וּ וּלְמַ֣עַן יִלְמְד֗וּ וְיָֽרְאוּ֙ אֶת־יְהֹוָ֣ה אֱלֹהֵיכֶ֔ם וְשָׁמְר֣וּ לַעֲשׂ֔וֹת אֶת־כׇּל־דִּבְרֵ֖י הַתּוֹרָ֥ה הַזֹּֽאת  
+**Full verse (English)**: Gather the people—men, women, children,*men, women, children Or “householders, wives, [other] dependents.” Cf. 2.34; 3.6. See the Dictionary under “householder” and ṭaph. and the strangers in your communities—that they may hear and so learn to revere your God יהוה and to observe faithfully every word of this Teaching.  
+
+*Hebrew phrase*: וְשָׁמְר֣וּ לַעֲשׂ֔וֹת  
+*Explanation*: The verb 'shamar' (שׁמר), meaning 'to guard' or 'to keep,' is used metaphorically to describe faithful adherence to the law. This conceptual metaphor (OBEDIENCE IS GUARDING) frames the Torah's words a...  
+*Target*: faithful obedience → adherence to the law → moral and religious conduct  
+*Vehicle*: guarding → watching over → protecting a valuable object  
+*Ground*: careful attention → faithfulness → preservation  
+*Confidence*: 0.90  
+
+**Psalms 25:10** (idiom) - confidence: 0.98  
+*Figurative phrase*: those who keep the decrees of His covenant  
+
+**Full verse (Hebrew)**: כׇּל־אׇרְח֣וֹת יְ֭הֹוָה חֶ֣סֶד וֶאֱמֶ֑ת לְנֹצְרֵ֥י בְ֝רִית֗וֹ וְעֵדֹתָֽיו  
+**Full verse (English)**: All the LORD’s paths are steadfast lovefor those who keep the decrees of His covenant.  
+
+*Hebrew phrase*: לְנֹצְרֵ֥י בְ֝רִית֗וֹ וְעֵדֹתָֽיו  
+*Explanation*: The verb 'נָצַר' (natzar), typically meaning 'to guard' or 'to watch over' physically, is used idiomatically here to mean 'to observe,' 'to obey,' or 'to preserve' the terms of a covenant or decrees, ...  
+*Target*: obedience → observance → adherence  
+*Vehicle*: guarding → watching over → physical protection  
+*Ground*: fidelity → compliance → moral duty  
+*Confidence*: 0.98  
+
+**Psalms 25:3** (metaphor) - confidence: 0.90  
+*Figurative phrase*: all who look to You  
+
+**Full verse (Hebrew)**: גַּ֣ם כׇּל־קֹ֭וֶיךָ לֹ֣א יֵבֹ֑שׁוּ יֵ֝בֹ֗שׁוּ הַבּוֹגְדִ֥ים רֵיקָֽם  
+**Full verse (English)**: O let none who look to You be disappointed;let the faithless be disappointed, empty-handed.  
+
+*Hebrew phrase*: כׇּל־קֹ֭וֶיךָ  
+*Explanation*: The verb קוה (qavah) 'to look to/wait for' is used idiomatically to express hope, trust, and patient expectation in God, rather than literal visual perception....  
+*Target*: those who trust in God → believers → people of faith  
+*Vehicle*: those who wait/look → expectant individuals → people  
+*Ground*: trust → hope → reliance  
+*Confidence*: 0.90  
 
 **Psalms 27:14** (idiom) - confidence: 0.95  
 *Figurative phrase*: Look to the LORD  
@@ -973,6 +1371,19 @@ Matched: *קָר֣וֹב* (position 0)
 *Ground*: reliance → expectation → faith  
 *Confidence*: 0.95  
 
+**Psalms 39:2** (idiom) - confidence: 0.95  
+*Figurative phrase*: I would watch my steps  
+
+**Full verse (Hebrew)**: אָמַ֗רְתִּי אֶ֥שְׁמְרָ֣ה דְרָכַי֮ מֵחֲט֢וֹא בִלְשׁ֫וֹנִ֥י אֶשְׁמְרָ֥ה לְפִ֥י מַחְס֑וֹם בְּעֹ֖ד רָשָׁ֣ע לְנֶגְדִּֽי  
+**Full verse (English)**: I resolved I would watch my steplest I offend by my speech;I would keep my mouth muzzledwhile the wicked man was in my presence.  
+
+*Hebrew phrase*: אֶ֥שְׁמְרָ֣ה דְרָכַי֮  
+*Explanation*: This is an idiom meaning to be careful about one's conduct or behavior. The literal act of watching physical steps is not intended, but rather the careful management of one's actions and moral path....  
+*Target*: careful conduct → prudent behavior → moral discipline  
+*Vehicle*: watching one's physical steps → attentive walking → physical movement  
+*Ground*: carefulness → attentiveness → prudence  
+*Confidence*: 0.95  
+
 **Psalms 59:11** (metaphor, idiom) - confidence: 0.95  
 *Figurative phrase*: will let me gloat over my watchful foes  
 
@@ -999,85 +1410,24 @@ Matched: *קָר֣וֹב* (position 0)
 *Ground*: quiet expectation → patient submission → inner stillness  
 *Confidence*: 0.90  
 
-**Psalms 69:7** (metaphor) - confidence: 0.95  
-*Figurative phrase*: those who look to You  
+*...and 7 more instances*
 
-**Full verse (Hebrew)**: אַל־יֵ֘בֹ֤שׁוּ בִ֨י&thinsp;׀ קֹוֶיךָ֮ אֲדֹנָ֥י יֱהֹוִ֗ה צְבָ֫א֥וֹת אַל־יִכָּ֣לְמֽוּ בִ֣י מְבַקְשֶׁ֑יךָ אֱ֝לֹהֵ֗י יִשְׂרָאֵֽל  
-**Full verse (English)**: Let those who look to You,O Lord, GOD of hosts,not be disappointed on my account;let those who seek You,O God of Israel,not be shamed because of me.  
-
-*Hebrew phrase*: קֹוֶיךָ  
-*Explanation*: The physical act of 'looking' or 'waiting expectantly' is used metaphorically to represent the spiritual act of placing one's trust, hope, and reliance in God....  
-*Target*: spiritual reliance → trust in God → faith  
-*Vehicle*: physical looking → expectant waiting → physical action  
-*Ground*: dependence → anticipation → hope  
-*Confidence*: 0.95  
-
-**Psalms 71:5** (metaphor) - confidence: 1.00  
-*Figurative phrase*: For You are my hope  
-
-**Full verse (Hebrew)**: כִּֽי־אַתָּ֥ה תִקְוָתִ֑י אֲדֹנָ֥י יֱ֝הֹוִ֗ה מִבְטַחִ֥י מִנְּעוּרָֽי  
-**Full verse (English)**: For You are my hope,O Lord GOD,my trust from my youth.  
-
-*Hebrew phrase*: כִּֽי־אַתָּ֥ה תִקְוָתִ֑י  
-*Explanation*: God, a divine being, is directly equated with 'hope,' an abstract concept, signifying that God is the sole source and embodiment of the speaker's hope. This is a cross-domain comparison....  
-*Target*: God → divine being → spiritual entity  
-*Vehicle*: hope → abstract concept → positive expectation  
-*Ground*: source of expectation → foundation of desire → reliability  
-*Confidence*: 1.00  
-
-**Psalms 119:6** (metaphor) - confidence: 0.90  
-*Figurative phrase*: when I regard all Your commandments  
-
-**Full verse (Hebrew)**: אָ֥ז לֹא־אֵב֑וֹשׁ בְּ֝הַבִּיטִ֗י אֶל־כׇּל־מִצְוֺתֶֽיךָ  
-**Full verse (English)**: then I would not be ashamedwhen I regard all Your commandments.  
-
-*Hebrew phrase*: בְּ֝הַבִּיטִ֗י אֶל־כׇּל־מִצְוֺתֶֽיךָ  
-*Explanation*: The physical act of 'looking at' or 'gazing upon' (from the root נבט) is used metaphorically to describe the mental and spiritual act of focusing on, considering, and aligning one's life with God's co...  
-*Target*: psalmist's attention to God's commandments → spiritual focus, moral alignment → cognition, religious practice  
-*Vehicle*: looking at, gazing upon → physical sight, visual perception → sensory experience  
-*Ground*: focused attention, unwavering direction → concentration, guidance → behavioral orientation  
-*Confidence*: 0.90  
-
-**Psalms 123:2** (idiom, metonymy) - confidence: 0.90  
-*Figurative phrase*: our eyes are toward the LORD our God  
-
-**Full verse (Hebrew)**: הִנֵּ֨ה כְעֵינֵ֪י עֲבָדִ֡ים אֶל־יַ֤ד אֲֽדוֹנֵיהֶ֗ם כְּעֵינֵ֣י שִׁפְחָה֮ אֶל־יַ֢ד גְּבִ֫רְתָּ֥הּ כֵּ֣ן עֵ֭ינֵינוּ אֶל־יְהֹוָ֣ה אֱלֹהֵ֑ינוּ עַ֝֗ד שֶׁיְּחׇנֵּֽנוּ  
-**Full verse (English)**: As the eyes of slaves follow their master’s hand,as the eyes of a slave-girl follow the hand of her mistress,so our eyes are toward the LORD our God,awaiting His favor.  
-
-*Hebrew phrase*: עֵ֭ינֵינוּ אֶל־יְהֹוָ֣ה אֱלֹהֵ֑ינוּ  
-*Explanation*: This phrase functions as both a metonymy (synecdoche) and an idiom. 'Our eyes' represents the full attention, hope, and dependence of the people, and 'eyes toward X' is a common biblical idiom for loo...  
-*Target*: Israelites' hope and dependence → spiritual focus → reliance on God  
-*Vehicle*: physical eyes looking → human sensory organ → bodily action  
-*Ground*: attentive expectation → seeking divine favor → submissive waiting  
-*Confidence*: 0.90  
-
-**Psalms 141:8** (metaphor, idiom, metonymy) - confidence: 0.95  
-*Figurative phrase*: My eyes are fixed upon You, O GOD my Lord  
-
-**Full verse (Hebrew)**: כִּ֤י אֵלֶ֨יךָ&thinsp;׀ יֱהֹוִ֣ה אֲדֹנָ֣י עֵינָ֑י בְּכָ֥ה חָ֝סִ֗יתִי אַל־תְּעַ֥ר נַפְשִֽׁי  
-**Full verse (English)**: My eyes are fixed upon You, O GOD my Lord;I seek refuge in You, do not put me in jeopardy.  
-
-*Hebrew phrase*: אֵלֶ֨יךָ&thinsp;׀ יֱהֹוִ֣ה אֲדֹנָ֣י עֵינָ֑י  
-*Explanation*: The physical act of 'fixing eyes' is a metonymy (synecdoche) where the part (eyes) represents the whole person's intense focus, hope, and dependence. It functions metaphorically as a spiritual orienta...  
-*Target*: speaker's spiritual focus → human attention/hope → spiritual orientation  
-*Vehicle*: physical eyes looking → bodily action → sensory perception  
-*Ground*: intense focus → dependence → hope  
-*Confidence*: 0.95  
+**Usage breakdown**: guarding (3x), physical eyes looking (2x), those who wait/look (1x)
 
 ---
 
-### Query 6
-**Filters**: Vehicle contains: open hand  
-**Results**: 26  
+### Query 7
+**Filters**: Vehicle contains: opening  
+**Results**: 32  
 
-**Core pattern**: open hand metaphor (3/26 instances, 11%)
+**Core pattern**: open hand metaphor (3/32 instances, 9%)
 
 **Top 3 Most Relevant** (by confidence):
 1. ⭐ **Exodus 14:9** (confidence: 1.00) - The phrase עַל־פִּי (al-pi), literally 'upon the mouth of,' is a common biblical idiom used to denot...
 2. ⭐ **Exodus 39:23** (confidence: 1.00) - The opening of the robe is explicitly compared to the opening of a coat of mail using the comparativ...
 3. ⭐ **Psalms 5:10** (confidence: 1.00) - This is a powerful metaphor comparing the throat of the wicked, representing their speech, to an ope...
 
-#### All Instances (26 total):
+#### All Instances (32 total):
 
 **Deuteronomy 11:9** (idiom) - confidence: 0.90  
 *Figurative phrase*: long endure  
@@ -1118,6 +1468,19 @@ Matched: *קָר֣וֹב* (position 0)
 *Ground*: unrestricted giving → readiness to help → benevolence  
 *Confidence*: 0.95  
 
+**Exodus 7:5** (idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: when I stretch out My hand  
+
+**Full verse (Hebrew)**: וְיָדְע֤וּ מִצְרַ֙יִם֙ כִּֽי־אֲנִ֣י יְהֹוָ֔ה בִּנְטֹתִ֥י אֶת־יָדִ֖י עַל־מִצְרָ֑יִם וְהוֹצֵאתִ֥י אֶת־בְּנֵֽי־יִשְׂרָאֵ֖ל מִתּוֹכָֽם  
+**Full verse (English)**: And the Egyptians shall know that I am יהוה, when I stretch out My hand over Egypt and bring out the Israelites from their midst.”  
+
+*Hebrew phrase*: בִּנְטֹתִ֥י אֶת־יָדִ֖י  
+*Explanation*: The 'hand of God' is a common biblical idiom and metonymy (synecdoche) representing God's active power, intervention, and judgment, rather than a literal physical appendage. The action of 'stretching ...  
+*Target*: God's active power → divine intervention → God's attributes  
+*Vehicle*: human hand stretching → physical body part → instrument of action  
+*Ground*: exertion of power → active involvement → demonstration of authority  
+*Confidence*: 0.90  
+
 **Exodus 14:9** (idiom) - confidence: 1.00  
 *Figurative phrase*: near Pi-hahiroth  
 
@@ -1130,6 +1493,32 @@ Matched: *קָר֣וֹב* (position 0)
 *Vehicle*: mouth of a body → body part → physical opening  
 *Ground*: proximity → entrance → boundary  
 *Confidence*: 1.00  
+
+**Exodus 22:7** (idiom) - confidence: 0.95  
+*Figurative phrase*: laying hands  
+
+**Full verse (Hebrew)**: אִם־לֹ֤א יִמָּצֵא֙ הַגַּנָּ֔ב וְנִקְרַ֥ב בַּֽעַל־הַבַּ֖יִת אֶל־הָֽאֱלֹהִ֑ים אִם־לֹ֥א שָׁלַ֛ח יָד֖וֹ בִּמְלֶ֥אכֶת רֵעֵֽהוּ  
+**Full verse (English)**: if the thief is not caught, the owner of the house shall depose before God*before God See note at 21.6. and deny laying hands on the other’s property.  
+
+*Hebrew phrase*: שָׁלַ֛ח יָד֖וֹ  
+*Explanation*: This is a common biblical idiom meaning 'to take,' 'to seize,' 'to appropriate,' or 'to harm,' rather than merely the physical act of placing a hand....  
+*Target*: appropriation → theft → harm  
+*Vehicle*: stretching out hand → physical contact → action  
+*Ground*: possession → control → agency  
+*Confidence*: 0.95  
+
+**Exodus 22:10** (idiom) - confidence: 0.90  
+*Figurative phrase*: laid hands on  
+
+**Full verse (Hebrew)**: שְׁבֻעַ֣ת יְהֹוָ֗ה תִּהְיֶה֙ בֵּ֣ין שְׁנֵיהֶ֔ם אִם־לֹ֥א שָׁלַ֛ח יָד֖וֹ בִּמְלֶ֣אכֶת רֵעֵ֑הוּ וְלָקַ֥ח בְּעָלָ֖יו וְלֹ֥א יְשַׁלֵּֽם  
+**Full verse (English)**: an oath before יהוה shall decide between the two of them that the one has not laid hands on the property of the other; the owner must acquiesce, and no restitution shall be made.  
+
+*Hebrew phrase*: שָׁלַ֛ח יָד֖וֹ  
+*Explanation*: The phrase 'שָׁלַח יָד' (shalach yad) is a common idiom in biblical Hebrew meaning 'to harm,' 'to steal,' or 'to take possession of,' rather than a literal stretching out of the hand....  
+*Target*: act of taking property → theft → unlawful action  
+*Vehicle*: stretching out a hand → physical action → bodily movement  
+*Ground*: physical engagement → direct involvement → action  
+*Confidence*: 0.90  
 
 **Exodus 28:32** (metaphor) - confidence: 0.95  
 *Figurative phrase*: opening for the head  
@@ -1170,48 +1559,9 @@ Matched: *קָר֣וֹב* (position 0)
 *Ground*: structural strength → durability → design feature  
 *Confidence*: 1.00  
 
-**Genesis 3:7** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: Then the eyes of both of them were opened  
+*...and 22 more instances*
 
-**Full verse (Hebrew)**: וַתִּפָּקַ֙חְנָה֙ עֵינֵ֣י שְׁנֵיהֶ֔ם וַיֵּ֣דְע֔וּ כִּ֥י עֵֽירֻמִּ֖ם הֵ֑ם וַֽיִּתְפְּרוּ֙ עֲלֵ֣ה תְאֵנָ֔ה וַיַּעֲשׂ֥וּ לָהֶ֖ם חֲגֹרֹֽת  
-**Full verse (English)**: Then the eyes of both of them were opened and they perceived that they were naked; and they sewed together fig leaves and made themselves loincloths.  
-
-*Hebrew phrase*: וַתִּפָּקַ֙חְנָה֙ עֵינֵ֣י שְׁנֵיהֶ֔ם  
-*Explanation*: The phrase 'eyes were opened' is an idiom functioning as a metaphor. Adam and Eve were already physically seeing. The 'opening' refers to gaining a new moral or cognitive awareness, specifically perce...  
-*Target*: Moral awareness of nakedness → Cognitive insight, Spiritual understanding → Human perception, Knowledge acquisition  
-*Vehicle*: Physical opening of eyes → Sensory perception, Bodily action → Physical phenomena, Human physiology  
-*Ground*: Shift in perception, Acquisition of knowledge → Cognitive change, Epistemological shift → Transformation, Revelation  
-*Confidence*: 0.90  
-
-**Genesis 3:5** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: your eyes will be opened  
-
-**Full verse (Hebrew)**: כִּ֚י יֹדֵ֣עַ אֱלֹהִ֔ים כִּ֗י בְּיוֹם֙ אֲכׇלְכֶ֣ם מִמֶּ֔נּוּ וְנִפְקְח֖וּ עֵֽינֵיכֶ֑ם וִהְיִיתֶם֙ כֵּֽאלֹהִ֔ים יֹדְעֵ֖י ט֥וֹב וָרָֽע  
-**Full verse (English)**: but God knows that as soon as you eat of it your eyes will be opened and you will be like divine beings who know*divine beings who know Others “God, who knows.” good and bad.”  
-
-*Hebrew phrase*: וְנִפְקְח֖וּ עֵֽינֵיכֶ֑ם  
-*Explanation*: This is an idiom and a metaphor where the physical act of 'opening eyes' serves as a vehicle for gaining intellectual or moral understanding and awareness, particularly in the context of knowing good ...  
-*Target*: gaining moral insight → cognitive awakening → human understanding  
-*Vehicle*: physical eye opening → sensory perception → bodily function  
-*Ground*: new awareness → perception of reality → expanded knowledge  
-*Confidence*: 0.90  
-
-**Genesis 21:19** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: God opened her eyes  
-
-**Full verse (Hebrew)**: וַיִּפְקַ֤ח אֱלֹהִים֙ אֶת־עֵינֶ֔יהָ וַתֵּ֖רֶא בְּאֵ֣ר מָ֑יִם וַתֵּ֜לֶךְ וַתְּמַלֵּ֤א אֶת־הַחֵ֙מֶת֙ מַ֔יִם וַתַּ֖שְׁקְ אֶת־הַנָּֽעַר  
-**Full verse (English)**: Then God opened her eyes and she saw a well of water. She went and filled the skin with water, and let the boy drink.  
-
-*Hebrew phrase*: וַיִּפְקַ֤ח אֱלֹהִים֙ אֶת־עֵינֶ֔יהָ  
-*Explanation*: This is an idiom meaning God enabled Hagar to perceive or understand something she previously could not, using the physical act of opening eyes as a metaphor for granting insight or revelation....  
-*Target*: Hagar's perception of the well → human understanding → cognitive awareness  
-*Vehicle*: physical eye opening → physical sight → bodily function  
-*Ground*: enabling perception → granting insight → revealing hidden truth  
-*Confidence*: 0.90  
-
-*...and 16 more instances*
-
-**Usage breakdown**: open hand (3x), mouth (2x), coat of mail opening (2x)
+**Usage breakdown**: open hand (3x), stretching out a hand (2x), mouth (2x)
 
 ---
 
@@ -1241,7 +1591,7 @@ Matched: *קָר֣וֹב* (position 0)
 Classical interpretations from traditional Jewish commentators on key verses.
 
 ### Psalms 145:1
-**Why this verse**: Rare tehillah superscription - how do commentators explain its uniqueness and relationship to standard praise terminology?  
+**Why this verse**: Opening invocation with rare tehillah marker - how commentators frame psalm's unique genre  
 
 #### Ibn Ezra
 **Hebrew**: תהלה לדוד ארוממך - בדבור ובאמונת הלב. | והזכיר המלך – כי הוא המלך באמת וזהו יסוד כל התהלה הזאת. | ואברכה שמך - להוסיף על רוממותיך. והנה הטעם שאדבר שאתה מרומם.  
@@ -1276,7 +1626,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:2
-**Why this verse**: Daily blessing vow - traditional interpretation of perpetual praise obligation and spiritual discipline  
+**Why this verse**: Daily blessing commitment - traditional understanding of perpetual praise obligation  
 
 #### Ibn Ezra
 **Hebrew**: בכל יום - יום אחר יום אברכה שמך עד שאהיה מהמהללים תמיד, שמעלתם גדולה מהמברכים.  
@@ -1306,7 +1656,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:3
-**Why this verse**: Divine incomprehensibility - classical understanding of 'no searching' and relationship to Job parallels  
+**Why this verse**: Divine unfathomability paradox - classical interpretation of knowable yet unknowable God  
 
 #### Ibn Ezra
 **Hebrew**: גדול - בעבור שהזכיר ואהללה שמך הזכיר, כי השם גדול מהמהללו, על כן: ומהולל מאד יותר ממהללו ובעבור שאמר שהוא גדול הזכיר כי לגדולתו אין חקר כי כל מלך בלתו, יש לגדולתו ראשית ואחרית ולגדולתו אינו כן.  
@@ -1336,7 +1686,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:4
-**Why this verse**: Intergenerational praise - how commentators interpret transmission of divine knowledge across generations  
+**Why this verse**: Generational transmission theme - how commentators explain praise pedagogy  
 
 #### Rashi
 **Hebrew**: דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ. וְגַם אֲנִי הֲדַר כְּבוֹד הוֹדְךָ אָשִׂיחָה:  
@@ -1373,7 +1723,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:5
-**Why this verse**: Triple glory accumulation - traditional parsing of hadar/kevod/hod distinctions and poetic intensification  
+**Why this verse**: Triple glory vocabulary accumulation - traditional understanding of poetic intensification  
 
 #### Ibn Ezra
 **Hebrew**: הדר - הדורות יגידו גבורותיך הנראות ואני אשיחנו עם לבבי. | הדר כבוד הודך - עקרי כבוד גבורותיך הנראות, גם דברי נפלאותיך שלא יבינום הדורות.  
@@ -1398,7 +1748,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:6
-**Why this verse**: Ketiv/qere variation - how commentators handle textual uncertainty and awesome deeds language  
+**Why this verse**: Community/individual voice interplay - classical interpretation of testimonial dialogue  
 
 #### Rashi
 **Hebrew**: וְעֱזוּז נוֹרְאוֹתֶיךָ יֹאמֵרוּ. וְגַם אֲנִי גְּדֻלָּתְךָ אֲסַפְּרֶנָּה:  
@@ -1435,7 +1785,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:7
-**Why this verse**: Liquid praise metaphor - classical interpretation of 'pour forth' and relationship between memory and celebration  
+**Why this verse**: Liquid overflow metaphor for memory - traditional understanding of praise as natural response  
 
 #### Rashi
 **Hebrew**: זֵכֶר רַב טוּבְךָ יַבִּיעוּ. דּוֹר לְדוֹר גְּבוּרָתְךָ יְדַבֵּרוּ זֶה לָזֶה לֵאמֹר: טוֹב לָנוּ לְהוֹדִיעַ לִבְנֵי הָאָדָם גְּבוּרוֹתָיו וּכְבוֹד הֲדַר מַלְכוּתוֹ שֶׁל הַקָּדוֹשׁ בָּרוּךְ הוּא (מצאתי):  
@@ -1472,7 +1822,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:8
-**Why this verse**: Exodus 34 quotation - why insert systematic theology here and how it functions as psalm's pivot  
+**Why this verse**: Covenant formula in praise context - how commentators explain theological placement  
 
 #### Ibn Ezra
 **Hebrew**: חנון - להושיע המשוע אליו. | ורחום – לשמור עבדו שלא יכשל.  
@@ -1502,7 +1852,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:9
-**Why this verse**: Universal divine goodness - traditional reconciliation with particular divine judgment themes  
+**Why this verse**: Universal divine goodness - traditional reconciliation with covenant particularity  
 
 #### Ibn Ezra
 **Hebrew**: טוב - וכל מלך לא יתכן להיותו טוב רק לאנשים מעט והשם לבדו טוב לכל גם המלך לא יתכן לרחם רק על עבדיו הנאהבים, והשם לבדו רחמיו על כל מעשיו.  
@@ -1530,7 +1880,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:10
-**Why this verse**: Creation vs faithful distinction - how commentators explain different praise verbs for different communities  
+**Why this verse**: Creation giving thanks - classical interpretation of cosmic consciousness  
 
 #### Ibn Ezra
 **Hebrew**: יודוך - הנה כל מעשיך יודוך, כי כן אתה וחסידיך יוסיפו להודות לך.  
@@ -1560,7 +1910,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:11
-**Why this verse**: Royal vocabulary intensification - classical understanding of divine kingship and speech act emphasis  
+**Why this verse**: Royal terminology introduction - traditional understanding of kingship theology  
 
 #### Ibn Ezra
 **Hebrew**: כבוד - ומה היא ברכת חסידיך? שילמדו כבוד מלכותך, לאשר לא ידעוך.  
@@ -1585,7 +1935,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:12
-**Why this verse**: Missionary dimension - traditional interpretation of human proclamation role and person shift  
+**Why this verse**: Pedagogical function of praise - how commentators explain teaching through worship  
 
 #### Ibn Ezra
 **Hebrew**: להודיע לבני האדם - שהם קטנים. | וי"ו גבורותיו - שב אל כבוד מלכותך יאמרו ואין טענה איך סמך כבוד הדר מלכותו לכבוד מלכותך, כי הנה כמוהו: עד מלך מלכות פרס ותקנו קדמונינו בתפלה: וימליך מלכותיה. גם כן הכתוב: ומלכותו בכל משלה.  
@@ -1615,7 +1965,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:13
-**Why this verse**: Ugaritic parallel and LXX addition - how classical commentators handle eternal kingship formula  
+**Why this verse**: Eternal kingship formula - classical interpretation of Ugaritic parallel appropriation  
 
 #### Ibn Ezra
 **Hebrew**: מלכותך - כל מלכות תפסק ומלכות השם עומדת לנצח.  
@@ -1645,7 +1995,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:14
-**Why this verse**: Cosmic to personal shift - traditional understanding of divine kingship through concrete care  
+**Why this verse**: Divine care for vulnerable - traditional understanding of royal responsibility  
 
 #### Rashi
 **Hebrew**: נוּ״ן חֲסֵרָה מֵאָלְפָ״א בֵּיתָ״א, לְפִי שֶׁרָאָה דָּוִד בָּהּ מַפָּלָה קָשָׁה: ״נָפְלָה וְלֹא תוֹסִיף קוּם בְּתוּלַת יִשְׂרָאֵל״ (עמוס ה:ב), וְחָזַר וּסְמָכָהּ בְּרוּחַ הַקֹּדֶשׁ: סוֹמֵךְ ה׳ לְכָל הַנּוֹפְלִים (ברכות ד:):  
@@ -1687,7 +2037,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:15
-**Why this verse**: Universal dependence imagery - classical interpretation of eye metaphor and divine timing  
+**Why this verse**: Universal expectant gaze - classical interpretation of creation's dependence  
 
 #### Ibn Ezra
 **Hebrew**: עיני - עם מדינות המלך מפרנסים המלך והשם לבדו מפרנס הכל, לתת לכל אחד מהם מאכלו בעתו.  
@@ -1722,7 +2072,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:16
-**Why this verse**: Divine generosity - traditional understanding of open hand gesture and satisfaction language  
+**Why this verse**: Open hand provision imagery - traditional understanding of divine generosity  
 
 #### Rashi
 **Hebrew**: וּמַשְׂבִּיעַ לְכָל חַי רָצוֹן. כְּדֵי פַרְנָסָתוֹ הוּא מַשְׂבִּיעַ אֶת טוּבוֹ וְאֶת רְצוֹנוֹ וְאֶת בִּרְכָתוֹ. רָצוֹן אפיימנ״ט בְּלַעַ״ז:  
@@ -1766,7 +2116,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:17
-**Why this verse**: Character summary - how commentators distinguish divine ways vs works and universal righteousness  
+**Why this verse**: Double universalism in divine character - how commentators explain comprehensive righteousness  
 
 #### Ibn Ezra
 **Hebrew**: צדיק - אם טען טוען למה יאכיל אחד חטה ואחד שעורים? והנה התשובה: כי הוא יודע הטוב להם כי הוא בראם וידע תולדתם, כמו הרופא המצוה שיאכל כל אדם מה שהוא טוב לו. ועוד: כי השם כל מה שיתן בדרך חסד הוא, כי איננו חיוב עליו על כן: וחסיד.  
@@ -1801,7 +2151,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:18
-**Why this verse**: Qualified universalism - traditional interpretation of 'in truth' condition and divine nearness  
+**Why this verse**: Divine accessibility paradox - classical interpretation of transcendent yet near God  
 
 #### Ibn Ezra
 **Hebrew**: קרוב - אם המלך יהיה רחוק לא יכול להושיע קוראיו והשם לעולם קרוב הוא, רק לאשר יקראוהו באמת ולא לנסותו ואשר איננו ראוי להושיעו.  
@@ -1833,7 +2183,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:19
-**Why this verse**: Sequential divine response - classical understanding of desire-to-deliverance progression and fear-reverence  
+**Why this verse**: Fear and intimacy tension - traditional reconciliation of reverence with access  
 
 #### Ibn Ezra
 **Hebrew**: רצון - הירא מהמלך יספיק שלא יעשה לו רע, והשם יעשה רצון יראיו.  
@@ -1853,7 +2203,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:20
-**Why this verse**: Moral dualism - how commentators reconcile protection/destruction with universal mercy theme  
+**Why this verse**: Justice/mercy tension - how commentators reconcile universal goodness with selective judgment  
 
 #### Ibn Ezra
 **Hebrew**: שומר - אם באה צרה ליריאיו יושיעם, רק אוהביו הוא ישמור אותם לא תבא להם רעה. | ואת כל הרשעים ישמיד - באחרונה, כי סופם הוא לאבדון והמלך לא יוכל להשמיד רשעי ארצו אולי יקשרו עליו, על כן יפחד או לא יכירם כי לא ידע הנסתרות והשלים כאשר החל.  
@@ -1873,7 +2223,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 145:21
-**Why this verse**: Inclusio completion - traditional understanding of individual-to-cosmic praise trajectory and 'all flesh' terminology  
+**Why this verse**: Inclusio completion and universal expansion - classical interpretation of personal-to-cosmic movement  
 
 #### Rashi
 **Hebrew**: תְּהִלַּת ה׳ יְדַבֶּר פִּי. וְגַם כָּל בָּשָׂר יְבָרֵךְ אֶת שֵׁם קָדְשׁוֹ לְעוֹלָם וָעֶד:  
@@ -1916,10 +2266,10 @@ Classical interpretations from traditional Jewish commentators on key verses.
 
 ## Research Summary
 
-- **Lexicon entries**: 23
-- **Concordance searches**: 7
-- **Concordance results**: 9
-- **Figurative language searches**: 6
-- **Figurative instances found**: 176
+- **Lexicon entries**: 39
+- **Concordance searches**: 8
+- **Concordance results**: 17
+- **Figurative language searches**: 7
+- **Figurative instances found**: 255
 - **Commentary verses**: 21
 - **Commentary entries**: 111

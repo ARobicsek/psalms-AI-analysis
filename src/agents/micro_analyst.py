@@ -658,8 +658,8 @@ class MicroAnalystV2:
         return "\n".join(lines)
 
     def _get_phonetic_transcriptions(self, psalm_number: int) -> Dict[int, str]:
-        """Get phonetic transcription for each verse of the psalm."""
-        self.logger.info("  Generating phonetic transcriptions...")
+        """Get phonetic transcription for each verse of the psalm with stress marking."""
+        self.logger.info("  Generating phonetic transcriptions with stress marking...")
         psalm = self.db.get_psalm(psalm_number)
         if not psalm:
             self.logger.error(f"Could not retrieve psalm {psalm_number} for phonetic transcription.")
@@ -671,17 +671,18 @@ class MicroAnalystV2:
                 # Call the phonetic analyst to get the detailed transcription
                 analysis = self.phonetic_analyst.transcribe_verse(verse.hebrew)
 
-                # Join the syllabified transcriptions into a single string for the prompt
-                # Use 'syllable_transcription' which includes syllable boundaries (e.g., "tə-hil-lāh")
-                transcribed_words = [word['syllable_transcription'] for word in analysis['words']]
+                # Join the syllabified transcriptions WITH STRESS MARKING into a single string
+                # Use 'syllable_transcription_stressed' which shows stressed syllables in **BOLD CAPS**
+                # Example: "tə-**HIL**-lāh lə-dhā-**WIDH**"
+                transcribed_words = [word['syllable_transcription_stressed'] for word in analysis['words']]
                 verse_transcription = " ".join(transcribed_words)
-                
+
                 phonetic_data[verse.verse] = verse_transcription
             except Exception as e:
                 self.logger.error(f"Error transcribing verse {verse.verse}: {e}")
                 phonetic_data[verse.verse] = "[Transcription Error]"
 
-        self.logger.info("  ✓ Phonetic transcriptions generated.")
+        self.logger.info("  ✓ Phonetic transcriptions with stress marking generated.")
         return phonetic_data
 
 

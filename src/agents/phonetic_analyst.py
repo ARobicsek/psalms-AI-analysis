@@ -40,6 +40,39 @@ class PhoneticAnalyst:
         self.begadkefat_soft = {
             'ב': 'v', 'ג': 'gh', 'ד': 'dh', 'כ': 'kh', 'פ': 'f', 'ת': 'th'
         }
+        # Cantillation marks with stress levels
+        self.cantillation_stress = {
+            # Primary stress (level 2) - major disjunctive accents
+            '\u05BD': 2,  # Silluq/Meteg
+            '\u0591': 2,  # Atnah
+            '\u0594': 2,  # Zaqef Qaton
+            '\u0595': 2,  # Zaqef Gadol
+            '\u0596': 2,  # Tifcha
+            '\u0597': 2,  # R'vi'i (Revia)
+            '\u0598': 2,  # Zarqa
+            '\u0599': 2,  # Pashta
+            '\u059A': 2,  # Yetiv
+            '\u059B': 2,  # Tevir
+            '\u05A0': 2,  # Telisha Gedola
+            '\u05A9': 2,  # Telisha Qetana
+            '\u0593': 2,  # Shalshelet
+            '\u059C': 2,  # Geresh
+            '\u059D': 2,  # Geresh Muqdam
+            '\u059E': 2,  # Gershayim
+
+            # Secondary stress (level 1) - conjunctive accents
+            # Note: Dehi (֭ U+05AD) NOT included - it's a conjunctive accent that
+            # doesn't mark lexical stress (e.g., הָ֭אָדָם has stress on final syllable)
+            '\u05A3': 1,  # Munach
+            '\u05A4': 1,  # Mahpakh
+            '\u05A5': 1,  # Mercha
+            '\u05A8': 1,  # Qadma
+            '\u05AB': 1,  # Ole
+            '\u05A1': 1,  # Pazer
+            '\u05A7': 1,  # Darga
+            '\u05AA': 1,  # Galgal
+            '\u05AC': 1,  # Iluy
+        }
         # Unicode characters
         self.dagesh = '\u05BC'
         self.shin_dot = '\u05C1'
@@ -76,10 +109,22 @@ class PhoneticAnalyst:
         """
         Transcribes a single Hebrew word.
         This is a complex process involving context-sensitive rules.
+        Now includes stress detection from cantillation marks.
+
+        When multiple cantillation marks are present, the LAST (rightmost) one
+        typically indicates the actual stress position.
+
+        Maqqef compounds (word1־word2) are handled specially: each component
+        gets its own stress, since they are separate phonological words.
         """
+        # Check for maqqef compounds
+        if '־' in hebrew_word:
+            return self._transcribe_maqqef_compound(hebrew_word)
         phonemes = []
         transcription = []
-        
+        stressed_phoneme_index = None  # Track which phoneme position has stress
+        stress_level = 0  # 0=unstressed, 1=secondary, 2=primary
+
         chars = list(hebrew_word)
         i = 0
         while i < len(chars):
@@ -87,12 +132,28 @@ class PhoneticAnalyst:
             
             # --- Consonant Logic ---
             if char in self.consonant_map:
-                # Look ahead for dagesh, shin/sin dots, and vowels
+                # Look ahead for dagesh, shin/sin dots, vowels, and cantillation marks
                 j = i + 1
                 modifiers = []
+                has_cantillation = False
+                cantillation_level = 0
+
                 while j < len(chars) and unicodedata.category(chars[j]) == 'Mn':
                     modifiers.append(chars[j])
+                    # Check for cantillation marks (stress indicators)
+                    if chars[j] in self.cantillation_stress:
+                        has_cantillation = True
+                        # If multiple cantillation marks, use the highest level
+                        cantillation_level = max(cantillation_level, self.cantillation_stress[chars[j]])
                     j += 1
+
+                # If this consonant has a cantillation mark, it marks the stressed syllable
+                # We'll mark the VOWEL following this consonant as stressed (since stress is on the syllable)
+                # When multiple marks present, prefer rightmost (later in word) with same or higher level
+                if has_cantillation and cantillation_level >= stress_level:
+                    # Mark the position where we'll add the vowel (current phoneme count + 1 for consonant + 1 for vowel)
+                    stressed_phoneme_index = len(phonemes) + 1  # Will point to the vowel
+                    stress_level = cantillation_level
 
                 # === EXISTING: Check if vav is serving as mater lectionis ===
                 if char == 'ו':
@@ -199,12 +260,94 @@ class PhoneticAnalyst:
         syllables = self._syllabify(phonemes)
         syllable_string = self._format_syllables(syllables)
 
+        # Determine which syllable is stressed based on stressed_phoneme_index
+        stressed_syllable_index = None
+        if stressed_phoneme_index is not None:
+            stressed_syllable_index = self._find_syllable_for_phoneme(syllables, stressed_phoneme_index)
+        elif len(syllables) > 0 and stress_level == 0:
+            # Default Hebrew stress rule: ultima (final syllable)
+            # Apply this ONLY when no cantillation mark was found
+            stressed_syllable_index = len(syllables) - 1
+            stress_level = 1  # Mark as implicit stress (not from cantillation)
+
+        # Format with stress marking
+        stressed_syllable_string = self._format_syllables_with_stress(syllables, stressed_syllable_index)
+
         return {
             "word": unicodedata.normalize('NFC', hebrew_word),
             "transcription": "".join(transcription),
             "syllables": syllables,  # List of syllables (each is list of phonemes)
             "syllable_transcription": syllable_string,  # Hyphenated string (e.g., "tə-hil-lāh")
+            "syllable_transcription_stressed": stressed_syllable_string,  # With stress marking
+            "stressed_syllable_index": stressed_syllable_index,  # Which syllable is stressed (0-indexed)
+            "stress_level": stress_level,  # 0=unstressed, 1=secondary, 2=primary
             "phonemes": phonemes
+        }
+
+    def _transcribe_maqqef_compound(self, hebrew_word: str) -> dict:
+        """
+        Transcribe a maqqef compound (e.g., לְכׇל־הַנֹּפְלִ֑ים).
+
+        Maqqef (־) creates ONE ACCENT DOMAIN. Only the LAST word in the domain
+        receives the main stress/accent mark. Earlier words are unstressed.
+
+        This matches Hebrew cantillation rules where maqqef-connected words
+        form a single prosodic unit with stress only on the final component.
+
+        Args:
+            hebrew_word: Hebrew word containing maqqef (־)
+
+        Returns:
+            Combined transcription with stress ONLY on the last component
+        """
+        # Split by maqqef
+        components = hebrew_word.split('־')
+
+        # Recursively transcribe each component (without maqqef)
+        component_results = []
+        all_syllables = []
+        last_component_stress_index = None  # Only track stress from LAST component
+        last_component_stress_level = 0
+
+        for i, component in enumerate(components):
+            if not component:  # Skip empty strings
+                continue
+
+            # Recursively call _transcribe_word (won't have maqqef anymore)
+            result = self._transcribe_word(component)
+            component_results.append(result)
+
+            # Track syllable positions
+            syllable_offset = len(all_syllables)
+            all_syllables.extend(result['syllables'])
+
+            # ONLY track stress from the LAST component (maqqef = one accent domain)
+            is_last_component = (i == len(components) - 1)
+            if is_last_component and result['stressed_syllable_index'] is not None:
+                last_component_stress_index = syllable_offset + result['stressed_syllable_index']
+                last_component_stress_level = result['stress_level']
+
+        # Combine transcriptions
+        combined_transcription = '-'.join([r.get('syllable_transcription', '') for r in component_results])
+
+        # Format with stress ONLY on last component
+        if last_component_stress_index is not None:
+            combined_stressed = self._format_syllables_with_stress(
+                all_syllables,
+                last_component_stress_index
+            )
+        else:
+            combined_stressed = combined_transcription
+
+        return {
+            "word": unicodedata.normalize('NFC', hebrew_word),
+            "transcription": combined_transcription.replace('-', ''),
+            "syllables": all_syllables,
+            "syllable_transcription": combined_transcription,
+            "syllable_transcription_stressed": combined_stressed,
+            "stressed_syllable_index": last_component_stress_index,  # Only last component
+            "stress_level": last_component_stress_level,
+            "phonemes": [p for syl in all_syllables for p in syl]  # Flatten
         }
 
     def _is_vocal_shewa(self, index, chars):
@@ -388,14 +531,77 @@ class PhoneticAnalyst:
     def _format_syllables(self, syllables: list) -> str:
         """
         Format syllables list into hyphen-separated string.
-        
+
         Args:
             syllables: List of syllables (each syllable is a list of phonemes)
-            
+
         Returns:
             Hyphen-separated string (e.g., "tə-hil-lāh")
         """
         syllable_strings = [''.join(syl) for syl in syllables]
+        return '-'.join(syllable_strings)
+
+    def _find_syllable_for_phoneme(self, syllables: list, phoneme_index: int) -> int:
+        """
+        Find which syllable contains the phoneme at the given index.
+
+        Args:
+            syllables: List of syllables (each syllable is a list of phonemes)
+            phoneme_index: Index into the flattened phoneme list
+
+        Returns:
+            Syllable index (0-based), or None if not found
+        """
+        current_pos = 0
+        for syl_idx, syllable in enumerate(syllables):
+            syllable_length = len(syllable)
+            if current_pos <= phoneme_index < current_pos + syllable_length:
+                return syl_idx
+            current_pos += syllable_length
+        return None
+
+    def _format_syllables_with_stress(self, syllables: list, stressed_syllable_index: int = None) -> str:
+        """
+        Format syllables with stress marking on the stressed syllable.
+
+        Args:
+            syllables: List of syllables (each syllable is a list of phonemes)
+            stressed_syllable_index: Index of the stressed syllable (0-based), or None for no stress
+
+        Returns:
+            Hyphenated string with stressed syllable in **BOLD CAPS** (e.g., "mal-**KHŪTH**-khā")
+        """
+        syllable_strings = []
+        for idx, syl in enumerate(syllables):
+            syl_text = ''.join(syl)
+            if idx == stressed_syllable_index:
+                # Mark stressed syllable with **BOLD CAPS**
+                syl_text = f"**{syl_text.upper()}**"
+            syllable_strings.append(syl_text)
+        return '-'.join(syllable_strings)
+
+    def _format_syllables_with_multiple_stresses(self, syllables: list, stressed_indices: list = None) -> str:
+        """
+        Format syllables with stress marking on MULTIPLE stressed syllables.
+        Used for maqqef compounds where each component has its own stress.
+
+        Args:
+            syllables: List of syllables (each syllable is a list of phonemes)
+            stressed_indices: List of stressed syllable indices (0-based), or None/empty for no stress
+
+        Returns:
+            Hyphenated string with stressed syllables in **BOLD CAPS** (e.g., "lə-**KHOL**-han-nō-fə-**LIY**-m")
+        """
+        if stressed_indices is None:
+            stressed_indices = []
+
+        syllable_strings = []
+        for idx, syl in enumerate(syllables):
+            syl_text = ''.join(syl)
+            if idx in stressed_indices:
+                # Mark stressed syllable with **BOLD CAPS**
+                syl_text = f"**{syl_text.upper()}**"
+            syllable_strings.append(syl_text)
         return '-'.join(syllable_strings)
 
 
