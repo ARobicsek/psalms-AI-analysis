@@ -1,3 +1,176 @@
+## 2025-10-23 - Phonetic Transcription Relocation (Session 16)
+
+### Session Started
+Evening - Reorganized Master Editor prompt to show phonetic transcriptions alongside verses in PSALM TEXT section.
+
+### Tasks Completed
+- ✅ **Critical Bug Fix**: Fixed incorrectly nested `_get_psalm_text` method (indentation error causing duplicate definition)
+- ✅ **Enhanced `_get_psalm_text`**: Added micro_analysis parameter to extract and include phonetic transcriptions from micro analysis JSON
+- ✅ **Removed Phonetics from MICRO DISCOVERIES**: Updated `_format_analysis_for_prompt` to exclude phonetic transcriptions from micro section
+- ✅ **Reorganized Prompt Structure**: Moved PSALM TEXT section to top of prompt (above MACRO THESIS)
+- ✅ **Updated Prompt References**: Changed all references from "MICRO DISCOVERIES" to "PSALM TEXT" for phonetic location
+- ✅ **Testing**: Validated `_get_psalm_text` method extracts and includes phonetics correctly
+
+### Key Learnings & Issues
+
+#### 1. Indentation Bug Causing Duplicate Method (#bug #python)
+**Problem**: The `_get_psalm_text` method was nested inside `_parse_editorial_response` method (line 532), creating a duplicate method definition error.
+**Root Cause**: Previous commit had incorrect indentation, nesting the method inside another method instead of at class level.
+**Solution**: Unindented the entire method by one level (4 spaces) to place it at the class level where it belongs.
+**Result**: Method now properly compiles and can be called by `edit_commentary` method.
+
+#### 2. Phonetic Data Flow in Master Editor (#enhancement #prompt-engineering)
+**Problem**: Phonetics were appearing in MICRO DISCOVERIES section far down in the prompt, making them less accessible when analyzing verses.
+**Analysis**:
+- Master Editor needs to reference phonetics when reviewing verse commentary
+- Having phonetics in MICRO section (after MACRO, RESEARCH, etc.) means scrolling back and forth
+- Phonetics belong with the verse text for immediate context
+**Solution**:
+1. Modified `_get_psalm_text` to accept `micro_analysis` parameter
+2. Extract phonetic transcriptions from `micro_analysis['verse_commentaries'][]['phonetic_transcription']`
+3. Include phonetics in formatted output alongside Hebrew, English, LXX
+4. Moved PSALM TEXT section to line 66 (top of prompt inputs)
+5. Removed phonetics from `_format_analysis_for_prompt` micro section
+**Result**: Master Editor sees Hebrew, phonetic, English, and LXX together at the top of the prompt for each verse.
+
+#### 3. Prompt Section Ordering Strategy (#pattern #prompt-engineering)
+**Discovery**: The order of prompt sections significantly impacts LLM attention and reference accessibility.
+
+**New Structure**:
+```
+1. PSALM TEXT (with phonetics) ← Most important reference material at top
+2. INTRODUCTION ESSAY          ← Current draft being reviewed
+3. VERSE COMMENTARY            ← Current draft being reviewed
+4. FULL RESEARCH BUNDLE        ← Supporting materials
+5. MACRO THESIS                ← Original analysis
+6. MICRO DISCOVERIES           ← Detailed observations (without phonetics)
+7. ANALYTICAL FRAMEWORK        ← Background methodology
+```
+
+**Rationale**:
+- Primary reference text (psalm with phonetics) immediately accessible
+- Drafts to review come next (introduction, verses)
+- Research materials available for fact-checking
+- Background analysis last (already synthesized into drafts)
+
+**Impact**: Reduces cognitive load on Master Editor by placing most-referenced material at top.
+
+### Decisions Made (#decision-log)
+
+#### Decision 1: Place Phonetics with Verse Text (Not in Micro Section)
+**Choice**: Include phonetics in PSALM TEXT section alongside Hebrew, English, LXX
+**Rationale**:
+- Phonetics are reference material, not analytical commentary
+- Master Editor needs to check phonetics when reviewing sound-pattern claims
+- Having all forms of the verse together (Hebrew/Phonetic/English/LXX) provides complete context
+- Avoids duplication across prompt sections
+- Matches the pattern used in other agents (synthesis_writer shows phonetics with verse)
+
+#### Decision 2: Move PSALM TEXT to Top of Prompt
+**Choice**: Relocate PSALM TEXT section from line 75 to line 66 (before MACRO THESIS)
+**Rationale**:
+- Most-referenced material should be most accessible
+- LLM attention strongest at beginning of prompt
+- Reduces scrolling/searching for verse context
+- Follows "primary sources first" documentation pattern
+- Aligns with how scholars work (consult source text frequently)
+
+#### Decision 3: Remove Phonetics from MICRO DISCOVERIES
+**Choice**: Stop outputting `**Phonetic**: ...` lines in `_format_analysis_for_prompt` micro section
+**Rationale**:
+- Avoids redundancy (phonetics already in PSALM TEXT)
+- Keeps MICRO section focused on analytical observations
+- Reduces prompt length (token efficiency)
+- Cleaner separation of concerns (reference vs. analysis)
+
+### Code Snippets & Patterns
+
+#### Pattern: Extracting Phonetics from Micro Analysis
+```python
+def _get_psalm_text(self, psalm_number: int, micro_analysis: Optional[Dict] = None) -> str:
+    """Retrieve psalm text from database and include phonetics."""
+    # Extract phonetic data from micro_analysis
+    phonetic_data = {}
+    if micro_analysis:
+        verses_data = micro_analysis.get('verse_commentaries', micro_analysis.get('verses', []))
+        for verse_data in verses_data:
+            verse_num = verse_data.get('verse_number', verse_data.get('verse', 0))
+            phonetic = verse_data.get('phonetic_transcription', '')
+            if verse_num and phonetic:
+                phonetic_data[verse_num] = phonetic
+
+    # Format with phonetics
+    for verse in psalm.verses:
+        v_num = verse.verse
+        lines.append(f"**Hebrew:** {verse.hebrew}")
+        if v_num in phonetic_data:
+            lines.append(f"**Phonetic**: `{phonetic_data[v_num]}`")
+        lines.append(f"**English:** {verse.english}")
+```
+
+#### Pattern: Prompt Section Reordering
+```python
+# OLD order (phonetics in MICRO, PSALM TEXT later)
+MASTER_EDITOR_PROMPT = """
+...
+### INTRODUCTION ESSAY (for review)
+{introduction_essay}
+
+### VERSE COMMENTARY (for review)
+{verse_commentary}
+
+### FULL RESEARCH BUNDLE
+{research_bundle}
+
+### PSALM TEXT (Hebrew, English, LXX)
+{psalm_text}
+
+### MACRO THESIS
+{macro_analysis}
+
+### MICRO DISCOVERIES (verse-level observations)
+{micro_analysis}  # Contains phonetics here
+...
+"""
+
+# NEW order (phonetics with PSALM TEXT at top)
+MASTER_EDITOR_PROMPT = """
+...
+### PSALM TEXT (Hebrew, English, LXX, and Phonetic)
+{psalm_text}  # Contains phonetics here
+
+### INTRODUCTION ESSAY (for review)
+{introduction_essay}
+
+### VERSE COMMENTARY (for review)
+{verse_commentary}
+
+### FULL RESEARCH BUNDLE
+{research_bundle}
+
+### MACRO THESIS
+{macro_analysis}
+
+### MICRO DISCOVERIES (verse-level observations)
+{micro_analysis}  # No longer contains phonetics
+...
+"""
+```
+
+### Performance Metrics
+- **Development time**: ~2 hours
+- **Files modified**: 1 (`src/agents/master_editor.py`)
+- **Lines changed**: 58 added, 58 removed
+- **Bug fixed**: Indentation error (duplicate method definition)
+- **Test validation**: `_get_psalm_text` successfully extracts and includes phonetics
+
+### Files Modified
+- `src/agents/master_editor.py`
+- `docs/NEXT_SESSION_PROMPT.md`
+- `docs/IMPLEMENTATION_LOG.md`
+
+---
+
 ## 2025-10-23 - Phonetic Transcription Data Flow Fix (Session 15)
 
 ### Session Started
