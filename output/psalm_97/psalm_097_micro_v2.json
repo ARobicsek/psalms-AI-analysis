@@ -1,0 +1,186 @@
+{
+  "psalm_number": 97,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "The opening 'YHWH malak' formula is striking - literally 'YHWH has become king' rather than 'YHWH is king.' The pairing of 'earth' with 'many islands' (אִיִּים רַבִּים) is geographically curious - why islands specifically? The LXX adds a Davidic superscription not in Hebrew.",
+      "lexical_insights": [
+        "מָלָךְ",
+        "אִיִּים רַבִּים"
+      ],
+      "figurative_analysis": [
+        "earth personified as celebrating subject"
+      ],
+      "thesis_connection": "Supports thesis on universal scope, but 'islands' suggests specific geographic vision",
+      "phonetic_transcription": "yə-hō-**WĀH** mā-lā-**KHƏ** tā-**GHĒL** hā-**'Ā**-rets yis-**MKHŪ** 'iy-**YIY**-m ra-**BIY**-m"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Theological paradox: God surrounded by 'dense clouds and thick darkness' (עָנָן וַעֲרָפֶל) yet His throne founded on 'righteousness and justice' (צֶדֶק וּמִשְׁפָּט). The word מְכוֹן (base/foundation) is architecturally precise. This creates tension between hiddenness and moral clarity.",
+      "lexical_insights": [
+        "עֲרָפֶל",
+        "מְכוֹן"
+      ],
+      "figurative_analysis": [
+        "throne with foundation - divine kingship as building"
+      ],
+      "thesis_connection": "Central to thesis paradox of divine hiddenness/moral clarity - mystery and ethics coexist",
+      "phonetic_transcription": "ʿā-**NĀN** wa-ʿa-rā-**FEL** sə-viy-**VĀY**-w **TSE**-dheq ū-mish-**PĀT** mə-**KHŌN** kis-**'Ō**"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Fire as divine 'vanguard' (לְפָנָיו תֵּלֵךְ) - military imagery with fire as advance scout. The verb תְלַהֵט (burning) suggests consuming flame. Fire 'walks' anthropomorphically before God like a herald or destroyer.",
+      "lexical_insights": [
+        "תֵּלֵךְ",
+        "תְלַהֵט"
+      ],
+      "figurative_analysis": [
+        "fire as divine herald/warrior",
+        "circular destruction (סָבִיב)"
+      ],
+      "thesis_connection": "Supports thesis on cosmic power display, but military imagery adds conquest dimension",
+      "phonetic_transcription": "**'ĒSH** lə-fā-**NĀY**-w tē-**LĒ**-khə ū-thə-la-**HĒT** sā-**VIY**-v tsā-**RĀY**-w"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Lightning 'illuminates' (הֵאִירוּ) the world - revelation through natural phenomena. Earth 'convulses' (וַתָּחֵל) suggests labor pains or trembling. The sequence sight→convulsion implies causation: seeing divine power causes cosmic reaction.",
+      "lexical_insights": [
+        "הֵאִירוּ",
+        "וַתָּחֵל"
+      ],
+      "figurative_analysis": [
+        "earth as sentient being responding to divine display"
+      ],
+      "thesis_connection": "Fits thesis on cosmic scope, but earth's reaction suggests vulnerability rather than celebration",
+      "phonetic_transcription": "hē-**'IY**-rū və-rā-**QĀY**-w tē-**VĒL** rā-'a-**THĀH** wa-tā-**KHĒL** hā-**'Ā**-rets"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Mountains 'melt like wax' (כַּדּוֹנַג נָמַסּוּ) - vivid simile of ultimate solidity becoming liquid. Double מִלִּפְנֵי (at the presence of) creates emphatic repetition. The progression YHWH → Lord of all earth escalates divine titles.",
+      "lexical_insights": [
+        "דּוֹנַג",
+        "מִלִּפְנֵי"
+      ],
+      "figurative_analysis": [
+        "mountains as wax - solidity/permanence dissolving"
+      ],
+      "thesis_connection": "Climaxes thesis on overwhelming cosmic power - even geological permanence fails",
+      "phonetic_transcription": "hā-**RIY**-m ka-dō-**NAGH** nā-mas-**SŪ** mil-lif-**NĒY** yə-hō-**WĀH** mil-lif-**NĒY** 'a-**DHŌN** kol-hā-**'Ā**-rets"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Heavens 'proclaim' (הִגִּידוּ) God's righteousness while peoples 'see' (וְרָאוּ) His glory - auditory vs. visual revelation. This verse completes the cosmic witness sequence. Universal scope: שָׁמַיִם and כׇל־הָעַמִּים.",
+      "lexical_insights": [
+        "הִגִּידוּ",
+        "כְּבוֹדוֹ"
+      ],
+      "figurative_analysis": [
+        "heavens as herald",
+        "glory as visible phenomenon"
+      ],
+      "thesis_connection": "Transitions thesis from power display to universal recognition - cosmic to human response",
+      "phonetic_transcription": "hi-**GIY**-dhū hash-shā-**MA**-yim tsidh-**QŌ** wə-rā-**'Ū** khol-hā-ʿam-**MIY**-m kə-vō-**DHŌ**"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Sharp contrast: idol worshippers 'are dismayed' (יֵבֹשׁוּ) while 'all divine beings' (כׇּל־אֱלֹהִים) bow to YHWH. The phrase הַמִּתְהַלְלִים בָּאֱלִילִים (who vaunt their idols) suggests boastful pride preceding shame. Divine beings bowing implies heavenly submission.",
+      "lexical_insights": [
+        "יֵבֹשׁוּ",
+        "הַמִּתְהַלְלִים",
+        "אֱלֹהִים"
+      ],
+      "figurative_analysis": [
+        "divine council scenario",
+        "idol boasting vs. divine prostration"
+      ],
+      "thesis_connection": "Pivotal for thesis - cosmic power creates moral categories, but divine beings complicate monotheism",
+      "phonetic_transcription": "yē-**VŌ**-shū  kol-**ʿŌ**-və-dhēy **FE**-sel ham-**MITH**-hal-liy-m bā-'e-liy-**LIY**-m hish-ta-kha-wū-**LŌ** kol-'e-lō-**HIY**-m"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Sudden shift to Zion and Judah's joy - geographic narrowing from cosmic to particular. The phrase 'Your judgments' (מִשְׁפָּטֶיךָ) echoes v.2's מִשְׁפָּט but now as divine activity rather than throne foundation. Direct address to YHWH begins.",
+      "lexical_insights": [
+        "מִשְׁפָּטֶיךָ",
+        "בְּנוֹת יְהוּדָה"
+      ],
+      "figurative_analysis": [
+        "daughter cities of Judah",
+        "hearing causing joy"
+      ],
+      "thesis_connection": "Confirms thesis movement from universal to particular, but raises election questions",
+      "phonetic_transcription": "shā-mə-**ʿĀH** wa-tis-**MAKH**  tsiy-**YŌN** wa-tā-ghē-lə-**NĀH** bə-**NŌTH** yə-hū-**DHĀH** lə-**MA**-ʿan mish-pā-**TEY**-khā yə-hō-**WĀH**"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Climactic theological assertion: YHWH is 'supreme' (עֶלְיוֹן) over earth and 'exalted high above' (נַעֲלֵיתָ) all divine beings. The emphatic מְאֹד strengthens the claim. This verse resolves v.7's divine beings question through hierarchical supremacy.",
+      "lexical_insights": [
+        "עֶלְיוֹן",
+        "נַעֲלֵיתָ",
+        "מְאֹד"
+      ],
+      "figurative_analysis": [
+        "vertical hierarchy imagery"
+      ],
+      "thesis_connection": "Resolves thesis tension about divine beings - acknowledges their existence but asserts YHWH's supremacy",
+      "phonetic_transcription": "kiy-'a-**TĀH** yə-hō-**WĀH** ʿel-**YŌN** ʿal-kol-hā-**'Ā**-rets mə-**'ŌDH** na-ʿa-**LĒY**-thā ʿal-kol-'e-lō-**HIY**-m"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Imperative 'hate evil!' (שִׂנְאוּ־רָע) directly addresses YHWH lovers - ethical demand following theological assertion. God 'guards' (שֹׁמֵר) His loyal ones (חֲסִידָיו) and 'saves' (יַצִּילֵם) from wicked hands. Personal protection follows cosmic display.",
+      "lexical_insights": [
+        "חֲסִידָיו",
+        "יַצִּילֵם"
+      ],
+      "figurative_analysis": [
+        "divine guardian imagery",
+        "hands of wicked"
+      ],
+      "thesis_connection": "Crucial for thesis - cosmic power translates to ethical demands and personal care",
+      "phonetic_transcription": "**'Ō**-ha-vēy yə-hō-**WĀH** sin-'ū-**RĀʿ** shō-**MĒR** naf-**SHŌTH** kha-siy-**DHĀY**-w miy-**YADH** rə-shā-**ʿIY**-m yats-tsiy-**LĒM**"
+    },
+    {
+      "verse_number": 11,
+      "commentary": "Mysterious agricultural metaphor: 'Light is sown' (אוֹר זָרֻעַ) for righteous. Light as seed planted for future harvest? The pairing צַדִּיק/יִשְׁרֵי־לֵב (righteous/upright of heart) suggests both external behavior and internal disposition.",
+      "lexical_insights": [
+        "זָרֻעַ",
+        "יִשְׁרֵי־לֵב"
+      ],
+      "figurative_analysis": [
+        "light as seed",
+        "heart uprightness"
+      ],
+      "thesis_connection": "Extends thesis ethics - divine kingship ensures righteous flourishing through mysterious provision",
+      "phonetic_transcription": "**'ŌR** zā-**RU**-ʿa lats-tsa-**DIY**-q ū-lə-yish-rēy-**LĒV** sim-**KHĀH**"
+    },
+    {
+      "verse_number": 12,
+      "commentary": "Concluding imperative parallels opening but narrows to 'righteous' rather than universal earth. 'Acclaim His holy name' (וְהוֹדוּ לְזֵכֶר קׇדְשׁוֹ) focuses on remembrance (זֵכֶר) of divine holiness. Creates inclusio with v.1 but particularizes the celebration.",
+      "lexical_insights": [
+        "וְהוֹדוּ",
+        "לְזֵכֶר קׇדְשׁוֹ"
+      ],
+      "figurative_analysis": [
+        "holy name as memorial"
+      ],
+      "thesis_connection": "Completes thesis arc - universal kingship creates particular righteous community with liturgical memory",
+      "phonetic_transcription": "sim-**KHŪ** tsa-diy-qiy-**M** bay-hō-**WĀH** wə-hō-**DHŪ** lə-**ZĒ**-kher qodh-**SHŌ** **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Cosmic-to-particular geographic progression: earth/islands → heavens/peoples → Zion/Judah → righteous community",
+    "Theological paradox threading: darkness/righteousness (v.2), power/protection (vv.3-6 vs. v.10), universal/particular (v.1 vs. v.12)",
+    "Triple divine title progression: YHWH → LORD of all earth → supreme/exalted one (vv.1,5,9)",
+    "Sensory sequence: visual lightning (v.4) → auditory heaven proclamation (v.6) → Zion hearing (v.8)",
+    "Tense shifts: perfect מָלָךְ (v.1) → imperfects for ongoing cosmic effects → perfect נַעֲלֵיתָ (v.9) for accomplished supremacy"
+  ],
+  "interesting_questions": [
+    "Why does the psalm specify 'many islands' (אִיִּים רַבִּים) rather than 'all nations' - does this reflect maritime trade routes or eschatological geography?",
+    "How does the theological paradox in v.2 function - can divine hiddenness (clouds/darkness) and moral clarity (righteousness/justice foundation) coexist?",
+    "What is the identity and significance of 'all divine beings' (כׇּל־אֱלֹהִים) in v.7 - angels, foreign deities, or divine council members?",
+    "Why does light get 'sown' (זָרֻעַ) in v.11 - is this agricultural metaphor about delayed harvest, hidden growth, or providential planting?",
+    "How does the double מִלִּפְנֵי (at the presence of) in v.5 function poetically and theologically - mere emphasis or escalating revelation?",
+    "Why do the heavens 'proclaim' righteousness while peoples only 'see' glory (v.6) - different types of divine revelation?",
+    "What triggers the shift from cosmic scope (vv.1-6) to particular focus on Zion/Judah (v.8) - is this liturgical, theological, or poetic necessity?"
+  ],
+  "synthesis_notes": "LEXICON: Investigate אִיִּים (islands), עֲרָפֶל (thick darkness), מְכוֹן (foundation), זָרֻעַ (sown), זֵכֶר (remembrance/memorial)\nCONCORDANCE: Track YHWH malak formula across Psalms 93-99, divine beings (אֱלֹהִים) in monotheistic contexts, מִלִּפְנֵי theophanic usage\nTHEOLOGICAL: Explore divine council imagery, cosmic kingship vs. particular election, theophanic darkness traditions\nCOMPARATIVE: ANE storm theophany parallels, island/coastland terminology in prophetic literature, light-sowing metaphors in wisdom traditions"
+}

@@ -126,6 +126,7 @@ Review the introduction and verse commentary for these issues:
 
 **Markup for Transliteration**:
 - When you use a transliterated Hebrew word or phrase in your prose, **you MUST enclose it in backticks**. This is how the document generator will identify it for italicization. For example: "The opening line, `ashrei ha’ish`, signals..." or "The verb `ḥafetz` denotes desire...".
+- when you use a transliterated Hebrew work or phrase in your prose, **you MUST use the phonetic transcription from the PSALM TEXT section above**. This ensures consistency and accuracy in pronunciation guidance for readers.
 
 **Should conform to this style:**
 - Measured, confident tone (like a distinguished professor)

@@ -1,0 +1,326 @@
+{
+  "psalm_number": 97,
+  "pipeline_start": "2025-10-24T09:53:25.356699",
+  "pipeline_end": "2025-10-24T10:15:30.457624",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1930,
+      "input_token_estimate": 643,
+      "output_char_count": 11041,
+      "output_token_estimate": 3680,
+      "duration_seconds": 69.27148771286011,
+      "completion_date": null,
+      "timestamp": "2025-10-24T09:53:25.364573"
+    },
+    "micro_analysis": {
+      "input_char_count": 11041,
+      "input_token_estimate": 3680,
+      "output_char_count": 104207,
+      "output_token_estimate": 34735,
+      "duration_seconds": 167.6195273399353,
+      "completion_date": null,
+      "timestamp": "2025-10-24T09:56:34.665360"
+    },
+    "synthesis": {
+      "input_char_count": 115250,
+      "input_token_estimate": 38416,
+      "output_char_count": 37053,
+      "output_token_estimate": 12351,
+      "duration_seconds": 273.91012048721313,
+      "completion_date": null,
+      "timestamp": "2025-10-24T10:01:22.338613"
+    },
+    "master_editor": {
+      "input_char_count": 140262,
+      "input_token_estimate": 46754,
+      "output_char_count": 27528,
+      "output_token_estimate": 9176,
+      "duration_seconds": 334.20367097854614,
+      "completion_date": "2025-10-24T10:15:30.457624",
+      "timestamp": "2025-10-24T10:07:57.210142"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "אִיִּים",
+        "reason": "Specific geographic term - why 'islands' rather than nations/peoples in universal context"
+      },
+      {
+        "word": "עֲרָפֶל",
+        "reason": "Theophanic darkness vocabulary - technical term for divine hiddenness"
+      },
+      {
+        "word": "מְכוֹן",
+        "reason": "Architectural foundation term - precise vocabulary for throne establishment"
+      },
+      {
+        "word": "תְלַהֵט",
+        "reason": "Intensive burning verb - specific fire imagery in divine procession"
+      },
+      {
+        "word": "וַתָּחֵל",
+        "reason": "Earth's convulsion reaction - possible labor pains imagery, unusual cosmic response"
+      },
+      {
+        "word": "דּוֹנַג",
+        "reason": "Wax in mountain-melting simile - why this specific material for permanence dissolving"
+      },
+      {
+        "word": "הַמִּתְהַלְלִים",
+        "reason": "Reflexive boasting about idols - precise vocabulary for idol worship hubris"
+      },
+      {
+        "word": "עֶלְיוֹן",
+        "reason": "Divine supremacy title - theological significance in hierarchical context"
+      },
+      {
+        "word": "חֲסִידָיו",
+        "reason": "Loyal/devoted ones - covenant relationship terminology and semantic range"
+      },
+      {
+        "word": "זָרֻעַ",
+        "reason": "Light being 'sown' - agricultural metaphor puzzle, passive construction significance"
+      },
+      {
+        "word": "זֵכֶר",
+        "reason": "Memorial/remembrance of holiness - liturgical memory vs present experience"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "יהוה מלך",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Track YHWH kingship formula across enthronement psalms"
+      },
+      {
+        "query": "איים רבים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Geographic scope of 'many islands' in biblical literature"
+      },
+      {
+        "query": "כל אלהים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine beings references in monotheistic contexts"
+      },
+      {
+        "query": "מלפני יהוה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Theophanic presence formula usage patterns"
+      },
+      {
+        "query": "אור זרוע",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Light-sowing metaphor occurrences and contexts"
+      },
+      {
+        "query": "זכר קדש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Holy remembrance/memorial liturgical formulas"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Throne foundation imagery - architectural metaphor for divine justice | Vehicle: foundation | Related terms: foundations, base, bases, establish, established, establishing",
+        "vehicle": "foundation",
+        "vehicle_terms": [
+          "foundation",
+          "foundations",
+          "base",
+          "bases",
+          "establish",
+          "established",
+          "establishing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Fire as military vanguard - personified flame in divine procession | Vehicle: vanguard | Related terms: advance, advancing, precede, preceding, herald, heralds",
+        "vehicle": "vanguard",
+        "vehicle_terms": [
+          "vanguard",
+          "advance",
+          "advancing",
+          "precede",
+          "preceding",
+          "herald",
+          "heralds"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Earth convulsing/trembling - vivid cosmic personification | Vehicle: convulse | Related terms: convulsing, tremble, trembles, trembling, shake, shakes, shaking, quake, quaking",
+        "vehicle": "convulse",
+        "vehicle_terms": [
+          "convulse",
+          "convulsing",
+          "tremble",
+          "trembles",
+          "trembling",
+          "shake",
+          "shakes",
+          "shaking",
+          "quake",
+          "quaking"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Mountains melting like wax - striking simile of permanence dissolving | Vehicle: melt | Related terms: melting, melts, dissolve, dissolves, dissolving, flow, flows, flowing",
+        "vehicle": "melt",
+        "vehicle_terms": [
+          "melt",
+          "melting",
+          "melts",
+          "dissolve",
+          "dissolves",
+          "dissolving",
+          "flow",
+          "flows",
+          "flowing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Heavens as heralds - cosmic proclamation personification | Vehicle: proclaim | Related terms: proclaiming, proclaims, declare, declares, declaring, announce, announces, announcing",
+        "vehicle": "proclaim",
+        "vehicle_terms": [
+          "proclaim",
+          "proclaiming",
+          "proclaims",
+          "declare",
+          "declares",
+          "declaring",
+          "announce",
+          "announces",
+          "announcing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Light sown like seed - unusual agricultural metaphor for divine provision | Vehicle: sown | Related terms: sow, sows, sowing, plant, planted, planting, seed, seeds",
+        "vehicle": "sown",
+        "vehicle_terms": [
+          "sown",
+          "sow",
+          "sows",
+          "sowing",
+          "plant",
+          "planted",
+          "planting",
+          "seed",
+          "seeds"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "97:1",
+        "reason": "YHWH kingship formula and islands specification - how commentators interpret universal vs. geographic scope"
+      },
+      {
+        "verse": "97:2",
+        "reason": "Theological paradox of divine hiddenness and moral foundation - traditional resolution of darkness/righteousness tension"
+      },
+      {
+        "verse": "97:3",
+        "reason": "Fire as divine vanguard - classical understanding of theophanic fire imagery and military metaphor"
+      },
+      {
+        "verse": "97:4",
+        "reason": "Cosmic response sequence - how commentators explain causation between lightning revelation and earth's convulsion"
+      },
+      {
+        "verse": "97:5",
+        "reason": "Mountain-wax melting simile - traditional interpretation of this vivid permanence-dissolution metaphor"
+      },
+      {
+        "verse": "97:6",
+        "reason": "Heavens proclaiming vs. peoples seeing - commentators on different modes of divine revelation"
+      },
+      {
+        "verse": "97:7",
+        "reason": "Divine beings identity and submission - classical exegesis of monotheism and heavenly hierarchy"
+      },
+      {
+        "verse": "97:8",
+        "reason": "Geographic shift to Zion/Judah - how commentators explain transition from universal to particular"
+      },
+      {
+        "verse": "97:9",
+        "reason": "Divine supremacy assertion - traditional understanding of YHWH's exaltation over other divine beings"
+      },
+      {
+        "verse": "97:10",
+        "reason": "Ethical imperative following cosmic display - commentators on connection between theology and ethics"
+      },
+      {
+        "verse": "97:11",
+        "reason": "Light sowing metaphor - classical interpretation of this puzzling agricultural imagery"
+      },
+      {
+        "verse": "97:12",
+        "reason": "Concluding imperative and holy remembrance - how commentators understand liturgical memory and inclusio structure"
+      }
+    ],
+    "lexicon_entries_count": 26,
+    "concordance_results": {
+      "יהוה מלך": 6,
+      "איים רבים": 2,
+      "כל אלהים": 0,
+      "מלפני יהוה": 13,
+      "אור זרוע": 0,
+      "זכר קדש": 0
+    },
+    "figurative_results": {
+      "total_instances_used": 183
+    },
+    "commentary_counts": {
+      "Rashi": 7,
+      "Ibn Ezra": 11,
+      "Radak": 12,
+      "Metzudat David": 11,
+      "Malbim": 8,
+      "Meiri": 11,
+      "Torah Temimah": 1
+    },
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 94414,
+    "research_bundle_tokens": 31471
+  },
+  "analysis": {
+    "macro_questions": [
+      "How do the theophanic elements (clouds, fire, lightning, melting mountains) compare to other biblical theophanies and Ancient Near Eastern storm god imagery, and what theological significance lies in their specific combination here?",
+      "What is the precise meaning and scope of 'many islands' (אִיִּים רַבִּים) in v. 1 - does this refer to distant gentile nations, and how does this relate to the psalm's universal claims?",
+      "How does the theological paradox in v. 2 function - 'clouds and darkness around Him' yet 'righteousness and justice are the base of His throne' - and what does this reveal about divine hiddenness and moral clarity?",
+      "What is the identity and significance of 'all divine beings' (כׇּל־אֱלֹהִים) who bow down in v. 7 - angels, foreign deities, or both - and how does this relate to divine council imagery?",
+      "How does the shift from third-person description (vv. 1-7) to second-person address (vv. 8-9) and back to third-person (vv. 10-12) function rhetorically and theologically?",
+      "What is the agricultural metaphor's significance in 'Light is sown for the righteous' (v. 11), and how does this 'sowing' imagery relate to divine providence and eschatological hope?",
+      "How does Psalm 97 relate to other 'YHWH malak' psalms (93, 96, 97, 98, 99) in terms of shared themes, vocabulary, and theological development?",
+      "What is the relationship between 'judgments' (מִשְׁפָּטֶיךָ) in v. 8 and the earlier 'justice' (מִשְׁפָּט) in v. 2, and how do these terms function in the psalm's moral theology?"
+    ],
+    "micro_questions": [
+      "Why does the psalm specify 'many islands' (אִיִּים רַבִּים) rather than 'all nations' - does this reflect maritime trade routes or eschatological geography?",
+      "How does the theological paradox in v.2 function - can divine hiddenness (clouds/darkness) and moral clarity (righteousness/justice foundation) coexist?",
+      "What is the identity and significance of 'all divine beings' (כׇּל־אֱלֹהִים) in v.7 - angels, foreign deities, or divine council members?",
+      "Why does light get 'sown' (זָרֻעַ) in v.11 - is this agricultural metaphor about delayed harvest, hidden growth, or providential planting?",
+      "How does the double מִלִּפְנֵי (at the presence of) in v.5 function poetically and theologically - mere emphasis or escalating revelation?",
+      "Why do the heavens 'proclaim' righteousness while peoples only 'see' glory (v.6) - different types of divine revelation?",
+      "What triggers the shift from cosmic scope (vv.1-6) to particular focus on Zion/Judah (v.8) - is this liturgical, theological, or poetic necessity?"
+    ],
+    "verse_count": 12
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-20250514",
+    "micro_analysis": "claude-sonnet-4-20250514",
+    "synthesis": "claude-sonnet-4-20250514",
+    "master_editor": "gpt-5"
+  }
+}
