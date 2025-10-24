@@ -1,15 +1,149 @@
-COPY AND PASTE THIS INTO YOUR NEXT SESSION:
+# Start Next Session - Documentation Consolidation (Phase 3)
+
+**Date**: 2025-10-24
+**Status**: Phase 2 Complete ✅ | Phase 3 Ready
+
+---
+
+## What Was Just Completed (Phase 2)
+
+✅ **Phase 2.1**: Consolidated 8 phonetic documents → 4 streamlined docs
+✅ **Phase 2.2**: Reduced NEXT_SESSION_PROMPT.md from 1,485 → 180 lines (88% reduction)
+✅ **Phase 2.3**: Archived 7 session summary files to docs/archive/sessions/
+✅ **Committed**: All changes committed with git mv (history preserved)
+
+---
+
+## COPY AND PASTE THIS INTO YOUR NEXT SESSION:
 
 ================================================================================
 
-Please read @NEXT_SESSION_DOCUMENTATION_CLEANUP.md and execute Phase 1 (Critical Fixes) from the documentation consolidation plan.
+Please execute Phase 3 (New Documentation) from the documentation consolidation plan.
 
-This is a 30-minute task with 4 specific actions:
-1. Fix README.md development status (Phase 1 → Phase 4)
-2. Add deprecation warning to ARCHITECTURE.md
-3. Create new QUICK_START.md file
-4. Update CONTEXT.md phase references
+Launch 4 agents to work on these tasks in parallel:
+1. Create DEVELOPER_GUIDE.md (scan src/ directory, explain code organization)
+2. Create GLOSSARY.md (define project-specific terms alphabetically)
+3. Consolidate overview.md into CONTEXT.md and archive it
+4. Update cross-references across all docs
 
-All instructions and exact content are in the file. Please work through Actions 1-4 sequentially.
+Use the agentic approach for maximum efficiency.
+
+All detailed instructions are in @START_NEXT_SESSION.txt and @docs/DOCUMENTATION_CONSOLIDATION_PLAN.md (lines 275-324).
 
 ================================================================================
+
+---
+
+## Phase 3 Overview: New Documentation (4 tasks, ~1-2 hours)
+
+### Task 1: Create DEVELOPER_GUIDE.md (45 min)
+**Agent Prompt**:
+```
+Create docs/DEVELOPER_GUIDE.md to help developers navigate the codebase.
+
+Content to include:
+1. Code organization - Explain src/ directory structure
+2. Where to find agents - List macro_analyst.py, micro_analyst.py, synthesis_writer.py, master_editor.py locations
+3. Librarian vs AI agents - Explain the distinction (Librarian = Python helper, AI agents = Claude/GPT-5)
+4. Data flow between components - How research bundles flow through pipeline
+5. How to add a new agent - Step-by-step process
+6. Testing procedures - How to run tests, validate output
+
+Scan the src/ directory to understand actual structure, then write clear guide.
+
+Target: 300-400 lines, practical and example-driven.
+```
+
+### Task 2: Create GLOSSARY.md (30 min)
+**Agent Prompt**:
+```
+Create docs/GLOSSARY.md to define project-specific terms.
+
+Terms to define (scan docs/ to understand each):
+1. Pass - What does "4-pass pipeline" mean?
+2. Librarian Agent - Python helper vs AI agent distinction
+3. Research Bundle - Assembled context for synthesis
+4. Macro/Micro Analysis - Telescopic approach explanation
+5. Phonetic Transcription - Why it matters for commentary
+6. Stress Marking - Linguistic feature explanation
+7. Figurative Language Database - What it contains, how used
+8. MasterEditor - GPT-5 o1 critical review role
+9. Consonantal/Voweled/Exact/Lemma search - 4-layer concordance
+10. Maqqef - Hebrew word joiner, stress domain implications
+11. Begadkefat - Letters that change pronunciation
+12. Gemination - Consonant doubling (dagesh forte)
+
+Format: Alphabetical, clear definitions with examples.
+Target: 150-200 lines.
+```
+
+### Task 3: Consolidate overview.md (30 min)
+**Agent Prompt**:
+```
+Task: Consolidate docs/overview.md into existing documentation.
+
+Steps:
+1. Read docs/overview.md to understand its content
+2. Read docs/CONTEXT.md to see what already exists
+3. Extract any unique content from overview.md not in CONTEXT.md
+4. If unique content exists, merge it into CONTEXT.md
+5. Move overview.md to docs/archive/deprecated/
+6. Update any cross-references pointing to overview.md → redirect to CONTEXT.md
+
+Use git mv to preserve history.
+Return: Summary of what was merged, what was redundant.
+```
+
+### Task 4: Update Cross-References (15 min)
+**Agent Prompt**:
+```
+Task: Update cross-references to point to new documentation structure.
+
+Actions:
+1. Search all .md files for references to:
+   - ARCHITECTURE.md → Should link to TECHNICAL_ARCHITECTURE_SUMMARY.md
+   - PHONETIC_REFERENCE_GUIDE.md → Should link to PHONETIC_SYSTEM.md
+   - PHONETIC_IMPLEMENTATION_EXAMPLE.md → Should link to PHONETIC_DEVELOPER_GUIDE.md
+   - overview.md → Should link to CONTEXT.md
+
+2. Update README.md links if needed to reflect new structure
+
+3. Add "See also" sections to related docs where helpful
+
+Return: List of files modified with brief description of changes.
+```
+
+---
+
+## Success Criteria
+
+Phase 3 complete when:
+- ✅ docs/DEVELOPER_GUIDE.md exists and is comprehensive
+- ✅ docs/GLOSSARY.md exists with all key terms defined
+- ✅ docs/overview.md archived, unique content merged to CONTEXT.md
+- ✅ All cross-references updated to point to correct files
+- ✅ All changes committed with clear message
+
+---
+
+## After Phase 3: Optional Phase 4 Tasks
+
+**Phase 4** (Low Priority - 1 hour):
+- Create visual pipeline diagram (Mermaid or ASCII)
+- Create documentation index (docs/INDEX.md)
+- Final validation pass
+
+See `docs/DOCUMENTATION_CONSOLIDATION_PLAN.md` lines 326-369 for Phase 4 details.
+
+---
+
+## Key Files Reference
+
+- **Plan**: `docs/DOCUMENTATION_CONSOLIDATION_PLAN.md`
+- **Status**: `docs/NEXT_SESSION_PROMPT.md` (now streamlined to 180 lines)
+- **Archive Index**: `docs/archive/sessions/INDEX.md`
+- **New Phonetic Reference**: `docs/PHONETIC_SYSTEM.md`
+
+---
+
+**Ready to continue?** Use the prompt above to start Phase 3! 🚀
