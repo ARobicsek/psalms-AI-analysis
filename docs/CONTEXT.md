@@ -9,7 +9,7 @@ See [PROJECT_STATUS.md](PROJECT_STATUS.md) for current task and progress.
 ## Key Documents
 - **[PROJECT_STATUS.md](PROJECT_STATUS.md)**: Where are we in the plan?
 - **[IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md)**: What have we learned?
-- **[ARCHITECTURE.md](ARCHITECTURE.md)**: Technical reference
+- **[TECHNICAL_ARCHITECTURE_SUMMARY.md](TECHNICAL_ARCHITECTURE_SUMMARY.md)**: Technical reference & methodological overview
 - **[../planning_prompt.md](../planning_prompt.md)**: Original vision
 - **Divine name modifications**: `C:\Users\ariro\OneDrive\Documents\Bible\docs\NON_SACRED_HEBREW.md`
 

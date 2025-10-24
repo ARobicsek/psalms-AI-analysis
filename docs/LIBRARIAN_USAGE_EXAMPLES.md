@@ -223,4 +223,4 @@ After Day 5 completion, these librarians will be integrated into the full pipeli
 3. **Scholar-Writer Agent** (Sonnet) receives markdown-formatted research
 4. Analysts can track everything via structured logs
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for complete documentation.
+See [TECHNICAL_ARCHITECTURE_SUMMARY.md](TECHNICAL_ARCHITECTURE_SUMMARY.md) for complete documentation.
