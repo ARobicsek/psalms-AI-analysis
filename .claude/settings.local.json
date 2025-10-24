@@ -37,7 +37,11 @@
       "Bash(head -3 \"$file\")",
       "Bash(done)",
       "Bash(dir /B \"C:\\Users\\ariro\\OneDrive\\Documents\\Psalms\\output\")",
-      "Bash(dir /B \"C:\\Users\\ariro\\OneDrive\\Documents\\Psalms\\logs\")"
+      "Bash(dir /B \"C:\\Users\\ariro\\OneDrive\\Documents\\Psalms\\logs\")",
+      "Bash(git log:*)",
+      "Bash(awk:*)",
+      "Bash(find:*)",
+      "Bash(git mv:*)"
     ],
     "deny": [],
     "ask": []

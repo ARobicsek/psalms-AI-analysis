@@ -42,7 +42,7 @@ python scripts/cost_report.py
 
 ## Agent Architecture
 
-### Five-Pass Telescopic Analysis (Phase 3 - CURRENT)
+### Five-Pass Telescopic Analysis (Phase 4 - CURRENT)
 
 **AUTO-AVAILABLE TO ALL AGENTS:**
 - Psalm text (Hebrew + English)

@@ -1,5 +1,23 @@
 # System Architecture - Psalms AI Commentary Pipeline
 
+---
+
+## ⚠️ DEPRECATION NOTICE
+
+**This document describes the original Phase 3 design specification.**
+
+**For current Phase 4 implementation, see**: [TECHNICAL_ARCHITECTURE_SUMMARY.md](TECHNICAL_ARCHITECTURE_SUMMARY.md)
+
+**Key differences from current implementation**:
+- ❌ **Critic Agent (Pass 4)** described in this doc was never implemented
+- ❌ **Final Polisher (Pass 5)** described in this doc was never implemented
+- ✅ **Actual Pass 4** uses MasterEditor (GPT-5 o1) instead
+- ✅ **Current pipeline**: Macro → Micro → Synthesis → MasterEditor (4 passes, not 5)
+
+This document is preserved for historical reference and design context.
+
+---
+
 ## Overview
 This document provides technical specifications for the Psalms AI commentary generation system. It includes database schemas, API integration patterns, agent architectures, and implementation details.
 
