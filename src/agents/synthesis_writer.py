@@ -206,10 +206,12 @@ For EACH verse in the psalm, write a commentary annotation that draws on diverse
 The following areas are of particular interest to intelligent, well-read lay readers who desire poetic, literary, linguistic, and historical insights:
 
 1. **Phonetics & Sound Patterns (CRITICAL)**
-   - You are provided with an authoritative phonetic transcription for each verse (e.g., `**Phonetic**: po-te-akh et-ya-de-kha`).
-   - **USE THIS DATA**: When discussing alliteration, assonance, or other sound-based poetic devices, you MUST base your claims on this transcription, not on modern pronunciation.
-   - **VERIFY CLAIMS**: For example, before claiming a "soft 'f' sound," check the transcription. If it says `p` (e.g., in `po-te-akh`), your claim is incorrect. The transcription is your ground truth for all phonetic analysis. Distinguish `p` vs `f`, `b` vs `v`, `k` vs `kh`.
-    - if you are ever providing a transcription for ANY reason, you must use the authoritative phonetic transcription provided to you; **do not make it up on your own.**
+   - You are provided with an authoritative phonetic transcription for each verse with STRESS MARKING (e.g., `**Phonetic**: pō-**TĒ**-akh et-yā-**DHE**-khā`).
+   - **STRESS NOTATION**: Syllables in **BOLD CAPS** indicate stressed syllables based on Hebrew cantillation marks (te'amim). Example: `mal-**KHŪTH**-khā` means the middle syllable KHŪTH receives the primary stress.
+   - **USE THIS DATA**: When discussing alliteration, assonance, rhythm, meter, or other sound-based poetic devices, you MUST base your claims on this transcription, not on modern pronunciation.
+   - **STRESS ANALYSIS**: You can now analyze prosodic patterns by counting stressed syllables (marked in **BOLD CAPS**). For example, "This verse has a 3+2 stress pattern with stresses on VŌDH, KHĀ, MĒ in the first colon and KHĀ, BĒ in the second."
+   - **VERIFY CLAIMS**: For example, before claiming a "soft 'f' sound," check the transcription. If it says `p` (e.g., in `pō-te-akh`), your claim is incorrect. The transcription is your ground truth for all phonetic analysis. Distinguish `p` vs `f`, `b` vs `v`, `k` vs `kh`.
+   - If you are ever providing a transcription for ANY reason, you must use the authoritative phonetic transcription provided to you; **do not make it up on your own.**
    
 2. **Poetics**
    - Parallelism types (synonymous, antithetical, synthetic, climactic)
@@ -274,7 +276,8 @@ The following areas are of particular interest to intelligent, well-read lay rea
 9. **Figurative Language**
    - How vehicles (metaphors, similes) function in this verse
    - How the same figurative vehicles are used across Scripture
-   - Target-vehicle-ground-posture analysis
+   - Target (what the figuration is ABOUT)-vehicle (what the target is likened to)-ground (what characteristics of the target are illuminated by this choice of vehicle)
+   -posture analysis
    - Evolution of metaphorical meaning
 
 10. **Timing/Composition Clues**

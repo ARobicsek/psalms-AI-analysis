@@ -1,166 +1,147 @@
 {
   "psalm_number": 145,
-  "pipeline_start": "2025-10-23T18:29:17.344458",
-  "pipeline_end": "2025-10-23T18:50:53.614027",
+  "pipeline_start": "2025-10-23T20:11:34.842568",
+  "pipeline_end": "2025-10-24T00:54:31.865559",
   "steps": {
     "macro_analysis": {
       "input_char_count": 3279,
       "input_token_estimate": 1093,
-      "output_char_count": 11141,
-      "output_token_estimate": 3713,
-      "duration_seconds": 63.83557868003845,
+      "output_char_count": 9830,
+      "output_token_estimate": 3276,
+      "duration_seconds": 57.2778856754303,
       "completion_date": null,
-      "timestamp": "2025-10-23T18:29:17.350268"
+      "timestamp": "2025-10-23T20:11:34.846516"
     },
     "micro_analysis": {
-      "input_char_count": 11141,
-      "input_token_estimate": 3713,
-      "output_char_count": 155478,
-      "output_token_estimate": 51826,
-      "duration_seconds": 239.3329131603241,
+      "input_char_count": 9830,
+      "input_token_estimate": 3276,
+      "output_char_count": 143650,
+      "output_token_estimate": 47883,
+      "duration_seconds": 247.66584730148315,
       "completion_date": null,
-      "timestamp": "2025-10-23T18:32:21.227252"
+      "timestamp": "2025-10-23T20:14:32.173560"
     },
     "synthesis": {
-      "input_char_count": 166621,
-      "input_token_estimate": 55540,
-      "output_char_count": 44463,
-      "output_token_estimate": 14821,
-      "duration_seconds": 299.51673316955566,
+      "input_char_count": 153482,
+      "input_token_estimate": 51160,
+      "output_char_count": 47987,
+      "output_token_estimate": 15995,
+      "duration_seconds": 317.65626287460327,
       "completion_date": null,
-      "timestamp": "2025-10-23T18:38:20.645246"
+      "timestamp": "2025-10-23T20:20:39.889635"
     },
     "master_editor": {
-      "input_char_count": 197158,
-      "input_token_estimate": 65719,
-      "output_char_count": 27709,
-      "output_token_estimate": 9236,
-      "duration_seconds": 213.44368171691895,
-      "completion_date": "2025-10-23T18:50:53.614027",
-      "timestamp": "2025-10-23T18:45:21.427266"
+      "input_char_count": 235017,
+      "input_token_estimate": 78339,
+      "output_char_count": 36025,
+      "output_token_estimate": 12008,
+      "duration_seconds": 199.2340602874756,
+      "completion_date": "2025-10-24T00:54:31.865559",
+      "timestamp": "2025-10-23T20:27:58.573312"
     }
   },
   "research": {
     "lexicon_requests": [
       {
         "word": "תְּהִלָּה",
-        "reason": "Only psalm titled 'tehillah' - need semantic distinction from other praise terms"
-      },
-      {
-        "word": "אֲרוֹמִמְךָ",
-        "reason": "Elevation metaphor - specific semantic range of this praise verb"
-      },
-      {
-        "word": "מְהֻלָּל",
-        "reason": "Pual form - passive praise construction, theological implications"
-      },
-      {
-        "word": "חֵקֶר",
-        "reason": "Investigation/fathoming - philosophical concept of divine comprehensibility"
-      },
-      {
-        "word": "דּוֹר",
-        "reason": "Generational transmission terminology - temporal vs. genealogical emphasis"
-      },
-      {
-        "word": "הֲדַר",
-        "reason": "First element of triple glory construct - specific nuance vs. כבוד/הוד"
+        "reason": "Rare superscription - only here and Ps 119:171, need semantic distinction from other praise terms"
       },
       {
         "word": "עֱזוּז",
-        "reason": "Strength/intensity of awesome deeds - rare substantival usage"
+        "reason": "Rare power term in v.6 - limited biblical usage, need precise meaning"
       },
       {
-        "word": "זֵכֶר",
-        "reason": "Memorial vs. memory - cultic/liturgical technical term"
+        "word": "חֵקֶר",
+        "reason": "Job language borrowed for divine incomprehensibility - theological significance"
       },
       {
         "word": "יַבִּיעוּ",
-        "reason": "Gushing/pouring forth - vigorous liquid metaphor for praise"
+        "reason": "Liquid metaphor for speech in v.7 - unique praise vocabulary"
       },
       {
-        "word": "אֶרֶךְ אַפַּיִם",
-        "reason": "Long-nose idiom - ANE background and theological development"
+        "word": "מְהֻלָּל",
+        "reason": "Intensive praise form in v.3 - morphological and semantic analysis needed"
       },
       {
-        "word": "חֲסִידֶיךָ",
-        "reason": "Faithful ones vs. works distinction - covenant community terminology"
+        "word": "אָשִׂיחָה",
+        "reason": "Meditation/recitation verb in v.5 - cultic vs personal dimension"
       },
       {
-        "word": "בֶאֱמֶת",
-        "reason": "Truth/sincerity qualifier for prayer - moral epistemology"
+        "word": "נוֹרְאֹתֶיךָ",
+        "reason": "Awesome deeds vocabulary - theological weight of 'nora' root"
       },
       {
-        "word": "כׇּל־בָּשָׂר",
-        "reason": "All flesh vs. all people - specific anthropological scope"
+        "word": "הֲדַר",
+        "reason": "Part of triple glory accumulation - distinct from kevod and hod?"
+      },
+      {
+        "word": "יְשַׂבֵּרוּ",
+        "reason": "Hopeful waiting in v.15 - semantic range of expectation"
+      },
+      {
+        "word": "רָצוֹן",
+        "reason": "Ambiguous in v.16 - divine favor or creatures' desire?"
+      },
+      {
+        "word": "מֶמְשַׁלְתְּךָ",
+        "reason": "Dominion term in Ugaritic parallel - ANE royal vocabulary"
+      },
+      {
+        "word": "כְּפוּפִים",
+        "reason": "Bent over ones in v.14 - specific vulnerability imagery"
       }
     ],
     "concordance_requests": [
       {
-        "query": "תהלה",
+        "query": "דור לדור",
         "scope": "Psalms",
         "level": "consonantal",
-        "purpose": "Compare tehillah usage patterns vs. other praise terms"
+        "purpose": "Track intergenerational transmission patterns"
       },
       {
-        "query": "דור לדור",
+        "query": "מלכותך מלכות",
         "scope": "Tanakh",
-        "level": "exact",
-        "purpose": "Generational transmission formula across Scripture"
+        "level": "consonantal",
+        "purpose": "Eternal kingship formulas and Ugaritic parallels"
       },
       {
-        "query": "עיני כל",
-        "scope": "Tanakh",
-        "level": "exact",
-        "purpose": "Universal dependence imagery - eyes of all looking expectantly"
+        "query": "כל מעשיך",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Universal divine works language"
       },
       {
         "query": "לעולם ועד",
-        "scope": "Psalms",
+        "scope": "Tanakh",
         "level": "exact",
-        "purpose": "Temporal eternity formula - obsessive usage pattern"
+        "purpose": "Eternity formula usage - appears twice in opening verses"
       },
       {
-        "query": "טוב לכל",
+        "query": "חנון ורחום",
         "scope": "Tanakh",
         "level": "consonantal",
-        "purpose": "Divine goodness to all creation - universalism theology"
-      },
-      {
-        "query": "מלכות",
-        "scope": "Psalms",
-        "level": "consonantal",
-        "purpose": "Kingdom/kingship language in praise contexts"
+        "purpose": "Exodus 34 formula distribution across Scripture"
       },
       {
         "query": "בני האדם",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Humanity references in psalm context"
+      },
+      {
+        "query": "קרוב יהוה",
         "scope": "Tanakh",
-        "level": "exact",
-        "purpose": "Sons of humanity - universal address patterns"
+        "level": "consonantal",
+        "purpose": "Divine nearness theology"
       }
     ],
     "figurative_requests": [
       {
         "verse": null,
-        "reason": "Investigation metaphor for divine comprehension - rare epistemological imagery | Vehicle: investigation | Related terms: investigate, search, searching, examine, examining, probe, probing",
-        "vehicle": "investigation",
+        "reason": "Pour forth praise - vivid liquid metaphor for speech overflow | Vehicle: pour forth | Related terms: pour, pours, pouring, gush, gushes, gushing, flow, flows, flowing",
+        "vehicle": "pour forth",
         "vehicle_terms": [
-          "investigation",
-          "investigate",
-          "search",
-          "searching",
-          "examine",
-          "examining",
-          "probe",
-          "probing"
-        ]
-      },
-      {
-        "verse": null,
-        "reason": "Pouring forth goodness - vivid liquid metaphor for divine attribute | Vehicle: pour | Related terms: pour, pours, pouring, gush, gushes, gushing, flow, flows, flowing",
-        "vehicle": "pour",
-        "vehicle_terms": [
-          "pour",
+          "pour forth",
           "pour",
           "pours",
           "pouring",
@@ -174,158 +155,179 @@
       },
       {
         "verse": null,
-        "reason": "Physical support imagery - bodies falling and bending as human condition | Vehicle: fallen | Related terms: fall, falls, falling, stumble, stumbles, stumbling",
-        "vehicle": "fallen",
+        "reason": "Fathoming divine greatness - epistemological impossibility imagery | Vehicle: fathom | Related terms: search, searching, probe, probing, investigate, investigation",
+        "vehicle": "fathom",
         "vehicle_terms": [
-          "fallen",
-          "fall",
-          "falls",
-          "falling",
-          "stumble",
-          "stumbles",
-          "stumbling"
+          "fathom",
+          "search",
+          "searching",
+          "probe",
+          "probing",
+          "investigate",
+          "investigation"
         ]
       },
       {
         "verse": null,
-        "reason": "Bent/bowed physical imagery - bodily metaphor for human condition | Vehicle: bent | Related terms: bow, bows, bowed, bowing, crouch, crouched",
-        "vehicle": "bent",
+        "reason": "Supporting the falling - physical divine intervention imagery | Vehicle: support | Related terms: supports, supporting, uphold, upholds, upholding, sustain, sustains, sustaining",
+        "vehicle": "support",
         "vehicle_terms": [
-          "bent",
-          "bow",
-          "bows",
-          "bowed",
-          "bowing",
-          "crouch",
-          "crouched"
+          "support",
+          "supports",
+          "supporting",
+          "uphold",
+          "upholds",
+          "upholding",
+          "sustain",
+          "sustains",
+          "sustaining"
         ]
       },
       {
         "verse": null,
-        "reason": "Eyes as universal dependence - striking personification of all creation | Vehicle: expectation | Related terms: expect, expects, expecting, hope, hopes, hoping, wait, waiting",
-        "vehicle": "expectation",
+        "reason": "Raising the bent - restoration of vulnerable imagery | Vehicle: raise up | Related terms: raise, raises, raising, lift, lifts, lifting, straighten, straightens",
+        "vehicle": "raise up",
         "vehicle_terms": [
-          "expectation",
-          "expect",
-          "expects",
-          "expecting",
-          "hope",
-          "hopes",
-          "hoping",
+          "raise up",
+          "raise",
+          "raises",
+          "raising",
+          "lift",
+          "lifts",
+          "lifting",
+          "straighten",
+          "straightens"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Eyes waiting hopefully - expectant gaze as universal dependence | Vehicle: wait hopefully | Related terms: wait, waiting, hope, hoping, expect, expecting, look, looking",
+        "vehicle": "wait hopefully",
+        "vehicle_terms": [
+          "wait hopefully",
           "wait",
-          "waiting"
+          "waiting",
+          "hope",
+          "hoping",
+          "expect",
+          "expecting",
+          "look",
+          "looking"
         ]
       },
       {
         "verse": null,
-        "reason": "Open hand gesture - generous divine action metaphor | Vehicle: opening | Related terms: open, opens, opened",
-        "vehicle": "opening",
+        "reason": "Opening divine hand - generosity gesture imagery | Vehicle: open hand | Related terms: open, opens, opening, extend, extends, extending",
+        "vehicle": "open hand",
         "vehicle_terms": [
-          "opening",
+          "open hand",
           "open",
           "opens",
-          "opened"
+          "opening",
+          "extend",
+          "extends",
+          "extending"
         ]
       }
     ],
     "commentary_requests": [
       {
         "verse": "145:1",
-        "reason": "Unique tehillah title - how do commentators explain this psalm's special status?"
+        "reason": "Rare tehillah superscription - how do commentators explain its uniqueness and relationship to standard praise terminology?"
       },
       {
         "verse": "145:2",
-        "reason": "Daily blessing commitment - traditional understanding of liturgical obligation"
+        "reason": "Daily blessing vow - traditional interpretation of perpetual praise obligation and spiritual discipline"
       },
       {
         "verse": "145:3",
-        "reason": "Divine transcendence claim - how commentators handle epistemological limits"
+        "reason": "Divine incomprehensibility - classical understanding of 'no searching' and relationship to Job parallels"
       },
       {
         "verse": "145:4",
-        "reason": "Generational transmission focus - classical interpretation of works vs. character"
+        "reason": "Intergenerational praise - how commentators interpret transmission of divine knowledge across generations"
       },
       {
         "verse": "145:5",
-        "reason": "Triple glory construction - how commentators parse the dense Hebrew syntax"
+        "reason": "Triple glory accumulation - traditional parsing of hadar/kevod/hod distinctions and poetic intensification"
       },
       {
         "verse": "145:6",
-        "reason": "Textual variant issue - traditional manuscript and interpretive approaches"
+        "reason": "Ketiv/qere variation - how commentators handle textual uncertainty and awesome deeds language"
       },
       {
         "verse": "145:7",
-        "reason": "Memorial terminology - liturgical vs. personal memory in classical exegesis"
+        "reason": "Liquid praise metaphor - classical interpretation of 'pour forth' and relationship between memory and celebration"
       },
       {
         "verse": "145:8",
-        "reason": "Selective divine attribute quotation - why omit 'truth and faithfulness'?"
+        "reason": "Exodus 34 quotation - why insert systematic theology here and how it functions as psalm's pivot"
       },
       {
         "verse": "145:9",
-        "reason": "Universal divine goodness - how commentators handle radical inclusivity"
+        "reason": "Universal divine goodness - traditional reconciliation with particular divine judgment themes"
       },
       {
         "verse": "145:10",
-        "reason": "Works vs. faithful distinction - covenant particularism within universalism"
+        "reason": "Creation vs faithful distinction - how commentators explain different praise verbs for different communities"
       },
       {
         "verse": "145:11",
-        "reason": "Royal proclamation theme - kingship theology in praise context"
+        "reason": "Royal vocabulary intensification - classical understanding of divine kingship and speech act emphasis"
       },
       {
         "verse": "145:12",
-        "reason": "Mission to humanity - universal proclamation purpose"
+        "reason": "Missionary dimension - traditional interpretation of human proclamation role and person shift"
       },
       {
         "verse": "145:13",
-        "reason": "Eternal kingship formula - ANE background and theological adaptation"
+        "reason": "Ugaritic parallel and LXX addition - how classical commentators handle eternal kingship formula"
       },
       {
         "verse": "145:14",
-        "reason": "Physical care imagery - literal vs. metaphorical interpretation of disability"
+        "reason": "Cosmic to personal shift - traditional understanding of divine kingship through concrete care"
       },
       {
         "verse": "145:15",
-        "reason": "Eyes of all creation - how commentators handle universal personification"
+        "reason": "Universal dependence imagery - classical interpretation of eye metaphor and divine timing"
       },
       {
         "verse": "145:16",
-        "reason": "Divine satisfaction provision - abundance vs. necessity theology"
+        "reason": "Divine generosity - traditional understanding of open hand gesture and satisfaction language"
       },
       {
         "verse": "145:17",
-        "reason": "Character-action integration - how divine ways reflect divine nature"
+        "reason": "Character summary - how commentators distinguish divine ways vs works and universal righteousness"
       },
       {
         "verse": "145:18",
-        "reason": "Qualified divine accessibility - what constitutes calling 'in truth'?"
+        "reason": "Qualified universalism - traditional interpretation of 'in truth' condition and divine nearness"
       },
       {
         "verse": "145:19",
-        "reason": "God-fearer privileges - covenant benefits within universal framework"
+        "reason": "Sequential divine response - classical understanding of desire-to-deliverance progression and fear-reverence"
       },
       {
         "verse": "145:20",
-        "reason": "Theodicy tension - destroying wicked vs. universal goodness"
+        "reason": "Moral dualism - how commentators reconcile protection/destruction with universal mercy theme"
       },
       {
         "verse": "145:21",
-        "reason": "All flesh conclusion - universal summons and inclusio completion"
+        "reason": "Inclusio completion - traditional understanding of individual-to-cosmic praise trajectory and 'all flesh' terminology"
       }
     ],
-    "lexicon_entries_count": 33,
+    "lexicon_entries_count": 23,
     "concordance_results": {
-      "תהלה": 8,
-      "דור לדור": 0,
-      "עיני כל": 0,
+      "דור לדור": 1,
+      "מלכותך מלכות": 1,
+      "כל מעשיך": 0,
       "לעולם ועד": 0,
-      "טוב לכל": 0,
-      "מלכות": 6,
-      "בני האדם": 0
+      "חנון ורחום": 4,
+      "בני האדם": 1,
+      "קרוב יהוה": 2
     },
     "figurative_results": {
-      "total_instances_used": 149
+      "total_instances_used": 176
     },
     "commentary_counts": {
       "Ibn Ezra": 21,
@@ -343,31 +345,32 @@
         "analysis": "This shared formula for celebrating divine kingship demonstrates a common liturgical and royal vocab..."
       }
     ],
-    "research_bundle_chars": 140966,
-    "research_bundle_tokens": 46988
+    "research_bundle_chars": 129321,
+    "research_bundle_tokens": 43107
   },
   "analysis": {
     "macro_questions": [
-      "How does the complete acrostic structure function theologically beyond literary artistry, and what does it suggest about comprehensive praise?",
-      "What is the significance of the divine epithet progression from 'my God the King' to 'YHWH' throughout the psalm?",
-      "How does the Ugaritic parallel in v. 13 illuminate the relationship between Israelite and broader ANE royal theology?",
-      "What is the theological significance of the movement from God's incomprehensible greatness (v. 3) to intimate care (vv. 15-16)?",
-      "How does the 'eyes of all' imagery (v. 15) function within the broader creation theology of the psalm?",
-      "What is the relationship between the generational transmission theme (vv. 4, 13) and the eternal praise framework?",
-      "How does the theodicy element (v. 20) fit into the comprehensive praise structure without creating tension?",
-      "What is the significance of the progression from 'works' and 'mighty acts' to specific care for the fallen and hungry?",
-      "How does this psalm function as a theological summary of praise literature in relation to other Hallel psalms?",
-      "What is the relationship between covenant (faithful ones, those who fear him) and creation (all flesh, all his works) in the psalm's theological vision?"
+      "What is the theological significance of the missing nun verse in the acrostic, and how do ancient versions handle this gap?",
+      "How does the sevenfold use of 'kol' (all/every) function as a literary and theological device throughout the psalm?",
+      "What is the relationship between the divine character formula in v. 8 and Exodus 34:6-7, and how does this psalm expand or modify that tradition?",
+      "How does the Ugaritic parallel in vv. 11-13 illuminate the psalm's appropriation and transformation of Ancient Near Eastern royal ideology?",
+      "What is the significance of the intergenerational motif (dor le-dor) for understanding the psalm's theology of covenant continuity?",
+      "How does the alternation between divine transcendence (greatness, majesty) and immanence (care, provision) function structurally and theologically?",
+      "What is the liturgical function of the movement from individual vow to cosmic participation, and how does this relate to temple worship practices?",
+      "How do the specific images of divine care (supporting the falling, feeding the hungry, protecting the righteous) relate to Ancient Near Eastern royal ideology and social justice themes?",
+      "What is the relationship between divine kingship and divine judgment in vv. 19-20, and how does this compare to other royal psalms?"
     ],
     "micro_questions": [
-      "Why is this the only psalm titled 'תְּהִלָּה' when this word gives the whole psalter its name?",
-      "What is the theological significance of selectively quoting the Exodus 34:6 formula while omitting 'truth and faithfulness'?",
-      "How does the LXX addition in v13a ('Faithful is the LORD in his words...') illuminate early interpretive traditions?",
-      "Is the triple construct chain 'הֲדַר כְּבוֹד הוֹדֶךָ' standard Hebrew syntax or innovative poetic accumulation?",
-      "How do we reconcile 'good to all' (v9) with 'destroys all the wicked' (v20) - is this theological tension intentional?",
-      "Why does the psalm use 'כׇּל־בָּשָׂר' (all flesh) in the conclusion rather than 'all people' or 'all creation'?",
-      "What is the difference between יוֹדוּךָ (praise from all works) and יְבָרְכוּכָה (bless from faithful ones) in v10?",
-      "Does the 'עֵינֵי־כֹל' (eyes of all) image include non-animate creation having metaphorical 'eyes'?"
+      "Why does the psalm use the rare superscription 'תְּהִלָּה' only here and Psalm 119:171?",
+      "What is the significance of the missing nun verse in the acrostic - textual accident or intentional theological statement?",
+      "How does the triple accumulation 'הֲדַר כְּבוֹד הוֹדֶךָ' function - are these distinct attributes or poetic intensification?",
+      "Why does the LXX add an entire extra verse (13a) about divine faithfulness?",
+      "How do we reconcile universal divine mercy (v.9) with universal destruction of the wicked (v.20)?",
+      "What motivates the dramatic shift from cosmic kingship language (vv.11-13) to concrete care imagery (vv.14-16)?",
+      "Why does the psalm borrow Job's 'אֵין חֵקֶר' language for divine incomprehensibility?",
+      "What is the theological significance of different praise verbs for creation (thank) versus faithful ones (bless) in verse 10?",
+      "How does 'כׇל־בָּשָׂר' (all flesh) in the conclusion relate to the cosmic scope established earlier?",
+      "Why integrate the exact Exodus 34:6-7 formula rather than creating original praise language?"
     ],
     "verse_count": 21
   },

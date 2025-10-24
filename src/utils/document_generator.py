@@ -106,7 +106,7 @@ class DocumentGenerator:
             section.right_margin = Pt(72)
 
     def _add_paragraph_with_markdown(self, text: str, style: str = 'Normal'):
-        """Adds a paragraph, parsing basic markdown for bold/italics."""
+        """Adds a paragraph, parsing basic markdown for bold/italics, including nested formatting."""
         # Apply divine name modification to the entire paragraph text first.
         modified_text = self.modifier.modify_text(text)
 
@@ -127,37 +127,94 @@ class DocumentGenerator:
                 run = p.add_run(part[1:-1])
                 run.italic = True
             elif part.startswith('`') and part.endswith('`'):
-                run = p.add_run(part[1:-1])
-                run.italic = True
+                # Backtick content may contain **BOLD** for stressed syllables
+                # Parse nested bold within backticks
+                inner_content = part[1:-1]
+                self._add_nested_formatting(p, inner_content, base_italic=True)
             else:
                 p.add_run(part)
 
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
-        """Adds a single paragraph, treating newlines as soft breaks."""
+        """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
         modified_text = self.modifier.modify_text(text)
         p = self.document.add_paragraph(style=style)
-        
+
         # Split the entire text by markdown markers first
         parts = re.split(r'(\*\*.*?\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
-        
+
         for part in parts:
             is_bold = (part.startswith('**') and part.endswith('**')) or \
                       (part.startswith('__') and part.endswith('__'))
+            is_backtick = part.startswith('`') and part.endswith('`')
             is_italic = (part.startswith('*') and part.endswith('*')) or \
                         (part.startswith('_') and part.endswith('_')) or \
-                        (part.startswith('`') and part.endswith('`'))
+                        is_backtick
 
             content = part[2:-2] if is_bold else (part[1:-1] if is_italic else part)
-            
-            # Now, handle soft breaks within the content
-            lines = content.split('\n')
-            for i, line in enumerate(lines):
-                if line:
-                    run = p.add_run(line)
-                    run.bold = is_bold
-                    run.italic = is_italic
-                if i < len(lines) - 1:
-                    p.add_run().add_break()
+
+            # Handle backticks with nested bold (for stressed syllables)
+            if is_backtick:
+                self._add_nested_formatting_with_breaks(p, content, base_italic=True)
+            else:
+                # Handle soft breaks within the content
+                lines = content.split('\n')
+                for i, line in enumerate(lines):
+                    if line:
+                        run = p.add_run(line)
+                        run.bold = is_bold
+                        run.italic = is_italic
+                    if i < len(lines) - 1:
+                        p.add_run().add_break()
+
+    def _add_nested_formatting(self, paragraph, text: str, base_italic: bool = False):
+        """
+        Add text with nested formatting (e.g., **BOLD** inside italic context).
+        Used for phonetic transcriptions where stressed syllables are in **BOLD CAPS**.
+
+        Args:
+            paragraph: The docx paragraph object to add runs to
+            text: The text content (e.g., "tə-**HIL**-lāh")
+            base_italic: Whether the base text should be italic (True for backtick context)
+        """
+        # Split by bold markers
+        parts = re.split(r'(\*\*.*?\*\*)', text)
+        for part in parts:
+            if part.startswith('**') and part.endswith('**'):
+                # Bold text (stressed syllable)
+                run = paragraph.add_run(part[2:-2])
+                run.bold = True
+                run.italic = base_italic  # Maintain italic if in backtick context
+            else:
+                # Regular text
+                run = paragraph.add_run(part)
+                run.italic = base_italic
+
+    def _add_nested_formatting_with_breaks(self, paragraph, text: str, base_italic: bool = False):
+        """
+        Add text with nested formatting AND support for soft breaks.
+        Used for phonetic transcriptions in verse commentary.
+
+        Args:
+            paragraph: The docx paragraph object to add runs to
+            text: The text content with possible newlines
+            base_italic: Whether the base text should be italic
+        """
+        # First split by newlines
+        lines = text.split('\n')
+        for i, line in enumerate(lines):
+            if line:
+                # Then handle bold within each line
+                parts = re.split(r'(\*\*.*?\*\*)', line)
+                for part in parts:
+                    if part.startswith('**') and part.endswith('**'):
+                        run = paragraph.add_run(part[2:-2])
+                        run.bold = True
+                        run.italic = base_italic
+                    else:
+                        run = paragraph.add_run(part)
+                        run.italic = base_italic
+            if i < len(lines) - 1:
+                paragraph.add_run().add_break()
 
     def _add_bilingual_verse(self, hebrew: str, english: str):
         """Adds a formatted bilingual verse line with Hebrew (RTL) and English (LTR)."""
@@ -186,12 +243,12 @@ class DocumentGenerator:
         """Parses the verse-by-verse commentary file."""
         verses = []
         # Try both formats: "**Verse X**" (expected format) and "Verse X" (fallback format)
-        # First try the expected format with bold markdown
-        verse_blocks = re.split(r'(?=^\*\*Verse \d+\*\*\n)', content, flags=re.MULTILINE)
+        # First try the expected format with bold markdown, allowing for trailing whitespace
+        verse_blocks = re.split(r'(?=^\*\*Verse \d+\*\*\s*\n)', content, flags=re.MULTILINE)
         
         # If no verses found with bold format, try the fallback format without bold
         if len(verse_blocks) <= 1:  # Only one block means no splits occurred
-            verse_blocks = re.split(r'(?=^Verse \d+\n)', content, flags=re.MULTILINE)
+            verse_blocks = re.split(r'(?=^Verse \d+\s*\n)', content, flags=re.MULTILINE)
 
         for block in verse_blocks:
             block = block.strip()
@@ -200,10 +257,10 @@ class DocumentGenerator:
 
             lines = block.strip().split('\n', 1)  # Split only on the first newline
             
-            # Try both formats for verse number matching
-            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*', lines[0])
+            # Try both formats for verse number matching, allowing for trailing whitespace
+            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])
             if not verse_num_match:
-                verse_num_match = re.match(r'^Verse (\d+)', lines[0])
+                verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])
             
             if not verse_num_match:
                 continue

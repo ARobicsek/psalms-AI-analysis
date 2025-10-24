@@ -1,0 +1,111 @@
+{
+  "psalm_number": 1,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "The threefold negation creates an escalating progression from passive listening (עֲצַת) to active walking (דֶרֶךְ) to settled dwelling (מוֹשַׁב). The verb choice is striking: הָלַךְ (walked), עָמָד (stood), יָשָב (sat) - suggesting deepening moral compromise. The term לֵצִים (scoffers/mockers) is particularly curious as it's a wisdom literature technical term.",
+      "lexical_insights": [
+        "לֵצִים",
+        "עֲצַת",
+        "מוֹשַׁב"
+      ],
+      "figurative_analysis": [
+        "path/way metaphor for moral choice",
+        "sitting metaphor for settled lifestyle"
+      ],
+      "thesis_connection": "Establishes the 'two ways' framework central to thesis, but the psychological progression adds complexity",
+      "phonetic_transcription": "'ash-rēy-hā-**'IY**-sh 'a-**SHER**  **LŌ'** hā-**LAKH** ba-ʿa-**TSATH** rə-shā-**ʿIY**-m ū-və-**DHE**-rekh khat-tā-'iy-**M** **LŌ'** ʿā-**MĀDH** ū-və-mō-**SHAV** lē-**TSIY**-m **LŌ'** yā-**SHĀV**"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "The strong adversative כִּי אִם creates sharp contrast. Torah appears twice with different constructions - first as object of delight (חֵפֶץ), then as object of meditation (הָגָה). The phrase יוֹמָם וָלָיְלָה suggests continuous, totalistic engagement rather than scheduled study periods.",
+      "lexical_insights": [
+        "חֶפְצוֹ",
+        "יֶהְגֶּה",
+        "יוֹמָם וָלָיְלָה"
+      ],
+      "figurative_analysis": [
+        "day and night - merism for totality"
+      ],
+      "thesis_connection": "Central to thesis about Torah engagement, but the affective dimension (delight) adds emotional complexity",
+      "phonetic_transcription": "**KIY** 'im-bə-thō-**RATH** yə-hō-**WĀH** khef-**TSŌ** ū-**VƏ**-thō-rā-thō yeh-**GEH** yō-**MĀM** wā-**LĀ**-yə-lāh"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "The extended simile uses agricultural imagery with precise details: שָׁתוּל (transplanted/planted) suggests deliberate placement rather than natural growth. Three benefits follow in sequence, with the climactic יַצְלִיחַ (prospers) being remarkably absolute - 'whatever he does.' The tree imagery contrasts sharply with upcoming chaff metaphor.",
+      "lexical_insights": [
+        "שָׁתוּל",
+        "פַּלְגֵי־מָיִם",
+        "יַצְלִיחַ"
+      ],
+      "figurative_analysis": [
+        "tree as stability/permanence",
+        "streams as divine provision",
+        "fruit/leaves as productivity"
+      ],
+      "thesis_connection": "Supports agricultural metaphor framework, but the transplanting detail suggests divine agency beyond human choice",
+      "phonetic_transcription": "wə-hā-**YĀH** kə-**ʿĒTS** shā-**THŪL** ʿal-pal-ghēy-**MĀ**-yim 'a-**SHER** pir-**YŌ**  yi-**TĒN** bə-ʿi-**TŌ** wə-ʿā-**LĒ**-hū lō'-yi-**BŌL** wə-**KHŌL** 'a-sher-ya-ʿa-**SEH** yats-**LIY**-kha"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "The sharp contrast marker לֹא־כֵן creates dramatic reversal. The wicked get only one verse compared to three for the righteous. The chaff (מֹץ) metaphor suggests worthlessness and instability. Wind (רוּחַ) as agent of judgment is theologically loaded - could be divine spirit or natural force.",
+      "lexical_insights": [
+        "לֹא־כֵן",
+        "מֹץ",
+        "תִּדְּפֶנּוּ"
+      ],
+      "figurative_analysis": [
+        "chaff as worthlessness/instability",
+        "wind as judgment force"
+      ],
+      "thesis_connection": "Supports agricultural contrast from thesis, but the asymmetrical treatment raises questions about the psalm's rhetorical strategy",
+      "phonetic_transcription": "lō'-**KHĒN** hā-rə-shā-**ʿIY**-m **KIY** 'im-kam-**MŌTS** 'a-sher-tid-**FEN**-nū **RŪ**-kha"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "The forensic imagery shifts from agricultural to legal sphere. The phrase לֹא־יָקֻמוּ suggests inability to 'stand' in judgment - legal terminology. The parallel בַּמִּשְׁפָּט || בַּעֲדַת צַדִּיקִים suggests two different contexts - divine tribunal and righteous community assembly.",
+      "lexical_insights": [
+        "יָקֻמוּ",
+        "מִשְׁפָּט",
+        "עֲדַת צַדִּיקִים"
+      ],
+      "figurative_analysis": [
+        "standing as legal competence",
+        "assembly as judicial body"
+      ],
+      "thesis_connection": "Extends beyond simple agricultural metaphor to include cosmic/legal judgment - adds forensic dimension to thesis",
+      "phonetic_transcription": "ʿal-**KĒN**  lō'-yā-**QU**-mū rə-shā-ʿiy-**M** bam-mish-**PĀT** wə-khat-tā-**'IY**-m ba-ʿa-**DHATH** tsa-diy-**QIY**-m"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "The divine knowledge verb יוֹדֵעַ carries covenantal overtones beyond mere cognitive awareness. The inclusio with 'way' (דֶרֶךְ) from verse 1 creates structural closure. The contrasting fates are asymmetrical: YHWH 'knows' the righteous way, but the wicked way simply 'perishes' (תֹּאבֵד) - no divine agent mentioned.",
+      "lexical_insights": [
+        "יוֹדֵעַ",
+        "דֶּרֶךְ",
+        "תֹּאבֵד"
+      ],
+      "figurative_analysis": [
+        "way/path as life trajectory",
+        "knowing as covenantal relationship"
+      ],
+      "thesis_connection": "Completes the 'two ways' framework but introduces covenantal theology beyond simple moral dualism",
+      "phonetic_transcription": "kiy-yō-**DHĒ**-ʿa yə-hō-**WĀH** **DE**-rekh tsa-diy-**QIY**-m wə-**DHE**-rekh rə-shā-**ʿIY**-m tō'-**VĒDH** **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Asymmetrical treatment: righteous get elaborate description (3 verses) while wicked get compressed treatment (1.5 verses)",
+    "Metaphorical progression: psychological (v.1) → affective (v.2) → agricultural (vv.3-4) → forensic (v.5) → covenantal (v.6)",
+    "Divine agency paradox: God plants/knows the righteous but doesn't actively destroy the wicked - they simply perish",
+    "Inclusio structure with דֶּרֶךְ (way) creating circular composition while showing linear moral development",
+    "Sound patterns connecting key terms: הָלַךְ/יַצְלִיחַ, Torah repetition, wind/chaff phonetic relationship"
+  ],
+  "interesting_questions": [
+    "Why does the psalm give three verses to describing the righteous but only one and a half to the wicked - what does this asymmetry accomplish rhetorically?",
+    "What is the significance of the tree being 'transplanted' (שָׁתוּל) rather than naturally grown - does this imply divine initiative beyond human choice?",
+    "How should we understand the absolute claim that 'whatever he does prospers' (כֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ) in light of other wisdom literature's more nuanced view of suffering?",
+    "Why does the LXX translate לֵצִים (scoffers) as λοιμός (plague/pestilence) - what does this reveal about ancient interpretation of moral corruption?",
+    "What is the relationship between the forensic imagery in v.5 (judgment, assembly of righteous) and the agricultural metaphors - are these sequential or simultaneous realities?",
+    "Why does YHWH actively 'know' the way of the righteous but the way of the wicked simply 'perishes' without explicit divine action - what theology of judgment does this suggest?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on שָׁתוּל (transplanted), הָגָה (meditate), יוֹדֵעַ (know), לֵצִים (scoffers/mockers)\nCONCORDANCE: Track דֶּרֶךְ (way) inclusio, Torah meditation formulas, forensic terminology (משפט, עדת)\nFIGURATIVE: Agricultural metaphors (tree/chaff), legal imagery (standing in judgment), psychological progression\nCOMMENTARY: Interpretive challenges around absolute prosperity claim, divine agency in judgment, LXX translation choices"
+}

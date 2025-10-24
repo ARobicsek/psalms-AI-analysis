@@ -5,6 +5,446 @@
 
 ---
 
+## SESSION 21 (2025-10-23): Master Editor Prompt Enhancement - COMPLETE ✅
+
+### Goal
+Enhance Master Editor prompt to: (1) enforce phonetic transcription formatting at the start of each verse commentary, and (2) increase verse commentary length for verses with interesting linguistic/literary features.
+
+### Problem Statement
+**Issue 1**: Current Master Editor verse commentary averages ~230 words per verse. While quality is good, more substantive analysis desired for verses with unusual Hebrew phrases, poetic devices, or interpretive questions (target: 400-500 words).
+
+**Issue 2**: Phonetic transcriptions are provided in the PSALM TEXT section of the Master Editor prompt, but not appearing at the start of each verse commentary in the final output.
+
+### What Was Accomplished
+
+1. **Enhanced OUTPUT FORMAT Section** ✅
+   - Added **CRITICAL** instruction to begin each verse with phonetic transcription
+   - Explicit format requirement: `` `[phonetic transcription from PSALM TEXT]` ``
+   - Strengthened length guidance from passive "target 300-500" to active "Aim for 400-500"
+   - Added permission for brevity: "Only use 200-300 words for genuinely simple verses"
+
+2. **Added Two CRITICAL REQUIREMENTS** ✅
+   - **Phonetic Format**: MANDATORY—Begin each verse commentary with phonetic transcription in backticks
+   - **Length**: Aim for 400-500 words per verse when there are interesting features to analyze
+
+3. **Triple Reinforcement Strategy** ✅
+   - Explicit formatting instruction in OUTPUT FORMAT section
+   - Detailed length guidance with "Do NOT shortchange the reader" language
+   - Two new CRITICAL REQUIREMENTS bullets
+
+### Files Modified
+
+- **`src/agents/master_editor.py`** (lines 266-291):
+  - Enhanced OUTPUT FORMAT with phonetic transcription requirement
+  - Strengthened length guidance with active language
+  - Added two new CRITICAL REQUIREMENTS
+
+### Expected Impact
+
+**For Phonetic Transcription**:
+- 95%+ compliance expected (very explicit structural requirement)
+- Each verse will start with authoritative phonetic transcription
+- Example format:
+  ```markdown
+  **Verse 5**
+  `hă-dhar kə-vōdh hō-dhe-khā wə-dhiv-rēy nif-lə-'ō-the-khā 'ā-siy-khāh`
+
+  [400-500 word commentary analyzing unusual phrase...]
+  ```
+
+**For Length**:
+- 70-80% compliance expected (subjective judgment by GPT-5)
+- Expected increase: ~230 words → ~350-450 words for complex verses
+- Better engagement with BDB lexicon, concordance patterns, figurative language parallels, Torah Temimah
+
+### Next Session Goals
+
+**Immediate (Session 22)**:
+1. Re-run Master Editor on Psalm 145 with updated prompt
+2. Validate phonetic transcription appears at start of each verse
+3. Measure word count per verse (target: 350-450 for complex verses)
+4. Verify quality improvement (deeper analysis, not padding)
+
+**If length still insufficient**:
+5. Add concrete 450-word example verse commentary to prompt
+6. Consider changing "Aim for" to "Write at least 400 words for..."
+7. Add editorial assessment check: "Did I write substantive analysis?"
+
+---
+
+## SESSION 20 (2025-10-23): Stress Marking Pipeline Integration - COMPLETE ✅
+
+### Goal
+Integrate stress-aware phonetic transcriptions (with **BOLD CAPS** marking stressed syllables) throughout the entire pipeline, from generation through to the final Word document output, and provide clear instructions to agents on how to interpret and use stress marking.
+
+### Problem Statement
+Sessions 18-19 implemented stress detection and marking in the PhoneticAnalyst, but the stressed transcriptions weren't being passed to downstream agents (SynthesisWriter, MasterEditor), and the agents had no instructions on how to interpret the stress notation. Additionally, the Word document generator couldn't render nested markdown (**BOLD** inside backticks).
+
+### What Was Accomplished
+
+1. **MicroAnalyst Updated to Use Stressed Transcriptions** ✅
+   - Changed `_get_phonetic_transcriptions()` to use `syllable_transcription_stressed` field
+   - All phonetic data now includes **BOLD CAPS** stress marking (e.g., `tə-**HIL**-lāh`)
+   - Updated method docstring and log messages
+
+2. **SynthesisWriter Prompt Enhanced** ✅
+   - Added **STRESS NOTATION** explanation to phonetics section
+   - Example provided: `mal-**KHŪTH**-khā` = stress on KHŪTH
+   - Added **STRESS ANALYSIS** instructions: how to count stressed syllables
+   - Example pattern analysis: "3+2 stress pattern with stresses on VŌDH, KHĀ, MĒ"
+
+3. **MasterEditor Prompt Enhanced** ✅
+   - Added **STRESS ANALYSIS IGNORED** to MISSED OPPORTUNITIES checklist
+   - Explains stress notation and instructs editor to validate prosodic claims
+   - Tells editor to count **BOLD CAPS** syllables for meter verification
+
+4. **DocumentGenerator Updated for Nested Markdown** ✅
+   - Enhanced `_add_paragraph_with_markdown()` to handle **BOLD** inside backticks
+   - Enhanced `_add_paragraph_with_soft_breaks()` for verse commentary
+   - Added `_add_nested_formatting()` helper method
+   - Added `_add_nested_formatting_with_breaks()` helper method
+   - Technical achievement: Backticks render as *italic*, **CAPS** inside render as ***bold italic***
+
+5. **Comprehensive Testing** ✅
+   - Created `test_stress_marking_integration.py` test suite
+   - All 3 tests passed: PhoneticAnalyst, MicroAnalyst, DocumentGenerator
+   - Verified stress marking flows correctly through entire pipeline
+
+### Files Modified
+
+- **`src/agents/micro_analyst.py`** (lines 660-686):
+  - Updated `_get_phonetic_transcriptions()` to use stressed field
+
+- **`src/agents/synthesis_writer.py`** (lines 208-214):
+  - Added stress notation instructions to phonetics section
+
+- **`src/agents/master_editor.py`** (lines 100-104):
+  - Added stress analysis validation to editorial checklist
+
+- **`src/utils/document_generator.py`** (lines 108-217):
+  - Enhanced `_add_paragraph_with_markdown()` for nested formatting
+  - Enhanced `_add_paragraph_with_soft_breaks()` for nested formatting
+  - Added `_add_nested_formatting()` helper method
+  - Added `_add_nested_formatting_with_breaks()` helper method
+
+### Test Results
+
+**All tests passed** ✅
+
+**Test 1 - PhoneticAnalyst**:
+- `תְּהִלָּה` → `tə-hil-**LĀH**` (stress on final syllable)
+- `לְדָוִד` → `lə-dhā-**WIDH**` (stress on final syllable)
+
+**Test 2 - MicroAnalyst**:
+- Psalm 145:1: `tə-hil-**LĀH** lə-dhā-**WIDH** 'a-rō-mim-**KHĀ**...`
+- Psalm 145:2: `bə-khol-**YŌM** 'a-vā-rə-**KHEKH**-khā...`
+- Psalm 145:3: `**GĀ**-dhōl yə-hō-**WĀH** ū-mə-hul-**LĀL**...`
+
+**Test 3 - DocumentGenerator**:
+- Text `tə-**HIL**-lāh` parsed into 5 Word runs
+- 2 runs bold (HIL), all 5 runs italic
+- Nested formatting logic works correctly
+
+### Expected Impact
+
+**For Synthesis Writer (Claude Sonnet 4.5)**:
+- From vague "rhythmic" → specific "3+2 stress pattern with stresses on VŌDH, KHĀ, MĒ"
+- From unverifiable prosodic analysis → evidence-based meter analysis
+- Can now cite specific stressed syllables in commentary
+
+**For Master Editor (GPT-5)**:
+- Can validate prosodic claims against actual stress data
+- Can add missing stress analysis if synthesis writer omitted it
+- Can verify stress counts by counting **BOLD CAPS** syllables
+
+**For Word Documents**:
+- Stressed syllables appear in ***bold italic*** format
+- Readers can verify meter claims by counting bold syllables
+- Pedagogically useful for understanding Hebrew prosody
+
+**For Commentary Quality**:
+- More accurate prosodic analysis based on cantillation marks
+- Verifiable stress pattern claims
+- Better alignment with Masoretic tradition
+
+### Data Flow
+
+```
+PhoneticAnalyst
+  ↓ Generates: word['syllable_transcription_stressed']
+  ↓ Format: "tə-hil-**LĀH**"
+  ↓
+MicroAnalystV2 (NEW in Session 20)
+  ↓ Extracts stressed transcription (line 677)
+  ↓ Stores in: phonetic_data[verse_num]
+  ↓
+SynthesisWriter / MasterEditor (NEW prompts in Session 20)
+  ↓ Receives phonetic data in prompt with stress notation
+  ↓ Format: **Phonetic**: `tə-hil-**LĀH**...`
+  ↓ Agents can now analyze stress patterns
+  ↓
+DocumentGenerator (NEW nested parsing in Session 20)
+  ↓ Parses backticks: base = italic
+  ↓ Parses **CAPS** inside: add bold
+  ↓ Creates Word runs with dual formatting
+  ↓
+Final Word Document
+  ✓ Stressed syllables appear in bold italic
+  ✓ Regular syllables appear in italic only
+```
+
+### Next Session Goals
+
+**Immediate (Session 21)**:
+1. Run full pipeline test on Psalm 23 with stress-aware commentary
+2. Validate Word document stress rendering (check for ***bold italic*** formatting)
+3. Verify agents cite specific stress patterns in commentary
+4. Compare output quality with pre-Session-20 commentary
+
+**Optional**:
+5. Re-run Psalm 145 with stress-aware agent instructions
+6. Add meter pattern template to analytical framework
+7. Create prosodic analysis guidelines for common Hebrew meters (3+3, 3+2, 2+2)
+
+---
+
+## SESSION 19 (2025-10-23): Maqqef Stress Domain Correction - COMPLETE ✅
+
+### Goal
+Fix maqqef compound stress handling to match Hebrew cantillation rules where maqqef creates ONE ACCENT DOMAIN and only the last word receives stress.
+
+### Problem Statement
+Session 18's implementation gave stress to BOTH components of maqqef compounds (e.g., `בְּכׇל־דְּרָכָ֑יו` → `bə-**KHOL**-də-rā-**KHĀY**-w`), but this is linguistically incorrect. In Hebrew cantillation, maqqef creates a single prosodic unit where only the final word receives the accent mark.
+
+### What Was Accomplished
+
+1. **Maqqef Stress Domain Correction** ✅
+   - Modified `_transcribe_maqqef_compound()` to apply stress ONLY to last component
+   - Changed from multi-stress model to single-stress model
+   - Updated linguistic model: maqqef = one accent domain (not multiple independent words)
+
+2. **Code Changes** ✅
+   - Renamed `all_stressed_indices` → `last_component_stress_index` (singular)
+   - Added enumeration to detect last component: `is_last_component = (i == len(components) - 1)`
+   - Changed from `_format_syllables_with_multiple_stresses()` to `_format_syllables_with_stress()`
+   - Updated docstring to reflect new cantillation-based model
+
+3. **Comprehensive Testing** ✅
+   - Tested on 4 cases from Psalm 145 (verses 2, 14, 17)
+   - All tests pass: only 1 stress per compound, on last word
+   - Verification: `בְּכׇל־דְּרָכָ֑יו` now → `bə-khol-də-rā-**KHĀY**-w` (correct!)
+
+### Files Modified
+
+- **`src/agents/phonetic_analyst.py`** (lines 287-351):
+  - Updated `_transcribe_maqqef_compound()` method
+  - Changed stress handling from multiple to single (last word only)
+  - Updated docstring with cantillation-based explanation
+
+### Test Results
+
+**All 4 test cases passed** ✅
+
+| Hebrew | Before (Session 18) | After (Session 19) | Status |
+|--------|---------------------|-------------------|--------|
+| בְּכׇל־דְּרָכָ֑יו | bə-**KHOL**-də-rā-**KHĀY**-w | bə-khol-də-rā-**KHĀY**-w | ✅ |
+| בְּכׇל־מַעֲשָֽׂיו | bə-**KHOL**-ma-ʿa-**SĀY**-w | bə-khol-ma-ʿa-**SĀY**-w | ✅ |
+| לְכׇל־הַנֹּפְלִ֑ים | lə-**KHOL**-han-nō-fə-**LIY**-m | lə-khol-han-nō-fə-**LIY**-m | ✅ |
+| בְּכׇל־יוֹם | bə-**KHOL**-**YŌM** | bə-khol-**YŌM** | ✅ |
+
+### Expected Impact
+
+**For Phonetic Accuracy**:
+- Maqqef compounds now match actual Hebrew cantillation rules
+- Unstressed proclitics (like כׇל) correctly show no stress
+- Only accent-bearing words show stress marks
+
+**For Commentary**:
+- More accurate prosodic analysis (fewer stress marks = correct meter)
+- Verse 17 stress count: was 4 stresses, now 2 stresses (correct!)
+- Better alignment with Masoretic cantillation tradition
+
+**Breaking Change**:
+- Any existing phonetic transcriptions with maqqef will show different stress
+- This is a CORRECTION, not a regression
+- Recommendation: Re-run phonetic analysis on processed psalms if maqqef cited
+
+### Next Session Goals
+
+**Immediate (Session 20)**:
+1. Re-run Psalm 145 phonetic analysis with corrected maqqef handling
+2. Verify all maqqef compounds now show correct stress patterns
+3. Check if any commentary references old (incorrect) maqqef stress patterns
+
+**Optional**:
+4. Update synthesis/editor prompts to note maqqef = unstressed proclitic
+5. Add prosodic analysis that accounts for accent domains
+
+---
+
+## SESSION 18 (2025-10-23): Stress-Aware Phonetic Transcription - COMPLETE ✅
+
+### Goal
+Enhance the phonetic transcription system to include stress/accent marking based on cantillation marks (te'amim), enabling agents to analyze prosodic patterns, meter, and rhythm with verifiable evidence.
+
+### Problem Statement
+Commentary like "The measured rhythm of kə-vōdh mal-khūth-khā yō'-mē-rū is stately" was unhelpful because:
+- No indication of which syllables are stressed
+- No stress count or meter pattern shown
+- Readers can't verify prosodic claims
+- Not pedagogically useful for understanding Hebrew phonology
+
+### What Was Accomplished
+
+1. **Cantillation-Based Stress Detection** ✅
+   - Added comprehensive cantillation mark mapping (30+ Hebrew accents)
+   - Mapped primary disjunctive accents (Silluq, Atnah, Zaqef, Tifcha, etc.) to stress level 2
+   - Mapped secondary conjunctive accents (Munach, Mahpakh, Mercha) to stress level 1
+   - Excluded Dehi (֭) - it's a conjunctive accent that doesn't mark lexical stress
+
+2. **Stress-to-Syllable Mapping** ✅
+   - Enhanced `_transcribe_word()` to detect cantillation marks during transcription
+   - Created `_find_syllable_for_phoneme()` to map stress position to syllable index
+   - Implemented `_format_syllables_with_stress()` to render stressed syllables in **BOLD CAPS**
+   - Added default ultima (final syllable) stress rule for words without cantillation marks
+
+3. **Maqqef Compound Handling** ✅
+   - Created `_transcribe_maqqef_compound()` method to handle word connectors (־)
+   - Splits compounds and transcribes each component separately
+   - Applies stress to BOTH components (e.g., לְכׇל־הַנֹּפְלִ֑ים → lə-**KHOL**-han-nō-fə-**LIY**-m)
+   - Implemented `_format_syllables_with_multiple_stresses()` for multi-stress output
+
+4. **Multiple Stress Mark Handling** ✅
+   - When multiple cantillation marks present, prefer rightmost (actual stress position)
+   - Example: וּ֝מֶֽמְשַׁלְתְּךָ֗ has 3 marks → stress on final syllable where Revia (֗) is
+
+5. **Enhanced Output Format** ✅
+   - New field: `syllable_transcription_stressed` with **BOLD CAPS** for stressed syllables
+   - New field: `stressed_syllable_index` (0-based syllable position)
+   - New field: `stress_level` (0=unstressed, 1=secondary, 2=primary)
+   - Backward compatible - existing `syllable_transcription` field preserved
+
+### Files Modified
+
+- **`src/agents/phonetic_analyst.py`**: All stress detection enhancements
+  - Added `cantillation_stress` dictionary (lines 43-74)
+  - Enhanced `_transcribe_word()` with stress detection (lines 127-149)
+  - Added default ultima stress rule (lines 261-265)
+  - Created `_transcribe_maqqef_compound()` method (lines 287-343)
+  - Created `_find_syllable_for_phoneme()` helper (lines 536-553)
+  - Created `_format_syllables_with_stress()` method (lines 555-573)
+  - Created `_format_syllables_with_multiple_stresses()` method (lines 575-597)
+
+### Test Results
+
+All stress patterns validated on Psalm 145:7-17:
+
+**Before Enhancement**:
+```
+Verse 11: kə-vōdh mal-khūth-khā yō'-mē-rū
+Problem: Which syllables are stressed? What's the meter?
+```
+
+**After Enhancement**:
+```
+Verse 11: kə-**VŌDH** mal-khūth-**KHĀ** yō'-**MĒ**-rū ū-ghə-vū-rā-thə-**KHĀ** yə-dha-**BĒ**-rū
+Pattern: 3+2 stresses (VŌDH | KHĀ | MĒ // KHĀ | BĒ)
+Result: Verifiable, specific, pedagogically clear
+```
+
+**Maqqef Compounds**:
+```
+Before: lə-khol-han-nō-fə-LIY-m (only 1 stress)
+After:  lə-**KHOL**-han-nō-fə-**LIY**-m (2 stresses - correct!)
+```
+
+**Verses Tested**: 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+- ✅ All stress patterns match expected Hebrew phonology
+- ✅ Maqqef compounds show multiple stresses correctly
+- ✅ Default ultima stress applies when no cantillation present
+- ✅ Stress counts accurate (2-7 stresses per verse)
+
+### Cantillation Mark Reference
+
+**Primary Stress (Level 2)** - Major disjunctive accents:
+- Silluq/Meteg (ֽ◌) - verse end
+- Atnah (֑◌) - major division
+- Zaqef Qaton (֔◌), Zaqef Gadol (֕◌)
+- Tifcha (֖◌), R'vi'i (֗◌), Zarqa (֘◌)
+- Pashta (֙◌), Yetiv (֚◌), Tevir (֛◌)
+- Geresh (֜◌), Gershayim (֞◌)
+
+**Secondary Stress (Level 1)** - Conjunctive accents:
+- Munach (֣◌), Mahpakh (֤◌), Mercha (֥◌)
+- Qadma (֨◌), Ole (֫◌), Pazer (֡◌)
+
+**Not Included**:
+- Dehi (֭◌) - conjunctive accent, doesn't mark lexical stress
+
+### Expected Impact
+
+**For Commentary**:
+- From vague: "the rhythm is stately"
+- To specific: "3+2 stress pattern with stresses on VŌDH | KHĀ | MĒ creates measured proclamation"
+
+**For Agents**:
+- Synthesis Writer can count stresses and show patterns explicitly
+- Master Editor can verify prosodic claims against actual stress data
+- Both agents can cite specific stressed syllables (e.g., "stress on VŌDH")
+
+**For Readers**:
+- Can count **BOLD CAPS** syllables to verify stress counts
+- Can see meter patterns (e.g., "3+3 balanced" vs "3+2 asymmetric")
+- Pedagogically useful for understanding Hebrew phonology
+
+### Known Limitations
+
+1. **Schwa Syllabification**: Word-final sequences like תְּךָ render as `TKHĀ` (single syllable) rather than `tə-KHĀ` (two syllables). This is phonetically accurate for rapid speech but could be pedagogically clearer. Decision: Keep current (phonetically accurate).
+
+2. **Secondary vs. Primary**: Some secondary accents (conjunctives) may not always indicate lexical stress. Current implementation treats all conjunctives as secondary stress, which is generally correct but not universally so.
+
+### Next Session Goals
+
+**Immediate (Session 19)**:
+1. Update `SynthesisWriter` prompts to use stressed transcriptions
+   - Modify `format_phonetic_section()` to use `stressed_transcription` field
+   - Add instructions on HOW to cite stress patterns
+   - Require explicit stress counts and syllable naming
+
+2. Update `MasterEditor` prompts to validate stress claims
+   - Add validation checklist for prosodic analysis
+   - Require verification that stress counts match phonetic data
+   - Flag vague claims like "rhythmic" without evidence
+
+3. Test on Psalm 145 full pipeline
+   - Regenerate with stress-aware prompts
+   - Verify commentary shows specific stress patterns
+   - Validate meter analysis is evidence-based
+
+**Files to Modify Next Session**:
+- `src/agents/synthesis_writer.py` (prompts + format helper)
+- `src/agents/master_editor.py` (validation criteria)
+- Test on Psalm 145 to validate quality improvement
+
+### Documentation Created
+
+- `docs/STRESS_MARKING_ENHANCEMENT.md` - Complete technical specification
+- `docs/SESSION_18_PLAN.md` - Detailed implementation roadmap
+- `output/stress_test_verses_7-13.md` - Sample output with analysis
+- `test_stress_extraction.py` - Proof-of-concept demonstration
+- `test_stress_multi_verse.py` - Multi-verse validation
+- `test_stress_output.py` - Full stress-aware transcription test
+
+### Backward Compatibility
+
+✅ **Fully backward compatible**
+- Existing `syllable_transcription` field preserved
+- New `stressed_transcription` field added alongside
+- Old pipelines continue to work
+- New pipelines automatically use stress marking when available
+
+---
+
 ## SESSION 17 (2025-10-23): Phonetic Engine Bug Fixes - COMPLETE ✅
 
 ### Goal

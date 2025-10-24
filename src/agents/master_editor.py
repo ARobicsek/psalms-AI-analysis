@@ -98,21 +98,20 @@ Review the introduction and verse commentary for these issues:
 - Wrong verse references
 
 ### 2. MISSED OPPORTUNITIES
-- Phonetic transcription [see above in ### PSALM TEXT] not used to analyze sound patterns (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm).
-- Phonetic transcriptions used that don't match the scholarly phonetic text provided to you above in ### PSALM TEXT. These transcriptions are authoritative and must be used.
-- Phonetic claims made that CONTRADICT the provided transcription (e.g., claiming "soft f" when transcription shows "p")
-- LXX suggests alternative Vorlage not mentioned
-- Poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
+- Interesting insights from the Torah Temimah (re rabbinic use/interpretation) not included
+- Illuminating traditional commentary (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) not integrated
+- Research questions identified by Macro and Micro analysts not answered (even when answerable with available materials)
+- Weak, forced, unclear or incorrect phonetic analysis. ONLY NOTEWORTHY, STRONG and ILLUMINATING phonetic poetic devices should be pointed out (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm, meter).
+- Authorotative Phonetic transcription provided above in ### PSALM TEXT MUST BE USED to analyze sound patterns.
+- Stress analysis ignored: The phonetic transcriptions include stress marking where syllables in **BOLD CAPS** indicate stressed syllables based on Hebrew cantillation marks. For example, `mal-**KHŪTH**-khā` means the middle syllable KHŪTH receives primary stress. If you wish to analyze prosodic patterns, meter, or stress counts, you should add this analysis by counting the **BOLD CAPS** syllables.
+- Comparative textual insights (e.g. MT vs LXX) not addressed
+- NOTEWORTHY poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
 - Unusual or interesting Hebrew phrases not commented on (e.g., distinctive idioms, unusual word pairings like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
 - Interesting lexical insights in BDB not surfaced
 - Concordance patterns not explored
 - Figurative language not analyzed
 - Figurative language parallels from database not cited or analyzed
 - ANE parallels available but not discussed
-- Comparative textual insights (e.g. MT vs LXX) not addressed
-- Interesting insights from the Torah Temimah (re rabbiic use/interpretation) not included
-- Illuminating traditional commentary (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) not integrated
-- Research questions identified by Macro and Micro analysts not answered (even when answerable with available materials)
 
 ### 3. STYLISTIC PROBLEMS
 **Too "LLM-ish" or breathless:**
@@ -155,7 +154,7 @@ Review the introduction and verse commentary for these issues:
 - woven directly into the sentence,
 - or included as a short explanation at the end of the introductory essay or verse commentary.
 EXAMPLES OF TERMS THAT MUST BE DEFINED:
-- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", etc.
+- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", hendiadys, doxology,etc.
 - **Hebrew Grammatical Terms:** **"intensive stem (Pi'el)"** (a verb form often indicating intensified action), **"Hithpolel"** (a reflexive verb form), etc. Explain what the form *does* functionally.
 - **Scholarly Shorthand:** **"BDB"** (the Brown-Driver-Briggs Hebrew and English Lexicon, a standard scholarly dictionary that includes...), "LXX" (the Septuagint, an ancient Greek translation of the Hebrew Bible that sometimes differs from the Masoretic Texts in ways that can reveal...), "MT" (the Masoretic Text, the standard Hebrew version known through...), "11QPsa" (the Psalm scroll from Qumran Cave 11, which contains variant readings that shed light on...)
 - **General Academic Terms or terms related to the Ancient Near East:** Any word not in common general lay usage must be clarified (including "ANE").
@@ -187,9 +186,9 @@ First, provide a brief editorial assessment (200-400 words):
 
 **Stage 2: Revised Introduction**
 Rewrite the introduction essay to address identified weaknesses. The revised introduction should:
-- Maintain 800-1400 words (can be longer if genuinely warranted by interesting findings and/or length of the psalm)
+- Maintain 800-1600 words (can be longer if genuinely warranted by interesting findings and/or length of the psalm)
 - Correct any factual errors
-- Surface missed insights from research materials
+- Surface missed insights from research materials, especially the Torah Temimah and traditional commentaries
 - Address answerable questions raised by the Macro and Micro analysts (weave answers into the essay where appropriate)
 - Achieve the target style (Alter/Kugel/Bloom level)
 - Define technical terms for lay readers
@@ -212,6 +211,13 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
 - **Discretion**: You have full editorial discretion. You are not required to include every detail from the synthesizer's commentary. Your role is to *evaluate* the synthesizer's choices regarding phonetic and figurative language, and then decide whether to retain, enhance, rewrite, or replace them to achieve the highest level of scholarly excellence.
 
 - **Items of interest to include** (when relevant):
+  **Interpretation and Reception**, including
+    - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
+    - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
+    - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
+    - Church fathers and medieval Christian interpretation if very illuminating
+    - Modern critical scholarship debates
+  * Figurative language analysis (how does the usage of similar figuration elsewhere shed light on how it's functioning here?)
   * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided above))
   * **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it—explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
   * Literary insights (narrative techniques, rhetorical strategies)
@@ -220,21 +226,14 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Grammar and syntax (especially when illuminating)
   * Textual criticism (MT vs LXX, hints about Vorlage)
   * Comparative biblical usage (concordance insights showing how terms/phrases appear elsewhere)
-  * Figurative language analysis (how vehicles/metaphors work across Scripture)
   * Timing/composition clues (vocabulary, theology, historical references)
-  **Interpretation and Reception**, including
-    - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
-    - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
-    - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
-    - Church fathers and medieval Christian interpretation if very illuminating
-    - Modern critical scholarship debates
 
 **Figurative Language Integration:**
 For verses with figurative language where research provided biblical parallels:
 - MUST cite at least one specific biblical parallel from the database (book:chapter:verse)
 - MUST analyze the usage pattern (frequency, typical contexts)
 - MUST note how this psalm's use compares to typical usage
-- SHOULD provide insight beyond generic observation
+- SHOULD provide insight beyond generic observation. Why was THIS figuration chosen by the poet? What can we learn about its senses from how it's used elsewhere? Think deeply and carefully about this!
 
 Example of GOOD: "“He shall be like a tree transplanted by channels of water” (v. 3). The participle shathul is precise; BDB glosses it “transplanted,” a term elsewhere used of vines or trees set in a chosen place (Jeremiah 17:8; Ezekiel 17:22–23; 19:10). The site is not random: palgei mayim are divided channels, irrigation runnels, rather than a single stream. This is cultivation as much as nature."
 
@@ -245,6 +244,8 @@ Example of BAD: "Verse 16 speaks of God opening his hand. This imagery appears e
 - **Correct style**: Avoid breathless LLM language; show rather than tell
 - **Define terms and ensure accesibility**: Scrupulously apply the rules from criteria #4 (Stypistic Problems) and #6 (Undefined Technical Terms). Rewrite any sentence that sounds like it belongs in an academic journal. And ensure all technical terms have a definition in-line or after the commentary.
 - **Emphasize the interesting**: Make sure to comment on unusual turns of phrase, distinctive Hebrew idioms, and poetic devices. These linguistic and literary features are precisely what intelligent lay readers find fascinating.
+- **REMEMBER**: Very curious intelligent readers are depending on you to be their guide through this compelling, mysterious and enduring text that has been studied and recited with fervor for millenia. Give them new insights and deeply enhance their encounter with this work.
+- **REMEMBER**: You have deep access to resources that NO scholar has had complete access to before. Use this to your advantage to produce truly outstanding commentary.
 
 ---
 
@@ -263,10 +264,12 @@ Return your response in this exact structure:
 ### REVISED VERSE COMMENTARY
 
 **Verse 1**
-[Revised commentary for verse 1]
+
+[Your revised commentary for verse 1. TARGET: 300-500 words. Do NOT shortchange the reader—intelligent lay readers want substantive analysis of linguistic and literary features. Aim for 400-500 words when the verse has interesting Hebrew phrases, poetic devices, figurative language, or interpretive questions. Only use 200-300 words for genuinely simple verses.]
 
 **Verse 2**
-[Revised commentary for verse 2]
+
+[Your revised commentary for verse 2. TARGET: 300-500 words as above.]
 
 [Continue for all verses...]
 
@@ -280,6 +283,7 @@ Return your response in this exact structure:
 - **Style**: Measured confidence, not breathless praise; show, don't tell
 - **Completeness**: Cover all verses, define technical terms, engage specific texts
 - **Excellence**: Elevate from "good" to "National Book Award" level
+- **Length**: Aim for 400-500 words per verse when there are interesting features to analyze. Do not be terse when the verse warrants substantive treatment.
 
 Begin your editorial review and revision below.
 """
@@ -477,9 +481,12 @@ class MasterEditor:
             result = self._parse_editorial_response(response_text, psalm_number)
 
             return result
-
+        
+        except openai.RateLimitError as e:
+            self.logger.error(f"OpenAI API quota exceeded: {e}. Please check your plan and billing details.")
+            raise  # Re-raise the exception to be handled by the pipeline
         except Exception as e:
-            self.logger.error(f"Error in editorial review: {e}")
+            self.logger.error(f"An unexpected error occurred during editorial review: {e}")
             raise
 
     def _parse_editorial_response(self, response_text: str, psalm_number: int) -> Dict[str, str]:

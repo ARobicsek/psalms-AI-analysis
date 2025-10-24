@@ -31,6 +31,7 @@ import json
 import argparse
 from pathlib import Path
 import subprocess
+import openai
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -520,14 +521,19 @@ def run_enhanced_pipeline(
 
         master_editor = MasterEditor()
         editor_model = master_editor.model
-        result = master_editor.edit_commentary(
-            introduction_file=synthesis_intro_file,
-            verse_file=synthesis_verses_file,
-            research_file=research_file,
-            macro_file=macro_file,
-            micro_file=micro_file,
-            psalm_number=psalm_number
-        )
+        try:
+            result = master_editor.edit_commentary(
+                introduction_file=synthesis_intro_file,
+                verse_file=synthesis_verses_file,
+                research_file=research_file,
+                macro_file=macro_file,
+                micro_file=micro_file,
+                psalm_number=psalm_number
+            )
+        except openai.RateLimitError as e:
+            logger.error(f"PIPELINE HALTED: OpenAI API quota exceeded during Master Editor step. {e}")
+            print(f"\n⚠️ PIPELINE HALTED: OpenAI API quota exceeded. Please check your plan and billing details.")
+            sys.exit(1) # Exit gracefully
 
         # Save outputs
         with open(edited_assessment_file, 'w', encoding='utf-8') as f:
@@ -810,7 +816,6 @@ Examples:
         import traceback
         traceback.print_exc()
         return 1
-
 
 if __name__ == '__main__':
     sys.exit(main())

@@ -1,7 +1,7 @@
 # Pipeline Summary Report: Psalm 145
 
-**Generated**: 2025-10-23 18:50:55
-**Total Pipeline Duration**: 1296.3 seconds (21.6 minutes)
+**Generated**: 2025-10-24 00:54:32
+**Total Pipeline Duration**: 16977.0 seconds (283.0 minutes)
 
 ---
 
@@ -18,82 +18,81 @@
 
 | Step | Input Chars | Input Tokens (est) | Output Chars | Output Tokens (est) | Duration (s) |
 |------|-------------|-------------------|--------------|---------------------|--------------|
-| macro_analysis | 3,279 | 1,093 | 11,141 | 3,713 | 63.8 |
-| micro_analysis | 11,141 | 3,713 | 155,478 | 51,826 | 239.3 |
-| → research_bundle | — | — | 140,966 | 46,988 | — |
-| synthesis | 166,621 | 55,540 | 44,463 | 14,821 | 299.5 |
-| master_editor | 197,158 | 65,719 | 27,709 | 9,236 | 213.4 |
+| macro_analysis | 3,279 | 1,093 | 9,830 | 3,276 | 57.3 |
+| micro_analysis | 9,830 | 3,276 | 143,650 | 47,883 | 247.7 |
+| → research_bundle | — | — | 129,321 | 43,107 | — |
+| synthesis | 153,482 | 51,160 | 47,987 | 15,995 | 317.7 |
+| master_editor | 235,017 | 78,339 | 36,025 | 12,008 | 199.2 |
 
 ---
 
 ## Research Requests
 
-### Lexicon Requests (13)
+### Lexicon Requests (12)
 
 | # | Hebrew Word | Reason |
 |---|-------------|--------|
-| 1 | תְּהִלָּה | Only psalm titled 'tehillah' - need semantic distinction from other praise terms |
-| 2 | אֲרוֹמִמְךָ | Elevation metaphor - specific semantic range of this praise verb |
-| 3 | מְהֻלָּל | Pual form - passive praise construction, theological implications |
-| 4 | חֵקֶר | Investigation/fathoming - philosophical concept of divine comprehensibility |
-| 5 | דּוֹר | Generational transmission terminology - temporal vs. genealogical emphasis |
-| 6 | הֲדַר | First element of triple glory construct - specific nuance vs. כבוד/הוד |
-| 7 | עֱזוּז | Strength/intensity of awesome deeds - rare substantival usage |
-| 8 | זֵכֶר | Memorial vs. memory - cultic/liturgical technical term |
-| 9 | יַבִּיעוּ | Gushing/pouring forth - vigorous liquid metaphor for praise |
-| 10 | אֶרֶךְ אַפַּיִם | Long-nose idiom - ANE background and theological development |
-| 11 | חֲסִידֶיךָ | Faithful ones vs. works distinction - covenant community terminology |
-| 12 | בֶאֱמֶת | Truth/sincerity qualifier for prayer - moral epistemology |
-| 13 | כׇּל־בָּשָׂר | All flesh vs. all people - specific anthropological scope |
+| 1 | תְּהִלָּה | Rare superscription - only here and Ps 119:171, need semantic distinction from o... |
+| 2 | עֱזוּז | Rare power term in v.6 - limited biblical usage, need precise meaning |
+| 3 | חֵקֶר | Job language borrowed for divine incomprehensibility - theological significance |
+| 4 | יַבִּיעוּ | Liquid metaphor for speech in v.7 - unique praise vocabulary |
+| 5 | מְהֻלָּל | Intensive praise form in v.3 - morphological and semantic analysis needed |
+| 6 | אָשִׂיחָה | Meditation/recitation verb in v.5 - cultic vs personal dimension |
+| 7 | נוֹרְאֹתֶיךָ | Awesome deeds vocabulary - theological weight of 'nora' root |
+| 8 | הֲדַר | Part of triple glory accumulation - distinct from kevod and hod? |
+| 9 | יְשַׂבֵּרוּ | Hopeful waiting in v.15 - semantic range of expectation |
+| 10 | רָצוֹן | Ambiguous in v.16 - divine favor or creatures' desire? |
+| 11 | מֶמְשַׁלְתְּךָ | Dominion term in Ugaritic parallel - ANE royal vocabulary |
+| 12 | כְּפוּפִים | Bent over ones in v.14 - specific vulnerability imagery |
 
 ### Concordance Searches (7)
 
 | # | Query | Scope | Level | Purpose |
 |---|-------|-------|-------|---------|
-| 1 | תהלה | Psalms | consonantal | Compare tehillah usage patterns vs. other praise terms |
-| 2 | דור לדור | Tanakh | exact | Generational transmission formula across Scripture |
-| 3 | עיני כל | Tanakh | exact | Universal dependence imagery - eyes of all looking expectant... |
-| 4 | לעולם ועד | Psalms | exact | Temporal eternity formula - obsessive usage pattern |
-| 5 | טוב לכל | Tanakh | consonantal | Divine goodness to all creation - universalism theology |
-| 6 | מלכות | Psalms | consonantal | Kingdom/kingship language in praise contexts |
-| 7 | בני האדם | Tanakh | exact | Sons of humanity - universal address patterns |
+| 1 | דור לדור | Psalms | consonantal | Track intergenerational transmission patterns |
+| 2 | מלכותך מלכות | Tanakh | consonantal | Eternal kingship formulas and Ugaritic parallels |
+| 3 | כל מעשיך | Psalms | consonantal | Universal divine works language |
+| 4 | לעולם ועד | Tanakh | exact | Eternity formula usage - appears twice in opening verses |
+| 5 | חנון ורחום | Tanakh | consonantal | Exodus 34 formula distribution across Scripture |
+| 6 | בני האדם | Psalms | consonantal | Humanity references in psalm context |
+| 7 | קרוב יהוה | Tanakh | consonantal | Divine nearness theology |
 
 ### Figurative Language Searches (6)
 
 | # | Verse | Vehicle Terms | Reason |
 |---|-------|---------------|--------|
-| 1 | None | investigation, investigation, investigat... | Investigation metaphor for divine comprehension - ... |
-| 2 | None | pour, pour, pour, pours | Pouring forth goodness - vivid liquid metaphor for... |
-| 3 | None | fallen, fallen, fall, falls | Physical support imagery - bodies falling and bend... |
-| 4 | None | bent, bent, bow, bows | Bent/bowed physical imagery - bodily metaphor for ... |
-| 5 | None | expectation, expectation, expect, expect... | Eyes as universal dependence - striking personific... |
-| 6 | None | opening, opening, open, opens | Open hand gesture - generous divine action metapho... |
+| 1 | None | pour forth, pour forth, pour, pours | Pour forth praise - vivid liquid metaphor for spee... |
+| 2 | None | fathom, fathom, search, searching | Fathoming divine greatness - epistemological impos... |
+| 3 | None | support, support, supports, supporting | Supporting the falling - physical divine intervent... |
+| 4 | None | raise up, raise up, raise, raises | Raising the bent - restoration of vulnerable image... |
+| 5 | None | wait hopefully, wait hopefully, wait, wa... | Eyes waiting hopefully - expectant gaze as univers... |
+| 6 | None | open hand, open hand, open, opens | Opening divine hand - generosity gesture imagery |... |
 
 ### Commentary Requests (21)
 
 | # | Verse | Reason |
 |---|-------|--------|
-| 1 | 145:1 | Unique tehillah title - how do commentators explain this psalm's speci... |
-| 2 | 145:2 | Daily blessing commitment - traditional understanding of liturgical ob... |
-| 3 | 145:3 | Divine transcendence claim - how commentators handle epistemological l... |
-| 4 | 145:4 | Generational transmission focus - classical interpretation of works vs... |
-| 5 | 145:5 | Triple glory construction - how commentators parse the dense Hebrew sy... |
-| 6 | 145:6 | Textual variant issue - traditional manuscript and interpretive approa... |
-| 7 | 145:7 | Memorial terminology - liturgical vs. personal memory in classical exe... |
-| 8 | 145:8 | Selective divine attribute quotation - why omit 'truth and faithfulnes... |
-| 9 | 145:9 | Universal divine goodness - how commentators handle radical inclusivit... |
-| 10 | 145:10 | Works vs. faithful distinction - covenant particularism within univers... |
-| 11 | 145:11 | Royal proclamation theme - kingship theology in praise context |
-| 12 | 145:12 | Mission to humanity - universal proclamation purpose |
-| 13 | 145:13 | Eternal kingship formula - ANE background and theological adaptation |
-| 14 | 145:14 | Physical care imagery - literal vs. metaphorical interpretation of dis... |
-| 15 | 145:15 | Eyes of all creation - how commentators handle universal personificati... |
-| 16 | 145:16 | Divine satisfaction provision - abundance vs. necessity theology |
-| 17 | 145:17 | Character-action integration - how divine ways reflect divine nature |
-| 18 | 145:18 | Qualified divine accessibility - what constitutes calling 'in truth'? |
-| 19 | 145:19 | God-fearer privileges - covenant benefits within universal framework |
-| 20 | 145:20 | Theodicy tension - destroying wicked vs. universal goodness |
-| 21 | 145:21 | All flesh conclusion - universal summons and inclusio completion |
+| 1 | 145:1 | Rare tehillah superscription - how do commentators explain its uniquen... |
+| 2 | 145:2 | Daily blessing vow - traditional interpretation of perpetual praise ob... |
+| 3 | 145:3 | Divine incomprehensibility - classical understanding of 'no searching'... |
+| 4 | 145:4 | Intergenerational praise - how commentators interpret transmission of ... |
+| 5 | 145:5 | Triple glory accumulation - traditional parsing of hadar/kevod/hod dis... |
+| 6 | 145:6 | Ketiv/qere variation - how commentators handle textual uncertainty and... |
+| 7 | 145:7 | Liquid praise metaphor - classical interpretation of 'pour forth' and ... |
+| 8 | 145:8 | Exodus 34 quotation - why insert systematic theology here and how it f... |
+| 9 | 145:9 | Universal divine goodness - traditional reconciliation with particular... |
+| 10 | 145:10 | Creation vs faithful distinction - how commentators explain different ... |
+| 11 | 145:11 | Royal vocabulary intensification - classical understanding of divine k... |
+| 12 | 145:12 | Missionary dimension - traditional interpretation of human proclamatio... |
+| 13 | 145:13 | Ugaritic parallel and LXX addition - how classical commentators handle... |
+| 14 | 145:14 | Cosmic to personal shift - traditional understanding of divine kingshi... |
+| 15 | 145:15 | Universal dependence imagery - classical interpretation of eye metapho... |
+| 16 | 145:16 | Divine generosity - traditional understanding of open hand gesture and... |
+| 17 | 145:17 | Character summary - how commentators distinguish divine ways vs works ... |
+| 18 | 145:18 | Qualified universalism - traditional interpretation of 'in truth' cond... |
+| 19 | 145:19 | Sequential divine response - classical understanding of desire-to-deli... |
+| 20 | 145:20 | Moral dualism - how commentators reconcile protection/destruction with... |
+| 21 | 145:21 | Inclusio completion - traditional understanding of individual-to-cosmi... |
 
 ---
 
@@ -101,29 +100,29 @@
 
 ### Lexicon Entries
 
-**Total entries returned**: 33
+**Total entries returned**: 23
 
 ### Concordance Results
 
 | Query | Results Count |
 |-------|---------------|
-| תהלה | 8 |
-| דור לדור | 0 |
-| עיני כל | 0 |
+| דור לדור | 1 |
+| מלכותך מלכות | 1 |
+| כל מעשיך | 0 |
 | לעולם ועד | 0 |
-| טוב לכל | 0 |
-| מלכות | 6 |
-| בני האדם | 0 |
+| חנון ורחום | 4 |
+| בני האדם | 1 |
+| קרוב יהוה | 2 |
 
-**Total concordance results**: 14
+**Total concordance results**: 9
 
 ### Figurative Language Results
 
 | Query/Verse | Instances Found |
 |-------------|-----------------|
-| total_instances_used | 149 |
+| total_instances_used | 176 |
 
-**Total figurative instances**: 149
+**Total figurative instances**: 176
 
 ### Commentary Results
 
@@ -151,37 +150,38 @@
 
 ## Analysis Questions
 
-### MacroAnalyst Research Questions (10)
+### MacroAnalyst Research Questions (9)
 
-1. How does the complete acrostic structure function theologically beyond literary artistry, and what does it suggest about comprehensive praise?
-2. What is the significance of the divine epithet progression from 'my God the King' to 'YHWH' throughout the psalm?
-3. How does the Ugaritic parallel in v. 13 illuminate the relationship between Israelite and broader ANE royal theology?
-4. What is the theological significance of the movement from God's incomprehensible greatness (v. 3) to intimate care (vv. 15-16)?
-5. How does the 'eyes of all' imagery (v. 15) function within the broader creation theology of the psalm?
-6. What is the relationship between the generational transmission theme (vv. 4, 13) and the eternal praise framework?
-7. How does the theodicy element (v. 20) fit into the comprehensive praise structure without creating tension?
-8. What is the significance of the progression from 'works' and 'mighty acts' to specific care for the fallen and hungry?
-9. How does this psalm function as a theological summary of praise literature in relation to other Hallel psalms?
-10. What is the relationship between covenant (faithful ones, those who fear him) and creation (all flesh, all his works) in the psalm's theological vision?
+1. What is the theological significance of the missing nun verse in the acrostic, and how do ancient versions handle this gap?
+2. How does the sevenfold use of 'kol' (all/every) function as a literary and theological device throughout the psalm?
+3. What is the relationship between the divine character formula in v. 8 and Exodus 34:6-7, and how does this psalm expand or modify that tradition?
+4. How does the Ugaritic parallel in vv. 11-13 illuminate the psalm's appropriation and transformation of Ancient Near Eastern royal ideology?
+5. What is the significance of the intergenerational motif (dor le-dor) for understanding the psalm's theology of covenant continuity?
+6. How does the alternation between divine transcendence (greatness, majesty) and immanence (care, provision) function structurally and theologically?
+7. What is the liturgical function of the movement from individual vow to cosmic participation, and how does this relate to temple worship practices?
+8. How do the specific images of divine care (supporting the falling, feeding the hungry, protecting the righteous) relate to Ancient Near Eastern royal ideology and social justice themes?
+9. What is the relationship between divine kingship and divine judgment in vv. 19-20, and how does this compare to other royal psalms?
 
-### MicroAnalyst Interesting Questions (8)
+### MicroAnalyst Interesting Questions (10)
 
-1. Why is this the only psalm titled 'תְּהִלָּה' when this word gives the whole psalter its name?
-2. What is the theological significance of selectively quoting the Exodus 34:6 formula while omitting 'truth and faithfulness'?
-3. How does the LXX addition in v13a ('Faithful is the LORD in his words...') illuminate early interpretive traditions?
-4. Is the triple construct chain 'הֲדַר כְּבוֹד הוֹדֶךָ' standard Hebrew syntax or innovative poetic accumulation?
-5. How do we reconcile 'good to all' (v9) with 'destroys all the wicked' (v20) - is this theological tension intentional?
-6. Why does the psalm use 'כׇּל־בָּשָׂר' (all flesh) in the conclusion rather than 'all people' or 'all creation'?
-7. What is the difference between יוֹדוּךָ (praise from all works) and יְבָרְכוּכָה (bless from faithful ones) in v10?
-8. Does the 'עֵינֵי־כֹל' (eyes of all) image include non-animate creation having metaphorical 'eyes'?
+1. Why does the psalm use the rare superscription 'תְּהִלָּה' only here and Psalm 119:171?
+2. What is the significance of the missing nun verse in the acrostic - textual accident or intentional theological statement?
+3. How does the triple accumulation 'הֲדַר כְּבוֹד הוֹדֶךָ' function - are these distinct attributes or poetic intensification?
+4. Why does the LXX add an entire extra verse (13a) about divine faithfulness?
+5. How do we reconcile universal divine mercy (v.9) with universal destruction of the wicked (v.20)?
+6. What motivates the dramatic shift from cosmic kingship language (vv.11-13) to concrete care imagery (vv.14-16)?
+7. Why does the psalm borrow Job's 'אֵין חֵקֶר' language for divine incomprehensibility?
+8. What is the theological significance of different praise verbs for creation (thank) versus faithful ones (bless) in verse 10?
+9. How does 'כׇל־בָּשָׂר' (all flesh) in the conclusion relate to the cosmic scope established earlier?
+10. Why integrate the exact Exodus 34:6-7 formula rather than creating original praise language?
 
 ---
 
 ## Token Usage Summary
 
-**Total Input Tokens (estimated)**: 126,065
-**Total Output Tokens (estimated)**: 79,596
-**Total Tokens (estimated)**: 205,661
+**Total Input Tokens (estimated)**: 133,868
+**Total Output Tokens (estimated)**: 79,162
+**Total Tokens (estimated)**: 213,030
 
 *Note: Token estimates are approximate (character count / 3). Actual API usage may vary.*
 
@@ -189,4 +189,4 @@
 
 
 *Report generated by PipelineSummaryTracker*
-*Psalm 145 - 2025-10-23 18:50:55*
+*Psalm 145 - 2025-10-24 00:54:32*
