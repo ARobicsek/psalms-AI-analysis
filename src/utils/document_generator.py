@@ -379,23 +379,22 @@ Methodological & Bibliographical Summary
         # Adjust spacing after the main title for a "softer" break
         title_style = self.document.styles['Heading 1']
         title_style.paragraph_format.space_after = Pt(12)
-        
 
-        # 2. Add Introduction
+
+        # 2. Add Full Psalm Text
+        self._format_psalm_text(self.psalm_num, psalm_text_data)
+
+        # Add a page break after the psalm text table
+        self.document.add_paragraph() # Add a paragraph to attach the break to
+        self.document.add_page_break()
+
+        # 3. Add Introduction
         self.document.add_heading('Introduction', level=2)
         intro_content = self.intro_path.read_text(encoding='utf-8')
         # Use single newline split to match print_ready.md formatting
         for para in intro_content.strip().split('\n'):
             if para.strip():
                 self._add_paragraph_with_markdown(para, style='BodySans')
-
-        # 3. Add Full Psalm Text
-        self.document.add_page_break()
-        self._format_psalm_text(self.psalm_num, psalm_text_data)
-        
-        # Add a page break after the psalm text table
-        self.document.add_paragraph() # Add a paragraph to attach the break to
-        self.document.add_page_break()
 
         # 4. Add Verse-by-Verse Commentary
         self.document.add_heading('Verse-by-Verse Commentary', level=2)
