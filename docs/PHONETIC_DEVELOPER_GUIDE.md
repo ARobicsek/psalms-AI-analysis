@@ -578,3 +578,12 @@ The intimate image of divine provision reaches climactic expression: "פּוֹת
 **Dependencies**: None (clean addition to existing pipeline)
 
 **Risk**: Low (additive feature, doesn't break existing functionality)
+
+---
+
+## See Also
+
+- **[PHONETIC_SYSTEM.md](PHONETIC_SYSTEM.md)** - Quick reference for phonetic transcription
+- **[PHONETIC_TRANSCRIPTION_DESIGN.md](PHONETIC_TRANSCRIPTION_DESIGN.md)** - Complete design specification
+- **[PHONETIC_ENHANCEMENT_SUMMARY.md](PHONETIC_ENHANCEMENT_SUMMARY.md)** - Overview of phonetic documentation
+- **[TECHNICAL_ARCHITECTURE_SUMMARY.md](TECHNICAL_ARCHITECTURE_SUMMARY.md)** - Overall system architecture

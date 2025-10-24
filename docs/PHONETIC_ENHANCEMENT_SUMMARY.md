@@ -62,7 +62,7 @@ All downstream agents will be instructed to:
 - Edge cases (divine names, maqqef, silent shewa)
 - Implementation checklist
 
-### 2. [PHONETIC_REFERENCE_GUIDE.md](PHONETIC_REFERENCE_GUIDE.md)
+### 2. [PHONETIC_SYSTEM.md](PHONETIC_SYSTEM.md)
 **Quick reference guide** with:
 - Complete consonant chart (with dagesh, without dagesh, final forms)
 - Complete vowel chart (with examples)
@@ -75,7 +75,7 @@ All downstream agents will be instructed to:
 
 **Use case**: LLM reference during transcription generation
 
-### 3. [PHONETIC_IMPLEMENTATION_EXAMPLE.md](PHONETIC_IMPLEMENTATION_EXAMPLE.md)
+### 3. [PHONETIC_DEVELOPER_GUIDE.md](PHONETIC_DEVELOPER_GUIDE.md)
 **Practical code examples** showing:
 - Schema update (add `phonetic_transcription` field)
 - Micro Analyst prompt update
@@ -382,8 +382,8 @@ The design is:
 ## Related Documents
 
 1. **[PHONETIC_TRANSCRIPTION_DESIGN.md](PHONETIC_TRANSCRIPTION_DESIGN.md)** - Complete design specification
-2. **[PHONETIC_REFERENCE_GUIDE.md](PHONETIC_REFERENCE_GUIDE.md)** - Quick reference for transcription system
-3. **[PHONETIC_IMPLEMENTATION_EXAMPLE.md](PHONETIC_IMPLEMENTATION_EXAMPLE.md)** - Code examples and integration points
+2. **[PHONETIC_SYSTEM.md](PHONETIC_SYSTEM.md)** - Quick reference for transcription system
+3. **[PHONETIC_DEVELOPER_GUIDE.md](PHONETIC_DEVELOPER_GUIDE.md)** - Code examples and integration points
 4. **[PHONETIC_PROMPT_TEXT.md](PHONETIC_PROMPT_TEXT.md)** - Ready-to-use prompt text
 
 ---
