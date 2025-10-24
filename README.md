@@ -70,7 +70,7 @@ psalms-AI-analysis/
 │   ├── CONTEXT.md         # Quick reference guide
 │   ├── PROJECT_STATUS.md  # Current progress tracking
 │   ├── IMPLEMENTATION_LOG.md  # Development journal
-│   ├── ARCHITECTURE.md    # Technical specifications
+│   ├── TECHNICAL_ARCHITECTURE_SUMMARY.md  # Technical specifications
 │   └── SESSION_MANAGEMENT.md  # Workflow protocols
 ├── src/
 │   ├── data_sources/      # API clients (Sefaria, etc.)
@@ -88,7 +88,7 @@ psalms-AI-analysis/
 - **[CONTEXT.md](docs/CONTEXT.md)**: Quick project overview and command reference
 - **[PROJECT_STATUS.md](docs/PROJECT_STATUS.md)**: Current phase, tasks, and metrics
 - **[IMPLEMENTATION_LOG.md](docs/IMPLEMENTATION_LOG.md)**: Development history and learnings
-- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)**: Technical specifications and schemas
+- **[TECHNICAL_ARCHITECTURE_SUMMARY.md](docs/TECHNICAL_ARCHITECTURE_SUMMARY.md)**: Technical specifications and schemas
 - **[SESSION_MANAGEMENT.md](docs/SESSION_MANAGEMENT.md)**: Workflow and maintenance protocols
 
 ## System Architecture
