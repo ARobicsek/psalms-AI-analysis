@@ -406,3 +406,14 @@ The technical implementation addresses complex challenges in Hebrew text process
 
 The system demonstrates that AI can be effectively integrated into scholarly workflows when properly architected with domain expertise and technical rigor.
 
+---
+
+## See Also
+
+- **[CONTEXT.md](CONTEXT.md)** - Quick project overview and command reference
+- **[PROJECT_STATUS.md](PROJECT_STATUS.md)** - Current phase, tasks, and metrics
+- **[IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md)** - Development history and learnings
+- **[PHONETIC_SYSTEM.md](PHONETIC_SYSTEM.md)** - Phonetic transcription reference
+- **[PHONETIC_DEVELOPER_GUIDE.md](PHONETIC_DEVELOPER_GUIDE.md)** - Phonetic implementation guide
+- **[LIBRARIAN_USAGE_EXAMPLES.md](LIBRARIAN_USAGE_EXAMPLES.md)** - Research librarian examples
+
