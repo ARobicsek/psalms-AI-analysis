@@ -1,0 +1,15 @@
+COPY AND PASTE THIS INTO YOUR NEXT SESSION:
+
+================================================================================
+
+Please read @NEXT_SESSION_DOCUMENTATION_CLEANUP.md and execute Phase 1 (Critical Fixes) from the documentation consolidation plan.
+
+This is a 30-minute task with 4 specific actions:
+1. Fix README.md development status (Phase 1 → Phase 4)
+2. Add deprecation warning to ARCHITECTURE.md
+3. Create new QUICK_START.md file
+4. Update CONTEXT.md phase references
+
+All instructions and exact content are in the file. Please work through Actions 1-4 sequentially.
+
+================================================================================
