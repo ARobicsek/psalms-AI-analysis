@@ -8,67 +8,56 @@
 ## SESSION 21 (2025-10-23): Master Editor Prompt Enhancement - COMPLETE ✅
 
 ### Goal
-Enhance Master Editor prompt to: (1) enforce phonetic transcription formatting at the start of each verse commentary, and (2) increase verse commentary length for verses with interesting linguistic/literary features.
+Enhance Master Editor prompt to increase verse commentary length for verses with interesting linguistic/literary features.
 
 ### Problem Statement
-**Issue 1**: Current Master Editor verse commentary averages ~230 words per verse. While quality is good, more substantive analysis desired for verses with unusual Hebrew phrases, poetic devices, or interpretive questions (target: 400-500 words).
+**Issue**: Current Master Editor verse commentary averages ~230 words per verse. While quality is good, more substantive analysis desired for verses with unusual Hebrew phrases, poetic devices, or interpretive questions (target: 400-500 words).
 
-**Issue 2**: Phonetic transcriptions are provided in the PSALM TEXT section of the Master Editor prompt, but not appearing at the start of each verse commentary in the final output.
+**Note**: Initial implementation included phonetic transcription formatting requirement at start of each verse, but this was subsequently removed as unnecessary.
 
 ### What Was Accomplished
 
 1. **Enhanced OUTPUT FORMAT Section** ✅
-   - Added **CRITICAL** instruction to begin each verse with phonetic transcription
-   - Explicit format requirement: `` `[phonetic transcription from PSALM TEXT]` ``
    - Strengthened length guidance from passive "target 300-500" to active "Aim for 400-500"
    - Added permission for brevity: "Only use 200-300 words for genuinely simple verses"
+   - Added explicit guidance: "Do NOT shortchange the reader"
 
-2. **Added Two CRITICAL REQUIREMENTS** ✅
-   - **Phonetic Format**: MANDATORY—Begin each verse commentary with phonetic transcription in backticks
+2. **Added Length CRITICAL REQUIREMENT** ✅
    - **Length**: Aim for 400-500 words per verse when there are interesting features to analyze
-
-3. **Triple Reinforcement Strategy** ✅
-   - Explicit formatting instruction in OUTPUT FORMAT section
-   - Detailed length guidance with "Do NOT shortchange the reader" language
-   - Two new CRITICAL REQUIREMENTS bullets
 
 ### Files Modified
 
 - **`src/agents/master_editor.py`** (lines 266-291):
-  - Enhanced OUTPUT FORMAT with phonetic transcription requirement
   - Strengthened length guidance with active language
-  - Added two new CRITICAL REQUIREMENTS
+  - Added length CRITICAL REQUIREMENT
 
 ### Expected Impact
-
-**For Phonetic Transcription**:
-- 95%+ compliance expected (very explicit structural requirement)
-- Each verse will start with authoritative phonetic transcription
-- Example format:
-  ```markdown
-  **Verse 5**
-  `hă-dhar kə-vōdh hō-dhe-khā wə-dhiv-rēy nif-lə-'ō-the-khā 'ā-siy-khāh`
-
-  [400-500 word commentary analyzing unusual phrase...]
-  ```
 
 **For Length**:
 - 70-80% compliance expected (subjective judgment by GPT-5)
 - Expected increase: ~230 words → ~350-450 words for complex verses
 - Better engagement with BDB lexicon, concordance patterns, figurative language parallels, Torah Temimah
 
-### Next Session Goals
+### Actual Results (Psalm 145)
 
-**Immediate (Session 22)**:
-1. Re-run Master Editor on Psalm 145 with updated prompt
-2. Validate phonetic transcription appears at start of each verse
-3. Measure word count per verse (target: 350-450 for complex verses)
-4. Verify quality improvement (deeper analysis, not padding)
+**Length Analysis**:
+- Average verse commentary: ~230 words (unchanged from pre-Session 21)
+- Compliance: ~30% of complex verses reach 400-500 word target
+- GPT-5 appears to optimize for conciseness despite explicit length instructions
 
-**If length still insufficient**:
-5. Add concrete 450-word example verse commentary to prompt
-6. Consider changing "Aim for" to "Write at least 400 words for..."
-7. Add editorial assessment check: "Did I write substantive analysis?"
+**Quality Assessment**:
+- ✅ Excellent scholarly tone and accessibility
+- ✅ Strong factual accuracy and research integration
+- ✅ Good figurative language citations
+- ❌ Length targets not consistently met for complex verses
+
+### Next Session Considerations
+
+**If length improvement desired**:
+1. Add concrete 450-word example verse commentary to prompt
+2. Consider changing "Aim for" to "Write at least 400 words for..."
+3. Add editorial assessment check: "Did I write substantive analysis?"
+4. Consider that GPT-5 (o1) may optimize for conciseness by design
 
 ---
 
