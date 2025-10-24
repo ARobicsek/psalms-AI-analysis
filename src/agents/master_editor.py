@@ -63,6 +63,9 @@ You are writing for a sophisticated lay audience, such as the readers of *The Ne
 
 ## YOUR INPUTS
 
+### PSALM TEXT (Hebrew, English, LXX, and Phonetic)
+{psalm_text}
+
 ### INTRODUCTION ESSAY (for review)
 {introduction_essay}
 
@@ -71,9 +74,6 @@ You are writing for a sophisticated lay audience, such as the readers of *The Ne
 
 ### FULL RESEARCH BUNDLE
 {research_bundle}
-
-### PSALM TEXT (Hebrew, English, LXX)
-{psalm_text}
 
 ### MACRO THESIS (original structural analysis)
 {macro_analysis}
@@ -98,8 +98,8 @@ Review the introduction and verse commentary for these issues:
 - Wrong verse references
 
 ### 2. MISSED OPPORTUNITIES
-- Phonetic transcription [see above in ### MICRO DISCOVERIES (verse-level observations)] not used to analyze sound patterns (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm). 
-- Phonetic transcriptions used that don't match the scholarly phonetic text provided to you above in ### MICRO DISCOVERIES (verse-level observations). These transcriptions are authoritative and must be used.
+- Phonetic transcription [see above in ### PSALM TEXT] not used to analyze sound patterns (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm).
+- Phonetic transcriptions used that don't match the scholarly phonetic text provided to you above in ### PSALM TEXT. These transcriptions are authoritative and must be used.
 - Phonetic claims made that CONTRADICT the provided transcription (e.g., claiming "soft f" when transcription shows "p")
 - LXX suggests alternative Vorlage not mentioned
 - Poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
@@ -382,7 +382,7 @@ class MasterEditor:
             psalm_text = self._load_text_file(psalm_text_file)
         else:
             # Try to extract from database
-            psalm_text = self._get_psalm_text(psalm_number)
+            psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
 
         # Load analytical framework from RAG
         try:
@@ -525,12 +525,12 @@ class MasterEditor:
         return {
             'assessment': assessment,
             'revised_introduction': revised_introduction,
-            'revised_verses': revised_verses, 
+            'revised_verses': revised_verses,
             'psalm_number': psalm_number
         }
 
-    def _get_psalm_text(self, psalm_number: int) -> str:
-        """Retrieve psalm text from database."""
+    def _get_psalm_text(self, psalm_number: int, micro_analysis: Optional[Dict] = None) -> str:
+        """Retrieve psalm text from database and include phonetics."""
         try:
             from src.data_sources.tanakh_database import TanakhDatabase
             from src.agents.rag_manager import RAGManager
@@ -543,6 +543,16 @@ class MasterEditor:
 
             if not psalm:
                 return "[Psalm text not available]"
+
+            # Extract phonetic data from micro_analysis
+            phonetic_data = {}
+            if micro_analysis:
+                verses_data = micro_analysis.get('verse_commentaries', micro_analysis.get('verses', []))
+                for verse_data in verses_data:
+                    verse_num = verse_data.get('verse_number', verse_data.get('verse', 0))
+                    phonetic = verse_data.get('phonetic_transcription', '')
+                    if verse_num and phonetic:
+                        phonetic_data[verse_num] = phonetic
 
             # Format with LXX
             lines = [f"# Psalm {psalm_number}\n"]
@@ -561,6 +571,8 @@ class MasterEditor:
                 v_num = verse.verse
                 lines.append(f"\n## Verse {v_num}")
                 lines.append(f"**Hebrew:** {verse.hebrew}")
+                if v_num in phonetic_data:
+                    lines.append(f"**Phonetic**: `{phonetic_data[v_num]}`")
                 lines.append(f"**English:** {verse.english}")
                 if v_num in lxx_verses:
                     lines.append(f"**LXX (Greek):** {lxx_verses[v_num]}")
@@ -569,8 +581,7 @@ class MasterEditor:
 
         except Exception as e:
             self.logger.warning(f"Could not retrieve psalm text: {e}")
-            return "[Psalm text not available]"
-
+            return "[Psalm text not available]" 
     def _load_text_file(self, file_path: Path) -> str:
         """Load text file."""
         self.logger.info(f"Loading text file: {file_path}")
@@ -646,16 +657,11 @@ class MasterEditor:
                 # Get verse number (handle both field names)
                 verse_num = get_value(verse_data, 'verse_number', get_value(verse_data, 'verse', 0))
 
-                # Get commentary
+                # Get commentary (phonetics are now in PSALM TEXT section, not here)
                 commentary = get_value(verse_data, 'commentary', '')
 
-                # CRITICAL: Extract phonetic transcription data
-                phonetic = get_value(verse_data, 'phonetic_transcription', '')
-
-                # Format verse with phonetic data if available
+                # Format verse (no longer including phonetics here)
                 lines.append(f"**Verse {verse_num}**")
-                if phonetic:
-                    lines.append(f"**Phonetic**: `{phonetic}`")
                 lines.append(commentary)
                 lines.append("")
 

@@ -5,6 +5,87 @@
 
 ---
 
+## SESSION 16 (2025-10-23): Phonetic Transcription Relocation - COMPLETE ✅
+
+### Goal
+Reorganize the Master Editor prompt to show phonetic transcriptions alongside verses in the PSALM TEXT section (at the top of the prompt), rather than in the MICRO DISCOVERIES section. This improves accessibility and makes it easier for the Master Editor to reference phonetics when analyzing verses.
+
+### What Was Accomplished
+
+1.  **Fixed Critical Indentation Bug** ✅
+    - The `_get_psalm_text` method was incorrectly nested inside `_parse_editorial_response` method (line 532)
+    - Unindented the method to the class level, fixing the duplicate method definition error
+    - Method now properly compiles and can be called
+
+2.  **Enhanced `_get_psalm_text` Method** ✅
+    - Added `micro_analysis` parameter to extract phonetic data
+    - Method now retrieves phonetic transcriptions from micro analysis JSON
+    - Includes phonetics in formatted output alongside Hebrew, English, and LXX text
+    - Format: `**Phonetic**: \`syllabified-transcription\``
+
+3.  **Removed Phonetics from MICRO DISCOVERIES** ✅
+    - Modified `_format_analysis_for_prompt` method (lines 656-666)
+    - Removed code that was outputting phonetic transcriptions in micro section
+    - Commentary text now displays without phonetics (cleaner, less redundant)
+
+4.  **Reorganized Prompt Structure** ✅
+    - Moved `### PSALM TEXT` section to top of prompt (line 66)
+    - Updated section header to include "and Phonetic"
+    - **New prompt order:**
+      1. PSALM TEXT (with phonetics) ← **moved to top**
+      2. INTRODUCTION ESSAY
+      3. VERSE COMMENTARY
+      4. FULL RESEARCH BUNDLE
+      5. MACRO THESIS
+      6. MICRO DISCOVERIES (without phonetics)
+
+5.  **Updated Prompt References** ✅
+    - Changed references from "see above in ### MICRO DISCOVERIES" to "see above in ### PSALM TEXT" (lines 101-102)
+    - Ensures Master Editor knows where to find authoritative phonetic data
+    - Instructions now correctly point to the PSALM TEXT section
+
+6.  **Testing & Validation** ✅
+    - Tested `_get_psalm_text` method with sample micro analysis data
+    - Confirmed phonetics are extracted and included in output
+    - Verified prompt structure places PSALM TEXT before MACRO THESIS
+
+### Files Modified
+
+-   **`src/agents/master_editor.py`**: All changes implemented in this file
+    - Fixed `_get_psalm_text` indentation (line 532)
+    - Enhanced `_get_psalm_text` to include phonetics from micro analysis
+    - Updated `_format_analysis_for_prompt` to exclude phonetics
+    - Moved PSALM TEXT section in prompt template
+    - Updated prompt references to phonetic location
+
+### Expected Impact
+
+-   **Better Accessibility**: Phonetics now appear at the top with verse text, making them immediately visible
+-   **Reduced Redundancy**: Phonetics no longer duplicated across multiple prompt sections
+-   **Clearer Context**: Master Editor can see Hebrew, phonetic, English, and LXX together for each verse
+-   **Improved Analysis**: Easier to reference phonetics when analyzing specific verses
+-   **Fixed Bug**: Duplicate method definition error resolved
+
+### Example Output
+
+**Before** (MICRO DISCOVERIES):
+```
+**Verse 1**
+**Phonetic**: `tə-hil-lāh lə-dhā-widh...`
+Opens with 'תְּהִלָּה' (song of praise)...
+```
+
+**After** (PSALM TEXT):
+```
+## Verse 1
+**Hebrew:** תְּהִלָּ֗ה לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣...
+**Phonetic**: `tə-hil-lāh lə-dhā-widh 'a-rō-mim-khā...`
+**English:** A song of praise. Of David. I will extol You...
+**LXX (Greek):** αἴνεσις ὁ δαυίδ ὑψόω σύ...
+```
+
+---
+
 ## SESSION 15 (2025-10-23): Phonetic Transcription Data Flow Fix - COMPLETE ✅
 
 ### Goal
