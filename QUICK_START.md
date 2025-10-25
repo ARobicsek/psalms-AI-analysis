@@ -4,7 +4,7 @@
 
 ## What is This?
 
-AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude AI (Sonnet 4.5) and GPT-5 o1.
+AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude AI (Sonnet 4.5) and GPT-5.
 
 ## Installation
 
@@ -40,7 +40,7 @@ Output will be in `output/psalm_23/psalm_023_print_ready.md`
 3. SynthesisWriter (Sonnet 4.5)
    └─→ Commentary generation (intro + verse commentary)
 
-4. MasterEditor (GPT-5 o1)
+4. MasterEditor (GPT-5)
    └─→ Critical editorial review and enhancement
 ```
 
@@ -73,8 +73,8 @@ python scripts/cost_report.py
 
 **Technical Reference**:
 - [TECHNICAL_ARCHITECTURE_SUMMARY.md](docs/TECHNICAL_ARCHITECTURE_SUMMARY.md) - System architecture
-- [PHONETIC_ENHANCEMENT_SUMMARY.md](docs/PHONETIC_ENHANCEMENT_SUMMARY.md) - Phonetic system
-- [STRESS_MARKING_ENHANCEMENT.md](docs/STRESS_MARKING_ENHANCEMENT.md) - Stress marking
+- [PHONETIC_SYSTEM.md](docs/PHONETIC_SYSTEM.md) - Phonetic transcription reference
+- [PHONETIC_DEVELOPER_GUIDE.md](docs/PHONETIC_DEVELOPER_GUIDE.md) - Phonetic implementation guide
 
 **Development**:
 - [SESSION_MANAGEMENT.md](docs/SESSION_MANAGEMENT.md) - Workflow protocols
@@ -97,4 +97,4 @@ See [SESSION_MANAGEMENT.md](docs/SESSION_MANAGEMENT.md) for development workflow
 
 **Questions?** See [CONTEXT.md](docs/CONTEXT.md) for comprehensive project overview.
 
-*Built with Claude Sonnet 4.5 and GPT-5 o1*
+*Built with Claude Sonnet 4.5 and GPT-5*

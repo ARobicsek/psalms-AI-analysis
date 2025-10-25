@@ -115,7 +115,7 @@ Last Updated: 2025-10-24
 
 **Key differences**:
 - The Critic Agent (Pass 4) and Final Polisher (Pass 5) were never implemented
-- Actual Pass 4 uses MasterEditor (GPT-5 o1) instead
+- Actual Pass 4 uses MasterEditor (GPT-5) instead
 - Current pipeline: Macro → Micro → Synthesis → MasterEditor (4 passes)
 ```
 
@@ -157,7 +157,7 @@ python scripts/run_enhanced_pipeline.py 23  # Process Psalm 23
 1. **MacroAnalyst** (Sonnet 4.5) → Structural analysis
 2. **MicroAnalyst** (Sonnet 4.5) → Verse-by-verse research
 3. **SynthesisWriter** (Sonnet 4.5) → Commentary generation
-4. **MasterEditor** (GPT-5 o1) → Critical editorial review
+4. **MasterEditor** (GPT-5) → Critical editorial review
 
 ## Key Facts
 - **Cost**: ~$0.60/psalm (Claude Sonnet + GPT-5)
@@ -187,7 +187,7 @@ python scripts/cost_report.py
 - See [DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md) for code organization
 
 ---
-*Built with Claude Sonnet 4.5 and GPT-5 o1*
+*Built with Claude Sonnet 4.5 and GPT-5*
 ```
 
 **Files**: Create new `QUICK_START.md` in root
@@ -298,7 +298,7 @@ python scripts/cost_report.py
 - Phonetic Transcription (why it matters)
 - Stress Marking (linguistic feature)
 - Figurative Language Database (what it contains)
-- MasterEditor (GPT-5 o1 critical review)
+- MasterEditor (GPT-5 critical review)
 
 ---
 

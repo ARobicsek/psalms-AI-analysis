@@ -79,8 +79,8 @@ The Master Editor receives phonetic transcriptions in the PSALM TEXT section of 
    - Detailed length guidance with "Do NOT shortchange" language
    - Two new CRITICAL REQUIREMENTS bullets
 
-2. **GPT-5 (o1) Response to Explicit Formatting**:
-   - o1 models are very good at following explicit structural requirements
+2. **GPT-5 Response to Explicit Formatting**:
+   - models are very good at following explicit structural requirements
    - Placing phonetic transcription in the OUTPUT FORMAT template makes it part of the expected structure
    - Using "CRITICAL" and "MANDATORY" signals high priority
 
@@ -186,7 +186,7 @@ python scripts/run_enhanced_pipeline.py 145 --start-from master_editor
 **High** - The changes address both issues directly:
 - Phonetic transcription format is now explicit and mandatory
 - Length guidance is triple-reinforced with psychological framing
-- GPT-5 (o1) responds well to explicit structural requirements
+- GPT-5 responds well to explicit structural requirements
 
 **Expected Success Rate**:
 - Phonetic transcription: 95%+ compliance (very explicit)

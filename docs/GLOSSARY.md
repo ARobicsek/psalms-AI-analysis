@@ -145,7 +145,7 @@ The Hebrew word joiner (־, Unicode U+05BE), similar to a hyphen, that connects 
 **Implementation**: The PhoneticAnalyst handles maqqef compounds specially, transcribing each component but only marking stress on the final word.
 
 ### MasterEditor
-The **fourth pass** of the pipeline, using **GPT-5** (or GPT-5 o1) for final editorial review. Acts as a rigorous critic and reviser with the persona of "a biblical scholar of the highest caliber, akin to Robert Alter or James Kugel."
+The **fourth pass** of the pipeline, using **GPT-5** (or GPT-5) for final editorial review. Acts as a rigorous critic and reviser with the persona of "a biblical scholar of the highest caliber, akin to Robert Alter or James Kugel."
 
 **Key responsibilities**:
 1. **Factual verification**: Checks all claims against research data

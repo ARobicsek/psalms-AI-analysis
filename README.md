@@ -118,7 +118,7 @@ psalms-AI-analysis/
        └─→ Uses: MacroAnalysis + MicroAnalysis + ResearchBundle + Introduction
        └─→ 11 categories of scholarly interest (poetics, textual criticism, etc.)
    ↓
-5. MasterEditor (GPT-5 o1) → [NEW IN PHASE 4]
+5. MasterEditor (GPT-5) → [NEW IN PHASE 4]
    ├─→ Critical editorial review (7 categories of issues)
    ├─→ Identifies: factual errors, missed insights, style problems
    ├─→ Revises introduction and verse commentary

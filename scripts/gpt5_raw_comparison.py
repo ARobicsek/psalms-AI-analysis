@@ -1,7 +1,7 @@
 """
 GPT-5 Raw Comparison Script
 
-This script generates commentary using ONLY GPT-5 (o1) with raw psalm text and instructions.
+This script generates commentary using ONLY GPT-5 with raw psalm text and instructions.
 No research bundle, no other agents - just the psalm text and quality writing instructions.
 
 This allows comparison with the full research-enhanced pipeline to see the value
@@ -246,7 +246,7 @@ Write the verse-by-verse commentary below in plain text. Use markdown formatting
 
 class GPT5RawComparison:
     """
-    Generates psalm commentary using only GPT-5 (o1) with raw psalm text.
+    Generates psalm commentary using only GPT-5 with raw psalm text.
 
     No research bundle, no macro/micro analysis - just high-quality instructions
     and the psalm text itself.
@@ -409,7 +409,7 @@ class GPT5RawComparison:
         full_file = output_path / f"psalm_{psalm_number:03d}_gpt5_raw.md"
         with open(full_file, 'w', encoding='utf-8') as f:
             f.write(f"# Psalm {psalm_number} Commentary (GPT-5 Raw)\n\n")
-            f.write("*Generated using only GPT-5 (o1) with raw psalm text - no research bundle*\n\n")
+            f.write("*Generated using only GPT-5 with raw psalm text - no research bundle*\n\n")
             f.write("---\n\n")
             f.write("## Introduction\n\n")
             f.write(commentary['introduction'])
@@ -510,7 +510,7 @@ def main():
         print(f"\nThis will generate:")
         print(f"  1. Introduction essay (800-1200 words)")
         print(f"  2. Verse-by-verse commentary (150-400 words per verse)")
-        print(f"\nUsing: GPT-5 (o1) with ONLY the raw psalm text\n")
+        print(f"\nUsing: GPT-5 with ONLY the raw psalm text\n")
 
         # Initialize generator
         generator = GPT5RawComparison()
