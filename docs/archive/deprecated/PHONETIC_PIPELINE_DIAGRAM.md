@@ -45,7 +45,7 @@
                              ▼
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       MASTER EDITOR (Pass 4)                        │
-│  Model: GPT-5 (o1)                                                  │
+│  Model: GPT-5                                                  │
 │  Task: Review and enhance commentary                                │
 │                                                                      │
 │  ⚠️  NO PHONETIC DATA AVAILABLE TO VERIFY CLAIMS                    │
@@ -136,7 +136,7 @@
                              ▼
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       MASTER EDITOR (Pass 4)                        │
-│  Model: GPT-5 (o1)                                                  │
+│  Model: GPT-5                                                  │
 │  Input: Commentary + Macro + Micro (w/ phonetics) + ResearchBundle │
 │  Task: Review, verify, enhance                                      │
 │                                                                      │

@@ -1,7 +1,7 @@
 """
 Master Editor Agent (Pass 4 - Final Review & Enhancement)
 
-This agent uses GPT-5 (o1) to provide final editorial review and enhancement of the
+This agent uses GPT-5 to provide final editorial review and enhancement of the
 generated commentary, elevating it from "good" to "National Book Award" level.
 
 The Master Editor has access to ALL research materials and performs:
@@ -18,7 +18,7 @@ Editorial Focus Areas:
 - Appropriate technical terminology usage
 - Balance between introduction and verse commentary (complementary, not repetitive)
 
-Model: GPT-5 (o1)
+Model: GPT-5
 Input: Introduction + Verse Commentary + Full Research Bundle
 Output: Revised Introduction + Revised Verse Commentary with editorial notes
 
@@ -435,7 +435,7 @@ class MasterEditor:
         analytical_framework: str
     ) -> Dict[str, str]:
         """Call GPT-5 for editorial review."""
-        self.logger.info(f"Calling GPT-5 (o1) for editorial review of Psalm {psalm_number}")
+        self.logger.info(f"Calling GPT-5 for editorial review of Psalm {psalm_number}")
 
         # Format macro and micro for prompt
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
@@ -460,8 +460,8 @@ class MasterEditor:
             prompt_file.write_text(prompt, encoding='utf-8')
             self.logger.info(f"Saved editorial prompt to {prompt_file}")
 
-        # Call GPT-5 (o1)
-        # Note: o1 uses different API parameters - no system messages, only user messages
+        # Call GPT-5
+        # Note: GPT-5 uses different API parameters - no system messages, only user messages
         try:
             response = self.client.chat.completions.create(
                 model=self.model,

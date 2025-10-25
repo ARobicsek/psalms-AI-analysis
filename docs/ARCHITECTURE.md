@@ -11,7 +11,7 @@
 **Key differences from current implementation**:
 - ❌ **Critic Agent (Pass 4)** described in this doc was never implemented
 - ❌ **Final Polisher (Pass 5)** described in this doc was never implemented
-- ✅ **Actual Pass 4** uses MasterEditor (GPT-5 o1) instead
+- ✅ **Actual Pass 4** uses MasterEditor (GPT-5) instead
 - ✅ **Current pipeline**: Macro → Micro → Synthesis → MasterEditor (4 passes, not 5)
 
 This document is preserved for historical reference and design context.

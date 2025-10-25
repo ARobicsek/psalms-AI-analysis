@@ -279,9 +279,8 @@ Geminated consonants are **ambisyllabic** (belong to both syllables).
 
 ## See Also
 
-- **[PHONETIC_TRANSCRIPTION_DESIGN.md](PHONETIC_TRANSCRIPTION_DESIGN.md)** - Complete design specification
+- **[PHONETIC_TRANSCRIPTION_DESIGN.md](archive/deprecated/PHONETIC_TRANSCRIPTION_DESIGN.md)** - Complete design specification (archived)
 - **[PHONETIC_DEVELOPER_GUIDE.md](PHONETIC_DEVELOPER_GUIDE.md)** - Implementation guide with code examples
-- **[PHONETIC_ENHANCEMENT_SUMMARY.md](PHONETIC_ENHANCEMENT_SUMMARY.md)** - Overview of phonetic documentation
 - **[TECHNICAL_ARCHITECTURE_SUMMARY.md](TECHNICAL_ARCHITECTURE_SUMMARY.md)** - Overall system architecture
 
 ---

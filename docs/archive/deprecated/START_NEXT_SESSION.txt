@@ -67,7 +67,7 @@ Terms to define (scan docs/ to understand each):
 5. Phonetic Transcription - Why it matters for commentary
 6. Stress Marking - Linguistic feature explanation
 7. Figurative Language Database - What it contains, how used
-8. MasterEditor - GPT-5 o1 critical review role
+8. MasterEditor - GPT-5 critical review role
 9. Consonantal/Voweled/Exact/Lemma search - 4-layer concordance
 10. Maqqef - Hebrew word joiner, stress domain implications
 11. Begadkefat - Letters that change pronunciation

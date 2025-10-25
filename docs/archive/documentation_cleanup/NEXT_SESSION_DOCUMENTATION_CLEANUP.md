@@ -78,7 +78,7 @@ Execute the **30-minute critical fixes** that address the most visible documenta
 **Key differences from current implementation**:
 - ❌ **Critic Agent (Pass 4)** described in this doc was never implemented
 - ❌ **Final Polisher (Pass 5)** described in this doc was never implemented
-- ✅ **Actual Pass 4** uses MasterEditor (GPT-5 o1) instead
+- ✅ **Actual Pass 4** uses MasterEditor (GPT-5) instead
 - ✅ **Current pipeline**: Macro → Micro → Synthesis → MasterEditor (4 passes, not 5)
 
 This document is preserved for historical reference and design context.
@@ -104,7 +104,7 @@ This document is preserved for historical reference and design context.
 
 ## What is This?
 
-AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude AI (Sonnet 4.5) and GPT-5 o1.
+AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude AI (Sonnet 4.5) and GPT-5.
 
 ## Installation
 
@@ -140,7 +140,7 @@ Output will be in `output/psalm_23/psalm_023_print_ready.md`
 3. SynthesisWriter (Sonnet 4.5)
    └─→ Commentary generation (intro + verse commentary)
 
-4. MasterEditor (GPT-5 o1)
+4. MasterEditor (GPT-5)
    └─→ Critical editorial review and enhancement
 ```
 
@@ -197,7 +197,7 @@ See [SESSION_MANAGEMENT.md](docs/SESSION_MANAGEMENT.md) for development workflow
 
 **Questions?** See [CONTEXT.md](docs/CONTEXT.md) for comprehensive project overview.
 
-*Built with Claude Sonnet 4.5 and GPT-5 o1*
+*Built with Claude Sonnet 4.5 and GPT-5*
 ```
 
 **File**: Create `QUICK_START.md` in root directory

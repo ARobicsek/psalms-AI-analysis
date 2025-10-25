@@ -777,7 +777,7 @@ with MacroAnalyst() as analyst:
 
 ### Key Documentation
 
-- `docs/ARCHITECTURE.md` - System architecture overview
+- `docs/TECHNICAL_ARCHITECTURE_SUMMARY.md` - System architecture overview
 - `docs/rag/analytical_framework.md` - Poetic analysis methodology
 - `docs/rag/psalm_function/` - Genre and structure analysis
 - `docs/rag/ugaritic/` - Ancient Near Eastern parallels
