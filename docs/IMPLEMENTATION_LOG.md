@@ -1,3 +1,177 @@
+## 2025-10-26 - Liturgical Librarian Phase 0 Implementation (Session 26)
+
+### Session Started
+Afternoon - Implementation of Phase 0 (Sefaria Bootstrap) from Liturgical Librarian plan.
+
+### Goal
+Implement Phase 0 of the Liturgical Librarian system to provide immediate value by harvesting and integrating Sefaria's existing curated Psalms→Liturgy cross-references.
+
+### Tasks Completed
+
+#### 1. Database Schema & Harvester ✅
+**Created**: `src/liturgy/sefaria_links_harvester.py` (~350 LOC)
+- Harvests liturgical links from Sefaria `/api/related/` endpoint
+- Parses and stores structured liturgical metadata
+- Infers nusach (tradition), occasion, service, section from references
+- Database table: `sefaria_liturgy_links` with 14 fields + index
+- Smart verse range parsing (handles entire chapters, single verses, ranges)
+
+**Harvest Results**:
+- **4,801 liturgical links** collected (far exceeding estimated 200-300!)
+- **142 out of 150 Psalms** have liturgical usage (94.7% coverage)
+- Processing time: ~5-10 minutes with rate limiting
+
+**Top Psalms by Liturgical Usage**:
+- Psalm 19: 166 contexts
+- Psalm 86: 145 contexts
+- Psalm 20, 84: 132 contexts each
+- Psalm 104, 136, 145: 121-122 contexts each
+
+**Coverage by Tradition**:
+- Sefard: 2,150 links
+- Ashkenaz: 1,385 links
+- Edot HaMizrach: 1,121 links
+
+**Coverage by Occasion**:
+- Shabbat: 1,246 links
+- Weekday: 1,015 links
+- Yom Kippur: 258 links
+- Rosh Hashanah: 206 links
+- Pesach, Sukkot, Shavuot: 169 links combined
+
+#### 2. Liturgical Librarian Agent ✅
+**Created**: `src/agents/liturgical_librarian_sefaria.py` (~330 LOC)
+- `SefariaLiturgicalLink` dataclass with formatted display methods
+- `find_liturgical_usage()` - Query by psalm chapter ± specific verses
+- `format_for_research_bundle()` - Markdown formatting for AI agents
+- `get_statistics()` - Database analytics
+- CLI interface for testing and exploration
+
+**Features**:
+- Verse-level precision (supports ranges and entire chapters)
+- Tradition filtering (Ashkenaz, Sefard, Edot HaMizrach)
+- Confidence scoring (1.0 for curated quotations, 0.95 for auto-detected)
+- Rich context metadata (service, section, occasion)
+
+#### 3. Research Bundle Integration ✅
+**Modified**: `src/agents/research_assembler.py` (~30 LOC changes)
+- Added `SefariaLiturgicalLibrarian` to imports
+- Added `liturgical_usage` field to `ResearchBundle` dataclass
+- Liturgical data **always fetched** for every Psalm (automatic inclusion)
+- Integrated into markdown output between commentary and summary
+- Updated summary statistics to include `liturgical_contexts` count
+
+**Integration Points**:
+- Initialized in `ResearchAssembler.__init__()`
+- Fetched in `assemble()` method
+- Rendered in `to_markdown()` with formatted location strings
+- Included in summary statistics
+
+#### 4. Testing & Validation ✅
+**Test Results**:
+- Psalm 23: 23 liturgical contexts (Shabbat meals, third meal zemirot)
+- Psalm 145 (Ashrei): 121 contexts (daily services, birkat hamazon, high holidays)
+- Research bundle integration: Working seamlessly
+- Markdown formatting: Clean and AI-optimized
+
+**Example Output**:
+```
+## Liturgical Usage (from Sefaria)
+
+This Psalm appears in **23 liturgical context(s)**...
+
+**Siddur Ashkenaz - Shabbat**
+- Reference: Siddur Ashkenaz, Shabbat, Third Meal, Mizmor LeDavid 1
+- Verses: Entire chapter
+- Tradition: Ashkenaz
+```
+
+### Technical Highlights
+
+**Database Design**:
+- SQLite database: `data/liturgy.db`
+- Single table (Phase 0): `sefaria_liturgy_links`
+- Indexed for fast psalm chapter lookups
+- Extensible schema for future custom indexing (Phases 1-6)
+
+**Code Architecture**:
+- Modular design (harvester, librarian, integration separate)
+- Follows existing librarian agent pattern
+- Zero changes to AI agents (MicroAnalyst, SynthesisWriter, MasterEditor)
+- Backward compatible (optional field in research bundle)
+
+**Data Quality**:
+- Sefaria's curated cross-references provide high confidence
+- Rich metadata inferred from reference strings
+- Handles multiple nusachim and occasions
+- Verse-level precision (foundation for future phrase-level system)
+
+### Impact on Pipeline
+
+**Immediate Value**:
+- Commentary AI agents now receive liturgical context for 94.7% of Psalms
+- Writers can reference where Psalms appear in Jewish prayer
+- Contextualizes theological/poetic analysis with practical usage
+- No additional API costs (one-time harvest to local database)
+
+**Example Use Cases**:
+- Psalm 23: "This pastoral Psalm is recited at Shabbat third meal across all traditions..."
+- Psalm 145: "Known as 'Ashrei,' this Psalm is central to daily liturgy, appearing 3x in traditional services..."
+- Psalm 130: "A penitential Psalm featured prominently in Selichot and Yom Kippur liturgy..."
+
+**Long-term Foundation**:
+- Database ready for custom phrase-level index (Phases 1-6)
+- Sefaria data serves as validation dataset
+- Can compare custom detection against curated links
+- Incremental path to comprehensive sub-verse detection
+
+### Files Created/Modified
+
+**New Files**:
+1. `src/liturgy/__init__.py` - Module initialization
+2. `src/liturgy/sefaria_links_harvester.py` - Harvester implementation (~350 LOC)
+3. `src/agents/liturgical_librarian_sefaria.py` - Librarian agent (~330 LOC)
+4. `data/liturgy.db` - SQLite database (4,801 records)
+
+**Modified Files**:
+1. `src/agents/research_assembler.py` - Integration with research bundle (~30 LOC changes)
+
+**Total New Code**: ~680 lines (production-quality with docstrings and CLI)
+
+### Statistics
+- **Implementation time**: ~3 hours (faster than estimated 4-6 hours)
+- **Database size**: ~500 KB (4,801 records)
+- **Coverage**: 142/150 Psalms (94.7%)
+- **Total liturgical contexts**: 4,801
+- **Lines of code**: ~680 new LOC
+
+### Next Steps
+
+**Completed** ✅:
+- [x] Phase 0: Sefaria Bootstrap (THIS SESSION)
+
+**Available Options**:
+1. **Production Testing**: Run full pipeline on Psalm 23 with liturgical data
+2. **Phase 1**: Begin custom phrase-level indexing system (Phases 1-6 from implementation plan)
+3. **Other Phase 4 Enhancements**: Master Editor refinements, commentary modes, etc.
+
+### Session Outcome
+✅ **Phase 0 COMPLETE** - Liturgical data now flowing through commentary pipeline!
+
+**Deliverables**:
+- ✅ Sefaria links harvester (production-ready)
+- ✅ Liturgical librarian agent (tested with Psalms 23, 145)
+- ✅ Research bundle integration (seamless)
+- ✅ Database with 4,801 curated cross-references
+
+**User can now**:
+- Generate commentaries with liturgical context
+- Query any Psalm for its liturgical usage
+- See where Psalms appear across three traditions
+- Build toward comprehensive phrase-level system
+
+---
+
 ## 2025-10-26 - Liturgical Librarian Research & Planning (Session 25)
 
 ### Session Started
