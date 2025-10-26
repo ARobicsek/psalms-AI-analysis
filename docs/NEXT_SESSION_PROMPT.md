@@ -67,7 +67,7 @@ The pipeline is **production-ready** with all core features implemented:
 
 ## Recent Sessions Summary
 
-### Session 26 (2025-10-26): Liturgical Librarian Phase 0 Implementation
+### Session 26 (2025-10-26): Liturgical Librarian Phase 0 + Data Quality Filtering
 
 **Goal**: Implement Phase 0 (Sefaria Bootstrap) for immediate liturgical cross-reference value
 
@@ -81,21 +81,35 @@ The pipeline is **production-ready** with all core features implemented:
    - Query interface with verse-level precision
    - Rich metadata (nusach, occasion, service, section)
    - CLI for testing and exploration
+   - **Quality filtering**: `curated_only=True` by default
 
 3. ✅ **Research Bundle Integration** - Modified `research_assembler.py`
    - Liturgical data automatically included in all research bundles
    - Markdown formatting for AI agents
    - Summary statistics updated
 
-**Results**:
-- Psalm 23: 23 liturgical contexts (Shabbat meals, zemirot)
-- Psalm 145: 121 contexts (daily services, birkat hamazon, holidays)
-- Coverage by tradition: Sefard (2,150), Ashkenaz (1,385), Edot HaMizrach (1,121)
-- Coverage by occasion: Shabbat (1,246), Weekday (1,015), High Holidays (464)
+4. ✅ **Data Quality Analysis & Filtering**
+   - Discovered 70% of links are auto-detected with ~98% false positive rate
+   - Analyzed link types: `quotation` (64, curated), `quotation_auto_tanakh` (3,355, noisy), `(empty)` (1,374, mixed)
+   - Implemented filtering to use only **64 manually curated quotations**
+   - Database preserves all 4,801 links for future validation
 
-**Impact**: AI commentary agents now receive liturgical context for 94.7% of Psalms!
+**Final Statistics (Curated Only)**:
+- **64 manually curated links** across **35 Psalms** (23.3% coverage)
+- Psalm 23: 6 curated contexts (Ashkenaz traditions)
+- Psalm 145: 2 curated contexts (Sefard Shacharit + Edot HaMizrach Selichot)
+- Psalm 27: 2 curated contexts (Shabbat Maariv + Weekday Shacharit)
+- By tradition: Ashkenaz (50), Sefard (4), Edot HaMizrach (4)
 
-**Time**: ~3 hours (faster than estimated 4-6 hours)
+**Key Learning**:
+- Sefaria's auto-detection creates noise (false positives like "Shir HaKavod 2", "Amidah 81")
+- Manual curation is sparse but accurate
+- 64 curated links = **gold standard validation dataset** for future custom search
+- Custom phrase-level engine (Phases 1-6) needed for comprehensive coverage
+
+**Impact**: AI commentary agents now receive **accurate** liturgical context for 35 Psalms!
+
+**Time**: ~4.5 hours total (including data quality analysis)
 
 **Next Session**: Test full pipeline with liturgical data OR begin Phase 1 (custom phrase indexing)
 
