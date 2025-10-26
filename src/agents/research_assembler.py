@@ -10,6 +10,7 @@ Librarian Agents Coordinated:
 2. Concordance Librarian - Word/phrase searches with variations
 3. Figurative Language Librarian - Figurative instances with hierarchical tags
 4. Commentary Librarian - Traditional Jewish commentaries (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri)
+5. Liturgical Librarian - Psalms→Liturgy cross-references from Sefaria (Phase 0 bootstrap)
 
 Input: JSON research request from Scholar-Researcher
 Output: Complete research bundle ready for Scholar-Writer agents
@@ -28,12 +29,14 @@ if __name__ == '__main__':
     from src.agents.concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle
+    from src.agents.liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from src.agents.rag_manager import RAGManager, RAGContext
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from .figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from .commentary_librarian import CommentaryLibrarian, CommentaryBundle
+    from .liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from .rag_manager import RAGManager, RAGContext
 
 
@@ -80,13 +83,14 @@ class ResearchBundle:
     Complete research bundle assembled for a Psalm.
 
     Contains all lexicon entries, concordance searches, figurative
-    language instances, traditional commentaries, and RAG documents requested by the Scholar-Researcher.
+    language instances, traditional commentaries, liturgical usage, and RAG documents requested by the Scholar-Researcher.
     """
     psalm_chapter: int
     lexicon_bundle: Optional[LexiconBundle]
     concordance_bundles: List[ConcordanceBundle]
     figurative_bundles: List[FigurativeBundle]
     commentary_bundles: Optional[List[CommentaryBundle]]
+    liturgical_usage: Optional[List[SefariaLiturgicalLink]]  # Phase 0: Sefaria liturgical cross-references
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
     request: ResearchRequest
 
@@ -105,7 +109,8 @@ class ResearchBundle:
                 'figurative_searches': len(self.figurative_bundles),
                 'figurative_instances': sum(len(f.instances) for f in self.figurative_bundles),
                 'commentary_verses': len(self.commentary_bundles) if self.commentary_bundles else 0,
-                'commentary_entries': sum(len(c.commentaries) for c in self.commentary_bundles) if self.commentary_bundles else 0
+                'commentary_entries': sum(len(c.commentaries) for c in self.commentary_bundles) if self.commentary_bundles else 0,
+                'liturgical_contexts': len(self.liturgical_usage) if self.liturgical_usage else 0
             }
         }
 
@@ -311,6 +316,23 @@ class ResearchBundle:
                 else:
                     md += "*No commentaries available for this verse.*\n\n"
 
+        # Liturgical Usage section
+        if self.liturgical_usage:
+            md += "## Liturgical Usage (from Sefaria)\n\n"
+            md += f"This Psalm appears in **{len(self.liturgical_usage)} liturgical context(s)** according to Sefaria's curated data:\n\n"
+
+            for link in self.liturgical_usage:
+                md += f"**{link.format_location()}**\n"
+                md += f"- Reference: {link.liturgy_ref}\n"
+                md += f"- Verses: {link.format_verse_range()}\n"
+
+                if link.nusach:
+                    md += f"- Tradition: {link.nusach}\n"
+
+                md += "\n"
+
+            md += "---\n\n"
+
         # Summary
         summary = self.to_dict()['summary']
         md += "## Research Summary\n\n"
@@ -321,6 +343,7 @@ class ResearchBundle:
         md += f"- **Figurative instances found**: {summary['figurative_instances']}\n"
         md += f"- **Commentary verses**: {summary['commentary_verses']}\n"
         md += f"- **Commentary entries**: {summary['commentary_entries']}\n"
+        md += f"- **Liturgical contexts**: {summary['liturgical_contexts']}\n"
 
         return md
 
@@ -362,6 +385,7 @@ class ResearchAssembler:
         self.concordance_librarian = ConcordanceLibrarian()
         self.figurative_librarian = FigurativeLibrarian()
         self.commentary_librarian = CommentaryLibrarian()
+        self.liturgical_librarian = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
@@ -403,6 +427,9 @@ class ResearchAssembler:
         if request.commentary_requests:
             commentary_bundles = self.commentary_librarian.process_requests(request.commentary_requests)
 
+        # Fetch liturgical usage (Phase 0: Always included - Sefaria bootstrap)
+        liturgical_usage = self.liturgical_librarian.find_liturgical_usage(request.psalm_chapter)
+
         # Fetch RAG context (Phase 2d: Always included for psalm-level research)
         rag_context = self.rag_manager.get_rag_context(request.psalm_chapter)
 
@@ -412,6 +439,7 @@ class ResearchAssembler:
             concordance_bundles=concordance_bundles,
             figurative_bundles=figurative_bundles,
             commentary_bundles=commentary_bundles,
+            liturgical_usage=liturgical_usage if liturgical_usage else None,
             rag_context=rag_context,
             request=request
         )
