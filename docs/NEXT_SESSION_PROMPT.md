@@ -2,7 +2,7 @@
 
 **Date**: 2025-10-26
 **Phase**: Phase 4 - Commentary Enhancement & Experimentation
-**Progress**: 95% (28 sessions complete, production-ready pipeline + Liturgical Librarian Phase 2 complete!)
+**Progress**: 96% (29 sessions complete, production-ready pipeline + Liturgical Librarian Phase 3 complete!)
 
 ---
 
@@ -17,44 +17,48 @@ The pipeline is **production-ready** with all core features implemented:
 - ✅ Comprehensive documentation suite (DEVELOPER_GUIDE, GLOSSARY, OPERATIONAL_GUIDE, DOCUMENTATION_INDEX)
 - ✅ Liturgical Librarian Phase 0 complete - 64 curated cross-references integrated
 - ✅ Liturgical Librarian Phase 1 complete - Database schema created, metadata collected
-- ✅ **Liturgical Librarian Phase 2 complete - ~903,000 words of Hebrew liturgical text ingested!**
-- 🔄 **NEXT**: Phase 3 - Extract Psalms phrases with TF-IDF distinctiveness scoring
+- ✅ Liturgical Librarian Phase 2 complete - ~903,000 words of Hebrew liturgical text ingested!
+- ✅ **Liturgical Librarian Phase 3 complete - 12,253 phrases extracted with TF-IDF scoring!**
+- 🔄 **NEXT**: Phase 4 - Index phrases against liturgical corpus
 
 ---
 
 ## Next Steps
 
-### Immediate Priority: Complete Liturgical Librarian Phases 3-6
+### Immediate Priority: Complete Liturgical Librarian Phases 4-6
 
-**BREAKTHROUGH** 🎉 - Phase 2 complete with ~903,000 words of liturgical text!
+**BREAKTHROUGH** 🎉 - Phase 3 complete with 12,253 distinctive phrases extracted!
 
-**Phase 2 Complete** (Session 28):
-- ✅ Downloaded 8 Sefaria-Export JSON files (29 MB from GitHub)
-- ✅ Built comprehensive JSON parser with recursive traversal
-- ✅ Ingested 1,113 prayers with Hebrew text (99.1% coverage, 100% match rate!)
-- ✅ ~903,082 Hebrew words across all liturgical sources
-- ✅ Database expanded to 11.80 MB
+**Phase 3 Complete** (Session 29):
+- ✅ Built phrase extractor with TF-IDF distinctiveness scoring (~750 LOC)
+- ✅ Extracted 12,253 unique phrases from all 150 Psalms
+- ✅ 99.6% searchable (12,205 phrases pass thresholds)
+- ✅ 68.8% unique phrases (never appear elsewhere in Tanakh)
+- ✅ Comprehensive normalization (diacritics, maqqef, punctuation)
+- ✅ Concordance-optimized frequency counting (efficient!)
+- ✅ Database expanded to 14.86 MB with phrase cache
 
 **Architecture Validated**:
 - ✅ Phase 0: 64 curated links (validation dataset)
 - ✅ Phase 1: Database schema (5 tables, 1,123 metadata entries)
 - ✅ Phase 2: Full liturgical corpus ingested (~903K words)
-- 🔄 Phase 3: Extract Psalms phrases (NEXT)
-- ⏳ Phase 4: Index phrases against liturgy
+- ✅ Phase 3: 12,253 phrases extracted with TF-IDF scoring ✨
+- 🔄 Phase 4: Index phrases against liturgy (NEXT)
 - ⏳ Phases 5-6: Build agent & test
 
 **Next Session Tasks**:
 
-1. **Phase 3: Extract Psalms Phrases** (~2-3 hours)
-   - Build phrase extractor with TF-IDF distinctiveness scoring
-   - Extract 2-10 word phrases from all 150 Psalms
-   - Use our Sefaria-based `tanakh.db` as canonical source
-   - Cache phrase distinctiveness scores
+1. **Phase 4: Index Phrases Against Liturgy** (~2-3 hours)
+   - Build liturgy indexer with 4-layer normalization matching
+   - Search each searchable phrase in all 1,113 liturgical prayers
+   - Store matches in `psalms_liturgy_index` table with confidence scores
+   - Optimize for performance (use phrase cache)
 
-3. **Phase 4-6: Index, Build Agent, Test** (~3-4 hours)
-   - Index Psalms phrases against liturgical corpus
-   - Build comprehensive LiturgicalLibrarian agent
+2. **Phase 5-6: Build Agent & Test** (~2-3 hours)
+   - Create comprehensive LiturgicalLibrarian agent
+   - Integrate with research bundle assembler
    - Validate against Phase 0's 64 curated links
+   - Test with sample Psalms (23, 27, 145)
 
 **Full Implementation Plan**: [LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md](LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md)
 
@@ -83,6 +87,52 @@ The pipeline is **production-ready** with all core features implemented:
 ---
 
 ## Recent Sessions Summary
+
+### Session 29 (2025-10-26): Liturgical Librarian Phase 3 - Phrase Extraction Complete
+
+**Goal**: Extract distinctive phrases from all 150 Psalms with TF-IDF scoring for liturgical matching
+
+**Implementation Completed**:
+1. ✅ **Phrase Extractor Built** - `src/liturgy/phrase_extractor.py` (~750 LOC)
+   - Extracts 2-10 word n-grams from all Psalms
+   - TF-IDF distinctiveness scoring against full Tanakh corpus
+   - Cross-verse phrase extraction (spans 2-3 verses)
+   - Comprehensive normalization (diacritics, maqqef, punctuation)
+   - Database caching for instant subsequent runs
+
+2. ✅ **Performance Optimization**
+   - Concordance-based frequency counting (vs. full corpus scan)
+   - Single-word phrases: Direct count from concordance index
+   - Multi-word phrases: Candidate verses via first word lookup
+   - Result: ~0.4 seconds per Psalm (vs. hours with naive approach)
+
+3. ✅ **Extracted All 150 Psalms**
+   - **12,253 unique phrases** extracted and cached
+   - **12,205 searchable phrases** (99.6% pass thresholds)
+   - **8,436 phrases** are unique to their context (68.8%, freq=0)
+   - **3,726 phrases** are very distinctive (30.4%, score ≥0.9)
+   - Phrase length: 2-10 words (all lengths well-represented)
+
+4. ✅ **Validation & Testing**
+   - Tested normalization: maqqef → space, punctuation removed ✓
+   - Validated distinctiveness scoring with Psalm 23 samples ✓
+   - Confirmed cache performance optimization ✓
+   - Created comprehensive validation report
+
+**Final Statistics**:
+- Database size: 11.80 MB → 14.86 MB (+3.06 MB for phrase cache)
+- Total phrases cached: 12,253
+- Searchable phrases: 12,205 (99.6%)
+- Top distinctive phrases: Psalm 23 ("יהוה רעי" = "The LORD is my shepherd")
+- Performance: Concordance-optimized, ~100% cache hit rate after first run
+
+**Key Achievement**: Complete phrase extraction with intelligent distinctiveness filtering ready for Phase 4 indexing!
+
+**Time**: ~2 hours (implementation, optimization, extraction, validation)
+
+**Next Session**: Phase 4 - Index phrases against liturgical corpus
+
+---
 
 ### Session 28 (2025-10-26): Liturgical Librarian Phase 2 - Corpus Ingestion Complete
 
