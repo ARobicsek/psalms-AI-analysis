@@ -1,3 +1,163 @@
+## 2025-10-26 - Liturgical Librarian Phase 4: Liturgy Indexing Complete (Session 30)
+
+### Session Started
+Afternoon - Building phrase indexing system to search liturgical corpus for Psalms matches with consonantal normalization.
+
+### Goal
+Complete Phase 4 of Liturgical Librarian implementation: Build indexing engine to search 1,113 liturgical prayers for all Psalms phrases extracted in Phase 3, with confidence scoring and context extraction.
+
+### Tasks Completed
+
+#### 1. Built Liturgy Indexer ✅
+**Created**: `src/liturgy/liturgy_indexer.py` (~700 LOC)
+
+**Core Features**:
+- Consonantal normalization (simplified from initial 4-layer plan)
+- Searches all 1,113 prayers for each phrase from Phase 3
+- Context extraction (±10 words around matches)
+- Exact match preservation (maintains original diacritics from liturgy)
+- Match type classification (exact_verse vs phrase_match)
+- Confidence scoring (base + distinctiveness boost + verse boost)
+- CLI for incremental and batch indexing
+
+**Design Decisions**:
+- **Simplified to consonantal-only**: Originally planned 4-layer (exact, voweled, consonantal, lemma), but consonantal alone is more robust across vocalization traditions
+- **Normalization includes**: maqqef→space, punctuation removal, diacritic stripping
+- **Match types**: `exact_verse` (full verse match) vs `phrase_match` (sub-verse phrase)
+
+**Confidence Scoring Algorithm**:
+```python
+def _calculate_confidence(distinctiveness_score, match_type):
+    base = 0.75  # Consonantal matching baseline
+    type_boost = 0.10 if match_type == 'exact_verse' else 0.0
+    distinctiveness_boost = distinctiveness_score * 0.15
+    return min(1.0, base + type_boost + distinctiveness_boost)
+```
+
+#### 2. Testing with Psalm 23 ✅
+**Results**:
+- **524 searchable items** indexed (518 phrases + 6 full verses)
+- **4,009 total matches** found across liturgical corpus
+- **135 unique prayers** matched (12% of 1,113 prayer corpus!)
+- **Average confidence**: 0.900 (90%)
+- **Processing time**: ~2-3 minutes per Psalm
+
+**Match Breakdown**:
+- Exact verse matches: 63 (1.6%) with 0.997 confidence
+- Phrase matches: 3,946 (98.4%) with ~0.85-0.95 confidence
+
+**Quality Validation** (sample matches):
+- Psalm 23:1 found in: Shabbat Kiddush, Zemirot, Magen Avot, etc.
+- All three nusachim represented: Ashkenaz, Sefard, Edot HaMizrach
+- Context preservation working correctly
+
+#### 3. Database Growth ✅
+- Size: 14.86 MB → 18.45 MB (+3.59 MB for index)
+- Index records: 4,009 (Psalm 23 only)
+- Ready for full 150-Psalm indexing
+
+### Critical Issues Found During Testing ⚠️
+
+#### Issue #1: Overlapping Match Deduplication Needed
+**Problem**: Overlapping n-grams create redundant matches
+- Example: One prayer has **366 matches** from Psalm 23
+- Cause: "לדוד", "לדוד יהוה", "לדוד יהוה רעי" all match same location
+- Impact: 4,009 matches should likely be ~500-800 unique contexts
+
+**Analysis**:
+```
+First 20 matches in one prayer (all verse 1, same spot):
+- "לְדָוִ֑ד יְהֹוָ֥ה" (2 words)
+- "יְהֹוָ֥ה רֹ֝עִ֗י" (2 words)
+- "רֹ֝עִ֗י לֹ֣א" (2 words)
+- "לֹ֣א אֶחְסָֽר׃" (2 words)
+- "מִזְמ֥וֹר לְדָוִ֑ד יְהֹוָ֥ה" (3 words)
+- "לְדָוִ֑ד יְהֹוָ֥ה רֹ֝עִ֗י" (3 words)
+... (continues through all n-gram lengths)
+```
+
+**Solution**: Build deduplication logic in Phase 5-6 LiturgicalLibrarian agent
+- Consolidate overlapping phrases to longest match
+- Or group by prayer location with all matching phrase lengths
+
+#### Issue #2: Confidence Scoring for Exact Matches
+**Problem**: Exact verse matches show 0.997 instead of 1.0
+- Current formula allows max of 0.75 + 0.10 + 0.15 = 1.0 theoretically
+- But in practice: 0.75 + 0.10 + (0.95 * 0.15) = 0.9925 ≈ 0.997
+
+**User Requirement**: Exact matches should show confidence = 1.0 (100%)
+
+**Solution**: Adjust confidence calculation
+```python
+if match_type == 'exact_verse':
+    return 1.0  # Perfect match
+else:
+    # Use existing formula for phrases
+    return min(1.0, base + distinctiveness_boost)
+```
+
+#### Issue #3: Cross-Psalm Phrase Detection (Opportunity)
+**Finding**: Discovered shared phrases across different Psalms
+- Example: "לְדָוִד יְהֹוָה" appears in:
+  - Psalm 23:1: "מִזְמוֹר לְדָוִד יְהֹוָה רֹעִי" ("A Psalm of David, the LORD is my shepherd")
+  - Psalm 27:1: "לְדָוִד יְהֹוָה אוֹרִי" ("Of David, the LORD is my light")
+
+**Implication**: Fuzzy matching could reveal liturgical influences vs. exact quotations
+- Most Psalm 23 matches are exact quotations (Kiddush, Zemirot)
+- Need to index more Psalms to find true "influenced but not exact" cases
+
+### Files Created
+- `src/liturgy/liturgy_indexer.py` (~700 lines)
+
+### Database Changes
+- `data/liturgy.db`: Added 4,009 records to `psalms_liturgy_index` table
+- Size: 14.86 MB → 18.45 MB
+
+### CLI Commands Added
+```bash
+# Index single Psalm
+python src/liturgy/liturgy_indexer.py --psalm 23
+
+# Index range
+python src/liturgy/liturgy_indexer.py --range 1-10
+
+# Index all 150 Psalms
+python src/liturgy/liturgy_indexer.py --all
+
+# Show statistics
+python src/liturgy/liturgy_indexer.py --stats
+```
+
+### Key Learnings
+1. **Simplicity wins**: Consonantal-only normalization is more robust than multi-level
+2. **Deduplication essential**: N-gram extraction creates natural overlaps that must be consolidated
+3. **Testing crucial**: Psalm 23 test revealed issues before full 150-Psalm indexing
+4. **Cross-psalm potential**: Shared phrases across Psalms create interesting research opportunities
+
+### Performance Metrics
+- **Indexing speed**: ~2-3 minutes per Psalm
+- **Estimated full indexing**: ~5-8 hours for all 150 Psalms
+- **Database efficiency**: Reasonable growth (+3.59 MB for 4,009 records)
+
+### Next Steps (Session 31)
+1. **Fix deduplication issue** (consolidate overlapping n-grams)
+2. **Adjust confidence scoring** (exact matches = 1.0)
+3. **Add fuzzy matching** (configurable for influences vs. exact quotes)
+4. **Test fixes with Psalm 23** before full indexing
+5. **Build LiturgicalLibrarian agent** with deduplication logic (Phases 5-6)
+
+### Session Status
+✅ **COMPLETE** - Phase 4 indexing system built and tested
+⚠️ **ISSUES FOUND** - 3 critical issues requiring fixes before production use
+
+### Git Commit
+```
+feat: Complete Liturgical Librarian Phase 4 - Phrase Indexing (~700 LOC)
+Commit: 1e1f1c5
+```
+
+---
+
 ## 2025-10-26 - Liturgical Librarian Phase 3: Phrase Extraction Complete (Session 29)
 
 ### Session Started

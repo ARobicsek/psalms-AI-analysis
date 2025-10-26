@@ -45,9 +45,12 @@
 - [x] **Database expanded to 18.45 MB with index** ✅
 - [ ] **Phase 5-6: Build comprehensive agent & integrate** ← NEXT
 
-**Next**: Build comprehensive LiturgicalLibrarian agent and integrate with research pipeline (Phases 5-6)
+**Next**: Fix critical issues (deduplication, confidence scoring) before full indexing
 
-**Breakthrough**: Phase 4 complete! Working phrase indexing system with high-quality matches (90% avg confidence)!
+**Status**: Phase 4 complete with findings! Testing revealed 3 critical issues requiring fixes:
+- ⚠️ Deduplication needed (366 overlapping matches → should be ~20-30)
+- ⚠️ Confidence scoring (exact matches should be 1.0, not 0.997)
+- 💡 Cross-psalm detection opportunity (found shared phrases)
 
 ## Progress
 - **Overall**: 98% complete (30 sessions complete, production-ready pipeline + Liturgical Librarian Phase 4 complete!)
@@ -283,8 +286,8 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 - **Liturgical JSON files downloaded**: 8 files, 29 MB from Sefaria-Export GitHub ✅
 - **Psalms phrases extracted (Phase 3)**: 12,253 unique phrases, 12,205 searchable (99.6%) ✅
 - **Phrase distinctiveness**: 68.8% unique (freq=0), 30.4% very distinctive (score ≥0.9) ✅
-- **Liturgical index records (Phase 4)**: 4,009 matches (Psalm 23 only - pending full indexing) ✅ NEW!
-- **Index quality**: 90% avg confidence, 99.7% for exact verses ✅ NEW!
+- **Liturgical index records (Phase 4)**: 4,009 matches (Psalm 23 only - needs deduplication) ✅ NEW!
+- **Index quality**: 90% avg confidence (needs adjustment to 1.0 for exact matches) ⚠️ NEW!
 - **Librarian agents created**: 5 (BDB, Concordance, Figurative, Commentary, Liturgical*) ✅
 - **AI agents created**: 4 (MacroAnalyst, MicroAnalyst, SynthesisWriter, MasterEditor) ✅
 - **Total agent code**: ~4,400 lines (including docs and CLIs)

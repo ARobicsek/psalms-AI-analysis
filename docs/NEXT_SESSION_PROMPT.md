@@ -49,12 +49,18 @@ The pipeline is **production-ready** with all core features implemented:
 
 **Next Session Tasks**:
 
-1. **Phase 5-6: Build Comprehensive Agent & Integrate** (~2-3 hours)
-   - Create comprehensive LiturgicalLibrarian agent (query interface)
+1. **Fix Critical Issues from Phase 4 Testing** (~1-2 hours) ⚠️ HIGH PRIORITY
+   - **Deduplication**: Consolidate overlapping n-grams (366 matches → ~20-30 unique contexts)
+   - **Confidence Scoring**: Exact matches should be 1.0 (currently 0.997)
+   - **Fuzzy Matching**: Add configurable matching levels for influences vs. exact quotes
+   - Test fixes with Psalm 23 before full indexing
+
+2. **Phase 5-6: Build Comprehensive Agent & Integrate** (~2-3 hours)
+   - Create comprehensive LiturgicalLibrarian agent with deduplication logic
    - Format liturgical usage for research bundles (markdown output)
    - Integrate with research bundle assembler
    - Validate against Phase 0's 64 curated links
-   - Test with sample Psalms (23, 27, 145)
+   - Index multiple Psalms to test cross-psalm phrase detection
    - Add usage examples and documentation
 
 **Full Implementation Plan**: [LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md](LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md)
@@ -124,9 +130,23 @@ The pipeline is **production-ready** with all core features implemented:
 
 **Key Achievement**: Complete phrase-level indexing system with high-quality matches and robust consonantal normalization!
 
+**Critical Issues Found During Testing**:
+1. ⚠️ **Deduplication Needed**: 366 overlapping matches in one prayer
+   - Example: "לדוד", "לדוד יהוה", "לדוד יהוה רעי" all match same spot
+   - Solution: Consolidate overlapping n-grams to unique contexts
+
+2. ⚠️ **Confidence Scoring**: Exact matches show 0.997 instead of 1.0
+   - Current: base 0.75 + boosts
+   - Should be: 1.0 for exact verse matches
+
+3. 💡 **Cross-Psalm Detection**: Found "לדוד יהוה" in both Psalms 23 and 27
+   - Psalm 23:1: "מזמור לדוד יהוה רעי"
+   - Psalm 27:1: "לדוד יהוה אורי"
+   - Suggests value in fuzzy matching for liturgical influences
+
 **Time**: ~2 hours (implementation, testing, validation, documentation)
 
-**Next Session**: Phase 5-6 - Build comprehensive LiturgicalLibrarian agent and integrate with pipeline
+**Next Session**: Fix critical deduplication & confidence issues, then build comprehensive LiturgicalLibrarian agent
 
 ---
 
