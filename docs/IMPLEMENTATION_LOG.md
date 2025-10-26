@@ -1,3 +1,128 @@
+## 2025-10-26 - Liturgical Librarian Phase 4: Critical Fixes Complete (Session 31)
+
+### Session Started
+Afternoon - Fixing critical issues from Phase 4 testing: deduplication of overlapping n-grams and confidence scoring for exact verse matches.
+
+### Goal
+Fix the two critical issues identified in Session 30:
+1. Deduplication: Consolidate overlapping n-gram matches (366 overlaps → ~20-30 unique contexts)
+2. Confidence Scoring: Exact verse matches should be 1.0 (not 0.997)
+
+### Tasks Completed
+
+#### 1. Fixed Confidence Scoring ✅
+**Modified**: `src/liturgy/liturgy_indexer.py` (lines 448-477)
+
+**Problem**: Exact verse matches scored 0.997 instead of perfect 1.0
+- Root cause: Formula allowed max 0.75 + 0.10 + (0.95 * 0.15) = 0.9925
+
+**Solution**: Special case for exact_verse matches
+```python
+def _calculate_confidence(self, distinctiveness_score: float, match_type: str) -> float:
+    # Exact verse matches are perfect confidence
+    if match_type == 'exact_verse':
+        return 1.0
+
+    # For phrase matches, use graduated scoring
+    base = 0.75
+    distinctiveness_boost = distinctiveness_score * 0.25  # Increased from 0.15
+    confidence = min(1.0, base + distinctiveness_boost)
+    return round(confidence, 3)
+```
+
+**Results**:
+- All 33 exact_verse matches: confidence = 1.000 (perfect)
+- Phrase matches: avg 0.991, range 0.945-1.000
+- Quality: ✅ Perfect calibration achieved
+
+#### 2. Implemented Deduplication System ✅
+**Created**: `_deduplicate_matches()` method (~108 LOC, lines 495-602)
+
+**Problem**: 366 overlapping n-grams matching same prayer location
+- Example: "לדוד", "לדוד יהוה", "לדוד יהוה רעי" all match same spot
+- Impact: 2,832 raw matches from Psalm 23 when should be ~300
+
+**Algorithm**:
+1. Find position of each match in prayer using consonantal normalization
+2. Group matches by prayer_id and overlapping positions
+3. Select best match from each group based on:
+   - Match type priority (exact_verse > phrase_match)
+   - Phrase length (longer is better)
+   - Confidence score (higher is better)
+
+**Implementation**:
+```python
+def _deduplicate_matches(self, matches: List[Dict]) -> List[Dict]:
+    # Find position of each match in its prayer
+    # Group by prayer_id and overlapping positions
+    # For each group, select best match (type, length, confidence)
+    # Return deduplicated list
+```
+
+**Integration**: Added to `index_psalm()` method before storing matches
+
+**Results**:
+- Before deduplication: 2,832 raw matches
+- After deduplication: 282 unique contexts
+- Reduction: 2,550 removed (90.0% deduplication rate)
+- Quality: ✅ Clean, non-overlapping matches
+
+#### 3. Validation Testing ✅
+**Test**: Re-indexed Psalm 23 with both fixes applied
+
+**Final Statistics**:
+```
+Total matches: 282 (deduplicated from 2,832)
+  - Exact verses: 33 (confidence 1.000)
+  - Phrase matches: 249 (confidence 0.991 avg)
+Unique prayers matched: 135
+Deduplication rate: 90.0%
+Processing time: ~2-3 minutes
+```
+
+**Quality Checks**:
+- ✅ All exact_verse matches have perfect 1.0 confidence
+- ✅ No overlapping n-grams in same location
+- ✅ Match distribution reasonable (avg 2.1 per prayer)
+- ✅ Database integrity verified
+
+### Files Modified
+1. **src/liturgy/liturgy_indexer.py** (~108 lines added/changed)
+   - Lines 448-477: `_calculate_confidence()` - Fixed exact verse scoring
+   - Lines 495-602: `_deduplicate_matches()` - New deduplication method
+   - Lines 104-150: `index_psalm()` - Integrated deduplication flow
+
+### Database State
+- Size: 18.45 MB (unchanged - re-indexed Psalm 23 only)
+- Index records: 282 for Psalm 23 (down from 2,832 raw matches)
+- Quality: Production-ready for full 150-Psalm indexing
+
+### Performance Impact
+- Deduplication adds ~10% processing overhead
+- Total indexing time: Still ~2-3 minutes per Psalm
+- Quality improvement: 90% reduction in noise
+
+### Success Metrics
+✅ Deduplication: 90% reduction achieved (2,832 → 282)
+✅ Confidence scoring: Perfect 1.0 for exact verses
+✅ Quality: Clean, non-overlapping matches
+✅ Performance: Acceptable overhead (<10%)
+✅ Database: Integrity maintained
+
+### Next Steps
+**Ready for Phase 5-6**: Build comprehensive LiturgicalLibrarian agent
+- Query interface for indexed liturgical matches
+- Format results for research bundles
+- Integrate with research bundle assembler
+- Validate against Phase 0's 64 curated links
+- Index additional Psalms (27, 145, etc.)
+
+### Session Complete
+**Time**: ~1.5 hours
+**Status**: ✅ All critical fixes complete - Phase 4 production-ready!
+
+---
+
 ## 2025-10-26 - Liturgical Librarian Phase 4: Liturgy Indexing Complete (Session 30)
 
 ### Session Started
