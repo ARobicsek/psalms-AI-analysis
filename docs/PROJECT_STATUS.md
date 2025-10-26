@@ -43,18 +43,20 @@
 - [x] **Phase 4: Built liturgy indexer with consonantal normalization** ✅
 - [x] **Tested with Psalm 23: 4,009 matches, 90% avg confidence** ✅
 - [x] **Database expanded to 18.45 MB with index** ✅
+- [x] **Phase 4 Critical Fixes: Deduplication & confidence scoring** ✅
+- [x] **Re-tested Psalm 23: 282 deduplicated matches (90% reduction), 1.0 exact confidence** ✅
 - [ ] **Phase 5-6: Build comprehensive agent & integrate** ← NEXT
 
-**Next**: Fix critical issues (deduplication, confidence scoring) before full indexing
+**Next**: Build comprehensive LiturgicalLibrarian agent (Phases 5-6)
 
-**Status**: Phase 4 complete with findings! Testing revealed 3 critical issues requiring fixes:
-- ⚠️ Deduplication needed (366 overlapping matches → should be ~20-30)
-- ⚠️ Confidence scoring (exact matches should be 1.0, not 0.997)
-- 💡 Cross-psalm detection opportunity (found shared phrases)
+**Status**: Phase 4 complete with all critical fixes applied! ✨
+- ✅ Deduplication: 90% reduction (2,832 → 282 unique contexts)
+- ✅ Confidence scoring: Exact verses now score perfect 1.0
+- 💡 Cross-psalm detection: Deferred to future fuzzy matching feature
 
 ## Progress
-- **Overall**: 98% complete (30 sessions complete, production-ready pipeline + Liturgical Librarian Phase 4 complete!)
-- **Current phase**: Phase 4 Enhancements - Ongoing (Liturgical Librarian Phases 5-6 in progress)
+- **Overall**: 98% complete (31 sessions complete, production-ready pipeline + Liturgical Librarian Phase 4 complete with fixes!)
+- **Current phase**: Phase 4 Enhancements - Ongoing (Liturgical Librarian Phases 5-6 ready to start)
 
 ## Completed
 ✅ **Phase 1, Day 1: Project Structure Setup** (100% COMPLETE)
@@ -286,16 +288,16 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 - **Liturgical JSON files downloaded**: 8 files, 29 MB from Sefaria-Export GitHub ✅
 - **Psalms phrases extracted (Phase 3)**: 12,253 unique phrases, 12,205 searchable (99.6%) ✅
 - **Phrase distinctiveness**: 68.8% unique (freq=0), 30.4% very distinctive (score ≥0.9) ✅
-- **Liturgical index records (Phase 4)**: 4,009 matches (Psalm 23 only - needs deduplication) ✅ NEW!
-- **Index quality**: 90% avg confidence (needs adjustment to 1.0 for exact matches) ⚠️ NEW!
+- **Liturgical index records (Phase 4)**: 282 deduplicated matches (Psalm 23 only, 90% reduction from 2,832 raw) ✅ FIXED!
+- **Index quality**: Perfect 1.0 confidence for exact verses, 0.991 avg for phrases ✅ FIXED!
 - **Librarian agents created**: 5 (BDB, Concordance, Figurative, Commentary, Liturgical*) ✅
 - **AI agents created**: 4 (MacroAnalyst, MicroAnalyst, SynthesisWriter, MasterEditor) ✅
 - **Total agent code**: ~4,400 lines (including docs and CLIs)
-- **Total liturgical code**: ~4,435 lines (Phases 0-4 complete) ✅ UPDATED!
+- **Total liturgical code**: ~4,543 lines (Phases 0-4 complete with fixes) ✅ UPDATED!
 - **Documentation files**: 15 core files + comprehensive archive ✅
 - **Archived documentation**: 23+ historical/session files (organized by category) ✅
-- **Database size**: 18.45 MB (Tanakh + concordance + liturgical corpus + phrase cache + index) ✅ UPDATED!
-- **Development sessions**: 30 (complete history in IMPLEMENTATION_LOG.md) ✅ UPDATED!
+- **Database size**: 18.45 MB (Tanakh + concordance + liturgical corpus + phrase cache + index) ✅
+- **Development sessions**: 31 (complete history in IMPLEMENTATION_LOG.md) ✅ UPDATED!
 - **Git commits**: 60+ (full history preserved)
 
 ## Detailed Phase Breakdown
@@ -358,16 +360,16 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 6. **Analysis approach**: Three-pass telescopic (macro → micro → synthesis)
 
 ## Quick Links
-- **Last session**: 2025-10-26 (Session 30 - Liturgical Librarian Phase 4 COMPLETE ✅)
-- **Last session topic**: Built phrase indexing system with consonantal normalization (4,009 matches for Psalm 23, 90% avg confidence)
+- **Last session**: 2025-10-26 (Session 31 - Phase 4 Critical Fixes COMPLETE ✅)
+- **Last session topic**: Fixed deduplication and confidence scoring (282 deduplicated matches, perfect 1.0 confidence for exact verses)
 - **Current code location**:
   - src/agents/ (all librarians + AI agents)
-  - src/liturgy/ (liturgical harvesting, parsing, phrase extraction, indexing - Phases 0-4 complete)
+  - src/liturgy/ (liturgical harvesting, parsing, phrase extraction, indexing - Phases 0-4 complete with fixes)
   - src/utils/ (logging, document generation)
   - src/concordance/ (Hebrew search + morphology)
   - docs/ (comprehensive documentation suite + implementation plans)
 - **Next milestone**: Phases 5-6 - Build comprehensive LiturgicalLibrarian agent and integrate with pipeline
-- **Git HEAD**: Ready to commit Session 30 (Liturgical Librarian Phase 4 complete)
+- **Git HEAD**: Ready to commit Session 31 (Phase 4 critical fixes complete)
 
 ## Notes
 - Project based on existing figurative language work in Bible project

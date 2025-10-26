@@ -102,8 +102,7 @@ class LiturgyIndexer:
         self._clear_existing_index(psalm_chapter)
 
         # Search each phrase in liturgy
-        total_matches = 0
-        match_details = {}
+        all_matches = []
 
         for i, phrase_data in enumerate(searchable, 1):
             phrase_text = phrase_data['phrase'][:60] + ('...' if len(phrase_data['phrase']) > 60 else '')
@@ -122,16 +121,33 @@ class LiturgyIndexer:
             if matches:
                 if self.verbose:
                     print(f"  ✓ Found {len(matches)} match(es)")
-                total_matches += len(matches)
+                all_matches.extend(matches)
 
-                # Track match types
-                for match in matches:
-                    match_type = match['match_type']
-                    match_details[match_type] = match_details.get(match_type, 0) + 1
+        # Deduplicate overlapping matches BEFORE storing
+        if self.verbose and all_matches:
+            print(f"\n{'='*70}")
+            print(f"Deduplicating matches...")
+            print(f"  Before: {len(all_matches)} matches")
 
-                # Store in index
-                for match in matches:
-                    self._store_match(match)
+        deduplicated_matches = self._deduplicate_matches(all_matches)
+
+        if self.verbose and all_matches:
+            print(f"  After: {len(deduplicated_matches)} unique contexts")
+            reduction_pct = (1 - len(deduplicated_matches)/len(all_matches)) * 100 if all_matches else 0
+            print(f"  Removed {len(all_matches) - len(deduplicated_matches)} overlapping matches ({reduction_pct:.1f}% reduction)")
+            print(f"{'='*70}\n")
+
+        # Now store deduplicated matches and track statistics
+        total_matches = 0
+        match_details = {}
+
+        for match in deduplicated_matches:
+            self._store_match(match)
+            total_matches += 1
+
+            # Track match types
+            match_type = match['match_type']
+            match_details[match_type] = match_details.get(match_type, 0) + 1
 
         if self.verbose:
             print(f"\n{'='*70}")
@@ -456,24 +472,134 @@ class LiturgyIndexer:
         Factors:
         - Distinctiveness score (rare phrases are more confident)
         - Match type (verse > phrase)
+
+        Fixed: Exact verse matches now return 1.0 (perfect confidence)
         """
 
+        # Exact verse matches are perfect confidence
+        if match_type == 'exact_verse':
+            return 1.0
+
+        # For phrase matches, use graduated scoring
         # Base confidence for consonantal matching
         base = 0.75
 
-        # Boost for exact verse matches
-        if match_type == 'exact_verse':
-            type_boost = 0.10
-        else:
-            type_boost = 0.0
-
         # Combine with distinctiveness (weighted)
-        # High distinctiveness adds up to 0.15 to confidence
-        distinctiveness_boost = distinctiveness_score * 0.15
+        # High distinctiveness adds up to 0.25 to confidence
+        distinctiveness_boost = distinctiveness_score * 0.25
 
-        confidence = min(1.0, base + type_boost + distinctiveness_boost)
+        confidence = min(1.0, base + distinctiveness_boost)
 
         return round(confidence, 3)
+
+    def _deduplicate_matches(self, matches: List[Dict]) -> List[Dict]:
+        """
+        Consolidate overlapping n-grams to unique contexts.
+
+        When multiple phrases match the same location in a prayer
+        (e.g., "לדוד", "לדוד יהוה", "לדוד יהוה רעי"),
+        keep only the longest/most distinctive match.
+
+        Strategy:
+        1. Group matches by (prayer_id, approximate_location)
+        2. For each group, select the best match based on:
+           - Match type priority (exact_verse > phrase_match)
+           - Phrase length (longer is better)
+           - Confidence score (higher is better)
+        """
+        if not matches:
+            return []
+
+        # Group matches by prayer and approximate location
+        from collections import defaultdict
+
+        # First pass: find position of each match in its prayer
+        conn = sqlite3.connect(self.liturgy_db)
+        cursor = conn.cursor()
+
+        match_positions = []
+        for match in matches:
+            # Get the full prayer text
+            cursor.execute("""
+                SELECT hebrew_text FROM prayers WHERE prayer_id = ?
+            """, (match['prayer_id'],))
+
+            result = cursor.fetchone()
+            if not result:
+                continue
+
+            prayer_text = result[0]
+
+            # Find position using consonantal normalization
+            normalized_prayer = normalize_for_search(prayer_text, level='consonantal')
+            normalized_prayer = self._normalize_text(normalized_prayer)
+
+            normalized_phrase = match['psalm_phrase_normalized']
+
+            # Find all occurrences (there might be multiple)
+            pos = normalized_prayer.find(normalized_phrase)
+
+            if pos != -1:
+                match_positions.append({
+                    'match': match,
+                    'position': pos,
+                    'length': len(normalized_phrase)
+                })
+
+        conn.close()
+
+        # Group by prayer_id and overlapping positions
+        # Two matches overlap if they're in the same prayer and their positions overlap
+        groups = defaultdict(list)
+
+        for item in match_positions:
+            prayer_id = item['match']['prayer_id']
+            pos = item['position']
+
+            # Find existing group with overlapping position
+            found_group = None
+            for group_key in groups.keys():
+                if group_key[0] == prayer_id:
+                    # Check if this position overlaps with any match in the group
+                    for existing_item in groups[group_key]:
+                        existing_pos = existing_item['position']
+                        existing_len = existing_item['length']
+
+                        # Check for overlap
+                        if (pos <= existing_pos + existing_len and
+                            pos + item['length'] >= existing_pos):
+                            found_group = group_key
+                            break
+
+                if found_group:
+                    break
+
+            if found_group:
+                groups[found_group].append(item)
+            else:
+                # Create new group with unique key
+                new_key = (prayer_id, pos)
+                groups[new_key].append(item)
+
+        # For each group, select the best match
+        deduplicated = []
+
+        for group_items in groups.values():
+            if len(group_items) == 1:
+                deduplicated.append(group_items[0]['match'])
+            else:
+                # Sort by priority:
+                # 1. Match type (exact_verse > phrase_match)
+                # 2. Phrase length (longer is better)
+                # 3. Confidence (higher is better)
+                best = max(group_items, key=lambda x: (
+                    1 if x['match']['match_type'] == 'exact_verse' else 0,
+                    x['match']['phrase_length'],
+                    x['match']['confidence']
+                ))
+                deduplicated.append(best['match'])
+
+        return deduplicated
 
     def _store_match(self, match: Dict):
         """Store a match in the psalms_liturgy_index table."""
