@@ -2,7 +2,7 @@
 
 **Date**: 2025-10-26
 **Phase**: Phase 4 - Commentary Enhancement & Experimentation
-**Progress**: 93% (26 sessions complete, production-ready pipeline + clean documentation + liturgical librarian Phase 0 complete)
+**Progress**: 95% (28 sessions complete, production-ready pipeline + Liturgical Librarian Phase 2 complete!)
 
 ---
 
@@ -15,29 +15,46 @@ The pipeline is **production-ready** with all core features implemented:
 - ✅ Hebrew concordance (4-layer system)
 - ✅ Print-ready output (.md and .docx)
 - ✅ Comprehensive documentation suite (DEVELOPER_GUIDE, GLOSSARY, OPERATIONAL_GUIDE, DOCUMENTATION_INDEX)
-- ✅ **NEW**: Liturgical Librarian Phase 0 complete - 4,801 cross-references integrated!
+- ✅ Liturgical Librarian Phase 0 complete - 64 curated cross-references integrated
+- ✅ Liturgical Librarian Phase 1 complete - Database schema created, metadata collected
+- ✅ **Liturgical Librarian Phase 2 complete - ~903,000 words of Hebrew liturgical text ingested!**
+- 🔄 **NEXT**: Phase 3 - Extract Psalms phrases with TF-IDF distinctiveness scoring
 
 ---
 
 ## Next Steps
 
-### Immediate Priority: Production Testing or Phase 1
+### Immediate Priority: Complete Liturgical Librarian Phases 3-6
 
-**Phase 0 COMPLETE** ✅ - Liturgical data now flowing through pipeline!
+**BREAKTHROUGH** 🎉 - Phase 2 complete with ~903,000 words of liturgical text!
 
-**Recommended Next Steps**:
+**Phase 2 Complete** (Session 28):
+- ✅ Downloaded 8 Sefaria-Export JSON files (29 MB from GitHub)
+- ✅ Built comprehensive JSON parser with recursive traversal
+- ✅ Ingested 1,113 prayers with Hebrew text (99.1% coverage, 100% match rate!)
+- ✅ ~903,082 Hebrew words across all liturgical sources
+- ✅ Database expanded to 11.80 MB
 
-1. **Production Testing with Liturgical Data** (~1 hour)
-   - Run full pipeline on Psalm 23 or 145
-   - Verify liturgical context appears in final commentary
-   - Check Word document formatting
-   - Validate cost estimates with new data
+**Architecture Validated**:
+- ✅ Phase 0: 64 curated links (validation dataset)
+- ✅ Phase 1: Database schema (5 tables, 1,123 metadata entries)
+- ✅ Phase 2: Full liturgical corpus ingested (~903K words)
+- 🔄 Phase 3: Extract Psalms phrases (NEXT)
+- ⏳ Phase 4: Index phrases against liturgy
+- ⏳ Phases 5-6: Build agent & test
 
-2. **Liturgical Librarian Phase 1** (optional, 1-2 weeks)
-   - Begin custom phrase-level indexing
-   - Build comprehensive liturgical corpus
-   - Implement TF-IDF distinctiveness scoring
-   - See [LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md](LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md) for details
+**Next Session Tasks**:
+
+1. **Phase 3: Extract Psalms Phrases** (~2-3 hours)
+   - Build phrase extractor with TF-IDF distinctiveness scoring
+   - Extract 2-10 word phrases from all 150 Psalms
+   - Use our Sefaria-based `tanakh.db` as canonical source
+   - Cache phrase distinctiveness scores
+
+3. **Phase 4-6: Index, Build Agent, Test** (~3-4 hours)
+   - Index Psalms phrases against liturgical corpus
+   - Build comprehensive LiturgicalLibrarian agent
+   - Validate against Phase 0's 64 curated links
 
 **Full Implementation Plan**: [LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md](LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md)
 
@@ -66,6 +83,105 @@ The pipeline is **production-ready** with all core features implemented:
 ---
 
 ## Recent Sessions Summary
+
+### Session 28 (2025-10-26): Liturgical Librarian Phase 2 - Corpus Ingestion Complete
+
+**Goal**: Download Sefaria-Export JSON files and populate database with complete liturgical corpus
+
+**Implementation Completed**:
+1. ✅ **Downloaded 8 Sefaria-Export JSON Files** (29 MB total)
+   - Siddur Ashkenaz (3.3 MB), Sefard (8.8 MB), Edot HaMizrach (5.4 MB)
+   - Machzor Rosh Hashanah Ashkenaz (2.2 MB), Yom Kippur Ashkenaz (3.4 MB)
+   - Machzor Rosh Hashanah Edot HaMizrach (2.2 MB), Yom Kippur Edot HaMizrach (3.4 MB)
+   - Pesach Haggadah (256 KB)
+
+2. ✅ **Built Comprehensive JSON Parser** - `src/liturgy/sefaria_json_parser.py` (~300 LOC)
+   - Recursive traversal of nested JSON hierarchies (2-6 levels deep)
+   - Automatic path building to match `sefaria_ref` format
+   - HTML tag cleaning while preserving Hebrew text
+   - Zero parsing errors across all 8 files
+
+3. ✅ **Ingested Complete Liturgical Corpus**
+   - **1,113 prayers** extracted and matched (100% match rate!)
+   - **~903,082 Hebrew words** across all sources
+   - **99.1% coverage** (10 empty entries are section headers - expected)
+   - Average: 4,868 chars per prayer, Range: 31 - 88,584 chars
+
+**Final Statistics**:
+- Database size: 8.7 MB → 11.80 MB (+3.1 MB)
+- Total characters: 5,418,495
+- All 8 sources: 98-100% text coverage
+- Ready for Phase 3 phrase extraction
+
+**Key Achievement**: Complete liturgical corpus (~903K words) now available for phrase-level matching!
+
+**Time**: ~1.5 hours (download, parser development, ingestion, validation, documentation)
+
+**Next Session**: Phase 3 - Extract Psalms phrases with TF-IDF distinctiveness scoring
+
+---
+
+### Session 27 (2025-10-26): Liturgical Librarian Phase 1 Start + Sefaria Bulk Data Discovery
+
+**Goal**: Begin Liturgical Librarian Phase 1 - Build custom phrase-level detection engine for comprehensive liturgical coverage
+
+**Implementation Completed**:
+1. ✅ **Comprehensive Database Schema** - `src/data_sources/liturgy_db_schema.sql` + `create_liturgy_db.py`
+   - 5 tables: `prayers`, `psalms_liturgy_index`, `liturgical_metadata`, `harvest_log`, `phrase_cache`
+   - 34 metadata entries populated (nusachim, services, occasions, sections, prayer types)
+   - Preserves Phase 0's `sefaria_liturgy_links` table (4,801 links)
+
+2. ✅ **Liturgical Metadata Scraper** - `src/liturgy/sefaria_metadata_scraper.py` (~350 LOC)
+   - Collected **1,123 liturgical prayer entries** with complete hierarchical metadata
+   - 8 sources: Siddur Ashkenaz (454), Siddur Sefard (214), Siddur Edot HaMizrach (129), 4 Machzorim (288), Haggadah (38)
+   - Full context: occasion, service, section, prayer name, sequence order
+   - Discovered Sefaria API provides metadata but NOT full Hebrew text via API
+
+3. ✅ **BREAKTHROUGH: Sefaria Bulk Data Discovery** 🎉
+   - Found Sefaria-Export GitHub repository: `https://github.com/Sefaria/Sefaria-Export`
+   - **Full Hebrew liturgical texts available** in JSON format!
+   - Siddur Ashkenaz: 3.73 MB (9 versions including merged.json with 890 KB)
+   - Structure: `json/Liturgy/Siddur/Siddur Ashkenaz/Hebrew/merged.json`
+   - Verified format: Complete hierarchical structure (Weekday, Shabbat, Festivals, etc.)
+   - All major siddurim, machzorim, haggadot, and piyutim available for download
+
+4. ✅ **Liturgical Harvester Prototype** - `src/liturgy/sefaria_liturgy_harvester.py` (~650 LOC)
+   - Built for Sefaria API approach (before bulk data discovery)
+   - Recursive schema traversal and metadata inference
+   - Will be adapted for JSON bulk download in Phase 2
+
+**Key Findings**:
+- Sefaria API is excellent for metadata but doesn't expose full text programmatically
+- Sefaria-Export GitHub repo solves this: complete downloadable corpus in JSON
+- Format is ideal: structured, includes schema, multiple versions available
+- Our Sefaria-based `tanakh.db` Psalms text should be canonical source (as user specified)
+
+**Architecture Validated**:
+- Phase 0: 64 curated links → validation dataset ✅
+- Phase 1: Database schema → ready ✅
+- Phase 2: Download JSON → feasible with Sefaria-Export ✅
+- Phase 3: Extract Psalms phrases → use tanakh.db as canonical ✅
+- Phase 4: Index phrases → search JSON texts ✅
+- Phases 5-6: Build agent & test → standard pattern ✅
+
+**Files Created**:
+- `src/data_sources/liturgy_db_schema.sql` (180 lines)
+- `src/data_sources/create_liturgy_db.py` (175 lines)
+- `src/liturgy/sefaria_metadata_scraper.py` (350 lines)
+- `src/liturgy/sefaria_liturgy_harvester.py` (650 lines - will adapt for JSON download)
+- `data/liturgy.db` expanded with new tables
+
+**Database Statistics**:
+- Total prayer metadata entries: 1,123
+- Phase 0 curated links: 64 (preserved)
+- Liturgical metadata entries: 34
+- Total database size: ~8.7 MB
+
+**Time**: ~3 hours (schema design, metadata collection, research, bulk data discovery)
+
+**Next Session**: Download Sefaria-Export JSON files and proceed with Phase 2 (corpus ingestion)
+
+---
 
 ### Session 26 (2025-10-26): Liturgical Librarian Phase 0 + Data Quality Filtering
 
