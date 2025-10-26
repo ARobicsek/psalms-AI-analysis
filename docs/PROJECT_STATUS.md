@@ -45,17 +45,19 @@
 - [x] **Database expanded to 18.45 MB with index** ✅
 - [x] **Phase 4 Critical Fixes: Deduplication & confidence scoring** ✅
 - [x] **Re-tested Psalm 23: 282 deduplicated matches (90% reduction), 1.0 exact confidence** ✅
+- [x] **Phase 4 Bug Fix: Liturgy phrase extraction (sliding window algorithm)** ✅
 - [ ] **Phase 5-6: Build comprehensive agent & integrate** ← NEXT
 
 **Next**: Build comprehensive LiturgicalLibrarian agent (Phases 5-6)
 
-**Status**: Phase 4 complete with all critical fixes applied! ✨
+**Status**: Phase 4 FULLY complete with all critical fixes + bug fix! ✨
 - ✅ Deduplication: 90% reduction (2,832 → 282 unique contexts)
 - ✅ Confidence scoring: Exact verses now score perfect 1.0
+- ✅ Phrase extraction: Sliding window algorithm ensures accurate liturgy_phrase_hebrew
 - 💡 Cross-psalm detection: Deferred to future fuzzy matching feature
 
 ## Progress
-- **Overall**: 98% complete (31 sessions complete, production-ready pipeline + Liturgical Librarian Phase 4 complete with fixes!)
+- **Overall**: 98% complete (32 sessions complete, production-ready pipeline + Liturgical Librarian Phase 4 FULLY complete!)
 - **Current phase**: Phase 4 Enhancements - Ongoing (Liturgical Librarian Phases 5-6 ready to start)
 
 ## Completed
@@ -293,11 +295,11 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 - **Librarian agents created**: 5 (BDB, Concordance, Figurative, Commentary, Liturgical*) ✅
 - **AI agents created**: 4 (MacroAnalyst, MicroAnalyst, SynthesisWriter, MasterEditor) ✅
 - **Total agent code**: ~4,400 lines (including docs and CLIs)
-- **Total liturgical code**: ~4,543 lines (Phases 0-4 complete with fixes) ✅ UPDATED!
+- **Total liturgical code**: ~4,543 lines (Phases 0-4 complete with all fixes) ✅ UPDATED!
 - **Documentation files**: 15 core files + comprehensive archive ✅
 - **Archived documentation**: 23+ historical/session files (organized by category) ✅
 - **Database size**: 18.45 MB (Tanakh + concordance + liturgical corpus + phrase cache + index) ✅
-- **Development sessions**: 31 (complete history in IMPLEMENTATION_LOG.md) ✅ UPDATED!
+- **Development sessions**: 32 (complete history in IMPLEMENTATION_LOG.md) ✅ UPDATED!
 - **Git commits**: 60+ (full history preserved)
 
 ## Detailed Phase Breakdown
@@ -360,8 +362,8 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 6. **Analysis approach**: Three-pass telescopic (macro → micro → synthesis)
 
 ## Quick Links
-- **Last session**: 2025-10-26 (Session 31 - Phase 4 Critical Fixes COMPLETE ✅)
-- **Last session topic**: Fixed deduplication and confidence scoring (282 deduplicated matches, perfect 1.0 confidence for exact verses)
+- **Last session**: 2025-10-26 (Session 32 - Phase 4 Bug Fix COMPLETE ✅)
+- **Last session topic**: Fixed liturgy_phrase_hebrew extraction bug using sliding window algorithm (all 282 matches now have correct phrases)
 - **Current code location**:
   - src/agents/ (all librarians + AI agents)
   - src/liturgy/ (liturgical harvesting, parsing, phrase extraction, indexing - Phases 0-4 complete with fixes)
@@ -369,7 +371,7 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
   - src/concordance/ (Hebrew search + morphology)
   - docs/ (comprehensive documentation suite + implementation plans)
 - **Next milestone**: Phases 5-6 - Build comprehensive LiturgicalLibrarian agent and integrate with pipeline
-- **Git HEAD**: Ready to commit Session 31 (Phase 4 critical fixes complete)
+- **Git HEAD**: Ready to commit Session 32 (Phase 4 bug fix complete)
 
 ## Notes
 - Project based on existing figurative language work in Bible project

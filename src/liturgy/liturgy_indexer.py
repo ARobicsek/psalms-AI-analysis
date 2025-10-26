@@ -399,30 +399,38 @@ class LiturgyIndexer:
         full_text: str,
         phrase: str
     ) -> str:
-        """Extract the exact matching text from liturgy (preserving original diacritics)."""
+        """
+        Extract the exact matching text from liturgy (preserving original diacritics).
+
+        Uses sliding window approach to find the correct word sequence that matches
+        the phrase at consonantal level, ensuring we return the actual matched phrase
+        from the liturgy text (not a different phrase from the same context).
+        """
 
         words = full_text.split()
         phrase_words = phrase.split()
+        phrase_length = len(phrase_words)
 
-        normalized_full = normalize_for_search(full_text, level='consonantal')
-        normalized_full = self._normalize_text(normalized_full)
-
+        # Normalize the target phrase
         normalized_phrase = normalize_for_search(phrase, level='consonantal')
         normalized_phrase = self._normalize_text(normalized_phrase)
 
-        idx = normalized_full.find(normalized_phrase)
-        if idx == -1:
-            return phrase  # Fallback to original phrase
+        # Use sliding window to find the matching sequence in original text
+        for i in range(len(words) - phrase_length + 1):
+            # Get window of words from original text
+            window = words[i:i + phrase_length]
+            window_text = ' '.join(window)
 
-        # Find word boundaries
-        words_before = normalized_full[:idx].split()
-        match_start = len(words_before)
-        match_end = match_start + len(phrase_words)
+            # Normalize the window
+            normalized_window = normalize_for_search(window_text, level='consonantal')
+            normalized_window = self._normalize_text(normalized_window)
 
-        if match_end > len(words):
-            return phrase
+            # Check if this window matches the phrase
+            if normalized_window == normalized_phrase:
+                return window_text
 
-        return ' '.join(words[match_start:match_end])
+        # Fallback: return the original phrase if no match found
+        return phrase
 
     def _determine_match_type(
         self,
