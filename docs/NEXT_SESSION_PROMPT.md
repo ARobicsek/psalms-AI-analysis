@@ -2,7 +2,7 @@
 
 **Date**: 2025-10-26
 **Phase**: Phase 4 - Commentary Enhancement & Experimentation
-**Progress**: 96% (29 sessions complete, production-ready pipeline + Liturgical Librarian Phase 3 complete!)
+**Progress**: 98% (30 sessions complete, production-ready pipeline + Liturgical Librarian Phase 4 complete!)
 
 ---
 
@@ -19,7 +19,8 @@ The pipeline is **production-ready** with all core features implemented:
 - ✅ Liturgical Librarian Phase 1 complete - Database schema created, metadata collected
 - ✅ Liturgical Librarian Phase 2 complete - ~903,000 words of Hebrew liturgical text ingested!
 - ✅ **Liturgical Librarian Phase 3 complete - 12,253 phrases extracted with TF-IDF scoring!**
-- 🔄 **NEXT**: Phase 4 - Index phrases against liturgical corpus
+- ✅ **Liturgical Librarian Phase 4 complete - Phrase indexing system built and tested!**
+- 🔄 **NEXT**: Phase 5-6 - Build comprehensive agent & integrate with pipeline
 
 ---
 
@@ -27,38 +28,34 @@ The pipeline is **production-ready** with all core features implemented:
 
 ### Immediate Priority: Complete Liturgical Librarian Phases 4-6
 
-**BREAKTHROUGH** 🎉 - Phase 3 complete with 12,253 distinctive phrases extracted!
+**BREAKTHROUGH** 🎉 - Phase 4 complete! Working phrase indexing system with high-quality matches!
 
-**Phase 3 Complete** (Session 29):
-- ✅ Built phrase extractor with TF-IDF distinctiveness scoring (~750 LOC)
-- ✅ Extracted 12,253 unique phrases from all 150 Psalms
-- ✅ 99.6% searchable (12,205 phrases pass thresholds)
-- ✅ 68.8% unique phrases (never appear elsewhere in Tanakh)
-- ✅ Comprehensive normalization (diacritics, maqqef, punctuation)
-- ✅ Concordance-optimized frequency counting (efficient!)
-- ✅ Database expanded to 14.86 MB with phrase cache
+**Phase 4 Complete** (Session 30):
+- ✅ Built liturgy indexer with consonantal normalization (~700 LOC)
+- ✅ Simplified search strategy (consonantal only - robust across traditions)
+- ✅ Confidence scoring based on distinctiveness + match type
+- ✅ Tested with Psalm 23: 4,009 matches across 135 prayers (12% coverage!)
+- ✅ High quality matches: 99.7% confidence for exact verses
+- ✅ Database expanded to 18.45 MB with index
+- ✅ CLI for incremental and batch indexing
 
 **Architecture Validated**:
 - ✅ Phase 0: 64 curated links (validation dataset)
 - ✅ Phase 1: Database schema (5 tables, 1,123 metadata entries)
 - ✅ Phase 2: Full liturgical corpus ingested (~903K words)
 - ✅ Phase 3: 12,253 phrases extracted with TF-IDF scoring ✨
-- 🔄 Phase 4: Index phrases against liturgy (NEXT)
-- ⏳ Phases 5-6: Build agent & test
+- ✅ Phase 4: Phrase indexing system built and tested! ✨
+- 🔄 Phases 5-6: Build comprehensive agent & integrate (NEXT)
 
 **Next Session Tasks**:
 
-1. **Phase 4: Index Phrases Against Liturgy** (~2-3 hours)
-   - Build liturgy indexer with 4-layer normalization matching
-   - Search each searchable phrase in all 1,113 liturgical prayers
-   - Store matches in `psalms_liturgy_index` table with confidence scores
-   - Optimize for performance (use phrase cache)
-
-2. **Phase 5-6: Build Agent & Test** (~2-3 hours)
-   - Create comprehensive LiturgicalLibrarian agent
+1. **Phase 5-6: Build Comprehensive Agent & Integrate** (~2-3 hours)
+   - Create comprehensive LiturgicalLibrarian agent (query interface)
+   - Format liturgical usage for research bundles (markdown output)
    - Integrate with research bundle assembler
    - Validate against Phase 0's 64 curated links
    - Test with sample Psalms (23, 27, 145)
+   - Add usage examples and documentation
 
 **Full Implementation Plan**: [LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md](LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md)
 
@@ -87,6 +84,51 @@ The pipeline is **production-ready** with all core features implemented:
 ---
 
 ## Recent Sessions Summary
+
+### Session 30 (2025-10-26): Liturgical Librarian Phase 4 - Liturgy Indexing Complete
+
+**Goal**: Build phrase indexing system to search liturgical corpus for Psalms matches
+
+**Implementation Completed**:
+1. ✅ **Liturgy Indexer Built** - `src/liturgy/liturgy_indexer.py` (~700 LOC)
+   - Consonantal normalization (simplified from 4-layer to single robust approach)
+   - Searches 1,113 prayers for each phrase from Phase 3
+   - Context extraction (±10 words around matches)
+   - Exact match preservation (maintains original diacritics)
+   - Match type classification (exact_verse vs phrase_match)
+   - Confidence scoring (base 0.75 + distinctiveness boost + verse boost)
+
+2. ✅ **Indexing Performance**
+   - Tested with Psalm 23: ~2-3 minutes to index
+   - 524 searchable items → 4,009 matches found
+   - 135 unique prayers matched (12.0% of corpus from one Psalm!)
+   - Average confidence: 0.900 (90%)
+
+3. ✅ **Quality Validation**
+   - Exact verse matches: 63 (1.6%), confidence 0.997
+   - Phrase matches: 3,946 (98.4%), confidence ~0.85-0.95
+   - Sample verification: Psalm 23:1 found in Shabbat Kiddush, Zemirot, etc.
+   - All three nusachim represented (Ashkenaz, Sefard, Edot HaMizrach)
+
+4. ✅ **CLI Interface**
+   - `--psalm N`: Index single Psalm
+   - `--range N-M`: Index range of Psalms
+   - `--all`: Index all 150 Psalms
+   - `--stats`: Show index statistics
+
+**Final Statistics**:
+- Database size: 14.86 MB → 18.45 MB (+3.59 MB for index)
+- Index records: 4,009 (from Psalm 23 only)
+- Match types: exact_verse (1.6%), phrase_match (98.4%)
+- Average confidence: 0.900
+
+**Key Achievement**: Complete phrase-level indexing system with high-quality matches and robust consonantal normalization!
+
+**Time**: ~2 hours (implementation, testing, validation, documentation)
+
+**Next Session**: Phase 5-6 - Build comprehensive LiturgicalLibrarian agent and integrate with pipeline
+
+---
 
 ### Session 29 (2025-10-26): Liturgical Librarian Phase 3 - Phrase Extraction Complete
 
