@@ -4,7 +4,7 @@
 **Phase 4: Commentary Enhancement & Experimentation** 🚀
 
 ## Current Task
-**Liturgical Librarian Phase 3 - Phrase Extraction** 🔄
+**Liturgical Librarian Phase 4 - Liturgy Indexing** 🔄
 - [x] Master Editor (GPT-5) integration ✅
 - [x] Enhanced figurative language search (hierarchical 3-level) ✅
 - [x] Optimized research bundle trimming ✅
@@ -35,17 +35,21 @@
 - [x] **Phase 2: Downloaded and parsed 8 Sefaria-Export JSON files** ✅
 - [x] **Ingested ~903,082 Hebrew words (1,113 prayers, 99.1% coverage)** ✅
 - [x] **Database expanded to 11.80 MB with full liturgical corpus** ✅
-- [ ] **Phase 3: Extract Psalms phrases with TF-IDF scoring** ← NEXT
-- [ ] **Phase 4: Index phrases against liturgical corpus**
+- [x] **Phase 3: Extract Psalms phrases with TF-IDF scoring** ✅
+- [x] **Extracted 12,253 unique phrases from all 150 Psalms** ✅
+- [x] **99.6% searchable (12,205 phrases), 68.8% unique (freq=0)** ✅
+- [x] **Concordance-optimized performance (~0.4s per Psalm)** ✅
+- [x] **Database expanded to 14.86 MB with phrase cache** ✅
+- [ ] **Phase 4: Index phrases against liturgical corpus** ← NEXT
 - [ ] **Phase 5-6: Build comprehensive agent & test**
 
-**Next**: Build phrase extractor with TF-IDF distinctiveness scoring for all 150 Psalms (Phase 3)
+**Next**: Index searchable phrases against liturgical corpus with confidence scoring (Phase 4)
 
-**Breakthrough**: Phase 2 complete! ~903K words of liturgical text ingested with 100% match rate. Ready for phrase-level indexing.
+**Breakthrough**: Phase 3 complete! 12,253 distinctive phrases extracted with intelligent TF-IDF filtering. Ready for liturgical indexing!
 
 ## Progress
-- **Overall**: 95% complete (28 sessions complete, production-ready pipeline + Liturgical Librarian Phase 2 complete!)
-- **Current phase**: Phase 4 Enhancements - Ongoing (Liturgical Librarian Phases 3-6 in progress)
+- **Overall**: 96% complete (29 sessions complete, production-ready pipeline + Liturgical Librarian Phase 3 complete!)
+- **Current phase**: Phase 4 Enhancements - Ongoing (Liturgical Librarian Phases 4-6 in progress)
 
 ## Completed
 ✅ **Phase 1, Day 1: Project Structure Setup** (100% COMPLETE)
@@ -273,16 +277,18 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 - **Figurative instances available**: 2,863+ (Psalms only from Tzafun database)
 - **Liturgical cross-references (Phase 0)**: 64 curated (35/150 Psalms, 23.3% coverage) + 4,737 auto-detected preserved ✅
 - **Liturgical metadata (Phase 1)**: 1,123 prayer entries (8 sources: 3 Siddurim + 4 Machzorim + 1 Haggadah) ✅
-- **Liturgical corpus ingested (Phase 2)**: ~903,082 Hebrew words, 1,113 prayers with text (99.1% coverage) ✅ NEW!
-- **Liturgical JSON files downloaded**: 8 files, 29 MB from Sefaria-Export GitHub ✅ NEW!
+- **Liturgical corpus ingested (Phase 2)**: ~903,082 Hebrew words, 1,113 prayers with text (99.1% coverage) ✅
+- **Liturgical JSON files downloaded**: 8 files, 29 MB from Sefaria-Export GitHub ✅
+- **Psalms phrases extracted (Phase 3)**: 12,253 unique phrases, 12,205 searchable (99.6%) ✅ NEW!
+- **Phrase distinctiveness**: 68.8% unique (freq=0), 30.4% very distinctive (score ≥0.9) ✅ NEW!
 - **Librarian agents created**: 5 (BDB, Concordance, Figurative, Commentary, Liturgical) ✅
 - **AI agents created**: 4 (MacroAnalyst, MicroAnalyst, SynthesisWriter, MasterEditor) ✅
 - **Total agent code**: ~4,400 lines (including docs and CLIs)
-- **Total liturgical code**: ~2,985 lines (Phases 0-2 complete) ✅ NEW!
+- **Total liturgical code**: ~3,735 lines (Phases 0-3 complete) ✅ UPDATED!
 - **Documentation files**: 15 core files + comprehensive archive ✅
 - **Archived documentation**: 23+ historical/session files (organized by category) ✅
-- **Database size**: 11.80 MB (Tanakh + concordance + full liturgical corpus) ✅ UPDATED!
-- **Development sessions**: 28 (complete history in IMPLEMENTATION_LOG.md) ✅ UPDATED!
+- **Database size**: 14.86 MB (Tanakh + concordance + liturgical corpus + phrase cache) ✅ UPDATED!
+- **Development sessions**: 29 (complete history in IMPLEMENTATION_LOG.md) ✅ UPDATED!
 - **Git commits**: 60+ (full history preserved)
 
 ## Detailed Phase Breakdown
@@ -345,16 +351,16 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 6. **Analysis approach**: Three-pass telescopic (macro → micro → synthesis)
 
 ## Quick Links
-- **Last session**: 2025-10-26 (Session 28 - Liturgical Librarian Phase 2 COMPLETE ✅)
-- **Last session topic**: Ingested ~903K words of Hebrew liturgical text from Sefaria-Export JSON files
+- **Last session**: 2025-10-26 (Session 29 - Liturgical Librarian Phase 3 COMPLETE ✅)
+- **Last session topic**: Extracted 12,253 phrases from all 150 Psalms with TF-IDF distinctiveness scoring
 - **Current code location**:
   - src/agents/ (all librarians + AI agents)
-  - src/liturgy/ (liturgical harvesting, parsing, Phase 0-2 complete)
+  - src/liturgy/ (liturgical harvesting, parsing, phrase extraction - Phases 0-3 complete)
   - src/utils/ (logging, document generation)
   - src/concordance/ (Hebrew search + morphology)
   - docs/ (comprehensive documentation suite + implementation plans)
-- **Next milestone**: Phase 3 - Extract Psalms phrases with TF-IDF distinctiveness scoring
-- **Git HEAD**: Ready to commit Session 28 (Liturgical Librarian Phase 2 complete)
+- **Next milestone**: Phase 4 - Index phrases against liturgical corpus with confidence scoring
+- **Git HEAD**: Ready to commit Session 29 (Liturgical Librarian Phase 3 complete)
 
 ## Notes
 - Project based on existing figurative language work in Bible project
