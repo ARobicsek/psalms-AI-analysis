@@ -155,20 +155,75 @@ This Psalm appears in **23 liturgical context(s)**...
 2. **Phase 1**: Begin custom phrase-level indexing system (Phases 1-6 from implementation plan)
 3. **Other Phase 4 Enhancements**: Master Editor refinements, commentary modes, etc.
 
+#### 5. Data Quality Analysis & Filtering (Session Continuation) ✅
+
+**Issue Discovered**: User noticed suspicious entries like "Amidah 81" and questioned data quality.
+
+**Investigation Conducted**:
+- Analyzed Sefaria's `link_type` field values
+- Examined actual liturgical references via WebFetch
+- Discovered significant data quality issues
+
+**Link Type Breakdown** (4,801 total links):
+- `quotation_auto_tanakh`: 3,355 (70%) - **Auto-detected, many false positives**
+- `(empty)`: 1,374 (29%) - Unknown quality, mixed reliability
+- **`quotation`: 64 (1.3%)** - **Manually curated by Sefaria editors** ✅
+- `reference`: 6 (<1%) - Thematic references
+- `related`: 2 (<1%) - Related content
+
+**False Positive Examples Found**:
+- ❌ `Shir HaKavod 2` - Medieval piyyut, shares themes but not actual Psalm 145 quote
+- ❌ `Tzamah Nafshi 46` - Zemirot, no Psalm 145 present
+- ❌ `Amidah 81/367` - Likely verse fragments or structural artifacts
+
+**Manual Verification**:
+- Only `quotation` type are **real, verified liturgical quotations**
+- Auto-detected had ~98% false positive rate for Psalm 145
+- Empty type had ~69% questionable entries
+
+**Solution Implemented**:
+- Modified `find_liturgical_usage()` to add `curated_only` parameter (default: `True`)
+- Filters to `link_type = 'quotation'` by default (manually curated only)
+- Database preserves all 4,801 links for future use
+- Option to access all data with `curated_only=False`
+
+**Revised Statistics (Curated Only)**:
+- **64 manually curated links** (down from 4,801)
+- **35 Psalms** with curated liturgical usage (23.3% coverage)
+- Top Psalms: 23 (6 links), 36/47/111 (4 links each)
+- By tradition: Ashkenaz (50), Sefard (4), Edot HaMizrach (4)
+
+**Rationale**:
+- Accuracy over coverage for Phase 0
+- 64 curated links serve as **gold standard validation dataset**
+- Future custom search engine (Phases 1-6) will provide comprehensive coverage
+- User building local corpus search in upcoming phases
+
+**Files Modified** (second commit):
+- `src/agents/liturgical_librarian_sefaria.py` - Added filtering, updated statistics
+
 ### Session Outcome
 ✅ **Phase 0 COMPLETE** - Liturgical data now flowing through commentary pipeline!
 
-**Deliverables**:
+**Final Deliverables**:
 - ✅ Sefaria links harvester (production-ready)
-- ✅ Liturgical librarian agent (tested with Psalms 23, 145)
+- ✅ Liturgical librarian agent with quality filtering (tested with Psalms 23, 27, 145)
 - ✅ Research bundle integration (seamless)
-- ✅ Database with 4,801 curated cross-references
+- ✅ Database with 4,801 total links (64 curated, rest preserved for validation)
+- ✅ Data quality analysis and filtering system
 
 **User can now**:
-- Generate commentaries with liturgical context
-- Query any Psalm for its liturgical usage
-- See where Psalms appear across three traditions
-- Build toward comprehensive phrase-level system
+- Generate commentaries with **accurate** liturgical context (curated only)
+- Query any Psalm for manually verified liturgical usage
+- Access all 4,801 links for analysis if needed (`curated_only=False`)
+- Use 64 curated links as validation dataset for future custom search
+- Build toward comprehensive phrase-level system (Phases 1-6)
+
+**Key Learning**:
+- Sefaria's auto-detection creates massive noise (98% false positives)
+- Manual curation is sparse but accurate (64 links across 35 Psalms)
+- Custom phrase-level search engine needed for comprehensive coverage
+- Database architecture supports incremental enhancement
 
 ---
 

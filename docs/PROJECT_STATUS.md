@@ -27,10 +27,13 @@
 - [x] **LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md created (2,490+ lines)** ✅
 - [x] **Liturgical Librarian Phase 0 Implementation** ✅
 - [x] **Harvested 4,801 liturgical links from Sefaria (142/150 Psalms)** ✅
-- [x] **Created liturgical librarian agent & integrated with research bundle** ✅
+- [x] **Data quality analysis: filtered to 64 manually curated links (35 Psalms)** ✅
+- [x] **Created liturgical librarian agent with quality filtering & integrated** ✅
 - [ ] **Production testing with liturgical data** ← NEXT (recommended)
 
 **Next**: Test full pipeline with liturgical data OR begin Phase 1 (custom phrase indexing)
+
+**Note**: Using curated-only filtering (64 links, 35 Psalms) for accuracy. Database preserves all 4,801 links for future validation when building custom search engine.
 
 ## Progress
 - **Overall**: 93% complete (26 sessions complete, production-ready pipeline + clean documentation + liturgical data integrated)
@@ -260,7 +263,7 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for detailed progress.
 - **Concordance words indexed**: 269,844
 - **Unique Hebrew roots**: 8,233 (Psalms only)
 - **Figurative instances available**: 2,863+ (Psalms only from Tzafun database)
-- **Liturgical cross-references**: 4,801 (142/150 Psalms, 94.7% coverage) ✅ NEW!
+- **Liturgical cross-references**: 64 curated (35/150 Psalms, 23.3% coverage) + 4,737 auto-detected preserved ✅ NEW!
 - **Librarian agents created**: 5 (BDB, Concordance, Figurative, Commentary, Liturgical) ✅
 - **AI agents created**: 4 (MacroAnalyst, MicroAnalyst, SynthesisWriter, MasterEditor) ✅
 - **Total agent code**: ~3,200 lines (including docs and CLIs)
