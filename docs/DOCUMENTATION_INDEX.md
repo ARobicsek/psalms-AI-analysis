@@ -2,7 +2,7 @@
 
 Complete guide to all documentation in the Psalms Commentary Project.
 
-**Last Updated**: 2025-10-24 (Session 23 - Documentation Cleanup Phase 1)
+**Last Updated**: 2025-10-25 (Session 24 - Documentation Cleanup Phase 2)
 
 ---
 
@@ -44,12 +44,10 @@ Complete guide to all documentation in the Psalms Commentary Project.
 
 ## Operational Guides
 
-### Testing & Output
-- **[TESTING_AND_OUTPUT_CONVENTIONS.md](TESTING_AND_OUTPUT_CONVENTIONS.md)** - Directory structure and naming conventions
-
-### Production Deployment
-- **[BATCH_API_GUIDE.md](BATCH_API_GUIDE.md)** - Anthropic Message Batches API (50% cost savings)
-- **[RATE_LIMITING_GUIDE.md](RATE_LIMITING_GUIDE.md)** - Rate limiting strategies for production
+- **[OPERATIONAL_GUIDE.md](OPERATIONAL_GUIDE.md)** - Complete operational reference
+  - Testing & output conventions
+  - Rate limiting & API usage
+  - Batch API for production runs
 
 ---
 
@@ -96,7 +94,7 @@ All session-specific planning documents and summaries:
 1. [TECHNICAL_ARCHITECTURE_SUMMARY.md](TECHNICAL_ARCHITECTURE_SUMMARY.md) - System design
 2. [PHONETIC_DEVELOPER_GUIDE.md](PHONETIC_DEVELOPER_GUIDE.md) - Phonetic integration
 3. [LIBRARIAN_USAGE_EXAMPLES.md](LIBRARIAN_USAGE_EXAMPLES.md) - Using librarian agents
-4. [TESTING_AND_OUTPUT_CONVENTIONS.md](TESTING_AND_OUTPUT_CONVENTIONS.md) - Testing procedures
+4. [OPERATIONAL_GUIDE.md](OPERATIONAL_GUIDE.md) - Testing, rate limiting, batch API
 
 ### For Project Managers
 1. [PROJECT_STATUS.md](PROJECT_STATUS.md) - Current progress
@@ -114,9 +112,9 @@ All session-specific planning documents and summaries:
 ## Documentation Statistics
 
 **Core Documentation**: 13 essential files
-**Operational Guides**: 3 files
-**Archived**: 20+ historical/session-specific files
-**Total**: 36+ markdown files
+**Operational Guides**: 1 consolidated file
+**Archived**: 23+ historical/session-specific files
+**Total**: 37+ markdown files
 
 **Archive Structure**:
 - `archive/sessions/` - Session-specific summaries and plans
@@ -132,6 +130,7 @@ All session-specific planning documents and summaries:
 **Documentation Cleanup Sessions**:
 - **Session 22** (2025-10-24): Phase 3 - Created DEVELOPER_GUIDE, GLOSSARY; consolidated overview.md
 - **Session 23** (2025-10-24): Phase 1 Cleanup - Archived 15 files, fixed cross-references
+- **Session 24** (2025-10-25): Phase 2 Cleanup - Consolidated operational guides (3 → 1)
 
 **Key Documentation Updates**:
 - ARCHITECTURE.md → TECHNICAL_ARCHITECTURE_SUMMARY.md (Session 18)
