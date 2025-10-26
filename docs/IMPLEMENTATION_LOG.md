@@ -1,3 +1,394 @@
+## 2025-10-26 - Liturgical Librarian Research & Planning (Session 25)
+
+### Session Started
+Afternoon - Research and planning for liturgical cross-reference enhancement to Psalms Commentary Pipeline.
+
+### Goal
+Research and plan a comprehensive liturgical librarian system that can identify where passages from Psalms appear in Jewish prayer and ritual (siddur, machzor, Ashkenazi/Sephardic traditions), with sub-verse phrase detection and "influenced by" capability.
+
+### User Requirements
+1. **Detection granularity**: Exact verse quotations, sub-verse phrases, and likely influences
+2. **Contextual information**: WHERE in Jewish prayer/ritual (service, section, ritual occasion)
+3. **Tradition coverage**: Multiple nusachim (Ashkenazi, Sephardic, Edot HaMizrach)
+4. **Phrase intelligence**: Distinguish meaningful phrases from common formulas (e.g., מוֹדֶה אֲנִי vs לְעוֹלָם וָעֶד)
+5. **Preference**: Comprehensive solution with sub-verse detection capability
+
+### Research Conducted
+
+#### 1. Available Liturgical Corpora ✅
+**Sefaria API** (Primary resource):
+- Multiple complete siddurim: Siddur Ashkenaz, Siddur Sefard, Siddur Edot HaMizrach
+- Multiple machzorim: Rosh Hashanah and Yom Kippur (Ashkenaz, Edot HaMizrach)
+- Free API access, no authentication required
+- Existing cross-references: `/api/related/` endpoint returns Psalms→Liturgy links
+- Rich metadata: liturgical context, nusach, service, section
+- ~74 of 150 Psalms have existing liturgical links in Sefaria's database
+
+**Open Siddur Project** (Supplementary):
+- Open-access liturgical archive
+- Less mature API infrastructure
+- Could supplement gaps in Sefaria's coverage
+
+#### 2. Phrase Matching Analysis ✅
+**Distinctiveness scoring approach**:
+- Use TF-IDF against broader biblical corpus
+- 2-word phrases: Only if score > 0.75 (very distinctive)
+- 3-word phrases: If score > 0.5
+- 4+ word phrases: If score > 0.3
+- Filter out common particles and liturgical formulas
+
+**Search strategy**:
+- Leverage existing 4-layer Hebrew normalization (exact, voweled, consonantal, root)
+- Extract n-grams (2-10 words) from each Psalm
+- Score phrase distinctiveness using corpus frequency
+- Search liturgical texts at multiple normalization levels
+- Assign confidence scores (0.0-1.0) based on match type and normalization level
+
+### Implementation Options Designed
+
+Presented four implementation approaches:
+
+#### Option 1: Lightweight Sefaria Cross-Reference Librarian
+- **Time**: 1-2 days
+- **Scope**: Verse-level quotations only using Sefaria's existing links
+- **Pros**: Fast, reliable, leverages curated scholarly data
+- **Cons**: No sub-verse detection, no "influenced by" capability
+
+#### Option 2: Enhanced Sefaria with Phrase Detection
+- **Time**: 1-2 weeks
+- **Scope**: Verse-level + sub-verse phrase detection
+- **Approach**: Combine Sefaria links with custom phrase search in downloaded liturgical texts
+- **Pros**: Comprehensive, uses existing infrastructure
+- **Cons**: More complex, requires threshold tuning
+
+#### Option 3: Comprehensive Annotated Liturgical Corpus ← **USER SELECTED**
+- **Time**: 3-4 weeks (can build incrementally)
+- **Scope**: Full system with pre-indexed phrase-level database
+- **Approach**: Build complete `liturgy.db` with prayers and psalms_liturgy_index tables
+- **Pros**: Most comprehensive, fast lookups, offline capability, manual curation possible
+- **Cons**: Significant upfront investment, requires maintenance
+- **Decision**: Build incrementally - index Psalms one at a time as commentary is generated
+
+#### Option 4: Hybrid with ML Enhancement
+- **Time**: 4-6 weeks
+- **Scope**: Semantic similarity detection for thematic connections
+- **Approach**: Use Hebrew word embeddings (AlephBERT/DictaBERT)
+- **Pros**: Can detect allusions beyond lexical matches
+- **Cons**: Very high complexity, many false positives, harder to validate
+
+### Key Innovation: Phase 0 Bootstrap Strategy
+
+**Problem**: Option 3 requires 3-4 weeks before any value
+**Solution**: Phase 0 - Bootstrap from Sefaria's existing cross-references FIRST
+
+**Phase 0 Benefits**:
+- ✅ Immediate value (4-6 hours to implement)
+- ✅ Verse-level precision for ~74 Psalms
+- ✅ Zero manual curation (Sefaria's scholars already did it)
+- ✅ Becomes validation dataset for custom phrase-level index
+- ✅ No wasted work - feeds into comprehensive system
+
+**Two-phase strategy**:
+1. **Phase 0** (4-6 hours): Harvest Sefaria's curated links → immediate commentary enhancement
+2. **Phases 1-6** (3-4 weeks): Build comprehensive phrase-level system incrementally
+
+### Deliverable Created
+
+**LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md** (2,490+ lines)
+
+#### Complete Technical Architecture
+- Database schemas for all 4 tables (prayers, psalms_liturgy_index, liturgical_metadata, harvest_log)
+- Full Python implementations with type hints and error handling
+- Integration points with existing pipeline
+- Testing strategies and validation datasets
+
+#### Phase 0: Bootstrap from Sefaria (4-6 hours) ⚡
+- `SefariaLinksHarvester` class - harvest existing Psalms→Liturgy cross-references
+- Parses Sefaria's `/api/related/` endpoint response
+- Infers metadata (nusach, occasion, service, section) from liturgy references
+- Stores in `sefaria_liturgy_links` table
+- `SefariaLiturgicalLibrarian` class - quick query interface
+- Research bundle formatting
+- **Immediate integration** with existing pipeline
+
+#### Phase 1: Database Design & Setup
+- Complete SQLite schema with indexes
+- `prayers` table: Full liturgical text storage
+- `psalms_liturgy_index` table: Pre-computed Psalms references
+- `liturgical_metadata` table: Rich contextual information (services, occasions, sections, nusachim)
+- `harvest_log` table: Corpus building progress tracking
+
+#### Phase 2: Corpus Harvesting from Sefaria
+- `SefariaLiturgyHarvester` class
+- Recursive structure traversal for hierarchical liturgical texts
+- Metadata inference from text paths
+- Priority 1: Siddurim (Ashkenaz, Sefard, Edot HaMizrach)
+- Priority 2: Machzorim (Rosh Hashanah, Yom Kippur)
+- Priority 3: Haggadah and festival prayers
+
+#### Phase 3: Phrase Extraction & Distinctiveness Scoring
+- `PhraseExtractor` class
+- N-gram generation (2-10 words) from each Psalm
+- TF-IDF-based distinctiveness scoring against Tanakh corpus
+- Smart thresholds to filter common phrases
+- Cross-verse phrase detection (spans verse boundaries)
+- Particle filtering (avoid searching for common grammatical particles)
+
+#### Phase 4: Indexing Algorithm
+- `LiturgyIndexer` class
+- Search at multiple normalization levels (exact → voweled → consonantal)
+- Context extraction (±10 words around matches)
+- Confidence scoring based on:
+  - Normalization level (exact=1.0, voweled=0.85, consonantal=0.7)
+  - Match type (verse > phrase)
+  - Distinctiveness score
+- Incremental indexing: Process one Psalm at a time
+
+#### Phase 5: Librarian Implementation
+- `LiturgicalLibrarian` class
+- Query interface for Psalm chapter or specific verses
+- Confidence threshold filtering
+- Rich metadata in results (nusach, occasion, service, section)
+- Research bundle formatting (markdown for LLM consumption)
+- Integration with existing `ScholarResearcher` agent
+
+#### Phase 6: Testing & Refinement
+- Validation against known liturgical Psalms (23, 92, 113-118, 126, 145, 150)
+- Manual curation interface for edge cases
+- Confidence threshold tuning
+- Quality metrics and reporting
+
+### Technical Highlights
+
+**Leverages Existing Infrastructure**:
+- Uses existing 4-layer Hebrew normalization system
+- Integrates with current concordance database
+- Follows established librarian agent pattern
+- Minimal changes to `scholar_researcher.py`
+
+**Smart Phrase Detection**:
+- Distinctiveness scoring prevents searching for "לעולם ועד" (appears everywhere)
+- Allows searching for "מודה אני" (distinctive 2-word phrase)
+- N-gram length thresholds: 2-word (0.75), 3-word (0.5), 4+ word (0.3)
+
+**Confidence Scoring**:
+- Multi-factor: normalization level × match type × distinctiveness
+- Exact verse quotations: confidence = 1.0
+- Voweled phrase matches: confidence = ~0.85
+- Consonantal "likely influence": confidence = ~0.7
+
+**Incremental Build Strategy**:
+- Index Psalms one at a time as commentary is generated
+- No pressure to complete full system before use
+- System grows alongside commentary production
+- Validation against Sefaria data throughout
+
+### Implementation Timeline
+
+**Quick Start Path** (RECOMMENDED):
+- **Day 1** (4-6 hours): Phase 0 - Bootstrap from Sefaria → IMMEDIATE VALUE
+- **Weeks 1-4** (at own pace): Build comprehensive system incrementally
+
+**Full Implementation Path**:
+- **Week 1**: Phases 1-2 (database + corpus harvesting)
+- **Week 2**: Phases 3-4 (phrase extraction + indexing)
+- **Week 3**: Phase 5 (librarian + integration)
+- **Week 4**: Phase 6 (testing + refinement)
+
+### Integration Point
+
+New liturgical section in research bundles:
+
+```python
+# In src/agents/scholar_researcher.py
+class ScholarResearcher:
+    def __init__(self):
+        # ... existing librarians ...
+        self.liturgical_librarian = LiturgicalLibrarian()  # NEW
+
+    def generate_research_bundle(self, psalm_chapter, requests):
+        # ... existing sections ...
+
+        # Add liturgical usage
+        liturgical_usages = self.liturgical_librarian.find_liturgical_usage(
+            psalm_chapter=psalm_chapter
+        )
+        bundle_sections.append({
+            'title': 'Liturgical Usage',
+            'content': self.liturgical_librarian.format_for_research_bundle(liturgical_usages)
+        })
+```
+
+### Files Created
+- **docs/LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md** (2,490+ lines)
+  - Complete architecture documentation
+  - All 6 phases with full code examples
+  - Database schemas
+  - Testing strategies
+  - Timeline and deliverables
+
+### Files Modified
+- docs/NEXT_SESSION_PROMPT.md (Session 25 summary)
+- docs/PROJECT_STATUS.md (progress update, next milestone)
+- docs/IMPLEMENTATION_LOG.md (this file)
+
+### Impact
+
+**Immediate Value Path**:
+- Phase 0 can be implemented in one session (4-6 hours)
+- Provides liturgical context for ~74 Psalms immediately
+- Enhances AI agents' understanding of Psalms reception history
+- No wasted work - becomes validation dataset
+
+**Long-term Enhancement**:
+- Sub-verse phrase detection reveals allusions beyond full verses
+- "Influenced by" detection shows thematic connections
+- Multiple nusachim reveal different liturgical traditions
+- Can become scholarly contribution in its own right
+
+**Research Value**:
+- Illuminates reception history of Psalms in Jewish worship
+- Shows how specific verses/phrases shaped liturgical tradition
+- Provides evidence for commentary about ongoing ritual use
+- Supports analysis of theological themes in prayer
+
+### Next Steps
+
+**Next Session Options**:
+1. **Implement Phase 0** (RECOMMENDED) - Get immediate value
+   - Build `SefariaLinksHarvester` class
+   - Harvest all 150 Psalms cross-references (~10 min runtime)
+   - Build `SefariaLiturgicalLibrarian` class
+   - Integrate with research bundle
+   - Test with known Psalms (23, 145)
+   - **Result**: Liturgical data working in commentary TODAY
+
+2. **Production Testing** - Validate existing pipeline
+   - Run full pipeline on Psalm 23
+   - Verify all features working
+   - Check stress marking in Word output
+
+### Time
+~2 hours (web research, API exploration, option design, comprehensive documentation)
+
+### Session Complete
+Liturgical Librarian fully planned with incremental implementation strategy. Phase 0 ready for immediate implementation next session.
+
+**Documentation Structure Updated**:
+- Core docs: 15 files (unchanged)
+- New planning doc: LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md
+- Archive: 23+ files (unchanged)
+
+**Next**: Implement Phase 0 for immediate liturgical enhancement!
+
+---
+
+## 2025-10-25 - Documentation Cleanup Phase 2 (Session 24)
+
+### Session Started
+Morning - Optional Phase 2 Cleanup: Consolidate operational guides.
+
+### Goal
+Consolidate three separate operational guides (BATCH_API_GUIDE.md, RATE_LIMITING_GUIDE.md, TESTING_AND_OUTPUT_CONVENTIONS.md) into a single comprehensive OPERATIONAL_GUIDE.md for easier navigation and maintenance.
+
+### Approach
+Direct consolidation approach - merge all three guides into a single well-structured document with clear sections.
+
+### Tasks Completed
+
+#### 1. Created OPERATIONAL_GUIDE.md (742 lines) ✅
+**Location**: `docs/OPERATIONAL_GUIDE.md`
+
+**Content Structure**:
+- **Section 1: Testing & Output Conventions** (~166 lines from TESTING_AND_OUTPUT_CONVENTIONS.md)
+  - Directory structure and naming conventions
+  - Test execution standards
+  - Output organization
+  - File cleanup policy
+
+- **Section 2: Rate Limiting & API Usage** (~311 lines from RATE_LIMITING_GUIDE.md)
+  - Anthropic rate limits explanation
+  - Phase 4 token usage breakdown
+  - Delay settings (default 120s, conservative 150s, aggressive 90s)
+  - Rate limit error handling
+  - Best practices for testing vs production
+
+- **Section 3: Batch API for Production** (~352 lines from BATCH_API_GUIDE.md)
+  - Batch API overview and benefits (50% cost savings)
+  - Implementation workflow
+  - Python script examples
+  - End-to-end production workflow
+  - Cost calculations
+
+**Format**:
+- Single table of contents linking to all three sections
+- Consistent markdown formatting
+- Cross-references to DEVELOPER_GUIDE, TECHNICAL_ARCHITECTURE_SUMMARY
+- "See Also" section at end
+
+#### 2. Archived Original Files (3 files) ✅
+**Archived to docs/archive/deprecated/**:
+- BATCH_API_GUIDE.md
+- RATE_LIMITING_GUIDE.md
+- TESTING_AND_OUTPUT_CONVENTIONS.md
+
+#### 3. Updated DOCUMENTATION_INDEX.md ✅
+**Changes**:
+- Updated "Operational Guides" section: 3 separate files → 1 consolidated file
+- Updated "For Active Developers" section: TESTING_AND_OUTPUT_CONVENTIONS.md → OPERATIONAL_GUIDE.md
+- Updated statistics: "Operational Guides: 3 files" → "Operational Guides: 1 consolidated file"
+- Updated statistics: "Archived: 20+" → "Archived: 23+"
+- Added Session 24 to maintenance notes
+
+#### 4. No Cross-Reference Updates Needed ✅
+**Analysis**: Checked for references to the three archived files:
+- DOCUMENTATION_CONSOLIDATION_PLAN.md (already archived) - mentioned in planning section
+- IMPLEMENTATION_LOG.md - mentioned only in historical planning notes (Session 23)
+- DOCUMENTATION_INDEX.md - updated above
+
+No active cross-references needed updating since these were operational guides not heavily cross-referenced.
+
+### Impact
+
+**Documentation Consolidation Progress**:
+- **Session 22**: Created DEVELOPER_GUIDE, GLOSSARY; consolidated overview.md
+- **Session 23**: Archived 15 files, fixed cross-references, created DOCUMENTATION_INDEX
+- **Session 24**: Consolidated 3 operational guides → 1 comprehensive guide
+
+**Benefits**:
+- Single entry point for all operational concerns
+- Easier to maintain (one file vs three)
+- Better navigation with table of contents
+- Reduced context switching for users
+- All information preserved in logical sections
+
+**File Count Reduction**:
+- Root directory: Already at 2 files (no change)
+- Docs directory: 17 → 15 core files (11% reduction)
+- Archive: 20+ → 23+ files (comprehensive preservation)
+
+**New Documentation Structure**:
+```
+Core Documentation (13 essential files):
+├── Project Management (4): PROJECT_STATUS, NEXT_SESSION_PROMPT, IMPLEMENTATION_LOG, SESSION_MANAGEMENT
+├── Technical (3): TECHNICAL_ARCHITECTURE_SUMMARY, DEVELOPER_GUIDE, GLOSSARY
+├── Phonetic (2): PHONETIC_SYSTEM, PHONETIC_DEVELOPER_GUIDE
+├── Other Core (3): CONTEXT, LIBRARIAN_USAGE_EXAMPLES, analytical_framework_for_RAG
+└── Operational (1): OPERATIONAL_GUIDE ← NEW!
+```
+
+### Time
+~30 minutes (direct consolidation)
+
+### Session Complete
+Documentation consolidation complete! All three optional cleanup phases finished:
+- ✅ Phase 1 (Session 23): Archived 15 session/bug-specific files
+- ✅ Phase 2 (Session 24): Consolidated 3 operational guides
+
+**Next**: Production testing (Psalm 23 benchmark) or production run decision.
+
+---
+
 ## 2025-10-24 - Documentation Cleanup Phase 1 (Session 23)
 
 ### Session Started
