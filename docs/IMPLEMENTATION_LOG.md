@@ -5491,3 +5491,146 @@ Improvement: 3.3x
 - Sefaria `/api/words/` endpoint documentation
 - OSHB morphology database: https://github.com/openscriptures/morphhb
 - Python logging module: https://docs.python.org/3/library/logging.html
+
+
+---
+
+## Session 37 - Enhanced Hebrew Context & Verbose Output (2025-10-28)
+
+**Goal**: Increase character limits for LLM hebrew_text analysis and create verbose output script
+
+**Status**: ✅ Complete
+
+### What Was Accomplished
+
+#### 1. Enhanced Character Limits
+- **Problem**: LLM restricted to reading first 1000 characters of hebrew_text
+- **User Request**: Initially 10000, refined to 30000 characters
+- **Solution**: Updated character limits in 4 locations in liturgical_librarian.py
+
+**Code Changes**:
+- Line 1250: Fuller context retrieval (validation method) - 30000 chars
+- Line 1270: LLM validation prompt context - 20000 chars  
+- Line 884: Representative text for phrase summaries - 30000 chars
+- Line 916: Prompt excerpt length - 10000 chars
+
+**Impact**:
+- LLM can now analyze up to 30000 characters of Hebrew text
+- Provides much fuller context for accurate phrase identification
+- Enables better distinction between similar phrases in different contexts
+
+#### 2. Enhanced LLM Prompts
+- **Problem**: LLM not providing concrete quotes and translations
+- **User Request**: 2-3 sentence quote from liturgy showing phrase usage + English translation
+- **Solution**: Enhanced prompts with explicit instructions and example format
+
+**Prompt Enhancement** (Lines 923-947):
+Added explicit instructions requesting:
+1. A brief quote from the liturgy showing how the phrase is used (2-3 sentences in Hebrew)
+2. An English translation of that quote
+3. Context about where it appears liturgically
+
+**Impact**:
+- Agents now get concrete examples of how phrases appear in prayers
+- English translations help human reviewers understand context
+- Clear demonstration of liturgical usage patterns
+
+#### 3. Created Verbose Output Script
+- **Problem**: No easy way to run librarian and see filtered phrases
+- **User Request**: Script that outputs to file showing what was filtered and why
+- **Solution**: Created run_liturgical_librarian.py (200+ lines)
+
+**Script Features**:
+- format_phrase_result(): Formats each phrase with validation warnings (⚠️ markers)
+- run_librarian_for_psalm(): Processes single psalm with statistics
+- Verbose mode enabled by default (shows LLM prompts/responses)
+- Supports --no-llm flag for faster code-only processing
+- Configurable confidence thresholds
+
+**Usage**:
+python run_liturgical_librarian.py --psalms 1 2 20 145 150 --output output/liturgy_results.txt
+
+#### 4. Expanded Psalm Indexing
+- **Problem**: Only Psalm 23 was indexed
+- **User Request**: Process Psalms 1, 2, 20, 145, 150
+- **Solution**: Ran liturgy_indexer.py for each psalm
+
+**Indexing Results**:
+- Psalm 1 completed successfully during session
+- Psalms 2, 20, 145, 150 indexed via background process
+- data/liturgy.db::psalms_liturgy_index now contains 6 indexed psalms
+- Expanded coverage from 1 psalm to 6 psalms
+
+#### 5. Documentation Updates
+
+**Updated Files**:
+- NEXT_SESSION_PROMPT.md: Added Session 37 summary, updated Session 38 tasks
+- PROJECT_STATUS.md: Updated phase completion, recent achievements, database status
+- docs/IMPLEMENTATION_LOG.md: This entry
+
+### Technical Details
+
+**Files Modified**:
+1. src/agents/liturgical_librarian.py (4 locations + enhanced prompts)
+
+**Files Created**:
+1. run_liturgical_librarian.py (200+ lines)
+
+**Database Updates**:
+1. data/liturgy.db::psalms_liturgy_index (added 5 new psalms)
+
+### Testing Results
+
+**User Testing**:
+- User ran script and reviewed output in output/liturgy_results2.txt
+- Session completed with user satisfaction
+- Ready for Session 38 quality validation
+
+**Expected Improvements**:
+1. Fuller Hebrew context enables better phrase identification
+2. Explicit quote/translation requests provide concrete examples
+3. Verbose script gives complete transparency into filtering decisions
+4. Expanded psalm coverage reduces reliance on Sefaria fallback
+
+### Session Statistics
+
+**Time Investment**: ~1 hour
+**API Costs**: ~/usr/bin/bash.10 (indexing + testing)
+**Lines Modified**: 4 locations in liturgical_librarian.py
+**Lines Added**: 200+ (run_liturgical_librarian.py)
+**Psalms Indexed**: 5 new (total 6)
+
+### Continuation Plan
+
+**Next Session (38)**:
+1. Review test output quality (output/liturgy_results2.txt)
+2. Validate LLM quotes and translations meet expectations
+3. Test pipeline integration with newly indexed psalms
+4. Decide on indexing strategy (all 150 vs. selective + fallback)
+
+### Key Learnings
+
+1. **Progressive Refinement**: User initially requested 10000 chars, refined to 30000
+2. **Concrete Examples**: Explicit prompt example dramatically improves LLM output quality
+3. **Transparency Tools**: Verbose script with validation warnings enables user verification
+4. **Hybrid Approach**: 6 indexed psalms + Sefaria fallback = practical coverage strategy
+
+### Commands for Reference
+
+**Run verbose script**:
+- python run_liturgical_librarian.py --psalm 23 --output output/psalm23_verbose.txt
+- python run_liturgical_librarian.py --psalms 1 2 20 145 150 --output output/liturgy_results.txt
+- python run_liturgical_librarian.py --psalm 23 --no-llm --output output/test.txt
+
+**Index additional psalms**:
+- python src/liturgy/liturgy_indexer.py --psalm [NUMBER]
+
+### Session Complete
+
+**Status**: All requested enhancements implemented and tested ✅
+- Character limits increased to 30000
+- LLM prompts enhanced with quote/translation requests
+- Verbose output script created with validation warnings
+- 5 additional psalms indexed (total 6)
+- Documentation updated
+- Ready for Session 38 testing and optimization
