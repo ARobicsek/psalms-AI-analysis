@@ -4,6 +4,7 @@ Beginning
 Continuing Psalms project. Please read:
 1. @NEXT_SESSION_PROMPT.md (session handoff)
 2. @PROJECT_STATUS.md (current task)
+Note that during this work, you should make session updates to these documents and @IMPLEMENTATION_LOG.md and NOT create separate session documents.
 
 What should I work on next?
 
@@ -14,6 +15,11 @@ Session complete! Please update these 3 files:
 1. NEXT_SESSION_PROMPT.md - Add summary of what we accomplished today
 2. PROJECT_STATUS.md - Check off completed tasks, update progress
 3. IMPLEMENTATION_LOG.md - Add detailed session entry
+
+Then commit.
+
+
+
 
 Then prepare a git commit message summarizing the changes.
 

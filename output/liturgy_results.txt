@@ -1,0 +1,3045 @@
+
+LITURGICAL LIBRARIAN VERBOSE OUTPUT
+Generated: 2025-10-27 23:57:25
+
+Configuration:
+  Psalms: 1, 2, 20, 23, 145, 150
+  LLM Summaries: Enabled (Claude Haiku 4.5)
+  Min Confidence: 0.75
+  Verbose Mode: ON
+
+This output includes:
+  1. All phrase matches found in the liturgy index
+  2. LLM validation results (filtered phrases are marked)
+  3. Detailed summaries with Hebrew quotes and translations
+  4. Prayer contexts, occasions, services, and traditions
+  5. Statistics for each psalm
+
+================================================================================
+
+
+
+################################################################################
+# PSALM 1
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 1
+================================================================================
+Total distinct phrases found: 12
+Total occurrences across all prayers: 37
+Average occurrences per phrase: 3.1
+
+
+================================================================================
+PHRASE 1: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+================================================================================
+Verse Range: 1:6
+Phrase Length: 2 words
+Total Occurrences: 10
+Unique Prayer Contexts: 7
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וְדֶ֖רֶךְ רְשָׁעִ֣ים' appears in 7 prayer context(s):. Ashrei (Ashkenaz), Hodu (Sefard), Pesukei D'Zimra (Edot_HaMizrach), Pesukei D'Zimrah (Sefard), Pesukei Dezimrah (Edot_HaMizrach) (and 2 more). Occasions: Shabbat, Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Hodu (Sefard)
+  3. Pesukei D'Zimra (Edot_HaMizrach)
+  4. Pesukei D'Zimrah (Sefard)
+  5. Pesukei Dezimrah (Edot_HaMizrach)
+  6. Psalm 146 (Ashkenaz)
+  7. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: [Full Psalm 1]
+================================================================================
+Verse Range: 1:1, 3-6
+Phrase Length: 0 words
+Total Occurrences: 7
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Partial recitation in: Arvit Finale (verses 3-6), Customs of Yom Kippur Night (verses 1, 4-6).
+
+--- PRAYER CONTEXTS ---
+  1. Arvit Finale (Edot_HaMizrach)
+  2. Customs of Yom Kippur Night (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach
+
+================================================================================
+PHRASE 3: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל
+================================================================================
+Verse Range: 1:3
+Phrase Length: 3 words
+Total Occurrences: 4
+Unique Prayer Contexts: 4
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל' appears in 4 prayer context(s):. Hakafot (Sefard), Mussaf (Edot_HaMizrach), Nighttime Kiddush (Edot_HaMizrach), Pirkei Avot (Edot_HaMizrach). Occasions: Festivals, Shabbat.
+
+--- PRAYER CONTEXTS ---
+  1. Hakafot (Sefard)
+  2. Mussaf (Edot_HaMizrach)
+  3. Nighttime Kiddush (Edot_HaMizrach)
+  4. Pirkei Avot (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 4: יִתֵּ֬ן בְּעִתּ֗וֹ
+================================================================================
+Verse Range: 1:3
+Phrase Length: 2 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יִתֵּ֬ן בְּעִתּ֗וֹ' appears in 3 prayer context(s):. Hakafot (Sefard), Mussaf (Edot_HaMizrach), Nighttime Kiddush (Edot_HaMizrach). Occasions: Festivals.
+
+--- PRAYER CONTEXTS ---
+  1. Hakafot (Sefard)
+  2. Mussaf (Edot_HaMizrach)
+  3. Nighttime Kiddush (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 5: אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 1:1-3
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ [+ 1 overlapping phrase(s)]' appears in 1 prayer context(s):. Hakafot (Sefard).
+
+--- PRAYER CONTEXTS ---
+  1. Hakafot (Sefard)
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 6: אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃
+================================================================================
+Verse Range: 1:3
+Phrase Length: 10 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃' appears in 2 prayer context(s):. Mussaf (Edot_HaMizrach), Nighttime Kiddush (Edot_HaMizrach). Occasions: Festivals.
+
+--- PRAYER CONTEXTS ---
+  1. Mussaf (Edot_HaMizrach)
+  2. Nighttime Kiddush (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 7: כְּעֵץ֮ שָׁת֢וּל
+================================================================================
+Verse Range: 1:3
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כְּעֵץ֮ שָׁת֢וּל' appears in 2 prayer context(s):. Prayer for Rain (Ashkenaz), Prayer for Rain (Sefard). Occasions: Festivals.
+
+--- PRAYER CONTEXTS ---
+  1. Prayer for Rain (Ashkenaz)
+  2. Prayer for Rain (Sefard)
+
+--- OCCASIONS ---
+  Festivals
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 8: רְשָׁעִ֣ים תֹּאבֵֽד׃
+================================================================================
+Verse Range: 1:6
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'רְשָׁעִ֣ים תֹּאבֵֽד׃' appears in 2 prayer context(s):. Korbanot (Sefard), Menorah Lighting (Sefard). Occasions: Chanukah, Shabbat. Services: Mincha.
+
+--- PRAYER CONTEXTS ---
+  1. Korbanot (Sefard)
+  2. Menorah Lighting (Sefard)
+
+--- OCCASIONS ---
+  Chanukah, Shabbat
+
+--- SERVICES ---
+  Mincha
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 9: לֹ֥א עָמָ֑ד
+================================================================================
+Verse Range: 1:1
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 96.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לֹ֥א עָמָ֑ד' appears in 2 prayer context(s):. Megillah Reading (Sefard), The Avodah Service (Ashkenaz). Occasions: Purim, Yom_Kippur. Services: Musaf.
+
+--- PRAYER CONTEXTS ---
+  1. Megillah Reading (Sefard)
+  2. The Avodah Service (Ashkenaz)
+
+--- OCCASIONS ---
+  Purim, Yom_Kippur
+
+--- SERVICES ---
+  Musaf
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 10: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃
+================================================================================
+Verse Range: 1:1
+Phrase Length: 4 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃' appears in 1 prayer context(s):. Pirkei Avot (Edot_HaMizrach). Occasions: Shabbat.
+
+--- PRAYER CONTEXTS ---
+  1. Pirkei Avot (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 11: הָרְשָׁעִ֑ים כִּ֥י
+================================================================================
+Verse Range: 1:4
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הָרְשָׁעִ֑ים כִּ֥י' appears in 1 prayer context(s):. Haftarah for Yom Kippur Morning (Ashkenaz). Occasions: Yom_Kippur. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Haftarah for Yom Kippur Morning (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 12: ׀ לֹ֥א הָלַךְ֮
+================================================================================
+Verse Range: 1:1
+Phrase Length: 3 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 97.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase '׀ לֹ֥א הָלַךְ֮' appears in 1 prayer context(s):. Evening Torah Reading (Sefard). Services: Maariv.
+
+--- PRAYER CONTEXTS ---
+  1. Evening Torah Reading (Sefard)
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 2
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 2
+================================================================================
+Total distinct phrases found: 6
+Total occurrences across all prayers: 41
+Average occurrences per phrase: 6.8
+
+
+================================================================================
+PHRASE 1: [Full Psalm 2]
+================================================================================
+Verse Range: 2:1-6, 8-12
+Phrase Length: 0 words
+Total Occurrences: 21
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Full Psalm 2 recited in: Arvit Finale, Customs of Yom Kippur Night.
+
+--- PRAYER CONTEXTS ---
+  1. Arvit Finale (Edot_HaMizrach)
+  2. Customs of Yom Kippur Night (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach
+
+================================================================================
+PHRASE 2: שֹׁ֣פְטֵי אָֽרֶץ׃
+================================================================================
+Verse Range: 2:10
+Phrase Length: 2 words
+Total Occurrences: 11
+Unique Prayer Contexts: 8
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'שֹׁ֣פְטֵי אָֽרֶץ׃' appears in 8 prayer context(s):. Ashrei (Ashkenaz), Blessing of the Trees (Edot_HaMizrach), Hodu (Sefard), Pesukei D'Zimra (Edot_HaMizrach), Pesukei D'Zimrah (Sefard) (and 3 more). Occasions: Shabbat, Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Blessing of the Trees (Edot_HaMizrach)
+  3. Hodu (Sefard)
+  4. Pesukei D'Zimra (Edot_HaMizrach)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Pesukei Dezimrah (Edot_HaMizrach)
+  7. Psalm 148 (Ashkenaz)
+  8. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: אָֽרֶץ׃ עִבְד֣וּ
+================================================================================
+Verse Range: 2:10-11
+Phrase Length: 2 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אָֽרֶץ׃ עִבְד֣וּ' appears in 3 prayer context(s):. Hodu (Sefard), Kabbalat Shabbat (Sefard), Mizmor Letoda (Ashkenaz). Occasions: Shabbat, Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Hodu (Sefard)
+  2. Kabbalat Shabbat (Sefard)
+  3. Mizmor Letoda (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 4: אָֽרֶץ׃ עִבְד֣וּ אֶת־יְהֹוָ֣ה
+================================================================================
+Verse Range: 2:10-11
+Phrase Length: 3 words
+Total Occurrences: 3
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אָֽרֶץ׃ עִבְד֣וּ אֶת־יְהֹוָ֣ה' appears in 2 prayer context(s):. Kabbalat Shabbat (Edot_HaMizrach), Pesukei D'Zimra (Edot_HaMizrach). Occasions: Shabbat, Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Kabbalat Shabbat (Edot_HaMizrach)
+  2. Pesukei D'Zimra (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 5: לָ֭מָּה רָגְשׁ֣וּ גוֹיִ֑ם
+================================================================================
+Verse Range: 2:1
+Phrase Length: 3 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לָ֭מָּה רָגְשׁ֣וּ גוֹיִ֑ם' appears in 2 prayer context(s):. Ashrei (Sefard), Lamenatze'ach (Ashkenaz). Occasions: Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Sefard)
+  2. Lamenatze'ach (Ashkenaz)
+
+--- OCCASIONS ---
+  Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 6: יוֹשֵׁ֣ב בַּשָּׁמַ֣יִם
+================================================================================
+Verse Range: 2:4
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יוֹשֵׁ֣ב בַּשָּׁמַ֣יִם' appears in 1 prayer context(s):. Tenth of Tevet (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Tenth of Tevet (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+
+################################################################################
+# PSALM 20
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 20
+================================================================================
+Total distinct phrases found: 15
+Total occurrences across all prayers: 353
+Average occurrences per phrase: 23.5
+
+
+================================================================================
+PHRASE 1: ׀ אֱלֹהֵ֬י יַעֲקֹֽב׃
+================================================================================
+Verse Range: 20:2
+Phrase Length: 3 words
+Total Occurrences: 181
+Unique Prayer Contexts: 105
+Average Confidence: 95.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase '׀ אֱלֹהֵ֬י יַעֲקֹֽב׃' appears in 105 prayer context(s):. Achot Ketannah (Edot_HaMizrach), Aleinu (Edot_HaMizrach), Amida (Edot_HaMizrach), Amidah (Ashkenaz), Amidah (Edot_HaMizrach) (and 100 more). Occasions: Festivals, Purim, Rosh_Chodesh, Shabbat, Sukkot, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Achot Ketannah (Edot_HaMizrach)
+  2. Aleinu (Edot_HaMizrach)
+  3. Amida (Edot_HaMizrach)
+  4. Amidah (Ashkenaz)
+  5. Amidah (Edot_HaMizrach)
+  6. Amidah (Sefard)
+  7. Amidah for Mincha (Ashkenaz)
+  8. Amidah for Neilah (Ashkenaz)
+  9. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  10. Ashrei (Ashkenaz)
+  11. Ashrei (Edot_HaMizrach)
+  12. Ashrei Uva L'Tziyon (Sefard)
+  13. Avinu Malkenu (Ashkenaz)
+  14. Avodah (Ashkenaz)
+  15. Avot (Ashkenaz)
+  16. Awesome Prayer of Rabbeinu Tam (Sefard)
+  17. Barchu (Edot_HaMizrach)
+  18. Barechu (Edot_HaMizrach)
+  19. Before Havdalah (Edot_HaMizrach)
+  20. Borechu (Ashkenaz)
+  21. Chapter of Song (Sefard)
+  22. Customs of Yom Kippur Night (Ashkenaz)
+  23. Fast of Esther (Ashkenaz)
+  24. Fast of Esther (Edot_HaMizrach)
+  25. Fast of Gedalia (Ashkenaz)
+  26. Fast of Gedalya (Edot_HaMizrach)
+  27. Gott Fun Avraham (Sefard)
+  28. Havdala (Sefard)
+  29. Havdalah (Ashkenaz)
+  30. Hineni (Ashkenaz)
+  31. Hodu (Ashkenaz)
+  32. Hodu (Edot_HaMizrach)
+  33. Hodu (Sefard)
+  34. Hoshana Rabba (Sefard)
+  35. Incense Offering (Edot_HaMizrach)
+  36. Kaveh (Edot_HaMizrach)
+  37. Kaveh (Sefard)
+  38. Ketores (Incense Offering) (Ashkenaz)
+  39. Ketoret (Ashkenaz)
+  40. Ketoret (Edot_HaMizrach)
+  41. Korbanot (Edot_HaMizrach)
+  42. Korbanot (Sefard)
+  43. Krovetz L'Purim (Sefard)
+  44. Learning of the Day (Edot_HaMizrach)
+  45. Maariv, Shacharit & Mincha Amidah (Sefard)
+  46. Magen Avot (Edot_HaMizrach)
+  47. Me'ein Sheva (Ashkenaz)
+  48. Melava Malka Zemirot (Sefard)
+  49. Mincha (Sefard)
+  50. Motzaei Shabbat (Sefard)
+  51. Motzei Yom Kippur (Ashkenaz)
+  52. Musaf (Edot_HaMizrach)
+  53. Musaf (Sefard)
+  54. Musaf for Hachodesh (Sefard)
+  55. Musaf for Shekalim (Sefard)
+  56. Mussaf (Edot_HaMizrach)
+  57. Mussaf (Sefard)
+  58. Mussaf Finale (Edot_HaMizrach)
+  59. Offerings (Edot_HaMizrach)
+  60. Parashat HaChodesh (Sefard)
+  61. Parashat Parah (Sefard)
+  62. Parashat Sekalim (Sefard)
+  63. Parashat Zachor (Sefard)
+  64. Patriarchs (Ashkenaz)
+  65. Pesukei D'Zimrah (Sefard)
+  66. Pitum Haketoret (Ashkenaz)
+  67. Prayer for Dew (Sefard)
+  68. Prayer for Rain (Sefard)
+  69. Prayer of Rabbi Chaim Yosef David Azulai (Edot_HaMizrach)
+  70. Priestly Blessing (Sefard)
+  71. Reader's Repetition (Ashkenaz)
+  72. Reader's Repetition (Edot_HaMizrach)
+  73. Reader's Repetition of the Amidah (Ashkenaz)
+  74. Sanctification of the Day (Ashkenaz)
+  75. Selichot for 17 Tamuz (Sefard)
+  76. Selichot for 20 Sivan (Sefard)
+  77. Selichot for Asara B'Tevet (Sefard)
+  78. Selichot for Concluding Monday (Sefard)
+  79. Selichot for First Monday (Sefard)
+  80. Selichot for Taanit Esther (Sefard)
+  81. Selichot for Thursday (Sefard)
+  82. Seventeen of Tamuz (Ashkenaz)
+  83. Seventeenth of Tammuz (Edot_HaMizrach)
+  84. Shabbat HaGadol (Sefard)
+  85. Shemoneh Esrei (Ashkenaz)
+  86. Shofarot (Ashkenaz)
+  87. Song of the Day (Ashkenaz)
+  88. Song of the Day (Edot_HaMizrach)
+  89. Song of the Day (Sefard)
+  90. Sounding of the Shofar (Edot_HaMizrach)
+  91. Ten of Tevet (Ashkenaz)
+  92. Tenth of Tevet (Edot_HaMizrach)
+  93. Traveler's Prayer (Sefard)
+  94. Uva LeSion (Edot_HaMizrach)
+  95. Uva Letzion (Ashkenaz)
+  96. Vayechulu (Ashkenaz)
+  97. Vayechulu (Edot_HaMizrach)
+  98. Vayechulu (Sefard)
+  99. Veyiten Lecha (Edot_HaMizrach)
+  100. Vidui (Edot_HaMizrach)
+  101. Viyehi Noam (Ashkenaz)
+  102. Yaaleh (Ashkenaz)
+  103. Yom Tov Daytime Kiddush (Sefard)
+  104. Yom Tov Musaf Amidah (Sefard)
+  105. Zikhronot (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Purim, Rosh_Chodesh, Shabbat, Sukkot, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ בְיוֹם־קׇרְאֵֽנוּ׃
+================================================================================
+Verse Range: 20:10
+Phrase Length: 5 words
+Total Occurrences: 56
+Unique Prayer Contexts: 36
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ בְיוֹם־קׇרְאֵֽנוּ׃' appears in 36 prayer context(s):. Amidah (Edot_HaMizrach), Arvit for Motzei Rosh Hashana (Edot_HaMizrach), Ashrei (Edot_HaMizrach), Barchu (Edot_HaMizrach), Barechu (Edot_HaMizrach) (and 31 more). Occasions: Shabbat, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Edot_HaMizrach)
+  2. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  3. Ashrei (Edot_HaMizrach)
+  4. Barchu (Edot_HaMizrach)
+  5. Barechu (Edot_HaMizrach)
+  6. Fast of Esther (Edot_HaMizrach)
+  7. Fast of Gedalya (Edot_HaMizrach)
+  8. For Monday & Thursday (Sefard)
+  9. For Monday and Thursday (Ashkenaz)
+  10. Hodu (Ashkenaz)
+  11. Hodu (Edot_HaMizrach)
+  12. Hodu (Sefard)
+  13. Incense Offering (Edot_HaMizrach)
+  14. Kaveh (Edot_HaMizrach)
+  15. Kaveh (Sefard)
+  16. Ketores (Incense Offering) (Ashkenaz)
+  17. Ketoret (Ashkenaz)
+  18. Ketoret (Edot_HaMizrach)
+  19. Korbanot (Edot_HaMizrach)
+  20. Korbanot (Sefard)
+  21. Motzei Yom Kippur (Ashkenaz)
+  22. Mourning (Edot_HaMizrach)
+  23. Musaf (Edot_HaMizrach)
+  24. Mussaf Finale (Edot_HaMizrach)
+  25. Offerings (Edot_HaMizrach)
+  26. Pesukei D'Zimra (Edot_HaMizrach)
+  27. Pesukei Dezimrah (Edot_HaMizrach)
+  28. Prayer of Rabbi Chaim Yosef David Azulai (Edot_HaMizrach)
+  29. Seventeenth of Tammuz (Edot_HaMizrach)
+  30. Tenth of Tevet (Edot_HaMizrach)
+  31. The Shema (Sefard)
+  32. Uva LeSion (Edot_HaMizrach)
+  33. Vehu Rachum (Ashkenaz)
+  34. Vidui (Edot_HaMizrach)
+  35. Yehi Chevod (Ashkenaz)
+  36. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: [Full Psalm 20]
+================================================================================
+Verse Range: 20:1-10
+Phrase Length: 0 words
+Total Occurrences: 31
+Unique Prayer Contexts: 6
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Full Psalm 20 recited in: Ashrei, Tikkun Leah. Partial recitation in: Lamenatze'ach (verses 1-2, 7, 9), Yom Kippur Katan (verses 1-2, 7, 9).
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Edot_HaMizrach)
+  2. Ashrei (Sefard)
+  3. Lamenatze'ach (Ashkenaz)
+  4. Tikkun Leah (Edot_HaMizrach)
+  5. Yom Kippur Katan (Ashkenaz)
+  6. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 4: יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ
+================================================================================
+Verse Range: 20:10
+Phrase Length: 4 words
+Total Occurrences: 29
+Unique Prayer Contexts: 27
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ' appears in 27 prayer context(s):. Ashrei (Ashkenaz), Ashrei Uva L'Tziyon (Sefard), Fast of Esther (Ashkenaz), Havdala (Sefard), Korbanot (Sefard) (and 22 more). Occasions: Festivals, Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur. Services: Maariv, Mincha, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Fast of Esther (Ashkenaz)
+  4. Havdala (Sefard)
+  5. Korbanot (Sefard)
+  6. Melava Malka Zemirot (Sefard)
+  7. Mincha (Sefard)
+  8. Motzaei Shabbat (Sefard)
+  9. Motzei Yom Kippur (Ashkenaz)
+  10. Mussaf (Sefard)
+  11. Pesukei D'Zimrah (Sefard)
+  12. Sanctification of the Day (Ashkenaz)
+  13. Selichot for 17 Tamuz (Sefard)
+  14. Selichot for 20 Sivan (Sefard)
+  15. Selichot for Asara B'Tevet (Sefard)
+  16. Selichot for Concluding Monday (Sefard)
+  17. Selichot for First Monday (Sefard)
+  18. Selichot for Taanit Esther (Sefard)
+  19. Selichot for Thursday (Sefard)
+  20. Seventeen of Tamuz (Ashkenaz)
+  21. Tachanun (Sefard)
+  22. Ten of Tevet (Ashkenaz)
+  23. Traveler's Prayer (Sefard)
+  24. Uva Letzion (Ashkenaz)
+  25. Veyiten Lecha (Edot_HaMizrach)
+  26. Viyehi Noam (Ashkenaz)
+  27. Yaaleh (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 5: שֵׁ֤ם ׀ אֱלֹהֵ֬י
+================================================================================
+Verse Range: 20:2
+Phrase Length: 3 words
+Total Occurrences: 15
+Unique Prayer Contexts: 15
+Average Confidence: 96.80%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'שֵׁ֤ם ׀ אֱלֹהֵ֬י' appears in 15 prayer context(s):. Atkenu Seudata (Edot_HaMizrach), Beit Yaakov (Edot_HaMizrach), Beit Yaakov (Sefard), Introductory Prayers (Sefard), Musaf (Edot_HaMizrach) (and 10 more). Occasions: Festivals, Pesach, Rosh_Chodesh, Shabbat, Weekday. Services: Maariv, Mincha, Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Atkenu Seudata (Edot_HaMizrach)
+  2. Beit Yaakov (Edot_HaMizrach)
+  3. Beit Yaakov (Sefard)
+  4. Introductory Prayers (Sefard)
+  5. Musaf (Edot_HaMizrach)
+  6. Prayer for Rain (Ashkenaz)
+  7. Prayer for Rain (Sefard)
+  8. Returning Sefer Torah (Sefard)
+  9. Selichot for Asara B'Tevet (Sefard)
+  10. Supplications After Prayers (Sefard)
+  11. Ten of Tevet (Ashkenaz)
+  12. Torah Reading for Chol Hamoed Pesach (Sefard)
+  13. Torah Reading for Mincha Service (Ashkenaz)
+  14. Torah Reading for Shabbat Mincha & Monday, Thursday (Sefard)
+  15. Uva LeSion (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals, Pesach, Rosh_Chodesh, Shabbat, Weekday
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 6: עַתָּ֤ה יָדַ֗עְתִּי כִּ֤י
+================================================================================
+Verse Range: 20:7
+Phrase Length: 3 words
+Total Occurrences: 12
+Unique Prayer Contexts: 9
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'עַתָּ֤ה יָדַ֗עְתִּי כִּ֤י' appears in 9 prayer context(s):. Akedah (Ashkenaz), Akeidah (Edot_HaMizrach), Akeidah (The Binding of Yitzchak) (Ashkenaz), Morning Prayer (Edot_HaMizrach), Morning Prayer (Sefard) (and 4 more). Occasions: Shabbat, Weekday. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Akedah (Ashkenaz)
+  2. Akeidah (Edot_HaMizrach)
+  3. Akeidah (The Binding of Yitzchak) (Ashkenaz)
+  4. Morning Prayer (Edot_HaMizrach)
+  5. Morning Prayer (Sefard)
+  6. Prayer of Rabbi Chaim Yosef David Azulai (Edot_HaMizrach)
+  7. Reading of the Torah for the Second Day (Ashkenaz)
+  8. Reading of the Torah for the Second Day (Edot_HaMizrach)
+  9. Torah Reading for Shabbat Mincha & Monday, Thursday (Sefard)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 7: יְהֹוָ֥ה הוֹשִׁ֑יעָה
+================================================================================
+Verse Range: 20:10
+Phrase Length: 2 words
+Total Occurrences: 6
+Unique Prayer Contexts: 5
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יְהֹוָ֥ה הוֹשִׁ֑יעָה' appears in 5 prayer context(s):. Hakafot (Sefard), Hallel (Edot_HaMizrach), Hallel (Sefard), Motzei Shabbat Songs (Edot_HaMizrach), Mussaf (Edot_HaMizrach). Occasions: Festivals, Pesach, Rosh_Chodesh, Shabbat.
+
+--- PRAYER CONTEXTS ---
+  1. Hakafot (Sefard)
+  2. Hallel (Edot_HaMizrach)
+  3. Hallel (Sefard)
+  4. Motzei Shabbat Songs (Edot_HaMizrach)
+  5. Mussaf (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals, Pesach, Rosh_Chodesh, Shabbat
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 8: צָרָ֑ה יְ֝שַׂגֶּבְךָ֗
+================================================================================
+Verse Range: 20:2
+Phrase Length: 2 words
+Total Occurrences: 5
+Unique Prayer Contexts: 5
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'צָרָ֑ה יְ֝שַׂגֶּבְךָ֗' appears in 5 prayer context(s):. Fast of Esther (Edot_HaMizrach), Fast of Gedalya (Edot_HaMizrach), Seventeenth of Tammuz (Edot_HaMizrach), Tenth of Tevet (Edot_HaMizrach), Vidui (Edot_HaMizrach). Occasions: Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Esther (Edot_HaMizrach)
+  2. Fast of Gedalya (Edot_HaMizrach)
+  3. Seventeenth of Tammuz (Edot_HaMizrach)
+  4. Tenth of Tevet (Edot_HaMizrach)
+  5. Vidui (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 9: הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ
+================================================================================
+Verse Range: 20:10
+Phrase Length: 3 words
+Total Occurrences: 5
+Unique Prayer Contexts: 5
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ' appears in 5 prayer context(s):. Fast of Gedalia (Ashkenaz), Havdalah (Ashkenaz), Hodu (Ashkenaz), Ketoret (Ashkenaz), Yehi Chevod (Ashkenaz). Occasions: Festivals, Shabbat. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Gedalia (Ashkenaz)
+  2. Havdalah (Ashkenaz)
+  3. Hodu (Ashkenaz)
+  4. Ketoret (Ashkenaz)
+  5. Yehi Chevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 10: שֵׁ֤ם ׀ אֱלֹהֵ֬י יַעֲקֹֽב׃ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 20:2
+Phrase Length: 3 words
+Total Occurrences: 4
+Unique Prayer Contexts: 2
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'שֵׁ֤ם ׀ אֱלֹהֵ֬י יַעֲקֹֽב׃ [+ 1 overlapping phrase(s)]' appears in 2 prayer context(s):. For Monday & Thursday (Sefard), For Monday and Thursday (Ashkenaz). Occasions: Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. For Monday & Thursday (Sefard)
+  2. For Monday and Thursday (Ashkenaz)
+
+--- OCCASIONS ---
+  Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 11: ׀ בְּשֵׁם־יְהֹוָ֖ה אֱלֹהֵ֣ינוּ
+================================================================================
+Verse Range: 20:8
+Phrase Length: 3 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase '׀ בְּשֵׁם־יְהֹוָ֖ה אֱלֹהֵ֣ינוּ' appears in 3 prayer context(s):. Beit Yaakov (Edot_HaMizrach), Beit Yaakov (Sefard), Uva LeSion (Edot_HaMizrach). Occasions: Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Beit Yaakov (Edot_HaMizrach)
+  2. Beit Yaakov (Sefard)
+  3. Uva LeSion (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 12: מְשִׁ֫יח֥וֹ יַ֭עֲנֵהוּ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 20:7
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'מְשִׁ֫יח֥וֹ יַ֭עֲנֵהוּ [+ 1 overlapping phrase(s)]' appears in 1 prayer context(s):. Mussaf (Edot_HaMizrach). Occasions: Festivals.
+
+--- PRAYER CONTEXTS ---
+  1. Mussaf (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 13: בְּי֣וֹם צָרָ֑ה
+================================================================================
+Verse Range: 20:2
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 96.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'בְּי֣וֹם צָרָ֑ה' appears in 2 prayer context(s):. Fast of Esther (Edot_HaMizrach), Sounding of the Shofar (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Esther (Edot_HaMizrach)
+  2. Sounding of the Shofar (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 14: הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ
+================================================================================
+Verse Range: 20:10
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ' appears in 1 prayer context(s):. Awesome Prayer of Rabbeinu Tam (Sefard).
+
+--- PRAYER CONTEXTS ---
+  1. Awesome Prayer of Rabbeinu Tam (Sefard)
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 15: יְמַלֵּ֥א יְ֝הֹוָ֗ה
+================================================================================
+Verse Range: 20:6
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יְמַלֵּ֥א יְ֝הֹוָ֗ה' appears in 1 prayer context(s):. Blessing of New Month (Sefard). Occasions: Shabbat. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Blessing of New Month (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 23
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 23
+================================================================================
+Total distinct phrases found: 9
+Total occurrences across all prayers: 161
+Average occurrences per phrase: 17.9
+
+
+================================================================================
+PHRASE 1: לְמַ֣עַן שְׁמֽוֹ׃
+================================================================================
+Verse Range: 23:3
+Phrase Length: 2 words
+Total Occurrences: 78
+Unique Prayer Contexts: 32
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לְמַ֣עַן שְׁמֽוֹ׃' appears in 32 prayer context(s):. Amida (Edot_HaMizrach), Amidah (Ashkenaz), Amidah (Edot_HaMizrach), Amidah (Sefard), Amidah for Mincha (Ashkenaz) (and 27 more). Occasions: Festivals, Purim, Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Amida (Edot_HaMizrach)
+  2. Amidah (Ashkenaz)
+  3. Amidah (Edot_HaMizrach)
+  4. Amidah (Sefard)
+  5. Amidah for Mincha (Ashkenaz)
+  6. Amidah for Neilah (Ashkenaz)
+  7. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  8. Avot (Ashkenaz)
+  9. Krovetz L'Purim (Sefard)
+  10. Maariv, Shacharit & Mincha Amidah (Sefard)
+  11. Motzei Yom Kippur (Ashkenaz)
+  12. Musaf (Edot_HaMizrach)
+  13. Musaf (Sefard)
+  14. Musaf for Hachodesh (Sefard)
+  15. Musaf for Shekalim (Sefard)
+  16. Mussaf (Edot_HaMizrach)
+  17. Mussaf (Sefard)
+  18. Parashat HaChodesh (Sefard)
+  19. Parashat Parah (Sefard)
+  20. Parashat Sekalim (Sefard)
+  21. Parashat Zachor (Sefard)
+  22. Patriarchs (Ashkenaz)
+  23. Prayer for Dew (Sefard)
+  24. Prayer for Rain (Sefard)
+  25. Reader's Repetition (Ashkenaz)
+  26. Reader's Repetition (Edot_HaMizrach)
+  27. Reader's Repetition of the Amidah (Ashkenaz)
+  28. Selichot for 20 Sivan (Sefard)
+  29. Shabbat HaGadol (Sefard)
+  30. Shemoneh Esrei (Ashkenaz)
+  31. Sounding of the Shofar (Edot_HaMizrach)
+  32. Yom Tov Musaf Amidah (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Purim, Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: [Full Psalm 23]
+================================================================================
+Verse Range: 23:1-6
+Phrase Length: 0 words
+Total Occurrences: 33
+Unique Prayer Contexts: 13
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Full Psalm 23 recited in: Amidah, Kiddush, Magen Avot. (and 2 more). Partial recitation in: Daytime Kiddush (verses 1-4), Melava Malka Zemirot (verses 1, 5).
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Edot_HaMizrach)
+  2. Daytime Kiddush (Edot_HaMizrach)
+  3. Kiddush (Edot_HaMizrach)
+  4. Magen Avot (Edot_HaMizrach)
+  5. Melava Malka Zemirot (Sefard)
+  6. Mizmor LeDavid (Ashkenaz)
+  7. Mussaf (Edot_HaMizrach)
+  8. Shabbat Day Kiddush (Sefard)
+  9. Supplications After Prayers (Sefard)
+  10. Third Meal (Edot_HaMizrach)
+  11. Vayechulu (Edot_HaMizrach)
+  12. Vayechulu (Sefard)
+  13. Zemirot (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: לְאֹ֣רֶךְ יָמִֽים׃
+================================================================================
+Verse Range: 23:6
+Phrase Length: 2 words
+Total Occurrences: 28
+Unique Prayer Contexts: 19
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לְאֹ֣רֶךְ יָמִֽים׃' appears in 19 prayer context(s):. Aleinu (Edot_HaMizrach), Amidah (Edot_HaMizrach), Customs of Yom Kippur Night (Ashkenaz), Hodu (Ashkenaz), Kabbalas Shabbos (Ashkenaz) (and 14 more). Occasions: Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Aleinu (Edot_HaMizrach)
+  2. Amidah (Edot_HaMizrach)
+  3. Customs of Yom Kippur Night (Ashkenaz)
+  4. Hodu (Ashkenaz)
+  5. Kabbalas Shabbos (Ashkenaz)
+  6. Kabbalat Shabbat (Edot_HaMizrach)
+  7. Kabbalat Shabbat (Sefard)
+  8. Musaf (Sefard)
+  9. Pesukei D'Zimra (Edot_HaMizrach)
+  10. Pesukei D'Zimrah (Sefard)
+  11. Pesukei Dezimrah (Edot_HaMizrach)
+  12. Psalm 93 (Ashkenaz)
+  13. Reader's Repetition (Ashkenaz)
+  14. Song of the Day (Ashkenaz)
+  15. Song of the Day (Edot_HaMizrach)
+  16. Song of the Day (Sefard)
+  17. Tikkun Rachel (Edot_HaMizrach)
+  18. Vidui (Edot_HaMizrach)
+  19. Yishtabach (Ashkenaz)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 4: לְדָוִ֑ד יְהֹוָ֥ה
+================================================================================
+Verse Range: 23:1
+Phrase Length: 2 words
+Total Occurrences: 13
+Unique Prayer Contexts: 8
+Average Confidence: 97.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לְדָוִ֑ד יְהֹוָ֥ה' appears in 8 prayer context(s):. Aleinu (Ashkenaz), Amidah (Sefard), Avinu Malkenu (Ashkenaz), L'David Hashem (Sefard), LeDavid (Ashkenaz) (and 3 more). Occasions: Shabbat, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Aleinu (Ashkenaz)
+  2. Amidah (Sefard)
+  3. Avinu Malkenu (Ashkenaz)
+  4. L'David Hashem (Sefard)
+  5. LeDavid (Ashkenaz)
+  6. Motzei Yom Kippur (Ashkenaz)
+  7. Song of the Day (Ashkenaz)
+  8. Tachanun (Sefard)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 5: נֶ֥גֶד צֹרְרָ֑י
+================================================================================
+Verse Range: 23:5
+Phrase Length: 2 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'נֶ֥גֶד צֹרְרָ֑י' appears in 3 prayer context(s):. Bar Yochai (Sefard), Songs for Shabbat (Edot_HaMizrach), Zemirot (Sefard). Occasions: Shabbat. Services: Maariv.
+
+--- PRAYER CONTEXTS ---
+  1. Bar Yochai (Sefard)
+  2. Songs for Shabbat (Edot_HaMizrach)
+  3. Zemirot (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 6: מִזְמ֥וֹר לְדָוִ֑ד יְהֹוָ֥ה
+================================================================================
+Verse Range: 23:1
+Phrase Length: 3 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'מִזְמ֥וֹר לְדָוִ֑ד יְהֹוָ֥ה' appears in 3 prayer context(s):. Mourning (Edot_HaMizrach), Yom Kippur Katan (Ashkenaz), Yom Kippur Katan (Sefard). Occasions: Yom_Kippur.
+
+--- PRAYER CONTEXTS ---
+  1. Mourning (Edot_HaMizrach)
+  2. Yom Kippur Katan (Ashkenaz)
+  3. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 7: לֹ֣א אֶחְסָֽר׃
+================================================================================
+Verse Range: 23:1
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לֹ֣א אֶחְסָֽר׃' appears in 1 prayer context(s):. Customs of Yom Kippur Night (Ashkenaz). Occasions: Yom_Kippur.
+
+--- PRAYER CONTEXTS ---
+  1. Customs of Yom Kippur Night (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 8: דִּשַּׁ֥נְתָּ בַשֶּׁ֥מֶן רֹ֝אשִׁ֗י כּוֹסִ֥י רְוָיָֽה׃
+================================================================================
+Verse Range: 23:5
+Phrase Length: 5 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'דִּשַּׁ֥נְתָּ בַשֶּׁ֥מֶן רֹ֝אשִׁ֗י כּוֹסִ֥י רְוָיָֽה׃' appears in 1 prayer context(s):. Nighttime Kiddush (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Nighttime Kiddush (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 9: אַ֤ךְ ׀ ט֤וֹב
+================================================================================
+Verse Range: 23:6
+Phrase Length: 3 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אַ֤ךְ ׀ ט֤וֹב' appears in 1 prayer context(s):. Shalom Aleichem (Sefard). Occasions: Shabbat. Services: Maariv.
+
+--- PRAYER CONTEXTS ---
+  1. Shalom Aleichem (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 145
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 145
+================================================================================
+Total distinct phrases found: 41
+Total occurrences across all prayers: 1406
+Average occurrences per phrase: 34.3
+
+
+================================================================================
+PHRASE 1: [Full Psalm 145]
+================================================================================
+Verse Range: 145:1-20
+Phrase Length: 0 words
+Total Occurrences: 600
+Unique Prayer Contexts: 14
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Full Psalm 145 recited in: Ashrei, Hallel, Hodu. (and 7 more).
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei (Edot_HaMizrach)
+  3. Ashrei (Sefard)
+  4. Hallel (Edot_HaMizrach)
+  5. Hodu (Sefard)
+  6. Korbanot (Edot_HaMizrach)
+  7. Korbanot (Sefard)
+  8. Memorial Services (Ashkenaz)
+  9. Offerings (Edot_HaMizrach)
+  10. Pesukei D'Zimra (Edot_HaMizrach)
+  11. Pesukei Dezimrah (Edot_HaMizrach)
+  12. Sounding of the Shofar (Ashkenaz)
+  13. Sounding of the Shofar (Edot_HaMizrach)
+  14. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Mincha, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: לְעוֹלָ֥ם וָעֶֽד׃
+================================================================================
+Verse Range: 145:1
+Phrase Length: 2 words
+Total Occurrences: 275
+Unique Prayer Contexts: 143
+Average Confidence: 96.80%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לְעוֹלָ֥ם וָעֶֽד׃' appears in 143 prayer context(s):. Akeidah (Edot_HaMizrach), Akeidah (The Binding of Yitzchak) (Ashkenaz), Al Hanisim for Purim (Ashkenaz), Aleinu (Ashkenaz), Aleinu (Edot_HaMizrach) (and 138 more). Occasions: Chanukah, Festivals, Pesach, Purim, Rosh_Chodesh, Shabbat, Sukkot, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Akeidah (Edot_HaMizrach)
+  2. Akeidah (The Binding of Yitzchak) (Ashkenaz)
+  3. Al Hanisim for Purim (Ashkenaz)
+  4. Aleinu (Ashkenaz)
+  5. Aleinu (Edot_HaMizrach)
+  6. Aleinu (Sefard)
+  7. Alenu (Ashkenaz)
+  8. Alenu (Edot_HaMizrach)
+  9. Amida (Edot_HaMizrach)
+  10. Amidah (Ashkenaz)
+  11. Amidah (Edot_HaMizrach)
+  12. Amidah (Sefard)
+  13. Amidah for Mincha (Ashkenaz)
+  14. Amidah for Neilah (Ashkenaz)
+  15. Ana Bekoach (Ashkenaz)
+  16. Arvit Finale (Edot_HaMizrach)
+  17. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  18. Avinu Malkenu (Ashkenaz)
+  19. Avodah (Ashkenaz)
+  20. Az Yashir (Ashkenaz)
+  21. Barchu (Ashkenaz)
+  22. Barchu (Edot_HaMizrach)
+  23. Barech (Sefard)
+  24. Barechu (Edot_HaMizrach)
+  25. Bedtime Shema (Edot_HaMizrach)
+  26. Bedtime Shema (Sefard)
+  27. Beit Yaakov (Edot_HaMizrach)
+  28. Beit Yaakov (Sefard)
+  29. Berich Shemei (Ashkenaz)
+  30. Birchat HaMazon (Sefard)
+  31. Birkat HaMazon (Ashkenaz)
+  32. Birkat HaTorah (Ashkenaz)
+  33. Birkat Hamazon (Universal)
+  34. Blessing after Shema (Ashkenaz)
+  35. Blessing after the Haftarah (Edot_HaMizrach)
+  36. Blessing on the Torah (Edot_HaMizrach)
+  37. Blessings on Torah Reading (Sefard)
+  38. Borechu (Ashkenaz)
+  39. Chapter of Song (Sefard)
+  40. Circumcision (Sefard)
+  41. Counting of the Omer (Edot_HaMizrach)
+  42. Eil Adon (Ashkenaz)
+  43. Ein Kamocha (Ashkenaz)
+  44. First Blessing before Shema (Ashkenaz)
+  45. Haftarah (Ashkenaz)
+  46. Haftarah (Edot_HaMizrach)
+  47. Haftarah Blessings (Sefard)
+  48. Haftarah for Yom Kippur Morning (Ashkenaz)
+  49. Haftarah for the Second Day of Rosh Hashana (Ashkenaz)
+  50. Hakafot (Sefard)
+  51. Hodayah (Ashkenaz)
+  52. Hosha'ana Rabba (Ashkenaz)
+  53. Hoshana Rabba (Sefard)
+  54. Incense Offering (Edot_HaMizrach)
+  55. Kabbalat Shabbat (Edot_HaMizrach)
+  56. Kabbalat Shabbat (Sefard)
+  57. Kaveh (Edot_HaMizrach)
+  58. Keduasha (Ashkenaz)
+  59. Kedusha (Ashkenaz)
+  60. Kedushah (Ashkenaz)
+  61. Kedushat HaShem (Ashkenaz)
+  62. Keri'at Shema al Hamita (Ashkenaz)
+  63. Ketores (Incense Offering) (Ashkenaz)
+  64. Ketoret (Edot_HaMizrach)
+  65. Kiddush Levanah (Sefard)
+  66. Korbanot (Edot_HaMizrach)
+  67. Korbanot (Sefard)
+  68. Krovetz L'Purim (Sefard)
+  69. Maariv, Shacharit & Mincha Amidah (Sefard)
+  70. Magen Avot (Edot_HaMizrach)
+  71. Malkhuyot (Ashkenaz)
+  72. Menorah Lighting (Sefard)
+  73. Mincha (Sefard)
+  74. Modeh Ani (Ashkenaz)
+  75. Modeh Ani (Sefard)
+  76. Modim (Ashkenaz)
+  77. Morning Prayer (Edot_HaMizrach)
+  78. Morning Prayer (Sefard)
+  79. Motzaei Shabbat (Sefard)
+  80. Motzei Yom Kippur (Ashkenaz)
+  81. Mourning (Edot_HaMizrach)
+  82. Musaf (Edot_HaMizrach)
+  83. Musaf (Sefard)
+  84. Musaf for Hachodesh (Sefard)
+  85. Musaf for Shekalim (Sefard)
+  86. Mussaf (Edot_HaMizrach)
+  87. Mussaf (Sefard)
+  88. Mussaf Finale (Edot_HaMizrach)
+  89. Nirtzah (Sefard)
+  90. Nishmat (Edot_HaMizrach)
+  91. Order of the Temple Service (Ashkenaz)
+  92. Parashat HaChodesh (Sefard)
+  93. Parashat Parah (Sefard)
+  94. Parashat Sekalim (Sefard)
+  95. Parashat Zachor (Sefard)
+  96. Pesukei D'Zimrah (Sefard)
+  97. Prayer for Dew (Sefard)
+  98. Prayer for Rain (Sefard)
+  99. Reader's Repetition (Ashkenaz)
+  100. Reader's Repetition (Edot_HaMizrach)
+  101. Reading of the Torah (Edot_HaMizrach)
+  102. Recitation of Shema (Ashkenaz)
+  103. Returning Sefer Torah (Sefard)
+  104. Second Blessing before Shema (Ashkenaz)
+  105. Sefirat HaOmer (Ashkenaz)
+  106. Sefirat HaOmer (Sefard)
+  107. Shabbat Candle Lighting (Sefard)
+  108. Shabbat Eve Maariv (Sefard)
+  109. Shabbat HaGadol (Sefard)
+  110. Shabbat Torah Reading (Sefard)
+  111. Shema & Blessings (Sefard)
+  112. Shema (Ashkenaz)
+  113. Shema and Blessings (Edot_HaMizrach)
+  114. Shema and its Blessings (Edot_HaMizrach)
+  115. Shemoneh Esrei (Ashkenaz)
+  116. Slichot (Edot_HaMizrach)
+  117. Sovereignty of Heaven (Ashkenaz)
+  118. Supplications After Prayers (Sefard)
+  119. Tachanun (Sefard)
+  120. Tefilin (Sefard)
+  121. Tefillin (Ashkenaz)
+  122. Ten Remembrances (Edot_HaMizrach)
+  123. Thanksgiving (Ashkenaz)
+  124. The Avodah Service (Ashkenaz)
+  125. The Shema (Edot_HaMizrach)
+  126. The Shema (Sefard)
+  127. Third Blessing after Shema (Ashkenaz)
+  128. Torah Reading (Edot_HaMizrach)
+  129. Torah Reading (Sefard)
+  130. Torah Reading for Mincha Service (Ashkenaz)
+  131. Upon Arising in the Morning (Ashkenaz)
+  132. Uva LeSion (Edot_HaMizrach)
+  133. Uva Letzion (Ashkenaz)
+  134. Va'yehi Binsoa (Ashkenaz)
+  135. Vayechulu (Edot_HaMizrach)
+  136. Vayechulu (Sefard)
+  137. Viyehi Noam (Ashkenaz)
+  138. Yehi Chevod (Ashkenaz)
+  139. Yishtabach (Ashkenaz)
+  140. Yishtabach (Sefard)
+  141. Yom Kippur Katan (Ashkenaz)
+  142. Yom Kippur Katan (Sefard)
+  143. Yom Tov Musaf Amidah (Sefard)
+
+--- OCCASIONS ---
+  Chanukah, Festivals, Pesach, Purim, Rosh_Chodesh, Shabbat, Sukkot, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard, Universal
+
+================================================================================
+PHRASE 3: חַנּ֣וּן וְרַח֣וּם
+================================================================================
+Verse Range: 145:8
+Phrase Length: 2 words
+Total Occurrences: 81
+Unique Prayer Contexts: 44
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'חַנּ֣וּן וְרַח֣וּם' appears in 44 prayer context(s):. Amida (Edot_HaMizrach), Amidah (Ashkenaz), Amidah (Edot_HaMizrach), Amidah (Sefard), Amidah for Mincha (Ashkenaz) (and 39 more). Occasions: Festivals, Pesach, Shabbat, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Amida (Edot_HaMizrach)
+  2. Amidah (Ashkenaz)
+  3. Amidah (Edot_HaMizrach)
+  4. Amidah (Sefard)
+  5. Amidah for Mincha (Ashkenaz)
+  6. Amidah for Neilah (Ashkenaz)
+  7. Ashrei (Ashkenaz)
+  8. Barech (Sefard)
+  9. Bedtime Shema (Sefard)
+  10. Birchat HaMazon (Sefard)
+  11. Birkat HaMazon (Ashkenaz)
+  12. Birkat Hamazon (Edot_HaMizrach)
+  13. Birkat Hamazon (Universal)
+  14. Borechu (Ashkenaz)
+  15. Fast of Esther (Edot_HaMizrach)
+  16. Fast of Gedalia (Ashkenaz)
+  17. Fast of Gedalya (Edot_HaMizrach)
+  18. For Monday & Thursday (Sefard)
+  19. For Monday and Thursday (Ashkenaz)
+  20. Kedushah (Ashkenaz)
+  21. Keri'at Shema al Hamita (Ashkenaz)
+  22. Maariv, Shacharit & Mincha Amidah (Sefard)
+  23. Magen Avot (Edot_HaMizrach)
+  24. Melava Malka Zemirot (Sefard)
+  25. Motzei Yom Kippur (Ashkenaz)
+  26. Parashat HaChodesh (Sefard)
+  27. Parashat Sekalim (Sefard)
+  28. Pirkei Avot (Edot_HaMizrach)
+  29. Post Meal Blessing (Edot_HaMizrach)
+  30. Reader's Repetition (Edot_HaMizrach)
+  31. Reader's Repetition of the Amidah (Ashkenaz)
+  32. Sancification of the Day (Ashkenaz)
+  33. Sanctification of the Day (Ashkenaz)
+  34. Sanctity of the Day (Ashkenaz)
+  35. Second Blessing after Shema (Ashkenaz)
+  36. Seventeenth of Tammuz (Edot_HaMizrach)
+  37. Shema & Blessings (Sefard)
+  38. Slichot (Edot_HaMizrach)
+  39. Temple Service (Ashkenaz)
+  40. Tenth of Tevet (Edot_HaMizrach)
+  41. The Shema (Sefard)
+  42. Torah Reading for Mincha Service (Ashkenaz)
+  43. Vidui (Edot_HaMizrach)
+  44. Yaaleh (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Pesach, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard, Universal
+
+================================================================================
+PHRASE 4: אֶ֥רֶךְ אַ֝פַּ֗יִם
+================================================================================
+Verse Range: 145:8
+Phrase Length: 2 words
+Total Occurrences: 62
+Unique Prayer Contexts: 50
+Average Confidence: 95.80%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֶ֥רֶךְ אַ֝פַּ֗יִם' appears in 50 prayer context(s):. Amidah (Edot_HaMizrach), Amidah for Neilah (Ashkenaz), Ashrei (Ashkenaz), BaHaB (Ashkenaz), Beit Yaakov (Edot_HaMizrach) (and 45 more). Occasions: Festivals, Pesach, Shabbat, Weekday, Yom_Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Edot_HaMizrach)
+  2. Amidah for Neilah (Ashkenaz)
+  3. Ashrei (Ashkenaz)
+  4. BaHaB (Ashkenaz)
+  5. Beit Yaakov (Edot_HaMizrach)
+  6. Beit Yaakov (Sefard)
+  7. El Erech Appayim (Ashkenaz)
+  8. Fast Day Torah Reading (Sefard)
+  9. Fast of Esther (Ashkenaz)
+  10. Fast of Esther (Edot_HaMizrach)
+  11. Fast of Gedalia (Ashkenaz)
+  12. Fast of Gedalya (Edot_HaMizrach)
+  13. For Monday & Thursday (Sefard)
+  14. For Monday and Thursday (Ashkenaz)
+  15. Hodu (Edot_HaMizrach)
+  16. Kedushah (Ashkenaz)
+  17. Opening of the Ark (Edot_HaMizrach)
+  18. Pirkei Avot (Edot_HaMizrach)
+  19. Priestly Blessing (Sefard)
+  20. Reader's Repetition (Edot_HaMizrach)
+  21. Reader's Repetition of the Amidah (Ashkenaz)
+  22. Sanctification of the Day (Ashkenaz)
+  23. Selichot for 17 Tamuz (Sefard)
+  24. Selichot for 20 Sivan (Sefard)
+  25. Selichot for Asara B'Tevet (Sefard)
+  26. Selichot for BaHaB (Sefard)
+  27. Selichot for Concluding Monday (Sefard)
+  28. Selichot for First Monday (Sefard)
+  29. Selichot for Taanit Esther (Sefard)
+  30. Selichot for Thursday (Sefard)
+  31. Seventeen of Tamuz (Ashkenaz)
+  32. Seventeenth of Tammuz (Edot_HaMizrach)
+  33. Shabbat Torah Reading (Sefard)
+  34. Slichot (Edot_HaMizrach)
+  35. Tachanun (Sefard)
+  36. Ten of Tevet (Ashkenaz)
+  37. Tenth of Tevet (Edot_HaMizrach)
+  38. The Ten Martyrs (Ashkenaz)
+  39. Torah Reading (Edot_HaMizrach)
+  40. Torah Reading (Sefard)
+  41. Torah Reading for Chol Hamoed Pesach (Sefard)
+  42. Torah Reading for Fast Days (Edot_HaMizrach)
+  43. Torah Reading for Mincha Service (Ashkenaz)
+  44. Va'yehi Binsoa (Ashkenaz)
+  45. Vayehi Binsoa (Ashkenaz)
+  46. Vidui (Edot_HaMizrach)
+  47. Vidui and 13 Middot (Ashkenaz)
+  48. Yaaleh (Ashkenaz)
+  49. Yom Kippur Katan (Ashkenaz)
+  50. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Pesach, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 5: לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃ [+ 3 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:12-18
+Phrase Length: 2 words
+Total Occurrences: 40
+Unique Prayer Contexts: 8
+Average Confidence: 99.63%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃ [+ 3 overlapping phrase(s)]' appears in 8 prayer context(s):. Ashrei (Ashkenaz), Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Fast of Gedalia (Ashkenaz), Korbanot (Sefard) (and 3 more). Occasions: Festivals, Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Fast of Gedalia (Ashkenaz)
+  5. Korbanot (Sefard)
+  6. Mincha (Sefard)
+  7. Pesukei D'Zimrah (Sefard)
+  8. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 6: גָּ֘ד֤וֹל יְהֹוָ֣ה וּמְהֻלָּ֣ל מְאֹ֑ד
+================================================================================
+Verse Range: 145:3
+Phrase Length: 4 words
+Total Occurrences: 25
+Unique Prayer Contexts: 16
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'גָּ֘ד֤וֹל יְהֹוָ֣ה וּמְהֻלָּ֣ל מְאֹ֑ד' appears in 16 prayer context(s):. Avinu Malkenu (Ashkenaz), Avodah (Ashkenaz), Hodu (Ashkenaz), Hodu (Edot_HaMizrach), Kabbalat Shabbat (Edot_HaMizrach) (and 11 more). Occasions: Rosh_Chodesh, Shabbat, Weekday. Services: Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Avinu Malkenu (Ashkenaz)
+  2. Avodah (Ashkenaz)
+  3. Hodu (Ashkenaz)
+  4. Hodu (Edot_HaMizrach)
+  5. Kabbalat Shabbat (Edot_HaMizrach)
+  6. Kabbalat Shabbat (Sefard)
+  7. Musaf (Sefard)
+  8. Musaf for Hachodesh (Sefard)
+  9. Musaf for Shekalim (Sefard)
+  10. Pesukei D'Zimrah (Sefard)
+  11. Psalm 96 (Ashkenaz)
+  12. Reader's Repetition of the Amidah (Ashkenaz)
+  13. Song of the Day (Ashkenaz)
+  14. Song of the Day (Edot_HaMizrach)
+  15. Song of the Day (Sefard)
+  16. Yom Tov Musaf Amidah (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat, Weekday
+
+--- SERVICES ---
+  Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 7: יַבִּ֑יעוּ וְצִדְקָתְךָ֥ יְרַנֵּֽנוּ׃ חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם [+ 3 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:7-21
+Phrase Length: 8 words
+Total Occurrences: 24
+Unique Prayer Contexts: 6
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יַבִּ֑יעוּ וְצִדְקָתְךָ֥ יְרַנֵּֽנוּ׃ חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם [+ 3 overlapping phrase(s)]' appears in 6 prayer context(s):. Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Korbanot (Sefard), Mincha (Sefard), Pesukei D'Zimrah (Sefard) (and 1 more). Occasions: Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Korbanot (Sefard)
+  4. Mincha (Sefard)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 8: שֵׁ֥ם קׇדְשׁ֗וֹ
+================================================================================
+Verse Range: 145:21
+Phrase Length: 2 words
+Total Occurrences: 24
+Unique Prayer Contexts: 17
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'שֵׁ֥ם קׇדְשׁ֗וֹ' appears in 17 prayer context(s):. Customs of Yom Kippur Night (Ashkenaz), Hallel (Sefard), Hodu (Ashkenaz), Hodu (Edot_HaMizrach), Hymn of Glory (Ashkenaz) (and 12 more). Occasions: Chanukah, Pesach, Shabbat, Weekday, Yom_Kippur. Services: Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Customs of Yom Kippur Night (Ashkenaz)
+  2. Hallel (Sefard)
+  3. Hodu (Ashkenaz)
+  4. Hodu (Edot_HaMizrach)
+  5. Hymn of Glory (Ashkenaz)
+  6. Menorah Lighting (Sefard)
+  7. Musaf (Sefard)
+  8. Nishmas (Ashkenaz)
+  9. Nishmat Kol Chai (Ashkenaz)
+  10. Pesukei D'Zimrah (Sefard)
+  11. Priestly Blessing (Sefard)
+  12. Psalm 33 (Ashkenaz)
+  13. Psalms for Shabbat (Edot_HaMizrach)
+  14. Reader's Repetition of the Amidah (Ashkenaz)
+  15. Shir HaKavod (Ashkenaz)
+  16. Songs of Praise and Thanks (Universal)
+  17. Tashlich (Ashkenaz)
+
+--- OCCASIONS ---
+  Chanukah, Pesach, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard, Universal
+
+================================================================================
+PHRASE 9: כְּב֣וֹד מַלְכוּתְךָ֣
+================================================================================
+Verse Range: 145:11
+Phrase Length: 2 words
+Total Occurrences: 23
+Unique Prayer Contexts: 15
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כְּב֣וֹד מַלְכוּתְךָ֣' appears in 15 prayer context(s):. Amidah (Ashkenaz), Amidah (Edot_HaMizrach), Ashreinu Uma Naim (Sefard), Kedushah (Ashkenaz), Menorah Lighting (Sefard) (and 10 more). Occasions: Chanukah, Festivals, Yom_Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Ashkenaz)
+  2. Amidah (Edot_HaMizrach)
+  3. Ashreinu Uma Naim (Sefard)
+  4. Kedushah (Ashkenaz)
+  5. Menorah Lighting (Sefard)
+  6. Musaf (Edot_HaMizrach)
+  7. Mussaf (Edot_HaMizrach)
+  8. Prayer for Dew (Sefard)
+  9. Prayer for Rain (Sefard)
+  10. Reader's Repetition (Edot_HaMizrach)
+  11. Sanctity of the Day (Ashkenaz)
+  12. Shemoneh Esrei (Ashkenaz)
+  13. Slichot (Edot_HaMizrach)
+  14. Ten Remembrances (Edot_HaMizrach)
+  15. Yom Tov Musaf Amidah (Sefard)
+
+--- OCCASIONS ---
+  Chanukah, Festivals, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 10: אָשִֽׂיחָה׃ וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ [+ 2 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:5-7
+Phrase Length: 4 words
+Total Occurrences: 21
+Unique Prayer Contexts: 7
+Average Confidence: 99.83%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אָשִֽׂיחָה׃ וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ [+ 2 overlapping phrase(s)]' appears in 7 prayer context(s):. Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Fast of Gedalia (Ashkenaz), Korbanot (Sefard), Mincha (Sefard) (and 2 more). Occasions: Festivals, Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Fast of Gedalia (Ashkenaz)
+  4. Korbanot (Sefard)
+  5. Mincha (Sefard)
+  6. Pesukei D'Zimrah (Sefard)
+  7. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 11: אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃ גָּ֘ד֤וֹל [+ 4 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:2-21
+Phrase Length: 6 words
+Total Occurrences: 20
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃ גָּ֘ד֤וֹל [+ 4 overlapping phrase(s)]' appears in 2 prayer context(s):. Ashrei (Ashkenaz), Fast of Gedalia (Ashkenaz). Occasions: Festivals, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Fast of Gedalia (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 12: מַֽלְכוּתְךָ֗ מַלְכ֥וּת
+================================================================================
+Verse Range: 145:13
+Phrase Length: 2 words
+Total Occurrences: 19
+Unique Prayer Contexts: 15
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'מַֽלְכוּתְךָ֗ מַלְכ֥וּת' appears in 15 prayer context(s):. Ashrei (Ashkenaz), Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Ein Kamocha (Ashkenaz), Fast of Gedalia (Ashkenaz) (and 10 more). Occasions: Festivals, Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Ein Kamocha (Ashkenaz)
+  5. Fast of Gedalia (Ashkenaz)
+  6. Hakafot (Sefard)
+  7. Korbanot (Sefard)
+  8. Mincha (Sefard)
+  9. Pesukei D'Zimrah (Sefard)
+  10. Reader's Repetition (Ashkenaz)
+  11. Reader's Repetition of the Amidah (Ashkenaz)
+  12. Shabbat Torah Reading (Sefard)
+  13. Va'yehi Binsoa (Ashkenaz)
+  14. Yishtabach (Ashkenaz)
+  15. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 13: קָר֣וֹב יְ֭הֹוָה
+================================================================================
+Verse Range: 145:18
+Phrase Length: 2 words
+Total Occurrences: 14
+Unique Prayer Contexts: 12
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'קָר֣וֹב יְ֭הֹוָה' appears in 12 prayer context(s):. Ashrei Uva L'Tziyon (Sefard), Ashreinu Ma Tov (Sefard), Av HaRachamim (Sefard), Customs of Yom Kippur Night (Ashkenaz), Hodu (Ashkenaz) (and 7 more). Occasions: Rosh_Chodesh, Shabbat, Yom_Kippur. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Ashreinu Ma Tov (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Customs of Yom Kippur Night (Ashkenaz)
+  5. Hodu (Ashkenaz)
+  6. Hodu (Edot_HaMizrach)
+  7. Korbanot (Sefard)
+  8. Mincha (Sefard)
+  9. Pesukei D'Zimrah (Sefard)
+  10. Psalms for Shabbat (Edot_HaMizrach)
+  11. Reader's Repetition of the Amidah (Ashkenaz)
+  12. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat, Yom_Kippur
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 14: לַכֹּ֑ל וְ֝רַחֲמָ֗יו
+================================================================================
+Verse Range: 145:9
+Phrase Length: 2 words
+Total Occurrences: 13
+Unique Prayer Contexts: 11
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לַכֹּ֑ל וְ֝רַחֲמָ֗יו' appears in 11 prayer context(s):. Ashrei (Ashkenaz), Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Chapter of Song (Sefard), Fast of Gedalia (Ashkenaz) (and 6 more). Occasions: Festivals, Rosh_Chodesh, Shabbat, Yom_Kippur. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Chapter of Song (Sefard)
+  5. Fast of Gedalia (Ashkenaz)
+  6. Korbanot (Sefard)
+  7. Mincha (Sefard)
+  8. Pesukei D'Zimrah (Sefard)
+  9. Yizkor (Sefard)
+  10. Yom Kippur Katan (Ashkenaz)
+  11. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat, Yom_Kippur
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 15: אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ
+================================================================================
+Verse Range: 145:15
+Phrase Length: 2 words
+Total Occurrences: 12
+Unique Prayer Contexts: 9
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ' appears in 9 prayer context(s):. Amidah (Sefard), Barchi Nafshi (Ashkenaz), Barchi Nafshi (Edot_HaMizrach), Barchi Nafshi (Sefard), Barchu (Edot_HaMizrach) (and 4 more). Occasions: Rosh_Chodesh, Shabbat, Weekday. Services: Maariv, Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Sefard)
+  2. Barchi Nafshi (Ashkenaz)
+  3. Barchi Nafshi (Edot_HaMizrach)
+  4. Barchi Nafshi (Sefard)
+  5. Barchu (Edot_HaMizrach)
+  6. Hodu (Edot_HaMizrach)
+  7. Parashat HaChodesh (Sefard)
+  8. Parashat Sekalim (Sefard)
+  9. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat, Weekday
+
+--- SERVICES ---
+  Maariv, Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 16: שִׁ֝מְךָ֗ לְעוֹלָ֥ם
+================================================================================
+Verse Range: 145:1
+Phrase Length: 2 words
+Total Occurrences: 12
+Unique Prayer Contexts: 9
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'שִׁ֝מְךָ֗ לְעוֹלָ֥ם' appears in 9 prayer context(s):. Beit Yaakov (Edot_HaMizrach), Beit Yaakov (Sefard), Hodu (Ashkenaz), Hodu (Edot_HaMizrach), Pesukei D'Zimrah (Sefard) (and 4 more). Occasions: Shabbat, Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Beit Yaakov (Edot_HaMizrach)
+  2. Beit Yaakov (Sefard)
+  3. Hodu (Ashkenaz)
+  4. Hodu (Edot_HaMizrach)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Psalm 135 (Ashkenaz)
+  7. Psalms for Shabbat (Edot_HaMizrach)
+  8. Yehi Chevod (Ashkenaz)
+  9. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 17: שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃
+================================================================================
+Verse Range: 145:21
+Phrase Length: 4 words
+Total Occurrences: 11
+Unique Prayer Contexts: 9
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃' appears in 9 prayer context(s):. Ashrei (Ashkenaz), Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Fast of Gedalia (Ashkenaz), Hakafot (Sefard) (and 4 more). Occasions: Festivals, Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Fast of Gedalia (Ashkenaz)
+  5. Hakafot (Sefard)
+  6. Korbanot (Sefard)
+  7. Mincha (Sefard)
+  8. Pesukei D'Zimrah (Sefard)
+  9. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 18: חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה
+================================================================================
+Verse Range: 145:8
+Phrase Length: 3 words
+Total Occurrences: 11
+Unique Prayer Contexts: 9
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה' appears in 9 prayer context(s):. Amida (Edot_HaMizrach), Amidah (Ashkenaz), For Monday & Thursday (Sefard), For Monday and Thursday (Ashkenaz), Menorah Lighting (Sefard) (and 4 more). Occasions: Chanukah, Shabbat, Weekday. Services: Mincha, Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Amida (Edot_HaMizrach)
+  2. Amidah (Ashkenaz)
+  3. For Monday & Thursday (Sefard)
+  4. For Monday and Thursday (Ashkenaz)
+  5. Menorah Lighting (Sefard)
+  6. Musaf (Edot_HaMizrach)
+  7. Reader's Repetition of the Amidah (Ashkenaz)
+  8. Tikkun Leah (Edot_HaMizrach)
+  9. Zikhronot (Ashkenaz)
+
+--- OCCASIONS ---
+  Chanukah, Shabbat, Weekday
+
+--- SERVICES ---
+  Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 19: אֵ֣ין חֵֽקֶר׃
+================================================================================
+Verse Range: 145:3
+Phrase Length: 2 words
+Total Occurrences: 11
+Unique Prayer Contexts: 9
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֵ֣ין חֵֽקֶר׃' appears in 9 prayer context(s):. Borechu (Ashkenaz), Customs of Yom Kippur Night (Ashkenaz), First Blessing after Shema (Ashkenaz), Kedushah (Ashkenaz), Motzei Yom Kippur (Ashkenaz) (and 4 more). Occasions: Shabbat, Weekday, Yom_Kippur. Services: Maariv, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Borechu (Ashkenaz)
+  2. Customs of Yom Kippur Night (Ashkenaz)
+  3. First Blessing after Shema (Ashkenaz)
+  4. Kedushah (Ashkenaz)
+  5. Motzei Yom Kippur (Ashkenaz)
+  6. Reader's Repetition of the Amidah (Ashkenaz)
+  7. Shema & Blessings (Sefard)
+  8. The Shema (Sefard)
+  9. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 20: גָּ֘ד֤וֹל יְהֹוָ֣ה
+================================================================================
+Verse Range: 145:3
+Phrase Length: 2 words
+Total Occurrences: 10
+Unique Prayer Contexts: 9
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'גָּ֘ד֤וֹל יְהֹוָ֣ה' appears in 9 prayer context(s):. Kabbalat Shabbat (Edot_HaMizrach), Kabbalat Shabbat (Sefard), Parashat Zachor (Sefard), Prayer After the Meal (Edot_HaMizrach), Psalm 95 (Ashkenaz) (and 4 more). Occasions: Shabbat. Services: Mincha, Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Kabbalat Shabbat (Edot_HaMizrach)
+  2. Kabbalat Shabbat (Sefard)
+  3. Parashat Zachor (Sefard)
+  4. Prayer After the Meal (Edot_HaMizrach)
+  5. Psalm 95 (Ashkenaz)
+  6. Psalms for Shabbat (Edot_HaMizrach)
+  7. Shabbat Torah Reading (Sefard)
+  8. Song of the Day (Ashkenaz)
+  9. Torah Reading for Shabbat Mincha & Monday, Thursday (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 21: וּגְדֻלָּתְךָ֥ אֲסַפְּרֶֽנָּה׃ זֵ֣כֶר [+ 2 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:6-14
+Phrase Length: 3 words
+Total Occurrences: 9
+Unique Prayer Contexts: 1
+Average Confidence: 99.83%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וּגְדֻלָּתְךָ֥ אֲסַפְּרֶֽנָּה׃ זֵ֣כֶר [+ 2 overlapping phrase(s)]' appears in 1 prayer context(s):. Ashrei (Ashkenaz). Occasions: Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 22: סוֹמֵ֣ךְ יְ֭הֹוָה
+================================================================================
+Verse Range: 145:14
+Phrase Length: 2 words
+Total Occurrences: 9
+Unique Prayer Contexts: 9
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'סוֹמֵ֣ךְ יְ֭הֹוָה' appears in 9 prayer context(s):. Ashrei Uva L'Tziyon (Sefard), Ashreinu Ma Tov (Sefard), Av HaRachamim (Sefard), Chapter of Song (Sefard), Korbanot (Sefard) (and 4 more). Occasions: Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Ashreinu Ma Tov (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Chapter of Song (Sefard)
+  5. Korbanot (Sefard)
+  6. Mincha (Sefard)
+  7. Pesukei D'Zimrah (Sefard)
+  8. Reader's Repetition of the Amidah (Ashkenaz)
+  9. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 23: לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣
+================================================================================
+Verse Range: 145:1
+Phrase Length: 2 words
+Total Occurrences: 9
+Unique Prayer Contexts: 6
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣' appears in 6 prayer context(s):. Introductory Psalm (Ashkenaz), Menorah Lighting (Edot_HaMizrach), Menorah Lighting (Sefard), Mizmor Shir (Ashkenaz), Pesukei D'Zimrah (Sefard) (and 1 more). Occasions: Chanukah, Shabbat, Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Introductory Psalm (Ashkenaz)
+  2. Menorah Lighting (Edot_HaMizrach)
+  3. Menorah Lighting (Sefard)
+  4. Mizmor Shir (Ashkenaz)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Song of the Day (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Chanukah, Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 24: יוֹד֣וּךָ יְ֭הֹוָה
+================================================================================
+Verse Range: 145:10
+Phrase Length: 2 words
+Total Occurrences: 8
+Unique Prayer Contexts: 8
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יוֹד֣וּךָ יְ֭הֹוָה' appears in 8 prayer context(s):. Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Chapter of Song (Sefard), Korbanot (Sefard), Mincha (Sefard) (and 3 more). Occasions: Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Chapter of Song (Sefard)
+  4. Korbanot (Sefard)
+  5. Mincha (Sefard)
+  6. Pesukei D'Zimrah (Sefard)
+  7. Reader's Repetition of the Amidah (Ashkenaz)
+  8. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 25: חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם
+================================================================================
+Verse Range: 145:8
+Phrase Length: 5 words
+Total Occurrences: 7
+Unique Prayer Contexts: 7
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם' appears in 7 prayer context(s):. Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Korbanot (Sefard), Mincha (Sefard), Pesukei D'Zimrah (Sefard) (and 2 more). Occasions: Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Korbanot (Sefard)
+  4. Mincha (Sefard)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Shabbat Torah Reading (Sefard)
+  7. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 26: שׁוֹמֵ֣ר יְ֭הֹוָה
+================================================================================
+Verse Range: 145:20
+Phrase Length: 2 words
+Total Occurrences: 7
+Unique Prayer Contexts: 7
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'שׁוֹמֵ֣ר יְ֭הֹוָה' appears in 7 prayer context(s):. Ashrei Uva L'Tziyon (Sefard), Av HaRachamim (Sefard), Korbanot (Sefard), Mincha (Sefard), Pesukei D'Zimrah (Sefard) (and 2 more). Occasions: Rosh_Chodesh, Shabbat. Services: Mincha, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Korbanot (Sefard)
+  4. Mincha (Sefard)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Reader's Repetition of the Amidah (Ashkenaz)
+  7. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 27: הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ
+================================================================================
+Verse Range: 145:5
+Phrase Length: 3 words
+Total Occurrences: 6
+Unique Prayer Contexts: 5
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ' appears in 5 prayer context(s):. Customs of Yom Kippur Night (Ashkenaz), Hymn of Glory (Ashkenaz), Musaf (Sefard), Reader's Repetition of the Amidah (Ashkenaz), Shir HaKavod (Ashkenaz). Occasions: Shabbat, Yom_Kippur. Services: Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Customs of Yom Kippur Night (Ashkenaz)
+  2. Hymn of Glory (Ashkenaz)
+  3. Musaf (Sefard)
+  4. Reader's Repetition of the Amidah (Ashkenaz)
+  5. Shir HaKavod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Yom_Kippur
+
+--- SERVICES ---
+  Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 28: צַדִּ֣יק יְ֭הֹוָה
+================================================================================
+Verse Range: 145:17
+Phrase Length: 2 words
+Total Occurrences: 6
+Unique Prayer Contexts: 6
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'צַדִּ֣יק יְ֭הֹוָה' appears in 6 prayer context(s):. Customs of Yom Kippur Night (Ashkenaz), Hakafot (Sefard), Hoshana Rabba (Sefard), Krovetz L'Purim (Sefard), Learning of the Day (Edot_HaMizrach) (and 1 more). Occasions: Purim, Sukkot, Yom_Kippur. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Customs of Yom Kippur Night (Ashkenaz)
+  2. Hakafot (Sefard)
+  3. Hoshana Rabba (Sefard)
+  4. Krovetz L'Purim (Sefard)
+  5. Learning of the Day (Edot_HaMizrach)
+  6. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- OCCASIONS ---
+  Purim, Sukkot, Yom_Kippur
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 29: ׀ לִבְנֵ֣י הָ֭אָדָם
+================================================================================
+Verse Range: 145:12
+Phrase Length: 3 words
+Total Occurrences: 6
+Unique Prayer Contexts: 4
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase '׀ לִבְנֵ֣י הָ֭אָדָם' appears in 4 prayer context(s):. Hodu (Ashkenaz), Hodu (Edot_HaMizrach), Psalms for Shabbat (Edot_HaMizrach), Tashlich (Ashkenaz). Occasions: Shabbat. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Hodu (Ashkenaz)
+  2. Hodu (Edot_HaMizrach)
+  3. Psalms for Shabbat (Edot_HaMizrach)
+  4. Tashlich (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach
+
+================================================================================
+PHRASE 30: דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ [+ 4 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:1-12
+Phrase Length: 3 words
+Total Occurrences: 5
+Unique Prayer Contexts: 1
+Average Confidence: 99.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ [+ 4 overlapping phrase(s)]' appears in 1 prayer context(s):. Reader's Repetition of the Amidah (Ashkenaz). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 31: תְּהִלַּ֥ת יְהֹוָ֗ה
+================================================================================
+Verse Range: 145:21
+Phrase Length: 2 words
+Total Occurrences: 5
+Unique Prayer Contexts: 5
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'תְּהִלַּ֥ת יְהֹוָ֗ה' appears in 5 prayer context(s):. Birkat Hamazon (Edot_HaMizrach), Hakafot (Sefard), Post Meal Blessing (Edot_HaMizrach), Reader's Repetition of the Amidah (Ashkenaz), Sanctification of the Day (Ashkenaz). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Birkat Hamazon (Edot_HaMizrach)
+  2. Hakafot (Sefard)
+  3. Post Meal Blessing (Edot_HaMizrach)
+  4. Reader's Repetition of the Amidah (Ashkenaz)
+  5. Sanctification of the Day (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 32: פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:16
+Phrase Length: 2 words
+Total Occurrences: 4
+Unique Prayer Contexts: 2
+Average Confidence: 99.75%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ [+ 1 overlapping phrase(s)]' appears in 2 prayer context(s):. Mourning (Edot_HaMizrach), Post Meal Blessing (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Mourning (Edot_HaMizrach)
+  2. Post Meal Blessing (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 33: וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:21
+Phrase Length: 6 words
+Total Occurrences: 4
+Unique Prayer Contexts: 2
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ [+ 1 overlapping phrase(s)]' appears in 2 prayer context(s):. Birkat Hamazon (Edot_HaMizrach), Post Meal Blessing (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Birkat Hamazon (Edot_HaMizrach)
+  2. Post Meal Blessing (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 34: דּ֣וֹר לְ֭דוֹר
+================================================================================
+Verse Range: 145:4
+Phrase Length: 2 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'דּ֣וֹר לְ֭דוֹר' appears in 3 prayer context(s):. Fast of Gedalya (Edot_HaMizrach), Parashat Zachor (Sefard), Reader's Repetition of the Amidah (Ashkenaz). Services: Mincha.
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Gedalya (Edot_HaMizrach)
+  2. Parashat Zachor (Sefard)
+  3. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- SERVICES ---
+  Mincha
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 35: יוֹד֣וּךָ יְ֭הֹוָה כׇּל־מַעֲשֶׂ֑יךָ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:5-10
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יוֹד֣וּךָ יְ֭הֹוָה כׇּל־מַעֲשֶׂ֑יךָ [+ 1 overlapping phrase(s)]' appears in 1 prayer context(s):. Customs of Yom Kippur Night (Ashkenaz). Occasions: Yom_Kippur.
+
+--- PRAYER CONTEXTS ---
+  1. Customs of Yom Kippur Night (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 36: וּמְהֻלָּ֣ל מְאֹ֑ד
+================================================================================
+Verse Range: 145:3
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וּמְהֻלָּ֣ל מְאֹ֑ד' appears in 2 prayer context(s):. Hodu (Ashkenaz), Pitum Haketoret (Ashkenaz). Occasions: Shabbat. Services: Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Hodu (Ashkenaz)
+  2. Pitum Haketoret (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 37: יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם
+================================================================================
+Verse Range: 145:8
+Phrase Length: 3 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם' appears in 2 prayer context(s):. Hodu (Edot_HaMizrach), Melava Malka Zemirot (Sefard). Occasions: Shabbat. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Hodu (Edot_HaMizrach)
+  2. Melava Malka Zemirot (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 38: כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ
+================================================================================
+Verse Range: 145:10
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ' appears in 1 prayer context(s):. Berakhah after the Hallel (Ashkenaz). Occasions: Rosh_Chodesh.
+
+--- PRAYER CONTEXTS ---
+  1. Berakhah after the Hallel (Ashkenaz)
+
+--- OCCASIONS ---
+  Rosh_Chodesh
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 39: בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃
+================================================================================
+Verse Range: 145:17
+Phrase Length: 3 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃' appears in 1 prayer context(s):. Hosha'ana Rabba (Ashkenaz). Occasions: Sukkot.
+
+--- PRAYER CONTEXTS ---
+  1. Hosha'ana Rabba (Ashkenaz)
+
+--- OCCASIONS ---
+  Sukkot
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 40: הֲ֭דַר כְּב֣וֹד
+================================================================================
+Verse Range: 145:5
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הֲ֭דַר כְּב֣וֹד' appears in 1 prayer context(s):. Avinu Malkenu (Edot_HaMizrach). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Avinu Malkenu (Edot_HaMizrach)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 41: אֲרוֹמִמְךָ֣ אֱלוֹהַ֣י
+================================================================================
+Verse Range: 145:1
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֲרוֹמִמְךָ֣ אֱלוֹהַ֣י' appears in 1 prayer context(s):. Pesukei D'Zimrah (Sefard). Occasions: Shabbat. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Pesukei D'Zimrah (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 150
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 150
+================================================================================
+Total distinct phrases found: 8
+Total occurrences across all prayers: 136
+Average occurrences per phrase: 17.0
+
+
+================================================================================
+PHRASE 1: [Full Psalm 150]
+================================================================================
+Verse Range: 150:1-6
+Phrase Length: 0 words
+Total Occurrences: 123
+Unique Prayer Contexts: 16
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Full Psalm 150 recited in: Ashrei, Avinu Malkenu, Birkat HaLevana. (and 8 more). Partial recitation in: Amidah (verses 2-4, 6), Kiddush Levanah (verses 2-4, 6).
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Ashkenaz)
+  2. Ashrei (Ashkenaz)
+  3. Avinu Malkenu (Edot_HaMizrach)
+  4. Birkat HaLevana (Ashkenaz)
+  5. Blessing of the Moon (Edot_HaMizrach)
+  6. Hodu (Sefard)
+  7. Kiddush Levanah (Sefard)
+  8. Motzei Yom Kippur (Ashkenaz)
+  9. Musaf (Edot_HaMizrach)
+  10. Pesukei D'Zimra (Edot_HaMizrach)
+  11. Pesukei D'Zimrah (Sefard)
+  12. Pesukei Dezimrah (Edot_HaMizrach)
+  13. Psalm 150 (Ashkenaz)
+  14. Shofarot (Ashkenaz)
+  15. Vayechulu (Edot_HaMizrach)
+  16. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: כֹּ֣ל הַ֭נְּשָׁמָה
+================================================================================
+Verse Range: 150:6
+Phrase Length: 2 words
+Total Occurrences: 4
+Unique Prayer Contexts: 4
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כֹּ֣ל הַ֭נְּשָׁמָה' appears in 4 prayer context(s):. Closing Verses (Ashkenaz), Shema & Blessings (Sefard), Shema and its Blessings (Edot_HaMizrach), The Shema (Edot_HaMizrach). Occasions: Shabbat, Weekday. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Closing Verses (Ashkenaz)
+  2. Shema & Blessings (Sefard)
+  3. Shema and its Blessings (Edot_HaMizrach)
+  4. The Shema (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: הַֽ֝לְל֗וּהוּ בְּֽצִלְצְלֵ֥י תְרוּעָֽה׃ [+ 2 overlapping phrase(s)]
+================================================================================
+Verse Range: 150:5-6
+Phrase Length: 2 words
+Total Occurrences: 3
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הַֽ֝לְל֗וּהוּ בְּֽצִלְצְלֵ֥י תְרוּעָֽה׃ [+ 2 overlapping phrase(s)]' appears in 1 prayer context(s):. Chapter of Song (Sefard).
+
+--- PRAYER CONTEXTS ---
+  1. Chapter of Song (Sefard)
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 4: הַ֭לְלוּהוּ בְּתֵ֣קַע שׁוֹפָ֑ר
+================================================================================
+Verse Range: 150:3
+Phrase Length: 3 words
+Total Occurrences: 2
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הַ֭לְלוּהוּ בְּתֵ֣קַע שׁוֹפָ֑ר' appears in 1 prayer context(s):. Reader's Repetition (Ashkenaz). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Reader's Repetition (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 5: כֹּ֣ל הַ֭נְּשָׁמָה תְּהַלֵּ֥ל יָ֗הּ
+================================================================================
+Verse Range: 150:6
+Phrase Length: 4 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כֹּ֣ל הַ֭נְּשָׁמָה תְּהַלֵּ֥ל יָ֗הּ' appears in 1 prayer context(s):. Kedushah (Ashkenaz). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Kedushah (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 6: תְּהַלֵּ֥ל יָ֗הּ
+================================================================================
+Verse Range: 150:6
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'תְּהַלֵּ֥ל יָ֗הּ' appears in 1 prayer context(s):. Learning of the Day (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Learning of the Day (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 7: יָ֗הּ הַֽלְלוּ־יָֽהּ׃
+================================================================================
+Verse Range: 150:6
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יָ֗הּ הַֽלְלוּ־יָֽהּ׃' appears in 1 prayer context(s):. Maggid (Sefard). Occasions: Pesach.
+
+--- PRAYER CONTEXTS ---
+  1. Maggid (Sefard)
+
+--- OCCASIONS ---
+  Pesach
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 8: בִּרְקִ֥יעַ עֻזּֽוֹ׃
+================================================================================
+Verse Range: 150:1
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'בִּרְקִ֥יעַ עֻזּֽוֹ׃' appears in 1 prayer context(s):. Reader's Repetition of the Amidah (Ashkenaz). Occasions: Yom_Kippur. Services: Musaf.
+
+--- PRAYER CONTEXTS ---
+  1. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- SERVICES ---
+  Musaf
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+
+================================================================================
+PROCESSING COMPLETE
+================================================================================
+
+Total psalms processed: 6
+Output file: output\liturgy_results.txt
+
+Note: Filtered phrases (marked with ⚠️ VALIDATION WARNING) were identified by the
+LLM as potentially being from other psalms or non-psalm content and are included
+in this verbose output for review.
+
