@@ -334,7 +334,8 @@ class LiturgicalLibrarian:
                     psalm_verse_range=verse_range,
                     prayer_contexts=prayer_contexts,
                     contexts=contexts_data,
-                    total_count=len(matches)
+                    total_count=len(matches),
+                    matches=matches
                 )
             else:
                 summary = self._generate_phrase_code_summary(
@@ -854,15 +855,36 @@ Output only the summary, no preamble or explanation."""
         psalm_verse_range: str,
         prayer_contexts: List[str],
         contexts: Dict[str, Any],
-        total_count: int
+        total_count: int,
+        matches: List[LiturgicalMatch]
     ) -> str:
         """
         Use Claude Haiku to generate intelligent summary for a specific psalm phrase.
 
         This prompt is designed for PHRASE-level descriptions, not prayer-level.
+        Includes hebrew_text context and requests quotes/translations for phrase excerpts.
         """
         if not self.anthropic_client:
             return self._generate_phrase_code_summary(psalm_phrase, prayer_contexts, contexts)
+
+        # Get hebrew_text from a representative match (first one)
+        representative_hebrew_text = ""
+        if matches:
+            try:
+                conn = sqlite3.connect(self.db_path)
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT hebrew_text FROM prayers WHERE prayer_id = ?",
+                    (matches[0].prayer_id,)
+                )
+                result = cursor.fetchone()
+                conn.close()
+
+                if result and result[0]:
+                    representative_hebrew_text = result[0][:30000]  # Use first 30000 chars
+            except Exception as e:
+                if self.verbose:
+                    print(f"[WARNING] Could not fetch hebrew_text for summary: {e}")
 
         # Build context description
         context_lines = []
@@ -886,6 +908,16 @@ Output only the summary, no preamble or explanation."""
         if contexts['sections']:
             context_lines.append(f"Sections: {', '.join(contexts['sections'])}")
 
+        # Add hebrew text context if available
+        if representative_hebrew_text:
+            context_lines.append("")
+            context_lines.append("Representative Hebrew text from prayer:")
+            context_lines.append("```")
+            context_lines.append(representative_hebrew_text[:10000])  # Show 10000 chars in prompt
+            if len(representative_hebrew_text) > 10000:
+                context_lines.append("... [text continues]")
+            context_lines.append("```")
+
         context_description = "\n".join(context_lines)
 
         prompt = f"""You are summarizing liturgical usage for a scholarly Biblical commentary tool.
@@ -896,16 +928,22 @@ You are analyzing where a SPECIFIC PHRASE from a psalm appears in Jewish liturgy
 
 Generate a concise 2-3 sentence summary describing WHERE and WHEN this specific phrase appears in Jewish liturgy.
 
+IMPORTANT: For phrase excerpts (not full verses), please provide:
+1. **A brief quote from the liturgy showing how the phrase is used (2-3 sentences in Hebrew) for EACH context where it appears.**
+2. An English translation of that quote
+3. Explanation of the context in whichit appears liturgically
+
 Guidelines:
 - Start by mentioning the phrase itself (in transliteration if possible)
 - Identify patterns in where it appears (e.g., "appears in the Patriarchs blessing across all services")
 - Be specific about occasions (Weekday, Shabbat, High Holidays, etc.)
 - Mention traditions (Ashkenaz, Sefard, Edot HaMizrach) if relevant
 - Group related contexts (e.g., "appears in the Amidah for daily services" not "Amidah Shacharit, Amidah Mincha, Amidah Maariv")
+- For phrase excerpts: **Include a representative quote and translation showing liturgical context**
 - Focus on liturgical significance
 - Keep it concise and scholarly
 
-Example output: "The phrase 'למען שמו' (l'ma'an shemo, 'for His name's sake') appears in the Patriarchs (Avot) blessing of the Amidah, recited in all daily services (Shacharit, Mincha, and Maariv) as well as Musaf and Neilah. It also appears in various Selichot and in the Edot HaMizrach liturgy for the Sounding of the Shofar."
+Example output: "The phrase 'למען שמו' (l'ma'an shemo, 'for His name's sake') appears in the Patriarchs (Avot) blessing of the Amidah, recited in all daily services (Shacharit, Mincha, and Maariv) as well as Musaf and Neilah. The Amidah blessing reads: 'ברוך אתה ה׳ אלוהי אברהם אלוהי יצחק ואלוהי יעקב... ומביא גואל לבני בניהם למען שמו באהבה' ('Blessed are You, Lord our God of Abraham, God of Isaac, and God of Jacob... who brings a redeemer to their children's children for His name's sake with love'). It also appears in various Selichot and in the Edot HaMizrach liturgy for the Sounding of the Shofar."
 
 Output only the summary, no preamble."""
 
@@ -1208,8 +1246,8 @@ Output only the summary, no preamble."""
 
             if result:
                 hebrew_text, prayer_name, section = result
-                # Use first 1000 chars of hebrew_text for context
-                fuller_context = hebrew_text[:1000] if hebrew_text else match.liturgy_context
+                # Use first 30000 chars of hebrew_text for context
+                fuller_context = hebrew_text[:30000] if hebrew_text else match.liturgy_context
             else:
                 fuller_context = match.liturgy_context
 
@@ -1229,7 +1267,7 @@ Output only the summary, no preamble."""
 
 **Liturgy context** (Hebrew text from prayer):
 ```
-{fuller_context[:800]}
+{fuller_context[:20000]}
 ```
 
 **Analyze and determine**:

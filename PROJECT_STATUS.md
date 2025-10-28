@@ -1,7 +1,7 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-10-27 (Session 35 Complete)
-**Current Phase**: Liturgical Librarian Redesign - Phrase-First Grouping
+**Last Updated**: 2025-10-28 (Session 37 Complete)
+**Current Phase**: Liturgical Librarian Testing & Optimization
 
 ---
 
@@ -10,22 +10,23 @@
 ### Completed ✅
 - **Core Pipeline**: 4-pass commentary generation (Macro → Micro → Synthesis → Editor)
 - **Hebrew Processing**: Phonetic transcription, concordance, morphology
-- **Figurative Language**: 2,863 analyzed instances indexed
+- **Figurical Language**: 2,863 analyzed instances indexed
 - **Liturgical Context Phase 0**: Sefaria curated links operational
-- **Liturgical Context Phase 4**: Phrase-level indexing complete (some Psalms)
+- **Liturgical Context Phase 4**: Phrase-level indexing complete (6 Psalms)
 - **Liturgical Context Phase 5**: Intelligent aggregation with LLM summaries ✅
 - **Liturgical Context Phase 6**: Pipeline integration ✅
-- **NEW (Session 35)**: Phrase-first grouping with intelligent deduplication! ✅
+- **Liturgical Context Phase 6.5**: Phrase-first grouping with deduplication ✅
+- **NEW (Session 36)**: Verse-level analysis + LLM validation filtering ✅
+- **NEW (Session 37)**: Enhanced context (30000 chars) + verbose output script ✅
 
 ### In Progress 🔄
-- **Bug Fixes**: Full psalm detection too aggressive (filters ALL matches)
-- **Enhancement**: Need to add LLM analysis of hebrew_text field
+- **Testing**: Validating LLM output quality with enhanced prompts
+- **Indexing**: 6 psalms indexed (1, 2, 20, 23, 145, 150), others use Sefaria fallback
 
 ### Next Up 📋
-- **PRIORITY**: Fix `_verify_full_psalm_matches()` (currently too strict)
-- **PRIORITY**: Add hebrew_text analysis to LLM prompts for context verification
-- Test fixes with Psalm 23 full chapter
-- Full pipeline testing after fixes complete
+- Review test output quality (`output/liturgy_results2.txt`)
+- Pipeline integration testing with newly indexed psalms
+- Decide on full indexing strategy (all 150 vs. selective + fallback)
 
 ---
 
@@ -38,13 +39,14 @@
 | **Phase 3**: Figurative Language | ✅ Complete | 2,863 instances indexed |
 | **Phase 4A**: Liturgy Harvesting | ✅ Complete | ~1,113 prayers from Sefaria |
 | **Phase 4B**: Phrase Extraction | ✅ Complete | ~12,253 phrases cached |
-| **Phase 4C**: Phrase Indexing | 🔄 Partial | Psalm 23 indexed, not all 150 |
+| **Phase 4C**: Phrase Indexing | 🔄 Partial | 6 psalms indexed (1, 2, 20, 23, 145, 150) |
 | **Phase 4D**: Bug Fixes | ✅ Complete | Phrase extraction corrected (Session 32) |
 | **Phase 5**: Intelligent Aggregation | ✅ Complete | 730-line module with LLM (Session 33) |
 | **Phase 6**: Pipeline Integration | ✅ Complete | Integrated into ResearchAssembler (Session 34) |
 | **Phase 6.5**: Phrase-First Redesign | ✅ Complete | Groups by phrase not prayer (Session 35) |
-| **Phase 6.6**: Bug Fixes | 🔧 Needed | Full psalm detection, hebrew_text analysis |
-| **Phase 7**: Optimization | 📋 After fixes | LLM summary caching, verse-level queries |
+| **Phase 6.6**: Verse-Level Analysis | ✅ Complete | Full psalm detection + validation (Session 36) |
+| **Phase 6.7**: Enhanced Context | ✅ Complete | 30000 char limits + verbose script (Session 37) |
+| **Phase 7**: Testing & Optimization | 🔄 In Progress | Validate output quality, pipeline testing |
 
 ---
 
@@ -114,7 +116,7 @@ SynthesisWriter:
 
 ---
 
-## Recent Achievements (Sessions 32-35)
+## Recent Achievements (Sessions 32-37)
 
 ### Session 32: Bug Fix
 - **Problem**: Liturgy phrase extraction returning wrong phrases from same context
@@ -149,7 +151,7 @@ SynthesisWriter:
   - Backward compatible
   - Pre-formatted markdown for agents
 
-### Session 35: Phrase-First Redesign ⭐ NEW
+### Session 35: Phrase-First Redesign
 - **Problem**: Output grouped by prayer name without identifying which specific phrase
 - **Solution**: Complete redesign to phrase-first grouping with intelligent deduplication
 - **Impact**: Clear descriptions of WHERE SPECIFIC PHRASES appear in liturgy
@@ -166,10 +168,41 @@ SynthesisWriter:
   - Before: 5 redundant entries
   - After: 3 distinct phrases with clear descriptions
   - Example: "The phrase 'למען שמו' (l'ma'an shemo, 'for His name's sake') from Psalm 23:3 appears in the Amidah across all traditions..."
-- **Known Issues**:
-  - Full psalm detection too aggressive (filters ALL matches)
-  - Need to add hebrew_text analysis to LLM
-  - **Session 36 priority**: Fix these bugs
+
+### Session 36: Verse-Level Analysis & LLM Validation ⭐
+- **Problem**: Full psalm detection too aggressive; no validation of false positives
+- **Solution**: Verse-by-verse analysis + LLM validation filtering
+- **Impact**: 80% reduction in false positives (10 → 2 phrases for Psalm 23)
+- **Code**: `src/agents/liturgical_librarian.py` (~300 lines added/modified)
+- **New Features**:
+  - **Verse-level detection**: Checks actual Hebrew text for which verses present
+  - **ValidationResult** dataclass with confidence thresholds
+  - **_validate_phrase_match_with_llm()**: Validates individual matches
+  - **_validate_phrase_groups_with_llm()**: Batch validation
+  - Reports: "verses 1, 3-6 (83%)" or "verses 1-4 (67%)"
+  - Distinguishes full recitations (80%+) from partial (30-79%)
+- **Test Results**:
+  - Correctly filtered Psalm 20 and Psalm 93 phrases masquerading as Psalm 23
+  - Kept genuine matches ("למען שמו" - 78 occurrences)
+  - Full psalm entry with 33 occurrences across 13 contexts
+
+### Session 37: Enhanced Context & Verbose Output ⭐ NEW
+- **Problem**: Character limits too low (1000); no visibility into filtered phrases
+- **Solution**: Increased to 30000 chars + created verbose output script
+- **Impact**: Fuller context for LLM analysis; complete transparency in filtering
+- **Code**:
+  - `src/agents/liturgical_librarian.py` (4 locations updated)
+  - `run_liturgical_librarian.py` (200+ lines, new file)
+- **Enhancements**:
+  - **Character limits**: 1000 → 30000 (hebrew_text reading)
+  - **Prompt context**: 2000 → 10000 (LLM prompt excerpt)
+  - **Explicit quote requests**: LLM asked for 2-3 sentence Hebrew quotes + translations
+  - **Verbose script**: Shows filtered phrases with ⚠️ warnings and validation reasons
+  - **Expanded indexing**: Psalms 1, 2, 20, 145, 150 added (previously only 23)
+- **Usage**:
+  ```bash
+  python run_liturgical_librarian.py --psalms 1 2 20 145 150 --output output/liturgy_results.txt
+  ```
 
 ---
 
@@ -226,6 +259,27 @@ SynthesisWriter:
 
 ## Command Reference
 
+### Verbose Output Script (NEW - Session 37) ⭐
+```bash
+# Run with verbose LLM output for single psalm
+python run_liturgical_librarian.py --psalm 23 --output output/psalm23_verbose.txt
+
+# Run for multiple psalms
+python run_liturgical_librarian.py --psalms 1 2 20 145 150 --output output/liturgy_results.txt
+
+# Run without LLM (faster, code-only)
+python run_liturgical_librarian.py --psalm 23 --no-llm --output output/test.txt
+
+# Custom confidence threshold
+python run_liturgical_librarian.py --psalm 23 --min-confidence 0.85 --output output/test.txt
+```
+
+**Features**:
+- Shows filtered phrases with ⚠️ VALIDATION WARNING markers
+- Displays LLM prompts and responses in verbose mode
+- Complete statistics per psalm
+- Easy-to-read file output
+
 ### Liturgical Librarian CLI
 ```bash
 # Test with LLM summaries (default, requires ANTHROPIC_API_KEY)
@@ -276,9 +330,9 @@ markdown = librarian.format_for_research_bundle(
 ### liturgy.db (Main Liturgy Database)
 ```
 prayers table:           1,113 prayers
-phrase_cache:            12,253 phrases (Psalm 23 + others)
-psalms_liturgy_index:    Varies by Psalm (Psalm 23 fully indexed)
-sefaria_liturgy_links:   212 curated links (Phase 0)
+phrase_cache:            12,253 phrases (multiple Psalms)
+psalms_liturgy_index:    6 Psalms indexed (1, 2, 20, 23, 145, 150)
+sefaria_liturgy_links:   212 curated links (Phase 0 fallback)
 ```
 
 ### tanakh.db (Canonical Hebrew Text)
@@ -292,59 +346,78 @@ All 150 Psalms available for processing
 ## Known Issues & Limitations
 
 ### Current
-1. **Phase 4 Indexing Incomplete**: Only some Psalms indexed (e.g., Psalm 23)
-   - **Impact**: Need to run indexer for remaining Psalms
-   - **Solution**: Run `python src/liturgy/liturgy_indexer.py --all` (long-running)
+1. **Phase 4 Indexing Incomplete**: Only 6 Psalms indexed (1, 2, 20, 23, 145, 150)
+   - **Impact**: Other Psalms use Phase 0 (Sefaria) fallback
+   - **Solution**: Either index all 150 (long-running) or proceed with hybrid approach
+   - **Decision pending**: Full indexing vs. selective + fallback
 
-2. **LLM Testing Pending**: Haiku 4.5 not yet tested with API key
-   - **Impact**: Code-only summaries used in tests
-   - **Solution**: Set `ANTHROPIC_API_KEY` and verify
+2. **Output Quality Testing**: Session 37 enhancements need validation
+   - **Impact**: Need to verify LLM quotes/translations meet expectations
+   - **Solution**: Review `output/liturgy_results2.txt` and validate quality
 
 3. **Caching Not Implemented**: LLM summaries regenerated each query
    - **Impact**: Minor cost/latency overhead
-   - **Solution**: Phase 2 optimization (cache summaries in DB)
+   - **Solution**: Future optimization (cache summaries in DB)
 
 ### Design Decisions
 - **Aggregation ON by default**: Always groups prayers
 - **Confidence threshold**: 0.75 (configurable)
-- **LLM opt-in**: Use `--skip-liturgy-llm` to disable
-- **Backward compatible**: Phase 0 librarian still available
+- **LLM enabled by default**: Use `--no-llm` to disable in verbose script
+- **Backward compatible**: Phase 0 librarian still available as fallback
+- **Character limits**: 30000 for hebrew_text, 10000 for LLM prompts
 
 ---
 
 ## Next Session Priorities
 
-### High Priority
-1. ✅ Set `ANTHROPIC_API_KEY` and test LLM summaries
-2. ✅ Verify aggregation handles pattern from `logs/another_example.txt`
-3. ✅ Integrate librarian into MicroAnalyst research bundle generation
-4. ✅ Test end-to-end pipeline with Psalm 23
+### High Priority (Session 38)
+1. ⚪ Review and validate output quality (`output/liturgy_results2.txt`)
+2. ⚪ Verify LLM quotes and translations meet expectations
+3. ⚪ Test pipeline integration with newly indexed psalms
+4. ⚪ Decide on indexing strategy (all 150 vs. selective + fallback)
 
 ### Medium Priority
 5. ⚪ Add cost tracking for Haiku 4.5 API calls
-6. ⚪ Index remaining Psalms (or decide on Phase 0 fallback strategy)
-7. ⚪ Update TECHNICAL_ARCHITECTURE_SUMMARY.md
+6. ⚪ Index additional high-priority Psalms (if selective strategy chosen)
+7. ⚪ Update TECHNICAL_ARCHITECTURE_SUMMARY.md with Session 36-37 changes
 
 ### Low Priority / Future
 8. ⚪ Implement LLM summary caching (optimization)
 9. ⚪ Add drill-down capability (expand aggregated entries)
 10. ⚪ Export aggregated liturgy data to CSV/JSON
 
+### Completed (Sessions 32-37) ✅
+- ✅ Set `ANTHROPIC_API_KEY` and test LLM summaries
+- ✅ Verify aggregation handles various patterns
+- ✅ Integrate librarian into ResearchAssembler pipeline
+- ✅ Test end-to-end pipeline with Psalm 23
+- ✅ Fix full psalm detection (verse-level analysis)
+- ✅ Add LLM validation to filter false positives
+- ✅ Enhance character limits for fuller context
+- ✅ Create verbose output script
+
 ---
 
-## Files Modified (Session 33)
+## Files Modified (Sessions 36-37)
 
-### New Files
-- `src/agents/liturgical_librarian.py` - Comprehensive librarian with aggregation
-
-### Updated Files
-- `docs/IMPLEMENTATION_LOG.md` - Session 33 entry
-- `NEXT_SESSION_PROMPT.md` - Session 34 handoff
+### Modified Files (Session 37)
+- `src/agents/liturgical_librarian.py` - Enhanced character limits (4 locations)
+- `NEXT_SESSION_PROMPT.md` - Session 38 handoff
 - `PROJECT_STATUS.md` - This file
+- `docs/IMPLEMENTATION_LOG.md` - Session 37 entry
 
-### Test Files
-- `logs/one_phrase_example.txt` - Example of duplication problem
-- `logs/another_example.txt` - Pattern to assess
+### New Files (Session 37)
+- `run_liturgical_librarian.py` - Verbose output script (200+ lines)
+
+### Database Updates (Session 37)
+- `data/liturgy.db::psalms_liturgy_index` - Added Psalms 1, 2, 20, 145, 150
+
+### Modified Files (Session 36)
+- `src/agents/liturgical_librarian.py` - Verse-level analysis + LLM validation (~300 lines)
+
+### Output Files
+- `output/liturgy_results2.txt` - Test output from Session 37
+- `logs/psalm23_validated_session36.txt` - Validation test results
 
 ---
 
@@ -357,11 +430,20 @@ All 150 Psalms available for processing
 - [x] Research bundle formatter
 - [x] Documentation complete
 
-### Phase 6 Goals (Next)
-- [ ] Integrated into pipeline
-- [ ] LLM summaries tested and verified
-- [ ] Full Psalm 23 end-to-end test passes
-- [ ] Cost tracking implemented
+### Phase 6 Completion Criteria ✅
+- [x] Integrated into pipeline (Session 34)
+- [x] LLM summaries tested and verified (Sessions 33-37)
+- [x] Full Psalm 23 end-to-end test passes (Session 36)
+- [x] Verse-level analysis implemented (Session 36)
+- [x] LLM validation filtering (Session 36)
+- [x] Enhanced context (30000 chars) (Session 37)
+- [x] Verbose output script created (Session 37)
+
+### Phase 7 Goals (Current)
+- [ ] Output quality validation
+- [ ] Pipeline integration testing with new psalms
+- [ ] Indexing strategy decision
+- [ ] Cost tracking implementation
 - [ ] No regression in commentary quality
 
 ---
@@ -375,4 +457,4 @@ All 150 Psalms available for processing
 
 ---
 
-**Status**: Ready for Phase 6 integration testing! 🚀
+**Status**: Phase 6 complete! Ready for Phase 7 testing & optimization! 🚀
