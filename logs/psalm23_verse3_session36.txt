@@ -1,0 +1,79 @@
+======================================================================
+LITURGICAL USAGE: PSALM 23 (verse 3) - Session 36 Test
+======================================================================
+
+Found 4 distinct phrase(s)
+
+1. Phrase: לְמַ֣עַן שְׁמֽוֹ׃
+   Verse: 23:3
+   Occurrences: 79 across 33 contexts
+   Confidence: 99%
+
+   The phrase "למען שמו" (l'ma'an shemo, "for His name's sake") appears predominantly in the Amidah across all prayer traditions (Ashkenaz, Sefard, Edot HaMizrach) and all daily services (Shacharit, Mincha, Maariv), as well as in specialized Amidot for Musaf and Neilah. It is recited throughout the liturgical year on weekdays, Shabbat, festivals, Rosh Chodesh, Purim, and Yom Kippur, with additional appearances in Selichot and specialized prayer contexts such as the Avot blessing and holiday-specific liturgies.
+
+   Prayer contexts:
+     - Amida (Edot_HaMizrach)
+     - Amidah (Ashkenaz)
+     - Amidah (Edot_HaMizrach)
+     - Amidah (Sefard)
+     - Amidah for Mincha (Ashkenaz)
+     - Amidah for Neilah (Ashkenaz)
+     - Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+     - Avot (Ashkenaz)
+     - Krovetz L'Purim (Sefard)
+     - Maariv, Shacharit & Mincha Amidah (Sefard)
+     ... and 23 more
+
+----------------------------------------------------------------------
+
+2. Phrase: מְנֻח֣וֹת יְנַהֲלֵֽנִי׃ נַפְשִׁ֥י יְשׁוֹבֵ֑ב יַֽנְחֵ֥נִי [+ 1 overlapping phrase(s)]
+   Verse: 23:2-4
+   Occurrences: 10 across 5 contexts
+   Confidence: 100%
+
+   The phrase "menuḥot yenhahleni" (מְנֻחוֹת יְנַהֲלֵֽנִי, "He leads me to rest") from Psalm 23:2-4 appears in Sefardic liturgy primarily within Shabbat contexts, including the Kiddush recited at Maariv and in various Shabbat zemirot (hymns), as well as in Melava Malka zemirot and supplications following prayer services. This phrase is concentrated in Sefardic tradition and appears across multiple Shabbat-specific prayer contexts, reflecting its thematic connection to Shabbat rest and divine guidance.
+
+   Prayer contexts:
+     - Melava Malka Zemirot (Sefard)
+     - Shabbat Day Kiddush (Sefard)
+     - Supplications After Prayers (Sefard)
+     - Vayechulu (Sefard)
+     - Zemirot (Sefard)
+
+----------------------------------------------------------------------
+
+3. Phrase: [Full Psalm 23]
+   Verse: 23:1-6
+   Occurrences: 8 across 7 contexts
+   Confidence: 100%
+
+   Psalm 23 is recited in full (verses 1, 3-6) across six liturgical contexts including the Amidah, Kiddush, Magen Avot, Mussaf, and Third Meal, primarily during Shabbat and Festival services in Edot HaMizrach traditions. A partial recitation of verses 1-4 appears in the Daytime Kiddush. The psalm's consistent inclusion in these contexts underscores its liturgical significance as a declaration of divine providence and sustenance during sacred occasions.
+
+   Prayer contexts:
+     - Amidah (Edot_HaMizrach)
+     - Daytime Kiddush (Edot_HaMizrach)
+     - Kiddush (Edot_HaMizrach)
+     - Magen Avot (Edot_HaMizrach)
+     - Mussaf (Edot_HaMizrach)
+     - Third Meal (Edot_HaMizrach)
+     - Vayechulu (Edot_HaMizrach)
+
+----------------------------------------------------------------------
+
+4. Phrase: נַפְשִׁ֥י יְשׁוֹבֵ֑ב יַֽנְחֵ֥נִי
+   Verse: 23:3
+   Occurrences: 6 across 6 contexts
+   Confidence: 100%
+
+   The phrase נַפְשִׁ֥י יְשׁוֹבֵ֑ב יַֽנְחֵ֥נִי (nafshi yeshovev yancheni, "He restores my soul; He leads me") from Psalm 23:3 appears predominantly in Sefardic liturgy across multiple Shabbat contexts, including the Kiddush, Vayechulu, Zemirot, and Melava Malka, as well as in Supplications After Prayers. The phrase also appears in the Ashkenazic Mizmor LeDavid recited on Shabbat, reflecting its significance as a restorative motif in Shabbat observance across both traditions.
+
+   Prayer contexts:
+     - Melava Malka Zemirot (Sefard)
+     - Mizmor LeDavid (Ashkenaz)
+     - Shabbat Day Kiddush (Sefard)
+     - Supplications After Prayers (Sefard)
+     - Vayechulu (Sefard)
+     - Zemirot (Sefard)
+
+----------------------------------------------------------------------
+
