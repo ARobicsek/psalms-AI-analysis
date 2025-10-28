@@ -1,3 +1,575 @@
+## 2025-10-27 - Liturgical Librarian Redesign: Phrase-First Grouping (Session 35)
+
+### Session Started
+Evening - Redesign Liturgical Librarian to group by PHRASE instead of PRAYER
+
+### Goal
+Fix fundamental issue: Output should describe WHERE A SPECIFIC PHRASE appears in liturgy, not which prayers contain unspecified content
+
+### Problem Identified
+**User feedback**: Current output groups by prayer name without identifying which specific phrase is being referenced:
+- "Amidah appears 54 times" - which phrase from the psalm?
+- "Kiddush appears 18 times" - which verse?
+- Need: "The phrase 'למען שמו' from Psalm 23:3 appears in the Amidah..."
+
+### Work Completed ✅
+
+#### 1. New Data Structure: `PhraseUsageMatch`
+**Created phrase-first dataclass** (~40 lines):
+```python
+@dataclass
+class PhraseUsageMatch:
+    # Psalm phrase info
+    psalm_phrase_hebrew: str  # The specific phrase (e.g., "למען שמו")
+    psalm_verse_range: str    # Which verse(s) (e.g., "23:3")
+    phrase_length: int
+
+    # Usage statistics
+    occurrence_count: int              # Total occurrences
+    unique_prayer_contexts: int        # Distinct prayers
+    prayer_contexts: List[str]         # Where it appears
+
+    # Aggregated metadata
+    occasions: List[str]
+    services: List[str]
+    nusachs: List[str]
+    sections: List[str]
+
+    # LLM-generated summary
+    liturgical_summary: str
+
+    # Match quality
+    confidence_avg: float
+    match_types: List[str]
+```
+
+#### 2. New Method: `find_liturgical_usage_by_phrase()`
+**Implemented phrase-first aggregation** (~130 lines):
+
+**Key Features**:
+1. **Groups by psalm phrase** (not prayer name)
+2. **Separates full psalm from excerpts** (`separate_full_psalm=True`)
+3. **Deduplicates intelligently**:
+   - Filters false "full psalm" matches via `_verify_full_psalm_matches()`
+   - Removes phrases already in full psalm contexts
+   - Merges overlapping phrases via `_merge_overlapping_phrase_groups()`
+
+**Algorithm**:
+```python
+def find_liturgical_usage_by_phrase(psalm_chapter, psalm_verses, ...):
+    # 1. Get all raw matches
+    raw_matches = _get_raw_matches(...)
+
+    # 2. Separate and verify full psalm recitations
+    full_psalm_matches = _verify_full_psalm_matches(potential_full)
+    full_psalm_prayer_ids = set(m.prayer_id for m in full_psalm_matches)
+
+    # 3. Filter out phrases from full psalm contexts (avoid redundancy)
+    phrase_matches = [m for m in raw if m.prayer_id not in full_psalm_prayer_ids]
+
+    # 4. Group by psalm phrase (not prayer)
+    grouped = _group_by_psalm_phrase(phrase_matches)
+
+    # 5. Merge overlapping phrases (same contexts)
+    grouped = _merge_overlapping_phrase_groups(grouped)
+
+    # 6. Generate LLM summaries for each phrase
+    # 7. Return phrase-first results
+```
+
+#### 3. Helper Methods Added
+
+**A. `_verify_full_psalm_matches()` (~30 lines)**:
+- Filters false positives where metadata incorrectly labels single verse as "full psalm"
+- Checks: context length, verse span, verse count markers
+- **BUG IDENTIFIED**: Currently too aggressive - filters ALL matches for Psalm 23:3
+- **Needs fix in Session 36**: Improve heuristics or use LLM text analysis
+
+**B. `_merge_overlapping_phrase_groups()` (~50 lines)**:
+- Detects when multiple phrases appear in identical prayer contexts
+- Creates signature based on prayer_ids
+- Merges groups with identical contexts
+- Example: 3 phrases → 1 merged entry with `[+ 2 overlapping phrase(s)]` notation
+
+**C. `_extract_prayer_contexts()` (~30 lines)**:
+- Builds human-readable context strings
+- Format: "Amidah - Patriarchs (Ashkenaz)"
+- Combines prayer_name, section, and nusach
+
+**D. `_format_verse_range()` (~20 lines)**:
+- Formats verse ranges: "23:3" or "23:1-2"
+
+#### 4. Enhanced LLM Prompts
+
+**Updated `_generate_phrase_llm_summary()`**:
+- NEW prompt focus: Describes WHERE A SPECIFIC PHRASE appears
+- Shows psalm phrase in Hebrew + transliteration + verse reference
+- Lists prayer contexts explicitly
+- Instructs LLM to identify patterns (e.g., "appears in Patriarchs blessing across all services")
+
+**Example prompt**:
+```
+Psalm phrase: למען שמו (from verse 23:3)
+Total occurrences: 82
+Appears in 34 distinct prayer contexts:
+  - Amidah (Ashkenaz)
+  - Amidah (Sefard)
+  - Amidah (Edot_HaMizrach)
+  [...]
+
+Generate a concise 2-3 sentence summary describing WHERE and WHEN
+this specific phrase appears in Jewish liturgy.
+```
+
+**Example LLM output**:
+> "The phrase 'למען שמו' (l'ma'an shemo, 'for His name's sake') from Psalm 23:3 appears predominantly in the Amidah across all prayer traditions (Ashkenaz, Sefard, Edot HaMizrach) and all daily services (Shacharit, Mincha, Maariv)..."
+
+#### 5. Updated CLI
+
+**Modified `main()` function**:
+- Switched from `find_liturgical_usage_aggregated()` to `find_liturgical_usage_by_phrase()`
+- Enhanced output format to show phrase-first results
+- Added `--verbose` flag support for debugging deduplication
+
+**New output format**:
+```
+1. Phrase: לְמַ֣עַן שְׁמֽוֹ׃
+   Verse: 23:3
+   Occurrences: 82 across 34 prayer context(s)
+   Confidence: 98%
+
+   [LLM Summary describes WHERE this phrase appears]
+
+   Prayer contexts:
+     - Amidah (Ashkenaz)
+     - Amidah (Sefard)
+     [...]
+```
+
+### Testing Results ✅
+
+**Test Case: Psalm 23:3**
+
+**Before (Session 34)**:
+- 56 distinct entries grouped by prayer name
+- Unclear which phrases were referenced
+- Example: "Amidah - 54 occurrences" (which phrase?)
+
+**After (Session 35)**:
+- 3 distinct entries grouped by phrase:
+  1. **"למען שמו"** - 82 occurrences across 34 contexts
+  2. **Merged Sefard phrases** - 10 occurrences across 5 contexts
+  3. **Additional Ashkenaz phrase** - 6 occurrences across 6 contexts
+- Clear identification of which phrase appears where
+- Reduced redundancy through merging
+
+**Deduplication Stats**:
+- 8 false "full psalm" matches filtered (metadata errors)
+- 2 overlapping phrase groups merged
+- 5 initial phrases → 3 final entries
+
+**Output saved**: `logs/psalm23_verse3_deduplicated.txt`
+
+### Known Issues (For Session 36)
+
+#### 1. CRITICAL BUG: Full Psalm Detection Too Aggressive
+**Problem**: `_verify_full_psalm_matches()` filtered ALL 8 potential full psalm matches
+- Expected: Some ARE valid (e.g., Third Meal, specific Zemirot)
+- Current heuristics too strict:
+  - `context_length < 500` - Many valid psalms in compact formatting
+  - `verse_span < 3` - Doesn't account for full psalm in single block
+- **Result**: No "Full Psalm 23" entries in output
+
+**Fix needed**:
+- Improve verification logic
+- Consider checking for consecutive verse text
+- Use LLM analysis of `hebrew_text` field
+
+#### 2. Missing Feature: LLM Not Analyzing Hebrew Text
+**Problem**: LLM only sees aggregated metadata, not actual `hebrew_text` field
+- Can't verify if phrase is IN prayer vs. ADJACENT to prayer
+- Example: Metadata says "Amidah" but psalm might be in text following Amidah
+- **Fix needed**: Pass `hebrew_text` snippets (500-char window) to LLM for context verification
+
+### Code Changes Summary
+
+**Files Modified**:
+- `src/agents/liturgical_librarian.py` - ~400 lines added
+  - New dataclass: `PhraseUsageMatch`
+  - New method: `find_liturgical_usage_by_phrase()`
+  - Helper methods: `_verify_full_psalm_matches()`, `_merge_overlapping_phrase_groups()`, etc.
+  - Updated LLM prompt in `_generate_phrase_llm_summary()`
+  - Modified CLI to use phrase-first method
+
+**Files Created**:
+- `logs/psalm23_verse3_deduplicated.txt` - Test output showing phrase-first results
+
+### Performance & Costs
+
+**Session 35 Costs**: ~$0.08 (testing with verbose output)
+
+**Impact on Production**:
+- No significant change to token usage per psalm
+- LLM summaries still ~$0.025 per psalm
+- Adding hebrew_text analysis in Session 36 will increase cost ~$0.005/psalm
+
+### Next Session Priority
+
+**Session 36 must fix**:
+1. Full psalm detection (too aggressive filtering)
+2. Add hebrew_text analysis to LLM prompts
+
+---
+
+## 2025-10-27 - Liturgical Librarian Phase 6: Pipeline Integration (Session 34)
+
+### Session Started
+Evening - Integrate Phase 4/5 Liturgical Librarian into Research Bundle Pipeline
+
+### Goal
+Complete the integration of intelligent liturgical aggregation into the MicroAnalyst → SynthesisWriter pipeline
+
+### Work Completed ✅
+
+#### 1. LLM Summary Testing
+**Verified Claude Haiku 4.5 integration**:
+- Set `ANTHROPIC_API_KEY` from `.env` file
+- Tested Psalm 23:3: 106 raw matches → 31 distinct prayers
+- Confirmed LLM summaries generate natural language descriptions
+- Example quality comparison:
+  - **Code-only**: "Appears in 42 contexts. Occasions: Festivals, Shabbat..."
+  - **LLM-powered**: "The Amidah appears across all daily services (Shacharit, Mincha, Maariv) as well as additional services (Musaf, Neilah) on weekdays, Shabbat, festivals, and Yom Kippur..."
+
+#### 2. Pattern Assessment
+**Tested "LeDavid" vs "L'David Hashem" pattern** (from `logs/another_example.txt`):
+- Phrase "לְדָוִ֑ד יְהֹוָ֥ה" appears in 21 distinct prayers with 30 total occurrences
+- Successfully aggregated:
+  - **Amidah**: 4 occurrences (correctly grouped)
+  - **Tachanun**: 1 occurrence (kept separate)
+  - **LeDavid**: 2 occurrences (Ashkenaz tradition)
+  - **L'David Hashem**: 1 occurrence (Sefard tradition)
+- Aggregation correctly groups same prayer across services while keeping distinct prayers separate
+
+#### 3. Pipeline Integration
+**Updated `src/agents/research_assembler.py`** (~100 lines modified):
+
+**A. New Imports**:
+```python
+from src.agents.liturgical_librarian import LiturgicalLibrarian, AggregatedPrayerMatch
+```
+
+**B. Enhanced ResearchBundle Dataclass**:
+```python
+@dataclass
+class ResearchBundle:
+    # ... existing fields ...
+    liturgical_usage: Optional[List[SefariaLiturgicalLink]]  # Phase 0 (deprecated)
+    liturgical_usage_aggregated: Optional[List[AggregatedPrayerMatch]]  # Phase 4/5
+    liturgical_markdown: Optional[str]  # Pre-formatted markdown for LLM consumption
+    # ... remaining fields ...
+```
+
+**C. Updated ResearchAssembler**:
+```python
+def __init__(self, use_llm_summaries: bool = True):
+    # ... existing librarians ...
+    self.liturgical_librarian_sefaria = SefariaLiturgicalLibrarian()  # Phase 0 fallback
+    self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries)  # Phase 4/5 primary
+```
+
+**D. Enhanced assemble() Method**:
+- Try Phase 4/5 aggregated liturgical data first
+- Fall back to Phase 0 Sefaria data if Phase 4/5 unavailable
+- Use `format_for_research_bundle()` to generate pre-formatted markdown
+- Graceful exception handling for backward compatibility
+
+**E. Updated to_markdown() Method**:
+- Prioritizes Phase 4/5 aggregated markdown
+- Falls back to Phase 0 format if needed
+- Updated summary statistics to show:
+  - `liturgical_prayers_aggregated`: Number of distinct prayers
+  - `liturgical_total_occurrences`: Total prayer instances
+
+#### 4. Integration Testing
+**Created `test_liturgical_integration.py`**:
+- Tests ResearchAssembler with new liturgical librarian
+- Verified Psalm 23 integration:
+  - **56 distinct prayers** found
+  - **282 total occurrences** across liturgy
+  - Top prayers: Amidah (54), Vayechulu (20), Kiddush (18)
+  - **368 lines of markdown** generated
+  - **LLM summaries working** (19 API calls to Claude Haiku 4.5)
+
+**Test Results**: ✅ All integration tests passed
+
+### Technical Architecture
+
+#### Data Flow (Before → After)
+
+**Before (Session 33)**:
+```
+LiturgicalLibrarian (standalone)
+   ↓
+Command-line testing only
+```
+
+**After (Session 34)**:
+```
+MicroAnalyst creates ResearchRequest
+   ↓
+ResearchAssembler.assemble()
+   ↓
+LiturgicalLibrarian.find_liturgical_usage_aggregated()
+   ↓
+LiturgicalLibrarian.format_for_research_bundle()
+   ↓
+ResearchBundle (with liturgical_markdown)
+   ↓
+SynthesisWriter receives formatted liturgical context
+```
+
+#### Backward Compatibility
+**Dual-path design**:
+1. **Primary**: Phase 4/5 aggregated with LLM summaries
+2. **Fallback**: Phase 0 Sefaria curated links
+3. **Graceful degradation**: If Phase 4/5 fails, automatically falls back
+
+### Performance Characteristics
+
+#### Token Reduction
+**Example: Psalm 23, verse 3**:
+- **Raw index**: 106 entries × ~200 tokens = ~21,000 tokens
+- **Aggregated**: 31 prayers × ~150 tokens = ~4,650 tokens
+- **Reduction**: ~78% fewer tokens while preserving information
+
+#### API Cost
+**Per Psalm (full chapter)**:
+- ~56 prayers × ~$0.0005/query = ~$0.028
+- Negligible compared to commentary generation cost (~$0.42/Psalm)
+
+### Files Modified
+
+#### New Files
+- `test_liturgical_integration.py` - Integration test script
+
+#### Modified Files
+- `src/agents/research_assembler.py` - Added Phase 4/5 support (~100 lines)
+
+### Success Metrics
+
+#### Phase 6 Goals Achieved ✅
+- [x] LLM summaries tested and verified working
+- [x] Pattern aggregation confirmed correct
+- [x] Integrated into ResearchAssembler pipeline
+- [x] Backward compatible with Phase 0 fallback
+- [x] Integration tests passing
+- [x] Token usage significantly reduced
+
+### Cost Analysis
+
+#### Session 34 API Usage
+**Testing**:
+- Psalm 23:3 test: 31 prayers × $0.0005 = ~$0.016
+- Psalm 23:1 test: 21 prayers × $0.0005 = ~$0.011
+- Full Psalm 23 integration test: 56 prayers × $0.0005 = ~$0.028
+- **Total session cost**: ~$0.055
+
+**Production estimates** (unchanged from Session 33):
+- Per Psalm: ~$0.025
+- All 150 Psalms: ~$3.75
+- Impact on total project cost: +$3 (~3% increase)
+
+### Next Steps
+
+#### Immediate
+1. Test full pipeline (MicroAnalyst → SynthesisWriter → MasterEditor) with Psalm 23
+2. Verify liturgical context improves commentary quality
+3. Consider caching LLM summaries (optimization for Phase 7)
+
+#### Future Enhancements
+1. **Verse-level liturgical queries**: Currently psalm-level only
+2. **Summary caching**: Store LLM summaries in database to reduce API calls
+3. **Confidence threshold tuning**: Experiment with optimal min_confidence value
+4. **Drill-down capability**: Allow expanding aggregated entries to show all raw matches
+
+### Session End
+Integration complete and tested. Phase 6 successfully delivered!
+
+---
+
+## 2025-10-27 - Liturgical Librarian Phase 5: Intelligent Aggregation with LLM Summaries (Session 33)
+
+### Session Started
+Afternoon - Implement intelligent aggregation to solve duplication problem (79 Amidah entries → 1 aggregated entry)
+
+### Goal
+Create comprehensive Liturgical Librarian with intelligent prayer aggregation and Claude Haiku 4.5 summaries
+
+### Problem Statement
+**Duplication Challenge**: For phrase "לְמַֽעַן שְׁמוֹ" from Psalm 23:3:
+- Found 82 distinct matches in index
+- 79 were essentially the same prayer (Amidah) across different:
+  - Services: Shacharit, Mincha, Maariv
+  - Occasions: Weekday, Shabbat, High Holidays, Festivals
+  - Traditions: Ashkenaz, Sefard, Edot HaMizrach
+- Only 3 were genuinely different prayers
+
+**Agent Impact**: Commentary agents would see "79 different prayers" instead of "Amidah appears 79 times"
+
+**Additional Challenge**: Inconsistent metadata
+- "Avot" vs "Patriarchs" vs "Amida" vs "Amidah"
+- Many fields NULL or sparsely populated
+- Variable naming conventions across traditions
+
+### Solution Implemented ✅
+
+**Created**: `src/agents/liturgical_librarian.py` (~730 lines)
+
+**Architecture**: Hybrid code + LLM approach
+
+#### Component 1: Code-Based Aggregation
+```python
+def find_liturgical_usage_aggregated(
+    psalm_chapter, psalm_verses, min_confidence=0.75
+) -> List[AggregatedPrayerMatch]:
+    """
+    Main aggregation method:
+    1. Query raw matches from psalms_liturgy_index
+    2. Group by prayer name (with smart normalization)
+    3. Generate summaries (LLM or code fallback)
+    4. Return aggregated results
+    """
+```
+
+**Prayer Grouping Logic**:
+- Normalizes "Amida"/"Amidah", "Avot"/"Patriarchs"
+- Groups by `prayer_name` (falls back to `section` if NULL)
+- Handles 31 distinct prayers from 106 raw matches
+
+#### Component 2: LLM-Powered Summaries (Optional)
+```python
+def _generate_llm_summary(prayer_name, contexts, total_count) -> str:
+    """
+    Uses Claude Haiku 4.5 to generate natural language summaries.
+
+    Input: Structured metadata (occasions, services, nusachs)
+    Output: "Appears in Patriarchs blessing of Amidah across all
+             daily services (Shacharit, Mincha, Maariv), Shabbat,
+             and High Holidays..."
+    """
+    # Prompts Haiku 4.5 with context metadata
+    # Temperature: 0.3 (deterministic)
+    # Max tokens: 300
+    # Graceful fallback to code-only if API fails
+```
+
+**Cost Analysis** (Haiku 4.5):
+- ~$0.0005 per phrase query (half a cent)
+- ~$0.025 for full Psalm (50 phrases)
+- Negligible for project scale
+
+#### Component 3: Command-Line Interface
+```bash
+# With LLM summaries (default)
+python src/agents/liturgical_librarian.py 23 --verses 3
+
+# Without LLM (code-only)
+python src/agents/liturgical_librarian.py 23 --verses 3 --skip-liturgy-llm
+
+# Statistics
+python src/agents/liturgical_librarian.py --stats
+```
+
+### Results ✅
+
+**Test Case**: Psalm 23, verse 3
+
+**Before** (raw index):
+- 106 individual matches
+- Difficult to see patterns
+
+**After** (aggregated):
+- **31 distinct prayers** (down from 106)
+- **Amidah**: 42 occurrences (aggregated)
+- **Reader's Repetition**: 8 occurrences
+- **Amidah - Patriarchs**: 7 occurrences
+- Clear summary: "Appears in 42 contexts. Occasions: Festivals, Shabbat, Weekday, Yom_Kippur; Services: Maariv, Mincha, Musaf, Neilah, Shacharit..."
+
+**For Agents**:
+```markdown
+## Liturgical Usage: Psalm 23 - Verse 3
+
+This passage appears in **31 distinct prayer(s)** with **106 total occurrence(s)**:
+
+### 1. Amidah
+**Occurrences**: 42 contexts
+**Phrase in liturgy**: נַפְשִׁ֥י יְשׁוֹבֵ֑ב...
+**Where it appears**: [intelligent summary of all 42 contexts]
+**Confidence**: 99%
+```
+
+### Key Features
+
+1. **Smart Grouping**: Handles naming variants (Avot/Patriarchs, Amida/Amidah)
+2. **LLM Summaries**: Natural language context descriptions (when enabled)
+3. **Graceful Degradation**: Falls back to code-only if API unavailable
+4. **Flexible Queries**: By chapter, by verse(s), with confidence thresholds
+5. **Research Bundle Format**: Optimized markdown for AI agents
+6. **Statistics**: Comprehensive index statistics
+
+### Data Classes
+
+```python
+@dataclass
+class LiturgicalMatch:
+    """Single raw match from index"""
+    index_id, psalm_chapter, psalm_verse_start, ...
+    prayer_id, prayer_name, nusach, occasion, service, ...
+
+@dataclass
+class AggregatedPrayerMatch:
+    """Aggregated match (one prayer, multiple contexts)"""
+    prayer_name, occurrence_count
+    representative_phrase, representative_context
+    contexts_summary  # LLM-generated or code-based
+    confidence_avg, occasions, services, nusachs
+```
+
+### Files Created
+1. **src/agents/liturgical_librarian.py** (~730 lines)
+   - `LiturgicalLibrarian` class
+   - Aggregation logic
+   - LLM integration (Claude Haiku 4.5)
+   - CLI with `--skip-liturgy-llm` flag
+   - Research bundle formatter
+
+### Files Modified
+None (new module, backward compatible)
+
+### API Integration
+- **Model**: `claude-haiku-4-5`
+- **Temperature**: 0.3 (fairly deterministic)
+- **Max tokens**: 300 per summary
+- **Fallback**: Code-only summaries if API fails
+- **Cost**: ~$0.0005 per phrase query
+
+### Next Steps
+1. ✅ **DONE**: Core aggregation working
+2. ✅ **DONE**: LLM integration with fallback
+3. ✅ **DONE**: CLI with --skip-liturgy-llm flag
+4. **TODO**: Integrate into research bundle generation pipeline
+5. **TODO**: Test with ANTHROPIC_API_KEY set (verify LLM summaries)
+6. **TODO**: Add caching layer for LLM summaries (Phase 2 optimization)
+
+### Session Duration
+~1.5 hours
+
+### Lines of Code
+- New code: ~730 lines (liturgical_librarian.py)
+- Test runs: 3 (code-only mode verified)
+
+---
+
 ## 2025-10-26 - Liturgical Librarian Phase 4: Bug Fix - Liturgy Phrase Extraction (Session 32)
 
 ### Session Started
