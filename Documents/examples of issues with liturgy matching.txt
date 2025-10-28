@@ -1,0 +1,77 @@
+[issue: this phrase is being directly used in the recitation of ANOTHER psalm (148). It should not be considered a use of this same phrase from ps 2.]
+================================================================================
+PHRASE: שֹׁ֣פְטֵי אָֽרֶץ׃
+================================================================================
+
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  3. Hodu (Sefard)
+  4. Pesukei D'Zimra (Edot_HaMizrach)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Pesukei Dezimrah (Edot_HaMizrach)
+  7. Psalm 148 (Ashkenaz)
+  8. Yehi Kevod (Ashkenaz)
+
+
+
+
+[issue: all the PRAYER CONTEXTS given below are actually the same thing - a brief recitation of verses prior to barechu.]
+================================================================================
+PHRASE: יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ בְיוֹם־קׇרְאֵֽנוּ׃
+================================================================================
+
+
+
+--- PRAYER CONTEXTS ---
+  2. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  4. Barchu (Edot_HaMizrach)
+  5. Barechu (Edot_HaMizrach)
+  33. Vehu Rachum (Ashkenaz)
+ 21. Motzei Yom Kippur (Ashkenaz)
+
+
+
+[issue: all the PRAYER CONTEXTS below are the same thing - part of a compilation of verses that are sung towards the end of the Sabbath.]
+================================================================================
+PHRASE 2: [Full Psalm 23]
+================================================================================
+
+
+
+--- PRAYER CONTEXTS ---
+  5. Melava Malka Zemirot (Sefard)
+  6. Mizmor LeDavid (Ashkenaz)
+  10. Third Meal (Edot_HaMizrach)
+
+
+
+[issue - all the PRAYER CONTEXTS below are the same thing - a recitation of ps 23 as a supplement at the end of the prayer service at a certain time of the year that includes Yom Kippur. it is NOT part of Aleinu, but it's CLOSE to it so it may have been grouped with it in our metadata. Same as 'Song of the Day'. As you can see, in other metadata it's just called by its superscription 'LeDavid' which provides NO information about its liturgical context.]
+================================================================================
+PHRASE 3: לְדָוִ֑ד יְהֹוָ֥ה
+================================================================================
+
+
+--- PRAYER CONTEXTS ---
+  1. Aleinu (Ashkenaz)
+  4. L'David Hashem (Sefard)
+  5. LeDavid (Ashkenaz)
+  6. Motzei Yom Kippur (Ashkenaz)
+  7. Song of the Day (Ashkenaz)
+
+
+[issue: again, the PRAYER CONTEXTS listed below are all the same thing, just with different metadata.]
+================================================================================
+PHRASE 1: [Full Psalm 150]
+================================================================================
+
+
+--- PRAYER CONTEXTS ---
+  2. Ashrei (Ashkenaz)
+  10. Pesukei D'Zimra (Edot_HaMizrach)
+  11. Pesukei D'Zimrah (Sefard)
+  12. Pesukei Dezimrah (Edot_HaMizrach)
+  13. Psalm 150 (Ashkenaz)
+
+
+

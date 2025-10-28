@@ -30,6 +30,7 @@ if __name__ == '__main__':
     from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle
     from src.agents.liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
+    from src.agents.liturgical_librarian import LiturgicalLibrarian, AggregatedPrayerMatch
     from src.agents.rag_manager import RAGManager, RAGContext
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
@@ -37,6 +38,7 @@ else:
     from .figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from .commentary_librarian import CommentaryLibrarian, CommentaryBundle
     from .liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
+    from .liturgical_librarian import LiturgicalLibrarian, AggregatedPrayerMatch
     from .rag_manager import RAGManager, RAGContext
 
 
@@ -90,7 +92,9 @@ class ResearchBundle:
     concordance_bundles: List[ConcordanceBundle]
     figurative_bundles: List[FigurativeBundle]
     commentary_bundles: Optional[List[CommentaryBundle]]
-    liturgical_usage: Optional[List[SefariaLiturgicalLink]]  # Phase 0: Sefaria liturgical cross-references
+    liturgical_usage: Optional[List[SefariaLiturgicalLink]]  # Phase 0: Sefaria liturgical cross-references (deprecated)
+    liturgical_usage_aggregated: Optional[List[AggregatedPrayerMatch]]  # Phase 4/5: Aggregated phrase-level liturgy
+    liturgical_markdown: Optional[str]  # Phase 4/5: Pre-formatted markdown for LLM consumption
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
     request: ResearchRequest
 
@@ -110,7 +114,9 @@ class ResearchBundle:
                 'figurative_instances': sum(len(f.instances) for f in self.figurative_bundles),
                 'commentary_verses': len(self.commentary_bundles) if self.commentary_bundles else 0,
                 'commentary_entries': sum(len(c.commentaries) for c in self.commentary_bundles) if self.commentary_bundles else 0,
-                'liturgical_contexts': len(self.liturgical_usage) if self.liturgical_usage else 0
+                'liturgical_contexts_phase0': len(self.liturgical_usage) if self.liturgical_usage else 0,
+                'liturgical_prayers_aggregated': len(self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
+                'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0
             }
         }
 
@@ -316,9 +322,13 @@ class ResearchBundle:
                 else:
                     md += "*No commentaries available for this verse.*\n\n"
 
-        # Liturgical Usage section
-        if self.liturgical_usage:
-            md += "## Liturgical Usage (from Sefaria)\n\n"
+        # Liturgical Usage section (Phase 4/5: Aggregated phrase-level data)
+        if self.liturgical_markdown:
+            md += self.liturgical_markdown
+            md += "\n---\n\n"
+        # Fallback to Phase 0 Sefaria data if Phase 4/5 not available
+        elif self.liturgical_usage:
+            md += "## Liturgical Usage (from Sefaria - Phase 0)\n\n"
             md += f"This Psalm appears in **{len(self.liturgical_usage)} liturgical context(s)** according to Sefaria's curated data:\n\n"
 
             for link in self.liturgical_usage:
@@ -343,7 +353,8 @@ class ResearchBundle:
         md += f"- **Figurative instances found**: {summary['figurative_instances']}\n"
         md += f"- **Commentary verses**: {summary['commentary_verses']}\n"
         md += f"- **Commentary entries**: {summary['commentary_entries']}\n"
-        md += f"- **Liturgical contexts**: {summary['liturgical_contexts']}\n"
+        md += f"- **Liturgical prayers (aggregated)**: {summary['liturgical_prayers_aggregated']}\n"
+        md += f"- **Liturgical total occurrences**: {summary['liturgical_total_occurrences']}\n"
 
         return md
 
@@ -379,13 +390,20 @@ class ResearchAssembler:
         >>> print(bundle.to_markdown())
     """
 
-    def __init__(self):
-        """Initialize Research Assembler with all librarian agents."""
+    def __init__(self, use_llm_summaries: bool = True):
+        """
+        Initialize Research Assembler with all librarian agents.
+
+        Args:
+            use_llm_summaries: Enable LLM-powered liturgical summaries (Claude Haiku 4.5).
+                             Requires ANTHROPIC_API_KEY environment variable.
+        """
         self.bdb_librarian = BDBLibrarian()
         self.concordance_librarian = ConcordanceLibrarian()
         self.figurative_librarian = FigurativeLibrarian()
         self.commentary_librarian = CommentaryLibrarian()
-        self.liturgical_librarian = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap
+        self.liturgical_librarian_sefaria = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap (fallback)
+        self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries=use_llm_summaries)  # Phase 4/5: Aggregated phrase-level
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
@@ -427,8 +445,30 @@ class ResearchAssembler:
         if request.commentary_requests:
             commentary_bundles = self.commentary_librarian.process_requests(request.commentary_requests)
 
-        # Fetch liturgical usage (Phase 0: Always included - Sefaria bootstrap)
-        liturgical_usage = self.liturgical_librarian.find_liturgical_usage(request.psalm_chapter)
+        # Fetch liturgical usage (Phase 4/5: Aggregated phrase-level with LLM summaries)
+        liturgical_usage_aggregated = None
+        liturgical_markdown = None
+        try:
+            # Try Phase 4/5 first (comprehensive, aggregated)
+            liturgical_usage_aggregated = self.liturgical_librarian.find_liturgical_usage_aggregated(
+                psalm_chapter=request.psalm_chapter,
+                min_confidence=0.75
+            )
+            if liturgical_usage_aggregated:
+                # Format as markdown for LLM consumption
+                liturgical_markdown = self.liturgical_librarian.format_for_research_bundle(
+                    liturgical_usage_aggregated,
+                    psalm_chapter=request.psalm_chapter
+                )
+        except Exception as e:
+            # If Phase 4/5 fails, will fall back to Phase 0 below
+            print(f"Warning: Phase 4/5 liturgical lookup failed: {e}")
+            liturgical_usage_aggregated = None
+
+        # Fetch Phase 0 liturgical usage as fallback (Sefaria bootstrap)
+        liturgical_usage = None
+        if not liturgical_usage_aggregated:
+            liturgical_usage = self.liturgical_librarian_sefaria.find_liturgical_usage(request.psalm_chapter)
 
         # Fetch RAG context (Phase 2d: Always included for psalm-level research)
         rag_context = self.rag_manager.get_rag_context(request.psalm_chapter)
@@ -440,6 +480,8 @@ class ResearchAssembler:
             figurative_bundles=figurative_bundles,
             commentary_bundles=commentary_bundles,
             liturgical_usage=liturgical_usage if liturgical_usage else None,
+            liturgical_usage_aggregated=liturgical_usage_aggregated if liturgical_usage_aggregated else None,
+            liturgical_markdown=liturgical_markdown if liturgical_markdown else None,
             rag_context=rag_context,
             request=request
         )

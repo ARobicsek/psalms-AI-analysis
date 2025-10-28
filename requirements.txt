@@ -1,2 +1,4 @@
 python-docx
 lxml
+anthropic
+python-dotenv

@@ -1,7 +1,7 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-10-28 (Session 37 Complete)
-**Current Phase**: Liturgical Librarian Testing & Optimization
+**Last Updated**: 2025-10-28 (Session 38 Complete)
+**Current Phase**: Liturgical Canonicalization Pipeline Ready
 
 ---
 
@@ -16,17 +16,21 @@
 - **Liturgical Context Phase 5**: Intelligent aggregation with LLM summaries ✅
 - **Liturgical Context Phase 6**: Pipeline integration ✅
 - **Liturgical Context Phase 6.5**: Phrase-first grouping with deduplication ✅
-- **NEW (Session 36)**: Verse-level analysis + LLM validation filtering ✅
-- **NEW (Session 37)**: Enhanced context (30000 chars) + verbose output script ✅
+- **Liturgical Context Phase 6.6**: Verse-level analysis + LLM validation filtering ✅
+- **Liturgical Context Phase 6.7**: Enhanced context (30000 chars) + verbose output script ✅
+- **NEW (Session 38)**: Liturgical canonicalization pipeline complete ✅
 
-### In Progress 🔄
-- **Testing**: Validating LLM output quality with enhanced prompts
-- **Indexing**: 6 psalms indexed (1, 2, 20, 23, 145, 150), others use Sefaria fallback
+### Ready to Execute 🚀
+- **Liturgical Canonicalization**: Production pipeline ready to enrich all 1,123 prayers
+  - Script: `canonicalize_liturgy_db.py`
+  - Tested on 8 diverse prayers with excellent results
+  - Estimated runtime: ~37 minutes
+  - Will add 9 hierarchical metadata fields to liturgy.db
 
 ### Next Up 📋
-- Review test output quality (`output/liturgy_results2.txt`)
-- Pipeline integration testing with newly indexed psalms
-- Decide on full indexing strategy (all 150 vs. selective + fallback)
+- Run liturgical canonicalization pipeline (`python canonicalize_liturgy_db.py`)
+- Verify completion and data quality
+- Optional: Use canonical data in liturgical librarian
 
 ---
 
@@ -46,7 +50,8 @@
 | **Phase 6.5**: Phrase-First Redesign | ✅ Complete | Groups by phrase not prayer (Session 35) |
 | **Phase 6.6**: Verse-Level Analysis | ✅ Complete | Full psalm detection + validation (Session 36) |
 | **Phase 6.7**: Enhanced Context | ✅ Complete | 30000 char limits + verbose script (Session 37) |
-| **Phase 7**: Testing & Optimization | 🔄 In Progress | Validate output quality, pipeline testing |
+| **Phase 6.8**: Canonicalization Pipeline | ✅ Complete | Pipeline built & tested (Session 38) |
+| **Phase 7**: Execute Canonicalization | ⚪ Ready | Run pipeline on all 1,123 prayers |
 
 ---
 
@@ -186,7 +191,7 @@ SynthesisWriter:
   - Kept genuine matches ("למען שמו" - 78 occurrences)
   - Full psalm entry with 33 occurrences across 13 contexts
 
-### Session 37: Enhanced Context & Verbose Output ⭐ NEW
+### Session 37: Enhanced Context & Verbose Output ✅
 - **Problem**: Character limits too low (1000); no visibility into filtered phrases
 - **Solution**: Increased to 30000 chars + created verbose output script
 - **Impact**: Fuller context for LLM analysis; complete transparency in filtering
@@ -203,6 +208,34 @@ SynthesisWriter:
   ```bash
   python run_liturgical_librarian.py --psalms 1 2 20 145 150 --output output/liturgy_results.txt
   ```
+
+### Session 38: Liturgical Canonicalization Pipeline ⭐ NEW
+- **Problem**: Liturgy.db has flat, inconsistent metadata; poor grouping in liturgical librarian
+- **Solution**: Complete pipeline to enrich prayers with hierarchical metadata using Gemini 2.5 Pro
+- **Impact**: Will dramatically improve liturgical context quality and grouping
+- **Code**:
+  - `canonicalize_liturgy_db.py` - Main production script (~300 lines)
+  - `preview_db_changes.py` - Preview tool (~100 lines)
+  - `check_canonicalization_status.py` - Status monitoring (~130 lines)
+  - `CANONICALIZATION_README.md` - Full documentation
+  - `SETUP_COMPLETE.md` - Quick start guide
+- **Features**:
+  - **9 New Fields**: L1 Occasion, L2 Service, L3 Signpost, L4 SubSection, canonical name, usage type, location description, timestamp, status
+  - **Resumable**: Progress saved every 10 prayers
+  - **Error Handling**: Failed prayers logged and retryable
+  - **Non-Destructive**: Original data never modified
+  - **Gemini 2.5 Pro**: Latest model for highest quality
+- **Test Results** (8 prayers: IDs 100, 200, 300, 400, 500, 600, 700, 800):
+  - All successfully canonicalized with rich metadata
+  - Proper handling of composite text blocks (e.g., full Birkhot K'riat Shema sequence)
+  - Accurate L3 signpost categorization
+  - Quality location descriptions
+- **Usage**:
+  ```bash
+  python canonicalize_liturgy_db.py        # Start canonicalization
+  python canonicalize_liturgy_db.py --resume  # Resume if interrupted
+  ```
+- **Estimated Runtime**: ~37 minutes for all 1,123 prayers
 
 ---
 
@@ -400,23 +433,31 @@ All 150 Psalms available for processing
 
 ## Files Modified (Sessions 36-37)
 
-### Modified Files (Session 37)
-- `src/agents/liturgical_librarian.py` - Enhanced character limits (4 locations)
-- `NEXT_SESSION_PROMPT.md` - Session 38 handoff
+### Modified Files (Session 38)
+- `NEXT_SESSION_PROMPT.md` - Session 39 handoff
 - `PROJECT_STATUS.md` - This file
-- `docs/IMPLEMENTATION_LOG.md` - Session 37 entry
+- `docs/IMPLEMENTATION_LOG.md` - Session 38 entry
 
-### New Files (Session 37)
-- `run_liturgical_librarian.py` - Verbose output script (200+ lines)
+### New Files (Session 38)
+- `canonicalize_liturgy_db.py` - Main production script (~300 lines)
+- `preview_db_changes.py` - Preview tool (~100 lines)
+- `check_canonicalization_status.py` - Status monitoring (~130 lines)
+- `test_specific_prayers.py` - Testing script for diverse sample
+- `view_test_results.py` - Results viewer
+- `generate_summary.py` - Summary generator
+- `CANONICALIZATION_README.md` - Full documentation
+- `SETUP_COMPLETE.md` - Quick start guide
 
-### Database Updates (Session 37)
-- `data/liturgy.db::psalms_liturgy_index` - Added Psalms 1, 2, 20, 145, 150
+### Database Updates (Session 38)
+- `data/liturgy.db::prayers` - Ready to add 9 canonical fields (not yet applied)
 
 ### Modified Files (Session 36)
 - `src/agents/liturgical_librarian.py` - Verse-level analysis + LLM validation (~300 lines)
 
 ### Output Files
 - `output/liturgy_results2.txt` - Test output from Session 37
+- `output/test_diverse_sample.jsonl` - Canonicalization test results (Session 38)
+- `output/test_results_summary.txt` - Formatted test summary
 - `logs/psalm23_validated_session36.txt` - Validation test results
 
 ---
@@ -438,13 +479,14 @@ All 150 Psalms available for processing
 - [x] LLM validation filtering (Session 36)
 - [x] Enhanced context (30000 chars) (Session 37)
 - [x] Verbose output script created (Session 37)
+- [x] Canonicalization pipeline built and tested (Session 38)
 
-### Phase 7 Goals (Current)
-- [ ] Output quality validation
-- [ ] Pipeline integration testing with new psalms
-- [ ] Indexing strategy decision
-- [ ] Cost tracking implementation
-- [ ] No regression in commentary quality
+### Phase 7 Goals (Ready to Execute)
+- [ ] Run liturgical canonicalization on all 1,123 prayers
+- [ ] Verify completion and data quality
+- [ ] Query canonical data to validate accuracy
+- [ ] Optional: Update liturgical librarian to use canonical fields
+- [ ] Optional: Decide on full psalm indexing strategy (all 150 vs. selective)
 
 ---
 

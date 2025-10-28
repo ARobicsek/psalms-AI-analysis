@@ -1,0 +1,2487 @@
+
+LITURGICAL LIBRARIAN VERBOSE OUTPUT
+Generated: 2025-10-28 00:12:44
+
+Configuration:
+  Psalms: 1, 2, 20, 23, 145, 150
+  LLM Summaries: Enabled (Claude Haiku 4.5)
+  Min Confidence: 0.75
+  Verbose Mode: ON
+
+This output includes:
+  1. All phrase matches found in the liturgy index
+  2. LLM validation results (filtered phrases are marked)
+  3. Detailed summaries with Hebrew quotes and translations
+  4. Prayer contexts, occasions, services, and traditions
+  5. Statistics for each psalm
+
+================================================================================
+
+
+
+################################################################################
+# PSALM 1
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 1
+================================================================================
+Total distinct phrases found: 8
+Total occurrences across all prayers: 29
+Average occurrences per phrase: 3.6
+
+
+================================================================================
+PHRASE 1: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+================================================================================
+Verse Range: 1:6
+Phrase Length: 2 words
+Total Occurrences: 10
+Unique Prayer Contexts: 7
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary: וְדֶרֶךְ רְשָׁעִים (The Way of the Wicked)
+
+The phrase **וְדֶרֶךְ רְשָׁעִים** (v'derekh r'sha'im, "the way of the wicked") appears ten times across seven distinct prayer contexts, primarily within **Pesukei D'Zimrah** (Introductory Psalms) recited during **Shacharit (morning service)** on both **Weekday and Shabbat** occasions across **Ashkenaz, Sefard, and Edot HaMizrach** traditions.
+
+The phrase originates from **Psalm 1:6** and is incorporated into the liturgy as part of the extended Ashrei (Psalm 145) recitation and related psalm passages. In the representative liturgical text provided, it appears in the context: **"יְהֹוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶֽרֶךְ רְשָׁעִים יְעַוֵּת"** ("The Lord preserves the strangers, the orphan and widow He sustains, and the way of the wicked He makes crooked" — Psalm 146:9), emphasizing God's justice in contrasting the protection of the righteous with the destruction of the wicked.
+
+This phrase serves a **theological function** within the morning praise service, reinforcing the psalmist's affirmation of divine justice and moral
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Hodu (Sefard)
+  3. Pesukei D'Zimra (Edot_HaMizrach)
+  4. Pesukei D'Zimrah (Sefard)
+  5. Pesukei Dezimrah (Edot_HaMizrach)
+  6. Psalm 146 (Ashkenaz)
+  7. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: [Full Psalm 1]
+================================================================================
+Verse Range: 1:1, 3-6
+Phrase Length: 0 words
+Total Occurrences: 7
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Psalm 1 appears in Jewish liturgy exclusively during Yom Kippur observances, recited only in partial form across Ashkenazi and Edot HaMizrach traditions. Verses 3-6 (67%) are incorporated into the Arvit (evening prayer) finale, while verses 1 and 4-6 (67%) feature in customary Yom Kippur night recitations, reflecting the psalm's thematic emphasis on righteous versus wicked paths during the Day of Atonement.
+
+--- PRAYER CONTEXTS ---
+  1. Arvit Finale (Edot_HaMizrach)
+  2. Customs of Yom Kippur Night (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach
+
+================================================================================
+PHRASE 3: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל
+================================================================================
+Verse Range: 1:3
+Phrase Length: 3 words
+Total Occurrences: 4
+Unique Prayer Contexts: 4
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל** (v'hayah k'etz shatul, "and he shall be like a tree planted") from Psalm 1:3 appears in four distinct liturgical contexts within Edot HaMizrach and Sefard traditions, primarily on Festivals and Shabbat. It is incorporated into the Hakafot (circumambulations) of Simchat Torah in the Sefard rite, the Mussaf service in Edot HaMizrach, the Nighttime Kiddush in Edot HaMizrach, and Pirkei Avot (Ethics of the Fathers) recitations in Edot HaMizrach. The phrase evokes the psalmist's metaphor of the righteous person as a flourishing tree, making it liturgically significant for passages emphasizing spiritual growth and divine blessing during festive occasions and Shabbat observance.
+
+--- PRAYER CONTEXTS ---
+  1. Hakafot (Sefard)
+  2. Mussaf (Edot_HaMizrach)
+  3. Nighttime Kiddush (Edot_HaMizrach)
+  4. Pirkei Avot (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 4: אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃
+================================================================================
+Verse Range: 1:3
+Phrase Length: 10 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃' appears in 2 prayer context(s):. Mussaf (Edot_HaMizrach), Nighttime Kiddush (Edot_HaMizrach). Occasions: Festivals.
+
+--- PRAYER CONTEXTS ---
+  1. Mussaf (Edot_HaMizrach)
+  2. Nighttime Kiddush (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 5: כְּעֵץ֮ שָׁת֢וּל
+================================================================================
+Verse Range: 1:3
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כְּעֵץ֮ שָׁת֢וּל' appears in 2 prayer context(s):. Prayer for Rain (Ashkenaz), Prayer for Rain (Sefard). Occasions: Festivals.
+
+--- PRAYER CONTEXTS ---
+  1. Prayer for Rain (Ashkenaz)
+  2. Prayer for Rain (Sefard)
+
+--- OCCASIONS ---
+  Festivals
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 6: רְשָׁעִ֣ים תֹּאבֵֽד׃
+================================================================================
+Verse Range: 1:6
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'רְשָׁעִ֣ים תֹּאבֵֽד׃' appears in 2 prayer context(s):. Korbanot (Sefard), Menorah Lighting (Sefard). Occasions: Chanukah, Shabbat. Services: Mincha.
+
+--- PRAYER CONTEXTS ---
+  1. Korbanot (Sefard)
+  2. Menorah Lighting (Sefard)
+
+--- OCCASIONS ---
+  Chanukah, Shabbat
+
+--- SERVICES ---
+  Mincha
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 7: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃
+================================================================================
+Verse Range: 1:1
+Phrase Length: 4 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃' appears in 1 prayer context(s):. Pirkei Avot (Edot_HaMizrach). Occasions: Shabbat.
+
+--- PRAYER CONTEXTS ---
+  1. Pirkei Avot (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 8: ׀ לֹ֥א הָלַךְ֮
+================================================================================
+Verse Range: 1:1
+Phrase Length: 3 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 97.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase '׀ לֹ֥א הָלַךְ֮' appears in 1 prayer context(s):. Evening Torah Reading (Sefard). Services: Maariv.
+
+--- PRAYER CONTEXTS ---
+  1. Evening Torah Reading (Sefard)
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 2
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 2
+================================================================================
+Total distinct phrases found: 4
+Total occurrences across all prayers: 36
+Average occurrences per phrase: 9.0
+
+
+================================================================================
+PHRASE 1: [Full Psalm 2]
+================================================================================
+Verse Range: 2:1-6, 8-12
+Phrase Length: 0 words
+Total Occurrences: 21
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Psalm 2 is recited substantially during Maariv (Arvit) services on Yom Kippur night across Ashkenazi and Edot HaMizrach traditions, with verses 1-6 and 8-12 comprising the primary recitation (92% coverage). A variant custom for Yom Kippur night omits verse 7, reciting verses 1, 3-6, and 8-12 (83% coverage), reflecting liturgical flexibility in this solemn observance. The psalm's eschatological and messianic themes make it particularly significant for the Day of Atonement's concluding prayers.
+
+--- PRAYER CONTEXTS ---
+  1. Arvit Finale (Edot_HaMizrach)
+  2. Customs of Yom Kippur Night (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach
+
+================================================================================
+PHRASE 2: שֹׁ֣פְטֵי אָֽרֶץ׃
+================================================================================
+Verse Range: 2:10
+Phrase Length: 2 words
+Total Occurrences: 11
+Unique Prayer Contexts: 8
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: שֹׁפְטֵי אָרֶץ (Shoftei Eretz, "Judges of the Earth")
+
+The phrase **שֹׁפְטֵי אָרֶץ** (judges of the earth) from Psalm 2:10 appears primarily in **Pesukei D'Zimrah** and related praise sections of **Shacharit** across all three major traditions (Ashkenaz, Sefard, and Edot HaMizrach), recited on both weekdays and Shabbat. The phrase appears most prominently in **Psalm 148** (Ashkenaz tradition) within the context of universal praise: *"מַלְכֵי־אֶֽרֶץ וְכָל־לְאֻמִּים שָׂרִים וְכָל־שֹׁפְטֵי אָֽרֶץ"* ("Kings of the earth and all peoples, princes and all judges of the earth [shall praise the Lord]"), where earthly rulers are summoned to join in cosmic praise of God. It also appears in **Ashrei** (Psalm 145) contexts and in the **Yehi Kevod** section (Ashkenaz), as well as in the **Blessing of the Trees** (Edot HaMizrach), functioning as part of the liturgical call for all creation and authority to acknowledge divine sovereignty during the morning service's opening praise sections.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Blessing of the Trees (Edot_HaMizrach)
+  3. Hodu (Sefard)
+  4. Pesukei D'Zimra (Edot_HaMizrach)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Pesukei Dezimrah (Edot_HaMizrach)
+  7. Psalm 148 (Ashkenaz)
+  8. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: אָֽרֶץ׃ עִבְד֣וּ אֶת־יְהֹוָ֣ה
+================================================================================
+Verse Range: 2:10-11
+Phrase Length: 3 words
+Total Occurrences: 3
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary
+
+The phrase **עִבְדוּ אֶת־יְהֹוָה** (ivdu et-Adonai, "serve the Lord") from Psalm 100:2 appears in two distinct prayer contexts within Edot HaMizrach (Eastern/Mizrahi tradition):
+
+**1. Kabbalat Shabbat (Welcoming the Sabbath):**
+The phrase appears in the liturgical recitation of Psalm 100 during Kabbalat Shabbat services on Friday evening. The full verse reads: "עִבְדוּ אֶת־יְהֹוָה בְּשִׂמְחָה בֹּאוּ לְפָנָיו בִּרְנָנָה" ("Serve the Lord with gladness; come before Him with joyful song"). This occurs as part of the extended psalm recitations that frame the transition into Shabbat.
+
+**2. Pesukei D'Zimra (Verses of Song):**
+The same phrase recurs in the Pesukei D'Zimra section of Shacharit (morning service), where Psalm 100 is recited as part of the preparatory hymns preceding the formal prayer service. This appears on both Shabbat and weekday mornings within the Edot HaMizrach tradition.
+
+The phrase emphasizes joyful service to God and appears specifically in contexts celebrating divine sovereignty and communal worship.
+
+--- PRAYER CONTEXTS ---
+  1. Kabbalat Shabbat (Edot_HaMizrach)
+  2. Pesukei D'Zimra (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 4: יוֹשֵׁ֣ב בַּשָּׁמַ֣יִם
+================================================================================
+Verse Range: 2:4
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יוֹשֵׁ֣ב בַּשָּׁמַ֣יִם' appears in 1 prayer context(s):. Tenth of Tevet (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Tenth of Tevet (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+
+################################################################################
+# PSALM 20
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 20
+================================================================================
+Total distinct phrases found: 11
+Total occurrences across all prayers: 321
+Average occurrences per phrase: 29.2
+
+
+================================================================================
+PHRASE 1: ׀ אֱלֹהֵ֬י יַעֲקֹֽב׃
+================================================================================
+Verse Range: 20:2
+Phrase Length: 3 words
+Total Occurrences: 181
+Unique Prayer Contexts: 105
+Average Confidence: 95.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase "אֱלֹהֵי יַעֲקֹב" (Elohei Ya'akov, "God of Jacob") appears predominantly in the Amidah blessing across all daily services (Shacharit, Mincha, and Maariv) as well as in Musaf and Neilah, where it forms part of the Patriarchs (Avot) blessing recited in all three traditions (Ashkenaz, Sefard, and Edot HaMizrach). The blessing reads: "בָּרוּךְ אַתָּה ה׳ אֱלֹהֵי אַבְרָהָם אֱלֹהֵי יִצְחָק וֵאלֹהֵי יַעֲקֹב" ("Blessed are You, Lord, God of Abraham, God of Isaac, and God of Jacob"), establishing the covenantal connection to the patriarchs. Beyond the Amidah, the phrase appears in Pesukei D'Zimrah (particularly in Psalm 81:5 recited on weekdays and festivals), in Ashrei, in various Selichot, and in festival-specific liturgies including Rosh Chodesh, Sukkot, and Purim, making it one of the most frequently invoked divine appellations in Jewish prayer across all occasions and traditions.
+
+--- PRAYER CONTEXTS ---
+  1. Achot Ketannah (Edot_HaMizrach)
+  2. Aleinu (Edot_HaMizrach)
+  3. Amida (Edot_HaMizrach)
+  4. Amidah (Ashkenaz)
+  5. Amidah (Edot_HaMizrach)
+  6. Amidah (Sefard)
+  7. Amidah for Mincha (Ashkenaz)
+  8. Amidah for Neilah (Ashkenaz)
+  9. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  10. Ashrei (Ashkenaz)
+  11. Ashrei (Edot_HaMizrach)
+  12. Ashrei Uva L'Tziyon (Sefard)
+  13. Avinu Malkenu (Ashkenaz)
+  14. Avodah (Ashkenaz)
+  15. Avot (Ashkenaz)
+  16. Awesome Prayer of Rabbeinu Tam (Sefard)
+  17. Barchu (Edot_HaMizrach)
+  18. Barechu (Edot_HaMizrach)
+  19. Before Havdalah (Edot_HaMizrach)
+  20. Borechu (Ashkenaz)
+  21. Chapter of Song (Sefard)
+  22. Customs of Yom Kippur Night (Ashkenaz)
+  23. Fast of Esther (Ashkenaz)
+  24. Fast of Esther (Edot_HaMizrach)
+  25. Fast of Gedalia (Ashkenaz)
+  26. Fast of Gedalya (Edot_HaMizrach)
+  27. Gott Fun Avraham (Sefard)
+  28. Havdala (Sefard)
+  29. Havdalah (Ashkenaz)
+  30. Hineni (Ashkenaz)
+  31. Hodu (Ashkenaz)
+  32. Hodu (Edot_HaMizrach)
+  33. Hodu (Sefard)
+  34. Hoshana Rabba (Sefard)
+  35. Incense Offering (Edot_HaMizrach)
+  36. Kaveh (Edot_HaMizrach)
+  37. Kaveh (Sefard)
+  38. Ketores (Incense Offering) (Ashkenaz)
+  39. Ketoret (Ashkenaz)
+  40. Ketoret (Edot_HaMizrach)
+  41. Korbanot (Edot_HaMizrach)
+  42. Korbanot (Sefard)
+  43. Krovetz L'Purim (Sefard)
+  44. Learning of the Day (Edot_HaMizrach)
+  45. Maariv, Shacharit & Mincha Amidah (Sefard)
+  46. Magen Avot (Edot_HaMizrach)
+  47. Me'ein Sheva (Ashkenaz)
+  48. Melava Malka Zemirot (Sefard)
+  49. Mincha (Sefard)
+  50. Motzaei Shabbat (Sefard)
+  51. Motzei Yom Kippur (Ashkenaz)
+  52. Musaf (Edot_HaMizrach)
+  53. Musaf (Sefard)
+  54. Musaf for Hachodesh (Sefard)
+  55. Musaf for Shekalim (Sefard)
+  56. Mussaf (Edot_HaMizrach)
+  57. Mussaf (Sefard)
+  58. Mussaf Finale (Edot_HaMizrach)
+  59. Offerings (Edot_HaMizrach)
+  60. Parashat HaChodesh (Sefard)
+  61. Parashat Parah (Sefard)
+  62. Parashat Sekalim (Sefard)
+  63. Parashat Zachor (Sefard)
+  64. Patriarchs (Ashkenaz)
+  65. Pesukei D'Zimrah (Sefard)
+  66. Pitum Haketoret (Ashkenaz)
+  67. Prayer for Dew (Sefard)
+  68. Prayer for Rain (Sefard)
+  69. Prayer of Rabbi Chaim Yosef David Azulai (Edot_HaMizrach)
+  70. Priestly Blessing (Sefard)
+  71. Reader's Repetition (Ashkenaz)
+  72. Reader's Repetition (Edot_HaMizrach)
+  73. Reader's Repetition of the Amidah (Ashkenaz)
+  74. Sanctification of the Day (Ashkenaz)
+  75. Selichot for 17 Tamuz (Sefard)
+  76. Selichot for 20 Sivan (Sefard)
+  77. Selichot for Asara B'Tevet (Sefard)
+  78. Selichot for Concluding Monday (Sefard)
+  79. Selichot for First Monday (Sefard)
+  80. Selichot for Taanit Esther (Sefard)
+  81. Selichot for Thursday (Sefard)
+  82. Seventeen of Tamuz (Ashkenaz)
+  83. Seventeenth of Tammuz (Edot_HaMizrach)
+  84. Shabbat HaGadol (Sefard)
+  85. Shemoneh Esrei (Ashkenaz)
+  86. Shofarot (Ashkenaz)
+  87. Song of the Day (Ashkenaz)
+  88. Song of the Day (Edot_HaMizrach)
+  89. Song of the Day (Sefard)
+  90. Sounding of the Shofar (Edot_HaMizrach)
+  91. Ten of Tevet (Ashkenaz)
+  92. Tenth of Tevet (Edot_HaMizrach)
+  93. Traveler's Prayer (Sefard)
+  94. Uva LeSion (Edot_HaMizrach)
+  95. Uva Letzion (Ashkenaz)
+  96. Vayechulu (Ashkenaz)
+  97. Vayechulu (Edot_HaMizrach)
+  98. Vayechulu (Sefard)
+  99. Veyiten Lecha (Edot_HaMizrach)
+  100. Vidui (Edot_HaMizrach)
+  101. Viyehi Noam (Ashkenaz)
+  102. Yaaleh (Ashkenaz)
+  103. Yom Tov Daytime Kiddush (Sefard)
+  104. Yom Tov Musaf Amidah (Sefard)
+  105. Zikhronot (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Purim, Rosh_Chodesh, Shabbat, Sukkot, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ בְיוֹם־קׇרְאֵֽנוּ׃
+================================================================================
+Verse Range: 20:10
+Phrase Length: 5 words
+Total Occurrences: 56
+Unique Prayer Contexts: 36
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary
+
+The phrase **יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ בְיוֹם־קׇרְאֵֽנוּ** (Adonai hoshi'ah, ha-melekh ya'aneinu b'yom kra'einu, "O Lord, save us; may the King answer us when we call") appears 56 times across 36 distinct prayer contexts, predominantly in the liturgies of Edot HaMizrach, Ashkenaz, and Sefard traditions. The phrase is integrated into multiple daily services (Shacharit, Mincha, Maariv, Musaf, and Neilah) and special occasions including Shabbat, weekdays, Yom Kippur, and fast days (Fast of Esther, Fast of Gedalya). Representative liturgical contexts include the Amidah, Ashrei, Barchu, Pesukei D'Zimrah, and Tachanun sections, where it functions as a petition for divine salvation and response to prayer, particularly in the Edot HaMizrach recitation of the Amidah for weekday services: "יְהֹוָה הוֹשִׁיעָה הַמֶּלֶךְ יַעֲנֵנוּ בְיוֹם קׇרְאֵנוּ" ("O Lord, save us; may the King answer us on
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Edot_HaMizrach)
+  2. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  3. Ashrei (Edot_HaMizrach)
+  4. Barchu (Edot_HaMizrach)
+  5. Barechu (Edot_HaMizrach)
+  6. Fast of Esther (Edot_HaMizrach)
+  7. Fast of Gedalya (Edot_HaMizrach)
+  8. For Monday & Thursday (Sefard)
+  9. For Monday and Thursday (Ashkenaz)
+  10. Hodu (Ashkenaz)
+  11. Hodu (Edot_HaMizrach)
+  12. Hodu (Sefard)
+  13. Incense Offering (Edot_HaMizrach)
+  14. Kaveh (Edot_HaMizrach)
+  15. Kaveh (Sefard)
+  16. Ketores (Incense Offering) (Ashkenaz)
+  17. Ketoret (Ashkenaz)
+  18. Ketoret (Edot_HaMizrach)
+  19. Korbanot (Edot_HaMizrach)
+  20. Korbanot (Sefard)
+  21. Motzei Yom Kippur (Ashkenaz)
+  22. Mourning (Edot_HaMizrach)
+  23. Musaf (Edot_HaMizrach)
+  24. Mussaf Finale (Edot_HaMizrach)
+  25. Offerings (Edot_HaMizrach)
+  26. Pesukei D'Zimra (Edot_HaMizrach)
+  27. Pesukei Dezimrah (Edot_HaMizrach)
+  28. Prayer of Rabbi Chaim Yosef David Azulai (Edot_HaMizrach)
+  29. Seventeenth of Tammuz (Edot_HaMizrach)
+  30. Tenth of Tevet (Edot_HaMizrach)
+  31. The Shema (Sefard)
+  32. Uva LeSion (Edot_HaMizrach)
+  33. Vehu Rachum (Ashkenaz)
+  34. Vidui (Edot_HaMizrach)
+  35. Yehi Chevod (Ashkenaz)
+  36. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: [Full Psalm 20]
+================================================================================
+Verse Range: 20:1-10
+Phrase Length: 0 words
+Total Occurrences: 31
+Unique Prayer Contexts: 6
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Psalm 20 is recited in full within the Ashrei (verses 2-10) and Tikkun Leah (verses 1-10) during weekday Shacharit services across Ashkenazi, Sefardic, and Mizrahi traditions. Partial recitations of verses 1-2, 7, and 9 appear in Lamenatze'ach and Yom Kippur Katan liturgies, emphasizing the psalm's petitionary themes for divine deliverance. The psalm's liturgical use concentrates primarily on weekday morning services, with specialized application on Yom Kippur Katan observances.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Edot_HaMizrach)
+  2. Ashrei (Sefard)
+  3. Lamenatze'ach (Ashkenaz)
+  4. Tikkun Leah (Edot_HaMizrach)
+  5. Yom Kippur Katan (Ashkenaz)
+  6. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 4: יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ
+================================================================================
+Verse Range: 20:10
+Phrase Length: 4 words
+Total Occurrences: 29
+Unique Prayer Contexts: 27
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **"Yehovah hoshi'a, hammelech ya'aneinu"** (יְהֹוָ֥ה הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ — "Lord, save us; may the King answer us") appears prominently in the **Ashrei** (Psalms 145) recitation across all prayer traditions (Ashkenaz, Sefard, Edot HaMizrach), integrated into daily services (Shacharit, Mincha, Maariv) as well as special occasions including Shabbat, festivals, Rosh Chodesh, and High Holidays. The phrase functions as a petitionary refrain within the acrostic psalm, appearing in the liturgical context: *"יְהֹוָה הוֹשִׁיעָה הַמֶּלֶךְ יַעֲנֵנוּ בְיוֹם קָרְאֵנוּ"* ("Lord, save us; may the King answer us on the day we call"), and is also incorporated into Selichot (penitential prayers), Tachanun (supplication), and concluding prayers of Neilah on Yom Kippur. Its recurrence across 27 distinct prayer contexts reflects its role as a central supplicatory formula expressing Israel's trust in divine salvation and kingship.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Fast of Esther (Ashkenaz)
+  4. Havdala (Sefard)
+  5. Korbanot (Sefard)
+  6. Melava Malka Zemirot (Sefard)
+  7. Mincha (Sefard)
+  8. Motzaei Shabbat (Sefard)
+  9. Motzei Yom Kippur (Ashkenaz)
+  10. Mussaf (Sefard)
+  11. Pesukei D'Zimrah (Sefard)
+  12. Sanctification of the Day (Ashkenaz)
+  13. Selichot for 17 Tamuz (Sefard)
+  14. Selichot for 20 Sivan (Sefard)
+  15. Selichot for Asara B'Tevet (Sefard)
+  16. Selichot for Concluding Monday (Sefard)
+  17. Selichot for First Monday (Sefard)
+  18. Selichot for Taanit Esther (Sefard)
+  19. Selichot for Thursday (Sefard)
+  20. Seventeen of Tamuz (Ashkenaz)
+  21. Tachanun (Sefard)
+  22. Ten of Tevet (Ashkenaz)
+  23. Traveler's Prayer (Sefard)
+  24. Uva Letzion (Ashkenaz)
+  25. Veyiten Lecha (Edot_HaMizrach)
+  26. Viyehi Noam (Ashkenaz)
+  27. Yaaleh (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 5: יְהֹוָ֥ה הוֹשִׁ֑יעָה
+================================================================================
+Verse Range: 20:10
+Phrase Length: 2 words
+Total Occurrences: 6
+Unique Prayer Contexts: 5
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **יְהֹוָ֥ה הוֹשִׁ֑יעָה** (Adonai hoshi'ah, "Lord, save us") appears primarily in the **Hakafot (Processional Circuits) of Simchat Torah** across Sefard and Edot HaMizrach traditions, where it is recited during the seven circumambulations of the Torah scrolls around the bimah. The representative liturgical context shows: **"אָנָּא יְהֹוָה הוֹשִׁיעָה נָּא. אָנָּא יְהֹוָה הַצְּלִיחָה נָא"** ("Please, Lord, save us. Please, Lord, grant success"), which opens each of the seven hakafot with petitionary intensity. The phrase also appears in the **Hallel recitation** (both Sefard and Edot HaMizrach traditions) on festivals and Rosh Chodesh, in **Mussaf services** (Edot HaMizrach), and in **Motzei Shabbat liturgical songs** (Edot HaMizrach), functioning as a recurring supplicatory refrain that emphasizes divine salvation across festive and transitional liturgical moments.
+
+--- PRAYER CONTEXTS ---
+  1. Hakafot (Sefard)
+  2. Hallel (Edot_HaMizrach)
+  3. Hallel (Sefard)
+  4. Motzei Shabbat Songs (Edot_HaMizrach)
+  5. Mussaf (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Festivals, Pesach, Rosh_Chodesh, Shabbat
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 6: צָרָ֑ה יְ֝שַׂגֶּבְךָ֗
+================================================================================
+Verse Range: 20:2
+Phrase Length: 2 words
+Total Occurrences: 5
+Unique Prayer Contexts: 5
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: טוֹב יְהֹוָה לְמָעוֹז בְּיוֹם צָרָה
+
+The phrase **"Tov Adonai l'ma'oz b'yom tzarah"** (טוֹב יְהֹוָה לְמָעוֹז בְּיוֹם צָרָה, "The Lord is good, a stronghold in the day of trouble") from Psalm 20:2 appears exclusively in the **Selichot (penitential prayers) of the Edot HaMizrach tradition**, recited during **weekday Shacharit services on communal fast days**. The phrase appears in five distinct fast-day contexts: the Fast of Esther, Fast of Gedalya, Seventeenth of Tammuz, Tenth of Tevet, and the Vidui (confession). 
+
+In the representative liturgical text, the phrase appears within an acrostic structure (אַלְפָא בֵּית) in the Selichot for the Fast of Esther, where it functions as a refrain emphasizing divine protection during times of national distress: **"יְמִינִי צָהַל בִּרְאוֹתוֹ מַפָּלַת הָמָן בְּחִבָּה, אֵל נַעֲרָץ בְּסוֹד־קְדֹשִׁים רַבָּה"** ("My right hand rejoiced seeing Haman's downfall with love, O God revered in the council
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Esther (Edot_HaMizrach)
+  2. Fast of Gedalya (Edot_HaMizrach)
+  3. Seventeenth of Tammuz (Edot_HaMizrach)
+  4. Tenth of Tevet (Edot_HaMizrach)
+  5. Vidui (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 7: הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ
+================================================================================
+Verse Range: 20:10
+Phrase Length: 3 words
+Total Occurrences: 5
+Unique Prayer Contexts: 5
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: הוֹשִׁ֑יעָה הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ (Hoshia ha-melekh ya'aneinu)
+
+The phrase "הוֹשִׁיעָה הַמֶּלֶךְ יַעֲנֵנוּ" (Hoshia ha-melekh ya'aneinu, "Save us, O King, answer us") from Psalm 20:10 appears exclusively in Ashkenazi liturgy across five distinct prayer contexts: the Fast of Gedaliah, Havdalah, Hodu (Pesukei D'Zimrah), Ketoret (Incense), and Yehi Chevod. The phrase functions as a petitionary refrain, appearing primarily in Shacharit services on Shabbat and festival occasions, where it serves as a concluding supplication within praise and thanksgiving sections. Representative usage appears in the Hodu section: "יְיָ הוֹשִׁיעָה הַמֶּלֶךְ יַעֲנֵנוּ בְיוֹם קָרְאֵנוּ" ("Lord, save us, O King, answer us on the day we call"), integrating the psalmaic petition into the morning's liturgical framework as a bridge between communal praise and personal petition.
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Gedalia (Ashkenaz)
+  2. Havdalah (Ashkenaz)
+  3. Hodu (Ashkenaz)
+  4. Ketoret (Ashkenaz)
+  5. Yehi Chevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 8: שֵׁ֤ם ׀ אֱלֹהֵ֬י יַעֲקֹֽב׃ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 20:2
+Phrase Length: 3 words
+Total Occurrences: 4
+Unique Prayer Contexts: 2
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **שֵׁם אֱלֹהֵי יַעֲקֹב** (shem Elohei Ya'akov, "the name of the God of Jacob") appears in the **Tachanun (supplicatory prayers)** recited during **Shacharit (morning service) on weekdays, specifically Monday and Thursday**, in both **Ashkenazi and Sefardi traditions**. The phrase occurs within the extended penitential liturgy that includes verses from Psalms 20:2 and related biblical passages, as exemplified in the representative text: **"יַעֲנֵֽנוּ יְהֹוָה בְּיוֹם צָרָה יְשַׂגְּ֒בֵֽנוּ שֵׁם אֱלֺהֵי יַעֲקֹב"** ("Answer us, O Lord, in the day of trouble; may the name of the God of Jacob set us on high"). This invocation of Jacob's God appears as part of the intensified supplications on Monday and Thursday, days traditionally associated with Moses receiving the second tablets of the Law, emphasizing divine protection and ancestral covenant.
+
+--- PRAYER CONTEXTS ---
+  1. For Monday & Thursday (Sefard)
+  2. For Monday and Thursday (Ashkenaz)
+
+--- OCCASIONS ---
+  Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 9: בְּי֣וֹם צָרָ֑ה
+================================================================================
+Verse Range: 20:2
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 96.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'בְּי֣וֹם צָרָ֑ה' appears in 2 prayer context(s):. Fast of Esther (Edot_HaMizrach), Sounding of the Shofar (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Esther (Edot_HaMizrach)
+  2. Sounding of the Shofar (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 10: הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ
+================================================================================
+Verse Range: 20:10
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ' appears in 1 prayer context(s):. Awesome Prayer of Rabbeinu Tam (Sefard).
+
+--- PRAYER CONTEXTS ---
+  1. Awesome Prayer of Rabbeinu Tam (Sefard)
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 11: יְמַלֵּ֥א יְ֝הֹוָ֗ה
+================================================================================
+Verse Range: 20:6
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יְמַלֵּ֥א יְ֝הֹוָ֗ה' appears in 1 prayer context(s):. Blessing of New Month (Sefard). Occasions: Shabbat. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Blessing of New Month (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 23
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 23
+================================================================================
+Total distinct phrases found: 6
+Total occurrences across all prayers: 129
+Average occurrences per phrase: 21.5
+
+
+================================================================================
+PHRASE 1: לְמַ֣עַן שְׁמֽוֹ׃
+================================================================================
+Verse Range: 23:3
+Phrase Length: 2 words
+Total Occurrences: 78
+Unique Prayer Contexts: 32
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: לְמַעַן שְׁמוֹ (L'ma'an Shemo, "For His Name's Sake")
+
+The phrase **לְמַעַן שְׁמוֹ** (l'ma'an shemo, "for His name's sake") appears predominantly in the **Patriarchs (Avot) blessing of the Amidah**, recited across all daily services (Shacharit, Mincha, and Maariv) as well as Musaf and Neilah throughout the Jewish calendar year. The representative liturgical formulation reads: **"וּמֵבִיא גוֹאֵל לִבְנֵי בְנֵיהֶם לְמַעַן שְׁמוֹ בְּאַהֲבָה"** ("and brings a redeemer to their children's children for His name's sake with love"), establishing the theological principle that redemption is motivated by God's commitment to His own name and honor. Beyond the Amidah, the phrase appears in **Selichot (penitential prayers)** and in **special liturgies for Rosh Chodesh, Festivals, Purim, and Yom Kippur**, with particular frequency in **Ashkenazi, Sefardi, and Edot HaMizrach traditions**, underscoring its centrality as a theological anchor connecting divine redemptive action to the sanctification of God's name across the entire liturgical calendar.
+
+--- PRAYER CONTEXTS ---
+  1. Amida (Edot_HaMizrach)
+  2. Amidah (Ashkenaz)
+  3. Amidah (Edot_HaMizrach)
+  4. Amidah (Sefard)
+  5. Amidah for Mincha (Ashkenaz)
+  6. Amidah for Neilah (Ashkenaz)
+  7. Arvit for Motzei Rosh Hashana (Edot_HaMizrach)
+  8. Avot (Ashkenaz)
+  9. Krovetz L'Purim (Sefard)
+  10. Maariv, Shacharit & Mincha Amidah (Sefard)
+  11. Motzei Yom Kippur (Ashkenaz)
+  12. Musaf (Edot_HaMizrach)
+  13. Musaf (Sefard)
+  14. Musaf for Hachodesh (Sefard)
+  15. Musaf for Shekalim (Sefard)
+  16. Mussaf (Edot_HaMizrach)
+  17. Mussaf (Sefard)
+  18. Parashat HaChodesh (Sefard)
+  19. Parashat Parah (Sefard)
+  20. Parashat Sekalim (Sefard)
+  21. Parashat Zachor (Sefard)
+  22. Patriarchs (Ashkenaz)
+  23. Prayer for Dew (Sefard)
+  24. Prayer for Rain (Sefard)
+  25. Reader's Repetition (Ashkenaz)
+  26. Reader's Repetition (Edot_HaMizrach)
+  27. Reader's Repetition of the Amidah (Ashkenaz)
+  28. Selichot for 20 Sivan (Sefard)
+  29. Shabbat HaGadol (Sefard)
+  30. Shemoneh Esrei (Ashkenaz)
+  31. Sounding of the Shofar (Edot_HaMizrach)
+  32. Yom Tov Musaf Amidah (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Purim, Rosh_Chodesh, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: [Full Psalm 23]
+================================================================================
+Verse Range: 23:1-6
+Phrase Length: 0 words
+Total Occurrences: 33
+Unique Prayer Contexts: 13
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Psalm 23 is recited in full (verses 1, 3-6) across five major liturgical contexts including the Amidah, Kiddush, and Third Meal of Shabbat, primarily in Ashkenazi, Sefardic, and Mizrachi traditions. Partial recitations of verses 1 and 5 appear in seven additional contexts, particularly in Shabbat-related services such as Daytime Kiddush, Melava Malka Zemirot, and Mizmor LeDavid, with verses 1-4 featured in the Daytime Kiddush (67% of the psalm). The psalm's liturgical use concentrates on Shabbat and festival occasions, particularly in evening (Maariv) and meal-related services across all major Jewish traditions.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Edot_HaMizrach)
+  2. Daytime Kiddush (Edot_HaMizrach)
+  3. Kiddush (Edot_HaMizrach)
+  4. Magen Avot (Edot_HaMizrach)
+  5. Melava Malka Zemirot (Sefard)
+  6. Mizmor LeDavid (Ashkenaz)
+  7. Mussaf (Edot_HaMizrach)
+  8. Shabbat Day Kiddush (Sefard)
+  9. Supplications After Prayers (Sefard)
+  10. Third Meal (Edot_HaMizrach)
+  11. Vayechulu (Edot_HaMizrach)
+  12. Vayechulu (Sefard)
+  13. Zemirot (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: לְדָוִ֑ד יְהֹוָ֥ה
+================================================================================
+Verse Range: 23:1
+Phrase Length: 2 words
+Total Occurrences: 13
+Unique Prayer Contexts: 8
+Average Confidence: 97.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **לְדָוִ֑ד יְהֹוָ֥ה** (L'David Hashem, "A Psalm of David: The Lord") appears prominently as the opening superscription of Psalm 27, which is recited in eight distinct liturgical contexts across Ashkenazi and Sefardi traditions. The phrase introduces the full psalm in prayers such as **Aleinu** (concluding the daily services), **Avinu Malkenu** (penitential prayers on weekdays and High Holidays), and **L'David Hashem** (a dedicated recitation in Sefardi tradition), as well as in **Tachanun** (supplicatory prayers) and the **Song of the Day** (Shir Shel Yom). Representative usage appears in the Ashkenazi liturgy: *"לְדָוִד יְהֹוָה אוֹרִי וְיִשְׁעִי מִמִּי אִירָא"* ("A Psalm of David: The Lord is my light and my salvation; whom shall I fear?"), establishing Psalm 27's protective and trust-affirming theology as a cornerstone of daily Jewish prayer across Shacharit, Mincha, Maariv, and Musaf services, particularly on weekdays and Yom Kippur.
+
+--- PRAYER CONTEXTS ---
+  1. Aleinu (Ashkenaz)
+  2. Amidah (Sefard)
+  3. Avinu Malkenu (Ashkenaz)
+  4. L'David Hashem (Sefard)
+  5. LeDavid (Ashkenaz)
+  6. Motzei Yom Kippur (Ashkenaz)
+  7. Song of the Day (Ashkenaz)
+  8. Tachanun (Sefard)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 4: מִזְמ֥וֹר לְדָוִ֑ד יְהֹוָ֥ה
+================================================================================
+Verse Range: 23:1
+Phrase Length: 3 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary
+
+The phrase **מִזְמ֥וֹר לְדָוִ֑ד יְהֹוָ֥ה** (Mizmor l'David Adonai, "A Psalm of David, O Lord") from Psalm 23:1 appears in three distinct mourning contexts across Jewish traditions. It is recited during the **Shiva (seven-day mourning period)** in **Edot HaMizrach** tradition, and on **Yom Kippur Katan** (the minor Day of Atonement observed monthly) in both **Ashkenaz** and **Sefard** traditions, specifically within the **Selichot** (penitential prayers) section. The representative liturgical context shows: *"עד כאן בימי השבעה ואחר כך אומרים מִזְמ֗וֹר לְדָ֫וִ֥ד יְ֭הֹוָה מִי־יָג֣וּר בְּאׇהֳלֶ֑ךָ"* ("Until here during the seven days, and afterwards they recite: A Psalm of David, O Lord, who shall dwell in Your tent?"), indicating its function as a transitional psalm marking the conclusion of the initial mourning recitations and the beginning of additional penitential devotions.
+
+--- PRAYER CONTEXTS ---
+  1. Mourning (Edot_HaMizrach)
+  2. Yom Kippur Katan (Ashkenaz)
+  3. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 5: דִּשַּׁ֥נְתָּ בַשֶּׁ֥מֶן רֹ֝אשִׁ֗י כּוֹסִ֥י רְוָיָֽה׃
+================================================================================
+Verse Range: 23:5
+Phrase Length: 5 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'דִּשַּׁ֥נְתָּ בַשֶּׁ֥מֶן רֹ֝אשִׁ֗י כּוֹסִ֥י רְוָיָֽה׃' appears in 1 prayer context(s):. Nighttime Kiddush (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Nighttime Kiddush (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 6: אַ֤ךְ ׀ ט֤וֹב
+================================================================================
+Verse Range: 23:6
+Phrase Length: 3 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אַ֤ךְ ׀ ט֤וֹב' appears in 1 prayer context(s):. Shalom Aleichem (Sefard). Occasions: Shabbat. Services: Maariv.
+
+--- PRAYER CONTEXTS ---
+  1. Shalom Aleichem (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Maariv
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 145
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 145
+================================================================================
+Total distinct phrases found: 35
+Total occurrences across all prayers: 1109
+Average occurrences per phrase: 31.7
+
+
+================================================================================
+PHRASE 1: [Full Psalm 145]
+================================================================================
+Verse Range: 145:1-20
+Phrase Length: 0 words
+Total Occurrences: 600
+Unique Prayer Contexts: 14
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Psalm 145 is recited in full (verses 1-20) as part of Ashrei, a central acrostic prayer recited in Shacharit and Mincha services across Ashkenazi, Sefardic, and Mizrahi traditions on weekdays and Shabbat. Partial recitations of verses 1-5 and 7-20 appear in additional contexts including Hallel, Korbanot, and memorial services, with particular prominence on Yom Kippur and during Neilah. The psalm's liturgical significance spans all major Jewish traditions and occasions, functioning as a foundational element of daily and festival prayer.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei (Edot_HaMizrach)
+  3. Ashrei (Sefard)
+  4. Hallel (Edot_HaMizrach)
+  5. Hodu (Sefard)
+  6. Korbanot (Edot_HaMizrach)
+  7. Korbanot (Sefard)
+  8. Memorial Services (Ashkenaz)
+  9. Offerings (Edot_HaMizrach)
+  10. Pesukei D'Zimra (Edot_HaMizrach)
+  11. Pesukei Dezimrah (Edot_HaMizrach)
+  12. Sounding of the Shofar (Ashkenaz)
+  13. Sounding of the Shofar (Edot_HaMizrach)
+  14. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Mincha, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: חַנּ֣וּן וְרַח֣וּם
+================================================================================
+Verse Range: 145:8
+Phrase Length: 2 words
+Total Occurrences: 81
+Unique Prayer Contexts: 44
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: חַנּ֣וּן וְרַח֣וּם (Chanun v'Rachum)
+
+The phrase **חַנּוּן וְרַחוּם** (chanun v'rachum, "gracious and merciful") appears 81 times across 44 distinct prayer contexts, establishing it as a foundational theological descriptor of God's character throughout Jewish liturgy. It appears most prominently in the **Amidah** (the central prayer of all services—Shacharit, Mincha, Maariv, Musaf, and Neilah) across all traditions (Ashkenaz, Sefard, Edot HaMizrach), where it functions as a key attribute in blessings addressing divine compassion and forgiveness. The phrase also appears in **Ashrei** (Psalm 145, from which it originates), **Selichot** (penitential prayers), **Tachanun** (supplication), and various **Pesukei D'Zimrah** contexts, making it central to weekday, Shabbat, festival, and High Holiday liturgy. Representative usage appears in the Amidah's closing petitions: *"חוּס וְרַחֵם עָלֵֽינוּ וְהוֹשִׁיעֵֽנוּ כִּי אֵלֶֽיךָ עֵינֵֽינוּ כִּי אֵל מֶֽלֶךְ חַנּוּן וְרַחוּם אָֽתָּה"* ("Have
+
+--- PRAYER CONTEXTS ---
+  1. Amida (Edot_HaMizrach)
+  2. Amidah (Ashkenaz)
+  3. Amidah (Edot_HaMizrach)
+  4. Amidah (Sefard)
+  5. Amidah for Mincha (Ashkenaz)
+  6. Amidah for Neilah (Ashkenaz)
+  7. Ashrei (Ashkenaz)
+  8. Barech (Sefard)
+  9. Bedtime Shema (Sefard)
+  10. Birchat HaMazon (Sefard)
+  11. Birkat HaMazon (Ashkenaz)
+  12. Birkat Hamazon (Edot_HaMizrach)
+  13. Birkat Hamazon (Universal)
+  14. Borechu (Ashkenaz)
+  15. Fast of Esther (Edot_HaMizrach)
+  16. Fast of Gedalia (Ashkenaz)
+  17. Fast of Gedalya (Edot_HaMizrach)
+  18. For Monday & Thursday (Sefard)
+  19. For Monday and Thursday (Ashkenaz)
+  20. Kedushah (Ashkenaz)
+  21. Keri'at Shema al Hamita (Ashkenaz)
+  22. Maariv, Shacharit & Mincha Amidah (Sefard)
+  23. Magen Avot (Edot_HaMizrach)
+  24. Melava Malka Zemirot (Sefard)
+  25. Motzei Yom Kippur (Ashkenaz)
+  26. Parashat HaChodesh (Sefard)
+  27. Parashat Sekalim (Sefard)
+  28. Pirkei Avot (Edot_HaMizrach)
+  29. Post Meal Blessing (Edot_HaMizrach)
+  30. Reader's Repetition (Edot_HaMizrach)
+  31. Reader's Repetition of the Amidah (Ashkenaz)
+  32. Sancification of the Day (Ashkenaz)
+  33. Sanctification of the Day (Ashkenaz)
+  34. Sanctity of the Day (Ashkenaz)
+  35. Second Blessing after Shema (Ashkenaz)
+  36. Seventeenth of Tammuz (Edot_HaMizrach)
+  37. Shema & Blessings (Sefard)
+  38. Slichot (Edot_HaMizrach)
+  39. Temple Service (Ashkenaz)
+  40. Tenth of Tevet (Edot_HaMizrach)
+  41. The Shema (Sefard)
+  42. Torah Reading for Mincha Service (Ashkenaz)
+  43. Vidui (Edot_HaMizrach)
+  44. Yaaleh (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Pesach, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard, Universal
+
+================================================================================
+PHRASE 3: אֶ֥רֶךְ אַ֝פַּ֗יִם
+================================================================================
+Verse Range: 145:8
+Phrase Length: 2 words
+Total Occurrences: 62
+Unique Prayer Contexts: 50
+Average Confidence: 95.80%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: אֶרֶךְ אַפַּיִם (Erech Appayim)
+
+The phrase **אֶרֶךְ אַפַּיִם** (erech appayim, "slow to anger" or "long-suffering") appears 62 times across 50 distinct prayer contexts, predominantly in the **Amidah blessings** (particularly the second blessing on God's attributes) recited in all daily services (Shacharit, Mincha, Maariv) and on High Holidays (Yom Kippur Neilah, Fast Days). The phrase is featured prominently in **Selichot** (penitential prayers) and in the dedicated prayer **El Erech Appayim** (Ashkenaz tradition), where it functions as a central invocation of divine patience and compassion. Representative liturgical usage appears in the Amidah: "אַתָּה גִבּוֹר לְעוֹלָם אֲדֹנָי... אֶרֶךְ אַפַּיִם וּמְרֻבֵּה חֶסֶד" ("You are mighty forever, O Lord... slow to anger and abundant in mercy"), emphasizing God's merciful attributes during both ordinary weekday worship and solemn occasions like Yom Kippur, across Ashkenaz, Sefard, and Edot HaMizrach traditions.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Edot_HaMizrach)
+  2. Amidah for Neilah (Ashkenaz)
+  3. Ashrei (Ashkenaz)
+  4. BaHaB (Ashkenaz)
+  5. Beit Yaakov (Edot_HaMizrach)
+  6. Beit Yaakov (Sefard)
+  7. El Erech Appayim (Ashkenaz)
+  8. Fast Day Torah Reading (Sefard)
+  9. Fast of Esther (Ashkenaz)
+  10. Fast of Esther (Edot_HaMizrach)
+  11. Fast of Gedalia (Ashkenaz)
+  12. Fast of Gedalya (Edot_HaMizrach)
+  13. For Monday & Thursday (Sefard)
+  14. For Monday and Thursday (Ashkenaz)
+  15. Hodu (Edot_HaMizrach)
+  16. Kedushah (Ashkenaz)
+  17. Opening of the Ark (Edot_HaMizrach)
+  18. Pirkei Avot (Edot_HaMizrach)
+  19. Priestly Blessing (Sefard)
+  20. Reader's Repetition (Edot_HaMizrach)
+  21. Reader's Repetition of the Amidah (Ashkenaz)
+  22. Sanctification of the Day (Ashkenaz)
+  23. Selichot for 17 Tamuz (Sefard)
+  24. Selichot for 20 Sivan (Sefard)
+  25. Selichot for Asara B'Tevet (Sefard)
+  26. Selichot for BaHaB (Sefard)
+  27. Selichot for Concluding Monday (Sefard)
+  28. Selichot for First Monday (Sefard)
+  29. Selichot for Taanit Esther (Sefard)
+  30. Selichot for Thursday (Sefard)
+  31. Seventeen of Tamuz (Ashkenaz)
+  32. Seventeenth of Tammuz (Edot_HaMizrach)
+  33. Shabbat Torah Reading (Sefard)
+  34. Slichot (Edot_HaMizrach)
+  35. Tachanun (Sefard)
+  36. Ten of Tevet (Ashkenaz)
+  37. Tenth of Tevet (Edot_HaMizrach)
+  38. The Ten Martyrs (Ashkenaz)
+  39. Torah Reading (Edot_HaMizrach)
+  40. Torah Reading (Sefard)
+  41. Torah Reading for Chol Hamoed Pesach (Sefard)
+  42. Torah Reading for Fast Days (Edot_HaMizrach)
+  43. Torah Reading for Mincha Service (Ashkenaz)
+  44. Va'yehi Binsoa (Ashkenaz)
+  45. Vayehi Binsoa (Ashkenaz)
+  46. Vidui (Edot_HaMizrach)
+  47. Vidui and 13 Middot (Ashkenaz)
+  48. Yaaleh (Ashkenaz)
+  49. Yom Kippur Katan (Ashkenaz)
+  50. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Pesach, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 4: לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃ [+ 3 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:12-18
+Phrase Length: 2 words
+Total Occurrences: 40
+Unique Prayer Contexts: 8
+Average Confidence: 99.63%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **לְכֹל אֲשֶׁר יִקְרָאֻהוּ בֶאֱמֶת** (l'khol asher yikra'uhu be'emet, "to all who call upon Him in truth") from Psalm 145:18 appears predominantly in the **Ashrei** prayer recited in Shacharit and Mincha services across Shabbat, festivals, and Rosh Chodesh, with particular concentration in Sefardic tradition where it is integrated into **Ashrei Uva L'Tziyon**, **Pesukei D'Zimrah**, and **Korbanot** sections. The liturgical context emphasizes God's accessibility and responsiveness to sincere prayer: "קָרוב ה' לְכָל קרְאָיו. לְכל אֲשֶׁר יִקְרָאֻהוּ בֶאֱמֶת" ("The Lord is near to all who call upon Him, to all who call upon Him in truth"), positioning this phrase as a theological affirmation of divine proximity to the faithful worshipper. The phrase also appears in Ashkenazic **Selichot** contexts (Fast of Gedalia) and Sefardic **Yizkor** services, reflecting its thematic significance regarding God's direct relationship with those who approach Him authentically.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Fast of Gedalia (Ashkenaz)
+  5. Korbanot (Sefard)
+  6. Mincha (Sefard)
+  7. Pesukei D'Zimrah (Sefard)
+  8. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 5: גָּ֘ד֤וֹל יְהֹוָ֣ה וּמְהֻלָּ֣ל מְאֹ֑ד
+================================================================================
+Verse Range: 145:3
+Phrase Length: 4 words
+Total Occurrences: 25
+Unique Prayer Contexts: 16
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary
+
+The phrase **גָּדוֹל יְהֹוָה וּמְהֻלָּל מְאֹד** (Gadol Adonai u'mehullal me'od, "Great is the Lord and greatly to be praised") appears prominently across Jewish liturgy in 25 instances spanning multiple traditions and occasions. It functions as a doxological refrain in **Pesukei D'Zimrah** (Sefard tradition), where it introduces the daily praise service, and appears in **Kabbalat Shabbat** (both Sefard and Edot HaMizrach), particularly in the Lecha Dodi and related hymns welcoming the Sabbath. The phrase also features in **Hodu** (thanksgiving psalms) across Ashkenaz and Edot HaMizrach traditions, and in the **Avinu Malkenu** penitential prayer (Ashkenaz), where it punctuates petitions for divine mercy and intervention.
+
+**Representative liturgical context (from Pesukei D'Zimrah):**
+> "שִׁיר מִזְמוֹר לִבְנֵי קֹרַח: גָּדוֹל יְהֹוָה וּמְהֻלָּל מְאֹד בְּעִיר אֱלֹהֵֽינוּ הַר קָדְשׁוֹ"
+> 
+> "A song, a psalm of the sons of Korah: Great is the Lord and greatly to be praised in the city of our God, His holy
+
+--- PRAYER CONTEXTS ---
+  1. Avinu Malkenu (Ashkenaz)
+  2. Avodah (Ashkenaz)
+  3. Hodu (Ashkenaz)
+  4. Hodu (Edot_HaMizrach)
+  5. Kabbalat Shabbat (Edot_HaMizrach)
+  6. Kabbalat Shabbat (Sefard)
+  7. Musaf (Sefard)
+  8. Musaf for Hachodesh (Sefard)
+  9. Musaf for Shekalim (Sefard)
+  10. Pesukei D'Zimrah (Sefard)
+  11. Psalm 96 (Ashkenaz)
+  12. Reader's Repetition of the Amidah (Ashkenaz)
+  13. Song of the Day (Ashkenaz)
+  14. Song of the Day (Edot_HaMizrach)
+  15. Song of the Day (Sefard)
+  16. Yom Tov Musaf Amidah (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat, Weekday
+
+--- SERVICES ---
+  Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 6: יַבִּ֑יעוּ וְצִדְקָתְךָ֥ יְרַנֵּֽנוּ׃ חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם [+ 3 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:7-21
+Phrase Length: 8 words
+Total Occurrences: 24
+Unique Prayer Contexts: 6
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **יַבִּיעוּ וְצִדְקָתְךָ יְרַנֵּנוּ / חַנּוּן וְרַחוּם יְהֹוָה אֶרֶךְ אַפַּיִם** (Yabi'u v'tzidkatcha yeranenu / Chanun v'rachum Adonai erech apayim, "They shall utter... and Your righteousness shall sing / Gracious and merciful is the Lord, slow to anger") appears primarily in the **Ashrei (Psalm 145)** recitation within **Pesukei D'Zimrah** (Verses of Song), which is recited in **Shacharit and Mincha services on Shabbat and Rosh Chodesh in Sefardic tradition**. The representative liturgical context shows: *"זֵכֶר רַב טוּבְךָ יַבִּיעוּ וְצִדְקָתְךָ יְרַנֵּנוּ: חַנּוּן וְרַחוּם יְהֹוָה אֶרֶךְ אַפַּיִם וּגְדָל חָסֶד"* ("The memory of Your abundant goodness they shall utter, and Your righteousness shall sing. Gracious and merciful is the Lord, slow to anger and great in kindness"), which emphasizes God's attributes of compassion and justice. The phrase also appears in supplementary contexts including **Av HaRachamim,
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Korbanot (Sefard)
+  4. Mincha (Sefard)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 7: שֵׁ֥ם קׇדְשׁ֗וֹ
+================================================================================
+Verse Range: 145:21
+Phrase Length: 2 words
+Total Occurrences: 24
+Unique Prayer Contexts: 17
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: שֵׁם קׇדְשׁוֹ (Shem Qadsho, "His Holy Name")
+
+The phrase **שֵׁם קׇדְשׁוֹ** (His Holy Name) appears 24 times across 17 distinct prayer contexts, predominantly in the **Pesukei D'Zimrah** (Introductory Psalms), **Hallel**, and **Nishmat Kol Chai** sections of daily services, with particular concentration in **Ashkenazi** and **Sefardi** traditions. It recurs throughout the **Hymn of Glory** (Yigdal-related compositions) and appears in specialized contexts including **Yom Kippur Night customs**, **Chanukah Menorah blessings**, and **Musaf services**. The phrase functions as a refrain emphasizing divine sanctity and praise, appearing most frequently during **Shabbat and festival services** (Pesach, Chanukah) and **weekday Shacharit**, serving as a liturgical anchor for congregational affirmation of God's holiness across multiple Jewish traditions and prayer sections.
+
+**Representative context from Nishmat Kol Chai (Ashkenazi):**
+*"כִּי פִי יַגִּיד תְּהִלָּתֶֽךָ כָּל־הַיּוֹם אֶת־תִּפְאַרְתֶּֽךָ וּמִפִּי הַכֹּל בְּכָל־אֱיָלוּתָם כְּפ
+
+--- PRAYER CONTEXTS ---
+  1. Customs of Yom Kippur Night (Ashkenaz)
+  2. Hallel (Sefard)
+  3. Hodu (Ashkenaz)
+  4. Hodu (Edot_HaMizrach)
+  5. Hymn of Glory (Ashkenaz)
+  6. Menorah Lighting (Sefard)
+  7. Musaf (Sefard)
+  8. Nishmas (Ashkenaz)
+  9. Nishmat Kol Chai (Ashkenaz)
+  10. Pesukei D'Zimrah (Sefard)
+  11. Priestly Blessing (Sefard)
+  12. Psalm 33 (Ashkenaz)
+  13. Psalms for Shabbat (Edot_HaMizrach)
+  14. Reader's Repetition of the Amidah (Ashkenaz)
+  15. Shir HaKavod (Ashkenaz)
+  16. Songs of Praise and Thanks (Universal)
+  17. Tashlich (Ashkenaz)
+
+--- OCCASIONS ---
+  Chanukah, Pesach, Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard, Universal
+
+================================================================================
+PHRASE 8: כְּב֣וֹד מַלְכוּתְךָ֣
+================================================================================
+Verse Range: 145:11
+Phrase Length: 2 words
+Total Occurrences: 23
+Unique Prayer Contexts: 15
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary: כְּבוֹד מַלְכוּתְךָ (Kevod Malkhutekha)
+
+The phrase **כְּבוֹד מַלְכוּתְךָ** ("the glory of Your kingdom") appears 23 times across the Jewish liturgy, predominantly in the Amidah blessing recited in all daily services (Shacharit, Mincha, and Maariv) as well as Musaf and Neilah services. The phrase is particularly prominent in the Ashkenazi, Sefardi, and Edot HaMizrach traditions, appearing in the Kedushah (Sanctification) and in special petitions such as the Prayer for Rain and Prayer for Dew. A representative liturgical context appears in the concluding petition: **"אָבִֽינוּ מַלְכֵּֽנוּ גַּלֵּה כְּבוֹד מַלְכוּתְךָ עָלֵֽינוּ מְהֵרָה"** ("Our Father, our King, reveal the glory of Your kingdom upon us speedily"), which is recited during the High Holidays (Yom Kippur, Rosh Hashanah) and festival services. The phrase emphasizes the eschatological hope for divine sovereignty and appears with particular frequency during Chanukah, festivals, and the Days of Awe, reflecting its theological significance in prayers for the manifestation of God's kingship.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Ashkenaz)
+  2. Amidah (Edot_HaMizrach)
+  3. Ashreinu Uma Naim (Sefard)
+  4. Kedushah (Ashkenaz)
+  5. Menorah Lighting (Sefard)
+  6. Musaf (Edot_HaMizrach)
+  7. Mussaf (Edot_HaMizrach)
+  8. Prayer for Dew (Sefard)
+  9. Prayer for Rain (Sefard)
+  10. Reader's Repetition (Edot_HaMizrach)
+  11. Sanctity of the Day (Ashkenaz)
+  12. Shemoneh Esrei (Ashkenaz)
+  13. Slichot (Edot_HaMizrach)
+  14. Ten Remembrances (Edot_HaMizrach)
+  15. Yom Tov Musaf Amidah (Sefard)
+
+--- OCCASIONS ---
+  Chanukah, Festivals, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Neilah, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 9: אָשִֽׂיחָה׃ וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ [+ 2 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:5-7
+Phrase Length: 4 words
+Total Occurrences: 21
+Unique Prayer Contexts: 7
+Average Confidence: 99.83%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase "אָשִׂיחָה וֶעֱזוּז נוֹרְאֹתֶיךָ יֹאמֵרוּ" (asichah ve'ezuz nora'otecha yomeru, "I will meditate [on Your wonders]... and they shall speak of the might of Your awesome deeds") from Psalm 145:5-7 appears predominantly in Sefardic liturgy across 21 occurrences in seven distinct prayer contexts. The phrase is most prominently featured in **Ashrei U'Va L'Tziyon** (the acrostic prayer recited in Pesukei D'Zimrah), where the complete Psalm 145 is incorporated as a central element of daily Shacharit and Mincha services on Shabbat and Rosh Chodesh. It additionally appears in **Korbanot** (the sacrificial service recitation), **Selichot** (penitential prayers for the Fast of Gedalia in Ashkenaz tradition), and memorial services (**Yizkor**), reflecting its liturgical significance in expressing divine praise and the commemoration of God's mighty acts across festive and solemn occasions.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Fast of Gedalia (Ashkenaz)
+  4. Korbanot (Sefard)
+  5. Mincha (Sefard)
+  6. Pesukei D'Zimrah (Sefard)
+  7. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 10: אֲבָרְכֶ֑ךָּ וַאֲהַלְלָ֥ה שִׁ֝מְךָ֗ לְעוֹלָ֥ם וָעֶֽד׃ גָּ֘ד֤וֹל [+ 4 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:2-21
+Phrase Length: 6 words
+Total Occurrences: 20
+Unique Prayer Contexts: 2
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **אֲבָרְכֶךָּ וַאֲהַלְלָה שִׁמְךָ לְעוֹלָם וָעֶד** (avarkhekha va-ahallelah shimkha le-olam va-ed, "I will bless You and praise Your name forever and ever") from Psalm 145:2 appears prominently in **Ashrei** (Psalms of David), recited in Pesukei D'Zimrah during Shacharit and Mincha services on Shabbat and Festivals in Ashkenazi tradition. The liturgical context reads: **"בְּכָל יום אֲבָרְכֶךָּ וַאֲהַלְלָה שִׁמְךָ לְעוֹלָם וָעֶד"** ("Every day I will bless You and praise Your name forever and ever"), which forms the acrostic core of Psalm 145 and serves as a central declaration of perpetual praise. The phrase also appears in **Selichot recited on the Fast of Gedaliah** (Ashkenazi rite), where it reinforces themes of repentance and eternal devotion during penitential services.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Fast of Gedalia (Ashkenaz)
+
+--- OCCASIONS ---
+  Festivals, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 11: מַֽלְכוּתְךָ֗ מַלְכ֥וּת
+================================================================================
+Verse Range: 145:13
+Phrase Length: 2 words
+Total Occurrences: 19
+Unique Prayer Contexts: 15
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **מַלְכוּתְךָ מַלְכוּת** (malkhutekha malkhut, "Your kingdom is a kingdom") from Psalm 145:13 appears prominently in the **Ashrei** prayer recited in both Ashkenazi and Sefardi traditions across Shacharit and Mincha services on weekdays, Shabbat, and festivals. The phrase appears in its full liturgical context: **"כְּבוד מַלְכוּתְךָ יאמֵרוּ וּגְבוּרָתְךָ יְדַבֵּרוּ... מַלְכוּתְךָ מַלְכוּת כָּל עולָמִים וּמֶמְשַׁלְתְּךָ בְּכָל דּור וָדר"** ("The glory of Your kingdom they shall speak, and Your might they shall tell... Your kingdom is a kingdom of all worlds, and Your dominion is in every generation and generation"), emphasizing God's eternal sovereignty. Beyond Ashrei, the phrase is distributed across 15 distinct prayer contexts including Pesukei D'Zimrah, Selichot, and various Sefardi liturgical compositions (Av HaRachamim, Ein Kamocha, Hakafot), making it one of the most theologically significant affirmations of divine kingship in Jewish daily worship.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Ein Kamocha (Ashkenaz)
+  5. Fast of Gedalia (Ashkenaz)
+  6. Hakafot (Sefard)
+  7. Korbanot (Sefard)
+  8. Mincha (Sefard)
+  9. Pesukei D'Zimrah (Sefard)
+  10. Reader's Repetition (Ashkenaz)
+  11. Reader's Repetition of the Amidah (Ashkenaz)
+  12. Shabbat Torah Reading (Sefard)
+  13. Va'yehi Binsoa (Ashkenaz)
+  14. Yishtabach (Ashkenaz)
+  15. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 12: קָר֣וֹב יְ֭הֹוָה
+================================================================================
+Verse Range: 145:18
+Phrase Length: 2 words
+Total Occurrences: 14
+Unique Prayer Contexts: 12
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase קָרוֹב יְהֹוָה (Karov Adonai, "The Lord is near") from Psalm 145:18 appears prominently in the Ashrei prayer and related liturgical contexts across Sefardic, Ashkenazic, and Edot HaMizrach traditions. The phrase appears in its full psalm context—קָרוֹב יְהֹוָה לְכָל קֹרְאָיו לְכָל אֲשֶׁר יִקְרָאֻהוּ בֶאֱמֶת ("The Lord is near to all who call upon Him, to all who call upon Him in truth")—as part of the Ashrei recitation in Pesukei D'Zimrah during Shacharit and Mincha services, as well as in specialized contexts such as Av HaRachamim (Sefardic), Hodu (Ashkenazic and Edot HaMizrach), and Yom Kippur observances. The phrase's liturgical significance emphasizes God's accessibility and responsiveness to sincere prayer, making it a recurring motif in morning and afternoon services, particularly on Shabbat, Rosh Chodesh, and the High Holidays.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Ashreinu Ma Tov (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Customs of Yom Kippur Night (Ashkenaz)
+  5. Hodu (Ashkenaz)
+  6. Hodu (Edot_HaMizrach)
+  7. Korbanot (Sefard)
+  8. Mincha (Sefard)
+  9. Pesukei D'Zimrah (Sefard)
+  10. Psalms for Shabbat (Edot_HaMizrach)
+  11. Reader's Repetition of the Amidah (Ashkenaz)
+  12. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat, Yom_Kippur
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 13: לַכֹּ֑ל וְ֝רַחֲמָ֗יו
+================================================================================
+Verse Range: 145:9
+Phrase Length: 2 words
+Total Occurrences: 13
+Unique Prayer Contexts: 11
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **"טוב ה׳ לַכּל וְרַחֲמָיו עַל כָּל מַעֲשיו"** (Tov Adonai lakol v'rachamav al kol ma'asav, "The Lord is good to all, and His mercies are upon all His works") from Psalm 145:9 appears predominantly in the **Ashrei** prayer recited in both Ashkenaz and Sefard traditions across Shacharit and Mincha services on weekdays, Shabbat, Rosh Chodesh, and Yom Kippur. The phrase is embedded within the acrostic psalm that comprises Ashrei and is also incorporated into related liturgical contexts including **Pesukei D'Zimrah** (Sefard), **Av HaRachamim** (Sefard), and various **Selichot** recitations (particularly on Fast of Gedalia for Ashkenaz and Yom Kippur Katan). The liturgical text reads: "טוב ה׳ לַכּל וְרַחֲמָיו עַל כָּל מַעֲשיו" ("The Lord is good to all, and His mercies extend over all His works"), emphasizing divine benevolence and universal compassion as a central theological affirmation in daily Jewish prayer.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Chapter of Song (Sefard)
+  5. Fast of Gedalia (Ashkenaz)
+  6. Korbanot (Sefard)
+  7. Mincha (Sefard)
+  8. Pesukei D'Zimrah (Sefard)
+  9. Yizkor (Sefard)
+  10. Yom Kippur Katan (Ashkenaz)
+  11. Yom Kippur Katan (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat, Yom_Kippur
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 14: אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ
+================================================================================
+Verse Range: 145:15
+Phrase Length: 2 words
+Total Occurrences: 12
+Unique Prayer Contexts: 9
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary: אֵלֶ֣יךָ יְשַׂבְּ֑רוּ (Aleicha yesaberu, "They hope to You")
+
+The phrase אֵלֶ֣יךָ יְשַׂבְּ֑רוּ from Psalm 145:15 appears primarily in the **Barchi Nafshi** (Psalm 104) liturgical context across Ashkenaz, Sefard, and Edot HaMizrach traditions, recited on **weekdays and Shabbat** in **Shacharit and Mincha services**. The phrase also appears in the **Amidah (Sefard tradition)**, specifically in the blessing section, and in **Hodu** and **Barchu** contexts for Edot HaMizrach. Additionally, it is incorporated into the **Parashat HaChodesh** and **Parashat Sekalim** (special Torah readings for Sefard tradition). 
+
+Representative liturgical context from Barchi Nafshi: The phrase appears within the framework of praising God's providence and sustenance, as in "כל אלה אליך ישברו לתת אכלם בעתו" ("All these look to You to give them their food in due season"), emphasizing the theme of divine provision and human dependence on God's mercy across multiple prayer traditions and occasions.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Sefard)
+  2. Barchi Nafshi (Ashkenaz)
+  3. Barchi Nafshi (Edot_HaMizrach)
+  4. Barchi Nafshi (Sefard)
+  5. Barchu (Edot_HaMizrach)
+  6. Hodu (Edot_HaMizrach)
+  7. Parashat HaChodesh (Sefard)
+  8. Parashat Sekalim (Sefard)
+  9. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat, Weekday
+
+--- SERVICES ---
+  Maariv, Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 15: שִׁ֝מְךָ֗ לְעוֹלָ֥ם
+================================================================================
+Verse Range: 145:1
+Phrase Length: 2 words
+Total Occurrences: 12
+Unique Prayer Contexts: 9
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: שִׁמְךָ לְעוֹלָם (Shimcha l'olam, "Your name forever")
+
+The phrase שִׁמְךָ לְעוֹלָם from Psalm 145:1 appears primarily in the **Pesukei D'Zimrah section of Shacharit** across multiple traditions (Ashkenaz, Sefard, and Edot HaMizrach), particularly within the **Beit Yaakov** passage and related psalmic recitations. The phrase occurs in contexts such as:
+
+**Representative liturgical usage:**
+- In **Beit Yaakov** (Edot HaMizrach and Sefard): "אוֹדְךָ אֲדֹנָי אֱלֹהַי בְּכָל־לְבָבִי וַאֲכַבְּדָה שִׁמְךָ לְעוֹלָם" (*I will praise You, my Lord my God, with all my heart, and I will glorify Your name forever*) — appearing in the morning praise section recited on weekdays and Shabbat.
+- In **Hodu** (Ashkenaz and Edot HaMizrach) and **Yehi Chevod/Kevod** (Ashkenaz): The phrase reinforces the eternal glorification of God's name within the opening psalmic praises of the morning service.
+
+The phrase's recurrence across nine distinct prayer contexts reflects its theological significance in affirming perpetual divine praise, functioning as a refrain throughout the introductory hymnic sections of the daily Shacharit service
+
+--- PRAYER CONTEXTS ---
+  1. Beit Yaakov (Edot_HaMizrach)
+  2. Beit Yaakov (Sefard)
+  3. Hodu (Ashkenaz)
+  4. Hodu (Edot_HaMizrach)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Psalm 135 (Ashkenaz)
+  7. Psalms for Shabbat (Edot_HaMizrach)
+  8. Yehi Chevod (Ashkenaz)
+  9. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 16: שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃
+================================================================================
+Verse Range: 145:21
+Phrase Length: 4 words
+Total Occurrences: 11
+Unique Prayer Contexts: 9
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **שֵׁם קׇדְשׁוֹ לְעוֹלָם וָעֶד** (shem kadsho l'olam va'ed, "His holy name forever and ever") appears predominantly in Sefardic liturgy across nine distinct prayer contexts, with limited Ashkenazic usage. The phrase concludes Psalm 145 (Ashrei) and is recited in the Pesukei D'Zimrah section during Shacharit, as exemplified in the closing lines: **"תְּהִלַּת ה׳ יְדַבֶּר פִּי. וִיבָרֵךְ כָּל בָּשר שֵׁם קָדְשׁו לְעולָם וָעֶד"** ("The praise of the Lord my mouth shall speak, and let all flesh bless His holy name forever and ever"). It recurs in Sefardic Mincha, Korbanot, Av HaRachamim, Hakafot (on Festivals), and Yizkor services, as well as in the Fast of Gedalia (Ashkenazic tradition), appearing on Shabbat, Rosh Chodesh, and Festival occasions. The phrase's liturgical function emphasizes perpetual sanctification of God's name across multiple prayer traditions and seasonal observances.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+  2. Ashrei Uva L'Tziyon (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Fast of Gedalia (Ashkenaz)
+  5. Hakafot (Sefard)
+  6. Korbanot (Sefard)
+  7. Mincha (Sefard)
+  8. Pesukei D'Zimrah (Sefard)
+  9. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Festivals, Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 17: חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה
+================================================================================
+Verse Range: 145:8
+Phrase Length: 3 words
+Total Occurrences: 11
+Unique Prayer Contexts: 9
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary: חַנּוּן וְרַחוּם יְהֹוָה
+
+The phrase **"Chanun v'rachum Adonai"** (gracious and merciful is the Lord) appears primarily in the **Amidah across all prayer traditions** (Ashkenaz, Sefard, Edot HaMizrach) and in supplementary prayers recited on **weekdays, Shabbat, and festival occasions**. The phrase is embedded in the concluding petition of the Amidah, particularly in the blessing requesting divine compassion: *"וּמִי דוֹמֶה לָךְ מֶלֶךְ מֵמִית וּמְחַיֶּה וּמַצְמִֽיחַ יְשׁוּעָה... כִּי אֵל מֶֽלֶךְ חַנּוּן וְרַחוּם אָֽתָּה"* ("And who is like You, King who brings death and life and causes salvation to sprout... for You are a gracious and merciful King"). It also appears in **Tachanun (supplicatory prayers) for Monday and Thursday services** across Ashkenazi and Sefardic traditions, in the **Zikhronot (Remembrance) section** of the Ashkenazi High Holiday liturgy, in **Menorah Lighting blessings** (Sefard), and in the **Tikkun Leah** (Edot HaMizrach). The phrase serves as a theological anchor emphasizing divine mercy and compassion across the
+
+--- PRAYER CONTEXTS ---
+  1. Amida (Edot_HaMizrach)
+  2. Amidah (Ashkenaz)
+  3. For Monday & Thursday (Sefard)
+  4. For Monday and Thursday (Ashkenaz)
+  5. Menorah Lighting (Sefard)
+  6. Musaf (Edot_HaMizrach)
+  7. Reader's Repetition of the Amidah (Ashkenaz)
+  8. Tikkun Leah (Edot_HaMizrach)
+  9. Zikhronot (Ashkenaz)
+
+--- OCCASIONS ---
+  Chanukah, Shabbat, Weekday
+
+--- SERVICES ---
+  Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 18: אֵ֣ין חֵֽקֶר׃
+================================================================================
+Verse Range: 145:3
+Phrase Length: 2 words
+Total Occurrences: 11
+Unique Prayer Contexts: 9
+Average Confidence: 98.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **אֵין חֵקֶר** (ein cheiker, "without measure/limit") appears prominently in the Ashkenazi liturgy across multiple daily services, particularly in the blessings surrounding the Shema and in the Amidah. It is most notably found in the opening blessing of the evening service (Maariv), where it describes God's greatness: **"הָעֹשֶׂה גְדוֹלוֹת עַד אֵין חֵקֶר וְנִפְלָאוֹת עַד אֵין מִסְפָּר"** ("He who performs great deeds without measure and wonders without number"), and similarly appears in the Kedushah and Reader's Repetition of the Amidah. The phrase also occurs in Sefardi tradition within the Shema blessings and Yizkor services. Additionally, it is incorporated into special liturgical contexts including Yom Kippur observances (both evening and concluding services) and weekday Shacharit services, functioning as a theological affirmation of God's infinite power and incomprehensibility across Ashkenazi and Sefardi traditions.
+
+--- PRAYER CONTEXTS ---
+  1. Borechu (Ashkenaz)
+  2. Customs of Yom Kippur Night (Ashkenaz)
+  3. First Blessing after Shema (Ashkenaz)
+  4. Kedushah (Ashkenaz)
+  5. Motzei Yom Kippur (Ashkenaz)
+  6. Reader's Repetition of the Amidah (Ashkenaz)
+  7. Shema & Blessings (Sefard)
+  8. The Shema (Sefard)
+  9. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 19: גָּ֘ד֤וֹל יְהֹוָ֣ה
+================================================================================
+Verse Range: 145:3
+Phrase Length: 2 words
+Total Occurrences: 10
+Unique Prayer Contexts: 9
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary: גָּדוֹל יְהֹוָה (Gadol Adonai, "Great is the Lord")
+
+The phrase **גָּדוֹל יְהֹוָה** from Psalm 145:3 appears primarily in **Kabbalat Shabbat** (Friday evening service) across Sefard and Edot HaMizrach traditions, as well as in **Shabbat morning services** (Shacharit and Musaf). The phrase occurs within the extended Psalm 95 recitation and related psalm sequences that constitute the opening liturgical framework for welcoming Shabbat. Representative context: **כִּי אֵל גָּדוֹל יְהֹוָה וּמֶלֶךְ גָּדוֹל עַל כָּל אֱלֹהִים** ("For God is great, the Lord, and a great King over all gods")—this declaration of divine greatness appears in the Psalms of praise recited during Kabbalat Shabbat to establish the sanctity of the day. The phrase also appears in **Torah Reading contexts** (Shabbat morning and Parashat Zachor in Sefard tradition) and in **Grace After Meals** (Edot HaMizrach), reflecting its use as a liturgical affirmation of God's greatness across multiple Shabbat occasions and prayer traditions.
+
+--- PRAYER CONTEXTS ---
+  1. Kabbalat Shabbat (Edot_HaMizrach)
+  2. Kabbalat Shabbat (Sefard)
+  3. Parashat Zachor (Sefard)
+  4. Prayer After the Meal (Edot_HaMizrach)
+  5. Psalm 95 (Ashkenaz)
+  6. Psalms for Shabbat (Edot_HaMizrach)
+  7. Shabbat Torah Reading (Sefard)
+  8. Song of the Day (Ashkenaz)
+  9. Torah Reading for Shabbat Mincha & Monday, Thursday (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 20: וּגְדֻלָּתְךָ֥ אֲסַפְּרֶֽנָּה׃ זֵ֣כֶר [+ 2 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:6-14
+Phrase Length: 3 words
+Total Occurrences: 9
+Unique Prayer Contexts: 1
+Average Confidence: 99.83%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **וּגְדֻלָּתְךָ אֲסַפְּרֶנָּה** (u'g'dulat'cha asap'renah, "Your greatness I will declare") appears in the **Ashrei** (Psalm 145) recitation within **Pesukei D'Zimrah** (Verses of Song), recited during both **Shacharit and Mincha services on Shabbat** in **Ashkenazi tradition**. The phrase appears in its original biblical context as part of the complete psalm: "וֶעֱזוּז נורְאתֶיךָ יאמֵרוּ. וּגְדֻלָּתְךָ אֲסַפְּרֶנָּה" ("The might of Your awesome acts they will declare, and Your greatness I will declare"), functioning as a declaration of God's majesty and power within the morning and afternoon liturgical praise. This phrase is integral to the acrostic psalm's role as a central hymn of praise preceding the Amidah in the daily service structure.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 21: סוֹמֵ֣ךְ יְ֭הֹוָה
+================================================================================
+Verse Range: 145:14
+Phrase Length: 2 words
+Total Occurrences: 9
+Unique Prayer Contexts: 9
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **סוֹמֵךְ יְהֹוָה** (Somekh Adonai, "The Lord supports/sustains") from Psalm 145:14 appears predominantly in Sefardic liturgy across nine distinct prayer contexts, with a single occurrence in the Ashkenazi Reader's Repetition of the Amidah. The phrase is embedded within Psalm 145 itself, which is recited as part of **Pesukei D'Zimrah** (Introductory Psalms) in Shacharit and appears in supplementary contexts including **Ashrei** (Ashrei Uva L'Tziyon), **Av HaRachamim**, and **Korbanot**. The liturgical context reads: *"סוֹמֵךְ יְהֹוָה לְכָל הַנֹּפְלִים וְזוֹקֵף לְכָל הַכְּפוּפִים"* ("The Lord sustains all who fall and raises up all who are bent down"), emphasizing divine compassion and support—a theme particularly resonant on **Shabbat and Rosh Chodesh** when these extended prayer sections are recited. The phrase's liturgical significance lies in its theological affirmation of God's providential care, making it a cornerstone of Sefardic morning prayer traditions.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Ashreinu Ma Tov (Sefard)
+  3. Av HaRachamim (Sefard)
+  4. Chapter of Song (Sefard)
+  5. Korbanot (Sefard)
+  6. Mincha (Sefard)
+  7. Pesukei D'Zimrah (Sefard)
+  8. Reader's Repetition of the Amidah (Ashkenaz)
+  9. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 22: לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣
+================================================================================
+Verse Range: 145:1
+Phrase Length: 2 words
+Total Occurrences: 9
+Unique Prayer Contexts: 6
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣** (l'David aromimcha, "A Psalm of David: I will exalt You") from Psalm 145:1 appears across multiple prayer contexts in Shacharit services, primarily within the Pesukei D'Zimrah section and related introductory psalms. It occurs nine times across six distinct liturgical settings: as an Introductory Psalm in Ashkenaz tradition, during Menorah Lighting in both Edot HaMizrach and Sefard traditions, in the Mizmor Shir (Ashkenaz), within Pesukei D'Zimrah (Sefard), and as the Song of the Day (Edot HaMizrach). The phrase is recited on Weekdays, Shabbat, and Chanukah, with the full Psalm 30 (which begins with this phrase) serving as a liturgical anchor—as explained in the Eitz Chaim commentary, this psalm was chosen to precede the Pesukei D'Zimrah because it reveals David's righteousness and vindication, establishing a thematic foundation for the subsequent psalms of praise that constitute the morning's song service.
+
+--- PRAYER CONTEXTS ---
+  1. Introductory Psalm (Ashkenaz)
+  2. Menorah Lighting (Edot_HaMizrach)
+  3. Menorah Lighting (Sefard)
+  4. Mizmor Shir (Ashkenaz)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Song of the Day (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Chanukah, Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 23: יוֹד֣וּךָ יְ֭הֹוָה
+================================================================================
+Verse Range: 145:10
+Phrase Length: 2 words
+Total Occurrences: 8
+Unique Prayer Contexts: 8
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **יוֹדוּךָ יְהֹוָה** (Yoduka Adonai, "They shall praise You, Lord") from Psalm 145:10 appears predominantly in Sefardic liturgy across eight distinct prayer contexts, with a single occurrence in the Ashkenazi Reader's Repetition of the Amidah. The phrase is embedded within the complete recitation of Psalm 145 (Ashrei), which reads: "יוֹדוּךָ יְהֹוָה כָּל מַעֲשֶׂיךָ וַחֲסִידֶיךָ יְבָרֲכוּכָה" ("All Your works shall praise You, Lord, and Your pious ones shall bless You"), appearing in Pesukei D'Zimrah, Ashrei Uva L'Tziyon, and other morning and afternoon services. It is recited on Shabbat and Rosh Chodesh in both Shacharit and Mincha services, serving as a central element of praise and thanksgiving in the liturgical framework of Jewish prayer across Ashkenazi and Sefardic traditions.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Chapter of Song (Sefard)
+  4. Korbanot (Sefard)
+  5. Mincha (Sefard)
+  6. Pesukei D'Zimrah (Sefard)
+  7. Reader's Repetition of the Amidah (Ashkenaz)
+  8. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 24: חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם
+================================================================================
+Verse Range: 145:8
+Phrase Length: 5 words
+Total Occurrences: 7
+Unique Prayer Contexts: 7
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase "חנון ורחום יהוה ארך אפים" (Chanun v'rachum Adonai, erech appayim—"Gracious and merciful is the Lord, slow to anger") from Psalm 145:8 appears prominently in Sefardic liturgy across seven distinct prayer contexts, primarily within Pesukei D'Zimrah (Verses of Praise) and the Ashrei prayer recited in both Shacharit and Mincha services on Shabbat and Rosh Chodesh. The phrase appears in its full biblical context within the acrostic psalm recitation: "חנון ורחום יהוה ארך אפים וגדל חסד" ("Gracious and merciful is the Lord, slow to anger and abounding in kindness"), functioning as a central theological affirmation of God's merciful attributes in the morning and afternoon services. This phrase also appears in supplementary contexts including Av HaRachamim (Father of Mercies), Korbanot (Sacrificial passages), and Yizkor (Memorial prayers), reinforcing the theme of divine compassion throughout the Sefardic liturgical cycle.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Korbanot (Sefard)
+  4. Mincha (Sefard)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Shabbat Torah Reading (Sefard)
+  7. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 25: שׁוֹמֵ֣ר יְ֭הֹוָה
+================================================================================
+Verse Range: 145:20
+Phrase Length: 2 words
+Total Occurrences: 7
+Unique Prayer Contexts: 7
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **שׁוֹמֵר יְהֹוָה** (Shomer Adonai, "The Lord preserves/guards") from Psalm 145:20 appears predominantly in Sefardic liturgy across seven distinct prayer contexts, including Pesukei D'Zimrah, Ashrei U'Va L'Tziyon, and various additional prayers (Av HaRachamim, Korbanot, Mincha), as well as in the Ashkenazic Reader's Repetition of the Amidah. The phrase appears in its full Psalm 145 context: **"שׁוֹמֵר יְהֹוָה אֶת כָּל אֹהֲבָיו וְאֵת כָּל הָרְשָׁעִים יַשְׁמִיד"** ("The Lord preserves all who love Him, but all the wicked He will destroy"), functioning as a declaration of divine protection and justice recited on Shabbat and Rosh Chodesh in both Shacharit and Mincha services. This verse serves as a concluding affirmation within the extended Psalm 145 recitation that forms the centerpiece of Pesukei D'Zimrah and related liturgical sections.
+
+--- PRAYER CONTEXTS ---
+  1. Ashrei Uva L'Tziyon (Sefard)
+  2. Av HaRachamim (Sefard)
+  3. Korbanot (Sefard)
+  4. Mincha (Sefard)
+  5. Pesukei D'Zimrah (Sefard)
+  6. Reader's Repetition of the Amidah (Ashkenaz)
+  7. Yizkor (Sefard)
+
+--- OCCASIONS ---
+  Rosh_Chodesh, Shabbat
+
+--- SERVICES ---
+  Mincha, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Sefard
+
+================================================================================
+PHRASE 26: דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ [+ 4 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:1-12
+Phrase Length: 3 words
+Total Occurrences: 5
+Unique Prayer Contexts: 1
+Average Confidence: 99.20%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary
+
+The phrase **דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ** (dor l'dor yeshabbach ma'asecha, "generation to generation shall praise Your works") appears exclusively in the **Reader's Repetition of the Amidah during Shacharit in the Ashkenazi tradition**. 
+
+In this context, the phrase is incorporated into the congregational response within the extended piyyutim (liturgical poems) of the Reader's Repetition, specifically in the line: **"קהל: דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ"** ("Congregation: Generation to generation shall praise Your works"). This represents a direct quotation from Psalm 145:4, integrated into the responsive liturgical structure where the congregation affirms God's eternal praise through the generations, functioning as a congregational acclamation within the extended Kedushah framework of the Reader's Repetition.
+
+--- PRAYER CONTEXTS ---
+  1. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 27: תְּהִלַּ֥ת יְהֹוָ֗ה
+================================================================================
+Verse Range: 145:21
+Phrase Length: 2 words
+Total Occurrences: 5
+Unique Prayer Contexts: 5
+Average Confidence: 99.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: תְּהִלַּת יְהֹוָה (Tehillat Adonai)
+
+The phrase **תְּהִלַּת יְהֹוָה** (Tehillat Adonai, "the praise of the Lord") from Psalm 145:21 appears in five distinct liturgical contexts across Ashkenaz, Sefard, and Edot HaMizrach traditions, primarily in post-meal blessings and processional settings.
+
+**Primary occurrences:**
+
+1. **Birkat Hamazon (Edot HaMizrach)**: The phrase appears in the concluding section of Grace After Meals, specifically in the formula: *"תְּהִלַּת יְהֹוָה יְדַבֶּר פִּי"* ("The praise of the Lord my mouth shall speak"), drawn directly from Psalm 145:21, functioning as a transition to the final doxological statements.
+
+2. **Post-Meal Blessing (Edot HaMizrach)**: Appears in supplementary blessings recited after Birkat Hamazon, reinforcing the theme of continuous praise.
+
+3. **Hakafot (Sefard)**: Incorporated into the processional prayers during Simchat Torah celebrations, where it emphasizes communal praise and rejoicing.
+
+4. **Reader's Repetition of the Amidah (Ashkenaz)**: Appears in the concluding sections of the hazzan's repetition during Shacharit, linking the statutory prayer to scriptural praise.
+
+5. **Sanctification of the Day (Ashkenaz)**: Used in Kiddush
+
+--- PRAYER CONTEXTS ---
+  1. Birkat Hamazon (Edot_HaMizrach)
+  2. Hakafot (Sefard)
+  3. Post Meal Blessing (Edot_HaMizrach)
+  4. Reader's Repetition of the Amidah (Ashkenaz)
+  5. Sanctification of the Day (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 28: פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:16
+Phrase Length: 2 words
+Total Occurrences: 4
+Unique Prayer Contexts: 2
+Average Confidence: 99.75%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Summary: פּוֹתֵחַ אֶת־יָדֶךָ (Potéach et-yadécha, "You open Your hand")
+
+The phrase "פּוֹתֵחַ אֶת־יָדֶךָ וּמַשְׂבִּיעַ לְכָל־חַי רָצוֹן" (Psalm 145:16) appears in the Edot HaMizrach tradition in two distinct liturgical contexts:
+
+**1. Post-Meal Blessing (Birkat HaMazon):**
+In the third blessing of the Grace After Meals, the phrase is cited as scriptural support for God's providence: "כִּי הוּא אֵל זָן וּמְפַרְנֵס לַכֹּל וְשׁוּלְחָנוֹ עָרוּךְ לַכֹּל... כָּאָמוּר. פּוֹתֵחַ אֶת־יָדֶךָ וּמַשְׂבִּיעַ לְכָל־חַי רָצוֹן" ("For He is God who sustains and provides for all, and His table is set for all... as it is said: 'You open Your hand and satisfy every living thing with favor'"). This blessing emphasizes divine sustenance and benevolence.
+
+**2. Mourning Liturgy (Avelut):**
+The phrase appears within the consolation prayers recited during the seven days of mour
+
+--- PRAYER CONTEXTS ---
+  1. Mourning (Edot_HaMizrach)
+  2. Post Meal Blessing (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 29: וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם וָעֶֽד׃ [+ 1 overlapping phrase(s)]
+================================================================================
+Verse Range: 145:21
+Phrase Length: 6 words
+Total Occurrences: 4
+Unique Prayer Contexts: 2
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary
+
+The phrase **וִיבָרֵךְ כׇּל־בָּשָׂר שֵׁם קׇדְשׁוֹ לְעוֹלָם וָעֶֽד׃** ("and let all flesh bless His holy name forever and ever") from Psalm 145:21 appears in the **Birkat Hamazon (Grace After Meals)** according to the **Edot HaMizrach** (Eastern/Sephardic) tradition. 
+
+In the representative liturgical text, the phrase appears near the conclusion of the meal blessings, specifically within the recitation of Psalm 145 that follows the formal blessings: **"תְּהִלַּת יְהֹוָה יְדַבֶּר פִּי, וִיבָרֵךְ כָּל־בָּשָׂר שֵׁם קָדְשׁוֹ לְעוֹלָם וָעֶד"** ("The praise of the Lord shall my mouth speak, and let all flesh bless His holy name forever and ever"). This occurs after the four formal blessings of Birkat Hamazon and serves as a concluding liturgical affirmation of universal praise to God. The phrase reinforces the eschatological theme of universal acknowledgment of God's holiness that characterizes the conclusion of the Grace After Meals in this tradition.
+
+--- PRAYER CONTEXTS ---
+  1. Birkat Hamazon (Edot_HaMizrach)
+  2. Post Meal Blessing (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 30: דּ֣וֹר לְ֭דוֹר
+================================================================================
+Verse Range: 145:4
+Phrase Length: 2 words
+Total Occurrences: 3
+Unique Prayer Contexts: 3
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+# Liturgical Usage Summary: דּוֹר לְדוֹר (dor l'dor, "generation to generation")
+
+The phrase דּוֹר לְדוֹר appears in the Mincha service across three distinct liturgical contexts: in the Selichot (penitential prayers) recited on the Fast of Gedalya according to Edot HaMizrach tradition, in the Parashat Zachor readings according to Sefard custom, and in the Reader's Repetition of the Amidah according to Ashkenaz practice.
+
+**Representative liturgical contexts:**
+
+1. **Fast of Gedalya (Edot HaMizrach):** שֻׁדַּדְנוּ מִדּוֹר לְדוֹר וּמִקֵּץ לְקֵץ ("We have been plundered from generation to generation and from end to end"), appearing within the acrostic Selichot that lament the destruction and exile of the Jewish people, emphasizing the continuity of suffering across successive generations.
+
+2. **Parashat Zachor (Sefard):** The phrase appears in commemorative passages recalling the command to remember Amalek's attack, connecting the obligation across generations.
+
+3. **Reader's Repetition of the Amidah (Ashkenaz):** The phrase functions within devotional insertions that emphasize God's mercy extending across generations, reinforcing themes of divine compassion and historical continuity in the central prayer.
+
+--- PRAYER CONTEXTS ---
+  1. Fast of Gedalya (Edot_HaMizrach)
+  2. Parashat Zachor (Sefard)
+  3. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- SERVICES ---
+  Mincha
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 31: וּמְהֻלָּ֣ל מְאֹ֑ד
+================================================================================
+Verse Range: 145:3
+Phrase Length: 2 words
+Total Occurrences: 2
+Unique Prayer Contexts: 2
+Average Confidence: 98.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'וּמְהֻלָּ֣ל מְאֹ֑ד' appears in 2 prayer context(s):. Hodu (Ashkenaz), Pitum Haketoret (Ashkenaz). Occasions: Shabbat. Services: Musaf, Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Hodu (Ashkenaz)
+  2. Pitum Haketoret (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 32: כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ
+================================================================================
+Verse Range: 145:10
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ' appears in 1 prayer context(s):. Berakhah after the Hallel (Ashkenaz). Occasions: Rosh_Chodesh.
+
+--- PRAYER CONTEXTS ---
+  1. Berakhah after the Hallel (Ashkenaz)
+
+--- OCCASIONS ---
+  Rosh_Chodesh
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 33: בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃
+================================================================================
+Verse Range: 145:17
+Phrase Length: 3 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 100.00%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃' appears in 1 prayer context(s):. Hosha'ana Rabba (Ashkenaz). Occasions: Sukkot.
+
+--- PRAYER CONTEXTS ---
+  1. Hosha'ana Rabba (Ashkenaz)
+
+--- OCCASIONS ---
+  Sukkot
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 34: הֲ֭דַר כְּב֣וֹד
+================================================================================
+Verse Range: 145:5
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הֲ֭דַר כְּב֣וֹד' appears in 1 prayer context(s):. Avinu Malkenu (Edot_HaMizrach). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Avinu Malkenu (Edot_HaMizrach)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 35: אֲרוֹמִמְךָ֣ אֱלוֹהַ֣י
+================================================================================
+Verse Range: 145:1
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'אֲרוֹמִמְךָ֣ אֱלוֹהַ֣י' appears in 1 prayer context(s):. Pesukei D'Zimrah (Sefard). Occasions: Shabbat. Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Pesukei D'Zimrah (Sefard)
+
+--- OCCASIONS ---
+  Shabbat
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+
+################################################################################
+# PSALM 150
+################################################################################
+
+
+SUMMARY STATISTICS FOR PSALM 150
+================================================================================
+Total distinct phrases found: 8
+Total occurrences across all prayers: 136
+Average occurrences per phrase: 17.0
+
+
+================================================================================
+PHRASE 1: [Full Psalm 150]
+================================================================================
+Verse Range: 150:1-6
+Phrase Length: 0 words
+Total Occurrences: 123
+Unique Prayer Contexts: 16
+Average Confidence: 100.00%
+Match Types: exact_verse
+
+--- LITURGICAL SUMMARY ---
+Psalm 150 is recited in its entirety across eleven liturgical contexts including Ashrei, Avinu Malkenu, and Birkat HaLevana, primarily during Shacharit and Maariv services on Shabbat and weekdays across Ashkenazi, Sefardic, and Mizrachi traditions. Verses 2-4 and 6 (67% of the psalm) appear in partial form within the Amidah, Pesukei D'Zimrah, and Kiddush Levanah, extending its liturgical presence to Mincha and Musaf services as well as Yom Kippur observance. The psalm's dual usage—complete and fragmented—reflects its central role in Jewish praise liturgy, with full recitations emphasizing communal worship and partial verses integrated into core benedictions.
+
+--- PRAYER CONTEXTS ---
+  1. Amidah (Ashkenaz)
+  2. Ashrei (Ashkenaz)
+  3. Avinu Malkenu (Edot_HaMizrach)
+  4. Birkat HaLevana (Ashkenaz)
+  5. Blessing of the Moon (Edot_HaMizrach)
+  6. Hodu (Sefard)
+  7. Kiddush Levanah (Sefard)
+  8. Motzei Yom Kippur (Ashkenaz)
+  9. Musaf (Edot_HaMizrach)
+  10. Pesukei D'Zimra (Edot_HaMizrach)
+  11. Pesukei D'Zimrah (Sefard)
+  12. Pesukei Dezimrah (Edot_HaMizrach)
+  13. Psalm 150 (Ashkenaz)
+  14. Shofarot (Ashkenaz)
+  15. Vayechulu (Edot_HaMizrach)
+  16. Yehi Kevod (Ashkenaz)
+
+--- OCCASIONS ---
+  Shabbat, Weekday, Yom_Kippur
+
+--- SERVICES ---
+  Maariv, Mincha, Musaf, Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 2: כֹּ֣ל הַ֭נְּשָׁמָה
+================================================================================
+Verse Range: 150:6
+Phrase Length: 2 words
+Total Occurrences: 4
+Unique Prayer Contexts: 4
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **כֹּל הַנְּשָׁמָה** (kol ha-neshamah, "every soul/all that has breath") from Psalm 150:6 appears in the concluding sections of Pesukei D'Zimrah (Verses of Song) during Shacharit services on both weekdays and Shabbat across Ashkenaz, Sefard, and Edot HaMizrach traditions. The phrase is incorporated into the Closing Verses (Ashkenazi custom) and the Shema and its Blessings sections (Sefard and Edot HaMizrach), where it functions as part of the liturgical conclusion to the morning praise service. The Talmud (Berakhot 10a) explains that these final verses from Psalms are recited to complete the Pesukei D'Zimrah, as they represent the concluding passages of the Book of Psalms, with the full verse reading: "כֹּל הַנְּשָׁמָה תְּהַלֵּל יָהּ הַלְלוּיָהּ" ("Let every soul praise the Lord, Hallelujah"), serving as a universal call to praise that transitions the worshipper from the opening hymns into the Shema recitation.
+
+--- PRAYER CONTEXTS ---
+  1. Closing Verses (Ashkenaz)
+  2. Shema & Blessings (Sefard)
+  3. Shema and its Blessings (Edot_HaMizrach)
+  4. The Shema (Edot_HaMizrach)
+
+--- OCCASIONS ---
+  Shabbat, Weekday
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz, Edot_HaMizrach, Sefard
+
+================================================================================
+PHRASE 3: הַֽ֝לְל֗וּהוּ בְּֽצִלְצְלֵ֥י תְרוּעָֽה׃ [+ 2 overlapping phrase(s)]
+================================================================================
+Verse Range: 150:5-6
+Phrase Length: 2 words
+Total Occurrences: 3
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase **"הַֽ֝לְל֗וּהוּ בְּֽצִלְצְלֵ֥י תְרוּעָֽה"** (hallelu hu b'tziltzlei t'ruah, "praise Him with loud cymbals") from Psalm 150:5 appears exclusively in the **Chapter of Song (Prek Shirah)** within Sefardic tradition. This liturgical composition, recited as a devotional text emphasizing the praises of creation, incorporates the final verses of Psalms 150 as part of its concluding section where various elements of creation voice their hymns of praise. The phrase appears three times within this single prayer context, functioning as part of the eschatological vision wherein all creation participates in divine praise, particularly in the framework of the Sefardic rite's mystical and homiletical elaboration of cosmic harmony.
+
+--- PRAYER CONTEXTS ---
+  1. Chapter of Song (Sefard)
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 4: הַ֭לְלוּהוּ בְּתֵ֣קַע שׁוֹפָ֑ר
+================================================================================
+Verse Range: 150:3
+Phrase Length: 3 words
+Total Occurrences: 2
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'הַ֭לְלוּהוּ בְּתֵ֣קַע שׁוֹפָ֑ר' appears in 1 prayer context(s):. Reader's Repetition (Ashkenaz). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Reader's Repetition (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 5: כֹּ֣ל הַ֭נְּשָׁמָה תְּהַלֵּ֥ל יָ֗הּ
+================================================================================
+Verse Range: 150:6
+Phrase Length: 4 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'כֹּ֣ל הַ֭נְּשָׁמָה תְּהַלֵּ֥ל יָ֗הּ' appears in 1 prayer context(s):. Kedushah (Ashkenaz). Services: Shacharit.
+
+--- PRAYER CONTEXTS ---
+  1. Kedushah (Ashkenaz)
+
+--- SERVICES ---
+  Shacharit
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+================================================================================
+PHRASE 6: תְּהַלֵּ֥ל יָ֗הּ
+================================================================================
+Verse Range: 150:6
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'תְּהַלֵּ֥ל יָ֗הּ' appears in 1 prayer context(s):. Learning of the Day (Edot_HaMizrach).
+
+--- PRAYER CONTEXTS ---
+  1. Learning of the Day (Edot_HaMizrach)
+
+--- TRADITIONS (NUSACH) ---
+  Edot_HaMizrach
+
+================================================================================
+PHRASE 7: יָ֗הּ הַֽלְלוּ־יָֽהּ׃
+================================================================================
+Verse Range: 150:6
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'יָ֗הּ הַֽלְלוּ־יָֽהּ׃' appears in 1 prayer context(s):. Maggid (Sefard). Occasions: Pesach.
+
+--- PRAYER CONTEXTS ---
+  1. Maggid (Sefard)
+
+--- OCCASIONS ---
+  Pesach
+
+--- TRADITIONS (NUSACH) ---
+  Sefard
+
+================================================================================
+PHRASE 8: בִּרְקִ֥יעַ עֻזּֽוֹ׃
+================================================================================
+Verse Range: 150:1
+Phrase Length: 2 words
+Total Occurrences: 1
+Unique Prayer Contexts: 1
+Average Confidence: 99.50%
+Match Types: phrase_match
+
+--- LITURGICAL SUMMARY ---
+The phrase 'בִּרְקִ֥יעַ עֻזּֽוֹ׃' appears in 1 prayer context(s):. Reader's Repetition of the Amidah (Ashkenaz). Occasions: Yom_Kippur. Services: Musaf.
+
+--- PRAYER CONTEXTS ---
+  1. Reader's Repetition of the Amidah (Ashkenaz)
+
+--- OCCASIONS ---
+  Yom_Kippur
+
+--- SERVICES ---
+  Musaf
+
+--- TRADITIONS (NUSACH) ---
+  Ashkenaz
+
+
+================================================================================
+PROCESSING COMPLETE
+================================================================================
+
+Total psalms processed: 6
+Output file: output\liturgy_results2.txt
+
+Note: Filtered phrases (marked with ⚠️ VALIDATION WARNING) were identified by the
+LLM as potentially being from other psalms or non-psalm content and are included
+in this verbose output for review.
+
