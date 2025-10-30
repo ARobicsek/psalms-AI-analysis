@@ -85,10 +85,23 @@ class LiturgyIndexer:
         # Filter to searchable only
         searchable = [p for p in phrases if p['is_searchable']]
 
+        # Apply additional quality filters
+        before_filtering = len(searchable)
+
+        # Filter 1: Remove single-word phrases (Issue 1)
+        searchable = [p for p in searchable if self._count_meaningful_hebrew_words(p['phrase']) >= 2]
+
+        # Filter 2: Remove cross-verse phrases with verse-end marker (Issue 2)
+        searchable = [p for p in searchable if '\u05C3' not in p['phrase']]  # sof pasuq
+
         if self.verbose:
             print(f"Cached phrases: {len(phrases)}")
-            print(f"Searchable phrases: {len(searchable)} ({len(searchable)/len(phrases)*100:.1f}%)")
-            print(f"Filtering out {len(phrases) - len(searchable)} low-distinctiveness phrases\n")
+            print(f"Searchable phrases (before filters): {before_filtering} ({before_filtering/len(phrases)*100:.1f}%)")
+            filtered_count = before_filtering - len(searchable)
+            if filtered_count > 0:
+                print(f"Filtered out {filtered_count} phrases (single-word or cross-verse)")
+            print(f"Final searchable phrases: {len(searchable)}")
+            print(f"Filtering out {len(phrases) - len(searchable)} total phrases\n")
 
         # Also index full verses (exact quotations)
         full_verses = self._get_full_verses(psalm_chapter)
@@ -110,7 +123,7 @@ class LiturgyIndexer:
             if self.verbose:
                 print(f"[{i}/{len(searchable)}] {phrase_text}")
 
-            matches = self._search_liturgy(
+            matches = self._search_consonantal(
                 phrase_hebrew=phrase_data['phrase'],
                 psalm_chapter=psalm_chapter,
                 psalm_verse_start=phrase_data.get('verse_start'),
@@ -229,18 +242,84 @@ class LiturgyIndexer:
     ) -> List[Dict]:
         """
         Search for a Psalms phrase in all liturgical texts.
-
-        Uses consonantal normalization only (robust across vocalization traditions).
-        Returns list of matches with metadata.
+        This is the main search function that now orchestrates the corrected matching logic.
         """
-        matches = self._search_consonantal(
-            phrase_hebrew=phrase_hebrew,
-            psalm_chapter=psalm_chapter,
-            psalm_verse_start=psalm_verse_start,
-            psalm_verse_end=psalm_verse_end,
-            distinctiveness_score=distinctiveness_score
-        )
+        conn = sqlite3.connect(self.liturgy_db)
+        cursor = conn.cursor()
 
+        cursor.execute("""
+            SELECT prayer_id, hebrew_text
+            FROM prayers
+            WHERE hebrew_text IS NOT NULL AND hebrew_text != ''
+        """)
+        
+        all_prayers = cursor.fetchall()
+        conn.close()
+
+        matches = []
+
+        for prayer_id, hebrew_text in all_prayers:
+            found_occurrences = self._find_all_occurrences(hebrew_text, phrase_hebrew)
+
+            if not found_occurrences:
+                continue
+
+            prayer_words = hebrew_text.split()
+            phrase_word_count = len(phrase_hebrew.split())
+            word_start_chars = [m.start() for m in re.finditer(r'\S+', hebrew_text)]
+
+            for liturgy_phrase, start_word_index in found_occurrences:
+                match_type = self._determine_match_type(
+                    phrase_hebrew=phrase_hebrew,
+                    psalm_chapter=psalm_chapter,
+                    verse_start=psalm_verse_start,
+                    verse_end=psalm_verse_end
+                )
+
+                if match_type == 'phrase_match':
+                    if start_word_index < len(word_start_chars):
+                        char_start_index = word_start_chars[start_word_index]
+                        context_start = max(0, char_start_index - 500)
+                        context_end = min(len(hebrew_text), char_start_index + len(liturgy_phrase) + 500)
+                        context = hebrew_text[context_start:context_end]
+                    else:
+                        # Fallback for safety if word index is out of bounds
+                        context = self._extract_context_from_words(
+                            prayer_words,
+                            start_word_index,
+                            phrase_word_count
+                        )
+                else:  # exact_verse
+                    context = self._extract_context_from_words(
+                        prayer_words,
+                        start_word_index,
+                        phrase_word_count
+                    )
+
+                confidence = self._calculate_confidence(
+                    distinctiveness_score=distinctiveness_score,
+                    match_type=match_type
+                )
+
+                # Use _full_normalize to handle maqqef correctly (replace BEFORE stripping vowels)
+                normalized_phrase = self._full_normalize(phrase_hebrew)
+
+                matches.append({
+                    'psalm_chapter': psalm_chapter,
+                    'psalm_verse_start': psalm_verse_start,
+                    'psalm_verse_end': psalm_verse_end,
+                    'psalm_phrase_hebrew': phrase_hebrew,
+                    'psalm_phrase_normalized': normalized_phrase,
+                    'phrase_length': phrase_word_count,
+                    'prayer_id': prayer_id,
+                    'liturgy_phrase_hebrew': liturgy_phrase,
+                    'liturgy_context': context,
+                    'match_type': match_type,
+                    'normalization_level': 2,
+                    'confidence': confidence,
+                    'distinctiveness_score': distinctiveness_score
+                })
+        
         return matches
 
     def _search_consonantal(
@@ -253,11 +332,8 @@ class LiturgyIndexer:
     ) -> List[Dict]:
         """Search using consonantal normalization."""
 
-        # Normalize to consonants only
-        normalized_phrase = normalize_for_search(phrase_hebrew, level='consonantal')
-
-        # Further normalize (remove punctuation, maqqef, etc.)
-        normalized_phrase = self._normalize_text(normalized_phrase)
+        # Full normalization (maqqef->space, then consonantal, then punctuation)
+        normalized_phrase = self._full_normalize(phrase_hebrew)
 
         conn = sqlite3.connect(self.liturgy_db)
         cursor = conn.cursor()
@@ -280,9 +356,8 @@ class LiturgyIndexer:
         matches = []
 
         for prayer_id, hebrew_text, sefaria_ref, nusach, occasion, service, section, prayer_name in cursor.fetchall():
-            # Normalize liturgy text to consonantal
-            normalized_liturgy = normalize_for_search(hebrew_text, level='consonantal')
-            normalized_liturgy = self._normalize_text(normalized_liturgy)
+            # Full normalization of liturgy text
+            normalized_liturgy = self._full_normalize(hebrew_text)
 
             # Search for phrase in normalized liturgy
             if normalized_phrase in normalized_liturgy:
@@ -331,14 +406,62 @@ class LiturgyIndexer:
         conn.close()
         return matches
 
+    def _full_normalize(self, text: str) -> str:
+        """
+        Complete normalization pipeline for matching.
+
+        CRITICAL: Must replace maqqef BEFORE stripping vowels, otherwise
+        maqqef-connected words become joined (עלמי instead of על מי).
+
+        Order:
+        1. Normalize divine name abbreviations (ה' → יהוה)
+        2. Replace maqqef with space (BEFORE vowel stripping)
+        3. Strip vowels/cantillation (consonantal)
+        4. Remove other punctuation
+        5. Normalize whitespace
+
+        Args:
+            text: Hebrew text with diacritics
+
+        Returns:
+            Normalized consonantal text
+        """
+        if not text:
+            return text
+
+        # STEP 1: Normalize divine name abbreviations (BEFORE vowel stripping!)
+        # Replace ה' (hey with geresh) with the full tetragrammaton
+        # This ensures liturgical texts match canonical texts
+        text = text.replace("ה'", "יהוה")  # divine name abbreviation -> full form
+
+        # STEP 2: Replace maqqef with space (BEFORE stripping vowels!)
+        text = text.replace('\u05BE', ' ')  # maqqef -> space
+
+        # STEP 3: Strip vowels and cantillation (consonantal normalization)
+        text = normalize_for_search(text, level='consonantal')
+
+        # STEP 4: Remove remaining punctuation and markers
+        text = text.replace('\u05C0', ' ')  # paseq (|) -> space
+        text = text.replace('\u05F3', '')  # geresh
+        text = text.replace('\u05F4', '')  # gershayim
+        text = re.sub(r'[,.:;!?\-\(\)\[\]{}\"\'`]', ' ', text)
+        # Remove paragraph markers (פ and ס) when standalone
+        text = re.sub(r'\s+[פס]\s+', ' ', text)  # Surrounded by whitespace
+        text = re.sub(r'\s+[פס]$', '', text)  # At end of text
+
+        # STEP 5: Normalize whitespace
+        text = ' '.join(text.split())
+
+        return text
+
     def _normalize_text(self, text: str) -> str:
         """
-        Additional normalization for robust matching.
+        DEPRECATED: Use _full_normalize() instead.
 
-        Removes:
-        - Maqqef (Hebrew hyphen) -> converted to space
-        - Hebrew punctuation (geresh, gershayim)
-        - ASCII punctuation
+        This method is kept for backward compatibility but should not be used
+        for new code. It doesn't handle maqqef correctly because it expects
+        text to already be consonantal, but maqqef gets stripped by
+        normalize_for_search before this method can replace it with a space.
         """
         if not text:
             return text
@@ -358,6 +481,35 @@ class LiturgyIndexer:
 
         return text
 
+    def _count_meaningful_hebrew_words(self, phrase: str) -> int:
+        """
+        Count meaningful Hebrew words in a phrase.
+
+        Excludes punctuation marks, cantillation, and separators like paseq (׀).
+
+        Args:
+            phrase: Hebrew text with diacritics
+
+        Returns:
+            Number of meaningful Hebrew words (not punctuation)
+        """
+        if not phrase:
+            return 0
+
+        # Split by whitespace
+        words = phrase.split()
+
+        # Count only words that contain Hebrew letters (not just punctuation/marks)
+        hebrew_letter_pattern = re.compile(r'[\u05D0-\u05EA]')  # Hebrew letters (aleph-tav)
+        meaningful_count = 0
+
+        for word in words:
+            # Check if word contains at least one Hebrew letter
+            if hebrew_letter_pattern.search(word):
+                meaningful_count += 1
+
+        return meaningful_count
+
     def _extract_context(
         self,
         full_text: str,
@@ -369,12 +521,9 @@ class LiturgyIndexer:
         words = full_text.split()
         phrase_words = phrase.split()
 
-        # Find the phrase using consonantal normalization
-        normalized_full = normalize_for_search(full_text, level='consonantal')
-        normalized_full = self._normalize_text(normalized_full)
-
-        normalized_phrase = normalize_for_search(phrase, level='consonantal')
-        normalized_phrase = self._normalize_text(normalized_phrase)
+        # Full normalization
+        normalized_full = self._full_normalize(full_text)
+        normalized_phrase = self._full_normalize(phrase)
 
         # Find position in normalized text
         idx = normalized_full.find(normalized_phrase)
@@ -411,9 +560,8 @@ class LiturgyIndexer:
         phrase_words = phrase.split()
         phrase_length = len(phrase_words)
 
-        # Normalize the target phrase
-        normalized_phrase = normalize_for_search(phrase, level='consonantal')
-        normalized_phrase = self._normalize_text(normalized_phrase)
+        # Full normalization of target phrase
+        normalized_phrase = self._full_normalize(phrase)
 
         # Use sliding window to find the matching sequence in original text
         for i in range(len(words) - phrase_length + 1):
@@ -421,9 +569,8 @@ class LiturgyIndexer:
             window = words[i:i + phrase_length]
             window_text = ' '.join(window)
 
-            # Normalize the window
-            normalized_window = normalize_for_search(window_text, level='consonantal')
-            normalized_window = self._normalize_text(normalized_window)
+            # Full normalization of window
+            normalized_window = self._full_normalize(window_text)
 
             # Check if this window matches the phrase
             if normalized_window == normalized_phrase:
@@ -457,11 +604,8 @@ class LiturgyIndexer:
 
             if verse_text:
                 # Compare at consonantal level (most reliable)
-                verse_normalized = normalize_for_search(verse_text[0], level='consonantal')
-                phrase_normalized = normalize_for_search(phrase_hebrew, level='consonantal')
-
-                verse_normalized = self._normalize_text(verse_normalized)
-                phrase_normalized = self._normalize_text(phrase_normalized)
+                verse_normalized = self._full_normalize(verse_text[0])
+                phrase_normalized = self._full_normalize(phrase_hebrew)
 
                 if verse_normalized == phrase_normalized:
                     return 'exact_verse'
@@ -514,6 +658,7 @@ class LiturgyIndexer:
            - Match type priority (exact_verse > phrase_match)
            - Phrase length (longer is better)
            - Confidence score (higher is better)
+        3. Remove phrase matches when full verse match exists for same verse-prayer pair
         """
         if not matches:
             return []
@@ -538,10 +683,8 @@ class LiturgyIndexer:
 
             prayer_text = result[0]
 
-            # Find position using consonantal normalization
-            normalized_prayer = normalize_for_search(prayer_text, level='consonantal')
-            normalized_prayer = self._normalize_text(normalized_prayer)
-
+            # Find position using full normalization
+            normalized_prayer = self._full_normalize(prayer_text)
             normalized_phrase = match['psalm_phrase_normalized']
 
             # Find all occurrences (there might be multiple)
@@ -556,58 +699,158 @@ class LiturgyIndexer:
 
         conn.close()
 
-        # Group by prayer_id and overlapping positions
-        # Two matches overlap if they're in the same prayer and their positions overlap
-        groups = defaultdict(list)
-
+        # Group matches by prayer_id
+        by_prayer = defaultdict(list)
         for item in match_positions:
             prayer_id = item['match']['prayer_id']
-            pos = item['position']
+            by_prayer[prayer_id].append(item)
 
-            # Find existing group with overlapping position
-            found_group = None
-            for group_key in groups.keys():
-                if group_key[0] == prayer_id:
-                    # Check if this position overlaps with any match in the group
-                    for existing_item in groups[group_key]:
-                        existing_pos = existing_item['position']
-                        existing_len = existing_item['length']
-
-                        # Check for overlap
-                        if (pos <= existing_pos + existing_len and
-                            pos + item['length'] >= existing_pos):
-                            found_group = group_key
-                            break
-
-                if found_group:
-                    break
-
-            if found_group:
-                groups[found_group].append(item)
-            else:
-                # Create new group with unique key
-                new_key = (prayer_id, pos)
-                groups[new_key].append(item)
-
-        # For each group, select the best match
+        # For each prayer, merge overlapping intervals
         deduplicated = []
 
-        for group_items in groups.values():
-            if len(group_items) == 1:
-                deduplicated.append(group_items[0]['match'])
-            else:
+        for prayer_id, items in by_prayer.items():
+            # Sort by position
+            items.sort(key=lambda x: x['position'])
+
+            # Merge overlapping intervals using interval merging
+            merged_groups = []
+            current_group = [items[0]]
+
+            for item in items[1:]:
+                # Check if this item overlaps with any item in current group
+                overlaps = False
+                for existing in current_group:
+                    existing_end = existing['position'] + existing['length']
+                    item_end = item['position'] + item['length']
+
+                    # Two intervals overlap if one starts before the other ends
+                    if item['position'] <= existing_end and existing['position'] <= item_end:
+                        overlaps = True
+                        break
+
+                if overlaps:
+                    # Add to current group
+                    current_group.append(item)
+                else:
+                    # Start new group
+                    merged_groups.append(current_group)
+                    current_group = [item]
+
+            # Don't forget the last group
+            merged_groups.append(current_group)
+
+            # For each merged group, select the best match
+            for group in merged_groups:
                 # Sort by priority:
                 # 1. Match type (exact_verse > phrase_match)
                 # 2. Phrase length (longer is better)
                 # 3. Confidence (higher is better)
-                best = max(group_items, key=lambda x: (
+                best = max(group, key=lambda x: (
                     1 if x['match']['match_type'] == 'exact_verse' else 0,
                     x['match']['phrase_length'],
                     x['match']['confidence']
                 ))
                 deduplicated.append(best['match'])
 
-        return deduplicated
+        # SECOND PASS: Remove phrase matches when verse match exists for same verse-prayer pair
+        # Group by (psalm_chapter, verse_start, verse_end, prayer_id)
+        verse_groups = defaultdict(list)
+        for match in deduplicated:
+            key = (
+                match['psalm_chapter'],
+                match['psalm_verse_start'],
+                match['psalm_verse_end'],
+                match['prayer_id']
+            )
+            verse_groups[key].append(match)
+
+        # Filter out phrase matches when exact_verse exists
+        final_deduplicated = []
+        for group_matches in verse_groups.values():
+            # Check if any match is exact_verse
+            has_exact_verse = any(m['match_type'] == 'exact_verse' for m in group_matches)
+
+            if has_exact_verse:
+                # Keep only exact_verse matches
+                final_deduplicated.extend([m for m in group_matches if m['match_type'] == 'exact_verse'])
+            else:
+                # Keep all matches (no verse match exists)
+                final_deduplicated.extend(group_matches)
+
+        # THIRD PASS: Detect entire chapter appearances
+        # Group by (psalm_chapter, prayer_id)
+        chapter_prayer_groups = defaultdict(list)
+        for match in final_deduplicated:
+            key = (match['psalm_chapter'], match['prayer_id'])
+            chapter_prayer_groups[key].append(match)
+
+        # Check each group for complete chapter coverage
+        result = []
+        for (psalm_chapter, prayer_id), matches in chapter_prayer_groups.items():
+            # Get total number of verses in this Psalm
+            conn_temp = sqlite3.connect(self.tanakh_db)
+            cursor_temp = conn_temp.cursor()
+            cursor_temp.execute("""
+                SELECT COUNT(*) FROM verses
+                WHERE book_name = 'Psalms' AND chapter = ?
+            """, (psalm_chapter,))
+            total_verses = cursor_temp.fetchone()[0]
+            conn_temp.close()
+
+            # Get unique verse numbers covered by exact_verse matches
+            exact_verse_matches = [m for m in matches if m['match_type'] == 'exact_verse']
+            covered_verses = set()
+            for m in exact_verse_matches:
+                if m['psalm_verse_start'] == m['psalm_verse_end']:
+                    covered_verses.add(m['psalm_verse_start'])
+
+            # Check if all verses are covered
+            if len(covered_verses) == total_verses and total_verses > 0:
+                # All verses present! Create single entire_chapter match
+                # Find the prayer text to extract context
+                conn_temp = sqlite3.connect(self.liturgy_db)
+                cursor_temp = conn_temp.cursor()
+                cursor_temp.execute("SELECT hebrew_text FROM prayers WHERE prayer_id = ?", (prayer_id,))
+                prayer_text = cursor_temp.fetchone()[0]
+                conn_temp.close()
+
+                # Extract full chapter from prayer (first verse to last verse)
+                first_match = min(exact_verse_matches, key=lambda m: m['psalm_verse_start'])
+                last_match = max(exact_verse_matches, key=lambda m: m['psalm_verse_end'])
+
+                # Combine all verse texts to create the chapter phrase
+                conn_temp = sqlite3.connect(self.tanakh_db)
+                cursor_temp = conn_temp.cursor()
+                cursor_temp.execute("""
+                    SELECT GROUP_CONCAT(hebrew, ' ')
+                    FROM verses
+                    WHERE book_name = 'Psalms' AND chapter = ?
+                    ORDER BY verse
+                """, (psalm_chapter,))
+                chapter_text = cursor_temp.fetchone()[0]
+                conn_temp.close()
+
+                # Create entire_chapter match
+                result.append({
+                    'psalm_chapter': psalm_chapter,
+                    'psalm_verse_start': 1,
+                    'psalm_verse_end': total_verses,
+                    'psalm_phrase_hebrew': f"[Entire Psalm {psalm_chapter}]",
+                    'psalm_phrase_normalized': self._full_normalize(chapter_text),
+                    'phrase_length': total_verses,  # Number of verses
+                    'prayer_id': prayer_id,
+                    'liturgy_phrase_hebrew': f"[Entire Psalm {psalm_chapter}]",
+                    'liturgy_context': f"Complete text of Psalm {psalm_chapter} appears in this prayer",
+                    'match_type': 'entire_chapter',
+                    'normalization_level': 2,
+                    'confidence': 1.0,
+                    'distinctiveness_score': 1.0
+                })
+            else:
+                # Not a complete chapter, keep individual matches
+                result.extend(matches)
+
+        return result
 
     def _store_match(self, match: Dict):
         """Store a match in the psalms_liturgy_index table."""
