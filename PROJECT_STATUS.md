@@ -1,7 +1,7 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-10-31 (Session 50+ Complete)
-**Current Phase**: Liturgical Indexer Enhanced - Ready for Full Reindexing
+**Last Updated**: 2025-10-31 (Session 52 Complete - Reindexing in Progress)
+**Current Phase**: Liturgical Indexer Fixed - Full Reindexing Running
 
 ---
 
@@ -19,17 +19,24 @@
 - **Liturgical Context Phase 6.6**: Verse-level analysis + LLM validation filtering ✅
 - **Liturgical Context Phase 6.7**: Enhanced context (30000 chars) + verbose output script ✅
 - **Liturgical Context Phase 6.8**: Liturgical canonicalization pipeline complete ✅
-- **NEW (Session 50+)**: Liturgical indexer enhancements complete ✅
+- **Session 50+**: Liturgical indexer enhancements complete ✅
   - Two-pass ktiv male/haser matching
   - Duplicate entry elimination
   - Discontinuous verse range support
   - Near-complete psalm detection (≥90% coverage)
+- **Session 51**: Critical bug fixes complete ✅
+  - Empty context extraction fixed (35% failure → 0%)
+  - False positive entire_chapter prevention (90+ errors eliminated)
+- **Session 52**: verse_range validation & threshold fixes ✅
+  - verse_range consolidation validation (prevents false matches)
+  - Substring threshold lowered to 90% (better coverage detection)
+  - Verified inline reference removal working
 
-### Ready to Execute 🚀
-- **Full Psalm Reindexing**: All 150 Psalms ready to reindex with enhanced logic
+### In Progress 🔄
+- **Full Psalm Reindexing**: All 150 Psalms being reindexed with all fixes
   - Estimated runtime: ~2.5-3.5 hours
-  - Will dramatically improve index quality
-  - Tested successfully on Psalm 145
+  - Includes Session 50+, 51, and 52 improvements
+  - Expected: 0% empty contexts, no false positives, verified verse_range entries
 
 - **Liturgical Canonicalization**: Production pipeline ready to enrich all 1,123 prayers
   - Script: `canonicalize_liturgy_db.py`
@@ -62,7 +69,9 @@
 | **Phase 6.7**: Enhanced Context | ✅ Complete | 30000 char limits + verbose script (Session 37) |
 | **Phase 6.8**: Canonicalization Pipeline | ✅ Complete | Pipeline built & tested (Session 38) |
 | **Phase 6.9**: Indexer Enhancements | ✅ Complete | 4 major improvements (Session 50+) |
-| **Phase 7**: Full Psalm Reindexing | ⚪ Ready | Reindex all 150 psalms with enhanced logic |
+| **Phase 6.10**: Critical Bug Fixes | ✅ Complete | Empty contexts + false positives (Session 51) |
+| **Phase 6.11**: verse_range Validation | ✅ Complete | Validation + threshold fixes (Session 52) |
+| **Phase 7**: Full Psalm Reindexing | 🔄 In Progress | Reindexing all 150 psalms with all fixes |
 | **Phase 7.5**: Execute Canonicalization | ⚪ Ready | Run pipeline on all 1,123 prayers |
 
 ---
@@ -133,7 +142,7 @@ SynthesisWriter:
 
 ---
 
-## Recent Achievements (Sessions 32-37)
+## Recent Achievements (Sessions 32-52)
 
 ### Session 32: Bug Fix
 - **Problem**: Liturgy phrase extraction returning wrong phrases from same context
@@ -249,6 +258,48 @@ SynthesisWriter:
   - Verse Set: 5 (new!)
   - Verse Range: 2
 - **Usage**: Ready for full reindexing of all 150 Psalms
+
+### Session 51: Critical Liturgical Indexer Bug Fixes
+- **Problems**:
+  1. Empty liturgy_context fields (35%+ failure rate, e.g., Psalm 49: 73% empty)
+  2. False positive entire_chapter matches (90+ errors, e.g., Psalm 86 claimed instead of Psalm 25)
+- **Solutions**:
+  1. **Empty Context Fix**: Removed early return in `_extract_context()` that blocked fallback logic
+  2. **False Positive Prevention**: Added strict substring validation in BOTH entire_chapter detection passes
+- **Impact**:
+  - 100% context coverage (0% empty contexts after fix)
+  - Zero false positives (all 90+ Psalm 86 errors eliminated)
+  - Database integrity restored
+- **Code**: `src/liturgy/liturgy_indexer.py` (~150 lines modified/added)
+  - Lines 842-852: Fixed empty context early return
+  - Lines 1296-1362: Added first pass validation
+  - Lines 1564-1634: Added second pass validation
+- **Test Results**:
+  - Psalm 49: 125 empty contexts (73%) → 0 empty contexts (0%)
+  - Psalm 86: Correctly NOT in Prayer 697 (was falsely claimed)
+  - Psalm 25: Correctly detected in Prayer 697
+
+### Session 52: verse_range Validation & Threshold Fixes
+- **Problem**: Index_id 122248 (Psalm 81:2-17 in prayer 921) claimed 16/17 verses but no "LIKELY entire psalm" message
+- **Root Cause**: verse_range consolidation created ranges WITHOUT validating that all verses actually exist
+- **Solutions**:
+  1. **verse_range Validation**: Added comprehensive validation before creating verse_range entries (lines 1467-1557)
+     - Validates EVERY verse in proposed range using 90% substring logic
+     - Only creates verse_range if ALL verses pass validation
+     - Keeps individual matches if validation fails
+  2. **Substring Threshold**: Lowered from 95% to 90% (lines 1336-1337, 1611-1613)
+     - Catches edge cases like missing paragraph markers
+     - Psalm 81:17 had 94.4% match but failed 95% threshold
+  3. **Inline Reference Removal**: Verified already working (line 645)
+- **Impact**:
+  - verse_range entries now guaranteed to contain only validated verses
+  - Better coverage detection for verses with minor variations
+  - "LIKELY entire psalm" messages now appear for 90%+ coverage
+- **Code**: `src/liturgy/liturgy_indexer.py` (~90 lines added)
+- **Test Results** (Psalm 81 in Prayer 921):
+  - Before: verse_range [2-17], context "Verses 2-17 of Psalm 81 appear consecutively"
+  - After: entire_chapter [1-17], context "LIKELY complete text of Psalm 81 appears in this prayer (94% coverage; missing verses: 1)"
+  - Confidence: 0.941 ✅
 
 ### Session 38: Liturgical Canonicalization Pipeline
 - **Problem**: Liturgy.db has flat, inconsistent metadata; poor grouping in liturgical librarian
