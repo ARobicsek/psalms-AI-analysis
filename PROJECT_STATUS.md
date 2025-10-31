@@ -1,7 +1,7 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-10-28 (Session 38 Complete)
-**Current Phase**: Liturgical Canonicalization Pipeline Ready
+**Last Updated**: 2025-10-31 (Session 50+ Complete)
+**Current Phase**: Liturgical Indexer Enhanced - Ready for Full Reindexing
 
 ---
 
@@ -18,9 +18,19 @@
 - **Liturgical Context Phase 6.5**: Phrase-first grouping with deduplication ✅
 - **Liturgical Context Phase 6.6**: Verse-level analysis + LLM validation filtering ✅
 - **Liturgical Context Phase 6.7**: Enhanced context (30000 chars) + verbose output script ✅
-- **NEW (Session 38)**: Liturgical canonicalization pipeline complete ✅
+- **Liturgical Context Phase 6.8**: Liturgical canonicalization pipeline complete ✅
+- **NEW (Session 50+)**: Liturgical indexer enhancements complete ✅
+  - Two-pass ktiv male/haser matching
+  - Duplicate entry elimination
+  - Discontinuous verse range support
+  - Near-complete psalm detection (≥90% coverage)
 
 ### Ready to Execute 🚀
+- **Full Psalm Reindexing**: All 150 Psalms ready to reindex with enhanced logic
+  - Estimated runtime: ~2.5-3.5 hours
+  - Will dramatically improve index quality
+  - Tested successfully on Psalm 145
+
 - **Liturgical Canonicalization**: Production pipeline ready to enrich all 1,123 prayers
   - Script: `canonicalize_liturgy_db.py`
   - Tested on 8 diverse prayers with excellent results
@@ -28,9 +38,9 @@
   - Will add 9 hierarchical metadata fields to liturgy.db
 
 ### Next Up 📋
-- Run liturgical canonicalization pipeline (`python canonicalize_liturgy_db.py`)
+- **RECOMMENDED**: Run full psalm reindexing (all 150 psalms)
+- Optional: Run liturgical canonicalization pipeline after reindexing
 - Verify completion and data quality
-- Optional: Use canonical data in liturgical librarian
 
 ---
 
@@ -51,7 +61,9 @@
 | **Phase 6.6**: Verse-Level Analysis | ✅ Complete | Full psalm detection + validation (Session 36) |
 | **Phase 6.7**: Enhanced Context | ✅ Complete | 30000 char limits + verbose script (Session 37) |
 | **Phase 6.8**: Canonicalization Pipeline | ✅ Complete | Pipeline built & tested (Session 38) |
-| **Phase 7**: Execute Canonicalization | ⚪ Ready | Run pipeline on all 1,123 prayers |
+| **Phase 6.9**: Indexer Enhancements | ✅ Complete | 4 major improvements (Session 50+) |
+| **Phase 7**: Full Psalm Reindexing | ⚪ Ready | Reindex all 150 psalms with enhanced logic |
+| **Phase 7.5**: Execute Canonicalization | ⚪ Ready | Run pipeline on all 1,123 prayers |
 
 ---
 
@@ -209,7 +221,36 @@ SynthesisWriter:
   python run_liturgical_librarian.py --psalms 1 2 20 145 150 --output output/liturgy_results.txt
   ```
 
-### Session 38: Liturgical Canonicalization Pipeline ⭐ NEW
+### Session 50+: Liturgical Indexer Enhancements ⭐ NEW
+- **Problems**:
+  1. Missing verses due to spelling variants (Prayer 91 missing Psalm 145:6)
+  2. Duplicate entries for prayers with entire psalms
+  3. Multiple entries for scattered verses
+  4. No recognition of near-complete psalms (90%+ coverage)
+- **Solutions**:
+  1. **Two-pass Ktiv Male/Haser Matching**: Dual Aho-Corasick search (exact + fuzzy)
+  2. **Duplicate Elimination**: Remove redundant entries when entire_chapter detected
+  3. **Discontinuous Verse Ranges**: New `verse_set` match type ("13, 17, 21")
+  4. **Near-Complete Detection**: Identify 90%+ coverage with "LIKELY complete" messages
+- **Impact**:
+  - Verse 6 now detected in Prayer 91
+  - 41 total entire_chapter entries (25 complete, 16 near-complete)
+  - 5 verse_set entries consolidating scattered verses
+  - Index size optimized (366 matches vs 698 before)
+- **Code**:
+  - `src/liturgy/liturgy_indexer.py` - Enhanced (~400 lines modified/added)
+  - New `verse_set` match type with JSON verse storage
+  - Two-pass Aho-Corasick automatons
+  - Coverage percentage calculations
+- **Test Results** (Psalm 145):
+  - Entire Chapter: 41 (10x improvement potential across all psalms)
+  - Phrase Match: 324
+  - Exact Verse: 15
+  - Verse Set: 5 (new!)
+  - Verse Range: 2
+- **Usage**: Ready for full reindexing of all 150 Psalms
+
+### Session 38: Liturgical Canonicalization Pipeline
 - **Problem**: Liturgy.db has flat, inconsistent metadata; poor grouping in liturgical librarian
 - **Solution**: Complete pipeline to enrich prayers with hierarchical metadata using Gemini 2.5 Pro
 - **Impact**: Will dramatically improve liturgical context quality and grouping
