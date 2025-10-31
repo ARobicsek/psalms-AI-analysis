@@ -1,6 +1,108 @@
-# Session 39 Handoff - Liturgical Canonicalization Pipeline Ready
+# Session 51 Handoff - Liturgical Indexer Enhancements Complete
 
-## Previous Session (Session 38) Completed ✅
+## Previous Session (Session 50+) Completed ✅
+
+Successfully implemented **4 Major Liturgical Indexer Improvements**:
+
+### Session 50+ Accomplishments
+
+**1. Two-Pass Ktiv Male/Haser Matching** ✅
+- **Problem**: Prayer 91 missing Psalm 145:6 due to spelling variant (`נוראותיך` vs `נוראתיך`)
+- **Solution**: Implemented dual-pass Aho-Corasick search (exact + fuzzy with vowel letter normalization)
+- **Result**: Verse 6 now detected; 16 near-complete psalms identified (90-99% coverage)
+
+**2. Duplicate Entry Elimination** ✅
+- **Problem**: Prayers with entire psalms showed redundant entries (entire_chapter + verse_range + verses)
+- **Solution**: When entire_chapter detected, remove all other entries for that prayer
+- **Result**: Clean single entries; much better index quality
+
+**3. Discontinuous Verse Range Support** ✅
+- **Problem**: Prayers with scattered verses showed multiple separate entries
+- **Solution**: New `verse_set` match type with discontinuous range display ("13, 17, 21" or "1-5, 7-10, 14")
+- **Result**: 5 verse_set entries; consolidated multi-verse prayers
+
+**4. Near-Complete Psalm Detection** ✅
+- **Problem**: Prayers with ≥90% coverage but missing 1-2 verses not recognized
+- **Solution**: Detect 90%+ coverage and mark as "LIKELY complete text... (X% coverage; missing verses: Y, Z)"
+- **Result**: 16 near-complete + 25 complete = 41 total entire_chapter entries
+
+**Test Results (Psalm 145)**:
+```
+Total matches: 366 (optimized from 698)
+Match breakdown:
+  - Entire Chapter: 41 (25 complete @100%, 16 near-complete @90-99%)
+  - Phrase Match: 324
+  - Exact Verse: 15
+  - Verse Set: 5 (discontinuous ranges)
+  - Verse Range: 2
+```
+
+**Files Modified**:
+- `src/liturgy/liturgy_indexer.py` - Enhanced with 4 major improvements (~400 lines modified/added)
+- Database schema: Added `locations` field to `psalms_liturgy_index` for verse_set storage
+
+---
+
+## This Session (Session 51) Tasks
+
+### Primary Goal
+**READY TO REINDEX ALL 150 PSALMS** 🚀
+
+All liturgical indexer improvements are now complete and tested on Psalm 145. The system is ready for full-scale production indexing.
+
+### Key Objectives
+
+1. **Decision Point: Full Reindexing** 📊
+   - Current status: 6 psalms indexed (1, 2, 20, 23, 145, 150)
+   - **Recommendation**: YES, ready to reindex all 150 Psalms
+   - Improvements will benefit all psalms:
+     * Ktiv male/haser matching will catch spelling variants across all psalms
+     * Discontinuous verse ranges will clean up fragmented matches
+     * Near-complete detection will identify 90%+ coverage psalms
+     * Duplicate elimination will dramatically reduce index size
+
+2. **Estimated Reindexing Time** ⏱️
+   - Per psalm: ~60-80 seconds (with two-pass Aho-Corasick)
+   - All 150 psalms: ~2.5-3.5 hours
+   - **Strategy**: Run overnight or in batches
+
+3. **Monitoring & Validation** ✅
+   - Track progress with verbose output
+   - Verify statistics match expectations
+   - Check for any errors or issues
+
+4. **Optional: Canonicalization Pipeline** (Deferred from Session 39)
+   - Liturgical canonicalization pipeline still ready
+   - Can run after psalm reindexing completes
+   - Estimated time: ~37 minutes for all 1,123 prayers
+
+### Reindexing Command
+
+```python
+# Simple approach - reindex all 150 psalms
+from src.liturgy.liturgy_indexer import LiturgyIndexer
+
+indexer = LiturgyIndexer(verbose=True)
+for psalm_num in range(1, 151):
+    print(f"\nIndexing Psalm {psalm_num}...")
+    result = indexer.index_psalm(psalm_num)
+    print(f"  Matches: {result['total_matches']}")
+```
+
+### Success Criteria
+
+1. ✅ All improvements working on Psalm 145 test
+2. ⚪ All 150 Psalms reindexed with new logic
+3. ⚪ Verify entire_chapter detection across multiple psalms
+4. ⚪ Validate verse_set consolidation working correctly
+5. ⚪ Confirm near-complete detection finds 90%+ coverage prayers
+6. ⚪ Index quality significantly improved vs. old system
+
+---
+
+## Earlier Sessions
+
+### Session 38: Liturgical Canonicalization Pipeline ✅
 
 Successfully created **Liturgical Database Canonicalization Pipeline** using Gemini 2.5 Pro:
 

@@ -322,7 +322,7 @@ class LiturgyIndexer:
         
         return matches
 
-    def _build_search_automaton(self, phrases: List[Dict]) -> ahocorasick.Automaton:
+    def _build_search_automaton(self, phrases: List[Dict], apply_ktiv: bool = False) -> ahocorasick.Automaton:
         """
         Build Aho-Corasick automaton for all normalized phrases.
 
@@ -331,6 +331,7 @@ class LiturgyIndexer:
 
         Args:
             phrases: List of phrase dicts with 'phrase' field and metadata
+            apply_ktiv: If True, apply ktiv male/haser normalization for fuzzy matching
 
         Returns:
             Compiled automaton ready for searching
@@ -338,7 +339,7 @@ class LiturgyIndexer:
         A = ahocorasick.Automaton()
 
         for i, phrase_data in enumerate(phrases):
-            normalized = self._full_normalize(phrase_data['phrase'])
+            normalized = self._full_normalize(phrase_data['phrase'], apply_ktiv_normalization=apply_ktiv)
             if normalized:  # Skip empty normalized phrases
                 # Store (index, original_data) tuple as metadata
                 A.add_word(normalized, (i, phrase_data))
@@ -369,13 +370,14 @@ class LiturgyIndexer:
         if not phrases:
             return []
 
-        # Step 1: Build automaton once for all phrases
+        # Step 1: Build automatons - one for exact matching, one for fuzzy (ktiv) matching
         if self.verbose:
-            print(f"  Building Aho-Corasick automaton for {len(phrases)} phrases...")
+            print(f"  Building Aho-Corasick automatons for {len(phrases)} phrases...")
 
-        automaton = self._build_search_automaton(phrases)
+        automaton_exact = self._build_search_automaton(phrases, apply_ktiv=False)
+        automaton_fuzzy = self._build_search_automaton(phrases, apply_ktiv=True)
 
-        # Step 2: Search each prayer once against automaton
+        # Step 2: Search each prayer once against both automatons
         matches = []
 
         conn = sqlite3.connect(self.liturgy_db)
@@ -399,16 +401,74 @@ class LiturgyIndexer:
         conn.close()
 
         if self.verbose:
-            print(f"  Searching {len(all_prayers)} prayers...")
+            print(f"  Searching {len(all_prayers)} prayers (two-pass: exact + fuzzy)...")
 
         for prayer_id, hebrew_text, sefaria_ref, nusach, occasion, service, section, prayer_name in all_prayers:
-            # Normalize prayer text once
-            normalized_prayer = self._full_normalize(hebrew_text)
+            # Normalize prayer text twice - once for exact, once for fuzzy
+            normalized_prayer_exact = self._full_normalize(hebrew_text, apply_ktiv_normalization=False)
+            normalized_prayer_fuzzy = self._full_normalize(hebrew_text, apply_ktiv_normalization=True)
 
-            # Search automaton (returns all matching phrases in one pass!)
-            for end_pos, (phrase_idx, phrase_data) in automaton.iter(normalized_prayer):
+            # Track which phrases we've already matched (to avoid duplicates from fuzzy pass)
+            matched_phrases = set()
+
+            # PASS 1: Exact matching (returns all matching phrases in one pass!)
+            for end_pos, (phrase_idx, phrase_data) in automaton_exact.iter(normalized_prayer_exact):
                 phrase_hebrew = phrase_data['phrase']
-                normalized_phrase = self._full_normalize(phrase_hebrew)
+                normalized_phrase = self._full_normalize(phrase_hebrew, apply_ktiv_normalization=False)
+
+                # Mark this phrase as matched
+                matched_phrases.add(phrase_idx)
+
+                # Extract context
+                context = self._extract_context(
+                    full_text=hebrew_text,
+                    phrase=phrase_hebrew
+                )
+
+                # Extract exact match from liturgy (preserving original diacritics)
+                liturgy_phrase = self._extract_exact_match(
+                    full_text=hebrew_text,
+                    phrase=phrase_hebrew
+                )
+
+                # Determine match type
+                match_type = self._determine_match_type(
+                    phrase_hebrew=phrase_hebrew,
+                    psalm_chapter=psalm_chapter,
+                    verse_start=phrase_data.get('verse_start'),
+                    verse_end=phrase_data.get('verse_end')
+                )
+
+                # Calculate confidence
+                confidence = self._calculate_confidence(
+                    distinctiveness_score=phrase_data.get('distinctiveness_score', 0.0),
+                    match_type=match_type
+                )
+
+                matches.append({
+                    'psalm_chapter': psalm_chapter,
+                    'psalm_verse_start': phrase_data.get('verse_start'),
+                    'psalm_verse_end': phrase_data.get('verse_end'),
+                    'psalm_phrase_hebrew': phrase_hebrew,
+                    'psalm_phrase_normalized': normalized_phrase,
+                    'phrase_length': len(phrase_hebrew.split()),
+                    'prayer_id': prayer_id,
+                    'liturgy_phrase_hebrew': liturgy_phrase,
+                    'liturgy_context': context,
+                    'match_type': match_type,
+                    'normalization_level': 2,  # consonantal = 2 (for database compatibility)
+                    'confidence': confidence,
+                    'distinctiveness_score': phrase_data.get('distinctiveness_score', 0.0)
+                })
+
+            # PASS 2: Fuzzy matching with ktiv normalization (only for unmatched phrases)
+            for end_pos, (phrase_idx, phrase_data) in automaton_fuzzy.iter(normalized_prayer_fuzzy):
+                # Skip if we already matched this phrase in exact pass
+                if phrase_idx in matched_phrases:
+                    continue
+
+                phrase_hebrew = phrase_data['phrase']
+                normalized_phrase = self._full_normalize(phrase_hebrew, apply_ktiv_normalization=True)
 
                 # Extract context
                 context = self._extract_context(
@@ -543,7 +603,7 @@ class LiturgyIndexer:
         conn.close()
         return matches
 
-    def _full_normalize(self, text: str) -> str:
+    def _full_normalize(self, text: str, apply_ktiv_normalization: bool = False) -> str:
         """
         Complete normalization pipeline for matching.
 
@@ -555,11 +615,15 @@ class LiturgyIndexer:
         2. Handle ktiv-kri notation (remove written, keep read)
         3. Replace maqqef with space (BEFORE vowel stripping)
         4. Strip vowels/cantillation (consonantal)
-        5. Remove other punctuation
-        6. Normalize whitespace
+        5. [Optional] Normalize ktiv male/haser (remove vowel letters)
+        6. Remove other punctuation
+        7. Normalize whitespace
 
         Args:
             text: Hebrew text with diacritics
+            apply_ktiv_normalization: If True, apply aggressive ktiv male/haser normalization
+                                     (removes ו and י vowel letters). Default False for
+                                     backward compatibility.
 
         Returns:
             Normalized consonantal text
@@ -589,7 +653,12 @@ class LiturgyIndexer:
         # STEP 4: Strip vowels and cantillation (consonantal normalization)
         text = normalize_for_search(text, level='consonantal')
 
-        # STEP 5: Remove remaining punctuation and markers
+        # STEP 5: [Optional] Normalize ktiv male/haser (full vs defective spelling)
+        # Only apply if explicitly requested (e.g., for fuzzy matching of spelling variants)
+        if apply_ktiv_normalization:
+            text = self._normalize_ktiv_male_haser(text)
+
+        # STEP 6: Remove remaining punctuation and markers
         text = text.replace('\u05C0', ' ')  # paseq (|) -> space
         text = text.replace('\u05F3', '')  # geresh
         text = text.replace('\u05F4', '')  # gershayim
@@ -599,10 +668,91 @@ class LiturgyIndexer:
         text = re.sub(r'\s+[פס]\s+', ' ', text)  # Surrounded by whitespace
         text = re.sub(r'\s+[פס]$', '', text)  # At end of text
 
-        # STEP 6: Normalize whitespace
+        # STEP 7: Normalize whitespace
         text = ' '.join(text.split())
 
         return text
+
+    def _normalize_ktiv_male_haser(self, text: str) -> str:
+        """
+        Normalize ktiv male/haser (full vs defective spelling) by removing vowel letters.
+
+        Matres lectionis (vowel letters) are consonant letters used to indicate vowels:
+        - ו (vav) can represent 'v' (consonant) or 'o'/'u' (vowel)
+        - י (yod) can represent 'y' (consonant) or 'i'/'e' (vowel)
+
+        This function removes these letters in contexts where they're most likely vowels.
+
+        Examples:
+            נוראותיך → נוראתיך (removes ו representing 'o' sound)
+            גדוליך → גדליך (removes ו representing 'o' sound)
+            אלוהים → אלהים (removes ו representing 'o' sound)
+
+        Strategy: Remove all ו except at word boundaries (start/end)
+                  Remove all י except at word boundaries (start/end)
+
+        This is aggressive but effective for matching spelling variants.
+
+        Args:
+            text: Consonantal Hebrew text (already vowel-stripped)
+
+        Returns:
+            Text with vowel letters removed
+        """
+        if not text:
+            return text
+
+        # Process each word separately to preserve word boundaries
+        words = text.split()
+        normalized_words = []
+
+        for word in words:
+            if len(word) <= 2:
+                # Keep short words as-is to avoid over-normalization
+                normalized_words.append(word)
+                continue
+
+            # Keep first and last characters, normalize middle
+            # This preserves consonantal ו/י at word boundaries while removing internal vowel letters
+            if len(word) == 3:
+                # For 3-letter words, only normalize middle character if it's ו or י
+                first, middle, last = word[0], word[1], word[2]
+                if middle in 'וי':
+                    # Check if it's likely a vowel (between two consonants)
+                    normalized_word = first + last
+                else:
+                    normalized_word = word
+            else:
+                # For longer words, remove all internal ו and י
+                first = word[0]
+                last = word[-1]
+                middle = word[1:-1]
+
+                # Remove vowel letters from middle
+                # Keep ו at start of middle section if followed by another consonant
+                # (e.g., וְ prefix)
+                normalized_middle = ''
+                i = 0
+                while i < len(middle):
+                    char = middle[i]
+                    if char in 'וי':
+                        # Check if this is a consonantal use
+                        # If י or ו is at the very start of the middle and followed by ה, keep it
+                        # (e.g., יהוה should stay as-is)
+                        if i == 0 and char == 'י' and len(middle) > 1 and middle[1] == 'ה':
+                            normalized_middle += char
+                        # Otherwise, skip vowel letters
+                        else:
+                            pass  # Skip this vowel letter
+                    else:
+                        normalized_middle += char
+                    i += 1
+
+                normalized_word = first + normalized_middle + last
+
+            normalized_words.append(normalized_word)
+
+        return ' '.join(normalized_words)
 
     def _normalize_text(self, text: str) -> str:
         """
@@ -1128,9 +1278,13 @@ class LiturgyIndexer:
                 for v in range(m['psalm_verse_start'], m['psalm_verse_end'] + 1):
                     covered_verses.add(v)
 
-            # Check if all verses are covered
-            if len(covered_verses) == total_verses and total_verses > 0:
-                # All verses present! Create single entire_chapter match
+            # Check if all or nearly all verses are covered
+            coverage_pct = len(covered_verses) / total_verses if total_verses > 0 else 0
+
+            if coverage_pct >= 0.90 and total_verses > 0:
+                # All verses or nearly all (≥90%) present! Replace with single entire_chapter match
+                is_complete = (len(covered_verses) == total_verses)
+
                 # Find the prayer text to extract context
                 conn_temp = sqlite3.connect(self.liturgy_db)
                 cursor_temp = conn_temp.cursor()
@@ -1154,7 +1308,20 @@ class LiturgyIndexer:
                 chapter_text = cursor_temp.fetchone()[0]
                 conn_temp.close()
 
-                # Create entire_chapter match
+                # Determine context message based on completeness
+                if is_complete:
+                    context_msg = f"Complete text of Psalm {psalm_chapter} appears in this prayer"
+                    confidence = 1.0
+                else:
+                    missing_verses = sorted(set(range(1, total_verses + 1)) - covered_verses)
+                    missing_str = ", ".join(map(str, missing_verses))
+                    context_msg = f"LIKELY complete text of Psalm {psalm_chapter} appears in this prayer ({coverage_pct*100:.0f}% coverage; missing verses: {missing_str})"
+                    confidence = round(coverage_pct, 3)
+                    if self.verbose:
+                        print(f"  ⬆ Near-complete psalm detected: {coverage_pct*100:.0f}% coverage (missing {missing_str})")
+
+                # Add entire_chapter entry (replacing individual matches for THIS prayer)
+                # This prevents duplicate entries when the full psalm is present
                 result.append({
                     'psalm_chapter': psalm_chapter,
                     'psalm_verse_start': 1,
@@ -1164,12 +1331,14 @@ class LiturgyIndexer:
                     'phrase_length': total_verses,  # Number of verses
                     'prayer_id': prayer_id,
                     'liturgy_phrase_hebrew': f"[Entire Psalm {psalm_chapter}]",
-                    'liturgy_context': f"Complete text of Psalm {psalm_chapter} appears in this prayer",
+                    'liturgy_context': context_msg,
                     'match_type': 'entire_chapter',
                     'normalization_level': 2,
-                    'confidence': 1.0,
+                    'confidence': confidence,
                     'distinctiveness_score': 1.0
                 })
+                # Continue to next prayer - skip adding individual matches for this prayer
+                continue
             else:
                 # Not a complete chapter, check for consecutive verse ranges (Issue #5)
                 # Sort exact_verse matches by verse number
@@ -1178,8 +1347,8 @@ class LiturgyIndexer:
                     key=lambda m: m['psalm_verse_start']
                 )
 
-                # Find consecutive sequences (minimum 3 verses)
-                if len(sorted_verses) >= 3:
+                # Find consecutive sequences (minimum 2 verses for consolidation)
+                if len(sorted_verses) >= 2:
                     sequences = []
                     current_seq = [sorted_verses[0]]
 
@@ -1187,12 +1356,12 @@ class LiturgyIndexer:
                         if match['psalm_verse_start'] == current_seq[-1]['psalm_verse_start'] + 1:
                             current_seq.append(match)
                         else:
-                            if len(current_seq) >= 3:
+                            if len(current_seq) >= 2:
                                 sequences.append(current_seq)
                             current_seq = [match]
 
                     # Don't forget the last sequence
-                    if len(current_seq) >= 3:
+                    if len(current_seq) >= 2:
                         sequences.append(current_seq)
 
                     # Replace sequences with verse_range entries
@@ -1238,27 +1407,89 @@ class LiturgyIndexer:
                     # Not enough verses for sequences, keep all matches
                     result.extend(matches)
 
+            # THIRD PASS: Consolidate multiple verse_range/exact_verse into discontinuous verse_set
+            # This creates entries like "Psalm 145: verses 13, 17, 21" or "1-5, 7-10, 14"
+            # Only apply if there are multiple verse-level entries (not including phrase_match)
+            verse_level_entries = [m for m in result if m['prayer_id'] == prayer_id and
+                                    m['match_type'] in ('exact_verse', 'verse_range')]
+
+            if len(verse_level_entries) >= 2:
+                # Extract verse ranges/numbers
+                ranges = []
+                for entry in verse_level_entries:
+                    if entry['psalm_verse_start'] == entry['psalm_verse_end']:
+                        ranges.append(str(entry['psalm_verse_start']))
+                    else:
+                        ranges.append(f"{entry['psalm_verse_start']}-{entry['psalm_verse_end']}")
+
+                # Create verse_set entry
+                discontinuous_range_str = ", ".join(ranges)
+                all_verses = set()
+                for entry in verse_level_entries:
+                    for v in range(entry['psalm_verse_start'], entry['psalm_verse_end'] + 1):
+                        all_verses.add(v)
+
+                if self.verbose:
+                    print(f"  ⬆ Consolidated to discontinuous verse_set: Psalm {psalm_chapter}: {discontinuous_range_str}")
+
+                # Remove the individual verse entries for THIS prayer
+                result = [m for m in result if not (m['prayer_id'] == prayer_id and
+                                                     m['match_type'] in ('exact_verse', 'verse_range'))]
+
+                # Add the consolidated verse_set entry
+                # Store actual verses in locations field as JSON for accurate coverage calculation
+                import json
+                result.append({
+                    'psalm_chapter': psalm_chapter,
+                    'psalm_verse_start': min(all_verses),
+                    'psalm_verse_end': max(all_verses),
+                    'psalm_phrase_hebrew': f"[Psalm {psalm_chapter}: {discontinuous_range_str}]",
+                    'psalm_phrase_normalized': '',
+                    'phrase_length': len(all_verses),
+                    'prayer_id': prayer_id,
+                    'liturgy_phrase_hebrew': f"[Psalm {psalm_chapter}: {discontinuous_range_str}]",
+                    'liturgy_context': f"Verses {discontinuous_range_str} of Psalm {psalm_chapter}",
+                    'match_type': 'verse_set',  # New match type for discontinuous ranges
+                    'normalization_level': 2,
+                    'confidence': 1.0,
+                    'distinctiveness_score': 1.0,
+                    'locations': json.dumps(sorted(all_verses))  # Store actual verses for coverage calc
+                })
+
             # SECOND PASS: After consolidation, check if verse_range + exact_verse now cover entire chapter
             # This handles cases where consolidation created verse_range entries that, together with
             # any remaining exact_verse or high-confidence phrase_match, cover all verses (Issue #8)
             if result:  # Only check if we have matches
                 # Get all matches that represent verified verses
-                # Include: exact_verse, verse_range, AND high-confidence (>=80%) phrase_match
+                # Include: exact_verse, verse_range, verse_set, AND high-confidence (>=80%) phrase_match
                 verified_matches = [
                     m for m in result
-                    if m['match_type'] in ('exact_verse', 'verse_range')
+                    if m['match_type'] in ('exact_verse', 'verse_range', 'verse_set')
                     or (m['match_type'] == 'phrase_match' and m.get('confidence', 0) >= 0.80)
                 ]
                 covered_verses_v2 = set()
                 for m in verified_matches:
-                    for v in range(m['psalm_verse_start'], m['psalm_verse_end'] + 1):
-                        covered_verses_v2.add(v)
+                    if m['match_type'] == 'verse_set' and m.get('locations'):
+                        # For verse_set, use the actual verses from locations field
+                        import json
+                        covered_verses_v2.update(json.loads(m['locations']))
+                    else:
+                        # For continuous ranges, use start to end
+                        for v in range(m['psalm_verse_start'], m['psalm_verse_end'] + 1):
+                            covered_verses_v2.add(v)
 
-                # Check if all verses are now covered
-                if len(covered_verses_v2) == total_verses and total_verses > 0:
-                    # All verses present after consolidation! Create single entire_chapter match
+                # Check if all or nearly all verses are now covered
+                coverage_pct_v2 = len(covered_verses_v2) / total_verses if total_verses > 0 else 0
+
+                if coverage_pct_v2 >= 0.90 and total_verses > 0:
+                    # All verses or nearly all (≥90%) present after consolidation!
+                    is_complete = (len(covered_verses_v2) == total_verses)
+
                     if self.verbose:
-                        print(f"  ⬆ Second pass: Detected entire chapter after consolidation (Psalm {psalm_chapter})")
+                        if is_complete:
+                            print(f"  ⬆ Second pass: Detected entire chapter after consolidation (Psalm {psalm_chapter})")
+                        else:
+                            print(f"  ⬆ Second pass: Detected near-complete chapter ({coverage_pct_v2*100:.0f}% coverage, Psalm {psalm_chapter})")
 
                     # Find the prayer text to extract context
                     conn_temp = sqlite3.connect(self.liturgy_db)
@@ -1279,7 +1510,20 @@ class LiturgyIndexer:
                     chapter_text = cursor_tanakh.fetchone()[0]
                     conn_tanakh.close()
 
-                    # Replace all matches with single entire_chapter entry
+                    # Determine context message based on completeness
+                    if is_complete:
+                        context_msg = f"Complete text of Psalm {psalm_chapter} appears in this prayer"
+                        confidence = 1.0
+                    else:
+                        missing_verses_v2 = sorted(set(range(1, total_verses + 1)) - covered_verses_v2)
+                        missing_str_v2 = ", ".join(map(str, missing_verses_v2))
+                        context_msg = f"LIKELY complete text of Psalm {psalm_chapter} appears in this prayer ({coverage_pct_v2*100:.0f}% coverage; missing verses: {missing_str_v2})"
+                        confidence = round(coverage_pct_v2, 3)
+
+                    # Clear THIS prayer's entries and replace with single entire_chapter entry
+                    # This prevents duplicate entries when the full psalm is present
+                    # Filter out all entries for this specific prayer, then add entire_chapter
+                    result = [r for r in result if r['prayer_id'] != prayer_id]
                     result.append({
                         'psalm_chapter': psalm_chapter,
                         'psalm_verse_start': 1,
@@ -1289,10 +1533,10 @@ class LiturgyIndexer:
                         'phrase_length': total_verses,  # Number of verses
                         'prayer_id': prayer_id,
                         'liturgy_phrase_hebrew': f"[Entire Psalm {psalm_chapter}]",
-                        'liturgy_context': f"Complete text of Psalm {psalm_chapter} appears in this prayer",
+                        'liturgy_context': context_msg,
                         'match_type': 'entire_chapter',
                         'normalization_level': 2,
-                        'confidence': 1.0,
+                        'confidence': confidence,
                         'distinctiveness_score': 1.0
                     })
 
@@ -1318,8 +1562,9 @@ class LiturgyIndexer:
                 match_type,
                 normalization_level,
                 confidence,
-                distinctiveness_score
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                distinctiveness_score,
+                locations
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             match['psalm_chapter'],
             match['psalm_verse_start'],
@@ -1333,7 +1578,8 @@ class LiturgyIndexer:
             match['match_type'],
             match['normalization_level'],
             match['confidence'],
-            match['distinctiveness_score']
+            match['distinctiveness_score'],
+            match.get('locations')  # Optional field for verse_set entries
         ))
 
         conn.commit()
