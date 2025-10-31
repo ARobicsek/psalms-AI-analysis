@@ -50,3 +50,4 @@ Documents/*without*.docx
 .anthropic_key
 .sefaria_key
 secrets/
+.claude/settings.local.json
