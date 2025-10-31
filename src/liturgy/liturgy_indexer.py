@@ -88,7 +88,7 @@ class LiturgyIndexer:
 
         if not phrases:
             if self.verbose:
-                print(f"⚠ No phrases found for Psalm {psalm_chapter}")
+                print(f"[!] No phrases found for Psalm {psalm_chapter}")
             return {'psalm_chapter': psalm_chapter, 'total_matches': 0, 'error': 'No phrases extracted'}
 
         # Filter to searchable only
@@ -134,7 +134,7 @@ class LiturgyIndexer:
         )
 
         if self.verbose and all_matches:
-            print(f"\n✓ Found {len(all_matches)} total matches (before deduplication)")
+            print(f"\n[+] Found {len(all_matches)} total matches (before deduplication)")
 
         # Deduplicate overlapping matches BEFORE storing
         if self.verbose and all_matches:
@@ -164,7 +164,7 @@ class LiturgyIndexer:
 
         if self.verbose:
             print(f"\n{'='*70}")
-            print(f"✓ Indexing complete for Psalm {psalm_chapter}")
+            print(f"[+] Indexing complete for Psalm {psalm_chapter}")
             print(f"{'='*70}")
             print(f"Total matches: {total_matches}")
             if match_details:
@@ -840,11 +840,15 @@ class LiturgyIndexer:
         pos = normalized_text.find(normalized_phrase)
 
         if pos == -1:
-            return ""  # Phrase not found
+            # FIX (Session 51): Don't return early! The simple find() fails for many cases.
+            # Instead, proceed to the robust sliding window approach below.
+            # Use middle of text as starting point for the search.
+            ratio = 0.5
+        else:
+            # Calculate approximate position ratio in original text
+            # This works because normalization preserves most text length
+            ratio = pos / len(normalized_text) if len(normalized_text) > 0 else 0
 
-        # Calculate approximate position ratio in original text
-        # This works because normalization preserves most text length
-        ratio = pos / len(normalized_text) if len(normalized_text) > 0 else 0
         approx_char_pos = int(ratio * len(full_text))
 
         # Find nearest word boundary before the approximate position
@@ -1209,7 +1213,7 @@ class LiturgyIndexer:
                                 match['distinctiveness_score'] = 1.0
                                 upgraded = True
                                 if self.verbose:
-                                    print(f"  ⬆ Upgraded phrase to exact_verse: Psalm {psalm_ch}:{verse_start}")
+                                    print(f"  [^] Upgraded phrase to exact_verse: Psalm {psalm_ch}:{verse_start}")
 
                 # Keep all matches (with possible upgrades)
                 final_deduplicated.extend(group_matches)
@@ -1267,7 +1271,7 @@ class LiturgyIndexer:
                                 match['match_type'] = 'exact_verse'
                                 match['confidence'] = round(match_pct, 3)
                                 if self.verbose:
-                                    print(f"  ⬆ Upgraded near-complete phrase to exact_verse: Psalm {psalm_chapter}:{verse_num} ({match_pct*100:.0f}%)")
+                                    print(f"  [^] Upgraded near-complete phrase to exact_verse: Psalm {psalm_chapter}:{verse_num} ({match_pct*100:.0f}%)")
 
             # Get unique verse numbers covered by exact_verse matches (after upgrades)
             exact_verse_matches = [m for m in matches if m['match_type'] == 'exact_verse']
@@ -1280,6 +1284,83 @@ class LiturgyIndexer:
 
             # Check if all or nearly all verses are covered
             coverage_pct = len(covered_verses) / total_verses if total_verses > 0 else 0
+
+            # FIX (Session 51): VALIDATE that the actual verse CONTENT matches
+            # before claiming entire_chapter. This prevents false positives where
+            # phrases from different psalms get confused (e.g., Psalm 25 vs Psalm 86).
+            #
+            # The bug: If Psalm 25 phrases get mislabeled as Psalm 86, we might see
+            # 16 "covered verses" that match Psalm 86's verse count, but the actual
+            # Hebrew text in the prayer is from Psalm 25, not Psalm 86.
+            #
+            # Solution: STRICT validation - check ALL verses using substring matching.
+            # Word counting can give false positives if two psalms share common vocabulary.
+            if coverage_pct >= 0.90 and total_verses > 0:
+                # Get the prayer text for verification
+                conn_temp_verify = sqlite3.connect(self.liturgy_db)
+                cursor_temp_verify = conn_temp_verify.cursor()
+                cursor_temp_verify.execute("SELECT hebrew_text FROM prayers WHERE prayer_id = ?", (prayer_id,))
+                prayer_text_for_verify = cursor_temp_verify.fetchone()[0]
+                conn_temp_verify.close()
+
+                # Normalize the prayer text once
+                normalized_prayer = self._full_normalize(prayer_text_for_verify)
+
+                # STRICT VALIDATION: Check ALL covered verses, not just a sample
+                verification_passed = True
+                failed_verses = []
+
+                for verse_num in covered_verses:
+                    if verse_num not in verse_texts:
+                        # Verse number doesn't exist in this psalm!
+                        verification_passed = False
+                        if self.verbose:
+                            print(f"  [!] VALIDATION FAILED: Psalm {psalm_chapter} verse {verse_num} doesn't exist (psalm has {total_verses} verses)")
+                        break
+
+                    # Get canonical verse text and normalize it
+                    canonical_verse = verse_texts[verse_num]
+                    normalized_canonical = self._full_normalize(canonical_verse)
+
+                    # STRICT CHECK: The entire normalized verse must appear as a substring
+                    # in the normalized prayer. Not just word overlap!
+                    if normalized_canonical not in normalized_prayer:
+                        # Try lenient check: 95% of verse must be present as contiguous substring
+                        verse_words = normalized_canonical.split()
+                        if len(verse_words) < 3:
+                            # For very short verses, require exact match
+                            failed_verses.append(verse_num)
+                            continue
+
+                        # Check if at least 90% of the verse text is present as contiguous substring
+                        # (Lowered from 95% to handle edge cases like missing paragraph markers)
+                        min_length = int(len(normalized_canonical) * 0.90)
+                        found_substring = False
+                        for i in range(len(verse_words)):
+                            for j in range(i+1, len(verse_words)+1):
+                                substring = ' '.join(verse_words[i:j])
+                                if len(substring) >= min_length and substring in normalized_prayer:
+                                    found_substring = True
+                                    break
+                            if found_substring:
+                                break
+
+                        if not found_substring:
+                            failed_verses.append(verse_num)
+
+                if failed_verses:
+                    verification_passed = False
+                    failed_str = ', '.join(map(str, sorted(failed_verses)))
+                    if self.verbose:
+                        print(f"  [!] VALIDATION FAILED: Psalm {psalm_chapter} verses {failed_str} not found in prayer")
+                        print(f"      ({len(failed_verses)}/{len(covered_verses)} verses failed substring check)")
+
+                if not verification_passed:
+                    # Verification failed - this is a false positive
+                    if self.verbose:
+                        print(f"  [!] Skipping entire_chapter for Psalm {psalm_chapter} in Prayer {prayer_id} - verification failed")
+                    # Fall through to add individual matches instead
+                    coverage_pct = 0  # Force skip of entire_chapter logic
 
             if coverage_pct >= 0.90 and total_verses > 0:
                 # All verses or nearly all (≥90%) present! Replace with single entire_chapter match
@@ -1318,7 +1399,7 @@ class LiturgyIndexer:
                     context_msg = f"LIKELY complete text of Psalm {psalm_chapter} appears in this prayer ({coverage_pct*100:.0f}% coverage; missing verses: {missing_str})"
                     confidence = round(coverage_pct, 3)
                     if self.verbose:
-                        print(f"  ⬆ Near-complete psalm detected: {coverage_pct*100:.0f}% coverage (missing {missing_str})")
+                        print(f"  [^] Near-complete psalm detected: {coverage_pct*100:.0f}% coverage (missing {missing_str})")
 
                 # Add entire_chapter entry (replacing individual matches for THIS prayer)
                 # This prevents duplicate entries when the full psalm is present
@@ -1378,28 +1459,102 @@ class LiturgyIndexer:
                                 result.append(match)
 
                         # Add verse_range entries for each sequence
+                        # CRITICAL FIX: Validate ALL verses in range before creating the verse_range entry
                         for seq in sequences:
                             first_verse = seq[0]['psalm_verse_start']
                             last_verse = seq[-1]['psalm_verse_start']
 
-                            if self.verbose:
-                                print(f"  ⬆ Consolidated consecutive verses to verse_range: Psalm {psalm_chapter}:{first_verse}-{last_verse}")
+                            # VALIDATION: Check that ALL verses in the range actually exist in prayer
+                            # This prevents false positives where verse numbers are consecutive
+                            # but some verses are actually missing/mismatched
+                            conn_temp_validate = sqlite3.connect(self.liturgy_db)
+                            cursor_temp_validate = conn_temp_validate.cursor()
+                            cursor_temp_validate.execute("SELECT hebrew_text FROM prayers WHERE prayer_id = ?", (prayer_id,))
+                            prayer_text_validate = cursor_temp_validate.fetchone()[0]
+                            conn_temp_validate.close()
 
-                            result.append({
-                                'psalm_chapter': psalm_chapter,
-                                'psalm_verse_start': first_verse,
-                                'psalm_verse_end': last_verse,
-                                'psalm_phrase_hebrew': f"[Psalm {psalm_chapter}:{first_verse}-{last_verse}]",
-                                'psalm_phrase_normalized': '',  # Not needed for range
-                                'phrase_length': len(seq),  # Number of verses
-                                'prayer_id': prayer_id,
-                                'liturgy_phrase_hebrew': f"[Psalm {psalm_chapter}:{first_verse}-{last_verse}]",
-                                'liturgy_context': f"Verses {first_verse}-{last_verse} of Psalm {psalm_chapter} appear consecutively",
-                                'match_type': 'verse_range',
-                                'normalization_level': 2,
-                                'confidence': 1.0,
-                                'distinctiveness_score': 1.0
-                            })
+                            normalized_prayer_validate = self._full_normalize(prayer_text_validate)
+
+                            # Get all verses in the range from Tanakh
+                            conn_temp_tanakh = sqlite3.connect(self.tanakh_db)
+                            cursor_temp_tanakh = conn_temp_tanakh.cursor()
+                            cursor_temp_tanakh.execute("""
+                                SELECT verse, hebrew FROM verses
+                                WHERE book_name = 'Psalms' AND chapter = ?
+                                  AND verse >= ? AND verse <= ?
+                                ORDER BY verse
+                            """, (psalm_chapter, first_verse, last_verse))
+                            verses_in_range = {verse_num: hebrew for verse_num, hebrew in cursor_temp_tanakh.fetchall()}
+                            conn_temp_tanakh.close()
+
+                            # Validate each verse in the range
+                            all_valid = True
+                            failed_verse_nums = []
+                            for verse_num in range(first_verse, last_verse + 1):
+                                if verse_num not in verses_in_range:
+                                    all_valid = False
+                                    failed_verse_nums.append(verse_num)
+                                    continue
+
+                                canonical_verse = verses_in_range[verse_num]
+                                normalized_canonical = self._full_normalize(canonical_verse)
+
+                                # Check if verse appears in prayer (same logic as entire_chapter validation)
+                                if normalized_canonical not in normalized_prayer_validate:
+                                    # Try lenient check: 90% of verse must be present
+                                    verse_words = normalized_canonical.split()
+                                    if len(verse_words) < 3:
+                                        all_valid = False
+                                        failed_verse_nums.append(verse_num)
+                                        continue
+
+                                    min_length = int(len(normalized_canonical) * 0.90)
+                                    found_substring = False
+                                    for i in range(len(verse_words)):
+                                        for j in range(i+1, len(verse_words)+1):
+                                            substring = ' '.join(verse_words[i:j])
+                                            if len(substring) >= min_length and substring in normalized_prayer_validate:
+                                                found_substring = True
+                                                break
+                                        if found_substring:
+                                            break
+
+                                    if not found_substring:
+                                        all_valid = False
+                                        failed_verse_nums.append(verse_num)
+
+                            # Only create verse_range if ALL verses validated
+                            if all_valid:
+                                if self.verbose:
+                                    print(f"  [^] Consolidated consecutive verses to verse_range: Psalm {psalm_chapter}:{first_verse}-{last_verse}")
+
+                                result.append({
+                                    'psalm_chapter': psalm_chapter,
+                                    'psalm_verse_start': first_verse,
+                                    'psalm_verse_end': last_verse,
+                                    'psalm_phrase_hebrew': f"[Psalm {psalm_chapter}:{first_verse}-{last_verse}]",
+                                    'psalm_phrase_normalized': '',  # Not needed for range
+                                    'phrase_length': len(seq),  # Number of verses
+                                    'prayer_id': prayer_id,
+                                    'liturgy_phrase_hebrew': f"[Psalm {psalm_chapter}:{first_verse}-{last_verse}]",
+                                    'liturgy_context': f"Verses {first_verse}-{last_verse} of Psalm {psalm_chapter} appear consecutively",
+                                    'match_type': 'verse_range',
+                                    'normalization_level': 2,
+                                    'confidence': 1.0,
+                                    'distinctiveness_score': 1.0
+                                })
+                            else:
+                                # Validation failed - keep only the valid individual verse matches
+                                failed_str = ', '.join(map(str, failed_verse_nums))
+                                if self.verbose:
+                                    print(f"  [!] Cannot consolidate verses {first_verse}-{last_verse}: validation failed for verses {failed_str}")
+                                    print(f"      Keeping individual validated matches only")
+
+                                # Add back only the verse matches that would have passed validation
+                                for match in seq:
+                                    verse_num = match['psalm_verse_start']
+                                    if verse_num not in failed_verse_nums:
+                                        result.append(match)
                     else:
                         # No sequences found, keep all matches
                         result.extend(matches)
@@ -1430,7 +1585,7 @@ class LiturgyIndexer:
                         all_verses.add(v)
 
                 if self.verbose:
-                    print(f"  ⬆ Consolidated to discontinuous verse_set: Psalm {psalm_chapter}: {discontinuous_range_str}")
+                    print(f"  [^] Consolidated to discontinuous verse_set: Psalm {psalm_chapter}: {discontinuous_range_str}")
 
                 # Remove the individual verse entries for THIS prayer
                 result = [m for m in result if not (m['prayer_id'] == prayer_id and
@@ -1481,15 +1636,89 @@ class LiturgyIndexer:
                 # Check if all or nearly all verses are now covered
                 coverage_pct_v2 = len(covered_verses_v2) / total_verses if total_verses > 0 else 0
 
+                # FIX (Session 51): VALIDATION for second pass too!
+                # Same strict validation as first pass - check verse content, not just counts
+                if coverage_pct_v2 >= 0.90 and total_verses > 0:
+                    # Get the prayer text for verification
+                    conn_temp_verify = sqlite3.connect(self.liturgy_db)
+                    cursor_temp_verify = conn_temp_verify.cursor()
+                    cursor_temp_verify.execute("SELECT hebrew_text FROM prayers WHERE prayer_id = ?", (prayer_id,))
+                    prayer_text_for_verify = cursor_temp_verify.fetchone()[0]
+                    conn_temp_verify.close()
+
+                    # Get verse texts for validation
+                    conn_temp_tanakh = sqlite3.connect(self.tanakh_db)
+                    cursor_temp_tanakh = conn_temp_tanakh.cursor()
+                    cursor_temp_tanakh.execute("""
+                        SELECT verse, hebrew FROM verses
+                        WHERE book_name = 'Psalms' AND chapter = ?
+                        ORDER BY verse
+                    """, (psalm_chapter,))
+                    verse_texts_v2 = {verse_num: hebrew for verse_num, hebrew in cursor_temp_tanakh.fetchall()}
+                    conn_temp_tanakh.close()
+
+                    # Normalize the prayer text once
+                    normalized_prayer_v2 = self._full_normalize(prayer_text_for_verify)
+
+                    # STRICT VALIDATION: Check ALL covered verses
+                    verification_passed_v2 = True
+                    failed_verses_v2 = []
+
+                    for verse_num in covered_verses_v2:
+                        if verse_num not in verse_texts_v2:
+                            verification_passed_v2 = False
+                            if self.verbose:
+                                print(f"  [!] VALIDATION FAILED (2nd pass): Psalm {psalm_chapter} verse {verse_num} doesn't exist")
+                            break
+
+                        canonical_verse = verse_texts_v2[verse_num]
+                        normalized_canonical = self._full_normalize(canonical_verse)
+
+                        # STRICT CHECK: verse must appear as substring
+                        if normalized_canonical not in normalized_prayer_v2:
+                            # Try lenient check: 95% of verse as contiguous substring
+                            verse_words = normalized_canonical.split()
+                            if len(verse_words) < 3:
+                                failed_verses_v2.append(verse_num)
+                                continue
+
+                            # Check if at least 90% of the verse text is present as contiguous substring
+                            # (Lowered from 95% to handle edge cases like missing paragraph markers)
+                            min_length = int(len(normalized_canonical) * 0.90)
+                            found_substring = False
+                            for i in range(len(verse_words)):
+                                for j in range(i+1, len(verse_words)+1):
+                                    substring = ' '.join(verse_words[i:j])
+                                    if len(substring) >= min_length and substring in normalized_prayer_v2:
+                                        found_substring = True
+                                        break
+                                if found_substring:
+                                    break
+
+                            if not found_substring:
+                                failed_verses_v2.append(verse_num)
+
+                    if failed_verses_v2:
+                        verification_passed_v2 = False
+                        failed_str_v2 = ', '.join(map(str, sorted(failed_verses_v2)))
+                        if self.verbose:
+                            print(f"  [!] VALIDATION FAILED (2nd pass): Psalm {psalm_chapter} verses {failed_str_v2} not found")
+                            print(f"      ({len(failed_verses_v2)}/{len(covered_verses_v2)} verses failed substring check)")
+
+                    if not verification_passed_v2:
+                        if self.verbose:
+                            print(f"  [!] Skipping entire_chapter (2nd pass) for Psalm {psalm_chapter} in Prayer {prayer_id}")
+                        coverage_pct_v2 = 0  # Force skip
+
                 if coverage_pct_v2 >= 0.90 and total_verses > 0:
                     # All verses or nearly all (≥90%) present after consolidation!
                     is_complete = (len(covered_verses_v2) == total_verses)
 
                     if self.verbose:
                         if is_complete:
-                            print(f"  ⬆ Second pass: Detected entire chapter after consolidation (Psalm {psalm_chapter})")
+                            print(f"  [^] Second pass: Detected entire chapter after consolidation (Psalm {psalm_chapter})")
                         else:
-                            print(f"  ⬆ Second pass: Detected near-complete chapter ({coverage_pct_v2*100:.0f}% coverage, Psalm {psalm_chapter})")
+                            print(f"  [^] Second pass: Detected near-complete chapter ({coverage_pct_v2*100:.0f}% coverage, Psalm {psalm_chapter})")
 
                     # Find the prayer text to extract context
                     conn_temp = sqlite3.connect(self.liturgy_db)
@@ -1609,7 +1838,7 @@ class LiturgyIndexer:
                 error_msg = f"Psalm {psalm}: {str(e)}"
                 errors.append(error_msg)
                 if self.verbose:
-                    print(f"✗ Error indexing {error_msg}\n")
+                    print(f"[X] Error indexing {error_msg}\n")
 
         if self.verbose:
             print(f"\n{'='*70}")
