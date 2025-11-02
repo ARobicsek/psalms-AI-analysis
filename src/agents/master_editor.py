@@ -246,7 +246,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
     - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
-    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally.
+    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation/re-interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally.
     - Church fathers and medieval Christian interpretation if very illuminating
     - Modern critical scholarship debates
   * Figurative language analysis (how does the usage of similar figuration elsewhere shed light on how it's functioning here?)
@@ -293,6 +293,7 @@ This is NOT optional. This is NOT a placeholder. You MUST:
    - OMIT subsections that don't apply to this specific psalm
    - For verses and phrases, ALWAYS start with Hebrew text + English translation
    - Include Hebrew quotations from the prayers themselves to illustrate usage
+   - for individual verses and phrases that appear in the liturgy, reflect on whether their liturgical use goes with the grain of its natural ("pshat") reading or whether the compilers of the liturgy have put this verse or phrase to use in a novel way.
    - Be specific about occasions, services, and traditions
 4. **Target 150-400 words** (can be longer if the psalm has extensive liturgical use)
 
@@ -542,6 +543,13 @@ class MasterEditor:
 
             self.logger.info(f"Editorial review generated: {len(response_text)} chars")
 
+            # Save response for debugging
+            if self.logger:
+                response_file = Path(f"output/debug/master_editor_response_psalm_{psalm_number}.txt")
+                response_file.parent.mkdir(parents=True, exist_ok=True)
+                response_file.write_text(response_text, encoding='utf-8')
+                self.logger.info(f"Saved editorial response to {response_file}")
+
             # Parse response into sections
             result = self._parse_editorial_response(response_text, psalm_number)
 
@@ -556,7 +564,9 @@ class MasterEditor:
 
     def _parse_editorial_response(self, response_text: str, psalm_number: int) -> Dict[str, str]:
         """Parse the GPT-5 response into structured sections."""
-        # Find section markers
+        import re
+
+        # Find section markers using regex to match only at line start with exact pattern
         assessment_marker = "### EDITORIAL ASSESSMENT"
         intro_marker = "### REVISED INTRODUCTION"
         verses_marker = "### REVISED VERSE COMMENTARY"
@@ -566,54 +576,47 @@ class MasterEditor:
         revised_introduction = ""
         revised_verses = ""
 
-        # Split by markers
-        parts = response_text.split("###")
+        # Find section positions
+        assessment_match = re.search(r'^### EDITORIAL ASSESSMENT\s*$', response_text, re.MULTILINE)
+        intro_match = re.search(r'^### REVISED INTRODUCTION\s*$', response_text, re.MULTILINE)
+        verses_match = re.search(r'^### REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
 
-        for i, part in enumerate(parts):
-            part = part.strip()
+        # Extract assessment (from EDITORIAL ASSESSMENT to REVISED INTRODUCTION)
+        if assessment_match and intro_match:
+            assessment = response_text[assessment_match.end():intro_match.start()].strip()
+        elif assessment_match:
+            assessment = response_text[assessment_match.end():].strip()
 
-            if part.startswith("EDITORIAL ASSESSMENT"):
-                # Extract assessment text (everything until next ### marker)
-                assessment_text = part.replace("EDITORIAL ASSESSMENT", "", 1).strip()
-                # Find where next section starts
-                next_section_idx = assessment_text.find("REVISED INTRODUCTION")
-                if next_section_idx > 0:
-                    assessment = assessment_text[:next_section_idx].strip()
-                else:
-                    assessment = assessment_text.strip()
+        # Extract introduction (from REVISED INTRODUCTION to REVISED VERSE COMMENTARY)
+        if intro_match and verses_match:
+            revised_introduction = response_text[intro_match.end():verses_match.start()].strip()
+        elif intro_match:
+            revised_introduction = response_text[intro_match.end():].strip()
 
-            elif part.startswith("REVISED INTRODUCTION"):
-                intro_text = part.replace("REVISED INTRODUCTION", "", 1).strip()
-                # Find where next section starts
-                next_section_idx = intro_text.find("REVISED VERSE COMMENTARY")
-                if next_section_idx > 0:
-                    revised_introduction = intro_text[:next_section_idx].strip()
-                else:
-                    revised_introduction = intro_text.strip()
+        # Extract verse commentary (from REVISED VERSE COMMENTARY to end)
+        if verses_match:
+            revised_verses = response_text[verses_match.end():].strip()
 
-                # Replace the liturgical marker with proper markdown header
-                if "---LITURGICAL-SECTION-START---" in revised_introduction:
-                    revised_introduction = revised_introduction.replace(
-                        "---LITURGICAL-SECTION-START---",
-                        "## Modern Jewish Liturgical Use"
-                    )
-                    self.logger.info("✓ Liturgical section marker found and replaced with header")
+        # Replace the liturgical marker with proper markdown header
+        if "---LITURGICAL-SECTION-START---" in revised_introduction:
+            revised_introduction = revised_introduction.replace(
+                "---LITURGICAL-SECTION-START---",
+                "## Modern Jewish Liturgical Use"
+            )
+            self.logger.info("✓ Liturgical section marker found and replaced with header")
 
-                    # Validate that there's content after the header
-                    liturgical_idx = revised_introduction.find("## Modern Jewish Liturgical Use")
-                    content_after_header = revised_introduction[liturgical_idx + len("## Modern Jewish Liturgical Use"):].strip()
+            # Validate that there's content after the header
+            liturgical_idx = revised_introduction.find("## Modern Jewish Liturgical Use")
+            content_after_header = revised_introduction[liturgical_idx + len("## Modern Jewish Liturgical Use"):].strip()
 
-                    if len(content_after_header) < 100:
-                        self.logger.warning(
-                            f"⚠️  WARNING: Liturgical section appears very short ({len(content_after_header)} chars)"
-                        )
-                    else:
-                        self.logger.info(f"✓ Liturgical section has {len(content_after_header)} chars of content")
-                else:
-                    self.logger.warning("⚠️  WARNING: Liturgical section marker not found in revised introduction!")
-
-            elif part.startswith("REVISED VERSE COMMENTARY"):
-                revised_verses = part.replace("REVISED VERSE COMMENTARY", "", 1).strip()
+            if len(content_after_header) < 100:
+                self.logger.warning(
+                    f"⚠️  WARNING: Liturgical section appears very short ({len(content_after_header)} chars)"
+                )
+            else:
+                self.logger.info(f"✓ Liturgical section has {len(content_after_header)} chars of content")
+        else:
+            self.logger.warning("⚠️  WARNING: Liturgical section marker not found in revised introduction!")
 
         return {
             'assessment': assessment,

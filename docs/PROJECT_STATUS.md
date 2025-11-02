@@ -1,6 +1,6 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-11-02 (Session 64)
+**Last Updated**: 2025-11-02 (Session 65)
 **Current Phase**: Document Generation & Content Enhancement
 
 ---
@@ -25,20 +25,46 @@
 - **Transliterations with Hebrew Text** ✅: Master Editor now required to include Hebrew text alongside all transliterations.
 - **Furtive Patach Transcription** ✅: Phonetic analyst now correctly transcribes patach under final ח, ע, ה as vowel-before-consonant (e.g., רוּחַ → **RŪ**-aḥ).
 - **Empty Liturgical Section Output** ✅: Master Editor now generates actual liturgical content (200-500 words) using marker-based approach instead of outputting just header.
+- **Liturgical Section Parser Bug** ✅: Fixed parser that was incorrectly splitting on #### headings within liturgical section, causing subsection content to be discarded. Now uses regex-based section matching.
 
 ### Pending ⚠️
 - **Hebrew Font/Size in Parentheses**: Hebrew text within parentheses may still be Arial 11pt instead of Aptos 12pt. This issue is deferred for now.
 
 ### Next Up 📋
-- **Test Complete Pipeline**: Run full pipeline for Psalm 1 (`python scripts/run_enhanced_pipeline.py --psalm 1`) to verify all five fixes work together
-- **Review Commentary Quality**: After pipeline run, review the Master Editor's output to ensure:
+- **Test Complete Pipeline**: Run full pipeline for Psalm 1 (`python scripts/run_enhanced_pipeline.py --psalm 1`) to verify all fixes work together (including the recent parser fix)
+- **Review Commentary Quality**: Open the generated `.docx` file and verify:
   * Hebrew verse text is Aptos 12pt
-  * Modern Jewish Liturgical Use section has proper structure WITH CONTENT
-  * Transliterations are accompanied by Hebrew text
-  * Furtive patach correctly transcribed in phonetic transcriptions
-  * No stray "PART 1" or "PART 2" labels appear
-  * Liturgical insights are used effectively throughout
-- **Generate Additional Psalms**: Once verified, test fixes with other psalms to ensure robustness
+  * Modern Jewish Liturgical Use section has complete content with proper subsections (Full psalm, Key verses, Phrases)
+  * Transliterations are accompanied by Hebrew text throughout
+  * Furtive patach correctly transcribed in phonetic transcriptions (e.g., רוּחַ as **RŪ**-aḥ)
+  * Liturgical insights are used effectively throughout the commentary
+- **Generate Additional Psalms**: Once Psalm 1 is verified, test with other psalms to ensure robustness across different content
+
+---
+
+## Session 65 Summary
+
+- **Goal**: Fix liturgical section parser bug causing subsection content to be discarded.
+- **Activity**:
+  - User reported liturgical section appearing empty despite Session 64 marker-based fix
+  - Added debug logging to save raw LLM response for analysis
+  - Discovered parser was using `split("###")` which incorrectly split on `####` subsection headers
+  - Rewrote `_parse_editorial_response()` in `src/agents/master_editor.py` to use regex-based section matching
+  - Verified fix: liturgical section now has 1914 chars (vs. 168 before) with all subsections intact
+- **Outcome**: Parser now correctly preserves all content including Heading 4 subsections within the liturgical section. The regex approach with line anchors ensures exact matching of section delimiters.
+
+---
+
+## Session 64 Summary
+
+- **Goal**: Fix five persistent formatting and content issues using agentic approach.
+- **Activity**:
+  - Fixed Hebrew verse text font via XML-level setting (Aptos 12pt with all font ranges)
+  - Restructured Modern Jewish Liturgical Use section with subsections (Full psalm, Key verses, Phrases)
+  - Required Hebrew text alongside all transliterations
+  - Fixed furtive patach transcription (vowel-before-consonant for final gutturals)
+  - Debugged empty liturgical section output and implemented marker-based approach (`---LITURGICAL-SECTION-START---`)
+- **Outcome**: All five fixes successfully implemented. Commentary now has proper formatting, structured liturgical section with content, and correct phonetic transcriptions.
 
 ---
 

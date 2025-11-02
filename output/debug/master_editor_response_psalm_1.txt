@@ -1,0 +1,129 @@
+### EDITORIAL ASSESSMENT
+
+What works: The draft rightly treats Psalm 1 as the Psalter’s threshold and explains its “two ways” with care. It brings in classic Jewish readings (Rashi on “his Torah,” Radak on the plural “אַשְׁרֵי”) and offers solid lexical notes on יֶהְגֶּה and שָׁתוּל. The tree/chaff contrast is well sketched, and the conclusion on “knowing” (יודע) as covenantal regard is on target. The liturgical section includes valuable data (Yom Kippur, Tefillat Geshem, Simḥat Torah).
+
+What needs repair: 
+- A factual slip: v. 4 is described as giving the wicked “exactly four Hebrew words.” The clause actually runs to eight words (לֹא־כֵן הָרְשָׁעִים כִּי אִם־כַּמֹּץ אֲשֶׁר־תִּדְּפֶנּוּ רוּחַ).
+- The taxonomy of wickedness (רְשָׁעִים / חַטָּאִים / לֵצִים) is asserted rather than argued; Ibn Ezra’s caution and lexical nuance deserve closer handling.
+- The LXX (Septuagint) is absent where it is instructive. Notably Ps 1:1 renders לֵצִים as λοιμοί (“pestilent fellows”), a striking interpretive move; Ps 1:2 uses μελετᾶν for יֶהְגֶּה and νόμος for תּוֹרָה. These reception-history angles are missed.
+- Prosody and sound: the triple, stressed לֹא (LŌ’) in v.1, evident in the phonetic line, is ripe for a brief, illuminating note.
+- The essay sometimes overstates (“a complete taxonomy,” “theological engine”) and could trade a few grand abstractions for textual particulars (parallelism, merism, inclusio).
+- The liturgical section is informative but needs clearer structure, precise Hebrew citations from prayers, and brief notes on theological significance.
+
+Missed opportunities the materials allow us to answer: 
+- How the merism יוֹמָם וָלַיְלָה functions here alongside Joshua 1:8.
+- Palgei mayim as irrigation channels and the “transplanted” nuance of שָׁתוּל (Jeremiah 17:8; Ezekiel 17; 19; 47).
+- The judicial force of יָקֻמוּ (“stand/withstand”) in v.5 and the aggadic uses preserved in Torah Temimah (Sanhedrin 107b).
+- The inclusio with דֶּרֶךְ at the start and end, and Psalm 2 as the narrative outworking of Psalm 1’s “two ways.”
+
+Figurative language: The draft names the metaphors but does not leverage the database’s specific parallels. We should cite, at minimum, Psalm 35:5 and Isaiah 41:2 for chaff; Jeremiah 17:8 for the tree; Joshua 1:8 for meditation day and night. Usage patterns—chaff as a conventional emblem of ephemerality; trees by channels as sustained, cultivated vitality—make Psalm 1’s choices clearer.
+
+---
+
+### REVISED INTRODUCTION
+
+Psalm 1 does more than open a book; it teaches you how to read what follows. The poet sets two paths before the reader—the way of the righteous and the way of the wicked—and invites us to hear the Psalms as a school of desire. Righteousness here is not moral athleticism but a rooted habit of attention: delighting in the instruction of YHWH and murmuring it “day and night.” This is a wisdom poem, but its wisdom is not generic. The center of gravity is תּוֹרָה (Torah), divine teaching, become a way of life.
+
+The first verse sketches moral drift with disarming simplicity: “Happy the person who has not walked…not stood…not sat.” The verbs fall in a little staircase of entanglement: from casual movement (הָלַךְ), to lingering (עָמַד), to settled belonging (יָשַׁב). The three negations are aurally emphatic; in the phonetic line, לֹא (LŌ’) receives stress each time, a drumbeat of refusal. At each step the company darkens—from רְשָׁעִים (the wicked), to חַטָּאִים (sinners), to לֵצִים (scoffers). The last term, as BDB notes, signals the haughty spirit that “delights in scorning” and resists correction. The Greek translators took a bold turn, rendering לֵצִים as λοιμοί—literally “pestilent fellows,” a metaphor that reads mockers as a social contagion. The line is not a tidy taxonomy so much as a felt progression: what begins as a walk by bad advice can end in a chair that fits a little too well.
+
+Negation clears space for desire. “But rather, in the Torah of YHWH is his delight; and in his Torah he יֶהְגֶּה (yeh-GEH), day and night.” The verb הָגָה suggests murmuring, the low-voiced, rhythmic recitation of a text one is trying to live into (see BDB: “moan, mutter, meditate”). Joshua 1:8 pairs this exact practice with the same merism—“day and night,” a figure of speech (merism) in which two extremes denote the whole—to signify constancy. Rashi’s classic note catches the alchemy of study: it begins as “Torah of YHWH” (תּוֹרַת יְהוָה), but as one labors over it, it becomes “his Torah” (תּוֹרָתוֹ). The LXX echoes this innering: “ἐν τῷ νόμῳ Κυρίου τὸ θέλημα αὐτοῦ… καὶ ἐν τῷ νόμῳ αὐτοῦ μελετᾷ” (his will is in the Lord’s Law… and in his Law he studies). Where modern readers might hear “law” as code, the psalm hears “instruction as sustenance.”
+
+The tree makes that claim visible. “He shall be like a tree שָׁתוּל (shā-THŪL)—transplanted—by channels of water” (פַלְגֵי־מָיִם). The participle matters. This is not a lucky sapling but a chosen placement, the agricultural equivalent of vocation. The channels (from פָּלַג, “to divide”) evoke irrigation works, not a brook stumbled upon by chance. Elsewhere the Bible reserves this kind of placement for promised nurture: “like a tree planted by the stream” (Jeremiah 17:8), or the ever-greenings of Ezekiel’s river (Ezekiel 47:12). Fruitfulness arrives “in season,” leaves do not wither, and the work prospers—not as a talismanic guarantee, but as a description of what a life plumbed into good water is like over time. The psalmist’s terse style carries a great deal in few words; poetry’s compact “cola” (single lines in a parallel pair) do this kind of heavy lifting.
+
+The counterimage is intentionally slight. “Not so the wicked!” The Hebrew then says: “but rather, like chaff that the wind drives away.” Grain endures; chaff is for winnowing. Across the canon, chaff is a conventional emblem of ephemerality and worthlessness (Psalm 35:5; Isaiah 41:2). The verb נָדַף (to drive, scatter) suggests a force they cannot resist. No roots, no mass, no future. The contrast is not only moral but ontological. Righteousness coheres with the world’s grain; wickedness is debris.
+
+Verses 5–6 shift from field to court. “Therefore the wicked will not stand in the judgment, nor sinners in the assembly of the righteous.” Here קוּם (“stand”) is judicial: to stand is to endure scrutiny. The rhyme of thought is deliberate. In v.1, “standing” in a sinner’s way is compromise; in v.5, “standing” in God’s judgment is impossible for those whose lives are chaff. “Assembly” (עֲדַת) is a charged term in the Torah for a people gathered by appointment; to be excluded from it is to live beyond the circle of flourishing. Rabbinic tradition leverages this line in sober ways (Sanhedrin 107b), reading “not stand in the judgment” against notorious generations (the Flood; Sodom).
+
+The conclusion is both brief and profound: “For YHWH knows the way of the righteous, but the way of the wicked will perish.” Hebrew “knowing” (יֹדֵעַ) is not bare awareness; it is recognition and regard—“For I have known him, that he may command his children…” (Genesis 18:19). Radak glosses it “pays attention to do them good.” Malbim goes further: divine knowing, which cleaves to what endures, binds to the righteous path because it shares something of God’s permanence. And notice the framing: the poem opens by warning where you “walk” and closes by naming two “ways” (דֶּרֶךְ). This device—an inclusio, or envelope—brackets the psalm’s argument and asks us to hear all that lies between as a single lecture on the art of walking.
+
+Read with Psalm 2, the pairing comes alive. If Psalm 1 places a single person at the fork of the road, Psalm 2 depicts the nations assembled on the wrong one. The “counsel of the wicked” reappears as “the counsel of the kings,” and the two openings become a single overture to the Psalter: what you attend to (and whom you keep company with) will make you fruitful—or weightless.
+
+Definitions used:
+- Merism: naming two extremes (“day and night”) to mean “the whole.”
+- Inclusio: a repeated word or phrase at beginning and end that frames a unit (here, “way”).
+- Colon: a single poetic line within a parallel pair.
+- LXX: the Septuagint, the ancient Greek translation of the Hebrew Bible, useful for ancient interpretation and textual variants.
+- MT: the Masoretic Text, the standard medieval Hebrew text on which most modern editions are based.
+
+---LITURGICAL-SECTION-START---
+
+Psalm 1 is a threshold text in worship as well as in the Psalter.
+
+#### Full psalm
+- Yom Kippur (Maariv): Many Ashkenazi and Edot HaMizrach communities recite the entire psalm as an opening devotion on Kol Nidrei night. Placing “אַשְׁרֵי הָאִישׁ” (“Happy is the person…”) at the entry to the Day of Atonement foregrounds choice: counsel and company, way and destiny.
+
+#### Key verses
+- Psalm 1:3 in Tefillat Geshem (Shemini Atzeret, Amidah—Gevurot). The piyyut for rain weaves the verse into a petition for winter blessing: “בֵּרַכְתּוֹ כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם” (Bless him like a tree planted by streams of water). Theologically, Torah-rootedness and rain-nourishment become one image of divine provision.
+
+- Psalm 1:3 in Edot HaMizrach Rosh Hashanah night Kiddush and in the Mussaf of the Shalosh Regalim: “וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ…” is quoted amid pleas for “הַצְלָחָה” and blessing, aligning the year’s hopes with seasonal fruitfulness.
+
+#### Phrases
+- Psalm 1:1 “בַּעֲצַת רְשָׁעִים” in Simḥat Torah Hakafot (Sefard tradition): “וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים” (Grant us not to walk in the counsel of the wicked). The joy of Torah is tethered to vigilance about one’s counsel and company.
+
+- Psalm 1:1 “וּבְמוֹשַׁב לֵצִים לֹא” as prooftext in Pirkei Avot (customarily studied after Shabbat Minḥah): “שֶׁיּוֹשְׁבִין וְאֵין בֵּינֵיהֶם דִּבְרֵי תוֹרָה, הֲרֵי זֶה מוֹשַׁב לֵצִים, שֶׁנֶּאֱמַר ‘וּבְמוֹשַׁב לֵצִים לֹא יָשָׁב’.” The absence of Torah-talk marks a gathering as a “seat of scoffers,” a liturgical ethic of conversation.
+
+The liturgical usage is not ornamental. Communities place Psalm 1 where choices are made: on the holiest night, at the turn of the seasons, around the dancing scrolls. In each case the psalm’s agricultural image becomes a spiritual map: be planted by the right water, and the fruit will come in season.
+
+---
+
+### REVISED VERSE COMMENTARY
+
+**Verse 1**
+
+The beatitude opens with breadth: אַשְׁרֵי־הָאִישׁ (`'ash-rēy-hā-'IY-sh`)—“Happy is the person.” Radak notes the plural form אַשְׁרֵי signals composite well-being, not a single stroke of luck. The line then sketches moral entanglement by movement: “who has not walked in the counsel of the wicked, nor stood in the way of sinners, nor sat in the seat of scoffers.” The tricolon moves from incidental exposure (הָלַךְ) to participation (עָמַד) to belonging (יָשַׁב). The threefold לֹא (each LŌ’ stressed in the phonetic) creates a cadence of refusal.
+
+The three groups are related but not identical. רְשָׁעִים are the “wicked,” those whose way bends against the grain of covenant life. חַטָּאִים are “sinners,” the more general term for those who miss the mark. לֵצִים (BDB: scorners who “delight in scorning” and reject correction) are the terminal case of cynicism. The LXX’s rendering of לֵצִים as λοιμοί (“pestilent fellows”) is sardonic and telling: mockery spreads, and a society that organizes around it becomes diseased. Ibn Ezra cautions against pressing the sequence into a rigid taxonomy; better to hear a rhetorical descent from motion to stasis and from corruption to contempt.
+
+The poetry works by parallelism—the art of the second line responding to the first. (Parallelism is the basic structure of Hebrew verse: the second “colon,” or half-line, confirms, sharpens, or completes the first.) Here the parallel cola are staircase-like: walk → stand → sit; counsel → way → seat; wicked → sinners → scoffers. The effect is both structural and moral: the longer one loiters in the wrong space, the more the posture hardens. Talmudic reception makes the point with social specificity, warning against entertainments that habituate levity and thus “bring one to neglect of Torah” (Torah Temimah on Avodah Zarah 18b). Liturgically, Sefard communities echo the verse in Simḥat Torah’s Hakafot: “וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים” (Grant us not to walk in the counsel of the wicked), a wise reminder at the height of joy.
+
+The verse’s genius lies in its modesty. It does not ask you to be a hero; it asks you to mind your steps and your seats. Counsel, roads, chairs—elemental human realities become the psalm’s moral map.
+
+**Verse 2**
+
+כִּי אִם (a strong “rather”) pivots from negation to desire: “Rather, in the Torah of YHWH is his delight, and in his Torah he יֶהְגֶּה (`yeh-GEH`) day and night.” Two words are central. First, חֵפֶץ (`ḥef-TSŌ`): not duty, but delight. The psalmists consistently insist that love fuels obedience. Second, הָגָה: not silent perusal but murmuring recitation. BDB’s range—“moan, mutter, meditate”—captures the embodied soundscape of ancient study. This is the same practice commended in Joshua 1:8: “לֹא־יָמוּשׁ… וְהָגִיתָ בוֹ יוֹמָם וָלַיְלָה,” where the same merism “day and night” (יוֹמָם וָלַיְלָה) indicates constancy.
+
+The double naming of Torah invites a classic observation. First it is “תּוֹרַת יְהוָה” (Torah of YHWH), then “תּוֹרָתוֹ” (his Torah). Rashi’s gloss—“initially it is called the Torah of YHWH; after he has labored in it, it is called his”—describes not ownership so much as internalization. The LXX’s “μελετᾷ” (studies) fittingly renders יֶהְגֶּה, and “νόμος” (law) renders Torah, which in biblical usage means “divine instruction,” not merely statute. The psalm’s claim is simple: constant, delighted attention to God’s teaching shapes the self.
+
+The merism “day and night” warrants a word. A merism names opposite poles to imply the whole—“heaven and earth,” “going out and coming in,” “day and night.” Here it locates meditation not in a hermit’s cell but in ordinary time. That everydayness is reflected in later practice: the verse frames how Jewish worship and study imagine a life—morning and evening, household and road (cf. Deuteronomy 11:19’s similar merism).
+
+Finally, the verse’s music. Read aloud, the stress falls on key content words (תּוֹרַת, יְהוָה, חֶפְצוֹ, תּוֹרָתוֹ, יֶהְגֶּה), giving it the incantatory cadence of prayer. It is less about thinking and more about apprenticing the voice, and thus the heart, to a text.
+
+**Verse 3**
+
+The simile is both lovely and exact: “He shall be like a tree שָׁתוּל (`shā-THŪL`) by channels of water, which yields its fruit in season; its leaf does not wither; and in all he does he prospers.” Two details matter. First, שָׁתוּל is the passive participle of שָׁתַל, “to transplant.” This is careful placement, not happenstance. Jeremiah 17:8 uses the same image—“וְהָיָה כְּעֵץ שָׁתוּל עַל־מַיִם… וְעָלֵהוּ רַעֲנָן”—to describe the one who trusts YHWH; Ezekiel 17:22–23 and 19:10 use the verb for royal plantings. Second, פַלְגֵי־מָיִם (from פָּלַג, “to divide”) evokes irrigation channels. The righteous are not dependent on fickle rain but on a reliable watercourse. The figure is agricultural, but it is also spiritual: Torah is the steady flow.
+
+The triad of blessings—fruit “in season,” unfading leaves, and prosperity in work—maps to character, durability, and vocation. “In season” guards against forced readings; the psalmist does not promise perpetual harvest but appropriate timing. “Leaf does not wither” resonates with Ezekiel 47:12’s vision of leaves for healing: it points to vitality that outlasts weather. “Prospers” (יַצְלִיחַ) can sound like a slogan; the contexts cited above caution against reading it as a simplistic guarantee. It names the ordinary goodness that attends roots in the right place.
+
+Scripture’s figurative habits help here. The “tree” as a figure for the godly is common; the “stream” or “channel” as the locus of divine blessing recurs (Psalm 46:4; Jeremiah 17:8). The figure’s antitype appears in v.4: chaff. Where the righteous have mass and root, the wicked have neither.
+
+Liturgically, communities draw on this verse precisely where they pray for water and for a good year. In Tefillat Geshem on Shemini Atzeret, the petition reads: “בֵּרַכְתּוֹ כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם,” binding rain and Torah as parallel blessings. Edot HaMizrach quote it in the Rosh Hashanah night Kiddush, a garden prayer at the threshold of time.
+
+Ibn Ezra notes a further nuance: “עַל־פַלְגֵי־מָיִם” can mean “by one of the channels,” a Hebrew way of using a plural to indicate “the class of,” as in “to the innermost parts of the ship” (Jonah 1:5). The line’s precision—transplanted, well-watered, seasonally fruitful—derives not from luck but from location.
+
+**Verse 4**
+
+“Not so the wicked!”—and the music of the poem changes. After the extended, textured image of rootedness, the wicked receive a single, unsubtle comparison: “כִּי אִם־כַּמֹּץ אֲשֶׁר־תִּדְּפֶנּוּ רוּחַ”—“but like chaff which the wind drives away.” The LŌ’-kēn (לֹא־כֵן) cancels the entire previous line of blessing at a stroke; the particle כִּי אִם signals the counter-fate.
+
+Chaff (מֹּץ) is threshing-floor refuse—light, useless, scatterable. Scripture consistently employs it as a figure of ephemerality and judgment. The database gives, for instance, Psalm 35:5 (“כְּמֹץ לִפְנֵי־ר֑וּחַ”), a curse against enemies, and Isaiah 41:2, where hostile kings become chaff before a conqueror. The pattern is stable: chaff displays two attributes—lightness (no weight or inwardness) and vulnerability to forces it cannot resist. The verb נָדַף (here תִּדְּפֶנּוּ) means “drive” or “scatter,” and in poetic contexts intensifies the sense of overpowering—God or wind doing the driving, the wicked reduced to drift.
+
+The brevity is itself interpretive, especially after v.3’s extended figure. Alter calls attention to the way Hebrew poetry uses terseness as meaning: thin lives get thin description. Radak adds a social angle: chaff can injure when blown into the eyes of passersby; wickedness is not merely nothing—it harms.
+
+Measured against v.3, v.4 reads almost like a mirror image: fixed / driven; fruitful / barren; nourished / exposed. The contrast is deliberately schematic. Psalm 1 does not attempt a theodicy; it asks what kind of life has weight. On the threshing floor, the wind answers.
+
+**Verse 5**
+
+“Therefore the wicked will not stand in the judgment, nor sinners in the assembly of the righteous.” The causal עַל־כֵן links the image to its outcome: what has no weight cannot “stand.” The verb קוּם (יָקֻמוּ) in judicial contexts means “to hold one’s ground,” “to endure scrutiny” (cf. BDB). The line is a neat irony: in v.1, “standing” in a sinner’s path is a step toward settling among scoffers; by v.5, the wicked cannot “stand” when it matters. The second colon ascends from the individual to the communal: “בַּעֲדַת צַדִּיקִים” (in the assembly of the righteous). עֵדָה is the technical Torah-term for an appointed gathering of Israel; exclusion from it is not merely social but covenantal. 
+
+Ibn Ezra hears “judgment” (מִשְׁפָּט) as both the final divine trial and, more prosaically, the day of death—a moment when illusions of permanence fail. Traditional readings play with the line’s scope. Malbim distinguishes “wicked” and “sinners”: the former, he says, cannot stand even on their own terms; the latter, who sin from appetite rather than malice, may elicit mitigating consideration, but not in the “assembly of the righteous,” where the standard is higher. Talmudic Midrash (Sanhedrin 107b, via Torah Temimah) applies this verse to paradigmatic wicked generations, treating “not stand in the judgment” as ultimate exclusion.
+
+The structure of the verse exhibits antithetic parallelism—the second colon sets a limit (no place among the righteous) that sharpens the first (no footing in court). The poetry’s economy does the theological work: the life without roots falters in the moment that calls for roots; the life without wise company finds itself outside the circle where wisdom is celebrated.
+
+**Verse 6**
+
+“For YHWH knows the way of the righteous, but the way of the wicked will perish.” Here the psalm gives a reason (כִּי) for all it has asserted. “Knows” (יֹדֵעַ) in biblical idiom signals intimate regard, chosen recognition, active care: “כִּי יְדַעְתִּיו” (Genesis 18:19); “אָנֹכִי יְדַעְתִּיךָ” (Hosea 13:5). Radak glosses, “recognizes and watches over to do them good.” Malbim, moving metaphysically, suggests that divine knowing cleaves to what endures; hence the “way” that aligns with God remains, while the other “perishes” (תֹּאבֵד, from אָבַד, a verb often used for extermination or vanishing).
+
+The verse is also a structural key. “Way” (דֶּרֶךְ) brackets the poem—implicitly in v.1’s “way of sinners,” explicitly in v.6’s pair. This framing device (an inclusio) invites us to read Psalm 1 as a little treatise on walking: counsel chosen, steps taken, company kept, water sought. The antithetic parallelism is crisp: YHWH’s active verb (“knows”) meets the passive fate of the wicked path (“will perish”). One is kept in mind; the other is let go—and falls apart.
+
+The LXX is illuminating: “ὅτι γινώσκει Κύριος ὁδὸν δικαίων, καὶ ὁδὸς ἀσεβῶν ἀπολεῖται.” γινώσκει (“knows”) and ἀπολεῖται (“is destroyed/perishes”) preserve the Hebrew symmetry. The Septuagint’s choice across the psalm—νόμος for Torah, μελετᾶν for יֶהְגֶּה, λοιμοί for לֵצִים—shows how Greek-speaking Jews first heard this poem: Torah as formative study; scoffers as pestilential; knowledge as preferential care.
+
+Liturgically, the verse returns us to Yom Kippur, where congregations recite Psalm 1 in full. Hearing “YHWH knows the way of the righteous” at the threshold of the fast frames the day less as a test than as a return to waters that hold. That is the poem’s final promise: root yourself well, and time will, in season, bear you out.
