@@ -292,8 +292,14 @@ class ResearchBundle:
                     md += f"**{parallel.get('parallel_type')}** ({heb.get('text_reference')})  \n"
                     md += f"*Conceptual Analysis*: {parallel.get('conceptual_analysis', '')[:300]}...  \n\n"
 
-            md += "*Note: Full analytical framework available to Writer agent*\n\n"
-            md += "---\n\n"
+            # Include full analytical framework
+            if self.rag_context.analytical_framework:
+                md += "## Analytical Framework for Biblical Poetry\n\n"
+                md += self.rag_context.analytical_framework
+                md += "\n\n---\n\n"
+            else:
+                md += "*Note: Full analytical framework available to Writer agent*\n\n"
+                md += "---\n\n"
 
         # Commentary section
         if self.commentary_bundles:

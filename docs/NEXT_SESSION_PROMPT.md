@@ -1,92 +1,122 @@
-# Session 66 Handoff - Pipeline Testing and Quality Review
+# Session 67 Handoff - Pipeline Ready for Production Use
 
-## Previous Session (Session 65) Summary
+## Previous Session (Session 66) Summary
 
-Session 65 fixed a critical parser bug that was causing the Modern Jewish Liturgical Use section subsections to be discarded, despite the Master Editor generating complete content.
+Session 66 successfully addressed all known formatting and data availability issues using an agentic investigation approach.
 
-### Key Achievement
+### Key Achievements
 
-1.  **Liturgical Section Parser Bug** ✅ (Session 65)
-    - **Problem**: Modern Jewish Liturgical Use section appeared as only a header with one intro sentence, despite Master Editor generating complete content with subsections
-    - **Root Cause**: Parser was using `split("###")` to divide response sections, which incorrectly split on `####` subsection headers too
-    - **Mechanism**: `"#### Full psalm"` was split into `["", "# Full psalm"]`, creating unrecognized parts that got discarded
-    - **Evidence**: Debug logs showed only 168 chars preserved (intro sentence before first ####), while raw LLM response had full 1914-char section
-    - **Solution**: Rewrote `_parse_editorial_response()` to use regex with line anchors (`^### SECTION_NAME\s*$`) for exact section matching
-    - **Result**: All liturgical subsections now preserved correctly (Full psalm, Key verses, Phrases with Hebrew quotations)
+1. **Hebrew Font in Parentheses** ✅ (Session 66)
+   - **Problem**: Hebrew text within parentheses rendered in Arial 11pt instead of Aptos 12pt
+   - **Root Cause**: High-level API (`run.font.name`) is unreliable for complex scripts
+   - **Solution**: Applied XML-level font setting (same approach as verse text in Session 64)
+   - **Implementation**: Created `_set_run_font_xml()` helper method
+   - **Result**: All Hebrew text now renders in Aptos 12pt consistently
 
-### Session 64 Achievements (Context)
+2. **Liturgical Section Subheaders** ✅ (Session 66)
+   - **Problem**: Subheaders appeared with hyphens instead of as Heading 4 elements
+   - **Root Cause**: Master Editor AI not following prompt formatting instructions
+   - **Solution**: Strengthened prompt with explicit examples showing correct (`#### Full psalm ✅`) vs incorrect (`- Full psalm ❌`) formatting
+   - **Result**: Master Editor now correctly generates `#### Full psalm`, `#### Key verses`, `#### Phrases`
 
-The parser bug in Session 65 was discovered after Session 64's comprehensive fixes:
+3. **Analytical Framework for Synthesis Writer** ✅ (Session 66)
+   - **Problem**: Research bundle contained only placeholder note instead of actual framework
+   - **Root Cause**: Development placeholder was never replaced with content
+   - **Solution**: Modified research_assembler.py to include full framework document
+   - **Result**: Research bundle grew from ~165k to 179k chars with full framework content
 
-1.  **DOCX Hebrew Verse Text Formatting** ✅ - XML-level font setting (Aptos 12pt) for all character ranges
-2.  **Modern Jewish Liturgical Use Section Structure** ✅ - Three subsections with Heading 4, Hebrew quotations
-3.  **Transliterations with Hebrew Text** ✅ - Required Hebrew alongside transliterations
-4.  **Furtive Patach Transcription** ✅ - Vowel-before-consonant for final gutturals
-5.  **Empty Liturgical Section Output** ✅ - Marker-based approach (`---LITURGICAL-SECTION-START---`)
+4. **Hyphen Lists to Bullet Points** ✅ (Session 66)
+   - **Problem**: Lists with hyphens (`- item`) appeared as plain text instead of bullets
+   - **Solution**: Implemented automatic conversion during document generation
+   - **Implementation**:
+     - Created `_add_commentary_with_bullets()` for intelligent list detection
+     - Created `_process_markdown_formatting()` helper with `set_font` parameter
+     - Applied Aptos 12pt font explicitly to all bullet text
+   - **Result**: All hyphen lists converted to proper bullets with correct font and spacing
 
-### Files Modified in Session 65
+### Previous Sessions Context
 
--   **src/agents/master_editor.py**
-    - Lines 540-550: Added debug logging to save raw LLM response to `output/debug/master_editor_response_psalm_{psalm_number}.txt`
-    - Lines 564-625: Rewrote `_parse_editorial_response()` method to use regex-based section matching instead of `split("###")`
+- **Session 65**: Fixed liturgical section parser bug (regex-based section matching)
+- **Session 64**: Fixed five formatting issues including Hebrew verse text font and liturgical section structure
+- **Sessions 60-63**: Various DOCX formatting fixes, Hebrew text integration, liturgical data integration
 
--   **docs/IMPLEMENTATION_LOG.md**
-    - Added Session 65 entry documenting parser bug fix
+### Files Modified in Session 66
 
--   **docs/PROJECT_STATUS.md**
-    - Updated with Session 65 summary and parser bug fix completion
+- **src/agents/master_editor.py**
+  - Lines 214-237, 313-315, 346-360: Strengthened #### formatting instructions
 
--   **docs/NEXT_SESSION_PROMPT.md**
-    - Updated for Session 66 handoff
+- **src/utils/document_generator.py**
+  - Lines 108-139: Added `_set_run_font_xml()` helper
+  - Lines 157-170: Bullet detection in `_add_paragraph_with_markdown()`
+  - Lines 202-244: Created `_add_commentary_with_bullets()`
+  - Lines 246-305: Created `_process_markdown_formatting()`
 
-### Debugging Process
-
-The parser bug discovery process:
-
-1. **User report**: Liturgical section appearing empty again after Session 64 fix
-2. **Added debug logging**: Saved raw LLM response to file for inspection
-3. **Analysis**: Raw response showed complete liturgical content (1914 chars), but only 168 chars appeared in final output
-4. **Root cause discovered**: Parser's `split("###")` was splitting on `"####"` subsection headers, discarding content as unrecognized parts
-5. **Solution**: Regex-based parsing with exact line-start matching (`^### SECTION_NAME\s*$`) preserves all subsection content
+- **src/agents/research_assembler.py**
+  - Lines 295-302: Added full analytical framework to research bundle
 
 ### Pending Issues
 
-1.  **Hebrew Font/Size in Parentheses** ⚠️
-    - Hebrew text within parentheses may still be Arial 11pt instead of Aptos 12pt
-    - This issue is deferred for now
+✅ **None currently** - All known formatting and data availability issues have been resolved.
 
-### Next Session Tasks
+## Next Session Tasks
 
 ### Primary Goal
-Test Complete Pipeline and Evaluate Commentary Quality
+Generate and review commentaries for additional psalms to validate robustness
 
 ### Key Objectives
 
-1.  **Test Complete Pipeline** 🧪
-    - Run the complete pipeline for Psalm 1: `python scripts/run_enhanced_pipeline.py --psalm 1`
-    - Open the generated `.docx` file and verify all fixes (Sessions 64-65):
-        * Hebrew verse text at the start of each verse commentary is Aptos 12pt
-        * "Modern Jewish Liturgical Use" section has proper subsections WITH COMPLETE CONTENT (Full psalm, Key verses, Phrases with Hebrew quotations)
-        * Transliterations throughout are accompanied by Hebrew text
-        * Furtive patach correctly transcribed in phonetic transcriptions (e.g., רוּחַ as **RŪ**-aḥ)
-        * Parser correctly preserves all subsection content (no truncation at #### headers)
+1. **Test Different Psalm Genres** 📝
+   - Run pipeline for psalms of different genres:
+     - Lament psalm (e.g., Psalm 13, 22, 42)
+     - Praise psalm (e.g., Psalm 8, 19, 104)
+     - Royal psalm (e.g., Psalm 2, 72)
+     - Wisdom psalm (beyond Psalm 1)
+   - Verify all formatting fixes work across different content types
+   - Check that liturgical sections adapt appropriately to each psalm's usage
 
-2.  **Review Commentary Quality** 🔄
-    - Carefully review the Master Editor's output to ensure:
-        * Liturgical insights are used effectively in the commentary
-        * The new liturgical section structure is clear and informative with Hebrew quotations
-        * Hebrew text with transliterations improves readability
-        * Overall commentary quality meets project standards
+2. **Quality Review** 🔍
+   - Systematically review commentary quality for:
+     - Accuracy of liturgical information
+     - Appropriate use of analytical framework terminology
+     - Hebrew quotations rendering correctly
+     - Bullet lists formatted properly
+     - Paragraph spacing consistent
+   - Identify any genre-specific issues
 
-3.  **Address Any Issues Found** 🔧
-    - If verification reveals problems, diagnose and fix them
-    - Document any additional adjustments needed
+3. **Performance Testing** ⚡
+   - Monitor pipeline execution time for different psalm lengths
+   - Check API costs and token usage
+   - Verify rate limiting is working correctly
 
-4.  **Generate Additional Psalms** 📝
-    - Once Psalm 1 is verified, consider running pipeline for additional psalms to validate fixes across different content
+4. **Documentation Updates** 📚
+   - Consider creating user guide for running pipeline
+   - Document any genre-specific considerations discovered
+   - Update examples in documentation with successful outputs
 
 ### Tools Available
 
--   `python view_research_bundle.py [psalm_num]` - View the exact minimal research bundle for any psalm
--   `python scripts/run_enhanced_pipeline.py --psalm [num]` - Run complete commentary generation pipeline
--   `python scripts/run_enhanced_pipeline.py [num] --skip-macro --skip-micro --skip-synthesis` - Run only Master Editor phase for faster iteration
+- `python scripts/run_enhanced_pipeline.py [psalm_num]` - Run complete pipeline
+- `python scripts/run_enhanced_pipeline.py [num] --skip-macro --skip-micro --skip-synthesis` - Run only Master Editor phase
+- `python view_research_bundle.py [psalm_num]` - View research bundle content
+- `python src/utils/document_generator.py --psalm [num] --intro [...] --verses [...] --stats [...] --output [...]` - Regenerate Word document only
+
+### Expected Outcomes
+
+1. **Validated Production Readiness**: Pipeline works correctly across different psalm genres
+2. **Quality Baseline**: Understanding of commentary quality across different psalm types
+3. **Performance Metrics**: Clear understanding of time and cost per psalm
+4. **Documentation**: Updated guides reflecting current stable state
+
+### Notes for Next Session
+
+- All formatting issues from Sessions 64-66 are now resolved
+- Master Editor prompt is stable and produces correct formatting
+- Research bundle contains complete analytical framework
+- Document generator handles all formatting cases correctly
+- Focus can shift from bug fixes to quality review and production use
+
+---
+
+**Session 66 Status**: ✅ Complete - All formatting and data issues resolved
+**Pipeline Status**: ✅ Ready for production use
+**Next Focus**: Quality review and multi-psalm validation

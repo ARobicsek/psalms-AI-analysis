@@ -143,6 +143,7 @@ Review the introduction and verse commentary for these issues:
 - Explain technical terms when needed (e.g., "jussive," "anaphora," "chiasm," "inclusio")
 - Elegant, uncluttered prose for sophisticated lay readers (New Yorker/Atlantic level)
 - AVOID pompous tone and fancy terms that signal you're a professor; prove your erudition through the incisive and original quality of your insights and your lapidary prose.
+- You are not just a scholar; you are a masterful writer **AND A TEACHER**. You are fashioning legitimate insights and aha! moments for your readers.
 
 ### 4. ARGUMENT COHERENCE
 - Introduction thesis unclear or unsupported
@@ -211,10 +212,30 @@ The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" 
 **MANDATORY ACTIONS:**
 1. **Review the existing liturgical section** in the draft introduction
 2. **Cross-reference with research bundle** to verify accuracy and add missing details
-3. **Restructure into clear subsections** (use #### for Heading 4):
-   * #### Full psalm - Where/when the complete psalm is recited (if applicable)
-   * #### Key verses - Each verse used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
-   * #### Phrases - Each phrase used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
+3. **Restructure into clear subsections using EXACT MARKDOWN HEADING 4 SYNTAX**:
+
+   **⚠️ CRITICAL FORMAT REQUIREMENT:**
+   - You MUST use markdown Heading 4 syntax: `#### Subheading Name`
+   - Do NOT use hyphens: `- Full psalm` ❌ WRONG
+   - Do NOT use bullets: `• Full psalm` ❌ WRONG
+   - Do NOT use bold: `**Full psalm**` ❌ WRONG
+   - Use ONLY the markdown heading syntax: `#### Full psalm` ✅ CORRECT
+
+   **Example of CORRECT formatting:**
+   ```
+   #### Full psalm
+
+   Many communities recite the entire psalm at Yom Kippur Maariv...
+
+   #### Key verses
+
+   Verse 2 (אַשְׁרֵי־הָאִישׁ, "Happy is the one") appears in...
+   ```
+
+   **Required subsections (use only those that apply to this psalm):**
+   * `#### Full psalm` - Where/when the complete psalm is recited (if applicable)
+   * `#### Key verses` - Each verse used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
+   * `#### Phrases` - Each phrase used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
 4. **OMIT subsections that don't apply** to this psalm
 5. **Add Hebrew quotations** - for EVERY verse/phrase, include Hebrew from both the psalm AND the prayer
 6. **Be specific** - name the service, occasion, tradition
@@ -290,8 +311,9 @@ Example of BAD: "Verse 16 speaks of God opening his hand. This imagery appears e
 This is NOT optional. This is NOT a placeholder. You MUST:
 1. **Find the liturgical data** in the research bundle (look for sections titled "Modern Jewish Liturgical Use (Psalm N)" or "Phrase-Level Liturgical Usage")
 2. **Write actual content** - the section cannot be empty or contain only the header
-3. **Use the proper structure**:
-   - Include subsections (#### Full psalm, #### Key verses, #### Phrases) as appropriate for THIS psalm
+3. **Use the proper structure with CORRECT MARKDOWN SYNTAX**:
+   - Include subsections using Heading 4 markdown: `#### Full psalm`, `#### Key verses`, `#### Phrases` (as appropriate for THIS psalm)
+   - **DO NOT USE HYPHENS OR BULLETS** - use only `####` for subsection headings
    - OMIT subsections that don't apply to this specific psalm
    - For verses and phrases, ALWAYS start with Hebrew text + English translation
    - Include Hebrew quotations from the prayers themselves to illustrate usage
@@ -320,10 +342,23 @@ Second, IMMEDIATELY after finishing the essay, add a blank line and write this E
 
 ---LITURGICAL-SECTION-START---
 
-Then continue with 2-4 substantial paragraphs (200-500 words) about liturgical usage:
-- Full psalm recitation (if applicable) - where, when, which traditions
-- Key verses in prayers (if applicable) - for EACH: Hebrew text, English, prayer name, service, occasion, Hebrew quote from the prayer
-- Phrases in prayers (if applicable) - same format as verses
+Then continue with 2-4 substantial paragraphs (200-500 words) about liturgical usage, structured with Heading 4 subsections:
+
+**⚠️ REQUIRED FORMAT - Use markdown Heading 4 (####) for subsections:**
+
+#### Full psalm
+
+[Write content about where/when the complete psalm is recited - which traditions, services, occasions. OMIT this subsection if not applicable.]
+
+#### Key verses
+
+[For EACH verse: Start with Hebrew text + English translation, then explain the prayer context with Hebrew quotations from the prayers. OMIT this subsection if not applicable.]
+
+#### Phrases
+
+[For EACH phrase: Start with Hebrew text + English translation, then explain the prayer context with Hebrew quotations from the prayers. OMIT this subsection if not applicable.]
+
+**DO NOT use hyphens, bullets, or bold for subsection headings - ONLY use #### markdown syntax.**
 
 Use BOTH the existing liturgical content in the draft introduction AND the detailed liturgical data in the research bundle.
 

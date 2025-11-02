@@ -105,6 +105,39 @@ class DocumentGenerator:
             section.left_margin = Pt(72)
             section.right_margin = Pt(72)
 
+    def _set_run_font_xml(self, run, font_name='Aptos', font_size=12):
+        """
+        Set font and size at the XML level for comprehensive coverage.
+        This ensures the font applies to all character ranges (ASCII, complex script, etc.).
+        This approach is more reliable than the high-level API for Hebrew text.
+        """
+        rPr = run._element.get_or_add_rPr()
+
+        # Set rFonts element with all font attributes
+        rFonts = rPr.find(ns.qn('w:rFonts'))
+        if rFonts is None:
+            rFonts = OxmlElement('w:rFonts')
+            rPr.insert(0, rFonts)
+
+        # Set font for all ranges: ascii, hAnsi (high ANSI), and cs (complex scripts)
+        rFonts.set(ns.qn('w:ascii'), font_name)
+        rFonts.set(ns.qn('w:hAnsi'), font_name)
+        rFonts.set(ns.qn('w:cs'), font_name)
+
+        # Set size at XML level
+        sz = rPr.find(ns.qn('w:sz'))
+        if sz is None:
+            sz = OxmlElement('w:sz')
+            rPr.append(sz)
+        sz.set(ns.qn('w:val'), str(font_size * 2))  # Word uses half-points
+
+        # Set complex script size
+        szCs = rPr.find(ns.qn('w:szCs'))
+        if szCs is None:
+            szCs = OxmlElement('w:szCs')
+            rPr.append(szCs)
+        szCs.set(ns.qn('w:val'), str(font_size * 2))  # Word uses half-points
+
     def _add_paragraph_with_markdown(self, text: str, style: str = 'Normal'):
         """Adds a paragraph, parsing basic markdown for bold/italics, including nested formatting."""
         # Apply divine name modification to the entire paragraph text first.
@@ -121,40 +154,125 @@ class DocumentGenerator:
             self.document.add_heading(modified_text.replace('##', '').strip(), level=2)
             return
 
+        # Handle bullet lists (lines starting with "- ")
+        is_bullet = False
+        if modified_text.startswith('- '):
+            modified_text = modified_text[2:]  # Remove "- " prefix
+            is_bullet = True
+
         p = self.document.add_paragraph(style=style)
-        # Split by bold/italic markers
+
+        # Apply bullet formatting if this is a list item
+        if is_bullet:
+            p.style = 'List Bullet'
+
+        # Use the centralized formatting method with font setting for bullets
+        self._process_markdown_formatting(p, modified_text, set_font=is_bullet)
+
+    def _add_commentary_with_bullets(self, text: str, style: str = 'Normal'):
+        """
+        Adds commentary text, intelligently handling bullet lists and regular text.
+        Bullet list items (lines starting with "- ") are converted to proper Word bullets.
+        Regular text blocks use soft breaks, with empty lines creating paragraph breaks.
+        """
+        lines = text.split('\n')
+        i = 0
+
+        while i < len(lines):
+            line = lines[i]
+
+            # Check if this is an empty line (paragraph break)
+            if not line.strip():
+                i += 1
+                continue
+
+            # Check if this is a bullet item
+            if line.strip().startswith('- '):
+                # Collect consecutive bullet items
+                bullet_block = []
+                while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('- '):
+                    bullet_block.append(lines[i].strip()[2:])  # Remove "- " prefix
+                    i += 1
+
+                # Add each bullet as a separate paragraph with List Bullet style
+                for bullet_text in bullet_block:
+                    p = self.document.add_paragraph(style='List Bullet')
+                    # Process markdown formatting in bullet text with explicit font
+                    self._process_markdown_formatting(p, bullet_text, set_font=True)
+            else:
+                # Collect consecutive non-bullet, non-empty lines until we hit an empty line or bullet
+                text_block = []
+                while i < len(lines) and lines[i].strip() and not lines[i].strip().startswith('- '):
+                    text_block.append(lines[i])
+                    i += 1
+
+                # Add as a paragraph with soft breaks
+                if text_block:
+                    self._add_paragraph_with_soft_breaks('\n'.join(text_block), style=style)
+
+    def _process_markdown_formatting(self, paragraph, text, set_font=False):
+        """
+        Process markdown formatting (bold, italic, etc.) and add runs to the given paragraph.
+        This is a helper for adding formatted text to an existing paragraph.
+
+        Args:
+            paragraph: The paragraph to add runs to
+            text: The text to process
+            set_font: If True, explicitly set Aptos 12pt font on all runs (for bullet lists)
+        """
+        modified_text = self.modifier.modify_text(text)
         parts = re.split(r'(\$\$|__.*?__|\\*.*?\\*|_.*?_|`.*?`)', modified_text)
+
         for part in parts:
             if part.startswith('**') and part.endswith('**'):
-                run = p.add_run(part[2:-2])
+                run = paragraph.add_run(part[2:-2])
                 run.bold = True
+                if set_font:
+                    run.font.name = 'Aptos'
+                    run.font.size = Pt(12)
             elif part.startswith('__') and part.endswith('__'):
-                run = p.add_run(part[2:-2])
+                run = paragraph.add_run(part[2:-2])
                 run.bold = True
+                if set_font:
+                    run.font.name = 'Aptos'
+                    run.font.size = Pt(12)
             elif part.startswith('*') and part.endswith('*'):
-                run = p.add_run(part[1:-1])
+                run = paragraph.add_run(part[1:-1])
                 run.italic = True
+                if set_font:
+                    run.font.name = 'Aptos'
+                    run.font.size = Pt(12)
             elif part.startswith('_') and part.endswith('_'):
-                run = p.add_run(part[1:-1])
+                run = paragraph.add_run(part[1:-1])
                 run.italic = True
+                if set_font:
+                    run.font.name = 'Aptos'
+                    run.font.size = Pt(12)
             elif part.startswith('`') and part.endswith('`'):
-                # Backtick content may contain **BOLD** for stressed syllables
-                # Parse nested bold within backticks
                 inner_content = part[1:-1]
-                self._add_nested_formatting(p, inner_content, base_italic=True)
+                self._add_nested_formatting(paragraph, inner_content, base_italic=True)
+                # Note: nested formatting handles its own font settings
             else:
-                # Bidi fix: handle parenthesized Hebrew
+                # Handle parenthesized Hebrew
                 sub_parts = re.split(r'([\\(][\\u0590-\\u05FF\\u05B0-\\u05BD\\u05BF\\u05C1-\\u05C2\\u05C4-\\u05C7\\s]+[\\)])', part)
                 for sub_part in sub_parts:
                     if sub_part and sub_part.startswith('(') and sub_part.endswith(')'):
-                        p.add_run('(')
-                        hebrew_run = p.add_run(sub_part[1:-1])
+                        run_open = paragraph.add_run('(')
+                        if set_font:
+                            run_open.font.name = 'Aptos'
+                            run_open.font.size = Pt(12)
+                        hebrew_run = paragraph.add_run(sub_part[1:-1])
                         hebrew_run.font.rtl = True
-                        hebrew_run.font.name = 'Aptos' # Explicitly set font
-                        hebrew_run.font.size = Pt(12) # Explicitly set size
-                        p.add_run(')')
+                        self._set_run_font_xml(hebrew_run, font_name='Aptos', font_size=12)
+                        run_close = paragraph.add_run(')')
+                        if set_font:
+                            run_close.font.name = 'Aptos'
+                            run_close.font.size = Pt(12)
                     elif sub_part:
-                        p.add_run(sub_part)
+                        run = paragraph.add_run(sub_part)
+                        if set_font:
+                            run.font.name = 'Aptos'
+                            run.font.size = Pt(12)
 
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
@@ -192,8 +310,8 @@ class DocumentGenerator:
 
                                 hebrew_run = p.add_run(sub_part[1:-1])
                                 hebrew_run.font.rtl = True
-                                hebrew_run.font.name = 'Aptos' # Explicitly set font
-                                hebrew_run.font.size = Pt(12) # Explicitly set size
+                                # Set font at XML level for reliable rendering
+                                self._set_run_font_xml(hebrew_run, font_name='Aptos', font_size=12)
                                 hebrew_run.bold = is_bold
                                 hebrew_run.italic = is_italic
 
@@ -480,7 +598,7 @@ Methodological & Bibliographical Summary
                 rPr.append(szCs)
             szCs.set(ns.qn('w:val'), '24')  # 24 half-points = 12pt
 
-            self._add_paragraph_with_soft_breaks(verse["commentary"], style='BodySans')
+            self._add_commentary_with_bullets(verse["commentary"], style='BodySans')
 
         # 5. Add Methodological Summary
         if self.stats_path.exists():
