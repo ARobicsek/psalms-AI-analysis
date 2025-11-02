@@ -1,0 +1,916 @@
+LITURGICAL LIBRARIAN - FULL OUTPUT TEST
+Generated: 2025-11-01 22:45:29
+====================================================================================================
+
+
+====================================================================================================
+PSALM 1 - LITURGICAL ANALYSIS
+====================================================================================================
+Generated: 2025-11-01 22:45:29
+
+================================================================================
+RESEARCH BUNDLE STRUCTURE
+================================================================================
+Full Psalm Recitations: 2 matches
+Full Psalm Summary: 1397 chars
+Phrase Groups: 10
+
+################################################################################
+FULL PSALM RECITATIONS
+################################################################################
+Number of matches: 2
+
+--------------------------------------------------------------------------------
+ALL FULL PSALM MATCHES:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: entire_chapter
+Confidence: 1.0
+Prayer ID: 1048
+Prayer Name: Arvit Finale
+Nusach: Edot_HaMizrach
+Occasion: None
+Service: Maariv
+Section: None
+
+Canonical Classification:
+  Prayer Name: Aleinu
+  L1 (Occasion): Yom Kippur
+  L2 (Service): Maariv
+  L3 (Signpost): Concluding Prayers
+  L4 (SubSection): Aleinu and Closing Psalms
+  Location Description: This composite block forms the conclusion of the Yom Kippur Maariv service in the Edot HaMizrach rite. It begins with the recitation of Psalms 1, 2, 3, 4, and 24, followed by a 'Yehi Ratzon' supplication. It then continues with the Full Kaddish (Kaddish Shalem), Barechu, the full Aleinu prayer, and concludes with the hymn Yigdal.
+
+Verse Range: 1-6
+Psalm Phrase: [Entire Psalm 1]
+
+Liturgy Context (47 chars):
+Complete text of Psalm 1 appears in this prayer
+
+================================================================================
+MATCH #2
+================================================================================
+Match Type: entire_chapter
+Confidence: 1.0
+Prayer ID: 966
+Prayer Name: Customs of Yom Kippur Night
+Nusach: Ashkenaz
+Occasion: Yom_Kippur
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Shir HaYichud and Anim Zemirot
+  L1 (Occasion): Yom Kippur
+  L2 (Service): Maariv / Evening Prayers
+  L3 (Signpost): Special - Piyyutim
+  L4 (SubSection): Shir HaYichud and Anim Zemirot
+  Location Description: A collection of devotional texts recited by some communities on the night of Yom Kippur, often before or after the formal Maariv service. This block begins with Psalms 1, 2, 3, and 4. It is followed by the complete 'Shir HaYichud' (Song of Unity) for all seven days of the week. After Shir HaYichud, it includes 'Anim Zemirot' (also known as Shir HaKavod - The Song of Glory). The section concludes with verses from Chronicles I 29:11 and Psalm 106:2.
+
+Verse Range: 1-6
+Psalm Phrase: [Entire Psalm 1]
+
+Liturgy Context (47 chars):
+Complete text of Psalm 1 appears in this prayer
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR FULL PSALM RECITATIONS:
+--------------------------------------------------------------------------------
+# Psalm 1 in Jewish Liturgy
+
+Psalm 1 achieves full liturgical recitation within two distinct prayer contexts, both representing supplementary devotional material rather than core statutory prayers. In the Ashkenazic and Edot HaMizrach traditions, the entire psalm (verses 1–6) is incorporated into *Shir HaYichud* and *Anim Zemirot*, mystical acrostic hymns recited during Maariv services, where it functions as part of the contemplative material preceding or following the main evening prayer service. Additionally, all six verses appear in the *Aleinu* recitation on Yom Kippur, the Day of Atonement, where the psalm's opening declaration—"Happy is the one who has not walked in the counsel of the wicked"—establishes the ethical framework for the day's penitential focus across both Ashkenazic and Mizrachi communities. The complete textual preservation across both contexts (100% coverage in each) suggests that Psalm 1's opening wisdom concerning righteous conduct and divine retribution holds particular resonance during moments of heightened spiritual intensity, whether in the mystical poetry of evening prayer or in the solemn judgment of the High Holiday season. The psalm's appearance in these supplementary rather than obligatory prayer blocks indicates its role as devotional reinforcement of liturgical themes rather than as a foundational element of the statutory service structure.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+Number of matches: 10
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 985
+Prayer Name: Ashrei
+Nusach: Ashkenaz
+Occasion: None
+Service: Shacharit
+Section: None
+
+Canonical Classification:
+  Prayer Name: Ashrei and Concluding Psalms of Pesukei Dezimra
+  L1 (Occasion): High Holidays
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra
+  L4 (SubSection): Ashrei and Concluding Psalms
+  Location Description: This large liturgical block forms the core of Pesukei Dezimra. It begins with Ashrei (Psalm 145, preceded by introductory verses) and is immediately followed by the concluding Halleluyah psalms: Psalms 146, 147, 148, 149, and 150. After Psalm 150, it includes a collection of concluding verses ('Baruch Hashem L'olam...'), followed by 'Vayevarech David' (I Chronicles 29:10-13) and 'Atah Hu Hashem L'vadecha' (Nehemiah 9:6-11). This entire section immediately precedes the Yishtabach blessing, which concludes Pesukei Dezimra.
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (197 chars):
+כְּפוּפִים יְהֹוָה אֹהֵב צַדִּיקִים: יְהֹוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶֽרֶךְ רְשָׁעִים יְעַוֵּת: חזן: יִמְלֹךְ יְהֹוָה לְעוֹלָם אֱלֹהַֽיִךְ צִיּוֹן לְדֹר וָדֹר הַלְלוּיָהּ:
+
+================================================================================
+MATCH #2
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 465
+Prayer Name: Hodu
+Nusach: Sefard
+Occasion: Weekday
+Service: Shacharit
+Section: None
+
+Canonical Classification:
+  Prayer Name: Pesukei Dezimra
+  L1 (Occasion): Weekday
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra
+  L4 (SubSection): Main Body
+  Location Description: This text block contains the main body of Pesukei Dezimra for a weekday Shacharit service according to Nusach Sefard. It begins with the introductory 'Hodu' section (a compilation from I Chronicles 16 and various Psalms), followed by Psalm 30, Psalm 67, the opening blessing of Baruch She'amar, Mizmor L'Todah (Psalm 100), the 'Yehi K'vod' collection of verses, Ashrei (Psalm 145), the concluding Halleluyah psalms (Psalms 146, 147, 148, 149, and 150), the 'Vayevarech David' passage, and the Song at the Sea ('Az Yashir'). This entire section is recited after the preparatory prayers and immediately before the concluding blessing of Pesukei Dezimra, Yishtabach.
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (200 chars):
+כְּפוּפִים יְהֹוָה אֹהֵב צַדִּיקִים: יְהֹוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶֽרֶךְ רְשָׁעִים יְעַוֵּת: יִמְלֹךְ יְהֹוָה לְעוֹלָם אֱלֹהַֽיִךְ צִיּוֹן לְדֹר וָדֹר הַלְ֒לוּיָהּ: המזמור
+
+================================================================================
+MATCH #3
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 682
+Prayer Name: Pesukei D'Zimra
+Nusach: Edot_HaMizrach
+Occasion: Weekday
+Service: Shacharit
+Section: Pesukei_DZimrah
+
+Canonical Classification:
+  Prayer Name: Pesukei Dezimra
+  L1 (Occasion): Weekday
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra (Verses of Praise)
+  L4 (SubSection): Main Body of Pesukei Dezimra
+  Location Description: This extensive block constitutes the main body of Pesukei Dezimra for the Edot HaMizrach rite. It begins with Baruch She'amar and includes Mizmor L'Todah (Psalm 100), the Yehi K'vod collection of verses, Ashrei (Psalm 145), Psalms 146-150, Vayevarech David, Az Yashir (The Song at the Sea), and concludes with the Yishtabach blessing. It also includes instructions for adding Psalm 130 during the Ten Days of Repentance, followed by the concluding Half-Kaddish and the Barechu call to prayer which transitions to the next section of the service.
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (206 chars):
+יְ֝הֹוָ֗ה אֹהֵ֥ב צַדִּיקִֽים׃ יְהֹוָ֤ה ׀ שֹׁ֘מֵ֤ר אֶת־גֵּרִ֗ים יָת֣וֹם וְאַלְמָנָ֣ה יְעוֹדֵ֑ד וְדֶ֖רֶךְ רְשָׁעִ֣ים יְעַוֵּֽת׃ יִמְלֹ֤ךְ יְהֹוָ֨ה ׀ לְעוֹלָ֗ם אֱלֹהַ֣יִךְ צִ֭יּוֹן לְדֹ֥ר וָדֹ֗ר הַֽלְלוּיָֽהּ׃
+
+================================================================================
+MATCH #4
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 725
+Prayer Name: Pesukei D'Zimra
+Nusach: Edot_HaMizrach
+Occasion: Shabbat
+Service: Shacharit
+Section: Pesukei_DZimrah
+
+Canonical Classification:
+  Prayer Name: Pesukei Dezimra for Shabbat
+  L1 (Occasion): Shabbat
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra
+  L4 (SubSection): Full Section
+  Location Description: This is a large, composite block containing the entirety of Pesukei Dezimra for Shabbat. It begins with 'Baruch She'amar', includes all the standard Shabbat psalms and readings, and concludes with 'Yishtabach'. Following Yishtabach, it includes a conditional insertion of Psalm 130 for Shabbat Teshuvah, the Half-Kaddish that formally concludes Pesukei Dezimra, and the Barechu (call to prayer) which begins the next section of the service.
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (206 chars):
+יְ֝הֹוָ֗ה אֹהֵ֥ב צַדִּיקִֽים׃ יְהֹוָ֤ה ׀ שֹׁ֘מֵ֤ר אֶת־גֵּרִ֗ים יָת֣וֹם וְאַלְמָנָ֣ה יְעוֹדֵ֑ד וְדֶ֖רֶךְ רְשָׁעִ֣ים יְעַוֵּֽת׃ יִמְלֹ֤ךְ יְהֹוָ֨ה ׀ לְעוֹלָ֗ם אֱלֹהַ֣יִךְ צִ֭יּוֹן לְדֹ֥ר וָדֹ֗ר הַֽלְלוּיָֽהּ׃
+
+================================================================================
+MATCH #5
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 556
+Prayer Name: Pesukei D'Zimrah
+Nusach: Sefard
+Occasion: Shabbat
+Service: Shacharit
+Section: Pesukei_DZimrah
+
+Canonical Classification:
+  Prayer Name: Pesukei Dezimra for Shabbat
+  L1 (Occasion): Shabbat and Festivals
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra
+  L4 (SubSection): Main Body of Pesukei Dezimra (Shabbat)
+  Location Description: This is the complete Pesukei Dezimra section for Shabbat and Festivals in Nusach Sefard. It begins with introductory verses ('Hodu'), includes a collection of psalms (30, 19, 33, 34, 90, 91, 98, 121-124, 135, 136), the Baruch She'amar blessing, the specific psalms for Shabbat (Psalm 92 and 93), a collection of verses known as 'Yehi Kavod', Ashrei (Psalm 145), the concluding Halleluyot psalms (Psalms 146-150), Vayevarech David, Az Yashir (Song at the Sea), and culminates in the expansive Nishmat Kol Chai and Yishtabach prayers. The section concludes with the Chatzi Kaddish and Barechu, which transition to the Blessings of the Shema. An instruction is included to add Psalm 130 on Shabbat Shuva.
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (191 chars):
+יְהֹוָה אֹהֵב צַדִּיקִים: יְהֹוָה שֹׁמֵר אֶת גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶרֶךְ רְשָׁעִים יְעַוֵּת: יִמְלֹךְ יְהֹוָה לְעוֹלָם אֱלֹהַיִךְ צִיּוֹן לְדֹר וָדֹר הַלְלוּיָהּ: הַלְלוּיָהּ
+
+================================================================================
+MATCH #6
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 923
+Prayer Name: Pesukei Dezimrah
+Nusach: Edot_HaMizrach
+Occasion: None
+Service: Shacharit
+Section: Pesukei_DZimrah
+
+Canonical Classification:
+  Prayer Name: Pesukei Dezimra
+  L1 (Occasion): Rosh Hashanah
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra
+  L4 (SubSection): Core Psalms and Verses
+  Location Description: This text block comprises the main body of Pesukei Dezimra. It begins with Psalm 92 and Psalm 93, followed by the 'Yehi K'vod' collection of verses. It then includes the sequence of Psalms 145 (Ashrei), 146, 147, 148, 149, and 150. The section concludes with 'Vayevarech David', 'Atah Hu Hashem L'vadecha', and the beginning of 'Az Yashir' (Song at the Sea).
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (199 chars):
+אֹהֵ֥ב צַדִּיקִֽים: יְהֹוָה יאהדונהי | שֹׁ֘מֵ֤ר אֶת־גֵּרִ֗ים יָת֣וֹם וְאַלְמָנָ֣ה יְעוֹדֵ֑ד וְדֶ֖רֶךְ רְשָׁעִ֣ים יְעַוֵּֽת: יִמְלֹ֤ךְ יְהֹוָ֙ה יאהדונהי | לְעוֹלָ֗ם אֱלֹהַ֣יִךְ ֖צִיּֽוֹן לְדֹ֥ר וָדֹ֗ר
+
+================================================================================
+MATCH #7
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 1059
+Prayer Name: Pesukei Dezimrah
+Nusach: Edot_HaMizrach
+Occasion: None
+Service: Shacharit
+Section: Pesukei_DZimrah
+
+Canonical Classification:
+  Prayer Name: Pesukei Dezimra
+  L1 (Occasion): Yom Kippur
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra (Verses of Praise)
+  L4 (SubSection): Main Body of Pesukei Dezimra
+  Location Description: This is a comprehensive block containing the entirety of Pesukei Dezimra for Yom Kippur Shacharit. It begins with the introductory blessing 'Baruch She'amar', proceeds through the core psalms (including Psalms 92, 93, 145, 146, 147, 148, 149, and 150), 'Az Yashir' (Song at the Sea), and concludes with 'Nishmat Kol Chai' and the concluding blessing 'Yishtabach'. As is customary on Yom Kippur, Psalm 130 ('Mima'amakim') is inserted immediately after Yishtabach. The section concludes with the Chatzi Kaddish and Barechu, which transition to the next part of the service, Birkhot K'riat Shema.
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (206 chars):
+יְ֝הֹוָ֗ה אֹהֵ֥ב צַדִּיקִֽים׃ יְהֹוָ֤ה ׀ שֹׁ֘מֵ֤ר אֶת־גֵּרִ֗ים יָת֣וֹם וְאַלְמָנָ֣ה יְעוֹדֵ֑ד וְדֶ֖רֶךְ רְשָׁעִ֣ים יְעַוֵּֽת׃ יִמְלֹ֤ךְ יְהֹוָ֨ה ׀ לְעוֹלָ֗ם אֱלֹהַ֣יִךְ צִ֭יּוֹן לְדֹ֥ר וָדֹ֗ר הַֽלְלוּיָֽהּ׃
+
+================================================================================
+MATCH #8
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 31
+Prayer Name: Psalm 146
+Nusach: Ashkenaz
+Occasion: Weekday
+Service: Shacharit
+Section: Pesukei_DZimrah
+
+Canonical Classification:
+  Prayer Name: Psalm 146
+  L1 (Occasion): Weekday
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra (Verses of Praise)
+  L4 (SubSection): Halleluyot Psalms
+  Location Description: The first of the five 'Halleluyot' psalms (146-150) recited daily during Pesukei Dezimra, immediately following Ashrei (Psalm 145).
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (193 chars):
+כְּפוּפִים יְהֹוָה אֹהֵב צַדִּיקִים: יְהֹוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶֽרֶךְ רְשָׁעִים יְעַוֵּת: יִמְלֹךְ יְהֹוָה לְעוֹלָם אֱלֹהַֽיִךְ צִיּוֹן לְדֹר וָדֹר הַלְ֒לוּיָהּ:
+
+================================================================================
+MATCH #9
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 262
+Prayer Name: Psalm 146
+Nusach: Ashkenaz
+Occasion: Shabbat
+Service: Shacharit
+Section: Pesukei_DZimrah
+
+Canonical Classification:
+  Prayer Name: Psalm 146 (Halleli Nafshi)
+  L1 (Occasion): Weekday
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra (Verses of Praise)
+  L4 (SubSection): Concluding Psalms of Pesukei Dezimra
+  Location Description: The second of the five concluding psalms (146-150) of Pesukei Dezimra, recited daily after Ashrei (Psalm 145).
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (158 chars):
+ה' אהֵב צַדִּיקִים: ה' שׁמֵר אֶת גֵּרִים. יָתום וְאַלְמָנָה יְעודֵד. וְדֶרֶךְ רְשָׁעִים יְעַוֵּת: יִמְלךְ ה' לְעולָם. אֱלהַיִךְ צִיּון לְדר וָדר. הַלְלוּיָהּ:
+
+================================================================================
+MATCH #10
+================================================================================
+Match Type: phrase_match
+Confidence: 0.985
+Prayer ID: 833
+Prayer Name: Yehi Kevod
+Nusach: Ashkenaz
+Occasion: None
+Service: Shacharit
+Section: None
+
+Canonical Classification:
+  Prayer Name: Ashrei
+  L1 (Occasion): Weekday / Shabbat / Festival
+  L2 (Service): Shacharit
+  L3 (Signpost): Pesukei Dezimra (Verses of Praise)
+  L4 (SubSection): Ashrei and Halleluyah Psalms
+  Location Description: This large block constitutes the main body of Pesukei Dezimra. It begins with the collection of verses known as 'Yehi Kevod', followed by Ashrei (Psalm 145), Psalms 146-150, the concluding verses 'Baruch Hashem L'olam', the passage of 'Vayevarech David' (I Chronicles 29:10-13), and the passage from Nehemiah (9:6-11) which leads into Az Yashir.
+
+Verse Range: 6-6
+Psalm Phrase: וְדֶ֖רֶךְ רְשָׁעִ֣ים
+
+Liturgy Context (197 chars):
+כְּפוּפִים יְהֹוָה אֹהֵב צַדִּיקִים: יְהֹוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶֽרֶךְ רְשָׁעִים יְעַוֵּת: חזן: יִמְלֹךְ יְהֹוָה לְעוֹלָם אֱלֹהַֽיִךְ צִיּוֹן לְדֹר וָדֹר הַלְלוּיָהּ:
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: וְדֶרֶךְ רְשָׁעִים in Jewish Liturgy
+
+The phrase וְדֶרֶךְ רְשָׁעִים (the way of the wicked) from Psalm 1:6 appears consistently throughout the morning liturgy across all Jewish traditions as part of the recitation of Psalm 146, which comprises the concluding section of Pesukei Dezimra (Verses of Praise). This phrase is integrated into the liturgical context immediately following Ashrei (Psalm 145) and preceding the final Halleluyah psalms, appearing within a broader passage that emphasizes God's protective care for the righteous and vulnerable: יְהֹוָה אֹהֵב צַדִּיקִים יְהֹוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶרֶךְ רְשָׁעִים יְעַוֵּת (The Lord loves the righteous; the Lord guards the strangers, sustains the orphan and widow, and makes crooked the way of the wicked). The phrase recurs identically across multiple liturgical traditions—Ashkenaz, Sefard, and Edot HaMizrach—appearing in both weekday and Shabbat services, as well as in the High Holiday Machzor for Yom Kippur, demonstrating its universal significance in Jewish prayer. The consistent placement of this phrase within Pesukei Dezimra, the preparatory section of morning prayer designed to attune the worshiper's heart before the formal Amidah, suggests its function as a theological affirmation that precedes the central petitions of the service. The phrase's appearance across all occasions—weekday, Shabbat, and festival—underscores the fundamental Jewish conviction that divine justice operates continuously, rendering the path of wickedness ultimately futile while protecting those who pursue righteousness.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃
+Number of matches: 2
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: exact_verse
+Confidence: 1.0
+Prayer ID: 767
+Prayer Name: Mussaf
+Nusach: Edot_HaMizrach
+Occasion: Festivals
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Mussaf Amidah for Shalosh Regalim
+  L1 (Occasion): Pilgrimage Festivals
+  L2 (Service): Mussaf
+  L3 (Signpost): Mussaf
+  L4 (SubSection): Amidah
+  Location Description: This extensive text block begins with the full Mussaf Amidah for the Three Pilgrimage Festivals, including the silent prayer, the reader's repetition (Chazarat HaShatz) with Kedusha, and the Priestly Blessing (Birkat Kohanim). Following the Amidah, the entry contains a large and varied collection of supplemental and home-based rituals, including: the Kiddush and symbolic foods (Simanim) for Rosh Hashanah night, the Kabbalistic 'Patach Eliyahu' prayer, the 'Ushpizin' ceremony for Sukkot, various Zohar readings for festival meals, and several Piyyutim (liturgical poems) for Sukkot.
+
+Verse Range: 3-3
+Psalm Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃
+
+Liturgy Context (300 chars):
+וַֽעַד טוֹב, כִּי יְ֭הֹוָה יִתֵּ֣ן הַטּ֑וֹב. שָֽׁנָה זוֹ תִּהְיֶה שְׁנַת זִמְרָה, וְ֭לַיְלָה כַּיּ֣וֹם יָאִ֑יר כַּ֝חֲשֵׁיכָ֗ה כָּאוֹרָֽה. שָֽׁנָה זוֹ תִּהְיֶה שְׁנַת חֲנִינָה, וּפְדוּיֵ֨י יְהֹוָ֜ה יְשׁוּב֗וּן וּבָ֤אוּ צִיּוֹן֙ בְּרִנָּ֔ה. שָֽׁנָה זוֹ תִּהְיֶה שְׁנַת טוֹבָה, אִמְרוּ֙ לְבַת־צִיּ֔וֹ...
+
+================================================================================
+MATCH #2
+================================================================================
+Match Type: exact_verse
+Confidence: 1.0
+Prayer ID: 909
+Prayer Name: Nighttime Kiddush
+Nusach: Edot_HaMizrach
+Occasion: None
+Service: None
+Section: Kiddush
+
+Canonical Classification:
+  Prayer Name: Kiddush for Rosh Hashanah Night
+  L1 (Occasion): Rosh Hashanah
+  L2 (Service): Home Ritual
+  L3 (Signpost): Home / Non-Synagogue Ritual
+  L4 (SubSection): Kiddush
+  Location Description: This is a comprehensive text for the Rosh Hashanah night Kiddush ceremony. It begins with extensive preliminary kabbalistic verses and supplications, including 'P'tichat Eliyahu HaNavi', repeated biblical verses, and two long acrostic poems ('Ana Adonai...' and 'Shanah Zo...'). The text then provides the core Kiddush blessings with variations for when the holiday falls on a weekday versus Shabbat. It also includes the special Havdalah blessings ('Borei Me'orei Ha'esh' and 'HaMavdil') for when the second night of Rosh Hashanah coincides with Motza'ei Shabbat. The ceremony concludes with the Shehecheyanu blessing, the blessing of the children using the Priestly Blessing, and instructions for washing for the meal.
+
+Verse Range: 3-3
+Psalm Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃
+
+Liturgy Context (300 chars):
+אָנָּא יְהֹוָה הוֹשִׁיעָה נָּא, אָנָּא יְהֹוָה הַצְלִיחָה נָא: כַּכָּתוּב: יִשָּׂא בְרָכָה מֵאֵת יְהֹוָה יאהדונהי, וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ: וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם, אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל, וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ: אָנָּא יְהֹוָה הָאֵל...
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 1:3 in Jewish Liturgy
+
+The verse from Psalm 1:3 describing the righteous person as "a tree planted by streams of water, whose fruit it yields in its season, whose leaf does not wither, and all that it does prospers" appears in two significant liturgical contexts within the Edot HaMizrach (Mizrahi) tradition, both occasions centered on themes of blessing, abundance, and divine providence. In the Mussaf Amidah for the Three Pilgrimage Festivals, the verse is woven into the festival petitions as part of a broader liturgical meditation on divine blessing and sustenance. More prominently, the complete verse appears in the Rosh Hashanah night Kiddush ceremony, where it is recited within an extended acrostic poem following the preliminary kabbalistic supplications. In this domestic ritual context, the liturgy states: "אָנָּא יְהֹוָה הוֹשִׁיעָה נָּא, אָנָּא יְהֹוָה הַצְלִיחָה נָא: כַּכָּתוּב: יִשָּׂא בְרָכָה מֵאֵת יְהֹוָה יאהדונהי, וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ: וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם, אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל, וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ" ("Please, O Lord, save us; please, O Lord, grant us success: as it is written, may one receive blessing from the Lord and righteousness from the God of salvation. And he shall be like a tree planted by streams of water, whose fruit it yields in its season, whose leaf does not wither, and all that it does prospers"). The placement of this Davidic image within the Rosh Hashanah Kiddush—a ceremony that inaugurates the new year and petitions for divine favor—transforms the botanical metaphor into a prayer for the community's flourishing and success throughout the coming year. The verse's appearance in both festival and High Holiday contexts reflects its theological significance as a symbol of sustained blessing and righteous prosperity in Jewish liturgical imagination.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם
+Number of matches: 2
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.995
+Prayer ID: 418
+Prayer Name: Prayer for Rain
+Nusach: Ashkenaz
+Occasion: Festivals
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Tefillat Geshem
+  L1 (Occasion): Festivals
+  L2 (Service): Mussaf
+  L3 (Signpost): Special - Piyyutim
+  L4 (SubSection): Chazzan's Repetition - Gevurot
+  Location Description: The Prayer for Rain (Tefillat Geshem), recited during the Chazzan's repetition of the Mussaf Amidah on Shemini Atzeret. This series of piyyutim is inserted into the second blessing (Gevurot), immediately before the first recitation of 'Mashiv HaRuach U'Morid HaGeshem' for the winter season. The text begins after the opening of the Ark and the blessing of Magen Avraham, and concludes by leading back into the standard text of the Gevurot blessing.
+
+Verse Range: 3-3
+Psalm Phrase: כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם
+
+Liturgy Context (217 chars):
+הַגָּשֶׁם: אֱלהֵינוּ וֵאלהֵי אֲבותֵינוּ: זְכור אָב נִמְשַׁךְ אַחֲרֶיךָ כַּמַּיִם. בֵּרַכְתּו כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם. גְּנַנְתּו הִצַּלְתּו מֵאֵשׁ וּמִמַּיִם. דְּרַשְׁתּו בְּזָרְעו עַל כָּל מָיִם: בַּעֲבוּרו
+
+================================================================================
+MATCH #2
+================================================================================
+Match Type: phrase_match
+Confidence: 0.995
+Prayer ID: 598
+Prayer Name: Prayer for Rain
+Nusach: Sefard
+Occasion: None
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Tefillat Geshem (Prayer for Rain)
+  L1 (Occasion): Shemini Atzeret
+  L2 (Service): Mussaf
+  L3 (Signpost): Amidah
+  L4 (SubSection): Chazzan's Repetition (Chazarat HaShatz)
+  Location Description: This is the Chazzan's Repetition of the Mussaf Amidah for Shemini Atzeret, which incorporates the special 'Tefillat Geshem' (Prayer for Rain). The text begins with the first two blessings of the Amidah (Avot and Gevurot) expanded with piyyutim (liturgical poems) for rain. It includes the Kedusha (Keter version), the middle blessing for the festival detailing the day's sacrifices, and the concluding blessings of the Amidah (Retzei, Modim, Sim Shalom). The block concludes with the personal supplications at the end of the Amidah and the Full Kaddish (Kaddish Shalem) that follows the repetition.
+
+Verse Range: 3-3
+Psalm Phrase: כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם
+
+Liturgy Context (227 chars):
+הַגָּשֶׁם: אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ: זְכוֹר אָב נִמְשַׁךְ אַחֲרֶיךָ כַּמַּיִם. בֵּרַכְתּוֹ כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם. גְּנַנְתּוֹ הִצַּלְתּוֹ מֵאֵשׁ וּמִמַּיִם. דְּרַשְׁתּוֹ בְּזָרְעוֹ עַל כָּל מָיִם: בַּעֲבוּרוֹ
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary on Psalm 1:3 in Jewish Liturgy
+
+The phrase כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם (like a tree planted by streams of water) from Psalm 1:3 appears in Jewish liturgy exclusively within the Tefillat Geshem (Prayer for Rain), the special piyyutim recited during the Chazzan's repetition of the Mussaf Amidah on Shemini Atzeret across both Ashkenazi and Sefardi traditions. This acrostic poem, which begins with the invocation "אֱלהֵינוּ וֵאלהֵי אֲבותֵינוּ" (Our God and God of our fathers), integrates the psalmist's botanical imagery into a petition for divine blessing, as evidenced in the liturgical context: "בֵּרַכְתּו כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם. גְּנַנְתּו הִצַּלְתּוֹ מֵאֵשׁ וּמִמַּיִם" (You blessed him like a tree planted by streams of water; You sheltered him, saved him from fire and from water). The citation of Psalm 1:3 is strategically positioned within the Gevurot blessing, immediately preceding the seasonal insertion of "Mashiv HaRuach U'Morid HaGeshem" (He causes the wind to blow and the rain to fall), thereby establishing a theological connection between the righteous individual's flourishing through water and the community's need for rain during the winter season. The phrase's appearance in this singular liturgical context—the most solemn petition for rain in the Jewish calendar—underscores how biblical imagery of botanical prosperity becomes a metaphor for collective sustenance and divine providence. This usage demonstrates the rabbinic hermeneutical principle of applying individual psalmist wisdom to communal supplication, transforming personal piety into national petition.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: לֹ֥א עָמָ֑ד
+Number of matches: 2
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.962
+Prayer ID: 641
+Prayer Name: Megillah Reading
+Nusach: Sefard
+Occasion: Purim
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Kriat HaMegillah (Reading of the Megillah)
+  L1 (Occasion): Purim
+  L2 (Service): Arvit / Shacharit
+  L3 (Signpost): Torah Service
+  L4 (SubSection): Megillah Reading
+  Location Description: This comprehensive block contains the complete ritual for the reading of the Megillah on Purim. It begins with the three introductory blessings ('Al Mikra Megillah', 'She'asah Nissim', and 'Shehecheyanu'). It is followed by the full Hebrew text of the Book of Esther. After the reading, it includes the concluding blessing ('HaRav et Riveinu'), the piyyut 'Shoshanat Yaakov', and the 'Arur Haman/Baruch Mordechai' formula. The entry concludes with instructions for the Kaddish that follows the reading.
+
+Verse Range: 1-1
+Psalm Phrase: לֹ֥א עָמָ֑ד
+
+Liturgy Context (186 chars):
+בְּעָרֵיהֶם בְּכָל מְדִינוֹת הַמֶּלֶךְ אֳחַשְׁוֵרוֹשׁ לִשְׁלֹחַ יָד בִּמְבַקְשֵׁי רָעָתָם וְאִישׁ לֹא עָמַד לִפְנֵיהֶם (בִּפְנֵיהֶם) כִּי נָפַל פַּחְדָּם עַל כָּל הָעַמִּים: וְכָל שָׂרֵי
+
+================================================================================
+MATCH #2
+================================================================================
+Match Type: phrase_match
+Confidence: 0.962
+Prayer ID: 1011
+Prayer Name: The Avodah Service
+Nusach: Ashkenaz
+Occasion: Yom_Kippur
+Service: Musaf
+Section: None
+
+Canonical Classification:
+  Prayer Name: Seder HaAvodah
+  L1 (Occasion): Yom Kippur
+  L2 (Service): Mussaf
+  L3 (Signpost): Special - High Holiday
+  L4 (SubSection): Avodah Service
+  Location Description: This extensive liturgical poem, known as the Seder HaAvodah, is the centerpiece of the Yom Kippur Mussaf service, recited during the Chazan's repetition of the Amidah. It is a detailed, poetic retelling of the High Priest's service in the Temple on Yom Kippur. The text begins with the piyyut 'Amitz Koach,' which provides a historical narrative from creation to the establishment of the priesthood. It then meticulously describes the High Priest's preparations, confessions, the lottery of the two goats, the incense offering in the Holy of Holies, the sprinkling of the blood, and the dispatch of the scapegoat. The poem includes the specific confessional formulas used by the High Priest and the congregation's prostration and response. Following the description of the service, it includes the High Priest's prayer upon safely exiting the Holy of Holies, the 'Mareh Kohen' piyyut celebrating his glorious appearance, and concludes with a series of laments ('Ashrei Ayin') and supplications contrasting the past glory with the present state of exile and praying for redemption.
+
+Verse Range: 1-1
+Psalm Phrase: לֹ֥א עָמָ֑ד
+
+Liturgy Context (182 chars):
+רֵק. מִכֹּל נִשְׁאַֽרְנוּ עֲרוּמִים: לֹא נָבִיא וְלֹא חָזוֹן בָּֽנוּ. כְּעִוְרִים נְגַשֵּׁשׁ וְנֵלֵךְ: יוֹם יוֹם נֹאמַר מַה בְּסוֹפֵֽנוּ. טוֹב מָֽוֶת מֵחַיִּים אָמָֽרְנוּ: חַיֵּֽינוּ
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: לֹא עָמַד in Jewish Liturgy
+
+The phrase לֹא עָמַד (lit. "he/none did not stand") appears in Jewish liturgy primarily within two distinct commemorative and penitential contexts that span the liturgical calendar. The phrase first occurs in the Sefard tradition's Kriat HaMegillah (Reading of the Megillah) on Purim, where it appears as part of the narrative account from the Book of Esther describing the miraculous deliverance of the Jewish people. In this context, the liturgy recites: "לִשְׁלֹחַ יָד בִּמְבַקְשֵׁי רָעָתָם וְאִישׁ לֹא עָמַד לִפְנֵיהֶם כִּי נָפַל פַּחְדָּם עַל כָּל הָעַמִּים" ("to lay hands upon those who sought their harm, and no one stood before them, for fear of them fell upon all the peoples"), emphasizing the reversal of Jewish vulnerability into triumph through divine providence. The second occurrence appears in the Ashkenazi Machzor for Yom Kippur, specifically within the Seder HaAvodah—the elaborate liturgical poem recited during the Mussaf service that reconstructs the High Priest's Temple service. Here, the phrase functions within a broader lamentation about the present state of exile and spiritual diminishment, as the liturgy mourns: "לֹא נָבִיא וְלֹא חָזוֹן בָּֽנוּ. כְּעִוְרִים נְגַשֵּׁשׁ וְנֵלֵךְ" ("we have neither prophet nor seer among us; like the blind we grope and walk"), expressing the absence and loss characteristic of the post-Temple era. Thus, while both liturgical instances employ the phrase לֹא עָמַד, they operate in fundamentally different registers: one celebrating historical deliverance during a joyous festival, the other lamenting spiritual absence during the most solemn day of the Jewish year.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: בַּעֲצַ֢ת רְשָׁ֫עִ֥ים
+Number of matches: 1
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.995
+Prayer ID: 626
+Prayer Name: Hakafot
+Nusach: Sefard
+Occasion: None
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Hakafot for Simchat Torah
+  L1 (Occasion): Sukkot / Shemini Atzeret / Simchat Torah
+  L2 (Service): Ma'ariv and Shacharit
+  L3 (Signpost): Torah Service
+  L4 (SubSection): Hakafot
+  Location Description: This is the complete liturgy for the seven Hakafot (circuits) on Simchat Torah, performed during both the evening and morning services. The text begins with instructions and introductory verses ('Atah Horeita'), followed by the liturgy for opening the ark. It then provides the full text for each of the seven circuits, which includes specific piyyutim (liturgical poems), verses from Psalms, and a 'Yehi Ratzon' prayer corresponding to a kabbalistic attribute (Sefirah). The text concludes with various celebratory songs such as 'Sisu v'Simchu b'Simchat Torah' and 'Ashreichem Yisrael', and instructions for returning the Torah scrolls to the ark.
+
+Verse Range: 1-1
+Psalm Phrase: בַּעֲצַ֢ת רְשָׁ֫עִ֥ים
+
+Liturgy Context (207 chars):
+וּלְאַמֵּץ בִּרְכַּיִם כּוֹשְׁלוֹת, הַנֵּי בִּרְכֵּי דְרַבָּנָן דְּשַׁלְהֵי, וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים, וְלֹא נִהְיֶה מֵהוֹלְכֵי רָכִיל, וּלְמַעַן זְכוּת אַהֲרֹן קְדוֹשׁ יְהֹוָה הֶחָתוּם
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase בַּעֲצַת רְשָׁעִים (in the counsel of the wicked), drawn from the opening verse of Psalm 1, appears in the Sefard liturgical tradition specifically within the Hakafot (circuits) of Simchat Torah, performed during both the evening and morning services at the conclusion of Sukkot. This phrase is integrated into a petitionary passage within the Torah Service section of the Hakafot, where the liturgy reads: וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים, וְלֹא נִהְיֶה מֵהוֹלְכֵי רָכִיל, וּלְמַעַן זְכוּת אַהֲרֹן קְדוֹשׁ יְהֹוָה הֶחָתוּם ("Grant us merit that we not walk in the counsel of the wicked, and that we not be among those who bear tales, and for the sake of the merit of Aaron the holy one, O Lord the sealed one"). The invocation of Psalm 1's opening admonition serves a moral-spiritual function within the celebratory context of Simchat Torah, reminding the community even amid festive rejoicing of the ethical imperative to distance oneself from wickedness and preserve righteous conduct. By anchoring this petition to the merit of Aaron—the archetypal priest and symbol of holiness—the liturgy weaves together the scriptural warning against walking in the counsel of the wicked with the sacred occasion of Torah celebration, creating a moment of spiritual accountability within the joy of the festival.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ
+Number of matches: 1
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.995
+Prayer ID: 626
+Prayer Name: Hakafot
+Nusach: Sefard
+Occasion: None
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Hakafot for Simchat Torah
+  L1 (Occasion): Sukkot / Shemini Atzeret / Simchat Torah
+  L2 (Service): Ma'ariv and Shacharit
+  L3 (Signpost): Torah Service
+  L4 (SubSection): Hakafot
+  Location Description: This is the complete liturgy for the seven Hakafot (circuits) on Simchat Torah, performed during both the evening and morning services. The text begins with instructions and introductory verses ('Atah Horeita'), followed by the liturgy for opening the ark. It then provides the full text for each of the seven circuits, which includes specific piyyutim (liturgical poems), verses from Psalms, and a 'Yehi Ratzon' prayer corresponding to a kabbalistic attribute (Sefirah). The text concludes with various celebratory songs such as 'Sisu v'Simchu b'Simchat Torah' and 'Ashreichem Yisrael', and instructions for returning the Torah scrolls to the ark.
+
+Verse Range: 3-3
+Psalm Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ
+
+Liturgy Context (260 chars):
+וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ. סוּר מֵרָע וַעֲשֵׂה טוֹב, בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ. וְהָיָה כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבֹּל וְכָל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ. דְּרָכַי סִפַּרְתִּי וַתַּעֲנֵנִי, לַמְּדֵנִי
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase from Psalm 1:3 describing the righteous person as "a tree planted by streams of water, which yields its fruit in season and whose leaf does not wither" (וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ) appears in the Sefard liturgical tradition during the Hakafot (circuits) of Simchat Torah, performed in both the evening (Ma'ariv) and morning (Shacharit) services. This occurrence is situated within the Torah Service section of the Hakafot liturgy, where it is integrated into a broader sequence of scriptural verses and piyyutim that accompany the seven circuits around the bimah with the Torah scrolls. The liturgical context presents the phrase as part of a concatenated passage that reads: "וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ. סוּר מֵרָע וַעֲשֵׂה טוֹב, בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ. וְהָיָה כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבֹּל וְכָל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ" (righteousness from the God of salvation; turn from evil and do good, seek peace and pursue it; and he shall be like a tree planted by streams of water whose fruit it yields in its season and whose leaf does not wither, and all that he does shall prosper). In this liturgical setting, the verse functions as a thematic meditation on the prosperity and blessing that accompanies adherence to divine law, making it particularly apt for the joyous celebration of Simchat Torah when the annual cycle of Torah reading is completed and renewed. The phrase's appearance in this specific context underscores the theological connection between the study and observance of Torah and the flourishing spiritual life symbolized by the fruitful, ever-verdant tree.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א
+Number of matches: 1
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.995
+Prayer ID: 797
+Prayer Name: Pirkei Avot
+Nusach: Edot_HaMizrach
+Occasion: Shabbat
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Pirkei Avot
+  L1 (Occasion): Shabbat
+  L2 (Service): Mincha
+  L3 (Signpost): Other / Supplemental
+  L4 (SubSection): Study of Pirkei Avot
+  Location Description: This entry contains the full text of the first six chapters of the Mishnaic tractate Pirkei Avot. It is customarily recited on Shabbat afternoons after the Mincha service, particularly during the weeks between Passover and Shavuot, with one chapter often recited per week.
+
+Verse Range: 1-1
+Psalm Phrase: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א
+
+Liturgy Context (209 chars):
+שֶׁיּוֹשְׁבִין וְאֵין בֵּינֵיהֶם דִּבְרֵי תוֹרָה, הֲרֵי זֶה מוֹשַׁב לֵצִים, שֶׁנֶּאֱמַר: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃ אֲבָל שְׁנַיִם שֶׁיּוֹשְׁבִין וְיֵשׁ בֵּינֵיהֶם דִּבְרֵי תוֹרָה, שְׁכִינָה שְׁרוּיָה
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א from Psalm 1:1 appears in Jewish liturgy as a prooftext within the study of Pirkei Avot, the Mishnaic tractate on ethical teachings that is recited on Shabbat afternoons following the Mincha service, particularly during the spring season between Passover and Shavuot. In the Siddur Edot HaMizrach, this Psalm verse is cited to support a teaching about the "seat of scoffers" (מוֹשַׁב לֵצִים), with the liturgical context presenting the full verse as scriptural authority: "שֶׁיּוֹשְׁבִין וְאֵין בֵּינֵיהֶם דִּבְרֵי תוֹרָה, הֲרֵי זֶה מוֹשַׁב לֵצִים, שֶׁנֶּאֱמַר: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב" ("When people sit together without words of Torah between them, behold this is a seat of scoffers, as it is said: 'In the seat of scoffers he does not sit'"). The phrase functions here not as part of the primary liturgical recitation but rather as a scriptural citation embedded within the interpretive tradition surrounding Pirkei Avot, serving to reinforce the ethical imperative that righteous individuals must distance themselves from frivolous gatherings and instead engage in Torah study. This usage reflects the broader Jewish hermeneutical practice of grounding Mishnaic teachings in biblical authority, making the Psalm verse integral to the spiritual message conveyed during this customary Shabbat afternoon study session.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם
+Number of matches: 1
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.995
+Prayer ID: 797
+Prayer Name: Pirkei Avot
+Nusach: Edot_HaMizrach
+Occasion: Shabbat
+Service: None
+Section: None
+
+Canonical Classification:
+  Prayer Name: Pirkei Avot
+  L1 (Occasion): Shabbat
+  L2 (Service): Mincha
+  L3 (Signpost): Other / Supplemental
+  L4 (SubSection): Study of Pirkei Avot
+  Location Description: This entry contains the full text of the first six chapters of the Mishnaic tractate Pirkei Avot. It is customarily recited on Shabbat afternoons after the Mincha service, particularly during the weeks between Passover and Shavuot, with one chapter often recited per week.
+
+Verse Range: 3-3
+Psalm Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם
+
+Liturgy Context (227 chars):
+כָּל־הָרוּחוֹת שֶׁבָּעוֹלָם בָּאוֹת וְנוֹשְׁבוֹת בּוֹ, אֵין מְזִיזִין אוֹתוֹ מִמְּקוֹמוֹ, שֶׁנֶּאֱמַר: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י מָ֥יִם, וְעַל יוּבַל יְשַׁלַּח שָֽׁרָשָׁיו, וְלֹא יִרְאֶה כִּי יָבֹֽא חֹם, וְהָיָה
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם (and he shall be like a tree planted by streams of water) from Psalm 1:3 appears in Jewish liturgy specifically within the study of Pirkei Avot as recited in the Siddur Edot HaMizrach tradition. This passage is studied on Shabbat afternoons following the Mincha service, particularly during the weeks between Passover and Shavuot, when one chapter of Pirkei Avot is customarily studied each week. The verse is cited in the Mishnaic tractate as scriptural support for a teaching about the righteous person whose character remains unmoved by external circumstances, as the liturgy states: "כָּל־הָרוּחוֹת שֶׁבָּעוֹלָם בָּאוֹת וְנוֹשְׁבוֹת בּוֹ, אֵין מְזִיזִין אוֹתוֹ מִמְּקוֹמוֹ, שֶׁנֶּאֱמַר: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י מָ֥יִם, וְעַל יוּבַל יְשַׁלַּח שָֽׁרָשָׁיו" (All the winds of the world come and blow upon it, yet they do not move it from its place, as it is said: "He shall be like a tree planted by streams of water, and beside a stream shall he send forth his roots"). The integration of this Psalmist imagery into the ethical teachings of Pirkei Avot demonstrates how biblical metaphors of rootedness and stability were employed to reinforce moral constancy and spiritual resilience within Jewish ethical instruction.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: הָרְשָׁעִ֑ים כִּ֥י
+Number of matches: 1
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.99
+Prayer ID: 1004
+Prayer Name: Haftarah for Yom Kippur Morning
+Nusach: Ashkenaz
+Occasion: Yom_Kippur
+Service: Shacharit
+Section: None
+
+Canonical Classification:
+  Prayer Name: Haftarah for Yom Kippur (Shacharit)
+  L1 (Occasion): Yom Kippur
+  L2 (Service): Shacharit
+  L3 (Signpost): Torah Service
+  L4 (SubSection): Haftarah and Blessings
+  Location Description: This block contains the complete Haftarah reading for Yom Kippur morning, which is Isaiah 57:14–58:14, followed by the full set of blessings recited after the Haftarah reading, concluding with the special blessing for Yom Kippur.
+
+Verse Range: 4-4
+Psalm Phrase: הָרְשָׁעִ֑ים כִּ֥י
+
+Liturgy Context (210 chars):
+בּוֹרֵ֖א נִ֣יב שְׂפָתָ֑יִם שָׁל֨וֹם| שָׁל֜וֹם לָֽרָח֧וֹק וְלַקָּר֛וֹב אָמַ֥ר יְהֹוָ֖ה וּרְפָאתִֽיו: וְהָֽרְשָׁעִ֖ים כַּיָּ֣ם נִגְרָ֑שׁ כִּ֤י הַשְׁקֵט֙ לֹ֣א יוּכָ֔ל וַיִּגְרְשׁ֥וּ מֵימָ֖יו רֶ֥פֶשׁ וָטִֽיט: אֵ֣ין
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase הָרְשָׁעִים כִּי from Psalm 1:4 appears in Jewish liturgy specifically within the Haftarah reading for Yom Kippur morning (Shacharit service), where it is encountered as part of the prophetic selection from Isaiah 57:14–58:14. The liturgical context preserves this phrase within the broader prophetic passage concerning divine peace and judgment, as the liturgy recites: "בּוֹרֵא נִיב שְׂפָתָיִם שָׁלוֹם שָׁלוֹם לָרָחוֹק וְלַקָּרוֹב אָמַר יְהֹוָה וּרְפָאתִיו וְהָֽרְשָׁעִים כַּיָּם נִגְרָשׁ כִּי הַשְׁקֵט לֹא יוּכָל" (Creator of the fruit of the lips, peace, peace to the far and the near, says the Lord, and I will heal them; and the wicked are like the sea that is driven, for it cannot be quiet). This prophetic reading, followed by the full set of post-Haftarah blessings and the special blessing for Yom Kippur, integrates the Psalmist's imagery of the wicked with Isaiah's eschatological vision, connecting the Day of Atonement's themes of judgment and repentance to the prophetic promise of restoration. The appearance of this phrase in the Ashkenazi Yom Kippur liturgy thus links the opening of Psalms—which distinguishes the righteous from the wicked—to the High Holiday's central concern with moral reckoning and divine mercy.
+################################################################################
+PHRASE GROUP
+################################################################################
+Phrase: ׀ לֹ֥א הָלַךְ֮
+Number of matches: 1
+
+--------------------------------------------------------------------------------
+ALL MATCHES IN THIS GROUP:
+--------------------------------------------------------------------------------
+
+================================================================================
+MATCH #1
+================================================================================
+Match Type: phrase_match
+Confidence: 0.972
+Prayer ID: 627
+Prayer Name: Evening Torah Reading
+Nusach: Sefard
+Occasion: None
+Service: Maariv
+Section: Torah_Reading
+
+Canonical Classification:
+  Prayer Name: Torah Reading for Simchat Torah Evening
+  L1 (Occasion): Festival
+  L2 (Service): Maariv
+  L3 (Signpost): Torah Service
+  L4 (SubSection): Torah Reading
+  Location Description: This is the special Torah reading for the evening of Simchat Torah, which takes place during the Maariv service. It is a composite reading of several biblical passages related to blessings. The first aliyah (Kohen) is the Priestly Blessing (Numbers 6:22-27). The second aliyah (Levi) is Jacob's blessing to Isaac (Genesis 27:22-29). The third aliyah (Yisrael) consists of either Jacob's blessing to Ephraim and Menashe (Genesis 48:11-16) or Balaam's blessing of Israel (Numbers 24:1-13). The reading is followed by the standard prayers for returning the Torah to the ark.
+
+Verse Range: 1-1
+Psalm Phrase: ׀ לֹ֥א הָלַךְ֮
+
+Liturgy Context (168 chars):
+וְיִצְחָק וְיִדְגּוּ לָרֹב בְּקֶרֶב הָאָרֶץ: (בקצת קהילות קוראים כאן לישראל): וַיַּרְא בִּלְעָם כִּי טוֹב בְּעֵינֵי יְהוָה לְבָרֵךְ אֶת יִשְׂרָאֵל וְלֹא הָלַךְ כְּפַעַם
+
+--------------------------------------------------------------------------------
+LLM SUMMARY FOR THIS PHRASE GROUP:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 1:1 in Jewish Liturgy
+
+The phrase לֹא הָלַךְ (he did not walk) from Psalm 1:1 appears in the Jewish liturgical tradition specifically within the Torah Service of Simchat Torah evening, as preserved in the Sefard rite. This occurrence emerges not as an independent liturgical recitation but rather as part of the composite Torah reading for Maariv on Simchat Torah, where the phrase is embedded within the third aliyah's reading from Balaam's blessing of Israel. The liturgical context preserves the phrase within the fuller verse: וַיַּרְא בִּלְעָם כִּי טוֹב בְּעֵינֵי יְהוָה לְבָרֵךְ אֶת יִשְׂרָאֵל וְלֹא הָלַךְ כְּפַעַם (And Balaam saw that it was good in the eyes of the Lord to bless Israel, and he did not go as at other times). The integration of this phrase into the Simchat Torah evening service, which celebrates the completion and renewal of the Torah cycle, associates the language of righteous restraint and divine purpose with the broader themes of blessing and covenant affirmation that characterize the festival's liturgical program. Though this represents a single, localized occurrence within the Sefard tradition's festival liturgy, it demonstrates how biblical language from the Psalms and prophetic writings are woven throughout the Jewish liturgical calendar to reinforce thematic resonances between scriptural narratives and communal celebration.
+
+================================================================================
+COMPLETE RESEARCH BUNDLE (JSON)
+================================================================================
+{
+  "psalm_chapter": 1,
+  "full_psalm_summary": "# Psalm 1 in Jewish Liturgy\n\nPsalm 1 achieves full liturgical recitation within two distinct prayer contexts, both representing supplementary devotional material rather than core statutory prayers. In the Ashkenazic and Edot HaMizrach traditions, the entire psalm (verses 1–6) is incorporated into *Shir HaYichud* and *Anim Zemirot*, mystical acrostic hymns recited during Maariv services, where it functions as part of the contemplative material preceding or following the main evening prayer service. Additionally, all six verses appear in the *Aleinu* recitation on Yom Kippur, the Day of Atonement, where the psalm's opening declaration—\"Happy is the one who has not walked in the counsel of the wicked\"—establishes the ethical framework for the day's penitential focus across both Ashkenazic and Mizrachi communities. The complete textual preservation across both contexts (100% coverage in each) suggests that Psalm 1's opening wisdom concerning righteous conduct and divine retribution holds particular resonance during moments of heightened spiritual intensity, whether in the mystical poetry of evening prayer or in the solemn judgment of the High Holiday season. The psalm's appearance in these supplementary rather than obligatory prayer blocks indicates its role as devotional reinforcement of liturgical themes rather than as a foundational element of the statutory service structure.",
+  "full_psalm_recitations_count": 2,
+  "phrase_groups": [
+    {
+      "phrase": "וְדֶ֖רֶךְ רְשָׁעִ֣ים",
+      "matches_count": 10,
+      "summary": "# Scholarly Commentary: וְדֶרֶךְ רְשָׁעִים in Jewish Liturgy\n\nThe phrase וְדֶרֶךְ רְשָׁעִים (the way of the wicked) from Psalm 1:6 appears consistently throughout the morning liturgy across all Jewish traditions as part of the recitation of Psalm 146, which comprises the concluding section of Pesukei Dezimra (Verses of Praise). This phrase is integrated into the liturgical context immediately following Ashrei (Psalm 145) and preceding the final Halleluyah psalms, appearing within a broader passage that emphasizes God's protective care for the righteous and vulnerable: יְהֹוָה אֹהֵב צַדִּיקִים יְהֹוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶרֶךְ רְשָׁעִים יְעַוֵּת (The Lord loves the righteous; the Lord guards the strangers, sustains the orphan and widow, and makes crooked the way of the wicked). The phrase recurs identically across multiple liturgical traditions—Ashkenaz, Sefard, and Edot HaMizrach—appearing in both weekday and Shabbat services, as well as in the High Holiday Machzor for Yom Kippur, demonstrating its universal significance in Jewish prayer. The consistent placement of this phrase within Pesukei Dezimra, the preparatory section of morning prayer designed to attune the worshiper's heart before the formal Amidah, suggests its function as a theological affirmation that precedes the central petitions of the service. The phrase's appearance across all occasions—weekday, Shabbat, and festival—underscores the fundamental Jewish conviction that divine justice operates continuously, rendering the path of wickedness ultimately futile while protecting those who pursue righteousness.",
+      "verses": "1:6",
+      "validation_notes": null
+    },
+    {
+      "phrase": "וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃",
+      "matches_count": 2,
+      "summary": "# Scholarly Commentary: Psalm 1:3 in Jewish Liturgy\n\nThe verse from Psalm 1:3 describing the righteous person as \"a tree planted by streams of water, whose fruit it yields in its season, whose leaf does not wither, and all that it does prospers\" appears in two significant liturgical contexts within the Edot HaMizrach (Mizrahi) tradition, both occasions centered on themes of blessing, abundance, and divine providence. In the Mussaf Amidah for the Three Pilgrimage Festivals, the verse is woven into the festival petitions as part of a broader liturgical meditation on divine blessing and sustenance. More prominently, the complete verse appears in the Rosh Hashanah night Kiddush ceremony, where it is recited within an extended acrostic poem following the preliminary kabbalistic supplications. In this domestic ritual context, the liturgy states: \"אָנָּא יְהֹוָה הוֹשִׁיעָה נָּא, אָנָּא יְהֹוָה הַצְלִיחָה נָא: כַּכָּתוּב: יִשָּׂא בְרָכָה מֵאֵת יְהֹוָה יאהדונהי, וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ: וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם, אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל, וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ\" (\"Please, O Lord, save us; please, O Lord, grant us success: as it is written, may one receive blessing from the Lord and righteousness from the God of salvation. And he shall be like a tree planted by streams of water, whose fruit it yields in its season, whose leaf does not wither, and all that it does prospers\"). The placement of this Davidic image within the Rosh Hashanah Kiddush—a ceremony that inaugurates the new year and petitions for divine favor—transforms the botanical metaphor into a prayer for the community's flourishing and success throughout the coming year. The verse's appearance in both festival and High Holiday contexts reflects its theological significance as a symbol of sustained blessing and righteous prosperity in Jewish liturgical imagination.",
+      "verses": "1:3",
+      "validation_notes": null
+    },
+    {
+      "phrase": "כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם",
+      "matches_count": 2,
+      "summary": "# Scholarly Commentary on Psalm 1:3 in Jewish Liturgy\n\nThe phrase כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם (like a tree planted by streams of water) from Psalm 1:3 appears in Jewish liturgy exclusively within the Tefillat Geshem (Prayer for Rain), the special piyyutim recited during the Chazzan's repetition of the Mussaf Amidah on Shemini Atzeret across both Ashkenazi and Sefardi traditions. This acrostic poem, which begins with the invocation \"אֱלהֵינוּ וֵאלהֵי אֲבותֵינוּ\" (Our God and God of our fathers), integrates the psalmist's botanical imagery into a petition for divine blessing, as evidenced in the liturgical context: \"בֵּרַכְתּו כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם. גְּנַנְתּו הִצַּלְתּוֹ מֵאֵשׁ וּמִמַּיִם\" (You blessed him like a tree planted by streams of water; You sheltered him, saved him from fire and from water). The citation of Psalm 1:3 is strategically positioned within the Gevurot blessing, immediately preceding the seasonal insertion of \"Mashiv HaRuach U'Morid HaGeshem\" (He causes the wind to blow and the rain to fall), thereby establishing a theological connection between the righteous individual's flourishing through water and the community's need for rain during the winter season. The phrase's appearance in this singular liturgical context—the most solemn petition for rain in the Jewish calendar—underscores how biblical imagery of botanical prosperity becomes a metaphor for collective sustenance and divine providence. This usage demonstrates the rabbinic hermeneutical principle of applying individual psalmist wisdom to communal supplication, transforming personal piety into national petition.",
+      "verses": "1:3",
+      "validation_notes": null
+    },
+    {
+      "phrase": "לֹ֥א עָמָ֑ד",
+      "matches_count": 2,
+      "summary": "# Scholarly Commentary: לֹא עָמַד in Jewish Liturgy\n\nThe phrase לֹא עָמַד (lit. \"he/none did not stand\") appears in Jewish liturgy primarily within two distinct commemorative and penitential contexts that span the liturgical calendar. The phrase first occurs in the Sefard tradition's Kriat HaMegillah (Reading of the Megillah) on Purim, where it appears as part of the narrative account from the Book of Esther describing the miraculous deliverance of the Jewish people. In this context, the liturgy recites: \"לִשְׁלֹחַ יָד בִּמְבַקְשֵׁי רָעָתָם וְאִישׁ לֹא עָמַד לִפְנֵיהֶם כִּי נָפַל פַּחְדָּם עַל כָּל הָעַמִּים\" (\"to lay hands upon those who sought their harm, and no one stood before them, for fear of them fell upon all the peoples\"), emphasizing the reversal of Jewish vulnerability into triumph through divine providence. The second occurrence appears in the Ashkenazi Machzor for Yom Kippur, specifically within the Seder HaAvodah—the elaborate liturgical poem recited during the Mussaf service that reconstructs the High Priest's Temple service. Here, the phrase functions within a broader lamentation about the present state of exile and spiritual diminishment, as the liturgy mourns: \"לֹא נָבִיא וְלֹא חָזוֹן בָּֽנוּ. כְּעִוְרִים נְגַשֵּׁשׁ וְנֵלֵךְ\" (\"we have neither prophet nor seer among us; like the blind we grope and walk\"), expressing the absence and loss characteristic of the post-Temple era. Thus, while both liturgical instances employ the phrase לֹא עָמַד, they operate in fundamentally different registers: one celebrating historical deliverance during a joyous festival, the other lamenting spiritual absence during the most solemn day of the Jewish year.",
+      "verses": "1:1",
+      "validation_notes": null
+    },
+    {
+      "phrase": "בַּעֲצַ֢ת רְשָׁ֫עִ֥ים",
+      "matches_count": 1,
+      "summary": "# Scholarly Commentary\n\nThe phrase בַּעֲצַת רְשָׁעִים (in the counsel of the wicked), drawn from the opening verse of Psalm 1, appears in the Sefard liturgical tradition specifically within the Hakafot (circuits) of Simchat Torah, performed during both the evening and morning services at the conclusion of Sukkot. This phrase is integrated into a petitionary passage within the Torah Service section of the Hakafot, where the liturgy reads: וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים, וְלֹא נִהְיֶה מֵהוֹלְכֵי רָכִיל, וּלְמַעַן זְכוּת אַהֲרֹן קְדוֹשׁ יְהֹוָה הֶחָתוּם (\"Grant us merit that we not walk in the counsel of the wicked, and that we not be among those who bear tales, and for the sake of the merit of Aaron the holy one, O Lord the sealed one\"). The invocation of Psalm 1's opening admonition serves a moral-spiritual function within the celebratory context of Simchat Torah, reminding the community even amid festive rejoicing of the ethical imperative to distance oneself from wickedness and preserve righteous conduct. By anchoring this petition to the merit of Aaron—the archetypal priest and symbol of holiness—the liturgy weaves together the scriptural warning against walking in the counsel of the wicked with the sacred occasion of Torah celebration, creating a moment of spiritual accountability within the joy of the festival.",
+      "verses": "1:1",
+      "validation_notes": null
+    },
+    {
+      "phrase": "וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ",
+      "matches_count": 1,
+      "summary": "# Scholarly Commentary Paragraph\n\nThe phrase from Psalm 1:3 describing the righteous person as \"a tree planted by streams of water, which yields its fruit in season and whose leaf does not wither\" (וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ) appears in the Sefard liturgical tradition during the Hakafot (circuits) of Simchat Torah, performed in both the evening (Ma'ariv) and morning (Shacharit) services. This occurrence is situated within the Torah Service section of the Hakafot liturgy, where it is integrated into a broader sequence of scriptural verses and piyyutim that accompany the seven circuits around the bimah with the Torah scrolls. The liturgical context presents the phrase as part of a concatenated passage that reads: \"וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ. סוּר מֵרָע וַעֲשֵׂה טוֹב, בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ. וְהָיָה כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבֹּל וְכָל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ\" (righteousness from the God of salvation; turn from evil and do good, seek peace and pursue it; and he shall be like a tree planted by streams of water whose fruit it yields in its season and whose leaf does not wither, and all that he does shall prosper). In this liturgical setting, the verse functions as a thematic meditation on the prosperity and blessing that accompanies adherence to divine law, making it particularly apt for the joyous celebration of Simchat Torah when the annual cycle of Torah reading is completed and renewed. The phrase's appearance in this specific context underscores the theological connection between the study and observance of Torah and the flourishing spiritual life symbolized by the fruitful, ever-verdant tree.",
+      "verses": "1:3",
+      "validation_notes": null
+    },
+    {
+      "phrase": "וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א",
+      "matches_count": 1,
+      "summary": "# Scholarly Commentary Paragraph\n\nThe phrase וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א from Psalm 1:1 appears in Jewish liturgy as a prooftext within the study of Pirkei Avot, the Mishnaic tractate on ethical teachings that is recited on Shabbat afternoons following the Mincha service, particularly during the spring season between Passover and Shavuot. In the Siddur Edot HaMizrach, this Psalm verse is cited to support a teaching about the \"seat of scoffers\" (מוֹשַׁב לֵצִים), with the liturgical context presenting the full verse as scriptural authority: \"שֶׁיּוֹשְׁבִין וְאֵין בֵּינֵיהֶם דִּבְרֵי תוֹרָה, הֲרֵי זֶה מוֹשַׁב לֵצִים, שֶׁנֶּאֱמַר: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב\" (\"When people sit together without words of Torah between them, behold this is a seat of scoffers, as it is said: 'In the seat of scoffers he does not sit'\"). The phrase functions here not as part of the primary liturgical recitation but rather as a scriptural citation embedded within the interpretive tradition surrounding Pirkei Avot, serving to reinforce the ethical imperative that righteous individuals must distance themselves from frivolous gatherings and instead engage in Torah study. This usage reflects the broader Jewish hermeneutical practice of grounding Mishnaic teachings in biblical authority, making the Psalm verse integral to the spiritual message conveyed during this customary Shabbat afternoon study session.",
+      "verses": "1:1",
+      "validation_notes": null
+    },
+    {
+      "phrase": "וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם",
+      "matches_count": 1,
+      "summary": "# Scholarly Commentary Paragraph\n\nThe phrase וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם (and he shall be like a tree planted by streams of water) from Psalm 1:3 appears in Jewish liturgy specifically within the study of Pirkei Avot as recited in the Siddur Edot HaMizrach tradition. This passage is studied on Shabbat afternoons following the Mincha service, particularly during the weeks between Passover and Shavuot, when one chapter of Pirkei Avot is customarily studied each week. The verse is cited in the Mishnaic tractate as scriptural support for a teaching about the righteous person whose character remains unmoved by external circumstances, as the liturgy states: \"כָּל־הָרוּחוֹת שֶׁבָּעוֹלָם בָּאוֹת וְנוֹשְׁבוֹת בּוֹ, אֵין מְזִיזִין אוֹתוֹ מִמְּקוֹמוֹ, שֶׁנֶּאֱמַר: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י מָ֥יִם, וְעַל יוּבַל יְשַׁלַּח שָֽׁרָשָׁיו\" (All the winds of the world come and blow upon it, yet they do not move it from its place, as it is said: \"He shall be like a tree planted by streams of water, and beside a stream shall he send forth his roots\"). The integration of this Psalmist imagery into the ethical teachings of Pirkei Avot demonstrates how biblical metaphors of rootedness and stability were employed to reinforce moral constancy and spiritual resilience within Jewish ethical instruction.",
+      "verses": "1:3",
+      "validation_notes": null
+    },
+    {
+      "phrase": "הָרְשָׁעִ֑ים כִּ֥י",
+      "matches_count": 1,
+      "summary": "# Scholarly Commentary Paragraph\n\nThe phrase הָרְשָׁעִים כִּי from Psalm 1:4 appears in Jewish liturgy specifically within the Haftarah reading for Yom Kippur morning (Shacharit service), where it is encountered as part of the prophetic selection from Isaiah 57:14–58:14. The liturgical context preserves this phrase within the broader prophetic passage concerning divine peace and judgment, as the liturgy recites: \"בּוֹרֵא נִיב שְׂפָתָיִם שָׁלוֹם שָׁלוֹם לָרָחוֹק וְלַקָּרוֹב אָמַר יְהֹוָה וּרְפָאתִיו וְהָֽרְשָׁעִים כַּיָּם נִגְרָשׁ כִּי הַשְׁקֵט לֹא יוּכָל\" (Creator of the fruit of the lips, peace, peace to the far and the near, says the Lord, and I will heal them; and the wicked are like the sea that is driven, for it cannot be quiet). This prophetic reading, followed by the full set of post-Haftarah blessings and the special blessing for Yom Kippur, integrates the Psalmist's imagery of the wicked with Isaiah's eschatological vision, connecting the Day of Atonement's themes of judgment and repentance to the prophetic promise of restoration. The appearance of this phrase in the Ashkenazi Yom Kippur liturgy thus links the opening of Psalms—which distinguishes the righteous from the wicked—to the High Holiday's central concern with moral reckoning and divine mercy.",
+      "verses": "1:4",
+      "validation_notes": null
+    },
+    {
+      "phrase": "׀ לֹ֥א הָלַךְ֮",
+      "matches_count": 1,
+      "summary": "# Scholarly Commentary: Psalm 1:1 in Jewish Liturgy\n\nThe phrase לֹא הָלַךְ (he did not walk) from Psalm 1:1 appears in the Jewish liturgical tradition specifically within the Torah Service of Simchat Torah evening, as preserved in the Sefard rite. This occurrence emerges not as an independent liturgical recitation but rather as part of the composite Torah reading for Maariv on Simchat Torah, where the phrase is embedded within the third aliyah's reading from Balaam's blessing of Israel. The liturgical context preserves the phrase within the fuller verse: וַיַּרְא בִּלְעָם כִּי טוֹב בְּעֵינֵי יְהוָה לְבָרֵךְ אֶת יִשְׂרָאֵל וְלֹא הָלַךְ כְּפַעַם (And Balaam saw that it was good in the eyes of the Lord to bless Israel, and he did not go as at other times). The integration of this phrase into the Simchat Torah evening service, which celebrates the completion and renewal of the Torah cycle, associates the language of righteous restraint and divine purpose with the broader themes of blessing and covenant affirmation that characterize the festival's liturgical program. Though this represents a single, localized occurrence within the Sefard tradition's festival liturgy, it demonstrates how biblical language from the Psalms and prophetic writings are woven throughout the Jewish liturgical calendar to reinforce thematic resonances between scriptural narratives and communal celebration.",
+      "verses": "1:1",
+      "validation_notes": null
+    }
+  ]
+}
+********************************************************************************
+LLM PROMPT DATA FOR PSALM 1
+********************************************************************************
+
+Total unique phrases to be summarized: 5
+
+Example phrase: בַּעֲצַ֢ת רְשָׁ֫עִ֥ים...
+
+Example phrase: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א...
+
+Example phrase: כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם...
+
+Example phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ...
+
+Example phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם...
+
+====================================================================================================
+TEST COMPLETE
+====================================================================================================

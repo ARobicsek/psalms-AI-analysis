@@ -1,0 +1,130 @@
+================================================================================
+LITURGICAL RESEARCH BUNDLE FOR PSALM 1
+================================================================================
+Generated: 2025-11-02 01:11:10
+
+This is the EXACT research bundle passed to commentary generation agents.
+It contains ONLY phrase/verse identifiers and LLM-generated summaries.
+
+--------------------------------------------------------------------------------
+BUNDLE CONTENTS
+--------------------------------------------------------------------------------
+Full Psalm Summary: Yes
+Phrase Groups: 6
+
+
+================================================================================
+FULL PSALM SUMMARY
+================================================================================
+
+Identifier: [Full Psalm Recitation]
+
+Summary:
+--------------------------------------------------------------------------------
+Psalm 1 is recited in its entirety within the Yom Kippur evening (Maariv) service, though its liturgical function varies between traditions and devotional contexts. In the Edot HaMizrach rite, Psalm 1 appears as an introductory supplement preceding the Aleinu prayer, forming part of a composite liturgical block that includes Psalms 2, 3, and 4, followed by a Yehi Ratzon supplication, the Full Kaddish, Barechu, and finally the Aleinu itself. Additionally, among certain communities observing the night of Yom Kippur, Psalm 1 serves as an opening devotional text within the Shir HaYichud and Anim Zemirot collection, similarly functioning as a prelude to the full recitation of Shir HaYichud for all seven days of the week. The placement of Psalm 1 in these contexts—with its opening declaration that the righteous are blessed and the wicked are not—establishes a thematic framework appropriate to the Day of Atonement's focus on judgment, repentance, and the distinction between righteous and unrighteous paths. Though the psalm appears exclusively in Yom Kippur evening services rather than in regular weekday or Shabbat liturgy, its complete recitation in these High Holiday contexts underscores its significance as a foundational text for the season's spiritual reckoning.
+
+
+================================================================================
+PHRASE GROUPS
+================================================================================
+Total phrase groups: 6
+
+
+================================================================================
+PHRASE GROUP 1 of 6
+================================================================================
+
+Identifier:
+  Verse Range: 1:3
+  Hebrew Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 1:3 in Jewish Liturgy
+
+The verse from Psalm 1:3, "וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ" (And he shall be like a tree planted by streams of water, that brings forth its fruit in its season, and whose leaf does not wither, and all that he does prospers), appears in the liturgical tradition of Edot HaMizrach primarily during the festival season and the High Holidays. In the Mussaf Amidah for the Three Pilgrimage Festivals, this verse is incorporated into the thematic framework of blessing and prosperity that characterizes the festival prayers. More prominently, the verse appears in the Rosh Hashanah night Kiddush ceremony within the Machzor Rosh Hashanah Edot HaMizrach, where it is cited as scriptural support within a longer supplicatory passage. The liturgy integrates the verse as follows: "אָנָּא יְהֹוָה הוֹשִׁיעָה נָּא, אָנָּא יְהֹוָה הַצְלִיחָה נָא: כַּכָּתוּב: יִשָּׂא בְרָכָה מֵאֵת יְהֹוָה יאהדונהי, וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ: וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם, אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל, וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ" (Please, O Lord, save us; please, O Lord, grant us success: as it is written: May he receive blessing from the Lord... And he shall be like a tree planted by streams of water...). In this home ritual context, the verse functions as scriptural validation of the petitions for divine blessing and success recited during the Rosh Hashanah Kiddush, reinforcing the theological connection between righteous conduct, divine favor, and material prosperity that characterizes the liturgical framework of the New Year celebration.
+
+
+================================================================================
+PHRASE GROUP 2 of 6
+================================================================================
+
+Identifier:
+  Verse Range: 1:3
+  Hebrew Phrase: כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם ("like a tree planted by streams of water") from Psalm 1:3 appears in Jewish liturgy specifically within the Tefillat Geshem (Prayer for Rain), the special piyyutim recited during the Chazzan's repetition of the Mussaf Amidah on Shemini Atzeret in both Ashkenazi and Sefardi traditions. This acrostic poem, which begins with the invocation "הַגָּשֶׁם: אֱלהֵינוּ וֵאלהֵי אֲבותֵינוּ" (The Rain: Our God and God of our fathers), integrates the Psalmist's botanical imagery into a broader meditation on divine blessing and sustenance. The liturgy presents the phrase within an extended passage: "זְכור אָב נִמְשַׁךְ אַחֲרֶיךָ כַּמַּיִם. בֵּרַכְתּו כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם. גְּנַנְתּו הִצַּלְתּוֹ מֵאֵשׁ וּמִמַּיִם" (Remember the father drawn after You like water; You blessed him like a tree planted by streams of water; You protected him, delivered him from fire and from water), thereby transforming the Psalm's description of the righteous individual into a prayer for communal blessing and protection through rain. The placement of this phrase within the second blessing (Gevurot) of the Amidah, immediately before the seasonal insertion of "Mashiv HaRuach U'Morid HaGeshem" (He causes the wind to blow and the rain to fall), creates a poetic bridge between the agricultural imagery of the Psalms and the concrete petition for winter precipitation essential to the Land of Israel. This liturgical deployment demonstrates how the tradition repurposes biblical metaphors of spiritual flourishing to address the material needs of the Jewish people, particularly during the season when rain becomes the focus of communal prayer.
+
+
+================================================================================
+PHRASE GROUP 3 of 6
+================================================================================
+
+Identifier:
+  Verse Range: 1:1
+  Hebrew Phrase: בַּעֲצַ֢ת רְשָׁ֫עִ֥ים
+
+Summary:
+--------------------------------------------------------------------------------
+# Commentary Paragraph
+
+The phrase בַּעֲצַ֢ת רְשָׁ֫עִ֥ים ("in the counsel of the wicked") from Psalm 1:1 appears in the Hakafot (circuits) of Simchat Torah as recited in the Sefard tradition during both the evening and morning services. Within the liturgical context of the seven circuits performed on Simchat Torah, this phrase is integrated into a Yehi Ratzon (petition) prayer that accompanies one of the Hakafot, where the liturgy reads: "וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים, וְלֹא נִהְיֶה מֵהוֹלְכֵי רָכִיל, וּלְמַעַן זְכוּת אַהֲרֹן קְדוֹשׁ יְהֹוָה הֶחָתוּם" ("and merit us that we shall not walk in the counsel of the wicked, and we shall not be among those who gossip, and for the merit of Aaron the holy, O Lord, the sealed one"). The invocation of this opening verse from Psalm 1 in the Hakafot context serves to invoke the ethical imperative of righteous conduct and proper association, particularly fitting during the celebration of Torah completion and renewal. The phrase thus functions within a supplicatory framework during the festival of Simchat Torah, reinforcing the spiritual aspirations of the community as they circumambulate with the Torah scrolls, drawing upon the psalmist's foundational distinction between the righteous and the wicked to petition for divine protection and moral guidance.
+
+
+================================================================================
+PHRASE GROUP 4 of 6
+================================================================================
+
+Identifier:
+  Verse Range: 1:3
+  Hebrew Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם ("and he shall be like a tree planted by streams of water") from Psalm 1:3 appears in the Sefard liturgical tradition during the Hakafot (circuits) on Simchat Torah, recited in both the evening (Ma'ariv) and morning (Shacharit) services. This phrase is incorporated into the Torah Service as part of the comprehensive liturgy for the seven circuits, where it functions as one of several biblical verses interspersed among the piyyutim and kabbalistic prayers that accompany the processions with the Torah scrolls. The liturgical context presents the verse within a longer scriptural sequence that emphasizes ethical conduct and divine blessing: "סוּר מֵרָע וַעֲשֵׂה טוֹב, בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ. וְהָיָה כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבֹּל וְכָל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ" ("Turn from evil and do good, seek peace and pursue it. And he shall be like a tree planted by streams of water whose fruit it yields in its season, whose leaf does not wither, and all that he does prospers"). On Simchat Torah specifically, this arboreal metaphor of fruitfulness and perpetual flourishing resonates thematically with the celebration of the Torah's eternal vitality and the community's spiritual renewal through the annual cycle of scriptural reading. The single occurrence of this phrase in Jewish liturgy underscores its selective but meaningful deployment during this joyous festival occasion.
+
+
+================================================================================
+PHRASE GROUP 5 of 6
+================================================================================
+
+Identifier:
+  Verse Range: 1:1
+  Hebrew Phrase: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 1:1 in Jewish Liturgy
+
+The phrase וּבְמוֹשַׁב לֵצִים לֹא from Psalm 1:1 appears in the Siddur Edot HaMizrach as part of the Pirkei Avot (Chapters of the Fathers) recitation, which is customarily studied on Shabbat afternoons following the Mincha service, particularly during the weeks between Passover and Shavuot. This Mishnaic tractate serves as supplemental study material in the liturgical calendar, and the psalmistic phrase is invoked within a homiletical interpretation of the opening mishnah. The liturgy contextualizes the verse through the rabbinic teaching: "שֶׁיּוֹשְׁבִין וְאֵין בֵּינֵיהֶם דִּבְרֵי תוֹרָה, הֲרֵי זֶה מוֹשַׁב לֵצִים, שֶׁנֶּאֱמַר: וּבְמוֹשַׁב לֵצִים לֹא יָשָׁב" ("When people sit together without words of Torah between them, this is a 'seat of scoffers,' as it is said: 'and in the seat of scoffers he does not sit'"). The Psalmist's warning against the assembly of the wicked is thus reinterpreted within the rabbinic ethical framework to emphasize the spiritual danger of idle conversation divorced from Torah study. This citation demonstrates how the biblical phrase functions as textual authority for the Mishnaic principle that distinguishes righteous communal gathering (characterized by Torah discourse) from the corrupting influence of those who mock religious devotion, underscoring the centrality of sacred study to Jewish communal life.
+
+
+================================================================================
+PHRASE GROUP 6 of 6
+================================================================================
+
+Identifier:
+  Verse Range: 1:3
+  Hebrew Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם ("and he shall be like a tree planted by streams of water") from Psalm 1:3 appears in the Siddur Edot HaMizrach as a scriptural proof-text within the study of Pirkei Avot, the Mishnaic tractate on ethical teachings, which is customarily recited on Shabbat afternoons following the Mincha service, particularly during the weeks between Passover and Shavuot. The phrase is cited within a broader Talmudic discussion concerning the righteous person's stability and resilience, as the liturgy contextualizes it thus: "כָּל־הָרוּחוֹת שֶׁבָּעוֹלָם בָּאוֹת וְנוֹשְׁבוֹת בּוֹ, אֵין מְזִיזִין אוֹתוֹ מִמְּקוֹמוֹ, שֶׁנֶּאֱמַר: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י מָ֥יִם, וְעַל יוּבַל יְשַׁלַּח שָֽׁרָשָׁיו" ("All the winds of the world come and blow upon him, yet they do not move him from his place, as it is said: 'And he shall be like a tree planted by streams of water, and by a stream he shall send forth his roots'"). This usage exemplifies how the Psalms function within the supplementary study material of the Siddur, serving as scriptural warrant for the ethical principles expounded in Pirkei Avot. The application of this arboreal metaphor to the person of integrity reinforces the Mishnaic theme of spiritual rootedness and constancy, making the phrase a touchstone for contemplation during the extended Shabbat afternoon period of Jewish learning and devotion.
+
+
+================================================================================
+END OF RESEARCH BUNDLE
+================================================================================
+
+This research bundle contains everything needed for commentary generation:
+- Each phrase/verse is identified
+- Each has a scholarly LLM-generated summary of its liturgical usage
+- No raw data or metadata - just the curated summaries

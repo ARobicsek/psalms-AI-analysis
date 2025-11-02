@@ -15,18 +15,20 @@ Usage:
 
     # With LLM summarization (default)
     librarian = LiturgicalLibrarian()
-    results = librarian.find_liturgical_usage_aggregated(psalm_chapter=23, psalm_verses=[3])
+    results = librarian.find_liturgical_usage_by_phrase(psalm_chapter=23, psalm_verses=[3])
 
     # Without LLM (code-only summaries)
     librarian = LiturgicalLibrarian(use_llm_summaries=False)
-    results = librarian.find_liturgical_usage_aggregated(psalm_chapter=23)
+    results = librarian.find_liturgical_usage_by_phrase(psalm_chapter=23)
 """
 
 import sqlite3
 import os
+import json
 from typing import List, Optional, Dict, Any
 from dataclasses import dataclass
 from collections import defaultdict
+from dotenv import load_dotenv
 
 
 @dataclass
@@ -44,6 +46,8 @@ class LiturgicalMatch:
     liturgy_context: str
     match_type: str
     confidence: float
+    is_unique: int  # 0 or 1 - whether phrase is unique to this psalm chapter
+    locations: Optional[str]
 
     # Prayer metadata
     prayer_id: int
@@ -56,27 +60,13 @@ class LiturgicalMatch:
     service: Optional[str]
     section: Optional[str]
 
-
-@dataclass
-class AggregatedPrayerMatch:
-    """Aggregated match representing one prayer with multiple occurrences."""
-
-    prayer_name: str
-    occurrence_count: int
-    representative_phrase: str
-    representative_context: str
-    contexts_summary: str
-    confidence_avg: float
-    match_types: List[str]
-
-    # Metadata
-    occasions: List[str]
-    services: List[str]
-    nusachs: List[str]
-    sections: List[str]
-
-    # Raw matches (for detailed view)
-    raw_matches: Optional[List[LiturgicalMatch]] = None
+    # Canonical classification fields (our own, better than Sefaria)
+    canonical_prayer_name: Optional[str]
+    canonical_L1_Occasion: Optional[str]
+    canonical_L2_Service: Optional[str]
+    canonical_L3_Signpost: Optional[str]
+    canonical_L4_SubSection: Optional[str]
+    canonical_location_description: Optional[str]
 
 
 @dataclass
@@ -101,6 +91,7 @@ class PhraseUsageMatch:
     # Psalm phrase info
     psalm_phrase_hebrew: str  # The phrase from the psalm (e.g., "למען שמו")
     psalm_verse_range: str  # Which verse(s), e.g., "23:3" or "23:1-2"
+    content_used_description: str  # Human-readable description of what content is used
     phrase_length: int  # Number of words in phrase
 
     # Usage statistics
@@ -164,6 +155,9 @@ class LiturgicalLibrarian:
         self.verbose = verbose
         self.anthropic_client = None
 
+        # Load environment variables from .env file
+        load_dotenv()
+
         # Initialize LLM client if needed
         if use_llm_summaries:
             try:
@@ -178,79 +172,51 @@ class LiturgicalLibrarian:
                 print("[WARNING] anthropic package not installed. Falling back to code-only summaries.")
                 self.use_llm_summaries = False
 
-    def find_liturgical_usage_aggregated(
-        self,
-        psalm_chapter: int,
-        psalm_verses: Optional[List[int]] = None,
-        min_confidence: float = 0.75,
-        include_raw_matches: bool = False
-    ) -> List[AggregatedPrayerMatch]:
+    def generate_research_bundle(self, psalm_chapter: int) -> Dict[str, Any]:
         """
-        Find liturgical usage with intelligent aggregation by prayer.
+        Generate a research bundle for a given psalm chapter.
 
-        This is the main method that solves the duplication problem.
-        Instead of returning 79 separate Amidah entries, it returns ONE
-        Amidah entry with a summary of all 79 contexts.
+        This method orchestrates the process of finding liturgical usage,
+        generating summaries, and structuring the data into a research bundle.
 
         Args:
-            psalm_chapter: Psalm number (1-150)
-            psalm_verses: Specific verses (None = entire chapter)
-            min_confidence: Minimum confidence threshold (0.0-1.0)
-            include_raw_matches: Include full list of raw matches in results
+            psalm_chapter: The psalm chapter number.
 
         Returns:
-            List of aggregated prayer matches (one per unique prayer)
+            A dictionary representing the research bundle.
         """
-        # 1. Get all raw matches from index
-        raw_matches = self._get_raw_matches(
+        # Use find_liturgical_usage_by_phrase to get the data
+        phrase_usage_matches = self.find_liturgical_usage_by_phrase(
             psalm_chapter=psalm_chapter,
-            psalm_verses=psalm_verses,
-            min_confidence=min_confidence
+            separate_full_psalm=True,
+            include_raw_matches=True
         )
 
-        if not raw_matches:
-            return []
+        full_psalm_summary = ""
+        phrase_groups = []
 
-        # 2. Group by prayer (smart grouping handles variants)
-        grouped = self._group_by_prayer(raw_matches)
-
-        # 3. Create aggregated results
-        aggregated_results = []
-
-        for prayer_key, matches in grouped.items():
-            # Extract metadata
-            contexts_data = self._extract_contexts_metadata(matches)
-
-            # Generate summary (LLM or code)
-            if self.use_llm_summaries and len(matches) >= 3:
-                summary = self._generate_llm_summary(
-                    prayer_name=prayer_key,
-                    contexts=contexts_data,
-                    total_count=len(matches)
-                )
+        # Separate full psalm recitations from phrase groups
+        for match in phrase_usage_matches:
+            if match.psalm_phrase_hebrew == f"[Full Psalm {psalm_chapter}]":
+                # For full psalm recitations, we only need the summary
+                full_psalm_summary = match.liturgical_summary
             else:
-                summary = self._generate_code_summary(contexts_data)
+                # Simplified phrase groups: only phrase/verse + summary
+                phrase_groups.append({
+                    'phrase': match.psalm_phrase_hebrew,
+                    'verses': match.psalm_verse_range,
+                    'summary': match.liturgical_summary
+                })
 
-            # Build aggregated result
-            aggregated_results.append(AggregatedPrayerMatch(
-                prayer_name=prayer_key,
-                occurrence_count=len(matches),
-                representative_phrase=matches[0].liturgy_phrase_hebrew,
-                representative_context=matches[0].liturgy_context,
-                contexts_summary=summary,
-                confidence_avg=sum(m.confidence for m in matches) / len(matches),
-                match_types=list(set(m.match_type for m in matches)),
-                occasions=sorted(set(m.occasion for m in matches if m.occasion)),
-                services=sorted(set(m.service for m in matches if m.service)),
-                nusachs=sorted(set(m.nusach for m in matches if m.nusach)),
-                sections=sorted(set(m.section for m in matches if m.section)),
-                raw_matches=matches if include_raw_matches else None
-            ))
+        return {
+            'psalm_chapter': psalm_chapter,
+            'full_psalm_summary': full_psalm_summary,
+            'phrase_groups': phrase_groups
+        }
 
-        # Sort by occurrence count (most common first)
-        aggregated_results.sort(key=lambda x: x.occurrence_count, reverse=True)
-
-        return aggregated_results
+    def _get_db_connection(self):
+        """Establish a connection to the SQLite database."""
+        return sqlite3.connect(self.db_path)
 
     def find_liturgical_usage_by_phrase(
         self,
@@ -286,19 +252,16 @@ class LiturgicalLibrarian:
         if not raw_matches:
             return []
 
-        # 2. Separate and verify full psalm recitations
+        # 2. Separate full psalm recitations and phrase matches
         if separate_full_psalm:
-            # Separate exact_verse matches (potential full psalm) from phrase_match (excerpts)
-            potential_full = [m for m in raw_matches if m.match_type == 'exact_verse']
-            phrase_matches = [m for m in raw_matches if m.match_type != 'exact_verse']
+            # Per user feedback, only 'entire_chapter' is a "full psalm recitation"
+            full_psalm_matches = [m for m in raw_matches if m.match_type == 'entire_chapter']
+            phrase_matches = [m for m in raw_matches if m.match_type != 'entire_chapter']
 
-            # Verify full psalm matches (filter out false positives)
-            full_psalm_matches = self._verify_full_psalm_matches(potential_full, psalm_chapter)
-
-            # Get prayer_ids where full psalm is recited (to deduplicate phrases)
+            # Get prayer_ids where full/substantial content is present (to deduplicate phrases)
             full_psalm_prayer_ids = set(m.prayer_id for m in full_psalm_matches)
 
-            # Filter out phrase matches from same contexts where full psalm is recited
+            # Filter out phrase matches from same contexts where full/substantial content exists
             phrase_matches = [m for m in phrase_matches if m.prayer_id not in full_psalm_prayer_ids]
         else:
             phrase_matches = raw_matches
@@ -308,16 +271,23 @@ class LiturgicalLibrarian:
         grouped = self._group_by_psalm_phrase(phrase_matches)
 
         # 4. Merge overlapping phrases (same prayer contexts)
-        grouped = self._merge_overlapping_phrase_groups(grouped)
+        # This is now disabled as per user feedback to have separate summaries.
+        # grouped = self._merge_overlapping_phrase_groups(grouped)
 
-        # 4.5. LLM Validation Pass (if enabled)
-        if self.use_llm_summaries and self.anthropic_client:
-            grouped = self._validate_phrase_groups_with_llm(grouped, psalm_chapter)
+        # 4.5. LLM Validation Pass for phrase matches
+        # DISABLED per user feedback - validation should be implicit in summary generation
+        # The LLM will naturally handle false positives as part of its analysis
+        validation_notes = {}
+        # if self.use_llm_summaries and self.anthropic_client:
+        #     grouped, validation_notes = self._validate_phrase_groups_with_llm(grouped, psalm_chapter)
+        #     if self.verbose:
+        #         print(f"DEBUG: number of groups to be processed: {len(grouped)}")
 
         # 5. Create aggregated results for each phrase
         phrase_results = []
 
-        for phrase_key, matches in grouped.items():
+        for phrase_key_tuple, matches in grouped.items():
+            phrase_key = phrase_key_tuple[0]
             # Extract metadata
             contexts_data = self._extract_contexts_metadata(matches)
 
@@ -328,7 +298,7 @@ class LiturgicalLibrarian:
             verse_range = self._format_verse_range(psalm_chapter, matches)
 
             # Generate summary (LLM or code)
-            if self.use_llm_summaries and len(matches) >= 3:
+            if self.use_llm_summaries and len(matches) >= 1:
                 summary = self._generate_phrase_llm_summary(
                     psalm_phrase=phrase_key,
                     psalm_verse_range=verse_range,
@@ -346,6 +316,7 @@ class LiturgicalLibrarian:
             phrase_results.append(PhraseUsageMatch(
                 psalm_phrase_hebrew=phrase_key,
                 psalm_verse_range=verse_range,
+                content_used_description=self._format_content_used(matches[0]),
                 phrase_length=matches[0].phrase_length,
                 occurrence_count=len(matches),
                 unique_prayer_contexts=len(prayer_contexts),
@@ -358,6 +329,7 @@ class LiturgicalLibrarian:
                 confidence_avg=sum(m.confidence for m in matches) / len(matches),
                 match_types=list(set(m.match_type for m in matches)),
                 representative_liturgy_context=matches[0].liturgy_context[:200] + "...",
+                validation_notes=validation_notes.get(phrase_key_tuple),
                 raw_matches=matches if include_raw_matches else None
             ))
 
@@ -376,22 +348,37 @@ class LiturgicalLibrarian:
                 contexts_data=contexts_data
             )
 
-            # Determine actual verse range from found_verses (show range of all verses found)
-            all_found_verses = []
+            # Determine actual verse range from matches
+            all_verses = []
             for m in full_psalm_matches:
-                if hasattr(m, 'found_verses') and m.found_verses:
-                    all_found_verses.extend(m.found_verses)
+                if m.match_type == 'exact_verse':
+                    all_verses.append(m.psalm_verse_start)
+                elif m.match_type == 'verse_range':
+                    all_verses.extend(range(m.psalm_verse_start, m.psalm_verse_end + 1))
+                elif m.match_type == 'verse_set' and m.locations:
+                    try:
+                        all_verses.extend(json.loads(m.locations))
+                    except (json.JSONDecodeError, TypeError):
+                        pass
+                elif m.match_type == 'entire_chapter':
+                    psalm_verses = self._get_psalm_verses(psalm_chapter)
+                    if psalm_verses:
+                        all_verses.extend(psalm_verses.keys())
 
-            if all_found_verses:
-                unique_verses = sorted(set(all_found_verses))
+            if all_verses:
+                unique_verses = sorted(set(all_verses))
                 verse_range_str = self._format_verse_list(unique_verses)
                 psalm_verse_range = f"{psalm_chapter}:{verse_range_str}"
             else:
                 psalm_verse_range = f"{psalm_chapter}:1-end"
 
+            # Collect all unique match types from the full psalm matches
+            full_psalm_match_types = list(set(m.match_type for m in full_psalm_matches))
+
             phrase_results.append(PhraseUsageMatch(
                 psalm_phrase_hebrew=f"[Full Psalm {psalm_chapter}]",
                 psalm_verse_range=psalm_verse_range,
+                content_used_description=f"Entire Psalm {psalm_chapter}",
                 phrase_length=0,  # Full psalm
                 occurrence_count=len(full_psalm_matches),
                 unique_prayer_contexts=len(prayer_contexts),
@@ -401,8 +388,8 @@ class LiturgicalLibrarian:
                 nusachs=contexts_data['nusachs'],
                 sections=contexts_data['sections'],
                 liturgical_summary=summary,
-                confidence_avg=sum(m.confidence for m in full_psalm_matches) / len(full_psalm_matches),
-                match_types=['exact_verse'],
+                confidence_avg=sum(m.confidence for m in full_psalm_matches) / len(full_psalm_matches) if full_psalm_matches else 0,
+                match_types=full_psalm_match_types,  # Use actual match types from the matches
                 representative_liturgy_context="[Full psalm recitation]",
                 raw_matches=full_psalm_matches if include_raw_matches else None
             ))
@@ -420,7 +407,7 @@ class LiturgicalLibrarian:
     ) -> List[LiturgicalMatch]:
         """Query database for all raw matches with full metadata."""
 
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_db_connection()
         cursor = conn.cursor()
 
         # Build query
@@ -438,6 +425,8 @@ class LiturgicalLibrarian:
                     i.liturgy_context,
                     i.match_type,
                     i.confidence,
+                    i.is_unique,
+                    i.locations,
                     p.prayer_id,
                     p.prayer_name,
                     p.source_text,
@@ -446,7 +435,13 @@ class LiturgicalLibrarian:
                     p.prayer_type,
                     p.occasion,
                     p.service,
-                    p.section
+                    p.section,
+                    p.canonical_prayer_name,
+                    p.canonical_L1_Occasion,
+                    p.canonical_L2_Service,
+                    p.canonical_L3_Signpost,
+                    p.canonical_L4_SubSection,
+                    p.canonical_location_description
                 FROM psalms_liturgy_index i
                 JOIN prayers p ON i.prayer_id = p.prayer_id
                 WHERE i.psalm_chapter = ?
@@ -473,6 +468,8 @@ class LiturgicalLibrarian:
                     i.liturgy_context,
                     i.match_type,
                     i.confidence,
+                    i.is_unique,
+                    i.locations,
                     p.prayer_id,
                     p.prayer_name,
                     p.source_text,
@@ -481,7 +478,13 @@ class LiturgicalLibrarian:
                     p.prayer_type,
                     p.occasion,
                     p.service,
-                    p.section
+                    p.section,
+                    p.canonical_prayer_name,
+                    p.canonical_L1_Occasion,
+                    p.canonical_L2_Service,
+                    p.canonical_L3_Signpost,
+                    p.canonical_L4_SubSection,
+                    p.canonical_location_description
                 FROM psalms_liturgy_index i
                 JOIN prayers p ON i.prayer_id = p.prayer_id
                 WHERE i.psalm_chapter = ?
@@ -510,75 +513,64 @@ class LiturgicalLibrarian:
                 liturgy_context=row[7],
                 match_type=row[8],
                 confidence=row[9],
-                prayer_id=row[10],
-                prayer_name=row[11],
-                source_text=row[12],
-                sefaria_ref=row[13],
-                nusach=row[14],
-                prayer_type=row[15],
-                occasion=row[16],
-                service=row[17],
-                section=row[18]
+                is_unique=row[10],
+                locations=row[11],
+                prayer_id=row[12],
+                prayer_name=row[13],
+                source_text=row[14],
+                sefaria_ref=row[15],
+                nusach=row[16],
+                prayer_type=row[17],
+                occasion=row[18],
+                service=row[19],
+                section=row[20],
+                canonical_prayer_name=row[21],
+                canonical_L1_Occasion=row[22],
+                canonical_L2_Service=row[23],
+                canonical_L3_Signpost=row[24],
+                canonical_L4_SubSection=row[25],
+                canonical_location_description=row[26]
             ))
 
         conn.close()
         return matches
 
-    def _group_by_prayer(self, matches: List[LiturgicalMatch]) -> Dict[str, List[LiturgicalMatch]]:
+    def _group_by_psalm_phrase(self, matches: List[LiturgicalMatch]) -> Dict[tuple, List[LiturgicalMatch]]:
         """
-        Group matches by prayer name with smart normalization.
-
-        Handles variants like:
-        - "Patriarchs" vs "Avot" -> same prayer
-        - "Amidah" vs "Amida" -> same prayer
-        - None/empty -> use section or "Unknown"
+        Group matches by a composite key to ensure distinct summaries for distinct items.
         """
         grouped = defaultdict(list)
 
         for match in matches:
-            # Determine grouping key
-            key = self._get_prayer_grouping_key(match)
+            # Filter out phrases with <2 meaningful words (like "פ" or single letters)
+            if match.match_type == 'phrase_match':
+                word_count = self._count_meaningful_hebrew_words(match.psalm_phrase_hebrew)
+                if word_count < 2:
+                    if self.verbose:
+                        print(f"[FILTER] Phrase with <2 words (length: {len(match.psalm_phrase_hebrew)} chars, {word_count} words)")
+                    continue
+
+                # Filter out phrases that are not unique to this psalm chapter
+                # (is_unique=0 means the phrase appears in other psalm chapters)
+                if match.is_unique == 0:
+                    if self.verbose:
+                        try:
+                            phrase_preview = match.psalm_phrase_hebrew[:50] + '...' if len(match.psalm_phrase_hebrew) > 50 else match.psalm_phrase_hebrew
+                            print(f"[FILTER] Non-unique phrase (appears in other psalms): {phrase_preview}")
+                        except UnicodeEncodeError:
+                            print(f"[FILTER] Non-unique phrase (appears in other psalms) - length {len(match.psalm_phrase_hebrew)} chars")
+                    continue
+
+            # Use a composite key to group matches
+            key = (
+                match.psalm_phrase_hebrew.strip(),
+                match.match_type,
+                match.psalm_verse_start,
+                match.psalm_verse_end
+            )
             grouped[key].append(match)
 
         return dict(grouped)
-
-    def _get_prayer_grouping_key(self, match: LiturgicalMatch) -> str:
-        """
-        Generate a normalized grouping key for a prayer match.
-
-        This handles naming inconsistencies:
-        - Uses prayer_name if available
-        - Falls back to section if prayer_name is None/empty
-        - Normalizes common variants
-        """
-        # Start with prayer_name
-        if match.prayer_name and match.prayer_name.strip():
-            key = match.prayer_name.strip()
-        elif match.section and match.section.strip():
-            key = match.section.strip()
-        else:
-            key = "Unknown Prayer"
-
-        # Normalize common variants (case-insensitive)
-        key_lower = key.lower()
-
-        # Amidah variants
-        if 'amida' in key_lower or 'amidah' in key_lower:
-            key = "Amidah"
-
-        # Patriarchs/Avot variants
-        if 'patriarch' in key_lower or 'avot' in key_lower or 'avos' in key_lower:
-            # Check if it's part of Amidah
-            if match.section and 'amida' in match.section.lower():
-                key = "Amidah - Patriarchs"
-            else:
-                key = "Patriarchs"
-
-        # Magen Avot
-        if 'magen avot' in key_lower:
-            key = "Magen Avot"
-
-        return key
 
     def _extract_contexts_metadata(self, matches: List[LiturgicalMatch]) -> Dict[str, Any]:
         """Extract structured metadata from a list of matches."""
@@ -598,214 +590,11 @@ class LiturgicalLibrarian:
             'total_count': len(matches)
         }
 
-    def _generate_llm_summary(
-        self,
-        prayer_name: str,
-        contexts: Dict[str, Any],
-        total_count: int
-    ) -> str:
-        """
-        Use Claude Haiku 4.5 to generate intelligent context summary.
-
-        Handles inconsistent metadata and generates natural language descriptions.
-        """
-
-        if not self.anthropic_client:
-            return self._generate_code_summary(contexts)
-
-        # Build context description
-        context_lines = []
-        if contexts['occasions']:
-            context_lines.append(f"Occasions: {', '.join(contexts['occasions'])}")
-        if contexts['services']:
-            context_lines.append(f"Services: {', '.join(contexts['services'])}")
-        if contexts['nusachs']:
-            context_lines.append(f"Traditions (nusach): {', '.join(contexts['nusachs'])}")
-        if contexts['sections']:
-            context_lines.append(f"Sections: {', '.join(contexts['sections'])}")
-        if contexts['prayer_types']:
-            context_lines.append(f"Types: {', '.join(contexts['prayer_types'])}")
-
-        context_description = "\n".join(context_lines) if context_lines else "Limited metadata available"
-
-        prompt = f"""You are summarizing liturgical contexts for a scholarly Biblical commentary tool.
-
-Prayer/Section: {prayer_name}
-Number of occurrences: {total_count}
-
-Liturgical contexts:
-{context_description}
-
-Generate a concise 1-2 sentence summary describing WHERE and WHEN this text appears in Jewish liturgy.
-
-Guidelines:
-- Identify patterns (e.g., "all daily services" instead of listing each)
-- Be specific about occasions (Weekday, Shabbat, High Holidays, etc.)
-- Mention traditions (Ashkenaz, Sefard, Edot HaMizrach) if relevant
-- Handle inconsistent naming (e.g., "Amida" = "Amidah", "Avot" = "Patriarchs")
-- Focus on liturgical significance, not just data listing
-- Keep it concise and scholarly
-
-Example output: "Appears in the Patriarchs blessing of the Amidah across all daily services (Shacharit, Mincha, Maariv), Shabbat, and High Holidays (Rosh Hashanah and Yom Kippur), in Ashkenaz, Sefard, and Edot HaMizrach traditions."
-
-Output only the summary, no preamble or explanation."""
-
-        if self.verbose:
-            print(f"\n{'='*70}")
-            print(f"LLM PROMPT FOR: {prayer_name}")
-            print(f"{'='*70}")
-            print(prompt)
-            print(f"{'='*70}\n")
-
-        try:
-            response = self.anthropic_client.messages.create(
-                model="claude-haiku-4-5",
-                max_tokens=300,
-                temperature=0.3,  # Fairly deterministic
-                messages=[{"role": "user", "content": prompt}]
-            )
-
-            summary = response.content[0].text.strip()
-
-            if self.verbose:
-                print(f"\n{'='*70}")
-                print(f"LLM RESPONSE FOR: {prayer_name}")
-                print(f"{'='*70}")
-                print(summary)
-                print(f"\nToken usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
-                print(f"{'='*70}\n")
-
-            # Track usage for cost monitoring (optional)
-            # Could log: response.usage.input_tokens, response.usage.output_tokens
-
-            return summary
-
-        except Exception as e:
-            print(f"[WARNING] LLM summarization failed ({e}). Using code-only fallback.")
-            return self._generate_code_summary(contexts)
-
-    def _generate_code_summary(self, contexts: Dict[str, Any]) -> str:
-        """Generate summary using pure code (fallback or no-LLM mode)."""
-
-        parts = []
-
-        if contexts['occasions']:
-            parts.append(f"Occasions: {', '.join(contexts['occasions'])}")
-        if contexts['services']:
-            parts.append(f"Services: {', '.join(contexts['services'])}")
-        if contexts['nusachs']:
-            parts.append(f"Traditions: {', '.join(contexts['nusachs'])}")
-        if contexts['sections']:
-            parts.append(f"Sections: {', '.join(contexts['sections'])}")
-
-        if parts:
-            return f"Appears in {contexts['total_count']} contexts. " + "; ".join(parts) + "."
-        else:
-            return f"Appears in {contexts['total_count']} liturgical contexts (limited metadata)."
-
-    def format_for_research_bundle(
-        self,
-        aggregated_matches: List[AggregatedPrayerMatch],
-        psalm_chapter: int,
-        psalm_verses: Optional[List[int]] = None
-    ) -> str:
-        """
-        Format aggregated matches for research bundle (optimized for AI agents).
-
-        Returns:
-            Markdown-formatted section for research bundle
-        """
-
-        if not aggregated_matches:
-            verse_text = f" (verse{'s' if psalm_verses and len(psalm_verses) > 1 else ''} {', '.join(map(str, psalm_verses))})" if psalm_verses else ""
-            return f"## Liturgical Usage\n\nNo liturgical usage found for Psalm {psalm_chapter}{verse_text}.\n"
-
-        # Build header
-        verse_text = f" - Verse{'s' if psalm_verses and len(psalm_verses) > 1 else ''} {', '.join(map(str, psalm_verses))}" if psalm_verses else ""
-        total_occurrences = sum(m.occurrence_count for m in aggregated_matches)
-
-        output = [f"## Liturgical Usage: Psalm {psalm_chapter}{verse_text}\n"]
-        output.append(f"This passage appears in **{len(aggregated_matches)} distinct prayer(s)** "
-                     f"with **{total_occurrences} total occurrence(s)** in the liturgy:\n")
-
-        # Format each prayer
-        for i, match in enumerate(aggregated_matches, 1):
-            output.append(f"### {i}. {match.prayer_name}")
-
-            if match.occurrence_count > 1:
-                output.append(f"**Occurrences**: {match.occurrence_count} contexts")
-
-            output.append(f"**Phrase in liturgy**: {match.representative_phrase}")
-
-            if match.representative_context:
-                # Truncate very long contexts
-                context = match.representative_context
-                if len(context) > 200:
-                    context = context[:197] + "..."
-                output.append(f"**Context**: {context}")
-
-            # LLM-generated summary
-            output.append(f"**Where it appears**: {match.contexts_summary}")
-
-            # Confidence and match quality
-            confidence_pct = int(match.confidence_avg * 100)
-            output.append(f"**Confidence**: {confidence_pct}% (Match type: {', '.join(match.match_types)})")
-
-            output.append("")  # Blank line between prayers
-
-        return "\n".join(output)
-
-    def _count_meaningful_hebrew_words(self, text: str) -> int:
-        """
-        Count meaningful Hebrew words (excluding punctuation, markers, etc.).
-
-        Filters out:
-        - Single letters (like paragraph marker פ)
-        - Punctuation marks
-        - Cantillation and vowel points
-        """
-        import re
-
-        # Remove cantillation marks, vowel points, and punctuation
-        normalized = self._normalize_hebrew_for_comparison(text)
-
-        # Split into words
-        words = normalized.split()
-
-        # Count words that are at least 2 Hebrew letters
-        meaningful_words = [w for w in words if len(w) >= 2]
-
-        return len(meaningful_words)
-
-    def _group_by_psalm_phrase(self, matches: List[LiturgicalMatch]) -> Dict[str, List[LiturgicalMatch]]:
-        """
-        Group matches by psalm phrase (the phrase from the psalm).
-
-        This creates one group per unique phrase from the psalm that appears in liturgy.
-        Filters out phrases with <2 meaningful words.
-        """
-        grouped = defaultdict(list)
-
-        for match in matches:
-            # Filter out phrases with <2 meaningful words (like "פ" or single letters)
-            word_count = self._count_meaningful_hebrew_words(match.psalm_phrase_hebrew)
-            if word_count < 2:
-                if self.verbose:
-                    print(f"[FILTER] Phrase with <2 words (length: {len(match.psalm_phrase_hebrew)} chars, {word_count} words)")
-                continue
-
-            # Use the psalm phrase as the key
-            key = match.psalm_phrase_hebrew.strip()
-            grouped[key].append(match)
-
-        return dict(grouped)
-
     def _extract_prayer_contexts(self, matches: List[LiturgicalMatch]) -> List[str]:
         """
         Extract unique prayer context descriptions from matches.
 
-        Returns a list like: ["Amidah - Patriarchs (Ashkenaz)", "Shabbat Kiddush (Sefard)", ...]
-        """
+        Returns a list like: ["Amidah - Patriarchs (Ashkenaz)", "Shabbat Kiddush (Sefard)", ...]"""
         contexts = set()
 
         for match in matches:
@@ -849,6 +638,42 @@ Output only the summary, no preamble or explanation."""
         else:
             return f"{psalm_chapter}:{verses_sorted[0]}-{verses_sorted[-1]}"
 
+    def _format_content_used(self, match) -> str:
+        """
+        Format a description of what content from the psalm is used.
+
+        Returns a string like:
+        - "Entire Psalm 145"
+        - "Psalm 23:3 (complete verse)"
+        - "Phrase from Psalm 145:1-2"
+        - "Verses 27:1-14"
+        """
+        if hasattr(match, 'psalm_phrase_hebrew') and match.psalm_phrase_hebrew == f"[Full Psalm {match.psalm_chapter}]":
+            return f"Entire Psalm {match.psalm_chapter}"
+
+        # Determine match type description
+        if match.match_type == 'entire_chapter':
+            return f"Entire Psalm {match.psalm_chapter}"
+        elif match.match_type == 'exact_verse':
+            if match.psalm_verse_start == match.psalm_verse_end or match.psalm_verse_end is None:
+                return f"Psalm {match.psalm_chapter}:{match.psalm_verse_start} (complete verse)"
+            else:
+                return f"Verses {match.psalm_chapter}:{match.psalm_verse_start}-{match.psalm_verse_end} (complete)"
+        elif match.match_type == 'verse_range':
+            return f"Verses {match.psalm_chapter}:{match.psalm_verse_start}-{match.psalm_verse_end}"
+        elif match.match_type == 'verse_set':
+            # Get actual verse numbers from the phrase if available
+            return f"Selected verses from Psalm {match.psalm_chapter}"
+        elif match.match_type == 'phrase_match':
+            # Show the actual Hebrew phrase
+            phrase_excerpt = match.psalm_phrase_hebrew[:50] + '...' if len(match.psalm_phrase_hebrew) > 50 else match.psalm_phrase_hebrew
+            if match.psalm_verse_start == match.psalm_verse_end or match.psalm_verse_end is None:
+                return f"Phrase \"{phrase_excerpt}\" from Psalm {match.psalm_chapter}:{match.psalm_verse_start}"
+            else:
+                return f"Phrase \"{phrase_excerpt}\" from Psalm {match.psalm_chapter}:{match.psalm_verse_start}-{match.psalm_verse_end}"
+        else:
+            return f"Psalm {match.psalm_chapter}:{match.psalm_verse_start}"
+
     def _generate_phrase_llm_summary(
         self,
         psalm_phrase: str,
@@ -862,117 +687,249 @@ Output only the summary, no preamble or explanation."""
         Use Claude Haiku to generate intelligent summary for a specific psalm phrase.
 
         This prompt is designed for PHRASE-level descriptions, not prayer-level.
-        Includes hebrew_text context and requests quotes/translations for phrase excerpts.
+        Uses canonical classification fields and location_description to understand context.
         """
         if not self.anthropic_client:
             return self._generate_phrase_code_summary(psalm_phrase, prayer_contexts, contexts)
 
-        # Get hebrew_text from a representative match (first one)
-        representative_hebrew_text = ""
-        if matches:
-            try:
-                conn = sqlite3.connect(self.db_path)
-                cursor = conn.cursor()
-                cursor.execute(
-                    "SELECT hebrew_text FROM prayers WHERE prayer_id = ?",
-                    (matches[0].prayer_id,)
-                )
-                result = cursor.fetchone()
-                conn.close()
-
-                if result and result[0]:
-                    representative_hebrew_text = result[0][:30000]  # Use first 30000 chars
-            except Exception as e:
-                if self.verbose:
-                    print(f"[WARNING] Could not fetch hebrew_text for summary: {e}")
-
-        # Build context description
+        # Build context description with match details
         context_lines = []
         context_lines.append(f"Psalm phrase: {psalm_phrase} (from verse {psalm_verse_range})")
         context_lines.append(f"Total occurrences: {total_count}")
         context_lines.append(f"Appears in {len(prayer_contexts)} distinct prayer contexts:")
-
-        # Show up to 10 prayer contexts
-        for ctx in prayer_contexts[:10]:
-            context_lines.append(f"  - {ctx}")
-        if len(prayer_contexts) > 10:
-            context_lines.append(f"  ... and {len(prayer_contexts) - 10} more")
-
         context_lines.append("")
-        if contexts['occasions']:
-            context_lines.append(f"Occasions: {', '.join(contexts['occasions'])}")
-        if contexts['services']:
-            context_lines.append(f"Services: {', '.join(contexts['services'])}")
-        if contexts['nusachs']:
-            context_lines.append(f"Traditions: {', '.join(contexts['nusachs'])}")
-        if contexts['sections']:
-            context_lines.append(f"Sections: {', '.join(contexts['sections'])}")
 
-        # Add hebrew text context if available
-        if representative_hebrew_text:
-            context_lines.append("")
-            context_lines.append("Representative Hebrew text from prayer:")
-            context_lines.append("```")
-            context_lines.append(representative_hebrew_text[:10000])  # Show 10000 chars in prompt
-            if len(representative_hebrew_text) > 10000:
-                context_lines.append("... [text continues]")
-            context_lines.append("```")
+        # Prioritize matches by type (full psalms first, then phrases)
+        prioritized_matches = self._prioritize_matches_by_type(matches)
+
+        # Provide detailed match information for LLM to analyze
+        context_lines.append("Detailed matches (ordered by significance - full recitations first, phrases last):")
+        for i, match in enumerate(prioritized_matches[:5], 1):  # Show up to 5 detailed matches
+            context_lines.append(f"\nMatch {i}:")
+            context_lines.append(f"  Source Text: {match.source_text}")
+            context_lines.append(f"  Main prayer in this liturgical block: {match.canonical_prayer_name or 'N/A'}")
+            context_lines.append(f"  Location Description: {match.canonical_location_description or 'N/A'}")
+            context_lines.append(f"  L1 Occasion: {match.canonical_L1_Occasion or 'N/A'}")
+            context_lines.append(f"  L2 Service: {match.canonical_L2_Service or 'N/A'}")
+            context_lines.append(f"  L3 Signpost: {match.canonical_L3_Signpost or 'N/A'}")
+            context_lines.append(f"  L4 SubSection: {match.canonical_L4_SubSection or 'N/A'}")
+            context_lines.append(f"  Match Type: {match.match_type}")
+
+            # Add match type context to help LLM understand significance
+            if match.match_type == 'phrase_match':
+                context_lines.append(f"  NOTE: This is a PHRASE excerpt, not full verse/psalm")
+            elif match.match_type in ['entire_chapter', 'verse_range', 'verse_set']:
+                context_lines.append(f"  NOTE: This is a FULL/SUBSTANTIAL recitation")
+
+            context_lines.append(f"  Liturgy Context: {match.liturgy_context[:500]}..." if len(match.liturgy_context) > 500 else f"  Liturgy Context: {match.liturgy_context}")
+
+        if len(prioritized_matches) > 15:
+            remaining = len(prioritized_matches) - 15
+            # Count remaining matches by type
+            remaining_types = {}
+            for m in prioritized_matches[15:]:
+                remaining_types[m.match_type] = remaining_types.get(m.match_type, 0) + 1
+            type_summary = ", ".join(f"{count} {mtype}" for mtype, count in remaining_types.items())
+            context_lines.append(f"\n... and {remaining} more matches ({type_summary})")
 
         context_description = "\n".join(context_lines)
 
-        prompt = f"""You are summarizing liturgical usage for a scholarly Biblical commentary tool.
+        prompt = f'''You are a scholarly liturgist writing for a Biblical commentary. Your task is to describe how a specific phrase from Psalms is used in Jewish liturgy.
 
-You are analyzing where a SPECIFIC PHRASE from a psalm appears in Jewish liturgy.
-
+PHRASE BEING ANALYZED:
 {context_description}
 
-Generate a concise 2-3 sentence summary describing WHERE and WHEN this specific phrase appears in Jewish liturgy.
+YOUR TASK:
+Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this phrase appears in Jewish liturgy. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
 
-IMPORTANT: For phrase excerpts (not full verses), please provide:
-1. **A brief quote from the liturgy showing how the phrase is used (2-3 sentences in Hebrew) for EACH context where it appears.**
-2. An English translation of that quote
-3. Explanation of the context in whichit appears liturgically
+CRITICAL REQUIREMENTS:
 
-Guidelines:
-- Start by mentioning the phrase itself (in transliteration if possible)
-- Identify patterns in where it appears (e.g., "appears in the Patriarchs blessing across all services")
-- Be specific about occasions (Weekday, Shabbat, High Holidays, etc.)
-- Mention traditions (Ashkenaz, Sefard, Edot HaMizrach) if relevant
-- Group related contexts (e.g., "appears in the Amidah for daily services" not "Amidah Shacharit, Amidah Mincha, Amidah Maariv")
-- For phrase excerpts: **Include a representative quote and translation showing liturgical context**
-- Focus on liturgical significance
-- Keep it concise and scholarly
+1. **NARRATIVE STYLE - NOT LISTS**
+   - Write in flowing, scholarly prose
+   - NO bullet points, NO "appears in X contexts:" format
+   - Synthesize information into coherent paragraphs
+   - Example: "The phrase appears throughout the Amidah in all traditions..." (GOOD)
+   - NOT: "Appears in: Amidah (Ashkenaz), Amidah (Sefard)..." (BAD)
 
-Example output: "The phrase 'למען שמו' (l'ma'an shemo, 'for His name's sake') appears in the Patriarchs (Avot) blessing of the Amidah, recited in all daily services (Shacharit, Mincha, and Maariv) as well as Musaf and Neilah. The Amidah blessing reads: 'ברוך אתה ה׳ אלוהי אברהם אלוהי יצחק ואלוהי יעקב... ומביא גואל לבני בניהם למען שמו באהבה' ('Blessed are You, Lord our God of Abraham, God of Isaac, and God of Jacob... who brings a redeemer to their children's children for His name's sake with love'). It also appears in various Selichot and in the Edot HaMizrach liturgy for the Sounding of the Shofar."
+2. **DEDUPLICATE AND CONSOLIDATE**
+   - "Amidah (Ashkenaz)" + "Amidah (Sefard)" + "Amidah (Edot_HaMizrach)"
+     → "Amidah across all Jewish traditions"
+   - "Menorah Lighting (Sefard) on Chanukah"
+     → "Menorah Lighting ceremony in the Sefard rite during Chanukah"
+   - Look for patterns and group intelligently
 
-Output only the summary, no preamble."""
+3. **PRIORITIZE BY MATCH TYPE**
+   - The matches are ordered by significance: full psalm recitations first, then verse ranges, then phrases
+   - If you see entire_chapter or verse_range matches, prioritize discussing those
+   - Phrase matches are less significant - don't let them dominate the summary
+
+4. **INCLUDE EXTENDED HEBREW QUOTATIONS (REQUIRED AND CRITICAL)**
+   - **MANDATORY**: For phrase excerpts, you MUST include at least ONE extended Hebrew quotation
+   - The quotation must show CONTEXT: include words BEFORE and AFTER the phrase itself
+   - **Minimum**: At least 7-12 Hebrew words (not just repeating the 2-3 word phrase)
+   - Extract from the "Liturgy Context" field provided for each match
+   - **Example of GOOD quotation** (shows context around "הֲדַר כְּבוֹד הוֹדֶךָ"):
+     "The liturgy states: 'בְּיַד נְבִיאֶיךָ בְּסוֹד עֲבָדֶיךָ. דִּמִּיתָ הֲדַר כְּבוֹד הוֹדֶךָ גְּדֻלָּתְךָ וּגְבוּרָתֶךָ'"
+   - **Example of BAD quotation** (just the phrase): "The phrase 'הֲדַר כְּבוֹד הוֹדֶךָ' appears"
+   - If multiple distinct usages exist, include AT LEAST one quotation, more if contexts are interesting/different
+   - For full psalm recitations (entire_chapter): Mention the recitation without quoting the entire text
+   - **Your summary will be REJECTED if it lacks proper extended quotations**
+
+5. **USE CANONICAL CLASSIFICATION DATA**
+   - L1 Occasion (Weekday/Shabbat/High Holidays/etc.)
+   - L2 Service (Shacharit/Mincha/Maariv/Musaf/etc.)
+   - L3 Signpost (Pesukei Dezimra/Amidah/Tachanun/etc.)
+   - Location Description provides crucial context about composite blocks
+
+6. **SYNTHESIS AND THINKING**
+   - Identify liturgical patterns and their significance
+   - Mention if usage varies by tradition (Ashkenaz vs. Sefard vs. Edot HaMizrach)
+   - Note when phrase appears in special occasions vs. daily liturgy
+   - Explain liturgical context where helpful
+
+7. **READ LITURGY CONTEXT CAREFULLY**
+   - The "Liturgy Context" field shows surrounding text
+   - Use it to understand HOW the phrase is integrated
+   - Extract representative quotes from there
+
+8. **DISTINGUISH MAIN PRAYER VS. SUPPLEMENT** (CRITICAL):
+   - The 'Main prayer in this liturgical block' field shows the primary prayer
+   - The 'Location Description' explains the FULL structure of the block
+   - A phrase/verse may be: (a) IN the main prayer itself, (b) in supplementary material BEFORE the main prayer, or (c) in supplementary material AFTER the main prayer
+
+   **KEY PHRASES TO WATCH FOR**:
+   - "This block begins with [Psalm X]... It is followed by [Main Prayer]"
+     → The phrase is in a PRELUDE/INTRODUCTION, NOT in the main prayer
+     → Say: "The phrase appears in Psalm X, which is recited as an introductory supplement before [Main Prayer]"
+     → NOT: "The phrase appears in [Main Prayer]"
+
+   - "After [Main Prayer], it includes [Psalm X]"
+     → The phrase is in a CONCLUSION/SUPPLEMENT, NOT in the main prayer
+     → Say: "The phrase appears in Psalm X, recited as a concluding supplement after [Main Prayer]"
+
+   - "The phrase is found within [Prayer Name]" OR matches Main Prayer field
+     → The phrase IS in the main prayer
+     → Say: "The phrase appears within [Main Prayer]"
+
+   **EXAMPLE (CORRECT)**:
+   - Location: "This block begins with Psalms 1, 2, 3, and 4. It is followed by the complete Shir HaYichud..."
+   - Main Prayer: "Shir HaYichud and Anim Zemirot"
+   - Phrase from Psalm 1
+   - CORRECT: "The phrase appears in Psalm 1, recited as an introductory supplement before Shir HaYichud on Yom Kippur night"
+   - WRONG: "The phrase appears in Shir HaYichud"
+
+GOOD EXAMPLE (4-6 sentences, narrative, with Hebrew quote):
+
+The phrase 'כְּב֣וֹד מַלְכוּתְךָ֣' (the glory of Your kingdom) is prominently featured in the Kedushah section of the Amidah across all Jewish traditions during the Musaf service on Rosh Hashanah and Yom Kippur. In this context, the liturgy proclaims: 'אָבִֽינוּ מַלְכֵּֽנוּ גַּלֵּה כְּבוֹד מַלְכוּתְךָ עָלֵֽינוּ מְהֵרָה' ('Our Father, our King, reveal the glory of Your kingdom upon us swiftly'). The phrase also appears in the Sefard tradition's Menorah Lighting ceremony during Chanukah, where it emphasizes themes of divine sovereignty and revelation. Additionally, it features in various piyyutim (liturgical poems) during the High Holidays, reinforcing the petition for God's kingship to be manifest to all humanity.
+
+BAD EXAMPLE (list-like, no quotes, too short):
+
+The phrase 'כְּב֣וֹד מַלְכוּתְךָ֣' appears in 15 prayer contexts: Amidah (Ashkenaz), Amidah (Edot_HaMizrach), Kedushah (Ashkenaz), Menorah Lighting (Sefard), and 11 more. Occasions: Chanukah, Festivals, Yom Kippur. Services: Maariv, Mincha, Musaf, Neilah, Shacharit.
+
+OUTPUT FORMAT:
+Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" label, just the scholarly prose.'''
 
         if self.verbose:
-            print(f"\n{'='*70}")
-            print(f"LLM PROMPT FOR PHRASE: {psalm_phrase}")
-            print(f"{'='*70}")
-            print(prompt)
-            print(f"{'='*70}\n")
-
-        try:
-            response = self.anthropic_client.messages.create(
-                model="claude-haiku-4-5",
-                max_tokens=400,
-                temperature=0.3,
-                messages=[{"role": "user", "content": prompt}]
-            )
-
-            summary = response.content[0].text.strip()
-
-            if self.verbose:
+            try:
                 print(f"\n{'='*70}")
-                print(f"LLM RESPONSE FOR PHRASE: {psalm_phrase}")
+                print(f"LLM PROMPT FOR PHRASE: {psalm_phrase}")
                 print(f"{'='*70}")
-                print(summary)
-                print(f"\nToken usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                print(prompt)
+                print(f"{'='*70}\n")
+            except UnicodeEncodeError:
+                print(f"\n{'='*70}")
+                print(f"LLM PROMPT FOR PHRASE: [Hebrew text - encoding error]")
                 print(f"{'='*70}\n")
 
-            return summary
+        # Get psalm chapter from matches for validation
+        psalm_chapter = matches[0].psalm_chapter if matches else 0
+
+        # Retry logic: Try up to 2 times if quality is poor or misattribution detected
+        max_attempts = 2
+        attempt = 0
+        best_summary = None
+        best_score = 0.0
+
+        try:
+            while attempt < max_attempts:
+                attempt += 1
+
+                response = self.anthropic_client.messages.create(
+                    model="claude-haiku-4-5",
+                    max_tokens=1000,  # Increased from 400 to allow 4-6 sentences with Hebrew quotes
+                    temperature=0.6,   # Increased from 0.3 for more synthesis/narrative flow
+                    messages=[{"role": "user", "content": prompt}]
+                )
+
+                summary = response.content[0].text.strip()
+
+                if self.verbose:
+                    try:
+                        print(f"\n{'='*70}")
+                        print(f"LLM RESPONSE FOR PHRASE (Attempt {attempt}/{max_attempts}): {psalm_phrase}")
+                        print(f"{'='*70}")
+                        print(summary)
+                        print(f"\nToken usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        print(f"{'='*70}\n")
+                    except UnicodeEncodeError:
+                        print(f"\n{'='*70}")
+                        print(f"LLM RESPONSE FOR PHRASE (Attempt {attempt}/{max_attempts}): [Hebrew text - encoding error]")
+                        print(f"Token usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        print(f"{'='*70}\n")
+
+                # Validate summary quality
+                quality_result = self._validate_summary_quality(summary, 'phrase', psalm_chapter)
+
+                if self.verbose:
+                    print(f"Quality validation: score={quality_result['score']:.2f}, valid={quality_result['is_valid']}")
+                    if quality_result['issues']:
+                        print(f"  Issues: {', '.join(quality_result['issues'])}")
+
+                # Check for misattribution
+                misattribution_result = self._check_for_misattribution(summary, psalm_chapter)
+
+                if self.verbose and misattribution_result['is_misattributed']:
+                    print(f"[WARNING] Possible misattribution detected!")
+                    print(f"  Detected psalm: {misattribution_result['detected_psalm']}")
+                    print(f"  Confidence: {misattribution_result['confidence']:.2f}")
+                    print(f"  Reason: {misattribution_result['reason']}")
+
+                # Track best summary (highest quality score)
+                if quality_result['score'] > best_score:
+                    best_score = quality_result['score']
+                    best_summary = summary
+
+                # If quality is good AND no misattribution, accept immediately
+                if quality_result['is_valid'] and not misattribution_result['is_misattributed']:
+                    if self.verbose:
+                        print(f"[OK] Summary accepted (score={quality_result['score']:.2f})")
+                    return summary
+
+                # If misattribution detected with high confidence, reject and retry
+                if misattribution_result['is_misattributed'] and misattribution_result['confidence'] >= 0.7:
+                    if attempt < max_attempts:
+                        if self.verbose:
+                            print(f"[RETRY] Misattribution detected, retrying...")
+                        continue
+                    else:
+                        if self.verbose:
+                            print(f"[WARNING] Misattribution detected but max attempts reached, using best summary")
+                        break
+
+                # If quality is poor, retry once
+                if not quality_result['is_valid'] and attempt < max_attempts:
+                    if self.verbose:
+                        print(f"[RETRY] Poor quality (score={quality_result['score']:.2f}), retrying...")
+                    continue
+                else:
+                    # Either quality is acceptable or we've exhausted retries
+                    break
+
+            # Return best summary after all attempts
+            if self.verbose and best_summary != summary:
+                print(f"[OK] Using best summary from {attempt} attempts (score={best_score:.2f})")
+
+            return best_summary if best_summary else summary
 
         except Exception as e:
             print(f"[WARNING] LLM summarization failed ({e}). Using code-only fallback.")
@@ -1008,23 +965,60 @@ Output only the summary, no preamble."""
         """
         Generate a summary for full/partial psalm recitations with verse coverage information.
         """
-        # Collect verse coverage data
+        # Collect verse coverage data AND location descriptions
         verse_coverage = {}
+        location_descriptions = {}  # NEW: Track location descriptions
+        psalm_verses = self._get_psalm_verses(psalm_chapter)
+        total_verses = len(psalm_verses) if psalm_verses else 1 # Avoid division by zero
+
         for match in matches:
-            prayer_name = match.prayer_name or "Unknown Prayer"
-            if hasattr(match, 'found_verses') and match.found_verses:
-                verse_range = self._format_verse_list(match.found_verses)
-                percentage = getattr(match, 'found_percentage', 0)
+            prayer_name = match.canonical_prayer_name or "Unknown Prayer"
+
+            percentage = 0
+            verse_range = ""
+            is_full = False
+
+            if match.match_type == 'entire_chapter':
+                percentage = 100
+                verse_range = f"1-{total_verses}" if total_verses > 1 else "1"
+                is_full = True
+            elif match.match_type == 'verse_range':
+                if match.psalm_verse_start and match.psalm_verse_end and total_verses > 0:
+                    num_verses = match.psalm_verse_end - match.psalm_verse_start + 1
+                    percentage = (num_verses / total_verses) * 100
+                    verse_range = f"{match.psalm_verse_start}-{match.psalm_verse_end}"
+                    is_full = percentage >= 80
+            elif match.match_type == 'verse_set':
+                if hasattr(match, 'locations') and match.locations:
+                    try:
+                        verses = json.loads(match.locations)
+                        num_verses = len(verses)
+                        if total_verses > 0:
+                            percentage = (num_verses / total_verses) * 100
+                        verse_range = self._format_verse_list(verses)
+                        is_full = percentage >= 80
+                    except (json.JSONDecodeError, TypeError):
+                        pass # Keep default values
+            elif match.match_type == 'exact_verse':
+                if total_verses > 0:
+                    percentage = (1 / total_verses) * 100
+                verse_range = str(match.psalm_verse_start)
+                is_full = False
+
+            # To avoid duplicate prayer names in verse_coverage
+            if prayer_name not in verse_coverage:
                 verse_coverage[prayer_name] = {
                     'verses': verse_range,
                     'percentage': percentage,
-                    'is_full': percentage >= 80
+                    'is_full': is_full
                 }
+                # NEW: Store location description
+                location_descriptions[prayer_name] = match.canonical_location_description or ""
 
         # Use LLM for intelligent summary if available
-        if self.anthropic_client and len(matches) >= 2:
+        if self.anthropic_client and len(matches) >= 1:
             return self._generate_full_psalm_llm_summary(
-                psalm_chapter, verse_coverage, prayer_contexts, contexts_data
+                psalm_chapter, verse_coverage, prayer_contexts, contexts_data, location_descriptions
             )
 
         # Fallback code-only summary
@@ -1051,11 +1045,15 @@ Output only the summary, no preamble."""
         psalm_chapter: int,
         verse_coverage: Dict[str, Dict],
         prayer_contexts: List[str],
-        contexts_data: Dict[str, Any]
+        contexts_data: Dict[str, Any],
+        location_descriptions: Dict[str, str] = None
     ) -> str:
         """
         Use LLM to generate an intelligent summary of full/partial psalm recitations.
+        Uses canonical classification fields AND location descriptions for accurate liturgical placement.
         """
+        location_descriptions = location_descriptions or {}
+
         # Build context description
         context_lines = []
         context_lines.append(f"Psalm {psalm_chapter} usage in Jewish liturgy:")
@@ -1069,73 +1067,197 @@ Output only the summary, no preamble."""
         if full_recitations:
             context_lines.append(f"Full recitations ({len(full_recitations)}):")
             for prayer, data in list(full_recitations.items())[:5]:
-                context_lines.append(f"  - {prayer} (verses {data['verses']}, {data['percentage']:.0f}%)")
+                context_lines.append(f"  - Main Prayer: {prayer} (verses {data['verses']}, {data['percentage']:.0f}%)")
+                # NEW: Include location description
+                if prayer in location_descriptions and location_descriptions[prayer]:
+                    context_lines.append(f"    Location Description: {location_descriptions[prayer][:300]}...")
             if len(full_recitations) > 5:
                 context_lines.append(f"  ... and {len(full_recitations) - 5} more")
 
         if partial_recitations:
             context_lines.append(f"\nPartial recitations ({len(partial_recitations)}):")
             for prayer, data in list(partial_recitations.items())[:5]:
-                context_lines.append(f"  - {prayer} (verses {data['verses']}, {data['percentage']:.0f}%)")
+                context_lines.append(f"  - Main Prayer: {prayer} (verses {data['verses']}, {data['percentage']:.0f}%)")
+                # NEW: Include location description
+                if prayer in location_descriptions and location_descriptions[prayer]:
+                    context_lines.append(f"    Location Description: {location_descriptions[prayer][:300]}...")
             if len(partial_recitations) > 5:
                 context_lines.append(f"  ... and {len(partial_recitations) - 5} more")
 
         context_lines.append("")
         if contexts_data['occasions']:
-            context_lines.append(f"Occasions: {', '.join(contexts_data['occasions'])}")
+            context_lines.append(f"L1 Occasions: {', '.join(contexts_data['occasions'])}")
         if contexts_data['services']:
-            context_lines.append(f"Services: {', '.join(contexts_data['services'])}")
+            context_lines.append(f"L2 Services: {', '.join(contexts_data['services'])}")
         if contexts_data['nusachs']:
             context_lines.append(f"Traditions: {', '.join(contexts_data['nusachs'])}")
 
         context_description = "\n".join(context_lines)
 
-        prompt = f"""You are summarizing liturgical usage for a scholarly Biblical commentary tool.
+        prompt = f'''You are a scholarly liturgist writing for a Biblical commentary. Your task is to describe where and how an entire Psalm is recited in Jewish liturgy.
 
-You are analyzing where Psalm {psalm_chapter} is recited (fully or partially) in Jewish liturgy.
-
+PSALM BEING ANALYZED:
 {context_description}
 
-Generate a concise 2-3 sentence summary describing WHERE and WHEN this psalm is recited in Jewish liturgy.
+YOUR TASK:
+Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this psalm is recited in Jewish liturgy. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
 
-Guidelines:
-- Distinguish between full recitations and partial verses used
-- Mention which verses are used if partial
-- Identify patterns in occasions (Weekday, Shabbat, Festivals, etc.)
-- Mention traditions (Ashkenaz, Sefard, Edot HaMizrach) if relevant
-- Focus on liturgical significance
-- Keep it concise and scholarly
+CRITICAL REQUIREMENTS:
 
-Example output: "Psalm 23 is recited in its entirety in the Shabbat afternoon Shalosh Seudos (Third Meal) across all traditions. Verse 3 ('for His name's sake') is incorporated into the Amidah's Patriarchs blessing for all daily services. Additionally, verses 2-4 appear in Sefardic Shabbat Zemirot and Kiddush."
+1. **NARRATIVE STYLE - NOT LISTS**
+   - Write in flowing, scholarly prose
+   - Synthesize information into coherent paragraphs
+   - NO bullet points or "appears in:" format
 
-Output only the summary, no preamble."""
+2. **DISTINGUISH FULL VS. PARTIAL RECITATIONS**
+   - Note if entire psalm is recited or just portions
+   - Mention which verses if partial (use the verse coverage data)
+   - Note: The indexer sometimes misses verses, so 80%+ coverage likely means full psalm
+
+3. **DEDUPLICATE AND CONSOLIDATE**
+   - Group by tradition and occasion intelligently
+   - "Tachanun across all traditions" not "Tachanun (Ashkenaz), Tachanun (Sefard)..."
+
+4. **USE CANONICAL CLASSIFICATION**
+   - L1 Occasions and L2 Services are highly accurate
+   - Provide specific liturgical placement
+   - Mention when psalm appears (daily/weekly/seasonal)
+
+5. **SYNTHESIS AND SIGNIFICANCE**
+   - Explain liturgical context and meaning
+   - Note variations by tradition if significant
+   - Mention both regular and special occasion usage
+
+6. **DISTINGUISH MAIN PRAYER VS. SUPPLEMENT** (CRITICAL):
+   - The 'Main prayer in this liturgical block' field shows the primary prayer
+   - The 'Location Description' explains the FULL structure of the block
+   - A psalm may be: (a) THE main prayer itself, (b) supplementary material BEFORE the main prayer, or (c) supplementary material AFTER the main prayer
+
+   **KEY PHRASES TO WATCH FOR**:
+   - "This block begins with [Psalm X]... It is followed by [Main Prayer]"
+     → Psalm X is a PRELUDE/INTRODUCTION, NOT part of the main prayer
+     → Say: "Psalm X is recited as an introductory supplement before [Main Prayer]"
+     → NOT: "Psalm X is incorporated into [Main Prayer]"
+
+   - "After [Main Prayer], it includes [Psalm X]"
+     → Psalm X is a CONCLUSION/SUPPLEMENT, NOT part of the main prayer
+     → Say: "Psalm X is recited as a concluding supplement after [Main Prayer]"
+
+   - "The psalm constitutes the core of [Prayer Name]" OR "Main prayer: [Psalm X]"
+     → The psalm IS the main prayer
+     → Say: "Psalm X forms the core of [Prayer Name]"
+
+   **EXAMPLE (CORRECT)**:
+   - Location: "This block begins with Psalms 1, 2, 3, and 4. It is followed by the complete Shir HaYichud..."
+   - Main Prayer: "Shir HaYichud and Anim Zemirot"
+   - CORRECT: "Psalm 1 is recited as an introductory supplement before Shir HaYichud on Yom Kippur night"
+   - WRONG: "Psalm 1 is incorporated into Shir HaYichud"
+
+GOOD EXAMPLE (narrative, informative):
+
+"Psalm 27 is recited in its entirety during the penitential period from Rosh Chodesh Elul through Shemini Atzeret, appearing in both the morning (Shacharit) and evening (Maariv) services across all traditions. The psalm's themes of seeking God's presence ('One thing I ask of the Lord') make it particularly appropriate for this season of introspection and repentance. Edot HaMizrach communities also incorporate it into an extended Pesukei Dezimra on Shabbat and festivals. Individual verses, particularly verse 14 ('Hope in the Lord'), appear in composite prayer blocks after Aleinu and in High Holiday piyyutim within the Ashkenazic tradition."
+
+OUTPUT FORMAT:
+Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" label.'''
 
         if self.verbose:
-            print(f"\n{'='*70}")
-            print(f"LLM PROMPT FOR FULL PSALM {psalm_chapter}")
-            print(f"{'='*70}")
-            print(prompt)
-            print(f"{'='*70}\n")
-
-        try:
-            response = self.anthropic_client.messages.create(
-                model="claude-haiku-4-5",
-                max_tokens=500,
-                temperature=0.3,
-                messages=[{"role": "user", "content": prompt}]
-            )
-
-            summary = response.content[0].text.strip()
-
-            if self.verbose:
+            try:
                 print(f"\n{'='*70}")
-                print(f"LLM RESPONSE FOR FULL PSALM {psalm_chapter}")
+                print(f"LLM PROMPT FOR FULL PSALM {psalm_chapter}")
                 print(f"{'='*70}")
-                print(summary)
-                print(f"\nToken usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                print(prompt)
+                print(f"{'='*70}\n")
+            except UnicodeEncodeError:
+                print(f"\n{'='*70}")
+                print(f"LLM PROMPT FOR FULL PSALM {psalm_chapter} [encoding error in prompt display]")
                 print(f"{'='*70}\n")
 
-            return summary
+        # Retry logic: Try up to 2 times if quality is poor or misattribution detected
+        max_attempts = 2
+        attempt = 0
+        best_summary = None
+        best_score = 0.0
+
+        try:
+            while attempt < max_attempts:
+                attempt += 1
+
+                response = self.anthropic_client.messages.create(
+                    model="claude-haiku-4-5",
+                    max_tokens=1000,  # Increased from 500 to allow 4-6 sentences
+                    temperature=0.6,   # Increased from 0.3 for more synthesis/narrative flow
+                    messages=[{"role": "user", "content": prompt}]
+                )
+
+                summary = response.content[0].text.strip()
+
+                if self.verbose:
+                    try:
+                        print(f"\n{'='*70}")
+                        print(f"LLM RESPONSE FOR FULL PSALM {psalm_chapter} (Attempt {attempt}/{max_attempts})")
+                        print(f"{'='*70}")
+                        print(summary)
+                        print(f"\nToken usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        print(f"{'='*70}\n")
+                    except UnicodeEncodeError:
+                        print(f"\n{'='*70}")
+                        print(f"LLM RESPONSE FOR FULL PSALM {psalm_chapter} (Attempt {attempt}/{max_attempts}) [encoding error]")
+                        print(f"Token usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        print(f"{'='*70}\n")
+
+                # Validate summary quality
+                quality_result = self._validate_summary_quality(summary, 'full_psalm', psalm_chapter)
+
+                if self.verbose:
+                    print(f"Quality validation: score={quality_result['score']:.2f}, valid={quality_result['is_valid']}")
+                    if quality_result['issues']:
+                        print(f"  Issues: {', '.join(quality_result['issues'])}")
+
+                # Check for misattribution
+                misattribution_result = self._check_for_misattribution(summary, psalm_chapter)
+
+                if self.verbose and misattribution_result['is_misattributed']:
+                    print(f"[WARNING] Possible misattribution detected!")
+                    print(f"  Detected psalm: {misattribution_result['detected_psalm']}")
+                    print(f"  Confidence: {misattribution_result['confidence']:.2f}")
+                    print(f"  Reason: {misattribution_result['reason']}")
+
+                # Track best summary (highest quality score)
+                if quality_result['score'] > best_score:
+                    best_score = quality_result['score']
+                    best_summary = summary
+
+                # If quality is good AND no misattribution, accept immediately
+                if quality_result['is_valid'] and not misattribution_result['is_misattributed']:
+                    if self.verbose:
+                        print(f"[OK] Summary accepted (score={quality_result['score']:.2f})")
+                    return summary
+
+                # If misattribution detected with high confidence, reject and retry
+                if misattribution_result['is_misattributed'] and misattribution_result['confidence'] >= 0.7:
+                    if attempt < max_attempts:
+                        if self.verbose:
+                            print(f"[RETRY] Misattribution detected, retrying...")
+                        continue
+                    else:
+                        if self.verbose:
+                            print(f"[WARNING] Misattribution detected but max attempts reached, using best summary")
+                        break
+
+                # If quality is poor, retry once
+                if not quality_result['is_valid'] and attempt < max_attempts:
+                    if self.verbose:
+                        print(f"[RETRY] Poor quality (score={quality_result['score']:.2f}), retrying...")
+                    continue
+                else:
+                    # Either quality is acceptable or we've exhausted retries
+                    break
+
+            # Return best summary after all attempts
+            if self.verbose and best_summary != summary:
+                print(f"[OK] Using best summary from {attempt} attempts (score={best_score:.2f})")
+
+            return best_summary if best_summary else summary
 
         except Exception as e:
             if self.verbose:
@@ -1150,11 +1272,86 @@ Output only the summary, no preamble."""
                 parts.append(f"Partial: {partial_list}")
             return ". ".join(parts) + "." if parts else f"Psalm {psalm_chapter} in {len(prayer_contexts)} contexts"
 
+    def _validate_summary_quality(self, summary: str, summary_type: str, psalm_chapter: int) -> Dict[str, Any]:
+        """
+        Validate the quality of an LLM-generated summary.
+
+        Checks for common failure modes:
+        - Too short / too long
+        - List-like format instead of narrative
+        - Missing Hebrew quotations (for phrase summaries)
+        - Use of forbidden phrases ("appears in:", "Summary:")
+
+        Returns:
+            Dict with 'is_valid' (bool), 'score' (float), and 'issues' (list of strings)
+        """
+        issues = []
+        score = 1.0
+
+        # 1. Length check (approximate sentence count by splitting on '.')
+        sentences = summary.split('.')
+        num_sentences = len([s for s in sentences if len(s.strip()) > 5])
+        if not (3 <= num_sentences <= 7):
+            issues.append(f"Incorrect sentence count ({num_sentences})")
+            score -= 0.2
+
+        # 2. Check for list-like formats
+        if any(line.strip().startswith('* ') or line.strip().startswith('- ') for line in summary.split('\n')):
+            issues.append("Uses list format (bullet points)")
+            score -= 0.5
+
+        if "appears in:" in summary.lower() or "prayer contexts:" in summary.lower():
+            issues.append("Uses list-like 'appears in:' format")
+            score -= 0.4
+
+        # 3. Check for forbidden preamble
+        if summary.lower().strip().startswith("summary:"):
+            issues.append("Contains 'Summary:' preamble")
+            score -= 0.5
+
+        # 4. Hebrew quotation check (critical for phrase summaries)
+        if summary_type == 'phrase':
+            import re
+            hebrew_chars = re.findall(r'[\u0590-\u05FF]+', summary)
+            if not hebrew_chars:
+                issues.append("Missing required Hebrew quotation")
+                score -= 0.7
+            else:
+                # Check if there is at least one long enough quotation
+                longest_quote = max(hebrew_chars, key=len)
+                # A word is roughly 5-6 chars, so 7 words is ~35-42 chars.
+                # Let's check word count in the quote.
+                quote_words = longest_quote.split()
+                if len(quote_words) < 5:
+                    issues.append(f"Hebrew quote is too short ({len(quote_words)} words)")
+                    score -= 0.3
+
+        # Final decision
+        is_valid = score >= 0.5 and not any(crit in str(issues) for crit in ["Missing required Hebrew", "Uses list format"])
+
+        return {
+            'is_valid': is_valid,
+            'score': max(0.0, score),
+            'issues': issues
+        }
+
+    def _check_for_misattribution(self, summary: str, expected_psalm: int) -> Dict[str, Any]:
+        """
+        Placeholder for checking if the summary incorrectly attributes content
+        to a different psalm.
+        """
+        return {
+            'is_misattributed': False,
+            'detected_psalm': None,
+            'confidence': 0.0,
+            'reason': ''
+        }
+
     def _validate_phrase_groups_with_llm(
         self,
         grouped: Dict[str, List[LiturgicalMatch]],
         psalm_chapter: int
-    ) -> Dict[str, List[LiturgicalMatch]]:
+    ) -> tuple[Dict[str, List[LiturgicalMatch]], Dict[str, str]]:
         """
         Validate all phrase groups with LLM to filter false positives.
 
@@ -1162,10 +1359,42 @@ Output only the summary, no preamble."""
         Filters out groups that fail validation.
         """
         validated_groups = {}
+        validation_notes = {}
         filtered_count = 0
 
         for phrase_key, matches in grouped.items():
-            # Sample 1-2 representative matches for validation
+            # HEURISTIC PRE-FILTER: Check if Location Description explicitly mentions other psalms
+            import re
+            should_keep = True
+            heuristic_reason = None
+
+            for match in matches[:2]:  # Check first 2 matches
+                loc_desc = match.canonical_location_description or ""
+                # Look for "Psalm(s) X, Y, Z" or "Psalms X-Y" patterns where X != psalm_chapter
+                psalm_mentions = re.findall(r'Psalms?\s+(\d+)(?:\s*[,\-]\s*(\d+))*', loc_desc)
+                if psalm_mentions:
+                    # Extract all mentioned psalm numbers
+                    mentioned_psalms = set()
+                    for match_tuple in psalm_mentions:
+                        for num_str in match_tuple:
+                            if num_str:
+                                mentioned_psalms.add(int(num_str))
+
+                    # If other psalms are mentioned but NOT our target psalm, likely a false positive
+                    if mentioned_psalms and psalm_chapter not in mentioned_psalms:
+                        other_psalms = sorted(mentioned_psalms)
+                        heuristic_reason = f"Location Description mentions Psalms {other_psalms} but not Psalm {psalm_chapter}"
+                        should_keep = False
+                        if self.verbose:
+                            print(f"[HEURISTIC FILTER] Phrase - {heuristic_reason}")
+                        break
+
+            if not should_keep:
+                filtered_count += 1
+                validation_notes[phrase_key] = f"FILTERED: {heuristic_reason}"
+                continue  # Skip LLM validation for this group
+
+            # Sample 1-2 representative matches for LLM validation
             sample_matches = matches[:min(2, len(matches))]
 
             # Generate verse range for context
@@ -1182,22 +1411,32 @@ Output only the summary, no preamble."""
                 )
                 validations.append(validation)
 
-            # Decision logic: Filter if ANY validation fails with high confidence
+            # Decision logic: Filter if ANY validation fails with moderate confidence
             should_keep = True
             for val in validations:
-                if not val.is_valid and val.confidence >= 0.7:
+                # LOWERED THRESHOLD: Filter at 0.5 instead of 0.7 to catch more false positives
+                if not val.is_valid and val.confidence >= 0.5:
                     if self.verbose:
-                        print(f"[FILTERED] Phrase (len:{len(phrase_key)}) - {val.reason}")
+                        try:
+                            # phrase_key is a tuple, get the Hebrew text from first element
+                            phrase_text = phrase_key[0] if isinstance(phrase_key, tuple) else phrase_key
+                            print(f"[FILTERED] Phrase (len:{len(phrase_text)}) - {val.reason}")
+                        except (UnicodeEncodeError, AttributeError):
+                            print(f"[FILTERED] Phrase - {val.reason}")
                     should_keep = False
                     filtered_count += 1
+                    validation_notes[phrase_key] = f"FILTERED: {val.reason}"
                     break
-                elif not val.is_valid and val.confidence >= 0.5:
+                elif not val.is_valid and val.confidence >= 0.3:
                     # Low confidence rejection - add warning but keep
                     if self.verbose:
-                        print(f"[WARNING] Phrase (len:{len(phrase_key)}) - {val.reason}")
-                    # Add validation note to first match for reporting
-                    if hasattr(matches[0], 'validation_warning'):
-                        matches[0].validation_warning = val.reason
+                        try:
+                            phrase_text = phrase_key[0] if isinstance(phrase_key, tuple) else phrase_key
+                            print(f"[WARNING] Phrase (len:{len(phrase_text)}) - {val.reason}")
+                        except (UnicodeEncodeError, AttributeError):
+                            print(f"[WARNING] Phrase - {val.reason}")
+                    validation_notes[phrase_key] = f"WARNING: {val.reason}"
+
 
             if should_keep:
                 validated_groups[phrase_key] = matches
@@ -1205,7 +1444,7 @@ Output only the summary, no preamble."""
         if self.verbose:
             print(f"\n[OK] LLM Validation complete: {len(validated_groups)}/{len(grouped)} phrase groups kept ({filtered_count} filtered)")
 
-        return validated_groups
+        return validated_groups, validation_notes
 
     def _validate_phrase_match_with_llm(
         self,
@@ -1215,7 +1454,7 @@ Output only the summary, no preamble."""
         match: LiturgicalMatch
     ) -> ValidationResult:
         """
-        Use LLM to validate if a phrase match is really from the target psalm.
+        Use LLM to validate if a phrase match is really from **the target psalm**.
 
         Checks for:
         - Different psalm with same words
@@ -1235,78 +1474,99 @@ Output only the summary, no preamble."""
 
         # Get fuller context from database if needed
         try:
-            conn = sqlite3.connect(self.db_path)
+            conn = self._get_db_connection()
             cursor = conn.cursor()
             cursor.execute(
-                "SELECT hebrew_text, prayer_name, section FROM prayers WHERE prayer_id = ?",
+                "SELECT hebrew_text, canonical_prayer_name, canonical_location_description FROM prayers WHERE prayer_id = ?",
                 (match.prayer_id,)
             )
             result = cursor.fetchone()
             conn.close()
 
             if result:
-                hebrew_text, prayer_name, section = result
+                hebrew_text, prayer_name, location_desc = result
                 # Use first 30000 chars of hebrew_text for context
                 fuller_context = hebrew_text[:30000] if hebrew_text else match.liturgy_context
             else:
                 fuller_context = match.liturgy_context
+                prayer_name = "Unknown"
+                location_desc = ""
 
         except Exception as e:
             if self.verbose:
                 print(f"[WARNING] Could not fetch fuller context: {e}")
             fuller_context = match.liturgy_context
+            prayer_name = "Unknown"
+            location_desc = ""
 
-        prompt = f"""You are validating liturgical usage for a scholarly Biblical commentary tool.
+        prompt = f'''You are a meticulous biblical scholar analyzing whether a liturgical text quotes from **Psalm {psalm_chapter}** or from a DIFFERENT biblical source.
 
-**Task**: Determine if this phrase match is genuinely from Psalm {psalm_chapter} or a false positive.
+**CRITICAL**: Many Hebrew phrases appear in MULTIPLE psalms. Your job is to determine which psalm the liturgy is ACTUALLY quoting.
 
-**Psalm phrase being searched**: {psalm_phrase} (from Psalm {psalm_chapter}:{psalm_verse_range})
+**TARGET PSALM**: {psalm_chapter}
+**SEARCHED PHRASE**: "{psalm_phrase}" (exists in Psalm {psalm_chapter}:{psalm_verse_range})
 
-**Prayer context**: {match.prayer_name or match.section or "Unknown"}
-**Nusach/Tradition**: {match.nusach}
-
-**Liturgy context** (Hebrew text from prayer):
+**EVIDENCE**:
+- **Prayer Name**: {prayer_name or "Unknown"} ({match.nusach})
+- **Main Prayer in this Liturgical Block**: {match.canonical_prayer_name or "N/A"}
+- **Location Description**: {location_desc or 'N/A'}
+- **Full Liturgy Text**:
 ```
 {fuller_context[:20000]}
 ```
 
-**Analyze and determine**:
+**ANALYSIS PROCEDURE** (follow these steps):
 
-1. **Is this phrase really from Psalm {psalm_chapter}?**
-   - Check if the surrounding context indicates this is Psalm {psalm_chapter}
-   - Watch for: Different psalms that share words (e.g., many psalms start with "לדוד ה'")
-   - Watch for: Common Hebrew phrases that appear in multiple contexts
+1. **CHECK FOR EXPLICIT PSALM MARKERS**:
+   - Look for explicit psalm numbers in Hebrew (e.g., "מזמור קמה", "מזמור קמו", "תהלים קמה")
+   - Look for psalm attribution phrases (e.g., "לדוד מזמור", "מזמור שיר")
 
-2. **If it's a phrase excerpt** (not full verse):
-   - Extract the relevant quote from the liturgy showing how it's used
-   - Provide a brief translation/explanation
+2. **EXAMINE SURROUNDING VERSES**:
+   - Read the verses BEFORE and AFTER the phrase in the liturgy
+   - Compare them to Psalm {psalm_chapter} and other psalms
+   - The phrase "ודרך רשעים" appears in BOTH Psalm 1:6 AND Psalm 146:9 - check which one matches the context
+   - The phrase "הללי נפשי את ה'" is from Psalm 146:1, NOT Psalm 1
 
-**Respond in JSON format**:
+3. **USE THE LOCATION DESCRIPTION**:
+   - The Location Description often explicitly states which psalms are in this block
+   - Example: "begins with Psalms 1, 2, 3, and 4" means Psalm 1 IS present
+   - Example: "followed by Psalms 146, 147, 148" means these psalms ARE present
+   - Example: "includes Ashrei (Psalm 145)" means Psalm 145 IS present
+
+4. **MAKE YOUR DETERMINATION**:
+   - If the surrounding verses match Psalm {psalm_chapter}: `is_valid: true`, HIGH confidence (0.8-1.0)
+   - If the surrounding verses match a DIFFERENT psalm: `is_valid: false`, HIGH confidence (0.8-1.0)
+   - If you see explicit mention of a different psalm number: `is_valid: false`, MAXIMUM confidence (1.0)
+   - If uncertain: LOW confidence (0.3-0.5)
+
+**Respond in JSON format ONLY**:
 ```json
 {{
   "is_valid": true/false,
   "confidence": 0.0-1.0,
-  "reason": "Brief explanation (e.g., 'This is Psalm 20, not Psalm 23', 'Valid quote from Psalm 23:3')",
-  "liturgy_quote": "Relevant Hebrew quote from liturgy (if valid and a phrase excerpt)",
-  "translation": "English translation of the quote (if provided)",
-  "notes": "Any additional context or warnings (optional)"
+  "reason": "Brief explanation with specific evidence (e.g., 'Surrounding verses are from Psalm 146:8-9, not Psalm 1')",
+  "liturgy_quote": "Relevant Hebrew quote showing context",
+  "translation": "English translation if helpful",
+  "notes": "Additional context"
 }}
 ```
 
-**Examples**:
-- If you see "מזמור לדוד לַיהוָה הָאָרֶץ" → This is Psalm 24, NOT Psalm 23
-- If you see "למען שמו" in the Amidah Avot blessing → Valid from Psalm 23:3
-- If common words like "טוב" appear in unrelated context → Likely false positive
+**CRITICAL EXAMPLES**:
+1. If searching for Psalm 1 and you see "ודרך רשעים יעות" with surrounding text "הללי נפשי את ה׳... יהוה שמר את גרים":
+   → `is_valid: false`, `confidence: 0.95`, `reason: "This is Psalm 146:9 (context: verses 8-9), not Psalm 1:6"`
 
-Output ONLY the JSON, no additional text."""
+2. If searching for Psalm 145 and you see "הדר כבוד הודך" with Location Description saying "includes Ashrei (Psalm 145)":
+   → `is_valid: true`, `confidence: 0.9`, `reason: "Location Description confirms Psalm 145 (Ashrei) is in this block"`
+
+Output ONLY the JSON.'''
 
         if self.verbose:
-            print(f"\n{'='*70}")
-            print(f"LLM VALIDATION: Psalm {psalm_chapter}:{psalm_verse_range}")
-            print(f"{'='*70}")
-            # Skip printing prompt due to Hebrew encoding issues in Windows console
-            # print(prompt[:500] + "..." if len(prompt) > 500 else prompt)
-            print(f"{'='*70}\n")
+            try:
+                print(f"\n{'='*70}")
+                print(f"LLM VALIDATION: Psalm {psalm_chapter}:{psalm_verse_range}")
+                print(f"{'='*70}\n")
+            except UnicodeEncodeError:
+                pass  # Skip printing on Windows console with encoding issues
 
         try:
             response = self.anthropic_client.messages.create(
@@ -1319,14 +1579,17 @@ Output ONLY the JSON, no additional text."""
             result_text = response.content[0].text.strip()
 
             if self.verbose:
-                print(f"LLM Validation Result: {result_text[:200]}...")
+                try:
+                    print(f"LLM Validation Result: {result_text[:200]}...")
+                except UnicodeEncodeError:
+                    pass  # Skip printing on Windows with encoding issues
 
             # Parse JSON response
             import json
             import re
 
             # Extract JSON from response (in case LLM adds extra text)
-            json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
+            json_match = re.search(r'{{.*}}', result_text, re.DOTALL)
             if json_match:
                 result_json = json.loads(json_match.group(0))
 
@@ -1398,125 +1661,27 @@ Output ONLY the JSON, no additional text."""
         text = ' '.join(text.split())
         return text.strip()
 
-    def _check_verses_in_prayer(self, hebrew_text: str, psalm_verses: Dict[int, str]) -> List[int]:
+    def _count_meaningful_hebrew_words(self, text: str) -> int:
         """
-        Check which verses from a psalm appear in the prayer's hebrew_text.
+        Count meaningful Hebrew words (excluding punctuation, markers, etc.).
 
-        Args:
-            hebrew_text: The full Hebrew text of the prayer
-            psalm_verses: Dict mapping verse number to Hebrew text
-
-        Returns:
-            List of verse numbers found in the prayer text
+        Filters out:
+        - Single letters (like paragraph marker פ)
+        - Punctuation marks
+        - Cantillation and vowel points
         """
-        normalized_prayer = self._normalize_hebrew_for_comparison(hebrew_text)
-        found_verses = []
+        import re
 
-        for verse_num, verse_text in psalm_verses.items():
-            normalized_verse = self._normalize_hebrew_for_comparison(verse_text)
-            # Check if at least 70% of the verse words appear in sequence
-            verse_words = normalized_verse.split()
+        # Remove cantillation marks, vowel points, and punctuation
+        normalized = self._normalize_hebrew_for_comparison(text)
 
-            # For short verses (1-3 words), require exact match
-            if len(verse_words) <= 3:
-                if normalized_verse in normalized_prayer:
-                    found_verses.append(verse_num)
-            else:
-                # For longer verses, check if most words appear in order
-                # This handles minor variations in text
-                words_found = 0
-                prayer_words = normalized_prayer.split()
-                verse_idx = 0
+        # Split into words
+        words = normalized.split()
 
-                for prayer_word in prayer_words:
-                    if verse_idx < len(verse_words) and prayer_word == verse_words[verse_idx]:
-                        words_found += 1
-                        verse_idx += 1
+        # Count words that are at least 2 Hebrew letters
+        meaningful_words = [w for w in words if len(w) >= 2]
 
-                        # If we've found 70%+ of verse words in order, count it
-                        if words_found / len(verse_words) >= 0.7:
-                            found_verses.append(verse_num)
-                            break
-
-        return found_verses
-
-    def _verify_full_psalm_matches(self, matches: List[LiturgicalMatch], psalm_chapter: int) -> List[LiturgicalMatch]:
-        """
-        Verify that "full psalm" matches actually contain substantial portions of the psalm.
-
-        New implementation: Checks actual verse content in hebrew_text field.
-        Reports which verses are present and filters false positives.
-        """
-        if not matches:
-            return []
-
-        # Get all verses of the psalm
-        psalm_verses = self._get_psalm_verses(psalm_chapter)
-        if not psalm_verses:
-            if self.verbose:
-                print(f"[WARNING] Could not load psalm {psalm_chapter} verses, using old heuristic")
-            return matches  # Fall back to accepting all matches if we can't verify
-
-        total_verses = len(psalm_verses)
-        verified = []
-
-        # Get hebrew_text for each prayer_id
-        conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
-
-        for match in matches:
-            try:
-                # Get the full hebrew_text from prayers table
-                cursor.execute(
-                    "SELECT hebrew_text FROM prayers WHERE prayer_id = ?",
-                    (match.prayer_id,)
-                )
-                result = cursor.fetchone()
-
-                if not result or not result[0]:
-                    if self.verbose:
-                        print(f"[WARNING] No hebrew_text for prayer_id {match.prayer_id} ({match.prayer_name})")
-                    continue
-
-                hebrew_text = result[0]
-
-                # Check which verses are present
-                found_verses = self._check_verses_in_prayer(hebrew_text, psalm_verses)
-                found_count = len(found_verses)
-
-                # Determine if this is a true full psalm or partial
-                percentage = (found_count / total_verses) * 100 if total_verses > 0 else 0
-
-                # Full psalm: At least 80% of verses present
-                # Partial: 30-79% of verses
-                # False positive: < 30%
-
-                if percentage >= 30:  # Keep if at least 30% of verses present
-                    # Annotate the match with verse information
-                    match.found_verses = found_verses
-                    match.found_percentage = percentage
-
-                    if self.verbose:
-                        verse_range = self._format_verse_list(found_verses)
-                        status = "FULL" if percentage >= 80 else "PARTIAL"
-                        print(f"[{status}] Psalm match in {match.prayer_name}: verses {verse_range} ({percentage:.0f}%)")
-
-                    verified.append(match)
-                else:
-                    if self.verbose:
-                        print(f"[FILTER] False 'full psalm' match in {match.prayer_name} - only {found_count}/{total_verses} verses ({percentage:.0f}%)")
-
-            except Exception as e:
-                if self.verbose:
-                    print(f"[WARNING] Error verifying match for prayer_id {match.prayer_id}: {e}")
-                continue
-
-        conn.close()
-
-        if self.verbose:
-            print(f"\nFull psalm verification: {len(verified)}/{len(matches)} matches kept")
-
-        return verified
+        return len(meaningful_words)
 
     def _format_verse_list(self, verses: List[int]) -> str:
         """
@@ -1591,10 +1756,47 @@ Output ONLY the JSON, no additional text."""
 
         return merged
 
+    def _prioritize_matches_by_type(self, matches: List[LiturgicalMatch]) -> List[LiturgicalMatch]:
+        """
+        Sort matches by match_type priority for LLM presentation.
+
+        Priority order (highest to lowest):
+        1. entire_chapter - full psalm recitations
+        2. verse_range - multiple consecutive verses
+        3. verse_set - multiple non-consecutive verses
+        4. exact_verse - single complete verse
+        5. phrase_match - partial verse excerpts
+
+        This ensures LLM sees most significant usages first.
+
+        Args:
+            matches: List of liturgical matches to prioritize
+
+        Returns:
+            Sorted list with highest priority matches first
+        """
+        # Define priority scores (lower = higher priority)
+        type_priority = {
+            'entire_chapter': 1,
+            'verse_range': 2,
+            'verse_set': 3,
+            'exact_verse': 4,
+            'phrase_match': 5
+        }
+
+        # Sort by priority, then by confidence (higher confidence first)
+        return sorted(
+            matches,
+            key=lambda m: (
+                type_priority.get(m.match_type, 999),  # Unknown types go last
+                -m.confidence  # Higher confidence first within same type
+            )
+        )
+
     def get_statistics(self) -> Dict[str, Any]:
         """Get comprehensive statistics about the liturgical index."""
 
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_db_connection()
         cursor = conn.cursor()
 
         stats = {}
@@ -1608,11 +1810,11 @@ Output ONLY the JSON, no additional text."""
         stats['psalms_indexed'] = cursor.fetchone()[0]
 
         # Matches by type
-        cursor.execute("""
+        cursor.execute('''
             SELECT match_type, COUNT(*)
             FROM psalms_liturgy_index
             GROUP BY match_type
-        """)
+        ''')
         stats['by_match_type'] = dict(cursor.fetchall())
 
         # Average confidence
@@ -1620,20 +1822,20 @@ Output ONLY the JSON, no additional text."""
         stats['avg_confidence'] = round(cursor.fetchone()[0] or 0, 3)
 
         # Top Psalms by matches
-        cursor.execute("""
+        cursor.execute('''
             SELECT psalm_chapter, COUNT(*) as count
             FROM psalms_liturgy_index
             GROUP BY psalm_chapter
             ORDER BY count DESC
             LIMIT 10
-        """)
+        ''')
         stats['top_psalms'] = cursor.fetchall()
 
         # Unique prayers referenced
-        cursor.execute("""
+        cursor.execute('''
             SELECT COUNT(DISTINCT prayer_id)
             FROM psalms_liturgy_index
-        """)
+        ''')
         stats['unique_prayers'] = cursor.fetchone()[0]
 
         conn.close()
@@ -1653,7 +1855,7 @@ def main():
     parser = argparse.ArgumentParser(
         description='Liturgical Librarian - Query phrase-level liturgical index',
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
+        epilog='''
 Examples:
   # Query Psalm 23 with LLM summaries (default)
   python src/agents/liturgical_librarian.py 23
@@ -1666,7 +1868,7 @@ Examples:
 
   # Show statistics
   python src/agents/liturgical_librarian.py --stats
-        """
+        '''
     )
 
     parser.add_argument(
@@ -1796,7 +1998,7 @@ Examples:
             print(f"   Raw matches ({len(match.raw_matches)}):")
             for j, raw in enumerate(match.raw_matches[:5], 1):  # Show first 5
                 liturgy_excerpt = raw.liturgy_context[:60] + "..." if len(raw.liturgy_context) > 60 else raw.liturgy_context
-                print(f"     {j}. {raw.prayer_name or raw.section} ({raw.nusach})")
+                print(f"     {j}. {raw.canonical_prayer_name or raw.canonical_L3_signpost} ({raw.nusach})")
                 print(f"        Context: {liturgy_excerpt}")
             if len(match.raw_matches) > 5:
                 print(f"     ... and {len(match.raw_matches) - 5} more")
