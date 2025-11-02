@@ -1,0 +1,805 @@
+================================================================================
+LITURGICAL RESEARCH BUNDLE FOR PSALM 145
+================================================================================
+Generated: 2025-11-02 01:18:42
+
+This is the EXACT research bundle passed to commentary generation agents.
+It contains ONLY phrase/verse identifiers and LLM-generated summaries.
+
+--------------------------------------------------------------------------------
+BUNDLE CONTENTS
+--------------------------------------------------------------------------------
+Full Psalm Summary: Yes
+Phrase Groups: 51
+
+
+================================================================================
+FULL PSALM SUMMARY
+================================================================================
+
+Identifier: [Full Psalm Recitation]
+
+Summary:
+--------------------------------------------------------------------------------
+# Psalm 145 in Jewish Liturgy
+
+Psalm 145, known as Ashrei from its opening word, constitutes the central core of Pesukei Dezimra (Verses of Song) and is recited in its entirety across all Jewish traditions during Shacharit on weekdays, Shabbat, Rosh Chodesh, and Yom Kippur. The psalm appears in two primary liturgical contexts: first as the foundation of Pesukei Dezimra, where it is preceded by introductory verses and immediately followed by the concluding Hallel psalms (146–150), and second as a preparatory prayer before the silent Amidah in the Mincha service, where it is accompanied by the Half Kaddish. In the Mincha service specifically, Ashrei serves as an introductory element that precedes both the standard Amidah and, on festival occasions, the Torah service introduction, establishing a consistent liturgical framework across Ashkenazic, Sefardic, and Mizrachi traditions. The recitation of Psalm 145 in these contexts reflects its acrostic structure (an alphabetic acrostic in the original Hebrew) and its thematic emphasis on God's kingship and providential care—themes that make it particularly suitable for framing the daily prayers and connecting the preliminary praise of Pesukei Dezimra to the petitionary Amidah. The psalm's placement immediately before the Amidah in Mincha and its integration into the morning praise service underscore its liturgical significance as a bridge between communal song and individual prayer.
+
+
+================================================================================
+PHRASE GROUPS
+================================================================================
+Total phrase groups: 51
+
+
+================================================================================
+PHRASE GROUP 1 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:11
+  Hebrew Phrase: כְּב֣וֹד מַלְכוּתְךָ֣
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:11 in Jewish Liturgy
+
+The phrase כְּבוֹד מַלְכוּתְךָ (the glory of Your kingdom) occupies a central position in the High Holiday liturgy, appearing most prominently in the Amidah across all Jewish traditions during the Musaf service on both Rosh Hashanah and Yom Kippur. Within this sacred context, the liturgy invokes the phrase in the imperative petition: אָבִֽינוּ מַלְכֵּֽנוּ גַּלֵּה כְּבוֹד מַלְכוּתְךָ עָלֵֽינוּ מְהֵרָה וְהוֹפַע וְהִנָּשֵׂא עָלֵֽינוּ לְעֵינֵי כָּל חָי ("Our Father, our King, reveal the glory of Your kingdom upon us swiftly, and appear and be exalted upon us before the eyes of all living"). This formulation appears identically in both the silent Amidah and the Chazzan's repetition, particularly within the Malchuyot (Kingship) section, where it functions as a direct appeal for the manifestation of divine sovereignty. Beyond the High Holidays, the phrase extends into other liturgical contexts, including piyyutim (liturgical poems) such as those recited on Lag Ba'Omer in commemoration of Rabbi Shimon Bar Yochai, where it maintains its thematic emphasis on the revelation of God's kingship. The consistent deployment of this Psalmist's language across multiple traditions and occasions underscores its theological significance as a petition for the visible establishment of God's reign over creation.
+
+
+================================================================================
+PHRASE GROUP 2 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:1-21
+  Hebrew Phrase: [Psalm 145: 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+
+Summary:
+--------------------------------------------------------------------------------
+# Psalm 145 in Jewish Liturgy: The Ashrei Prayer
+
+Psalm 145 in its entirety constitutes the Ashrei prayer, one of the most central and frequently recited compositions in Jewish liturgy across all traditions. The complete psalm—comprising verses 1 through 21, with the acrostic structure proceeding through the Hebrew alphabet—appears as a substantial and integral component of the concluding prayers (Concluding Prayers/Ashrei and Uva L'Tzion Sequence) during weekday Shacharit services in the Edot HaMizrach tradition, where the liturgy presents the full text: 'אַשְׁרֵי יוֹשְׁבֵי בֵיתֶךָ עוֹד יְהַלְלוּךָ סֶלָה. אַשְׁרֵי הָעָם שֶׁכָּכָה לּוֹ אַשְׁרֵי הָעָם שֶׁיְהוָה אֱלֹהָיו' (Psalm 145:1-2). This psalm recitation appears consistently across multiple liturgical occasions and services: it is recited during Shacharit on weekdays when the Torah is read, where it serves as part of the Ashrei and Return of the Torah sequence; it appears in the Mincha service on Yom Kippur as a preparatory prayer preceding the Amidah; and it features prominently in both the Shacharit and Mincha services on Yom Kippur as part of the concluding prayers following the Torah Service. The Ashrei is invariably framed by supplementary verses from Psalms 84:5 and 144:15 as an introduction, and Psalm 115:18 as a conclusion, creating a composite liturgical unit that emphasizes themes of divine praise and the blessedness of those who dwell in God's house. The consistent placement of this acrostic psalm across weekday and High Holiday services, and its integration into both ordinary and sacred occasions, underscores its theological significance as a comprehensive statement of praise encompassing all aspects of divine majesty and human gratitude.
+
+
+================================================================================
+PHRASE GROUP 3 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:16
+  Hebrew Phrase: פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י רָצֽוֹן׃
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:16 in Jewish Liturgy
+
+The verse "פּוֹתֵחַ אֶת־יָדֶךָ וּמַשְׂבִּיעַ לְכׇל־חַי רָצוֹן" (You open Your hand and satisfy the desire of every living thing) occupies a central place in Jewish liturgical theology, appearing most prominently within Birkat HaMazon (Grace After Meals) across all Jewish traditions as the scriptural proof-text for the first blessing. In this context, the liturgy invokes the verse as the authoritative biblical foundation for praising God as "הַזָּן אֶת־הַכֹּל" (the One who sustains all), with the surrounding liturgical context stating: "מָזוֹן לְכָל־בְּרִיּוֹתָיו אֲשֶׁר בָּרָא. כָּאָמוּר, פּוֹתֵֽחַ אֶת־יָדֶֽךָ וּמַשְׂבִּֽיעַ לְכָל־חַי רָצוֹן" (sustenance for all His creatures which He created, as it is said, You open Your hand and satisfy the desire of every living thing). The phrase also appears in the weekday Amidah of the Sefard rite, where it is cited to support the petition for divine provision, introduced by the declaration "וִיקֻיַּם בִּי מִקְרָא שֶׁכָּתוּב פּוֹתֵֽחַ אֶת יָדֶֽךָ וּמַשְׂבִּיעַ לְכָל חַי רָצוֹן" (and may be fulfilled in me the verse that is written, You open Your hand and satisfy the desire of every living thing). The verse's recurrence in both daily mealtime blessings and the formal Amidah demonstrates its theological significance as the primary scriptural warrant for the doctrine of divine sustenance in rabbinic Judaism. Its integration across multiple liturgical contexts—from the intimate home setting of Grace After Meals to the communal prayer of the Amidah—reflects the Jewish tradition's understanding of God's providential care as both a universal principle and a personal reality demanding grateful acknowledgment.
+
+
+================================================================================
+PHRASE GROUP 4 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:13
+  Hebrew Phrase: מַֽלְכוּתְךָ֗ מַלְכ֥וּת
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase מַלְכוּתְךָ מַלְכוּת כָּל עוֹלָמִים (Your kingdom is a kingdom of all worlds) from Psalm 145:13 occupies a central position in Jewish liturgy, appearing most prominently in the Torah Service and the High Holiday Amidah across both Ashkenazic and Sefardic traditions. In the context of removing the Torah scroll from the Ark on weekdays and festivals, the liturgy recites: "אֵין כָּמוֹךָ בָאֱלֹהִים אֲדֹנָי וְאֵין כְּמַעֲשֶׂיךָ: מַלְכוּתְךָ מַלְכוּת כָּל עוֹלָמִים. וּמֶמְשַׁלְתְּךָ בְּכָל דּוֹר וָדוֹר" (There is none like You among the gods, O Lord, and there are no deeds like Yours; Your kingdom is a kingdom of all worlds, and Your dominion is in every generation), establishing the phrase as a declaration of God's eternal sovereignty over all creation at the moment the community encounters the Torah. The phrase achieves particular liturgical significance on the High Holidays, where it functions as a congregational response (קהל) within the Kedushah section of the Chazzan's Repetition during both Rosh Hashanah and Yom Kippur Shacharit services, interspersed among the piyyutim (liturgical poems) that expand upon themes of divine kingship and judgment. In these contexts, the congregation proclaims: "קהל: מַלְכוּתְךָ מַלְכוּת כָּל עוֹלָמִים" as a direct affirmation of God's universal and eternal reign, thereby transforming the psalmist's declaration into a participatory liturgical act. This strategic placement—at the threshold of Torah study and at the climactic moment of the High Holiday Amidah—underscores the theological centrality of divine kingship (malkhuyot) in Jewish prayer, making the phrase from Psalm 145 a cornerstone of Ashkenazic liturgical tradition.
+
+
+================================================================================
+PHRASE GROUP 5 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:1
+  Hebrew Phrase: לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣
+
+Summary:
+--------------------------------------------------------------------------------
+# Liturgical Usage of לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣
+
+The opening phrase of Psalm 145:1, לְדָ֫וִ֥ד אֲרוֹמִמְךָ֣ ("A Psalm of David: I will exalt You"), appears prominently as part of the complete recitation of Psalm 30 (Mizmor Shir Chanukat HaBayit) across multiple Jewish traditions and occasions. In the Ashkenaz rite, this psalm is recited daily during Pesukei Dezimra (Verses of Praise) in the Shacharit service, serving as an introductory psalm preceding Baruch She'amar, and the same practice appears in the Ashkenaz machzor for Rosh Hashanah. The liturgical context demonstrates this integration: the siddur presents the full opening, "מִזְמוֹר שִׁיר־חֲנֻכַּת הַבַּֽיִת לְדָוִד: אֲרוֹמִמְךָ יְהֹוָה כִּי דִלִּיתָֽנִי וְלֹא־שִׂמַּֽחְתָּ אֹיְבַי לִי" (A Psalm, a Song for the Dedication of the House, of David: I will exalt You, O Lord, for You have lifted me up, and have not let my enemies rejoice over me). Beyond the daily Ashkenaz rite, Psalm 30 also features prominently in the Hanukkah home candle-lighting ceremony across both the Sefard and Edot HaMizrach traditions, where it is recited as part of the extended psalm collection following the core blessings and the HaNerot Hallalu declaration. The phrase's liturgical significance thus spans both regular weekday worship and the special observance of Hanukkah, reflecting the psalm's thematic connection to dedication and deliverance that resonates across Jewish prayer traditions.
+
+
+================================================================================
+PHRASE GROUP 6 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:5
+  Hebrew Phrase: הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase הֲדַר כְּבוֹד הוֹדֶךָ (the splendor of the glory of Your praise) from Psalm 145:5 occupies a significant place in Ashkenazi High Holiday liturgy, particularly within the piyyutim (liturgical poems) that frame and embellish the central prayers of the season. The phrase appears most prominently in Anim Zemirot (also known as Shir HaKavod, the Song of Glory), a devotional hymn recited at the conclusion of the Musaf service on both Rosh Hashanah and Yom Kippur, where it functions as part of an antiphonal dialogue between cantor and congregation. The liturgical context shows the phrase embedded within a passage that reads: "דִּמִּֽיתָ הֲדַר כְּבוֹד הוֹדֶךָ גְּדֻלָּתְךָ וּגְבוּרָתֶךָ כִּנּוּ לְתוֹקֶף פְּעֻלָּתֶךָ" (You are likened to the splendor of the glory of Your praise; Your greatness and might—they have fashioned [hymns] to the strength of Your deeds), demonstrating how the psalmist's language of divine majesty is woven into the piyyutim's meditation on God's transcendence. Beyond its use in Anim Zemirot, the phrase also appears in the Yom Kippur Shacharit Kedushah within the chazan's repetition of the Amidah, where it surfaces in a call-and-response structure incorporating verses from Psalm 145, reinforcing themes of divine glory and sovereignty at the liturgical climax of the Day of Atonement. The phrase's recurrence across multiple High Holiday contexts—whether in concluding hymns after the return of the Torah to the Ark or within the expanded piyyutim of the Kedushah—reflects its theological centrality to Ashkenazi High Holiday piety, where the articulation of God's splendor and praise becomes an essential element of communal devotion during the season of judgment and repentance.
+
+
+================================================================================
+PHRASE GROUP 7 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:10
+  Hebrew Phrase: כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ
+
+Summary:
+--------------------------------------------------------------------------------
+# Liturgical Usage of כׇּל־מַעֲשֶׂ֑יךָ וַ֝חֲסִידֶ֗יךָ (Psalm 145:10)
+
+The phrase כׇּל־מַעֲשֶׂיךָ וַחֲסִידֶיךָ ("all Your works and Your pious ones") from Psalm 145 occupies a significant position in the concluding blessings of Hallel across both Ashkenazi and Sefardi liturgical traditions. This phrase appears most prominently in the Yehalelukha blessing, the formal conclusion to the Hallel service recited during Shacharit on festivals and Rosh Chodesh, where the liturgy declares: יְהַלְלוּךָ יְהֹוָה אֱלֹהֵינוּ כָּל־מַעֲשֶׂיךָ וַחֲסִידֶיךָ צַדִּיקִים עוֹשֵׂי רְצוֹנֶךָ וְכָל עַמְּךָ בֵּית יִשְׂרָאֵל בְּרִנָּה יוֹדוּ וִיבָרְכוּ ("May all Your works praise You, O Lord our God, and Your pious ones, the righteous who do Your will, and all Your people, the house of Israel, shall joyfully give thanks and bless"). Beyond the festival cycle, the phrase also appears in the Selichot service for the Fast of Gedaliah, where it is recited as part of the extended penitential readings (Tachanun) that follow the Amidah, reinforcing themes of divine works and human righteousness during times of communal repentance. The phrase maintains particular liturgical prominence during the Passover Seder, where it appears in both the Siddur Sefard's Nirtzah section and the Haggadah's concluding Hallel, emphasizing the connection between God's redemptive works and the gratitude of the Jewish people as they complete the festival's central ritual. Across all these contexts, the phrase functions theologically to unite God's cosmic creative activity with human moral response, positioning the righteous and the entire community of Israel as participants in a comprehensive liturgical acknowledgment of divine sovereignty.
+
+
+================================================================================
+PHRASE GROUP 8 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:13
+  Hebrew Phrase: וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:13 in Jewish Liturgy
+
+The phrase וּמֶמְשַׁלְתְּךָ בְּכׇל־דּוֹר (and Your dominion in every generation) from Psalm 145:13 occupies a central position in the Torah Service across the Jewish liturgical calendar, appearing as a constitutive element of the "Ein Kamocha" introduction recited when the Ark is opened to remove the Torah scroll. This phrase functions within a composite liturgical block that declares God's incomparability and eternal sovereignty, as exemplified in the Ashkenazi formula: "אֵין כָּמוֹךָ בָאֱלֹהִים אֲדֹנָי וְאֵין כְּמַעֲשֶׂיךָ: מַלְכוּתְךָ מַלְכוּת כָּל עוֹלָמִים. וּמֶמְשַׁלְתְּךָ בְּכׇל דּוֹר וָדוֹר" (There is none like You among the gods, O Lord, and there is nothing like Your works; Your kingdom is a kingdom of all eternities, and Your dominion in every generation). The phrase appears consistently across both Ashkenazi and Sefardi traditions on weekdays during the Shacharit service, and with particular prominence during the High Holidays (Rosh Hashanah and Yom Kippur) when the opening of the Ark assumes heightened liturgical significance. On Shabbat and Festival occasions, the Sefardi rite integrates this phrase into the more elaborate "Hotza'at Sefer Torah" (Taking out the Torah) ceremony, where it serves as a theological anchor affirming God's perpetual rulership across all generations. The consistent recitation of this phrase across multiple occasions and traditions underscores its function as a foundational declaration of divine sovereignty at the precise moment when the community encounters the written Torah, thereby linking textual revelation to the affirmation of God's eternal dominion.
+
+
+================================================================================
+PHRASE GROUP 9 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:16-21
+  Hebrew Phrase: [Psalm 145: 21, 16]
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:16, 21 in Jewish Liturgy
+
+Verses 16 and 21 from Psalm 145 appear as concluding supplements within the Grace After Meals (Birkat HaMazon) across both the Machzor Rosh Hashanah Edot HaMizrach and the standard Siddur Edot HaMizrach, contexts that span both festive occasions and ordinary mealtime observance. The Location Description for both liturgical blocks indicates that these verses function as part of the concluding section following the four core blessings and the extended HaRachaman supplications, where the liturgy states: "פִּתְחָה אֶת־יָדְךָ וּמַשְׂבִּיעַ לְכָל־חַי רָצוֹן" (You open Your hand and satisfy every living thing with favor) and "יְהַלְלוּ אֶת־יְהוָה כָּל־מַעֲשָׂיו וַחֲסִידָיו יְבָרְכוּ אֶתְךָ" (All Your works shall praise You, and Your pious ones shall bless You). These verses from Psalm 145 serve a dual liturgical function: they reinforce the gratitude expressed in the main blessings while simultaneously elevating the mealtime blessing through the inclusion of biblical praise language that emphasizes divine providence and universal recognition of God's beneficence. The recitation of these verses occurs in the home setting during meals, making them part of the non-synagogue ritual observance that characterizes Birkat HaMazon across all occasions—whether on ordinary weekdays or during the High Holiday season of Rosh Hashanah—thereby integrating scriptural praise into the domestic religious experience of Jewish table fellowship.
+
+
+================================================================================
+PHRASE GROUP 10 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:17
+  Hebrew Phrase: בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase צַדִּיק יְיָ בְּכׇל־דְּרָכָיו וְחָסִיד בְּכׇל־מַעֲשָׂיו (The Lord is righteous in all His ways and merciful in all His deeds) from Psalm 145:17 appears in the Ashkenazi liturgy within two distinct penitential and festive contexts. First, the phrase is incorporated into the Selichot service for the Fast of Gedalia, where it appears as part of a broader scriptural composition following the recitation of Ashrei (Psalm 145 in full) and preceding the central recitation of the Thirteen Attributes of Mercy. In this context, the liturgy presents the phrase within a longer sequence: בְּעִתּוֹ. פּוֹתֵחַ אֶת יָדֶךָ וּמַשְׂבִּיעַ לְכָל חַי רָצוֹן. צַדִּיק יְיָ בְּכׇל דְּרָכָיו וְחָסִיד בְּכׇל מַעֲשָׂיו. קָרוֹב יְיָ לְכׇל קֹרְאָיו, emphasizing divine justice and mercy during the penitential season. Second, the identical phrase appears in the Hoshanot for Hoshana Rabbah on the seventh day of Sukkot, where it is recited among various piyyutim during the Hakafot (processional circuits) around the bimah, functioning as a theological affirmation within the liturgical poems. The dual appearance of this phrase—once in a fast day penitential context and once in a festival celebration—demonstrates its versatility as a scriptural anchor affirming God's righteous character across both solemn and joyous occasions in the Jewish liturgical calendar.
+
+
+================================================================================
+PHRASE GROUP 11 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:19
+  Hebrew Phrase: רְצוֹן־יְרֵאָ֥יו יַעֲשֶׂ֑ה
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase רְצוֹן־יְרֵאָ֥יו יַעֲשֶׂ֑ה ("He fulfills the desire of those who fear Him") from Psalm 145:19 appears in Jewish liturgy within two distinct liturgical contexts that reflect different seasons and spiritual emphases. In the Sefard rite, the phrase is incorporated into the Melaveh Malka zemirot (songs for the concluding Shabbat meal), where it appears within a collection of protective verses and psalms recited in the home after Shabbat concludes. The liturgical context presents the phrase as part of a series of divine attributes: "חַנּוּן וְרַחוּם בִּמְרוֹמָיו. אוּלַי יִגְמְלֵנוּ בְּרַחֲמָיו: טוֹב לְקֹוָיו מַחֲסֶה. רְצוֹן יְרֵאָיו יַעֲשֶׂה" ("Gracious and merciful in the heavens, perhaps He will deal with us in His mercy; good is He to those who hope in Him; He fulfills the desire of those who fear Him"). More significantly, the phrase appears in the Ashkenazi Machzor for Yom Kippur, where it is recited as a congregational response within the Kedushah of the Shacharit Amidah's Chazan's Repetition. In this High Holiday context, the phrase functions as a responsive affirmation interspersed among piyyutim (liturgical poems), with the congregation declaring "רְצוֹן יְרֵאָיו יַעֲשֶׂה" in dialogue with the cantor's invocations of divine compassion and forgiveness. The dual occurrence of this phrase—once in the intimate domestic ritual of Melaveh Malka and once in the solemn communal liturgy of Yom Kippur—demonstrates how a single psalmaic affirmation of divine providence adapts to express both the gratitude of Shabbat's departure and the supplication for divine favor on the Day of Atonement.
+
+
+================================================================================
+PHRASE GROUP 12 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:9
+  Hebrew Phrase: טוֹב־יְהֹוָ֥ה לַכֹּ֑ל וְ֝רַחֲמָ֗יו עַל־כׇּל־מַעֲשָֽׂיו׃
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The verse "טוֹב־יְהֹוָ֥ה לַכֹּ֑ל וְ֝רַחֲמָ֗יו עַל־כׇּל־מַעֲשָֽׂיו" (The Lord is good to all, and His mercies extend over all His works) from Psalm 145:9 appears in Jewish liturgy exclusively within the penitential service of Yom Kippur Katan, the minor fast day observed on the eve of Rosh Chodesh (the new month), in both the Ashkenazic and Sefardic traditions. The phrase is recited during the Mincha (afternoon) service following the chazan's repetition of the Amidah, as part of the Selichot (penitential poems) section that comprises the special Seder Yom Kippur Katan. In both liturgical contexts, the verse appears within a sequence of confessional and supplicatory verses, integrated into the liturgy as follows: "פָשָׁעְנוּ: כִּי אַתָּה אֲדֹנָי טוֹב וְסַלָּח וְרַב חֶסֶד לְכָל קֹרְאֶיךָ: טוֹב יְהֹוָה לַכֹּל וְרַחֲמָיו עַל כָּל מַעֲשָׂיו" (We have transgressed; for You, O Lord, are good and forgiving, abundant in kindness to all who call upon You; the Lord is good to all, and His mercies extend over all His works). This placement within the confessional framework transforms the verse from a general statement of divine benevolence into a specific affirmation of God's mercy during a moment of communal repentance and spiritual accounting. The dual appearance across Ashkenazic and Sefardic rites indicates a shared liturgical tradition regarding the theological emphasis on divine compassion during these monthly penitential observances, though the verse does not appear in the daily liturgy or in the major festivals.
+
+
+================================================================================
+PHRASE GROUP 13 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:16
+  Hebrew Phrase: וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י
+
+Summary:
+--------------------------------------------------------------------------------
+# Commentary: Psalm 145:16 in Jewish Liturgy
+
+The phrase וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י (and satisfies the desire of every living thing) from Psalm 145:16 appears in two significant liturgical contexts within the Sefard tradition, each reflecting distinct theological emphases. In the weekday Mincha Amidah, the phrase is integrated into a blessing that addresses divine providence and sustenance, appearing within the liturgical context: "מַתְּנַת בָּשָׂר וָדָם. וִיקֻיַּם בִּי מִקְרָא שֶׁכָּתוּב. פּוֹתֵחַ אֶת יָדֶיךָ וּמַשְׂבִּיעַ לְכָל חַי רָצוֹן" (a gift of flesh and blood, and may be fulfilled in me the verse that is written: You open Your hand and satisfy the desire of every living thing). This recitation emphasizes God's continuous provision and benevolence, particularly resonating with the prayer for relief from drought in the Land of Israel that follows. The same phrase also appears in the Zemirot L'Leil Shabbat (Friday night table songs), where it is embedded within a broader hymn of praise: "חָי: עַל כּל אֲהוֹדֶךָ. כָּל פֶּה תְּיַחֲדֶךָ. פּוֹתֵחַ אֶת יָדֶיךָ. וּמַשְׂבִּיעַ לְכָל חָי" (life: for all I praise You, every mouth unites You, You open Your hand and satisfy the desire of every living thing). In this festive context, the phrase reinforces Shabbat's themes of divine abundance and the joy of creation's sustenance. Across both contexts, the Psalmistic language serves to ground the liturgy in scriptural authority while elevating everyday concepts of nourishment to expressions of divine providence and cosmic care.
+
+
+================================================================================
+PHRASE GROUP 14 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:4
+  Hebrew Phrase: דּ֣וֹר לְ֭דוֹר
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: דּוֹר לְדוֹר in Jewish Liturgy
+
+The phrase דּוֹר לְדוֹר (dor le-dor, "generation to generation") from Psalm 145:4 appears in Jewish liturgy exclusively within the Shabbat meal context, specifically in the kabbalistic zmirot and meditations recited during Friday evening. Both the Sefard and Edot HaMizrach traditions incorporate this phrase within the composite liturgical block of *Atkinu Seudata* and *Azamer Bishvachin*, the renowned Shabbat table songs attributed to Rabbi Isaac Luria. These zmirot are recited in the home during the Shabbat evening meal, functioning as devotional supplements that frame the mystical significance of Shabbat sustenance. The liturgy surrounding the phrase emphasizes the transmission of divine blessing and spiritual knowledge across generations, as evidenced in the kabbalistic meditation: "עִלָּאָה מִנֵּיהּ לְמַלְיָא רֵישֵׁיהּ דִזְעֵיר אַנְפִּין וּלְהַטִּיל לַחֲקַל תַּפּוּחִין קַדִּישִׁין בִּנְהִֽירוּ דְּאַנְפִּין" (from above to fill the head of the Small Face, to cast holy apples in the radiance of the countenance). In this mystical context, the phrase דּוֹר לְדוֹר serves to connect the eternal transmission of Shabbat's sanctity across all generations of Israel, linking the earthly meal to the supernal realms through the Lurianic kabbalistic framework that characterizes these devotional compositions.
+
+
+================================================================================
+PHRASE GROUP 15 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:10
+  Hebrew Phrase: יוֹד֣וּךָ יְ֭הֹוָה כׇּל־מַעֲשֶׂ֑יךָ
+
+Summary:
+--------------------------------------------------------------------------------
+The phrase יוֹדֽוּךָ יְהֹוָה כָּל־מַעֲשֶֽׂיךָ ("All Your works shall praise You, O Lord") from Psalm 145:10 appears in the Ashkenazi Yom Kippur liturgy in two significant contexts, both reflecting the solemnity and devotional intensity of the holiest day of the Jewish calendar. In the evening service (Maariv), the phrase is incorporated into the Shir HaYichud and Anim Zemirot, devotional texts recited before the formal service begins, where it appears within a responsive liturgical passage: וְשִׁמְךָ יְהֹוָה כֻּלָּם יְהַלְּלוּ חזן רַבּוּ וְגָדְלוּ מְאֹד מַעֲשֶֽׂיךָ, יוֹדֽוּךָ יְהֹוָה כָּל־מַעֲשֶֽׂיךָ ("Your name, O Lord, all shall praise; it has grown great and exceedingly magnified—Your works, O Lord, all Your works shall praise You"). The phrase recurs during the morning service (Shacharit) within the Kedushah section of the Chazan's repetition of the Amidah, functioning as a congregational response within a complex of piyyutim (liturgical poems). Here the liturgy reads: חזן קוֹמֵם אִוּוּי קִרְיַת מְשׂוֹשֶֽׂךָ קְדֻשַּׁת אַבְנֵי נֵֽזֶר בְּנוֹסְסֶֽךָ קהל יוֹדֽוּךָ יְהֹוָה כָּל מַעֲשֶֽׂיךָ, where the congregation's affirmation punctuates the chazan's poetic invocations of divine glory. The dual appearance of this phrase from Psalm 145—a psalm of praise and thanksgiving—across both evening and morning services of Yom Kippur underscores the liturgical significance of universal praise as an expression of repentance and spiritual renewal on the Day of Atonement.
+
+
+================================================================================
+PHRASE GROUP 16 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:21
+  Hebrew Phrase: תְּהִלַּ֥ת יְהֹוָ֗ה יְֽדַבֶּ֫ר־פִּ֥י
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:21 in Jewish Liturgy
+
+The phrase תְּהִלַּת יְהֹוָה יְדַבֶּר פִּי (the praise of the Lord shall my mouth speak) appears in the Ashkenazi Yom Kippur liturgy as a congregational response within the Chazan's Repetition of the Shacharit Amidah, specifically integrated into the elaborate Kedushah section that characterizes High Holiday worship. In this context, the liturgy employs the verse as a call-and-response element within a complex piyyutim structure, where the cantor chants supplicatory verses and the congregation responds with this biblical affirmation: חזן: קַבֵּל צְקוֹנִי כִּבְמִכְלַל יֹֽפִי. קוֹלִי תַּאֲזִין וְתַצְלִיל דֹּֽפִי: קהל: תְּהִלַּת יְהֹוָה יְדַבֶּר פִּי (The cantor: Accept my prayer as the perfection of beauty. Hear my voice and the sound of my supplication. The congregation: The praise of the Lord shall my mouth speak). The same phrase recurs later in the Kedushat HaYom section of the Amidah, where it appears amid a lengthy series of supplicatory verses and penitential poetry, functioning as a bridge between expressions of human contrition and renewed commitment to divine praise: תְּהִלַּת יְהֹוָה יְדַבֶּר פִּי: חטאנו: פִּי תְּהִלָּתְךָ יַגִּיד תִּקְוָתֵֽנוּ (The praise of the Lord shall my mouth speak; we have sinned; my mouth shall tell of Your praise and our hope). This dual deployment of the Psalm verse within the Yom Kippur liturgy creates a theological resonance: the worshipper's commitment to praise God frames both the confession of sin and the petition for forgiveness, transforming the Day of Atonement into an occasion where human speech itself becomes an instrument of divine service.
+
+
+================================================================================
+PHRASE GROUP 17 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:9-14
+  Hebrew Phrase: [Psalm 145: 14, 9]
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+Verses 14 and 9 from Psalm 145 appear in the Sefard liturgical tradition as part of Perek Shirah (Chapter of Song), a devotional text that occupies a supplemental position within the siddur. Perek Shirah is not integrated into the obligatory prayer service itself but rather functions as an appendix for personal study and devotional recitation, with some practitioners observing the custom of reciting it daily following the morning service. Within this contemplative framework, the liturgy presents the psalmist's affirmation: "סוֹמֵךְ יְהוָה לְכָל־הַנֹּפְלִים וְזוֹקֵף לְכָל־הַכְּפוּפִים" (The Lord supports all who fall and raises up all who are bowed down) and "טוֹב־יְהוָה לַכּל וְרַחֲמָיו עַל־כָּל־מַעֲשָׂיו" (The Lord is good to all and His compassion is upon all His works). The inclusion of these verses in Perek Shirah reflects the devotional emphasis on divine providence and compassion that characterizes this supplemental liturgical composition. As a personal devotional text rather than a component of obligatory communal prayer, Perek Shirah allows individuals to engage with these affirmations of God's sustaining care according to their own spiritual practice and custom.
+
+
+================================================================================
+PHRASE GROUP 18 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:1-19
+  Hebrew Phrase: [Psalm 145: 4, 7, 19, 1-2, 11-13, 15-16]
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145 in the Selichot for the Fast of Gedalia
+
+Psalm 145 appears in the Ashkenazi liturgy as a foundational element of the Selichot service recited on the Fast of Gedalia, a minor fast day commemorating the assassination of the Jewish governor and the subsequent exile of Judah's remnant to Egypt. The complete psalm is recited as the opening component of the Selichot block, beginning with the full acrostic recitation of Ashrei (Psalm 145), which serves as an introductory supplement before the central penitential prayers and the invocation of the Thirteen Attributes of Mercy. The specific verses selected—4, 7, 19, 1-2, 11-13, and 15-16—constitute a substantial recitation of the psalm's most theologically significant passages, including the opening declaration "אַשְׁרֵי יוֹשְׁבֵי בֵיתְךָ עוֹד יְהַלְלוּךָ סֶלָה" (Happy are those who dwell in Your house; they shall praise You forever) and the affirmation of divine providence: "עֵינֵי־כֹל אֵלֶיךָ יְשַׂבְּרוּ וְאַתָּה נוֹתֵן לָהֶם אֶת־אָכְלָם בְּעִתּוֹ" (The eyes of all look hopefully to You, and You give them their food in due season). This placement immediately after the Half Kaddish and preceding the extended Tachanun (penitential verses) establishes a liturgical movement from praise to confession, allowing the community to acknowledge divine majesty and providential care before articulating their transgressions and seeking forgiveness. The use of Psalm 145 on a fast day emphasizes the paradox central to Jewish penitential theology: that even in moments of national catastrophe and communal fasting, the worshiper must begin by affirming God's kingship, justice, and sustaining mercy.
+
+
+================================================================================
+PHRASE GROUP 19 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:14
+  Hebrew Phrase: לְכׇל־הַנֹּפְלִ֑ים וְ֝זוֹקֵ֗ף
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:14 in Jewish Liturgy
+
+The phrase לְכׇל־הַנֹּפְלִ֑ים וְ֝זוֹקֵ֗ף (sustaining all who fall and raising up all who are bowed down) appears in the Ashkenazi Selichot service recited on the Fast of Gedalia, a minor fast day observed in the Jewish calendar. This phrase is integrated into the liturgical block that begins with the recitation of Ashrei (Psalm 145) and a Half Kaddish, followed by an extensive collection of penitential verses (Tachanun) drawn from the Tanakh, which precedes the central recitation of the Thirteen Attributes of Mercy. The liturgical context preserves the phrase within a longer quotation that emphasizes God's sustaining power: "סוֹמֵךְ יְיָ לְכָל הַנֹּפְלִים וְזוֹקֵף לְכָל הַכְּפוּפִים. עֵינֵי כֹל אֵלֶיךָ יְשַׂבֵּרוּ וְאַתָּה נוֹתֵן לָהֶם אֶת" (The Lord sustains all who fall and raises up all who are bowed down; the eyes of all look to You, and You give them their food in due season). This penitential adaptation of Psalm 145 reflects the theological purpose of the fast day—a communal expression of repentance and acknowledgment of divine mercy—by highlighting God's compassionate support for the afflicted and broken-hearted. The phrase's appearance in this specific liturgical context underscores the role of Psalm 145 not merely as a hymn of praise recited daily in Pesukei Dezimra, but as a source of theological comfort and petition during times of communal fasting and spiritual reckoning.
+
+
+================================================================================
+PHRASE GROUP 20 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:20
+  Hebrew Phrase: אֶת־כׇּל־אֹהֲבָ֑יו וְאֵ֖ת כׇּל־הָרְשָׁעִ֣ים
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase אֶת־כׇּל־אֹהֲבָ֑יו וְאֵ֖ת כׇּל־הָרְשָׁעִ֣ים (all those who love Him and all the wicked) from Psalm 145:20 appears in the Ashkenazi rite during the Selichot service recited on the Fast of Gedalia, a minor fast day observed in the Jewish calendar. Within this liturgical context, the phrase is encountered as part of the complete recitation of Psalm 145 (Ashrei), which serves as an introductory supplement preceding the main body of penitential prayers. The full liturgical passage reads: "שׁוֹמֵר יְיָ אֶת כָּל אֹהֲבָיו וְאֵת כָּל הָרְשָׁעִים יַשְׁמִיד. תְּהִלַּת יְיָ יְדַבֶּר פִּי וִיבָרֵךְ כָּל בָּשָׂר שֵׁם קָדְשׁוֹ" (The Lord preserves all those who love Him, but all the wicked He will destroy; the praise of the Lord my mouth shall speak, and let all flesh bless His holy name). This verse is positioned within the Selichot framework after the Half Kaddish and before the extended collection of penitential verses (Tachanun) drawn from throughout the Tanakh, creating a liturgical movement from praise to confession. The theological significance of this phrase in the context of a fast day lies in its juxtaposition of divine protection for the righteous with divine judgment against the wicked, reinforcing themes of repentance and moral accountability that are central to the penitential service.
+
+
+================================================================================
+PHRASE GROUP 21 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:21
+  Hebrew Phrase: יְֽדַבֶּ֫ר־פִּ֥י וִיבָרֵ֣ךְ כׇּל־בָּ֭שָׂר שֵׁ֥ם קׇדְשׁ֗וֹ לְעוֹלָ֥ם
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:21 in Jewish Liturgy
+
+The concluding phrase of Psalm 145—"יְדַבֶּר־פִּי וִיבָרֵךְ כׇּל־בָּשָׂר שֵׁם קׇדְשׁוֹ לְעוֹלָם" (Let my mouth speak the praise of the Lord, and let all flesh bless His holy name forever)—appears in the Ashkenazi Selichot service for the Fast of Gedalia, where it functions as a concluding affirmation within a composite liturgical block. The phrase is integrated into the penitential framework following the recitation of Ashrei (Psalm 145 in its entirety) and a Half Kaddish, appearing within a sequence of Tachanun (supplicatory verses) that draws from across the Tanakh. The liturgical context presents the phrase as part of a broader confessional statement: "יְיָ אֶת כָּל אֹהֲבָיו וְאֵת כָּל הָרְשָׁעִים יַשְׁמִיד. תְּהִלַּת יְיָ יְדַבֶּר פִּי וִיבָרֵךְ כָּל בָּשָׂר שֵׁם קָדְשׁוֹ לְעוֹלָם וָעֶד" (The Lord loves all who love Him and destroys all the wicked. The praise of the Lord shall my mouth speak, and let all flesh bless His holy name forever and ever). This placement—within the main body of Selichot following the Amidah—positions the phrase as a liturgical seal affirming the perpetual nature of God's praise even amid the penitential confession characteristic of fast day observance. The phrase's emphasis on universal blessing ("וִיבָרֵךְ כׇּל־בָּשָׂר") resonates with the theological purpose of Selichot, transforming personal and communal repentance into an affirmation of God's eternal sanctity.
+
+
+================================================================================
+PHRASE GROUP 22 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:15-16
+  Hebrew Phrase: [Psalm 145:15-16]
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:15-16 in Jewish Liturgy
+
+Psalm 145:15-16 appears in the Siddur Edot HaMizrach (Eastern tradition) as an introductory supplement to the blessings recited before the Shabbat meal on Friday evening. The verses are incorporated into the composite liturgical block that structures the home ritual immediately following Kiddush, functioning as preparatory verses that precede the formal blessing over bread (HaMotzi). The liturgy presents these verses from Psalm 145 in their consecutive form—"עֵינֵי־כֹל אֵלֶיךָ יְשַׂבְּרוּ וְאַתָּה נוֹתֵן לָהֶם אֶת־אָכְלָם בְּעִתּוֹ" ("The eyes of all look to You, and You give them their food in due season")—establishing a theological framework that emphasizes divine providence and sustenance before the household partakes of the meal. This placement within the Shabbat meal ritual reflects the Jewish tradition of invoking God's providential care over nourishment, transforming the act of eating into a spiritually conscious acknowledgment of dependence upon the divine. The phrase thus serves not as part of the primary blessing formula itself, but rather as a devotional introduction that sanctifies the meal through meditation on God's benevolent provision, a practice characteristic of Mizrahi liturgical custom.
+
+
+================================================================================
+PHRASE GROUP 23 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:13-21
+  Hebrew Phrase: [Psalm 145: 13, 21, 17]
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+Selected verses from Psalm 145 (verses 13, 21, and 17) appear in the Hakafot (circuits) of Simchat Torah as recited in the Sefard liturgical tradition, specifically during both the evening (Ma'ariv) and morning (Shacharit) services on this joyous festival concluding the Sukkot season. The Hakafot liturgy represents a composite ceremonial block that structures the seven processional circuits around the Torah scrolls, incorporating specific psalmic verses alongside piyyutim and kabbalistic meditations corresponding to the Sefirot. These particular verses from Psalm 145 are integrated into the Torah Service section of the Hakafot, where the liturgy states: 'מַלְכוּתְךָ מַלְכוּת כָּל־עֹלָמִים וּמֶמְשַׁלְתְּךָ בְּכָל־דּוֹר וָדוֹר' (Your kingdom is an everlasting kingdom, and Your dominion endures throughout all generations), emphasizing the eternal sovereignty of God as the community celebrates the completion and renewal of the Torah cycle. The selection of these verses reflects a deliberate liturgical choice to invoke themes of divine majesty and perpetual kingship during the most exuberant moment of the Jewish liturgical year, when the community's relationship to Torah is most visibly and corporally expressed through the joyful circumambulation of the sacred scrolls. This usage demonstrates how the Sefard tradition weaves scriptural passages into the Hakafot ceremony to sanctify the physical act of honoring the Torah and to connect the communal celebration to the broader theological themes of God's eternal rule and providential care.
+
+
+================================================================================
+PHRASE GROUP 24 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:17
+  Hebrew Phrase: צַדִּ֣יק יְ֭הֹוָה בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase "צַדִּיק יְהֹוָה בְּכׇל־דְּרָכָיו וְחָסִיד בְּכׇל־מַעֲשָׂיו" (The Lord is righteous in all His ways and faithful in all His works) from Psalm 145:17 appears in the Hoshanot piyyutim recited on Hoshana Rabba, the seventh day of Sukkot, during the Shacharit service. This liturgical context is particularly significant, as Hoshana Rabba represents the climactic day of petition within the Sukkot festival, marked by the ritual circling of the bimah with the Four Species and the distinctive custom of beating willow branches. The phrase is integrated into the extended acrostic poems that comprise the Hoshanot, which collectively plead for divine salvation through the refrain "Hosha Na" (Save, we pray). In the Sefard rite's version of these piyyutim, the liturgy incorporates the verse within a broader theological affirmation: "רוֹב מֵרָזוֹן. שִׁבּוֹלֶת מִצִּנָּמוֹן. הוֹשַׁע נָא: תְּבוּאָה מֵחָסִיל. הוֹשַׁע נָא: צַדִּיק יְהֹוָה בְּכָל דְּרָכָיו וְחָסִיד בְּכָל מַעֲשָׂיו" (Abundance from mysteries, grain from cinnamon, Save us we pray; harvest from locusts, Save us we pray; The Lord is righteous in all His ways and faithful in all His works). By invoking this affirmation of divine justice and faithfulness within the supplicatory framework of the Hoshanot, the liturgy balances human petition with confident acknowledgment of God's essential righteousness, a rhetorical strategy characteristic of the High Holiday and festival liturgies that blend lamentation with theological affirmation.
+
+
+================================================================================
+PHRASE GROUP 25 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:16-17
+  Hebrew Phrase: [Psalm 145:16-17]
+
+Summary:
+--------------------------------------------------------------------------------
+# Psalm 145:16-17 in Jewish Liturgy
+
+Verses 16-17 of Psalm 145 appear in the Siddur Edot HaMizrach as part of the comprehensive liturgical materials for mourning rituals, specifically within the broader collection of texts designated for funeral and burial services. Rather than appearing within the primary mourning prayers themselves—such as the Tzidduk HaDin recited at graveside or the Dayan Ha'Emet blessing—these verses are incorporated as supplementary psalmic material within the mourning liturgical block. The liturgy presents these verses consecutively: "פּוֹתֵחַ אֶת־יָדְךָ וּמַשְׂבִּיעַ לְכָל־חַי רָצוֹן. צַדִּיק יְהוָה בְּכָל־דְּרָכָיו וְחָסִיד בְּכָל־מַעֲשָׂיו" ("You open Your hand and satisfy the desire of every living thing; the Lord is righteous in all His ways and merciful in all His deeds"). The inclusion of these particular verses within the mourning context emphasizes divine providence and justice—themes that provide theological comfort and affirmation of God's righteousness during the confrontation with mortality. This usage reflects a broader rabbinic practice of incorporating psalmic passages that affirm divine benevolence and cosmic order into the liturgical framework surrounding death and bereavement, thereby offering the mourner scriptural language through which to process loss within a framework of ultimate divine justice.
+
+
+================================================================================
+PHRASE GROUP 26 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:13
+  Hebrew Phrase: מַֽלְכוּתְךָ֗ מַלְכ֥וּת כׇּל־עֹלָמִ֑ים וּ֝מֶֽמְשַׁלְתְּךָ֗ בְּכׇל־דּ֥וֹר וָדֹֽר׃
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase מַלְכוּתְךָ מַלְכוּת כׇּל־עֹלָמִים וּמֶמְשַׁלְתְּךָ בְּכׇל־דּוֹר וָדֹר (Your kingdom is a kingdom of all eternities, and Your dominion is in every generation) from Psalm 145:13 appears in the Mussaf Amidah for the Pilgrimage Festivals according to the Edot HaMizrach (Eastern Sephardic) tradition. This verse is integrated into the festival liturgy at a point where the congregation affirms God's eternal sovereignty and perpetual dominion, themes particularly resonant with the celebration of the appointed seasons when Israel gathered to acknowledge divine kingship. The liturgical context surrounding this phrase includes passages such as יָצָאתָ לְיֵשַׁע עַמֶּךָ לְיֵשַׁע אֶת־מְשִׁיחֶךָ (You went forth to save Your people, to save Your anointed), which reinforces the connection between God's eternal rule and His active redemption of Israel. The inclusion of this specific psalm verse in the Mussaf service underscores the liturgical emphasis on recognizing divine majesty across all time and generations, a theological principle central to the festival observance in the Mizrahi rite. The phrase's appearance in this formal prayer context, rather than in supplementary devotional material, indicates its significance as a core theological statement within the official festival liturgy of Eastern Jewish communities.
+
+
+================================================================================
+PHRASE GROUP 27 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:2
+  Hebrew Phrase: בְּכׇל־י֥וֹם אֲבָרְכֶ֑ךָּ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase בְּכׇל־י֥וֹם אֲבָרְכֶ֑ךָּ (I will bless You every day) from Psalm 145:2 appears in Jewish liturgy specifically within the Kedushah section of the Chazan's Repetition during the Yom Kippur Shacharit Amidah in the Ashkenazi tradition. Within this highly elaborate liturgical block, which incorporates extensive piyyutim (liturgical poems) throughout the first two blessings of the Amidah, the phrase is recited responsively by the congregation as part of a call-and-response structure built upon verses from Psalm 145. The liturgy presents this exchange: the Chazan sings "שַֽׁחַר וָנֶֽשֶׁף אֲיַחֵד לְהַמְלִיכֶֽךָ. שׁוֹכֵן עַד וְאֵין כְּעֶרְכֶּֽךָ" (Dawn and dusk I unite to make You king; Eternal One who dwells, there is none like You), to which the congregation responds: "בְּכָל יוֹם אֲבָרְכֶֽךָּ" (Every day I will bless You). This congregational response affirms the daily, perpetual nature of blessing and praise, a theme particularly resonant on the Day of Atonement when the community gathers to renew its covenant with the Divine. The integration of this Psalm verse into the High Holiday liturgy, specifically within the Kedushah—the holiness proclamation that stands at the heart of the Amidah—underscores the tradition's emphasis on continuous daily devotion as central to the penitential experience.
+
+
+================================================================================
+PHRASE GROUP 28 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:9
+  Hebrew Phrase: טוֹב־יְהֹוָ֥ה לַכֹּ֑ל
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:9 in Jewish Liturgy
+
+The phrase טוֹב־יְהֹוָה לַכֹּל (The Lord is good to all) appears within the Kedushah section of the Chazan's Repetition during the Yom Kippur Shacharit Amidah in the Ashkenazi tradition, where it functions as part of an intricate call-and-response structure woven throughout the High Holiday piyyutim. Within this solemn liturgical context, the congregation responds to the cantor's invocation with the psalmaic affirmation, as evidenced in the liturgical sequence: "יְהֹוָה: חזן: יָהּ כֹּֽפֶר אֶשְׁכֹּל. יִכְבּשׁ עִוּוּיֵֽנוּ וְיֹאמְרוּ הַכֹּל: קהל: טוֹב יְהֹוָה לַכֹּל: חזן וקהל: אָֽנָּא סְלַח נָא" (The cantor: "May He cover our iniquities, and let all say: Congregation: The Lord is good to all. Cantor and congregation: We beseech You, forgive, we pray"). This integration of the Psalm verse into the Kedushah reflects a sophisticated liturgical strategy in which the declaration of God's universal goodness functions as a congregational affirmation that punctuates the cantor's penitential poetry on the Day of Atonement. The placement of this phrase within the expanded piyyutim framework characteristic of Ashkenazi High Holiday liturgy underscores the theological assertion that even amid the solemnity of Yom Kippur's confessional prayers, the community affirms God's fundamental benevolence toward all creation.
+
+
+================================================================================
+PHRASE GROUP 29 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:15
+  Hebrew Phrase: עֵֽינֵי־כֹ֭ל אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase עֵינֵי־כֹל אֵלֶיךָ יְשַׂבֵּֽרוּ from Psalm 145:15 ("The eyes of all look to You in hope") appears in the Ashkenazi Yom Kippur Shacharit liturgy as part of a sophisticated call-and-response structure embedded within the Chazan's Repetition of the Amidah. Specifically, the congregation recites this verse from Psalm 145 as a congregational response during the Kedushah section, which is heavily interwoven with piyyutim (liturgical poems) characteristic of High Holiday expansions. The liturgical context shows the phrase functioning within an extended poetic dialogue, as the liturgy records: "חזן: מַבִּֽיעֵי טוּבְךָ בְּוַֽעַד יִתְחַבֵּֽרוּ. מֵחִים חֲשׁוֹב תַּֽחַן יְדַבֵּֽרוּ: קהל: עֵינֵי כֹל אֵלֶֽיךָ יְשַׂבֵּֽרוּ" (Chazan: "Those who proclaim Your goodness shall gather together..." Congregation: "The eyes of all look to You in hope"). This integration of Psalm 145 into the Kedushah during the Amidah's Chazan's Repetition demonstrates how biblical verses are repurposed to heighten the liturgical drama of the Day of Atonement, with the congregation's response emphasizing universal human dependence upon divine providence at a moment of intense spiritual petition. The phrase's placement as a congregational interjection underscores the participatory nature of Yom Kippur worship in the Ashkenazi rite, transforming the psalm verse into a collective affirmation of trust in God's sustenance.
+
+
+================================================================================
+PHRASE GROUP 30 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:8
+  Hebrew Phrase: חַנּ֣וּן וְרַח֣וּם יְהֹוָ֑ה אֶ֥רֶךְ אַ֝פַּ֗יִם וּגְדׇל־חָֽסֶד׃
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary on Psalm 145:8 in Jewish Liturgy
+
+The phrase חַנּוּן וְרַחוּם יְהֹוָה אֶרֶךְ אַפַּיִם וּגְדׇל־חָֽסֶד (Gracious and merciful is the Lord, slow to anger and great in mercy) appears in the Sefard tradition's Torah Service during Shacharit on Shabbat and Festivals, specifically within the composite liturgical block for Hotza'at Sefer Torah (Taking the Torah from the Ark). The phrase is recited as part of a supplementary verse collection that precedes the central Aramaic prayer Brich Shmei, which accompanies the Torah's procession to the bimah. Within this liturgical context, the phrase is embedded in a sequence that reads: וְהָדָר לְפָנָיו עֹז וְחֶדְוָה בִּמְקוֹמוֹ כִּי עִמְּךָ הַסְּלִיחָה לְמַעַן תִּוָּרֵא חַנּוּן וְרַחוּם יְהֹוָה אֶרֶךְ אַפַּיִם וּגְדָל חָסֶד בְּאוֹר פְּנֵי מֶלֶךְ חַיִּים וּרְצוֹנוֹ (And splendor before Him, strength and joy in His place; for with You is forgiveness, that You may be feared; Gracious and merciful is the Lord, slow to anger and great in mercy; in the light of the King of Life's countenance and His will). This placement emphasizes themes of divine mercy and forgiveness at the moment when the community encounters the Torah scroll, establishing a spiritual atmosphere of reverence tempered by confidence in God's compassionate attributes. The invocation of these divine qualities—particularly God's patience and abundant mercy—serves as a theological prelude to the public reading of Torah, reminding the congregation of the merciful God whose word they are about to hear.
+
+
+================================================================================
+PHRASE GROUP 31 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:9-16
+  Hebrew Phrase: [Psalm 145: 16, 9]
+
+Summary:
+--------------------------------------------------------------------------------
+# Psalm 145:9, 16 in Jewish Liturgy
+
+Psalm 145, verses 9 and 16, appear in the Siddur Edot HaMizrach as part of the Eser Zekhirot (Ten Remembrances), a series of meditative verses recited during the preparatory prayers of the weekday Shacharit service. This liturgical composition functions as an introductory supplement to the morning blessings, establishing a contemplative framework before the main service proceeds. The specific verses from Psalm 145 are integrated into this meditative sequence, which draws upon key biblical passages to evoke central themes of Jewish theology and history. Within this context, the liturgy presents the psalmist's affirmation of divine providence and sustenance, as expressed in the passage: "טוֹב ה' לַכֹּל וְרַחֲמָיו עַל כָּל מַעֲשָׂיו... אַתָּה פּוֹתֵחַ אֶת יָדְךָ וּמַשְׂבִּיעַ לְכָל חַי רָצוֹן" (The Lord is good to all, and His mercies are upon all His works... You open Your hand and satisfy the desire of every living thing). The placement of these verses in the Eser Zekhirot underscores their role in cultivating spiritual readiness and gratitude as the worshiper enters the formal prayer service, making them a distinctive feature of the Mizrachi tradition's approach to morning devotion.
+
+
+================================================================================
+PHRASE GROUP 32 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:3
+  Hebrew Phrase: גָּ֘ד֤וֹל יְהֹוָ֣ה וּמְהֻלָּ֣ל מְאֹ֑ד וְ֝לִגְדֻלָּת֗וֹ אֵ֣ין חֵֽקֶר׃
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: Psalm 145:3 in Jewish Liturgy
+
+The verse "גָּדוֹל יְהֹוָה וּמְהֻלָּל מְאֹד וְלִגְדֻלָּתוֹ אֵין חֵֽקֶר" (Great is the Lord and highly praised; His greatness is unsearchable) appears within the Selichot and Vidui (confessional prayers) recited during the Maariv service on Yom Kippur night in the Ashkenazi tradition. This biblical verse is integrated into the extensive penitential block that constitutes the fourth blessing of the Amidah, where it functions as part of a liturgical sequence that emphasizes divine greatness and mercy in the context of confession and atonement. The liturgy presents the verse in a composite passage that reads: "כִּי גָדוֹל מֵעַל שָׁמַֽיִם חַסְדֶּֽךָ, וְעַד שְׁחָקִים אֲמִתֶּֽךָ: גָּדוֹל יְהֹוָה וּמְהֻלָּל מְאֹד, וְלִגְדֻלָּתוֹ אֵין חֵֽקֶר" (Your mercy is great above the heavens, and Your truth reaches to the skies; Great is the Lord and highly praised, and His greatness is unsearchable), thereby framing human confession against the backdrop of God's infinite majesty and mercy. The phrase appears within this penitential context as part of the liturgical framework that surrounds the recitation of the Thirteen Attributes of Mercy, underscoring the theological principle that confession and repentance are appropriately directed toward a God whose greatness transcends human comprehension. This placement reflects a fundamental liturgical strategy on Yom Kippur: the acknowledgment of divine transcendence and inscrutability serves to elevate the significance of human repentance and to invoke divine compassion during the Day of Atonement.
+
+
+================================================================================
+PHRASE GROUP 33 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:14
+  Hebrew Phrase: סוֹמֵ֣ךְ יְ֭הֹוָה לְכׇל־הַנֹּפְלִ֑ים
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase סוֹמֵךְ יְהֹוָה לְכׇל־הַנֹּפְלִים ("The Lord sustains all who fall") from Psalm 145:14 appears in Jewish liturgy specifically within the piyyut "Ashreinu Ma Tov Chelkeinu" (Hilula d'Bar Yochai), an alphabetic acrostic recited during Lag Ba'Omer celebrations in the Sefard tradition. This liturgical poem is part of special communal observances rather than the formal daily prayer service, and it commemorates the Hilula (anniversary of passing) of Rabbi Shimon bar Yochai through a series of supplications, each followed by the refrain "in the merit of the celebration of Bar Yochai." The phrase appears within this devotional context as follows: "הִלּוּלָא דְבַּר יוֹחַאי: אַשְׁרֵנוּ מַה טוֹב חֶלְקֵנוּ בְּהִלּוּלָא דְבַּר יוֹחַאי: סוֹמֵךְ יְהֹוָה לְכׇל־הַנֹּפְלִים, בִּזְכוּת הִלּוּלָא דְבַּר יוֹחַאי" ("The Hilula of Bar Yochai: Happy are we, how good is our portion in the Hilula of Bar Yochai: The Lord sustains all who fall, in the merit of the Hilula of Bar Yochai"). The invocation of this verse from Psalms emphasizes divine compassion and support, themes particularly resonant with the mystical celebration of the righteous sage's spiritual legacy. This usage demonstrates how biblical language is woven into specialized piyyutim to enhance the spiritual significance of commemorative occasions within Jewish tradition.
+
+
+================================================================================
+PHRASE GROUP 34 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:18
+  Hebrew Phrase: קָר֣וֹב יְ֭הֹוָה לְכׇל־קֹרְאָ֑יו
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase קָרוֹב יְהֹוָה לְכׇל־קֹרְאָיו ("The Lord is near to all who call upon Him") from Psalm 145:18 appears in Jewish liturgy within the piyyut Ashreinu Ma Tov Chelkeinu, an alphabetic acrostic composed to commemorate the Hilula d'Bar Yochai—the anniversary of Rabbi Shimon bar Yochai's passing—celebrated on Lag Ba'Omer. This liturgical poem, preserved in the Siddur Sefard, is typically recited or sung during communal celebrations associated with this festival rather than as part of the formal statutory prayer service. The phrase is integrated into the piyyut's structure as part of a series of supplications, each followed by the refrain בִּזְכוּת הִלּוּלָא דְבַּר יוֹחָאי ("in the merit of the celebration of Bar Yochai"), as exemplified in the liturgical context: הִלּוּלָא דְבַּר יוֹחָאי אַשְׁרֵנוּ מַה טוֹב חֶלְקֵנוּ בְּהִלּוּלָא דְבַּר יוֹחָאי קָרוֹב יְהֹוָה לְכָל קֹרְאָיו בִּזְכוּת הִלּוּלָא דְבַּר יוֹחָאי. The invocation of God's proximity to those who call upon Him serves to reinforce the spiritual intimacy and divine accessibility celebrated during this commemoration of the Kabbalistic master. Thus, this Psalmist affirmation appears as a special liturgical supplement rather than in the core statutory prayers, reflecting the devotional and commemorative character of Lag Ba'Omer observance.
+
+
+================================================================================
+PHRASE GROUP 35 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:5
+  Hebrew Phrase: הֲ֭דַר כְּב֣וֹד
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase הֲדַר כְּבוֹד (the splendor of glory) from Psalm 145:5 appears in the Rosh Hashanah liturgy of the Edot HaMizrach tradition, specifically within a composite liturgical block recited after the Chazzan's repetition of the Shacharit Amidah. Rather than appearing in the main prayers themselves—Avinu Malkeinu and the Kaddish Titkabal—the phrase is embedded within the extensive collection of piyyutim (liturgical poems) that conclude this block, serving as part of the poetic embellishment of the morning service on the High Holiday. The liturgical context preserves the phrase within a hymnic passage that celebrates divine glory and the testimony of the heavens: כְּבוֹדְךָֽ, וְעֹז יָדְךָ, מְסַפְּרִים הַשָּׁמַיִם. בְּעֵת עֲלוֹתָם, וְעֵת פְּנוֹתָם, וְעֵת שְׁחוֹתָם אַפַּיִם. וּמַלְאָכִים, נֶהֱלָכִים, בְּתוֹךְ אַבְנֵי אֵשׁ וּמַיִם ("Your glory and the strength of Your hand, the heavens declare. At their rising and at their setting, and at their bowing down. And angels walk in the midst of stones of fire and water"). This single attestation reflects the selective incorporation of Psalm 145 into the Rosh Hashanah piyyutim tradition, where the phrase reinforces themes of divine majesty and cosmic testimony appropriate to the Day of Judgment.
+
+
+================================================================================
+PHRASE GROUP 36 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:5
+  Hebrew Phrase: כְּב֣וֹד הוֹדֶ֑ךָ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary: כְּב֣וֹד הוֹדֶ֑ךָ in Jewish Liturgy
+
+The phrase כְּב֣וֹד הוֹדֶ֑ךָ (the glory of Your praise) from Psalm 145:5 appears in the Ashkenazi Yom Kippur Machzor as part of the devotional piyyutim recited on the eve of the holy day, specifically within the liturgical complex of Shir HaYichud and Anim Zemirot (Song of Glory). This collection of hymns and psalms is recited by certain communities before or after the formal Maariv service, functioning as an extended devotional supplement that establishes the spiritual atmosphere for the Day of Atonement. The phrase is integrated into a responsive exchange between cantor and congregation, where the liturgy declares: וְלֹא יָרַֽשְׁתָּ מֶמְשַׁלְתֶּֽךָ: חזן לְעוֹלָם יְהֵא לְךָ לְבַדֶּֽךָ, וְלֹא לַאֲחֵרִים כְּבוֹד הוֹדֶֽךָ: קהל וְלֹא תִתֵּן לֵאלֹהִים אֲחֵרִים (Your dominion shall remain Yours alone forever, and not to others shall the glory of Your praise belong; we shall not give Your praise to other gods). The recitation of this phrase within the framework of Anim Zemirot, which emphasizes the uniqueness and incomparability of the divine, underscores the penitential and affirmatory character of Yom Kippur liturgy, as worshippers solemnly recommit themselves to exclusive devotion to the God of Israel. This usage reflects the broader liturgical function of Psalm 145 in Jewish prayer, where its affirmations of divine majesty and praise are particularly resonant during the High Holiday season.
+
+
+================================================================================
+PHRASE GROUP 37 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:3
+  Hebrew Phrase: וּמְהֻלָּ֣ל מְאֹ֑ד וְ֝לִגְדֻלָּת֗וֹ אֵ֣ין
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase וּמְהֻלָּל מְאֹד וְלִגְדֻלָּתוֹ אֵין חֵקֶר (praised greatly, and His greatness has no measure) appears within Psalm 145, which serves as an introductory element in the Selichot service for the Fast of Gedalia in the Ashkenazi tradition. Rather than appearing in the main penitential prayers themselves, this phrase is encountered as part of the Ashrei (Psalm 145) recitation that opens the liturgical block, preceding the extensive collection of penitential verses and the central recitation of the Thirteen Attributes of Mercy. The liturgical context preserves the full acrostic psalm in its traditional sequence: "גָּדוֹל יְיָ וּמְהֻלָּל מְאֹד וְלִגְדֻלָּתוֹ אֵין חֵקֶר. דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ וּגְבוּרֹתֶיךָ יַגִּידוּ. הֲדַר כְּבוֹד הוֹדֶךָ" (Great is the Lord and greatly praised, and His greatness has no measure. Generation to generation shall praise Your works and declare Your mighty deeds. The splendor of the glory of Your majesty). This placement of Psalm 145 as a liturgical prelude to Selichot establishes a theological framework for the penitential prayers that follow, moving from praise of God's infinite greatness to supplication for mercy on a communal fast day. The phrase thus functions within the broader structure of the fast day liturgy as an affirmation of divine majesty that contextualizes the subsequent confessional and intercessory elements of the service.
+
+
+================================================================================
+PHRASE GROUP 38 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:5
+  Hebrew Phrase: הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ וְדִבְרֵ֖י
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase הֲדַר כְּבוֹד הוֹדֶךָ וְדִבְרֵי (the splendor of the glory of Your praise and the words of) appears within Psalm 145, which serves as an introductory recitation in the Selichot service for the Fast of Gedalia according to the Ashkenazi rite. Within this penitential liturgy, Psalm 145 (Ashrei) is recited at the beginning of the service, preceding the central confessional prayers and the invocation of the Thirteen Attributes of Mercy. The liturgical context preserves the verse in its fuller form, as the siddur incorporates the surrounding verses: "מְאֹד וְלִגְדֻלָּתוֹ אֵין חֵקֶר. דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ וּגְבוּרֹתֶיךָ יַגִּידוּ. הֲדַר כְּבוֹד הוֹדֶךָ וְדִבְרֵי נִפְלְאוֹתֶיךָ אָשִׂיחָה" (Your greatness is beyond measure; generation after generation will praise Your works and declare Your mighty deeds; the splendor of Your glorious praise and the account of Your wondrous deeds I shall meditate upon). This placement of Psalm 145 as an opening hymn establishes a framework of divine praise and acknowledgment of God's attributes before the community enters into confession and supplication on this minor fast day. The phrase thus functions within the broader liturgical strategy of Selichot, wherein praise precedes petition, and recognition of divine majesty frames the penitential petitions that follow.
+
+
+================================================================================
+PHRASE GROUP 39 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:6
+  Hebrew Phrase: וֶעֱז֣וּז נֽוֹרְאֹתֶ֣יךָ יֹאמֵ֑רוּ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase וֶעֱזוּז נוֹרְאוֹתֶיךָ יֹאמֵרוּ ("the strength of Your awesome deeds they shall declare") from Psalm 145:6 appears in Jewish liturgy as part of the introductory recitation of Ashrei (Psalm 145), which precedes the central Selichot service on the Fast of Gedalia in the Ashkenaz tradition. This fast day observance, commemorating the assassination of Gedaliah ben Ahikam, incorporates Psalm 145 as a liturgical prelude to the main penitential prayers, establishing a tone of praise and acknowledgment of divine power before the congregation moves into the confessional and supplicatory elements of the service. The phrase appears within the broader liturgical context where it is surrounded by related verses of praise: "יְשַׁבַּח מַעֲשֶׂיךָ וּגְבוּרֹתֶיךָ יַגִּידוּ. הֲדַר כְּבוֹד הוֹדֶךָ וְדִבְרֵי נִפְלְאוֹתֶיךָ אָשִׂיחָה. וֶעֱזוּז נוֹרְאוֹתֶיךָ יֹאמֵרוּ וּגְדוּלָּתְךָ אֲסַפְּרֶנָּה" ("Let my mouth speak the praise of the Lord... The might of Your awesome deeds they shall declare, and Your greatness I shall recount"). The inclusion of this phrase in the Selichot framework demonstrates how Psalm 145's emphasis on God's mighty and awesome deeds serves as a liturgical foundation for penitential prayer, reminding the community of divine power and majesty even as they approach God in confession and supplication during a day of fasting and communal repentance.
+
+
+================================================================================
+PHRASE GROUP 40 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:9
+  Hebrew Phrase: לַכֹּ֑ל וְ֝רַחֲמָ֗יו
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase לַכֹּל וְרַחֲמָיו ("to all, and His mercies") from Psalm 145:9 appears in Jewish liturgy within the Selichot service recited on the Fast of Gedalia, a minor fast day observed in the Jewish calendar. Specifically, this phrase is incorporated into the introductory section of the Selichot service in the Ashkenazi rite, where it appears as part of the opening recitation of Psalm 145 (Ashrei) that precedes the main body of penitential prayers. The liturgical context preserves the phrase within a broader passage that emphasizes God's benevolence and compassion: "טוֹב יְיָ לַכֹּל וְרַחֲמָיו עַל כָּל מַעֲשָׂיו" ("The Lord is good to all, and His mercies extend over all His works"), which is immediately followed by verses celebrating God's praise and kindness. This placement at the beginning of the Selichot service is theologically significant, as it establishes a foundational affirmation of divine mercy before the community proceeds to recite the penitential confessions and the Thirteen Attributes of Mercy that form the core of the service. The phrase thus serves to frame the entire penitential experience within a context of trust in God's fundamental goodness and compassionate nature, even as the worshipping community seeks forgiveness for transgressions.
+
+
+================================================================================
+PHRASE GROUP 41 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:18
+  Hebrew Phrase: לְכׇל־קֹרְאָ֑יו לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase "קָרוֹב יְיָ לְכָל קֹרְאָיו לְכֹל אֲשֶׁר יִקְרָאֻהוּ בֶאֱמֶת" (The Lord is near to all who call upon Him, to all who call upon Him in truth) from Psalm 145:18 appears in the Ashkenazi liturgical tradition as part of the extended scriptural recitation that precedes the central petitions of the Selichot service on the Fast of Gedalia. The phrase is encountered within the broader context of Psalm 145 (Ashrei), which serves as an introductory supplement to the main body of Selichot, beginning the service before the penitential verses (Tachanun) and the recitation of the Thirteen Attributes of Mercy. Within this liturgical block, the verse appears embedded in a longer passage of consolatory and penitential material: "צַדִּיק יְיָ בְּכָל דְּרָכָיו וְחָסִיד בְּכָל מַעֲשָׂיו. קָרוֹב יְיָ לְכָל קֹרְאָיו לְכֹל אֲשֶׁר יִקְרָאֻהוּ בֶאֱמֶת. רְצוֹן יְרֵאָיו יַעֲשֶׂה וְאֶת שַׁוְעָתָם יִשְׁמַע וְיוֹשִׁיעֵם" (The Lord is righteous in all His ways and faithful in all His deeds. The Lord is near to all who call upon Him, to all who call upon Him in truth. He fulfills the desire of those who fear Him; He hears their cry and saves them). The placement of this verse at the opening of the Fast Day Selichot service establishes a theological foundation for the subsequent penitential recitations by affirming God's accessibility and responsiveness to sincere prayer—a particularly significant assurance as the community enters a day of fasting and supplication.
+
+
+================================================================================
+PHRASE GROUP 42 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:1
+  Hebrew Phrase: אֲרוֹמִמְךָ֣ אֱלוֹהַ֣י הַמֶּ֑לֶךְ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase אֲרוֹמִמְךָ אֱלוֹהַי הַמֶּלֶךְ ("I will exalt You, my God the King") from Psalm 145:1 appears in the Ashkenazi High Holiday liturgy as part of a responsorial exchange during the Chazan's Repetition of the Yom Kippur Shacharit Amidah, specifically within the Kedushah section. This occurrence is embedded within an elaborate composite liturgical block that weaves together the standard opening blessings of the Amidah with an intricate series of piyyutim (liturgical poems) characteristic of High Holiday worship. The liturgical context shows the Chazan intoning "מוֹרֶה חַטָּאִים סְלוֹל לְהִתְהַלֵּךְ. מְלַמֵּד לְהַדְרִֽיכִי בְּדֶֽרֶךְ אֵלֵךְ" (Teaching sinners the path to walk, instructing those who go astray in the way), after which the congregation responds with the Psalmist's declaration: "אֲרוֹמִמְךָ אֱלוֹהַי הַמֶּֽלֶךְ" (I will exalt You, my God the King). The phrase functions liturgically as a congregational affirmation of divine sovereignty and majesty, punctuating the Chazan's poetic meditations on divine instruction and guidance. This responsorial structure transforms Psalm 145 into a call-and-response dialogue, allowing the community to participate actively in the sanctification of God's name during the most solemn day of the Jewish calendar, thereby reinforcing themes of repentance, divine kingship, and communal petition that characterize Yom Kippur worship.
+
+
+================================================================================
+PHRASE GROUP 43 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:4
+  Hebrew Phrase: דּ֣וֹר לְ֭דוֹר יְשַׁבַּ֣ח מַעֲשֶׂ֑יךָ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ ("Generation to generation shall praise Your works") from Psalm 145:4 appears in Jewish liturgy as a congregational response within the Chazan's Repetition of the Amidah during the Yom Kippur Shacharit service in the Ashkenazi tradition. Specifically, the phrase functions as part of an elaborate call-and-response structure embedded within the Kedushah section, which is heavily interwoven with piyyutim (liturgical poems) characteristic of High Holiday worship. The liturgical context shows the congregation responding with this verse after the Chazan recites: "מְיַחֲלִים לְחַסְדְּךָ זֶֽרַע עֲמוּסֶֽיךָ. מַלֵּא מִשְׁאֲלוֹתָם וְיִשְׂמְחוּ חוֹסֶֽיךָ" (Those who hope for Your mercy, the seed of Your afflicted ones—fulfill their requests and let Your sheltered ones rejoice), establishing a responsive dialogue between the prayer leader and community. This integration of Psalm 145 into the Kedushah underscores the theological emphasis of Yom Kippur on divine praise and the perpetual transmission of God's deeds across generations, transforming the individual psalm verse into a communal affirmation of eternal divine providence. The phrase's placement within this expanded liturgical block demonstrates how biblical poetry is woven into the most solemn moments of the Jewish liturgical year, giving congregational voice to themes of generational continuity and universal praise.
+
+
+================================================================================
+PHRASE GROUP 44 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:7
+  Hebrew Phrase: זֵ֣כֶר רַב־טוּבְךָ֣ יַבִּ֑יעוּ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase זֶֽכֶר רַב טוּבְךָ יַבִּֽיעוּ ("They shall utter the memory of Your abundant goodness") from Psalm 145:7 appears in the Ashkenazi High Holiday liturgy during the Chazan's Repetition of the Amidah on Yom Kippur morning, specifically within the Kedushah section of the Shacharit service. This occurrence is embedded within an elaborate piyyutic framework characteristic of High Holiday worship, where the chazan and congregation engage in a call-and-response pattern drawing extensively from Psalm 145. The liturgical context shows the congregation responding to the chazan's recitation with the words: "חזן: רוֹן פְּגִיעוֹת לְפָנֶֽיךָ יְרַבֵּֽעוּ. רַֽחַשׁ הִלּוּלָךְ בַּיּוֹם יְשַׂבֵּֽעוּ: קהל: זֶֽכֶר רַב טוּבְךָ יַבִּֽיעוּ" (the chazan: "May the sound of petitions before You multiply... May the whisper of Your praise satisfy on the day:" the congregation: "They shall utter the memory of Your abundant goodness"). In this liturgical setting, the phrase functions as a congregational affirmation of God's goodness during the most solemn day of the Jewish calendar, where the community collectively testifies to divine benevolence even as they seek atonement. The integration of this Psalm 145 material into the Kedushah—the holiness proclamation at the heart of the Amidah—elevates the theme of remembering God's abundant goodness to a central position in the Day of Atonement's theology of repentance and reconciliation.
+
+
+================================================================================
+PHRASE GROUP 45 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:11
+  Hebrew Phrase: כְּב֣וֹד מַלְכוּתְךָ֣ יֹאמֵ֑רוּ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase כְּבוֹד מַלְכוּתְךָ יֹאמֵֽרוּ (the glory of Your kingdom they shall declare), drawn from Psalm 145:11, appears in the Ashkenazi High Holiday liturgy as part of a responsorial structure within the Chazan's Repetition of the Yom Kippur Shacharit Amidah. Specifically, the phrase is integrated into the Kedushah section, which forms the climactic moment of the Amidah's opening blessings and is heavily ornamented with piyyutim (liturgical poems) characteristic of High Holiday practice. The liturgical context shows the phrase functioning as the congregation's response (קהל), following the Chazan's (חזן) recitation of poetic verses: the Chazan intones "לְוִיֶּֽיךָ וַחֲסִידֶֽיךָ בְּנֹֽעַם יְזַמֵּֽרוּ. לְבוּשֵׁי שְׂרָד רֶֽקַח יְתַמֵּֽרוּ" (Your Levites and pious ones shall sing with sweetness; those clothed in fragrant myrrh shall rejoice), and the congregation responds with "כְּבוֹד מַלְכוּתְךָ יֹאמֵֽרוּ" (the glory of Your kingdom they shall declare). This call-and-response pattern, rooted in Psalm 145's celebration of divine majesty, transforms the Kedushah from a moment of angelic praise into a communal affirmation of God's sovereignty on the Day of Judgment. The insertion of this Psalmaic phrase into the High Holiday liturgy thus reinforces the theological emphasis on divine kingship and judgment that characterizes Yom Kippur observance in the Ashkenazi tradition.
+
+
+================================================================================
+PHRASE GROUP 46 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:12
+  Hebrew Phrase: לְהוֹדִ֤יעַ ׀ לִבְנֵ֣י הָ֭אָדָם
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase לְהוֹדִֽיעַ לִבְנֵי הָאָדָם ("to make known to the children of humanity") from Psalm 145:12 appears in the Ashkenazi High Holiday liturgy specifically during the Chazan's Repetition of the Amidah on Yom Kippur morning, integrated into the Kedushah section through an elaborate call-and-response structure featuring piyyutim (liturgical poems). Within this solemn context, the congregation responds to the Chazan's recitation with the phrase drawn from Psalm 145, as the liturgy states: "חזן: וּשְׁתוּלִים בְּנָוָךְ יַפְרִֽיחוּ בְּחַצְרוֹתָיו. וִינוּבוּן בְּשֵׂיבָה דְּשֵׁנִים בְּטִירוֹתָיו: קהל: לְהוֹדִֽיעַ לִבְנֵי הָאָדָם גְּבוּרוֹתָיו" (The Chazan: "Those planted in Your house shall flourish in Your courtyards, bearing fruit in old age with vigor in Your fortresses: Congregation: To make known to the children of humanity His mighty deeds"). This liturgical deployment transforms the psalmist's declaration into a congregational affirmation of God's power and majesty, placing it strategically within the High Holiday Kedushah, where the theme of divine revelation to humanity achieves particular resonance on the Day of Atonement. The phrase thus functions not merely as scriptural citation but as an integral component of the piyyutim framework that characterizes Ashkenazi High Holiday liturgy, allowing the congregation to participate actively in proclaiming God's might to all humanity.
+
+
+================================================================================
+PHRASE GROUP 47 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:14
+  Hebrew Phrase: סוֹמֵ֣ךְ יְ֭הֹוָה
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase סוֹמֵךְ יְהֹוָה (the Lord sustains) from Psalm 145:14 appears in the High Holiday liturgy of the Ashkenazi tradition, specifically integrated into the Chazan's Repetition of the Amidah during the Kedushah section of Yom Kippur Shacharit. Within this elaborate liturgical structure, which is heavily ornamented with piyyutim (liturgical poems) characteristic of High Holiday observance, the congregation responds to the Chazan's poetic invocation with the verse: חזן: יַֽחַד בְּכַנֶּסְךָ לְשִׁכְנְךָ גְּאוּלִים. יַלְבִּישֽׁוּךָ עֹז כְּעוֹבְרֵי גַלִּים: קהל: סוֹמֵךְ יְהֹוָה לְכָל הַנּוֹפְלִים ('The Lord sustains all who are falling'). This responsorial structure, wherein the congregation punctuates the Chazan's elaborate poetic elaborations with biblical verses, serves a dual liturgical function: it grounds the abstract theological imagery of the piyyutim in scriptural authority while simultaneously inviting congregational participation in the solemnities of the Day of Atonement. The invocation of divine sustenance at this particular juncture—within the Kedushah, the holiness proclamation that constitutes the climax of the Amidah—underscores the theological emphasis on God's merciful support of the penitent on Yom Kippur, transforming the abstract concept of divine holiness into an immediate, personal experience of divine compassion.
+
+
+================================================================================
+PHRASE GROUP 48 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:16
+  Hebrew Phrase: פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary on Psalm 145:16 in Jewish Liturgy
+
+The phrase פּוֹתֵחַ אֶת־יָדֶךָ ("You open Your hand") from Psalm 145:16 appears in the Ashkenazi Yom Kippur Shacharit liturgy, specifically within the Chazan's Repetition of the Amidah during the Kedushah section. This occurrence is situated within an elaborate liturgical block that interweaves the standard blessings of Avot and Gevurot with an intricate series of piyyutim (liturgical poems) characteristic of High Holiday worship. The phrase functions as a congregational response within a call-and-response structure built upon verses from Psalm 145, as evidenced by the liturgical context: "חזן: וִדּוּיָם יְנֽוֹחַח כְּשַׁי עָדֶֽיךָ. וִישֻׁלַּם פָּרִים אֶֽרֶשׁ עֵדֶֽיךָ: קהל: פּוֹתֵֽחַ אֶת יָדֶֽךָ" (Chazan: "May their confession be pleasing as an offering before You... and may bulls be rendered acceptable at Your altars." Congregation: "You open Your hand"). In this solemn context, the phrase evokes the psalmist's affirmation of divine providence and abundance, reinforcing the penitential themes of Yom Kippur by reminding the congregation of God's sustaining mercy even as they seek atonement. The integration of this phrase into the Kedushah—the holiness declaration at the heart of the Amidah—elevates it to a central position in the day's liturgical theology, where human confession is met with the recognition of God's open-handed benevolence.
+
+
+================================================================================
+PHRASE GROUP 49 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:17
+  Hebrew Phrase: צַדִּ֣יק יְ֭הֹוָה בְּכׇל־דְּרָכָ֑יו
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Narrative
+
+The phrase "צַדִּיק יְהֹוָה בְּכׇל־דְּרָכָיו" (The Lord is righteous in all His ways) from Psalm 145:17 appears in the Ashkenazi High Holiday liturgy as part of a responsive call-and-response structure embedded within the Chazan's Repetition of the Yom Kippur Shacharit Amidah. Specifically, the phrase functions as a congregational response (Qehilat Kol) within the Kedushah section, which is heavily ornamented with piyyutim (liturgical poems) characteristic of High Holiday practice. The liturgical context shows the phrase integrated into a carefully constructed dialogue: the Chazan recites "סֶֽלָה בְּרַחֲמָיו יָצִיץ מֵחֲרַכָּיו. סְלֽוֹחַ יַרְבֶּה לְעַם מְבוֹרָכָיו" (He shines forth in His mercies from His dwelling; He multiplies forgiveness to His blessed people), to which the congregation responds with "צַדִּיק יְהֹוָה בְּכׇל־דְּרָכָיו" (The Lord is righteous in all His ways), followed by further exchange with "חִין יִֽשַׁע מִגּוֹי מְקוֹרָאָיו. חוֹן יָחוֹן קוֹרְאֵי מִקְרָאָיו" (He saves with grace from the nations who call upon Him; He shows mercy to those who call upon His proclamation). This responsorial incorporation of Psalm 145 during the Kedushah on Yom Kippur morning serves to affirm divine justice and righteousness at the climactic moment of the Amidah's repetition, allowing the congregation to participate actively in the liturgical affirmation of God's perfect righteousness in all His ways during the Day of Atonement.
+
+
+================================================================================
+PHRASE GROUP 50 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:20
+  Hebrew Phrase: שׁוֹמֵ֣ר יְ֭הֹוָה אֶת־כׇּל־אֹהֲבָ֑יו
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary Paragraph
+
+The phrase שׁוֹמֵר יְהֹוָה אֶת־כׇּל־אֹהֲבָיו ("The Lord guards all who love Him") from Psalm 145:20 appears in the Ashkenazi Yom Kippur Shacharit liturgy as part of a responsorial piyyut integrated within the Chazan's Repetition of the Amidah, specifically in the Kedushah section. This phrase functions as a congregational response (קהל) within a complex liturgical structure that weaves together biblical verses and poetic elaborations throughout the opening blessings and the Kedushah itself. The liturgical context demonstrates how this verse is embedded: קִוּוּי יִתֵּן לְלוֹ מַשְׁלִיךְ יְהָבָיו. קָדוֹשׁ פְּשָׁעֵֽינוּ יְכַסֶּה בַּאֲהָבָיו: קהל: שׁוֹמֵר יְהֹוָה אֶת כָּל אֹהֲבָיו, where the congregation punctuates the chazan's poetic meditations with this affirmation of divine protection. The placement of this phrase within the High Holiday Kedushah—the most solemn moment of the Amidah when the community joins the heavenly hosts in sanctification—underscores its theological significance: the assurance that God guards the faithful serves as a counterpoint to themes of divine judgment that dominate Yom Kippur liturgy. This responsorial use of Psalm 145:20 thus transforms a personal declaration of confidence into a communal affirmation of God's protective covenant with those who love Him, particularly resonant during the Day of Atonement when the community stands before divine judgment.
+
+
+================================================================================
+PHRASE GROUP 51 of 51
+================================================================================
+
+Identifier:
+  Verse Range: 145:16
+  Hebrew Phrase: פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י
+
+Summary:
+--------------------------------------------------------------------------------
+# Scholarly Commentary
+
+The phrase "פּוֹתֵחַ אֶת־יָדֶךָ וּמַשְׂבִּיעַ לְכׇל־חַי" (You open Your hand and satisfy every living thing) from Psalm 145:16 appears in the Ashkenazi liturgical tradition as part of the piyyut "Tzamah Nafshi," a special liturgical poem recited as a reshut (introductory prelude) before the first blessing of the Shema in the Maariv service. This piyyut is typically reserved for Shabbat and special occasions such as Shabbat Shuvah, the Shabbat of repentance preceding Yom Kippur. Within the poetic composition, the verse is integrated into a broader meditation on divine providence and remembrance, as evidenced in the liturgical context: "כָּל חַסְדֶיךָ תְּחַדֵּשׁ עַדֵיךָ ... פּוֹתֵחַ אֶת יָדֶךָ וּמַשְׂבִּיעַ לְכָּל חָי זְכוֹר אַהֲבַת קְדוּמִים וְהַחֲיֶה נִרְדָמִים" (Your mercies are renewed... You open Your hand and satisfy every living thing; remember the love of the ancients and revive those who sleep). The placement of this phrase within an introductory poem rather than within the main blessing itself reflects the piyyut's function as a contemplative preparation for the recitation of the Shema, inviting the worshipper to meditate on divine sustenance and faithfulness before engaging in the central act of accepting God's sovereignty. This usage demonstrates how biblical verses addressing God's providential care are woven into the special liturgical poetry of the Ashkenazi rite to deepen the spiritual and theological dimensions of evening prayer.
+
+
+================================================================================
+END OF RESEARCH BUNDLE
+================================================================================
+
+This research bundle contains everything needed for commentary generation:
+- Each phrase/verse is identified
+- Each has a scholarly LLM-generated summary of its liturgical usage
+- No raw data or metadata - just the curated summaries

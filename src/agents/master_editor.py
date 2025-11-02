@@ -101,6 +101,7 @@ Review the introduction and verse commentary for these issues:
 - Interesting insights from the Torah Temimah (re rabbinic use/interpretation) not included
 - Illuminating traditional commentary (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) not integrated
 - Research questions identified by Macro and Micro analysts not answered (even when answerable with available materials)
+- **Liturgical context not addressed**: The research bundle includes detailed information about where and how this psalm (or specific verses/phrases from it) appears in Jewish liturgy. This liturgical usage reveals how Jewish tradition has interpreted and valued the psalm and should be integrated naturally into the commentary
 - Weak, forced, unclear or incorrect phonetic analysis. ONLY NOTEWORTHY, STRONG and ILLUMINATING phonetic poetic devices should be pointed out (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm, meter).
 - Authorotative Phonetic transcription provided above in ### PSALM TEXT MUST BE USED to analyze sound patterns.
 - Stress analysis ignored: The phonetic transcriptions include stress marking where syllables in **BOLD CAPS** indicate stressed syllables based on Hebrew cantillation marks. For example, `mal-**KHŪTH**-khā` means the middle syllable KHŪTH receives primary stress. If you wish to analyze prosodic patterns, meter, or stress counts, you should add this analysis by counting the **BOLD CAPS** syllables.
@@ -185,15 +186,26 @@ First, provide a brief editorial assessment (200-400 words):
 - Does it provide insights beyond generic observations?
 - Are comparisons used to illuminate THIS psalm's distinctive usage?
 
-**Stage 2: Revised Introduction**
-Rewrite the introduction essay to address identified weaknesses. The revised introduction should:
+**Stage 2: Revised Introduction (TWO SECTIONS REQUIRED)**
+Rewrite the introduction to address identified weaknesses. The revised introduction must include TWO sections:
+
+**Section 1: Introduction Essay**
 - Maintain 800-1600 words (can be longer if genuinely warranted by interesting findings and/or length of the psalm)
 - Correct any factual errors
 - Surface missed insights from research materials, especially the Torah Temimah and traditional commentaries
 - Address answerable questions raised by the Macro and Micro analysts (weave answers into the essay where appropriate)
+- Integrate liturgical insights naturally where relevant (don't treat liturgy as separate topic)
 - Achieve the target style (Alter/Kugel/Bloom level)
 - Define technical terms for lay readers
 - Engage specific texts (Hebrew, LXX) with analysis
+
+**Section 2: Modern Jewish Liturgical Use (REQUIRED)**
+After the introduction essay, include a separate section titled "## Modern Jewish Liturgical Use" (150-300 words) that:
+- Summarizes where and how this psalm (or verses/phrases from it) appears in Jewish liturgy
+- Distinguishes between full recitations vs. individual verses/phrases quoted in prayers
+- Is specific about occasions (Weekday/Shabbat/Festivals), services (Shacharit/Mincha/Maariv), and traditions (Ashkenaz/Sefard/Edot HaMizrach)
+- Explains what the liturgical placement reveals about how Jewish tradition has understood and valued this psalm
+- Draws on the liturgical usage information provided in the research bundle
 
 **Stage 3: Revised Verse Commentary**
 Rewrite the verse-by-verse commentary to address identified weaknesses. For each verse:
@@ -216,6 +228,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
     - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
+    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally.
     - Church fathers and medieval Christian interpretation if very illuminating
     - Modern critical scholarship debates
   * Figurative language analysis (how does the usage of similar figuration elsewhere shed light on how it's functioning here?)
@@ -261,6 +274,10 @@ Return your response in this exact structure:
 ### REVISED INTRODUCTION
 
 [The complete revised introduction essay, 800-1400 words]
+
+## Modern Jewish Liturgical Use
+
+[A separate section (150-300 words) summarizing where and how this psalm appears in Jewish liturgy]
 
 ### REVISED VERSE COMMENTARY
 

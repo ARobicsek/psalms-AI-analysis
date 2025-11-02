@@ -98,19 +98,26 @@ Write a scholarly introduction essay that:
    - Show how this psalm's language echoes or innovates or is in conversation with other texts
    - Example: "The 'voice of YHWH' formula also appears in Psalm 18..."
 
-6. **Writes for an educated general reader**
+6. **Reflects on liturgical context and reception**
+   - The research bundle includes detailed information about where and how this psalm (or specific phrases from it) appears in Jewish liturgy
+   - Pay attention to liturgical usage patterns - they reveal how the psalm has been interpreted and valued in Jewish tradition
+   - Consider what the liturgical placement tells us about the psalm's meaning and reception
+   - Integrate liturgical insights naturally into your discussion - don't treat them as a separate topic
+   - Example: "The daily recitation of this verse in the Amidah suggests that Jewish liturgy understood it as..."
+
+7. **Writes for an educated general reader**
    - Scholarly rigor but accessible prose
    - Technical terms explained when necessary
    - Balance depth with readability
    - Novel insights are strongly encouraged
 
-7. **Uses proper citations**
+8. **Uses proper citations**
    - When referring to specific Hebrew verse, phrases and terms, cite in Hebrew and English
    - in Hebrew, replace the tegragrammaton with 'ה
    - When citing research, note the source (e.g., "BDB lexicon notes...", "Concordance shows...")
    - When referencing other texts, cite book/chapter/verse (e.g., "Gen 1:2", "KTU 1.4")
 
-8. **Stylistic guidelines**
+9. **Stylistic guidelines**
 You are a distinguished professor of biblical literature, akin to a figure like Robert Alter, Ellen F. Davis or James Kugel. Your task is to write an essay on a specific psalm for a sophisticated lay audience, such as the readers of The New Yorker or The Atlantic.
 
 Your writing style should be scholarly, lucid, and engaging. Your tone is one of measured confidence, not breathless praise. You illuminate the text's brilliance through insightful analysis rather than by simply labeling it as "brilliant" or a "masterpiece."
@@ -159,7 +166,29 @@ Revised Version in the Target Style:
 
 ---
 
-Write the introduction essay below in plain text (NOT JSON). Use markdown formatting for emphasis (*italics*) and Hebrew transliterations.
+## OUTPUT FORMAT
+
+Write TWO sections:
+
+### 1. Introduction Essay (800-1200 words)
+[Write the main introduction essay as described above]
+
+### 2. Modern Jewish Liturgical Use (150-300 words)
+After the introduction essay, write a separate section titled "## Modern Jewish Liturgical Use" that summarizes where and how elements of this psalm appear in Jewish liturgy.
+
+This section should:
+- Summarize the liturgical usage information provided in the research bundle
+- Distinguish between full recitations of the psalm vs. individual verses or phrases quoted in prayers
+- Be specific about occasions (Weekday/Shabbat/Festivals), services (Shacharit/Mincha/Maariv), and traditions (Ashkenaz/Sefard/Edot HaMizrach)
+- Explain what the liturgical placement reveals about how Jewish tradition has understood and valued this psalm
+- Be scholarly but concise - aim for 150-300 words
+
+Example structure:
+"Psalm [X] is recited in its entirety during [occasion/service/tradition]. Verse [Y] from this psalm appears in [specific prayer], recited during [service] on [occasions]. The phrase '[Hebrew phrase]' from verse [Z] is incorporated into [prayer/piyyut] in the [tradition] nusach. This liturgical usage reflects the tradition's understanding of this psalm as..."
+
+---
+
+Write both sections below in plain text (NOT JSON). Use markdown formatting for emphasis (*italics*) and Hebrew transliterations.
 """
 
 
@@ -242,6 +271,14 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - Temple/sanctuary practices
    - Royal psalms and kingship theology
    - Festival associations (Sukkot, Passover, New Year, etc.)
+
+3a. **Modern Liturgical Context** (IMPORTANT)
+   - The research bundle includes detailed information about where and how this verse (or phrases from it) appears in Jewish liturgy
+   - When a verse appears in liturgy, comment on this usage and what it reveals about reception and interpretation
+   - Be specific: mention the prayer name, service (Shacharit/Mincha/Maariv), occasion (Weekday/Shabbat/Festivals), and tradition (Ashkenaz/Sefard/Edot HaMizrach)
+   - Consider what the liturgical placement tells us about how Jewish tradition understood this verse
+   - Integrate liturgical insights naturally - don't treat them as a separate "trivia" item
+   - Example: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..."
 
 4. **Comparative Religion**
    - Ancient Near Eastern parallels (Ugaritic, Akkadian, Egyptian)

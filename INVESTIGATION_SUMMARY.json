@@ -1,0 +1,92 @@
+{
+  "title": "Investigation: Psalm 49 Empty Liturgy_Context Fields",
+  "date": "2025-10-31",
+  "issue": "125 empty liturgy_context fields (73% of Psalm 49 matches)",
+  "previous_count": 51,
+  "new_count": 125,
+  "increase_pct": 245,
+  "core_findings": [
+    "ALL 125 empty contexts are 2-word phrase matches",
+    "ZERO empty contexts for 3+ word phrases",
+    "Pattern is systematic and deterministic",
+    "Matches are VALID (high confidence 0.99-0.995)",
+    "Some 2-word phrases WORK (Prayer 954 has context)",
+    "Some 2-word phrases FAIL (Prayer 841 has no context)"
+  ],
+  "root_cause": {
+    "file": "src/liturgy/liturgy_indexer.py",
+    "method": "_extract_context()",
+    "line": 843,
+    "issue": "Normalization inconsistency between matching and context extraction",
+    "problem": "After finding phrase, context extraction tries to re-find it in normalized text. For 125 Psalm 49 matches, search fails (pos == -1) and returns empty string."
+  },
+  "examples": {
+    "prayer_954": {
+      "name": "Blessing the Children",
+      "status": "HAS CONTEXT",
+      "phrase_length": "2 words",
+      "confidence": 0.995,
+      "context_length": 203,
+      "prayer_length": 1136
+    },
+    "prayer_841": {
+      "name": "Reader's Repetition",
+      "status": "NO CONTEXT",
+      "phrase_length": "2 words",
+      "confidence": 0.995,
+      "context_length": 0,
+      "prayer_length": 14829,
+      "note": "Same as 954 but fails - why?"
+    }
+  },
+  "statistics": {
+    "total_matches": 171,
+    "empty_contexts": 125,
+    "non_empty_contexts": 46,
+    "empty_percentage": 73.1,
+    "by_phrase_length": {
+      "2_words": {
+        "empty": 125,
+        "non_empty": 41,
+        "failure_rate": "75%"
+      },
+      "4_words": {
+        "empty": 0,
+        "non_empty": 2,
+        "failure_rate": "0%"
+      },
+      "21_words": {
+        "empty": 0,
+        "non_empty": 3,
+        "failure_rate": "0%"
+      }
+    },
+    "affected_prayers": {
+      "count": 123,
+      "total_prayers": 1113,
+      "percentage": 11.1
+    }
+  },
+  "impact": {
+    "match_correctness": "LOW RISK (matches are valid)",
+    "data_quality": "MEDIUM-HIGH RISK (missing context)",
+    "user_experience": "MEDIUM IMPACT (harder to verify)"
+  },
+  "recommendations": {
+    "immediate": [
+      "For 2-word phrase matches with empty context",
+      "Use simpler word-based extraction without normalization",
+      "Extract plus/minus 5 words in original text"
+    ],
+    "short_term": [
+      "Add fallback in _extract_context() at line 843",
+      "If pos == -1, try word-based extraction",
+      "Create word-based fallback method"
+    ],
+    "medium_term": [
+      "Debug normalization differences between matching and extraction",
+      "Extract context at match time instead of later",
+      "Add logging for context extraction failures"
+    ]
+  }
+}
