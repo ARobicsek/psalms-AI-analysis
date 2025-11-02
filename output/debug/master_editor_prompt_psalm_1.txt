@@ -2073,7 +2073,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
     - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
-    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally.
+    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation/re-interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally.
     - Church fathers and medieval Christian interpretation if very illuminating
     - Modern critical scholarship debates
   * Figurative language analysis (how does the usage of similar figuration elsewhere shed light on how it's functioning here?)
@@ -2120,6 +2120,7 @@ This is NOT optional. This is NOT a placeholder. You MUST:
    - OMIT subsections that don't apply to this specific psalm
    - For verses and phrases, ALWAYS start with Hebrew text + English translation
    - Include Hebrew quotations from the prayers themselves to illustrate usage
+   - for individual verses and phrases that appear in the liturgy, reflect on whether their liturgical use goes with the grain of its natural ("pshat") reading or whether the compilers of the liturgy have put this verse or phrase to use in a novel way.
    - Be specific about occasions, services, and traditions
 4. **Target 150-400 words** (can be longer if the psalm has extensive liturgical use)
 
@@ -2136,24 +2137,22 @@ Write your 200-400 word critical analysis of the current draft.
 
 ### REVISED INTRODUCTION
 
-Write your complete revised introduction. This has TWO required parts that must both be included:
+Your revised introduction must have TWO parts (do NOT label them with "PART 1" or "PART 2" - just write the content):
 
-**PART 1: Main Introduction Essay (600-1200 words)**
-Write the revised introduction essay incorporating improvements from your assessment.
+First, write the revised introduction essay (600-1200 words) incorporating improvements from your assessment. Begin directly with the essay content.
 
-**PART 2: Liturgical Section (200-500 words)**
-IMMEDIATELY after finishing the main essay, add a blank line and write this EXACT TEXT as a header:
+Second, IMMEDIATELY after finishing the essay, add a blank line and write this EXACT TEXT as a marker:
 
 ---LITURGICAL-SECTION-START---
 
-Then write 2-4 substantial paragraphs (200-500 words) about how this psalm is used in Jewish liturgy, organized by:
+Then continue with 2-4 substantial paragraphs (200-500 words) about liturgical usage:
 - Full psalm recitation (if applicable) - where, when, which traditions
 - Key verses in prayers (if applicable) - for EACH: Hebrew text, English, prayer name, service, occasion, Hebrew quote from the prayer
 - Phrases in prayers (if applicable) - same format as verses
 
 Use BOTH the existing liturgical content in the draft introduction AND the detailed liturgical data in the research bundle.
 
-Write actual content with specific prayer names, services, and Hebrew quotations. This is mandatory - do not skip it.
+Write actual content with specific prayer names, services, and Hebrew quotations.
 
 ### REVISED VERSE COMMENTARY
 

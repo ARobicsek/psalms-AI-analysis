@@ -1,19 +1,9 @@
 # Editorial Assessment - Psalm 1
 
-What works: The draft rightly treats Psalm 1 as the gate to the Psalter and links its “two ways” to Torah-centered piety. It makes good use of traditional Jewish commentaries (Rashi, Radak, Ibn Ezra) and correctly stresses the verb sequence in v. 1 (walk–stand–sit) and the crucial force of יֶהְגֶּה (yeh-GEH, “mutter/meditate,” v. 2). The image of a transplanted tree by irrigation channels is well handled, and the closing antithesis (v. 6) is read aptly as covenantal “knowing.”
+The draft rightly treats Psalm 1 as an architectural threshold to the Psalter, and it makes several strong moves: the “two ways” frame is clear; the treatment of שָׁתוּל (shā-THŪL, “transplanted”) and פַלְגֵי־מָיִם (pal-ghēy-MĀ-yim, “water channels”) is accurate and illuminating; the shift from “Torah of YHWH” to “his Torah” is well read through Rashi and rabbinic tradition; and the liturgical notices are a valuable, underused strand.
 
-What needs revision: 
-- Style: At times the tone leans toward academic insider or sermonizing; it should be leaner, crisper, and more literary, with technical terms briefly defined in context (colon, antithetic parallelism, inclusio, merism).
-- Lexicon: “שָׁתוּל” is best rendered “transplanted” (not just “planted”). This matters. “פַלְגֵי־מָיִם” are divided channels; this should be explicit. 
-- Sound and structure: The poem’s cadence (the three emphatic לֹא, lo, in v. 1) and the inclusio on “way” (דֶּרֶךְ, derekh, vv. 1, 6) deserve a sharper literary reading. If phonetic points are made, they should be purposeful, not perfunctory.
-- LXX: The Septuagint’s renderings (e.g., choosing λοιμοί “pestilent” for לֵצִים) are worth noting because they subtly shift the social portrait of wickedness.
-- Figurative database: The chaff motif should be situated with specific parallels (e.g., Psalms 35:5; Isaiah 41:2), and the tree-by-water image alongside Jeremiah 17:7–8 to show the psalm’s distinct nuances.
-- Liturgy: The draft collects uses but needs clearer structure, Hebrew citations from the prayers, and a brief statement of theological significance.
-- Missed rabbinic uses: Torah Temimah’s applications of v. 3 (“fruit in its season”) to conjugal rhythms on Erev Shabbat are too telling to omit.
+That said, the essay needs tightening and some corrections. Most pressing: it claims “the wicked receive exactly four Hebrew words,” which is simply false (v. 4 is longer, and the brevity point stands without the error). The tone sometimes turns breathless (“theological engine”), when the psalm’s spare craft speaks best for itself. Some scholarly terms (e.g., “merism,” “inclusio”) are used without definition for general readers. The phonetic analysis notes “stress pattern” vaguely; if we comment on sound, we should use the provided phonetics (e.g., the triple anaphora of לֹא, LŌ’, in v. 1). The LXX deserves a clearer glance: its “καθέδρα λοιμῶν” (“seat of pestilent [men]”) broadens לֵצִים (lē-TSIY-m, “scoffers”) in a revealing way, and μελετᾶν (“to study, practice”) nuances יֶהְגֶּה (yeh-GEH). 
 
-Questions answerable from the supplied materials: 
-- Does “knowing” (יוֹדֵעַ) in v. 6 mean mere cognition or covenantal regard? (Answer: the latter, per Radak and usage across Scripture.)
-- Is the tree “planted” or “transplanted”? (Answer: “transplanted,” with implications of divine agency and careful cultivation.)
-- Does the psalm’s rhetoric promise naïve prosperity? (Answer: no; the imagery is seasonal, measured, and tethered to “in its season,” v. 3.)
+Missed opportunities: (1) the editorial seam with Psalm 2 (“אַשְׁרֵי” inclusio at 1:1 and 2:12) that frames the opening diptych; (2) explicit parallels to the Bible’s “path” metaphor (Deuteronomy 5:29–30; 11:28; Proverbs 4:18–19), confirming that “way” (דֶּרֶךְ, DE-rekh) is a moral itinerary; (3) the figurative patterning of “chaff” (מֹּץ, MŌTS) across Psalms 35:5 and 83:14 and Isaiah 41:2; (4) verse 5’s irony (“did not stand” in v. 1 // “will not stand” in judgment) and Malbim’s smart distinction between רְשָׁעִים (rə-shā-ʿIY-m, hardened wicked) and חַטָּאִים (ḥat-tā-’IY-m, strayers). Liturgy should be structured more clearly, with Hebrew prayer citations and why they matter. 
 
-Overall: tighten the prose; sharpen Hebrew-literary detail; define terms; integrate LXX and liturgy judiciously; add a few decisive, vivid insights.
+In revision, we will: correct errors; define terms; integrate LXX and sound where they actually help; fold in the “Psalms 1–2” seam; deepen verse-by-verse with concrete Hebrew, figurative parallels, and liturgical reception; and smooth the tone for an intelligent lay audience.

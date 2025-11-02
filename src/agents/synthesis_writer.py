@@ -176,7 +176,8 @@ Write TWO sections:
 ### 2. Modern Jewish Liturgical Use (150-300 words)
 After the introduction essay, write a separate section titled "## Modern Jewish Liturgical Use" that summarizes where and how elements of this psalm appear in Jewish liturgy.
 - do NOT try to comment on liturgical use of this psalm WITHOUT carefully consulting the research bundle's liturgical information
-- for PHRASES, make sure to quote them in full in Hebrew, and make sure to include enough of a quotation from the relevant prayer(s) to properly illustrate their use.
+- for PHRASES that appear in liturgy, make sure to quote the phrases in full in Hebrew, and make sure to include enough of a quotation from the relevant prayer(s) to properly illustrate their use.
+- for individual verses and phrases that appear in the liturgy, reflect on whether their liturgical use goes with the grain of its natural ("pshat") reading or whether the compilers of the liturgy have put this verse or phrase to use in a novel way.
 
 
 This section should:
@@ -191,7 +192,7 @@ Example structure:
 
 ---
 
-Write both sections below in plain text (NOT JSON). Use markdown formatting for emphasis (*italics*) and Hebrew transliterations.
+Write both sections below in plain text (NOT JSON). Use markdown formatting for emphasis (*italics*) and phonetic transcriptions.
 """
 
 
@@ -251,6 +252,8 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - **STRESS ANALYSIS**: You can now analyze prosodic patterns by counting stressed syllables (marked in **BOLD CAPS**). For example, "This verse has a 3+2 stress pattern with stresses on VŌDH, KHĀ, MĒ in the first colon and KHĀ, BĒ in the second."
    - **VERIFY CLAIMS**: For example, before claiming a "soft 'f' sound," check the transcription. If it says `p` (e.g., in `pō-te-akh`), your claim is incorrect. The transcription is your ground truth for all phonetic analysis. Distinguish `p` vs `f`, `b` vs `v`, `k` vs `kh`.
    - If you are ever providing a transcription for ANY reason, you must use the authoritative phonetic transcription provided to you; **do not make it up on your own.**
+   - **too many transcriptions clutter the prose. ONLY use transcriptions when the reader NEEDS to know how something was pronounced in order to understand your point about a poetic device. Do NOT transliterate words where the pronunciation does not pertain to the point you are making.** On the other hand, DO always provide the relevant text/words in Hebrew with English TRANSLATION.
+-
    
 2. **Poetics**
    - Parallelism types (synonymous, antithetical, synthetic, climactic)
@@ -397,7 +400,7 @@ Write the verse-by-verse commentary below in plain text (NOT JSON). Use markdown
 
 
 def format_phonetic_section(micro_analysis: 'MicroAnalysis') -> str:
-    """Format phonetic transcriptions for inclusion in prompts."""
+    """Format phonetic transcription for inclusion in prompts."""
     lines = ["## PHONETIC TRANSCRIPTIONS\n"]
     lines.append("*Reference these for accurate phonetic commentary. DO NOT make phonetic claims without consulting these transcriptions.*\n")
 
