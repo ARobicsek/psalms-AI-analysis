@@ -1,6 +1,6 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-11-02 (Session 65)
+**Last Updated**: 2025-11-02 (Session 66)
 **Current Phase**: Document Generation & Content Enhancement
 
 ---
@@ -26,19 +26,33 @@
 - **Furtive Patach Transcription** ✅: Phonetic analyst now correctly transcribes patach under final ח, ע, ה as vowel-before-consonant (e.g., רוּחַ → **RŪ**-aḥ).
 - **Empty Liturgical Section Output** ✅: Master Editor now generates actual liturgical content (200-500 words) using marker-based approach instead of outputting just header.
 - **Liturgical Section Parser Bug** ✅: Fixed parser that was incorrectly splitting on #### headings within liturgical section, causing subsection content to be discarded. Now uses regex-based section matching.
+- **Hebrew Font/Size in Parentheses** ✅: Hebrew text within parentheses now renders in Aptos 12pt via XML-level font setting (same approach as verse text).
+- **Liturgical Section Subheaders** ✅: Master Editor prompt strengthened with explicit examples; now generates proper `#### Full psalm` headers instead of hyphens.
+- **Analytical Framework for Synthesis Writer** ✅: Research bundle now includes full analytical framework document (~179k chars) instead of just a placeholder note.
+- **Hyphen Lists to Bullet Points** ✅: Document generator automatically converts `- item` markdown to proper Word bullet points with correct font (Aptos 12pt).
 
 ### Pending ⚠️
-- **Hebrew Font/Size in Parentheses**: Hebrew text within parentheses may still be Arial 11pt instead of Aptos 12pt. This issue is deferred for now.
+- None currently
 
 ### Next Up 📋
-- **Test Complete Pipeline**: Run full pipeline for Psalm 1 (`python scripts/run_enhanced_pipeline.py --psalm 1`) to verify all fixes work together (including the recent parser fix)
-- **Review Commentary Quality**: Open the generated `.docx` file and verify:
-  * Hebrew verse text is Aptos 12pt
-  * Modern Jewish Liturgical Use section has complete content with proper subsections (Full psalm, Key verses, Phrases)
-  * Transliterations are accompanied by Hebrew text throughout
-  * Furtive patach correctly transcribed in phonetic transcriptions (e.g., רוּחַ as **RŪ**-aḥ)
-  * Liturgical insights are used effectively throughout the commentary
-- **Generate Additional Psalms**: Once Psalm 1 is verified, test with other psalms to ensure robustness across different content
+- **Generate Additional Psalms**: Test pipeline with other psalms (especially different genres) to ensure robustness across different content
+- **Quality Review**: Systematic review of commentary quality across multiple psalms
+- **Documentation**: Create user guide for running the pipeline and interpreting outputs
+
+---
+
+## Session 66 Summary
+
+- **Goal**: Address multiple formatting issues and ensure analytical framework availability using agentic approach.
+- **Activity**:
+  - Used three Explore agents in parallel to investigate issues
+  - Fixed Hebrew font in parentheses via XML-level setting (same approach as verse text)
+  - Strengthened Master Editor prompt with explicit #### formatting examples
+  - Added full analytical framework to research bundle (was only a placeholder note)
+  - Implemented automatic hyphen-to-bullet conversion in document generator
+  - Fixed bullet font matching (Aptos 12pt) and paragraph spacing
+  - Ran full pipeline test - all fixes verified working
+- **Outcome**: All four issues resolved. Word document now has proper formatting with bullets, correct fonts, Heading 4 subsections, and synthesis writer has access to full analytical framework.
 
 ---
 

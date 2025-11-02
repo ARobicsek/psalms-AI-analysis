@@ -1,3 +1,189 @@
+# Session 66 - Multiple Formatting Fixes and Analytical Framework Integration (2025-11-02)
+
+**Goal**: Address three formatting issues and ensure analytical framework availability to synthesis writer.
+
+**Status**: ✅ Complete
+
+## Session Overview
+
+This session used an agentic approach to investigate and fix multiple issues:
+1. Hebrew text in parentheses rendering in wrong font/size
+2. Liturgical section subheaders appearing with hyphens instead of as Heading 4 elements
+3. Analytical framework not actually available to synthesis writer
+4. Hyphen lists not converted to proper bullet points in Word document
+
+## Issues Investigated and Fixed
+
+### 1. Hebrew Font in Parentheses ✅
+
+**Problem**: Hebrew text within parentheses (e.g., `(יהוה)`) was rendering in Arial 11pt instead of Aptos 12pt in the Word document.
+
+**Investigation**: Used Explore agent to search previous sessions. Found that Session 60 had implemented a fix using `font.name` and `font.size` direct assignment, but it was marked as "deferred" due to inconsistency.
+
+**Root Cause**: The high-level API (`run.font.name`, `run.font.size`) is unreliable for Hebrew text due to complex script handling in python-docx.
+
+**Solution**: Applied the same XML-level font setting approach that worked for Hebrew verse text in Session 64:
+
+**File**: [document_generator.py:108-139](../src/utils/document_generator.py#L108-L139)
+
+Created `_set_run_font_xml()` helper method that sets font via XML elements:
+```python
+def _set_run_font_xml(self, run, font_name='Aptos', font_size=12):
+    rPr = run._element.get_or_add_rPr()
+
+    # Set rFonts for all character ranges
+    rFonts = OxmlElement('w:rFonts')
+    rFonts.set(ns.qn('w:ascii'), font_name)
+    rFonts.set(ns.qn('w:hAnsi'), font_name)
+    rFonts.set(ns.qn('w:cs'), font_name)  # Complex scripts
+
+    # Set size elements
+    sz.set(ns.qn('w:val'), str(font_size * 2))  # Half-points
+    szCs.set(ns.qn('w:val'), str(font_size * 2))
+```
+
+Applied at [document_generator.py:187](../src/utils/document_generator.py#L187) and [document_generator.py:229](../src/utils/document_generator.py#L229).
+
+### 2. Liturgical Section Subheaders with Hyphens ✅
+
+**Problem**: Subheaders in "Modern Jewish Liturgical Use" section (e.g., "Full psalm", "Key verses") appeared with hyphens as regular paragraphs instead of Heading 4 elements.
+
+**Investigation**: Used Explore agent to trace the issue through the pipeline.
+
+**Root Cause**: Master Editor AI was not following prompt instructions. Despite the prompt specifying "use #### for Heading 4", the model generated:
+```markdown
+- Full psalm. Many communities recite...
+- Phrases in prayer.
+```
+
+Instead of:
+```markdown
+#### Full psalm
+
+Many communities recite...
+
+#### Phrases
+```
+
+**Evidence**:
+- Master Editor prompt ([master_editor.py:215](../src/agents/master_editor.py#L215)): "use #### for Heading 4"
+- Actual output ([master_editor_response_psalm_1.txt:47](../output/debug/master_editor_response_psalm_1.txt#L47)): Used hyphens
+- Document generator ([document_generator.py:114-122](../src/utils/document_generator.py#L114-L122)): Correctly handles `####` when present
+
+**Solution**: Strengthened Master Editor prompt with explicit examples and formatting requirements:
+
+**File**: [master_editor.py:214-237](../src/agents/master_editor.py#L214-L237), [master_editor.py:313-315](../src/agents/master_editor.py#L313-L315), [master_editor.py:346-360](../src/agents/master_editor.py#L346-L360)
+
+Added visual examples showing correct (`#### Full psalm ✅`) vs incorrect (`- Full psalm ❌`) formatting, with explicit instructions not to use hyphens, bullets, or bold.
+
+**Result**: Master Editor now correctly generates `#### Full psalm`, `#### Key verses`, `#### Phrases` headers.
+
+### 3. Analytical Framework Not Available to Synthesis Writer ✅
+
+**Problem**: Research bundle contained only "*Note: Full analytical framework available to Writer agent*" instead of the actual framework document.
+
+**Investigation**: Used Explore agent to trace data flow through the pipeline.
+
+**Findings**:
+- **Master Editor**: ✅ Has access (loads separately at [master_editor.py:460-467](../src/agents/master_editor.py#L460-L467))
+- **Synthesis Writer**: ❌ No access (research bundle only contained placeholder note)
+- **Research Bundle**: Assembler had the framework in `rag_context.analytical_framework` but didn't output it to markdown
+
+**Root Cause**: The note at [research_assembler.py:295](../src/agents/research_assembler.py#L295) was a placeholder that was never replaced with actual content during development.
+
+**Solution**: Modified research bundle assembly to include full analytical framework:
+
+**File**: [research_assembler.py:295-302](../src/agents/research_assembler.py#L295-L302)
+
+```python
+# Include full analytical framework
+if self.rag_context.analytical_framework:
+    md += "## Analytical Framework for Biblical Poetry\n\n"
+    md += self.rag_context.analytical_framework
+    md += "\n\n---\n\n"
+```
+
+**Verification**: Research bundle size increased from ~165k to 179k chars, with framework content starting at line 1523.
+
+### 4. Hyphen Lists to Bullet Points ✅
+
+**Problem**: Master Editor generated lists with hyphens (`- item`) which appeared as plain text with hyphens in Word document instead of proper bullet points.
+
+**Solution**: Implemented automatic conversion of hyphen lists to Word bullet points during document generation.
+
+**Changes**:
+
+1. **Introduction lists** ([document_generator.py:157-170](../src/utils/document_generator.py#L157-L170)):
+   - Detect lines starting with `- `
+   - Convert to 'List Bullet' style
+   - Set font explicitly to Aptos 12pt
+
+2. **Verse commentary lists** ([document_generator.py:202-244](../src/utils/document_generator.py#L202-L244)):
+   - Created `_add_commentary_with_bullets()` method
+   - Intelligently detects bullet blocks vs regular text
+   - Maintains paragraph spacing (empty lines = paragraph breaks)
+   - Applies Aptos 12pt font to all bullet text
+
+3. **Centralized formatting** ([document_generator.py:246-305](../src/utils/document_generator.py#L246-L305)):
+   - Created `_process_markdown_formatting()` helper with `set_font` parameter
+   - Ensures consistent font handling across all sections
+   - Preserves all markdown formatting (bold, italic, Hebrew in parentheses)
+
+**Result**:
+- ✅ Hyphen lists automatically converted to proper bullets
+- ✅ Bullets use same font as body text (Aptos 12pt)
+- ✅ Paragraph spacing preserved in verse commentary
+
+## Files Modified
+
+1. **src/agents/master_editor.py**
+   - Lines 214-237: Added explicit #### formatting instructions with examples
+   - Lines 313-315: Reinforced format requirements in critical section
+   - Lines 346-360: Added example format in OUTPUT FORMAT section
+
+2. **src/utils/document_generator.py**
+   - Lines 108-139: Added `_set_run_font_xml()` helper for reliable Hebrew font setting
+   - Lines 157-170: Added bullet detection and font setting in `_add_paragraph_with_markdown()`
+   - Lines 187, 229: Applied XML-level font setting to Hebrew in parentheses
+   - Lines 202-244: Added `_add_commentary_with_bullets()` for intelligent list handling
+   - Lines 246-305: Added `_process_markdown_formatting()` with font parameter
+
+3. **src/agents/research_assembler.py**
+   - Lines 295-302: Added full analytical framework to research bundle output
+
+4. **docs/IMPLEMENTATION_LOG.md** (this file)
+   - Added Session 66 entry
+
+5. **docs/PROJECT_STATUS.md**
+   - Updated with Session 66 summary and completed tasks
+
+6. **docs/NEXT_SESSION_PROMPT.md**
+   - Updated for Session 67 handoff
+
+## Testing and Verification
+
+1. ✅ Full pipeline run completed successfully (`python scripts/run_enhanced_pipeline.py 1`)
+2. ✅ Master Editor followed new prompt and generated `#### Full psalm`, `#### Key verses`, `#### Phrases`
+3. ✅ Research bundle contains full analytical framework (179,571 chars, starting line 1523)
+4. ✅ Word document generated with:
+   - Proper bullet points (not hyphens)
+   - Aptos 12pt font in all bullets
+   - Heading 4 formatting for liturgical subsections
+   - Hebrew in parentheses with correct font
+   - Preserved paragraph spacing
+
+## Key Learnings
+
+1. **XML-level font setting**: The only reliable way to set fonts for Hebrew text in python-docx is via XML elements (`w:rFonts`, `w:sz`, `w:szCs`), not the high-level API.
+
+2. **Prompt engineering**: When AI models don't follow formatting instructions, explicit examples with visual indicators (✅/❌) significantly improve compliance.
+
+3. **Placeholder notes**: Development placeholders like "*Note: X available*" should be replaced with actual content or removed before production use.
+
+4. **Centralized formatting**: Helper methods with parameters (like `set_font=True`) allow code reuse while maintaining flexibility.
+
+---
+
 # Session 65 - Fix Liturgical Section Parser Bug (2025-11-02)
 
 **Goal**: Fix the recurring issue where the Modern Jewish Liturgical Use section appeared as just a header with no content in the final output, despite the Master Editor generating full liturgical content.
