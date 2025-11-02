@@ -1,14 +1,19 @@
 # Editorial Assessment - Psalm 1
 
-The current draft gets much right. It frames Psalm 1 as the Psalter’s doorway and a “two ways” poem; it rightly highlights the tree/chaff contrast, the inclusio on “way” (דֶּרֶךְ), and the covenantal force of “to know” (יָדַע). It also draws fruitfully on classical commentators (Rashi, Radak, Ibn Ezra, Malbim) and registers the ancient practice implied by yehgeh (יֶהְגֶּה, “murmur/meditate”). The emphasis on asymmetry—three verses for the righteous, a verse and a half for the wicked—is a sound literary observation.
+What works: The draft rightly treats Psalm 1 as the gate to the Psalter and links its “two ways” to Torah-centered piety. It makes good use of traditional Jewish commentaries (Rashi, Radak, Ibn Ezra) and correctly stresses the verb sequence in v. 1 (walk–stand–sit) and the crucial force of יֶהְגֶּה (yeh-GEH, “mutter/meditate,” v. 2). The image of a transplanted tree by irrigation channels is well handled, and the closing antithesis (v. 6) is read aptly as covenantal “knowing.”
 
-Where it falls short is in precision, balance, and distinctiveness. Several phonetic or rhythmic claims are asserted without carefully using the provided stress markings; sound analysis should be selective and exact, not decorative. The LXX is cited but barely interpreted; its “καθέδρα λοιμῶν” (“seat of pestilences/pestilent men”) for לֵצִים (“scoffers”) deserves comment. The introduction gestures to ANE parallels and the Psalm 1–2 unity but does not work them into the argument. More could be made of concordance data: the rarity of “מוֹשַׁב לֵצִים,” the Job echo of “עֲצַת רְשָׁעִים,” the eight occurrences of שָׁתוּל (shātul, “transplanted”). Liturgical reception is mentioned in generalities; specifics matter.
+What needs revision: 
+- Style: At times the tone leans toward academic insider or sermonizing; it should be leaner, crisper, and more literary, with technical terms briefly defined in context (colon, antithetic parallelism, inclusio, merism).
+- Lexicon: “שָׁתוּל” is best rendered “transplanted” (not just “planted”). This matters. “פַלְגֵי־מָיִם” are divided channels; this should be explicit. 
+- Sound and structure: The poem’s cadence (the three emphatic לֹא, lo, in v. 1) and the inclusio on “way” (דֶּרֶךְ, derekh, vv. 1, 6) deserve a sharper literary reading. If phonetic points are made, they should be purposeful, not perfunctory.
+- LXX: The Septuagint’s renderings (e.g., choosing λοιμοί “pestilent” for לֵצִים) are worth noting because they subtly shift the social portrait of wickedness.
+- Figurative database: The chaff motif should be situated with specific parallels (e.g., Psalms 35:5; Isaiah 41:2), and the tree-by-water image alongside Jeremiah 17:7–8 to show the psalm’s distinct nuances.
+- Liturgy: The draft collects uses but needs clearer structure, Hebrew citations from the prayers, and a brief statement of theological significance.
+- Missed rabbinic uses: Torah Temimah’s applications of v. 3 (“fruit in its season”) to conjugal rhythms on Erev Shabbat are too telling to omit.
 
-Missed opportunities the bundle allows us to answer:
-- How the triad “walk/stand/sit” exploits the “way” idiom elsewhere (Deut 8:6; 10:12; 19:9) and legal “standing” (Deut 19:15).
-- How “hagah” works across its semantic range (Joshua 1:8; Psalm 2:1).
-- How “palgei mayim” likely denotes irrigation channels—cultivation more than wild nature (Jer 17:8; Ezek 47:12).
-- Why the chaff image is standard for ephemerality (Psalm 35:5; 83:14; Isa 17:13), and what is distinctive here.
-- Specific liturgical locations: the daily Ashrei complex, Birkhot HaTorah, and the prominence of “אַשְׁרֵי” as a framing blessing.
+Questions answerable from the supplied materials: 
+- Does “knowing” (יוֹדֵעַ) in v. 6 mean mere cognition or covenantal regard? (Answer: the latter, per Radak and usage across Scripture.)
+- Is the tree “planted” or “transplanted”? (Answer: “transplanted,” with implications of divine agency and careful cultivation.)
+- Does the psalm’s rhetoric promise naïve prosperity? (Answer: no; the imagery is seasonal, measured, and tethered to “in its season,” v. 3.)
 
-Stylistically, the prose sometimes veers into insider talk and generic claims. The revision should define technical terms (e.g., “inclusio,” “colon,” “LXX/MT,” “BDB”), prune unsupported phonetic remarks, integrate concrete parallels, and make the LXX and rabbinic reception work for the argument. Above all, it should show—through crisp examples—how Psalm 1’s art (its sounds, images, and legal metaphors) carries its theology.
+Overall: tighten the prose; sharpen Hebrew-literary detail; define terms; integrate LXX and liturgy judiciously; add a few decisive, vivid insights.
