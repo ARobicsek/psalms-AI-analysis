@@ -17,7 +17,7 @@ class PhoneticAnalyst:
         """
         self.consonant_map = {
             'א': "'", 'ב': 'b', 'ג': 'g', 'ד': 'd', 'ה': 'h', 'ו': 'w', 'ז': 'z',
-            'ח': 'kh', 'ט': 't', 'י': 'y', 'כ': 'k', 'ך': 'kh', 'ל': 'l', 'מ': 'm',
+            'ח': 'ḥ', 'ט': 't', 'י': 'y', 'כ': 'k', 'ך': 'kh', 'ל': 'l', 'מ': 'm',
             'ם': 'm', 'נ': 'n', 'ן': 'n', 'ס': 's', 'ע': 'ʿ', 'פ': 'p', 'ף': 'f',
             'צ': 'ts', 'ץ': 'ts', 'ק': 'q', 'ר': 'r', 'ש': 'sh', 'ת': 't'
         }
@@ -223,31 +223,54 @@ class PhoneticAnalyst:
                         if i == 0:
                             is_geminated = False
 
-                phonemes.append(consonant_sound)
-                transcription.append(consonant_sound)
-                
-                # === NEW: If geminated, add the consonant again ===
-                if is_geminated:
-                    phonemes.append(consonant_sound)
-                    transcription.append(consonant_sound)
-
                 # --- Vowel Logic ---
                 vowel_sound = ""
                 for mod in modifiers:
                     if mod in self.vowel_map:
                         vowel_sound = self.vowel_map[mod]
                         break # Take the first vowel found
-                
-                if vowel_sound:
-                    # Special case: Qamets He (ָה) at the end of a word is 'āh'
-                    is_qamets_he = (vowel_sound == 'ā' and 
-                                    i + len(modifiers) + 1 < len(chars) and 
-                                    chars[i + len(modifiers) + 1] == 'ה' and
-                                    i + len(modifiers) + 2 == len(chars))
 
-                    if not (vowel_sound == 'ə' and not self._is_vocal_shewa(i, chars)):
-                         phonemes.append(vowel_sound)
-                         transcription.append(vowel_sound)
+                # === Check for Furtive Patach (Patach Gnuva) ===
+                # When patach appears under ח, ע, or ה at the end of a word,
+                # it's pronounced BEFORE the consonant, not after
+                is_furtive_patach = False
+                if vowel_sound == 'a' and char in ['ח', 'ע', 'ה']:
+                    # Check if this is at the end of the word (allowing for cantillation marks)
+                    # Look ahead past current modifiers to see if we're at word end
+                    remaining_chars = chars[j:]
+                    # Filter out non-Mn characters (actual consonants/vowels, not just marks)
+                    non_marks = [c for c in remaining_chars if unicodedata.category(c) != 'Mn' and c not in ['׃', '׀', '־']]
+                    if len(non_marks) == 0:
+                        is_furtive_patach = True
+
+                # Add consonant and vowel in correct order
+                if is_furtive_patach:
+                    # Furtive patach: vowel BEFORE consonant
+                    phonemes.append(vowel_sound)
+                    transcription.append(vowel_sound)
+                    phonemes.append(consonant_sound)
+                    transcription.append(consonant_sound)
+                else:
+                    # Normal case: consonant first
+                    phonemes.append(consonant_sound)
+                    transcription.append(consonant_sound)
+
+                    # === If geminated, add the consonant again ===
+                    if is_geminated:
+                        phonemes.append(consonant_sound)
+                        transcription.append(consonant_sound)
+
+                    # Then add vowel (if not furtive patach)
+                    if vowel_sound:
+                        # Special case: Qamets He (ָה) at the end of a word is 'āh'
+                        is_qamets_he = (vowel_sound == 'ā' and
+                                        j < len(chars) and
+                                        chars[j] == 'ה' and
+                                        j + 1 == len(chars))
+
+                        if not (vowel_sound == 'ə' and not self._is_vocal_shewa(i, chars)):
+                             phonemes.append(vowel_sound)
+                             transcription.append(vowel_sound)
 
                 i = j # Move index past the processed modifiers
             else:

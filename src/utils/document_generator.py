@@ -110,9 +110,20 @@ class DocumentGenerator:
         # Apply divine name modification to the entire paragraph text first.
         modified_text = self.modifier.modify_text(text)
 
+        # Handle markdown headers first (check from most specific to least specific)
+        if modified_text.startswith('####'):
+            self.document.add_heading(modified_text.replace('####', '').strip(), level=4)
+            return
+        elif modified_text.startswith('###'):
+            self.document.add_heading(modified_text.replace('###', '').strip(), level=3)
+            return
+        elif modified_text.startswith('##'):
+            self.document.add_heading(modified_text.replace('##', '').strip(), level=2)
+            return
+
         p = self.document.add_paragraph(style=style)
         # Split by bold/italic markers
-        parts = re.split(r'(\$\$|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
+        parts = re.split(r'(\$\$|__.*?__|\\*.*?\\*|_.*?_|`.*?`)', modified_text)
         for part in parts:
             if part.startswith('**') and part.endswith('**'):
                 run = p.add_run(part[2:-2])
@@ -133,7 +144,7 @@ class DocumentGenerator:
                 self._add_nested_formatting(p, inner_content, base_italic=True)
             else:
                 # Bidi fix: handle parenthesized Hebrew
-                sub_parts = re.split(r'([\(][\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+[\)])', part)
+                sub_parts = re.split(r'([\\(][\\u0590-\\u05FF\\u05B0-\\u05BD\\u05BF\\u05C1-\\u05C2\\u05C4-\\u05C7\\s]+[\\)])', part)
                 for sub_part in sub_parts:
                     if sub_part and sub_part.startswith('(') and sub_part.endswith(')'):
                         p.add_run('(')
@@ -433,14 +444,41 @@ Methodological & Bibliographical Summary
 
         for verse in parsed_verses:
             self.document.add_heading(f'Verse {verse["number"]}', level=3)
-            
+
             # Insert the Hebrew verse text before the commentary
-            p_hebrew = self.document.add_paragraph()
+            p_hebrew = self.document.add_paragraph(style='BodySans')
             hebrew_run = p_hebrew.add_run(self.modifier.modify_text(verse["hebrew"]))
-            hebrew_run.font.name = 'SBL Hebrew'
-            hebrew_run.font.size = Pt(14)
             hebrew_run.font.rtl = True
             p_hebrew.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+            # Set font at the XML level for comprehensive coverage
+            # This ensures the font applies to all character ranges (ASCII, complex script, etc.)
+            rPr = hebrew_run._element.get_or_add_rPr()
+
+            # Set rFonts element with all font attributes
+            rFonts = rPr.find(ns.qn('w:rFonts'))
+            if rFonts is None:
+                rFonts = OxmlElement('w:rFonts')
+                rPr.insert(0, rFonts)
+
+            # Set font for all ranges: ascii, hAnsi (high ANSI), eastAsia, and cs (complex scripts)
+            rFonts.set(ns.qn('w:ascii'), 'Aptos')
+            rFonts.set(ns.qn('w:hAnsi'), 'Aptos')
+            rFonts.set(ns.qn('w:cs'), 'Aptos')
+
+            # Also set size at XML level
+            sz = rPr.find(ns.qn('w:sz'))
+            if sz is None:
+                sz = OxmlElement('w:sz')
+                rPr.append(sz)
+            sz.set(ns.qn('w:val'), '24')  # 24 half-points = 12pt
+
+            # Set complex script size
+            szCs = rPr.find(ns.qn('w:szCs'))
+            if szCs is None:
+                szCs = OxmlElement('w:szCs')
+                rPr.append(szCs)
+            szCs.set(ns.qn('w:val'), '24')  # 24 half-points = 12pt
 
             self._add_paragraph_with_soft_breaks(verse["commentary"], style='BodySans')
 

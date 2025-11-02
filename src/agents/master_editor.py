@@ -126,8 +126,12 @@ Review the introduction and verse commentary for these issues:
 - AVOID Unnecessarily complex sentence structures that obscure rather than illuminate
 
 **Markup for Transliteration**:
-- When you use a transliterated Hebrew word or phrase in your prose, **you MUST enclose it in backticks**. This is how the document generator will identify it for italicization. For example: "The opening line, `ashrei ha’ish`, signals..." or "The verb `ḥafetz` denotes desire...".
-- when you use a transliterated Hebrew work or phrase in your prose, **you MUST use the phonetic transcription from the PSALM TEXT section above EXCEPT for the tretragrammaton, which you should render as YHWH.**. This ensures consistency and accuracy in pronunciation guidance for readers.
+- When you use a transliterated Hebrew word or phrase in your prose, **you MUST include the Hebrew text alongside the transliteration** in the format: Hebrew (transliteration). For example: "The opening line, אַשְׁרֵי־הָאִישׁ (`ashrei ha'ish`), signals..." or "The verb חָפֵץ (`ḥafetz`) denotes desire...".
+- **You MUST enclose the transliteration in backticks**. This is how the document generator will identify it for italicization.
+- When you use a transliterated Hebrew word or phrase in your prose, **you MUST use the phonetic transcription from the PSALM TEXT section above EXCEPT for the tetragrammaton, which you should render as YHWH**. This ensures consistency and accuracy in pronunciation guidance for readers.
+- ALWAYS provide the Hebrew text before the transliteration. Do NOT use standalone transliterations without Hebrew. For example:
+  * CORRECT: "The verb יֶהְגֶּה (`yeh-GEH`) is deliciously concrete"
+  * INCORRECT: "The verb `yeh-GEH` is deliciously concrete"
 
 **Should conform to this style:**
 - Measured, confident tone (like a distinguished professor)
@@ -200,12 +204,23 @@ Rewrite the introduction to address identified weaknesses. The revised introduct
 - Engage specific texts (Hebrew, LXX) with analysis
 
 **Section 2: Modern Jewish Liturgical Use (REQUIRED)**
-After the introduction essay, include a separate section titled "## Modern Jewish Liturgical Use" (150-300 words) that:
-- Summarizes where and how this psalm (or verses/phrases from it) appears in Jewish liturgy
-- Distinguishes between full recitations vs. individual verses/phrases quoted in prayers
-- Is specific about occasions (Weekday/Shabbat/Festivals), services (Shacharit/Mincha/Maariv), and traditions (Ashkenaz/Sefard/Edot HaMizrach)
-- Explains what the liturgical placement reveals about how Jewish tradition has understood and valued this psalm
-- Draws on the liturgical usage information provided in the research bundle
+The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" section. Your job is to REVISE and IMPROVE it, NOT to skip it or output just a header.
+
+**MANDATORY ACTIONS:**
+1. **Review the existing liturgical section** in the draft introduction
+2. **Cross-reference with research bundle** to verify accuracy and add missing details
+3. **Restructure into clear subsections** (use #### for Heading 4):
+   * #### Full psalm - Where/when the complete psalm is recited (if applicable)
+   * #### Key verses - Each verse used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
+   * #### Phrases - Each phrase used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
+4. **OMIT subsections that don't apply** to this psalm
+5. **Add Hebrew quotations** - for EVERY verse/phrase, include Hebrew from both the psalm AND the prayer
+6. **Be specific** - name the service, occasion, tradition
+7. **Explain significance** - why this usage matters theologically
+
+**Target: 200-500 words** (longer if extensive usage)
+
+**⚠️ CRITICAL: Output the COMPLETE revised section with REAL CONTENT. Writing just "## Modern Jewish Liturgical Use" with nothing after it is UNACCEPTABLE and will fail validation.**
 
 **Stage 3: Revised Verse Commentary**
 Rewrite the verse-by-verse commentary to address identified weaknesses. For each verse:
@@ -268,25 +283,48 @@ Example of BAD: "Verse 16 speaks of God opening his hand. This imagery appears e
 
 ## CRITICAL REQUIREMENT: LITURGICAL SUMMARY
 
-**Your final output MUST include the `## Modern Jewish Liturgical Use` section.** This is not optional. This section must follow the main introduction essay and summarize the liturgical data from the research bundle as specified in the instructions. Your output will be automatically checked for the presence of this exact header.
+**⚠️ MANDATORY: You MUST write a complete `## Modern Jewish Liturgical Use` section with actual content.**
 
+This is NOT optional. This is NOT a placeholder. You MUST:
+1. **Find the liturgical data** in the research bundle (look for sections titled "Modern Jewish Liturgical Use (Psalm N)" or "Phrase-Level Liturgical Usage")
+2. **Write actual content** - the section cannot be empty or contain only the header
+3. **Use the proper structure**:
+   - Include subsections (#### Full psalm, #### Key verses, #### Phrases) as appropriate for THIS psalm
+   - OMIT subsections that don't apply to this specific psalm
+   - For verses and phrases, ALWAYS start with Hebrew text + English translation
+   - Include Hebrew quotations from the prayers themselves to illustrate usage
+   - Be specific about occasions, services, and traditions
+4. **Target 150-400 words** (can be longer if the psalm has extensive liturgical use)
+
+**Your output will fail validation if this section is empty or missing.**
 ---
 
 ## OUTPUT FORMAT
 
-Return your response in this exact structure:
+Return your response with these THREE sections in order:
 
 ### EDITORIAL ASSESSMENT
 
-[Your 200-400 word critical analysis of the current draft]
+Write your 200-400 word critical analysis of the current draft.
 
 ### REVISED INTRODUCTION
 
-[The complete revised introduction essay, 800-1400 words]
+Your revised introduction must have TWO parts (do NOT label them with "PART 1" or "PART 2" - just write the content):
 
-## Modern Jewish Liturgical Use
+First, write the revised introduction essay (600-1200 words) incorporating improvements from your assessment. Begin directly with the essay content.
 
-[A separate section (150-300 words) summarizing where and how this psalm appears in Jewish liturgy]
+Second, IMMEDIATELY after finishing the essay, add a blank line and write this EXACT TEXT as a marker:
+
+---LITURGICAL-SECTION-START---
+
+Then continue with 2-4 substantial paragraphs (200-500 words) about liturgical usage:
+- Full psalm recitation (if applicable) - where, when, which traditions
+- Key verses in prayers (if applicable) - for EACH: Hebrew text, English, prayer name, service, occasion, Hebrew quote from the prayer
+- Phrases in prayers (if applicable) - same format as verses
+
+Use BOTH the existing liturgical content in the draft introduction AND the detailed liturgical data in the research bundle.
+
+Write actual content with specific prayer names, services, and Hebrew quotations.
 
 ### REVISED VERSE COMMENTARY
 
@@ -552,6 +590,27 @@ class MasterEditor:
                     revised_introduction = intro_text[:next_section_idx].strip()
                 else:
                     revised_introduction = intro_text.strip()
+
+                # Replace the liturgical marker with proper markdown header
+                if "---LITURGICAL-SECTION-START---" in revised_introduction:
+                    revised_introduction = revised_introduction.replace(
+                        "---LITURGICAL-SECTION-START---",
+                        "## Modern Jewish Liturgical Use"
+                    )
+                    self.logger.info("✓ Liturgical section marker found and replaced with header")
+
+                    # Validate that there's content after the header
+                    liturgical_idx = revised_introduction.find("## Modern Jewish Liturgical Use")
+                    content_after_header = revised_introduction[liturgical_idx + len("## Modern Jewish Liturgical Use"):].strip()
+
+                    if len(content_after_header) < 100:
+                        self.logger.warning(
+                            f"⚠️  WARNING: Liturgical section appears very short ({len(content_after_header)} chars)"
+                        )
+                    else:
+                        self.logger.info(f"✓ Liturgical section has {len(content_after_header)} chars of content")
+                else:
+                    self.logger.warning("⚠️  WARNING: Liturgical section marker not found in revised introduction!")
 
             elif part.startswith("REVISED VERSE COMMENTARY"):
                 revised_verses = part.replace("REVISED VERSE COMMENTARY", "", 1).strip()
