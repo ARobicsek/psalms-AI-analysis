@@ -30,7 +30,7 @@ if __name__ == '__main__':
     from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle
     from src.agents.liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
-    from src.agents.liturgical_librarian import LiturgicalLibrarian, AggregatedPrayerMatch
+    from src.agents.liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
     from src.agents.rag_manager import RAGManager, RAGContext
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
@@ -38,7 +38,7 @@ else:
     from .figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
     from .commentary_librarian import CommentaryLibrarian, CommentaryBundle
     from .liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
-    from .liturgical_librarian import LiturgicalLibrarian, AggregatedPrayerMatch
+    from .liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
     from .rag_manager import RAGManager, RAGContext
 
 
@@ -93,7 +93,7 @@ class ResearchBundle:
     figurative_bundles: List[FigurativeBundle]
     commentary_bundles: Optional[List[CommentaryBundle]]
     liturgical_usage: Optional[List[SefariaLiturgicalLink]]  # Phase 0: Sefaria liturgical cross-references (deprecated)
-    liturgical_usage_aggregated: Optional[List[AggregatedPrayerMatch]]  # Phase 4/5: Aggregated phrase-level liturgy
+    liturgical_usage_aggregated: Optional[List[PhraseUsageMatch]]  # Phase 4/5: Aggregated phrase-level liturgy
     liturgical_markdown: Optional[str]  # Phase 4/5: Pre-formatted markdown for LLM consumption
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
     request: ResearchRequest

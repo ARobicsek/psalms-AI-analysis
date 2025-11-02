@@ -1,83 +1,79 @@
-# Session 59 Handoff - Research Bundle Simplified and Ready for Commentary
+# Session 60 Handoff - Hebrew Text Integration Complete
 
-## Previous Session (Session 58) Summary
+## Previous Session (Session 59) Summary
 
-Session 58 completed three major improvements to the Liturgical Librarian: fixed the is_unique=0 filtering bug, removed wasteful extra LLM validation calls, and simplified the research bundle to its minimal essential structure.
+Session 59 enhanced the commentary generation pipeline to better serve readers familiar with biblical and rabbinic Hebrew, adding programmatic Hebrew verse text insertion and ensuring proper divine names modification.
 
 ### Key Achievements
 
-1. **Fixed is_unique=0 Filtering Bug** ✅
-   - **Root Cause**: The `_group_by_psalm_phrase` method was not filtering out phrases with `is_unique=0`
-   - **Impact**: Non-unique phrases (appearing in multiple psalms) were being sent to the LLM and included in output
-   - **Solution**: Added filter for `is_unique=0` in phrase_match processing (only affects phrase matches, not full verses/chapters)
-   - **Result**: 14 non-unique phrases filtered out, phrase groups reduced from 9 to 6 for Psalm 1
+1. **Hebrew Source Text in Commentary** ✅
+   - **Enhancement**: Updated Master Editor and Synthesis Writer to include Hebrew text when quoting sources
+   - **Rationale**: Readers are familiar with biblical and rabbinic Hebrew and can engage directly with source text
+   - **Implementation**: Added instructions to both agent prompts to provide Hebrew alongside English translations
 
-2. **Removed Extra LLM Validation Calls** ✅
-   - **Problem**: In earlier version, we made separate LLM calls to validate phrases before summarization
-   - **User Requirement**: "We should NOT be making extra LLM calls for filtering purposes"
-   - **Solution**: Disabled `_validate_phrase_groups_with_llm` - validation now implicit in summary generation
-   - **Result**: Fewer LLM calls, lower costs, same quality (LLM naturally handles false positives during analysis)
+2. **Programmatic Hebrew Verse Text Insertion** ✅
+   - **Enhancement**: Created `_insert_verse_text_into_commentary()` method in commentary_formatter.py
+   - **Rationale**: More reliable than instructing LLM; ensures consistency
+   - **Implementation**:
+     - New method parses verse commentary looking for "**Verse N**" headers
+     - Inserts modified Hebrew text (with divine names handled) after each header
+     - Applied in `format_commentary()` method before body text formatting
 
-3. **Simplified Research Bundle to Minimal Structure** ✅
-   - **User Requirements**:
-     - "We should NOT be EVER using the fields called Occasion, Service"
-     - "We should ONLY be placing into the research bundle the phrase or name of chapter or verse range, and then the LLM summary for it. That's ALL"
-   - **Solution**: Removed all raw match data and metadata from bundle
-   - **New Structure**:
-     ```json
-     {
-       "psalm_chapter": 1,
-       "full_psalm_summary": "LLM narrative...",
-       "phrase_groups": [
-         {"phrase": "...", "verses": "1:3", "summary": "LLM narrative..."}
-       ]
-     }
-     ```
-   - **Result**: Clean, minimal bundle with only scholarly summaries - exactly what commentary agents need
+3. **Divine Names Modification Verified** ✅
+   - **Verification**: Confirmed divine names modifier is applied to all Hebrew text:
+     - document_generator.py applies `modifier.modify_text()` to all text
+     - commentary_formatter.py applies modification to psalm text and inserted verse text
+   - **Result**: All Hebrew text properly modified for non-sacred rendering
 
-4. **Created Research Bundle Viewer** ✅
-   - New `view_research_bundle.py` script shows exact bundle passed to commentary agents
-   - Usage: `python view_research_bundle.py [psalm_number] [--format json|text|both]`
-   - Outputs the minimal bundle structure with only summaries
-   - Documentation in `RESEARCH_BUNDLE_VIEWING_GUIDE.md`
+4. **Liturgical Librarian Integration Confirmed** ✅
+   - **Verification**: Liturgical librarian output is properly integrated in research bundles
+   - **Format**: Research bundles include full psalm summaries and phrase-level liturgical usage summaries
+   - **Example**: research_bundle_psalm145_20251102_011842.txt shows detailed liturgical summaries
 
-### Verification Results
+### Files Modified
 
-Test run for Psalm 1 (`python view_research_bundle.py 1`) confirmed:
-- ✅ **14 non-unique phrases filtered**: Console shows `[FILTER] Non-unique phrase` messages
-- ✅ **Phrase groups reduced**: From 9 to 6 (3 groups with is_unique=0 removed)
-- ✅ **No separate LLM validation calls**: Only summary generation calls
-- ✅ **Minimal bundle structure**: Only phrase/verse + summary, no metadata
-- ✅ **Both problematic phrases removed**:
-  - "׀ לֹ֥א הָלַךְ֮" (was in output, now filtered)
-  - "וְדֶרֶךְ רְשָׁעִים" (was already filtered, still filtered)
+1. **src/agents/master_editor.py**
+   - Added instruction about readers' Hebrew proficiency
+   - Instructed to include Hebrew text when quoting sources
+   - Noted that verse text is programmatically inserted (don't duplicate)
+
+2. **src/agents/synthesis_writer.py**
+   - Added instruction about readers' Hebrew proficiency
+   - Instructed to include Hebrew text when quoting sources
+   - Noted that verse text is programmatically inserted (don't duplicate)
+
+3. **src/utils/commentary_formatter.py**
+   - Added `_insert_verse_text_into_commentary()` method
+   - Updated `format_commentary()` to call new method
+   - Ensures divine names modification applied to inserted verse text
 
 ## Next Session Tasks
 
 ### Primary Goal
-**Test Commentary Generation with New Research Bundle**
+**Test Full Commentary Generation with Hebrew Text Integration**
 
-With the research bundle now simplified to its minimal structure, the next phase is to integrate it with the Master Editor and Synthesis Writer to generate commentary.
+With Hebrew text integration complete, the next phase is to test the full commentary generation pipeline to ensure the enhancements work as expected.
 
 ### Key Objectives
 
-1. **Review Master Editor and Synthesis Writer** 📖
-   - Check the current state of these agents
-   - Update them to work with the new minimal research bundle structure
-   - Ensure they expect: `{"psalm_chapter": N, "full_psalm_summary": "...", "phrase_groups": [{"phrase": "...", "verses": "...", "summary": "..."}]}`
+1. **Run Complete Commentary Pipeline** 📖
+   - Generate commentary for a test psalm (e.g., Psalm 23 or Psalm 145)
+   - Verify that Hebrew verse text appears before each verse commentary
+   - Verify that quoted sources include Hebrew text alongside translations
+   - Check that divine names are properly modified throughout
 
-2. **Test Commentary Generation for Psalm 1** ✍️
-   - Run the full commentary generation pipeline with the new research bundle
-   - Review how the Master Editor and Synthesis Writer incorporate the liturgical summaries
-   - Verify the commentary quality matches expectations
+2. **Review Commentary Quality** ✍️
+   - Evaluate how well the Master Editor and Synthesis Writer incorporate Hebrew text
+   - Ensure the Hebrew text is natural and supports the analysis
+   - Verify that liturgical usage summaries from the research bundle are well-integrated
 
 3. **Iterate as Needed** 🔄
-   - Address any issues with the new bundle structure
-   - Fine-tune prompts if needed
-   - Adjust integration between agents as necessary
+   - Address any formatting issues with Hebrew text
+   - Fine-tune prompts if Hebrew text usage needs adjustment
+   - Adjust verse text insertion logic if needed
 
 ### Tools Available
 
 - `python view_research_bundle.py [psalm_num]` - View the exact research bundle for any psalm
-- `python test_psalm_filtering.py [psalm_num]` - Test filtering for any psalm
-- `RESEARCH_BUNDLE_VIEWING_GUIDE.md` - Documentation on bundle structure
+- `python run_pipeline.py --psalm [num]` - Run complete commentary generation pipeline
+- Commentary formatter automatically inserts verse text and applies divine names modification

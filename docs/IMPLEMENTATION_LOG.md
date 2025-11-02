@@ -1,3 +1,70 @@
+# Session 59 - Hebrew Text Integration and Commentary Enhancements (2025-11-02)
+
+**Goal**: Integrate Hebrew source text in commentary, programmatically add verse text to verse-by-verse commentary, and ensure divine names modification works on all Hebrew additions.
+
+**Status**: ✅ Complete
+
+## Session Overview
+
+This session enhanced the commentary generation pipeline to better serve readers familiar with biblical and rabbinic Hebrew:
+1. Updated Master Editor and Synthesis Writer to include Hebrew text when quoting sources
+2. Programmatically inserted Hebrew verse text before each verse's commentary
+3. Ensured divine names modifier works on all Hebrew text additions
+4. Verified that liturgical librarian output is properly incorporated in research bundles
+
+## Changes Implemented
+
+### 1. Hebrew Source Text in Commentary
+- **Enhancement**: Updated Master Editor and Synthesis Writer instructions to include Hebrew original text when quoting sources (biblical, rabbinic, liturgical)
+- **Rationale**: Readers are familiar with biblical and rabbinic Hebrew and can engage directly with the source text
+- **Implementation**: Added explicit instructions in both agent prompts to provide Hebrew alongside English translations
+
+### 2. Programmatic Hebrew Verse Text Insertion
+- **Enhancement**: Created `_insert_verse_text_into_commentary()` method in [commentary_formatter.py](../src/utils/commentary_formatter.py) to programmatically insert Hebrew verse text before each verse's commentary
+- **Rationale**: More reliable than instructing LLM to add verse text; ensures consistency
+- **Implementation**:
+  - New method parses verse commentary looking for "**Verse N**" headers
+  - Inserts modified Hebrew text (with divine names handled) after each header
+  - Applied in `format_commentary()` method before body text formatting
+
+### 3. Divine Names Modification on Hebrew Text
+- **Verification**: Confirmed that divine names modifier is already applied to all Hebrew text:
+  - [document_generator.py](../src/utils/document_generator.py) applies `modifier.modify_text()` to all text (lines 111, 139)
+  - [commentary_formatter.py](../src/utils/commentary_formatter.py) applies modification to psalm text (line 110) and now to inserted verse text
+- **Result**: All Hebrew text (including verse text and quoted sources) will have divine names properly modified for non-sacred rendering
+
+### 4. Liturgical Librarian Integration
+- **Verification**: Confirmed liturgical librarian output is already properly integrated in research bundles
+- **Format**: Research bundles include full psalm summaries and phrase-level summaries of liturgical usage
+- **Example**: [research_bundle_psalm145_20251102_011842.txt](../research_bundle_psalm145_20251102_011842.txt) shows detailed liturgical summaries
+
+## Files Modified
+
+1. **src/agents/master_editor.py**
+   - Added instruction about readers' Hebrew proficiency
+   - Instructed to include Hebrew text when quoting sources
+   - Noted that verse text is programmatically inserted (don't duplicate)
+
+2. **src/agents/synthesis_writer.py**
+   - Added instruction about readers' Hebrew proficiency
+   - Instructed to include Hebrew text when quoting sources
+   - Noted that verse text is programmatically inserted (don't duplicate)
+
+3. **src/utils/commentary_formatter.py**
+   - Added `_insert_verse_text_into_commentary()` method
+   - Updated `format_commentary()` to call new method
+   - Ensures divine names modification applied to inserted verse text
+
+## Technical Notes
+
+The programmatic insertion of verse text happens during the commentary formatting stage, after the LLM has generated the commentary. This ensures:
+- Consistency across all verse commentaries
+- Proper divine names modification
+- Reduced token usage (LLM doesn't need to repeat verse text)
+- Cleaner separation of concerns (LLM focuses on analysis, formatter handles presentation)
+
+---
+
 # Session 58 - Fix is_unique=0 Bug + Simplify Research Bundle (2025-11-02)
 
 **Goal**: Fix is_unique=0 filtering bug, remove extra LLM validation calls, and simplify research bundle to minimal structure.

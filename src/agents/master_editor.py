@@ -209,6 +209,9 @@ After the introduction essay, include a separate section titled "## Modern Jewis
 
 **Stage 3: Revised Verse Commentary**
 Rewrite the verse-by-verse commentary to address identified weaknesses. For each verse:
+
+- **Audience Hebrew Proficiency**: Your readers are familiar with biblical and rabbinic Hebrew. When you quote sources (biblical texts, rabbinic sources, liturgical texts), provide the Hebrew original AS WELL AS the English translation. Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.). Don't rely solely on translation—let readers see the Hebrew evidence for themselves. NOTE: The verse text in Hebrew will be programmatically inserted before your commentary, so you do NOT need to include it yourself.
+
 - **Length**: Target 300-500 words per verse. Shorter (200-250 words) is acceptable for simple verses with minimal interesting features. Longer (500-800 words) is ENCOURAGED and often NECESSARY for verses with:
   * Unusual Hebrew phrases or idioms (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
   * Complex poetic devices (chiasm, inclusio, intricate parallelism)
@@ -283,7 +286,7 @@ Return your response in this exact structure:
 
 **Verse 1**
 
-[Your revised commentary for verse 1. TARGET: 300-500 words. Do NOT shortchange the reader—intelligent lay readers want substantive analysis of linguistic and literary features. Aim for 400-500 words when the verse has interesting Hebrew phrases, poetic devices, figurative language, or interpretive questions. Only use 200-300 words for genuinely simple verses.]
+[Your revised commentary for verse 1. NOTE: The Hebrew verse text will be programmatically inserted before your commentary. TARGET: 300-500 words. Do NOT shortchange the reader—intelligent lay readers want substantive analysis of linguistic and literary features. Aim for 400-500 words when the verse has interesting Hebrew phrases, poetic devices, figurative language, or interpretive questions. Only use 200-300 words for genuinely simple verses.]
 
 **Verse 2**
 

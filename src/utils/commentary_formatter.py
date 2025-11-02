@@ -71,8 +71,9 @@ class CommentaryFormatter:
         # 3. Psalm Text Section
         psalm_text_section = self._format_psalm_text(psalm_num, psalm_text_data).strip() + "\n"
 
-        # 4. Verse-by-Verse Commentary
-        verse_commentary_section = f"## Verse-by-Verse Commentary\n{self._format_body_text(verses_text)}\n"
+        # 4. Verse-by-Verse Commentary (with programmatically inserted Hebrew verse text)
+        verses_with_hebrew = self._insert_verse_text_into_commentary(verses_text, psalm_text_data)
+        verse_commentary_section = f"## Verse-by-Verse Commentary\n{self._format_body_text(verses_with_hebrew)}\n"
 
         # 5. Bibliographical Summary
         biblio_summary_section = self._format_bibliographical_summary(summary_data)
@@ -100,6 +101,42 @@ class CommentaryFormatter:
         # Replace any sequence of two or more newlines with a single newline
         # This converts hard paragraph breaks into soft line breaks for Word.
         return re.sub(r'\n{2,}', '\n', normalized_text)
+
+    def _insert_verse_text_into_commentary(self, verses_text: str, psalm_text_data: Dict[int, Dict[str, str]]) -> str:
+        """
+        Programmatically inserts Hebrew verse text before each verse's commentary.
+
+        Args:
+            verses_text: The verse-by-verse commentary markdown from the LLM.
+            psalm_text_data: A dictionary mapping verse number to its Hebrew/English text.
+
+        Returns:
+            Modified verse commentary with Hebrew text inserted before each verse.
+        """
+        lines = verses_text.split('\n')
+        result = []
+
+        for line in lines:
+            # Check if this is a verse header (e.g., "**Verse 1**" or "**Verse 23**")
+            verse_match = re.match(r'\*\*Verse (\d+)\*\*', line.strip())
+            if verse_match:
+                verse_num = int(verse_match.group(1))
+                result.append(line)  # Add the verse header
+
+                # Add the Hebrew verse text if available
+                if verse_num in psalm_text_data:
+                    hebrew = psalm_text_data[verse_num].get('hebrew', '')
+                    if hebrew:
+                        # Apply divine names modification
+                        modified_hebrew = self.modifier.modify_text(hebrew)
+                        result.append(f"\n{modified_hebrew}\n")
+                        self.logger.debug(f"Inserted Hebrew text for verse {verse_num}")
+                else:
+                    result.append('')  # Add blank line after header if no Hebrew found
+            else:
+                result.append(line)
+
+        return '\n'.join(result)
 
     def _format_psalm_text(self, psalm_num: int, psalm_text_data: Dict[int, Dict[str, str]]) -> str:
         """Formats the full psalm text with Hebrew and English side-by-side."""
