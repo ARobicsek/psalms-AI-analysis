@@ -214,6 +214,62 @@ class LiturgicalLibrarian:
             'phrase_groups': phrase_groups
         }
 
+    def format_for_research_bundle(
+        self,
+        phrase_usage_matches: List['PhraseUsageMatch'],
+        psalm_chapter: int
+    ) -> str:
+        """
+        Formats the aggregated liturgical usage data into a markdown string
+        suitable for inclusion in the research bundle.
+        """
+        md = f"## Modern Jewish Liturgical Use (Psalm {psalm_chapter})\n\n"
+        md += "This section summarizes how Psalm {psalm_chapter} and its phrases are used in contemporary Jewish liturgy.\n\n"
+
+        full_psalm_summary_text = ""
+        phrase_summaries = []
+
+        for match in phrase_usage_matches:
+            if match.psalm_phrase_hebrew == f"[Full Psalm {psalm_chapter}]":
+                full_psalm_summary_text = match.liturgical_summary
+            else:
+                phrase_summaries.append(match)
+
+        if full_psalm_summary_text:
+            md += f"### Full Psalm {psalm_chapter} Recitation\n\n"
+            md += f"{full_psalm_summary_text}\n\n"
+
+        if phrase_summaries:
+            md += "### Phrase-Level Liturgical Usage\n\n"
+            md += "The following phrases from Psalm {psalm_chapter} appear in various liturgical contexts:\n\n"
+            for match in phrase_summaries:
+                md += f"#### Phrase: {match.psalm_phrase_hebrew} (from {match.psalm_verse_range})\n\n"
+                md += f"{match.liturgical_summary}\n\n"
+                if match.validation_notes:
+                    md += f"**Note**: {match.validation_notes}\n\n"
+                md += "---\n\n" # Separator for phrases
+
+        if not full_psalm_summary_text and not phrase_summaries:
+            md += f"No significant liturgical usage found for Psalm {psalm_chapter} or its phrases.\n\n"
+
+        return md
+
+    def find_liturgical_usage_aggregated(
+        self,
+        psalm_chapter: int,
+        min_confidence: float = 0.75
+    ) -> List[PhraseUsageMatch]:
+        """
+        Finds aggregated liturgical usage for a given psalm chapter.
+        This method is called by ResearchAssembler.
+        """
+        return self.find_liturgical_usage_by_phrase(
+            psalm_chapter=psalm_chapter,
+            min_confidence=min_confidence,
+            separate_full_psalm=True,
+            include_raw_matches=False # No need for raw matches in aggregated view
+        )
+
     def _get_db_connection(self):
         """Establish a connection to the SQLite database."""
         return sqlite3.connect(self.db_path)

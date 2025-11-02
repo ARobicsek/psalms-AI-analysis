@@ -1,7 +1,7 @@
 # Pipeline Summary Report: Psalm 1
 
-**Generated**: 2025-10-24 01:20:51
-**Total Pipeline Duration**: 923.8 seconds (15.4 minutes)
+**Generated**: 2025-11-02 02:03:15
+**Total Pipeline Duration**: -2674.6 seconds (-44.6 minutes)
 
 ---
 
@@ -18,61 +18,66 @@
 
 | Step | Input Chars | Input Tokens (est) | Output Chars | Output Tokens (est) | Duration (s) |
 |------|-------------|-------------------|--------------|---------------------|--------------|
-| macro_analysis | 1,270 | 423 | 8,865 | 2,955 | 55.4 |
-| micro_analysis | 8,865 | 2,955 | 128,274 | 42,758 | 105.4 |
-| → research_bundle | — | — | 121,477 | 40,492 | — |
-| synthesis | 137,141 | 45,713 | 21,378 | 7,126 | 139.9 |
-| master_editor | 150,441 | 50,147 | 22,083 | 7,361 | 142.9 |
+| macro_analysis | 1,270 | 423 | 8,119 | 2,706 | 47.3 |
+| micro_analysis | 8,119 | 2,706 | 102,729 | 34,243 | 103.6 |
+| → research_bundle | — | — | 96,607 | 32,202 | — |
+| synthesis | 110,850 | 36,950 | 20,276 | 6,758 | 149.1 |
+| master_editor | 123,977 | 41,325 | 23,470 | 7,823 | 145.3 |
 
 ---
 
 ## Research Requests
 
-### Lexicon Requests (8)
+### Lexicon Requests (13)
 
 | # | Hebrew Word | Reason |
 |---|-------------|--------|
-| 1 | לֵצִים | Wisdom literature technical term - semantic range and distinction from other wic... |
-| 2 | שָׁתוּל | Rare term for 'transplanted' - implies divine agency rather than natural growth |
-| 3 | הָגָה | Key meditation term - vocal vs. mental activity, and theological implications |
-| 4 | חֶפְצוֹ | Delight/desire - emotional dimension of Torah engagement beyond mere study |
-| 5 | פַּלְגֵי־מָיִם | Streams/channels compound - agricultural imagery precision |
-| 6 | מֹץ | Chaff - specific agricultural term contrasting with tree imagery |
-| 7 | יָקֻמוּ | Legal standing terminology - forensic context and inability to rise |
-| 8 | עֲדַת צַדִּיקִים | Assembly of righteous - judicial vs. community gathering context |
+| 1 | אַשְׁרֵי | Opening beatitude formula - semantic range beyond simple happiness, connection t... |
+| 2 | עֲצַת | Counsel/advice - whether human scheming or formal deliberation, ANE legal backgr... |
+| 3 | לֵצִים | Scoffers/insolent ones - specific social category in wisdom literature, etymolog... |
+| 4 | חֶפְצוֹ | Delight/desire - emotional vs. volitional aspects, theological implications of d... |
+| 5 | יֶהְגֶּה | Meditate/murmur - vocal vs. mental activity, technical term for Torah study prac... |
+| 6 | שָׁתוּל | Transplanted/planted - implies divine agency vs. natural growth, rare passive pa... |
+| 7 | פַּלְגֵי | Streams/channels - artificial irrigation vs. natural water, ANE agricultural con... |
+| 8 | יִבּוֹל | Produce/fruit - agricultural vs. metaphorical yield, covenant blessing terminolo... |
+| 9 | מֹץ | Chaff - specific agricultural term, metaphorical use in judgment contexts |
+| 10 | תִּדְּפֶנּוּ | Drive away - violent dispersal imagery, causative verbal form |
+| 11 | יָקֻמוּ | Stand/arise in judgment - legal technical term, eschatological implications |
+| 12 | עֲדַת | Assembly/congregation - formal community vs. casual gathering, cultic overtones |
+| 13 | תֹּאבֵד | Perish/be destroyed - active divine judgment vs. natural consequence |
 
-### Concordance Searches (6)
+### Concordance Searches (8)
 
 | # | Query | Scope | Level | Purpose |
 |---|-------|-------|-------|---------|
-| 1 | אשרי האיש | Tanakh | consonantal | Track beatitude formulas and 'blessed man' patterns |
-| 2 | תורת יהוה | Tanakh | consonantal | Divine law references and Torah meditation contexts |
-| 3 | יומם ולילה | Tanakh | consonantal | Merism for totality - continuous engagement patterns |
-| 4 | כעץ שתול | Tanakh | consonantal | Tree planting imagery and divine cultivation metaphors |
-| 5 | לא יקומו | Tanakh | consonantal | Legal inability to stand - forensic judgment terminology |
-| 6 | דרך רשעים | Tanakh | consonantal | Two ways theology and wicked path imagery |
+| 1 | הלך עמד ישב | Tanakh | consonantal | Check if this verb sequence is an established idiom or uniqu... |
+| 2 | עצת רשעים | Tanakh | consonantal | Track 'counsel of wicked' phrase usage in wisdom literature |
+| 3 | מושב לצים | Tanakh | consonantal | Find other references to scoffers' assembly or seat |
+| 4 | יהגה תורה | Tanakh | consonantal | Torah meditation language across Hebrew Bible |
+| 5 | עץ שתול | Tanakh | consonantal | Transplanted tree imagery in other contexts |
+| 6 | פלגי מים | Tanakh | consonantal | Water channels/streams in agricultural and metaphorical cont... |
+| 7 | מץ רוח | Tanakh | consonantal | Chaff and wind judgment imagery |
+| 8 | דרך צדיקים | Tanakh | consonantal | Way of righteous as wisdom theme |
 
-### Figurative Language Searches (6)
+### Figurative Language Searches (4)
 
 | # | Verse | Vehicle Terms | Reason |
 |---|-------|---------------|--------|
-| 1 | None | path, path, paths, way | Three-stage moral progression - path/way/dwelling ... |
-| 2 | None | tree, tree, trees, cedar | Tree by streams - agricultural metaphor for spirit... |
-| 3 | None | streams, streams, stream, waters | Streams of water - divine provision and irrigation... |
-| 4 | None | chaff, chaff, grain, harvest | Chaff blown by wind - worthlessness and instabilit... |
-| 5 | None | wind, wind, winds, spirit | Wind as judgment agent - natural force or divine s... |
-| 6 | None | standing, standing, stand, stands | Standing in judgment - legal court imagery | Vehic... |
+| 1 | None | walking, walking, walk, walks | Walking/standing/sitting as moral progression - em... |
+| 2 | None | tree, tree, trees, plant | Tree by water streams - vivid agricultural metapho... |
+| 3 | None | fruit, fruit, fruits, produce | Fruit in season - temporal productivity metaphor |... |
+| 4 | None | chaff, chaff, driven, drive | Chaff driven by wind - fragility and judgment imag... |
 
 ### Commentary Requests (6)
 
 | # | Verse | Reason |
 |---|-------|--------|
-| 1 | 1:1 | Opening beatitude and threefold moral progression - how commentators i... |
-| 2 | 1:2 | Torah meditation day and night - traditional understanding of continuo... |
-| 3 | 1:3 | Tree metaphor and transplanting imagery - classical interpretation of ... |
-| 4 | 1:4 | Chaff imagery and wind judgment - how commentators contrast wicked ins... |
-| 5 | 1:5 | Forensic judgment language - traditional eschatology and relationship ... |
-| 6 | 1:6 | Two ways conclusion and divine knowing - how commentators frame covena... |
+| 1 | 1:1 | Opening beatitude - how do commentators interpret 'ashrei' and the thr... |
+| 2 | 1:2 | Torah meditation - traditional understanding of 'delight' and continuo... |
+| 3 | 1:3 | Tree metaphor - classical interpretation of 'transplanted' vs natural ... |
+| 4 | 1:4 | Chaff imagery - how commentators explain the stark asymmetrical contra... |
+| 5 | 1:5 | Judgment scene - traditional eschatology, legal terminology, and exclu... |
+| 6 | 1:6 | Divine knowing and two ways - how commentators frame yada as covenant ... |
 
 ---
 
@@ -80,28 +85,30 @@
 
 ### Lexicon Entries
 
-**Total entries returned**: 23
+**Total entries returned**: 26
 
 ### Concordance Results
 
 | Query | Results Count |
 |-------|---------------|
-| אשרי האיש | 0 |
-| תורת יהוה | 11 |
-| יומם ולילה | 17 |
-| כעץ שתול | 1 |
-| לא יקומו | 0 |
-| דרך רשעים | 2 |
+| הלך עמד ישב | 0 |
+| עצת רשעים | 2 |
+| מושב לצים | 1 |
+| יהגה תורה | 0 |
+| עץ שתול | 1 |
+| פלגי מים | 0 |
+| מץ רוח | 0 |
+| דרך צדיקים | 1 |
 
-**Total concordance results**: 31
+**Total concordance results**: 5
 
 ### Figurative Language Results
 
 | Query/Verse | Instances Found |
 |-------------|-----------------|
-| total_instances_used | 380 |
+| total_instances_used | 245 |
 
-**Total figurative instances**: 380
+**Total figurative instances**: 245
 
 ### Commentary Results
 
@@ -125,35 +132,34 @@
 
 ## Analysis Questions
 
-### MacroAnalyst Research Questions (10)
+### MacroAnalyst Research Questions (8)
 
-1. What is the specific meaning and cultural significance of לצים (scoffers/mockers) in wisdom literature contexts?
-2. How does the forensic imagery in v. 5 (משפט and עדת צדיקים) relate to temple or legal procedures in ancient Israel?
-3. What are the Ancient Near Eastern parallels to the 'two ways' theme, particularly in wisdom traditions?
-4. How does the threefold progression in v. 1 (עצת/דרך/מושב) reflect Hebrew psychological understanding of moral development?
-5. What is the theological significance of the tree being 'planted' (שתול) versus naturally growing, and how does this relate to divine agency?
-6. How does the emphasis on Torah study 'day and night' (יומם ולילה) connect to specific post-exilic educational or devotional practices?
-7. What is the relationship between יצליח (prosper/succeed) in v. 3 and covenant blessing formulas elsewhere in scripture?
-8. How does the chaff imagery in v. 4 relate to harvest and judgment metaphors throughout biblical literature?
-9. What does ידע (know) in v. 6 suggest about the nature of divine knowledge—cognitive awareness or covenantal relationship?
-10. How does this psalm's placement as Psalm 1 function editorially to interpret the entire Psalter?
+1. What is the significance of the specific verb sequence in v. 1 (halak/amad/yashab) and how does it relate to Ancient Near Eastern idioms of moral progression?
+2. How does the concept of 'hagah' (meditation/murmuring) in v. 2 relate to ancient practices of Torah study and oral tradition?
+3. What is the background of the tree-by-water imagery in v. 3, particularly in relation to Ancient Near Eastern temple and cosmic symbolism?
+4. How does the legal terminology in v. 5 ('mishpat', 'adat tzaddikim') reflect specific judicial or cultic contexts?
+5. What does 'yada' (knows/cherishes) in v. 6 imply about the nature of divine providence and covenant relationship?
+6. How does the chaff metaphor in v. 4 function within the broader biblical and ANE harvest imagery tradition?
+7. What is the relationship between this psalm's 'two ways' theology and similar patterns in Deuteronomy and wisdom literature?
+8. How does the psalm's position as introduction to the Psalter influence its interpretation and theological function?
 
-### MicroAnalyst Interesting Questions (6)
+### MicroAnalyst Interesting Questions (7)
 
-1. Why does the psalm give three verses to describing the righteous but only one and a half to the wicked - what does this asymmetry accomplish rhetorically?
-2. What is the significance of the tree being 'transplanted' (שָׁתוּל) rather than naturally grown - does this imply divine initiative beyond human choice?
-3. How should we understand the absolute claim that 'whatever he does prospers' (כֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ) in light of other wisdom literature's more nuanced view of suffering?
-4. Why does the LXX translate לֵצִים (scoffers) as λοιμός (plague/pestilence) - what does this reveal about ancient interpretation of moral corruption?
-5. What is the relationship between the forensic imagery in v.5 (judgment, assembly of righteous) and the agricultural metaphors - are these sequential or simultaneous realities?
-6. Why does YHWH actively 'know' the way of the righteous but the way of the wicked simply 'perishes' without explicit divine action - what theology of judgment does this suggest?
+1. Why does the psalm use the specific verb progression halak/amad/yashab in v1 - does this reflect a known idiom or cultural pattern?
+2. What is the precise meaning of 'hagah' in v2 - is this vocal recitation, mental meditation, or memorization technique?
+3. Why is the tree 'planted' (shatul) rather than naturally growing - what does this suggest about divine agency?
+4. What accounts for the asymmetrical treatment of righteous vs wicked - is this theological bias or rhetorical strategy?
+5. How does the legal imagery in v5 ('stand in judgment', 'assembly') relate to specific judicial or cultic practices?
+6. What does divine 'knowing' (yada) in v6 imply beyond cognitive awareness - covenant care, election, or providence?
+7. Why does the wicked's way 'perish' (toved) while the righteous person 'prospers' (yatzliach) - active vs passive causation?
 
 ---
 
 ## Token Usage Summary
 
-**Total Input Tokens (estimated)**: 99,238
-**Total Output Tokens (estimated)**: 60,200
-**Total Tokens (estimated)**: 159,438
+**Total Input Tokens (estimated)**: 81,404
+**Total Output Tokens (estimated)**: 51,530
+**Total Tokens (estimated)**: 132,934
 
 *Note: Token estimates are approximate (character count / 3). Actual API usage may vary.*
 
@@ -161,4 +167,4 @@
 
 
 *Report generated by PipelineSummaryTracker*
-*Psalm 1 - 2025-10-24 01:20:51*
+*Psalm 1 - 2025-11-02 02:03:15*
