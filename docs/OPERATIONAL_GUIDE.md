@@ -107,6 +107,13 @@ Psalms/
 - Contains: Assembled research data (lexicon, concordances, etc.)
 - Format: Comprehensive markdown reference
 
+**Liturgical Usage**:
+- Included in: `output/phase3_test/psalm_029_research.md`
+- Contains: Where psalm verses/phrases appear in Jewish liturgy
+- Format: Organized by prayer tradition (Ashkenaz, Sefard, Edot HaMizrach)
+- LLM Summaries: Narrative descriptions of liturgical contexts (if enabled)
+- Coverage: Both full psalm usage and phrase-level appearances in prayers
+
 ### For Machine Processing
 
 **JSON Files**: `output/phase3_test/psalm_029_*.json`
@@ -795,7 +802,8 @@ done
 **Token Usage per Psalm:**
 - Introduction: ~50K input + 4K output = 54K tokens
 - Verses: ~50K input + 16K output = 66K tokens
-- **Total per psalm:** 120K tokens
+- Liturgical Summaries (if enabled): ~5-10K input + 1-2K output per psalm
+- **Total per psalm:** 120-130K tokens (with liturgical summaries)
 
 **All 150 Psalms:**
 - Total tokens: 150 × 120K = 18M tokens

@@ -65,6 +65,8 @@ data/                    # Raw data files
 - `src/agents/concordance_librarian.py` - Word/phrase concordance searches
 - `src/agents/figurative_librarian.py` - Figurative language database queries
 - `src/agents/commentary_librarian.py` - Traditional Jewish commentaries
+- `src/agents/liturgical_librarian_sefaria.py` - Sefaria liturgical cross-references (Phase 0)
+- `src/agents/liturgical_librarian.py` - Comprehensive liturgical usage (Phase 4/5)
 
 #### Supporting Infrastructure
 - `src/agents/research_assembler.py` - Coordinates all librarians
@@ -205,6 +207,24 @@ bundle = librarian.fetch_multiple(requests)
 - `ConcordanceLibrarian` - Searches local concordance database
 - `FigurativeLibrarian` - Queries figurative language database
 - `CommentaryLibrarian` - Retrieves traditional commentaries via Sefaria
+- `SefariaLiturgicalLibrarian` (Phase 0) - Quick verse-level liturgical cross-references from Sefaria
+- `LiturgicalLibrarian` (Phase 4/5) - Comprehensive phrase-level liturgical usage with optional LLM summaries
+
+**Liturgical Librarian Details**:
+
+**SefariaLiturgicalLibrarian** (Phase 0 Bootstrap):
+- Purpose: Quick verse-level liturgical cross-references from Sefaria's curated data
+- Coverage: ~74 Psalms with explicit liturgical connections
+- No LLM required (pure data retrieval)
+- Used for bootstrapping and quick reference
+
+**LiturgicalLibrarian** (Phase 4/5 Comprehensive):
+- Purpose: Phrase-level detection of Psalm passages in Jewish liturgy
+- Database: `liturgy.db` with indexed prayers and phrase matches
+- LLM Integration: Optional Claude Haiku 4.5 for intelligent summarization
+- Aggregation: Groups matches by prayer name to prevent duplication
+- Quality Assurance: Automatic validation and retry logic
+- Output: Narrative summaries of liturgical contexts included in research bundle
 
 **Think of them as**: Research assistants who fetch books from the library shelves
 
@@ -239,6 +259,7 @@ BDBLibrarian fetches lexicon entries
 ConcordanceLibrarian finds usage patterns
 FigurativeLibrarian identifies metaphors
 CommentaryLibrarian retrieves Rashi, Ibn Ezra, etc.
+LiturgicalLibrarian identifies prayer contexts
     ↓
 ResearchBundle assembled
     ↓
