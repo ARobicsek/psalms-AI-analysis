@@ -35,6 +35,10 @@ Complete guide to all documentation in the Psalms Commentary Project.
 ### Librarian Agents
 - **[LIBRARIAN_USAGE_EXAMPLES.md](LIBRARIAN_USAGE_EXAMPLES.md)** - Quick reference for BDB, Concordance, Figurative, Commentary librarians
 
+### Liturgical Features
+- **[LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md](LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md)** - Implementation architecture for liturgical database and librarian
+- **[SESSION_55_LITURGICAL_LIBRARIAN_ENHANCEMENTS.md](SESSION_55_LITURGICAL_LIBRARIAN_ENHANCEMENTS.md)** - Quality validation and retry logic
+
 ### RAG Knowledge Base
 - **[analytical_framework_for_RAG.md](analytical_framework_for_RAG.md)** - Biblical poetry analysis methodology
 - **rag/psalm_function/** - Genre and structure database (150 psalms)
@@ -94,7 +98,8 @@ All session-specific planning documents and summaries:
 1. [TECHNICAL_ARCHITECTURE_SUMMARY.md](TECHNICAL_ARCHITECTURE_SUMMARY.md) - System design
 2. [PHONETIC_DEVELOPER_GUIDE.md](PHONETIC_DEVELOPER_GUIDE.md) - Phonetic integration
 3. [LIBRARIAN_USAGE_EXAMPLES.md](LIBRARIAN_USAGE_EXAMPLES.md) - Using librarian agents
-4. [OPERATIONAL_GUIDE.md](OPERATIONAL_GUIDE.md) - Testing, rate limiting, batch API
+4. [LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md](LITURGICAL_LIBRARIAN_IMPLEMENTATION_PLAN.md) - Liturgical features
+5. [OPERATIONAL_GUIDE.md](OPERATIONAL_GUIDE.md) - Testing, rate limiting, batch API
 
 ### For Project Managers
 1. [PROJECT_STATUS.md](PROJECT_STATUS.md) - Current progress

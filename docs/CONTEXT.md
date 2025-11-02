@@ -90,7 +90,9 @@ python scripts/cost_report.py
 - **BDB Librarian**: Fetches Hebrew lexicon entries via Sefaria
 - **Concordance Librarian**: Searches 4-layer Hebrew concordance
 - **Figurative Librarian**: Queries 2,863 figurative instances database
-- **Commentary Librarian**: Fetches 6 traditional commentators (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri)
+- **Commentary Librarian**: Fetches 7 traditional commentators (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah)
+- **Liturgical Librarian (Sefaria)**: Verse-level liturgical cross-references from Sefaria (Phase 0)
+- **Liturgical Librarian**: Phrase-level liturgical usage with LLM-generated summaries (Phase 4/5)
 - **Research Assembler**: Coordinates all librarians, returns structured bundle
 
 ## Hebrew Concordance: 4-Layer Search + Phrase Support

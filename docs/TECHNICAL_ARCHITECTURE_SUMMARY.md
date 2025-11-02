@@ -39,8 +39,8 @@ Output: Scholarly Commentary (.docx)
 ### Core Components
 
 1. **AI Agents** (4 specialized LLM-based analyzers)
-2. **Librarian Agents** (5 deterministic Python data retrieval systems)
-3. **Data Sources** (SQLite databases, Sefaria API, RAG documents)
+2. **Librarian Agents** (7 deterministic Python data retrieval systems)
+3. **Data Sources** (SQLite databases, Sefaria API, RAG documents, Liturgical corpus)
 4. **Output Generation** (Markdown → Word document formatting)
 5. **Logging & Metrics** (Dual-format observability system)
 
@@ -134,6 +134,21 @@ Output: Scholarly Commentary (.docx)
   - Historical perspective inclusion
   - Traditional interpretation synthesis
 
+#### Liturgical Librarian (Dual-Phase Implementation)
+- **Function**: Identifies where Psalm passages appear in Jewish liturgy
+- **Databases**: `liturgy.db` with prayers and phrase-level index
+- **Implementation**: Dual-phase approach
+  - Phase 0: `liturgical_librarian_sefaria.py` - Bootstrap from Sefaria cross-references
+  - Phase 4/5: `liturgical_librarian.py` - Comprehensive phrase-level matching
+- **Key Features**:
+  - Verse-level and sub-verse phrase detection
+  - Coverage across 3 traditions (Ashkenaz, Sefard, Edot HaMizrach)
+  - Claude Haiku 4.5 LLM-powered intelligent summarization
+  - Aggregation by prayer name (prevents duplicate contexts)
+  - Quality validation with automatic retry logic
+  - Misattribution detection (prevents wrong psalm references)
+  - Generates narrative summaries of liturgical usage for research bundle
+
 #### Research Bundle Assembler
 - **Function**: Coordinates all librarians and formats results
 - **Output**: Markdown format for LLM consumption
@@ -190,6 +205,10 @@ def normalize_hebrew(text: str, level: int) -> str:
 3. **`psalms_commentary.db`**: Pipeline output storage
    - Tables: `chapters`, `verses`, `research_requests`, `cost_log`
    - Fields: Analysis results, research bundles, cost tracking
+
+4. **`liturgy.db`**: Liturgical texts and Psalms cross-reference index
+   - Tables: `prayers`, `psalms_liturgy_index`, `sefaria_liturgy_links`, `liturgical_metadata`
+   - Fields: Prayer classification (nusach, occasion, service, section), phrase matches, confidence scores
 
 #### RAG Document Integration
 - **Analytical Framework**: `docs/analytical_framework_for_RAG.md`
