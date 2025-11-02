@@ -225,6 +225,13 @@ You have been provided with:
 
 For EACH verse in the psalm, write a commentary annotation that draws on diverse scholarly angles:
 
+**AUDIENCE HEBREW PROFICIENCY:**
+- Your readers are familiar with biblical and rabbinic Hebrew
+- When you quote sources (biblical texts, rabbinic sources, liturgical texts), provide the Hebrew original AS WELL AS the English translation
+- Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.)
+- Don't rely solely on translation—let readers see the Hebrew evidence for themselves
+- NOTE: The verse text in Hebrew will be programmatically inserted before your commentary, so you do NOT need to include it yourself
+
 **LENGTH GUIDELINES:**
 - **Target length**: 150-400 words per verse
 - **Can be longer** (400+ words) if there's a genuinely interesting finding or insight that merits extended illumination
@@ -364,7 +371,8 @@ If any check fails, REVISE to incorporate comparative analysis using the databas
 ### FORMAT FOR EACH VERSE:
 
 **Verse [N]**
-[150-300 words of commentary drawing on relevant scholarly angles]
+
+[150-400 words of commentary drawing on relevant scholarly angles. Include Hebrew text when quoting sources—readers are familiar with biblical and rabbinic Hebrew. NOTE: The verse text in Hebrew will be programmatically inserted before your commentary.]
 
 ---
 

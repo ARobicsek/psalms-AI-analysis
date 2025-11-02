@@ -1,13 +1,17 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-11-02 (Session 58)
-**Current Phase**: Liturgical Librarian Complete - Ready for Commentary Generation
+**Last Updated**: 2025-11-02 (Session 59)
+**Current Phase**: Commentary Enhancements Complete - Hebrew Text Integration
 
 ---
 
 ## Quick Status
 
 ### Completed ✅
+- **Hebrew Text Integration**: Master Editor and Synthesis Writer now include Hebrew source text when quoting sources
+- **Programmatic Verse Text Insertion**: Hebrew verse text automatically inserted before each verse commentary
+- **Divine Names Modification**: All Hebrew text (verse text, quoted sources) properly modified for non-sacred rendering
+- **Liturgical Librarian Output**: Confirmed integration in research bundles with detailed summaries
 - **is_unique=0 Filtering**: Phrases appearing in multiple psalms are now filtered out before LLM processing
 - **Removed Extra LLM Calls**: Validation is now implicit in summary generation - no separate validation calls
 - **Minimal Research Bundle**: Bundle contains ONLY phrase/verse identifiers and LLM summaries - no metadata
@@ -16,9 +20,21 @@
 - **Cost Control**: LLM receives maximum 5 matches per verse/phrase/chapter group
 
 ### Next Up 📋
-- **Commentary Generation**: Integrate the new minimal research bundle with Master Editor and Synthesis Writer
-- **Pipeline Integration**: Update commentary agents to work with simplified bundle structure
-- **Quality Assessment**: Test Psalm 1 commentary generation and iterate as needed
+- **Commentary Generation**: Test the enhanced system with full commentary generation
+- **Pipeline Integration**: Run complete pipeline with Hebrew text integration
+- **Quality Assessment**: Review generated commentary to ensure Hebrew text is properly integrated
+
+---
+
+## Session 59 Summary
+
+- **Goal**: Integrate Hebrew source text in commentary, programmatically add verse text, ensure divine names modification works.
+- **Activity**:
+    - Updated Master Editor and Synthesis Writer prompts to include Hebrew text when quoting sources
+    - Created `_insert_verse_text_into_commentary()` method in commentary_formatter.py
+    - Verified divine names modifier handles all Hebrew text additions
+    - Confirmed liturgical librarian output is properly integrated in research bundles
+- **Outcome**: Commentary now serves readers familiar with biblical and rabbinic Hebrew. Hebrew verse text programmatically inserted before each commentary. Divine names modification applied to all Hebrew text.
 
 ---
 
