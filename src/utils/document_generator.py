@@ -112,7 +112,7 @@ class DocumentGenerator:
 
         p = self.document.add_paragraph(style=style)
         # Split by bold/italic markers
-        parts = re.split(r'(\*\*.*?\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
+        parts = re.split(r'(\$\$|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
         for part in parts:
             if part.startswith('**') and part.endswith('**'):
                 run = p.add_run(part[2:-2])
@@ -132,7 +132,18 @@ class DocumentGenerator:
                 inner_content = part[1:-1]
                 self._add_nested_formatting(p, inner_content, base_italic=True)
             else:
-                p.add_run(part)
+                # Bidi fix: handle parenthesized Hebrew
+                sub_parts = re.split(r'([\(][\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+[\)])', part)
+                for sub_part in sub_parts:
+                    if sub_part and sub_part.startswith('(') and sub_part.endswith(')'):
+                        p.add_run('(')
+                        hebrew_run = p.add_run(sub_part[1:-1])
+                        hebrew_run.font.rtl = True
+                        hebrew_run.font.name = 'Aptos' # Explicitly set font
+                        hebrew_run.font.size = Pt(12) # Explicitly set size
+                        p.add_run(')')
+                    elif sub_part:
+                        p.add_run(sub_part)
 
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
@@ -140,7 +151,7 @@ class DocumentGenerator:
         p = self.document.add_paragraph(style=style)
 
         # Split the entire text by markdown markers first
-        parts = re.split(r'(\*\*.*?\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
+        parts = re.split(r'(\$\$|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
 
         for part in parts:
             is_bold = (part.startswith('**') and part.endswith('**')) or \
@@ -160,9 +171,28 @@ class DocumentGenerator:
                 lines = content.split('\n')
                 for i, line in enumerate(lines):
                     if line:
-                        run = p.add_run(line)
-                        run.bold = is_bold
-                        run.italic = is_italic
+                        # Bidi fix: handle parenthesized Hebrew
+                        sub_parts = re.split(r'([\(][\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+[\)])', line)
+                        for sub_part in sub_parts:
+                            if sub_part and sub_part.startswith('(') and sub_part.endswith(')'):
+                                run_open = p.add_run('(')
+                                run_open.bold = is_bold
+                                run_open.italic = is_italic
+
+                                hebrew_run = p.add_run(sub_part[1:-1])
+                                hebrew_run.font.rtl = True
+                                hebrew_run.font.name = 'Aptos' # Explicitly set font
+                                hebrew_run.font.size = Pt(12) # Explicitly set size
+                                hebrew_run.bold = is_bold
+                                hebrew_run.italic = is_italic
+
+                                run_close = p.add_run(')')
+                                run_close.bold = is_bold
+                                run_close.italic = is_italic
+                            elif sub_part:
+                                run = p.add_run(sub_part)
+                                run.bold = is_bold
+                                run.italic = is_italic
                     if i < len(lines) - 1:
                         p.add_run().add_break()
 
@@ -177,7 +207,7 @@ class DocumentGenerator:
             base_italic: Whether the base text should be italic (True for backtick context)
         """
         # Split by bold markers
-        parts = re.split(r'(\*\*.*?\*\*)', text)
+        parts = re.split(r'(\$\$|\*\*)', text)
         for part in parts:
             if part.startswith('**') and part.endswith('**'):
                 # Bold text (stressed syllable)
@@ -204,7 +234,7 @@ class DocumentGenerator:
         for i, line in enumerate(lines):
             if line:
                 # Then handle bold within each line
-                parts = re.split(r'(\*\*.*?\*\*)', line)
+                parts = re.split(r'(\$\$|\*\*)', line)
                 for part in parts:
                     if part.startswith('**') and part.endswith('**'):
                         run = paragraph.add_run(part[2:-2])
@@ -266,7 +296,7 @@ class DocumentGenerator:
                 continue
 
             verse_num = verse_num_match.group(1)
-            commentary_text = "\n".join(lines[1:]).strip()
+            commentary_text = '\n'.join(lines[1:]).strip()
 
             # Get Hebrew/English text from the database data
             verse_info = psalm_text_data.get(int(verse_num), {})
@@ -403,6 +433,15 @@ Methodological & Bibliographical Summary
 
         for verse in parsed_verses:
             self.document.add_heading(f'Verse {verse["number"]}', level=3)
+            
+            # Insert the Hebrew verse text before the commentary
+            p_hebrew = self.document.add_paragraph()
+            hebrew_run = p_hebrew.add_run(self.modifier.modify_text(verse["hebrew"]))
+            hebrew_run.font.name = 'SBL Hebrew'
+            hebrew_run.font.size = Pt(14)
+            hebrew_run.font.rtl = True
+            p_hebrew.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
             self._add_paragraph_with_soft_breaks(verse["commentary"], style='BodySans')
 
         # 5. Add Methodological Summary

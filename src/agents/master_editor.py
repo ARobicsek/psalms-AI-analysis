@@ -266,6 +266,12 @@ Example of BAD: "Verse 16 speaks of God opening his hand. This imagery appears e
 
 ---
 
+## CRITICAL REQUIREMENT: LITURGICAL SUMMARY
+
+**Your final output MUST include the `## Modern Jewish Liturgical Use` section.** This is not optional. This section must follow the main introduction essay and summarize the liturgical data from the research bundle as specified in the instructions. Your output will be automatically checked for the presence of this exact header.
+
+---
+
 ## OUTPUT FORMAT
 
 Return your response in this exact structure:

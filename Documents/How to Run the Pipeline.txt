@@ -20,6 +20,11 @@ python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synth
 --skip-print-ready
 --skip-word-doc
 
+#View the exact bundle passed to commentary agents
+python view_research_bundle.py [psalm_number] [--format json|text|both]
+RESEARCH_BUNDLE_VIEWING_GUIDE.md - Documentation on bundle structure
+
+
 #Targeted Re-indexing Script
 Created: scripts/reindex_specific_psalms.py
 Features: Re-index specific Psalms, ranges, or all 150

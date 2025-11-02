@@ -175,6 +175,7 @@ Write TWO sections:
 
 ### 2. Modern Jewish Liturgical Use (150-300 words)
 After the introduction essay, write a separate section titled "## Modern Jewish Liturgical Use" that summarizes where and how elements of this psalm appear in Jewish liturgy.
+- this should be drawn from the liturgical section of the research bundle
 
 This section should:
 - Summarize the liturgical usage information provided in the research bundle
