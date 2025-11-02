@@ -424,50 +424,71 @@ class MicroAnalystV2:
             verse_count=verse_count
         )
 
-        # Call Sonnet 4.5
+        # Call Sonnet 4.5 with retry logic
         self.logger.info("  Calling Sonnet 4.5...")
-        try:
-            response = self.client.messages.create(
-                model=self.model,
-                max_tokens=8192,
-                messages=[{
-                    "role": "user",
-                    "content": prompt
-                }]
-            )
 
-            # Extract and parse JSON
-            response_text = self._extract_json_from_response(response)
-            self.logger.debug(f"Response text preview: {response_text[:500]}")
+        max_retries = 3
+        retry_delay = 2  # seconds
 
-            # Try to extract JSON from markdown code blocks if present
-            if response_text.startswith("```"):
-                # Extract from code block
-                lines = response_text.split('\n')
-                json_lines = []
-                in_json = False
-                for line in lines:
-                    if line.startswith("```"):
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))  # Exponential backoff
+                    self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
+
+                response = self.client.messages.create(
+                    model=self.model,
+                    max_tokens=8192,
+                    messages=[{
+                        "role": "user",
+                        "content": prompt
+                    }]
+                )
+
+                # Extract and parse JSON
+                response_text = self._extract_json_from_response(response)
+                self.logger.debug(f"Response text preview: {response_text[:500]}")
+
+                # Try to extract JSON from markdown code blocks if present
+                if response_text.startswith("```"):
+                    # Extract from code block
+                    lines = response_text.split('\n')
+                    json_lines = []
+                    in_json = False
+                    for line in lines:
+                        if line.startswith("```"):
+                            if in_json:
+                                break
+                            in_json = True
+                            continue
                         if in_json:
-                            break
-                        in_json = True
-                        continue
-                    if in_json:
-                        json_lines.append(line)
-                response_text = '\n'.join(json_lines)
-                self.logger.debug(f"Extracted from code block, length: {len(response_text)}")
+                            json_lines.append(line)
+                    response_text = '\n'.join(json_lines)
+                    self.logger.debug(f"Extracted from code block, length: {len(response_text)}")
 
-            discoveries = json.loads(response_text)
+                discoveries = json.loads(response_text)
 
-            self.logger.info(f"  ✓ Discovery pass complete")
-            return discoveries
+                self.logger.info(f"  ✓ Discovery pass complete")
+                return discoveries
 
-        except json.JSONDecodeError as e:
-            self.logger.error(f"Failed to parse discovery JSON: {e}")
-            raise ValueError(f"Invalid JSON from discovery pass: {e}")
-        except Exception as e:
-            self.logger.error(f"Error in discovery pass: {e}")
-            raise
+            except json.JSONDecodeError as e:
+                self.logger.error(f"Failed to parse discovery JSON: {e}")
+                raise ValueError(f"Invalid JSON from discovery pass: {e}")
+
+            except Exception as e:
+                # Check if it's a retryable error
+                import anthropic
+                is_retryable = isinstance(e, (anthropic.InternalServerError, anthropic.RateLimitError, anthropic.APIConnectionError))
+
+                if is_retryable and attempt < max_retries - 1:
+                    self.logger.warning(f"API error (attempt {attempt + 1}/{max_retries}): {e}")
+                    continue  # Retry
+                else:
+                    # Not retryable or out of retries
+                    self.logger.error(f"Error in discovery pass: {e}")
+                    raise
 
     def _generate_research_requests(
         self,
@@ -490,55 +511,76 @@ class MicroAnalystV2:
             commentary_instructions=commentary_instructions
         )
 
-        # Call Sonnet 4.5
+        # Call Sonnet 4.5 with retry logic
         self.logger.info("  Calling Sonnet 4.5 for research request generation...")
-        try:
-            response = self.client.messages.create(
-                model=self.model,
-                max_tokens=4096,
-                messages=[{
-                    "role": "user",
-                    "content": prompt
-                }]
-            )
 
-            # Extract and parse JSON
-            response_text = self._extract_json_from_response(response)
-            self.logger.debug(f"Response text preview: {response_text[:500]}")
+        max_retries = 3
+        retry_delay = 2  # seconds
 
-            # Try to extract JSON from markdown code blocks if present
-            if response_text.startswith("```"):
-                # Extract from code block
-                lines = response_text.split('\n')
-                json_lines = []
-                in_json = False
-                for line in lines:
-                    if line.startswith("```"):
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))  # Exponential backoff
+                    self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
+
+                response = self.client.messages.create(
+                    model=self.model,
+                    max_tokens=4096,
+                    messages=[{
+                        "role": "user",
+                        "content": prompt
+                    }]
+                )
+
+                # Extract and parse JSON
+                response_text = self._extract_json_from_response(response)
+                self.logger.debug(f"Response text preview: {response_text[:500]}")
+
+                # Try to extract JSON from markdown code blocks if present
+                if response_text.startswith("```"):
+                    # Extract from code block
+                    lines = response_text.split('\n')
+                    json_lines = []
+                    in_json = False
+                    for line in lines:
+                        if line.startswith("```"):
+                            if in_json:
+                                break
+                            in_json = True
+                            continue
                         if in_json:
-                            break
-                        in_json = True
-                        continue
-                    if in_json:
-                        json_lines.append(line)
-                response_text = '\n'.join(json_lines)
-                self.logger.debug(f"Extracted from code block, length: {len(response_text)}")
+                            json_lines.append(line)
+                    response_text = '\n'.join(json_lines)
+                    self.logger.debug(f"Extracted from code block, length: {len(response_text)}")
 
-            data = json.loads(response_text)
+                data = json.loads(response_text)
 
-            # Convert to ResearchRequest via ScholarResearchRequest
-            scholar_request = ScholarResearchRequest.from_dict(data)
-            request_dict = scholar_request.to_research_request(psalm_number)
-            research_request = ResearchRequest.from_dict(request_dict)
+                # Convert to ResearchRequest via ScholarResearchRequest
+                scholar_request = ScholarResearchRequest.from_dict(data)
+                request_dict = scholar_request.to_research_request(psalm_number)
+                research_request = ResearchRequest.from_dict(request_dict)
 
-            self.logger.info(f"  ✓ Research requests generated")
-            return research_request
+                self.logger.info(f"  ✓ Research requests generated")
+                return research_request
 
-        except json.JSONDecodeError as e:
-            self.logger.error(f"Failed to parse research request JSON: {e}")
-            raise ValueError(f"Invalid JSON from research generation: {e}")
-        except Exception as e:
-            self.logger.error(f"Error generating research requests: {e}")
-            raise
+            except json.JSONDecodeError as e:
+                self.logger.error(f"Failed to parse research request JSON: {e}")
+                raise ValueError(f"Invalid JSON from research generation: {e}")
+
+            except Exception as e:
+                # Check if it's a retryable error
+                import anthropic
+                is_retryable = isinstance(e, (anthropic.InternalServerError, anthropic.RateLimitError, anthropic.APIConnectionError))
+
+                if is_retryable and attempt < max_retries - 1:
+                    self.logger.warning(f"API error (attempt {attempt + 1}/{max_retries}): {e}")
+                    continue  # Retry
+                else:
+                    # Not retryable or out of retries
+                    self.logger.error(f"Error generating research requests: {e}")
+                    raise
 
     def _create_micro_analysis(
         self,
