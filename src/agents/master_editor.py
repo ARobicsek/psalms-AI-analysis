@@ -105,6 +105,7 @@ Review the introduction and verse commentary for these issues:
 - Weak, forced, unclear or incorrect phonetic analysis. ONLY NOTEWORTHY, STRONG and ILLUMINATING phonetic poetic devices should be pointed out (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm, meter).
 - Authorotative Phonetic transcription provided above in ### PSALM TEXT MUST BE USED to analyze sound patterns.
 - Stress analysis ignored: The phonetic transcriptions include stress marking where syllables in **BOLD CAPS** indicate stressed syllables based on Hebrew cantillation marks. For example, `mal-**KHŪTH**-khā` means the middle syllable KHŪTH receives primary stress. If you wish to analyze prosodic patterns, meter, or stress counts, you should add this analysis by counting the **BOLD CAPS** syllables.
+- IRRELEVANT phonetic transcriptions. ONLY provide phonetic transcriptions where the pronunciation specifically illustrates the point you are making. Otherwise, just proivide the relevant Hebrew with English translation (not transcriptions). Example of RELEVANT transcription:"The triple anaphora לֹא (LŌ’) … לֹא … לֹא gives the line its pulse; read aloud, the negatives strike like posts in a fence...". Example of IRRELEVANT transcription: "The wicked “will not stand” (לֹא־יָקֻמוּ, lō’-yā-QU-mū) in the judgment..."
 - Comparative textual insights (e.g. MT vs LXX) not addressed
 - NOTEWORTHY poetic devices (e.g. assonance, chiasm, inclusio, parallelism) not described
 - Unusual or interesting Hebrew phrases not commented on (e.g., distinctive idioms, unusual word pairings like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
@@ -125,13 +126,14 @@ Review the introduction and verse commentary for these issues:
 - **Clarity is paramount.** If a sentence feels like it was written for a dissertation defense, rewrite it for a coffee shop conversation with a clever friend.
 - AVOID Unnecessarily complex sentence structures that obscure rather than illuminate
 
-**Markup for Transliteration**:
-- When you use a transliterated Hebrew word or phrase in your prose, **you MUST include the Hebrew text alongside the transliteration** in the format: Hebrew (transliteration). For example: "The opening line, אַשְׁרֵי־הָאִישׁ (`ashrei ha'ish`), signals..." or "The verb חָפֵץ (`ḥafetz`) denotes desire...".
-- **You MUST enclose the transliteration in backticks**. This is how the document generator will identify it for italicization.
-- When you use a transliterated Hebrew word or phrase in your prose, **you MUST use the phonetic transcription from the PSALM TEXT section above EXCEPT for the tetragrammaton, which you should render as YHWH**. This ensures consistency and accuracy in pronunciation guidance for readers.
-- ALWAYS provide the Hebrew text before the transliteration. Do NOT use standalone transliterations without Hebrew. For example:
-  * CORRECT: "The verb יֶהְגֶּה (`yeh-GEH`) is deliciously concrete"
-  * INCORRECT: "The verb `yeh-GEH` is deliciously concrete"
+**Markup for Phonetic transcription (i.e. transliteration)**:
+- **too many phonetic transcriptions clutter the prose. ONLY use transcriptions when the reader NEEDS to know how something was pronounced in order to understand your point about a poetic device. Do NOT transliterate words where the pronunciation does not pertain to the point you are making.** On the other hand, DO always provide the relevant text/words in Hebrew with English TRANSLATION.
+- When you use a phonetically transcribed Hebrew word or phrase in your prose, **you MUST include the Hebrew text alongside the phonetic transcription** in the format: Hebrew (phonetic transcription). For example: "The opening line, אַשְׁרֵי־הָאִישׁ (`'ash-rēy-hā-'IY-sh`).
+- **You MUST enclose the phonetic transcription in backticks**. This is how the document generator will identify it for italicization.
+- When you use a phonetically transcribed Hebrew word or phrase in your prose, **you MUST use the phonetic transcription from the PSALM TEXT section above EXCEPT for the tetragrammaton, which you should render as YHWH**. This ensures consistency and accuracy in pronunciation guidance for readers.
+- ALWAYS provide the Hebrew text before the transcription. Do NOT use standalone transcriptions without Hebrew.
+  * CORRECT: "The verb יֶהְגֶּה (`yeh-GEH`) is onomotopoeic, evoking a murmuring sound..."
+  * INCORRECT: "The verb `yeh-GEH` is onomotopoeic..."
 
 **Should conform to this style:**
 - Measured, confident tone (like a distinguished professor)
@@ -140,7 +142,7 @@ Review the introduction and verse commentary for these issues:
 - Vary sentence structure for readability
 - Explain technical terms when needed (e.g., "jussive," "anaphora," "chiasm," "inclusio")
 - Elegant, uncluttered prose for sophisticated lay readers (New Yorker/Atlantic level)
-- AVOID pompous tone and fancy terms that signal you're a professor; prove your erudition through the incisive and original quality of your insights
+- AVOID pompous tone and fancy terms that signal you're a professor; prove your erudition through the incisive and original quality of your insights and your lapidary prose.
 
 ### 4. ARGUMENT COHERENCE
 - Introduction thesis unclear or unsupported
@@ -216,7 +218,7 @@ The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" 
 4. **OMIT subsections that don't apply** to this psalm
 5. **Add Hebrew quotations** - for EVERY verse/phrase, include Hebrew from both the psalm AND the prayer
 6. **Be specific** - name the service, occasion, tradition
-7. **Explain significance** - why this usage matters theologically
+7. **Explain significance** - why this usage matters theologically, or is relevant to our understanding of the psalm, or reflects something interesting about how the psalm was received, understood, appropriated or reinterpreted by the tradition.
 
 **Target: 200-500 words** (longer if extensive usage)
 
@@ -250,7 +252,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
     - Church fathers and medieval Christian interpretation if very illuminating
     - Modern critical scholarship debates
   * Figurative language analysis (how does the usage of similar figuration elsewhere shed light on how it's functioning here?)
-  * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided above))
+  * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided above to conduct this analysis))
   * **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it—explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
   * Literary insights (narrative techniques, rhetorical strategies)
   * Historical and cultic insights (worship setting, historical context)
