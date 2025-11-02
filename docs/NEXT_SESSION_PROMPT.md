@@ -1,73 +1,53 @@
-# Session 65 Handoff - Pipeline Testing and Quality Review
+# Session 66 Handoff - Pipeline Testing and Quality Review
 
-## Previous Session (Session 64) Summary
+## Previous Session (Session 65) Summary
 
-Session 64 successfully addressed five persistent formatting and content issues using an agentic approach, including a challenging debugging session to fix the Master Editor's empty liturgical section output.
+Session 65 fixed a critical parser bug that was causing the Modern Jewish Liturgical Use section subsections to be discarded, despite the Master Editor generating complete content.
 
-### Key Achievements
+### Key Achievement
 
-1.  **DOCX Hebrew Verse Text Formatting** ✅
-    - RESOLVED the long-standing issue with Hebrew verse text font
-    - Implemented XML-level font setting for comprehensive coverage
-    - Hebrew verse text now set to Aptos 12pt via `rFonts` element with all attributes (`w:ascii`, `w:hAnsi`, `w:cs`)
-    - Also set size via both `w:sz` and `w:szCs` elements at XML level
-    - Applied 'BodySans' paragraph style for additional consistency
+1.  **Liturgical Section Parser Bug** ✅ (Session 65)
+    - **Problem**: Modern Jewish Liturgical Use section appeared as only a header with one intro sentence, despite Master Editor generating complete content with subsections
+    - **Root Cause**: Parser was using `split("###")` to divide response sections, which incorrectly split on `####` subsection headers too
+    - **Mechanism**: `"#### Full psalm"` was split into `["", "# Full psalm"]`, creating unrecognized parts that got discarded
+    - **Evidence**: Debug logs showed only 168 chars preserved (intro sentence before first ####), while raw LLM response had full 1914-char section
+    - **Solution**: Rewrote `_parse_editorial_response()` to use regex with line anchors (`^### SECTION_NAME\s*$`) for exact section matching
+    - **Result**: All liturgical subsections now preserved correctly (Full psalm, Key verses, Phrases with Hebrew quotations)
 
-2.  **Modern Jewish Liturgical Use Section Structure** ✅
-    - Updated Master Editor prompt to request three subsections: "Full psalm", "Key verses", "Phrases"
-    - Each subsection formatted with Heading 4 (####)
-    - Subsections that don't apply are omitted
-    - Verses and phrases start with Hebrew text + English translation
-    - Includes Hebrew quotations from liturgical context
-    - Added Heading 4 support to document_generator.py
+### Session 64 Achievements (Context)
 
-3.  **Transliterations with Hebrew Text** ✅
-    - Updated Master Editor prompt to require Hebrew text alongside all transliterations
-    - Format: Hebrew (transliteration), e.g., יֶהְגֶּה (`yeh-GEH`)
-    - Added explicit CORRECT/INCORRECT examples to prompt
+The parser bug in Session 65 was discovered after Session 64's comprehensive fixes:
 
-4.  **Furtive Patach Transcription** ✅
-    - Fixed phonetic analyst to correctly handle furtive patach (patach gnuva)
-    - When patach appears under ח, ע, or ה at word end, vowel now transcribed BEFORE consonant
-    - Example: רוּחַ now correctly transcribed as **RŪ**-aḥ (not **RŪ**-ḥa)
-    - Also changed chet transcription from 'kh' to 'ḥ' (with underdot) to distinguish from kaf
+1.  **DOCX Hebrew Verse Text Formatting** ✅ - XML-level font setting (Aptos 12pt) for all character ranges
+2.  **Modern Jewish Liturgical Use Section Structure** ✅ - Three subsections with Heading 4, Hebrew quotations
+3.  **Transliterations with Hebrew Text** ✅ - Required Hebrew alongside transliterations
+4.  **Furtive Patach Transcription** ✅ - Vowel-before-consonant for final gutturals
+5.  **Empty Liturgical Section Output** ✅ - Marker-based approach (`---LITURGICAL-SECTION-START---`)
 
-5.  **Empty Liturgical Section Issue** ✅
-    - **Problem**: Master Editor was analyzing liturgical section in assessment but outputting only header with no content
-    - **Diagnosis**: User discovered synthesis intro HAD complete liturgical content, revealing Master Editor understood task but wasn't writing output
-    - **Root Cause**: The `## Modern Jewish Liturgical Use` markdown header in OUTPUT FORMAT template was being treated as structural marker to output, not content to write
-    - **Solution**: Implemented marker-based approach using `---LITURGICAL-SECTION-START---` that parser replaces with proper header
-    - **Result**: Liturgical section now generates with actual content (200-500 words)
-
-### Files Modified in Session 64
-
--   **src/utils/document_generator.py**
-    - Lines 114-122: Added Heading 4 (####) support
-    - Lines 446-480: XML-level font setting for Hebrew verse text
+### Files Modified in Session 65
 
 -   **src/agents/master_editor.py**
-    - Lines 128-134: Transliteration markup instructions
-    - Lines 206-223: Modern Jewish Liturgical Use section requirements
-    - Lines 279-294: Critical requirements for liturgical summary
-    - Lines 310-327: OUTPUT FORMAT template with marker-based approach
-    - Lines 596-615: Parser to replace liturgical marker with proper header
-    - Removed "PART 1" / "PART 2" labels to prevent them appearing in output
+    - Lines 540-550: Added debug logging to save raw LLM response to `output/debug/master_editor_response_psalm_{psalm_number}.txt`
+    - Lines 564-625: Rewrote `_parse_editorial_response()` method to use regex-based section matching instead of `split("###")`
 
--   **src/agents/phonetic_analyst.py**
-    - Lines 18-23: Changed chet (ח) from 'kh' to 'ḥ'
-    - Lines 233-273: Furtive patach detection and handling
+-   **docs/IMPLEMENTATION_LOG.md**
+    - Added Session 65 entry documenting parser bug fix
 
--   **docs/IMPLEMENTATION_LOG.md**, **docs/PROJECT_STATUS.md**, **docs/NEXT_SESSION_PROMPT.md**
-    - Updated with Session 64 details
+-   **docs/PROJECT_STATUS.md**
+    - Updated with Session 65 summary and parser bug fix completion
 
-### Debugging Process for Empty Liturgical Section
+-   **docs/NEXT_SESSION_PROMPT.md**
+    - Updated for Session 66 handoff
 
-The liturgical section issue required multiple diagnostic iterations:
+### Debugging Process
 
-1. **Initial attempts**: Added warnings, examples, and imperative instructions - model still output just header
-2. **Key insight**: User discovered synthesis intro already had complete liturgical content, but Master Editor wasn't outputting it
-3. **Root cause analysis**: The `##` markdown header in template was positioned BETWEEN two `###` sections, signaling it was a structural marker rather than content
-4. **Final solution**: Marker-based approach eliminates markdown ambiguity - model writes content after plain text marker, parser adds proper header
+The parser bug discovery process:
+
+1. **User report**: Liturgical section appearing empty again after Session 64 fix
+2. **Added debug logging**: Saved raw LLM response to file for inspection
+3. **Analysis**: Raw response showed complete liturgical content (1914 chars), but only 168 chars appeared in final output
+4. **Root cause discovered**: Parser's `split("###")` was splitting on `"####"` subsection headers, discarding content as unrecognized parts
+5. **Solution**: Regex-based parsing with exact line-start matching (`^### SECTION_NAME\s*$`) preserves all subsection content
 
 ### Pending Issues
 
@@ -84,12 +64,12 @@ Test Complete Pipeline and Evaluate Commentary Quality
 
 1.  **Test Complete Pipeline** 🧪
     - Run the complete pipeline for Psalm 1: `python scripts/run_enhanced_pipeline.py --psalm 1`
-    - Open the generated `.docx` file and verify all five fixes:
+    - Open the generated `.docx` file and verify all fixes (Sessions 64-65):
         * Hebrew verse text at the start of each verse commentary is Aptos 12pt
-        * "Modern Jewish Liturgical Use" section has proper subsections WITH CONTENT (Full psalm, Key verses, Phrases)
+        * "Modern Jewish Liturgical Use" section has proper subsections WITH COMPLETE CONTENT (Full psalm, Key verses, Phrases with Hebrew quotations)
         * Transliterations throughout are accompanied by Hebrew text
         * Furtive patach correctly transcribed in phonetic transcriptions (e.g., רוּחַ as **RŪ**-aḥ)
-        * No stray "PART 1" or "PART 2" labels in the output
+        * Parser correctly preserves all subsection content (no truncation at #### headers)
 
 2.  **Review Commentary Quality** 🔄
     - Carefully review the Master Editor's output to ensure:

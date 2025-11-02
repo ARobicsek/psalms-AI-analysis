@@ -1,3 +1,92 @@
+# Session 65 - Fix Liturgical Section Parser Bug (2025-11-02)
+
+**Goal**: Fix the recurring issue where the Modern Jewish Liturgical Use section appeared as just a header with no content in the final output, despite the Master Editor generating full liturgical content.
+
+**Status**: ✅ Complete
+
+## Session Overview
+
+Despite fixing the "empty liturgical section" issue in Session 64 using a marker-based approach, the section was appearing empty again in the final output. The user reported that after running `python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synthesis`, the liturgical section in [psalm_001_edited_intro.md](../output/psalm_1/psalm_001_edited_intro.md) contained only the header with no content.
+
+## Root Cause Analysis
+
+The user provided a crucial clue: the issue seemed to recur after removing the "PART 1" / "PART 2" labels from the output in Session 64. This led to investigation of the parser logic.
+
+**Discovery**: The parser in `_parse_editorial_response()` was using `split("###")` to divide the response into sections:
+
+```python
+parts = response_text.split("###")
+```
+
+**The Bug**: When the liturgical section used `####` (Heading 4) for subsections like "#### Full psalm", "#### Key verses", the `split("###")` would incorrectly split on these headings too, because "####" contains "###":
+- `"#### Full psalm"` gets split into `["", "# Full psalm"]`
+- This creates spurious parts that don't match any expected section name
+- The liturgical subsection content gets discarded as unrecognized parts
+
+**Evidence**:
+- Debug logs showed `✓ Liturgical section has 168 chars of content` (only the intro sentence before first ####)
+- The raw LLM response (saved to `output/debug/master_editor_response_psalm_1.txt`) contained full liturgical content with all subsections
+- The final output file contained only the intro sentence, with all subsection content missing
+
+## Solution Implemented
+
+Rewrote the `_parse_editorial_response()` method in [master_editor.py:564-625](../src/agents/master_editor.py#L564-L625) to use regex-based section parsing instead of string splitting:
+
+**Before** (broken approach):
+```python
+parts = response_text.split("###")
+for i, part in enumerate(parts):
+    if part.startswith("EDITORIAL ASSESSMENT"):
+        # Extract section...
+```
+
+**After** (fixed approach):
+```python
+import re
+
+# Find section positions using regex at line start
+assessment_match = re.search(r'^### EDITORIAL ASSESSMENT\s*$', response_text, re.MULTILINE)
+intro_match = re.search(r'^### REVISED INTRODUCTION\s*$', response_text, re.MULTILINE)
+verses_match = re.search(r'^### REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
+
+# Extract content between section markers
+if intro_match and verses_match:
+    revised_introduction = response_text[intro_match.end():verses_match.start()].strip()
+```
+
+This approach:
+- Only matches exact section headers at line start (`^### SECTION_NAME\s*$`)
+- Uses position-based extraction instead of splitting
+- Preserves all content including `####` subsection headers within sections
+
+## Files Modified
+
+1. **src/agents/master_editor.py**
+   - Lines 540-550: Added debug logging to save raw LLM response to `output/debug/master_editor_response_psalm_{psalm_number}.txt`
+   - Lines 564-625: Rewrote `_parse_editorial_response()` to use regex-based section matching instead of string split
+
+## Verification
+
+Tested with `python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synthesis`:
+
+**Before fix**:
+- Log: `✓ Liturgical section has 168 chars of content`
+- Output file: Only header + 1 sentence
+
+**After fix**:
+- Log: `✓ Liturgical section has 1914 chars of content`
+- Output file: Complete liturgical section with:
+  - #### Full psalm (Yom Kippur Maariv details)
+  - #### Key verses (Tefillat Geshem, Rosh Hashanah usage)
+  - #### Phrases (Simḥat Torah, Pirkei Avot quotations)
+  - Theological closing reflection
+
+## Technical Notes
+
+**Parser Design Pattern**: This fix highlights the importance of using structured parsing (regex with position-based extraction) rather than naive string splitting when dealing with hierarchical markdown content. String splitting on a prefix like "###" will match any superset like "####", leading to incorrect parsing. The regex approach with `re.MULTILINE` and line anchors (`^` and `$`) ensures exact matching of section delimiters.
+
+---
+
 # Session 64 - Comprehensive Formatting and Content Improvements (2025-11-02)
 
 **Goal**: Fix four persistent issues: Hebrew font in verse headers, Modern Jewish Liturgical Use section structure, transliterations without Hebrew text, and furtive patach transcription.
