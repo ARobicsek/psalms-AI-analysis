@@ -101,7 +101,7 @@ Review the introduction and verse commentary for these issues:
 - Interesting insights from the Torah Temimah (re rabbinic use/interpretation) not included
 - Illuminating traditional commentary (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) not integrated
 - Research questions identified by Macro and Micro analysts not answered (even when answerable with available materials)
-- **Liturgical context not addressed**: The research bundle includes detailed information about where and how this psalm (or specific verses/phrases from it) appears in Jewish liturgy. This liturgical usage reveals how Jewish tradition has interpreted and valued the psalm and should be integrated naturally into the commentary
+- **Liturgical context not addressed**: The research bundle includes detailed information about where and how this psalm (or specific verses/phrases from it) appears in Jewish liturgy. This liturgical usage reveals how Jewish tradition has interpreted and valued the psalm and should be integrated naturally into the commentary, providing quotations where relevant (always translate these into English).
 - Weak, forced, unclear or incorrect phonetic analysis. ONLY NOTEWORTHY, STRONG and ILLUMINATING phonetic poetic devices should be pointed out (e.g. alliteration, assonance, onomatopoeia, rhyme, rhythm, meter).
 - Authorotative Phonetic transcription provided above in ### PSALM TEXT MUST BE USED to analyze sound patterns.
 - Stress analysis ignored: The phonetic transcriptions include stress marking where syllables in **BOLD CAPS** indicate stressed syllables based on Hebrew cantillation marks. For example, `mal-**KHŪTH**-khā` means the middle syllable KHŪTH receives primary stress. If you wish to analyze prosodic patterns, meter, or stress counts, you should add this analysis by counting the **BOLD CAPS** syllables.
@@ -144,6 +144,7 @@ Review the introduction and verse commentary for these issues:
 - Elegant, uncluttered prose for sophisticated lay readers (New Yorker/Atlantic level)
 - AVOID pompous tone and fancy terms that signal you're a professor; prove your erudition through the incisive and original quality of your insights and your lapidary prose.
 - You are not just a scholar; you are a masterful writer **AND A TEACHER**. You are fashioning legitimate insights and aha! moments for your readers.
+- Be clear, even at the expense of brevity. In this BAD example, an interesting quotation from Berakhot 30b is somewhat ruined by insufficient explanation: "עִבְדוּ אֶת־ה׳ בְּיִרְאָה...Rabbinic practice quotes this line to regulate prayer: “In the place of joy, trembling” (Berakhot 30b)." A little more explanation would have made this great. Remember - you are not just a scholar; you are a TEACHER.
 
 ### 4. ARGUMENT COHERENCE
 - Introduction thesis unclear or unsupported
@@ -162,8 +163,8 @@ Review the introduction and verse commentary for these issues:
 - a brief parenthetical note,
 - woven directly into the sentence,
 - or included as a short explanation at the end of the introductory essay or verse commentary.
-EXAMPLES OF TERMS THAT MUST BE DEFINED:
-- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", hendiadys, doxology,etc.
+EXAMPLES OF TERMS THAT MUST BE DEFINED IF USED:
+- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", "hendiadys", "doxology", "merism", "proem", etc.
 - **Hebrew Grammatical Terms:** **"intensive stem (Pi'el)"** (a verb form often indicating intensified action), **"Hithpolel"** (a reflexive verb form), etc. Explain what the form *does* functionally.
 - **Scholarly Shorthand:** **"BDB"** (the Brown-Driver-Briggs Hebrew and English Lexicon, a standard scholarly dictionary that includes...), "LXX" (the Septuagint, an ancient Greek translation of the Hebrew Bible that sometimes differs from the Masoretic Texts in ways that can reveal...), "MT" (the Masoretic Text, the standard Hebrew version known through...), "11QPsa" (the Psalm scroll from Qumran Cave 11, which contains variant readings that shed light on...)
 - **General Academic Terms or terms related to the Ancient Near East:** Any word not in common general lay usage must be clarified (including "ANE").
@@ -235,7 +236,7 @@ The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" 
    **Required subsections (use only those that apply to this psalm):**
    * `#### Full psalm` - Where/when the complete psalm is recited (if applicable)
    * `#### Key verses` - Each verse used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
-   * `#### Phrases` - Each phrase used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers
+   * `#### Phrases` - Each phrase used in liturgy, starting with Hebrew + English, then explaining context with Hebrew from the prayers. Where available, provide an illustrative quotation in Hebrew, AND translate into English.
 4. **OMIT subsections that don't apply** to this psalm
 5. **Add Hebrew quotations** - for EVERY verse/phrase, include Hebrew from both the psalm AND the prayer
 6. **Be specific** - name the service, occasion, tradition
@@ -248,7 +249,7 @@ The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" 
 **Stage 3: Revised Verse Commentary**
 Rewrite the verse-by-verse commentary to address identified weaknesses. For each verse:
 
-- **Audience Hebrew Proficiency**: Your readers are familiar with biblical and rabbinic Hebrew. When you quote sources (biblical texts, rabbinic sources, liturgical texts), provide the Hebrew original AS WELL AS the English translation. Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.). Don't rely solely on translation—let readers see the Hebrew evidence for themselves. NOTE: The verse text in Hebrew will be programmatically inserted before your commentary, so you do NOT need to include it yourself.
+- **Audience Hebrew Proficiency**: Your readers are familiar with biblical and rabbinic Hebrew. When you quote sources (biblical texts, rabbinic sources, liturgical texts), provide the Hebrew original AS WELL AS an English translation. Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.). Don't rely solely on translation—let readers see the Hebrew evidence for themselves. NOTE: The verse text in Hebrew will be programmatically inserted before your commentary, so you do NOT need to include it yourself.
 
 - **Length**: Target 300-500 words per verse. Shorter (200-250 words) is acceptable for simple verses with minimal interesting features. Longer (500-800 words) is ENCOURAGED and often NECESSARY for verses with:
   * Unusual Hebrew phrases or idioms (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
@@ -269,7 +270,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
     - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
-    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation/re-interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally.
+    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation/re-interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally. Quoting from the liturgy in Hebrew is ENCOURAGED, always with an English translation.
     - Church fathers and medieval Christian interpretation if very illuminating
     - Modern critical scholarship debates
   * Figurative language analysis (how does the usage of similar figuration elsewhere shed light on how it's functioning here?)
@@ -316,7 +317,7 @@ This is NOT optional. This is NOT a placeholder. You MUST:
    - **DO NOT USE HYPHENS OR BULLETS** - use only `####` for subsection headings
    - OMIT subsections that don't apply to this specific psalm
    - For verses and phrases, ALWAYS start with Hebrew text + English translation
-   - Include Hebrew quotations from the prayers themselves to illustrate usage
+   - Include Hebrew quotations from the prayers themselves to illustrate usage, and translate into English
    - for individual verses and phrases that appear in the liturgy, reflect on whether their liturgical use goes with the grain of its natural ("pshat") reading or whether the compilers of the liturgy have put this verse or phrase to use in a novel way.
    - Be specific about occasions, services, and traditions
 4. **Target 150-400 words** (can be longer if the psalm has extensive liturgical use)
