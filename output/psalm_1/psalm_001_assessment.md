@@ -1,9 +1,19 @@
 # Editorial Assessment - Psalm 1
 
-The draft rightly treats Psalm 1 as an architectural threshold to the Psalter, and it makes several strong moves: the “two ways” frame is clear; the treatment of שָׁתוּל (shā-THŪL, “transplanted”) and פַלְגֵי־מָיִם (pal-ghēy-MĀ-yim, “water channels”) is accurate and illuminating; the shift from “Torah of YHWH” to “his Torah” is well read through Rashi and rabbinic tradition; and the liturgical notices are a valuable, underused strand.
+What works: The draft rightly treats Psalm 1 as the Psalter’s threshold—framing the “two ways,” highlighting the pivot from refusal (v. 1) to delight (v. 2), and drawing out the asymmetry of v. 6 (God “knows” the righteous way; the wicked way “perishes”). The notes on חֵפֶץ (delight) and הָגָה (to murmur/meditate), and on שָׁתוּל (transplanted) and פַלְגֵי־מַיִם (irrigation channels), are solid. The draft also nods toward liturgical use.
 
-That said, the essay needs tightening and some corrections. Most pressing: it claims “the wicked receive exactly four Hebrew words,” which is simply false (v. 4 is longer, and the brevity point stands without the error). The tone sometimes turns breathless (“theological engine”), when the psalm’s spare craft speaks best for itself. Some scholarly terms (e.g., “merism,” “inclusio”) are used without definition for general readers. The phonetic analysis notes “stress pattern” vaguely; if we comment on sound, we should use the provided phonetics (e.g., the triple anaphora of לֹא, LŌ’, in v. 1). The LXX deserves a clearer glance: its “καθέδρα λοιμῶν” (“seat of pestilent [men]”) broadens לֵצִים (lē-TSIY-m, “scoffers”) in a revealing way, and μελετᾶν (“to study, practice”) nuances יֶהְגֶּה (yeh-GEH). 
+What needs work: 
+- It leans on generalities where the text rewards close reading. The rhetorical mechanics—parallelism, anaphora (repetition at a line’s opening), and the poem’s internal echoes (“stand” in vv. 1 and 5)—should be made explicit. 
+- The LXX (ancient Greek translation) is left unused; its choices (“μελετήσει,” meditate/study; “λοιμῶν,” pestilent persons) sharpen interpretation. 
+- Figurative language is under-illustrated by specific biblical parallels; Psalm 1’s chaff and tree are standard images with a history (e.g., Ps 35:5; Job 21:18; Isa 17:13; Jer 17:8) that should be mobilized to show what is distinctive here.
+- Rabbinic reception (Avodah Zarah 19; Sanhedrin 107b) and liturgical usage are mentioned but not integrated as interpretation—how tradition reads Psalm 1 should be shown to illuminate the psalm itself.
+- Occasional phonetic asides feel gratuitous. Use sound only where it illuminates craft (e.g., the triple לֹא, “not,” in v. 1).
+- Some missed opportunities: the legal idiom “stand in judgment” (v. 5) resonates with Deut 19:15 (“a matter shall stand”), and Joshua 1:8 tightly links Torah recitation to “prospering,” echoing v. 3.
 
-Missed opportunities: (1) the editorial seam with Psalm 2 (“אַשְׁרֵי” inclusio at 1:1 and 2:12) that frames the opening diptych; (2) explicit parallels to the Bible’s “path” metaphor (Deuteronomy 5:29–30; 11:28; Proverbs 4:18–19), confirming that “way” (דֶּרֶךְ, DE-rekh) is a moral itinerary; (3) the figurative patterning of “chaff” (מֹּץ, MŌTS) across Psalms 35:5 and 83:14 and Isaiah 41:2; (4) verse 5’s irony (“did not stand” in v. 1 // “will not stand” in judgment) and Malbim’s smart distinction between רְשָׁעִים (rə-shā-ʿIY-m, hardened wicked) and חַטָּאִים (ḥat-tā-’IY-m, strayers). Liturgy should be structured more clearly, with Hebrew prayer citations and why they matter. 
+Figurative language assessment: The draft does not systematically cite parallels. It should: 
+- Tree by water: Jer 17:8; Ps 92:13-15.
+- Chaff: Ps 35:5; Job 21:18; Isa 17:13.
+- “Walk in God’s ways”: Deut 8:6; 10:12.
+Doing so will let us ask: how does Psalm 1’s planting-as-transplant (שָׁתוּל) and cultivation (פלגי) nuance a well-worn image? Why is chaff so tersely sketched here? And what do these choices signal about the psalm’s confident, programmatic tone?
 
-In revision, we will: correct errors; define terms; integrate LXX and sound where they actually help; fold in the “Psalms 1–2” seam; deepen verse-by-verse with concrete Hebrew, figurative parallels, and liturgical reception; and smooth the tone for an intelligent lay audience.
+In sum: deepen the literary analysis, bring in the LXX and specific cross-references, integrate rabbinic and liturgical reception as interpretation, and refine the style—lucid, precise, unlabored.

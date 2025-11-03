@@ -1,0 +1,369 @@
+{
+  "psalm_number": 2,
+  "pipeline_start": "2025-11-02T17:02:22.433238",
+  "pipeline_end": "2025-11-02T17:24:20.062938",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1890,
+      "input_token_estimate": 630,
+      "output_char_count": 10089,
+      "output_token_estimate": 3363,
+      "duration_seconds": 58.85970616340637,
+      "completion_date": null,
+      "timestamp": "2025-11-02T17:02:22.439314"
+    },
+    "micro_analysis": {
+      "input_char_count": 10089,
+      "input_token_estimate": 3363,
+      "output_char_count": 198892,
+      "output_token_estimate": 66297,
+      "duration_seconds": 205.86475944519043,
+      "completion_date": null,
+      "timestamp": "2025-11-02T17:05:21.355693"
+    },
+    "synthesis": {
+      "input_char_count": 208983,
+      "input_token_estimate": 69661,
+      "output_char_count": 46120,
+      "output_token_estimate": 15373,
+      "duration_seconds": 332.9695506095886,
+      "completion_date": null,
+      "timestamp": "2025-11-02T17:10:47.272702"
+    },
+    "master_editor": {
+      "input_char_count": 243687,
+      "input_token_estimate": 81229,
+      "output_char_count": 29053,
+      "output_token_estimate": 9684,
+      "duration_seconds": 239.8185315132141,
+      "completion_date": "2025-11-02T17:24:20.062938",
+      "timestamp": "2025-11-02T17:18:21.358643"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "רָגַשׁ",
+        "reason": "Rare verb for tumultuous assembly - only appears here and Daniel 6:7, need semantic range"
+      },
+      {
+        "word": "יֶהְגּוּ־רִֽיק",
+        "reason": "Onomatopoetic plotting verb - muttering/growling connotations need exploration"
+      },
+      {
+        "word": "רוֹזְנִים",
+        "reason": "Unusual term for officials rather than common śārîm - specific connotations"
+      },
+      {
+        "word": "נָסַךְ",
+        "reason": "Installation verb 'poured out' rather than typical coronation terminology - cultic implications"
+      },
+      {
+        "word": "יָלַד",
+        "reason": "Divine 'begetting' vs adoption language - theological implications in divine sonship"
+      },
+      {
+        "word": "שֵׁבֶט בַּרְזֶל",
+        "reason": "Iron rod imagery - shepherd tool subverted for harsh rule, semantic development"
+      },
+      {
+        "word": "רָעָה",
+        "reason": "Shepherd verb used for breaking/harsh rule - ironic usage needs investigation"
+      },
+      {
+        "word": "הִוָּסְרוּ",
+        "reason": "Niphal of yāsar - discipline/correction with wisdom overtones rather than punishment"
+      },
+      {
+        "word": "בִּרְעָדָה",
+        "reason": "Trembling with joy paradox - physiological vs emotional trembling"
+      },
+      {
+        "word": "בַר",
+        "reason": "Major textual crux - Aramaic 'son' or Hebrew 'purity'? Critical for psalm's conclusion"
+      },
+      {
+        "word": "כִּמְעַט",
+        "reason": "Divine anger burns 'briefly' - unusual qualification of divine wrath duration"
+      },
+      {
+        "word": "חָסָה",
+        "reason": "Refuge terminology concluding psalm - technical sanctuary language"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "רגש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track rare tumultuous assembly verb across Hebrew Bible"
+      },
+      {
+        "query": "משיח יהוה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine anointed one formula - messianic development"
+      },
+      {
+        "query": "ישב בשמים",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Divine enthronement in heavens imagery"
+      },
+      {
+        "query": "בני אתה אני היום",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine sonship adoption formula usage"
+      },
+      {
+        "query": "נחלה גוים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Nations as inheritance theme"
+      },
+      {
+        "query": "שחק לעג",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine laughter and mockery responses"
+      },
+      {
+        "query": "אשרי חוסי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Blessed refuge formula patterns"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Tumultuous assembly imagery - nations as agitated crowd | Vehicle: raging | Related terms: rage, rages, tumult, uproar, commotion, agitation, turmoil",
+        "vehicle": "raging",
+        "vehicle_terms": [
+          "raging",
+          "rage",
+          "rages",
+          "tumult",
+          "uproar",
+          "commotion",
+          "agitation",
+          "turmoil"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Bondage breaking imagery - dual restraint metaphors | Vehicle: bonds | Related terms: bond, fetters, chains, cords, ropes, yoke, yokes",
+        "vehicle": "bonds",
+        "vehicle_terms": [
+          "bonds",
+          "bond",
+          "fetters",
+          "chains",
+          "cords",
+          "ropes",
+          "yoke",
+          "yokes"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Divine laughter as derision - anthropomorphic mockery | Vehicle: laughs | Related terms: laugh, laughter, laughing, mock, mocks, mockery, scorn, derision",
+        "vehicle": "laughs",
+        "vehicle_terms": [
+          "laughs",
+          "laugh",
+          "laughter",
+          "laughing",
+          "mock",
+          "mocks",
+          "mockery",
+          "scorn",
+          "derision"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Mountain installation imagery - Zion as divine dwelling | Vehicle: mountain | Related terms: mountains, hill, hills, height, heights, peak, peaks",
+        "vehicle": "mountain",
+        "vehicle_terms": [
+          "mountain",
+          "mountains",
+          "hill",
+          "hills",
+          "height",
+          "heights",
+          "peak",
+          "peaks"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Inheritance of nations - legal/familial possession | Vehicle: inheritance | Related terms: inherit, inherits, heritage, possession, possessions",
+        "vehicle": "inheritance",
+        "vehicle_terms": [
+          "inheritance",
+          "inherit",
+          "inherits",
+          "heritage",
+          "possession",
+          "possessions"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Iron rod and pottery imagery - harsh rule vs fragility | Vehicle: iron | Related terms: rod, rods, staff, scepter, club",
+        "vehicle": "iron",
+        "vehicle_terms": [
+          "iron",
+          "rod",
+          "rods",
+          "staff",
+          "scepter",
+          "club"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Potter's vessel shattering - fragile rebellion imagery | Vehicle: potter | Related terms: pottery, vessel, vessels, jar, jars, shatter, shatters, break",
+        "vehicle": "potter",
+        "vehicle_terms": [
+          "potter",
+          "pottery",
+          "vessel",
+          "vessels",
+          "jar",
+          "jars",
+          "shatter",
+          "shatters",
+          "break"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Trembling joy paradox - complex religious emotion | Vehicle: trembling | Related terms: tremble, trembles, shaking, quaking, fear, awe",
+        "vehicle": "trembling",
+        "vehicle_terms": [
+          "trembling",
+          "tremble",
+          "trembles",
+          "shaking",
+          "quaking",
+          "fear",
+          "awe"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "2:1",
+        "reason": "Double rhetorical questions - how do commentators explain the emphatic 'why' opening?"
+      },
+      {
+        "verse": "2:2",
+        "reason": "Military conspiracy language - traditional interpretation of organized earthly rebellion"
+      },
+      {
+        "verse": "2:3",
+        "reason": "Direct speech of rebels - classical understanding of rejection of divine authority"
+      },
+      {
+        "verse": "2:4",
+        "reason": "Divine laughter response - how commentators handle anthropomorphic mockery"
+      },
+      {
+        "verse": "2:5",
+        "reason": "Progression from laughter to terror - traditional psychology of divine response"
+      },
+      {
+        "verse": "2:6",
+        "reason": "Divine installation decree - classical interpretation of Zion's significance"
+      },
+      {
+        "verse": "2:7",
+        "reason": "Divine sonship formula - traditional understanding of 'today I have begotten you'"
+      },
+      {
+        "verse": "2:8",
+        "reason": "Conditional inheritance promise - why must the king 'ask' according to commentators?"
+      },
+      {
+        "verse": "2:9",
+        "reason": "Shepherd imagery for harsh rule - how commentators resolve the semantic tension"
+      },
+      {
+        "verse": "2:10",
+        "reason": "Wisdom appeal to rulers - traditional interpretation of prudence vs submission"
+      },
+      {
+        "verse": "2:11",
+        "reason": "Paradoxical trembling joy - how commentators resolve the emotional contradiction"
+      },
+      {
+        "verse": "2:12",
+        "reason": "Textual crux of 'bar' - traditional solutions to this interpretive puzzle"
+      }
+    ],
+    "lexicon_entries_count": 41,
+    "concordance_results": {
+      "רגש": 1,
+      "משיח יהוה": 5,
+      "ישב בשמים": 0,
+      "בני אתה אני היום": 1,
+      "נחלה גוים": 0,
+      "שחק לעג": 0,
+      "אשרי חוסי": 0
+    },
+    "figurative_results": {
+      "total_instances_used": 228
+    },
+    "commentary_counts": {
+      "Rashi": 12,
+      "Ibn Ezra": 11,
+      "Radak": 12,
+      "Metzudat David": 12,
+      "Malbim": 7,
+      "Meiri": 12,
+      "Torah Temimah": 6
+    },
+    "ugaritic_parallels": [
+      {
+        "type": "Royal Ideology",
+        "reference": "Psalm 2:7",
+        "analysis": "The Israelite ideology of Davidic kingship, articulated in Psalm 2, is deeply rooted in this shared ..."
+      }
+    ],
+    "research_bundle_chars": 188126,
+    "research_bundle_tokens": 62708
+  },
+  "analysis": {
+    "macro_questions": [
+      "How does the specific Hebrew term 'mashiach' (anointed) in verse 2 relate to later messianic interpretation, and what did it signify in its original royal context?",
+      "What is the precise meaning of 'hayom yelidtikha' (today I have begotten you) in verse 7, and how does this adoption language function within Ancient Near Eastern royal ideology?",
+      "How do the Ugaritic parallels of divine sonship illuminate the theological boundaries that distinguish Israelite royal ideology from Canaanite divine kingship?",
+      "What is the significance of the geographical reference to Zion as 'har-qodshi' (My holy mountain) in establishing the theological geography of divine rule?",
+      "How does the shift from perfect tense verbs in the divine decree section (vv. 4-6) to imperfect/modal verbs in the promise section (vv. 8-9) affect the psalm's temporal perspective?",
+      "What is the meaning of the difficult phrase 'nashqu-var' (pay homage in good faith/kiss the son) in verse 12, and how do textual variants affect interpretation?",
+      "How does the imagery of breaking 'moseroteimo' and 'avoteimo' (their bonds/cords) in verse 3 relate to Ancient Near Eastern treaties and suzerainty language?",
+      "What role does divine laughter (yischaq) in verse 4 play in the psalm's theology, and how does this anthropomorphic language function rhetorically?",
+      "How does the universal scope of the promised inheritance ('aphsey-aretz' - limits of the earth) in verse 8 relate to the historical limitations of Davidic kingship?",
+      "What is the relationship between serving YHWH 'be-yir'ah' (in awe) and rejoicing 'bir'adah' (with trembling) in verse 11, and how does this paradox function theologically?"
+    ],
+    "micro_questions": [
+      "Why does the divine response begin with laughter rather than immediate anger or action?",
+      "What is the significance of the specific verb 'nasakhti' (poured out/installed) for royal appointment rather than more common coronation terminology?",
+      "How does the temporal marker 'hayom' (today) in the divine sonship formula relate to historical coronation ceremonies vs. eternal divine decree?",
+      "Why does verse 9 use shepherd terminology ('tero'em') for harsh military rule - is this ironic subversion or semantic range?",
+      "What explains the textual difficulty of 'nashqu-var' in verse 12, and how do different solutions affect the psalm's conclusion?",
+      "How does the paradox of 'rejoicing with trembling' (v.11) function theologically - simultaneous emotions or dialectical response?",
+      "Why does the universal scope promised in verse 8 require the king to 'ask' rather than receive automatically?"
+    ],
+    "verse_count": 12
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-20250514",
+    "micro_analysis": "claude-sonnet-4-20250514",
+    "synthesis": "claude-sonnet-4-20250514",
+    "master_editor": "gpt-5"
+  }
+}
