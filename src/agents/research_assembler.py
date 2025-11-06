@@ -31,6 +31,7 @@ if __name__ == '__main__':
     from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle
     from src.agents.liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from src.agents.liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
+    from src.agents.sacks_librarian import SacksLibrarian, SacksReference
     from src.agents.rag_manager import RAGManager, RAGContext
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
@@ -39,6 +40,7 @@ else:
     from .commentary_librarian import CommentaryLibrarian, CommentaryBundle
     from .liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from .liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
+    from .sacks_librarian import SacksLibrarian, SacksReference
     from .rag_manager import RAGManager, RAGContext
 
 
@@ -85,7 +87,8 @@ class ResearchBundle:
     Complete research bundle assembled for a Psalm.
 
     Contains all lexicon entries, concordance searches, figurative
-    language instances, traditional commentaries, liturgical usage, and RAG documents requested by the Scholar-Researcher.
+    language instances, traditional commentaries, liturgical usage, Rabbi Sacks references,
+    and RAG documents requested by the Scholar-Researcher.
     """
     psalm_chapter: int
     lexicon_bundle: Optional[LexiconBundle]
@@ -95,6 +98,8 @@ class ResearchBundle:
     liturgical_usage: Optional[List[SefariaLiturgicalLink]]  # Phase 0: Sefaria liturgical cross-references (deprecated)
     liturgical_usage_aggregated: Optional[List[PhraseUsageMatch]]  # Phase 4/5: Aggregated phrase-level liturgy
     liturgical_markdown: Optional[str]  # Phase 4/5: Pre-formatted markdown for LLM consumption
+    sacks_references: Optional[List[SacksReference]]  # Rabbi Jonathan Sacks references to this psalm
+    sacks_markdown: Optional[str]  # Pre-formatted Sacks markdown for LLM consumption
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
     request: ResearchRequest
 
@@ -106,6 +111,7 @@ class ResearchBundle:
             'concordance': [c.to_dict() for c in self.concordance_bundles],
             'figurative': [f.to_dict() for f in self.figurative_bundles],
             'commentary': [c.to_dict() for c in self.commentary_bundles] if self.commentary_bundles else [],
+            'sacks_references': [s.to_dict() for s in self.sacks_references] if self.sacks_references else [],
             'summary': {
                 'lexicon_entries': len(self.lexicon_bundle.entries) if self.lexicon_bundle else 0,
                 'concordance_searches': len(self.concordance_bundles),
@@ -116,7 +122,8 @@ class ResearchBundle:
                 'commentary_entries': sum(len(c.commentaries) for c in self.commentary_bundles) if self.commentary_bundles else 0,
                 'liturgical_contexts_phase0': len(self.liturgical_usage) if self.liturgical_usage else 0,
                 'liturgical_prayers_aggregated': len(self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
-                'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0
+                'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
+                'sacks_references': len(self.sacks_references) if self.sacks_references else 0
             }
         }
 
@@ -349,6 +356,11 @@ class ResearchBundle:
 
             md += "---\n\n"
 
+        # Rabbi Sacks References section
+        if self.sacks_markdown:
+            md += self.sacks_markdown
+            md += "\n---\n\n"
+
         # Summary
         summary = self.to_dict()['summary']
         md += "## Research Summary\n\n"
@@ -360,6 +372,7 @@ class ResearchBundle:
         md += f"- **Commentary verses**: {summary['commentary_verses']}\n"
         md += f"- **Commentary entries**: {summary['commentary_entries']}\n"
         md += f"- **Liturgical prayers (aggregated)**: {summary['liturgical_prayers_aggregated']}\n"
+        md += f"- **Rabbi Sacks references**: {summary['sacks_references']}\n"
         md += f"- **Liturgical total occurrences**: {summary['liturgical_total_occurrences']}\n"
 
         return md
@@ -410,6 +423,7 @@ class ResearchAssembler:
         self.commentary_librarian = CommentaryLibrarian()
         self.liturgical_librarian_sefaria = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap (fallback)
         self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries=use_llm_summaries)  # Phase 4/5: Aggregated phrase-level
+        self.sacks_librarian = SacksLibrarian()  # Rabbi Jonathan Sacks references
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
@@ -476,6 +490,15 @@ class ResearchAssembler:
         if not liturgical_usage_aggregated:
             liturgical_usage = self.liturgical_librarian_sefaria.find_liturgical_usage(request.psalm_chapter)
 
+        # Fetch Rabbi Sacks references (ALWAYS included, regardless of request)
+        sacks_references = self.sacks_librarian.get_psalm_references(request.psalm_chapter)
+        sacks_markdown = None
+        if sacks_references:
+            sacks_markdown = self.sacks_librarian.format_for_research_bundle(
+                sacks_references,
+                psalm_chapter=request.psalm_chapter
+            )
+
         # Fetch RAG context (Phase 2d: Always included for psalm-level research)
         rag_context = self.rag_manager.get_rag_context(request.psalm_chapter)
 
@@ -488,6 +511,8 @@ class ResearchAssembler:
             liturgical_usage=liturgical_usage if liturgical_usage else None,
             liturgical_usage_aggregated=liturgical_usage_aggregated if liturgical_usage_aggregated else None,
             liturgical_markdown=liturgical_markdown if liturgical_markdown else None,
+            sacks_references=sacks_references if sacks_references else None,
+            sacks_markdown=sacks_markdown if sacks_markdown else None,
             rag_context=rag_context,
             request=request
         )

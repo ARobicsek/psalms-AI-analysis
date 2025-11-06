@@ -96,10 +96,11 @@ def strip_sefaria_footnotes(text: str) -> str:
     """
     Remove Sefaria footnote markers and footnote text from English translations.
 
-    Sefaria embeds footnotes using this pattern:
-    <sup class="footnote-marker">a</sup><i class="footnote">Footnote text here</i>
+    Sefaria embeds footnotes using two patterns:
+    1. HTML-style: <sup class="footnote-marker">a</sup><i class="footnote">Footnote text here</i>
+    2. Simple text markers: word.-a, phrase,-b, etc. (hyphen + lowercase letter)
 
-    This function removes both the marker and the footnote content, leaving
+    This function removes both types of markers and footnote content, leaving
     only the main translation text for reader-friendly output.
 
     Args:
@@ -113,9 +114,13 @@ def strip_sefaria_footnotes(text: str) -> str:
         >>> strip_sefaria_footnotes(text)
         'May He receive the tokens of all'
 
-        >>> text = 'and approve<sup class="footnote-marker">b</sup><i class="footnote">Meaning of Heb. uncertain.</i> your offerings'
+        >>> text = 'I have fathered you this day.-b'
         >>> strip_sefaria_footnotes(text)
-        'and approve your offerings'
+        'I have fathered you this day.'
+
+        >>> text = 'pay homage in good faith,-d lest He be angered'
+        >>> strip_sefaria_footnotes(text)
+        'pay homage in good faith, lest He be angered'
     """
     if not text:
         return text
@@ -138,6 +143,11 @@ def strip_sefaria_footnotes(text: str) -> str:
 
     # Convert HTML entities
     text = unescape(text)
+
+    # Remove simple text-based footnote indicators (e.g., .-a, ,-b, -c)
+    # Pattern: optional punctuation (. , ; :) followed by hyphen and lowercase letter
+    # This matches: "day.-b", "faith,-d", "word-a", etc.
+    text = re.sub(r'([.,;:])?\-[a-z](?=\s|$)', r'\1', text)
 
     # Clean up extra whitespace, but preserve intentional line breaks
     lines = text.split('\n')
