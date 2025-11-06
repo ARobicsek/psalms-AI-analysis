@@ -1,15 +1,25 @@
-### Session 67 Summary & Next Steps
+### Session 68 Summary & Next Steps
 
-**Goal**: Finalize the `sacks_on_psalms.json` data file by fixing missing context snippets and performing requested data cleanup.
+**Goal**: Remove footnote indicators from English psalm text and integrate Rabbi Sacks commentary data into the research bundle.
 
 **Accomplishments**:
-- **Fixed Snippet Extraction (94% Completion)**: Addressed the 67 remaining entries with missing `context_snippet`s.
-  - **English Citations**: Developed a flexible regex to handle variations like `(Psalm 1:4)`, `(Ps. 1.4)`, and `(Tehillim 1:4)`, successfully fixing many English-only entries.
-  - **Hebrew Citations**: Identified and fixed a bug where Hebrew numerals without Gershayim (e.g., `כב` vs. `כ״ב`) were not being matched. The regex was updated to make the Gershayim optional.
-  - **Final Result**: Successfully generated snippets for **54** more entries, bringing the total completion rate to **~94%** (217 out of 230 entries now have snippets).
-- **Data Cleanup**: As requested, removed 24 entries from the JSON file where the `heVersionTitle` was "Covenant and Conversation, trans. by Tsur Ehrlich, Maggid Books, 2017". The file now contains 206 entries.
-- **CLI Assistance**: Successfully added the `C:\Users\ariro\.local\bin` directory to the user's PATH environment variable to complete the installation of the `claude` CLI tool.
+- **Footnote Indicator Removal (COMPLETE)**: Enhanced the `strip_sefaria_footnotes()` function in `src/data_sources/sefaria_client.py` to remove simple text-based footnote markers.
+  - **Pattern Added**: `([.,;:])?\-[a-z](?=\s|$)` to match "-a", ".-b", ",-c" patterns
+  - **Tested**: Verified with Psalm 8 - clean text confirmed ("gittith." vs "gittith.-a")
+  - **Result**: All footnote indicators (e.g., "-b", "-c", "-d") are now automatically stripped from English translations when fetched from Sefaria
+  - **Database Note**: Previously cached psalms will be cleaned when database entry is deleted and psalm is re-fetched
+
+- **Rabbi Sacks Integration (COMPLETE)**: Created and integrated a new `SacksLibrarian` to make Rabbi Jonathan Sacks' psalm references available to all commentary agents.
+  - **New Class**: `src/agents/sacks_librarian.py` - loads `sacks_on_psalms.json` (206 entries) and filters by psalm chapter
+  - **Research Bundle Integration**: Added `sacks_references` and `sacks_markdown` fields to `ResearchBundle`
+  - **Always Included**: Unlike other librarians, Sacks data is ALWAYS fetched for every psalm (regardless of micro-agent requests)
+  - **Tested**: Psalm 1 (5 refs), Psalm 8 (9 refs) - verified in research bundle, markdown, and Word document
+  - **Format**: Markdown section explains to LLM agents that these are NOT traditional commentaries but excerpts from Sacks' broader theological works
+  - **Display**: Added "Rabbi Jonathan Sacks References Reviewed" line to both print-ready markdown and Word document bibliographies
 
 **Next Steps**:
-- The `sacks_on_psalms.json` file is now in a very good state. The remaining 13 missing snippets are likely edge cases requiring manual review.
-- The project can now proceed with using this JSON file for its intended purpose.
+- Both requested enhancements are complete and ready for use in the commentary generation pipeline
+- The next full pipeline run will automatically include:
+  - Clean English translations without footnote indicators in the Word document
+  - Rabbi Sacks references in the research bundle for synthesis and editorial agents
+- Consider testing with a new psalm to verify both features work end-to-end

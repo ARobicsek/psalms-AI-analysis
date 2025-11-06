@@ -188,6 +188,10 @@ class CommentaryFormatter:
         figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
         lines.append(f"- **Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}")
 
+        # Rabbi Sacks references
+        sacks_count = research_data.get('sacks_references_count', 0)
+        lines.append(f"- **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}")
+
         # Get Master Editor prompt size from the 'steps' section
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')

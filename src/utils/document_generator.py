@@ -482,10 +482,12 @@ class DocumentGenerator:
             commentary_details = f" ({'; '.join(commentary_lines)})"
 
         concordance_total = sum((research_data.get('concordance_results', {}) or {}).values())
-        
+
         figurative_results = research_data.get('figurative_results', {}) or {}
         figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
-        
+
+        sacks_count = research_data.get('sacks_references_count', 0)
+
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
         if isinstance(prompt_chars, int):
@@ -508,6 +510,7 @@ Methodological & Bibliographical Summary
 **Traditional Commentaries Reviewed**: {total_commentaries}{commentary_details}
 **Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}
 **Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}
+**Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
 **Master Editor Prompt Size**: {prompt_chars_str}
 
 {models_used_str}
