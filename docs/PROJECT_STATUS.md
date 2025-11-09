@@ -1,13 +1,15 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-11-07 (Session 76)
-**Current Phase**: Hirsch English Translation Extraction - Full Screenshot Extraction COMPLETE, Ready for OCR Processing
+**Last Updated**: 2025-11-08 (Session 77 Continuation)
+**Current Phase**: OCR Margin Optimization - Decision Needed on Verse Text Trade-off
 
 ---
 
 ## Quick Status
 
 ### Completed ✅
+- **OCR Margin Optimization and PSALM Header Detection** ⚠️ (Session 77 Continuation): Implemented PSALM header detection using OCR to distinguish first pages (with "PSALM" headers) from continuation pages (with verse text). Progressive margin testing: -20px → -50px → -80px → -120px → -150px → **-180px**. Testing shows -180px for all pages captures all commentary (pages 49, 56 work correctly) but may include 3-5 lines of verse text on some continuation pages (e.g., page 267). **DECISION NEEDED**: Keep -180px for completeness (filter verse text in parser) OR implement smarter detection (risk missing commentary). Recommendation: Option A (filter in parser) documented in NEXT_SESSION_PROMPT.md.
+- **Hirsch OCR Enhancement and Extraction** ✅ (Session 77): Enhanced OCR pipeline with Hebrew chapter number extraction, optimized cropping (initial -180px margin for headers), improved line detection (MIN_LENGTH=400, SEARCH=500), and loading screen detection for OCR processing. Validated against gold standard (~95% English accuracy, ~1 error/100 words). Full 501-page extraction completed: 499 successful, 2 loading screens detected. Outputs complete commentary with PSALM headers, verse markers, and embedded Hebrew text.
 - **Hirsch Full Screenshot Extraction** ✅ (Session 76): Completed full extraction of all 501 pages (33-533) from HathiTrust. Added intelligent loading screen detection using numpy image analysis with retry logic. Tested multiple resolution enhancement approaches (fullscreen, zoom, window sizing) and determined original method works best. All 501 pages successfully captured with ~440KB average file size, zero failures. Screenshots ready for OCR processing. Total extraction time: ~29 minutes.
 - **Hirsch English Translation Extraction Pipeline** ✅ (Session 75): After discovering English translation of Hirsch commentary on HathiTrust, built complete extraction pipeline with screenshot automation and smart OCR. Successfully captures pages via browser automation (bypasses Cloudflare), detects horizontal separator line, crops to commentary-only region, and runs dual-language OCR (English + Hebrew). Achieved excellent quality: ~95% English accuracy, Hebrew preserved as Unicode characters. Tested on 6 sample pages with reproducible results.
 - **Hirsch German Fraktur OCR Project Terminated** ✅ (Session 74): After ground truth comparison testing, determined that OCR quality is insufficient for scholarly work despite 81-82% confidence scores. Text contains ~1 severe error per 10-15 words, including garbled technical terminology, missing words, corrupted Hebrew text (nikud lost), and unintelligible passages. Errors are too frequent and severe for LLM correction. Project archived; ~5,000 lines of OCR code preserved for future use if better OCR technology emerges. Decision documented in Session 74 of IMPLEMENTATION_LOG.md.
@@ -42,13 +44,13 @@
 - **Hyphen Lists to Bullet Points** ✅: Document generator automatically converts `- item` markdown to proper Word bullet points with correct font (Aptos 12pt).
 
 ### Pending ⚠️
-- **Run OCR on 501 Pages**: Process all screenshot pages with dual-language OCR (estimated 30-45 minutes)
-- **Hirsch Parser Development**: Extract verse-by-verse commentary into JSON structure
+- **Monitor OCR Completion** (RUNNING NOW): 501-page OCR extraction in progress (~30-45 min)
+- **Hirsch Parser Development**: Extract verse-by-verse commentary into JSON structure (`parse_hirsch_commentary.py`)
 - **Delete Obsolete Files**: Remove German Fraktur OCR code and test scripts (to be archived in Session 76 commit)
 - **Final JSON Review**: The `sacks_on_psalms.json` file still has 13 entries with missing snippets that may require manual review
 
 ### Next Up 📋
-- **Run OCR on All Pages** (IMMEDIATE): Process 501 screenshots with Tesseract English + Hebrew (~30-45 minutes)
+- **Review OCR Results** (NEXT SESSION): Check completion status, spot-check quality, review any loading screens
 - **Build Hirsch Parser** (HIGH PRIORITY): Extract verse-by-verse commentary, create `data/hirsch_on_psalms.json`
 - **Integrate Hirsch Librarian**: Connect parser output to existing `HirschLibrarian` class (Session 70)
 - **Generate Additional Psalms**: Test pipeline with Psalms 23, 51, 19 to validate robustness across genres
@@ -56,6 +58,22 @@
 - **Documentation**: Create user guide for running the pipeline and interpreting outputs
 
 ---
+
+## Session 77 Summary
+
+- **Goal**: Enhance OCR extraction pipeline for complete commentary capture with Hebrew chapter numbers, then run full 501-page extraction.
+- **Activity**:
+  - Tested OCR quality on page 100 (Session 76 screenshot) - found ~95% accuracy but missing PSALM headers
+  - Iteratively optimized cropping margin: -5px → -50px → -100px → -180px (final)
+  - Reduced bottom crop from 100px to 80px to capture more text at page bottom
+  - Implemented Hebrew gematria parser for chapter numbers (א=1, כ=20, קמה=145, etc.)
+  - Enhanced header extraction to capture centered "תהלים א" / "מזמור כ" patterns
+  - Fixed line detection for page 56 with multiple horizontal lines (MIN_LENGTH 300→400, SEARCH_HEIGHT 300→500)
+  - Added loading screen detection for OCR using numpy image analysis (std_dev < 20, pixel_range < 30)
+  - Comprehensive testing on pages 33-35, 56, 100 with varying layouts
+  - Validated against gold standard transcription (Psalm 1) - confirmed PSALM headers, verse markers captured
+  - Started full 501-page extraction with enhanced script
+- **Outcome**: OCR enhancement complete with excellent quality validation (~95% English, Hebrew preserved). Full extraction running on all 501 pages. Script captures complete commentary including PSALM headers, verse markers (V. 1., VV. 1-3), and embedded Hebrew text. Creates metadata with psalm numbers, verse markers, and status. Loading screen detection will track any problematic pages for recapture. Estimated completion: 30-45 minutes. Output: `data/hirsch_commentary_text/`, `data/hirsch_metadata/`, `data/hirsch_cropped/`.
 
 ## Session 76 Summary
 
