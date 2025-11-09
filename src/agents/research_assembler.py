@@ -11,6 +11,8 @@ Librarian Agents Coordinated:
 3. Figurative Language Librarian - Figurative instances with hierarchical tags
 4. Commentary Librarian - Traditional Jewish commentaries (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri)
 5. Liturgical Librarian - Psalms→Liturgy cross-references from Sefaria (Phase 0 bootstrap)
+6. Sacks Librarian - Rabbi Jonathan Sacks' references to Psalms from his collected works
+7. Hirsch Librarian - R. Samson Raphael Hirsch's 19th-century German commentary (OCR-extracted)
 
 Input: JSON research request from Scholar-Researcher
 Output: Complete research bundle ready for Scholar-Writer agents
@@ -32,6 +34,7 @@ if __name__ == '__main__':
     from src.agents.liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from src.agents.liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
     from src.agents.sacks_librarian import SacksLibrarian, SacksReference
+    from src.agents.hirsch_librarian import HirschLibrarian, HirschCommentary
     from src.agents.rag_manager import RAGManager, RAGContext
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
@@ -41,6 +44,7 @@ else:
     from .liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from .liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
     from .sacks_librarian import SacksLibrarian, SacksReference
+    from .hirsch_librarian import HirschLibrarian, HirschCommentary
     from .rag_manager import RAGManager, RAGContext
 
 
@@ -100,6 +104,8 @@ class ResearchBundle:
     liturgical_markdown: Optional[str]  # Phase 4/5: Pre-formatted markdown for LLM consumption
     sacks_references: Optional[List[SacksReference]]  # Rabbi Jonathan Sacks references to this psalm
     sacks_markdown: Optional[str]  # Pre-formatted Sacks markdown for LLM consumption
+    hirsch_commentaries: Optional[List[HirschCommentary]]  # R. Samson Raphael Hirsch German commentary
+    hirsch_markdown: Optional[str]  # Pre-formatted Hirsch markdown for LLM consumption
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
     request: ResearchRequest
 
@@ -112,6 +118,7 @@ class ResearchBundle:
             'figurative': [f.to_dict() for f in self.figurative_bundles],
             'commentary': [c.to_dict() for c in self.commentary_bundles] if self.commentary_bundles else [],
             'sacks_references': [s.to_dict() for s in self.sacks_references] if self.sacks_references else [],
+            'hirsch_commentaries': [h.to_dict() for h in self.hirsch_commentaries] if self.hirsch_commentaries else [],
             'summary': {
                 'lexicon_entries': len(self.lexicon_bundle.entries) if self.lexicon_bundle else 0,
                 'concordance_searches': len(self.concordance_bundles),
@@ -123,7 +130,8 @@ class ResearchBundle:
                 'liturgical_contexts_phase0': len(self.liturgical_usage) if self.liturgical_usage else 0,
                 'liturgical_prayers_aggregated': len(self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
                 'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
-                'sacks_references': len(self.sacks_references) if self.sacks_references else 0
+                'sacks_references': len(self.sacks_references) if self.sacks_references else 0,
+                'hirsch_commentaries': len(self.hirsch_commentaries) if self.hirsch_commentaries else 0
             }
         }
 
@@ -361,6 +369,11 @@ class ResearchBundle:
             md += self.sacks_markdown
             md += "\n---\n\n"
 
+        # R. Samson Raphael Hirsch Commentary section
+        if self.hirsch_markdown:
+            md += self.hirsch_markdown
+            md += "\n---\n\n"
+
         # Summary
         summary = self.to_dict()['summary']
         md += "## Research Summary\n\n"
@@ -424,6 +437,7 @@ class ResearchAssembler:
         self.liturgical_librarian_sefaria = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap (fallback)
         self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries=use_llm_summaries)  # Phase 4/5: Aggregated phrase-level
         self.sacks_librarian = SacksLibrarian()  # Rabbi Jonathan Sacks references
+        self.hirsch_librarian = HirschLibrarian()  # R. Samson Raphael Hirsch German commentary
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
@@ -499,6 +513,15 @@ class ResearchAssembler:
                 psalm_chapter=request.psalm_chapter
             )
 
+        # Fetch R. Samson Raphael Hirsch German commentary (if available from OCR extraction)
+        hirsch_commentaries = self.hirsch_librarian.get_psalm_commentary(request.psalm_chapter)
+        hirsch_markdown = None
+        if hirsch_commentaries:
+            hirsch_markdown = self.hirsch_librarian.format_for_research_bundle(
+                hirsch_commentaries,
+                psalm=request.psalm_chapter
+            )
+
         # Fetch RAG context (Phase 2d: Always included for psalm-level research)
         rag_context = self.rag_manager.get_rag_context(request.psalm_chapter)
 
@@ -513,6 +536,8 @@ class ResearchAssembler:
             liturgical_markdown=liturgical_markdown if liturgical_markdown else None,
             sacks_references=sacks_references if sacks_references else None,
             sacks_markdown=sacks_markdown if sacks_markdown else None,
+            hirsch_commentaries=hirsch_commentaries if hirsch_commentaries else None,
+            hirsch_markdown=hirsch_markdown if hirsch_markdown else None,
             rag_context=rag_context,
             request=request
         )
