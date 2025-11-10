@@ -114,6 +114,7 @@ Review the introduction and verse commentary for these issues:
 - Figurative language not analyzed
 - Figurative language parallels from database not cited or analyzed
 - ANE parallels available but not discussed
+- insufficient picture provided of what the psalm is ABOUT (especially if there are unexpected moments or shifts in tone/subject)
 
 ### 3. STYLISTIC PROBLEMS
 **Too "LLM-ish" or breathless:**
@@ -140,7 +141,7 @@ Review the introduction and verse commentary for these issues:
 - Show brilliance through analysis, don't label it
 - Use strong verbs and concrete imagery
 - Vary sentence structure for readability
-- Explain technical terms when needed (e.g., "jussive," "anaphora," "chiasm," "inclusio")
+- Explain technical terms when needed (e.g., "jussive," "anaphora," "chiasm," "inclusio", "perfect tense")
 - Elegant, uncluttered prose for sophisticated lay readers (New Yorker/Atlantic level)
 - AVOID pompous tone and fancy terms that signal you're a professor; prove your erudition through the incisive and original quality of your insights and your lapidary prose.
 - You are not just a scholar; you are a masterful writer **AND A TEACHER**. You are fashioning legitimate insights and aha! moments for your readers.
@@ -164,7 +165,7 @@ Review the introduction and verse commentary for these issues:
 - woven directly into the sentence,
 - or included as a short explanation at the end of the introductory essay or verse commentary.
 EXAMPLES OF TERMS THAT MUST BE DEFINED IF USED:
-- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", "hendiadys", "doxology", "merism", "proem", etc.
+- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", "hendiadys", "doxology", "merism", "proem", "prefect tense", etc.
 - **Hebrew Grammatical Terms:** **"intensive stem (Pi'el)"** (a verb form often indicating intensified action), **"Hithpolel"** (a reflexive verb form), etc. Explain what the form *does* functionally.
 - **Scholarly Shorthand:** **"BDB"** (the Brown-Driver-Briggs Hebrew and English Lexicon, a standard scholarly dictionary that includes...), "LXX" (the Septuagint, an ancient Greek translation of the Hebrew Bible that sometimes differs from the Masoretic Texts in ways that can reveal...), "MT" (the Masoretic Text, the standard Hebrew version known through...), "11QPsa" (the Psalm scroll from Qumran Cave 11, which contains variant readings that shed light on...)
 - **General Academic Terms or terms related to the Ancient Near East:** Any word not in common general lay usage must be clarified (including "ANE").
@@ -205,7 +206,8 @@ Rewrite the introduction to address identified weaknesses. The revised introduct
 - Integrate liturgical insights naturally where relevant (don't treat liturgy as separate topic)
 - Achieve the target style (Alter/Kugel/Bloom level)
 - Define technical terms for lay readers
-- Engage specific texts (Hebrew, LXX) with analysis
+- Engage specific texts (Hebrew, LXX) with analysis. Your readers DO NOT understand Greek. If you quote Greek, translate into English.
+- Leave the reader with a sense of what this psalm is ABOUT (especially if there are unexpected moments or shifts in tone/subject)
 
 **Section 2: Modern Jewish Liturgical Use (REQUIRED)**
 The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" section. Your job is to REVISE and IMPROVE it, NOT to skip it or output just a header.
@@ -249,7 +251,11 @@ The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" 
 **Stage 3: Revised Verse Commentary**
 Rewrite the verse-by-verse commentary to address identified weaknesses. For each verse:
 
-- **Audience Hebrew Proficiency**: Your readers are familiar with biblical and rabbinic Hebrew. When you quote sources (biblical texts, rabbinic sources, liturgical texts), provide the Hebrew original AS WELL AS an English translation. Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.). Don't rely solely on translation—let readers see the Hebrew evidence for themselves. NOTE: The verse text in Hebrew will be programmatically inserted before your commentary, so you do NOT need to include it yourself.
+- **Audience Hebrew Proficiency**: Your readers are familiar with biblical, rabbinic and liturgical Hebrew. When you quote sources (biblical texts, rabbinic sources, liturgical texts), **YOU MUST PROVIDE THE HEBREW ORIGINAL WELL AS AN ENGLISH TRANSLATION**. Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.). Don't rely solely on translation—let readers see the Hebrew evidence for themselves. 
+- Readers will be disappointed if you quote a translation without Hebrew OR provide more than a word or two of Hebrew without an English translation. **Rule of thumb: BOTH Hebrew and English.**
+- Don't let space considerations stop you from including both Hebrew and English. Readers will appreciate it and it's fine to go a little longer in order to include both Hebrew and English.
+
+**IMPORTANT: The verse text in Hebrew will be programmatically inserted before your commentary for each verse. DO NOT START A VERSE'S COMMENTARY WITH THE HEBREW TEXT OF THE VERSE. If you do that readers will see the verse printed twice.**
 
 - **Length**: Target 300-500 words per verse. Shorter (200-250 words) is acceptable for simple verses with minimal interesting features. Longer (500-800 words) is ENCOURAGED and often NECESSARY for verses with:
   * Unusual Hebrew phrases or idioms (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
@@ -270,17 +276,18 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
     - *Influence of verses and their use in aggada and halacha by the Mishna, Talmud, Midrashim, etc as provided in the Torah Temimah* - make sure to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
-    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation/re-interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally. Quoting from the liturgy in Hebrew is ENCOURAGED, always with an English translation.
+    - *Contemporary Jewish theologian Rabbi Jonathan Sacks if relevant*
+    - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation/re-interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally. Quoting generously from the liturgy in Hebrew is STRONGLY ENCOURAGED, always with an English translation.
     - Church fathers and medieval Christian interpretation if very illuminating
     - Modern critical scholarship debates
   * Figurative language analysis (how does the usage of similar figuration elsewhere shed light on how it's functioning here?)
-  * Poetics (parallelism, wordplay, structure, clever devices, sound patterns (USE the authoritative phonetic information you are provided above to conduct this analysis))
+  * Poetics (parallelism, wordplay, structure, clever devices, recurring words, sound patterns (USE the authoritative phonetic information you are provided above to conduct this analysis and illustrate your point to readers))
   * **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it—explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
   * Literary insights (narrative techniques, rhetorical strategies)
   * Historical and cultic insights (worship setting, historical context)
   * Comparative religion (ANE parallels, theological contrasts)
   * Grammar and syntax (especially when illuminating)
-  * Textual criticism (MT vs LXX, hints about Vorlage)
+  * Textual criticism (MT vs LXX, hints about Vorlage). You readers do NOT know Greek. If you quote Greek, translate into English.
   * Comparative biblical usage (concordance insights showing how terms/phrases appear elsewhere)
   * Timing/composition clues (vocabulary, theology, historical references)
 

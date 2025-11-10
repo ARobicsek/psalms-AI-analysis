@@ -190,10 +190,13 @@ class SacksLibrarian:
         lines = [
             f"## Rabbi Jonathan Sacks on Psalm {psalm_chapter}",
             "",
-            "**About this section**: These excerpts are from the writings of contemporary thinker Rabbi Jonathan Sacks (1948-2020). ",
-            "They are NOT traditional commentaries on Psalms. Rather, they show how Sacks references and interprets psalm verses ",
-            "in his broader theological and philosophical works. Each entry includes the psalm verse he referenced plus approximately ",
-            "1000 characters before and after to reveal his thinking about that verse.",
+            "### About Rabbi Jonathan Sacks",
+            "",
+            "Rabbi Lord Jonathan Sacks (1948–2020) was a British Orthodox rabbi, philosopher, and public theologian who served as the Chief Rabbi of the Commonwealth from 1991 to 2013. A graduate in philosophy from Cambridge, he became one of the world's most prominent public voices for faith, integrating traditional Jewish thought with Western philosophy and science. His vast scholarly corpus includes over 40 books, which fall into two main categories: biblical and liturgical commentary, most famously his *Covenant & Conversation* essays on the weekly Torah portion; and works of public theology, such as *The Great Partnership* and *The Dignity of Difference*.",
+            "",
+            "Rabbi Sacks's philosophy was a 21st-century application of *Torah ve-Hokhma* (Torah and Wisdom). He argued that science and religion are not in conflict but are \"two hemispheres of the brain\": \"Science takes things apart to see how they work. Religion puts things together to see what they mean.\" His exegetical approach is not that of a classical *parshan* (commentator) focused on grammatical or textual puzzles. His method is thematic, philosophical, and ethical. In *Covenant & Conversation*, he uses the Torah portion as a springboard to discuss the most pressing existential and moral concerns of modernity—leadership, family, ethics, and alienation. A typical essay masterfully blends insights from classical commentators like Rashi with Western philosophers, modern psychology, and current events. His work answers a new, modern question. While classical commentators asked, \"What does this verse *mean*?\" Rabbi Sacks, writing for an educated and often secularized world, answers the question, \"Why does this verse *matter*?\" He translated the text's covenantal message into a universal moral framework for the 21st century.",
+            "",
+            "**About this section**: These excerpts are from Rabbi Sacks' writings. They are NOT traditional commentaries on Psalms. Rather, they show how Sacks references and interprets psalm verses in his broader theological and philosophical works. Each entry includes the psalm verse he referenced plus approximately 1000 characters before and after to reveal his thinking about that verse.",
             ""
         ]
 
