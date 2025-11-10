@@ -1,0 +1,22 @@
+{
+  "page": "page_0507",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלום 8ם ₪ הסוס\n4 תחשכנח עיניהם מראוות -6 ץג3ם 6₪ש6 זוסםו 181 50 (24 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "25",
+      "position": 1167,
+      "marker": "V. 25"
+    },
+    {
+      "verse": "27-29",
+      "position": 1374,
+      "marker": "V. 27-29"
+    }
+  ],
+  "text_length": 1755,
+  "text_file": "page_0507.txt"
+}

@@ -1,0 +1,302 @@
+{
+  "psalm_number": 6,
+  "pipeline_start": "2025-11-10T16:21:13.355127",
+  "pipeline_end": "2025-11-10T16:42:50.566170",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1700,
+      "input_token_estimate": 566,
+      "output_char_count": 7895,
+      "output_token_estimate": 2631,
+      "duration_seconds": 50.60430431365967,
+      "completion_date": null,
+      "timestamp": "2025-11-10T16:21:13.362397"
+    },
+    "micro_analysis": {
+      "input_char_count": 7895,
+      "input_token_estimate": 2631,
+      "output_char_count": 160439,
+      "output_token_estimate": 53479,
+      "duration_seconds": 286.1201663017273,
+      "completion_date": null,
+      "timestamp": "2025-11-10T16:24:03.992912"
+    },
+    "synthesis": {
+      "input_char_count": 168336,
+      "input_token_estimate": 56112,
+      "output_char_count": 31978,
+      "output_token_estimate": 10659,
+      "duration_seconds": 239.92359519004822,
+      "completion_date": null,
+      "timestamp": "2025-11-10T16:30:50.200584"
+    },
+    "master_editor": {
+      "input_char_count": 191349,
+      "input_token_estimate": 63783,
+      "output_char_count": 28638,
+      "output_token_estimate": 9546,
+      "duration_seconds": 240.4394142627716,
+      "completion_date": "2025-11-10T16:42:50.566170",
+      "timestamp": "2025-11-10T16:36:51.228746"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "הַשְּׁמִינִית",
+        "reason": "Mysterious technical cultic term appearing only here and Psalm 12 - need etymology and musical significance"
+      },
+      {
+        "word": "אֻמְלַל",
+        "reason": "Rare term for languishing/withering - need semantic range and illness contexts"
+      },
+      {
+        "word": "תוֹכִיחֵנִי",
+        "reason": "Legal/forensic term for rebuke - why judicial language rather than simple punishment?"
+      },
+      {
+        "word": "נִבְהֲלוּ",
+        "reason": "Terror applied to bones - unusual personification, need emotional/physical semantic range"
+      },
+      {
+        "word": "חַלְּצָה",
+        "reason": "Military rescue terminology - specific connotations of deliverance"
+      },
+      {
+        "word": "אַשְׂחֶה",
+        "reason": "Flood/drench verb creating hyperbolic weeping imagery - semantic intensity"
+      },
+      {
+        "word": "אַמְסֶה",
+        "reason": "Dissolving/melting verb - physical dissolution metaphor needs clarification"
+      },
+      {
+        "word": "עָשְׁשָׁה",
+        "reason": "Moth-damage/decay terminology for eyes - rare verb with specific imagery"
+      },
+      {
+        "word": "פֹּעֲלֵי אָוֶן",
+        "reason": "Workers of iniquity formula - theological significance and enemy characterization"
+      },
+      {
+        "word": "קוֹל בִּכְיִי",
+        "reason": "Voice of weeping compound - how weeping becomes communicative speech"
+      },
+      {
+        "word": "רָגַע",
+        "reason": "Instant/moment - temporal emphasis in reversal, need precise meaning"
+      },
+      {
+        "word": "בְּנְגִינוֹת",
+        "reason": "Instrumental music term - cultic performance context and rare usage"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "שמינית",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Find all occurrences of this rare musical/cultic term"
+      },
+      {
+        "query": "בהל",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Terror vocabulary transfer from psalmist to enemies"
+      },
+      {
+        "query": "עד מתי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "How long formula in lament literature"
+      },
+      {
+        "query": "למען חסדך",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Appeals to divine faithfulness as motivation"
+      },
+      {
+        "query": "זכר במות",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Death and remembrance theology across Scripture"
+      },
+      {
+        "query": "שמע קול",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Divine hearing of vocal prayer/weeping"
+      },
+      {
+        "query": "סורו ממני",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Dismissal formula and authority claims"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Bones experiencing terror - unusual personification of body parts | Vehicle: bones | Related terms: bone, skeleton, frame",
+        "vehicle": "bones",
+        "vehicle_terms": [
+          "bones",
+          "bone",
+          "skeleton",
+          "frame"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Furniture dissolving in tears - hyperbolic liquid imagery | Vehicle: flood | Related terms: floods, drench, drenching, dissolve, dissolving, melt, melting",
+        "vehicle": "flood",
+        "vehicle_terms": [
+          "flood",
+          "floods",
+          "drench",
+          "drenching",
+          "dissolve",
+          "dissolving",
+          "melt",
+          "melting"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Eyes wasting like moth damage - specific decay metaphor | Vehicle: waste | Related terms: wasted, wasting, decay, decaying, consumed, consuming",
+        "vehicle": "waste",
+        "vehicle_terms": [
+          "waste",
+          "wasted",
+          "wasting",
+          "decay",
+          "decaying",
+          "consumed",
+          "consuming"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Weeping as voice - transformation of tears into speech | Vehicle: voice | Related terms: sound, cry, call, calling, speak, speaking",
+        "vehicle": "voice",
+        "vehicle_terms": [
+          "voice",
+          "sound",
+          "cry",
+          "call",
+          "calling",
+          "speak",
+          "speaking"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "6:1",
+        "reason": "Superscription with mysterious sheminith - how do commentators interpret this rare cultic term?"
+      },
+      {
+        "verse": "6:2",
+        "reason": "Double negative imperatives about divine anger - traditional understanding of measured discipline"
+      },
+      {
+        "verse": "6:3",
+        "reason": "Languishing and terrified bones - classical interpretation of psychosomatic illness imagery"
+      },
+      {
+        "verse": "6:4",
+        "reason": "Broken syntax and 'how long' cry - commentators on emotional fragmentation and lament formula"
+      },
+      {
+        "verse": "6:5",
+        "reason": "Triple imperatives and appeal to divine faithfulness - traditional understanding of proper petition structure"
+      },
+      {
+        "verse": "6:6",
+        "reason": "Central theological argument about death and praise - classical views on afterlife and divine worship"
+      },
+      {
+        "verse": "6:7",
+        "reason": "Hyperbolic weeping dissolving furniture - how commentators handle extreme emotional imagery"
+      },
+      {
+        "verse": "6:8",
+        "reason": "Introduction of enemies and eye decay - traditional connection between illness and social opposition"
+      },
+      {
+        "verse": "6:9",
+        "reason": "Dramatic reversal and dismissal of enemies - commentators on the trigger for sudden confidence"
+      },
+      {
+        "verse": "6:10",
+        "reason": "Perfect tense divine acceptance - traditional understanding of assured divine response"
+      },
+      {
+        "verse": "6:11",
+        "reason": "Terror transfer and instant reversal - classical interpretation of poetic justice and chiastic structure"
+      }
+    ],
+    "lexicon_entries_count": 24,
+    "concordance_results": {
+      "שמינית": 0,
+      "בהל": 0,
+      "עד מתי": 0,
+      "למען חסדך": 2,
+      "זכר במות": 0,
+      "שמע קול": 1,
+      "סורו ממני": 1
+    },
+    "figurative_results": {
+      "total_instances_used": 182
+    },
+    "commentary_counts": {
+      "Rashi": 7,
+      "Ibn Ezra": 10,
+      "Radak": 11,
+      "Malbim": 5,
+      "Meiri": 11,
+      "Metzudat David": 10,
+      "Torah Temimah": 1
+    },
+    "sacks_references_count": 2,
+    "ugaritic_parallels": [
+      {
+        "type": "Poetic Word Pair",
+        "reference": "Psalm 6:7 [Eng. 6:6]",
+        "analysis": "This pair illustrates how the shared poetic thesaurus provided conventional language for expressing ..."
+      }
+    ],
+    "research_bundle_chars": 150936,
+    "research_bundle_tokens": 50312
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the specific meaning and significance of 'sheminith' in the superscription, and how does it relate to the psalm's content?",
+      "How does the theological argument in v. 6 about death and praise function within broader biblical and ANE concepts of Sheol?",
+      "What triggers the dramatic reversal between v. 8 and v. 9 - is this an oracle of salvation, inner assurance, or liturgical response?",
+      "How do the Ugaritic parallels for weeping/tears language illuminate the conventional nature of the psalmist's expression versus unique elements?",
+      "What is the relationship between the implied sin (v. 2), physical illness (vv. 3, 7-8), and enemy opposition (vv. 8, 11) in the psalm's understanding of crisis?",
+      "How does the verb tense progression (imperatives → descriptions → confident declarations) support the psalm's rhetorical movement?",
+      "What lexical and semantic connections exist between the psalmist's 'terror' (נִבְהֲלוּ) and the enemies' future 'terror' (וְיִבָּהֲלוּ)?",
+      "How does this psalm's integration of penitential and confidence motifs compare to other individual laments in the Psalter?"
+    ],
+    "micro_questions": [
+      "What is the precise meaning and significance of 'שְׁמִינִית' in the superscription, and why does it appear only here and Psalm 12?",
+      "Why does the psalmist use 'תוֹכִיחֵנִי' (rebuke/prove) rather than a simple word for punishment - what legal/forensic context is implied?",
+      "What triggers the dramatic reversal between verse 8 and 9 - is this an oracle of salvation, inner assurance, or liturgical response?",
+      "How does the rare word 'אֻמְלַל' (languishing) relate to similar terms in other biblical texts, and what does it suggest about the nature of the affliction?",
+      "Why do the psalmist's 'bones' experience 'terror' (נִבְהֲלוּ) - what does this personification of body parts accomplish that other imagery would not?",
+      "Is the theological argument in verse 6 about death and praise a genuine theological principle or a form of holy manipulation - and what does this suggest about the psalmist's relationship with God?",
+      "What is the semantic difference between the two pieces of sleeping furniture ('מִטָּה' and 'עֶרֶשׂ') in verse 7, and why does the poet use both?",
+      "How does 'weeping' become transformed into 'voice' (קוֹל בִּכְיִי) in verse 9, and what does this suggest about the nature of prayer and divine communication?"
+    ],
+    "verse_count": 11
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-20250514",
+    "micro_analysis": "claude-sonnet-4-20250514",
+    "synthesis": "claude-sonnet-4-20250514",
+    "master_editor": "gpt-5"
+  }
+}

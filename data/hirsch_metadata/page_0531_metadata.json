@@ -1,0 +1,17 @@
+{
+  "page": "page_0531",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים עב 08| 500\n1"
+  },
+  "verse_markers": [
+    {
+      "verse": "16",
+      "position": 771,
+      "marker": "V. 16"
+    }
+  ],
+  "text_length": 1900,
+  "text_file": "page_0531.txt"
+}

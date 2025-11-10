@@ -1,0 +1,166 @@
+{
+  "psalm_number": 6,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "The superscription contains the mysterious technical term 'הַשְּׁמִינִית' (sheminith) which appears only here and Psalm 12:1, possibly referring to an octave or eight-stringed instrument. The term 'בִּנְגִינוֹת' (with instrumental music) is relatively rare and suggests specific liturgical performance instructions.",
+      "lexical_insights": [
+        "הַשְּׁמִינִית",
+        "בִּנְגִינוֹת"
+      ],
+      "figurative_analysis": [
+        "none in superscription"
+      ],
+      "thesis_connection": "Establishes cultic performance context supporting temple worship setting from thesis",
+      "phonetic_transcription": "lam-nats-**TSĒ**-aḥ bin-ghiy-**NŌTH** ʿal-hash-shmiy-**NIY**-th miz-**MŌR** lə-dhā-**WIDH**"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Opens with striking double negative imperatives using parallel terms for divine anger: 'אַף' (nostril anger) and 'חֵמָה' (burning fury). The verbs 'תוֹכִיחֵנִי' (rebuke/prove) and 'תְיַסְּרֵנִי' (chastise/discipline) suggest legal/pedagogical contexts rather than arbitrary punishment.",
+      "lexical_insights": [
+        "תוֹכִיחֵנִי",
+        "חֵמָה"
+      ],
+      "figurative_analysis": [
+        "divine anger as bodily heat/breath"
+      ],
+      "thesis_connection": "Establishes measured discipline plea that frames the theological argument about sin and restoration",
+      "phonetic_transcription": "yə-hō-**WĀH** 'al-bə-'ap-**KHĀ** thō-khiy-**ḤĒ**-niy wə-'al-ba-ḥa-mā-thə-**KHĀ** thə-yas-**SRĒ**-niy"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Contains the rare word 'אֻמְלַל' (languishing/withering) found only here and a few other places, suggesting extreme physical deterioration. The phrase 'נִבְהֲלוּ עֲצָמָי' (my bones are terrified) uses an unusual verb typically applied to persons, creating personification of body parts.",
+      "lexical_insights": [
+        "אֻמְלַל",
+        "נִבְהֲלוּ"
+      ],
+      "figurative_analysis": [
+        "bones experiencing terror - personification"
+      ],
+      "thesis_connection": "Begins somatic imagery progression that integrates physical and spiritual crisis",
+      "phonetic_transcription": "ḥon-**NĒ**-niy yə-hō-**WĀH** **KIY** 'um-lal-**'Ā**-niy rə-fā-**'Ē**-niy yə-hō-**WĀH** **KIY** niv-ha-**LŪ** ʿa-tsā-**MĀY**"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Features the dramatic phrase 'וְנַפְשִׁי נִבְהֲלָה מְאֹד' escalating from bones to whole being ('nephesh'). The broken syntax 'וְאַתָּה יְהוָה עַד־מָתָי' creates rhetorical fragmentation - the psalmist can barely complete the thought, trailing off into the classic lament cry.",
+      "lexical_insights": [
+        "נִבְהֲלָה",
+        "עַד־מָתָי"
+      ],
+      "figurative_analysis": [
+        "nephesh as seat of terror"
+      ],
+      "thesis_connection": "Peak of terror description before theological argument - supports progression toward exclusion from praise community",
+      "phonetic_transcription": "wə-naf-**SHIY** niv-ha-**LĀH** mə-**'ŌDH** wə-'a-**TĀH** yə-hō-**WĀH** ʿadh-mā-**THĀY**"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Uses three rapid-fire imperatives: 'שׁוּבָה' (turn/return), 'חַלְּצָה' (deliver/rescue), 'הוֹשִׁיעֵנִי' (save me). The motivation 'לְמַ֣עַן חַסְדֶּךָ' (for the sake of your faithfulness) appeals to God's character rather than the psalmist's worthiness.",
+      "lexical_insights": [
+        "שׁוּבָה",
+        "חַלְּצָה"
+      ],
+      "figurative_analysis": [
+        "divine turning as spatial movement"
+      ],
+      "thesis_connection": "Transition from lament to petition based on divine character - key theological move in argument structure",
+      "phonetic_transcription": "shū-**VĀH** yə-hō-**WĀH** ḥal-**LTSĀH** naf-**SHIY** hō-shiy-**ʿĒ**-niy lə-**MA**-ʿan ḥas-**DE**-khā"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Presents the famous theological argument about death and praise using parallel terms 'מָוֶת' (death) and 'שְׁאוֹל' (Sheol), and 'זִכְרֶךָ' (remembrance of you) and 'יוֹדֶה־לָּךְ' (acclaim you). This verse contains the psalm's central theological premise about the relationship between life, death, and divine worship.",
+      "lexical_insights": [
+        "זִכְרֶךָ",
+        "שְׁאוֹל"
+      ],
+      "figurative_analysis": [
+        "death/Sheol as realm of silence"
+      ],
+      "thesis_connection": "Central theological argument of entire psalm - God's interest in preserving those who can praise Him",
+      "phonetic_transcription": "**KIY** **'ĒY**-n bam-**MĀ**-weth zikh-**RE**-khā bish-**'ŌL** **MIY** yō-dheh-**LLĀ**-khə"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Contains extraordinary hyperbolic imagery with 'אַשְׂחֶה' (I flood/drench) and 'אַמְסֶה' (I melt/dissolve), using two different words for sleeping furniture: 'מִטָּה' (bed) and 'עֶרֶשׂ' (couch). The alliteration and assonance create a drowning effect in Hebrew.",
+      "lexical_insights": [
+        "אַשְׂחֶה",
+        "אַמְסֶה"
+      ],
+      "figurative_analysis": [
+        "tears as flood dissolving solid furniture"
+      ],
+      "thesis_connection": "Peak of weeping imagery that becomes the very means of divine hearing in verse 9",
+      "phonetic_transcription": "yā-**GHAʿ**-tiy  bə-'an-ḥā-**THIY** 'as-**ḤEH** və-khol-lay-**LĀH** mit-tā-**THIY** bə-dhim-ʿā-**THIY** ʿar-**SIY** 'am-**SEH**"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Introduces the enemies for the first time with 'צוֹרְרָי' (my foes) and uses the rare word 'עָשְׁשָׁה' (wasted away) typically used for moth damage or decay. The progression from internal weeping to external opposition broadens the crisis from personal to social.",
+      "lexical_insights": [
+        "עָשְׁשָׁה",
+        "עָתְקָה"
+      ],
+      "figurative_analysis": [
+        "eyes decaying like moth-eaten cloth"
+      ],
+      "thesis_connection": "Expands crisis to include social dimension - exclusion from community through enemy opposition",
+      "phonetic_transcription": "ʿā-shə-**SHĀH** mi-**KA**-ʿas ʿēy-**NIY** ʿā-thə-**QĀH** bə-khol-tsō-rə-**RĀY**"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Dramatic tonal shift with commanding imperative 'סוּרוּ מִמֶּנִּי' (depart from me) - the psalmist suddenly has authority to dismiss enemies. The reason given is 'שָׁמַע יְהוָה קוֹל בִּכְיִי' (the LORD has heard the voice of my weeping) - weeping becomes 'voice' with communicative power.",
+      "lexical_insights": [
+        "פֹּעֲלֵי אָוֶן",
+        "קוֹל בִּכְיִי"
+      ],
+      "figurative_analysis": [
+        "weeping personified as speaking voice"
+      ],
+      "thesis_connection": "Pivotal reversal where weeping becomes the means of divine communication and restoration to community",
+      "phonetic_transcription": "**SŪ**-rū mim-men-**NIY** kol-**PŌ**-ʿa-lēy **'Ā**-wen kiy-shā-**MAʿ** yə-hō-**WĀH** **QŌL** bikh-**YIY**"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Uses perfect tense verbs 'שָׁמַע' (has heard) and 'יִקָּח' (accepts/receives) to declare completed divine action. The parallel between 'תְּחִנָּתִי' (my plea) and 'תְּפִלָּתִי' (my prayer) suggests formal liturgical language.",
+      "lexical_insights": [
+        "תְּחִנָּתִי",
+        "יִקָּח"
+      ],
+      "figurative_analysis": [
+        "divine hearing as receiving/accepting"
+      ],
+      "thesis_connection": "Confirms divine response that restores psalmist's position as one whose prayers are received",
+      "phonetic_transcription": "shā-**MAʿ** yə-hō-**WĀH** tə-ḥin-nā-**THIY** yə-hō-**WĀH** **TƏ**-fil-lā-thiy yiq-**QĀḤ**"
+    },
+    {
+      "verse_number": 11,
+      "commentary": "Creates perfect chiastic reversal with enemies now experiencing 'יִבָּהֲלוּ' (will be terrified) - the same root used for the psalmist's terror in verses 3-4. The phrase 'רָגַע' (in an instant/moment) emphasizes the speed of reversal, and 'יֵבֹשׁוּ' appears twice creating a frame around the verse.",
+      "lexical_insights": [
+        "יִבָּהֲלוּ",
+        "רָגַע"
+      ],
+      "figurative_analysis": [
+        "terror as transferable condition"
+      ],
+      "thesis_connection": "Completes reversal structure - enemies excluded from community while psalmist restored to praising position",
+      "phonetic_transcription": "yē-**VŌ**-shū  wə-yi-bā-ha-**LŪ** mə-**'ŌDH** kol-'ō-yə-**VĀY** yā-**SHU**-vū yē-**VŌ**-shū **RĀ**-ghaʿ **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Terror vocabulary 'בהל' creates inclusio - psalmist's bones/soul terrified (vv.3-4) then enemies terrified (v.11)",
+    "Divine name 'יְהוָה' appears strategically: petition (vv.2-5), argument (v.6), and confidence (vv.9-10)",
+    "Somatic progression: bones → soul → eyes → whole body dissolving in tears → restoration",
+    "Imperative mood progression: negative (don't punish) → positive (heal me) → dismissive (depart from me)",
+    "Weeping transforms from expression of distress (v.7) to means of divine communication (v.9)"
+  ],
+  "interesting_questions": [
+    "What is the precise meaning and significance of 'שְׁמִינִית' in the superscription, and why does it appear only here and Psalm 12?",
+    "Why does the psalmist use 'תוֹכִיחֵנִי' (rebuke/prove) rather than a simple word for punishment - what legal/forensic context is implied?",
+    "What triggers the dramatic reversal between verse 8 and 9 - is this an oracle of salvation, inner assurance, or liturgical response?",
+    "How does the rare word 'אֻמְלַל' (languishing) relate to similar terms in other biblical texts, and what does it suggest about the nature of the affliction?",
+    "Why do the psalmist's 'bones' experience 'terror' (נִבְהֲלוּ) - what does this personification of body parts accomplish that other imagery would not?",
+    "Is the theological argument in verse 6 about death and praise a genuine theological principle or a form of holy manipulation - and what does this suggest about the psalmist's relationship with God?",
+    "What is the semantic difference between the two pieces of sleeping furniture ('מִטָּה' and 'עֶרֶשׂ') in verse 7, and why does the poet use both?",
+    "How does 'weeping' become transformed into 'voice' (קוֹל בִּכְיִי) in verse 9, and what does this suggest about the nature of prayer and divine communication?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on 'שְׁמִינִית', 'אֻמְלַל', terror vocabulary (בהל root), and rare verbs like 'אַמְסֶה'\nCONCORDANCE: Track legal terminology ('תוֹכִיחֵנִי'), death/Sheol theology, and weeping/voice imagery across Psalter\nFIGURATIVE: All verses with somatic imagery and personification of body parts\nCOMMENTARY: Verses 6 (death/praise theology) and 9 (reversal trigger) need interpretive exploration\nSTRUCTURE: Investigation of chiastic patterns and the relationship between physical, moral, and social dimensions of crisis"
+}

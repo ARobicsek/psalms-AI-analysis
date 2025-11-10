@@ -1,0 +1,22 @@
+{
+  "page": "page_0370",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n42 תחהלום מח סוחס\n4 אלחור? רארועומיה וצרש תל גת 0204 ,65סג!הק וג מז (4 1צ"
+  },
+  "verse_markers": [
+    {
+      "verse": "4",
+      "position": 116,
+      "marker": "V.4"
+    },
+    {
+      "verse": "5",
+      "position": 937,
+      "marker": "V. 5"
+    }
+  ],
+  "text_length": 1852,
+  "text_file": "page_0370.txt"
+}

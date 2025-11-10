@@ -1,0 +1,17 @@
+{
+  "page": "page_0526",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n48 תחלים עב 50\n/ '-\"--80 ת--- 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "3",
+      "position": 677,
+      "marker": "V. 3"
+    }
+  ],
+  "text_length": 2786,
+  "text_file": "page_0526.txt"
+}

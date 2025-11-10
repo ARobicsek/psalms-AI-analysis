@@ -1,0 +1,22 @@
+{
+  "page": "page_0279",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים לח 21 סוחס"
+  },
+  "verse_markers": [
+    {
+      "verse": "4",
+      "position": 730,
+      "marker": "V. 4"
+    },
+    {
+      "verse": "7",
+      "position": 1893,
+      "marker": "V. 7"
+    }
+  ],
+  "text_length": 2031,
+  "text_file": "page_0279.txt"
+}

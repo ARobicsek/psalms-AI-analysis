@@ -1,0 +1,22 @@
+{
+  "page": "page_0368",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n0 תחלים מז-מח חס5וח50\nזגנצ.זא ]א 541 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "1",
+      "position": 619,
+      "marker": "V. 1"
+    },
+    {
+      "verse": "2",
+      "position": 1344,
+      "marker": "V. 2"
+    }
+  ],
+  "text_length": 2389,
+  "text_file": "page_0368.txt"
+}

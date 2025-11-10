@@ -1,0 +1,22 @@
+{
+  "page": "page_0486",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n48 תחלים פח סוחס\n0.4 ב.בבת שה) 4תג 64[מוה6) ה1וב= שהיך ו 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "9",
+      "position": 486,
+      "marker": "V.9"
+    },
+    {
+      "verse": "10",
+      "position": 1073,
+      "marker": "V. 10"
+    }
+  ],
+  "text_length": 2295,
+  "text_file": "page_0486.txt"
+}

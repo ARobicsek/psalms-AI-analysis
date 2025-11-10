@@ -1,0 +1,27 @@
+{
+  "page": "page_0194",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n16 תחלים כב 5\n1"
+  },
+  "verse_markers": [
+    {
+      "verse": "23",
+      "position": 0,
+      "marker": "V. 23"
+    },
+    {
+      "verse": "24",
+      "position": 315,
+      "marker": "V. 24"
+    },
+    {
+      "verse": "25",
+      "position": 1585,
+      "marker": "V. 25"
+    }
+  ],
+  "text_length": 1803,
+  "text_file": "page_0194.txt"
+}

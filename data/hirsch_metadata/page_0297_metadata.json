@@ -1,0 +1,22 @@
+{
+  "page": "page_0297",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים לז 9 סוחס\n\\ 7\"7הת-- 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "8",
+      "position": 487,
+      "marker": "V. 8"
+    },
+    {
+      "verse": "9",
+      "position": 1027,
+      "marker": "V.9"
+    }
+  ],
+  "text_length": 1878,
+  "text_file": "page_0297.txt"
+}

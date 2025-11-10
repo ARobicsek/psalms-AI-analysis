@@ -1,0 +1,27 @@
+{
+  "page": "page_0493",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים פח 465 הסוס\n8 א שדוי ה שר 0פומסזק 25 זסוצה] ]1 (23 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "23",
+      "position": 270,
+      "marker": "V. 23"
+    },
+    {
+      "verse": "24",
+      "position": 749,
+      "marker": "V. 24"
+    },
+    {
+      "verse": "25",
+      "position": 1620,
+      "marker": "V. 25"
+    }
+  ],
+  "text_length": 1915,
+  "text_file": "page_0493.txt"
+}

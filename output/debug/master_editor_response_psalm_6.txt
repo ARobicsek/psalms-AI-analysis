@@ -1,0 +1,160 @@
+### EDITORIAL ASSESSMENT
+
+What works: The draft rightly locates Psalm 6 at the intersection of illness, sin, and social hostility, and it hears the psalm’s audacious claim that “weeping” has a “voice.” It tracks the pivot from lament to confidence, notes the personified “bones,” and attends to lexical nuances (e.g., af vs. chemah; tokhiach vs. yasser). Several traditional commentators are woven in with sensitivity.
+
+Main weaknesses: The essay too often asserts rather than demonstrates. Some claims drift toward the abstract (“sophisticated theology”) without enough anchoring in the Hebrew line or the poem’s sound. The verse-by-verse notes omit a few easy wins: the concordance pattern of למען חסדך (only Ps 6:6; 44:27), the tight network of “bones” imagery across the Psalter (Ps 22:18; 35:10; 38:4), and the usage of רֶגַע (“in a moment”) elsewhere (Ps 30:6; Isa 54:7–8). The dramatic reversal (vv. 9–10) is described but not fully interpreted: is this a cultic oracle, a liturgical cue, or an inner assurance? The figurative language database is only lightly used; readers would benefit from specific, cited parallels (e.g., dissolving/melting: Ps 58:8–9; 46:7; praise-in-Sheol polemic: Isa 38:18; Ps 30:10; 88:11–12; 115:17).
+
+Missed opportunities: 
+- Superscription: the midrashic “eighth” (circumcision) reading should be noted alongside instrument/mode options.
+- Verse 7’s sibilant music (אַשְׂחֶה… מִטָּתִי… בְּדִמְעָתִי… עַרְשִׂי אַמְסֶה) invites a brief, precise sound observation.
+- LXX differences could be used modestly to illuminate ancient reception (e.g., “on the eighth” as “ὑπὲρ ὁ ὄγδοος”).
+- Liturgical use is present but needs structuring and Hebrew quotations from the prayers, showing how the tradition “reads” the psalm.
+
+Actionable revisions:
+- Define terms (colon, parallelism, chiasm, LXX, Qere/Kethib).
+- Answer the macro-questions the draft raises: (1) “Sheminith,” (2) Sheol and praise, (3) what triggers the reversal, (4) why “bones,” (5) the force of רֶגַע.
+- Integrate specific biblical parallels from the figurative database with citations.
+- Strengthen the liturgical section with clear subsections, Hebrew prayer excerpts, and reflection on how liturgy reframes the psalm.
+
+Overall, the draft is strong in conception; it needs crisper demonstrations, fuller use of the research bundle, and a more carefully built liturgical appendix.
+
+### REVISED INTRODUCTION
+
+Psalm 6 is a small, exacting poem that begins with a flinch—“O YHWH, do not rebuke me in your anger” (יְהוָה אַל־בְּאַפְּּךָ תּוֹכִיחֵנִי)—and ends with a shout, “Away from me, all you workers of iniquity” (סוּרוּ מִמֶּנִּי כָּל־פֹּעֲלֵי אָוֶן). Between those poles, the speaker traverses a terrain where illness feels like judgment, bones know terror, and the night is saline. Psalm 6 is often called a “penitential psalm,” but its penitence is unusually embodied. The poet does not offer abstract contrition; he offers his bones, his bed, his eyes.
+
+The superscription—לַמְנַצֵּחַ בִּנְגִינוֹת עַל־הַשְּׁמִינִית (For the leader; with stringed instruments; on the sheminith)—preserves a mystery. “Sheminith” (הַשְּׁמִינִית) appears only here and in Psalm 12. Most medievals (Rashi, Radak) gloss it as an eight-stringed lyre or an “eighth mode.” The Septuagint renders “ὑπὲρ ὁ ὄγδοος,” “for the eighth,” which could be an octave, a register, or a guild cue. A homiletical tradition (Menachot 43b; echoed by Malbim and Meiri) ties “the eighth” to circumcision on the eighth day—an elegant midrash rather than the plain sense, but one that hears in this psalm a prayer uttered at the threshold of covenantal identity. Either way, the music matters. “With stringed instruments” (בִּנְגִינוֹת) recalls temple craft; in the centuries since, those once-practical notations became part of the poetry, reminders that lament is never only spoken—it is performed.
+
+The opening line calibrates the entire prayer. The poet accepts that God may correct him, but he pleads for the manner of it. Two different words for anger—אַף (visible wrath, literally “nose”) and חֵמָה (smoldering, stored-up fury)—and two different verbs—תּוֹכִיחֵנִי (rebuke/prove) and תְּיַסְּרֵנִי (discipline/chasten)—stage a negotiation between justice and mercy. Jeremiah’s plea “Correct me, YHWH, but with justice; not in your anger” (Jer 10:24) is the same calculus. The psalm thus begins with a theology of proportion.
+
+Verses 3–4 bring the crisis into the body. “Have mercy… for I am אֻמְלַל” (umlal), a word used of fields and vines that “languish” (e.g., Joel 1:10; Hos 4:3). Here the human being is a withered plot. Most striking is the personification: “נִבְהֲלוּ עֲצָמָי” (“my bones are terrified”). In the Psalter, bones are often the deepest register of a person’s condition: “All my bones shall say, ‘YHWH, who is like you?’” (Ps 35:10); “There is no wholeness in my bones because of my sin” (Ps 38:4); “I can count all my bones” (Ps 22:18). In Psalm 6, the fear runs to the frame. The next line intensifies the reach: “And my נֶפֶשׁ is deeply terrified” (וְנַפְשִׁי נִבְהֲלָה מְאֹד). נֶפֶשׁ is not a detachable soul; it is the living self, breath and appetite. Terror has progressed from skeleton to self.
+
+Then the poem breaks: “וְאַתָּה יְהוָה, עַד־מָתָי” (“And You, YHWH—how long?”). The syntax is jagged, as if the speaker loses the strength to complete the sentence. “How long?” (עַד־מָתָי) is a classic lament cry (Ps 13:2–3; 74:10; 89:47; 94:3), but here the cry is preceded by an accusatory “and You,” a finger half-pointed. The Masoretic text notes a Qere/Kethib (read/write) variation on וְאַתָּה; in either case, the line preserves a stammer. Some theology is best done in sentence fragments.
+
+Verse 5 shifts the mode: three imperatives—שׁוּבָה (“turn”), חַלְּצָה (“draw out, deliver”), הוֹשִׁיעֵנִי (“save”)—named in a rising sequence, then grounded by motive: “לְמַעַן חַסְדֶּךָ,” “for the sake of your steadfast love.” That phrase is rare in the Psalms (here and 44:27), and it is precise: the appeal is not to the poet’s merit but to God’s covenantal character. The verb חָלַץ can mean “draw out” (rescue) and, in other contexts, “be equipped for war.” Both resonate: the psalmist needs extraction and re-equipping.
+
+The centerpiece (v. 6) makes a bracing argument: “For in death there is no remembrance of You; in Sheol who will praise You?” In the Bible’s early horizon, Sheol is a shadowland where praise falls silent (Isa 38:18; Ps 30:10; 88:11–12; 115:17). “Remembrance” (זִכְרֶךָ) is covenantal: to remember God is to confess God, especially in public worship. The poet is not bargaining crudely. He is saying: if You wish to be remembered and acclaimed among the living, keep me among the living. Radak, writing in a world that affirms the praise of souls after death, already felt the tension and resolves it by saying the righteous still prefer life to fulfill God’s will. The line remains radical. It grounds the prayer for healing not in self-preservation but in witness.
+
+Verses 7–8 press the grief to hyperbole. “Every night I make my bed swim” (אַשְׂחֶה… מִטָּתִי); “I melt my couch with my tears” (בְּדִמְעָתִי עַרְשִׂי אַמְסֶה). The ancient lexicons already noticed the double sense possibilities: אַשְׂחֶה could be “I make swim” (from שָׂחָה) or “I soil” (Rashi’s link to סְחִי וּמָאוֹס, Lam 3:45). Either way, the image is of liquid overrun. The verse even sounds like water: the sibilants and liquids—אשׂכה… בכל־לילה… בדמעתי… ערשי אמסה—create a hush and hiss that matches the meaning. “Melt” (מָסָה) is a favorite biblical metaphor for dissolution under pressure (Ps 46:7; 58:8–9). Here tears are the solvent. The next line shifts from furniture to vision: “My eye is wasted by vexation” (עָשְׁשָׁה מִכַּעַס עֵינִי), “worn out” like a moth-eaten garment (cf. Job 13:28; Isa 50:9). The eye’s dimming is caused “by all my foes” (בְּכָל־צֹרְרָי). Illness has a social surround; vulnerability invites mockery.
+
+Then, without warning, the psalm turns. “Depart from me, all workers of iniquity, for YHWH has heard the voice of my weeping. YHWH has heard my plea; YHWH will receive my prayer” (vv. 9–10). Two questions always asked here deserve answers. First, what triggers this reversal? In Israel’s laments, the turn often arrives as an “oracle of salvation”—a brief, priestly assurance that the prayer is heard—after which the petitioner speaks in confidence. Whether or not an external oracle is implied, the grammar does the work: perfect verbs (“has heard”) state as accomplished what faith already knows, and the future “will receive” extends that confidence forward. Second, what changed socially? The poet’s authority returns with prayer. “Depart from me” is a dismissal formula. The enemies’ taunt is silenced because “weeping” has become “voice” (קוֹל בִּכְיִי): grief addressed to God becomes speech that God answers. That is the psalm’s most daring insight into prayer.
+
+The final verse completes a structural arc: the terror that gripped bones and soul (“נִבְהֲלוּ,” vv. 3–4) now grips the enemies (יִבָּהֲלוּ, v. 11). “They will turn back” (יָשֻׁבוּ) can mean retreat or repentance; Radak hears a hint of reconciliation. “In a moment” (רָגַע) is one of the Bible’s favorite words for God’s swift reversals (Ps 30:6; Isa 54:7–8; Jer 4:20). The psalm holds together proportionate discipline, embodied suffering, public witness, and social reordering. Its theology is modestly exact: life is where praise belongs, and tears addressed to God become a language God honors.
+
+A few terms for readers:
+- Parallelism: the basic poetic technique in Hebrew verse, where a line’s second half “answers” the first (by intensifying, specifying, or contrasting).
+- Colon: a single poetic unit, often presented in pairs (the two halves of a verse).
+- Chiasm: an inverted structure (A–B–B'–A') that mirrors elements for emphasis.
+- LXX: the Septuagint, the ancient Greek translation of the Hebrew Bible.
+- Qere/Kethib: Masoretic notations marking what is written in the text (Kethib) and how it is to be read (Qere).
+
+—This is not a grand theory of suffering. It is a compact ritual: plead for proportion, name the body’s terror, argue for life as the arena of praise, let the night be wet, and trust that when grief finds its voice, it will be heard.
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+
+In both Ashkenazic and Sefardic rites, Psalm 6 is recited in its entirety during Tachanun (supplicatory prayers) at Shacharit and Mincha on weekdays, within Nefilat Apayim (“falling on one’s face”). The posture—head bowed, often leaning the head on the arm—matches the psalm’s self-humbling tone. Placing Psalm 6 immediately after confession and the Thirteen Attributes of Mercy frames the recitation as a plea that divine justice be tempered by compassion.
+
+#### Key verses
+
+Verse 2: יְהוָה אַל־בְּאַפְּךָ תּוֹכִיחֵנִי וְאַל־בַּחֲמָתְךָ תְיַסְּרֵנִי (“O YHWH, do not rebuke me in Your anger, nor chasten me in Your wrath”). In the Sefard tradition, this line accompanies Birkat Kohanim. The congregation responds: “יְהוָה יְהוָה, אֵל רַחוּם וְחַנּוּן… יְהוָה אַל בְּאַפְּךָ תּוֹכִיחֵנוּ, וְאַל בַּחֲמָתְךָ תְיַסְּרֵנוּ” (“YHWH, YHWH, God compassionate and gracious… O YHWH, do not rebuke us in Your anger, nor chasten us in Your wrath”). The placement is deliberate: the priestly blessing of peace is flanked by a communal plea for moderated judgment.
+
+Verse 10: שָׁמַע יְהוָה תְּחִנָּתִי; יְהוָה תְּפִלָּתִי יִקָּח (“YHWH has heard my supplication; YHWH will receive my prayer”). In Mizrahi Selichot for the eve of Yom Kippur, this verse appears among the biblical invocations that open the service: “שְׁמַע־יְהוָה וְחָנֵּנִי… שָׁמַע יְהוָה תְּחִנָּתִי; יְהוָה תְּפִלָּתִי יִקָּח” (“Hear, O YHWH, and be gracious to me… YHWH has heard my supplication; YHWH will receive my prayer”), establishing the service’s note of confident appeal.
+
+#### Phrases
+
+Psalm 6:9: סוּרוּ מִמֶּנִּי כָּל־פֹּעֲלֵי אָוֶן (“Depart from me, all workers of iniquity”). In the Rosh Hashanah simanim (home ritual of symbolic foods) in Mizrahi communities, a Yehi Ratzon prayer includes: “שֶׁיִּסְתַּלְּקוּ אוֹיְבֶיךָ וְשֹׂנְאֶיךָ… סוּרוּ מִמֶּנִּי כָּל־פֹּעֲלֵי אָוֶן, כִּי־שָׁמַע יְהוָה קוֹל בִּכְיִי” (“May Your enemies and haters depart… Depart from me, all workers of iniquity, for YHWH has heard the voice of my weeping”). Here the psalm’s courtroom dismissal becomes a New Year’s protective formula.
+
+Psalm 6:7: יָגַעְתִּי בְּאַנְחָתִי; אַשְׂחֶה בְכָל־לַיְלָה מִטָּתִי (“I am weary with my groaning; each night I drench my bed”). In some Mizrahi motifs for Motzaei Shabbat zemirot (Saturday night songs), the line is woven into a reflective stanza on the transition from holy time: “יָגַעְתִּי בְּאַנְחָתִי אַשְׂחֶה בְכָל־לַיְלָה… פְּתַח לִי שַׁעַר” (“I am weary with my groaning; I drench my bed all night… open for me the gate”), transposing David’s lament into the ache of departure from Shabbat.
+
+Psalm 6:5: שׁוּבָה יְהוָה חַלְּצָה נַפְשִׁי (“Turn, O YHWH; deliver my life”). In the Yom Kippur Mussaf’s Seder Ha-Avodah (Mizrahi rite), a piyyut pleads: “דְּרַשְׁתִּיךָ… שׁוּבָה יְהוָה חַלְּצָה נַפְשִׁי” (“I have sought You… Turn, O YHWH; deliver my life”). The penitential idiom of Psalm 6 becomes the congregation’s corporate voice.
+
+These reuses “read” the psalm faithfully: they foreground moderated justice (v. 2), confident hearing (vv. 9–10), and the social reordering that follows prayer (v. 9). Liturgy thus confirms the psalm’s claim: when weeping becomes voice, authority returns.
+
+### REVISED VERSE COMMENTARY
+
+**Verse 1**
+
+The superscription—לַמְנַצֵּחַ בִּנְגִינוֹת עַל־הַשְּׁמִינִית מִזְמוֹר לְדָוִד—places the poem in temple craft. “For the leader” (לַמְנַצֵּחַ) is a performance cue, and “with stringed instruments” (בִּנְגִינוֹת) signals lyres rather than winds. The rare “on the sheminith” (עַל־הַשְּׁמִינִית) is found only here and in Psalm 12. Traditional Jewish interpreters give two main senses. First, a practical one: an eight-stringed instrument or the “eighth” musical mode (Rashi; Ibn Ezra; Radak; cf. 1 Chr 15:21). The Greek translators rendered “ὑπὲρ ὁ ὄγδοος,” “for the eighth,” which preserves a sense of register or guild designation. Second, a homiletical one: “on the eighth” hints to circumcision (מילה) on the eighth day; the Talmud (Menachot 43b) and later homilists (Malbim, Meiri) take this as an emblem of covenant identity. That derash (interpretive homily) cannot be the plain sense of a performance rubric, but it recognizes something true about the poem’s theology: this is a prayer asked from inside covenant.
+
+The pairing of “stringed instruments” and “the eighth” matters poetically. It reminds us that laments were not only texts; they were sung, with texture, tempo, and timbre. Once the temple fell, those directions no longer told musicians what to do; they tell readers how to hear. The superscription also hints at the lament’s intended setting: a public place where one could plausibly receive an answering word, the very “oracle of salvation” that explains the psalm’s pivot in verses 9–10.
+
+Finally, the superscription’s survival in liturgical recitation (Tachanun) is part of the psalm’s meaning. In synagogue, we still “hand the score” to a leader and say this lament aloud together. That is not antiquarian. It is the psalm’s wager: a suffering voice, voiced rightly, will be heard.
+
+**Verse 2**
+
+“יְהוָה אַל־בְּאַפְּךָ תּוֹכִיחֵנִי; וְאַל־בַּחֲמָתְךָ תְיַסְּרֵנִי.” Two pairs, carefully chosen. First, anger-words: אַף (af) is “flared nostrils,” visible wrath; חֵמָה (chemah) is burning fury that simmers. Second, verbs: תּוֹכִיחֵנִי (from יכח) is to “reprove/prove,” with forensic nuance—God’s rebuke establishes what is true; תְיַסְּרֵנִי (from יסר) is to “discipline,” a pedagogy that often includes pain. The poet does not deny that God might correct him; he asks that it be proportionate. Jeremiah’s line—“יִסְּרֵנִי יְהוָה אַךְ בְּמִשְׁפָּט, אַל בְּאַפְּּךָ” (“Correct me, YHWH, but with justice, not in your anger,” Jer 10:24)—stands behind this verse and supports the old rabbinic instinct to read it as a model prayer.
+
+The parallelism is not tautology. The second colon intensifies the first: from “rebuke” to “discipline,” from “anger” to “wrath.” The movement is psychological: how correction is felt matters. Medievals noticed the nuance. Malbim distinguishes af (the visible scowl) and chemah (the seething); Radak hears the plea, “gently, that I may bear it.” The Septuagint keeps the doublet (“Do not rebuke me in your wrath; nor discipline me in your anger”), underscoring that early readers, too, heard measured parallelism.
+
+Liturgically, this line has legs. Its appearance after the Priestly Blessing in the Sefard rite—“יְהוָה אַל־בְּאַפְּךָ תּוֹכִיחֵנוּ”—sets up a theology of balance: a benediction of peace alongside a plea that any needed correction be fatherly, not furious. The psalm opens with restraint because the rest of the poem will ask for intervention without presumption.
+
+**Verse 3**
+
+“חָנֵּנִי יְהוָה, כִּי אֻמְלַל־אָ֑נִי; רְפָאֵנִי יְהוָה, כִּי נִבְהֲלוּ עֲצָמָי.” The verse is architected in symmetry: plea (have mercy), cause (I am umlal), plea (heal), cause (my bones are terrified). אֻמְלַל is used of land and crops that “languish” (Hos 4:3; Joel 1:10), and of persons in desolation (Jer 15:9). It is not a sudden wound; it is withering. The verbs clarify the target: חָנֵּנִי (show me grace) and רְפָאֵנִי (heal me) locate the situation at the blurred line between moral and medical.
+
+Then the shock: “my bones are terrified” (נִבְהֲלוּ עֲצָמָי). Bones in the Psalms are the deep interior—what remains when flesh fails (cf. Ps 22:18; 35:10; 38:4). They are also, at times, speakers: “כָּל־עַצְמוֹתַי תֹּאמַרְנָה” (“all my bones shall say,” Ps 35:10). Here the bones fear. The poet personifies his own frame; the fear has settled at the studs.
+
+This image has scriptural company. The verb בהל (to be terrified) is used of whole peoples (Exod 15:15), of individuals (Gen 45:3), and of the psalmist himself (Ps 30:8). Applying it to bones is rare and expressive. It conveys precisely what the prayer will argue in verse 6: this is not pain that can be compartmentalized; it is existential. If God will act, mere analgesic would be insufficient. The frame must be steadied.
+
+The line also clarifies the prayer’s scope: the psalmist does not merely want his symptoms treated. He wants to be reinstalled in the vocation of a living, praising creature. That is why the next verse will speak of the נֶפֶשׁ, and the one after that of “steadfast love.”
+
+**Verse 4**
+
+“וְנַפְשִׁי נִבְהֲלָה מְאֹד; וְאַתָּה יְהוָה, עַד־מָתָי.” If verse 3 sank the fear to the bones, verse 4 brings it to the self. נֶפֶשׁ is the living person, throat and breath; to say “my נֶפֶשׁ is terrified” (נִבְהֲלָה) is to say that the whole person is destabilized. The adverb “מְאֹד” intensifies: whatever the bones felt, the living self feels more.
+
+Then the syntax breaks. “וְאַתָּה יְהוָה, עַד־מָתָי.” The Kethib/Qere notes an orthographic variation on וְאַתָּה, but the effect is the same: the line begins with “and You, YHWH—,” a half-accusatory address that tails off into “how long?” (עַד־מָתָי). The lament formula appears elsewhere fully framed (“How long, YHWH? Will You forget me forever?” Ps 13:2–3), but here the poet cannot complete the sentence. The fragment does two things at once. It admits powerlessness—the petitioner cannot even finish the thought—and it signals the audacity to hold God to account for delay. That is covenant speech.
+
+The Septuagint’s “ἕως πότε” (“until when?”) preserves the bluntness. Medieval Jews heard it too. Rashi supplies the elided clause (“will You look on and not heal?”), which is helpful as commentary and precisely not what the poem says. There is pastoral wisdom in letting the fragment stand. The psalm acknowledges that affliction can render even piety inarticulate.
+
+**Verse 5**
+
+“שׁוּבָה יְהוָה, חַלְּצָה נַפְשִׁי; הוֹשִׁיעֵנִי לְמַעַן חַסְדֶּךָ.” Three imperatives, artfully arranged. שׁוּבָה (“turn back”) implies that God has turned away; the prayer asks a reversal of divine posture. חַלְּצָה (“draw out, deliver”) is a rescuing verb used of extracting someone from danger; elsewhere it can carry martial overtones (“armed,” חֲלוּצִים). הוֹשִׁיעֵנִי is the comprehensive “save me.” The rhetoric rises: turn… draw out… save.
+
+The motive clause, “לְמַעַן חַסְדֶּךָ,” is the theological key. חֶסֶד is God’s covenantal steadfast love; it names a character trait and a way of acting. The phrase “for the sake of your steadfast love” appears in the Psalter only here and at 44:27, each time in acute distress. The appeal is thus correctly theological: not “because I deserve rescue,” but “because rescue fits who You are.”
+
+The line’s clipped rhythm is part of its persuasion. Hebrew poetry’s parallelism is a “seconding sequence,” not mere repetition. Here the B-colon (“deliver my life”) sharpens and specifies the A-colon (“turn back”), and the motive phrase gives the logic. The psalm educates its reader in how to pray: ask boldly, name the danger precisely, and plant the plea in God’s own character.
+
+**Verse 6**
+
+“כִּי אֵין בַּמָּוֶת זִכְרֶךָ; בִּשְׁאוֹל מִי יוֹדֶה־לָךְ.” The psalm’s theological centerpiece. It states a negative liturgy: Sheol is where praise does not happen. Other texts sound the same note: “For Sheol cannot thank You; death cannot praise You” (Isa 38:18); “The dead do not praise YHWH” (Ps 115:17); “Will the dust praise You?” (Ps 30:10). Psalm 88:11–12 pushes the questions to the limit. Collectively, these suggest that in Israel’s early imagination, Sheol is a realm of silence, not of active worship.
+
+Two key terms matter. זִכְרֶךָ is not “memory” in the modern sense; it is covenantal remembrance, the act of bringing God to speech in the congregation. The Hiphil of ידה (“to praise/confess”) is public acknowledgment. The poet’s argument is not transactional (“If You heal me, I’ll say thank you”), but vocational: You are the God who wants to be publicly remembered among the living; therefore, keep me among the living. Radak, from within a later metaphysics in which the soul praises God after death, resolves the tension by saying the righteous still crave life to increase their deeds. The psalm speaks from the ancient threshold: in the Bible, “heaven” is life before death. God dwells with the living.
+
+The line also answers a suspicion some modern readers have: Is the psalmist bargaining? Perhaps. But the bargain is noble: preserve my capacity to witness. In a book that cares intensely about the public voice of praise, this is an argument God welcomes.
+
+**Verse 7**
+
+“יָגַעְתִּי בְּאַנְחָתִי; אַשְׂחֶה בְכָל־לַיְלָה מִטָּתִי; בְּדִמְעָתִי עַרְשִׂי אַמְסֶה.” The Hebrew is drenched. אַשְׂחֶה likely means “I make (it) swim” (from שָׂחָה; cf. Isa 25:11; Ezek 47:5), though a venerable strand of interpretation (Rashi) hears “I soil” (cf. Lam 3:45). Either way the bed is awash. אַמְסֶה (from מָסָה) is “I melt” (cf. Ps 46:7; 58:8–9), a startling verb for furniture. Grief is a solvent; it dissolves even the solid supports of rest.
+
+The diction’s sound is mimetic. The sibilants and liquids in “אַשְׂחֶה… מִטָּתִי… בְּדִמְעָתִי… עַרְשִׂי אַמְסֶה” create a soft hiss, a hush that matches the night. Hebrew poetry often uses such sound to carry meaning. Here the ear confirms what the eye sees: water everywhere. “Every night” (בְּכָל־לַיְלָה) underscores the rhythm; night is when illness grows heavy and when one can weep without spectators.
+
+The figurative language has biblical neighbors. Melting imagery appears in laments and judgments (Ps 46:7; “the earth melts,” תָּמוּג); the wicked are asked to “melt like water” (Ps 58:8); and even a snail “melts as it goes” (Ps 58:9). Psalm 6 is distinctive in making tears the agent of dissolution. It is the body’s water, not God’s storm, that wears away the furniture. The poem’s honesty about the body’s nocturnal life is one reason it has remained the synagogue’s prayer.
+
+**Verse 8**
+
+“עָשְׁשָׁה מִכַּעַס עֵינִי; עָתְקָה בְּכָל־צֹרְרָי.” The verb עָשַׁשׁ evokes moth-eaten decay (cf. Job 13:28; Isa 50:9), a slow, inner erosion. Applied to the eye, it suggests dimming, a glassed-over sight. The cause is “מִכַּעַס,” a word that spans grief and anger. Ibn Ezra calls it the grief of seeing one’s enemies rejoice at one’s illness; the anger is the moral pain of being mocked while vulnerable. The second verb, עָתְקָה, may mean “has aged” (cf. עָתִיק, “ancient”) or “has moved away” (cf. Job 14:18, מִמְּקוֹמוֹ יֵעָתֵק, “moved from its place”). Either way, the eye is not right, and the cause is “בְּכָל־צֹרְרָי”—“because of all my foes.” The preposition בְּ here is causal: the social surround aggravates the physical condition.
+
+This line is where illness becomes social. In the psalm’s arc, the inward weeping (v. 7) yields to outward pressure (v. 8), preparing the reversal (vv. 9–10). The better we see that crowd of “foes,” the more dramatic the dismissal “Depart from me” will be. The psalm is not naïve about how suffering works: it attracts onlookers, not all of them kind.
+
+**Verse 9**
+
+“סוּרוּ מִמֶּנִּי כָּל־פֹּעֲלֵי אָוֶן; כִּי־שָׁמַע יְהוָה קוֹל בִּכְיִי.” The imperative “סוּרוּ” (“turn away, depart”) is a formal dismissal. “פֹּעֲלֵי אָוֶן” (“workers of iniquity”) is a stock phrase for those who actively generate trouble (see Ps 5:6; 14:4). The verb “שָׁמַע” appears twice in the next verse; here its first appearance, in the perfect, declares the hearing as a completed fact.
+
+The phrase “קוֹל בִּכְיִי” (“the voice of my weeping”) is unique in this form. Elsewhere “voice” attaches to cries, prayers, and shouts (e.g., Ps 28:2; 31:23; 86:6), and “weeping” is often heard (Ezra 3:13; Jer 31:15). Psalm 6 fuses them: weeping itself becomes “voice.” That is theological as well as poetic. It means that raw grief, when addressed to God, counts as prayer. The dismissal of enemies is thus not braggadocio. It rests on a changed status: once God has heard, the social script changes. The petitioner speaks with borrowed authority.
+
+Liturgy caught this precisely. In Mizrahi Rosh Hashanah simanim, the verse is recited as protection: “Depart… for YHWH has heard the voice of my weeping.” The home ritual places the poetry’s reversal at the threshold of the year. Psalm 6’s “oracle of salvation” is thus not mechanized; rather, it is dramatized in communal time.
+
+**Verse 10**
+
+“שָׁמַע יְהוָה תְּחִנָּתִי; יְהוָה תְּפִלָּתִי יִקָּח.” The pairing of perfect (“has heard”) and imperfect (“will receive”) marks the now-and-forward scope of the assurance. The noun “תְּחִנָּה” (supplication, from חנן, “to be gracious”) and “תְּפִלָּה” (prayer, intercession) cover both urgent plea and structured petition. “יִקָּח” (from לקח, “to take/receive”) is a cultic term for acceptance; elsewhere God “takes” what is offered (cf. Hos 14:3, “קַח־טוֹב,” “accept what is good”). The idea is not merely that God “hears” in the auditory sense; God receives with favor.
+
+Repetition of the divine name—“יְהוָה… יְהוָה”—frames the confidence. This is not optimism; it is response. The liturgical reuse of this verse at the threshold of Yom Kippur (Mizrahi Selichot) is apt: the most searching night of the year begins by asserting that God hears and receives.
+
+**Verse 11**
+
+“יֵבֹשׁוּ וְיִבָּהֲלוּ מְאֹד כָּל־אֹיְבָי; יָשֻׁבוּ, יֵבֹשׁוּ רָגַע.” The poem closes with a chiastic reversal. The terror (בהל) that gripped the psalmist’s bones and soul (vv. 3–4) now grips “all my enemies.” Shame (בּוֹשׁ) bookends the line; shame in biblical psychology is not embarrassment but public recognition of having misread reality. The middle verb, “יָשֻׁבוּ,” can mean “turn back” (retreat) or “return” (repent). Radak suggests reconciliation: when their schemes fail, they will return to seek peace. In any case, the social geometry has changed.
+
+“רָגַע” (“in a moment”) compresses time. It is a word the Bible uses for the speed of divine action (Ps 30:6, “for His anger is but for a moment”; Isa 54:7–8). The psalm’s turn from “every night” of weeping (v. 7) to “in a moment” of reversal frames time itself as part of the petition—and the answer. The line’s deceptively simple cadence is earned; it is the music of release.
+
+Rashi’s midrash about “double shame” (future judgment and renewed condemnation) pushes the verse toward eschatology; other readers keep it close to the healed bed and cleared room. Either way, the poem ends by giving its opening request (measured discipline) a social corollary (measured justice). Those who exploited weakness now experience the very disquiet they induced. And the person who lay drenched and dim sees the room turn. That is the psalm’s last claim: prayer changes the social weather.

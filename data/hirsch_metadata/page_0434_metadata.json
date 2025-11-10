@@ -1,0 +1,22 @@
+{
+  "page": "page_0434",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n6 תחלים נם סוחס\nהתתתתתתתשתילה 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "9",
+      "position": 179,
+      "marker": "V. 9"
+    },
+    {
+      "verse": "10",
+      "position": 745,
+      "marker": "V. 10"
+    }
+  ],
+  "text_length": 1843,
+  "text_file": "page_0434.txt"
+}

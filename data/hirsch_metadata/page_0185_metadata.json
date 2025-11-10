@@ -1,0 +1,27 @@
+{
+  "page": "page_0185",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתהלים כא דשב וו\n8 כההמלר טח ביהוה ובחסך ת: גו טת ,קתוא 8 צם מס (8 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "8",
+      "position": 291,
+      "marker": "V.8"
+    },
+    {
+      "verse": "9",
+      "position": 606,
+      "marker": "V.9"
+    },
+    {
+      "verse": "10",
+      "position": 1086,
+      "marker": "V. 10"
+    }
+  ],
+  "text_length": 2084,
+  "text_file": "page_0185.txt"
+}
