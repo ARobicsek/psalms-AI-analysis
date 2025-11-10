@@ -1,0 +1,19 @@
+{
+  "page": "page_0402",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": [
+      52
+    ],
+    "raw_hebrew": "| חס הסוזס|5ר\n%% תהלים נב-:ג סוחס"
+  },
+  "verse_markers": [
+    {
+      "verse": "1",
+      "position": 10,
+      "marker": "V. 1"
+    }
+  ],
+  "text_length": 2428,
+  "text_file": "page_0402.txt"
+}

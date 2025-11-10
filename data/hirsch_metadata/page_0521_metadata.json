@@ -1,0 +1,17 @@
+{
+  "page": "page_0521",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים עא 488 הסוס"
+  },
+  "verse_markers": [
+    {
+      "verse": "18",
+      "position": 1461,
+      "marker": "V. 18"
+    }
+  ],
+  "text_length": 2028,
+  "text_file": "page_0521.txt"
+}

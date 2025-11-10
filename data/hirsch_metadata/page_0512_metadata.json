@@ -1,0 +1,27 @@
+{
+  "page": "page_0512",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n4 תחהלים ע 50\n1"
+  },
+  "verse_markers": [
+    {
+      "verse": "3",
+      "position": 417,
+      "marker": "V. 3"
+    },
+    {
+      "verse": "4",
+      "position": 1468,
+      "marker": "V. 4"
+    },
+    {
+      "verse": "5",
+      "position": 1606,
+      "marker": "V. 5"
+    }
+  ],
+  "text_length": 1824,
+  "text_file": "page_0512.txt"
+}

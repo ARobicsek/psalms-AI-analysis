@@ -1,0 +1,22 @@
+{
+  "page": "page_0346",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n88 תהלים מר רחוס\nוו[ ה 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "8",
+      "position": 182,
+      "marker": "V. 8"
+    },
+    {
+      "verse": "9",
+      "position": 898,
+      "marker": "V.9"
+    }
+  ],
+  "text_length": 1757,
+  "text_file": "page_0346.txt"
+}

@@ -1,0 +1,22 @@
+{
+  "page": "page_0140",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n18 תתלים פד סוחס\nב ליוו אא ברו תוב = 2136 15 6811 עגם 6606 (9 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "9",
+      "position": 453,
+      "marker": "V.9"
+    },
+    {
+      "verse": "10",
+      "position": 1280,
+      "marker": "V.10"
+    }
+  ],
+  "text_length": 2378,
+  "text_file": "page_0140.txt"
+}

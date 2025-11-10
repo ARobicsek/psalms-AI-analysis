@@ -1,0 +1,27 @@
+{
+  "page": "page_0349",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים מד 1 סוחס\nב 2 0.42 0.44 0:66 ]סם 285 68( זט0) (19 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "19",
+      "position": 224,
+      "marker": "V. 19"
+    },
+    {
+      "verse": "21",
+      "position": 704,
+      "marker": "V. 21"
+    },
+    {
+      "verse": "23",
+      "position": 1293,
+      "marker": "V. 23"
+    }
+  ],
+  "text_length": 1581,
+  "text_file": "page_0349.txt"
+}

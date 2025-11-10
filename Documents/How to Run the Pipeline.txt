@@ -20,6 +20,9 @@ python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synth
 --skip-print-ready
 --skip-word-doc
 
+#running Chrome in debug mode (where selenium works)
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:/temp/chrome_debug"
+
 #View the exact bundle passed to commentary agents
 python view_research_bundle.py [psalm_number] [--format json|text|both]
 RESEARCH_BUNDLE_VIEWING_GUIDE.md - Documentation on bundle structure

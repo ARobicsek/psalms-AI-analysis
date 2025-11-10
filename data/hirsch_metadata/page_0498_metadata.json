@@ -1,0 +1,22 @@
+{
+  "page": "page_0498",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n470 תחלים פח חס5וח50\nההם-₪הת א 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "33",
+      "position": 798,
+      "marker": "V. 33"
+    },
+    {
+      "verse": "34",
+      "position": 1207,
+      "marker": "V. 34"
+    }
+  ],
+  "text_length": 1929,
+  "text_file": "page_0498.txt"
+}

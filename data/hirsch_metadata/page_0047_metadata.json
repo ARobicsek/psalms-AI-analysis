@@ -1,0 +1,19 @@
+{
+  "page": "page_0047",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": [
+      2
+    ],
+    "raw_hebrew": "חס הסוזס|5ר\nתהלים ב-ב 5 ספ 0\n.0 | 2 וש | 1 גת 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "1",
+      "position": 605,
+      "marker": "V. 1"
+    }
+  ],
+  "text_length": 2671,
+  "text_file": "page_0047.txt"
+}

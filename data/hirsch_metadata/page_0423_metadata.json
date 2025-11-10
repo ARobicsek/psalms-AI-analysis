@@ -1,0 +1,22 @@
+{
+  "page": "page_0423",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים נז 3 הסוח\nההפּהת תתו )]) 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "10",
+      "position": 1107,
+      "marker": "V. 10"
+    },
+    {
+      "verse": "11",
+      "position": 2010,
+      "marker": "V. 11"
+    }
+  ],
+  "text_length": 2151,
+  "text_file": "page_0423.txt"
+}

@@ -1,0 +1,22 @@
+{
+  "page": "page_0186",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס ה0ול5!0ר\n18 תחלים כת סו 50\n1 תרוול הארש הארד רס 1111 זוסו!) 03056 )!וא סוד (11 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "12",
+      "position": 483,
+      "marker": "V. 12"
+    },
+    {
+      "verse": "13",
+      "position": 846,
+      "marker": "V. 13"
+    }
+  ],
+  "text_length": 1511,
+  "text_file": "page_0186.txt"
+}

@@ -1,0 +1,29 @@
+{
+  "page": "page_0220",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": [
+      26
+    ],
+    "raw_hebrew": "| חס הסוזס|5ר\n1% תהלים כו-כז -יה\n1 ואני בתמי אלה פדני וחננו. | אפ 57811 1 ,₪6 זס! 85 וט (11 /-"
+  },
+  "verse_markers": [
+    {
+      "verse": "11",
+      "position": 669,
+      "marker": "V. 11"
+    },
+    {
+      "verse": "12",
+      "position": 959,
+      "marker": "V. 12"
+    },
+    {
+      "verse": "1",
+      "position": 1306,
+      "marker": "V. 1"
+    }
+  ],
+  "text_length": 1778,
+  "text_file": "page_0220.txt"
+}

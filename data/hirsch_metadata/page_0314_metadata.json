@@ -1,0 +1,22 @@
+{
+  "page": "page_0314",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n166 תחלים לח 550\n.4 2-2 2,000.40 2 ך )1 2ב ב ך ונוב \\) 4 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "14-17",
+      "position": 983,
+      "marker": "V. 14-17"
+    },
+    {
+      "verse": "18",
+      "position": 1633,
+      "marker": "V. 18"
+    }
+  ],
+  "text_length": 1894,
+  "text_file": "page_0314.txt"
+}

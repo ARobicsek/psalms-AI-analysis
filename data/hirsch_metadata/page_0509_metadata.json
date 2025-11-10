@@ -1,0 +1,17 @@
+{
+  "page": "page_0509",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתהלים פפ 441 סוחס\nוהההתתששתתשסחשת; 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "32",
+      "position": 808,
+      "marker": "V. 32"
+    }
+  ],
+  "text_length": 2030,
+  "text_file": "page_0509.txt"
+}

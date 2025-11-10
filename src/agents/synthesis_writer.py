@@ -258,7 +258,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
    
 2. **Poetics**
    - Parallelism types (synonymous, antithetical, synthetic, climactic)
-   - Wordplay (paronomasia, alliteration, assonance) - *Must be verified with phonetic transcription*
+   - Wordplay (e.g. paronomasia, alliteration, assonance) - *Must be verified with phonetic transcription*
    - Meter and rhythm
    - Structural devices (chiasm, inclusio, envelope structure)
    - **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it - explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
@@ -269,8 +269,9 @@ The following areas are of particular interest to intelligent, well-read lay rea
    2. **Cite compelling parallel uses** from the figurative language database (at least 1-2 specific references with book/chapter/verse)
    3. **Analyze the pattern**: How common is this image? How is it typically used across Scripture?
    4. **Note distinctive features**: How does this psalm's use differ from or extend typical usage?
+   5. Quote generously (always with Hebrew and English translation) from the parallel texts to illustrate your points. You have a unique resource for this - USE IT!
 
-   Example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11). Psalm 145 distinctively applies this human obligation metaphor to divine providence, transforming covenant ethics into cosmic theology."
+   Example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11). Psalm 145 distinctively applies this human obligation metaphor to divine providence, transforming covenant ethics into cosmic theology." This example was okay but would have been STRONGER if it had used 1-2 actual quotations.
 
 2. **Literary Insights**
    - Narrative techniques and rhetorical strategies

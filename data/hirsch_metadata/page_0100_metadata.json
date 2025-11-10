@@ -1,0 +1,17 @@
+{
+  "page": "page_0100",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "חס הסוזס|5ר\n8 תחלים ם הסוח\n4-4 .1-0 .בב =ה] זהה ]15 זה ] () 766 ן20 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "20",
+      "position": 2217,
+      "marker": "V. 20"
+    }
+  ],
+  "text_length": 2818,
+  "text_file": "page_0100.txt"
+}

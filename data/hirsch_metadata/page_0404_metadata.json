@@ -1,0 +1,22 @@
+{
+  "page": "page_0404",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n166 תחלים נג הסוס\n20000400\" 22 .₪ 240 נחוש )0 400:6 הה] סה =טגזזך ן5 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "6",
+      "position": 1283,
+      "marker": "V. 6"
+    },
+    {
+      "verse": "7",
+      "position": 1679,
+      "marker": "V. 7"
+    }
+  ],
+  "text_length": 1890,
+  "text_file": "page_0404.txt"
+}

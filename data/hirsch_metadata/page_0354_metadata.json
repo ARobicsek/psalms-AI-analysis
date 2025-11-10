@@ -1,0 +1,22 @@
+{
+  "page": "page_0354",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n6 תהלים מח הסוס\nוה-- / 4 -ם \\/ ₪2 <שאש ףד 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "7",
+      "position": 182,
+      "marker": "V. 7"
+    },
+    {
+      "verse": "9",
+      "position": 1649,
+      "marker": "V. 9"
+    }
+  ],
+  "text_length": 1949,
+  "text_file": "page_0354.txt"
+}

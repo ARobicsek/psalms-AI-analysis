@@ -1,0 +1,27 @@
+{
+  "page": "page_0250",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n- תחוים וא סוחס\n,00 4000000 22 666 4 866!! מס!ווסקזס! תג 1 (13 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "14",
+      "position": 815,
+      "marker": "V. 14"
+    },
+    {
+      "verse": "16",
+      "position": 1034,
+      "marker": "V. 16"
+    },
+    {
+      "verse": "18",
+      "position": 1380,
+      "marker": "V. 18"
+    }
+  ],
+  "text_length": 1522,
+  "text_file": "page_0250.txt"
+}

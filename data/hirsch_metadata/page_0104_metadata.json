@@ -1,0 +1,22 @@
+{
+  "page": "page_0104",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "חס הסוזס|5ר\n18 תחלום י הסוס\n, | 0 50 1\" +:ה6 18 ם? 8ש58 116 (6 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "6",
+      "position": 2117,
+      "marker": "V. 6"
+    },
+    {
+      "verse": "7",
+      "position": 2396,
+      "marker": "V. 7"
+    }
+  ],
+  "text_length": 2612,
+  "text_file": "page_0104.txt"
+}

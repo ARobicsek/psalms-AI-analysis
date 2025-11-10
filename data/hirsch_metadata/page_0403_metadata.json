@@ -1,0 +1,17 @@
+{
+  "page": "page_0403",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים נג 6 סוחס\n-- ,410 ולה--- 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "3",
+      "position": 1468,
+      "marker": "V. 3"
+    }
+  ],
+  "text_length": 1754,
+  "text_file": "page_0403.txt"
+}

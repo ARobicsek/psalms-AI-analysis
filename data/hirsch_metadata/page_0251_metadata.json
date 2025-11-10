@@ -1,0 +1,22 @@
+{
+  "page": "page_0251",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים לא 8 הס0 50\n9) תאלמנה שפתי שקר הדברזת תסותא 4606 ]0 5קו! 6מד (19 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "19",
+      "position": 659,
+      "marker": "V. 19"
+    },
+    {
+      "verse": "20",
+      "position": 1954,
+      "marker": "V. 20"
+    }
+  ],
+  "text_length": 2083,
+  "text_file": "page_0251.txt"
+}
