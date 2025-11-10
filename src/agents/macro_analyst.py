@@ -82,6 +82,7 @@ Produce a comprehensive chapter-level analysis addressing the following:
   * **section**: The verse range (e.g., "vv. 1-2")
   * **theme**: Brief description of this section's theme
   * **notes**: Additional observations about structure, tone shifts, or key features
+  * **are there unexpected moments? What is this poem really ABOUT?**
 
 ### 5. KEY POETIC DEVICES
 - Identify the dominant poetic techniques used across the psalm

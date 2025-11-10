@@ -1,7 +1,7 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-11-08 (Session 77 Continuation)
-**Current Phase**: OCR Margin Optimization - Decision Needed on Verse Text Trade-off
+**Last Updated**: 2025-11-09 (Session 79)
+**Current Phase**: Core Pipeline Maintenance and Hirsch OCR Development
 
 ---
 
@@ -42,6 +42,9 @@
 - **Liturgical Section Subheaders** ✅: Master Editor prompt strengthened with explicit examples; now generates proper `#### Full psalm` headers instead of hyphens.
 - **Analytical Framework for Synthesis Writer** ✅: Research bundle now includes full analytical framework document (~179k chars) instead of just a placeholder note.
 - **Hyphen Lists to Bullet Points** ✅: Document generator automatically converts `- item` markdown to proper Word bullet points with correct font (Aptos 12pt).
+- **Divine Names Modifier SHIN/SIN Bug Fix** ✅ (Session 78): Fixed critical bug where words with SIN dot (ׂ U+05C2) were incorrectly modified as divine names. The modifier now correctly distinguishes between שַׁדַּי (Shaddai with SHIN ׁ) and שָׂדָֽי (sadai with SIN ׂ). Fixed in Psalm 8:8 where שָׂדָֽי was being incorrectly modified. Updated regex pattern with positive lookahead for SHIN and negative lookahead for SIN. All tests pass including prefixed forms. Fix applies throughout pipeline.
+- **Commentator Bios Integration** ✅ (Session 79): Added comprehensive scholarly biographies for all six traditional commentators (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) and Rabbi Jonathan Sacks to research bundles. Bios provide Synthesis Writer and Master Editor with crucial context about each commentator's historical period, philosophical approach, and exegetical methodology. Each bio includes biographical overview, scholarly contributions, philosophical/theological approach, exegetical methodology, legacy/influence, and distinctive characteristics. Enables agents to contextualize interpretations within historical/philosophical frameworks and synthesize across different exegetical schools. Updated `sacks_librarian.py::format_for_research_bundle()` and `research_assembler.py::ResearchBundle.to_markdown()`.
+
 
 ### Pending ⚠️
 - **Monitor OCR Completion** (RUNNING NOW): 501-page OCR extraction in progress (~30-45 min)

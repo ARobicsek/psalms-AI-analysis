@@ -78,6 +78,7 @@ Write a scholarly introduction essay that:
    - Novel insights are strongly encouraged. You are in conversation with the sources, not just summarizing them.
 
 3. **Addresses major interpretive questions**
+   - What is this psalm about? If there are sections that seem quite different, what theme, context or idea holds them together?
    - What is the psalm's central message and how does it function?
    - What are the key poetic/rhetorical strategies and why do they matter?
    - How does this psalm relate to its Ancient Near Eastern context?

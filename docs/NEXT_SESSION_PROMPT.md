@@ -1,210 +1,117 @@
-# Session 78 - OCR Margin Optimization and Parser Development
+# Session 80 - Continuing Psalms Project
 
-## Session Handoff from Session 77 Continuation
+## Session Handoff from Session 79
 
-**What Was Completed in Session 77 (Continuation)**:
+**What Was Completed in Session 79**:
 
-✅ **PSALM Header Detection Implementation**:
-- Implemented `has_psalm_header()` function to detect "PSALM" keyword in region above horizontal line
-- Uses OCR to scan 220-20px above separator line for PSALM markers
-- Adaptive margin: -180px for header pages, initially -20px for continuation pages
-- Successfully distinguishes between first pages (with PSALM headers) and continuation pages (with verse text)
+✅ **Commentator Bios Integration**:
+- Added comprehensive scholarly biographies for all commentators to research bundles
+- **Rabbi Sacks bio**: Added to `sacks_librarian.py::format_for_research_bundle()`
+  - 2 paragraphs covering biographical overview, scholarly corpus, philosophical approach
+  - Inserted after section header, before "About this section" note
+- **Six commentator bios**: Added to `research_assembler.py::ResearchBundle.to_markdown()`
+  - Rashi (1040–1105): Foundational commentator, *peshat*/*derash* synthesis
+  - Ibn Ezra (c.1092–1167): Spanish polymath, rationalist grammarian
+  - Radak (1160–1235): "Golden mean" of medieval exegesis
+  - Meiri (1249–1316): Maimonidean rationalist, *halachic* universalism
+  - Metzudat David (c.1687–1769): Pedagogical innovation, "frictionless reading"
+  - Malbim (1809–1879): "Warrior rabbi" against Haskalah
+- Bios enable agents to contextualize interpretations within historical/philosophical frameworks
+- Synthesis Writer and Master Editor now receive full scholarly context with every research bundle
 
-✅ **Full 501-Page OCR Extraction Complete**:
-- Processed all 501 pages with initial PSALM header detection
-- Results: 499 successful, 2 loading screens detected
-- Output: `data/hirsch_commentary_text/`, `data/hirsch_metadata/`
+## Immediate Tasks for Session 80
 
-⚠️ **Margin Adjustment Issue Identified**:
-- User spot-checked pages and found missing first lines on continuation pages
-- Problem: -20px margin for continuation pages too small
-- Tested pages 49, 56, 267 - all missing expected start text
-- Progressive testing: -50px → -80px → -120px → -150px → **-180px**
+### Option A: Continue Hirsch OCR Parser Development
 
-✅ **Margin Optimization Testing**:
-- Page 33 (header): ✓ Correct with -180px (PSALM I header captured)
-- Page 49: ✓ Correct with -180px (starts with "moment in the form of misfortunate")
-- Page 56: ✓ Correct with -180px (starts with "V. 9.")
-- Page 260: ✓ Correct (user verified)
-- Page 267: ⚠️ Commentary present but captures 4-5 lines of verse text before it
+Per Session 77 continuation, the Hirsch OCR margin decision was made (use -180px for all pages, filter verse text in parser). If continuing with Hirsch work:
 
-## DECISION NEEDED: Margin Trade-off
+**1. Verify Current OCR Status**
+\`\`\`bash
+# Check if OCR completed
+ls data/hirsch_commentary_text/*.txt | wc -l  # Should be ~499-501
 
-**Current Status**: Code set to **-180px for ALL pages** (both header and continuation)
-
-**Trade-offs**:
-
-### Option A: Keep -180px for All Pages (Current)
-✅ **Pros**:
-- Captures ALL commentary text without missing first lines
-- Pages 49, 56 work correctly
-- Simpler logic (same margin for everything)
-
-⚠️ **Cons**:
-- May capture 3-5 lines of verse text above commentary on some continuation pages (e.g., page 267)
-- Verse text format: numbered paragraphs like "(19) To deliver their soul from..."
-
-### Option B: Implement Smarter Verse Text Detection
-✅ **Pros**:
-- Could minimize verse text capture on continuation pages
-- More precise extraction
-
-⚠️ **Cons**:
-- More complex logic required
-- Risk of missing commentary text (as we saw with -20px, -50px, -80px, -120px, -150px all being insufficient)
-- Verse text varies in layout and amount per page
-
-### Recommendation
-**Use Option A (-180px for all)** because:
-1. Verse text can be identified and filtered in post-processing (numbered paragraphs: "(1)", "(2)", etc.)
-2. Missing commentary text is worse than having extra verse text
-3. OCR quality is good (~95% accuracy) - verse text won't corrupt commentary
-4. Parser can detect and skip verse text patterns during database build
-
-**Next Session Action**: If Option A chosen, re-run full OCR with -180px margin for all pages.
-
-## Immediate Tasks for Session 78
-
-### 1. Make Margin Decision and Re-run OCR if Needed
-
-**If keeping -180px for all pages**:
-```bash
-# Clean old output
-rm -rf data/hirsch_commentary_text/* data/hirsch_metadata/* data/hirsch_cropped/*
-
-# Re-run full extraction
-python scripts/extract_hirsch_commentary_enhanced.py 2>&1 | tee ocr_extraction_final.log
-```
-
-**Monitor**:
-```bash
-# Check progress
-watch -n 10 'ls data/hirsch_commentary_text/*.txt | wc -l'
-```
-
-### 2. Quality Assessment
-
-**Spot Check Pages**:
-```bash
-# Check the problematic pages
-head -10 data/hirsch_commentary_text/page_0049.txt  # Should start with "moment in the form"
-head -10 data/hirsch_commentary_text/page_0056.txt  # Should start with "V. 9."
-head -10 data/hirsch_commentary_text/page_0267.txt  # Will have verse text, commentary starts ~line 6
-```
-
-**Check for Loading Screens**:
-```bash
+# Check for loading screens
 cat data/hirsch_metadata/loading_screens.txt
-```
+\`\`\`
 
-### 3. Build Hirsch Commentary Parser
+**2. Build Hirsch Commentary Parser**
 
-**Create** `scripts/parse_hirsch_commentary.py` with verse text filtering:
+Create \`scripts/parse_hirsch_commentary.py\` with:
+- Verse text filtering (detect and skip numbered paragraphs like "(1)", "(19)")
+- Verse marker detection (V. 1., VV. 1-3)
+- Commentary extraction per verse
+- Output: \`data/hirsch_on_psalms.json\`
 
-```python
-def is_verse_text(line):
-    """
-    Detect if line is verse text (not commentary).
-    Verse text patterns:
-    - Starts with number in parentheses: "(1)", "(19)"
-    - Two-column format markers
-    """
-    import re
-    # Check for verse number pattern
-    if re.match(r'^\s*\(\d+\)', line.strip()):
-        return True
-    return False
-
-def clean_commentary_text(text):
-    """Remove verse text from beginning of commentary."""
-    lines = text.split('\n')
-
-    # Find first line that's NOT verse text
-    for i, line in enumerate(lines):
-        if not is_verse_text(line) and len(line.strip()) > 20:
-            # This looks like commentary, return from here
-            return '\n'.join(lines[i:])
-
-    return text  # If unsure, return all
-
-def parse_verse_commentary(text):
-    """
-    Split commentary text by verse markers.
-    Returns: {verse_num: commentary_text}
-    """
-    # Clean verse text first
-    text = clean_commentary_text(text)
-
-    # Pattern: V. 1., VV. 1-3, etc.
-    verses = {}
-    pattern = r'V\.?\s*(\d+(?:-\d+)?)\.'
-    matches = list(re.finditer(pattern, text))
-
-    if not matches:
-        return {"unknown": text}
-
-    for i, match in enumerate(matches):
-        verse_num = match.group(1)
-        start = match.end()
-        end = matches[i+1].start() if i+1 < len(matches) else len(text)
-        commentary = text[start:end].strip()
-        verses[verse_num] = commentary
-
-    return verses
-```
-
-### 4. Test Parser on Sample Pages
-
-```bash
+**3. Test Parser**
+\`\`\`bash
 python scripts/parse_hirsch_commentary.py
-```
+# Spot check output on Psalms 1, 23, 119
+\`\`\`
 
-## Technical Details Updated
+**4. Integrate HirschLibrarian**
+- Connect parser output to \`HirschLibrarian\` class (created in Session 70)
+- Test integration with research assembler
 
-**Final OCR Parameters** (if Option A):
-```python
-# Margin Strategy
-if has_psalm_header(content_region, line_y):
-    margin = -180  # PSALM header page
-else:
-    margin = -180  # Continuation page (same as header for completeness)
+### Option B: Generate Additional Psalms
 
-# This ensures ALL commentary is captured at cost of some verse text
-```
+Test overall pipeline robustness with additional psalms:
+- Psalm 23 (shepherd psalm - different genre)
+- Psalm 51 (penitential - different genre)
+- Psalm 19 (creation/torah - different genre)
+- Validate formatting, divine names, liturgical sections work across genres
 
-**Verse Text Filtering** (in parser):
-- Detect numbered paragraphs: `r'^\s*\(\d+\)'`
-- Skip lines until first substantial commentary text
-- Preserve verse markers: `V. 1.`, `VV. 1-3`
+### Option C: Address Other Items
 
-## Files Modified in Session 77 Continuation
+Other pending items from PROJECT_STATUS.md:
+- Delete obsolete German Fraktur OCR files
+- Review remaining Sacks JSON entries with missing snippets
 
-- `scripts/extract_hirsch_commentary_enhanced.py` - Updated margin from -20px to -180px for continuation pages
-- `scripts/test_margin_120px.py` - Test script for margin validation (created)
-- `scripts/test_pages_56_267.py` - Specific page testing (created)
-- `docs/IMPLEMENTATION_LOG.md` - Added Session 77 continuation details
-- `docs/PROJECT_STATUS.md` - Updated with margin decision status
-- `docs/NEXT_SESSION_PROMPT.md` - This file (updated)
+## Technical Context
+
+### Divine Names Modifier Fix (Session 78)
+
+The SHIN/SIN fix is now active in:
+- \`src/utils/divine_names_modifier.py::_modify_el_shaddai()\`
+- Used by \`commentary_formatter.py\` and \`document_generator.py\`
+
+### Hirsch OCR Context (Session 77)
+
+OCR extraction complete with:
+- 501 pages processed (499 successful, 2 loading screens)
+- PSALM header detection working
+- -180px margin for all pages (may include verse text)
+- Output: \`data/hirsch_commentary_text/\`, \`data/hirsch_metadata/\`
+- Next step: Parser to filter verse text and extract verse-by-verse commentary
+
+## Files Modified in Session 79
+
+- \`src/agents/sacks_librarian.py\` - Added Rabbi Sacks bio to \`format_for_research_bundle()\`
+- \`src/agents/research_assembler.py\` - Added six commentator bios to \`ResearchBundle.to_markdown()\`
+- \`docs/IMPLEMENTATION_LOG.md\` - Added Session 79 entry
+- \`docs/PROJECT_STATUS.md\` - Updated with Session 79 completion
+- \`docs/NEXT_SESSION_PROMPT.md\` - This file (updated for Session 80)
 
 ## Success Criteria
 
-✅ Margin decision made and documented
-✅ Full OCR re-run completed with chosen margin (if Option A)
-✅ Spot checks confirm all test pages start correctly
+**If continuing Hirsch work**:
 ✅ Parser created with verse text filtering
-✅ Parser successfully builds `data/hirsch_on_psalms.json`
+✅ Parser successfully builds \`data/hirsch_on_psalms.json\`
 ✅ HirschLibrarian integration tested
+✅ Sample psalms verified (1, 23, 119)
+
+**If generating additional psalms**:
+✅ Psalms 23, 51, 19 generated successfully
+✅ Divine names modified correctly across all psalms
+✅ Liturgical sections present and well-formed
+✅ Formatting consistent across different genres
 
 ## Known Issues
 
-1. **Verse Text in Output**: Some continuation pages will have 3-5 lines of verse text before commentary
-   - **Mitigation**: Parser filters during database build
-   - **Pattern**: Numbered paragraphs `(1)`, `(19)` are verse text
+1. **Hirsch OCR verse text**: Some pages have 3-5 lines of verse text before commentary
+   - Mitigation: Parser filters during JSON build
+   - Pattern: (1), (19) are verse text markers
 
-2. **OCR Quality**: ~95% English accuracy, some Hebrew character confusion
-   - **Impact**: Minor - affects individual words not overall meaning
-   - **Mitigation**: Manual review for critical psalms if needed
+2. **Sacks JSON**: 13 entries still missing snippets
+   - May require manual review if needed
 
-3. **Verse Marker Variations**: `V. 1.`, `VV. 1-3`, `V.1`, `Vv. 10`
-   - **Mitigation**: Regex pattern handles variations
-   - **Test**: Verify on Psalms 1, 23, 119 (long)
+3. **No new issues from Session 79**: Commentator bios successfully integrated into research bundles

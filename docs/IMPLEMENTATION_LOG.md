@@ -1,3 +1,194 @@
+# Session 79 - Commentator Bios Integration (2025-11-09)
+
+**Goal**: Integrate scholarly biographies for all commentators into research bundles.
+
+**Status**: ✅ Complete - Bios added to both Traditional Commentaries and Rabbi Sacks sections
+
+## Session Overview
+
+Session 79 added comprehensive scholarly biographies for all six traditional commentators (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) and Rabbi Jonathan Sacks to the research bundles. These bios provide the Synthesis Writer and Master Editor agents with crucial context about each commentator's historical period, philosophical approach, and exegetical methodology, enabling them to better interpret and synthesize the commentary materials.
+
+## What Was Accomplished
+
+### 1. Rabbi Sacks Bio Integration (COMPLETE ✅)
+
+**Updated** `src/agents/sacks_librarian.py::format_for_research_bundle()`
+
+**Added comprehensive bio** (2 paragraphs):
+- Biographical overview: British Chief Rabbi (1991-2013), philosopher, Cambridge graduate
+- Scholarly corpus: 40+ books including *Covenant & Conversation* and *The Great Partnership*
+- Philosophical approach: *Torah ve-Hokhma* synthesis, "two hemispheres of the brain"
+- Exegetical method: Thematic, philosophical, ethical (not grammatical/textual)
+- Key distinction: Answers "Why does this verse *matter*?" vs. "What does this verse *mean*?"
+- Integration: 21st-century application blending classical commentators with Western philosophy
+
+**Location**: Inserted after section header, before "About this section" note
+
+### 2. Traditional Commentators Bios Integration (COMPLETE ✅)
+
+**Updated** `src/agents/research_assembler.py::ResearchBundle.to_markdown()`
+
+**Added six commentator bios** (full scholarly summaries):
+
+1. **Rashi (1040–1105)**: Foundational commentator, Troyes France, post-First Crusade context
+   - Pedagogical mission: Make Tanakh/Talmud accessible for Jewish continuity
+   - Method: Revolutionary *peshat*/*derash* synthesis via curation
+   - Legacy: First Hebrew printed book (1475), total saturation in Jewish tradition
+
+2. **Ibn Ezra (c.1092–1167)**: Spanish Golden Age polymath, rationalist grammarian
+   - Fields: Grammar, philosophy, mathematics, astrology
+   - Method: Rigorous grammatical *peshat*, polemic against Rashi's approach
+   - Controversial hints: Post-Mosaic authorship, Deutero-Isaiah (*ve-hamaskil yavin*)
+
+3. **Radak (1160–1235)**: Provençal mediator between French Talmudism and Spanish rationalism
+   - Works: *Sefer Mikhlol* (grammar), *Sefer Ha-Shorashim* (lexicon)
+   - Method: "Golden mean" - grammatical *peshat* with Rashi's accessibility
+   - Influence: Primary resource for King James Bible translators
+
+4. **Meiri (1249–1316)**: Maimonidean rationalist, *Beit HaBechirah* author
+   - Work: Encyclopedic Talmud digest (lost/rediscovered 20th century)
+   - Innovation: Revolutionary *halachic* universalism - "nations restricted by ways of religion"
+   - Legacy: Primary traditional source for Jewish universalism and interfaith relations
+
+5. **Metzudat David (c.1687–1769)**: Father-son pedagogical collaboration
+   - Goal: Reverse decline in *Nevi'im*/*Ketuvim* study
+   - Innovation: Two-part system (*Metzudat Tzion* glossary + *Metzudat David* paraphrase)
+   - Impact: "Frictionless reading experience" - standard starting point for Prophets/Writings
+
+6. **Malbim (1809–1879)**: "Warrior rabbi" against Haskalah and Reform movement
+   - Mission: Prove Oral Law implicit in Written Torah's *peshat*
+   - Principles: No synonyms, no redundancies, 613 grammatical rules (*Ayelet ha-Shachar*)
+   - Legacy: Co-opted Enlightenment tools to defend Torah unity, hero of Modern Orthodox world
+
+**Location**: Inserted after "Classical interpretations..." intro, before verse-by-verse commentaries
+
+### 3. Bio Content Design
+
+**Each bio includes**:
+- Historical context and life circumstances
+- Scholarly contributions and major works
+- Philosophical/theological approach
+- Exegetical methodology and innovations
+- Legacy and influence on tradition
+- Distinctive characteristics vs. other commentators
+
+**Purpose**: Enable AI agents to:
+- Understand interpretive lens of each commentator
+- Recognize philosophical conflicts (e.g., Rashi vs. Ibn Ezra on rationalism)
+- Contextualize specific commentary choices
+- Synthesize across different schools of thought
+- Explain methodology differences to readers
+
+## Files Modified
+
+- `src/agents/sacks_librarian.py` - Added Rabbi Sacks bio to `format_for_research_bundle()`
+- `src/agents/research_assembler.py` - Added six commentator bios to `ResearchBundle.to_markdown()`
+- `docs/IMPLEMENTATION_LOG.md` - Added Session 79 entry (this file)
+- `docs/PROJECT_STATUS.md` - Updated with Session 79 completion
+- `docs/NEXT_SESSION_PROMPT.md` - Updated for Session 80 handoff
+
+## Impact
+
+**On Research Bundles**:
+- Synthesis Writer now receives commentator bios with every research bundle
+- Master Editor now receives commentator bios with every research bundle
+- Bios appear consistently regardless of which commentators are cited
+
+**On Commentary Quality**:
+- Agents can now contextualize interpretations within historical/philosophical frameworks
+- Enables richer synthesis across different exegetical schools
+- Provides readers with scholarly context they need to evaluate interpretations
+
+---
+
+# Session 78 - Divine Names Modifier SHIN/SIN Bug Fix (2025-11-08)
+
+**Goal**: Fix Divine Names modifier to distinguish between SHIN (ׁ) and SIN (ׂ) when modifying שַׁדַּי.
+
+**Status**: ✅ Complete - Bug fixed and tested
+
+## Session Overview
+
+Session 78 fixed a critical bug in the Divine Names modifier where words with SIN dot (ׂ U+05C2) were incorrectly being modified as if they were the divine name שַׁדַּי (which has SHIN dot ׁ U+05C1). The issue was discovered in Psalm 8:8 where שָׂדָֽי (sadai, with SIN) was being incorrectly modified to שָׂקָֽי.
+
+## What Was Accomplished
+
+### 1. Bug Identification and Testing (COMPLETE ✅)
+
+**Problem**: In Psalm 8:8, the word שָׂדָֽי was being incorrectly modified to שָׂקָֽי
+- The original pattern did not distinguish between SHIN dot (ׁ U+05C1) and SIN dot (ׂ U+05C2)
+- Divine name שַׁדַּי (Shaddai) uses SHIN, but שָׂדָֽי (sadai) uses SIN
+- The modifier should only change words with SHIN, not SIN
+
+**Created test file**: `test_divine_names_shin_sin.py` with 5 test cases:
+1. Divine name with SHIN (שַׁדַּי) - should be modified ✓
+2. Divine name with prefix (וְשַׁדַּי) - should be modified ✓
+3. Unvoweled form (שדי) - should be modified ✓
+4. Word with SIN (שָׂדָֽי) - should NOT be modified (BUG!) ✗
+5. Psalm 8:8 full verse - should NOT modify sadai (BUG!) ✗
+
+**Initial test results**: Tests 4 and 5 failed, confirming the bug
+
+### 2. Fix Implementation (COMPLETE ✅)
+
+**Updated** `src/utils/divine_names_modifier.py::_modify_el_shaddai()`
+
+**Key changes**:
+- Added positive lookahead to REQUIRE SHIN dot (U+05C1): `(?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1)`
+- Added negative lookahead to EXCLUDE SIN dot (U+05C2): `(?![\u0591-\u05C7]*\u05C2)`
+- Enhanced prefix matching to handle וְ and other prefixes: `(^|[\s\-\u05BE.,;:!?]|[וּ]?[\u0591-\u05C7]*)`
+- Added detailed documentation explaining SHIN vs SIN distinction
+
+**New pattern**:
+```python
+shaddai_pattern = r'(^|[\s\-\u05BE.,;:!?]|[וּ]?[\u0591-\u05C7]*)ש(?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1)(?![\u0591-\u05C7]*\u05C2)[\u0591-\u05C7]*ד[\u0591-\u05C7]*י(?=[\u0591-\u05C7]*(?:[\s\-\u05BE.,;:!?]|$))'
+```
+
+### 3. Test Verification (COMPLETE ✅)
+
+**Final test results**: All 5 tests PASS ✓
+- Test 1: Divine name with SHIN modified correctly ✓
+- Test 2: Divine name with prefix now works (was failing before) ✓
+- Test 3: Unvoweled form still works ✓
+- Test 4: Word with SIN NOT modified (BUG FIXED!) ✓
+- Test 5: Psalm 8:8 NOT modified (BUG FIXED!) ✓
+
+### 4. Integration Verification (COMPLETE ✅)
+
+**Verified fix applies everywhere**:
+- `src/utils/commentary_formatter.py` - imports DivineNamesModifier
+- `src/utils/document_generator.py` - imports DivineNamesModifier
+- Both use the same class instance, so fix automatically applies throughout pipeline
+
+## Technical Details
+
+### Unicode Characters
+- **SHIN dot**: ׁ (U+05C1) - right dot, "sh" sound, used in divine name
+- **SIN dot**: ׂ (U+05C2) - left dot, "s" sound, NOT a divine name
+- Both use same base letter ש but different diacritical marks
+
+### Pattern Explanation
+The regex now has two critical lookaheads after the ש:
+1. `(?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1)` - Look ahead and REQUIRE SHIN dot somewhere in next few chars
+2. `(?![\u0591-\u05C7]*\u05C2)` - Look ahead and ENSURE NO SIN dot in next few chars
+
+This ensures we only match words like שַׁדַּי (Shaddai) and not שָׂדָֽי (sadai).
+
+## Files Modified
+
+- `src/utils/divine_names_modifier.py` - Fixed `_modify_el_shaddai()` method with SHIN/SIN distinction
+- `test_divine_names_shin_sin.py` - Created comprehensive test suite for SHIN/SIN edge case
+- `docs/IMPLEMENTATION_LOG.md` - Added Session 78 entry
+- `docs/PROJECT_STATUS.md` - Updated with Session 78 completion
+- `docs/NEXT_SESSION_PROMPT.md` - Updated for Session 79 handoff
+
+## Next Steps
+
+- Continue with Hirsch OCR parser development (Session 77 continuation)
+- OR generate additional psalms to validate overall pipeline robustness
+
+---
+
 # Session 77 - Hirsch OCR Enhancement and Full Extraction (2025-11-07)
 
 **Goal**: Enhance OCR extraction to properly capture commentary text, handle Hebrew chapter numbers, detect loading screens, and run full 501-page extraction.
