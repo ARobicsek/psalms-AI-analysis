@@ -1,117 +1,143 @@
-# Session 80 - Continuing Psalms Project
+# Session 82 - Continuing Psalms Project
 
-## Session Handoff from Session 79
+## Session Handoff from Session 81
 
-**What Was Completed in Session 79**:
+**What Was Completed in Session 81**:
 
-✅ **Commentator Bios Integration**:
-- Added comprehensive scholarly biographies for all commentators to research bundles
-- **Rabbi Sacks bio**: Added to `sacks_librarian.py::format_for_research_bundle()`
-  - 2 paragraphs covering biographical overview, scholarly corpus, philosophical approach
-  - Inserted after section header, before "About this section" note
-- **Six commentator bios**: Added to `research_assembler.py::ResearchBundle.to_markdown()`
-  - Rashi (1040–1105): Foundational commentator, *peshat*/*derash* synthesis
-  - Ibn Ezra (c.1092–1167): Spanish polymath, rationalist grammarian
-  - Radak (1160–1235): "Golden mean" of medieval exegesis
-  - Meiri (1249–1316): Maimonidean rationalist, *halachic* universalism
-  - Metzudat David (c.1687–1769): Pedagogical innovation, "frictionless reading"
-  - Malbim (1809–1879): "Warrior rabbi" against Haskalah
-- Bios enable agents to contextualize interpretations within historical/philosophical frameworks
-- Synthesis Writer and Master Editor now receive full scholarly context with every research bundle
+🎉 **CRITICAL BUG FIXED - DOCX Bidirectional Text Rendering** (Session 80 → Session 81):
+- **Problem**: Parenthesized Hebrew text rendered incorrectly in Word documents - text duplicated, split, and misordered
+- **Impact**: Affected ~5-10 instances per psalm commentary document
+- **Root Causes Identified**:
+  1. **Bidi Algorithm Issue**: Word's Unicode Bidirectional Algorithm reorders runs in ways python-docx cannot control
+  2. **Regex Bug**: Pattern `\\*.*?\\*` (double backslash) matched zero-or-more backslashes at EVERY position, fragmenting text into thousands of empty parts, preventing the bidi fix from running
+- **Solution Implemented**:
+  - **Creative Hybrid Approach** (Solution 6): Reverse Hebrew by grapheme clusters + LEFT-TO-RIGHT OVERRIDE
+  - **Technical**: Pre-reverse Hebrew character order (keeping nikud attached), then apply LRO (U+202D), forcing LTR display that visually appears as correct RTL
+  - **Regex Fix**: Changed `\\*.*?\\*` to `\*.*?\*` to prevent text fragmentation
+- **Status**: ✅ **RESOLVED** - Tested successfully on Psalm 6, all Hebrew renders correctly!
 
-## Immediate Tasks for Session 80
+**Testing Process**:
+- Created 6 test documents with different approaches (ornate parentheses, zero-width joiner, LRO, pre-mirrored, etc.)
+- Solution 3 (LRO alone) almost worked but displayed Hebrew backwards
+- Solution 6 (reversed clusters + LRO) worked perfectly in isolated tests
+- Discovered regex bug was preventing the fix from applying in full documents
+- Fixed both issues, confirmed working in production document
 
-### Option A: Continue Hirsch OCR Parser Development
+## Immediate Tasks for Session 82
 
-Per Session 77 continuation, the Hirsch OCR margin decision was made (use -180px for all pages, filter verse text in parser). If continuing with Hirsch work:
+### Option A: Generate Additional Psalms (RECOMMENDED)
 
-**1. Verify Current OCR Status**
-\`\`\`bash
-# Check if OCR completed
-ls data/hirsch_commentary_text/*.txt | wc -l  # Should be ~499-501
-
-# Check for loading screens
-cat data/hirsch_metadata/loading_screens.txt
-\`\`\`
-
-**2. Build Hirsch Commentary Parser**
-
-Create \`scripts/parse_hirsch_commentary.py\` with:
-- Verse text filtering (detect and skip numbered paragraphs like "(1)", "(19)")
-- Verse marker detection (V. 1., VV. 1-3)
-- Commentary extraction per verse
-- Output: \`data/hirsch_on_psalms.json\`
-
-**3. Test Parser**
-\`\`\`bash
-python scripts/parse_hirsch_commentary.py
-# Spot check output on Psalms 1, 23, 119
-\`\`\`
-
-**4. Integrate HirschLibrarian**
-- Connect parser output to \`HirschLibrarian\` class (created in Session 70)
-- Test integration with research assembler
-
-### Option B: Generate Additional Psalms
-
-Test overall pipeline robustness with additional psalms:
-- Psalm 23 (shepherd psalm - different genre)
-- Psalm 51 (penitential - different genre)
-- Psalm 19 (creation/torah - different genre)
+Test the bidirectional text fix across different psalm genres:
+- Psalm 23 (shepherd psalm - pastoral genre)
+- Psalm 51 (penitential - confessional genre)
+- Psalm 19 (creation/torah - wisdom genre)
 - Validate formatting, divine names, liturgical sections work across genres
+- Verify bidirectional text renders correctly in all documents
 
-### Option C: Address Other Items
+### Option B: Continue Hirsch OCR Parser Development
 
-Other pending items from PROJECT_STATUS.md:
-- Delete obsolete German Fraktur OCR files
-- Review remaining Sacks JSON entries with missing snippets
+**Current Status** (from Session 77):
+- 501 pages of Hirsch commentary successfully extracted via OCR
+- 499 pages successful, 2 loading screens detected
+- Output: `data/hirsch_commentary_text/`, `data/hirsch_metadata/`
+- Quality: ~95% English accuracy, Hebrew preserved as Unicode
+
+**Next Steps**:
+1. Build Hirsch commentary parser (`scripts/parse_hirsch_commentary.py`)
+2. Extract verse-by-verse commentary from OCR text
+3. Filter verse text (numbered paragraphs like "(1)", "(19)")
+4. Build structure: `{"psalm": 1, "verse": 1, "commentary": "..."}`
+5. Save as `data/hirsch_on_psalms.json`
+6. Integrate with `HirschLibrarian` class (created in Session 70)
+7. Test on sample psalms (1, 23, 119)
+
+### Option C: Project Maintenance
+
+Clean up from the intensive debugging session:
+- Remove test files (test_bidi_solution*.py, test_transform_debug.py, test_minimal_doc.py, test_regex_split.py)
+- Archive test documents in `output/bidi_tests/`
+- Update user documentation with notes about bidirectional text handling
+- Consider adding unit tests for the grapheme cluster reversal function
 
 ## Technical Context
 
+### Bidirectional Text Fix (Session 81)
+
+**Implementation** (`src/utils/document_generator.py`):
+- Lines 70-108: Helper methods for grapheme cluster handling
+  - `_split_into_grapheme_clusters()`: Splits Hebrew into letter+nikud units
+  - `_reverse_hebrew_by_clusters()`: Reverses cluster order while keeping each intact
+- Lines 278-300: Applied in `_process_markdown_formatting()`
+- Lines 328-348: Applied in `_add_paragraph_with_soft_breaks()`
+- Line 288: Regex fix from `\\*.*?\\*` to `\*.*?\*`
+
+**How It Works**:
+```
+Original: (וְנַפְשִׁי נִבְהֲלָה מְאֹד)
+Step 1: Split into clusters: [וְ, נַ, פְ, שִׁ, י, ' ', נִ, בְ, הֲ, לָ, ה, ' ', מְ, אֹ, ד]
+Step 2: Reverse order: [ד, אֹ, מְ, ' ', ה, לָ, הֲ, בְ, נִ, ' ', י, שִׁ, פְ, נַ, וְ]
+Step 3: Join: דאֹמְ הלָהֲבְנִ ישִׁפְנַוְ
+Step 4: Wrap with LRO+PDF: ‭(דאֹמְ הלָהֲבְנִ ישִׁפְנַוְ)‬
+Result: Word's LTR display of reversed text = correct RTL visual appearance!
+```
+
+**Why This Works**:
+- LRO (LEFT-TO-RIGHT OVERRIDE) forces Word to display content as LTR and keeps text inside parentheses
+- Pre-reversing the Hebrew cancels out the forced LTR, creating correct RTL visual result
+- Grapheme cluster splitting prevents nikud from detaching (no dotted circles)
+
 ### Divine Names Modifier Fix (Session 78)
 
-The SHIN/SIN fix is now active in:
-- \`src/utils/divine_names_modifier.py::_modify_el_shaddai()\`
-- Used by \`commentary_formatter.py\` and \`document_generator.py\`
+The SHIN/SIN fix is active in:
+- `src/utils/divine_names_modifier.py::_modify_el_shaddai()`
+- Used by `commentary_formatter.py` and `document_generator.py`
+- Distinguishes between שַׁדַּי (Shaddai with SHIN ׁ) and שָׂדָֽי (sadai with SIN ׂ)
 
 ### Hirsch OCR Context (Session 77)
 
-OCR extraction complete with:
+OCR extraction complete:
 - 501 pages processed (499 successful, 2 loading screens)
-- PSALM header detection working
-- -180px margin for all pages (may include verse text)
-- Output: \`data/hirsch_commentary_text/\`, \`data/hirsch_metadata/\`
+- PSALM header detection working (distinguishes first pages from continuation pages)
+- -180px margin for all pages (may include 3-5 lines of verse text on some pages)
+- Output: `data/hirsch_commentary_text/`, `data/hirsch_metadata/`
 - Next step: Parser to filter verse text and extract verse-by-verse commentary
 
-## Files Modified in Session 79
+## Files Modified in Session 81
 
-- \`src/agents/sacks_librarian.py\` - Added Rabbi Sacks bio to \`format_for_research_bundle()\`
-- \`src/agents/research_assembler.py\` - Added six commentator bios to \`ResearchBundle.to_markdown()\`
-- \`docs/IMPLEMENTATION_LOG.md\` - Added Session 79 entry
-- \`docs/PROJECT_STATUS.md\` - Updated with Session 79 completion
-- \`docs/NEXT_SESSION_PROMPT.md\` - This file (updated for Session 80)
+- `src/utils/document_generator.py` - Added grapheme cluster methods, applied bidi fix, fixed regex pattern
+- `test_bidi_solutions.py` - Created 5 test documents for bidi solutions
+- `test_bidi_solution5.py` - Reversed Hebrew + LRO approach
+- `test_bidi_solution6.py` - Grapheme cluster reversal + LRO (winning solution)
+- `test_minimal_doc.py` - Minimal test document for debugging
+- `test_transform_debug.py` - Transformation logic verification
+- `test_regex_split.py` - Regex pattern debugging (found the fragmentation bug)
+- `output/psalm_6/psalm_006_commentary.docx` - Regenerated with fix, confirmed working
+- `docs/IMPLEMENTATION_LOG.md` - Added Session 81 entry
+- `docs/PROJECT_STATUS.md` - Updated with Session 81 completion
+- `docs/NEXT_SESSION_PROMPT.md` - This file (updated for Session 82)
 
 ## Success Criteria
 
-**If continuing Hirsch work**:
-✅ Parser created with verse text filtering
-✅ Parser successfully builds \`data/hirsch_on_psalms.json\`
-✅ HirschLibrarian integration tested
-✅ Sample psalms verified (1, 23, 119)
-
 **If generating additional psalms**:
 ✅ Psalms 23, 51, 19 generated successfully
+✅ Bidirectional text renders correctly in all documents
 ✅ Divine names modified correctly across all psalms
 ✅ Liturgical sections present and well-formed
 ✅ Formatting consistent across different genres
 
+**If continuing Hirsch work**:
+✅ Parser created with verse text filtering
+✅ Parser successfully builds `data/hirsch_on_psalms.json`
+✅ HirschLibrarian integration tested
+✅ Sample psalms verified (1, 23, 119)
+
 ## Known Issues
 
-1. **Hirsch OCR verse text**: Some pages have 3-5 lines of verse text before commentary
-   - Mitigation: Parser filters during JSON build
-   - Pattern: (1), (19) are verse text markers
+**All previously critical issues have been resolved!** 🎉
 
+Minor pending items:
+1. **Hirsch OCR verse text**: Some pages have 3-5 lines of verse text before commentary
+   - Mitigation: Parser filters during JSON build (pattern: numbered paragraphs like "(1)", "(19)")
 2. **Sacks JSON**: 13 entries still missing snippets
    - May require manual review if needed
-
-3. **No new issues from Session 79**: Commentator bios successfully integrated into research bundles
+3. **Test files cleanup**: Multiple test scripts from Session 81 debugging can be archived

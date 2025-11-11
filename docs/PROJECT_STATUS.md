@@ -1,7 +1,7 @@
 # Psalms Commentary Project - Status
 
-**Last Updated**: 2025-11-09 (Session 79)
-**Current Phase**: Core Pipeline Maintenance and Hirsch OCR Development
+**Last Updated**: 2025-11-11 (Session 81)
+**Current Phase**: Core Pipeline - DOCX Bidirectional Text Bug RESOLVED
 
 ---
 
@@ -31,7 +31,7 @@
 - **Field Labeling**: Updated to use ONLY canonical fields (canonical_L1-L4, canonical_location_description).
 - **Cost Control**: LLM receives maximum 5 matches per group per verse/phrase/chapter.
 - **DOCX Header Formatting**: Markdown `##`, `###`, and `####` headers in introduction content now correctly rendered as level 2, 3, and 4 headings in `.docx`.
-- **DOCX Bidi Parentheses**: Parentheses around Hebrew phrases now render correctly (bidi issue resolved).
+- **DOCX Bidi Parentheses** ✅ (Session 81 - CRITICAL BUG FIXED): Parenthesized Hebrew text now renders correctly using grapheme cluster reversal + LEFT-TO-RIGHT OVERRIDE. Root causes were: (1) Word's Unicode Bidirectional Algorithm reordering runs uncontrollably, and (2) regex bug (`\\*.*?\\*` → `\*.*?\*`) fragmenting text. Solution 6 combines pre-reversed Hebrew (by grapheme clusters to preserve nikud) with LRO wrapper, forcing LTR display that visually appears as correct RTL. Tested successfully on Psalm 6. ~5-10 instances per document now render perfectly.
 - **DOCX Hebrew Verse Text Formatting** ✅: Hebrew text at the beginning of each verse in verse-by-verse commentaries now renders in Aptos 12pt (fixed via XML-level font setting).
 - **Modern Jewish Liturgical Use Section Structure** ✅: Section now has proper subsections (Full psalm, Key verses, Phrases) with Heading 4 formatting, Hebrew + English translations, and liturgical context quotes.
 - **Transliterations with Hebrew Text** ✅: Master Editor now required to include Hebrew text alongside all transliterations.
@@ -47,7 +47,6 @@
 
 
 ### Pending ⚠️
-- **Monitor OCR Completion** (RUNNING NOW): 501-page OCR extraction in progress (~30-45 min)
 - **Hirsch Parser Development**: Extract verse-by-verse commentary into JSON structure (`parse_hirsch_commentary.py`)
 - **Delete Obsolete Files**: Remove German Fraktur OCR code and test scripts (to be archived in Session 76 commit)
 - **Final JSON Review**: The `sacks_on_psalms.json` file still has 13 entries with missing snippets that may require manual review
@@ -59,6 +58,30 @@
 - **Generate Additional Psalms**: Test pipeline with Psalms 23, 51, 19 to validate robustness across genres
 - **Quality Review**: Systematic review of commentary quality across multiple psalms
 - **Documentation**: Create user guide for running the pipeline and interpreting outputs
+
+---
+
+## Session 81 Summary
+
+- **Goal**: Fix critical DOCX bidirectional text rendering bug where parenthesized Hebrew text was duplicated, split, and misordered.
+- **Activity**:
+  - Proposed 10+ creative solutions including ornate parentheses, zero-width joiners, LEFT-TO-RIGHT OVERRIDE (LRO), pre-mirrored parentheses
+  - Created test_bidi_solutions.py to systematically test 5 different approaches
+  - Solution 3 (LRO alone) kept text inside parentheses but displayed Hebrew backwards - key breakthrough
+  - Developed Solution 5: reversed Hebrew + LRO, but had dotted circles issue (nikud detached from base letters)
+  - Root cause: Character-level reversal separated combining characters (nikud) from base letters
+  - Solution 6 (WINNING): Grapheme cluster reversal + LRO
+    - Split Hebrew into grapheme clusters (letter+nikud as units)
+    - Reverse cluster order while keeping each intact
+    - Apply LRO wrapper to force LTR display
+    - Worked perfectly in isolated tests
+  - Integration problem: Solution 6 worked in tests but not in production
+  - Deep debugging with test_transform_debug.py, test_minimal_doc.py, test_regex_split.py
+  - Critical discovery: Text split into 2187 parts from 546 chars - massive fragmentation
+  - Found regex bug: `\\*.*?\\*` matched "zero or more backslashes" at EVERY position
+  - Fixed regex from `\\*.*?\\*` to `\*.*?\*` in document_generator.py line 288
+  - Regenerated Psalm 6 document - confirmed working perfectly
+- **Outcome**: CRITICAL BUG RESOLVED! Both root causes fixed: (1) bidi algorithm issue solved with grapheme cluster reversal + LRO, (2) regex fragmentation bug fixed. All Hebrew text in parentheses now renders correctly. Added grapheme cluster helper methods (lines 70-108), applied transformation in _process_markdown_formatting() (lines 278-300) and _add_paragraph_with_soft_breaks() (lines 328-348).
 
 ---
 

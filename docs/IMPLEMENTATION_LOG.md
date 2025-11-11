@@ -1,3 +1,668 @@
+# Session 80 - DOCX Bidirectional Text Rendering Issue Investigation (2025-11-11)
+
+**Goal**: Fix persistent rendering issue with parenthesized Hebrew text in Word documents.
+
+**Status**: ⚠️ UNRESOLVED - Issue persists despite 6+ different approaches attempted
+
+## Session Overview
+
+Session 80 attempted to fix a critical rendering bug where parenthesized Hebrew text in Word documents displays incorrectly - text is duplicated, split, and misordered. Example: `(וְנַפְשִׁי נִבְהֲלָה מְאֹד)` renders with "וְנַפְשִׁי" appearing twice, and "נִבְהֲלָה מְאֹד" appearing outside the parentheses. Despite trying 6+ different technical approaches including regex fixes, Unicode control characters, XML-level properties, and paragraph directionality settings, the issue persists. The problem appears to be with Word's bidirectional text algorithm reordering runs at the paragraph level in ways we cannot control.
+
+## Problem Description
+
+**Affected Text**: English paragraphs containing parenthesized Hebrew, e.g.:
+```
+"And my נֶפֶשׁ is deeply terrified" (וְנַפְשִׁי נִבְהֲלָה מְאֹד). נֶפֶשׁ is not a detachable soul...
+```
+
+**Expected Rendering**: `(וְנַפְשִׁי נִבְהֲלָה מְאֹד)` with Hebrew reading right-to-left inside parentheses
+
+**Actual Rendering**: Text duplicated and split:
+- "וְנַפְשִׁי" appears twice inside parentheses
+- "נִבְהֲלָה מְאֹד" appears outside parentheses
+- Parentheses appear in wrong positions
+
+**Root Cause Hypothesis**: Word's Unicode Bidirectional Algorithm treats parentheses as "neutral" characters and reorders them based on surrounding strong directional characters (Hebrew RTL, English LTR), causing the text to be split and duplicated.
+
+## What Was Attempted
+
+### 1. Regex Pattern Fix (COMPLETE ✅)
+
+**Problem Discovered**: Original regex had double-escaped backslashes
+```python
+r'([\\(][\\u0590-\\u05FF...'  # WRONG - matches literal "\u" not Unicode
+```
+
+**Fix Applied**: Changed to single backslashes
+```python
+r'([\(][\u0590-\u05FF...'  # CORRECT - matches Hebrew Unicode range
+```
+
+**Result**: ❌ Regex now matches correctly but rendering issue persists
+
+### 2. Unicode Control Characters - LRM/RLM (ATTEMPT 1)
+
+**Approach**: Added Left-to-Right Mark (U+200E) and Right-to-Left Mark (U+200F)
+```python
+LRM = '\u200E'
+RLM = '\u200F'
+full_text = f"{LRM}({RLM}{hebrew_text}{RLM}){LRM}"
+```
+
+**Result**: ❌ Issue persists - control characters had no effect on rendering
+
+### 3. Unicode Control Characters - RLE/PDF (ATTEMPT 2)
+
+**Approach**: Used Right-to-Left Embedding (U+202B) and Pop Directional Formatting (U+202C)
+```python
+RLE = '\u202B'
+PDF = '\u202C'
+full_text = f"{RLE}{sub_part}{PDF}"
+```
+
+**Result**: ❌ Issue persists - embedding had no effect
+
+### 4. Explicit Paragraph LTR Setting (ATTEMPT 3)
+
+**Approach**: Set paragraph direction to LTR at XML level to prevent Word's bidi algorithm from reordering runs
+
+Added `_set_paragraph_ltr()` method:
+```python
+def _set_paragraph_ltr(self, paragraph):
+    pPr = paragraph._element.get_or_add_pPr()
+    bidi_elem = OxmlElement('w:bidi')
+    bidi_elem.set(ns.qn('w:val'), '0')
+    pPr.append(bidi_elem)
+```
+
+Applied to all paragraph creation methods in `_add_paragraph_with_markdown()`, `_add_commentary_with_bullets()`, and `_add_paragraph_with_soft_breaks()`
+
+**Result**: ❌ Issue persists - paragraph-level LTR had no effect
+
+### 5. Separate Runs with LRM Anchors (ATTEMPT 4)
+
+**Approach**: Created three separate runs (opening paren, Hebrew, closing paren) with LRM characters anchoring parentheses in LTR context
+```python
+run_open = paragraph.add_run(f'{LRM}({LRM}')
+run_hebrew = paragraph.add_run(hebrew_text)
+run_hebrew.font.rtl = True
+# Set RTL at XML level
+run_close = paragraph.add_run(f'{LRM}){LRM}')
+```
+
+**Result**: ❌ Issue persists - runs still being reordered
+
+### 6. Natural Bidi Handling - No Special Processing (ATTEMPT 5)
+
+**Approach**: Removed ALL special handling, letting Word's natural Hebrew font rendering handle directionality
+```python
+# Just add text as-is without any special RTL handling
+run = paragraph.add_run(part)
+```
+
+Combined with explicit paragraph LTR setting
+
+**Result**: ❌ Issue persists - same duplication and misordering
+
+### 7. Unicode Control Characters - LRI/PDI (ATTEMPT 6)
+
+**Approach**: Used Left-to-Right Isolate (U+2066) and Pop Directional Isolate (U+2069) to isolate parenthesized Hebrew as single LTR unit
+```python
+LRI = '\u2066'
+PDI = '\u2069'
+hebrew_paren_pattern = r'([\(][\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+[\)])'
+modified_part = re.sub(
+    hebrew_paren_pattern,
+    lambda m: f'{LRI}{m.group(0)}{PDI}',
+    part
+)
+```
+
+Applied to both `_process_markdown_formatting()` and `_add_paragraph_with_soft_breaks()`
+
+**Result**: ❌ Issue persists - LRI/PDI had no effect
+
+## Files Modified
+
+**`src/utils/document_generator.py`** - Multiple iterations:
+- Fixed regex pattern (line 257, 279, 305, 329)
+- Added `_set_paragraph_ltr()` method (lines 108-123)
+- Applied paragraph LTR to all paragraph creation methods
+- Attempted 6 different approaches to handle parenthesized Hebrew
+- Final state: Using LRI/PDI isolate approach (currently not working)
+
+## Technical Analysis
+
+### Why This Is So Difficult
+
+1. **Multiple Hebrew Segments in Single Paragraph**: The problematic paragraphs contain:
+   - Standalone Hebrew words (נֶפֶשׁ)
+   - Parenthesized Hebrew phrases (וְנַפְשִׁי נִבְהֲלָה מְאֹד)
+   - English text
+
+2. **Word's Bidi Algorithm**: Word applies Unicode Bidirectional Algorithm at multiple levels:
+   - Character level (inherent directionality)
+   - Run level (can be set via rtl property)
+   - Paragraph level (can be set via w:bidi)
+   - The algorithm reorders elements in ways we cannot fully control
+
+3. **Neutral Characters**: Parentheses are "weak" directional characters that get reordered based on surrounding strong characters
+
+4. **Run Reordering**: Even when we create separate runs with explicit directionality, Word's renderer reorders them based on its bidi algorithm
+
+### Diagnostic Evidence
+
+**Screenshot Analysis** (user provided multiple screenshots):
+- Hebrew text clearly duplicated: "וְנַפְשִׁי" appears twice
+- Text split: "נִבְהֲלָה מְאֹד" appears outside parentheses
+- Parentheses mirrored: `)` before Hebrew, `(` after
+- Issue consistent across different margin settings and line breaks
+
+**What This Tells Us**:
+- Not a simple character encoding issue
+- Not a font issue
+- Appears to be fundamental limitation of Word's bidi rendering with mixed LTR/RTL content
+- May require completely different approach (e.g., inserting actual mirrored parentheses, using different document structure)
+
+## Potential Solutions for Next Session
+
+### Option A: Insert Mirrored Parentheses for RTL Context
+Instead of `(Hebrew)`, insert `(Hebrew)` where both parentheses are treated as part of the RTL run. This might require inserting them in reverse visual order for Word's renderer.
+
+### Option B: Use Word Fields or Special Characters
+Investigate if Word has special field codes or character types that can anchor parentheses in specific positions regardless of bidi algorithm.
+
+### Option C: Pre-render Hebrew Segments
+Convert parenthesized Hebrew to an image or use a different formatting approach (e.g., brackets instead of parentheses, or italics without parentheses).
+
+### Option D: Accept Limitation and Warn Users
+Document this as a known limitation and advise users to manually fix these instances in Word after generation (there are typically only 5-10 per document).
+
+### Option E: Python-docx Library Limitation Research
+Investigate if this is a known limitation of python-docx library and if there are workarounds in the library's issue tracker or forks.
+
+### Option F: Use LibreOffice/OpenOffice ODT Format Instead
+Generate to ODT format (which may have better bidi support) and provide conversion to DOCX as secondary step.
+
+## Known Issues
+
+⚠️ **CRITICAL UNRESOLVED BUG**: Parenthesized Hebrew text renders incorrectly in Word documents
+- **Impact**: Affects any paragraph with pattern: `(Hebrew text)`
+- **Frequency**: ~5-10 instances per psalm commentary
+- **Workaround**: None currently available
+- **Status**: 6+ approaches attempted, all unsuccessful
+- **Next Steps**: Research alternative approaches (see "Potential Solutions" above)
+
+## Files Generated for Testing
+
+- `output/psalm_6/psalm_006_commentary_test.docx` - First test (regex fix only)
+- `output/psalm_6/psalm_006_commentary_fixed.docx` - Second test (regex fix verified)
+- `output/psalm_6/psalm_006_commentary_v2.docx` - RLE/PDF attempt
+- `output/psalm_6/psalm_006_commentary_v3.docx` - LRM-anchored parentheses attempt
+- `output/psalm_6/psalm_006_commentary_v4.docx` - Explicit paragraph LTR attempt
+- `output/psalm_6/psalm_006_commentary_v5.docx` - Natural bidi handling attempt
+- `output/psalm_6/psalm_006_commentary_v6.docx` - LRI/PDI isolate attempt
+
+## Session Statistics
+
+- **Duration**: ~2 hours
+- **Approaches Attempted**: 6+ different technical solutions
+- **Lines of Code Modified**: ~200 lines across multiple iterations
+- **Bug Status**: UNRESOLVED
+- **Test Documents Generated**: 7 versions for validation
+- **User Feedback**: Issue persists in all versions
+
+## Recommendation for Next Session
+
+Given that 6+ different approaches have failed, recommend:
+
+1. **Research Phase**: Spend time researching:
+   - Python-docx GitHub issues related to bidi/RTL
+   - Word's OOXML specification for bidi handling
+   - Alternative Python libraries for Word document generation
+   - How commercial tools handle this issue
+
+2. **Proof of Concept**: Before implementing, create minimal test case:
+   - Single paragraph with `(Hebrew)` pattern
+   - Test rendering in Word
+   - Verify fix works before applying to full pipeline
+
+3. **Consider Workaround**: If technical solution remains elusive:
+   - Document as known limitation
+   - Provide manual fix instructions for users
+   - Add to commentary that ~5-10 instances per document need manual correction
+
+---
+
+# Session 81 - DOCX Bidirectional Text Rendering Bug RESOLVED (2025-11-11)
+
+**Goal**: Fix critical DOCX bidirectional text rendering bug where parenthesized Hebrew text was duplicated, split, and misordered in Word documents.
+
+**Status**: ✅ RESOLVED - Solution 6 (Grapheme Cluster Reversal + LRO) successfully implemented
+
+## Session Overview
+
+Session 81 successfully resolved the critical bidirectional text rendering bug from Session 80. The bug caused parenthesized Hebrew text in Word documents to render incorrectly - text was duplicated, split, and misordered. Through systematic testing of 10+ creative solutions, we discovered that a hybrid approach (Solution 6) combining grapheme cluster reversal with LEFT-TO-RIGHT OVERRIDE successfully renders Hebrew correctly inside parentheses. Additionally, we discovered and fixed a critical regex bug that was fragmenting text into thousands of parts. The solution has been tested on Psalm 6 and confirmed working perfectly.
+
+## What Was Accomplished
+
+### 1. Creative Solution Generation (COMPLETE ✅)
+
+Using Opus for creative thinking, proposed 10+ novel solutions including:
+- **Solution 1**: Hebrew ornate parentheses (U+FD3E ﴾ / U+FD3F ﴿)
+- **Solution 2**: Zero-Width Joiner (U+200D) to bind Hebrew to parentheses
+- **Solution 3**: LEFT-TO-RIGHT OVERRIDE (U+202D) - stronger than embedding
+- **Solution 4**: Pre-mirrored parentheses (swap opening/closing)
+- **Solution 5**: Reversed Hebrew + LRO
+- **Solution 6**: Grapheme cluster reversal + LRO (WINNING SOLUTION)
+- **Solution 7**: Multiple Unicode isolation techniques
+
+### 2. Systematic Testing Framework (COMPLETE ✅)
+
+Created `test_bidi_solutions.py` to test 5 different approaches in parallel:
+- Generated 5 test documents with identical content using different bidi solutions
+- Each document clearly labeled with solution number and approach
+- Included problematic paragraph from Psalm 6 introduction
+- Enabled rapid user testing and visual comparison
+
+**Test Results**:
+- Solution 1 (Ornate parentheses): ❌ Same duplication issue
+- Solution 2 (Zero-width joiner): ❌ No effect
+- Solution 3 (LRO alone): ⚠️ **Almost perfect** - text stayed inside parentheses but displayed backwards
+- Solution 4 (Pre-mirrored parens): ❌ Worse rendering
+- Solution 5 (Reversed + LRO): ⚠️ Very close but had dotted circles (nikud detachment)
+
+**Key Breakthrough**: User identified Solution 3 as "closest by far" - text inside parentheses but backwards. This insight led directly to Solution 6.
+
+### 3. Solution 5 - Reversed Hebrew + LRO (ATTEMPT ⚠️)
+
+Created `test_bidi_solution5.py` implementing character-level Hebrew reversal + LRO:
+
+```python
+def solution5_reverse_hebrew_plus_lro(text):
+    LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+    PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+    def reverse_hebrew_in_match(match):
+        hebrew_text = match.group(1)
+        reversed_hebrew = hebrew_text[::-1]  # Simple character reversal
+        return f'{LRO}({reversed_hebrew}){PDF}'
+
+    hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+    return re.sub(hebrew_paren_pattern, reverse_hebrew_in_match, text)
+```
+
+**Result**: ❌ Almost worked but vowel points (nikud) appeared shifted left with dotted circles (◌)
+
+**Root Cause Identified**: Character-level reversal separated combining characters (nikud) from their base letters. Hebrew text like `שִׁ` is actually 3 characters:
+- ש (base letter shin)
+- ִ (hiriq vowel - combining character U+05B4)
+- ׁ (shin dot - combining character U+05C1)
+
+When reversed character-by-character, these become detached.
+
+### 4. Solution 6 - Grapheme Cluster Reversal + LRO (WINNING SOLUTION ✅)
+
+Created `test_bidi_solution6.py` implementing grapheme cluster-aware reversal:
+
+```python
+def split_into_grapheme_clusters(text):
+    """Split Hebrew into grapheme clusters (base letter + combining marks)."""
+    # Pattern: base character followed by zero or more combining marks
+    cluster_pattern = r'[\u05D0-\u05EA\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
+    clusters = re.findall(cluster_pattern, text)
+    return clusters
+
+def reverse_hebrew_by_clusters(hebrew_text):
+    """Reverse Hebrew text by grapheme clusters, keeping nikud attached."""
+    clusters = split_into_grapheme_clusters(hebrew_text)
+    reversed_clusters = clusters[::-1]
+    return ''.join(reversed_clusters)
+
+def solution6_cluster_reverse_plus_lro(text):
+    LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+    PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+    def reverse_hebrew_in_match(match):
+        hebrew_text = match.group(1)
+        reversed_hebrew = reverse_hebrew_by_clusters(hebrew_text)
+        return f'{LRO}({reversed_hebrew}){PDF}'
+
+    hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+    return re.sub(hebrew_paren_pattern, reverse_hebrew_in_match, text)
+```
+
+**How It Works**:
+```
+Original: (וְנַפְשִׁי נִבְהֲלָה מְאֹד)
+Step 1: Split into clusters: [וְ, נַ, פְ, שִׁ, י, ' ', נִ, בְ, הֲ, לָ, ה, ' ', מְ, אֹ, ד]
+Step 2: Reverse order: [ד, אֹ, מְ, ' ', ה, לָ, הֲ, בְ, נִ, ' ', י, שִׁ, פְ, נַ, וְ]
+Step 3: Join: דאֹמְ הלָהֲבְנִ ישִׁפְנַוְ
+Step 4: Wrap with LRO+PDF: ‭(דאֹמְ הלָהֲבְנִ ישִׁפְנַוְ)‬
+Result: Word's LTR display of reversed text = correct RTL visual appearance!
+```
+
+**Why This Works**:
+- LRO (LEFT-TO-RIGHT OVERRIDE) forces Word to display content as LTR
+- Pre-reversing the Hebrew cancels out the forced LTR direction
+- Grapheme cluster splitting prevents nikud from detaching (no dotted circles)
+- Parentheses remain in correct positions within the LTR context
+
+**Test Result**: ✅ **Perfect rendering** in isolated test document!
+
+### 5. Integration into Document Generator (COMPLETE ✅)
+
+Added three components to `src/utils/document_generator.py`:
+
+**A. Helper Methods (Lines 70-108)**:
+```python
+@staticmethod
+def _split_into_grapheme_clusters(text: str) -> List[str]:
+    """
+    Split Hebrew text into grapheme clusters (base character + combining marks).
+    This preserves nikud (vowel points) attached to their base letters.
+    """
+    # Pattern: Hebrew letter followed by zero or more combining marks
+    cluster_pattern = r'[\u05D0-\u05EA\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
+    clusters = re.findall(cluster_pattern, text)
+    return clusters
+
+@staticmethod
+def _reverse_hebrew_by_clusters(hebrew_text: str) -> str:
+    """
+    Reverse Hebrew text by grapheme clusters to fix bidirectional rendering.
+    Used in combination with LRO (Left-to-Right Override) to force correct display.
+    """
+    clusters = DocumentGenerator._split_into_grapheme_clusters(hebrew_text)
+    reversed_clusters = clusters[::-1]
+    return ''.join(reversed_clusters)
+```
+
+**B. Applied in _process_markdown_formatting() (Lines 278-300)**:
+```python
+else:
+    # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
+    hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+
+    if re.search(hebrew_paren_pattern, part):
+        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+        def reverse_hebrew_match(match):
+            hebrew_text = match.group(1)
+            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+            return f'{LRO}({reversed_hebrew}){PDF}'
+
+        modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_match, part)
+        run = paragraph.add_run(modified_part)
+    else:
+        run = paragraph.add_run(part)
+```
+
+**C. Applied in _add_paragraph_with_soft_breaks() (Lines 328-348)**: Same transformation for soft-break paragraphs
+
+### 6. Critical Regex Bug Discovery and Fix (COMPLETE ✅)
+
+**Problem**: Solution 6 worked perfectly in isolated tests but failed in production document.
+
+**Investigation**:
+- Created `test_transform_debug.py` - confirmed transformation logic works
+- Created `test_minimal_doc.py` - confirmed rendering works in minimal document
+- Added debug logging to document_generator.py
+- Discovered text was being split into **2187 parts** from 546 characters
+
+**Root Cause**: The markdown splitting pattern had a bug:
+```python
+# BEFORE (line 288):
+r'(\*\*|__.*?__|\\*.*?\\*|_.*?_|`.*?`)'
+#                ^^^^^^^^^^
+#                This matches "zero or more backslashes followed by anything"
+#                which matches at EVERY position in the text!
+
+# AFTER:
+r'(\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)'
+#                ^^^^^^^^^
+#                Now correctly matches italic markdown *text*
+```
+
+Created `test_regex_split.py` to isolate the bug:
+- Original pattern: 563 parts from 140 chars
+- Fixed pattern: Normal split on markdown delimiters
+
+**Fix Applied**: Changed `\\*.*?\\*` to `\*.*?\*` in document_generator.py line 288
+
+This regex was intended to match italic markdown `*text*` but the double backslash was escaping the asterisk in the string, making the pattern match "backslash-zero-or-more-times" which matches at every position.
+
+### 7. Production Testing and Validation (COMPLETE ✅)
+
+**Test Process**:
+1. Applied both fixes (grapheme cluster transformation + regex fix)
+2. Regenerated `output/psalm_6/psalm_006_commentary.docx`
+3. User opened document in Word and validated
+4. Created multiple test documents throughout debugging process
+
+**Test Documents Created**:
+- `test_bidi_solutions.py` → 5 test documents
+- `test_bidi_solution5.py` → solution5_test.docx (dotted circles issue)
+- `test_bidi_solution6.py` → solution6_test.docx (perfect in isolation)
+- `test_minimal_doc.py` → minimal_test_debug.docx (proved logic works)
+- `output/bidi_tests/` directory with all test documents
+
+**Final Result**: ✅ User confirmed: "it works!!!" - All Hebrew text renders correctly in parentheses!
+
+## Files Modified
+
+### `src/utils/document_generator.py` (PRIMARY FIX)
+
+**Lines 70-108**: Added grapheme cluster helper methods
+- `_split_into_grapheme_clusters()`: Splits Hebrew into base letter + nikud units
+- `_reverse_hebrew_by_clusters()`: Reverses cluster order while keeping each intact
+
+**Line 288**: Fixed regex pattern bug
+- Changed `\\*.*?\\*` to `\*.*?\*`
+- Prevents text fragmentation into thousands of parts
+
+**Lines 278-300**: Applied transformation in `_process_markdown_formatting()`
+- Detects parenthesized Hebrew with regex pattern
+- Applies grapheme cluster reversal
+- Wraps with LRO/PDF control characters
+
+**Lines 328-348**: Applied transformation in `_add_paragraph_with_soft_breaks()`
+- Same transformation for paragraphs with soft breaks (line breaks within paragraph)
+
+### Test Files Created
+
+**`test_bidi_solutions.py`** (NEW):
+- Systematic testing framework for 5 different bidi solutions
+- Creates 5 test documents for rapid comparison
+- Includes sample problematic text from Psalm 6
+
+**`test_bidi_solution5.py`** (NEW):
+- Character-level reversal + LRO approach
+- Revealed nikud detachment issue
+
+**`test_bidi_solution6.py`** (NEW):
+- Grapheme cluster reversal + LRO approach
+- Winning solution implementation
+
+**`test_transform_debug.py`** (NEW):
+- Verified transformation logic works correctly
+- Tested grapheme cluster splitting and reversal
+
+**`test_minimal_doc.py`** (NEW):
+- Minimal test case to isolate rendering issue
+- Proved transformation works when text isn't fragmented
+
+**`test_regex_split.py`** (NEW):
+- Isolated and identified regex fragmentation bug
+- Showed pattern matching at every position
+
+### Output Documents
+
+**`output/psalm_6/psalm_006_commentary.docx`** (REGENERATED):
+- Final production document with fix
+- User confirmed all Hebrew renders correctly
+
+**`output/bidi_tests/`** (NEW DIRECTORY):
+- Contains all test documents from debugging process
+- 6+ test documents for validation and reference
+
+## Technical Analysis
+
+### Root Cause #1: Unicode Bidirectional Algorithm
+
+**Problem**: Word's Unicode Bidirectional Algorithm reorders text runs in ways python-docx cannot control:
+- Parentheses are "neutral" characters that get reordered based on surrounding text
+- Hebrew text (RTL) and English text (LTR) create conflicting directional contexts
+- Word reorders runs at render time, causing duplication and splitting
+
+**Solution**: Force LTR display with pre-reversed Hebrew:
+- LRO (U+202D) forces Word to treat content as LTR
+- Pre-reversing Hebrew character order makes reversed LTR display appear as correct RTL
+- Grapheme clusters preserve nikud attachment during reversal
+
+### Root Cause #2: Regex Fragmentation Bug
+
+**Problem**: Pattern `\\*.*?\\*` in markdown splitting regex:
+- Double backslash escapes the asterisk in the Python string
+- Creates pattern that matches "zero or more backslashes"
+- Matches at EVERY position in text (empty string matches)
+- Fragments 546 chars into 2187 parts
+
+**Solution**: Changed to `\*.*?\*`:
+- Single backslash correctly escapes regex metacharacter
+- Matches markdown italic delimiters `*text*`
+- Normal text splitting behavior restored
+
+### Why Grapheme Clusters Are Critical
+
+Hebrew text combines multiple Unicode code points:
+- **Base letter**: ש (U+05E9 SHIN)
+- **Vowel point**: ִ (U+05B4 HIRIQ)
+- **Consonant point**: ׁ (U+05C1 SHIN DOT)
+
+These form a single **grapheme cluster**: `שִׁ`
+
+**Character-level reversal** (`[::-1]`):
+```
+Original: שִׁי → [ש, ִ, ׁ, י]
+Reversed: [י, ׁ, ִ, ש]
+Result: יִׁש (nikud detached, dotted circles appear)
+```
+
+**Cluster-level reversal**:
+```
+Original: שִׁי → [שִׁ, י]
+Reversed: [י, שִׁ]
+Result: ישִׁ (nikud stays attached, correct rendering)
+```
+
+### Unicode Control Characters Used
+
+**LRO (U+202D)** - LEFT-TO-RIGHT OVERRIDE:
+- Strongest LTR directional control
+- Forces all following text to display LTR until PDF
+- Overrides inherent character directionality
+
+**PDF (U+202C)** - POP DIRECTIONAL FORMATTING:
+- Ends the LRO override
+- Returns to normal bidirectional algorithm
+
+**Why LRO succeeds where others failed**:
+- Stronger than RLE (Right-to-Left Embedding U+202B)
+- Stronger than LRI/PDI (Isolate characters U+2066/U+2069)
+- Stronger than LRM/RLM (Mark characters U+200E/U+200F)
+- OVERRIDE vs EMBED: Override ignores inherent directionality, embedding respects it
+
+## Testing Methodology
+
+### Phase 1: Systematic Solution Testing
+1. Generated 10+ creative solutions using Opus
+2. Implemented 5 most promising in parallel
+3. User tested visually in Word
+4. Identified Solution 3 (LRO) as closest
+
+### Phase 2: Iterative Refinement
+1. Developed Solution 5 (reversed + LRO)
+2. User identified dotted circles issue
+3. Root cause analysis: combining character detachment
+4. Developed Solution 6 (cluster reversal + LRO)
+5. User confirmed perfect rendering in test
+
+### Phase 3: Integration Debugging
+1. Integrated Solution 6 into pipeline
+2. User reported issue persists in production
+3. Created isolated test cases to bisect problem
+4. Added debug logging to discover fragmentation
+5. Created regex test to identify bug
+6. Fixed regex and validated
+
+### Phase 4: Production Validation
+1. Regenerated Psalm 6 document
+2. User confirmed working: "it works!!!"
+3. All Hebrew in parentheses renders correctly
+
+## Known Limitations
+
+**None remaining!** Both issues fully resolved:
+1. ✅ Bidirectional algorithm issue solved with grapheme cluster reversal + LRO
+2. ✅ Regex fragmentation bug fixed
+
+## Session Statistics
+
+- **Duration**: ~2.5 hours across multiple debugging cycles
+- **Solutions Proposed**: 10+ creative approaches
+- **Solutions Tested**: 7 different implementations
+- **Root Causes Identified**: 2 (bidi algorithm + regex bug)
+- **Test Scripts Created**: 6 debugging scripts
+- **Test Documents Generated**: 10+ for validation
+- **Bug Status**: ✅ **RESOLVED**
+- **Impact**: ~5-10 instances per document now render perfectly
+
+## Key Insights
+
+1. **User's intuition was critical**: Identifying Solution 3 (text backwards in parentheses) as "almost there" led directly to the winning solution
+
+2. **Grapheme clusters are essential**: Cannot reverse Hebrew at character level without breaking nikud
+
+3. **LRO is the strongest tool**: Override beats embedding, isolation, and marks for forcing directionality
+
+4. **Test in isolation first**: Solution 6 worked perfectly in minimal tests, proving the logic before discovering the separate regex bug
+
+5. **Debug logging reveals hidden bugs**: Without logging the split count, would never have discovered the regex fragmentation
+
+6. **Multiple bugs can compound**: Both the bidi issue AND the regex bug had to be fixed for the solution to work
+
+## Cleanup Tasks for Future Sessions
+
+- **Test files**: Can archive or delete test_bidi_solution*.py, test_transform_debug.py, test_minimal_doc.py, test_regex_split.py
+- **Test documents**: Can archive output/bidi_tests/ directory
+- **Temporary files**: Multiple ~$.docx files in output/psalm_6/
+
+## Recommendation for Next Session
+
+**Option A - Generate Additional Psalms (RECOMMENDED)**:
+- Test the fix across different psalm genres:
+  - Psalm 23 (shepherd psalm - pastoral)
+  - Psalm 51 (penitential - confessional)
+  - Psalm 19 (creation/torah - wisdom)
+- Validate formatting works consistently
+- Verify bidirectional text renders correctly across different content types
+
+**Option B - Continue Hirsch OCR Work**:
+- Build Hirsch commentary parser (parse_hirsch_commentary.py)
+- Extract verse-by-verse commentary from OCR text
+- Create data/hirsch_on_psalms.json
+- Test integration with HirschLibrarian
+
+**Option C - Project Cleanup**:
+- Remove test scripts created during debugging
+- Archive test documents
+- Update user documentation
+- Add unit tests for grapheme cluster reversal
+
+---
+
 # Session 79 - Commentator Bios Integration (2025-11-09)
 
 **Goal**: Integrate scholarly biographies for all commentators into research bundles.
