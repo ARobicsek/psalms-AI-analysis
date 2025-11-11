@@ -67,6 +67,46 @@ class DocumentGenerator:
         self._set_default_styles()
         self.modifier = DivineNamesModifier()
 
+    @staticmethod
+    def _split_into_grapheme_clusters(text: str) -> List[str]:
+        """
+        Split Hebrew text into grapheme clusters (base letter + combining marks).
+
+        A grapheme cluster consists of:
+        - A base character (Hebrew letter or space)
+        - Followed by zero or more combining characters (nikud, cantillation, shin/sin dot, etc.)
+
+        Combining character ranges:
+        - U+0591-U+05BD: Cantillation marks
+        - U+05BF: Rafe
+        - U+05C1-U+05C2: Shin/Sin dots
+        - U+05C4-U+05C7: Other marks
+        - U+05B0-U+05BD: Vowel points (nikud)
+        """
+        # Pattern: base character followed by any combining marks
+        # Base: Hebrew letter (U+05D0-U+05EA) or space
+        # Combining: U+0591-U+05BD, U+05BF, U+05C1-U+05C2, U+05C4-U+05C7
+        cluster_pattern = r'[\u05D0-\u05EA\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
+        clusters = re.findall(cluster_pattern, text)
+        return clusters
+
+    @staticmethod
+    def _reverse_hebrew_by_clusters(hebrew_text: str) -> str:
+        """
+        Reverse Hebrew text by grapheme clusters (keeping letter+nikud together).
+
+        Example:
+        - Input: "שִׁלוֹם" (shalom) = [שִׁ, ל, וֹ, ם]
+        - Output: "םוֹלשִׁ" (reversed clusters)
+
+        This prevents combining marks (nikud) from detaching from their base letters,
+        which would cause dotted circle placeholders to appear.
+        """
+        clusters = DocumentGenerator._split_into_grapheme_clusters(hebrew_text)
+        # Reverse the order of clusters (but keep each cluster intact)
+        reversed_clusters = clusters[::-1]
+        return ''.join(reversed_clusters)
+
     def _set_default_styles(self):
         """Set default font for the document."""
         # Set default font
@@ -104,6 +144,23 @@ class DocumentGenerator:
             section.bottom_margin = Pt(72)
             section.left_margin = Pt(72)
             section.right_margin = Pt(72)
+
+    def _set_paragraph_ltr(self, paragraph):
+        """
+        Explicitly set paragraph direction to LTR at the XML level.
+        This prevents Word's bidi algorithm from reordering runs when there's mixed Hebrew/English.
+        """
+        pPr = paragraph._element.get_or_add_pPr()
+
+        # Set bidi to 0 (LTR) - if the element exists and is 1, it means RTL
+        bidi_elem = pPr.find(ns.qn('w:bidi'))
+        if bidi_elem is not None:
+            pPr.remove(bidi_elem)
+        # Not setting w:bidi or setting it to 0 means LTR
+        # We'll explicitly set it to 0 for clarity
+        bidi_elem = OxmlElement('w:bidi')
+        bidi_elem.set(ns.qn('w:val'), '0')
+        pPr.append(bidi_elem)
 
     def _set_run_font_xml(self, run, font_name='Aptos', font_size=12):
         """
@@ -166,6 +223,9 @@ class DocumentGenerator:
         if is_bullet:
             p.style = 'List Bullet'
 
+        # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
+        self._set_paragraph_ltr(p)
+
         # Use the centralized formatting method with font setting for bullets
         self._process_markdown_formatting(p, modified_text, set_font=is_bullet)
 
@@ -197,6 +257,8 @@ class DocumentGenerator:
                 # Add each bullet as a separate paragraph with List Bullet style
                 for bullet_text in bullet_block:
                     p = self.document.add_paragraph(style='List Bullet')
+                    # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
+                    self._set_paragraph_ltr(p)
                     # Process markdown formatting in bullet text with explicit font
                     self._process_markdown_formatting(p, bullet_text, set_font=True)
             else:
@@ -221,7 +283,9 @@ class DocumentGenerator:
             set_font: If True, explicitly set Aptos 12pt font on all runs (for bullet lists)
         """
         modified_text = self.modifier.modify_text(text)
-        parts = re.split(r'(\$\$|__.*?__|\\*.*?\\*|_.*?_|`.*?`)', modified_text)
+        # FIX: Changed \\* to \* - the double backslash was matching zero-or-more backslashes,
+        # creating thousands of empty parts. Single backslash correctly matches markdown *italic*.
+        parts = re.split(r'(\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
 
         for part in parts:
             if part.startswith('**') and part.endswith('**'):
@@ -253,31 +317,37 @@ class DocumentGenerator:
                 self._add_nested_formatting(paragraph, inner_content, base_italic=True)
                 # Note: nested formatting handles its own font settings
             else:
-                # Handle parenthesized Hebrew
-                sub_parts = re.split(r'([\\(][\\u0590-\\u05FF\\u05B0-\\u05BD\\u05BF\\u05C1-\\u05C2\\u05C4-\\u05C7\\s]+[\\)])', part)
-                for sub_part in sub_parts:
-                    if sub_part and sub_part.startswith('(') and sub_part.endswith(')'):
-                        run_open = paragraph.add_run('(')
-                        if set_font:
-                            run_open.font.name = 'Aptos'
-                            run_open.font.size = Pt(12)
-                        hebrew_run = paragraph.add_run(sub_part[1:-1])
-                        hebrew_run.font.rtl = True
-                        self._set_run_font_xml(hebrew_run, font_name='Aptos', font_size=12)
-                        run_close = paragraph.add_run(')')
-                        if set_font:
-                            run_close.font.name = 'Aptos'
-                            run_close.font.size = Pt(12)
-                    elif sub_part:
-                        run = paragraph.add_run(sub_part)
-                        if set_font:
-                            run.font.name = 'Aptos'
-                            run.font.size = Pt(12)
+                # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
+                # Solution: Reverse Hebrew by clusters, then apply LEFT-TO-RIGHT OVERRIDE
+                # This keeps text inside parentheses with correct RTL appearance
+                hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+                if re.search(hebrew_paren_pattern, part):
+                    LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                    PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+                    def reverse_hebrew_match(match):
+                        hebrew_text = match.group(1)
+                        # Reverse by grapheme clusters (keeps nikud attached)
+                        reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                        # Wrap with LRO to force LTR display
+                        return f'{LRO}({reversed_hebrew}){PDF}'
+
+                    modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_match, part)
+                    run = paragraph.add_run(modified_part)
+                else:
+                    run = paragraph.add_run(part)
+
+                if set_font:
+                    run.font.name = 'Aptos'
+                    run.font.size = Pt(12)
 
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
         modified_text = self.modifier.modify_text(text)
         p = self.document.add_paragraph(style=style)
+
+        # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
+        self._set_paragraph_ltr(p)
 
         # Split the entire text by markdown markers first
         parts = re.split(r'(\$\$|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
@@ -300,28 +370,25 @@ class DocumentGenerator:
                 lines = content.split('\n')
                 for i, line in enumerate(lines):
                     if line:
-                        # Bidi fix: handle parenthesized Hebrew
-                        sub_parts = re.split(r'([\(][\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+[\)])', line)
-                        for sub_part in sub_parts:
-                            if sub_part and sub_part.startswith('(') and sub_part.endswith(')'):
-                                run_open = p.add_run('(')
-                                run_open.bold = is_bold
-                                run_open.italic = is_italic
+                        # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
+                        hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+                        if re.search(hebrew_paren_pattern, line):
+                            LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                            PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
 
-                                hebrew_run = p.add_run(sub_part[1:-1])
-                                hebrew_run.font.rtl = True
-                                # Set font at XML level for reliable rendering
-                                self._set_run_font_xml(hebrew_run, font_name='Aptos', font_size=12)
-                                hebrew_run.bold = is_bold
-                                hebrew_run.italic = is_italic
+                            def reverse_hebrew_match(match):
+                                hebrew_text = match.group(1)
+                                # Reverse by grapheme clusters (keeps nikud attached)
+                                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                                # Wrap with LRO to force LTR display
+                                return f'{LRO}({reversed_hebrew}){PDF}'
 
-                                run_close = p.add_run(')')
-                                run_close.bold = is_bold
-                                run_close.italic = is_italic
-                            elif sub_part:
-                                run = p.add_run(sub_part)
-                                run.bold = is_bold
-                                run.italic = is_italic
+                            modified_line = re.sub(hebrew_paren_pattern, reverse_hebrew_match, line)
+                            run = p.add_run(modified_line)
+                        else:
+                            run = p.add_run(line)
+                        run.bold = is_bold
+                        run.italic = is_italic
                     if i < len(lines) - 1:
                         p.add_run().add_break()
 
