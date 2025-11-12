@@ -1,0 +1,31 @@
+================================================================================
+CONCORDANCE TABLE INVESTIGATION
+================================================================================
+
+### Concordance table schema:
+  concordance_id (INTEGER)
+  word (TEXT)
+  word_consonantal (TEXT)
+  word_voweled (TEXT)
+  book_name (TEXT)
+  chapter (INTEGER)
+  verse (INTEGER)
+  position (INTEGER)
+  created_at (TIMESTAMP)
+
+### Row count:
+  269844 rows
+
+### Entries for Psalm 3:8:
+Traceback (most recent call last):
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\test_concordance_table.py", line 29, in <module>
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+        SELECT *
+        ^^^^^^^^
+    ...<3 lines>...
+        LIMIT 20
+        ^^^^^^^^
+    """)
+    ^^^^
+sqlite3.OperationalError: no such column: book

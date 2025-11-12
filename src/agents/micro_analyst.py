@@ -220,13 +220,18 @@ GENERATE RESEARCH REQUESTS:
    - **IMPORTANT**: Use the actual Hebrew forms from the text, including verb conjugations and suffixes
      - Good: "מה רבו" (as it appears in the text)
      - Bad: "מה רב" (oversimplified, will miss matches)
-   - **PROVIDE ALTERNATES**: If you see different forms in the text, list them in "alternates" field
-     - Example: If you see both "מה־רבו" (maqqef-connected) and want to catch other forms
-     - Alternates: ["מה רבו", "מהרבו"] (provide separated and combined forms)
-     - For verb patterns, suggest different binyanim if relevant: ["ברח", "יברח", "בורח"]
-     - Suggest other plausible variants, such as pluralization. Example: "מה רבו" would benefit from a search for "מה רבים" as well
+   - **ALWAYS ALSO PROVIDE ALTERNATES**: For EVERY concordance search, offer your BEST GUESS of PLAUSIBLE alternate morphological and grammatical forms of the same word/phrase in the "alternates" field
+     - **This is NOT optional** - always think about what variant linguistic forms of the same word/phrase might be relevant
+     - For maqqef-connected words: provide both separated and combined forms
+       * Example: "מה־רבו" → alternates: ["מה רבו", "מהרבו"]
+     - For verbs: suggest different conjugations and binyanim
+       * Example: "ברח" (he fled) → alternates: ["יברח", "בורח", "ברחו"]
+     - For nouns: consider singular/plural, different states
+       * Example: "מה רבו" → alternate: ["מה רבים"]
+     - **DO NOT suggest variants that are SYNONYMS but not morphological variants UNLESS you are pursuing a very specific hypothesis (e.g. wanting to contrast how THIS word is used to how a SYNONYM is used)**
      - The system will automatically generate prefix/suffix variations of all forms
-   - The search system automatically generates variations with prefixes/suffixes, but alternates help catch different roots
+     - Even if you only have one alternate, include it - this dramatically improves search coverage
+   - The search system automatically generates some variations with prefixes/suffixes, but alternates help catch additional morphological and grammatical forms
    - VALID LEVELS: "consonantal" (all root forms), "voweled" (distinguish homographs), "exact" (specific vocalization)
    - **DEFAULT TO "consonantal"** - Only use "exact" if specifically concerned about homographs (same consonants, different vocalizations)
    - "consonantal" finds all forms of a root pattern regardless of vocalization
@@ -258,14 +263,17 @@ GENERATE RESEARCH REQUESTS:
 
 OUTPUT FORMAT: Return ONLY valid JSON:
 
+**CRITICAL**: Every concordance_searches entry MUST include an "alternates" field (array of strings). Even if you can't think of good morphological/grammatical alternates for a particular query, include an empty array []. Do NOT omit this field.
+
 {{
   "bdb_requests": [
     {{"word": "קוֹל", "reason": "Central to sevenfold anaphora - need semantic range and theological uses"}},
     {{"word": "בְּנֵי אֵלִים", "reason": "Divine council puzzle - etymology and comparative ANE usage"}}
   ],
   "concordance_searches": [
-    {{"query": "קול יהוה", "level": "consonantal", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns", "alternates": ["קול אלהים"]}},
-    {{"query": "בני אלים", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible", "alternates": ["בני אל", "בני אלהים"]}}
+    {{"query": "ליהוה הישועה", "level": "consonantal", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns", "alternates": ["תשועה ליהוה", "ישועה מיהוה", "ישועת יהוה"]}},
+    {{"query": "מרים ראש", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible", "alternates": ["רום ראש", "ירים ראשי"]}},
+    {{"query": "unique phrase", "level": "consonantal", "scope": "Tanakh", "purpose": "Example with no obvious alternates", "alternates": []}}
   ],
   "figurative_checks": [
     {{"verse": 3, "reason": "Waters as primordial chaos imagery - vivid and theologically rich", "vehicle": "waters", "vehicle_synonyms": ["water", "sea", "seas", "deep", "depths", "flood", "floods", "ocean", "oceans"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch"}},
@@ -322,7 +330,7 @@ class MicroAnalystV2:
             raise ValueError(f"Invalid commentary_mode: {commentary_mode}. Must be 'all' or 'selective'")
 
         self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = "claude-sonnet-4-20250514"  # Sonnet 4.5
+        self.model = "claude-sonnet-4-5"  # Sonnet 4.5
         self.rag_manager = RAGManager(docs_dir)
         self.db = TanakhDatabase(Path(db_path))
         self.research_assembler = ResearchAssembler()
@@ -569,7 +577,7 @@ class MicroAnalystV2:
 
                 # Convert to ResearchRequest via ScholarResearchRequest
                 scholar_request = ScholarResearchRequest.from_dict(data)
-                request_dict = scholar_request.to_research_request(psalm_number)
+                request_dict = scholar_request.to_research_request(psalm_number, logger=self.logger)
                 research_request = ResearchRequest.from_dict(request_dict)
 
                 self.logger.info(f"  ✓ Research requests generated")

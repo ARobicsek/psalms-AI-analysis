@@ -1,0 +1,27 @@
+================================================================================
+CONCORDANCE TABLE INVESTIGATION
+================================================================================
+
+### Concordance table schema:
+  concordance_id (INTEGER)
+  word (TEXT)
+  word_consonantal (TEXT)
+  word_voweled (TEXT)
+  book_name (TEXT)
+  chapter (INTEGER)
+  verse (INTEGER)
+  position (INTEGER)
+  created_at (TIMESTAMP)
+
+### Row count:
+  269844 rows
+
+### Entries for Psalm 3:8:
+Traceback (most recent call last):
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\test_concordance_table.py", line 39, in <module>
+    print(f"  Pos {pos}: '{word}' (cons: '{cons}')")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 10-17: character maps to <undefined>

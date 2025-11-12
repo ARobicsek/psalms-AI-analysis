@@ -232,19 +232,26 @@ class ScholarResearchRequest:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'ScholarResearchRequest':
         """Create from dictionary/JSON."""
+        # Post-processing: ensure alternates field is always present
+        concordance_searches = data.get('concordance_searches', [])
+        for req in concordance_searches:
+            if 'alternates' not in req and 'alternate_queries' not in req:
+                req['alternates'] = []  # Guarantee field presence even if LLM didn't provide it
+
         return cls(
             bdb_requests=data.get('bdb_requests', []),
-            concordance_searches=data.get('concordance_searches', []),
+            concordance_searches=concordance_searches,
             figurative_checks=data.get('figurative_checks', []),
             commentary_requests=data.get('commentary_requests', [])
         )
 
-    def to_research_request(self, psalm_chapter: int) -> Dict[str, Any]:
+    def to_research_request(self, psalm_chapter: int, logger=None) -> Dict[str, Any]:
         """
         Convert to ResearchRequest format for Research Assembler.
 
         Args:
             psalm_chapter: Psalm chapter number
+            logger: Optional logger for debug output
 
         Returns:
             Dictionary in ResearchRequest.from_dict() format
@@ -256,15 +263,29 @@ class ScholarResearchRequest:
         ]
 
         # Convert concordance searches
-        concordance_requests = [
-            {
+        concordance_requests = []
+        for idx, req in enumerate(self.concordance_searches):
+            conc_req = {
                 "query": req["query"],
                 "scope": req.get("scope", "auto"),
                 "level": req.get("level", "consonantal"),
                 "notes": req.get("purpose", "")
             }
-            for req in self.concordance_searches
-        ]
+            # Add alternates if present (support both field names)
+            alternates = req.get("alternates") or req.get("alternate_queries")
+
+            # DEBUG: Log what we're seeing
+            if logger:
+                logger.debug(f"Concordance request {idx+1}: query='{req['query']}'")
+                logger.debug(f"  Has 'alternates' key: {'alternates' in req}")
+                logger.debug(f"  Has 'alternate_queries' key: {'alternate_queries' in req}")
+                if alternates:
+                    logger.info(f"  ✓ Alternates found for '{req['query']}': {alternates}")
+                    conc_req["alternates"] = alternates
+                else:
+                    logger.warning(f"  ✗ NO ALTERNATES PROVIDED BY LLM for '{req['query']}'")
+
+            concordance_requests.append(conc_req)
 
         # Convert figurative checks
         figurative_requests = []
@@ -434,11 +455,26 @@ class ScholarResearcher:
             )
 
             # Parse JSON
+            response_text = response_text.strip()
+
+            # Strip markdown code fences if present
+            if response_text.startswith("```json"):
+                self.logger.info("Removing markdown json code fence from response")
+                response_text = response_text[7:]  # Remove ```json
+            elif response_text.startswith("```"):
+                self.logger.info("Removing markdown code fence from response")
+                response_text = response_text[3:]  # Remove ```
+
+            if response_text.endswith("```"):
+                response_text = response_text[:-3]  # Remove trailing ```
+
+            response_text = response_text.strip()
+
             try:
                 data = json.loads(response_text)
             except json.JSONDecodeError as e:
                 self.logger.error(f"Failed to parse JSON response: {e}")
-                self.logger.error(f"Response text: {response_text}")
+                self.logger.error(f"Response text (first 1000 chars): {response_text[:1000]}...")
                 raise ValueError(f"Invalid JSON from Scholar-Researcher: {e}")
 
             # Create request object
@@ -477,7 +513,7 @@ class ScholarResearcher:
         scholar_request = self.generate_research_request(psalm_number, macro_overview)
 
         # Convert to ResearchRequest format
-        request_dict = scholar_request.to_research_request(psalm_number)
+        request_dict = scholar_request.to_research_request(psalm_number, logger=self.logger)
 
         # Assemble research bundle
         assembler = ResearchAssembler()

@@ -1,0 +1,156 @@
+{
+  "issue_1_quotation_marks": {
+    "status": "NOT AN ISSUE",
+    "explanation": "Python displays strings with apostrophes using double quotes. This is normal Python behavior."
+  },
+  "issue_2_hakita_et": {
+    "query": "hakita et (you struck)",
+    "expected": "Common expression, many results",
+    "actual": "2 results",
+    "psalm_3_8_words": [
+      {
+        "position": 0,
+        "word": "ק֘וּמָ֤ה",
+        "consonantal": "קומה"
+      },
+      {
+        "position": 1,
+        "word": "יְהֹוָ֨ה",
+        "consonantal": "יהוה"
+      },
+      {
+        "position": 2,
+        "word": "׀",
+        "consonantal": ""
+      },
+      {
+        "position": 3,
+        "word": "הוֹשִׁ֘יעֵ֤נִי",
+        "consonantal": "הושיעני"
+      },
+      {
+        "position": 4,
+        "word": "אֱלֹהַ֗י",
+        "consonantal": "אלהי"
+      },
+      {
+        "position": 5,
+        "word": "כִּֽי־הִכִּ֣יתָ",
+        "consonantal": "כיהכית"
+      },
+      {
+        "position": 6,
+        "word": "אֶת־כׇּל־אֹיְבַ֣י",
+        "consonantal": "אתכלאיבי"
+      },
+      {
+        "position": 7,
+        "word": "לֶ֑חִי",
+        "consonantal": "לחי"
+      },
+      {
+        "position": 8,
+        "word": "שִׁנֵּ֖י",
+        "consonantal": "שני"
+      },
+      {
+        "position": 9,
+        "word": "רְשָׁעִ֣ים",
+        "consonantal": "רשעים"
+      },
+      {
+        "position": 10,
+        "word": "שִׁבַּֽרְתָּ׃",
+        "consonantal": "שברת"
+      }
+    ],
+    "diagnosis": {
+      "problem": "Maqqef combining",
+      "details": [
+        "Position 5: 'ki-hikita' (for-you-struck) stored as 'כיהכית'",
+        "Position 6: 'et-kol-oyvai' (all-my-enemies) stored as 'אתכלאיבי'",
+        "'הכית' is embedded in 'כיהכית' (with prefix 'כי')",
+        "'את' is embedded in 'אתכלאיבי' (combined with 'כל' and 'איבי')",
+        "These are not adjacent standalone words"
+      ]
+    },
+    "hakita_in_tanakh": 45
+  },
+  "issue_3_shavar_shen": {
+    "query": "shavar shen (break tooth)",
+    "expected": "At least 1 result (Psalm 3:8)",
+    "actual": "0 results",
+    "psalm_3_8_words": [
+      {
+        "position": 0,
+        "word": "ק֘וּמָ֤ה",
+        "consonantal": "קומה"
+      },
+      {
+        "position": 1,
+        "word": "יְהֹוָ֨ה",
+        "consonantal": "יהוה"
+      },
+      {
+        "position": 2,
+        "word": "׀",
+        "consonantal": ""
+      },
+      {
+        "position": 3,
+        "word": "הוֹשִׁ֘יעֵ֤נִי",
+        "consonantal": "הושיעני"
+      },
+      {
+        "position": 4,
+        "word": "אֱלֹהַ֗י",
+        "consonantal": "אלהי"
+      },
+      {
+        "position": 5,
+        "word": "כִּֽי־הִכִּ֣יתָ",
+        "consonantal": "כיהכית"
+      },
+      {
+        "position": 6,
+        "word": "אֶת־כׇּל־אֹיְבַ֣י",
+        "consonantal": "אתכלאיבי"
+      },
+      {
+        "position": 7,
+        "word": "לֶ֑חִי",
+        "consonantal": "לחי"
+      },
+      {
+        "position": 8,
+        "word": "שִׁנֵּ֖י",
+        "consonantal": "שני"
+      },
+      {
+        "position": 9,
+        "word": "רְשָׁעִ֣ים",
+        "consonantal": "רשעים"
+      },
+      {
+        "position": 10,
+        "word": "שִׁבַּֽרְתָּ׃",
+        "consonantal": "שברת"
+      }
+    ],
+    "diagnosis": {
+      "problem": "Non-adjacent words + morphological differences",
+      "details": [
+        "Position 8: 'shinei' (teeth-of) = 'שני' (construct form, not 'שן')",
+        "Position 9: 'resha'im' (wicked-ones) = 'רשעים' (in between!)",
+        "Position 10: 'shibarta' (you-broke) = 'שברת' (past tense, not 'שבר')",
+        "Query was 'שבר שן' but text has 'שני ... שברת'",
+        "Words are NOT adjacent (רשעים in between)",
+        "Morphological forms differ (שני not שן, שברת not שבר)"
+      ]
+    },
+    "individual_word_counts": {
+      "shavar_variations": 239,
+      "shen_variations": 264
+    }
+  }
+}

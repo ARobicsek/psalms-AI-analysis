@@ -464,7 +464,7 @@ class SynthesisWriter:
             raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
 
         self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = "claude-sonnet-4-20250514"  # Sonnet 4.5
+        self.model = "claude-sonnet-4-5"  # Sonnet 4.5
         self.logger = logger or get_logger("synthesis_writer")
 
         self.logger.info(f"SynthesisWriter initialized with model {self.model}")

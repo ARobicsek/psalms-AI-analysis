@@ -58,7 +58,8 @@ class ConcordanceSearch:
                     word: str,
                     level: str = 'consonantal',
                     scope: str = 'Tanakh',
-                    limit: Optional[int] = None) -> List[SearchResult]:
+                    limit: Optional[int] = None,
+                    use_split: bool = True) -> List[SearchResult]:
         """
         Search for a Hebrew word in the concordance.
 
@@ -67,6 +68,7 @@ class ConcordanceSearch:
             level: Normalization level - 'exact', 'voweled', or 'consonantal'
             scope: Search scope - 'Tanakh', 'Torah', 'Prophets', 'Writings', or book name
             limit: Maximum number of results (None for all)
+            use_split: If True and level='consonantal', use maqqef-split column (default: True)
 
         Returns:
             List of SearchResult objects
@@ -78,15 +80,21 @@ class ConcordanceSearch:
         if not is_hebrew_text(word):
             raise ValueError(f"Input must contain Hebrew text: {word}")
 
-        # Normalize the search word
-        normalized = normalize_for_search(word, level)
+        # Normalize the search word (use split normalization if requested)
+        if use_split and level == 'consonantal':
+            from .hebrew_text_processor import normalize_for_search_split
+            normalized = normalize_for_search_split(word, level)
+        else:
+            normalized = normalize_for_search(word, level)
 
-        # Determine column to search based on level
-        if level == 'exact':
+        # Determine column to search based on level and use_split flag
+        if use_split and level == 'consonantal':
+            column = 'word_consonantal_split'
+        elif level == 'exact':
             column = 'word'
         elif level == 'voweled':
             column = 'word_voweled'
-        else:  # consonantal
+        else:  # consonantal without split
             column = 'word_consonantal'
 
         # Build query
@@ -139,7 +147,8 @@ class ConcordanceSearch:
                       phrase: str,
                       level: str = 'consonantal',
                       scope: str = 'Tanakh',
-                      limit: Optional[int] = None) -> List[SearchResult]:
+                      limit: Optional[int] = None,
+                      use_split: bool = True) -> List[SearchResult]:
         """
         Search for a multi-word Hebrew phrase in the concordance.
 
@@ -148,6 +157,7 @@ class ConcordanceSearch:
             level: Normalization level
             scope: Search scope
             limit: Maximum number of results
+            use_split: If True and level='consonantal', use maqqef-split column (default: True)
 
         Returns:
             List of SearchResult objects where the phrase appears
@@ -159,16 +169,30 @@ class ConcordanceSearch:
         if not is_hebrew_text(phrase):
             raise ValueError(f"Input must contain Hebrew text: {phrase}")
 
-        # Split and normalize phrase words
-        words = split_words(phrase)
+        # Split and normalize phrase words (use split normalization if requested)
+        if use_split and level == 'consonantal':
+            from .hebrew_text_processor import normalize_for_search_split, split_on_maqqef
+            # First split on maqqef, then split into words
+            phrase_split = split_on_maqqef(phrase)
+            words = split_words(phrase_split)
+        else:
+            words = split_words(phrase)
+
         if len(words) < 2:
             # Single word - use word search instead
-            return self.search_word(words[0] if words else phrase, level, scope, limit)
+            return self.search_word(words[0] if words else phrase, level, scope, limit, use_split)
 
-        normalized_words = normalize_word_sequence(words, level)
+        # Normalize each word
+        if use_split and level == 'consonantal':
+            from .hebrew_text_processor import normalize_for_search_split
+            normalized_words = [normalize_for_search_split(w, level) for w in words]
+        else:
+            normalized_words = normalize_word_sequence(words, level)
 
-        # Determine column based on level
-        if level == 'exact':
+        # Determine column based on level and use_split flag
+        if use_split and level == 'consonantal':
+            column = 'word_consonantal_split'
+        elif level == 'exact':
             column = 'word'
         elif level == 'voweled':
             column = 'word_voweled'
@@ -179,7 +203,7 @@ class ConcordanceSearch:
         results = []
 
         # Search for first word
-        first_word_results = self.search_word(words[0], level, scope, limit=None)
+        first_word_results = self.search_word(words[0], level, scope, limit=None, use_split=use_split)
 
         for first_match in first_word_results:
             # Check if this verse contains the full phrase
@@ -322,7 +346,8 @@ class ConcordanceSearch:
                         root: str,
                         level: str = 'consonantal',
                         scope: str = 'Tanakh',
-                        limit: Optional[int] = None) -> List[SearchResult]:
+                        limit: Optional[int] = None,
+                        use_split: bool = True) -> List[SearchResult]:
         """
         Search for words containing a root substring (broader discovery).
 
@@ -336,6 +361,7 @@ class ConcordanceSearch:
             level: Normalization level (typically 'consonantal' for root search)
             scope: Search scope
             limit: Maximum number of results
+            use_split: If True and level='consonantal', use maqqef-split column (default: True)
 
         Returns:
             List of SearchResult objects
@@ -347,11 +373,17 @@ class ConcordanceSearch:
         if not is_hebrew_text(root):
             raise ValueError(f"Input must contain Hebrew text: {root}")
 
-        # Normalize the root
-        normalized = normalize_for_search(root, level)
+        # Normalize the root (use split normalization if requested)
+        if use_split and level == 'consonantal':
+            from .hebrew_text_processor import normalize_for_search_split
+            normalized = normalize_for_search_split(root, level)
+        else:
+            normalized = normalize_for_search(root, level)
 
-        # Determine column based on level
-        if level == 'exact':
+        # Determine column based on level and use_split flag
+        if use_split and level == 'consonantal':
+            column = 'word_consonantal_split'
+        elif level == 'exact':
             column = 'word'
         elif level == 'voweled':
             column = 'word_voweled'

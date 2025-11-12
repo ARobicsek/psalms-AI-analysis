@@ -83,6 +83,28 @@ def strip_consonantal(text: str) -> str:
     return strip_vowels(text)
 
 
+def split_on_maqqef(text: str) -> str:
+    """
+    Replace maqqef (־) with space for searchability.
+
+    This allows maqqef-connected morphemes to be found as individual words.
+    Maqqef (U+05BE) traditionally connects words into single prosodic units,
+    but for concordance searching, treating them as separate words improves
+    searchability dramatically.
+
+    Args:
+        text: Hebrew text potentially containing maqqef
+
+    Returns:
+        Text with maqqef replaced by spaces
+
+    Example:
+        >>> split_on_maqqef("כִּֽי־הִכִּ֣יתָ")
+        'כִּֽי הִכִּ֣יתָ'
+    """
+    return text.replace('\u05BE', ' ')
+
+
 def normalize_for_search(text: str, level: str = 'consonantal') -> str:
     """
     Normalize Hebrew text at specified level for concordance searching.
@@ -123,6 +145,30 @@ def normalize_for_search(text: str, level: str = 'consonantal') -> str:
     else:
         raise ValueError(f"Unknown normalization level: {level}. "
                         f"Use 'exact', 'voweled', 'consonantal', or 'lemma'")
+
+
+def normalize_for_search_split(text: str, level: str = 'consonantal') -> str:
+    """
+    Normalize Hebrew text for search with maqqef splitting.
+
+    This variant replaces maqqef with spaces BEFORE normalization,
+    allowing maqqef-connected words to be searchable as separate tokens.
+
+    Args:
+        text: Hebrew text to normalize
+        level: Normalization level
+
+    Returns:
+        Normalized text with maqqefs replaced by spaces
+
+    Example:
+        >>> normalize_for_search_split("כִּֽי־הִכִּ֣יתָ", level='consonantal')
+        'כי הכית'
+    """
+    # First split on maqqef
+    text = split_on_maqqef(text)
+    # Then normalize normally
+    return normalize_for_search(text, level)
 
 
 def split_words(text: str) -> List[str]:

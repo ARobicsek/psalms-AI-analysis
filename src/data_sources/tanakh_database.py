@@ -523,9 +523,13 @@ class TanakhDatabase:
         # Import here to avoid circular dependency
         if __name__ == '__main__':
             sys.path.insert(0, str(Path(__file__).parent.parent))
-            from concordance.hebrew_text_processor import split_words, normalize_for_search
+            from concordance.hebrew_text_processor import (
+                split_words, normalize_for_search, split_on_maqqef, normalize_for_search_split
+            )
         else:
-            from ..concordance.hebrew_text_processor import split_words, normalize_for_search
+            from ..concordance.hebrew_text_processor import (
+                split_words, normalize_for_search, split_on_maqqef, normalize_for_search_split
+            )
 
         cursor = self.conn.cursor()
 
@@ -575,21 +579,27 @@ class TanakhDatabase:
                 if not hebrew_text or not hebrew_text.strip():
                     continue
 
-                # Split into words
-                words = split_words(hebrew_text)
+                # Split on maqqef FIRST, then split into words
+                # This ensures maqqef-connected morphemes become separate concordance entries
+                hebrew_text_split = split_on_maqqef(hebrew_text)
+                words = split_words(hebrew_text_split)
 
                 # Index each word
                 for position, word in enumerate(words):
                     # Normalize at different levels
                     word_consonantal = normalize_for_search(word, 'consonantal')
                     word_voweled = normalize_for_search(word, 'voweled')
+                    # Split column uses same normalization (maqqef already split)
+                    word_consonantal_split = word_consonantal
 
                     # Insert into concordance
                     cursor.execute("""
                         INSERT INTO concordance
-                        (word, word_consonantal, word_voweled, book_name, chapter, verse, position)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """, (word, word_consonantal, word_voweled, book_name, chapter, verse_num, position))
+                        (word, word_consonantal, word_voweled, word_consonantal_split,
+                         book_name, chapter, verse, position)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """, (word, word_consonantal, word_voweled, word_consonantal_split,
+                          book_name, chapter, verse_num, position))
 
                     stats['words_indexed'] += 1
 
@@ -614,6 +624,116 @@ class TanakhDatabase:
 
         if stats['failed_verses']:
             logger.warning(f"  Failed verses: {len(stats['failed_verses'])}")
+
+        return stats
+
+    def add_split_concordance_column(self) -> bool:
+        """
+        Add word_consonantal_split column for maqqef-split searching.
+
+        This column stores consonantal text with maqqef characters replaced
+        by spaces, making maqqef-connected morphemes searchable as separate words.
+
+        Returns:
+            True if column was added, False if it already exists
+        """
+        cursor = self.conn.cursor()
+
+        # Check if column already exists
+        cursor.execute("PRAGMA table_info(concordance)")
+        columns = [row[1] for row in cursor.fetchall()]
+
+        if 'word_consonantal_split' not in columns:
+            logger.info("Adding word_consonantal_split column to concordance table...")
+            cursor.execute("""
+                ALTER TABLE concordance
+                ADD COLUMN word_consonantal_split TEXT
+            """)
+
+            # Create index for the new column
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_concordance_consonantal_split
+                ON concordance(word_consonantal_split)
+            """)
+
+            self.conn.commit()
+            logger.info("Column word_consonantal_split added successfully with index")
+            return True
+        else:
+            logger.info("Column word_consonantal_split already exists")
+            return False
+
+    def populate_split_concordance(self) -> Dict[str, Any]:
+        """
+        Populate word_consonantal_split column with maqqef-split versions.
+
+        Processes all existing concordance entries and generates split versions
+        where maqqef characters are replaced with spaces before normalization.
+
+        Returns:
+            Statistics about the population process
+        """
+        # Import here to avoid circular dependency
+        if __name__ == '__main__':
+            sys.path.insert(0, str(Path(__file__).parent.parent))
+            from concordance.hebrew_text_processor import normalize_for_search_split
+        else:
+            from ..concordance.hebrew_text_processor import normalize_for_search_split
+
+        cursor = self.conn.cursor()
+
+        # Get all concordance entries
+        cursor.execute("SELECT concordance_id, word FROM concordance")
+        entries = cursor.fetchall()
+        total_entries = len(entries)
+
+        logger.info(f"Populating word_consonantal_split for {total_entries} entries...")
+
+        stats = {
+            'entries_processed': 0,
+            'entries_updated': 0,
+            'failed_entries': []
+        }
+
+        batch_size = 1000
+        for i in range(0, total_entries, batch_size):
+            batch = entries[i:i+batch_size]
+
+            for entry in batch:
+                try:
+                    conc_id = entry['concordance_id']
+                    word = entry['word']
+
+                    # Normalize with maqqef splitting
+                    split_consonantal = normalize_for_search_split(word, 'consonantal')
+
+                    cursor.execute("""
+                        UPDATE concordance
+                        SET word_consonantal_split = ?
+                        WHERE concordance_id = ?
+                    """, (split_consonantal, conc_id))
+
+                    stats['entries_updated'] += 1
+
+                except Exception as e:
+                    logger.error(f"Failed to process entry {conc_id}: {e}")
+                    stats['failed_entries'].append(conc_id)
+
+                stats['entries_processed'] += 1
+
+            # Commit after each batch
+            self.conn.commit()
+
+            # Progress update
+            if (i + batch_size) % 10000 == 0 or (i + batch_size) >= total_entries:
+                logger.info(f"Progress: {min(i + batch_size, total_entries)}/{total_entries} entries processed")
+
+        logger.info(f"Split concordance population complete!")
+        logger.info(f"  Entries processed: {stats['entries_processed']}")
+        logger.info(f"  Entries updated: {stats['entries_updated']}")
+
+        if stats['failed_entries']:
+            logger.warning(f"  Failed entries: {len(stats['failed_entries'])}")
 
         return stats
 

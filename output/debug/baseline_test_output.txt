@@ -1,0 +1,111 @@
+INFO:src.data_sources.tanakh_database:Database schema created at C:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+
+Database concordance entries: 269844
+
+================================================================================
+CONCORDANCE BASELINE TEST SUITE
+Running against CURRENT system (before maqqef changes)
+================================================================================
+
+### Test 1: How numerous (opening lament)
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 2: No salvation
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 3: In God
+  Total Results: 0
+  Variations Searched: 81
+  Found in Psalm 3: NO
+
+### Test 4: Shield around
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 5: Lifts head (honor restoration)
+  Total Results: 0
+  Variations Searched: 840
+  Found in Psalm 3: NO
+
+### Test 6: From holy mountain
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 7: I lay down and slept
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 8: Arise, LORD
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 9: You struck (MAQQEF TEST - currently failing)
+Expected Issue: (see test definition)
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 10: Break tooth (NON-ADJACENT TEST - currently failing)
+Expected Issue: (see test definition)
+  Total Results: 0
+  Variations Searched: 672
+  Found in Psalm 3: NO
+
+### Test 11: Your blessing on your people
+  Total Results: 0
+  Variations Searched: 663
+  Found in Psalm 3: NO
+
+### Test 12: Single word: struck (should work even with maqqef)
+  Total Results: 0
+  Variations Searched: 20
+  Found in Psalm 3: NO
+
+### Test 13: Single word: teeth (construct form)
+  Total Results: 0
+  Variations Searched: 20
+  Found in Psalm 3: NO
+
+### Test 14: Single word: you broke
+  Total Results: 0
+  Variations Searched: 20
+  Found in Psalm 3: NO
+
+================================================================================
+BASELINE RESULTS SUMMARY
+================================================================================
+Total Tests: 14
+Tests with Results: 0/14
+Tests Finding Psalm 3: 0/14
+
+### Tests with NO results:
+  - Test 1: How numerous (opening lament)
+  - Test 2: No salvation
+  - Test 3: In God
+  - Test 4: Shield around
+  - Test 5: Lifts head (honor restoration)
+  - Test 6: From holy mountain
+  - Test 7: I lay down and slept
+  - Test 8: Arise, LORD
+  - Test 9: You struck (MAQQEF TEST - currently failing)
+  - Test 10: Break tooth (NON-ADJACENT TEST - currently failing)
+  - Test 11: Your blessing on your people
+  - Test 12: Single word: struck (should work even with maqqef)
+  - Test 13: Single word: teeth (construct form)
+  - Test 14: Single word: you broke
+
+### Tests NOT finding expected Psalm 3:
+
+Baseline results saved to: output\debug\concordance_baseline_results.json
+
+================================================================================
+END BASELINE TEST
+================================================================================
