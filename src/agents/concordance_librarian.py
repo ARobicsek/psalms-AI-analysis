@@ -48,6 +48,7 @@ class ConcordanceRequest:
     notes: Optional[str] = None  # Why this search is being requested
     max_results: int = 50  # Limit results per variation
     auto_scope_threshold: int = 30  # If 'auto' scope: words with >N results get limited scope
+    alternate_queries: Optional[List[str]] = None  # Additional forms to search (e.g., different conjugations)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'ConcordanceRequest':
@@ -59,7 +60,8 @@ class ConcordanceRequest:
             include_variations=data.get('include_variations', True),
             notes=data.get('notes'),
             max_results=data.get('max_results', 50),
-            auto_scope_threshold=data.get('auto_scope_threshold', 30)
+            auto_scope_threshold=data.get('auto_scope_threshold', 30),
+            alternate_queries=data.get('alternate_queries', data.get('alternates'))  # Support both names
         )
 
 
@@ -131,6 +133,19 @@ class ConcordanceLibrarian:
         'מ': 'from'
     }
 
+    # Common Hebrew pronominal suffixes (consonantal form)
+    PRONOMINAL_SUFFIXES = [
+        'י',    # my
+        'ך',    # your (m.s.)
+        'ו',    # his/its
+        'ה',    # her/its
+        'נו',   # our
+        'כם',   # your (m.pl.)
+        'כן',   # your (f.pl.)
+        'הם',   # their (m.)
+        'הן',   # their (f.)
+    ]
+
     def __init__(self, db: Optional[TanakhDatabase] = None):
         """
         Initialize Concordance Librarian.
@@ -189,6 +204,11 @@ class ConcordanceLibrarian:
         """
         Generate variations of a Hebrew phrase with different prefixes.
 
+        Enhanced to handle:
+        - Maqqef-connected words (combined forms like "מהרבו" from "מה רבו")
+        - Pronominal suffixes on final words
+        - Various prefix combinations
+
         Args:
             phrase: Original Hebrew phrase
             level: Normalization level (consonantal, voweled, exact)
@@ -202,6 +222,10 @@ class ConcordanceLibrarian:
         """
         words = split_words(phrase)
         variations = set()
+
+        # Handle empty input
+        if not words:
+            return []
 
         # Always include original
         variations.add(phrase)
@@ -232,6 +256,13 @@ class ConcordanceLibrarian:
                 # With conjunction before preposition (ו + preposition)
                 var_words = [self.CONJUNCTION + prep + words[0]] + words[1:]
                 variations.add(' '.join(var_words))
+
+            # NEW: Generate maqqef-combined versions (words joined as single token)
+            # This handles cases like "מה־רבו" stored as "מהרבו"
+            variations.update(self._generate_maqqef_combined_variations(words, level))
+
+            # NEW: Add pronominal suffix variations to last word
+            variations.update(self._generate_suffix_variations(words, level))
 
         # Normalize all variations at the requested level
         normalized = set()
@@ -269,6 +300,103 @@ class ConcordanceLibrarian:
             variations.add(self.CONJUNCTION + prep + word)
             variations.add(prep + self.DEFINITE_ARTICLE + word)
             variations.add(self.CONJUNCTION + prep + self.DEFINITE_ARTICLE + word)
+
+        return variations
+
+    def _generate_maqqef_combined_variations(self, words: List[str], level: str) -> Set[str]:
+        """
+        Generate variations where words are combined as maqqef-connected single tokens.
+
+        In Hebrew text, words connected by maqqef (hyphen) are often stored as single
+        tokens in the database. For example:
+        - "מה רבו" (two words) may be stored as "מהרבו" (single token)
+        - "מרים ראש" may be stored as "מרימראש"
+
+        Args:
+            words: List of Hebrew words
+            level: Normalization level
+
+        Returns:
+            Set of combined variations as single words
+        """
+        variations = set()
+
+        # For 2-word phrases, generate the combined form
+        if len(words) == 2:
+            # Direct concatenation (how maqqef words appear in DB)
+            combined = words[0] + words[1]
+            variations.add(combined)
+
+            # With common prefixes on first word
+            for prefix in ['ו', 'ה', 'ב', 'כ', 'ל', 'מ', 'וה', 'וב', 'וכ', 'ול', 'ום']:
+                combined_with_prefix = prefix + words[0] + words[1]
+                variations.add(combined_with_prefix)
+
+        # For 3-word phrases, try combining pairs
+        elif len(words) == 3:
+            # First two combined
+            variations.add(words[0] + words[1] + ' ' + words[2])
+            # Last two combined
+            variations.add(words[0] + ' ' + words[1] + words[2])
+            # All three combined (rare but possible)
+            variations.add(words[0] + words[1] + words[2])
+
+        return variations
+
+    def _generate_suffix_variations(self, words: List[str], level: str) -> Set[str]:
+        """
+        Generate variations with pronominal suffixes on the last word.
+
+        Hebrew nouns and verbs often take pronominal suffixes. For example:
+        - "ראש" (head) → "ראשי" (my head)
+        - "מלך" (king) → "מלכו" (his king)
+
+        This also generates combinations with prefixes on the first word,
+        since phrases like "מהר קדשו" (from his holy mountain) are common.
+
+        Args:
+            words: List of Hebrew words
+            level: Normalization level
+
+        Returns:
+            Set of phrase variations with suffixes on last word
+        """
+        variations = set()
+
+        if len(words) < 2:
+            return variations
+
+        # Generate variations with each common suffix on the last word
+        for suffix in self.PRONOMINAL_SUFFIXES:
+            modified_words = words[:-1] + [words[-1] + suffix]
+            variation = ' '.join(modified_words)
+            variations.add(variation)
+
+            # Try with conjunction on first word
+            modified_words_with_vav = [self.CONJUNCTION + words[0]] + words[1:-1] + [words[-1] + suffix]
+            variations.add(' '.join(modified_words_with_vav))
+
+            # Try with prepositions on first word (very common pattern)
+            for prep in self.PREPOSITIONS:
+                modified_words_with_prep = [prep + words[0]] + words[1:-1] + [words[-1] + suffix]
+                variations.add(' '.join(modified_words_with_prep))
+
+                # Conjunction + preposition on first word
+                modified_words_both = [self.CONJUNCTION + prep + words[0]] + words[1:-1] + [words[-1] + suffix]
+                variations.add(' '.join(modified_words_both))
+
+            # Try with definite article on first word
+            modified_words_def = [self.DEFINITE_ARTICLE + words[0]] + words[1:-1] + [words[-1] + suffix]
+            variations.add(' '.join(modified_words_def))
+
+            # Conjunction + definite on first word
+            modified_words_vav_def = [self.CONJUNCTION + self.DEFINITE_ARTICLE + words[0]] + words[1:-1] + [words[-1] + suffix]
+            variations.add(' '.join(modified_words_vav_def))
+
+            # Preposition + definite on first word (like מהר -> מ+ה+ר)
+            for prep in self.PREPOSITIONS:
+                modified_words_prep_def = [prep + self.DEFINITE_ARTICLE + words[0]] + words[1:-1] + [words[-1] + suffix]
+                variations.add(' '.join(modified_words_prep_def))
 
         return variations
 
@@ -313,6 +441,15 @@ class ConcordanceLibrarian:
             queries = self.generate_phrase_variations(request.query, request.level)
         else:
             queries = [request.query]
+
+        # Add alternate queries with their variations
+        if request.alternate_queries:
+            for alt_query in request.alternate_queries:
+                if request.include_variations:
+                    alt_variations = self.generate_phrase_variations(alt_query, request.level)
+                    queries.extend(alt_variations)
+                else:
+                    queries.append(alt_query)
 
         # Search each variation
         seen_verses = set()  # Deduplicate: (book, chapter, verse)
