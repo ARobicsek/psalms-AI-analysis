@@ -188,7 +188,8 @@ class ConcordanceLibrarian:
             word=query,
             level=level,
             scope='Tanakh',
-            limit=threshold + 1  # Just need to know if it exceeds threshold
+            limit=threshold + 1,  # Just need to know if it exceeds threshold
+            use_split=True  # Use maqqef-split column
         )
 
         frequency = len(results)
@@ -465,14 +466,16 @@ class ConcordanceLibrarian:
                 results = self.search.search_phrase(
                     phrase=query,
                     level=request.level,
-                    scope=actual_scope  # Use actual_scope (may be auto-determined)
+                    scope=actual_scope,  # Use actual_scope (may be auto-determined)
+                    use_split=True  # Use maqqef-split column for better phrase matching
                 )
             else:
                 # Word search
                 results = self.search.search_word(
                     word=query,
                     level=request.level,
-                    scope=actual_scope  # Use actual_scope (may be auto-determined)
+                    scope=actual_scope,  # Use actual_scope (may be auto-determined)
+                    use_split=True  # Use maqqef-split column for better word matching
                 )
 
             # Add results, deduplicating by verse reference

@@ -1,0 +1,253 @@
+[
+  {
+    "test_id": 1,
+    "query": "מה רבו",
+    "alternates": [
+      "מה רבים",
+      "כמה רבו",
+      "כמה רבים"
+    ],
+    "description": "How numerous (opening lament)",
+    "total_results": 2,
+    "variations_searched": 672,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 2,
+        "matched_word": "מָה",
+        "position": 1
+      }
+    ]
+  },
+  {
+    "test_id": 2,
+    "query": "אין ישועה",
+    "alternates": [
+      "אין תשועה",
+      "אין הישועה",
+      "לא ישועה"
+    ],
+    "description": "No salvation",
+    "total_results": 0,
+    "variations_searched": 672,
+    "found_in_psalm_3": false,
+    "psalm_3_matches": []
+  },
+  {
+    "test_id": 3,
+    "query": "באלהים",
+    "alternates": [
+      "בה' ",
+      "ביהוה",
+      "לאלהים"
+    ],
+    "description": "In God",
+    "total_results": 131,
+    "variations_searched": 81,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 3,
+        "matched_word": "בֵאלֹהִ֬ים",
+        "position": 6
+      }
+    ]
+  },
+  {
+    "test_id": 4,
+    "query": "מגן בעד",
+    "alternates": [
+      "מגן סביב",
+      "מגן לי",
+      "מגן עלי"
+    ],
+    "description": "Shield around",
+    "total_results": 1,
+    "variations_searched": 672,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 4,
+        "matched_word": "מָגֵ֣ן",
+        "position": 2
+      }
+    ]
+  },
+  {
+    "test_id": 5,
+    "query": "מרים ראש",
+    "alternates": [
+      "נשא ראש",
+      "רום ראש",
+      "ירים ראשי",
+      "ונשא ראשי"
+    ],
+    "description": "Lifts head (honor restoration)",
+    "total_results": 2,
+    "variations_searched": 840,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 4,
+        "matched_word": "וּמֵרִ֥ים",
+        "position": 5
+      }
+    ]
+  },
+  {
+    "test_id": 6,
+    "query": "מהר קדש",
+    "alternates": [
+      "הר קדשו",
+      "הר קדשי",
+      "בהר קדש"
+    ],
+    "description": "From holy mountain",
+    "total_results": 17,
+    "variations_searched": 672,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 5,
+        "matched_word": "מֵהַ֖ר",
+        "position": 5
+      }
+    ]
+  },
+  {
+    "test_id": 7,
+    "query": "שכבתי ואישנה",
+    "alternates": [
+      "שכב וישן",
+      "אשכב ואישן",
+      "שכבתי וישנתי"
+    ],
+    "description": "I lay down and slept",
+    "total_results": 1,
+    "variations_searched": 672,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 6,
+        "matched_word": "שָׁכַ֗בְתִּי",
+        "position": 1
+      }
+    ]
+  },
+  {
+    "test_id": 8,
+    "query": "קומה יהוה",
+    "alternates": [
+      "קום יהוה",
+      "קומה ה'",
+      "קום ה'"
+    ],
+    "description": "Arise, LORD",
+    "total_results": 7,
+    "variations_searched": 672,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 8,
+        "matched_word": "ק֘וּמָ֤ה",
+        "position": 0
+      }
+    ]
+  },
+  {
+    "test_id": 9,
+    "query": "הכית את",
+    "alternates": [
+      "הך את",
+      "תכה את",
+      "הכה את"
+    ],
+    "description": "You struck (MAQQEF TEST - currently failing)",
+    "total_results": 23,
+    "variations_searched": 672,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 8,
+        "matched_word": "הִכִּ֣יתָ",
+        "position": 6
+      }
+    ]
+  },
+  {
+    "test_id": 10,
+    "query": "שבר שן",
+    "alternates": [
+      "שבר שיניים",
+      "שבור שן",
+      "שבר שני"
+    ],
+    "description": "Break tooth (NON-ADJACENT TEST - currently failing)",
+    "total_results": 0,
+    "variations_searched": 672,
+    "found_in_psalm_3": false,
+    "psalm_3_matches": []
+  },
+  {
+    "test_id": 11,
+    "query": "על עמך ברכתך",
+    "alternates": [
+      "עמך ברכה",
+      "ברך עמך",
+      "ברכת עמך"
+    ],
+    "description": "Your blessing on your people",
+    "total_results": 1,
+    "variations_searched": 663,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 9,
+        "matched_word": "עַֽל",
+        "position": 2
+      }
+    ]
+  },
+  {
+    "test_id": 12,
+    "query": "הכית",
+    "alternates": [],
+    "description": "Single word: struck (should work even with maqqef)",
+    "total_results": 14,
+    "variations_searched": 20,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 8,
+        "matched_word": "הִכִּ֣יתָ",
+        "position": 6
+      }
+    ]
+  },
+  {
+    "test_id": 13,
+    "query": "שני",
+    "alternates": [],
+    "description": "Single word: teeth (construct form)",
+    "total_results": 163,
+    "variations_searched": 20,
+    "found_in_psalm_3": false,
+    "psalm_3_matches": []
+  },
+  {
+    "test_id": 14,
+    "query": "שברת",
+    "alternates": [],
+    "description": "Single word: you broke",
+    "total_results": 6,
+    "variations_searched": 20,
+    "found_in_psalm_3": true,
+    "psalm_3_matches": [
+      {
+        "verse": 8,
+        "matched_word": "שִׁבַּֽרְתָּ׃",
+        "position": 13
+      }
+    ]
+  }
+]

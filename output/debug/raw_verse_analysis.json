@@ -1,0 +1,719 @@
+{
+  "reference": "Psalms 3:8",
+  "hebrew_raw": "ק֘וּמָ֤ה יְהֹוָ֨ה ׀ הוֹשִׁ֘יעֵ֤נִי אֱלֹהַ֗י כִּֽי־הִכִּ֣יתָ אֶת־כׇּל־אֹיְבַ֣י לֶ֑חִי שִׁנֵּ֖י רְשָׁעִ֣ים שִׁבַּֽרְתָּ׃",
+  "english": "Rise, O LORD!\nDeliver me, O my God!\nFor You slap all my enemies in the face;\nYou break the teeth of the wicked.",
+  "analysis": {
+    "contains_maqqef_char": true,
+    "maqqef_count": 3,
+    "character_breakdown": [
+      {
+        "index": 0,
+        "char": "ק",
+        "unicode": "U+05E7",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 1,
+        "char": "֘",
+        "unicode": "U+0598",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 2,
+        "char": "ו",
+        "unicode": "U+05D5",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 3,
+        "char": "ּ",
+        "unicode": "U+05BC",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 4,
+        "char": "מ",
+        "unicode": "U+05DE",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 5,
+        "char": "ָ",
+        "unicode": "U+05B8",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 6,
+        "char": "֤",
+        "unicode": "U+05A4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 7,
+        "char": "ה",
+        "unicode": "U+05D4",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 8,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 9,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 10,
+        "char": "ְ",
+        "unicode": "U+05B0",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 11,
+        "char": "ה",
+        "unicode": "U+05D4",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 12,
+        "char": "ֹ",
+        "unicode": "U+05B9",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 13,
+        "char": "ו",
+        "unicode": "U+05D5",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 14,
+        "char": "ָ",
+        "unicode": "U+05B8",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 15,
+        "char": "֨",
+        "unicode": "U+05A8",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 16,
+        "char": "ה",
+        "unicode": "U+05D4",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 17,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 18,
+        "char": "׀",
+        "unicode": "U+05C0",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 19,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 20,
+        "char": "ה",
+        "unicode": "U+05D4",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 21,
+        "char": "ו",
+        "unicode": "U+05D5",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 22,
+        "char": "ֹ",
+        "unicode": "U+05B9",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 23,
+        "char": "ש",
+        "unicode": "U+05E9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 24,
+        "char": "ׁ",
+        "unicode": "U+05C1",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 25,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 26,
+        "char": "֘",
+        "unicode": "U+0598",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 27,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 28,
+        "char": "ע",
+        "unicode": "U+05E2",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 29,
+        "char": "ֵ",
+        "unicode": "U+05B5",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 30,
+        "char": "֤",
+        "unicode": "U+05A4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 31,
+        "char": "נ",
+        "unicode": "U+05E0",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 32,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 33,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 34,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 35,
+        "char": "א",
+        "unicode": "U+05D0",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 36,
+        "char": "ֱ",
+        "unicode": "U+05B1",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 37,
+        "char": "ל",
+        "unicode": "U+05DC",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 38,
+        "char": "ֹ",
+        "unicode": "U+05B9",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 39,
+        "char": "ה",
+        "unicode": "U+05D4",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 40,
+        "char": "ַ",
+        "unicode": "U+05B7",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 41,
+        "char": "֗",
+        "unicode": "U+0597",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 42,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 43,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 44,
+        "char": "כ",
+        "unicode": "U+05DB",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 45,
+        "char": "ּ",
+        "unicode": "U+05BC",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 46,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 47,
+        "char": "ֽ",
+        "unicode": "U+05BD",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 48,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 49,
+        "char": "־",
+        "unicode": "U+05BE",
+        "name": "MAQQEF"
+      },
+      {
+        "index": 50,
+        "char": "ה",
+        "unicode": "U+05D4",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 51,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 52,
+        "char": "כ",
+        "unicode": "U+05DB",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 53,
+        "char": "ּ",
+        "unicode": "U+05BC",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 54,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 55,
+        "char": "֣",
+        "unicode": "U+05A3",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 56,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 57,
+        "char": "ת",
+        "unicode": "U+05EA",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 58,
+        "char": "ָ",
+        "unicode": "U+05B8",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 59,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 60,
+        "char": "א",
+        "unicode": "U+05D0",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 61,
+        "char": "ֶ",
+        "unicode": "U+05B6",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 62,
+        "char": "ת",
+        "unicode": "U+05EA",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 63,
+        "char": "־",
+        "unicode": "U+05BE",
+        "name": "MAQQEF"
+      },
+      {
+        "index": 64,
+        "char": "כ",
+        "unicode": "U+05DB",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 65,
+        "char": "ּ",
+        "unicode": "U+05BC",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 66,
+        "char": "ׇ",
+        "unicode": "U+05C7",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 67,
+        "char": "ל",
+        "unicode": "U+05DC",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 68,
+        "char": "־",
+        "unicode": "U+05BE",
+        "name": "MAQQEF"
+      },
+      {
+        "index": 69,
+        "char": "א",
+        "unicode": "U+05D0",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 70,
+        "char": "ֹ",
+        "unicode": "U+05B9",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 71,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 72,
+        "char": "ְ",
+        "unicode": "U+05B0",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 73,
+        "char": "ב",
+        "unicode": "U+05D1",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 74,
+        "char": "ַ",
+        "unicode": "U+05B7",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 75,
+        "char": "֣",
+        "unicode": "U+05A3",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 76,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 77,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 78,
+        "char": "ל",
+        "unicode": "U+05DC",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 79,
+        "char": "ֶ",
+        "unicode": "U+05B6",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 80,
+        "char": "֑",
+        "unicode": "U+0591",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 81,
+        "char": "ח",
+        "unicode": "U+05D7",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 82,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 83,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 84,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 85,
+        "char": "ש",
+        "unicode": "U+05E9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 86,
+        "char": "ׁ",
+        "unicode": "U+05C1",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 87,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 88,
+        "char": "נ",
+        "unicode": "U+05E0",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 89,
+        "char": "ּ",
+        "unicode": "U+05BC",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 90,
+        "char": "ֵ",
+        "unicode": "U+05B5",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 91,
+        "char": "֖",
+        "unicode": "U+0596",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 92,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 93,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 94,
+        "char": "ר",
+        "unicode": "U+05E8",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 95,
+        "char": "ְ",
+        "unicode": "U+05B0",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 96,
+        "char": "ש",
+        "unicode": "U+05E9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 97,
+        "char": "ׁ",
+        "unicode": "U+05C1",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 98,
+        "char": "ָ",
+        "unicode": "U+05B8",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 99,
+        "char": "ע",
+        "unicode": "U+05E2",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 100,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 101,
+        "char": "֣",
+        "unicode": "U+05A3",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 102,
+        "char": "י",
+        "unicode": "U+05D9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 103,
+        "char": "ם",
+        "unicode": "U+05DD",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 104,
+        "char": " ",
+        "unicode": "U+0020",
+        "name": "SPACE"
+      },
+      {
+        "index": 105,
+        "char": "ש",
+        "unicode": "U+05E9",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 106,
+        "char": "ׁ",
+        "unicode": "U+05C1",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 107,
+        "char": "ִ",
+        "unicode": "U+05B4",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 108,
+        "char": "ב",
+        "unicode": "U+05D1",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 109,
+        "char": "ּ",
+        "unicode": "U+05BC",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 110,
+        "char": "ַ",
+        "unicode": "U+05B7",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 111,
+        "char": "ֽ",
+        "unicode": "U+05BD",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 112,
+        "char": "ר",
+        "unicode": "U+05E8",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 113,
+        "char": "ְ",
+        "unicode": "U+05B0",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 114,
+        "char": "ת",
+        "unicode": "U+05EA",
+        "name": "HEBREW_LETTER"
+      },
+      {
+        "index": 115,
+        "char": "ּ",
+        "unicode": "U+05BC",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 116,
+        "char": "ָ",
+        "unicode": "U+05B8",
+        "name": "DIACRITIC"
+      },
+      {
+        "index": 117,
+        "char": "׃",
+        "unicode": "U+05C3",
+        "name": "DIACRITIC"
+      }
+    ]
+  }
+}

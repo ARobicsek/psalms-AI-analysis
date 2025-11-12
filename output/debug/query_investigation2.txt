@@ -1,0 +1,12 @@
+INFO:src.data_sources.tanakh_database:Database schema created at C:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+================================================================================
+INVESTIGATION: Concordance Query Results
+================================================================================
+
+
+### Query 1: hakitah et (you struck)
+Traceback (most recent call last):
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\test_queries_simple.py", line 27, in <module>
+    bundle1 = lib.search_concordance(req1)
+              ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConcordanceLibrarian' object has no attribute 'search_concordance'

@@ -1,0 +1,10 @@
+Testing direct database queries...
+
+Traceback (most recent call last):
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\test_db_query.py", line 42, in <module>
+    print(f"{desc} ('{word}'): {count} matches")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 20-22: character maps to <undefined>

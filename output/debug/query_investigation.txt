@@ -1,0 +1,12 @@
+INFO:src.data_sources.tanakh_database:Database schema created at C:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+================================================================================
+INVESTIGATION: Concordance Query Results
+================================================================================
+Traceback (most recent call last):
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\test_queries_investigation.py", line 20, in <module>
+    print("\n\n### Query 1: \u05d4\u05db\u05d9\u05ea \u05d0\u05ea")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 17-20: character maps to <undefined>

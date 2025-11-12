@@ -206,7 +206,7 @@ class MacroAnalyst:
             raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
 
         self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = "claude-sonnet-4-20250514"  # Sonnet 4.5 with extended thinking
+        self.model = "claude-sonnet-4-5"  # Sonnet 4.5 with extended thinking
         self.logger = logger or get_logger("macro_analyst")
 
         # Initialize RAG Manager
@@ -270,6 +270,7 @@ class MacroAnalyst:
 
         # Step 5: Call Claude Sonnet 4.5 with extended thinking
         try:
+            self.logger.info(f"Calling Claude API with model: {self.model}")
             response = self.client.messages.create(
                 model=self.model,
                 max_tokens=max_tokens,
@@ -282,18 +283,34 @@ class MacroAnalyst:
                     "content": prompt
                 }]
             )
+            self.logger.info("API call successful")
 
             # Extract thinking and response
             thinking_text = ""
             response_text = ""
 
-            for block in response.content:
+            # Debug: Log response structure
+            self.logger.info(f"Response has {len(response.content)} content blocks")
+            for i, block in enumerate(response.content):
+                self.logger.info(f"  Block {i}: type={block.type}")
                 if block.type == "thinking":
                     thinking_text = block.thinking
+                    self.logger.info(f"    Thinking block: {len(thinking_text)} chars")
                 elif block.type == "text":
                     response_text = block.text
+                    self.logger.info(f"    Text block: {len(response_text)} chars")
 
             self.logger.info(f"Response received. Thinking tokens: {len(thinking_text.split()) if thinking_text else 0}")
+
+            # Check if we got a text response
+            if not response_text or not response_text.strip():
+                self.logger.error("ERROR: Empty text block received from API!")
+                self.logger.error(f"Model: {self.model}")
+                self.logger.error(f"Response structure: {len(response.content)} blocks")
+                for i, block in enumerate(response.content):
+                    self.logger.error(f"  Block {i}: type={block.type}")
+                self.logger.error(f"Thinking text length: {len(thinking_text)} chars")
+                raise ValueError("MacroAnalyst returned empty text block. This may be due to extended thinking mode allocating all tokens to thinking.")
 
             # Log API call
             self.logger.log_api_call(
@@ -305,11 +322,25 @@ class MacroAnalyst:
 
             # Step 6: Parse JSON response
             response_text = response_text.strip()
+
+            # Strip markdown code fences if present
+            if response_text.startswith("```json"):
+                self.logger.info("Removing markdown json code fence from response")
+                response_text = response_text[7:]  # Remove ```json
+            elif response_text.startswith("```"):
+                self.logger.info("Removing markdown code fence from response")
+                response_text = response_text[3:]  # Remove ```
+
+            if response_text.endswith("```"):
+                response_text = response_text[:-3]  # Remove trailing ```
+
+            response_text = response_text.strip()
+
             try:
                 data = json.loads(response_text)
             except json.JSONDecodeError as e:
                 self.logger.error(f"Failed to parse JSON response: {e}")
-                self.logger.error(f"Response text: {response_text[:500]}...")
+                self.logger.error(f"Response text (first 1000 chars): {response_text[:1000]}...")
                 raise ValueError(f"Invalid JSON from MacroAnalyst: {e}")
 
             # Step 7: Create MacroAnalysis object
@@ -335,6 +366,13 @@ class MacroAnalyst:
 
         except Exception as e:
             self.logger.error(f"Error calling Claude API: {e}")
+            self.logger.error(f"Exception type: {type(e).__name__}")
+            self.logger.error(f"Model used: {self.model}")
+            # If it's an API error, log more details
+            if hasattr(e, 'response'):
+                self.logger.error(f"API Response: {e.response}")
+            if hasattr(e, 'status_code'):
+                self.logger.error(f"Status code: {e.status_code}")
             raise
 
     def _format_psalm_text(self, psalm_text) -> str:
