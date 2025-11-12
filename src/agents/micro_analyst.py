@@ -217,6 +217,16 @@ GENERATE RESEARCH REQUESTS:
 2. **CONCORDANCE SEARCHES** - Patterns to trace across Scripture
    - Repeated phrases from discoveries
    - Thematic roots identified
+   - **IMPORTANT**: Use the actual Hebrew forms from the text, including verb conjugations and suffixes
+     - Good: "מה רבו" (as it appears in the text)
+     - Bad: "מה רב" (oversimplified, will miss matches)
+   - **PROVIDE ALTERNATES**: If you see different forms in the text, list them in "alternates" field
+     - Example: If you see both "מה־רבו" (maqqef-connected) and want to catch other forms
+     - Alternates: ["מה רבו", "מהרבו"] (provide separated and combined forms)
+     - For verb patterns, suggest different binyanim if relevant: ["ברח", "יברח", "בורח"]
+     - Suggest other plausible variants, such as pluralization. Example: "מה רבו" would benefit from a search for "מה רבים" as well
+     - The system will automatically generate prefix/suffix variations of all forms
+   - The search system automatically generates variations with prefixes/suffixes, but alternates help catch different roots
    - VALID LEVELS: "consonantal" (all root forms), "voweled" (distinguish homographs), "exact" (specific vocalization)
    - **DEFAULT TO "consonantal"** - Only use "exact" if specifically concerned about homographs (same consonants, different vocalizations)
    - "consonantal" finds all forms of a root pattern regardless of vocalization
@@ -254,8 +264,8 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     {{"word": "בְּנֵי אֵלִים", "reason": "Divine council puzzle - etymology and comparative ANE usage"}}
   ],
   "concordance_searches": [
-    {{"query": "קול יהוה", "level": "consonantal", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns"}},
-    {{"query": "בני אלים", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible"}}
+    {{"query": "קול יהוה", "level": "consonantal", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns", "alternates": ["קול אלהים"]}},
+    {{"query": "בני אלים", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible", "alternates": ["בני אל", "בני אלהים"]}}
   ],
   "figurative_checks": [
     {{"verse": 3, "reason": "Waters as primordial chaos imagery - vivid and theologically rich", "vehicle": "waters", "vehicle_synonyms": ["water", "sea", "seas", "deep", "depths", "flood", "floods", "ocean", "oceans"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch"}},
