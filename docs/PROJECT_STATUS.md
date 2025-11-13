@@ -1,7 +1,39 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ SYSTEM OPERATIONAL - Enhanced Scoring System Implemented & Validated
-**Last Updated**: 2025-11-13 (Session 94 - Enhanced Phrase Matching System Implementation Complete)
+## Current Status: ✓ SYSTEM OPERATIONAL - Top 300 Connections Export Complete
+**Last Updated**: 2025-11-13 (Session 95 - Top 300 Detailed Connections Export Complete)
+
+## Recent Work Session 95: (2025-11-13 - Top 300 Detailed Connections Export COMPLETE ✓)
+
+### ✓ SUCCESS: Comprehensive JSON Export with All Match Details
+
+**Implementation Complete**: Generated 2.45MB JSON file with top 300 psalm connections including full match details
+- ✓ Created merge script combining enhanced scores with detailed match information
+- ✓ Each entry includes all statistics plus complete shared_roots and shared_phrases arrays
+- ✓ Shared phrases include verse numbers for precise reference
+- ✓ Shared roots include IDF scores and example word forms
+- ✓ File ready for analysis, visualization, or integration with commentary pipeline
+
+**Results**:
+- Total connections: 300
+- Score range: 101,215.07 (Psalms 60-108) to 368.05 (Psalms 95-97)
+- Total shared roots across all 300: 6,813 (avg 22.7 per connection)
+- Total shared phrases across all 300: 1,642 (avg 5.5 per connection)
+
+**Files Created** (158 lines):
+- generate_top_300_detailed.py
+
+**Output Files**:
+- top_300_connections_detailed.json (2.45MB - comprehensive export)
+
+**What Each Entry Contains**:
+- All scoring statistics (pattern counts, scores, p-values)
+- DETAILED SHARED ROOTS: consonantal form, IDF, counts, example word forms
+- DETAILED SHARED PHRASES: Hebrew text, consonantal, length, counts, verse numbers
+
+**Status**: ✓ Export complete - Data ready for user review and analysis
+
+---
 
 ## Recent Work Session 94: (2025-11-13 - Enhanced Phrase Matching System Implementation COMPLETE ✓)
 
