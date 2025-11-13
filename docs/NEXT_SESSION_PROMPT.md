@@ -98,25 +98,38 @@ The analysis is complete and validated. Results are ready for review and integra
    - Identify patterns in relationship types (duplicates, composites, genre clusters)
    - Consider whether threshold adjustment is needed (e.g., p < 1e-6)
 
-2. **Integrate with Commentary Pipeline** (HIGH VALUE)
+2. **Implement Phrase-Based Matching** (HIGH VALUE - NOT YET IMPLEMENTED)
+   - **Status**: We have phrase EXTRACTION (33,867 phrases stored) but not phrase MATCHING
+   - **Current limitation**: Analysis only compares shared individual roots, not shared phrases
+   - **Why this matters**: Shared multi-word phrases are more significant than shared roots
+     - Example: "יהו רעי" (LORD is my shepherd) is more distinctive than just "יהו" or "רע"
+     - Catches liturgical formulas, repeated expressions, intertextual borrowing
+   - **Implementation**: Create phrase_matcher.py to:
+     - Compare Psalms based on shared 2-word and 3-word phrases
+     - Weight by phrase rarity (IDF scores for phrase combinations)
+     - Apply hypergeometric test for phrase overlap significance
+     - Combine with root-based analysis for comprehensive similarity metric
+   - **Expected insights**: Identify Psalms with shared liturgical language beyond vocabulary overlap
+
+3. **Integrate with Commentary Pipeline** (HIGH VALUE)
    - Add relationship data to macro analyst prompts
    - Inform analysts of known related Psalms during analysis
    - Example: "Psalm 31 shares significant vocabulary with Psalms 71, 69, 143, 25"
    - Helps identify recurring themes and intertextual connections
 
-3. **Generate Detailed Reports** (OPTIONAL)
+4. **Generate Detailed Reports** (OPTIONAL)
    - Create human-readable reports for specific Psalm pairs
    - Show exact shared roots with examples and IDF scores
    - Visualize relationship networks (graph diagrams)
    - Document strongest clusters for scholarly reference
 
-4. **Phase 3 Enhancements** (FUTURE)
+5. **Phase 3 Enhancements** (FUTURE)
    - Implement cluster_detector.py for graph-based analysis
    - Apply Benjamini-Hochberg FDR correction for multiple testing
    - Enhanced phrase analysis (semantic grouping)
    - Consider more stringent threshold (p < 1e-6) for "strongest" relationships
 
-5. **Continue Psalm Processing** (READY)
+6. **Continue Psalm Processing** (READY)
    - System fully operational (concordance + alternates + relationship data)
    - Ready to process remaining Psalms (4, 5, 7, 8, etc.)
    - Can now reference related Psalms in commentary
