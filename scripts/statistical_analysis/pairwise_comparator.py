@@ -71,7 +71,7 @@ class PairwiseComparator:
             psalm_b: Second Psalm number
 
         Returns:
-            Dict with statistical measures and shared roots
+            Dict with statistical measures, shared roots, and shared phrases
         """
         # Get roots for both Psalms
         roots_a = {r['root']: r for r in self.db.get_psalm_roots(psalm_a)}
@@ -80,6 +80,13 @@ class PairwiseComparator:
         # Find shared roots
         shared_roots = set(roots_a.keys()) & set(roots_b.keys())
 
+        # Get phrases for both Psalms
+        phrases_a = {p['consonantal']: p for p in self.db.get_psalm_phrases(psalm_a)}
+        phrases_b = {p['consonantal']: p for p in self.db.get_psalm_phrases(psalm_b)}
+
+        # Find shared phrases (matching on consonantal form)
+        shared_phrases_keys = set(phrases_a.keys()) & set(phrases_b.keys())
+
         if not shared_roots:
             return {
                 'psalm_a': psalm_a,
@@ -87,11 +94,13 @@ class PairwiseComparator:
                 'shared_root_count': 0,
                 'total_roots_a': len(roots_a),
                 'total_roots_b': len(roots_b),
+                'shared_phrase_count': len(shared_phrases_keys),
                 'pvalue': 1.0,
                 'weighted_score': 0.0,
                 'z_score': 0.0,
                 'is_significant': False,
-                'shared_roots': []
+                'shared_roots': [],
+                'shared_phrases': []
             }
 
         # Hypergeometric test
@@ -136,17 +145,35 @@ class PairwiseComparator:
                 'examples_b': roots_b[root]['examples']
             })
 
+        # Build shared phrases list (sorted by length descending, then by frequency)
+        shared_phrases_list = []
+        for phrase_key in sorted(shared_phrases_keys,
+                                key=lambda p: (phrases_a[p]['length'],
+                                              phrases_a[p]['count'] + phrases_b[p]['count']),
+                                reverse=True):
+            shared_phrases_list.append({
+                'consonantal': phrase_key,
+                'hebrew': phrases_a[phrase_key]['hebrew'],
+                'length': phrases_a[phrase_key]['length'],
+                'count_a': phrases_a[phrase_key]['count'],
+                'count_b': phrases_b[phrase_key]['count'],
+                'verses_a': phrases_a[phrase_key]['verses'],
+                'verses_b': phrases_b[phrase_key]['verses']
+            })
+
         return {
             'psalm_a': psalm_a,
             'psalm_b': psalm_b,
             'shared_root_count': k,
             'total_roots_a': K,
             'total_roots_b': n,
+            'shared_phrase_count': len(shared_phrases_keys),
             'pvalue': float(pvalue),
             'weighted_score': float(weighted_score),
             'z_score': float(z_score),
             'is_significant': bool(is_significant),
             'shared_roots': shared_roots_list,
+            'shared_phrases': shared_phrases_list,
             'hypergeom_params': {
                 'N': N,
                 'K': K,
@@ -201,13 +228,15 @@ class PairwiseComparator:
         return relationships
 
     def get_significant_relationships(self, min_pvalue: float = 0.01,
-                                     min_z_score: float = 3.0) -> List[Dict[str, Any]]:
+                                     min_z_score: float = 3.0,
+                                     include_shared_items: bool = True) -> List[Dict[str, Any]]:
         """
         Get all significant relationships from database.
 
         Args:
             min_pvalue: Maximum p-value for significance
             min_z_score: Minimum z-score for significance
+            include_shared_items: If True, include shared_roots and shared_phrases lists
 
         Returns:
             List of significant relationship dicts
@@ -223,7 +252,7 @@ class PairwiseComparator:
 
         relationships = []
         for row in cursor.fetchall():
-            relationships.append({
+            rel = {
                 'psalm_a': row['psalm_a'],
                 'psalm_b': row['psalm_b'],
                 'pvalue': row['hypergeometric_pvalue'],
@@ -232,7 +261,23 @@ class PairwiseComparator:
                 'shared_root_count': row['shared_root_count'],
                 'total_roots_a': row['total_roots_a'],
                 'total_roots_b': row['total_roots_b']
-            })
+            }
+
+            if include_shared_items:
+                import json
+                # Parse shared roots from JSON
+                if row['shared_roots_json']:
+                    rel['shared_roots'] = json.loads(row['shared_roots_json'])
+                else:
+                    rel['shared_roots'] = []
+
+                # Parse shared phrases from JSON
+                if row['shared_phrases_json']:
+                    rel['shared_phrases'] = json.loads(row['shared_phrases_json'])
+                else:
+                    rel['shared_phrases'] = []
+
+            relationships.append(rel)
 
         return relationships
 

@@ -301,6 +301,43 @@ class PsalmRelationshipsDB:
 
         return results
 
+    def get_psalm_phrases(self, psalm_number: int) -> List[Dict[str, Any]]:
+        """
+        Get all phrases for a specific Psalm.
+
+        Args:
+            psalm_number: Psalm number (1-150)
+
+        Returns:
+            List of dicts with phrase_consonantal, phrase_hebrew, phrase_length,
+                          occurrence_count, verse_references
+        """
+        cursor = self.conn.cursor()
+
+        cursor.execute("""
+            SELECT
+                phrase_consonantal,
+                phrase_hebrew,
+                phrase_length,
+                occurrence_count,
+                verse_references
+            FROM psalm_phrases
+            WHERE psalm_number = ?
+            ORDER BY phrase_length DESC, occurrence_count DESC
+        """, (psalm_number,))
+
+        results = []
+        for row in cursor.fetchall():
+            results.append({
+                'consonantal': row['phrase_consonantal'],
+                'hebrew': row['phrase_hebrew'],
+                'length': row['phrase_length'],
+                'count': row['occurrence_count'],
+                'verses': json.loads(row['verse_references']) if row['verse_references'] else []
+            })
+
+        return results
+
     def store_relationship(self, relationship: Dict[str, Any]):
         """
         Store a pairwise Psalm relationship.
