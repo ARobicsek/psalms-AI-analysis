@@ -126,8 +126,8 @@ def run_full_analysis(output_dir: Path = None):
 
     # Top 20 most significant relationships
     print("\nTop 20 Most Significant Relationships:")
-    print(f"{'Rank':<6} {'Psalms':<12} {'p-value':<12} {'Z-score':<10} {'Shared':<8} {'Weighted':<10} {'Likelihood':<30}")
-    print('-' * 110)
+    print(f"{'Rank':<6} {'Psalms':<12} {'p-value':<12} {'Z-score':<10} {'Roots':<8} {'Phrases':<9} {'Weighted':<10} {'Likelihood':<30}")
+    print('-' * 120)
 
     for i, rel in enumerate(significant[:20], 1):
         # Interpret p-value
@@ -143,9 +143,10 @@ def run_full_analysis(output_dir: Path = None):
             likelihood = "possibly by chance"
 
         psalms_str = f"{rel['psalm_a']}-{rel['psalm_b']}"
+        phrase_count = rel.get('shared_phrase_count', len(rel.get('shared_phrases', [])))
 
         print(f"{i:<6} {psalms_str:<12} {rel['pvalue']:<12.2e} {rel['z_score']:<10.2f} "
-              f"{rel['shared_root_count']:<8} {rel['weighted_score']:<10.2f} {likelihood:<30}")
+              f"{rel['shared_root_count']:<8} {phrase_count:<9} {rel['weighted_score']:<10.2f} {likelihood:<30}")
 
     # Save comprehensive report
     report_file = output_dir / 'significant_relationships.json'
@@ -159,6 +160,8 @@ def run_full_analysis(output_dir: Path = None):
     # Create bidirectional entries (user requirement)
     bidirectional = []
     for rel in significant:
+        phrase_count = rel.get('shared_phrase_count', len(rel.get('shared_phrases', [])))
+
         # Add A→B entry
         bidirectional.append({
             'from_psalm': rel['psalm_a'],
@@ -166,7 +169,8 @@ def run_full_analysis(output_dir: Path = None):
             'pvalue': rel['pvalue'],
             'z_score': rel['z_score'],
             'weighted_score': rel['weighted_score'],
-            'shared_root_count': rel['shared_root_count']
+            'shared_root_count': rel['shared_root_count'],
+            'shared_phrase_count': phrase_count
         })
 
         # Add B→A entry
@@ -176,7 +180,8 @@ def run_full_analysis(output_dir: Path = None):
             'pvalue': rel['pvalue'],
             'z_score': rel['z_score'],
             'weighted_score': rel['weighted_score'],
-            'shared_root_count': rel['shared_root_count']
+            'shared_root_count': rel['shared_root_count'],
+            'shared_phrase_count': phrase_count
         })
 
     # Sort by from_psalm, then by pvalue
@@ -194,7 +199,8 @@ def run_full_analysis(output_dir: Path = None):
     psalm_23_rels = [r for r in bidirectional if r['from_psalm'] == 23][:5]
     for rel in psalm_23_rels:
         print(f"    Psalm 23 → Psalm {rel['to_psalm']:3d}: p={rel['pvalue']:.2e}, "
-              f"shared={rel['shared_root_count']}, weighted={rel['weighted_score']:.2f}")
+              f"roots={rel['shared_root_count']}, phrases={rel['shared_phrase_count']}, "
+              f"weighted={rel['weighted_score']:.2f}")
 
     # Summary
     print_section("Analysis Complete - Summary")
