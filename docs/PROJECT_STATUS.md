@@ -1,37 +1,62 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ SYSTEM OPERATIONAL - Top 300 Connections Export Complete
-**Last Updated**: 2025-11-13 (Session 95 - Top 300 Detailed Connections Export Complete)
+## Current Status: ✓ SYSTEM OPERATIONAL - Skipgram-Aware Deduplication Complete
+**Last Updated**: 2025-11-13 (Session 95 - Comprehensive Deduplication System Implemented)
 
-## Recent Work Session 95: (2025-11-13 - Top 300 Detailed Connections Export COMPLETE ✓)
+## Recent Work Session 95: (2025-11-13 - Skipgram-Aware Hierarchical Deduplication COMPLETE ✓)
 
-### ✓ SUCCESS: Comprehensive JSON Export with All Match Details
+### ✓ SUCCESS: Comprehensive Deduplication System Eliminates All Double-Counting
 
-**Implementation Complete**: Generated 2.45MB JSON file with top 300 psalm connections including full match details
-- ✓ Created merge script combining enhanced scores with detailed match information
-- ✓ Each entry includes all statistics plus complete shared_roots and shared_phrases arrays
-- ✓ Shared phrases include verse numbers for precise reference
-- ✓ Shared roots include IDF scores and example word forms
-- ✓ File ready for analysis, visualization, or integration with commentary pipeline
+**Problem Identified by User**: Severe double-counting in psalm similarity scoring
+- Same words counted as both phrase matches AND individual roots
+- Shorter phrases counted even when part of longer phrases
+- Contiguous phrases double-counted as skipgrams
+- Example: Psalms 4 & 6 superscription contributed 40% of score through duplication
 
-**Results**:
-- Total connections: 300
-- Score range: 101,215.07 (Psalms 60-108) to 368.05 (Psalms 95-97)
-- Total shared roots across all 300: 6,813 (avg 22.7 per connection)
-- Total shared phrases across all 300: 1,642 (avg 5.5 per connection)
+**Solution Implemented**: Three-tier hierarchical deduplication system
+- ✓ Phrase-level: Longer phrases exclude substring phrases
+- ✓ Skipgram-level: Combinatorial deduplication removes subpattern overlaps
+- ✓ Root-level: Exclude roots that appear in any phrase (contiguous or skipgram)
+- ✓ Result: Each word/root contributes to score exactly once
 
-**Files Created** (158 lines):
-- generate_top_300_detailed.py
+**Implementation Complete**:
+1. Initial detailed export (with double-counting for comparison)
+2. Contiguous-only deduplication (intermediate step)
+3. **Skipgram-aware deduplication (FINAL RECOMMENDED METHOD)**
+
+**Results - Psalms 4 & 6 Example**:
+- Old (double-counted): 423.16
+- Contiguous-only: 119.46 (too conservative, lost skipgrams)
+- **Skipgram-aware dedup: 133.87 (balanced, recommended)**
+- Reduction: 68.4% from eliminating double-counting
+
+**Deduplication Impact (all 11,001 pairs)**:
+- Contiguous phrases removed as substrings: 1,150
+- Skipgrams removed (overlap + combinatorial dedup): 20,040
+- Roots removed (appear in phrases): 59,051
+
+**Top 10 Connections (deduplicated)**:
+1. Psalms 60-108: 85,323.90 (composite psalm)
+2. Psalms 14-53: 77,110.96 (nearly identical)
+3. Psalms 40-70: 29,121.11 (shared passage)
+4. Psalms 42-43: 23,150.86 (originally one)
+5. Psalms 57-108: 22,915.30
+
+**Files Created** (1,135 lines total):
+- generate_top_300_detailed.py (158 lines)
+- enhanced_scorer_deduplicated.py (294 lines)
+- generate_top_300_deduplicated.py (123 lines)
+- **enhanced_scorer_skipgram_dedup.py (424 lines) - RECOMMENDED**
+- **generate_top_300_skipgram_dedup.py (136 lines) - RECOMMENDED**
 
 **Output Files**:
-- top_300_connections_detailed.json (2.45MB - comprehensive export)
+- top_300_connections_detailed.json (2.45MB - with double-counting)
+- enhanced_scores_deduplicated.json (52.93MB - contiguous-only)
+- top_300_connections_deduplicated.json (2.73MB)
+- **enhanced_scores_skipgram_dedup.json (45.60MB) - RECOMMENDED**
+- **top_300_connections_skipgram_dedup.json (1.96MB) - RECOMMENDED**
 
-**What Each Entry Contains**:
-- All scoring statistics (pattern counts, scores, p-values)
-- DETAILED SHARED ROOTS: consonantal form, IDF, counts, example word forms
-- DETAILED SHARED PHRASES: Hebrew text, consonantal, length, counts, verse numbers
-
-**Status**: ✓ Export complete - Data ready for user review and analysis
+**Status**: ✓ Deduplication complete - Use skipgram-aware scores going forward
 
 ---
 
