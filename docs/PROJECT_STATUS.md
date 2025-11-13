@@ -280,32 +280,50 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for complete technical detail
 ## Next Priorities
 
 ✓ **System Ready for Production** - Concordance system operational
+✓ **Statistical Analysis Complete** - 11,001 Psalm relationships identified
 
-1. **Psalm Relationship Statistical Analysis** ⭐⭐⭐ CURRENT SESSION
-   - Implement statistical framework for identifying related Psalms
-   - See detailed plan above
+1. **Implement Phrase-Based Matching** ⭐⭐⭐ HIGH PRIORITY (NOT YET IMPLEMENTED)
+   - **Current Status**: We have phrase EXTRACTION (33,867 phrases) but not phrase MATCHING
+   - **Current Limitation**: Analysis only compares shared individual roots, not shared phrases
+   - **Why This Matters**: Shared multi-word phrases more significant than shared roots
+     - Example: "יהו רעי" (LORD is my shepherd) vs. just "יהו" or "רע"
+     - Catches liturgical formulas, repeated expressions, intertextual borrowing
+   - **Implementation**: Create phrase_matcher.py to compare Psalms by shared phrases
+     - Weight by phrase rarity (IDF scores for phrase combinations)
+     - Apply hypergeometric test for phrase overlap significance
+     - Combine with root-based analysis for comprehensive similarity metric
+   - **Expected Insights**: Identify Psalms with shared liturgical language beyond vocabulary
 
-2. **Process More Psalms** ⭐⭐⭐ HIGH PRIORITY
+2. **Review and Integrate Statistical Analysis Results** ⭐⭐ HIGH VALUE
+   - Examine top relationships to assess quality
+   - Check if shared vocabulary is meaningful (vs. common words)
+   - Integrate relationship data into commentary pipeline
+   - Inform macro/micro analysts of related Psalms during analysis
+   - Example: "Psalm 31 shares significant vocabulary with Psalms 71, 69, 143, 25"
+
+3. **Process More Psalms** ⭐⭐⭐ HIGH PRIORITY
    - Continue with Psalms 4, 5, 7, 8, etc.
    - Concordance system fully functional (86% hit rate)
    - Two-layer search strategy operational (480% improvement)
+   - Statistical relationship data now available
    - Run full pipeline (all 5 passes) for comprehensive commentary
 
-2. **Optional: Re-run Psalm 3**
+4. **Optional: Re-run Psalm 3**
    - Previous 6 runs (2025-11-11) had concordance bugs
    - Could re-run with working concordance for improved results
    - Compare quality with Psalm 6 output
 
-3. **Monitor and Optimize** (Ongoing)
+5. **Monitor and Optimize** (Ongoing)
    - Track concordance hit rates across different psalm types
    - Document any patterns where searches fail
    - Assess alternates quality in future runs
    - Fine-tune prompts if needed based on results
 
-4. **Future Enhancements** (Lower Priority)
-   - Investigate remaining 3 failed queries for pattern recognition
-   - 3-word phrase concordance support if clear patterns emerge
-   - Additional morphological patterns for edge cases discovered during processing
+6. **Future Enhancements** (Lower Priority)
+   - Cluster detection (graph-based analysis of Psalm families)
+   - Apply Benjamini-Hochberg FDR correction for multiple testing
+   - Generate detailed reports with network visualizations
+   - Consider more stringent significance threshold (p < 1e-6)
 
 ## Key Insights
 
