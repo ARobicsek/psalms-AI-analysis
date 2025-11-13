@@ -192,11 +192,86 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for complete technical detail
 - ✓ LLM compliance validated (100% - all queries include alternates)
 - ✓ Concordance system now functional underneath
 
+## Current Work Session: Psalm Relationship Statistical Analysis (2025-11-13)
+
+**Objective**: Implement statistical analysis to identify related Psalms based on shared rare vocabulary
+
+**STATUS**: ✓ PHASES 1-2 COMPLETE - System Ready for Full Analysis Run
+
+### Implementation Results
+
+**Session Accomplishments** (Session 89):
+- Created complete statistical analysis system (~2000 lines of code)
+- Validated on sample Psalms and known related pairs
+- System ready to process all 150 Psalms
+- All user requirements addressed in implementation
+
+### Implementation Plan (from PSALM_RELATIONSHIP_STATISTICAL_ANALYSIS.md)
+
+#### Phase 1: Foundation ✓ COMPLETE
+- [x] Create project structure (`scripts/statistical_analysis/`, `data/psalm_relationships.db`)
+- [x] Implement database schema (root_frequencies, psalm_roots, psalm_phrases, psalm_relationships, psalm_clusters)
+- [x] Implement root_extractor.py with Hebrew normalization (leveraging existing hebrew_text_processor.py)
+- [x] Validate root extraction on 5-10 sample Psalms with examples
+  - **Result**: Psalm 23 has 53 unique roots, 93 n-gram phrases
+- [x] Show examples of root/phrase matches with rarity scores
+  - **Result**: Sample analysis showed IDF range 3.624-5.011
+
+#### Phase 2: Analysis Core ✓ COMPLETE
+- [x] Implement frequency_analyzer.py (compute root frequencies and IDF scores across all 150 Psalms)
+- [x] Implement pairwise_comparator.py with hypergeometric test
+- [x] Validate on known related Psalms (42-43)
+  - **Result**: p-value = 4.09e-07 (1 in 2.4 million chance by random)
+  - **Shared**: 19 roots, weighted score = 71.09, z-score = 27.01
+  - **Status**: ✓ Correctly identified as extremely significant
+- [x] Show examples of detected relationships with p-values and rarity assessment
+- [x] Implement run_full_analysis.py master script for all 150 Psalms
+
+#### Phase 3: Enhanced Features ⏸️ OPTIONAL (for future enhancement)
+- [ ] Implement phrase_analyzer.py for n-grams (2-word and 3-word phrases)
+  - *Note: Basic n-gram extraction already in root_extractor.py*
+- [ ] Implement cluster_detector.py (graph-based clustering of related Psalms)
+- [ ] Apply Benjamini-Hochberg FDR correction
+- [ ] Performance optimization for all 11,175 pairwise comparisons
+
+#### Phase 4: Full Analysis & Validation ⏳ READY TO RUN
+- [ ] Run full analysis on ALL 150 Psalms (including short Psalms like 117)
+  - **Command**: `python scripts/statistical_analysis/run_full_analysis.py`
+  - **Estimated time**: 3-5 minutes
+- [ ] Record bidirectional relationships (if A↔B, store both A→B and B→A entries)
+  - **Implementation**: Complete in run_full_analysis.py
+- [ ] Generate comprehensive reports with examples of matches and likelihood assessment
+  - **Output files**: root_statistics.json, significant_relationships.json, bidirectional_relationships.json
+- [ ] Validate results against known relationships
+- [ ] Manual review of sample detected relationships
+
+### Key Requirements (from User)
+✓ Include ALL psalms (no minimum length cutoff)
+✓ Record bidirectional relationships as separate entries
+✓ Show examples of root/phrase matches with rarity scores
+✓ Include likelihood assessment for cross-psalm matches
+✓ Manual review checkpoints throughout process
+
+### Expected Outputs
+- `data/psalm_relationships.db` - SQLite database with all relationships
+- Example reports showing:
+  - Shared roots with IDF scores
+  - p-values (probability by chance)
+  - Weighted overlap scores
+  - Phrase matches with contexts
+  - Bidirectional relationship entries
+
+---
+
 ## Next Priorities
 
 ✓ **System Ready for Production** - Concordance system operational
 
-1. **Process More Psalms** ⭐⭐⭐ HIGH PRIORITY
+1. **Psalm Relationship Statistical Analysis** ⭐⭐⭐ CURRENT SESSION
+   - Implement statistical framework for identifying related Psalms
+   - See detailed plan above
+
+2. **Process More Psalms** ⭐⭐⭐ HIGH PRIORITY
    - Continue with Psalms 4, 5, 7, 8, etc.
    - Concordance system fully functional (86% hit rate)
    - Two-layer search strategy operational (480% improvement)
