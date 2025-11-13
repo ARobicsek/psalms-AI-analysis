@@ -1,5 +1,139 @@
 # Next Session Prompt
 
+## Session 92 Handoff - 2025-11-13 (IDF Transformation Analysis COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Analyze IDF score distribution bunching and compare linear IDF vs exponential (e^IDF) transformation
+
+User requested analysis of IDF score distribution and comparison of statistical methods:
+1. Count significant psalm-psalm matches with current method
+2. Calculate matches with exponential transformation (e^IDF)
+3. Create comparison table for all 150 psalms
+4. Identify examples that shift from significant to non-significant
+
+**EXECUTION RESULTS: ✓ COMPLETE ANALYSIS - Exponential Transformation Not Recommended**
+
+### Analysis Summary
+
+**IDF Distribution Bunching Confirmed**:
+- 50th, 75th, 90th, and 95th percentiles all at IDF = 5.0106
+- Represents 1,558 hapax legomena (47% of all roots)
+- This bunching is a **real linguistic phenomenon**, not a bug
+
+**Comparison Results**:
+- **Current method (linear IDF)**: 11,001 significant relationships (100.0%)
+- **Exponential method (e^IDF)**: 11,000 significant relationships (99.99%)
+- **Difference**: Only 1 pair changes (Psalms 131 & 150)
+
+**Key Findings**:
+1. Exponential transformation **amplifies** differences but doesn't spread distribution
+2. Hypergeometric test (based on counts) dominates significance determination
+3. Weighted scores (where transformation would matter) rarely drive significance
+4. The 98.4% significance rate is **expected and correct** for religious poetry corpus
+
+### Why Exponential Doesn't Help
+
+**Mathematical Issue**:
+- Current: sum of IDF scores (e.g., 5.01 + 5.01 = 10.02)
+- Exponential: sum of e^IDF (e.g., e^5.01 + e^5.01 = 300)
+- Rare words become ~145x more dominant with exponential
+- This makes bunching **worse**, not better
+
+**Statistical Issue**:
+- Significance test: `is_significant = (pvalue < 0.01) OR (z_score > 3.0)`
+- P-value based on **count** of shared roots (same for both methods)
+- Only relationships depending on z-score threshold can change
+- Result: 99.99% of relationships maintain identical significance
+
+### The One Difference: Psalms 131 & 150
+
+| Metric | Current Method | Exponential Method |
+|--------|---------------|-------------------|
+| Shared roots | 2 | 2 |
+| p-value | 0.0146 | 0.0146 (same) |
+| z-score | 3.40 ✓ | 0.34 ✗ |
+| **Significant?** | YES | NO |
+
+With exponential, expected weighted score increases dramatically, causing observed score to be less unusual (lower z-score).
+
+### Output Files Generated
+
+**Analysis Documents**:
+- `data/analysis_results/IDF_TRANSFORMATION_ANALYSIS.md` - Complete analysis report (13KB)
+- `data/analysis_results/idf_comparison_table.txt` - Psalm-by-psalm comparison (120KB)
+- `data/analysis_results/idf_comparison_summary.json` - Summary statistics
+
+**Code Created**:
+- `scripts/statistical_analysis/compare_idf_methods.py` - Analysis script (367 lines)
+
+### Recommendations
+
+**DO NOT** switch to exponential transformation - it provides no benefit and makes bunching worse.
+
+**Instead, consider**:
+
+1. **Use More Stringent Threshold** (RECOMMENDED)
+   - Change p < 0.01 to p < 0.001
+   - Expected result: ~4,268 relationships (down from 11,001)
+   - Focuses on strongest connections only
+
+2. **Prioritize by Phrase Overlap** (ALREADY IMPLEMENTED)
+   - Session 91 added phrase matching (8,888 shared phrases)
+   - Phrases provide better discrimination than roots
+   - Example: Psalms 14 & 53 (73 phrases) vs Psalms 78 & 105 (8 phrases)
+
+3. **Accept Current Results**
+   - 98.4% significance reflects genuine linguistic connections
+   - Religious poetry has high vocabulary overlap by nature
+   - Use **ranking** (by p-value, phrase count) rather than binary significance
+
+4. **Combine Root + Phrase Criteria**
+   - Require BOTH root AND phrase overlap to be significant
+   - Would be highly selective
+
+### What to Work on Next
+
+**PRIORITY: HIGH - Integrate Relationship Data with Commentary Pipeline**
+
+The enhanced statistical analysis is complete and exponential transformation has been evaluated. Next steps:
+
+**Immediate Options**:
+
+1. **Integrate with Commentary Pipeline** (RECOMMENDED - HIGH VALUE)
+   - Add relationship data to macro analyst prompts
+   - Inform analysts of statistically related Psalms during analysis
+   - Example: "Psalm 31 shares significant vocabulary with Psalms 71 (52 roots, 18 phrases), 69 (80 roots, 9 phrases), 143 (40 roots, 6 phrases)"
+   - Helps identify recurring themes and intertextual connections
+   - Enhances commentary quality by providing context
+
+2. **Implement More Stringent Threshold** (OPTIONAL)
+   - Modify pairwise_comparator.py to use p < 0.001
+   - Re-generate significant_relationships.json
+   - Focus on ~4,268 strongest relationships
+   - Better for identifying true duplicates and composites
+
+3. **Continue Psalm Processing** (READY)
+   - System fully operational with relationship data available
+   - Ready to process remaining Psalms (4, 5, 7, 8, etc.)
+   - Can now reference related Psalms in commentary generation
+   - All data sources integrated and working
+
+4. **Generate Detailed Relationship Reports** (OPTIONAL)
+   - Create human-readable reports for specific Psalm pairs
+   - Show all shared roots and phrases with examples
+   - Useful for scholarly analysis and publication
+
+### Important Notes
+
+- IDF distribution bunching is **normal and expected** for hapax legomena
+- Exponential transformation doesn't solve bunching - it amplifies it
+- Current linear IDF method is appropriate
+- Phrase matching (Session 91) provides excellent discrimination
+- System ready for commentary pipeline integration
+
+---
+
 ## Session 91 Handoff - 2025-11-13 (Root & Phrase Matching ENHANCED ✓)
 
 ### What Was Done This Session

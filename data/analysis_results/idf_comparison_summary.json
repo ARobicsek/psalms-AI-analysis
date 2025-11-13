@@ -1,0 +1,29 @@
+{
+  "total_pairs": 11001,
+  "current_method": {
+    "significant_count": 11001,
+    "percentage": 100.0
+  },
+  "exponential_method": {
+    "significant_count": 11000,
+    "percentage": 99.99090991728025
+  },
+  "overlap": {
+    "both_significant": 11000,
+    "current_only": 1,
+    "exponential_only": 0
+  },
+  "examples_current_only": [
+    {
+      "psalm_a": 131,
+      "psalm_b": 150,
+      "current_pvalue": 0.014586383839004678,
+      "current_z": 3.396533938381976,
+      "current_weighted": 2.4769384801388235,
+      "exp_z": 0.3426881081461523,
+      "exp_weighted": 9.761904761904761,
+      "shared_roots": 2
+    }
+  ],
+  "examples_exponential_only": []
+}
