@@ -1,5 +1,110 @@
 # Implementation Log
 
+## Session 95 - 2025-11-13 (Top 300 Detailed Connections Export COMPLETE ✓)
+
+### Overview
+**Objective**: Generate comprehensive JSON export of top 300 psalm connections with complete match details
+**Trigger**: User requested detailed export showing all statistics PLUS verse-level match information
+**Result**: ✓ COMPLETE - 2.45MB JSON file with 300 connections and full match details
+
+**Session Duration**: ~20 minutes (script creation and execution)
+**Status**: Export complete and validated
+**Impact**: Provides comprehensive data for further analysis and visualization
+
+### Implementation Summary
+
+**Task**: Create JSON showing for top 300 connections:
+- All scoring statistics (pattern counts, scores, p-values)
+- Complete list of shared roots with IDF scores and example word forms
+- Complete list of shared phrases with Hebrew text and verse numbers
+
+**Approach**:
+- Merged `enhanced_scores_full.json` (scoring statistics) with `significant_relationships.json` (detailed matches)
+- Sorted by final_score descending, took top 300
+- Combined all data into single comprehensive entry per connection
+
+**Script Created**:
+- `scripts/statistical_analysis/generate_top_300_detailed.py` (158 lines)
+- Loads both JSON files, creates lookup dictionary, merges data
+
+### Results Summary
+
+**Output File**: `data/analysis_results/top_300_connections_detailed.json`
+- File size: 2.45 MB
+- Total connections: 300
+- Score range: 101,215.07 (Psalms 60-108) to 368.05 (Psalms 95-97)
+
+**Content Statistics**:
+- Total shared roots across all 300: 6,813 (avg 22.7 per connection)
+- Total shared phrases across all 300: 1,642 (avg 5.5 per connection)
+
+**Each Entry Contains**:
+1. **Basic Info**: rank, psalm_a, psalm_b
+2. **Pattern Counts**: contiguous_2word, contiguous_3word, contiguous_4plus, skipgram_2word, skipgram_3word, skipgram_4plus, total_pattern_points
+3. **Root Statistics**: shared_roots_count, root_idf_sum
+4. **Lengths**: word_count_a, word_count_b, geometric_mean_length
+5. **Scores**: phrase_score, root_score, final_score
+6. **Original Stats**: original_pvalue, original_rank
+7. **DETAILED SHARED ROOTS ARRAY**: For each root:
+   - root (consonantal form)
+   - idf (inverse document frequency score)
+   - count_a, count_b (occurrences in each psalm)
+   - examples_a, examples_b (actual word forms from each psalm)
+8. **DETAILED SHARED PHRASES ARRAY**: For each phrase:
+   - hebrew (full Hebrew text with vowels)
+   - consonantal (consonantal form used for matching)
+   - length (number of words)
+   - count_a, count_b (occurrences in each psalm)
+   - verses_a, verses_b (verse numbers where phrase appears)
+
+### Sample Entry (Psalms 75-76, Rank #98)
+
+**Statistics**:
+- Final score: 565.03
+- Shared roots: 13
+- Shared phrases: 4
+- Pattern points: 41 (3 contiguous 2-word, 1 contiguous 3-word, 7 skipgram 2-word, 7 skipgram 3-word, 5 skipgram 4+)
+
+**Sample Root Match**:
+- Root: אסף (Asaph)
+- IDF: 2.526
+- Psalm 75: 1 occurrence - לְאָסָ֣ף
+- Psalm 76: 1 occurrence - לְאָסָ֣ף
+
+**Sample Phrase Match**:
+- Hebrew: מִזְמ֖וֹר לְאָסָ֣ף שִֽׁיר׃
+- English: "A Psalm of Asaph, a Song"
+- Length: 3 words
+- Psalm 75: verse 1
+- Psalm 76: verse 1
+
+### Technical Notes
+
+**Data Sources**:
+- `enhanced_scores_full.json`: Contains all scoring statistics but no detailed matches
+- `significant_relationships.json`: Contains detailed shared_roots and shared_phrases arrays
+
+**Verse Information**:
+- ✓ Shared phrases include verse numbers (verses_a and verses_b arrays)
+- ⚠️ Shared roots only include example word forms, not verse numbers
+  - Reason: Roots can appear many times throughout a psalm in different forms
+  - Database schema doesn't track verse-level granularity for roots (only for phrases)
+
+**File Format**: JSON with UTF-8 encoding, 2-space indentation, Hebrew preserved as Unicode
+
+### Files Created
+- `scripts/statistical_analysis/generate_top_300_detailed.py` (158 lines)
+- `data/analysis_results/top_300_connections_detailed.json` (2.45 MB)
+
+### Next Steps
+User can now:
+- Analyze detailed match patterns across top 300 connections
+- Identify specific verses where phrases match
+- Study root overlap patterns with IDF-weighted importance
+- Create visualizations or further statistical analysis
+
+---
+
 ## Session 94 - 2025-11-13 (Enhanced Phrase Matching System Implementation COMPLETE ✓)
 
 ### Overview

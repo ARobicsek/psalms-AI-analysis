@@ -1,5 +1,189 @@
 # Next Session Prompt
 
+## Session 95 Handoff - 2025-11-13 (Top 300 Detailed Connections Export COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Generate comprehensive JSON export of top 300 psalm connections with complete match details
+
+User requested: "Create a json that shows, for all of the 300 highest-ranked psalm a-psalm b connections, all the info below AND the identity and verse # of all the root/word and phrase matches found between the verses"
+
+**EXECUTION RESULTS: ✓ COMPLETE - Comprehensive 2.45MB JSON Generated**
+
+### Implementation Summary
+
+**Script Created**:
+- `scripts/statistical_analysis/generate_top_300_detailed.py` (158 lines)
+- Merges enhanced_scores_full.json with significant_relationships.json
+- Outputs top 300 connections sorted by final_score with all match details
+
+**Output File Generated**: `data/analysis_results/top_300_connections_detailed.json`
+- File size: 2.45 MB
+- Total connections: 300
+- Score range: 101,215.07 to 368.05
+
+**Content Summary**:
+- Total shared roots across all 300: 6,813 (avg 22.7 per connection)
+- Total shared phrases across all 300: 1,642 (avg 5.5 per connection)
+
+### What Each Entry Contains
+
+**Scoring Statistics**:
+- rank, psalm_a, psalm_b
+- contiguous_2word, contiguous_3word, contiguous_4plus
+- skipgram_2word, skipgram_3word, skipgram_4plus
+- total_pattern_points
+- shared_roots_count, root_idf_sum
+- word_count_a, word_count_b, geometric_mean_length
+- phrase_score, root_score, final_score
+- original_pvalue, original_rank
+
+**DETAILED SHARED ROOTS** (for each root):
+- root (consonantal form)
+- idf (inverse document frequency score)
+- count_a, count_b (occurrences in each psalm)
+- examples_a, examples_b (actual word forms from each psalm)
+
+**DETAILED SHARED PHRASES** (for each phrase):
+- hebrew (full Hebrew text with vowels)
+- consonantal (consonantal form used for matching)
+- length (number of words)
+- count_a, count_b (occurrences in each psalm)
+- verses_a, verses_b (verse numbers where phrase appears) ✓
+
+### Technical Notes
+
+**Verse Information**:
+- ✓ Shared phrases include verse numbers (verses_a and verses_b arrays)
+- ⚠️ Shared roots only include example word forms, not specific verse numbers
+  - Reason: Roots can appear many times in different forms throughout a psalm
+  - Database schema tracks phrase occurrences at verse level, but not individual root occurrences
+
+### What to Work on Next
+
+**PRIORITY: User Review - Data Ready for Analysis**
+
+The comprehensive top 300 export is complete and ready for:
+
+**Immediate Options**:
+
+1. **Review and Analyze Top 300 Connections** (RECOMMENDED)
+   - Examine detailed match patterns across connections
+   - Identify specific verses where phrases match
+   - Study root overlap patterns with IDF-weighted importance
+   - Look for thematic clusters or groupings
+
+2. **Create Visualizations** (OPTIONAL)
+   - Generate network graphs showing psalm connections
+   - Visualize score distributions
+   - Create heat maps of connection strengths
+   - Show verse-level phrase matches graphically
+
+3. **Further Filter or Expand** (OPTIONAL)
+   - If 300 is too many: Filter to top 100, 150, or other threshold
+   - If 300 is too few: Expand to top 500 or add filtering criteria
+   - Apply additional filters (minimum phrase count, minimum root IDF sum, etc.)
+
+4. **Integrate with Commentary Pipeline** (HIGH VALUE)
+   - Add relationship data to macro analyst prompts
+   - Inform analysts of statistically related Psalms during analysis
+   - Example: "Psalm 75 shares significant vocabulary with Psalm 76 (rank #98)"
+   - Helps identify recurring themes and intertextual connections
+
+5. **Continue Psalm Processing** (READY)
+   - System fully operational with relationship data available
+   - Ready to process remaining Psalms (4, 5, 7, 8, etc.)
+   - Can now reference related Psalms in commentary generation
+   - All data sources integrated and working
+
+### Quick Access Commands
+
+```bash
+# View the detailed JSON
+python -c "
+import json
+with open('data/analysis_results/top_300_connections_detailed.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+    print(f'Total: {len(data)}')
+    print(f'Top connection: Psalms {data[0][\"psalm_a\"]}-{data[0][\"psalm_b\"]} (score: {data[0][\"final_score\"]:.2f})')
+"
+
+# Find a specific psalm pair
+python -c "
+import json
+with open('data/analysis_results/top_300_connections_detailed.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
+    pair = [e for e in data if e['psalm_a'] == 75 and e['psalm_b'] == 76][0]
+    print(f'Psalms 75-76: Rank #{pair[\"rank\"]}, Score: {pair[\"final_score\"]:.2f}')
+    print(f'Shared roots: {len(pair[\"shared_roots\"])}')
+    print(f'Shared phrases: {len(pair[\"shared_phrases\"])}')
+"
+```
+
+### Important Notes
+
+- Phrase matches include verse numbers for precise reference
+- Root matches show example word forms but not verse-level granularity
+- All 300 connections have complete detailed match information
+- Data ready for analysis, visualization, or integration with commentary pipeline
+- File uses UTF-8 encoding with Hebrew text preserved as Unicode
+
+---
+
+## Session 94 Handoff - 2025-11-13 (Enhanced Phrase Matching System Implementation COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Implement enhanced scoring system to reduce 11,001 psalm relationships to ~100 most meaningful connections
+
+User requested implementation of Session 93 design after observing that current statistical analysis finds too many significant relationships (98.4% of all pairs).
+
+**EXECUTION RESULTS: ✓ COMPLETE - Enhanced Scoring System Implemented with Rare Root Weighting**
+
+### Implementation Summary
+
+**Phase 1: Data Preparation** ✓
+- Created `get_psalm_lengths.py` to extract word counts from concordance database
+- All 150 psalms: 20,339 total words (min: 19, max: 1,094, mean: 135.6)
+
+**Phase 2: Skip-Gram Extraction** ✓
+- Implemented `skipgram_extractor.py` for non-contiguous pattern detection
+- Extracted **1,935,965 skip-grams** across all 150 psalms in ~45 seconds
+
+**Phase 3: Enhanced Scoring** ✓
+- Implemented three-component scoring system with length normalization
+- Scored all 11,001 pairs in ~6.5 minutes
+
+**Phase 4: Validation & Reporting** ✓
+- Generated comprehensive `TOP_100_CONNECTIONS_REPORT.md`
+- Successfully reduced from 11,001 to top 100 (99.1% reduction)
+
+**Rare Root Weighting Adjustment** ✓
+- Applied 2x multiplier to very rare roots (IDF ≥ 4.0)
+- Improved Psalms 25 & 34 from rank #309 → #256
+
+### Results Summary
+
+**Top 10 Connections**:
+1. Psalms 60 & 108: 100,864 (composite psalm)
+2. Psalms 14 & 53: 93,127 (nearly identical)
+3. Psalms 40 & 70: 36,395 (shared passage)
+4. Psalms 57 & 108: 28,520
+5. Psalms 42 & 43: 28,022 (originally one psalm)
+
+**Files Created** (1,416 lines total):
+- get_psalm_lengths.py, skipgram_extractor.py, add_skipgrams_to_db.py
+- enhanced_scorer.py, rescore_all_pairs.py, generate_top_connections.py
+
+**Output Files**:
+- enhanced_scores_full.json (6.4MB - all 11,001 scores)
+- top_100_connections.json (638KB - filtered top 100)
+- TOP_100_CONNECTIONS_REPORT.md (11KB - human-readable report)
+
+**Status**: ✓ Implementation complete and validated
+
+---
+
 ## Session 93 Handoff - 2025-11-13 (Enhanced Phrase Matching System Design COMPLETE ✓)
 
 ### What Was Done This Session
