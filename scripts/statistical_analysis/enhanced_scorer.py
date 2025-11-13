@@ -206,8 +206,16 @@ class EnhancedScorer:
             (cont_4plus + skip_4) * 3
         )
 
-        # Calculate root IDF sum
-        root_idf_sum = sum(root.get('idf', 0) for root in shared_roots)
+        # Calculate root IDF sum with bonus weight for rare roots (IDF >= 4)
+        root_idf_sum = 0
+        for root in shared_roots:
+            idf = root.get('idf', 0)
+            if idf >= 4.0:
+                # Double weight for rare roots
+                root_idf_sum += idf * 2
+            else:
+                # Normal weight for common roots
+                root_idf_sum += idf
 
         # Get word counts
         word_count_a = self.word_counts.get(psalm_a, 0)
@@ -220,6 +228,7 @@ class EnhancedScorer:
             geometric_mean = math.sqrt(word_count_a * word_count_b)
 
         # Calculate normalized scores
+        # NOTE: Rare roots (IDF >= 4) are already doubled in root_idf_sum calculation
         phrase_score = (pattern_points / geometric_mean) * 1000 if geometric_mean > 0 else 0
         root_score = (root_idf_sum / geometric_mean) * 1000 if geometric_mean > 0 else 0
 
