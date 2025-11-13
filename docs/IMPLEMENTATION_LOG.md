@@ -1,5 +1,200 @@
 # Implementation Log
 
+## Session 94 - 2025-11-13 (Enhanced Phrase Matching System Implementation COMPLETE ✓)
+
+### Overview
+**Objective**: Implement enhanced scoring system to reduce 11,001 psalm relationships to ~100 most meaningful connections
+**Trigger**: User requested implementation of Session 93 design
+**Result**: ✓ COMPLETE - System implemented with rare root weighting adjustment
+
+**Session Duration**: ~2 hours (implementation, validation, adjustment)
+**Status**: Implementation complete - Psalms 25 & 34 rank #256 (accepted by user)
+**Impact**: Successfully reduced connections from 11,001 to top 100 (99.1% reduction)
+
+### Implementation Summary
+
+**Phase 1: Data Preparation** ✓
+- Created `get_psalm_lengths.py` to extract word counts from concordance database
+- All 150 psalms: 20,339 total words (min: 19, max: 1,094, mean: 135.6)
+- Verified root IDF sums available in database for all relationships
+
+**Phase 2: Skip-Gram Extraction** ✓
+- Implemented `skipgram_extractor.py` for non-contiguous pattern detection
+- Extracted **1,935,965 skip-grams** across all 150 psalms in ~45 seconds:
+  - 2-word patterns (window=5): 77,185
+  - 3-word patterns (window=7): 288,621
+  - 4-word patterns (window=10): 1,570,159
+- Stored in new `psalm_skipgrams` database table with indexes
+
+**Phase 3: Enhanced Scoring** ✓
+- Implemented `enhanced_scorer.py` with three-component scoring system:
+  1. **Pattern points**: 1pt (2-word), 2pt (3-word), 3pt (4+ word)
+  2. **Root IDF overlap**: Sum of IDF scores (with 2x bonus for IDF ≥ 4.0)
+  3. **Length normalization**: Geometric mean of word counts
+- Formula: `final_score = (pattern_pts/geom_mean × 1000) + (root_idf/geom_mean × 1000)`
+- Scored all 11,001 pairs in ~6.5 minutes
+
+**Phase 4: Validation & Reporting** ✓
+- Generated comprehensive `TOP_100_CONNECTIONS_REPORT.md`
+- Successfully reduced from 11,001 to top 100 (99.1% reduction)
+- Score range: 7.33 to 100,864.09
+
+**Rare Root Weighting Adjustment** ✓
+- User requested more weight for rare roots (IDF ≥ 4.0)
+- Modified scoring to apply 2x multiplier to very rare roots only
+- Improved Psalms 25 & 34 from rank #309 → #256 (+53 positions)
+- User accepted this result
+
+### Results Summary
+
+**Top 10 Connections**:
+1. Psalms 60 & 108: 100,864 (composite psalm)
+2. Psalms 14 & 53: 93,127 (nearly identical)
+3. Psalms 40 & 70: 36,395 (shared passage)
+4. Psalms 57 & 108: 28,520
+5. Psalms 42 & 43: 28,022 (originally one psalm)
+6. Psalms 115 & 135: 19,465 (Hallel psalms)
+7. Psalms 96 & 98: 8,184
+8. Psalms 29 & 96: 5,734
+9. Psalms 31 & 71: 4,634
+10. Psalms 113 & 135: 3,336
+
+**Validation Results**:
+- ✓ Psalms 14 & 53 (nearly identical): Rank #2
+- ✓ Psalms 60 & 108 (composite): Rank #1
+- ✓ Psalms 40 & 70 (shared passage): Rank #3
+- ✓ Psalms 42 & 43 (originally one): Rank #5 (jumped from #195!)
+- ✓ Psalms 25 & 34 (thematic): Rank #256 (accepted - shares vocabulary thematically, not textually)
+
+**Psalms 25 & 34 Analysis**:
+- Share 31 roots, but only 1 is very rare (IDF ≥ 4.0): צרות (troubles)
+- Only 15 pattern points (4 contiguous + 11 skip-gram 2-word patterns)
+- No 3-word or longer matching phrases
+- Conclusion: Share thematic vocabulary (refuge, goodness, fear) but express differently
+
+### Technical Implementation
+
+**Files Created** (1,416 lines total):
+- `scripts/statistical_analysis/get_psalm_lengths.py` (121 lines)
+- `scripts/statistical_analysis/skipgram_extractor.py` (308 lines)
+- `scripts/statistical_analysis/add_skipgrams_to_db.py` (202 lines)
+- `scripts/statistical_analysis/enhanced_scorer.py` (412 lines)
+- `scripts/statistical_analysis/rescore_all_pairs.py` (109 lines)
+- `scripts/statistical_analysis/generate_top_connections.py` (254 lines)
+
+**Output Files Generated**:
+- `data/analysis_results/psalm_word_counts.json` (2.4KB)
+- `data/analysis_results/enhanced_scores_full.json` (6.4MB - all 11,001 scores)
+- `data/analysis_results/top_100_connections.json` (638KB - filtered top 100)
+- `data/analysis_results/TOP_100_CONNECTIONS_REPORT.md` (11KB - human-readable)
+- `data/analysis_results/README_DATABASE.md` (regeneration instructions)
+
+**Database Updates** (not committed - too large for GitHub):
+- Added `psalm_skipgrams` table (1,935,965 entries)
+- Database size: 47MB → 360MB (local only)
+- Added to .gitignore with regeneration instructions
+
+### Scoring Formula Details
+
+**Pattern Points**:
+```python
+pattern_points = (2-word × 1) + (3-word × 2) + (4+word × 3)
+```
+
+**Root IDF Sum** (with rare root bonus):
+```python
+root_idf_sum = 0
+for root in shared_roots:
+    if root.idf >= 4.0:
+        root_idf_sum += root.idf * 2  # 2x bonus for very rare
+    else:
+        root_idf_sum += root.idf      # Normal weight
+```
+
+**Length Normalization**:
+```python
+geom_mean_length = sqrt(word_count_A × word_count_B)
+```
+
+**Final Score**:
+```python
+phrase_score = (pattern_points / geom_mean_length) × 1000
+root_score = (root_idf_sum / geom_mean_length) × 1000
+final_score = phrase_score + root_score
+```
+
+### Validation Findings
+
+**Score Distribution**:
+- Minimum: 7.33
+- Maximum: 100,864.09
+- Median: 149.07
+- Top 100 threshold: 555.16
+- Top 150 threshold: 459.15
+
+**Known Pair Validation**:
+- 4 of 4 duplicate/composite pairs in top 5 ✓
+- Psalms 42 & 43 jumped from rank #195 to #5 (system caught the connection!)
+- Psalms 25 & 34 at #256 (thematic similarity, not textual overlap)
+
+### Key Insights
+
+1. **Skip-grams successfully capture patterns**: System finds both contiguous and non-contiguous patterns within sliding windows
+
+2. **Length normalization is critical**: Prevents bias toward shorter psalms; geometric mean is appropriate
+
+3. **Rare root bonus helps**: Psalms 25 & 34 improved by 53 positions with 2x bonus for IDF ≥ 4.0
+
+4. **Thematic vs. Textual connections**: Some scholarly connections are thematic (shared concepts expressed differently) rather than textual (shared exact phrases)
+
+5. **System identifies textual overlap effectively**: All known duplicate/composite pairs rank in top 5
+
+### User Decisions
+
+1. **Accepted Psalms 25 & 34 at rank #256**: Recognizes difference between thematic and textual connections
+2. **Approved 2x weight for rare roots (IDF ≥ 4.0)**: Balances common and distinctive vocabulary
+3. **Ready to review top 100 carefully**: System has reduced relationships to manageable set
+
+### Next Steps (User to Decide)
+
+**Immediate Options**:
+
+1. **Review Top 100 Report** (RECOMMENDED)
+   - Examine detailed breakdown in `TOP_100_CONNECTIONS_REPORT.md`
+   - Verify quality of connections identified
+   - Assess whether top 100 captures meaningful relationships
+
+2. **Integrate with Commentary Pipeline**
+   - Use top 100 connections in macro/micro analyst prompts
+   - Inform agents of related Psalms during analysis
+   - Helps identify recurring themes and intertextual connections
+
+3. **Continue Psalm Processing**
+   - System fully operational with filtered relationship data
+   - Ready to process remaining Psalms with top 100 connections
+   - Can reference related Psalms in commentary generation
+
+4. **Further Scoring Adjustments** (if needed)
+   - Adjust rare root threshold (e.g., IDF ≥ 3.5)
+   - Adjust rare root multiplier (e.g., 3x instead of 2x)
+   - Expand to top 150 or 200 if desired
+
+### Session Accomplishments
+
+✓ Implemented complete enhanced scoring system (4 phases)
+✓ Extracted 1.9M skip-grams across all 150 psalms
+✓ Scored all 11,001 pairs with new formula
+✓ Generated comprehensive top 100 report
+✓ Applied rare root weighting adjustment
+✓ Validated against known psalm connections
+✓ Reduced relationships from 11,001 to 100 (99.1% reduction)
+✓ Documented all work with regeneration instructions
+✓ Committed and pushed all changes to GitHub
+
+**Status**: Implementation complete and validated. Ready for user review and integration with commentary pipeline.
+
+---
+
 ## Session 93 - 2025-11-13 (Enhanced Phrase Matching System Design COMPLETE ✓)
 
 ### Overview

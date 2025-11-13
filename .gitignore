@@ -30,6 +30,9 @@ Desktop.ini
 .env
 *.log
 
+# Large database files (too big for GitHub)
+data/psalm_relationships.db
+
 # Temporary files
 temp/
 tmp/
