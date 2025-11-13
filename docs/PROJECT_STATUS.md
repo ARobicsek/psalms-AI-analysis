@@ -1,9 +1,50 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ SYSTEM OPERATIONAL - Statistical Analysis Enhanced with Root & Phrase Matching
-**Last Updated**: 2025-11-13 (Session 91 - Root & Phrase Matching Complete)
+## Current Status: ✓ SYSTEM OPERATIONAL - IDF Transformation Analysis Complete
+**Last Updated**: 2025-11-13 (Session 92 - IDF Transformation Analysis Complete)
 
-## Recent Work Session 91: (2025-11-13 - Root & Phrase Matching ENHANCED ✓)
+## Recent Work Session 92: (2025-11-13 - IDF Transformation Analysis COMPLETE ✓)
+
+### ✓ SUCCESS: Exponential IDF Transformation Evaluated - Not Recommended
+
+**Problem**: IDF score distribution shows bunching at high end (50th-95th percentiles all at 5.0106)
+- User concerned about bunched distribution affecting statistical analysis
+- Requested comparison: current method (linear IDF) vs exponential transformation (e^IDF)
+- Requested psalm-by-psalm comparison table showing matches under each method
+
+**Analysis Performed**:
+- ✓ Implemented comparison script (`compare_idf_methods.py`, 367 lines)
+- ✓ Analyzed all 11,001 significant relationships
+- ✓ Calculated exponential weighted scores and z-scores
+- ✓ Generated comprehensive comparison table for all 150 psalms
+- ✓ Identified differences between methods
+
+**Results**:
+- **Current method**: 11,001 significant relationships (100.0%)
+- **Exponential method**: 11,000 significant relationships (99.99%)
+- **Only 1 pair differs**: Psalms 131 & 150 (goes from significant to non-significant)
+- **Conclusion**: Exponential transformation makes **almost no difference**
+
+**Why Exponential Doesn't Help**:
+1. **Mathematical issue**: Exponential amplifies differences (e^5.01 ≈ 150 vs e^1 ≈ 2.7), making bunching worse
+2. **Statistical issue**: Hypergeometric p-value (count-based) dominates significance, unchanged by transformation
+3. **Real phenomenon**: Bunching at IDF=5.0106 represents 1,558 hapax legomena (47% of roots) - this is correct!
+
+**Recommendation**: **DO NOT** use exponential transformation
+- Provides no benefit (99.99% same results)
+- Makes bunching worse by amplifying rare word dominance
+- Current linear IDF method is appropriate
+
+**Alternative Solutions**:
+1. **More stringent threshold**: Change p < 0.01 to p < 0.001 → ~4,268 relationships
+2. **Prioritize phrase overlap**: Use Session 91's phrase matching for discrimination
+3. **Accept current results**: 98.4% significance reflects genuine linguistic connections
+
+**Status**: ✓ Analysis complete - Current method validated, exponential transformation rejected
+
+---
+
+## Previous Work Session 91: (2025-11-13 - Root & Phrase Matching ENHANCED ✓)
 
 ### ✓ SUCCESS: Statistical Analysis Enhanced with Detailed Root and Phrase Matching
 
