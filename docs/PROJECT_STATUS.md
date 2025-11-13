@@ -1,7 +1,76 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ SYSTEM OPERATIONAL - IDF Transformation Analysis Complete
-**Last Updated**: 2025-11-13 (Session 92 - IDF Transformation Analysis Complete)
+## Current Status: ✓ SYSTEM OPERATIONAL - Enhanced Scoring System Design Complete
+**Last Updated**: 2025-11-13 (Session 93 - Enhanced Phrase Matching System Design Complete)
+
+## Recent Work Session 93: (2025-11-13 - Enhanced Phrase Matching System Design COMPLETE ✓)
+
+### ✓ SUCCESS: Enhanced Scoring System Designed to Reduce Connections to ~100
+
+**Problem Identified**: Current statistical analysis too broad
+- User observed: "Each psalm has a statistically significant relationship with almost ALL other psalms"
+- Current system: 11,001 significant relationships (98.4% of all pairs)
+- This doesn't help identify the truly meaningful connections
+- Goal: Reduce to ~100 most significant connections for synthesis/master editor agents
+- Key requirement: Psalms 25 & 34 must remain connected (known scholarly relationship)
+
+**Current System Limitations**:
+1. Only captures contiguous 2-3 word phrases
+2. Missing non-contiguous patterns (skip-grams) that scholars recognize
+3. No length normalization (short psalms appear more similar)
+4. Psalms 25 & 34: p=9.32e-23, 31 shared roots, only 4 contiguous phrases, rank #286
+
+**Solution Designed**:
+
+**Three-Component Enhanced Scoring System**:
+
+1. **Extended Phrase Patterns**
+   - Extract contiguous phrases: 2, 3, 4, 5, 6+ words
+   - Extract skip-grams (non-contiguous patterns):
+     - 2-word patterns within 5-word window
+     - 3-word patterns within 7-word window
+     - 4+ word patterns within 10-word window
+   - Unified scoring: 1 point (2 words), 2 points (3 words), 3 points (4+ words)
+   - Same points whether contiguous or skip-gram
+
+2. **Root IDF Overlap** (already implemented)
+   - Sum of IDF scores for all shared roots
+   - Rewards both quantity and rarity of shared roots
+
+3. **Length Normalization** (new)
+   - Normalize by geometric mean of psalm word counts
+   - Formula: `score = (raw_points / sqrt(length_A × length_B)) × 1000`
+   - Prevents bias toward shorter psalms
+
+**Final Score Formula**:
+```
+phrase_points = sum of all pattern points (contiguous + skipgrams)
+root_idf_sum = sum of IDF scores for all shared roots
+geom_mean_length = sqrt(word_count_A × word_count_B)
+
+phrase_score = (phrase_points / geom_mean_length) × 1000
+root_score = (root_idf_sum / geom_mean_length) × 1000
+
+FINAL_SCORE = phrase_score + root_score
+```
+
+**Expected Score Ranges**:
+- Nearly identical psalms (14-53, 60-108): ~2,000+
+- Strong thematic connections (25-34): ~300-500
+- Weak connections: <100
+- Filter to top 100-150 connections
+
+**Implementation Plan Created** (See NEXT_SESSION_PROMPT.md):
+- Phase 1: Data preparation (psalm lengths, verify IDF sums)
+- Phase 2: Skip-gram extraction (2-word, 3-word, 4+ word patterns)
+- Phase 3: Enhanced scoring (calculate normalized scores for all pairs)
+- Phase 4: Validation & reporting (generate top 100, validate known pairs)
+- Phase 5: Integration (update pipeline to use filtered connections)
+- **Total estimated time**: 2.5-3 hours
+
+**Status**: ✓ Design complete - Ready for implementation in next session
+
+---
 
 ## Recent Work Session 92: (2025-11-13 - IDF Transformation Analysis COMPLETE ✓)
 
