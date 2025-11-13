@@ -1,9 +1,41 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ SYSTEM OPERATIONAL - Concordance Fixed & Ready for Production
-**Last Updated**: 2025-11-12 (Maqqef Fix Implemented & Validated)
+## Current Status: ✓ SYSTEM OPERATIONAL - Statistical Analysis Enhanced with Root & Phrase Matching
+**Last Updated**: 2025-11-13 (Session 91 - Root & Phrase Matching Complete)
 
-## Recent Work Session 88: (2025-11-12 - Maqqef Fix IMPLEMENTED ✓)
+## Recent Work Session 91: (2025-11-13 - Root & Phrase Matching ENHANCED ✓)
+
+### ✓ SUCCESS: Statistical Analysis Enhanced with Detailed Root and Phrase Matching
+
+**Problem**: Statistical relationships showed counts but not actual matched roots/phrases
+- User requested: "list out the matched roots between the psalms"
+- User requested: "Add in matching for phrases (and list phrases that matched in the output)"
+
+**Solution Implemented**:
+- ✓ Modified `pairwise_comparator.py` to retrieve shared_roots_json from database
+- ✓ Added `get_psalm_phrases()` method to database_builder.py
+- ✓ Enhanced `compare_pair()` to find and list shared phrases
+- ✓ Updated output generation to display roots and phrases in results
+- ✓ Re-ran full analysis with phrase extraction
+
+**Results**:
+- **63,669 total phrases** extracted from all 150 Psalms
+- **8,888 shared phrases** identified across 11,001 significant relationships
+- Top relationship (Psalms 14 & 53): **45 shared roots, 73 shared phrases**
+- Output now includes:
+  - Complete list of shared roots (with IDF scores, counts, examples)
+  - Complete list of shared phrases (with Hebrew text, length, verse refs)
+- JSON files updated: significant_relationships.json (51MB), bidirectional_relationships.json (4.7MB)
+
+**Key Example** (Psalms 14 & 53):
+- Shared roots: נאלח (IDF=4.317), תעיב (IDF=4.317), קיף (IDF=3.912), etc.
+- Shared phrases: "אֵ֣ין עֹֽשֵׂה טֽוֹב" (there is none who does good), "בְּנֵי אָ֫דָ֥ם לִ֭רְאוֹת" (sons of man to see), etc.
+
+**Status**: ✓ Feature complete - All relationships now include detailed matched roots and phrases
+
+---
+
+## Previous Work Session 88: (2025-11-12 - Maqqef Fix IMPLEMENTED ✓)
 
 ### ✓ SUCCESS: Concordance System Fixed and Fully Functional
 

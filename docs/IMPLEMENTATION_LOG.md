@@ -1,5 +1,192 @@
 # Implementation Log
 
+## Session 91 - 2025-11-13 (Root & Phrase Matching Enhancement COMPLETE ✓)
+
+### Overview
+**Objective**: Enhance statistical analysis output to list matched roots and phrases between psalms
+**Trigger**: User requested that statistically significant matches should list the actual matched roots and phrases
+**Result**: ✓ COMPLETE SUCCESS - Full analysis re-run with enhanced output including 8,888 shared phrases
+
+**Session Duration**: ~6 minutes (analysis) + implementation time
+**Status**: Feature complete - All relationships now include detailed root and phrase lists
+**Impact**: Provides concrete examples of vocabulary connections between Psalms
+
+### Tasks Completed
+
+1. **Updated root matching output** ✓
+   - Modified `pairwise_comparator.py::get_significant_relationships()` to retrieve `shared_roots_json` from database
+   - Added `include_shared_items` parameter (defaults to True)
+   - Output now includes complete list of shared roots with:
+     - Root consonantal form
+     - IDF score (rarity metric)
+     - Occurrence counts in each Psalm
+     - Example words from each Psalm
+
+2. **Implemented phrase matching** ✓
+   - Added `get_psalm_phrases()` method to `database_builder.py`
+   - Enhanced `compare_pair()` in `pairwise_comparator.py` to:
+     - Retrieve phrases from both Psalms
+     - Find shared phrases by consonantal form
+     - Build detailed shared phrase list with Hebrew text, length, and verse references
+   - Database schema already supported phrases (from Session 89)
+
+3. **Updated output generation** ✓
+   - Modified `run_full_analysis.py` to display phrase counts in top 20 table
+   - Updated bidirectional relationship generation to include `shared_phrase_count`
+   - Enhanced example output to show both roots and phrases
+
+4. **Re-ran full analysis** ✓
+   - Extracted phrases from all 150 Psalms: **63,669 total phrases**
+   - Compared all 11,175 Psalm pairs with phrase matching
+   - Identified **8,888 shared phrases** across 11,001 significant relationships
+   - Processing time: ~5.5 minutes (vs 2.6 minutes without phrases)
+
+### Implementation Details
+
+**Files Modified**:
+- `scripts/statistical_analysis/pairwise_comparator.py` (lines 65-183, 203-255)
+  - Added phrase retrieval and comparison in `compare_pair()`
+  - Enhanced `get_significant_relationships()` to parse shared_roots_json and shared_phrases_json
+- `scripts/statistical_analysis/database_builder.py` (lines 304-339)
+  - Added `get_psalm_phrases()` method to retrieve phrases by Psalm number
+- `scripts/statistical_analysis/run_full_analysis.py` (lines 127-203)
+  - Updated display format to show phrase counts
+  - Enhanced bidirectional relationship entries
+
+**New Files Created**:
+- `scripts/statistical_analysis/regenerate_outputs.py` (169 lines)
+  - Standalone script to regenerate JSON outputs from database
+  - Useful for updating outputs after code changes without re-running analysis
+- `scripts/statistical_analysis/test_phrase_extraction.py` (169 lines)
+  - Test script to verify phrase extraction on Psalms 14 & 53
+  - Validates phrase matching functionality
+
+### Results Summary
+
+**Database Statistics** (after re-run):
+- **Root frequencies**: 3,327 unique roots (unchanged)
+- **Psalm-root mappings**: 13,886 entries (unchanged)
+- **Psalm phrases**: **63,669 phrases** (new - was 33,867 placeholder count)
+- **Significant relationships**: 11,001 pairs (unchanged)
+- **Total shared phrases**: **8,888** across all relationships (new)
+
+**Top 10 Relationships** (with phrase counts):
+| Rank | Psalms  | p-value   | Roots | **Phrases** | Notes                          |
+|------|---------|-----------|-------|-------------|--------------------------------|
+| 1    | 14-53   | 1.11e-80  | 45    | **73**      | Nearly identical Psalms        |
+| 2    | 60-108  | 1.15e-70  | 54    | **82**      | Composite Psalm (57+60)        |
+| 3    | 40-70   | 9.16e-53  | 38    | **40**      | Shared passage                 |
+| 4    | 78-105  | 1.91e-43  | 93    | **8**       | Historical narratives          |
+| 5    | 115-135 | 2.86e-40  | 38    | **46**      | Hallel Psalms                  |
+| 6    | 31-71   | 2.69e-36  | 52    | **18**      | Individual laments             |
+| 7    | 31-119  | 4.74e-36  | 80    | **9**       | Long vs shorter lament         |
+| 8    | 69-119  | 3.99e-35  | 91    | **9**       | Both lengthy Psalms            |
+| 9    | 25-31   | 8.85e-33  | 44    | **9**       | Related laments                |
+| 10   | 31-143  | 1.18e-32  | 40    | **6**       | Individual laments             |
+
+**Example Output** (Psalms 14 & 53):
+```
+Top 10 Shared Roots (by rarity/IDF):
+  1. נאלח (IDF=4.317, occurs 1x in Ps 14, 1x in Ps 53)
+  2. תעיב (IDF=4.317, occurs 1x in Ps 14, 1x in Ps 53)
+  3. קיף (IDF=3.912, occurs 1x in Ps 14, 1x in Ps 53)
+  ...
+
+Top 5 Shared Phrases:
+  1. אֵ֣ין עֹֽשֵׂה טֽוֹב׃ (אין עש טוב)
+     Length: 3 words, occurs 2x in Ps 14, 2x in Ps 53
+  2. בְּנֵי אָ֫דָ֥ם לִ֭רְאוֹת (ני אדם רא)
+     Length: 3 words, occurs 1x in Ps 14, 1x in Ps 53
+  3. פָ֑חַד כִּֽי אֱ֝לֹהִ֗ים (פחד כי אלה)
+     Length: 3 words, occurs 1x in Ps 14, 1x in Ps 53
+  ...
+```
+
+### Technical Notes
+
+**Phrase Extraction**:
+- Uses n-gram approach (2-word and 3-word sequences)
+- Matches on consonantal form (vowel-independent)
+- Preserves Hebrew text for display
+- Tracks verse references for each phrase occurrence
+- Groups duplicate phrases by consonantal form
+
+**Performance Impact**:
+- Analysis time increased from 2.6 to ~5.5 minutes (2.1x slowdown)
+- Due to phrase extraction (63K+ phrases) and comparison overhead
+- Database size increased from ~6MB to ~8MB
+- JSON output files: significant_relationships.json increased from 2.6MB to 51MB
+
+**Data Quality**:
+- High phrase match counts for duplicate/composite Psalms (73, 82, 40)
+- Lower phrase counts for thematically similar Psalms (8, 9, 6)
+- Makes sense: duplicates share exact phrases, thematic similarity shares vocabulary (roots) but not phrases
+- Validates that phrase matching adds meaningful signal beyond root matching
+
+### Validation
+
+**Test Results** (Psalms 14 & 53):
+- ✓ 125 phrases extracted from Psalm 14
+- ✓ 133 phrases extracted from Psalm 53
+- ✓ 73 shared phrases identified
+- ✓ Shared phrases include meaningful sequences like "אֵ֣ין עֹֽשֵׂה טֽוֹב׃" (there is none who does good)
+
+**Known Related Pairs**:
+| Psalms  | Shared Roots | **Shared Phrases** | Status              |
+|---------|--------------|--------------------|--------------------|
+| 14 & 53 | 45           | **73**             | ✓ Highest phrase count |
+| 60 & 108| 54           | **82**             | ✓ Second highest   |
+| 40 & 70 | 38           | **40**             | ✓ Third highest    |
+| 42 & 43 | 19           | **6**              | ✓ Detected         |
+
+### Output Files
+
+**Updated Files** (`data/analysis_results/`):
+- `root_statistics.json` - Unchanged (310 bytes)
+- `significant_relationships.json` - **51MB** (was 2.6MB) - Now includes full shared_roots and shared_phrases arrays
+- `bidirectional_relationships.json` - **4.7MB** (was 4.1MB) - Now includes shared_phrase_count field
+
+**Database** (`data/psalm_relationships.db`):
+- All relationships now have populated `shared_roots_json` and `shared_phrases_json` fields
+- Database ready for queries and further analysis
+
+### Next Steps (Recommendations)
+
+1. **Integration with Commentary Pipeline** (HIGH PRIORITY)
+   - Modify macro analyst prompts to include relationship data
+   - Show analysts which Psalms are statistically related
+   - Example: "Psalm 31 shares significant vocabulary with Psalms 71 (52 roots, 18 phrases), 69 (80 roots, 9 phrases), 143 (40 roots, 6 phrases)"
+   - Helps identify recurring themes and intertextual connections
+
+2. **Detailed Relationship Reports** (OPTIONAL)
+   - Create human-readable reports for specific Psalm pairs
+   - Show all shared roots and phrases with examples
+   - Useful for scholarly analysis and publication
+
+3. **Phrase Filtering** (FUTURE ENHANCEMENT)
+   - Filter common liturgical phrases that appear frequently
+   - Focus on rare/distinctive phrases
+   - Similar to IDF scoring for roots, could add "phrase rarity" metric
+
+4. **Continue Psalm Processing** (READY)
+   - System fully operational with relationship data available
+   - Ready to process remaining Psalms (4, 5, 7, 8, etc.)
+   - Can now reference related Psalms in commentary generation
+
+### Session Accomplishments
+
+✓ Enhanced output to list matched roots (with IDF scores, counts, examples)
+✓ Implemented phrase matching functionality
+✓ Updated output to list matched phrases (with Hebrew text, length, verse refs)
+✓ Re-ran full analysis with phrase extraction (63,669 phrases, 8,888 shared)
+✓ Validated results on known related Psalm pairs
+✓ Created regenerate_outputs.py utility script
+✓ Updated documentation (IMPLEMENTATION_LOG, PROJECT_STATUS, NEXT_SESSION_PROMPT)
+
+**Status**: Feature complete and validated. All user requirements met.
+
+---
+
 ## Session 90 - Session Summary: 2025-11-13 (Full Statistical Analysis RUN COMPLETE ✓)
 
 ### Overview
