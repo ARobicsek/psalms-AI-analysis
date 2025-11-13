@@ -10,13 +10,13 @@
     "skipgram_4plus": 3124,
     "total_pattern_points": 11030,
     "shared_roots": 54,
-    "root_idf_sum": 136.7986248633391,
+    "root_idf_sum": 175.6560178851659,
     "word_count_a": 119,
     "word_count_b": 103,
     "geometric_mean_length": 110.71133636624572,
     "phrase_score": 99628.46048133231,
-    "root_score": 1235.6333990115852,
-    "final_score": 100864.09388034389,
+    "root_score": 1586.6127503336766,
+    "final_score": 101215.07323166599,
     "original_pvalue": 1.1463270500225199e-70,
     "original_rank": 1
   },
@@ -31,13 +31,13 @@
     "skipgram_4plus": 1956,
     "total_pattern_points": 7090,
     "shared_roots": 45,
-    "root_idf_sum": 78.39550865912564,
+    "root_idf_sum": 87.03048488619824,
     "word_count_a": 75,
     "word_count_b": 79,
     "geometric_mean_length": 76.97402159170326,
     "phrase_score": 92108.99798905927,
-    "root_score": 1018.4671014717463,
-    "final_score": 93127.46509053101,
+    "root_score": 1130.647497513355,
+    "final_score": 93239.64548657263,
     "original_pvalue": 1.1100351083679758e-80,
     "original_rank": 2
   },
@@ -52,13 +52,13 @@
     "skipgram_4plus": 966,
     "total_pattern_points": 3592,
     "shared_roots": 38,
-    "root_idf_sum": 74.46450905014542,
+    "root_idf_sum": 78.78199716368172,
     "word_count_a": 199,
     "word_count_b": 51,
     "geometric_mean_length": 100.74224535913422,
     "phrase_score": 35655.34982067298,
-    "root_score": 739.1587192114712,
-    "final_score": 36394.50853988445,
+    "root_score": 782.015497895974,
+    "final_score": 36437.365318568955,
     "original_pvalue": 9.157562005806187e-53,
     "original_rank": 3
   },
@@ -73,13 +73,13 @@
     "skipgram_4plus": 807,
     "total_pattern_points": 3005,
     "shared_roots": 27,
-    "root_idf_sum": 44.510092031690306,
+    "root_idf_sum": 48.82758014522661,
     "word_count_a": 111,
     "word_count_b": 103,
     "geometric_mean_length": 106.92520750505935,
     "phrase_score": 28103.756542701245,
-    "root_score": 416.2731414814812,
-    "final_score": 28520.029684182726,
+    "root_score": 456.6517221200273,
+    "final_score": 28560.40826482127,
     "original_pvalue": 5.1272917433424926e-27,
     "original_rank": 4
   },
@@ -94,13 +94,13 @@
     "skipgram_4plus": 729,
     "total_pattern_points": 2648,
     "shared_roots": 19,
-    "root_idf_sum": 32.753023114147744,
+    "root_idf_sum": 37.07051122768406,
     "word_count_a": 143,
     "word_count_b": 64,
     "geometric_mean_length": 95.66608594481119,
     "phrase_score": 27679.610531234706,
-    "root_score": 342.3681735347952,
-    "final_score": 28021.978704769503,
+    "root_score": 387.49898526286177,
+    "final_score": 28067.109516497567,
     "original_pvalue": 5.4962741452111586e-21,
     "original_rank": 5
   },
@@ -115,13 +115,13 @@
     "skipgram_4plus": 770,
     "total_pattern_points": 2941,
     "shared_roots": 38,
-    "root_idf_sum": 57.83942323259808,
+    "root_idf_sum": 62.15691134613439,
     "word_count_a": 138,
     "word_count_b": 172,
     "geometric_mean_length": 154.06492138056606,
     "phrase_score": 19089.355147465652,
-    "root_score": 375.4224044922274,
-    "final_score": 19464.77755195788,
+    "root_score": 403.4462276626647,
+    "final_score": 19492.801375128318,
     "original_pvalue": 2.8641897446010716e-40,
     "original_rank": 6
   },
@@ -178,13 +178,13 @@
     "skipgram_4plus": 235,
     "total_pattern_points": 939,
     "shared_roots": 52,
-    "root_idf_sum": 84.51037217575522,
+    "root_idf_sum": 88.82786028929154,
     "word_count_a": 228,
     "word_count_b": 214,
     "geometric_mean_length": 220.8891124523796,
     "phrase_score": 4251.001733742917,
-    "root_score": 382.5918409354576,
-    "final_score": 4633.593574678374,
+    "root_score": 402.1377934978189,
+    "final_score": 4653.139527240736,
     "original_pvalue": 2.6861629823548546e-36,
     "original_rank": 9
   },
@@ -388,13 +388,13 @@
     "skipgram_4plus": 15,
     "total_pattern_points": 109,
     "shared_roots": 11,
-    "root_idf_sum": 10.941231188395141,
+    "root_idf_sum": 15.258719301931452,
     "word_count_a": 88,
     "word_count_b": 83,
     "geometric_mean_length": 85.46344247688599,
     "phrase_score": 1275.399127872477,
-    "root_score": 128.02235518835144,
-    "final_score": 1403.4214830608285,
+    "root_score": 178.5408925700395,
+    "final_score": 1453.9400204425165,
     "original_pvalue": 3.622910593559433e-08,
     "original_rank": 19
   },
@@ -409,13 +409,13 @@
     "skipgram_4plus": 55,
     "total_pattern_points": 266,
     "shared_roots": 37,
-    "root_idf_sum": 50.403925097221006,
+    "root_idf_sum": 54.721413210757326,
     "word_count_a": 139,
     "word_count_b": 394,
     "geometric_mean_length": 234.0213665458776,
     "phrase_score": 1136.6483493628061,
-    "root_score": 215.38172279384503,
-    "final_score": 1352.0300721566512,
+    "root_score": 233.83084210829838,
+    "final_score": 1370.4791914711045,
     "original_pvalue": 1.8574210854400645e-17,
     "original_rank": 20
   },
@@ -514,15 +514,57 @@
     "skipgram_4plus": 19,
     "total_pattern_points": 103,
     "shared_roots": 25,
-    "root_idf_sum": 35.37083803410371,
+    "root_idf_sum": 39.68832614764004,
     "word_count_a": 88,
     "word_count_b": 172,
     "geometric_mean_length": 123.02845199383759,
     "phrase_score": 837.2047142815322,
-    "root_score": 287.50128495378783,
-    "final_score": 1124.7059992353202,
+    "root_score": 322.59469662861403,
+    "final_score": 1159.7994109101462,
     "original_pvalue": 6.177447232613578e-20,
     "original_rank": 25
+  },
+  {
+    "psalm_a": 54,
+    "psalm_b": 86,
+    "contiguous_2word": 5,
+    "contiguous_3word": 3,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 14,
+    "skipgram_3word": 9,
+    "skipgram_4plus": 9,
+    "total_pattern_points": 70,
+    "shared_roots": 25,
+    "root_idf_sum": 44.68020991219236,
+    "word_count_a": 65,
+    "word_count_b": 154,
+    "geometric_mean_length": 100.0499875062461,
+    "phrase_score": 699.6502622814412,
+    "root_score": 446.5788654836462,
+    "final_score": 1146.2291277650875,
+    "original_pvalue": 1.607695841901342e-26,
+    "original_rank": 26
+  },
+  {
+    "psalm_a": 135,
+    "psalm_b": 136,
+    "contiguous_2word": 8,
+    "contiguous_3word": 2,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 17,
+    "skipgram_3word": 21,
+    "skipgram_4plus": 24,
+    "total_pattern_points": 143,
+    "shared_roots": 28,
+    "root_idf_sum": 50.983229612940946,
+    "word_count_a": 172,
+    "word_count_b": 167,
+    "geometric_mean_length": 169.4815624190431,
+    "phrase_score": 843.7495970590155,
+    "root_score": 300.81873736144195,
+    "final_score": 1144.5683344204574,
+    "original_pvalue": 3.9274683245983496e-26,
+    "original_rank": 27
   },
   {
     "psalm_a": 130,
@@ -543,28 +585,7 @@
     "root_score": 193.30596414871505,
     "final_score": 1124.3432710438076,
     "original_pvalue": 1.1053352902198127e-11,
-    "original_rank": 26
-  },
-  {
-    "psalm_a": 135,
-    "psalm_b": 136,
-    "contiguous_2word": 8,
-    "contiguous_3word": 2,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 17,
-    "skipgram_3word": 21,
-    "skipgram_4plus": 24,
-    "total_pattern_points": 143,
-    "shared_roots": 28,
-    "root_idf_sum": 42.348253385868325,
-    "word_count_a": 172,
-    "word_count_b": 167,
-    "geometric_mean_length": 169.4815624190431,
-    "phrase_score": 843.7495970590155,
-    "root_score": 249.8693827306258,
-    "final_score": 1093.6189797896413,
-    "original_pvalue": 3.9274683245983496e-26,
-    "original_rank": 27
+    "original_rank": 28
   },
   {
     "psalm_a": 135,
@@ -585,7 +606,7 @@
     "root_score": 182.2000883418026,
     "final_score": 1088.384843203561,
     "original_pvalue": 2.403348510505568e-19,
-    "original_rank": 28
+    "original_rank": 29
   },
   {
     "psalm_a": 127,
@@ -606,27 +627,6 @@
     "root_score": 75.67947044113909,
     "final_score": 1069.8710960430592,
     "original_pvalue": 1.5525920730529498e-06,
-    "original_rank": 29
-  },
-  {
-    "psalm_a": 54,
-    "psalm_b": 86,
-    "contiguous_2word": 5,
-    "contiguous_3word": 3,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 14,
-    "skipgram_3word": 9,
-    "skipgram_4plus": 9,
-    "total_pattern_points": 70,
-    "shared_roots": 25,
-    "root_idf_sum": 36.04523368511973,
-    "word_count_a": 65,
-    "word_count_b": 154,
-    "geometric_mean_length": 100.0499875062461,
-    "phrase_score": 699.6502622814412,
-    "root_score": 360.2722457398552,
-    "final_score": 1059.9225080212964,
-    "original_pvalue": 1.607695841901342e-26,
     "original_rank": 30
   },
   {
@@ -703,13 +703,13 @@
     "skipgram_4plus": 31,
     "total_pattern_points": 186,
     "shared_roots": 27,
-    "root_idf_sum": 36.64373994748608,
+    "root_idf_sum": 40.9612280610224,
     "word_count_a": 336,
     "word_count_b": 167,
     "geometric_mean_length": 236.87971631188685,
     "phrase_score": 785.2086404692571,
-    "root_score": 154.69344745093846,
-    "final_score": 939.9020879201956,
+    "root_score": 172.91994729971285,
+    "final_score": 958.12858776897,
     "original_pvalue": 2.2688014145680677e-15,
     "original_rank": 34
   },
@@ -861,6 +861,27 @@
     "original_rank": 41
   },
   {
+    "psalm_a": 96,
+    "psalm_b": 97,
+    "contiguous_2word": 6,
+    "contiguous_3word": 1,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 14,
+    "skipgram_3word": 8,
+    "skipgram_4plus": 7,
+    "total_pattern_points": 59,
+    "shared_roots": 22,
+    "root_idf_sum": 33.91487986628555,
+    "word_count_a": 116,
+    "word_count_b": 98,
+    "geometric_mean_length": 106.62082348209472,
+    "phrase_score": 553.362824194545,
+    "root_score": 318.08870686485574,
+    "final_score": 871.4515310594008,
+    "original_pvalue": 1.3398403188152412e-21,
+    "original_rank": 42
+  },
+  {
     "psalm_a": 135,
     "psalm_b": 146,
     "contiguous_2word": 6,
@@ -879,7 +900,7 @@
     "root_score": 154.28455969004497,
     "final_score": 869.74293553255,
     "original_pvalue": 3.0331682783114393e-16,
-    "original_rank": 42
+    "original_rank": 43
   },
   {
     "psalm_a": 28,
@@ -900,7 +921,7 @@
     "root_score": 255.2157308535215,
     "final_score": 858.618157256479,
     "original_pvalue": 1.5277605075651323e-18,
-    "original_rank": 43
+    "original_rank": 44
   },
   {
     "psalm_a": 121,
@@ -921,7 +942,7 @@
     "root_score": 239.33547787424703,
     "final_score": 851.1107681957451,
     "original_pvalue": 4.788929577032921e-19,
-    "original_rank": 44
+    "original_rank": 45
   },
   {
     "psalm_a": 95,
@@ -942,7 +963,7 @@
     "root_score": 144.32983375137528,
     "final_score": 845.1116198908031,
     "original_pvalue": 3.5505261734163574e-15,
-    "original_rank": 45
+    "original_rank": 46
   },
   {
     "psalm_a": 67,
@@ -963,28 +984,49 @@
     "root_score": 195.59516266344468,
     "final_score": 841.1289166838692,
     "original_pvalue": 5.2633412892520185e-15,
-    "original_rank": 46
+    "original_rank": 47
   },
   {
-    "psalm_a": 96,
-    "psalm_b": 97,
-    "contiguous_2word": 6,
-    "contiguous_3word": 1,
+    "psalm_a": 106,
+    "psalm_b": 107,
+    "contiguous_2word": 8,
+    "contiguous_3word": 5,
     "contiguous_4plus": 0,
-    "skipgram_2word": 14,
-    "skipgram_3word": 8,
-    "skipgram_4plus": 7,
-    "total_pattern_points": 59,
-    "shared_roots": 22,
-    "root_idf_sum": 29.597391752749246,
-    "word_count_a": 116,
-    "word_count_b": 98,
-    "geometric_mean_length": 106.62082348209472,
-    "phrase_score": 553.362824194545,
-    "root_score": 277.59485235751964,
-    "final_score": 830.9576765520646,
-    "original_pvalue": 1.3398403188152412e-21,
-    "original_rank": 47
+    "skipgram_2word": 18,
+    "skipgram_3word": 20,
+    "skipgram_4plus": 31,
+    "total_pattern_points": 169,
+    "shared_roots": 47,
+    "root_idf_sum": 90.5125501256574,
+    "word_count_a": 336,
+    "word_count_b": 286,
+    "geometric_mean_length": 309.993548319961,
+    "phrase_score": 545.1726363852129,
+    "root_score": 291.98204483996074,
+    "final_score": 837.1546812251736,
+    "original_pvalue": 5.173463120163267e-18,
+    "original_rank": 48
+  },
+  {
+    "psalm_a": 116,
+    "psalm_b": 135,
+    "contiguous_2word": 5,
+    "contiguous_3word": 2,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 22,
+    "skipgram_3word": 14,
+    "skipgram_4plus": 11,
+    "total_pattern_points": 92,
+    "shared_roots": 23,
+    "root_idf_sum": 32.86536308608598,
+    "word_count_a": 135,
+    "word_count_b": 172,
+    "geometric_mean_length": 152.38110119040354,
+    "phrase_score": 603.7494104012543,
+    "root_score": 215.67873462877776,
+    "final_score": 819.428145030032,
+    "original_pvalue": 9.766339063451482e-17,
+    "original_rank": 49
   },
   {
     "psalm_a": 107,
@@ -1005,28 +1047,7 @@
     "root_score": 178.78751376530832,
     "final_score": 812.7485150581974,
     "original_pvalue": 3.0306113823957326e-15,
-    "original_rank": 48
-  },
-  {
-    "psalm_a": 106,
-    "psalm_b": 107,
-    "contiguous_2word": 8,
-    "contiguous_3word": 5,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 18,
-    "skipgram_3word": 20,
-    "skipgram_4plus": 31,
-    "total_pattern_points": 169,
-    "shared_roots": 47,
-    "root_idf_sum": 81.87757389858477,
-    "word_count_a": 336,
-    "word_count_b": 286,
-    "geometric_mean_length": 309.993548319961,
-    "phrase_score": 545.1726363852129,
-    "root_score": 264.1267030953642,
-    "final_score": 809.299339480577,
-    "original_pvalue": 5.173463120163267e-18,
-    "original_rank": 49
+    "original_rank": 50
   },
   {
     "psalm_a": 111,
@@ -1047,7 +1068,7 @@
     "root_score": 285.9498166883095,
     "final_score": 795.5123747887415,
     "original_pvalue": 9.496131375212404e-15,
-    "original_rank": 50
+    "original_rank": 51
   },
   {
     "psalm_a": 79,
@@ -1068,7 +1089,7 @@
     "root_score": 179.6094159829624,
     "final_score": 793.3318268342084,
     "original_pvalue": 4.3669641217094835e-16,
-    "original_rank": 51
+    "original_rank": 52
   },
   {
     "psalm_a": 125,
@@ -1089,27 +1110,6 @@
     "root_score": 266.91813056040326,
     "final_score": 792.1974537275528,
     "original_pvalue": 2.2689715558284185e-13,
-    "original_rank": 52
-  },
-  {
-    "psalm_a": 116,
-    "psalm_b": 135,
-    "contiguous_2word": 5,
-    "contiguous_3word": 2,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 22,
-    "skipgram_3word": 14,
-    "skipgram_4plus": 11,
-    "total_pattern_points": 92,
-    "shared_roots": 23,
-    "root_idf_sum": 28.54787497254967,
-    "word_count_a": 135,
-    "word_count_b": 172,
-    "geometric_mean_length": 152.38110119040354,
-    "phrase_score": 603.7494104012543,
-    "root_score": 187.3452465531042,
-    "final_score": 791.0946569543585,
-    "original_pvalue": 9.766339063451482e-17,
     "original_rank": 53
   },
   {
@@ -1323,6 +1323,27 @@
     "original_rank": 63
   },
   {
+    "psalm_a": 44,
+    "psalm_b": 79,
+    "contiguous_2word": 4,
+    "contiguous_3word": 3,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 16,
+    "skipgram_3word": 10,
+    "skipgram_4plus": 5,
+    "total_pattern_points": 61,
+    "shared_roots": 31,
+    "root_idf_sum": 58.78709838569248,
+    "word_count_a": 204,
+    "word_count_b": 139,
+    "geometric_mean_length": 168.39239887833418,
+    "phrase_score": 362.24913004578866,
+    "root_score": 349.1077909530048,
+    "final_score": 711.3569209987934,
+    "original_pvalue": 3.1257511755380443e-18,
+    "original_rank": 64
+  },
+  {
     "psalm_a": 47,
     "psalm_b": 96,
     "contiguous_2word": 3,
@@ -1341,7 +1362,28 @@
     "root_score": 133.2164545287078,
     "final_score": 690.3024690598634,
     "original_pvalue": 1.0081345235816128e-14,
-    "original_rank": 64
+    "original_rank": 65
+  },
+  {
+    "psalm_a": 6,
+    "psalm_b": 31,
+    "contiguous_2word": 5,
+    "contiguous_3word": 1,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 13,
+    "skipgram_3word": 9,
+    "skipgram_4plus": 5,
+    "total_pattern_points": 53,
+    "shared_roots": 28,
+    "root_idf_sum": 44.63453821044747,
+    "word_count_a": 88,
+    "word_count_b": 228,
+    "geometric_mean_length": 141.6474496770062,
+    "phrase_score": 374.1684027552496,
+    "root_score": 315.1100730173828,
+    "final_score": 689.2784757726324,
+    "original_pvalue": 6.881244812347638e-21,
+    "original_rank": 66
   },
   {
     "psalm_a": 8,
@@ -1362,7 +1404,28 @@
     "root_score": 89.18975920419273,
     "final_score": 669.6136312861382,
     "original_pvalue": 1.3328435055600649e-09,
-    "original_rank": 65
+    "original_rank": 67
+  },
+  {
+    "psalm_a": 27,
+    "psalm_b": 102,
+    "contiguous_2word": 5,
+    "contiguous_3word": 1,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 15,
+    "skipgram_3word": 10,
+    "skipgram_4plus": 9,
+    "total_pattern_points": 69,
+    "shared_roots": 35,
+    "root_idf_sum": 54.11483290102612,
+    "word_count_a": 158,
+    "word_count_b": 217,
+    "geometric_mean_length": 185.16479146965278,
+    "phrase_score": 372.64103749069716,
+    "root_score": 292.2522822590447,
+    "final_score": 664.8933197497419,
+    "original_pvalue": 6.549590976793799e-23,
+    "original_rank": 68
   },
   {
     "psalm_a": 113,
@@ -1383,28 +1446,7 @@
     "root_score": 133.73861079912405,
     "final_score": 662.9763575562811,
     "original_pvalue": 7.873902911180577e-13,
-    "original_rank": 66
-  },
-  {
-    "psalm_a": 44,
-    "psalm_b": 79,
-    "contiguous_2word": 4,
-    "contiguous_3word": 3,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 16,
-    "skipgram_3word": 10,
-    "skipgram_4plus": 5,
-    "total_pattern_points": 61,
-    "shared_roots": 31,
-    "root_idf_sum": 50.15212215861986,
-    "word_count_a": 204,
-    "word_count_b": 139,
-    "geometric_mean_length": 168.39239887833418,
-    "phrase_score": 362.24913004578866,
-    "root_score": 297.8288954411503,
-    "final_score": 660.0780254869389,
-    "original_pvalue": 3.1257511755380443e-18,
-    "original_rank": 67
+    "original_rank": 69
   },
   {
     "psalm_a": 8,
@@ -1425,28 +1467,7 @@
     "root_score": 194.87076780098238,
     "final_score": 659.473927428683,
     "original_pvalue": 1.2815521472989896e-13,
-    "original_rank": 68
-  },
-  {
-    "psalm_a": 6,
-    "psalm_b": 31,
-    "contiguous_2word": 5,
-    "contiguous_3word": 1,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 13,
-    "skipgram_3word": 9,
-    "skipgram_4plus": 5,
-    "total_pattern_points": 53,
-    "shared_roots": 28,
-    "root_idf_sum": 40.31705009691115,
-    "word_count_a": 88,
-    "word_count_b": 228,
-    "geometric_mean_length": 141.6474496770062,
-    "phrase_score": 374.1684027552496,
-    "root_score": 284.6295516710307,
-    "final_score": 658.7979544262803,
-    "original_pvalue": 6.881244812347638e-21,
-    "original_rank": 69
+    "original_rank": 70
   },
   {
     "psalm_a": 117,
@@ -1467,7 +1488,7 @@
     "root_score": 95.33145858151781,
     "final_score": 655.1006014145735,
     "original_pvalue": 2.7062907675407406e-11,
-    "original_rank": 70
+    "original_rank": 71
   },
   {
     "psalm_a": 32,
@@ -1488,7 +1509,7 @@
     "root_score": 218.49265869061153,
     "final_score": 654.1046416199069,
     "original_pvalue": 9.800291739289665e-12,
-    "original_rank": 71
+    "original_rank": 72
   },
   {
     "psalm_a": 27,
@@ -1509,7 +1530,7 @@
     "root_score": 222.82089934054093,
     "final_score": 653.4460895238518,
     "original_pvalue": 1.137265650894682e-22,
-    "original_rank": 72
+    "original_rank": 73
   },
   {
     "psalm_a": 6,
@@ -1530,27 +1551,6 @@
     "root_score": 116.04366718723134,
     "final_score": 643.7566693562397,
     "original_pvalue": 2.572177366688584e-08,
-    "original_rank": 73
-  },
-  {
-    "psalm_a": 27,
-    "psalm_b": 102,
-    "contiguous_2word": 5,
-    "contiguous_3word": 1,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 15,
-    "skipgram_3word": 10,
-    "skipgram_4plus": 9,
-    "total_pattern_points": 69,
-    "shared_roots": 35,
-    "root_idf_sum": 49.79734478748982,
-    "word_count_a": 158,
-    "word_count_b": 217,
-    "geometric_mean_length": 185.16479146965278,
-    "phrase_score": 372.64103749069716,
-    "root_score": 268.9352786361183,
-    "final_score": 641.5763161268155,
-    "original_pvalue": 6.549590976793799e-23,
     "original_rank": 74
   },
   {
@@ -1575,6 +1575,27 @@
     "original_rank": 75
   },
   {
+    "psalm_a": 106,
+    "psalm_b": 147,
+    "contiguous_2word": 2,
+    "contiguous_3word": 0,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 15,
+    "skipgram_3word": 15,
+    "skipgram_4plus": 14,
+    "total_pattern_points": 89,
+    "shared_roots": 36,
+    "root_idf_sum": 51.20998788084093,
+    "word_count_a": 336,
+    "word_count_b": 145,
+    "geometric_mean_length": 220.7260745811423,
+    "phrase_score": 403.2147093128421,
+    "root_score": 232.00697053131955,
+    "final_score": 635.2216798441616,
+    "original_pvalue": 2.0307239448949027e-16,
+    "original_rank": 76
+  },
+  {
     "psalm_a": 148,
     "psalm_b": 149,
     "contiguous_2word": 3,
@@ -1593,7 +1614,7 @@
     "root_score": 187.92477886674357,
     "final_score": 633.6463417271757,
     "original_pvalue": 1.5810663673438698e-14,
-    "original_rank": 76
+    "original_rank": 77
   },
   {
     "psalm_a": 117,
@@ -1614,7 +1635,7 @@
     "root_score": 116.08376000900573,
     "final_score": 627.3009474197717,
     "original_pvalue": 1.911327603638468e-12,
-    "original_rank": 77
+    "original_rank": 78
   },
   {
     "psalm_a": 47,
@@ -1635,7 +1656,7 @@
     "root_score": 110.22885951622486,
     "final_score": 622.7236685802737,
     "original_pvalue": 1.987696047642629e-10,
-    "original_rank": 78
+    "original_rank": 79
   },
   {
     "psalm_a": 124,
@@ -1656,28 +1677,28 @@
     "root_score": 103.8452258141189,
     "final_score": 621.9246959457336,
     "original_pvalue": 3.4454480349941944e-10,
-    "original_rank": 79
+    "original_rank": 80
   },
   {
-    "psalm_a": 106,
-    "psalm_b": 147,
-    "contiguous_2word": 2,
-    "contiguous_3word": 0,
+    "psalm_a": 78,
+    "psalm_b": 105,
+    "contiguous_2word": 7,
+    "contiguous_3word": 1,
     "contiguous_4plus": 0,
-    "skipgram_2word": 15,
-    "skipgram_3word": 15,
-    "skipgram_4plus": 14,
-    "total_pattern_points": 89,
-    "shared_roots": 36,
-    "root_idf_sum": 46.89249976730462,
-    "word_count_a": 336,
-    "word_count_b": 145,
-    "geometric_mean_length": 220.7260745811423,
-    "phrase_score": 403.2147093128421,
-    "root_score": 212.4465804789466,
-    "final_score": 615.6612897917887,
-    "original_pvalue": 2.0307239448949027e-16,
-    "original_rank": 80
+    "skipgram_2word": 19,
+    "skipgram_3word": 5,
+    "skipgram_4plus": 1,
+    "total_pattern_points": 41,
+    "shared_roots": 93,
+    "root_idf_sum": 208.59054874449754,
+    "word_count_a": 542,
+    "word_count_b": 299,
+    "geometric_mean_length": 402.564280581375,
+    "phrase_score": 101.84708872031231,
+    "root_score": 518.1546371755968,
+    "final_score": 620.0017258959091,
+    "original_pvalue": 1.906964997093175e-43,
+    "original_rank": 81
   },
   {
     "psalm_a": 49,
@@ -1698,7 +1719,49 @@
     "root_score": 220.18481151773523,
     "final_score": 611.317067028928,
     "original_pvalue": 6.711615364879177e-17,
-    "original_rank": 81
+    "original_rank": 82
+  },
+  {
+    "psalm_a": 147,
+    "psalm_b": 149,
+    "contiguous_2word": 3,
+    "contiguous_3word": 1,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 6,
+    "skipgram_3word": 3,
+    "skipgram_4plus": 5,
+    "total_pattern_points": 32,
+    "shared_roots": 17,
+    "root_idf_sum": 27.58934986985667,
+    "word_count_a": 145,
+    "word_count_b": 66,
+    "geometric_mean_length": 97.82637681116479,
+    "phrase_score": 327.11014189731173,
+    "root_score": 282.023629711981,
+    "final_score": 609.1337716092928,
+    "original_pvalue": 1.1560334100213008e-12,
+    "original_rank": 83
+  },
+  {
+    "psalm_a": 35,
+    "psalm_b": 38,
+    "contiguous_2word": 11,
+    "contiguous_3word": 3,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 19,
+    "skipgram_3word": 10,
+    "skipgram_4plus": 2,
+    "total_pattern_points": 62,
+    "shared_roots": 40,
+    "root_idf_sum": 60.18895634598075,
+    "word_count_a": 235,
+    "word_count_b": 172,
+    "geometric_mean_length": 201.0472581260436,
+    "phrase_score": 308.38520543826576,
+    "root_score": 299.37715593338845,
+    "final_score": 607.7623613716542,
+    "original_pvalue": 2.7243191449066114e-24,
+    "original_rank": 84
   },
   {
     "psalm_a": 121,
@@ -1719,7 +1782,7 @@
     "root_score": 153.40594023039327,
     "final_score": 605.5969496654704,
     "original_pvalue": 1.0210918876275422e-12,
-    "original_rank": 82
+    "original_rank": 85
   },
   {
     "psalm_a": 104,
@@ -1740,7 +1803,7 @@
     "root_score": 82.60979780769989,
     "final_score": 604.5307053135751,
     "original_pvalue": 2.4724559802517336e-07,
-    "original_rank": 83
+    "original_rank": 86
   },
   {
     "psalm_a": 95,
@@ -1761,7 +1824,7 @@
     "root_score": 139.89439778291347,
     "final_score": 603.4940205970909,
     "original_pvalue": 3.510901692562309e-14,
-    "original_rank": 84
+    "original_rank": 87
   },
   {
     "psalm_a": 25,
@@ -1782,7 +1845,28 @@
     "root_score": 259.1583481017046,
     "final_score": 600.773175343591,
     "original_pvalue": 2.3972119994121306e-25,
-    "original_rank": 85
+    "original_rank": 88
+  },
+  {
+    "psalm_a": 5,
+    "psalm_b": 138,
+    "contiguous_2word": 3,
+    "contiguous_3word": 2,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 13,
+    "skipgram_3word": 4,
+    "skipgram_4plus": 2,
+    "total_pattern_points": 34,
+    "shared_roots": 18,
+    "root_idf_sum": 24.370834865224996,
+    "word_count_a": 120,
+    "word_count_b": 79,
+    "geometric_mean_length": 97.36529155710468,
+    "phrase_score": 349.2004127575484,
+    "root_score": 250.30310571125352,
+    "final_score": 599.503518468802,
+    "original_pvalue": 3.0047097977186197e-15,
+    "original_rank": 89
   },
   {
     "psalm_a": 58,
@@ -1803,7 +1887,7 @@
     "root_score": 166.13578294820616,
     "final_score": 597.0070071439329,
     "original_pvalue": 1.439373491877276e-08,
-    "original_rank": 86
+    "original_rank": 90
   },
   {
     "psalm_a": 84,
@@ -1824,28 +1908,7 @@
     "root_score": 201.19293660029325,
     "final_score": 590.1620200460163,
     "original_pvalue": 6.1279302030629824e-18,
-    "original_rank": 87
-  },
-  {
-    "psalm_a": 35,
-    "psalm_b": 38,
-    "contiguous_2word": 11,
-    "contiguous_3word": 3,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 19,
-    "skipgram_3word": 10,
-    "skipgram_4plus": 2,
-    "total_pattern_points": 62,
-    "shared_roots": 40,
-    "root_idf_sum": 55.871468232444435,
-    "word_count_a": 235,
-    "word_count_b": 172,
-    "geometric_mean_length": 201.0472581260436,
-    "phrase_score": 308.38520543826576,
-    "root_score": 277.90216466128896,
-    "final_score": 586.2873700995547,
-    "original_pvalue": 2.7243191449066114e-24,
-    "original_rank": 88
+    "original_rank": 91
   },
   {
     "psalm_a": 98,
@@ -1866,7 +1929,7 @@
     "root_score": 265.97388090280987,
     "final_score": 584.4979994807317,
     "original_pvalue": 5.717057070013033e-15,
-    "original_rank": 89
+    "original_rank": 92
   },
   {
     "psalm_a": 113,
@@ -1887,7 +1950,7 @@
     "root_score": 131.39118520928577,
     "final_score": 583.4884002990184,
     "original_pvalue": 6.298330054513147e-10,
-    "original_rank": 90
+    "original_rank": 93
   },
   {
     "psalm_a": 6,
@@ -1908,7 +1971,28 @@
     "root_score": 124.87650850743312,
     "final_score": 583.2580486719955,
     "original_pvalue": 4.866849081479288e-09,
-    "original_rank": 91
+    "original_rank": 94
+  },
+  {
+    "psalm_a": 38,
+    "psalm_b": 109,
+    "contiguous_2word": 4,
+    "contiguous_3word": 1,
+    "contiguous_4plus": 0,
+    "skipgram_2word": 18,
+    "skipgram_3word": 7,
+    "skipgram_4plus": 1,
+    "total_pattern_points": 41,
+    "shared_roots": 44,
+    "root_idf_sum": 74.93175467027169,
+    "word_count_a": 172,
+    "word_count_b": 233,
+    "geometric_mean_length": 200.18990983563583,
+    "phrase_score": 204.80552708007457,
+    "root_score": 374.30335390926416,
+    "final_score": 579.1088809893388,
+    "original_pvalue": 3.3569559783465435e-29,
+    "original_rank": 95
   },
   {
     "psalm_a": 100,
@@ -1929,7 +2013,7 @@
     "root_score": 125.74044915525137,
     "final_score": 570.7070925347134,
     "original_pvalue": 2.899123811793688e-15,
-    "original_rank": 92
+    "original_rank": 96
   },
   {
     "psalm_a": 96,
@@ -1950,28 +2034,7 @@
     "root_score": 284.94028642780415,
     "final_score": 570.6592369793632,
     "original_pvalue": 4.5835215460885995e-20,
-    "original_rank": 93
-  },
-  {
-    "psalm_a": 78,
-    "psalm_b": 105,
-    "contiguous_2word": 7,
-    "contiguous_3word": 1,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 19,
-    "skipgram_3word": 5,
-    "skipgram_4plus": 1,
-    "total_pattern_points": 41,
-    "shared_roots": 93,
-    "root_idf_sum": 187.00310817681594,
-    "word_count_a": 542,
-    "word_count_b": 299,
-    "geometric_mean_length": 402.564280581375,
-    "phrase_score": 101.84708872031231,
-    "root_score": 464.5298085233741,
-    "final_score": 566.3768972436864,
-    "original_pvalue": 1.906964997093175e-43,
-    "original_rank": 94
+    "original_rank": 97
   },
   {
     "psalm_a": 75,
@@ -1992,28 +2055,7 @@
     "root_score": 116.8861046324851,
     "final_score": 565.0337590848529,
     "original_pvalue": 2.080905786615249e-09,
-    "original_rank": 95
-  },
-  {
-    "psalm_a": 147,
-    "psalm_b": 149,
-    "contiguous_2word": 3,
-    "contiguous_3word": 1,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 6,
-    "skipgram_3word": 3,
-    "skipgram_4plus": 5,
-    "total_pattern_points": 32,
-    "shared_roots": 17,
-    "root_idf_sum": 23.271861756320355,
-    "word_count_a": 145,
-    "word_count_b": 66,
-    "geometric_mean_length": 97.82637681116479,
-    "phrase_score": 327.11014189731173,
-    "root_score": 237.8894375413929,
-    "final_score": 564.9995794387046,
-    "original_pvalue": 1.1560334100213008e-12,
-    "original_rank": 96
+    "original_rank": 98
   },
   {
     "psalm_a": 96,
@@ -2034,7 +2076,7 @@
     "root_score": 209.9275403088849,
     "final_score": 560.348297824067,
     "original_pvalue": 4.749488777629825e-18,
-    "original_rank": 97
+    "original_rank": 99
   },
   {
     "psalm_a": 104,
@@ -2055,48 +2097,6 @@
     "root_score": 159.04729548169956,
     "final_score": 558.5171014940399,
     "original_pvalue": 9.511284843996232e-16,
-    "original_rank": 98
-  },
-  {
-    "psalm_a": 107,
-    "psalm_b": 136,
-    "contiguous_2word": 6,
-    "contiguous_3word": 5,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 12,
-    "skipgram_3word": 17,
-    "skipgram_4plus": 14,
-    "total_pattern_points": 104,
-    "shared_roots": 20,
-    "root_idf_sum": 17.793277780998896,
-    "word_count_a": 286,
-    "word_count_b": 167,
-    "geometric_mean_length": 218.54518983496297,
-    "phrase_score": 475.87412048984856,
-    "root_score": 81.41692706408091,
-    "final_score": 557.2910475539295,
-    "original_pvalue": 1.6733497586348078e-10,
-    "original_rank": 99
-  },
-  {
-    "psalm_a": 5,
-    "psalm_b": 138,
-    "contiguous_2word": 3,
-    "contiguous_3word": 2,
-    "contiguous_4plus": 0,
-    "skipgram_2word": 13,
-    "skipgram_3word": 4,
-    "skipgram_4plus": 2,
-    "total_pattern_points": 34,
-    "shared_roots": 18,
-    "root_idf_sum": 20.05334675168869,
-    "word_count_a": 120,
-    "word_count_b": 79,
-    "geometric_mean_length": 97.36529155710468,
-    "phrase_score": 349.2004127575484,
-    "root_score": 205.959910672351,
-    "final_score": 555.1603234298993,
-    "original_pvalue": 3.0047097977186197e-15,
     "original_rank": 100
   }
 ]
