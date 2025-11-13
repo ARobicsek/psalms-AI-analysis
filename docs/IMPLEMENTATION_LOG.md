@@ -1,6 +1,293 @@
 # Implementation Log
 
-## Session 91 - 2025-11-13 (Root & Phrase Matching Enhancement COMPLETE ✓)
+## Session 93 - 2025-11-13 (Enhanced Phrase Matching System Design COMPLETE ✓)
+
+### Overview
+**Objective**: Design approach to reduce ~11,000 psalm relationships to ~100 most meaningful connections
+**Trigger**: User identified that current system finds 98.4% of psalm pairs as significantly related, which is too broad to be useful
+**Result**: ✓ COMPLETE - Enhanced scoring system designed with skip-grams, root IDF scoring, and length normalization
+
+**Session Duration**: ~1.5 hours (design and documentation)
+**Status**: Design phase complete - Implementation ready for next session
+**Impact**: Will enable synthesis and master editor agents to focus on truly meaningful connections
+
+### Problem Analysis
+
+**User Observation**:
+> "So at present each psalm has a statistically significant relationship with almost ALL other psalms. this doesn't help us! We're trying to find the relatively few psalms that are truly related to one another MORE than psalms in general are expected to be related to one another."
+
+**Current System Results**:
+- 11,001 significant relationships out of 11,175 possible pairs (98.4%)
+- Only 4,840 pairs share at least one contiguous phrase (44%)
+- System uses hypergeometric test with p < 0.01 threshold
+- Captures only contiguous 2-3 word phrases
+- No length normalization
+
+**Specific Example: Psalms 25 & 34**
+User noted that scholars recognize these as related, citing shared non-contiguous patterns:
+- כִּֽי־חָסִ֥יתִי בָֽךְ (for I take refuge in you)
+- וְלֹ֥א יֶ֝אְשְׁמ֗וּ כׇּֽל־הַחֹסִ֥ים בּֽוֹ (and none who take refuge in him will be condemned)
+- טוֹב־וְיָשָׁ֥ר יְהֹוָ֑ה (Good and upright is the LORD)
+- טַעֲמ֣וּ וּ֭רְאוּ כִּֽי־ט֣וֹב יְהֹוָ֑ה (Taste and see that the LORD is good)
+
+**Current system misses these connections**:
+- Psalms 25 & 34: p=9.32e-23, 31 shared roots, **only 4 contiguous phrases**
+- Ranks #286 out of 4,840 pairs with phrases
+- Would be filtered out by simple threshold approaches
+
+### Solution Design Process
+
+**Options Considered**:
+
+1. **Simple Phrase Count Threshold**
+   - Require ≥10 shared phrases
+   - Result: ~100-150 connections
+   - **Rejected**: Would exclude Psalms 25 & 34 (only 4 phrases)
+
+2. **Multi-Factor Scoring**
+   - Combine phrase count, p-value, root rarity
+   - **Partially adopted**: Used as basis but needed enhancement
+
+3. **Enhanced Phrase Matching** ⭐ **SELECTED**
+   - Add skip-grams (non-contiguous patterns)
+   - Add longer contiguous phrases (4-6 words)
+   - Include root IDF scoring
+   - Add length normalization
+   - **Chosen**: Addresses user's specific concerns about non-contiguous patterns
+
+4. **Cluster Detection**
+   - Group by genre, keep best within/across clusters
+   - **Deferred**: More complex, can apply later if needed
+
+### Design Decisions
+
+**Decision 1: Phrase Pattern Types**
+
+Initial proposal:
+- Contiguous phrases weighted higher than skip-grams
+- 6+ word phrases = 15 points
+
+User feedback:
+> "I don't think we should award more than 3 points per phrase. So - four or more matching words = 4 points."
+
+**Final decision**:
+- 2-word pattern: 1 point
+- 3-word pattern: 2 points
+- 4+ word pattern: 3 points (capped)
+- **Same points whether contiguous or skip-gram within windows**
+
+Rationale: Simplifies scoring, treats all patterns of same length equally
+
+**Decision 2: Root Scoring**
+
+User requirement:
+> "We need to give points for matching roots as well, in a manner that rewards a) more matches; b) rarer word matches."
+
+**Final decision**:
+- Use sum of IDF scores for all shared roots
+- Naturally satisfies both requirements:
+  - (a) More roots = higher sum
+  - (b) Rarer roots = higher IDF = more contribution to sum
+- No need for custom weighting
+
+**Decision 3: Length Normalization**
+
+User requirement:
+> "We need to make sure that our calculation takes psalm word length into account (i.e. 5 points in two 100 word psalms should be worth more than 5 points in two 200 word psalms)."
+
+**Final decision**:
+- Normalize by geometric mean: `sqrt(word_count_A × word_count_B)`
+- Multiply by 1000 to keep scores in readable range
+- Formula: `normalized_score = (raw_points / geom_mean_length) × 1000`
+
+Rationale: Geometric mean is symmetric and standard for comparing pairs of different sizes
+
+### Final Scoring System Design
+
+**Formula**:
+```python
+# Pattern scoring
+pattern_points = 0
+for pattern in shared_patterns:
+    if pattern.length == 2:
+        pattern_points += 1
+    elif pattern.length == 3:
+        pattern_points += 2
+    else:  # 4+ words
+        pattern_points += 3
+
+# Root scoring
+root_idf_sum = sum(root.idf_score for root in shared_roots)
+
+# Length normalization
+geom_mean_length = sqrt(word_count_A × word_count_B)
+
+# Normalized component scores
+phrase_score = (pattern_points / geom_mean_length) × 1000
+root_score = (root_idf_sum / geom_mean_length) × 1000
+
+# Final score
+FINAL_SCORE = phrase_score + root_score
+```
+
+**Pattern Types to Extract**:
+1. Contiguous phrases (already in DB): 2, 3, 4, 5, 6+ words
+2. Skip-grams (new):
+   - 2-word: all pairs within 5-word window
+   - 3-word: all triples within 7-word window
+   - 4-word: all 4-grams within 10-word window
+
+### Expected Results
+
+**Score Estimates**:
+
+**Psalms 14 & 53** (nearly identical, ~80 words each):
+- Contiguous phrases: ~73 (from DB) ≈ 100 points
+- Skip-grams: ~50 additional ≈ 75 points
+- Pattern total: 175 points
+- Roots: 45 shared, IDF sum ≈ 60 points
+- Geometric mean: 80 words
+- **Phrase score**: (175 / 80) × 1000 = 2,188
+- **Root score**: (60 / 80) × 1000 = 750
+- **Total**: ~2,938
+
+**Psalms 25 & 34** (thematic connection, ~180 words each):
+- Contiguous phrases: 4 × 1 = 4 points
+- Skip-grams (estimated): ~40 patterns ≈ 50 points
+- Pattern total: 54 points
+- Roots: 31 shared, IDF sum ≈ 45 points
+- Geometric mean: 180 words
+- **Phrase score**: (54 / 180) × 1000 = 300
+- **Root score**: (45 / 180) × 1000 = 250
+- **Total**: ~550
+
+**Weak connection** (few matches, long psalms):
+- Pattern total: 10 points
+- Root IDF sum: 20 points
+- Geometric mean: 200 words
+- **Total**: ~150
+
+**Filtering Strategy**:
+- Take top 100-150 by final score
+- Expected cutoff: ~300-400 points
+- Psalms 25 & 34 should be included (score ~550)
+- Known duplicates should dominate top ranks (scores ~2,000+)
+
+### Implementation Plan Created
+
+**Five-Phase Implementation** (2.5-3 hours total):
+
+**Phase 1: Data Preparation** (30 min)
+- Get psalm word counts from concordance or text
+- Verify root IDF sums in database
+- Create `get_psalm_lengths.py`
+
+**Phase 2: Skip-Gram Extraction** (1 hour)
+- Implement `skipgram_extractor.py` with window-based extraction
+- Extract skip-grams for all 150 psalms
+- Store in database: `psalm_skipgrams` table (~100K-150K entries)
+- Expected: ~500-1000 skip-grams per psalm
+
+**Phase 3: Enhanced Scoring** (45 min)
+- Implement `enhanced_scorer.py` with length normalization
+- Score all 11,001 pairs with new formula
+- Generate `enhanced_scores_full.json`
+
+**Phase 4: Validation & Reporting** (30 min)
+- Sort by enhanced score, take top 100-150
+- Validate known connections rank appropriately
+- Generate `TOP_100_CONNECTIONS_REPORT.md`
+- Key validation: Psalms 25 & 34 in top 150
+
+**Phase 5: Integration** (30 min - optional)
+- Update relationship data format for agents
+- Test with sample psalm processing
+
+### Files to Create (Next Session)
+
+**Scripts**:
+- `scripts/statistical_analysis/get_psalm_lengths.py` (~100 lines)
+- `scripts/statistical_analysis/skipgram_extractor.py` (~300 lines)
+- `scripts/statistical_analysis/add_skipgrams_to_db.py` (~200 lines)
+- `scripts/statistical_analysis/enhanced_scorer.py` (~400 lines)
+- `scripts/statistical_analysis/rescore_all_pairs.py` (~250 lines)
+- `scripts/statistical_analysis/generate_top_connections.py` (~300 lines)
+
+**Output Files**:
+- `data/analysis_results/enhanced_scores_full.json` (all 11,001 pairs)
+- `data/analysis_results/top_100_connections.json` (filtered top 100)
+- `data/analysis_results/TOP_100_CONNECTIONS_REPORT.md` (human-readable)
+
+**Database Updates**:
+- New table: `psalm_skipgrams` (~100K-150K entries)
+- Schema: `(psalm_number, pattern_consonantal, pattern_hebrew, pattern_length, occurrence_count)`
+
+### Success Criteria
+
+1. ✓ System reduces connections from 11,001 to ~100-150
+2. ✓ Psalms 25 & 34 remain in top connections
+3. ✓ Known duplicates/composites (14-53, 60-108, 40-70) rank highest
+4. ✓ Score distribution shows clear separation between strong/weak connections
+5. ✓ Skip-grams successfully capture non-contiguous patterns user mentioned
+
+### Technical Notes
+
+**Skip-Gram Extraction Algorithm**:
+```python
+def extract_skipgrams(words, n, max_gap):
+    """
+    Extract all n-word patterns within max_gap window.
+
+    For n=2, max_gap=5:
+      "A B C D E F" yields: (A,B), (A,C), (A,D), (A,E), (B,C), (B,D), ...
+
+    For n=3, max_gap=7:
+      All triples where last - first < max_gap
+    """
+    skipgrams = []
+    for i in range(len(words)):
+        for combo in combinations(range(i, min(i+max_gap, len(words))), n):
+            if len(combo) == n:
+                pattern = tuple(words[idx] for idx in combo)
+                skipgrams.append(pattern)
+    return skipgrams
+```
+
+**Length Normalization Rationale**:
+- Geometric mean preferred over arithmetic mean: sqrt(A×B) vs (A+B)/2
+- Geometric mean is symmetric: sqrt(A×B) = sqrt(B×A)
+- Arithmetic mean favors longer psalm when pair has one long, one short
+- Multiply by 1000: keeps scores in range 50-3000 instead of 0.05-3.0
+
+**Pattern Matching**:
+- All matching done on consonantal forms (vowel-independent)
+- Same approach as current contiguous phrase matching
+- Skip-grams and contiguous phrases treated equally in scoring
+
+### User Validation
+
+User confirmed:
+- ✓ Simplified phrase scoring (max 3 points per pattern)
+- ✓ Root IDF scoring approach
+- ✓ Length normalization requirement
+- ✓ Equal treatment of contiguous and skip-gram patterns
+
+### Next Steps
+
+**Immediate (Next Session)**:
+1. Implement Phase 1-4 of plan
+2. Validate Psalms 25 & 34 included in top 100
+3. Generate comprehensive report
+
+**Future Considerations**:
+- May need to adjust skip-gram windows based on results
+- Could add phrase rarity scoring (IDF-like for phrases)
+- Could filter common liturgical formulas
+- Could implement cluster-based filtering if needed
+
+---
+
+## Session 92 - 2025-11-13 (IDF Transformation Analysis COMPLETE ✓)
 
 ### Overview
 **Objective**: Enhance statistical analysis output to list matched roots and phrases between psalms

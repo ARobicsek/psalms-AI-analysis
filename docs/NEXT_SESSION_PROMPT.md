@@ -1,5 +1,223 @@
 # Next Session Prompt
 
+## Session 93 Handoff - 2025-11-13 (Enhanced Phrase Matching System Design COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Design approach to reduce ~11,000 psalm relationships to ~100 most meaningful connections
+
+User identified critical issue with current statistical analysis:
+- Current system finds 11,001 significant relationships (98.4% of all pairs)
+- This is too many to be useful for synthesis and master editor agents
+- Goal: Identify only ~100 truly meaningful connections
+- Key requirement: Psalms 25 & 34 should remain connected (known scholarly relationship)
+
+**DESIGN RESULTS: ✓ COMPLETE - Enhanced Scoring System Designed**
+
+### Problem Analysis
+
+**Current Limitations**:
+1. **Too many relationships**: 11,001 pairs flagged as significant
+2. **Simple phrase matching**: Only captures contiguous 2-3 word phrases
+3. **Missing patterns**: Doesn't capture non-contiguous patterns scholars recognize
+4. **No length normalization**: Short psalms can appear more similar than they are
+
+**Example**: Psalms 25 & 34
+- Scholars recognize as related (shared themes: taking refuge, goodness of LORD)
+- Current system: p=9.32e-23, 31 shared roots, **only 4 contiguous phrases**
+- Current rank: #286 out of 4,840 pairs with phrases
+- Would likely be filtered out by simple thresholds
+
+### Solution Designed: Enhanced Phrase Matching with Length Normalization
+
+**Three-Component Scoring System**:
+
+1. **Extended Phrase Patterns**
+   - Contiguous phrases: 2, 3, 4, 5, 6+ words
+   - Skip-grams: Non-contiguous patterns within windows
+     - 2-word patterns (within 5-word window)
+     - 3-word patterns (within 7-word window)
+     - 4+ word patterns
+   - **Scoring**: 1 point (2 words), 2 points (3 words), 3 points (4+ words)
+   - Same points whether contiguous or skip-gram
+
+2. **Root IDF Overlap**
+   - Sum of IDF scores for all shared roots
+   - Naturally rewards: (a) more matches, (b) rarer words
+   - Already implemented in current system
+
+3. **Length Normalization**
+   - Normalize by geometric mean: sqrt(word_count_A × word_count_B)
+   - Prevents bias toward shorter psalms
+   - Formula: `score = (phrase_points / geom_mean_length) × 1000`
+
+**Final Score Formula**:
+```
+phrase_points = sum of pattern points (1/2/3 per pattern)
+root_idf_sum = sum of IDF scores for shared roots
+geom_mean_length = sqrt(word_count_A × word_count_B)
+
+phrase_score = (phrase_points / geom_mean_length) × 1000
+root_score = (root_idf_sum / geom_mean_length) × 1000
+
+FINAL_SCORE = phrase_score + root_score
+```
+
+**Expected Results**:
+- Nearly identical psalms (14-53, 60-108): scores ~2,000+
+- Strong thematic connections (25-34): scores ~300-500
+- Weak connections: scores <100
+- Take top 100-150 by final score
+
+### What to Work on Next
+
+**PRIORITY: HIGH - Implement Enhanced Scoring System**
+
+Implementation ready to begin. Detailed plan below.
+
+---
+
+## Implementation Plan for Next Session
+
+### Overview
+Implement skip-gram extraction, length-normalized scoring, and generate top 100 connections report.
+
+**Estimated Time**: 2.5-3 hours total
+
+### Phase 1: Data Preparation (30 minutes)
+
+**Task 1.1**: Get psalm word counts
+- Query database for each psalm's word count
+- Store in dictionary: `{psalm_num: word_count}`
+- Source: Count entries in concordance table OR analyze psalm text
+
+**Task 1.2**: Verify root IDF sums are available
+- Confirm `shared_roots_json` contains IDF scores
+- Calculate total IDF sum for sample pairs (14-53, 25-34)
+
+**Files to create**:
+- `scripts/statistical_analysis/get_psalm_lengths.py` (100 lines)
+
+### Phase 2: Skip-Gram Extraction (1 hour)
+
+**Task 2.1**: Implement skip-gram extractor
+- Create `extract_skipgrams()` function
+- Parameters: text (list of words), n (pattern length), max_gap
+- For 2-word skipgrams: extract all pairs within 5-word window
+- For 3-word skipgrams: extract all triples within 7-word window
+- For 4+ word skipgrams: extract all 4-grams within 10-word window
+- Return consonantal forms for matching
+
+**Task 2.2**: Extract skip-grams for all 150 psalms
+- Load psalm text (word-by-word)
+- Generate all skip-gram patterns
+- Store in database: `psalm_skipgrams` table
+- Schema: `(psalm_number, pattern_consonantal, pattern_length, pattern_hebrew, occurrence_count)`
+
+**Task 2.3**: Compare skip-grams between psalm pairs
+- For each significant pair, find shared skip-grams
+- Count by pattern length (2, 3, 4+)
+- Store results temporarily (don't need to persist in DB)
+
+**Files to create**:
+- `scripts/statistical_analysis/skipgram_extractor.py` (300 lines)
+- `scripts/statistical_analysis/add_skipgrams_to_db.py` (200 lines)
+
+### Phase 3: Enhanced Scoring (45 minutes)
+
+**Task 3.1**: Implement scoring calculator
+- Create `calculate_enhanced_score()` function
+- Inputs: psalm_a, psalm_b, shared patterns (from DB and skipgrams), shared roots
+- Calculate:
+  - Pattern points: count × (1, 2, or 3 based on length)
+  - Root IDF sum: sum from shared_roots_json
+  - Geometric mean length
+  - Normalized phrase score
+  - Normalized root score
+  - Final score
+- Return dict with breakdown
+
+**Task 3.2**: Score all significant pairs
+- Load all 11,001 relationships from database
+- For each pair:
+  - Get contiguous phrases (already in DB)
+  - Get skip-grams (from Phase 2)
+  - Get root IDF sum (already in DB)
+  - Calculate enhanced score
+- Store results: `enhanced_scores.json`
+
+**Files to create**:
+- `scripts/statistical_analysis/enhanced_scorer.py` (400 lines)
+- `scripts/statistical_analysis/rescore_all_pairs.py` (250 lines)
+
+### Phase 4: Validation & Reporting (30 minutes)
+
+**Task 4.1**: Generate top 100 report
+- Sort all pairs by enhanced score (descending)
+- Take top 100-150 connections
+- Create detailed report with:
+  - Rank, psalm numbers, final score
+  - Breakdown: phrase score, root score, pattern counts
+  - Sample matching patterns (top 5)
+  - Original p-value for reference
+
+**Task 4.2**: Validate known connections
+- Check ranks of known pairs:
+  - Psalms 14 & 53 (nearly identical) - should be #1-3
+  - Psalms 60 & 108 (composite) - should be #1-3
+  - Psalms 40 & 70 (shared passage) - should be top 10
+  - Psalms 42 & 43 (originally one) - should be top 20
+  - **Psalms 25 & 34 (thematic)** - should be top 100-150
+- If Ps 25 & 34 not in top 150, adjust weighting
+
+**Task 4.3**: Create comparison table
+- Show before vs. after for sample pairs
+- Columns: Psalms, Old Rank, New Rank, Score, Patterns, Roots
+
+**Files to create**:
+- `scripts/statistical_analysis/generate_top_connections.py` (300 lines)
+- `data/analysis_results/enhanced_scores_full.json` (all scores)
+- `data/analysis_results/top_100_connections.json` (filtered top 100)
+- `data/analysis_results/TOP_100_CONNECTIONS_REPORT.md` (human-readable report)
+
+### Phase 5: Integration (Optional - 30 minutes)
+
+**Task 5.1**: Update relationship data format
+- Modify output format for synthesis/master editor agents
+- Include only top 100 connections
+- Add enhanced score and pattern examples to relationship data
+
+**Task 5.2**: Test with sample psalm
+- Run psalm processing pipeline with filtered relationship data
+- Verify macro/micro analysts receive manageable connection list
+
+---
+
+## Expected Outcomes
+
+**Database Updates**:
+- New table: `psalm_skipgrams` (~100,000-150,000 entries)
+- Enhanced scoring: all 11,001 pairs scored with new system
+
+**Output Files**:
+- `enhanced_scores_full.json` - All pairs with enhanced scores
+- `top_100_connections.json` - Filtered top 100-150 connections
+- `TOP_100_CONNECTIONS_REPORT.md` - Human-readable analysis report
+
+**Key Metrics to Report**:
+- Psalms 25 & 34 rank with enhanced system
+- Score distribution (min, max, median, quartiles)
+- Comparison with p-value rankings
+- Validation of known connections
+
+**Success Criteria**:
+1. ✓ System reduces connections from 11,001 to ~100
+2. ✓ Psalms 25 & 34 remain in top connections
+3. ✓ Known duplicates/composites rank highest
+4. ✓ Score distribution shows clear separation between strong/weak connections
+
+---
+
 ## Session 92 Handoff - 2025-11-13 (IDF Transformation Analysis COMPLETE ✓)
 
 ### What Was Done This Session
