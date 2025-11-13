@@ -192,11 +192,66 @@ See [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md) for complete technical detail
 - ✓ LLM compliance validated (100% - all queries include alternates)
 - ✓ Concordance system now functional underneath
 
+## Current Work Session: Psalm Relationship Statistical Analysis (2025-11-13)
+
+**Objective**: Implement statistical analysis to identify related Psalms based on shared rare vocabulary
+
+### Implementation Plan (from PSALM_RELATIONSHIP_STATISTICAL_ANALYSIS.md)
+
+#### Phase 1: Foundation ⏳ IN PROGRESS
+- [ ] Create project structure (`scripts/statistical_analysis/`, `data/psalm_relationships.db`)
+- [ ] Implement database schema (root_frequencies, psalm_roots, psalm_phrases, psalm_relationships, psalm_clusters)
+- [ ] Implement root_extractor.py with Hebrew normalization (leveraging existing hebrew_text_processor.py)
+- [ ] Validate root extraction on 5-10 sample Psalms with examples
+- [ ] Show examples of root/phrase matches with rarity scores
+
+#### Phase 2: Analysis Core ⏸️ PENDING
+- [ ] Implement frequency_analyzer.py (compute root frequencies and IDF scores across all 150 Psalms)
+- [ ] Implement pairwise_comparator.py with hypergeometric test
+- [ ] Validate on known related Psalms (42-43, 120-134, 146-150)
+- [ ] Show examples of detected relationships with p-values and rarity assessment
+- [ ] Tune significance thresholds (account for multiple testing correction)
+
+#### Phase 3: Enhanced Features ⏸️ PENDING
+- [ ] Implement phrase_analyzer.py for n-grams (2-word and 3-word phrases)
+- [ ] Implement cluster_detector.py (graph-based clustering of related Psalms)
+- [ ] Apply Benjamini-Hochberg FDR correction
+- [ ] Performance optimization for all 11,175 pairwise comparisons
+
+#### Phase 4: Full Analysis & Validation ⏸️ PENDING
+- [ ] Run full analysis on ALL 150 Psalms (including short Psalms like 117)
+- [ ] Record bidirectional relationships (if A↔B, store both A→B and B→A entries)
+- [ ] Generate comprehensive reports with examples of matches and likelihood assessment
+- [ ] Validate results against known relationships
+- [ ] Manual review of sample detected relationships
+
+### Key Requirements (from User)
+✓ Include ALL psalms (no minimum length cutoff)
+✓ Record bidirectional relationships as separate entries
+✓ Show examples of root/phrase matches with rarity scores
+✓ Include likelihood assessment for cross-psalm matches
+✓ Manual review checkpoints throughout process
+
+### Expected Outputs
+- `data/psalm_relationships.db` - SQLite database with all relationships
+- Example reports showing:
+  - Shared roots with IDF scores
+  - p-values (probability by chance)
+  - Weighted overlap scores
+  - Phrase matches with contexts
+  - Bidirectional relationship entries
+
+---
+
 ## Next Priorities
 
 ✓ **System Ready for Production** - Concordance system operational
 
-1. **Process More Psalms** ⭐⭐⭐ HIGH PRIORITY
+1. **Psalm Relationship Statistical Analysis** ⭐⭐⭐ CURRENT SESSION
+   - Implement statistical framework for identifying related Psalms
+   - See detailed plan above
+
+2. **Process More Psalms** ⭐⭐⭐ HIGH PRIORITY
    - Continue with Psalms 4, 5, 7, 8, etc.
    - Concordance system fully functional (86% hit rate)
    - Two-layer search strategy operational (480% improvement)
