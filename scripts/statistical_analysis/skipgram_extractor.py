@@ -3,6 +3,11 @@ Skip-gram Pattern Extractor for Enhanced Phrase Matching
 
 Extracts non-contiguous word patterns (skip-grams) within sliding windows.
 This captures patterns like "כִּֽי חָסִ֥יתִי בָֽךְ" even when words appear with intervening text.
+
+V3 Updates:
+- Uses ROOT extraction instead of consonantal forms (consistent with contiguous phrases)
+- Captures FULL Hebrew text span including gap words
+- Removes paragraph markers before processing
 """
 
 import sqlite3
@@ -10,6 +15,15 @@ from pathlib import Path
 from typing import List, Tuple, Set, Dict
 from itertools import combinations
 import logging
+import sys
+
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
+
+from concordance.hebrew_text_processor import strip_consonantal
+
+# Import text cleaning and root extraction
+from text_cleaning import clean_word_list, is_paragraph_marker
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -17,13 +31,18 @@ logger = logging.getLogger(__name__)
 # Paths
 TANAKH_DB_PATH = Path(__file__).parent.parent.parent / "database" / "tanakh.db"
 
+# Import RootExtractor for root extraction
+# We'll create a lightweight version here to avoid circular dependencies
+from root_extractor import RootExtractor
+
 
 class SkipgramExtractor:
-    """Extracts skip-gram patterns from psalm text."""
+    """Extracts skip-gram patterns from psalm text using root-based methodology."""
 
     def __init__(self):
         """Initialize extractor."""
         self.conn = None
+        self.root_extractor = None
 
     def connect_db(self):
         """Connect to Tanakh database."""
@@ -32,12 +51,18 @@ class SkipgramExtractor:
 
         self.conn = sqlite3.connect(str(TANAKH_DB_PATH))
         self.conn.row_factory = sqlite3.Row
+        
+        # Initialize root extractor
+        self.root_extractor = RootExtractor(TANAKH_DB_PATH)
+        
         logger.info(f"Connected to {TANAKH_DB_PATH}")
 
     def close_db(self):
         """Close database connection."""
         if self.conn:
             self.conn.close()
+        if self.root_extractor:
+            self.root_extractor.close()
 
     def get_psalm_words(self, psalm_number: int) -> List[Dict[str, str]]:
         """
@@ -47,13 +72,12 @@ class SkipgramExtractor:
             psalm_number: Psalm number (1-150)
 
         Returns:
-            List of word dictionaries with consonantal and Hebrew text
+            List of word dictionaries with root, hebrew text, and position info
         """
         cursor = self.conn.cursor()
 
         cursor.execute("""
             SELECT
-                word_consonantal_split as consonantal,
                 word as hebrew,
                 chapter,
                 verse,
@@ -65,13 +89,24 @@ class SkipgramExtractor:
 
         words = []
         for row in cursor.fetchall():
-            words.append({
-                'consonantal': row['consonantal'],
-                'hebrew': row['hebrew'],
-                'chapter': row['chapter'],
-                'verse': row['verse'],
-                'position': row['position']
-            })
+            hebrew_word = row['hebrew']
+            
+            # Skip paragraph markers and empty words
+            if is_paragraph_marker(hebrew_word) or not hebrew_word.strip():
+                continue
+            
+            # Extract root using root extractor
+            root = self.root_extractor.extract_root(hebrew_word)
+            
+            # Only include words with valid roots (at least 2 chars)
+            if root and len(root) >= 2:
+                words.append({
+                    'root': root,
+                    'hebrew': hebrew_word,
+                    'chapter': row['chapter'],
+                    'verse': row['verse'],
+                    'position': row['position']
+                })
 
         return words
 
@@ -80,7 +115,7 @@ class SkipgramExtractor:
         words: List[Dict[str, str]],
         n: int,
         max_gap: int
-    ) -> Set[Tuple[str, ...]]:
+    ) -> Set[Tuple[str, str, str]]:
         """
         Extract n-word skip-grams within max_gap window.
 
@@ -96,29 +131,41 @@ class SkipgramExtractor:
             max_gap: Maximum distance between first and last word
 
         Returns:
-            Set of unique skip-gram tuples (consonantal forms)
+            Set of unique skip-gram tuples: (pattern_roots, pattern_hebrew, full_span_hebrew)
         """
         skipgrams = set()
-        consonantal_words = [w['consonantal'] for w in words]
-
-        for i in range(len(consonantal_words)):
+        
+        for i in range(len(words)):
             # Define window: from position i to i+max_gap
-            window_end = min(i + max_gap, len(consonantal_words))
+            window_end = min(i + max_gap, len(words))
             window_indices = range(i, window_end)
 
             # Generate all n-word combinations within window
             for combo_indices in combinations(window_indices, n):
                 if len(combo_indices) == n:
-                    # Extract consonantal forms for this pattern
-                    pattern = tuple(consonantal_words[idx] for idx in combo_indices)
-                    skipgrams.add(pattern)
+                    # Extract roots for the matched words
+                    matched_roots = [words[idx]['root'] for idx in combo_indices]
+                    pattern_roots = ' '.join(matched_roots)
+                    
+                    # Extract Hebrew for the matched words only
+                    matched_hebrew = [words[idx]['hebrew'] for idx in combo_indices]
+                    pattern_hebrew = ' '.join(matched_hebrew)
+                    
+                    # Extract FULL Hebrew span (from first to last index, including gaps)
+                    first_idx = combo_indices[0]
+                    last_idx = combo_indices[-1]
+                    full_span_hebrew = ' '.join(words[idx]['hebrew'] 
+                                                for idx in range(first_idx, last_idx + 1))
+                    
+                    # Store tuple: (roots, matched hebrew, full span hebrew)
+                    skipgrams.add((pattern_roots, pattern_hebrew, full_span_hebrew))
 
         return skipgrams
 
     def extract_all_skipgrams(
         self,
         psalm_number: int
-    ) -> Dict[int, Set[Tuple[str, ...]]]:
+    ) -> Dict[int, Set[Tuple[str, str, str]]]:
         """
         Extract all skip-gram patterns for a psalm.
 
@@ -132,6 +179,7 @@ class SkipgramExtractor:
 
         Returns:
             Dictionary mapping pattern length to set of patterns
+            Each pattern is a tuple: (roots, matched_hebrew, full_span_hebrew)
         """
         words = self.get_psalm_words(psalm_number)
 
@@ -154,7 +202,7 @@ class SkipgramExtractor:
 
     def count_pattern_in_psalm(
         self,
-        pattern: Tuple[str, ...],
+        pattern_roots: str,
         words: List[Dict[str, str]],
         max_gap: int
     ) -> int:
@@ -162,7 +210,7 @@ class SkipgramExtractor:
         Count occurrences of a skip-gram pattern in a psalm.
 
         Args:
-            pattern: Tuple of consonantal forms
+            pattern_roots: Space-separated root forms
             words: List of word dictionaries
             max_gap: Maximum gap to search within
 
@@ -170,18 +218,19 @@ class SkipgramExtractor:
             Number of occurrences
         """
         count = 0
-        consonantal_words = [w['consonantal'] for w in words]
-        n = len(pattern)
+        roots = [w['root'] for w in words]
+        pattern_list = pattern_roots.split()
+        n = len(pattern_list)
 
-        for i in range(len(consonantal_words)):
-            window_end = min(i + max_gap, len(consonantal_words))
+        for i in range(len(roots)):
+            window_end = min(i + max_gap, len(roots))
             window_indices = range(i, window_end)
 
             # Check all n-word combinations in window
             for combo_indices in combinations(window_indices, n):
                 if len(combo_indices) == n:
-                    candidate = tuple(consonantal_words[idx] for idx in combo_indices)
-                    if candidate == pattern:
+                    candidate = [roots[idx] for idx in combo_indices]
+                    if candidate == pattern_list:
                         count += 1
 
         return count
@@ -190,7 +239,7 @@ class SkipgramExtractor:
         self,
         psalm_a: int,
         psalm_b: int
-    ) -> Dict[int, Set[Tuple[str, ...]]]:
+    ) -> Dict[int, Set[Tuple[str, str, str]]]:
         """
         Find skip-grams shared between two psalms.
 
@@ -208,7 +257,15 @@ class SkipgramExtractor:
 
         for length in [2, 3, 4]:
             if length in skipgrams_a and length in skipgrams_b:
-                shared[length] = skipgrams_a[length] & skipgrams_b[length]
+                # Find shared based on root patterns (first element of tuple)
+                roots_a = {sg[0]: sg for sg in skipgrams_a[length]}
+                roots_b = {sg[0]: sg for sg in skipgrams_b[length]}
+                
+                # Find common root patterns
+                common_roots = set(roots_a.keys()) & set(roots_b.keys())
+                
+                # Include all tuples for common patterns
+                shared[length] = {roots_a[r] for r in common_roots}
             else:
                 shared[length] = set()
 
@@ -218,7 +275,7 @@ class SkipgramExtractor:
 def test_skipgram_extraction():
     """Test skip-gram extraction on Psalms 25 & 34."""
     logger.info("=" * 60)
-    logger.info("SKIP-GRAM EXTRACTION TEST")
+    logger.info("SKIP-GRAM EXTRACTION TEST (V3 - Root-Based)")
     logger.info("=" * 60)
 
     extractor = SkipgramExtractor()
@@ -252,11 +309,25 @@ def test_skipgram_extraction():
     logger.info(f"  Shared 4-word skip-grams: {len(shared[4]):,}")
     logger.info(f"  Total shared: {sum(len(s) for s in shared.values()):,}")
 
-    # Show some examples
+    # Show some examples with full span
     if shared[3]:
         logger.info(f"\nExample 3-word shared skip-grams:")
         for i, pattern in enumerate(list(shared[3])[:5], 1):
-            logger.info(f"  {i}. {' '.join(pattern)}")
+            roots, matched_hebrew, full_span = pattern
+            logger.info(f"  {i}. Roots: {roots}")
+            logger.info(f"     Matched: {matched_hebrew}")
+            logger.info(f"     Full span: {full_span}")
+            logger.info("")
+
+    # Test for paragraph markers
+    logger.info("\nTesting for paragraph markers...")
+    psalm_1 = extractor.get_psalm_words(1)
+    has_markers = any(is_paragraph_marker(w['hebrew']) for w in psalm_1)
+    
+    if has_markers:
+        logger.error("  ✗ ERROR: Paragraph markers found in word list!")
+    else:
+        logger.info("  ✓ SUCCESS: No paragraph markers in word list")
 
     extractor.close_db()
 
