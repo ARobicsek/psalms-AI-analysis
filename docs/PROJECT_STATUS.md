@@ -1,9 +1,64 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ SYSTEM OPERATIONAL - Enhanced Deduplication V2 Complete
-**Last Updated**: 2025-11-14 (Session 96 - IDF Filtering + Top 500 + Skipgram Details)
+## Current Status: ✓ V2 ISSUES IDENTIFIED - V3 Planning Complete
+**Last Updated**: 2025-11-14 (Session 97 - V2 Review + V3 Design)
 
-## Recent Work Session 96: (2025-11-14 - Enhanced Deduplication V2 with IDF Filter COMPLETE ✓)
+## Recent Work Session 97: (2025-11-14 - V2 Quality Review + V3 Planning COMPLETE ✓)
+
+### ✓ SUCCESS: Identified 4 Critical Issues + Designed V3 Fix with Hebrew Morphology
+
+**User Review of V2 Output**:
+User examined top 500 connections and identified four critical issues:
+
+1. **Incomplete Deduplication** (CRITICAL BUG)
+   - Example: Rank 500 has 4-word skipgram "מזמור לאסף אל אלהים"
+   - Should remove 2-word contiguous "זמור אסף" (it's a subsequence)
+   - But doesn't because contiguous uses ROOTS ("זמור") and skipgrams use CONSONANTAL ("מזמור")
+   - Root cause: Inconsistent extraction methodology
+   - Impact: Double-counting, inflated scores, deduplication failure
+
+2. **Missing Full Hebrew Text**
+   - Skipgrams only show matched words: "מזמור לאסף אל אלהים"
+   - Need full span with gap words: "מִזְמ֗וֹר לְאָ֫סָ֥ף [gap] אֵ֤ל [gap] אֱלֹהִ֗ים"
+   - Impact: Can't validate what's actually being matched
+
+3. **False Positive Root Matches** (MANY EXAMPLES)
+   - "חי" matching מָחִיתָ (destroy) vs חַיִּים (life) - different roots!
+   - "בי" matching לִבִּי (my heart) vs בְּבֵית (in house) - preposition vs word
+   - "אד" matching מְאֹד (very) vs אֲדֹנָי (Lord) - completely unrelated
+   - Root cause: Naive string stripping, not real Hebrew morphology
+   - Impact: Many spurious matches, unreliable scores
+
+4. **Paragraph Markers Counted as Words**
+   - "{פ}" appearing in phrases: "בו {פ}"
+   - Impact: Inflated word counts, spurious phrase matches
+
+**Session Accomplishments**:
+- ✓ Analyzed all four issues with concrete examples from actual data
+- ✓ Identified root causes (design flaws, missing features, naive algorithms)
+- ✓ Created comprehensive analysis document (docs/TOP_500_ISSUES_AND_FIXES.md)
+- ✓ Designed V3 implementation using Hebrew morphological analysis
+- ✓ Created detailed multi-subagent implementation plan
+- ✓ Updated NEXT_SESSION_PROMPT.md with complete V3 roadmap
+
+**V3 Design Decisions**:
+1. Use proper Hebrew NLP package (HebMorph, MILA, or similar) for root extraction
+2. Standardize to root-based extraction for both contiguous and skipgrams
+3. Filter paragraph markers before any analysis
+4. Add full Hebrew text span to skipgram output
+5. Include verse-level phrase matching details in output
+6. Preserve meaningful 2-word roots (don't just filter by length)
+
+**Next Session**: Implement V3 using 3 parallel Explore agents for:
+- Agent 1: Hebrew morphology research and integration
+- Agent 2: Text cleaning and skipgram extraction fixes
+- Agent 3: Enhanced output format with verse-level details
+
+**Status**: ✓ Complete - Ready for V3 implementation
+
+---
+
+## Previous Work Session 96: (2025-11-14 - Enhanced Deduplication V2 with IDF Filter COMPLETE ✓)
 
 ### ✓ SUCCESS: V2 Implements IDF Threshold, Top 500 Export, and Skipgram Details
 
