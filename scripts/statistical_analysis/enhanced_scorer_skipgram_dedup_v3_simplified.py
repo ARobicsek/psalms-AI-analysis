@@ -68,119 +68,132 @@ def enhance_contiguous_phrases_with_verse_info(phrases: List[Dict]) -> List[Dict
 def enhance_skipgrams_with_verse_info(skipgrams: List[Dict]) -> List[Dict]:
     """
     Enhance skipgrams with verse-level information.
-    
+
     Note: Skipgrams in current data don't have verse info, so we provide
     the structure but with empty verse lists.
     """
     enhanced = []
-    
+
     for skipgram in skipgrams:
         consonantal = skipgram['consonantal']
         words = consonantal.split()
-        length = len(words)
-        
+        pattern_length = len(words)
+
+        # Get full_span_hebrew from skipgram data
+        full_span_hebrew = skipgram.get('full_span_hebrew', '')
+        full_span_words = full_span_hebrew.split() if full_span_hebrew else []
+        span_word_count = len(full_span_words)
+
+        # Calculate gap_word_count as difference between span and pattern
+        gap_word_count = span_word_count - pattern_length if span_word_count > pattern_length else 0
+
         # Create enhanced skipgram with structure
         enhanced_skipgram = {
             'consonantal': consonantal,
-            'matched_hebrew': skipgram.get('hebrew', consonantal),
-            'full_span_hebrew': '',  # Would need database lookup
-            'length': length,
-            'gap_word_count': 0,  # Would need per-match calculation
-            'span_word_count': length,
+            'matched_hebrew': skipgram.get('pattern_hebrew', consonantal),
+            'full_span_hebrew': full_span_hebrew,
+            'length': pattern_length,
+            'gap_word_count': gap_word_count,
+            'span_word_count': span_word_count,
             'verses_a': [],  # Skipgrams don't have verse info in current data
             'verses_b': [],
             'matches_from_a': [],
             'matches_from_b': []
         }
-        
+
         enhanced.append(enhanced_skipgram)
-    
+
     return enhanced
 
 
 def enhance_roots_with_verse_info(roots: List[Dict]) -> List[Dict]:
     """
     Enhance roots with verse-level information.
-    
-    Uses examples to show the Hebrew forms, structure for verse details.
+
+    Uses verse numbers from the source data (via pairwise_comparator)
+    to populate verse fields for each example.
     """
     enhanced = []
-    
+
     for root in roots:
         # Create enhanced root with verse structure
         enhanced_root = root.copy()
-        
-        # Add verse information structure
-        # (Actual verse lookup would require complex morphological matching)
-        enhanced_root['verses_a'] = []
-        enhanced_root['verses_b'] = []
+
+        # Get verse information from source data
+        verses_a = root.get('verses_a', [])
+        verses_b = root.get('verses_b', [])
+        examples_a = root.get('examples_a', [])
+        examples_b = root.get('examples_b', [])
+
+        # Pair examples with verse numbers (one verse number per example)
         enhanced_root['matches_from_a'] = [
             {
-                'verse': None,
+                'verse': verses_a[i] if i < len(verses_a) else None,
                 'text': ex,
                 'position': None
             }
-            for ex in root.get('examples_a', [])
+            for i, ex in enumerate(examples_a)
         ]
         enhanced_root['matches_from_b'] = [
             {
-                'verse': None,
+                'verse': verses_b[i] if i < len(verses_b) else None,
                 'text': ex,
                 'position': None
             }
-            for ex in root.get('examples_b', [])
+            for i, ex in enumerate(examples_b)
         ]
-        
+
         enhanced.append(enhanced_root)
-    
+
     return enhanced
 
 
 def load_shared_skipgrams(db_path: Path, psalm_a: int, psalm_b: int) -> List[Dict]:
-    """Load shared skipgrams (returns empty if database not available)."""
+    """Load shared skipgrams with full_span_hebrew from database."""
     try:
         conn = sqlite3.connect(str(db_path))
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
-        
+
         # Check if table exists
         cursor.execute("""
-            SELECT name FROM sqlite_master 
+            SELECT name FROM sqlite_master
             WHERE type='table' AND name='psalm_skipgrams'
         """)
         if not cursor.fetchone():
             conn.close()
             return []
-        
-        # Get skipgrams for both psalms
+
+        # Get skipgrams for both psalms with all required columns
         cursor.execute("""
-            SELECT pattern_roots, pattern_length
+            SELECT pattern_roots, pattern_hebrew, full_span_hebrew, pattern_length
             FROM psalm_skipgrams
             WHERE psalm_number = ?
         """, (psalm_a,))
-        skipgrams_a = {(row['pattern_roots'], row['pattern_length'])
-                       for row in cursor.fetchall()}
+        skipgrams_a = {row['pattern_roots']: row for row in cursor.fetchall()}
 
         cursor.execute("""
-            SELECT pattern_roots, pattern_length
+            SELECT pattern_roots, pattern_hebrew, full_span_hebrew, pattern_length
             FROM psalm_skipgrams
             WHERE psalm_number = ?
         """, (psalm_b,))
-        skipgrams_b = {(row['pattern_roots'], row['pattern_length'])
-                       for row in cursor.fetchall()}
-        
+        skipgrams_b = {row['pattern_roots']: row for row in cursor.fetchall()}
+
         conn.close()
-        
+
         # Find shared skipgrams
         shared = []
-        for (consonantal, length) in skipgrams_a:
-            if (consonantal, length) in skipgrams_b:
+        for consonantal, row_a in skipgrams_a.items():
+            if consonantal in skipgrams_b:
+                row_b = skipgrams_b[consonantal]
+                # Use data from psalm_a (they should be identical for shared skipgrams)
                 shared.append({
                     'consonantal': consonantal,
-                    'length': length,
-                    'hebrew': consonantal
+                    'pattern_hebrew': row_a['pattern_hebrew'],
+                    'full_span_hebrew': row_a['full_span_hebrew'],
+                    'length': row_a['pattern_length']
                 })
-        
+
         return shared
     except Exception as e:
         logger.warning(f"Could not load skipgrams: {e}")
