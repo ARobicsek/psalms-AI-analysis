@@ -1,0 +1,70 @@
+================================================================================
+V2 VS V3 COMPARISON REPORT
+================================================================================
+
+TOP 10 RANKINGS COMPARISON
+--------------------------------------------------------------------------------
+Rank   V2 Pair         V2 Score     V3 Pair         V3 Score    
+--------------------------------------------------------------------------------
+1      14-53           72862.78     60-108          80177.20    
+2      60-108          68994.17     14-53           74167.88    
+3      57-108          20349.02     40-70           31277.84    
+4      40-70           19936.66     57-108          28962.52    
+5      42-43           19022.60     42-43           19453.08    
+6      115-135         15352.15     115-135         16145.67    
+7      96-98           5749.60      96-98           4927.32     
+8      29-96           4262.13      29-96           4331.25     
+9      31-71           3183.98      31-71           3595.65     
+10     118-136         1872.52      54-86           2481.12     
+
+
+KNOWN DUPLICATE PAIRS - SCORE CHANGES
+--------------------------------------------------------------------------------
+Pair         V2 Score        V3 Score        Change          % Change  
+--------------------------------------------------------------------------------
+14-53        72862.78        74167.88               +1305.10       +1.8%
+60-108       68994.17        80177.20              +11183.03      +16.2%
+40-70        19936.66        31277.84              +11341.18      +56.9%
+42-43        19022.60        19453.08                +430.48       +2.3%
+
+
+RANK 500 ISSUE EXAMPLE: Psalms 50-82 (Asaph Collection)
+--------------------------------------------------------------------------------
+V2 Rank: 500
+V2 Score: 242.51
+V2 Deduplicated Contiguous: 2
+V2 Deduplicated Skipgrams: 1
+
+V3 Rank: 181
+V3 Score: 279.28
+V3 Deduplicated Contiguous: 2
+V3 Deduplicated Skipgrams: 7
+
+Score Change: +36.76 (+15.2%)
+
+
+OVERALL STATISTICS
+--------------------------------------------------------------------------------
+
+V2 Statistics:
+  Top score: 72862.78
+  Cutoff score (rank 500): 242.51
+  Average score: 763.91
+
+V3 Statistics:
+  Top score: 80177.20
+  Cutoff score (rank 500): 231.27
+  Average score: 836.22
+
+
+DEDUPLICATION EFFECTIVENESS
+--------------------------------------------------------------------------------
+V2 Total items deduplicated: 0
+V3 Total items deduplicated: 0
+Traceback (most recent call last):
+  File "/home/user/psalms-AI-analysis/scripts/statistical_analysis/compare_v2_v3_results.py", line 141, in <module>
+    main()
+  File "/home/user/psalms-AI-analysis/scripts/statistical_analysis/compare_v2_v3_results.py", line 128, in main
+    print(f"Difference: {v3_total_dedup - v2_total_dedup:+,} ({((v3_total_dedup - v2_total_dedup)/v2_total_dedup)*100:+.1f}%)")
+                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+ZeroDivisionError: division by zero
