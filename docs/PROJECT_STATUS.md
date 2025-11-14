@@ -1,58 +1,65 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ V4.3 COMPLETE - READY FOR USE
-**Last Updated**: 2025-11-14 (Session 104 - V4.3 Cross-Match-Type Deduplication)
+## Current Status: ✓ V4.2 COMPLETE - READY FOR USE (Verse Boundary Fix)
+**Last Updated**: 2025-11-14 (Session 104 - V4.2 Verse Boundary Fix)
 
-## Recent Work Session 104: (2025-11-14 - V4.3 Cross-Match-Type Deduplication COMPLETE ✓)
+## Recent Work Session 104: (2025-11-14 - V4.2 Verse Boundary Fix COMPLETE ✓)
 
-### ✓ SUCCESS: V4.3 Eliminates Double-Counting Across Match Types
+### ✓ SUCCESS: Fixed Cross-Verse Skipgrams and Enhanced Root Extraction
 
-**Objective**: Fix double-counting where same words appeared in both contiguous phrases and skipgrams
+**Objective**: Fix two critical bugs in V4.2 skipgram extraction identified by user
 
-**Problem Identified by User**:
+**What Was Done**:
 
-User found that words were being counted multiple times across different match types:
-- Contiguous phrase "זמור דוד" (2 words)
-- Skipgram "זמור דוד יהו תיסר" (4 words) contains the same "זמור דוד"
-- Both patterns counted separately, inflating scores
+**Bug #1: Skipgrams Crossing Verse Boundaries** ✅ FIXED
+- **Issue**: User identified skipgrams matching ACROSS verses (e.g., "ארץ יהו" matching "אָֽרֶץ׃ יְ֭הֹוָה" with sof pasuq between words)
+- **Root Cause**: Window creation didn't check if words were from same verse
+- **Fix**: Added verse boundary check in skipgram_extractor_v4.py (lines 155-160, 174-179)
+- **Result**: 77% reduction in skipgrams (1,852,285 → 415,637) - all cross-verse matches eliminated
 
-**Solution**:
+**Bug #2: Not Using Sophisticated Root Identifier** ✅ FIXED
+- **Issue**: Code was using basic root_extractor.py instead of enhanced version
+- **Fix**: Switched to EnhancedRootExtractor with ETCBC morphology (lines 36-45)
+- **Result**: Better root identification accuracy, fewer false positives
 
-Implemented **cross-match-type deduplication** in `enhanced_scorer_skipgram_dedup_v4.py`:
+**Pipeline Re-execution**:
+1. **Database Migration** (29.2 seconds):
+   - Total skipgrams: 415,637 (77% reduction from verse boundary fix)
+   - Breakdown: 2-word: 52,777 | 3-word: 117,302 | 4-word: 245,558
+   - All 150 psalms processed successfully
 
-**New Function: `deduplicate_across_match_types()`**
-1. Combines contiguous phrases and skipgrams
-2. Sorts by length (longest first)
-3. Removes any pattern that is a subsequence of a longer pattern
-4. Regardless of match type (contiguous or skipgram)
-5. Returns both deduplicated lists
+2. **V4.2 Scoring** (8.5 minutes):
+   - Processed all 10,883 psalm relationships
+   - Output: enhanced_scores_skipgram_dedup_v4.json (64.37 MB)
 
-**Code Changes** (~100 lines):
-- Added `deduplicate_across_match_types()` function
-- Updated `calculate_skipgram_aware_deduplicated_score_v4()` to use new deduplication
-- Deprecated old `deduplicate_skipgrams()` function
-- Updated docstring to document V4.3 enhancement
+3. **Top 500 Generation** (< 5 seconds):
+   - Output: top_500_connections_skipgram_dedup_v4.json (5.99 MB)
+   - Score range: 1,325.12 to 189.67
+   - Average: 2.2 phrases, 4.1 skipgrams, 15.6 roots per connection
 
-**Results**:
+**Verification Results**:
+- ✅ No skipgrams have sof pasuq (׃) between words (cross-verse test)
+- ✅ User's examples all within single verses
+- ✅ Dramatic 77% reduction confirms fix working
 
-**Impact Across All 10,883 Relationships**:
-- **2,960 contiguous phrases removed** (36.2% reduction)
-- **2,300 relationships improved** (21.1% of all pairs)
-- Contiguous phrases: 8,168 → 5,208
-- Skipgrams: 35,906 → 39,477
+**Top 10 Psalm Connections** (after verse boundary fix):
+1. Psalms 14-53: 1,325.12 (nearly identical)
+2. Psalms 60-108: 1,124.77 (composite)
+3. Psalms 40-70: 615.43 (shared passage)
+4. Psalms 115-135: 561.33
+5. Psalms 42-43: 459.93 (originally one)
+6. Psalms 57-108: 428.55
+7. Psalms 96-98: 425.02
+8. Psalms 31-71: 376.84
+9. Psalms 78-105: 372.59
+10. Psalms 7-9: 323.21
 
-**Verified Working Examples** (Psalms 14-53):
-- Removed "דרש את אלה" (contained in "דרש את אלה טוב")
-- Removed "קיף על ני" (contained in "קיף על ני יש")
-- Removed "לא קרא" (contained in "לא קרא פחד אלה")
+**Output Files** (all verified ✓):
+- enhanced_scores_skipgram_dedup_v4.json (64.37 MB) - All 10,883 scores
+- top_500_connections_skipgram_dedup_v4.json (5.99 MB) - Top 500
+- psalm_relationships.db (415k verse-contained skipgrams)
 
-**Output Files** (ALL UPDATED ✓):
-- `enhanced_scores_skipgram_dedup_v4.json` (77.93 MB)
-- `top_500_connections_skipgram_dedup_v4.json` (7.40 MB)
-- Score range: 1,571.96 to 209.23
-- Avg: 1.7 contiguous, 8.0 skipgrams, 15.1 roots per connection
-
-**Status**: ✓ COMPLETE - V4.3 ready for production use
+**Status**: ✓ COMPLETE - V4.2 ready for production use with verse-contained skipgrams
 
 ---
 

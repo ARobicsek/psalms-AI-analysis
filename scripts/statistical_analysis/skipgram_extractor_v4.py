@@ -33,8 +33,16 @@ logger = logging.getLogger(__name__)
 # Paths
 TANAKH_DB_PATH = Path(__file__).parent.parent.parent / "database" / "tanakh.db"
 
-# Import RootExtractor for root extraction
-from root_extractor import RootExtractor
+# Import sophisticated RootExtractor with ETCBC morphology
+# This provides more accurate root extraction and reduces false positives
+try:
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
+    from hebrew_analysis.root_extractor_v2 import EnhancedRootExtractor as RootExtractor
+    logger.info("Using enhanced root extractor with ETCBC morphology")
+except ImportError:
+    # Fallback to basic root extractor if enhanced version unavailable
+    from root_extractor import RootExtractor
+    logger.warning("Enhanced root extractor unavailable, using basic version")
 
 
 class SkipgramExtractorV4:
@@ -152,6 +160,13 @@ class SkipgramExtractorV4:
             # Generate all n-word combinations within window
             for combo_indices in combinations(window_indices, n):
                 if len(combo_indices) == n:
+                    # CRITICAL FIX: Ensure all words are from the SAME verse
+                    # Skip combinations that cross verse boundaries
+                    verses_in_combo = set(words[idx]['verse'] for idx in combo_indices)
+                    if len(verses_in_combo) > 1:
+                        # This combination crosses verse boundaries - skip it
+                        continue
+
                     # Extract roots for the matched words
                     matched_roots = [words[idx]['root'] for idx in combo_indices]
                     pattern_roots = ' '.join(matched_roots)
@@ -163,11 +178,14 @@ class SkipgramExtractorV4:
                     # Extract FULL Hebrew span (from first to last index, including gaps)
                     first_idx = combo_indices[0]
                     last_idx = combo_indices[-1]
-                    full_span_hebrew = ' '.join(words[idx]['hebrew']
-                                                for idx in range(first_idx, last_idx + 1))
 
-                    # Get verse number (should be same for all words in window)
+                    # CRITICAL FIX: Only include words from the same verse in full span
+                    # This prevents including words from the next verse
                     verse = words[first_idx]['verse']
+                    full_span_hebrew = ' '.join(words[idx]['hebrew']
+                                                for idx in range(first_idx, last_idx + 1)
+                                                if words[idx]['verse'] == verse)
+
                     first_position = words[first_idx]['position']
 
                     # Create skipgram instance
