@@ -6,11 +6,12 @@ and morphological analysis (prefix/suffix stripping).
 
 Strategy:
 1. Load Hebrew text from tanakh.db
-2. Split on maqqef and whitespace
-3. Normalize to consonantal form
-4. Strip common prefixes (ה, ו, ב, כ, ל, מ, ש)
-5. Strip common suffixes (pronominal, plural, etc.)
-6. Extract n-grams (2-word and 3-word phrases)
+2. Clean text to remove paragraph markers ({פ}, {ס}, etc.)
+3. Split on maqqef and whitespace
+4. Normalize to consonantal form
+5. Strip common prefixes (ה, ו, ב, כ, ל, מ, ש)
+6. Strip common suffixes (pronominal, plural, etc.)
+7. Extract n-grams (2-word and 3-word phrases)
 """
 
 import sys
@@ -29,6 +30,9 @@ from concordance.hebrew_text_processor import (
     split_on_maqqef,
     split_words
 )
+
+# Import text cleaning utilities
+from text_cleaning import clean_hebrew_text, clean_word_list, is_paragraph_marker
 
 logger = logging.getLogger(__name__)
 
@@ -228,11 +232,17 @@ class RootExtractor:
         Returns:
             Dict mapping root -> list of original word forms
         """
+        # STEP 1: Clean text to remove paragraph markers
+        cleaned_text = clean_hebrew_text(hebrew_text)
+        
         # Split on maqqef first
-        text_split = split_on_maqqef(hebrew_text)
+        text_split = split_on_maqqef(cleaned_text)
 
         # Split into words
         words = split_words(text_split)
+        
+        # STEP 2: Clean word list to remove any remaining markers
+        words = clean_word_list(words)
 
         # Extract roots
         root_to_words = defaultdict(list)
@@ -259,11 +269,17 @@ class RootExtractor:
         Returns:
             List of n-gram dicts with 'consonantal' and 'hebrew' forms
         """
+        # STEP 1: Clean text to remove paragraph markers
+        cleaned_text = clean_hebrew_text(hebrew_text)
+        
         # Split on maqqef first
-        text_split = split_on_maqqef(hebrew_text)
+        text_split = split_on_maqqef(cleaned_text)
 
         # Split into words
         words = split_words(text_split)
+        
+        # STEP 2: Clean word list to remove any remaining markers
+        words = clean_word_list(words)
 
         if len(words) < n:
             return []
@@ -381,7 +397,7 @@ if __name__ == '__main__':
 
     # Test with Psalm 23 (short, familiar psalm)
     print("=" * 60)
-    print("Testing Root Extraction on Psalm 23")
+    print("Testing Root Extraction on Psalm 23 (with text cleaning)")
     print("=" * 60)
 
     with RootExtractor(db_path) as extractor:
@@ -408,6 +424,25 @@ if __name__ == '__main__':
         for phrase in result['phrases'][:5]:
             if phrase['length'] == 2:
                 print(f"    {phrase['consonantal']} | {phrase['hebrew']} (v.{phrase['verse']})")
+
+    # Test with Psalm 1 (contains {פ} marker)
+    print("\n" + "=" * 60)
+    print("Testing Root Extraction on Psalm 1 (contains {פ})")
+    print("=" * 60)
+    
+    with RootExtractor(db_path) as extractor:
+        result = extractor.extract_psalm_roots(1, include_phrases=False)
+        
+        print(f"\nPsalm 1 Analysis:")
+        print(f"  Total unique roots: {len(result['roots'])}")
+        
+        # Check if {פ} appears in roots (it shouldn't!)
+        has_marker = '{פ}' in result['roots'] or any('{' in root for root in result['roots'])
+        
+        if has_marker:
+            print("  ✗ ERROR: Paragraph markers found in roots!")
+        else:
+            print("  ✓ SUCCESS: No paragraph markers in roots")
 
     print("\n" + "=" * 60)
     print("✓ Root extraction test complete!")
