@@ -14,7 +14,12 @@ V4.1 Enhancement:
 - Keeps longest pattern as representative per overlapping group
 - Prevents over-counting of multiple patterns from the same phrase
 
-This addresses all issues identified by user in V3 output.
+V4.3 Fix (Session 103):
+- ISSUE #1: Remove contiguous phrases that are contained within skipgrams
+- ISSUE #1: Keep only ONE skipgram per verse/location (most aggressive deduplication)
+- ISSUE #2: Full verse text now loaded from tanakh.db (fixed by V4 migration)
+
+This addresses all issues identified by user in Session 103.
 """
 
 import json
@@ -119,6 +124,107 @@ def _instances_overlap_substantially(inst1: Dict, inst2: Dict) -> bool:
 
     # Require >80% overlap of the shorter span
     return overlap_length > shorter_span * 0.8
+
+
+def filter_contiguous_contained_in_skipgrams(
+    contiguous_phrases: List[Dict],
+    skipgrams: List[Dict]
+) -> List[Dict]:
+    """
+    V4.3 FIX - ISSUE #1: Remove contiguous phrases that are contained within skipgrams.
+
+    A contiguous phrase should be removed if its words appear as a subsequence
+    within any skipgram (whether consecutive or with gaps).
+
+    Example:
+        Contiguous: "יהו אל"
+        Skipgram: "יהו אל תוכיח חמת"
+        -> "יהו אל" should be removed (it's part of the skipgram)
+
+    Args:
+        contiguous_phrases: List of contiguous phrase dicts
+        skipgrams: List of skipgram dicts
+
+    Returns:
+        Filtered list of contiguous phrases
+    """
+    if not skipgrams:
+        return contiguous_phrases
+
+    # Get all word sequences from skipgrams
+    skipgram_sequences = []
+    for sg in skipgrams:
+        words = sg['consonantal'].split()
+        skipgram_sequences.append(words)
+
+    # Filter contiguous phrases
+    filtered = []
+    for phrase in contiguous_phrases:
+        phrase_words = phrase['consonantal'].split()
+
+        # Check if this phrase is a subsequence of any skipgram
+        is_contained = False
+        for sg_words in skipgram_sequences:
+            if len(phrase_words) <= len(sg_words):
+                # Check if phrase_words is a subsequence of sg_words
+                j = 0
+                for phrase_word in phrase_words:
+                    while j < len(sg_words) and sg_words[j] != phrase_word:
+                        j += 1
+                    if j >= len(sg_words):
+                        break
+                    j += 1
+                else:
+                    # All words found in order - this phrase is contained in the skipgram
+                    is_contained = True
+                    break
+
+        if not is_contained:
+            filtered.append(phrase)
+
+    return filtered
+
+
+def keep_best_skipgram_per_verse_pair(skipgrams: List[Dict]) -> List[Dict]:
+    """
+    V4.3 FIX - ISSUE #1: Keep only ONE skipgram per verse pair location.
+
+    When multiple skipgrams come from the same verse(s), keep only the longest
+    or most significant one. This prevents counting multiple overlapping patterns
+    from the same location.
+
+    Example: If we have 9 skipgrams all from verse 2, keep only the longest one.
+
+    Args:
+        skipgrams: List of skipgram dicts with matches_from_a and matches_from_b
+
+    Returns:
+        Filtered list with at most one skipgram per verse pair
+    """
+    if not skipgrams:
+        return []
+
+    # Group skipgrams by the verses they appear in
+    verse_groups = defaultdict(list)
+
+    for sg in skipgrams:
+        # Create a key from the verse numbers
+        verses_a = tuple(sorted(set(m['verse'] for m in sg.get('matches_from_a', []))))
+        verses_b = tuple(sorted(set(m['verse'] for m in sg.get('matches_from_b', []))))
+        key = (verses_a, verses_b)
+        verse_groups[key].append(sg)
+
+    # For each verse group, keep only the best skipgram
+    result = []
+    for key, group in verse_groups.items():
+        if len(group) == 1:
+            result.append(group[0])
+        else:
+            # Sort by length (longer is better), then by span_word_count (fewer gaps is better)
+            best = max(group, key=lambda sg: (sg['length'], -sg.get('span_word_count', 999)))
+            result.append(best)
+
+    return result
 
 
 def load_psalm_verses(db_path: Path, psalm_number: int) -> Dict[int, str]:
@@ -496,8 +602,27 @@ def calculate_skipgram_aware_deduplicated_score_v4(
     contiguous_3 = sum(1 for p in deduplicated_contiguous if p['length'] == 3)
     contiguous_4plus = sum(1 for p in deduplicated_contiguous if p['length'] >= 4)
 
-    # Deduplicate skipgrams
+    # Deduplicate skipgrams (remove those matching contiguous, remove subpatterns)
     deduplicated_skipgrams = deduplicate_skipgrams(shared_skipgrams, deduplicated_contiguous)
+
+    # V4.3 FIX - ISSUE #1: Keep only ONE skipgram per verse pair location
+    deduplicated_skipgrams = keep_best_skipgram_per_verse_pair(deduplicated_skipgrams)
+
+    # V4.3 FIX - ISSUE #1: Remove contiguous phrases that are contained within skipgrams
+    deduplicated_contiguous = filter_contiguous_contained_in_skipgrams(
+        deduplicated_contiguous,
+        deduplicated_skipgrams
+    )
+
+    # Recalculate contiguous counts and roots after filtering
+    contiguous_2 = sum(1 for p in deduplicated_contiguous if p['length'] == 2)
+    contiguous_3 = sum(1 for p in deduplicated_contiguous if p['length'] == 3)
+    contiguous_4plus = sum(1 for p in deduplicated_contiguous if p['length'] >= 4)
+
+    roots_in_contiguous = set()
+    for phrase in deduplicated_contiguous:
+        roots = phrase['consonantal'].split()
+        roots_in_contiguous.update(roots)
 
     skipgram_2_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 2)
     skipgram_3_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 3)
