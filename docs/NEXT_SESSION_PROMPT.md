@@ -6,11 +6,19 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V4.2 Root Extraction & Gap Penalty - TESTING NEEDED  
-**Version**: V4.2 with ETCBC morphology cache and gap penalty  
-**Last Session**: Session 105 - Root Extraction & Gap Penalty (2025-11-14)
+**Phase**: V4.2 Root Extraction & Gap Penalty - COMPLETE ✓
+**Version**: V4.2 with ETCBC morphology cache and gap penalty
+**Last Session**: Session 106 - Ranking Analysis & Top 550 Generation (2025-11-14)
 
-## Session 105 Summary (IN PROGRESS)
+## Session 106 Summary (COMPLETE ✓)
+
+**Completed**:
+- ✓ Analyzed Ps 25-34 ranking position (#534)
+- ✓ Generated Top 550 connections file
+- ✓ Documented score distributions and cutoffs
+- ✓ Updated session documentation
+
+## Session 105 Summary (COMPLETE ✓)
 
 **Completed**:
 - ✓ Built ETCBC morphology cache (5,353 entries from Psalms)
@@ -18,62 +26,71 @@ Continue working on the Psalms structural analysis project. This document provid
 - ✓ Improved fallback root extraction (3-letter minimum)
 - ✓ Implemented 10% gap penalty per word (max 50%)
 - ✓ Root extraction: 80% improvement on test cases
-
-**Pending**:
-- ⏳ Re-run V4.2 migration with improved root extraction  
-- ⏳ Re-run V4.2 scoring with gap penalty  
-- ⏳ Validate results and spot-check examples
+- ✓ Re-ran V4.2 migration with improved root extraction
+- ✓ Re-ran V4.2 scoring with gap penalty
+- ✓ Validated results and verified gap penalty working
 
 ## Next Steps
 
-### Option 1: Complete V4.2 Re-Migration (Recommended)
+### Possible Next Actions
 
-Run full migration with improved root extraction and gap penalty:
+V4.2 analysis is complete with all improvements applied. Consider:
 
-```bash
-# 1. Re-migrate all psalm pairs (will use new ETCBC cache)
-python3 scripts/statistical_analysis/skipgram_migration_v4.py
+1. **Analyze Specific Psalm Connections**
+   - Investigate specific pairs from Top 550
+   - Look for theological/liturgical patterns
+   - Compare with Hirsch commentary
 
-# 2. Re-score with gap penalty
-python3 scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py
+2. **Statistical Analysis**
+   - Study score distribution patterns
+   - Identify clusters of related psalms
+   - Analyze by psalm genre/type
 
-# 3. Spot-check improvements
-# Check Ps 31/41 and Ps 22/119 for better root matching
-```
+3. **Export for External Analysis**
+   - Generate visualizations
+   - Create network graphs
+   - Export to spreadsheet formats
 
-**Expected Time**: ~2-3 hours for full migration + scoring  
-**Expected Result**: Better root matching, reduced false positives, gap penalty applied
+4. **Further Refinements** (optional)
+   - Expand ETCBC cache to full Bible
+   - Tune gap penalty parameters
+   - Add additional pattern types
 
-### Option 2: Spot-Test Before Full Migration
+## Key Improvements - Recent Sessions
 
-Test on a few psalm pairs first to verify improvements:
+### Session 106: Ranking Analysis & Top 550
+- **Generated**: Top 550 connections file (extends Top 500)
+- **Captures**: Ps 25-34 at position #534
+- **File**: `data/analysis_results/top_550_connections_skipgram_dedup_v4.json`
+- **Score Range**: 1,087.38 to 183.97
 
-```bash
-# Test individual pairs
-python3 scripts/statistical_analysis/test_single_pair.py 31 41
-python3 scripts/statistical_analysis/test_single_pair.py 22 119
-```
+### Session 105: ETCBC Morphology & Gap Penalty
 
-## Key Improvements This Session
+1. **ETCBC Morphology Cache**
+   - 5,353 morphological mappings from Psalms
+   - ETCBC BHSA 2021 scholarly database
+   - 80% improvement in root extraction
 
-### 1. ETCBC Morphology Cache
-- **Built**: 5,353 morphological mappings from Psalms
-- **Source**: ETCBC BHSA 2021 scholarly database
-- **Location**: `src/hebrew_analysis/data/psalms_morphology_cache.json`
-- **Impact**: Accurate root extraction for most Psalms words
+2. **Improved Fallback Root Extraction**
+   - Require 3 letters after prefix stripping
+   - Prevents over-stripping like "שוא" → "וא"
 
-### 2. Improved Fallback Root Extraction  
-- **Change**: Require 3 letters after prefix stripping (was 2)
-- **Impact**: Prevents over-stripping like "שוא" → "וא"
-- **Result**: 80% improvement on test cases
+3. **Gap Penalty for Skipgrams**
+   - Formula: `value = base * (1.0 - min(0.1 * gap_count, 0.5))`
+   - Contiguous phrases valued higher than gappy skipgrams
 
-### 3. Gap Penalty for Skipgrams
-- **Formula**: `value = base * (1.0 - min(0.1 * gap_count, 0.5))`
-- **Impact**: Contiguous phrases valued higher than gappy skipgrams
-- **Example**: 3-word pattern with 2 gap words: 2.0 → 1.6 points
+## Files Modified - Recent Sessions
 
-## Files Modified This Session
+### Session 106:
+**New Files**:
+- `data/analysis_results/top_550_connections_skipgram_dedup_v4.json` - Extended top connections
 
+**Documentation Updates**:
+- `docs/IMPLEMENTATION_LOG.md` - Session 106 entry
+- `docs/PROJECT_STATUS.md` - Updated current status
+- `docs/NEXT_SESSION_PROMPT.md` - This file
+
+### Session 105:
 **Core Changes**:
 - `src/hebrew_analysis/cache_builder.py` - ETCBC API fixes
 - `src/hebrew_analysis/morphology.py` - Fallback extraction improvements
@@ -85,20 +102,15 @@ python3 scripts/statistical_analysis/test_single_pair.py 22 119
 
 ## Important Notes
 
-1. **ETCBC Cache Coverage**: Cache only includes words that appear in Psalms. Words from other books will use fallback extraction.
+1. **Two Top Lists Available**:
+   - Top 500 (cutoff: 186.48) - High-confidence connections
+   - Top 550 (cutoff: 183.97) - Includes historically significant pairs like Ps 25-34
 
-2. **Gap Penalty is Modest**: 10% per gap word, max 50%. Won't eliminate distant patterns, just reduces their weight.
+2. **ETCBC Cache Coverage**: Cache includes all words from Psalms. Words from other books use improved fallback extraction.
 
-3. **Root Extraction Fallback**: For words not in cache (rare forms, other books), falls back to improved naive extraction.
+3. **Gap Penalty Applied**: 10% per gap word (max 50%). Contiguous patterns valued higher than gappy skipgrams.
 
-4. **Migration Required**: Need to re-run migration for root extraction improvements to take effect.
-
-## Questions for User
-
-Before proceeding with full migration:
-1. Should we run full migration now, or test on specific psalm pairs first?
-2. Are there specific psalm pairs you want to verify for improvements?
-3. Is the 10% gap penalty appropriate, or would you prefer different values?
+4. **All Data Current**: V4.2 migration and scoring complete with all improvements applied.
 
 ## Reference
 
