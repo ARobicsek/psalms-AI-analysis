@@ -133,16 +133,22 @@ class PairwiseComparator:
         # Determine significance (p < 0.01 OR z-score > 3.0)
         is_significant = (pvalue < 0.01) or (z_score > 3.0)
 
-        # Build shared roots list
+        # Build shared roots list with verse information
         shared_roots_list = []
         for root in sorted(shared_roots, key=lambda r: roots_a[r]['idf'], reverse=True):
+            # Extract verse numbers for both psalms
+            verses_a = roots_a[root].get('verses', [])
+            verses_b = roots_b[root].get('verses', [])
+
             shared_roots_list.append({
                 'root': root,
                 'idf': roots_a[root]['idf'],
                 'count_a': roots_a[root]['count'],
                 'count_b': roots_b[root]['count'],
                 'examples_a': roots_a[root]['examples'],
-                'examples_b': roots_b[root]['examples']
+                'examples_b': roots_b[root]['examples'],
+                'verses_a': verses_a,
+                'verses_b': verses_b
             })
 
         # Build shared phrases list (sorted by length descending, then by frequency)
