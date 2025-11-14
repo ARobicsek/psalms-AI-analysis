@@ -7701,3 +7701,115 @@ After initial implementation, discovered gap_word_count was missing from databas
 - Gap penalty: Working correctly on all 8,745 pairs with skipgrams
 - All data re-generated with improvements applied
 
+
+## Session 106 - 2025-11-14 (Ranking Analysis & Top 550 Generation)
+
+### Overview
+**Objective**: Analyze ranking of Ps 25-34 connection and generate extended top connections list
+**Approach**: Query ranking position, generate top 550 to capture historically significant pairs
+**Status**: ✅ COMPLETE
+
+**Session Duration**: ~10 minutes
+**Key Achievements**:
+- ✓ Identified Ps 25-34 ranking position (#534)
+- ✓ Generated top 550 connections file
+- ✓ Documented score distribution and cutoffs
+
+### User Request
+
+User noticed that Ps 25-34 has a final score of 184.56 and asked:
+"How far down in the ranking would I need to go to capture it in our 'top' list?"
+
+This is a historically/theologically significant pair (alphabetic acrostic psalms) that should be included in analysis.
+
+### Analysis Results
+
+**Ps 25-34 Position**:
+- Final score: 184.56
+- Ranking: #534 out of 10,883 total pairs
+- Status: Outside current Top 500 by 34 positions
+
+**Score Context**:
+- Top 500 cutoff: 186.48 (Ps 81-150)
+- Ps 25-34 score: 184.56
+- Score delta: 1.92 points below Top 500 cutoff
+
+**Neighboring Pairs**:
+```
+#530 | Ps  48- 87 | 184.82
+#531 | Ps 103-104 | 184.75
+#532 | Ps  66- 88 | 184.63
+#533 | Ps  59- 76 | 184.60
+#534 | Ps  25- 34 | 184.56 ← TARGET
+#535 | Ps  35- 59 | 184.53
+#536 | Ps 135-146 | 184.52
+```
+
+### Solution Implementation
+
+**Decision**: Extend to Top 550
+- Captures Ps 25-34 (#534)
+- Provides buffer (16 additional pairs beyond target)
+- Round number (550 vs 534)
+
+**Generated File**:
+```bash
+python3 -c "
+import json
+with open('data/analysis_results/enhanced_scores_skipgram_dedup_v4.json', 'r') as f:
+    all_scores = json.load(f)
+sorted_scores = sorted(all_scores, key=lambda x: x['final_score'], reverse=True)
+top_550 = sorted_scores[:550]
+with open('data/analysis_results/top_550_connections_skipgram_dedup_v4.json', 'w') as f:
+    json.dump(top_550, f, ensure_ascii=False, indent=2)
+"
+```
+
+**Output**:
+- File: `data/analysis_results/top_550_connections_skipgram_dedup_v4.json`
+- Total pairs: 550
+- Score range: 1,087.38 (Ps 14-53) to 183.97 (Ps 41-101)
+- Size: ~8.5 MB
+
+### Comparison: Top 500 vs Top 550
+
+**Top 500**:
+- Count: 500
+- Cutoff: 186.48 (Ps 81-150)
+
+**Top 550**:
+- Count: 550
+- Cutoff: 183.97 (Ps 41-101)
+- New pairs added: 50
+- Score range of additions: 183.97 to 186.39
+
+**Verification**:
+✅ Ps 25-34 confirmed included at position #534 (score: 184.56)
+
+### Files Created
+
+**New Files**:
+- `data/analysis_results/top_550_connections_skipgram_dedup_v4.json` - Extended top connections (550 pairs)
+
+### Technical Notes
+
+**Score Distribution**:
+The decision to use 550 (vs 534) provides:
+1. **Captures target**: Ps 25-34 at #534
+2. **Buffer room**: 16 pairs of margin
+3. **Round number**: Easier to reference
+4. **Minimal overhead**: Only 10% increase over Top 500
+
+**Usage Recommendation**:
+- Use Top 500 for general high-confidence connections
+- Use Top 550 for comprehensive analysis including historically significant pairs
+- Both files remain available for different analytical purposes
+
+### Session Outcome
+
+✅ COMPLETE - Top 550 file generated successfully
+- Ps 25-34 successfully included in extended list
+- Provides 50 additional pairs beyond Top 500
+- Minimal computational overhead
+- Both Top 500 and Top 550 files available for analysis
+
