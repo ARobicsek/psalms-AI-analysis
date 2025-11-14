@@ -55,14 +55,29 @@ def build_psalms_cache(output_path: Optional[Path] = None,
         )
     
     logger.info("Loading ETCBC BHSA data (this may take a minute on first run)...")
-    
+
     try:
         # Load Hebrew Bible with morphology
-        # checkout="clone" ensures we get the full dataset
-        A = use('ETCBC/bhsa', checkout="clone", silent=True)
+        # Note: First run will download ~100MB of data from GitHub
+        # Not using checkout="clone" - let text-fabric handle it automatically
+        A = use('ETCBC/bhsa')
+
+        # Verify the API loaded correctly
+        # In text-fabric 13+, F and L are at A.api.F and A.api.L
+        if not hasattr(A, 'api') or not hasattr(A.api, 'F') or not hasattr(A.api, 'L'):
+            raise RuntimeError(
+                "BHSA API did not load correctly. "
+                "The TF API object is missing required attributes (api.F, api.L). "
+                "Try running this script again to allow text-fabric to download the data."
+            )
+
+        # Extract API for easier access
+        F = A.api.F
+        L = A.api.L
+
     except Exception as e:
         raise RuntimeError(f"Failed to load BHSA data: {e}")
-    
+
     logger.info("BHSA data loaded successfully")
     
     # Build cache
@@ -73,26 +88,27 @@ def build_psalms_cache(output_path: Optional[Path] = None,
     # Determine which books to process
     if include_all_bible:
         # Get all book nodes
-        books = A.F.book.s('Genesis')  # Start from Genesis
+        books = F.book.s('Genesis')  # Start from Genesis
         logger.info("Building cache for entire Hebrew Bible...")
         book_filter = None  # Process all
     else:
-        # Only Psalms
+        # Only Psalms (ETCBC uses Latin name "Psalmi")
         logger.info("Building cache for Psalms only...")
-        book_filter = 'Psalms'
-    
+        book_filter = 'Psalmi'
+
     # Iterate through all words
-    for word_node in A.F.otype.s('word'):
+    for word_node in F.otype.s('word'):
         # Check if word is in desired book(s)
-        book_node = A.L.u(word_node, 'book')[0]  # Get parent book
-        book_name = A.F.book.v(book_node)
-        
+        book_node = L.u(word_node, 'book')[0]  # Get parent book
+        book_name = F.book.v(book_node)
+
         if book_filter and book_name != book_filter:
             continue  # Skip this word
-        
+
         # Get word data
-        consonantal = A.F.g_cons.v(word_node)  # Consonantal form (without vowels)
-        lemma = A.F.lex.v(word_node)  # Lexeme (root/lemma)
+        # Use g_cons_utf8 (Hebrew consonantal) not g_cons (transliterated)
+        consonantal = F.g_cons_utf8.v(word_node)  # Consonantal form (without vowels) in Hebrew
+        lemma = F.lex_utf8.v(word_node)  # Lexeme (root/lemma) in Hebrew
         
         if not consonantal or not lemma:
             continue

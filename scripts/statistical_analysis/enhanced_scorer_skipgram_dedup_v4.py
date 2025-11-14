@@ -561,9 +561,41 @@ def calculate_skipgram_aware_deduplicated_score_v4(
     contiguous_3 = sum(1 for p in deduplicated_contiguous if p['length'] == 3)
     contiguous_4plus = sum(1 for p in deduplicated_contiguous if p['length'] >= 4)
 
+    # Calculate skipgram scores WITH GAP PENALTY
+    # Apply a modest penalty for gaps: reduce score by 10% per word in gap (up to 50% reduction)
+    def calculate_skipgram_value(skipgram: Dict) -> float:
+        """
+        Calculate the value of a skipgram with gap penalty applied.
+
+        Base value is determined by length (2→1, 3→2, 4+→3).
+        Gap penalty: reduce by 10% per word in gap, capped at 50% reduction.
+        """
+        length = skipgram['length']
+        gap_count = skipgram.get('gap_word_count', 0)
+
+        # Base value by length
+        if length == 2:
+            base_value = 1.0
+        elif length == 3:
+            base_value = 2.0
+        else:  # 4+
+            base_value = 3.0
+
+        # Apply gap penalty: 10% per word in gap, max 50% reduction
+        # gap_penalty ranges from 0.0 (no gap) to 0.5 (5+ words gap)
+        gap_penalty = min(0.1 * gap_count, 0.5)
+
+        # Final value = base_value * (1 - penalty)
+        return base_value * (1.0 - gap_penalty)
+
     skipgram_2_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 2)
     skipgram_3_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 3)
     skipgram_4_actual = sum(1 for s in deduplicated_skipgrams if s['length'] >= 4)
+
+    # Calculate skipgram contribution with gap penalty
+    skipgram_score_contribution = sum(
+        calculate_skipgram_value(s) for s in deduplicated_skipgrams
+    )
 
     # Find roots in skipgrams
     roots_in_skipgrams = set()
@@ -591,12 +623,13 @@ def calculate_skipgram_aware_deduplicated_score_v4(
     enhanced_skipgrams = deduplicated_skipgrams
     enhanced_roots = enhance_roots_with_verse_info(deduplicated_roots)
 
-    # Calculate scores
-    total_pattern_points = (
-        (contiguous_2 + skipgram_2_actual) * 1 +
-        (contiguous_3 + skipgram_3_actual) * 2 +
-        (contiguous_4plus + skipgram_4_actual) * 3
+    # Calculate scores WITH GAP PENALTY
+    contiguous_score_contribution = (
+        contiguous_2 * 1 +
+        contiguous_3 * 2 +
+        contiguous_4plus * 3
     )
+    total_pattern_points = contiguous_score_contribution + skipgram_score_contribution
 
     root_idf_sum = 0.0
     for root in deduplicated_roots:
