@@ -7669,3 +7669,35 @@ Result: 8/10 (80% improvement vs. 0% before)
 - Linear scaling: Simple and predictable
 - Applied at scoring time: Doesn't affect extraction or deduplication
 
+
+
+### Session 105 Completion - Gap Penalty Implementation Fixed
+
+After initial implementation, discovered gap_word_count was missing from database schema. Fixed:
+
+**Schema Updates**:
+- Added `gap_word_count INTEGER NOT NULL DEFAULT 0` to psalm_skipgrams table
+- Updated INSERT statement to include gap_word_count from extraction
+- Re-ran migration with complete schema
+
+**Scoring Updates**:
+- Fixed SQL SELECT to fetch gap_word_count from database
+- Changed from recalculating gap count to using stored value
+- Gap penalty now correctly applied during scoring
+
+**Final Results**:
+- ✅ 8,745 psalm pairs with skipgrams (out of 10,883 total)
+- ✅ Top pair (Ps 18/119): 25 skipgrams
+- ✅ Gap distribution (Ps 18/119):
+  - 44% contiguous (gap=0) - full value
+  - 56% with gaps - penalty applied
+- ✅ Gap penalty verification:
+  - 3-word, gap=3: 2.0 → 1.40 (30% penalty) ✓
+  - 2-word, gap=3: 1.0 → 0.70 (30% penalty) ✓
+  - 3-word, gap=2: 2.0 → 1.60 (20% penalty) ✓
+
+**Session Outcome**: ✅ COMPLETE
+- Root extraction: 80% improvement with ETCBC cache
+- Gap penalty: Working correctly on all 8,745 pairs with skipgrams
+- All data re-generated with improvements applied
+
