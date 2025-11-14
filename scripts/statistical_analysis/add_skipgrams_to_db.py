@@ -1,6 +1,11 @@
 """
 Extract Skip-grams for All 150 Psalms and Store in Database
 
+V3 Update:
+- Uses root-based extraction (consistent with contiguous phrases)
+- Stores full Hebrew text spans (matched words + gaps)
+- Removes paragraph markers before processing
+
 Processes all psalms and stores skip-gram patterns in psalm_relationships.db
 for use in enhanced scoring.
 """
@@ -20,7 +25,7 @@ RELATIONSHIPS_DB_PATH = Path(__file__).parent.parent.parent / "data" / "psalm_re
 
 
 class SkipgramDatabase:
-    """Manages skip-gram storage in database."""
+    """Manages skip-gram storage in database (V3 schema)."""
 
     def __init__(self):
         """Initialize database connection."""
@@ -29,63 +34,70 @@ class SkipgramDatabase:
         self._create_table()
 
     def _create_table(self):
-        """Create psalm_skipgrams table if it doesn't exist."""
+        """Create psalm_skipgrams table if it doesn't exist (V3 schema)."""
         cursor = self.conn.cursor()
 
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS psalm_skipgrams (
                 skipgram_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 psalm_number INTEGER NOT NULL,
-                pattern_consonantal TEXT NOT NULL,
+                pattern_roots TEXT NOT NULL,
+                pattern_hebrew TEXT NOT NULL,
+                full_span_hebrew TEXT NOT NULL,
                 pattern_length INTEGER NOT NULL,
                 occurrence_count INTEGER NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE(psalm_number, pattern_consonantal, pattern_length)
+                UNIQUE(psalm_number, pattern_roots, pattern_length)
             )
         """)
 
-        # Create index for faster lookups
+        # Create indexes for faster lookups
         cursor.execute("""
             CREATE INDEX IF NOT EXISTS idx_skipgram_lookup
-            ON psalm_skipgrams(pattern_consonantal, pattern_length)
+            ON psalm_skipgrams(pattern_roots, pattern_length)
+        """)
+        
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_psalm_lookup
+            ON psalm_skipgrams(psalm_number)
         """)
 
         self.conn.commit()
-        logger.info("Skip-gram table created/verified")
+        logger.info("Skip-gram table created/verified (V3 schema)")
 
     def store_psalm_skipgrams(
         self,
         psalm_number: int,
-        skipgrams: Dict[int, Set[Tuple[str, ...]]]
+        skipgrams: Dict[int, Set[Tuple[str, str, str]]]
     ):
         """
         Store skip-grams for a psalm.
 
         Args:
             psalm_number: Psalm number
-            skipgrams: Dictionary mapping length to set of patterns
+            skipgrams: Dictionary mapping length to set of (roots, matched_hebrew, full_span) tuples
         """
         cursor = self.conn.cursor()
 
         for length, patterns in skipgrams.items():
             for pattern in patterns:
-                # Convert tuple to space-separated string
-                pattern_str = ' '.join(pattern)
-
+                roots, matched_hebrew, full_span = pattern
+                
                 # Note: occurrence_count set to 1 for now
                 # Could be calculated more accurately if needed
                 cursor.execute("""
                     INSERT OR REPLACE INTO psalm_skipgrams
-                    (psalm_number, pattern_consonantal, pattern_length, occurrence_count)
-                    VALUES (?, ?, ?, 1)
-                """, (psalm_number, pattern_str, length))
+                    (psalm_number, pattern_roots, pattern_hebrew, 
+                     full_span_hebrew, pattern_length, occurrence_count)
+                    VALUES (?, ?, ?, ?, ?, 1)
+                """, (psalm_number, roots, matched_hebrew, full_span, length))
 
         self.conn.commit()
 
     def get_psalm_skipgrams(
         self,
         psalm_number: int
-    ) -> Dict[int, Set[Tuple[str, ...]]]:
+    ) -> Dict[int, Set[Tuple[str, str, str]]]:
         """
         Get skip-grams for a psalm from database.
 
@@ -98,7 +110,7 @@ class SkipgramDatabase:
         cursor = self.conn.cursor()
 
         cursor.execute("""
-            SELECT pattern_consonantal, pattern_length
+            SELECT pattern_roots, pattern_hebrew, full_span_hebrew, pattern_length
             FROM psalm_skipgrams
             WHERE psalm_number = ?
         """, (psalm_number,))
@@ -106,12 +118,12 @@ class SkipgramDatabase:
         skipgrams = {2: set(), 3: set(), 4: set()}
 
         for row in cursor.fetchall():
-            pattern_str = row['pattern_consonantal']
+            roots = row['pattern_roots']
+            matched = row['pattern_hebrew']
+            full_span = row['full_span_hebrew']
             length = row['pattern_length']
 
-            # Convert space-separated string back to tuple
-            pattern = tuple(pattern_str.split())
-            skipgrams[length].add(pattern)
+            skipgrams[length].add((roots, matched, full_span))
 
         return skipgrams
 
@@ -119,7 +131,7 @@ class SkipgramDatabase:
         self,
         psalm_a: int,
         psalm_b: int
-    ) -> Dict[int, Set[Tuple[str, ...]]]:
+    ) -> Dict[int, Set[Tuple[str, str, str]]]:
         """
         Find skip-grams shared between two psalms.
 
@@ -135,7 +147,15 @@ class SkipgramDatabase:
 
         shared = {}
         for length in [2, 3, 4]:
-            shared[length] = skipgrams_a[length] & skipgrams_b[length]
+            # Find shared based on root patterns (first element of tuple)
+            roots_a = {sg[0]: sg for sg in skipgrams_a[length]}
+            roots_b = {sg[0]: sg for sg in skipgrams_b[length]}
+            
+            # Find common root patterns
+            common_roots = set(roots_a.keys()) & set(roots_b.keys())
+            
+            # Include tuples for common patterns
+            shared[length] = {roots_a[r] for r in common_roots}
 
         return shared
 
@@ -165,10 +185,12 @@ class SkipgramDatabase:
 
 
 def extract_all_skipgrams():
-    """Extract skip-grams for all 150 psalms and store in database."""
+    """Extract skip-grams for all 150 psalms and store in database (V3)."""
     logger.info("=" * 60)
-    logger.info("EXTRACTING SKIP-GRAMS FOR ALL 150 PSALMS")
+    logger.info("EXTRACTING SKIP-GRAMS FOR ALL 150 PSALMS (V3)")
     logger.info("=" * 60)
+    logger.info("Using root-based extraction with full text spans")
+    logger.info("")
 
     # Initialize extractor and database
     extractor = SkipgramExtractor()
@@ -184,7 +206,7 @@ def extract_all_skipgrams():
         try:
             logger.info(f"Processing Psalm {psalm_num}...")
 
-            # Extract skip-grams
+            # Extract skip-grams (V3 methodology)
             skipgrams = extractor.extract_all_skipgrams(psalm_num)
 
             # Store in database
@@ -227,6 +249,15 @@ def extract_all_skipgrams():
     logger.info(f"Shared 3-word skip-grams: {len(shared[3])}")
     logger.info(f"Shared 4-word skip-grams: {len(shared[4])}")
     logger.info(f"Total shared: {sum(len(s) for s in shared.values())}")
+    
+    # Show sample with full spans
+    if shared[2]:
+        logger.info("\nSample 2-word shared skipgrams with full spans:")
+        for i, pattern in enumerate(list(shared[2])[:3], 1):
+            roots, matched, full_span = pattern
+            logger.info(f"  {i}. Roots: {roots}")
+            logger.info(f"     Matched: {matched}")
+            logger.info(f"     Full span: {full_span}")
 
     # Clean up
     extractor.close_db()
