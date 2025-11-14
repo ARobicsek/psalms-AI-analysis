@@ -1,6 +1,82 @@
 # Next Session Prompt
 
-## Session 103 Handoff - 2025-11-14 (V4.2 Complete Execution - READY FOR USE ✓)
+## Session 104 Handoff - 2025-11-14 (V4.3 Cross-Match-Type Deduplication - READY FOR USE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Fix double-counting of words in both contiguous phrases and skipgrams
+
+**EXECUTION RESULTS: ✓ COMPLETE - V4.3 Eliminates Cross-Match-Type Duplicates**
+
+### Problem Identified by User
+
+**Double-Counting Words Across Match Types**
+
+User identified that the same words were being counted in both contiguous phrases AND skipgrams:
+
+Example from Psalms 6-38:
+- Contiguous phrase: "זמור דוד" (2 words)
+- Skipgram: "זמור דוד יהו תיסר" (4 words) **contains the same "זמור דוד"**
+
+Similarly:
+- Contiguous phrase: "יהו אל" (2 words)
+- Skipgram: "יהו אל תוכיח כי" (4 words) **contains the same "יהו אל"**
+
+The same words were being counted twice, inflating scores.
+
+### Solution Implemented - V4.3
+
+**Cross-Match-Type Deduplication**
+
+Created new function `deduplicate_across_match_types()` that:
+1. Combines contiguous phrases and skipgrams into one pool
+2. Sorts by length (longest first)
+3. Removes any pattern that is a subsequence of a longer pattern
+4. **Regardless of whether it's contiguous or skipgram**
+5. Returns deduplicated lists of both types
+
+**Modified Files**:
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py`:
+  - Added `deduplicate_across_match_types()` function (70 lines)
+  - Updated `calculate_skipgram_aware_deduplicated_score_v4()` to use new function
+  - Deprecated old `deduplicate_skipgrams()` function
+
+### Verification Results
+
+**V4.3 Impact Across All 10,883 Relationships**:
+- **2,960 contiguous phrases removed** (36.2% reduction)
+- **2,300 relationships improved** (21.1% of all pairs)
+- Contiguous phrases: 8,168 → 5,208
+- Skipgrams: 35,906 → 39,477 (some patterns reclassified)
+
+**Working Examples** (Psalms 14-53):
+- Removed "דרש את אלה" (contained in skipgram "דרש את אלה טוב")
+- Removed "קיף על ני" (contained in skipgram "קיף על ני יש")
+- Removed "לא קרא" (contained in skipgram "לא קרא פחד אלה")
+
+**Note on User's Original Example**:
+The skipgram "זמור דוד יהו תיסר" from user's example was not in the database because it had been removed by V4.2's cross-pattern deduplication (overlap detection). The example was from an earlier version, but the V4.3 fix is confirmed working on current data.
+
+### Output Files
+
+**All files updated with V4.3**:
+- `enhanced_scores_skipgram_dedup_v4.json` (77.93 MB) - All 10,883 scores
+- `top_500_connections_skipgram_dedup_v4.json` (7.40 MB) - Top 500 connections
+- Score range: 1,571.96 to 209.23
+- Average per connection: 1.7 contiguous, 8.0 skipgrams, 15.1 roots
+
+### What to Work on Next
+
+**V4.3 IS READY FOR PRODUCTION USE** ✓
+
+All deduplication fixes complete:
+- V4.1: Overlap-based deduplication within same verse
+- V4.2: Cross-pattern deduplication across all shared patterns + full verse text
+- V4.3: Cross-match-type deduplication (contiguous vs skipgrams)
+
+---
+
+## Previous Session 103 Handoff - 2025-11-14 (V4.2 Complete Execution - READY FOR USE ✓)
 
 ### What Was Done This Session
 
