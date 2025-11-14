@@ -8,6 +8,12 @@ V4 Updates from V3:
 4. Fixes deduplication bug where overlapping patterns from same phrase counted separately
 5. Cleaner, more consistent JSON output format
 
+V4.1 Enhancement:
+- Overlap-based deduplication at scoring time (not extraction time)
+- Groups overlapping skipgrams (>80% overlap) within same verse
+- Keeps longest pattern as representative per overlapping group
+- Prevents over-counting of multiple patterns from the same phrase
+
 This addresses all issues identified by user in V3 output.
 """
 
@@ -24,6 +30,95 @@ logger = logging.getLogger(__name__)
 
 # Constants
 IDF_THRESHOLD_FOR_SINGLE_ROOTS = 0.5
+
+
+def deduplicate_overlapping_matches(instances: List[Dict]) -> List[Dict]:
+    """
+    Deduplicate skipgram instances that overlap within the same verse.
+
+    Groups instances by verse, then within each verse groups instances with
+    substantial overlap (>80% of shorter span), keeping only the longest
+    pattern from each overlapping group.
+
+    Args:
+        instances: List of skipgram instances with verse, position, full_span_hebrew
+
+    Returns:
+        Deduplicated list of instances
+    """
+    # Group by verse
+    verse_groups = defaultdict(list)
+    for inst in instances:
+        verse_groups[inst['verse']].append(inst)
+
+    deduplicated = []
+
+    for verse, inst_list in verse_groups.items():
+        # Calculate word ranges for each instance
+        for inst in inst_list:
+            span_word_count = len(inst['full_span_hebrew'].split())
+            inst['_start_pos'] = inst['position']
+            inst['_end_pos'] = inst['position'] + span_word_count - 1
+
+        # Find substantially overlapping instances
+        # Use simple pairwise comparison (not union-find) to avoid transitive merging
+        kept_instances = []
+
+        for inst in inst_list:
+            # Check if this instance overlaps substantially with any kept instance
+            is_redundant = False
+
+            for kept in kept_instances:
+                if _instances_overlap_substantially(inst, kept):
+                    # Keep the longer one
+                    if inst['length'] > kept['length'] or \
+                       (inst['length'] == kept['length'] and
+                        (inst['_end_pos'] - inst['_start_pos']) > (kept['_end_pos'] - kept['_start_pos'])):
+                        # Replace kept with current instance
+                        kept_instances.remove(kept)
+                        kept_instances.append(inst)
+                    is_redundant = True
+                    break
+
+            if not is_redundant:
+                kept_instances.append(inst)
+
+        # Clean up temporary fields and add to deduplicated list
+        for inst in kept_instances:
+            del inst['_start_pos']
+            del inst['_end_pos']
+            deduplicated.append(inst)
+
+    return deduplicated
+
+
+def _instances_overlap_substantially(inst1: Dict, inst2: Dict) -> bool:
+    """
+    Check if two skipgram instances overlap substantially (>80% of shorter span).
+
+    Args:
+        inst1, inst2: Instances with _start_pos and _end_pos
+
+    Returns:
+        True if overlap is substantial
+    """
+    start1, end1 = inst1['_start_pos'], inst1['_end_pos']
+    start2, end2 = inst2['_start_pos'], inst2['_end_pos']
+
+    # Calculate overlap
+    overlap_start = max(start1, start2)
+    overlap_end = min(end1, end2)
+
+    if overlap_start > overlap_end:
+        return False  # No overlap
+
+    overlap_length = overlap_end - overlap_start + 1
+    span1_length = end1 - start1 + 1
+    span2_length = end2 - start2 + 1
+    shorter_span = min(span1_length, span2_length)
+
+    # Require >80% overlap of the shorter span
+    return overlap_length > shorter_span * 0.8
 
 
 def load_shared_skipgrams_with_verses(
@@ -100,6 +195,10 @@ def load_shared_skipgrams_with_verses(
         for pattern_roots in common_patterns:
             instances_a = skipgrams_a[pattern_roots]
             instances_b = skipgrams_b[pattern_roots]
+
+            # V4.1: Deduplicate overlapping instances within same verses
+            instances_a = deduplicate_overlapping_matches(instances_a)
+            instances_b = deduplicate_overlapping_matches(instances_b)
 
             # Use first instance for pattern info (they're all the same pattern)
             first_a = instances_a[0]
