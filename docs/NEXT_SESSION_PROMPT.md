@@ -1,5 +1,324 @@
 # Next Session Prompt
 
+## Session 97 Handoff - 2025-11-14 (V2 Issues Identified → V3 Planning COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Review V2 output quality and identify issues
+
+**User Review Findings**: Identified 4 critical issues in V2 deduplication:
+1. Incomplete skipgram vs contiguous deduplication (root/consonantal mismatch)
+2. Missing full Hebrew text for skipgrams (only shows matched words, not gaps)
+3. False positive root matches (naive string manipulation vs real morphology)
+4. Paragraph markers "{פ}" counted as words
+
+**Session Accomplishments**:
+- ✓ Analyzed all four issues with concrete examples
+- ✓ Identified root causes (design inconsistencies, missing features, naive algorithms)
+- ✓ Created comprehensive fix plan (docs/TOP_500_ISSUES_AND_FIXES.md)
+- ✓ Designed V3 implementation with Hebrew morphological analysis
+- ✓ Planned multi-subagent approach for parallel implementation
+
+**Status**: Ready for V3 implementation in next session
+
+### What to Work on Next
+
+**PRIORITY: HIGH - Implement V3 with Hebrew Morphological Analysis**
+
+V3 will fix all four identified issues using proper Hebrew linguistic tools.
+
+---
+
+## Implementation Plan for Session 97: Enhanced Deduplication V3
+
+### Overview
+
+Rebuild deduplication system with proper Hebrew morphological analysis, fixing:
+1. Root extraction using Hebrew NLP package (not naive string stripping)
+2. Root/consonantal consistency between contiguous and skipgram extraction
+3. Paragraph marker filtering before any analysis
+4. Full Hebrew text display for skipgrams including gap words
+5. Verse-level phrase details showing exact matches from each psalm
+
+**Estimated Time**: 3-4 hours total using parallel subagent approach
+
+---
+
+### Multi-Subagent Implementation Approach
+
+**Use 3 parallel Explore agents** to research and implement different components simultaneously:
+
+#### Agent 1: Hebrew Morphological Analysis Research & Integration
+**Task**: Research and integrate Hebrew NLP package for proper root extraction
+
+**Deliverables**:
+1. Research report on available Hebrew morphological analyzers:
+   - **HebMorph** (Open source, actively maintained)
+   - **MILA Hebrew Analyzer** (Academic standard)
+   - **AlephBERT/HeBERT** (Modern transformer-based)
+   - **Simple-HebMorph** (Lightweight option)
+   - Python libraries: `hebrew-tokenizer`, `hebrew`, `hebpipe`
+
+2. Recommendation with pros/cons:
+   - Installation complexity
+   - Accuracy for Biblical Hebrew vs Modern Hebrew
+   - API simplicity
+   - License compatibility
+   - Performance (can handle 150 psalms quickly)
+
+3. Proof of concept implementation:
+   - Install chosen package
+   - Create `hebrew_morphology.py` wrapper
+   - Test on sample words from false positive examples:
+     - "מָ֝חִ֗יתָ" (machita) vs "חַיִּ֣ים" (chayim) - should get different roots
+     - "לִבִּ֑י" (libi) vs "בְּבֵ֣ית" (b'veit) - should distinguish preposition
+     - "מְאֹד֮" (me'od) vs "אֲדֹנָ֑י" (Adonai) - should get different roots
+
+4. Integration plan:
+   - Where to add in extraction pipeline
+   - Fallback strategy if analysis fails
+   - Caching for performance
+
+**Files to Create**:
+- `src/hebrew_analysis/` (new package)
+  - `__init__.py`
+  - `morphology.py` (wrapper around chosen library)
+  - `root_extractor_v2.py` (enhanced version using real morphology)
+  - `README.md` (installation and usage guide)
+
+**Expected Output**:
+- Research report: `docs/HEBREW_MORPHOLOGY_ANALYSIS.md`
+- Working prototype code
+- Installation instructions
+
+---
+
+#### Agent 2: Text Cleaning & Skipgram Extraction Fix
+**Task**: Fix paragraph marker filtering and root/consonantal consistency
+
+**Deliverables**:
+1. Text cleaning implementation:
+   - Create `clean_hebrew_text()` function
+   - Filter paragraph markers: {פ}, {ס}, etc.
+   - Filter brackets, parentheses that aren't part of text
+   - Preserve actual Hebrew content
+   - Test on sample verses with markers
+
+2. Skipgram extractor update:
+   - Modify `scripts/statistical_analysis/skipgram_extractor.py`
+   - Use root extraction (matching contiguous phrase methodology)
+   - Integrate with Agent 1's morphology wrapper
+   - Add full text span capture (matched words + gap words)
+   - Store both `pattern_hebrew` (matched) and `full_span_hebrew` (complete)
+
+3. Database schema update:
+   - Add `full_span_hebrew` column to `psalm_skipgrams` table
+   - Migration script for existing database
+   - Rebuild with new extraction
+
+**Files to Modify**:
+- `scripts/statistical_analysis/skipgram_extractor.py` (~200 lines)
+- `scripts/statistical_analysis/add_skipgrams_to_db.py` (~100 lines)
+- `scripts/statistical_analysis/root_extractor.py` (add text cleaning)
+
+**Files to Create**:
+- `scripts/statistical_analysis/text_cleaning.py` (new utility)
+- `scripts/statistical_analysis/migrate_skipgrams_v3.py` (database migration)
+
+**Test Cases**:
+- Verify {פ} removed from word lists
+- Verify skipgram roots match contiguous phrase roots
+- Verify full Hebrew text includes gap words
+- Verify deduplication now works correctly
+
+---
+
+#### Agent 3: Enhanced Output Format & Verse-Level Details
+**Task**: Update output JSON to include verse-level phrase matching details
+
+**Deliverables**:
+1. Enhanced contiguous phrase format:
+   ```json
+   {
+     "consonantal": "זמור אסף",
+     "hebrew": "מִזְמ֗וֹר לְאָ֫סָ֥ף",
+     "length": 2,
+     "count_a": 1,
+     "count_b": 1,
+     "verses_a": [1],
+     "verses_b": [1],
+     "matches_from_a": [
+       {"verse": 1, "text": "מִזְמ֗וֹר לְאָ֫סָ֥ף", "position": 0}
+     ],
+     "matches_from_b": [
+       {"verse": 1, "text": "מִזְמ֗וֹר לְאָ֫סָ֥ף", "position": 0}
+     ]
+   }
+   ```
+
+2. Enhanced skipgram format:
+   ```json
+   {
+     "consonantal": "מזמור אסף אל אלהים",
+     "matched_hebrew": "מזמור ... אסף ... אל ... אלהים",
+     "full_span_hebrew": "מִזְמ֗וֹר לְאָ֫סָ֥ף אֵ֤ל אֱלֹהִ֗ים",
+     "length": 4,
+     "gap_word_count": 3,
+     "span_word_count": 7
+   }
+   ```
+
+3. Update scorer and generator scripts:
+   - `enhanced_scorer_skipgram_dedup_v3.py` (copy from v2, enhance)
+   - `generate_top_500_skipgram_dedup_v3.py` (copy from v2, enhance)
+   - Add verse-level detail retrieval from database
+   - Format output with new structure
+
+**Files to Create**:
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v3.py` (~500 lines)
+- `scripts/statistical_analysis/generate_top_500_skipgram_dedup_v3.py` (~250 lines)
+
+**Test Cases**:
+- Verify verse-level details present for all contiguous phrases
+- Verify skipgrams show both matched words and full span
+- Verify output JSON is well-formed and complete
+
+---
+
+### Sequential Integration Phase (After Parallel Work)
+
+Once all three agents complete their tasks:
+
+**Step 1: Integration Review** (15 minutes)
+- Review Agent 1's morphology recommendation
+- Verify Agent 2's text cleaning and extraction fixes
+- Verify Agent 3's output format enhancements
+- Resolve any conflicts or dependencies
+
+**Step 2: Full Rebuild** (30 minutes)
+- Run text cleaning on all 150 psalms
+- Rebuild psalm_relationships.db with new skipgram extraction
+- Expected: ~1.9M skipgrams with proper root-based matching
+- Verify database size and sample entries
+
+**Step 3: Score Calculation** (15 minutes)
+- Run `enhanced_scorer_skipgram_dedup_v3.py` on all 11,001 pairs
+- Monitor for errors or unexpected results
+- Verify deduplication now removes contiguous phrases that are skipgram subsequences
+
+**Step 4: Generate Top 500 V3** (10 minutes)
+- Run `generate_top_500_skipgram_dedup_v3.py`
+- Generate `top_500_connections_skipgram_dedup_v3.json`
+
+**Step 5: Validation** (20 minutes)
+- Check rank 500 (Psalms 50-82):
+  - Should the 2-word contiguous phrases be removed now?
+  - Are roots properly matched?
+  - Is full Hebrew text shown?
+- Review false positive examples:
+  - Verify "חי" no longer matches "מחה" and "חיה" incorrectly
+  - Verify prepositions properly identified
+- Check for {פ} in output (should be 0 occurrences)
+- Generate comparison report: V2 vs V3
+
+---
+
+### Expected V3 Results
+
+**Improvements Over V2**:
+1. ✓ Proper root extraction using Hebrew morphology
+   - Fewer false positives
+   - Better linguistic accuracy
+   - Preserve meaningful 2-word roots
+
+2. ✓ Consistent root/consonantal handling
+   - Skipgrams and contiguous use same methodology
+   - Deduplication actually works
+   - No double-counting
+
+3. ✓ Clean text processing
+   - No paragraph markers in word counts
+   - Accurate word count normalization
+   - Cleaner phrase matches
+
+4. ✓ Enhanced output format
+   - Verse-level phrase details
+   - Full Hebrew text for skipgrams
+   - Better readability for validation
+
+5. ✓ More accurate scores
+   - Proper deduplication
+   - Better root matching
+   - Clean word counts
+
+**Validation Metrics**:
+- False positive rate reduction (expect 50-80% reduction)
+- Deduplication effectiveness (contiguous subsumed by skipgrams)
+- Output completeness (all requested details present)
+
+---
+
+### Files to Create (Summary)
+
+**New Python Packages**:
+- `src/hebrew_analysis/` (morphology wrapper)
+
+**New Scripts** (~1,200 lines):
+- `scripts/statistical_analysis/text_cleaning.py` (~100 lines)
+- `scripts/statistical_analysis/migrate_skipgrams_v3.py` (~150 lines)
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v3.py` (~500 lines)
+- `scripts/statistical_analysis/generate_top_500_skipgram_dedup_v3.py` (~250 lines)
+
+**Modified Scripts**:
+- `scripts/statistical_analysis/skipgram_extractor.py` (add root extraction)
+- `scripts/statistical_analysis/root_extractor.py` (add text cleaning)
+- `scripts/statistical_analysis/add_skipgrams_to_db.py` (use new schema)
+
+**Documentation**:
+- `docs/HEBREW_MORPHOLOGY_ANALYSIS.md` (Agent 1 research)
+- `docs/V2_VS_V3_COMPARISON.md` (validation results)
+- `src/hebrew_analysis/README.md` (installation guide)
+
+**Output Files**:
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v3.json` (~50 MB)
+- `data/analysis_results/top_500_connections_skipgram_dedup_v3.json` (~6 MB)
+- `data/psalm_relationships.db` (rebuilt with v3 skipgrams)
+
+---
+
+### Quick Start Commands for Session 97
+
+```bash
+# Launch 3 parallel Explore agents
+Task("Research Hebrew morphology packages", subagent_type="Explore", model="haiku")
+Task("Fix text cleaning and skipgram extraction", subagent_type="Explore", model="haiku")
+Task("Enhance output format with verse details", subagent_type="Explore", model="haiku")
+
+# After agents complete, run integration:
+python scripts/statistical_analysis/migrate_skipgrams_v3.py
+python scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v3.py
+python scripts/statistical_analysis/generate_top_500_skipgram_dedup_v3.py
+
+# Validate results:
+python scripts/statistical_analysis/compare_v2_v3.py
+```
+
+---
+
+### Success Criteria
+
+✓ Hebrew morphology package successfully integrated
+✓ False positive examples now correctly distinguished
+✓ Paragraph markers completely removed from analysis
+✓ Skipgrams and contiguous use consistent root extraction
+✓ Deduplication removes contiguous phrases subsumed by skipgrams
+✓ Full Hebrew text shown for skipgrams (including gap words)
+✓ Verse-level phrase details included in output
+✓ V3 top 500 generated and validated
+✓ Comparison report documents improvements
+
+---
+
 ## Session 96 Handoff - 2025-11-14 (Enhanced Deduplication V2 COMPLETE ✓)
 
 ### What Was Done This Session
