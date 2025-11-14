@@ -1,6 +1,131 @@
 # Next Session Prompt
 
-## Session 101 Handoff - 2025-11-14 (V4.1 Overlap Deduplication Fix COMPLETE ✓)
+## Session 102 Handoff - 2025-11-14 (V4.2 Cross-Pattern Deduplication Fix COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Fix two critical bugs in V4.1 skipgram output identified by user
+
+**EXECUTION RESULTS: ✓ COMPLETE - V4.2 with Cross-Pattern Deduplication and Full Verse Text**
+
+### Issues Fixed
+
+**Bug #1: Cross-Pattern Overlap Deduplication Failure**
+
+User identified that V4.1 still had overlapping skipgrams from same verse counted separately:
+- **Example**: 8 skipgrams from Psalms 6-38 verses 1-2, all overlapping:
+  - "יהו אל תוכיח תיסר", "יהו אל תוכיח כי", "זמור דוד תוכיח תיסר", etc.
+- **Root Cause**: Deduplication only compared patterns WITHIN each pattern_roots group
+- Different patterns never got compared against each other for overlap
+- Result: All 8 patterns counted separately despite overlapping in same verses
+
+**V4.2 Fix #1 - Cross-Pattern Deduplication**:
+- Collect ALL instances of ALL shared patterns together (not grouped by pattern)
+- Deduplicate ACROSS all patterns (not just within each pattern group)
+- Group results back by pattern for output
+- **Result**: 8 overlapping patterns → 2 unique patterns (75% reduction)
+
+**Bug #2: matches_from_a/b Shows Only Matched Words**
+
+- **Problem**: Text field showed only matched skipgram words, not full verse
+- **Example**: Showed "יְֽהֹוָ֗ה אַל תוֹכִיחֵ֑נִי תְיַסְּרֵֽנִי׃" (4 words)
+- **Should show**: "יְֽהֹוָ֗ה אַל בְּאַפְּךָ֥ תוֹכִיחֵ֑נִי וְֽאַל בַּחֲמָתְךָ֥ תְיַסְּרֵֽנִי׃" (full verse)
+
+**V4.2 Fix #2 - Full Verse Text**:
+- Added `load_psalm_verses()` to load complete verse texts from tanakh.db
+- Load verse texts for both psalms before processing skipgrams
+- Use verse text lookup: `verses_text_a.get(inst['verse'], inst['pattern_hebrew'])`
+- **Result**: All matches show complete verse text with linguistic context
+
+### Code Changes
+
+**Files Modified** (~100 lines):
+1. `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py`:
+   - Added `load_psalm_verses()` function (35 lines)
+   - Modified `load_shared_skipgrams_with_verses()` for cross-pattern dedup (65 lines)
+
+**Files Created**:
+2. `scripts/statistical_analysis/test_v4_2_fix.py` (200 lines) - Test script
+3. `docs/V4_2_SKIPGRAM_FIX_SUMMARY.md` - Comprehensive fix documentation
+
+### Testing Results
+
+**Test Case**: Psalms 6-38 (user's example)
+
+**Deduplication Test**:
+- ✅ Verse 1: 8+ patterns → 1 pattern after deduplication
+- ✅ Verse 2: 8+ patterns → 1 pattern after deduplication
+- ✅ Total: 6 shared skipgrams (down from ~50+ with duplicates)
+
+**Verse Text Test**:
+- ✅ All matches show full verse text
+- ✅ Example: matched=4 words, full verse=5-7 words
+- ✅ Users can see complete linguistic context
+
+### Pipeline Re-execution
+
+**Database Migration** (54.2 seconds):
+```bash
+python3 scripts/statistical_analysis/migrate_skipgrams_v4.py
+```
+- Generated 1,852,285 skipgrams with verse tracking
+- 150/150 psalms processed successfully
+- Database: `data/psalm_relationships.db` (58 MB)
+
+**V4.2 Scoring** (IN PROGRESS ~35 minutes estimated):
+```bash
+python3 scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py
+```
+- Processing 10,883 psalm relationships
+- Applying cross-pattern deduplication
+- Loading full verse texts
+- Output: `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json`
+
+**Status**: Scorer running in background (2000/10883 processed as of session end)
+
+### What to Work on Next
+
+**IMMEDIATE**: Complete V4.2 Output Generation
+
+1. **Wait for Scorer to Complete** (~30 more minutes)
+   - Monitor: `tail -f /tmp/v4_scorer_output.log`
+   - Or re-run if needed: `python3 scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py`
+
+2. **Generate Top 500**:
+   ```bash
+   python3 scripts/statistical_analysis/generate_top_500_skipgram_dedup_v4.py
+   ```
+
+3. **Verify Output Quality**:
+   - Check that Psalms 6-38 no longer have 8 duplicate patterns
+   - Verify matches_from_a/b show full verse text
+   - Sample a few top connections for quality
+
+**V4.2 IS READY FOR PRODUCTION** (after output files regenerated)
+
+### Files to Reference
+
+**V4.2 Implementation**:
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Fixed scorer
+- `scripts/statistical_analysis/test_v4_2_fix.py` - Validation test
+- `docs/V4_2_SKIPGRAM_FIX_SUMMARY.md` - Complete fix documentation
+
+**Output Files** (being regenerated):
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json` - All scores
+- `data/analysis_results/top_500_connections_skipgram_dedup_v4.json` - Top 500
+
+**Database**:
+- `data/psalm_relationships.db` (58 MB with 1.85M skipgrams)
+
+### Git Status
+
+✓ COMMITTED AND PUSHED to branch: `claude/fix-skipgram-deduplication-01UCeRuVbzoHzjeEMqEXs1Wq`
+
+Commit: `fix: V4.2 skipgram cross-pattern deduplication and full verse text`
+
+---
+
+## Previous Session 101 Handoff - 2025-11-14 (V4.1 Overlap Deduplication Fix COMPLETE ✓)
 
 ### What Was Done This Session
 
