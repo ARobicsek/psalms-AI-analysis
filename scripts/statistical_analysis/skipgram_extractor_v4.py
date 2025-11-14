@@ -188,6 +188,11 @@ class SkipgramExtractorV4:
 
                     first_position = words[first_idx]['position']
 
+                    # Calculate gap size (number of words between first and last matched word)
+                    # For contiguous words (no gap), this is 0
+                    # For words with gaps, this is the span minus the matched words
+                    gap_word_count = (last_idx - first_idx + 1) - n
+
                     # Create skipgram instance
                     skipgrams.append({
                         'pattern_roots': pattern_roots,
@@ -195,7 +200,8 @@ class SkipgramExtractorV4:
                         'full_span_hebrew': full_span_hebrew,
                         'verse': verse,
                         'first_position': first_position,
-                        'length': n
+                        'length': n,
+                        'gap_word_count': gap_word_count  # NEW: Track gap size for penalty
                     })
 
         return skipgrams

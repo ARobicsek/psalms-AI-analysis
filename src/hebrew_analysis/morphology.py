@@ -167,55 +167,74 @@ class HebrewMorphologyAnalyzer:
     def _fallback_extraction(self, consonantal: str) -> str:
         """
         Improved naive root extraction for words not in cache.
-        
+
         Improvements over V2:
         - Minimum length filtering (avoid "בי", "ית" false matches)
         - Function word protection (don't strip to single letters)
-        - Smarter prefix/suffix stripping
-        
+        - Smarter prefix/suffix stripping with 3-letter minimum
+        - Multi-prefix/suffix handling (try combinations)
+
         Args:
             consonantal: Hebrew word in consonantal form
-        
+
         Returns:
             Extracted root
         """
         # Filter 1: If too short, don't strip anything
         if len(consonantal) < 3:
             return consonantal
-        
+
         # Filter 2: Remove paragraph markers if present
         consonantal = re.sub(r'\{[^}]+\}', '', consonantal).strip()
-        
+
         if not consonantal:
             return ''
-        
-        # Try stripping prefixes (max 1 to be conservative)
+
+        # Try stripping prefixes (max 2, trying combinations)
         result = consonantal
-        for prefix in self.COMMON_PREFIXES:
-            if result.startswith(prefix):
-                stripped = result[len(prefix):]
-                # Only strip if result is meaningful (not a function word, length >= 2)
-                if stripped not in self.FUNCTION_WORDS and len(stripped) >= 2:
-                    result = stripped
-                    break  # Only strip one prefix
-        
-        # Try stripping suffixes (max 1 to be conservative)
-        for suffix in self.COMMON_SUFFIXES:
-            if result.endswith(suffix):
-                stripped = result[:-len(suffix)]
-                # Only strip if result is meaningful
-                if stripped not in self.FUNCTION_WORDS and len(stripped) >= 2:
-                    result = stripped
-                    break  # Only strip one suffix
-        
+        prefixes_removed = 0
+
+        while prefixes_removed < 2:
+            found_prefix = False
+            for prefix in self.COMMON_PREFIXES:
+                if result.startswith(prefix):
+                    stripped = result[len(prefix):]
+                    # Be more conservative: require at least 3 letters after stripping prefix
+                    # This prevents stripping "שוא" → "וא" and "כלו" → "לו"
+                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= 3:
+                        result = stripped
+                        prefixes_removed += 1
+                        found_prefix = True
+                        break  # Only strip one prefix at a time
+            if not found_prefix:
+                break  # No more prefixes to strip
+
+        # Try stripping suffixes (max 2, trying combinations)
+        suffixes_removed = 0
+
+        while suffixes_removed < 2:
+            found_suffix = False
+            for suffix in self.COMMON_SUFFIXES:
+                if result.endswith(suffix):
+                    stripped = result[:-len(suffix)]
+                    # For suffixes, require at least 2 letters (roots can be 2 letters)
+                    # But avoid single letters
+                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= 2:
+                        result = stripped
+                        suffixes_removed += 1
+                        found_suffix = True
+                        break  # Only strip one suffix at a time
+            if not found_suffix:
+                break  # No more suffixes to strip
+
         # Final check: Don't return single function words
         if result in self.FUNCTION_WORDS:
             return consonantal  # Return original
-        
-        # Final check: Minimum length
+
+        # Final check: Minimum length (2 letters for Biblical Hebrew roots)
         if len(result) < 2:
             return consonantal  # Return original
-        
+
         return result
     
     def get_cache_stats(self) -> Dict[str, any]:
