@@ -94,6 +94,7 @@ class SkipgramMigrationV4:
                 pattern_length INTEGER NOT NULL,
                 verse INTEGER NOT NULL,
                 first_position INTEGER NOT NULL,
+                gap_word_count INTEGER NOT NULL DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE(psalm_number, pattern_roots, pattern_length, verse, first_position)
             )
@@ -135,12 +136,12 @@ class SkipgramMigrationV4:
 
         for length, instances in skipgrams.items():
             for sg in instances:
-                # Insert with V4 schema (includes verse and position)
+                # Insert with V4 schema (includes verse, position, and gap_word_count)
                 cursor.execute("""
                     INSERT OR REPLACE INTO psalm_skipgrams
                     (psalm_number, pattern_roots, pattern_hebrew,
-                     full_span_hebrew, pattern_length, verse, first_position)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                     full_span_hebrew, pattern_length, verse, first_position, gap_word_count)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     psalm_number,
                     sg['pattern_roots'],
@@ -148,7 +149,8 @@ class SkipgramMigrationV4:
                     sg['full_span_hebrew'],
                     sg['length'],
                     sg['verse'],
-                    sg['first_position']
+                    sg['first_position'],
+                    sg.get('gap_word_count', 0)  # New field with fallback to 0
                 ))
                 insert_count += 1
 
