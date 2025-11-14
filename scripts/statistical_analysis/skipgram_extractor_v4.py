@@ -187,33 +187,108 @@ class SkipgramExtractorV4:
         skipgrams: List[Dict[str, any]]
     ) -> List[Dict[str, any]]:
         """
-        Deduplicate skipgrams that overlap in the same location.
+        Deduplicate exact duplicate skipgrams only.
 
-        V4 Fix: Group by (full_span_hebrew, verse) to identify overlapping patterns
-        from the same phrase, then select the longest pattern as representative.
+        V4.1: Moved overlap-based deduplication to scoring time, since different
+        psalm pairs may share different subsets of overlapping skipgrams.
+        At extraction time, we only remove exact duplicates.
 
         Args:
             skipgrams: List of skipgram instances
 
         Returns:
-            Deduplicated list with one representative per unique location
+            List with exact duplicates removed
         """
-        # Group by (full_span, verse) to find overlapping patterns
-        location_groups = defaultdict(list)
+        # Use a set to track unique skipgrams
+        # Key: (pattern_roots, verse, first_position)
+        seen = set()
+        deduplicated = []
 
         for sg in skipgrams:
-            key = (sg['full_span_hebrew'], sg['verse'])
-            location_groups[key].append(sg)
-
-        # For each location, keep only the longest pattern
-        deduplicated = []
-        for (full_span, verse), group in location_groups.items():
-            # Sort by length (descending) and take the longest
-            group_sorted = sorted(group, key=lambda x: x['length'], reverse=True)
-            representative = group_sorted[0]
-            deduplicated.append(representative)
+            key = (sg['pattern_roots'], sg['verse'], sg['first_position'])
+            if key not in seen:
+                seen.add(key)
+                deduplicated.append(sg)
 
         return deduplicated
+
+    def _find_overlapping_groups(self, skipgrams: List[Dict]) -> List[List[Dict]]:
+        """
+        Find groups of skipgrams with substantial overlap (>50% of shorter span).
+
+        This prevents over-aggressive transitive merging while still catching
+        multiple patterns extracted from the same phrase.
+
+        Args:
+            skipgrams: List of skipgrams with _start_pos and _end_pos fields
+
+        Returns:
+            List of groups, where each group contains substantially overlapping skipgrams
+        """
+        if not skipgrams:
+            return []
+
+        # Use a more conservative approach: group by overlap similarity
+        # Build an adjacency structure for skipgrams that overlap substantially
+        n = len(skipgrams)
+        overlaps = set()
+
+        for i in range(n):
+            for j in range(i + 1, n):
+                if self._has_substantial_overlap(skipgrams[i], skipgrams[j]):
+                    overlaps.add((i, j))
+
+        # Use union-find to group connected skipgrams
+        parent = list(range(n))
+
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+            return parent[x]
+
+        def union(x, y):
+            px, py = find(x), find(y)
+            if px != py:
+                parent[px] = py
+
+        for i, j in overlaps:
+            union(i, j)
+
+        # Group skipgrams by their root parent
+        groups_dict = defaultdict(list)
+        for i, sg in enumerate(skipgrams):
+            root = find(i)
+            groups_dict[root].append(sg)
+
+        return list(groups_dict.values())
+
+    def _has_substantial_overlap(self, sg1: Dict, sg2: Dict) -> bool:
+        """
+        Check if two skipgrams have substantial overlap (>50% of shorter span).
+
+        Args:
+            sg1, sg2: Skipgrams with _start_pos and _end_pos
+
+        Returns:
+            True if overlap is substantial
+        """
+        start1, end1 = sg1['_start_pos'], sg1['_end_pos']
+        start2, end2 = sg2['_start_pos'], sg2['_end_pos']
+
+        # Calculate overlap
+        overlap_start = max(start1, start2)
+        overlap_end = min(end1, end2)
+
+        if overlap_start > overlap_end:
+            return False  # No overlap
+
+        overlap_length = overlap_end - overlap_start + 1
+        span1_length = end1 - start1 + 1
+        span2_length = end2 - start2 + 1
+        shorter_span = min(span1_length, span2_length)
+
+        # Require >80% overlap of the shorter span (conservative)
+        return overlap_length > shorter_span * 0.8
 
     def extract_all_skipgrams(
         self,
