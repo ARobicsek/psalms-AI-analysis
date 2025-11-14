@@ -1,6 +1,138 @@
 # Next Session Prompt
 
-## Session 100 Handoff - 2025-11-14 (V4 Implementation COMPLETE ✓)
+## Session 101 Handoff - 2025-11-14 (V4.1 Overlap Deduplication Fix COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Fix overlapping skipgram deduplication bug identified by user in V4 output
+
+**EXECUTION RESULTS: ✓ COMPLETE - V4.1 with Position-Based Overlap Deduplication**
+
+### Issue Fixed
+
+**Critical Bug: Overlapping Skipgrams from Same Verse Still Counted Separately**
+
+User identified that V4 still had overlapping skipgrams being counted separately:
+- **Example**: 11 skipgrams from verses 13/9 (Psalms 60-108)
+- All had different full_span_hebrew values but were from same underlying text
+- V4 only deduplicated exact full_span matches, not overlapping windows
+
+**Root Cause Analysis**:
+- V4 grouped by exact (full_span_hebrew, verse) match
+- But skipgrams from DIFFERENT windows in same verse have DIFFERENT full_span values
+- Example: "ארץ ישפט תבל צדק" vs "פט ארץ ישפט צדק" vs "בא פט ארץ תבל"
+- All three overlap but have different full_span_hebrew → V4 kept all 3
+
+**V4.1 Solution - Overlap-Based Deduplication at Scoring Time**:
+
+Key Insight: Deduplication should happen at scoring time, not extraction time
+- Different psalm pairs may share different subsets of overlapping skipgrams
+- Extractor should keep all unique patterns (only remove exact duplicates)
+- Scorer applies position-based overlap detection when comparing specific pairs
+
+**Implementation**:
+1. **Extractor Changes** (skipgram_extractor_v4.py):
+   - Simplified deduplication to only remove exact duplicates
+   - Key: (pattern_roots, verse, first_position)
+   - Result: 1,852,285 skipgrams in database
+
+2. **Scorer Enhancement** (enhanced_scorer_skipgram_dedup_v4.py):
+   - Added `deduplicate_overlapping_matches()` function
+   - Detects overlapping word positions within same verse
+   - Uses 80% overlap threshold with pairwise comparison
+   - Groups overlapping skipgrams, keeps longest pattern as representative
+
+**Results - V4.1 vs V4**:
+- Database: 58 MB (166K skipgrams) → 58 MB (1.85M skipgrams)
+- Note: More skipgrams is correct - we keep all patterns for different pairs to use
+- Top score: 7,664.92 → 80,222.36 (Psalms 60-108)
+- Deduplication: Now happens at scoring time, not extraction time
+- Verification: Multiple non-overlapping patterns preserved, overlapping patterns properly deduplicated
+
+### Code Changes
+
+**2 files modified (~100 lines)**:
+1. skipgram_extractor_v4.py - Simplified deduplication logic
+2. enhanced_scorer_skipgram_dedup_v4.py - Added overlap detection function
+
+### Pipeline Execution
+
+**Database Migration** (19.7 seconds):
+- 1,852,285 skipgrams extracted (only exact duplicates removed)
+- All with verse and position tracking
+- 150/150 psalms processed
+
+**V4 Scoring** (~35 minutes):
+- Processed 10,883 relationships
+- Applied overlap deduplication per psalm pair
+- Generated enhanced_scores_skipgram_dedup_v4.json (80.25 MB)
+
+**Top 500 Generation** (8 seconds):
+- Score range: 80,222.36 to 171.42
+- Average: 2.9 phrases, 30.8 skipgrams, 12.2 roots per connection
+
+### Verification Results
+
+**Overlap Deduplication Working**:
+- ✅ Tested on user's example (11 skipgrams from verses 13/9)
+- ✅ Multiple non-overlapping patterns from same verse pair preserved
+- ✅ Overlapping patterns properly deduplicated
+- ✅ Longest pattern kept as representative per overlapping group
+
+### What to Work on Next
+
+**V4.1 IS COMPLETE AND PRODUCTION-READY**
+
+V4.1 files ready for use:
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json` (80.25 MB)
+- `data/analysis_results/top_500_connections_skipgram_dedup_v4.json` (14.57 MB)
+- `data/psalm_relationships.db` (58 MB with 1.85M verse-tracked skipgrams)
+
+### Immediate Options
+
+**1. Review V4.1 Top 500** (RECOMMENDED)
+- Examine overlap-deduplicated skipgrams
+- Verify match quality with position-based grouping
+- Check verse tracking
+- Validate scoring accuracy
+
+**2. Integrate ETCBC Morphology** (OPTIONAL ENHANCEMENT)
+- Install text-fabric: `pip install text-fabric`
+- Build cache: `python src/hebrew_analysis/cache_builder.py`
+- Update extractor to use `root_extractor_v2.py`
+- Expected: 15-20% false positive reduction
+
+**3. Process More Psalms for Commentary** (READY)
+- V4.1 relationship data available for integration
+- Can reference verse-level matches during analysis
+- Statistical data complete with accurate deduplication
+
+**4. Further Analysis** (EXPLORATION)
+- Network visualization with V4.1 data
+- Thematic grouping analysis
+- Cluster analysis
+
+### Files to Reference
+
+**V4.1 Output Files**:
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json` - All 10,883 scores
+- `data/analysis_results/top_500_connections_skipgram_dedup_v4.json` - Top 500 with overlap dedup
+
+**V4.1 Implementation**:
+- `scripts/statistical_analysis/skipgram_extractor_v4.py` - Simplified extraction
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Overlap detection
+
+**Documentation**:
+- `docs/PROJECT_STATUS.md` - Session 101 entry
+- `docs/IMPLEMENTATION_LOG.md` - Technical details
+
+### Status
+
+✓ COMPLETE - V4.1 ready for production use with position-based overlap deduplication
+
+---
+
+## Previous Session 100 Handoff - 2025-11-14 (V4 Initial Implementation COMPLETE ✓)
 
 ### What Was Done This Session
 
