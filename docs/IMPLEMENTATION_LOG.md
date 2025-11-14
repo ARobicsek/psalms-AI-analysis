@@ -1,6 +1,181 @@
 # Implementation Log
 
 
+## Session 104 - 2025-11-14 (V4.3 Cross-Match-Type Deduplication - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix double-counting of words across contiguous phrases and skipgrams
+**Approach**: Implement cross-match-type deduplication to remove contiguous phrases contained in skipgrams
+**Result**: ✓ COMPLETE - V4.3 eliminates 2,960 duplicate patterns (36.2% reduction in contiguous phrases)
+
+**Session Duration**: ~2 hours (implementation + testing + verification + execution)
+**Status**: V4.3 ready for production use
+**Impact**: More accurate scores, no double-counting across match types
+
+### Problem Identified by User
+
+**Double-Counting Words Across Match Types**
+
+User provided example from Psalms 6-38 showing the same words counted in both match types:
+
+**Contiguous phrases:**
+- "זמור דוד" (2 words)
+- "יהו אל" (2 words)
+- "חמת תיסר" (2 words)
+
+**Skipgrams:**
+- "זמור דוד יהו תיסר" (4 words) **← contains "זמור דוד"**
+- "יהו אל תוכיח כי" (4 words) **← contains "יהו אל"**
+
+**Problem**: The same words were being counted twice - once in contiguous phrases and again in skipgrams, artificially inflating scores.
+
+**Root Cause**:
+- V4.2 deduplicated contiguous phrases separately from skipgrams
+- Did not check if contiguous phrases were subsequences of skipgrams
+- Only removed skipgrams that matched contiguous patterns exactly
+
+### Solution Implementation - V4.3
+
+**Phase 1: Design Cross-Match-Type Deduplication**
+
+Created new function `deduplicate_across_match_types()` that treats both contiguous and skipgrams equally:
+
+**Algorithm**:
+1. Tag each pattern with its type ('contiguous' or 'skipgram')
+2. Combine all patterns into one list
+3. Sort by length (longest first) for hierarchical deduplication
+4. For each pattern, check if it's a subsequence of any already-kept pattern
+5. Remove patterns that are subsequences (regardless of type)
+6. Separate back into contiguous and skipgram lists
+
+**Key Difference from V4.2**:
+- V4.2: Deduplicate contiguous → then deduplicate skipgrams (separate)
+- V4.3: Deduplicate contiguous AND skipgrams TOGETHER
+
+**Phase 2: Implementation**
+
+Modified `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py`:
+
+**Added new function** (~70 lines):
+```python
+def deduplicate_across_match_types(
+    contiguous_phrases: List[Dict],
+    skipgrams: List[Dict]
+) -> Tuple[List[Dict], List[Dict]]:
+    # Combines both types, deduplicates, returns both lists
+```
+
+**Updated scoring function**:
+```python
+# V4.2 (old):
+deduplicated_contiguous = deduplicate_contiguous_only(shared_phrases)
+deduplicated_skipgrams = deduplicate_skipgrams(shared_skipgrams, deduplicated_contiguous)
+
+# V4.3 (new):
+deduplicated_contiguous, deduplicated_skipgrams = deduplicate_across_match_types(
+    shared_phrases,
+    shared_skipgrams
+)
+```
+
+**Updated docstring** to document V4.3 enhancement
+
+**Phase 3: Testing**
+
+Created `test_v4_3_fix.py` to verify the fix:
+
+**Test Case** (user's example):
+- Input: 3 contiguous phrases, 2 skipgrams
+- Expected: Remove "זמור דוד" and "יהו אל" (contained in skipgrams)
+- Result: ✅ **ALL TESTS PASSED**
+
+**Phase 4: Full Execution**
+
+Ran scorer on all 10,883 relationships (~30 minutes):
+```bash
+python3 scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py
+```
+
+Generated top 500:
+```bash
+python3 scripts/statistical_analysis/generate_top_500_skipgram_dedup_v4.py
+```
+
+### Verification Results
+
+**V4.3 Impact Analysis**:
+
+**Across All 10,883 Relationships**:
+- Contiguous phrases: 8,168 → 5,208 (**2,960 removed, 36.2% reduction**)
+- Skipgrams: 35,906 → 39,477 (3,571 increase)
+- Relationships improved: 2,300 (21.1% of all pairs)
+
+**Verified Working Examples** (Psalms 14-53):
+
+Found multiple instances where V4.3 correctly removed contiguous phrases:
+1. Removed "דרש את אלה" (2 words)
+   - Contained in skipgram "דרש את אלה טוב" (4 words)
+
+2. Removed "קיף על ני" (2 words)
+   - Contained in skipgram "קיף על ני יש" (4 words)
+
+3. Removed "לא קרא" (2 words)
+   - Contained in skipgram "לא קרא פחד אלה" (4 words)
+
+**Score Impact**:
+- Top score: V4.2 = 1,662.90 → V4.3 = 1,571.96 (5.5% reduction)
+- Scores now more accurate (no double-counting)
+
+**Note on User's Original Example**:
+The skipgram "זמור דוד יהו תיסר" from user's example was not found in the database. It had been removed by V4.2's cross-pattern deduplication (overlap detection). The example was from an earlier version, but V4.3 fix is confirmed working on current data with multiple other examples.
+
+### Output Files Generated
+
+**All files updated with V4.3**:
+
+1. **Full Scores**:
+   - `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json` (77.93 MB)
+   - All 10,883 relationships
+   - V4.3 deduplication applied
+
+2. **Top 500**:
+   - `data/analysis_results/top_500_connections_skipgram_dedup_v4.json` (7.40 MB)
+   - Score range: 1,571.96 to 209.23
+   - Average: 1.7 contiguous, 8.0 skipgrams, 15.1 roots per connection
+
+3. **Backups Created**:
+   - `enhanced_scores_skipgram_dedup_v4.json.v4.2.backup` (V4.2 output)
+
+### Code Summary
+
+**Modified Files** (~100 lines total):
+
+**scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py**:
+- Added `deduplicate_across_match_types()` function (70 lines)
+- Updated `calculate_skipgram_aware_deduplicated_score_v4()` (20 lines changed)
+- Deprecated `deduplicate_skipgrams()` (kept for reference)
+- Updated docstring (10 lines)
+
+**Test file created**:
+- `test_v4_3_fix.py` (120 lines) - Unit test for cross-type deduplication
+
+### Resolution Summary
+
+**V4.3 Fix**: ✅ VERIFIED AND COMPLETE
+- Cross-match-type deduplication working correctly
+- 2,960 duplicate patterns eliminated
+- 2,300 relationships improved
+- More accurate scores (no double-counting)
+
+**Complete Deduplication Stack**:
+- ✅ V4.1: Overlap-based deduplication within same verse
+- ✅ V4.2: Cross-pattern deduplication across all shared patterns + full verse text
+- ✅ V4.3: Cross-match-type deduplication (contiguous vs skipgrams)
+
+**Status**: ✓ COMPLETE - V4.3 ready for production use
+
+---
+
 ## Session 103 - 2025-11-14 (V4.2 Complete Execution - COMPLETE ✓)
 
 ### Overview
