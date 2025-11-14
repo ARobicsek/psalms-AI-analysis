@@ -121,6 +121,44 @@ def _instances_overlap_substantially(inst1: Dict, inst2: Dict) -> bool:
     return overlap_length > shorter_span * 0.8
 
 
+def load_psalm_verses(db_path: Path, psalm_number: int) -> Dict[int, str]:
+    """
+    Load all verse texts for a given psalm from tanakh.db.
+
+    Args:
+        db_path: Path to database directory (will look for tanakh.db)
+        psalm_number: Psalm number
+
+    Returns:
+        Dict mapping verse number to full Hebrew text
+    """
+    # tanakh.db is in database/ directory, psalm_relationships.db is in data/
+    tanakh_db = db_path.parent.parent / "database" / "tanakh.db"
+
+    try:
+        conn = sqlite3.connect(str(tanakh_db))
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT verse, hebrew
+            FROM verses
+            WHERE book_name = 'Psalms' AND chapter = ?
+            ORDER BY verse
+        """, (psalm_number,))
+
+        verses = {}
+        for row in cursor.fetchall():
+            verses[row['verse']] = row['hebrew'] or ''
+
+        conn.close()
+        return verses
+
+    except Exception as e:
+        logger.warning(f"Could not load verses for Psalm {psalm_number}: {e}")
+        return {}
+
+
 def load_shared_skipgrams_with_verses(
     db_path: Path,
     psalm_a: int,
@@ -128,6 +166,10 @@ def load_shared_skipgrams_with_verses(
 ) -> List[Dict]:
     """
     Load shared skipgrams with full verse tracking from V4 database.
+
+    V4.2 FIX:
+    1. Deduplicates across ALL shared patterns (not just within each pattern)
+    2. Uses full verse text from tanakh.db (not just matched words)
 
     Returns skipgrams with:
     - pattern information (roots, hebrew, full_span)
@@ -148,6 +190,10 @@ def load_shared_skipgrams_with_verses(
             conn.close()
             return []
 
+        # Load verse texts for both psalms
+        verses_text_a = load_psalm_verses(db_path, psalm_a)
+        verses_text_b = load_psalm_verses(db_path, psalm_b)
+
         # Get skipgrams for psalm_a
         cursor.execute("""
             SELECT pattern_roots, pattern_hebrew, full_span_hebrew,
@@ -160,6 +206,7 @@ def load_shared_skipgrams_with_verses(
         for row in cursor.fetchall():
             pattern_roots = row['pattern_roots']
             skipgrams_a[pattern_roots].append({
+                'pattern_roots': pattern_roots,
                 'pattern_hebrew': row['pattern_hebrew'],
                 'full_span_hebrew': row['full_span_hebrew'],
                 'length': row['pattern_length'],
@@ -179,6 +226,7 @@ def load_shared_skipgrams_with_verses(
         for row in cursor.fetchall():
             pattern_roots = row['pattern_roots']
             skipgrams_b[pattern_roots].append({
+                'pattern_roots': pattern_roots,
                 'pattern_hebrew': row['pattern_hebrew'],
                 'full_span_hebrew': row['full_span_hebrew'],
                 'length': row['pattern_length'],
@@ -188,31 +236,50 @@ def load_shared_skipgrams_with_verses(
 
         conn.close()
 
-        # Find shared skipgrams
-        shared = []
+        # Find shared patterns
         common_patterns = set(skipgrams_a.keys()) & set(skipgrams_b.keys())
 
-        for pattern_roots in common_patterns:
-            instances_a = skipgrams_a[pattern_roots]
-            instances_b = skipgrams_b[pattern_roots]
+        # V4.2 FIX #1: Collect ALL instances of shared patterns together
+        # (not grouped by pattern) so we can deduplicate ACROSS patterns
+        all_instances_a = []
+        all_instances_b = []
 
-            # V4.1: Deduplicate overlapping instances within same verses
-            instances_a = deduplicate_overlapping_matches(instances_a)
-            instances_b = deduplicate_overlapping_matches(instances_b)
+        for pattern_roots in common_patterns:
+            all_instances_a.extend(skipgrams_a[pattern_roots])
+            all_instances_b.extend(skipgrams_b[pattern_roots])
+
+        # V4.2 FIX #1: Deduplicate overlapping instances ACROSS ALL patterns
+        deduped_instances_a = deduplicate_overlapping_matches(all_instances_a)
+        deduped_instances_b = deduplicate_overlapping_matches(all_instances_b)
+
+        # Group deduplicated instances back by pattern for output
+        deduped_by_pattern_a = defaultdict(list)
+        deduped_by_pattern_b = defaultdict(list)
+
+        for inst in deduped_instances_a:
+            deduped_by_pattern_a[inst['pattern_roots']].append(inst)
+
+        for inst in deduped_instances_b:
+            deduped_by_pattern_b[inst['pattern_roots']].append(inst)
+
+        # Build output list - only include patterns that still have instances after dedup
+        shared = []
+        for pattern_roots in common_patterns:
+            instances_a = deduped_by_pattern_a.get(pattern_roots, [])
+            instances_b = deduped_by_pattern_b.get(pattern_roots, [])
+
+            # Skip if either side has no instances after deduplication
+            if not instances_a or not instances_b:
+                continue
 
             # Use first instance for pattern info (they're all the same pattern)
             first_a = instances_a[0]
 
-            # Collect all verses
-            verses_a = sorted(set(inst['verse'] for inst in instances_a))
-            verses_b = sorted(set(inst['verse'] for inst in instances_b))
-
-            # Create match instances for arrays
+            # V4.2 FIX #2: Create match instances with FULL VERSE TEXT
             matches_from_a = [
                 {
                     'verse': inst['verse'],
-                    'text': inst['pattern_hebrew']
-                    # Removed 'position' field per user request
+                    'text': verses_text_a.get(inst['verse'], inst['pattern_hebrew'])
                 }
                 for inst in instances_a
             ]
@@ -220,7 +287,7 @@ def load_shared_skipgrams_with_verses(
             matches_from_b = [
                 {
                     'verse': inst['verse'],
-                    'text': inst['pattern_hebrew']
+                    'text': verses_text_b.get(inst['verse'], inst['pattern_hebrew'])
                 }
                 for inst in instances_b
             ]
@@ -237,7 +304,6 @@ def load_shared_skipgrams_with_verses(
                 'length': first_a['length'],
                 'gap_word_count': gap_word_count,
                 'span_word_count': len(full_span_words),
-                # Removed verses_a and verses_b per user request (empty in V3, not needed)
                 'matches_from_a': matches_from_a,
                 'matches_from_b': matches_from_b
             })
