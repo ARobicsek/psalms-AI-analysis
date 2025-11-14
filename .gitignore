@@ -54,3 +54,10 @@ Documents/*without*.docx
 .sefaria_key
 secrets/
 .claude/settings.local.json
+
+# Session monitoring scripts (temporary)
+monitor_log.txt
+monitor_scorer.sh
+run_scorer_with_monitoring.sh
+*.backup
+
