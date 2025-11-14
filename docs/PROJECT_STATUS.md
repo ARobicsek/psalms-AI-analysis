@@ -1,8 +1,27 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-14 (Session 105 - COMPLETE)  
-**Current Phase**: V4.2 with Root Extraction & Gap Penalty - COMPLETE ✓  
+**Last Updated**: 2025-11-14 (Session 106 - COMPLETE)
+**Current Phase**: V4.2 with Root Extraction & Gap Penalty - COMPLETE ✓
 **Status**: All improvements implemented and verified
+
+## Session 106 Summary (COMPLETE ✓)
+
+### Ranking Analysis & Top 550 Generation
+
+**Completed**:
+1. **Analyzed Ps 25-34 Ranking** ✅
+   - Final score: 184.56
+   - Position: #534 out of 10,883 pairs
+   - 34 positions below Top 500 cutoff
+
+2. **Generated Top 550 Connections** ✅
+   - Extended from Top 500 to capture historically significant pairs
+   - Successfully includes Ps 25-34 at position #534
+   - File: `data/analysis_results/top_550_connections_skipgram_dedup_v4.json`
+   - Score range: 1,087.38 to 183.97
+
+**Files Created**:
+- `data/analysis_results/top_550_connections_skipgram_dedup_v4.json` (550 pairs)
 
 ## Session 105 Summary (COMPLETE ✓)
 
@@ -64,10 +83,17 @@
 V4.2 is now complete with all improvements applied. Possible future enhancements:
 1. Expand ETCBC cache to full Hebrew Bible (optional)
 2. Tune gap penalty parameters if needed
-3. Analysis of results
+3. Analysis of results using Top 500 or Top 550 connections
+
+## Available Datasets
+
+**V4.2 Results**:
+- `enhanced_scores_skipgram_dedup_v4.json` - All 10,883 psalm pairs
+- `top_500_connections_skipgram_dedup_v4.json` - Top 500 pairs (cutoff: 186.48)
+- `top_550_connections_skipgram_dedup_v4.json` - Top 550 pairs (cutoff: 183.97)
 
 ## Branch
 
-All changes committed to: `claude/psalms-improve-root-extraction-01A68ooANKEbifXaCjunRH1P`
+All changes committed to: `claude/psalms-ranking-analysis-01VJrKyzSERDdaayu1qwPfpK`
 
 Ready for merge or further analysis.
