@@ -1,6 +1,130 @@
 # Next Session Prompt
 
-## Session 103 Handoff - 2025-11-14 (V4.2 Complete Execution - READY FOR USE ✓)
+## Session 104 Handoff - 2025-11-14 (V4.2 Verse Boundary Fix - IN PROGRESS)
+
+### What Was Done This Session
+
+**Session Goals**: Fix two critical bugs in V4.2 skipgram extraction identified by user
+
+**CRITICAL BUGS FIXED**:
+
+**Bug #1: Skipgrams Crossing Verse Boundaries**
+
+User identified that skipgrams were being found ACROSS verses, which is linguistically incorrect:
+- **Example**: "ארץ יהו" matching "אָֽרֶץ׃ יְ֭הֹוָה" where ׃ (sof pasuq) indicates verse boundary
+- **Root Cause**: Window creation didn't check if words were from the same verse
+- **Impact**: Many spurious matches, inflated scores, linguistically meaningless patterns
+
+**V4.2 Fix #1 - Verse Boundary Enforcement**:
+- Added check: Skip combinations where words are from different verses
+- Added filter: Only include same-verse words in full_span_hebrew
+- **Result**: 77% reduction in skipgrams (1.85M → 415k), all within single verses
+- **Code**: `skipgram_extractor_v4.py` lines 163-187
+
+**Bug #2: Not Using Sophisticated Root Identifier**
+
+User requested use of sophisticated root identification (ETCBC morphology):
+- **Problem**: Code was using basic root_extractor.py instead of enhanced version
+- **Impact**: More false positive root matches
+
+**V4.2 Fix #2 - Enhanced Root Extraction**:
+- Switched to EnhancedRootExtractor with ETCBC morphology support
+- Falls back gracefully if cache unavailable
+- **Result**: More accurate root identification, fewer false positives
+- **Code**: `skipgram_extractor_v4.py` lines 36-45
+
+### Implementation Complete
+
+**Code Changes** (~30 lines):
+1. `skipgram_extractor_v4.py`:
+   - Import enhanced root extractor with fallback (lines 36-45)
+   - Add verse boundary check in combinations (lines 163-168)
+   - Filter full_span_hebrew to same verse (lines 182-187)
+
+**Testing** (test_verse_boundary_fix.py):
+- ✅ No skipgrams have sof pasuq BETWEEN words (cross-verse test)
+- ✅ User's examples all within single verses
+- ✅ Dramatic reduction in skipgram count (77%) confirms fix working
+
+### Pipeline Re-execution
+
+**Database Migration** (29.2 seconds):
+```bash
+python3 scripts/statistical_analysis/migrate_skipgrams_v4.py
+```
+- Total skipgrams: 415,637 (vs 1,852,285 before - 77% reduction)
+- Breakdown: 2-word: 52,777 | 3-word: 117,302 | 4-word: 245,558
+- All 150 psalms processed successfully
+- Database: `data/psalm_relationships.db` (smaller, cleaner data)
+
+**V4.2 Scoring** (IN PROGRESS ~30 minutes estimated):
+```bash
+python3 scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py
+```
+- Processing 10,883 psalm relationships
+- Applying cross-pattern deduplication
+- Loading full verse texts
+- Output: `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json`
+- Monitor: `tail -f /tmp/v4_2_scorer_output.log`
+
+**Status**: Scorer running in background (1000/10883 processed as of session documentation)
+
+### What to Work on Next
+
+**IMMEDIATE**: Complete V4.2 Output Generation
+
+1. **Wait for Scorer to Complete** (~25 more minutes)
+   - Monitor: `tail -f /tmp/v4_2_scorer_output.log`
+   - Or check completion: `ls -lh data/analysis_results/enhanced_scores_skipgram_dedup_v4.json`
+
+2. **Generate Top 500**:
+   ```bash
+   python3 scripts/statistical_analysis/generate_top_500_skipgram_dedup_v4.py
+   ```
+
+3. **Verify Output Quality**:
+   - Check that user's examples no longer have cross-verse matches
+   - Verify skipgram counts are lower (due to verse boundary fix)
+   - Sample a few top connections for quality
+
+**V4.2 IS READY FOR PRODUCTION** (after output files regenerated)
+
+### Files Modified/Created
+
+**Modified** (1 file, ~30 lines):
+- `scripts/statistical_analysis/skipgram_extractor_v4.py`
+
+**Created** (1 test file, ~140 lines):
+- `scripts/statistical_analysis/test_verse_boundary_fix.py`
+
+**Output Files** (being regenerated):
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json` - All scores
+- `data/analysis_results/top_500_connections_skipgram_dedup_v4.json` - Top 500
+
+**Database**:
+- `data/psalm_relationships.db` (smaller with 415k verse-contained skipgrams)
+
+### Verification Results
+
+**Test Results** (test_verse_boundary_fix.py):
+- ✅ PASS: No skipgrams have sof pasuq (׃) between words
+- ✅ PASS: Pattern 'ציל אל' only within verse 20 (not crossing verses)
+- ✅ PASS: Pattern 'כל לא' only within individual verses (Ps 25:3, 34:21)
+
+**Before vs After**:
+- V4.2 (before): 1,852,285 skipgrams (many cross-verse)
+- V4.2 (after): 415,637 skipgrams (all within verses)
+- Reduction: 77% (1,436,648 cross-verse skipgrams eliminated)
+
+### Status
+
+✓ CODE FIXES COMPLETE
+✓ MIGRATION COMPLETE
+⏳ SCORER IN PROGRESS (estimated ~25 min remaining)
+
+---
+
+## Previous Session 103 Handoff - 2025-11-14 (V4.2 Complete Execution - READY FOR USE ✓)
 
 ### What Was Done This Session
 
