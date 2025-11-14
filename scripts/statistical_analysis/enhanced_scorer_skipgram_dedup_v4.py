@@ -207,7 +207,7 @@ def load_shared_skipgrams_with_verses(
         # Get skipgrams for psalm_a
         cursor.execute("""
             SELECT pattern_roots, pattern_hebrew, full_span_hebrew,
-                   pattern_length, verse, first_position
+                   pattern_length, verse, first_position, gap_word_count
             FROM psalm_skipgrams
             WHERE psalm_number = ?
         """, (psalm_a,))
@@ -221,13 +221,14 @@ def load_shared_skipgrams_with_verses(
                 'full_span_hebrew': row['full_span_hebrew'],
                 'length': row['pattern_length'],
                 'verse': row['verse'],
-                'position': row['first_position']
+                'position': row['first_position'],
+                'gap_word_count': row['gap_word_count']  # NEW: Include gap count
             })
 
         # Get skipgrams for psalm_b
         cursor.execute("""
             SELECT pattern_roots, pattern_hebrew, full_span_hebrew,
-                   pattern_length, verse, first_position
+                   pattern_length, verse, first_position, gap_word_count
             FROM psalm_skipgrams
             WHERE psalm_number = ?
         """, (psalm_b,))
@@ -241,7 +242,8 @@ def load_shared_skipgrams_with_verses(
                 'full_span_hebrew': row['full_span_hebrew'],
                 'length': row['pattern_length'],
                 'verse': row['verse'],
-                'position': row['first_position']
+                'position': row['first_position'],
+                'gap_word_count': row['gap_word_count']  # NEW: Include gap count
             })
 
         conn.close()
@@ -302,17 +304,16 @@ def load_shared_skipgrams_with_verses(
                 for inst in instances_b
             ]
 
-            # Calculate gap words
-            words = first_a['pattern_hebrew'].split()
+            # Use gap_word_count from database (don't recalculate)
+            gap_word_count = first_a.get('gap_word_count', 0)
             full_span_words = first_a['full_span_hebrew'].split()
-            gap_word_count = len(full_span_words) - len(words)
 
             shared.append({
                 'consonantal': pattern_roots,  # Using 'consonantal' for consistency with V3 output
                 'matched_hebrew': first_a['pattern_hebrew'],
                 'full_span_hebrew': first_a['full_span_hebrew'],
                 'length': first_a['length'],
-                'gap_word_count': gap_word_count,
+                'gap_word_count': gap_word_count,  # From database, not recalculated
                 'span_word_count': len(full_span_words),
                 'matches_from_a': matches_from_a,
                 'matches_from_b': matches_from_b
