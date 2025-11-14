@@ -1,9 +1,69 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ V4.2 COMPLETE - READY FOR USE
-**Last Updated**: 2025-11-14 (Session 103 - V4.2 Complete Execution)
+## Current Status: ✓ V4.2 COMPLETE - READY FOR USE (Verse Boundary Fix)
+**Last Updated**: 2025-11-14 (Session 104 - V4.2 Verse Boundary Fix)
 
-## Recent Work Session 103: (2025-11-14 - V4.2 Complete Execution COMPLETE ✓)
+## Recent Work Session 104: (2025-11-14 - V4.2 Verse Boundary Fix COMPLETE ✓)
+
+### ✓ SUCCESS: Fixed Cross-Verse Skipgrams and Enhanced Root Extraction
+
+**Objective**: Fix two critical bugs in V4.2 skipgram extraction identified by user
+
+**What Was Done**:
+
+**Bug #1: Skipgrams Crossing Verse Boundaries** ✅ FIXED
+- **Issue**: User identified skipgrams matching ACROSS verses (e.g., "ארץ יהו" matching "אָֽרֶץ׃ יְ֭הֹוָה" with sof pasuq between words)
+- **Root Cause**: Window creation didn't check if words were from same verse
+- **Fix**: Added verse boundary check in skipgram_extractor_v4.py (lines 155-160, 174-179)
+- **Result**: 77% reduction in skipgrams (1,852,285 → 415,637) - all cross-verse matches eliminated
+
+**Bug #2: Not Using Sophisticated Root Identifier** ✅ FIXED
+- **Issue**: Code was using basic root_extractor.py instead of enhanced version
+- **Fix**: Switched to EnhancedRootExtractor with ETCBC morphology (lines 36-45)
+- **Result**: Better root identification accuracy, fewer false positives
+
+**Pipeline Re-execution**:
+1. **Database Migration** (29.2 seconds):
+   - Total skipgrams: 415,637 (77% reduction from verse boundary fix)
+   - Breakdown: 2-word: 52,777 | 3-word: 117,302 | 4-word: 245,558
+   - All 150 psalms processed successfully
+
+2. **V4.2 Scoring** (8.5 minutes):
+   - Processed all 10,883 psalm relationships
+   - Output: enhanced_scores_skipgram_dedup_v4.json (64.37 MB)
+
+3. **Top 500 Generation** (< 5 seconds):
+   - Output: top_500_connections_skipgram_dedup_v4.json (5.99 MB)
+   - Score range: 1,325.12 to 189.67
+   - Average: 2.2 phrases, 4.1 skipgrams, 15.6 roots per connection
+
+**Verification Results**:
+- ✅ No skipgrams have sof pasuq (׃) between words (cross-verse test)
+- ✅ User's examples all within single verses
+- ✅ Dramatic 77% reduction confirms fix working
+
+**Top 10 Psalm Connections** (after verse boundary fix):
+1. Psalms 14-53: 1,325.12 (nearly identical)
+2. Psalms 60-108: 1,124.77 (composite)
+3. Psalms 40-70: 615.43 (shared passage)
+4. Psalms 115-135: 561.33
+5. Psalms 42-43: 459.93 (originally one)
+6. Psalms 57-108: 428.55
+7. Psalms 96-98: 425.02
+8. Psalms 31-71: 376.84
+9. Psalms 78-105: 372.59
+10. Psalms 7-9: 323.21
+
+**Output Files** (all verified ✓):
+- enhanced_scores_skipgram_dedup_v4.json (64.37 MB) - All 10,883 scores
+- top_500_connections_skipgram_dedup_v4.json (5.99 MB) - Top 500
+- psalm_relationships.db (415k verse-contained skipgrams)
+
+**Status**: ✓ COMPLETE - V4.2 ready for production use with verse-contained skipgrams
+
+---
+
+## Previous Work Session 103: (2025-11-14 - V4.2 Complete Execution COMPLETE ✓)
 
 ### ✓ SUCCESS: V4.2 Fully Operational with Both Fixes Verified
 
