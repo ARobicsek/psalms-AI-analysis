@@ -1,7 +1,60 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ SYSTEM OPERATIONAL - Skipgram-Aware Deduplication Complete
-**Last Updated**: 2025-11-13 (Session 95 - Comprehensive Deduplication System Implemented)
+## Current Status: ✓ SYSTEM OPERATIONAL - Enhanced Deduplication V2 Complete
+**Last Updated**: 2025-11-14 (Session 96 - IDF Filtering + Top 500 + Skipgram Details)
+
+## Recent Work Session 96: (2025-11-14 - Enhanced Deduplication V2 with IDF Filter COMPLETE ✓)
+
+### ✓ SUCCESS: V2 Implements IDF Threshold, Top 500 Export, and Skipgram Details
+
+**User Requested Three Enhancements**:
+1. Filter out single root matches with IDF < 0.5 (very common words)
+2. Expand top connections from 300 to 500
+3. Include deduplicated skipgrams in JSON output (not just counts)
+
+**Implementation Complete**:
+1. ✓ Created enhanced_scorer_skipgram_dedup_v2.py with IDF threshold filter
+2. ✓ Created generate_top_500_skipgram_dedup_v2.py for top 500 export
+3. ✓ Rebuilt skipgram database (1,935,965 patterns, ~50 seconds)
+4. ✓ Re-ran full analysis with actual skipgram pattern deduplication
+5. ✓ Generated comprehensive top 500 connections JSON
+
+**Results - V2 Improvements**:
+
+IDF Filtering Impact:
+- Roots filtered (IDF < 0.5): 49,647 across all 11,001 pairs
+- These very common words no longer contribute to single root scores
+- Still counted if they appear in phrase/skipgram matches
+
+Skipgram Deduplication (Actual vs Estimated):
+- V1 used combinatorial estimates: 20,040 skipgrams removed
+- V2 uses actual pattern matching: 15,350 skipgrams removed
+- More accurate deduplication leads to slightly lower but more reliable scores
+
+Top 500 Export Statistics:
+- File: top_500_connections_skipgram_dedup_v2.json (4.94 MB)
+- Score range: 72,862.78 (Psalms 14-53) to 242.51 (Psalms 50-82)
+- Average per connection: 2.6 contiguous phrases, 22.3 skipgrams, 18.1 roots
+- Includes full deduplicated match details for all three categories
+
+**Example Output (Psalms 14-53)**:
+- V1 Score: 77,110.96
+- V2 Score: 72,862.78 (5.5% reduction from more accurate deduplication)
+- Deduplicated contiguous: 35 phrases
+- Deduplicated skipgrams: 1,847 patterns (NOW INCLUDED!)
+- Deduplicated roots: 2 roots
+
+**Files Created** (2 scripts, ~500 lines):
+- enhanced_scorer_skipgram_dedup_v2.py (480 lines)
+- generate_top_500_skipgram_dedup_v2.py (230 lines)
+
+**Output Files**:
+- enhanced_scores_skipgram_dedup_v2.json (46.82 MB - all 11,001 scores)
+- top_500_connections_skipgram_dedup_v2.json (4.94 MB - top 500 with details)
+
+**Status**: ✓ Complete - All three requested changes implemented successfully
+
+---
 
 ## Recent Work Session 95: (2025-11-13 - Skipgram-Aware Hierarchical Deduplication COMPLETE ✓)
 

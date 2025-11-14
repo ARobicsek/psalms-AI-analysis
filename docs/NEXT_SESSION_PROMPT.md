@@ -1,5 +1,191 @@
 # Next Session Prompt
 
+## Session 96 Handoff - 2025-11-14 (Enhanced Deduplication V2 COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**:
+1. Filter out single root matches with IDF < 0.5 (very common words)
+2. Expand top connections from 300 to 500
+3. Include deduplicated skipgrams in JSON output (not just counts)
+
+**EXECUTION RESULTS: ✓ COMPLETE - All Three Enhancements Implemented**
+
+### Session Summary
+
+**Implementation Approach**:
+1. Created V2 versions of scorer and generator scripts
+2. Rebuilt skipgram database from concordance (1.9M patterns)
+3. Re-ran analysis with actual skipgram pattern deduplication
+4. Generated top 500 export with full match details
+
+**Key Changes from V1 to V2**:
+
+1. **IDF Threshold Filter** (NEW)
+   - Excludes roots with IDF < 0.5 from single root matches
+   - These very common words still counted in phrase/skipgram matches
+   - Filtered 49,647 common root instances across all pairs
+   - Prevents inflation from ubiquitous words like prepositions
+
+2. **Actual Skipgram Deduplication** (IMPROVED)
+   - V1: Used combinatorial estimates (conservative math)
+   - V2: Loads real skipgram patterns from database
+   - V2: Applies actual subsequence deduplication
+   - Result: More accurate, slightly lower scores (5-6% for top pairs)
+
+3. **Top 500 Export** (EXPANDED)
+   - Changed from top 300 to top 500 connections
+   - Cutoff score: 242.51 (down from 200.65 in V1 top 300)
+   - Provides broader view of significant relationships
+
+4. **Skipgram Details Included** (NEW)
+   - Each entry now has `deduplicated_skipgrams` array
+   - Shows consonantal pattern, length, and Hebrew text
+   - Example: Psalms 14-53 have 1,847 deduplicated skipgrams
+   - Enables detailed analysis of non-contiguous patterns
+
+### Results Summary
+
+**Files Generated**:
+- enhanced_scores_skipgram_dedup_v2.json (46.82 MB)
+  - All 11,001 psalm pairs with V2 scoring
+- top_500_connections_skipgram_dedup_v2.json (4.94 MB)
+  - Top 500 connections with full match details
+  - Includes deduplicated: contiguous phrases, skipgrams, roots
+
+**Statistics Comparison (V1 vs V2)**:
+
+Psalms 14-53 (Rank #1):
+- V1 Score: 77,110.96
+- V2 Score: 72,862.78 (-5.5%)
+- Reason: More accurate skipgram deduplication
+
+Top 300 vs Top 500:
+- V1 Top 300 cutoff: 200.65
+- V2 Top 500 cutoff: 242.51
+- 200 additional connections exposed
+
+IDF Filtering:
+- Total roots filtered: 49,647 (IDF < 0.5)
+- Example common roots: prepositions, articles, conjunctions
+- Impact: Prevents score inflation from ubiquitous vocabulary
+
+**Top 500 Statistics**:
+- Average contiguous phrases: 2.6 per connection
+- Average skipgrams: 22.3 per connection
+- Average roots: 18.1 per connection
+- Deduplication removed: 554 phrase substrings, 7,855 skipgram overlaps, 5,064 roots
+
+### What to Work on Next
+
+**RECOMMENDED FILE**: Use `top_500_connections_skipgram_dedup_v2.json` going forward
+
+The V2 implementation provides:
+- ✓ More accurate scoring (real pattern deduplication, not estimates)
+- ✓ Filtered common words (IDF threshold)
+- ✓ Complete match details (contiguous + skipgrams + roots)
+- ✓ Broader coverage (500 connections vs 300)
+
+**Immediate Options**:
+
+1. **Review Top 500 Connections** (RECOMMENDED)
+   - Examine detailed match patterns across top 500
+   - Study skipgram patterns (now included in output)
+   - Identify thematic clusters or groupings
+   - Validate that filtering produces meaningful results
+
+2. **Compare V1 vs V2** (ANALYSIS)
+   - Document differences in scoring
+   - Analyze impact of IDF filtering
+   - Verify known duplicates still rank highest
+   - Study how scores changed for middle-tier connections
+
+3. **Integrate with Commentary Pipeline** (HIGH VALUE)
+   - Use V2 deduplicated scores for psalm relationship data
+   - Inform analysts of truly significant connections
+   - Include skipgram patterns in relationship descriptions
+   - Avoid false positives from double-counting
+
+4. **Continue Psalm Processing** (READY)
+   - System fully operational with V2 scoring
+   - Can reference relationships using accurate scores
+   - More precise connection strength assessment
+   - Full pattern details available for context
+
+### Technical Notes
+
+**Database Regeneration**:
+- psalm_relationships.db rebuilt with 1,935,965 skipgrams
+- Extraction time: ~50 seconds (all 150 psalms)
+- Database size: ~360 MB (too large for git, use .gitignore)
+
+**Performance**:
+- Enhanced scorer V2: ~80 seconds (11,001 pairs)
+- Top 500 generator: ~10 seconds
+- Database queries efficient with proper indexing
+
+**Code Organization**:
+- V1 scripts preserved for comparison
+- V2 scripts use "_v2" suffix
+- Both versions available for validation
+
+### Files Created This Session
+
+**Scripts** (2 files, ~710 lines):
+- scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v2.py (480 lines)
+- scripts/statistical_analysis/generate_top_500_skipgram_dedup_v2.py (230 lines)
+
+**Output Files**:
+- data/analysis_results/enhanced_scores_skipgram_dedup_v2.json (46.82 MB)
+- data/analysis_results/top_500_connections_skipgram_dedup_v2.json (4.94 MB)
+
+**Database** (regenerated):
+- data/psalm_relationships.db (360 MB, not in git)
+
+### Quick Access Commands
+
+```bash
+# View V2 top 500 connections
+python -c "
+import json
+with open('data/analysis_results/top_500_connections_skipgram_dedup_v2.json', 'r') as f:
+    data = json.load(f)
+    print(f'Total: {len(data)}')
+    print(f'Top: Psalms {data[0][\"psalm_a\"]}-{data[0][\"psalm_b\"]} (score: {data[0][\"final_score\"]:.2f})')
+    print(f'Cutoff: {data[-1][\"final_score\"]:.2f}')
+    print(f'Top entry has {len(data[0][\"deduplicated_skipgrams\"])} skipgrams')
+"
+
+# Compare V1 vs V2 for specific pair
+python -c "
+import json
+
+with open('data/analysis_results/enhanced_scores_skipgram_dedup.json', 'r') as f:
+    v1 = {(s['psalm_a'], s['psalm_b']): s for s in json.load(f)}
+
+with open('data/analysis_results/enhanced_scores_skipgram_dedup_v2.json', 'r') as f:
+    v2 = {(s['psalm_a'], s['psalm_b']): s for s in json.load(f)}
+
+key = (14, 53)
+print(f'Psalms 14-53:')
+print(f'  V1: {v1[key][\"final_score\"]:.2f}')
+print(f'  V2: {v2[key][\"final_score\"]:.2f}')
+print(f'  Difference: {v2[key][\"final_score\"] - v1[key][\"final_score\"]:.2f}')
+print(f'  V2 Roots filtered by IDF: {v2[key][\"roots_filtered_by_idf\"]}')
+"
+```
+
+### Important Notes
+
+- **RECOMMENDED FILE**: Use `top_500_connections_skipgram_dedup_v2.json` going forward
+- V2 scoring is more accurate (uses real pattern matching, not estimates)
+- IDF threshold (0.5) filters very common words from single root matches
+- Skipgram details now included in output (consonantal, length, hebrew)
+- Each word/root still contributes to score exactly once
+- Known duplicate psalms (14-53, 60-108, 40-70) still rank at top
+
+---
+
 ## Session 95 Handoff - 2025-11-13 (Skipgram-Aware Deduplication COMPLETE ✓)
 
 ### What Was Done This Session
