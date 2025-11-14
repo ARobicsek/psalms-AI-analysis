@@ -14,7 +14,17 @@ V4.1 Enhancement:
 - Keeps longest pattern as representative per overlapping group
 - Prevents over-counting of multiple patterns from the same phrase
 
-This addresses all issues identified by user in V3 output.
+V4.2 Enhancement:
+- Cross-pattern deduplication across ALL shared patterns
+- Full verse text from tanakh.db (not just matched words)
+
+V4.3 Enhancement:
+- Cross-match-type deduplication (contiguous vs skipgrams)
+- Removes any pattern that is a subsequence of a longer pattern
+- Regardless of whether it's contiguous or skipgram
+- Example: If skipgram "זמור דוד יהו תיסר" exists, removes contiguous "זמור דוד"
+
+This addresses all issues identified by user in V3, V4, V4.1, and V4.2 output.
 """
 
 import json
@@ -400,15 +410,86 @@ def enhance_roots_with_verse_info(roots: List[Dict]) -> List[Dict]:
     return enhanced
 
 
+def deduplicate_across_match_types(
+    contiguous_phrases: List[Dict],
+    skipgrams: List[Dict]
+) -> Tuple[List[Dict], List[Dict]]:
+    """
+    Deduplicate contiguous phrases and skipgrams ACROSS match types.
+
+    V4.3 Fix: Removes any pattern (contiguous or skipgram) that is a subsequence
+    of a longer pattern, regardless of match type.
+
+    Example: If skipgram "זמור דוד יהו תיסר" (4 words) exists,
+    remove contiguous phrase "זמור דוד" (2 words) because it's contained.
+
+    Returns:
+        Tuple of (deduplicated_contiguous, deduplicated_skipgrams)
+    """
+    # Tag each pattern with its type and combine them
+    all_patterns = []
+    for phrase in contiguous_phrases:
+        all_patterns.append({
+            'type': 'contiguous',
+            'data': phrase,
+            'consonantal': phrase['consonantal'],
+            'length': phrase['length']
+        })
+    for skipgram in skipgrams:
+        all_patterns.append({
+            'type': 'skipgram',
+            'data': skipgram,
+            'consonantal': skipgram['consonantal'],
+            'length': skipgram['length']
+        })
+
+    # Sort by length (longer patterns first) for hierarchical deduplication
+    sorted_patterns = sorted(all_patterns, key=lambda p: p['length'], reverse=True)
+
+    deduplicated = []
+    covered_patterns = set()
+
+    for pattern in sorted_patterns:
+        pattern_words = pattern['consonantal'].split()
+        pattern_tuple = tuple(pattern_words)
+
+        # Check if this pattern is a subpattern of any already-included pattern
+        is_subpattern = False
+        for covered in covered_patterns:
+            covered_words = list(covered)
+            if len(pattern_words) < len(covered_words):
+                # Check if pattern_words is a subsequence of covered_words
+                j = 0
+                for word in pattern_words:
+                    while j < len(covered_words) and covered_words[j] != word:
+                        j += 1
+                    if j >= len(covered_words):
+                        break
+                    j += 1
+                else:
+                    is_subpattern = True
+                    break
+
+        if not is_subpattern:
+            deduplicated.append(pattern)
+            covered_patterns.add(pattern_tuple)
+
+    # Separate back into contiguous and skipgrams
+    deduplicated_contiguous = [p['data'] for p in deduplicated if p['type'] == 'contiguous']
+    deduplicated_skipgrams = [p['data'] for p in deduplicated if p['type'] == 'skipgram']
+
+    return deduplicated_contiguous, deduplicated_skipgrams
+
+
 def deduplicate_skipgrams(
     skipgrams: List[Dict],
     contiguous_phrases: List[Dict]
 ) -> List[Dict]:
     """
-    Deduplicate skipgrams (remove those already captured by contiguous phrases).
+    DEPRECATED in V4.3: Use deduplicate_across_match_types() instead.
 
-    V4: Skipgrams are already deduplicated at extraction time by (full_span, verse),
-    so this only needs to remove skipgrams that match contiguous phrases.
+    This function is kept for reference but should not be used.
+    V4.3 fix requires deduplicating across match types, not just within skipgrams.
     """
     contiguous_patterns = {p['consonantal'] for p in contiguous_phrases}
     non_contiguous = [s for s in skipgrams if s['consonantal'] not in contiguous_patterns]
@@ -461,43 +542,24 @@ def calculate_skipgram_aware_deduplicated_score_v4(
 ) -> Dict:
     """Calculate enhanced score with V4 verse-level formatting and clean output."""
 
-    # Deduplicate contiguous phrases
-    if not shared_phrases:
-        deduplicated_contiguous = []
-        roots_in_contiguous = set()
-    else:
-        sorted_phrases = sorted(shared_phrases, key=lambda p: p['length'], reverse=True)
-        deduplicated_contiguous = []
+    # V4.3: Deduplicate ACROSS match types (contiguous and skipgrams)
+    # This removes any pattern that is a subsequence of a longer pattern,
+    # regardless of whether it's contiguous or skipgram
+    deduplicated_contiguous, deduplicated_skipgrams = deduplicate_across_match_types(
+        shared_phrases,
+        shared_skipgrams
+    )
 
-        for phrase in sorted_phrases:
-            consonantal = phrase['consonantal']
-            is_substring = False
-            for included in deduplicated_contiguous:
-                shorter_words = consonantal.split()
-                longer_words = included['consonantal'].split()
-                if len(shorter_words) < len(longer_words):
-                    for i in range(len(longer_words) - len(shorter_words) + 1):
-                        if longer_words[i:i+len(shorter_words)] == shorter_words:
-                            is_substring = True
-                            break
-                if is_substring:
-                    break
-
-            if not is_substring:
-                deduplicated_contiguous.append(phrase)
-
-        roots_in_contiguous = set()
-        for phrase in deduplicated_contiguous:
-            roots = phrase['consonantal'].split()
-            roots_in_contiguous.update(roots)
+    # Extract roots from deduplicated patterns
+    roots_in_contiguous = set()
+    for phrase in deduplicated_contiguous:
+        roots = phrase['consonantal'].split()
+        roots_in_contiguous.update(roots)
 
     # Count contiguous by length
     contiguous_2 = sum(1 for p in deduplicated_contiguous if p['length'] == 2)
     contiguous_3 = sum(1 for p in deduplicated_contiguous if p['length'] == 3)
     contiguous_4plus = sum(1 for p in deduplicated_contiguous if p['length'] >= 4)
-
-    # Deduplicate skipgrams
-    deduplicated_skipgrams = deduplicate_skipgrams(shared_skipgrams, deduplicated_contiguous)
 
     skipgram_2_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 2)
     skipgram_3_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 3)

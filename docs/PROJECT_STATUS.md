@@ -1,9 +1,62 @@
 # Psalms Commentary Project - Status
 
-## Current Status: ✓ V4.2 COMPLETE - READY FOR USE
-**Last Updated**: 2025-11-14 (Session 103 - V4.2 Complete Execution)
+## Current Status: ✓ V4.3 COMPLETE - READY FOR USE
+**Last Updated**: 2025-11-14 (Session 104 - V4.3 Cross-Match-Type Deduplication)
 
-## Recent Work Session 103: (2025-11-14 - V4.2 Complete Execution COMPLETE ✓)
+## Recent Work Session 104: (2025-11-14 - V4.3 Cross-Match-Type Deduplication COMPLETE ✓)
+
+### ✓ SUCCESS: V4.3 Eliminates Double-Counting Across Match Types
+
+**Objective**: Fix double-counting where same words appeared in both contiguous phrases and skipgrams
+
+**Problem Identified by User**:
+
+User found that words were being counted multiple times across different match types:
+- Contiguous phrase "זמור דוד" (2 words)
+- Skipgram "זמור דוד יהו תיסר" (4 words) contains the same "זמור דוד"
+- Both patterns counted separately, inflating scores
+
+**Solution**:
+
+Implemented **cross-match-type deduplication** in `enhanced_scorer_skipgram_dedup_v4.py`:
+
+**New Function: `deduplicate_across_match_types()`**
+1. Combines contiguous phrases and skipgrams
+2. Sorts by length (longest first)
+3. Removes any pattern that is a subsequence of a longer pattern
+4. Regardless of match type (contiguous or skipgram)
+5. Returns both deduplicated lists
+
+**Code Changes** (~100 lines):
+- Added `deduplicate_across_match_types()` function
+- Updated `calculate_skipgram_aware_deduplicated_score_v4()` to use new deduplication
+- Deprecated old `deduplicate_skipgrams()` function
+- Updated docstring to document V4.3 enhancement
+
+**Results**:
+
+**Impact Across All 10,883 Relationships**:
+- **2,960 contiguous phrases removed** (36.2% reduction)
+- **2,300 relationships improved** (21.1% of all pairs)
+- Contiguous phrases: 8,168 → 5,208
+- Skipgrams: 35,906 → 39,477
+
+**Verified Working Examples** (Psalms 14-53):
+- Removed "דרש את אלה" (contained in "דרש את אלה טוב")
+- Removed "קיף על ני" (contained in "קיף על ני יש")
+- Removed "לא קרא" (contained in "לא קרא פחד אלה")
+
+**Output Files** (ALL UPDATED ✓):
+- `enhanced_scores_skipgram_dedup_v4.json` (77.93 MB)
+- `top_500_connections_skipgram_dedup_v4.json` (7.40 MB)
+- Score range: 1,571.96 to 209.23
+- Avg: 1.7 contiguous, 8.0 skipgrams, 15.1 roots per connection
+
+**Status**: ✓ COMPLETE - V4.3 ready for production use
+
+---
+
+## Previous Work Session 103: (2025-11-14 - V4.2 Complete Execution COMPLETE ✓)
 
 ### ✓ SUCCESS: V4.2 Fully Operational with Both Fixes Verified
 
