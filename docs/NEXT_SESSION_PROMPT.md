@@ -1,6 +1,131 @@
 # Next Session Prompt
 
-## Session 99 Handoff - 2025-11-14 (V3 Critical Fixes COMPLETE ✓)
+## Session 100 Handoff - 2025-11-14 (V4 Implementation COMPLETE ✓)
+
+### What Was Done This Session
+
+**Session Goals**: Implement V4 with verse tracking, fix deduplication bug, clean output format
+
+**EXECUTION RESULTS: ✓ COMPLETE - V4 Production-Ready with All Fixes**
+
+### Issues Fixed
+
+**Issue #1: Overlapping Skipgrams from Same Phrase** ✅ FIXED
+- **Problem**: Multiple overlapping patterns from same location counted separately
+- **Example**: "שמרני אל כי בך", "שמרני אל כי חסי", "שמרני כי חסי בך" all from same verse
+- **Fix**: Added verse tracking + deduplication by (full_span_hebrew, verse) at extraction time
+- **Result**: 1.8M skipgrams → 166K (91% reduction), 0 duplicate locations
+
+**Issue #2: Empty Match Arrays** ✅ FIXED
+- **Problem**: matches_from_a and matches_from_b were empty arrays `[]`
+- **Fix**: Load skipgrams with verse data from V4 database, populate arrays with verse+text
+- **Result**: 100% of skipgrams have populated match arrays with verse numbers
+
+**Issue #3: Unnecessary Fields in Output** ✅ FIXED
+- **Problem**: JSON had empty verses_a/verses_b arrays and null position fields
+- **Fix**: Removed these fields from V4 output format
+- **Result**: Clean, compact JSON with only necessary data
+
+**Issue #4: ETCBC Morphology Integration** ✅ READY (Optional)
+- **Decision**: Made optional for V4 (code ready in `src/hebrew_analysis/`)
+- **Rationale**: V4 fixes are critical, morphology is enhancement
+- **Status**: Ready to integrate when user requests (15-20% false positive reduction)
+
+### Code Changes
+
+**4 new files (~1,200 lines)**:
+1. skipgram_extractor_v4.py (380 lines) - Verse-tracked extraction
+2. migrate_skipgrams_v4.py (280 lines) - Database migration
+3. enhanced_scorer_skipgram_dedup_v4.py (515 lines) - V4 scorer
+4. generate_top_500_skipgram_dedup_v4.py (165 lines) - Top 500 generator
+
+### Pipeline Execution
+
+**Database Migration** (19.7 seconds):
+- Extracted skipgrams with verse tracking for all 150 psalms
+- Applied deduplication at extraction time
+- Result: 166,259 skipgrams (vs 1.8M in V3)
+
+**V4 Scoring** (~2 minutes):
+- Processed 10,883 relationships
+- Generated enhanced_scores_skipgram_dedup_v4.json (47.72 MB)
+- Top 500: top_500_connections_skipgram_dedup_v4.json (5.21 MB)
+
+**Top 500 Generation** (5 seconds):
+- Score range: 7,664.92 to 171.42
+- Average: 1.9 phrases, 2.5 skipgrams, 16.0 roots per connection
+
+### Verification Results
+
+**Deduplication Fix Verified**:
+- ✅ 0 locations with multiple overlapping patterns
+- ✅ Tested on Psalm 16:1 (user's example)
+- ✅ Different patterns from same base phrase have different full_spans (correct)
+
+**Output Format Verified**:
+- ✅ All skipgrams have matches_from_a/b arrays populated
+- ✅ All matches have verse numbers
+- ✅ No position field, no empty verses_a/b
+- ✅ Verified on Psalms 60-108 (rank 2)
+
+### What to Work on Next
+
+**V4 IS COMPLETE AND PRODUCTION-READY**
+
+V4 files ready for use:
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json` (47.72 MB)
+- `data/analysis_results/top_500_connections_skipgram_dedup_v4.json` (5.21 MB)
+- `data/psalm_relationships.db` (58 MB with 166K verse-tracked skipgrams)
+
+### Immediate Options
+
+**1. Review V4 Top 500** (RECOMMENDED)
+- Examine deduplicated skipgrams
+- Verify match quality
+- Check verse tracking
+- Validate scoring accuracy
+
+**2. Integrate ETCBC Morphology** (OPTIONAL ENHANCEMENT)
+- Install text-fabric: `pip install text-fabric`
+- Build cache: `python src/hebrew_analysis/cache_builder.py`
+- Update extractor to use `root_extractor_v2.py`
+- Expected: 15-20% false positive reduction
+
+**3. Process More Psalms for Commentary** (READY)
+- V4 relationship data available for integration
+- Can reference verse-level matches during analysis
+- Statistical data complete with verse details
+
+**4. Further Analysis** (EXPLORATION)
+- Cluster analysis using V4 relationships
+- Network visualization
+- Thematic grouping analysis
+
+### Files to Reference
+
+**V4 Output Files** (WITH ALL FIXES):
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v4.json` - All 10,883 scores
+- `data/analysis_results/top_500_connections_skipgram_dedup_v4.json` - Top 500 clean format
+
+**V4 Implementation**:
+- `scripts/statistical_analysis/skipgram_extractor_v4.py`
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py`
+- `scripts/statistical_analysis/migrate_skipgrams_v4.py`
+
+**Documentation**:
+- `docs/PROJECT_STATUS.md` - Session 100 entry
+- `docs/IMPLEMENTATION_LOG.md` - Technical details
+
+**Database**:
+- `data/psalm_relationships.db` (58 MB) - V4 with verse-tracked skipgrams
+
+### Status
+
+✓ COMPLETE - V4 ready for production use with all critical fixes applied
+
+---
+
+## Previous Session 99 Handoff - 2025-11-14 (V3 Critical Fixes COMPLETE ✓)
 
 ### What Was Done This Session
 
