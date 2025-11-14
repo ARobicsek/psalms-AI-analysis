@@ -59,6 +59,7 @@ class PsalmRelationshipsDB:
                 root_id INTEGER NOT NULL,
                 occurrence_count INTEGER NOT NULL,
                 example_words TEXT,
+                verse_numbers TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (root_id) REFERENCES root_frequencies(root_id),
                 UNIQUE(psalm_number, root_id)
@@ -179,23 +180,26 @@ class PsalmRelationshipsDB:
 
         Args:
             psalm_number: Psalm number (1-150)
-            roots: Dict mapping root_consonantal to {count, examples}
+            roots: Dict mapping root_consonantal to {count, examples, verse_numbers (optional)}
         """
         cursor = self.conn.cursor()
 
         for root_consonantal, data in roots.items():
             root_id = self.get_or_create_root(root_consonantal)
 
-            # Store psalm-root relationship
+            # Store psalm-root relationship with verse numbers if available
+            verse_numbers = json.dumps(data.get('verse_numbers', []), ensure_ascii=False) if data.get('verse_numbers') else None
+
             cursor.execute("""
                 INSERT OR REPLACE INTO psalm_roots
-                (psalm_number, root_id, occurrence_count, example_words)
-                VALUES (?, ?, ?, ?)
+                (psalm_number, root_id, occurrence_count, example_words, verse_numbers)
+                VALUES (?, ?, ?, ?, ?)
             """, (
                 psalm_number,
                 root_id,
                 data['count'],
-                json.dumps(data['examples'], ensure_ascii=False)
+                json.dumps(data['examples'], ensure_ascii=False),
+                verse_numbers
             ))
 
         self.conn.commit()
@@ -274,7 +278,7 @@ class PsalmRelationshipsDB:
             psalm_number: Psalm number (1-150)
 
         Returns:
-            List of dicts with root_consonantal, occurrence_count, idf_score
+            List of dicts with root_consonantal, occurrence_count, idf_score, examples, verse_numbers
         """
         cursor = self.conn.cursor()
 
@@ -283,7 +287,8 @@ class PsalmRelationshipsDB:
                 rf.root_consonantal,
                 pr.occurrence_count,
                 rf.idf_score,
-                pr.example_words
+                pr.example_words,
+                pr.verse_numbers
             FROM psalm_roots pr
             JOIN root_frequencies rf ON pr.root_id = rf.root_id
             WHERE pr.psalm_number = ?
@@ -292,11 +297,15 @@ class PsalmRelationshipsDB:
 
         results = []
         for row in cursor.fetchall():
+            examples = json.loads(row['example_words']) if row['example_words'] else []
+            verse_numbers = json.loads(row['verse_numbers']) if row['verse_numbers'] else []
+
             results.append({
                 'root': row['root_consonantal'],
                 'count': row['occurrence_count'],
                 'idf': row['idf_score'],
-                'examples': json.loads(row['example_words']) if row['example_words'] else []
+                'examples': examples,
+                'verses': verse_numbers  # verse_numbers parallel to examples
             })
 
         return results

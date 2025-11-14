@@ -324,7 +324,8 @@ class RootExtractor:
             return {'roots': {}, 'phrases': []}
 
         # Accumulate roots across all verses
-        all_roots = defaultdict(lambda: {'count': 0, 'examples': []})
+        # Format: root -> {'count': int, 'examples': [str], 'verse_numbers': [int]}
+        all_roots = defaultdict(lambda: {'count': 0, 'examples': [], 'verse_numbers': []})
         all_phrases = []
 
         for verse in verses:
@@ -336,10 +337,13 @@ class RootExtractor:
             for root, examples in verse_roots.items():
                 all_roots[root]['count'] += len(examples)
 
-                # Keep first 3 examples of each root
+                # Keep first 3 examples of each root and track their verses
                 if len(all_roots[root]['examples']) < 3:
-                    all_roots[root]['examples'].extend(
-                        examples[:3 - len(all_roots[root]['examples'])]
+                    examples_to_add = examples[:3 - len(all_roots[root]['examples'])]
+                    all_roots[root]['examples'].extend(examples_to_add)
+                    # Add corresponding verse numbers for each example
+                    all_roots[root]['verse_numbers'].extend(
+                        [verse['verse']] * len(examples_to_add)
                     )
 
             # Extract phrases if requested
