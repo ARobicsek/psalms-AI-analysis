@@ -18,6 +18,7 @@ from itertools import combinations
 from collections import defaultdict
 import logging
 import sys
+import json
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
@@ -26,6 +27,9 @@ from concordance.hebrew_text_processor import strip_consonantal
 
 # Import text cleaning and root extraction
 from text_cleaning import clean_word_list, is_paragraph_marker
+
+# Import word classifier for content word filtering
+from hebrew_analysis.word_classifier import HebrewWordClassifier
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -51,12 +55,110 @@ class SkipgramExtractorV4:
 
     Key improvement: Each skipgram instance is now tracked by verse number,
     enabling proper deduplication of overlapping patterns from the same location.
+
+    V5 Enhancement: Content word filtering and pattern stoplist
+    - Filters patterns based on content word count
+    - Applies stoplist to remove high-frequency formulaic patterns
     """
 
-    def __init__(self):
-        """Initialize extractor."""
+    def __init__(self, enable_quality_filtering: bool = True):
+        """
+        Initialize extractor.
+
+        Args:
+            enable_quality_filtering: If True, apply content word filtering and stoplist
+        """
         self.conn = None
         self.root_extractor = None
+        self.enable_quality_filtering = enable_quality_filtering
+
+        # Initialize word classifier for content word analysis
+        self.word_classifier = HebrewWordClassifier()
+
+        # Load pattern stoplist
+        self.stoplist_skipgrams = set()
+        self.stoplist_contiguous = set()
+        self._load_pattern_stoplist()
+
+        # Statistics for filtering
+        self.stats = {
+            'total_extracted': 0,
+            'filtered_by_content': 0,
+            'filtered_by_stoplist': 0,
+            'kept': 0
+        }
+
+    def _load_pattern_stoplist(self):
+        """Load pattern stoplist from JSON file."""
+        stoplist_path = Path(__file__).parent.parent.parent / "src" / "hebrew_analysis" / "data" / "pattern_stoplist.json"
+
+        if not stoplist_path.exists():
+            logger.warning(f"Pattern stoplist not found at {stoplist_path}, continuing without stoplist")
+            return
+
+        try:
+            with open(stoplist_path, 'r', encoding='utf-8') as f:
+                stoplist_data = json.load(f)
+                self.stoplist_skipgrams = set(stoplist_data.get('skipgrams', []))
+                self.stoplist_contiguous = set(stoplist_data.get('contiguous', []))
+                logger.info(f"Loaded pattern stoplist: {len(self.stoplist_skipgrams)} skipgram patterns, {len(self.stoplist_contiguous)} contiguous patterns")
+        except Exception as e:
+            logger.warning(f"Error loading pattern stoplist: {e}, continuing without stoplist")
+
+    def _should_keep_pattern(self, pattern_roots: str, gap_word_count: int) -> Tuple[bool, str]:
+        """
+        Determine if a pattern should be kept based on quality filters.
+
+        Applies:
+        1. Content word filtering (Priority 1)
+        2. Pattern stoplist (Priority 2)
+
+        Args:
+            pattern_roots: Space-separated root words
+            gap_word_count: Number of gap words (0 for contiguous)
+
+        Returns:
+            Tuple of (should_keep: bool, reason: str)
+        """
+        if not self.enable_quality_filtering:
+            return True, "Filtering disabled"
+
+        self.stats['total_extracted'] += 1
+
+        # Split pattern into words
+        words = pattern_roots.split()
+        is_contiguous = (gap_word_count == 0)
+
+        # Check stoplist first (most efficient)
+        stoplist = self.stoplist_contiguous if is_contiguous else self.stoplist_skipgrams
+        if pattern_roots in stoplist:
+            self.stats['filtered_by_stoplist'] += 1
+            return False, f"In stoplist ({'contiguous' if is_contiguous else 'skipgram'})"
+
+        # Analyze content words
+        analysis = self.word_classifier.analyze_pattern(words)
+        content_count = analysis['content_word_count']
+        pattern_length = len(words)
+
+        # Apply content word thresholds (Priority 1)
+        # OPTION A: Conservative (recommended starting point)
+        if is_contiguous:
+            # Contiguous phrases: require >= 1 content word
+            min_content = 1
+        else:
+            # Skipgrams: require >= 1 content word for 2-word, >= 2 for 3+ word
+            if pattern_length == 2:
+                min_content = 1
+            else:
+                min_content = 2
+
+        if content_count < min_content:
+            self.stats['filtered_by_content'] += 1
+            category = analysis['category']
+            return False, f"Only {content_count} content words (need >= {min_content}, category: {category})"
+
+        self.stats['kept'] += 1
+        return True, f"Has {content_count} content words (>= {min_content})"
 
     def connect_db(self):
         """Connect to Tanakh database."""
@@ -193,16 +295,27 @@ class SkipgramExtractorV4:
                     # For words with gaps, this is the span minus the matched words
                     gap_word_count = (last_idx - first_idx + 1) - n
 
-                    # Create skipgram instance
-                    skipgrams.append({
-                        'pattern_roots': pattern_roots,
-                        'pattern_hebrew': pattern_hebrew,
-                        'full_span_hebrew': full_span_hebrew,
-                        'verse': verse,
-                        'first_position': first_position,
-                        'length': n,
-                        'gap_word_count': gap_word_count  # NEW: Track gap size for penalty
-                    })
+                    # V5: Check quality filters before adding
+                    should_keep, reason = self._should_keep_pattern(pattern_roots, gap_word_count)
+
+                    if should_keep:
+                        # Analyze content words for metadata
+                        analysis = self.word_classifier.analyze_pattern(matched_roots)
+
+                        # Create skipgram instance with V5 enhancements
+                        skipgrams.append({
+                            'pattern_roots': pattern_roots,
+                            'pattern_hebrew': pattern_hebrew,
+                            'full_span_hebrew': full_span_hebrew,
+                            'verse': verse,
+                            'first_position': first_position,
+                            'length': n,
+                            'gap_word_count': gap_word_count,
+                            # V5: Add content word metadata
+                            'content_word_count': analysis['content_word_count'],
+                            'content_word_ratio': analysis['content_word_ratio'],
+                            'pattern_category': analysis['category']
+                        })
 
         return skipgrams
 
