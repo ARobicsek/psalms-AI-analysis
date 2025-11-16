@@ -202,8 +202,13 @@ class HebrewMorphologyAnalyzer:
                     # Be more conservative: require at least 3 letters after stripping prefix
                     # For "ש" specifically, require at least 4 letters since ש-initial roots are very common
                     # (e.g., שנא, שמר, שלח, שמע) and "ש" as a prefix is relatively rare
-                    # This prevents "ושנאת" → "שנאת" → "נאת" (incorrect over-stripping)
-                    min_length = 4 if prefix == 'ש' else 3
+                    # ADAPTIVE FIX: If we already stripped a prefix, require 5+ letters for ש
+                    # This prevents "ומשנאיו" → "שנאיו" (5 letters) → "נאיו" (incorrect)
+                    # because after stripping "ום", we need more certainty before stripping ש
+                    if prefix == 'ש':
+                        min_length = 5 if prefixes_removed > 0 else 4
+                    else:
+                        min_length = 3
                     if stripped not in self.FUNCTION_WORDS and len(stripped) >= min_length:
                         result = stripped
                         prefixes_removed += 1
