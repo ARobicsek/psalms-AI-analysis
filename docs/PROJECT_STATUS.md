@@ -1,8 +1,49 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-16 (Session 111 - COMPLETE)
-**Current Phase**: V5 Quality Filtering - Production Complete ✓
-**Status**: All quality improvements implemented; V5 recommended for production use
+**Last Updated**: 2025-11-16 (Session 112 - IN PROGRESS)
+**Current Phase**: V5 Quality Issues Investigation and Fixes
+**Status**: 6 critical issues identified, fixes pending
+
+## Session 112 Summary (IN PROGRESS)
+
+### V5 Quality Issues Investigation
+
+**Objective**: Investigate matching system issues and data quality problems
+
+**Issues Identified**:
+1. **False Match Bug** - "ראה עני" matching unrelated words
+   - ETCBC cache has wrong root for "ענוים" (humble → should be "ענו", shows "עני")
+   - Creates semantic mismatches (affliction vs. humility)
+
+2. **Root Extraction Error** - Pattern "רבב נא" nonsensical
+   - Word "ושנאת" (and hatred of) extracting to "נא" instead of "שׂנא"
+   - Fallback extractor over-stripping prefixes when word not in cache
+
+3. **Stoplist Not Applied** - "כי את" appears 34x despite being in stoplist
+   - V5 database is empty (0 bytes)
+   - Quality filtering never actually applied to V5 data
+   - V5 JSON was scored from V4 data, not from filtered database
+
+4. **Empty Match Arrays** - All contiguous phrases and roots missing verse data
+   - V5 has empty `matches_from_a/b` despite correct counts
+   - Function looks for wrong field names (`verses_a/b` vs `matches_from_a/b`)
+   - Data loss bug - V4 had correct data, V5 deleted it
+
+5. **No IDF for Phrases** - Confirmed not implemented
+   - Only roots use IDF weighting
+   - Phrases use fixed point values regardless of rarity
+
+**Critical Fixes Needed**:
+- Regenerate V5 database (currently empty)
+- Fix empty matches_from_a/b bug in scorer
+- Fix ETCBC cache entry for "ענוים"
+- Improve fallback root extraction
+
+**Files Affected**:
+- `data/psalm_relationships.db` - Empty, needs regeneration
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Empty matches bug
+- `src/hebrew_analysis/data/psalms_morphology_cache.json` - Wrong root for "ענוים"
+- `src/hebrew_analysis/morphology.py` - Fallback extraction issues
 
 ## Session 111 Summary (COMPLETE ✓)
 
