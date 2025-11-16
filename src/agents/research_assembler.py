@@ -451,7 +451,7 @@ class ResearchAssembler:
         self.sacks_librarian = SacksLibrarian()  # Rabbi Jonathan Sacks references
         self.hirsch_librarian = HirschLibrarian()  # R. Samson Raphael Hirsch German commentary
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
-        self.related_psalms_librarian = RelatedPsalmsLibrarian()  # Related psalms from top connections
+        self.related_psalms_librarian = RelatedPsalmsLibrarian(connections_file='data/analysis_results/top_550_connections_v6.json')  # Related psalms from top connections
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
         """

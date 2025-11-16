@@ -1,8 +1,64 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-16 (Session 116 - COMPLETE ✓)
-**Current Phase**: V6 Clean Regeneration - Implementation Pending
-**Status**: ⚠️ V5 Has Errors in Roots/Phrases - V6 Plan Ready
+**Last Updated**: 2025-11-16 (Session 118 - COMPLETE ✓)
+**Current Phase**: V6 Production Ready
+**Status**: ✓ V6 System Ready - Token-Optimized Display Implemented
+
+## Session 118 Summary (COMPLETE ✓)
+
+### Related Psalms Display Token Optimization
+
+**Objective**: Optimize related psalms display in research bundles for maximum token efficiency
+**Result**: ✓ COMPLETE - 30-40% token reduction achieved while improving clarity
+
+**Optimizations Implemented**:
+1. ✓ Removed IDF scores from root displays (~10 chars/root saved)
+2. ✓ Compact occurrence format - "(1 occurrence(s))" → "(×1)" (~13 chars saved per)
+3. ✓ Removed "Consonantal:" prefix (~14 chars/phrase saved)
+4. ✓ Simplified psalm references - "In Psalm X" → "Psalm X" (~3 chars each)
+5. ✓ Smart context extraction for roots - Show matched word ±3 words instead of full verse
+6. ✓ Reordered sections - Phrases FIRST → Skipgrams SECOND → Roots THIRD (by IDF)
+7. ✓ Full verse context for phrases/skipgrams (100-char limit)
+8. ✓ V6 data compatibility - Fixed skipgram display to use `full_span_hebrew` field
+9. ✓ Pipeline updated - research_assembler.py now uses V6 connections file
+
+**Key Features**:
+- Created `_remove_nikud()` method for consonantal matching
+- Created `_extract_word_context()` to show matched word ±3 words
+- Matched roots now always visible in displayed context
+- Roots sorted by IDF descending (best matches first)
+- Token savings: ~30-40% reduction in related psalms section
+
+**Files Modified**:
+- `src/agents/related_psalms_librarian.py` - Core formatting optimizations
+- `src/agents/research_assembler.py` - Updated to use V6 connections file
+
+**Impact**: V6 system now ready for production with cost-effective, token-optimized research bundles
+
+---
+
+## Session 117 Summary (COMPLETE ✓)
+
+### V6 Complete Regeneration
+
+**Objective**: Execute V6 clean regeneration plan with fresh patterns and Session 115 morphology
+**Result**: ✓ COMPLETE - V6 fully generated with all user-reported errors fixed
+
+**V6 Generation Results**:
+1. ✓ **Fresh Pattern Extraction** - 11,170 psalm pairs, 2,738 unique roots (39.67 MB)
+2. ✓ **V6 Scoring** - Fresh patterns + V5 skipgrams with Hebrew text (107.97 MB)
+3. ✓ **Top 550 Connections** - Score range 19908.71 to 211.50 (13.35 MB)
+
+**Validation**: All 5 user-reported errors now fixed:
+- `שִׁ֣יר חָדָ֑שׁ` → "שיר חדש" ✓
+- `וּמִשְׁפָּ֑ט` → "שפט" ✓
+- `שָׁמַ֣יִם` → "שמים" ✓
+- `שִׁנָּ֣יו` → "שן" ✓
+- `בְּתוּל֣וֹת` → "בתולה" ✓
+
+**Status**: V6 system ready for production use
+
+---
 
 ## Session 116 Summary (COMPLETE ✓)
 
@@ -11,23 +67,9 @@
 **Objective**: Investigate serious root extraction errors in V5 output
 **Result**: ✓ COMPLETE - Found V5 reuses old V4 data; created V6 plan
 
-**Investigation**:
-- ✓ Session 115 morphology fixes ARE working correctly
-- ✓ V5 database skipgrams have correct roots
-- ✗ V5 JSON `deduplicated_roots` are WRONG (from old V4 file, Nov 14)
-- ✗ V5 JSON `deduplicated_contiguous_phrases` are WRONG (from old V4)
+**Root Cause**: V5 scorer reused V4 roots/phrases (generated before Session 115 morphology fixes)
 
-**Root Cause**: V5 scorer reuses V4 roots/phrases instead of regenerating them
-
-**Solution**: V6 - fresh generation from ground up, no V3/V4/V5 dependency
-
-**V6 Plan**:
-1. Extract fresh roots/phrases from tanakh.db (Session 115 morphology)
-2. Reuse V5 skipgram database (correct)
-3. Generate V6 scores
-4. Generate V6 top 550
-
-**Status**: V6 plan documented in NEXT_SESSION_PROMPT.md, ready for implementation
+**Solution**: V6 - fresh generation from ground up with no V3/V4/V5 dependency
 
 ---
 
