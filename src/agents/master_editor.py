@@ -115,6 +115,8 @@ Review the introduction and verse commentary for these issues:
 - Figurative language parallels from database not cited or analyzed
 - ANE parallels available but not discussed
 - insufficient picture provided of what the psalm is ABOUT (especially if there are unexpected moments or shifts in tone/subject)
+- didn't make use of the 'Related Psalms Analysis' section of the research bundle when there are interesting/informative parallels with another psalm
+
 
 ### 3. STYLISTIC PROBLEMS
 **Too "LLM-ish" or breathless:**
@@ -293,6 +295,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
   * Textual criticism (MT vs LXX, hints about Vorlage). You readers do NOT know Greek. If you quote Greek, translate into English.
   * Comparative biblical usage (concordance insights showing how terms/phrases appear elsewhere). Quote generously from other Biblical passages (Hebrew with English translation) where illustrative.
   * Timing/composition clues (vocabulary, theology, historical references)
+  * Interesting parallels with other psalms, when convincing and illuminating (use the 'Related Psalms Analysis' section of the research bundle)
 
 **Figurative Language Integration:**
 For verses with figurative language where research provided biblical parallels:
