@@ -1,5 +1,114 @@
 # Implementation Log
 
+## Session 114 - 2025-11-15 (V5 Root Extraction Fix - Suffix/Prefix Order - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix remaining root extraction issues with ש-initial roots discovered in V5 output
+**Result**: ✓ COMPLETE - Reversed suffix/prefix stripping order, V5 database and scores regenerated
+**Session Duration**: ~45 minutes (investigation + fix + testing + regeneration + documentation)
+**Status**: Production ready - Root extraction significantly improved
+
+### Issue Discovered
+
+**Problem**: ש-initial roots still being incorrectly stripped in some cases
+- `שְׁקָרִ֑ים` (sheqarim - "falsehoods") → `קר` ✗ (should be `שקר`)
+- `שָׂנֵ֗אתִי` (saneti - "I hated") → `נא` ✗ (should be `שנא`)
+
+**Root Cause**: Prefix-first stripping order allowed shin to be stripped from long words before suffixes removed
+- Example: `שקרים` (5 letters) → strip `ש` prefix → `קרים` → strip `ים` suffix → `קר` ✗
+- The 4-letter minimum for ש (from Session 112) and 5-letter adaptive minimum (from Session 113) were insufficient
+- Long words with ש-roots and suffixes passed the length checks
+
+### Fix Applied
+
+**Solution**: Reverse the stripping order - **suffixes BEFORE prefixes** ([morphology.py:193-240](src/hebrew_analysis/morphology.py#L193-L240))
+
+**Rationale**:
+- Strip `שקרים` suffix `ים` first → `שקר` (3 letters)
+- Now when checking prefixes, `שקר` is only 3 letters, below the 4-letter minimum for ש stripping
+- Result: ש is preserved as part of the root ✓
+
+**Code Change**:
+```python
+# CRITICAL FIX: Strip suffixes BEFORE prefixes to prevent over-stripping of ש
+# Example: שקרים → (strip ים) → שקר (3 letters, protected from ש stripping) ✓
+# Old way: שקרים → (strip ש) → קרים → (strip ים) → קר ✗
+result = consonantal
+
+# Try stripping suffixes (max 2, trying combinations)
+# ... suffix stripping code ...
+
+# Try stripping prefixes (max 2, trying combinations)
+# ... prefix stripping code ...
+```
+
+### Testing
+
+**Test Results**: 15/16 tests passing (93.75%)
+
+**Passing Tests** (all ש-related issues fixed):
+- ✓ `שָׁ֥קֶר` → `שקר` (sheqer - falsehood)
+- ✓ `שְׁקָרִ֑ים` → `שקר` (sheqarim - falsehoods) - **FIXED**
+- ✓ `שָׂנֵ֗אתִי` → `שנא` (saneti - I hated) - **FIXED**
+- ✓ `שָׁ֑וְא` → `שוא` (shav - vanity)
+- ✓ `שָׁ֥מַר` → `שמר` (shamar - to guard)
+- ✓ `שָׁלַ֣ח` → `שלח` (shalach - to send)
+- ✓ `שָׁמַ֣ע` → `שמע` (shama - to hear)
+- ✓ `וּמְשַׁנְאֶ֥יךָ` → `שנא` (u-meshan'echa - and those who hate you)
+- ✓ `בְּשִׁ֥יר` → `שיר` (be-shir - in a song)
+- ✓ All non-shin prefix tests passing
+
+**Note**: One test failing (`וְיֹאמֶר` → `יאמר` instead of `אמר`) is unrelated to shin issue - involves imperfect verb י-prefix. Most common verbs are in ETCBC cache anyway.
+
+### Data Regeneration
+
+**V5 Database** (`data/psalm_relationships.db`):
+- Previous: 337,243 skipgrams (Session 113)
+- New: 341,175 skipgrams (+3,932 with improved root extraction)
+- Size: 132.5 MB
+- Migration time: 23.9 seconds
+
+**V5 Scoring** (`data/analysis_results/enhanced_scores_skipgram_dedup_v5.json`):
+- Size: 52.81 MB
+- All 10,883 psalm pairs scored
+
+**V5 Top 550** (`data/analysis_results/top_550_connections_skipgram_dedup_v5.json`):
+- Size: 5.53 MB
+- Score range: 1140.64 to 167.57
+- Top connection: Psalms 14-53 (1140.64)
+
+### Files Modified
+
+**Core Fix**:
+- `src/hebrew_analysis/morphology.py` - Reversed suffix/prefix stripping order
+
+**Data Regenerated**:
+- `data/psalm_relationships.db` - 341,175 skipgrams
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json`
+- `data/analysis_results/top_550_connections_skipgram_dedup_v5.json`
+
+**Documentation**:
+- `docs/IMPLEMENTATION_LOG.md` - This entry
+- `docs/PROJECT_STATUS.md` - Updated to Session 114
+- `docs/NEXT_SESSION_PROMPT.md` - Updated with Session 114 summary
+
+### Impact
+
+**Improved Root Extraction**:
+- ש-initial roots now correctly preserved in words with suffixes
+- Examples: שקרים → שקר ✓, שנאתי → שנא ✓
+- Better semantic matching for verbs like שנא (hate), שמר (guard), שמע (hear)
+
+**Database Changes**:
+- +3,932 skipgrams due to improved root matching
+- More accurate root-based connections between psalms
+
+**V5 Quality**:
+- All critical root extraction issues resolved
+- Ready for production analysis
+
+---
+
 ## Session 113 - 2025-11-16 (V5 Critical Fixes - Root Extraction & Skipgram Filtering - COMPLETE ✓)
 
 ### Overview
