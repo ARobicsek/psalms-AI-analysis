@@ -1,0 +1,61 @@
+INFO:src.data_sources.tanakh_database:Database schema created at C:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\src\agents\related_psalms_librarian.py", line 301, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\ariro\OneDrive\Documents\Psalms\src\agents\related_psalms_librarian.py", line 295, in main
+    print(librarian.format_for_research_bundle(args.psalm, matches))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 876-887: character maps to <undefined>
+
+Found 13 related psalms for Psalm 4:
+
+  - Psalm 13: Score 289.96
+    Contiguous phrases: 1
+    Skipgrams: 2
+  - Psalm 65: Score 235.28
+    Contiguous phrases: 2
+    Skipgrams: 3
+  - Psalm 3: Score 233.90
+    Contiguous phrases: 4
+    Skipgrams: 6
+  - Psalm 51: Score 217.37
+    Contiguous phrases: 2
+    Skipgrams: 2
+  - Psalm 77: Score 216.62
+    Contiguous phrases: 0
+    Skipgrams: 0
+  - Psalm 97: Score 207.24
+    Contiguous phrases: 1
+    Skipgrams: 1
+  - Psalm 57: Score 204.15
+    Contiguous phrases: 0
+    Skipgrams: 2
+  - Psalm 30: Score 200.11
+    Contiguous phrases: 2
+    Skipgrams: 4
+  - Psalm 86: Score 193.41
+    Contiguous phrases: 1
+    Skipgrams: 3
+  - Psalm 62: Score 191.06
+    Contiguous phrases: 3
+    Skipgrams: 3
+  - Psalm 55: Score 190.64
+    Contiguous phrases: 1
+    Skipgrams: 5
+  - Psalm 122: Score 187.71
+    Contiguous phrases: 0
+    Skipgrams: 0
+  - Psalm 39: Score 184.92
+    Contiguous phrases: 3
+    Skipgrams: 3
+
+================================================================================
+
+Formatted for research bundle:
+

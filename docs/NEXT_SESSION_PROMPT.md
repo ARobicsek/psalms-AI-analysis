@@ -8,7 +8,21 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V4.2 with Related Psalms Integration - Production Configuration ✓
 **Version**: V4.2 with Top 550 related psalms, enhanced limits, bug fixes
-**Last Session**: Session 109 - Bug Fixes & Configuration Updates (2025-11-15)
+**Last Session**: Session 110 - Liturgical Header & Related Psalms Display Fixes (2025-11-15)
+
+## Session 110 Summary (COMPLETE ✓)
+
+**Completed**:
+- ✓ Fixed liturgical section header replacement (em-dash variant handling)
+- ✓ Fixed related psalms display to show count AND list of psalms
+- ✓ Updated pipeline_summary.py to track and save psalm numbers list
+- ✓ Updated all session documentation
+
+**Key Changes**:
+- `master_editor.py` now handles 4 liturgical marker variants (regular hyphens + em-dashes)
+- `pipeline_summary.py` tracks `related_psalms_list` in addition to count
+- `document_generator.py` displays "8 (Psalms 77, 25, 34...)" instead of just count or "N/A"
+- Future DOCX generations will show which psalms were used for comparative analysis
 
 ## Session 109 Summary (COMPLETE ✓)
 

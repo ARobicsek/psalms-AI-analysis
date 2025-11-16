@@ -1,0 +1,163 @@
+{
+  "psalm_number": 4,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Musical/liturgical superscription with technical terminology. 'לַמְנַצֵּחַ' (for the leader/director) appears in 55 psalm titles, suggesting professional temple performance context. 'בִּנְגִינוֹת' (with instrumental music/stringed instruments) is rare - only 6 occurrences in psalm titles. Davidic attribution connects to royal/authoritative tradition, but what's the function of this attribution in the psalm's rhetoric?",
+      "lexical_insights": [
+        "לַמְנַצֵּחַ",
+        "בִּנְגִינוֹת"
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Frames the psalm as formal temple liturgy, supporting the thesis that this is public/performative rather than private prayer",
+      "phonetic_transcription": "lam-nats-**TSĒ**-aḥ bin-ghiy-**NŌTH** miz-**MŌR** lə-dhā-**WIDH**"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Striking divine epithet 'אֱלֹהֵי צִדְקִי' (God of my righteousness/vindication) is unique to this psalm. The phrase combines personal relationship ('my') with forensic/legal terminology (צֶדֶק). Verb sequence creates urgency: three imperatives (עֲנֵנִי, חׇנֵּנִי, וּשְׁמַע) building petition momentum. Past deliverance 'הִרְחַבְתָּ לִּי' (you made wide/spacious for me) uses spatial metaphor - from constriction (בַּצָּר) to expansion. Why does the psalmist ground present petition in past experience?",
+      "lexical_insights": [
+        "אֱלֹהֵי צִדְקִי",
+        "הִרְחַבְתָּ",
+        "בַּצָּר"
+      ],
+      "figurative_analysis": [
+        "distress as physical constriction",
+        "deliverance as spatial expansion"
+      ],
+      "thesis_connection": "The spatial metaphor (constriction→expansion) connects to thesis about competing securities. Also establishes confident prayer tone through past testimony",
+      "phonetic_transcription": "bə-qor-**'IY** ʿa-**NĒ**-niy  'e-**LŌ**-hēy tsidh-**QIY** bats-**TSĀR** hir-**ḤAV**-tā **LLIY** ḥon-**NĒ**-niy ū-shə-**MAʿ** tə-fil-lā-**THIY**"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Dramatic vocative shift: psalmist turns from God to address 'בְּנֵי אִישׁ' (sons of men/mortals). This is unusual in lament genre - prayers typically address God throughout. Rhetorical question 'עַד־מֶה' (how long) is lament formula, but directed at humans, not deity. Triple accusation: they turn כְבוֹדִי (my glory/honor) into כְלִמָּה (shame), love רִיק (emptiness/illusion), seek כָזָב (fraud/lie). The word כָבוֹד is multivalent - personal honor, divine glory, or both? Sound pattern: /k/ alliteration in 'כְבוֹדִי לִכְלִמָּה' emphasizes transformation.",
+      "lexical_insights": [
+        "בְּנֵי אִישׁ",
+        "כְבוֹדִי",
+        "כְלִמָּה",
+        "רִיק",
+        "כָזָב"
+      ],
+      "figurative_analysis": [
+        "glory→shame transformation",
+        "emptiness and fraud as objects of love/pursuit"
+      ],
+      "thesis_connection": "Central to thesis: psalmist directly confronts adversaries' value system. The honor/shame language fits honor-culture context. Selah pause creates dramatic weight after accusation",
+      "phonetic_transcription": "bə-**NĒY** **'IY**-sh ʿadh-**MEH** khə-vō-**DHIY** likh-lim-**MĀH** te-'e-hā-**VŪN** **RIY**-q tə-vaq-**SHŪ** khā-**ZĀV** **SE**-lāh"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Imperative 'וּדְעוּ' (know!) continues address to adversaries with didactic force. Key theological claim: 'הִפְלָה יְהוָה חָסִיד לוֹ' - YHWH 'singles out/makes wonderful/distinguishes' the חָסִיד (faithful/pious one) for Himself. The verb הִפְלָה (hiphil of פָּלָא) suggests divine action that creates distinction or performs wonders. Election theology: God's selective setting apart of the faithful. Second half creates inclusio with v.2: 'יְהוָה יִשְׁמַע בְּקׇרְאִי אֵלָיו' echoes the opening petition, demonstrating answered prayer within the psalm itself. Divine name יְהוָה appears twice, emphasizing covenant relationship.",
+      "lexical_insights": [
+        "הִפְלָה",
+        "חָסִיד",
+        "וּדְעוּ"
+      ],
+      "figurative_analysis": [
+        "divine selection/distinction"
+      ],
+      "thesis_connection": "Critical for thesis: establishes theological warrant for psalmist's distinctive stance. The election language explains why psalmist can challenge adversaries - divine authorization",
+      "phonetic_transcription": "ū-dhə-**ʿŪ** kiy-hif-**LĀH** yə-hō-**WĀH** ḥā-**SIY**-dh **LŌ** yə-hō-**WĀH** yish-**MAʿ** bə-qor-**'IY** 'ē-**LĀY**-w"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Continues instruction with mysterious imperative 'רִגְזוּ' - standard translation 'tremble' but root רָגַז can mean 'tremble,' 'be agitated,' 'be angry.' LXX reads 'be angry' (cited by Paul in Eph 4:26!). Followed by prohibition 'וְאַל־תֶּחֱטָאוּ' (and do not sin). Second imperative sequence: 'אִמְרוּ בִלְבַבְכֶם' (speak in your hearts) + 'עַל־מִשְׁכַּבְכֶם' (on your beds) + 'וְדֹמּוּ' (and be silent). Evening imagery emerges: bed as place of reflection. The progression is striking: internal emotional state → prohibition → internal speech → physical location (bed) → silence. This creates movement from agitation to contemplative quiet.",
+      "lexical_insights": [
+        "רִגְזוּ",
+        "מִשְׁכַּבְכֶם",
+        "וְדֹמּוּ"
+      ],
+      "figurative_analysis": [
+        "bed as contemplation space",
+        "internal speech"
+      ],
+      "thesis_connection": "Evening context connects to thesis about evening prayer frame. The movement toward silence and reflection supports pedagogical function - psalmist teaching proper response to conflict",
+      "phonetic_transcription": "righ-**ZŪ** wə-'al-te-ḥe-**TĀ**-'ū 'im-**RŪ** vil-vav-**KHEM** ʿal-mish-kav-**KHEM** wə-**DHŌM**-mū **SE**-lāh"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Two final imperatives to adversaries: 'זִבְחוּ זִבְחֵי־צֶדֶק' (offer sacrifices of righteousness) and 'וּבִטְחוּ אֶל־יְהוָה' (trust in YHWH). The phrase 'זִבְחֵי־צֶדֶק' is rare and ambiguous - righteous sacrifices, properly performed rituals, or metaphorical worship? Cognate accusative construction 'זִבְחוּ זִבְחֵי' (offer offerings of) creates emphasis through repetition of root. The verse pairs external ritual (sacrifice) with internal disposition (trust) - integration of cult and faith. This concludes the instruction section before shifting to communal voice in v.7.",
+      "lexical_insights": [
+        "זִבְחֵי־צֶדֶק",
+        "וּבִטְחוּ"
+      ],
+      "figurative_analysis": [
+        "sacrifice as righteousness expression"
+      ],
+      "thesis_connection": "Connects to thesis about competing paradigms: proper worship (sacrifice + trust) contrasts with adversaries' pursuit of illusion. The emphasis on trust is key to the psalm's argument",
+      "phonetic_transcription": "ziv-**ḤŪ** ziv-ḥēy-**TSE**-dheq ū-vit-**ḤŪ** 'el-yə-hō-**WĀH**"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Sudden voice shift: 'רַבִּים אֹמְרִים' (many are saying) - psalmist now quotes communal despair/questioning. The question 'מִי־יַרְאֵנוּ טוֹב' (who will show us good?) expresses existential anxiety about blessing/prosperity. Response/prayer: 'נְסָה־עָלֵינוּ אוֹר פָּנֶיךָ יְהוָה' (lift upon us the light of your face, YHWH) - clear allusion to Aaronic blessing (Num 6:25-26). The 'many' are invoking priestly blessing language, seeking visible divine favor. This sets up the contrast in v.8: conventional piety seeking material signs vs. psalmist's inner joy.",
+      "lexical_insights": [
+        "רַבִּים",
+        "מִי־יַרְאֵנוּ טוֹב",
+        "נְסָה־עָלֵינוּ",
+        "אוֹר פָּנֶיךָ"
+      ],
+      "figurative_analysis": [
+        "light of face = divine favor/blessing",
+        "seeing good = experiencing prosperity"
+      ],
+      "thesis_connection": "Crucial for thesis: the 'many' seeking visible good fortune represents the competing paradigm. Their request for divine favor is conventional/legitimate, but the psalmist will offer superior alternative in v.8",
+      "phonetic_transcription": "ra-**BIY**-m 'ō-mə-riy-**M** miy-yar-'ē-**NŪ** **TŌV** nə-sāh-ʿā-lēy-**NŪ** **'ŌR** pā-**NEY**-khā yə-hō-**WĀH**"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "The psalm's rhetorical climax and interpretive crux. 'נָתַתָּה שִׂמְחָה בְלִבִּי' (you have put joy in my heart) - perfect verb suggests completed action, God as subject, joy as direct gift to the heart (not circumstance-dependent). Critical temporal clause: 'מֵעֵת דְּגָנָם וְתִירוֹשָׁם רָבּוּ' (from the time [when] their grain and wine increased/multiplied). The possessive suffix on 'דְּגָנָם וְתִירוֹשָׁם' (their grain and wine) distinguishes 'them' from 'me' - others have material abundance. Grain and wine are covenant blessing vocabulary (Deut 7:13, 11:14). The מֵעֵת construction is ambiguous: 'more than when,' 'at the time when,' or 'because'? This determines whether psalmist lacks material blessing or has it but finds it insufficient.",
+      "lexical_insights": [
+        "נָתַתָּה שִׂמְחָה",
+        "מֵעֵת",
+        "דְּגָנָם וְתִירוֹשָׁם",
+        "רָבּוּ"
+      ],
+      "figurative_analysis": [
+        "heart as receptacle of joy",
+        "grain and wine as prosperity metonymy"
+      ],
+      "thesis_connection": "Absolutely central to thesis: this verse articulates the competing paradigms - divine gift of heart-joy vs. material prosperity. The syntax determines whether this is prosperity theology critique or spirituality hierarchy claim",
+      "phonetic_transcription": "nā-**THA**-tāh sim-**ḤĀH** və-li-**BIY** mē-**ʿĒTH** də-ghā-**NĀM** wə-thiy-rō-**SHĀM** **RĀ**-bū"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Confident conclusion with evening imagery fulfilling the frame from v.5. 'בְּשָׁלוֹם יַחְדָּו' (in peace together) - the adverb יַחְדָּו is ambiguous: 'together' (with whom?), 'at once,' or 'altogether/safely.' Two verbs for rest: 'אֶשְׁכְּבָה' (I will lie down) and 'וְאִישָׁן' (and I will sleep) - imperfect/cohortative expressing confident intention. Theological grounding: 'כִּי־אַתָּה יְהוָה לְבָדָד' (for You, YHWH, alone) - the emphatic לְבָדָד (alone) is key: YHWH alone, not YHWH plus material security. Final phrase 'לָבֶטַח תּוֹשִׁיבֵנִי' (in security you make me dwell) - verb ישׁב (dwell/settle) suggests permanent habitation, not temporary respite.",
+      "lexical_insights": [
+        "יַחְדָּו",
+        "לְבָדָד",
+        "לָבֶטַח",
+        "תּוֹשִׁיבֵנִי"
+      ],
+      "figurative_analysis": [
+        "sleep as trust metaphor",
+        "dwelling as security"
+      ],
+      "thesis_connection": "Concludes thesis argument: confident rest despite circumstances proves the superiority of trust in YHWH alone. The 'alone' emphasis is the psalm's theological payoff - exclusive sufficiency of divine relationship",
+      "phonetic_transcription": "bə-shā-**LŌM** yaḥ-**DĀW** 'esh-**KVĀH** wə-'iy-**SHĀN** kiy-'a-**TĀH** yə-hō-**WĀH** lə-vā-**DHĀDH** lā-**VE**-taḥ tō-shiy-**VĒ**-niy **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Dramatic addressee shifts create three-way rhetorical situation: God (v.2) → adversaries (vv.3-6) → community (v.7 quoted) → testimony about God (vv.8-9). This makes the psalm performative - prayer becomes instruction and apologetic",
+    "Evening frame structure: bed imagery (v.5) and lie down/sleep (v.9) bookend the instruction section, marking this as liminal evening time for theological reorientation",
+    "Competing paradigms antithesis: adversaries love illusion/seek fraud (v.3) vs. psalmist trusts YHWH (v.6); 'many' seek visible good/prosperity (v.7) vs. psalmist receives heart-joy (v.8); material abundance (grain/wine, v.8) vs. divine presence alone (v.9)",
+    "Call-answer inclusio: 'answer me when I call' (v.2) is fulfilled by 'YHWH hears when I call' (v.4), showing answered prayer within the psalm itself",
+    "Spatial metaphor progression: distress-constriction (v.2) → spacious deliverance (v.2) → secure dwelling (v.9) - movement from confined to expansive to permanent habitation",
+    "Divine name concentration: YHWH appears 4x in vv.4-9, emphasizing covenant relationship as basis for trust. Opening 'Elohim of my righteousness' (v.2) shifts to repeated YHWH",
+    "Sound patterns: /k/ alliteration in v.3 (כְבוֹדִי לִכְלִמָּה), cognate accusative emphasis (זִבְחוּ זִבְחֵי) in v.6, imperative chains creating instruction rhythm in vv.5-6",
+    "Selah markers (vv.3, 5) punctuate major rhetorical shifts: after confronting adversaries (v.3) and after calling for silent reflection (v.5) - musical/liturgical pauses that enact the instruction"
+  ],
+  "interesting_questions": [
+    "Why does the psalmist use the unique epithet 'God of my righteousness/vindication' (אֱלֹהֵי צִדְקִי) in v.2 - is this forensic/legal language suggesting a lawsuit context where God vindicates the psalmist's claim?",
+    "What is the semantic range and function of כָבוֹד (glory/honor) in v.3 - personal reputation in honor-shame culture, divine glory reflected in the psalmist, or material wealth? How does its transformation to כְלִמָּה (shame) work?",
+    "What does רִגְזוּ mean in v.5 - 'tremble' (in fear of God), 'be angry' (LXX and Paul's reading), or 'be agitated'? How does this choice affect the instruction's meaning - is anger legitimate if it doesn't lead to sin?",
+    "What are 'sacrifices of righteousness' (זִבְחֵי־צֶדֶק) in v.6 - morally upright sacrifices, properly performed rituals according to Torah, or metaphorical worship? How does this relate to prophetic critique of empty ritual?",
+    "How should מֵעֵת in v.8 be interpreted - comparative ('more than when their grain...'), temporal ('at the time when their grain...'), or causal ('because their grain...')? This determines whether the psalmist lacks prosperity or transcends it",
+    "Who are 'the many' (רַבִּים) in v.7 - are they the same as the 'sons of men' adversaries from v.3, or the broader community including sympathetic voices? Is their prayer for divine blessing legitimate or misguided?",
+    "What does the verb הִפְלָה mean in v.4 - 'set apart,' 'make wonderful/marvelous,' 'distinguish,' or 'show favor'? Is this about individual election or corporate identity of the חָסִיד (faithful/pious)?",
+    "How does יַחְדָּו function in v.9 - 'together' (with God, implying intimate communion), 'together' (with community), 'at once' (both lie down and sleep simultaneously), or 'safely/altogether'?",
+    "What is the theological force of לְבָדָד ('alone') in v.9 - monotheistic confession (YHWH alone not other gods), sufficiency claim (YHWH alone not YHWH plus prosperity), or isolation (psalmist alone with God in solitude)?",
+    "Why does the psalm address adversaries directly (vv.3-6) rather than complaining about them to God - what rhetorical or liturgical function does this confrontational instruction serve?",
+    "How does the priestly blessing allusion in v.7 ('lift up the light of your face') function - is the psalmist affirming this request but redefining fulfillment, or critiquing conventional piety that seeks visible signs?",
+    "What is the relationship between the evening setting (bed, sleep, lie down) and the psalm's theological argument about competing securities - why is nighttime the appropriate frame for this teaching?"
+  ],
+  "synthesis_notes": "LEXICON: Deep dive on אֱלֹהֵי צִדְקִי (unique epithet), רִגְזוּ (tremble/angry/agitated), הִפְלָה (set apart/make wonderful), זִבְחֵי־צֶדֶק (sacrifices of righteousness), מֵעֵת (temporal/comparative particle), יַחְדָּו (together/at once), לְבָדָד (alone - theological implications)\nCONCORDANCE: Track כָבוֹד/כְלִמָּה (glory/shame) in honor-shame contexts, חָסִיד (faithful one) as identity marker, priestly blessing formula ('light of face'), grain/wine as prosperity vocabulary, bed/sleep as trust metaphors, spatial metaphors (distress-constriction vs. secure dwelling)\nSYNTAX: Analyze addressee shift patterns in lament genre, imperative chains in wisdom instruction, temporal constructions with מֵעֵת, causative ki-clauses in confidence statements, perfect vs. imperfect verb aspectual meanings in vv.8-9\nINTERTEXTUALITY: Numbers 6:24-26 (priestly blessing in v.7), Ephesians 4:26 (Paul's citation of v.5 via LXX), Psalm 3:5-6 (parallel evening trust and sleep imagery), Psalms 37, 49, 73 (prosperity theology debates), prophetic sacrifice critique (Amos 5, Isaiah 1)\nLXX VARIANTS: Why does LXX add 'oil' in v.8 completing agricultural triad? How does 'be angry' (ὀργίζεσθε) reading of רִגְזוּ change Paul's appropriation? What does 'heavy-hearted' (βαρυκάρδιοι) expansion in v.3 reveal about ancient interpretation?\nFIGURATIVE LANGUAGE: All spatial metaphors (constriction/expansion, dwelling), internal/external contrasts (heart-joy vs. material prosperity), evening liminal time symbolism, light/face imagery\nCOMPARATIVE WISDOM: How does this psalm's instruction to adversaries compare with other wisdom psalms (1, 37, 49)? What is the relationship between lament and wisdom genres in Psalm 4's hybrid form?"
+}

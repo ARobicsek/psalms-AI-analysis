@@ -588,6 +588,7 @@ class PipelineSummaryTracker:
                 'commentary_counts': self.research.commentary_counts,
                 'sacks_references_count': self.research.sacks_references_count,
                 'related_psalms_count': self.research.related_psalms_count,
+                'related_psalms_list': self.research.related_psalms_list,
                 'ugaritic_parallels': self.research.ugaritic_parallels,
                 'research_bundle_chars': self.research.research_bundle_chars,
                 'research_bundle_tokens': self.research.research_bundle_tokens

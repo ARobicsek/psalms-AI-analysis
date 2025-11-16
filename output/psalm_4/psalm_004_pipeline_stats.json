@@ -1,0 +1,502 @@
+{
+  "psalm_number": 4,
+  "pipeline_start": "2025-11-14T16:06:59.963716",
+  "pipeline_end": "2025-11-14T16:34:37.675335",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1471,
+      "input_token_estimate": 490,
+      "output_char_count": 16728,
+      "output_token_estimate": 5576,
+      "duration_seconds": 119.08817982673645,
+      "completion_date": null,
+      "timestamp": "2025-11-14T16:06:59.966219"
+    },
+    "micro_analysis": {
+      "input_char_count": 16728,
+      "input_token_estimate": 5576,
+      "output_char_count": 378601,
+      "output_token_estimate": 126200,
+      "duration_seconds": 406.8740475177765,
+      "completion_date": null,
+      "timestamp": "2025-11-14T16:10:59.090503"
+    },
+    "synthesis": {
+      "input_char_count": 395331,
+      "input_token_estimate": 131777,
+      "output_char_count": 48673,
+      "output_token_estimate": 16224,
+      "duration_seconds": 445.169921875,
+      "completion_date": null,
+      "timestamp": "2025-11-14T16:19:46.137131"
+    },
+    "master_editor": {
+      "input_char_count": 425450,
+      "input_token_estimate": 141816,
+      "output_char_count": 25442,
+      "output_token_estimate": 8480,
+      "duration_seconds": 206.36341333389282,
+      "completion_date": "2025-11-14T16:34:37.675335",
+      "timestamp": "2025-11-14T16:29:12.359979"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "לַמְנַצֵּחַ",
+        "reason": "Technical liturgical term - need full semantic range: musical director, eschatological 'end', or victory?"
+      },
+      {
+        "word": "בִּנְגִינוֹת",
+        "reason": "Rare instrumental designation (only 6 occurrences) - specific instruments and liturgical function"
+      },
+      {
+        "word": "אֱלֹהֵי צִדְקִי",
+        "reason": "Unique divine epithet - genitive construction: subjective or objective? Forensic implications?"
+      },
+      {
+        "word": "הִרְחַבְתָּ",
+        "reason": "Spatial deliverance metaphor - verb הרחב in hiphil: external circumstance or internal psychological expansion?"
+      },
+      {
+        "word": "בַּצָּר",
+        "reason": "Constriction imagery - need full range of distress/narrow space semantic overlap"
+      },
+      {
+        "word": "בְּנֵי אִישׁ",
+        "reason": "Unusual vocative - why אִישׁ instead of אָדָם? Social class implications vs. general humanity?"
+      },
+      {
+        "word": "כָבוֹד",
+        "reason": "Multivalent term - personal honor, divine glory, or material wealth? Context determines theological claim"
+      },
+      {
+        "word": "כְלִמָּה",
+        "reason": "Shame terminology - honor-shame culture context and transformation from כָבוֹד"
+      },
+      {
+        "word": "רִיק",
+        "reason": "Emptiness/vanity - semantic relationship to Ecclesiastes' הֶבֶל and prophetic critique"
+      },
+      {
+        "word": "כָזָב",
+        "reason": "Fraud/lie/deception - distinguish from שֶׁקֶר, relationship to covenant faithfulness"
+      },
+      {
+        "word": "הִפְלָה",
+        "reason": "Theologically loaded verb - 'set apart,' 'make wonderful,' 'distinguish'? Election theology implications"
+      },
+      {
+        "word": "חָסִיד",
+        "reason": "Identity marker - covenant loyalty vocabulary, individual or corporate election?"
+      },
+      {
+        "word": "רִגְזוּ",
+        "reason": "Crux interpretum - 'tremble,' 'be angry,' 'be agitated'? LXX and Paul's reading affects theology"
+      },
+      {
+        "word": "וְדֹמּוּ",
+        "reason": "Silence imperative - contemplative quiet, remorseful compunction, or cessation from speech?"
+      },
+      {
+        "word": "זִבְחֵי־צֶדֶק",
+        "reason": "Rare compound phrase - moral uprightness, ritual correctness, or metaphorical worship?"
+      },
+      {
+        "word": "מֵעֵת",
+        "reason": "Critical particle determining v.8 theology - temporal, comparative, or causal? Prosperity theology implications"
+      },
+      {
+        "word": "יַחְדָּו",
+        "reason": "Ambiguous adverb - 'together' (with whom?), 'at once,' 'safely'? Communion or simultaneity?"
+      },
+      {
+        "word": "לְבָדָד",
+        "reason": "Theological crux - monotheism, sufficiency, or solitude? Emphatic placement significance"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "אלהי צדקי",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track this unique divine epithet - any other occurrences or similar constructions?"
+      },
+      {
+        "query": "הרחבת לי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Spatial deliverance metaphor - how often does God 'make wide/spacious' for psalmist?"
+      },
+      {
+        "query": "בני איש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Unusual vocative - usage patterns vs. בני אדם to determine social class implications"
+      },
+      {
+        "query": "כבודי לכלמה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Glory-to-shame transformation - honor-shame culture contexts"
+      },
+      {
+        "query": "הפלה יהוה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine 'setting apart' action - election theology vocabulary patterns"
+      },
+      {
+        "query": "חסיד לו",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Identity of חָסִיד - covenant loyalty language in Psalter"
+      },
+      {
+        "query": "רגזו ואל תחטאו",
+        "scope": "Tanakh",
+        "level": "voweled",
+        "purpose": "Exact phrase Paul cites - original context and semantic range of רגז"
+      },
+      {
+        "query": "זבחו זבחי צדק",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Sacrifices of righteousness - prophetic critique contexts and temple worship"
+      },
+      {
+        "query": "מי יראנו טוב",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Communal despair formula - existential questioning of visible blessing"
+      },
+      {
+        "query": "אור פניך",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Priestly blessing allusion - track 'light of face' divine favor imagery"
+      },
+      {
+        "query": "דגנם ותירושם",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Covenant blessing vocabulary - grain and wine prosperity formula"
+      },
+      {
+        "query": "בשלום יחדו",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Peace-together collocation - communion or safety meanings?"
+      },
+      {
+        "query": "יהוה לבדד",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "YHWH alone formula - monotheism, sufficiency, or solitude contexts"
+      },
+      {
+        "query": "לבטח תושיבני",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Security-dwelling collocation - permanent habitation vs. temporary rest"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Spatial metaphor: distress as physical constriction - vivid embodied imagery | Vehicle: constriction | Related terms: narrow, narrowness, tight, tightness, distress, trouble, straits",
+        "vehicle": "constriction",
+        "vehicle_terms": [
+          "constriction",
+          "narrow",
+          "narrowness",
+          "tight",
+          "tightness",
+          "distress",
+          "trouble",
+          "straits"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Spatial metaphor: deliverance as making wide/spacious - expansion imagery | Vehicle: spacious | Related terms: wide, broad, enlarge, enlarged, enlarging, expand, expanded, room",
+        "vehicle": "spacious",
+        "vehicle_terms": [
+          "spacious",
+          "wide",
+          "broad",
+          "enlarge",
+          "enlarged",
+          "enlarging",
+          "expand",
+          "expanded",
+          "room"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Glory-to-shame transformation - honor-shame culture mechanism | Vehicle: glory | Related terms: honor, honors, honored, weight, splendor, majesty",
+        "vehicle": "glory",
+        "vehicle_terms": [
+          "glory",
+          "honor",
+          "honors",
+          "honored",
+          "weight",
+          "splendor",
+          "majesty"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Emptiness as object of love - abstract personification | Vehicle: emptiness | Related terms: empty, vain, vanity, futile, futility, worthless",
+        "vehicle": "emptiness",
+        "vehicle_terms": [
+          "emptiness",
+          "empty",
+          "vain",
+          "vanity",
+          "futile",
+          "futility",
+          "worthless"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Bed as contemplation space - evening liminal imagery | Vehicle: bed | Related terms: beds, couch, couches, lying, lie",
+        "vehicle": "bed",
+        "vehicle_terms": [
+          "bed",
+          "beds",
+          "couch",
+          "couches",
+          "lying",
+          "lie"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Light of face - priestly blessing divine favor metaphor | Vehicle: light | Related terms: shine, shines, shining, shone, brightness, radiance",
+        "vehicle": "light",
+        "vehicle_terms": [
+          "light",
+          "shine",
+          "shines",
+          "shining",
+          "shone",
+          "brightness",
+          "radiance"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Seeing good - experiencing prosperity as visual perception | Vehicle: seeing | Related terms: see, sees, saw, behold, beholds, look, looks",
+        "vehicle": "seeing",
+        "vehicle_terms": [
+          "seeing",
+          "see",
+          "sees",
+          "saw",
+          "behold",
+          "beholds",
+          "look",
+          "looks"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Joy in heart - internal receptacle metaphor for divine gift | Vehicle: heart | Related terms: hearts, inner, innermost, within",
+        "vehicle": "heart",
+        "vehicle_terms": [
+          "heart",
+          "hearts",
+          "inner",
+          "innermost",
+          "within"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Grain and wine - agricultural covenant blessing metonymy | Vehicle: grain | Related terms: grains, corn, wheat, barley, harvest",
+        "vehicle": "grain",
+        "vehicle_terms": [
+          "grain",
+          "grains",
+          "corn",
+          "wheat",
+          "barley",
+          "harvest"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Sleep as trust metaphor - vulnerability as confidence expression | Vehicle: sleep | Related terms: sleeping, sleeps, slept, slumber, slumbers, rest, rests",
+        "vehicle": "sleep",
+        "vehicle_terms": [
+          "sleep",
+          "sleeping",
+          "sleeps",
+          "slept",
+          "slumber",
+          "slumbers",
+          "rest",
+          "rests"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Dwelling in security - permanent habitation vs. temporary refuge | Vehicle: dwell | Related terms: dwelling, dwells, dwelt, inhabit, inhabits, settle, settles",
+        "vehicle": "dwell",
+        "vehicle_terms": [
+          "dwell",
+          "dwelling",
+          "dwells",
+          "dwelt",
+          "inhabit",
+          "inhabits",
+          "settle",
+          "settles"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "4:1",
+        "reason": "Liturgical superscription - how do commentators understand לַמְנַצֵּחַ and בִּנְגִינוֹת technical terms?"
+      },
+      {
+        "verse": "4:2",
+        "reason": "Unique divine epithet אֱלֹהֵי צִדְקִי - traditional interpretation of righteousness/vindication relationship"
+      },
+      {
+        "verse": "4:2",
+        "reason": "Spatial metaphor progression - classical understanding of constriction-to-expansion deliverance"
+      },
+      {
+        "verse": "4:3",
+        "reason": "Dramatic addressee shift to בְּנֵי אִישׁ - who are they and why direct confrontation?"
+      },
+      {
+        "verse": "4:3",
+        "reason": "Glory-to-shame transformation - honor-shame culture and כָבוֹד semantic range"
+      },
+      {
+        "verse": "4:4",
+        "reason": "Election theology in הִפְלָה יְהוָה חָסִיד - individual or corporate identity of the faithful?"
+      },
+      {
+        "verse": "4:4",
+        "reason": "Call-answer inclusio - how commentators connect this verse to opening petition"
+      },
+      {
+        "verse": "4:5",
+        "reason": "Crux interpretum רִגְזוּ - traditional understanding: tremble, be angry, or be agitated?"
+      },
+      {
+        "verse": "4:5",
+        "reason": "Evening contemplation instruction - bed imagery and movement toward silence"
+      },
+      {
+        "verse": "4:6",
+        "reason": "Sacrifices of righteousness - ritual correctness, moral uprightness, or metaphorical worship?"
+      },
+      {
+        "verse": "4:6",
+        "reason": "Trust imperative - relationship between external sacrifice and internal disposition"
+      },
+      {
+        "verse": "4:7",
+        "reason": "Voice shift to 'many' - are they adversaries, community, or both? Legitimacy of their request"
+      },
+      {
+        "verse": "4:7",
+        "reason": "Priestly blessing allusion - how commentators understand appeal to 'light of your face'"
+      },
+      {
+        "verse": "4:8",
+        "reason": "Theological climax - interpretation of מֵעֵת: temporal, comparative, or causal?"
+      },
+      {
+        "verse": "4:8",
+        "reason": "Heart-joy vs. material prosperity - competing paradigms and sufficiency theology"
+      },
+      {
+        "verse": "4:9",
+        "reason": "Evening frame completion - confident sleep as trust demonstration"
+      },
+      {
+        "verse": "4:9",
+        "reason": "YHWH alone (לְבָדָד) - monotheism, sufficiency, or solitude? Theological payoff of psalm"
+      }
+    ],
+    "lexicon_entries_count": 45,
+    "concordance_results": {
+      "אלהי צדקי": 2,
+      "הרחבת לי": 1,
+      "בני איש": 13,
+      "כבודי לכלמה": 1,
+      "הפלה יהוה": 1,
+      "חסיד לו": 15,
+      "רגזו ואל תחטאו": 0,
+      "זבחו זבחי צדק": 3,
+      "מי יראנו טוב": 1,
+      "אור פניך": 4,
+      "דגנם ותירושם": 6,
+      "בשלום יחדו": 1,
+      "יהוה לבדד": 9,
+      "לבטח תושיבני": 1
+    },
+    "figurative_results": {
+      "total_instances_used": 429
+    },
+    "commentary_counts": {
+      "Rashi": 15,
+      "Ibn Ezra": 17,
+      "Radak": 17,
+      "Metzudat David": 17,
+      "Malbim": 9,
+      "Meiri": 17,
+      "Torah Temimah": 2
+    },
+    "sacks_references_count": 0,
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 362864,
+    "research_bundle_tokens": 120954
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the semantic field of כָבוֹד ('glory/honor') in v.3, and how does its transformation to 'shame' (כְלִמָּה) relate to honor/shame culture in ancient Israel? Is this personal reputation, divine glory, or both?",
+      "How does the divine epithet 'God of my righteousness/vindication' (אֱלֹהֵי צִדְקִי) function elsewhere in the Psalter and legal contexts? Does this suggest lawsuit/judicial imagery?",
+      "What is the exact meaning of רִגְזוּ in v.5—'tremble,' 'be angry,' or 'be agitated'? How does this relate to the Septuagint's ὀργίζω ('be angry') and Paul's citation in Ephesians 4:26?",
+      "What are 'sacrifices of righteousness' (זִבְחֵי־צֶדֶק) in v.6? Are these morally upright sacrifices, properly performed rituals, or metaphorical worship in righteousness? Compare with Psalm 51:19 and Deuteronomy 33:19.",
+      "How does the phrase 'the LORD singles out/makes wonderful' (הִפְלָה) the faithful relate to election theology? Is this about individual election or corporate identity of the חָסִיד (faithful/pious one)?",
+      "What is the relationship between the 'light of your face' request (v.7) and the Aaronic blessing (Numbers 6:24-26)? Is the psalmist critiquing or affirming this petition?",
+      "In v.8, the temporal clause 'when their grain and wine increase' (מֵעֵת דְּגָנָם וְתִירוֹשָׁם רָבּוּ)—is this contrast, concession, or temporal coincidence? Does the psalmist have material goods or not?",
+      "What does בְּשָׁלוֹם יַחְדָּו ('in peace together') mean in v.9? Together with whom—God, community, or is יַחְדָּו an adverb meaning 'at once/safely'?",
+      "How does the emphatic לְבָדָד ('alone') in v.9 function theologically—is this monotheistic confession (YHWH alone, not other gods), sufficiency (YHWH alone, not YHWH plus prosperity), or isolation (the psalmist alone with God)?",
+      "What is the function of the bed/sleep imagery in vv.5 and 9? Is this literal evening prayer, metaphorical rest from anxiety, or both? How does this relate to other sleep passages (Psalm 3:5, 127:2)?",
+      "How do the illusions/frauds (רִיק/כָזָב) that adversaries love in v.3 relate to idolatry language elsewhere? Are these false gods, false securities, or false accusations against the psalmist?"
+    ],
+    "micro_questions": [
+      "Why does the psalmist use the unique epithet 'God of my righteousness/vindication' (אֱלֹהֵי צִדְקִי) in v.2 - is this forensic/legal language suggesting a lawsuit context where God vindicates the psalmist's claim?",
+      "What is the semantic range and function of כָבוֹד (glory/honor) in v.3 - personal reputation in honor-shame culture, divine glory reflected in the psalmist, or material wealth? How does its transformation to כְלִמָּה (shame) work?",
+      "What does רִגְזוּ mean in v.5 - 'tremble' (in fear of God), 'be angry' (LXX and Paul's reading), or 'be agitated'? How does this choice affect the instruction's meaning - is anger legitimate if it doesn't lead to sin?",
+      "What are 'sacrifices of righteousness' (זִבְחֵי־צֶדֶק) in v.6 - morally upright sacrifices, properly performed rituals according to Torah, or metaphorical worship? How does this relate to prophetic critique of empty ritual?",
+      "How should מֵעֵת in v.8 be interpreted - comparative ('more than when their grain...'), temporal ('at the time when their grain...'), or causal ('because their grain...')? This determines whether the psalmist lacks prosperity or transcends it",
+      "Who are 'the many' (רַבִּים) in v.7 - are they the same as the 'sons of men' adversaries from v.3, or the broader community including sympathetic voices? Is their prayer for divine blessing legitimate or misguided?",
+      "What does the verb הִפְלָה mean in v.4 - 'set apart,' 'make wonderful/marvelous,' 'distinguish,' or 'show favor'? Is this about individual election or corporate identity of the חָסִיד (faithful/pious)?",
+      "How does יַחְדָּו function in v.9 - 'together' (with God, implying intimate communion), 'together' (with community), 'at once' (both lie down and sleep simultaneously), or 'safely/altogether'?",
+      "What is the theological force of לְבָדָד ('alone') in v.9 - monotheistic confession (YHWH alone not other gods), sufficiency claim (YHWH alone not YHWH plus prosperity), or isolation (psalmist alone with God in solitude)?",
+      "Why does the psalm address adversaries directly (vv.3-6) rather than complaining about them to God - what rhetorical or liturgical function does this confrontational instruction serve?",
+      "How does the priestly blessing allusion in v.7 ('lift up the light of your face') function - is the psalmist affirming this request but redefining fulfillment, or critiquing conventional piety that seeks visible signs?",
+      "What is the relationship between the evening setting (bed, sleep, lie down) and the psalm's theological argument about competing securities - why is nighttime the appropriate frame for this teaching?"
+    ],
+    "verse_count": 9
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5"
+  }
+}
