@@ -130,8 +130,8 @@ class RelatedPsalmsLibrarian:
         # Sort by score (highest first)
         related.sort(key=lambda x: x.final_score, reverse=True)
 
-        # Limit to top 8 most related psalms
-        return related[:8]
+        # Limit to top 5 most related psalms
+        return related[:5]
 
     def format_for_research_bundle(
         self,
@@ -215,6 +215,9 @@ class RelatedPsalmsLibrarian:
     def _format_single_match(self, analyzing_psalm: int, match: RelatedPsalmMatch) -> str:
         """Format a single related psalm match."""
         md = f"### Psalm {match.psalm_number} (Connection Score: {match.final_score:.2f})\n\n"
+
+        # Filter roots early so we can check if we have any displayable content
+        filtered_roots = [r for r in match.shared_roots if r.get('idf', 0) >= 1]
 
         # Add the introductory text
         md += f"The librarian has found that the psalm you're analyzing (Psalm {analyzing_psalm}) "
@@ -320,11 +323,12 @@ class RelatedPsalmsLibrarian:
                 md += "\n"
 
         # Shared roots THIRD (sorted by IDF descending - best matches first)
-        if match.shared_roots:
+        if filtered_roots:
             # Sort by IDF descending
-            sorted_roots = sorted(match.shared_roots, key=lambda r: r.get('idf', 0), reverse=True)
+            sorted_roots = sorted(filtered_roots, key=lambda r: r.get('idf', 0), reverse=True)
 
             md += f"**Shared Roots** ({len(sorted_roots)} found, sorted by relevance):\n\n"
+
             for root in sorted_roots:
                 md += f"- Root: `{root.get('root', 'N/A')}`\n"
 
@@ -353,7 +357,7 @@ class RelatedPsalmsLibrarian:
                 md += "\n"
 
         # If no patterns found at all (shouldn't happen, but just in case)
-        if not match.shared_roots and not match.contiguous_phrases and not match.skipgrams:
+        if not filtered_roots and not match.contiguous_phrases and not match.skipgrams:
             md += "*No specific patterns documented, but overall connection score suggests potential relationship.*\n\n"
 
         md += "---\n\n"

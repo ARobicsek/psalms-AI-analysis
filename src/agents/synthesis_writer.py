@@ -97,7 +97,8 @@ Write a scholarly introduction essay that:
    - Cite parallel biblical texts where similar language/imagery appears
    - Reference ANE parallels (Ugaritic, Akkadian, Egyptian texts) when relevant
    - Show how this psalm's language echoes or innovates or is in conversation with other texts
-   - Example: "The 'voice of YHWH' formula also appears in Psalm 18..."
+   - Example: "The term 'לְבָדָד' carries echoes of Deuteronomy 33:28 "וַיִּשְׁכֹּן֩ יִשְׂרָאֵ֨ל בֶּ֤טַח בָּדָד֙...אֶ֖רֶץ דָּגָ֣ן וְתִיר֑וֹשׁ" - ("Israel dwells secure, alone… in a land of grain and wine") "
+   - Carefully review the 'Related Psalms Analysis' section of the research bundle for interesting/informative parallels with other psalms, and incorporate these insights when relevant.
 
 6. **Reflects on liturgical context and reception**
    - The research bundle includes detailed information about where and how this psalm (or specific phrases from it) appears in Jewish liturgy
@@ -324,6 +325,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - Development of theological concepts across Scripture
    - Formulaic language and its variations
    - Quotation and allusion to other biblical texts
+   - insights from the 'Related Psalms Analysis' section, if there are convinding and informative parallels between this psalm and another
 
 9. **Figurative Language**
    - How vehicles (metaphors, similes) function in this verse

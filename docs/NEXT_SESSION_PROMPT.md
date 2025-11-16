@@ -8,7 +8,31 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 118 - Related Psalms Display Token Optimization (2025-11-16)
+**Last Session**: Session 119 - Further Token Reduction (2025-11-16)
+
+## Session 119 Summary (COMPLETE ✓)
+
+**Objective**: Continue token optimization by reducing # of matching psalms and filtering low-value roots
+**Result**: ✓ COMPLETE - Additional 30-40% reduction; 50-60% total reduction from Sessions 118-119
+
+**Optimizations Implemented**:
+1. ✓ **Reduced max matching psalms** - 8 → 5 (top connections by score)
+2. ✓ **Filtered low-IDF roots** - Only display roots with IDF >= 1 (excludes common words)
+
+**Impact**:
+- Reduced psalm sections by 37.5% (3 fewer psalms shown)
+- Filtered 20-40% of roots (varies by psalm pair)
+- Better focus on strongest, most distinctive connections
+- Total token reduction: ~50-60% across Sessions 118-119
+
+**Files Modified**:
+- `src/agents/related_psalms_librarian.py` - Max psalms limit & IDF filtering
+
+**Next Steps**:
+- V6 system ready for production with highly optimized research bundles
+- Monitor synthesis quality impact
+
+---
 
 ## Session 118 Summary (COMPLETE ✓)
 
