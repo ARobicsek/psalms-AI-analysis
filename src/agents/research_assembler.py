@@ -46,6 +46,7 @@ else:
     from .sacks_librarian import SacksLibrarian, SacksReference
     from .hirsch_librarian import HirschLibrarian, HirschCommentary
     from .rag_manager import RAGManager, RAGContext
+    from .related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
 
 
 @dataclass
@@ -107,6 +108,8 @@ class ResearchBundle:
     hirsch_commentaries: Optional[List[HirschCommentary]]  # R. Samson Raphael Hirsch German commentary
     hirsch_markdown: Optional[str]  # Pre-formatted Hirsch markdown for LLM consumption
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
+    related_psalms: Optional[List[RelatedPsalmMatch]]  # Related psalms from top connections analysis
+    related_psalms_markdown: Optional[str]  # Pre-formatted related psalms markdown for LLM consumption
     request: ResearchRequest
 
     def to_dict(self) -> Dict[str, Any]:
@@ -119,6 +122,7 @@ class ResearchBundle:
             'commentary': [c.to_dict() for c in self.commentary_bundles] if self.commentary_bundles else [],
             'sacks_references': [s.to_dict() for s in self.sacks_references] if self.sacks_references else [],
             'hirsch_commentaries': [h.to_dict() for h in self.hirsch_commentaries] if self.hirsch_commentaries else [],
+            'related_psalms': [r.to_dict() for r in self.related_psalms] if self.related_psalms else [],
             'summary': {
                 'lexicon_entries': len(self.lexicon_bundle.entries) if self.lexicon_bundle else 0,
                 'concordance_searches': len(self.concordance_bundles),
@@ -131,7 +135,8 @@ class ResearchBundle:
                 'liturgical_prayers_aggregated': len(self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
                 'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
                 'sacks_references': len(self.sacks_references) if self.sacks_references else 0,
-                'hirsch_commentaries': len(self.hirsch_commentaries) if self.hirsch_commentaries else 0
+                'hirsch_commentaries': len(self.hirsch_commentaries) if self.hirsch_commentaries else 0,
+                'related_psalms': len(self.related_psalms) if self.related_psalms else 0
             }
         }
 
@@ -375,6 +380,11 @@ class ResearchBundle:
             md += self.hirsch_markdown
             md += "\n---\n\n"
 
+        # Related Psalms section
+        if self.related_psalms_markdown:
+            md += self.related_psalms_markdown
+            md += "\n---\n\n"
+
         # Summary
         summary = self.to_dict()['summary']
         md += "## Research Summary\n\n"
@@ -388,6 +398,7 @@ class ResearchBundle:
         md += f"- **Liturgical prayers (aggregated)**: {summary['liturgical_prayers_aggregated']}\n"
         md += f"- **Rabbi Sacks references**: {summary['sacks_references']}\n"
         md += f"- **Liturgical total occurrences**: {summary['liturgical_total_occurrences']}\n"
+        md += f"- **Related psalms analyzed**: {summary['related_psalms']}\n"
 
         return md
 
@@ -440,6 +451,7 @@ class ResearchAssembler:
         self.sacks_librarian = SacksLibrarian()  # Rabbi Jonathan Sacks references
         self.hirsch_librarian = HirschLibrarian()  # R. Samson Raphael Hirsch German commentary
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
+        self.related_psalms_librarian = RelatedPsalmsLibrarian()  # Related psalms from top connections
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
         """
@@ -526,6 +538,15 @@ class ResearchAssembler:
         # Fetch RAG context (Phase 2d: Always included for psalm-level research)
         rag_context = self.rag_manager.get_rag_context(request.psalm_chapter)
 
+        # Fetch related psalms from top connections analysis (ALWAYS included)
+        related_psalms = self.related_psalms_librarian.get_related_psalms(request.psalm_chapter)
+        related_psalms_markdown = None
+        if related_psalms:
+            related_psalms_markdown = self.related_psalms_librarian.format_for_research_bundle(
+                request.psalm_chapter,
+                related_psalms
+            )
+
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,
             lexicon_bundle=lexicon_bundle,
@@ -540,6 +561,8 @@ class ResearchAssembler:
             hirsch_commentaries=hirsch_commentaries if hirsch_commentaries else None,
             hirsch_markdown=hirsch_markdown if hirsch_markdown else None,
             rag_context=rag_context,
+            related_psalms=related_psalms if related_psalms else None,
+            related_psalms_markdown=related_psalms_markdown if related_psalms_markdown else None,
             request=request
         )
 
