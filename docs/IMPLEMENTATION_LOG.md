@@ -1,5 +1,177 @@
 # Implementation Log
 
+## Session 112 - 2025-11-16 (V5 Quality Issues Investigation - IN PROGRESS)
+
+### Overview
+**Objective**: Investigate and document matching system issues identified by user
+**Result**: 6 critical issues identified requiring fixes
+**Status**: Analysis complete, fixes pending
+
+### Issues Investigated
+
+#### Issue 1: False Match - "ראה עני" ✓ IDENTIFIED
+**Problem**: Pattern matching semantically unrelated words
+- Psalm 25:18 "רְאֵ֣ה עׇ֭נְיִי" (See my affliction)
+- Psalm 69:33 "רָא֣וּ עֲנָוִ֣ים" (The humble have seen)
+
+**Root Cause**: ETCBC morphology cache error
+- "עָנְיִי" (my affliction) → "עני" ✓ Correct
+- "עֲנָוִים" (humble ones) → "עני" ✗ Wrong (should be "ענו")
+- Cache entry: `"ענוים": "עני"` is incorrect
+
+**Impact**: Creates false matches between unrelated concepts (affliction vs. humility)
+
+**Location**: `src/hebrew_analysis/data/psalms_morphology_cache.json`
+
+**Fix Required**:
+- Rebuild ETCBC cache with correct disambiguation for "ענוים"
+- Or mark as known homograph requiring manual review
+- Consider adding homograph detection to root extractor
+
+---
+
+#### Issue 2: Root Extraction Error - "רבב נא" ✓ IDENTIFIED
+**Problem**: Nonsensical pattern "רבב נא" appearing in results
+- "רָבּוּ" (they are many) → "רבב" ✓ Correct
+- "וְשִׂנְאַת" (and hatred of) → "נא" ✗ Wrong (should be "שׂנא")
+
+**Root Cause**: Fallback extractor error when word not in cache
+- Word "ושנאת" not in ETCBC cache (no שׂנא words in cache)
+- Fallback incorrectly strips "ש" as prefix (thinking it's שֶׁ)
+- Takes remaining "נא" as root (completely wrong)
+- Should identify "שׂ" as part of root "שׂנא" (hate)
+
+**Impact**: Creates meaningless patterns, pollutes matching results
+
+**Location**: `src/hebrew_analysis/morphology.py` - fallback root extraction
+
+**Fix Required**:
+- Improve fallback extraction to not over-strip prefixes
+- Add "hate" word family to ETCBC cache rebuild
+- Consider minimum root length checks (שׂנא is valid, נא alone is suspicious)
+
+---
+
+#### Issue 3: Non-Content Word Filtering - "כי את" ✓ IDENTIFIED BUT NOT FIXED
+**Problem**: Pattern "כי את" (function words) appearing 34 times in V5 top 550 despite being in stoplist
+
+**Analysis**:
+- Word classifier correctly identifies 0 content words ✓
+- Stoplist contains "כי את" in both skipgram and contiguous lists ✓
+- But pattern still appears in V5 results ✗
+
+**Root Cause**: V5 database empty - quality filtering not applied
+- Database: `data/psalm_relationships.db` is 0 bytes (empty!)
+- V5 JSON files exist (generated 2025-11-16 02:01)
+- Database file created but not populated (2025-11-16 02:04)
+- V5 scorer loaded data from V4 JSON, not from filtered database
+
+**Impact**: ~7-8% of patterns that should be filtered are still present
+
+**Files Affected**:
+- `data/psalm_relationships.db` - Empty
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - Based on unfiltered data
+
+**Fix Required**:
+- Run V5 migration script to populate database with quality-filtered skipgrams
+- Regenerate V5 scores from populated database
+- Verify stoplist filtering is actually applied during extraction
+
+---
+
+#### Issue 4-5: Empty `matches_from_a/b` Arrays ✓ IDENTIFIED
+**Problem**: Contiguous phrases and roots have empty match arrays despite correct counts
+
+Example from Psalm 14-53:
+```json
+{
+  "consonantal": "אין עש טוב",
+  "count_a": 2,
+  "count_b": 2,
+  "matches_from_a": [],  // Should have 2 entries!
+  "matches_from_b": []   // Should have 2 entries!
+}
+```
+
+**Root Cause**: Function mismatch in scorer
+- V4 data correctly has `matches_from_a` and `matches_from_b` populated ✓
+- V5 scorer calls `enhance_contiguous_phrases_with_verse_info()` on V4 data
+- Function looks for fields `verses_a` and `verses_b` (don't exist in V4)
+- Gets empty arrays: `phrase.get('verses_a', [])` returns `[]`
+- Creates new empty `matches_from_a/b`, overwriting correct V4 data ✗
+
+**Location**: `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py:343-383`
+```python
+def enhance_contiguous_phrases_with_verse_info(phrases: List[Dict]):
+    verses_a = phrase.get('verses_a', [])  # V4 doesn't have this field!
+    verses_b = phrase.get('verses_b', [])  # Returns empty []
+    # Creates empty matches_from_a/b from empty verses lists
+```
+
+**Impact**: Loss of verse-level match information in V5 output
+
+**Fix Required**:
+- Option 1: Extract verses from existing `matches_from_a/b` arrays
+- Option 2: Don't call enhancement function - V4 data already correct format
+- Option 3: Fix function to handle both formats (verses_a/b OR matches_from_a/b)
+
+---
+
+#### Issue 6: IDF Scoring for Phrases ✓ CONFIRMED NOT IMPLEMENTED
+**Question**: Have we assigned IDF weights to phrases for scoring?
+
+**Answer**: NO - Only roots use IDF scoring
+
+**Current Scoring**:
+- **Roots**: IDF-weighted (lines 661-667) ✓
+  - High IDF (≥4.0) gets 2x weight
+  - Low IDF gets 1x weight
+  - Filtered if IDF < 0.5 threshold
+
+- **Contiguous Phrases**: Fixed point values (NO IDF)
+  - 2-word = 1 point
+  - 3-word = 2 points
+  - 4+ word = 3 points
+
+- **Skipgrams**: Fixed points + modifiers (NO IDF)
+  - Same base points as contiguous
+  - Gap penalty: -10% per gap word (max -50%)
+  - Content word bonus: +25% for 2 words, +50% for 3+ words
+
+**Location**: `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py:654-658`
+
+**Potential Enhancement**:
+- Calculate IDF for multi-word patterns (not just roots)
+- Weight common phrases lower (e.g., "יהוה אלהים" is very common)
+- Weight rare phrases higher (e.g., unique theological expressions)
+- Would require corpus-wide phrase frequency analysis
+
+### Summary of Required Fixes
+
+**Critical (Correctness)**:
+1. ✗ Regenerate V5 database with quality filtering actually applied
+2. ✗ Fix empty matches_from_a/b in V5 output (data loss bug)
+3. ✗ Fix root extraction for "ושנאת" → should be "שׂנא" not "נא"
+
+**Important (Quality)**:
+4. ✗ Fix ETCBC cache entry for "ענוים" → should be "ענו" not "עני"
+5. ⚠ Consider implementing IDF scoring for phrases (enhancement)
+
+**Status**: Analysis complete, awaiting decision on which fixes to implement
+
+### Files That Need Changes
+
+**Immediate Fixes**:
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Fix empty matches bug
+- `src/hebrew_analysis/data/psalms_morphology_cache.json` - Fix "ענוים" entry
+- `data/psalm_relationships.db` - Regenerate with quality filtering
+
+**Future Enhancements**:
+- `src/hebrew_analysis/morphology.py` - Improve fallback root extraction
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Add phrase IDF scoring
+
+---
+
 
 ## Session 111 - 2025-11-16 (Skipgram Quality Improvement Implementation - V5 - COMPLETE ✓)
 

@@ -6,9 +6,45 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V5 Quality Filtering - Production Complete ✓
-**Version**: V5 with content word filtering, pattern stoplist, and content word bonus
-**Last Session**: Session 111 - Skipgram Quality Improvement Implementation (2025-11-16)
+**Phase**: V5 Quality Issues - Investigation Complete, Fixes Needed
+**Version**: V5 has critical bugs - Database empty, matches missing, filtering not applied
+**Last Session**: Session 112 - V5 Quality Issues Investigation (2025-11-16)
+
+## Session 112 Summary (IN PROGRESS)
+
+**Objective**: Investigate matching system issues identified by user
+
+**Completed**:
+- ✓ Issue #1: False match "ראה עני" - ETCBC cache has wrong root for "ענוים"
+- ✓ Issue #2: Root extraction error "רבב נא" - fallback extractor over-strips prefixes
+- ✓ Issue #3: "כי את" in results despite stoplist - V5 database empty, filtering not applied
+- ✓ Issue #4-5: Empty matches_from_a/b - Function looks for wrong field names
+- ✓ Issue #6: IDF for phrases - Confirmed NOT implemented (only roots use IDF)
+- ✓ Documentation updated
+
+**Critical Bugs Found**:
+1. **V5 Database Empty** (0 bytes) - Quality filtering never applied
+2. **Empty Match Arrays** - Data loss in V5, matches_from_a/b all empty
+3. **Root Extraction Errors** - "ושנאת" → "נא" (should be "שׂנא")
+4. **ETCBC Cache Errors** - "ענוים" → "עני" (should be "ענו")
+5. **Stoplist Not Applied** - "כי את" appears 34x in V5 top 550
+
+**Required Fixes**:
+1. Fix empty matches bug in enhanced_scorer (verses_a/b vs matches_from_a/b mismatch)
+2. Regenerate V5 database with quality filtering actually applied
+3. Fix ETCBC cache entry for "ענוים"
+4. Improve fallback root extraction to avoid over-stripping
+5. (Optional) Implement IDF weighting for phrases
+
+**Files Modified**:
+- `docs/IMPLEMENTATION_LOG.md` - Session 112 entry with detailed bug analysis
+- `docs/PROJECT_STATUS.md` - Updated current status
+- `docs/NEXT_SESSION_PROMPT.md` - This file
+
+**Next Steps**:
+- Decide which fixes to implement (user input needed)
+- Fix critical bugs first (empty matches, database regeneration)
+- Consider quality improvements (cache fixes, IDF for phrases)
 
 ## Session 111 Summary (COMPLETE ✓)
 
