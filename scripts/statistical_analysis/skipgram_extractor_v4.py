@@ -295,6 +295,12 @@ class SkipgramExtractorV4:
                     # For words with gaps, this is the span minus the matched words
                     gap_word_count = (last_idx - first_idx + 1) - n
 
+                    # Skip patterns with gap_word_count=0 - these are contiguous phrases
+                    # By definition, skipgrams must have at least one word gap between matched words
+                    # Contiguous patterns should be extracted by the contiguous phrase extractor
+                    if gap_word_count == 0:
+                        continue
+
                     # V5: Check quality filters before adding
                     should_keep, reason = self._should_keep_pattern(pattern_roots, gap_word_count)
 
