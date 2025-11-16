@@ -24,9 +24,11 @@ if __name__ == '__main__' and __package__ is None:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
+    from src.data_sources.sefaria_client import strip_sefaria_footnotes
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
+    from ..data_sources.sefaria_client import strip_sefaria_footnotes
 
 
 def add_page_number(paragraph):
@@ -517,15 +519,17 @@ class DocumentGenerator:
         for verse_num in sorted(psalm_text_data.keys()):
             hebrew = psalm_text_data[verse_num].get('hebrew', '')
             english = psalm_text_data[verse_num].get('english', '')
+            # Strip any footnote markers from the English text
+            english = strip_sefaria_footnotes(english)
             modified_hebrew = self.modifier.modify_text(hebrew)
-            
+
             row_cells = table.add_row().cells
-            
+
             # Hebrew cell (left, but text is RTL)
             p_heb = row_cells[0].paragraphs[0]
             p_heb.add_run(f"{verse_num}. ").bold = True
             p_heb.add_run(modified_hebrew).font.rtl = True
-            
+
             # English cell (right)
             p_eng = row_cells[1].paragraphs[0]
             run_eng = p_eng.add_run(english)
@@ -554,6 +558,7 @@ class DocumentGenerator:
         figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
 
         sacks_count = research_data.get('sacks_references_count', 0)
+        related_psalms_count = research_data.get('related_psalms_count', 0)
 
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
@@ -578,6 +583,7 @@ Methodological & Bibliographical Summary
 **Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}
 **Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
+**Number of Similar Psalms Analyzed**: {related_psalms_count if related_psalms_count > 0 else 'N/A'}
 **Master Editor Prompt Size**: {prompt_chars_str}
 
 {models_used_str}

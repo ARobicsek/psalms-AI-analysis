@@ -6,9 +6,47 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V4.2 Root Extraction & Gap Penalty - COMPLETE ✓
-**Version**: V4.2 with ETCBC morphology cache and gap penalty
-**Last Session**: Session 106 - Ranking Analysis & Top 550 Generation (2025-11-14)
+**Phase**: V4.2 with Related Psalms Integration - Production Configuration ✓
+**Version**: V4.2 with Top 550 related psalms, enhanced limits, bug fixes
+**Last Session**: Session 109 - Bug Fixes & Configuration Updates (2025-11-15)
+
+## Session 109 Summary (COMPLETE ✓)
+
+**Completed**:
+- ✓ Fixed footnote markers in DOCX English translation
+- ✓ Increased synthesis editor character limit to 700,000
+- ✓ Limited related psalms to top 8 (sorted by final_score)
+- ✓ Analyzed skipgram quality (~35-40% meaningful, ~45-50% trivial)
+- ✓ Updated all session documentation
+
+**Key Changes**:
+- DOCX now strips footnote markers from English text (`document_generator.py`)
+- Research bundles can now include up to 700K characters (~350K tokens)
+- Related psalms limited to 8 strongest connections for manageability
+- Skipgram quality assessed; current system acceptable but could be improved
+
+## Session 108 Summary (COMPLETE ✓)
+
+**Completed**:
+- ✓ Fixed shared roots loading (was hardcoded to empty array)
+- ✓ Added shared roots display section to markdown output
+- ✓ Fixed root field names ('root' and 'idf' vs incorrect names)
+- ✓ Fixed "No patterns" message to check all three pattern types
+- ✓ Changed to Hebrew-only full text (~30% token reduction)
+- ✓ Tested with Psalm 4→77 (11 roots now display correctly)
+- ✓ Updated all session documentation
+
+**Key Fix**: Psalm 77 connection to Psalm 4 (score 216.62, 11 shared roots) now displays all root patterns correctly instead of showing "No specific patterns documented"
+
+## Session 107 Summary (COMPLETE ✓)
+
+**Completed**:
+- ✓ Created Related Psalms Librarian module
+- ✓ Integrated related psalms into ResearchBundle
+- ✓ Updated pipeline stats tracking
+- ✓ Modified DOCX generator to show similar psalms count
+- ✓ Tested with Psalm 25 (found 10 related psalms including Ps 34)
+- ✓ Updated all session documentation
 
 ## Session 106 Summary (COMPLETE ✓)
 

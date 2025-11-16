@@ -661,7 +661,7 @@ class SynthesisWriter:
                         f"Instances: {total_original_instances} → {total_kept_instances}.")
         return result
 
-    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 250000) -> str:
+    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 700000) -> str:
         """
         Intelligently trim research bundle to fit within token limits.
 
@@ -781,10 +781,10 @@ class SynthesisWriter:
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
-        # Trim research bundle if needed to fit within 200K token limit
-        # Target: ~330K chars max (~165K tokens with 2:1 ratio)
-        # Conservative: 90% of theoretical max (340k) to leave safety margin
-        research_text = self._trim_research_bundle(research_bundle, max_chars=330000)
+        # Trim research bundle if needed to fit within token limits
+        # Target: ~700K chars max (~350K tokens with 2:1 ratio)
+        # Increased limit for comprehensive research inclusion
+        research_text = self._trim_research_bundle(research_bundle, max_chars=700000)
 
         # Build prompt
         prompt = INTRODUCTION_ESSAY_PROMPT.format(
@@ -875,10 +875,9 @@ class SynthesisWriter:
         phonetic_section = format_phonetic_section(micro_analysis)
 
         # Trim research bundle if needed - verse commentary includes introduction essay
-        # so needs more aggressive trimming than intro generation
-        # Target: ~320K chars max (~160K tokens)
-        # Conservative: 90% of theoretical max (334k) to leave safety margin for intro essay
-        research_text = self._trim_research_bundle(research_bundle, max_chars=320000)
+        # Target: ~700K chars max (~350K tokens)
+        # Increased limit for comprehensive research inclusion
+        research_text = self._trim_research_bundle(research_bundle, max_chars=700000)
 
         # Build prompt
         prompt = VERSE_COMMENTARY_PROMPT.format(
