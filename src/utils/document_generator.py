@@ -559,6 +559,16 @@ class DocumentGenerator:
 
         sacks_count = research_data.get('sacks_references_count', 0)
         related_psalms_count = research_data.get('related_psalms_count', 0)
+        related_psalms_list = research_data.get('related_psalms_list', [])
+
+        # Format related psalms display: count and list
+        if related_psalms_count > 0 and related_psalms_list:
+            psalms_list_str = ', '.join(str(p) for p in related_psalms_list)
+            related_psalms_str = f"{related_psalms_count} (Psalms {psalms_list_str})"
+        elif related_psalms_count > 0:
+            related_psalms_str = str(related_psalms_count)
+        else:
+            related_psalms_str = 'N/A'
 
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
@@ -583,7 +593,7 @@ Methodological & Bibliographical Summary
 **Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}
 **Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
-**Number of Similar Psalms Analyzed**: {related_psalms_count if related_psalms_count > 0 else 'N/A'}
+**Similar Psalms Analyzed**: {related_psalms_str}
 **Master Editor Prompt Size**: {prompt_chars_str}
 
 {models_used_str}

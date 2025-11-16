@@ -1,8 +1,30 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-15 (Session 109 - COMPLETE)
+**Last Updated**: 2025-11-15 (Session 110 - COMPLETE)
 **Current Phase**: V4.2 with Related Psalms Integration - Production Configuration ✓
 **Status**: All bug fixes applied; system configured for production psalm generation
+
+## Session 110 Summary (COMPLETE ✓)
+
+### DOCX Output Bug Fixes
+
+**Completed**:
+1. **Fixed Liturgical Section Header Replacement** ✅
+   - Issue: Marker "—LITURGICAL-SECTION-START—" not being replaced with proper header
+   - Root Cause: LLM using em-dashes (`—`) instead of regular hyphens (`---`)
+   - Fix: Updated replacement logic to handle multiple marker variants
+   - File: `src/agents/master_editor.py`
+
+2. **Fixed Related Psalms Display** ✅
+   - Issue 1: Count showing "N/A" in DOCX
+   - Issue 2: Only count shown, not which psalms analyzed
+   - Fix: Track psalm list, save to JSON, display as "8 (Psalms 77, 25, 34...)"
+   - Files: `src/utils/pipeline_summary.py`, `src/utils/document_generator.py`
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Liturgical marker variants
+- `src/utils/pipeline_summary.py` - Related psalms list tracking
+- `src/utils/document_generator.py` - Related psalms display format
 
 ## Session 109 Summary (COMPLETE ✓)
 

@@ -1,0 +1,1360 @@
+# Research Bundle for Psalm 117
+
+## Hebrew Lexicon Entries (BDB)
+
+### שַׁבְּחוּהוּ
+**Lexicon**: BDB Dictionary
+**Vocalized**: שָׁבַח  
+
+vb. Pi. soothe, still (Arabic سَبَخَ be free from care, etc., JenZA i (1886), 188; iv (1889), 268, cp. Assyrian pašâḫu, grow calm, so BaES 9 SchulthLex.);— Impf. 3 ms. sf. יְשַׁבְּחֶ֑נָּה Pr 29:11 he stilleth it, i.e. רוּחוֹ his temper (Bi Toy read חָשַׁךְ אַפּוֹ); 2 ms. sf. תְּשַׁבְּחֵם ψ 89:10 thou stillest them, i.e. waves (‖ גֵּאוּת הַיָּם). Pt. prob. Mass error for Pi. מְשַׁבֵּחַ) מַשְׁבִּיחַ שְׁאוֹן יַמּים ψ 65:8 stilling the roar of the seas.
+
+---
+
+### שַׁבְּחוּהוּ
+**Lexicon**: BDB Dictionary
+**Vocalized**: שָׁבַח²  
+
+vb. laud, praise (late Aramaism, cf. Aramaic (incl. Old Aramaic) שׁבח, ܫܒܚ, Pa. praise; v. SchwallyIdiot. 91 SchulthLex.);— laud, praise God (י׳): Impf. 3 mpl. sf. יְשַׁבְּח֑וּנְךָ ψ 63:4 (‖ בֵּרַךְ); Imv. fs. שַׁבְּחִי 147:12, mpl. sf. שַׁבְּח֫וּהוּ 117:1 (both ‖ הִלֵּל); his works, Impf. 3 ms. יְשַׁבַּח 145:4 (‖ הִגִּיד). commend, congratulate, the dead, Inf. abs. שַׁבֵּחַ Ec 4:2 (Ges§ 113 gg; c. מִן comp.); mirth, as best thing, Pf. 1 s. שִׁבַּחְתִּי Ec 8:15. boast of (בְּ): Inf. cstr. הִשְׁתַּבֵּחַ ψ 106:47 = 1 Ch 16:35, 𝔊 (ἐλ)καυχᾶσθαι ἐν.
+
+---
+
+### גָבַר
+**Lexicon**: BDB Dictionary
+**Vocalized**: גָּבַר  
+
+vb. be strong, mighty (NH id., Aramaic גְּבַר; Arabic جَبَرَ (conj. I. dial.; usually in derived conj.) compel, force; جَبَرِيَّةٌ overbearing behaviour, جَبْرٌ constraint; Ethiopic ገብረ I, 1, subigere; II, 2, cogere; Syriac ܐܶܬܓܰܒܰܪ play the man, is denom. from ܓܒܰܪ man)— Pf. ג׳ ψ 103:11 + 5 times; גָּבְֽרוּ Gn 7:19 + 6 times; גָּבֵ֑רוּ 2 S 1:23; Impf. יִגְבַּר 1 S 2:9; וַיִּגְבְּרוּ Gn 7:18, 24;— be strong, mighty, abs. גָּבְֽרוּ חַיִל mighty in power Jb 21:7; with מִן stronger than 2 S 1:23 ψ 65:4; with בְּ mighty among 1 Ch 5:2. prevail:— abs. e.g. enemies Ex 17:11(×2) (E) 1 S 2:9 La 1:16, waters Gn 7:18, 19, 20, 24 (P), power Je 9:2; with עַל prevail over, subj. enemies 2 S 11:23, blessings Gn 49:26 (J), mercy of God ψ 103:11; 117:2. Pf. גִּבַּרְתִּי Zc 10:6; sf. גִּבַּרְתִּים Zc 10:12; Impf. יְגַבֵּר Ec 10:10 make strong, strengthen. Pf. הִגְבִּיר בְּרִית לְ confirm a covenant Dn 9:27; Impf. נַגְבִּיר לִלְשֹׁנֵנוּ we will confirm a covenant with our tongue Ew Ol Che (or, to our tongue will we give strength Hi De) ψ 12:5. Impf. יִתְגַּבָּ֑ר Jb 15:25 Is 42:13; יִתְגַּבָּ֑רוּ Jb 36:9:—of י׳, shew himself a mighty one against (עַל) Is 42:13; of wicked, behave proudly toward (אֶל) Jb 15:25; of erring righteous (abs.) 36:9.
+
+---
+
+### אֻמִּים
+**Lexicon**: BDB Dictionary
+**Vocalized**: לְאֹם  
+
+n.m. Gn 25:23 people, poet. and chiefly late;—ל׳ abs. Gn 25:23(×2) Pr 14:28, לְאוֹם Pr 11:26; sf. לְאוּמִּו Is 51:4; pl. לְאֻמִּים Gn 25:23 + 28 times; לְאוּמִּים Is 55:4;—people, both of Isr. and of Edom, Gn 25:23(×3) (J; Jacob and Esau; ‖ גּוֹי); elsewhere of Isr. only Is 51:4 (sg. ‖ עַם); usually pl. of other peoples:—שְׁאוֹן ל׳ Is 17:12 (‖ הֲמוֹן עמים), cf. v 13; ‖ גּוֹיִם Is 34:1; 43:9; ψ 2:1; 44:3, 15; 105:44; 149:7, cf. Is 55:4(×2) (גּוֹי in v 5); ‖ עַמִּים Gn 27:29 (J), Hb 2:13 Je 51:58 ψ 47:4; 57:10; 67:5(×2); 108:4; Pr 24:24; further Is 41:1; 49:1 (both ‖ אִיִּים), 43:4 (‖ אָדָם), 60:2 (‖ אֶרֶץ), ψ 9:9 (‖ תֵּבֵל), 148:11 (‖ מַלְכֵי אֶרֶץ, etc.); עֲדַת לְאֻמִּים ψ 7:8, הֲמוֹן ל׳ 65:8; of any and all peoples Pr 14:34; sg. indef. = people in gen., as making public opinion, 11:26 (coll., c. pl. vb.); = population, as subjects of prince 14:28 (‖ עַם).
+
+---
+
+### חֶסֶד
+**Lexicon**: BDB Dictionary
+**Vocalized**: חֶ֫סֶד  
+
+n.m. 2 S 16:17 goodness, kindness;—abs. ח׳ Gn 24:12 + 85 times; חָ֑סֶד Gn 39:21 + 12 times; cstr. חֶסֶד 1 S 20:14 + 8 times; sf. חַסְדִּי ψ 59:18 + 120 times sfs.; pl. חֲסָדִים Gn 32:11; cstr. חַסְדֵי Is 55:3 + 5 times (BaerJes p. 79 Ges§ 93, R. 1 F.); sf. חֲסָדַי Ne 13:14 + 10 times sfs.; (not in H or P). of man: kindness of men towards men, in doing favours and benefits 1 S 20:15; 2 S 16:17 ψ 141:5 Pr 19:22; 20:6; ח׳ יהוה 1 S 20:14 the kindness of י׳ (such as he shews, Thes MV; that sworn to by oath to Yahweh Mich Dathe; shewn out of reverence to Yahweh Th Ke), cf. ח׳ אלהים 2 S 9:3; תּוֹרַת־ח׳ Pr 31:26 instruction in kindness, kindly instruction עָשָׂה חֶסֶד עִמָּדִי do or shew kindness (in dealing) with me Gn 20:13; 40:14 (E), 1 S 20:14; 2 S 10:2 (עִמִּי in ‖ 1 Ch 19:2); c. עִם Gn 21:23 (E), 24:12, 14; Jos 2:12(×2) Ju 1:24 (J), 8:35; 1 S 15:6; 2 S 2:5; 3:8; 9:1, 3, 7, 10:2a = 1 Ch 19:2a, 1 Ch 19:2b; 2 Ch 24:22; c. עַל 1 S 20:8; c. לְ 1 K 2:7; נשׂא ח׳ לפני obtain kindness before Est 2:9, 17; היטיב ח׳ Ru 3:10. kindness (especially as extended to the lowly, needy and miserable), mercy Pr 20:28; Jb 6:14; אישׁ חסד merciful man Pr 11:17 (opp. אַכְזָרִי); מַלְכֵי ח׳ merciful kings 1 K 20:31; עשׂה ח׳ ψ 109:16; in this sense usually with other attributes (v. also infr. II. 2); ‖ אמת Ho 4:1; Is 16:5; ח׳ ואמת Pr 3:3; 14:22; 16:6; 20:28; עשׂה ח׳ ואמת Gn 24:49; 47:29; Jos 2:14 (J; RV gives these under 1); ‖ צדקה Ho 10:12; צדקה וח׳ Pr 21:21; ‖ משׁפט Mi 6:8; ח׳ ומשׁפט Ho 12:7; ‖ חוֹנֵן ψ 109:12; ח׳ ורחמים Zc 7:9 Dn 1:9.—(On Ho 6:4, 6 v. 3 infr.) (rarely) affection of Isr. to י׳, love to God, piety: ח׳ נְעוּרַיִךְ Je 2:2 piety of thy youth (‖ love of thine espousals to Yahweh); poss. also חַסְדְּכֶם כַּעֲנַן־בֹּקֶר Ho 6:4 your piety is like a morning cloud (fleeting), and כִּי חֶסֶד חָפַצְתִּי וְלאֹ־זָ֑בַח Ho 6:6 for piety I delight in and not in peace-offering (‖ דעת אלהים, cf. 1 S 15:22);—so Wü Now Hi (v 4) Che; Ke Hi (v 6) al. sub 2 (or 1);—אַנְשֵׁי חֶסֶד men of piety Is 57:1 (‖ צַדִּיק); pl. pious acts 2 Ch 32:32; 35:26; Ne 13:14. lovely appearance: כָּל־חַסְדּוֹ כְּצִיץ הַשָּׂדֶה Is 40:6 all its loveliness as the flower of the field (so Thes Hi De Che Di al.; but δόξα 𝔊 1 Pet 1:24 & gloria 𝔙 favour an original reading הוֹדוֹ Lo or כְּבֹדוֹ Ew, see BrMP 375; Du הֲדָרוֹ). of God: kindness, lovingkindness in condescending to the needs of his creatures. He is חַסְדָּם their goodness, favour Jon 2:9; חַסְדִּי ψ 144:2; אֱלֹהֵי חַסְדִּי God of my kindness ψ 59:18; in v 11 read אֱלֹהַי חַסְדּוֹ my God with his kindness 𝔖 𝔙 Ew Hup De Pe Che Bae; his is the kindness ψ 62:13; it is with him ψ 130:7; he delights in it Mi 7:18. specif. lovingkindness: in redemption from enemies and troubles Gn 19:19; 39:21 (J), Ex 15:13 (song), Je 31:3; Ezr 7:28; 9:9 ψ 21:8; 31:17, 22; 32:10; 33:22; 36:8, 11; 42:9; 44:27; 48:10; 59:17; 66:20; 85:8; 90:14; 94:18; 107:8, 15, 21, 31; 143:8, 12; Jb 37:13; Ru 1:8; 2:20; men should trust in it ψ 13:6; 52:10; rejoice in it ψ 31:8; hope in it ψ 33:18; 147:11. in preservation of life from death ψ 6:5; 86:13 Jb 10:12. in quickening of spiritual life ψ 109:26; 119:41, 76, 88, 124, 149, 159. in redemption from sin ψ 25:7; 51:3. in keeping the covenants, with Abraham Mi 7:20; with Moses and Israel שׁמר הַבְּרִית וְ(הַ)חֶסֶד keepeth the covenant and the lovingkindness Dt 7:9, 12; 1 K 8:23 = 2 Ch 6:14, Ne 1:5; 9:32; Dn 9:4; with David and his dynasty 2 S 7:15 = 1 Ch 17:13, 2 S 22:51 = ψ 18:51, 1 K 3:6(×2) = 2 Ch 1:8, ψ 89:29, 34; with the wife Zion Is 54:10. חֶסֶד is grouped with other divine attributes: חסד ואמת kindness (lovingkindness) and fidelity Gn 24:27 (J), ψ 25:10; 40:11, 12; 57:4; 61:8; 85:11; 89:15; 115:1; 138:2; עשׂה ח׳ ואמת עם 2 S 2:6; 15:20 (𝔊, v. Dr); c. אֶת־ Gn 24:49; רַב ח׳ ואמת Ex 34:6 (JE), ψ 86:15; also ‖ אמת Mi 7:20 ψ 26:3; 117:2; ‖ אֱמוּנָה ψ 88:12; 89:3; 92:3; אמונה וח׳ ψ 89:25; ח׳ ואמונה ψ 98:3; ‖ רחמים ψ 77:9; ח׳ ורחמים Je 16:5; Ho 2:21 ψ 103:4; ח׳ ומשׁפט Je 9:23 ψ 101:1; ‖ צדקה ψ 36:11; טוב וח׳ ψ 23:6. the kindness of God is abundant: רַב־חֶסֶד abundant, plenteous in kindness (goodness) Nu 14:18 (J), Ne 9:17 (Qr), Jo 2:13; Jon 4:2 ψ 86:5; 103:8 (cf. Ex 34:6 JE; ψ 86:15); רֹב חַסְדְּךָ Ne 13:22 ψ 5:8; 69:14; 106:7 (𝔊 𝔙 Aq 𝔗, to be preferred to MT חֲסָדֶיךָ); רֹב חֲסָדָו֯ La 3:32 ψ 106:45 (Kt 𝔊 in both to be preferred). great in extent: גֹּדֶל ח׳ greatness of thy mercy Nu 14:19 (J); גְּדָו֯ל־ח׳ ψ 145:8; it is kept for thousands Ex 34:7 (JE), Je 32:18, especially of those connected with lovers of י׳, Ex 20:6 = Dt 5:10; for 1000 generations Dt 7:9; it is great as the heavens ψ 57:11; 103:11, cf. 36:6; 108:5; the earth is full of it ψ 33:5; 119:64. everlasting: לעולם חסדוֹ Je 33:11; 1 Ch 16:34, 41; 2 Ch 5:13; 7:3, 6; 20:21; Ezr 3:11 ψ 100:5; 106:1; 107:1; 118:1, 2, 3, 4, 29; 136:1–26 (26 times); חסדךָ לעולם ψ 138:8; ח׳ מעולם ועד עולם ψ 103:17; ח׳ עולם Is 54:8; ח׳ אל כל היום ψ 52:3. good: כִּי־טוֹב חַסְדְּךָ ψ 69:17; 109:21; כי טוב חסדךָ מחיים ψ 63:4. pl. mercies, deeds of kindness, the historic displays of lovingkindness to Israel: shewn to Jacob Gn 32:11 (R); but mostly late Is 63:7 ψ 25:6; 89:2; כְּרֹב חסדיו Is 63:7, see 3 a; promised in the Davidic covenant ψ 89:50; חַסְדֵי דָוִיד mercies to David Is 55:3; 2 Ch 6:42; mercies in general La 3:22 ψ 17:7; 107:43 f.—חֶסֶד in n.pr.m. בן־ח׳ v. sub בֵּן. On Lv 20:17; Pr 14:34 v. ii. חֶסֶד sub II. חסד.
+
+---
+
+### חֶסֶד
+**Lexicon**: BDB Dictionary
+**Vocalized**: חֶ֫סֶד²  
+
+n.m. shame, reproach, only abs.:—ח׳ הוּא Lv 20:17 (H) it is a shame (shameful thing); ח׳ לְאֻמִּים חַטָּאת Pr 14:34 sin is a reproach to peoples.
+
+---
+
+### יָהּ
+**Lexicon**: Klein Dictionary
+**Vocalized**: יָהּ ᴵ  
+
+shortened form of the Tetragrammaton.
+
+---
+
+### יָהּ
+**Lexicon**: Klein Dictionary
+**Vocalized**: יָהּ ᴵᴵ  
+
+woe!
+
+**Etymology**: [Of imitative origin.]  
+
+---
+
+### יָהּ
+**Lexicon**: BDB Dictionary
+**Vocalized**: יָהּ  
+
+n.pr.dei contr. from יהוה, first appears in early poems; Ex 15:2 עָזִּי וְזִמְרָת יָהּ My strength and song is Yah (cited Is 12:2 ψ 118:14), cf. the poetic extract יָד עַל כֵּם יָהּ = hand to the throne of Yah Ex 17:16 (E), the song of Hezekiah Is 38:11 (repeated by dittography), (א)שׁ להבת יה (so read in preference to the MT שַׁלְהֶבֶתְיָה) = flame of fire from Yah Ct 8:6; ביה יהוה Is 26:4 (יהוה sustained by Aq and the rhythmical movement, unless it be a mistake for שׁמו, cf. ψ 68:5), יה אלהים ψ 68:19. Elsewhere יָהּ is used only in late ψ, especially in the Hallels, in the phrase הַלֲלוּ־יָהּ praise ye Yah ψ 104:35; 105:45; 106:1, 48; 111:1; 112:1; 113:1, 9; 115:18; 116:19; 117:2; 135:1, 3, 21; 146:1, 10; 147:1, 20; 148:1, 14; 149:1, 9; 150:1, 6, cf. also יהלל יה 102:19 יהללו יה 115:17 תהלל יה ψ 150:6 (v. הלל); in var. other phrases ψ 77:12; 89:9; 94:7, 12; 115:18; 118:5, 5, 14, 17, 18, 19; 122:4; 130:3; 135:4.
+
+---
+
+### יָהּ
+**Lexicon**: BDB Dictionary
+**Vocalized**: יָהּ²  
+
+n.pr.dei, v. sub הוה p. 219b supr.
+
+---
+
+### יָהּ
+**Lexicon**: BDB Dictionary
+**Vocalized**: מַעֲשֵׂיָהוּ  
+
+† מַעֲשֵׂיָהוּ -יָה, מַעֲשַׂי n. pr.m. (work of י׳; cf. n.pr. מעשיהו on Isr. seal, Cl-Gann, v. Lzb315);—Μα(α)σσαια(ς), etc., 𝔊 B Ezr 10:21 Μασαηλ:— priest, Je.’s time, מַעֲשֵׂיָה Je 21:1; 29:25; 37:3; perhaps 35:4 (-יָהוּ). 29:21. מַעֲשֵׂיָהוּ Levites: 1 Ch 15:18, 20. 2 Ch 23:1. officials: 26:11. 34:8. son of Ahaz 28:7. Levite 1 Ch 6:25 reading מַעֲשֵׂיָה for MT בַּעֲשֵׂיָה q.v., cf. Kit. מַעֲשֵׂיָה of various post-exil. men: Ne 3:23 (Μαδασηλ, A Μαασιου). 8:4, 7. 10:26. 11:5. v 7. 12:41. v 42. Ezr 10:18. v 21 (Μασαηλ, Μασειας). v 22. v 30. מַעֲשַׂי (van d. H. מַעְשַׂי) Μα(α)σαι(α), a priest 1 Ch 9:12.
+
+---
+
+## Concordance Searches
+
+### Search 1: הַלְלוּ את־יהוה כל־גוים
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 627  
+**Results**: 0  
+
+---
+
+### Search 2: חֶסֶד אֱמֶת
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 840  
+**Results**: 17  
+
+#### Top Results:
+
+**Proverbs 14:22**  
+Hebrew: הֲֽלוֹא־יִ֭תְעוּ חֹ֣רְשֵׁי רָ֑ע וְחֶ֥סֶד וֶ֝אֱמֶ֗ת חֹ֣רְשֵׁי טֽוֹב׃  
+English: Surely those who plan evil go astray,While those who plan good earn steadfast love.  
+Matched: *וְחֶ֥סֶד* (position 4)  
+
+**Genesis 24:27**  
+Hebrew: וַיֹּ֗אמֶר בָּר֤וּךְ יְהֹוָה֙ אֱלֹהֵי֙ אֲדֹנִ֣י אַבְרָהָ֔ם אֲ֠שֶׁ֠ר לֹֽא־עָזַ֥ב חַסְדּ֛וֹ וַאֲמִתּ֖וֹ מֵעִ֣ם אֲדֹנִ֑י אָנֹכִ֗י בַּדֶּ֙רֶךְ֙ נָחַ֣נִי יְהֹוָ֔ה בֵּ֖ית אֲחֵ֥י אֲדֹנִֽי׃  
+English: and said, “Blessed be יהוה, the God of my master Abraham’s [house], who has not withheld steadfast faithfulness from my master. For I have been guided on my errand by יהוה, to the house of my master’s kin.”  
+Matched: *חַסְדּ֛וֹ* (position 9)  
+
+**Psalms 57:4**  
+Hebrew: יִשְׁלַ֤ח מִשָּׁמַ֨יִם ׀ וְֽיוֹשִׁיעֵ֗נִי חֵרֵ֣ף שֹׁאֲפִ֣י סֶ֑לָה יִשְׁלַ֥ח אֱ֝לֹהִ֗ים חַסְדּ֥וֹ וַאֲמִתּֽוֹ׃  
+English: He will reach down from heaven and deliver me:
+God will send down His steadfast love;
+my persecutor reviles. Selah.  
+Matched: *חַסְדּ֥וֹ* (position 9)  
+
+**Proverbs 16:6**  
+Hebrew: בְּחֶ֣סֶד וֶ֭אֱמֶת יְכֻפַּ֣ר עָוֺ֑ן וּבְיִרְאַ֥ת יְ֝הֹוָ֗ה ס֣וּר מֵרָֽע׃  
+English: Iniquity is expiated by loyalty and faithfulness,And evil is avoided through fear of the LORD.  
+Matched: *בְּחֶ֣סֶד* (position 0)  
+
+**Exodus 34:6**  
+Hebrew: וַיַּעֲבֹ֨ר יְהֹוָ֥ה ׀ עַל־פָּנָיו֮ וַיִּקְרָא֒ יְהֹוָ֣ה ׀ יְהֹוָ֔ה אֵ֥ל רַח֖וּם וְחַנּ֑וּן אֶ֥רֶךְ אַפַּ֖יִם וְרַב־חֶ֥סֶד וֶאֱמֶֽת׃  
+English: יהוה passed before him and proclaimed: “!יהוה! יהוה*and proclaimed: “יהוה! יהוה!…” Or “and יהוה proclaimed: ‘יהוה! a God compassionate…’”; cf. Num. 14.17–18. a God compassionate and gracious, slow to anger, abounding in kindness and faithfulness,  
+Matched: *חֶ֥סֶד* (position 15)  
+
+**Genesis 24:49**  
+Hebrew: וְ֠עַתָּ֠ה אִם־יֶשְׁכֶ֨ם עֹשִׂ֜ים חֶ֧סֶד וֶֽאֱמֶ֛ת אֶת־אֲדֹנִ֖י הַגִּ֣ידוּ לִ֑י וְאִם־לֹ֕א הַגִּ֣ידוּ לִ֔י וְאֶפְנֶ֥ה עַל־יָמִ֖ין א֥וֹ עַל־שְׂמֹֽאל׃  
+English: And now, if you mean to treat my master with true kindness, tell me; and if not, tell me also, that I may turn right or left.”  
+Matched: *חֶ֧סֶד* (position 4)  
+
+**Genesis 47:29**  
+Hebrew: וַיִּקְרְב֣וּ יְמֵֽי־יִשְׂרָאֵל֮ לָמוּת֒ וַיִּקְרָ֣א ׀ לִבְנ֣וֹ לְיוֹסֵ֗ף וַיֹּ֤אמֶר לוֹ֙ אִם־נָ֨א מָצָ֤אתִי חֵן֙ בְּעֵינֶ֔יךָ שִֽׂים־נָ֥א יָדְךָ֖ תַּ֣חַת יְרֵכִ֑י וְעָשִׂ֤יתָ עִמָּדִי֙ חֶ֣סֶד וֶאֱמֶ֔ת אַל־נָ֥א תִקְבְּרֵ֖נִי בְּמִצְרָֽיִם׃  
+English: And when the time approached for Israel to die, he summoned his son Joseph and said to him, “Do me this favor, place your hand under my thigh as a pledge of your steadfast loyalty: please do not bury me in Egypt.  
+Matched: *חֶ֣סֶד* (position 22)  
+
+**II Samuel 2:6**  
+Hebrew: וְעַתָּ֕ה יַעַשׂ־יְהֹוָ֥ה עִמָּכֶ֖ם חֶ֣סֶד וֶאֱמֶ֑ת וְגַ֣ם אָנֹכִ֗י אֶעֱשֶׂ֤ה אִתְּכֶם֙ הַטּוֹבָ֣ה הַזֹּ֔את אֲשֶׁ֥ר עֲשִׂיתֶ֖ם הַדָּבָ֥ר הַזֶּֽה׃  
+English: May GOD in turn show you true faithfulness; and I too will reward you generously because you performed this act.  
+Matched: *חֶ֣סֶד* (position 4)  
+
+**II Samuel 15:20**  
+Hebrew: תְּמ֣וֹל ׀ בּוֹאֶ֗ךָ וְהַיּ֞וֹם (אנועך) [אֲנִֽיעֲךָ֤] עִמָּ֙נוּ֙ לָלֶ֔כֶת וַאֲנִ֣י הוֹלֵ֔ךְ עַ֥ל אֲשֶׁר־אֲנִ֖י הוֹלֵ֑ךְ שׁ֣וּב וְהָשֵׁ֧ב אֶת־אַחֶ֛יךָ עִמָּ֖ךְ חֶ֥סֶד וֶאֱמֶֽת׃  
+English: You came only yesterday; should I make you wander about with us today, when I myself must go wherever I can? Go back, and take your kin with you, [in]j[in] Meaning of Heb. uncertain. Septuagint reads “and may GOD show you” (cf., e.g., 2.6). true faithfulness.”  
+Matched: *חֶ֥סֶד* (position 19)  
+
+**Joshua 2:14**  
+Hebrew: וַיֹּ֧אמְרוּ לָ֣הּ הָאֲנָשִׁ֗ים נַפְשֵׁ֤נוּ תַחְתֵּיכֶם֙ לָמ֔וּת אִ֚ם לֹ֣א תַגִּ֔ידוּ אֶת־דְּבָרֵ֖נוּ זֶ֑ה וְהָיָ֗ה בְּתֵת־יְהֹוָ֥ה לָ֙נוּ֙ אֶת־הָאָ֔רֶץ וְעָשִׂ֥ינוּ עִמָּ֖ךְ חֶ֥סֶד וֶאֱמֶֽת׃  
+English: The men answered her, “Our lives are pledged for yours, even to death! If you do not disclose this mission of ours, we will show you true loyalty when GOD gives us the land.”  
+Matched: *חֶ֥סֶד* (position 20)  
+
+*...and 7 more results*
+
+---
+
+### Search 3: גָבַר חֶסֶד
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 672  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 103:11**  
+Hebrew: כִּ֤י כִגְבֹ֣הַּ שָׁ֭מַיִם עַל־הָאָ֑רֶץ גָּבַ֥ר חַ֝סְדּ֗וֹ עַל־יְרֵאָֽיו׃  
+English: For as the heavens are high above the earth,
+so great is His steadfast love toward those who fear Him.  
+Matched: *גָּבַ֥ר* (position 5)  
+
+---
+
+### Search 4: עָלֵינוּ
+**Scope**: Psalms  
+**Level**: consonantal  
+**Variations searched**: 524  
+**Results**: 7  
+
+#### Top Results:
+
+**Psalms 4:7**  
+Hebrew: רַבִּ֥ים אֹמְרִים֮ מִֽי־יַרְאֵ֢נ֫וּ ט֥וֹב נְֽסָה־עָ֭לֵינוּ א֨וֹר פָּנֶ֬יךָ יְהֹוָֽה׃  
+English: Many say, “O for good days!”
+Bestow Your favor on us,-c O LORD.  
+Matched: *עָ֭לֵינוּ* (position 6)  
+
+**Psalms 33:22**  
+Hebrew: יְהִי־חַסְדְּךָ֣ יְהֹוָ֣ה עָלֵ֑ינוּ כַּ֝אֲשֶׁ֗ר יִחַ֥לְנוּ לָֽךְ׃ {פ}  
+English: May we enjoy, O LORD, Your faithful care,
+as we have put our hope in You.  
+Matched: *עָלֵ֑ינוּ* (position 3)  
+
+**Psalms 44:20**  
+Hebrew: כִּ֣י דִ֭כִּיתָנוּ בִּמְק֣וֹם תַּנִּ֑ים וַתְּכַ֖ס עָלֵ֣ינוּ בְצַלְמָֽוֶת׃  
+English: though You cast us, crushed, to where the sea monster-b is,
+and covered us over with deepest darkness.  
+Matched: *עָלֵ֣ינוּ* (position 5)  
+
+**Psalms 90:17**  
+Hebrew: וִיהִ֤י ׀ נֹ֤עַם אֲדֹנָ֥י אֱלֹהֵ֗ינוּ עָ֫לֵ֥ינוּ וּמַעֲשֵׂ֣ה יָ֭דֵינוּ כּוֹנְנָ֥ה עָלֵ֑ינוּ וּֽמַעֲשֵׂ֥ה יָ֝דֵ֗ינוּ כּוֹנְנֵֽהוּ׃ {פ}  
+English: May the favor of the Lord, our God, be upon us;
+let the work of our hands prosper,
+O prosper the work of our hands!  
+Matched: *עָ֫לֵ֥ינוּ* (position 5)  
+
+**Psalms 103:10**  
+Hebrew: לֹ֣א כַ֭חֲטָאֵינוּ עָ֣שָׂה לָ֑נוּ וְלֹ֥א כַ֝עֲוֺנֹתֵ֗ינוּ גָּמַ֥ל עָלֵֽינוּ׃  
+English: He has not dealt with us according to our sins,
+nor has He requited us according to our iniquities.  
+Matched: *עָלֵֽינוּ׃* (position 7)  
+
+**Psalms 117:2**  
+Hebrew: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}  
+English: for great is His steadfast love toward us;
+the faithfulness of the LORD endures forever.
+Hallelujah.  
+Matched: *עָלֵ֨ינוּ* (position 2)  
+
+**Psalms 124:2**  
+Hebrew: לוּלֵ֣י יְ֭הֹוָה שֶׁהָ֣יָה לָ֑נוּ בְּק֖וּם עָלֵ֣ינוּ אָדָֽם׃  
+English: were it not for the LORD, who was on our side
+when men assailed us,  
+Matched: *עָלֵ֣ינוּ* (position 5)  
+
+---
+
+### Search 5: לְעוֹלָם
+**Scope**: Psalms  
+**Level**: consonantal  
+**Variations searched**: 376  
+**Results**: 91  
+
+#### Top Results:
+
+**Psalms 85:6**  
+Hebrew: הַלְעוֹלָ֥ם תֶּאֱנַף־בָּ֑נוּ תִּמְשֹׁ֥ךְ אַ֝פְּךָ֗ לְדֹ֣ר וָדֹֽר׃  
+English: Will You be angry with us forever,
+prolong Your wrath for all generations?  
+Matched: *הַלְעוֹלָ֥ם* (position 0)  
+
+**Psalms 119:160**  
+Hebrew: רֹאשׁ־דְּבָרְךָ֥ אֱמֶ֑ת וּ֝לְעוֹלָ֗ם כׇּל־מִשְׁפַּ֥ט צִדְקֶֽךָ׃ {פ}  
+English: Truth is the essence of Your word;
+Your just rules are eternal.  
+Matched: *וּ֝לְעוֹלָ֗ם* (position 3)  
+
+**Psalms 5:12**  
+Hebrew: וְיִשְׂמְח֨וּ כׇל־ח֪וֹסֵי בָ֡ךְ לְעוֹלָ֣ם יְ֭רַנֵּנוּ וְתָסֵ֣ךְ עָלֵ֑ימוֹ וְֽיַעְלְצ֥וּ בְ֝ךָ֗ אֹהֲבֵ֥י שְׁמֶֽךָ׃  
+English: But let all who take refuge in You rejoice,
+ever jubilant as You shelter them;
+and let those who love Your name exult in You.  
+Matched: *לְעוֹלָ֣ם* (position 4)  
+
+**Psalms 9:6**  
+Hebrew: גָּעַ֣רְתָּ ג֭וֹיִם אִבַּ֣דְתָּ רָשָׁ֑ע שְׁמָ֥ם מָ֝חִ֗יתָ לְעוֹלָ֥ם וָעֶֽד׃  
+English: You blast the nations;
+You destroy the wicked;
+You blot out their name forever.  
+Matched: *לְעוֹלָ֥ם* (position 6)  
+
+**Psalms 9:8**  
+Hebrew: וַֽ֭יהֹוָה לְעוֹלָ֣ם יֵשֵׁ֑ב כּוֹנֵ֖ן לַמִּשְׁפָּ֣ט כִּסְאֽוֹ׃  
+English: But the LORD abides forever;
+He has set up His throne for judgment;  
+Matched: *לְעוֹלָ֣ם* (position 1)  
+
+**Psalms 12:8**  
+Hebrew: אַתָּֽה־יְהֹוָ֥ה תִּשְׁמְרֵ֑ם תִּצְּרֶ֓נּוּ ׀ מִן־הַדּ֖וֹר ז֣וּ לְעוֹלָֽם׃  
+English: You, O LORD, will keep them,
+guarding each from this age-a evermore.  
+Matched: *לְעוֹלָֽם׃* (position 8)  
+
+**Psalms 15:5**  
+Hebrew: כַּסְפּ֤וֹ ׀ לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮ וְשֹׁ֥חַד עַל־נָקִ֗י לֹ֥א־לָ֫קָ֥ח עֹֽשֵׂה־אֵ֑לֶּה לֹ֖א יִמּ֣וֹט לְעוֹלָֽם׃ {פ}  
+English: who has never lent money at interest,
+or accepted a bribe against the innocent.
+The man who acts thus shall never be shaken.  
+Matched: *לְעוֹלָֽם׃* (position 14)  
+
+**Psalms 29:10**  
+Hebrew: יְ֭הֹוָה לַמַּבּ֣וּל יָשָׁ֑ב וַיֵּ֥שֶׁב יְ֝הֹוָ֗ה מֶ֣לֶךְ לְעוֹלָֽם׃  
+English: The LORD sat enthroned at the Flood;
+the LORD sits enthroned, king forever.  
+Matched: *לְעוֹלָֽם׃* (position 6)  
+
+**Psalms 30:7**  
+Hebrew: וַ֭אֲנִי אָמַ֣רְתִּי בְשַׁלְוִ֑י בַּל־אֶמּ֥וֹט לְעוֹלָֽם׃  
+English: When I was untroubled,
+I thought, “I shall never be shaken,”  
+Matched: *לְעוֹלָֽם׃* (position 5)  
+
+**Psalms 30:13**  
+Hebrew: לְמַ֤עַן ׀ יְזַמֶּרְךָ֣ כָ֭בוֹד וְלֹ֣א יִדֹּ֑ם יְהֹוָ֥ה אֱ֝לֹהַ֗י לְעוֹלָ֥ם אוֹדֶֽךָּ׃ {פ}  
+English: that [my] whole being might sing hymns to You endlessly;
+O LORD my God, I will praise You forever.  
+Matched: *לְעוֹלָ֥ם* (position 8)  
+
+*...and 81 more results*
+
+---
+
+### Search 6: הַלְלוּ־יָהּ
+**Scope**: Psalms  
+**Level**: exact  
+**Variations searched**: 208  
+**Results**: 0  
+
+---
+
+## Figurative Language Instances
+
+### Query 1
+**Filters**: Vehicle contains: prevail  
+**Results**: 5  
+
+**Core pattern**: prevailing force metaphor (2/5 instances, 40%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Psalms 104:11** (confidence: 1.00) - The phrase 'slake their thirst' (יִשְׁבְּר֖וּ צְמָאָֽם, literally 'they break their thirst') is a co...
+2. ⭐ **Exodus 8:5** (confidence: 0.90) - This is a form of verbal irony or a rhetorical concession. Moses uses the language of granting an ho...
+3. ⭐ **Psalms 117:2** (confidence: 0.90) - The abstract concept of 'steadfast love' (חֶסֶד) is described using the verb גָבַר ('to prevail,' 't...
+
+#### All Instances (5 total):
+
+**Exodus 8:5** () - confidence: 0.90  
+*Figurative phrase*: You may have this triumph over me  
+
+**Full verse (Hebrew)**: וַיֹּ֨אמֶר מֹשֶׁ֣ה לְפַרְעֹה֮ הִתְפָּאֵ֣ר עָלַי֒ לְמָתַ֣י&thinsp;׀ אַעְתִּ֣יר לְךָ֗ וְלַעֲבָדֶ֙יךָ֙ וּֽלְעַמְּךָ֔ לְהַכְרִית֙ הַֽצְפַרְדְּעִ֔ים מִמְּךָ֖ וּמִבָּתֶּ֑יךָ רַ֥ק בַּיְאֹ֖ר תִּשָּׁאַֽרְנָה  
+**Full verse (English)**: And Moses said to Pharaoh, “You may have this triumph over me: for what time shall I plead in behalf of you and your courtiers and your people, that the frogs be cut off from you and your houses, to remain only in the Nile?”  
+
+*Hebrew phrase*: הִתְפָּאֵר עָלַי  
+*Explanation*: This is a form of verbal irony or a rhetorical concession. Moses uses the language of granting an honor ('glorify yourself') to Pharaoh, but the intent is the opposite. By allowing Pharaoh to choose t...  
+*Target*: Pharaoh's act of choosing the time → A concession of authority → Interpersonal power dynamics  
+*Vehicle*: A glorious triumph or honor → A courtly deference, a boast → Social status and glory  
+*Ground*: The appearance of control and honor → Deference, granting privilege → Social interaction  
+*Confidence*: 0.90  
+
+**Genesis 7:18** (personification) - confidence: 0.80  
+*Figurative phrase*: The waters swelled/prevailed  
+
+**Full verse (Hebrew)**: וַיִּגְבְּר֥וּ הַמַּ֛יִם וַיִּרְבּ֥וּ מְאֹ֖ד עַל־הָאָ֑רֶץ וַתֵּ֥לֶךְ הַתֵּבָ֖ה עַל־פְּנֵ֥י הַמָּֽיִם  
+**Full verse (English)**: The waters swelled and increased greatly upon the earth, and the ark drifted upon the waters.  
+
+*Hebrew phrase*: וַיִּגְבְּר֥וּ הַמַּ֛יִם  
+*Explanation*: The verb 'גבר' (gavar, to prevail, grow mighty) attributes an active, conquering agency to the waters, suggesting they are actively asserting their power rather than merely increasing in volume. This ...  
+*Target*: floodwaters → natural element → physical world  
+*Vehicle*: prevailing force → conquering entity → active agent  
+*Ground*: dominance → overwhelming power → active assertion  
+*Confidence*: 0.80  
+
+**Psalms 48:15** (metaphor) - confidence: 0.80  
+*Figurative phrase*: He will lead us evermore.  
+
+**Full verse (Hebrew)**: כִּ֤י זֶ֨ה&thinsp;׀ אֱלֹהִ֣ים אֱ֭לֹהֵינוּ עוֹלָ֣ם וָעֶ֑ד ה֖וּא יְנַהֲגֵ֣נוּ עַל־מֽוּת&nbsp;{פ}  
+**Full verse (English)**: For God—He is our God forever;He will lead us dMeaning of Heb. uncertain.evermore.-d  
+
+*Hebrew phrase*: יְנַהֲגֵ֣נוּ עַל־מֽוּת  
+*Explanation*: God's eternal guidance and preservation are metaphorically described as leading His people 'over' or 'beyond' death, implying triumph over the ultimate boundary of human existence and ensuring continu...  
+*Target*: God's eternal preservation → Divine care, salvation → Spiritual guidance, existential security  
+*Vehicle*: Leading over a deadly obstacle → Overcoming danger, navigating peril → Journey, guidance, triumph  
+*Ground*: Divine power over death → Eternal faithfulness, protection → Sovereignty, life-giving  
+*Confidence*: 0.80  
+
+**Psalms 104:11** (idiom) - confidence: 1.00  
+*Figurative phrase*: the wild asses slake their thirst  
+
+**Full verse (Hebrew)**: יַ֭שְׁקוּ כׇּל־חַיְת֣וֹ שָׂדָ֑י יִשְׁבְּר֖וּ פְרָאִ֣ים צְמָאָֽם  
+**Full verse (English)**: giving drink to all the wild beasts;the wild asses slake their thirst.  
+
+*Hebrew phrase*: יִשְׁבְּר֖וּ פְרָאִ֣ים צְמָאָֽם  
+*Explanation*: The phrase 'slake their thirst' (יִשְׁבְּר֖וּ צְמָאָֽם, literally 'they break their thirst') is a common Hebrew idiom meaning to satisfy or quench thirst. Thirst is not a physical object that can be l...  
+*Target*: thirst satisfaction → physical need fulfillment → biological process  
+*Vehicle*: breaking an object → overcoming a state → physical action  
+*Ground*: cessation → completion → resolution  
+*Confidence*: 1.00  
+
+**Psalms 117:2** (metaphor, personification) - confidence: 0.90  
+*Figurative phrase*: for great is His steadfast love toward us  
+
+**Full verse (Hebrew)**: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ&thinsp;׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ&nbsp;{פ}  
+**Full verse (English)**: for great is His steadfast love toward us;the faithfulness of the LORD endures forever.Hallelujah.  
+
+*Hebrew phrase*: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ׀ חַסְדּ֗וֹ  
+*Explanation*: The abstract concept of 'steadfast love' (חֶסֶד) is described using the verb גָבַר ('to prevail,' 'to be mighty,' 'to overcome'), which typically refers to the actions of a strong, active agent or a p...  
+*Target*: God's steadfast love → divine attribute → abstract concept  
+*Vehicle*: prevailing force → conquering power → active agent  
+*Ground*: overwhelming strength → dominance → efficacy  
+*Confidence*: 0.90  
+
+---
+
+### Query 2
+**Filters**: Vehicle contains: upon  
+**Results**: 77  
+
+**Core pattern**: physical covering metaphor (7/77 instances, 9%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Genesis 19:8** (confidence: 1.00) - The phrase functions as an idiom for hospitality and protection. The 'shelter' or 'shadow' (צֵל) is ...
+2. ⭐ **Genesis 41:43** (confidence: 1.00) - This is an idiom for appointing someone to a position of authority or governance over a territory, n...
+3. ⭐ **Psalms 7:8** (confidence: 1.00) - This verse constructs a metaphorical scene of a divine courtroom to represent God's universal judgme...
+
+#### All Instances (77 total):
+
+**Deuteronomy 8:11** () - confidence: 0.90  
+*Figurative phrase*: keep His commandments  
+
+**Full verse (Hebrew)**: הִשָּׁ֣מֶר לְךָ֔ פֶּן־תִּשְׁכַּ֖ח אֶת־יְהֹוָ֣ה אֱלֹהֶ֑יךָ לְבִלְתִּ֨י שְׁמֹ֤ר מִצְוֺתָיו֙ וּמִשְׁפָּטָ֣יו וְחֻקֹּתָ֔יו אֲשֶׁ֛ר אָנֹכִ֥י מְצַוְּךָ֖ הַיּֽוֹם  
+**Full verse (English)**: Take care lest you forget your God יהוה and fail to keep the divine commandments, rules, and laws which I enjoin upon you today.  
+
+*Hebrew phrase*: שְׁמֹ֤ר מִצְוֺתָיו֙  
+*Explanation*: The verb 'שמר' (shamar) literally means 'to guard' or 'to watch over.' In the context of commandments, rules, and laws, it is an idiom meaning 'to obey,' 'to observe,' or 'to fulfill' them....  
+*Target*: obedience to divine laws → observance of statutes → human behavior  
+*Vehicle*: guarding → watching over → preserving  
+*Ground*: laws are to be protected and upheld through adherence → the act of guarding implies careful attention and preservation → observance ensures continuity  
+*Confidence*: 0.90  
+
+**Deuteronomy 10:16** (metaphor) - confidence: 0.95  
+*Figurative phrase*: the thickening about your hearts  
+
+**Full verse (Hebrew)**: וּמַלְתֶּ֕ם אֵ֖ת עׇרְלַ֣ת לְבַבְכֶ֑ם וְעׇ֨רְפְּכֶ֔ם לֹ֥א תַקְשׁ֖וּ עֽוֹד  
+**Full verse (English)**: Cut away, therefore, the thickening about your hearts and stiffen your necks no more.  
+
+*Hebrew phrase*: עׇרְלַ֣ת לְבַבְכֶ֑ם  
+*Explanation*: This is a metaphor where the physical 'foreskin' (עׇרְלָה), which is removed in circumcision, is applied to the 'heart' (לֵבָב). It represents spiritual impurity, dullness, or resistance that needs to...  
+*Target*: spiritual impurity → inner resistance → human spiritual condition  
+*Vehicle*: foreskin → physical covering → bodily part  
+*Ground*: obstruction to receptivity → spiritual dullness → uncleanliness  
+*Confidence*: 0.95  
+
+**Deuteronomy 13:9** (metaphor) - confidence: 0.95  
+*Figurative phrase*: and do not cover up the matter  
+
+**Full verse (Hebrew)**: לֹא־תֹאבֶ֣ה ל֔וֹ וְלֹ֥א תִשְׁמַ֖ע אֵלָ֑יו וְלֹא־תָח֤וֹס עֵֽינְךָ֙ עָלָ֔יו וְלֹֽא־תַחְמֹ֥ל וְלֹֽא־תְכַסֶּ֖ה עָלָֽיו  
+**Full verse (English)**: do not assent or give heed to any of them. Show no pity or compassion, and do not cover up the matter;  
+
+*Hebrew phrase*: וְלֹֽא־תְכַסֶּ֖ה עָלָֽיו  
+*Explanation*: The verb כסה (kasah), meaning 'to cover' physically, is used metaphorically here to mean 'to conceal' or 'to hide' a transgression or guilt. It extends the physical act of covering to the abstract con...  
+*Target*: concealment of guilt → hiding transgression → protection of offender  
+*Vehicle*: physical covering → blanket → veil  
+*Ground*: hiding → obscuring → preventing exposure  
+*Confidence*: 0.95  
+
+**Deuteronomy 17:2** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: transgressed the Covenant  
+
+**Full verse (Hebrew)**: כִּֽי־יִמָּצֵ֤א בְקִרְבְּךָ֙ בְּאַחַ֣ד שְׁעָרֶ֔יךָ אֲשֶׁר־יְהֹוָ֥ה אֱלֹהֶ֖יךָ נֹתֵ֣ן לָ֑ךְ אִ֣ישׁ אוֹ־אִשָּׁ֗ה אֲשֶׁ֨ר יַעֲשֶׂ֧ה אֶת־הָרַ֛ע בְּעֵינֵ֥י יְהֹוָה־אֱלֹהֶ֖יךָ לַעֲבֹ֥ר בְּרִיתֽוֹ  
+**Full verse (English)**: If there is found among you, in one of the settlements that your God יהוה is giving you, a man or woman who has affronted your God יהוה and transgressed the Covenant—  
+
+*Hebrew phrase*: לַעֲבֹ֥ר בְּרִיתֽוֹ  
+*Explanation*: The verb עָבַר (ʿavar, 'to pass over/cross') is used idiomatically for breaking a covenant. This implies a conceptual metaphor where the covenant is viewed as a boundary or line that one crosses, ther...  
+*Target*: covenant violation → breaking an agreement → disobedience  
+*Vehicle*: crossing a boundary → stepping over a line → physical movement  
+*Ground*: violation → transgression → breach of agreement  
+*Confidence*: 0.90  
+
+**Deuteronomy 23:1** (metaphor, idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: so as to remove his father’s garment.  
+
+**Full verse (Hebrew)**: לֹא־יִקַּ֥ח אִ֖ישׁ אֶת־אֵ֣שֶׁת אָבִ֑יו וְלֹ֥א יְגַלֶּ֖ה כְּנַ֥ף אָבִֽיו&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: *This verse constitutes 22.30 in some editions, so that chapter 23 starts with the next verse. No householder*householder See the first note at 1.31. shall take his father’s former wife [as his own wife], so as to remove his father’s garment.*remove his father’s garment I.e., lay claim to what his father had possessed. Cf. Lev. 18.8; 20.11; Ezek. 16.8; Ruth 3.9.  
+
+*Hebrew phrase*: וְלֹ֥א יְגַלֶּ֖ה כְּנַ֥ף אָבִֽיו  
+*Explanation*: The phrase 'uncover/remove his father's kanaf (wing/garment)' is a biblical idiom that functions as both a metaphor and metonymy. The 'kanaf' (garment/wing) symbolizes the father's marital rights, his...  
+*Target*: father's marital rights → marital possession → social status  
+*Vehicle*: father's garment → protective covering → physical object  
+*Ground*: claim of possession → usurpation of rights → taking ownership  
+*Confidence*: 0.95  
+
+**Deuteronomy 25:5** (idiom) - confidence: 0.99  
+*Figurative phrase*: shall unite with her  
+
+**Full verse (Hebrew)**: כִּֽי־יֵשְׁב֨וּ אַחִ֜ים יַחְדָּ֗ו וּמֵ֨ת אַחַ֤ד מֵהֶם֙ וּבֵ֣ן אֵֽין־ל֔וֹ לֹֽא־תִהְיֶ֧ה אֵֽשֶׁת־הַמֵּ֛ת הַח֖וּצָה לְאִ֣ישׁ זָ֑ר יְבָמָהּ֙ יָבֹ֣א עָלֶ֔יהָ וּלְקָחָ֥הּ ל֛וֹ לְאִשָּׁ֖ה וְיִבְּמָֽהּ  
+**Full verse (English)**: When brothers dwell together and one of them dies and leaves no offspring,*offspring Lit. “son,” but daughters are also in view; cf. Num. 27.1–11. the wife of the deceased*Apparently a type of widow whose late husband had a share in his lineage’s patrimony, and whose access to support from that patrimony is now stymied by her lack of offspring; cf. Ruth 4.5. shall not become that of another party, outside the family. Her husband’s brother shall unite with her: he shall take her as his wife and perform the levir’s duty.  
+
+*Hebrew phrase*: יָבֹ֣א עָלֶ֔יהָ  
+*Explanation*: This phrase, literally 'come upon her,' is a common biblical idiom and euphemism for sexual intercourse, particularly in legal and narrative contexts concerning procreation or marriage....  
+*Target*: sexual intercourse → conjugal relations → physical intimacy  
+*Vehicle*: coming upon → physical approach → action  
+*Ground*: euphemistic expression → indirect reference → social decorum  
+*Confidence*: 0.99  
+
+**Deuteronomy 27:20** () - confidence: 0.90  
+*Figurative phrase*: he has uncovered his father's wing/garment  
+
+**Full verse (Hebrew)**: אָר֗וּר שֹׁכֵב֙ עִם־אֵ֣שֶׁת אָבִ֔יו כִּ֥י גִלָּ֖ה כְּנַ֣ף אָבִ֑יו וְאָמַ֥ר כׇּל־הָעָ֖ם אָמֵֽן&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: Cursed be the [man] who lies with his father’s wife, for he has removed his father’s garment.*removed his father’s garment See note at 23.1. —And all the people shall say, Amen.  
+
+*Hebrew phrase*: גִלָּ֖ה כְּנַ֣ף אָבִ֑יו  
+*Explanation*: Metaphorical expression using the concrete image of uncovering a garment or wing to represent violating the father's sexual authority and household protection...  
+*Target*: sexual violation of father's rights → familial transgression → moral violation  
+*Vehicle*: uncovering garment/wing → removing covering → physical exposure  
+*Ground*: violation of protection → breach of boundaries → transgressive act  
+*Confidence*: 0.90  
+
+**Deuteronomy 28:10** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: יהוה’s name is proclaimed over you  
+
+**Full verse (Hebrew)**: וְרָאוּ֙ כׇּל־עַמֵּ֣י הָאָ֔רֶץ כִּ֛י שֵׁ֥ם יְהֹוָ֖ה נִקְרָ֣א עָלֶ֑יךָ וְיָֽרְא֖וּ מִמֶּֽךָּ  
+**Full verse (English)**: And all the peoples of the earth shall see that יהוה’s name is proclaimed over you,*יהוה’s name is proclaimed over you I.e., God provides protection, much as a (typically male) householder does upon formally recognizing someone as part of his household; cf. Isa. 4.1; Jer. 14.9; 2 Sam. 12.28. Cf. note at Deut. 1.31. and they shall stand in fear of you.  
+
+*Hebrew phrase*: שֵׁ֥ם יְהֹוָ֖ה נִקְרָ֣א עָלֶ֑יךָ  
+*Explanation*: This is an idiom signifying divine ownership, protection, and identification. The 'name of Yahweh' functions metonymically, representing Yahweh's presence, authority, and claim over the individual....  
+*Target*: Divine protection and ownership → Security and favor → Relationship with God  
+*Vehicle*: Yahweh's name proclaimed over you → Idiomatic expression → Symbolic declaration  
+*Ground*: Cultural practice of naming/claiming → Legal and social custom → Identification and authority  
+*Confidence*: 0.95  
+
+**Deuteronomy 31:12** (metaphor) - confidence: 0.90  
+*Figurative phrase*: and to observe faithfully  
+
+**Full verse (Hebrew)**: הַקְהֵ֣ל אֶת־הָעָ֗ם הָֽאֲנָשִׁ֤ים וְהַנָּשִׁים֙ וְהַטַּ֔ף וְגֵרְךָ֖ אֲשֶׁ֣ר בִּשְׁעָרֶ֑יךָ לְמַ֨עַן יִשְׁמְע֜וּ וּלְמַ֣עַן יִלְמְד֗וּ וְיָֽרְאוּ֙ אֶת־יְהֹוָ֣ה אֱלֹהֵיכֶ֔ם וְשָׁמְר֣וּ לַעֲשׂ֔וֹת אֶת־כׇּל־דִּבְרֵ֖י הַתּוֹרָ֥ה הַזֹּֽאת  
+**Full verse (English)**: Gather the people—men, women, children,*men, women, children Or “householders, wives, [other] dependents.” Cf. 2.34; 3.6. See the Dictionary under “householder” and ṭaph. and the strangers in your communities—that they may hear and so learn to revere your God יהוה and to observe faithfully every word of this Teaching.  
+
+*Hebrew phrase*: וְשָׁמְר֣וּ לַעֲשׂ֔וֹת  
+*Explanation*: The verb 'shamar' (שׁמר), meaning 'to guard' or 'to keep,' is used metaphorically to describe faithful adherence to the law. This conceptual metaphor (OBEDIENCE IS GUARDING) frames the Torah's words a...  
+*Target*: faithful obedience → adherence to the law → moral and religious conduct  
+*Vehicle*: guarding → watching over → protecting a valuable object  
+*Ground*: careful attention → faithfulness → preservation  
+*Confidence*: 0.90  
+
+**Deuteronomy 32:38** (metaphor) - confidence: 0.90  
+*Figurative phrase*: And let them be a shield unto you!  
+
+**Full verse (Hebrew)**: אֲשֶׁ֨ר חֵ֤לֶב זְבָחֵ֙ימוֹ֙ יֹאכֵ֔לוּ יִשְׁתּ֖וּ יֵ֣ין נְסִיכָ֑ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;יָק֙וּמוּ֙ וְיַעְזְרֻכֶ֔ם יְהִ֥י עֲלֵיכֶ֖ם סִתְרָֽה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: Who ate the fat of their offeringsAnd drank their libation wine?Let them rise up to your help,And let them be a shield unto you!  
+
+*Hebrew phrase*: יְהִ֥י עֲלֵיכֶ֖ם סִתְרָֽה  
+*Explanation*: The false gods (referred to as 'them') are metaphorically called upon to *be* a 'shield' or 'shelter,' implying they should provide protection. They are not literally physical shields, but are expecte...  
+*Target*: false gods → idols → deities  
+*Vehicle*: shield → protective covering → defensive object  
+*Ground*: protection → defense → security  
+*Confidence*: 0.90  
+
+*...and 67 more instances*
+
+**Usage breakdown**: physical covering (7x), garment (6x), clothing (4x)
+
+---
+
+## Scholarly Context (RAG Documents)
+
+### Psalm 117 Function & Genre
+**Genre**: Hymn of Praise  
+
+**Structure**:  
+- v. 1-2: Short praise: all nations, all peoples, praise the Lord for His steadfast love and faithfulness  
+
+**Keywords**: universal praise, love, faithfulness, short, song  
+
+## Analytical Framework for Biblical Poetry
+
+Concepts and Analytical Frameworks for Biblical Poetry: A Foundational Document for the Telescopic Analysis of the PsalmsPreamble: Purpose and Methodological StanceThis document serves as the core knowledge base for an AI-powered commentary pipeline, designed to facilitate a literary-poetic analysis of the Book of Psalms. Its structure is optimized for Retrieval-Augmented Generation (RAG) systems to provide precise, context-rich information on the artistic conventions of biblical Hebrew poetry. The methodological stance is inspired by the literary approach of scholars like Robert Alter, which treats the biblical text as a work of sophisticated literary art.1 This framework posits that poetic form is not a decorative embellishment but the primary vehicle of meaning and theological expression.3 The objective is to equip analytical agents to move beyond surface-level paraphrase to a "telescopic analysis"—a method that connects micro-level poetic devices (e.g., a single word choice, a metaphor) to the macro-level thematic and theological arguments of an entire psalm.I. The Foundational Principle: ParallelismParallelism is the most fundamental and pervasive organizing principle of biblical Hebrew poetry.5 An analysis of its dynamic nature is the prerequisite for any meaningful literary interpretation. It is a "seconding sequence" where the relationship between the parts of a line, rather than rhyme or a strict meter, creates the poetic effect.6The Dynamics of Parallelism: Defining the "A is so, and what's more, B" PrincipleThe core dynamic of parallelism is not simple repetition but a progression of thought, aptly summarized by the principle "A is so, and what's more, B." In this model, the second part of a poetic line, or colon, dynamically engages with the first. It can confirm, sharpen, specify, intensify, contrast, or complete the initial statement.4 This functional understanding represents a significant development from earlier, more static classificatory approaches, which identified types of parallelism but often under-analyzed their rhetorical purpose.2 The energy of a poetic line sweeps from the first colon to the second, creating a forward momentum that can develop an argument or unfold "miniature stories".4 This principle forces the reader—or an AI agent—to locate the primary locus of meaning in the relationship between the cola, treating them not as isolated statements but as an integrated, developing thought.10 It is the essential "rhyme of thought" that defines Hebrew verse.11Synonymous ParallelismConcept Name: Synonymous ParallelismDefinition: A form of parallelism where the second colon restates, echoes, or reinforces the thought of the first colon using different but semantically equivalent words or concepts.5Function in Poetry: The function of synonymous parallelism is rarely simple tautology. It serves to reinforce and amplify an idea, adding emotional depth and aesthetic beauty that makes the message more memorable and impactful.12 Frequently, the second colon achieves this by intensifying the first or by moving from a general term to a more specific or concrete image, making the concept more pointed and forceful.7 This progression from general to particular is a key dynamic of biblical poetry.Canonical Examples (from Psalms):Psalm 19:1: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד-אֵל // וּמַעֲשֵׂה יָדָיו מַגִּיד הָרָקִיעַ."6Psalm 24:1: "לַיהוָה הָאָרֶץ וּמְלוֹאָהּ // תֵּבֵל וְיֹשְׁבֵי בָהּ."13Psalm 120:2: "יְהוָה הַצִּילָה נַפְשִׁי מִשְּׂפַת-שֶׁקֶר // מִלָּשׁוֹן רְמִיָּה."12Analytical Questions:How does the second colon restate the first? Does it use direct synonyms or related concepts?Does the second colon specify, intensify, or make the first more concrete? If so, what is the effect of this shift?What nuances of meaning are introduced by the specific word choices in the second colon that are not present in the first?Does the second line simply repeat the first, or does it heighten the idea or emotion?Antithetic ParallelismConcept Name: Antithetic ParallelismDefinition: A form of parallelism where the second colon presents a thought that is in direct contrast or opposition to the first.5 The contrast is often, but not always, marked by a conjunction such as "but".11Function in Poetry: This device sharpens an idea by defining it against its opposite. The use of opposites clarifies both extremes, creating a starker focus on the desired message and forcing a moral or theological choice.16 It is a favored device in wisdom literature for framing the two paths of life—for example, righteousness versus wickedness, or wisdom versus folly—thereby creating tension and emphasizing the consequences of a decision.5Canonical Examples (from Psalms):Psalm 1:6: "כִּי-יוֹדֵעַ יְהוָה דֶּרֶךְ צַדִּיקִים // וְדֶרֶךְ רְשָׁעִים תֹּאבֵד."11Psalm 20:7: "אֵלֶּה בָרֶכֶב וְאֵלֶּה בַסּוּסִים // וַאֲנַחְנוּ בְּשֵׁם-יְהוָה אֱלֹהֵינוּ נַזְכִּיר."20Psalm 34:10: "כְּפִירִים רָשׁוּ וְרָעֵבוּ // וְדֹרְשֵׁי יְהוָה לֹא-יַחְסְרוּ כָל-טוֹב."16Analytical Questions:What two concepts, paths, or outcomes are being contrasted in this verse?How does the contrast in the second colon clarify or sharpen the meaning of the first?What is the central idea that is being defined by this opposition?Is the contrast marked by a conjunction like "but," or is it implied by the juxtaposition of the two lines?Synthetic (or Climactic/Staircase) ParallelismConcept Name: Synthetic (or Climactic/Staircase) ParallelismDefinition: A form of parallelism where the second colon does not restate or contrast the first but instead builds upon, extends, or completes its thought.5 The climactic or "staircase" variation is a specific type where a key word or phrase from the first colon is repeated in the second, which then adds new information to build toward a climax or completion.8Function in Poetry: This form creates narrative or logical progression within the poetic line itself, developing an argument, explaining a cause and effect, or building emotional intensity step-by-step.23 It is the most explicit embodiment of the "A is so, and what's more, B" principle, as the second line carries the thought of the first to its conclusion.Canonical Examples (from Psalms):Psalm 29:1-2: "הָבוּ לַיהוָה בְּנֵי אֵלִים // הָבוּ לַיהוָה כָּבוֹד וָעֹז. // הָבוּ לַיהוָה כְּבוֹד שְׁמוֹ..."23Psalm 14:2: "יְהוָה מִשָּׁמַיִם הִשְׁקִיף עַל-בְּנֵי-אָדָם // לִרְאוֹת הֲיֵשׁ מַשְׂכִּיל דֹּרֵשׁ אֶת-אֱלֹהִים."22Psalm 96:1-2: "שִׁירוּ לַיהוָה שִׁיר חָדָשׁ // שִׁירוּ לַיהוָה כָּל-הָאָרֶץ. // שִׁירוּ לַיהוָה בָּרְכוּ שְׁמוֹ..."20Analytical Questions:How does the second colon build upon or complete the thought of the first?Is there a cause-and-effect relationship, a question-and-answer, or a sequential development being presented?In climactic forms, what key term is repeated, and what new information is added to create a sense of rising intensity or completion?How does this progression contribute to the overall argument of the psalm?II. Poetic Diction: Economy and ConcretenessThe characteristic style of Hebrew poetry favors compact expression and tangible imagery, creating a discourse that is both dense and emotionally resonant.Terseness & ConcisenessConcept Name: Terseness & ConcisenessDefinition: A primary characteristic of biblical Hebrew poetry is its compressed and economical use of language, employing a minimum of words to express complex ideas.2 This is often achieved through the omission of common prose particles (such as the definite article or direct object marker) and conjunctions, and through the use of ellipsis, where a word from the first colon (frequently the verb) is omitted but understood in the second.6Function in Poetry: Terseness creates a heightened, dense form of discourse that focuses attention on the most semantically important words.2 By omitting explicit logical connectors, the poet forces the reader to deduce the relationship between cola from the parallel structure itself, thereby empowering the function of parallelism. This word economy also contributes to the accentual rhythm of the verse by keeping lines short and impactful.2 Imagery, in this context, becomes a primary tool for compactness, allowing the poet to communicate a rich message in very few words.14Canonical Examples (from Psalms):Psalm 114:4: "הֶהָרִים רָקְדוּ כְאֵילִים // גְּבָעוֹת כִּבְנֵי-צֹאן."25Psalm 23:1: "יְהוָה רֹעִי // לֹא אֶחְסָר."Psalm 1:3: "וְהָיָה כְּעֵץ שָׁתוּל עַל-פַּלְגֵי מָיִם // אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ."Analytical Questions:Are there words (especially verbs or conjunctions) from the first colon that are omitted but implied in the second? What is the effect of this ellipsis?How does the economy of words force a greater focus on the key nouns and verbs that are present?Does the terseness create ambiguity, or does it sharpen the focus and impact of the verse?How does the poet use a single image to convey a complex idea concisely?Concrete ImageryConcept Name: Concrete ImageryDefinition: Hebrew poetry demonstrates a marked preference for conveying theological ideas, emotional states, and moral principles through concrete, physical, and sensory images rather than through abstract philosophical or theological language.29 The ancient Hebrew imagination engaged the world not through abstract categories but through the empirical knowledge of lived experience—the life of shepherds, warriors, farmers, and priests.3Function in Poetry: Concrete images make abstract concepts tangible, emotionally resonant, and memorable.15 They ground theological claims in the physical world, allowing the poet to explore complex spiritual states through a shared, sensory vocabulary. Transforming a general term into a concrete image makes the idea "more pointed, more forceful".9 This imagery is not merely ornamental but functional, expressing significant themes and conveying implicit value judgments.30 For example, the choice between pastoral, military, or cultic imagery frames the psalmist's problem and the desired divine response.Canonical Examples (from Psalms):Psalm 18:2: "יְהוָה סַלְעִי וּמְצוּדָתִי וּמְפַלְטִי // אֵלִי צוּרִי אֶחֱסֶה-בּוֹ // מָגִנִּי וְקֶרֶן-יִשְׁעִי מִשְׂגַּבִּי."25Psalm 23:1-3: "יְהוָה רֹעִי... בִּנְאוֹת דֶּשֶׁא יַרְבִּיצֵנִי עַל-מֵי מְנֻחוֹת יְנַהֲלֵנִי..."33Psalm 1:3: "וְהָיָה כְּעֵץ שָׁתוּל עַל-פַּלְgֵי מָיִם..."34Analytical Questions:What concrete, physical image is being used in this verse? What senses does it appeal to (sight, sound, touch)?What abstract theological, emotional, or moral concept does this image represent?What specific attributes of the concrete image are being mapped onto the abstract concept (e.g., a rock's stability, a shield's protection, a tree's fruitfulness)?How does the domain of the imagery (e.g., nature, warfare, temple cult) contribute to the overall argument or emotional tone of the psalm?III. The Music of Language: Sound and WordplayThese devices leverage the phonetic qualities of the Hebrew language to create artistic effects that enhance meaning and memorability. While often lost in translation, an awareness of their function is crucial for appreciating the original artistry.ParonomasiaConcept Name: ParonomasiaDefinition: The use of words that are similar in sound but different in meaning to create a "wordplay" or "pun".35 It is a deliberate juxtaposition of like-sounding words that draws the reader's attention to a particular statement or connection.37Function in Poetry: Paronomasia forges an associative link between two otherwise disparate concepts, prompting the reader to consider their relationship. It adds a layer of wit, memorability, and rhetorical force, often underscoring a solemn or important statement that might otherwise be overlooked.35Canonical Examples (from Psalms):Psalm 56:8: "נֹדִי סָפַרְתָּה-אָתָּה // שִׂימָה דִמְעָתִי בְנֹאדֶךָ." The similar sounds of the Hebrew words for "my wanderings" ($nōdî$) and "in your bottle" ($bənōdekā$) phonetically link the cause (wandering) with the effect (tears) that God is said to collect and remember.35Psalm 96:5: "כִּי כָּל-אֱלֹהֵי הָעַמִּים אֱלִילִים // וַיהוָה שָׁמַיִם עָשָׂה." This is a common prophetic wordplay contrasting the true God ($'elohim$) with "worthless things" ($'elilim$).Analytical Questions:(For Hebrew text analysis) Are there words in close proximity that share similar root consonants or sounds but have different meanings?What new connection or idea is suggested by the phonetic link between these words?How does this wordplay contribute to the verse's rhetorical force, memorability, or theological argument?Alliteration & AssonanceConcept Name: Alliteration & AssonanceDefinition: Alliteration is the repetition of the same or similar consonant sounds in nearby words, typically at the beginning of words. Assonance is the repetition of vowel sounds within nearby words.38 While not a primary structural principle in Hebrew poetry, these sound devices are common and are used for aesthetic and emphatic effect.25Function in Poetry: These devices enhance the musicality and oral-aural quality of the poetry, making it more pleasing to the ear and more memorable.38 They can be used to link key words together, create emphasis on a particular phrase, and contribute to the emotional texture of a line. The sound itself can be mimetic, with the phonetic quality reinforcing the semantic meaning (e.g., harsh sounds for judgment, soft sounds for lament).41Canonical Examples (from Psalms):Psalm 29:1: In the Hebrew phrase kavod vā'oz (כָּבוֹד וָעֹז), the repetition of the 'o' vowel sound is an example of assonance.42Psalm 122:6: Sha'alu shalom Yerushalayim (שַׁאֲלוּ שְׁלוֹם יְרוּשָׁלָ‍ִם) features prominent alliteration of the 'sh' ($š$) and 'l' sounds.Psalm 6:6 (Hebrew 6:7): 'aśḥeh bəkol-laylāh miṭṭātî (אַשְׂחֶה בְכָל-לַיְלָה מִטָּתִי). The line is rich with sibilant 's' ($s/ś$) sounds, phonetically mimicking the sound of weeping or sighing.Analytical Questions:(For Hebrew text analysis) Is there a noticeable repetition of a particular consonant or vowel sound in this line or verse?Which words are linked by this sound repetition, and what is the significance of that link?How does the sound itself (e.g., a harsh guttural vs. a soft sibilant) contribute to the mood or meaning of the line?IV. Figurative Language: The Architecture of MeaningThis section covers devices that convey meaning by describing one thing in terms of another, creating rich layers of significance and enabling the poet to articulate complex truths.Metaphor & SimileConcept Name: Metaphor & SimileDefinition: Both are figures of speech that draw a comparison between two essentially different things to highlight a point of similarity. A simile makes the comparison explicit by using a comparative term such as "like" or "as." A metaphor makes the comparison implicitly, often by stating that A is B.34 While formally distinct, their poetic function is largely the same: to generate new understanding through analogy.44Function in Poetry: Metaphor and simile are central to poetic expression, transforming abstract concepts into concrete, understandable, and memorable images.34 They function by inviting the reader to transfer attributes from a familiar source domain (e.g., a shepherd) to a less familiar target domain (e.g., God) to generate new insight.44 They are the primary linguistic tools for expressing the ineffable nature of God and the depth of human spiritual experience, which defy literal description.15Canonical Examples (from Psalms):Simile: Psalm 1:3: "וְהָיָה כְּעֵץ שָׁתוּל עַל-פַּלְגֵי מָיִם..."25Simile: Psalm 42:1: "כְּאַיָּל תַּעֲרֹג עַל-אֲפִיקֵי-מָיִם כֵּן נַפְשִׁי תַעֲרֹג אֵלֶיךָ אֱלֹהִים."11Metaphor: Psalm 23:1: "יְהוָה רֹעִי."15Metaphor: Psalm 84:11: "כִּי שֶׁמֶשׁ וּמָגֵן יְהוָה אֱלֹהִים."11Analytical Questions:What two things are being compared? Identify the target (the main subject) and the source (what it's being compared to).What specific characteristics of the source domain are being transferred to the target domain?How does this comparison help to understand the target (e.g., God, the psalmist's soul) in a new or deeper way?Is this a standalone figure of speech, or is it part of an extended metaphor that develops across several verses?MerismConcept Name: MerismDefinition: A figure of speech in which a totality or whole is expressed by naming two opposite, contrasting, or complementary parts.46Function in Poetry: Merism is a poetic and compact rhetorical device for expressing completeness or all-encompassing scope ("everything"). By naming the boundaries or polar extremes of a category (e.g., "day and night," "heaven and earth"), it implies everything contained within them, creating a sense of totality and amplification.46Canonical Examples (from Psalms):Psalm 139:2: "אַתָּה יָדַעְתָּ שִׁבְתִּי וְקוּמִי..."Psalm 121:6: "יוֹמָם הַשֶּׁמֶשׁ לֹא-יַכֶּכָּה וְיָרֵחַ בַּלָּיְלָה."46Psalm 121:8: "יְהוָה יִשְׁמָר-צֵאתְךָ וּבוֹאֶךָ..."46Analytical Questions:What are the two opposite or complementary poles mentioned in the text?What is the whole or totality that these two extremes are meant to represent?How does using a merism create a sense of all-encompassing scope for the action or attribute being described?PersonificationConcept Name: PersonificationDefinition: The attribution of human qualities, actions, emotions, or consciousness to inanimate objects, animals, or abstract concepts.11Function in Poetry: Personification enlivens the poetic world, creating a dramatic and vivid landscape where all of creation can participate in the relationship with God. It is a powerful tool for reinforcing themes of God's universal sovereignty by depicting nature as an active participant in praise or judgment.50 It can also make abstract concepts like "justice," "peace," or "steadfast love" into active agents within a poetic narrative.50Canonical Examples (from Psalms):Psalm 98:8: "נְהָרוֹת יִמְחֲאוּ-כָף, יַחַד הָרִים יְרַנֵּנוּ."50Psalm 19:1-2: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד-אֵל... יוֹם לְיוֹם יַבִּיעַ אֹמֶר..."50Psalm 85:10: "חֶסֶד-וֶאֱמֶת נִפְגָּשׁוּ; צֶדֶק וְשָׁלוֹם נָשָׁקוּ."50Analytical Questions:What non-human entity is being given human attributes or actions?What specific human quality (e.g., speech, emotion, action) is being attributed to it?What is the poetic or theological effect of this personification? Does it make creation seem more alive, an abstract concept more active, or God's power more pervasive?V. Macro-Structures: Poetic Form and FramingThese devices organize larger blocks of text—from a few lines to an entire psalm—creating patterns that guide the reader, build emphasis, and unify the composition.Chiasmus (Chiastic Structure)Concept Name: Chiasmus (Chiastic Structure)Definition: An inverted literary structure in which a sequence of elements (words, phrases, or themes) is presented and then repeated in reverse order, creating a mirrored pattern such as A-B-B'-A' or A-B-C-B'-A'.51 The name is derived from the Greek letter Chi ($X$), which the pattern resembles when diagrammed, as lines can be drawn connecting the parallel elements.53Function in Poetry: Chiasmus is a sophisticated device used for emphasis, memorization, and to highlight the central element of the structure (the pivot or turning point), which often contains the main idea of the passage.53 By forcing the reader to process the logic of the poem both forwards and backwards, it underscores the unity of the composition and directs attention to its theological or emotional core.53Canonical Examples (from Psalms):Micro-Chiasm: Psalm 2:10: "וְעַתָּה מְלָכִים (A), הַשְׂכִּילוּ (B); // הִוָּסְרוּ (B'), שֹׁפְטֵי אָרֶץ (A')".53Macro-Chiasm: Psalm 8 is structured as a large-scale chiasm. It is framed by praise of God's name (A, v. 1 and A', v. 9), which envelops reflections on God's glory in the heavens (B, vv. 1-3) and humanity's rule on earth (B', vv. 6-8), with the central question about humanity's significance (C, vv. 4-5) at its core.53Thematic Chiasm: Psalm 106 embeds its historical narrative within a chiastic structure of key themes and repeated words, drawing attention to central motifs like Moses's intercession and the sin at Baal-Peor.55Analytical Questions:Are there repeated words, phrases, or ideas that appear in a mirrored or inverted order (A-B...B'-A')?What is the central element of the chiasm? How is it emphasized by the surrounding structure?How do the corresponding pairs (A and A', B and B') relate to each other? Does the second element resolve, expand upon, or reflect on the first?Inclusio (Envelope Structure)Concept Name: Inclusio (Envelope Structure)Definition: A literary device where a section of text is "bracketed" or "enveloped" by repeating the same or a very similar word, phrase, or theme at both the beginning and the end.56Function in Poetry: Inclusio serves to unify a poetic unit, clearly marking its beginning and end for the reader or listener.57 It highlights the central theme encapsulated within the "envelope" and encourages the interpretation of the intervening material in light of the framing statement.56 The meaning of the repeated phrase is often enriched or deepened by the content it encloses, so its final appearance carries more weight than its first.59Canonical Examples (from Psalms):Psalm 8: Begins and ends with the identical line: "יְהוָה אֲדֹנֵינוּ מָה-אַדִּיר שִׁמְךָ בְּכָל-הָאָרֶץ!" (vv. 1, 9).57Psalm 103: Begins and ends with the exhortation "בָּרְכִי נַפְשִׁי אֶת-יְהוָה" (vv. 1, 22), framing a lengthy recitation of God's benefits and merciful character.58Psalm 118: Begins and ends with the liturgical call to worship: "הוֹדוּ לַיהוָה כִּי-טוֹב כִּי לְעוֹלָם חַסְדּוֹ" (vv. 1, 29).56Analytical Questions:Does the same or a similar line, phrase, or key theme appear at both the beginning and the end of this psalm or stanza?What is the main idea of the material contained within this "envelope"?How does the repetition of the framing device guide the interpretation of the central content?Is the meaning of the closing phrase identical to the opening one, or has it been deepened by the intervening text?RefrainConcept Name: RefrainDefinition: A line, part of a line, or a group of lines repeated at regular or strategic intervals within a poem, functioning similarly to a chorus in a modern song.54Function in Poetry: A refrain serves as a primary structural marker, dividing a psalm into distinct stanzas or sections.63 Thematically, it often encapsulates the central plea, affirmation of trust, or core theme of the psalm, reinforcing it through repetition and providing an anchor point for the reader's attention and emotion.65Canonical Examples (from Psalms):Psalms 42-43: The refrain "מַה-תִּשְׁתּוֹחֲחִי נַפְשִׁי וַתֶּהֱמִי עָלָי הוֹחִילִי לֵאלֹהִים כִּי-עוֹד אוֹדֶנּוּ יְשׁוּעֹת פָּנַי וֵאלֹהָי" appears three times (42:5, 42:11; 43:5), structuring the poem and tracing the psalmist's internal struggle and self-exhortation.62Psalm 46: The refrain "יְהוָה צְבָאוֹת עִמָּנוּ מִשְׂגָּב-לָנוּ אֱלֹהֵי יַעֲקֹב סֶלָה" appears after the second and third stanzas (vv. 7, 11), acting as a powerful, climactic affirmation of trust.62Psalm 136: The refrain "כִּי לְעוֹלָם חַסְדּוֹ" is repeated after every single colon, making it the dominant structural and theological statement of the entire psalm.65Analytical Questions:Is there a line or phrase that repeats at key junctures in the psalm?How does this refrain divide the psalm into larger structural units (stanzas)?What is the central message of the refrain, and how does its repetition shape the psalm's overall theme and emotional trajectory?VI. Rhythm and CadenceThis section addresses the prosody of Hebrew poetry, clarifying the scholarly consensus on its distinctive rhythmic nature, which is tied more to logic and stress than to syllable counts.Meter & RhythmConcept Name: Meter & RhythmDefinition: Unlike much Western poetry that relies on a strict syllabic meter (a fixed number of syllables per line), the scholarly consensus is that biblical Hebrew poetry is based on an accentual rhythm.68 This means the rhythm is determined by the number of stressed or accented syllables per colon, with the number of unstressed syllables in between being variable.68 This rhythm is not an independent system imposed on the words; rather, it is an emergent property of the parallel structure itself. Because parallel lines often use parallel syntax (e.g., Noun-Verb-Object // Noun-Verb-Object), they naturally result in a similar number of stressed words, creating a "rhythm of thought" or syntactic rhythm.6Function in Poetry: The accentual rhythm creates a distinct cadence and pace appropriate for oral recitation and liturgy. The balance of stresses between the two cola of a line is a key component of parallelism, reinforcing the semantic relationship with a phonetic one. This gives the poetry a powerful, incantatory quality that enhances its emotional impact and aids in memorization.69Canonical Examples (from Psalms): (Note: Stress patterns are most apparent in Hebrew but can be approximated in translation by focusing on major content words.)Psalm 23:1: "יְהוָה רֹעִי // לֹא אֶחְסָר."Psalm 19:1: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד-אֵל // וּמַעֲשֵׂה יָדָיו מַגִּיד הָרָקִיעַ."Analytical Questions:When reading the line aloud, how many major stressed words or syllables are in the first colon versus the second?Is there a sense of rhythmic balance, or does one colon feel significantly longer or heavier than the other? How does this affect the meaning?How does the rhythm contribute to the overall feeling or impact of the line (e.g., is it stately and balanced, urgent and short, or falling in a lamenting cadence)?How does the grammatical structure of each colon contribute to its rhythmic feel?
+
+---
+
+## Traditional Commentaries
+
+Classical interpretations from traditional Jewish commentators on key verses.
+
+### About the Commentators
+
+#### 1. Rabbi Shlomo Yitzchaki (Rashi)
+
+Rabbi Shlomo Yitzchaki (1040–1105), known as Rashi, is the foundational commentator of Jewish tradition. Living in Troyes, France, his life and work were profoundly shaped by the communal precariousness following the massacres of the First Crusade. This context fueled his pedagogical mission: to make the core Jewish texts, the Tanakh and the Babylonian Talmud, accessible to ensure the continuity of Jewish knowledge. His commentaries on both became indispensable, with his Talmud commentary being printed in every subsequent edition and his Tanakh commentary holding the distinction of being the first Hebrew book ever printed (1475).
+
+Rashi's exegetical method is a revolutionary synthesis of *peshat* (plain, contextual meaning) and *derash* (rabbinic homiletics). While he stated his goal was *peshat*, his genius was not in literalism but in *curation*. He possessed an uncanny ability to anticipate a student's question—a textual redundancy, an awkward phrase, or a narrative difficulty—and would then select a concise midrashic teaching that "settles" this specific problem. Thus, *derash* is not used as a replacement for the plain meaning but as a tool to reveal a deeper coherence *within* the *peshat*. He anchors the Oral Law within the Written Law, demonstrating their inseparability. To aid his local French-speaking audience, he frequently translated difficult Hebrew terms into Old French using Hebrew letters (*la'azim*), a practice that made his work an invaluable resource for modern linguists. His philosophy was his pedagogy; he was not a formal philosopher but an educator driven by a desire to empower every Jew to study. His legacy is one of total saturation; all subsequent Jewish commentary is, in some form, a dialogue with Rashi.
+
+#### 2. Rabbi Abraham ibn Ezra
+
+Rabbi Abraham ibn Ezra (c.1092–1167) represents the zenith of the "Golden Age" of Spanish Jewry. A consummate polymath, he was a master of grammar, philosophy, mathematics, and astrology. After personal tragedies, he spent the second half of his life as an itinerant scholar, wandering through Christian Europe and acting as an intellectual bridge, introducing the sophisticated Sephardic grammatical and scientific traditions to the Jews of France, Italy, and England. His scholarly corpus is vast, including foundational works on Hebrew grammar, Neoplatonic philosophy (*Yesod Mora*), and scientific tracts that introduced the decimal system to European Jews.
+
+His philosophy was a thoroughgoing rationalism, famously stating the "intellect must be the intermediary between man and his God." This rationalism included a deep, scientific belief in astrology, which he viewed as the deterministic physics of the cosmos; the *mitzvot* (commandments), in his view, were divine tools to mitigate this astral determinism. His exegetical method is a conscious and sharp polemic against Rashi's *peshat/derash* synthesis. For Ibn Ezra, the *peshat* is discoverable only through rigorous, scientific mastery of Hebrew grammar and linguistics, and he famously rejects any rabbinic interpretation that "flies in the face of reason." His commentary is concise, witty, and often enigmatic, frequently hinting at controversial ideas with the phrase, "and the intelligent will understand" (*ve-hamaskil yavin*). Scholars agree he was alluding to conclusions that form the basis of modern biblical criticism, such as post-Mosaic authorship of certain verses and the existence of a Deutero-Isaiah. His legacy is the creation of the competing rationalist-grammatical school of exegesis.
+
+#### 3. Rabbi David Kimhi (Radak)
+
+Rabbi David Kimhi (1160–1235), or Radak, was a product of the unique intellectual climate of 13th-century Provence, a "geographic and intellectual crossroads" mediating between the Talmudism of Northern France (Rashi) and the rationalism of Spain (Ibn Ezra). A staunch defender of Maimonides during the Maimonidean Controversy, Radak's primary field was philology. His grammatical treatise, *Sefer Mikhlol*, and his lexicon, *Sefer Ha-Shorashim*, synthesized and systematized Hebrew grammar with such unparalleled clarity that they became the definitive Hebrew textbooks for centuries.
+
+Radak applied this "genius for clarification" to his biblical commentaries, most notably on the *Nevi'im* (Prophets). His exegetical approach represents the "golden mean" of medieval exegesis. He follows the methodology of Ibn Ezra, with a profound commitment to *peshat*, grammatical precision, and a Maimonidean rationalist philosophy. However, unlike the polemical Ibn Ezra, Radak comfortably integrates all his predecessors. He presents the grammatical *peshat* with the accessibility of Rashi and respectfully utilizes rabbinic *derash*, which he clearly distinguishes from the plain meaning. He provides the necessary linguistic, historical, and geographical context to make the prophetic books understandable. His commentary on *Nevi'im* became as standard as Rashi's on the Torah. Because of its clarity and precision, Radak's work became the primary resource for the Christian Hebraists of the Renaissance and Reformation, heavily influencing the translators of the King James Version of the Bible. He remains indispensable for any serious study of the Prophets.
+
+#### 4. Rabbi Menachem ben Solomon (Meiri)
+
+Rabbi Menachem ben Solomon (1249–1316), the Meiri, was a leading Maimonidean rationalist in 13th-century Provence, living at the height of the Maimonidean Controversy. His magnum opus is the *Beit HaBechirah* ("The Chosen House"), a monumental, encyclopedic digest of the Talmud. This work, which was lost for centuries and only rediscovered in the 20th century, is not a line-by-line commentary like Rashi's. Instead, it is a systematic, topical summary. The Meiri omits the "give and take" of the Talmudic debate and instead presents a lucid summary of the entire subject, collating the opinions of all preceding authorities (whom he refers to by epithets, not names) before concluding with the final *halachic* (legal) decision. This work is the ultimate expression of his Maimonidean worldview, imposing a clear, logical, and rational order on the vast sea of the Talmud.
+
+The Meiri's most radical and enduring innovation is his *halachic* position on non-Jews. The Talmud contains discriminatory laws against ancient *akum* (idolaters). The Meiri was the first major authority to rule that these laws were entirely obsolete. He did this by positing a revolutionary *halachic* category: "nations restricted by the ways of religion" (*umot ha-gedurot be-darkhei ha-datot*). He argued that the Talmud's "idolater" was a moral, not theological, category referring to lawless, barbaric ancient peoples. Contemporary Christians and Muslims, by contrast, are governed by *dat* (law, reason, and social order). Because they live by a system of law and morality, the Meiri ruled they are to be treated as equals to Jews in all matters of civil law. Since its rediscovery, his work has become the primary traditional source for modern Jewish universalism and interfaith relations.
+
+#### 5. Rabbi David Altschuler (Metzudat David)
+
+The commentary known as the *Metzudot* ("The Fortresses") is the product of an 18th-century father-son collaboration, initiated by Rabbi David Altschuler (c. 1687–1769) and completed by his son, Rabbi Yechiel Hillel Altschuler. Working in Galicia and Prague, they perceived that the study of Tanakh, particularly *Nevi'im* (Prophets) and *Ketuvim* (Writings), had "weakened." Their work, which covers only *Nevi'im* and *Ketuvim*, was a purely pedagogical intervention designed to reverse this decline.
+
+The brilliance of the *Metzudot* lies not in its content, which is intentionally not original—it is a masterful compilation and simplification based primarily on Radak—but in its revolutionary *form*. Rabbi Yechiel Hillel split the commentary into two distinct parts, printed side-by-side on the page. The first, *Metzudat Tzion* ("Fortress of Zion"), is a simple glossary whose sole function is to define individual difficult Hebrew words. The second, *Metzudat David* ("Fortress of David"), is the commentary proper, providing a clear, flowing paraphrase and explanation of the verse's meaning as a whole. This two-part system created a "frictionless reading experience." It solved the problem of earlier commentaries, like Radak's, which required a student to get bogged down in a grammatical discussion just to understand the verse. With the *Metzudot*, a student can read the flowing paraphrase of *Metzudat David* and only glance at *Metzudat Tzion* if they encounter an unfamiliar word. This pedagogical innovation was a massive success, and the *Metzudot* became a standard, indispensable starting point for any student beginning the study of the Prophets and Writings.
+
+#### 6. Rabbi Meir Leibush Wisser (Malbim)
+
+Rabbi Meir Leibush Wisser (1809–1879), the Malbim, was a "warrior" rabbi, grammarian, and polemicist whose life was defined by his fierce, uncompromising struggle against the 19th-century Haskalah (Jewish Enlightenment) and the nascent Reform movement. His stormy rabbinic career saw him expelled from Bucharest for his staunch opposition to any religious innovations. His commentary was his weapon in this war. His magnum opus, *HaTorah veHaMitzvah*, was an explicit polemic against the Reform movement's claim that the Oral Law (the Talmud) was a later, human invention separate from the "pure" Written Torah. The Malbim's goal was to prove, through systematic linguistic analysis, that the *entire* Oral Law is "implicit in the plain meaning of the verse."
+
+To achieve this, he launched an exegetical counter-reformation built on two radical linguistic principles. First, he rejected the long-held rabbinic principle that "the Torah speaks in human language." He argued that in a divine text, there are *no true synonyms* and *no redundancies*. If the Torah uses two different words for "speak" (e.g., *amar* vs. *diber*), they must have distinct, precise meanings that carry *halachic* implications. Second, in his introduction *Ayelet ha-Shachar*, he laid out a "rediscovered" system of 613 precise grammatical and syntactic rules that he claimed the Talmudic Sages used to derive the Oral Law. With this framework, the Malbim argued that what earlier commentators (like Rashi or Ibn Ezra) saw as *derash* (homiletics) was, in fact, the true, logical, grammatical *peshat* of the verse. He effectively co-opted the Enlightenment's own tools—logic and systematic rules—to defend the divine, inseparable unity of the Written and Oral Law, becoming a hero of the modern Orthodox yeshiva world.
+
+
+
+### Psalms 117:1
+**Why this verse**: Universal imperative to Gentiles - how do commentators explain command to non-Israelites to praise YHWH before motivation given? What is the distinction between גּוֹיִם and אֻמִּים?  
+
+#### Ibn Ezra
+**Hebrew**: הללו את ה' כל גוים - על כן אמר עוד: הללו לפי דעתי, כי טעם כל גוים שהיו תחת יד דוד כמו אם יש גוי וממלכה. ורבי משה אמר: כי הוא כלל לכל גוי. | וטעם כי גבר החסד שיעשה עם הכל לחיותם ולכלכלם. ואמר: ואמת ה' לעולם כנגד הגוים שלא יאמינו בהבליהם וחתם הללו יה - כן עשו תמיד.  
+
+---
+
+#### Radak
+**Hebrew**: הללו. זה המזמור משנים פסוקים לבד והוא לימות המשיח ורמז בו בעשותו אותו שנים פסוקים לבד כי כל העמים יהיו לשני עברים, ישראל יהיו בתורתם, וכל האומות בשבע מצות לעדר אחד וכולם יהללויה כי כולם יודו בו אז, ולפי שאמר בתכלית המזמור הללויה שאמר כנגד ישראל, ראה ברוח הקדש כי כל האומות יהללו יה עדין אמר כנגד כולם הללו את ה' כל גוים: | שבחוהו כל האמים. והוא כפל הענין במלות שונות, וזה יש לכם להללו ולשבחו:  
+
+---
+
+#### Metzudat David
+**Hebrew**: הללו. זה יאמר על לעתיד אתם כל הגוים כולכם הללו את יה:  
+
+---
+
+#### Malbim
+**Hebrew**: (א-ב) הללו, אמר כי ה' מלא בקשתו זאת וישראל נצולו, וגם הגוים כולם שלקחם סנחריב בשבי והביאם לפני ירושלים יהללו את ה' על כי גבר עלינו חסדו, שעי"ז ניצולו גם השבוים ההמה, כמ"ש יגיע מצרים וסחר כוש וסבאים עליך יעבורו, וכן יתר הגוים שנלחם סנחריב עמהם, הודו לה' על זה, כמ"ש ומה יענה מלאכי גוי כי ה' יסד ציון, ונגד מה שאמר כי לשמך תן כבוד אמר הללו את ה' כל גוים, ונגד מה שאמר על חסדך, אמר כי גבר עלינו חסדו, ונ...  
+
+---
+
+#### Meiri
+**Hebrew**: הללו את ה׳ כל גוים וגו׳ כי גבר עלינו חסדו ופירשו בו שהוא נאמ׳ לימות המשיח שיהפכו כל העמים שפה ברורה לקרא כלם בשם ה׳  
+
+---
+
+### Psalms 117:2
+**Why this verse**: Theological paradox - how do commentators explain particular covenant experience (עָלֵינוּ) as grounds for universal worship? What does גָבַר with חֶסֶד as subject mean? Does perfect tense point to specific historical event?  
+
+#### Rashi
+**Hebrew**: כִּי גָבַר עָלֵינוּ חַסְדּוֹ. כְּלוֹמַר: וְאַף כִּי אֲנַחְנוּ, אֲשֶׁר גָּבַר עָלֵינוּ חַסְדּוֹ: | וֶאֱמֶת ה׳ לְעוֹלָם. שֶׁשָּׁמַר הַבְטָחָתוֹ שֶׁהִבְטִיחַ אֶת הָאָבוֹת (בראשית טו:יח-כא):  
+
+**English**: For His kindness has overwhelmed us That is to say: and surely we [must praise Him], for His kindness has overwhelmed us. | and the truth of the Lord is eternal For He kept His promise that He promised the Patriarchs.  
+
+---
+
+#### Radak
+**Hebrew**: כי גבר עלינו חסדו. עד שהוציאנו מן הגלות שלא הייתם מאמינים שיוכל להיות, ועתה הודו ואמרו כולם ואמת ה' לעולם. כי אמת הוא דברו והבטחתו שהבטיחני להוציאנו מן הגלות: ואמר עוד הללו יה. לחזק, או אמר כנגד ישראל: | ואמת ה' לעולם. אמת שקיימת מה שאמרת וזכרתי את בריתי יעקב ואף את בריתי יצחק ואף את בריתי אברהם אזכור והארץ אזכור:  
+
+---
+
+#### Metzudat David
+**Hebrew**: כי גבר. על אשר גבר חסדו והוא לעולם אל אמת כי קיים לנו הבטחתו ולזה הללו את יה:  
+
+---
+
+#### Meiri
+**Hebrew**: וכן כי גבר עלינו חסדו להוציאנו מתחת ידם ומתחת סבלותם. ואמת ה׳ על ייעודי הנביאים בהבטחת הגאולה. ומ״מ פי׳ ג״כ הבטחה על ימות המשיח כלומ׳ שכמו שהוציאני מאפלה לאורה בתחלת המלכות כן תהיה בימות המשיח להפוך אל עמים שפה ברורה.  
+
+---
+
+## Modern Jewish Liturgical Use (Psalm 117)
+
+This section summarizes how Psalm {psalm_chapter} and its phrases are used in contemporary Jewish liturgy.
+
+### Full Psalm 117 Recitation
+
+# Psalm 117 in Jewish Liturgy
+
+Psalm 117, the shortest psalm in the Psalter, is recited in its entirety as an integral component of the Hallel service across all Jewish traditions. This psalm appears in the complete Hallel sequence (Psalms 113–118) recited after the Shacharit Amidah on festivals, Rosh Chodesh, and Chanukah, where it occupies its fixed position between Psalms 116 and 118 within the liturgical progression. Beyond these regular occasions, Psalm 117 features prominently in the concluding Nirtzah section of the Passover Seder, where it appears as part of the second half of Hallel followed by the Great Hallel (Psalm 136) and additional concluding prayers. The psalm's universal call—"Praise the Lord, all nations; extol Him, all peoples"—makes it particularly resonant within the Hallel liturgy, which celebrates God's redemptive acts and universal sovereignty. Ashkenazic, Sefardic, and Mizrahi traditions all maintain this consistent placement and recitation of the complete psalm, reflecting its essential role within the Hallel framework rather than its use as supplementary material. The brevity of Psalm 117 renders it an emphatic affirmation within the longer Hallel sequence, serving as a concise yet theologically significant statement of universal praise.
+
+### Phrase-Level Liturgical Usage
+
+The following phrases from Psalm {psalm_chapter} appear in various liturgical contexts:
+
+#### Phrase: הַֽלְל֣וּ אֶת־יְ֭הֹוָה (from 117:1)
+
+# Scholarly Commentary: הַֽלְל֣וּ אֶת־יְ֭הֹוָה in Jewish Liturgy
+
+The imperative phrase הַֽלְל֣וּ אֶת־יְ֭הֹוָה ("Praise the Lord") from Psalm 117:1 occupies a central position in Jewish liturgical practice, particularly within the concluding psalms of Pesukei Dezimra (the Verses of Song), where it appears as part of the grand hallel sequence that culminates the preliminary morning service. In the Ashkenazi rite for the High Holidays, this phrase is encountered within Psalms 146–150, the concluding Halleluyah psalms that immediately precede the Yishtabach blessing, forming the liturgical climax of Pesukei Dezimra. The liturgy surrounding this phrase reads: "וּמִשְׁפָּטָיו לְיִשְׂרָאֵל: לֹא עָֽשָׂא כֵן לְכָל־גּוֹי... הַלְלוּיָהּ הַלְלוּ אֶת־יְהֹוָה מִן הַשָּׁמַֽיִם הַלְלֽוּהוּ בַּמְּרוֹמִים" (His judgments are with Israel; He has not dealt so with any nation... Praise the Lord! Praise the Lord from the heavens; praise Him in the heights). Beyond the daily service, this phrase also appears in monthly rituals such as Kiddush Levanah (Sanctification of the Moon) across both Ashkenazi and Mizrahi traditions, as well as in special seasonal blessings like Birkat Ha'Ilanot (Blessing of the Trees) in the Edot HaMizrach rite, where it introduces Psalm 148 as a preparatory element. Additionally, the phrase features in Perek Shirah (Chapter of Song), a devotional supplemental text often recited for personal study and spiritual enhancement. Throughout these diverse liturgical contexts, the phrase serves as a universal call to praise that bridges daily obligatory prayer, monthly observances, and special seasonal occasions, uniting Jewish worshippers across different traditions in a common expression of divine acclaim.
+
+---
+
+#### Phrase: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם (from 117:2)
+
+# Psalm 117:2 in Jewish Liturgy
+
+The phrase כִּי־גָבַר עָלֵינוּ חַסְדּוֹ וֶאֱמֶת־יְהֹוָה לְעוֹלָם (For His mercy has prevailed over us, and the truth of the Lord endures forever) appears as an introductory supplement within Pesukei Dezimra (Verses of Praise) across the Edot HaMizrach tradition, preceding the blessing Baruch She'amar that formally opens this section of the morning service. The phrase is recited in three distinct liturgical contexts: on Rosh Hashanah during Shacharit, on Shabbat mornings, and on Yom Kippur during Shacharit, with the liturgy presenting it as an optional opening: יש אומרים כִּי־גָבַר עָלֵינוּ חַסְדּוֹ וֶאֱמֶת־יְהֹוָה לְעוֹלָם הַֽלְלוּיָֽהּ׃ בָּרוּךְ שֶׁנָּתַן לְעַמּוֹ יִשְׂרָאֵל (Some say: For His mercy has prevailed over us, and the truth of the Lord endures forever, Hallelujah. Blessed is He who gave to His people Israel...). This placement before the opening blessing of Pesukei Dezimra establishes a thematic foundation for the entire praise section, invoking God's enduring mercy and faithfulness at the threshold of the morning's liturgical ascent. The phrase's appearance on both ordinary Shabbat mornings and the High Holidays underscores its role as a stabilizing scriptural anchor in the Mizrahi rite, affirming divine constancy across the liturgical calendar. The optional nature of the recitation (indicated by יש אומרים, "some say") suggests regional or communal variation within Mizrahi practice, reflecting the flexibility characteristic of Eastern Jewish liturgical traditions.
+
+---
+
+#### Phrase: עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ (from 117:2)
+
+# Liturgical Usage of עָלֵינוּ חַסְדּוֹ (Psalm 117:2)
+
+The phrase עָלֵינוּ חַסְדּוֹ (His mercy is upon us) from Psalm 117:2 appears in the Sefard liturgical tradition as part of a composite blessing recited across multiple festive occasions, integrated into contexts that emphasize divine favor and the acknowledgment of God's sovereignty. Most prominently, the phrase appears during the Hakafot (circuits) on Simchat Torah in both the evening and morning services, where it is embedded within a declaration of praise and thanksgiving that reads: "אֱלֹהֵינוּ שֶׁבְּרָאָנוּ לִכְבוֹדוֹ. לְהַלְּלוֹ וּלְשַׁבְּחוֹ וּלְסַפֵּר הוֹדוֹ. מִכָּל אוֹם גָּבַר עָלֵינוּ חַסְדּוֹ" (Our God who created us for His glory, to praise Him and to declare His thanksgiving—over all nations His mercy has prevailed upon us). Beyond the festival of Simchat Torah, the same formulation appears in the Shabbat Zemirot (table songs) sung at home during Shabbat meals, as well as in the Zemirot for Seudah Shlishit (the third Shabbat meal), demonstrating that this phrase functions as a recurring liturgical refrain that sanctifies ordinary Shabbat observance with the same language of divine compassion. The consistent recurrence of this phrase across both festive and regular Shabbat contexts reveals its theological significance in expressing the covenantal relationship between Israel and God, emphasizing that divine mercy encompasses the Jewish people distinctively and perpetually.
+
+---
+
+#### Phrase: הַֽלְל֣וּ אֶת־יְ֭הֹוָה כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ כׇּל־הָאֻמִּֽים׃ (from 117:1)
+
+# Scholarly Narrative
+
+The opening verse of Psalm 117, "Hallelu et Adonai kol goyim, shabbechu hu kol ha'umim" (Praise the Lord, all nations; extol Him, all peoples), appears in Jewish liturgy as part of the complete recitation of the Hallel psalms during the Shacharit service on festivals and special occasions. This verse constitutes the entirety of Psalm 117 and is recited within the Hallel service block of the Siddur Sefard, which encompasses the full sequence of Psalms 113 through 118, beginning with an introductory blessing and concluding with a final blessing and Kaddish Shalem. The liturgical context demonstrates the phrase's integration within a broader theological framework, as the Siddur presents it alongside surrounding verses: "Na lechol ammo: bechatzerot beit Adonai betochechech Yerushalayim, Halleluyah: Hallelu et Adonai kol goyim, shabbechu hu kol ha'umim: ki gavar aleinu chasdo, ve'emet Adonai le'olam, Halleluyah" (Grant success to Your people; praise the Lord in the courts of the House of the Lord, in your midst, O Jerusalem, Hallelujah). The brevity of Psalm 117 makes it unique within the Hallel sequence, yet its universalist call for all nations and peoples to praise God carries particular significance during festival celebrations when the community gathers to commemorate divine deliverance. The Hallel service permits variations for certain occasions, with Half Hallel observed on Rosh Chodesh and Chol HaMoed Pesach, though Psalm 117 remains part of the full recitation across all Hallel observances.
+
+---
+
+#### Phrase: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ (from 117:2)
+
+# Scholarly Commentary
+
+The phrase כִּי־גָבַר עָלֵינוּ (ki-gavar alenu, "for His mercy has prevailed over us") appears within the complete recitation of Psalm 117 as part of the Hallel service in the Sefard liturgical tradition. Hallel is recited during the Shacharit (morning) service on festivals and special occasions, where Psalms 113–118 are sung in their entirety to praise God for His deliverance and enduring compassion. The phrase appears within its fuller liturgical context: "יְרוּשָׁלָיִם, הַלְלוּיָהּ: הַלְלוּ אֶת יְהֹוָה כָּל גּוֹיִם, שַׁבְּחוּהוּ כָּל הָאֻמִּים: כִּי גָבַר עָלֵינוּ חַסְדּוֹ, וֶאֱמֶת יְהֹוָה לְעוֹלָם, הַלְלוּיָהּ" (Jerusalem, Hallelujah: Praise the Lord, all nations, extol Him, all peoples: for His mercy has prevailed over us, and the truth of the Lord endures forever, Hallelujah). In this liturgical setting, the phrase serves to emphasize God's steadfast mercy as the theological foundation for communal praise, particularly on occasions when the full Hallel is recited rather than the abbreviated "Half Hallel" observed on Rosh Chodesh and intermediate festival days. The placement of this phrase within Psalm 117—one of the shortest psalms—underscores its concentrated theological significance as a statement of divine compassion that encompasses all nations and generations.
+
+---
+
+#### Phrase: וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם (from 117:2)
+
+# Scholarly Narrative
+
+The phrase וְאֶמֶת־יְהוָה לְעוֹלָם (and the truth of the Lord endures forever) from Psalm 117:2 appears in Jewish liturgy specifically within the Kedushah section of the Amidah during the Yom Kippur Shacharit service in the Ashkenazi tradition, where it functions as part of the third blessing (Kedushat HaShem) in the Reader's Repetition. Within this solemn High Holiday context, the phrase is woven into an elaborate liturgical composition featuring extensive piyyutim (acrostic poems) that elaborate upon themes of divine holiness and kingship, particularly the prominent piyyut "Mi Lo Yirakha Melekh HaGoyim." The liturgical context preserves the phrase within a theologically rich passage that reads: "חֲסִין יָהּ נֶאְדָּר בַּקֹּֽדֶשׁ. זַכִּים יִשְׁתַּחֲווּ לַיהֹוָה בְּהַדְרַת קֹֽדֶשׁ: מֶֽלֶךְ וֶאֱמֶת יְהוָה לְעוֹלָם הַלְלוּיָהּ" (Strong One, O Lord, adorned in holiness; the righteous bow down to the Lord in the splendor of holiness: King and the truth of the Lord endures forever, Hallelujah). This integration of the psalmanic affirmation of eternal divine truth into the Kedushah emphasizes the unchanging nature of God's sovereignty and veracity, themes particularly resonant on the Day of Atonement when the community seeks reconciliation with an eternal and truthful God. The phrase's appearance here represents a characteristic feature of Ashkenazi High Holiday liturgy, where biblical verses are selectively incorporated into the poetic elaborations of the Amidah to deepen theological reflection during moments of heightened spiritual intensity.
+
+---
+
+#### Phrase: כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ (from 117:1)
+
+# Scholarly Narrative
+
+The phrase כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ from Psalm 117:1 appears in Jewish liturgy specifically as part of the concluding Hallel recitation during the Pesach Seder. This occurs in the home setting following the Grace After Meals and immediately before the drinking of the fourth cup of wine, representing a liturgical moment of universal praise that frames the Passover celebration. Within this context, the phrase is embedded in a broader passage of exhortation to praise: הַלְלוּ אֶת־יְיָ כָּל גּוֹיִם, שַׁבְּחוּהוּ כָּל־הָאֻמִּים. כִּי גָבַר עָלֵינוּ חַסְדּוֹ, וֶאֱמֶת יְיָ לְעוֹלָם, הַלְלוּ־יָהּ ("Praise the Lord, all nations; extol Him, all peoples, for His mercy has prevailed over us, and the truth of the Lord endures forever"). The placement of this universalistic summons to praise at the conclusion of the Hallel on Pesach carries particular theological significance, as it transforms the festival's commemoration of Israel's particular redemption into an affirmation of God's universal dominion and the nations' role in acknowledging divine sovereignty. This liturgical positioning reflects the rabbinic understanding that the Exodus narrative ultimately testifies not merely to Israel's liberation but to the manifestation of God's power before all humanity.
+
+---
+
+#### Phrase: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ (from 117:2)
+
+# Scholarly Narrative
+
+The phrase כִּי־גָבַר עָלֵינוּ חַסְדּוֹ ("For His mercy has prevailed over us") appears in Jewish liturgy during the Pesach Seder, specifically within the concluding recitation of Hallel that follows the Grace After Meals and precedes the fourth cup of wine. This passage from Psalm 117 is integrated into the liturgical sequence that begins with Psalm 115 and continues through Psalms 116, 117, and 118, culminating in the Birkat HaShir (Blessing of the Song). The liturgy presents the phrase within its fuller scriptural context: הַלְלוּ אֶת־יְיָ כָּל גּוֹיִם, שַׁבְּחוּהוּ כָּל־הָאֻמִּים. כִּי גָבַר עָלֵינוּ חַסְדּוֹ, וֶאֱמֶת יְיָ לְעוֹלָם, הַלְלוּ־יָהּ ("Praise the Lord, all nations; extol Him, all peoples. For His mercy has prevailed over us, and the truth of the Lord endures forever; praise the Lord"). In this home-centered ritual context, the phrase emphasizes God's enduring compassion as central to the Passover narrative of redemption, linking the historical deliverance from Egypt with the affirmation of divine mercy that sustains Israel. The placement of this verse in the Hallel's conclusion underscores the theological movement from individual thanksgiving to universal recognition of God's merciful dominion.
+
+---
+
+#### Phrase: ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם (from 117:2)
+
+# Scholarly Commentary
+
+The phrase חַסְדּוֹ וֶאֱמֶת־יְהֹוָה לְעוֹלָם (His mercy and the truth of the Lord endure forever) appears as part of Psalm 117:2 within the complete recitation of Hallel during the Shacharit service on festivals and special days in the Sefard tradition. This verse is integral to the Hallel psalms (Psalms 113–118), which are recited in their entirety as the main liturgical unit during these occasions, with the phrase appearing within the broader liturgical context where the congregation responds to the call for universal praise. The liturgy presents this phrase within the fuller verse: "יְהֹוָה כָּל גּוֹיִם, שַׁבְּחוּהוּ כָּל הָאֻמִּים: כִּי גָבַר עָלֵינוּ חַסְדּוֹ, וֶאֱמֶת יְהֹוָה לְעוֹלָם" (Praise the Lord, all nations; extol Him, all peoples, for His mercy has overwhelmed us, and the truth of the Lord endures forever). The phrase emphasizes the eternal nature of God's covenant faithfulness and truth, themes that resonate throughout the Hallel liturgy as expressions of gratitude for divine deliverance and protection. This placement within Hallel on festival mornings connects the phrase to communal celebration and the acknowledgment of God's enduring mercies toward Israel and all humanity.
+
+---
+
+
+---
+
+## Related Psalms Analysis
+
+The concordance librarian has identified **5 psalm(s)** with potentially interesting word and phrase relationships to Psalm 117.
+
+### Psalm 100 (Connection Score: 232.02)
+
+The librarian has found that the psalm you're analyzing (Psalm 117) has some POSSIBLY interesting word and phrase relationships with another psalm (Psalm 100). Below is a list of POSSIBLY related words and phrases. These relationships might deepen your insights into the meaning, intent, posture, history and poetics of the psalm you are analyzing. We're providing the ENTIRE text of Psalm 100 for your consideration, as well as a list of possibly related words and phrases (including skipgrams if they were found). Feel free to REJECT these possible connections as spurious, OR to incorporate them into your work where relevant.
+
+#### Full Text of Psalm 100
+
+**Verse 1**  
+Hebrew: מִזְמ֥וֹר לְתוֹדָ֑ה הָרִ֥יעוּ לַ֝יהֹוָ֗ה כׇּל־הָאָֽרֶץ׃  
+English: A psalm for praise.-a
+Raise a shout for the LORD, all the earth;  
+
+**Verse 2**  
+Hebrew: עִבְד֣וּ אֶת־יְהֹוָ֣ה בְּשִׂמְחָ֑ה בֹּ֥אוּ לְ֝פָנָ֗יו בִּרְנָנָֽה׃  
+English: worship the LORD in gladness;
+come into His presence with shouts of joy.  
+
+**Verse 3**  
+Hebrew: דְּע֗וּ כִּֽי־יְהֹוָה֮ ה֤וּא אֱלֹ֫הִ֥ים הֽוּא־עָ֭שָׂנוּ (ולא) [וְל֣וֹ] אֲנַ֑חְנוּ עַ֝מּ֗וֹ וְצֹ֣אן מַרְעִיתֽוֹ׃  
+English: Acknowledge that the LORD is God;
+He made us and we are His,-b
+His people, the flock He tends.  
+
+**Verse 4**  
+Hebrew: בֹּ֤אוּ שְׁעָרָ֨יו ׀ בְּתוֹדָ֗ה חֲצֵרֹתָ֥יו בִּתְהִלָּ֑ה הוֹדוּ־ל֝֗וֹ בָּרְכ֥וּ שְׁמֽוֹ׃  
+English: Enter His gates with praise,
+His courts with acclamation.
+Praise Him!
+Bless His name!  
+
+**Verse 5**  
+Hebrew: כִּי־ט֣וֹב יְ֭הֹוָה לְעוֹלָ֣ם חַסְדּ֑וֹ וְעַד־דֹּ֥ר וָ֝דֹ֗ר אֱמוּנָתֽוֹ׃ {פ}  
+English: For the LORD is good;
+His steadfast love is eternal;
+His faithfulness is for all generations.  
+
+#### Shared Patterns
+
+**Contiguous Phrases** (3 found):
+
+- **אֶת יְהֹוָ֣ה** (2-word phrase)
+  - Consonantal: `את יהו`
+  - In Psalm 100:
+    - v.2: אֶת יְהֹוָ֣ה
+  - In Psalm 117:
+    - v.1: אֶת יְהֹוָ֣ה
+
+- **יְ֭הֹוָה לְעוֹלָ֣ם** (2-word phrase)
+  - Consonantal: `יהו עולם`
+  - In Psalm 100:
+    - v.5: יְ֭הֹוָה לְעוֹלָ֣ם
+  - In Psalm 117:
+    - v.2: יְ֭הֹוָה לְעוֹלָ֣ם
+
+- **לַ֝יהֹוָ֗ה כׇּל** (2-word phrase)
+  - Consonantal: `יהו כל`
+  - In Psalm 100:
+    - v.1: לַ֝יהֹוָ֗ה כׇּל
+  - In Psalm 117:
+    - v.1: לַ֝יהֹוָ֗ה כׇּל
+
+**Skipgrams** (2 found):
+
+*Skipgrams are patterns where words appear in the same order but not necessarily adjacent*
+
+- **כִּי יְ֭הֹוָה לְעוֹלָ֣ם** (3-word pattern, 1 gap word(s))
+  - Consonantal: `כי יהוה עולם`
+  - Full span: כִּי ט֣וֹב יְ֭הֹוָה לְעוֹלָ֣ם
+  - In Psalm 100:
+    - v.5: כִּי־ט֣וֹב יְ֭הֹוָה לְעוֹלָ֣ם חַסְדּ֑וֹ וְעַד־דֹּ֥ר וָ֝דֹ֗ר אֱמוּנָתֽוֹ׃ {פ}...
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+
+- **אֶת יְהֹוָ֣ה** (2-word pattern, 0 gap word(s))
+  - Consonantal: `את יהוה`
+  - Full span: אֶת יְהֹוָ֣ה
+  - In Psalm 100:
+    - v.2: עִבְד֣וּ אֶת־יְהֹוָ֣ה בְּשִׂמְחָ֑ה בֹּ֥אוּ לְ֝פָנָ֗יו בִּרְנָנָֽה׃...
+  - In Psalm 117:
+    - v.1: הַֽלְל֣וּ אֶת־יְ֭הֹוָה כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ כׇּל־הָאֻמִּֽים׃...
+
+---
+
+### Psalm 146 (Connection Score: 232.01)
+
+The librarian has found that the psalm you're analyzing (Psalm 117) has some POSSIBLY interesting word and phrase relationships with another psalm (Psalm 146). Below is a list of POSSIBLY related words and phrases. These relationships might deepen your insights into the meaning, intent, posture, history and poetics of the psalm you are analyzing. We're providing the ENTIRE text of Psalm 146 for your consideration, as well as a list of possibly related words and phrases (including skipgrams if they were found). Feel free to REJECT these possible connections as spurious, OR to incorporate them into your work where relevant.
+
+#### Full Text of Psalm 146
+
+**Verse 1**  
+Hebrew: הַֽלְלוּ־יָ֡הּ הַֽלְלִ֥י נַ֝פְשִׁ֗י אֶת־יְהֹוָֽה׃  
+English: Hallelujah.
+Praise the LORD, O my soul!  
+
+**Verse 2**  
+Hebrew: אֲהַלְלָ֣ה יְהֹוָ֣ה בְּחַיָּ֑י אֲזַמְּרָ֖ה לֵאלֹהַ֣י בְּעוֹדִֽי׃  
+English: I will praise the LORD all my life,
+sing hymns to my God while I exist.  
+
+**Verse 3**  
+Hebrew: אַל־תִּבְטְח֥וּ בִנְדִיבִ֑ים בְּבֶן־אָדָ֓ם ׀ שֶׁ֤אֵ֖ין ל֥וֹ תְשׁוּעָֽה׃  
+English: Put not your trust in the great,
+in mortal man who cannot save.  
+
+**Verse 4**  
+Hebrew: תֵּצֵ֣א ר֭וּחוֹ יָשֻׁ֣ב לְאַדְמָת֑וֹ בַּיּ֥וֹם הַ֝ה֗וּא אָבְד֥וּ עֶשְׁתֹּנֹתָֽיו׃  
+English: His breath departs;
+he returns to the dust;
+on that day his plans come to nothing.  
+
+**Verse 5**  
+Hebrew: אַשְׁרֵ֗י שֶׁ֤אֵ֣ל יַעֲקֹ֣ב בְּעֶזְר֑וֹ שִׂ֝בְר֗וֹ עַל־יְהֹוָ֥ה אֱלֹהָֽיו׃  
+English: Happy is he who has the God of Jacob for his help,
+whose hope is in the LORD his God,  
+
+**Verse 6**  
+Hebrew: עֹשֶׂ֤ה ׀ שָׁ֘מַ֤יִם וָאָ֗רֶץ אֶת־הַיָּ֥ם וְאֶת־כׇּל־אֲשֶׁר־בָּ֑ם הַשֹּׁמֵ֖ר אֱמֶ֣ת לְעוֹלָֽם׃  
+English: maker of heaven and earth,
+the sea and all that is in them;
+who keeps faith forever;  
+
+**Verse 7**  
+Hebrew: עֹשֶׂ֤ה מִשְׁפָּ֨ט ׀ לָעֲשׁוּקִ֗ים נֹתֵ֣ן לֶ֭חֶם לָרְעֵבִ֑ים יְ֝הֹוָ֗ה מַתִּ֥יר אֲסוּרִֽים׃  
+English: who secures justice for those who are wronged,
+gives food to the hungry.
+The LORD sets prisoners free;  
+
+**Verse 8**  
+Hebrew: יְהֹוָ֤ה ׀ פֹּ֘קֵ֤חַ עִוְרִ֗ים יְ֭הֹוָה זֹקֵ֣ף כְּפוּפִ֑ים יְ֝הֹוָ֗ה אֹהֵ֥ב צַדִּיקִֽים׃  
+English: The LORD restores sight to the blind;
+the LORD makes those who are bent stand straight;
+the LORD loves the righteous;  
+
+**Verse 9**  
+Hebrew: יְהֹוָ֤ה ׀ שֹׁ֘מֵ֤ר אֶת־גֵּרִ֗ים יָת֣וֹם וְאַלְמָנָ֣ה יְעוֹדֵ֑ד וְדֶ֖רֶךְ רְשָׁעִ֣ים יְעַוֵּֽת׃  
+English: The LORD watches over the stranger;
+He gives courage to the orphan and widow,
+but makes the path of the wicked tortuous.  
+
+**Verse 10**  
+Hebrew: יִמְלֹ֤ךְ יְהֹוָ֨ה ׀ לְעוֹלָ֗ם אֱלֹהַ֣יִךְ צִ֭יּוֹן לְדֹ֥ר וָדֹ֗ר הַֽלְלוּ־יָֽהּ׃ {פ}  
+English: The LORD shall reign forever,
+your God, O Zion, for all generations.
+Hallelujah.  
+
+#### Shared Patterns
+
+**Contiguous Phrases** (3 found):
+
+- **הַֽלְלוּ יָֽהּ׃** (2-word phrase)
+  - Consonantal: `לו יה`
+  - In Psalm 117:
+    - v.2: הַֽלְלוּ יָֽהּ׃
+  - In Psalm 146:
+    - v.1: הַֽלְלוּ יָֽהּ׃
+    - v.10: הַֽלְלוּ יָֽהּ׃
+
+- **יְהֹוָ֥ה לְעוֹלָ֗ם** (2-word phrase)
+  - Consonantal: `יהו עולם`
+  - In Psalm 117:
+    - v.2: יְהֹוָ֥ה לְעוֹלָ֗ם
+  - In Psalm 146:
+    - v.10: יְהֹוָ֥ה לְעוֹלָ֗ם
+
+- **אֶת יְ֭הֹוָה** (2-word phrase)
+  - Consonantal: `את יהו`
+  - In Psalm 117:
+    - v.1: אֶת יְ֭הֹוָה
+  - In Psalm 146:
+    - v.1: אֶת יְ֭הֹוָה
+
+**Skipgrams** (4 found):
+
+*Skipgrams are patterns where words appear in the same order but not necessarily adjacent*
+
+- **יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ יָֽהּ׃** (4-word pattern, 0 gap word(s))
+  - Consonantal: `יהוה עולם הלל יה`
+  - Full span: יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ יָֽהּ׃
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+  - In Psalm 146:
+    - v.10: יִמְלֹ֤ךְ יְהֹוָ֨ה ׀ לְעוֹלָ֗ם אֱלֹהַ֣יִךְ צִ֭יּוֹן לְדֹ֥ר וָדֹ֗ר הַֽלְלוּ־יָֽהּ׃ {פ}...
+
+- **הַֽלְל֣וּ אֶת יְ֭הֹוָה** (3-word pattern, 0 gap word(s))
+  - Consonantal: `הלל את יהוה`
+  - Full span: הַֽלְל֣וּ אֶת יְ֭הֹוָה
+  - In Psalm 117:
+    - v.1: הַֽלְל֣וּ אֶת־יְ֭הֹוָה כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ כׇּל־הָאֻמִּֽים׃...
+  - In Psalm 146:
+    - v.1: הַֽלְלוּ־יָ֡הּ הַֽלְלִ֥י נַ֝פְשִׁ֗י אֶת־יְהֹוָֽה׃...
+    - v.1: הַֽלְלוּ־יָ֡הּ הַֽלְלִ֥י נַ֝פְשִׁ֗י אֶת־יְהֹוָֽה׃...
+
+- **אֶת כׇּל** (2-word pattern, 1 gap word(s))
+  - Consonantal: `את כל`
+  - Full span: אֶת יְ֭הֹוָה כׇּל
+  - In Psalm 117:
+    - v.1: הַֽלְל֣וּ אֶת־יְ֭הֹוָה כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ כׇּל־הָאֻמִּֽים׃...
+  - In Psalm 146:
+    - v.6: עֹשֶׂ֤ה ׀ שָׁ֘מַ֤יִם וָאָ֗רֶץ אֶת־הַיָּ֥ם וְאֶת־כׇּל־אֲשֶׁר־בָּ֑ם הַשֹּׁמֵ֖ר אֱמֶ֣ת לְעוֹלָֽם׃...
+
+- **עָלֵ֨ינוּ יְהֹוָ֥ה** (2-word pattern, 2 gap word(s))
+  - Consonantal: `על יהוה`
+  - Full span: עָלֵ֨ינוּ חַסְדּ֗וֹ וֶאֱמֶת יְהֹוָ֥ה
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+  - In Psalm 146:
+    - v.5: אַשְׁרֵ֗י שֶׁ֤אֵ֣ל יַעֲקֹ֣ב בְּעֶזְר֑וֹ שִׂ֝בְר֗וֹ עַל־יְהֹוָ֥ה אֱלֹהָֽיו׃...
+
+---
+
+### Psalm 134 (Connection Score: 211.93)
+
+The librarian has found that the psalm you're analyzing (Psalm 117) has some POSSIBLY interesting word and phrase relationships with another psalm (Psalm 134). Below is a list of POSSIBLY related words and phrases. These relationships might deepen your insights into the meaning, intent, posture, history and poetics of the psalm you are analyzing. We're providing the ENTIRE text of Psalm 134 for your consideration, as well as a list of possibly related words and phrases (including skipgrams if they were found). Feel free to REJECT these possible connections as spurious, OR to incorporate them into your work where relevant.
+
+#### Full Text of Psalm 134
+
+**Verse 1**  
+Hebrew: שִׁ֗יר הַֽמַּ֫עֲל֥וֹת הִנֵּ֤ה ׀ בָּרְכ֣וּ אֶת־יְ֭הֹוָה כׇּל־עַבְדֵ֣י יְהֹוָ֑ה הָעֹמְדִ֥ים בְּבֵית־יְ֝הֹוָ֗ה בַּלֵּילֽוֹת׃  
+English: A song of ascents.
+Now bless the LORD,
+all you servants of the LORD
+who stand nightly
+in the house of the LORD.  
+
+**Verse 2**  
+Hebrew: שְׂאֽוּ־יְדֵכֶ֥ם קֹ֑דֶשׁ וּ֝בָרְכ֗וּ אֶת־יְהֹוָֽה׃  
+English: Lift your hands toward the sanctuary
+and bless the LORD.  
+
+**Verse 3**  
+Hebrew: יְבָרֶכְךָ֣ יְ֭הֹוָה מִצִּיּ֑וֹן עֹ֝שֵׂ֗ה שָׁמַ֥יִם וָאָֽרֶץ׃ {פ}  
+English: May the LORD,
+maker of heaven and earth,
+bless you from Zion.  
+
+#### Shared Patterns
+
+**Contiguous Phrases** (1 found):
+
+- **אֶת יְ֭הֹוָה כׇּל** (3-word phrase)
+  - Consonantal: `את יהו כל`
+  - In Psalm 117:
+    - v.1: אֶת יְ֭הֹוָה כׇּל
+  - In Psalm 134:
+    - v.1: אֶת יְ֭הֹוָה כׇּל
+
+**Skipgrams** (2 found):
+
+*Skipgrams are patterns where words appear in the same order but not necessarily adjacent*
+
+- **אֶת יְ֭הֹוָה כׇּל** (3-word pattern, 0 gap word(s))
+  - Consonantal: `את יהוה כל`
+  - Full span: אֶת יְ֭הֹוָה כׇּל
+  - In Psalm 117:
+    - v.1: הַֽלְל֣וּ אֶת־יְ֭הֹוָה כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ כׇּל־הָאֻמִּֽים׃...
+  - In Psalm 134:
+    - v.1: שִׁ֗יר הַֽמַּ֫עֲל֥וֹת הִנֵּ֤ה ׀ בָּרְכ֣וּ אֶת־יְ֭הֹוָה כׇּל־עַבְדֵ֣י יְהֹוָ֑ה הָעֹמְדִ֥ים בְּבֵית־יְ...
+
+- **עָלֵ֨ינוּ יְהֹוָ֥ה** (2-word pattern, 2 gap word(s))
+  - Consonantal: `על יהוה`
+  - Full span: עָלֵ֨ינוּ חַסְדּ֗וֹ וֶאֱמֶת יְהֹוָ֥ה
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+  - In Psalm 134:
+    - v.1: שִׁ֗יר הַֽמַּ֫עֲל֥וֹת הִנֵּ֤ה ׀ בָּרְכ֣וּ אֶת־יְ֭הֹוָה כׇּל־עַבְדֵ֣י יְהֹוָ֑ה הָעֹמְדִ֥ים בְּבֵית־יְ...
+
+---
+
+### Psalm 115 (Connection Score: 189.30)
+
+The librarian has found that the psalm you're analyzing (Psalm 117) has some POSSIBLY interesting word and phrase relationships with another psalm (Psalm 115). Below is a list of POSSIBLY related words and phrases. These relationships might deepen your insights into the meaning, intent, posture, history and poetics of the psalm you are analyzing. We're providing the ENTIRE text of Psalm 115 for your consideration, as well as a list of possibly related words and phrases (including skipgrams if they were found). Feel free to REJECT these possible connections as spurious, OR to incorporate them into your work where relevant.
+
+#### Full Text of Psalm 115
+
+**Verse 1**  
+Hebrew: לֹ֤א לָ֥נוּ יְהֹוָ֗ה לֹ֫א־לָ֥נוּ כִּֽי־לְ֭שִׁמְךָ תֵּ֣ן כָּב֑וֹד עַל־חַ֝סְדְּךָ֗ עַל־אֲמִתֶּֽךָ׃  
+English: Not to us, O LORD, not to us
+but to Your name bring glory
+for the sake of Your love and Your faithfulness.  
+
+**Verse 2**  
+Hebrew: לָ֭מָּה יֹאמְר֣וּ הַגּוֹיִ֑ם אַיֵּה־נָ֝֗א אֱלֹהֵיהֶֽם׃  
+English: Let the nations not say,
+“Where, now, is their God?”  
+
+**Verse 3**  
+Hebrew: וֵאלֹהֵ֥ינוּ בַשָּׁמָ֑יִם כֹּ֖ל אֲשֶׁר־חָפֵ֣ץ עָשָֽׂה׃  
+English: when our God is in heaven
+and all that He wills He accomplishes.  
+
+**Verse 4**  
+Hebrew: עֲֽ֭צַבֵּיהֶם כֶּ֣סֶף וְזָהָ֑ב מַ֝עֲשֵׂ֗ה יְדֵ֣י אָדָֽם׃  
+English: Their idols are silver and gold,
+the work of men’s hands.  
+
+**Verse 5**  
+Hebrew: פֶּֽה־לָ֭הֶם וְלֹ֣א יְדַבֵּ֑רוּ עֵינַ֥יִם לָ֝הֶ֗ם וְלֹ֣א יִרְאֽוּ׃  
+English: They have mouths, but cannot speak,
+eyes, but cannot see;  
+
+**Verse 6**  
+Hebrew: אׇזְנַ֣יִם לָ֭הֶם וְלֹ֣א יִשְׁמָ֑עוּ אַ֥ף לָ֝הֶ֗ם וְלֹ֣א יְרִיחֽוּן׃  
+English: they have ears, but cannot hear,
+noses, but cannot smell;  
+
+**Verse 7**  
+Hebrew: יְדֵיהֶ֤ם ׀ וְלֹ֬א יְמִישׁ֗וּן רַ֭גְלֵיהֶם וְלֹ֣א יְהַלֵּ֑כוּ לֹא־יֶ֝הְגּ֗וּ בִּגְרוֹנָֽם׃  
+English: they have hands, but cannot touch,
+feet, but cannot walk;
+they can make no sound in their throats.  
+
+**Verse 8**  
+Hebrew: כְּ֭מוֹהֶם יִהְי֣וּ עֹשֵׂיהֶ֑ם כֹּ֖ל אֲשֶׁר־בֹּטֵ֣חַ בָּהֶֽם׃  
+English: Those who fashion them,
+all who trust in them,
+shall become like them.  
+
+**Verse 9**  
+Hebrew: יִ֭שְׂרָאֵל בְּטַ֣ח בַּיהֹוָ֑ה עֶזְרָ֖ם וּמָגִנָּ֣ם הֽוּא׃  
+English: O Israel, trust in the LORD!
+He is their help and shield.  
+
+**Verse 10**  
+Hebrew: בֵּ֣ית אַ֭הֲרֹן בִּטְח֣וּ בַיהֹוָ֑ה עֶזְרָ֖ם וּמָגִנָּ֣ם הֽוּא׃  
+English: O house of Aaron, trust in the LORD!
+He is their help and shield.  
+
+**Verse 11**  
+Hebrew: יִרְאֵ֣י יְ֭הֹוָה בִּטְח֣וּ בַיהֹוָ֑ה עֶזְרָ֖ם וּמָגִנָּ֣ם הֽוּא׃  
+English: O you who fear the LORD, trust in the LORD!
+He is their help and shield.  
+
+**Verse 12**  
+Hebrew: יְהֹוָה֮ זְכָרָ֢נוּ יְבָ֫רֵ֥ךְ יְ֭בָרֵךְ אֶת־בֵּ֣ית יִשְׂרָאֵ֑ל יְ֝בָרֵ֗ךְ אֶת־בֵּ֥ית אַהֲרֹֽן׃  
+English: The LORD is mindful of us.
+He will bless us;
+He will bless the house of Israel;
+He will bless the house of Aaron;  
+
+**Verse 13**  
+Hebrew: יְ֭בָרֵךְ יִרְאֵ֣י יְהֹוָ֑ה הַ֝קְּטַנִּ֗ים עִם־הַגְּדֹלִֽים׃  
+English: He will bless those who fear the LORD,
+small and great alike.  
+
+**Verse 14**  
+Hebrew: יֹסֵ֣ף יְהֹוָ֣ה עֲלֵיכֶ֑ם עֲ֝לֵיכֶ֗ם וְעַל־בְּנֵיכֶֽם׃  
+English: May the LORD increase your numbers,
+yours and your children’s also.  
+
+**Verse 15**  
+Hebrew: בְּרוּכִ֣ים אַ֭תֶּם לַיהֹוָ֑ה עֹ֝שֵׂ֗ה שָׁמַ֥יִם וָאָֽרֶץ׃  
+English: May you be blessed by the LORD,
+Maker of heaven and earth.  
+
+**Verse 16**  
+Hebrew: הַשָּׁמַ֣יִם שָׁ֭מַיִם לַיהֹוָ֑ה וְ֝הָאָ֗רֶץ נָתַ֥ן לִבְנֵי־אָדָֽם׃  
+English: The heavens belong to the LORD,
+but the earth He gave over to man.  
+
+**Verse 17**  
+Hebrew: לֹ֣א הַ֭מֵּתִים יְהַֽלְלוּ־יָ֑הּ וְ֝לֹ֗א כׇּל־יֹרְדֵ֥י דוּמָֽה׃  
+English: The dead cannot praise the LORD,
+nor any who go down into silence.  
+
+**Verse 18**  
+Hebrew: וַאֲנַ֤חְנוּ ׀ נְבָ֘רֵ֤ךְ יָ֗הּ מֵעַתָּ֥ה וְעַד־עוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}  
+English: But we will bless the LORD
+now and forever.
+Hallelujah.  
+
+#### Shared Patterns
+
+**Contiguous Phrases** (1 found):
+
+- **עוֹלָ֗ם הַֽלְלוּ יָֽהּ׃** (3-word phrase)
+  - Consonantal: `עולם לו יה`
+  - In Psalm 115:
+    - v.18: עוֹלָ֗ם הַֽלְלוּ יָֽהּ׃
+  - In Psalm 117:
+    - v.2: עוֹלָ֗ם הַֽלְלוּ יָֽהּ׃
+
+**Skipgrams** (3 found):
+
+*Skipgrams are patterns where words appear in the same order but not necessarily adjacent*
+
+- **כִּֽי עַל חַ֝סְדְּךָ֗** (3-word pattern, 3 gap word(s))
+  - Consonantal: `כי על חסד`
+  - Full span: כִּֽי לְ֭שִׁמְךָ תֵּ֣ן כָּב֑וֹד עַל חַ֝סְדְּךָ֗
+  - In Psalm 115:
+    - v.1: לֹ֤א לָ֥נוּ יְהֹוָ֗ה לֹ֫א־לָ֥נוּ כִּֽי־לְ֭שִׁמְךָ תֵּ֣ן כָּב֑וֹד עַל־חַ֝סְדְּךָ֗ עַל־אֲמִתֶּֽךָ׃...
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+
+- **עוֹלָ֗ם הַֽלְלוּ יָֽהּ׃** (3-word pattern, 0 gap word(s))
+  - Consonantal: `עולם הלל יה`
+  - Full span: עוֹלָ֗ם הַֽלְלוּ יָֽהּ׃
+  - In Psalm 115:
+    - v.18: וַאֲנַ֤חְנוּ ׀ נְבָ֘רֵ֤ךְ יָ֗הּ מֵעַתָּ֥ה וְעַד־עוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+
+- **יְהַֽלְלוּ כׇּל** (2-word pattern, 2 gap word(s))
+  - Consonantal: `הלל כל`
+  - Full span: יְהַֽלְלוּ יָ֑הּ וְ֝לֹ֗א כׇּל
+  - In Psalm 115:
+    - v.17: לֹ֣א הַ֭מֵּתִים יְהַֽלְלוּ־יָ֑הּ וְ֝לֹ֗א כׇּל־יֹרְדֵ֥י דוּמָֽה׃...
+  - In Psalm 117:
+    - v.1: הַֽלְל֣וּ אֶת־יְ֭הֹוָה כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ כׇּל־הָאֻמִּֽים׃...
+
+---
+
+### Psalm 103 (Connection Score: 188.07)
+
+The librarian has found that the psalm you're analyzing (Psalm 117) has some POSSIBLY interesting word and phrase relationships with another psalm (Psalm 103). Below is a list of POSSIBLY related words and phrases. These relationships might deepen your insights into the meaning, intent, posture, history and poetics of the psalm you are analyzing. We're providing the ENTIRE text of Psalm 103 for your consideration, as well as a list of possibly related words and phrases (including skipgrams if they were found). Feel free to REJECT these possible connections as spurious, OR to incorporate them into your work where relevant.
+
+#### Full Text of Psalm 103
+
+**Verse 1**  
+Hebrew: לְדָוִ֨ד ׀ בָּרְכִ֣י נַ֭פְשִׁי אֶת־יְהֹוָ֑ה וְכׇל־קְ֝רָבַ֗י אֶת־שֵׁ֥ם קׇדְשֽׁוֹ׃  
+English: Of David.
+Bless the LORD, O my soul,
+all my being, His holy name.  
+
+**Verse 2**  
+Hebrew: בָּרְכִ֣י נַ֭פְשִׁי אֶת־יְהֹוָ֑ה וְאַל־תִּ֝שְׁכְּחִ֗י כׇּל־גְּמוּלָֽיו׃  
+English: Bless the LORD, O my soul
+and do not forget all His bounties.  
+
+**Verse 3**  
+Hebrew: הַסֹּלֵ֥חַ לְכׇל־עֲוֺנֵ֑כִי הָ֝רֹפֵ֗א לְכׇל־תַּחֲלוּאָֽיְכִי׃  
+English: He forgives all your sins,
+heals all your diseases.  
+
+**Verse 4**  
+Hebrew: הַגּוֹאֵ֣ל מִשַּׁ֣חַת חַיָּ֑יְכִי הַֽ֝מְעַטְּרֵ֗כִי חֶ֣סֶד וְרַחֲמִֽים׃  
+English: He redeems your life from the Pit,
+surrounds you with steadfast love and mercy.  
+
+**Verse 5**  
+Hebrew: הַמַּשְׂבִּ֣יעַ בַּטּ֣וֹב עֶדְיֵ֑ךְ תִּתְחַדֵּ֖שׁ כַּנֶּ֣שֶׁר נְעוּרָֽיְכִי׃  
+English: He satisfies you with good things in the prime of life,-a
+so that your youth is renewed like the eagle’s.  
+
+**Verse 6**  
+Hebrew: עֹשֵׂ֣ה צְדָק֣וֹת יְהֹוָ֑ה וּ֝מִשְׁפָּטִ֗ים לְכׇל־עֲשׁוּקִֽים׃  
+English: The LORD executes righteous acts
+and judgments for all who are wronged.  
+
+**Verse 7**  
+Hebrew: יוֹדִ֣יעַ דְּרָכָ֣יו לְמֹשֶׁ֑ה לִבְנֵ֥י יִ֝שְׂרָאֵ֗ל עֲלִילוֹתָֽיו׃  
+English: He made known His ways to Moses,
+His deeds to the children of Israel.  
+
+**Verse 8**  
+Hebrew: רַח֣וּם וְחַנּ֣וּן יְהֹוָ֑ה אֶ֖רֶךְ אַפַּ֣יִם וְרַב־חָֽסֶד׃  
+English: The LORD is compassionate and gracious,
+slow to anger, abounding in steadfast love.  
+
+**Verse 9**  
+Hebrew: לֹא־לָנֶ֥צַח יָרִ֑יב וְלֹ֖א לְעוֹלָ֣ם יִטּֽוֹר׃  
+English: He will not contend forever,
+or nurse His anger for all time.  
+
+**Verse 10**  
+Hebrew: לֹ֣א כַ֭חֲטָאֵינוּ עָ֣שָׂה לָ֑נוּ וְלֹ֥א כַ֝עֲוֺנֹתֵ֗ינוּ גָּמַ֥ל עָלֵֽינוּ׃  
+English: He has not dealt with us according to our sins,
+nor has He requited us according to our iniquities.  
+
+**Verse 11**  
+Hebrew: כִּ֤י כִגְבֹ֣הַּ שָׁ֭מַיִם עַל־הָאָ֑רֶץ גָּבַ֥ר חַ֝סְדּ֗וֹ עַל־יְרֵאָֽיו׃  
+English: For as the heavens are high above the earth,
+so great is His steadfast love toward those who fear Him.  
+
+**Verse 12**  
+Hebrew: כִּרְחֹ֣ק מִ֭זְרָח מִֽמַּעֲרָ֑ב הִֽרְחִ֥יק מִ֝מֶּ֗נּוּ אֶת־פְּשָׁעֵֽינוּ׃  
+English: As east is far from west,
+so far has He removed our sins from us.  
+
+**Verse 13**  
+Hebrew: כְּרַחֵ֣ם אָ֭ב עַל־בָּנִ֑ים רִחַ֥ם יְ֝הֹוָ֗ה עַל־יְרֵאָֽיו׃  
+English: As a father has compassion for his children,
+so the LORD has compassion for those who fear Him.  
+
+**Verse 14**  
+Hebrew: כִּי־ה֭וּא יָדַ֣ע יִצְרֵ֑נוּ זָ֝כ֗וּר כִּי־עָפָ֥ר אֲנָֽחְנוּ׃  
+English: For He knows how we are formed;
+He is mindful that we are dust.  
+
+**Verse 15**  
+Hebrew: אֱ֭נוֹשׁ כֶּחָצִ֣יר יָמָ֑יו כְּצִ֥יץ הַ֝שָּׂדֶ֗ה כֵּ֣ן יָצִֽיץ׃  
+English: Man, his days are like those of grass;
+he blooms like a flower of the field;  
+
+**Verse 16**  
+Hebrew: כִּ֤י ר֣וּחַ עָֽבְרָה־בּ֣וֹ וְאֵינֶ֑נּוּ וְלֹֽא־יַכִּירֶ֖נּוּ ע֣וֹד מְקוֹמֽוֹ׃  
+English: a wind passes by and it is no more,
+its own place no longer knows it.  
+
+**Verse 17**  
+Hebrew: וְחֶ֤סֶד יְהֹוָ֨ה ׀ מֵעוֹלָ֣ם וְעַד־ע֭וֹלָם עַל־יְרֵאָ֑יו וְ֝צִדְקָת֗וֹ לִבְנֵ֥י בָנִֽים׃  
+English: But the LORD’s steadfast love is for all eternity
+toward those who fear Him,
+and His beneficence is for the children’s children  
+
+**Verse 18**  
+Hebrew: לְשֹׁמְרֵ֥י בְרִית֑וֹ וּלְזֹכְרֵ֥י פִ֝קֻּדָ֗יו לַעֲשׂוֹתָֽם׃  
+English: of those who keep His covenant
+and remember to observe His precepts.  
+
+**Verse 19**  
+Hebrew: יְֽהֹוָ֗ה בַּ֭שָּׁמַיִם הֵכִ֣ין כִּסְא֑וֹ וּ֝מַלְכוּת֗וֹ בַּכֹּ֥ל מָשָֽׁלָה׃  
+English: The LORD has established His throne in heaven,
+and His sovereign rule is over all.  
+
+**Verse 20**  
+Hebrew: בָּרְכ֥וּ יְהֹוָ֗ה מַלְאָ֫כָ֥יו גִּבֹּ֣רֵי כֹ֭חַ עֹשֵׂ֣י דְבָר֑וֹ לִ֝שְׁמֹ֗עַ בְּק֣וֹל דְּבָרֽוֹ׃  
+English: Bless the LORD, O His angels,
+mighty creatures who do His bidding,
+ever obedient to His bidding;  
+
+**Verse 21**  
+Hebrew: בָּרְכ֣וּ יְ֭הֹוָה כׇּל־צְבָאָ֑יו מְ֝שָׁרְתָ֗יו עֹשֵׂ֥י רְצוֹנֽוֹ׃  
+English: bless the LORD, all His hosts,
+His servants who do His will;  
+
+**Verse 22**  
+Hebrew: בָּרְכ֤וּ יְהֹוָ֨ה ׀ כׇּֽל־מַעֲשָׂ֗יו בְּכׇל־מְקֹמ֥וֹת מֶמְשַׁלְתּ֑וֹ בָּרְכִ֥י נַ֝פְשִׁ֗י אֶת־יְהֹוָֽה׃ {פ}  
+English: bless the LORD, all His works,
+through the length and breadth of His realm;
+bless the LORD, O my soul.  
+
+#### Shared Patterns
+
+**Contiguous Phrases** (2 found):
+
+- **אֶת יְהֹוָ֑ה וְכׇל** (3-word phrase)
+  - Consonantal: `את יהו כל`
+  - In Psalm 103:
+    - v.1: אֶת יְהֹוָ֑ה וְכׇל
+  - In Psalm 117:
+    - v.1: אֶת יְהֹוָ֑ה וְכׇל
+
+- **יְהֹוָ֨ה מֵעוֹלָ֣ם** (2-word phrase)
+  - Consonantal: `יהו עולם`
+  - In Psalm 103:
+    - v.17: יְהֹוָ֨ה מֵעוֹלָ֣ם
+  - In Psalm 117:
+    - v.2: יְהֹוָ֨ה מֵעוֹלָ֣ם
+
+**Skipgrams** (4 found):
+
+*Skipgrams are patterns where words appear in the same order but not necessarily adjacent*
+
+- **אֶת יְהֹוָ֑ה כׇּל** (3-word pattern, 2 gap word(s))
+  - Consonantal: `את יהוה כל`
+  - Full span: אֶת יְהֹוָ֑ה וְאַל תִּ֝שְׁכְּחִ֗י כׇּל
+  - In Psalm 103:
+    - v.2: בָּרְכִ֣י נַ֭פְשִׁי אֶת־יְהֹוָ֑ה וְאַל־תִּ֝שְׁכְּחִ֗י כׇּל־גְּמוּלָֽיו׃...
+  - In Psalm 117:
+    - v.1: הַֽלְל֣וּ אֶת־יְ֭הֹוָה כׇּל־גּוֹיִ֑ם שַׁ֝בְּח֗וּהוּ כׇּל־הָאֻמִּֽים׃...
+
+- **כִּ֤י גָּבַ֥ר חַ֝סְדּ֗וֹ** (3-word pattern, 4 gap word(s))
+  - Consonantal: `כי גבר חסד`
+  - Full span: כִּ֤י כִגְבֹ֣הַּ שָׁ֭מַיִם עַל הָאָ֑רֶץ גָּבַ֥ר חַ֝סְדּ֗וֹ
+  - In Psalm 103:
+    - v.11: כִּ֤י כִגְבֹ֣הַּ שָׁ֭מַיִם עַל־הָאָ֑רֶץ גָּבַ֥ר חַ֝סְדּ֗וֹ עַל־יְרֵאָֽיו׃...
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+
+- **וְחֶ֤סֶד יְהֹוָ֨ה מֵעוֹלָ֣ם** (3-word pattern, 0 gap word(s))
+  - Consonantal: `חסד יהוה עולם`
+  - Full span: וְחֶ֤סֶד יְהֹוָ֨ה מֵעוֹלָ֣ם
+  - In Psalm 103:
+    - v.17: וְחֶ֤סֶד יְהֹוָ֨ה ׀ מֵעוֹלָ֣ם וְעַד־ע֭וֹלָם עַל־יְרֵאָ֑יו וְ֝צִדְקָת֗וֹ לִבְנֵ֥י בָנִֽים׃...
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+
+- **עַל יְ֝הֹוָ֗ה** (2-word pattern, 2 gap word(s))
+  - Consonantal: `על יהוה`
+  - Full span: עַל בָּנִ֑ים רִחַ֥ם יְ֝הֹוָ֗ה
+  - In Psalm 103:
+    - v.13: כְּרַחֵ֣ם אָ֭ב עַל־בָּנִ֑ים רִחַ֥ם יְ֝הֹוָ֗ה עַל־יְרֵאָֽיו׃...
+  - In Psalm 117:
+    - v.2: כִּ֥י־גָ֘בַ֤ר עָלֵ֨ינוּ ׀ חַסְדּ֗וֹ וֶאֱמֶת־יְהֹוָ֥ה לְעוֹלָ֗ם הַֽלְלוּ־יָֽהּ׃ {פ}...
+
+---
+
+
+---
+
+## Research Summary
+
+- **Lexicon entries**: 11
+- **Concordance searches**: 6
+- **Concordance results**: 116
+- **Figurative language searches**: 2
+- **Figurative instances found**: 82
+- **Commentary verses**: 2
+- **Commentary entries**: 9
+- **Liturgical prayers (aggregated)**: 10
+- **Rabbi Sacks references**: 0
+- **Liturgical total occurrences**: 32
+- **Related psalms analyzed**: 5

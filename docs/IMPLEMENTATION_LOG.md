@@ -1,6 +1,89 @@
 # Implementation Log
 
 
+## Session 110 - 2025-11-15 (Liturgical Header & Related Psalms Display Fixes - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix liturgical section header replacement and related psalms display in DOCX
+**Result**: ✓ COMPLETE - Both issues resolved
+**Session Duration**: ~30 minutes (2 issues + documentation)
+**Status**: Production ready
+
+### Tasks Completed
+
+**Issue 1: Liturgical Section Header Not Formatted in DOCX**
+- **Problem**: Psalm 4 DOCX showed "—LITURGICAL-SECTION-START—" instead of proper header "## Modern Jewish Liturgical Use"
+- **Root Cause**: LLM outputting em-dashes (`—`) instead of regular hyphens (`---`) in the marker
+  - Expected: `---LITURGICAL-SECTION-START---`
+  - Actual: `—LITURGICAL-SECTION-START—`
+- **Fix**: Updated `master_editor.py` replacement logic to handle multiple marker variants
+- **Implementation**: Added list of marker variants including em-dash versions
+- **Files Modified**:
+  - `src/agents/master_editor.py` (lines 645-677)
+
+**Issue 2: Related Psalms Count Shows "N/A" and Missing List**
+- **Problem 1**: Related psalms count showing "N/A" in DOCX "Research & Data Inputs" section
+- **Problem 2**: Only count shown, not WHICH psalms were analyzed
+- **Root Cause**:
+  - `pipeline_summary.py` tracked `related_psalms_count` but didn't save it to JSON
+  - No tracking of psalm numbers list, only count
+- **Fix**: Three-part solution:
+  1. Added `related_psalms_list` field to `ResearchStats` dataclass
+  2. Updated `track_research_bundle()` to populate the list from `research_bundle.related_psalms`
+  3. Updated `to_dict()` to include both count and list in JSON export
+  4. Updated `document_generator.py` to display "8 (Psalms 77, 25, 34, ...)" format
+- **Files Modified**:
+  - `src/utils/pipeline_summary.py` (lines 59, 244, 591)
+  - `src/utils/document_generator.py` (lines 562-571, 596)
+
+### Code Changes Summary
+
+**Modified Files**:
+
+1. `src/agents/master_editor.py`
+   - Changed single marker check to list of marker variants (lines 647-652)
+   - Added support for em-dash versions: `—LITURGICAL-SECTION-START—`
+   - Improved logging to show which marker variant was found (line 661)
+
+2. `src/utils/pipeline_summary.py`
+   - Added `related_psalms_list: List[int]` field to `ResearchStats` (line 59)
+   - Updated `track_research_bundle()` to extract psalm numbers (line 244)
+   - Added `related_psalms_list` to JSON export in `to_dict()` (line 591)
+
+3. `src/utils/document_generator.py`
+   - Added `related_psalms_list` extraction from research data (line 562)
+   - Created formatted string showing both count and list (lines 564-571)
+   - Changed label from "Number of Similar Psalms Analyzed" to "Similar Psalms Analyzed" (line 596)
+   - Format example: "8 (Psalms 77, 25, 34, 62, 55, 3, 31, 63)"
+
+### Impact
+
+**Liturgical Section Fix**:
+- Affects all future psalm DOCX generation
+- Existing psalms with em-dash markers can now be regenerated with proper headers
+- More robust against LLM output variations
+
+**Related Psalms Display Fix**:
+- New psalm generations will automatically show count + list
+- Provides users with clear view of which psalms were used for comparative analysis
+- Existing psalms need to be regenerated to get the full list (count was already tracked for some)
+
+### Testing Notes
+- Liturgical marker replacement now handles 4 variants:
+  1. `---LITURGICAL-SECTION-START---` (regular hyphens)
+  2. `—LITURGICAL-SECTION-START—` (em-dashes)
+  3. `— LITURGICAL-SECTION-START—` (em-dash with space before)
+  4. `—LITURGICAL-SECTION-START —` (em-dash with space after)
+- Related psalms list extraction tested with Psalm 4 data structure
+- DOCX formatting will be visible on next psalm generation
+
+### Next Session
+- Continue psalm generation with both fixes in place
+- Monitor that liturgical sections appear correctly in DOCX
+- Verify related psalms list appears in new generations
+
+---
+
 ## Session 109 - 2025-11-15 (Bug Fixes & Configuration Updates - COMPLETE ✓)
 
 ### Overview
