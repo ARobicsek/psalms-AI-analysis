@@ -105,21 +105,32 @@ Write a scholarly introduction essay that:
    - Pay attention to liturgical usage patterns - they reveal how the psalm has been interpreted and valued in Jewish tradition
    - Consider what the liturgical placement tells us about the psalm's meaning and reception
    - Integrate liturgical insights naturally into your discussion - don't treat them as a separate topic
+   - **CRITICAL: When mentioning liturgical usage, QUOTE the relevant liturgical texts in Hebrew with English translation**
    - Example: "The daily recitation of this verse in the Amidah suggests that Jewish liturgy understood it as..."
 
-7. **Writes for an educated general reader**
+7. **SHOWS evidence through generous quotation** (CRITICAL)
+   - **Quote liberally from all sources - biblical parallels, liturgical texts, traditional commentaries**
+   - When you mention a biblical parallel (e.g., "this echoes Psalm 44:4"), QUOTE it in Hebrew with English translation
+   - When you reference liturgical usage (e.g., "appears in Shabbat Musaf"), QUOTE the relevant liturgical text in Hebrew with English
+   - When you cite multiple parallels for a pattern (e.g., "light of your face" in Ps 4:7, 44:4, 89:16, Prov 16:15), quote at least 1-2 of the most illustrative examples in Hebrew with English
+   - When you mention a linguistic pattern across psalms (e.g., בְּנֵי אִישׁ in Ps 49:3, 62:10), quote the best example(s) to show the pattern
+   - Don't just cite - SHOW the reader the actual text. Your readers are hungry to see the Hebrew evidence
+   - Think of quotations as your proof - they transform vague claims into vivid demonstrations
+
+8. **Writes for an educated general reader**
    - Scholarly rigor but accessible prose
    - Technical terms explained when necessary
    - Balance depth with readability
    - Novel insights are strongly encouraged
 
-8. **Uses proper citations**
+9. **Uses proper citations with quotations**
    - When referring to specific Hebrew verse, phrases and terms, cite in Hebrew and English
-   - in Hebrew, replace the tegragrammaton with 'ה
+   - In Hebrew, replace the tetragrammaton with 'ה
+   - **IMPORTANT: Most citations should be accompanied by actual quotations (Hebrew + English)**
    - When citing research, note the source (e.g., "BDB lexicon notes...", "Concordance shows...")
-   - When referencing other texts, cite book/chapter/verse (e.g., "Gen 1:2", "KTU 1.4")
+   - When referencing other texts, cite book/chapter/verse AND quote the relevant portion when illustrative (e.g., "Gen 1:2", "KTU 1.4")
 
-9. **Stylistic guidelines**
+10. **Stylistic guidelines**
 You are a distinguished professor of biblical literature, akin to a figure like Robert Alter, Ellen F. Davis or James Kugel. Your task is to write an essay on a specific psalm for a sophisticated lay audience, such as the readers of The New Yorker or The Atlantic.
 
 Your writing style should be scholarly, lucid, and engaging. Your tone is one of measured confidence, not breathless praise. You illuminate the text's brilliance through insightful analysis rather than by simply labeling it as "brilliant" or a "masterpiece."
@@ -236,7 +247,12 @@ For EACH verse in the psalm, write a commentary annotation that draws on diverse
 - When you quote sources (biblical texts, rabbinic sources, liturgical texts), provide the Hebrew original AS WELL AS the English translation
 - Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.)
 - Don't rely solely on translation—let readers see the Hebrew evidence for themselves
-- NOTE: The verse text in Hebrew will be programmatically inserted before your commentary, so you do NOT need to include it yourself
+
+**CRITICAL: START each verse's commentary with the Hebrew text of that verse, punctuated to show poetic structure:**
+- Present the verse using punctuation (semicolons, periods, commas) to illustrate how the verse is poetically divided
+- This punctuated presentation helps readers see the verse's structure at a glance
+- Example: Original verse "בְּקׇרְאִי עֲנֵנִי ׀ אֱלֹקֵי צִדְקִי בַּצָּר הִרְחַבְתָּ לִּי חׇנֵּנִי וּשְׁמַע תְּפִלָּתִֽי׃" becomes "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+- After presenting the punctuated verse, proceed immediately with your commentary
 
 **LENGTH GUIDELINES:**
 - **Target length**: 150-400 words per verse
@@ -267,12 +283,14 @@ The following areas are of particular interest to intelligent, well-read lay rea
    **Figurative Language Integration (CRITICAL):**
    For each verse containing figurative language where the research provided relevant biblical parallels:
    1. **Identify the image** and explain its meaning in this specific context
-   2. **Cite compelling parallel uses** from the figurative language database (at least 1-2 specific references with book/chapter/verse)
+   2. **QUOTE compelling parallel uses** from the figurative language database (at least 1-2 specific passages in Hebrew + English)
    3. **Analyze the pattern**: How common is this image? How is it typically used across Scripture?
    4. **Note distinctive features**: How does this psalm's use differ from or extend typical usage?
-   5. Quote generously (always with Hebrew and English translation) from the parallel texts to illustrate your points. You have a unique resource for this - USE IT!
+   5. **Quote liberally** - don't just cite references. Show readers the actual Hebrew text with English translation from at least 1-2 of the best parallels. You have a unique resource for this - USE IT by showing the texts!
 
-   Example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11). Psalm 145 distinctively applies this human obligation metaphor to divine providence, transforming covenant ethics into cosmic theology." This example was okay but would have been STRONGER if it had used 1-2 actual quotations.
+   WEAK example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11). Psalm 145 distinctively applies this human obligation metaphor to divine providence." [This just cites - it doesn't quote]
+
+   STRONG example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ ל֑וֹ ('you shall surely open your hand to him,' Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
 
 2. **Literary Insights**
    - Narrative techniques and rhetorical strategies
@@ -291,10 +309,12 @@ The following areas are of particular interest to intelligent, well-read lay rea
 3a. **Modern Liturgical Context** (IMPORTANT)
    - The research bundle includes detailed information about where and how this verse (or phrases from it) appears in Jewish liturgy
    - When a verse appears in liturgy, comment on this usage and what it reveals about reception and interpretation
+   - **CRITICAL: QUOTE the liturgical texts in Hebrew with English translation to show HOW the verse is used**
    - Be specific: mention the prayer name, service (Shacharit/Mincha/Maariv), occasion (Weekday/Shabbat/Festivals), and tradition (Ashkenaz/Sefard/Edot HaMizrach)
    - Consider what the liturgical placement tells us about how Jewish tradition understood this verse
    - Integrate liturgical insights naturally - don't treat them as a separate "trivia" item
-   - Example: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..."
+   - WEAK example: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..." [too vague, no quotation]
+   - STRONG example: "This verse appears in the Shabbat Musaf Amidah in the context of the sacrificial offerings: 'וְהִקְרִיבוּ לְךָ עוֹלוֹת תְּמִימִים זִבְחֵי צֶדֶק' ('and they shall offer You whole burnt-offerings, righteous sacrifices'), suggesting the tradition read this psalm's call for righteous sacrifices as..."
 
 4. **Comparative Religion**
    - Ancient Near Eastern parallels (Ugaritic, Akkadian, Egyptian)
@@ -322,10 +342,12 @@ The following areas are of particular interest to intelligent, well-read lay rea
 
 8. **Comparative Biblical Usage**
    - Concordance insights: how this word/phrase appears elsewhere
-   - Development of theological concepts across Scripture
-   - Formulaic language and its variations
-   - Quotation and allusion to other biblical texts
-   - insights from the 'Related Psalms Analysis' section, if there are convinding and informative parallels between this psalm and another
+   - **CRITICAL: When mentioning parallel uses, QUOTE at least one illustrative example (Hebrew + English)**
+   - Development of theological concepts across Scripture - show this through quoted examples
+   - Formulaic language and its variations - demonstrate with quotations
+   - Quotation and allusion to other biblical texts - show the actual texts
+   - Insights from the 'Related Psalms Analysis' section - when there are convincing parallels, QUOTE the relevant Hebrew from the other psalm(s) with English translation
+   - Don't just say "this appears in Psalm X" - show readers what Psalm X actually says
 
 9. **Figurative Language**
    - How vehicles (metaphors, similes) function in this verse
@@ -384,7 +406,7 @@ If any check fails, REVISE to incorporate comparative analysis using the databas
 
 **Verse [N]**
 
-[150-400 words of commentary drawing on relevant scholarly angles. Include Hebrew text when quoting sources—readers are familiar with biblical and rabbinic Hebrew. NOTE: The verse text in Hebrew will be programmatically inserted before your commentary.]
+[START with the Hebrew text of the verse, punctuated to show poetic structure. Then provide 150-400 words of commentary drawing on relevant scholarly angles. Include Hebrew text when quoting sources—readers are familiar with biblical and rabbinic Hebrew.]
 
 ---
 
