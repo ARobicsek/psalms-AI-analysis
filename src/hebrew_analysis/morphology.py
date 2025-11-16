@@ -190,54 +190,86 @@ class HebrewMorphologyAnalyzer:
         if not consonantal:
             return ''
 
-        # CRITICAL FIX: Strip suffixes BEFORE prefixes to prevent over-stripping of ש
-        # Example: שקרים → (strip ים) → שקר (3 letters, protected from ש stripping) ✓
-        # Old way: שקרים → (strip ש) → קרים → (strip ים) → קר ✗
+        # HYBRID APPROACH: Choose stripping order based on word structure
+        # - Prefix-first: For words starting with simple single-letter prefixes (ב, ל, מ, etc.)
+        #   Example: בשמים → strip ב first → שמים ✓
+        # - Suffix-first: For ש-initial words (protects ש-roots)
+        #   Example: שקרים → strip ים first → שקר (protected from ש-stripping) ✓
+
         result = consonantal
+        simple_single_prefixes = {'ב', 'ל', 'כ', 'מ', 'ה', 'ו'}
+        use_prefix_first = (
+            len(consonantal) >= 4 and
+            consonantal[0] in simple_single_prefixes and
+            consonantal[1] != consonantal[0]  # Avoid doubled letters
+        )
 
-        # Try stripping suffixes (max 2, trying combinations)
-        suffixes_removed = 0
+        # Helper function to strip suffixes
+        def strip_suffixes_helper(text, max_strips=2):
+            suffixes_removed = 0
+            while suffixes_removed < max_strips:
+                found_suffix = False
+                for suffix in self.COMMON_SUFFIXES:
+                    if text.endswith(suffix):
+                        stripped = text[:-len(suffix)]
+                        # Special handling for plural endings ים/ות
+                        if suffix in ['ים', 'ות']:
+                            min_result = 3
+                        else:
+                            min_result = 2
+                        if stripped not in self.FUNCTION_WORDS and len(stripped) >= min_result:
+                            text = stripped
+                            suffixes_removed += 1
+                            found_suffix = True
+                            break
+                if not found_suffix:
+                    break
+            return text
 
-        while suffixes_removed < 2:
-            found_suffix = False
-            for suffix in self.COMMON_SUFFIXES:
-                if result.endswith(suffix):
-                    stripped = result[:-len(suffix)]
-                    # For suffixes, require at least 2 letters (roots can be 2 letters)
-                    # But avoid single letters
-                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= 2:
-                        result = stripped
-                        suffixes_removed += 1
-                        found_suffix = True
-                        break  # Only strip one suffix at a time
-            if not found_suffix:
-                break  # No more suffixes to strip
+        # Helper function to strip prefixes
+        def strip_prefixes_helper(text, max_strips=2):
+            prefixes_removed = 0
+            while prefixes_removed < max_strips:
+                found_prefix = False
+                for prefix in self.COMMON_PREFIXES:
+                    if text.startswith(prefix):
+                        stripped = text[len(prefix):]
+                        # For "ש" specifically, require at least 4 letters
+                        if prefix == 'ש':
+                            min_length = 5 if prefixes_removed > 0 else 4
+                        else:
+                            min_length = 3
+                        if stripped not in self.FUNCTION_WORDS and len(stripped) >= min_length:
+                            text = stripped
+                            prefixes_removed += 1
+                            found_prefix = True
+                            break
+                if not found_prefix:
+                    break
+            return text
 
-        # Try stripping prefixes (max 2, trying combinations)
-        prefixes_removed = 0
+        # Apply stripping in the appropriate order
+        if use_prefix_first:
+            # Strip prefixes first, then suffixes
+            result = strip_prefixes_helper(result)
+            result = strip_suffixes_helper(result)
+        else:
+            # Strip suffixes first, then prefixes (protects ש-roots)
+            result = strip_suffixes_helper(result)
+            result = strip_prefixes_helper(result)
 
-        while prefixes_removed < 2:
-            found_prefix = False
-            for prefix in self.COMMON_PREFIXES:
-                if result.startswith(prefix):
-                    stripped = result[len(prefix):]
-                    # Be more conservative: require at least 3 letters after stripping prefix
-                    # For "ש" specifically, require at least 4 letters since ש-initial roots are very common
-                    # (e.g., שנא, שמר, שלח, שמע) and "ש" as a prefix is relatively rare
-                    # ADAPTIVE FIX: If we already stripped a prefix, require 5+ letters for ש
-                    # This prevents "ומשנאיו" → "שנאיו" (5 letters) → "נאיו" (incorrect)
-                    # because after stripping "ום", we need more certainty before stripping ש
-                    if prefix == 'ש':
-                        min_length = 5 if prefixes_removed > 0 else 4
-                    else:
-                        min_length = 3
-                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= min_length:
-                        result = stripped
-                        prefixes_removed += 1
-                        found_prefix = True
-                        break  # Only strip one prefix at a time
-            if not found_prefix:
-                break  # No more prefixes to strip
+        # Normalize final letters: Convert regular forms to final forms when at end of word
+        # Hebrew has 5 letters with special final forms (ך ם ן ף ץ)
+        # After stripping suffixes, we need to convert: שמך → שמ → שם
+        final_letter_map = {
+            'כ': 'ך',  # kaf → final kaf
+            'מ': 'ם',  # mem → final mem
+            'נ': 'ן',  # nun → final nun
+            'פ': 'ף',  # pe → final pe
+            'צ': 'ץ',  # tsadi → final tsadi
+        }
+        if result and result[-1] in final_letter_map:
+            result = result[:-1] + final_letter_map[result[-1]]
 
         # Final check: Don't return single function words
         if result in self.FUNCTION_WORDS:
