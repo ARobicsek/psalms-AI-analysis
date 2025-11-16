@@ -204,10 +204,11 @@ def load_shared_skipgrams_with_verses(
         verses_text_a = load_psalm_verses(db_path, psalm_a)
         verses_text_b = load_psalm_verses(db_path, psalm_b)
 
-        # Get skipgrams for psalm_a
+        # Get skipgrams for psalm_a (V5: Include content word metadata)
         cursor.execute("""
             SELECT pattern_roots, pattern_hebrew, full_span_hebrew,
-                   pattern_length, verse, first_position, gap_word_count
+                   pattern_length, verse, first_position, gap_word_count,
+                   content_word_count, content_word_ratio, pattern_category
             FROM psalm_skipgrams
             WHERE psalm_number = ?
         """, (psalm_a,))
@@ -215,20 +216,27 @@ def load_shared_skipgrams_with_verses(
         skipgrams_a = defaultdict(list)
         for row in cursor.fetchall():
             pattern_roots = row['pattern_roots']
-            skipgrams_a[pattern_roots].append({
+            skipgram_data = {
                 'pattern_roots': pattern_roots,
                 'pattern_hebrew': row['pattern_hebrew'],
                 'full_span_hebrew': row['full_span_hebrew'],
                 'length': row['pattern_length'],
                 'verse': row['verse'],
                 'position': row['first_position'],
-                'gap_word_count': row['gap_word_count']  # NEW: Include gap count
-            })
+                'gap_word_count': row['gap_word_count']
+            }
+            # V5: Add content word metadata if available in database
+            if 'content_word_count' in row.keys():
+                skipgram_data['content_word_count'] = row['content_word_count']
+                skipgram_data['content_word_ratio'] = row['content_word_ratio']
+                skipgram_data['pattern_category'] = row['pattern_category']
+            skipgrams_a[pattern_roots].append(skipgram_data)
 
-        # Get skipgrams for psalm_b
+        # Get skipgrams for psalm_b (V5: Include content word metadata)
         cursor.execute("""
             SELECT pattern_roots, pattern_hebrew, full_span_hebrew,
-                   pattern_length, verse, first_position, gap_word_count
+                   pattern_length, verse, first_position, gap_word_count,
+                   content_word_count, content_word_ratio, pattern_category
             FROM psalm_skipgrams
             WHERE psalm_number = ?
         """, (psalm_b,))
@@ -236,15 +244,21 @@ def load_shared_skipgrams_with_verses(
         skipgrams_b = defaultdict(list)
         for row in cursor.fetchall():
             pattern_roots = row['pattern_roots']
-            skipgrams_b[pattern_roots].append({
+            skipgram_data = {
                 'pattern_roots': pattern_roots,
                 'pattern_hebrew': row['pattern_hebrew'],
                 'full_span_hebrew': row['full_span_hebrew'],
                 'length': row['pattern_length'],
                 'verse': row['verse'],
                 'position': row['first_position'],
-                'gap_word_count': row['gap_word_count']  # NEW: Include gap count
-            })
+                'gap_word_count': row['gap_word_count']
+            }
+            # V5: Add content word metadata if available in database
+            if 'content_word_count' in row.keys():
+                skipgram_data['content_word_count'] = row['content_word_count']
+                skipgram_data['content_word_ratio'] = row['content_word_ratio']
+                skipgram_data['pattern_category'] = row['pattern_category']
+            skipgrams_b[pattern_roots].append(skipgram_data)
 
         conn.close()
 
@@ -562,17 +576,20 @@ def calculate_skipgram_aware_deduplicated_score_v4(
     contiguous_3 = sum(1 for p in deduplicated_contiguous if p['length'] == 3)
     contiguous_4plus = sum(1 for p in deduplicated_contiguous if p['length'] >= 4)
 
-    # Calculate skipgram scores WITH GAP PENALTY
+    # Calculate skipgram scores WITH GAP PENALTY AND CONTENT WORD BONUS (V5)
     # Apply a modest penalty for gaps: reduce score by 10% per word in gap (up to 50% reduction)
+    # Apply content word bonus: boost patterns with 2+ content words (V5 Priority 4)
     def calculate_skipgram_value(skipgram: Dict) -> float:
         """
-        Calculate the value of a skipgram with gap penalty applied.
+        Calculate the value of a skipgram with gap penalty and content word bonus.
 
         Base value is determined by length (2→1, 3→2, 4+→3).
         Gap penalty: reduce by 10% per word in gap, capped at 50% reduction.
+        Content word bonus (V5): boost patterns with multiple content words.
         """
         length = skipgram['length']
         gap_count = skipgram.get('gap_word_count', 0)
+        content_word_count = skipgram.get('content_word_count', 1)  # Default to 1 if not available
 
         # Base value by length
         if length == 2:
@@ -586,8 +603,17 @@ def calculate_skipgram_aware_deduplicated_score_v4(
         # gap_penalty ranges from 0.0 (no gap) to 0.5 (5+ words gap)
         gap_penalty = min(0.1 * gap_count, 0.5)
 
-        # Final value = base_value * (1 - penalty)
-        return base_value * (1.0 - gap_penalty)
+        # Apply content word bonus (V5 Priority 4)
+        # Patterns with 2+ content words are inherently more interesting
+        if content_word_count >= 3:
+            content_bonus = 1.5  # 50% bonus for 3+ content words
+        elif content_word_count == 2:
+            content_bonus = 1.25  # 25% bonus for 2 content words
+        else:
+            content_bonus = 1.0  # No bonus for 1 or fewer content words
+
+        # Final value = base_value * (1 - gap_penalty) * content_bonus
+        return base_value * (1.0 - gap_penalty) * content_bonus
 
     skipgram_2_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 2)
     skipgram_3_actual = sum(1 for s in deduplicated_skipgrams if s['length'] == 3)
@@ -706,10 +732,10 @@ def main():
     # Load inputs
     logger.info("Loading data files...")
 
-    # Use V3 as input since it has all the relationship data
-    with open(base_dir / "data/analysis_results/enhanced_scores_skipgram_dedup_v3.json", 'r', encoding='utf-8') as f:
-        v3_scores = json.load(f)
-    logger.info(f"  Loaded {len(v3_scores)} relationships from V3")
+    # Use V4 as input since it has all the relationship data
+    with open(base_dir / "data/analysis_results/enhanced_scores_skipgram_dedup_v4.json", 'r', encoding='utf-8') as f:
+        v4_scores = json.load(f)
+    logger.info(f"  Loaded {len(v4_scores)} relationships from V4")
 
     with open(base_dir / "data/analysis_results/psalm_word_counts.json", 'r', encoding='utf-8') as f:
         word_counts_data = json.load(f)
@@ -719,45 +745,46 @@ def main():
     db_path = base_dir / "data/psalm_relationships.db"
 
     # Calculate scores
-    logger.info("Calculating V4 scores with verse-tracked skipgrams...")
+    logger.info("Calculating V5 scores with quality-filtered skipgrams...")
     logger.info(f"  Using IDF threshold {IDF_THRESHOLD_FOR_SINGLE_ROOTS}")
+    logger.info(f"  V5 Features: Content word filtering + content word bonus")
     deduplicated_scores = []
 
-    for i, v3_entry in enumerate(v3_scores, 1):
+    for i, v4_entry in enumerate(v4_scores, 1):
         if i % 1000 == 0:
-            logger.info(f"  Processing {i}/{len(v3_scores)}...")
+            logger.info(f"  Processing {i}/{len(v4_scores)}...")
 
-        psalm_a = v3_entry['psalm_a']
-        psalm_b = v3_entry['psalm_b']
+        psalm_a = v4_entry['psalm_a']
+        psalm_b = v4_entry['psalm_b']
 
-        # Load skipgrams with verse tracking (V4 database)
+        # Load skipgrams with verse tracking (V5 database with quality filters)
         shared_skipgrams = load_shared_skipgrams_with_verses(db_path, psalm_a, psalm_b)
 
-        # Use phrase and root data from V3, skipgram counts for stats
+        # Use phrase and root data from V4, skipgram counts for stats
         skipgram_counts = {
-            'skipgram_2word': v3_entry.get('original_skipgram_2', 0),
-            'skipgram_3word': v3_entry.get('original_skipgram_3', 0),
-            'skipgram_4plus': v3_entry.get('original_skipgram_4plus', 0)
+            'skipgram_2word': v4_entry.get('original_skipgram_2', 0),
+            'skipgram_3word': v4_entry.get('original_skipgram_3', 0),
+            'skipgram_4plus': v4_entry.get('original_skipgram_4plus', 0)
         }
 
         score_data = calculate_skipgram_aware_deduplicated_score_v4(
             psalm_a=psalm_a,
             psalm_b=psalm_b,
-            shared_phrases=v3_entry['deduplicated_contiguous_phrases'],
-            shared_roots=v3_entry['deduplicated_roots'],
+            shared_phrases=v4_entry['deduplicated_contiguous_phrases'],
+            shared_roots=v4_entry['deduplicated_roots'],
             shared_skipgrams=shared_skipgrams,
             skipgram_counts=skipgram_counts,
             word_count_a=word_counts[str(psalm_a)],
             word_count_b=word_counts[str(psalm_b)],
-            original_pvalue=v3_entry['original_pvalue'],
-            original_rank=v3_entry['original_rank']
+            original_pvalue=v4_entry['original_pvalue'],
+            original_rank=v4_entry['original_rank']
         )
 
         deduplicated_scores.append(score_data)
 
     # Save results
-    output_path = base_dir / "data/analysis_results/enhanced_scores_skipgram_dedup_v4.json"
-    logger.info(f"Saving V4 scores to {output_path}...")
+    output_path = base_dir / "data/analysis_results/enhanced_scores_skipgram_dedup_v5.json"
+    logger.info(f"Saving V5 scores to {output_path}...")
 
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(deduplicated_scores, f, indent=2, ensure_ascii=False)
@@ -765,11 +792,11 @@ def main():
     file_size_mb = output_path.stat().st_size / (1024 * 1024)
     logger.info(f"  File size: {file_size_mb:.2f} MB")
 
-    logger.info("\n✓ Complete! V4 output includes:")
+    logger.info("\n✓ Complete! V5 output includes:")
+    logger.info("  - Quality-filtered skipgrams (content word filtering + stoplist)")
+    logger.info("  - Content word bonus for patterns with 2+ content words")
     logger.info("  - Verse-tracked skipgrams with proper deduplication")
     logger.info("  - Populated matches_from_a/b arrays for all match types")
-    logger.info("  - Clean output (no position, no empty verses_a/b in skipgrams)")
-    logger.info("  - Fixed overlapping pattern bug")
 
 
 if __name__ == "__main__":
