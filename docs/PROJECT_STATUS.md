@@ -1,8 +1,44 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-16 (Session 112 - COMPLETE ✓)
-**Current Phase**: V5 System Fully Operational
-**Status**: All critical bugs fixed, quality filtering properly applied
+**Last Updated**: 2025-11-16 (Session 113 - COMPLETE ✓)
+**Current Phase**: V5 System Fully Operational with Critical Fixes
+**Status**: Root extraction fixed, skipgram contamination eliminated, all quality filters working
+
+## Session 113 Summary (COMPLETE ✓)
+
+### V5 Critical Fixes - Root Extraction & Skipgram Filtering
+
+**Objective**: Fix critical V5 issues - root extraction over-stripping and skipgram contamination
+**Result**: ✓ COMPLETE - 2 major fixes applied, V5 database and scores regenerated
+
+**Bugs Fixed**:
+1. ✓ **Skipgram Contamination** - Excluded gap_word_count=0 patterns from skipgrams
+   - 38.29% of "skipgrams" were actually contiguous (gap=0)
+   - Added check to skip gap=0 patterns in extractor
+   - Result: 378,836 → 337,243 true skipgrams (11% reduction)
+
+2. ✓ **Root Extraction Over-Stripping** - Fixed adaptive ש-prefix handling
+   - Session 112's 4-letter check insufficient for multi-prefix cases
+   - Now requires 5+ letters when stripping ש if another prefix already stripped
+   - Fixes: "ומשנאיו" → "שנא" ✓ (not "נא")
+
+**Impact**: V5 system now has:
+- Pure skipgram data (gap ≥ 1 only)
+- Accurate root extraction for multi-prefix words
+- No duplicate patterns between contiguous and skipgram lists
+- Proper stoplist filtering (database now populated)
+
+**Files Modified**:
+- `src/hebrew_analysis/morphology.py` - Adaptive ש-stripping
+- `scripts/statistical_analysis/skipgram_extractor_v4.py` - Exclude gap=0
+- `data/psalm_relationships.db` - Regenerated (129 MB, 337,243 skipgrams)
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - Regenerated (51.18 MB)
+- `data/analysis_results/top_550_connections_skipgram_dedup_v5.json` - Regenerated (5.36 MB)
+
+**Next Steps**:
+- V5 system ready for production use
+- All known critical bugs fixed
+- Consider validation on specific psalm pairs
 
 ## Session 112 Summary (COMPLETE ✓)
 
