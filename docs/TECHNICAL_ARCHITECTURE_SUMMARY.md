@@ -1,16 +1,24 @@
 # Technical Architecture Summary: Psalms Commentary Pipeline
 
-**Date**: 2025-10-19  
-**Version**: Enhanced Pipeline (Phase 4)  
-**Status**: Production System
+**Date**: 2025-11-16
+**Version**: Enhanced Pipeline V6 (Phase 4, Sessions 105-123)
+**Status**: Production System with V6 Scoring & Related Psalms Integration
 
 ---
 
 ## Executive Summary
 
-The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a five-pass agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, Claude Haiku 4.5, GPT-5) with deterministic Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
+The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, GPT-5) with eight specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
+
+**Recent Enhancements (Sessions 105-123)**:
+- **V6 Scoring System**: Fresh statistical analysis with improved Hebrew morphology (Sessions 115-117)
+- **Related Psalms Integration**: Automatic identification and integration of top 5 related psalms (Sessions 107-119)
+- **Enhanced Quotation Emphasis**: Prompts designed to encourage generous quotation from sources (Session 122)
+- **Poetic Punctuation**: LLM-generated verse presentation with poetic punctuation (Session 121)
+- **Token Optimization**: 50-60% reduction in research bundle size through intelligent formatting (Sessions 118-119)
+- **Pipeline Tracking**: Comprehensive statistics tracking with resume capability
 
 ---
 
@@ -22,27 +30,38 @@ The Psalms Commentary Pipeline is a sophisticated AI-powered system that generat
 Input: Psalm Number
     ↓
 [1] Macro Analysis (Claude Sonnet 4.5)
+    → Structural thesis, poetic devices, research questions
     ↓
-[2] Micro Analysis + Research Generation (Claude Sonnet 4.5)
+[2] Micro Analysis + Research Request Generation (Claude Sonnet 4.5)
+    → Discovery-driven verse analysis, research requests
     ↓
-[3] Research Bundle Assembly (Python Librarians)
+    [Research Bundle Assembly - 8 Python Librarians]
+    → Lexicon, concordance, figurative analysis, commentary,
+      liturgical usage, related psalms, Hirsch, Sacks
     ↓
-[4] Synthesis Writing (Claude Sonnet 4.5)
+[3] Synthesis Writing (Claude Sonnet 4.5)
+    → Introduction essay + verse commentary with quotations
     ↓
-[5] Master Editorial Review (GPT-5)
+[4] Master Editorial Review (GPT-5)
+    → Critical review, fact-checking, enhancement to "National Book Award" level
     ↓
-[6] Print-Ready Formatting (Python)
+[5] Print-Ready Formatting (Python)
+    → Markdown with divine name modifications, verse numbering
     ↓
-Output: Scholarly Commentary (.docx)
+[6] Document Generation (Python)
+    → Professional .docx with metadata, statistics
+    ↓
+Output: Scholarly Commentary (.docx + .md)
 ```
 
 ### Core Components
 
 1. **AI Agents** (4 specialized LLM-based analyzers)
-2. **Librarian Agents** (7 deterministic Python data retrieval systems)
-3. **Data Sources** (SQLite databases, Sefaria API, RAG documents, Liturgical corpus)
-4. **Output Generation** (Markdown → Word document formatting)
-5. **Logging & Metrics** (Dual-format observability system)
+2. **Librarian Agents** (8 deterministic Python data retrieval systems)
+3. **Data Sources** (SQLite databases, Sefaria API, RAG documents, V6 statistical analysis)
+4. **Pipeline Tracking** (Comprehensive statistics with resume capability)
+5. **Output Generation** (Markdown → Word document formatting)
+6. **Logging & Metrics** (Dual-format observability system)
 
 ---
 
@@ -66,11 +85,14 @@ Output: Scholarly Commentary (.docx)
 - **Purpose**: Verse-by-verse discovery and research request generation
 - **Input**: `MacroAnalysis`, Psalm text, phonetic transcriptions
 - **Output**: `MicroAnalysis` object + `ResearchBundle` requests
+- **Commentary Mode**: `all` (default) or `selective` (request only for specific verses)
 - **Key Features**:
-  - Curiosity-driven verse analysis
-  - Phonetic transcription integration
+  - Discovery-driven (not thesis-driven) verse analysis
+  - Curiosity-focused approach to find patterns, puzzles, surprises
+  - Phonetic transcription integration for sound pattern analysis
   - Research request generation (lexicon, concordance, figurative, commentary)
-  - Pattern recognition across verses
+  - Pattern recognition and interesting question formulation
+  - Three-stage process: Discovery → Research Requests → Bundle Assembly
 
 #### SynthesisWriter (Pass 3)
 - **Model**: Claude Sonnet 4.5 (`claude-sonnet-4-20250514`)
@@ -80,19 +102,28 @@ Output: Scholarly Commentary (.docx)
 - **Key Features**:
   - 800-1200 word introduction essay
   - 150-400+ words per verse commentary
-  - Critical engagement with sources
-  - Intertextual connections
+  - **Enhanced quotation emphasis** (Session 122): Generous quoting from sources in Hebrew + English
+  - Critical engagement with sources and prior scholarship
+  - Intertextual connections with biblical parallels
+  - Integration of liturgical usage and related psalms insights
+  - **Poetic punctuation** (Session 121): LLM-generated verses with semicolons, periods, commas
+  - Accessible scholarly voice (Robert Alter, Ellen Davis style)
 
 #### MasterEditor (Pass 4)
 - **Model**: GPT-5 (`gpt-5`)
 - **Purpose**: Final editorial review and quality enhancement
-- **Input**: Complete commentary, research bundle, analysis objects
-- **Output**: Revised introduction + verse commentary
+- **Input**: Complete commentary, research bundle, analysis objects, psalm text
+- **Output**: Revised introduction + verse commentary + editorial assessment
+- **Character Limit**: 350,000 characters (~175K tokens) for comprehensive review
 - **Key Features**:
   - "National Book Award" quality standards
-  - Phonetic accuracy verification
-  - Factual error detection
-  - Style and coherence improvement
+  - **Enhanced quotation checking** (Session 122): Ensures sources are quoted, not just cited
+  - **Poetic punctuation verification** (Session 121): Ensures verses include punctuation
+  - Phonetic accuracy verification using authoritative transcriptions
+  - Factual error detection (biblical, historical, grammatical)
+  - Missed opportunities identification (unused research, unanswered questions)
+  - Style refinement (avoiding LLM-ish breathlessness, academic jargon)
+  - Coherence and argumentation strengthening
 
 ### 2. Librarian Agent System
 
@@ -149,14 +180,63 @@ Output: Scholarly Commentary (.docx)
   - Misattribution detection (prevents wrong psalm references)
   - Generates narrative summaries of liturgical usage for research bundle
 
+#### Related Psalms Librarian (Sessions 107-119)
+- **Function**: Identifies and retrieves related psalms from statistical analysis
+- **Database**: V6 top 550 connections analysis
+- **Implementation**: `src/agents/related_psalms_librarian.py`
+- **Key Features**:
+  - Loads top 5 most related psalms by final score
+  - **V6 Scoring** (Sessions 115-117): Fresh statistical analysis with improved Hebrew morphology
+  - Retrieves full psalm text (Hebrew only for token efficiency)
+  - Provides shared roots with IDF scores
+  - Shows contiguous phrases (2-6 word exact matches)
+  - Displays skipgrams (gappy patterns) with full span Hebrew
+  - **Token optimization** (Sessions 118-119): 50-60% reduction through smart formatting
+    - Compact occurrence format: "(×1)" instead of "(1 occurrence(s))"
+    - Word context extraction (±3 words) for roots instead of full verse
+    - IDF filtering (only roots with IDF ≥ 1.0)
+    - Removed redundant labels and scores
+  - Bidirectional matching (psalm_a ↔ psalm_b)
+
+#### Hirsch Librarian
+- **Function**: Retrieves R. Samson Raphael Hirsch's 19th-century German commentary
+- **Source**: OCR-extracted commentary from Hirsch's Psalms volumes
+- **Implementation**: `src/agents/hirsch_librarian.py`
+- **Key Features**:
+  - Verse-level commentary lookup
+  - Historical German Orthodox perspective
+  - Character-by-character symbolic interpretation
+
+#### Sacks Librarian
+- **Function**: Retrieves Rabbi Jonathan Sacks' references to Psalms
+- **Source**: Collected works and essays
+- **Implementation**: `src/agents/sacks_librarian.py`
+- **Key Features**:
+  - Modern British Orthodox perspective
+  - Philosophical and ethical interpretations
+  - Contemporary relevance emphasis
+
 #### Research Bundle Assembler
-- **Function**: Coordinates all librarians and formats results
+- **Function**: Coordinates all 8 librarians and formats results
 - **Output**: Markdown format for LLM consumption
-- **Implementation**: `src/agents/scholar_researcher.py`
+- **Implementation**: `src/agents/research_assembler.py`
+- **Librarians Coordinated**:
+  1. BDB Librarian (lexicon entries)
+  2. Concordance Librarian (word/phrase searches)
+  3. Figurative Language Librarian (metaphor analysis)
+  4. Commentary Librarian (traditional Jewish commentaries)
+  5. Liturgical Librarian (liturgical usage)
+  6. Related Psalms Librarian (statistical connections)
+  7. Hirsch Librarian (19th-century German commentary)
+  8. Sacks Librarian (modern British Orthodox perspective)
 - **Key Features**:
   - JSON and Markdown serialization
-  - Token limit management
-  - Priority-based content trimming
+  - Token limit management (700,000 character capacity - Session 109)
+  - **Priority-based content trimming**:
+    * Lexicon and commentary always preserved
+    * Concordance results trimmed first
+    * Figurative language trimmed second (Psalms examples prioritized - Session 111)
+  - Comprehensive research statistics tracking
 
 ### 3. Hebrew Text Processing System
 
@@ -181,6 +261,27 @@ def normalize_hebrew(text: str, level: int) -> str:
   - Suffix patterns (pronouns, verb endings)
   - Verb stem variations (Qal, Niphal, Piel, etc.)
   - Tense and aspect modifications
+
+#### Root Extraction System (V6 - Sessions 112-115)
+- **Function**: Extract morphological roots from inflected Hebrew words
+- **Implementation**: `src/hebrew_analysis/morphology.py`
+- **Data Sources**:
+  - **ETCBC Morphology Cache** (Session 105): 5,353 authoritative mappings from ETCBC BHSA 2021
+  - **Fallback Extraction**: Algorithmic stripping for words not in cache
+- **V6 Improvements (Session 115)**:
+  1. **Hybrid Stripping Approach**: Adaptive strategy based on word structure
+     - Prefix-first for simple prefixes: `בשמים` → `שמים`
+     - Suffix-first for ש-words to protect ש-roots: `שקרים` → `שקר`
+  2. **Plural Ending Protection**: Stricter minimums for ים/ות endings
+     - Prevents over-stripping of dual/plural nouns
+     - `שמים` → `שמים` (dual "heavens", not שם + plural)
+  3. **Final Letter Normalization**: Converts to proper final forms (ך ם ן ף ץ)
+     - `שמך` → `שם` (מ → ם final mem)
+     - `שניו` → `שן` (נ → ן final nun)
+- **Quality Metrics**:
+  - 93.75% test pass rate (15/16 comprehensive tests)
+  - 80% improvement on root extraction test cases vs. V4
+  - All user-reported problem cases fixed
 
 #### Phonetic Transcription System
 - **Function**: Hebrew text to phonetic representation
@@ -210,31 +311,112 @@ def normalize_hebrew(text: str, level: int) -> str:
    - Tables: `prayers`, `psalms_liturgy_index`, `sefaria_liturgy_links`, `liturgical_metadata`
    - Fields: Prayer classification (nusach, occasion, service, section), phrase matches, confidence scores
 
+5. **`psalm_relationships.db`**: V6 Skipgram patterns database (Session 113-115)
+   - Tables: `psalm_skipgrams`
+   - Fields: `psalm_a`, `psalm_b`, `skipgram_hebrew`, `gap_word_count`, `pattern_roots`, `content_word_count`, `pattern_category`
+   - Size: 130 MB, 335,720 quality-filtered skipgrams
+   - **Quality Filters** (Session 111):
+     * Content word filtering (requires 1+ content words for 2-word patterns)
+     * Pattern stoplist (excludes 41 formulaic patterns)
+     * Gap penalty (10% per gap word, max 50%)
+
+#### V6 Statistical Analysis Files (Sessions 115-117)
+- **`psalm_patterns_v6.json`**: Fresh root and phrase extraction (39.67 MB)
+  - 11,170 psalm pairs with patterns
+  - 2,738 unique roots with IDF scores
+  - Generated using Session 115 morphology fixes
+
+- **`enhanced_scores_v6.json`**: Comprehensive scoring (107.97 MB)
+  - 11,170 scored psalm pairs
+  - Fresh roots + phrases from V6 patterns
+  - V5 skipgrams from database (quality-filtered)
+  - Full Hebrew text in all matches arrays
+  - Gap penalty and content word bonus applied
+
+- **`top_550_connections_v6.json`**: Top relationships (13.35 MB)
+  - Score range: 19,908.71 to 211.50
+  - Top connection: Psalms 14-53 (nearly identical)
+  - Used by Related Psalms Librarian
+
 #### RAG Document Integration
 - **Analytical Framework**: `docs/analytical_framework_for_RAG.md`
 - **Psalm Function Database**: `docs/psalm_function_for_RAG.json`
 - **Ugaritic Comparisons**: `docs/ugaritic.json`
 - **LXX Text**: Integrated via Sefaria API
 
-### 5. Output Generation Pipeline
+#### ETCBC Morphology Cache (Session 105)
+- **File**: `src/hebrew_analysis/data/psalms_morphology_cache.json`
+- **Size**: 147.7 KB
+- **Entries**: 5,353 morphological mappings from Psalms
+- **Source**: ETCBC BHSA 2021 scholarly database
+- **Purpose**: Authoritative root extraction for Hebrew words
+
+### 5. Pipeline Tracking and Management
+
+#### Pipeline Summary Tracker
+- **Function**: Comprehensive statistics tracking throughout pipeline execution
+- **Implementation**: `src/utils/pipeline_summary.py`
+- **Key Features**:
+  - **Step-by-step tracking**:
+    * Input/output character and token counts for each step
+    * Duration tracking for each pipeline step
+    * Model usage recording (which LLM used for each step)
+  - **Research statistics**:
+    * Lexicon, concordance, figurative, commentary request counts
+    * Research bundle size metrics
+    * Related psalms count and list
+    * Ugaritic parallels tracking
+  - **Analysis metrics**:
+    * Macro and micro questions tracked
+    * Verse count
+    * Completion timestamps
+  - **Resume capability**:
+    * Saves JSON snapshot after each step
+    * Can resume from any step using `--skip-*` flags
+    * Preserves existing statistics when resuming
+  - **Output formats**:
+    * JSON format: `psalm_NNN_pipeline_stats.json` (machine-readable)
+    * Markdown report: `psalm_NNN_pipeline_summary.md` (human-readable)
+
+#### Pipeline Control Flags
+- **`--skip-macro`**: Use existing macro analysis file
+- **`--skip-micro`**: Use existing micro analysis file
+- **`--skip-synthesis`**: Use existing synthesis files
+- **`--skip-master-edit`**: Use existing master-edited files
+- **`--skip-print-ready`**: Skip print-ready formatting step
+- **`--skip-word-doc`**: Skip .docx generation step
+- **`--smoke-test`**: Generate dummy data without API calls
+- **`--skip-default-commentaries`**: Use selective commentary mode
+- **`--delay SECONDS`**: Rate limit delay between API-heavy steps (default: 120)
+
+### 6. Output Generation Pipeline
 
 #### Commentary Formatter
 - **Function**: Markdown to structured commentary
 - **Implementation**: `src/utils/commentary_formatter.py`
 - **Features**:
-  - Divine name modifications for study
-  - Verse numbering and formatting
+  - Divine name modifications for study (יהוה → ה׳)
+  - **LLM-generated verse presentation** (Session 121): Relies on LLM to provide punctuated verses
+  - Pipeline statistics integration
+  - Sefaria footnote stripping (Session 109)
   - Cross-reference integration
 
 #### Document Generator
-- **Function**: Word document creation
+- **Function**: Word document creation (.docx)
 - **Implementation**: `src/utils/document_generator.py`
 - **Features**:
-  - Professional formatting
+  - Professional formatting with Hebrew fonts
   - Print-ready layout
-  - Metadata inclusion
+  - **Metadata inclusion**:
+    * Pipeline statistics (models used, durations, token counts)
+    * Related psalms count and list (Session 110)
+    * Research bundle statistics
+    * Date produced timestamp
+  - **Sefaria footnote stripping** (Session 109): Removes `-c`, `-d` markers from English text
+  - Phonetic transcription italicization
+  - Divine name formatting
 
-### 6. Logging and Observability
+### 7. Logging and Observability
 
 #### Dual-Format Logging System
 - **Console Output**: Human-readable progress tracking
@@ -247,6 +429,97 @@ def normalize_hebrew(text: str, level: int) -> str:
 - API call success rates
 - Research bundle statistics
 - Figurative language utilization rates
+
+---
+
+## Recent Enhancements (Sessions 105-123)
+
+### Session 123: User Guide Documentation Updates
+- Created comprehensive suggestions for updating "How Psalms Readers Guide works.docx"
+- Documented all user-facing enhancements from Sessions 105-122
+- Maintained friendly, accessible voice for educated lay readers
+
+### Session 122: Enhanced Quotation Emphasis
+**Problem**: Final output mentioned interesting sources but didn't quote them enough
+**Solution**: Strengthened prompts in both SynthesisWriter and MasterEditor to:
+- Require quoting biblical parallels in Hebrew + English (not just citing)
+- Require quoting liturgical texts when mentioned
+- Require showing linguistic patterns with quoted examples
+- Added WEAK vs. STRONG examples throughout prompts
+**Impact**: Readers now see actual Hebrew texts, not just citations
+
+### Session 121: Poetic Punctuation in Verse Presentation
+**Change**: Removed programmatic verse insertion, rely on LLM to provide punctuated verses
+**Implementation**:
+- Updated master_editor.py prompts (3 locations)
+- Updated synthesis_writer.py prompts (2 locations)
+- Removed programmatic insertion from document_generator.py and commentary_formatter.py
+**Impact**: Verses now include poetic punctuation (semicolons, periods, commas) showing structure
+**Example**: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+
+### Session 120: Repository Cleanup
+- Removed 47 files from V6 development (test scripts, validation artifacts, old V4/V5 data)
+- Freed ~200MB disk space
+- Repository now clean and production-ready
+
+### Sessions 118-119: Token Optimization for Related Psalms
+**Optimizations**:
+1. Removed IDF scores from root displays (~10 chars/root saved)
+2. Compact occurrence format: "(×1)" instead of "(1 occurrence(s))"
+3. Removed "Consonantal:" prefix
+4. Simplified psalm references: "Psalm X" instead of "In Psalm X"
+5. Smart context extraction for roots (matched word ±3 words instead of full verse)
+6. Reduced max matching psalms from 8 → 5
+7. Filtered low-IDF roots (only display IDF ≥ 1.0)
+**Impact**: 50-60% total token reduction in related psalms section while improving clarity
+
+### Sessions 115-117: V6 Complete Regeneration
+**Objective**: Fix root extraction errors by regenerating all statistical data with improved morphology
+**V6 Improvements**:
+1. **Session 115 Morphology Fixes**:
+   - Hybrid stripping approach (adaptive prefix/suffix order)
+   - Plural ending protection (stricter minimums for ים/ות)
+   - Final letter normalization (ך ם ן ף ץ)
+   - 93.75% test pass rate, all user-reported errors fixed
+
+2. **Session 117 Fresh Generation**:
+   - `psalm_patterns_v6.json`: 11,170 pairs, 2,738 unique roots (39.67 MB)
+   - `enhanced_scores_v6.json`: Fresh patterns + V5 skipgrams (107.97 MB)
+   - `top_550_connections_v6.json`: Score range 19,908.71 to 211.50 (13.35 MB)
+
+**Validation Results** - All passed:
+- `שִׁ֣יר חָדָ֑שׁ` → "שיר חדש" ✓ (was "יר חדש" in V5)
+- `וּמִשְׁפָּ֑ט` → "שפט" ✓ (was "פט" in V5)
+- `שָׁמַ֣יִם` → "שמים" ✓ (was "מים" in V5)
+- `שִׁנָּ֣יו` → "שן" ✓ (was "ני" in V5)
+
+### Session 111: Skipgram Quality Filtering (V5)
+**Implemented Three Priority Improvements**:
+1. **Content Word Filtering**: Created Hebrew word classifier, filtered 7.6% of formulaic patterns
+2. **Pattern Stoplist**: 41 high-frequency formulaic patterns removed
+3. **Content Word Bonus**: 25-50% scoring boost for multi-content patterns
+**Impact**: 34.2% reduction in average skipgrams per connection (4.4 → 2.9)
+
+### Sessions 109-110: UI and Configuration Updates
+- Fixed footnote markers in DOCX English translation
+- Increased synthesis character limit to 700,000 (350K tokens)
+- Limited related psalms to top 8 (later reduced to 5 in Session 119)
+- Added related psalms list to JSON export and DOCX display
+
+### Sessions 107-108: Related Psalms Integration
+**New Feature**: Automatic identification and integration of related psalms
+**Implementation**:
+- Created `related_psalms_librarian.py`
+- Integrated into ResearchBundle
+- Added pipeline stats tracking
+- Fixed bugs: shared roots loading, display formatting, field names
+**Impact**: Provides cross-psalm intertextual connections for synthesis and editing
+
+### Session 105: ETCBC Morphology & Gap Penalty
+**Two Major Improvements**:
+1. **ETCBC Morphology Cache**: 5,353 authoritative mappings from BHSA 2021 database
+2. **Gap Penalty for Skipgrams**: 10% per gap word (max 50%), values contiguous patterns higher
+**Impact**: 80% improvement in root extraction on test cases
 
 ---
 
@@ -322,27 +595,58 @@ FROM concordance
 - **Priority Order**: Lexicon and Commentary sections are always preserved. Concordance results are trimmed first. If more space is needed, the Figurative Language section is trimmed next.
 - **Prioritized Figuration Trimming**: When the Figurative Language section is trimmed, the logic now prioritizes keeping examples from the Book of Psalms. Instances from other biblical books are discarded first, ensuring the most relevant context is preserved for the LLM.
 - **Preservation of Critical Information**: This multi-level strategy ensures that the most critical information (lexicon, commentary, and Psalms-specific figuration) is protected from truncation.
+- **Character Limit Increase** (Session 109): Raised from 250K-330K to 700,000 characters (~350K tokens)
+
+### 7. Hebrew Root Extraction Complexity (Sessions 112-115)
+
+**Challenge**: Algorithmic root extraction from inflected Hebrew words is complex due to:
+- Multiple prefix/suffix combinations (ב, ל, מ, ש, etc.)
+- Dual/plural endings that shouldn't be stripped (שמים is "heavens", not שם + plural)
+- Final letter normalization requirements (מ → ם, נ → ן, etc.)
+- ש-initial roots being over-stripped (שקרים → "קר" instead of "שקר")
+
+**Solutions Applied (V6)**:
+1. **ETCBC Morphology Cache** (Session 105): 5,353 authoritative mappings for cache hits
+2. **Hybrid Stripping Approach** (Session 115): Adaptive strategy
+   - Prefix-first for simple prefixes: `בשמים` → `שמים`
+   - Suffix-first for ש-words: `שקרים` → `שקר`
+3. **Plural Protection** (Session 115): Stricter minimums to prevent over-stripping
+4. **Final Letter Normalization** (Session 115): Automatic conversion to final forms
+
+**Results**: 93.75% test pass rate, 80% improvement on test cases, all user-reported errors fixed
 
 ---
 
 ## Performance and Cost Optimization
 
 ### Model Selection Strategy
-- **Claude Sonnet 4.5**: Complex analysis tasks (Macro, Micro, Synthesis)
-- **Claude Haiku 4.5**: Simple research tasks (Scholar-Researcher)
-- **GPT-5**: Final editorial review (highest quality requirements)
+- **Claude Sonnet 4.5** (`claude-sonnet-4-20250514`):
+  - MacroAnalyst (Pass 1): Structural analysis with extended thinking
+  - MicroAnalystV2 (Pass 2): Discovery-driven research with extended thinking
+  - SynthesisWriter (Pass 3): Commentary synthesis
+- **GPT-5** (`gpt-5`):
+  - MasterEditor (Pass 4): Final editorial review with 350K character capacity
+- **Claude Haiku 4.5**:
+  - Liturgical Librarian: Intelligent summarization of liturgical usage
+- **Python Librarians**: 8 deterministic data retrieval systems (no LLM costs for core research)
 
 ### Cost Management
-- **Python Librarians**: Deterministic data retrieval (no LLM costs)
-- **Prompt Caching**: Reuse of common prompt sections
-- **Structured Outputs**: JSON schema reduces token usage
+- **8 Python Librarians**: Deterministic data retrieval without LLM costs
+  - BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Hirsch, Sacks
+- **Structured Outputs**: JSON schema validation reduces token usage
 - **Efficient Research**: Targeted queries vs. broad searches
+- **Token Optimization** (Sessions 118-119): 50-60% reduction in related psalms section
+- **Prompt Efficiency**: Enhanced prompts focus on quotations without excessive length
+- **Resume Capability**: Skip completed steps to avoid redundant API calls
 
-### Performance Metrics
-- **Average Runtime**: 15-25 minutes per psalm
-- **Token Usage**: ~50,000-80,000 tokens per psalm
-- **Cost Estimate**: $2-5 per psalm (depending on complexity)
+### Performance Metrics (V6 System)
+- **Average Runtime**: 15-30 minutes per psalm (varies with complexity)
+- **Pipeline Steps**: 6 steps (Macro → Micro → Synthesis → Master Edit → Print-Ready → DOCX)
+- **Research Bundle Size**: Up to 700,000 characters (~350K tokens) with intelligent trimming
+- **Related Psalms**: Top 5 most related (down from 8, optimized for token efficiency)
+- **Morphology Accuracy**: 93.75% test pass rate with V6 improvements
 - **Success Rate**: >95% completion rate
+- **Token Tracking**: Comprehensive per-step tracking with PipelineSummaryTracker
 
 ---
 
@@ -352,21 +656,41 @@ FROM concordance
 - Each pass builds on previous work
 - Cross-validation between agents
 - Consistency checking across passes
+- Pipeline statistics tracking for transparency
 
-### 2. Phonetic Accuracy Verification
-- MasterEditor explicitly checks phonetic claims
+### 2. Enhanced Quotation Verification (Session 122)
+- **SynthesisWriter**: Prompts require quoting sources in Hebrew + English
+- **MasterEditor**: Checks for insufficient quotations as missed opportunities
+- Ensures biblical parallels are quoted, not just cited
+- Requires liturgical texts to be quoted when mentioned
+- Validates linguistic patterns shown with quoted examples
+
+### 3. Poetic Punctuation Verification (Session 121)
+- **MasterEditor**: Ensures verses include poetic punctuation
+- Verses presented with semicolons, periods, commas showing structure
+- LLM-generated punctuation (not programmatic insertion)
+- Example: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+
+### 4. Phonetic Accuracy Verification
+- MasterEditor explicitly checks phonetic claims against authoritative transcriptions
 - Reference transcriptions provided to all agents
 - Common error detection (p/f, kh/sh, etc.)
+- Stress marking from cantillation preserved in transcriptions
 
-### 3. Factual Error Detection
+### 5. Factual Error Detection
 - Biblical accuracy verification
 - Historical claim validation
 - Grammatical analysis checking
+- Cross-reference accuracy
+- Misattribution detection
 
-### 4. Source Integration
-- Multiple commentary perspectives
-- Cross-referential validation
+### 6. Source Integration and Cross-Validation
+- 8 librarians provide multiple perspectives
+- Traditional Jewish commentaries (7 sources)
+- Related psalms statistical validation (V6 scoring)
+- Liturgical usage verification
 - Intertextual connection verification
+- ANE parallel validation
 
 ---
 
@@ -390,40 +714,65 @@ FROM concordance
 ### Testing Framework
 - Unit tests for individual components
 - Integration tests for full pipeline
-- Smoke testing mode for rapid iteration
+- **Smoke testing mode** (`--smoke-test`): Generates dummy data without API calls
+  - Validates pipeline flow without LLM costs
+  - Tests file I/O and formatting logic
+  - Rapid iteration during development
+- Morphology test suite (93.75% pass rate)
+- Resume capability testing (can restart from any step)
 
 ---
 
 ## Future Enhancements
 
-### Planned Improvements
-1. **Figurative Language Database Utilization**: Increase from 1.5% to 15-25% utilization
-2. **Enhanced Phonetic Analysis**: Deeper sound pattern analysis
-3. **Multi-Language Support**: LXX integration improvements
-4. **Advanced Morphology**: More sophisticated Hebrew grammar analysis
+### Completed (Sessions 105-123)
+1. ✅ **ETCBC Morphology Integration**: 5,353 authoritative mappings (Session 105)
+2. ✅ **Related Psalms Integration**: Statistical analysis with V6 scoring (Sessions 107-119)
+3. ✅ **Quality Filtering**: Content word filtering and pattern stoplist (Session 111)
+4. ✅ **Root Extraction Accuracy**: 93.75% test pass rate (Sessions 112-115)
+5. ✅ **Enhanced Quotation Emphasis**: Prompts encourage Hebrew + English quotations (Session 122)
+6. ✅ **Poetic Punctuation**: LLM-generated verse presentation (Session 121)
+7. ✅ **Token Optimization**: 50-60% reduction in related psalms section (Sessions 118-119)
+8. ✅ **Pipeline Tracking**: Comprehensive statistics with resume capability
 
-### Technical Debt
-1. **Module Import Issues**: CLI script execution needs path management
-2. **Error Recovery**: More robust failure handling
-3. **Performance Optimization**: Caching and query optimization
-4. **Documentation**: API documentation for all components
+### Planned Improvements
+1. **Figurative Language Database Utilization**: Increase from current levels to 15-25% utilization
+2. **Enhanced Phonetic Analysis**: Deeper prosodic and stress pattern analysis
+3. **Multi-Language Support**: Improved LXX integration and analysis
+4. **Advanced Morphology**: Additional rare word handling beyond ETCBC cache
+5. **Performance Optimization**: Additional caching and query optimization
+6. **Expanded Commentary Sources**: Integration of additional modern commentaries
+7. **Cross-Testament Connections**: New Testament quotation and allusion detection
+
+### Known Limitations
+1. **Figurative Language Utilization**: Currently lower than desired hit rate
+2. **Morphology Edge Cases**: 6.25% of test cases still challenging (very rare words)
+3. **LXX Integration**: Text available but limited analysis integration
+4. **Computational Cost**: GPT-5 usage for master editing is expensive
 
 ---
 
 ## Conclusion
 
-The Psalms Commentary Pipeline represents a sophisticated integration of AI capabilities with traditional biblical scholarship. The system's success lies in its multi-pass architecture, which prevents common AI failure modes while leveraging the strengths of different models for specialized tasks.
+The Psalms Commentary Pipeline represents a sophisticated integration of AI capabilities with traditional biblical scholarship. The system's success lies in its six-step architecture, which prevents common AI failure modes while leveraging the strengths of different models for specialized tasks.
 
 The technical implementation addresses complex challenges in Hebrew text processing, morphological analysis, and scholarly research integration. The result is a system that produces commentary of sufficient quality for scholarly publication while maintaining efficiency and cost-effectiveness.
 
-**Key Technical Achievements**:
-- Robust Hebrew text processing with 4-layer normalization
-- Efficient morphological variation generation (66 optimized patterns)
-- Comprehensive research integration through specialized librarians
-- Quality assurance through multi-pass validation
-- Cost optimization through strategic model selection
+**Key Technical Achievements (V6 System)**:
+- **8 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Hirsch, Sacks
+- **V6 Statistical Analysis**: Fresh root extraction with 93.75% accuracy, 11,170 psalm pairs analyzed
+- **Related Psalms Integration**: Top 5 connections with intelligent token optimization (50-60% reduction)
+- **Enhanced Quotation System**: Prompts encourage generous Hebrew + English quotations
+- **Poetic Punctuation**: LLM-generated verse presentation with structural markers
+- **Pipeline Tracking**: Comprehensive statistics with resume capability
+- **Robust Hebrew Processing**: 4-layer normalization, ETCBC cache, hybrid root extraction
+- **Quality Assurance**: Multi-pass validation with quotation and punctuation verification
+- **Cost Optimization**: Strategic model selection, deterministic librarians, token efficiency
 
-The system demonstrates that AI can be effectively integrated into scholarly workflows when properly architected with domain expertise and technical rigor.
+**Recent Evolution (Sessions 105-123)**:
+The system has undergone significant enhancement through 19 development sessions, improving morphological accuracy, adding statistical psalm relationships, optimizing token usage, and refining prompt quality to ensure generous quotation from sources. These enhancements demonstrate the system's continued refinement and adaptation to produce increasingly scholarly output.
+
+The system demonstrates that AI can be effectively integrated into scholarly workflows when properly architected with domain expertise, technical rigor, and continuous iterative improvement based on real-world usage and feedback.
 
 ---
 
