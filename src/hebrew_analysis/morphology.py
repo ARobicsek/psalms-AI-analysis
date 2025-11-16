@@ -190,8 +190,30 @@ class HebrewMorphologyAnalyzer:
         if not consonantal:
             return ''
 
-        # Try stripping prefixes (max 2, trying combinations)
+        # CRITICAL FIX: Strip suffixes BEFORE prefixes to prevent over-stripping of ש
+        # Example: שקרים → (strip ים) → שקר (3 letters, protected from ש stripping) ✓
+        # Old way: שקרים → (strip ש) → קרים → (strip ים) → קר ✗
         result = consonantal
+
+        # Try stripping suffixes (max 2, trying combinations)
+        suffixes_removed = 0
+
+        while suffixes_removed < 2:
+            found_suffix = False
+            for suffix in self.COMMON_SUFFIXES:
+                if result.endswith(suffix):
+                    stripped = result[:-len(suffix)]
+                    # For suffixes, require at least 2 letters (roots can be 2 letters)
+                    # But avoid single letters
+                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= 2:
+                        result = stripped
+                        suffixes_removed += 1
+                        found_suffix = True
+                        break  # Only strip one suffix at a time
+            if not found_suffix:
+                break  # No more suffixes to strip
+
+        # Try stripping prefixes (max 2, trying combinations)
         prefixes_removed = 0
 
         while prefixes_removed < 2:
@@ -216,24 +238,6 @@ class HebrewMorphologyAnalyzer:
                         break  # Only strip one prefix at a time
             if not found_prefix:
                 break  # No more prefixes to strip
-
-        # Try stripping suffixes (max 2, trying combinations)
-        suffixes_removed = 0
-
-        while suffixes_removed < 2:
-            found_suffix = False
-            for suffix in self.COMMON_SUFFIXES:
-                if result.endswith(suffix):
-                    stripped = result[:-len(suffix)]
-                    # For suffixes, require at least 2 letters (roots can be 2 letters)
-                    # But avoid single letters
-                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= 2:
-                        result = stripped
-                        suffixes_removed += 1
-                        found_suffix = True
-                        break  # Only strip one suffix at a time
-            if not found_suffix:
-                break  # No more suffixes to strip
 
         # Final check: Don't return single function words
         if result in self.FUNCTION_WORDS:

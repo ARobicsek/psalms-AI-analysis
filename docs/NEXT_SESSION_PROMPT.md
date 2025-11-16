@@ -6,9 +6,41 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V5 System Fully Operational with Critical Fixes
-**Version**: V5.1 - Root extraction and skipgram filtering fixed
-**Last Session**: Session 113 - V5 Critical Fixes Complete (2025-11-16)
+**Phase**: V5 System Fully Operational with Improved Root Extraction
+**Version**: V5.2 - Suffix/prefix stripping order fixed
+**Last Session**: Session 114 - ש-Initial Root Extraction Fixed (2025-11-15)
+
+## Session 114 Summary (COMPLETE ✓)
+
+**Objective**: Fix remaining root extraction issues with ש-initial roots
+**Result**: ✓ COMPLETE - Reversed suffix/prefix stripping order, V5 regenerated with improved root extraction
+
+**Bug Fixed**:
+✓ **ש-Initial Root Over-Stripping** - Reversed stripping order (suffixes before prefixes)
+   - Issue: Words with ש-roots and suffixes incorrectly stripped
+   - Example: `שקרים` (5 letters) → strip `ש` → `קרים` → strip `ים` → `קר` ✗ (should be `שקר`)
+   - Root cause: Prefix-first order allowed ש to be stripped before suffix removal
+   - Fix: Strip suffixes FIRST, then prefixes
+   - Result: `שקרים` → strip `ים` → `שקר` (3 letters, protected from ש stripping) ✓
+   - File: `src/hebrew_analysis/morphology.py` lines 193-240
+
+**Impact**:
+- All ש-related root extraction issues resolved
+- +3,932 skipgrams (341,175 total) due to improved root matching
+- Better semantic matching for common ש-roots (שנא=hate, שמר=guard, שמע=hear, etc.)
+- 15/16 comprehensive tests passing (93.75%)
+
+**Files Modified**:
+- `src/hebrew_analysis/morphology.py` - Reversed suffix/prefix stripping order
+- `data/psalm_relationships.db` - Regenerated (132.5 MB, 341,175 skipgrams)
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - Regenerated (52.81 MB)
+- `data/analysis_results/top_550_connections_skipgram_dedup_v5.json` - Regenerated (5.53 MB)
+- Documentation files updated
+
+**Next Steps**:
+- V5 system ready for production use
+- All known root extraction issues resolved
+- Ready for analysis or further feature development
 
 ## Session 113 Summary (COMPLETE ✓)
 

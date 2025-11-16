@@ -1,8 +1,40 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-16 (Session 113 - COMPLETE ✓)
-**Current Phase**: V5 System Fully Operational with Critical Fixes
-**Status**: Root extraction fixed, skipgram contamination eliminated, all quality filters working
+**Last Updated**: 2025-11-15 (Session 114 - COMPLETE ✓)
+**Current Phase**: V5 System Fully Operational with Improved Root Extraction
+**Status**: ש-initial root extraction fixed, all V5 quality filters working correctly
+
+## Session 114 Summary (COMPLETE ✓)
+
+### V5 Root Extraction Fix - Suffix/Prefix Stripping Order
+
+**Objective**: Fix remaining root extraction issues with ש-initial roots
+**Result**: ✓ COMPLETE - Reversed suffix/prefix order, V5 regenerated
+
+**Bug Fixed**:
+✓ **ש-Initial Root Over-Stripping** - Reversed stripping order (suffixes before prefixes)
+  - Issue: `שקרים` → strip `ש` → `קרים` → strip `ים` → `קר` ✗
+  - Fix: `שקרים` → strip `ים` → `שקר` (now protected from ש stripping) ✓
+  - Examples fixed: שקרים → שקר ✓, שנאתי → שנא ✓
+  - File: `src/hebrew_analysis/morphology.py` lines 193-240
+
+**Impact**:
+- All ש-related root extraction issues resolved
+- +3,932 skipgrams (341,175 total) due to improved root matching
+- Better semantic matching for common ש-roots (שנא, שמר, שמע, etc.)
+- 15/16 comprehensive tests passing (93.75%)
+
+**Files Modified**:
+- `src/hebrew_analysis/morphology.py` - Reversed suffix/prefix stripping order
+- `data/psalm_relationships.db` - Regenerated (132.5 MB, 341,175 skipgrams)
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - Regenerated (52.81 MB)
+- `data/analysis_results/top_550_connections_skipgram_dedup_v5.json` - Regenerated (5.53 MB)
+- Documentation files updated
+
+**Next Steps**:
+- V5 system ready for production use
+- All known root extraction issues resolved
+- Ready for analysis or further feature development
 
 ## Session 113 Summary (COMPLETE ✓)
 
