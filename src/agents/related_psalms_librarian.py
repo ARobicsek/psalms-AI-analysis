@@ -11,6 +11,7 @@ to help the synthesis and editor agents make connections.
 
 import sys
 import json
+import re
 from pathlib import Path
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
@@ -159,6 +160,58 @@ class RelatedPsalmsLibrarian:
 
         return md
 
+    def _remove_nikud(self, text: str) -> str:
+        """Remove Hebrew vowel points (nikud) and cantillation marks."""
+        # Unicode ranges for Hebrew vowel points and cantillation marks
+        nikud_pattern = r'[\u0591-\u05C7]'
+        return re.sub(nikud_pattern, '', text)
+
+    def _extract_word_context(self, verse_text: str, root: str, context_words: int = 3) -> str:
+        """
+        Extract a snippet showing the root word with context_words on either side.
+
+        Args:
+            verse_text: Full verse text in Hebrew
+            root: The root to find in the verse
+            context_words: Number of words to show on either side (default 3)
+
+        Returns:
+            Snippet with the matched word and surrounding context
+        """
+        if not verse_text or not root:
+            return "..."
+
+        # Split verse into words
+        words = verse_text.split()
+
+        # Remove nikud from root for comparison
+        root_consonantal = self._remove_nikud(root)
+
+        # Find the first word containing the root (consonantal match)
+        matched_index = -1
+        for i, word in enumerate(words):
+            word_consonantal = self._remove_nikud(word)
+            if root_consonantal in word_consonantal:
+                matched_index = i
+                break
+
+        # If no match found, just return first few words
+        if matched_index == -1:
+            snippet_words = words[:min(7, len(words))]
+            return " ".join(snippet_words) + ("..." if len(words) > 7 else "")
+
+        # Extract context: matched_index ± context_words
+        start_idx = max(0, matched_index - context_words)
+        end_idx = min(len(words), matched_index + context_words + 1)
+
+        snippet_words = words[start_idx:end_idx]
+
+        # Add ellipsis if truncated
+        prefix = "..." if start_idx > 0 else ""
+        suffix = "..." if end_idx < len(words) else ""
+
+        return prefix + " ".join(snippet_words) + suffix
+
     def _format_single_match(self, analyzing_psalm: int, match: RelatedPsalmMatch) -> str:
         """Format a single related psalm match."""
         md = f"### Psalm {match.psalm_number} (Connection Score: {match.final_score:.2f})\n\n"
@@ -186,77 +239,116 @@ class RelatedPsalmsLibrarian:
         # Shared patterns
         md += f"#### Shared Patterns\n\n"
 
-        # Shared roots
-        if match.shared_roots:
-            md += f"**Shared Roots** ({len(match.shared_roots)} found):\n\n"
-            for root in match.shared_roots:
-                md += f"- Root: `{root.get('root', 'N/A')}`\n"
-                md += f"  - IDF Score: {root.get('idf', 0):.4f}\n"
-
-                # Show matches from analyzed psalm
-                matches_a = root.get('matches_from_a', [])
-                if matches_a:
-                    md += f"  - In Psalm {analyzing_psalm if analyzing_psalm < match.psalm_number else match.psalm_number} ({len(matches_a)} occurrence(s)):\n"
-                    for m in matches_a[:3]:  # Limit to 3 examples
-                        md += f"    - v.{m.get('verse', '?')}: {m.get('text', 'N/A')}\n"
-
-                # Show matches from related psalm
-                matches_b = root.get('matches_from_b', [])
-                if matches_b:
-                    md += f"  - In Psalm {match.psalm_number if analyzing_psalm < match.psalm_number else analyzing_psalm} ({len(matches_b)} occurrence(s)):\n"
-                    for m in matches_b[:3]:  # Limit to 3 examples
-                        md += f"    - v.{m.get('verse', '?')}: {m.get('text', 'N/A')}\n"
-
-                md += "\n"
-
-        # Contiguous phrases
+        # Contiguous phrases FIRST
         if match.contiguous_phrases:
             md += f"**Contiguous Phrases** ({len(match.contiguous_phrases)} found):\n\n"
             for phrase in match.contiguous_phrases:
                 md += f"- **{phrase.get('hebrew', phrase.get('consonantal', 'N/A'))}** "
-                md += f"({phrase.get('length', 0)}-word phrase)\n"
-                md += f"  - Consonantal: `{phrase.get('consonantal', 'N/A')}`\n"
+                md += f"({phrase.get('length', 0)}-word)\n"
 
-                # Show matches from the analyzed psalm
+                # Show matches from the analyzed psalm with verse context
                 matches_a = phrase.get('matches_from_a', [])
                 if matches_a:
-                    md += f"  - In Psalm {analyzing_psalm if analyzing_psalm < match.psalm_number else match.psalm_number}:\n"
-                    for m in matches_a[:3]:  # Limit to 3 examples
-                        md += f"    - v.{m.get('verse', '?')}: {m.get('text', 'N/A')}\n"
+                    md += f"  - Psalm {analyzing_psalm if analyzing_psalm < match.psalm_number else match.psalm_number} (×{len(matches_a)}): "
+                    verses = []
+                    for m in matches_a[:3]:
+                        text = m.get('hebrew', m.get('text', 'N/A'))
+                        # Truncate if over 100 chars
+                        if len(text) > 100:
+                            text = text[:100] + "..."
+                        verses.append(f"v.{m.get('verse', '?')} {text}")
+                    md += ", ".join(verses)
+                    md += "\n"
 
-                # Show matches from the related psalm
+                # Show matches from the related psalm with verse context
                 matches_b = phrase.get('matches_from_b', [])
                 if matches_b:
-                    md += f"  - In Psalm {match.psalm_number if analyzing_psalm < match.psalm_number else analyzing_psalm}:\n"
-                    for m in matches_b[:3]:  # Limit to 3 examples
-                        md += f"    - v.{m.get('verse', '?')}: {m.get('text', 'N/A')}\n"
+                    md += f"  - Psalm {match.psalm_number if analyzing_psalm < match.psalm_number else analyzing_psalm} (×{len(matches_b)}): "
+                    verses = []
+                    for m in matches_b[:3]:
+                        text = m.get('hebrew', m.get('text', 'N/A'))
+                        # Truncate if over 100 chars
+                        if len(text) > 100:
+                            text = text[:100] + "..."
+                        verses.append(f"v.{m.get('verse', '?')} {text}")
+                    md += ", ".join(verses)
+                    md += "\n"
 
                 md += "\n"
 
-        # Skipgrams
+        # Skipgrams SECOND
         if match.skipgrams:
             md += f"**Skipgrams** ({len(match.skipgrams)} found):\n\n"
-            md += "*Skipgrams are patterns where words appear in the same order but not necessarily adjacent*\n\n"
+            md += "*Patterns where words appear in the same order but not necessarily adjacent*\n\n"
             for skipgram in match.skipgrams:
-                md += f"- **{skipgram.get('matched_hebrew', skipgram.get('consonantal', 'N/A'))}** "
-                md += f"({skipgram.get('length', 0)}-word pattern, "
-                md += f"{skipgram.get('gap_word_count', 0)} gap word(s))\n"
-                md += f"  - Consonantal: `{skipgram.get('consonantal', 'N/A')}`\n"
-                md += f"  - Full span: {skipgram.get('full_span_hebrew', 'N/A')}\n"
+                # Use hebrew field from skipgram, fall back to consonantal
+                skipgram_display = skipgram.get('hebrew', skipgram.get('matched_hebrew', skipgram.get('consonantal', 'N/A')))
+                md += f"- **{skipgram_display}** "
+                md += f"({skipgram.get('length', 0)}-word, "
+                md += f"{skipgram.get('gap_word_count', 0)} gap)\n"
 
-                # Show matches from the analyzed psalm
+                # Show matches from the analyzed psalm with verse context
                 matches_a = skipgram.get('matches_from_a', [])
                 if matches_a:
-                    md += f"  - In Psalm {analyzing_psalm if analyzing_psalm < match.psalm_number else match.psalm_number}:\n"
-                    for m in matches_a[:2]:  # Limit to 2 examples for skipgrams
-                        md += f"    - v.{m.get('verse', '?')}: {m.get('text', 'N/A')[:100]}...\n"
+                    md += f"  - Psalm {analyzing_psalm if analyzing_psalm < match.psalm_number else match.psalm_number} (×{len(matches_a)}): "
+                    verses = []
+                    for m in matches_a[:2]:
+                        # V6 skipgrams use 'full_span_hebrew' not 'hebrew' or 'text'
+                        text = m.get('full_span_hebrew', m.get('hebrew', m.get('text', 'N/A')))
+                        # Truncate if over 100 chars
+                        if len(text) > 100:
+                            text = text[:100] + "..."
+                        verses.append(f"v.{m.get('verse', '?')} {text}")
+                    md += ", ".join(verses)
+                    md += "\n"
 
-                # Show matches from the related psalm
+                # Show matches from the related psalm with verse context
                 matches_b = skipgram.get('matches_from_b', [])
                 if matches_b:
-                    md += f"  - In Psalm {match.psalm_number if analyzing_psalm < match.psalm_number else analyzing_psalm}:\n"
-                    for m in matches_b[:2]:  # Limit to 2 examples
-                        md += f"    - v.{m.get('verse', '?')}: {m.get('text', 'N/A')[:100]}...\n"
+                    md += f"  - Psalm {match.psalm_number if analyzing_psalm < match.psalm_number else analyzing_psalm} (×{len(matches_b)}): "
+                    verses = []
+                    for m in matches_b[:2]:
+                        # V6 skipgrams use 'full_span_hebrew' not 'hebrew' or 'text'
+                        text = m.get('full_span_hebrew', m.get('hebrew', m.get('text', 'N/A')))
+                        # Truncate if over 100 chars
+                        if len(text) > 100:
+                            text = text[:100] + "..."
+                        verses.append(f"v.{m.get('verse', '?')} {text}")
+                    md += ", ".join(verses)
+                    md += "\n"
+
+                md += "\n"
+
+        # Shared roots THIRD (sorted by IDF descending - best matches first)
+        if match.shared_roots:
+            # Sort by IDF descending
+            sorted_roots = sorted(match.shared_roots, key=lambda r: r.get('idf', 0), reverse=True)
+
+            md += f"**Shared Roots** ({len(sorted_roots)} found, sorted by relevance):\n\n"
+            for root in sorted_roots:
+                md += f"- Root: `{root.get('root', 'N/A')}`\n"
+
+                # Show matches from analyzed psalm with context (matched word ± 3 words)
+                matches_a = root.get('matches_from_a', [])
+                if matches_a:
+                    md += f"  - Psalm {analyzing_psalm if analyzing_psalm < match.psalm_number else match.psalm_number} (×{len(matches_a)}): "
+                    snippets = []
+                    for m in matches_a[:3]:
+                        snippet = self._extract_word_context(m.get('hebrew', m.get('text', '')), root.get('root', ''), 3)
+                        snippets.append(f"v.{m.get('verse', '?')} {snippet}")
+                    md += ", ".join(snippets)
+                    md += "\n"
+
+                # Show matches from related psalm with context
+                matches_b = root.get('matches_from_b', [])
+                if matches_b:
+                    md += f"  - Psalm {match.psalm_number if analyzing_psalm < match.psalm_number else analyzing_psalm} (×{len(matches_b)}): "
+                    snippets = []
+                    for m in matches_b[:3]:
+                        snippet = self._extract_word_context(m.get('hebrew', m.get('text', '')), root.get('root', ''), 3)
+                        snippets.append(f"v.{m.get('verse', '?')} {snippet}")
+                    md += ", ".join(snippets)
+                    md += "\n"
 
                 md += "\n"
 

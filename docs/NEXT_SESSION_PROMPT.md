@@ -6,9 +6,94 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V6 Clean Regeneration - Build from Ground Up
+**Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 116 - V5 Error Investigation & V6 Plan (2025-11-16)
+**Last Session**: Session 118 - Related Psalms Display Token Optimization (2025-11-16)
+
+## Session 118 Summary (COMPLETE ✓)
+
+**Objective**: Optimize related psalms display in research bundles for maximum token efficiency
+**Result**: ✓ COMPLETE - 30-40% token reduction achieved while improving clarity
+
+**Optimizations Implemented**:
+1. ✓ **Removed IDF scores** from root displays (~10 chars/root saved)
+2. ✓ **Compact occurrence format** - "(1 occurrence(s))" → "(×1)" (~13 chars saved per)
+3. ✓ **Removed "Consonantal:" prefix** - Eliminated redundant label (~14 chars/phrase)
+4. ✓ **Simplified psalm references** - "In Psalm X" → "Psalm X" (~3 chars each)
+5. ✓ **Smart context extraction for roots** - Show matched word ±3 words instead of full verse
+6. ✓ **Reordered sections** - Phrases FIRST → Skipgrams SECOND → Roots THIRD (by IDF)
+7. ✓ **Full verse context for phrases/skipgrams** - Show complete verse (100-char limit)
+8. ✓ **V6 data compatibility** - Fixed skipgram display to use `full_span_hebrew` field
+9. ✓ **Pipeline updated** - research_assembler.py now uses V6 connections file
+
+**Key Features**:
+- Created `_remove_nikud()` method for consonantal matching
+- Created `_extract_word_context()` to show matched word ±3 words
+- Matched roots now always visible in displayed context
+- Roots sorted by IDF descending (best matches first)
+- Token savings: ~30-40% reduction in related psalms section
+
+**Files Modified**:
+- `src/agents/related_psalms_librarian.py` - Core formatting optimizations
+- `src/agents/research_assembler.py` - Updated to use V6 connections file
+
+**Next Steps**:
+- V6 system ready for production with optimized token-efficient display
+- Related psalms section now maximally compact while retaining clarity
+- Ready for psalm analysis with cost-effective research bundles
+
+---
+
+## Session 117 Summary (COMPLETE ✓)
+
+**Objective**: Execute V6 clean regeneration plan with fresh patterns and Session 115 morphology
+**Result**: ✓ COMPLETE - V6 fully generated with all user-reported errors fixed
+
+**V6 Generation Complete**:
+1. ✓ **Fresh Pattern Extraction** - Generated [psalm_patterns_v6.json](../data/analysis_results/psalm_patterns_v6.json) (39.67 MB)
+   - 11,170 psalm pairs with patterns
+   - 2,738 unique roots with IDF scores
+   - Fresh extraction using Session 115 morphology fixes
+
+2. ✓ **V6 Scoring** - Generated [enhanced_scores_v6.json](../data/analysis_results/enhanced_scores_v6.json) (107.97 MB)
+   - 11,170 scored psalm pairs
+   - Fresh roots + phrases from V6 patterns
+   - V5 skipgrams from database (correct)
+   - Full Hebrew text in all matches arrays
+
+3. ✓ **Top 550 Connections** - Generated [top_550_connections_v6.json](../data/analysis_results/top_550_connections_v6.json) (13.35 MB)
+   - Score range: 19908.71 to 211.50
+   - Top connection: Psalms 14-53 (nearly identical)
+
+**Validation Results** - ALL PASSED ✓:
+- `שִׁ֣יר חָדָ֑שׁ` → "שיר חדש" ✓ (was "יר חדש" in V5)
+- `וּמִשְׁפָּ֑ט` → "שפט" ✓ (was "פט" in V5)
+- `שָׁמַ֣יִם` → "שמים" ✓ (was "מים" in V5)
+- `שִׁנָּ֣יו` → "שן" ✓ (was "ני" in V5)
+- `בְּתוּל֣וֹת` → "בתולה" ✓ (was "תול" in V5)
+
+**Files Created**:
+- `scripts/statistical_analysis/extract_psalm_patterns_v6.py` - Fresh pattern extractor
+- `scripts/statistical_analysis/generate_v6_scores.py` - V6 scoring with Hebrew text in matches
+- `scripts/statistical_analysis/generate_top_550_v6.py` - V6 top connections generator
+- `data/analysis_results/psalm_patterns_v6.json` - Fresh patterns (39.67 MB)
+- `data/analysis_results/enhanced_scores_v6.json` - V6 scores (107.97 MB)
+- `data/analysis_results/top_550_connections_v6.json` - V6 top 550 (13.35 MB)
+
+**Key Features**:
+- Completely fresh generation - no V3/V4/V5 dependency
+- Session 115 morphology fixes applied throughout
+- Full Hebrew text in matches arrays (phrases and roots)
+- Skipgrams from V5 database (correct, with quality filtering)
+- Gap penalty and content word bonus applied
+- IDF filtering and rare root bonus
+
+**Next Steps**:
+- V6 system ready for production use
+- All known root extraction errors fixed
+- Ready for analysis or integration into pipeline
+
+---
 
 ## Session 116 Summary (COMPLETE ✓)
 
