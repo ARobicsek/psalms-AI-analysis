@@ -6,9 +6,35 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V4.2 with Related Psalms Integration - Production Configuration ✓
-**Version**: V4.2 with Top 550 related psalms, enhanced limits, bug fixes
-**Last Session**: Session 110 - Complete Related Psalms Display (2025-11-15)
+**Phase**: V5 Quality Filtering - Production Complete ✓
+**Version**: V5 with content word filtering, pattern stoplist, and content word bonus
+**Last Session**: Session 111 - Skipgram Quality Improvement Implementation (2025-11-16)
+
+## Session 111 Summary (COMPLETE ✓)
+
+**Completed**:
+- ✓ Implemented Priority 1: Content word filtering (removed 7.6% of formulaic patterns)
+- ✓ Implemented Priority 2: Pattern stoplist (removed high-frequency noise patterns)
+- ✓ Implemented Priority 3: Content word bonus in scoring (25-50% boost for 2+ content words)
+- ✓ Generated V5 database with 379,220 quality-filtered skipgrams
+- ✓ Generated top 550 V5 connections with improved signal-to-noise ratio
+- ✓ Compared V5 to V4: 86.7% overlap, 34.2% reduction in avg skipgrams per connection
+- ✓ Updated all session documentation
+
+**Key Changes**:
+- Created `src/hebrew_analysis/word_classifier.py` - Hebrew linguistic categorization
+- Created `src/hebrew_analysis/data/pattern_stoplist.json` - Formulaic pattern list
+- Modified `scripts/statistical_analysis/skipgram_extractor_v4.py` - Quality filtering
+- Modified `scripts/statistical_analysis/migrate_skipgrams_v4.py` - V5 schema with content metadata
+- Modified `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Content word bonus
+- Generated `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - V5 scores
+- Generated `data/analysis_results/top_550_connections_skipgram_dedup_v5.json` - V5 top 550
+
+**V5 Impact**:
+- Average skipgrams per connection: 4.4 → 2.9 (34.2% reduction)
+- Average contiguous phrases: 2.1 → 1.9 (9.2% reduction)
+- 73 new connections entered top 550 (higher quality patterns)
+- 73 connections dropped from top 550 (formulaic patterns filtered)
 
 ## Session 110 Summary (COMPLETE ✓)
 
@@ -89,29 +115,61 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ### Possible Next Actions
 
-V4.2 analysis is complete with all improvements applied. Consider:
+V5 quality filtering is complete with all priority improvements applied. Consider:
 
-1. **Analyze Specific Psalm Connections**
-   - Investigate specific pairs from Top 550
+1. **Analyze V5 Quality Improvements**
+   - Compare specific psalm pairs between V4 and V5
+   - Investigate patterns that gained/lost significant scores
+   - Validate that filtered patterns were indeed formulaic
+
+2. **Further Quality Refinements** (Optional - Priority 4-5)
+   - Implement pattern-level IDF weighting
+   - Refine gap penalty based on content words
+   - Tune stoplist based on V5 results
+
+3. **Analyze Specific Psalm Connections (using V5)**
+   - Investigate specific pairs from Top 550 V5
    - Look for theological/liturgical patterns
    - Compare with Hirsch commentary
 
-2. **Statistical Analysis**
-   - Study score distribution patterns
+4. **Statistical Analysis**
+   - Study score distribution patterns in V5
    - Identify clusters of related psalms
    - Analyze by psalm genre/type
 
-3. **Export for External Analysis**
-   - Generate visualizations
+5. **Export for External Analysis**
+   - Generate visualizations comparing V4 vs V5
    - Create network graphs
    - Export to spreadsheet formats
 
-4. **Further Refinements** (optional)
-   - Expand ETCBC cache to full Bible
-   - Tune gap penalty parameters
-   - Add additional pattern types
-
 ## Key Improvements - Recent Sessions
+
+### Session 111: V5 Quality Filtering (2025-11-16)
+
+1. **Content Word Filtering (Priority 1)**
+   - Hebrew word classifier with linguistic categories
+   - Filters patterns based on content word count
+   - Removed 7.6% of formulaic patterns before deduplication
+
+2. **Pattern Stoplist (Priority 2)**
+   - JSON-based stoplist for high-frequency formulaic patterns
+   - 22 skipgram patterns, 19 contiguous patterns
+   - Targets liturgical formulas (מזמור דוד) and divine name patterns (יהוה אל)
+
+3. **Content Word Bonus (Priority 3)**
+   - 25% score bonus for patterns with 2 content words
+   - 50% score bonus for patterns with 3+ content words
+   - Promotes semantically meaningful patterns
+
+4. **Database Schema (V5)**
+   - Added `content_word_count`, `content_word_ratio`, `pattern_category` fields
+   - Enables future analysis of pattern quality
+   - 379,220 quality-filtered skipgrams stored
+
+5. **V5 Results**
+   - Average skipgrams reduced 34.2% (4.4 → 2.9 per connection)
+   - Better signal-to-noise ratio
+   - 73 connection changes in top 550 (higher quality patterns promoted)
 
 ### Session 106: Ranking Analysis & Top 550
 - **Generated**: Top 550 connections file (extends Top 500)
@@ -136,6 +194,26 @@ V4.2 analysis is complete with all improvements applied. Consider:
 
 ## Files Modified - Recent Sessions
 
+### Session 111:
+**New Files**:
+- `src/hebrew_analysis/word_classifier.py` - Hebrew linguistic word classifier
+- `src/hebrew_analysis/data/pattern_stoplist.json` - Formulaic pattern stoplist
+- `scripts/statistical_analysis/generate_top_550_skipgram_dedup_v5.py` - V5 top 550 generator
+- `scripts/statistical_analysis/compare_v4_v5_top_550.py` - V4 vs V5 comparison
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - V5 scores (37 MB)
+- `data/analysis_results/top_550_connections_skipgram_dedup_v5.json` - V5 top 550 (3.7 MB)
+
+**Core Changes**:
+- `scripts/statistical_analysis/skipgram_extractor_v4.py` - Quality filtering implementation
+- `scripts/statistical_analysis/migrate_skipgrams_v4.py` - V5 schema with content metadata
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Content word bonus scoring
+- `data/psalm_relationships.db` - Rebuilt with V5 quality-filtered patterns (379,220 skipgrams)
+
+**Documentation Updates**:
+- `docs/IMPLEMENTATION_LOG.md` - Session 111 entry
+- `docs/PROJECT_STATUS.md` - Updated to V5 status
+- `docs/NEXT_SESSION_PROMPT.md` - This file
+
 ### Session 106:
 **New Files**:
 - `data/analysis_results/top_550_connections_skipgram_dedup_v4.json` - Extended top connections
@@ -157,15 +235,21 @@ V4.2 analysis is complete with all improvements applied. Consider:
 
 ## Important Notes
 
-1. **Two Top Lists Available**:
-   - Top 500 (cutoff: 186.48) - High-confidence connections
-   - Top 550 (cutoff: 183.97) - Includes historically significant pairs like Ps 25-34
+1. **V5 vs V4 Available**:
+   - V5 (current): Quality-filtered with content word analysis - **RECOMMENDED**
+   - V4: Previous version without quality filtering - Available for comparison
+   - Both have Top 550 connections files
 
-2. **ETCBC Cache Coverage**: Cache includes all words from Psalms. Words from other books use improved fallback extraction.
+2. **V5 Quality Filters**:
+   - Content word filtering: Requires 1+ content words for 2-word patterns, 2+ for 3+ word skipgrams
+   - Pattern stoplist: Removes 41 high-frequency formulaic patterns
+   - Content word bonus: 25-50% scoring boost for multi-content patterns
 
-3. **Gap Penalty Applied**: 10% per gap word (max 50%). Contiguous patterns valued higher than gappy skipgrams.
+3. **ETCBC Cache Coverage**: Cache includes all words from Psalms. Words from other books use improved fallback extraction.
 
-4. **All Data Current**: V4.2 migration and scoring complete with all improvements applied.
+4. **Gap Penalty Applied**: 10% per gap word (max 50%). Contiguous patterns valued higher than gappy skipgrams.
+
+5. **All Data Current**: V5 migration and scoring complete with all improvements applied.
 
 ## Reference
 
