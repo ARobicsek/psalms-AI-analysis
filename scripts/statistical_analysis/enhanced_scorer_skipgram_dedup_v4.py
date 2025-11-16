@@ -344,37 +344,26 @@ def enhance_contiguous_phrases_with_verse_info(phrases: List[Dict]) -> List[Dict
     """
     Enhance contiguous phrases with verse-level formatting.
 
-    Uses existing verses_a and verses_b from source data.
+    Uses existing matches_from_a and matches_from_b from V4 data.
     Removes 'position' field per user request.
     """
     enhanced = []
 
     for phrase in phrases:
-        verses_a = phrase.get('verses_a', [])
-        verses_b = phrase.get('verses_b', [])
+        # V4 data already has matches_from_a and matches_from_b arrays
+        # Extract them directly instead of looking for non-existent verses_a/verses_b
+        matches_from_a = phrase.get('matches_from_a', [])
+        matches_from_b = phrase.get('matches_from_b', [])
 
         # Create enhanced format with verse details
         enhanced_phrase = {
             'consonantal': phrase['consonantal'],
             'hebrew': phrase['hebrew'],
             'length': phrase['length'],
-            'count_a': phrase.get('count_a', len(verses_a)),
-            'count_b': phrase.get('count_b', len(verses_b)),
-            'matches_from_a': [
-                {
-                    'verse': v,
-                    'text': phrase['hebrew']
-                    # Removed 'position' field
-                }
-                for v in verses_a
-            ],
-            'matches_from_b': [
-                {
-                    'verse': v,
-                    'text': phrase['hebrew']
-                }
-                for v in verses_b
-            ]
+            'count_a': phrase.get('count_a', len(matches_from_a)),
+            'count_b': phrase.get('count_b', len(matches_from_b)),
+            'matches_from_a': matches_from_a,
+            'matches_from_b': matches_from_b
         }
 
         enhanced.append(enhanced_phrase)
@@ -386,38 +375,25 @@ def enhance_roots_with_verse_info(roots: List[Dict]) -> List[Dict]:
     """
     Enhance roots with verse-level information.
 
-    Uses verse numbers from the source data to populate verse fields.
+    Uses existing matches_from_a and matches_from_b from V4 data.
     Removes 'position' field per user request.
     """
     enhanced = []
 
     for root in roots:
-        # Get verse information and examples from source data
-        verses_a = root.get('verses_a', [])
-        verses_b = root.get('verses_b', [])
-        examples_a = root.get('examples_a', [])
-        examples_b = root.get('examples_b', [])
+        # V4 data already has matches_from_a and matches_from_b arrays
+        # Extract them directly instead of looking for non-existent verses_a/verses_b
+        matches_from_a = root.get('matches_from_a', [])
+        matches_from_b = root.get('matches_from_b', [])
 
         # Create enhanced root with verse structure
         enhanced_root = {
             'root': root['root'],
             'idf': root['idf'],
-            'count_a': root.get('count_a', len(examples_a)),
-            'count_b': root.get('count_b', len(examples_b)),
-            'matches_from_a': [
-                {
-                    'verse': verses_a[i] if i < len(verses_a) else None,
-                    'text': ex
-                }
-                for i, ex in enumerate(examples_a)
-            ],
-            'matches_from_b': [
-                {
-                    'verse': verses_b[i] if i < len(verses_b) else None,
-                    'text': ex
-                }
-                for i, ex in enumerate(examples_b)
-            ]
+            'count_a': root.get('count_a', len(matches_from_a)),
+            'count_b': root.get('count_b', len(matches_from_b)),
+            'matches_from_a': matches_from_a,
+            'matches_from_b': matches_from_b
         }
 
         enhanced.append(enhanced_root)
