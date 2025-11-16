@@ -380,7 +380,7 @@ Write actual content with specific prayer names, services, and Hebrew quotations
 
 **Verse 2**
 
-[Your revised commentary for verse 2. As above, DO NOT start with the Hebrew text of the verse. TARGET: 300-500 words as above.]
+[Your revised commentary for verse 2. As above, **DO NOT start with the full Hebrew text of the verse.** TARGET: 300-500 words as above.]
 
 [Continue for all verses...]
 
@@ -643,13 +643,26 @@ class MasterEditor:
             revised_verses = response_text[verses_match.end():].strip()
 
         # Replace the liturgical marker with proper markdown header
-        if "---LITURGICAL-SECTION-START---" in revised_introduction:
-            revised_introduction = revised_introduction.replace(
-                "---LITURGICAL-SECTION-START---",
-                "## Modern Jewish Liturgical Use"
-            )
-            self.logger.info("✓ Liturgical section marker found and replaced with header")
+        # Handle both regular hyphens (---) and em-dashes (—) variants
+        liturgical_markers = [
+            "---LITURGICAL-SECTION-START---",
+            "—LITURGICAL-SECTION-START—",
+            "— LITURGICAL-SECTION-START—",
+            "—LITURGICAL-SECTION-START —"
+        ]
 
+        marker_found = False
+        for marker in liturgical_markers:
+            if marker in revised_introduction:
+                revised_introduction = revised_introduction.replace(
+                    marker,
+                    "## Modern Jewish Liturgical Use"
+                )
+                self.logger.info(f"✓ Liturgical section marker '{marker}' found and replaced with header")
+                marker_found = True
+                break
+
+        if marker_found:
             # Validate that there's content after the header
             liturgical_idx = revised_introduction.find("## Modern Jewish Liturgical Use")
             content_after_header = revised_introduction[liturgical_idx + len("## Modern Jewish Liturgical Use"):].strip()
