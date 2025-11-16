@@ -200,8 +200,11 @@ class HebrewMorphologyAnalyzer:
                 if result.startswith(prefix):
                     stripped = result[len(prefix):]
                     # Be more conservative: require at least 3 letters after stripping prefix
-                    # This prevents stripping "שוא" → "וא" and "כלו" → "לו"
-                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= 3:
+                    # For "ש" specifically, require at least 4 letters since ש-initial roots are very common
+                    # (e.g., שנא, שמר, שלח, שמע) and "ש" as a prefix is relatively rare
+                    # This prevents "ושנאת" → "שנאת" → "נאת" (incorrect over-stripping)
+                    min_length = 4 if prefix == 'ש' else 3
+                    if stripped not in self.FUNCTION_WORDS and len(stripped) >= min_length:
                         result = stripped
                         prefixes_removed += 1
                         found_prefix = True
