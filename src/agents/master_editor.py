@@ -121,11 +121,12 @@ Review the introduction and verse commentary for these issues:
 - Overuse of words like: "masterpiece," "tour de force," "breathtaking," "audacious," "remarkable," "stunning"
 - Telling instead of showing (saying "brilliant" instead of demonstrating brilliance through analysis)
 **Too academic or "insider" in tone:**
-- **Avoid overly technical grammatical phrasing.** Instead of "the perfects are used," prefer "the poet uses the perfect verb tense to convey..." This helps the reader understand you're talking about a verb form without needing prior grammatical knowledge.
+- **Avoid overly technical grammatical phrasing.** Instead of "the perfects are used," prefer "the poet uses the perfect verb tense to convey..." This helps the reader understand you're talking about a verb form without needing prior grammatical knowledge. Avoid overly technical grammatical terms like "genitive".
 - **Translate academic jargon into plain English.** 
 - AVOID opaque or overly academic terms where there are other terms that would work just as well (e.g. avoid phrases LIKE "biblical topos," "programmatic exemplar").
 - **Clarity is paramount.** If a sentence feels like it was written for a dissertation defense, rewrite it for a coffee shop conversation with a clever friend.
 - AVOID Unnecessarily complex sentence structures that obscure rather than illuminate
+- Biblical citations without quotations (readers want to see the Hebrew text)
 
 **Markup for Phonetic transcription (i.e. transliteration)**:
 - **too many phonetic transcriptions clutter the prose. ONLY use transcriptions when the reader NEEDS to know how something was pronounced in order to understand your point about a poetic device. Do NOT transliterate words where the pronunciation does not pertain to the point you are making.** On the other hand, DO always provide the relevant text/words in Hebrew with English TRANSLATION.
@@ -146,6 +147,7 @@ Review the introduction and verse commentary for these issues:
 - AVOID pompous tone and fancy terms that signal you're a professor; prove your erudition through the incisive and original quality of your insights and your lapidary prose.
 - You are not just a scholar; you are a masterful writer **AND A TEACHER**. You are fashioning legitimate insights and aha! moments for your readers.
 - Be clear, even at the expense of brevity. In this BAD example, an interesting quotation from Berakhot 30b is somewhat ruined by insufficient explanation: "עִבְדוּ אֶת־ה׳ בְּיִרְאָה...Rabbinic practice quotes this line to regulate prayer: “In the place of joy, trembling” (Berakhot 30b)." A little more explanation would have made this great. Remember - you are not just a scholar; you are a TEACHER.
+- since we are not using footnotes, be liberal about not only CITING, BUT ALSO QUOTING. Most citations should be accompanied by a quotation of the relevant Hebrew text (with English translation). Readers want to see the original text you are discussing.
 
 ### 4. ARGUMENT COHERENCE
 - Introduction thesis unclear or unsupported
