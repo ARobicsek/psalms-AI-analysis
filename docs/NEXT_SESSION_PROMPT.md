@@ -8,7 +8,65 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 120 - Repository Cleanup (2025-11-16)
+**Last Session**: Session 122 - Enhanced Quote-Sharing in Prompts (2025-11-16)
+
+## Session 122 Summary (COMPLETE ✓)
+
+**Objective**: Improve synthesis writer and master editor prompts to encourage more quotations from sources
+**Result**: ✓ COMPLETE - Prompts now strongly emphasize showing actual quoted texts (Hebrew + English)
+
+**Changes Implemented**:
+1. ✓ **Added new section #7 to INTRODUCTION_ESSAY_PROMPT** - "SHOWS evidence through generous quotation" with specific examples
+2. ✓ **Strengthened figurative language integration** - Now requires QUOTING parallels, not just citing them
+3. ✓ **Enhanced liturgical context sections** - Explicitly requires quoting liturgical texts in Hebrew with English
+4. ✓ **Improved comparative biblical usage** - Emphasizes showing actual texts from other passages
+5. ✓ **Updated master editor MISSED OPPORTUNITIES** - New bullet point for insufficient quotations with detailed sub-bullets
+6. ✓ **Strengthened figurative language assessment** - Asks whether parallels are quoted, not just cited
+
+**Key Improvements**:
+- When biblical parallels are mentioned (e.g., Ps 44:4, 89:16), prompts now require quoting 1-2 in Hebrew + English
+- When liturgical usage is discussed, prompts now require showing the liturgical text itself
+- When linguistic patterns are mentioned (e.g., בְּנֵי אִישׁ across psalms), prompts now require quoting examples
+- Added concrete examples of WEAK vs. STRONG quotation practices throughout
+- Maintained focus on not distracting from main task while emphasizing this improvement
+
+**Files Modified**:
+- `src/agents/synthesis_writer.py` - Updated INTRODUCTION_ESSAY_PROMPT and VERSE_COMMENTARY_PROMPT
+- `src/agents/master_editor.py` - Updated MASTER_EDITOR_PROMPT with stronger quotation requirements
+
+**Next Steps**:
+- Test with next psalm generation to see improved quote-sharing behavior
+- Monitor whether LLMs follow new quotation emphasis without getting distracted
+
+---
+
+## Session 121 Summary (COMPLETE ✓)
+
+**Objective**: Embrace LLM's verse presentation by removing programmatic insertion and updating prompts
+**Result**: ✓ COMPLETE - System now relies on LLM to provide verses with poetic punctuation
+
+**Changes Implemented**:
+1. ✓ **Removed programmatic verse insertion** - document_generator.py, commentary_formatter.py
+2. ✓ **Updated master_editor.py prompts** - Now ENSURES LLM provides punctuated verses (3 locations)
+3. ✓ **Updated synthesis_writer.py prompts** - Now ENSURES LLM provides punctuated verses (2 locations)
+
+**Key Features**:
+- LLM now provides verses with poetic punctuation (semicolons, periods, commas)
+- Example: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+- Helps readers see verse structure at a glance
+- No more duplication (verse appearing twice)
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Updated verse commentary instructions
+- `src/agents/synthesis_writer.py` - Updated verse commentary instructions
+- `src/utils/document_generator.py` - Removed programmatic verse insertion
+- `src/utils/commentary_formatter.py` - Removed programmatic verse insertion
+
+**Next Steps**:
+- Test with next psalm generation to ensure LLMs follow new instructions
+- Monitor quality of verse punctuation
+
+---
 
 ## Session 120 Summary (COMPLETE ✓)
 

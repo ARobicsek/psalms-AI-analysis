@@ -1,5 +1,251 @@
 # Implementation Log
 
+## Session 122 - 2025-11-16 (Enhanced Quote-Sharing in Prompts - COMPLETE ✓)
+
+### Overview
+**Objective**: Improve synthesis writer and master editor prompts to encourage more quotations from sources
+**Approach**: Strategically strengthen prompts to emphasize showing actual quoted texts (Hebrew + English) without distracting from main task
+**Result**: ✓ COMPLETE - Prompts now explicitly require quotations when mentioning sources
+**Session Duration**: ~60 minutes
+**Status**: Changes complete, ready to test with next psalm generation
+
+### Problem Description
+
+User feedback on Psalm 4 commentary indicated that while the final output mentions interesting sources, it doesn't quote them enough:
+
+**Example 1 - Liturgical references without quotes**:
+> "Liturgically, the phrase has been heard in contexts where 'righteous offerings' represent a whole way of life—Shabbat Musaf prayers and readings for the tribal offerings in Nissan—suggesting that the psalm's brief imperative has long been read as summary: integrity first, then cult; and in both, turn toward God."
+
+User response: "I read this and I'm dying to know what the quote(s) are from liturgy - it should share!"
+
+**Example 2 - Biblical parallels cited but only one quoted**:
+> "The collocation 'light of your face' is rare and charged, clustered around blessing and favor (Psalm 4:7; 44:4; 89:16; Proverbs 16:15) and echoing the priestly words 'יָאֵר ה׳ פָּנָיו אֵלֶיךָ' ('May YHWH make His face shine upon you,' Numbers 6:25)."
+
+User response: "I was thrilled that it shared the Numbers quotation, but I would have loved for it to share good illustrative quotes from 1-2 of the other locations too."
+
+**Example 3 - Parallel passages without Hebrew**:
+> "The spatial metaphor 'in narrowness you made wide' recurs elsewhere to mean release from pressure: 'Indeed, he wooed you out of the mouth of distress to a broad place' (Job 36:16); 'deliver me from my straits' (Psalm 25:17)."
+
+User response: "Good that it provided the quotes in English, but what about the original Hebrew??"
+
+**Example 4 - Linguistic patterns mentioned without examples**:
+> "In Psalms, בְּנֵי אִישׁ ('sons of man') often denotes the elite (compare Psalm 49:3; 62:10), sharpening the social conflict."
+
+User response: "I would have loved to have seen the best of those examples quoted."
+
+### Changes Implemented
+
+#### A. synthesis_writer.py - INTRODUCTION_ESSAY_PROMPT
+
+**1. Added New Section #7: "SHOWS evidence through generous quotation" (CRITICAL)**
+Location: Lines 111-118
+```
+7. **SHOWS evidence through generous quotation** (CRITICAL)
+   - **Quote liberally from all sources - biblical parallels, liturgical texts, traditional commentaries**
+   - When you mention a biblical parallel (e.g., "this echoes Psalm 44:4"), QUOTE it in Hebrew with English translation
+   - When you reference liturgical usage (e.g., "appears in Shabbat Musaf"), QUOTE the relevant liturgical text in Hebrew with English
+   - When you cite multiple parallels for a pattern (e.g., "light of your face" in Ps 4:7, 44:4, 89:16, Prov 16:15), quote at least 1-2 of the most illustrative examples in Hebrew with English
+   - When you mention a linguistic pattern across psalms (e.g., בְּנֵי אִישׁ in Ps 49:3, 62:10), quote the best example(s) to show the pattern
+   - Don't just cite - SHOW the reader the actual text. Your readers are hungry to see the Hebrew evidence
+   - Think of quotations as your proof - they transform vague claims into vivid demonstrations
+```
+
+**2. Updated Section #9: "Uses proper citations with quotations"**
+Location: Line 129
+Added: "**IMPORTANT: Most citations should be accompanied by actual quotations (Hebrew + English)**"
+
+**3. Strengthened Liturgical Context Section**
+Location: Line 108
+Added: "**CRITICAL: When mentioning liturgical usage, QUOTE the relevant liturgical texts in Hebrew with English translation**"
+
+#### B. synthesis_writer.py - VERSE_COMMENTARY_PROMPT
+
+**1. Strengthened Figurative Language Integration**
+Location: Lines 283-293
+Changes:
+- Point #2: Changed from "Cite compelling parallel uses" to "**QUOTE compelling parallel uses**"
+- Point #5: Changed from "Quote generously" to "**Quote liberally** - don't just cite references. Show readers the actual Hebrew text"
+- Added WEAK vs. STRONG examples:
+  * WEAK: "The 'opened hand' imagery appears 23 times... (Deut 15:8, 11)" [just cites]
+  * STRONG: "In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ ל֑וֹ ('you shall surely open your hand to him,' Deut 15:8)"
+
+**2. Enhanced Liturgical Context Section**
+Location: Lines 309-317
+Changes:
+- Added: "**CRITICAL: QUOTE the liturgical texts in Hebrew with English translation to show HOW the verse is used**"
+- Added WEAK vs. STRONG examples showing citation vs. quotation
+
+**3. Improved Comparative Biblical Usage**
+Location: Lines 343-350
+Changes:
+- Added: "**CRITICAL: When mentioning parallel uses, QUOTE at least one illustrative example (Hebrew + English)**"
+- Added: "Don't just say 'this appears in Psalm X' - show readers what Psalm X actually says"
+
+#### C. master_editor.py - MASTER_EDITOR_PROMPT
+
+**1. Added Major Section to MISSED OPPORTUNITIES**
+Location: Lines 104-109
+New bullet point: "**CRITICAL: Insufficient quotations from sources**" with four sub-bullets:
+- Liturgical texts mentioned but not quoted
+- Biblical parallels cited but not quoted (with specific example)
+- Concordance patterns described without examples
+- Figurative language parallels cited without quotation
+- Closing: "Remember: readers are hungry to see the actual Hebrew texts. Citations without quotations disappoint."
+
+**2. Strengthened Figurative Language Assessment**
+Location: Lines 202-208
+Added:
+- "**CRITICAL: Are these parallels QUOTED (Hebrew + English), not just cited?**"
+- "**Does the commentary show readers actual examples through quotations, or just mention them in passing?**"
+
+**3. Enhanced Figurative Language Integration Instructions**
+Location: Lines 313-324
+Changes:
+- Point #1: Changed from "MUST cite" to "MUST QUOTE"
+- Updated examples:
+  * Changed "GOOD" to "EXCELLENT" and added Hebrew quotation
+  * Added "WEAK" example showing citation without quotation
+  * Added second "WEAK" example for emphasis
+
+**4. Strengthened "Items of Interest" Bullets**
+Location: Lines 298, 301, 309
+Changes:
+- Liturgical context: Added "**CRITICAL: Quote generously from the liturgy in Hebrew (always with English translation) to SHOW how the verse is used, not just mention that it appears.**"
+- Figurative language: Added "**CRITICAL: Quote generously from other biblical passages (Hebrew + English translation) to illustrate your points - at least 1-2 strong examples when parallels are available. Don't just cite references; SHOW the texts.**"
+- Comparative biblical usage: Added "**CRITICAL: When mentioning that a word or phrase appears elsewhere, QUOTE at least one illustrative example (Hebrew + English) to demonstrate the pattern. Don't just say 'this appears in Psalm X' - show what Psalm X actually says.**"
+
+### Files Modified
+
+1. **src/agents/synthesis_writer.py**
+   - INTRODUCTION_ESSAY_PROMPT: Added new section #7, updated sections #6 and #9
+   - VERSE_COMMENTARY_PROMPT: Enhanced 3 major sections (figurative language, liturgical context, comparative biblical usage)
+
+2. **src/agents/master_editor.py**
+   - MASTER_EDITOR_PROMPT: Added to MISSED OPPORTUNITIES, strengthened assessment and revision instructions
+
+3. **docs/NEXT_SESSION_PROMPT.md** - Added Session 122 summary
+
+4. **docs/PROJECT_STATUS.md** - Added Session 122 summary with full details
+
+5. **docs/IMPLEMENTATION_LOG.md** - This entry
+
+### Key Design Decisions
+
+**Balance**: The prompts needed to strongly emphasize quotations without becoming SO focused on this that the LLMs get distracted from their main task of providing insightful commentary. Achieved this by:
+- Using "CRITICAL" markers sparingly (only for most important points)
+- Providing concrete WEAK vs. STRONG examples rather than just rules
+- Integrating quotation requirements naturally into existing sections
+- Not creating an entirely separate "quotation" section that might dominate
+
+**Specificity**: Rather than generic "quote more," provided specific scenarios:
+- "When you cite multiple parallels (e.g., Ps 44:4, 89:16, Prov 16:15), quote at least 1-2"
+- "When you mention a linguistic pattern (e.g., בְּנֵי אִישׁ in Ps 49:3, 62:10), quote the best example"
+- "When you reference liturgical usage, QUOTE the relevant liturgical text"
+
+**Redundancy**: Intentionally included quotation emphasis in multiple places (intro prompt, verse prompt, editor prompt) and in multiple sections within each prompt to ensure the message comes through clearly.
+
+### Expected Impact
+
+When the next psalm is generated, we expect to see:
+1. **More liturgical quotations**: When liturgy is mentioned, actual Hebrew text from prayers with English translation
+2. **More biblical parallel quotations**: When multiple passages are cited, 1-2 will be quoted in Hebrew + English
+3. **Hebrew for all significant parallels**: English-only parallel quotations will include Hebrew
+4. **Demonstrated linguistic patterns**: When patterns are mentioned, examples will be shown via quotations
+
+### Testing Plan
+
+Generate next psalm and check for:
+- ✓ Liturgical references include quoted Hebrew texts from prayers
+- ✓ Biblical parallels include 1-2 quoted examples when multiple are mentioned
+- ✓ All parallel quotations include both Hebrew and English
+- ✓ Linguistic patterns include quoted examples showing the pattern
+- ✓ Commentary quality not diminished by focus on quotations
+
+---
+
+## Session 121 - 2025-11-16 (Verse Presentation Approach - COMPLETE ✓)
+
+### Overview
+**Objective**: Embrace LLM's verse presentation by removing programmatic insertion and updating prompts
+**Approach**: Remove all programmatic verse insertion code and update all prompts to ensure LLM provides punctuated verses
+**Result**: ✓ COMPLETE - System now relies on LLM to provide verses with poetic punctuation
+**Session Duration**: ~30 minutes
+**Status**: Changes complete, ready to commit
+
+### Problem Description
+
+The system previously:
+1. Programmatically inserted raw verse text before each verse's commentary
+2. Instructed the LLM NOT to provide verses in prompts
+3. LLM kept providing verses anyway, creating duplication
+
+The user recognized that the LLM's verse presentation was actually VALUABLE because it shows poetic punctuation:
+- Example: Original "בְּקׇרְאִי עֲנֵנִי ׀ אֱלֹקֵי צִדְקִי בַּצָּר הִרְחַבְתָּ לִּי חׇנֵּנִי וּשְׁמַע תְּפִלָּתִֽי׃"
+- LLM version: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+
+The LLM's punctuation (semicolons, periods, commas) helps readers see poetic structure at a glance.
+
+### Changes Implemented
+
+**1. Removed Programmatic Verse Insertion**
+
+Files modified to remove verse insertion code:
+- `src/utils/document_generator.py` (lines 652-685) - Removed Hebrew verse insertion before commentary in DOCX generation
+- `src/utils/commentary_formatter.py` (line 75) - Removed call to `_insert_verse_text_into_commentary()` in markdown generation
+
+**2. Updated Prompts to ENSURE Verse Provision**
+
+**`src/agents/master_editor.py`** (3 locations):
+- Line 262: Changed from "DO NOT START A VERSE'S COMMENTARY WITH THE HEBREW TEXT" to "**CRITICAL: You MUST START each verse's commentary with the Hebrew text of that verse, punctuated to show poetic structure.**"
+- Added guidance on punctuation approach with example
+- Lines 390, 394: Updated output format examples to show verse should be provided
+
+**`src/agents/synthesis_writer.py`** (2 locations):
+- Lines 240-244: Changed from "NOTE: The verse text in Hebrew will be programmatically inserted" to "**CRITICAL: START each verse's commentary with the Hebrew text of that verse, punctuated to show poetic structure:**"
+- Added guidance on punctuation approach with example
+- Line 392: Updated format example to show verse should be provided
+
+### Key Features of New Approach
+
+1. **Poetic Punctuation**: LLM uses semicolons, periods, and commas to show verse structure
+2. **Reader Value**: Helps readers immediately see how the verse is poetically divided
+3. **Consistent with LLM Behavior**: Embraces what the LLM was already doing naturally
+4. **No Duplication**: Removes the double-verse problem
+
+### Impact
+
+**Benefits**:
+- Readers get poetically punctuated verses that show structure at a glance
+- No more duplication (verse appearing twice)
+- Aligns system with LLM's natural tendency
+
+**Breaking Changes**:
+- Future commentary generation will require LLMs to provide verses (prompts now enforce this)
+- DOCX and markdown output now depend on LLM providing verses (no programmatic fallback)
+
+### Files Modified
+
+**Prompt Changes** (2 files):
+- `src/agents/master_editor.py` - Updated verse commentary instructions (3 locations)
+- `src/agents/synthesis_writer.py` - Updated verse commentary instructions (2 locations)
+
+**Code Changes** (2 files):
+- `src/utils/document_generator.py` - Removed programmatic verse insertion
+- `src/utils/commentary_formatter.py` - Removed programmatic verse insertion
+
+**Documentation Updates** (3 files):
+- `docs/IMPLEMENTATION_LOG.md` - Added Session 121 entry
+- `docs/PROJECT_STATUS.md` - Updated to Session 121
+- `docs/NEXT_SESSION_PROMPT.md` - Updated to Session 121
+
+### Next Steps
+
+- Test with next psalm generation to ensure LLMs follow new instructions
+- Monitor quality of verse punctuation
+- Adjust prompts if needed to get optimal punctuation style
+
+---
+
 ## Session 120 - 2025-11-16 (Repository Cleanup - COMPLETE ✓)
 
 ### Overview

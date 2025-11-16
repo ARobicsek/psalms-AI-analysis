@@ -1,8 +1,86 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-16 (Session 120 - COMPLETE ✓)
+**Last Updated**: 2025-11-16 (Session 122 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Repository Cleaned
+**Status**: ✓ V6 System Ready - Enhanced Quote-Sharing in Prompts
+
+## Session 122 Summary (COMPLETE ✓)
+
+### Enhanced Quote-Sharing in Prompts
+
+**Objective**: Improve synthesis writer and master editor prompts to encourage more quotations from sources
+**Result**: ✓ COMPLETE - Prompts now strongly emphasize showing actual quoted texts (Hebrew + English)
+
+**Problem Addressed**:
+User feedback indicated that final output mentions interesting sources but doesn't quote them enough:
+- Liturgical references mentioned without showing the actual liturgical texts
+- Biblical parallels cited (e.g., "Ps 44:4, 89:16, Prov 16:15") without quoting 1-2 examples
+- Parallel passages mentioned in English without the Hebrew
+- Linguistic patterns across psalms described without showing quoted examples
+
+**Changes Made**:
+
+**synthesis_writer.py**:
+1. Added new section #7 "SHOWS evidence through generous quotation" to INTRODUCTION_ESSAY_PROMPT
+   - Specific guidance on quoting biblical parallels, liturgical texts, and linguistic patterns
+   - Examples of what to do: "quote at least 1-2 of the most illustrative examples in Hebrew with English"
+2. Strengthened figurative language integration section
+   - Changed from "cite" to "QUOTE compelling parallel uses"
+   - Added WEAK vs. STRONG examples showing difference between citing and quoting
+3. Enhanced liturgical context section
+   - Added "CRITICAL: QUOTE the liturgical texts in Hebrew with English translation"
+   - Provided WEAK vs. STRONG examples
+4. Improved comparative biblical usage section
+   - Added "CRITICAL: When mentioning parallel uses, QUOTE at least one illustrative example"
+   - Emphasized "show readers what Psalm X actually says"
+
+**master_editor.py**:
+1. Added major new bullet in MISSED OPPORTUNITIES section: "CRITICAL: Insufficient quotations from sources"
+   - Four sub-bullets with specific examples of citation-without-quotation problems
+   - "Remember: readers are hungry to see the actual Hebrew texts. Citations without quotations disappoint."
+2. Strengthened Figurative Language Assessment
+   - Added "CRITICAL: Are these parallels QUOTED (Hebrew + English), not just cited?"
+3. Enhanced figurative language integration in revised verse commentary instructions
+   - Changed examples from "GOOD" to "EXCELLENT" with Hebrew quotations
+   - Added "WEAK" example showing citation without quotation
+4. Strengthened "Items of interest" bullets for liturgical and figurative language
+   - Added "CRITICAL: Quote generously" language to multiple sections
+   - Emphasized "at least 1-2 strong examples when parallels are available"
+
+**Impact**:
+- Prompts now explicitly require quotations (Hebrew + English) when mentioning sources
+- Multiple concrete examples throughout showing WEAK (cite only) vs. STRONG (quote) approaches
+- Maintained balance - didn't make prompts so focused on quotations that LLMs get distracted from main task
+- Should result in final output that satisfies readers' desire to see actual prooftexts
+
+**Next Steps**:
+- Test with next psalm generation to evaluate effectiveness
+- Monitor whether improved quotation behavior is achieved without distraction from core commentary task
+
+---
+
+## Session 121 Summary (COMPLETE ✓)
+
+### Verse Presentation Approach
+
+**Objective**: Embrace LLM's verse presentation by removing programmatic insertion and updating prompts
+**Result**: ✓ COMPLETE - System now relies on LLM to provide verses with poetic punctuation
+
+**Changes Made**:
+1. ✓ **Removed programmatic verse insertion** - document_generator.py, commentary_formatter.py
+2. ✓ **Updated master_editor.py prompts** - Now ENSURES LLM provides punctuated verses
+3. ✓ **Updated synthesis_writer.py prompts** - Now ENSURES LLM provides punctuated verses
+
+**Impact**:
+- Readers now see verses with poetic punctuation (semicolons, periods, commas showing structure)
+- No more verse duplication
+- Aligns with LLM's natural behavior
+
+**Next Steps**:
+- Test with next psalm generation to ensure LLMs follow new instructions
+- Monitor quality of verse punctuation
+
+---
 
 ## Session 120 Summary (COMPLETE ✓)
 
