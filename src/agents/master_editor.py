@@ -279,6 +279,7 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)*
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)*
     - *Contemporary Jewish theologian Rabbi Jonathan Sacks if relevant*
+    - Make sure to read the "### About the Commentators" section in the research bundle for context on these commentators
     - **Modern liturgical context (IMPORTANT)**: When a verse (or phrase from it) appears in Jewish liturgy, comment on this usage and what it reveals about reception and interpretation/re-interpretation. Be specific about the prayer name, service, occasion, and tradition. Integrate liturgical insights naturally. Quoting generously from the liturgy in Hebrew is STRONGLY ENCOURAGED, always with an English translation.
     - Church fathers and medieval Christian interpretation if very illuminating
     - Modern critical scholarship debates
