@@ -8,7 +8,44 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 122 - Enhanced Quote-Sharing in Prompts (2025-11-16)
+**Last Session**: Session 123 - User Guide Documentation Updates (2025-11-16)
+
+## Session 123 Summary (COMPLETE ✓)
+
+**Objective**: Review and suggest updates to "How Psalms Readers Guide works.docx" to reflect system enhancements
+**Result**: ✓ COMPLETE - Comprehensive suggestions document created
+
+**Analysis**:
+- Extracted and reviewed original user guide document (October 2024)
+- Analyzed 18 sessions of enhancements (Sessions 105-122)
+- Identified user-facing improvements: Related Psalms (107-119), Quotations (122), Poetic Punctuation (121), Token Optimizations (118-119), V6 Morphology (115-117), Quality Filtering (111), ETCBC Cache (105)
+
+**Suggestions Created** (in `suggested_guide_updates.md`):
+1. Update librarian count (7 → 8 with Related Psalms Librarian)
+2. New Stage 2.5: Related Psalms Research (explains statistical analysis, IDF scoring, top 5 limit)
+3. Enhanced Stage 3: Research Assembly (notes related psalms data, IDF filtering, gap penalties)
+4. Enhanced Stage 4: Synthesis Writer (highlights quotation emphasis, poetic punctuation)
+5. Updated Stage 5: Editorial Review (350K character capacity)
+6. New source category: Intertextual Psalm Connections (V6 database, 11,175 pairs, top 550)
+7. Optional technical note: Morphological Analysis (ETCBC cache, algorithms)
+8. Date correction and update notation
+9. Optional example: Cross-psalm connections (Psalm 25-34)
+
+**Design Approach**:
+- Maintained original document's friendly, accessible voice
+- Explained technical features in plain language with concrete examples
+- Focused on user-facing enhancements that improve reader experience
+- Marked certain additions as optional for user flexibility
+
+**Files Created**:
+- `suggested_guide_updates.md` - Comprehensive suggestions with specific text locations, rationales, and session references
+
+**Next Steps**:
+- User reviews suggestions document
+- User selects which suggestions to incorporate
+- Can assist with applying changes to Word document if desired
+
+---
 
 ## Session 122 Summary (COMPLETE ✓)
 
