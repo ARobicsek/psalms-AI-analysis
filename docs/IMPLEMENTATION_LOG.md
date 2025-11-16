@@ -1,11 +1,13 @@
 # Implementation Log
 
-## Session 112 - 2025-11-16 (V5 Quality Issues Investigation - IN PROGRESS)
+## Session 112 - 2025-11-16 (V5 Quality Issues Investigation & Bug Fixes - COMPLETE ✓)
 
 ### Overview
-**Objective**: Investigate and document matching system issues identified by user
-**Result**: 6 critical issues identified requiring fixes
-**Status**: Analysis complete, fixes pending
+**Objective**: Investigate and fix matching system issues identified by user
+**Result**: ✓ COMPLETE - 6 critical bugs fixed, V5 system fully operational
+**Session Duration**: ~120 minutes (investigation + fixes + regeneration + validation + documentation)
+**Status**: Production ready - V5 bugs resolved, quality filtering now properly applied
+**Approach**: Multiagent debugging session with systematic root cause analysis
 
 ### Issues Investigated
 
@@ -146,29 +148,114 @@ def enhance_contiguous_phrases_with_verse_info(phrases: List[Dict]):
 - Weight rare phrases higher (e.g., unique theological expressions)
 - Would require corpus-wide phrase frequency analysis
 
-### Summary of Required Fixes
+### Summary of Bugs Fixed
 
-**Critical (Correctness)**:
-1. ✗ Regenerate V5 database with quality filtering actually applied
-2. ✗ Fix empty matches_from_a/b in V5 output (data loss bug)
-3. ✗ Fix root extraction for "ושנאת" → should be "שׂנא" not "נא"
+**Critical Fixes (Correctness)**:
+1. ✓ **ETCBC Cache Error** - Fixed "ענוים" root mapping
+   - Changed: `"ענוים": "עני"` → `"ענוים": "ענו"`
+   - Prevents false matches between "affliction" (עני) and "humility" (ענו)
+   - File: `src/hebrew_analysis/data/psalms_morphology_cache.json`
 
-**Important (Quality)**:
-4. ✗ Fix ETCBC cache entry for "ענוים" → should be "ענו" not "עני"
-5. ⚠ Consider implementing IDF scoring for phrases (enhancement)
+2. ✓ **Root Extraction Over-stripping** - Fixed fallback extraction
+   - Issue: "ושנאת" (and hatred of) → "נא" (incorrect)
+   - Fix: Require 4+ letters remaining when stripping "ש" prefix
+   - Now: "ושנאת" preserved correctly → "שׂנא" (hate)
+   - File: `src/hebrew_analysis/morphology.py`
 
-**Status**: Analysis complete, awaiting decision on which fixes to implement
+3. ✓ **Empty Matches Arrays** - Fixed field name mismatch
+   - Issue: Function looked for `verses_a/b` but V4 data uses `matches_from_a/b`
+   - Result: All verse-level match data was being lost in V5 output
+   - Fix: Changed to extract from existing `matches_from_a/b` fields
+   - File: `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py`
 
-### Files That Need Changes
+4. ✓ **V5 Database Empty** - Regenerated with quality filtering
+   - Issue: Database file was 0 bytes, quality filtering never applied
+   - Fix: Ran `migrate_skipgrams_v4.py` to populate V5 database
+   - Result: 378,836 quality-filtered skipgrams stored (141 MB)
+   - File: `data/psalm_relationships.db`
 
-**Immediate Fixes**:
-- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Fix empty matches bug
-- `src/hebrew_analysis/data/psalms_morphology_cache.json` - Fix "ענוים" entry
-- `data/psalm_relationships.db` - Regenerate with quality filtering
+5. ✓ **Stoplist Not Applied** - Fixed by database regeneration
+   - Issue: Patterns like "כי את" appearing despite being in stoplist
+   - Root Cause: V5 scorer was loading V4 data (unfiltered)
+   - Fix: Database regeneration ensures stoplist filtering is active
+   - Result: High-frequency formulaic patterns now properly filtered
 
-**Future Enhancements**:
-- `src/hebrew_analysis/morphology.py` - Improve fallback root extraction
-- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Add phrase IDF scoring
+6. ✓ **V5 Scoring Regeneration** - Applied all fixes
+   - Regenerated V5 scores from fixed database with all corrections
+   - New files created with all bug fixes applied
+   - Quality filtering now fully functional
+
+**Status**: All critical bugs resolved - V5 system fully operational
+
+### Files Modified
+
+**Bug Fixes**:
+- `src/hebrew_analysis/data/psalms_morphology_cache.json` - Fixed "ענוים" entry
+- `src/hebrew_analysis/morphology.py` - Fixed fallback root extraction (4+ letter requirement)
+- `scripts/statistical_analysis/enhanced_scorer_skipgram_dedup_v4.py` - Fixed empty matches bug
+
+**Data Regeneration**:
+- `data/psalm_relationships.db` - Regenerated with 378,836 quality-filtered skipgrams (141 MB)
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - Regenerated with all fixes
+- `data/analysis_results/top_550_connections_skipgram_dedup_v5.json` - Regenerated with all fixes
+
+**Documentation**:
+- `docs/IMPLEMENTATION_LOG.md` - Session 112 entry
+- `docs/PROJECT_STATUS.md` - Updated to Session 112 complete
+- `docs/NEXT_SESSION_PROMPT.md` - Updated status and next steps
+
+### Technical Details
+
+**Bug #1: ETCBC Cache Fix**
+- Location: Line 3847 in `psalms_morphology_cache.json`
+- Before: `"ענוים": "עני"` (affliction)
+- After: `"ענוים": "ענו"` (humble)
+- Impact: Fixes semantic false matches in pattern detection
+
+**Bug #2: Root Extraction Improvement**
+- Location: `src/hebrew_analysis/morphology.py`, lines 119-128
+- Added condition: `len(without_shin) >= 4` before accepting "ש" removal
+- Prevents over-stripping short words like "ושנאת" → "נא"
+- Preserves root integrity for words with shin as root letter
+
+**Bug #3: Empty Matches Fix**
+- Location: `enhanced_scorer_skipgram_dedup_v4.py:343-383`
+- Changed: `phrase.get('verses_a', [])` → extract from `matches_from_a`
+- Changed: `phrase.get('verses_b', [])` → extract from `matches_from_b`
+- Preserves verse-level match information in V5 output
+
+**Bug #4-5: Database Regeneration**
+- Command: `python scripts/statistical_analysis/migrate_skipgrams_v4.py`
+- Duration: ~23 seconds
+- Result: 378,836 skipgrams stored with quality filtering applied
+- Stoplist now active: Patterns like "כי את" properly filtered
+
+**Bug #6: V5 Scoring**
+- Regenerated from corrected database with all fixes
+- All 10,883 psalm pairs rescored
+- Quality filtering and bug fixes now reflected in final scores
+
+### Impact Assessment
+
+**Before Session 112**:
+- ❌ V5 database empty (0 bytes) - quality filtering inactive
+- ❌ False semantic matches due to cache errors
+- ❌ Nonsensical patterns from root extraction bugs
+- ❌ Missing verse-level match data in all V5 outputs
+- ❌ Stoplist patterns still appearing in results
+
+**After Session 112**:
+- ✅ V5 database populated with 378,836 quality-filtered skipgrams
+- ✅ Accurate semantic matching with corrected ETCBC cache
+- ✅ Improved root extraction prevents nonsensical patterns
+- ✅ Complete verse-level match data preserved in V5
+- ✅ Stoplist filtering fully operational
+
+**Data Quality Improvements**:
+- More accurate semantic matching (fixed "ענוים" cache error)
+- Better root extraction (fixed "ושנאת" over-stripping)
+- Complete match information (fixed empty arrays bug)
+- Proper quality filtering (database regenerated correctly)
 
 ---
 
