@@ -6,9 +6,45 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V5 System Fully Operational
-**Version**: V5 bugs fixed - All critical issues resolved
-**Last Session**: Session 112 - V5 Bug Fixes Complete (2025-11-16)
+**Phase**: V5 System Fully Operational with Critical Fixes
+**Version**: V5.1 - Root extraction and skipgram filtering fixed
+**Last Session**: Session 113 - V5 Critical Fixes Complete (2025-11-16)
+
+## Session 113 Summary (COMPLETE ✓)
+
+**Objective**: Fix critical V5 issues - root extraction over-stripping and skipgram contamination
+**Result**: ✓ COMPLETE - 2 major fixes applied, V5 system now working correctly
+
+**Bugs Fixed**:
+1. ✓ **Skipgram Contamination** - Excluded gap_word_count=0 patterns
+   - 38.29% of "skipgrams" were contiguous (gap=0) - now eliminated
+   - Database: 378,836 → 337,243 true skipgrams (11% reduction)
+   - File: `skipgram_extractor_v4.py` lines 298-302
+
+2. ✓ **Root Extraction Over-Stripping** - Adaptive ש-prefix handling
+   - Session 112's 4-letter check insufficient for multi-prefix cases
+   - Now requires 5+ letters for ש when another prefix already stripped
+   - Fixes: "ומשנאיו" → "שנא" ✓ (not "נא"), "בשיר" → "שיר" ✓ (not "יר")
+   - File: `morphology.py` lines 208-211
+
+**Impact**:
+- Pure skipgram data (all patterns have gap ≥ 1)
+- Accurate root extraction for multi-prefix words
+- No duplicate patterns between contiguous and skipgram lists
+- Proper stoplist filtering now active
+
+**Files Modified**:
+- `src/hebrew_analysis/morphology.py` - Adaptive ש-stripping
+- `scripts/statistical_analysis/skipgram_extractor_v4.py` - Exclude gap=0
+- `data/psalm_relationships.db` - Regenerated (129 MB, 337,243 skipgrams)
+- `data/analysis_results/enhanced_scores_skipgram_dedup_v5.json` - Regenerated (51.18 MB)
+- `data/analysis_results/top_550_connections_skipgram_dedup_v5.json` - Regenerated (5.36 MB)
+- Documentation files updated
+
+**Next Steps**:
+- V5 system ready for production use
+- All known critical bugs fixed
+- Ready for analysis or further feature development
 
 ## Session 112 Summary (COMPLETE ✓)
 
