@@ -1,8 +1,46 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-16 (Session 122 - COMPLETE ✓)
+**Last Updated**: 2025-11-16 (Session 123 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Enhanced Quote-Sharing in Prompts
+**Status**: ✓ V6 System Ready - User Guide Documentation Updated
+
+## Session 123 Summary (COMPLETE ✓)
+
+### User Guide Document Updates
+
+**Objective**: Review and suggest updates to "How Psalms Readers Guide works.docx" reflecting enhancements from Sessions 105-122
+**Result**: ✓ COMPLETE - Comprehensive suggestions document created
+
+**Analysis Performed**:
+- Extracted original document content (October 2024 guide for friends)
+- Reviewed 18 sessions of enhancements (Sessions 105-122)
+- Identified user-facing improvements worth documenting
+
+**Suggestions Created** (9 sections in `suggested_guide_updates.md`):
+1. Update librarian count (7 → 8, reflecting Related Psalms Librarian)
+2. Add Stage 2.5 explaining related psalms research and statistical analysis
+3. Enhance Stage 3 noting related psalms data and optimizations
+4. Enhance Stage 4 highlighting quotation emphasis and poetic punctuation
+5. Update Stage 5 with increased character capacity (350K)
+6. Add new source category documenting V6 intertextual connections database
+7. Optional technical note on morphological analysis
+8. Date correction (October 2024, updated November 2025)
+9. Optional example showing related psalms feature with Psalm 25-34
+
+**Design Principles**:
+- Maintained original document's friendly, accessible voice for educated lay readers
+- Explained complex features (IDF scoring, skipgrams, morphology) in plain language
+- Integrated suggestions naturally into existing structure
+- Focused on user-facing enhancements (quotations, poetic punctuation, cross-psalm connections)
+
+**Files Created**:
+- `suggested_guide_updates.md` - Comprehensive suggestions with rationales
+
+**Next Steps**:
+- User reviews suggestions and selects which to incorporate
+- Can assist with applying changes to Word document if desired
+
+---
 
 ## Session 122 Summary (COMPLETE ✓)
 
