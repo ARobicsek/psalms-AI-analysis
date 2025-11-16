@@ -56,6 +56,7 @@ class ResearchStats:
     commentary_counts: Dict[str, int] = field(default_factory=dict)  # commentator -> count
     sacks_references_count: int = 0  # Rabbi Jonathan Sacks references
     related_psalms_count: int = 0  # Related psalms from top connections analysis
+    related_psalms_list: List[int] = field(default_factory=list)  # List of psalm numbers analyzed
 
     # Ugaritic parallels
     ugaritic_parallels: List[Dict[str, str]] = field(default_factory=list)
@@ -240,6 +241,7 @@ class PipelineSummaryTracker:
         # Related psalms (from top connections analysis)
         if research_bundle.related_psalms:
             self.research.related_psalms_count = len(research_bundle.related_psalms)
+            self.research.related_psalms_list = [p.psalm_number for p in research_bundle.related_psalms]
 
         # Ugaritic parallels (from RAG context)
         if research_bundle.rag_context and research_bundle.rag_context.ugaritic_parallels:
@@ -585,6 +587,7 @@ class PipelineSummaryTracker:
                 'figurative_results': self.research.figurative_results,
                 'commentary_counts': self.research.commentary_counts,
                 'sacks_references_count': self.research.sacks_references_count,
+                'related_psalms_count': self.research.related_psalms_count,
                 'ugaritic_parallels': self.research.ugaritic_parallels,
                 'research_bundle_chars': self.research.research_bundle_chars,
                 'research_bundle_tokens': self.research.research_bundle_tokens
