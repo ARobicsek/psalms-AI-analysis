@@ -1,5 +1,5 @@
 """
-Migration Script: Skipgrams V3 → V4
+Migration Script: Skipgrams V3 → V4 → V5
 
 V4 Enhancements:
 1. Add verse tracking for each skipgram instance
@@ -7,10 +7,21 @@ V4 Enhancements:
 3. Support matches_from_a/b array population in scoring
 4. Fix overlapping pattern issue where multiple patterns from same phrase counted separately
 
-Database Schema Changes:
+V5 Enhancements (Quality Filtering):
+1. Add content word analysis metadata
+2. Apply content word filtering (Priority 1)
+3. Apply pattern stoplist filtering (Priority 2)
+4. Support content word bonus in scoring (Priority 4)
+
+Database Schema Changes (V4):
 - Add 'verse' column to track verse number
 - Add 'first_position' column to track word position
 - Update indexes for efficient verse-based queries
+
+Database Schema Changes (V5):
+- Add 'content_word_count' column
+- Add 'content_word_ratio' column
+- Add 'pattern_category' column (formulaic vs interesting)
 """
 
 import sqlite3
@@ -79,10 +90,10 @@ class SkipgramMigrationV4:
         logger.info("  Old table and indexes dropped")
 
     def create_new_schema(self):
-        """Create new V4 schema with verse and position tracking."""
+        """Create new V5 schema with verse tracking, position, and content word metadata."""
         cursor = self.conn.cursor()
 
-        logger.info("Creating new V4 schema...")
+        logger.info("Creating new V5 schema...")
 
         cursor.execute("""
             CREATE TABLE psalm_skipgrams (
@@ -95,6 +106,9 @@ class SkipgramMigrationV4:
                 verse INTEGER NOT NULL,
                 first_position INTEGER NOT NULL,
                 gap_word_count INTEGER NOT NULL DEFAULT 0,
+                content_word_count INTEGER DEFAULT 0,
+                content_word_ratio REAL DEFAULT 0.0,
+                pattern_category TEXT DEFAULT 'unknown',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE(psalm_number, pattern_roots, pattern_length, verse, first_position)
             )
@@ -125,7 +139,7 @@ class SkipgramMigrationV4:
         skipgrams: Dict[int, List[Dict[str, any]]]
     ):
         """
-        Store skip-grams for a psalm in V4 format with verse tracking.
+        Store skip-grams for a psalm in V5 format with verse tracking and content word metadata.
 
         Args:
             psalm_number: Psalm number
@@ -136,12 +150,13 @@ class SkipgramMigrationV4:
 
         for length, instances in skipgrams.items():
             for sg in instances:
-                # Insert with V4 schema (includes verse, position, and gap_word_count)
+                # Insert with V5 schema (includes verse, position, gap_word_count, and content word metadata)
                 cursor.execute("""
                     INSERT OR REPLACE INTO psalm_skipgrams
                     (psalm_number, pattern_roots, pattern_hebrew,
-                     full_span_hebrew, pattern_length, verse, first_position, gap_word_count)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                     full_span_hebrew, pattern_length, verse, first_position, gap_word_count,
+                     content_word_count, content_word_ratio, pattern_category)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     psalm_number,
                     sg['pattern_roots'],
@@ -150,7 +165,10 @@ class SkipgramMigrationV4:
                     sg['length'],
                     sg['verse'],
                     sg['first_position'],
-                    sg.get('gap_word_count', 0)  # New field with fallback to 0
+                    sg.get('gap_word_count', 0),
+                    sg.get('content_word_count', 0),
+                    sg.get('content_word_ratio', 0.0),
+                    sg.get('pattern_category', 'unknown')
                 ))
                 insert_count += 1
 
@@ -158,12 +176,13 @@ class SkipgramMigrationV4:
         return insert_count
 
     def migrate_all_psalms(self):
-        """Extract and store skipgrams for all 150 psalms using V4 methodology."""
-        logger.info("Extracting skipgrams for all 150 psalms (V4 with verse tracking)...")
+        """Extract and store skipgrams for all 150 psalms using V5 methodology."""
+        logger.info("Extracting skipgrams for all 150 psalms (V5 with quality filtering)...")
+        logger.info("  V5 Features: Content word filtering + pattern stoplist")
         logger.info("This will take several minutes...")
 
-        # Initialize extractor
-        extractor = SkipgramExtractorV4()
+        # Initialize extractor with quality filtering enabled
+        extractor = SkipgramExtractorV4(enable_quality_filtering=True)
         extractor.connect_db()
 
         # Process each psalm
@@ -188,12 +207,19 @@ class SkipgramMigrationV4:
                 logger.error(f"  ERROR processing Psalm {psalm_num}: {e}")
                 failed_psalms.append(psalm_num)
 
+        # Log filtering statistics
+        logger.info(f"\nV5 Filtering Statistics:")
+        logger.info(f"  Total patterns extracted: {extractor.stats['total_extracted']:,}")
+        logger.info(f"  Filtered by content words: {extractor.stats['filtered_by_content']:,} ({100.0 * extractor.stats['filtered_by_content'] / max(extractor.stats['total_extracted'], 1):.1f}%)")
+        logger.info(f"  Filtered by stoplist: {extractor.stats['filtered_by_stoplist']:,} ({100.0 * extractor.stats['filtered_by_stoplist'] / max(extractor.stats['total_extracted'], 1):.1f}%)")
+        logger.info(f"  Patterns kept: {extractor.stats['kept']:,} ({100.0 * extractor.stats['kept'] / max(extractor.stats['total_extracted'], 1):.1f}%)")
+
         # Clean up
         extractor.close_db()
 
         elapsed = time.time() - start_time
         logger.info(f"\nExtraction complete in {elapsed:.1f} seconds ({elapsed/60:.1f} minutes)")
-        logger.info(f"  Total skipgrams: {total_skipgrams:,}")
+        logger.info(f"  Total skipgrams stored: {total_skipgrams:,}")
 
         if failed_psalms:
             logger.warning(f"  Failed psalms: {failed_psalms}")
