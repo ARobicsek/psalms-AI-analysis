@@ -1,8 +1,35 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-15 (Session 115 - COMPLETE ✓)
-**Current Phase**: V5 System Fully Operational with Comprehensive Root Extraction
-**Status**: All major root extraction issues resolved - hybrid approach + plural protection + final letter normalization
+**Last Updated**: 2025-11-16 (Session 116 - COMPLETE ✓)
+**Current Phase**: V6 Clean Regeneration - Implementation Pending
+**Status**: ⚠️ V5 Has Errors in Roots/Phrases - V6 Plan Ready
+
+## Session 116 Summary (COMPLETE ✓)
+
+### V5 Error Investigation & V6 Plan
+
+**Objective**: Investigate serious root extraction errors in V5 output
+**Result**: ✓ COMPLETE - Found V5 reuses old V4 data; created V6 plan
+
+**Investigation**:
+- ✓ Session 115 morphology fixes ARE working correctly
+- ✓ V5 database skipgrams have correct roots
+- ✗ V5 JSON `deduplicated_roots` are WRONG (from old V4 file, Nov 14)
+- ✗ V5 JSON `deduplicated_contiguous_phrases` are WRONG (from old V4)
+
+**Root Cause**: V5 scorer reuses V4 roots/phrases instead of regenerating them
+
+**Solution**: V6 - fresh generation from ground up, no V3/V4/V5 dependency
+
+**V6 Plan**:
+1. Extract fresh roots/phrases from tanakh.db (Session 115 morphology)
+2. Reuse V5 skipgram database (correct)
+3. Generate V6 scores
+4. Generate V6 top 550
+
+**Status**: V6 plan documented in NEXT_SESSION_PROMPT.md, ready for implementation
+
+---
 
 ## Session 115 Summary (COMPLETE ✓)
 

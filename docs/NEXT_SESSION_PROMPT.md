@@ -6,9 +6,45 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V5 System Fully Operational with Comprehensive Root Extraction
-**Version**: V5.3 - Hybrid stripping + plural protection + final letter normalization
-**Last Session**: Session 115 - Comprehensive Root Extraction Fix (2025-11-15)
+**Phase**: V6 Clean Regeneration - Build from Ground Up
+**Version**: V6.0 - Fresh generation with Session 115 morphology fixes
+**Last Session**: Session 116 - V5 Error Investigation & V6 Plan (2025-11-16)
+
+## Session 116 Summary (COMPLETE ✓)
+
+**Objective**: Investigate V5 root extraction errors and create clean V6 regeneration plan
+**Result**: ✓ COMPLETE - Identified issue (V5 reuses old V4 roots) and created V6 plan
+
+**Investigation Results**:
+1. ✓ **Morphology.py Session 115 fixes ARE working correctly** - Tested and verified
+2. ✓ **V5 database pattern_roots ARE correct** - Database has good roots in skipgrams table
+3. ✗ **V5 JSON deduplicated_roots ARE incorrect** - Reused from old V4 file (Nov 14, before fixes)
+4. ✗ **V5 JSON contiguous phrases ARE incorrect** - Also reused from old V4 file
+
+**Root Cause**:
+- `enhanced_scorer_skipgram_dedup_v4.py` line 712 loads existing V4 file
+- V4 file was generated Nov 14, before Nov 15 morphology fixes
+- V5 reuses V4's `deduplicated_roots` and `deduplicated_contiguous_phrases`
+- Result: V5 has correct skipgrams but incorrect roots/phrases
+
+**User-Reported Errors** (all from old V4 data):
+- `שִׁ֣יר חָדָ֑שׁ` → "יר חדש" ✗ (should be "שיר חדש")
+- `וּמִשְׁפָּ֑ט` → "פט" ✗ (should be "שפט")
+- `שָׁמַ֣יִם` → "מים" ✗ (should be "שמים")
+- `שִׁנָּ֣יו` → "ני" ✗ (should be "שן")
+- `בְּתוּל֣וֹת` → "תול" ✗ (should be "בתולה")
+
+**Solution**: Create V6 - fresh generation from ground up, no dependency on V3/V4/V5
+
+**Files Modified**:
+- `docs/NEXT_SESSION_PROMPT.md` - Updated with V6 plan
+- `docs/IMPLEMENTATION_LOG.md` - Session 116 entry
+
+**Next Steps**:
+- Execute V6 regeneration plan (see below)
+- All data will be fresh with Session 115 morphology fixes
+
+---
 
 ## Session 115 Summary (COMPLETE ✓)
 
@@ -233,11 +269,115 @@ Continue working on the Psalms structural analysis project. This document provid
 - ✓ Re-ran V4.2 scoring with gap penalty
 - ✓ Validated results and verified gap penalty working
 
-## Next Steps
+## V6 Regeneration Plan (NEXT SESSION)
 
-### Possible Next Actions
+### Overview
+Generate V6 completely fresh from tanakh.db and current morphology.py (Session 115 fixes). No dependency on V3/V4/V5 files.
 
-V5 system is now fully operational with all bugs fixed and quality filtering properly applied. Consider:
+### Why V6?
+- V5 reused old V4 roots/phrases (generated before Session 115 morphology fixes)
+- V5 database skipgrams are correct, but JSON deduplicated_roots/phrases are wrong
+- Clean regeneration ensures all data uses fixed morphology
+
+### V6 Generation Steps
+
+**Step 1: Extract Fresh Roots & Phrases from All Psalms**
+- Script: Create new `scripts/statistical_analysis/extract_psalm_patterns_v6.py`
+- Input: `database/tanakh.db` (psalm text)
+- Uses: `src/hebrew_analysis/morphology.py` (Session 115 fixes)
+- Output: `data/analysis_results/psalm_patterns_v6.json`
+- Contains for each psalm pair:
+  - Shared roots with IDF scores and verse locations
+  - Shared contiguous phrases (2-4+ words) with verse locations
+  - Word counts for normalization
+
+**Step 2: Reuse V5 Skipgram Database** (Already Correct)
+- Database: `data/psalm_relationships.db` (335,720 skipgrams)
+- Table: `psalm_skipgrams` with correct `pattern_roots`
+- Quality filtering already applied (content words + stoplist)
+- No regeneration needed - V5 skipgrams are good
+
+**Step 3: Generate V6 Scores**
+- Script: Create new `scripts/statistical_analysis/generate_v6_scores.py`
+- Inputs:
+  - Fresh roots/phrases from Step 1
+  - V5 skipgram database from Step 2
+  - Psalm word counts
+- Processing:
+  - Cross-pattern deduplication (phrases vs skipgrams vs roots)
+  - Gap penalty for skipgrams (10% per gap word, max 50%)
+  - Content word bonus (25% for 2 content words, 50% for 3+)
+  - IDF filtering for roots (threshold 0.5)
+  - Rare root bonus (2x for IDF >= 4.0)
+- Output: `data/analysis_results/enhanced_scores_v6.json`
+
+**Step 4: Generate V6 Top 550**
+- Script: `scripts/statistical_analysis/generate_top_550_v6.py`
+- Input: V6 scores from Step 3
+- Output: `data/analysis_results/top_550_connections_v6.json`
+
+### Implementation Notes
+
+**Extraction Script Design** (Step 1):
+```python
+# Extract patterns for all psalm pairs
+for psalm_a in range(1, 151):
+    for psalm_b in range(psalm_a + 1, 151):
+        # Get text from tanakh.db
+        words_a = get_psalm_words(psalm_a)
+        words_b = get_psalm_words(psalm_b)
+
+        # Extract roots using Session 115 morphology
+        roots_a = extract_roots_with_verses(words_a)
+        roots_b = extract_roots_with_verses(words_b)
+
+        # Find shared roots
+        shared_roots = find_shared_roots(roots_a, roots_b)
+
+        # Extract contiguous phrases
+        phrases_a = extract_contiguous_phrases(words_a, 2, 6)
+        phrases_b = extract_contiguous_phrases(words_b, 2, 6)
+
+        # Find shared phrases
+        shared_phrases = find_shared_phrases(phrases_a, phrases_b)
+
+        # Store with verse tracking
+```
+
+**Key Features**:
+- Uses current `HebrewMorphologyAnalyzer` with Session 115 fixes
+- Tracks verse numbers for all matches
+- Calculates IDF scores fresh from all 150 psalms
+- No dependency on any previous version files
+
+### Expected Results
+
+**V6 vs V5 Differences**:
+- Skipgrams: Identical (reusing V5 database)
+- Contiguous phrases: FIXED (all roots extracted correctly)
+- Shared roots: FIXED (all roots extracted correctly)
+- Scores: Different (better accuracy with correct roots)
+
+**Validation**:
+- `שִׁ֣יר חָדָ֑שׁ` → "שיר חדש" ✓
+- `וּמִשְׁפָּ֑ט` → "שפט" ✓
+- `שָׁמַ֣יִם` → "שמים" ✓
+- `שִׁנָּ֣יו` → "שן" ✓
+
+### Next Session Tasks
+
+1. Create `extract_psalm_patterns_v6.py` extraction script
+2. Create `generate_v6_scores.py` scoring script
+3. Create `generate_top_550_v6.py` top connections script
+4. Run V6 generation pipeline
+5. Validate results against user-reported errors
+6. Update documentation
+
+---
+
+## Possible Next Actions (Legacy - V5)
+
+V5 system has bugs in deduplicated_roots/phrases. Use V6 instead. Consider:
 
 1. **Validate Bug Fixes** (Recommended Next Step)
    - Verify "ענוים" now correctly maps to "ענו" (not "עני")

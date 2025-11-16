@@ -1,5 +1,199 @@
 # Implementation Log
 
+## Session 116 - 2025-11-16 (V5 Error Investigation & V6 Plan - COMPLETE ✓)
+
+### Overview
+**Objective**: Investigate serious root extraction errors reported in V5 output and devise solution
+**Approach**: Systematic debugging of morphology → database → scoring pipeline
+**Result**: ✓ COMPLETE - Identified root cause (V5 reuses old V4 data) and created V6 regeneration plan
+**Session Duration**: ~2 hours (investigation + pipeline tracing + V6 plan creation)
+**Status**: V6 plan ready for implementation
+
+### User-Reported Errors
+
+User found serious errors in V5 output (`top_550_connections_skipgram_dedup_v5.json`):
+
+**Contiguous Phrase Errors**:
+- `שִׁ֣יר חָדָ֑שׁ` (shir chadash - "new song") → `consonantal: "יר חדש"` ✗
+  - Missing initial ש from "שיר"
+  - Should be: `consonantal: "שיר חדש"` ✓
+
+**Shared Root Errors**:
+- `וּמִשְׁפָּ֑ט` (u-mishpat - "and judgment") → `root: "פט"` ✗ (should be "שפט")
+- `שָׁמַ֣יִם` (shamayim - "heavens") → `root: "מים"` ✗ (should be "שמים")
+- `שִׁנָּ֣יו` (shinav - "his teeth") → `root: "ני"` ✗ (should be "שן")
+- `בְּתוּל֣וֹת` (betulot - "maidens") → `root: "תול"` ✗ (should be "בתולה")
+
+**Pattern**: All errors are ש-initial words being over-stripped, exactly the issues Session 115 supposedly fixed!
+
+### Investigation Process
+
+**Phase 1: Verify Morphology Fixes (Session 115)**
+
+Tested `HebrewMorphologyAnalyzer.extract_root()` directly:
+```
+Testing root extraction:
+
+PASS: שִׁ֣יר -> שיר (expected: שיר) [song]
+PASS: חָדָ֑שׁ -> חדש (expected: חדש) [new]
+PASS: שָׁמַ֣יִם -> שמים (expected: שמים) [heavens]
+PASS: שִׁנָּ֣יו -> שן (expected: שן) [his teeth]
+PASS: וּמִשְׁפָּ֑ט -> שפט (expected: שפט) [and judgment]
+PASS: בְּתוּל֣וֹת -> בתול (expected: בתול) [maidens]
+PASS: שְׁ֭תוּלִים -> שתל (expected: שתל) [planted]
+```
+
+**Result**: ✓ morphology.py is working correctly! Session 115 fixes are effective.
+
+**Phase 2: Verify V5 Database**
+
+Checked `psalm_skipgrams` table in `data/psalm_relationships.db`:
+```sql
+SELECT pattern_roots, pattern_hebrew FROM psalm_skipgrams
+WHERE pattern_hebrew LIKE '%שיר%' OR pattern_hebrew LIKE '%חדש%';
+```
+
+Results:
+- `pattern_roots='שיר חדש' | pattern_hebrew='שִׁ֣יר חָדָ֑שׁ'` ✓
+- `pattern_roots='שיר' | pattern_hebrew='שִׁ֣יר'` ✓
+
+**Result**: ✓ V5 database `pattern_roots` are correct! Skipgrams have proper root extraction.
+
+**Phase 3: Trace V5 JSON Generation**
+
+Examined `enhanced_scorer_skipgram_dedup_v4.py` (generates V5 JSON):
+
+Line 712-713:
+```python
+with open(base_dir / "data/analysis_results/enhanced_scores_skipgram_dedup_v4.json", 'r', encoding='utf-8') as f:
+    v4_scores = json.load(f)
+```
+
+Line 749-750:
+```python
+shared_phrases=v4_entry['deduplicated_contiguous_phrases'],
+shared_roots=v4_entry['deduplicated_roots'],
+```
+
+**FOUND THE PROBLEM!**
+- V5 scorer **reuses** `deduplicated_roots` and `deduplicated_contiguous_phrases` from V4 file
+- V5 only regenerates skipgrams (from database with correct roots)
+- V5 does NOT regenerate roots/phrases
+
+**Phase 4: Verify V4 File Date**
+
+```
+enhanced_scores_skipgram_dedup_v4.json: Modified Nov 14 14:38:07 2025
+src/hebrew_analysis/morphology.py: Modified Nov 15 23:42:25 2025
+```
+
+**CONFIRMED!**
+- V4 was generated **before** Session 115 morphology fixes (Nov 14 vs Nov 15)
+- V4 has old broken roots from pre-Session 115 morphology
+- V5 reused these broken roots/phrases
+
+### Root Cause Summary
+
+1. Session 115 (Nov 15) fixed morphology.py ✓
+2. V5 database was regenerated with fixed morphology ✓
+3. **BUT** V5 JSON scorer reused V4 roots/phrases (from Nov 14) ✗
+4. V4 was generated with OLD broken morphology
+5. Result: V5 has correct skipgrams but incorrect roots/phrases
+
+**Pipeline Dependency Chain**:
+```
+V3 (unknown)
+  → V4 (Nov 14 - broken morphology)
+    → V5 (reuses V4 roots/phrases)
+```
+
+### Solution: V6 Clean Regeneration
+
+**Decision**: Build V6 completely fresh from ground up, no dependency on V3/V4/V5 files
+
+**V6 Approach**:
+1. Extract ALL roots/phrases fresh from `tanakh.db` using current morphology
+2. Reuse V5 skipgram database (already correct with 335,720 skipgrams)
+3. Generate fresh V6 scores with clean data
+4. No dependency on any previous version JSON files
+
+**Advantages**:
+- ✓ Eliminates complex V3/V4 dependency chain
+- ✓ Uses verified-working Session 115 morphology
+- ✓ Reuses good V5 skipgram database
+- ✓ Clean, understandable generation process
+- ✓ All data guaranteed fresh
+
+### V6 Plan Created
+
+Detailed V6 regeneration plan documented in `docs/NEXT_SESSION_PROMPT.md`:
+
+**Step 1**: Extract Fresh Roots & Phrases
+- New script: `extract_psalm_patterns_v6.py`
+- Process all 11,175 psalm pairs
+- Extract roots using Session 115 morphology
+- Extract contiguous phrases (2-6 words)
+- Calculate IDF scores fresh
+- Track verse locations for all matches
+- Output: `psalm_patterns_v6.json`
+
+**Step 2**: Reuse V5 Skipgram Database
+- Use existing `data/psalm_relationships.db`
+- Table: `psalm_skipgrams` (335,720 skipgrams with correct roots)
+- No changes needed
+
+**Step 3**: Generate V6 Scores
+- New script: `generate_v6_scores.py`
+- Combine fresh roots/phrases with V5 skipgrams
+- Apply all scoring logic (dedup, gap penalty, content bonus, IDF filtering)
+- Output: `enhanced_scores_v6.json`
+
+**Step 4**: Generate V6 Top 550
+- Script: `generate_top_550_v6.py`
+- Output: `top_550_connections_v6.json`
+
+### Files Modified
+
+**Documentation**:
+- `docs/NEXT_SESSION_PROMPT.md` - Updated with Session 116 summary and V6 plan
+- `docs/IMPLEMENTATION_LOG.md` - This entry
+
+**No Code Changes**: Investigation session only, V6 implementation deferred to next session
+
+### Impact
+
+**V5 Status**:
+- ✗ Has incorrect `deduplicated_roots` (from old V4)
+- ✗ Has incorrect `deduplicated_contiguous_phrases` (from old V4)
+- ✓ Has correct skipgrams in database
+- **Not recommended for use**
+
+**V6 Status**:
+- Plan created and documented
+- Ready for implementation
+- Will have all correct data (roots, phrases, skipgrams)
+- **Recommended for next session**
+
+**Session 115 Morphology Fixes**:
+- ✓ Verified working correctly
+- ✓ Being used in V5 skipgram database
+- ✓ Will be used throughout V6 generation
+- All fixes validated and production-ready
+
+### Next Steps
+
+Next session should:
+1. Implement V6 extraction script (`extract_psalm_patterns_v6.py`)
+2. Implement V6 scoring script (`generate_v6_scores.py`)
+3. Implement V6 top 550 script (`generate_top_550_v6.py`)
+4. Execute V6 pipeline
+5. Validate against user-reported errors
+6. Update documentation
+
+**Expected Outcome**: All user-reported errors fixed in V6 output
+
+---
+
 ## Session 115 - 2025-11-15 (V5 Root Extraction Comprehensive Fix - COMPLETE ✓)
 
 ### Overview
