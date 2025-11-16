@@ -342,10 +342,12 @@ The following areas are of particular interest to intelligent, well-read lay rea
     - *Influence of verse and their use in aggada and halacha by the Mishna, Talum, Midrashim, etc as provided in the Torah Temimah* - MAKE SURE to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)* - see research bundle
     - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)* - see research bundle
+    - Make sure to read the "### About the Commentators" section in the research bundle for context on these commentators
     - Targum renderings
     - Church fathers (Augustine, Jerome, etc.)
     - Medieval Christian interpretation
     - Modern critical scholarship debates
+    
 
 ### VALIDATION CHECK - Figurative Language:
 
