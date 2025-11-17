@@ -59,7 +59,7 @@ class RelatedPsalmsLibrarian:
 
     def __init__(
         self,
-        connections_file: str = "data/analysis_results/top_550_connections_skipgram_dedup_v4.json",
+        connections_file: str = "data/analysis_results/top_550_connections_v6.json",
         db: Optional[TanakhDatabase] = None
     ):
         """
@@ -152,8 +152,28 @@ class RelatedPsalmsLibrarian:
             return ""
 
         md = f"## Related Psalms Analysis\n\n"
-        md += f"The concordance librarian has identified **{len(related_matches)} psalm(s)** "
-        md += f"with potentially interesting word and phrase relationships to Psalm {psalm_number}.\n\n"
+
+        # Build list of related psalm numbers for display
+        psalm_numbers = ", ".join([str(m.psalm_number) for m in related_matches])
+
+        md += f"The librarian has found that the psalm you're analyzing (Psalm {psalm_number}) has some POSSIBLY interesting word and phrase relationships with other psalms (Psalms {psalm_numbers}).\n\n"
+
+        md += "To understand the potential value of these connections, consider the scholarly consensus regarding Psalm 25 and Psalm 34. These two acrostics are a classic example of a \"diptych,\" or deliberate pair, linked by numerous structural and thematic echoes.\n"
+        md += "- **Structural Anomaly**: They both share the unique acrostic structure of omitting the Vav (ו) stanza and adding a final Pe (פ) stanza, which links them conceptually through the root פדה (padah - to redeem).\n"
+        md += "- **The \"Call and Response\" Arc**: This structural link is reinforced by a clear theological arc:\n"
+        md += "  - **The Plea (Ps 25:22)**: Concludes with the petition פְּדֵה... מִכֹּל צָרוֹתָיו (pedeh... mikol tzarotav - \"Redeem... from all his troubles\").\n"
+        md += "  - **The Response (Ps 34:7, 18)**: Answers with the assurance וּמִכׇּל־צָרוֹתָיו הוֹשִׁיעוֹ (u'mikol-tzarotav hoshio - \"and from all his troubles He saved him\") and the final capstone statement פֹּדֶה יְהֹוָה (podeh Adonai - \"The Lord redeems\").\n"
+        md += "- **Shared Wisdom Theme**: Both psalms pivot to wisdom instruction using the nearly identical rhetorical question מִי־הָאִישׁ (mi ha-ish - \"Who is the man...\") (Ps 25:12, Ps 34:13).\n"
+        md += "- **Shared Thematic Vocabulary**: They are further bound by a specific vocabulary of piety and instruction, including:\n"
+        md += "  - \"Fear of the LORD\" (Ps 25:12, 14; Ps 34:8, 10, 12)\n"
+        md += "  - \"The humble/afflicted\" (עֲנָוִים - anavim) (Ps 25:9; Ps 34:3)\n"
+        md += "  - \"Good\" (טוֹב - tov) (Ps 25:13; Ps 34:9, 11, 13)\n\n"
+
+        md += "As you review the data below, ask yourself if a similar structural, thematic, or \"call-and-response\" dynamic is at play here, where one psalm seems to complete or answer the other.\n\n"
+
+        md += f"Below is the full text of the psalms potentially related to Psalm {psalm_number}, and for each psalm, a list of POSSIBLY related words and phrases that were algorithmically detected. These relationships might deepen your insights into the meaning, intent, posture, history, and poetics of the psalm you are analyzing. Feel free to REJECT these possible connections as spurious, but DO incorporate them into your work where relevant.\n\n"
+
+        md += "---\n\n"
 
         for match in related_matches:
             md += self._format_single_match(psalm_number, match)
@@ -218,17 +238,6 @@ class RelatedPsalmsLibrarian:
 
         # Filter roots early so we can check if we have any displayable content
         filtered_roots = [r for r in match.shared_roots if r.get('idf', 0) >= 1]
-
-        # Add the introductory text
-        md += f"The librarian has found that the psalm you're analyzing (Psalm {analyzing_psalm}) "
-        md += f"has some POSSIBLY interesting word and phrase relationships with another psalm "
-        md += f"(Psalm {match.psalm_number}). Below is a list of POSSIBLY related words and phrases. "
-        md += f"These relationships might deepen your insights into the meaning, intent, posture, "
-        md += f"history and poetics of the psalm you are analyzing. We're providing the ENTIRE text "
-        md += f"of Psalm {match.psalm_number} for your consideration, as well as a list of possibly "
-        md += f"related words and phrases (including skipgrams if they were found). Feel free to "
-        md += f"REJECT these possible connections as spurious, OR to incorporate them into your work "
-        md += f"where relevant.\n\n"
 
         # Full text of the related psalm (Hebrew only)
         md += f"#### Full Text of Psalm {match.psalm_number}\n\n"
@@ -372,7 +381,7 @@ def main():
     parser = argparse.ArgumentParser(description='Find related psalms')
     parser.add_argument('psalm', type=int, help='Psalm number')
     parser.add_argument('--connections-file',
-                       default='data/analysis_results/top_550_connections_skipgram_dedup_v4.json',
+                       default='data/analysis_results/top_550_connections_v6.json',
                        help='Path to connections file')
 
     args = parser.parse_args()
