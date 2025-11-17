@@ -1,8 +1,35 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-16 (Session 124 - COMPLETE ✓)
+**Last Updated**: 2025-11-16 (Session 125 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Technical Architecture Documentation Updated
+**Status**: ✓ V6 System Ready - Related Psalms Instructions Enhanced
+
+## Session 125 Summary (COMPLETE ✓)
+
+### Enhanced Related Psalms Instructions
+
+**Objective**: Improve related psalms research bundle instructions with scholarly example and reduce token usage
+**Result**: ✓ COMPLETE - Single comprehensive instruction with Ps 25-34 diptych example
+
+**Changes Made**:
+1. ✓ Consolidated repetitive intro to appear once at top (eliminated 4 repetitions)
+2. ✓ Added comprehensive Ps 25-34 diptych example as teaching framework
+3. ✓ Updated to V6 connections file (was using V4)
+
+**Impact**:
+- Better guidance: Multi-dimensional framework (structural, thematic, call-and-response, vocabulary)
+- Token efficiency: Eliminated 4 repetitions of instructional text
+- Actionable prompt: "Ask yourself if a similar... dynamic is at play here"
+- Real example: Ps 25-34 actually appears as #1 match when analyzing Psalm 25
+
+**Files Modified**:
+- `src/agents/related_psalms_librarian.py` - Enhanced instructions, V6 integration
+
+**Next Steps**:
+- Monitor synthesis writer's use of enhanced guidance
+- Evaluate connection identification improvement
+
+---
 
 ## Session 124 Summary (COMPLETE ✓)
 

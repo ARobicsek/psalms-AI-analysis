@@ -8,7 +8,45 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 124 - Technical Architecture Documentation Update (2025-11-16)
+**Last Session**: Session 125 - Enhanced Related Psalms Instructions (2025-11-16)
+
+## Session 125 Summary (COMPLETE ✓)
+
+**Objective**: Improve related psalms research bundle instructions with scholarly example and reduce token usage
+**Result**: ✓ COMPLETE - Single comprehensive instruction with better guidance and reduced repetition
+
+**Changes Made**:
+1. **Consolidated Instructions** - Moved repetitive intro from each psalm section to appear once at top
+   - Eliminated 4 repetitions of ~60-token instruction
+   - Significant token savings per research bundle
+
+2. **Enhanced Instruction with Ps 25-34 Example** - Added comprehensive scholarly framework:
+   - Structural Anomaly: Shared acrostic structure (omitting Vav ו, adding Pe פ linked by פדה)
+   - Call-and-Response Arc: Ps 25:22 plea → Ps 34:7,18 response → Ps 34:23 capstone
+   - Shared Wisdom Theme: מִי־הָאִישׁ (mi ha-ish) rhetorical question
+   - Shared Thematic Vocabulary: Fear of LORD, humble/afflicted, good
+   - Actionable prompt: "Ask yourself if a similar structural, thematic, or 'call-and-response' dynamic is at play"
+
+3. **Updated to V6 Data** - Changed default from V4 to V6 connections file
+
+**Testing**:
+- ✓ Psalm 25 lookup found 5 related psalms with Psalm 34 ranked #1 (matches example!)
+- ✓ Comprehensive instruction appears once at top
+- ✓ Individual psalm sections simplified (no repetition)
+
+**Impact**:
+- Better guidance: Multi-dimensional framework for evaluating connections
+- Token efficiency: Net positive despite longer instruction (appears once vs. 5 times)
+- User experience: Clearer organization, concrete scholarly example
+
+**Files Modified**:
+- `src/agents/related_psalms_librarian.py` - Enhanced instructions, V6 integration
+
+**Next Steps**:
+- Monitor synthesis writer's use of related psalms data with enhanced guidance
+- Evaluate whether new instruction framework improves connection identification
+
+---
 
 ## Session 124 Summary (COMPLETE ✓)
 
