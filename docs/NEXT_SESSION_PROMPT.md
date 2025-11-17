@@ -8,7 +8,59 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 125 - Enhanced Related Psalms Instructions (2025-11-16)
+**Last Session**: Session 126 - GPT-5 Master Editor Enhancement (2025-11-17)
+
+## Session 126 Summary (COMPLETE ✓)
+
+**Objective**: Upgrade master editor to GPT-5.1 for improved reasoning capabilities
+**Result**: ✓ COMPLETE - Master Editor enhanced with GPT-5 high reasoning effort configuration
+
+**Changes Made**:
+1. **Researched GPT-5.1 Capabilities** - Investigated new OpenAI GPT-5.1 model parameters
+   - Discovered `reasoning_effort` parameter (values: "none", "minimal", "low", "medium", "high")
+   - GPT-5.1 defaults to `reasoning_effort="none"` (no reasoning!) - must explicitly set
+   - Discovered `max_completion_tokens` parameter for output length control
+   - Temperature parameter not supported in reasoning models (GPT-5/5.1)
+
+2. **Attempted GPT-5.1 Migration** - Updated master_editor.py to use GPT-5.1
+   - Set `reasoning_effort="high"` for complex editorial analysis
+   - Set `max_completion_tokens=65536` (64K tokens for detailed commentary)
+   - Fixed import: Added `RateLimitError` to imports from openai package
+
+3. **Rate Limit Issue Discovered** - GPT-5.1 has restrictive token limits on current plan
+   - User's GPT-5.1 limit: 30,000 tokens per minute (TPM)
+   - Actual request size: 116,477 tokens (research bundle + commentary + prompts)
+   - Single request exceeds entire per-minute allowance by 3.9x
+   - No upgrade path available for GPT-5.1 at this time
+
+4. **Solution: Enhanced GPT-5 Configuration** - Switched to GPT-5 with new parameters
+   - Model: `gpt-5` (500K TPM limit - easily handles 116K token requests)
+   - Added `reasoning_effort="high"` (GPT-5 defaults to "medium")
+   - Added `max_completion_tokens=65536` (explicit output limit)
+   - Both models support high reasoning effort - main difference is default behavior
+
+**Impact**:
+- **Better than before**: Now using explicit `reasoning_effort="high"` (was using defaults)
+- **Within rate limits**: 116K tokens fits comfortably in 500K TPM allowance
+- **Improved quality**: High reasoning effort provides deeper analytical thinking for complex editorial work
+- **Explicit configuration**: max_completion_tokens ensures adequate output length for detailed commentary
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Updated to GPT-5 with reasoning_effort and max_completion_tokens parameters
+
+**Key Learning**:
+- GPT-5 and GPT-5.1 both support `reasoning_effort` parameter for deep reasoning
+- GPT-5.1 requires explicit `reasoning_effort` setting (defaults to "none")
+- GPT-5 defaults to "medium" reasoning effort (we set to "high")
+- Temperature/top_p not supported in reasoning models - use reasoning_effort instead
+- Rate limits can vary significantly between model versions
+
+**Next Steps**:
+- Test enhanced GPT-5 configuration with Psalm 6 pipeline
+- Monitor quality improvements from high reasoning effort
+- Consider GPT-5.1 migration when higher rate limits become available
+
+---
 
 ## Session 125 Summary (COMPLETE ✓)
 
