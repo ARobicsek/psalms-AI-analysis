@@ -18,7 +18,7 @@ Editorial Focus Areas:
 - Appropriate technical terminology usage
 - Balance between introduction and verse commentary (complementary, not repetitive)
 
-Model: GPT-5
+Model: GPT-5 with high reasoning effort
 Input: Introduction + Verse Commentary + Full Research Bundle
 Output: Revised Introduction + Revised Verse Commentary with editorial notes
 
@@ -35,7 +35,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, List, Any, Tuple
-from openai import OpenAI
+from openai import OpenAI, RateLimitError
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -423,7 +423,7 @@ Begin your editorial review and revision below.
 
 class MasterEditor:
     """
-    Pass 4: Master Editor Agent using GPT-5.
+    Pass 4: Master Editor Agent using GPT-5 with high reasoning effort.
 
     Takes completed commentary (introduction + verse) plus full research bundle
     and provides expert editorial review and revision.
@@ -592,7 +592,9 @@ class MasterEditor:
             self.logger.info(f"Saved editorial prompt to {prompt_file}")
 
         # Call GPT-5
-        # Note: GPT-5 uses different API parameters - no system messages, only user messages
+        # Note: GPT-5 supports reasoning_effort parameter (defaults to "medium")
+        # Setting to "high" for complex editorial analysis
+        # No system messages supported - use user messages only
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -601,7 +603,9 @@ class MasterEditor:
                         "role": "user",
                         "content": prompt
                     }
-                ]
+                ],
+                reasoning_effort="high",        # Critical for complex editorial analysis
+                max_completion_tokens=65536     # 64K tokens for detailed commentary
             )
 
             # Extract response text
@@ -620,9 +624,9 @@ class MasterEditor:
             result = self._parse_editorial_response(response_text, psalm_number)
 
             return result
-        
-        except openai.RateLimitError as e:
-            self.logger.error(f"OpenAI API quota exceeded: {e}. Please check your plan and billing details.")
+
+        except RateLimitError as e:
+            self.logger.error(f"OpenAI API rate limit exceeded: {e}. Please check your plan and billing details.")
             raise  # Re-raise the exception to be handled by the pipeline
         except Exception as e:
             self.logger.error(f"An unexpected error occurred during editorial review: {e}")
@@ -979,7 +983,7 @@ def main():
         print(f"Micro:         {args.micro}")
         print()
         print("Performing master editorial review...")
-        print("This may take 2-5 minutes for GPT-5 to analyze and revise.")
+        print("This may take several minutes for GPT-5 to analyze and revise with high reasoning effort.")
         print()
 
         # Edit and save
