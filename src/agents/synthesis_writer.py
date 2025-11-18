@@ -859,9 +859,9 @@ class SynthesisWriter:
             prompt_file.write_text(prompt, encoding='utf-8')
             self.logger.info(f"Saved introduction prompt to {prompt_file}")
 
-        # Call Claude
+        # Call Claude with streaming (consistent with verse commentary)
         try:
-            response = self.client.messages.create(
+            stream = self.client.messages.stream(
                 model=self.model,
                 max_tokens=max_tokens,
                 messages=[{
@@ -870,11 +870,14 @@ class SynthesisWriter:
                 }]
             )
 
-            # Extract text
+            # Collect response chunks
             introduction = ""
-            for block in response.content:
-                if block.type == "text":
-                    introduction += block.text
+            with stream as response_stream:
+                for chunk in response_stream:
+                    if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                        if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                            if chunk.delta.type == 'text_delta':
+                                introduction += chunk.delta.text
 
             self.logger.info(f"Introduction generated: {len(introduction)} chars")
 
@@ -954,9 +957,9 @@ class SynthesisWriter:
             prompt_file.write_text(prompt, encoding='utf-8')
             self.logger.info(f"Saved verse commentary prompt to {prompt_file}")
 
-        # Call Claude
+        # Call Claude with streaming (required for large token limits)
         try:
-            response = self.client.messages.create(
+            stream = self.client.messages.stream(
                 model=self.model,
                 max_tokens=max_tokens,
                 messages=[{
@@ -965,11 +968,14 @@ class SynthesisWriter:
                 }]
             )
 
-            # Extract text
+            # Collect response chunks
             commentary = ""
-            for block in response.content:
-                if block.type == "text":
-                    commentary += block.text
+            with stream as response_stream:
+                for chunk in response_stream:
+                    if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                        if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                            if chunk.delta.type == 'text_delta':
+                                commentary += chunk.delta.text
 
             self.logger.info(f"Verse commentary generated: {len(commentary)} chars")
 
