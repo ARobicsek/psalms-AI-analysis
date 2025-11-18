@@ -495,6 +495,23 @@ class SynthesisWriter:
 
         self.logger.info(f"SynthesisWriter initialized with model {self.model}")
 
+    def _calculate_verse_token_limit(self, num_verses: int) -> int:
+        """
+        Calculate appropriate token limit for verse commentary based on psalm length.
+
+        Target: ~1800 tokens per verse to maintain consistent depth across all psalms.
+        Minimum: 16000 tokens (for psalms with fewer than 9 verses).
+
+        Args:
+            num_verses: Number of verses in the psalm
+
+        Returns:
+            Token limit for verse commentary generation
+        """
+        BASE_TOKENS_PER_VERSE = 1800
+        calculated = BASE_TOKENS_PER_VERSE * num_verses
+        return max(16000, calculated)  # Minimum 16K, scales up for longer psalms
+
     def write_commentary(
         self,
         macro_analysis: 'MacroAnalysis',
@@ -502,7 +519,7 @@ class SynthesisWriter:
         research_bundle_content: str,
         psalm_number: int,
         max_tokens_intro: int = 4000,
-        max_tokens_verse: int = 16000
+        max_tokens_verse: int = None  # Now optional, will be calculated if not provided
     ) -> Dict[str, str]:
         """
         Generate complete commentary from analysis objects.
@@ -513,17 +530,30 @@ class SynthesisWriter:
             research_bundle_content: Research Bundle markdown content
             psalm_number: Psalm number
             max_tokens_intro: Max tokens for introduction essay
-            max_tokens_verse: Max tokens for verse commentary
+            max_tokens_verse: Max tokens for verse commentary (if None, calculated based on psalm length)
 
         Returns:
             Dictionary with 'introduction' and 'verse_commentary' keys
         """
         self.logger.info("Starting commentary synthesis")
 
+        # Calculate verse count for dynamic token scaling
+        num_verses = 0
+        if hasattr(micro_analysis, 'verse_commentaries'):
+            num_verses = len(micro_analysis.verse_commentaries)
+        elif isinstance(micro_analysis, dict):
+            num_verses = len(micro_analysis.get('verse_commentaries', []))
+
+        # Calculate verse token limit if not provided
+        if max_tokens_verse is None:
+            max_tokens_verse = self._calculate_verse_token_limit(num_verses)
+            self.logger.info(f"Calculated verse token limit for {num_verses} verses: {max_tokens_verse} tokens")
+
         self.logger.info(f"Synthesizing commentary for Psalm {psalm_number}")
         self.logger.info(f"  Macro thesis: {len(macro_analysis.to_markdown())} chars")
         self.logger.info(f"  Micro analysis: {len(micro_analysis.to_markdown())} chars")
         self.logger.info(f"  Research bundle: {len(research_bundle_content)} chars")
+        self.logger.info(f"  Verse commentary token limit: {max_tokens_verse} tokens ({num_verses} verses)")
 
         # Check for phonetic data and log it
         try:

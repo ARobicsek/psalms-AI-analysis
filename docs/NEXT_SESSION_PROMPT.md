@@ -8,7 +8,70 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 127 - JSON Parsing Error Retry Fix (2025-11-18)
+**Last Session**: Session 128 - Dynamic Token Scaling for Verse Commentary (2025-11-18)
+
+## Session 128 Summary (COMPLETE ✓)
+
+**Objective**: Fix verse commentary length inconsistency in longer psalms
+**Result**: ✓ COMPLETE - Implemented dynamic token scaling based on psalm length
+
+**Issue Discovered**:
+- User noticed Psalm 7 (18 verses) output was only ~11-12 pages (~23K characters)
+- Same total length as much shorter psalms (1-6 verses)
+- Verse-by-verse commentary was only ~1/3 as long per verse
+
+**Root Cause Analysis**:
+- Synthesis writer had **fixed** `max_tokens_verse = 16000` output limit regardless of psalm length
+- Token budget per verse decreased proportionally with longer psalms:
+  - Psalm 1 (6 verses): 16000 ÷ 6 = **2,666 tokens/verse** (~2,000 words)
+  - Psalm 4 (9 verses): 16000 ÷ 9 = **1,777 tokens/verse** (~1,333 words)
+  - Psalm 7 (18 verses): 16000 ÷ 18 = **888 tokens/verse** (~666 words) ❌
+- Claude Sonnet 4.5 tried to cover all verses equally but was constrained by total limit
+- Result: Compressed commentary for longer psalms
+
+**Solution Implemented**:
+- Added `_calculate_verse_token_limit()` method to synthesis_writer.py
+- Dynamic scaling: `max(16000, num_verses * 1800)`
+- Maintains ~1,800 tokens per verse for consistent depth
+- Minimum floor of 16K tokens (no regression for short psalms)
+
+**New Token Allocations**:
+- Psalm 1-8 (≤8 verses): 16,000 tokens (minimum, unchanged)
+- Psalm 7 (18 verses): **32,400 tokens** (doubles current limit)
+- Psalm 119 (176 verses): 316,800 tokens (extreme case)
+
+**Master Editor Capacity Verified**:
+- No changes needed to master_editor.py
+- GPT-5 context window: 256K tokens (plenty of room)
+- Current Psalm 7 input: ~107K → After fix: ~123K ✓
+- Output limit: 65K tokens (unchanged, sufficient)
+
+**Files Modified**:
+- `src/agents/synthesis_writer.py`:
+  - Added `_calculate_verse_token_limit()` method (lines 498-513)
+  - Modified `write_commentary()` signature: `max_tokens_verse` now optional (line 522)
+  - Added dynamic calculation logic (lines 524-539)
+  - Enhanced logging to show calculated token limits
+
+**Impact**:
+- Longer psalms now receive proportionally more tokens for verse commentary
+- Maintains consistent depth (~1,800 tokens/verse) across all psalm lengths
+- No regression for shorter psalms (16K minimum preserved)
+- Better user experience with detailed verse analysis for longer psalms
+
+**Session Accomplishments**:
+1. ✓ Diagnosed token allocation issue through comparative analysis
+2. ✓ Designed dynamic scaling algorithm with minimum floor
+3. ✓ Verified master editor capacity for increased input
+4. ✓ Implemented fix with proper logging
+5. ✓ Updated all documentation
+
+**Next Steps**:
+- Re-run Psalm 7 pipeline to verify improved verse commentary length
+- Monitor verse commentary quality in longer psalms
+- Consider applying similar dynamic scaling to other agents if needed
+
+---
 
 ## Session 127 Summary (COMPLETE ✓ - VERIFIED)
 
