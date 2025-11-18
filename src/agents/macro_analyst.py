@@ -220,7 +220,7 @@ class MacroAnalyst:
     def analyze_psalm(
         self,
         psalm_number: int,
-        max_tokens: int = 16000,
+        max_tokens: int = 32000,  # Doubled from 16K to ensure no output constraint
         include_full_framework: bool = False
     ) -> MacroAnalysis:
         """
@@ -228,7 +228,7 @@ class MacroAnalyst:
 
         Args:
             psalm_number: Psalm number (1-150)
-            max_tokens: Maximum tokens for response
+            max_tokens: Maximum tokens for response (default: 32K)
             include_full_framework: Whether to include full analytical framework
                                    (can be very large, ~1200 lines)
 

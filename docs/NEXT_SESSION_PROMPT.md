@@ -52,6 +52,11 @@ Continue working on the Psalms structural analysis project. This document provid
   - Modified `write_commentary()` signature: `max_tokens_verse` now optional (line 522)
   - Added dynamic calculation logic (lines 524-539)
   - Enhanced logging to show calculated token limits
+- `src/agents/macro_analyst.py`:
+  - Doubled max_tokens default: 16K → 32K (line 223)
+- `src/agents/micro_analyst.py`:
+  - Doubled discovery max_tokens: 16K → 32K (line 461)
+  - Doubled synthesis max_tokens: 4K → 8K per verse (line 554)
 
 **Impact**:
 - Longer psalms now receive proportionally more tokens for verse commentary
@@ -64,7 +69,11 @@ Continue working on the Psalms structural analysis project. This document provid
 2. ✓ Designed dynamic scaling algorithm with minimum floor
 3. ✓ Verified master editor capacity for increased input
 4. ✓ Implemented fix with proper logging
-5. ✓ Updated all documentation
+5. ✓ Doubled macro/micro analyst token limits as precaution:
+   - Macro analyst: 16K → 32K
+   - Micro discovery: 16K → 32K
+   - Micro synthesis: 4K → 8K per verse
+6. ✓ Updated all documentation
 
 **Next Steps**:
 - Re-run Psalm 7 pipeline to verify improved verse commentary length

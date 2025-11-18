@@ -458,7 +458,7 @@ class MicroAnalystV2:
 
                 response = self.client.messages.create(
                     model=self.model,
-                    max_tokens=16384,  # Increased from 8192 to handle longer responses with Hebrew text
+                    max_tokens=32768,  # Doubled to 32K to ensure no output constraint (was 16K, originally 8K)
                     messages=[{
                         "role": "user",
                         "content": prompt
@@ -551,7 +551,7 @@ class MicroAnalystV2:
 
                 response = self.client.messages.create(
                     model=self.model,
-                    max_tokens=4096,
+                    max_tokens=8192,  # Doubled from 4K to ensure no output constraint per verse
                     messages=[{
                         "role": "user",
                         "content": prompt

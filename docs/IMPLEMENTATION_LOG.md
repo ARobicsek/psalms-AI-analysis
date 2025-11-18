@@ -165,6 +165,11 @@ Verse commentary token limit: 32400 tokens (18 verses)
   - Added `_calculate_verse_token_limit()` method
   - Modified `write_commentary()` to use dynamic token calculation
   - Enhanced logging for token allocation
+- `src/agents/macro_analyst.py`:
+  - Doubled max_tokens default: 16K → 32K (precautionary)
+- `src/agents/micro_analyst.py`:
+  - Doubled discovery max_tokens: 16K → 32K (precautionary)
+  - Doubled synthesis max_tokens: 4K → 8K per verse (precautionary)
 
 **Documentation**:
 - `docs/NEXT_SESSION_PROMPT.md` - Added Session 128 summary
