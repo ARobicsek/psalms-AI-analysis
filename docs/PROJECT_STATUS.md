@@ -4,12 +4,12 @@
 **Current Phase**: V6 Production Ready
 **Status**: ✓ V6 System Ready - Dynamic Token Scaling Implemented
 
-## Session 128 Summary (COMPLETE ✓)
+## Session 128 Summary (COMPLETE ✓ VERIFIED)
 
-### Dynamic Token Scaling for Verse Commentary
+### Dynamic Token Scaling + Streaming Support
 
 **Objective**: Fix verse commentary length inconsistency in longer psalms
-**Result**: ✓ COMPLETE - Implemented dynamic token scaling based on psalm length
+**Result**: ✓ COMPLETE & VERIFIED - Dynamic scaling + streaming enabled across all agents
 
 **Issue Discovered**:
 - Psalm 7 (18 verses) verse commentary was ~1/3 as long per verse as shorter psalms
@@ -19,18 +19,34 @@
 - Fixed token limit (16K) spread across all verses
 - Psalm 7: 16000 ÷ 18 = 888 tokens/verse (vs. 2,666 for Psalm 1)
 
-**Solution**:
-- Dynamic scaling: `max(16000, num_verses * 1800)`
-- Psalm 7 now gets 32,400 tokens for verse commentary
-- Maintains ~1,800 tokens/verse for consistent depth
+**Solutions Implemented**:
+1. **Dynamic Token Scaling**:
+   - Formula: `max(16000, num_verses * 1800)`
+   - Psalm 7 now gets 32,400 tokens for verse commentary
+   - Maintains ~1,800 tokens/verse for consistent depth
 
-**Files Modified**:
-- `src/agents/synthesis_writer.py` - Added dynamic token calculation
+2. **Doubled Analyst Limits**:
+   - Macro analyst: 16K → 32K
+   - Micro discovery: 16K → 32K
+   - Micro synthesis: 4K → 8K per verse
+
+3. **Streaming Support** (discovered necessity during testing):
+   - 32K limits triggered SDK requirement for streaming
+   - Added to macro analyst (thinking + text blocks)
+   - Added to micro analyst (discovery + synthesis)
+   - Added to synthesis writer (intro + verses)
+
+**Files Modified** (4 commits):
+- `src/agents/synthesis_writer.py` - Dynamic scaling + streaming
+- `src/agents/macro_analyst.py` - Doubled limit + streaming
+- `src/agents/micro_analyst.py` - Doubled limits + streaming
 
 **Impact**:
-- Longer psalms receive proportionally more tokens
-- No regression for short psalms (16K minimum)
-- Consistent verse commentary depth across all psalm lengths
+- ✅ Longer psalms receive proportionally more tokens
+- ✅ No regression for short psalms (16K minimum)
+- ✅ No timeout errors with large token requests
+- ✅ Consistent verse commentary depth across all psalm lengths
+- ✅ Pipeline verified working end-to-end with Psalm 7
 
 ---
 
