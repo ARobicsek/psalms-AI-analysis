@@ -1,8 +1,61 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-17 (Session 126 - COMPLETE ✓)
+**Last Updated**: 2025-11-18 (Session 127 - COMPLETE ✓ VERIFIED)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Master Editor Enhanced with GPT-5 High Reasoning
+**Status**: ✓ V6 System Ready - Pipeline Resilience Improved & Verified
+
+## Session 127 Summary (COMPLETE ✓ VERIFIED)
+
+### JSON Parsing Error Fix - Retry Logic + Token Limit
+
+**Objective**: Fix pipeline crash caused by malformed JSON from Sonnet 4.5
+**Result**: ✓ COMPLETE & VERIFIED - Two fixes applied, Psalm 7 successful
+
+**Issue #1**:
+- Psalm 7 pipeline crashed with JSONDecodeError (unterminated string)
+- No retry mechanism existed for JSON parsing failures
+
+**Fix #1 - Retry Logic**:
+- Made JSONDecodeError retryable (up to 3 attempts with exponential backoff)
+- Logs: "JSON parsing error (attempt X/3)... Retrying with fresh request..."
+
+**Issue #2** (Discovered after Fix #1):
+- Retry logic worked but all 3 attempts failed
+- Errors at end of response (lines 169-212, chars 22K-23K)
+- Pattern: JSON truncated near 8192 token limit
+
+**Root Cause**:
+- Discovery pass `max_tokens=8192` too small for complex psalms
+- Psalm 7 response: ~23KB text (~10K+ tokens with Hebrew)
+- JSON truncated before closing
+
+**Fix #2 - Increased Token Limit**:
+- Increased `max_tokens` from 8192 → 16384
+- Now handles longer discovery responses
+
+**Verification**:
+- ✓ Psalm 7 pipeline completed successfully
+- ✓ No JSON parsing errors with 16K token limit
+- ✓ Discovery pass handled longer response
+
+**Impact**:
+- Pipeline handles longer responses without truncation
+- Automatic retry for transient JSON issues
+- Better resilience for complex psalms
+- Verified working with Psalm 7
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` - Two fixes (retry logic + token limit)
+
+**Note**: The user's edit to `output/debug/related_psalms_test.txt` was unrelated - this was a token limit issue.
+
+**Session Complete**:
+✓ Issue diagnosed
+✓ Two fixes implemented
+✓ Psalm 7 pipeline successful
+✓ Documentation updated
+
+---
 
 ## Session 126 Summary (COMPLETE ✓)
 
