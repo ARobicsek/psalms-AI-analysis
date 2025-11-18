@@ -458,7 +458,7 @@ class MicroAnalystV2:
 
                 response = self.client.messages.create(
                     model=self.model,
-                    max_tokens=8192,
+                    max_tokens=16384,  # Increased from 8192 to handle longer responses with Hebrew text
                     messages=[{
                         "role": "user",
                         "content": prompt
@@ -492,8 +492,14 @@ class MicroAnalystV2:
                 return discoveries
 
             except json.JSONDecodeError as e:
-                self.logger.error(f"Failed to parse discovery JSON: {e}")
-                raise ValueError(f"Invalid JSON from discovery pass: {e}")
+                if attempt < max_retries - 1:
+                    self.logger.warning(f"JSON parsing error (attempt {attempt + 1}/{max_retries}): {e}")
+                    self.logger.warning("  Retrying with fresh request...")
+                    continue  # Retry
+                else:
+                    # Out of retries
+                    self.logger.error(f"Failed to parse discovery JSON after {max_retries} attempts: {e}")
+                    raise ValueError(f"Invalid JSON from discovery pass: {e}")
 
             except Exception as e:
                 # Check if it's a retryable error

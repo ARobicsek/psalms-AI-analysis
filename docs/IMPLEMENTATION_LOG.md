@@ -1,5 +1,254 @@
 # Implementation Log
 
+## Session 127 - 2025-11-18 (JSON Parsing Error Fix - Retry + Token Limit - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix pipeline crash caused by malformed JSON from Sonnet 4.5
+**Approach**: Add retry logic + increase token limit for discovery pass
+**Result**: ✓ COMPLETE - Two fixes applied: retry logic + increased max_tokens
+**Session Duration**: ~30 minutes
+**Status**: Pipeline resilient to JSON errors and handles longer discovery responses
+
+### Task Description
+
+**Initial Error**:
+User ran Psalm 7 pipeline and encountered fatal error:
+```
+11:33:33 | micro_analyst_v2 | ERROR | Failed to parse discovery JSON: Unterminated string starting at: line 179 column 226 (char 21955)
+Error in pipeline: Invalid JSON from discovery pass: Unterminated string starting at: line 179 column 226 (char 21955)
+```
+
+**First Analysis**:
+- Micro analyst discovery pass received 22KB JSON response from Sonnet 4.5
+- Response contained malformed string (unterminated quote at line 179)
+- Error immediately raised as ValueError with no retry attempt
+- Existing retry logic only handled API connection errors, not JSON parsing errors
+
+**After Fix #1 (Retry Logic) - Second Error**:
+All 3 retry attempts failed with similar errors:
+```
+Attempt 1: Unterminated string at line 169, char 23346 (response: 23382 chars)
+Attempt 2: Unterminated string at line 212, char 23141 (response: 23232 chars)
+Attempt 3: Unterminated string at line 199, char 22143 (response: 22274 chars)
+```
+
+**Second Analysis**:
+- Pattern clear: All errors at end of response, near total length
+- Responses ~22-23KB = ~10K+ tokens with Hebrew text
+- Discovery pass had `max_tokens=8192` - responses getting truncated!
+- Not a transient error - systematic truncation issue
+
+**Root Cause**:
+Discovery pass token limit (8192) insufficient for complex psalms like Psalm 7. JSON truncated mid-string before proper closing.
+
+### Changes Implemented
+
+**File Modified**: `src/agents/micro_analyst.py`
+
+**Fix #1 - Retry Logic** (Lines 494-502):
+
+**Change**: Made JSONDecodeError retryable with same pattern as API errors
+
+**Before**:
+```python
+except json.JSONDecodeError as e:
+    self.logger.error(f"Failed to parse discovery JSON: {e}")
+    raise ValueError(f"Invalid JSON from discovery pass: {e}")
+```
+
+**After**:
+```python
+except json.JSONDecodeError as e:
+    if attempt < max_retries - 1:
+        self.logger.warning(f"JSON parsing error (attempt {attempt + 1}/{max_retries}): {e}")
+        self.logger.warning("  Retrying with fresh request...")
+        continue  # Retry
+    else:
+        # Out of retries
+        self.logger.error(f"Failed to parse discovery JSON after {max_retries} attempts: {e}")
+        raise ValueError(f"Invalid JSON from discovery pass: {e}")
+```
+
+**Fix #2 - Token Limit Increase** (Line 461):
+
+**Change**: Increased max_tokens to prevent truncation of long discovery responses
+
+**Before**:
+```python
+response = self.client.messages.create(
+    model=self.model,
+    max_tokens=8192,
+    messages=[{
+        "role": "user",
+        "content": prompt
+    }]
+)
+```
+
+**After**:
+```python
+response = self.client.messages.create(
+    model=self.model,
+    max_tokens=16384,  # Increased from 8192 to handle longer responses with Hebrew text
+    messages=[{
+        "role": "user",
+        "content": prompt
+    }]
+)
+```
+
+### Impact
+
+**Before Fixes**:
+- JSON parsing errors were fatal (no retry)
+- Token limit too low for complex psalms (8192 tokens)
+- Psalm 7 discovery responses truncated mid-JSON
+- Required manual investigation and pipeline re-run
+
+**After Fix #1 (Retry Logic)**:
+- Automatic retry up to 3 times (same as API errors)
+- Exponential backoff: 2s, 4s delays
+- Clear logging of retry attempts
+- Revealed underlying token limit issue (all 3 retries failed)
+
+**After Fix #2 (Token Limit)**:
+- Discovery pass now supports up to 16384 tokens (doubled)
+- Handles longer responses with extensive Hebrew text (~23KB+)
+- No more mid-JSON truncation
+- Adequate headroom for complex psalm analysis
+
+**Combined Impact**:
+- Pipeline handles both transient errors AND longer responses
+- Automatic recovery for occasional LLM formatting issues
+- Complex psalms (like Ps 7) now complete successfully
+- Better resilience for long-running analysis pipelines
+
+**User Experience**:
+- No manual intervention needed for these error types
+- Pipeline "just works" for complex psalms
+- Clear logging shows retry attempts when they occur
+
+### Testing & Validation
+
+**Command to test**: `python scripts/run_enhanced_pipeline.py 7`
+
+**Expected behavior with Fix #1 (Retry Logic)**:
+- If JSON parsing fails, automatically retry
+- Log: "JSON parsing error (attempt X/3): ... Retrying with fresh request..."
+- Fresh API call with exponential backoff
+
+**Actual behavior (revealed need for Fix #2)**:
+- All 3 retry attempts failed with unterminated string errors
+- Errors at lines 169, 212, 199 (near end of 22-23KB responses)
+- Pattern indicated systematic truncation, not transient error
+
+**Expected behavior with Fix #2 (Token Limit)**:
+- Discovery pass completes successfully with 16K token budget
+- No truncation of ~23KB responses (~10K tokens)
+- JSON properly closed and parsed
+
+### Technical Notes
+
+**Discovery Process**:
+1. Initial issue appeared to be transient JSON formatting error
+2. Added retry logic (Fix #1) - best practice for LLM interactions
+3. Retries revealed systematic issue: all 3 attempts failed identically
+4. Error pattern analysis: truncation at 22-23KB (~8192 token limit)
+5. Root cause: Discovery responses for complex psalms exceed 8K tokens
+6. Solution: Double token limit to 16K (Fix #2)
+
+**Token Budget Calculation**:
+- Previous: 8192 tokens (~16KB text with English/Hebrew mix)
+- Psalm 7 needs: ~10-11K tokens (~23KB text with extensive Hebrew)
+- New limit: 16384 tokens (comfortable headroom for complex psalms)
+
+**Why Both Fixes Matter**:
+- **Retry logic**: Handles actual transient LLM output errors (will occur occasionally)
+- **Token limit**: Fixes systematic truncation for complex psalms
+- Together: Robust pipeline that handles both error types
+
+**Retry Strategy**:
+- Max 3 attempts (same as API errors)
+- Exponential backoff: 2s, 4s (prevents rapid retry loops)
+- Fresh API request each time (not same response re-parsed)
+- Helped diagnose that issue was systematic, not transient
+
+**User's Question**:
+User asked: "ps - I just made a small change in the language of @output/debug/related_psalms_test.txt - around line 172 maybe that did it?"
+
+**Answer**: No - the edited file is unrelated. Error occurred in micro_analyst discovery pass (completely different code path). Root cause was token limit (8192) being too small for Psalm 7's extensive discovery response.
+
+### Files Modified
+
+**Core Changes**:
+- `src/agents/micro_analyst.py` - Two fixes:
+  - Lines 494-502: Added JSONDecodeError retry logic
+  - Line 461: Increased max_tokens from 8192 to 16384
+
+**Documentation Updates**:
+- `docs/NEXT_SESSION_PROMPT.md` - Session 127 summary (both fixes)
+- `docs/PROJECT_STATUS.md` - Updated current status (both fixes)
+- `docs/IMPLEMENTATION_LOG.md` - This entry
+
+### Session Outcome
+
+✓ **Issue #1 Resolved**: Pipeline now resilient to JSON parsing errors (retry logic)
+✓ **Issue #2 Resolved**: Discovery pass handles longer responses (16K token limit)
+✓ **Verified Working**: Psalm 7 pipeline completed successfully
+✓ **Documentation Updated**: All session docs reflect both fixes
+✓ **Consistent Patterns**: Retry logic matches existing API error handling
+
+### Verification Results
+
+**Test Command**: `python scripts/run_enhanced_pipeline.py 7`
+
+**Result**: ✓ SUCCESS
+- Discovery pass completed without errors
+- No JSON truncation with 16K token limit
+- Full pipeline executed successfully
+- Psalm 7 commentary generated
+
+**Key Validation**:
+- Discovery response fit within 16K token budget
+- JSON properly formatted and parsed
+- No retry attempts needed (clean first attempt)
+- Pipeline continued through all stages
+
+### Session Complete
+
+**Accomplishments**:
+1. ✓ Diagnosed JSON parsing error from Psalm 7 pipeline
+2. ✓ Implemented retry logic for JSON parsing errors
+3. ✓ Discovered token limit issue through retry diagnostics
+4. ✓ Increased max_tokens from 8192 to 16384
+5. ✓ Verified fix with successful Psalm 7 completion
+6. ✓ Updated all documentation files
+
+**Code Quality**:
+- Retry logic matches existing patterns (API errors)
+- Clear logging for debugging
+- Appropriate token budget for complex psalms
+- Backward compatible (doesn't affect other psalms)
+
+### Future Considerations
+
+1. **Monitor Token Usage** (optional):
+   - Track discovery pass token usage across different psalms
+   - Identify if any psalms approach 16K limit
+   - Consider dynamic token budgeting if needed
+
+2. **Other Passes** (if needed):
+   - Check if other pipeline stages need token increases
+   - Apply similar fixes if truncation occurs elsewhere
+   - Research request pass may need similar headroom
+
+3. **Performance**:
+   - Current 16K limit provides adequate headroom
+   - No performance impact from increased limit
+   - Only uses what it needs per request
+
+---
+
 ## Session 126 - 2025-11-17 (Master Editor Enhancement: GPT-5 High Reasoning - COMPLETE ✓)
 
 ### Overview
