@@ -268,10 +268,12 @@ class MacroAnalyst:
         self.logger.info(f"RAG: Genre={rag_context.psalm_function['genre'] if rag_context.psalm_function else 'N/A'}, "
                         f"Ugaritic={len(rag_context.ugaritic_parallels)} parallels")
 
-        # Step 5: Call Claude Sonnet 4.5 with extended thinking
+        # Step 5: Call Claude Sonnet 4.5 with extended thinking (using streaming for long requests)
         try:
-            self.logger.info(f"Calling Claude API with model: {self.model}")
-            response = self.client.messages.create(
+            self.logger.info(f"Calling Claude API with model: {self.model} (streaming enabled)")
+
+            # Use streaming to avoid 10-minute timeout for large token requests
+            stream = self.client.messages.stream(
                 model=self.model,
                 max_tokens=max_tokens,
                 thinking={
@@ -283,22 +285,28 @@ class MacroAnalyst:
                     "content": prompt
                 }]
             )
-            self.logger.info("API call successful")
 
-            # Extract thinking and response
+            # Collect response chunks
             thinking_text = ""
             response_text = ""
 
-            # Debug: Log response structure
-            self.logger.info(f"Response has {len(response.content)} content blocks")
-            for i, block in enumerate(response.content):
-                self.logger.info(f"  Block {i}: type={block.type}")
-                if block.type == "thinking":
-                    thinking_text = block.thinking
-                    self.logger.info(f"    Thinking block: {len(thinking_text)} chars")
-                elif block.type == "text":
-                    response_text = block.text
-                    self.logger.info(f"    Text block: {len(response_text)} chars")
+            with stream as response_stream:
+                for chunk in response_stream:
+                    if hasattr(chunk, 'type'):
+                        if chunk.type == 'content_block_start':
+                            if hasattr(chunk, 'content_block') and hasattr(chunk.content_block, 'type'):
+                                self.logger.debug(f"Starting {chunk.content_block.type} block")
+                        elif chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta'):
+                                if hasattr(chunk.delta, 'type'):
+                                    if chunk.delta.type == 'thinking_delta':
+                                        thinking_text += chunk.delta.thinking
+                                    elif chunk.delta.type == 'text_delta':
+                                        response_text += chunk.delta.text
+
+            self.logger.info("API streaming call successful")
+            self.logger.info(f"Thinking collected: {len(thinking_text)} chars")
+            self.logger.info(f"Response collected: {len(response_text)} chars")
 
             self.logger.info(f"Response received. Thinking tokens: {len(thinking_text.split()) if thinking_text else 0}")
 

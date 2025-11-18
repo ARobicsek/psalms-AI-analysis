@@ -456,7 +456,8 @@ class MicroAnalystV2:
                     self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
                     time.sleep(wait_time)
 
-                response = self.client.messages.create(
+                # Use streaming to avoid 10-minute timeout for large token requests
+                stream = self.client.messages.stream(
                     model=self.model,
                     max_tokens=32768,  # Doubled to 32K to ensure no output constraint (was 16K, originally 8K)
                     messages=[{
@@ -465,8 +466,14 @@ class MicroAnalystV2:
                     }]
                 )
 
-                # Extract and parse JSON
-                response_text = self._extract_json_from_response(response)
+                # Collect response chunks
+                response_text = ""
+                with stream as response_stream:
+                    for chunk in response_stream:
+                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                if chunk.delta.type == 'text_delta':
+                                    response_text += chunk.delta.text
                 self.logger.debug(f"Response text preview: {response_text[:500]}")
 
                 # Try to extract JSON from markdown code blocks if present
@@ -549,7 +556,8 @@ class MicroAnalystV2:
                     self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
                     time.sleep(wait_time)
 
-                response = self.client.messages.create(
+                # Use streaming to avoid potential timeout (8K is safer but being consistent)
+                stream = self.client.messages.stream(
                     model=self.model,
                     max_tokens=8192,  # Doubled from 4K to ensure no output constraint per verse
                     messages=[{
@@ -558,8 +566,14 @@ class MicroAnalystV2:
                     }]
                 )
 
-                # Extract and parse JSON
-                response_text = self._extract_json_from_response(response)
+                # Collect response chunks
+                response_text = ""
+                with stream as response_stream:
+                    for chunk in response_stream:
+                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                if chunk.delta.type == 'text_delta':
+                                    response_text += chunk.delta.text
                 self.logger.debug(f"Response text preview: {response_text[:500]}")
 
                 # Try to extract JSON from markdown code blocks if present
