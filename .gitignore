@@ -33,6 +33,10 @@ Desktop.ini
 # Large database files (too big for GitHub)
 data/psalm_relationships.db
 
+# Large data/analysis files (too big for GitHub)
+data/analysis_results/*.json
+!data/analysis_results/psalm_word_counts.json
+
 # Temporary files
 temp/
 tmp/

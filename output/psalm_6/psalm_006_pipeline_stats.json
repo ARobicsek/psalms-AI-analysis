@@ -1,7 +1,7 @@
 {
   "psalm_number": 6,
   "pipeline_start": "2025-11-10T16:21:13.355127",
-  "pipeline_end": "2025-11-10T16:42:50.566170",
+  "pipeline_end": "2025-11-17T16:02:45.178889",
   "steps": {
     "macro_analysis": {
       "input_char_count": 1700,
@@ -31,12 +31,12 @@
       "timestamp": "2025-11-10T16:30:50.200584"
     },
     "master_editor": {
-      "input_char_count": 191349,
-      "input_token_estimate": 63783,
-      "output_char_count": 28638,
-      "output_token_estimate": 9546,
-      "duration_seconds": 240.4394142627716,
-      "completion_date": "2025-11-10T16:42:50.566170",
+      "input_char_count": 338529,
+      "input_token_estimate": 112843,
+      "output_char_count": 25888,
+      "output_token_estimate": 8629,
+      "duration_seconds": 233.49770617485046,
+      "completion_date": null,
       "timestamp": "2025-11-10T16:36:51.228746"
     }
   },
@@ -260,6 +260,13 @@
       "Torah Temimah": 1
     },
     "sacks_references_count": 2,
+    "related_psalms_count": 4,
+    "related_psalms_list": [
+      30,
+      38,
+      31,
+      69
+    ],
     "ugaritic_parallels": [
       {
         "type": "Poetic Word Pair",
@@ -294,9 +301,9 @@
     "verse_count": 11
   },
   "model_usage": {
-    "macro_analysis": "claude-sonnet-4-20250514",
-    "micro_analysis": "claude-sonnet-4-20250514",
-    "synthesis": "claude-sonnet-4-20250514",
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
     "master_editor": "gpt-5"
   }
 }

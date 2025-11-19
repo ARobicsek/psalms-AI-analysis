@@ -26,98 +26,6 @@ v. sub ליץ.
 
 ---
 
-### מוֹשַׁב
-**Lexicon**: BDB Dictionary
-**Vocalized**: מוֹשָׁב  
-
-n.m. 2 K 2:19 seat, assembly, dwelling-place, dwelling, dwellers;—abs. מ׳ ψ 107:4 + 4 times; cstr. מוֹשַׁב Ex 12:40 + 9 times; sf. מוֹשָׁבִי Jb 29:7 etc.; pl. cstr. מוֹשְׁבֵי Ez 34:13; sf. 2 mpl. מוֹשְׁבֹתֵיכֶם etc. Ex 12:20 + 11 times; sf. 3 mpl. מוֹשְׁבֹתָם etc. 10:23 + 5 times; מוֹשְׁבֹתֵיהֶם Ez 37:23, but read מְשׁוּב׳ their apostasies 𝔊 Comm., see VB; מוֹשְׁבוֹתֵיהֶם Ez 6:14;— seat 1 S 20:18, 25(×2) Jb 29:7; fig. מ׳ אלהים יָשַׁבְתִּי Ez 28:2. sitting = those sitting, sitting company or assembly, מוֹשַׁב עֲבָדָיו 1 K 10:5 (‖ מַעֲמַד מְשָֽׁרְתָיו) = 2 Ch 9:4; so ψ 1:1; 107:32 (‖ קהל). dwelling-place of people, tribe, etc., often = territory, district, or, later city; Gn 10:30; 27:39 (both J), Ex 10:23 (E), Nu 24:21 (JE), Gn 36:43 (P), Ez 6:14; 48:15; 1 Ch 4:33; 6:39; 7:28; מ׳ הָאָרֶץ Ez 34:13 = habitable places of the land; distinct from city עָרֵיהֶם בְּמוֹשְׁבֹתָם Nu 31:10, cf. Ez 6:6, but also עִיר מוֹשָׁב ψ 107:4, 7, 36; of Zion as מ׳ י׳ 132:13. alm. = abstr. dwelling בֵּית מוֹשַׁב עִיר Lv 25:29 (P); אֶרֶץ מ׳ Nu 15:2 land of your dwelling-place or dwelling (P). = house Ex 12:20 (‖ ביה v 19), 35:3; Lv 3:17; 7:26; 13:46; 23:3, 14, 21, 31; Nu 35:29 (all P), Lv 23:17 (H). situation of city 2 K 2:19; location of image Ez 8:3. time of dwelling Ex 12:40 (P). coll. = those dwelling, כֹּל מוֹשַׁב וגו׳ 2 S 9:12 all those dwelling in the house of Ṣiba—Ez 37:23 v. supr. and מְשׁוּבָה sub שׁוּב.
-
----
-
-### מוֹשַׁב
-**Lexicon**: BDB Dictionary
-**Vocalized**: מוֹשָׁב²  
-
-v. ישׁב.
-
----
-
-### חֶפֶץ
-**Lexicon**: Klein Dictionary
-**Vocalized**: חפץ ᴵ  
-
-to delight, take pleasure. he delighted, took pleasure, wished.
-
-**Etymology**: [Syr. חפט (= to strive hand), whence חֲפִיט (= assiduous, eager, zealous), Arab. ḥafiza (= he was mindful, kept, protected).]  
-
-**Derivatives**: Derivatives: חֲפִיצָה, חָפֵץ (adj.), חֵפֶץ, חֶפְצִית.  
-
----
-
-### חֶפֶץ
-**Lexicon**: Klein Dictionary
-**Vocalized**: חפץ ᴵᴵ  
-
-to bend down. he bent down (a hapax legomenon in the Bible, occurring Job 40:17 in the form יַחְפֹּץ).
-
-**Etymology**: [Arab. ḫafaḍa (= he bent down).]  
-
----
-
-### חֶפֶץ
-**Lexicon**: Klein Dictionary
-**Vocalized**: חֵֽפֶץ  
-
-delight, pleasure, desire. business, matter, affair, thing, object.
-
-**Etymology**: [From חפץ ᴵ. For sense development cp. Aram. חֶפְצָא (= object). cp. also Arab. shay (= thing) from shāa (= he wanted).]  
-
-**Derivatives**: Derivatives: חֶפְצָה, חֶפְצִי, מֶחְפָּצָה.  
-
----
-
-### חֶפֶץ
-**Lexicon**: Klein Dictionary
-**Vocalized**: חָפֵץ  
-
-delighting, having pleasure, desirous, wishing.
-
-**Etymology**: [Part. of the verb חָפֵץ. See חפץ ᴵ.]  
-
----
-
-### חֶפֶץ
-**Lexicon**: BDB Dictionary
-**Vocalized**: חָפֵץ  
-
-vb. delight in (cf. Arabic حَفِظَ be mindful of, attentive to, keep, protect, Aramaic ܚܦܛ whence ܚܦܺܝܛ eager, zealous, Arabic حَفِيظَةٌ anger (excitement), أَحْفَظَ enrage (Aramaic and Arabic of excited attention, Heb. of delighted attention), Dl Pr 168 Nö ZMG 1886, 742; NH חֵפֶץ weakened to thing, v. De Ec. Gloss., Ph. in n.pr. חפצבעל);— Pf. ח׳ Gn 34:19 + 28 times; f. חָפֵ֑צָה Is 66:3; 2 m. חָפַצְתָּ Dt 21:14 + 4 times; חָפָ֫צְנוּ Jb 21:14, etc., + 14 times Pf.; Impf. יַחְפֹּץ Dt 25:7 + 7 times; יֶחְפָּ֑ץ ψ 37:23; 147:10; pl. יַחְפְּצוּ Is 13:17; Je 6:10; יֶחְפָּ֑צוּ ψ 68:31; יֶחְפָּצוּ֑ן Is 58:2(×2) etc. + 9 times Impf.; Inf. abs. חָפֹץ Ez 18:23; on Pt. חָפֵץ = adj. verb., v. infr.;— of men: take pleasure in, delight in, c. בְּ, a woman Gn 34:19 (J), Dt 21:14; Est 2:14; a man 1 S 18:22; 19:1 2 S 20:11; in matters and things 2 S 24:3; Is 13:17; 66:3; Je 6:10 ψ 109:17; 112:1; 119:35; Pr 18:2; Est 6:6, 7, 9(×2), 11; c. acc. ψ 68:31 Is 58:2; Ec 8:3; implic. obj. ψ 73:25. delight, desire, be pleased to do a thing, would do it Dt 25:7, 8 1 K 9:1; Est 6:6 Ru 3:13 ψ 40:9; Jb 9:3; 13:3; 21:14; 33:32; Is 58:2; Je 42:22. abs. עַד שֶׁתֶּחְפָּ֑ץ until it please (of love) Ct 2:7; 3:5; 8:4. of God: delight in, have pleasure in, c. בְּ, persons Nu 14:8 (J), 2 S 15:26; 22:20 = ψ 18:20, 1 K 10:9 = 2 Ch 9:8, ψ 22:9; 41:12; Is 62:4; not in the strength of a horse ψ 147:10; in doing evil Mal 2:17; in the death of the sinner Ez 18:32; 33:11; but in mercy, justice, and righteousness Je 9:23; בחר באשׁר (לא) חפצתי Is 56:4; 65:12; 66:4; not with (acc.) the blood of bullocks Is 1:11; זבח(ים) ψ 40:7; 51:18, 21, or the death of the sinner Ex 18:23(×2); but with חסד Ho 6:6 Mi 7:18, אמת ψ 51:8; with the way of a man ψ 37:23; כל אשׁר חפץ ψ 115:3; 135:6 Pr 21:1; אשׁר חפץ Is 55:11; Jon 1:14. pleased to do a thing c. inf. Ju 13:23 1 S 2:25; Is 53:10. with impf. subj. (Ges§ 142(3)c) י׳ חָפֵץ יגדיל תּורה Yahweh was pleased to magnify teaching Is 42:21.—On Jb 40:17 v. חָפַץ.
-
----
-
-### חֶפֶץ
-**Lexicon**: BDB Dictionary
-**Vocalized**: חָפֵץ²  
-
-adj. verb. delighting in, having pleasure in;—ח׳ ψ 5:5 + 4 times; pl. חֲפֵצִים Mal 3:1 Ne 1:11; cstr. חֲפֵצֵי ψ 35:27 + 2 times; sf. חֶפְצֵיהֶם ψ 111:2; f. חֲפֵצָ֑ה 1 Ch 28:9;— of man, c. acc. ψ 34:13; 35:27 Mal 3:1; c. inf. Ne 1:11; abs. הֶחָפֵץ whosoever would 1 K 13:33; אם חפץ אתה if thou pleasest 1 K 21:6; נֶפֶשׁ חֲפֵצָה willing soul 1 Ch 28:9; pl. cstr. before nouns abs. ψ 35:22; 40:15 = 70:3; דְּרוּשִׁים לְכָל־חֶפְצֵיהֶם studied of all who take pleasure in them ψ 111:2. of God, לֹא אֵל־חָפֵץ רֶשַׁע אַתָּה thou art not a God taking pleasure in wickedness ψ 5:5.
-
----
-
-### חֶפֶץ
-**Lexicon**: BDB Dictionary
-**Vocalized**: חֵ֫פֶץ  
-
-n.m. Pr 3:15 delight, pleasure;—ח׳ Is 54:12 + 20 times; sf. חֶפְצְךָ Is 58:13 etc. + 13 times sfs.; pl. חֲפָצִים Pr 8:11; sf. חֲפָצֶיךָ Pr 3:15; חֲפָצֶ֖ךָ Is 58:13— delight אבני ח׳ Is 54:12 delightful stones; אֶרֶץ ח׳ Mal 3:12 delightsome land; דִּבְרֵי ח׳ Ec 12:10; so perhaps also בִּגְדֵי ח׳ Ez 27:20 garments of delight, i.e. of beauty and luxury (Gr; MT חֹפֶשׁ q.v.); c. בְּ of persons ψ 16:3; Ec 5:3 Mal 1:10; of things 1 S 15:22; 18:25 ψ 1:2; Jb 21:21; Ec 12:1; כְּלִי אֵין חֵפֶץ בּוֹ vessel wherein is no pleasure Je 22:28; 48:38; Ho 8:8; הַחֵפֶץ לְשַׁדַּי כִּי Jb 22:3 is it a pleasure to Shadday that? desire, longing מנע מח׳ דלים Jb 31:16 withhold the poor from (their) desire; מְחוֹז חֶפְצָם the city of their desire ψ 107:30; כל חפץ all (one’s) desire 2 S 23:5 1 K 5:22, 23, 24; 9:11, 10:13 = 2 Ch 9:12; כל חפצים all things to be desired Pr 3:15; 8:11. the good pleasure, will, purpose, of Yahweh Ju 13:23 (J) Is 44:28; 46:10; 48:14. that in which one takes delight, his business (late), or matter (very late, cf. Mish. = thing) חֵפֶץ י׳ בְּיָדוֹ יִצְלַח the good pleasure (cause, business) of Yahweh will prosper in his hands Is 53:10; - Is 58:3, 13; עֲשׂוֹת חֲפָצֶךָ doing thy affairs Is 58:13 (see De in loco); בְּחֵפֶץ כַּפֶּיהָ in the business of her hands Pr 31:13; עֵת לְכָל־חֵפֶץ time for every matter, affair Ec 3:1, 17; 8:6; אַל־תִּתְמַהּ עַל־הַחֵפֶץ marvel not at the matter Ec 5:7. —חפץ is not used in any of its forms in E D2 H P of the Hexateuch.
-
----
-
-### חֶפֶץ
-**Lexicon**: BDB Dictionary
-**Vocalized**: חָפַץ  
-
-vb. bend down (Arabic خَفَضَ lower, depress, as wings Qor 15:88)—only Impf. יַחְפֹּץ זְנָכוֹ כְמוֹ־אֶרֶז Jb 40:17; he bendeth down (extendeth down stiffly) his tail like a cedar, v. Wetzst in De Job 526 Hi Hiob 299.
-
----
-
 ### הָגָה
 **Lexicon**: Klein Dictionary
 **Vocalized**: הגה ᴵ  
@@ -158,15 +66,29 @@ vb. remove (Thes comp. יגה)— Pf. הָגָה Is 27:8 (Di reads הָגָהּ)
 
 ---
 
-### שָׁתַל
+### חֵפֶץ
+**Lexicon**: BDB Dictionary
+**Vocalized**: חֵ֫פֶץ  
+
+n.m. Pr 3:15 delight, pleasure;—ח׳ Is 54:12 + 20 times; sf. חֶפְצְךָ Is 58:13 etc. + 13 times sfs.; pl. חֲפָצִים Pr 8:11; sf. חֲפָצֶיךָ Pr 3:15; חֲפָצֶ֖ךָ Is 58:13— delight אבני ח׳ Is 54:12 delightful stones; אֶרֶץ ח׳ Mal 3:12 delightsome land; דִּבְרֵי ח׳ Ec 12:10; so perhaps also בִּגְדֵי ח׳ Ez 27:20 garments of delight, i.e. of beauty and luxury (Gr; MT חֹפֶשׁ q.v.); c. בְּ of persons ψ 16:3; Ec 5:3 Mal 1:10; of things 1 S 15:22; 18:25 ψ 1:2; Jb 21:21; Ec 12:1; כְּלִי אֵין חֵפֶץ בּוֹ vessel wherein is no pleasure Je 22:28; 48:38; Ho 8:8; הַחֵפֶץ לְשַׁדַּי כִּי Jb 22:3 is it a pleasure to Shadday that? desire, longing מנע מח׳ דלים Jb 31:16 withhold the poor from (their) desire; מְחוֹז חֶפְצָם the city of their desire ψ 107:30; כל חפץ all (one’s) desire 2 S 23:5 1 K 5:22, 23, 24; 9:11, 10:13 = 2 Ch 9:12; כל חפצים all things to be desired Pr 3:15; 8:11. the good pleasure, will, purpose, of Yahweh Ju 13:23 (J) Is 44:28; 46:10; 48:14. that in which one takes delight, his business (late), or matter (very late, cf. Mish. = thing) חֵפֶץ י׳ בְּיָדוֹ יִצְלַח the good pleasure (cause, business) of Yahweh will prosper in his hands Is 53:10; - Is 58:3, 13; עֲשׂוֹת חֲפָצֶךָ doing thy affairs Is 58:13 (see De in loco); בְּחֵפֶץ כַּפֶּיהָ in the business of her hands Pr 31:13; עֵת לְכָל־חֵפֶץ time for every matter, affair Ec 3:1, 17; 8:6; אַל־תִּתְמַהּ עַל־הַחֵפֶץ marvel not at the matter Ec 5:7. —חפץ is not used in any of its forms in E D2 H P of the Hexateuch.
+
+---
+
+### שָׁתוּל
 **Lexicon**: Klein Dictionary
-**Vocalized**: שׁתל  
+**Vocalized**: שָׁתוּל  
 
-to transplant, plant. he transplanted, planted. was transplanted, was planted. it struck roots; he transplanted. was transplanted.
+planted.
 
-**Etymology**: [Aram.–Syr. שְׁתַל (= he transplanted, planted, laid down, inserted), Arab. shatala (= he planted, transplanted), shatl (= plant), shatla (= slip, cutting, seedling), Akka. shitlu (= small cutting of vine), prob. also Akka. satālu (= to plant).]  
+**Etymology**: [Pass. part. of שָׁתַל. See שׁתל.]  
 
-**Derivatives**: Derivatives: שֶׁתֶל, שַׁתָּל, שַׁתֽלָן, שָׁתוּל, שִׁתּוּל, שָׁתִיל, הַשְׁתָּלָה, הִשָּׁתְלוּת, מִשְׁתָּל, מִשְׁתָּלָה.  
+---
+
+### שָׁתוּל
+**Lexicon**: BDB Dictionary
+**Vocalized**: שָׁתַל  
+
+vb. transplant (NH id.; Aramaic שְׁתַל, ܫܬܰܠ; Vulg.Ar. شَتْل plant, شَتْلَة slip, cutting, Dozy (loan-words?) Thes 1488; Assyrian šitlu appar. = shoot, slip);—Qal Pf. 1 s. שָׁתַ֫לְתִּי Ez 17:22; Impf. 1 s. sf. אֶשְׁתֳּלֶנּוּ v 23; Pt. pass. שָׁתוּל Je 17:8 = ψ 1:3, etc.(8 times);—transplant (poet.): tree or vine, c. ב loc., Ez 17:10, 23; 19:13 ψ 92:14; עַל־מַיִם Ez 19:10; Je 17:8; ‖ עַל־פַּלְגֵי מִיִם ψ 1:3, עַל־הַר Ez 17:22, אֶל־מַיִם v 8; לְצוֹר שְׁתוּלָה בְנָוֶה֑ Ho 9:13 is corrupt 𝔊 Che We Now (both in transl.) GASm Harper לָצַ֫יִד שָׁתוּ בָנָיו (or the like; somewhat differently Marti) Ephraim … for a prey have they set his sons.
 
 ---
 
@@ -175,58 +97,6 @@ to transplant, plant. he transplanted, planted. was transplanted, was planted. i
 **Vocalized**: פֶּ֫לֶג  
 
 n.pr.m. son of Eber, Φαλεκ, 𝔊L Φαλεγ: Gn 10:25; 11:17, 18, 19; 1 Ch 1:19, 25, פָּ֑לֶג Gn 11:16.
-
----
-
-### נָבֵל
-**Lexicon**: Klein Dictionary
-**Vocalized**: נבל ᴵ  
-
-to wither, fade. it sank, dropped down; withered, faded, wear away. caused to wither, caused to fade.
-
-**Etymology**: [Arab. nabīla (= corpse), Akka. nabultu (= corpse). Related to the bases בלה, בלל and נפל. cp. נבל ᴵᴵ.]  
-
-**Derivatives**: Derivatives: נְבִילָה, נְבֵלָה, נוֹבֶלֶת.  
-
----
-
-### נָבֵל
-**Lexicon**: BDB Dictionary
-**Vocalized**: נָבַל  
-
-vb. be senseless, foolish (NH נְבָלָה, נַבְלוּת of immodesty; Arabic نَبُلَ = (per contra) be noble, distinguished, نَبَلَ also be gracious (Frey); Aramaic נְבַל Pa. reject, despise, v. 𝔗 Na 3:6; Je 14:21; in deriv. as NH);— Pf. 2 ms. נָבַלְתָּ Pr 30:32 if thou hast been foolish in lifting up thyself (opp. וַמּוֹתָ). [Qal = be foolish †Pr 30:32 is doubted by Frankenberg Toy (where see various renderings), al., who think text crpt.] Pf. 1 s. sf. consec. וְנִבַּלְתִּיךְ Na 3:6; Impf. 3 ms. וַיְנַבֵּל Dt 32:15; 2 ms. תְּנַבֵּל Je 14:21; Pt. מִנַבֵּל Mi 7:6;—regard or treat as a נָבָל (q.v.), i.e. with contumely, c. acc.: בֵּן מְנַבֵּל אָב Mi 7:6 son treateth father as a fool (with contumely); וַיְנ׳ צוּר Dt 32:15 and he treated with contumely the Rock of his salvation (i.e. י׳; ‖ נטשׁ); י׳ subj., Na 3:6 I will treat thee (Nineveh) with contumely (‖ וְהִשְׁלַכְתִּ֫י עָלַיִךְ שִׁקֻּצִים); Je 14:21 do not treat with contumely the throne of thy glory (‖ נאץ).
-
----
-
-### נָבֵל
-**Lexicon**: BDB Dictionary
-**Vocalized**: נָבֵל  
-
-vb. sink or drop down, languish, wither and fall, fade (NH id.; Assyrian nabâlu, destroy, DlHWB 443 f. Arabic نَبَلَ v, viii. die; Aramaic נְבֵילָא corpse);— Pf. 3 ms. נ׳ Is 40:7, 8 Je 8:13; 3 fs. נָֽבְלָה Is 24:4(×2); Impf. 3 ms. יִבּוֹל ψ 1:3 + 4 times (on form cf. Ges§ 47 h Ol§ § 911 e, 912.2), 2 ms. תִּכֹּל Ex 18:18; 3 mpl. יִבֹּלוּ 2 S 22:46 = ψ 18:46, יִבּוֹל֑וּן ψ 37:2; 1 pl. וַנָּ֫בֶל Is 64:5 (on form cf. Di and Ol§ 236 e); Inf. abs. נָבֹל Ex 18:18; cstr. נְבֹל Is 34:4; Pt. נֹבֵל Is 28:1, 4; f. נֹבֶ֫לֶת abs. Is 34:4; cstr. Is 1:30;— sink or drop down, from exhaustion נָבֹל תִּבֹּל Ex 18:18 (Moses and Isr.); from discouragement 2 S 22:46 = ψ 18:46 (of foreigners, foes of Isr.); of mt. הַר־נֹפֵל יִבּוֹל Jb 14:18 (but נָפוֹל יִפּוֹל Lag Proph. Chald. Siegf Baer, after 𝔊, so Bu [or יִבְלֶה]; Du נָבוֹל יִבּוֹל). usually droop like a leaf, or flower wither and fall, fade: כְּאֵלָה נֹבֶ֫לֶת עָלֶ֑הָ Is 1:30 like an oak falling as to its leaves (sim. of people of Jerus.); the host of heaven יִבּוֹל כִּנְבֹל עָלֶה מִגֶּפֶן וּכְנֹבֶלֶת מִתְּאֵנָה Is 34:4; לֹא יִבּ׳ עָלֵהוּ Ez 47:12 (trees in Ezek.’s vision), so fig. of good man ψ 1:3; of Isr. Je 8:13, וַ֫נָּבֶל כֶּעָלֶה Is 64:5; also נָבֵל צִיץ 40:7, 8 (both ‖ יָבֵשׁ חָצִיר), צִיץ נֹבֵל 28:1, cf. v 4; of wicked כְּיֶרֶק דֶּשֶׁא יִבּ׳ ψ 37:2 (‖ כֶּחָצִיר יִמָּ֑לוּ); of devastated earth אָֽבְלָה נָֽבְלָה הָאָרֶץ אֻמְלְלָה נָֽבְלָה תֵּבֵ֑ל Is 24:4.
-
----
-
-### צָלַח
-**Lexicon**: Klein Dictionary
-**Vocalized**: צלח ᴵ  
-
-to succeed, prosper; to be fit; to appear, come over. was successful, prospered; was fit. he succeeded, was successful, prospered; made prosperous, brought to successful issue. was successful.
-
-**Etymology**: [BAram. and Aram.–Syr. צֽלַח (= he succeeded, prospered), Arab. ṣalaḥa (= was in good condition), ṣulḥ (= prosperity), OSArab. הצלח (= to make prosperous).]  
-
-**Derivatives**: Derivatives: צָלֵחַ, הַצְלָחָה, מֻצְלָח, מַצְלִיחַ.  
-
----
-
-### צָלַח
-**Lexicon**: Klein Dictionary
-**Vocalized**: צלח ᴵᴵ  
-
-to cleave, split, break through, penetrate; to cross (a river). he cleft; he crossed (a river).
-
-**Etymology**: [Aram.–Syr. צֽלַח (= he cleft, split, cracked). cp. Arab. aslaḥ (= deaf).]  
-
-**Derivatives**: Derivatives: צָלִיחַ, מִצְלָח. cp. צִלְחָה.  
 
 ---
 
@@ -250,25 +120,15 @@ see מוֹץ.
 
 ---
 
-### דָּפָה
+### נָדַף
 **Lexicon**: Klein Dictionary
-**Vocalized**: דַּפָּה  
+**Vocalized**: נדף  
 
-lathe.
+to drive, drive about; to be different, spread (said of odor), evaporate. he drove about, scattered; it spread (said of odor), evaporated. was driven about, was scattered. emitted (smell). was blown away, evaporated; vanished, disappeared. emitted (smell).
 
-**Etymology**: [Formed from דַּף with first suff. ◌ָה.]  
+**Etymology**: [cp. Arab. nadafa (= he carded cotton), Ethiop. nadafa (= he threw).]  
 
----
-
-### דָּפָה
-**Lexicon**: Klein Dictionary
-**Vocalized**: דפה  
-
-to find fault, vilify. he found fault, vilified.
-
-**Etymology**: [Denominated from דֳּפִי (= blemish, fault).]  
-
-**Derivatives**: Derivative: דִּפּוּי.  
+**Derivatives**: Derivatives: נִדָּף, נָדִיף, נְדִיפָה, הִתְנַדְּפוּת, מַדֵּף.  
 
 ---
 
@@ -394,166 +254,79 @@ vb. know (NH id.; Aramaic יְדַע, ܝܺܕܰܥ Ph. ידע; Ethiopic አይድ�
 
 ---
 
-### אָבַד
-**Lexicon**: Klein Dictionary
-**Vocalized**: אבד  
-
-to perish. he was lost, perished; it strayed (said of an animal). he (or it) was lost, perished. he destroyed, wasted; he caused to perish; he lost. he committed suicide. he caused to perish, destroyed.
-
-**Etymology**: [Moabite אבד (= to perish), Aram. אֲבַד, Syr. אֱבַד (= he perished), Ugar. ’bd (= to perish), Arab. ’ábada (= it ran away — said of an animal), Ethiop. ’abáda (= he wandered about), Akka. abātu (= to destroy).]  
-
-**Derivatives**: Derivatives: אָבֵד, אֲבֵדָה, אָבוּד, אִבּוּד, אֲבַדּוֹן, אַבְדָן, אָבְדָן, אוֹבֵד, הֵאָבֽדוּת, הִתֽאַבּֽדוּת, מִתֽאַבֵּד, נֶאֱבָד.  
-
----
-
-### אָבַד
-**Lexicon**: BDB Dictionary
-**Vocalized**: אָבַד  
-
-vb. perish (MI אבד, Assyrian abâtu DlW184 Aramaic אֲבַד, ܐܶܒܰܕ.— Pf. א׳ Nu 21:30 +; אָֽבְדוּ ψ 10:16 + (+ Ez 6:3 𝔊 Co) etc.; Impf. יֹאבַד Jb 3:3 Je 4:9; יֹאבֵ֑ד Jb 20:7 + 2 times; 3 fs. תֹּאבַד Dt 22:3 + 4 times; תֹּאבֵ֑ד Jb 8:13 + 3 times; יֹאבְדוּ Ju 5:31 + 3 times; יֹאבֵ֑דוּ Jb 4:9 +; 3 fpl. וַתֹּאבַדְנָה 1 S 9:3; תֹּאבֵדוּן Dt 4:26 +; נֹאבֵ֑ד Jn 1:6; 3:9; נֹאבְדָה Jon 1:14 etc.; Inf. abs. אָבֹד Dt 4:26 + 2 times; cstr. אֲבֹד Dt 7:20 Pr 11:10; אֲבָדְךָ Dt 28:20; אָבְדֶ֑ךָ Dt 28:22; אֲבָדְכֶם Jos 23:13; אָבְדָם Ob 12 Pr 28:28; Pt. אֹבֵד אוֹבֵד Dt 26:5 + 7 times; cstr. אֹבַד Dt 32:28 (v. Di Bö§ 378); etc. perish, die, of individuals (mostly late) Nu 17:27 (‖ גוע & (v 28 מות), (also Dt 26:5? cf. infr.) Jon 1:6, 14 Jb 31:19 cf. 29:13 Pr 31:6 Est 4:14, 16(×2) Mi 4:9 Je 40:15 cf. Is 57:1 Pr 11:10; 28:28 Ec 7:15 ψ 119:92; emphasis on mortality Jb 4:20 ψ 146:4 Ec 9:6; Saul & Jonath., under fig. of weapons 2 S 1:27; lion Jb 4:11; caravan Jb 6:18 (cf. Di); cf. מִן־הָאָרֶץ א׳ הָסִיד Mi 7:2, וא׳ מֶלֶךְ מֵעַזָּה Zc 9:5; perish, be exterminated (judgment for sin), of Israel Lv 26:38 Dt 8:19(×2), 20; 28:20, 22; 30:18(×2) Je 27:10, 15 cf. 6:21, Ob 12 cf. ψ 80:17 Is 27:13; other nations Dt 7:20 Je 10:15; 51:18 ψ 2:12; 10:16; 83:18 cf. 9:4 Am 1:8 Is 41:11; 60:12 cf. Jon 3:9 v. also Ex 10:7 Nu 21:29, 30 (JE) Je 48:46; house of Ahab 2 K 9:8; wicked in general Ju 5:31 Jb 4:9 cf. v 7, ψ 37:20; 49:11; 68:3 (‖ sim. of melting wax), 73:27; 92:10; also Pr 19:9; 21:28; לָנֶצַח א׳ Jb 20:7; cf. דֶּרֶךְ רְשָׁעִים א׳ ψ 1:6; sq. מֵעַל הָאָ֑רֶץ (of annihilation of Isr.) Dt 4:26(×2), 11:17 Jos 23:13, 16 (D); sq. מִתּוֹךְ הַקָּהָל (of Korah’s company) Nu 16:33 (JE); perish, be ruined, destroyed, of inanimate things, e.g. land Je 9:11 (‖ נִצְּתָה כַמִּדְבָּר) cf. 48:8; harvest Jo 1:11; Jonah’s gourd Jon 4:10; riches Je 48:36 Ec 5:13; vessel ψ 31:13; houses Am 3:15 (so often Assyrian DlW); city Ez 26:17 (but del. 𝔊 Co); cf. bamôth Ez 6:3 𝔊 Co; heavens & earth ψ 102:27. fig. perish, vanish, subj. memory Jb 18:17 ψ 9:7; name ψ 41:6 (i.e. be forgotten); vigour Jb 30:2; wisdom Is 29:14; cf. אֹבַד עֵצוֹת Dt 32:28; אֱמוּנָה Je 7:28 (‖ נִכְרְתָה); חָזוֹן Ez 12:22; יוֹם Jb 3:3 (i.e. be blotted out); לֵב Je 4:9 (i.e. courage fail); תִּקְוָה ψ 9:19 Pr 10:28; 11:7 Ez 19:5; 37:11 Jb 8:13; so תַּאֲוָה ψ 112:10 (i.e. comes to naught); תּוֹחֶלֶת Pr 11:7, sq. מִן + agent La 3:18; תורה + עצה + דבר sq. מן + persons negligent Je 18:18 (cf. 49:7 Ez 7:26), especially א׳ מָנוֹס מִן־ (i.e. they could not escape) Am 2:14 Je 25:35 Jb 11:20 ψ 142:5. be lost, property Dt 22:3; strayed, beasts 1 S 9:3, 20 Je 50:6 Ez 34:4, 16 ψ 119:176 (fig. of erring men); perhaps Dt 26:5. caus. of Qal.—Pf. אִבַּד 2 K 21:3 + 2 times; sf. וְאִבַּדְךָ Co Ez 28:16 cf. infr.; אִבַּדְתִּי Je 15:7; וְאִבַּדְתִּ֫י Ez 6:3 (𝔊 Co וְאָֽבְדוּ) etc.; Impf. יְאַבֵּד Ec 9:18; וִיאַבֵּד Ec 7:7 Zp 2:13; 1 s. sf. וָאַבֶּדְךָ Ez 28:16 (for וָאֲאַבּ׳ Ew§ 72 c Ol§ 79 a KöI 338 Ges§ 68 fin; but Co 3 ms.; v. also Co 38:14); תְּאַבְּדוּן Dt 12:2 etc.; Inf. abs. אַבֵּד Dt 12:2 + 3 times; cstr. id. Ez 22:27 + etc.; Pt. מְאַבְּדִים Je 23:1. cause to perish, destroy, kill, obj. pers. (mostly late) 2 K 11:1 Est 3:9; 4:7; 8:5; 9:24; ‖ הרג 9:6, 12; ‖ הרג + השׁמיד 3:13; 7:4; 8:11; ‖ המם 9:24; cf. ψ 119:95; obj. נְפָשׁוֹת Ez 22:27 (del. 𝔊 Co); in judgment, subj. י׳ ψ 5:7; cf. Pr 1:32; sq. מִתּוֹךְ Ez 28:16; obj. a people 2 K 13:7 2 K 19:18 = Is 37:19; Jb 12:23; in judgment Dt 11:4 Je 12:17; 15:7 Zp 2:13 ψ 9:6 cf. 21:11; obj. inanimate things especially idols, bamôth etc., Nu. 33:52(×2) (J) Dt 12:2(×2) 2 K 21:3 Ez 6:3 (but cf. 𝔊 Co supr.); bars of Zion La 2:9 (‖ שִׁבַּר). fig. cause to vanish, blot out, do away with names of idols Dt 12:3; voice of Babylon Je 51:55; memory of dead Is 26:14; substance Pr 29:3; understanding Ec 7:7; good (טוֹבָה q.v.) Ec 9:18. cause to stray, lose; obj. Isr. under fig. of flock Je 23:1 (‖ הֵפִיץ); abs. Ec 3:6 (‖ בִּקֵּשׁ). Pf. וְהֶאֱבִיד Nu 24:19; הֶאֱבַ֑דְתָּ Jb 14:19 etc.; Impf. אֹבִידָה Je 46:8 (Ges§ 68, 2 R. 1). Inf. cstr. הַאֲבִיד 2 K 10:19 + etc.; Pt. מַאֲבִיד Dt 8:20. destroy, put to death, in judgment, (subj. י׳) obj. pers. Lv 23:30 (sq. מִקֶּרֶב עַמָּהּ; ‖ כָּרַת v 29); Je 49:38 (sq. מִשָּׁם); Ob 8 (sq. מֵאֱדוֹם); obj. nation, Ammon Ez 25:7 (sq. מן־הארצות; ‖ כָּרַת), cf. v 16; Canaanites Dt 8:20 (sq. מִפְּנֵיכֶם); Canaan = Philistines Zp 2:5 (‖ כָּרַת); especially Isr. Dt 28:51, 63 (‖ הִשְׁמִיד), cf. Js 7:7; also abs. Je 18:7 (‖ לִנְתוֹשׁ וְלִנְתוֹץ); = 1:10 (+ וְלַהֲרוֹס) = 31:28 (+ וּלְהָרֵעַ); animals Ez 32:13 (sq. מֵעַל מַיִם רַבִּים); cf. Dt 7:10; ψ 143:12 (‖ הִצְמִית); (human subj.), obj. servants of Baal 2 K 10:19, obj. nation Dt 9:3, cf. Nu 24:19 (E; sq. מֵעִיר); 2 K 24:2; cf. Je 46:8; obj. inanimate, chariots Mi 5:9; idols Ez 30:13 (del. BCo). fig., obj. name of kings Dt 7:24 (sq. מִתַּחַת הַשָּׁמַיִם); hope Jb 14:19; voice of mirth etc. Je 25:10 (cf. 51:55 Pi. supr.)
-
----
-
 ## Concordance Searches
 
-### Search 1: אשרי האיש
+### Search 1: אשרי האיש אשר
 **Scope**: Psalms  
 **Level**: consonantal  
-**Variations searched**: 12  
+**Variations searched**: 477  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 1:1**  
+Hebrew: אַ֥שְֽׁרֵי־הָאִ֗ישׁ אֲשֶׁ֤ר ׀ לֹ֥א הָלַךְ֮ בַּעֲצַ֢ת רְשָׁ֫עִ֥ים וּבְדֶ֣רֶךְ חַ֭טָּאִים לֹ֥א עָמָ֑ד וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃  
+English: Happy is the man who has not followed the counsel of the wicked,
+or taken the path of sinners,
+or joined the company of the insolent;  
+Matched: *אַ֥שְֽׁרֵי* (position 0)  
+
+---
+
+### Search 2: הלך בעצת
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 504  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 1:1**  
+Hebrew: אַ֥שְֽׁרֵי־הָאִ֗ישׁ אֲשֶׁ֤ר ׀ לֹ֥א הָלַךְ֮ בַּעֲצַ֢ת רְשָׁ֫עִ֥ים וּבְדֶ֣רֶךְ חַ֭טָּאִים לֹ֥א עָמָ֑ד וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃  
+English: Happy is the man who has not followed the counsel of the wicked,
+or taken the path of sinners,
+or joined the company of the insolent;  
+Matched: *הָלַךְ֮* (position 5)  
+
+---
+
+### Search 3: עמד בדרך
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 504  
 **Results**: 0  
 
 ---
 
-### Search 2: תורת יהוה
+### Search 4: ישב במושב
 **Scope**: Tanakh  
 **Level**: consonantal  
-**Variations searched**: 12  
-**Results**: 11  
-
-#### Top Results:
-
-**I Chronicles 16:40**  
-Hebrew: לְֽהַעֲלוֹת֩ עֹל֨וֹת לַיהֹוָ֜ה עַל־מִזְבַּ֧ח הָעֹלָ֛ה תָּמִ֖יד לַבֹּ֣קֶר וְלָעָ֑רֶב וּלְכׇל־הַכָּתוּב֙ בְּתוֹרַ֣ת יְהֹוָ֔ה אֲשֶׁ֥ר צִוָּ֖ה עַל־יִשְׂרָאֵֽל׃  
-English: to sacrifice burnt offerings to the LORD on the altar of the burnt offering regularly, morning and evening, in accordance with what was prescribed in the Teaching of the LORD with which He charged Israel.  
-Matched: *בְּתוֹרַ֣ת* (position 9)  
-
-**II Chronicles 31:3**  
-Hebrew: וּמְנָת֩ הַמֶּ֨לֶךְ מִן־רְכוּשׁ֜וֹ לָעֹל֗וֹת לְעֹלוֹת֙ הַבֹּ֣קֶר וְהָעֶ֔רֶב וְהָ֣עֹל֔וֹת לַשַּׁבָּת֖וֹת וְלֶחֳדָשִׁ֣ים וְלַמֹּעֲדִ֑ים כַּכָּת֖וּב בְּתוֹרַ֥ת יְהֹוָֽה׃  
-English: also the king’s portion, from his property, for the burnt offerings—the morning and evening burnt offering, and the burnt offerings for sabbaths, and new moons, and festivals, as prescribed in the Teaching of the LORD.  
-Matched: *בְּתוֹרַ֥ת* (position 12)  
-
-**II Chronicles 31:4**  
-Hebrew: וַיֹּ֤אמֶר לָעָם֙ לְיוֹשְׁבֵ֣י יְרוּשָׁלַ֔͏ִם לָתֵ֕ת מְנָ֥ת הַכֹּהֲנִ֖ים וְהַלְוִיִּ֑ם לְמַ֥עַן יֶחֶזְק֖וּ בְּתוֹרַ֥ת יְהֹוָֽה׃  
-English: He ordered the people, the inhabitants of Jerusalem, to deliver the portions of the priests and the Levites, so that they might devote themselves to the Teaching of the LORD.  
-Matched: *בְּתוֹרַ֥ת* (position 10)  
-
-**II Chronicles 35:26**  
-Hebrew: וְיֶ֛תֶר דִּבְרֵ֥י יֹאשִׁיָּ֖הוּ וַחֲסָדָ֑יו כַּכָּת֖וּב בְּתוֹרַ֥ת יְהֹוָֽה׃  
-English: The other events of Josiah’s reign and his faithful deeds, in accord with the Teaching of the LORD,  
-Matched: *בְּתוֹרַ֥ת* (position 5)  
-
-**Psalms 119:1**  
-Hebrew: אַשְׁרֵ֥י תְמִֽימֵי־דָ֑רֶךְ הַ֝הֹלְכִ֗ים בְּתוֹרַ֥ת יְהֹוָֽה׃  
-English: Happy are those whose way is blameless,
-who follow the teaching of the LORD.  
-Matched: *בְּתוֹרַ֥ת* (position 3)  
-
-**Exodus 13:9**  
-Hebrew: וְהָיָה֩ לְךָ֨ לְא֜וֹת עַל־יָדְךָ֗ וּלְזִכָּרוֹן֙ בֵּ֣ין עֵינֶ֔יךָ לְמַ֗עַן תִּהְיֶ֛ה תּוֹרַ֥ת יְהֹוָ֖ה בְּפִ֑יךָ כִּ֚י בְּיָ֣ד חֲזָקָ֔ה הוֹצִֽאֲךָ֥ יְהֹוָ֖ה מִמִּצְרָֽיִם׃  
-English: “And this shall serve you as a sign on your hand and as a reminder on your forehead*on your forehead Lit. “between your eyes”; cf. Deut. 6.8. —in order that the Teaching of יהוה may be in your mouth—that with a mighty hand יהוה freed you from Egypt.  
-Matched: *תּוֹרַ֥ת* (position 9)  
-
-**II Chronicles 17:9**  
-Hebrew: וַֽיְלַמְּדוּ֙ בִּיהוּדָ֔ה וְעִ֨מָּהֶ֔ם סֵ֖פֶר תּוֹרַ֣ת יְהֹוָ֑ה וַיָּסֹ֙בּוּ֙ בְּכׇל־עָרֵ֣י יְהוּדָ֔ה וַֽיְלַמְּד֖וּ בָּעָֽם׃  
-English: They offered instruction throughout Judah, having with them the Book of the Teaching of the LORD. They made the rounds of all the cities of Judah and instructed the people.  
-Matched: *תּוֹרַ֣ת* (position 4)  
-
-**Isaiah 5:24**  
-Hebrew: לָכֵן֩ כֶּאֱכֹ֨ל קַ֜שׁ לְשׁ֣וֹן אֵ֗שׁ וַחֲשַׁ֤שׁ לֶהָבָה֙ יִרְפֶּ֔ה שׇׁרְשָׁם֙ כַּמָּ֣ק יִֽהְיֶ֔ה וּפִרְחָ֖ם כָּאָבָ֣ק יַעֲלֶ֑ה כִּ֣י מָאֲס֗וּ אֵ֚ת תּוֹרַת֙ יְהֹוָ֣ה צְבָא֔וֹת וְאֵ֛ת אִמְרַ֥ת קְדֽוֹשׁ־יִשְׂרָאֵ֖ל נִאֵֽצוּ׃  
-English: Assuredly,As straw is consumed by a tongue of fireAnd hay shrivels as it burns,hshrivels as it burns Emendation yields “is burned by flame”; cf. 33.11–12; 47.14. Their stock shall become like rot,And their buds shall blow away like dust.For they have rejected the instruction of GOD of Hosts,Spurned the word of the Holy One of Israel.  
-Matched: *תּוֹרַת֙* (position 17)  
-
-**Isaiah 30:9**  
-Hebrew: כִּ֣י עַ֤ם מְרִי֙ ה֔וּא בָּנִ֖ים כֶּחָשִׁ֑ים בָּנִ֕ים לֹא־אָב֥וּ שְׁמ֖וֹעַ תּוֹרַ֥ת יְהֹוָֽה׃  
-English: For it is a rebellious people,Faithless children,Children who refused to heedGOD’s instruction;  
-Matched: *תּוֹרַ֥ת* (position 9)  
-
-**Nehemiah 9:3**  
-Hebrew: וַיָּק֙וּמוּ֙ עַל־עׇמְדָ֔ם וַֽיִּקְרְא֗וּ בְּסֵ֨פֶר תּוֹרַ֧ת יְהֹוָ֛ה אֱלֹהֵיהֶ֖ם רְבִעִ֣ית הַיּ֑וֹם וּרְבִעִית֙ מִתְוַדִּ֣ים וּמִֽשְׁתַּחֲוִ֔ים לַיהֹוָ֖ה אֱלֹהֵיהֶֽם׃ {פ}  
-English: Standing in their places, they read from the scroll of the Teaching of the LORD their God for one-fourth of the day, and for another fourth they confessed and prostrated themselves before the LORD their God.  
-Matched: *תּוֹרַ֧ת* (position 4)  
-
-*...and 1 more results*
+**Variations searched**: 504  
+**Results**: 0  
 
 ---
 
-### Search 3: יומם ולילה
+### Search 5: הגה יומם ולילה
 **Scope**: Tanakh  
 **Level**: consonantal  
-**Variations searched**: 12  
-**Results**: 17  
-
-#### Top Results:
-
-**Exodus 13:21**  
-Hebrew: וַֽיהֹוָ֡ה הֹלֵךְ֩ לִפְנֵיהֶ֨ם יוֹמָ֜ם בְּעַמּ֤וּד עָנָן֙ לַנְחֹתָ֣ם הַדֶּ֔רֶךְ וְלַ֛יְלָה בְּעַמּ֥וּד אֵ֖שׁ לְהָאִ֣יר לָהֶ֑ם לָלֶ֖כֶת יוֹמָ֥ם וָלָֽיְלָה׃  
-English: יהוה went before them in a pillar of cloud by day, to guide them along the way, and in a pillar of fire by night, to give them light, that they might travel day and night.  
-Matched: *יוֹמָ֥ם* (position 14)  
-
-**I Kings 8:59**  
-Hebrew: וְיִֽהְי֨וּ דְבָרַ֜י אֵ֗לֶּה אֲשֶׁ֤ר הִתְחַנַּ֙נְתִּי֙ לִפְנֵ֣י יְהֹוָ֔ה קְרֹבִ֛ים אֶל־יְהֹוָ֥ה אֱלֹהֵ֖ינוּ יוֹמָ֣ם וָלָ֑יְלָה לַעֲשׂ֣וֹת ׀ מִשְׁפַּ֣ט עַבְדּ֗וֹ וּמִשְׁפַּ֛ט עַמּ֥וֹ יִשְׂרָאֵ֖ל דְּבַר־י֥וֹם בְּיוֹמֽוֹ׃  
-English: And may these words of mine, which I have offered in supplication before GOD, be close to the ETERNAL our God day and night, that God’s servant and this covenanted people Israel may be provided for, according to each day’s needs—  
-Matched: *יוֹמָ֣ם* (position 10)  
-
-**II Chronicles 6:20**  
-Hebrew: לִהְיוֹת֩ עֵינֶ֨יךָ פְתֻח֜וֹת אֶל־הַבַּ֤יִת הַזֶּה֙ יוֹמָ֣ם וָלַ֔יְלָה אֶ֨ל־הַמָּק֔וֹם אֲשֶׁ֣ר אָמַ֔רְתָּ לָשׂ֥וּם שִׁמְךָ֖ שָׁ֑ם לִשְׁמ֙וֹעַ֙ אֶל־הַתְּפִלָּ֔ה אֲשֶׁ֣ר יִתְפַּלֵּ֣ל עַבְדְּךָ֔ אֶל־הַמָּק֖וֹם הַזֶּֽה׃  
-English: May Your eyes be open day and night toward this House, toward the place where You have resolved to make Your name abide; may You heed the prayers that Your servant offers toward this place.  
-Matched: *יוֹמָ֣ם* (position 5)  
-
-**Isaiah 60:11**  
-Hebrew: וּפִתְּח֨וּ שְׁעָרַ֧יִךְ תָּמִ֛יד יוֹמָ֥ם וָלַ֖יְלָה לֹ֣א יִסָּגֵ֑רוּ לְהָבִ֤יא אֵלַ֙יִךְ֙ חֵ֣יל גּוֹיִ֔ם וּמַלְכֵיהֶ֖ם נְהוּגִֽים׃  
-English: Your gates shall always stay open—Day and night they shall never be shut—To let in the wealth of the nations,With their kings in procession.  
-Matched: *יוֹמָ֥ם* (position 3)  
-
-**Jeremiah 8:23**  
-Hebrew: מִֽי־יִתֵּ֤ן רֹאשִׁי֙ מַ֔יִם וְעֵינִ֖י מְק֣וֹר דִּמְעָ֑ה וְאֶבְכֶּה֙ יוֹמָ֣ם וָלַ֔יְלָה אֵ֖ת חַֽלְלֵ֥י בַת־עַמִּֽי׃ {ס}  
-English: Oh, that my head were water,My eyes a fount of tears!Then would I weep day and nightFor the slain of my poor people.  
-Matched: *יוֹמָ֣ם* (position 7)  
-
-**Jeremiah 16:13**  
-Hebrew: וְהֵטַלְתִּ֣י אֶתְכֶ֗ם מֵעַל֙ הָאָ֣רֶץ הַזֹּ֔את עַל־הָאָ֕רֶץ אֲשֶׁר֙ לֹ֣א יְדַעְתֶּ֔ם אַתֶּ֖ם וַאֲבוֹתֵיכֶ֑ם וַעֲבַדְתֶּם־שָׁ֞ם אֶת־אֱלֹהִ֤ים אֲחֵרִים֙ יוֹמָ֣ם וָלַ֔יְלָה אֲשֶׁ֛ר לֹא־אֶתֵּ֥ן לָכֶ֖ם חֲנִינָֽה׃ {פ}  
-English: Therefore I will hurl you out of this land to a land that neither you nor your ancestors have known, and there you will serve other gods, day and night; for I will show you no mercy.”  
-Matched: *יוֹמָ֣ם* (position 14)  
-
-**Jeremiah 33:25**  
-Hebrew: כֹּ֚ה אָמַ֣ר יְהֹוָ֔ה אִם־לֹ֥א בְרִיתִ֖י יוֹמָ֣ם וָלָ֑יְלָה חֻקּ֛וֹת שָׁמַ֥יִם וָאָ֖רֶץ לֹא־שָֽׂמְתִּי׃  
-English: Thus said GOD: As surely as I have established My covenant with day and night—the laws of heaven and earth—  
-Matched: *יוֹמָ֣ם* (position 5)  
-
-**Joshua 1:8**  
-Hebrew: לֹֽא־יָמ֡וּשׁ סֵ֩פֶר֩ הַתּוֹרָ֨ה הַזֶּ֜ה מִפִּ֗יךָ וְהָגִ֤יתָ בּוֹ֙ יוֹמָ֣ם וָלַ֔יְלָה לְמַ֙עַן֙ תִּשְׁמֹ֣ר לַעֲשׂ֔וֹת כְּכׇל־הַכָּת֖וּב בּ֑וֹ כִּי־אָ֛ז תַּצְלִ֥יחַ אֶת־דְּרָכֶ֖ךָ וְאָ֥ז תַּשְׂכִּֽיל׃  
-English: Let not this Book of the Teaching cease from your lips, but recite it day and night, so that you may observe faithfully all that is written in it. Only then will you prosper in your undertakings and only then will you be successful.  
-Matched: *יוֹמָ֣ם* (position 7)  
-
-**Lamentations 2:18**  
-Hebrew: צָעַ֥ק לִבָּ֖ם אֶל־אֲדֹנָ֑י חוֹמַ֣ת בַּת־צִ֠יּ֠וֹן הוֹרִ֨ידִי כַנַּ֤חַל דִּמְעָה֙ יוֹמָ֣ם וָלַ֔יְלָה אַֽל־תִּתְּנִ֤י פוּגַת֙ לָ֔ךְ אַל־תִּדֹּ֖ם בַּת־עֵינֵֽךְ׃ {ס}  
-English: lEmendation yields “Cry aloud.”Their heart cried out-l to the Lord.O wall of Fair Zion,Shed tears like a torrentDay and night!Give yourself no respite,Your eyes no rest.  
-Matched: *יוֹמָ֣ם* (position 8)  
-
-**Leviticus 8:35**  
-Hebrew: וּפֶ֩תַח֩ אֹ֨הֶל מוֹעֵ֜ד תֵּשְׁב֨וּ יוֹמָ֤ם וָלַ֙יְלָה֙ שִׁבְעַ֣ת יָמִ֔ים וּשְׁמַרְתֶּ֛ם אֶת־מִשְׁמֶ֥רֶת יְהֹוָ֖ה וְלֹ֣א תָמ֑וּתוּ כִּי־כֵ֖ן צֻוֵּֽיתִי׃  
-English: You shall remain at the entrance of the Tent of Meeting day and night for seven days, keeping יהוה’s charge—that you may not die—for so I have been commanded.  
-Matched: *יוֹמָ֤ם* (position 4)  
-
-*...and 7 more results*
-
----
-
-### Search 4: עץ שתול
-**Scope**: Tanakh  
-**Level**: consonantal  
-**Variations searched**: 12  
+**Variations searched**: 477  
 **Results**: 1  
+
+#### Top Results:
+
+**Psalms 1:2**  
+Hebrew: כִּ֤י אִ֥ם־בְּתוֹרַ֥ת יְהֹוָ֗ה חֶ֫פְצ֥וֹ וּֽבְתוֹרָת֥וֹ יֶהְגֶּ֗ה יוֹמָ֥ם וָלָֽיְלָה׃  
+English: rather, the teaching of the LORD is his delight,
+and he studies that teaching day and night.  
+Matched: *יֶהְגֶּ֗ה* (position 6)  
+
+---
+
+### Search 6: עץ שתול
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 356  
+**Results**: 2  
 
 #### Top Results:
 
@@ -565,20 +338,125 @@ whose foliage never fades,
 and whatever it produces thrives.-b  
 Matched: *כְּעֵץ֮* (position 1)  
 
+**Psalms 92:14**  
+Hebrew: שְׁ֭תוּלִים בְּבֵ֣ית יְהֹוָ֑ה בְּחַצְר֖וֹת אֱלֹהֵ֣ינוּ יַפְרִֽיחוּ׃  
+English: planted in the house of the LORD,
+they flourish in the courts of our God.  
+Matched: *שְׁ֭תוּלִים* (position 0)  
+
 ---
 
-### Search 5: דרך רשעים דרך צדיקים
-**Scope**: Psalms  
+### Search 7: פרי בעתו
+**Scope**: Tanakh  
 **Level**: consonantal  
-**Variations searched**: 12  
+**Variations searched**: 504  
 **Results**: 0  
 
 ---
 
-### Search 6: עדת צדיקים
+### Search 8: לא יקומו
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 504  
+**Results**: 5  
+
+#### Top Results:
+
+**Deuteronomy 19:15**  
+Hebrew: לֹֽא־יָקוּם֩ עֵ֨ד אֶחָ֜ד בְּאִ֗ישׁ לְכׇל־עָוֺן֙ וּלְכׇל־חַטָּ֔את בְּכׇל־חֵ֖טְא אֲשֶׁ֣ר יֶֽחֱטָ֑א עַל־פִּ֣י ׀ שְׁנֵ֣י עֵדִ֗ים א֛וֹ עַל־פִּ֥י שְׁלֹשָֽׁה־עֵדִ֖ים יָק֥וּם דָּבָֽר׃  
+English: A single witness may not validate against an [accused] party any guilt or blame for any offense that may be committed; a case can be valid only on the testimony of two witnesses or more.*more See note at 17.6.  
+Matched: *לֹֽא* (position 0)  
+
+**I Kings 3:12**  
+Hebrew: הִנֵּ֥ה עָשִׂ֖יתִי כִּדְבָרֶ֑יךָ הִנֵּ֣ה ׀ נָתַ֣תִּֽי לְךָ֗ לֵ֚ב חָכָ֣ם וְנָב֔וֹן אֲשֶׁ֤ר כָּמ֙וֹךָ֙ לֹא־הָיָ֣ה לְפָנֶ֔יךָ וְאַחֲרֶ֖יךָ לֹא־יָק֥וּם כָּמֽוֹךָ׃  
+English: I now do as you have spoken. I grant you a wise and discerning mind; there has never been anyone like you before, nor will anyone like you arise again.  
+Matched: *לֹא* (position 16)  
+
+**Job 25:3**  
+Hebrew: הֲיֵ֣שׁ מִ֭סְפָּר לִגְדוּדָ֑יו וְעַל־מִ֝֗י לֹא־יָק֥וּם אוֹרֵֽהוּ׃  
+English: Can His troops be numbered?On whom does His light not shine?  
+Matched: *לֹא* (position 5)  
+
+**Numbers 30:6**  
+Hebrew: וְאִם־הֵנִ֨יא אָבִ֣יהָ אֹתָהּ֮ בְּי֣וֹם שׇׁמְעוֹ֒ כׇּל־נְדָרֶ֗יהָ וֶֽאֱסָרֶ֛יהָ אֲשֶׁר־אָסְרָ֥ה עַל־נַפְשָׁ֖הּ לֹ֣א יָק֑וּם וַֽיהֹוָה֙ יִֽסְלַח־לָ֔הּ כִּי־הֵנִ֥יא אָבִ֖יהָ אֹתָֽהּ׃  
+English: But if her father restrains her on the day he finds out, none of her vows or self-imposed obligations shall stand; and יהוה will forgive her, since her father restrained her.  
+Matched: *לֹ֣א* (position 13)  
+
+**Numbers 30:13**  
+Hebrew: וְאִם־הָפֵר֩ יָפֵ֨ר אֹתָ֥ם ׀ אִישָׁהּ֮ בְּי֣וֹם שׇׁמְעוֹ֒ כׇּל־מוֹצָ֨א שְׂפָתֶ֧יהָ לִנְדָרֶ֛יהָ וּלְאִסַּ֥ר נַפְשָׁ֖הּ לֹ֣א יָק֑וּם אִישָׁ֣הּ הֲפֵרָ֔ם וַיהֹוָ֖ה יִֽסְלַֽח־לָֽהּ׃  
+English: But if her husband does annul them on the day he finds out, then nothing that has crossed her lips shall stand, whether vows or self-imposed obligations. Her husband has annulled them, and יהוה will forgive her.  
+Matched: *לֹ֣א* (position 14)  
+
+---
+
+### Search 9: במשפט
 **Scope**: Psalms  
 **Level**: consonantal  
-**Variations searched**: 12  
+**Variations searched**: 60  
+**Results**: 9  
+
+#### Top Results:
+
+**Psalms 1:5**  
+Hebrew: עַל־כֵּ֤ן ׀ לֹא־יָקֻ֣מוּ רְ֭שָׁעִים בַּמִּשְׁפָּ֑ט וְ֝חַטָּאִ֗ים בַּעֲדַ֥ת צַדִּיקִֽים׃  
+English: Therefore the wicked will not survive judgment,
+nor will sinners, in the assembly of the righteous.  
+Matched: *בַּמִּשְׁפָּ֑ט* (position 6)  
+
+**Psalms 25:9**  
+Hebrew: יַדְרֵ֣ךְ עֲ֭נָוִים בַּמִּשְׁפָּ֑ט וִילַמֵּ֖ד עֲנָוִ֣ים דַּרְכּֽוֹ׃  
+English: He guides the lowly in the right path,
+and teaches the lowly His way.  
+Matched: *בַּמִּשְׁפָּ֑ט* (position 2)  
+
+**Psalms 72:2**  
+Hebrew: יָדִ֣ין עַמְּךָ֣ בְצֶ֑דֶק וַעֲנִיֶּ֥יךָ בְמִשְׁפָּֽט׃  
+English: that he may judge Your people rightly,
+Your lowly ones, justly.  
+Matched: *בְמִשְׁפָּֽט׃* (position 4)  
+
+**Psalms 112:5**  
+Hebrew: טֽוֹב־אִ֭ישׁ חוֹנֵ֣ן וּמַלְוֶ֑ה יְכַלְכֵּ֖ל דְּבָרָ֣יו בְּמִשְׁפָּֽט׃  
+English: All goes well with the man who lends generously,
+who conducts his affairs with equity.  
+Matched: *בְּמִשְׁפָּֽט׃* (position 6)  
+
+**Psalms 143:2**  
+Hebrew: וְאַל־תָּב֣וֹא בְ֭מִשְׁפָּט אֶת־עַבְדֶּ֑ךָ כִּ֤י לֹֽא־יִצְדַּ֖ק לְפָנֶ֣יךָ כׇל־חָֽי׃  
+English: Do not enter into judgment with Your servant,
+for before You no creature is in the right.  
+Matched: *בְ֭מִשְׁפָּט* (position 2)  
+
+**Psalms 9:8**  
+Hebrew: וַֽ֭יהֹוָה לְעוֹלָ֣ם יֵשֵׁ֑ב כּוֹנֵ֖ן לַמִּשְׁפָּ֣ט כִּסְאֽוֹ׃  
+English: But the LORD abides forever;
+He has set up His throne for judgment;  
+Matched: *לַמִּשְׁפָּ֣ט* (position 4)  
+
+**Psalms 76:10**  
+Hebrew: בְּקוּם־לַמִּשְׁפָּ֥ט אֱלֹהִ֑ים לְהוֹשִׁ֖יעַ כׇּל־עַנְוֵי־אֶ֣רֶץ סֶֽלָה׃  
+English: as God rose to execute judgment,
+to deliver all the lowly of the earth. Selah.  
+Matched: *לַמִּשְׁפָּ֥ט* (position 1)  
+
+**Psalms 122:5**  
+Hebrew: כִּ֤י שָׁ֨מָּה ׀ יָשְׁב֣וּ כִסְא֣וֹת לְמִשְׁפָּ֑ט כִּ֝סְא֗וֹת לְבֵ֣ית דָּוִֽד׃  
+English: There the thrones of judgment stood,
+thrones of the house of David.  
+Matched: *לְמִשְׁפָּ֑ט* (position 5)  
+
+**Psalms 89:31**  
+Hebrew: אִם־יַעַזְב֣וּ בָ֭נָיו תּוֹרָתִ֑י וּ֝בְמִשְׁפָּטַ֗י לֹ֣א יֵלֵכֽוּן׃  
+English: If his sons forsake My Teaching
+and do not live by My rules;  
+Matched: *וּ֝בְמִשְׁפָּטַ֗י* (position 4)  
+
+---
+
+### Search 10: עדת צדיקים
+**Scope**: Psalms  
+**Level**: consonantal  
+**Variations searched**: 504  
 **Results**: 1  
 
 #### Top Results:
@@ -587,39 +465,136 @@ Matched: *כְּעֵץ֮* (position 1)
 Hebrew: עַל־כֵּ֤ן ׀ לֹא־יָקֻ֣מוּ רְ֭שָׁעִים בַּמִּשְׁפָּ֑ט וְ֝חַטָּאִ֗ים בַּעֲדַ֥ת צַדִּיקִֽים׃  
 English: Therefore the wicked will not survive judgment,
 nor will sinners, in the assembly of the righteous.  
-Matched: *בַּעֲדַ֥ת* (position 6)  
+Matched: *בַּעֲדַ֥ת* (position 8)  
 
 ---
 
-### Search 7: יהוה יודע
+### Search 11: יודע יהוה דרך
 **Scope**: Tanakh  
 **Level**: consonantal  
-**Variations searched**: 12  
+**Variations searched**: 477  
 **Results**: 1  
 
 #### Top Results:
 
-**Ezekiel 36:32**  
-Hebrew: לֹ֧א לְמַעַנְכֶ֣ם אֲנִֽי־עֹשֶׂ֗ה נְאֻם֙ אֲדֹנָ֣י יֱהֹוִ֔ה יִוָּדַ֖ע לָכֶ֑ם בּ֧וֹשׁוּ וְהִכָּֽלְמ֛וּ מִדַּרְכֵיכֶ֖ם בֵּ֥ית יִשְׂרָאֵֽל׃ {ס}  
-English: Not for your sake will I act—declares the Sovereign GOD—take good note! Be ashamed and humiliated because of your ways, O House of Israel!  
-Matched: *יֱהֹוִ֔ה* (position 5)  
+**Psalms 1:6**  
+Hebrew: כִּֽי־יוֹדֵ֣עַ יְ֭הֹוָה דֶּ֣רֶךְ צַדִּיקִ֑ים וְדֶ֖רֶךְ רְשָׁעִ֣ים תֹּאבֵֽד׃ {פ}  
+English: For the LORD cherishes the way of the righteous,
+but the way of the wicked is doomed.  
+Matched: *יוֹדֵ֣עַ* (position 1)  
+
+---
+
+### Search 12: דרך רשעים
+**Scope**: Tanakh  
+**Level**: consonantal  
+**Variations searched**: 504  
+**Results**: 2  
+
+#### Top Results:
+
+**Jeremiah 12:1**  
+Hebrew: צַדִּ֤יק אַתָּה֙ יְהֹוָ֔ה כִּ֥י אָרִ֖יב אֵלֶ֑יךָ אַ֤ךְ מִשְׁפָּטִים֙ אֲדַבֵּ֣ר אֹתָ֔ךְ מַדּ֗וּעַ דֶּ֤רֶךְ רְשָׁעִים֙ צָלֵ֔חָה שָׁל֖וּ כׇּל־בֹּ֥גְדֵי בָֽגֶד׃  
+English: You will win,awin Lit. “be in the right.” O ETERNAL One, if I make claim against You,Yet I shall present charges against You:Why does the way of the wicked prosper?Why are the workers of treachery at ease?  
+Matched: *דֶּ֤רֶךְ* (position 11)  
+
+**Proverbs 4:19**  
+Hebrew: דֶּ֣רֶךְ רְ֭שָׁעִים כָּאֲפֵלָ֑ה לֹ֥א יָ֝דְע֗וּ בַּמֶּ֥ה יִכָּשֵֽׁלוּ׃ {פ}  
+English: The way of the wicked is all darkness;They do not know what will make them stumble.  
+Matched: *דֶּ֣רֶךְ* (position 0)  
+
+---
+
+### Search 13: תאבד
+**Scope**: Psalms  
+**Level**: consonantal  
+**Variations searched**: 80  
+**Results**: 10  
+
+#### Top Results:
+
+**Psalms 1:6**  
+Hebrew: כִּֽי־יוֹדֵ֣עַ יְ֭הֹוָה דֶּ֣רֶךְ צַדִּיקִ֑ים וְדֶ֖רֶךְ רְשָׁעִ֣ים תֹּאבֵֽד׃ {פ}  
+English: For the LORD cherishes the way of the righteous,
+but the way of the wicked is doomed.  
+Matched: *תֹּאבֵֽד׃* (position 7)  
+
+**Psalms 5:7**  
+Hebrew: תְּאַבֵּד֮ דֹּבְרֵ֢י כָ֫זָ֥ב אִישׁ־דָּמִ֥ים וּמִרְמָ֗ה יְתָ֘עֵ֥ב ׀ יְהֹוָֽה׃  
+English: You doom those who speak lies;
+murderous, deceitful men the LORD abhors.  
+Matched: *תְּאַבֵּד֮* (position 0)  
+
+**Psalms 9:19**  
+Hebrew: כִּ֤י לֹ֣א לָ֭נֶצַח יִשָּׁכַ֣ח אֶבְי֑וֹן תִּקְוַ֥ת (ענוים) [עֲ֝נִיִּ֗ים] תֹּאבַ֥ד לָעַֽד׃  
+English: Not always shall the needy be ignored,
+nor the hope of the afflicted forever lost.  
+Matched: *תֹּאבַ֥ד* (position 8)  
+
+**Psalms 21:11**  
+Hebrew: פִּ֭רְיָמוֹ מֵאֶ֣רֶץ תְּאַבֵּ֑ד וְ֝זַרְעָ֗ם מִבְּנֵ֥י אָדָֽם׃  
+English: You wipe their offspring from the earth,
+their issue from among men.  
+Matched: *תְּאַבֵּ֑ד* (position 2)  
+
+**Psalms 112:10**  
+Hebrew: רָ֘שָׁ֤ע יִרְאֶ֨ה ׀ וְכָעָ֗ס שִׁנָּ֣יו יַחֲרֹ֣ק וְנָמָ֑ס תַּאֲוַ֖ת רְשָׁעִ֣ים תֹּאבֵֽד׃ {פ}  
+English: The wicked man shall see it and be vexed;
+he shall gnash his teeth; his courage shall fail.
+The desire of the wicked shall come to nothing.  
+Matched: *תֹּאבֵֽד׃* (position 9)  
+
+**Psalms 9:7**  
+Hebrew: הָֽאוֹיֵ֨ב ׀ תַּ֥מּוּ חֳרָב֗וֹת לָ֫נֶ֥צַח וְעָרִ֥ים נָתַ֑שְׁתָּ אָבַ֖ד זִכְרָ֣ם הֵֽמָּה׃  
+English: The enemy is no more—
+ruins everlasting;
+You have torn down their cities;
+their very names are lost.-b  
+Matched: *אָבַ֖ד* (position 7)  
+
+**Psalms 31:13**  
+Hebrew: נִ֭שְׁכַּחְתִּי כְּמֵ֣ת מִלֵּ֑ב הָ֝יִ֗יתִי כִּכְלִ֥י אֹבֵֽד׃  
+English: I am put out of mind like the dead;
+I am like an object given up for lost.  
+Matched: *אֹבֵֽד׃* (position 5)  
+
+**Psalms 119:176**  
+Hebrew: תָּעִ֗יתִי כְּשֶׂ֣ה אֹ֭בֵד בַּקֵּ֣שׁ עַבְדֶּ֑ךָ כִּ֥י מִ֝צְוֺתֶ֗יךָ לֹ֣א שָׁכָֽחְתִּי׃ {פ}  
+English: I have strayed like a lost sheep;
+search for Your servant,
+for I have not neglected Your commandments.  
+Matched: *אֹ֭בֵד* (position 2)  
+
+**Psalms 142:5**  
+Hebrew: הַבֵּ֤יט יָמִ֨ין ׀ וּרְאֵה֮ וְאֵֽין־לִ֢י מַ֫כִּ֥יר אָבַ֣ד מָנ֣וֹס מִמֶּ֑נִּי אֵ֖ין דּוֹרֵ֣שׁ לְנַפְשִֽׁי׃  
+English: Look at my right and see—
+I have no friend;
+there is nowhere I can flee,
+no one cares about me.  
+Matched: *אָבַ֣ד* (position 7)  
+
+**Psalms 41:6**  
+Hebrew: אוֹיְבַ֗י יֹאמְר֣וּ רַ֣ע לִ֑י מָתַ֥י יָ֝מ֗וּת וְאָבַ֥ד שְׁמֽוֹ׃  
+English: My enemies speak evilly of me,
+“When will he die and his name perish?”  
+Matched: *וְאָבַ֥ד* (position 6)  
 
 ---
 
 ## Figurative Language Instances
 
 ### Query 1
-**Filters**: Vehicle contains: walking  
-**Results**: 100  
+**Filters**: Vehicle contains: walk  
+**Results**: 77  
 
-**Core pattern**: physical walking metaphor (17/100 instances, 17%)
+**Core pattern**: physical walking metaphor (22/77 instances, 28%)
 
 **Top 3 Most Relevant** (by confidence):
 1. ⭐ **Deuteronomy 26:17** (confidence: 1.00) - This is an idiom. 'Walking in ways' (הָלַךְ בְּדֶרֶךְ) in biblical Hebrew refers not to physical loc...
 2. ⭐ **Deuteronomy 28:9** (confidence: 1.00) - The phrase 'walk in God's ways' is an idiom and a metaphor. 'Ways' (דרכים) refers not to literal phy...
 3. ⭐ **Exodus 4:18** (confidence: 1.00) - This is a common biblical idiom used as a farewell blessing, wishing the departing person well-being...
 
-#### All Instances (100 total):
+#### All Instances (77 total):
 
 **Deuteronomy 4:3** (idiom) - confidence: 0.90  
 *Figurative phrase*: who followed Baal-peor  
@@ -632,32 +607,6 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Target*: allegiance to a deity → worship → religious devotion  
 *Vehicle*: physical following → walking behind → movement  
 *Ground*: loyalty → adherence → service  
-*Confidence*: 0.90  
-
-**Deuteronomy 6:25** (idiom) - confidence: 0.95  
-*Figurative phrase*: before Yahweh our God / in the presence of Yahweh our God  
-
-**Full verse (Hebrew)**: וּצְדָקָ֖ה תִּֽהְיֶה־לָּ֑נוּ כִּֽי־נִשְׁמֹ֨ר לַעֲשׂ֜וֹת אֶת־כׇּל־הַמִּצְוָ֣ה הַזֹּ֗את לִפְנֵ֛י יְהֹוָ֥ה אֱלֹהֵ֖ינוּ כַּאֲשֶׁ֥ר צִוָּֽנוּ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: It will be therefore to our merit before our God יהוה to observe faithfully this whole Instruction, as [God] has commanded us.”  
-
-*Hebrew phrase*: לִפְנֵ֛י יְהֹוָ֥ה אֱלֹהֵ֖ינוּ  
-*Explanation*: This is an idiom where 'לִפְנֵי' (literally 'to the face of') is used in relation to God to denote being in the divine presence, sight, or under the observation and authority of God, rather than a lit...  
-*Target*: divine presence → divine observation → accountability to God  
-*Vehicle*: physical presence before a superior → standing in sight → being in front of  
-*Ground*: accountability → visibility → reverence  
-*Confidence*: 0.95  
-
-**Deuteronomy 7:24** (idiom) - confidence: 0.90  
-*Figurative phrase*: no one shall stand up to you  
-
-**Full verse (Hebrew)**: וְנָתַ֤ן מַלְכֵיהֶם֙ בְּיָדֶ֔ךָ וְהַאֲבַדְתָּ֣ אֶת־שְׁמָ֔ם מִתַּ֖חַת הַשָּׁמָ֑יִם לֹֽא־יִתְיַצֵּ֥ב אִישׁ֙ בְּפָנֶ֔יךָ עַ֥ד הִשְׁמִֽדְךָ֖ אֹתָֽם  
-**Full verse (English)**: [God] will deliver their kings into your hand, and you shall obliterate their name from under the heavens; no one shall stand up to you, until you have wiped them out.  
-
-*Hebrew phrase*: לֹֽא־יִתְיַצֵּ֥ב אִישׁ֙ בְּפָנֶ֔יךָ  
-*Explanation*: This is a common biblical idiom meaning no one will be able to resist or oppose you in battle or confrontation. It does not refer to a literal physical posture....  
-*Target*: enemy's ability to resist → military opposition → challenge to authority  
-*Vehicle*: physical confrontation → standing face-to-face → direct opposition  
-*Ground*: invincibility → uncontested power → lack of effective resistance  
 *Confidence*: 0.90  
 
 **Deuteronomy 8:6** (metaphor, idiom) - confidence: 0.90  
@@ -686,32 +635,6 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: direction → guidance → adherence  
 *Confidence*: 0.95  
 
-**Deuteronomy 11:25** (idiom) - confidence: 0.90  
-*Figurative phrase*: shall stand up to you  
-
-**Full verse (Hebrew)**: לֹא־יִתְיַצֵּ֥ב אִ֖ישׁ בִּפְנֵיכֶ֑ם פַּחְדְּכֶ֨ם וּמוֹרַֽאֲכֶ֜ם יִתֵּ֣ן&thinsp;׀ יְהֹוָ֣ה אֱלֹֽהֵיכֶ֗ם עַל־פְּנֵ֤י כׇל־הָאָ֙רֶץ֙ אֲשֶׁ֣ר תִּדְרְכוּ־בָ֔הּ כַּאֲשֶׁ֖ר דִּבֶּ֥ר לָכֶֽם&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: No one shall stand up to you: your God יהוה will put the dread and the fear of you over the whole land in which you set foot, as promised.  
-
-*Hebrew phrase*: יִתְיַצֵּ֥ב אִ֖ישׁ בִּפְנֵיכֶ֑ם  
-*Explanation*: This is an idiom meaning to oppose or resist, not a literal physical act of standing in front of someone....  
-*Target*: opposition → resistance → conflict  
-*Vehicle*: physical standing → confrontational posture → human action  
-*Ground*: defiance → challenge → confrontation  
-*Confidence*: 0.90  
-
-**Deuteronomy 18:15** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: will raise up for you  
-
-**Full verse (Hebrew)**: נָבִ֨יא מִקִּרְבְּךָ֤ מֵאַחֶ֙יךָ֙ כָּמֹ֔נִי יָקִ֥ים לְךָ֖ יְהֹוָ֣ה אֱלֹהֶ֑יךָ אֵלָ֖יו תִּשְׁמָעֽוּן  
-**Full verse (English)**: From among your own people, your God יהוה will raise up for you a prophet like myself; that is whom you shall heed.  
-
-*Hebrew phrase*: יָקִ֥ים לְךָ֖  
-*Explanation*: The phrase 'raise up' (יָקִים) is an idiom for appointing, establishing, or bringing into prominence, rather than a literal physical elevation. This idiom functions metaphorically, using the concrete ...  
-*Target*: prophet's appointment → divine commissioning → leadership establishment  
-*Vehicle*: physical elevation → making stand → physical action  
-*Ground*: establishment → prominence → authority  
-*Confidence*: 0.90  
-
 **Deuteronomy 19:9** (metaphor, idiom) - confidence: 0.90  
 *Figurative phrase*: and to walk in God’s ways  
 
@@ -725,331 +648,287 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: adherence to principles → following a course → obedience  
 *Confidence*: 0.90  
 
-**Deuteronomy 19:15** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: A single witness may not validate  
+**Deuteronomy 26:17** (idiom) - confidence: 1.00  
+*Figurative phrase*: in whose ways you will walk  
 
-**Full verse (Hebrew)**: לֹֽא־יָקוּם֩ עֵ֨ד אֶחָ֜ד בְּאִ֗ישׁ לְכׇל־עָוֺן֙ וּלְכׇל־חַטָּ֔את בְּכׇל־חֵ֖טְא אֲשֶׁ֣ר יֶֽחֱטָ֑א עַל־פִּ֣י&thinsp;׀ שְׁנֵ֣י עֵדִ֗ים א֛וֹ עַל־פִּ֥י שְׁלֹשָֽׁה־עֵדִ֖ים יָק֥וּם דָּבָֽר  
-**Full verse (English)**: A single witness may not validate against an [accused] party any guilt or blame for any offense that may be committed; a case can be valid only on the testimony of two witnesses or more.*more See note at 17.6.  
+**Full verse (Hebrew)**: אֶת־יְהֹוָ֥ה הֶאֱמַ֖רְתָּ הַיּ֑וֹם לִהְיוֹת֩ לְךָ֨ לֵֽאלֹהִ֜ים וְלָלֶ֣כֶת בִּדְרָכָ֗יו וְלִשְׁמֹ֨ר חֻקָּ֧יו וּמִצְוֺתָ֛יו וּמִשְׁפָּטָ֖יו וְלִשְׁמֹ֥עַ בְּקֹלֽוֹ  
+**Full verse (English)**: You have affirmed*affirmed Exact nuance of Heb. he’emarta uncertain. this day that יהוה is your God, in whose ways you will walk, whose laws and commandments and rules you will observe, and whom you will obey.  
 
-*Hebrew phrase*: לֹֽא־יָקוּם֩ עֵ֨ד אֶחָ֜ד  
-*Explanation*: The phrase `לֹֽא־יָקוּם֩ עֵ֨ד אֶחָ֜ד` (literally 'a single witness will not stand/arise') is a legal idiom meaning that a single witness's testimony is insufficient to establish or validate a legal cl...  
-*Target*: legal establishment → validity of testimony → legal concept  
-*Vehicle*: physical standing → firmness → physical state  
-*Ground*: stability → confirmation → foundation  
+*Hebrew phrase*: וְלָלֶ֣כֶת בִּדְרָכָ֗יו  
+*Explanation*: This is an idiom. 'Walking in ways' (הָלַךְ בְּדֶרֶךְ) in biblical Hebrew refers not to physical locomotion, but to one's conduct, lifestyle, or adherence to a particular moral or spiritual path....  
+*Target*: moral conduct → behavioral adherence → human action  
+*Vehicle*: physical walking → locomotion → bodily movement  
+*Ground*: following a path → adherence to principles → guidance  
+*Confidence*: 1.00  
+
+**Deuteronomy 28:9** (metaphor, idiom) - confidence: 1.00  
+*Figurative phrase*: and walk in God’s ways  
+
+**Full verse (Hebrew)**: יְקִֽימְךָ֨ יְהֹוָ֥ה לוֹ֙ לְעַ֣ם קָד֔וֹשׁ כַּאֲשֶׁ֖ר נִֽשְׁבַּֽע־לָ֑ךְ כִּ֣י תִשְׁמֹ֗ר אֶת־מִצְוֺת֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ וְהָלַכְתָּ֖ בִּדְרָכָֽיו  
+**Full verse (English)**: יהוה will establish you as God’s holy people, as was sworn to you, if you keep the commandments of your God יהוה and walk in God’s ways.  
+
+*Hebrew phrase*: וְהָלַכְתָּ֖ בִּדְרָכָֽיו  
+*Explanation*: The phrase 'walk in God's ways' is an idiom and a metaphor. 'Ways' (דרכים) refers not to literal physical paths, but to God's moral principles, commands, or character. 'Walking' (הלך) signifies living...  
+*Target*: Israel's moral conduct → human behavior → religious observance  
+*Vehicle*: physical walking → journey on a path → locomotion  
+*Ground*: adherence to principles → obedience to commands → following guidance  
+*Confidence*: 1.00  
+
+**Deuteronomy 28:14** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: to walk after  
+
+**Full verse (Hebrew)**: וְלֹ֣א תָס֗וּר מִכׇּל־הַדְּבָרִים֙ אֲשֶׁ֨ר אָנֹכִ֜י מְצַוֶּ֥ה אֶתְכֶ֛ם הַיּ֖וֹם יָמִ֣ין וּשְׂמֹ֑אול לָלֶ֗כֶת אַחֲרֵ֛י אֱלֹהִ֥ים אֲחֵרִ֖ים לְעׇבְדָֽם&nbsp;{פ}  
+**Full verse (English)**: and do not deviate to the right or to the left from any of the commandments that I enjoin upon you this day and turn to the worship of other gods.  
+
+*Hebrew phrase*: לָלֶ֗כֶת אַחֲרֵ֛י  
+*Explanation*: This is an idiom where physical 'walking after' represents allegiance, service, or obedience to other gods. It metaphorically equates following a leader with spiritual devotion....  
+*Target*: serving other gods → idolatry → religious disloyalty  
+*Vehicle*: physical following → walking behind a leader → physical action  
+*Ground*: allegiance → obedience → devotion  
 *Confidence*: 0.90  
 
-**Deuteronomy 19:15** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: a case can be valid  
+**Deuteronomy 30:16** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: to walk in God’s ways  
 
-**Full verse (Hebrew)**: לֹֽא־יָקוּם֩ עֵ֨ד אֶחָ֜ד בְּאִ֗ישׁ לְכׇל־עָוֺן֙ וּלְכׇל־חַטָּ֔את בְּכׇל־חֵ֖טְא אֲשֶׁ֣ר יֶֽחֱטָ֑א עַל־פִּ֣י&thinsp;׀ שְׁנֵ֣י עֵדִ֗ים א֛וֹ עַל־פִּ֥י שְׁלֹשָֽׁה־עֵדִ֖ים יָק֥וּם דָּבָֽר  
-**Full verse (English)**: A single witness may not validate against an [accused] party any guilt or blame for any offense that may be committed; a case can be valid only on the testimony of two witnesses or more.*more See note at 17.6.  
+**Full verse (Hebrew)**: אֲשֶׁ֨ר אָנֹכִ֣י מְצַוְּךָ֮ הַיּוֹם֒ לְאַהֲבָ֞ה אֶת־יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ לָלֶ֣כֶת בִּדְרָכָ֔יו וְלִשְׁמֹ֛ר מִצְוֺתָ֥יו וְחֻקֹּתָ֖יו וּמִשְׁפָּטָ֑יו וְחָיִ֣יתָ וְרָבִ֔יתָ וּבֵֽרַכְךָ֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ בָּאָ֕רֶץ אֲשֶׁר־אַתָּ֥ה בָא־שָׁ֖מָּה לְרִשְׁתָּֽהּ  
+**Full verse (English)**: For*For Septuagint reads “If you obey the commandments of your God יהוה, which.” I command you this day, to love your God יהוה, to walk in God’s ways, and to keep God’s commandments, God’s laws, and God’s rules, that you may thrive and increase, and that your God יהוה may bless you in the land that you are about to enter and possess.  
 
-*Hebrew phrase*: יָק֥וּם דָּבָֽר  
-*Explanation*: The phrase `יָק֥וּם דָּבָֽר` (literally 'a matter will stand') is a legal idiom meaning 'a case will be established' or 'a matter will be legally valid.' The verb `יָקוּם` (to stand) is used metaphori...  
-*Target*: legal establishment → validity of a case → legal concept  
-*Vehicle*: physical standing → firmness → physical state  
-*Ground*: stability → confirmation → foundation  
+*Hebrew phrase*: לָלֶ֣כֶת בִּדְרָכָ֔יו  
+*Explanation*: This phrase uses the physical act of 'walking' (ללכת) and 'ways' (דרכים) as a metaphor for one's moral conduct and adherence to God's principles and commands. It is a common biblical idiom for living ...  
+*Target*: human conduct → moral behavior → human action  
+*Vehicle*: physical walking → following a path → locomotion  
+*Ground*: adherence to principles → obedience to commands → moral direction  
 *Confidence*: 0.90  
 
-*...and 90 more instances*
+**Deuteronomy 31:2** (idiom) - confidence: 0.90  
+*Figurative phrase*: to come and go / to be active  
 
-**Usage breakdown**: physical walking (17x), physical standing (6x), physical sitting (5x)
+**Full verse (Hebrew)**: וַיֹּ֣אמֶר אֲלֵהֶ֗ם בֶּן־מֵאָה֩ וְעֶשְׂרִ֨ים שָׁנָ֤ה אָנֹכִי֙ הַיּ֔וֹם לֹא־אוּכַ֥ל ע֖וֹד לָצֵ֣את וְלָב֑וֹא וַֽיהֹוָה֙ אָמַ֣ר אֵלַ֔י לֹ֥א תַעֲבֹ֖ר אֶת־הַיַּרְדֵּ֥ן הַזֶּֽה  
+**Full verse (English)**: He said to them: I am now one hundred and twenty years old, I can no longer be active.*be active Lit. “come and go.” Moreover, יהוה has said to me, “You shall not go across yonder Jordan.”  
+
+*Hebrew phrase*: לָצֵ֣את וְלָב֑וֹא  
+*Explanation*: This phrase is a common Hebrew idiom signifying the ability to move freely, engage in daily activities, or perform one's duties, particularly in a leadership capacity. It represents general functional...  
+*Target*: Moses's active leadership → leadership capacity → human functionality  
+*Vehicle*: physical movement of coming and going → daily routine actions → physical activity  
+*Ground*: active engagement → functional capacity → freedom of movement  
+*Confidence*: 0.90  
+
+**Deuteronomy 31:8** (metaphor) - confidence: 0.90  
+*Figurative phrase*: will not fail you  
+
+**Full verse (Hebrew)**: וַיהֹוָ֞ה ה֣וּא&thinsp;׀ הַהֹלֵ֣ךְ לְפָנֶ֗יךָ ה֚וּא יִהְיֶ֣ה עִמָּ֔ךְ לֹ֥א יַרְפְּךָ֖ וְלֹ֣א יַעַזְבֶ֑ךָּ לֹ֥א תִירָ֖א וְלֹ֥א תֵחָֽת  
+**Full verse (English)**: And it is indeed יהוה who will go before you. [God] will be with you—and will not fail you or forsake you. Fear not and be not dismayed!”  
+
+*Hebrew phrase*: לֹ֥א יַרְפְּךָ֖  
+*Explanation*: This is a metaphor. The Hebrew root רפה (rapha) means 'to let drop, sink, or grow weak.' The phrase metaphorically depicts God's unwavering support by using the physical image of not letting go or sla...  
+*Target*: God's covenantal faithfulness → divine support → theological attribute  
+*Vehicle*: not letting go → maintaining a firm grip → physical action of support  
+*Ground*: steadfastness → reliability → unwavering commitment  
+*Confidence*: 0.90  
+
+*...and 67 more instances*
+
+**Usage breakdown**: physical walking (22x), walking (4x), physical journey (3x)
 
 ---
 
 ### Query 2
-**Filters**: Vehicle contains: delight  
-**Results**: 19  
+**Filters**: Vehicle contains: meditate  
+**Results**: 2  
 
-**Core pattern**: soul's desire metaphor (2/19 instances, 10%)
+**Core pattern**: meditation metaphor (1/2 instances, 50%)
 
-**Top 3 Most Relevant** (by confidence):
-1. ⭐ **Deuteronomy 18:6** (confidence: 1.00) - This is an idiom expressing the Levite's wholehearted, strong, and unreserved personal desire or wil...
-2. ⭐ **Psalms 119:14** (confidence: 1.00) - This is a simile comparing the psalmist's profound joy in God's decrees to the immense joy one would...
-3. ⭐ **Genesis 49:26** (confidence: 0.95) - The inanimate 'hills' are attributed the human capacity for 'desire' or 'longing,' personifying them...
+#### All Instances (2 total):
 
-#### All Instances (19 total):
+**Psalms 119:97** (metaphor) - confidence: 0.90  
+*Figurative phrase*: It is my study  
 
-**Deuteronomy 12:15** (idiom) - confidence: 0.90  
-*Figurative phrase*: whenever you desire (lit. in all the desire of your soul)  
+**Full verse (Hebrew)**: מָה־אָהַ֥בְתִּי תוֹרָתֶ֑ךָ כׇּל־הַ֝יּ֗וֹם הִ֣יא שִׂיחָתִֽי  
+**Full verse (English)**: O how I love Your teaching!It is my study all day long.  
 
-**Full verse (Hebrew)**: רַק֩ בְּכׇל־אַוַּ֨ת נַפְשְׁךָ֜ תִּזְבַּ֣ח&thinsp;׀ וְאָכַלְתָּ֣ בָשָׂ֗ר כְּבִרְכַּ֨ת יְהֹוָ֧ה אֱלֹהֶ֛יךָ אֲשֶׁ֥ר נָֽתַן־לְךָ֖ בְּכׇל־שְׁעָרֶ֑יךָ הַטָּמֵ֤א וְהַטָּהוֹר֙ יֹאכְלֶ֔נּוּ כַּצְּבִ֖י וְכָאַיָּֽל  
-**Full verse (English)**: But whenever you desire, you may slaughter and eat meat in any of your settlements, according to the blessing that your God יהוה has granted you. The impure and the pure alike may partake of it, as of the gazelle and the deer.*gazelle … deer I.e., animals that may be eaten (cf. 14.5; Lev. 11.1ff.), but not specified (Lev. 1.1ff.).  
-
-*Hebrew phrase*: בְּכׇל־אַוַּ֨ת נַפְשְׁךָ֜  
-*Explanation*: This is a common biblical idiom where 'soul' (nephesh) represents the person's inner being or desire, signifying 'according to your full desire' or 'whenever you wish'....  
-*Target*: personal desire → human will → inner experience  
-*Vehicle*: soul's desire → inner being's wish → human faculty  
-*Ground*: intensity of desire → personal inclination → human agency  
+*Hebrew phrase*: הִ֣יא שִׂיחָתִֽי  
+*Explanation*: The Torah is metaphorically equated with the speaker's constant meditation or study, indicating it is the sole or primary focus of their mental and spiritual engagement....  
+*Target*: Torah → God's teaching → divine instruction  
+*Vehicle*: meditation → study → mental engagement  
+*Ground*: constant focus → primary concern → source of reflection  
 *Confidence*: 0.90  
 
-**Deuteronomy 12:20** (idiom) - confidence: 0.90  
-*Figurative phrase*: your soul desires  
+**Psalms 119:99** (metaphor) - confidence: 0.90  
+*Figurative phrase*: Your decrees are my study.  
 
-**Full verse (Hebrew)**: כִּֽי־יַרְחִיב֩ יְהֹוָ֨ה אֱלֹהֶ֥יךָ אֶֽת־גְּבֻלְךָ֮ כַּאֲשֶׁ֣ר דִּבֶּר־לָךְ֒ וְאָמַרְתָּ֙ אֹכְלָ֣ה בָשָׂ֔ר כִּֽי־תְאַוֶּ֥ה נַפְשְׁךָ֖ לֶאֱכֹ֣ל בָּשָׂ֑ר בְּכׇל־אַוַּ֥ת נַפְשְׁךָ֖ תֹּאכַ֥ל בָּשָֽׂר  
-**Full verse (English)**: When יהוה enlarges your territory, as promised, and you say, “I shall eat some meat,” for you have the urge to eat meat, you may eat meat whenever you wish.  
+**Full verse (Hebrew)**: מִכׇּל־מְלַמְּדַ֥י הִשְׂכַּ֑לְתִּי כִּ֥י עֵ֝דְוֺתֶ֗יךָ שִׂ֣יחָה לִֽי  
+**Full verse (English)**: I have gained more insight than all my teachers,for Your decrees are my study.  
 
-*Hebrew phrase*: תְאַוֶּ֥ה נַפְשְׁךָ֖  
-*Explanation*: This is a common biblical idiom expressing a strong personal desire or craving. 'Nefesh' (soul/self) is used as the seat of intense appetite, representing the individual's inner longing....  
-*Target*: strong personal desire → intense craving → human appetite  
-*Vehicle*: soul desiring → inner self's urge → seat of life's longing  
-*Ground*: source of internal motivation → depth of feeling → personal will  
+*Hebrew phrase*: עֵ֝דְוֺתֶ֗יךָ שִׂ֣יחָה לִֽי  
+*Explanation*: The abstract concept of God's decrees is metaphorically identified with the psalmist's intellectual activity of 'study' or 'meditation,' indicating that the decrees constitute the entirety of his inte...  
+*Target*: God's decrees → divine law → abstract concept  
+*Vehicle*: study → meditation → intellectual activity  
+*Ground*: source of insight → object of focus → intellectual foundation  
 *Confidence*: 0.90  
-
-**Deuteronomy 12:20** (idiom) - confidence: 0.90  
-*Figurative phrase*: with all the desire of your soul  
-
-**Full verse (Hebrew)**: כִּֽי־יַרְחִיב֩ יְהֹוָ֨ה אֱלֹהֶ֥יךָ אֶֽת־גְּבֻלְךָ֮ כַּאֲשֶׁ֣ר דִּבֶּר־לָךְ֒ וְאָמַרְתָּ֙ אֹכְלָ֣ה בָשָׂ֔ר כִּֽי־תְאַוֶּ֥ה נַפְשְׁךָ֖ לֶאֱכֹ֣ל בָּשָׂ֑ר בְּכׇל־אַוַּ֥ת נַפְשְׁךָ֖ תֹּאכַ֥ל בָּשָֽׂר  
-**Full verse (English)**: When יהוה enlarges your territory, as promised, and you say, “I shall eat some meat,” for you have the urge to eat meat, you may eat meat whenever you wish.  
-
-*Hebrew phrase*: בְּכׇל־אַוַּ֥ת נַפְשְׁךָ֖  
-*Explanation*: This is a common biblical idiom emphasizing the full extent or intensity of a personal desire or craving. 'Nefesh' (soul/self) is used as the seat of intense appetite, indicating an unrestricted longi...  
-*Target*: unrestricted personal desire → full extent of craving → complete appetite  
-*Vehicle*: all the soul's desire → every urge of the inner self → total longing  
-*Ground*: unconditional permission → depth of internal feeling → personal autonomy  
-*Confidence*: 0.90  
-
-**Deuteronomy 18:6** (idiom) - confidence: 1.00  
-*Figurative phrase*: with all the desire of his soul  
-
-**Full verse (Hebrew)**: וְכִֽי־יָבֹ֨א הַלֵּוִ֜י מֵאַחַ֤ד שְׁעָרֶ֙יךָ֙ מִכׇּל־יִשְׂרָאֵ֔ל אֲשֶׁר־ה֖וּא גָּ֣ר שָׁ֑ם וּבָא֙ בְּכׇל־אַוַּ֣ת נַפְשׁ֔וֹ אֶל־הַמָּק֖וֹם אֲשֶׁר־יִבְחַ֥ר יְהֹוָֽה  
-**Full verse (English)**: If a Levite would go, from any of the settlements throughout Israel where he has been residing, to the place that יהוה has chosen, he may do so whenever he pleases.  
-
-*Hebrew phrase*: בְּכׇל־אַוַּ֣ת נַפְשׁ֔וֹ  
-*Explanation*: This is an idiom expressing the Levite's wholehearted, strong, and unreserved personal desire or will. 'נֶפֶשׁ' (soul/self) here emphasizes the depth and sincerity of the desire....  
-*Target*: Levite's strong desire → personal will → human motivation  
-*Vehicle*: soul's desire → inner being's longing → human faculty of emotion  
-*Ground*: intensity of feeling → completeness of intention → depth of personal commitment  
-*Confidence*: 1.00  
-
-**Deuteronomy 28:67** (hyperbole) - confidence: 0.90  
-*Figurative phrase*: In the morning you shall say, “If only it were evening!” and in the evening you shall say, “If only it were morning!”  
-
-**Full verse (Hebrew)**: בַּבֹּ֤קֶר תֹּאמַר֙ מִֽי־יִתֵּ֣ן עֶ֔רֶב וּבָעֶ֥רֶב תֹּאמַ֖ר מִֽי־יִתֵּ֣ן בֹּ֑קֶר מִפַּ֤חַד לְבָֽבְךָ֙ אֲשֶׁ֣ר תִּפְחָ֔ד וּמִמַּרְאֵ֥ה עֵינֶ֖יךָ אֲשֶׁ֥ר תִּרְאֶֽה  
-**Full verse (English)**: In the morning you shall say, “If only it were evening!” and in the evening you shall say, “If only it were morning!”—because of what your heart shall dread and your eyes shall see.  
-
-*Hebrew phrase*: בַּבֹּ֤קֶר תֹּאמַר֙ מִֽי־יִתֵּ֣ן עֶ֔רֶב וּבָעֶ֥רֶב תֹּאמַ֖ר מִֽי־יִתֵּ֣ן בֹּ֑קֶר  
-*Explanation*: This phrase uses hyperbole to describe a state of extreme and unceasing distress. The constant longing for the opposite time of day exaggerates the depth of suffering, implying that no moment brings r...  
-*Target*: suffering → human experience → emotional state  
-*Vehicle*: constant longing for time to pass → exaggerated speech → rhetorical device  
-*Ground*: intensity of distress → pervasiveness of misery → desire for escape  
-*Confidence*: 0.90  
-
-**Genesis 34:8** (idiom) - confidence: 0.90  
-*Figurative phrase*: his soul longs  
-
-**Full verse (Hebrew)**: וַיְדַבֵּ֥ר חֲמ֖וֹר אִתָּ֣ם לֵאמֹ֑ר שְׁכֶ֣ם בְּנִ֗י חָֽשְׁקָ֤ה נַפְשׁוֹ֙ בְּבִתְּכֶ֔ם תְּנ֨וּ נָ֥א אֹתָ֛הּ ל֖וֹ לְאִשָּֽׁה  
-**Full verse (English)**: And Hamor spoke with them, saying, “My son Shechem longs for your daughter. Please give her to him in marriage.  
-
-*Hebrew phrase*: חָֽשְׁקָ֤ה נַפְשׁוֹ֙  
-*Explanation*: This is a common biblical idiom where 'nefesh' (soul) is used to express intense personal desire or longing, representing the person's inner being as the seat of emotion....  
-*Target*: Shechem's desire → personal emotion → human experience  
-*Vehicle*: soul's longing → inner being's attachment → spiritual/emotional state  
-*Ground*: intense desire → deep affection → emotional state  
-*Confidence*: 0.90  
-
-**Genesis 49:26** (personification) - confidence: 0.95  
-*Figurative phrase*: the desire of the eternal hills  
-
-**Full verse (Hebrew)**: בִּרְכֹ֣ת אָבִ֗יךָ גָּֽבְרוּ֙ עַל־בִּרְכֹ֣ת הוֹרַ֔י עַֽד־תַּאֲוַ֖ת גִּבְעֹ֣ת עוֹלָ֑ם תִּֽהְיֶ֙יןָ֙ לְרֹ֣אשׁ יוֹסֵ֔ף וּלְקׇדְקֹ֖ד נְזִ֥יר אֶחָֽיו&nbsp;{פ}  
-**Full verse (English)**: The blessings of your fatherSurpass the blessings of my ancestors,To the utmost bounds of the eternal hills.*The blessings of your father … hills Meaning of Heb. uncertain. May they rest on the head of Joseph,On the brow of the elect of his brothers.  
-
-*Hebrew phrase*: עַֽד־תַּאֲוַ֖ת גִּבְעֹ֣ת עוֹלָ֑ם  
-*Explanation*: The inanimate 'hills' are attributed the human capacity for 'desire' or 'longing,' personifying them. This implies the blessings are as abundant, enduring, or deeply rooted as the hills' inherent capa...  
-*Target*: blessings' abundance → divine favor → prosperity  
-*Vehicle*: hills' desire → nature's longing → human emotion  
-*Ground*: abundance → endurance → fertility  
-*Confidence*: 0.95  
-
-**Numbers 14:2** (hyperbole) - confidence: 0.90  
-*Figurative phrase*: “If only we had died in the land of Egypt,” the whole community shouted at them, “or if only we might die in this wilderness!”  
-
-**Full verse (Hebrew)**: וַיִּלֹּ֙נוּ֙ עַל־מֹשֶׁ֣ה וְעַֽל־אַהֲרֹ֔ן כֹּ֖ל בְּנֵ֣י יִשְׂרָאֵ֑ל וַֽיֹּאמְר֨וּ אֲלֵהֶ֜ם כׇּל־הָעֵדָ֗ה לוּ־מַ֙תְנוּ֙ בְּאֶ֣רֶץ מִצְרַ֔יִם א֛וֹ בַּמִּדְבָּ֥ר הַזֶּ֖ה לוּ־מָֽתְנוּ  
-**Full verse (English)**: All the Israelites railed against Moses and Aaron. “If only we had died in the land of Egypt,” the whole community shouted at them, “or if only we might die in this wilderness!”  
-
-*Hebrew phrase*: לוּ־מַ֙תְנוּ֙ בְּאֶ֣רֶץ מִצְרַ֔יִם א֛וֹ בַּמִּדְבָּ֥ר הַזֶּ֖ה לוּ־מָֽתְנוּ  
-*Explanation*: The Israelites express an exaggerated desire for death, indicating extreme despair and frustration with their current circumstances rather than a literal wish for immediate demise. This overstatement ...  
-*Target*: Israelites' suffering → human hardship → existential distress  
-*Vehicle*: desire for death → ultimate escape → extreme relief  
-*Ground*: extreme despair → profound regret → overwhelming misery  
-*Confidence*: 0.90  
-
-**Psalms 17:9** (idiom) - confidence: 0.90  
-*Figurative phrase*: my mortal enemies  
-
-**Full verse (Hebrew)**: מִפְּנֵ֣י רְ֭שָׁעִים ז֣וּ שַׁדּ֑וּנִי אֹיְבַ֥י בְּ֝נֶ֗פֶשׁ יַקִּ֥יפוּ עָלָֽי  
-**Full verse (English)**: from the wicked who despoil me,cOr “from my enemies who avidly.”my mortal enemies who-c encircle me.  
-
-*Hebrew phrase*: אֹיְבַ֥י בְּ֝נֶ֗פֶשׁ  
-*Explanation*: The phrase בְּנֶפֶשׁ (b'nefesh) functions as an idiom to intensify the nature of the enemies, indicating a deep-seated, life-threatening animosity rather than a literal 'soul' or 'life' being involved...  
-*Target*: enemies' animosity → hostility → human emotion  
-*Vehicle*: life-threatening intent → existential threat → intense desire  
-*Ground*: intensity of hatred → desire for destruction → existential threat  
-*Confidence*: 0.90  
-
-**Psalms 43:4** (metaphor) - confidence: 0.90  
-*Figurative phrase*: God, my delight, my joy  
-
-**Full verse (Hebrew)**: וְאָב֤וֹאָה&thinsp;׀ אֶל־מִזְבַּ֬ח אֱלֹהִ֗ים אֶל־אֵל֮ שִׂמְחַ֢ת גִּ֫ילִ֥י וְאוֹדְךָ֥ בְכִנּ֗וֹר אֱלֹהִ֥ים אֱלֹהָֽי  
-**Full verse (English)**: that I may come to the altar of God,God, my delight, my joy;that I may praise You with the lyre,O God, my God.  
-
-*Hebrew phrase*: אֵל שִׂמְחַת גִּילִי  
-*Explanation*: God is directly identified as the speaker's delight and joy, rather than merely the source of these emotions. This is a direct cross-domain comparison where an abstract emotional state is equated with...  
-*Target*: God → Divine Being → Deity  
-*Vehicle*: Delight and Joy → Profound Happiness → Positive Emotion  
-*Ground*: Ultimate Source of Happiness → Spiritual Fulfillment → Emotional Connection  
-*Confidence*: 0.90  
-
-*...and 9 more instances*
-
-**Usage breakdown**: soul's desire (2x), source of delight (2x), soul desiring (1x)
 
 ---
 
 ### Query 3
-**Filters**: Vehicle contains: transplanted  
-**Results**: 9  
+**Filters**: Vehicle contains: tree  
+**Results**: 100  
 
-**Core pattern**: planted saplings metaphor (1/9 instances, 11%)
+**Core pattern**: seed metaphor (9/100 instances, 9%)
 
 **Top 3 Most Relevant** (by confidence):
-1. ⭐ **Psalms 44:3** (confidence: 0.95) - The agricultural act of 'planting' is metaphorically applied to the establishment and settlement of ...
-2. ⭐ **Psalms 80:15** (confidence: 0.95) - The 'vine' is a well-established metaphor for Israel, God's chosen people, depicting them as a plant...
-3. ⭐ **Psalms 80:16** (confidence: 0.95) - The act of 'planting' is used metaphorically to describe God's act of establishing, creating, or bri...
+1. ⭐ **Deuteronomy 10:15** (confidence: 1.00) - The Hebrew word 'zera' (seed) is a common biblical idiom used metonymically (specifically synecdoche...
+2. ⭐ **Deuteronomy 29:17** (confidence: 1.00) - This is a metaphor comparing an individual or group whose heart turns away from God (the 'root' or '...
+3. ⭐ **Exodus 16:31** (confidence: 1.00) - The appearance of the manna is compared to white coriander seed using the particle 'כְּ' (like).
 
-#### All Instances (9 total):
+#### All Instances (100 total):
 
-**Exodus 15:17** (metaphor) - confidence: 0.90  
-*Figurative phrase*: and plant them  
+**Deuteronomy 7:13** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: your issue from the womb  
 
-**Full verse (Hebrew)**: תְּבִאֵ֗מוֹ וְתִטָּעֵ֙מוֹ֙ בְּהַ֣ר נַחֲלָֽתְךָ֔&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;מָכ֧וֹן לְשִׁבְתְּךָ֛ פָּעַ֖לְתָּ יְהֹוָ֑ה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;מִקְּדָ֕שׁ אֲדֹנָ֖י כּוֹנְנ֥וּ יָדֶֽיךָ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: You will bring them and plant them in Your own mountain,The place You made to dwell in, יהוה,The sanctuary, O my lord, which Your hands established.  
+**Full verse (Hebrew)**: וַאֲהֵ֣בְךָ֔ וּבֵרַכְךָ֖ וְהִרְבֶּ֑ךָ וּבֵרַ֣ךְ פְּרִֽי־בִטְנְךָ֣ וּפְרִֽי־אַ֠דְמָתֶ֠ךָ דְּגָ֨נְךָ֜ וְתִירֹשְׁךָ֣ וְיִצְהָרֶ֗ךָ שְׁגַר־אֲלָפֶ֙יךָ֙ וְעַשְׁתְּרֹ֣ת צֹאנֶ֔ךָ עַ֚ל הָֽאֲדָמָ֔ה אֲשֶׁר־נִשְׁבַּ֥ע לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: [God] will favor you and bless you and multiply you—blessing your issue from the womb and your produce from the soil, your new grain and wine and oil, the calving of your herd and the lambing of your flock, in the land sworn to your fathers to be assigned to you.  
 
-*Hebrew phrase*: וְתִטָּעֵ֙מוֹ֙  
-*Explanation*: The act of 'planting' is typically applied to vegetation to signify rooting, growth, and flourishing. When applied to people (Israel), it metaphorically describes their secure establishment, settlemen...  
-*Target*: Israelites → God's chosen people → human group  
-*Vehicle*: planted saplings → growing plants → vegetation  
-*Ground*: secure establishment → rootedness and growth → settlement and prosperity  
+*Hebrew phrase*: פְּרִֽי־בִטְנְךָ֣  
+*Explanation*: This phrase is a common biblical idiom for offspring or children. It also functions as a metaphor, comparing human children (the target) to the valuable, life-giving 'fruit' (the vehicle) of a plant, ...  
+*Target*: children → offspring → human descendants  
+*Vehicle*: fruit → plant product → natural yield  
+*Ground*: fertility → progeny → abundance  
+*Confidence*: 0.95  
+
+**Deuteronomy 10:15** (idiom, metonymy) - confidence: 1.00  
+*Figurative phrase*: their lineal descendants  
+
+**Full verse (Hebrew)**: רַ֧ק בַּאֲבֹתֶ֛יךָ חָשַׁ֥ק יְהֹוָ֖ה לְאַהֲבָ֣ה אוֹתָ֑ם וַיִּבְחַ֞ר בְּזַרְעָ֣ם אַחֲרֵיהֶ֗ם בָּכֶ֛ם מִכׇּל־הָעַמִּ֖ים כַּיּ֥וֹם הַזֶּֽה  
+**Full verse (English)**: Yet it was to your ancestors that יהוה was drawn out of love for them, so that you, their lineal descendants, were chosen from among all peoples—as is now the case.  
+
+*Hebrew phrase*: בְּזַרְעָ֣ם  
+*Explanation*: The Hebrew word 'zera' (seed) is a common biblical idiom used metonymically (specifically synecdoche) to refer to offspring or descendants, where the source of life represents the progeny itself....  
+*Target*: descendants → offspring → people  
+*Vehicle*: seed → plant reproductive part → biological element  
+*Ground*: progeny → lineage → continuation  
+*Confidence*: 1.00  
+
+**Deuteronomy 12:29** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: your God יהוה has cut down the nations  
+
+**Full verse (Hebrew)**: כִּֽי־יַכְרִית֩ יְהֹוָ֨ה אֱלֹהֶ֜יךָ אֶת־הַגּוֹיִ֗ם אֲשֶׁ֨ר אַתָּ֥ה בָא־שָׁ֛מָּה לָרֶ֥שֶׁת אוֹתָ֖ם מִפָּנֶ֑יךָ וְיָרַשְׁתָּ֣ אֹתָ֔ם וְיָשַׁבְתָּ֖ בְּאַרְצָֽם  
+**Full verse (English)**: When your God יהוה has cut down before you the nations that you are about to enter and dispossess, and you have dispossessed them and settled in their land,  
+
+*Hebrew phrase*: יַכְרִית֩ יְהֹוָ֨ה אֱלֹהֶ֜יךָ אֶת־הַגּוֹיִ֗ם  
+*Explanation*: The destruction of nations is metaphorically described as 'cutting down,' likening them to trees or plants that are felled. This is a common biblical idiom for complete eradication....  
+*Target*: nations → people groups → human entities  
+*Vehicle*: felled trees → cut vegetation → physical objects for destruction  
+*Ground*: complete destruction → decisive removal → vulnerability to power  
+*Confidence*: 0.95  
+
+**Deuteronomy 19:1** (metaphor) - confidence: 0.90  
+*Figurative phrase*: your God יהוה has cut down the nations  
+
+**Full verse (Hebrew)**: כִּֽי־יַכְרִ֞ית יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ אֶת־הַגּוֹיִ֔ם אֲשֶׁר֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ נֹתֵ֥ן לְךָ֖ אֶת־אַרְצָ֑ם וִֽירִשְׁתָּ֕ם וְיָשַׁבְתָּ֥ בְעָרֵיהֶ֖ם וּבְבָתֵּיהֶֽם  
+**Full verse (English)**: When your God יהוה has cut down the nations whose land your God יהוה is assigning to you, and you have dispossessed them and settled in their towns and homes,  
+
+*Hebrew phrase*: יַכְרִית יְהֹוָה אֱלֹהֶיךָ אֶת־הַגּוֹיִם  
+*Explanation*: The verb כרת (karat), meaning 'to cut' or 'to cut off,' is used idiomatically here to describe the complete destruction or annihilation of nations. It's a common biblical idiom for divine judgment and...  
+*Target*: nations → people group → political entity  
+*Vehicle*: something physically cut down → tree being felled → object being severed  
+*Ground*: complete destruction → utter annihilation → elimination of power/existence  
 *Confidence*: 0.90  
 
-**Numbers 24:6** (simile) - confidence: 0.90  
-*Figurative phrase*: Like aloes planted by יהוה  
+**Deuteronomy 28:4** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: your issue from the womb / fruit of your womb  
 
-**Full verse (Hebrew)**: כִּנְחָלִ֣ים נִטָּ֔יוּ כְּגַנֹּ֖ת עֲלֵ֣י נָהָ֑ר כַּאֲהָלִים֙ נָטַ֣ע יְהֹוָ֔ה כַּאֲרָזִ֖ים עֲלֵי־מָֽיִם  
-**Full verse (English)**: Like palm-groves that stretch out,Like gardens beside a river,Like aloes planted by יהוה,Like cedars beside the water;  
+**Full verse (Hebrew)**: בָּר֧וּךְ פְּרִֽי־בִטְנְךָ֛ וּפְרִ֥י אַדְמָתְךָ֖ וּפְרִ֣י בְהֶמְתֶּ֑ךָ שְׁגַ֥ר אֲלָפֶ֖יךָ וְעַשְׁתְּר֥וֹת צֹאנֶֽךָ  
+**Full verse (English)**: Blessed shall be your issue from the womb, your produce from the soil, and the offspring of your cattle, the calving of your herd and the lambing of your flock.  
 
-*Hebrew phrase*: כַּאֲהָלִים֙ נָטַ֣ע יְהֹוָ֔ה  
-*Explanation*: This is an explicit simile comparing Israel's divinely established and beautiful state to aloes (lign-aloes) planted by YHWH, using the comparative particle 'כְּ' (like/as)....  
-*Target*: Israel's encampment → Israel's prosperity → nation's state  
-*Vehicle*: divinely planted aloes → fragrant trees → natural landscape  
-*Ground*: divine favor → beauty → fragrance  
+*Hebrew phrase*: פְּרִֽי־בִטְנְךָ֛  
+*Explanation*: The Hebrew word 'פְּרִי' (p'ri), literally 'fruit' (of a plant), is used metaphorically to refer to human offspring. This is a common biblical idiom, likening children to the productive output of a pl...  
+*Target*: human offspring → children → human life  
+*Vehicle*: plant fruit → botanical product → natural growth  
+*Ground*: fertility, productivity → result of procreation → life's continuation  
+*Confidence*: 0.95  
+
+**Deuteronomy 28:4** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: the offspring of your cattle / fruit of your cattle  
+
+**Full verse (Hebrew)**: בָּר֧וּךְ פְּרִֽי־בִטְנְךָ֛ וּפְרִ֥י אַדְמָתְךָ֖ וּפְרִ֣י בְהֶמְתֶּ֑ךָ שְׁגַ֥ר אֲלָפֶ֖יךָ וְעַשְׁתְּר֥וֹת צֹאנֶֽךָ  
+**Full verse (English)**: Blessed shall be your issue from the womb, your produce from the soil, and the offspring of your cattle, the calving of your herd and the lambing of your flock.  
+
+*Hebrew phrase*: וּפְרִ֣י בְהֶמְתֶּ֑ךָ  
+*Explanation*: Similar to 'fruit of the womb,' the Hebrew word 'פְּרִֽי' (p'ri), literally 'fruit,' is used metaphorically to refer to the offspring of animals (cattle). This extends the same cross-domain comparison...  
+*Target*: animal offspring → livestock young → animal life  
+*Vehicle*: plant fruit → botanical product → natural growth  
+*Ground*: fertility, productivity → result of procreation → life's continuation  
+*Confidence*: 0.95  
+
+**Deuteronomy 28:11** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: in your issue from the womb / fruit of your womb  
+
+**Full verse (Hebrew)**: וְהוֹתִרְךָ֤ יְהֹוָה֙ לְטוֹבָ֔ה בִּפְרִ֧י בִטְנְךָ֛ וּבִפְרִ֥י בְהֶמְתְּךָ֖ וּבִפְרִ֣י אַדְמָתֶ֑ךָ עַ֚ל הָאֲדָמָ֔ה אֲשֶׁ֨ר נִשְׁבַּ֧ע יְהֹוָ֛ה לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: יהוה will give you abounding prosperity in your issue from the womb, the offspring of your cattle, and the produce of your soil in the land that יהוה swore to your fathers to assign to you.  
+
+*Hebrew phrase*: בִּפְרִ֧י בִטְנְךָ֛  
+*Explanation*: “Fruit of the womb” is a common biblical idiom and a metonymy (specifically synecdoche) referring to human offspring or children. The word 'fruit' (פְרִי) represents the product or yield of the womb, ...  
+*Target*: children → offspring → human progeny  
+*Vehicle*: fruit → produce → natural yield  
+*Ground*: product → result → increase  
+*Confidence*: 0.95  
+
+**Deuteronomy 28:11** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: and the offspring of your cattle / fruit of your cattle  
+
+**Full verse (Hebrew)**: וְהוֹתִרְךָ֤ יְהֹוָה֙ לְטוֹבָ֔ה בִּפְרִ֧י בִטְנְךָ֛ וּבִפְרִ֥י בְהֶמְתְּךָ֖ וּבִפְרִ֣י אַדְמָתֶ֑ךָ עַ֚ל הָאֲדָמָ֔ה אֲשֶׁ֨ר נִשְׁבַּ֧ע יְהֹוָ֛ה לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: יהוה will give you abounding prosperity in your issue from the womb, the offspring of your cattle, and the produce of your soil in the land that יהוה swore to your fathers to assign to you.  
+
+*Hebrew phrase*: וּבִפְרִ֥י בְהֶמְתְּךָ֖  
+*Explanation*: “Fruit of your cattle” is a common biblical idiom and a metonymy (specifically synecdoche) referring to the offspring or increase of livestock. The word 'fruit' (פְרִי) represents the product or yield...  
+*Target*: livestock offspring → animal progeny → herd increase  
+*Vehicle*: fruit → produce → natural yield  
+*Ground*: product → result → increase  
+*Confidence*: 0.95  
+
+**Deuteronomy 28:11** (idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: and the produce of your soil / fruit of your ground  
+
+**Full verse (Hebrew)**: וְהוֹתִרְךָ֤ יְהֹוָה֙ לְטוֹבָ֔ה בִּפְרִ֧י בִטְנְךָ֛ וּבִפְרִ֥י בְהֶמְתְּךָ֖ וּבִפְרִ֣י אַדְמָתֶ֑ךָ עַ֚ל הָאֲדָמָ֔ה אֲשֶׁ֨ר נִשְׁבַּ֧ע יְהֹוָ֛ה לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: יהוה will give you abounding prosperity in your issue from the womb, the offspring of your cattle, and the produce of your soil in the land that יהוה swore to your fathers to assign to you.  
+
+*Hebrew phrase*: וּבִפְרִ֣י אַדְמָתֶ֑ךָ  
+*Explanation*: “Fruit of your soil” is an idiom and a metonymy (specifically synecdoche) referring to the agricultural produce or yield of the land. While 'fruit' can be literal for some produce, in this parallel st...  
+*Target*: agricultural produce → crop yield → land's bounty  
+*Vehicle*: fruit → produce → natural yield  
+*Ground*: product → result → increase  
 *Confidence*: 0.90  
 
-**Psalms 1:3** (simile) - confidence: 0.90  
-*Figurative phrase*: He is like a tree planted beside streams of water, which yields its fruit in season, whose foliage never fades  
+**Deuteronomy 28:18** (idiom) - confidence: 0.90  
+*Figurative phrase*: your issue from the womb  
 
-**Full verse (Hebrew)**: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ&thinsp;׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ  
-**Full verse (English)**: He is like a tree planted beside streams of water,which yields its fruit in season,whose foliage never fades,and whatever bOr “he does prospers.”it produces thrives.-b  
+**Full verse (Hebrew)**: אָר֥וּר פְּרִֽי־בִטְנְךָ֖ וּפְרִ֣י אַדְמָתֶ֑ךָ שְׁגַ֥ר אֲלָפֶ֖יךָ וְעַשְׁתְּרֹ֥ת צֹאנֶֽךָ  
+**Full verse (English)**: Cursed shall be your issue from the womb and your produce from the soil, the calving of your herd and the lambing of your flock.  
 
-*Hebrew phrase*: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ&thinsp;׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל  
-*Explanation*: The righteous person ('he') is explicitly compared to a tree using the comparative particle 'כְּ' (like). This is an extended simile where the characteristics of the tree (yielding fruit, unfading fol...  
-*Target*: The righteous person → Human being → Person  
-*Vehicle*: A tree planted by streams → Plant → Natural element  
-*Ground*: Prosperity, stability, fruitfulness, enduring vitality → Well-being, success, resilience → Life condition, spiritual state  
+*Hebrew phrase*: פְּרִֽי־בִטְנְךָ֖  
+*Explanation*: “Fruit of the womb” is a common biblical idiom referring to human offspring, likening them to the produce or fruit of a plant. It is a conventionalized expression for children....  
+*Target*: human offspring → children → people  
+*Vehicle*: fruit of a plant → produce → botanical entities  
+*Ground*: result of growth → product of a source → biological outcome  
 *Confidence*: 0.90  
 
-**Psalms 44:3** (metaphor) - confidence: 0.95  
-*Figurative phrase*: You planted them  
+*...and 90 more instances*
 
-**Full verse (Hebrew)**: אַתָּ֤ה&thinsp;׀ יָדְךָ֡ גּוֹיִ֣ם ה֭וֹרַשְׁתָּ וַתִּטָּעֵ֑ם תָּרַ֥ע לְ֝אֻמִּ֗ים וַֽתְּשַׁלְּחֵֽם  
-**Full verse (English)**: With Your hand You planted them,displacing nations;You brought misfortune on peoples,and drove them out.  
-
-*Hebrew phrase*: וַתִּטָּעֵ֑ם  
-*Explanation*: The agricultural act of 'planting' is metaphorically applied to the establishment and settlement of a nation (Israel) in a land, implying secure rooting, growth, and flourishing....  
-*Target*: Establishment of Israel → National settlement → Divine provision  
-*Vehicle*: Planting a crop/tree → Agricultural act → Cultivation  
-*Ground*: firm establishment → growth and flourishing → secure rooting  
-*Confidence*: 0.95  
-
-**Psalms 80:15** (metaphor) - confidence: 0.95  
-*Figurative phrase*: that vine  
-
-**Full verse (Hebrew)**: אֱלֹהִ֣ים צְבָאוֹת֮ שֽׁ֫וּב־נָ֥א הַבֵּ֣ט מִשָּׁמַ֣יִם וּרְאֵ֑ה וּ֝פְקֹ֗ד גֶּ֣פֶן זֹֽאת  
-**Full verse (English)**: O God of hosts, turn again,look down from heaven and see;take note of that vine,  
-
-*Hebrew phrase*: גֶּ֣פֶן זֹֽאת  
-*Explanation*: The 'vine' is a well-established metaphor for Israel, God's chosen people, depicting them as a plant that God has planted, cultivated, and is responsible for, now in a state of distress and needing di...  
-*Target*: Israel → God's people → nation  
-*Vehicle*: vine → cultivated plant → flora  
-*Ground*: dependence on God → need for care/protection → potential for fruitfulness  
-*Confidence*: 0.95  
-
-**Psalms 80:16** (metaphor) - confidence: 0.95  
-*Figurative phrase*: planted  
-
-**Full verse (Hebrew)**: וְ֭כַנָּה אֲשֶׁר־נָטְעָ֣ה יְמִינֶ֑ךָ וְעַל־בֵּ֝֗ן אִמַּ֥צְתָּה לָּֽךְ  
-**Full verse (English)**: the stock planted by Your right hand,the stemaLit. “son.” you have taken as Your own.  
-
-*Hebrew phrase*: נָטְעָ֣ה  
-*Explanation*: The act of 'planting' is used metaphorically to describe God's act of establishing, creating, or bringing into being the 'stock' (people/group). It extends the plant metaphor....  
-*Target*: divine establishment → God's creation → founding of a people  
-*Vehicle*: planting → agricultural act → cultivation  
-*Ground*: initiation → nurturing → care  
-*Confidence*: 0.95  
-
-**Psalms 94:9** (metaphor) - confidence: 0.90  
-*Figurative phrase*: He who implants the ear  
-
-**Full verse (Hebrew)**: הֲנֹ֣טַֽע אֹ֭זֶן הֲלֹ֣א יִשְׁמָ֑ע אִֽם־יֹ֥צֵֽר עַ֝֗יִן הֲלֹ֣א יַבִּֽיט  
-**Full verse (English)**: Shall He who implants the ear not hear,He who forms the eye not see?  
-
-*Hebrew phrase*: הֲנֹ֣טַֽע אֹ֭זֶן  
-*Explanation*: The verb נָטַע (nata', 'to plant') is typically used for vegetation or for establishing people/nations. Its application to the creation of a physical organ like the ear is a cross-domain comparison, m...  
-*Target*: God's act of creating the ear → divine creation → divine action  
-*Vehicle*: planting a seed/tree → establishing a foundation → agricultural process  
-*Ground*: deliberate creation → intentional design → foundational establishment  
-*Confidence*: 0.90  
-
-**Psalms 97:11** (metaphor) - confidence: 0.95  
-*Figurative phrase*: Light is sown  
-
-**Full verse (Hebrew)**: א֭וֹר זָרֻ֣עַ לַצַּדִּ֑יק וּֽלְיִשְׁרֵי־לֵ֥ב שִׂמְחָֽה  
-**Full verse (English)**: Light is sown for the righteous,radiancebOthers “joy.” for the upright.  
-
-*Hebrew phrase*: א֭וֹר זָרֻ֣עַ  
-*Explanation*: The verb 'sown' (זָרֻ֣עַ) is typically used for planting seeds in agriculture, implying future growth and harvest. Here, it is applied to 'light' (א֭וֹר), which cannot literally be sown. This metaphor...  
-*Target*: Divine favor → Blessing → Spiritual prosperity  
-*Vehicle*: Sown seeds → Agricultural planting → Cultivation process  
-*Ground*: Future emergence → Promised provision → Eventual fruition  
-*Confidence*: 0.95  
-
-**Psalms 126:5** (metaphor, metonymy) - confidence: 0.95  
-*Figurative phrase*: They who sow in tears  
-
-**Full verse (Hebrew)**: הַזֹּרְעִ֥ים בְּדִמְעָ֗ה בְּרִנָּ֥ה יִקְצֹֽרוּ  
-**Full verse (English)**: They who sow in tearsshall reap with songs of joy.  
-
-*Hebrew phrase*: הַזֹּרְעִ֥ים בְּדִמְעָ֗ה  
-*Explanation*: The act of 'sowing' is a metaphor for undertaking a difficult or painful endeavor, while 'tears' is a metonymy for the sorrow and suffering associated with that endeavor....  
-*Target*: human effort → hardship → life experience  
-*Vehicle*: agricultural sowing → planting seeds → farming activity  
-*Ground*: initial effort → investment of labor → painful beginning  
-*Confidence*: 0.95  
+**Usage breakdown**: seed (9x), fruit (7x), blossoming plant (4x)
 
 ---
 
 ### Query 4
-**Filters**: Vehicle contains: channels  
-**Results**: 7  
+**Filters**: Vehicle contains: streams  
+**Results**: 14  
 
-**Core pattern**: flowing source metaphor (1/7 instances, 14%)
+**Core pattern**: flowing river of milk and honey metaphor (2/14 instances, 14%)
 
 **Top 3 Most Relevant** (by confidence):
-1. ⭐ **Psalms 36:9** (confidence: 0.95) - This phrase employs the image of a life-giving, delightful stream to metaphorically describe the spi...
-2. ⭐ **Deuteronomy 6:3** (confidence: 0.90) - This phrase is a metaphor and an idiom describing the extreme fertility, abundance, and prosperity o...
-3. ⭐ **Genesis 12:3** (confidence: 0.90) - This phrase is a covenantal idiom where Abraham (the 'you') functions as the metonymic source, chann...
+1. ⭐ **Deuteronomy 31:20** (confidence: 1.00) - This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and pro...
+2. ⭐ **Deuteronomy 11:9** (confidence: 0.95) - This is a classic biblical idiom and metaphor describing a land of extraordinary fertility, prosperi...
+3. ⭐ **Exodus 3:8** (confidence: 0.95) - This is a metaphor and a well-known biblical idiom describing the extraordinary fertility, abundance...
 
-#### All Instances (7 total):
+#### All Instances (14 total):
 
 **Deuteronomy 6:3** (metaphor, idiom) - confidence: 0.90  
 *Figurative phrase*: a land flowing with milk and honey  
@@ -1064,6 +943,58 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: abundance → fertility → prosperity  
 *Confidence*: 0.90  
 
+**Deuteronomy 11:9** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וּלְמַ֨עַן תַּאֲרִ֤יכוּ יָמִים֙ עַל־הָ֣אֲדָמָ֔ה אֲשֶׁר֩ נִשְׁבַּ֨ע יְהֹוָ֧ה לַאֲבֹתֵיכֶ֛ם לָתֵ֥ת לָהֶ֖ם וּלְזַרְעָ֑ם אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: and that you may long endure upon the soil that יהוה swore to your fathers to assign to them and to their heirs, a land flowing with milk and honey.  
+
+*Hebrew phrase*: אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ  
+*Explanation*: This is a classic biblical idiom and metaphor describing a land of extraordinary fertility, prosperity, and abundance, where rich sustenance is readily available. Lands do not literally flow with milk...  
+*Target*: promised land → fertile territory → geographical region  
+*Vehicle*: flowing river of milk and honey → abundant source of sustenance → natural bounty  
+*Ground*: fertility → abundance → prosperity  
+*Confidence*: 0.95  
+
+**Deuteronomy 31:20** (metaphor, idiom) - confidence: 1.00  
+*Figurative phrase*: flowing with milk and honey  
+
+**Full verse (Hebrew)**: כִּֽי־אֲבִיאֶ֜נּוּ אֶֽל־הָאֲדָמָ֣ה&thinsp;׀ אֲשֶׁר־נִשְׁבַּ֣עְתִּי לַאֲבֹתָ֗יו זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ וְאָכַ֥ל וְשָׂבַ֖ע וְדָשֵׁ֑ן וּפָנָ֞ה אֶל־אֱלֹהִ֤ים אֲחֵרִים֙ וַעֲבָד֔וּם וְנִ֣אֲצ֔וּנִי וְהֵפֵ֖ר אֶת־בְּרִיתִֽי  
+**Full verse (English)**: When I bring them into the land flowing with milk and honey that I promised on oath to their fathers, and they eat their fill and grow fat and turn to other gods and serve them, spurning Me and breaking My covenant,  
+
+*Hebrew phrase*: זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ  
+*Explanation*: This is a well-known biblical idiom describing a land of extraordinary fertility, abundance, and prosperity. The land is not literally a liquid conduit for milk and honey; rather, it is metaphorically...  
+*Target*: land of Israel → promised land → geographical region  
+*Vehicle*: flowing river → abundant liquid source → natural phenomenon  
+*Ground*: fertility → abundance → prosperity  
+*Confidence*: 1.00  
+
+**Exodus 3:8** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: וָאֵרֵ֞ד לְהַצִּיל֣וֹ&thinsp;׀ מִיַּ֣ד מִצְרַ֗יִם וּֽלְהַעֲלֹתוֹ֮ מִן־הָאָ֣רֶץ הַהִוא֒ אֶל־אֶ֤רֶץ טוֹבָה֙ וּרְחָבָ֔ה אֶל־אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ אֶל־מְק֤וֹם הַֽכְּנַעֲנִי֙ וְהַ֣חִתִּ֔י וְהָֽאֱמֹרִי֙ וְהַפְּרִזִּ֔י וְהַחִוִּ֖י וְהַיְבוּסִֽי  
+**Full verse (English)**: I have come down to rescue them from the Egyptians and to bring them out of that land to a good and spacious land, a land flowing with milk and honey, the region of the Canaanites, the Hittites, the Amorites, the Perizzites, the Hivites, and the Jebusites.  
+
+*Hebrew phrase*: אֶרֶץ זָבַת חָלָב וּדְבָשׁ  
+*Explanation*: This is a metaphor and a well-known biblical idiom describing the extraordinary fertility, abundance, and prosperity of the promised land. The land does not literally flow with these substances, but p...  
+*Target*: Promised Land's fertility → national prosperity → divine blessing  
+*Vehicle*: flowing river → abundant liquid source → natural phenomenon  
+*Ground*: abundance → richness → sustenance  
+*Confidence*: 0.95  
+
+**Exodus 33:3** (idiom, hyperbole) - confidence: 0.90  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: אֶל־אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ כִּי֩ לֹ֨א אֶֽעֱלֶ֜ה בְּקִרְבְּךָ֗ כִּ֤י עַם־קְשֵׁה־עֹ֙רֶף֙ אַ֔תָּה פֶּן־אֲכֶלְךָ֖ בַּדָּֽרֶךְ  
+**Full verse (English)**: a land flowing with milk and honey. But I will not go in your midst, since you are a stiffnecked people, lest I destroy you on the way.”  
+
+*Hebrew phrase*: אֶל־אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ  
+*Explanation*: This is a well-known biblical idiom and hyperbole describing a land of extreme fertility, abundance, and prosperity. A land does not literally 'flow' with milk and honey....  
+*Target*: Promised Land → fertile territory → geographical feature  
+*Vehicle*: flowing river of milk and honey → abundant liquid source → natural phenomenon  
+*Ground*: fertility → abundance → prosperity  
+*Confidence*: 0.90  
+
 **Genesis 12:3** (idiom, metonymy) - confidence: 0.90  
 *Figurative phrase*: Shall bless themselves by you  
 
@@ -1075,6 +1006,19 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Target*: universal blessing → divine favor → human prosperity  
 *Vehicle*: Abraham → covenantal figure → human channel  
 *Ground*: source of blessing → exemplar of divine favor → mediator of prosperity  
+*Confidence*: 0.90  
+
+**Numbers 16:13** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: a land flowing with milk and honey  
+
+**Full verse (Hebrew)**: הַמְעַ֗ט כִּ֤י הֶֽעֱלִיתָ֙נוּ֙ מֵאֶ֨רֶץ זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ לַהֲמִיתֵ֖נוּ בַּמִּדְבָּ֑ר כִּֽי־תִשְׂתָּרֵ֥ר עָלֵ֖ינוּ גַּם־הִשְׂתָּרֵֽר  
+**Full verse (English)**: Is it not enough that you brought us from a land flowing with milk and honey to have us die in the wilderness, that you would also lord it over us?  
+
+*Hebrew phrase*: אֶ֨רֶץ זָבַ֤ת חָלָב֙ וּדְבַ֔שׁ  
+*Explanation*: This phrase is a metaphor and idiom describing a land of extraordinary fertility, abundance, and desirability. The land is implicitly compared to a source that 'flows' with rich, sweet, and nourishing...  
+*Target*: Land of Canaan → Promised Land → Fertile territory  
+*Vehicle*: Flowing river of milk and honey → Abundant liquid source → Source of sustenance and wealth  
+*Ground*: Exceptional fertility and abundance → Desirability and richness → Bountiful provision  
 *Confidence*: 0.90  
 
 **Psalms 1:3** (simile) - confidence: 0.90  
@@ -1103,98 +1047,318 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: refreshment → life-giving → abundance  
 *Confidence*: 0.95  
 
-**Psalms 77:3** (metaphor) - confidence: 0.90  
-*Figurative phrase*: with my hand [uplifted]; [my eyes] flow  
+**Psalms 46:5** (metaphor) - confidence: 0.90  
+*Figurative phrase*: a river whose streams  
 
-**Full verse (Hebrew)**: בְּי֥וֹם צָרָתִי֮ אֲדֹנָ֢י דָּ֫רָ֥שְׁתִּי יָדִ֤י&thinsp;׀ לַ֣יְלָה נִ֭גְּרָה וְלֹ֣א תָפ֑וּג מֵאֲנָ֖ה הִנָּחֵ֣ם נַפְשִֽׁי  
-**Full verse (English)**: In my time of distress I turn to the Lord,aMeaning of Heb. uncertain.with my hand [uplifted];[my eyes] flow all night without respite;-aI will not be comforted.  
+**Full verse (Hebrew)**: נָהָ֗ר פְּלָגָ֗יו יְשַׂמְּח֥וּ עִיר־אֱלֹהִ֑ים קְ֝דֹ֗שׁ מִשְׁכְּנֵ֥י עֶלְיֽוֹן  
+**Full verse (English)**: There is a river whose streams gladden God’s city,the holy dwelling-place of the Most High.  
 
-*Hebrew phrase*: יָדִ֤י ... נִ֭גְּרָה  
-*Explanation*: This is a metaphor where the psalmist's hand (יָדִי), representing his unceasing prayer, is described with a verb for liquid motion, 'flowed' or 'was poured out' (נִגְּרָה). This likens the constant a...  
-*Target*: psalmist's prayer → act of supplication → human action  
-*Vehicle*: flowing water → stream → liquid motion  
-*Ground*: unceasing → continuous → relentless  
+*Hebrew phrase*: נָהָ֗ר פְּלָגָ֗יו  
+*Explanation*: The 'river' is not a literal physical river in Jerusalem but a metaphor for God's abundant provision, blessing, peace, or presence, which brings spiritual joy and sustenance to His people....  
+*Target*: Divine blessing → God's provision → Spiritual sustenance  
+*Vehicle*: Life-giving river → Abundant water source → Natural phenomenon  
+*Ground*: Abundance → Sustenance → Joy-bringing  
 *Confidence*: 0.90  
 
-**Psalms 105:41** (simile) - confidence: 0.90  
-*Figurative phrase*: it flowed as a stream in the parched land  
+*...and 4 more instances*
 
-**Full verse (Hebrew)**: פָּ֣תַח צ֭וּר וַיָּז֣וּבוּ מָ֑יִם הָ֝לְכ֗וּ בַּצִּיּ֥וֹת נָהָֽר  
-**Full verse (English)**: He opened a rock so that water gushed forth;it flowed as a stream in the parched land.  
-
-*Hebrew phrase*: הָ֝לְכ֗וּ בַּצִּיּ֥וֹת נָהָֽר  
-*Explanation*: The miraculously flowing water is compared to a stream/river, highlighting its abundance and life-giving quality in a desolate land....  
-*Target*: miraculous water → divine provision → natural phenomenon  
-*Vehicle*: stream → river → natural watercourse  
-*Ground*: abundant flow → life-giving sustenance → provision  
-*Confidence*: 0.90  
-
-**Psalms 119:136** (metaphor, hyperbole) - confidence: 0.90  
-*Figurative phrase*: My eyes shed streams of water  
-
-**Full verse (Hebrew)**: פַּלְגֵי־מַ֭יִם יָרְד֣וּ עֵינָ֑י עַ֝֗ל לֹא־שָׁמְר֥וּ תוֹרָתֶֽךָ&nbsp;{פ}  
-**Full verse (English)**: My eyes shed streams of waterbecause men do not obey Your teaching.  
-
-*Hebrew phrase*: פַּלְגֵי־מַ֭יִם יָרְד֣וּ עֵינָ֑י  
-*Explanation*: The phrase uses hyperbole and metaphor to describe an extremely large and continuous flow of tears. The tears are exaggeratedly compared to 'streams of water' to emphasize the profound depth of sorrow...  
-*Target*: tears → weeping → human emotion  
-*Vehicle*: streams of water → flowing water → natural phenomena  
-*Ground*: abundance → intensity → continuous flow  
-*Confidence*: 0.90  
+**Usage breakdown**: flowing river of milk and honey (2x), flowing river (2x), flowing source (1x)
 
 ---
 
 ### Query 5
-**Filters**: Vehicle contains: chaff  
-**Results**: 15  
+**Filters**: Vehicle contains: fruit  
+**Results**: 25  
 
-**Core pattern**: dross metaphor (2/15 instances, 13%)
+**Core pattern**: fruit metaphor (10/25 instances, 40%)
 
 **Top 3 Most Relevant** (by confidence):
-1. ⭐ **Deuteronomy 24:7** (confidence: 1.00) - This is a recurring legal idiom or set phrase in Deuteronomy. It contains a metaphor where 'evil' (a...
-2. ⭐ **Psalms 1:4** (confidence: 1.00) - The wicked are explicitly compared to chaff, using the comparative particle 'כַּ' (like/as), highlig...
-3. ⭐ **Psalms 35:5** (confidence: 1.00) - The implied subject (adversaries or the wicked) is explicitly compared to chaff, which is light, wor...
+1. ⭐ **Genesis 30:2** (confidence: 1.00) - This is a common Hebrew idiom for offspring or children. It compares children to the 'fruit' or prod...
+2. ⭐ **Psalms 58:12** (confidence: 1.00) - The Hebrew word 'פְּרִ֣י' (fruit) is used metaphorically to represent the 'reward' or 'outcome' that...
+3. ⭐ **Deuteronomy 7:13** (confidence: 0.95) - This phrase is a common biblical idiom for offspring or children. It also functions as a metaphor, c...
 
-#### All Instances (15 total):
+#### All Instances (25 total):
 
-**Deuteronomy 17:7** (metaphor) - confidence: 0.95  
-*Figurative phrase*: Thus you will sweep out evil from your midst.  
+**Deuteronomy 7:13** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: your issue from the womb  
 
-**Full verse (Hebrew)**: יַ֣ד הָעֵדִ֞ים תִּֽהְיֶה־בּ֤וֹ בָרִאשֹׁנָה֙ לַהֲמִית֔וֹ וְיַ֥ד כׇּל־הָעָ֖ם בָּאַחֲרֹנָ֑ה וּבִֽעַרְתָּ֥ הָרָ֖ע מִקִּרְבֶּֽךָ&nbsp;{פ}  
-**Full verse (English)**: Let the hands of the witnesses be the first to put [the condemned] to death, followed by the hands of the rest of the people. Thus you will sweep out evil from your midst.  
+**Full verse (Hebrew)**: וַאֲהֵ֣בְךָ֔ וּבֵרַכְךָ֖ וְהִרְבֶּ֑ךָ וּבֵרַ֣ךְ פְּרִֽי־בִטְנְךָ֣ וּפְרִֽי־אַ֠דְמָתֶ֠ךָ דְּגָ֨נְךָ֜ וְתִירֹשְׁךָ֣ וְיִצְהָרֶ֗ךָ שְׁגַר־אֲלָפֶ֙יךָ֙ וְעַשְׁתְּרֹ֣ת צֹאנֶ֔ךָ עַ֚ל הָֽאֲדָמָ֔ה אֲשֶׁר־נִשְׁבַּ֥ע לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: [God] will favor you and bless you and multiply you—blessing your issue from the womb and your produce from the soil, your new grain and wine and oil, the calving of your herd and the lambing of your flock, in the land sworn to your fathers to be assigned to you.  
 
-*Hebrew phrase*: וּבִֽעַרְתָּ֥ הָרָ֖ע מִקִּרְבֶּֽךָ  
-*Explanation*: The abstract concept of 'evil' (or the evil person/influence) is metaphorically treated as physical refuse or dirt that needs to be 'swept out' or removed from a physical space (the community). The co...  
-*Target*: evil → wickedness → moral corruption  
-*Vehicle*: dirt → refuse → unwanted debris  
-*Ground*: removal → purification → elimination of undesirable elements  
+*Hebrew phrase*: פְּרִֽי־בִטְנְךָ֣  
+*Explanation*: This phrase is a common biblical idiom for offspring or children. It also functions as a metaphor, comparing human children (the target) to the valuable, life-giving 'fruit' (the vehicle) of a plant, ...  
+*Target*: children → offspring → human descendants  
+*Vehicle*: fruit → plant product → natural yield  
+*Ground*: fertility → progeny → abundance  
 *Confidence*: 0.95  
 
-**Deuteronomy 21:21** (metaphor) - confidence: 0.95  
-*Figurative phrase*: you will sweep out evil from your midst  
+**Deuteronomy 21:17** (metaphor) - confidence: 0.90  
+*Figurative phrase*: first fruit of his vigor  
 
-**Full verse (Hebrew)**: וּ֠רְגָמֻ֠הוּ כׇּל־אַנְשֵׁ֨י עִיר֤וֹ בָֽאֲבָנִים֙ וָמֵ֔ת וּבִֽעַרְתָּ֥ הָרָ֖ע מִקִּרְבֶּ֑ךָ וְכׇל־יִשְׂרָאֵ֖ל יִשְׁמְע֥וּ וְיִרָֽאוּ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: Thereupon his town’s council*town’s council Lit. “participants whose involvement defines the depicted situation of the town.” Taking Heb. ’anshe ha-‘ir as a technical term; NJPS “men of the town,” trad. “men of the city.” See the Dictionary under ’ish. shall stone him to death. Thus you will sweep out evil from your midst: all Israel will hear and be afraid.  
+**Full verse (Hebrew)**: כִּי֩ אֶת־הַבְּכֹ֨ר בֶּן־הַשְּׂנוּאָ֜ה יַכִּ֗יר לָ֤תֶת לוֹ֙ פִּ֣י שְׁנַ֔יִם בְּכֹ֥ל אֲשֶׁר־יִמָּצֵ֖א ל֑וֹ כִּי־הוּא֙ רֵאשִׁ֣ית אֹנ֔וֹ ל֖וֹ מִשְׁפַּ֥ט הַבְּכֹרָֽה&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: Instead, he must accept the first-born, the son of the unloved one, and allot to him a double portion*double portion Lit. two-thirds. of all he possesses; since he is the first fruit of his vigor, the birthright is his due.  
 
-*Hebrew phrase*: וּבִעַרְתָּ הָרָע מִקִּרְבֶּךָ  
-*Explanation*: The abstract concept of 'evil' is metaphorically treated as a tangible substance or entity that can be physically 'swept out' or purged from the community, which is represented as a physical space ('y...  
-*Target*: evil → moral corruption → abstract concept  
-*Vehicle*: refuse → physical impurity → tangible substance  
-*Ground*: thorough removal → purification → elimination of undesirable elements  
+*Hebrew phrase*: רֵאשִׁ֣ית אֹנ֔וֹ  
+*Explanation*: The firstborn son is metaphorically described as the 'first fruit' or 'first yield' of his father's strength or procreative power. This likens the son to the initial and most significant produce of a ...  
+*Target*: firstborn son → human offspring → person  
+*Vehicle*: first fruit → first yield → agricultural produce  
+*Ground*: initial product → primary result → origin  
+*Confidence*: 0.90  
+
+**Deuteronomy 28:4** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: your issue from the womb / fruit of your womb  
+
+**Full verse (Hebrew)**: בָּר֧וּךְ פְּרִֽי־בִטְנְךָ֛ וּפְרִ֥י אַדְמָתְךָ֖ וּפְרִ֣י בְהֶמְתֶּ֑ךָ שְׁגַ֥ר אֲלָפֶ֖יךָ וְעַשְׁתְּר֥וֹת צֹאנֶֽךָ  
+**Full verse (English)**: Blessed shall be your issue from the womb, your produce from the soil, and the offspring of your cattle, the calving of your herd and the lambing of your flock.  
+
+*Hebrew phrase*: פְּרִֽי־בִטְנְךָ֛  
+*Explanation*: The Hebrew word 'פְּרִי' (p'ri), literally 'fruit' (of a plant), is used metaphorically to refer to human offspring. This is a common biblical idiom, likening children to the productive output of a pl...  
+*Target*: human offspring → children → human life  
+*Vehicle*: plant fruit → botanical product → natural growth  
+*Ground*: fertility, productivity → result of procreation → life's continuation  
 *Confidence*: 0.95  
 
-**Deuteronomy 24:7** (metaphor, idiom, metonymy) - confidence: 1.00  
-*Figurative phrase*: thus you will sweep out evil from your midst  
+**Deuteronomy 28:4** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: the offspring of your cattle / fruit of your cattle  
 
-**Full verse (Hebrew)**: כִּי־יִמָּצֵ֣א אִ֗ישׁ גֹּנֵ֨ב נֶ֤פֶשׁ מֵאֶחָיו֙ מִבְּנֵ֣י יִשְׂרָאֵ֔ל וְהִתְעַמֶּר־בּ֖וֹ וּמְכָר֑וֹ וּמֵת֙ הַגַּנָּ֣ב הַה֔וּא וּבִֽעַרְתָּ֥ הָרָ֖ע מִקִּרְבֶּֽךָ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: If a party is found to have kidnapped—and then enslaved or sold—a fellow Israelite, that kidnapper shall die; thus you will sweep out evil from your midst.  
+**Full verse (Hebrew)**: בָּר֧וּךְ פְּרִֽי־בִטְנְךָ֛ וּפְרִ֥י אַדְמָתְךָ֖ וּפְרִ֣י בְהֶמְתֶּ֑ךָ שְׁגַ֥ר אֲלָפֶ֖יךָ וְעַשְׁתְּר֥וֹת צֹאנֶֽךָ  
+**Full verse (English)**: Blessed shall be your issue from the womb, your produce from the soil, and the offspring of your cattle, the calving of your herd and the lambing of your flock.  
 
-*Hebrew phrase*: וּבִֽעַרְתָּ֥ הָרָ֖ע מִקִּרְבֶּֽךָ  
-*Explanation*: This is a recurring legal idiom or set phrase in Deuteronomy. It contains a metaphor where 'evil' (an abstract concept) is treated as a physical entity that can be 'swept out' or 'burned out' (from th...  
-*Target*: eradication of evil → community purification → moral cleansing  
-*Vehicle*: sweeping out refuse → burning away impurity → physical removal  
-*Ground*: complete removal → thorough cleansing → elimination of corruption  
-*Confidence*: 1.00  
+*Hebrew phrase*: וּפְרִ֣י בְהֶמְתֶּ֑ךָ  
+*Explanation*: Similar to 'fruit of the womb,' the Hebrew word 'פְּרִֽי' (p'ri), literally 'fruit,' is used metaphorically to refer to the offspring of animals (cattle). This extends the same cross-domain comparison...  
+*Target*: animal offspring → livestock young → animal life  
+*Vehicle*: plant fruit → botanical product → natural growth  
+*Ground*: fertility, productivity → result of procreation → life's continuation  
+*Confidence*: 0.95  
+
+**Deuteronomy 28:11** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: in your issue from the womb / fruit of your womb  
+
+**Full verse (Hebrew)**: וְהוֹתִרְךָ֤ יְהֹוָה֙ לְטוֹבָ֔ה בִּפְרִ֧י בִטְנְךָ֛ וּבִפְרִ֥י בְהֶמְתְּךָ֖ וּבִפְרִ֣י אַדְמָתֶ֑ךָ עַ֚ל הָאֲדָמָ֔ה אֲשֶׁ֨ר נִשְׁבַּ֧ע יְהֹוָ֛ה לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: יהוה will give you abounding prosperity in your issue from the womb, the offspring of your cattle, and the produce of your soil in the land that יהוה swore to your fathers to assign to you.  
+
+*Hebrew phrase*: בִּפְרִ֧י בִטְנְךָ֛  
+*Explanation*: “Fruit of the womb” is a common biblical idiom and a metonymy (specifically synecdoche) referring to human offspring or children. The word 'fruit' (פְרִי) represents the product or yield of the womb, ...  
+*Target*: children → offspring → human progeny  
+*Vehicle*: fruit → produce → natural yield  
+*Ground*: product → result → increase  
+*Confidence*: 0.95  
+
+**Deuteronomy 28:11** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: and the offspring of your cattle / fruit of your cattle  
+
+**Full verse (Hebrew)**: וְהוֹתִרְךָ֤ יְהֹוָה֙ לְטוֹבָ֔ה בִּפְרִ֧י בִטְנְךָ֛ וּבִפְרִ֥י בְהֶמְתְּךָ֖ וּבִפְרִ֣י אַדְמָתֶ֑ךָ עַ֚ל הָאֲדָמָ֔ה אֲשֶׁ֨ר נִשְׁבַּ֧ע יְהֹוָ֛ה לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: יהוה will give you abounding prosperity in your issue from the womb, the offspring of your cattle, and the produce of your soil in the land that יהוה swore to your fathers to assign to you.  
+
+*Hebrew phrase*: וּבִפְרִ֥י בְהֶמְתְּךָ֖  
+*Explanation*: “Fruit of your cattle” is a common biblical idiom and a metonymy (specifically synecdoche) referring to the offspring or increase of livestock. The word 'fruit' (פְרִי) represents the product or yield...  
+*Target*: livestock offspring → animal progeny → herd increase  
+*Vehicle*: fruit → produce → natural yield  
+*Ground*: product → result → increase  
+*Confidence*: 0.95  
+
+**Deuteronomy 28:11** (idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: and the produce of your soil / fruit of your ground  
+
+**Full verse (Hebrew)**: וְהוֹתִרְךָ֤ יְהֹוָה֙ לְטוֹבָ֔ה בִּפְרִ֧י בִטְנְךָ֛ וּבִפְרִ֥י בְהֶמְתְּךָ֖ וּבִפְרִ֣י אַדְמָתֶ֑ךָ עַ֚ל הָאֲדָמָ֔ה אֲשֶׁ֨ר נִשְׁבַּ֧ע יְהֹוָ֛ה לַאֲבֹתֶ֖יךָ לָ֥תֶת לָֽךְ  
+**Full verse (English)**: יהוה will give you abounding prosperity in your issue from the womb, the offspring of your cattle, and the produce of your soil in the land that יהוה swore to your fathers to assign to you.  
+
+*Hebrew phrase*: וּבִפְרִ֣י אַדְמָתֶ֑ךָ  
+*Explanation*: “Fruit of your soil” is an idiom and a metonymy (specifically synecdoche) referring to the agricultural produce or yield of the land. While 'fruit' can be literal for some produce, in this parallel st...  
+*Target*: agricultural produce → crop yield → land's bounty  
+*Vehicle*: fruit → produce → natural yield  
+*Ground*: product → result → increase  
+*Confidence*: 0.90  
+
+**Deuteronomy 28:18** (idiom) - confidence: 0.90  
+*Figurative phrase*: your issue from the womb  
+
+**Full verse (Hebrew)**: אָר֥וּר פְּרִֽי־בִטְנְךָ֖ וּפְרִ֣י אַדְמָתֶ֑ךָ שְׁגַ֥ר אֲלָפֶ֖יךָ וְעַשְׁתְּרֹ֥ת צֹאנֶֽךָ  
+**Full verse (English)**: Cursed shall be your issue from the womb and your produce from the soil, the calving of your herd and the lambing of your flock.  
+
+*Hebrew phrase*: פְּרִֽי־בִטְנְךָ֖  
+*Explanation*: “Fruit of the womb” is a common biblical idiom referring to human offspring, likening them to the produce or fruit of a plant. It is a conventionalized expression for children....  
+*Target*: human offspring → children → people  
+*Vehicle*: fruit of a plant → produce → botanical entities  
+*Ground*: result of growth → product of a source → biological outcome  
+*Confidence*: 0.90  
+
+**Deuteronomy 28:53** (idiom) - confidence: 0.90  
+*Figurative phrase*: your own issue / fruit of your womb  
+
+**Full verse (Hebrew)**: וְאָכַלְתָּ֣ פְרִֽי־בִטְנְךָ֗ בְּשַׂ֤ר בָּנֶ֙יךָ֙ וּבְנֹתֶ֔יךָ אֲשֶׁ֥ר נָתַן־לְךָ֖ יְהֹוָ֣ה אֱלֹהֶ֑יךָ בְּמָצוֹר֙ וּבְמָצ֔וֹק אֲשֶׁר־יָצִ֥יק לְךָ֖ אֹיְבֶֽךָ  
+**Full verse (English)**: you shall eat your own issue, the flesh of your sons and daughters that your God יהוה has assigned to you, because of the desperate straits to which your enemy shall reduce you.  
+
+*Hebrew phrase*: פְרִֽי־בִטְנְךָ֗  
+*Explanation*: This is a common biblical idiom for 'offspring' or 'children.' While 'fruit' can be metaphorical, in this fixed phrase, it functions as a conventionalized expression for the biological product of the ...  
+*Target*: offspring → children → human family  
+*Vehicle*: fruit → produce → natural product  
+*Ground*: product → result → outcome  
+*Confidence*: 0.90  
+
+**Deuteronomy 30:9** (metaphor, idiom) - confidence: 0.95  
+*Figurative phrase*: your issue from the womb / fruit of your womb  
+
+**Full verse (Hebrew)**: וְהוֹתִֽירְךָ֩ יְהֹוָ֨ה אֱלֹהֶ֜יךָ בְּכֹ֣ל&thinsp;׀ מַעֲשֵׂ֣ה יָדֶ֗ךָ בִּפְרִ֨י בִטְנְךָ֜ וּבִפְרִ֧י בְהֶמְתְּךָ֛ וּבִפְרִ֥י אַדְמָתְךָ֖ לְטֹבָ֑ה כִּ֣י&thinsp;׀ יָשׁ֣וּב יְהֹוָ֗ה לָשׂ֤וּשׂ עָלֶ֙יךָ֙ לְט֔וֹב כַּאֲשֶׁר־שָׂ֖שׂ עַל־אֲבֹתֶֽיךָ  
+**Full verse (English)**: And your God יהוה will grant you abounding prosperity in all your undertakings, in your issue from the womb, the offspring of your cattle, and your produce from the soil. For יהוה will again delight in your well-being as in that of your ancestors,  
+
+*Hebrew phrase*: בִּפְרִ֨י בִטְנְךָ֜  
+*Explanation*: This is a common biblical idiom that uses 'fruit' as a metaphor for human offspring, likening children to the produce of a plant....  
+*Target*: children → offspring → human progeny  
+*Vehicle*: fruit → produce → plant yield  
+*Ground*: fertility → growth → result of life  
+*Confidence*: 0.95  
+
+*...and 15 more instances*
+
+**Usage breakdown**: fruit (10x), first fruit (3x), plant fruit (2x)
+
+---
+
+### Query 6
+**Filters**: Vehicle contains: wither  
+**Results**: 7  
+
+**Core pattern**: withering plant metaphor (2/7 instances, 28%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Exodus 18:18** (confidence: 0.95) - The verb נבל (n-b-l) primarily means 'to wither' or 'to fade,' typically used for plants. Applying t...
+2. ⭐ **Genesis 18:12** (confidence: 0.90) - Sarah's body, specifically her reproductive capacity, is metaphorically described as 'worn out' or '...
+3. ⭐ **Psalms 18:46** (confidence: 0.90) - The verb יִבֹּ֑לוּ (yibbolu) comes from the root נבל, which primarily means 'to wither' or 'to fade'...
+
+#### All Instances (7 total):
+
+**Exodus 18:18** (metaphor) - confidence: 0.95  
+*Figurative phrase*: you will surely wear yourself out  
+
+**Full verse (Hebrew)**: נָבֹ֣ל תִּבֹּ֔ל גַּם־אַתָּ֕ה גַּם־הָעָ֥ם הַזֶּ֖ה אֲשֶׁ֣ר עִמָּ֑ךְ כִּֽי־כָבֵ֤ד מִמְּךָ֙ הַדָּבָ֔ר לֹא־תוּכַ֥ל עֲשֹׂ֖הוּ לְבַדֶּֽךָ  
+**Full verse (English)**: you will surely wear yourself out, and these people as well. For the task is too heavy for you; you cannot do it alone.  
+
+*Hebrew phrase*: נָבֹ֣ל תִּבֹּ֔ל  
+*Explanation*: The verb נבל (n-b-l) primarily means 'to wither' or 'to fade,' typically used for plants. Applying this verb to a person to describe extreme exhaustion and loss of strength is a metaphor, likening a p...  
+*Target*: Moses's energy → human vitality → personal capacity  
+*Vehicle*: withering plant → fading vegetation → natural process  
+*Ground*: loss of strength → exhaustion → diminishment  
+*Confidence*: 0.95  
+
+**Genesis 18:12** (metaphor) - confidence: 0.90  
+*Figurative phrase*: my being worn out/withered  
+
+**Full verse (Hebrew)**: וַתִּצְחַ֥ק שָׂרָ֖ה בְּקִרְבָּ֣הּ לֵאמֹ֑ר אַחֲרֵ֤י בְלֹתִי֙ הָֽיְתָה־לִּ֣י עֶדְנָ֔ה וַֽאדֹנִ֖י זָקֵֽן  
+**Full verse (English)**: And Sarah laughed to herself, saying, “Now that I’ve lost the ability,*I’ve lost the ability Precise force of Heb. veloti uncertain. NJPS “I am withered,” trad. “I am waxed old.” am I to have enjoyment—with my husband so old?”  
+
+*Hebrew phrase*: בְלֹתִי  
+*Explanation*: Sarah's body, specifically her reproductive capacity, is metaphorically described as 'worn out' or 'withered,' comparing it to a decaying object or a plant that has lost its vitality and function due ...  
+*Target*: Sarah's reproductive capacity → human fertility → physical function  
+*Vehicle*: worn out object → withered plant → decaying entity  
+*Ground*: loss of vitality → loss of function → physical decay  
+*Confidence*: 0.90  
+
+**Psalms 18:46** (metaphor) - confidence: 0.90  
+*Figurative phrase*: lose courage  
+
+**Full verse (Hebrew)**: בְּנֵי־נֵכָ֥ר יִבֹּ֑לוּ וְ֝יַחְרְג֗וּ מִֽמִּסְגְּרֽוֹתֵיהֶֽם  
+**Full verse (English)**: foreign peoples lose courage,lMeaning of Heb. uncertain.and come trembling out of their strongholds.-l  
+
+*Hebrew phrase*: יִבֹּ֑לוּ  
+*Explanation*: The verb יִבֹּ֑לוּ (yibbolu) comes from the root נבל, which primarily means 'to wither' or 'to fade' like a plant. When applied to 'foreign peoples' and translated as 'lose courage,' it metaphorically...  
+*Target*: courage of foreign peoples → human emotional state → human attribute  
+*Vehicle*: withering plant → dying vegetation → natural phenomenon  
+*Ground*: loss of vitality → diminishment of strength → deterioration  
+*Confidence*: 0.90  
+
+**Psalms 102:12** (simile) - confidence: 0.90  
+*Figurative phrase*: My days are like a lengthening shadow  
+
+**Full verse (Hebrew)**: יָ֭מַי כְּצֵ֣ל נָט֑וּי וַ֝אֲנִ֗י כָּעֵ֥שֶׂב אִיבָֽשׁ  
+**Full verse (English)**: My days are like a lengthening shadow;I wither like grass.  
+
+*Hebrew phrase*: יָ֭מַי כְּצֵ֣ל נָט֑וּי  
+*Explanation*: The speaker compares the brevity and fading nature of their life (days) to a shadow that lengthens as day ends, symbolizing transience and approaching demise....  
+*Target*: speaker's life → human existence → temporal reality  
+*Vehicle*: lengthening shadow → fading image → ephemeral phenomenon  
+*Ground*: transience → brevity → mortality  
+*Confidence*: 0.90  
+
+**Psalms 102:12** (simile) - confidence: 0.90  
+*Figurative phrase*: I wither like grass  
+
+**Full verse (Hebrew)**: יָ֭מַי כְּצֵ֣ל נָט֑וּי וַ֝אֲנִ֗י כָּעֵ֥שֶׂב אִיבָֽשׁ  
+**Full verse (English)**: My days are like a lengthening shadow;I wither like grass.  
+
+*Hebrew phrase*: וַ֝אֲנִ֗י כָּעֵ֥שֶׂב אִיבָֽשׁ  
+*Explanation*: The speaker compares their physical decline and mortality to grass, which quickly withers and dies, highlighting human fragility and the inevitability of death....  
+*Target*: speaker's vitality → human body → physical existence  
+*Vehicle*: withering grass → perishable plant → fragile vegetation  
+*Ground*: mortality → fragility → decay  
+*Confidence*: 0.90  
+
+**Psalms 102:5** (simile) - confidence: 0.90  
+*Figurative phrase*: stricken like grass  
+
+**Full verse (Hebrew)**: הוּכָּה־כָעֵ֣שֶׂב וַיִּבַ֣שׁ לִבִּ֑י כִּֽי־שָׁ֝כַ֗חְתִּי מֵאֲכֹ֥ל לַחְמִֽי  
+**Full verse (English)**: My body is stricken and withered like grass;aOthers “I forget.”too wasted-a to eat my food;  
+
+*Hebrew phrase*: הוּכָּה־כָעֵ֣שֶׂב  
+*Explanation*: The speaker's physical state of being 'stricken' or 'afflicted' is explicitly compared to 'grass' using the comparative particle 'כָּ' (ka-). Grass is a common biblical image for fragility, transience...  
+*Target*: speaker's body → physical state → human condition  
+*Vehicle*: withered grass → perishable plant → natural world  
+*Ground*: fragility → perishability → vulnerability  
+*Confidence*: 0.90  
+
+**Psalms 102:5** (metaphor) - confidence: 0.90  
+*Figurative phrase*: and my heart withered  
+
+**Full verse (Hebrew)**: הוּכָּה־כָעֵ֣שֶׂב וַיִּבַ֣שׁ לִבִּ֑י כִּֽי־שָׁ֝כַ֗חְתִּי מֵאֲכֹ֥ל לַחְמִֽי  
+**Full verse (English)**: My body is stricken and withered like grass;aOthers “I forget.”too wasted-a to eat my food;  
+
+*Hebrew phrase*: וַיִּבַ֣שׁ לִבִּ֑י  
+*Explanation*: The 'heart' (לִבִּי) is used idiomatically to represent the inner self, spirit, or vitality. The verb 'withered' (וַיִּבַשׁ), typically applied to plants, is metaphorically used to describe the profou...  
+*Target*: speaker's spirit → inner vitality → human psyche  
+*Vehicle*: dried up plant → withered vegetation → natural process  
+*Ground*: loss of vitality → emotional desiccation → spiritual decline  
+*Confidence*: 0.90  
+
+---
+
+### Query 7
+**Filters**: Vehicle contains: chaff  
+**Results**: 6  
+
+**Core pattern**: straw metaphor (2/6 instances, 33%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Psalms 1:4** (confidence: 1.00) - The wicked are explicitly compared to chaff, using the comparative particle 'כַּ' (like/as), highlig...
+2. ⭐ **Psalms 35:5** (confidence: 1.00) - The implied subject (adversaries or the wicked) is explicitly compared to chaff, which is light, wor...
+3. ⭐ **Psalms 83:14** (confidence: 1.00) - This is a simile, explicitly comparing the enemies (implied 'them') to thistledown using the compara...
+
+#### All Instances (6 total):
+
+**Exodus 5:18** () - confidence: 0.90  
+*Figurative phrase*: straw  
+
+**Full verse (Hebrew)**: וְעַתָּה֙ לְכ֣וּ עִבְד֔וּ וְתֶ֖בֶן לֹא־יִנָּתֵ֣ן לָכֶ֑ם וְתֹ֥כֶן לְבֵנִ֖ים תִּתֵּֽנוּ  
+**Full verse (English)**: Be off now to your work! No straw shall be issued to you, but you must produce your quota of bricks!”  
+
+*Hebrew phrase*: תֶ֖בֶן  
+*Explanation*: The physical 'straw' (a part of the brick-making process) stands in for the broader concept of 'necessary resources' or 'support' (the whole means of production) required for brick production. By with...  
+*Target*: necessary resources → means of production → support  
+*Vehicle*: straw → raw material → physical component  
+*Ground*: essentiality → necessity → provision  
+*Confidence*: 0.90  
+
+**Exodus 15:7** (simile) - confidence: 0.99  
+*Figurative phrase*: like straw  
+
+**Full verse (Hebrew)**: וּבְרֹ֥ב גְּאוֹנְךָ֖ תַּהֲרֹ֣ס קָמֶ֑יךָ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;תְּשַׁלַּח֙ חֲרֹ֣נְךָ֔ יֹאכְלֵ֖מוֹ כַּקַּֽשׁ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: In Your great triumph You break Your opponents;You send forth Your fury, it consumes them like straw.  
+
+*Hebrew phrase*: כַּקַּֽשׁ  
+*Explanation*: The opponents are explicitly compared to straw, highlighting their extreme vulnerability and the ease with which they will be utterly destroyed by God's fury....  
+*Target*: God's opponents → enemies → people  
+*Vehicle*: straw → dry vegetation → flammable material  
+*Ground*: vulnerability → fragility → ease of destruction  
+*Confidence*: 0.99  
 
 **Psalms 1:4** (simile) - confidence: 1.00  
 *Figurative phrase*: rather, they are like chaff that wind blows away.  
@@ -1209,19 +1373,6 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: insubstantiality → worthlessness → vulnerability to judgment  
 *Confidence*: 1.00  
 
-**Psalms 18:43** (simile, hyperbole) - confidence: 0.95  
-*Figurative phrase*: I trod them flat as dirt of the streets  
-
-**Full verse (Hebrew)**: וְֽאֶשְׁחָקֵ֗ם כְּעָפָ֥ר עַל־פְּנֵי־ר֑וּחַ כְּטִ֖יט חוּצ֣וֹת אֲרִיקֵֽם  
-**Full verse (English)**: I ground them fine as windswept dust;I trod them flat as dirt of the streets.  
-
-*Hebrew phrase*: כְּטִ֖יט חוּצ֣וֹת אֲרִיקֵֽם  
-*Explanation*: The speaker compares the utter subjugation and humiliation of his enemies to street dirt that is trampled underfoot, emphasizing their low status and complete defeat. The extreme degradation described...  
-*Target*: enemies → adversaries → people  
-*Vehicle*: street dirt → mud → common refuse  
-*Ground*: utter humiliation → complete subjugation → insignificance  
-*Confidence*: 0.95  
-
 **Psalms 35:5** (simile) - confidence: 1.00  
 *Figurative phrase*: as chaff in the wind  
 
@@ -1235,76 +1386,46 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: insignificance and scattering → vulnerability and destruction → negative qualities  
 *Confidence*: 1.00  
 
-**Psalms 50:17** (metaphor, idiom) - confidence: 0.95  
-*Figurative phrase*: and brush My words aside?  
+**Psalms 83:14** (simile) - confidence: 1.00  
+*Figurative phrase*: make them like thistledown  
 
-**Full verse (Hebrew)**: וְ֭אַתָּה שָׂנֵ֣אתָ מוּסָ֑ר וַתַּשְׁלֵ֖ךְ דְּבָרַ֣י אַחֲרֶֽיךָ  
-**Full verse (English)**: seeing that you spurn My discipline,and brush My words aside?  
+**Full verse (Hebrew)**: אֱֽלֹהַ֗י שִׁיתֵ֥מוֹ כַגַּלְגַּ֑ל כְּ֝קַ֗שׁ לִפְנֵי־רֽוּחַ  
+**Full verse (English)**: O my God, make them like thistledown,like stubble driven by the wind.  
 
-*Hebrew phrase*: וַתַּשְׁלֵךְ דְּבָרַי אַחֲרֶֽיךָ  
-*Explanation*: The phrase 'casting My words behind you' is an idiom that metaphorically describes the complete rejection and disregard of divine commands or teachings. The physical act of discarding an unwanted obje...  
-*Target*: divine words → divine commands → spiritual instruction  
-*Vehicle*: discarded objects → thrown items → physical refuse  
-*Ground*: rejection → disregard → abandonment  
-*Confidence*: 0.95  
+*Hebrew phrase*: שִׁיתֵ֥מוֹ כַגַּלְגַּ֑ל  
+*Explanation*: This is a simile, explicitly comparing the enemies (implied 'them') to thistledown using the comparative particle 'כְּ' (like/as), emphasizing their desired insignificance, vulnerability, and ease of ...  
+*Target*: enemies → adversaries → people  
+*Vehicle*: thistledown → chaff → light plant material  
+*Ground*: insignificance → powerlessness → vulnerability  
+*Confidence*: 1.00  
 
-**Psalms 53:4** (metaphor) - confidence: 0.95  
-*Figurative phrase*: Everyone is dross  
+**Psalms 83:14** (simile) - confidence: 1.00  
+*Figurative phrase*: like stubble driven by the wind  
 
-**Full verse (Hebrew)**: כֻּלּ֥וֹ סָג֮ יַחְדָּ֢ו נֶ֫אֱלָ֥חוּ אֵ֤ין עֹֽשֵׂה־ט֑וֹב אֵ֝֗ין גַּם־אֶחָֽד  
-**Full verse (English)**: Everyone is dross,altogether foul;there is none who does good,not even one.  
+**Full verse (Hebrew)**: אֱֽלֹהַ֗י שִׁיתֵ֥מוֹ כַגַּלְגַּ֑ל כְּ֝קַ֗שׁ לִפְנֵי־רֽוּחַ  
+**Full verse (English)**: O my God, make them like thistledown,like stubble driven by the wind.  
 
-*Hebrew phrase*: כֻּלּ֥וֹ סָג֮  
-*Explanation*: Humanity is metaphorically described as 'dross,' the worthless impurities separated from metal during smelting, to emphasize their pervasive moral corruption and worthlessness in God's sight....  
-*Target*: humanity → people → moral state of humanity  
-*Vehicle*: dross → metallic impurity → worthless residue  
-*Ground*: moral corruption → worthlessness → impurity  
-*Confidence*: 0.95  
-
-**Psalms 71:9** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: Do not cast me off  
-
-**Full verse (Hebrew)**: אַֽל־תַּ֭שְׁלִיכֵנִי לְעֵ֣ת זִקְנָ֑ה כִּכְל֥וֹת כֹּ֝חִ֗י אַֽל־תַּעַזְבֵֽנִי  
-**Full verse (English)**: Do not cast me off in old age;when my strength fails, do not forsake me!  
-
-*Hebrew phrase*: אַֽל־תַּ֭שְׁלִיכֵנִי  
-*Explanation*: This phrase uses the imagery of physically 'casting off' or 'throwing away' an object to express the idea of abandoning or rejecting a person. It functions as an idiom for abandonment, with an underly...  
-*Target*: the speaker (person) → human being → individual  
-*Vehicle*: discarded object → worthless item → refuse  
-*Ground*: rejection → abandonment → uselessness  
-*Confidence*: 0.90  
-
-**Psalms 74:14** (metaphor) - confidence: 0.95  
-*Figurative phrase*: left him as food for the denizens of the desert  
-
-**Full verse (Hebrew)**: אַתָּ֣ה רִ֭צַּצְתָּ רָאשֵׁ֣י לִוְיָתָ֑ן תִּתְּנֶ֥נּוּ מַ֝אֲכָ֗ל לְעָ֣ם לְצִיִּֽים  
-**Full verse (English)**: it was You who crushed the heads of Leviathan,who left him as food for cOr “seafaring men”; meaning of Heb. uncertain.the denizens of the desert;-c  
-
-*Hebrew phrase*: תִּתְּנֶ֥נּוּ מַ֝אֲכָ֗ל לְעָ֣ם לְצִיִּֽים  
-*Explanation*: Following the defeat of Leviathan (symbolizing chaos/enemies), its remains becoming 'food for denizens of the desert' is a metaphorical image signifying the utter humiliation, degradation, and complet...  
-*Target*: utter destruction of enemies → humiliation of defeated forces → ignominious end  
-*Vehicle*: carcass as carrion → food for scavengers → waste product  
-*Ground*: worthlessness → degradation → complete demise  
-*Confidence*: 0.95  
-
-*...and 5 more instances*
-
-**Usage breakdown**: dross (2x), dirt (1x), refuse (1x)
+*Hebrew phrase*: כְּ֝קַ֗שׁ לִפְנֵי־רֽוּחַ  
+*Explanation*: This is a simile, explicitly comparing the enemies (implied 'them') to stubble driven by the wind using the comparative particle 'כְּ' (like/as), highlighting their desired weakness, powerlessness, an...  
+*Target*: enemies → adversaries → people  
+*Vehicle*: stubble driven by wind → dry plant remains → inanimate object  
+*Ground*: weakness → powerlessness → being scattered  
+*Confidence*: 1.00  
 
 ---
 
-### Query 6
-**Filters**: Vehicle contains: drives  
-**Results**: 4  
+### Query 8
+**Filters**: Vehicle contains: driven  
+**Results**: 11  
 
-**Core pattern**: scattering of objects/seeds metaphor (1/4 instances, 25%)
+**Core pattern**: scattering of objects/seeds metaphor (1/11 instances, 9%)
 
 **Top 3 Most Relevant** (by confidence):
-1. ⭐ **Deuteronomy 15:2** (confidence: 0.98) - The verb 'to dun' (יִגֹּשׂ) literally means 'to press' or 'to drive,' as a taskmaster oppresses a la...
-2. ⭐ **Deuteronomy 4:27** (confidence: 0.90) - This is a common biblical idiom describing the widespread dispersion of a people, often as a divine ...
-3. ⭐ **Numbers 18:5** (confidence: 0.90) - Wrath, an abstract concept (divine judgment), is depicted as a physical force or burden that can 'st...
+1. ⭐ **Psalms 1:4** (confidence: 1.00) - The wicked are explicitly compared to chaff, using the comparative particle 'כַּ' (like/as), highlig...
+2. ⭐ **Psalms 83:14** (confidence: 1.00) - This is a simile, explicitly comparing the enemies (implied 'them') to stubble driven by the wind us...
+3. ⭐ **Deuteronomy 15:2** (confidence: 0.98) - The verb 'to dun' (יִגֹּשׂ) literally means 'to press' or 'to drive,' as a taskmaster oppresses a la...
 
-#### All Instances (4 total):
+#### All Instances (11 total):
 
 **Deuteronomy 4:27** (idiom) - confidence: 0.90  
 *Figurative phrase*: יהוה will scatter you  
@@ -1317,6 +1438,19 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Target*: Israelites' dispersion → exile → divine judgment  
 *Vehicle*: scattering of objects/seeds → widespread dispersal → physical action  
 *Ground*: widespread distribution → loss of cohesion → forced movement  
+*Confidence*: 0.90  
+
+**Deuteronomy 4:27** (metaphor) - confidence: 0.90  
+*Figurative phrase*: יהוה will drive you  
+
+**Full verse (Hebrew)**: וְהֵפִ֧יץ יְהֹוָ֛ה אֶתְכֶ֖ם בָּעַמִּ֑ים וְנִשְׁאַרְתֶּם֙ מְתֵ֣י מִסְפָּ֔ר בַּגּוֹיִ֕ם אֲשֶׁ֨ר יְנַהֵ֧ג יְהֹוָ֛ה אֶתְכֶ֖ם שָֽׁמָּה  
+**Full verse (English)**: יהוה will scatter you among the peoples, and only a scant few of you shall be left among the nations to which יהוה will drive you.  
+
+*Hebrew phrase*: יְנַהֵ֧ג יְהֹוָ֛ה אֶתְכֶ֖ם  
+*Explanation*: The action of God 'driving' the people metaphorically likens them to a flock or herd of animals being compelled to move, emphasizing the involuntary and forceful nature of their exile....  
+*Target*: Israelites' forced movement → exile → divine compulsion  
+*Vehicle*: driven animals → herded flock → controlled movement  
+*Ground*: involuntary movement → lack of agency → forceful direction  
 *Confidence*: 0.90  
 
 **Deuteronomy 15:2** (metaphor) - confidence: 0.98  
@@ -1332,6 +1466,19 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: coercive nature → pressure → hardship  
 *Confidence*: 0.98  
 
+**Leviticus 26:36** (metaphor, personification, hyperbole) - confidence: 0.90  
+*Figurative phrase*: The sound of a driven leaf shall put them to flight.  
+
+**Full verse (Hebrew)**: וְהַנִּשְׁאָרִ֣ים בָּכֶ֔ם וְהֵבֵ֤אתִי מֹ֙רֶךְ֙ בִּלְבָבָ֔ם בְּאַרְצֹ֖ת אֹיְבֵיהֶ֑ם וְרָדַ֣ף אֹתָ֗ם ק֚וֹל עָלֶ֣ה נִדָּ֔ף וְנָס֧וּ מְנֻֽסַת־חֶ֛רֶב וְנָפְל֖וּ וְאֵ֥ין רֹדֵֽף  
+**Full verse (English)**: As for those of you who survive, I will cast a faintness into their hearts in the land of their enemies. The sound of a driven leaf shall put them to flight. Fleeing as though from the sword, they shall fall though none pursues.  
+
+*Hebrew phrase*: וְרָדַ֣ף אֹתָ֗ם ק֚וֹל עָלֶ֣ה נִדָּ֔ף  
+*Explanation*: This is a clear cross-domain metaphor and hyperbole. The insignificant sound of a driven leaf (vehicle) is metaphorically equated with a terrifying pursuer or threat (target), emphasizing the extreme ...  
+*Target*: people's extreme fear → human emotion → psychological state  
+*Vehicle*: sound of a driven leaf → insignificant natural phenomenon → environmental element  
+*Ground*: extreme terror → irrational panic → cowardice  
+*Confidence*: 0.90  
+
 **Numbers 18:5** (metaphor, personification) - confidence: 0.90  
 *Figurative phrase*: wrath may not again strike the Israelites  
 
@@ -1344,6 +1491,19 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Vehicle*: physical blow → descending burden → striking force  
 *Ground*: destructive impact → severity of consequence → inescapable judgment  
 *Confidence*: 0.90  
+
+**Psalms 1:4** (simile) - confidence: 1.00  
+*Figurative phrase*: rather, they are like chaff that wind blows away.  
+
+**Full verse (Hebrew)**: לֹא־כֵ֥ן הָרְשָׁעִ֑ים כִּ֥י אִם־כַּ֝מֹּ֗ץ אֲֽשֶׁר־תִּדְּפֶ֥נּוּ רֽוּחַ  
+**Full verse (English)**: Not so the wicked;rather, they are like chaff that wind blows away.  
+
+*Hebrew phrase*: כִּ֥י אִם־כַּ֝מֹּ֗ץ אֲֽשֶׁר־תִּדְּפֶ֥נּוּ רֽוּחַ  
+*Explanation*: The wicked are explicitly compared to chaff, using the comparative particle 'כַּ' (like/as), highlighting their lack of substance, instability, and ultimate dispersal or destruction....  
+*Target*: the wicked → ungodly individuals → humanity  
+*Vehicle*: chaff blown by wind → agricultural byproduct → natural element  
+*Ground*: insubstantiality → worthlessness → vulnerability to judgment  
+*Confidence*: 1.00  
 
 **Psalms 39:11** (metaphor) - confidence: 0.90  
 *Figurative phrase*: from Your blows  
@@ -1358,20 +1518,89 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: severity → destructive force → oppression  
 *Confidence*: 0.90  
 
+**Psalms 53:6** (metonymy) - confidence: 0.90  
+*Figurative phrase*: scattered the bones of your besiegers  
+
+**Full verse (Hebrew)**: שָׁ֤ם&thinsp;׀ פָּ֥חֲדוּ פַחַד֮ לֹא־הָ֢יָ֫ה פָ֥חַד כִּֽי־אֱלֹהִ֗ים פִּ֭זַּר עַצְמ֣וֹת חֹנָ֑ךְ הֱ֝בִשֹׁ֗תָה כִּֽי־אֱלֹהִ֥ים מְאָסָֽם  
+**Full verse (English)**: There they will be seized with fright—dMeaning of Heb. uncertain.never was there such a fright—for God has scattered the bones of your besiegers;you have put them to shame,-dfor God has rejected them.  
+
+*Hebrew phrase*: פִּ֭זַּר עַצְמ֣וֹת חֹנָ֑ךְ  
+*Explanation*: The 'scattering of bones' is a metonymic expression (specifically synecdoche) where the physical remnants (bones) and their desecration represent the complete and utter destruction, defeat, and humili...  
+*Target*: enemy's destruction → military defeat → divine judgment  
+*Vehicle*: scattered physical remains → desecrated bodies → physical consequence  
+*Ground*: total annihilation → powerlessness → dishonor  
+*Confidence*: 0.90  
+
+**Psalms 78:26** (personification) - confidence: 0.80  
+*Figurative phrase*: and drove the south wind by His might.  
+
+**Full verse (Hebrew)**: יַסַּ֣ע קָ֭דִים בַּשָּׁמָ֑יִם וַיְנַהֵ֖ג בְּעֻזּ֣וֹ תֵימָֽן  
+**Full verse (English)**: He set the east wind moving in heaven,and drove the south wind by His might.  
+
+*Hebrew phrase*: וַיְנַהֵ֖ג בְּעֻזּ֣וֹ תֵימָֽן  
+*Explanation*: The verb 'drove' (וַיְנַהֵג) is typically used for leading or driving animate beings (like animals) or vehicles. Applying it to the wind treats the wind as an entity capable of being actively directed...  
+*Target*: south wind → wind → natural phenomenon  
+*Vehicle*: driven animal/chariot → controllable entity → agent of movement  
+*Ground*: obedience → subservience → controllability  
+*Confidence*: 0.80  
+
+**Psalms 83:14** (simile) - confidence: 1.00  
+*Figurative phrase*: like stubble driven by the wind  
+
+**Full verse (Hebrew)**: אֱֽלֹהַ֗י שִׁיתֵ֥מוֹ כַגַּלְגַּ֑ל כְּ֝קַ֗שׁ לִפְנֵי־רֽוּחַ  
+**Full verse (English)**: O my God, make them like thistledown,like stubble driven by the wind.  
+
+*Hebrew phrase*: כְּ֝קַ֗שׁ לִפְנֵי־רֽוּחַ  
+*Explanation*: This is a simile, explicitly comparing the enemies (implied 'them') to stubble driven by the wind using the comparative particle 'כְּ' (like/as), highlighting their desired weakness, powerlessness, an...  
+*Target*: enemies → adversaries → people  
+*Vehicle*: stubble driven by wind → dry plant remains → inanimate object  
+*Ground*: weakness → powerlessness → being scattered  
+*Confidence*: 1.00  
+
+*...and 1 more instances*
+
+**Usage breakdown**: scattering of objects/seeds (1x), driven animals (1x), physical pressing (1x)
+
 ---
 
-### Query 7
+### Query 9
 **Filters**: Vehicle contains: stand  
-**Results**: 58  
+**Results**: 75  
 
-**Core pattern**: physical standing metaphor (7/58 instances, 12%)
+**Core pattern**: physical rising metaphor (11/75 instances, 14%)
 
 **Top 3 Most Relevant** (by confidence):
-1. ⭐ **Genesis 17:19** (confidence: 1.00) - The verb הֵקִים (Hifil of קוּם, 'to stand up') used with בְּרִית ('covenant') forms a common biblica...
-2. ⭐ **Psalms 139:2** (confidence: 1.00) - This is a merism, an idiom where two contrasting actions ('sitting' and 'standing') represent the to...
-3. ⭐ **Deuteronomy 6:25** (confidence: 0.95) - This is an idiom where 'לִפְנֵי' (literally 'to the face of') is used in relation to God to denote b...
+1. ⭐ **Deuteronomy 4:47** (confidence: 1.00) - This is a common biblical idiom for the cardinal direction 'east,' literally meaning 'rising of the ...
+2. ⭐ **Deuteronomy 33:2** (confidence: 1.00) - This uses verbs of shining/dawning (zaraḥ, hofia') to metaphorically describe God's glorious self-re...
+3. ⭐ **Genesis 17:19** (confidence: 1.00) - The verb הֵקִים (Hifil of קוּם, 'to stand up') used with בְּרִית ('covenant') forms a common biblica...
 
-#### All Instances (58 total):
+#### All Instances (75 total):
+
+**Deuteronomy 4:41** (idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: eastward sun  
+
+**Full verse (Hebrew)**: אָ֣ז יַבְדִּ֤יל מֹשֶׁה֙ שָׁלֹ֣שׁ עָרִ֔ים בְּעֵ֖בֶר הַיַּרְדֵּ֑ן מִזְרְחָ֖ה שָֽׁמֶשׁ  
+**Full verse (English)**: Then Moses set aside three cities on the east side of the Jordan  
+
+*Hebrew phrase*: מִזְרְחָ֖ה שָֽׁמֶשׁ  
+*Explanation*: This phrase is an idiom for 'east' or 'eastward.' It functions as metonymy, where the rising of the sun (a defining characteristic or event) is used to refer to the cardinal direction 'east.'...  
+*Target*: east → cardinal direction → geographical concept  
+*Vehicle*: rising of the sun → celestial event → natural phenomenon  
+*Ground*: defining characteristic → directional indicator → spatial orientation  
+*Confidence*: 0.90  
+
+**Deuteronomy 4:47** (idiom) - confidence: 1.00  
+*Figurative phrase*: rising of the sun  
+
+**Full verse (Hebrew)**: וַיִּֽירְשׁ֨וּ אֶת־אַרְצ֜וֹ וְאֶת־אֶ֣רֶץ&thinsp;׀ ע֣וֹג מֶֽלֶךְ־הַבָּשָׁ֗ן שְׁנֵי֙ מַלְכֵ֣י הָֽאֱמֹרִ֔י אֲשֶׁ֖ר בְּעֵ֣בֶר הַיַּרְדֵּ֑ן מִזְרַ֖ח שָֽׁמֶשׁ  
+**Full verse (English)**: They had taken possession of his country and that of King Og of Bashan—the two kings of the Amorites—which were on the east side of the Jordan  
+
+*Hebrew phrase*: מִזְרַ֖ח שָֽׁמֶשׁ  
+*Explanation*: This is a common biblical idiom for the cardinal direction 'east,' literally meaning 'rising of the sun.' It is a conventionalized expression to indicate geographical orientation....  
+*Target*: east → cardinal direction → geographical orientation  
+*Vehicle*: rising of the sun → celestial event → natural phenomenon  
+*Ground*: directional indicator → spatial reference → locational definition  
+*Confidence*: 1.00  
 
 **Deuteronomy 6:25** (idiom) - confidence: 0.95  
 *Figurative phrase*: before Yahweh our God / in the presence of Yahweh our God  
@@ -1477,35 +1706,307 @@ Matched: *יֱהֹוִ֔ה* (position 5)
 *Ground*: accountability → observation → approval  
 *Confidence*: 0.95  
 
-**Deuteronomy 27:7** (idiom) - confidence: 0.90  
-*Figurative phrase*: before your God יהוה  
+*...and 65 more instances*
 
-**Full verse (Hebrew)**: וְזָבַחְתָּ֥ שְׁלָמִ֖ים וְאָכַ֣לְתָּ שָּׁ֑ם וְשָׂ֣מַחְתָּ֔ לִפְנֵ֖י יְהֹוָ֥ה אֱלֹהֶֽיךָ  
-**Full verse (English)**: and you shall sacrifice there offerings of well-being and eat them, rejoicing before your God יהוה.  
+**Usage breakdown**: physical rising (11x), physical standing (7x), standing entity (4x)
 
-*Hebrew phrase*: לִפְנֵ֖י יְהֹוָ֥ה אֱלֹהֶֽיךָ  
-*Explanation*: The phrase 'לִפְנֵי יְהֹוָה' is a common biblical idiom that uses the physical concept of 'face' (פְּנֵי) to denote being in the divine presence, under God's observation, or within a sacred space dedi...  
-*Target*: worshipper's rejoicing → religious act → human action  
-*Vehicle*: standing before a face → physical proximity → spatial relationship  
-*Ground*: divine presence → sacred space → spiritual proximity  
+---
+
+### Query 10
+**Filters**: Vehicle contains: know  
+**Results**: 20  
+
+**Core pattern**: knowing metaphor (6/20 instances, 30%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Deuteronomy 1:17** (confidence: 1.00) - This is a biblical idiom meaning 'to show partiality' or 'to give preferential treatment' in judgmen...
+2. ⭐ **Exodus 33:12** (confidence: 1.00) - This is a biblical idiom signifying a deep, personal, and specific knowledge or selection by God, im...
+3. ⭐ **Genesis 4:1** (confidence: 1.00) - The verb 'yada‘' (knew) is used euphemistically as an idiom to refer to sexual intercourse, a common...
+
+#### All Instances (20 total):
+
+**Deuteronomy 1:17** (idiom) - confidence: 1.00  
+*Figurative phrase*: You shall not be partial  
+
+**Full verse (Hebrew)**: לֹֽא־תַכִּ֨ירוּ פָנִ֜ים בַּמִּשְׁפָּ֗ט כַּקָּטֹ֤ן כַּגָּדֹל֙ תִּשְׁמָע֔וּן לֹ֤א תָג֙וּרוּ֙ מִפְּנֵי־אִ֔ישׁ כִּ֥י הַמִּשְׁפָּ֖ט לֵאלֹהִ֣ים ה֑וּא וְהַדָּבָר֙ אֲשֶׁ֣ר יִקְשֶׁ֣ה מִכֶּ֔ם תַּקְרִב֥וּן אֵלַ֖י וּשְׁמַעְתִּֽיו  
+**Full verse (English)**: You shall not be partial in judgment: hear out low and high alike. Fear neither party,*neither party Or “no human being.” for judgment is God’s. And any matter that is too difficult for you, you shall bring to me and I will hear it.”  
+
+*Hebrew phrase*: לֹֽא־תַכִּ֨ירוּ פָנִ֜ים  
+*Explanation*: This is a biblical idiom meaning 'to show partiality' or 'to give preferential treatment' in judgment, rather than literally 'recognizing faces'....  
+*Target*: impartial judgment → judicial conduct → ethical principles  
+*Vehicle*: recognizing faces → showing favoritism based on appearance/status → biased perception  
+*Ground*: absence of bias → equality in treatment → objectivity  
+*Confidence*: 1.00  
+
+**Deuteronomy 13:3** (idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: whom you have not experienced  
+
+**Full verse (Hebrew)**: וּבָ֤א הָאוֹת֙ וְהַמּוֹפֵ֔ת אֲשֶׁר־דִּבֶּ֥ר אֵלֶ֖יךָ לֵאמֹ֑ר נֵֽלְכָ֞ה אַחֲרֵ֨י אֱלֹהִ֧ים אֲחֵרִ֛ים אֲשֶׁ֥ר לֹֽא־יְדַעְתָּ֖ם וְנׇֽעׇבְדֵֽם  
+**Full verse (English)**: saying, “Let us follow and worship another god”—whom you have not experienced*whom you have not experienced See note at 11.28. —even if the sign or portent named to you comes true,  
+
+*Hebrew phrase*: אֲשֶׁ֥ר לֹֽא־יְדַעְתָּ֖ם  
+*Explanation*: In biblical Hebrew, 'to know' (ידע) when referring to deities often signifies a deep, experiential, and covenantal relationship rather than mere intellectual acquaintance. Here, 'not knowing' other go...  
+*Target*: relationship with other gods → divine interaction → spiritual allegiance  
+*Vehicle*: knowing → cognitive understanding → human perception  
+*Ground*: lack of legitimate connection → absence of experience → unfamiliarity  
 *Confidence*: 0.90  
 
-**Exodus 9:11** (idiom) - confidence: 0.90  
-*Figurative phrase*: to confront Moses  
+**Deuteronomy 13:8** (idiom, hyperbole) - confidence: 0.95  
+*Figurative phrase*: from one end of the earth to the other  
 
-**Full verse (Hebrew)**: וְלֹֽא־יָכְל֣וּ הַֽחַרְטֻמִּ֗ים לַעֲמֹ֛ד לִפְנֵ֥י מֹשֶׁ֖ה מִפְּנֵ֣י הַשְּׁחִ֑ין כִּֽי־הָיָ֣ה הַשְּׁחִ֔ין בַּֽחַרְטֻמִּ֖ם וּבְכׇל־מִצְרָֽיִם  
-**Full verse (English)**: The magician-priests were unable to confront Moses because of the inflammation, for the inflammation afflicted the magician-priests as well as all the other Egyptians.  
+**Full verse (Hebrew)**: מֵאֱלֹהֵ֣י הָֽעַמִּ֗ים אֲשֶׁר֙ סְבִיבֹ֣תֵיכֶ֔ם הַקְּרֹבִ֣ים אֵלֶ֔יךָ א֖וֹ הָרְחֹקִ֣ים מִמֶּ֑ךָּ מִקְצֵ֥ה הָאָ֖רֶץ וְעַד־קְצֵ֥ה הָאָֽרֶץ  
+**Full verse (English)**: from among the gods of the peoples around you, either near to you or distant, anywhere from one end of the earth to the other:  
 
-*Hebrew phrase*: לַעֲמֹ֛ד לִפְנֵ֥י מֹשֶׁ֖ה  
-*Explanation*: The phrase 'לַעֲמֹד לִפְנֵי' (to stand before) is a common Hebrew idiom. In this context of ongoing conflict, it signifies confrontation or opposition, rather than merely a literal physical posture. T...  
-*Target*: magicians' opposition → confrontation → social interaction  
-*Vehicle*: standing before → physical posture → bodily action  
-*Ground*: inability to oppose → lack of power → physical impediment  
+*Hebrew phrase*: מִקְצֵ֥ה הָאָ֖רֶץ וְעַד־קְצֵ֥ה הָאָֽרֶץ  
+*Explanation*: This is a common biblical idiom and hyperbole signifying a vast, all-encompassing geographical extent, meaning 'everywhere' or 'the entire known world,' rather than a literal measurement of the planet...  
+*Target*: geographical scope → extent of territory → spatial domain  
+*Vehicle*: entire known world → universal reach → boundless expanse  
+*Ground*: totality → universality → comprehensiveness  
+*Confidence*: 0.95  
+
+**Deuteronomy 16:19** (idiom) - confidence: 0.90  
+*Figurative phrase*: you shall show no partiality  
+
+**Full verse (Hebrew)**: לֹא־תַטֶּ֣ה מִשְׁפָּ֔ט לֹ֥א תַכִּ֖יר פָּנִ֑ים וְלֹא־תִקַּ֣ח שֹׁ֔חַד כִּ֣י הַשֹּׁ֗חַד יְעַוֵּר֙ עֵינֵ֣י חֲכָמִ֔ים וִֽיסַלֵּ֖ף דִּבְרֵ֥י צַדִּיקִֽם  
+**Full verse (English)**: You shall not judge unfairly: you shall show no partiality; you shall not take bribes, for bribes blind the eyes of the discerning and upset the plea of the just.  
+
+*Hebrew phrase*: לֹ֥א תַכִּ֖יר פָּנִ֑ים  
+*Explanation*: This is a common Hebrew idiom meaning 'not to show favoritism' or 'not to judge based on a person's identity/status,' literally 'not to recognize faces.' The literal act of recognizing a face is not p...  
+*Target*: impartial judgment → fairness → ethical conduct  
+*Vehicle*: recognizing a person's face → social interaction → human perception  
+*Ground*: equality in judgment → absence of favoritism → moral principle  
 *Confidence*: 0.90  
 
-*...and 48 more instances*
+**Deuteronomy 33:9** (idiom) - confidence: 0.90  
+*Figurative phrase*: he disregarded  
 
-**Usage breakdown**: physical standing (7x), physical rising (5x), standing entity (4x)
+**Full verse (Hebrew)**: הָאֹמֵ֞ר לְאָבִ֤יו וּלְאִמּוֹ֙ לֹ֣א רְאִיתִ֔יו וְאֶת־אֶחָיו֙ לֹ֣א הִכִּ֔יר וְאֶת־בָּנָ֖ו לֹ֣א יָדָ֑ע כִּ֤י שָֽׁמְרוּ֙ אִמְרָתֶ֔ךָ וּבְרִיתְךָ֖ יִנְצֹֽרוּ  
+**Full verse (English)**: Who said of his father and mother,“I consider them not.”His brothers he disregarded,Ignored his own children.Your precepts alone they observed,And kept Your covenant.  
+
+*Hebrew phrase*: לֹ֣א הִכִּ֔יר  
+*Explanation*: This is an idiom where the literal act of 'not recognizing' is used to express a complete disregard, rejection, or disowning of familial relationships and obligations. In this context, it praises the ...  
+*Target*: Levites' devotion → religious commitment → spiritual priority  
+*Vehicle*: not recognizing → lack of cognitive identification → mental process  
+*Ground*: supreme dedication to God → prioritization of divine duty → unwavering loyalty  
+*Confidence*: 0.90  
+
+**Deuteronomy 33:9** (idiom) - confidence: 0.90  
+*Figurative phrase*: Ignored  
+
+**Full verse (Hebrew)**: הָאֹמֵ֞ר לְאָבִ֤יו וּלְאִמּוֹ֙ לֹ֣א רְאִיתִ֔יו וְאֶת־אֶחָיו֙ לֹ֣א הִכִּ֔יר וְאֶת־בָּנָ֖ו לֹ֣א יָדָ֑ע כִּ֤י שָֽׁמְרוּ֙ אִמְרָתֶ֔ךָ וּבְרִיתְךָ֖ יִנְצֹֽרוּ  
+**Full verse (English)**: Who said of his father and mother,“I consider them not.”His brothers he disregarded,Ignored his own children.Your precepts alone they observed,And kept Your covenant.  
+
+*Hebrew phrase*: לֹ֣א יָדָ֑ע  
+*Explanation*: This is an idiom where the literal act of 'not knowing' is used to express a complete disregard, rejection, or disowning of familial relationships and obligations. In this context, it praises the Levi...  
+*Target*: Levites' devotion → religious commitment → spiritual priority  
+*Vehicle*: not knowing → lack of acquaintance/knowledge → mental state  
+*Ground*: supreme dedication to God → prioritization of divine duty → unwavering loyalty  
+*Confidence*: 0.90  
+
+**Exodus 33:12** (idiom) - confidence: 1.00  
+*Figurative phrase*: I have singled you out by name  
+
+**Full verse (Hebrew)**: וַיֹּ֨אמֶר מֹשֶׁ֜ה אֶל־יְהֹוָ֗ה רְ֠אֵ֠ה אַתָּ֞ה אֹמֵ֤ר אֵלַי֙ הַ֚עַל אֶת־הָעָ֣ם הַזֶּ֔ה וְאַתָּה֙ לֹ֣א הֽוֹדַעְתַּ֔נִי אֵ֥ת אֲשֶׁר־תִּשְׁלַ֖ח עִמִּ֑י וְאַתָּ֤ה אָמַ֙רְתָּ֙ יְדַעְתִּ֣יךָֽ בְשֵׁ֔ם וְגַם־מָצָ֥אתָ חֵ֖ן בְּעֵינָֽי  
+**Full verse (English)**: Moses said to יהוה, “See, You say to me, ‘Lead this people forward,’ but You have not made known to me whom You will send with me. Further, You have said, ‘I have singled you out by name, and you have, indeed, gained My favor.’  
+
+*Hebrew phrase*: יְדַעְתִּ֣יךָֽ בְשֵׁ֔ם  
+*Explanation*: This is a biblical idiom signifying a deep, personal, and specific knowledge or selection by God, implying a special, intimate relationship and divine favor, beyond merely knowing a name....  
+*Target*: Moses's relationship with God → divine recognition → personal connection  
+*Vehicle*: knowing a name → personal identification → human interaction  
+*Ground*: intimacy → selection → special favor  
+*Confidence*: 1.00  
+
+**Exodus 33:17** (idiom) - confidence: 0.95  
+*Figurative phrase*: and I have singled you out by name  
+
+**Full verse (Hebrew)**: וַיֹּ֤אמֶר יְהֹוָה֙ אֶל־מֹשֶׁ֔ה גַּ֣ם אֶת־הַדָּבָ֥ר הַזֶּ֛ה אֲשֶׁ֥ר דִּבַּ֖רְתָּ אֶֽעֱשֶׂ֑ה כִּֽי־מָצָ֤אתָ חֵן֙ בְּעֵינַ֔י וָאֵדָעֲךָ֖ בְּשֵֽׁם  
+**Full verse (English)**: And יהוה said to Moses, “I will also do this thing that you have asked; for you have truly gained My favor and I have singled you out by name.”  
+
+*Hebrew phrase*: וָאֵדָעֲךָ֖ בְּשֵֽׁם  
+*Explanation*: This is a biblical idiom (יָדַע בְּשֵׁם) signifying a deep, personal, and intimate knowledge, implying special recognition, selection, and a unique relationship, beyond mere acquaintance....  
+*Target*: God's intimate knowledge of Moses → divine selection → personal relationship  
+*Vehicle*: knowing a person's appellation → literal identification → basic recognition  
+*Ground*: intimate relationship → special recognition → divine election  
+*Confidence*: 0.95  
+
+**Genesis 4:1** (idiom) - confidence: 1.00  
+*Figurative phrase*: knew  
+
+**Full verse (Hebrew)**: וְהָ֣אָדָ֔ם יָדַ֖ע אֶת־חַוָּ֣ה אִשְׁתּ֑וֹ וַתַּ֙הַר֙ וַתֵּ֣לֶד אֶת־קַ֔יִן וַתֹּ֕אמֶר קָנִ֥יתִי אִ֖ישׁ אֶת־יְהֹוָֽה  
+**Full verse (English)**: Now the Human knew*knew Heb. yada‘, often in a sexual sense. his wife Eve, and she conceived and bore Cain, saying, “I have gained*gained Echoing the Heb. wordplay: qanithi, connected with “Cain”; lit. “created, acquired.” a person*a person Or “someone new.” Lit. “a participant whose involvement defines the depicted situation.” Unlike “man” in contemporary English, Heb. ’ish can include infants in its denotative scope, as here and in Isa. 66.13. NJPS “male child”; trad. “man.” Cf. note at Num. 30.4 and see the Dictionary under ’ish. with the help of*with the help of Or “as did”; precise force of Heb. ’et uncertain. יהוה.”  
+
+*Hebrew phrase*: יָדַ֖ע  
+*Explanation*: The verb 'yada‘' (knew) is used euphemistically as an idiom to refer to sexual intercourse, a common and well-established usage in biblical Hebrew....  
+*Target*: sexual intimacy → conjugal relations → human relationship  
+*Vehicle*: intellectual knowing → cognitive understanding → mental process  
+*Ground*: deep familiarity → intimate connection → experiential knowledge  
+*Confidence*: 1.00  
+
+**Genesis 4:17** (idiom) - confidence: 0.90  
+*Figurative phrase*: Cain knew his wife  
+
+**Full verse (Hebrew)**: וַיֵּ֤דַע קַ֙יִן֙ אֶת־אִשְׁתּ֔וֹ וַתַּ֖הַר וַתֵּ֣לֶד אֶת־חֲנ֑וֹךְ וַֽיְהִי֙ בֹּ֣נֶה עִ֔יר וַיִּקְרָא֙ שֵׁ֣ם הָעִ֔יר כְּשֵׁ֖ם בְּנ֥וֹ חֲנֽוֹךְ  
+**Full verse (English)**: Cain knew his wife, and she conceived and bore Enoch. And he then founded a city, and named the city after his son Enoch.  
+
+*Hebrew phrase*: וַיֵּ֤דַע קַ֙יִן֙ אֶת־אִשְׁתּ֔וֹ  
+*Explanation*: The verb יָדַע (yada', 'to know') is used here as a common biblical euphemism or idiom for sexual intercourse, indicating intimate physical union rather than intellectual acquaintance....  
+*Target*: sexual intercourse → intimate act → human reproduction  
+*Vehicle*: knowing → acquaintance → human interaction  
+*Ground*: intimacy → union → physical relationship  
+*Confidence*: 0.90  
+
+*...and 10 more instances*
+
+**Usage breakdown**: knowing (6x), knowing a name (2x), recognizing faces (1x)
+
+---
+
+### Query 11
+**Filters**: Vehicle contains: perish  
+**Results**: 23  
+
+**Core pattern**: perishing entity metaphor (3/23 instances, 13%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Deuteronomy 31:16** (confidence: 1.00) - This is a standard biblical idiom for violating the terms of an agreement or annulling a formal pact...
+2. ⭐ **Psalms 49:13** (confidence: 1.00) - Man's transient existence and ultimate fate are explicitly compared to that of perishing animals usi...
+3. ⭐ **Psalms 49:21** (confidence: 1.00) - This is a direct comparison using the comparative particle כַּ (ka-, 'like') and the verb נִמְשַׁל (...
+
+#### All Instances (23 total):
+
+**Deuteronomy 7:24** (idiom) - confidence: 0.90  
+*Figurative phrase*: and you shall obliterate their name  
+
+**Full verse (Hebrew)**: וְנָתַ֤ן מַלְכֵיהֶם֙ בְּיָדֶ֔ךָ וְהַאֲבַדְתָּ֣ אֶת־שְׁמָ֔ם מִתַּ֖חַת הַשָּׁמָ֑יִם לֹֽא־יִתְיַצֵּ֥ב אִישׁ֙ בְּפָנֶ֔יךָ עַ֥ד הִשְׁמִֽדְךָ֖ אֹתָֽם  
+**Full verse (English)**: [God] will deliver their kings into your hand, and you shall obliterate their name from under the heavens; no one shall stand up to you, until you have wiped them out.  
+
+*Hebrew phrase*: וְהַאֲבַדְתָּ֣ אֶת־שְׁמָ֔ם  
+*Explanation*: This is a common biblical idiom for the complete destruction of a people's memory, lineage, or existence. 'Name' stands metonymically for the entire entity and its legacy....  
+*Target*: enemy's existence and legacy → memory of a people → identity of a nation  
+*Vehicle*: erasing a written name → destroying a record → removing a label  
+*Ground*: total annihilation → erasure of memory → complete destruction  
+*Confidence*: 0.90  
+
+**Deuteronomy 31:16** (idiom) - confidence: 1.00  
+*Figurative phrase*: and break My covenant  
+
+**Full verse (Hebrew)**: וַיֹּ֤אמֶר יְהֹוָה֙ אֶל־מֹשֶׁ֔ה הִנְּךָ֥ שֹׁכֵ֖ב עִם־אֲבֹתֶ֑יךָ וְקָם֩ הָעָ֨ם הַזֶּ֜ה וְזָנָ֣ה&thinsp;׀ אַחֲרֵ֣י&thinsp;׀ אֱלֹהֵ֣י נֵכַר־הָאָ֗רֶץ אֲשֶׁ֨ר ה֤וּא בָא־שָׁ֙מָּה֙ בְּקִרְבּ֔וֹ וַעֲזָבַ֕נִי וְהֵפֵר֙ אֶת־בְּרִיתִ֔י אֲשֶׁ֥ר כָּרַ֖תִּי אִתּֽוֹ  
+**Full verse (English)**: יהוה said to Moses: You are soon to lie with your ancestors. This people will thereupon go astray after the alien gods in their midst, in the land that they are about to enter; they will forsake Me and break My covenant that I made with them.  
+
+*Hebrew phrase*: וְהֵפֵר֙ אֶת־בְּרִיתִ֔י  
+*Explanation*: This is a standard biblical idiom for violating the terms of an agreement or annulling a formal pact. While not a physical breaking, it's a set phrase for covenant transgression....  
+*Target*: covenant violation → disobedience → breach of agreement  
+*Vehicle*: breaking a physical object → destroying a bond → annulling a contract  
+*Ground*: transgression of terms → failure to uphold agreement → dissolution of relationship  
+*Confidence*: 1.00  
+
+**Exodus 10:7** (hyperbole) - confidence: 0.80  
+*Figurative phrase*: Egypt is lost  
+
+**Full verse (Hebrew)**: וַיֹּאמְרוּ֩ עַבְדֵ֨י פַרְעֹ֜ה אֵלָ֗יו עַד־מָתַי֙ יִהְיֶ֨ה זֶ֥ה לָ֙נוּ֙ לְמוֹקֵ֔שׁ שַׁלַּח֙ אֶת־הָ֣אֲנָשִׁ֔ים וְיַֽעַבְד֖וּ אֶת־יְהֹוָ֣ה אֱלֹהֵיהֶ֑ם הֲטֶ֣רֶם תֵּדַ֔ע כִּ֥י אָבְדָ֖ה מִצְרָֽיִם  
+**Full verse (English)**: Pharaoh’s courtiers said to him, “How long shall this one be a snare to us? Let a delegation*a delegation Lit. “the [salient] participants,” i.e., not everyone. Trad. “the men.” See the Dictionary under ’ish. go to worship their God יהוה ! Are you not yet aware that Egypt is lost?”  
+
+*Hebrew phrase*: אָבְדָ֖ה מִצְרָֽיִם  
+*Explanation*: The nation of Egypt is personified as an entity that can 'perish' or 'be lost,' emphasizing its utter ruin. This is also hyperbole, exaggerating the extent of the destruction to convey the catastrophi...  
+*Target*: Egypt → the nation of Egypt → country  
+*Vehicle*: perishing entity → lost object/being → ruined entity  
+*Ground*: utter ruin → destruction → catastrophe  
+*Confidence*: 0.80  
+
+**Genesis 6:7** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: I will blot out humankind  
+
+**Full verse (Hebrew)**: וַיֹּ֣אמֶר יְהֹוָ֗ה אֶמְחֶ֨ה אֶת־הָאָדָ֤ם אֲשֶׁר־בָּרָ֙אתִי֙ מֵעַל֙ פְּנֵ֣י הָֽאֲדָמָ֔ה מֵֽאָדָם֙ עַד־בְּהֵמָ֔ה עַד־רֶ֖מֶשׂ וְעַד־ע֣וֹף הַשָּׁמָ֑יִם כִּ֥י נִחַ֖מְתִּי כִּ֥י עֲשִׂיתִֽם  
+**Full verse (English)**: יהוה said, “I will blot out from the earth humankind whom I created—humans together with beasts, creeping things, and birds of the sky; for I regret that I made them.”  
+
+*Hebrew phrase*: אֶמְחֶה אֶת־הָאָדָם  
+*Explanation*: The verb מָחָה ('machah'), 'to blot out' or 'to wipe away,' is used metaphorically to describe the complete destruction or annihilation of humankind. It evokes the image of erasing writing from a tabl...  
+*Target*: humankind → living beings → creation  
+*Vehicle*: erased writing → wiped slate → removed mark  
+*Ground*: complete removal → total annihilation → erasure of existence  
+*Confidence*: 0.90  
+
+**Psalms 9:7** (metonymy) - confidence: 0.90  
+*Figurative phrase*: their very names are lost  
+
+**Full verse (Hebrew)**: הָֽאוֹיֵ֨ב&thinsp;׀ תַּ֥מּוּ חֳרָב֗וֹת לָ֫נֶ֥צַח וְעָרִ֥ים נָתַ֑שְׁתָּ אָבַ֖ד זִכְרָ֣ם הֵֽמָּה  
+**Full verse (English)**: bMeaning of Heb. uncertain.The enemy is no more—ruins everlasting;You have torn down their cities;their very names are lost.-b  
+
+*Hebrew phrase*: אָבַ֖ד זִכְרָ֣ם הֵֽמָּה  
+*Explanation*: This is an idiom signifying complete oblivion or eradication from memory and history. The literal meaning of 'their memory perished/was lost' conveys the figurative meaning of being utterly forgotten....  
+*Target*: enemy's oblivion → complete forgetfulness → eradication of legacy  
+*Vehicle*: perished memory → lost remembrance → disappeared record  
+*Ground*: utter absence → non-existence in consciousness → irreversible disappearance  
+*Confidence*: 0.90  
+
+**Psalms 9:19** (metaphor) - confidence: 0.95  
+*Figurative phrase*: the hope of the afflicted ... lost  
+
+**Full verse (Hebrew)**: כִּ֤י לֹ֣א לָ֭נֶצַח יִשָּׁכַ֣ח אֶבְי֑וֹן תִּקְוַ֥ת (ענוים) [עֲ֝נִיִּ֗ים] תֹּאבַ֥ד לָעַֽד  
+**Full verse (English)**: Not always shall the needy be ignored,nor the hope of the afflicted forever lost.  
+
+*Hebrew phrase*: תִּקְוַ֥ת עֲ֝נִיִּ֗ים תֹּאבַ֥ד  
+*Explanation*: The abstract concept of 'hope' (תִּקְוָה) is metaphorically treated as a living being or physical object that can 'perish' or 'be lost' (תֹּאבַד). This reification portrays the potential end of hope i...  
+*Target*: hope of the afflicted → human emotion → abstract concept  
+*Vehicle*: a perishing entity → living being or physical object → physical existence  
+*Ground*: cessation → coming to an end → state of being  
+*Confidence*: 0.95  
+
+**Psalms 37:22** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: shall be cut off  
+
+**Full verse (Hebrew)**: כִּ֣י מְ֭בֹרָכָיו יִ֣ירְשׁוּ אָ֑רֶץ וּ֝מְקֻלָּלָ֗יו יִכָּרֵֽתוּ  
+**Full verse (English)**: Those blessed by Him shall inherit the land,but those cursed by Him shall be cut off.  
+
+*Hebrew phrase*: יִכָּרֵֽתוּ  
+*Explanation*: This phrase is a common biblical idiom and a metaphor for the complete termination of existence, lineage, or removal from the community, often implying divine judgment leading to death or destruction....  
+*Target*: cursed individuals → wicked people → human beings  
+*Vehicle*: severed branch → cut-down tree → destroyed object  
+*Ground*: termination → destruction → removal from existence  
+*Confidence*: 0.90  
+
+**Psalms 37:15** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: and their bows shall be broken  
+
+**Full verse (Hebrew)**: חַ֭רְבָּם תָּב֣וֹא בְלִבָּ֑ם וְ֝קַשְּׁתוֹתָ֗ם תִּשָּׁבַֽרְנָה  
+**Full verse (English)**: Their swords shall pierce their own hearts,and their bows shall be broken.  
+
+*Hebrew phrase*: וְ֝קַשְּׁתוֹתָ֗ם תִּשָּׁבַֽרְנָה  
+*Explanation*: This phrase uses metonymy and functions as an idiom. The 'bows' (instruments of war) represent the military power or ability to wage war of the wicked. 'Broken' signifies the complete loss of this pow...  
+*Target*: wicked people's military defeat → loss of power → cessation of aggression  
+*Vehicle*: broken bows → destroyed weapons → physical objects  
+*Ground*: disarmament → incapacitation → defeat  
+*Confidence*: 0.95  
+
+**Psalms 46:10** (metonymy) - confidence: 0.90  
+*Figurative phrase*: breaking the bow  
+
+**Full verse (Hebrew)**: מַשְׁבִּ֥ית מִלְחָמוֹת֮ עַד־קְצֵ֢ה הָ֫אָ֥רֶץ קֶ֣שֶׁת יְ֭שַׁבֵּר וְקִצֵּ֣ץ חֲנִ֑ית עֲ֝גָל֗וֹת יִשְׂרֹ֥ף בָּאֵֽשׁ  
+**Full verse (English)**: He puts a stop to wars throughout the earth,breaking the bow, snapping the spear,consigning wagons to the flames.  
+
+*Hebrew phrase*: קֶ֣שֶׁת יְ֭שַׁבֵּר  
+*Explanation*: The act of breaking a bow, a primary weapon of war, stands metonymically for the complete cessation of warfare and disarmament. The instrument represents the activity or outcome....  
+*Target*: cessation of war → disarmament → peace  
+*Vehicle*: broken bow → destroyed weapon → military equipment  
+*Ground*: destruction of means → rendering useless → ending conflict  
+*Confidence*: 0.90  
+
+**Psalms 46:10** (metonymy) - confidence: 0.90  
+*Figurative phrase*: snapping the spear  
+
+**Full verse (Hebrew)**: מַשְׁבִּ֥ית מִלְחָמוֹת֮ עַד־קְצֵ֢ה הָ֫אָ֥רֶץ קֶ֣שֶׁת יְ֭שַׁבֵּר וְקִצֵּ֣ץ חֲנִ֑ית עֲ֝גָל֗וֹת יִשְׂרֹ֥ף בָּאֵֽשׁ  
+**Full verse (English)**: He puts a stop to wars throughout the earth,breaking the bow, snapping the spear,consigning wagons to the flames.  
+
+*Hebrew phrase*: וְקִצֵּ֣ץ חֲנִ֑ית  
+*Explanation*: Similar to breaking the bow, snapping a spear, another key weapon, metonymically represents the end of fighting and the establishment of peace. The instrument represents the activity or outcome....  
+*Target*: cessation of war → disarmament → peace  
+*Vehicle*: snapped spear → destroyed weapon → military equipment  
+*Ground*: destruction of means → rendering useless → ending conflict  
+*Confidence*: 0.90  
+
+*...and 13 more instances*
+
+**Usage breakdown**: perishing entity (3x), perishing beasts (2x), crushed objects (2x)
 
 ---
 
@@ -1530,8 +2031,48 @@ Concepts and Analytical Frameworks for Biblical Poetry: A Foundational Document 
 
 Classical interpretations from traditional Jewish commentators on key verses.
 
+### About the Commentators
+
+#### 1. Rabbi Shlomo Yitzchaki (Rashi)
+
+Rabbi Shlomo Yitzchaki (1040–1105), known as Rashi, is the foundational commentator of Jewish tradition. Living in Troyes, France, his life and work were profoundly shaped by the communal precariousness following the massacres of the First Crusade. This context fueled his pedagogical mission: to make the core Jewish texts, the Tanakh and the Babylonian Talmud, accessible to ensure the continuity of Jewish knowledge. His commentaries on both became indispensable, with his Talmud commentary being printed in every subsequent edition and his Tanakh commentary holding the distinction of being the first Hebrew book ever printed (1475).
+
+Rashi's exegetical method is a revolutionary synthesis of *peshat* (plain, contextual meaning) and *derash* (rabbinic homiletics). While he stated his goal was *peshat*, his genius was not in literalism but in *curation*. He possessed an uncanny ability to anticipate a student's question—a textual redundancy, an awkward phrase, or a narrative difficulty—and would then select a concise midrashic teaching that "settles" this specific problem. Thus, *derash* is not used as a replacement for the plain meaning but as a tool to reveal a deeper coherence *within* the *peshat*. He anchors the Oral Law within the Written Law, demonstrating their inseparability. To aid his local French-speaking audience, he frequently translated difficult Hebrew terms into Old French using Hebrew letters (*la'azim*), a practice that made his work an invaluable resource for modern linguists. His philosophy was his pedagogy; he was not a formal philosopher but an educator driven by a desire to empower every Jew to study. His legacy is one of total saturation; all subsequent Jewish commentary is, in some form, a dialogue with Rashi.
+
+#### 2. Rabbi Abraham ibn Ezra
+
+Rabbi Abraham ibn Ezra (c.1092–1167) represents the zenith of the "Golden Age" of Spanish Jewry. A consummate polymath, he was a master of grammar, philosophy, mathematics, and astrology. After personal tragedies, he spent the second half of his life as an itinerant scholar, wandering through Christian Europe and acting as an intellectual bridge, introducing the sophisticated Sephardic grammatical and scientific traditions to the Jews of France, Italy, and England. His scholarly corpus is vast, including foundational works on Hebrew grammar, Neoplatonic philosophy (*Yesod Mora*), and scientific tracts that introduced the decimal system to European Jews.
+
+His philosophy was a thoroughgoing rationalism, famously stating the "intellect must be the intermediary between man and his God." This rationalism included a deep, scientific belief in astrology, which he viewed as the deterministic physics of the cosmos; the *mitzvot* (commandments), in his view, were divine tools to mitigate this astral determinism. His exegetical method is a conscious and sharp polemic against Rashi's *peshat/derash* synthesis. For Ibn Ezra, the *peshat* is discoverable only through rigorous, scientific mastery of Hebrew grammar and linguistics, and he famously rejects any rabbinic interpretation that "flies in the face of reason." His commentary is concise, witty, and often enigmatic, frequently hinting at controversial ideas with the phrase, "and the intelligent will understand" (*ve-hamaskil yavin*). Scholars agree he was alluding to conclusions that form the basis of modern biblical criticism, such as post-Mosaic authorship of certain verses and the existence of a Deutero-Isaiah. His legacy is the creation of the competing rationalist-grammatical school of exegesis.
+
+#### 3. Rabbi David Kimhi (Radak)
+
+Rabbi David Kimhi (1160–1235), or Radak, was a product of the unique intellectual climate of 13th-century Provence, a "geographic and intellectual crossroads" mediating between the Talmudism of Northern France (Rashi) and the rationalism of Spain (Ibn Ezra). A staunch defender of Maimonides during the Maimonidean Controversy, Radak's primary field was philology. His grammatical treatise, *Sefer Mikhlol*, and his lexicon, *Sefer Ha-Shorashim*, synthesized and systematized Hebrew grammar with such unparalleled clarity that they became the definitive Hebrew textbooks for centuries.
+
+Radak applied this "genius for clarification" to his biblical commentaries, most notably on the *Nevi'im* (Prophets). His exegetical approach represents the "golden mean" of medieval exegesis. He follows the methodology of Ibn Ezra, with a profound commitment to *peshat*, grammatical precision, and a Maimonidean rationalist philosophy. However, unlike the polemical Ibn Ezra, Radak comfortably integrates all his predecessors. He presents the grammatical *peshat* with the accessibility of Rashi and respectfully utilizes rabbinic *derash*, which he clearly distinguishes from the plain meaning. He provides the necessary linguistic, historical, and geographical context to make the prophetic books understandable. His commentary on *Nevi'im* became as standard as Rashi's on the Torah. Because of its clarity and precision, Radak's work became the primary resource for the Christian Hebraists of the Renaissance and Reformation, heavily influencing the translators of the King James Version of the Bible. He remains indispensable for any serious study of the Prophets.
+
+#### 4. Rabbi Menachem ben Solomon (Meiri)
+
+Rabbi Menachem ben Solomon (1249–1316), the Meiri, was a leading Maimonidean rationalist in 13th-century Provence, living at the height of the Maimonidean Controversy. His magnum opus is the *Beit HaBechirah* ("The Chosen House"), a monumental, encyclopedic digest of the Talmud. This work, which was lost for centuries and only rediscovered in the 20th century, is not a line-by-line commentary like Rashi's. Instead, it is a systematic, topical summary. The Meiri omits the "give and take" of the Talmudic debate and instead presents a lucid summary of the entire subject, collating the opinions of all preceding authorities (whom he refers to by epithets, not names) before concluding with the final *halachic* (legal) decision. This work is the ultimate expression of his Maimonidean worldview, imposing a clear, logical, and rational order on the vast sea of the Talmud.
+
+The Meiri's most radical and enduring innovation is his *halachic* position on non-Jews. The Talmud contains discriminatory laws against ancient *akum* (idolaters). The Meiri was the first major authority to rule that these laws were entirely obsolete. He did this by positing a revolutionary *halachic* category: "nations restricted by the ways of religion" (*umot ha-gedurot be-darkhei ha-datot*). He argued that the Talmud's "idolater" was a moral, not theological, category referring to lawless, barbaric ancient peoples. Contemporary Christians and Muslims, by contrast, are governed by *dat* (law, reason, and social order). Because they live by a system of law and morality, the Meiri ruled they are to be treated as equals to Jews in all matters of civil law. Since its rediscovery, his work has become the primary traditional source for modern Jewish universalism and interfaith relations.
+
+#### 5. Rabbi David Altschuler (Metzudat David)
+
+The commentary known as the *Metzudot* ("The Fortresses") is the product of an 18th-century father-son collaboration, initiated by Rabbi David Altschuler (c. 1687–1769) and completed by his son, Rabbi Yechiel Hillel Altschuler. Working in Galicia and Prague, they perceived that the study of Tanakh, particularly *Nevi'im* (Prophets) and *Ketuvim* (Writings), had "weakened." Their work, which covers only *Nevi'im* and *Ketuvim*, was a purely pedagogical intervention designed to reverse this decline.
+
+The brilliance of the *Metzudot* lies not in its content, which is intentionally not original—it is a masterful compilation and simplification based primarily on Radak—but in its revolutionary *form*. Rabbi Yechiel Hillel split the commentary into two distinct parts, printed side-by-side on the page. The first, *Metzudat Tzion* ("Fortress of Zion"), is a simple glossary whose sole function is to define individual difficult Hebrew words. The second, *Metzudat David* ("Fortress of David"), is the commentary proper, providing a clear, flowing paraphrase and explanation of the verse's meaning as a whole. This two-part system created a "frictionless reading experience." It solved the problem of earlier commentaries, like Radak's, which required a student to get bogged down in a grammatical discussion just to understand the verse. With the *Metzudot*, a student can read the flowing paraphrase of *Metzudat David* and only glance at *Metzudat Tzion* if they encounter an unfamiliar word. This pedagogical innovation was a massive success, and the *Metzudot* became a standard, indispensable starting point for any student beginning the study of the Prophets and Writings.
+
+#### 6. Rabbi Meir Leibush Wisser (Malbim)
+
+Rabbi Meir Leibush Wisser (1809–1879), the Malbim, was a "warrior" rabbi, grammarian, and polemicist whose life was defined by his fierce, uncompromising struggle against the 19th-century Haskalah (Jewish Enlightenment) and the nascent Reform movement. His stormy rabbinic career saw him expelled from Bucharest for his staunch opposition to any religious innovations. His commentary was his weapon in this war. His magnum opus, *HaTorah veHaMitzvah*, was an explicit polemic against the Reform movement's claim that the Oral Law (the Talmud) was a later, human invention separate from the "pure" Written Torah. The Malbim's goal was to prove, through systematic linguistic analysis, that the *entire* Oral Law is "implicit in the plain meaning of the verse."
+
+To achieve this, he launched an exegetical counter-reformation built on two radical linguistic principles. First, he rejected the long-held rabbinic principle that "the Torah speaks in human language." He argued that in a divine text, there are *no true synonyms* and *no redundancies*. If the Torah uses two different words for "speak" (e.g., *amar* vs. *diber*), they must have distinct, precise meanings that carry *halachic* implications. Second, in his introduction *Ayelet ha-Shachar*, he laid out a "rediscovered" system of 613 precise grammatical and syntactic rules that he claimed the Talmudic Sages used to derive the Oral Law. With this framework, the Malbim argued that what earlier commentators (like Rashi or Ibn Ezra) saw as *derash* (homiletics) was, in fact, the true, logical, grammatical *peshat* of the verse. He effectively co-opted the Enlightenment's own tools—logic and systematic rules—to defend the divine, inseparable unity of the Written and Oral Law, becoming a hero of the modern Orthodox yeshiva world.
+
+
+
 ### Psalms 1:1
-**Why this verse**: Opening beatitude formula - how commentators interpret אַשְׁרֵי and the threefold wicked categories  
+**Why this verse**: Opening beatitude formula - how do commentators interpret אַשְׁרֵי structure and threefold negative progression of walk/stand/sit with three wicked categories?  
 
 #### Rashi
 **Hebrew**: אַשְׁרֵי הָאִישׁ. בַּעֲשָׂרָה לְשׁוֹנוֹת שֶׁל זֶמֶר נֶאֱמַר סֵפֶר זֶה, בְּנִצּוּחַ, בְּנִגּוּן, בְּמִזְמוֹר, בְּשִׁיר, בְּהַלֵּל, בִּתְפִלָּה, בִּבְרָכָה, בְּהוֹדָאָה, בְּאַשְׁרֵי, בְּהַלְלוּיָהּ, כְּנֶגֶד עֲשָׂרָה בְּנֵי אָדָם שֶׁאֲמָרוּהוּ, אָדָם, מַלְכִּי צֶדֶק, אַבְרָהָם, מֹשֶׁה, דָּוִד, שְׁלֹמֹה, אָסָף, וּשְׁלֹשָׁה בְּנֵי קֹרַח, וַחֲלוּקִין עַל יְדוּתוּן (קהלת רבה ז,לט). יֵשׁ אוֹמְרִים: אָדָם...  
@@ -1577,7 +2118,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 1:2
-**Why this verse**: Torah meditation as delight - traditional understanding of חֵפֶץ and יֶהְגֶּה practices  
+**Why this verse**: Torah meditation practice - traditional understanding of חֵפֶץ (delight vs. duty) and יֶהְגֶּה (vocalized vs. silent practice), day/night merismus significance  
 
 #### Rashi
 **Hebrew**: כִּי אִם בְּתוֹרַת ה׳ חֶפְצוֹ. הָא לָמַדְתָּ, שֶׁמּוֹשַׁב לֵצִים מְבִיאוֹ לִידֵי בִּטּוּל תּוֹרָה (עבודה זרה יח:): | וּבְתוֹרָתוֹ יֶהְגֶּה. בִּתְחִלָּה הִיא נִקְרֵאת תּוֹרַת ה׳, וּמִשֶּׁעָמַל בָּהּ הִיא נִקְרֵאת תּוֹרָתוֹ (עבודה זרה יט.): | יֶהְגֶּה. כָּל לְשׁוֹן הֶגֶה בַּלֵּב הוּא, כְּמָה דְאַתְּ אָמַר ״וְהֶגְיוֹן לִבִּי״ (תהלים יט:טו), ״לִבְּךָ יֶהְגֶּה אֵימָה״ (ישעיהו לג:יח), ״כִּי שֹׁד יֶהְגֶּ...  
@@ -1616,7 +2157,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 1:3
-**Why this verse**: Transplanted tree metaphor - classical interpretation of שָׁתוּל and cultivation imagery  
+**Why this verse**: Tree metaphor elaboration - classical interpretation of שָׁתוּל (passive planting, divine agency), water channels imagery, fruitfulness in season, comprehensive success promise  
 
 #### Rashi
 **Hebrew**: שָׁתוּל. פְּלַנְדִי״ץ בְּלַעַ״ז: | פַּלְגֵי. רָאוּיְיָארוֹ״שׁ בְּלַעַ״ז: | וְעָלֵהוּ לֹא יִבּוֹל. אֲפִלּוּ הַפְּסֹלֶת שֶׁבּוֹ לְצֹרֶךְ הִיא. שִׂיחָתָן שֶׁל תַּלְמִידֵי חֲכָמִים לְצֹרֶךְ הִיא וּצְרִיכָה לִמּוּד (עבודה זרה יט:): | לֹא יִבּוֹל. לְשׁוֹן כָּמוֹשׁ, פְּלִישְׁטִי״ר בְּלַעַ״ז:  
@@ -1660,7 +2201,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 1:4
-**Why this verse**: Chaff imagery brevity - how commentators explain minimal description of wicked  
+**Why this verse**: Chaff imagery brevity - how commentators explain dramatic structural asymmetry and insubstantiality metaphor, contrast with elaborate tree description  
 
 #### Rashi
 **Hebrew**: כַּמּוֹץ. לְשׁוֹן קַשׁ, קוֹמְבְּלָ״א בְּלַעַ״ז:  
@@ -1699,7 +2240,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 1:5
-**Why this verse**: Judicial assembly language - traditional eschatology of מִשְׁפָּט and עֲדַת צַדִּיקִים  
+**Why this verse**: Judgment and assembly language - traditional eschatology of יָקֻמוּ (standing/arising), forensic vs. eschatological בַּמִּשְׁפָּט, nature of עֲדַת צַדִּיקִים  
 
 #### Rashi
 **Hebrew**: עַל כֵּן וְגוֹ׳. דָּבוּק הוּא לַמִּקְרָא שֶׁל אַחֲרָיו:  
@@ -1743,7 +2284,7 @@ Classical interpretations from traditional Jewish commentators on key verses.
 ---
 
 ### Psalms 1:6
-**Why this verse**: Two ways conclusion - how commentators frame יוֹדֵעַ יְהוָה and divine knowledge vs. perishing  
+**Why this verse**: Two ways theology climax - how commentators frame יוֹדֵעַ (YHWH's knowing as covenantal/constitutive), תֹּאבֵד (self-destruction vs. divine judgment), דֶּרֶךְ inclusio significance  
 
 #### Rashi
 **Hebrew**: כִּי יוֹדֵעַ ה׳ וְגוֹ׳. לְפִי שֶׁהוּא יוֹדֵעַ דֶּרֶךְ צַדִּיקִים, וּלְפָנָיו הוּא לְהַכִּירָהּ תָּמִיד, וְדֶרֶךְ רְשָׁעִים שְׂנוּאָה בְּעֵינָיו וּמַעֲבִירָהּ מִלְּפָנָיו, עַל כֵּן לֹא תְהֵא הֲקָמַת רֶגֶל לָרְשָׁעִים לְיוֹם הַדִּין, וְלַחַטָּאִים לִיכָּתֵב בַּעֲדַת צַדִּיקִים:  
@@ -1789,7 +2330,7 @@ This section summarizes how Psalm {psalm_chapter} and its phrases are used in co
 
 # Psalm 1 in Jewish Liturgy
 
-Psalm 1 is recited in its entirety as an introductory supplement within the Yom Kippur evening service (Maariv) across both Ashkenazic and Edot HaMizrach traditions. In the Edot HaMizrach rite specifically, Psalm 1 appears as the opening of a liturgical sequence that includes Psalms 2, 3, and 4, followed by Psalm 24, a Yehi Ratzon supplication, and the Full Kaddish before culminating in the Aleinu prayer. The same psalmic collection (Psalms 1-4) also serves as an introductory prelude in devotional recitations known as Shir HaYichud and Anim Zemirot, observed by certain communities on Yom Kippur night either before or after the formal Maariv service, after which the complete Shir HaYichud for all seven days of the week follows. The positioning of Psalm 1 at the threshold of these High Holiday devotions is particularly significant, as its opening declaration regarding the righteous and the wicked ("Blessed is the one who has not walked in the counsel of the wicked") establishes the penitential and moral framework appropriate to the Day of Atonement. Though Psalm 1 appears in limited liturgical contexts, its strategic placement at the commencement of these solemn evening prayers underscores its thematic resonance with the introspective and judgmental character of Yom Kippur observance.
+Psalm 1 is recited in its entirety within the Yom Kippur evening (Maariv) service, where it functions as an introductory supplement to the liturgical blocks that follow. In the Edot HaMizrach rite, the complete psalm opens a devotional sequence that precedes the recitation of Aleinu, the central concluding prayer of the Yom Kippur Maariv service, following an initial grouping of Psalms 1 through 4 and 24 with an intervening Yehi Ratzon supplication. Similarly, among certain communities observing Yom Kippur night, Psalm 1 appears as the opening element of a collection of devotional texts including Shir HaYichud and Anim Zemirot, again serving as an introductory framework before the main devotional recitations. The psalm's placement at the threshold of these High Holiday liturgies—both in the formal Ashkenazic and Edot HaMizrach traditions—reflects its thematic appropriateness as an opening meditation on the righteous path, establishing a spiritual orientation for the penitential prayers that follow. Though Psalm 1 does not appear to feature prominently in daily or weekly liturgical cycles according to the available evidence, its concentrated use on Yom Kippur underscores its particular resonance during the Day of Atonement, when communities seek alignment with the blessed path described in its opening verses.
 
 ### Phrase-Level Liturgical Usage
 
@@ -1797,41 +2338,41 @@ The following phrases from Psalm {psalm_chapter} appear in various liturgical co
 
 #### Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ לֹֽא־יִבּ֑וֹל וְכֹ֖ל אֲשֶׁר־יַעֲשֶׂ֣ה יַצְלִֽיחַ׃ (from 1:3)
 
-# Liturgical Use of Psalm 1:3 in Jewish Worship
+# Liturgical Usage of Psalm 1:3
 
-The verse "וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ" (And he shall be like a tree planted by streams of water, that brings forth its fruit in its season, and whose leaf does not wither, and all that he does prospers) appears in the liturgical tradition of Edot HaMizrach in two significant contexts associated with blessing and divine favor. In the Mussaf Amidah for the Three Pilgrimage Festivals, the phrase is integrated into a larger poetic composition that invokes divine blessing for the coming year, establishing thematic continuity between the prayer's petitions and the psalmist's vision of flourishing righteousness. More prominently, the verse appears in the Rosh Hashanah night Kiddush ceremony as part of an extended acrostic poem ("Shanah Zo...") that precedes the core blessings, where it is quoted directly within the liturgical context: "אָנָּא יְהֹוָה הַצְלִיחָה נָא: כַּכָּתוּב: יִשָּׂא בְרָכָה מֵאֵת יְהֹוָה יאהדונהי, וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ: וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם, אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל, וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ" (Please, O Lord, grant success: as it is written, May he receive blessing from the Lord... And he shall be like a tree planted by streams of water...). In both liturgical settings, the verse functions to invoke the righteous person's prosperity and divine success, making it particularly apt for festival and new year celebrations when the community seeks blessing and spiritual flourishing in the year ahead.
+The verse from Psalm 1:3, "וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ" ("and he shall be like a tree planted by streams of water, which yields its fruit in season"), appears in the liturgical traditions of Edot HaMizrach (Sephardic and Eastern communities) in two significant ceremonial contexts during the High Holiday season. In the Siddur Edot HaMizrach, the complete verse is incorporated into the Mussaf Amidah for the Three Pilgrimage Festivals, where it functions within a broader liturgical framework emphasizing divine blessing and agricultural prosperity. More prominently, the verse appears in the Rosh Hashanah night Kiddush ceremony within the Machzor, where it is cited as scriptural support following the supplications "אָנָּא יְהֹוָה הוֹשִׁיעָה נָּא, אָנָּא יְהֹוָה הַצְלִיחָה נָא" ("Please, O Lord, save us; please, O Lord, grant us success"), with the liturgy stating: "וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי מָיִם, אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא־יִבּוֹל, וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ." In this domestic ritual context, the verse serves as a prooftext for the blessing of success and prosperity sought during the new year, connecting the individual's spiritual fruitfulness to the divine promise of sustained blessing. The phrase's appearance in both the festive Amidah and the intimate home ceremony reflects its theological significance as a scriptural guarantee of divine favor for those whose lives are rooted in spiritual nourishment, much as a well-watered tree bears abundant fruit.
 
 ---
 
 #### Phrase: כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם (from 1:3)
 
-# Narrative Commentary
+# Scholarly Narrative
 
-The phrase כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם (like a tree planted by streams of water) from Psalm 1:3 appears in Jewish liturgy exclusively within the Tefillat Geshem (Prayer for Rain), the special piyyutim recited during the Chazzan's repetition of the Mussaf Amidah on Shemini Atzeret across both Ashkenazi and Sefardi traditions. This acrostic poem, which begins with the words "זְכוֹר אָב נִמְשַׁךְ אַחֲרֶיךָ כַּמַּיִם. בֵּרַכְתּוֹ כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם" (Remember the father drawn after You like water. You blessed him like a tree planted by streams of water), is inserted into the second blessing of the Amidah (Gevurot) immediately before the seasonal recitation of "Mashiv HaRuach U'Morid HaGeshem." The liturgical integration of this Psalmist image is particularly apt for the occasion, as Shemini Atzeret marks the beginning of the winter rainy season in the Land of Israel, and the metaphor of the tree flourishing by water sources evokes both the agricultural concerns of the Jewish people and the divine blessing that sustains all growth. The phrase appears as part of a larger acrostic structure that develops the theme of water and blessing throughout the piyyut, connecting the patriarchal narrative with Israel's ongoing dependence on rain. This usage demonstrates how the rabbinical liturgists wove biblical imagery into seasonal prayers, transforming the Psalmist's meditation on the righteous person into a petition for the life-giving waters essential to the land and its inhabitants.
+The phrase כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם (like a tree planted by streams of water) from Psalm 1:3 appears in Jewish liturgy exclusively within the Tefillat Geshem (Prayer for Rain), the acrostical piyyutim recited during the Chazzan's repetition of the Mussaf Amidah on Shemini Atzeret across both Ashkenazi and Sefardi traditions. This poetic insertion into the second blessing (Gevurot) invokes the psalmist's imagery of flourishing vegetation sustained by abundant water as a metaphorical petition for winter rainfall essential to the Land of Israel. The liturgy integrates the phrase within a broader acrostic structure that addresses God: "זְכוֹר אָב נִמְשַׁךְ אַחֲרֶיךָ כַּמַּיִם. בֵּרַכְתּוֹ כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם. גְּנַנְתּוֹ הִצַּלְתּוֹ מֵאֵשׁ וּמִמַּיִם" (Remember the father drawn after You like waters; You blessed him like a tree planted by streams of water; You protected him, delivered him from fire and water), where the Psalm verse functions as a blessing formula recalling God's covenantal care for the patriarchs. The application of this botanical metaphor in the rain prayer transforms Psalm 1's wisdom imagery—originally depicting the righteous person's prosperity—into a collective petition for divine sustenance through precipitation. This liturgical adaptation demonstrates how the Rabbis appropriated Scriptural language to address the seasonal agricultural needs of the Jewish people, particularly during the transitional moment when the liturgical calendar shifts to winter and the blessing for rain is formally introduced into the Amidah.
 
 ---
 
 #### Phrase: בַּעֲצַ֢ת רְשָׁ֫עִ֥ים (from 1:1)
 
-# Scholarly Commentary
+# Scholarly Commentary Paragraph
 
-The phrase בַּעֲצַת רְשָׁעִים (in the counsel of the wicked) from Psalm 1:1 appears in the Hakafot (circuits) of Simchat Torah as recited in the Sefard liturgical tradition during both the evening and morning services. This occurrence is situated within the Torah Service on Shemini Atzeret/Simchat Torah, specifically as part of the devotional and petitionary material that accompanies the seven circuits around the Torah. The phrase is integrated into a supplication that seeks divine protection and moral guidance, as evidenced in the liturgical context: "וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים, וְלֹא נִהְיֶה מֵהוֹלְכֵי רָכִיל, וּלְמַעַן זְכוּת אַהֲרֹן קְדוֹשׁ יְהֹוָה הֶחָתוּם" (and merit us that we do not walk in the counsel of the wicked, and are not among those who spread slander, and for the sake of the merit of Aaron the holy, O Lord the sealed one). The invocation of Psalm 1's opening sentiment here reflects the liturgical concern with righteous conduct and divine protection during the joyous celebration of Torah completion and renewal. By embedding this phrase within the Hakafot, the Sefard rite connects the festive joy of Simchat Torah with the ethical imperatives established in the opening of the Psalter, creating a moment of spiritual recalibration amidst celebration.
+The phrase בַּעֲצַ֢ת רְשָׁ֫עִ֥ים (in the counsel of the wicked) from Psalm 1:1 appears in the Sefard liturgical tradition during the Hakafot (circuits) of Simchat Torah, performed in both the evening and morning services. Within this joyous celebration of Torah, the phrase is incorporated into a Yehi Ratzon (petition) prayer that accompanies one of the seven circuits, where it serves a protective function within the broader liturgical context. The full liturgical passage reads: וּתְזַכֵּנוּ שֶׁלֹּא נֵלֵךְ בַּעֲצַת רְשָׁעִים, וְלֹא נִהְיֶה מֵהוֹלְכֵי רָכִיל, וּלְמַעַן זְכוּת אַהֲרֹן קְדוֹשׁ יְהֹוָה הֶחָתוּם (and grant us merit that we shall not walk in the counsel of the wicked, and shall not be among those who carry tales, and for the merit of Aaron the holy, O Lord the sealed One). The invocation of Psalm 1's opening imagery—the contrast between righteous and wicked counsel—within the Hakafot ceremony creates a spiritual protective framework, ensuring that the community's celebration of Torah completion and renewal occurs within proper ethical and spiritual boundaries. This integration of the psalmist's moral teaching into the festive Simchat Torah liturgy demonstrates how classical biblical wisdom traditions were woven into the Jewish calendar's most exuberant celebrations.
 
 ---
 
 #### Phrase: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ ׀ יִתֵּ֬ן בְּעִתּ֗וֹ וְעָלֵ֥הוּ (from 1:3)
 
-# Scholarly Narrative
+# Scholarly Commentary Paragraph
 
-The opening verses of Psalm 1, which describe the righteous person as "a tree planted by streams of water, that yields its fruit in season, and whose leaf does not wither" (וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבֹּל), appears within the Hakafot (processional circuits) of Simchat Torah in the Sefard liturgical tradition, recited during both the evening and morning services. The phrase is embedded within a broader liturgical sequence that includes ethical imperatives drawn from the Psalms—"Turn from evil and do good, seek peace and pursue it" (סוּר מֵרָע וַעֲשֵׂה טוֹב, בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ)—followed immediately by this botanical metaphor of spiritual flourishing. The liturgy presents the full context: "וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ. סוּר מֵרָע וַעֲשֵׂה טוֹב, בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ. וְהָיָה כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבֹּל וְכָל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ." This integration of Psalm 1 into the Hakafot liturgy connects the celebration of Torah completion and renewal (Simchat Torah) with the promise of spiritual prosperity that comes from adherence to divine instruction, transforming the festival's joyous circuits into a meditation on the fruits of righteous living. The phrase's singular appearance in Jewish liturgy underscores its particular resonance within this specific festive context, where the imagery of perpetual fruitfulness and unwithering leaves becomes a benediction upon the community as it celebrates the eternal cycle of Torah study.
+The phrase "וְהָיָה כְּעֵץ שָׁתוּל עַל־פַּלְגֵי־מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ" from Psalm 1:3 appears in the Sefard liturgical tradition during the Hakafot (circuits) of Simchat Torah, which are performed in both the evening (Ma'ariv) and morning (Shacharit) services. This verse is integrated into the Torah Service section of the Hakafot as part of a composite liturgical block that includes introductory verses, piyyutim, and Kabbalistic prayers corresponding to the seven Sefirot. The phrase is woven into the liturgy within a sequence that reads: "וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ. סוּר מֵרָע וַעֲשֵׂה טוֹב, בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ. וְהָיָה כְּעֵץ שָׁתוּל עַל פַּלְגֵי מַיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבֹּל וְכָל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ." The imagery of the tree planted by streams of water, bearing fruit in its season with unfailing leaves, serves as a meditation on spiritual prosperity and divine blessing during the joyous celebration of Torah completion and renewal. This single liturgical occurrence reflects the selective use of Psalm 1 in the Sefard rite, where its themes of righteous conduct and flourishing align with the spiritual aspirations expressed during Simchat Torah's festive circuits.
 
 ---
 
 #### Phrase: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א (from 1:1)
 
-# Scholarly Commentary on Psalm 1:1 in Jewish Liturgy
+# Scholarly Narrative
 
-The phrase וּבְמוֹשַׁב לֵצִים לֹא (and in the seat of the scornful he does not sit) from Psalm 1:1 appears in the Siddur Edot HaMizrach as part of the study of Pirkei Avot, the Mishnaic tractate of ethical teachings customarily recited on Shabbat afternoons following the Mincha service, particularly during the weeks between Passover and Shavuot. The phrase is introduced within a halakhic discussion that contrasts two types of gatherings: those devoid of Torah discourse are deemed a "seat of the scornful," as the Talmud establishes through this very Psalmist's declaration. The liturgical context reads: "שֶׁיּוֹשְׁבִין וְאֵין בֵּינֵיהֶם דִּבְרֵי תוֹרָה, הֲרֵי זֶה מוֹשַׁב לֵצִים, שֶׁנֶּאֱמַר: וּבְמוֹשַׁב לֵצִים לֹא יָשָׁב׃ אֲבָל שְׁנַיִם שֶׁיּוֹשְׁבִין וְיֵשׁ בֵּינֵיהֶם דִּבְרֵי תוֹרָה, שְׁכִינָה שְׁרוּיָה" (when people sit together without words of Torah between them, behold this is a seat of the scornful, as it is said: "and in the seat of the scornful he does not sit"; but when two sit together with words of Torah between them, the Divine Presence rests upon them). This integration of the Psalm verse into the Mishnaic teaching exemplifies how biblical proof-texts substantiate rabbinic ethical instruction, reinforcing the supreme value of Torah study and righteous fellowship within Jewish practice.
+The phrase וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א from Psalm 1:1 appears in the Siddur Edot HaMizrach within the framework of Pirkei Avot (Chapters of the Fathers), a Mishnaic tractate customarily studied on Shabbat afternoons following the Mincha service, particularly during the weeks between Passover and Shavuot. The phrase is cited in the context of a Talmudic teaching that interprets the biblical language to establish a principle regarding proper social conduct and the sanctity of Torah study. The liturgy presents the verse as scriptural support for the dictum: "שֶׁיּוֹשְׁבִין וְאֵין בֵּינֵיהֶם דִּבְרֵי תוֹרָה, הֲרֵי זֶה מוֹשַׁב לֵצִים, שֶׁנֶּאֱמַר: וּבְמוֹשַׁ֥ב לֵ֝צִ֗ים לֹ֣א יָשָֽׁב׃" (When people sit together without words of Torah between them, behold this is a gathering of scoffers, as it is stated: "nor sits in the seat of scoffers"). This citation demonstrates how the Psalmist's condemnation of the "seat of scoffers" is reinterpreted within Jewish ethical tradition as a positive exhortation toward continuous Torah engagement. The phrase thus functions within the supplemental study of Pirkei Avot not as a standalone biblical text but as integral proof-text within rabbinic homily, reinforcing the central value of Torah discourse in Jewish communal life.
 
 ---
 
@@ -1839,7 +2380,162 @@ The phrase וּבְמוֹשַׁב לֵצִים לֹא (and in the seat of the sc
 
 # Scholarly Narrative
 
-The phrase וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם (and he shall be like a tree planted by streams of water) from Psalm 1:3 appears in the Siddur Edot HaMizrach as a scriptural proof-text within the study of Pirkei Avot (the Ethics of the Fathers), which is customarily recited on Shabbat afternoons following the Mincha service, particularly during the weeks between Passover and Shavuot. The phrase is cited in the context of a Mishnaic discussion concerning the righteous person whose character remains unmoved by external forces, with the liturgy presenting the verse as scriptural corroboration: כָּל־הָרוּחוֹת שֶׁבָּעוֹלָם בָּאוֹת וְנוֹשְׁבוֹת בּוֹ, אֵין מְזִיזִין אוֹתוֹ מִמְּקוֹמוֹ, שֶׁנֶּאֱמַר: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י מָ֥יִם (all the winds of the world come and blow upon him, yet they do not move him from his place, as it is said: and he shall be like a tree planted by streams of water). The botanical metaphor of the tree rooted by flowing water serves as a powerful illustration of spiritual constancy and moral stability, making it particularly apt for the ethical teachings of Pirkei Avot. This usage demonstrates how the Psalms function within the framework of rabbinic textual study during the supplemental Shabbat afternoon period, enriching the contemplative atmosphere of the intermediate Shabbat day.
+The phrase וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם (and he shall be like a tree planted by streams of water) from Psalm 1:3 appears in the liturgical tradition of Edot HaMizrach as a prooftext within the study of Pirkei Avot, the Mishnaic tractate of ethical teachings recited on Shabbat afternoons following the Mincha service. This scriptural citation functions as scriptural support for a passage in Pirkei Avot that describes the righteous person as immovable by worldly forces, with the liturgy presenting the extended context: "כָּל־הָרוּחוֹת שֶׁבָּעוֹלָם בָּאוֹת וְנוֹשְׁבוֹת בּוֹ, אֵין מְזִיזִין אוֹתוֹ מִמְּקוֹמוֹ, שֶׁנֶּאֱמַר: וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י מָ֥יִם, וְעַל יוּבַל יְשַׁלַּח שָֽׁרָשָׁיו, וְלֹא יִרְאֶה כִּי יָבֹֽא חֹם" (all the winds of the world come and blow upon him, yet they do not move him from his place, as it is said: and he shall be like a tree planted by streams of water, and by a stream shall he send forth his roots, and he shall not fear when heat comes). The phrase is particularly recited during the weeks between Passover and Shavuot, when one chapter of Pirkei Avot is customarily studied each Shabbat afternoon, thereby integrating this Psalmist's image of stability and spiritual rootedness into the weekly rhythm of Jewish ethical study and contemplation.
+
+---
+
+
+---
+
+## Rabbi Jonathan Sacks on Psalm 1
+
+### About Rabbi Jonathan Sacks
+
+Rabbi Lord Jonathan Sacks (1948–2020) was a British Orthodox rabbi, philosopher, and public theologian who served as the Chief Rabbi of the Commonwealth from 1991 to 2013. A graduate in philosophy from Cambridge, he became one of the world's most prominent public voices for faith, integrating traditional Jewish thought with Western philosophy and science. His vast scholarly corpus includes over 40 books, which fall into two main categories: biblical and liturgical commentary, most famously his *Covenant & Conversation* essays on the weekly Torah portion; and works of public theology, such as *The Great Partnership* and *The Dignity of Difference*.
+
+Rabbi Sacks's philosophy was a 21st-century application of *Torah ve-Hokhma* (Torah and Wisdom). He argued that science and religion are not in conflict but are "two hemispheres of the brain": "Science takes things apart to see how they work. Religion puts things together to see what they mean." His exegetical approach is not that of a classical *parshan* (commentator) focused on grammatical or textual puzzles. His method is thematic, philosophical, and ethical. In *Covenant & Conversation*, he uses the Torah portion as a springboard to discuss the most pressing existential and moral concerns of modernity—leadership, family, ethics, and alienation. A typical essay masterfully blends insights from classical commentators like Rashi with Western philosophers, modern psychology, and current events. His work answers a new, modern question. While classical commentators asked, "What does this verse *mean*?" Rabbi Sacks, writing for an educated and often secularized world, answers the question, "Why does this verse *matter*?" He translated the text's covenantal message into a universal moral framework for the 21st century.
+
+**About this section**: These excerpts are from Rabbi Sacks' writings. They are NOT traditional commentaries on Psalms. Rather, they show how Sacks references and interprets psalm verses in his broader theological and philosophical works. Each entry includes the psalm verse he referenced plus approximately 1000 characters before and after to reveal his thinking about that verse.
+
+### Verse 1 (2 references)
+
+#### Reference 1: A Weekly Reading of the Jewish Bible, Pekudei; Don't Sit, Walk
+**Source**: Maggid Books and OU Press, 2021
+
+...Sitting is the new smoking. So goes the new health mantra. Spend too much time at a desk or in front of a screen and you are at risk of significant danger to your health. The World Health Organisation has identified physical inactivity as the fourth greatest health hazard today, ahead of obesity. In the words of Dr. James Levine, one of the world’s leading experts on the subject, and the man credited with coining the mantra, “We are sitting ourselves to death.” The reason is that we were not made to sit still. Our bodies were made for movement, standing, walking, and running. If we fail to give the body regular exercise, it can easily malfunction and put us at risk of serious illness. The question is: Does the same apply to the soul, the spirit, the mind? It is fascinating to look at the sequence of verbs in the very first verse of the book of Psalms: “Happy is the man who does not walk in the counsel of the ungodly, or stand in the way of sinners, or sit in the seat of the scornful” (Ps. 1:1). That is a picture of the bad life, lived in pursuit of the wrong values. Note how the bad man begins by walking, then stands, then sits. A bad life immobilises. That is the point of the famous verses in Hallel: Their idols are silver and gold, the work of men’s hands. They have mouths, but do not speak, eyes but do not see, ears but do not hear, noses but do not smell. They have hands but cannot feel, feet but cannot walk, nor can they make a sound with their throats. Those who make them will be like them; so will all who trust in them. (Ps. 115:4–8) If you live for lifeless things, you will become lifeless. Except in the House of the Lord, Jews do not sit. Jewish life began with two momentous journeys, Abraham from Mesopotamia and Moses and the Israelites from Egypt. “Walk on ahead of Me and be blameless,” said God to Abraham (Gen. 17:1). At the age of ninety-nine, having just been circumcised, Abraham saw three strangers passing by and “ran to meet them” (ibid. 18:2). On the verse...
+
+---
+
+#### Reference 2: A Weekly Reading of the Jewish Bible, Ki Tavo; The Pursuit of Joy
+**Source**: Maggid Books and The Orthodox Union, 2016
+
+...rebelliously,” or “contemptuously.” But the curses in Deuteronomy are provoked simply “because you did not serve the Lord your God with joy and gladness of heart out of the abundance of all things” (Deut. 28:47). Now, joylessness may not be the best way to live, but it is surely not even a sin, let alone one that warrants a litany of curses. What does the Torah mean when it attributes national disaster to a lack of joy? Why does joy seem to matter in Judaism more than happiness? To answer these questions we have first to understand the difference between happiness and joy. This is how the first psalm describes the happy life: Happy is the man who has not walked in the counsel of the wicked, nor stood in the way of sinners, nor sat where scoffers sit. But his desire is in the Torah of the Lord; on his Torah he meditates day and night. He shall be like a tree planted by streams of water, bearing its fruit in its season, and its leaf does not wither; and in all that he does he prospers. (Ps. 1:1–3) This is a serene and blessed life, granted to one who lives in accordance with the Torah. Like a tree, such a life has roots. It is not blown this way and that by every passing wind or whim. Such people bear fruit, stay firm, survive, and thrive. Yet for all that, happiness is the state of mind of an individual. Simḥa in the Torah is never about individuals. It is always about something we share. A newly married man does not serve in the army for a year, says the Torah, so that he can stay at home “and bring joy to the wife he has married” (Deut. 24:5). You shall bring all your offerings to the central Sanctuary, says Moses, so that “there, in the presence of the Lord your God, you and your families shall eat and rejoice in all you have put your hand to, because the Lord your God has blessed you” (Deut. 12:7). The festivals as described in Deuteronomy are days of joy, precisely because they are occasions of collective celebration: “you, your sons and daughters, your male and female...
+
+---
+
+### Verse 3 (1 reference)
+
+#### Reference 1: A Weekly Reading of the Jewish Bible, Kedoshim; Made with Love
+**Source**: OU Press, The Rabbi Sacks Legacy, Maggid Books, 2022
+
+...י אִם עֲשׂוֹת מִשְׁפָּט וְאַהֲבַת חֶסֶד וְהַצְנֵעַ לֶכֶת עִם אֱלֹהֶיךָ״ (מיכה ו, ח), ודברי זכריה ״וְהָאֱמֶת וְהַשָּׁלוֹם אֱהָבוּ״ (זכריה ח, יט). אך בכל המקרים הללו האהבה מופנית לדברים מופשטים — הטוב, החסד, האמת והשלום; לא לאנשים. הקול הנבואי עוסק בהתנהלותם של אנשים בחברה. האם הם נאמנים לאלוהים וזה לזה? האם הם פועלים בהגינות, בצדק, ומתוך דאגה לפגיעים בחברה? האם המנהיגים הפוליטיים והדתיים פועלים בהגינות? האם זו חברה מרוממת, חברה שהיחידים בה מרגישים שהיא מתייחסת אליהם כראוי ומטפחת את הטוב שבהם? חברה מוסרית תפרח; חברה לא מוסרית, או א־מוסרית, תיבּוֹל. זו ליבת התובנה הנבואית. הנביאים לא דרשו מהאנשים שיאהבו זה את זה. האהבה נמצאת מחוץ לשטח השיפוט שלהם. חברה צריכה צדק, לא אהבה. קול החוכמה בתורה, בנביאים ובעיקר בכתובים מחפש תכונות אחרות ותוצאות אחרות. אם אדם חי חיי סגולה, חיי מידות טובות, החיים בעיקרם יאירו לו פנים. דוגמה טובה לכך היא מזמור א בתהילים. האדם ההוגה בתורה יהיה ״כְּעֵץ שָׁתוּל עַל פַּלְגֵי מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבּוֹל וְכֹל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ״ (תהילים א, ג). זהו קול החוכמה. הנוהג כראוי יבוא על שכרו. הוא ימצא אושר (זה עניינה של המילה ״אשרי״). אנשים טובים אוהבים את ה׳, את המשפחה, את החברים ואת המידות הטובות. אולם ספרות החוכמה אינה מדברת על אהבת הרֵע והגר. החזון המוסרי של הכוהן, המבדילו מן הנביא ומן החכם, טמון במילה ״קדוש״. האדם או הדבר הקדושים הם נבדלים, נפרדים, שונים. הכוהנים נבדלו משאר האומה. לא הייתה להם נחלה משלהם בארץ. הם לא חיו כעובדי אדמה. תחום הפעולה שלהם היה המשכן והמקדש. הם חיו במוקד השראת השכינה. הם היו המשמשים בקודש, ועל כן נדרשו להקפיד על טהרתם ולהיזהר מטומאה מכל סוג. הם היו קדושים. מבחינה זאת, הקדושה נתפסה כתכונה ייחודית של הכוהנים. אך במתן תורה נרמזנו כי הקדושה נוגעת לא רק לבני אהרן אלא לעם כולו: ״וְאַתֶּם תִּהְיוּ לִי מַמְלֶכֶת כֹּהֲנִים וְגוֹי קָדוֹשׁ״ (שמות יט, ו). בפרק שלנו, התורה חוזרת לכך לראשונה. ״וַיְדַבֵּר ה׳‏ אֶל מֹשֶׁה לֵּאמֹר: דַּבֵּר אֶל כָּל עֲדַת בְּנֵי יִשְׂרָאֵל וְאָמַרְתָּ אֲלֵהֶם, ׳קְדֹשִׁים תִּהְיוּ, כִּי קָדוֹשׁ אֲנִי ה׳‏ אֱלֹהֵיכֶם׳״ (ויקרא יט, א–ב). מכאן שאתיקת הקדושה חלה לא רק על הכוהנים אלא על האומה...
+
+---
+
+### Verse 4 (2 references)
+
+#### Reference 1: Transforming the Story
+**Source**: Covenant and Conversation Family Edition, Maggid Books, 2023
+
+...ppened (the past as past) did not change, but its significance (the past as part of a narrative of transformation) did. That too was the profound philosophical-spiritual truth Yosef conveyed to his brothers. By your repentance – he intimated to them – you have changed the story of which you are a part. The harm you intended to do ultimately brought about good. So long as you stayed the people prepared to sell a brother into slavery, none of that good could be attributed to you, but now you have transformed yourself through teshuva, and so have transformed the story of your life as well. By your change of heart you have earned the right to be included in a narrative whose ultimate outcome was benign. FROM THE THOUGHT OF RABBI SACKSTeshuva sensitises us to the full significance of time. There are those who live purely in the present, but their lives have no overarching meaning. They react rather than act. They travel with no ultimate destination. They are “like chaff blown by the wind” (Tehillim 1:4). To be a Jew is to live poised between past and future: the past and future of our individual lives, of our ancient but still young people, and of humanity as a whole. Teshuva tells us that our past does not determine our future. We can change. We can act differently next time than last. If anything, our future determines our past. Our determination to grow as human beings – our commitment to a more faithful, sensitive, decent life in the year to come – gives us the courage and honesty to face our past and admit its shortcomings. Our teshuva and God’s forgiveness together mean that we are not prisoners of the past, held captive by it. In Judaism, sin is what we do, not what we are. Therefore we remain intact, able to acknowledge our failures and then move on. Ceremony &amp; Celebration, Rosh HaShana, 19–20 QUESTIONS TO PONDER 1. How does the concept of teshuva sensitise us to the significance of time, helping us to live in the moment? 2. Where do we see this message in Parashat Vayeḥ...
+
+---
+
+#### Reference 2: Introduction to the Holidays, Rosh HaShana; The Anniversary of Creation, Past, Present and Future
+**Source**: Maggid Books, 2017
+
+...lly in the central section of the Musaf Amida. On all other festivals, there is one central blessing, Kedushat HaYom, “the special sanctity of the day.” Uniquely, Rosh HaShana has three central blessings, Malkhiyot, Kingship; Zikhronot, Remembrances; and Shofarot, verses about the Shofar. These correspond to the sentence (not found in Tanakh, but pieced together from biblical phrases), “The Lord is King, the Lord was King, the Lord will be King, forever and all time.” Malkhiyot refers to the present. Zikhronot is about memories of the past. Shofarot is about the future. The shofar is always a signal of something about to come: the imminent arrival of the king, a warning of impending danger, or the sound of a trial about to begin. Teshuva sensitizes us to the full significance of time. There are those who live purely in the present, but their lives have no overarching meaning. They react rather than act. They travel with no ultimate destination. They are “like chaff blown by the wind” (Ps. 1:4). To be a Jew is to live poised between past and future: the past and future of our individual lives, of our ancient but still young people and of humanity as a whole. Teshuva tells us that our past does not determine our future. We can change. We can act differently next time than last. If anything, our future determines our past. Our determination to grow as human beings – our commitment to a more faithful, sensitive, decent life in the year to come – gives us the courage and honesty to face our past and admit its shortcomings. Our teshuva and God’s forgiveness together mean that we are not prisoners of the past, held captive by it. In Judaism, sin is what we do, not what we are. Therefore we remain intact, able to acknowledge our failures and then move on. My predecessor Lord Jakobovits made a profound comment about Rosh HaShana. Given that it is the start of the Ten Days of Repentance, surprisingly it contains no explicit confessions, no penitential prayers. These form the text an...
+
+---
+
+---
+
+## Related Psalms Analysis
+
+The librarian has found that the psalm you're analyzing (Psalm 1) has some POSSIBLY interesting word and phrase relationships with other psalms (Psalms 92).
+
+To understand the potential value of these connections, consider the scholarly consensus regarding Psalm 25 and Psalm 34. These two acrostics are a classic example of a "diptych," or deliberate pair, linked by numerous structural and thematic echoes.
+- **Structural Anomaly**: They both share the unique acrostic structure of omitting the Vav (ו) stanza and adding a final Pe (פ) stanza, which links them conceptually through the root פדה (padah - to redeem).
+- **The "Call and Response" Arc**: This structural link is reinforced by a clear theological arc:
+  - **The Plea (Ps 25:22)**: Concludes with the petition פְּדֵה... מִכֹּל צָרוֹתָיו (pedeh... mikol tzarotav - "Redeem... from all his troubles").
+  - **The Response (Ps 34:7, 18)**: Answers with the assurance וּמִכׇּל־צָרוֹתָיו הוֹשִׁיעוֹ (u'mikol-tzarotav hoshio - "and from all his troubles He saved him") and the final capstone statement פֹּדֶה יְהֹוָה (podeh Adonai - "The Lord redeems").
+- **Shared Wisdom Theme**: Both psalms pivot to wisdom instruction using the nearly identical rhetorical question מִי־הָאִישׁ (mi ha-ish - "Who is the man...") (Ps 25:12, Ps 34:13).
+- **Shared Thematic Vocabulary**: They are further bound by a specific vocabulary of piety and instruction, including:
+  - "Fear of the LORD" (Ps 25:12, 14; Ps 34:8, 10, 12)
+  - "The humble/afflicted" (עֲנָוִים - anavim) (Ps 25:9; Ps 34:3)
+  - "Good" (טוֹב - tov) (Ps 25:13; Ps 34:9, 11, 13)
+
+As you review the data below, ask yourself if a similar structural, thematic, or "call-and-response" dynamic is at play here, where one psalm seems to complete or answer the other.
+
+Below is the full text of the psalms potentially related to Psalm 1, and for each psalm, a list of POSSIBLY related words and phrases that were algorithmically detected. These relationships might deepen your insights into the meaning, intent, posture, history, and poetics of the psalm you are analyzing. Feel free to REJECT these possible connections as spurious, but DO incorporate them into your work where relevant.
+
+---
+
+### Psalm 92 (Connection Score: 214.00)
+
+#### Full Text of Psalm 92
+
+**Verse 1**: מִזְמ֥וֹר שִׁ֗יר לְי֣וֹם הַשַּׁבָּֽת׃
+
+**Verse 2**: ט֗וֹב לְהֹד֥וֹת לַיהֹוָ֑ה וּלְזַמֵּ֖ר לְשִׁמְךָ֣ עֶלְיֽוֹן׃
+
+**Verse 3**: לְהַגִּ֣יד בַּבֹּ֣קֶר חַסְדֶּ֑ךָ וֶ֝אֱמ֥וּנָתְךָ֗ בַּלֵּילֽוֹת׃
+
+**Verse 4**: עֲֽלֵי־עָ֭שׂוֹר וַעֲלֵי־נָ֑בֶל עֲלֵ֖י הִגָּי֣וֹן בְּכִנּֽוֹר׃
+
+**Verse 5**: כִּ֤י שִׂמַּחְתַּ֣נִי יְהֹוָ֣ה בְּפׇעֳלֶ֑ךָ בְּֽמַעֲשֵׂ֖י יָדֶ֣יךָ אֲרַנֵּֽן׃
+
+**Verse 6**: מַה־גָּדְל֣וּ מַעֲשֶׂ֣יךָ יְהֹוָ֑ה מְ֝אֹ֗ד עָמְק֥וּ מַחְשְׁבֹתֶֽיךָ׃
+
+**Verse 7**: אִֽישׁ־בַּ֭עַר לֹ֣א יֵדָ֑ע וּ֝כְסִ֗יל לֹא־יָבִ֥ין אֶת־זֹֽאת׃
+
+**Verse 8**: בִּפְרֹ֤חַ רְשָׁעִ֨ים ׀ כְּמ֥וֹ־עֵ֗שֶׂב וַ֭יָּצִיצוּ כׇּל־פֹּ֣עֲלֵי אָ֑וֶן לְהִשָּׁמְדָ֥ם עֲדֵי־עַֽד׃
+
+**Verse 9**: וְאַתָּ֥ה מָר֗וֹם לְעֹלָ֥ם יְהֹוָֽה׃
+
+**Verse 10**: כִּ֤י הִנֵּ֪ה אֹיְבֶ֡יךָ יְֽהֹוָ֗ה כִּֽי־הִנֵּ֣ה אֹיְבֶ֣יךָ יֹאבֵ֑דוּ יִ֝תְפָּרְד֗וּ כׇּל־פֹּ֥עֲלֵי אָֽוֶן׃
+
+**Verse 11**: וַתָּ֣רֶם כִּרְאֵ֣ים קַרְנִ֑י בַּ֝לֹּתִ֗י בְּשֶׁ֣מֶן רַעֲנָֽן׃
+
+**Verse 12**: וַתַּבֵּ֥ט עֵינִ֗י בְּשׁ֫וּרָ֥י בַּקָּמִ֖ים עָלַ֥י מְרֵעִ֗ים תִּשְׁמַ֥עְנָה אׇזְנָֽי׃
+
+**Verse 13**: צַ֭דִּיק כַּתָּמָ֣ר יִפְרָ֑ח כְּאֶ֖רֶז בַּלְּבָנ֣וֹן יִשְׂגֶּֽה׃
+
+**Verse 14**: שְׁ֭תוּלִים בְּבֵ֣ית יְהֹוָ֑ה בְּחַצְר֖וֹת אֱלֹהֵ֣ינוּ יַפְרִֽיחוּ׃
+
+**Verse 15**: ע֭וֹד יְנוּב֣וּן בְּשֵׂיבָ֑ה דְּשֵׁנִ֖ים וְֽרַעֲנַנִּ֣ים יִהְיֽוּ׃
+
+**Verse 16**: לְ֭הַגִּיד כִּֽי־יָשָׁ֣ר יְהֹוָ֑ה צ֝וּרִ֗י וְֽלֹא־[עַוְלָ֥תָה] (עלתה) בּֽוֹ׃ {פ}
+
+#### Shared Patterns
+
+**Skipgrams** (2 found):
+
+*Patterns where words appear in the same order but not necessarily adjacent*
+
+- **וְעָלֵ֥הוּ יִבּ֑וֹל** (2-word, 1 gap)
+  - Psalm 1 (×1): v.3 וְעָלֵ֥הוּ לֹֽא יִבּ֑וֹל
+  - Psalm 92 (×1): v.4 עֲֽלֵי עָ֭שׂוֹר וַעֲלֵי נָ֑בֶל
+
+- **הָאִ֗ישׁ לֹ֥א** (2-word, 1 gap)
+  - Psalm 1 (×1): v.1 הָאִ֗ישׁ אֲשֶׁ֤ר לֹ֥א
+  - Psalm 92 (×1): v.7 אִֽישׁ בַּ֭עַר לֹ֣א
+
+**Shared Roots** (6 found, sorted by relevance):
+
+- Root: `שתול`
+  - Psalm 1 (×1): v.3 וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּלְגֵ֫י־מָ֥יִם אֲשֶׁ֤ר פִּרְי֨וֹ...
+  - Psalm 92 (×1): v.14 שְׁ֭תוּלִים בְּבֵ֣ית יְהֹוָ֑ה בְּחַצְר֖וֹת...
+
+- Root: `יל`
+  - Psalm 1 (×1): v.2 ...וּֽבְתוֹרָת֥וֹ יֶהְגֶּ֗ה יוֹמָ֥ם וָלָֽיְלָה׃
+  - Psalm 92 (×1): v.3 ...בַּבֹּ֣קֶר חַסְדֶּ֑ךָ וֶ֝אֱמ֥וּנָתְךָ֗ בַּלֵּילֽוֹת׃
+
+- Root: `אבד`
+  - Psalm 1 (×1): v.6 ...צַדִּיקִ֑ים וְדֶ֖רֶךְ רְשָׁעִ֣ים תֹּאבֵֽד׃ {פ}
+  - Psalm 92 (×1): v.10 ...יְֽהֹוָ֗ה כִּֽי־הִנֵּ֣ה אֹיְבֶ֣יךָ יֹאבֵ֑דוּ יִ֝תְפָּרְד֗וּ כׇּל־פֹּ֥עֲלֵי אָֽוֶן׃
+
+- Root: `צדיק`
+  - Psalm 1 (×2): v.5 ...בַּמִּשְׁפָּ֑ט וְ֝חַטָּאִ֗ים בַּעֲדַ֥ת צַדִּיקִֽים׃, v.6 כִּֽי־יוֹדֵ֣עַ יְ֭הֹוָה דֶּ֣רֶךְ צַדִּיקִ֑ים וְדֶ֖רֶךְ רְשָׁעִ֣ים תֹּאבֵֽד׃...
+  - Psalm 92 (×1): v.13 צַ֭דִּיק כַּתָּמָ֣ר יִפְרָ֑ח כְּאֶ֖רֶז...
+
+- Root: `רשע`
+  - Psalm 1 (×4): v.1 ...לֹ֥א הָלַךְ֮ בַּעֲצַ֢ת רְשָׁ֫עִ֥ים וּבְדֶ֣רֶךְ חַ֭טָּאִים לֹ֥א..., v.4 לֹא־כֵ֥ן הָרְשָׁעִ֑ים כִּ֥י אִם־כַּ֝מֹּ֗ץ אֲֽשֶׁר־תִּדְּפֶ֥נּוּ..., v.5 עַל־כֵּ֤ן ׀ לֹא־יָקֻ֣מוּ רְ֭שָׁעִים בַּמִּשְׁפָּ֑ט וְ֝חַטָּאִ֗ים בַּעֲדַ֥ת...
+  - Psalm 92 (×1): v.8 בִּפְרֹ֤חַ רְשָׁעִ֨ים ׀ כְּמ֥וֹ־עֵ֗שֶׂב וַ֭יָּצִיצוּ...
+
+- Root: `עד`
+  - Psalm 1 (×1): v.5 ...רְ֭שָׁעִים בַּמִּשְׁפָּ֑ט וְ֝חַטָּאִ֗ים בַּעֲדַ֥ת צַדִּיקִֽים׃
+  - Psalm 92 (×1): v.8 ...כׇּל־פֹּ֣עֲלֵי אָ֑וֶן לְהִשָּׁמְדָ֥ם עֲדֵי־עַֽד׃
 
 ---
 
@@ -1848,12 +2544,14 @@ The phrase וְֽהָיָ֗ה כְּעֵץ֮ שָׁת֢וּל עַֽל־פַּל
 
 ## Research Summary
 
-- **Lexicon entries**: 44
-- **Concordance searches**: 7
-- **Concordance results**: 31
-- **Figurative language searches**: 7
-- **Figurative instances found**: 212
+- **Lexicon entries**: 28
+- **Concordance searches**: 13
+- **Concordance results**: 33
+- **Figurative language searches**: 11
+- **Figurative instances found**: 360
 - **Commentary verses**: 6
 - **Commentary entries**: 39
 - **Liturgical prayers (aggregated)**: 7
+- **Rabbi Sacks references**: 5
 - **Liturgical total occurrences**: 10
+- **Related psalms analyzed**: 1

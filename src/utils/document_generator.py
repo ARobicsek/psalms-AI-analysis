@@ -649,41 +649,7 @@ Methodological & Bibliographical Summary
         for verse in parsed_verses:
             self.document.add_heading(f'Verse {verse["number"]}', level=3)
 
-            # Insert the Hebrew verse text before the commentary
-            p_hebrew = self.document.add_paragraph(style='BodySans')
-            hebrew_run = p_hebrew.add_run(self.modifier.modify_text(verse["hebrew"]))
-            hebrew_run.font.rtl = True
-            p_hebrew.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-
-            # Set font at the XML level for comprehensive coverage
-            # This ensures the font applies to all character ranges (ASCII, complex script, etc.)
-            rPr = hebrew_run._element.get_or_add_rPr()
-
-            # Set rFonts element with all font attributes
-            rFonts = rPr.find(ns.qn('w:rFonts'))
-            if rFonts is None:
-                rFonts = OxmlElement('w:rFonts')
-                rPr.insert(0, rFonts)
-
-            # Set font for all ranges: ascii, hAnsi (high ANSI), eastAsia, and cs (complex scripts)
-            rFonts.set(ns.qn('w:ascii'), 'Aptos')
-            rFonts.set(ns.qn('w:hAnsi'), 'Aptos')
-            rFonts.set(ns.qn('w:cs'), 'Aptos')
-
-            # Also set size at XML level
-            sz = rPr.find(ns.qn('w:sz'))
-            if sz is None:
-                sz = OxmlElement('w:sz')
-                rPr.append(sz)
-            sz.set(ns.qn('w:val'), '24')  # 24 half-points = 12pt
-
-            # Set complex script size
-            szCs = rPr.find(ns.qn('w:szCs'))
-            if szCs is None:
-                szCs = OxmlElement('w:szCs')
-                rPr.append(szCs)
-            szCs.set(ns.qn('w:val'), '24')  # 24 half-points = 12pt
-
+            # Commentary now includes the verse text with punctuation from the LLM
             self._add_commentary_with_bullets(verse["commentary"], style='BodySans')
 
         # 5. Add Methodological Summary

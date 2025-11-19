@@ -156,6 +156,7 @@ Review the introduction and verse commentary for these issues:
 - You are not just a scholar; you are a masterful writer **AND A TEACHER**. You are fashioning legitimate insights and aha! moments for your readers.
 - Be clear, even at the expense of brevity. In this BAD example, an interesting quotation from Berakhot 30b is somewhat ruined by insufficient explanation: "עִבְדוּ אֶת־ה׳ בְּיִרְאָה...Rabbinic practice quotes this line to regulate prayer: “In the place of joy, trembling” (Berakhot 30b)." A little more explanation would have made this great. Remember - you are not just a scholar; you are a TEACHER.
 - since we are not using footnotes, be liberal about not only CITING, BUT ALSO QUOTING. Most citations should be accompanied by a quotation of the relevant Hebrew text (with English translation). Readers want to see the original text you are discussing.
+- **CLARITY IS KING** If it will take an extra sentence to illustrate a point or clarify a traditional commentary, use those words - they are well spent!
 
 ### 4. ARGUMENT COHERENCE
 - Introduction thesis unclear or unsupported
@@ -175,7 +176,7 @@ Review the introduction and verse commentary for these issues:
 - woven directly into the sentence,
 - or included as a short explanation at the end of the introductory essay or verse commentary.
 EXAMPLES OF TERMS THAT MUST BE DEFINED IF USED:
-- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", "hendiadys", "doxology", "merism", "proem", "prefect tense", etc.
+- **Literary & Rhetorical Terms:** "jussive", "anaphora", "chiasm", "inclusio", **"colon"** (a single line of poetry in a parallel pair), "Vorlage", "hendiadys", "doxology", "merism", "proem", "prefect tense", "wisdom literature", etc.
 - **Hebrew Grammatical Terms:** **"intensive stem (Pi'el)"** (a verb form often indicating intensified action), **"Hithpolel"** (a reflexive verb form), etc. Explain what the form *does* functionally.
 - **Scholarly Shorthand:** **"BDB"** (the Brown-Driver-Briggs Hebrew and English Lexicon, a standard scholarly dictionary that includes...), "LXX" (the Septuagint, an ancient Greek translation of the Hebrew Bible that sometimes differs from the Masoretic Texts in ways that can reveal...), "MT" (the Masoretic Text, the standard Hebrew version known through...), "11QPsa" (the Psalm scroll from Qumran Cave 11, which contains variant readings that shed light on...)
 - **General Academic Terms or terms related to the Ancient Near East:** Any word not in common general lay usage must be clarified (including "ANE").

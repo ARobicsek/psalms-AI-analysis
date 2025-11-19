@@ -71,9 +71,8 @@ class CommentaryFormatter:
         # 3. Psalm Text Section
         psalm_text_section = self._format_psalm_text(psalm_num, psalm_text_data).strip() + "\n"
 
-        # 4. Verse-by-Verse Commentary (with programmatically inserted Hebrew verse text)
-        verses_with_hebrew = self._insert_verse_text_into_commentary(verses_text, psalm_text_data)
-        verse_commentary_section = f"## Verse-by-Verse Commentary\n{self._format_body_text(verses_with_hebrew)}\n"
+        # 4. Verse-by-Verse Commentary (verse text with punctuation now provided by LLM)
+        verse_commentary_section = f"## Verse-by-Verse Commentary\n{self._format_body_text(verses_text)}\n"
 
         # 5. Bibliographical Summary
         biblio_summary_section = self._format_bibliographical_summary(summary_data)

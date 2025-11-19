@@ -45,6 +45,56 @@ from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
 
 
+def _parse_related_psalms_from_markdown(markdown_content: str) -> list:
+    """
+    Parse the related psalms section from a research bundle markdown file.
+
+    Extracts psalm numbers from the "Related Psalms Analysis" section.
+    Expected format: "### Psalm XX (Connection Score: ...)"
+
+    Args:
+        markdown_content: The full research bundle markdown text
+
+    Returns:
+        List of psalm numbers (as integers)
+    """
+    import re
+
+    related_psalms = []
+
+    # Look for the "Related Psalms Analysis" section
+    if "## Related Psalms Analysis" not in markdown_content:
+        return related_psalms
+
+    # Find the section start
+    start_match = re.search(r'## Related Psalms Analysis', markdown_content)
+    if not start_match:
+        return related_psalms
+
+    start_pos = start_match.end()
+
+    # Find the next ## heading (exactly ##, not ###, ####, etc.)
+    end_match = re.search(r'\n## [^#]', markdown_content[start_pos:])
+    if end_match:
+        end_pos = start_pos + end_match.start()
+        related_section = markdown_content[start_pos:end_pos]
+    else:
+        # No next section found, go to end of document
+        related_section = markdown_content[start_pos:]
+
+    # Find all psalm headers: "### Psalm XX (Connection Score: ...)"
+    psalm_matches = re.findall(r'### Psalm (\d+)', related_section)
+
+    for psalm_num_str in psalm_matches:
+        try:
+            psalm_num = int(psalm_num_str)
+            related_psalms.append(psalm_num)
+        except ValueError:
+            pass
+
+    return related_psalms
+
+
 def run_enhanced_pipeline(
     psalm_number: int,
     output_dir: str = "output",
@@ -314,6 +364,18 @@ def run_enhanced_pipeline(
         with open(research_file, 'r', encoding='utf-8') as f:
             research_bundle_content = f.read()
         logger.info(f"Successfully loaded {micro_file} and {research_file} for subsequent steps.")
+
+        # If we skipped micro analysis, we need to manually extract related psalms data from the markdown
+        # so it gets captured in pipeline stats
+        if skip_micro:
+            related_psalms = _parse_related_psalms_from_markdown(research_bundle_content)
+            if related_psalms:
+                tracker.research.related_psalms_count = len(related_psalms)
+                tracker.research.related_psalms_list = related_psalms
+                logger.info(f"Extracted {len(related_psalms)} related psalms from research bundle markdown")
+                # Save immediately so the update persists
+                tracker.save_json(str(output_path))
+                logger.info(f"Saved updated stats with related psalms data")
     except Exception as e:
         logger.error(f"FATAL: Could not load micro analysis or research file: {e}")
         print(f"⚠ FATAL: Could not load required analysis files. Exiting.")

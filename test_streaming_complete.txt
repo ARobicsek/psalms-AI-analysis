@@ -1,0 +1,936 @@
+
+================================================================================
+ENHANCED COMMENTARY PIPELINE - Psalm 7
+================================================================================
+
+Output Directory: output/psalm_7
+Database: database/tanakh.db
+Rate Limit Delay: 120 seconds
+
+15:02:27 | enhanced_pipeline | INFO | ================================================================================
+INFO:enhanced_pipeline:================================================================================
+15:02:27 | enhanced_pipeline | INFO | ENHANCED PIPELINE - Psalm 7
+INFO:enhanced_pipeline:ENHANCED PIPELINE - Psalm 7
+15:02:27 | enhanced_pipeline | INFO | ================================================================================
+INFO:enhanced_pipeline:================================================================================
+15:02:27 | enhanced_pipeline | INFO | Pipeline summary tracking enabled.
+INFO:enhanced_pipeline:Pipeline summary tracking enabled.
+15:02:27 | enhanced_pipeline | INFO | 
+[STEP 1] Running MacroAnalyst...
+INFO:enhanced_pipeline:
+[STEP 1] Running MacroAnalyst...
+INFO:src.data_sources.tanakh_database:Database schema created at database\tanakh.db
+INFO:src.data_sources.tanakh_database:Database schema created at c:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+
+================================================================================
+STEP 1: Macro Analysis (Structural Thesis)
+================================================================================
+
+15:02:27 | macro_analyst | INFO | MacroAnalyst initialized with model claude-sonnet-4-5
+INFO:macro_analyst:MacroAnalyst initialized with model claude-sonnet-4-5
+15:02:27 | macro_analyst | INFO | Starting macro analysis for Psalm 7
+INFO:macro_analyst:Starting macro analysis for Psalm 7
+INFO:src.data_sources.sefaria_client:Fetching LXX Psalm 7 (MT Psalm 7) from Bolls.life...
+INFO:src.data_sources.sefaria_client:Successfully fetched LXX Psalm 7 (18 verses)
+15:02:28 | macro_analyst | INFO | Prompt length: 11330 characters
+INFO:macro_analyst:Prompt length: 11330 characters
+15:02:28 | macro_analyst | INFO | Psalm verses: 18
+INFO:macro_analyst:Psalm verses: 18
+15:02:28 | macro_analyst | INFO | RAG: Genre=Individual Lament, Ugaritic=1 parallels
+INFO:macro_analyst:RAG: Genre=Individual Lament, Ugaritic=1 parallels
+15:02:28 | macro_analyst | INFO | Calling Claude API with model: claude-sonnet-4-5 (streaming enabled)
+INFO:macro_analyst:Calling Claude API with model: claude-sonnet-4-5 (streaming enabled)
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+DEBUG:macro_analyst:Starting thinking block
+DEBUG:macro_analyst:Starting text block
+15:04:25 | macro_analyst | INFO | API streaming call successful
+INFO:macro_analyst:API streaming call successful
+15:04:25 | macro_analyst | INFO | Thinking collected: 3299 chars
+INFO:macro_analyst:Thinking collected: 3299 chars
+15:04:25 | macro_analyst | INFO | Response collected: 14854 chars
+INFO:macro_analyst:Response collected: 14854 chars
+15:04:25 | macro_analyst | INFO | Response received. Thinking tokens: 455
+INFO:macro_analyst:Response received. Thinking tokens: 455
+DEBUG:macro_analyst:Anthropic Claude API call: claude-sonnet-4-5 -> 200 (0.00ms)
+15:04:25 | macro_analyst | INFO | Removing markdown json code fence from response
+INFO:macro_analyst:Removing markdown json code fence from response
+15:04:25 | macro_analyst | INFO | Macro analysis complete for Psalm 7
+INFO:macro_analyst:Macro analysis complete for Psalm 7
+15:04:25 | macro_analyst | INFO |   Thesis length: 725 chars
+INFO:macro_analyst:  Thesis length: 725 chars
+15:04:25 | macro_analyst | INFO |   Structural divisions: 7
+INFO:macro_analyst:  Structural divisions: 7
+15:04:25 | macro_analyst | INFO |   Poetic devices: 12
+INFO:macro_analyst:  Poetic devices: 12
+15:04:25 | macro_analyst | INFO |   Research questions: 13
+INFO:macro_analyst:  Research questions: 13
+15:04:25 | enhanced_pipeline | INFO | ✓ Macro analysis saved to output\psalm_7\psalm_007_macro.json
+INFO:enhanced_pipeline:✓ Macro analysis saved to output\psalm_7\psalm_007_macro.json
+✓ Macro analysis complete: output\psalm_7\psalm_007_macro.json
+
+15:06:25 | enhanced_pipeline | INFO | 
+[STEP 2] Running MicroAnalyst v2 (with enhanced figurative search)...
+INFO:enhanced_pipeline:
+[STEP 2] Running MicroAnalyst v2 (with enhanced figurative search)...
+
+================================================================================
+STEP 2: Micro Analysis (Discovery + Enhanced Research)
+================================================================================
+
+15:06:25 | enhanced_pipeline | INFO |   Using commentary mode: all
+INFO:enhanced_pipeline:  Using commentary mode: all
+INFO:src.data_sources.tanakh_database:Database schema created at database\tanakh.db
+INFO:src.data_sources.tanakh_database:Database schema created at c:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+INFO:src.agents.sacks_librarian:Loaded 206 Sacks references from c:\Users\ariro\OneDrive\Documents\Psalms\sacks_on_psalms.json
+WARNING:src.agents.hirsch_librarian:Hirsch data file not found at c:\Users\ariro\OneDrive\Documents\Psalms\hirsch_on_psalms.json
+INFO:src.agents.hirsch_librarian:To generate this file, run: python scripts/extract_hirsch_pdf.py
+See docs/HIRSCH_OCR_RESEARCH.md for setup instructions.
+INFO:src.data_sources.tanakh_database:Database schema created at c:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+15:06:26 | micro_analyst_v2 | INFO | ================================================================================
+INFO:micro_analyst_v2:================================================================================
+15:06:26 | micro_analyst_v2 | INFO | MICROANALYST V2: Psalm 7
+INFO:micro_analyst_v2:MICROANALYST V2: Psalm 7
+15:06:26 | micro_analyst_v2 | INFO | ================================================================================
+INFO:micro_analyst_v2:================================================================================
+15:06:26 | micro_analyst_v2 | INFO | 
+INPUTS RECEIVED:
+INFO:micro_analyst_v2:
+INPUTS RECEIVED:
+15:06:26 | micro_analyst_v2 | INFO |   Psalm Number: 7
+INFO:micro_analyst_v2:  Psalm Number: 7
+15:06:26 | micro_analyst_v2 | INFO |   Macro Thesis: Psalm 7 is a forensic lament that transforms a personal accusation of wrongdoing into a theodicy of ...
+INFO:micro_analyst_v2:  Macro Thesis: Psalm 7 is a forensic lament that transforms a personal accusation of wrongdoing into a theodicy of ...
+15:06:26 | micro_analyst_v2 | INFO |   Structural Divisions: 7
+INFO:micro_analyst_v2:  Structural Divisions: 7
+15:06:26 | micro_analyst_v2 | INFO |   Poetic Devices: 12
+INFO:micro_analyst_v2:  Poetic Devices: 12
+15:06:26 | micro_analyst_v2 | INFO |   Research Questions: 13
+INFO:micro_analyst_v2:  Research Questions: 13
+15:06:26 | micro_analyst_v2 | INFO |   Psalm Verses: 18
+INFO:micro_analyst_v2:  Psalm Verses: 18
+INFO:src.data_sources.sefaria_client:Fetching LXX Psalm 7 (MT Psalm 7) from Bolls.life...
+INFO:src.data_sources.sefaria_client:Successfully fetched LXX Psalm 7 (18 verses)
+15:06:27 | micro_analyst_v2 | INFO |   RAG Genre: Individual Lament
+INFO:micro_analyst_v2:  RAG Genre: Individual Lament
+15:06:27 | micro_analyst_v2 | INFO |   Ugaritic Parallels: 1
+INFO:micro_analyst_v2:  Ugaritic Parallels: 1
+15:06:27 | micro_analyst_v2 | INFO |   LXX Available: Yes
+INFO:micro_analyst_v2:  LXX Available: Yes
+15:06:27 | micro_analyst_v2 | INFO |   LXX Verses: 18
+INFO:micro_analyst_v2:  LXX Verses: 18
+15:06:27 | micro_analyst_v2 | INFO | 
+[STAGE 1] Quick Verse-by-Verse Discovery Pass
+INFO:micro_analyst_v2:
+[STAGE 1] Quick Verse-by-Verse Discovery Pass
+15:06:27 | micro_analyst_v2 | INFO |   Generating phonetic transcriptions with stress marking...
+INFO:micro_analyst_v2:  Generating phonetic transcriptions with stress marking...
+15:06:27 | micro_analyst_v2 | INFO |   ✓ Phonetic transcriptions with stress marking generated.
+INFO:micro_analyst_v2:  ✓ Phonetic transcriptions with stress marking generated.
+INFO:src.data_sources.sefaria_client:Fetching LXX Psalm 7 (MT Psalm 7) from Bolls.life...
+INFO:src.data_sources.sefaria_client:Successfully fetched LXX Psalm 7 (18 verses)
+15:06:27 | micro_analyst_v2 | INFO |   Calling Sonnet 4.5...
+INFO:micro_analyst_v2:  Calling Sonnet 4.5...
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+DEBUG:micro_analyst_v2:Response text preview: ```json
+{
+  "verse_discoveries": [
+    {
+      "verse_number": 1,
+      "observations": "The superscription contains the unique genre designation 'shiggaion' (שִׁגָּיוֹן), appearing only here and Habakkuk 3, suggesting a specific literary/musical form whose meaning is uncertain. The historical reference to 'Cush, a Benjaminite' (כּוּשׁ בֶּן-יְמִינִי) is puzzling—no such figure appears elsewhere in Scripture. The tribal designation 'Benjaminite' is politically charged if this is Davidic, given Be
+DEBUG:micro_analyst_v2:Extracted from code block, length: 26704
+15:09:57 | micro_analyst_v2 | INFO |   ✓ Discovery pass complete
+INFO:micro_analyst_v2:  ✓ Discovery pass complete
+15:09:57 | micro_analyst_v2 | INFO | 
+  DISCOVERIES:
+INFO:micro_analyst_v2:
+  DISCOVERIES:
+15:09:57 | micro_analyst_v2 | INFO |     Verses analyzed: 18
+INFO:micro_analyst_v2:    Verses analyzed: 18
+15:09:57 | micro_analyst_v2 | INFO | 
+    Sample (v1):
+INFO:micro_analyst_v2:
+    Sample (v1):
+15:09:57 | micro_analyst_v2 | INFO |       Observations: The superscription contains the unique genre designation 'shiggaion' (שִׁגָּיוֹן...
+INFO:micro_analyst_v2:      Observations: The superscription contains the unique genre designation 'shiggaion' (שִׁגָּיוֹן...
+15:09:57 | micro_analyst_v2 | INFO |       Curious words: 3
+INFO:micro_analyst_v2:      Curious words: 3
+15:09:57 | micro_analyst_v2 | INFO |       Poetic features: 2
+INFO:micro_analyst_v2:      Poetic features: 2
+15:09:57 | micro_analyst_v2 | INFO | 
+    Overall patterns identified: 8
+INFO:micro_analyst_v2:
+    Overall patterns identified: 8
+15:09:57 | micro_analyst_v2 | INFO |       - Structural movement: urgent petition (vv2-3) → oath of innocence (vv4-6) → appea...
+INFO:micro_analyst_v2:      - Structural movement: urgent petition (vv2-3) → oath of innocence (vv4-6) → appea...
+15:09:57 | micro_analyst_v2 | INFO |       - Scale expansion: individual crisis (vv2-3) explodes into cosmic judgment scene (...
+INFO:micro_analyst_v2:      - Scale expansion: individual crisis (vv2-3) explodes into cosmic judgment scene (...
+15:09:57 | micro_analyst_v2 | INFO | 
+[STAGE 2] Generating Research Requests from Discoveries
+INFO:micro_analyst_v2:
+[STAGE 2] Generating Research Requests from Discoveries
+15:09:57 | micro_analyst_v2 | INFO |   Commentary mode: all
+INFO:micro_analyst_v2:  Commentary mode: all
+15:09:57 | micro_analyst_v2 | INFO |   Calling Sonnet 4.5 for research request generation...
+INFO:micro_analyst_v2:  Calling Sonnet 4.5 for research request generation...
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+DEBUG:micro_analyst_v2:Response text preview: ```json
+{
+  "bdb_requests": [
+    {"word": "שִׁגָּיוֹן", "reason": "Hapax legomenon in superscriptions (here and Hab 3) - genre designation whose meaning is uncertain; etymology and comparative Semitic data needed"},
+    {"word": "כּוּשׁ", "reason": "Unique proper name 'Cush the Benjaminite' not attested elsewhere - need onomastic data and possible wordplay"},
+    {"word": "חָסָה", "reason": "Perfect tense 'I have taken refuge' in v2 - semantic range and syntactic patterns of this refuge verb"},
+DEBUG:micro_analyst_v2:Extracted from code block, length: 10871
+DEBUG:micro_analyst_v2:Concordance request 1: query='יהוה אלהי'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'יהוה אלהי': ['אלהי יהוה', 'יהוה אלהינו', 'אלהים יהוה']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'יהוה אלהי': ['אלהי יהוה', 'יהוה אלהינו', 'אלהים יהוה']
+DEBUG:micro_analyst_v2:Concordance request 2: query='חסיתי'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'חסיתי': ['חסה', 'חסו', 'חוסה', 'חוסים']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'חסיתי': ['חסה', 'חסו', 'חוסה', 'חוסים']
+DEBUG:micro_analyst_v2:Concordance request 3: query='כל רדפי'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'כל רדפי': ['רדפי', 'רדף', 'רדפים', 'רודפי']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'כל רדפי': ['רדפי', 'רדף', 'רדפים', 'רודפי']
+DEBUG:micro_analyst_v2:Concordance request 4: query='אם עשיתי זאת'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'אם עשיתי זאת': ['אם עשיתי', 'זאת עשיתי', 'עשיתי זה']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'אם עשיתי זאת': ['אם עשיתי', 'זאת עשיתי', 'עשיתי זה']
+DEBUG:micro_analyst_v2:Concordance request 5: query='עדת לאמים'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'עדת לאמים': ['עדת עמים', 'קהל לאמים', 'קהל גוים']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'עדת לאמים': ['עדת עמים', 'קהל לאמים', 'קהל גוים']
+DEBUG:micro_analyst_v2:Concordance request 6: query='למרום שובה'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'למרום שובה': ['שוב למרום', 'שובה מרום', 'שבה למרום']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'למרום שובה': ['שוב למרום', 'שובה מרום', 'שבה למרום']
+DEBUG:micro_analyst_v2:Concordance request 7: query='יהוה ידין עמים'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'יהוה ידין עמים': ['ידין יהוה', 'שפט עמים', 'דין עמים']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'יהוה ידין עמים': ['ידין יהוה', 'שפט עמים', 'דין עמים']
+DEBUG:micro_analyst_v2:Concordance request 8: query='בחן לבות וכליות'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'בחן לבות וכליות': ['בחן לב וכליה', 'בחן כליות ולב', 'לבות כליות']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'בחן לבות וכליות': ['בחן לב וכליה', 'בחן כליות ולב', 'לבות כליות']
+DEBUG:micro_analyst_v2:Concordance request 9: query='אלהים צדיק'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'אלהים צדיק': ['צדיק אלהים', 'אל צדיק', 'יהוה צדיק']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'אלהים צדיק': ['צדיק אלהים', 'אל צדיק', 'יהוה צדיק']
+DEBUG:micro_analyst_v2:Concordance request 10: query='בכל יום'
+DEBUG:micro_analyst_v2:  Has 'alternates' key: True
+DEBUG:micro_analyst_v2:  Has 'alternate_queries' key: False
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Alternates found for 'בכל יום': ['כל יום', 'יום יום', 'תמיד']
+INFO:micro_analyst_v2:  ✓ Alternates found for 'בכל יום': ['כל יום', 'יום יום', 'תמיד']
+15:11:01 | micro_analyst_v2 | INFO |   ✓ Research requests generated
+INFO:micro_analyst_v2:  ✓ Research requests generated
+15:11:01 | micro_analyst_v2 | INFO | 
+  RESEARCH REQUESTS:
+INFO:micro_analyst_v2:
+  RESEARCH REQUESTS:
+15:11:01 | micro_analyst_v2 | INFO |     BDB lexicon: 20
+INFO:micro_analyst_v2:    BDB lexicon: 20
+15:11:01 | micro_analyst_v2 | INFO |     Concordance: 10
+INFO:micro_analyst_v2:    Concordance: 10
+15:11:01 | micro_analyst_v2 | INFO |     Figurative: 14
+INFO:micro_analyst_v2:    Figurative: 14
+15:11:01 | micro_analyst_v2 | INFO |     Commentary: 18
+INFO:micro_analyst_v2:    Commentary: 18
+15:11:01 | micro_analyst_v2 | INFO | 
+  FIGURATIVE LANGUAGE REQUESTS (detailed):
+INFO:micro_analyst_v2:
+  FIGURATIVE LANGUAGE REQUESTS (detailed):
+15:11:01 | micro_analyst_v2 | INFO |     [1] Verse: None:None
+INFO:micro_analyst_v2:    [1] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: lion
+INFO:micro_analyst_v2:        vehicle_contains: lion
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['lion', 'lions', 'lioness', 'lionesses']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['lion', 'lions', 'lioness', 'lionesses']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Lion predation imagery - vivid animal attack metaphor for enemies | Vehicle: lion | Related terms: l...
+INFO:micro_analyst_v2:        notes: Lion predation imagery - vivid animal attack metaphor for enemies | Vehicle: lion | Related terms: l...
+15:11:01 | micro_analyst_v2 | INFO |     [2] Verse: None:None
+INFO:micro_analyst_v2:    [2] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: tear
+INFO:micro_analyst_v2:        vehicle_contains: tear
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['tear', 'tearing', 'rend', 'rending', 'rip', 'ripping', 'shred', 'shredding']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['tear', 'tearing', 'rend', 'rending', 'rip', 'ripping', 'shred', 'shredding']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Tearing/rending action - graphic violence verbs for destruction | Vehicle: tear | Related terms: tea...
+INFO:micro_analyst_v2:        notes: Tearing/rending action - graphic violence verbs for destruction | Vehicle: tear | Related terms: tea...
+15:11:01 | micro_analyst_v2 | INFO |     [3] Verse: None:None
+INFO:micro_analyst_v2:    [3] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: hands
+INFO:micro_analyst_v2:        vehicle_contains: hands
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['hands', 'hand', 'palm', 'palms']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['hands', 'hand', 'palm', 'palms']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Hands as instruments of guilt - synecdoche for agency and moral culpability | Vehicle: hands | Relat...
+INFO:micro_analyst_v2:        notes: Hands as instruments of guilt - synecdoche for agency and moral culpability | Vehicle: hands | Relat...
+15:11:01 | micro_analyst_v2 | INFO |     [4] Verse: None:None
+INFO:micro_analyst_v2:    [4] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: trample
+INFO:micro_analyst_v2:        vehicle_contains: trample
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['trample', 'trampling', 'tread', 'treading', 'crush', 'crushing']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['trample', 'trampling', 'tread', 'treading', 'crush', 'crushing']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Trampling to ground - humiliation and defeat imagery | Vehicle: trample | Related terms: trampling, ...
+INFO:micro_analyst_v2:        notes: Trampling to ground - humiliation and defeat imagery | Vehicle: trample | Related terms: trampling, ...
+15:11:01 | micro_analyst_v2 | INFO |     [5] Verse: None:None
+INFO:micro_analyst_v2:    [5] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: dust
+INFO:micro_analyst_v2:        vehicle_contains: dust
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['dust', 'ashes', 'ground', 'earth']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['dust', 'ashes', 'ground', 'earth']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Dwelling in dust - death and shame spatial metaphor | Vehicle: dust | Related terms: ashes, ground, ...
+INFO:micro_analyst_v2:        notes: Dwelling in dust - death and shame spatial metaphor | Vehicle: dust | Related terms: ashes, ground, ...
+15:11:01 | micro_analyst_v2 | INFO |     [6] Verse: None:None
+INFO:micro_analyst_v2:    [6] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: arise
+INFO:micro_analyst_v2:        vehicle_contains: arise
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['arise', 'arising', 'rise', 'rising', 'stand', 'standing']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['arise', 'arising', 'rise', 'rising', 'stand', 'standing']
+15:11:01 | micro_analyst_v2 | INFO |         notes: God arising/awakening - anthropomorphic call to divine action | Vehicle: arise | Related terms: aris...
+INFO:micro_analyst_v2:        notes: God arising/awakening - anthropomorphic call to divine action | Vehicle: arise | Related terms: aris...
+15:11:01 | micro_analyst_v2 | INFO |     [7] Verse: None:None
+INFO:micro_analyst_v2:    [7] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: anger
+INFO:micro_analyst_v2:        vehicle_contains: anger
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['anger', 'wrath', 'fury', 'rage']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['anger', 'wrath', 'fury', 'rage']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Divine anger invoked - emotional attribute as weapon | Vehicle: anger | Related terms: wrath, fury, ...
+INFO:micro_analyst_v2:        notes: Divine anger invoked - emotional attribute as weapon | Vehicle: anger | Related terms: wrath, fury, ...
+15:11:01 | micro_analyst_v2 | INFO |     [8] Verse: None:None
+INFO:micro_analyst_v2:    [8] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: surround
+INFO:micro_analyst_v2:        vehicle_contains: surround
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['surround', 'surrounding', 'encircle', 'encircling', 'encompass']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['surround', 'surrounding', 'encircle', 'encircling', 'encompass']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Assembly surrounding God - cosmic courtroom scene | Vehicle: surround | Related terms: surrounding, ...
+INFO:micro_analyst_v2:        notes: Assembly surrounding God - cosmic courtroom scene | Vehicle: surround | Related terms: surrounding, ...
+15:11:01 | micro_analyst_v2 | INFO |     [9] Verse: None:None
+INFO:micro_analyst_v2:    [9] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: shield
+INFO:micro_analyst_v2:        vehicle_contains: shield
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['shield', 'shields', 'buckler', 'bucklers']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['shield', 'shields', 'buckler', 'bucklers']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Shield metaphor for divine protection - military defensive imagery | Vehicle: shield | Related terms...
+INFO:micro_analyst_v2:        notes: Shield metaphor for divine protection - military defensive imagery | Vehicle: shield | Related terms...
+15:11:01 | micro_analyst_v2 | INFO |     [10] Verse: None:None
+INFO:micro_analyst_v2:    [10] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: whet
+INFO:micro_analyst_v2:        vehicle_contains: whet
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['whet', 'sharpen', 'sharpening', 'hone', 'honing']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['whet', 'sharpen', 'sharpening', 'hone', 'honing']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Whetting sword - weapon preparation for judgment | Vehicle: whet | Related terms: sharpen, sharpenin...
+INFO:micro_analyst_v2:        notes: Whetting sword - weapon preparation for judgment | Vehicle: whet | Related terms: sharpen, sharpenin...
+15:11:01 | micro_analyst_v2 | INFO |     [11] Verse: None:None
+INFO:micro_analyst_v2:    [11] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: bow
+INFO:micro_analyst_v2:        vehicle_contains: bow
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['bow', 'bows', 'archer', 'archers']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['bow', 'bows', 'archer', 'archers']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Bending bow - archer imagery for attack | Vehicle: bow | Related terms: bows, archer, archers...
+INFO:micro_analyst_v2:        notes: Bending bow - archer imagery for attack | Vehicle: bow | Related terms: bows, archer, archers...
+15:11:01 | micro_analyst_v2 | INFO |     [12] Verse: None:None
+INFO:micro_analyst_v2:    [12] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: burning
+INFO:micro_analyst_v2:        vehicle_contains: burning
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['burning', 'burn', 'burns', 'flame', 'flames', 'fire']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['burning', 'burn', 'burns', 'flame', 'flames', 'fire']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Flaming arrows - intensified projectile threat | Vehicle: burning | Related terms: burn, burns, flam...
+INFO:micro_analyst_v2:        notes: Flaming arrows - intensified projectile threat | Vehicle: burning | Related terms: burn, burns, flam...
+15:11:01 | micro_analyst_v2 | INFO |     [13] Verse: None:None
+INFO:micro_analyst_v2:    [13] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: conceive
+INFO:micro_analyst_v2:        vehicle_contains: conceive
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['conceive', 'conceiving', 'pregnant', 'pregnancy', 'travail']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['conceive', 'conceiving', 'pregnant', 'pregnancy', 'travail']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Pregnancy with evil - birth metaphor for sin's generation | Vehicle: conceive | Related terms: conce...
+INFO:micro_analyst_v2:        notes: Pregnancy with evil - birth metaphor for sin's generation | Vehicle: conceive | Related terms: conce...
+15:11:01 | micro_analyst_v2 | INFO |     [14] Verse: None:None
+INFO:micro_analyst_v2:    [14] Verse: None:None
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_contains: pit
+INFO:micro_analyst_v2:        vehicle_contains: pit
+15:11:01 | micro_analyst_v2 | INFO |         vehicle_search_terms: ['pit', 'pits', 'hole', 'holes', 'trap', 'traps']
+INFO:micro_analyst_v2:        vehicle_search_terms: ['pit', 'pits', 'hole', 'holes', 'trap', 'traps']
+15:11:01 | micro_analyst_v2 | INFO |         notes: Pit digging - trap construction reversal motif | Vehicle: pit | Related terms: pits, hole, holes, tr...
+INFO:micro_analyst_v2:        notes: Pit digging - trap construction reversal motif | Vehicle: pit | Related terms: pits, hole, holes, tr...
+15:11:01 | micro_analyst_v2 | INFO | 
+[STAGE 3] Assembling Research Bundle
+INFO:micro_analyst_v2:
+[STAGE 3] Assembling Research Bundle
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: שִׁגָּיוֹן
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: כּוּשׁ
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: חָסָה
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: פָּרַק
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: עָוֶל
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: גָּמַל
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: שָׁלֵם
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: חָלַץ
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: כָּבוֹד
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: עַבְרָה
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: עֵדָה
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: לְאֹם
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: תֻּם
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: בָּחַן
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: כִּלְיָה
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: זָעַם
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: לָטַשׁ
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: דָּלַק
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: חָבַל
+INFO:src.data_sources.sefaria_client:Fetching lexicon entries for: קׇדְקֹד
+INFO:src.agents.commentary_librarian:Processing 18 commentary requests...
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:1...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (1209 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:1...
+INFO:src.agents.commentary_librarian:Successfully fetched Ibn Ezra commentary (506 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:1...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (1295 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:1...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (149 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:1...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (316 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:1...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (634 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:1...
+INFO:src.agents.commentary_librarian:Successfully fetched Torah Temimah commentary (357 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:2...
+INFO:src.agents.commentary_librarian:No Rashi commentary found for Psalms 7:2
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:2...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:2
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:2...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (106 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:2...
+INFO:src.agents.commentary_librarian:No Metzudat David commentary found for Psalms 7:2
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:2...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (172 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:2...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (94 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:2...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:2
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:3...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (57 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:3...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:3
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:3...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (223 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:3...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (106 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:3...
+INFO:src.agents.commentary_librarian:No Malbim commentary found for Psalms 7:3
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:3...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (134 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:3...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:3
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:4...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (46 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:4...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:4
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:4...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (142 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:4...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (131 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:4...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (224 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:4...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (210 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:4...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:4
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:5...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (332 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:5...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:5
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:5...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (559 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:5...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (313 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:5...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (454 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:5...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (188 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:5...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:5
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:6...
+INFO:src.agents.commentary_librarian:No Rashi commentary found for Psalms 7:6
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:6...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:6
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:6...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (967 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:6...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (165 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:6...
+INFO:src.agents.commentary_librarian:No Malbim commentary found for Psalms 7:6
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:6...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (761 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:6...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:6
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:7...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (411 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:7...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:7
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:7...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (261 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:7...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (229 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:7...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (454 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:7...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (414 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:7...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:7
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:8...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (243 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:8...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:8
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:8...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (1614 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:8...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (107 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:8...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (1113 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:8...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (408 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:8...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:8
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:9...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (199 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:9...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:9
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:9...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (460 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:9...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (121 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:9...
+INFO:src.agents.commentary_librarian:No Malbim commentary found for Psalms 7:9
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:9...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (164 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:9...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:9
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:10...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (259 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:10...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:10
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:10...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (390 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:10...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (171 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:10...
+INFO:src.agents.commentary_librarian:No Malbim commentary found for Psalms 7:10
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:10...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (373 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:10...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:10
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:11...
+INFO:src.agents.commentary_librarian:No Rashi commentary found for Psalms 7:11
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:11...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:11
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:11...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (105 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:11...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (30 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:11...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (378 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:11...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (38 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:11...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:11
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:12...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (102 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:12...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:12
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:12...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (594 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:12...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (54 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:12...
+INFO:src.agents.commentary_librarian:No Malbim commentary found for Psalms 7:12
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:12...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (43 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:12...
+INFO:src.agents.commentary_librarian:Successfully fetched Torah Temimah commentary (629 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:13...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (149 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:13...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:13
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:13...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (182 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:13...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (99 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:13...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (220 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:13...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (126 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:13...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:13
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:14...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (315 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:14...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:14
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:14...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (221 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:14...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (134 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:14...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (127 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:14...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (113 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:14...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:14
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:15...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (279 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:15...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:15
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:15...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (256 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:15...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (186 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:15...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (204 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:15...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (241 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:15...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:15
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:16...
+INFO:src.agents.commentary_librarian:No Rashi commentary found for Psalms 7:16
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:16...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:16
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:16...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (156 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:16...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (106 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:16...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (650 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:16...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (172 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:16...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:16
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:17...
+INFO:src.agents.commentary_librarian:No Rashi commentary found for Psalms 7:17
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:17...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:17
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:17...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (97 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:17...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (85 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:17...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (161 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:17...
+INFO:src.agents.commentary_librarian:Successfully fetched Meiri commentary (320 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:17...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:17
+INFO:src.agents.commentary_librarian:Fetching Rashi on Psalms 7:18...
+INFO:src.agents.commentary_librarian:Successfully fetched Rashi commentary (92 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Ibn Ezra on Psalms 7:18...
+INFO:src.agents.commentary_librarian:No Ibn Ezra commentary found for Psalms 7:18
+INFO:src.agents.commentary_librarian:Fetching Radak on Psalms 7:18...
+INFO:src.agents.commentary_librarian:Successfully fetched Radak commentary (122 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Metzudat David on Psalms 7:18...
+INFO:src.agents.commentary_librarian:Successfully fetched Metzudat David commentary (113 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Malbim on Psalms 7:18...
+INFO:src.agents.commentary_librarian:Successfully fetched Malbim commentary (83 Hebrew chars)
+INFO:src.agents.commentary_librarian:Fetching Meiri on Psalms 7:18...
+INFO:src.agents.commentary_librarian:No Meiri commentary found for Psalms 7:18
+INFO:src.agents.commentary_librarian:Fetching Torah Temimah on Psalms 7:18...
+INFO:src.agents.commentary_librarian:No Torah Temimah commentary found for Psalms 7:18
+INFO:src.agents.commentary_librarian:Fetched 81 commentaries total
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+INFO:src.agents.sacks_librarian:Found 0 Sacks references for Psalm 7
+INFO:src.agents.hirsch_librarian:Found 0 Hirsch commentaries for Psalm 7
+INFO:src.data_sources.sefaria_client:Fetching LXX Psalm 7 (MT Psalm 7) from Bolls.life...
+INFO:src.data_sources.sefaria_client:Successfully fetched LXX Psalm 7 (18 verses)
+15:13:05 | micro_analyst_v2 | INFO | 
+  RESEARCH BUNDLE ASSEMBLED:
+INFO:micro_analyst_v2:
+  RESEARCH BUNDLE ASSEMBLED:
+15:13:05 | micro_analyst_v2 | INFO |     Lexicon entries: 72
+INFO:micro_analyst_v2:    Lexicon entries: 72
+15:13:05 | micro_analyst_v2 | INFO |     Concordance results: 94
+INFO:micro_analyst_v2:    Concordance results: 94
+15:13:05 | micro_analyst_v2 | INFO |     Figurative instances: 449
+INFO:micro_analyst_v2:    Figurative instances: 449
+15:13:05 | micro_analyst_v2 | INFO |     Commentary entries: 81
+INFO:micro_analyst_v2:    Commentary entries: 81
+15:13:05 | micro_analyst_v2 | INFO | 
+================================================================================
+INFO:micro_analyst_v2:
+================================================================================
+15:13:05 | micro_analyst_v2 | INFO | MICROANALYST V2 COMPLETE
+INFO:micro_analyst_v2:MICROANALYST V2 COMPLETE
+15:13:05 | micro_analyst_v2 | INFO | ================================================================================
+
+INFO:micro_analyst_v2:================================================================================
+
+15:13:05 | enhanced_pipeline | INFO | ✓ Micro analysis saved to output\psalm_7\psalm_007_micro_v2.json
+INFO:enhanced_pipeline:✓ Micro analysis saved to output\psalm_7\psalm_007_micro_v2.json
+15:13:05 | enhanced_pipeline | INFO | ✓ Research bundle saved to output\psalm_7\psalm_007_research_v2.md
+INFO:enhanced_pipeline:✓ Research bundle saved to output\psalm_7\psalm_007_research_v2.md
+✓ Micro analysis complete: output\psalm_7\psalm_007_micro_v2.json
+✓ Research bundle complete: output\psalm_7\psalm_007_research_v2.md
+
+15:15:05 | enhanced_pipeline | INFO | Successfully loaded output\psalm_7\psalm_007_micro_v2.json and output\psalm_7\psalm_007_research_v2.md for subsequent steps.
+INFO:enhanced_pipeline:Successfully loaded output\psalm_7\psalm_007_micro_v2.json and output\psalm_7\psalm_007_research_v2.md for subsequent steps.
+15:15:05 | enhanced_pipeline | INFO | 
+[STEP 3] Running SynthesisWriter (with enhanced prompts)...
+INFO:enhanced_pipeline:
+[STEP 3] Running SynthesisWriter (with enhanced prompts)...
+
+================================================================================
+STEP 3: Synthesis (Introduction + Verse Commentary)
+================================================================================
+
+15:15:06 | synthesis_writer | INFO | SynthesisWriter initialized with model claude-sonnet-4-5
+INFO:synthesis_writer:SynthesisWriter initialized with model claude-sonnet-4-5
+15:15:06 | synthesis_writer | INFO | Starting commentary synthesis
+INFO:synthesis_writer:Starting commentary synthesis
+15:15:06 | synthesis_writer | INFO | Calculated verse token limit for 18 verses: 32400 tokens
+INFO:synthesis_writer:Calculated verse token limit for 18 verses: 32400 tokens
+15:15:06 | synthesis_writer | INFO | Synthesizing commentary for Psalm 7
+INFO:synthesis_writer:Synthesizing commentary for Psalm 7
+15:15:06 | synthesis_writer | INFO |   Macro thesis: 17159 chars
+INFO:synthesis_writer:  Macro thesis: 17159 chars
+15:15:06 | synthesis_writer | INFO |   Micro analysis: 19041 chars
+INFO:synthesis_writer:  Micro analysis: 19041 chars
+15:15:06 | synthesis_writer | INFO |   Research bundle: 317588 chars
+INFO:synthesis_writer:  Research bundle: 317588 chars
+15:15:06 | synthesis_writer | INFO |   Verse commentary token limit: 32400 tokens (18 verses)
+INFO:synthesis_writer:  Verse commentary token limit: 32400 tokens (18 verses)
+15:15:06 | synthesis_writer | INFO | ✓ Phonetic transcription data FOUND and passed to synthesis writer.
+INFO:synthesis_writer:✓ Phonetic transcription data FOUND and passed to synthesis writer.
+15:15:06 | synthesis_writer | INFO | Generating introduction essay for Psalm 7
+INFO:synthesis_writer:Generating introduction essay for Psalm 7
+DEBUG:synthesis_writer:Introduction prompt length: 352373 chars
+15:15:06 | synthesis_writer | INFO | Saved introduction prompt to output\debug\intro_prompt_psalm_7.txt
+INFO:synthesis_writer:Saved introduction prompt to output\debug\intro_prompt_psalm_7.txt
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+15:16:57 | synthesis_writer | INFO | Introduction generated: 10409 chars
+INFO:synthesis_writer:Introduction generated: 10409 chars
+DEBUG:synthesis_writer:Anthropic Claude API call: claude-sonnet-4-5 -> 200 (0.00ms)
+15:16:57 | synthesis_writer | INFO | Generating verse commentary for Psalm 7
+INFO:synthesis_writer:Generating verse commentary for Psalm 7
+DEBUG:synthesis_writer:Verse commentary prompt length: 368420 chars
+15:16:57 | synthesis_writer | INFO | Saved verse commentary prompt to output\debug\verse_prompt_psalm_7.txt
+INFO:synthesis_writer:Saved verse commentary prompt to output\debug\verse_prompt_psalm_7.txt
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+15:21:20 | synthesis_writer | INFO | Verse commentary generated: 29501 chars
+INFO:synthesis_writer:Verse commentary generated: 29501 chars
+DEBUG:synthesis_writer:Anthropic Claude API call: claude-sonnet-4-5 -> 200 (0.00ms)
+15:21:20 | synthesis_writer | INFO | Commentary synthesis complete
+INFO:synthesis_writer:Commentary synthesis complete
+15:21:20 | synthesis_writer | INFO |   Introduction: 10409 chars
+INFO:synthesis_writer:  Introduction: 10409 chars
+15:21:20 | synthesis_writer | INFO |   Verse commentary: 29501 chars
+INFO:synthesis_writer:  Verse commentary: 29501 chars
+15:21:20 | enhanced_pipeline | INFO | ✓ Introduction saved to output\psalm_7\psalm_007_synthesis_intro.md
+INFO:enhanced_pipeline:✓ Introduction saved to output\psalm_7\psalm_007_synthesis_intro.md
+15:21:20 | enhanced_pipeline | INFO | ✓ Verse commentary saved to output\psalm_7\psalm_007_synthesis_verses.md
+INFO:enhanced_pipeline:✓ Verse commentary saved to output\psalm_7\psalm_007_synthesis_verses.md
+✓ Introduction complete: output\psalm_7\psalm_007_synthesis_intro.md
+✓ Verse commentary complete: output\psalm_7\psalm_007_synthesis_verses.md
+
+15:23:20 | enhanced_pipeline | INFO | 
+[STEP 4] Running MasterEditor (GPT-5) for final editorial review...
+INFO:enhanced_pipeline:
+[STEP 4] Running MasterEditor (GPT-5) for final editorial review...
+
+================================================================================
+STEP 4: Master Editorial Review (GPT-5)
+================================================================================
+
+This step uses GPT-5 to elevate the commentary from 'good' to 'excellent'
+Expected duration: 2-5 minutes
+
+15:23:20 | master_editor | INFO | MasterEditor initialized with model gpt-5
+INFO:master_editor:MasterEditor initialized with model gpt-5
+INFO:src.data_sources.tanakh_database:Database schema created at database\tanakh.db
+INFO:src.data_sources.sefaria_client:Fetching LXX Psalm 7 (MT Psalm 7) from Bolls.life...
+INFO:src.data_sources.sefaria_client:Successfully fetched LXX Psalm 7 (18 verses)
+15:23:21 | enhanced_pipeline | WARNING | Could not load analytical framework for tracking: 'RAGManager' object has no attribute 'get_analytical_framework'
+WARNING:enhanced_pipeline:Could not load analytical framework for tracking: 'RAGManager' object has no attribute 'get_analytical_framework'
+15:23:21 | master_editor | INFO | MasterEditor initialized with model gpt-5
+INFO:master_editor:MasterEditor initialized with model gpt-5
+15:23:21 | master_editor | INFO | Starting master editorial review
+INFO:master_editor:Starting master editorial review
+15:23:21 | master_editor | INFO | Loading text file: output\psalm_7\psalm_007_synthesis_intro.md
+INFO:master_editor:Loading text file: output\psalm_7\psalm_007_synthesis_intro.md
+15:23:21 | master_editor | INFO | Loading text file: output\psalm_7\psalm_007_synthesis_verses.md
+INFO:master_editor:Loading text file: output\psalm_7\psalm_007_synthesis_verses.md
+15:23:21 | master_editor | INFO | Loading text file: output\psalm_7\psalm_007_research_v2.md
+INFO:master_editor:Loading text file: output\psalm_7\psalm_007_research_v2.md
+15:23:21 | master_editor | INFO | Loading JSON file: output\psalm_7\psalm_007_macro.json
+INFO:master_editor:Loading JSON file: output\psalm_7\psalm_007_macro.json
+15:23:21 | master_editor | INFO | Loading JSON file: output\psalm_7\psalm_007_micro_v2.json
+INFO:master_editor:Loading JSON file: output\psalm_7\psalm_007_micro_v2.json
+INFO:src.data_sources.tanakh_database:Database schema created at database\tanakh.db
+INFO:src.data_sources.sefaria_client:Fetching LXX Psalm 7 (MT Psalm 7) from Bolls.life...
+INFO:src.data_sources.sefaria_client:Successfully fetched LXX Psalm 7 (18 verses)
+15:23:22 | master_editor | INFO | ✓ Analytical framework loaded successfully for Master Editor.
+INFO:master_editor:✓ Analytical framework loaded successfully for Master Editor.
+15:23:22 | master_editor | INFO | Editing commentary for Psalm 7
+INFO:master_editor:Editing commentary for Psalm 7
+15:23:22 | master_editor | INFO |   Introduction: 10409 chars
+INFO:master_editor:  Introduction: 10409 chars
+15:23:22 | master_editor | INFO |   Verse commentary: 29501 chars
+INFO:master_editor:  Verse commentary: 29501 chars
+15:23:22 | master_editor | INFO |   Research bundle: 317588 chars
+INFO:master_editor:  Research bundle: 317588 chars
+15:23:22 | master_editor | INFO | Calling GPT-5 for editorial review of Psalm 7
+INFO:master_editor:Calling GPT-5 for editorial review of Psalm 7
+15:23:22 | master_editor | INFO | Saved editorial prompt to output\debug\master_editor_prompt_psalm_7.txt
+INFO:master_editor:Saved editorial prompt to output\debug\master_editor_prompt_psalm_7.txt
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+15:28:06 | master_editor | INFO | Editorial review generated: 31304 chars
+INFO:master_editor:Editorial review generated: 31304 chars
+15:28:06 | master_editor | INFO | Saved editorial response to output\debug\master_editor_response_psalm_7.txt
+INFO:master_editor:Saved editorial response to output\debug\master_editor_response_psalm_7.txt
+15:28:06 | master_editor | INFO | ✓ Liturgical section marker '---LITURGICAL-SECTION-START---' found and replaced with header
+INFO:master_editor:✓ Liturgical section marker '---LITURGICAL-SECTION-START---' found and replaced with header
+15:28:06 | master_editor | INFO | ✓ Liturgical section has 1494 chars of content
+INFO:master_editor:✓ Liturgical section has 1494 chars of content
+15:28:06 | master_editor | INFO | Master editorial review complete
+INFO:master_editor:Master editorial review complete
+15:28:06 | master_editor | INFO |   Assessment: 2103 chars
+INFO:master_editor:  Assessment: 2103 chars
+15:28:06 | master_editor | INFO |   Revised introduction: 9609 chars
+INFO:master_editor:  Revised introduction: 9609 chars
+15:28:06 | master_editor | INFO |   Revised verses: 19507 chars
+INFO:master_editor:  Revised verses: 19507 chars
+15:28:06 | enhanced_pipeline | INFO | ✓ Editorial assessment saved to output\psalm_7\psalm_007_assessment.md
+INFO:enhanced_pipeline:✓ Editorial assessment saved to output\psalm_7\psalm_007_assessment.md
+15:28:06 | enhanced_pipeline | INFO | ✓ Revised introduction saved to output\psalm_7\psalm_007_edited_intro.md
+INFO:enhanced_pipeline:✓ Revised introduction saved to output\psalm_7\psalm_007_edited_intro.md
+15:28:06 | enhanced_pipeline | INFO | ✓ Revised verses saved to output\psalm_7\psalm_007_edited_verses.md
+INFO:enhanced_pipeline:✓ Revised verses saved to output\psalm_7\psalm_007_edited_verses.md
+✓ Editorial assessment: output\psalm_7\psalm_007_assessment.md
+✓ Revised introduction: output\psalm_7\psalm_007_edited_intro.md
+✓ Revised verses: output\psalm_7\psalm_007_edited_verses.md
+
+15:30:06 | enhanced_pipeline | INFO | Analysis complete. Statistics with completion date saved to output\psalm_7\psalm_007_pipeline_stats.json
+INFO:enhanced_pipeline:Analysis complete. Statistics with completion date saved to output\psalm_7\psalm_007_pipeline_stats.json
+15:30:06 | enhanced_pipeline | INFO | 
+[STEP 5] Creating print-ready formatted output...
+INFO:enhanced_pipeline:
+[STEP 5] Creating print-ready formatted output...
+
+================================================================================
+STEP 5: Print-Ready Formatting
+================================================================================
+
+15:30:06 | enhanced_pipeline | INFO | Running formatter command: C:\Python313\python.exe c:\Users\ariro\OneDrive\Documents\Psalms\src\utils\commentary_formatter.py --psalm 7 --intro output\psalm_7\psalm_007_edited_intro.md --verses output\psalm_7\psalm_007_edited_verses.md --summary output\psalm_7\psalm_007_pipeline_stats.json --output output\psalm_7\psalm_007_print_ready.md --db-path database/tanakh.db
+INFO:enhanced_pipeline:Running formatter command: C:\Python313\python.exe c:\Users\ariro\OneDrive\Documents\Psalms\src\utils\commentary_formatter.py --psalm 7 --intro output\psalm_7\psalm_007_edited_intro.md --verses output\psalm_7\psalm_007_edited_verses.md --summary output\psalm_7\psalm_007_pipeline_stats.json --output output\psalm_7\psalm_007_print_ready.md --db-path database/tanakh.db
+15:30:07 | enhanced_pipeline | INFO | Formatter stdout:
+15:30:07 | formatter_cli | INFO | Loading introduction from: output\psalm_7\psalm_007_edited_intro.md
+15:30:07 | formatter_cli | INFO | Loading verse commentary from: output\psalm_7\psalm_007_edited_verses.md
+15:30:07 | formatter_cli | INFO | Loading summary from: output\psalm_7\psalm_007_pipeline_stats.json
+15:30:07 | formatter_cli | INFO | Fetching psalm text from database...
+15:30:07 | formatter_cli | INFO | Formatting print-ready commentary for Psalm 7...
+15:30:07 | formatter_cli | INFO | Formatting bibliographical summary.
+15:30:07 | formatter_cli | INFO | Formatting complete.
+15:30:07 | formatter_cli | INFO | Successfully created print-ready file: output\psalm_7\psalm_007_print_ready.md
+
+INFO:enhanced_pipeline:Formatter stdout:
+15:30:07 | formatter_cli | INFO | Loading introduction from: output\psalm_7\psalm_007_edited_intro.md
+15:30:07 | formatter_cli | INFO | Loading verse commentary from: output\psalm_7\psalm_007_edited_verses.md
+15:30:07 | formatter_cli | INFO | Loading summary from: output\psalm_7\psalm_007_pipeline_stats.json
+15:30:07 | formatter_cli | INFO | Fetching psalm text from database...
+15:30:07 | formatter_cli | INFO | Formatting print-ready commentary for Psalm 7...
+15:30:07 | formatter_cli | INFO | Formatting bibliographical summary.
+15:30:07 | formatter_cli | INFO | Formatting complete.
+15:30:07 | formatter_cli | INFO | Successfully created print-ready file: output\psalm_7\psalm_007_print_ready.md
+
+15:30:07 | enhanced_pipeline | WARNING | Formatter stderr:
+INFO:formatter_cli:Loading introduction from: output\psalm_7\psalm_007_edited_intro.md
+INFO:formatter_cli:Loading verse commentary from: output\psalm_7\psalm_007_edited_verses.md
+INFO:formatter_cli:Loading summary from: output\psalm_7\psalm_007_pipeline_stats.json
+INFO:formatter_cli:Fetching psalm text from database...
+INFO:src.data_sources.tanakh_database:Database schema created at database\tanakh.db
+INFO:formatter_cli:Formatting print-ready commentary for Psalm 7...
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+INFO:formatter_cli:Formatting bibliographical summary.
+INFO:formatter_cli:Formatting complete.
+DEBUG:formatter_cli:Divine names modified in text
+INFO:formatter_cli:Successfully created print-ready file: output\psalm_7\psalm_007_print_ready.md
+
+WARNING:enhanced_pipeline:Formatter stderr:
+INFO:formatter_cli:Loading introduction from: output\psalm_7\psalm_007_edited_intro.md
+INFO:formatter_cli:Loading verse commentary from: output\psalm_7\psalm_007_edited_verses.md
+INFO:formatter_cli:Loading summary from: output\psalm_7\psalm_007_pipeline_stats.json
+INFO:formatter_cli:Fetching psalm text from database...
+INFO:src.data_sources.tanakh_database:Database schema created at database\tanakh.db
+INFO:formatter_cli:Formatting print-ready commentary for Psalm 7...
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+DEBUG:formatter_cli:Divine names modified in text
+INFO:formatter_cli:Formatting bibliographical summary.
+INFO:formatter_cli:Formatting complete.
+DEBUG:formatter_cli:Divine names modified in text
+INFO:formatter_cli:Successfully created print-ready file: output\psalm_7\psalm_007_print_ready.md
+
+15:30:07 | enhanced_pipeline | INFO | ✓ Print-ready commentary saved to output\psalm_7\psalm_007_print_ready.md
+INFO:enhanced_pipeline:✓ Print-ready commentary saved to output\psalm_7\psalm_007_print_ready.md
+✓ Print-ready commentary: output\psalm_7\psalm_007_print_ready.md
+
+15:30:07 | enhanced_pipeline | INFO | 
+[STEP 6] Creating .docx document...
+INFO:enhanced_pipeline:
+[STEP 6] Creating .docx document...
+INFO:src.data_sources.tanakh_database:Database schema created at c:\Users\ariro\OneDrive\Documents\Psalms\database\tanakh.db
+
+================================================================================
+STEP 6: Generating Word Document (.docx)
+================================================================================
+
+15:30:07 | enhanced_pipeline | ERROR | Failed to generate .docx file for Psalm 7: [Errno 13] Permission denied: 'output\\psalm_7\\psalm_007_commentary.docx'
+ERROR:enhanced_pipeline:Failed to generate .docx file for Psalm 7: [Errno 13] Permission denied: 'output\\psalm_7\\psalm_007_commentary.docx'
+⚠ Error in Word document generation (see logs for details)
+
+15:30:07 | enhanced_pipeline | INFO | 
+================================================================================
+INFO:enhanced_pipeline:
+================================================================================
+15:30:07 | enhanced_pipeline | INFO | ENHANCED PIPELINE COMPLETE - Psalm 7
+INFO:enhanced_pipeline:ENHANCED PIPELINE COMPLETE - Psalm 7
+15:30:07 | enhanced_pipeline | INFO | ================================================================================
+
+INFO:enhanced_pipeline:================================================================================
+
+15:30:07 | enhanced_pipeline | INFO | 
+[SUMMARY] Generating pipeline summary report...
+INFO:enhanced_pipeline:
+[SUMMARY] Generating pipeline summary report...
+15:30:07 | enhanced_pipeline | INFO | ✓ Pipeline summary saved to output\psalm_7\psalm_007_pipeline_summary.md
+INFO:enhanced_pipeline:✓ Pipeline summary saved to output\psalm_7\psalm_007_pipeline_summary.md
+15:30:07 | enhanced_pipeline | INFO | ✓ Pipeline statistics can be found at output\psalm_7\psalm_007_pipeline_stats.json
+INFO:enhanced_pipeline:✓ Pipeline statistics can be found at output\psalm_7\psalm_007_pipeline_stats.json
+
+✓ Pipeline summary: output\psalm_7\psalm_007_pipeline_summary.md
+✓ Pipeline statistics: output\psalm_7\psalm_007_pipeline_stats.json
+
+================================================================================
+ENHANCED PIPELINE COMPLETE
+================================================================================
+
+Final Output: output\psalm_7\psalm_007_print_ready.md
+
+All files saved to: output\psalm_7/
+
