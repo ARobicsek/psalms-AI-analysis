@@ -879,6 +879,9 @@ class SynthesisWriter:
                             if chunk.delta.type == 'text_delta':
                                 introduction += chunk.delta.text
 
+                # Get final message for usage tracking
+                final_message = response_stream.get_final_message()
+
             self.logger.info(f"Introduction generated: {len(introduction)} chars")
 
             # Track model usage
@@ -886,8 +889,8 @@ class SynthesisWriter:
                 self.tracker.track_model_usage(
                     agent_name='synthesis_writer',
                     model=self.model,
-                    input_tokens=response.usage.input_tokens,
-                    output_tokens=response.usage.output_tokens)
+                    input_tokens=final_message.usage.input_tokens,
+                    output_tokens=final_message.usage.output_tokens)
 
             # Log API call
             self.logger.log_api_call(
@@ -977,6 +980,9 @@ class SynthesisWriter:
                             if chunk.delta.type == 'text_delta':
                                 commentary += chunk.delta.text
 
+                # Get final message for usage tracking
+                final_message = response_stream.get_final_message()
+
             self.logger.info(f"Verse commentary generated: {len(commentary)} chars")
 
             # Track model usage
@@ -984,8 +990,8 @@ class SynthesisWriter:
                 self.tracker.track_model_usage(
                     agent_name='synthesis_writer',
                     model=self.model,
-                    input_tokens=response.usage.input_tokens,
-                    output_tokens=response.usage.output_tokens)
+                    input_tokens=final_message.usage.input_tokens,
+                    output_tokens=final_message.usage.output_tokens)
 
             # Log API call
             self.logger.log_api_call(

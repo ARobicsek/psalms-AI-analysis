@@ -1,0 +1,518 @@
+{
+  "psalm_number": 7,
+  "pipeline_start": "2025-11-18T15:02:27.199365",
+  "pipeline_end": "2025-11-18T15:30:06.970953",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 3017,
+      "input_token_estimate": 1005,
+      "output_char_count": 17159,
+      "output_token_estimate": 5719,
+      "duration_seconds": 118.4623556137085,
+      "completion_date": null,
+      "timestamp": "2025-11-18T15:02:27.202474"
+    },
+    "micro_analysis": {
+      "input_char_count": 17159,
+      "input_token_estimate": 5719,
+      "output_char_count": 336631,
+      "output_token_estimate": 112210,
+      "duration_seconds": 400.14305210113525,
+      "completion_date": null,
+      "timestamp": "2025-11-18T15:06:25.692594"
+    },
+    "synthesis": {
+      "input_char_count": 353792,
+      "input_token_estimate": 117930,
+      "output_char_count": 39912,
+      "output_token_estimate": 13304,
+      "duration_seconds": 374.2275309562683,
+      "completion_date": null,
+      "timestamp": "2025-11-18T15:15:05.921653"
+    },
+    "master_editor": {
+      "input_char_count": 373108,
+      "input_token_estimate": 124369,
+      "output_char_count": 31223,
+      "output_token_estimate": 10407,
+      "duration_seconds": 286.8204131126404,
+      "completion_date": "2025-11-18T15:30:06.970953",
+      "timestamp": "2025-11-18T15:23:21.133250"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "שִׁגָּיוֹן",
+        "reason": "Hapax legomenon in superscriptions (here and Hab 3) - genre designation whose meaning is uncertain; etymology and comparative Semitic data needed"
+      },
+      {
+        "word": "כּוּשׁ",
+        "reason": "Unique proper name 'Cush the Benjaminite' not attested elsewhere - need onomastic data and possible wordplay"
+      },
+      {
+        "word": "חָסָה",
+        "reason": "Perfect tense 'I have taken refuge' in v2 - semantic range and syntactic patterns of this refuge verb"
+      },
+      {
+        "word": "פָּרַק",
+        "reason": "Rare verb 'rend/dismember' in v3 - violent imagery, need usage patterns and ANE parallels"
+      },
+      {
+        "word": "עָוֶל",
+        "reason": "Used in v4 instead of common חֵטְא - semantic distinction between 'wrongdoing' and 'sin'"
+      },
+      {
+        "word": "גָּמַל",
+        "reason": "V5 'dealt evil to my ally' - idiomatic usage and range of requital/recompense meanings"
+      },
+      {
+        "word": "שָׁלֵם",
+        "reason": "V5 'my ally' - semantic field and relational implications vs. רֵעַ or אָח"
+      },
+      {
+        "word": "חָלַץ",
+        "reason": "V5 'rescued' - military deliverance vocabulary, need context patterns"
+      },
+      {
+        "word": "כָּבוֹד",
+        "reason": "V6 'my honor' parallel to 'my life' - theological anthropology and honor/glory semantic range"
+      },
+      {
+        "word": "עַבְרָה",
+        "reason": "V7 ambiguous 'עַבְרוֹת' - does it mean 'fury/wrath' or 'transgressions'? Critical for subject identification"
+      },
+      {
+        "word": "עֵדָה",
+        "reason": "V8 'assembly of peoples' - cultic, legal, or cosmic assembly? Usage patterns needed"
+      },
+      {
+        "word": "לְאֹם",
+        "reason": "V8 'peoples/nations' - distinction from גּוֹיִם and עַמִּים in assembly contexts"
+      },
+      {
+        "word": "תֻּם",
+        "reason": "V9 'integrity' paired with 'righteousness' - semantic field and usage in oath contexts"
+      },
+      {
+        "word": "בָּחַן",
+        "reason": "V10 'probes' hearts and kidneys - technical term for divine testing/examining"
+      },
+      {
+        "word": "כִּלְיָה",
+        "reason": "V10 'kidneys' as seat of conscience - biblical anthropology and metaphorical usage"
+      },
+      {
+        "word": "זָעַם",
+        "reason": "V12 'indignant/pronounces doom' - semantic range between emotion and judicial decree"
+      },
+      {
+        "word": "לָטַשׁ",
+        "reason": "V13 'whets' sword - weapon preparation vocabulary, need usage patterns"
+      },
+      {
+        "word": "דָּלַק",
+        "reason": "V14 'burning' arrows - rare term, literal fire or metaphorical intensity?"
+      },
+      {
+        "word": "חָבַל",
+        "reason": "V15 'travails' with iniquity - birth metaphor applied to evil, need semantic field"
+      },
+      {
+        "word": "קׇדְקֹד",
+        "reason": "V17 'skull/crown' - anatomical precision vs. general 'head', usage patterns needed"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "יהוה אלהי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Track compound divine address formula - covenant relationship emphasis in lament context"
+      },
+      {
+        "query": "חסיתי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Perfect tense refuge claims - examine whether completed action is typical or unusual"
+      },
+      {
+        "query": "כל רדפי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Plural 'pursuers' language in laments - typical antagonist description"
+      },
+      {
+        "query": "אם עשיתי זאת",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Oath of innocence formula - legal/ritual pattern across biblical texts"
+      },
+      {
+        "query": "עדת לאמים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Assembly of peoples/nations - determine if earthly or divine council imagery"
+      },
+      {
+        "query": "למרום שובה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "God returning/enthroning on high - rare vertical movement vocabulary"
+      },
+      {
+        "query": "יהוה ידין עמים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "YHWH judges peoples/nations - universal judgment declarations"
+      },
+      {
+        "query": "בחן לבות וכליות",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Hearts and kidneys probing - divine omniscience formula and anthropology"
+      },
+      {
+        "query": "אלהים צדיק",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "God as 'righteous' - divine attribute in forensic contexts"
+      },
+      {
+        "query": "בכל יום",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Daily/continuous action - examine temporal framework of divine judgment"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Lion predation imagery - vivid animal attack metaphor for enemies | Vehicle: lion | Related terms: lions, lioness, lionesses",
+        "vehicle": "lion",
+        "vehicle_terms": [
+          "lion",
+          "lions",
+          "lioness",
+          "lionesses"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Tearing/rending action - graphic violence verbs for destruction | Vehicle: tear | Related terms: tearing, rend, rending, rip, ripping, shred, shredding",
+        "vehicle": "tear",
+        "vehicle_terms": [
+          "tear",
+          "tearing",
+          "rend",
+          "rending",
+          "rip",
+          "ripping",
+          "shred",
+          "shredding"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Hands as instruments of guilt - synecdoche for agency and moral culpability | Vehicle: hands | Related terms: hand, palm, palms",
+        "vehicle": "hands",
+        "vehicle_terms": [
+          "hands",
+          "hand",
+          "palm",
+          "palms"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Trampling to ground - humiliation and defeat imagery | Vehicle: trample | Related terms: trampling, tread, treading, crush, crushing",
+        "vehicle": "trample",
+        "vehicle_terms": [
+          "trample",
+          "trampling",
+          "tread",
+          "treading",
+          "crush",
+          "crushing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Dwelling in dust - death and shame spatial metaphor | Vehicle: dust | Related terms: ashes, ground, earth",
+        "vehicle": "dust",
+        "vehicle_terms": [
+          "dust",
+          "ashes",
+          "ground",
+          "earth"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "God arising/awakening - anthropomorphic call to divine action | Vehicle: arise | Related terms: arising, rise, rising, stand, standing",
+        "vehicle": "arise",
+        "vehicle_terms": [
+          "arise",
+          "arising",
+          "rise",
+          "rising",
+          "stand",
+          "standing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Divine anger invoked - emotional attribute as weapon | Vehicle: anger | Related terms: wrath, fury, rage",
+        "vehicle": "anger",
+        "vehicle_terms": [
+          "anger",
+          "wrath",
+          "fury",
+          "rage"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Assembly surrounding God - cosmic courtroom scene | Vehicle: surround | Related terms: surrounding, encircle, encircling, encompass",
+        "vehicle": "surround",
+        "vehicle_terms": [
+          "surround",
+          "surrounding",
+          "encircle",
+          "encircling",
+          "encompass"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Shield metaphor for divine protection - military defensive imagery | Vehicle: shield | Related terms: shields, buckler, bucklers",
+        "vehicle": "shield",
+        "vehicle_terms": [
+          "shield",
+          "shields",
+          "buckler",
+          "bucklers"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Whetting sword - weapon preparation for judgment | Vehicle: whet | Related terms: sharpen, sharpening, hone, honing",
+        "vehicle": "whet",
+        "vehicle_terms": [
+          "whet",
+          "sharpen",
+          "sharpening",
+          "hone",
+          "honing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Bending bow - archer imagery for attack | Vehicle: bow | Related terms: bows, archer, archers",
+        "vehicle": "bow",
+        "vehicle_terms": [
+          "bow",
+          "bows",
+          "archer",
+          "archers"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Flaming arrows - intensified projectile threat | Vehicle: burning | Related terms: burn, burns, flame, flames, fire",
+        "vehicle": "burning",
+        "vehicle_terms": [
+          "burning",
+          "burn",
+          "burns",
+          "flame",
+          "flames",
+          "fire"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Pregnancy with evil - birth metaphor for sin's generation | Vehicle: conceive | Related terms: conceiving, pregnant, pregnancy, travail",
+        "vehicle": "conceive",
+        "vehicle_terms": [
+          "conceive",
+          "conceiving",
+          "pregnant",
+          "pregnancy",
+          "travail"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Pit digging - trap construction reversal motif | Vehicle: pit | Related terms: pits, hole, holes, trap, traps",
+        "vehicle": "pit",
+        "vehicle_terms": [
+          "pit",
+          "pits",
+          "hole",
+          "holes",
+          "trap",
+          "traps"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "7:1",
+        "reason": "Superscription with unique 'shiggaion' genre - how do commentators understand this rare designation and the Cush/Benjaminite historical reference?"
+      },
+      {
+        "verse": "7:2",
+        "reason": "Opening refuge claim and compound divine name - traditional interpretation of covenant relationship in urgent petition"
+      },
+      {
+        "verse": "7:3",
+        "reason": "Lion predation imagery - how commentators understand the shift from plural pursuers to singular animal threat"
+      },
+      {
+        "verse": "7:4",
+        "reason": "Oath of innocence begins - classical exegesis of conditional structure and demonstrative 'this'"
+      },
+      {
+        "verse": "7:5",
+        "reason": "Complex oath with parenthetical defense - how commentators parse the grammatical disruption and ally/enemy contrast"
+      },
+      {
+        "verse": "7:6",
+        "reason": "Self-curse conclusion - traditional understanding of life/honor parallelism and 'dwelling in dust' imagery"
+      },
+      {
+        "verse": "7:7",
+        "reason": "Triple imperative to God - how commentators explain anthropomorphic 'awaken' language and requested divine anger"
+      },
+      {
+        "verse": "7:8",
+        "reason": "Cosmic assembly scene - classical interpretation of 'peoples' (earthly nations or divine council?) and God's enthronement"
+      },
+      {
+        "verse": "7:9",
+        "reason": "Universal/personal judgment fusion - how commentators relate 'YHWH judges peoples' to 'judge me'"
+      },
+      {
+        "verse": "7:10",
+        "reason": "Petition for evil's end and divine omniscience - traditional understanding of hearts/kidneys probing and God's righteousness"
+      },
+      {
+        "verse": "7:11",
+        "reason": "Confidence statement with shield metaphor - how commentators parse unusual preposition 'upon God'"
+      },
+      {
+        "verse": "7:12",
+        "reason": "God as judge who is indignant daily - classical resolution of continuous judgment vs. apparent delays"
+      },
+      {
+        "verse": "7:13",
+        "reason": "Weapon preparation with ambiguous subject - who is preparing weapons (God or wicked)? Traditional interpretations"
+      },
+      {
+        "verse": "7:14",
+        "reason": "Deadly weapons and flaming arrows - how commentators understand 'for himself' and the reversal mechanism"
+      },
+      {
+        "verse": "7:15",
+        "reason": "Pregnancy/birth metaphor for evil - classical interpretation of reverse chronology and self-generation of wickedness"
+      },
+      {
+        "verse": "7:16",
+        "reason": "Pit-digging reversal - traditional understanding of poetic justice and dual digging verbs"
+      },
+      {
+        "verse": "7:17",
+        "reason": "Violence returning on perpetrator - how commentators explain head/skull parallelism and boomerang justice"
+      },
+      {
+        "verse": "7:18",
+        "reason": "Vow of praise conclusion - traditional interpretation of praising God's righteousness specifically and 'Most High' epithet"
+      }
+    ],
+    "lexicon_entries_count": 72,
+    "concordance_results": {
+      "יהוה אלהי": 28,
+      "חסיתי": 15,
+      "כל רדפי": 8,
+      "אם עשיתי זאת": 4,
+      "עדת לאמים": 1,
+      "למרום שובה": 1,
+      "יהוה ידין עמים": 4,
+      "בחן לבות וכליות": 1,
+      "אלהים צדיק": 5,
+      "בכל יום": 27
+    },
+    "figurative_results": {
+      "total_instances_used": 449
+    },
+    "commentary_counts": {
+      "Rashi": 13,
+      "Ibn Ezra": 1,
+      "Radak": 18,
+      "Metzudat David": 17,
+      "Malbim": 13,
+      "Meiri": 17,
+      "Torah Temimah": 2
+    },
+    "sacks_references_count": 0,
+    "related_psalms_count": 5,
+    "related_psalms_list": [
+      9,
+      44,
+      18,
+      57,
+      11
+    ],
+    "ugaritic_parallels": [
+      {
+        "type": "Poetic Word Pair",
+        "reference": "Psalm 7:9 [Eng. 7:8]",
+        "analysis": "This pairing is used to create parallels that speak of universal scope, encompassing both individual..."
+      }
+    ],
+    "research_bundle_chars": 317588,
+    "research_bundle_tokens": 105862
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the meaning and etymology of 'shiggaion' (שִׁגָּיוֹן), and how does it relate to Habakkuk 3? Does it indicate a musical/liturgical form or an emotional/content characteristic?",
+      "Who is Cush the Benjaminite, and what are the political implications of a Benjaminite accuser if this is authentically Davidic? Could this relate to Saul/David or Absalom conflicts?",
+      "What specific accusation is addressed in vv. 4-5? What does 'dealt evil to my ally' (גָּמַלְתִּי שׁוֹלְמִי רָע) mean, and how does the parenthetical 'I who rescued my foe without reward' relate to it?",
+      "How does the conditional self-curse formula in vv. 4-6 compare to Ancient Near Eastern legal oath practices? Are there treaty or legal text parallels?",
+      "What is the theological significance of the shift from singular 'enemy' (v. 6) to 'assembly of peoples' (v. 8)? How does personal vindication become cosmic judgment?",
+      "How does the 'assembly of peoples' (עֲדַת לְאֻמִּים) imagery in v. 8 relate to divine council scenes in Psalm 82, Isaiah 6, 1 Kings 22, or Ugaritic texts? Is this earthly assembly or heavenly court?",
+      "Who is the subject of vv. 13-14 - God preparing weapons against the wicked, or the wicked preparing weapons that will backfire? How does this ambiguity function rhetorically?",
+      "How do the three self-destruction metaphors (weapons, pregnancy, pit) in vv. 13-17 relate to each other? Do they represent escalating certainty, different aspects, or parallel examples?",
+      "What is the relationship between active divine judgment (vv. 7-12) and inherent retributive justice (vv. 13-17)? Does God act directly or through moral order?",
+      "How does the 'God pronounces doom each day' (v. 12) relate to the delay of judgment theme elsewhere in Psalms? Is this about patience or ongoing active judgment?",
+      "What is the significance of 'probes mind and conscience/heart and kidneys' (v. 10) in biblical anthropology? How does this relate to divine omniscience and moral assessment?",
+      "How does the final epithet 'LORD Most High' (יְהֹוָה עֶלְיוֹן, v. 18) function, especially given the earlier 'on high' (לַמָּרוֹם, v. 8)? Is there intentional echo/inclusio?",
+      "What is the function of the single 'Selah' at v. 6? Does it mark the end of the oath section, or a pause before the shift to cosmic judgment appeal?"
+    ],
+    "micro_questions": [
+      "What is the etymology and meaning of 'shiggaion' (שִׁגָּיוֹן) in v1, and why does it appear only here and Habakkuk 3? Does it indicate emotional intensity, musical form, or literary genre?",
+      "Who is 'Cush the Benjaminite' (v1), and what are the political implications of a Benjaminite accuser in a Davidic psalm, given Benjamin was Saul's tribe?",
+      "Why does the psalmist shift from plural 'pursuers' (רֹדְפַי) in v2 to singular 'lion' metaphor in v3? Does this suggest multiple human enemies coalesce into one archetypal threat?",
+      "What specific accusation is addressed in vv4-5? What does the phrase 'dealt evil to my ally' (גָּמַלְתִּי שֽׁוֹלְמִי רָע) mean, and how does the parenthetical 'I who rescued my foe without reward' function rhetorically?",
+      "Is the preposition 'עַל' in v11 ('my shield is upon God') unusual? Why not 'from God' or 'with God'—what theological or linguistic point does 'upon' make?",
+      "Who is the subject of vv13-14—is God preparing weapons against the wicked, or is the wicked preparing weapons that will backfire? How does this ambiguity function rhetorically and theologically?",
+      "Why is the pregnancy/birth metaphor in v15 in reverse chronological order (travail mentioned before conception)? Does this serve a rhetorical or poetic function?",
+      "How do the three self-destruction metaphors (weapons vv13-14, pregnancy v15, pit-digging vv16-17) relate to each other—are they parallel examples, escalating certainty, or different aspects of retributive justice?",
+      "What is the relationship between active divine judgment described in vv7-12 and inherent self-destructive justice in vv13-17? Does God judge actively or through moral order, or both?",
+      "How does 'God pronounces doom each day' (v12) relate to the problem of delayed judgment elsewhere in Psalms? Is this about patience, ongoing threat, or continuous active judgment?",
+      "What is the significance of the body part pair 'hearts and kidneys' (לִבּוֹת וּכְלָיוֹת) in v10 for biblical anthropology and divine omniscience?",
+      "Does the final epithet 'YHWH Most High' (יְהֹוָה עֶלְיֽוֹן) in v18 intentionally echo 'on high' (לַמָּרוֹם) from v8, creating an inclusio that connects personal vindication to cosmic sovereignty?",
+      "Why does the LXX add 'longsuffering' (μακρόθυμος) in v12, not present in the Hebrew? Is this theological interpretation addressing the tension of daily judgment with apparent delay?",
+      "What does 'assembly of peoples' (עֲדַת לְאֻמִּים) in v8 represent—earthly nations gathered for judgment or heavenly divine council? How does this relate to divine council imagery in Psalm 82 or Ugaritic texts?",
+      "How does the specific emphasis on praising God's 'righteousness' (צֶדֶק) in v18 connect to the forensic/juridical frame of the entire psalm? Is this a thematic inclusio with the righteousness claims in vv9-10?"
+    ],
+    "verse_count": 18
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5"
+  }
+}

@@ -1,0 +1,443 @@
+{
+  "psalm_number": 5,
+  "pipeline_start": "2025-11-16T16:09:52.458000",
+  "pipeline_end": "2025-11-16T16:38:41.809994",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 2284,
+      "input_token_estimate": 761,
+      "output_char_count": 21271,
+      "output_token_estimate": 7090,
+      "duration_seconds": 157.10777735710144,
+      "completion_date": null,
+      "timestamp": "2025-11-16T16:09:52.475865"
+    },
+    "micro_analysis": {
+      "input_char_count": 21271,
+      "input_token_estimate": 7090,
+      "output_char_count": 291649,
+      "output_token_estimate": 97216,
+      "duration_seconds": 398.51717710494995,
+      "completion_date": null,
+      "timestamp": "2025-11-16T16:14:29.624394"
+    },
+    "synthesis": {
+      "input_char_count": 312922,
+      "input_token_estimate": 104307,
+      "output_char_count": 49195,
+      "output_token_estimate": 16398,
+      "duration_seconds": 440.1036374568939,
+      "completion_date": null,
+      "timestamp": "2025-11-16T16:23:08.223610"
+    },
+    "master_editor": {
+      "input_char_count": 341670,
+      "input_token_estimate": 113890,
+      "output_char_count": 27669,
+      "output_token_estimate": 9223,
+      "duration_seconds": 253.47724556922913,
+      "completion_date": "2025-11-16T16:38:41.809994",
+      "timestamp": "2025-11-16T16:32:29.292921"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "נְחִילוֹת",
+        "reason": "Hapax legomenon in superscription - rare/unknown musical/liturgical term, LXX struggles with translation"
+      },
+      {
+        "word": "הֲגִיגִי",
+        "reason": "Distinct from אֲמָרַי - interior meditation vs. exterior speech? Wisdom vocabulary implications"
+      },
+      {
+        "word": "אֶעֱרׇךְ",
+        "reason": "Potentially technical cultic term - 'arrange' as in battle lines or sacrificial offerings"
+      },
+      {
+        "word": "אֲצַפֶּה",
+        "reason": "Sentinel/watchman imagery - expectant waiting vocabulary"
+      },
+      {
+        "word": "חָפֵץ",
+        "reason": "Emotionally loaded desire/delight language - theological weight in divine character description"
+      },
+      {
+        "word": "יְגֻרְךָ",
+        "reason": "Technical entrance liturgy term? Sojourning/dwelling language with temple connotations"
+      },
+      {
+        "word": "הוֹלְלִים",
+        "reason": "Rare participle from הלל II (not praise verb) - specific category of wicked"
+      },
+      {
+        "word": "יִתְיַצְּבוּ",
+        "reason": "Hitpael of יצב - positioning oneself, standing in judgment/temple context"
+      },
+      {
+        "word": "יְתָעֵב",
+        "reason": "Strong disgust language from תעב - intensity of divine emotional response"
+      },
+      {
+        "word": "קִרְבָּם",
+        "reason": "Interior/inward parts - specific anatomical term in v.10's body imagery"
+      },
+      {
+        "word": "יַחֲלִיקוּן",
+        "reason": "Making smooth/slippery from חלק - deceptive flattery vocabulary"
+      },
+      {
+        "word": "נְכוֹנָה",
+        "reason": "Reliability/firmness - what constitutes sincere speech?"
+      },
+      {
+        "word": "מָרוּ",
+        "reason": "Bitter rebellion - covenant breach language, intensity of opposition"
+      },
+      {
+        "word": "יְרַנֵּנוּ",
+        "reason": "Specific joy/singing vocabulary - distinct from other celebration verbs"
+      },
+      {
+        "word": "תָסֵךְ",
+        "reason": "Covering/sheltering from סכך - protection metaphor vocabulary"
+      },
+      {
+        "word": "צִנָּה",
+        "reason": "Large shield - military protection imagery, specific equipment term"
+      },
+      {
+        "word": "תַּעְטְרֶנּוּ",
+        "reason": "Crown vs. encompass ambiguity - dual meaning of honor and protection"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "בְּרֹב חַסְדְּךָ",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Track 'abundance of lovingkindness' formula - grace theology pattern"
+      },
+      {
+        "query": "בְּרֹב פִּשְׁעֵיהֶם",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Parallel to v.8 abundance formula - abundance of sin language"
+      },
+      {
+        "query": "חוֹסֵי בָךְ",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Refuge-taking as definition of righteousness - trust vocabulary"
+      },
+      {
+        "query": "קֶבֶר פָּתוּחַ",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Open grave metaphor for throat/speech - death-speech associations"
+      },
+      {
+        "query": "מַלְכִּי וֵאלֹהָי",
+        "scope": "Tanakh",
+        "level": "exact",
+        "purpose": "Unusual double title king+God - divine kingship vocabulary"
+      },
+      {
+        "query": "אִישׁ דָּמִים וּמִרְמָה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Man of blood and deceit formula - speech-violence pairing"
+      },
+      {
+        "query": "אָבוֹא בֵיתֶךָ",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Entering God's house formula - temple access language"
+      },
+      {
+        "query": "הַיְשַׁר דַּרְכֶּֽךָ",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Make straight Your way - path guidance imagery"
+      },
+      {
+        "query": "בֹּקֶר",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Morning prayer emphasis - daily liturgical timing"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Prayer arrangement as sacrifice - vivid cultic imagery central to psalm | Vehicle: arrange | Related terms: arranged, arranging, set in order, order, ordering, preparation, prepare, prepared",
+        "vehicle": "arrange",
+        "vehicle_terms": [
+          "arrange",
+          "arranged",
+          "arranging",
+          "set in order",
+          "order",
+          "ordering",
+          "preparation",
+          "prepare",
+          "prepared"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Watchman/sentinel waiting - expectant observation imagery | Vehicle: watch | Related terms: watching, watchman, watchmen, sentinel, sentinels, lookout, lookouts",
+        "vehicle": "watch",
+        "vehicle_terms": [
+          "watch",
+          "watching",
+          "watchman",
+          "watchmen",
+          "sentinel",
+          "sentinels",
+          "lookout",
+          "lookouts"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Sojourning with God - spatial temple residence metaphor | Vehicle: sojourn | Related terms: sojourning, sojourner, sojourners, dwell, dwelling, abide, abiding, reside, residing",
+        "vehicle": "sojourn",
+        "vehicle_terms": [
+          "sojourn",
+          "sojourning",
+          "sojourner",
+          "sojourners",
+          "dwell",
+          "dwelling",
+          "abide",
+          "abiding",
+          "reside",
+          "residing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Standing before divine eyes - court/temple positioning imagery | Vehicle: stand | Related terms: standing, stood, stands, position, positioned, positioning",
+        "vehicle": "stand",
+        "vehicle_terms": [
+          "stand",
+          "standing",
+          "stood",
+          "stands",
+          "position",
+          "positioned",
+          "positioning"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Open grave as throat - striking death-speech metaphor central to psalm | Vehicle: grave | Related terms: graves, tomb, tombs, sepulcher, sepulchers, pit, pits",
+        "vehicle": "grave",
+        "vehicle_terms": [
+          "grave",
+          "graves",
+          "tomb",
+          "tombs",
+          "sepulcher",
+          "sepulchers",
+          "pit",
+          "pits"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Making smooth/slippery tongue - deception as surface texture | Vehicle: smooth | Related terms: smoothness, slippery, slipperiness, flattery, flatter, flattering",
+        "vehicle": "smooth",
+        "vehicle_terms": [
+          "smooth",
+          "smoothness",
+          "slippery",
+          "slipperiness",
+          "flattery",
+          "flatter",
+          "flattering"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Falling by own devices - measure-for-measure justice imagery | Vehicle: fall | Related terms: falling, fell, falls, stumble, stumbling, stumbled",
+        "vehicle": "fall",
+        "vehicle_terms": [
+          "fall",
+          "falling",
+          "fell",
+          "falls",
+          "stumble",
+          "stumbling",
+          "stumbled"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Shelter/covering protection - divine protection as physical covering | Vehicle: shelter | Related terms: sheltering, cover, covering, covers, canopy, protection",
+        "vehicle": "shelter",
+        "vehicle_terms": [
+          "shelter",
+          "sheltering",
+          "cover",
+          "covering",
+          "covers",
+          "canopy",
+          "protection"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Shield of favor - abstract favor as concrete military equipment | Vehicle: shield | Related terms: shields, buckler, bucklers",
+        "vehicle": "shield",
+        "vehicle_terms": [
+          "shield",
+          "shields",
+          "buckler",
+          "bucklers"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Crown/encompass ambiguity - honor vs. protection imagery | Vehicle: crown | Related terms: crowned, crowning, encircle, encircling, encompass, encompassing, surround, surrounding",
+        "vehicle": "crown",
+        "vehicle_terms": [
+          "crown",
+          "crowned",
+          "crowning",
+          "encircle",
+          "encircling",
+          "encompass",
+          "encompassing",
+          "surround",
+          "surrounding"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "5:1",
+        "reason": "Superscription puzzle - how do traditional commentators handle the enigmatic 'neḥiloth'?"
+      },
+      {
+        "verse": "5:2",
+        "reason": "Double petition with distinct vocabulary - classical interpretation of אֲמָרַי vs. הֲגִיגִי"
+      },
+      {
+        "verse": "5:3",
+        "reason": "Unusual double title 'my king and my God' - traditional understanding of merged political/covenantal relationship"
+      },
+      {
+        "verse": "5:4",
+        "reason": "Morning prayer as cultic arrangement - how commentators interpret prayer-sacrifice parallel"
+      },
+      {
+        "verse": "5:5",
+        "reason": "Central negative theology - traditional exegesis of God's incompatibility with evil"
+      },
+      {
+        "verse": "5:6",
+        "reason": "Escalating exclusion language - classical understanding of divine hatred vocabulary"
+      },
+      {
+        "verse": "5:7",
+        "reason": "Speech-violence pairing - why commentators see lies as serious as bloodshed"
+      },
+      {
+        "verse": "5:8",
+        "reason": "THE PIVOT - grace paradox after exclusion theology, how tradition resolves the tension"
+      },
+      {
+        "verse": "5:9",
+        "reason": "Divine righteousness as basis for guidance - traditional interpretation amid enemy opposition"
+      },
+      {
+        "verse": "5:10",
+        "reason": "Extraordinary anatomical dissection of corrupt speech - classical reading of body-part progression"
+      },
+      {
+        "verse": "5:11",
+        "reason": "Imprecatory prayer ethics - how commentators justify calling for divine judgment"
+      },
+      {
+        "verse": "5:12",
+        "reason": "Joyous vision of refuge-takers - traditional definition of righteousness as trust not achievement"
+      },
+      {
+        "verse": "5:13",
+        "reason": "Favor as shield metaphor - classical interpretation of crown/encompass ambiguity and divine protection"
+      }
+    ],
+    "lexicon_entries_count": 45,
+    "concordance_results": {
+      "בְּרֹב חַסְדְּךָ": 2,
+      "בְּרֹב פִּשְׁעֵיהֶם": 1,
+      "חוֹסֵי בָךְ": 2,
+      "קֶבֶר פָּתוּחַ": 2,
+      "מַלְכִּי וֵאלֹהָי": 0,
+      "אִישׁ דָּמִים וּמִרְמָה": 5,
+      "אָבוֹא בֵיתֶךָ": 2,
+      "הַיְשַׁר דַּרְכֶּֽךָ": 0,
+      "בֹּקֶר": 16
+    },
+    "figurative_results": {
+      "total_instances_used": 435
+    },
+    "commentary_counts": {
+      "Rashi": 12,
+      "Ibn Ezra": 12,
+      "Radak": 13,
+      "Malbim": 9,
+      "Meiri": 11,
+      "Metzudat David": 12,
+      "Torah Temimah": 3
+    },
+    "sacks_references_count": 0,
+    "related_psalms_count": 5,
+    "related_psalms_list": [
+      36,
+      55,
+      49,
+      52,
+      145
+    ],
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 277949,
+    "research_bundle_tokens": 92649
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the meaning and significance of 'neḥiloth' in the superscription (v. 1), and how do ancient versions translate it? Does it refer to musical instrumentation (flutes?), melody type, or something else?",
+      "How does 'hagigi' (my utterance/meditation, v. 2) function lexically and theologically? Where else does this term appear in Psalms, and what does it reveal about the nature of prayer as interior reflection versus external speech?",
+      "What are the cultic/sacrificial connotations of 'a'erok lekha' (I arrange before You, v. 4)? Does this verb elsewhere describe laying out sacrifices, and if so, how does this inform understanding prayer as spiritual sacrifice?",
+      "The phrase 'lo yegurka ra' (evil cannot sojourn/abide with You, v. 5)—how does the verb 'gur' (to sojourn) relate to temple residence theology and who can 'dwell' with God? Compare with Psalm 15:1's 'who may sojourn in Your tent?'",
+      "How does the body-part imagery in v. 10 (mouth, heart, throat, tongue) function syntactically and semantically? Is there a progression from interior to exterior, and how does this compare to similar imagery in Proverbs or prophetic literature?",
+      "The 'open grave' (qever patuach) metaphor for throat in v. 10—is this a unique image or part of broader Ancient Near Eastern death/speech associations? How does Paul's use in Romans 3:13 interpret this image?",
+      "What is the theological function of 'chesed' (covenant love/lovingkindness) in v. 8 as the sole basis for temple access? How does this grace theology relate to or tension with the entrance liturgies of Psalms 15 and 24 that emphasize moral requirements?",
+      "The verbs in v. 11's imprecation (ha'ashimem, yippelu, hadikhem)—what are their precise meanings and grammatical forms? Are these imperative requests, jussive wishes, or prophetic predictions? How does this affect the ethics of imprecatory prayer?",
+      "How does the 'tzinnah' (shield) imagery in v. 13 compare with other protective metaphors in Psalms? What specific type of shield is this, and how does 'ratzon' (favor) function as shielding substance?",
+      "What is the relationship between 'chosim' (those who take refuge, v. 12), 'ohavei shemekha' (those who love Your name, v. 12), and 'tzaddiq' (righteous, v. 13)? Are these synonymous designations or distinct groups, and how does 'refuge' language define righteousness?",
+      "How do the morning/dawn references (boqer, v. 4) connect to other dawn prayers in Psalms and to ancient Near Eastern prayer practices? Is there theological significance to morning prayer beyond liturgical convention?"
+    ],
+    "micro_questions": [
+      "What is the meaning of 'נְחִילוֹת' in the superscription, and why does the LXX interpret it as 'inheritance' rather than a musical term?",
+      "Does 'הֲגִיגִי' (my utterance/meditation) in v.2 specifically denote interior reflection as distinct from exterior speech, and how does this relate to wisdom meditation vocabulary?",
+      "What are the cultic/sacrificial connotations of 'אֶעֱרׇךְ־לְךָ' (I arrange before You) in v.4 - does this explicitly compare prayer to sacrifice?",
+      "Why does v.5 use 'יְגֻרְךָ' (sojourn) for evil's inability to abide with God - is this technical entrance liturgy language parallel to Psalm 15:1?",
+      "Is the progression in v.10's body imagery (mouth→inward parts→throat→tongue) intentional, moving from exterior to interior and back, or simply accumulated metaphor?",
+      "How does the 'open grave' metaphor for throat in v.10 function in Ancient Near Eastern death/speech associations, and why did Paul choose this verse for Romans 3:13?",
+      "What is the theological relationship between 'בְּרֹב חַסְדְּךָ' (v.8) and 'בְּרֹב פִּשְׁעֵיהֶם' (v.11) - is the parallel intentional to contrast grace and sin?",
+      "Are the verbs in v.11's imprecation (הַאֲשִׁימֵם, יִפְּלוּ, הַדִּיחֵמוֹ) true imperatives commanding God, or jussives expressing wishes?",
+      "Does 'תַּעְטְרֶנּוּ' in v.13 mean 'crown' (suggesting honor) or 'encompass' (suggesting protection), and why does LXX choose 'crown'?",
+      "How do the three designations for the righteous in vv.12-13 relate: 'חוֹסֵי בָךְ' (refuge-takers), 'אֹהֲבֵי שְׁמֶֽךָ' (name-lovers), and 'צַדִּיק' (righteous) - are these synonymous or progressive?"
+    ],
+    "verse_count": 13
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5"
+  }
+}

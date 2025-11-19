@@ -169,9 +169,9 @@ class RelatedPsalmsLibrarian:
         md += "  - \"The humble/afflicted\" (עֲנָוִים - anavim) (Ps 25:9; Ps 34:3)\n"
         md += "  - \"Good\" (טוֹב - tov) (Ps 25:13; Ps 34:9, 11, 13)\n\n"
 
-        md += "As you review the data below, ask yourself if a similar structural, thematic, or \"call-and-response\" dynamic is at play here, where one psalm seems to complete or answer the other.\n\n"
+        md += "As you review the data below, ask yourself if a similar structural, thematic, or \"call-and-response\" dynamic is at play here, where one psalm seems to complete or answer the other. You have the entire text of the potentially related psalms, so ALSO please look beyond the word similarities to OTHER possible connections of ARCHITECTURE, THEME, LIFE EVENTS, LITURGICAL FUNCTION, etc, AND consider how these psalms DIFFER in interesting and informative ways.\n\n"
 
-        md += f"Below is the full text of the psalms potentially related to Psalm {psalm_number}, and for each psalm, a list of POSSIBLY related words and phrases that were algorithmically detected. These relationships might deepen your insights into the meaning, intent, posture, history, and poetics of the psalm you are analyzing. Feel free to REJECT these possible connections as spurious, but DO incorporate them into your work where relevant.\n\n"
+        md += f"Below is the full text of the psalms potentially related to Psalm {psalm_number}, and for each psalm, a list of POSSIBLY related words and phrases that were algorithmically detected. These relationships might deepen your insights into the meaning, intent, posture, history, and poetics of the psalm you are analyzing. Feel free to REJECT these possible connections as spurious, but DO incorporate them into your work where relevant an insight-driving.\n\n"
 
         md += "---\n\n"
 

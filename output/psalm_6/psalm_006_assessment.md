@@ -1,19 +1,25 @@
 # Editorial Assessment - Psalm 6
 
-What works: The draft rightly locates Psalm 6 at the intersection of illness, sin, and social hostility, and it hears the psalm’s audacious claim that “weeping” has a “voice.” It tracks the pivot from lament to confidence, notes the personified “bones,” and attends to lexical nuances (e.g., af vs. chemah; tokhiach vs. yasser). Several traditional commentators are woven in with sensitivity.
+What works: The draft rightly resists the old “penitential” label by noting that Psalm 6 contains no confession and instead foregrounds illness, fragility, and the plea for healing. It also recognizes the psalm’s structural turn—vv. 9–11—where lament flips into confidence, and it insightfully traces the “terror-transfer” through the root בהל. The attention to body imagery (bones, soul, eyes) is sharp, and the discussion of Sheol theology is clear and useful. Liturgical placement is noted.
 
-Main weaknesses: The essay too often asserts rather than demonstrates. Some claims drift toward the abstract (“sophisticated theology”) without enough anchoring in the Hebrew line or the poem’s sound. The verse-by-verse notes omit a few easy wins: the concordance pattern of למען חסדך (only Ps 6:6; 44:27), the tight network of “bones” imagery across the Psalter (Ps 22:18; 35:10; 38:4), and the usage of רֶגַע (“in a moment”) elsewhere (Ps 30:6; Isa 54:7–8). The dramatic reversal (vv. 9–10) is described but not fully interpreted: is this a cultic oracle, a liturgical cue, or an inner assurance? The figurative language database is only lightly used; readers would benefit from specific, cited parallels (e.g., dissolving/melting: Ps 58:8–9; 46:7; praise-in-Sheol polemic: Isa 38:18; Ps 30:10; 88:11–12; 115:17).
-
-Missed opportunities: 
-- Superscription: the midrashic “eighth” (circumcision) reading should be noted alongside instrument/mode options.
-- Verse 7’s sibilant music (אַשְׂחֶה… מִטָּתִי… בְּדִמְעָתִי… עַרְשִׂי אַמְסֶה) invites a brief, precise sound observation.
-- LXX differences could be used modestly to illuminate ancient reception (e.g., “on the eighth” as “ὑπὲρ ὁ ὄγδοος”).
-- Liturgical use is present but needs structuring and Hebrew quotations from the prayers, showing how the tradition “reads” the psalm.
+What needs work: 
+- The style veers toward breathless; it sometimes tells readers that a move is “audacious” instead of showing why, with Hebrew evidence. 
+- Too few parallel texts are quoted in Hebrew; readers need to see the intertexts (e.g., Isaiah 38:18; Psalms 30:10; 31:10; 88:11–12) to feel the pattern. 
+- Key terms (“chiasm,” “colon,” “Niphal”) are used without definition. 
+- Some claims are overstated (e.g., “identical verbal form” for בהל; the forms are clearly cognate but not identical). 
+- The LXX is cited without drawing out what its choices suggest. 
+- The liturgical section is promising but thin on direct quotations from the prayers. 
+- The Talmudic use recorded by the Torah Temimah (Sanhedrin 107a on v. 7) is not integrated.
 
 Actionable revisions:
-- Define terms (colon, parallelism, chiasm, LXX, Qere/Kethib).
-- Answer the macro-questions the draft raises: (1) “Sheminith,” (2) Sheol and praise, (3) what triggers the reversal, (4) why “bones,” (5) the force of רֶגַע.
-- Integrate specific biblical parallels from the figurative database with citations.
-- Strengthen the liturgical section with clear subsections, Hebrew prayer excerpts, and reflection on how liturgy reframes the psalm.
+- Quote the most relevant parallels in Hebrew and English (e.g., Isa 38:18; Ps 30:10; 31:10; 88:11–12; 115:17), and explain the pattern.
+- Define technical terms briefly in-line.
+- Ground the “assurance-oracle” turn with examples from lament psalms and quote Exodus 2:24 to illuminate “hearing.”
+- Show the sound of v. 7’s sibilants with a brief, targeted transliteration (as provided).
+- Expand liturgical usage with precise prayer citations and Hebrew lines (Tachanun, Kerovah for Shabbat Zachor, Seliḥot, Birkat Kohanim responses, Simanim of Rosh Hashanah).
+- Integrate the Torah Temimah’s note on v. 7 as an instance of rabbinic reception.
+- Incorporate a few LXX observations where it clarifies meaning (e.g., v. 10 “receives”).
 
-Overall, the draft is strong in conception; it needs crisper demonstrations, fuller use of the research bundle, and a more carefully built liturgical appendix.
+Figurative language: The draft notes patterns but seldom quotes exemplars. Revisions will cite and quote Hebrew + English from Ps 31:10 (eye “wasted”), Ps 102:10 (tears as drink), and Isa 38:18 (Sheol cannot praise). Comparisons will be used to illuminate Psalm 6’s distinctive integration of medical, social, and cultic frames.
+
+---
