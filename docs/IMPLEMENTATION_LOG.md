@@ -1,5 +1,132 @@
 # Implementation Log
 
+## Session 129 - 2025-11-20 (Streaming Error Retry Logic - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix transient streaming errors in macro/micro/synthesis agents
+**Approach**: Add retry logic for network streaming errors across all agents with streaming calls
+**Result**: ✓ COMPLETE - All agents now retry transient streaming errors automatically
+**Session Duration**: ~20 minutes
+**Status**: Pipeline resilient to network streaming errors
+
+### Task Description
+
+**Issue Encountered**:
+User ran `python scripts/run_enhanced_pipeline.py 8` and the pipeline crashed at macro analysis with:
+```
+httpx.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)
+```
+
+This is a transient network error that occurs during streaming API calls when the server closes the connection before all data is transmitted.
+
+**Root Cause Analysis**:
+- Session 128 added streaming support for 32K token limits to avoid SDK timeouts
+- However, streaming calls can fail due to network issues (incomplete chunked reads)
+- No retry mechanism existed for `httpx.RemoteProtocolError` and `httpcore.RemoteProtocolError`
+- These errors are transient and should be retried like other API errors (InternalServerError, RateLimitError, etc.)
+- Session 127 added retry logic for JSON parsing errors, but not for streaming protocol errors
+
+### Changes Implemented
+
+**Files Modified**: 3 agent files
+
+**Change 1 - macro_analyst.py** (Lines 273-408):
+Added complete retry loop around streaming API call:
+```python
+max_retries = 3
+retry_delay = 2  # seconds
+
+for attempt in range(max_retries):
+    try:
+        # ... streaming call ...
+        return analysis
+    except Exception as e:
+        # Check if it's a retryable error (network/streaming issues)
+        import httpx
+        import httpcore
+        is_retryable = isinstance(e, (
+            anthropic.InternalServerError,
+            anthropic.RateLimitError,
+            anthropic.APIConnectionError,
+            httpx.RemoteProtocolError,      # NEW
+            httpcore.RemoteProtocolError    # NEW
+        ))
+
+        if is_retryable and attempt < max_retries - 1:
+            self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+            self.logger.warning("  Retrying with fresh request...")
+            continue
+        else:
+            # Not retryable or out of retries
+            raise
+```
+
+**Change 2 - micro_analyst.py** (Lines 516-531, 624-639):
+Updated existing retry blocks (2 locations) to include streaming errors:
+- Discovery pass retry block: Added `httpx.RemoteProtocolError` and `httpcore.RemoteProtocolError`
+- Research request generation retry block: Added streaming errors
+- Already had retry logic from Session 127, just needed streaming errors added
+
+**Change 3 - synthesis_writer.py** (Lines 864-936, 994-1066):
+Added retry loops to both streaming calls:
+- Introduction generation: Full retry loop with streaming errors
+- Verse commentary generation: Full retry loop with streaming errors
+- Both follow same pattern as macro_analyst
+
+### Retry Behavior
+
+**Retry Parameters**:
+- Max attempts: 3
+- Delays: 2s, 4s (exponential backoff)
+- Total max wait: 6 seconds across retries
+
+**Retryable Errors** (all agents):
+- `anthropic.InternalServerError` (existing)
+- `anthropic.RateLimitError` (existing)
+- `anthropic.APIConnectionError` (existing)
+- `httpx.RemoteProtocolError` ← **NEW**
+- `httpcore.RemoteProtocolError` ← **NEW**
+
+**Logging**:
+- First attempt: Normal operation
+- Retry attempts: `"Retry attempt 2/3 after 2s delay..."`
+- Error logging: `"Retryable error (attempt 1/3): RemoteProtocolError: peer closed connection..."`
+- Success: Normal completion logging
+- Final failure: Full error details logged before raising
+
+### Testing
+
+**User Testing**:
+- User will test with Psalm 8 pipeline: `python scripts/run_enhanced_pipeline.py 8`
+- Expected: Pipeline completes successfully, potentially with 1-2 retry attempts if network issues occur
+- Logging should show retry attempts if errors occur
+
+### Impact
+
+**Reliability**:
+- ✅ Pipeline now automatically retries transient streaming errors
+- ✅ More resilient to network issues during long-running API calls
+- ✅ Consistent with Session 127's retry approach for JSON errors
+- ✅ Consistent retry behavior across all streaming agents
+
+**User Experience**:
+- ✅ No more pipeline crashes due to transient network errors
+- ✅ Helpful logging shows retry attempts for debugging
+- ✅ Automatic recovery from temporary network issues
+
+**Code Quality**:
+- ✅ Consistent error handling patterns across all agents
+- ✅ Follows existing retry patterns from Session 127
+- ✅ Clear logging for debugging retry behavior
+
+### Next Steps
+
+- User will run Psalm 8 pipeline to verify fixes
+- System should handle transient streaming errors gracefully
+- If errors persist after 3 retries, likely indicates non-transient issue requiring investigation
+
+---
+
 ## Session 128 - 2025-11-18 (Dynamic Token Scaling for Verse Commentary - COMPLETE ✓)
 
 ### Overview

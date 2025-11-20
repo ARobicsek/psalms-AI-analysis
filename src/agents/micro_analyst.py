@@ -509,12 +509,21 @@ class MicroAnalystV2:
                     raise ValueError(f"Invalid JSON from discovery pass: {e}")
 
             except Exception as e:
-                # Check if it's a retryable error
+                # Check if it's a retryable error (API or network/streaming issues)
                 import anthropic
-                is_retryable = isinstance(e, (anthropic.InternalServerError, anthropic.RateLimitError, anthropic.APIConnectionError))
+                import httpx
+                import httpcore
+                is_retryable = isinstance(e, (
+                    anthropic.InternalServerError,
+                    anthropic.RateLimitError,
+                    anthropic.APIConnectionError,
+                    httpx.RemoteProtocolError,
+                    httpcore.RemoteProtocolError
+                ))
 
                 if is_retryable and attempt < max_retries - 1:
-                    self.logger.warning(f"API error (attempt {attempt + 1}/{max_retries}): {e}")
+                    self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.logger.warning("  Retrying with fresh request...")
                     continue  # Retry
                 else:
                     # Not retryable or out of retries
@@ -608,12 +617,21 @@ class MicroAnalystV2:
                 raise ValueError(f"Invalid JSON from research generation: {e}")
 
             except Exception as e:
-                # Check if it's a retryable error
+                # Check if it's a retryable error (API or network/streaming issues)
                 import anthropic
-                is_retryable = isinstance(e, (anthropic.InternalServerError, anthropic.RateLimitError, anthropic.APIConnectionError))
+                import httpx
+                import httpcore
+                is_retryable = isinstance(e, (
+                    anthropic.InternalServerError,
+                    anthropic.RateLimitError,
+                    anthropic.APIConnectionError,
+                    httpx.RemoteProtocolError,
+                    httpcore.RemoteProtocolError
+                ))
 
                 if is_retryable and attempt < max_retries - 1:
-                    self.logger.warning(f"API error (attempt {attempt + 1}/{max_retries}): {e}")
+                    self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.logger.warning("  Retrying with fresh request...")
                     continue  # Retry
                 else:
                     # Not retryable or out of retries

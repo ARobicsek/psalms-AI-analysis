@@ -269,119 +269,143 @@ class MacroAnalyst:
                         f"Ugaritic={len(rag_context.ugaritic_parallels)} parallels")
 
         # Step 5: Call Claude Sonnet 4.5 with extended thinking (using streaming for long requests)
-        try:
-            self.logger.info(f"Calling Claude API with model: {self.model} (streaming enabled)")
+        # Retry logic for transient network/API errors
+        max_retries = 3
+        retry_delay = 2  # seconds
 
-            # Use streaming to avoid 10-minute timeout for large token requests
-            stream = self.client.messages.stream(
-                model=self.model,
-                max_tokens=max_tokens,
-                thinking={
-                    "type": "enabled",
-                    "budget_tokens": 10000  # Allow extended thinking
-                },
-                messages=[{
-                    "role": "user",
-                    "content": prompt
-                }]
-            )
-
-            # Collect response chunks
-            thinking_text = ""
-            response_text = ""
-
-            with stream as response_stream:
-                for chunk in response_stream:
-                    if hasattr(chunk, 'type'):
-                        if chunk.type == 'content_block_start':
-                            if hasattr(chunk, 'content_block') and hasattr(chunk.content_block, 'type'):
-                                self.logger.debug(f"Starting {chunk.content_block.type} block")
-                        elif chunk.type == 'content_block_delta':
-                            if hasattr(chunk, 'delta'):
-                                if hasattr(chunk.delta, 'type'):
-                                    if chunk.delta.type == 'thinking_delta':
-                                        thinking_text += chunk.delta.thinking
-                                    elif chunk.delta.type == 'text_delta':
-                                        response_text += chunk.delta.text
-
-            self.logger.info("API streaming call successful")
-            self.logger.info(f"Thinking collected: {len(thinking_text)} chars")
-            self.logger.info(f"Response collected: {len(response_text)} chars")
-
-            self.logger.info(f"Response received. Thinking tokens: {len(thinking_text.split()) if thinking_text else 0}")
-
-            # Check if we got a text response
-            if not response_text or not response_text.strip():
-                self.logger.error("ERROR: Empty text block received from API!")
-                self.logger.error(f"Model: {self.model}")
-                self.logger.error(f"Response structure: {len(response.content)} blocks")
-                for i, block in enumerate(response.content):
-                    self.logger.error(f"  Block {i}: type={block.type}")
-                self.logger.error(f"Thinking text length: {len(thinking_text)} chars")
-                raise ValueError("MacroAnalyst returned empty text block. This may be due to extended thinking mode allocating all tokens to thinking.")
-
-            # Log API call
-            self.logger.log_api_call(
-                api_name="Anthropic Claude",
-                endpoint=self.model,
-                status_code=200,
-                response_time_ms=0
-            )
-
-            # Step 6: Parse JSON response
-            response_text = response_text.strip()
-
-            # Strip markdown code fences if present
-            if response_text.startswith("```json"):
-                self.logger.info("Removing markdown json code fence from response")
-                response_text = response_text[7:]  # Remove ```json
-            elif response_text.startswith("```"):
-                self.logger.info("Removing markdown code fence from response")
-                response_text = response_text[3:]  # Remove ```
-
-            if response_text.endswith("```"):
-                response_text = response_text[:-3]  # Remove trailing ```
-
-            response_text = response_text.strip()
-
+        for attempt in range(max_retries):
             try:
-                data = json.loads(response_text)
-            except json.JSONDecodeError as e:
-                self.logger.error(f"Failed to parse JSON response: {e}")
-                self.logger.error(f"Response text (first 1000 chars): {response_text[:1000]}...")
-                raise ValueError(f"Invalid JSON from MacroAnalyst: {e}")
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))  # Exponential backoff
+                    self.logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
 
-            # Step 7: Create MacroAnalysis object
-            analysis = MacroAnalysis.from_dict(data)
+                self.logger.info(f"Calling Claude API with model: {self.model} (streaming enabled)")
 
-            # Add thinking to working notes if available
-            if thinking_text:
-                analysis.working_notes = (
-                    "=== EXTENDED THINKING ===\n\n" +
-                    thinking_text +
-                    "\n\n=== END THINKING ===\n\n" +
-                    analysis.working_notes
+                # Use streaming to avoid 10-minute timeout for large token requests
+                stream = self.client.messages.stream(
+                    model=self.model,
+                    max_tokens=max_tokens,
+                    thinking={
+                        "type": "enabled",
+                        "budget_tokens": 10000  # Allow extended thinking
+                    },
+                    messages=[{
+                        "role": "user",
+                        "content": prompt
+                    }]
                 )
 
-            # Log results
-            self.logger.info(f"Macro analysis complete for Psalm {psalm_number}")
-            self.logger.info(f"  Thesis length: {len(analysis.thesis_statement)} chars")
-            self.logger.info(f"  Structural divisions: {len(analysis.structural_outline)}")
-            self.logger.info(f"  Poetic devices: {len(analysis.poetic_devices)}")
-            self.logger.info(f"  Research questions: {len(analysis.research_questions)}")
+                # Collect response chunks
+                thinking_text = ""
+                response_text = ""
 
-            return analysis
+                with stream as response_stream:
+                    for chunk in response_stream:
+                        if hasattr(chunk, 'type'):
+                            if chunk.type == 'content_block_start':
+                                if hasattr(chunk, 'content_block') and hasattr(chunk.content_block, 'type'):
+                                    self.logger.debug(f"Starting {chunk.content_block.type} block")
+                            elif chunk.type == 'content_block_delta':
+                                if hasattr(chunk, 'delta'):
+                                    if hasattr(chunk.delta, 'type'):
+                                        if chunk.delta.type == 'thinking_delta':
+                                            thinking_text += chunk.delta.thinking
+                                        elif chunk.delta.type == 'text_delta':
+                                            response_text += chunk.delta.text
 
-        except Exception as e:
-            self.logger.error(f"Error calling Claude API: {e}")
-            self.logger.error(f"Exception type: {type(e).__name__}")
-            self.logger.error(f"Model used: {self.model}")
-            # If it's an API error, log more details
-            if hasattr(e, 'response'):
-                self.logger.error(f"API Response: {e.response}")
-            if hasattr(e, 'status_code'):
-                self.logger.error(f"Status code: {e.status_code}")
-            raise
+                self.logger.info("API streaming call successful")
+                self.logger.info(f"Thinking collected: {len(thinking_text)} chars")
+                self.logger.info(f"Response collected: {len(response_text)} chars")
+
+                self.logger.info(f"Response received. Thinking tokens: {len(thinking_text.split()) if thinking_text else 0}")
+
+                # Check if we got a text response
+                if not response_text or not response_text.strip():
+                    self.logger.error("ERROR: Empty text block received from API!")
+                    self.logger.error(f"Model: {self.model}")
+                    raise ValueError("MacroAnalyst returned empty text block. This may be due to extended thinking mode allocating all tokens to thinking.")
+
+                # Log API call
+                self.logger.log_api_call(
+                    api_name="Anthropic Claude",
+                    endpoint=self.model,
+                    status_code=200,
+                    response_time_ms=0
+                )
+
+                # Step 6: Parse JSON response
+                response_text = response_text.strip()
+
+                # Strip markdown code fences if present
+                if response_text.startswith("```json"):
+                    self.logger.info("Removing markdown json code fence from response")
+                    response_text = response_text[7:]  # Remove ```json
+                elif response_text.startswith("```"):
+                    self.logger.info("Removing markdown code fence from response")
+                    response_text = response_text[3:]  # Remove ```
+
+                if response_text.endswith("```"):
+                    response_text = response_text[:-3]  # Remove trailing ```
+
+                response_text = response_text.strip()
+
+                try:
+                    data = json.loads(response_text)
+                except json.JSONDecodeError as e:
+                    self.logger.error(f"Failed to parse JSON response: {e}")
+                    self.logger.error(f"Response text (first 1000 chars): {response_text[:1000]}...")
+                    raise ValueError(f"Invalid JSON from MacroAnalyst: {e}")
+
+                # Step 7: Create MacroAnalysis object
+                analysis = MacroAnalysis.from_dict(data)
+
+                # Add thinking to working notes if available
+                if thinking_text:
+                    analysis.working_notes = (
+                        "=== EXTENDED THINKING ===\n\n" +
+                        thinking_text +
+                        "\n\n=== END THINKING ===\n\n" +
+                        analysis.working_notes
+                    )
+
+                # Log results
+                self.logger.info(f"Macro analysis complete for Psalm {psalm_number}")
+                self.logger.info(f"  Thesis length: {len(analysis.thesis_statement)} chars")
+                self.logger.info(f"  Structural divisions: {len(analysis.structural_outline)}")
+                self.logger.info(f"  Poetic devices: {len(analysis.poetic_devices)}")
+                self.logger.info(f"  Research questions: {len(analysis.research_questions)}")
+
+                return analysis
+
+            except Exception as e:
+                # Check if it's a retryable error (network/streaming issues)
+                import httpx
+                import httpcore
+                is_retryable = isinstance(e, (
+                    anthropic.InternalServerError,
+                    anthropic.RateLimitError,
+                    anthropic.APIConnectionError,
+                    httpx.RemoteProtocolError,
+                    httpcore.RemoteProtocolError
+                ))
+
+                if is_retryable and attempt < max_retries - 1:
+                    self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.logger.warning("  Retrying with fresh request...")
+                    continue  # Retry
+                else:
+                    # Not retryable or out of retries
+                    self.logger.error(f"Error calling Claude API: {e}")
+                    self.logger.error(f"Exception type: {type(e).__name__}")
+                    self.logger.error(f"Model used: {self.model}")
+                    # If it's an API error, log more details
+                    if hasattr(e, 'response'):
+                        self.logger.error(f"API Response: {e.response}")
+                    if hasattr(e, 'status_code'):
+                        self.logger.error(f"Status code: {e.status_code}")
+                    raise
 
     def _format_psalm_text(self, psalm_text) -> str:
         """
