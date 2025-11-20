@@ -1,8 +1,50 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-18 (Session 128 - COMPLETE ✓)
+**Last Updated**: 2025-11-20 (Session 129 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Dynamic Token Scaling Implemented
+**Status**: ✓ V6 System Ready - Streaming Error Retry Logic Added
+
+## Session 129 Summary (COMPLETE ✓)
+
+### Streaming Error Retry Logic
+
+**Objective**: Fix transient streaming errors in macro/micro/synthesis agents
+**Result**: ✓ COMPLETE - Added retry logic for network streaming errors across all agents
+
+**Issue Encountered**:
+- Psalm 8 pipeline crashed with `httpx.RemoteProtocolError: peer closed connection without sending complete message body`
+- Transient network error during streaming API calls
+- Session 128 added streaming but didn't add retry logic for streaming-specific errors
+
+**Root Cause**:
+- Streaming calls can fail due to network issues (incomplete chunked reads)
+- No retry mechanism for `httpx.RemoteProtocolError` and `httpcore.RemoteProtocolError`
+- These errors are transient and should be retried
+
+**Solution Implemented**:
+- Added retry logic (3 attempts, exponential backoff) to all streaming API calls
+- Added streaming errors to retryable exception list
+- Consistent with Session 127's retry approach
+
+**Files Modified**:
+- `src/agents/macro_analyst.py` - Full retry loop for streaming call
+- `src/agents/micro_analyst.py` - Added streaming errors to 2 existing retry blocks
+- `src/agents/synthesis_writer.py` - Added retry loops to intro + verse commentary
+
+**Retryable Errors** (all agents):
+- `anthropic.InternalServerError`
+- `anthropic.RateLimitError`
+- `anthropic.APIConnectionError`
+- `httpx.RemoteProtocolError` ← NEW
+- `httpcore.RemoteProtocolError` ← NEW
+
+**Impact**:
+- ✅ Pipeline automatically retries transient streaming errors
+- ✅ More resilient to network issues during long API calls
+- ✅ Consistent retry behavior across all streaming agents
+- ✅ Helpful logging for debugging retry attempts
+
+---
 
 ## Session 128 Summary (COMPLETE ✓ VERIFIED)
 

@@ -8,7 +8,64 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 128 - Dynamic Token Scaling for Verse Commentary (2025-11-18)
+**Last Session**: Session 129 - Streaming Error Retry Logic (2025-11-20)
+
+## Session 129 Summary (COMPLETE ✓)
+
+**Objective**: Fix transient streaming errors in macro/micro/synthesis agents
+**Result**: ✓ COMPLETE - Added retry logic for network streaming errors across all agents
+
+**Issue Encountered**:
+- User ran Psalm 8 pipeline and encountered: `httpx.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)`
+- This is a transient network error during streaming API calls
+- Session 128 added streaming support for 32K token limits but didn't add retry logic for streaming errors
+
+**Root Cause**:
+- Streaming calls can fail due to network issues (incomplete chunked reads)
+- No retry mechanism existed for `httpx.RemoteProtocolError` and `httpcore.RemoteProtocolError`
+- These errors are transient and should be retried like other API errors
+
+**Solution Implemented**:
+- Added retry logic (3 attempts with exponential backoff) to all streaming API calls
+- Added `httpx.RemoteProtocolError` and `httpcore.RemoteProtocolError` to list of retryable errors
+- Consistent with Session 127's retry approach for JSON errors
+
+**Files Modified** (3 agents):
+1. **`src/agents/macro_analyst.py`**:
+   - Wrapped streaming call in retry loop (lines 273-408)
+   - Retries up to 3 times with exponential backoff (2s, 4s delays)
+   - Added streaming errors to retryable exception list
+
+2. **`src/agents/micro_analyst.py`**:
+   - Updated both retry blocks (discovery + research request generation)
+   - Added streaming errors to existing retry logic (lines 516-531, 624-639)
+   - Already had retry logic from Session 127, just needed streaming errors added
+
+3. **`src/agents/synthesis_writer.py`**:
+   - Added retry loops to both streaming calls (intro + verse commentary)
+   - Introduction generation: lines 864-936
+   - Verse commentary generation: lines 994-1066
+   - Added streaming errors to retryable exception list
+
+**Retryable Errors** (all agents):
+- `anthropic.InternalServerError`
+- `anthropic.RateLimitError`
+- `anthropic.APIConnectionError`
+- `httpx.RemoteProtocolError` ← NEW
+- `httpcore.RemoteProtocolError` ← NEW
+
+**Impact**:
+- Pipeline now automatically retries transient streaming errors
+- More resilient to network issues during long-running API calls
+- Consistent retry behavior across all streaming agents
+- Helpful logging: "Retryable error (attempt X/3): RemoteProtocolError: ..."
+
+**Next Steps**:
+- User will test with Psalm 8 pipeline
+- System should now handle transient streaming errors gracefully
+- Ready for production use
+
+---
 
 ## Session 128 Summary (COMPLETE ✓)
 

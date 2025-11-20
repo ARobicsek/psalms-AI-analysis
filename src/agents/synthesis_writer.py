@@ -860,51 +860,80 @@ class SynthesisWriter:
             self.logger.info(f"Saved introduction prompt to {prompt_file}")
 
         # Call Claude with streaming (consistent with verse commentary)
-        try:
-            stream = self.client.messages.stream(
-                model=self.model,
-                max_tokens=max_tokens,
-                messages=[{
-                    "role": "user",
-                    "content": prompt
-                }]
-            )
+        # Retry logic for transient network/API errors
+        max_retries = 3
+        retry_delay = 2  # seconds
 
-            # Collect response chunks
-            introduction = ""
-            with stream as response_stream:
-                for chunk in response_stream:
-                    if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
-                        if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
-                            if chunk.delta.type == 'text_delta':
-                                introduction += chunk.delta.text
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))  # Exponential backoff
+                    self.logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
 
-                # Get final message for usage tracking
-                final_message = response_stream.get_final_message()
-
-            self.logger.info(f"Introduction generated: {len(introduction)} chars")
-
-            # Track model usage
-            if hasattr(self, 'tracker') and self.tracker:
-                self.tracker.track_model_usage(
-                    agent_name='synthesis_writer',
+                stream = self.client.messages.stream(
                     model=self.model,
-                    input_tokens=final_message.usage.input_tokens,
-                    output_tokens=final_message.usage.output_tokens)
+                    max_tokens=max_tokens,
+                    messages=[{
+                        "role": "user",
+                        "content": prompt
+                    }]
+                )
 
-            # Log API call
-            self.logger.log_api_call(
-                api_name="Anthropic Claude",
-                endpoint=self.model,
-                status_code=200,
-                response_time_ms=0
-            )
+                # Collect response chunks
+                introduction = ""
+                with stream as response_stream:
+                    for chunk in response_stream:
+                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                if chunk.delta.type == 'text_delta':
+                                    introduction += chunk.delta.text
 
-            return introduction.strip()
+                    # Get final message for usage tracking
+                    final_message = response_stream.get_final_message()
 
-        except Exception as e:
-            self.logger.error(f"Error generating introduction: {e}")
-            raise
+                self.logger.info(f"Introduction generated: {len(introduction)} chars")
+
+                # Track model usage
+                if hasattr(self, 'tracker') and self.tracker:
+                    self.tracker.track_model_usage(
+                        agent_name='synthesis_writer',
+                        model=self.model,
+                        input_tokens=final_message.usage.input_tokens,
+                        output_tokens=final_message.usage.output_tokens)
+
+                # Log API call
+                self.logger.log_api_call(
+                    api_name="Anthropic Claude",
+                    endpoint=self.model,
+                    status_code=200,
+                    response_time_ms=0
+                )
+
+                return introduction.strip()
+
+            except Exception as e:
+                # Check if it's a retryable error (network/streaming issues)
+                import anthropic
+                import httpx
+                import httpcore
+                is_retryable = isinstance(e, (
+                    anthropic.InternalServerError,
+                    anthropic.RateLimitError,
+                    anthropic.APIConnectionError,
+                    httpx.RemoteProtocolError,
+                    httpcore.RemoteProtocolError
+                ))
+
+                if is_retryable and attempt < max_retries - 1:
+                    self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.logger.warning("  Retrying with fresh request...")
+                    continue  # Retry
+                else:
+                    # Not retryable or out of retries
+                    self.logger.error(f"Error generating introduction: {e}")
+                    raise
 
     def _generate_verse_commentary(
         self,
@@ -961,51 +990,80 @@ class SynthesisWriter:
             self.logger.info(f"Saved verse commentary prompt to {prompt_file}")
 
         # Call Claude with streaming (required for large token limits)
-        try:
-            stream = self.client.messages.stream(
-                model=self.model,
-                max_tokens=max_tokens,
-                messages=[{
-                    "role": "user",
-                    "content": prompt
-                }]
-            )
+        # Retry logic for transient network/API errors
+        max_retries = 3
+        retry_delay = 2  # seconds
 
-            # Collect response chunks
-            commentary = ""
-            with stream as response_stream:
-                for chunk in response_stream:
-                    if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
-                        if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
-                            if chunk.delta.type == 'text_delta':
-                                commentary += chunk.delta.text
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))  # Exponential backoff
+                    self.logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
 
-                # Get final message for usage tracking
-                final_message = response_stream.get_final_message()
-
-            self.logger.info(f"Verse commentary generated: {len(commentary)} chars")
-
-            # Track model usage
-            if hasattr(self, 'tracker') and self.tracker:
-                self.tracker.track_model_usage(
-                    agent_name='synthesis_writer',
+                stream = self.client.messages.stream(
                     model=self.model,
-                    input_tokens=final_message.usage.input_tokens,
-                    output_tokens=final_message.usage.output_tokens)
+                    max_tokens=max_tokens,
+                    messages=[{
+                        "role": "user",
+                        "content": prompt
+                    }]
+                )
 
-            # Log API call
-            self.logger.log_api_call(
-                api_name="Anthropic Claude",
-                endpoint=self.model,
-                status_code=200,
-                response_time_ms=0
-            )
+                # Collect response chunks
+                commentary = ""
+                with stream as response_stream:
+                    for chunk in response_stream:
+                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                if chunk.delta.type == 'text_delta':
+                                    commentary += chunk.delta.text
 
-            return commentary.strip()
+                    # Get final message for usage tracking
+                    final_message = response_stream.get_final_message()
 
-        except Exception as e:
-            self.logger.error(f"Error generating verse commentary: {e}")
-            raise
+                self.logger.info(f"Verse commentary generated: {len(commentary)} chars")
+
+                # Track model usage
+                if hasattr(self, 'tracker') and self.tracker:
+                    self.tracker.track_model_usage(
+                        agent_name='synthesis_writer',
+                        model=self.model,
+                        input_tokens=final_message.usage.input_tokens,
+                        output_tokens=final_message.usage.output_tokens)
+
+                # Log API call
+                self.logger.log_api_call(
+                    api_name="Anthropic Claude",
+                    endpoint=self.model,
+                    status_code=200,
+                    response_time_ms=0
+                )
+
+                return commentary.strip()
+
+            except Exception as e:
+                # Check if it's a retryable error (network/streaming issues)
+                import anthropic
+                import httpx
+                import httpcore
+                is_retryable = isinstance(e, (
+                    anthropic.InternalServerError,
+                    anthropic.RateLimitError,
+                    anthropic.APIConnectionError,
+                    httpx.RemoteProtocolError,
+                    httpcore.RemoteProtocolError
+                ))
+
+                if is_retryable and attempt < max_retries - 1:
+                    self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.logger.warning("  Retrying with fresh request...")
+                    continue  # Retry
+                else:
+                    # Not retryable or out of retries
+                    self.logger.error(f"Error generating verse commentary: {e}")
+                    raise
 
     def _format_macro_for_prompt(self, macro) -> str:
         """
