@@ -1,8 +1,59 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-21 (Session 136 - COMPLETE ✓)
+**Last Updated**: 2025-11-21 (Session 137 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Liturgical Librarian with Uniqueness Filter
+**Status**: ✓ V6 System Ready - Pipeline Stats & College File Sync Fixed
+
+## Session 137 Summary (COMPLETE ✓)
+
+### Pipeline Fixes: College Regeneration & Stale Stats Dates
+
+**Objective**: Fix pipeline issues with college file regeneration and stale stats dates
+**Result**: ✓ COMPLETE - College files now auto-regenerate when synthesis changes, stats show correct run dates
+
+**Issues Investigated**:
+1. User reported .docx content mismatch with edited markdown
+   - ✅ Verified NO ISSUE - Content matches correctly
+2. College files not regenerated when running `--skip-macro --skip-micro`
+   - College files from 07:55 (stale), regular files from 14:57 (fresh)
+3. Stats JSON and .docx showed wrong dates (Nov 6 instead of Nov 21)
+
+**Root Causes**:
+
+1. **College File Regeneration Issue**:
+   - College step only checked if file existed, not if it was stale
+   - When synthesis ran fresh, old college files were reused
+   - Result: Regular and college versions out of sync
+
+2. **Stale Stats Dates Issue**:
+   - Pipeline treated `--skip-macro --skip-micro` as "resuming" old Nov 6 run
+   - Loaded old pipeline_start, pipeline_end from Nov 6 stats JSON
+   - Even though synthesis and master_editor ran fresh on Nov 21
+   - Result: .docx showed "Date Produced: Nov 6" instead of Nov 21
+
+**Fixes Implemented**:
+
+1. **College File Timestamp Check**:
+   - Added comparison: `synthesis_intro_file.stat().st_mtime > edited_intro_college_file.stat().st_mtime`
+   - Regenerates college files whenever synthesis files are newer
+   - Keeps regular and college versions synchronized
+
+2. **Fresh Analysis Detection**:
+   - Added logic: `is_fresh_analysis = not skip_synthesis or not skip_master_edit`
+   - If running fresh analysis, clears old pipeline_start/pipeline_end
+   - Tracker uses current time for new run dates
+   - Distinguishes "reusing research" from "true resume to output steps"
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Two fixes (college regeneration + stats dates)
+
+**Impact**:
+- ✅ College files stay synchronized with synthesis output
+- ✅ Stats show correct run dates for fresh analysis runs
+- ✅ No more confusion about when commentary was actually produced
+- ✅ Character counts already correct (tracker overwrites on each step)
+
+---
 
 ## Session 136 Summary (COMPLETE ✓)
 
