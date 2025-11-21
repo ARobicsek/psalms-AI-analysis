@@ -33,6 +33,7 @@ class StepStats:
     output_token_estimate: int = 0
     duration_seconds: Optional[float] = None
     timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+    completion_date: Optional[str] = None  # Date when pipeline completed (ISO format)
 
     def estimate_tokens(self, text: str) -> int:
         """Rough token estimation (4 chars per token for English, 2-3 for Hebrew)."""
@@ -120,7 +121,8 @@ class PipelineSummaryTracker:
                     output_char_count=step_data.get('output_char_count', 0),
                     output_token_estimate=step_data.get('output_token_estimate', 0),
                     duration_seconds=step_data.get('duration_seconds'),
-                    timestamp=step_data.get('timestamp')
+                    timestamp=step_data.get('timestamp'),
+                    completion_date=step_data.get('completion_date')
                 )
 
             # Reconstruct ResearchStats and AnalysisStats objects
@@ -311,8 +313,8 @@ class PipelineSummaryTracker:
         """
         if "master_editor" not in self.steps:
             self.steps["master_editor"] = StepStats(step_name="master_editor")
-        
-        # This is a bit of a hack, but it ensures the date is stored in the right place.
+
+        # Set the completion date field
         self.steps["master_editor"].completion_date = date_str
 
     def generate_markdown_report(self) -> str:
@@ -571,8 +573,8 @@ class PipelineSummaryTracker:
                     'input_token_estimate': step.input_token_estimate,
                     'output_char_count': step.output_char_count,
                     'output_token_estimate': step.output_token_estimate,
-                    'duration_seconds': step.duration_seconds, 
-                    'completion_date': getattr(step, 'completion_date', None),
+                    'duration_seconds': step.duration_seconds,
+                    'completion_date': step.completion_date,
                     'timestamp': step.timestamp
                 }
                 for name, step in self.steps.items()

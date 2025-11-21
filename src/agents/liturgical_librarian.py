@@ -6,7 +6,8 @@ with intelligent aggregation to prevent duplicate prayer contexts.
 
 Features:
 - Aggregates matches by prayer name (handles "Amidah" appearing 79x)
-- Uses Claude Haiku 4.5 for intelligent context summarization
+- Uses Google Gemini 2.5 Pro with extended thinking for intelligent context summarization
+- Automatic fallback to Claude Sonnet 4.5 with extended thinking if Gemini quota exhausted
 - Handles inconsistent metadata (e.g., "Avot" vs "Patriarchs")
 - Provides both aggregated and detailed views
 
@@ -25,10 +26,72 @@ Usage:
 import sqlite3
 import os
 import json
+import time
 from typing import List, Optional, Dict, Any
 from dataclasses import dataclass
 from collections import defaultdict
 from dotenv import load_dotenv
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+
+def _is_retryable_gemini_error(exception, verbose=False):
+    """
+    Determine if a Gemini API exception is retryable (temporary rate limit) vs permanent (quota exhausted).
+
+    Returns True for temporary errors that should be retried with backoff.
+    Returns False for quota exhaustion errors that should trigger Claude fallback.
+
+    Args:
+        exception: The exception to classify
+        verbose: Whether to print classification info
+
+    Returns:
+        bool: True if retryable, False otherwise
+    """
+    error_msg = str(exception).lower()
+
+    # Check for daily quota exhaustion indicators
+    # These should NOT be retried - switch to Claude immediately
+    quota_indicators = [
+        'quota exceeded',
+        'resource exhausted',
+        'daily limit',
+        '10,000 rpd',
+        'quota has been exceeded'
+    ]
+
+    if any(indicator in error_msg for indicator in quota_indicators):
+        if verbose:
+            print(f"[INFO] Detected quota exhaustion (not retrying, will switch to Claude)")
+        return False
+
+    # Temporary rate limit errors - safe to retry with backoff
+    rate_limit_indicators = [
+        '429',
+        'too many requests',
+        'rate limit',
+        'try again'
+    ]
+
+    if any(indicator in error_msg for indicator in rate_limit_indicators):
+        if verbose:
+            print(f"[INFO] Detected temporary rate limit (will retry with backoff)")
+        return True
+
+    # Network/transient errors - safe to retry
+    transient_indicators = [
+        'timeout',
+        'connection',
+        'network',
+        'unavailable',
+        'internal error'
+    ]
+
+    if any(indicator in error_msg for indicator in transient_indicators):
+        return True
+
+    # Default: don't retry unknown errors
+    return False
 
 
 @dataclass
@@ -136,7 +199,10 @@ class LiturgicalLibrarian:
         db_path: str = "data/liturgy.db",
         tanakh_db_path: str = "database/tanakh.db",
         use_llm_summaries: bool = True,
+        google_api_key: Optional[str] = None,
         anthropic_api_key: Optional[str] = None,
+        thinking_budget: int = 4096,
+        request_delay: float = 0.5,
         verbose: bool = False
     ):
         """
@@ -145,32 +211,145 @@ class LiturgicalLibrarian:
         Args:
             db_path: Path to liturgy database
             tanakh_db_path: Path to tanakh database (for psalm verse text)
-            use_llm_summaries: Whether to use Claude Haiku for intelligent summaries
+            use_llm_summaries: Whether to use LLM for intelligent summaries (Gemini 2.5 Pro primary, Claude Sonnet 4.5 fallback)
+            google_api_key: Google API key (defaults to GOOGLE_API_KEY env var)
+            anthropic_api_key: Anthropic API key for fallback (defaults to ANTHROPIC_API_KEY env var)
+            thinking_budget: Token budget for Gemini's reasoning phase (default 4096)
+                           - Higher values (up to 24576) for more complex reasoning
+                           - Set to -1 for dynamic thinking (model decides)
+                           - Set to 0 to disable thinking (not recommended)
+            request_delay: Delay in seconds between API calls to avoid rate limits (default 0.5)
+                         - Gemini Tier 1: 150 RPM = 2.5 req/sec max
+                         - 0.5s delay = 2 req/sec (safely under limit)
+                         - Set to 0 to disable (not recommended)
             verbose: Whether to print LLM prompts and responses
-            anthropic_api_key: API key (defaults to ANTHROPIC_API_KEY env var)
         """
         self.db_path = db_path
         self.tanakh_db_path = tanakh_db_path
         self.use_llm_summaries = use_llm_summaries
+        self.thinking_budget = thinking_budget
+        self.request_delay = request_delay
         self.verbose = verbose
+        self.gemini_client = None
         self.anthropic_client = None
+        self.llm_provider = None  # Track which provider is active: 'gemini', 'anthropic', or None
+        self._last_request_time = 0  # Track last API call time for rate limiting
 
         # Load environment variables from .env file
         load_dotenv()
 
-        # Initialize LLM client if needed
+        # Initialize LLM clients if needed
         if use_llm_summaries:
+            # Try Gemini 2.5 Pro first (primary)
             try:
-                from anthropic import Anthropic
-                api_key = anthropic_api_key or os.getenv('ANTHROPIC_API_KEY')
-                if not api_key:
-                    print("[WARNING] ANTHROPIC_API_KEY not found. Falling back to code-only summaries.")
-                    self.use_llm_summaries = False
-                else:
-                    self.anthropic_client = Anthropic(api_key=api_key)
+                from google import genai
+                api_key = google_api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
+                if api_key:
+                    # Initialize Gemini client
+                    # Note: SDK retry config (RetryConfig) not available in this SDK version
+                    # Using tenacity-based retry decorator instead (see _call_gemini_with_retry)
+                    self.gemini_client = genai.Client(api_key=api_key)
+                    self.llm_provider = 'gemini'
+                    print("[INFO] Liturgical Librarian: Using Gemini 2.5 Pro with tenacity-based retry logic")
             except ImportError:
-                print("[WARNING] anthropic package not installed. Falling back to code-only summaries.")
+                if self.verbose:
+                    print("[INFO] google-genai package not installed. Will try Claude Sonnet fallback.")
+
+            # ALWAYS try to initialize Claude Sonnet 4.5 as fallback (even if Gemini available)
+            # This ensures Claude is available if Gemini quota is exhausted at runtime
+            try:
+                import anthropic
+                api_key = anthropic_api_key or os.getenv('ANTHROPIC_API_KEY')
+                if api_key:
+                    self.anthropic_client = anthropic.Anthropic(api_key=api_key)
+                    # Only set as primary provider if Gemini not available
+                    if not self.llm_provider:
+                        self.llm_provider = 'anthropic'
+                        print("[INFO] Liturgical Librarian: Using Claude Sonnet 4.5 for summaries (Gemini unavailable)")
+                    else:
+                        print("[INFO] Liturgical Librarian: Claude Sonnet 4.5 initialized as fallback")
+            except ImportError:
+                if self.verbose:
+                    print("[INFO] anthropic package not installed.")
+
+            # If neither provider available, fall back to code-only
+            if not self.llm_provider:
+                print("[WARNING] No LLM provider available (tried Gemini and Claude). Using code-only summaries.")
                 self.use_llm_summaries = False
+
+    def _enforce_rate_limit(self):
+        """
+        Enforce rate limiting between API calls to avoid burst requests.
+
+        Gemini Tier 1 has 150 RPM limit = 2.5 req/sec burst rate.
+        This method ensures we don't exceed the configured request_delay.
+        """
+        if self.request_delay > 0:
+            elapsed = time.time() - self._last_request_time
+            if elapsed < self.request_delay:
+                sleep_time = self.request_delay - elapsed
+                if self.verbose:
+                    print(f"[RATE LIMIT] Sleeping {sleep_time:.2f}s to avoid burst requests...")
+                time.sleep(sleep_time)
+            self._last_request_time = time.time()
+
+    @retry(
+        retry=lambda retry_state: (
+            retry_state.outcome.failed and
+            retry_state.outcome.exception() is not None and
+            _is_retryable_gemini_error(retry_state.outcome.exception())
+        ),
+        stop=stop_after_attempt(5),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        reraise=True
+    )
+    def _call_gemini_with_retry(self, prompt: str, temperature: float, thinking_budget: int):
+        """
+        Call Gemini API with exponential backoff retry for transient errors only.
+
+        Retries up to 5 times with exponential backoff (2s, 4s, 8s, 10s, 10s) for:
+        - Temporary rate limit errors (429 burst limit)
+        - Network errors (timeouts, connection issues)
+
+        Does NOT retry for:
+        - Quota exhaustion (daily limit) - switches to Claude immediately
+        - Other permanent errors
+
+        Args:
+            prompt: The prompt to send to Gemini
+            temperature: Temperature setting for generation
+            thinking_budget: Token budget for thinking phase
+
+        Returns:
+            Response object from Gemini API
+
+        Raises:
+            Exception: Re-raises exception for non-retryable errors or after all retries exhausted
+        """
+        from google.genai import types
+
+        if self.verbose:
+            print(f"[API] Calling Gemini 2.5 Pro...")
+
+        response = self.gemini_client.models.generate_content(
+            model="gemini-2.5-pro",
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                # NOTE: max_output_tokens conflicts with thinking_config, causing response.text to be None
+                # Gemini will automatically allocate tokens between thinking and output
+                temperature=temperature,
+                thinking_config=types.ThinkingConfig(
+                    thinking_budget=thinking_budget
+                ),
+                # Explicitly disable Automatic Function Calling to prevent internal burst requests
+                # AFC can make up to 10 internal API calls which triggers 429 errors
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                    disable=True
+                )
+            )
+        )
+
+        return response
 
     def generate_research_bundle(self, psalm_chapter: int) -> Dict[str, Any]:
         """
@@ -224,7 +403,7 @@ class LiturgicalLibrarian:
         suitable for inclusion in the research bundle.
         """
         md = f"## Modern Jewish Liturgical Use (Psalm {psalm_chapter})\n\n"
-        md += "This section summarizes how Psalm {psalm_chapter} and its phrases are used in contemporary Jewish liturgy.\n\n"
+        md += f"This section summarizes how Psalm {psalm_chapter} and its phrases are used in contemporary Jewish liturgy.\n\n"
 
         full_psalm_summary_text = ""
         phrase_summaries = []
@@ -241,7 +420,7 @@ class LiturgicalLibrarian:
 
         if phrase_summaries:
             md += "### Phrase-Level Liturgical Usage\n\n"
-            md += "The following phrases from Psalm {psalm_chapter} appear in various liturgical contexts:\n\n"
+            md += f"The following phrases from Psalm {psalm_chapter} appear in various liturgical contexts:\n\n"
             for match in phrase_summaries:
                 md += f"#### Phrase: {match.psalm_phrase_hebrew} (from {match.psalm_verse_range})\n\n"
                 md += f"{match.liturgical_summary}\n\n"
@@ -355,6 +534,9 @@ class LiturgicalLibrarian:
 
             # Generate summary (LLM or code)
             if self.use_llm_summaries and len(matches) >= 1:
+                # Enforce rate limiting before API call
+                self._enforce_rate_limit()
+
                 summary = self._generate_phrase_llm_summary(
                     psalm_phrase=phrase_key,
                     psalm_verse_range=verse_range,
@@ -384,7 +566,8 @@ class LiturgicalLibrarian:
                 liturgical_summary=summary,
                 confidence_avg=sum(m.confidence for m in matches) / len(matches),
                 match_types=list(set(m.match_type for m in matches)),
-                representative_liturgy_context=matches[0].liturgy_context[:200] + "...",
+                # Increased from 200 to 400 chars for better context (Session 131)
+                representative_liturgy_context=matches[0].liturgy_context[:400] + "...",
                 validation_notes=validation_notes.get(phrase_key_tuple),
                 raw_matches=matches if include_raw_matches else None
             ))
@@ -502,6 +685,7 @@ class LiturgicalLibrarian:
                 JOIN prayers p ON i.prayer_id = p.prayer_id
                 WHERE i.psalm_chapter = ?
                   AND i.confidence >= ?
+                  AND (i.match_type != 'phrase_match' OR i.is_unique = 1)
                 ORDER BY i.confidence DESC, p.prayer_name
             """
             params = (psalm_chapter, min_confidence)
@@ -546,6 +730,7 @@ class LiturgicalLibrarian:
                 WHERE i.psalm_chapter = ?
                   AND ({verse_conditions})
                   AND i.confidence >= ?
+                  AND (i.match_type != 'phrase_match' OR i.is_unique = 1)
                 ORDER BY i.confidence DESC, p.prayer_name
             """
 
@@ -740,12 +925,12 @@ class LiturgicalLibrarian:
         matches: List[LiturgicalMatch]
     ) -> str:
         """
-        Use Claude Haiku to generate intelligent summary for a specific psalm phrase.
+        Use LLM (Gemini 2.5 Pro or Claude Sonnet 4.5) to generate intelligent summary for a specific psalm phrase.
 
         This prompt is designed for PHRASE-level descriptions, not prayer-level.
         Uses canonical classification fields and location_description to understand context.
         """
-        if not self.anthropic_client:
+        if not self.llm_provider:
             return self._generate_phrase_code_summary(psalm_phrase, prayer_contexts, contexts)
 
         # Build context description with match details
@@ -777,7 +962,8 @@ class LiturgicalLibrarian:
             elif match.match_type in ['entire_chapter', 'verse_range', 'verse_set']:
                 context_lines.append(f"  NOTE: This is a FULL/SUBSTANTIAL recitation")
 
-            context_lines.append(f"  Liturgy Context: {match.liturgy_context[:500]}..." if len(match.liturgy_context) > 500 else f"  Liturgy Context: {match.liturgy_context}")
+            # Increased from 500 to 1000 chars to provide more context for quotations (Session 131)
+            context_lines.append(f"  Liturgy Context: {match.liturgy_context[:1000]}..." if len(match.liturgy_context) > 1000 else f"  Liturgy Context: {match.liturgy_context}")
 
         if len(prioritized_matches) > 15:
             remaining = len(prioritized_matches) - 15
@@ -822,7 +1008,7 @@ CRITICAL REQUIREMENTS:
 4. **INCLUDE EXTENDED HEBREW QUOTATIONS (REQUIRED AND CRITICAL)**
    - **MANDATORY**: For phrase excerpts, you MUST include at least ONE extended Hebrew quotation
    - The quotation must show CONTEXT: include words BEFORE and AFTER the phrase itself
-   - **Minimum**: At least 7-12 Hebrew words (not just repeating the 2-3 word phrase)
+   - **Minimum**: At least 10-15 Hebrew words (not just repeating the 2-3 word phrase)
    - Extract from the "Liturgy Context" field provided for each match
    - **Example of GOOD quotation** (shows context around "הֲדַר כְּבוֹד הוֹדֶךָ"):
      "The liturgy states: 'בְּיַד נְבִיאֶיךָ בְּסוֹד עֲבָדֶיךָ. דִּמִּיתָ הֲדַר כְּבוֹד הוֹדֶךָ גְּדֻלָּתְךָ וּגְבוּרָתֶךָ'"
@@ -910,14 +1096,33 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
             while attempt < max_attempts:
                 attempt += 1
 
-                response = self.anthropic_client.messages.create(
-                    model="claude-haiku-4-5",
-                    max_tokens=1000,  # Increased from 400 to allow 4-6 sentences with Hebrew quotes
-                    temperature=0.6,   # Increased from 0.3 for more synthesis/narrative flow
-                    messages=[{"role": "user", "content": prompt}]
+                # Call Gemini API with automatic retry for transient errors (429, network issues, etc.)
+                response = self._call_gemini_with_retry(
+                    prompt=prompt,
+                    temperature=0.6,  # Increased from 0.3 for more synthesis/narrative flow
+                    thinking_budget=self.thinking_budget
                 )
 
-                summary = response.content[0].text.strip()
+                # Extract text from response - handle different response structures
+                summary = None
+
+                # Try method 1: response.text (simple access)
+                if hasattr(response, 'text') and response.text:
+                    summary = response.text.strip()
+
+                # Try method 2: candidates structure
+                if not summary and hasattr(response, 'candidates') and response.candidates:
+                    candidate = response.candidates[0]
+                    if hasattr(candidate, 'content') and candidate.content:
+                        if hasattr(candidate.content, 'parts') and candidate.content.parts:
+                            # Extract from parts list
+                            for part in candidate.content.parts:
+                                if hasattr(part, 'text') and part.text:
+                                    summary = part.text.strip()
+                                    break
+
+                if not summary:
+                    raise ValueError(f"Could not extract text from response. Response type: {type(response)}, has text: {hasattr(response, 'text')}, has candidates: {hasattr(response, 'candidates')}")
 
                 if self.verbose:
                     try:
@@ -925,12 +1130,21 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                         print(f"LLM RESPONSE FOR PHRASE (Attempt {attempt}/{max_attempts}): {psalm_phrase}")
                         print(f"{'='*70}")
                         print(summary)
-                        print(f"\nToken usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        # Gemini token usage
+                        if hasattr(response, 'usage_metadata'):
+                            input_tokens = response.usage_metadata.prompt_token_count
+                            output_tokens = response.usage_metadata.candidates_token_count
+                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
+                            print(f"\nToken usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
                         print(f"{'='*70}\n")
                     except UnicodeEncodeError:
                         print(f"\n{'='*70}")
                         print(f"LLM RESPONSE FOR PHRASE (Attempt {attempt}/{max_attempts}): [Hebrew text - encoding error]")
-                        print(f"Token usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        if hasattr(response, 'usage_metadata'):
+                            input_tokens = response.usage_metadata.prompt_token_count
+                            output_tokens = response.usage_metadata.candidates_token_count
+                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
+                            print(f"Token usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
                         print(f"{'='*70}\n")
 
                 # Validate summary quality
@@ -988,7 +1202,142 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
             return best_summary if best_summary else summary
 
         except Exception as e:
-            print(f"[WARNING] LLM summarization failed ({e}). Using code-only fallback.")
+            error_msg = str(e)
+            error_type = type(e).__name__
+
+            if self.verbose:
+                print(f"[DEBUG] Exception in phrase summary: {error_type}: {error_msg[:200]}")
+                print(f"[DEBUG] Provider: {self.llm_provider}, Has Claude: {self.anthropic_client is not None}")
+
+            # If Gemini failed and Claude available, switch to Claude
+            if self.llm_provider == 'gemini' and self.anthropic_client:
+                print(f"[WARNING] Gemini API error. Switching to Claude Sonnet 4.5 fallback.")
+                print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
+                self.llm_provider = 'anthropic'
+                # Retry with Claude
+                try:
+                    return self._generate_phrase_llm_summary_claude(psalm_phrase, psalm_verse_range, prayer_contexts, contexts, total_count, matches)
+                except Exception as claude_error:
+                    print(f"[WARNING] Claude also failed: {type(claude_error).__name__}: {str(claude_error)[:100]}")
+                    # Fall through to code-only summary
+            elif self.llm_provider == 'gemini':
+                print(f"[WARNING] Gemini API error and no Claude fallback available. Using code-only summaries.")
+                print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
+            else:
+                print(f"[WARNING] LLM summarization failed ({error_type}: {error_msg[:100]}). Using code-only fallback.")
+
+            # Fallback to code-only summary
+            return self._generate_phrase_code_summary(psalm_phrase, prayer_contexts, contexts)
+
+    def _generate_phrase_llm_summary_claude(
+        self,
+        psalm_phrase: str,
+        psalm_verse_range: str,
+        prayer_contexts: List[str],
+        contexts: Dict[str, Any],
+        total_count: int,
+        matches: List[LiturgicalMatch]
+    ) -> str:
+        """
+        Use Claude Sonnet 4.5 with extended thinking to generate intelligent summary (fallback when Gemini quota exhausted).
+        """
+        if not self.anthropic_client:
+            return self._generate_phrase_code_summary(psalm_phrase, prayer_contexts, contexts)
+
+        # Build same context as Gemini version
+        context_lines = []
+        context_lines.append(f"Psalm phrase: {psalm_phrase} (from verse {psalm_verse_range})")
+        context_lines.append(f"Total occurrences: {total_count}")
+        context_lines.append(f"Appears in {len(prayer_contexts)} distinct prayer contexts:")
+        context_lines.append("")
+
+        prioritized_matches = self._prioritize_matches_by_type(matches)
+
+        context_lines.append("Detailed matches (ordered by significance - full recitations first, phrases last):")
+        for i, match in enumerate(prioritized_matches[:15], 1):
+            context_lines.append(f"\nMatch {i}:")
+            context_lines.append(f"  Source Text: {match.source_text}")
+            context_lines.append(f"  Main prayer in this liturgical block: {match.canonical_prayer_name or 'N/A'}")
+            context_lines.append(f"  Location Description: {match.canonical_location_description or 'N/A'}")
+            context_lines.append(f"  L1 Occasion: {match.canonical_L1_Occasion or 'N/A'}")
+            context_lines.append(f"  L2 Service: {match.canonical_L2_Service or 'N/A'}")
+            context_lines.append(f"  L3 Signpost: {match.canonical_L3_Signpost or 'N/A'}")
+            context_lines.append(f"  L4 SubSection: {match.canonical_L4_SubSection or 'N/A'}")
+            context_lines.append(f"  Match Type: {match.match_type}")
+            if match.match_type == 'phrase_match':
+                context_lines.append(f"  NOTE: This is a PHRASE excerpt, not full verse/psalm")
+            elif match.match_type in ['entire_chapter', 'verse_range', 'verse_set']:
+                context_lines.append(f"  NOTE: This is a FULL/SUBSTANTIAL recitation")
+            context_lines.append(f"  Liturgy Context: {match.liturgy_context[:1000]}..." if len(match.liturgy_context) > 1000 else f"  Liturgy Context: {match.liturgy_context}")
+
+        if len(prioritized_matches) > 15:
+            remaining = len(prioritized_matches) - 15
+            remaining_types = {}
+            for m in prioritized_matches[15:]:
+                remaining_types[m.match_type] = remaining_types.get(m.match_type, 0) + 1
+            type_summary = ", ".join(f"{count} {mtype}" for mtype, count in remaining_types.items())
+            context_lines.append(f"\n... and {remaining} more matches ({type_summary})")
+
+        context_description = "\n".join(context_lines)
+
+        # Use same prompt structure as Gemini (without extended thinking references)
+        prompt = f'''You are a scholarly liturgist writing for a Biblical commentary. Your task is to describe how a specific phrase from Psalms is used in Jewish liturgy.
+
+PHRASE BEING ANALYZED:
+{context_description}
+
+YOUR TASK:
+Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this phrase appears in Jewish liturgy. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
+
+CRITICAL REQUIREMENTS:
+1. NARRATIVE STYLE - Write in flowing scholarly prose, NO bullet points
+2. DEDUPLICATE AND CONSOLIDATE - Group by tradition intelligently
+3. PRIORITIZE BY MATCH TYPE - Full recitations first, phrases last
+4. INCLUDE EXTENDED HEBREW QUOTATIONS - At least ONE 10-15 word quotation with context
+5. USE CANONICAL CLASSIFICATION - L1 Occasion, L2 Service data
+6. DISTINGUISH MAIN PRAYER VS. SUPPLEMENT - Note if phrase is in prelude/conclusion vs. main prayer
+
+OUTPUT FORMAT:
+Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" label.'''
+
+        try:
+            import anthropic
+            # Use streaming with extended thinking (matches macro/micro analyst pattern)
+            stream = self.anthropic_client.messages.stream(
+                model="claude-sonnet-4-5",
+                max_tokens=2000,  # Increased for Sonnet's more detailed output
+                thinking={
+                    "type": "enabled",
+                    "budget_tokens": 5000  # Extended thinking for liturgical analysis
+                },
+                messages=[{"role": "user", "content": prompt}]
+            )
+
+            # Collect thinking and response from stream
+            thinking_text = ""
+            response_text = ""
+
+            with stream as response_stream:
+                for chunk in response_stream:
+                    if hasattr(chunk, 'type'):
+                        if chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta'):
+                                if hasattr(chunk.delta, 'type'):
+                                    if chunk.delta.type == 'thinking_delta':
+                                        thinking_text += chunk.delta.thinking
+                                    elif chunk.delta.type == 'text_delta':
+                                        response_text += chunk.delta.text
+
+            summary = response_text.strip()
+
+            if self.verbose:
+                print(f"[INFO] Claude Sonnet 4.5 generated summary for phrase: {psalm_phrase[:50]}...")
+                print(f"[INFO] Thinking tokens used: ~{len(thinking_text.split()) if thinking_text else 0}")
+
+            return summary
+
+        except Exception as e:
+            print(f"[WARNING] Claude Sonnet summarization failed ({type(e).__name__}: {e}). Using code-only fallback.")
             return self._generate_phrase_code_summary(psalm_phrase, prayer_contexts, contexts)
 
     def _generate_phrase_code_summary(
@@ -1072,7 +1421,10 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                 location_descriptions[prayer_name] = match.canonical_location_description or ""
 
         # Use LLM for intelligent summary if available
-        if self.anthropic_client and len(matches) >= 1:
+        if self.gemini_client and len(matches) >= 1:
+            # Enforce rate limiting before API call
+            self._enforce_rate_limit()
+
             return self._generate_full_psalm_llm_summary(
                 psalm_chapter, verse_coverage, prayer_contexts, contexts_data, location_descriptions
             )
@@ -1238,14 +1590,33 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
             while attempt < max_attempts:
                 attempt += 1
 
-                response = self.anthropic_client.messages.create(
-                    model="claude-haiku-4-5",
-                    max_tokens=1000,  # Increased from 500 to allow 4-6 sentences
-                    temperature=0.6,   # Increased from 0.3 for more synthesis/narrative flow
-                    messages=[{"role": "user", "content": prompt}]
+                # Call Gemini API with automatic retry for transient errors (429, network issues, etc.)
+                response = self._call_gemini_with_retry(
+                    prompt=prompt,
+                    temperature=0.6,
+                    thinking_budget=self.thinking_budget
                 )
 
-                summary = response.content[0].text.strip()
+                # Extract text from response - handle different response structures
+                summary = None
+
+                # Try method 1: response.text (simple access)
+                if hasattr(response, 'text') and response.text:
+                    summary = response.text.strip()
+
+                # Try method 2: candidates structure
+                if not summary and hasattr(response, 'candidates') and response.candidates:
+                    candidate = response.candidates[0]
+                    if hasattr(candidate, 'content') and candidate.content:
+                        if hasattr(candidate.content, 'parts') and candidate.content.parts:
+                            # Extract from parts list
+                            for part in candidate.content.parts:
+                                if hasattr(part, 'text') and part.text:
+                                    summary = part.text.strip()
+                                    break
+
+                if not summary:
+                    raise ValueError(f"Could not extract text from response. Response type: {type(response)}, has text: {hasattr(response, 'text')}, has candidates: {hasattr(response, 'candidates')}")
 
                 if self.verbose:
                     try:
@@ -1253,12 +1624,21 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                         print(f"LLM RESPONSE FOR FULL PSALM {psalm_chapter} (Attempt {attempt}/{max_attempts})")
                         print(f"{'='*70}")
                         print(summary)
-                        print(f"\nToken usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        # Gemini token usage
+                        if hasattr(response, 'usage_metadata'):
+                            input_tokens = response.usage_metadata.prompt_token_count
+                            output_tokens = response.usage_metadata.candidates_token_count
+                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
+                            print(f"\nToken usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
                         print(f"{'='*70}\n")
                     except UnicodeEncodeError:
                         print(f"\n{'='*70}")
                         print(f"LLM RESPONSE FOR FULL PSALM {psalm_chapter} (Attempt {attempt}/{max_attempts}) [encoding error]")
-                        print(f"Token usage: {response.usage.input_tokens} input, {response.usage.output_tokens} output")
+                        if hasattr(response, 'usage_metadata'):
+                            input_tokens = response.usage_metadata.prompt_token_count
+                            output_tokens = response.usage_metadata.candidates_token_count
+                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
+                            print(f"Token usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
                         print(f"{'='*70}\n")
 
                 # Validate summary quality
@@ -1316,9 +1696,162 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
             return best_summary if best_summary else summary
 
         except Exception as e:
+            error_msg = str(e)
+            error_type = type(e).__name__
+
             if self.verbose:
-                print(f"[WARNING] LLM summarization failed ({e}). Using code-only fallback.")
+                print(f"[DEBUG] Exception in full psalm summary: {error_type}: {error_msg[:200]}")
+                print(f"[DEBUG] Provider: {self.llm_provider}, Has Claude: {self.anthropic_client is not None}")
+
+            # If Gemini failed and Claude available, switch to Claude
+            if self.llm_provider == 'gemini' and self.anthropic_client:
+                print(f"[WARNING] Gemini API error. Switching to Claude Sonnet 4.5 fallback.")
+                print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
+                self.llm_provider = 'anthropic'
+                # Retry with Claude
+                try:
+                    return self._generate_full_psalm_llm_summary_claude(psalm_chapter, verse_coverage, prayer_contexts, contexts_data, location_descriptions)
+                except Exception as claude_error:
+                    print(f"[WARNING] Claude also failed: {type(claude_error).__name__}: {str(claude_error)[:100]}")
+                    # Fall through to code-only summary
+            elif self.llm_provider == 'gemini':
+                print(f"[WARNING] Gemini API error and no Claude fallback available. Using code-only summaries.")
+                print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
+            else:
+                print(f"[WARNING] LLM summarization failed ({error_type}: {error_msg[:100]}). Using code-only fallback.")
+
             # Return code-only summary
+            full_list = ', '.join(list(full_recitations.keys())[:3])
+            partial_list = ', '.join([f"{p} (v. {d['verses']})" for p, d in list(partial_recitations.items())[:2]])
+            parts = []
+            if full_recitations:
+                parts.append(f"Full Psalm {psalm_chapter}: {full_list}")
+            if partial_recitations:
+                parts.append(f"Partial: {partial_list}")
+            return ". ".join(parts) + "." if parts else f"Psalm {psalm_chapter} in {len(prayer_contexts)} contexts"
+
+    def _generate_full_psalm_llm_summary_claude(
+        self,
+        psalm_chapter: int,
+        verse_coverage: Dict[str, Dict],
+        prayer_contexts: List[str],
+        contexts_data: Dict[str, Any],
+        location_descriptions: Dict[str, str] = None
+    ) -> str:
+        """
+        Use Claude Sonnet 4.5 with extended thinking to generate summary for full psalm (fallback when Gemini quota exhausted).
+        """
+        if not self.anthropic_client:
+            # Fallback to code-only
+            full_recitations = {p: d for p, d in verse_coverage.items() if d['is_full']}
+            partial_recitations = {p: d for p, d in verse_coverage.items() if not d['is_full']}
+            full_list = ', '.join(list(full_recitations.keys())[:3])
+            partial_list = ', '.join([f"{p} (v. {d['verses']})" for p, d in list(partial_recitations.items())[:2]])
+            parts = []
+            if full_recitations:
+                parts.append(f"Full Psalm {psalm_chapter}: {full_list}")
+            if partial_recitations:
+                parts.append(f"Partial: {partial_list}")
+            return ". ".join(parts) + "." if parts else f"Psalm {psalm_chapter} in {len(prayer_contexts)} contexts"
+
+        location_descriptions = location_descriptions or {}
+
+        # Build same context as Gemini version
+        context_lines = []
+        context_lines.append(f"Psalm {psalm_chapter} usage in Jewish liturgy:")
+        context_lines.append(f"Total prayer contexts: {len(prayer_contexts)}")
+        context_lines.append("")
+
+        full_recitations = {p: d for p, d in verse_coverage.items() if d['is_full']}
+        partial_recitations = {p: d for p, d in verse_coverage.items() if not d['is_full']}
+
+        if full_recitations:
+            context_lines.append(f"Full recitations ({len(full_recitations)}):")
+            for prayer, data in list(full_recitations.items())[:5]:
+                context_lines.append(f"  - Main Prayer: {prayer} (verses {data['verses']}, {data['percentage']:.0f}%)")
+                if prayer in location_descriptions and location_descriptions[prayer]:
+                    context_lines.append(f"    Location Description: {location_descriptions[prayer][:300]}...")
+            if len(full_recitations) > 5:
+                context_lines.append(f"  ... and {len(full_recitations) - 5} more")
+
+        if partial_recitations:
+            context_lines.append(f"\nPartial recitations ({len(partial_recitations)}):")
+            for prayer, data in list(partial_recitations.items())[:5]:
+                context_lines.append(f"  - Main Prayer: {prayer} (verses {data['verses']}, {data['percentage']:.0f}%)")
+                if prayer in location_descriptions and location_descriptions[prayer]:
+                    context_lines.append(f"    Location Description: {location_descriptions[prayer][:300]}...")
+            if len(partial_recitations) > 5:
+                context_lines.append(f"  ... and {len(partial_recitations) - 5} more")
+
+        context_lines.append("")
+        if contexts_data['occasions']:
+            context_lines.append(f"L1 Occasions: {', '.join(contexts_data['occasions'])}")
+        if contexts_data['services']:
+            context_lines.append(f"L2 Services: {', '.join(contexts_data['services'])}")
+        if contexts_data['nusachs']:
+            context_lines.append(f"Traditions: {', '.join(contexts_data['nusachs'])}")
+
+        context_description = "\n".join(context_lines)
+
+        # Use same prompt structure as Gemini
+        prompt = f'''You are a scholarly liturgist writing for a Biblical commentary. Your task is to describe where and how an entire Psalm is recited in Jewish liturgy.
+
+PSALM BEING ANALYZED:
+{context_description}
+
+YOUR TASK:
+Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this psalm is recited in Jewish liturgy.
+
+CRITICAL REQUIREMENTS:
+1. NARRATIVE STYLE - Flowing scholarly prose, NO bullet points
+2. DISTINGUISH FULL VS. PARTIAL RECITATIONS
+3. DEDUPLICATE AND CONSOLIDATE - Group by tradition
+4. USE CANONICAL CLASSIFICATION - L1 Occasions and L2 Services
+5. SYNTHESIS AND SIGNIFICANCE - Explain liturgical context
+6. DISTINGUISH MAIN PRAYER VS. SUPPLEMENT
+
+OUTPUT FORMAT:
+Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" label.'''
+
+        try:
+            import anthropic
+            # Use streaming with extended thinking (matches macro/micro analyst pattern)
+            stream = self.anthropic_client.messages.stream(
+                model="claude-sonnet-4-5",
+                max_tokens=2000,  # Increased for Sonnet's more detailed output
+                thinking={
+                    "type": "enabled",
+                    "budget_tokens": 5000  # Extended thinking for liturgical analysis
+                },
+                messages=[{"role": "user", "content": prompt}]
+            )
+
+            # Collect thinking and response from stream
+            thinking_text = ""
+            response_text = ""
+
+            with stream as response_stream:
+                for chunk in response_stream:
+                    if hasattr(chunk, 'type'):
+                        if chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta'):
+                                if hasattr(chunk.delta, 'type'):
+                                    if chunk.delta.type == 'thinking_delta':
+                                        thinking_text += chunk.delta.thinking
+                                    elif chunk.delta.type == 'text_delta':
+                                        response_text += chunk.delta.text
+
+            summary = response_text.strip()
+
+            if self.verbose:
+                print(f"[INFO] Claude Sonnet 4.5 generated summary for full Psalm {psalm_chapter}")
+                print(f"[INFO] Thinking tokens used: ~{len(thinking_text.split()) if thinking_text else 0}")
+
+            return summary
+
+        except Exception as e:
+            print(f"[WARNING] Claude Sonnet summarization failed ({type(e).__name__}: {e}). Using code-only fallback.")
+            # Code-only fallback
             full_list = ', '.join(list(full_recitations.keys())[:3])
             partial_list = ', '.join([f"{p} (v. {d['verses']})" for p, d in list(partial_recitations.items())[:2]])
             parts = []
@@ -1520,7 +2053,7 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
         Returns:
             ValidationResult with is_valid, confidence, reason, and optional quote/translation
         """
-        if not self.anthropic_client:
+        if not self.gemini_client:
             # Without LLM, accept all matches
             return ValidationResult(
                 is_valid=True,
@@ -1625,14 +2158,41 @@ Output ONLY the JSON.'''
                 pass  # Skip printing on Windows console with encoding issues
 
         try:
-            response = self.anthropic_client.messages.create(
-                model="claude-haiku-4-5",
-                max_tokens=400,
-                temperature=0.1,  # Low temperature for factual validation
-                messages=[{"role": "user", "content": prompt}]
+            # Import types for config
+            from google.genai import types
+
+            response = self.gemini_client.models.generate_content(
+                model="gemini-2.5-pro",
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    # NOTE: max_output_tokens conflicts with thinking_config
+                    temperature=0.1,  # Low temperature for factual validation
+                    thinking_config=types.ThinkingConfig(
+                        thinking_budget=1024  # Lower budget for simple validation task
+                    )
+                )
             )
 
-            result_text = response.content[0].text.strip()
+            # Extract text from response - handle different response structures
+            result_text = None
+
+            # Try method 1: response.text (simple access)
+            if hasattr(response, 'text') and response.text:
+                result_text = response.text.strip()
+
+            # Try method 2: candidates structure
+            if not result_text and hasattr(response, 'candidates') and response.candidates:
+                candidate = response.candidates[0]
+                if hasattr(candidate, 'content') and candidate.content:
+                    if hasattr(candidate.content, 'parts') and candidate.content.parts:
+                        # Extract from parts list
+                        for part in candidate.content.parts:
+                            if hasattr(part, 'text') and part.text:
+                                result_text = part.text.strip()
+                                break
+
+            if not result_text:
+                raise ValueError(f"Could not extract text from validation response. Response type: {type(response)}")
 
             if self.verbose:
                 try:
@@ -2007,7 +2567,7 @@ Examples:
     print("=" * 70)
 
     if use_llm:
-        print("Using Claude Haiku 4.5 for intelligent context summaries")
+        print("Using Claude Sonnet 4.5 for intelligent context summaries")
     else:
         print("Using code-only summaries (--skip-liturgy-llm)")
 

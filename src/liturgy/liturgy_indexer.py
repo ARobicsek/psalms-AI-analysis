@@ -276,24 +276,19 @@ class LiturgyIndexer:
                     verse_end=psalm_verse_end
                 )
 
-                if match_type == 'phrase_match':
-                    if start_word_index < len(word_start_chars):
-                        char_start_index = word_start_chars[start_word_index]
-                        context_start = max(0, char_start_index - 500)
-                        context_end = min(len(hebrew_text), char_start_index + len(liturgy_phrase) + 500)
-                        context = hebrew_text[context_start:context_end]
-                    else:
-                        # Fallback for safety if word index is out of bounds
-                        context = self._extract_context_from_words(
-                            prayer_words,
-                            start_word_index,
-                            phrase_word_count
-                        )
-                else:  # exact_verse
-                    context = self._extract_context_from_words(
-                        prayer_words,
-                        start_word_index,
-                        phrase_word_count
+                # Extract context using character-based windowing for better context
+                # Increased from ±500 to ±800 chars to provide more liturgical context (Session 131)
+                if start_word_index < len(word_start_chars):
+                    char_start_index = word_start_chars[start_word_index]
+                    context_start = max(0, char_start_index - 800)
+                    context_end = min(len(hebrew_text), char_start_index + len(liturgy_phrase) + 800)
+                    context = hebrew_text[context_start:context_end]
+                else:
+                    # Fallback: use word-based context extraction
+                    context = self._extract_context(
+                        full_text=hebrew_text,
+                        phrase=phrase_hebrew,
+                        context_words=30
                     )
 
                 confidence = self._calculate_confidence(
@@ -814,7 +809,7 @@ class LiturgyIndexer:
         self,
         full_text: str,
         phrase: str,
-        context_words: int = 10
+        context_words: int = 30
     ) -> str:
         """
         Extract surrounding context (±N words) around the match.
@@ -911,8 +906,9 @@ class LiturgyIndexer:
         context = ' '.join(words[start_idx:end_idx])
 
         # Truncate if too long (database field limit)
-        if len(context) > 300:
-            context = context[:297] + '...'
+        # Increased from 300 to 1200 to provide more liturgical context (Session 131)
+        if len(context) > 1200:
+            context = context[:1197] + '...'
 
         return context
 
