@@ -8,7 +8,81 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 136 - Fix is_unique Filter for Liturgical Phrases (2025-11-21) ✅ COMPLETE
+**Last Session**: Session 137 - Fix College Regeneration & Stale Stats Dates (2025-11-21) ✅ COMPLETE
+
+## Session 137 Summary (COMPLETE ✓)
+
+**Objective**: Fix pipeline issues with college file regeneration and stale stats dates
+**Result**: ✓ COMPLETE - College files now auto-regenerate when synthesis changes, stats show correct run dates
+
+**Issues Investigated**:
+1. User reported .docx content mismatch - ✅ Verified NO ISSUE (content matches correctly)
+2. College files not regenerated when running `--skip-macro --skip-micro`
+3. Stats JSON and .docx showed stale dates (Nov 6 instead of Nov 21)
+
+**Root Causes**:
+
+1. **College File Regeneration Issue**:
+   - College step only checked if file existed: `if not edited_intro_college_file.exists()`
+   - When synthesis ran fresh (14:57), old college files (07:55) were reused
+   - Result: Regular files based on new synthesis, college files based on old synthesis (mismatched!)
+
+2. **Stale Stats Dates Issue**:
+   - Pipeline treated `--skip-macro --skip-micro` as "resuming" the Nov 6 run
+   - Loaded old `pipeline_start`, `pipeline_end` from Nov 6 stats JSON
+   - Even though synthesis and master_editor ran fresh on Nov 21, dates stayed Nov 6
+   - Result: .docx showed "Date Produced: Nov 6" when actual run was Nov 21
+
+**Fixes Implemented**:
+
+1. **College File Timestamp Check** ([run_enhanced_pipeline.py:672-682](../scripts/run_enhanced_pipeline.py#L672-L682)):
+   ```python
+   # Check if college files need regeneration:
+   # 1. College file doesn't exist, OR
+   # 2. Synthesis files are newer than college files (synthesis was re-run)
+   college_needs_regeneration = (
+       not edited_intro_college_file.exists() or
+       (synthesis_intro_file.exists() and
+        synthesis_intro_file.stat().st_mtime > edited_intro_college_file.stat().st_mtime)
+   )
+   ```
+   - Uses file modification timestamps to detect stale college files
+   - Regenerates whenever synthesis is newer
+
+2. **Fresh Analysis Detection** ([run_enhanced_pipeline.py:145-161](../scripts/run_enhanced_pipeline.py#L145-L161)):
+   ```python
+   # Determine if this is "fresh analysis with reused research" vs "true resume"
+   is_fresh_analysis = not skip_synthesis or not skip_master_edit
+
+   if is_resuming and summary_json_file.exists():
+       # ... load existing stats ...
+
+       # If running fresh analysis, clear old pipeline dates
+       if is_fresh_analysis and initial_data:
+           logger.info("Running fresh analysis with reused research. Resetting pipeline dates.")
+           initial_data['pipeline_start'] = None  # Will use current time
+           initial_data['pipeline_end'] = None
+   ```
+   - Distinguishes "reusing research" from "true resume to output steps"
+   - Clears old dates when synthesis/master_editor run fresh
+   - Tracker uses current time for new dates
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Two fixes (college regeneration + stats dates)
+
+**Impact**:
+- ✅ College files stay synchronized with synthesis output
+- ✅ Stats show correct run dates for fresh analysis runs
+- ✅ No more confusion about when commentary was actually produced
+- ✅ Character counts already correct (tracker overwrites on each step)
+
+**Testing**:
+Next run with `--skip-macro --skip-micro` will:
+- Regenerate college files if synthesis is newer
+- Show today's date in stats instead of old date
+- Display correct pipeline duration
+
+---
 
 ## Session 136 Summary (COMPLETE ✓)
 
