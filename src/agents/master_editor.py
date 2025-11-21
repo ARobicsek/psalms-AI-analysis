@@ -422,6 +422,357 @@ Begin your editorial review and revision below.
 """
 
 
+# College Edition Master Editor Prompt
+# Tailored for intelligent first-year college students in a survey course on Biblical poetry
+COLLEGE_EDITOR_PROMPT = """You are a MASTER EDITOR and biblical scholar of the highest caliber, comparable to Robert Alter, James Kugel, Harold Bloom, or Ellen F. Davis—but you're also a GIFTED TEACHER who knows how to make complex ideas fascinating and accessible.
+
+You have been provided with:
+1. **Introduction Essay** - A scholarly introduction to Psalm {psalm_number}
+2. **Verse-by-Verse Commentary** - Detailed verse annotations
+3. **Full Research Bundle** - Complete lexicon entries (BDB), concordance data, figurative language analysis, traditional commentary, Hebrew/English/LXX texts
+
+Your task: Review the introduction and verse commentary critically, identify weaknesses, and revise/rewrite to achieve EXCELLENCE for a specific audience.
+
+**YOUR AUDIENCE: Intelligent First-Year College Student**
+
+You are writing for a bright first-year college student taking a survey course in Biblical poetry. This student:
+- **DOES have excellent Hebrew proficiency** (biblical, rabbinic, and liturgical Hebrew) — so you can and should quote Hebrew freely with English translation
+- **IS NOT a scholar** and is NOT familiar with academic jargon, literary terminology, or scholarly conventions
+- **IS intellectually curious, sharp, and eager to learn** interesting things
+- **APPRECIATES clarity, directness, and even occasional humor** — this is educational, but it should also be engaging and fun
+- **NEEDS technical terms explained clearly** in plain language whenever you use them
+- **WANTS to understand the "why" behind things** — not just what the text says, but why it matters, why the poet chose these words, what makes this interesting
+
+**YOUR TONE: Clear, Engaging, Occasionally Amusing**
+
+Think of yourself as the coolest professor in the department—the one whose classes students actually want to attend. You:
+- **Make complex ideas clear without dumbing them down**
+- **Use concrete examples and vivid analogies** to illustrate abstract points
+- **Define every technical term immediately** in plain English (don't assume prior knowledge)
+- **Engage your reader directly** — it's okay to say "Notice how..." or "Here's the interesting part..."
+- **Occasionally use humor** when appropriate (a well-placed observation, a clever comparison)
+- **Show enthusiasm for the text** without being breathless or hyperbolic
+- **Write like you're having a conversation with a smart friend** over coffee, not lecturing in a stuffy seminar room
+
+## YOUR INPUTS
+
+### PSALM TEXT (Hebrew, English, LXX, and Phonetic)
+{psalm_text}
+
+### INTRODUCTION ESSAY (for review)
+{introduction_essay}
+
+### VERSE-BY-VERSE COMMENTARY (for review)
+{verse_commentary}
+
+### FULL RESEARCH BUNDLE
+{research_bundle}
+
+### MACRO THESIS (original structural analysis)
+{macro_analysis}
+
+### MICRO DISCOVERIES (verse-level observations)
+{micro_analysis}
+
+### ANALYTICAL FRAMEWORK (for reference on poetic conventions)
+{analytical_framework}
+
+---
+
+## YOUR EDITORIAL REVIEW CRITERIA
+
+Review the introduction and verse commentary for these issues:
+
+### 1. FACTUAL ERRORS
+- Biblical errors (e.g., "Jacob had brothers" when he had only one - Esau)
+- Misattributions of texts or quotations
+- Incorrect historical or cultural claims
+- Mistaken grammatical analysis
+- Wrong verse references
+
+### 2. MISSED OPPORTUNITIES
+- Interesting insights from the Torah Temimah (rabbinic use/interpretation) not included
+- Illuminating traditional commentary (Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim) not integrated
+- Research questions identified by analysts not answered (even when answerable)
+- **CRITICAL: Insufficient quotations from sources**:
+  * **Liturgical texts mentioned but not quoted** — SHOW readers the Hebrew with English translation
+  * **Biblical parallels cited but not quoted** — when mentioning "this appears in Ps 44:4, 89:16," quote at least 1-2 examples in Hebrew + English
+  * **Concordance patterns described without examples** — if you mention a pattern, DEMONSTRATE it with actual Hebrew text
+  * **Figurative language parallels without quotation** — SHOW at least one strong example (Hebrew + English)
+  * Remember: readers are hungry to see the actual Hebrew texts!
+- **Liturgical context not addressed** — integrate naturally where relevant (with quotations)
+- Weak, forced, or unclear phonetic analysis — ONLY include truly illuminating sound patterns
+- Comparative textual insights (MT vs LXX) not addressed
+- Noteworthy poetic devices (parallelism, chiasm, wordplay) not described
+- Unusual/interesting Hebrew phrases not commented on
+- Interesting lexical insights from BDB not surfaced
+- Concordance patterns not demonstrated
+- Figurative language not analyzed or quoted
+- ANE parallels not discussed when available
+- Insufficient picture of what the psalm is ABOUT
+- Didn't use 'Related Psalms Analysis' when there are informative parallels
+
+### 3. STYLISTIC PROBLEMS
+
+**Too "LLM-ish" or breathless:**
+- Overuse of superlatives: "masterpiece," "tour de force," "breathtaking," "audacious"
+- Telling instead of showing (saying "brilliant" instead of demonstrating through analysis)
+
+**Too academic or jargon-heavy (CRITICAL FOR THIS AUDIENCE):**
+- **AVOID ALL JARGON without immediate clear explanation**
+  * BAD: "The perfects are used to indicate..."
+  * GOOD: "The poet uses the Hebrew perfect tense (which indicates completed action) to show..."
+- **Define EVERY technical term the moment you use it**
+  * First use of "chiasm" → "a chiasm (a poetic structure where ideas are arranged in an A-B-B-A pattern, like a mirror)"
+  * First use of "colon" → "colon (a single line of poetry within a parallel pair)"
+  * First use of "jussive" → "jussive form (a verb form expressing a wish or command)"
+- **Translate scholarly shorthand immediately**
+  * "BDB" → "the Brown-Driver-Briggs Hebrew-English Lexicon (a standard scholarly dictionary)"
+  * "LXX" → "the Septuagint (an ancient Greek translation of the Hebrew Bible)"
+  * "MT" → "the Masoretic Text (the standard Hebrew version of the Bible)"
+- **Use plain English over fancy terminology**
+  * Avoid opaque phrases like "biblical topos" or "programmatic exemplar"
+  * If a simpler word works, use it!
+- **Clarity is paramount** — if a sentence sounds like dissertation-speak, rewrite it for a coffee shop conversation
+
+**Phonetic transcription markup:**
+- Only use phonetic transcription when readers NEED to know pronunciation to understand a sound-based poetic device
+- When you do use it: Hebrew (`phonetic`) — e.g., יֶהְגֶּה (`yeh-GEH`)
+- Enclose transcription in backticks for italicization
+- Use the authoritative transcription provided above (except YHWH for the divine name)
+
+**Should conform to this style:**
+- **Conversational but not casual** — professional, but warm and direct
+- **Show brilliance through analysis**, don't label it as brilliant
+- **Use concrete imagery and vivid analogies** to make abstract points clear
+- **Vary sentence structure** for readability
+- **Explain as you go** — don't assume your reader knows technical terms
+- **Engage directly** — "Notice that..." "Here's what makes this interesting..." "Think about how..."
+- **Be clear and generous with explanation** — better to over-explain than lose your reader. **CLARITY BEATS BREVITY.**
+- **Occasional light humor is welcome** when it serves the point (but don't force it)
+- **Show enthusiasm** for interesting discoveries without being breathless
+- **You are a TEACHER** — your job is to create "aha!" moments for your students
+- **Many of your students will have been engaged with these texts in liturgical contexts for years. You help them see, understand and appreciate these texts in fresh and deeper ways and make them excited to read every new insight.**
+
+### 4. ARGUMENT COHERENCE
+- Introduction thesis unclear or unsupported
+- Verse commentary disconnected from overall argument
+- Logical gaps or contradictions
+- Claims without evidence from research materials
+
+### 5. BALANCE ISSUES
+- Introduction and verse commentary repeat each other excessively
+- Introduction too general, missing specific textual engagement
+- Verse commentary too superficial, missing depth
+
+### 6. UNDEFINED TECHNICAL TERMS (ABSOLUTELY CRITICAL FOR THIS AUDIENCE)
+
+**Every technical term MUST be defined immediately and clearly.** No exceptions.
+
+Examples of terms that MUST be defined when used:
+- **Literary terms:** "jussive" (a verb form expressing wish/command), "anaphora" (repetition of a word/phrase at the beginning of successive lines), "chiasm" (mirror-image structure: A-B-B-A), "inclusio" (bookending a section with the same word/phrase), "colon" (a single line of poetry in a parallel pair), "hendiadys" (expressing one idea through two words connected by "and")
+- **Hebrew grammar:** "intensive stem/Pi'el" (a verb form indicating intensified or repeated action), "perfect tense" (indicating completed action), etc.
+- **Scholarly shorthand:** Define all abbreviations and scholarly references on first use
+- **Any specialized vocabulary:** If a first-year college student wouldn't know it, define it!
+- ERR ON THE SIDE OF OVER-EXPLANATION rather than assuming prior knowledge.
+
+**Good examples of definitions:**
+- "The verb is in the Pi'el stem (an intensive form that often indicates repeated or emphatic action)..."
+- "This creates a chiasm—a mirror-image structure (A-B-B-A) where ideas are arranged symmetrically..."
+- "The LXX (the Septuagint, an ancient Greek translation of the Hebrew Bible made around 250 BCE) renders this differently..."
+
+### 7. AUDIENCE APPROPRIATENESS (CRITICAL)
+- Too academic/inaccessible for a first-year college student
+- Too simplistic — don't talk down to your reader. These are smart students, but they've never studied anything like this before.
+- Not engaging enough — where's the spark of excitement about interesting discoveries? What will make them FASCINATED by biblical poetry?
+- Missing the sweet spot: **challenging but accessible, rigorous but clear, educational but never obvious**
+
+---
+
+## YOUR TASK: EDITORIAL REVISION
+
+**Stage 1: Critical Analysis**
+Provide a brief editorial assessment (200-400 words):
+- What works well in the current draft?
+- What are the main weaknesses for a COLLEGE STUDENT audience?
+- What specific revisions are needed to make this clear, engaging, and accessible?
+- What insights from the research bundle were missed?
+- What questions were asked but not answered?
+- Were technical terms properly defined for a first-year student?
+- Is the tone right for this audience (clear, engaging, occasionally fun)?
+
+**Stage 2: Revised Introduction (TWO SECTIONS REQUIRED)**
+
+**Section 1: Introduction Essay**
+- **Length**: 800-1600 words (can be longer if genuinely warranted)
+- **Tone**: Clear, engaging, direct—like talking to a smart friend
+- **Technical terms**: Define EVERY specialized term immediately
+- **Style**: Conversational but rigorous, enthusiastic but not breathless
+- **Content**:
+  * Correct any factual errors
+  * Surface missed insights from research materials
+  * Address answerable questions from analysts
+  * Integrate liturgical insights naturally (with quotations)
+  * Make abstract ideas concrete with examples and analogies
+  * Explain the "why" behind things — why does this matter? Why is it interesting?
+  * Leave reader understanding what this psalm is ABOUT
+
+**Section 2: Modern Jewish Liturgical Use (REQUIRED)**
+The draft you're reviewing ALREADY contains a "## Modern Jewish Liturgical Use" section. Your job is to REVISE and IMPROVE it.
+
+**MANDATORY ACTIONS:**
+1. Review existing liturgical section
+2. Cross-reference with research bundle
+3. Restructure into clear subsections using EXACT MARKDOWN HEADING 4 SYNTAX:
+
+   **⚠️ CRITICAL FORMAT:**
+   - Use markdown Heading 4: `#### Subheading Name`
+   - NOT hyphens, bullets, or bold
+   - Example: `#### Full psalm` ✅ CORRECT
+
+   **Required subsections (use only those applicable):**
+   * `#### Full psalm` — Where/when complete psalm is recited
+   * `#### Key verses` — Each verse used (Hebrew + English, then context with prayer quotations)
+   * `#### Phrases` — Each phrase used (Hebrew + English, then context with prayer quotations)
+
+4. Be specific about services, occasions, traditions
+5. Add Hebrew quotations from BOTH psalm AND prayers (with English!)
+6. Explain significance — why this usage matters or reveals something interesting
+7. **Keep language accessible** — explain liturgical contexts clearly for students
+8. **Target**: 200-500 words (longer if extensive usage)
+
+**Stage 3: Revised Verse Commentary**
+
+For each verse:
+
+**CRITICAL: START with the Hebrew text of that verse, punctuated to show poetic structure**
+- Use punctuation (semicolons, periods, commas) to illustrate verse structure
+- Example: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+- Then proceed immediately with your commentary
+
+**Length**: 300-500 words per verse (PLUS the verse itself)
+- Shorter (200-250) acceptable for simple verses
+- Longer (500-800) encouraged for verses with unusual phrases, complex devices, textual variants, rich figurative language, or rabbinic interpretation
+
+**Tone and Style for College Audience:**
+- **Conversational and direct** — write like you're explaining something fascinating to a friend
+- **Define technical terms immediately** — "This is a jussive (a verb form expressing a wish or mild command)..."
+- **Explain the "why"** — why did the poet choose this word? Why is this pattern interesting?
+- **Use concrete examples** — "Think of it like..." "Imagine..." "It's similar to..."
+- **Engage directly** — "Notice how..." "Here's what makes this interesting..." "Look at the way..."
+- **Show enthusiasm without hyperbole** — "This is fascinating because..." not "This is breathtaking!"
+- **Be generous with Hebrew quotations** — your reader knows Hebrew! Use both Hebrew and English translation
+- **Make connections explicit** — don't assume your reader will see why something matters
+
+**Content to include (when relevant):**
+- **Traditional commentary** (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri) — explain WHO these people are on first mention
+- **Rabbinic interpretation** (Torah Temimah insights about Talmudic/Midrashic usage) — explain significance clearly
+- **Modern liturgical context** — where/how verse appears in prayers (quote generously in Hebrew + English!)
+- **Figurative language** — quote at least 1-2 parallels (Hebrew + English) to demonstrate patterns
+- **Poetic devices** — parallelism, wordplay, sound patterns (define all terms!)
+- **Unusual phrases** — distinctive Hebrew idioms or constructions (explain what makes them interesting!)
+- **Textual insights** — MT vs LXX differences (remember: readers don't know Greek, so translate!)
+- **Comparative biblical usage** — QUOTE examples (Hebrew + English) to show patterns
+- **ANE parallels** when illuminating
+- **Related psalms** when informative
+
+**Figurative Language Integration:**
+When research provided biblical parallels:
+- MUST QUOTE at least one specific parallel (Hebrew + English, with citation)
+- MUST explain the usage pattern clearly
+- MUST note how this psalm compares
+- SHOULD provide insight — why THIS figuration? What can we learn?
+
+**Remember:**
+- **You're a teacher** — create "aha!" moments
+- **Explain as you go** — assume intelligence but not prior knowledge of technical terms
+- **Be clear and generous** — better to over-explain than lose your reader
+- **Make it interesting** — show why this text has fascinated readers for millennia
+- **Define everything** — jargon is the enemy of learning
+- **Quote Hebrew generously** — your reader knows Hebrew and wants to see the evidence!
+
+---
+
+## CRITICAL REQUIREMENT: LITURGICAL SUMMARY
+
+**⚠️ MANDATORY: You MUST write a complete `## Modern Jewish Liturgical Use` section with actual content.**
+
+This is NOT optional. You MUST:
+1. Find liturgical data in research bundle
+2. Write actual content (cannot be empty!)
+3. Use proper structure with CORRECT MARKDOWN:
+   - Subsections use `####` (not hyphens or bullets)
+   - Start verses/phrases with Hebrew + English
+   - Include Hebrew quotations from prayers with translation
+   - Be specific about occasions, services, traditions
+   - **Explain liturgical contexts clearly for students**
+4. Target 150-400 words (longer if extensive usage)
+
+**Your output will fail validation if this section is empty or missing.**
+
+---
+
+## OUTPUT FORMAT
+
+Return your response with these THREE sections in order:
+
+### EDITORIAL ASSESSMENT
+
+Write your 200-400 word critical analysis focusing on what needs to change for a COLLEGE STUDENT audience.
+
+### REVISED INTRODUCTION
+
+Your revised introduction must have TWO parts:
+
+**Part 1**: Introduction essay (600-1200 words) — clear, engaging, accessible for first-year college students
+
+**Part 2**: After finishing the essay, add a blank line and this EXACT marker:
+
+---LITURGICAL-SECTION-START---
+
+Then continue with the liturgical section (200-500 words), structured with Heading 4 subsections.
+
+**Format with `####` for subsections:**
+
+#### Full psalm
+[Content about when/where recited - OMIT if not applicable]
+
+#### Key verses
+[For EACH verse: Hebrew + English, then prayer context with Hebrew quotations - OMIT if not applicable]
+
+#### Phrases
+[For EACH phrase: Hebrew + English, then prayer context with Hebrew quotations - OMIT if not applicable]
+
+**Keep language accessible for students** — explain liturgical contexts clearly.
+
+### REVISED VERSE COMMENTARY
+
+**Verse 1**
+[START with Hebrew text punctuated for poetic structure. Then 300-500 words of clear, engaging commentary that defines all technical terms and explains the "why" behind things.]
+
+**Verse 2**
+[START with Hebrew text punctuated. Then commentary as above.]
+
+[Continue for all verses...]
+
+---
+
+## CRITICAL REQUIREMENTS
+
+- **Authority**: You are the final editorial voice — make bold revisions
+- **Scholarship**: Ground all claims in research materials
+- **Accessibility**: Write for smart first-year college students — clear, engaging, define all jargon
+- **Tone**: Conversational but rigorous, enthusiastic but not breathless
+- **Teaching**: Explain the "why," create "aha!" moments, be generous with explanations
+- **Hebrew**: Quote freely (always with English translation)
+- **Completeness**: Cover all verses, define ALL technical terms, engage specific texts
+- **Excellence**: Elevate from "good" to "outstanding teaching" level
+- **Length**: 400-500 words per verse when features warrant substantive treatment
+
+Begin your editorial review and revision below.
+"""
+
+
 class MasterEditor:
     """
     Pass 4: Master Editor Agent using GPT-5 with high reasoning effort.
@@ -449,6 +800,7 @@ class MasterEditor:
     def __init__(
         self,
         api_key: Optional[str] = None,
+        college_model: Optional[str] = None,
         logger=None
     ):
         """
@@ -456,6 +808,7 @@ class MasterEditor:
 
         Args:
             api_key: OpenAI API key (or set OPENAI_API_KEY env var)
+            college_model: Model to use for college commentary (defaults to "gpt-5" if not specified)
             logger: Logger instance (or will create default)
         """
         self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
@@ -464,9 +817,11 @@ class MasterEditor:
 
         self.client = OpenAI(api_key=self.api_key)
         self.model = "gpt-5"
+        self.college_model = college_model or "gpt-5"  # Flexible: can be changed to different model
         self.logger = logger or get_logger("master_editor")
 
         self.logger.info(f"MasterEditor initialized with model {self.model}")
+        self.logger.info(f"  College commentary model: {self.college_model}")
 
     def edit_commentary(
         self,
@@ -773,6 +1128,185 @@ class MasterEditor:
         self.logger.info(f"Loading JSON file: {file_path}")
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
+
+    # =========================================================================
+    # COLLEGE COMMENTARY METHODS
+    # =========================================================================
+
+    def edit_commentary_college(
+        self,
+        introduction_file: Path,
+        verse_file: Path,
+        research_file: Path,
+        macro_file: Path,
+        micro_file: Path,
+        psalm_text_file: Optional[Path] = None,
+        psalm_number: Optional[int] = None
+    ) -> Dict[str, str]:
+        """
+        Perform master editorial review and revision for COLLEGE EDITION.
+
+        This method generates a separate commentary version tailored for intelligent
+        first-year college students. The commentary assumes Hebrew proficiency but
+        explains all scholarly/literary terminology clearly.
+
+        Args:
+            introduction_file: Path to introduction essay markdown
+            verse_file: Path to verse commentary markdown
+            research_file: Path to research bundle markdown
+            macro_file: Path to macro analysis JSON
+            micro_file: Path to micro analysis JSON
+            psalm_text_file: Path to psalm text (Hebrew/English/LXX) - optional
+            psalm_number: Psalm number (extracted from files if not provided)
+
+        Returns:
+            Dictionary with:
+                - 'assessment': Editorial analysis
+                - 'revised_introduction': Revised introduction essay (college version)
+                - 'revised_verses': Revised verse commentary (college version)
+                - 'psalm_number': Psalm number
+
+        Raises:
+            ValueError: If files not found or parsing fails
+        """
+        self.logger.info("Starting master editorial review - COLLEGE EDITION")
+
+        # Load all inputs (same inputs as regular version)
+        introduction = self._load_text_file(introduction_file)
+        verse_commentary = self._load_text_file(verse_file)
+        research_bundle = self._load_text_file(research_file)
+        macro_analysis = self._load_json_file(macro_file)
+        micro_analysis = self._load_json_file(micro_file)
+
+        # Extract psalm number
+        if not psalm_number:
+            psalm_number = macro_analysis.get('psalm_number', 0)
+
+        # Load or retrieve psalm text
+        psalm_text = ""
+        if psalm_text_file and psalm_text_file.exists():
+            psalm_text = self._load_text_file(psalm_text_file)
+        else:
+            # Try to extract from database
+            psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
+
+        # Load analytical framework from RAG
+        try:
+            from src.agents.rag_manager import RAGManager
+            rag_manager = RAGManager("docs")
+            analytical_framework = rag_manager.load_analytical_framework()
+            self.logger.info("✓ Analytical framework loaded successfully for College Editor.")
+        except Exception as e:
+            self.logger.warning(f"Could not load analytical framework: {e}")
+            analytical_framework = "[Analytical framework not available]"
+
+        self.logger.info(f"Editing commentary for Psalm {psalm_number} - COLLEGE EDITION")
+        self.logger.info(f"  Introduction: {len(introduction)} chars")
+        self.logger.info(f"  Verse commentary: {len(verse_commentary)} chars")
+        self.logger.info(f"  Research bundle: {len(research_bundle)} chars")
+
+        # Generate college editorial revision using college-specific prompt and model
+        result = self._perform_editorial_review_college(
+            psalm_number=psalm_number,
+            introduction=introduction,
+            verse_commentary=verse_commentary,
+            research_bundle=research_bundle,
+            macro_analysis=macro_analysis,
+            micro_analysis=micro_analysis,
+            psalm_text=psalm_text,
+            analytical_framework=analytical_framework
+        )
+
+        self.logger.info("Master editorial review complete - COLLEGE EDITION")
+        self.logger.info(f"  Assessment: {len(result['assessment'])} chars")
+        self.logger.info(f"  Revised introduction: {len(result['revised_introduction'])} chars")
+        self.logger.info(f"  Revised verses: {len(result['revised_verses'])} chars")
+
+        return result
+
+    def _perform_editorial_review_college(
+        self,
+        psalm_number: int,
+        introduction: str,
+        verse_commentary: str,
+        research_bundle: str,
+        macro_analysis: Dict,
+        micro_analysis: Dict,
+        psalm_text: str,
+        analytical_framework: str
+    ) -> Dict[str, str]:
+        """
+        Call GPT model for college editorial review.
+
+        Uses COLLEGE_EDITOR_PROMPT and self.college_model for a completely separate
+        API call tailored to college student audience.
+        """
+        self.logger.info(f"Calling {self.college_model} for college editorial review of Psalm {psalm_number}")
+
+        # Format macro and micro for prompt
+        macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
+        micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+
+        # Build prompt using COLLEGE_EDITOR_PROMPT
+        prompt = COLLEGE_EDITOR_PROMPT.format(
+            psalm_number=psalm_number,
+            introduction_essay=introduction,
+            verse_commentary=verse_commentary,
+            research_bundle=research_bundle,
+            psalm_text=psalm_text or "[Psalm text not available]",
+            macro_analysis=macro_text,
+            micro_analysis=micro_text,
+            analytical_framework=analytical_framework
+        )
+
+        # Save prompt for debugging
+        if self.logger:
+            prompt_file = Path(f"output/debug/college_editor_prompt_psalm_{psalm_number}.txt")
+            prompt_file.parent.mkdir(parents=True, exist_ok=True)
+            prompt_file.write_text(prompt, encoding='utf-8')
+            self.logger.info(f"Saved college editorial prompt to {prompt_file}")
+
+        # Call model (could be GPT-5 or a different model specified via college_model parameter)
+        try:
+            response = self.client.chat.completions.create(
+                model=self.college_model,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                reasoning_effort="high",        # High reasoning for complex editorial work
+                max_completion_tokens=65536     # 64K tokens for detailed commentary
+            )
+
+            # Extract response text
+            response_text = response.choices[0].message.content
+
+            self.logger.info(f"College editorial review generated: {len(response_text)} chars")
+
+            # Save response for debugging
+            if self.logger:
+                response_file = Path(f"output/debug/college_editor_response_psalm_{psalm_number}.txt")
+                response_file.parent.mkdir(parents=True, exist_ok=True)
+                response_file.write_text(response_text, encoding='utf-8')
+                self.logger.info(f"Saved college editorial response to {response_file}")
+
+            # Parse response into sections (uses same parser as regular version)
+            result = self._parse_editorial_response(response_text, psalm_number)
+
+            return result
+
+        except RateLimitError as e:
+            self.logger.error(f"OpenAI API rate limit exceeded: {e}. Please check your plan and billing details.")
+            raise  # Re-raise the exception to be handled by the pipeline
+        except Exception as e:
+            self.logger.error(f"An unexpected error occurred during college editorial review: {e}")
+            raise
+
+    # =========================================================================
+    # END COLLEGE COMMENTARY METHODS
+    # =========================================================================
 
     def _format_analysis_for_prompt(self, analysis: Dict, type: str) -> str:
         """

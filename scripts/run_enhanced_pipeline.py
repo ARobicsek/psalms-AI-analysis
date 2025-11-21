@@ -104,6 +104,7 @@ def run_enhanced_pipeline(
     skip_micro: bool = False,
     skip_synthesis: bool = False,
     skip_master_edit: bool = False,
+    skip_college: bool = False,
     skip_print_ready: bool = False,
     skip_word_doc: bool = False,
     smoke_test: bool = False,
@@ -121,6 +122,7 @@ def run_enhanced_pipeline(
         skip_micro: Skip micro analysis (use existing file)
         skip_synthesis: Skip synthesis (use existing file)
         skip_master_edit: Skip master editing (use existing file)
+        skip_college: Skip college commentary generation (use existing file)
         skip_print_ready: Skip print-ready formatting
         skip_word_doc: Skip .docx generation
         smoke_test: Run in smoke test mode (generates dummy data, no API calls)
@@ -138,7 +140,7 @@ def run_enhanced_pipeline(
     summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
     
     # Check if we are resuming a run (any skip flag is true)
-    is_resuming = any([skip_macro, skip_micro, skip_synthesis, skip_master_edit, skip_print_ready, skip_word_doc]) and not smoke_test
+    is_resuming = any([skip_macro, skip_micro, skip_synthesis, skip_master_edit, skip_college, skip_print_ready, skip_word_doc]) and not smoke_test
 
     initial_data = None
     if is_resuming and summary_json_file.exists():
@@ -166,6 +168,11 @@ def run_enhanced_pipeline(
     edited_verses_file = output_path / f"psalm_{psalm_number:03d}_edited_verses.md"
     edited_assessment_file = output_path / f"psalm_{psalm_number:03d}_assessment.md"
     docx_output_file = output_path / f"psalm_{psalm_number:03d}_commentary.docx"
+    # College edition file paths
+    edited_intro_college_file = output_path / f"psalm_{psalm_number:03d}_edited_intro_college.md"
+    edited_verses_college_file = output_path / f"psalm_{psalm_number:03d}_edited_verses_college.md"
+    edited_assessment_college_file = output_path / f"psalm_{psalm_number:03d}_assessment_college.md"
+    docx_output_college_file = output_path / f"psalm_{psalm_number:03d}_commentary_college.docx"
 
     # =====================================================================
     # STEP 1: Macro Analysis
@@ -649,7 +656,70 @@ def run_enhanced_pipeline(
     if not summary_json_file.exists():
         logger.warning(f"Stats file {summary_json_file} not found. Saving current tracker state.")
         summary_json_file = tracker.save_json(str(output_path))
-        
+
+    # =====================================================================
+    # STEP 4b: College Commentary (Separate API Call)
+    # =====================================================================
+    if not skip_college and not smoke_test:
+        if not edited_intro_college_file.exists():
+            logger.info("\n[STEP 4b] Running MasterEditor for COLLEGE EDITION...")
+            print(f"\n{'='*80}")
+            print(f"STEP 4b: College Commentary Generation")
+            print(f"{'='*80}\n")
+            print("This step generates a separate commentary version for college students")
+            print("Expected duration: 2-5 minutes\n")
+
+            step_start = time.time()
+
+            # Use the same inputs as regular master editor
+            master_editor_college = MasterEditor()  # Uses college_model parameter
+
+            try:
+                result_college = master_editor_college.edit_commentary_college(
+                    introduction_file=synthesis_intro_file,
+                    verse_file=synthesis_verses_file,
+                    research_file=research_file,
+                    macro_file=macro_file,
+                    micro_file=micro_file,
+                    psalm_number=psalm_number
+                )
+            except openai.RateLimitError as e:
+                logger.error(f"PIPELINE HALTED: OpenAI API quota exceeded during College Editor step. {e}")
+                print(f"\n⚠️ PIPELINE HALTED: OpenAI API quota exceeded. Please check your plan and billing details.")
+                sys.exit(1)
+
+            # Save college outputs
+            with open(edited_assessment_college_file, 'w', encoding='utf-8') as f:
+                f.write(f"# Editorial Assessment (College Edition) - Psalm {psalm_number}\n\n")
+                f.write(result_college['assessment'])
+
+            with open(edited_intro_college_file, 'w', encoding='utf-8') as f:
+                f.write(result_college['revised_introduction'])
+
+            with open(edited_verses_college_file, 'w', encoding='utf-8') as f:
+                f.write(result_college['revised_verses'])
+
+            step_duration = time.time() - step_start
+
+            logger.info(f"✓ College editorial assessment saved to {edited_assessment_college_file}")
+            logger.info(f"✓ College revised introduction saved to {edited_intro_college_file}")
+            logger.info(f"✓ College revised verses saved to {edited_verses_college_file}")
+            print(f"✓ College editorial assessment: {edited_assessment_college_file}")
+            print(f"✓ College revised introduction: {edited_intro_college_file}")
+            print(f"✓ College revised verses: {edited_verses_college_file}\n")
+
+            # Rate limit delay
+            time.sleep(delay_between_steps)
+        else:
+            logger.info(f"[STEP 4b] Skipping college commentary (using existing {edited_intro_college_file})")
+            print(f"\nSkipping Step 4b (using existing college commentary files)\n")
+    else:
+        if skip_college:
+            logger.info(f"[STEP 4b] Skipping college commentary generation (--skip-college flag set)")
+            print(f"\nSkipping Step 4b (college commentary not requested)\n")
+        else:
+            logger.info(f"[STEP 4b] Skipping college commentary in smoke test mode")
+
     # =====================================================================
     # STEP 5: Print-Ready Formatting
     # =====================================================================
@@ -740,7 +810,48 @@ def run_enhanced_pipeline(
         logger.info(f"[STEP 6] Skipping .docx generation")
         print(f"\nSkipping Step 6 (.docx generation)\n")
 
+    # =====================================================================
+    # STEP 6b: Generate College .docx Document
+    # =====================================================================
+    if not skip_word_doc and not skip_college and not smoke_test:
+        logger.info("\n[STEP 6b] Creating college edition .docx document...")
+        print(f"\n{'='*80}")
+        print(f"STEP 6b: Generating College Edition Word Document (.docx)")
+        print(f"{'='*80}\n")
 
+        from src.utils.document_generator import DocumentGenerator
+
+        summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+
+        # Use college-specific files if they exist, otherwise fall back to synthesis
+        intro_for_college_docx = edited_intro_college_file if edited_intro_college_file.exists() else synthesis_intro_file
+        verses_for_college_docx = edited_verses_college_file if edited_verses_college_file.exists() else synthesis_verses_file
+
+        if intro_for_college_docx.exists() and verses_for_college_docx.exists() and summary_json_file.exists():
+            try:
+                generator_college = DocumentGenerator(
+                    psalm_num=psalm_number,
+                    intro_path=intro_for_college_docx,
+                    verses_path=verses_for_college_docx,
+                    stats_path=summary_json_file,
+                    output_path=docx_output_college_file
+                )
+                generator_college.generate()
+                logger.info(f"Successfully generated college edition Word document for Psalm {psalm_number}.")
+                print(f"✓ College edition Word document: {docx_output_college_file}\n")
+            except Exception as e:
+                logger.error(f"Failed to generate college .docx file for Psalm {psalm_number}: {e}", exc_info=True)
+                print(f"⚠ Error in college Word document generation (see logs for details)\n")
+        else:
+            logger.warning("Skipping college .docx generation because input files (markdown or stats) were not found.")
+            print(f"⚠ Skipping college Word document generation: input files not found.\n")
+    else:
+        if skip_college:
+            logger.info(f"[STEP 6b] Skipping college .docx generation (--skip-college flag set)")
+        elif skip_word_doc:
+            logger.info(f"[STEP 6b] Skipping college .docx generation (--skip-word-doc flag set)")
+        else:
+            logger.info(f"[STEP 6b] Skipping college .docx in smoke test mode")
 
     # =====================================================================
     # COMPLETE - Generate Pipeline Summary
@@ -778,8 +889,12 @@ def run_enhanced_pipeline(
         'edited_assessment': edited_assessment_file,
         'edited_intro': edited_intro_file,
         'edited_verses': edited_verses_file,
+        'edited_assessment_college': edited_assessment_college_file,
+        'edited_intro_college': edited_intro_college_file,
+        'edited_verses_college': edited_verses_college_file,
         'print_ready': print_ready_file,
         'word_document': docx_output_file,
+        'word_document_college': docx_output_college_file,
         'pipeline_summary': str(summary_json_file).replace('.json', '.md'),
         'pipeline_stats': str(summary_json_file)
     }
@@ -825,6 +940,8 @@ Examples:
                        help='Skip synthesis (use existing file)')
     parser.add_argument('--skip-master-edit', action='store_true',
                        help='Skip master editing (use existing file)')
+    parser.add_argument('--skip-college', action='store_true',
+                       help='Skip college commentary generation (use existing file)')
     parser.add_argument('--skip-print-ready', action='store_true',
                        help='Skip print-ready formatting')
     parser.add_argument('--skip-word-doc', action='store_true',
@@ -862,6 +979,7 @@ Examples:
             skip_micro=args.skip_micro,
             skip_synthesis=args.skip_synthesis,
             skip_master_edit=args.skip_master_edit,
+            skip_college=args.skip_college,
             skip_print_ready=args.skip_print_ready,
             skip_word_doc=args.skip_word_doc,
             smoke_test=args.smoke_test,

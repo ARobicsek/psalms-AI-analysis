@@ -1,8 +1,288 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-20 (Session 129 - COMPLETE ✓)
+**Last Updated**: 2025-11-21 (Session 136 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Streaming Error Retry Logic Added
+**Status**: ✓ V6 System Ready - Liturgical Librarian with Uniqueness Filter
+
+## Session 136 Summary (COMPLETE ✓)
+
+### Liturgical Librarian: Fix is_unique Filter for Phrases
+
+**Objective**: Populate is_unique column and filter out non-unique phrases from liturgical output
+**Result**: ✓ COMPLETE - 47 non-unique phrases filtered from Psalm 8, only unique phrases shown
+
+**Problem**:
+- User noticed Psalm 8 liturgical section included "יָרֵ֥חַ וְ֝כוֹכָבִ֗ים" (moon and stars)
+- This phrase appears in Psalm 136, not unique to Psalm 8
+- Database column `is_unique` existed but all 33,099 values were NULL
+- No SQL filter to exclude non-unique phrases
+
+**Solution**:
+1. **Populated is_unique Column**:
+   - Ran `update_phrase_uniqueness.py` script
+   - Searched entire Tanakh (23,206 verses) using Aho-Corasick
+   - Marked 5,374 phrases as unique (17.9%), 24,721 as non-unique (82.1%)
+
+2. **Added SQL Filter**:
+   - Modified liturgical_librarian.py queries (2 locations)
+   - Added: `AND (i.match_type != 'phrase_match' OR i.is_unique = 1)`
+   - Only unique phrase_match entries now included
+
+**Impact**:
+- Psalm 8: phrase_match reduced from 80 → 33 (47 filtered, 41.6% reduction)
+- Eliminates misleading cross-psalm references
+- More accurate liturgical context for master editor
+- Token savings from processing fewer phrases
+
+**Files Modified**:
+- `data/liturgy.db` - Populated is_unique column
+- `src/agents/liturgical_librarian.py` - Added uniqueness filter
+
+---
+
+## Session 135 Summary (COMPLETE ✓)
+
+### Liturgical Librarian: Critical Fixes for 429 Errors & Claude Fallback
+
+**Objective**: Fix Gemini API 429 errors, retry decorator crash, and Claude fallback
+**Result**: ✓ COMPLETE - AFC disabled (key fix), crashes fixed, Claude fallback working, rate limiting active
+
+**Problems Addressed** (Multiple rounds):
+1. Initial 429 errors from burst requests
+2. `AttributeError: 'NoneType' object has no attribute '_is_retryable_error'`
+3. AFC (Automatic Function Calling) making hidden 10x burst requests per call
+4. Claude fallback not triggering
+5. `AttributeError: module 'google.genai.types' has no attribute 'RetryConfig'`
+
+**Root Cause** (Per developer feedback):
+AFC enabled by default - each `generate_content()` call triggered up to 10 internal API calls in milliseconds. 16 explicit calls = 160 internal calls = instant burst violation.
+
+**Fixes** (3 commits):
+1. **Disabled AFC** - No more hidden burst requests (CRITICAL FIX)
+2. **Fixed retry decorator** - Moved to module-level function to avoid NoneType
+3. **Improved Claude fallback** - Switches on ANY Gemini exception
+4. **Rate limiting** - 0.5s delay between calls
+5. **Intelligent retry** - Exponential backoff for transient errors
+6. **Removed unsupported SDK features** - RetryConfig not available
+
+**Impact**:
+- ✅ AFC disabled: Each call = 1 request (not 10)
+- ✅ No more crashes from retry decorator
+- ✅ Claude fallback works reliably
+- ✅ Rate limiting prevents bursts
+- ✅ Automatic retry with exponential backoff
+- ✅ Portable across SDK versions
+
+**Files Modified**:
+- `src/agents/liturgical_librarian.py` (3 commits) - AFC disable, retry fix, fallback improvements
+
+---
+
+## Session 134 Summary (COMPLETE ✓)
+
+### Liturgical Librarian: Claude Sonnet 4.5 Upgrade & Initialization Fix
+
+**Objective**: Upgrade liturgical librarian fallback from Haiku to Sonnet 4.5 with thinking, fix initialization bug preventing fallback
+**Result**: ✓ COMPLETE - Sonnet 4.5 with extended thinking now fallback, dual-client initialization fixed
+
+**Root Causes**:
+1. **Gemini Quota Exhausted**: 429 errors (10,000 RPD limit hit)
+2. **Critical Initialization Bug**: Claude client NEVER initialized when Gemini succeeded
+   - `if not self.llm_provider:` prevented Claude init if Gemini available
+   - `self.anthropic_client` remained `None` despite API key being present
+   - Runtime fallback impossible even with Session 133 fallback logic
+
+**Fixes**:
+1. **Upgraded to Sonnet 4.5 with Extended Thinking**:
+   - Model: `claude-haiku-4` → `claude-sonnet-4-5`
+   - Added streaming with 5000 token thinking budget
+   - Increased max_tokens: 1000 → 2000
+   - Matches macro/micro analyst pattern
+
+2. **Fixed Initialization Bug**:
+   - **Before**: Only initialized Claude if Gemini failed
+   - **After**: ALWAYS initialize both clients if API keys present
+   - Claude now available as runtime fallback
+
+3. **Updated All Documentation**:
+   - All references: "Claude Haiku" → "Claude Sonnet 4.5"
+   - Module and method docstrings updated
+
+**Files Modified**:
+- `src/agents/liturgical_librarian.py` - Sonnet upgrade + dual-client init fix
+- `src/agents/research_assembler.py` - Docstring update
+
+**Impact**:
+- ✅ Claude Sonnet 4.5 properly initialized as fallback
+- ✅ Extended thinking for deeper analysis
+- ✅ Automatic fallback when Gemini quota exhausted
+- ✅ No more "no Claude fallback available" errors
+- ✅ Matches quality of macro/micro analysts
+
+---
+
+## Session 133 Summary (COMPLETE ✓)
+
+### Liturgical Librarian Bug Fixes & Claude Haiku Fallback (SUPERSEDED BY SESSION 134)
+
+**Objective**: Fix liturgical librarian template bugs and implement Claude Haiku 4.5 fallback for Gemini quota exhaustion
+**Result**: ✓ COMPLETE - Fixed f-string bugs, added intelligent Claude fallback, improved quota error messages
+
+**Issues Fixed**:
+1. **Template Variable Bugs**: Missing `f` prefix on 2 f-strings (lines 235, 252)
+   - Caused `{psalm_chapter}` to appear literally in output instead of being replaced
+2. **Gemini API Quota Exhausted**: 429 RESOURCE_EXHAUSTED error
+   - Silently fell back to code-only summaries
+   - User saw database-style text instead of LLM narratives
+
+**Quota Analysis**:
+- **Gemini 2.5 Pro Tier 1 limits**: 150 RPM, 2M TPM, **10,000 RPD** (daily limit)
+- **Psalm 8 requirements**: 16 API calls (1 full psalm + 15 phrases)
+- **Conclusion**: Daily quota likely exhausted from multiple pipeline runs
+
+**Implementation**:
+1. **Dual-Provider System**:
+   - Primary: Gemini 2.5 Pro (extended thinking capabilities)
+   - Fallback: Claude Haiku 4.5 (cost-effective, high quality)
+   - Automatic switch when Gemini quota exhausted
+
+2. **New Claude Methods**:
+   - `_generate_phrase_llm_summary_claude()` - Phrase summaries with Claude
+   - `_generate_full_psalm_llm_summary_claude()` - Full psalm summaries with Claude
+   - Same prompt structure, optimized for Claude Haiku 4
+
+3. **Enhanced Error Handling**:
+   - Detects quota errors (429/RESOURCE_EXHAUSTED)
+   - Switches `llm_provider` from 'gemini' to 'anthropic' automatically
+   - Retries current request with Claude
+   - Informative messages with quota limits and check link
+
+**Files Modified**:
+- `src/agents/liturgical_librarian.py` - Dual-provider init, template fixes, Claude fallback methods
+
+**Impact**:
+- ✅ Template variables correctly replaced
+- ✅ Continuous LLM summaries even when Gemini quota exhausted
+- ✅ Cost-effective: Claude Haiku 4 ($0.80/M input) vs Gemini ($3.00/M input)
+- ✅ Better error messages help users understand quota issues
+- ✅ No silent degradation to code-only summaries
+
+**Testing**:
+- Gemini quota currently exhausted (confirmed 429 error)
+- Claude Haiku fallback working
+- Template fixes verified
+
+---
+
+## Session 132 Summary (COMPLETE ✓)
+
+### Gemini 2.5 Pro Integration (Session 132)
+
+**Objective**: Migrate Liturgical Librarian from Claude Haiku 4.5 to Gemini 2.5 Pro with extended thinking
+**Result**: ✓ COMPLETE - Full migration with optimized thinking budget configuration
+
+**Note**: Session 133 added Claude Haiku back as intelligent fallback when Gemini quota exhausted.
+
+---
+
+## Session 131 Summary (COMPLETE ✓)
+
+### Enhanced Liturgical Context
+
+**Objective**: Enhance liturgical context in research bundles for more accurate narrative generation
+**Result**: ✓ COMPLETE - 4x increase in liturgical context, improved quotation requirements, database regenerated
+
+**Problem Addressed**:
+Master editor was making mistakes about liturgical usage of individual verses/phrases. Root cause: insufficient liturgical context in research bundles generated by liturgical_librarian.py.
+
+**Improvements**:
+1. **Context Window**: ±10 → ±30 words around matches
+2. **Database Field**: 300 → 1200 char limit for liturgy_context
+3. **Character Extraction**: ±500 → ±800 chars for phrase matches
+4. **LLM Context Display**: 500 → 1000 chars shown to LLM
+5. **Quotation Requirement**: 7-12 → 10-15 Hebrew words minimum
+6. **Bug Fix**: Replaced non-existent `_extract_context_from_words()` method
+
+**Results** (Psalm 8 before full regeneration):
+- Average context: 196.5 → 575.4 chars (↑ 193%)
+- Max context: 300 → 761 chars (↑ 154%)
+- Entries > 300 chars: 0% → 97.3%
+
+**Database Regeneration**:
+- Re-indexed all 150 Psalms with enhanced context extraction
+- All 33,099 entries now have 3-4x more liturgical context
+
+**Files Modified**:
+- `src/liturgy/liturgy_indexer.py` - 3 context improvements + bug fix
+- `src/agents/liturgical_librarian.py` - 3 display/prompt improvements
+- `data/liturgy.db` - Regenerated with enhanced context
+
+---
+
+## Session 130 Summary (COMPLETE ✓)
+
+### College Commentary Feature
+
+**Objective**: Add college-level commentary generation feature
+**Result**: ✓ COMPLETE - Pipeline now generates two complete commentary versions
+
+**Feature Overview**:
+- Separate commentary version for intelligent first-year college students
+- Assumes Hebrew proficiency but explains all scholarly/literary terminology
+- Clear, engaging, occasionally amusing presentation
+- Flexible model configuration (easy to swap models)
+- Skippable via `--skip-college` flag
+
+**Implementation**:
+- **Separate API calls**: College version gets independent GPT-5 call with `reasoning_effort="high"`
+- **Dedicated prompt**: `COLLEGE_EDITOR_PROMPT` emphasizes clarity, defines jargon, conversational tone
+- **Flexible model**: `college_model` parameter (defaults to "gpt-5", easily changed)
+- **Parallel outputs**: `*_college.md` and `*_commentary_college.docx` files
+
+**Files Modified** (2 files):
+1. `src/agents/master_editor.py`:
+   - Added `COLLEGE_EDITOR_PROMPT` (350+ lines)
+   - Added `college_model` parameter to __init__
+   - Added `edit_commentary_college()` method
+   - Added `_perform_editorial_review_college()` method
+
+2. `scripts/run_enhanced_pipeline.py`:
+   - Added `skip_college` parameter
+   - Added Step 4b: College Commentary Generation
+   - Added Step 6b: College .docx Generation
+   - Added `--skip-college` command-line flag
+   - Updated to generate both `psalm_XXX_commentary.docx` AND `psalm_XXX_commentary_college.docx`
+
+**Usage**:
+```bash
+# Generate both versions
+python scripts/run_enhanced_pipeline.py 8
+
+# Skip college version
+python scripts/run_enhanced_pipeline.py 8 --skip-college
+```
+
+**Output Files**:
+- Regular: `psalm_XXX_commentary.docx`
+- College: `psalm_XXX_commentary_college.docx`
+- Plus markdown intermediates (`*_college.md`)
+
+**Impact**:
+✅ Two complete commentary versions from single pipeline run
+✅ Flexible model configuration for cost/quality optimization
+✅ Clear audience differentiation
+✅ Maintains Hebrew richness while maximizing accessibility
+
+**Bug Fix - Date Produced Field**:
+- Fixed "Data not available" issue in both .docx files
+- Modified `src/utils/pipeline_summary.py`:
+  * Added `completion_date: Optional[str] = None` as proper field in `StepStats` dataclass
+  * Updated `__init__` to reconstruct field from saved data
+  * Updated `to_dict()` to serialize field properly
+- Previously `completion_date` was added dynamically at runtime, causing serialization issues
+- Now properly persisted in JSON and read by DocumentGenerator
+
+---
 
 ## Session 129 Summary (COMPLETE ✓)
 

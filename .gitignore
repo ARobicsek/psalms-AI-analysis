@@ -32,6 +32,7 @@ Desktop.ini
 
 # Large database files (too big for GitHub)
 data/psalm_relationships.db
+data/liturgy.db
 
 # Large data/analysis files (too big for GitHub)
 data/analysis_results/*.json
