@@ -1,0 +1,1286 @@
+Cordance Health Insights Bank
+
+Cardiology
+
+USE CASE 1: Guideline-Directed Medical Therapy (GDMT) optimization for
+
+heart failure
+
+Clinical Scenario
+
+A 68-year-old patient with HFrEF (EF 32%) presents for follow-up.
+
+They're currently on a beta-blocker and ACE inhibitor but not on an
+
+SGLT2 inhibitor or mineralocorticoid receptor antagonist (MRA). The
+
+physician is managing a busy clinic with 20+ patients scheduled and
+
+limited time to review complex heart failure guidelines.
+
+Current State Challenges
+
+At a practice level:
+
+Only 5.3% of HFrEF patients achieve complete GDMT within 12 months
+
+    of diagnosis, leaving 94.7% on suboptimal therapy
+
+Difficult to track which patients need medication intensification
+
+    across large patient panels
+
+Real-world data shows patients without full GDMT cost $28,232 per
+
+    person per month vs $14,128 with complete GDMT
+
+At the individual patient level:
+
+Complex 4-pillar therapy requires remembering interactions,
+
+    contraindications, and dosing for multiple drug classes
+
+Prior authorizations for newer agents (SGLT2i, ARNI) create workflow
+
+    delays of 45-60 minutes per patient
+
+Patients face unexpected out-of-pocket costs causing non-adherence
+
+Dose titration schedules are complex and easily forgotten in
+
+    follow-up visits
+
+Cordance Solution
+
+Before Encounter:
+
+Automatically identifies HFrEF patients not on optimal GDMT across
+
+    the physician's panel; creates prioritized list based on greatest
+
+    potential mortality benefit
+
+Pre-loads relevant labs (K+, Cr, BNP) and vitals trends from EHR
+
+Reaches out to patients to capture subjective data (e.g. NYHA class)
+
+    if relevant
+
+During Encounter:
+
+Pre-loads medication history including past intolerance to ACE/ARB
+
+    or reasons for discontinuation
+
+Displays current medication gap analysis with evidence-based
+
+    recommendations and strength of evidence
+
+Provides patient-specific dosing based on renal function, weight,
+
+    blood pressure, and current medications
+
+Flags contraindications and potential drug-drug interactions in
+
+    real-time with clinical significance ratings
+
+Shows comparative out-of-pocket costs for SGLT2i options based on
+
+    patient's insurance with manufacturer co-pay assistance programs
+
+Generates pre-filled orders for medication and monitoring labs with
+
+    appropriate follow-up intervals
+
+After Encounter:
+
+Automatically submits prior authorization with clinical
+
+    justification including ejection fraction, NYHA class, and previous
+
+    medication trials
+
+Schedules follow-up based on titration protocol (2-4 weeks);
+
+    triggers front office follow-up re scheduling
+
+Creates patient-friendly education materials on new medications with
+
+    side effect monitoring instructions
+
+Triggers pharmacy outreach for medication reconciliation and
+
+    adherence support
+
+Impact on Three Pillars
+
+Economics (Value-Based Care & Fee-For-Service):
+
+Complete 4-pillar GDMT reduces cardiovascular death or HF
+
+    hospitalization by 62% (HR 0.38) compared to traditional 2-drug
+
+    therapy, translating to 20-30% reduction in 30-day HF readmissions
+
+Real-world data demonstrates $14,104 per person per month cost
+
+    savings with complete GDMT vs no GDMT ($14,128 vs $28,232)
+
+Captures quality bonuses in value-based contracts (HEDIS Heart
+
+    Failure measures, MIPS stars rating)
+
+Eliminates time-consuming manual prior authorization work (saves
+
+    45-60 min per PA)
+
+Reduces revenue leakage from incomplete billing for HF management
+
+    codes
+
+Estimated financial impact: $200K-$300K annually per cardiologist
+
+    through reduced readmissions and quality bonuses; four-drug regimen
+
+    adds 6+ years of life compared to traditional approach
+
+Quality & Safety:
+
+ARNIs reduce all-cause mortality by 41% (HR 0.59); SGLT2i reduce HF
+
+    hospitalization by 84% when combined with 2-drug GDMT
+
+Reduces HF mortality by 30-40% through evidence-based GDMT; prevents
+
+    one death for every four patients treated over 2 years with
+
+    quadruple therapy
+
+Decreases adverse drug events through automated interaction
+
+    screening and renal dosing
+
+Ensures appropriate monitoring labs are ordered with new medications
+
+    (K+, Cr within 1-2 weeks of initiation)
+
+Reduces medication errors from inappropriate dosing in renal
+
+    insufficiency
+
+Lowers malpractice risk through documented adherence to 2024 ACC
+
+    guidelines
+
+Population Health & Outcomes:
+
+Systematic identification of undertreated HF patients across entire
+
+    practice enables population-level GDMT optimization
+
+Reduces disparities by ensuring all eligible patients offered
+
+    optimal therapy regardless of insurance or socioeconomic status
+
+Improves medication adherence through cost transparency and patient
+
+    education
+
+Enables proactive population management with panel-level gap
+
+    analysis showing real-time GDMT adoption rates
+
+Estimated impact: 25-35% improvement in GDMT adherence rates across
+
+    HFrEF population (from current 5.3% to 30-40% achieving full
+
+    4-pillar therapy)
+
+Physician Value Proposition
+
+\"Set it and forget it\" - Cordance brings patients who need
+
+    optimization to physician's attention proactively
+
+Eliminates cognitive burden of remembering complex multi-drug
+
+    protocols and titration schedules
+
+Removes prior authorization frustration with automated submissions
+
+    achieving >90% approval rates
+
+Improves patient satisfaction through cost transparency and
+
+    coordinated care
+
+Protects against malpractice by documenting guideline-concordant
+
+    care
+
+Enables meeting quality metrics without additional documentation
+
+    burden
+
+Implementation Considerations
+
+Integration with formulary databases for real-time cost information
+
+API connections to major PBMs for prior authorization automation
+
+EHR integration for seamless order entry and lab result monitoring
+
+Natural language processing of visit notes to extract
+
+    contraindications and medication intolerance history
+
+Machine learning to predict which patients most likely to benefit
+
+    from intensification based on clinical characteristics
+
+Measurement & Validation
+
+Track % of HFrEF patients on 3+ pillar therapies (baseline 5.3%,
+
+    target: >80%)
+
+Monitor 30-day and 90-day readmission rates (target: <15%)
+
+Measure time from recommendation to prescription fill (target: <7
+
+    days)
+
+Survey physician satisfaction with workflow integration and time
+
+    savings
+
+Calculate ROI through reduced readmissions and quality bonus
+
+    achievement
+
+USE CASE 2: Atrial Fibrillation Stroke Prevention Optimization
+
+Clinical Scenario
+
+A 72-year-old patient with hypertension and diabetes is found to have
+
+new atrial fibrillation on ECG. The physician needs to quickly assess
+
+stroke and bleeding risk, determine anticoagulation appropriateness, and
+
+choose between multiple DOAC options while considering patient
+
+preferences and cost.
+
+Current State Challenges
+
+CHA2DS2-VASc and HAS-BLED scores require manual calculation during
+
+    busy clinic visits
+
+Difficult to compare multiple DOAC options (dosing, interactions,
+
+    costs) in real-time
+
+Patients often decline anticoagulation due to cost or bleeding
+
+    concerns without full information
+
+Physicians may be unaware of patient's fall risk or other
+
+    contraindications
+
+Follow-up monitoring (renal function for DOACs) often not
+
+    systematically tracked
+
+Prior authorizations vary significantly by insurance plan
+
+Stroke risk often underestimated leading to undertreatment
+
+13% inappropriate DOAC dosing in US (9.4% underdosed, 3.4%
+
+    overdosed); rates higher in Asia (32%)
+
+Cordance Solution
+
+Before Encounter:
+
+Automatically calculates and trends CHA2DS2-VASc score using
+
+    structured EHR data
+
+Identifies new AFib diagnoses across panel requiring anticoagulation
+
+    assessment
+
+Pulls relevant history (prior bleeds, falls, medication adherence,
+
+    renal function)
+
+During Encounter:
+
+Displays real-time stroke vs bleeding risk visualization with annual
+
+    risk percentages
+
+Provides personalized DOAC comparison table including appropriate
+
+    dosing based on age, weight, renal function; patient's estimated
+
+    out-of-pocket costs for each option; drug-drug interactions with
+
+    current medications; reversal agent availability; and dosing
+
+    frequency (QD vs BID)
+
+Flags high-risk scenarios (prior ICH, severe CKD, multiple falls)
+
+Generates shared decision-making tool for patient discussion with
+
+    visual aids
+
+After Encounter:
+
+Auto-submits prior authorization with stroke risk calculation and
+
+    clinical justification
+
+Orders appropriate monitoring labs (CBC, Cr) with auto-scheduling at
+
+    appropriate intervals (baseline, 3 months, then every 6 months)
+
+Triggers pharmacist consultation for complex cases
+
+Schedules follow-up visit at appropriate interval based on risk
+
+Sends patient education on AFib, stroke risk, and anticoagulation
+
+Impact on Three Pillars
+
+Economics:
+
+Prevents costly strokes ($140K average cost; lifetime impact
+
+    >$500K) through appropriate anticoagulation
+
+DOACs reduce stroke/systemic embolism by 19%, intracranial
+
+    hemorrhage by 52%, and all-cause death by 10% compared to warfarin
+
+Achieves quality bonuses for AFib anticoagulation measures (HEDIS,
+
+    MIPS)
+
+Reduces prior authorization burden (saves 10-15 minutes per patient)
+
+Optimizes anticoagulant choice based on formulary and cost-sharing
+
+Estimated impact: $120K-$180K annually per cardiologist through
+
+    stroke prevention and quality measures
+
+Quality & Safety:
+
+Reduces stroke incidence by 60-70% in high-risk AFib patients with
+
+    appropriate anticoagulation
+
+Minimizes bleeding complications through appropriate risk
+
+    stratification
+
+Ensures correct DOAC dosing (studies show 13-32% prescribed
+
+    incorrectly depending on geography)
+
+Prevents medication errors in patients with renal insufficiency
+
+Provides documentation of informed consent and shared
+
+    decision-making
+
+Population Health & Outcomes:
+
+Systematic identification of untreated high-risk AFib patients
+
+Reduces stroke-related disability and mortality at population level
+
+Enables proactive monitoring for DOAC safety (renal function
+
+    trending)
+
+Addresses health equity by ensuring all eligible patients offered
+
+    anticoagulation
+
+Estimated impact: 50-60% improvement in anticoagulation rates for
+
+    eligible AFib patients
+
+Physician Value Proposition
+
+Eliminates mental math of risk calculators during busy clinic
+
+Provides evidence-based ammunition for difficult patient
+
+    conversations about anticoagulation
+
+Real-time cost information enables productive medication selection
+
+    discussion
+
+Automated prior authorization removes significant workflow friction
+
+Malpractice protection through documented risk assessment and
+
+    patient education
+
+Panel-level surveillance identifies undertreated patients before
+
+    adverse events
+
+Implementation Considerations
+
+Integration with ECG/monitoring databases to identify new AFib
+
+    diagnoses
+
+Real-time formulary and patient cost-sharing databases
+
+Risk calculator algorithms embedded in inference engine
+
+Patient portal integration for education materials
+
+Claims data integration to identify anticoagulation-related outcomes
+
+Measurement & Validation
+
+Track % of high-risk AFib patients (CHA2DS2-VASc ≥2) on
+
+    anticoagulation (target: >85%)
+
+Monitor appropriate DOAC dosing rates (target: >95%)
+
+Measure stroke and major bleeding event rates
+
+Calculate time from AFib diagnosis to anticoagulation initiation
+
+    (target: <14 days)
+
+Survey patient satisfaction with shared decision-making process
+
+USE CASE 3: Cardiac Imaging Appropriateness and Utilization Management
+
+Clinical Scenario
+
+A 55-year-old patient with atypical chest pain is being evaluated. The
+
+physician considers ordering a stress test but is uncertain about
+
+appropriateness criteria, whether cardiac CT might be better, and which
+
+local facility offers best value.
+
+Current State Challenges
+
+Appropriateness criteria (AUC) for cardiac imaging are complex and
+
+    frequently updated
+
+Physicians often unaware which imaging studies require prior
+
+    authorization
+
+Prior authorization process is time-consuming (20-30 minutes per
+
+    request)
+
+Patients often unaware of out-of-pocket costs leading to payment
+
+    surprises and no-shows
+
+Difficult to compare quality and cost across multiple imaging
+
+    facilities
+
+Over-ordering of low-value imaging contributes to healthcare waste
+
+Cordance Solution
+
+Before Encounter:
+
+Identifies patients with symptoms suggestive of CAD needing risk
+
+    stratification
+
+Pulls relevant history (prior cardiac testing, cardiac risk factors,
+
+    functional capacity)
+
+During Encounter:
+
+Provides real-time appropriateness rating (appropriate/may be
+
+    appropriate/rarely appropriate) based on current AUC
+
+Suggests optimal test based on clinical scenario: Exercise stress
+
+    echo vs pharmacologic stress; Cardiac CT vs invasive angiography;
+
+    Stress MRI for special situations
+
+Displays comparative facility analysis: Patient's out-of-pocket
+
+    cost at each facility; Distance from patient's home; Next available
+
+    appointment; Quality metrics (accreditation, volume)
+
+Flags if prior authorization required and probability of approval
+
+After Encounter:
+
+Auto-generates and submits prior authorization with AUC rating and
+
+    clinical justification
+
+Integrates with scheduling system to book test at patient-preferred
+
+    facility
+
+Sends patient cost estimate and preparation instructions
+
+Alerts physician if prior authorization denied with suggested
+
+    alternative approaches
+
+Impact on Three Pillars
+
+Economics:
+
+Reduces inappropriate imaging saving $8,000-$12,000 per 100
+
+    patients screened
+
+Eliminates prior authorization administrative costs (30 min ×
+
+    $150/hr = $75 per test)
+
+Achieves imaging stewardship bonuses in value-based contracts
+
+Reduces unnecessary downstream procedures from false-positive
+
+    results
+
+Optimizes facility selection balancing quality and cost
+
+Estimated impact: $80K-$120K annually per cardiologist through
+
+    reduced inappropriate testing
+
+Quality & Safety:
+
+Ensures appropriate patients receive timely diagnostic testing
+
+Reduces radiation exposure from inappropriate CT/nuclear studies
+
+Improves diagnostic accuracy by selecting optimal test for clinical
+
+    scenario
+
+Prevents unnecessary invasive procedures from false-positive
+
+    findings
+
+Documents adherence to evidence-based appropriateness criteria
+
+Population Health & Outcomes:
+
+Reduces disparities in access to cardiac imaging (cost transparency
+
+    enables informed decisions)
+
+Improves cardiovascular outcomes through timely appropriate
+
+    diagnostic testing
+
+Decreases healthcare waste from low-value imaging
+
+Enables population-level monitoring of imaging utilization patterns
+
+Estimated impact: 20-30% reduction in inappropriate cardiac imaging
+
+Physician Value Proposition
+
+Eliminates need to look up complex appropriateness criteria during
+
+    clinic
+
+Removes prior authorization burden (saves 20-30 minutes per test)
+
+Empowers productive patient conversations about testing options and
+
+    costs
+
+Protects against payer denials through documented AUC adherence
+
+Improves patient satisfaction through transparent cost information
+
+    and coordinated scheduling
+
+Implementation Considerations
+
+Integration with current appropriateness use criteria (AUC)
+
+    databases
+
+API connections to imaging facilities for scheduling and pricing
+
+Real-time insurance benefit verification for out-of-pocket cost
+
+    estimates
+
+Prior authorization platform integration with major payers
+
+Machine learning to predict prior authorization approval likelihood
+
+Measurement & Validation
+
+Track % of imaging orders rated 'appropriate' per AUC (target:
+
+    >90%)
+
+Monitor prior authorization approval rates (target: >95%)
+
+Measure time from order to study completion (target: <14 days)
+
+Calculate cost savings from reduced inappropriate imaging
+
+Survey physician and patient satisfaction with ordering process
+
+Infectious Disease
+
+USE CASE 1: Antimicrobial Stewardship - Context-Aware Antibiotic
+
+Optimization
+
+Clinical Scenario
+
+A 45-year-old patient with diabetes presents with acute bacterial
+
+sinusitis. The physician is considering antibiotics but needs to balance
+
+treatment benefit against antimicrobial resistance, C. difficile risk,
+
+and patient-specific factors like recent antibiotic exposure and local
+
+resistance patterns.
+
+Current State Challenges
+
+Antibiotics over-prescribed for viral infections (\~30%
+
+    inappropriately prescribed)
+
+Physicians lack real-time access to local antibiotic resistance
+
+    patterns
+
+Difficult to remember which antibiotics increase C. diff risk
+
+Optimal duration of therapy often uncertain (many patients
+
+    overtreated)
+
+Drug allergies often incorrectly documented leading to unnecessary
+
+    broad-spectrum use
+
+Prior antibiotic exposure history not readily available
+
+Cordance Solution
+
+Before Encounter:
+
+Reviews patient's antibiotic exposure history (past 90 days)
+
+Flags prior C. difficile infections or high-risk factors
+
+Extracts documented drug allergies and assesses likelihood of true
+
+    allergy
+
+Pulls local antibiogram data relevant to suspected infection
+
+During Encounter:
+
+Provides likelihood assessment: bacterial vs viral infection based
+
+    on symptoms, vital signs, exam
+
+If bacterial infection likely, displays antibiotic recommendations
+
+    ranked by: Spectrum appropriateness (narrow over broad when
+
+    appropriate); Local resistance patterns for suspected organism; C.
+
+    difficile risk (fluoroquinolones flagged as high-risk); Drug
+
+    interactions with current medications; Patient's out-of-pocket
+
+    cost; QD vs BID/TID dosing
+
+Suggests optimal duration based on current evidence (e.g., 5 days
+
+    for uncomplicated sinusitis, not 10-14)
+
+Flags and offers de-labeling workflow if questionable penicillin
+
+    allergy
+
+After Encounter:
+
+Sends patient instructions on duration, side effects to watch for
+
+Schedules follow-up call or visit if not improving in 48-72 hours
+
+Triggers pharmacy notification if high C. diff risk (consider
+
+    probiotic)
+
+Provides delayed prescription option for selected conditions
+
+Generates stewardship metrics for physician feedback (quarterly
+
+    report card)
+
+Impact on Three Pillars
+
+Economics:
+
+Reduces unnecessary antibiotic prescriptions by 20-30% saving drug
+
+    costs
+
+Prevents costly C. difficile infections ($15K-$25K per case)
+
+Optimizes antibiotic selection reducing adverse drug events and
+
+    hospitalizations
+
+Achieves antibiotic stewardship quality bonuses
+
+Estimated impact: $60K-$90K annually per PCP through infection
+
+    prevention and optimal prescribing
+
+Quality & Safety:
+
+Reduces antimicrobial resistance through appropriate prescribing
+
+Decreases C. difficile infection rates by 25-40%
+
+Minimizes adverse drug reactions through optimal agent and duration
+
+    selection
+
+Improves treatment success rates through resistance pattern
+
+    incorporation
+
+Enables appropriate penicillin allergy de-labeling (80% of labeled
+
+    allergies not true allergies)
+
+Population Health & Outcomes:
+
+Community-level reduction in antimicrobial resistance
+
+Decreases antibiotic-associated complications at population scale
+
+Enables systematic stewardship across entire practice
+
+Preserves antibiotic effectiveness for future generations
+
+Estimated impact: 20-30% reduction in inappropriate antibiotic
+
+    prescriptions practice-wide
+
+Physician Value Proposition
+
+Eliminates need to consult multiple resources (local antibiogram,
+
+    duration guidelines)
+
+Provides evidence-based justification for not prescribing
+
+    antibiotics (viral infections)
+
+Real-time resistance data enables optimal empiric therapy
+
+Protects patients from C. diff and other complications
+
+Quarterly stewardship metrics with peer comparison motivates best
+
+    practice
+
+Implementation Considerations
+
+Integration with local hospital and reference laboratory antibiogram
+
+    data
+
+Natural language processing for symptom-based bacterial vs viral
+
+    likelihood
+
+Drug allergy assessment algorithms (validated criteria for low-risk
+
+    allergies)
+
+Pharmacy benefit integration for cost estimation
+
+Provider feedback dashboard with peer benchmarking
+
+Measurement & Validation
+
+Track antibiotic prescribing rate per 100 patient visits (benchmark
+
+    <15 for adults)
+
+Monitor % appropriate antibiotic selection based on local resistance
+
+    patterns (target: >85%)
+
+Measure % prescriptions with evidence-based durations (target:
+
+    >90%)
+
+Calculate C. difficile infection rates per 1,000 patients
+
+Assess treatment failure rates requiring second-line therapy
+
+Primary Care
+
+USE CASE 1: Comprehensive Preventive Care Optimization and Gap Closure
+
+Clinical Scenario
+
+A 52-year-old patient presents for annual physical. They are due for
+
+multiple preventive services (colorectal cancer screening, mammogram,
+
+lipid screening, immunizations) but physician is uncertain which are
+
+covered, when last done, and how to coordinate scheduling across
+
+multiple facilities while addressing cost barriers.
+
+Current State Challenges
+
+Patients often overdue for multiple preventive services
+
+    simultaneously
+
+Physicians must manually review previous visit notes and outside
+
+    records to determine what's due
+
+Preventive care guidelines change frequently (USPSTF, CDC)
+
+Insurance coverage for preventive services varies and isn't
+
+    transparent at point of care
+
+Scheduling across multiple facilities (mammography, endoscopy, lab)
+
+    is time-consuming
+
+Cost barriers prevent patients from completing recommended screening
+
+Cordance Solution
+
+Before Encounter:
+
+Automated preventive care gap analysis across multiple domains:
+
+    Cancer screening (colonoscopy, mammogram, cervical cancer, lung CT
+
+    if high-risk); Cardiovascular prevention (lipid screening, BP check,
+
+    aspirin if appropriate); Immunizations (flu, pneumococcal, shingles,
+
+    COVID-19, Tdap); Screening labs (diabetes screening if risk factors,
+
+    CKD screening if diabetic); Behavioral health (depression screening
+
+    PHQ-9, alcohol use AUDIT-C); Bone health (DEXA if post-menopausal
+
+    woman with risk factors); Abdominal aortic aneurysm (men 65-75 with
+
+    smoking history)
+
+Prioritizes gaps based on highest mortality/morbidity impact, most
+
+    overdue services, and opportunities to complete multiple services
+
+    efficiently
+
+Identifies patient's insurance coverage and estimated out-of-pocket
+
+    costs
+
+During Encounter:
+
+Displays visual 'prevention dashboard' with traffic light system:
+
+    Green (Up to date); Yellow (Due soon within 6 months); Red (Overdue)
+
+Provides one-click ordering for all due preventive services
+
+For each service, shows: Frequency recommendation (evidence grade);
+
+    Last completion date; Patient's insurance coverage (preventive
+
+    benefit vs cost-sharing); Estimated out-of-pocket cost; Nearby
+
+    facilities accepting patient's insurance; Next available
+
+    appointments
+
+Flags shared decision-making discussions needed (e.g., lung cancer
+
+    screening, prostate cancer screening)
+
+Generates patient-friendly explanation of benefits and importance of
+
+    each service
+
+After Encounter:
+
+Automatically schedules appointments at patient-preferred facilities
+
+Submits all necessary orders to facilities
+
+Sends patient reminders (text/email/portal) before each appointment
+
+Provides preparation instructions (colonoscopy bowel prep, fasting
+
+    for lipids)
+
+Triggers follow-up tracking system for results: Normal results
+
+    (patient notification, update prevention registry); Abnormal results
+
+    (alert PCP, schedule follow-up appointment)
+
+Impact on Three Pillars
+
+Economics:
+
+Early cancer detection dramatically reduces treatment costs (Stage I
+
+    vs Stage IV colorectal cancer: $50K vs $200K+)
+
+Captures maximum quality bonuses for preventive care measures
+
+    (HEDIS, MIPS stars)
+
+Reduces downstream costs from preventable disease (diabetes
+
+    prevention, CV risk reduction)
+
+Optimizes facility selection balancing quality and cost
+
+Prevents revenue leakage from incomplete preventive service billing
+
+Estimated impact: $150K-$200K annually per PCP through quality
+
+    bonuses and downstream cost reduction
+
+Quality & Safety:
+
+Increases cancer screening rates by 40-60% through systematic gap
+
+    closure
+
+Enables early detection when treatment most effective
+
+Ensures evidence-based prevention aligned with current USPSTF
+
+    guidelines
+
+Improves immunization rates preventing infectious disease
+
+    complications
+
+Systematic depression screening identifies mental health needs
+
+Reduces disparities by proactively identifying gaps for all patients
+
+Population Health & Outcomes:
+
+Systematic prevention for entire patient panel, not just those who
+
+    seek care frequently
+
+Reduces population-level cancer mortality through early detection
+
+Prevents progression to chronic disease (diabetes, CV disease)
+
+    through risk factor management
+
+Addresses social determinants by identifying and overcoming cost
+
+    barriers
+
+Estimated impact: 25-35% improvement in overall preventive service
+
+    completion rates
+
+Physician Value Proposition
+
+Eliminates time-consuming manual review of what's due
+
+\"One-click\" ordering of comprehensive prevention panel
+
+Automated scheduling across multiple facilities saves significant
+
+    time
+
+Real-time cost information enables productive patient conversations
+
+Automatic result tracking prevents patients from 'falling through
+
+    cracks'
+
+Meets quality measures effortlessly without additional documentation
+
+Implementation Considerations
+
+Integration with USPSTF and CDC guideline databases with regular
+
+    updates
+
+Insurance benefit verification for preventive service coverage
+
+Facility network database with appointment availability and pricing
+
+Results interface with multiple imaging and lab facilities
+
+Abnormal result alert system with PCP notification
+
+Measurement & Validation
+
+Track completion rates for key preventive services: Colorectal
+
+    cancer screening age 45-75 (target: >80%); Breast cancer screening
+
+    age 50-74 (target: >80%); Cervical cancer screening age 21-65
+
+    (target: >85%); Diabetes screening in overweight/obese adults
+
+    (target: >70%); Immunization rates (flu >70%, pneumococcal >80%
+
+    in age 65+)
+
+Monitor time from recommendation to completion (target: <60 days)
+
+Calculate early-stage cancer detection rates
+
+Survey patient satisfaction with prevention coordination
+
+USE CASE 2: Diabetes Comprehensive Management and Complication
+
+Prevention
+
+Comprehensive diabetes care bundle addressing HbA1c control, medication
+
+intensification (GLP-1 RA, SGLT2i based on comorbidities), complication
+
+screening (retinopathy, nephropathy, neuropathy), ASCVD risk reduction,
+
+and care coordination with specialists. Targets include >70% achieving
+
+HbA1c <8%, >85% on appropriate statin, >80% annual retinal exam, and
+
+>85% annual foot exam. Financial impact: $200K-$300K annually per PCP
+
+through complication prevention.
+
+USE CASE 3: Chronic Kidney Disease Early Detection and Progression
+
+Prevention
+
+Systematic CKD identification through eGFR/UACR monitoring, SGLT2i
+
+optimization (proven to slow progression by 30-40%), medication renal
+
+dosing, nephrology referral at appropriate stage, and ESRD prevention.
+
+CKD affects 90% unaware; only at stage G4-G5 do symptoms appear.
+
+Financial impact: $2M-$5M saved per 100 CKD patients through
+
+prevention of 10-15 ESRD cases requiring dialysis ($90K/year).
+
+USE CASE 4: Polypharmacy Optimization and Deprescribing in Older Adults
+
+Addresses polypharmacy in >40% of older adults through Beers Criteria
+
+screening, anticholinergic burden reduction, falls risk mitigation, and
+
+systematic deprescribing. Targets 30-50% reduction in potentially
+
+inappropriate medications. Financial impact: $80K-$120K saved per 100
+
+older adults through prevention of adverse drug events ($7K-$15K per
+
+event) and falls/fractures ($30K-$60K per hip fracture).
+
+USE CASE 5: Social Determinants of Health Identification and Community
+
+Resource Linkage
+
+Systematic SDOH screening (PRAPARE/AHC tools) identifying food
+
+insecurity, housing instability, transportation barriers, financial
+
+strain. One-click referrals to community resources with closed-loop
+
+tracking. Addresses root causes of medication non-adherence and missed
+
+appointments. Financial impact: $120K-$180K saved per 100 high-need
+
+patients through hospitalization and ED visit reduction. Estimated
+
+20-35% improvement in chronic disease control when SDOH needs addressed.
+
+USE CASE 4: Familial Hypercholesterolemia Detection and Cascade
+
+Screening
+
+FH significantly underdiagnosed (<10% of cases identified). Automated
+
+Dutch Lipid Clinic Network (DLCN) score calculation flags potential
+
+cases. Genetic testing coordination, PCSK9i prior authorization, family
+
+cascade screening tracking. Prevention of premature MI through early
+
+intensive lipid lowering. Financial impact: $200K-$300K per 100 FH
+
+patients through ASCVD event prevention. Identification of 50-100
+
+previously undiagnosed FH cases per 10,000 patients screened.
+
+USE CASE 5: Post-MI Secondary Prevention Bundle Optimization
+
+Comprehensive post-MI care bundle: dual antiplatelet therapy,
+
+high-intensity statin, beta-blocker, ACE-I/ARB, cardiac rehab enrollment
+
+(from <30% to >70%), smoking cessation. Bundle scorecard shows which
+
+components addressed. Coordination with pharmacy for medication
+
+reconciliation and adherence monitoring. Reduces 1-year mortality by
+
+25-40%, recurrent MI by 30-50%. Financial impact: $250K-$400K annually
+
+per cardiologist. Prevents recurrent MACE by 30-40% in first year
+
+post-MI.
+
+USE CASE 2: HIV Pre-Exposure Prophylaxis (PrEP) Identification and
+
+Streamlined Initiation
+
+PrEP significantly underutilized (only \~25% of eligible individuals
+
+prescribed). Systematic identification of eligible patients, baseline
+
+testing automation, specialty pharmacy enrollment with co-pay
+
+assistance, quarterly monitoring setup. >95% HIV prevention efficacy
+
+when adherent. Financial impact: $2M-$5M in avoided HIV treatment
+
+costs per 100 PrEP-eligible patients (lifetime treatment cost $450K per
+
+case). Estimated 60-80% increase in PrEP uptake among eligible patients.
+
+USE CASE 3: Hepatitis C Cure & Specialty Pharmacy Capture
+
+HCV screening rates remain low (\~15% in eligible population); 40%
+
+screening-to-treatment gap. Identification of untreated HCV patients,
+
+genotype-specific DAA selection, complex prior authorization automation,
+
+internal specialty pharmacy routing for 340B margin capture. >95% cure
+
+rates with DAA therapy. Financial impact: $5M-$10M in avoided
+
+complications per 100 HCV patients cured (prevents cirrhosis, HCC, liver
+
+transplant). Target 3-5x increase in HCV screening rates, 70-85% cure
+
+rate in identified patients.
+
+USE CASE 4: Diabetic Foot Infection Rapid Assessment and Limb
+
+Preservation Pathway
+
+Diabetic foot infections leading cause of non-traumatic amputations.
+
+IDSA severity classification, osteomyelitis detection (probe-to-bone
+
+test, imaging), appropriate antibiotic selection based on severity and
+
+local MRSA prevalence, OPAT facilitation, urgent podiatry/vascular
+
+referral coordination. Reduces major amputation rates by 50-70%.
+
+Financial impact: $500K-$1M saved per 10 patients with prevention of
+
+one major amputation. Target 40-60% reduction in major amputations in
+
+diabetic population.
+
+Summary
+
+These use cases demonstrate Cordance Health's potential to transform
+
+clinical decision support across cardiology, infectious disease, and
+
+primary care domains. Each use case addresses all three pillars
+
+(Economics, Quality & Safety, Population Health), Provides Clear
+
+physician value through reduced cognitive burden and automated
+
+workflows, and is measurable with specific targets. The platform's
+
+ability to anticipate needs, provide context-aware recommendations,
+
+integrate seamlessly into workflow, and coordinate across the care
+
+ecosystem positions Cordance Health as a transformative solution for
+
+healthcare's most pressing challenges.
+
+
+
+References
+
+[1] Greene SJ, et al. Eligibility and Projected Benefits of Rapid Initiation of Quadruple Therapy for Newly Diagnosed Heart Failure. JACC Heart Fail. 2024;12(8):1365-1377. https://doi.org/10.1016/j.jchf.2024.03.001
+
+[2] McMurray JJV, et al. Angiotensin-neprilysin inhibition versus enalapril in heart failure. N Engl J Med. 2014;371(11):993-1004. https://doi.org/10.1056/NEJMoa1409077
+
+[3] McMurray JJV, et al. Dapagliflozin in Patients with Heart Failure and Reduced Ejection Fraction. N Engl J Med. 2019;381(21):1995-2008. https://doi.org/10.1056/NEJMoa1911303
+
+[4] Vaduganathan M, et al. Quadruple medical therapy for heart failure. Lancet. 2020;396(10252):548-550. https://doi.org/10.1016/S0140-6736(20)32888-2
+
+[5] American College of Cardiology. Real-World Costs of Heart Failure GDMT. 2024. https://www.acc.org/Latest-in-Cardiology/Articles/2024/03/18/19/31/Real-World-Costs-of-Heart-Failure-GDMT
+
