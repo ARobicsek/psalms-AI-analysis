@@ -66,3 +66,4 @@ monitor_scorer.sh
 run_scorer_with_monitoring.sh
 *.backup
 
+data/liturgy.db
