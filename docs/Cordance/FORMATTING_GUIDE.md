@@ -54,23 +54,29 @@ This ensures:
 
 #### Heading 1
 - **Used for**: Specialty name (e.g., "Cardiology", "Primary Care")
-- **Style**: Heading 1 (from style definition)
-- **Direct formatting**: NONE - inherit all formatting from style
+- **Style**: Heading 1
+- **Font**: Times New Roman, 17pt, Bold
+- **Color**: #2E74B5 (blue)
+- **Direct formatting**: Apply font/size/color directly (no style inheritance needed)
 - **Navigation level**: Top level
 - **Count per document**: 1
 
 #### Heading 2
 - **Used for**: USE CASE titles
-- **Style**: Heading 2 (from style definition)
-- **Direct formatting**: NONE - inherit all formatting from style
+- **Style**: Heading 2
+- **Font**: Times New Roman, 14pt, Bold
+- **Color**: #2E74B5 (blue)
+- **Direct formatting**: Apply font/size/color directly (no style inheritance needed)
 - **Pattern**: "USE CASE N: [Description]" where N is 1-10
 - **Navigation level**: Second level
 - **Count per document**: ~10
 
 #### Heading 3
 - **Used for**: Major section headings
-- **Style**: Heading 3 (from style definition)
-- **Direct formatting**: NONE - inherit all formatting from style
+- **Style**: Heading 3
+- **Font**: Times New Roman, 13pt, Bold
+- **Color**: #1F4D78 (darker blue)
+- **Direct formatting**: Apply font/size/color directly (no style inheritance needed)
 - **Examples**:
   - Clinical Scenario
   - Current State Challenges
@@ -85,8 +91,10 @@ This ensures:
 
 #### Heading 4
 - **Used for**: Subsection headings
-- **Style**: Heading 4 (from style definition)
-- **Direct formatting**: NONE - inherit all formatting from style
+- **Style**: Heading 4
+- **Font**: Times New Roman, 11pt, Italic (not bold)
+- **Color**: #2E74B5 (blue)
+- **Direct formatting**: Apply font/size/color directly (no style inheritance needed)
 - **Examples**:
   - Before Encounter
   - During Encounter
@@ -99,8 +107,15 @@ This ensures:
 
 ### Normal Text Styles
 
+#### Body Text
+- **Font**: Arial, 11pt
+- **Color**: Black (default)
+- **Used for**: All regular paragraph text, including Clinical Scenario descriptions
+- **Count per document**: ~100-200 paragraphs
+
 #### "At a/the ... level:" Lines
 - **Style**: Normal (No Style) or Body Text
+- **Font**: Arial, 11pt
 - **NOT Heading 4** - these are introductory text, not section headings
 - **Examples**:
   - "At a practice level:"
@@ -108,9 +123,17 @@ This ensures:
 
 #### List Paragraph (Bulleted Lists)
 - **Style**: List Paragraph
+- **Font**: Arial, 11pt
 - **Used for**: All bullet point content
 - **Bullet style**: Automatic from style definition
 - **Count per document**: ~450-500
+
+#### Reference Markers
+- **Format**: Superscript
+- **Font**: Arial, 9pt (smaller than body text)
+- **Used for**: Citation markers like [1], [2], [3], etc.
+- **Example**: "reduces mortality by 33%[1]" where [1] is superscript
+- **Count per document**: ~60-80 references
 
 ## How to Create a New Document
 
