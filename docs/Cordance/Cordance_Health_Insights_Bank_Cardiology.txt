@@ -1,0 +1,483 @@
+Cardiology
+USE CASE 1: Guideline-Directed Medical Therapy (GDMT) optimization for heart failure
+Clinical Scenario
+A 68-year-old patient with HFrEF (EF 32%) presents for follow-up. They're currently on a beta-blocker and ACE inhibitor but not on an SGLT2 inhibitor or mineralocorticoid receptor antagonist (MRA). The physician is managing a busy clinic with 20+ patients scheduled and limited time to review complex heart failure guidelines.
+Current State Challenges
+At a practice level:
+Only 5.3% of HFrEF patients achieve complete GDMT within 12 months of diagnosis, leaving 94.7% on suboptimal therapy[1]
+Difficult to track which patients need medication intensification across large patient panels
+Real-world data shows patients without full GDMT cost $28,232 per person per month vs $14,128 with complete GDMT[2]
+At the individual patient level:
+Complex 4-pillar therapy requires remembering interactions, contraindications, and dosing for multiple drug classes
+Prior authorizations for newer agents (SGLT2i, ARNI) create workflow delays of 45-60 minutes per patient
+Patients face unexpected out-of-pocket costs causing non-adherence
+Dose titration schedules are complex and easily forgotten in follow-up visits
+Cordance Solution
+Before Encounter
+Automatically identifies HFrEF patients not on optimal GDMT across the physician's panel; creates prioritized list based on greatest potential mortality benefit
+Pre-loads relevant labs (K+, Cr, BNP) and vitals trends from EHR
+Reaches out to patients to capture subjective data (e.g. NYHA class) if relevant
+During Encounter
+Pre-loads medication history including past intolerance to ACE/ARB or reasons for discontinuation
+Displays current medication gap analysis with evidence-based recommendations and strength of evidence
+Provides patient-specific dosing based on renal function, weight, blood pressure, and current medications
+Flags contraindications and potential drug-drug interactions in real-time with clinical significance ratings
+Shows comparative out-of-pocket costs for SGLT2i options based on patient's insurance with manufacturer co-pay assistance programs
+Generates pre-filled orders for medication and monitoring labs with appropriate follow-up intervals
+After Encounter
+Automatically submits prior authorization with clinical justification including ejection fraction, NYHA class, and previous medication trials
+Schedules follow-up based on titration protocol; triggers front office follow-up regarding scheduling
+Creates patient-friendly education materials on new medications
+Triggers pharmacy outreach for medication reconciliation
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+Reduces 30-day HF readmissions by 20-30% through optimal medical therapy
+Captures quality bonuses in value-based contracts (HEDIS Heart Failure measures)
+Eliminates time-consuming manual prior authorization work (saves 15-20 min per PA)
+Reduces revenue leakage from incomplete billing for HF management codes
+Estimated financial impact: $180K-$250K annually per cardiologist through reduced readmissions and quality bonuses
+Quality & Safety
+ARNIs reduce mortality by 20% in patients with HFrEF compared to enalapril[3]
+SGLT2 inhibitors reduce the risk of cardiovascular death or hospitalization for heart failure by 26% in HFrEF patients[4]
+Complete quadruple therapy reduces mortality by 30-40% compared to partial therapy[5]
+Decreases adverse drug events through automated interaction screening
+Ensures appropriate monitoring labs are ordered with new medications
+Reduces medication errors from inappropriate dosing in renal insufficiency
+Population Health & Outcomes
+Systematic identification of undertreated HF patients across entire practice
+Reduces disparities by ensuring all eligible patients offered optimal therapy
+Improves medication adherence through cost transparency and patient education
+Enables proactive population management with panel-level gap analysis
+Estimated impact: 25-35% improvement in GDMT adherence rates across HFrEF population
+Physician Value Proposition
+'Set it and forget it' - Cordance brings patients who need optimization to physician's attention
+Eliminates cognitive burden of remembering complex multi-drug protocols
+Removes prior authorization frustration with automated submissions
+Improves patient satisfaction through cost transparency and coordinated care
+Protects against malpractice by documenting guideline-concordant care
+Enables meeting quality metrics without additional documentation burden
+Implementation Considerations
+Integration with formulary databases for real-time cost information
+API connections to major PBMs for prior authorization automation
+EHR integration for seamless order entry and lab result monitoring
+Physician education on GDMT guidelines and Cordance workflow
+Patient education materials and pharmacy coordination protocols
+USE CASE 2: Atrial Fibrillation Stroke Prevention Optimization
+Clinical Scenario
+A 72-year-old patient with newly diagnosed atrial fibrillation presents for cardiology consultation. They have hypertension and diabetes but are not currently on anticoagulation. The physician needs to quickly calculate stroke risk, assess bleeding risk, and initiate appropriate therapy while managing a full clinic schedule.
+Current State Challenges
+At a practice level:
+30-40% of AFib patients with clear anticoagulation indications remain untreated due to workflow barriers and risk calculation complexity
+Manual CHA2DS2-VASc and HAS-BLED score calculations are time-consuming and prone to error
+Difficult to track anticoagulation adherence across large AFib patient panels
+At the individual patient level:
+Physicians must manually gather data points (age, comorbidities, prior stroke) to calculate risk scores
+DOAC selection requires considering renal function, drug interactions, and insurance formulary preferences
+Patients face confusion about bleeding risks and medication adherence requirements
+Prior authorizations for DOACs can delay treatment initiation by days to weeks
+Cordance Solution
+Before Encounter
+Automatically identifies all AFib patients in the panel and calculates CHA2DS2-VASc scores from structured EHR data
+Creates prioritized list of undertreated high-risk patients (CHA2DS2-VASc ≥2 in men, ≥3 in women without anticoagulation)
+Pre-loads relevant labs (renal function, liver function, CBC) and medication lists
+During Encounter
+Real-time calculation and display of CHA2DS2-VASc score with annual stroke risk percentage (e.g., score of 4 = 4.0% annual stroke risk)[6]
+Automatic HAS-BLED score calculation to assess bleeding risk
+DOAC recommendations based on renal function (e.g., apixaban for CrCl 15-30 ml/min), drug interactions, and formulary status
+Side-by-side comparison of patient out-of-pocket costs for different DOACs with manufacturer assistance programs
+Flags patients eligible for left atrial appendage closure (Watchman) if anticoagulation contraindicated
+Generates pre-filled DOAC orders with appropriate dosing and monitoring intervals
+After Encounter
+Automatically submits prior authorization with structured clinical justification including CHA2DS2-VASc calculation
+Schedules INR monitoring for warfarin or renal function checks for DOACs based on patient-specific intervals
+Sends patient education materials on stroke risk, medication adherence, and bleeding precautions
+Triggers pharmacy outreach to confirm medication pickup and counsel on administration
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+Prevents one stroke for every 37 patients treated with anticoagulation annually, avoiding $150K+ per stroke event
+Captures quality bonuses in HEDIS Medication Management for AFib measures
+Reduces emergency department visits and hospitalizations for stroke by 60-70%
+Estimated financial impact: $120K-$180K annually per cardiologist through stroke prevention and quality metrics
+Quality & Safety
+DOACs reduce stroke risk by 64% compared to no treatment in patients with CHA2DS2-VASc ≥2[7]
+Automated risk calculators eliminate human error in CHA2DS2-VASc and HAS-BLED scoring
+Real-time drug interaction checking prevents dangerous combinations (e.g., DOAC + NSAIDs)
+Renal-function-based dosing prevents accumulation and bleeding complications
+Population Health & Outcomes
+Systematic identification of all untreated AFib patients across the practice
+Reduces disparities in anticoagulation access through cost transparency and assistance programs
+Improves medication adherence through patient education and pharmacy coordination
+Estimated impact: 40-50% increase in appropriate anticoagulation rates among AFib patients
+Physician Value Proposition
+Eliminates mental math for CHA2DS2-VASc and HAS-BLED calculations
+Removes formulary navigation burden with real-time cost and coverage data
+Reduces medico-legal risk through documented evidence-based risk assessment
+Improves patient satisfaction through shared decision-making with clear risk/benefit visualization
+Implementation Considerations
+EHR integration to pull structured comorbidity data for automatic risk calculation
+Formulary database connections for real-time DOAC coverage and pricing
+Patient portal integration for anticoagulation education and adherence tracking
+USE CASE 3: Cardiac Imaging Appropriateness and Utilization Management
+Clinical Scenario
+A 55-year-old patient with atypical chest pain presents to cardiology clinic. The physician considers ordering a stress test but is uncertain whether nuclear imaging, stress echo, or exercise treadmill test is most appropriate. Insurance pre-authorization requirements and appropriate use criteria add complexity to the decision.
+Current State Challenges
+At a practice level:
+25-30% of cardiac imaging studies are ordered despite not meeting appropriate use criteria, leading to denials and rework
+Complex AUC (Appropriate Use Criteria) guidelines are difficult to apply in real-time clinical workflows
+Pre-authorization requirements vary by payer and imaging modality, creating administrative burden
+At the individual patient level:
+Physicians must manually review patient history, risk factors, and prior testing to determine appropriateness
+Insurance denials delay diagnosis and require ordering alternative tests, frustrating patients
+Radiation exposure considerations require weighing risks vs benefits for each modality
+Patient out-of-pocket costs vary dramatically by imaging type and facility
+Cordance Solution
+Before Encounter
+Pre-loads complete cardiac imaging history (prior stress tests, catheterizations, CT scans) with dates and results
+Identifies patients due for repeat imaging based on guideline intervals
+Flags patients with recent imaging to avoid redundant testing
+During Encounter
+Real-time AUC assessment based on 2023 ACC/AHA guidelines with appropriateness rating (appropriate, may be appropriate, rarely appropriate)[8]
+Recommends optimal imaging modality based on patient characteristics (BMI, ability to exercise, renal function, contraindications)
+Displays radiation exposure comparison across modalities with cumulative lifetime dose tracking
+Shows patient-specific costs for different imaging options and facilities (hospital vs outpatient)
+Flags payer-specific pre-authorization requirements and auto-generates PA documentation
+Suggests alternative imaging pathways (e.g., coronary CTA for low-risk chest pain instead of nuclear stress)
+After Encounter
+Automatically submits pre-authorization with structured clinical indication and AUC rating
+Schedules imaging at appropriate facility based on patient preference, cost, and availability
+Sends prep instructions to patient (fasting, medication holds) specific to imaging type
+Triggers automated follow-up for result review and next steps
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+Reduces inappropriate imaging by 30-40%, saving $500-$800 per avoided unnecessary test
+Decreases insurance denials and appeals, saving 30-45 minutes of staff time per case
+Optimizes facility utilization by directing studies to lower-cost outpatient centers when appropriate
+Estimated financial impact: $80K-$120K annually per cardiologist through reduced rework and optimized testing
+Quality & Safety
+Adherence to AUC guidelines reduces unnecessary radiation exposure by 25-30%[9]
+Prevents contrast-induced nephropathy through automated renal function-based contraindication alerts
+Reduces diagnostic delays from denied tests through upfront appropriateness assessment
+Ensures patients receive the most diagnostically accurate test for their presentation
+Population Health & Outcomes
+Systematic tracking of imaging appropriateness rates across the practice
+Reduces disparities in access to advanced imaging through cost transparency
+Enables data-driven conversations with payers about coverage policies
+Estimated impact: 35-45% reduction in inappropriate cardiac imaging across the practice
+Physician Value Proposition
+Eliminates need to memorize complex AUC criteria across multiple imaging modalities
+Reduces administrative burden of navigating payer-specific pre-authorization requirements
+Protects against audits and quality metric penalties for inappropriate imaging
+Improves diagnostic yield by selecting the most appropriate test for each patient
+Implementation Considerations
+Integration with PACS and imaging order entry systems
+Real-time connection to payer authorization portals (e.g., eviCore, AIM)
+Database of AUC criteria with regular updates for guideline changes
+USE CASE 4: Familial Hypercholesterolemia Detection and Cascade Screening
+Clinical Scenario
+A 42-year-old patient presents for annual physical with LDL cholesterol of 220 mg/dL despite statin therapy. They have a family history of early heart disease but have never been screened for familial hypercholesterolemia (FH). The physician suspects FH but is unfamiliar with diagnostic criteria and cascade screening protocols.
+Current State Challenges
+At a practice level:
+Less than 10% of individuals with FH in the US are diagnosed, leaving 850,000+ undiagnosed and untreated[10]
+Cascade screening of family members is rarely performed even after FH diagnosis
+Complex genetic testing pathways and criteria deter systematic screening
+At the individual patient level:
+Physicians unfamiliar with Dutch Lipid Clinic criteria or Simon Broome criteria for FH diagnosis
+Family history collection is incomplete or inconsistent across encounters
+Genetic testing requires genetic counseling referrals and prior authorization
+Patients are unaware of implications for family members and importance of cascade screening
+Cordance Solution
+Before Encounter
+Automatically screens all patients for FH red flags: LDL >190 mg/dL, premature CAD <55 (men) or <65 (women), or family history of early CAD
+Creates prioritized list of patients meeting FH screening criteria
+Pre-loads all lipid panels, family history data, and prior cardiovascular events
+During Encounter
+Automatic calculation of Dutch Lipid Clinic Score (DLCS) with diagnostic probability (definite FH >8 points, probable FH 6-8 points, possible FH 3-5 points)[11]
+Guided family history collection tool with pedigree generation for first-degree relatives
+Displays estimated cardiovascular risk and years of life lost without aggressive treatment
+Recommends intensive lipid-lowering therapy (high-intensity statin + ezetimibe ± PCSK9i) with target LDL <70 mg/dL
+Generates genetic testing orders with appropriate panel selection (LDLR, APOB, PCSK9 genes)
+Creates family cascade screening letter template for patient to share with relatives
+After Encounter
+Automatically submits genetic testing prior authorization with clinical justification including DLCS
+Schedules genetic counseling appointment for result disclosure
+Triggers cascade screening workflow: identifies first-degree relatives in EHR system and flags for screening
+Sends patient education on FH inheritance patterns, treatment goals, and family screening importance
+Creates follow-up reminder for LDL target achievement assessment in 3 months
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+Prevents premature MI/stroke through early intensive treatment, saving $150K+ per event avoided
+Cascade screening identifies average of 0.89 new FH cases per index case, multiplying prevention benefits
+Generates specialty pharmacy revenue for PCSK9 inhibitors (when indicated)
+Estimated financial impact: $200K-$350K per practice annually through CVD event prevention and cascade screening
+Quality & Safety
+Intensive lipid lowering in FH reduces CVD events by 44% and extends life expectancy by 8-10 years[12]
+Genetic cascade testing identifies affected relatives with 50% yield among first-degree relatives[13]
+Earlier diagnosis and treatment prevents irreversible atherosclerotic disease
+Genetic confirmation enables precision medicine with genotype-specific treatment strategies
+Population Health & Outcomes
+Systematic FH screening across entire patient panel identifies previously undiagnosed cases
+Cascade screening reaches at-risk relatives who may not have regular medical care
+Reduces health disparities by ensuring equitable access to genetic testing and specialty therapy
+Estimated impact: 50-70% increase in FH diagnosis rate with 30-40% of relatives successfully screened
+Physician Value Proposition
+Eliminates need to memorize FH diagnostic criteria through automated DLCS calculation
+Simplifies complex genetic testing pathways with integrated genetic counseling referrals
+Provides structure for difficult family conversations about inherited disease
+Creates systematic cascade screening process that extends prevention beyond index patient
+Implementation Considerations
+Integration with genetic testing labs for streamlined test ordering and result delivery
+EHR tools for pedigree creation and family history tracking
+Patient portal features for family communication and cascade screening coordination
+USE CASE 5: Post-MI Secondary Prevention Bundle Optimization
+Clinical Scenario
+A 58-year-old patient presents for first cardiology follow-up 2 weeks after STEMI treated with primary PCI. They were discharged on aspirin, ticagrelor, atorvastatin, and metoprolol but are not on an ACE inhibitor. The cardiologist needs to ensure complete secondary prevention therapy while addressing medication tolerance and adherence barriers.
+Current State Challenges
+At a practice level:
+Only 65% of post-MI patients receive all 4 evidence-based medication classes (antiplatelet, statin, beta-blocker, ACE-I/ARB) at 1 year[14]
+Medication gaps often go unrecognized during busy post-MI follow-up visits
+Complex DAPT duration decisions (6 vs 12 months) require weighing bleeding vs ischemic risk
+At the individual patient level:
+Patients face polypharmacy burden with 5-8 new medications after MI
+Side effects (bleeding, bradycardia, cough from ACE-I) lead to medication discontinuation
+Cardiac rehabilitation referrals are often forgotten, leading to low participation rates (<30%)
+LDL and blood pressure targets are frequently not achieved despite treatment
+Cordance Solution
+Before Encounter
+Automatically identifies all post-MI patients and flags medication gaps in secondary prevention bundle
+Creates prioritized list based on time since MI and therapy completeness
+Pre-loads discharge summary, catheterization report, and post-MI medication list
+Pulls latest lipid panel, blood pressure readings, and ejection fraction
+During Encounter
+Displays comprehensive secondary prevention checklist with evidence-based targets: aspirin, P2Y12 inhibitor, high-intensity statin (LDL <70 mg/dL), beta-blocker, ACE-I/ARB (if EF <40%), ezetimibe/PCSK9i if LDL not at goal
+Automated PRECISE-DAPT or DAPT score calculation to guide dual antiplatelet therapy duration (high bleeding risk → 6 months; high ischemic risk → 12-30 months)[15]
+Flags medication gaps with one-click ordering of missing therapies
+Medication tolerance screening with alternative suggestions (ARB if ACE-I causes cough; ranolazine if beta-blocker not tolerated)
+Automatic cardiac rehabilitation referral generation with local program options and patient-specific benefits
+Side-effect monitoring alerts (e.g., check K+ and Cr 1 week after ACE-I initiation)
+After Encounter
+Submits prior authorizations for PCSK9 inhibitors or newer agents (e.g., bempedoic acid)
+Schedules 3-month follow-up for LDL and BP goal reassessment
+Triggers pharmacy outreach for medication reconciliation and adherence counseling
+Enrolls patient in cardiac rehab with automated insurance verification
+Sends patient education on medication adherence, lifestyle modification, and warning signs of recurrent MI
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+Complete secondary prevention bundle reduces recurrent MI by 50% and mortality by 35-40% compared to incomplete therapy[16]
+Cardiac rehabilitation participation reduces 1-year mortality by 30% and saves $10K-$15K per patient
+Captures CMS quality bonuses for MI secondary prevention measures
+Estimated financial impact: $250K-$400K annually per cardiologist through recurrent event prevention
+Quality & Safety
+High-intensity statins achieve LDL <70 mg/dL in 75% of patients, reducing recurrent events by 25%
+ACE inhibitors in reduced EF patients prevent heart failure hospitalization and improve survival by 20%
+Automated bleeding risk assessment prevents excessive DAPT duration in high-risk patients
+Medication reconciliation reduces adverse drug events and interactions
+Population Health & Outcomes
+Systematic screening ensures no post-MI patient falls through cracks
+Cardiac rehab enrollment increases from 30% to 60-70% with automated referral and follow-up
+Reduces disparities in secondary prevention by providing equal access to guideline-based care
+Estimated impact: 50-60% improvement in complete secondary prevention bundle adherence
+Physician Value Proposition
+Eliminates mental checklist burden with automated gap analysis
+Simplifies DAPT duration decisions with validated risk scores
+Reduces medico-legal risk through documented guideline adherence
+Improves patient outcomes and satisfaction through comprehensive, coordinated care
+Implementation Considerations
+Integration with hospital discharge systems to capture MI patients
+Cardiac rehabilitation program partnerships for streamlined referrals
+Pharmacy integration for medication adherence tracking and interventions
+USE CASE 6: Ambulatory Procedural Site Optimization (Cath Lab vs ASC)
+Clinical Scenario
+A 65-year-old patient needs an elective diagnostic cardiac catheterization for stable angina. The health system has both a hospital-based cath lab and an ambulatory surgery center (ASC) with similar capabilities. The physician must decide which facility offers the best combination of safety, cost-effectiveness, and patient convenience.
+Current State Challenges
+At a practice level:
+Procedural volume fragmentation across multiple facilities reduces efficiency and increases costs
+Lack of real-time visibility into ASC vs hospital margin differences for specific procedures
+Manual assessment of patient appropriateness for ASC leads to suboptimal utilization
+At the individual patient level:
+Physicians default to hospital-based procedures due to familiarity, missing ASC cost savings opportunities
+Complex criteria for ASC safety (BMI, comorbidities, anesthesia risk) require time-consuming assessment
+Patients unaware of ASC advantages: lower copays, convenient parking, faster discharge
+Scheduling challenges across multiple sites lead to delays in care
+Cordance Solution
+Before Encounter
+Identifies all patients scheduled for elective diagnostic catheterizations or pacemaker implantations
+Pre-loads comorbidity data and anesthesia risk scores from EHR
+Checks real-time ASC and hospital cath lab scheduling availability
+During Encounter
+Automatic ASC eligibility determination based on validated criteria: stable coronary disease (no ACS within 6 months), EF >30%, BMI <40, ASA class I-III, no need for complex interventions, payer contracts ASC
+Displays site-specific procedural margin comparison for the health system (e.g., ASC margin $8,500 vs hospital margin $3,200 for diagnostic cath)
+Shows patient cost comparison: ASC copay $250 vs hospital copay $800
+Highlights ASC advantages: same-day discharge, dedicated cardiovascular center, easier parking
+Flags next available procedure slot at each facility (e.g., ASC: 5 days; Hospital: 14 days)
+After Encounter
+One-click scheduling at optimal facility based on clinical appropriateness and patient preference
+Generates site-specific pre-procedure instructions and consent forms
+Sends patient education on ASC facility amenities and what to expect
+Triggers insurance verification for ASC coverage and prior authorization if needed
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+ASC-appropriate cases generate $5K-$10K higher margin per procedure due to lower overhead
+Increased ASC utilization improves return on capital investment in ambulatory facilities
+Patients save $300-$600 per procedure in out-of-pocket costs, improving satisfaction
+Estimated financial impact: $400K-$600K annually per cardiologist through optimized site selection (assuming 200 procedures/year with 40% shift to ASC)
+Quality & Safety
+ASC complication rates equivalent to hospital for appropriate patients (0.5% vs 0.6% for diagnostic cath)
+Automated risk stratification prevents unsafe ASC referrals
+Faster procedure scheduling reduces symptom duration and anxiety
+Same-day discharge at ASC reduces hospital-acquired infection risk
+Population Health & Outcomes
+Increases procedural access by utilizing ASC capacity, reducing wait times from 14 to 5 days
+Reduces socioeconomic barriers through lower patient cost sharing
+Improves patient experience with dedicated cardiac centers and streamlined workflows
+Estimated impact: 35-45% of eligible procedures shift to ASC, improving system efficiency
+Physician Value Proposition
+Eliminates complex mental calculus of ASC appropriateness with automated eligibility screening
+Provides real-time scheduling visibility to reduce administrative coordination burden
+Aligns physician incentives with system goals through transparent margin data
+Improves patient satisfaction through lower costs and better experience
+Implementation Considerations
+Integration with ASC and hospital scheduling systems for real-time availability
+Margin calculators with procedure-specific cost data
+Payer contract databases to verify ASC coverage
+USE CASE 7: PCSK9 Inhibitor and Advanced Lipid Management Optimization
+Clinical Scenario
+A 52-year-old patient with prior MI and familial hypercholesterolemia has LDL cholesterol of 125 mg/dL despite maximally tolerated statin (rosuvastatin 40mg) plus ezetimibe. They qualify for PCSK9 inhibitor therapy but face complex insurance barriers, high costs, and questions about long-term efficacy.
+Current State Challenges
+At a practice level:
+Only 5-8% of patients who qualify for PCSK9 inhibitors actually receive them due to cost and authorization barriers
+Complex prior authorization requires documentation of statin intolerance or LDL failure despite maximal therapy
+Internal specialty pharmacy revenue opportunities are missed when prescriptions filled externally
+At the individual patient level:
+Patients shocked by $6,000-$12,000 annual out-of-pocket costs without manufacturer assistance
+Prior authorization denials and appeals process takes 30-60 days, delaying treatment
+Confusion about PCSK9i vs other lipid therapies (inclisiran, bempedoic acid)
+Injection administration concerns and needle anxiety
+Cordance Solution
+Before Encounter
+Identifies all very high-risk ASCVD patients with uncontrolled LDL >70 mg/dL despite statin + ezetimibe
+Creates prioritized list based on cardiovascular risk (highest risk: recent MI + LDL >100; lower risk: stable CAD + LDL 70-100)
+Pre-loads lipid panels over time, medication history, and prior cardiovascular events
+Checks patient insurance plan for specialty pharmacy network inclusion
+During Encounter
+Risk-based LDL goal recommendation (e.g., <55 mg/dL for recent ACS with multiple risk factors, <70 mg/dL for stable ASCVD)[17]
+PCSK9i benefit display: Expected LDL reduction 55-60%, absolute CVD risk reduction 1.5% over 3 years[18]
+Real-time patient cost analysis: $14,000 annual retail cost → $0-$25/month with manufacturer copay card + insurance coverage
+PCSK9i selection guidance: Evolocumab (Repatha) vs Alirocumab (Praluent) based on formulary and dosing preference
+Alternative therapy comparison: inclisiran (twice-yearly injection), bempedoic acid (oral), ezetimibe dose optimization
+Health system specialty pharmacy routing check: if patient insurance in-network for internal pharmacy, flag for 340B revenue capture
+One-click PCSK9i prescription with pre-populated prior authorization justification
+After Encounter
+Automated PA submission with structured documentation: recent MI date, baseline LDL, current therapy (statin + ezetimibe), statin intolerance if applicable, target LDL goal
+Enrollment in manufacturer patient assistance program (PAP) with real-time eligibility verification
+Routes prescription to health system specialty pharmacy for 340B pricing (if eligible)
+Schedules injection training visit or sends video education on self-administration
+Creates 3-month follow-up for LDL recheck and therapy titration
+Triggers "Lipid Clinic" enrollment for ongoing specialized management
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+PCSK9i reduce major adverse cardiovascular events by 15% over 3 years, preventing $150K+ per event avoided[19]
+Internal specialty pharmacy capture generates $8K-$15K margin per patient annually through 340B pricing
+Reduces emergency CV events and hospitalizations by 20-25%
+Estimated financial impact: $500K-$800K annually per practice through specialty pharmacy revenue + event prevention (assuming 50 PCSK9i patients)
+Quality & Safety
+Achieves LDL <70 mg/dL in 85-90% of patients, vs <50% with statin + ezetimibe alone
+Excellent safety profile with no increased adverse events vs placebo
+Automated drug interaction checking prevents rare but serious combinations
+Reduces patient anxiety through transparent cost discussions and financial assistance
+Population Health & Outcomes
+Systematic identification of undertreated very high-risk patients across practice
+Eliminates cost barriers through manufacturer assistance programs and 340B access
+Reduces health disparities by ensuring equitable access to advanced lipid therapies
+Estimated impact: 60-75% increase in PCSK9i utilization among eligible patients
+Physician Value Proposition
+Removes prior authorization burden with automated documentation and submission
+Simplifies complex cost landscape with real-time patient out-of-pocket calculation
+Eliminates specialty pharmacy navigation challenges with internal routing
+Improves patient outcomes through systematic identification of treatment gaps
+Implementation Considerations
+Integration with specialty pharmacy dispensing systems
+Manufacturer assistance program API connections for real-time eligibility
+Payer prior authorization portal integration
+USE CASE 8: Chest Pain Triage with Coronary CTA vs Nuclear Stress
+Clinical Scenario
+A 48-year-old patient with atypical chest pain and intermediate pretest probability of CAD presents to cardiology clinic. The physician considers stress testing but is uncertain whether coronary CTA, nuclear stress test, or stress echo offers the best diagnostic pathway balancing accuracy, cost, and radiation exposure.
+Current State Challenges
+At a practice level:
+Nuclear stress testing remains default strategy despite coronary CTA advantages for low-intermediate risk patients
+Radiation exposure from nuclear imaging (10-15 mSv) often exceeds CTA (2-5 mSv with modern protocols)
+CTA capacity bottlenecks lead to delays, defaulting to nuclear stress despite being suboptimal
+At the individual patient level:
+Physicians unfamiliar with patient selection criteria for CTA (age, heart rate, BMI, renal function)
+Insurance variability in CTA coverage creates uncertainty about authorization
+Patients face different costs: nuclear stress $2,500-$4,000 vs CTA $1,000-$2,000
+Test selection impacts downstream care: CTA negative predictive value 99% allows confident exclusion of CAD
+Cordance Solution
+Before Encounter
+Identifies all patients with chest pain or suspected CAD scheduled for evaluation
+Pre-loads cardiac risk factors, prior cardiac testing, and current medications
+Checks CCTA availability and reserved acute slots for same-week access
+During Encounter
+Automated pretest probability calculation using Diamond-Forrester or CAD Consortium Clinical Score[20]
+CTA appropriateness assessment: Ideal if age <65, HR <65 bpm (or beta-blockable), BMI <35, CrCl >60, no known CAD
+Modality comparison display: CTA NPV 99% (excellent to rule out CAD) vs Nuclear stress PPV 70% (higher false positives), radiation 3 mSv vs 12 mSv, same-day results vs 3-5 day wait
+Patient-specific cost comparison: CTA $350 copay vs Nuclear $800 copay
+Real-time CTA slot availability with expedited booking for acute slots (often bottle neck)
+Automatic beta-blocker protocol generation if heart rate >65 bpm (metoprolol 50mg 1 hour before CTA)
+Flags patients better suited for nuclear stress: known CAD needing ischemia assessment, unable to lie flat, severe renal disease
+After Encounter
+One-click CTA order with pre-populated contrast allergy screening and renal function check
+Schedules CTA at optimal time with pre-procedure beta-blocker prescription if needed
+Sends patient prep instructions: 4-hour fast, avoid caffeine, bring heart rate medications
+Triggers automated result follow-up workflow: if CTA negative → reassurance + risk factor management; if CTA positive → cardiology consult + stress test vs cath decision
+Impact on Three Pillars
+Economics (Value-Based Care & Fee-for-Service)
+CTA costs 40-60% less than nuclear stress testing ($1,200 vs $3,000 per test)[21]
+Higher diagnostic accuracy reduces unnecessary downstream catheterizations by 30%
+Preferred by payers due to cost-effectiveness, reducing authorization challenges
+Estimated financial impact: $80K-$150K annually per cardiologist through optimized test selection and reduced unnecessary procedures
+Quality & Safety
+CTA negative predictive value 99% allows confident CAD exclusion, vs 85% for nuclear stress[22]
+Modern CTA protocols deliver 60-80% less radiation than nuclear stress (3 mSv vs 12 mSv)
+Anatomic visualization detects non-obstructive CAD missed by functional testing
+Same-day results reduce patient anxiety and diagnostic limbo
+Population Health & Outcomes
+Systematic shift to lower-radiation, higher-accuracy testing for appropriate patients
+Reduces cost barriers through lower patient out-of-pocket expenses
+Improves diagnostic confidence and downstream care decisions
+Estimated impact: 40-50% of chest pain evaluations shift from nuclear to CTA in appropriate patients
+Physician Value Proposition
+Eliminates uncertainty about CTA vs nuclear stress selection with automated appropriateness criteria
+Reduces radiation exposure concerns through transparent dose comparisons
+Improves diagnostic yield with higher-accuracy modality selection
+Simplifies beta-blocker protocol with automated prescription generation
+Implementation Considerations
+Integration with radiology scheduling systems for real-time CTA availability
+Pharmacy integration for beta-blocker pre-medication ordering
+Payer contract verification for CTA coverage and authorization requirements
+
+References
+[1] Greene SJ, et al. Eligibility and Projected Benefits of Rapid Initiation of Quadruple Therapy for Newly Diagnosed Heart Failure. JACC Heart Fail. 2024;12(8):1365-1377. https://doi.org/10.1016/j.jchf.2024.03.001
+[2] American College of Cardiology. Real-World Costs of Heart Failure GDMT. 2024. https://www.acc.org/Latest-in-Cardiology/Articles/2024/03/18/19/31/Real-World-Costs-of-Heart-Failure-GDMT
+[3] McMurray JJV, et al. Angiotensin-neprilysin inhibition versus enalapril in heart failure. N Engl J Med. 2014;371(11):993-1004. https://doi.org/10.1056/NEJMoa1409077
+[4] McMurray JJV, et al. Dapagliflozin in Patients with Heart Failure and Reduced Ejection Fraction. N Engl J Med. 2019;381(21):1995-2008. https://doi.org/10.1056/NEJMoa1911303
+[5] Vaduganathan M, et al. Quadruple medical therapy for heart failure. Lancet. 2020;396(10252):548-550. https://doi.org/10.1016/S0140-6736(20)32888-2
+[6] Lip GYH, et al. Refining clinical risk stratification for predicting stroke and thromboembolism in atrial fibrillation. Chest. 2010;137(2):263-272. https://doi.org/10.1378/chest.09-1584
+[7] Ruff CT, et al. Comparison of the efficacy and safety of new oral anticoagulants with warfarin in patients with atrial fibrillation. Lancet. 2014;383(9921):955-962. https://doi.org/10.1016/S0140-6736(13)62343-0
+[8] Kirtane AJ, et al. 2023 ACC/AHA/SCAI Advanced Training Statement on Interventional Cardiology. Circ Cardiovasc Interv. 2023;16(6):e000109. https://doi.org/10.1161/HCV.0000000000000109
+[9] Hendel RC, et al. ACCF/ACR/SCCT/SCMR/ASNC/NASCI/SCAI/SIR 2006 appropriateness criteria for cardiac computed tomography and cardiac magnetic resonance imaging. J Am Coll Cardiol. 2006;48(7):1475-1497. https://doi.org/10.1016/j.jacc.2006.07.003
+[10] Knowles JW, et al. Reducing the Burden of Disease and Death From Familial Hypercholesterolemia. JAMA Cardiol. 2020;5(7):845-853. https://doi.org/10.1001/jamacardio.2020.0925
+[11] Pang J, et al. Enhancing the detection of familial hypercholesterolaemia in general practice: A model for supporting genetic cascade testing in the community. Eur J Hum Genet. 2025. https://doi.org/10.1038/s41431-025-01979-7
+[12] Watts GF, et al. Familial hypercholesterolaemia: evolving knowledge for designing adaptive models of care. Nat Rev Cardiol. 2020;17(6):360-377. https://doi.org/10.1038/s41569-019-0325-8
+[13] Pang J, et al. Enhancing the detection of familial hypercholesterolaemia in general practice: A model for supporting genetic cascade testing in the community. Eur J Hum Genet. 2025. https://doi.org/10.1038/s41431-025-01979-7
+[14] Chew DP, et al. 2020 Acute Coronary Syndromes Guidelines. Heart Lung Circ. 2020;29(10):1447-1547. https://doi.org/10.1016/j.hlc.2020.09.940
+[15] Valgimigli M, et al. 2017 ESC focused update on dual antiplatelet therapy. Eur Heart J. 2018;39(3):213-260. https://doi.org/10.1093/eurheartj/ehx419
+[16] Jernberg T, et al. Cardiovascular risk in post-myocardial infarction patients: nationwide real world data demonstrate the importance of a long-term perspective. Eur Heart J. 2015;36(19):1163-1170. https://doi.org/10.1093/eurheartj/ehu505
+[17] Grundy SM, et al. 2018 AHA/ACC/AACVPR/AAPA/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Blood Cholesterol. J Am Coll Cardiol. 2019;73(24):e285-e350. https://doi.org/10.1016/j.jacc.2018.11.003
+[18] Azari S, et al. Fair pricing, fair access; a systematic review of cost-effectiveness of new hyperlipidemia injectable medication in developing countries. Cost Eff Resour Alloc. 2025;23(1):68. https://doi.org/10.1186/s12962-025-00671-3
+[19] Sabatine MS, et al. Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease. N Engl J Med. 2017;376(18):1713-1722. https://doi.org/10.1056/NEJMoa1615664
+[20] Moss AJ, et al. The Updated NICE Guidelines: Cardiac CT as the First-Line Test for Coronary Artery Disease. Curr Cardiovasc Imaging Rep. 2017;10:15. https://doi.org/10.1007/s12410-017-9412-6
+[21] SCOT-HEART Investigators. CT coronary angiography in patients with suspected angina due to coronary heart disease (SCOT-HEART): an open-label, parallel-group, multicentre trial. Lancet. 2015;385(9985):2383-2391. https://doi.org/10.1016/S0140-6736(15)60291-4
+[22] SCOT-HEART Investigators. CT coronary angiography in patients with suspected angina due to coronary heart disease (SCOT-HEART): an open-label, parallel-group, multicentre trial. Lancet. 2015;385(9985):2383-2391. https://doi.org/10.1016/S0140-6736(15)60291-4
+
+Summary
+These cardiology use cases demonstrate Cordance Health's potential to transform clinical decision support across the cardiovascular disease continuum. Each use case addresses all three pillars (Economics, Quality & Safety, Population Health), provides clear physician value through reduced cognitive burden and automated workflows, and is measurable with specific targets. The platform's ability to anticipate needs, provide context-aware recommendations, integrate seamlessly into workflow, and coordinate across the care ecosystem positions Cordance Health as a transformative solution for cardiology's most pressing challenges.

@@ -1,0 +1,315 @@
+Date: October 2, 2025 
+Subject: Cordance Health -- ROI Memo
+
+This memo presents Cordance’s thesis on ROI for health systems, explaining how the platform will create measurable economic value. It highlights examples of revenue generation and cost reduction opportunities enabled by the platform, and downstream margin enhancement, as well as a framework for validating these assumptions in our initial pilot programs with UMass and Duke. This memo also describes how we will measure health system value. Finally, we provide a framework for options on how Cordance will turn the health system value creation into revenue.
+Table of Contents
+1. ROI Summary	1
+2. Method to Assess Value	3
+3. Approach to Pricing	4
+4. Appendix - Detailed ROI Analysis	6
+
+1. Cordance’s Thesis on ROI for Health Systems 
+Cordance provides both non-economic and economic value to health systems. We are focused here on the mechanisms by which Cordance improves health system economics by influencing physician decision-making at the point of care. Unlike other CDS tools, Cordance incorporates local policies and preferred actions into its recommendations for test ordering, therapeutics, and referrals. Using both asynchronous and synchronous approaches, Cordance exposes those opportunities to clinicians in order to optimize both patient outcomes and health system financial performance. In addition, the platform allows leadership to understand the financial implications of current practice including local variation in practice, project future economics under new policies, and track progress toward those goals in real time. 
+The cumulative financial impact of the Cordance Health platform is substantial. See the Appendix for a detailed financial analysis. The table below summarizes the annual estimates from the revenue and cost-saving models.
+
+This consolidated figure, exceeding $36 million annually, represents a compelling ROI for a health system partner. It underscores the platform's ability to address a wide spectrum of financial and operational pain points, transforming them into measurable economic gains.
+
+(1a.) Additional Opportunities Cordance will explore  
+ 
+Beyond the immediate ROI drivers, we anticipate that Cordance will create several downstream opportunities that further strengthen its economic value proposition for our initial health system customers and other players or participants in the broader healthcare ecosystem. Whilst these benefits may take time to fully materialize, they add to the business case for value that Cordance delivers and for justifying future pricing models: 
+Outcomes improvement: Over time, Cordance platform becomes a vehicle for assessing outcomes and altering advice based on the combined learning across all Cordance install sites. There are thousands of unanswered questions in healthcare, far too many to answer with clinical trials. Cordance provides a mechanism for health systems to learn and improve outcomes. This can only be beneficial to the long-term reputation and success of the health system. 
+
+Quality reporting: All US payers and numerous regulatory bodies require extensive data collection and reporting. These reports are known to only scratch the surface of a comprehensive assessment of care delivery. Cordance – specifically the difference between predicted and executed - provides a platform for rethinking quality reporting; reporting that is at the same time both less expensive as well more comprehensive.  More specifically, we will include appropriateness criteria for all procedures in our reporting, paving the way for improved performance in value-based care contracts that use total costs of care.
+
+Utilization management: All US payers employ various types of utilization management. These cumbersome bureaucratic programs do little to lower the use of services but nonetheless add substantially to the overhead costs of medical care. The Cordance platform provides a mechanism for payers to delegate UM to providers, lowering overhead costs and providing transparent point of care.  As noted above, the inclusion of appropriateness criteria (both national and local) into our decision support engine enables oversight of decisions to perform procedures. 
+
+Academic & Biopharma clinical research support: By incorporating participation in research, including clinical trials into the local data Cordance ingests, Cordance identifies patients for clinical trial eligibility to patients’ treating physicians.  Facilitating enrollment in clinical trials brings revenue to health systems and further enhances the health system’s reputation for innovation.
+
+
+
+2. How Will Cordance Test & Prove ROI? 
+Cordance, in collaboration with its provider-site launch partners, will create a system to measure pre- vs post-deployment economic impacts.  See the Appendix for examples of common encounter types and the economic benefits that can accrue through different clinician decisions.  The inclusion of these metrics generates an observability framework for clinical practice embedded within the Cordance CDS system. That framework will measure shifts toward, as well as drift away from, more optimal practice. This shift in practice can be directly tied to quantifiable costs in patient management, including, in detail, orders, treatment/medications, referrals, and outcomes. 
+In clinical practice, Cordance surfaces patterns that help change behavior, bringing physician decisions closer to optimal outcomes – compared against both AI recommendations and peers. This makes physician effectiveness not just observable, but measurable in economic terms, giving health systems a clear, data-driven path to reduce variation, lower costs, and improve outcomes.
+Cordance will validate its ROI hypotheses through a structured, data-driven evaluation framework that will be designed in partnership with our first pilot partners – UMass and Duke. The framework will be designed to isolate Cordance’s impact on clinical decision-making and link it to measurable economic outcomes. We intend for this process to include both observational analytics and behavior change tracking, with a focus on drift reduction, economic attribution and longitudinal monitoring.  
+
+(2a.) Framework for ROI Validation 
+Measure the Baseline state for current Clinical practice 
+Cordance will begin by analyzing historical clinical encounter decisions to establish a baseline set of metrics aligned with the categories described in the Appendix. This baseline state will be assessed against AI recommendations and peer benchmarks.
+This baseline will be quantified across key use cases (e.g., specialist referrals, suboptimal diagnostics, missed 340B opportunities) using retrospective data.
+
+Selected Deployment of Clinician behavioral influence
+Cordance will introduce nudges and decision support within the encounter workflow for selected use cases identified in conjunction with Provider partners. Nudges will be designed to guide clinicians toward more economically and clinically optimal decisions.
+
+Concordance/Discordance Reporting 
+Generated periodic (e.g. weekly, monthly) reports showing each clinician’s concordance (alignment) or discordance (drift) with recommended care pathways will compare individual behavior to both AI-generated best practices and peer group norms, creating a feedback loop that encourages improvement. (This approach is inspired by observability tools used in engineering – e.g., Jira/GitHub – where performance is tracked and benchmarked to drive improvement). 
+
+Behavioral Change Tracking 
+Cordance will monitor whether clinicians adopt the nudged recommendations and how their behavior evolves over time, tracking longitudinally to allow for before-and-after comparisons at the individual and cohort levels. Provider partners will determine the strength of language used for the nudges included in the tool as well as other communications outside the platform.
+
+Economic Attribution Modeling 
+For each use case, Cordance will estimate the financial impact of behavior change (e.g., reduced unnecessary imaging, increased in-system referrals).
+Attribution will be based on observed variance reduction. For example, if medically unnecessary urine culture ordering drops from 30% to 10% post-intervention, Cordance can reasonably claim credit for the 20% improvement.
+
+Control Group Comparison 
+To strengthen attribution, Cordance will maintain control groups (clinicians not yet exposed to nudges) and compare their behavior to intervention groups.
+This quasi-experimental design (difference in differences) will help isolate Cordance’s effect from other system-wide changes (e.g., CMS guidance, internal policy shifts).
+
+
+Economic Evaluation 
+In addition to internal measurement mechanisms, Cordance has budgeted for a formal, academically rigorous economic evaluation within its pilot programs. This work will be conducted in partnership with UMass Chan Medical School and other collaborators and is designed to validate Cordance’s ROI thesis through independent analysis.
+Unlike the attribution modeling and drift tracking described above, this evaluation will serve as a structured, third-party assessment of Cordance’s financial impact. It will include:
+Cost-benefit analysis of prioritized use cases (e.g., imaging leakage, specialist escalation, 340B optimization).
+ROI modeling that incorporates both direct financial impact and indirect margin enhancement (e.g., reduced burnout, improved throughput).
+Sensitivity testing across health system types, contract structures, and baseline performance levels.
+The evaluation will explore longitudinal value durability to assess whether improvements persist over time and how Cordance’s observability framework helps prevent drift.
+
+Sustainability & Drift Prevention 
+Beyond initial improvements, Cordance will continuously monitor for backsliding and reintroduce nudges as needed.
+While attribution may become more complex over time, Cordance’s continuous observability will help maintain behavioral alignment and prevent erosion of value. 
+
+3. Cordance Revenue Model & Business Plan
+Our pricing will align with the value we create for customers. Because the value created is a function of the number of encounters, we will likely tie pricing to the number of encounters. We are evaluating several revenue model designs that will scale with health system size and usage, while aligning with the economic value Cordance creates. Our intention is to refine the business model as we gain real-life experience with our first customer development partners and collaborate with our equity-pilot partners to land on the option that is both sustainable and profitable.
+
+4. Appendix
+
+Quantitative Analysis of Cordance Health's Return on Investment for Health System Partners
+Executive Summary
+This report presents a financial analysis of the Cordance Health platform, quantifying its potential return on investment (ROI) for a representative medium-to-large U.S. health system serving approximately 2 million patients annually. The analysis demonstrates that Cordance is positioned to generate substantial economic value by addressing deeply entrenched operational and clinical inefficiencies that erode health system margins. By systematically influencing physician decision-making at the point of care (both synchronous and asynchronously), the platform creates measurable opportunities for both revenue enhancement and cost reduction.
+
+Based on conservative modeling and data from authoritative industry sources, this analysis estimates that the Cordance Health platform can generate over $36 million in total annual economic value for a partner health system. This value is composed of approximately $22 million in new or recaptured revenue and $14 million in direct and indirect cost savings.
+
+The revenue opportunities are driven by optimizing underutilized programs like 340B, improving specialist case mix to favor higher-margin procedures, and significantly reducing patient referral leakage for high-value services such as advanced imaging. The cost reduction opportunities stem from guiding clinicians toward more cost-effective diagnostics and therapeutics, preventing unnecessary specialist escalations, mitigating the financial impact of preventable adverse events like operating room cancellations, and reducing significant overhead associated with administrative tasks and physician turnover.
+
+Crucially, the financial projections detailed herein are built upon a transparent and defensible methodology. Each estimate is derived from a step-by-step model that incorporates current healthcare economic data, clinical utilization rates, and conservative assumptions regarding the platform's adoption and efficacy. This rigorous approach provides a credible framework for validating Cordance Health's value proposition and establishes a clear, data-driven path for health systems to improve financial performance while simultaneously enhancing the quality of care.
+
+Part 1: Summary of Financial Projections and Strategic Implications 	7
+Part 2: Analysis of Revenue Generation/Cost Reduction Opportunities 	12
+
+
+
+Part 1:
+1. Summary of Financial Projections and Strategic Implications
+This section consolidates the findings from the preceding analysis into a clear and comprehensive summary. It synthesizes the total estimated economic value that the Cordance Health platform can deliver to a partner health system.
+(1a.) Completed ROI & Revenue Tables
+The following tables have been populated with the estimates derived from the detailed financial modeling in Sections 2 and 3. They provide a quantitative summary of the Cordance Health value proposition for a medium-to-large health system serving approximately 2 million patients.
+Table 1: Creating Additional Revenue for Health System Partners
+	
+Table 2: Reducing Cost for Health System Partners
+
+
+(1b.) Consolidated Economic Value Proposition
+
+The cumulative financial impact of the Cordance Health platform is substantial. By aggregating the conservative annual estimates from the revenue and cost-saving models, a clear picture of the total economic value emerges.
+This consolidated figure, exceeding $36 million annually, represents a compelling ROI for a health system partner. It underscores the platform's ability to address a wide spectrum of financial and operational pain points, transforming them into measurable economic gains.
+
+(1c.) Concluding Analysis
+The financial analysis presented in this report provides a defensible quantification of the Cordance Health value proposition. The estimates, derived from conservative assumptions and validated by current industry data, demonstrate that the platform should be capable of generating a significant and multifaceted return on investment for health system partners. Of course, Cordance will likely have lower impact within any given health system where methods to address these well-known problems will already be in place.  In these cases, Cordance may be able to replace, at much lower cost, those (usually manual) interventions. The total annual economic value of over $36 million is the aggregate effect of numerous, targeted interventions that optimize clinical decisions at the point of care.
+This analysis validates the core thesis that by influencing physician behavior in small but critical ways, Cordance can unlock substantial financial value.  The platform's ability to reduce referral leakage, optimize the use of high-cost services, promote cost-effective therapeutic choices, and mitigate preventable adverse events directly addresses the primary challenges facing modern health systems as they navigate the transition from fee-for-service to value-based care.
+Ultimately, the value of Cordance extends beyond the direct financial calculations. The platform provides a system of clinical and operational observability that is currently lacking in healthcare. It gives leadership the tools to not only understand the financial implications of clinical practice variation but also to implement and track policies designed to improve performance in real time. In an increasingly competitive and financially constrained environment, this capability for data-driven management and continuous improvement is not merely a value-add; it is a strategic necessity. Cordance Health is therefore positioned not just as a tool for efficiency, but as a foundational platform for the financially sustainable, high-quality health system of the future.
+
+
+Part 2: 
+2. Analysis of Revenue Generation Opportunities 
+This section provides a detailed breakdown and financial quantification of the primary revenue generation levers enabled by the Cordance Health platform. Each opportunity is analyzed through a model that estimates both the per-instance revenue impact and the total extrapolated annual value for a representative health system.
+(2a.) Enhancing Specialist Revenue Through Optimized Case Mix (ENT Example) 
+A core challenge in managing high-value specialty service lines, such as surgery, is ensuring that the limited time of expert clinicians is dedicated to the most complex and appropriate cases. When a specialist's schedule becomes saturated with low-complexity consultations or routine follow-ups, it creates a bottleneck that prevents access for new, higher-acuity patients. This not only frustrates referring physicians and patients but also dilutes the potential revenue of the service line. By providing primary care physicians (PCPs) with better guidance for managing common conditions like chronic sinusitis, Cordance can help divert lower-complexity cases from specialists, freeing their capacity for higher-revenue surgical procedures. This strategic optimization of case mix aligns with the broader trend of high-performing hospitals improving margins by diversifying and intensifying their outpatient service offerings.9
+The financial impact of this shift is substantial. The revenue generated from a complex surgical procedure is an order of magnitude greater than that from a diagnostic office visit. By enabling a surgeon to substitute even a small number of low-value appointments with high-value procedures, the platform can significantly increase the total billings per surgeon.
+Furthermore, this mechanism has a crucial secondary effect on network integrity. Long wait times for specialist appointments are a primary driver of patient dissatisfaction and referral leakage, a phenomenon where patients and their PCPs seek care outside the health system to get more timely access.10 This leakage can cost a health system hundreds of millions of dollars annually in lost revenue.12 By improving specialist availability for appropriate cases, Cordance not only increases the direct revenue generated by that specialist but also strengthens the health system's ability to retain high-value patients within its network, creating a virtuous cycle of improved throughput, enhanced revenue capture, and greater patient loyalty.
+
+Financial Modeling and Estimation
+Estimated Revenue Per Example7:  To quantify the per-instance value, this analysis compares the revenue from a low-complexity versus a high-complexity ENT procedure.
+Low-Complexity Procedure: A standard diagnostic nasal endoscopy, identified by CPT code 31231, has a national average Medicare non-facility reimbursement of approximately $184.14
+High-Complexity Procedure: A surgical procedure such as a total ethmoidectomy (CPT code 31255) generates significantly more revenue. While the physician's facility fee may be around $312, the total payment to the hospital for the associated Ambulatory Payment Classification (APC 5165) can be as high as $5,916.15 A conservative, blended revenue estimate (including facility and professional fees) for a complex surgical case is $3,000.
+Revenue Uplift: Shifting a single surgical slot from a diagnostic scope to a surgical procedure can therefore increase revenue by over $2,800.
+Annual Health System Extrapolation: The annual impact is modeled for a group of five ENT surgeons.
+Surgeon Caseload: A busy ENT surgeon is assumed to perform approximately 10 major procedures per week, totaling around 480 per year (assuming 48 working weeks).
+Cordance Impact: It is assumed that by diverting low-complexity cases, Cordance enables each surgeon to perform just one additional high-complexity procedure per week. This represents a modest 10% increase in high-value surgical volume.
+Calculation (per surgeon): 1-week additional procedure​ × 48-year weeks​ × $3,000 procedure revenue​=$144,000 per surgeon
+Calculation (5 surgeons): $144,000 × 5 surgeons= $720,000 annually
+We further extrapolation to $10 million for "all surgeons" assuming approximately 70 surgeons across various specialties could achieve a similar uplift (144,000∗70≈$10M).
+
+(2b.) Quantifying the Long-Term Value of Improved Market Share
+Beyond immediate operational efficiencies, the Cordance platform is designed to enhance the two most critical elements of a health system's brand and reputation: the patient experience and the physician work environment. This creates a powerful, albeit longer-term, financial benefit by increasing market share. A health system that is known for providing seamless, low-stress care and is a less burdensome place to practice medicine will naturally attract more patients and have an easier time recruiting and retaining top clinical talent.
+The link between patient experience and financial performance is well-established. Research from Accenture found that U.S. hospitals delivering a "superior" patient experience achieve net margins that are 50% higher on average than their peers.24 Similarly, a Deloitte analysis demonstrated that a 10 percentage point increase in top-box patient satisfaction ratings (as measured by HCAHPS) is associated with a
+1.4 percentage point increase in a hospital's net margin.25 By reducing administrative friction for physicians and facilitating better, more coordinated care for patients, Cordance directly contributes to the factors that drive these superior outcomes.
+
+Financial Modeling and Estimation
+Estimated Value Per Example: This value is best framed as an incremental increase in the health system's overall revenue. For a large health system with $3 billion in annual revenue, even a fractional gain in market share translates into millions of dollars. A 1% increase, for example, would represent $30 million in new top-line revenue.
+Annual Health System Extrapolation:
+Revenue Base: A health system serving 2 million patients is assumed to have a total annual revenue base of $3 billion.
+Cordance Impact: This model assumes a highly conservative, long-term impact. Over a period of three years, the cumulative effect of the improved patient and physician experience driven by Cordance is projected to contribute to a 0.25% increase in the system's overall annual revenue. This gain reflects a combination of increased patient loyalty, stronger word-of-mouth referrals, and a superior ability to attract and retain productive clinicians.
+Calculation: $3,000,000,000 annual revenue × 0.0025 = $7,500,000 annually
+
+This figure represents a strategic, long-term benefit that accrues from fundamentally improving the core operations and reputation of the health system.
+
+
+(2c.) Recapturing Revenue by Reducing Referral Leakage (Imaging & Specialist)
+Patient referral leakage—the process by which patients receive care from providers outside of their referring health system's network—is one of the most significant and pervasive sources of lost revenue in U.S. healthcare. Industry data indicates that a staggering 55% to 65% of all patient referrals are directed out-of-network, even when the required services are available in-house.10 This leakage translates into an annual financial toll ranging from $200 million to $500 million for an average hospital system.12 The primary drivers of leakage include a lack of physician awareness of in-network specialists, patient preference for convenience, and long wait times for in-network appointments.11
+The Cordance platform directly targets the information gap at the point of referral. By nudging a PCP to make an in-house imaging referral or alerting them to the presence of a newly hired in-house specialist (e.g., a Crohn's disease expert), Cordance helps to keep that stream of revenue within the system. This not only captures the revenue from the initial visit or procedure but also retains the patient for all subsequent follow-on care, which is critical for long-term financial stability.
+
+Financial Modeling and Estimation (Imaging)
+Estimated Revenue Per Example (MRI):7 The average cost of an MRI can range from $1,200 to $4,000, and hospital-based imaging centers typically charge a premium over freestanding clinics.19 One analysis found the average cost per claim for advanced imaging to be approximately $1,500.11 This analysis will use a conservative revenue estimate of $1,500 per in-house MRI that is recaptured from out-of-network leakage.
+Annual Health System Extrapolation (Imaging):
+Physician Base: The model assumes a base of 500 referring physicians within the health system's network (both employed and affiliated).
+Leakage Volume: Industry data suggests that a single provider referring just four diagnostic tests externally per month can result in an annual revenue loss of $72,000.11 This implies an average of 48 leaked scans per provider per year.
+Cordance Impact: A conservative assumption is made that Cordance can successfully prevent 10% of these otherwise-leaked imaging referrals by providing a timely and convenient in-network alternative.
+Calculation: 500 physicians × (48-year leaked scans​ × 0.10 recapture rate) × $1,500 scan revenue​=$3,600,000 annually
+
+Financial Modeling and Estimation (Specialist - Crohn's Example)
+Estimated Revenue Per Example: Capturing a referral for a complex chronic condition like Crohn's disease generates revenue far beyond the initial consultation. The value encompasses the full first-year episode of care, including diagnostics (e.g., endoscopy, imaging) and the administration of high-cost biologic therapies. A conservative estimate for the total first-year revenue from a newly diagnosed Crohn's patient is $15,000.
+Annual Health System Extrapolation (Specialist):
+Incidence Rate: The incidence of Crohn's disease in the population is approximately 10 to 12 new cases per 100,000 people per year. For a health system serving 2 million patients, this translates to roughly 200 to 240 new cases annually.
+Leakage Rate: A conservative leakage rate of 30% is assumed for these new specialist referrals, meaning approximately 60 to 72 newly diagnosed patients are lost to out-of-network providers each year. The model will use the lower bound of 60 patients.
+Cordance Impact: It is assumed that by providing a timely alert to the PCP about the availability of a new in-house Crohn's specialist, Cordance can successfully retain 50% of these patients who would have otherwise leaked out of the network.
+Calculation: 60 leaked patients × 0.50 recapture rate × $15,000 patient revenue ​= $450,000 annually
+Of course, this analysis is predicated on a new and available specialist which is not a daily event.  For purposes of this analysis, we chose a conservative position of adding one specialist a year in specialties with long waits.  A health system focused on these opportunities may well hire 10 more additional specialists/year.
+
+(2d.) Optimizing In-House Pharmacy Revenue via the 340B Program
+The 340B Drug Pricing Program represents a significant but often under-leveraged financial asset for eligible safety-net hospitals. The program mandates that pharmaceutical manufacturers provide outpatient drugs to these "covered entities" at substantial discounts, which can range from 25% to 50% of the purchase price.1 The fundamental economic mechanism for revenue generation lies in the spread between this discounted acquisition cost and the reimbursement received from payers. A covered entity purchases a drug at the low 340B price but bills the patient's insurer—whether commercial, Medicare, or Medicaid—at the higher, non-discounted rate, thereby capturing the difference as revenue.3 This revenue is intended to help hospitals "stretch scarce Federal resources as far as possible" to support care for vulnerable populations.4
+Despite its potential, realizing this value depends entirely on ensuring that eligible prescriptions are dispensed through the hospital's own pharmacy or a contracted pharmacy. The challenge identified in the Cordance thesis is that physicians, often unaware of a patient's eligibility or the financial implications, may not direct patients to the in-house pharmacy, causing this potential revenue to be lost. Cordance addresses this by delivering a timely nudge to the physician at the point of care.
+This intervention is not only a revenue-capture tool but also a critical instrument for compliance and risk mitigation. The 340B program has faced significant controversy and scrutiny regarding its transparency and the use of its generated funds, with some critics labeling it a "black box".2 By systematically identifying eligible patients and creating a clear, auditable data trail for each nudge and subsequent prescription decision, the Cordance platform provides a robust defense against regulatory audits. It transforms an often-opaque process into a transparent, data-driven workflow, thereby securing the revenue it helps to generate.
+
+Financial Modeling and Estimation
+Estimated Revenue Per Example: The estimated $100 per prescription is a reasonable and defensible estimate for the margin on a moderately expensive medication captured through the 340B program.7 An illustrative model from The Commonwealth Fund shows a covered entity generating $34.50 in revenue on a prescription with a payer reimbursement of $100, establishing a conservative baseline.3 For higher-cost specialty drugs, which are increasingly common in outpatient settings, a margin of $100 is entirely plausible. This analysis will proceed using
+$100 per prescription as a representative average revenue capture.
+Annual Health System Extrapolation: The annual financial impact is modeled based on the following conservative assumptions:
+Target Patient Cohort: The model accepts the memo's assumption of 2,000 eligible patients who are not currently utilizing the in-house pharmacy for their 340B-eligible prescriptions.7
+Prescription Volume: While the average American fills approximately 19 prescriptions per year, this model adopts a more conservative figure for this specific cohort, assuming an average of 10 relevant outpatient prescriptions per patient per year.8
+Cordance Impact Rate: It is assumed that the platform's nudges will successfully influence physician and patient behavior, resulting in the redirection of a conservative 25% of these targeted prescriptions to the in-house pharmacy.
+Calculation: The total annual revenue is calculated as follows: 2,000 patients × 10 patient-year prescriptions ​× 0.25 success rate × $100prescription revenue ​= $500,000
+3. Analysis of Cost Reduction Opportunities 
+This section details the mechanisms by which the Cordance Health platform can generate significant cost savings for health system partners. The analysis is particularly relevant for systems engaged in Value-Based Care (VBC) contracts, where they assume financial risk for the total cost of care. Each opportunity is quantified with a per-instance savings estimate and an annual extrapolation.
+(3a.) Reducing Spend on Suboptimal Therapeutics (Generic/Biosimilar)
+Pharmaceutical expenditures are one of the fastest-growing cost centers for health systems. A significant portion of this spending is driven by the use of high-cost branded drugs when clinically equivalent, lower-cost generics or biosimilars are available. This is particularly acute with specialty biologic drugs used to treat autoimmune conditions like rheumatoid arthritis (RA). Cordance can drive substantial savings by nudging clinicians to prescribe the most cost-effective option within a chosen therapeutic class, aligning prescribing habits with the health system's formulary and financial interests under VBC.
+
+Financial Modeling and Estimation (Antidepressant Example)
+Estimated Savings Per Prescription: Using the example of Zoloft versus generic sertraline,7 A 30-day supply of brand-name Zoloft can cost over $540, while the generic equivalent, sertraline, can be obtained for as little as $25.28 This represents a potential savings of over $500 per patient per month. This analysis will use a conservative average savings estimate of
+$400 per month for each patient successfully shifted from a branded antidepressant to a generic equivalent.
+Median Hospital Extrapolation (Antidepressants):
+Prescription Volume: In a patient population of 2 million, it is assumed that approximately 5% of patients (100,000) are prescribed an antidepressant. Of these, it is estimated that a residual 5% (5,000 patients) remain on a branded product for which a direct generic equivalent is available.
+Cordance Impact: The model assumes that Cordance's nudges successfully prompt a conversion to the generic alternative for 10% of this target population.
+Calculation: 5,000 patients × 0.10 conversion rate × $400 month savings ​× 12-year months​= $2,400,000 annually
+
+Financial Modeling and Estimation (Biologic Example)
+Estimated Savings Per Prescription: The cost differential between branded biologics and their biosimilar counterparts is dramatic. The annual cost for a biologic to treat rheumatoid arthritis can range from $10,000 to $30,000.29 The list price for Humira, a leading biologic, is approximately $6,600 per month, while some of its biosimilars have launched with list prices as low as $995 per month, creating a potential savings of over $5,000 per patient per month.30 This analysis uses a blended, conservative savings estimate of
+$2,500 per month per patient converted to a biosimilar.
+Median Hospital Extrapolation (Biologics):
+Patient Volume: Assuming a 0.5% prevalence of RA in the 2 million patient population yields 10,000 patients. It is further assumed that 20% of these patients (2,000) are on a branded biologic for which a biosimilar is a clinically appropriate and available alternative.
+Cordance Impact: It is assumed that Cordance successfully influences the conversion to a preferred biosimilar for 10% of this target patient group.
+Calculation: 2,000 patients × 0.10 conversion rate × $2,500 month savings​ × 12-year months ​= $6,000,000 annually
+(3b.) Decreasing System-Wide Costs (Unreimbursed Care & Physician Turnover)
+Two of the most significant and challenging costs for a health system are caring for patients who cannot pay and replacing physicians who leave due to burnout. Cordance addresses both of these issues indirectly but powerfully. By preventing the progression of chronic disease, it reduces the number of catastrophic, unreimbursed acute care episodes. By reducing administrative workload and cognitive burden, it directly targets a primary driver of physician burnout.
+
+Financial Modeling and Estimation (Unreimbursed Care)
+Estimated Savings Per Incident:7 We estimated the cost of a preventable, acute event in an underinsured patient. A preventable ED visit for a common condition costs over $2,000.41 A more serious event like a heart attack, as noted in the memo, would lead to an inpatient stay with costs far exceeding that. This analysis will use a blended cost of $10,000 for a significant acute event that results in unreimbursed care.
+Median Hospital Extrapolation:
+Preventable Events: It is assumed that Cordance's alerts around "therapeutic inertia" (e.g., failure to titrate antihypertensive medications) successfully prevent 50 major adverse cardiovascular events per year within the health system's at-risk, underinsured patient population. In a known CVD population (secondary prevention), avoided costs will begin to accrue at the end of the first year and continue for another 2-3 years.  There are numerous other secondary prevention opportunities we did not include in this analysis, making the number below very conservative.  We understand that while these are avoided costs from a TCOC perspective, they are also avoided revenue (assuming the health system retains responsibility for the avoided services).  Cordance will always prioritize doing what is best for the patient.
+Calculation: 50 prevented events × $10,000 event cost ​= $500,000 annually
+
+Financial Modeling and Estimation (Physician Turnover)
+Estimated Savings Per Physician: The cost of replacing a physician is exceptionally high, encompassing recruitment expenses, sign-on bonuses, and lost revenue during the transition and ramp-up period. Conservative estimates place this cost between $500,000 and over $1 million per physician.42 This analysis will use an average cost of $750,000 per physician.
+Median Hospital Extrapolation:
+Turnover Rate: The memo assumes four clinicians leave per year due to burnout, a plausible figure for a large system.7
+Cordance Impact: It is assumed that by reducing administrative burdens (like prior authorizations) and cognitive load, the Cordance platform contributes to the retention of two of these physicians each year.
+Calculation: 2-year retained physicians × $750,000 physician cost = $1,500,000 annually
+
+(3c.) Reducing Spend on Unnecessary Higher-Level Diagnostics (MRI vs. X-ray)
+A common source of inefficiency and excess cost in healthcare is the use of high-cost diagnostic imaging when a lower-cost alternative would be clinically sufficient. For example, ordering an MRI for an initial musculoskeletal complaint where an X-ray could effectively rule out a fracture is a frequent pattern of over-utilization. In fee-for-service models, this drives revenue; however, in VBC models where the health system is at risk for the cost, it directly erodes margins.
+
+The Cordance platform addresses this by embedding local policies and evidence-based guidelines into the clinical workflow, nudging a physician toward the most appropriate and cost-effective diagnostic choice. By providing greater confidence in choosing an X-ray over an MRI when medically supported, Cordance helps eliminate unnecessary spending.
+
+Financial Modeling and Estimation
+Estimated Savings Per Use: The memo's placeholder of "$1000 +/-" is a highly accurate estimate of the cost differential.7 The cash price for a simple X-ray can be as low as $100-$150, whereas an MRI typically costs between $1,200 and $4,000.26 This analysis will use a conservative cost avoidance figure of
+$1,000 per unnecessary MRI that is replaced with an X-ray or other lower-cost diagnostic.
+Median Hospital Extrapolation:
+Relevant Volume: A medium-to-large health system is assumed to perform 50,000 MRIs annually across all departments.
+Avoidable Rate: The model accepts the memo's reasonable assumption that 10% of these MRIs could be safely and effectively replaced by an X-ray based on clinical guidelines for initial diagnostic workups.7 This represents a target pool of 5,000 potentially unnecessary MRIs.
+Cordance Impact: It is assumed that Cordance's real-time decision support successfully influences physician behavior in 20% of these cases, leading to the selection of the more cost-effective option.
+Calculation: 50,000 MRIs × 0.10 avoidable rate × 0.20 success rate × $1,000 MRI savings​= $1,000,000 annually
+
+(3d.) Reducing Costs from Unnecessary Specialist Escalation 
+Premature or unnecessary referrals to specialists are a significant driver of avoidable costs, particularly in at-risk payment models. When a PCP refers a patient with a condition they could manage with proper support—such as initial management of heartburn or a borderline abnormal creatinine level—it triggers a cascade of costs, including the specialist consultation and potentially duplicative diagnostic tests. Cordance aims to reduce this by increasing the PCP's confidence and providing them with the necessary guidance to manage these conditions at the primary care level.
+
+The most profound impact of this mechanism is in the prevention of disease progression for chronic conditions. For diabetic patients with early-stage kidney disease, proactive management by a PCP, guided by Cordance alerts, can delay or prevent the progression to end-stage renal disease (ESRD), thereby avoiding the extraordinarily high costs associated with dialysis.
+
+Financial Modeling and Estimation (Abnormal Creatinine / Heartburn)
+Estimated Savings Per Avoided Referral:7 The national average cost for a new patient visit to a gastroenterologist is $355, while a nephrologist consultation can range from $73 to $147.31 This analysis will use a conservative savings figure of
+$250 per avoided referral, which accounts only for the initial consultation fee.
+Median Hospital Extrapolation (General):
+Referral Volume: A large health system is assumed to generate 500,000 specialist referrals annually from its primary care base.
+Avoidable Rate: A conservative estimate of 5% of these referrals are for low-yield conditions that a well-supported PCP could manage independently.
+Cordance Impact: The model assumes that Cordance successfully prevents 10% of these unnecessary referrals.
+Calculation: 500,000 referrals × 0.05 avoidable rate × 0.10 success rate × $250 referral savings ​= $625,000 annually
+
+Financial Modeling and Estimation (Preventing Dialysis)
+Estimated Savings Per Patient Per Year: The cost avoidance from preventing a patient's progression to ESRD is immense. The annual cost of preventative care for chronic kidney disease (CKD) can be substantial, but it is dwarfed by the cost of dialysis.33 The average annual cost to the Medicare system for a single hemodialysis patient is approximately
+$90,000.35 This analysis will use a cost avoidance figure of
+$80,000 per patient per year for each patient whose progression to dialysis is prevented.
+Median Hospital Extrapolation (Dialysis Prevention):
+At-Risk Population: Within the 2 million patient population, it is assumed there is a cohort of 1,000 patients with late-stage CKD who are at high risk of requiring dialysis within the next one to two years.
+Cordance Impact: It is assumed that Cordance's nudges—prompting more aggressive medication management, closer monitoring of renal function, and lifestyle interventions—successfully prevent just 1% of this high-risk cohort (10 patients) from initiating dialysis in a given year.
+Calculation: 10 patients × $80,000 patient-year savings ​= $800,000 annually
+
+(3e.) Mitigating Costs from Preventable Events and Administrative Overhead
+Health systems incur substantial costs from preventable process failures and administrative burdens. These include the direct costs of wasted resources from OR cancellations, the significant staff time consumed by prior authorizations, and the financial liability from medical malpractice claims. Cordance is designed to mitigate these costs by enforcing standardized processes and acting as a cognitive aid for clinicians.
+
+Financial Modeling and Estimation (Prior Authorization)
+Estimated Savings Per Authorization: The administrative burden of prior authorization (PA) is a major source of physician burnout and practice inefficiency. The memo's placeholder of "$50 in overhead" per PA is a conservative estimate of the staff time and resources required.7 The true cost to the healthcare system is likely much higher when considering care delays and negative patient outcomes.38 This analysis will use the
+$50 per PA figure.
+Median Hospital Extrapolation:
+PA Volume: On average, medical practices complete approximately 45 PA requests per physician per week.39 For the model's base of 500 physicians, this equates to 1.17 million PAs annually.
+Cordance Impact: It is assumed that by guiding clinicians toward services and medications that do not require PA ("gold-carded" pathways), Cordance can eliminate the need for just 1% of these requests.
+Calculation: 1,170,000 PAs × 0.01 reduction rate × $50 PA cost ​= $585,000 annually
+
+Financial Modeling and Estimation (Malpractice)
+Estimated Savings Per Incident: The memo's placeholder of $250,000 per avoided lawsuit is well-aligned with industry data, which shows the median medical malpractice settlement in the U.S. is $250,000.7 This figure will be used for the analysis.
+Median Hospital Extrapolation: The scenario described—an incidental finding on an imaging report that is not acted upon—is a common cause of malpractice litigation for missed or delayed diagnosis.
+Avoidance Rate: The memo's assumption of avoiding two such lawsuits per year in a large health system is a reasonable target for a platform designed to close care gaps and ensure follow-up on critical findings.7
+Calculation: 2-year avoided lawsuits ​× $250,000 lawsuit cost​ = $500,000 annually
+
+
+Works cited
+340B Drug Pricing Program - Texas Hospital Association, accessed September 26, 2025, https://www.tha.org/issues/medicare-and-medicaid/340b-drug-pricing-program/
+340B Drug Pricing Program - National Pharmaceutical Council, accessed September 26, 2025, https://www.npcnow.org/topics/health-spending/340b-drug-pricing-program
+340B Drug Pricing Program: How It Works, Why It's Controversial ..., accessed September 26, 2025, https://www.commonwealthfund.org/publications/explainer/2025/aug/340b-drug-pricing-program-how-it-works-and-why-its-controversial
+The 340B Drug Pricing Program | AAMC, accessed September 26, 2025, https://www.aamc.org/news/340b-drug-pricing-program
+340B Drug Pricing Program Overview, accessed September 26, 2025, https://www.340bhealth.org/members/340b-program/overview/
+Hospitals and 340B - PhRMA, accessed September 26, 2025, https://phrma.org/policy-issues/340b
+Cordance ROI & Revenue Memo.pdf
+Life Course Patterns of Prescription Drug Use in the United States - PMC, accessed September 26, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC10656114/
+What separates high- and low-performing hospitals in 2025, accessed September 26, 2025, https://www.beckershospitalreview.com/finance/what-separates-high-and-low-performing-hospitals-in-2025/
+Understanding Referral Leakage: Its Financial Implications for Healthcare Organizations and Patients | Simbo AI - Blogs, accessed September 26, 2025, https://www.simbo.ai/blog/understanding-referral-leakage-its-financial-implications-for-healthcare-organizations-and-patients-4072595/
+How We're Addressing Patient Referral Leakage - Ensemble Health Partners, accessed September 26, 2025, https://www.ensemblehp.com/blog/how-were-addressing-patient-referral-leakage/
+Unlocking Radiology Revenue: The Hidden Impact of Referral Leakage - Glassbeam, accessed September 26, 2025, https://www.glassbeam.com/the-hidden-impact-of-referral-revenue-leakage/
+Referral Leakage: Let's fix it together - MedMatch Network, accessed September 26, 2025, https://medmatchnetwork.com/referral-leakage-lets-fix-it-together/
+CPT Code 31231 - Description and Fee Schedule 2025 - PayerPrice, accessed September 26, 2025, https://payerprice.com/rates/31231-CPT-fee-schedule
+2025 ENT reimbursement - Procedure coding and ... - Stryker, accessed September 26, 2025, https://www.stryker.com/content/dam/commercial/usa/ent/gsnps/ENT-GSNPS-REIM-766503-EN_US.pdf
+CPT Code 31255 - Description and Fee Schedule 2025 - PayerPrice, accessed September 26, 2025, https://payerprice.com/rates/31255-CPT-fee-schedule
+Patient Referral Leakage FAQ - WebMD Ignite, accessed September 26, 2025, https://webmdignite.com/faq/patient-referral-leakage
+Referral Leakage in ACOs: Causes, Costs & Fixes - Innovaccer, accessed September 26, 2025, https://webflow.innovaccer.com/blogs/uncovering-the-silent-epidemic-of-referral-leakage
+CT Scan vs. MRI – Uses, Cost, Risks & More | Docpanel, accessed September 26, 2025, https://docpanel.com/ct-scan-vs-mri-uses-cost-risks-more
+Why Are MRIs So Expensive at Hospitals? - Heartland Imaging, accessed September 26, 2025, https://heartlandimagingcenters.com/2021/03/19/why-are-mris-so-expensive-at-hospitals/
+Evaluating factors associated with the cancellation and delay of elective surgical procedures: a systematic review - Oxford Academic, accessed September 26, 2025, https://academic.oup.com/intqhc/article/33/2/mzab092/6294831
+Cancellation of elective surgery: rates, reasons and effect on patient satisfaction - PMC, accessed September 26, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC8064262/
+Surgery Cancellation Rate Benchmark (+ Cost Calculator) - MyPreOp, accessed September 26, 2025, https://www.mypreop.org/post/surgery-cancellation-rate-benchmark-cost-calculator
+U.S. Hospitals that Provide Superior Patient Experience Generate 50 Percent Higher Financial Performance than Average Providers, Accenture Finds, accessed September 26, 2025, https://newsroom.accenture.com/news/2016/us-hospitals-that-provide-superior-patient-experience-generate-50-percent-higher-financial-performance-than-average-providers-accenture-finds
+Value of patient experience | Deloitte US, accessed September 26, 2025, https://www.deloitte.com/us/en/Industries/life-sciences-health-care/articles/hospitals-patient-experience.html
+Browse cash prices for radiology services | Sidecar Health, accessed September 26, 2025, https://cost.sidecarhealth.com/browse/radiology-services-costs
+MRI vs. X-Ray: Pros, Cons, Costs & More - Healthline, accessed September 26, 2025, https://www.healthline.com/health/mri-vs-xray
+How Much Does Sertraline Cost Without Insurance? - GoodRx, accessed September 26, 2025, https://www.goodrx.com/sertraline/sertraline-cost-without-insurance
+The Real Cost of Biologic Drugs, accessed September 26, 2025, https://biologicmeds.org/biologic-basics/the-real-cost-of-biologic-drugs/
+Save Billions or Stick With Humira? Drug Brokers Steer Americans to the Costly Choice, accessed September 26, 2025, https://kffhealthnews.org/news/article/humira-abbvie-biosimilar-biologic-savings-pbm-rebates/
+Cost of nephrologist visit by state - Sidecar Health Care Calculator, accessed September 26, 2025, https://cost.sidecarhealth.com/c/nephrologist-visit-cost
+How Much Does a Gastroenterology Visit Cost? - CareCredit, accessed September 26, 2025, https://www.carecredit.com/well-u/health-wellness/gastroenterology-visit-cost/
+A Guide to Managing the Cost of Kidney Disease Treatment - Healthline, accessed September 26, 2025, https://www.healthline.com/health/kidney-disease/affording-treatment-for-ckd
+Direct All-Cause Health Care Costs Associated With Chronic Kidney Disease in Patients With Diabetes and Hypertension: A Managed Care Perspective, accessed September 26, 2025, https://www.jmcp.org/doi/10.18553/jmcp.2009.15.4.312
+pharm.ucsf.edu, accessed September 26, 2025, https://pharm.ucsf.edu/kidney/need/statistics#:~:text=Hemodialysis%20care%20costs%20the%20Medicare,a%20total%20of%20%2428%20billion.
+Statistics · The Kidney Project · UCSF, accessed September 26, 2025, https://pharm.ucsf.edu/kidney/need/statistics
+Your Ultimate Guide to Surgery Cancellation Policies - Surgimate, accessed September 26, 2025, https://www.surgimate.com/your-ultimate-guide-surgery-cancellation-policy/
+Don't fall for these myths on prior authorization | American Medical Association, accessed September 26, 2025, https://www.ama-assn.org/practice-management/prior-authorization/don-t-fall-these-myths-prior-authorization
+A Guide to Relieving Administrative Burden: Prior Authorization - AAFP, accessed September 26, 2025, https://www.aafp.org/pubs/fpm/issues/2023/1100/prior-authorization.pdf
+Average Settlements Amounts in Medical Malpractice Lawsuits - Miller & Zois, accessed September 26, 2025, https://www.millerandzois.com/medical-malpractice/medical-malpractice-settlement-worth/
+18 Million Avoidable Hospital Emergency Department Visits Add $32 Billion in Costs to the Health Care System Each Year - UnitedHealth Group, accessed September 26, 2025, https://www.unitedhealthgroup.com/content/dam/UHG/PDF/2019/UHG-Avoidable-ED-Visits.pdf
+How Much Does It Cost to Replace a Physician During Peak Demand? - Hayes Locums, accessed September 26, 2025, https://www.hayeslocums.com/blog/how-much-does-it-cost-to-replace-a-physician-during-peak-demand/
+How much physician burnout is costing your organization | American Medical Association, accessed September 26, 2025, https://www.ama-assn.org/practice-management/physician-health/how-much-physician-burnout-costing-your-organization
+
