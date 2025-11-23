@@ -125,7 +125,9 @@ This ensures:
 - **Style**: List Paragraph
 - **Font**: Arial, 11pt
 - **Used for**: All bullet point content
-- **Bullet style**: Automatic from style definition
+- **Bullet style**: Small bullet (• character), not oversized
+- **Bullet size**: Should be proportional to 11pt text (not enlarged)
+- **Indentation**: 0.25" hanging indent
 - **Count per document**: ~450-500
 
 #### Reference Markers
@@ -206,18 +208,137 @@ new_doc.save('Cordance_Health_Insights_Bank_Your_Specialty.docx')
 2. Replace all content text (keep the heading structures)
 3. Ensure no direct formatting is accidentally applied
 
-## Verification Checklist
+## Comprehensive Verification Checklist
 
-Before finalizing a document, verify:
+### Pre-Merge Checklist
+Before running the merge script:
 
-- [ ] Document has exactly 1 Heading 1 paragraph (specialty name)
-- [ ] Document has ~10 Heading 2 paragraphs (use cases)
-- [ ] All headings use proper heading styles (not direct formatting)
-- [ ] Headers appear in Word's Navigation Pane
-- [ ] "At a practice level:" and "At the individual patient level:" are NOT headings
-- [ ] All bullet points use List Paragraph style
-- [ ] No direct font/size/color formatting on headings
-- [ ] When you click a heading, the Styles panel shows the heading style name
+- [ ] All source documents are in the correct directory
+- [ ] Primary Care document is the well-formatted template
+- [ ] Python environment has python-docx installed
+- [ ] Backup of existing files created (if applicable)
+
+### Post-Merge Technical Verification
+
+Run these checks programmatically after merging:
+
+#### Document Structure
+- [ ] Document has 3 Heading 1 paragraphs (one per specialty: Primary Care, Cardiology, Infectious Diseases)
+- [ ] Document has ~23 total Heading 2 paragraphs (USE CASE N: titles)
+  - [ ] Primary Care: 10 use cases
+  - [ ] Cardiology: 8 use cases
+  - [ ] Infectious Diseases: 5 use cases
+- [ ] All use case sections have consistent structure:
+  - [ ] Clinical Scenario (H3)
+  - [ ] Current State Challenges (H3)
+  - [ ] Cordance Solution (H3) with Before/During/After (H4)
+  - [ ] Impact on Three Pillars (H3) with Economics/Quality/Population (H4)
+  - [ ] Physician Value Proposition (H3)
+  - [ ] Implementation Considerations (H3)
+
+#### Heading Formatting
+- [ ] **Heading 1**: Times New Roman, 17pt, Bold, Blue (#2E74B5)
+  - [ ] Verify: "Primary Care" heading
+  - [ ] Verify: "Cardiology" heading
+  - [ ] Verify: "Infectious Diseases" heading
+- [ ] **Heading 2**: Times New Roman, 14pt, Bold, Blue (#2E74B5)
+  - [ ] Verify: First USE CASE in Primary Care
+  - [ ] Verify: First USE CASE in Cardiology
+  - [ ] Verify: First USE CASE in Infectious Diseases
+- [ ] **Heading 3**: Times New Roman, 13pt, Bold, Dark Blue (#1F4D78)
+  - [ ] Verify: "Clinical Scenario" in each section
+  - [ ] Verify: "Cordance Solution" in each section
+- [ ] **Heading 4**: Times New Roman, 11pt, Italic (not bold), Blue (#2E74B5)
+  - [ ] Verify: "Before Encounter" in each section
+  - [ ] Verify: "Economics (Value-Based Care & Fee-for-Service)" in each section
+
+#### Body Text Formatting
+- [ ] **Normal paragraphs**: Arial, 11pt, Black
+  - [ ] Verify: Clinical Scenario description paragraphs
+  - [ ] Verify: "At a practice level:" lines (NOT headings)
+  - [ ] Verify: "At the individual patient level:" lines (NOT headings)
+- [ ] **List Paragraph (bullets)**: Arial, 11pt with proper bullets
+  - [ ] Bullets are present (not missing)
+  - [ ] Bullet size is proportional (not oversized)
+  - [ ] Bullets use • character
+  - [ ] Proper hanging indent (0.25")
+  - [ ] Verify bullets in Primary Care "Current State Challenges"
+  - [ ] Verify bullets in Cardiology "Cordance Solution - Before Encounter"
+  - [ ] Verify bullets in Infectious Diseases "Impact on Three Pillars"
+
+#### Navigation and Structure
+- [ ] All headings appear in Word's Navigation Pane
+- [ ] Navigation Pane shows proper hierarchy (H1 > H2 > H3 > H4)
+- [ ] Table of Contents field is present at document start
+- [ ] TOC includes instruction to update field
+- [ ] Page breaks exist between use cases
+- [ ] Page numbers appear at bottom right of all pages (except possibly first page)
+
+### Manual Verification in Microsoft Word
+
+Open the merged document and verify:
+
+#### Style Application
+- [ ] Click on "Primary Care" heading → Styles panel shows "Heading 1"
+- [ ] Click on any USE CASE heading → Styles panel shows "Heading 2"
+- [ ] Click on "Clinical Scenario" → Styles panel shows "Heading 3"
+- [ ] Click on "Before Encounter" → Styles panel shows "Heading 4"
+- [ ] Click on a bullet point → Styles panel shows "List Paragraph"
+- [ ] Click on body text → Styles panel shows "Normal" or no style
+
+#### Visual Verification
+- [ ] Specialty names (H1) are largest and blue
+- [ ] USE CASE titles (H2) are large and blue
+- [ ] Section headings (H3) are medium and dark blue
+- [ ] Subsection headings (H4) are smaller, italic, and blue
+- [ ] Body text is Arial (not Cambria, not Calibri)
+- [ ] Header text is Times New Roman (not Arial, not Calibri)
+- [ ] Bullets are present and properly sized (not missing, not huge)
+- [ ] All three specialty sections have consistent formatting
+
+#### Table of Contents
+- [ ] Right-click on Table of Contents placeholder
+- [ ] Select "Update Field"
+- [ ] Choose "Update entire table"
+- [ ] Verify all Heading 1 entries appear
+- [ ] Verify all Heading 2 entries appear
+- [ ] Verify page numbers are correct
+- [ ] Verify only H1 and H2 appear (no H3 or H4)
+
+#### Page Breaks
+- [ ] Each USE CASE starts on a new page (or follows directly after previous)
+- [ ] Page breaks don't create extra blank pages
+- [ ] Specialty sections start on new pages
+
+### Common Issues to Check
+
+#### Font Issues
+- [ ] NO Calibri font anywhere (common Word default)
+- [ ] NO Cambria font anywhere (common Word default)
+- [ ] Headers use Times New Roman consistently
+- [ ] Body and bullets use Arial consistently
+
+#### Bullet Issues
+- [ ] Bullets are not missing
+- [ ] Bullets are not oversized (comically large)
+- [ ] Bullets align properly with text
+- [ ] Bullet character is • (not →, ▪, or other symbols)
+
+#### Heading Issues
+- [ ] "At a practice level:" is NOT formatted as Heading 4
+- [ ] "At the individual patient level:" is NOT formatted as Heading 4
+- [ ] No direct formatting applied to headings (only style inheritance)
+
+### Troubleshooting Failed Checks
+
+If any check fails:
+
+1. **Headers wrong font/size**: Remove direct formatting, reapply style
+2. **Bullets missing**: Check numbering definitions were copied from template
+3. **Bullets oversized**: Check bullet font size in numbering definition
+4. **Wrong body font**: Verify styles._element was deep copied from template
+5. **Headings not in Navigation**: Style not properly applied, reapply heading style
+6. **TOC not visible**: Field code present but not rendered, update field in Word
 
 ## Troubleshooting
 
