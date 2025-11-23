@@ -60,6 +60,10 @@ Documents/*without*.docx
 secrets/
 .claude/settings.local.json
 
+# Node.js
+node_modules/
+package-lock.json
+
 # Session monitoring scripts (temporary)
 monitor_log.txt
 monitor_scorer.sh
