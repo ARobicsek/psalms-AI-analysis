@@ -1,0 +1,211 @@
+# Commentary on Psalm 9
+---
+## Introduction
+Psalm 9 reads like a psalm of thanks until it doesn’t. It opens in a register of wholehearted gratitude—“I will thank YHWH with all my heart; I will recount all Your wonders” (אוֹדֶה ה׳ בְּכָל־לִבִּי; אֲסַפְּרָה כָּל־נִפְלְאוֹתֶיךָ, v. 2)—and it recounts divine victories with a finality that sounds like the end of history: “You blotted out their name forever and ever” (שְׁמָם מָחִיתָ לְעוֹלָם וָעֶד, v. 6). Yet the psalm’s center of gravity is petition: “Be gracious to me, O YHWH; see my affliction… You who lift me from the gates of death” (חָנְּנֵנִי… רְאֵה עָנְיִי… מִשַּׁעֲרֵי מָוֶת, v. 14), and climax: “Arise, O YHWH… Let the nations know they are only mortal” (קוּמָה ה׳… יֵדְעוּ גוֹיִם אֱנוֹשׁ הֵמָּה, vv. 20–21). What looks like thanksgiving becomes something edgier: worship as argument.
+The formal architecture underwrites that argument. Psalm 9 is the first panel of a two-part acrostic (alphabetic) composition with Psalm 10 in the Masoretic Text: initial lines follow the order of the Hebrew alphabet, though with gaps, and Psalm 10 continues the sequence. (An acrostic is a poem whose lines begin with successive letters; here, the device asserts order in the face of chaos.) The ancient Greek translation (the Septuagint) merges Psalms 9 and 10 into one, acknowledging their designed unity. The acrostic is conspicuously incomplete—fitting a psalm whose justice is asserted and yet remains painfully pending.
+A key to the poem is its “name” theology. God’s foes are not merely defeated; their names are erased: “You blotted out their name” (v. 6); “their memorial has perished” (v. 7; אָבַד זִכְרָם). Against this oblivion stands “those who know Your name” (יוֹדְעֵי שְׁמֶךָ, v. 11). In the ancient world, a name is more than a label; it is identity and enduring presence. Erasing a name is the utter annihilation of person or people, their memory and posterity—think of “I will utterly blot out the memory of Amalek” (מָחֹה אֶמְחֶה אֶת־זֵכֶר עֲמָלֵק, Exodus 17:14). Deuteronomy repeats the idiom: “you shall blot out the memory of Amalek” (תִּמְחֶה אֶת־זֵכֶר עֲמָלֵק, Deut 25:19). Psalm 9 leans into this polarity: the wicked are remembered no more; the faithful know the Name.
+Psalm 9 also works with the logic of poetic justice. Verse 16 offers the most vivid scene: “The nations sank in the pit they made… in the net they hid, their own foot is caught” (טָבְעוּ… בְּשַׁחַת עָשׂוּ; בְּרֶשֶׁת־זוּ טָמָנוּ נִלְכְּדָה רַגְלָם). This motif is elsewhere a staple of wisdom: “He dug a pit and dug it deep, and he fell into the trap he made” (בּוֹר כָּרָה וַיַּחְפְּרֵהוּ; וַיִּפֹּל בְּשַׁחַת יִפְעָל, Psalm 7:16); “Whoever digs a pit will fall into it” (כֹּרֶה שַׁחַת בָּהּ יִפֹּל, Proverbs 26:27). The psalm gives us not only retribution but a moral physics: evil collapses into its own devices. That is why verse 17 commands a meditative pause precisely here: “הִגָּיוֹן סֶלָה — Higgaion. Selah.” “Higgaion” appears elsewhere of meditation (Psalm 19:15: “וְהֶגְיוֹן לִבִּי — the meditation of my heart”) and of instrumental interlude (Psalm 92:4). The pairing with Selah (a pause marker in psalms) invites the congregation to dwell on the lesson: judgment is not only top-down; it unfolds immanently as consequences ripen.
+Zion, too, is more than place. “Sing to YHWH, who dwells in Zion; proclaim His deeds among the peoples” (זַמְּרוּ לַה׳ יֹשֵׁב צִיּוֹן; הַגִּידוּ בָעַמִּים עֲלִילוֹתָיו, v. 12). Traditional commentators already noticed that David speaks of Zion before he conquered it; Radak explains this as prophetic speech about the appointed place where the Presence will dwell. Psalm 9’s Zion is the axis where particularity and universality meet: from Zion’s gates the psalmist longs to tell “all Your praises” (v. 15), and from that center God’s judgments reach the world (vv. 8–9).
+The poetry moves through time with care. The first section narrates in the perfect (a past/completed aspect): “You rebuked nations; You destroyed the wicked” (גָּעַרְתָּ גוֹיִם; אִבַּדְתָּ רָשָׁע, v. 6). Then the grammar shifts to durative-present: “But YHWH sits forever” (וַה׳ לְעוֹלָם יֵשֵׁב, v. 8), “He judges the world in righteousness” (וְהוּא יִשְׁפֹּט־תֵבֵל בְּצֶדֶק, v. 9). Finally, imperatives and jussives surge: “Arise!” (קוּמָה), “Let not man prevail” (אַל־יָעֹז), “Let the nations be judged” (יִשָּׁפְטוּ), “Put fear upon them” (שִׁיתָה… מוֹרָה). The rhetoric is telescopic: past deliverance authorizes present confidence; both drive a demand for God’s visible rule now.
+Two short, difficult words in the final line concentrate the psalm’s theology of knowledge. “Set upon them מוֹרָה (morah), O YHWH; let the nations know they are enosh” (v. 21). “Morah” commonly means “fear/dread” (מוֹרָא), and thus most medievals read “put fear upon them.” The Greek translators, however, rendered it “lawgiver” (νομοθέτης), as if reading מוֹרֶה, “teacher.” Both belong: the point is pedagogical. God’s intervention—by awe or by instruction—aims at a single lesson: “אֱנוֹשׁ הֵמָּה — they are mortal.” “Enosh” is not the generic “adam,” but a term tilted toward frailty: “What is enosh that You are mindful of him?” (מָה־אֱנוֹשׁ, Psalm 8:5); “Who are you that you fear enosh who will die?” (מִי־אַתְּ… מֵאֱנוֹשׁ יָמוּת, Isaiah 51:12). The psalm thus ends not with Israel’s triumphalism but with anthropology: the nations must relearn creatureliness.
+Psalm 9’s hardest line may be the softest sounding: “For not forever shall the needy be forgotten; the hope of the poor shall not perish forever” (כִּי לֹא לָנֶצַח יִשָּׁכַח אֶבְיוֹן; תִּקְוַת עֲנִיִּים תֹּאבַד לָעַד, v. 19). The double negative is a confession that, for now, the afflicted are “forgotten.” The biblical word “remember” (זָכַר) is not a mental verb; it means “to act.” God “remembered” Noah—and the waters subsided; God “remembered” Rachel—and she conceived. So here: the psalm dares to say that divine “remembrance” must be made manifest. That is why this psalm is a prayer, not a retrospective. It speaks of erased names and established thrones, but it will not allow divine justice to remain a theological generality. It is praise that becomes a petition.
+Technical notes for the reader: “Acrostic” refers to the alphabetic structure of lines (here shared with Psalm 10). A “colon” is a single line in the parallel pair that makes up Hebrew verse. “Jussive” is a verb form that expresses a wish or command-like desire (“let X be”). “Selah” is a liturgical pause marker in the Psalms; its exact function is uncertain.
+## Modern Jewish Liturgical Use
+#### Key verses
+וְיִבְטְחוּ בְךָ יוֹדְעֵי שְׁמֶךָ; כִּי לֹא־עָזַבְתָּ דֹרְשֶׁיךָ ה׳ (Psalm 9:11) — “Those who know Your name trust in You; for You have not forsaken those who seek You, O YHWH.” This line anchors the daily Uva L’Tzion. It is paired with Isaiah 26:4, forming an antiphon of trust: “בִּטְחוּ בַה׳ עֲדֵי־עַד כִּי בְּיָהּ ה׳ צוּר עוֹלָמִים. וְיִבְטְחוּ בְךָ יוֹדְעֵי שְׁמֶךָ כִּי לֹא־עָזַבְתָּ דֹרְשֶׁיךָ ה׳.” In context, the congregation affirms covenantal knowledge as confidence before the concluding Kaddish.
+כִּי־דֹרֵשׁ דָּמִים אוֹתָם זָכָר; לֹא־שָׁכַח צַעֲקַת עֲנָוִים (Psalm 9:13) — “For He who seeks blood remembers them; He does not forget the cry of the humble.” Ashkenazi Av HaRachamim quotes it after Psalm 79’s plea for vengeance: “יִוָּדַע בַּגּוֹיִם לְעֵינֵינוּ נִקְמַת דַּם עֲבָדֶיךָ הַשָּׁפוּךְ; וְאוֹמֵר: כִּי דֹרֵשׁ דָּמִים אוֹתָם זָכָר, לֹא שָׁכַח צַעֲקַת עֲנָוִים.” Here the verse becomes communal memory-work for Jewish martyrs.
+#### Phrases
+מִשְׂגָּב לְעִתּוֹת בַּצָּרָה (Psalm 9:10) — “a stronghold in times of trouble.” In the Mizrahi High Holiday piyyut “Atanu L’chalot Panecha” the community appeals: “אָתָאנוּ לְבַקֵּשׁ מִמְּךָ כַּפָּרָה. אָיֹם וְנוֹרָא, מִשְׂגָּב לְעִתּוֹת בַּצָּרָה.” The psalm’s refuge-language becomes the congregation’s scaffold on the Day of Judgment.
+וַה׳ לְעוֹלָם יֵשֵׁב; כוֹנֵן לַמִּשְׁפָּט כִּסְאוֹ (Psalm 9:8) — Used in Edot HaMizrach within the “Ten Remembrances,” echoing the petition to erase Amalek: “…וְתִמְחֶה אֶת זֵכֶר עֲמָלֵק… וַה׳ לְעוֹלָם יֵשֵׁב כוֹנֵן לַמִּשְׁפָּט כִּסְאוֹ.” The verse grounds the plea in God’s eternal judicial throne.
+These liturgical adoptions are not accidental; they show how the tradition reads the psalm: trust as knowledge of the Name, refuge in judgment’s hour, and a God who remembers blood and enthrones justice.
+---
+---
+## Psalm 9
+
+1. לַ֭מְנַצֵּחַ עַל־מ֥וּת לַבֵּ֗ן מִזְמ֥וֹר לְדָוִֽד׃‎		For the leader; ‘almuth labben.-a A psalm of David.
+2. אוֹדֶ֣ה ה׳ בְּכׇל־לִבִּ֑י אֲ֝סַפְּרָ֗ה כׇּל־נִפְלְאוֹתֶֽיךָ׃‎		I will praise You, LORD, with all my heart;
+I will tell all Your wonders.
+3. אֶשְׂמְחָ֣ה וְאֶעֶלְצָ֣ה בָ֑ךְ אֲזַמְּרָ֖ה שִׁמְךָ֣ עֶלְיֽוֹן׃‎		I will rejoice and exult in You,
+singing a hymn to Your name, O Most High.
+4. בְּשׁוּב־אוֹיְבַ֥י אָח֑וֹר יִכָּשְׁל֥וּ וְ֝יֹאבְד֗וּ מִפָּנֶֽיךָ׃‎		When my enemies retreat,
+they stumble to their doom at Your presence.
+5. כִּֽי־עָ֭שִׂיתָ מִשְׁפָּטִ֣י וְדִינִ֑י יָשַׁ֥בְתָּ לְ֝כִסֵּ֗א שׁוֹפֵ֥ט צֶֽדֶק׃‎		For You uphold my right and claim,
+enthroned as righteous judge.
+6. גָּעַ֣רְתָּ ג֭וֹיִם אִבַּ֣דְתָּ רָשָׁ֑ע שְׁמָ֥ם מָ֝חִ֗יתָ לְעוֹלָ֥ם וָעֶֽד׃‎		You blast the nations;
+You destroy the wicked;
+You blot out their name forever.
+7. הָֽאוֹיֵ֨ב ׀ תַּ֥מּוּ חֳרָב֗וֹת לָ֫נֶ֥צַח וְעָרִ֥ים נָתַ֑שְׁתָּ אָבַ֖ד זִכְרָ֣ם הֵֽמָּה׃‎		The enemy is no more—
+ruins everlasting;
+You have torn down their cities;
+their very names are lost.-b
+8. וַֽ֭ה׳ לְעוֹלָ֣ם יֵשֵׁ֑ב כּוֹנֵ֖ן לַמִּשְׁפָּ֣ט כִּסְאֽוֹ׃‎		But the LORD abides forever;
+He has set up His throne for judgment;
+9. וְה֗וּא יִשְׁפֹּֽט־תֵּבֵ֥ל בְּצֶ֑דֶק יָדִ֥ין לְ֝אֻמִּ֗ים בְּמֵישָׁרִֽים׃‎		it is He who judges the world with righteousness,
+rules the peoples with equity.
+10. וִ֘יהִ֤י ה׳ מִשְׂגָּ֣ב לַדָּ֑ךְ מִ֝שְׂגָּ֗ב לְעִתּ֥וֹת בַּצָּרָֽה׃‎		The LORD is a haven for the oppressed,
+a haven in times of trouble.
+11. וְיִבְטְח֣וּ בְ֭ךָ יוֹדְעֵ֣י שְׁמֶ֑ךָ כִּ֤י לֹֽא־עָזַ֖בְתָּ דֹרְשֶׁ֣יךָ ה׳׃‎		Those who know Your name trust You,
+for You do not abandon those who turn to You, O LORD.
+12. זַמְּר֗וּ לַ֭ה׳ יֹשֵׁ֣ב צִיּ֑וֹן הַגִּ֥ידוּ בָ֝עַמִּ֗ים עֲלִֽילוֹתָֽיו׃‎		Sing a hymn to the LORD, who reigns in Zion;-c
+declare His deeds among the peoples.
+13. כִּֽי־דֹרֵ֣שׁ דָּ֭מִים אוֹתָ֣ם זָכָ֑ר לֹֽא־שָׁ֝כַ֗ח צַעֲקַ֥ת (עניים) [עֲנָוִֽים]׃‎		For He does not ignore the cry of the afflicted;
+He who requites bloodshed is mindful of them.-d
+14. חָֽנְנֵ֬נִי ה׳ רְאֵ֣ה עׇ֭נְיִי מִשֹּׂנְאָ֑י מְ֝רוֹמְמִ֗י מִשַּׁ֥עֲרֵי מָֽוֶת׃‎		Have mercy on me, O LORD;
+see my affliction at the hands of my foes,
+You who lift me from the gates of death,
+15. לְמַ֥עַן אֲסַפְּרָ֗ה כׇּֽל־תְּהִלָּ֫תֶ֥יךָ בְּשַׁעֲרֵ֥י בַת־צִיּ֑וֹן אָ֝גִ֗ילָה בִּישׁוּעָתֶֽךָ׃‎		so that in the gates of Fair Zion-e
+I might tell all Your praise,
+I might exult in Your deliverance.
+16. טָבְע֣וּ ג֭וֹיִם בְּשַׁ֣חַת עָשׂ֑וּ בְּרֶֽשֶׁת־ז֥וּ טָ֝מָ֗נוּ נִלְכְּדָ֥ה רַגְלָֽם׃‎		The nations sink in the pit they have made;
+their own foot is caught in the net they have hidden.
+17. נ֤וֹדַ֨ע ׀ ה׳֮ מִשְׁפָּ֢ט עָ֫שָׂ֥ה בְּפֹ֣עַל כַּ֭פָּיו נוֹקֵ֣שׁ רָשָׁ֑ע הִגָּי֥וֹן סֶֽלָה׃‎		The LORD has made Himself known:
+He works judgment;
+the wicked man is snared by his own devices. Higgaion. Selah.
+18. יָשׁ֣וּבוּ רְשָׁעִ֣ים לִשְׁא֑וֹלָה כׇּל־גּ֝וֹיִ֗ם שְׁכֵחֵ֥י אֱלֹקִֽים׃‎		Let the wicked be in Sheol,
+all the nations who ignore God!
+19. כִּ֤י לֹ֣א לָ֭נֶצַח יִשָּׁכַ֣ח אֶבְי֑וֹן תִּקְוַ֥ת (ענוים) [עֲ֝נִיִּ֗ים] תֹּאבַ֥ד לָעַֽד׃‎		Not always shall the needy be ignored,
+nor the hope of the afflicted forever lost.
+20. קוּמָ֣ה ה׳ אַל־יָעֹ֣ז אֱנ֑וֹשׁ יִשָּׁפְט֥וּ ג֝וֹיִ֗ם עַל־פָּנֶֽיךָ׃‎		Rise, O LORD!
+Let not men have power;
+let the nations be judged in Your presence.
+21. שִׁ֘יתָ֤ה ה׳ ׀ מוֹרָ֗ה לָ֫הֶ֥ם יֵדְע֥וּ גוֹיִ֑ם אֱנ֖וֹשׁ הֵ֣מָּה סֶּֽלָה׃ {פ}‎		Strike fear into them,-b O LORD;
+let the nations know they are only men. Selah.
+---
+## Verse-by-Verse Commentary
+Note on format: A “colon” is a single poetic line; Hebrew verses are presented with punctuation to show the cola.
+---
+**Verse 1**
+לַמְנַצֵּחַ; עַל־מ֥וּת לַבֵּן; מִזְמ֥וֹר לְדָוִד׃
+The superscription’s riddle is עַל־מוּת לַבֵּן (’al‑muth labben). Ancient translators already struggled; the Septuagint renders “concerning the hidden things of the son,” an interpretive guess. Medievals offered history (a foreign tyrant named “Labben,” or Nabal via letter reversal) or music (a tune title). The Masoretic accenting treats it as a single unit, like “according to Alamoth” (Psalm 46:1). “Al‑mut” sounds like “on death,” which harmonizes with the psalm’s “gates of death” (v. 14). The most economical reading takes it as a musical or liturgical rubric now lost: “to the conductor; [to the tune] ‘Al‑mut Labben.’”
+This obscurity does a bit of theology. If the rubric evokes mortality (“death/son”), the psalm immediately transposes it: God lifts “from the gates of death” (v. 14) to the “gates of daughter Zion” (v. 15). The heading whispers the theme in miniature.
+Traditional voices are candid about the uncertainty. Radak, citing Rabbi Dunash, imagines an enemy prince Labben; Ibn Ezra lists and then shrugs at the options. The plausibility test favors a tune title, not least because superscriptions commonly do that work. But the heading’s resonance with v. 14 is a bonus. The poem will negotiate between death’s threshold and Zion’s.
+Two framing notes for the whole psalm belong here. First, Psalm 9 is the opening half of an acrostic that continues into Psalm 10; the Septuagint counts them as a single psalm. The incompleteness of the alphabetic sequence matches the psalm’s claims: justice has begun but is not complete. Second, the overall movement—past victories, eternal throne, present plea—tracks the grammar: perfects (past), durative imperfects (ongoing), then imperatives/jussives (petition). The superscription is a keyhole view into that architecture: from “death” to David’s song.
+---
+**Verse 2**
+אוֹדֶ֣ה ה׳ בְּכָל־לִבִּי; אֲסַפְּרָה כָּל־נִפְלְאוֹתֶיךָ׃
+Two pledges—thanks and testimony—each with an “all”: “with all my heart” (בְּכָל־לִבִּי) and “all Your wonders” (כָּל־נִפְלְאוֹתֶיךָ). “Wonders” (נִפְלָאוֹת) is a technical psalm‑word for God’s saving acts, particularly Exodus and conquest (cf. Psalm 105). Thanksgiving here overlaps with confession (the Hebrew root ידה means both “to thank” and “to acknowledge”), and the second verb, “I will recount” (אֲסַפְּרָה), aligns praise with narrative obligation. Israel’s basic liturgical grammar tells the story: “He has made His wonders to be remembered” (זֵכֶר עָשָׂה לְנִפְלְאוֹתָיו, Psalm 111:4).
+The vow is comprehensive, but the psalm soon confesses an incompleteness: the very act of recounting past wonders becomes the case for fresh intervention. The two “all”s—heart and wonders—set up the tension: if the wonders are “all,” why plead “Have mercy on me… see my affliction” (v. 14)? Because in biblical prayer, memory is not nostalgia; it is leverage. Israel tells what God has done to summon God to be that God again.
+---
+**Verse 3**
+אֶשְׂמְחָה וְאֶעֶלְצָה בָּךְ; אֲזַמְּרָה שִׁמְךָ עֶלְיוֹן׃
+Emotion (“I will rejoice and exult in You”) resolves into liturgy (“I will sing to Your name”). The divine epithet shifts: from the covenant Name (YHWH) to עֶלְיוֹן (Elyon, “Most High”). Elyon is the universal title used by Melchizedek (Genesis 14:19–20), signaling a widening lens. The structure follows the classic “A… and what’s more, B” dynamic of Hebrew parallelism: internal joy → public song; covenant intimacy → cosmic sovereignty.
+“Name” (שֵׁם) is programmatic. This psalm will erase the wicked’s name (v. 6) and exult that the meek are “not forgotten” (vv. 13, 19). To “sing to Your name” is not to spell out tetragrams. It is to vindicate God’s reputation in the world by telling what God has done. The liturgy takes this straight: Uva L’Tzion asks that we become “יוֹדְעֵי שְׁמֶךָ — those who know Your Name.”
+---
+**Verse 4**
+בְּשׁוּב־אוֹיְבַי אָחוֹר; יִכָּשְׁלוּ וְיֹאבְדוּ מִפָּנֶיךָ׃
+A theophany in thirteen words: when enemies turn back, they stumble and perish “from Your face” (מִפָּנֶיךָ). “Face” (פָּנִים) in biblical idiom means presence and agency; “from your face” can mean “because of you,” not merely “in front of you.” Hebrew uses פָּנִים in that causal sense elsewhere: “Because of you (מִפְּנֵיכֶם) the land trembles” (Deut 2:25). The psalm insists that defeat was not good luck or superior tactics; it was the pressure of the divine Presence.
+Note the patterning: “turn… back” (אָחוֹר), “stumble… perish” (יִכָּשְׁלוּ… וְיֹאבְדוּ), “from Your face.” The line compresses battlefield, courtroom, and sanctuary. Parallel psalms embed this idiom in communal lament: “from the sound of the taunter… from before [מִפְּנֵי] the vengeful enemy” (Psalm 44:17). Here, it is the enemy who cannot bear God’s “face.”
+---
+**Verse 5**
+כִּי־עָשִׂיתָ מִשְׁפָּטִי וְדִינִי; יָשַׁבְתָּ לְכִסֵּא, שׁוֹפֵט צֶדֶק׃
+Past action (“You have done my right and my cause”) shifts to enthronement: “You took Your seat on the throne, a righteous judge.” Two judicial terms—מִשְׁפָּט and דִּין—overlap in meaning (case/judgment). The point is not taxonomy but intensity. The psalm translates battlefield victory into courtroom vindication. The judge sits (“יָשַׁבְתָּ”)—a posture of established rule.
+This bench is not bare neutrality. “צֶדֶק” (righteousness) modifies both judge and judgments. Other psalms lavish the same pairing on God’s throne: “Righteousness and justice are the foundation of His throne” (צֶדֶק וּמִשְׁפָּט מְכוֹן כִּסְאוֹ, Psalm 97:2). Psalm 9’s theology of kingship rests on legal imagery: God’s kingship is seen in adjudication.
+---
+**Verse 6**
+גָּעַרְתָּ גוֹיִם; אִבַּדְתָּ רָשָׁע; שְׁמָם מָחִיתָ לְעוֹלָם וָעֶד׃
+Three verbs, three objects: “You rebuked nations… destroyed the wicked… blotted out their name.” The last phrase breaks into the psalm’s leitmotif. “To blot out a name” (מָחָה שֵׁם) is the biblical idiom for eliminating existence from memory: “I will utterly blot out the memory of Amalek” (מָחֹה אֶמְחֶה אֶת־זֵכֶר עֲמָלֵק, Exodus 17:14); “You shall blot out the memory of Amalek” (תִּמְחֶה אֶת־זֵכֶר עֲמָלֵק, Deuteronomy 25:19). The psalm uses the idiom for God’s enemies writ large. The goal is not humiliation but oblivion.
+“Rebuke” (גָּעַר) when God is subject often means destructive speech (cf. Psalm 106:9: He “rebuked the Sea of Reeds and it dried up”). The second clause narrows from plural “nations” to singular “the wicked,” allowing either a collective or an emblematic foe. The third clause carries the punchline: even their name is erased.
+---
+**Verse 7**
+הָאוֹיֵב—תַּמּוּ חֳרָבוֹת לָנֶצַח; וְעָרִים נָתַשְׁתָּ; אָבַד זִכְרָם הֵמָּה׃
+A shattered line for a shattered enemy. The opening הָאוֹיֵב functions as a vocative (“O enemy”), and the syntax fragments: “Ended… are ruins forever,” “cities you uprooted,” “their memorial has perished—they themselves.” Ancient commentators struggled to smooth this, but the brokenness can be heard: the poet’s grammar enacts ruination. The verb נָתַשׁ (“uproot”) is usually agricultural; here, cities are plants torn from soil (cf. Jeremiah 1:10). The redundancy הֵמָּה (“they themselves”) underlines finality.
+This verse stands as the negative image of Zion. Uprooted cities, perished memory—this is the counter-Zion, the result of violent “rising up.” The next section (vv. 8–9) asserts that only one throne endures.
+---
+**Verse 8**
+וַה׳ לְעוֹלָם יֵשֵׁב; כוֹנֵן לַמִּשְׁפָּט כִּסְאוֹ׃
+An adversative pivot: “But YHWH sits forever; He established His throne for judgment.” The eternal present counters the enemies’ disappearance. The verb “establish” (כּוֹנֵן) stresses purpose—His throne is prepared “for judgment,” not merely for display. Psalm 97:2 uses the same pairing: “Righteousness and justice are the foundation of His throne” (צֶדֶק וּמִשְׁפָּט מְכוֹן כִּסְאוֹ). The psalm’s structure centers here: the particular victory (vv. 4–7) rests on the cosmic court.
+This line also anchors liturgy in Edot HaMizrach: following the remembrance of Amalek’s erasure, the community affirms that God’s judicial throne is not an episodic intervention but an abiding condition.
+---
+**Verse 9**
+וְהוּא יִשְׁפֹּט־תֵבֵל בְּצֶדֶק; יָדִין לְאֻמִּים בְּמֵישָׁרִים׃
+Universal jurisdiction: “He judges the world (תֵבֵל, the inhabited earth) in righteousness; He administers justice to the peoples in equity.” “Equity” (מֵישָׁרִים) is straightness, the level path; the image is that of scales without tilt. This is not an Israel-only theology. It is precisely from Zion that the nations are judged “with equity” (compare Psalm 96:10: “יִשְׁפֹּט עַמִּים בְּמֵישָׁרִים”). The psalm thus refuses a false choice between covenant particularity and universal justice; it roots the one in the other.
+---
+**Verse 10**
+וִיהִי ה׳ מִשְׂגָּב לַדָּךְ; מִשְׂגָּב לְעִתּוֹת בַּצָּרָה׃
+From world‑scope to the “crushed” (דָּךְ, the rare noun behind Isaiah’s “contrite,” דַּכָּא, Isaiah 57:15). The same God who judges peoples is a “stronghold” (מִשְׂגָּב, literally a height, inaccessible) for the weak—especially “in times of trouble.” Both halves double the term “stronghold,” and the second adds the temporal focus: “for times of trouble.” The refuge is not generic; it activates at pressure points.
+The liturgy on the Days of Awe explicitly invokes this: “אָיֹם וְנוֹרָא, מִשְׂגָּב לְעִתּוֹת בַּצָּרָה — Awesome and Fearful One, a stronghold in times of trouble.” Judgment and refuge are not opposites; in the Psalms they are often the same presence viewed from different angles.
+---
+**Verse 11**
+וְיִבְטְחוּ בְךָ יוֹדְעֵי שְׁמֶךָ; כִּי לֹא־עָזַבְתָּ דֹרְשֶׁיךָ ה׳׃
+This is the psalm’s covenantal heart. Those who “know Your name” trust because experience says “You have not abandoned” Your seekers. “Knowing the Name” is Exodus language: “This is My name forever” (Exodus 3:15). In the Psalms, it is relational fidelity, not secret syllables. The verb “trust” (בָּטַח) names firm reliance, not vague hope.
+Liturgy has made this a daily refrain. Uva L’Tzion places it beside Isaiah 26:4, so that Name‑knowledge and divine rock mutually interpret each other: “בִּטְחוּ בַה׳… וְיִבְטְחוּ בְךָ יוֹדְעֵי שְׁמֶךָ.” The prayer effectively reads Psalm 9 as instruction in trust.
+---
+**Verse 12**
+זַמְּרוּ לַה׳ יֹשֵׁב צִיּוֹן; הַגִּידוּ בָעַמִּים עֲלִילוֹתָיו׃
+The psalm moves from theology back into summons. Zion appears now as God’s dwelling (“יֹשֵׁב צִיּוֹן”), and the command is twofold: sing to God; tell the nations. “Deeds” (עֲלִילוֹת) is a concrete term—works that can be narrated. Radak, noting that at David’s time Zion was still Jebusite, reads this as prophetic. The psalm pictures Zion as the broadcast tower of God’s justice. The centripetal (sing to God) and centrifugal (declare to the nations) energies converge.
+---
+**Verse 13**
+כִּי־דֹרֵשׁ דָּמִים אוֹתָם זָכָר; לֹא־שָׁכַח צַעֲקַת עֲנָוִים׃
+A rare divine epithet: “seeker of bloods” (דֹרֵשׁ דָּמִים). The plural “bloods” heightens the sense of bloodguilt. The idiom evokes the go’el ha‑dam (kinsman‑avenger) of Numbers 35:19: “גֹּאֵל הַדָּם הוּא יָמִית אֶת־הָרֹצֵחַ — The blood‑avenger shall put the murderer to death.” Here YHWH Himself is Israel’s avenger and remembers victims. In biblical idiom “remember” (זָכַר) means efficacious attention; “forget” (שָׁכַח) means failure to act. The line asserts the opposite of v. 19’s present scandal: God does not ignore the cry of the meek.
+The ketiv/qere notes (written עֲנִיִּים, read עֲנָוִים) link poverty and humility—often the same people. This verse’s liturgical afterlife in Av HaRachamim is telling: Israel applies it to the blood of martyrs, making Psalm 9’s plea that God be the avenger the community’s ongoing cry.
+---
+**Verse 14**
+חָנְּנֵנִי ה׳; רְאֵה עָנְיִי מִשֹּׂנְאָי; מְרוֹמְמִי מִשַּׁעֲרֵי מָוֶת׃
+The turn to personal petition is abrupt and deliberate. After affirming that God “does not forget,” the psalmist dares to command, “See my affliction” (רְאֵה עָנְיִי). The participle מְרוֹמְמִי (“You who lift me up”) addresses God as the One who habitually raises him “from the gates of death.” “Gates of death” is a biblical image for mortality’s threshold: “Have the gates of death been revealed to you?” (Job 38:17, הֲנִגְלוּ לְךָ שַׁעֲרֵי־מָוֶת); “They reached the gates of death” (Psalm 107:18, עַד־שַׁעֲרֵי מָוֶת). The parallel in v. 15 (“gates of daughter Zion”) is designed: from death’s city to Zion’s.
+The petition coexists with theological confidence. The psalm is not bashful about demanding that God be God. Biblical faith is full‑throated enough to say “You do not forget” and “see!” in one breath.
+---
+**Verse 15**
+לְמַעַן אֲסַפְּרָה כָּל־תְּהִלָּתֶיךָ; בְּשַׁעֲרֵי בַת־צִיּוֹן; אָגִילָה בִּישׁוּעָתֶךָ׃
+Purpose clause: the goal of rescue is testimony. “So that I may recount all Your praises in the gates of daughter Zion; I will exult in Your deliverance.” The gates polarity is explicit now: the one lifted from “gates of death” will praise at Zion’s gates. “Daughter Zion” is the personified city (cf. Lamentations). The defective spelling כָּל־תְּהִלָּתֶיךָ (instead of the fully spelled plural) is an old poetic feature; the meaning is plural: “all Your praises.”
+The movement is spatial and theological: saved from death’s threshold, the psalmist becomes Zion’s herald. The repetition of “tell/recount” (אֲסַפְּרָה) ties back to v. 2. Past wonders fuel future witness.
+---
+**Verse 16**
+טָבְעוּ גוֹיִם בְּשַׁחַת עָשׂוּ; בְּרֶשֶׁת־זוּ טָמָנוּ נִלְכְּדָה רַגְלָם׃
+The proverb becomes picture. The nations sink in the pit they made; their foot is caught in the very net they hid. Biblical poetry uses “pit” (שַׁחַת/בּוֹר) and “net” (רֶשֶׁת) as stock images for traps. Here the doubling—pit and net—emphasizes both stages: the snare and the fall. Compare Psalm 7:16: “בּוֹר כָּרָה וַיַּחְפְּרֵהוּ; וַיִּפֹּל בְּשַׁחַת יִפְעָל — He dug a pit and dug it deep; and he fell into the trap he made.” Proverbs 26:27 gives the maxim: “כֹּרֶה שַׁחַת בָּהּ יִפֹּל; וְגֹלֵל אֶבֶן אֵלָיו תָּשׁוּב — Whoever digs a pit will fall into it; one who rolls a stone, it will roll back on him.” Psalm 9’s contribution is the tight linkage of what was hidden (the net) and what becomes public (their caught foot).
+The tiny pronoun זוּ functions as a relative (“the net which…”); biblical poetry often uses demonstratives this way (cf. Isaiah 42:24: זוּ חָטָאנוּ לוֹ). The effect is to point a finger: this very net.
+---
+**Verse 17**
+נ֥וֹדַע ה׳—מִשְׁפָּט עָשָׂה; בְּפֹעַל כַּפָּיו נוֹקֵשׁ רָשָׁע; הִגָּיוֹן סֶלָה׃
+The reversal motif becomes theology: “YHWH has made Himself known: He has done judgment.” The wicked is “snared (נוֹקֵשׁ) by the work of his own hands.” The phrase בְּפֹעַל כַּפָּיו is ambiguous: does “his hands” refer to the wicked (his own schemes snare him) or to God (God’s work ensnares the wicked)? Given v. 16, the first reading is primary—measure‑for‑measure justice—but the ambiguity allows the deeper claim: divine justice operates through the consequences of human action.
+Then the liturgical marker: “הִגָּיוֹן סֶלָה.” “Higgaion” appears as “meditation” (Psalm 19:15: “וְהֶגְיוֹן לִבִּי”) and as musical sound (Psalm 92:4: “עֲלֵי־הִגָּיוֹן בְּכִנּוֹר — with sounding music on the lyre”). The combination with “Selah” (a pause) makes most sense as a command to ponder—to let the congregation sit in the moral clarity of vv. 16–17. The psalm trains attention, not just emotion.
+---
+**Verse 18**
+יָשֻׁבוּ רְשָׁעִים לִשְׁאוֹלָה; כָּל־גּוֹיִם שְׁכֵחֵי אֱלֹקִים׃
+A jussive wish masquerading as a future: “Let the wicked return to Sheol.” “Sheol” (שְׁאוֹל) is the underworld, the grave, the realm of the dead. The verb “return” echoes Genesis 3:19: “וְאֶל־עָפָר תָּשׁוּב — to dust you shall return”; it makes death a return to origin. The Torah Temimah (Sanhedrin 105a) records a midrashic distinction: “יָשֻׁבוּ רְשָׁעִים לִשְׁאוֹלָה… — these are sinners of Israel; ‘all nations who forget God’—sinners among the nations,” a homiletic effort to parse exactly whom the wish targets. The point in the psalm is blunt: forgetting God (שְׁכֵחֵי אֱלֹקִים) is a path to death.
+The unusual ending -ה on לִשְׁאוֹלָה has led some to hear intensification (to the “deepest Sheol”), but biblical Hebrew freely uses a final he where we expect a prefixed lamed (e.g., מִצְרַיְמָה, “to Egypt”). The rhetorical effect, though, is descending: back you go.
+---
+**Verse 19**
+כִּי לֹא לָנֶצַח יִשָּׁכַח אֶבְיוֹן; תִּקְוַת עֲנִיִּים תֹּאבַד לָעַד׃
+A doctrinal sentence with a wound in it. Not “God never forgets the poor” but “not forever shall the poor be forgotten.” The psalm admits the present crisis. The benediction comes with a temporal clause: there is a terminus to God’s apparent inaction. This is how biblical theodicy often argues: faith asserts an end to the scandal, rather than denying it exists.
+The parallel pair “needy/poor” (אֶבְיוֹן / עֲנִיִּים) hovers between economics and vulnerability. What cannot perish “forever” (לָעַד) is not their life but their hope (תִּקְוָה). That is the psalm’s claim: a cosmos with a just God cannot allow the poor’s hope to vanish permanently.
+---
+**Verse 20**
+קוּמָה ה׳; אַל־יָעֹז אֱנוֹשׁ; יִשָּׁפְטוּ גוֹיִם עַל־פָּנֶיךָ׃
+Three petitions in rising order. “Arise” is the classic summons to the Divine Warrior (cf. Psalm 3:8; Numbers 10:35). “Let not enosh be strong”—not merely “man,” but mortal man. “Let the nations be judged before Your face.” The sequence follows the psalm’s grammar of presence: earlier, the enemies perished “from Your face” (מִפָּנֶיךָ, v. 4); now the nations must be judged “before Your face” (עַל־פָּנֶיךָ). The plea is not for human power to replace human power, but for God’s own adjudication to be visible.
+The choice of “enosh” (אֱנוֹשׁ) matters; it underscores the psalm’s anthropological sting. Compare Psalm 8:5: “מָה־אֱנוֹשׁ כִּי־תִזְכְּרֶנּוּ — What is enosh that You remember him?” and Isaiah 51:12: “מִי־אַתְּ… מֵאֱנוֹשׁ יָמוּת — Who are you that you fear enosh, who dies?” The prayer is that mortality not be mistaken for sovereignty.
+---
+**Verse 21**
+שִׁיתָה ה׳ מוֹרָה לָהֶם; יֵדְעוּ גוֹיִם אֱנוֹשׁ הֵמָּה; סֶלָה׃
+The last line closes the psalm’s argument: judgment as pedagogy. “Set upon them מוֹרָה.” Read in Hebrew spelling, this is the usual word for “fear” (מוֹרָא); the Greek translators read “lawgiver/teacher” (as if מוֹרֶה). Both get at the point: let God arrange reality so that the nations learn. And what they must learn is not Israel’s prowess but a simple anthropology: “they are enosh.”
+A Torah Temimah note (Sotah 48b) reads the line as a stay against Israel’s own corrosive despair: had David not prayed “שִׁיתָה ה׳ מוֹרָה לָהֶם,” Israel would have been reduced to selling fat (a proverbial image for poverty), a way of saying that a prayer for divine instruction restrains the hopeless cycles of violence.
+“Selah” leaves the line sounding in the sanctuary. The acrostic remains incomplete; the prayer remains open‑ended. Between Zion’s gates and death’s, the psalm teaches a certain patience: God’s justice is not abstract; it must be enacted. Worship, therefore, becomes argument—the argument faithful people make until the nations learn they are enosh and the poor’s hope does not perish.
+---
+#### Cross‑references quoted in context
+To illuminate this psalm’s figurative motifs, here are two key parallels quoted in Hebrew and English:
+- Pit/measure‑for‑measure: “בּוֹר כָּרָה וַיַּחְפְּרֵהוּ; וַיִּפֹּל בְּשַׁחַת יִפְעָל” — “He dug a pit and dug it deep; and he fell into the trap he made” (Psalm 7:16). “כֹּרֶה שַׁחַת בָּהּ יִפֹּל; וְגֹלֵל אֶבֶן אֵלָיו תָּשׁוּב” — “Whoever digs a pit will fall into it; one who rolls a stone—it will roll back on him” (Proverbs 26:27).
+- Gates of death: “הֲנִגְלוּ לְךָ שַׁעֲרֵי־מָוֶת; וְשַׁעֲרֵי צַלְמָוֶת תִּרְאֶה?” — “Have the gates of death been revealed to you? Have you seen the gates of deep darkness?” (Job 38:17). “וַיַּגִּיעוּ עַד־שַׁעֲרֵי מָוֶת” — “They reached the gates of death” (Psalm 107:18).
+These are not mere ornaments; they frame Psalm 9’s own use of the images and sharpen how its claims work in the field of biblical speech.
+---
+This revised commentary aims to keep the analysis as lucid as the poetry is concise, giving readers the Hebrew evidence, liturgical echoes, and comparative textures that make Psalm 9 both demanding and bracingly clear.
+---
+## Methodological & Bibliographical Summary
+### Research & Data Inputs
+- **Psalm Verses Analyzed**: 21
+- **LXX (Septuagint) Texts Reviewed**: 21
+- **Phonetic Transcriptions Generated**: 21
+- **Ugaritic Parallels Reviewed**: 0
+- **Lexicon Entries (BDB/Klein) Reviewed**: 32
+- **Traditional Commentaries Reviewed**: 105 (Ibn Ezra (18); Malbim (10); Meiri (18); Metzudat David (18); Radak (21); Rashi (17); Torah Temimah (3))
+- **Concordance Entries Reviewed**: 93
+- **Figurative Language Instances Reviewed**: 502
+- **Rabbi Jonathan Sacks References Reviewed**: N/A
+- **Master Editor Prompt Size**: 386,904 characters
+
+### Models Used
+**Structural Analysis (Macro)**: claude-sonnet-4-5
+**Verse Discovery (Micro)**: claude-sonnet-4-5
+**Commentary Synthesis**: claude-sonnet-4-5
+**Editorial Review**: gpt-5
+
+### Date Produced
+November 21, 2025

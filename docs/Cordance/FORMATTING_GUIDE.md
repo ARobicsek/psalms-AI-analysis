@@ -294,7 +294,7 @@ Open the merged document and verify:
 - [ ] Body text is Arial (not Cambria, not Calibri)
 - [ ] Header text is Times New Roman (not Arial, not Calibri)
 - [ ] Bullets are present and properly sized (not missing, not huge)
-- [ ] All three specialty sections have consistent formatting
+- [ ] All specialty sections have consistent formatting
 
 #### Table of Contents
 - [ ] Right-click on Table of Contents placeholder
@@ -328,6 +328,9 @@ Open the merged document and verify:
 - [ ] "At a practice level:" is NOT formatted as Heading 4
 - [ ] "At the individual patient level:" is NOT formatted as Heading 4
 - [ ] No direct formatting applied to headings (only style inheritance)
+
+#### References
+- [ ] Reference indicators are all superscripts
 
 ### Troubleshooting Failed Checks
 
