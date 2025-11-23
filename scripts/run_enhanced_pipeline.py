@@ -142,12 +142,23 @@ def run_enhanced_pipeline(
     # Check if we are resuming a run (any skip flag is true)
     is_resuming = any([skip_macro, skip_micro, skip_synthesis, skip_master_edit, skip_college, skip_print_ready, skip_word_doc]) and not smoke_test
 
+    # Determine if this is a "true resume" (only skipping to output steps) vs "reusing research" (running fresh analysis)
+    # If synthesis or master_editor are NOT skipped, this is a fresh analysis run
+    is_fresh_analysis = not skip_synthesis or not skip_master_edit
+
     initial_data = None
     if is_resuming and summary_json_file.exists():
         try:
             logger.info(f"Resuming pipeline run. Loading existing stats from {summary_json_file}")
             with open(summary_json_file, 'r', encoding='utf-8') as f:
                 initial_data = json.load(f)
+
+            # If running fresh analysis (synthesis or master_editor), clear old pipeline dates
+            # to avoid showing stale run dates from previous pipeline
+            if is_fresh_analysis and initial_data:
+                logger.info("Running fresh analysis with reused research. Resetting pipeline dates.")
+                initial_data['pipeline_start'] = None  # Will use current time
+                initial_data['pipeline_end'] = None
         except (json.JSONDecodeError, IOError) as e:
             logger.warning(f"Could not load existing stats file, starting fresh. Error: {e}")
 
@@ -661,7 +672,16 @@ def run_enhanced_pipeline(
     # STEP 4b: College Commentary (Separate API Call)
     # =====================================================================
     if not skip_college and not smoke_test:
-        if not edited_intro_college_file.exists():
+        # Check if college files need regeneration:
+        # 1. College file doesn't exist, OR
+        # 2. Synthesis files are newer than college files (synthesis was re-run)
+        college_needs_regeneration = (
+            not edited_intro_college_file.exists() or
+            (synthesis_intro_file.exists() and
+             synthesis_intro_file.stat().st_mtime > edited_intro_college_file.stat().st_mtime)
+        )
+
+        if college_needs_regeneration:
             logger.info("\n[STEP 4b] Running MasterEditor for COLLEGE EDITION...")
             print(f"\n{'='*80}")
             print(f"STEP 4b: College Commentary Generation")
@@ -711,8 +731,8 @@ def run_enhanced_pipeline(
             # Rate limit delay
             time.sleep(delay_between_steps)
         else:
-            logger.info(f"[STEP 4b] Skipping college commentary (using existing {edited_intro_college_file})")
-            print(f"\nSkipping Step 4b (using existing college commentary files)\n")
+            logger.info(f"[STEP 4b] Skipping college commentary (existing files are up-to-date: {edited_intro_college_file})")
+            print(f"\nSkipping Step 4b (college commentary files are up-to-date)\n")
     else:
         if skip_college:
             logger.info(f"[STEP 4b] Skipping college commentary generation (--skip-college flag set)")
