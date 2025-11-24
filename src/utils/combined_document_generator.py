@@ -362,63 +362,57 @@ class CombinedDocumentGenerator:
 
         commentaries = research_data.get('commentary_counts', {})
         total_commentaries = sum(commentaries.values()) if commentaries else 'N/A'
-
-        liturgical_count = research_data.get('liturgical_uses_count', 'N/A')
-        related_psalms_count = research_data.get('related_psalms_count', 'N/A')
-
-        summary = f"""### Research & Data Inputs
-
-**Psalm Length**: {verse_count} verses
-
-**Medieval Commentaries Consulted**: {total_commentaries}"""
-
+        commentary_details = ""
         if commentaries:
-            for name, count in commentaries.items():
-                summary += f"\n- {name}: {count} entries"
+            commentary_lines = [f"{c} ({n})" for c, n in sorted(commentaries.items())]
+            commentary_details = f" ({'; '.join(commentary_lines)})"
 
-        summary += f"""
+        concordance_total = sum((research_data.get('concordance_results', {}) or {}).values())
 
-**Hebrew Lexicon Entries**: {lexicon_count}
+        figurative_results = research_data.get('figurative_results', {}) or {}
+        figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
 
-**Ugaritic Parallels Analyzed**: {ugaritic_count}
+        sacks_count = research_data.get('sacks_references_count', 0)
+        related_psalms_count = research_data.get('related_psalms_count', 0)
+        related_psalms_list = research_data.get('related_psalms_list', [])
 
-**Liturgical Uses Documented**: {liturgical_count}
+        # Format related psalms display: count and list
+        if related_psalms_count > 0 and related_psalms_list:
+            psalms_list_str = ', '.join(str(p) for p in related_psalms_list)
+            related_psalms_str = f"{related_psalms_count} (Psalms {psalms_list_str})"
+        elif related_psalms_count > 0:
+            related_psalms_str = str(related_psalms_count)
+        else:
+            related_psalms_str = 'N/A'
 
-**Number of Similar Psalms Analyzed**: {related_psalms_count}"""
+        master_editor_stats = stats.get('steps', {}).get('master_editor', {})
+        prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
+        if isinstance(prompt_chars, int):
+            prompt_chars_str = f"{prompt_chars:,} characters"
+        else:
+            prompt_chars_str = f"{prompt_chars} characters"
 
-        # --- Character Counts ---
-        char_counts = stats.get('character_counts', {})
+        # --- Models Used --- (This section will be built from the markdown in the generate() method)
+        models_used_str = "### Models Used"
 
-        intro_chars = char_counts.get('synthesis_intro', 'N/A')
-        verses_chars = char_counts.get('synthesis_verses', 'N/A')
-        total_chars = char_counts.get('total_synthesis', 'N/A')
+        summary = f"""
+Methodological & Bibliographical Summary
 
-        summary += f"""
+### Research & Data Inputs
+**Psalm Verses Analyzed**: {verse_count}
+**LXX (Septuagint) Texts Reviewed**: {verse_count}
+**Phonetic Transcriptions Generated**: {verse_count}
+**Ugaritic Parallels Reviewed**: {ugaritic_count}
+**Lexicon Entries (BDB\\Klein) Reviewed**: {lexicon_count}
+**Traditional Commentaries Reviewed**: {total_commentaries}{commentary_details}
+**Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}
+**Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}
+**Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
+**Similar Psalms Analyzed**: {related_psalms_str}
+**Master Editor Prompt Size**: {prompt_chars_str}
 
-### Character Counts (Synthesis Stage)
-
-**Introduction**: {intro_chars:,} characters
-**Verse Commentary**: {verses_chars:,} characters
-**Total**: {total_chars:,} characters"""
-
-        # --- Pipeline Duration ---
-        pipeline_start = stats.get('pipeline_start')
-        pipeline_end = stats.get('pipeline_end')
-
-        if pipeline_start and pipeline_end:
-            from datetime import datetime
-            start_dt = datetime.fromisoformat(pipeline_start.replace('Z', '+00:00'))
-            end_dt = datetime.fromisoformat(pipeline_end.replace('Z', '+00:00'))
-            duration = end_dt - start_dt
-
-            hours = int(duration.total_seconds() // 3600)
-            minutes = int((duration.total_seconds() % 3600) // 60)
-
-            summary += f"\n\n### Pipeline Duration\n\n{hours} hours, {minutes} minutes"
-
-        # --- Models Used section will be added separately ---
-        summary += "\n\n### Models Used"
-
+{models_used_str}
+        """.strip()
         return summary
 
     def _add_em_dash_separator(self):

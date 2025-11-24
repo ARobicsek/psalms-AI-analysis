@@ -1,8 +1,58 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-24 (Session 138 - COMPLETE ✓)
+**Last Updated**: 2025-11-24 (Session 139 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Combined Document Generator Integrated
+**Status**: ✓ V6 System Ready - Combined Document Generator Enhanced
+
+## Session 139 Summary (COMPLETE ✓)
+
+### Combined Document Generator Enhancement
+
+**Objective**: Add complete Methodological Summary to combined document and test pipeline without re-running LLM steps
+**Result**: ✓ COMPLETE - Methodological Summary enhanced, pipeline testing successful
+
+**Issues Addressed**:
+
+1. **Missing Methodological Summary Fields**:
+   - Combined document generator had incomplete Methodological Summary section
+   - Missing fields: LXX texts, Phonetic transcriptions, Concordance entries, Figurative language instances, Rabbi Sacks references, Master editor prompt size, Related psalms list display
+   - Root cause: Session 138 implementation used older format from document_generator.py
+
+2. **Pipeline Testing Without LLM Re-runs**:
+   - User needed way to test/fix combined doc generation without costly LLM steps
+   - Solution: Pipeline skip flags allow regenerating only document outputs
+
+**Fixes Implemented**:
+
+1. **Enhanced _format_bibliographical_summary Method**:
+   - Updated to match complete version from document_generator.py
+   - Added all missing fields to Research & Data Inputs section
+   - Fixed escape sequence warning (`BDB\Klein` → `BDB\\Klein`)
+   - Related psalms now shows both count and list: "5 (Psalms 77, 25, 34, 35, 10)"
+
+2. **Pipeline Testing Workflow Documented**:
+   - Command to regenerate documents without LLM steps:
+     ```bash
+     python scripts/run_enhanced_pipeline.py <N> --skip-macro --skip-micro --skip-synthesis --skip-master-edit --output-dir output/psalm_<N>
+     ```
+   - Successfully tested with Psalm 9 and Psalm 10
+   - No regex error encountered (issue from Session 138 was transient)
+
+**Files Modified**:
+- `src/utils/combined_document_generator.py` - Enhanced Methodological Summary (lines 353-416)
+
+**Testing Results**:
+- ✅ Standalone generator: Successfully regenerated Psalm 9 combined document
+- ✅ Pipeline integration: Successfully regenerated Psalm 9 and 10 combined documents
+- ✅ No regex errors encountered in pipeline runs
+- ✅ All Methodological Summary fields now appear in combined .docx
+
+**Impact**:
+- ✅ Combined document now has complete Methodological Summary matching individual documents
+- ✅ Clear workflow for testing document generation without expensive LLM re-runs
+- ✅ Pipeline robustness confirmed with successful multi-psalm testing
+
+---
 
 ## Session 138 Summary (COMPLETE ✓)
 

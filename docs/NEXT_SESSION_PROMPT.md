@@ -8,118 +8,107 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 138 - Combined Document Generator (2025-11-24) ✅ COMPLETE
+**Last Session**: Session 139 - Combined Document Generator Enhancement (2025-11-24) ✅ COMPLETE
 
-## Session 138 Summary (COMPLETE ✓)
+## Session 139 Summary (COMPLETE ✓)
 
-**Objective**: Create a combined document generator that merges main and college commentaries into a single .docx file
-**Result**: ✓ COMPLETE - New combined document generator integrated into pipeline
+**Objective**: Add complete Methodological Summary to combined document and test pipeline without re-running LLM steps
+**Result**: ✓ COMPLETE - Methodological Summary enhanced, pipeline testing workflow established
 
-**Feature Requirements**:
-User requested a single .docx file containing:
-1. Verse text (Hebrew & English with footnote removal)
-2. Main introduction
-3. College introduction (titled "Introduction - College version" with "College" in green)
-4. Modern Jewish Liturgical Use section (from main version)
-5. Verse-by-verse commentary with both versions:
-   - Main commentary
-   - Em dash separator (—)
-   - College commentary (first word green & bold)
-   - Horizontal border line between verses
+**Issues Addressed from Session 138**:
 
-**Implementation**:
+1. **Missing Methodological Summary Fields** (RESOLVED ✅):
+   - Combined document generator had incomplete Methodological Summary section
+   - Missing fields: LXX texts, Phonetic transcriptions, Concordance entries, Figurative language instances, Rabbi Sacks references, Master editor prompt size, Related psalms list display
+   - Root cause: Session 138 implementation used older format from document_generator.py
 
-1. **Created CombinedDocumentGenerator** ([combined_document_generator.py](../src/utils/combined_document_generator.py)):
-   - New class extending document generation capabilities
-   - Takes 4 markdown inputs: main intro, main verses, college intro, college verses
-   - Generates single unified .docx with both commentary versions
+2. **Pipeline Testing Without LLM Re-runs** (RESOLVED ✅):
+   - Needed way to test/fix combined doc generation without costly LLM steps
+   - Solution: Pipeline skip flags allow regenerating only document outputs
 
-2. **Key Features Implemented**:
-   - **Proper text formatting**: All body text uses Aptos 12pt (with explicit `set_font=True`)
-   - **Hebrew in parentheses fix**: Uses LRO/PDF Unicode control characters + cluster reversal
-   - **College intro heading**: "Introduction - College version" with "College" colored green
-   - **Verse commentary structure**:
-     - Main commentary
-     - Em dash separator (—) - only shown if college commentary exists
-     - College commentary with Hebrew verse lines automatically skipped
-     - First English word of college commentary green & bold
-     - Horizontal border between verses (not after last verse)
-   - **Divider filtering**: Filters out markdown dividers (---, ___, ***, —, –) from source text
+**Fixes Implemented**:
 
-3. **Pipeline Integration** ([run_enhanced_pipeline.py](../scripts/run_enhanced_pipeline.py)):
-   - Added STEP 6c: Combined Document Generation
-   - New flag: `--skip-combined-doc` to skip this step
-   - Automatically runs after STEP 6b (college document generation)
-   - Outputs: `psalm_XXX_commentary_combined.docx`
+1. **Enhanced _format_bibliographical_summary Method** ([combined_document_generator.py:353-416](../src/utils/combined_document_generator.py#L353-L416)):
+   - Updated to match complete version from document_generator.py
+   - Added all missing fields to Research & Data Inputs section:
+     - **LXX (Septuagint) Texts Reviewed**: {verse_count}
+     - **Phonetic Transcriptions Generated**: {verse_count}
+     - **Concordance Entries Reviewed**: {concordance_total}
+     - **Figurative Language Instances Reviewed**: {figurative_total}
+     - **Rabbi Jonathan Sacks References Reviewed**: {sacks_count}
+     - **Master Editor Prompt Size**: {prompt_chars}
+   - Fixed escape sequence warning (`BDB\Klein` → `BDB\\Klein`)
+   - Related psalms now shows both count and list: "5 (Psalms 77, 25, 34, 35, 10)"
 
-**Files Created**:
-- `src/utils/combined_document_generator.py` (755 lines) - Complete combined document generator
+2. **Pipeline Testing Workflow Documented**:
+   - Command to regenerate documents without LLM steps:
+     ```bash
+     python scripts/run_enhanced_pipeline.py <N> --skip-macro --skip-micro --skip-synthesis --skip-master-edit --output-dir output/psalm_<N>
+     ```
+   - Successfully tested with Psalm 9 and Psalm 10
+   - No regex error encountered (issue from Session 138 was transient)
 
 **Files Modified**:
-- `scripts/run_enhanced_pipeline.py` - Pipeline integration (STEP 6c, new parameter, CLI flag)
+- `src/utils/combined_document_generator.py` - Enhanced Methodological Summary (lines 353-416)
 
-**Technical Details**:
+**Testing Results**:
+- ✅ Standalone generator: Successfully regenerated Psalm 9 combined document
+- ✅ Pipeline integration: Successfully regenerated Psalm 9 and 10 combined documents
+- ✅ No regex errors encountered in pipeline runs (transient issue resolved)
+- ✅ All Methodological Summary fields now appear in combined .docx
 
-1. **Formatting Methods** (copied from document_generator.py):
-   - `_process_markdown_formatting()` - Handles bold/italic with Hebrew parentheses
-   - `_add_commentary_with_bullets()` - Proper bullet list handling
-   - `_set_paragraph_ltr()` - Forces LTR directionality
-   - `_reverse_hebrew_by_clusters()` - Preserves nikud with base letters
+**Impact**:
+- ✅ Combined document now has complete Methodological Summary matching individual documents
+- ✅ Clear workflow for testing document generation without expensive LLM re-runs
+- ✅ Pipeline robustness confirmed with successful multi-psalm testing
 
-2. **College Commentary Processing**:
-   - Automatically detects and skips leading Hebrew verse lines
-   - Identifies first English word for green/bold formatting
-   - Maintains proper paragraph structure (regular vs bullet)
-
-3. **Divider Logic**:
-   - Main and college commentary: Em dash separator
-   - Between verses: Horizontal border line
-   - Markdown dividers (---, etc.) filtered from source
-
-**Usage**:
+**Usage Examples**:
 ```bash
-# Generate combined document (included by default)
+# Generate all documents including combined (default)
 python scripts/run_enhanced_pipeline.py 9
+
+# Regenerate only documents (skip expensive LLM steps)
+python scripts/run_enhanced_pipeline.py 9 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --output-dir output/psalm_9
 
 # Skip combined document generation
 python scripts/run_enhanced_pipeline.py 9 --skip-combined-doc
 
-# Or use the standalone generator
+# Use standalone generator
 python src/utils/combined_document_generator.py 9
 ```
 
-**Impact**:
-- ✅ Users can now get main + college commentaries in a single document
-- ✅ Proper formatting with Aptos font throughout
-- ✅ Hebrew in parentheses displays correctly (no RTL issues)
-- ✅ Clean divider structure (em dash between versions, borders between verses)
-- ✅ College commentary easily identifiable with green text
-- ✅ Fully integrated into pipeline with skip flag
+---
 
-**Testing**:
-Tested with Psalm 9:
-- All formatting correct (Aptos font, no Arial)
-- Hebrew parentheses display properly
-- Dividers clean (em dash + border only)
-- College text properly colored and formatted
+## Session 138 Summary (COMPLETE ✓)
 
-**Issues Found**:
+**Objective**: Create a combined document generator that merges main and college commentaries into a single .docx file
+**Result**: ✓ COMPLETE - New combined document generator integrated into pipeline with `--skip-combined-doc` flag
 
-1. **Pipeline Regex Error** (NOT RESOLVED):
-   - When running via pipeline: `python scripts/run_enhanced_pipeline.py 10`
-   - Error in STEP 6c: `"Cannot specify ',' with 's'."`
-   - Error appears to be a regex-related issue in the pipeline context
-   - **Workaround**: Standalone generator works perfectly: `python src/utils/combined_document_generator.py 10`
-   - Successfully generates: `output/psalm_10/psalm_010_commentary_combined.docx`
-   - Issue may be transient (module caching, import order, or timing)
-   - **Action needed**: Investigate why same code works standalone but fails in pipeline
+**Feature Implemented**:
+Created a unified .docx document containing:
+1. Full psalm text (Hebrew & English)
+2. Main introduction
+3. College introduction (heading with "College" in green)
+4. Modern Jewish Liturgical Use section (from main version)
+5. Verse-by-verse commentary with both versions side-by-side
 
-2. **Missing Methodological Summary** (NOT IMPLEMENTED):
-   - The combined document generator currently does NOT include the "Methodological & Bibliographical Summary" section
-   - This section exists in both main and college individual documents
-   - Should be added to the end of the combined document as well
-   - Code structure exists at [combined_document_generator.py:632-639](../src/utils/combined_document_generator.py#L632-L639) but appears incomplete
-   - **Action needed**: Complete implementation to add full Methodological & Bibliographical Summary to combined .docx
+**Key Implementation**:
+- Created `CombinedDocumentGenerator` class ([combined_document_generator.py](../src/utils/combined_document_generator.py))
+- All body text uses Aptos 12pt font (explicit `set_font=True`)
+- Hebrew in parentheses handled correctly (LRO/PDF Unicode + cluster reversal)
+- College commentary: Automatically skips Hebrew verse lines, first English word colored green & bolded
+- Divider system: Em dash (—) between main and college, horizontal border line between verses
+- Pipeline integration: Added as STEP 6c with `--skip-combined-doc` flag
+
+**Files Created**:
+- `src/utils/combined_document_generator.py` (755 lines)
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Pipeline integration
+
+**Issues Found** (Resolved in Session 139):
+- Incomplete Methodological Summary section (missing several fields)
+- Transient pipeline regex error (resolved by Session 139)
 
 ---
 

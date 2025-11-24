@@ -1,0 +1,508 @@
+{
+  "psalm_number": 10,
+  "pipeline_start": "2025-11-24T10:00:46.424477",
+  "pipeline_end": "2025-11-24T10:42:31.857804",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 3288,
+      "input_token_estimate": 1096,
+      "output_char_count": 17317,
+      "output_token_estimate": 5772,
+      "duration_seconds": 122.07685875892639,
+      "completion_date": null,
+      "timestamp": "2025-11-24T10:00:46.429226"
+    },
+    "micro_analysis": {
+      "input_char_count": 17317,
+      "input_token_estimate": 5772,
+      "output_char_count": 243455,
+      "output_token_estimate": 81151,
+      "duration_seconds": 905.7458820343018,
+      "completion_date": null,
+      "timestamp": "2025-11-24T10:04:48.558008"
+    },
+    "synthesis": {
+      "input_char_count": 260774,
+      "input_token_estimate": 86924,
+      "output_char_count": 84105,
+      "output_token_estimate": 28035,
+      "duration_seconds": 686.0476047992706,
+      "completion_date": null,
+      "timestamp": "2025-11-24T10:21:54.371719"
+    },
+    "master_editor": {
+      "input_char_count": 325181,
+      "input_token_estimate": 108393,
+      "output_char_count": 34774,
+      "output_token_estimate": 11591,
+      "duration_seconds": 311.431916475296,
+      "completion_date": "2025-11-24T10:42:31.857804",
+      "timestamp": "2025-11-24T10:35:22.666980"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "תַּעֲמֹד",
+        "reason": "Unusual choice - 'stand' rather than more active verb for divine absence, implies intentional posture"
+      },
+      {
+        "word": "תַּעְלִים",
+        "reason": "Divine hiding verb - need semantic range of causative hiphil from עלם root"
+      },
+      {
+        "word": "גַאֲוַת",
+        "reason": "Arrogance as causal force - theological significance of pride terminology"
+      },
+      {
+        "word": "יִדְלַק",
+        "reason": "Vivid 'burns after' - passionate hunting metaphor, need range of burning imagery"
+      },
+      {
+        "word": "בֹּצֵעַ",
+        "reason": "Grasping/greedy one - technical term for economic exploitation"
+      },
+      {
+        "word": "נִאֵץ",
+        "reason": "Scorning/reviling with YHWH as direct object - shocking theological rebellion"
+      },
+      {
+        "word": "דרש",
+        "reason": "Central wordplay verb (vv.4,13,15) - juridical 'seeking' with multiple subjects/objects"
+      },
+      {
+        "word": "אַפּוֹ",
+        "reason": "Dual meaning nose/anger in 'height of his nose' - physical/emotional metaphor"
+      },
+      {
+        "word": "יָחִילוּ",
+        "reason": "Prosperity verb - need range of חיל (strength/succeed/prosper)"
+      },
+      {
+        "word": "יָפִיחַ",
+        "reason": "Snorting/puffing - animalistic contempt, possible onomatopoeia"
+      },
+      {
+        "word": "תֹךְ",
+        "reason": "Oppression/fraud - distinguish from מִרְמוֹת and אָלָה in triadic mouth imagery"
+      },
+      {
+        "word": "חֵלְכָה",
+        "reason": "Hapless/unfortunate victim - rare term, one of five victim vocabularies"
+      },
+      {
+        "word": "סֻכֹּה",
+        "reason": "Lion's lair/thicket - distinguish from den, cave, other predator habitats"
+      },
+      {
+        "word": "יִדְכֶּה",
+        "reason": "Crushed/humbled - textual variant issue, subject ambiguity in v.10"
+      },
+      {
+        "word": "עֲצוּמָיו",
+        "reason": "Strong ones/mighty traps - ambiguous syntax in final predator image"
+      },
+      {
+        "word": "עֲנָוִים",
+        "reason": "Lowly/humble - textual variant with עניים, theological distinction"
+      },
+      {
+        "word": "לַעֲרֹץ",
+        "reason": "Terrifying - final cessation verb, need range of intimidation vocabulary"
+      },
+      {
+        "word": "אֱנוֹשׁ",
+        "reason": "Mortal humanity vs elohim - theological contrast emphasizing earthly limitation"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "אמר בלבו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Threefold heart quotation formula - wisdom literature technique of interior monologue"
+      },
+      {
+        "query": "למה יהוה",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Lament opening formula - compare with v.1 'why stand aloof' rhetoric"
+      },
+      {
+        "query": "הסתיר פניו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine face-hiding - theodicy language matching v.1 and v.11"
+      },
+      {
+        "query": "בל ידרש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine non-seeking claim - first of three darash wordplay instances"
+      },
+      {
+        "query": "אין אלהים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Practical atheism statement - functional godlessness in wicked's schemes"
+      },
+      {
+        "query": "בל אמוט",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "False confidence formula - stability metaphor in wicked's self-assurance"
+      },
+      {
+        "query": "לדר ודר",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Generational eternity formula - wicked's temporal claim vs God's eternality"
+      },
+      {
+        "query": "ישב במארב",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Ambush sitting - beginning of extended predator metaphor sequence"
+      },
+      {
+        "query": "כאריה בסכה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Lion-in-lair simile - explicit predator comparison"
+      },
+      {
+        "query": "שבר זרוע",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Arm-breaking petition - political/military disarmament metaphor"
+      },
+      {
+        "query": "יהוה מלך עולם ועד",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Kingship formula - abrupt hymnic declaration answering theodicy"
+      },
+      {
+        "query": "קומה יהוה",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Imperative arising - urgent petition formula calling God to action"
+      },
+      {
+        "query": "לשפט יתום",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Orphan judgment - Torah covenant obligation for defenseless"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Standing aloof - spatial metaphor for divine absence, unusual posture imagery | Vehicle: stand aloof | Related terms: standing aloof, stands aloof, stand far, stands far, standing far, stand distant, stands distant",
+        "vehicle": "stand aloof",
+        "vehicle_terms": [
+          "stand aloof",
+          "standing aloof",
+          "stands aloof",
+          "stand far",
+          "stands far",
+          "standing far",
+          "stand distant",
+          "stands distant"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Burning pursuit - passionate hunting metaphor with יִדְלַק intensity | Vehicle: burns | Related terms: burn, burning, blazes, blazing, inflames, inflamed, inflaming",
+        "vehicle": "burns",
+        "vehicle_terms": [
+          "burns",
+          "burn",
+          "burning",
+          "blazes",
+          "blazing",
+          "inflames",
+          "inflamed",
+          "inflaming"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Mouth fullness - somatic container metaphor for violence held ready | Vehicle: mouth full | Related terms: mouth filled, fills mouth, filled mouth",
+        "vehicle": "mouth full",
+        "vehicle_terms": [
+          "mouth full",
+          "mouth filled",
+          "fills mouth",
+          "filled mouth"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Under tongue - spatial metaphor for hidden readiness of violence | Vehicle: under tongue | Related terms: beneath tongue, under his tongue",
+        "vehicle": "under tongue",
+        "vehicle_terms": [
+          "under tongue",
+          "beneath tongue",
+          "under his tongue"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Ambush sitting - predator posture in calculated violence metaphor | Vehicle: ambush | Related terms: ambushes, lying in wait, lies in wait, lurks, lurking",
+        "vehicle": "ambush",
+        "vehicle_terms": [
+          "ambush",
+          "ambushes",
+          "lying in wait",
+          "lies in wait",
+          "lurks",
+          "lurking"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Lion in lair - explicit predator simile central to extended metaphor | Vehicle: lion | Related terms: lions, young lion, young lions, lioness",
+        "vehicle": "lion",
+        "vehicle_terms": [
+          "lion",
+          "lions",
+          "young lion",
+          "young lions",
+          "lioness"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Net dragging - fishing imagery mixed with lion metaphor | Vehicle: net | Related terms: nets, snare, snares, trap, traps",
+        "vehicle": "net",
+        "vehicle_terms": [
+          "net",
+          "nets",
+          "snare",
+          "snares",
+          "trap",
+          "traps"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Crouching posture - predator ready-to-spring imagery | Vehicle: crouch | Related terms: crouches, crouching, crouched, bows down, bowing down",
+        "vehicle": "crouch",
+        "vehicle_terms": [
+          "crouch",
+          "crouches",
+          "crouching",
+          "crouched",
+          "bows down",
+          "bowing down"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Hidden face - divine absence parallel to v.1 spatial theology | Vehicle: hidden face | Related terms: hides face, hiding face, concealed face, conceals face",
+        "vehicle": "hidden face",
+        "vehicle_terms": [
+          "hidden face",
+          "hides face",
+          "hiding face",
+          "concealed face",
+          "conceals face"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Lifted hand - power gesture of divine intervention | Vehicle: lift hand | Related terms: lifts hand, lifting hand, raised hand, raise hand, raises hand",
+        "vehicle": "lift hand",
+        "vehicle_terms": [
+          "lift hand",
+          "lifts hand",
+          "lifting hand",
+          "raised hand",
+          "raise hand",
+          "raises hand"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Broken arm - political disarmament metaphor for destroyed power | Vehicle: break arm | Related terms: breaks arm, breaking arm, broken arm, shatter arm, shatters arm",
+        "vehicle": "break arm",
+        "vehicle_terms": [
+          "break arm",
+          "breaks arm",
+          "breaking arm",
+          "broken arm",
+          "shatter arm",
+          "shatters arm"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Inclining ear - tender anthropomorphism of divine attention | Vehicle: incline ear | Related terms: inclines ear, inclining ear, bend ear, bends ear, bending ear",
+        "vehicle": "incline ear",
+        "vehicle_terms": [
+          "incline ear",
+          "inclines ear",
+          "inclining ear",
+          "bend ear",
+          "bends ear",
+          "bending ear"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "10:1",
+        "reason": "Opening double rhetorical question - how do commentators frame the theodicy problem of divine hiddenness?"
+      },
+      {
+        "verse": "10:2",
+        "reason": "Arrogance as causal force - traditional interpretation of ga'awah driving persecution"
+      },
+      {
+        "verse": "10:3",
+        "reason": "Boasting and reviling - how commentators parse the shocking direct scorn of YHWH"
+      },
+      {
+        "verse": "10:4",
+        "reason": "Practical atheism statement - classical exegesis of 'no God in all his schemes'"
+      },
+      {
+        "verse": "10:5",
+        "reason": "Prosperity paradox - traditional wrestling with apparent success of wicked"
+      },
+      {
+        "verse": "10:6",
+        "reason": "First heart quotation - how commentators frame interior monologue technique"
+      },
+      {
+        "verse": "10:7",
+        "reason": "Somatic violence imagery - traditional understanding of mouth/tongue as weapons"
+      },
+      {
+        "verse": "10:8",
+        "reason": "Beginning of predator metaphor - classical interpretation of ambush imagery"
+      },
+      {
+        "verse": "10:9",
+        "reason": "Lion simile with net mixing - how commentators handle mixed metaphors"
+      },
+      {
+        "verse": "10:10",
+        "reason": "Textual variants and subject ambiguity - traditional resolution of who crouches/falls"
+      },
+      {
+        "verse": "10:11",
+        "reason": "Second heart quotation mirroring v.1 - how commentators see wicked's theology echoing psalmist's complaint"
+      },
+      {
+        "verse": "10:12",
+        "reason": "Imperative cascade and divine names - traditional interpretation of urgent petition"
+      },
+      {
+        "verse": "10:13",
+        "reason": "Third heart quotation with darash wordplay - classical understanding of non-seeking claim"
+      },
+      {
+        "verse": "10:14",
+        "reason": "Theological hinge and reversal - how commentators interpret emphatic 'You DO see' turning point"
+      },
+      {
+        "verse": "10:15",
+        "reason": "Violent petition to break arm - traditional ethics of imprecation and power dismantling"
+      },
+      {
+        "verse": "10:16",
+        "reason": "Abrupt kingship declaration - how commentators explain sudden hymnic genre shift"
+      },
+      {
+        "verse": "10:17",
+        "reason": "Perfect tense confidence - classical interpretation of completed divine action"
+      },
+      {
+        "verse": "10:18",
+        "reason": "Enosh terminology and mortality contrast - traditional understanding of human limitation vs divine eternality"
+      }
+    ],
+    "lexicon_entries_count": 41,
+    "concordance_results": {
+      "אמר בלבו": 5,
+      "למה יהוה": 2,
+      "הסתיר פניו": 6,
+      "בל ידרש": 4,
+      "אין אלהים": 17,
+      "בל אמוט": 8,
+      "לדר ודר": 21,
+      "ישב במארב": 0,
+      "כאריה בסכה": 1,
+      "שבר זרוע": 1,
+      "יהוה מלך עולם ועד": 7,
+      "קומה יהוה": 8,
+      "לשפט יתום": 2
+    },
+    "figurative_results": {
+      "total_instances_used": 134
+    },
+    "commentary_counts": {
+      "Rashi": 12,
+      "Ibn Ezra": 13,
+      "Radak": 14,
+      "Metzudat David": 16,
+      "Malbim": 10,
+      "Meiri": 15,
+      "Torah Temimah": 5
+    },
+    "sacks_references_count": 0,
+    "related_psalms_count": 5,
+    "related_psalms_list": [
+      31,
+      94,
+      7,
+      74,
+      44
+    ],
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 226160,
+    "research_bundle_tokens": 75386
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the significance of Psalm 10's connection to Psalm 9 as part of a broken acrostic, and how does this structural feature relate to the theme of broken/hidden divine order?",
+      "How does the three-fold 'says in his heart' formula (vv. 6, 11, 13) function in wisdom literature, and what does it reveal about the relationship between ideology and action?",
+      "What is the semantic range and usage of 'ani (poor/afflicted/lowly) in the Psalter, and how does Psalm 10's usage compare to prophetic social justice texts?",
+      "How does the predator/lion imagery in vv. 8-10 compare to other Ancient Near Eastern royal or military metaphors, and is there ironic reversal (the powerful acting like beasts)?",
+      "What is the theological significance of the verb ra'ah (see/look) in vv. 1, 11, 14—how does divine vision function in theodicy?",
+      "What does 'breaking the arm' (v. 15) signify in biblical political theology, and are there other texts where this metaphor appears?",
+      "How does the orphan (yatom) motif in vv. 14, 18 connect to Torah legislation (e.g., Exodus 22:22, Deuteronomy 10:18) and covenant identity?",
+      "What is the function of the nations ('goyim) in v. 16, and how does this relate to the psalm's concern with oppression—are the wicked identified with foreign powers or internal elites?",
+      "How does the phrase 'men of the earth' ('enosh min-ha'aretz) in v. 18 emphasize human mortality and temporal power versus divine eternality?",
+      "What is the rhetorical force of the shift from imperfect (future/modal) verbs in the petition section to perfect verbs in vv. 17-18, suggesting accomplished reality?",
+      "How does this psalm's theodicy—resolving divine hiddenness through assertion of divine kingship—compare to Job's treatment of the same problem?",
+      "What is the relationship between the wicked's 'prospering ways' (v. 5) and the concept of retributive justice elsewhere in Psalms—is there tension or development?"
+    ],
+    "micro_questions": [
+      "Why does the phrase אָמַר בְּלִבּוֹ ('says in his heart') appear exactly three times (vv.6,11,13), and what is the rhetorical progression across these interior quotations?",
+      "What is the syntactical relationship in v.4 between 'bal yidrosh' and 'ein elohim kol-mezimmotav' - is the latter a quotation, a description, or syntactically linked to the former?",
+      "How does the mixed predator imagery (lion in v.9 + net in v.9) function - are these compatible metaphors or deliberately jarring juxtapositions?",
+      "Why does v.16's kingship declaration use prophetic perfect אָבְדוּ ('nations have perished') - does this assert accomplished fact or prophetic certainty?",
+      "What is the significance of the five different terms for victims (ani, chelekah, naqi, yatom, dak) - do they represent distinct social categories or poetic variation?",
+      "How does the spatial theology (God stands afar v.1, judgments are high v.5, but God 'looks' v.14) resolve the theodicy problem?",
+      "What does the phrase אֱנוֹשׁ מִן־הָאָֽרֶץ ('man from/of the earth') in v.18 contribute theologically - is this about mortality, earthly power, or human limitation?",
+      "Why does the verb דרש appear in three strategic locations (vv.4,13,15) with different subjects and objects - what is the wordplay's function?",
+      "How does the emphatic fronted verb רָאִתָה in v.14 function grammatically and rhetorically - is this standard Hebrew emphasis or unusual?",
+      "What is the relationship between the 'mouth full' imagery (v.7) and the 'says in heart' quotations (vv.6,11,13) - interior vs exterior speech?",
+      "Why does v.10 have Kethiv/Qere variants, and how do these affect the interpretation of who is crushed/crouching?",
+      "How does the phrase 'breaking the arm' (v.15) function as political metaphor elsewhere in biblical literature - military, juridical, or symbolic disarmament?",
+      "What is the significance of the sudden genre shift to hymnic declaration in v.16 - does this interrupt the petition or resolve it?",
+      "Why does the psalmist use both YHWH and El in v.12 - is this poetic variation, theological emphasis, or liturgical formula?",
+      "How does the orphan motif (vv.14,18) connect to Torah legislation about widow/orphan, and does this invoke covenant obligations?"
+    ],
+    "verse_count": 18
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5"
+  }
+}
