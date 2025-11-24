@@ -1,5 +1,270 @@
 # Implementation Log
 
+## Session 138 - 2025-11-24 (Combined Document Generator - COMPLETE ✓)
+
+### Overview
+**Objective**: Create a combined document generator that merges main and college commentaries into a single .docx file
+**Approach**: Build new CombinedDocumentGenerator class with proper formatting, integrate into pipeline
+**Result**: ✓ COMPLETE - New combined document generator with pipeline integration and `--skip-combined-doc` flag
+**Session Duration**: ~2 hours
+**Status**: Complete and tested with Psalm 9
+
+### Task Description
+
+**User Request**:
+Create a single .docx file containing both main and college commentaries with specific formatting:
+1. Verse text (Hebrew & English, footnote removal handled)
+2. Main introduction
+3. College introduction (titled "Introduction - College version" with "College" in green)
+4. Modern Jewish Liturgical Use section (from main version only)
+5. Verse-by-verse commentary showing:
+   - Main commentary
+   - Em dash separator (—)
+   - College commentary (first English word green & bold)
+   - Horizontal border line between verses
+
+**Key Requirements**:
+- Use Aptos 12pt font consistently (no Arial bleeding through)
+- Handle Hebrew in parentheses correctly (no RTL/punctuation issues)
+- Skip Hebrew verse lines at start of college commentary
+- Filter out markdown dividers (---, ___, etc.) from source text
+- Clean divider structure: em dash between versions, borders between verses
+
+### Investigation & Planning
+
+**Existing Infrastructure**:
+- `document_generator.py` already handles:
+  - Hebrew text formatting with RTL support
+  - LRO/PDF Unicode control characters for parenthesized Hebrew
+  - Grapheme cluster reversal (keeps nikud with base letters)
+  - Proper markdown processing with `_process_markdown_formatting()`
+  - LTR directionality with `_set_paragraph_ltr()`
+
+**Design Decisions**:
+1. **New Class vs Extension**: Create standalone `CombinedDocumentGenerator` class
+   - Reason: Different structure from individual documents, cleaner separation
+2. **Hebrew Verse Skipping**: Detect and skip leading Hebrew lines automatically
+   - Reason: College commentary includes verse text we don't want to duplicate
+3. **Color Coding**: First word of college commentary green & bold
+   - Reason: Clear visual indicator of which version user is reading
+4. **Divider Filtering**: Skip lines that are exactly markdown dividers
+   - Reason: Source text has dividers (---, —) that shouldn't appear in output
+
+### Solution Implemented
+
+**File Created**: `src/utils/combined_document_generator.py` (755 lines)
+
+**Class Structure**:
+```python
+class CombinedDocumentGenerator:
+    def __init__(self, psalm_num, main_intro_path, main_verses_path,
+                 college_intro_path, college_verses_path,
+                 stats_path, output_path)
+
+    def generate(self)  # Main generation method
+
+    # Formatting methods (from document_generator.py)
+    def _process_markdown_formatting(paragraph, text, set_font)
+    def _add_commentary_with_bullets(text, style)
+    def _add_paragraph_with_markdown(text, style)
+    def _set_paragraph_ltr(paragraph)
+    def _reverse_hebrew_by_clusters(hebrew_text)
+    def _split_into_grapheme_clusters(text)
+
+    # Divider methods
+    def _add_em_dash_separator()  # Between main and college
+    def _add_horizontal_border()   # Between verses
+
+    # Utility methods
+    def _extract_liturgical_section(intro_content)
+    def _format_bibliographical_summary(stats)
+```
+
+**Key Implementation Details**:
+
+1. **Text Formatting** (all methods use `set_font=True`):
+   ```python
+   def _process_markdown_formatting(self, paragraph, text, set_font=False):
+       # ... process markdown ...
+       if set_font:
+           run.font.name = 'Aptos'
+           run.font.size = Pt(12)
+   ```
+
+2. **Hebrew in Parentheses**:
+   ```python
+   hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+   if re.search(hebrew_paren_pattern, part):
+       LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+       PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+       reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+       return f'{LRO}({reversed_hebrew}){PDF}'
+   ```
+
+3. **College Commentary Processing** (skips Hebrew, colors first word):
+   ```python
+   # Skip leading Hebrew verse lines
+   for line in lines:
+       if not started_english and re.match(r'^[\u0590-\u05FF]', line_stripped):
+           continue  # Skip Hebrew
+       started_english = True
+       commentary_lines.append(line)
+
+   # Color first English word
+   first_run = paragraph.add_run(first_word + ' ')
+   first_run.font.color.rgb = RGBColor(0, 128, 0)  # Green
+   first_run.bold = True
+   first_run.font.name = 'Aptos'
+   first_run.font.size = Pt(12)
+   ```
+
+4. **Divider Filtering**:
+   ```python
+   # Skip horizontal rule markers
+   if line in ('---', '___', '***', '—', '–'):
+       continue
+   ```
+
+5. **Divider Structure**:
+   ```python
+   # Em dash separator (only when college exists)
+   if verse_num in college_verse_map:
+       self._add_em_dash_separator()
+       # ... add college commentary ...
+
+   # Horizontal border (except after last verse)
+   if i < len(main_parsed_verses) - 1:
+       self._add_horizontal_border()
+   ```
+
+**Pipeline Integration** (`scripts/run_enhanced_pipeline.py`):
+
+Added STEP 6c after STEP 6b (college document generation):
+```python
+# STEP 6c: Generate Combined .docx Document (Main + College)
+if not skip_combined_doc and not skip_college and not smoke_test:
+    logger.info("\n[STEP 6c] Creating combined .docx document...")
+
+    from src.utils.combined_document_generator import CombinedDocumentGenerator
+
+    required_files = [
+        edited_intro_file,
+        edited_verses_file,
+        edited_intro_college_file,
+        edited_verses_college_file,
+        summary_json_file
+    ]
+
+    if all(f.exists() for f in required_files):
+        generator_combined = CombinedDocumentGenerator(
+            psalm_num=psalm_number,
+            main_intro_path=edited_intro_file,
+            main_verses_path=edited_verses_file,
+            college_intro_path=edited_intro_college_file,
+            college_verses_path=edited_verses_college_file,
+            stats_path=summary_json_file,
+            output_path=docx_output_combined_file
+        )
+        generator_combined.generate()
+```
+
+**CLI Flag**:
+```python
+parser.add_argument('--skip-combined-doc', action='store_true',
+                   help='Skip the combined .docx generation step')
+```
+
+### Testing & Validation
+
+**Test Case**: Psalm 9 (using existing files, no LLM calls)
+
+**Command**:
+```bash
+python src/utils/combined_document_generator.py 9
+```
+
+**Issues Found & Fixed**:
+
+1. **Issue**: Font inconsistency - Arial bleeding through instead of Aptos
+   - **Fix**: Added `set_font=True` to all `_process_markdown_formatting()` calls
+   - **Result**: All text now uses Aptos 12pt consistently
+
+2. **Issue**: Hebrew in parentheses causing RTL/punctuation issues
+   - **Fix**: Implemented LRO/PDF Unicode control characters + cluster reversal
+   - **Result**: Hebrew parentheses display correctly with proper punctuation
+
+3. **Issue**: Hebrew verse shown at start of college commentary
+   - **Fix**: Added automatic detection and skipping of Hebrew lines
+   - **Result**: College commentary starts with first English word
+
+4. **Issue**: Too many dividers (---, —, border line)
+   - **Fix**: Filter markdown dividers, only use programmatic dividers
+   - **Result**: Clean structure with em dash + border only
+
+**Verification Points**:
+- ✓ Aptos font used throughout (no Arial)
+- ✓ Hebrew in parentheses display correctly
+- ✓ College commentary starts with English (Hebrew skipped)
+- ✓ First word of college commentary green & bold
+- ✓ Em dash separator between main and college
+- ✓ Horizontal border between verses
+- ✓ No markdown dividers (---, etc.) in output
+- ✓ Liturgical section extracted from main intro
+- ✓ College intro has green "College" in heading
+
+### Files Modified
+
+1. **`src/utils/combined_document_generator.py`** (NEW - 755 lines):
+   - Complete combined document generator class
+   - Handles all formatting, Hebrew text, dividers, color coding
+
+2. **`scripts/run_enhanced_pipeline.py`**:
+   - Line 110: Added `skip_combined_doc` parameter
+   - Line 129: Added docstring for new parameter
+   - Line 190: Added `docx_output_combined_file` path
+   - Lines 880-931: Added STEP 6c (Combined Document Generation)
+   - Line 975: Added combined document to return dictionary
+   - Line 1027: Added `--skip-combined-doc` CLI flag
+   - Line 1065: Pass `skip_combined_doc` to function
+
+### Impact
+
+**User Benefits**:
+- ✅ Single document option for users wanting both commentary versions
+- ✅ Professional formatting with consistent Aptos font
+- ✅ Hebrew text displays correctly without RTL/punctuation issues
+- ✅ Clean visual separation between main and college versions
+- ✅ Easy to identify college version (green text indicator)
+- ✅ Can skip if only individual documents desired (`--skip-combined-doc`)
+
+**Technical Quality**:
+- ✅ Reuses proven formatting methods from `document_generator.py`
+- ✅ Proper LTR directionality throughout
+- ✅ Unicode control characters for complex Hebrew scenarios
+- ✅ Filters unwanted markdown artifacts
+- ✅ Fully integrated into pipeline with skip option
+
+### Usage
+
+**Standalone**:
+```bash
+python src/utils/combined_document_generator.py 9
+```
+
+**Via Pipeline** (default - includes combined doc):
+```bash
+python scripts/run_enhanced_pipeline.py 9
+```
+
+**Skip combined doc**:
+```bash
+python scripts/run_enhanced_pipeline.py 9 --skip-combined-doc
+```
+
+**Output**: `output/psalm_9/psalm_009_commentary_combined.docx`
+
+---
+
 ## Session 137 - 2025-11-21 (Fix College File Regeneration & Stale Pipeline Dates - COMPLETE ✓)
 
 ### Overview
