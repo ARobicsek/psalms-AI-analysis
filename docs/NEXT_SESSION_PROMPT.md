@@ -103,6 +103,24 @@ Tested with Psalm 9:
 - Dividers clean (em dash + border only)
 - College text properly colored and formatted
 
+**Issues Found**:
+
+1. **Pipeline Regex Error** (NOT RESOLVED):
+   - When running via pipeline: `python scripts/run_enhanced_pipeline.py 10`
+   - Error in STEP 6c: `"Cannot specify ',' with 's'."`
+   - Error appears to be a regex-related issue in the pipeline context
+   - **Workaround**: Standalone generator works perfectly: `python src/utils/combined_document_generator.py 10`
+   - Successfully generates: `output/psalm_10/psalm_010_commentary_combined.docx`
+   - Issue may be transient (module caching, import order, or timing)
+   - **Action needed**: Investigate why same code works standalone but fails in pipeline
+
+2. **Missing Methodological Summary** (NOT IMPLEMENTED):
+   - The combined document generator currently does NOT include the "Methodological & Bibliographical Summary" section
+   - This section exists in both main and college individual documents
+   - Should be added to the end of the combined document as well
+   - Code structure exists at [combined_document_generator.py:632-639](../src/utils/combined_document_generator.py#L632-L639) but appears incomplete
+   - **Action needed**: Complete implementation to add full Methodological & Bibliographical Summary to combined .docx
+
 ---
 
 ## Session 137 Summary (COMPLETE ✓)
