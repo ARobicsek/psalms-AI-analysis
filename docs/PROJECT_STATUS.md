@@ -1,8 +1,59 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-21 (Session 137 - COMPLETE ✓)
+**Last Updated**: 2025-11-24 (Session 138 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Pipeline Stats & College File Sync Fixed
+**Status**: ✓ V6 System Ready - Combined Document Generator Integrated
+
+## Session 138 Summary (COMPLETE ✓)
+
+### Combined Document Generator
+
+**Objective**: Create a combined document generator that merges main and college commentaries into a single .docx file
+**Result**: ✓ COMPLETE - New combined document generator integrated into pipeline with `--skip-combined-doc` flag
+
+**Feature Implemented**:
+Created a unified .docx document containing:
+1. Full psalm text (Hebrew & English)
+2. Main introduction
+3. College introduction (heading with "College" in green)
+4. Modern Jewish Liturgical Use section (from main version)
+5. Verse-by-verse commentary with both versions side-by-side
+
+**Key Implementation Details**:
+1. **Text Formatting**:
+   - All body text uses Aptos 12pt font (explicit `set_font=True`)
+   - Hebrew in parentheses handled correctly (LRO/PDF Unicode + cluster reversal)
+   - No Arial font bleeding through
+
+2. **College Commentary Features**:
+   - Automatically skips leading Hebrew verse lines
+   - First English word colored green and bolded
+   - Proper LTR directionality throughout
+
+3. **Divider System**:
+   - Em dash (—) between main and college commentary
+   - Horizontal border line between verses
+   - Markdown dividers (---, ___, etc.) filtered from source text
+
+4. **Pipeline Integration**:
+   - Added as STEP 6c in pipeline
+   - New CLI flag: `--skip-combined-doc`
+   - Outputs: `psalm_XXX_commentary_combined.docx`
+
+**Files Created**:
+- `src/utils/combined_document_generator.py` - Complete combined document generator (755 lines)
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Pipeline integration with new step and flag
+
+**Impact**:
+- ✅ Single document option for users wanting both commentary versions
+- ✅ Professional formatting with consistent Aptos font
+- ✅ Hebrew text displays correctly without RTL issues
+- ✅ Clean visual separation between main and college versions
+- ✅ Easy to skip if only individual documents desired
+
+---
 
 ## Session 137 Summary (COMPLETE ✓)
 

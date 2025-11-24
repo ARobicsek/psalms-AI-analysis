@@ -107,6 +107,7 @@ def run_enhanced_pipeline(
     skip_college: bool = False,
     skip_print_ready: bool = False,
     skip_word_doc: bool = False,
+    skip_combined_doc: bool = False,
     smoke_test: bool = False,
     skip_default_commentaries: bool = False
 ):
@@ -125,6 +126,7 @@ def run_enhanced_pipeline(
         skip_college: Skip college commentary generation (use existing file)
         skip_print_ready: Skip print-ready formatting
         skip_word_doc: Skip .docx generation
+        skip_combined_doc: Skip combined .docx generation (main + college in one document)
         smoke_test: Run in smoke test mode (generates dummy data, no API calls)
         skip_default_commentaries: Use selective commentary mode (only request for specific verses)
     """
@@ -184,6 +186,8 @@ def run_enhanced_pipeline(
     edited_verses_college_file = output_path / f"psalm_{psalm_number:03d}_edited_verses_college.md"
     edited_assessment_college_file = output_path / f"psalm_{psalm_number:03d}_assessment_college.md"
     docx_output_college_file = output_path / f"psalm_{psalm_number:03d}_commentary_college.docx"
+    # Combined document file path
+    docx_output_combined_file = output_path / f"psalm_{psalm_number:03d}_commentary_combined.docx"
 
     # =====================================================================
     # STEP 1: Macro Analysis
@@ -874,6 +878,59 @@ def run_enhanced_pipeline(
             logger.info(f"[STEP 6b] Skipping college .docx in smoke test mode")
 
     # =====================================================================
+    # STEP 6c: Generate Combined .docx Document (Main + College)
+    # =====================================================================
+    if not skip_combined_doc and not skip_college and not smoke_test:
+        logger.info("\\n[STEP 6c] Creating combined .docx document (main + college)...")
+        print(f"\\n{'='*80}")
+        print(f"STEP 6c: Generating Combined Word Document (.docx)")
+        print(f"{'='*80}\\n")
+
+        from src.utils.combined_document_generator import CombinedDocumentGenerator
+
+        summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+
+        # Check if all required files exist
+        required_files = [
+            edited_intro_file,
+            edited_verses_file,
+            edited_intro_college_file,
+            edited_verses_college_file,
+            summary_json_file
+        ]
+
+        if all(f.exists() for f in required_files):
+            try:
+                generator_combined = CombinedDocumentGenerator(
+                    psalm_num=psalm_number,
+                    main_intro_path=edited_intro_file,
+                    main_verses_path=edited_verses_file,
+                    college_intro_path=edited_intro_college_file,
+                    college_verses_path=edited_verses_college_file,
+                    stats_path=summary_json_file,
+                    output_path=docx_output_combined_file
+                )
+                generator_combined.generate()
+                logger.info(f"Successfully generated combined Word document for Psalm {psalm_number}.")
+                print(f"✓ Combined Word document: {docx_output_combined_file}\\n")
+            except Exception as e:
+                logger.error(f"Failed to generate combined .docx file for Psalm {psalm_number}: {e}", exc_info=True)
+                print(f"⚠ Error in combined Word document generation (see logs for details)\\n")
+        else:
+            missing = [f for f in required_files if not f.exists()]
+            logger.warning(f"Skipping combined .docx generation because required files were not found: {missing}")
+            print(f"⚠ Skipping combined Word document generation: required files not found.\\n")
+    else:
+        if skip_combined_doc:
+            logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-combined-doc flag set)")
+        elif skip_college:
+            logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-college flag set)")
+        elif skip_word_doc:
+            logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-word-doc flag set)")
+        else:
+            logger.info(f"[STEP 6c] Skipping combined .docx in smoke test mode")
+
+    # =====================================================================
     # COMPLETE - Generate Pipeline Summary
     # FINAL REPORTING
     # =====================================================================
@@ -915,6 +972,7 @@ def run_enhanced_pipeline(
         'print_ready': print_ready_file,
         'word_document': docx_output_file,
         'word_document_college': docx_output_college_file,
+        'word_document_combined': docx_output_combined_file,
         'pipeline_summary': str(summary_json_file).replace('.json', '.md'),
         'pipeline_stats': str(summary_json_file)
     }
@@ -966,6 +1024,8 @@ Examples:
                        help='Skip print-ready formatting')
     parser.add_argument('--skip-word-doc', action='store_true',
                        help='Skip the final .docx generation step')
+    parser.add_argument('--skip-combined-doc', action='store_true',
+                       help='Skip the combined .docx generation step (main + college in one document)')
     parser.add_argument('--smoke-test', action='store_true',
                        help='Run in smoke test mode (generates dummy data, no API calls)')
     parser.add_argument('--skip-default-commentaries', action='store_true',
@@ -1002,6 +1062,7 @@ Examples:
             skip_college=args.skip_college,
             skip_print_ready=args.skip_print_ready,
             skip_word_doc=args.skip_word_doc,
+            skip_combined_doc=args.skip_combined_doc,
             smoke_test=args.smoke_test,
             skip_default_commentaries=args.skip_default_commentaries
         )

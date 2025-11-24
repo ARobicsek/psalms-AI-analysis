@@ -8,7 +8,102 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 137 - Fix College Regeneration & Stale Stats Dates (2025-11-21) ✅ COMPLETE
+**Last Session**: Session 138 - Combined Document Generator (2025-11-24) ✅ COMPLETE
+
+## Session 138 Summary (COMPLETE ✓)
+
+**Objective**: Create a combined document generator that merges main and college commentaries into a single .docx file
+**Result**: ✓ COMPLETE - New combined document generator integrated into pipeline
+
+**Feature Requirements**:
+User requested a single .docx file containing:
+1. Verse text (Hebrew & English with footnote removal)
+2. Main introduction
+3. College introduction (titled "Introduction - College version" with "College" in green)
+4. Modern Jewish Liturgical Use section (from main version)
+5. Verse-by-verse commentary with both versions:
+   - Main commentary
+   - Em dash separator (—)
+   - College commentary (first word green & bold)
+   - Horizontal border line between verses
+
+**Implementation**:
+
+1. **Created CombinedDocumentGenerator** ([combined_document_generator.py](../src/utils/combined_document_generator.py)):
+   - New class extending document generation capabilities
+   - Takes 4 markdown inputs: main intro, main verses, college intro, college verses
+   - Generates single unified .docx with both commentary versions
+
+2. **Key Features Implemented**:
+   - **Proper text formatting**: All body text uses Aptos 12pt (with explicit `set_font=True`)
+   - **Hebrew in parentheses fix**: Uses LRO/PDF Unicode control characters + cluster reversal
+   - **College intro heading**: "Introduction - College version" with "College" colored green
+   - **Verse commentary structure**:
+     - Main commentary
+     - Em dash separator (—) - only shown if college commentary exists
+     - College commentary with Hebrew verse lines automatically skipped
+     - First English word of college commentary green & bold
+     - Horizontal border between verses (not after last verse)
+   - **Divider filtering**: Filters out markdown dividers (---, ___, ***, —, –) from source text
+
+3. **Pipeline Integration** ([run_enhanced_pipeline.py](../scripts/run_enhanced_pipeline.py)):
+   - Added STEP 6c: Combined Document Generation
+   - New flag: `--skip-combined-doc` to skip this step
+   - Automatically runs after STEP 6b (college document generation)
+   - Outputs: `psalm_XXX_commentary_combined.docx`
+
+**Files Created**:
+- `src/utils/combined_document_generator.py` (755 lines) - Complete combined document generator
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Pipeline integration (STEP 6c, new parameter, CLI flag)
+
+**Technical Details**:
+
+1. **Formatting Methods** (copied from document_generator.py):
+   - `_process_markdown_formatting()` - Handles bold/italic with Hebrew parentheses
+   - `_add_commentary_with_bullets()` - Proper bullet list handling
+   - `_set_paragraph_ltr()` - Forces LTR directionality
+   - `_reverse_hebrew_by_clusters()` - Preserves nikud with base letters
+
+2. **College Commentary Processing**:
+   - Automatically detects and skips leading Hebrew verse lines
+   - Identifies first English word for green/bold formatting
+   - Maintains proper paragraph structure (regular vs bullet)
+
+3. **Divider Logic**:
+   - Main and college commentary: Em dash separator
+   - Between verses: Horizontal border line
+   - Markdown dividers (---, etc.) filtered from source
+
+**Usage**:
+```bash
+# Generate combined document (included by default)
+python scripts/run_enhanced_pipeline.py 9
+
+# Skip combined document generation
+python scripts/run_enhanced_pipeline.py 9 --skip-combined-doc
+
+# Or use the standalone generator
+python src/utils/combined_document_generator.py 9
+```
+
+**Impact**:
+- ✅ Users can now get main + college commentaries in a single document
+- ✅ Proper formatting with Aptos font throughout
+- ✅ Hebrew in parentheses displays correctly (no RTL issues)
+- ✅ Clean divider structure (em dash between versions, borders between verses)
+- ✅ College commentary easily identifiable with green text
+- ✅ Fully integrated into pipeline with skip flag
+
+**Testing**:
+Tested with Psalm 9:
+- All formatting correct (Aptos font, no Arial)
+- Hebrew parentheses display properly
+- Dividers clean (em dash + border only)
+- College text properly colored and formatted
+
+---
 
 ## Session 137 Summary (COMPLETE ✓)
 
