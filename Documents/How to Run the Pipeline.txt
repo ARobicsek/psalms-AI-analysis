@@ -9,7 +9,7 @@ python scripts/run_enhanced_pipeline.py 23
 python scripts/run_formatter.py 145
 
 # just the word output
-python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready
+python scripts/run_enhanced_pipeline.py 8 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college
 
 #special commands
 --skip_default_commentaries (this will ensure that only traditional commentaries requested by the Micro agent are requested)
@@ -17,8 +17,10 @@ python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro --skip-synth
 --skip-micro 
 --skip-synthesis 
 --skip-master-edit 
+--skip-college
 --skip-print-ready
 --skip-word-doc
+--skip-combined-doc
 
 #running Chrome in debug mode (where selenium works)
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:/temp/chrome_debug"
