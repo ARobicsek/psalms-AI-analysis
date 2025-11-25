@@ -43,6 +43,7 @@ from src.agents.master_editor import MasterEditor
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
+from src.utils.cost_tracker import CostTracker
 
 
 def _parse_related_psalms_from_markdown(markdown_content: str) -> list:
@@ -109,7 +110,8 @@ def run_enhanced_pipeline(
     skip_word_doc: bool = False,
     skip_combined_doc: bool = False,
     smoke_test: bool = False,
-    skip_default_commentaries: bool = False
+    skip_default_commentaries: bool = False,
+    master_editor_model: str = "gpt-5"
 ):
     """
     Run complete enhanced pipeline for a single psalm.
@@ -129,6 +131,7 @@ def run_enhanced_pipeline(
         skip_combined_doc: Skip combined .docx generation (main + college in one document)
         smoke_test: Run in smoke test mode (generates dummy data, no API calls)
         skip_default_commentaries: Use selective commentary mode (only request for specific verses)
+        master_editor_model: Model to use for master editor (default: "gpt-5", or "claude-opus-4-5")
     """
     logger = get_logger("enhanced_pipeline")
     logger.info(f"=" * 80)
@@ -166,6 +169,10 @@ def run_enhanced_pipeline(
 
     tracker = PipelineSummaryTracker(psalm_number=psalm_number, initial_data=initial_data)
     logger.info("Pipeline summary tracking enabled.")
+
+    # Initialize cost tracker for API usage and costs
+    cost_tracker = CostTracker()
+    logger.info("Cost tracking enabled for all models.")
 
     # Create output directory
     output_path = Path(output_dir)
@@ -603,7 +610,10 @@ def run_enhanced_pipeline(
         )
         tracker.track_step_input("master_editor", editor_input)
 
-        master_editor = MasterEditor()
+        master_editor = MasterEditor(
+            main_model=master_editor_model,
+            cost_tracker=cost_tracker
+        )
         editor_model = master_editor.model
         try:
             result = master_editor.edit_commentary(
@@ -656,7 +666,10 @@ def run_enhanced_pipeline(
         logger.info(f"[STEP 4] Skipping master edit (using existing {edited_intro_file})")
         print(f"\nSkipping Step 4 (using existing master-edited files)\n")
         # Still need to get model name for tracking
-        master_editor = MasterEditor()
+        master_editor = MasterEditor(
+            main_model=master_editor_model,
+            cost_tracker=cost_tracker
+        )
         editor_model = master_editor.model
         tracker.track_model_for_step("master_editor", editor_model)
 
@@ -696,7 +709,12 @@ def run_enhanced_pipeline(
             step_start = time.time()
 
             # Use the same inputs as regular master editor
-            master_editor_college = MasterEditor()  # Uses college_model parameter
+            # College editor uses same model as main editor for consistency
+            master_editor_college = MasterEditor(
+                main_model=master_editor_model,
+                college_model=master_editor_model,  # Use same model for college
+                cost_tracker=cost_tracker
+            )
 
             try:
                 result_college = master_editor_college.edit_commentary_college(
@@ -951,6 +969,9 @@ def run_enhanced_pipeline(
         logger.error(f"Error generating pipeline summary: {e}")
         print(f"\n⚠ Warning: Could not generate pipeline summary: {e}")
 
+    # Display cost summary at end of pipeline
+    print(cost_tracker.get_summary())
+
     print(f"\n{'='*80}")
     print(f"ENHANCED PIPELINE COMPLETE")
     print(f"{'='*80}\n")
@@ -1030,6 +1051,9 @@ Examples:
                        help='Run in smoke test mode (generates dummy data, no API calls)')
     parser.add_argument('--skip-default-commentaries', action='store_true',
                        help='Use selective commentary mode (only request commentaries for specific verses instead of all verses)')
+    parser.add_argument('--master-editor-model', type=str, default='gpt-5',
+                       choices=['gpt-5', 'claude-opus-4-5'],
+                       help='Model to use for master editor (default: gpt-5). Use claude-opus-4-5 for maximum thinking mode.')
 
     args = parser.parse_args()
 
@@ -1048,7 +1072,11 @@ Examples:
         print(f"{'='*80}\n")
         print(f"Output Directory: {args.output_dir}")
         print(f"Database: {args.db_path}")
-        print(f"Rate Limit Delay: {args.delay} seconds\n")
+        print(f"Rate Limit Delay: {args.delay} seconds")
+        print(f"Master Editor Model: {args.master_editor_model}")
+        if args.master_editor_model == 'claude-opus-4-5':
+            print(f"  → Using Claude Opus 4.5 with extended thinking (40K budget + 24K output)")
+        print()
 
         result = run_enhanced_pipeline(
             psalm_number=args.psalm_number,
@@ -1064,7 +1092,8 @@ Examples:
             skip_word_doc=args.skip_word_doc,
             skip_combined_doc=args.skip_combined_doc,
             smoke_test=args.smoke_test,
-            skip_default_commentaries=args.skip_default_commentaries
+            skip_default_commentaries=args.skip_default_commentaries,
+            master_editor_model=args.master_editor_model
         )
 
         return 0

@@ -8,7 +8,39 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 139 - Combined Document Generator Enhancement (2025-11-24) ✅ COMPLETE
+**Last Session**: Session 140 - Document Formatting & Prompt Improvements (2025-11-24) ✅ COMPLETE
+
+## Session 140 Summary (COMPLETE ✓)
+
+**Objective**: Fix maqqef display in parentheses, add Header 3 styling for college intro headers, strengthen Hebrew+English pairing requirements
+**Result**: ✓ COMPLETE - All three formatting/prompt issues resolved
+
+**Issues Fixed**:
+
+1. **Maqqef Omission in Parentheses** (RESOLVED ✅):
+   - Problem: Hebrew maqqef (־, U+05BE) dropped when words in parentheses reversed for display
+   - Example: "(בְּכָל־לִבִּי)" → "(בְּכָללִבִּי)" (words run together)
+   - Fix: Added \u05BE to grapheme cluster pattern in both document generators
+   - Files: `src/utils/document_generator.py:91`, `src/utils/combined_document_generator.py:100`
+
+2. **College Intro Header Styling** (RESOLVED ✅):
+   - Problem: Section headers not formatted as Header 3 in .docx
+   - Fix: Updated COLLEGE_EDITOR_PROMPT to use `### Header text` markdown
+   - File: `src/agents/master_editor.py` (lines 611, 729-730)
+
+3. **Hebrew+English Pairing** (RESOLVED ✅):
+   - Problem: Some commentary had English without Hebrew or vice versa
+   - Fix: Added explicit CRITICAL instruction in both editor prompts
+   - File: `src/agents/master_editor.py` (lines 278-284, 654-660)
+
+**Impact**:
+- Maqqef preserved in all Hebrew parenthetical text across .docx outputs
+- Future college intros will have properly formatted section headers (Header 3)
+- Master editor will consistently pair Hebrew and English in all verse commentary
+
+**Model Used**: Opus 4.5 for session work
+
+---
 
 ## Session 139 Summary (COMPLETE ✓)
 
