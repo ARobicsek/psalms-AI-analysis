@@ -1,8 +1,53 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-24 (Session 139 - COMPLETE ✓)
+**Last Updated**: 2025-11-24 (Session 140 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Combined Document Generator Enhanced
+**Status**: ✓ V6 System Ready - Document Formatting & Prompt Improvements
+
+## Session 140 Summary (COMPLETE ✓)
+
+### Document Formatting & Prompt Enhancements
+
+**Objective**: Fix maqqef display in parentheses, add Header 3 styling for college intro headers, strengthen Hebrew+English pairing requirements
+**Result**: ✓ COMPLETE - All three issues resolved with code and prompt updates
+
+**Issues Fixed**:
+
+1. **Maqqef Omission in Parentheses** (RESOLVED ✅):
+   - Problem: Hebrew maqqef (־, U+05BE) was being dropped when words in parentheses were reversed for LTR display
+   - Example: "(בְּכָל־לִבִּי)" displayed as "(בְּכָללִבִּי)" - maqqef missing, words run together
+   - Root cause: `_split_into_grapheme_clusters()` pattern didn't include maqqef as a base character
+   - Fix: Added \u05BE to base character class in cluster pattern
+
+2. **College Intro Header Styling** (RESOLVED ✅):
+   - Problem: Engaging section headers in college intros (e.g., "A quick map of what we're reading:") not formatted as Header 3 in .docx
+   - Document generators already supported ### markdown headers
+   - Fix: Updated COLLEGE_EDITOR_PROMPT to explicitly instruct using `### Header text` for section headers
+   - Added examples and instructions in two locations (Stage 2 and OUTPUT FORMAT sections)
+
+3. **Hebrew+English Pairing Enforcement** (RESOLVED ✅):
+   - Problem: Some verse commentary showed English without Hebrew or vice versa (e.g., line 105 of psalm_009_edited_verses_college.md)
+   - Fix: Added explicit **CRITICAL** instruction in both MASTER_EDITOR_PROMPT and COLLEGE_EDITOR_PROMPT
+   - New section: "ALWAYS show Hebrew and English together when discussing the verse"
+   - Provided CORRECT/INCORRECT examples for clarity
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Added maqqef (U+05BE) to cluster pattern (line 91)
+- `src/utils/combined_document_generator.py` - Added maqqef (U+05BE) to cluster pattern (line 100)
+- `src/agents/master_editor.py` - Three prompt enhancements:
+  1. Hebrew+English pairing instruction (lines 278-284)
+  2. College intro Header 3 formatting (line 611)
+  3. College output format Header 3 examples (lines 729-730)
+
+**Impact**:
+- ✅ Maqqef now preserved in Hebrew text within parentheses across all .docx outputs
+- ✅ College intro section headers will be formatted as Header 3 in future generations
+- ✅ Master editor will consistently show Hebrew and English together in all commentary
+- ✅ Improved readability and formatting consistency across all output documents
+
+**Model Used**: Opus 4.5 (newly released) for development work
+
+---
 
 ## Session 139 Summary (COMPLETE ✓)
 

@@ -36,6 +36,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, List, Any, Tuple
 from openai import OpenAI, RateLimitError
+import anthropic
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -45,8 +46,10 @@ load_dotenv()
 if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.utils.logger import get_logger
+    from src.utils.cost_tracker import CostTracker
 else:
     from ..utils.logger import get_logger
+    from ..utils.cost_tracker import CostTracker
 
 
 # Master Editor System Prompt
@@ -274,6 +277,14 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
 - This punctuated presentation helps readers see the verse's structure at a glance
 - Example: Original verse "בְּקׇרְאִי עֲנֵנִי ׀ אֱלֹקֵי צִדְקִי בַּצָּר הִרְחַבְתָּ לִּי חׇנֵּנִי וּשְׁמַע תְּפִלָּתִֽי׃" becomes "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
 - After presenting the punctuated verse, proceed immediately with your commentary
+
+**CRITICAL: ALWAYS show Hebrew and English together when discussing the verse**
+- When discussing a Hebrew phrase or word from the verse, ALWAYS provide both the Hebrew text AND its English translation
+- NEVER show only the English without the Hebrew, or only the Hebrew without the English
+- CORRECT: "Be gracious to me" (חׇנֵּנִי) shows...
+- INCORRECT: "Be gracious to me" shows... (missing Hebrew)
+- INCORRECT: חׇנֵּנִי shows... (missing English)
+- This applies to EVERY quotation from the verse you're analyzing
 
 - **Length**: Target 300-500 words per verse (PLUS the verse itself at the start). Shorter (200-250 words) is acceptable for simple verses with minimal interesting features. Longer (500-800 words) is ENCOURAGED and often NECESSARY for verses with:
   * Unusual Hebrew phrases or idioms (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ)
@@ -608,6 +619,7 @@ Provide a brief editorial assessment (200-400 words):
 - **Tone**: Clear, engaging, direct—like talking to a smart friend
 - **Technical terms**: Define EVERY specialized term immediately
 - **Style**: Conversational but rigorous, enthusiastic but not breathless
+- **Formatting**: Use markdown Header 3 (`### Header text`) for section headers that break up your essay into digestible chunks (e.g., `### A quick map of what we're reading`, `### Why this psalm is so gripping`, `### How the poem argues`)
 - **Content**:
   * Correct any factual errors
   * Surface missed insights from research materials
@@ -649,6 +661,14 @@ For each verse:
 - Use punctuation (semicolons, periods, commas) to illustrate verse structure
 - Example: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
 - Then proceed immediately with your commentary
+
+**CRITICAL: ALWAYS show Hebrew and English together when discussing the verse**
+- When discussing a Hebrew phrase or word from the verse, ALWAYS provide both the Hebrew text AND its English translation
+- NEVER show only the English without the Hebrew, or only the Hebrew without the English
+- CORRECT: "Be gracious to me" (חׇנֵּנִי) shows...
+- INCORRECT: "Be gracious to me" shows... (missing Hebrew)
+- INCORRECT: חׇנֵּנִי shows... (missing English)
+- This applies to EVERY quotation from the verse you're analyzing
 
 **Length**: 300-500 words per verse (PLUS the verse itself)
 - Shorter (200-250) acceptable for simple verses
@@ -725,6 +745,8 @@ Write your 200-400 word critical analysis focusing on what needs to change for a
 Your revised introduction must have TWO parts:
 
 **Part 1**: Introduction essay (600-1200 words) — clear, engaging, accessible for first-year college students
+  - **IMPORTANT**: Use markdown Header 3 (`### Header text`) to break up the essay with engaging section headers
+  - Examples: `### A quick map of what we're reading`, `### Why this psalm is so gripping`, `### The architecture: an alphabet that runs out of breath`
 
 **Part 2**: After finishing the essay, add a blank line and this EXACT marker:
 
@@ -801,27 +823,60 @@ class MasterEditor:
         self,
         api_key: Optional[str] = None,
         college_model: Optional[str] = None,
-        logger=None
+        main_model: Optional[str] = None,
+        logger=None,
+        cost_tracker: Optional[CostTracker] = None
     ):
         """
         Initialize Master Editor agent.
 
         Args:
-            api_key: OpenAI API key (or set OPENAI_API_KEY env var)
-            college_model: Model to use for college commentary (defaults to "gpt-5" if not specified)
+            api_key: OpenAI API key (or set OPENAI_API_KEY env var) - only for GPT models
+            college_model: Model to use for college commentary (defaults to same as main_model)
+            main_model: Model to use for main commentary (defaults to "gpt-5")
+                       Supported: "gpt-5", "claude-opus-4-5"
             logger: Logger instance (or will create default)
+            cost_tracker: CostTracker instance for tracking API costs
         """
-        self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
-        if not self.api_key:
-            raise ValueError("OpenAI API key required (pass api_key or set OPENAI_API_KEY)")
-
-        self.client = OpenAI(api_key=self.api_key)
-        self.model = "gpt-5"
-        self.college_model = college_model or "gpt-5"  # Flexible: can be changed to different model
         self.logger = logger or get_logger("master_editor")
+        self.cost_tracker = cost_tracker or CostTracker()
 
-        self.logger.info(f"MasterEditor initialized with model {self.model}")
+        # Determine main model
+        self.model = main_model or "gpt-5"
+
+        # Determine college model (defaults to same as main model)
+        self.college_model = college_model or self.model
+
+        # Initialize clients based on which models are being used
+        self.openai_client = None
+        self.anthropic_client = None
+
+        models_used = {self.model, self.college_model}
+
+        # Initialize OpenAI if any GPT models are used
+        if any("gpt" in m.lower() for m in models_used):
+            openai_key = api_key or os.environ.get("OPENAI_API_KEY")
+            if not openai_key:
+                raise ValueError("OpenAI API key required for GPT models (pass api_key or set OPENAI_API_KEY)")
+            self.openai_client = OpenAI(api_key=openai_key)
+            self.logger.info("✓ OpenAI client initialized")
+
+        # Initialize Anthropic if any Claude models are used
+        if any("claude" in m.lower() for m in models_used):
+            anthropic_key = os.environ.get("ANTHROPIC_API_KEY")
+            if not anthropic_key:
+                raise ValueError("Anthropic API key required for Claude models (set ANTHROPIC_API_KEY env var)")
+            self.anthropic_client = anthropic.Anthropic(api_key=anthropic_key)
+            self.logger.info("✓ Anthropic client initialized")
+
+        self.logger.info(f"MasterEditor initialized with main model: {self.model}")
         self.logger.info(f"  College commentary model: {self.college_model}")
+
+        # Log thinking configuration based on model
+        if "opus" in self.model.lower():
+            self.logger.info(f"  Main model thinking: Claude Opus 4.5 with extended thinking (40K budget + 24K output)")
+        if "opus" in self.college_model.lower():
+            self.logger.info(f"  College model thinking: Claude Opus 4.5 with extended thinking (40K budget + 24K output)")
 
     def edit_commentary(
         self,
@@ -921,7 +976,36 @@ class MasterEditor:
         psalm_text: str,
         analytical_framework: str
     ) -> Dict[str, str]:
-        """Call GPT-5 for editorial review."""
+        """
+        Call appropriate model for editorial review.
+
+        Routes to GPT-5 or Claude Opus 4.5 based on self.model.
+        Tracks usage and costs.
+        """
+        # Route to appropriate implementation
+        if "claude" in self.model.lower():
+            return self._perform_editorial_review_claude(
+                psalm_number, introduction, verse_commentary, research_bundle,
+                macro_analysis, micro_analysis, psalm_text, analytical_framework
+            )
+        else:
+            return self._perform_editorial_review_gpt(
+                psalm_number, introduction, verse_commentary, research_bundle,
+                macro_analysis, micro_analysis, psalm_text, analytical_framework
+            )
+
+    def _perform_editorial_review_gpt(
+        self,
+        psalm_number: int,
+        introduction: str,
+        verse_commentary: str,
+        research_bundle: str,
+        macro_analysis: Dict,
+        micro_analysis: Dict,
+        psalm_text: str,
+        analytical_framework: str
+    ) -> Dict[str, str]:
+        """Call GPT-5 for editorial review with cost tracking."""
         self.logger.info(f"Calling GPT-5 for editorial review of Psalm {psalm_number}")
 
         # Format macro and micro for prompt
@@ -952,7 +1036,7 @@ class MasterEditor:
         # Setting to "high" for complex editorial analysis
         # No system messages supported - use user messages only
         try:
-            response = self.client.chat.completions.create(
+            response = self.openai_client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {
@@ -967,7 +1051,17 @@ class MasterEditor:
             # Extract response text
             response_text = response.choices[0].message.content
 
+            # Track usage and costs
+            usage = response.usage
+            self.cost_tracker.add_usage(
+                model=self.model,
+                input_tokens=usage.input_tokens,
+                output_tokens=usage.output_tokens,
+                thinking_tokens=0  # GPT-5 reasoning tokens are included in output_tokens
+            )
+
             self.logger.info(f"Editorial review generated: {len(response_text)} chars")
+            self.logger.info(f"  Usage: {usage.input_tokens:,} input + {usage.output_tokens:,} output tokens")
 
             # Save response for debugging
             if self.logger:
@@ -986,6 +1080,124 @@ class MasterEditor:
             raise  # Re-raise the exception to be handled by the pipeline
         except Exception as e:
             self.logger.error(f"An unexpected error occurred during editorial review: {e}")
+            raise
+
+    def _perform_editorial_review_claude(
+        self,
+        psalm_number: int,
+        introduction: str,
+        verse_commentary: str,
+        research_bundle: str,
+        macro_analysis: Dict,
+        micro_analysis: Dict,
+        psalm_text: str,
+        analytical_framework: str
+    ) -> Dict[str, str]:
+        """Call Claude Opus 4.5 for editorial review with MAXIMUM thinking and cost tracking."""
+        self.logger.info(f"Calling Claude Opus 4.5 with MAXIMUM thinking for editorial review of Psalm {psalm_number}")
+
+        # Format macro and micro for prompt
+        macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
+        micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+
+        # Build prompt
+        prompt = MASTER_EDITOR_PROMPT.format(
+            psalm_number=psalm_number,
+            introduction_essay=introduction,
+            verse_commentary=verse_commentary,
+            research_bundle=research_bundle,
+            psalm_text=psalm_text or "[Psalm text not available]",
+            macro_analysis=macro_text,
+            micro_analysis=micro_text,
+            analytical_framework=analytical_framework
+        )
+
+        # Save prompt for debugging
+        if self.logger:
+            prompt_file = Path(f"output/debug/master_editor_opus_prompt_psalm_{psalm_number}.txt")
+            prompt_file.parent.mkdir(parents=True, exist_ok=True)
+            prompt_file.write_text(prompt, encoding='utf-8')
+            self.logger.info(f"Saved Opus editorial prompt to {prompt_file}")
+
+        # Call Claude Opus 4.5 with MAXIMUM thinking
+        # Note: max_tokens must be GREATER than thinking budget (it's the total for both)
+        # Configuration: 40K thinking + 24K output = 64K total (balanced for deep reasoning + full commentary)
+        try:
+            stream = self.anthropic_client.messages.stream(
+                model=self.model,
+                max_tokens=64000,  # Maximum total tokens (thinking + output combined)
+                thinking={
+                    "type": "enabled",
+                    "budget_tokens": 40000  # 40K thinking budget (very high, leaves 24K for output)
+                },
+                messages=[{
+                    "role": "user",
+                    "content": prompt
+                }]
+            )
+
+            # Collect response chunks
+            thinking_text = ""
+            response_text = ""
+
+            with stream as response_stream:
+                for chunk in response_stream:
+                    if hasattr(chunk, 'type'):
+                        if chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta'):
+                                if hasattr(chunk.delta, 'type'):
+                                    if chunk.delta.type == 'thinking_delta':
+                                        thinking_text += chunk.delta.thinking
+                                    elif chunk.delta.type == 'text_delta':
+                                        response_text += chunk.delta.text
+
+                # Get usage from final message (must be called inside with block)
+                final_message = response_stream.get_final_message()
+                usage = final_message.usage
+
+            self.logger.info("Opus API streaming call successful")
+            self.logger.info(f"  Thinking collected: {len(thinking_text)} chars")
+            self.logger.info(f"  Response collected: {len(response_text)} chars")
+
+            # Track usage and costs
+            # Note: Claude reports thinking tokens separately
+            thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+
+            self.cost_tracker.add_usage(
+                model=self.model,
+                input_tokens=usage.input_tokens,
+                output_tokens=usage.output_tokens,
+                thinking_tokens=thinking_tokens
+            )
+
+            self.logger.info(f"Editorial review generated: {len(response_text)} chars")
+            self.logger.info(f"  Usage: {usage.input_tokens:,} input + {usage.output_tokens:,} output + {thinking_tokens:,} thinking tokens")
+
+            # Save thinking and response for debugging
+            if self.logger:
+                # Save thinking
+                if thinking_text:
+                    thinking_file = Path(f"output/debug/master_editor_opus_thinking_psalm_{psalm_number}.txt")
+                    thinking_file.parent.mkdir(parents=True, exist_ok=True)
+                    thinking_file.write_text(thinking_text, encoding='utf-8')
+                    self.logger.info(f"Saved Opus thinking to {thinking_file}")
+
+                # Save response
+                response_file = Path(f"output/debug/master_editor_opus_response_psalm_{psalm_number}.txt")
+                response_file.parent.mkdir(parents=True, exist_ok=True)
+                response_file.write_text(response_text, encoding='utf-8')
+                self.logger.info(f"Saved Opus editorial response to {response_file}")
+
+            # Parse response into sections
+            result = self._parse_editorial_response(response_text, psalm_number)
+
+            return result
+
+        except anthropic.RateLimitError as e:
+            self.logger.error(f"Anthropic API rate limit exceeded: {e}. Please check your plan and billing details.")
+            raise
+        except Exception as e:
+            self.logger.error(f"An unexpected error occurred during Opus editorial review: {e}")
             raise
 
     def _parse_editorial_response(self, response_text: str, psalm_number: int) -> Dict[str, str]:
@@ -1236,11 +1448,36 @@ class MasterEditor:
         analytical_framework: str
     ) -> Dict[str, str]:
         """
-        Call GPT model for college editorial review.
+        Call appropriate model for college editorial review.
 
         Uses COLLEGE_EDITOR_PROMPT and self.college_model for a completely separate
         API call tailored to college student audience.
+        Routes to GPT-5 or Claude Opus 4.5 based on self.college_model.
         """
+        # Route to appropriate implementation
+        if "claude" in self.college_model.lower():
+            return self._perform_editorial_review_college_claude(
+                psalm_number, introduction, verse_commentary, research_bundle,
+                macro_analysis, micro_analysis, psalm_text, analytical_framework
+            )
+        else:
+            return self._perform_editorial_review_college_gpt(
+                psalm_number, introduction, verse_commentary, research_bundle,
+                macro_analysis, micro_analysis, psalm_text, analytical_framework
+            )
+
+    def _perform_editorial_review_college_gpt(
+        self,
+        psalm_number: int,
+        introduction: str,
+        verse_commentary: str,
+        research_bundle: str,
+        macro_analysis: Dict,
+        micro_analysis: Dict,
+        psalm_text: str,
+        analytical_framework: str
+    ) -> Dict[str, str]:
+        """Call GPT model for college editorial review with cost tracking."""
         self.logger.info(f"Calling {self.college_model} for college editorial review of Psalm {psalm_number}")
 
         # Format macro and micro for prompt
@@ -1266,9 +1503,9 @@ class MasterEditor:
             prompt_file.write_text(prompt, encoding='utf-8')
             self.logger.info(f"Saved college editorial prompt to {prompt_file}")
 
-        # Call model (could be GPT-5 or a different model specified via college_model parameter)
+        # Call GPT model
         try:
-            response = self.client.chat.completions.create(
+            response = self.openai_client.chat.completions.create(
                 model=self.college_model,
                 messages=[
                     {
@@ -1283,7 +1520,17 @@ class MasterEditor:
             # Extract response text
             response_text = response.choices[0].message.content
 
+            # Track usage and costs
+            usage = response.usage
+            self.cost_tracker.add_usage(
+                model=self.college_model,
+                input_tokens=usage.input_tokens,
+                output_tokens=usage.output_tokens,
+                thinking_tokens=0  # GPT-5 reasoning tokens are included in output_tokens
+            )
+
             self.logger.info(f"College editorial review generated: {len(response_text)} chars")
+            self.logger.info(f"  Usage: {usage.input_tokens:,} input + {usage.output_tokens:,} output tokens")
 
             # Save response for debugging
             if self.logger:
@@ -1302,6 +1549,123 @@ class MasterEditor:
             raise  # Re-raise the exception to be handled by the pipeline
         except Exception as e:
             self.logger.error(f"An unexpected error occurred during college editorial review: {e}")
+            raise
+
+    def _perform_editorial_review_college_claude(
+        self,
+        psalm_number: int,
+        introduction: str,
+        verse_commentary: str,
+        research_bundle: str,
+        macro_analysis: Dict,
+        micro_analysis: Dict,
+        psalm_text: str,
+        analytical_framework: str
+    ) -> Dict[str, str]:
+        """Call Claude Opus 4.5 for college editorial review with MAXIMUM thinking and cost tracking."""
+        self.logger.info(f"Calling {self.college_model} with MAXIMUM thinking for college editorial review of Psalm {psalm_number}")
+
+        # Format macro and micro for prompt
+        macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
+        micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+
+        # Build prompt using COLLEGE_EDITOR_PROMPT
+        prompt = COLLEGE_EDITOR_PROMPT.format(
+            psalm_number=psalm_number,
+            introduction_essay=introduction,
+            verse_commentary=verse_commentary,
+            research_bundle=research_bundle,
+            psalm_text=psalm_text or "[Psalm text not available]",
+            macro_analysis=macro_text,
+            micro_analysis=micro_text,
+            analytical_framework=analytical_framework
+        )
+
+        # Save prompt for debugging
+        if self.logger:
+            prompt_file = Path(f"output/debug/college_editor_opus_prompt_psalm_{psalm_number}.txt")
+            prompt_file.parent.mkdir(parents=True, exist_ok=True)
+            prompt_file.write_text(prompt, encoding='utf-8')
+            self.logger.info(f"Saved college Opus editorial prompt to {prompt_file}")
+
+        # Call Claude Opus 4.5 with MAXIMUM thinking
+        # Note: max_tokens must be GREATER than thinking budget (it's the total for both)
+        # Configuration: 40K thinking + 24K output = 64K total (balanced for deep reasoning + full commentary)
+        try:
+            stream = self.anthropic_client.messages.stream(
+                model=self.college_model,
+                max_tokens=64000,  # Maximum total tokens (thinking + output combined)
+                thinking={
+                    "type": "enabled",
+                    "budget_tokens": 40000  # 40K thinking budget (very high, leaves 24K for output)
+                },
+                messages=[{
+                    "role": "user",
+                    "content": prompt
+                }]
+            )
+
+            # Collect response chunks
+            thinking_text = ""
+            response_text = ""
+
+            with stream as response_stream:
+                for chunk in response_stream:
+                    if hasattr(chunk, 'type'):
+                        if chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta'):
+                                if hasattr(chunk.delta, 'type'):
+                                    if chunk.delta.type == 'thinking_delta':
+                                        thinking_text += chunk.delta.thinking
+                                    elif chunk.delta.type == 'text_delta':
+                                        response_text += chunk.delta.text
+
+                # Get usage from final message (must be called inside with block)
+                final_message = response_stream.get_final_message()
+                usage = final_message.usage
+
+            self.logger.info("College Opus API streaming call successful")
+            self.logger.info(f"  Thinking collected: {len(thinking_text)} chars")
+            self.logger.info(f"  Response collected: {len(response_text)} chars")
+
+            # Track usage and costs
+            thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+
+            self.cost_tracker.add_usage(
+                model=self.college_model,
+                input_tokens=usage.input_tokens,
+                output_tokens=usage.output_tokens,
+                thinking_tokens=thinking_tokens
+            )
+
+            self.logger.info(f"College editorial review generated: {len(response_text)} chars")
+            self.logger.info(f"  Usage: {usage.input_tokens:,} input + {usage.output_tokens:,} output + {thinking_tokens:,} thinking tokens")
+
+            # Save thinking and response for debugging
+            if self.logger:
+                # Save thinking
+                if thinking_text:
+                    thinking_file = Path(f"output/debug/college_editor_opus_thinking_psalm_{psalm_number}.txt")
+                    thinking_file.parent.mkdir(parents=True, exist_ok=True)
+                    thinking_file.write_text(thinking_text, encoding='utf-8')
+                    self.logger.info(f"Saved college Opus thinking to {thinking_file}")
+
+                # Save response
+                response_file = Path(f"output/debug/college_editor_opus_response_psalm_{psalm_number}.txt")
+                response_file.parent.mkdir(parents=True, exist_ok=True)
+                response_file.write_text(response_text, encoding='utf-8')
+                self.logger.info(f"Saved college Opus editorial response to {response_file}")
+
+            # Parse response into sections (uses same parser as regular version)
+            result = self._parse_editorial_response(response_text, psalm_number)
+
+            return result
+
+        except anthropic.RateLimitError as e:
+            self.logger.error(f"Anthropic API rate limit exceeded: {e}. Please check your plan and billing details.")
+            raise
+        except Exception as e:
+            self.logger.error(f"An unexpected error occurred during college Opus editorial review: {e}")
             raise
 
     # =========================================================================
