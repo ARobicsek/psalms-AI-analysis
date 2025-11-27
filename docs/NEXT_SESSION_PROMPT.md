@@ -8,7 +8,64 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 145 - College Editor Parser Bug Fix (2025-11-27) ✅ COMPLETE
+**Last Session**: Session 147 - College Commentary Hebrew Duplication Fix (2025-11-27) ✅ COMPLETE
+
+## Session 147 Summary (COMPLETE ✓)
+
+**Objective**: Remove Hebrew verse and English translation duplication from college verse commentary sections in combined docx
+**Result**: ✓ COMPLETE - College commentary now starts after Hebrew verse quotation, Psalm 11 regenerated
+
+**What Was Fixed**:
+- Combined docx verse sections showed Hebrew verse twice (main subsection + college subsection)
+- College commentary should start AFTER the Hebrew quotation with first word bold/green
+- Parser didn't handle markdown-wrapped Hebrew (`**לַמְנַצֵּחַ**`) or English translation blocks
+- Enhanced parser with state machine to skip entire verse section (Hebrew + translation)
+- File: [combined_document_generator.py:663-700](../src/utils/combined_document_generator.py#L663-L700)
+
+## Session 146 Summary (COMPLETE ✓)
+
+**Objective**: Fix bullet rendering, add block quote formatting, fix empty quote lines, correct liturgical section source, and fix college verse commentary parsing
+**Result**: ✓ COMPLETE - All five formatting/parsing issues resolved, Psalm 11 documents regenerated
+
+**Issues Fixed**:
+
+1. **Bullets in Combined Document**:
+   - Intro sections showed weird hyphens instead of proper Word bullets
+   - Added bullet detection to all intro loops in combined_document_generator.py
+
+2. **Block Quote Formatting** (NEW FEATURE):
+   - Markdown block quotes (`> text`) displayed literal ">" carets
+   - Implemented elegant formatting: 0.5" indentation + italic text
+   - Handles `>` with or without space after it
+
+3. **Empty Block Quote Lines**:
+   - Lines with just `>` displayed as carets instead of blank lines
+   - Added empty-text detection - renders as blank paragraph
+
+4. **Liturgical Section Source**:
+   - Combined docx incorrectly used college intro's liturgical section
+   - Updated regex to handle both header and marker formats
+   - Now correctly uses main intro's liturgical section
+
+5. **College Verse Commentary Not Appearing**:
+   - College verses not showing in college or combined docx
+   - Parser only looked for `**Verse X**`, but college uses `### Verse X`
+   - Updated both parsers to handle all three formats
+   - Same root cause as Session 145 (LLM format variations)
+
+**Files Modified**:
+- src/utils/combined_document_generator.py (9 locations)
+- src/utils/document_generator.py (4 locations)
+
+**Impact**:
+- ✅ Consistent bullet formatting across all sections
+- ✅ Elegant block quote rendering with proper spacing
+- ✅ Correct liturgical section in combined documents
+- ✅ College verse commentary fully functional
+- ✅ Parsers robust to LLM format variations
+- ✅ All future psalms benefit from improvements
+
+---
 
 ## Session 145 Summary (COMPLETE ✓)
 
