@@ -33,11 +33,13 @@ if __name__ == '__main__':
     from src.schemas.analysis_schemas import MacroAnalysis, StructuralDivision, PoeticDevice
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.logger import get_logger
+    from src.utils.cost_tracker import CostTracker
 else:
     from .rag_manager import RAGManager, RAGContext
     from ..schemas.analysis_schemas import MacroAnalysis, StructuralDivision, PoeticDevice
     from ..data_sources.tanakh_database import TanakhDatabase
     from ..utils.logger import get_logger
+    from ..utils.cost_tracker import CostTracker
 
 
 # System prompt for MacroAnalyst agent
@@ -190,7 +192,8 @@ class MacroAnalyst:
         api_key: Optional[str] = None,
         db_path: Optional[Path] = None,
         docs_dir: str = "docs",
-        logger=None
+        logger=None,
+        cost_tracker: Optional[CostTracker] = None
     ):
         """
         Initialize MacroAnalyst agent.
@@ -200,6 +203,7 @@ class MacroAnalyst:
             db_path: Path to Tanakh database (for fetching psalm text)
             docs_dir: Path to docs directory (for RAG documents)
             logger: Logger instance (or will create default)
+            cost_tracker: CostTracker instance for tracking API costs
         """
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
         if not self.api_key:
@@ -208,6 +212,7 @@ class MacroAnalyst:
         self.client = anthropic.Anthropic(api_key=self.api_key)
         self.model = "claude-sonnet-4-5"  # Sonnet 4.5 with extended thinking
         self.logger = logger or get_logger("macro_analyst")
+        self.cost_tracker = cost_tracker or CostTracker()
 
         # Initialize RAG Manager
         self.rag_manager = RAGManager(docs_dir=docs_dir)
@@ -320,6 +325,21 @@ class MacroAnalyst:
                 self.logger.info(f"Response collected: {len(response_text)} chars")
 
                 self.logger.info(f"Response received. Thinking tokens: {len(thinking_text.split()) if thinking_text else 0}")
+
+                # Track usage and costs
+                final_message = response_stream.get_final_message()
+                if hasattr(final_message, 'usage'):
+                    usage = final_message.usage
+                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+
+                    self.cost_tracker.add_usage(
+                        model=self.model,
+                        input_tokens=usage.input_tokens,
+                        output_tokens=usage.output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
+                    self.logger.info(f"Usage tracked: {usage.input_tokens} input, {usage.output_tokens} output, {thinking_tokens} thinking tokens")
 
                 # Check if we got a text response
                 if not response_text or not response_text.strip():

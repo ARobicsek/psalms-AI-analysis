@@ -1214,6 +1214,7 @@ class MasterEditor:
         import re
 
         # Find section markers using regex to match only at line start with exact pattern
+        # Note: Some LLMs use ## instead of ### despite instructions, so we match both
         assessment_marker = "### EDITORIAL ASSESSMENT"
         intro_marker = "### REVISED INTRODUCTION"
         verses_marker = "### REVISED VERSE COMMENTARY"
@@ -1223,10 +1224,10 @@ class MasterEditor:
         revised_introduction = ""
         revised_verses = ""
 
-        # Find section positions
-        assessment_match = re.search(r'^### EDITORIAL ASSESSMENT\s*$', response_text, re.MULTILINE)
-        intro_match = re.search(r'^### REVISED INTRODUCTION\s*$', response_text, re.MULTILINE)
-        verses_match = re.search(r'^### REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
+        # Find section positions - match both ## and ### variants
+        assessment_match = re.search(r'^#{2,3} EDITORIAL ASSESSMENT\s*$', response_text, re.MULTILINE)
+        intro_match = re.search(r'^#{2,3} REVISED INTRODUCTION\s*$', response_text, re.MULTILINE)
+        verses_match = re.search(r'^#{2,3} REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
 
         # Extract assessment (from EDITORIAL ASSESSMENT to REVISED INTRODUCTION)
         if assessment_match and intro_match:

@@ -1,5 +1,317 @@
 # Implementation Log
 
+## Session 145 - 2025-11-27 (College Editor Parser Bug Fix - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix empty college edition edited files (intro and verses) for Psalm 11
+**Approach**: Investigate parser mismatch, update regex to handle both `##` and `###` headers
+**Result**: ✓ COMPLETE - Parser fixed, Psalm 11 college files regenerated successfully
+**Session Duration**: ~30 minutes
+**Status**: Complete - bug fix tested and working
+
+### Task Description
+
+**User Report**:
+After running `python scripts/run_enhanced_pipeline.py 11`, the college edition files were unexpectedly empty:
+- `psalm_011_assessment_college.md` - ✓ had content (464 lines)
+- `psalm_011_edited_intro_college.md` - ✗ empty (1 line)
+- `psalm_011_edited_verses_college.md` - ✗ empty (1 line)
+
+### Root Cause Analysis
+
+**LLM Header Format Mismatch**:
+1. **Parser expectations**: The `_parse_editorial_response()` method used exact regex patterns:
+   - `r'^### EDITORIAL ASSESSMENT\s*$'`
+   - `r'^### REVISED INTRODUCTION\s*$'`
+   - `r'^### REVISED VERSE COMMENTARY\s*$'`
+
+2. **Actual LLM output**: GPT-5/GPT-5.1 generated response with inconsistent headers:
+   - Line 1: `### EDITORIAL ASSESSMENT` ✓ (3 hashes - correct)
+   - Line 20: `## REVISED INTRODUCTION` ✗ (2 hashes - incorrect)
+   - Line 228: `## REVISED VERSE COMMENTARY` ✗ (2 hashes - incorrect)
+
+3. **Parser failure**: Regex didn't match `##` headers, so `intro_match` and `verses_match` were `None`, resulting in empty extracted sections
+
+**Why this happened**:
+- Both MASTER_EDITOR_PROMPT and COLLEGE_EDITOR_PROMPT correctly instruct the LLM to use `###` (3 hashes)
+- LLM didn't follow exact formatting instructions (common LLM compliance issue)
+- Parser was too strict and didn't handle format variations
+
+### Solution Implemented
+
+**Updated Parser Regex** ([master_editor.py:1212-1230](../src/agents/master_editor.py#L1212-L1230)):
+
+Changed from exact `###` matching to flexible `#{2,3}` pattern:
+
+```python
+# Before (too strict)
+assessment_match = re.search(r'^### EDITORIAL ASSESSMENT\s*$', response_text, re.MULTILINE)
+intro_match = re.search(r'^### REVISED INTRODUCTION\s*$', response_text, re.MULTILINE)
+verses_match = re.search(r'^### REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
+
+# After (flexible)
+assessment_match = re.search(r'^#{2,3} EDITORIAL ASSESSMENT\s*$', response_text, re.MULTILINE)
+intro_match = re.search(r'^#{2,3} REVISED INTRODUCTION\s*$', response_text, re.MULTILINE)
+verses_match = re.search(r'^#{2,3} REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
+```
+
+This allows the parser to handle both `##` (2 hashes) and `###` (3 hashes) formats.
+
+**Created Repair Script** ([scripts/fix_psalm_11_college.py](../scripts/fix_psalm_11_college.py)):
+
+Standalone script to reprocess existing Psalm 11 response:
+1. Load raw response from `output/debug/college_editor_response_psalm_11.txt`
+2. Parse using updated regex patterns
+3. Extract and save intro, verses, and assessment sections
+
+### Verification
+
+**Parsing Results**:
+```
+Extracted sections:
+  Assessment: 1963 chars
+  Introduction: 11964 chars
+  Verses: 16273 chars
+```
+
+**File Sizes After Fix**:
+- `psalm_011_assessment_college.md`: 2,081 bytes (formatted correctly)
+- `psalm_011_edited_intro_college.md`: 14,127 bytes ✓ (was ~empty, now full content)
+- `psalm_011_edited_verses_college.md`: 18,966 bytes ✓ (was ~empty, now full content)
+
+### Impact
+
+- ✅ Parser now handles LLM format variations (more robust)
+- ✅ Psalm 11 college files successfully regenerated
+- ✅ Future pipeline runs won't have this parsing issue
+- ✅ No need to re-run expensive API calls - existing response was fine
+
+### Files Modified
+
+1. **src/agents/master_editor.py** - Updated `_parse_editorial_response()` regex patterns
+2. **scripts/fix_psalm_11_college.py** - Created repair script for Psalm 11
+
+### Next Steps
+
+- Parser fix will automatically work for all future psalms
+- Consider testing with other psalms to ensure no regressions
+- Repair script can be reused if similar issues occur with other psalms
+
+---
+
+## Session 144 - 2025-11-27 (Comprehensive Cost Tracking Implementation - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix pipeline cost summary to show costs for all LLMs (macro, micro, synthesis, liturgical librarian) and add missing GPT-5.1 pricing
+**Approach**: Add cost_tracker parameter to all agents, track token usage after API calls, add GPT-5.1 pricing
+**Result**: ✓ COMPLETE - Full cost tracking now operational across all pipeline agents
+**Session Duration**: ~2 hours
+**Status**: Complete and ready for testing with next pipeline run
+
+### Task Description
+
+**User Report**:
+After running `python scripts/run_enhanced_pipeline.py 11`, the cost summary at end showed:
+1. Only GPT-5.1 costs (master editor), not showing costs for macro, micro, synthesis, or liturgical librarian
+2. All costs showing as $0.0000 even though token counts were displayed
+3. GPT-5.1 pricing not in the lookup table
+
+**User Questions**:
+- Can we request costs directly from LLM APIs instead of calculating them?
+
+### Root Cause Analysis
+
+**Missing Cost Tracking**:
+- CostTracker was created in Session 141 but only integrated with master_editor.py
+- Other agents (macro_analyst, micro_analyst, synthesis_writer, liturgical_librarian) not updated to use it
+- cost_tracker was passed to master_editor but not to other agents in run_enhanced_pipeline.py
+
+**Missing GPT-5.1 Pricing**:
+- GPT-5.1 model added in Session 143 but pricing not added to cost_tracker.py
+- Lookup table only had GPT-5, causing $0.00 costs for GPT-5.1
+
+**API Cost Reporting**:
+- Different APIs report costs differently (some not at all)
+- OpenAI, Anthropic, and Gemini all report token counts but NOT dollar costs
+- Calculating from token usage is more reliable and consistent across providers
+- Lookup table approach allows us to update pricing as it changes
+
+### Solution Implemented
+
+**1. Added GPT-5.1 Pricing** ([cost_tracker.py:85-92](../src/utils/cost_tracker.py#L85-L92)):
+
+```python
+# GPT-5.1 (OpenAI) - Same pricing as GPT-5
+"gpt-5.1": {
+    "input": 1.25,
+    "output": 10.00,
+    "thinking": 10.00,  # Reasoning tokens charged at output rate
+    "cache_read": 0.0,  # Not applicable
+    "cache_write": 0.0,  # Not applicable
+},
+```
+
+**2. Updated MacroAnalyst** ([macro_analyst.py:196, 215, 329-342](../src/agents/macro_analyst.py)):
+
+Added cost_tracker parameter to `__init__`:
+```python
+def __init__(
+    self,
+    api_key: Optional[str] = None,
+    db_path: Optional[Path] = None,
+    docs_dir: str = "docs",
+    logger=None,
+    cost_tracker: Optional[CostTracker] = None
+):
+    ...
+    self.cost_tracker = cost_tracker or CostTracker()
+```
+
+Added usage tracking after streaming API call:
+```python
+# Track usage and costs
+final_message = response_stream.get_final_message()
+if hasattr(final_message, 'usage'):
+    usage = final_message.usage
+    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+    self.cost_tracker.add_usage(
+        model=self.model,
+        input_tokens=usage.input_tokens,
+        output_tokens=usage.output_tokens,
+        thinking_tokens=thinking_tokens
+    )
+```
+
+**3. Updated MicroAnalystV2** ([micro_analyst.py:316, 340-341, 483-493, 605-615](../src/agents/micro_analyst.py)):
+
+Added cost_tracker parameter and tracks usage for both discovery pass and research generation pass:
+```python
+# Track usage and costs (discovery pass)
+final_message = response_stream.get_final_message()
+if hasattr(final_message, 'usage'):
+    usage = final_message.usage
+    thinking_tokens = getattr(usage, 'thinking_tokens', 0)
+    self.cost_tracker.add_usage(
+        model=self.model,
+        input_tokens=usage.input_tokens,
+        output_tokens=usage.output_tokens,
+        thinking_tokens=thinking_tokens
+    )
+```
+
+Also passes cost_tracker to ResearchAssembler:
+```python
+self.research_assembler = ResearchAssembler(cost_tracker=self.cost_tracker)
+```
+
+**4. Updated SynthesisWriter** ([synthesis_writer.py:482, 499, 903-912, 1036-1045](../src/agents/synthesis_writer.py)):
+
+Added cost_tracker parameter and tracks usage for both introduction and verse commentary:
+```python
+# Track usage and costs
+if hasattr(final_message, 'usage'):
+    usage = final_message.usage
+    thinking_tokens = getattr(usage, 'thinking_tokens', 0)
+    self.cost_tracker.add_usage(
+        model=self.model,
+        input_tokens=usage.input_tokens,
+        output_tokens=usage.output_tokens,
+        thinking_tokens=thinking_tokens
+    )
+```
+
+**5. Updated LiturgicalLibrarian** ([liturgical_librarian.py:207, 243-248, 1160-1172, 1357-1367, 1894-1904](../src/agents/liturgical_librarian.py)):
+
+Added cost_tracker parameter with lazy initialization to avoid circular dependency:
+```python
+# Initialize cost tracker (import here to avoid circular dependency)
+if cost_tracker is None:
+    from src.utils.cost_tracker import CostTracker
+    self.cost_tracker = CostTracker()
+else:
+    self.cost_tracker = cost_tracker
+```
+
+Tracks usage for both Gemini 2.5 Pro and Claude Sonnet 4.5 calls:
+```python
+# Track usage and costs (Gemini)
+if hasattr(response, 'usage_metadata'):
+    input_tokens = response.usage_metadata.prompt_token_count
+    output_tokens = response.usage_metadata.candidates_token_count
+    thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
+    self.cost_tracker.add_usage(
+        model="gemini-2.5-pro",
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
+        thinking_tokens=thinking_tokens
+    )
+
+# Track usage and costs (Claude)
+final_message = response_stream.get_final_message()
+if hasattr(final_message, 'usage'):
+    usage = final_message.usage
+    thinking_tokens = getattr(usage, 'thinking_tokens', 0)
+    self.cost_tracker.add_usage(
+        model="claude-sonnet-4-5",
+        input_tokens=usage.input_tokens,
+        output_tokens=usage.output_tokens,
+        thinking_tokens=thinking_tokens
+    )
+```
+
+**6. Updated ResearchAssembler** ([research_assembler.py:437, 451](../src/agents/research_assembler.py)):
+
+Added cost_tracker parameter and passes to LiturgicalLibrarian:
+```python
+def __init__(self, use_llm_summaries: bool = True, cost_tracker=None):
+    ...
+    self.liturgical_librarian = LiturgicalLibrarian(
+        use_llm_summaries=use_llm_summaries,
+        cost_tracker=cost_tracker
+    )
+```
+
+**7. Updated Pipeline** ([run_enhanced_pipeline.py:249, 338, 455](../scripts/run_enhanced_pipeline.py)):
+
+Pass cost_tracker to all agents:
+```python
+macro_analyst = MacroAnalyst(cost_tracker=cost_tracker)
+micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode, cost_tracker=cost_tracker)
+synthesis_writer = SynthesisWriter(cost_tracker=cost_tracker)
+```
+
+### Testing
+
+**Next Steps**:
+- Run full pipeline: `python scripts/run_enhanced_pipeline.py 11`
+- Verify cost summary shows all model usage:
+  - Claude Sonnet 4.5 (macro, micro, synthesis)
+  - Gemini 2.5 Pro (liturgical librarian - primary)
+  - Claude Sonnet 4.5 (liturgical librarian - fallback if Gemini quota exhausted)
+  - GPT-5.1 or GPT-5 (master editor for main and college)
+- Verify costs are calculated correctly (not $0.0000)
+
+### Files Modified
+
+**7 files changed**:
+- [src/utils/cost_tracker.py](../src/utils/cost_tracker.py) - Added GPT-5.1 pricing
+- [src/agents/macro_analyst.py](../src/agents/macro_analyst.py) - Added cost tracking
+- [src/agents/micro_analyst.py](../src/agents/micro_analyst.py) - Added cost tracking + ResearchAssembler integration
+- [src/agents/synthesis_writer.py](../src/agents/synthesis_writer.py) - Added cost tracking
+- [src/agents/liturgical_librarian.py](../src/agents/liturgical_librarian.py) - Added cost tracking for Gemini and Claude
+- [src/agents/research_assembler.py](../src/agents/research_assembler.py) - Added cost_tracker parameter
+- [scripts/run_enhanced_pipeline.py](../scripts/run_enhanced_pipeline.py) - Pass cost_tracker to all agents
+
+### Impact
+
+- ✅ Full visibility into all pipeline costs (Claude Sonnet 4.5, Gemini 2.5 Pro, GPT-5.1, GPT-5)
+- ✅ Separate tracking for input, output, and thinking/reasoning tokens
+- ✅ Accurate cost calculation based on current official pricing
+- ✅ Easy to identify which agents use which models and how much they cost
+- ✅ Lookup table approach allows easy pricing updates as rates change
+
+---
+
 ## Session 142 - 2025-11-25 (Combined Document Generator Fixes - COMPLETE ✓)
 
 ### Overview

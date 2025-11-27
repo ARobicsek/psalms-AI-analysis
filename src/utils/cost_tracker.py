@@ -82,6 +82,14 @@ PRICING = {
         "cache_read": 0.0,  # Not applicable
         "cache_write": 0.0,  # Not applicable
     },
+    # GPT-5.1 (OpenAI) - Same pricing as GPT-5
+    "gpt-5.1": {
+        "input": 1.25,
+        "output": 10.00,
+        "thinking": 10.00,  # Reasoning tokens charged at output rate
+        "cache_read": 0.0,  # Not applicable
+        "cache_write": 0.0,  # Not applicable
+    },
     # Gemini 2.5 Pro (Google)
     "gemini-2.5-pro": {
         "input": 3.00,
