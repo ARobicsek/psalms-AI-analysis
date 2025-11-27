@@ -263,6 +263,23 @@ class CombinedDocumentGenerator:
                 line_without_bullet = line[2:]  # Remove "- "
                 # Process with proper formatting
                 self._process_markdown_formatting(paragraph, line_without_bullet, set_font=True)
+            # Check if this is a block quote
+            elif line.startswith('>'):
+                # Check if it's an empty quote line (just ">" with optional spaces)
+                quote_text = line[1:].lstrip() if len(line) > 1 else ''  # Remove ">" and any leading spaces
+                if not quote_text:
+                    # Empty quote line - add a blank paragraph
+                    self.document.add_paragraph()
+                else:
+                    # Non-empty quote line - create a block quote paragraph with indentation and italic
+                    paragraph = self.document.add_paragraph(style=style)
+                    self._set_paragraph_ltr(paragraph)
+                    paragraph.paragraph_format.left_indent = Inches(0.5)
+                    # Process with proper formatting
+                    self._process_markdown_formatting(paragraph, quote_text, set_font=True)
+                    # Make the entire quote italic
+                    for run in paragraph.runs:
+                        run.italic = True
             else:
                 # Regular paragraph
                 self._add_paragraph_with_markdown(line, style=style)
@@ -274,12 +291,16 @@ class CombinedDocumentGenerator:
     def _parse_verse_commentary(self, content: str, psalm_text_data: Dict[int, Dict[str, str]]) -> List[Dict[str, str]]:
         """Parses the verse-by-verse commentary file."""
         verses = []
-        # Try both formats: "**Verse X**" (expected format) and "Verse X" (fallback format)
-        # First try the expected format with bold markdown, allowing for trailing whitespace
+        # Try multiple formats: "**Verse X**" (main format), "### Verse X" (college format), "Verse X" (fallback)
+        # First try the expected bold format
         verse_blocks = re.split(r'(?=^\*\*Verse \d+\*\*\s*\n)', content, flags=re.MULTILINE)
 
-        # If no verses found with bold format, try the fallback format without bold
-        if len(verse_blocks) <= 1:  # Only one block means no splits occurred
+        # If no verses found with bold format, try heading format (college uses this)
+        if len(verse_blocks) <= 1:
+            verse_blocks = re.split(r'(?=^#{2,3} Verse \d+\s*\n)', content, flags=re.MULTILINE)
+
+        # If still no verses found, try plain format without any markdown
+        if len(verse_blocks) <= 1:
             verse_blocks = re.split(r'(?=^Verse \d+\s*\n)', content, flags=re.MULTILINE)
 
         for block in verse_blocks:
@@ -289,10 +310,12 @@ class CombinedDocumentGenerator:
 
             lines = block.strip().split('\n', 1)  # Split only on the first newline
 
-            # Try both formats for verse number matching, allowing for trailing whitespace
-            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])
+            # Try all formats for verse number matching
+            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])  # **Verse X**
             if not verse_num_match:
-                verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])
+                verse_num_match = re.match(r'^#{2,3} Verse (\d+)\s*', lines[0])  # ### Verse X or ## Verse X
+            if not verse_num_match:
+                verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])  # Verse X
 
             if not verse_num_match:
                 continue
@@ -488,6 +511,28 @@ Methodological & Bibliographical Summary
                     self.document.add_heading(para.strip().replace('####', '').strip(), level=4)
                 elif para.strip().startswith('###'):
                     self.document.add_heading(para.strip().replace('###', '').strip(), level=3)
+                # Handle bullet lists
+                elif para.strip().startswith('- '):
+                    paragraph = self.document.add_paragraph(style='List Bullet')
+                    self._set_paragraph_ltr(paragraph)
+                    self._process_markdown_formatting(paragraph, para.strip()[2:], set_font=True)
+                # Handle block quotes
+                elif para.strip().startswith('>'):
+                    # Check if it's an empty quote line (just ">" with optional spaces)
+                    quote_text = para.strip()[1:].lstrip()  # Remove ">" and any leading spaces after it
+                    if not quote_text:
+                        # Empty quote line - add a blank paragraph
+                        self.document.add_paragraph()
+                    else:
+                        # Non-empty quote line
+                        paragraph = self.document.add_paragraph(style='BodySans')
+                        self._set_paragraph_ltr(paragraph)
+                        # Add left indentation and italic formatting for quotes
+                        paragraph.paragraph_format.left_indent = Inches(0.5)
+                        self._process_markdown_formatting(paragraph, quote_text, set_font=True)
+                        # Make the entire quote italic
+                        for run in paragraph.runs:
+                            run.italic = True
                 else:
                     self._add_paragraph_with_markdown(para, style='BodySans')
 
@@ -501,12 +546,15 @@ Methodological & Bibliographical Summary
         college_intro_content = self.college_intro_path.read_text(encoding='utf-8')
 
         # Remove liturgical section from college intro if present
+        # Handle both header-based (## Modern Jewish Liturgical Use) and marker-based (---LITURGICAL-SECTION-START---)
         college_intro_without_liturgical = re.sub(
-            r'## Modern Jewish Liturgical Use.*',
+            r'(## Modern Jewish Liturgical Use.*|---LITURGICAL-SECTION-START---.*)',
             '',
             college_intro_content,
             flags=re.DOTALL | re.IGNORECASE
         ).strip()
+        # Also remove the horizontal rule before liturgical section if present
+        college_intro_without_liturgical = re.sub(r'\n---\n*$', '', college_intro_without_liturgical).strip()
 
         # Add college intro paragraphs
         for para in college_intro_without_liturgical.strip().split('\n'):
@@ -516,6 +564,28 @@ Methodological & Bibliographical Summary
                     self.document.add_heading(para.strip().replace('####', '').strip(), level=4)
                 elif para.strip().startswith('###'):
                     self.document.add_heading(para.strip().replace('###', '').strip(), level=3)
+                # Handle bullet lists
+                elif para.strip().startswith('- '):
+                    paragraph = self.document.add_paragraph(style='List Bullet')
+                    self._set_paragraph_ltr(paragraph)
+                    self._process_markdown_formatting(paragraph, para.strip()[2:], set_font=True)
+                # Handle block quotes
+                elif para.strip().startswith('>'):
+                    # Check if it's an empty quote line (just ">" with optional spaces)
+                    quote_text = para.strip()[1:].lstrip()  # Remove ">" and any leading spaces after it
+                    if not quote_text:
+                        # Empty quote line - add a blank paragraph
+                        self.document.add_paragraph()
+                    else:
+                        # Non-empty quote line
+                        paragraph = self.document.add_paragraph(style='BodySans')
+                        self._set_paragraph_ltr(paragraph)
+                        # Add left indentation and italic formatting for quotes
+                        paragraph.paragraph_format.left_indent = Inches(0.5)
+                        self._process_markdown_formatting(paragraph, quote_text, set_font=True)
+                        # Make the entire quote italic
+                        for run in paragraph.runs:
+                            run.italic = True
                 else:
                     self._add_paragraph_with_markdown(para, style='BodySans')
 
@@ -532,6 +602,28 @@ Methodological & Bibliographical Summary
                         self.document.add_heading(para.strip().replace('####', '').strip(), level=4)
                     elif para.strip().startswith('###'):
                         self.document.add_heading(para.strip().replace('###', '').strip(), level=3)
+                    # Handle bullet lists
+                    elif para.strip().startswith('- '):
+                        paragraph = self.document.add_paragraph(style='List Bullet')
+                        self._set_paragraph_ltr(paragraph)
+                        self._process_markdown_formatting(paragraph, para.strip()[2:], set_font=True)
+                    # Handle block quotes
+                    elif para.strip().startswith('>'):
+                        # Check if it's an empty quote line (just ">" with optional spaces)
+                        quote_text = para.strip()[1:].lstrip()  # Remove ">" and any leading spaces after it
+                        if not quote_text:
+                            # Empty quote line - add a blank paragraph
+                            self.document.add_paragraph()
+                        else:
+                            # Non-empty quote line
+                            paragraph = self.document.add_paragraph(style='BodySans')
+                            self._set_paragraph_ltr(paragraph)
+                            # Add left indentation and italic formatting for quotes
+                            paragraph.paragraph_format.left_indent = Inches(0.5)
+                            self._process_markdown_formatting(paragraph, quote_text, set_font=True)
+                            # Make the entire quote italic
+                            for run in paragraph.runs:
+                                run.italic = True
                     else:
                         self._add_paragraph_with_markdown(para, style='BodySans')
 
@@ -568,26 +660,43 @@ Methodological & Bibliographical Summary
                 college_verse = college_verse_map[verse_num]
                 college_commentary = college_verse["commentary"]
 
-                # Remove any leading Hebrew verse lines
-                # College commentary often starts with the Hebrew verse (like "לַמְנַצֵּחַ...")
-                # We want to skip those and start with the English commentary
+                # Remove any leading Hebrew verse lines and English translation
+                # College commentary often starts with the Hebrew verse followed by English translation
+                # We want to skip both and start with the actual commentary
                 lines = college_commentary.split('\n')
                 commentary_lines = []
-                started_english = False
+                in_verse_section = True  # We're in the verse section (Hebrew + English translation)
+                in_english_quote = False  # Track if we're inside the English translation quote block
 
                 for line in lines:
                     line_stripped = line.strip()
                     if not line_stripped:
-                        if started_english:
+                        if not in_verse_section:
                             commentary_lines.append(line)
                         continue
 
-                    # Check if line starts with Hebrew (skip if it does and we haven't started English yet)
-                    if not started_english and re.match(r'^[\u0590-\u05FF]', line_stripped):
-                        continue  # Skip Hebrew verse lines at the beginning
+                    if in_verse_section:
+                        # Check for Hebrew line (with or without ** markdown or other formatting)
+                        # Remove markdown formatting before checking for Hebrew
+                        cleaned_line = re.sub(r'^\*+|\*+$', '', line_stripped)  # Remove leading/trailing asterisks
+                        if re.search(r'[\u0590-\u05FF]', cleaned_line[:10]):  # Check first 10 chars for Hebrew
+                            continue  # Skip Hebrew verse lines
 
-                    # If we're here, we've hit English commentary
-                    started_english = True
+                        # Check for English translation quote block
+                        if line_stripped.startswith('"') or line_stripped.startswith("'"):
+                            in_english_quote = True
+                            continue
+
+                        # If we're inside the English quote block, check for closing quote
+                        if in_english_quote:
+                            if line_stripped.endswith('"') or line_stripped.endswith("'"):
+                                in_english_quote = False
+                            continue
+
+                        # If we're here, we've exited the verse section
+                        in_verse_section = False
+
+                    # Add the line to commentary
                     commentary_lines.append(line)
 
                 # Join the English commentary lines

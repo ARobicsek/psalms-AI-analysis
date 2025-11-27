@@ -219,17 +219,39 @@ class DocumentGenerator:
             modified_text = modified_text[2:]  # Remove "- " prefix
             is_bullet = True
 
+        # Handle block quotes (lines starting with ">")
+        is_quote = False
+        if modified_text.startswith('>'):
+            # Check if it's an empty quote line (just ">" with optional spaces)
+            quote_text = modified_text[1:].lstrip()  # Remove ">" and any leading spaces
+            if not quote_text:
+                # Empty quote line - just add a blank paragraph and return
+                self.document.add_paragraph()
+                return
+            modified_text = quote_text
+            is_quote = True
+
         p = self.document.add_paragraph(style=style)
 
         # Apply bullet formatting if this is a list item
         if is_bullet:
             p.style = 'List Bullet'
 
+        # Apply quote formatting if this is a block quote
+        if is_quote:
+            from docx.shared import Inches
+            p.paragraph_format.left_indent = Inches(0.5)
+
         # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
         self._set_paragraph_ltr(p)
 
         # Use the centralized formatting method with font setting for bullets
         self._process_markdown_formatting(p, modified_text, set_font=is_bullet)
+
+        # Make block quotes italic
+        if is_quote:
+            for run in p.runs:
+                run.italic = True
 
     def _add_commentary_with_bullets(self, text: str, style: str = 'Normal'):
         """
@@ -263,10 +285,37 @@ class DocumentGenerator:
                     self._set_paragraph_ltr(p)
                     # Process markdown formatting in bullet text with explicit font
                     self._process_markdown_formatting(p, bullet_text, set_font=True)
+            # Check if this is a block quote
+            elif line.strip().startswith('>'):
+                # Collect consecutive block quote lines
+                quote_block = []
+                while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('>'):
+                    # Remove ">" and any leading spaces after it
+                    quote_text = lines[i].strip()[1:].lstrip()
+                    quote_block.append(quote_text)
+                    i += 1
+
+                # Add each quote line as a separate paragraph with indentation and italic
+                from docx.shared import Inches
+                for quote_text in quote_block:
+                    if not quote_text:
+                        # Empty quote line - add a blank paragraph
+                        self.document.add_paragraph()
+                    else:
+                        # Non-empty quote line
+                        p = self.document.add_paragraph(style=style)
+                        p.paragraph_format.left_indent = Inches(0.5)
+                        # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
+                        self._set_paragraph_ltr(p)
+                        # Process markdown formatting in quote text with explicit font
+                        self._process_markdown_formatting(p, quote_text, set_font=True)
+                        # Make the entire quote italic
+                        for run in p.runs:
+                            run.italic = True
             else:
-                # Collect consecutive non-bullet, non-empty lines until we hit an empty line or bullet
+                # Collect consecutive non-bullet, non-quote, non-empty lines until we hit an empty line or special formatting
                 text_block = []
-                while i < len(lines) and lines[i].strip() and not lines[i].strip().startswith('- '):
+                while i < len(lines) and lines[i].strip() and not lines[i].strip().startswith('- ') and not lines[i].strip().startswith('>'):
                     text_block.append(lines[i])
                     i += 1
 
@@ -470,12 +519,16 @@ class DocumentGenerator:
     def _parse_verse_commentary(self, content: str, psalm_text_data: Dict[int, Dict[str, str]]) -> List[Dict[str, str]]:
         """Parses the verse-by-verse commentary file."""
         verses = []
-        # Try both formats: "**Verse X**" (expected format) and "Verse X" (fallback format)
-        # First try the expected format with bold markdown, allowing for trailing whitespace
+        # Try multiple formats: "**Verse X**" (main format), "### Verse X" (college format), "Verse X" (fallback)
+        # First try the expected bold format
         verse_blocks = re.split(r'(?=^\*\*Verse \d+\*\*\s*\n)', content, flags=re.MULTILINE)
-        
-        # If no verses found with bold format, try the fallback format without bold
-        if len(verse_blocks) <= 1:  # Only one block means no splits occurred
+
+        # If no verses found with bold format, try heading format (college uses this)
+        if len(verse_blocks) <= 1:
+            verse_blocks = re.split(r'(?=^#{2,3} Verse \d+\s*\n)', content, flags=re.MULTILINE)
+
+        # If still no verses found, try plain format without any markdown
+        if len(verse_blocks) <= 1:
             verse_blocks = re.split(r'(?=^Verse \d+\s*\n)', content, flags=re.MULTILINE)
 
         for block in verse_blocks:
@@ -484,12 +537,14 @@ class DocumentGenerator:
                 continue
 
             lines = block.strip().split('\n', 1)  # Split only on the first newline
-            
-            # Try both formats for verse number matching, allowing for trailing whitespace
-            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])
+
+            # Try all formats for verse number matching
+            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])  # **Verse X**
             if not verse_num_match:
-                verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])
-            
+                verse_num_match = re.match(r'^#{2,3} Verse (\d+)\s*', lines[0])  # ### Verse X or ## Verse X
+            if not verse_num_match:
+                verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])  # Verse X
+
             if not verse_num_match:
                 continue
 

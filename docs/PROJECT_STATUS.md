@@ -1,8 +1,148 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-27 (Session 145 - COMPLETE ✓)
+**Last Updated**: 2025-11-27 (Session 147 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ College Editor Parser Bug Fixed, Psalm 11 Files Regenerated
+**Status**: ✓ College Commentary Hebrew Verse Duplication Fixed
+
+## Session 147 Summary (COMPLETE ✓)
+
+### Combined Document College Verse Commentary Fix
+
+**Objective**: Remove Hebrew verse and English translation duplication from college verse commentary sections in combined docx
+**Result**: ✓ COMPLETE - College commentary now starts after Hebrew verse quotation, Psalm 11 regenerated
+
+**Issue Identified**:
+- In combined docx verse-by-verse section, main commentary includes Hebrew verse at top
+- College subsection for same verse also included the Hebrew verse and English translation
+- Result: Hebrew verse appeared twice (once in main, once in college)
+- College commentary should begin AFTER the Hebrew quotation with first word bold/green
+
+**Root Cause**:
+- Parser used simple Hebrew character check: `re.match(r'^[\u0590-\u05FF]', line_stripped)`
+- Didn't handle markdown formatting (e.g., `**לַמְנַצֵּחַ**`)
+- Didn't skip the English translation block that follows Hebrew verse
+- Result: English translation included in college commentary output
+
+**Solution Implemented**:
+1. **Enhanced Hebrew Detection**:
+   - Strips markdown formatting (`**`) before checking for Hebrew characters
+   - Checks first 10 characters using `re.search()` instead of just start of line
+   - Handles both `**Hebrew**` and plain Hebrew lines
+
+2. **English Translation Block Skipping**:
+   - Added state tracking for English quote blocks
+   - Detects opening quote (`"` or `'` at line start)
+   - Tracks continuation until closing quote
+   - Skips entire translation block
+
+3. **State Machine Logic**:
+   - `in_verse_section` flag: True while processing Hebrew + translation
+   - `in_english_quote` flag: True while inside translation quote block
+   - Only adds lines after exiting verse section
+
+**Files Modified**:
+- [combined_document_generator.py:663-700](../src/utils/combined_document_generator.py#L663-L700) - Enhanced verse section parser with markdown handling and quote block detection
+
+**Testing**:
+- ✅ Regenerated Psalm 11 combined document
+- ✅ College verse commentary now starts with actual commentary (bold/green first word)
+- ✅ No Hebrew verse duplication in college subsections
+- ✅ Hebrew verse appears once at top of main subsection only
+
+**Impact**:
+- ✅ Eliminates redundant Hebrew verse text in college sections
+- ✅ Cleaner reading experience (verse shown once, not twice)
+- ✅ College commentary properly formatted with engaging first word
+- ✅ Correct document structure: Main (with Hebrew) → Em dash → College (commentary only)
+
+---
+
+## Session 146 Summary (COMPLETE ✓)
+
+### Document Formatting Fixes - Multiple Issues
+
+**Objective**: Fix bullet rendering, add block quote formatting, fix empty quote lines, correct liturgical section source, and fix college verse commentary parsing
+**Result**: ✓ COMPLETE - All five formatting/parsing issues resolved, Psalm 11 documents regenerated
+
+**Issues Fixed**:
+
+1. **Bullets in Combined Document (RESOLVED ✅)**:
+   - Problem: Intro sections (main, college, liturgical) in combined docx showed weird hyphens instead of proper Word bullets
+   - Root cause: College verse commentary handled bullets correctly (lines 649-652), but intro sections only called `_add_paragraph_with_markdown()` without checking for `- ` markers
+   - Fix: Added bullet detection to all three intro section loops in [combined_document_generator.py](../src/utils/combined_document_generator.py):
+     - Main intro section (lines 492-495)
+     - College intro section (lines 525-528)
+     - Liturgical section (lines 546-549)
+   - Now uses `List Bullet` style with `_process_markdown_formatting()` for consistent formatting
+
+2. **Block Quote Formatting (NEW FEATURE ✅)**:
+   - Problem: Markdown block quotes (`> text`) displayed literal ">" carets instead of formatted quotes
+   - Root cause: Neither document generator handled block quote markdown syntax
+   - Solution: Implemented block quote formatting in both generators:
+     - Strips `>` prefix from text (flexible - handles `>` with or without space)
+     - Applies 0.5" left indentation
+     - Makes text italic
+     - Works in intro sections and verse commentary
+   - Files modified:
+     - [combined_document_generator.py](../src/utils/combined_document_generator.py):
+       - Intro sections (lines 509-524, 562-577, 600-615)
+       - Verse commentary `_add_commentary_with_bullets()` (lines 267-282)
+     - [document_generator.py](../src/utils/document_generator.py):
+       - `_add_paragraph_with_markdown()` (lines 222-254)
+       - `_add_commentary_with_bullets()` (lines 289-314)
+
+3. **Empty Block Quote Lines (RESOLVED ✅)**:
+   - Problem: Lines with just `>` (or `> ` with trailing spaces) displayed as literal carets instead of blank lines
+   - Root cause: Block quote handling didn't check for empty content after stripping prefix
+   - Fix: Added empty-text detection - renders as blank paragraph instead of showing caret
+   - Example: Quote blocks with spacing (like line 101 in psalm_011_edited_intro.md) now render correctly
+
+4. **Liturgical Section Source (RESOLVED ✅)**:
+   - Problem: Combined docx used college intro's liturgical section instead of main intro's
+   - Root cause: College intro removal regex only looked for `## Modern Jewish Liturgical Use` header, but college version uses `---LITURGICAL-SECTION-START---` marker
+   - Fix: Updated regex to handle both formats:
+     - Header-based: `## Modern Jewish Liturgical Use`
+     - Marker-based: `---LITURGICAL-SECTION-START---`
+   - Also removes trailing `---` horizontal rules
+   - Result: Combined docx now correctly uses main intro's liturgical section
+
+5. **College Verse Commentary Not Appearing (RESOLVED ✅)**:
+   - Problem: College verse commentary not showing up in either college docx or combined docx
+   - Root cause: College verses file uses `### Verse X` (heading markdown), but both parsers only looked for `**Verse X**` (bold markdown) or `Verse X` (plain)
+   - Fix: Updated `_parse_verse_commentary()` method in both generators:
+     - Now tries bold format first (`**Verse X**`)
+     - Falls back to heading format (`## Verse X` or `### Verse X`)
+     - Finally falls back to plain format (`Verse X`)
+   - Files modified:
+     - [combined_document_generator.py](../src/utils/combined_document_generator.py) - lines 294-321
+     - [document_generator.py](../src/utils/document_generator.py) - lines 522-549
+   - Result: College verse commentary now renders correctly in both documents
+   - Note: This is the same root cause as Session 145 (LLM using `##`/`###` instead of `**`)
+
+**Testing**:
+- ✅ Regenerated all three Psalm 11 documents (4 total regenerations)
+- ✅ Bullets now display correctly in combined docx intro sections
+- ✅ Block quotes now render as indented, italic text (not literal ">")
+- ✅ Empty quote lines (just `>`) render as blank lines (not carets)
+- ✅ Combined docx liturgical section now from main intro (not college)
+- ✅ College verse commentary now appears in both college and combined docx
+- ✅ No regression in other formatting
+
+**Files Modified**:
+- `src/utils/combined_document_generator.py` - 9 locations (bullets, block quotes, empty quotes, liturgical section, verse parser)
+- `src/utils/document_generator.py` - 4 locations (block quotes, empty quotes, verse parser)
+
+**Impact**:
+- ✅ Combined document now has consistent bullet formatting across all sections
+- ✅ Block quotes render elegantly (indented + italic) instead of showing raw markdown
+- ✅ Empty quote lines provide proper spacing in block quotes
+- ✅ Liturgical section correctly sourced from main intro (consistent with design)
+- ✅ College verse commentary now fully functional in documents
+- ✅ Parsers now robust to LLM format variations (`**` vs `##`/`###`)
+- ✅ Improved document readability and professional appearance
+- ✅ All future psalms will automatically benefit from these improvements
+
+---
 
 ## Session 145 Summary (COMPLETE ✓)
 
