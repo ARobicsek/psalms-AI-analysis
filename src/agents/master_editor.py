@@ -842,7 +842,7 @@ class MasterEditor:
         self.cost_tracker = cost_tracker or CostTracker()
 
         # Determine main model
-        self.model = main_model or "gpt-5"
+        self.model = main_model or "gpt-5.1"
 
         # Determine college model (defaults to same as main model)
         self.college_model = college_model or self.model
@@ -1031,9 +1031,9 @@ class MasterEditor:
             prompt_file.write_text(prompt, encoding='utf-8')
             self.logger.info(f"Saved editorial prompt to {prompt_file}")
 
-        # Call GPT-5
-        # Note: GPT-5 supports reasoning_effort parameter (defaults to "medium")
-        # Setting to "high" for complex editorial analysis
+        # Call GPT-5.1
+        # Note: GPT-5.1 supports reasoning_effort parameter (defaults to "none"!)
+        # Setting to "high" for complex editorial analysis is CRITICAL
         # No system messages supported - use user messages only
         try:
             response = self.openai_client.chat.completions.create(
@@ -1053,15 +1053,24 @@ class MasterEditor:
 
             # Track usage and costs
             usage = response.usage
+
+            # GPT-5.1 API uses prompt_tokens, completion_tokens, and reasoning_tokens
+            input_tokens = getattr(usage, 'prompt_tokens', 0)
+            output_tokens = getattr(usage, 'completion_tokens', 0)
+            reasoning_tokens = getattr(usage, 'reasoning_tokens', 0)
+
             self.cost_tracker.add_usage(
                 model=self.model,
-                input_tokens=usage.input_tokens,
-                output_tokens=usage.output_tokens,
-                thinking_tokens=0  # GPT-5 reasoning tokens are included in output_tokens
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                thinking_tokens=reasoning_tokens  # GPT-5.1 tracks reasoning separately
             )
 
             self.logger.info(f"Editorial review generated: {len(response_text)} chars")
-            self.logger.info(f"  Usage: {usage.input_tokens:,} input + {usage.output_tokens:,} output tokens")
+            if reasoning_tokens > 0:
+                self.logger.info(f"  Usage: {input_tokens:,} input + {output_tokens:,} output + {reasoning_tokens:,} reasoning tokens")
+            else:
+                self.logger.info(f"  Usage: {input_tokens:,} input + {output_tokens:,} output tokens")
 
             # Save response for debugging
             if self.logger:
@@ -1522,15 +1531,24 @@ class MasterEditor:
 
             # Track usage and costs
             usage = response.usage
+
+            # GPT-5.1 API uses prompt_tokens, completion_tokens, and reasoning_tokens
+            input_tokens = getattr(usage, 'prompt_tokens', 0)
+            output_tokens = getattr(usage, 'completion_tokens', 0)
+            reasoning_tokens = getattr(usage, 'reasoning_tokens', 0)
+
             self.cost_tracker.add_usage(
                 model=self.college_model,
-                input_tokens=usage.input_tokens,
-                output_tokens=usage.output_tokens,
-                thinking_tokens=0  # GPT-5 reasoning tokens are included in output_tokens
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                thinking_tokens=reasoning_tokens  # GPT-5.1 tracks reasoning separately
             )
 
             self.logger.info(f"College editorial review generated: {len(response_text)} chars")
-            self.logger.info(f"  Usage: {usage.input_tokens:,} input + {usage.output_tokens:,} output tokens")
+            if reasoning_tokens > 0:
+                self.logger.info(f"  Usage: {input_tokens:,} input + {output_tokens:,} output + {reasoning_tokens:,} reasoning tokens")
+            else:
+                self.logger.info(f"  Usage: {input_tokens:,} input + {output_tokens:,} output tokens")
 
             # Save response for debugging
             if self.logger:

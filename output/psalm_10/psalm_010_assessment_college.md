@@ -1,19 +1,21 @@
 # Editorial Assessment (College Edition) - Psalm 10
 
-What’s strong: The current draft has real strengths. It frames Psalm 10 as a “theodicy” psalm (theodicy = how to talk about God’s justice when evil prospers); it highlights the rare and fascinating triple interior monologue (“אָמַר בְּלִבּוֹ”); it notices the wordplay on דרש (darash, “seek/call to account”); and it gives students a good feel for the predator imagery and the rhetorical pivot at “רָאִתָּה” (You do see!). It also integrates traditional commentators, which first-year Hebrew students appreciate.
+**What works well:** The draft demonstrates genuine scholarly depth. It correctly identifies the three-fold "says in his heart" formula as structurally significant, recognizes the broken acrostic's theological implications, and grasps the central irony—both psalmist and wicked agree God is hidden but draw opposite conclusions. The verse commentary shows real engagement with Rashi, Ibn Ezra, and Radak. The predator imagery analysis is solid.
 
-What needs fixing for college students: 
-- A few factual slips (e.g., the intro claims “the absence of the ע stanza,” but Psalm 10:13 begins “עַל־מֶה,” so ayin is not missing). Keep the broader claim—Psalms 9–10 form a broken acrostic—but avoid precise letter claims you can’t support.
-- Tone and jargon: terms like “performative utterance,” “speech-act theory,” and “jussive” appear without clear definitions. First-year students need simple definitions on the spot.
-- Missed chances to show the Hebrew: when you cite parallels (Ps 13:2; 44:25; 94:7; Job 20:12) and liturgical uses, quote the Hebrew (plus English) so students can see it.
-- LXX lines look unreliable/noisy and distract. Unless you have a clear point, skip them.
-- The liturgical section needs clear subsections, Hebrew quotes of what’s actually said in prayer, and a short explanation of what these contexts are.
+**Main weaknesses for a college student audience:**
 
-What to add: 
-- Use the “Related Psalms” (Ps 94; 44; 7; 74; 31) to show how this psalm’s themes recur; quote at least one Hebrew example per pattern.
-- Explain key Hebrew words when they’re interesting (e.g., יִדְלַק, “pursue hotly”).
-- Use Torah Temimah’s rabbinic play on “בוֹצֵעַ בֵּרֵךְ נִאֵץ יְהוָה” and on “שְׁבֹר זְרוֹעַ רָשָׁע” in Amidah discussions.
+1. **Too dissertation-like:** The introduction reads like a scholarly monograph. Phrases like "spatial theology," "formal theodicy," "prophetic perfect," and "performative utterance" drop without definition. A first-year student would drown.
 
-Overall: The argument is good, but tighten claims, define terms immediately, show the Hebrew, and make the liturgical section concrete. Keep the tone lively, direct, and teacherly.
+2. **Jargon flood:** Terms like "colon," "Leitwort," "Ketiv/Qere," "hiphil," "perfective of conviction" appear constantly without explanation. This violates the fundamental accessibility requirement.
+
+3. **Missing the engaging voice:** Where's the "coolest professor in the department"? The draft is competent but not exciting. No analogies, no "here's what makes this fascinating," no moments of discovery.
+
+4. **Liturgical section cut off:** The liturgical material ends mid-sentence and isn't properly integrated with quotations.
+
+5. **Verse commentaries too long and academic:** Many exceed 500 words and read like encyclopedia entries rather than teaching.
+
+6. **Missed research opportunities:** The Torah Temimah's brilliant connection between "the greedy one blesses" and stolen goods (Bava Kamma 94a) deserves spotlight. The connection to Birkat HaMinim in the Amidah is barely mentioned. The related psalms analysis wasn't utilized at all—Psalm 94's parallel orphan/stranger motif and Psalm 44's hidden-face lament create a powerful intertextual conversation.
+
+7. **Not enough "why":** The draft describes *what* but rarely explains *why* the poet made these choices or why it matters.
 
 ---

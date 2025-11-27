@@ -86,9 +86,9 @@ class DocumentGenerator:
         - U+05B0-U+05BD: Vowel points (nikud)
         """
         # Pattern: base character followed by any combining marks
-        # Base: Hebrew letter (U+05D0-U+05EA) or space
+        # Base: Hebrew letter (U+05D0-U+05EA), maqqef (U+05BE), or space
         # Combining: U+0591-U+05BD, U+05BF, U+05C1-U+05C2, U+05C4-U+05C7
-        cluster_pattern = r'[\u05D0-\u05EA\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
+        cluster_pattern = r'[\u05D0-\u05EA\u05BE\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
         clusters = re.findall(cluster_pattern, text)
         return clusters
 

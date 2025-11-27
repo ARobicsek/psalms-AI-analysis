@@ -1,19 +1,20 @@
 # Editorial Assessment - Psalm 10
 
-What works: The draft introduction perceptively links Psalm 10 to Psalm 9 as a broken acrostic and rightly frames the poem as a sustained meditation on divine hiddenness countered by liturgical assertion. It tracks the psalm’s psychological center with the three “he says in his heart” speeches and notices the verb darash (“seek/call to account”) as a structural hinge. The commentary is rich, generally accurate, and attentive to diction, idiom, and rhetoric. It often integrates medieval Jewish exegesis and occasionally notes liturgical reception.
+What works: The draft introduction rightly foregrounds Psalm 10’s broken acrostic with Psalm 9, the three “he says in his heart” monologues, the verb-play on darash (“seek/call to account”), and the pivot at “You do see” (v.14). The commentary shows sensitivity to spatial imagery (“standing far,” “judgments high”) and to the predator motif.
 
-What needs revision: 
-- Parallels and liturgical uses are frequently cited without quotations. Sophisticated readers want to see the Hebrew. We should quote biblical parallels (e.g., Ps 9–10, 13:2; 94:9; Deut 31:17) and prayer citations (Yehi Kevod; High Holiday piyyutim; Selichot; Seder HaAvodah).
-- A few grammatical matters need tightening (e.g., the syntax of אין אֱלֹהִים כׇּל־מְזִמּוֹתָיו; the jussive force in v. 2; the perfect in v. 14 as a rhetorical “perfect of conviction”). Define technical terms (acrostic, colon, jussive, perfect/perfective, prophetic perfect) in-line.
-- Some LXX material in the provided “Psalm Text” appears misaligned; avoid relying on those lines. It is safe—and important—to note that the LXX merges Psalms 9–10.
-- Missed opportunities: the Torah Temimah’s halakhic/agadic uses (Bava Kamma 94a; Megillah 17b) deserve quotation. Figurative language parallels (lion, net, hidden face) should be demonstrated with at least one Hebrew/English example apiece. Related psalms (31, 44, 74, 94) can be used to sharpen the psalm’s argument through brief, quoted cross-references.
-- The liturgical section needs restructuring: specific headings, Hebrew citations from the prayers, and explanation of how the liturgy repurposes the verses.
+Weaknesses: 
+- The LXX lines printed under verses are unrelated or garbled; better to avoid quoting them and simply note the LXX’s fusion of Psalms 9–10. 
+- Several promising claims are not demonstrated with quoted Hebrew texts. Readers need to see the evidence. This is especially acute for the figurative language parallels (lion, nets, hidden face), where the research bundle offers superb cross-references that were not quoted. 
+- The liturgical section is informative but thin on Hebrew prayer citations and does not consistently show how the verse functions in its prayer setting. 
+- Some grammatical observations drift into jargon; terms like “perfect” or “jussive” need quick, plain-English glosses.
+- Missed opportunities: the Torah Temimah’s halakhic/aggadic uses (Ps 10:3; 10:15) deserve quotation; the rare word חֵלְכָה needs explanation; v.10’s Ketiv/Qere should be fully unpacked; the related psalms (7, 31, 44, 74, 94) should be put to work with Hebrew quotations.
 
-Action plan:
-- Revise the introduction to define terms, anchor claims with quotations, and answer obvious questions (e.g., why “nations” in v. 16, what “prophetic perfect” accomplishes, the semantics of darash).
-- Rework verse notes to begin with punctuated Hebrew, add parallel quotations, integrate rabbinic and liturgical reception (with Hebrew), and clarify syntax where needed.
-- Build the liturgical section with proper subheadings, Hebrew excerpts, and brief theological reflection on reception.
+Answerable questions from the Macro/Micro analysis that should be addressed:
+- The three “אָמַר בְּלִבּוֹ” quotes and their rhetorical progression (vv. 6, 11, 13) can be clarified by quoting Ps 14:1 as a canon-wide foil. 
+- The darash triad (vv. 4, 13, 15) should be set out with Hebrew and explained as legal “calling to account.” 
+- Figurative language: quote Ps 7:3; 64:5; 94:9; Deut 31:17–18 to illuminate lion, ambush, and hidden-face imagery; quote Jer 48:25; Ezek 30:21–22 on “breaking the arm.” 
+- Liturgical use: quote the Yehi Kevod string (with 10:16), High Holiday piyyutim using 10:17, the Yom Kippur Avodah piyyut using 10:15, and Selichot using 10:1.
 
-Figurative language: The current draft often cites patterns without quoting. The revision will show them (e.g., Ps 64:5; 9:16; 13:2; 94:9) and compare Psalm 10’s distinctive use.
+Stylistically, the prose should maintain confidence while teaching—showing the Hebrew, translating it, and avoiding insider shorthand. With those revisions, the essay and commentary can become both elegant and persuasive.
 
 ---
