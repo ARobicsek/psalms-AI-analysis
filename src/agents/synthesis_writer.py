@@ -34,9 +34,11 @@ if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis
     from src.utils.logger import get_logger
+    from src.utils.cost_tracker import CostTracker
 else:
     from ..schemas.analysis_schemas import MacroAnalysis, MicroAnalysis
     from ..utils.logger import get_logger
+    from ..utils.cost_tracker import CostTracker
 
 
 # System prompt for Introduction Essay
@@ -476,7 +478,8 @@ class SynthesisWriter:
     def __init__(
         self,
         api_key: Optional[str] = None,
-        logger=None
+        logger=None,
+        cost_tracker: Optional[CostTracker] = None
     ):
         """
         Initialize SynthesisWriter agent.
@@ -484,6 +487,7 @@ class SynthesisWriter:
         Args:
             api_key: Anthropic API key (or set ANTHROPIC_API_KEY env var)
             logger: Logger instance (or will create default)
+            cost_tracker: CostTracker instance for tracking API costs
         """
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
         if not self.api_key:
@@ -492,6 +496,7 @@ class SynthesisWriter:
         self.client = anthropic.Anthropic(api_key=self.api_key)
         self.model = "claude-sonnet-4-5"  # Sonnet 4.5
         self.logger = logger or get_logger("synthesis_writer")
+        self.cost_tracker = cost_tracker or CostTracker()
 
         self.logger.info(f"SynthesisWriter initialized with model {self.model}")
 
@@ -895,13 +900,16 @@ class SynthesisWriter:
 
                 self.logger.info(f"Introduction generated: {len(introduction)} chars")
 
-                # Track model usage
-                if hasattr(self, 'tracker') and self.tracker:
-                    self.tracker.track_model_usage(
-                        agent_name='synthesis_writer',
+                # Track usage and costs
+                if hasattr(final_message, 'usage'):
+                    usage = final_message.usage
+                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                    self.cost_tracker.add_usage(
                         model=self.model,
-                        input_tokens=final_message.usage.input_tokens,
-                        output_tokens=final_message.usage.output_tokens)
+                        input_tokens=usage.input_tokens,
+                        output_tokens=usage.output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
 
                 # Log API call
                 self.logger.log_api_call(
@@ -1025,13 +1033,16 @@ class SynthesisWriter:
 
                 self.logger.info(f"Verse commentary generated: {len(commentary)} chars")
 
-                # Track model usage
-                if hasattr(self, 'tracker') and self.tracker:
-                    self.tracker.track_model_usage(
-                        agent_name='synthesis_writer',
+                # Track usage and costs
+                if hasattr(final_message, 'usage'):
+                    usage = final_message.usage
+                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                    self.cost_tracker.add_usage(
                         model=self.model,
-                        input_tokens=final_message.usage.input_tokens,
-                        output_tokens=final_message.usage.output_tokens)
+                        input_tokens=usage.input_tokens,
+                        output_tokens=usage.output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
 
                 # Log API call
                 self.logger.log_api_call(

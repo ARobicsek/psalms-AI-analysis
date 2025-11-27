@@ -56,6 +56,7 @@ if __name__ == '__main__':
     from src.agents.scholar_researcher import ScholarResearchRequest
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.logger import get_logger
+    from src.utils.cost_tracker import CostTracker
 else:
     from ..schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary
     from .rag_manager import RAGManager
@@ -63,6 +64,7 @@ else:
     from .scholar_researcher import ScholarResearchRequest
     from ..data_sources.tanakh_database import TanakhDatabase
     from ..utils.logger import get_logger
+    from ..utils.cost_tracker import CostTracker
 from .phonetic_analyst import PhoneticAnalyst
 
 
@@ -310,7 +312,8 @@ class MicroAnalystV2:
         db_path: str = "data/tanakh.db",
         docs_dir: str = "docs",
         logger=None,
-        commentary_mode: str = "all"
+        commentary_mode: str = "all",
+        cost_tracker: Optional[CostTracker] = None
     ):
         """Initialize MicroAnalyst v2 agent.
 
@@ -321,6 +324,7 @@ class MicroAnalystV2:
             logger: Optional logger instance
             commentary_mode: "all" (request all 7 commentaries for all verses) or
                            "selective" (only request commentaries for specific verses)
+            cost_tracker: CostTracker instance for tracking API costs
         """
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
         if not self.api_key:
@@ -333,7 +337,8 @@ class MicroAnalystV2:
         self.model = "claude-sonnet-4-5"  # Sonnet 4.5
         self.rag_manager = RAGManager(docs_dir)
         self.db = TanakhDatabase(Path(db_path))
-        self.research_assembler = ResearchAssembler()
+        self.cost_tracker = cost_tracker or CostTracker()
+        self.research_assembler = ResearchAssembler(cost_tracker=self.cost_tracker)
         self.logger = logger or get_logger("micro_analyst_v2")
         self.phonetic_analyst = PhoneticAnalyst()
         self.commentary_mode = commentary_mode
@@ -474,6 +479,19 @@ class MicroAnalystV2:
                             if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
                                 if chunk.delta.type == 'text_delta':
                                     response_text += chunk.delta.text
+
+                # Track usage and costs (discovery pass)
+                final_message = response_stream.get_final_message()
+                if hasattr(final_message, 'usage'):
+                    usage = final_message.usage
+                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                    self.cost_tracker.add_usage(
+                        model=self.model,
+                        input_tokens=usage.input_tokens,
+                        output_tokens=usage.output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
                 self.logger.debug(f"Response text preview: {response_text[:500]}")
 
                 # Try to extract JSON from markdown code blocks if present
@@ -583,6 +601,19 @@ class MicroAnalystV2:
                             if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
                                 if chunk.delta.type == 'text_delta':
                                     response_text += chunk.delta.text
+
+                # Track usage and costs (research generation pass)
+                final_message = response_stream.get_final_message()
+                if hasattr(final_message, 'usage'):
+                    usage = final_message.usage
+                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                    self.cost_tracker.add_usage(
+                        model=self.model,
+                        input_tokens=usage.input_tokens,
+                        output_tokens=usage.output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
                 self.logger.debug(f"Response text preview: {response_text[:500]}")
 
                 # Try to extract JSON from markdown code blocks if present

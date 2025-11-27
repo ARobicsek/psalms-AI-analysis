@@ -8,7 +8,76 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 143 - GPT-5.1 Thinking Mode Upgrade (2025-11-26) ✅ COMPLETE
+**Last Session**: Session 145 - College Editor Parser Bug Fix (2025-11-27) ✅ COMPLETE
+
+## Session 145 Summary (COMPLETE ✓)
+
+**Objective**: Fix empty college edition edited files for Psalm 11
+**Result**: ✓ COMPLETE - Parser fixed, Psalm 11 college files regenerated successfully
+
+**Problem**:
+- After running Psalm 11 through pipeline, college edition files were empty:
+  - `psalm_011_edited_intro_college.md` - empty (1 line)
+  - `psalm_011_edited_verses_college.md` - empty (1 line)
+  - `psalm_011_assessment_college.md` - had content ✓
+
+**Root Cause**:
+- LLM (GPT-5/GPT-5.1) used `##` (2 hashes) for section headers instead of `###` (3 hashes)
+- Parser regex looked for exactly `###`, so it failed to match and extract sections
+- This was an LLM formatting compliance issue - prompts correctly instructed `###`
+
+**Solution**:
+1. **Updated Parser** ([master_editor.py:1227-1230](../src/agents/master_editor.py#L1227-L1230)):
+   - Changed regex from `r'^### SECTION\s*$'` to `r'^#{2,3} SECTION\s*$'`
+   - Now handles both `##` and `###` formats
+
+2. **Created Repair Script** ([scripts/fix_psalm_11_college.py](../scripts/fix_psalm_11_college.py)):
+   - Reprocessed existing response without re-running API calls
+   - Successfully extracted and saved all sections
+
+**Result**:
+- ✅ `psalm_011_edited_intro_college.md`: 14,127 bytes (was empty)
+- ✅ `psalm_011_edited_verses_college.md`: 18,966 bytes (was empty)
+- ✅ Parser now robust to LLM format variations
+- ✅ Future pipeline runs will handle both formats automatically
+
+**Files Modified**:
+- src/agents/master_editor.py
+- scripts/fix_psalm_11_college.py (new)
+
+---
+
+## Session 144 Summary (COMPLETE ✓)
+
+**Objective**: Fix pipeline cost summary to show costs for all LLMs and add missing GPT-5.1 pricing
+**Result**: ✓ COMPLETE - Full cost tracking now operational across all pipeline agents with GPT-5.1 pricing added
+
+**What Was Fixed**:
+1. Added GPT-5.1 pricing to cost_tracker.py ($1.25 input, $10 output, $10 reasoning per million tokens)
+2. Updated all agents to accept and use cost_tracker:
+   - macro_analyst.py: Tracks Claude Sonnet 4.5 usage
+   - micro_analyst.py: Tracks Claude Sonnet 4.5 usage (discovery + research passes)
+   - synthesis_writer.py: Tracks Claude Sonnet 4.5 usage (intro + verse commentary)
+   - liturgical_librarian.py: Tracks Gemini 2.5 Pro and Claude Sonnet 4.5 usage
+   - research_assembler.py: Passes cost_tracker to LiturgicalLibrarian
+3. Updated run_enhanced_pipeline.py to pass cost_tracker to all agents
+4. Cost summary now shows all model usage at end of pipeline run
+
+**Impact**:
+- ✅ Full visibility into all pipeline costs (Claude Sonnet 4.5, Gemini 2.5 Pro, GPT-5.1, GPT-5)
+- ✅ Separate tracking for input, output, and thinking/reasoning tokens
+- ✅ Accurate cost calculation based on current pricing
+
+**Files Modified**:
+- src/utils/cost_tracker.py
+- src/agents/macro_analyst.py
+- src/agents/micro_analyst.py
+- src/agents/synthesis_writer.py
+- src/agents/liturgical_librarian.py
+- src/agents/research_assembler.py
+- scripts/run_enhanced_pipeline.py
+
+---
 
 ## Session 143 Summary (COMPLETE ✓)
 

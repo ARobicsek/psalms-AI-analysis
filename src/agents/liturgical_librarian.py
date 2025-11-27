@@ -27,11 +27,14 @@ import sqlite3
 import os
 import json
 import time
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, TYPE_CHECKING
 from dataclasses import dataclass
 from collections import defaultdict
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential
+
+if TYPE_CHECKING:
+    from src.utils.cost_tracker import CostTracker
 
 
 def _is_retryable_gemini_error(exception, verbose=False):
@@ -203,7 +206,8 @@ class LiturgicalLibrarian:
         anthropic_api_key: Optional[str] = None,
         thinking_budget: int = 4096,
         request_delay: float = 0.5,
-        verbose: bool = False
+        verbose: bool = False,
+        cost_tracker: Optional['CostTracker'] = None
     ):
         """
         Initialize Liturgical Librarian.
@@ -223,6 +227,7 @@ class LiturgicalLibrarian:
                          - 0.5s delay = 2 req/sec (safely under limit)
                          - Set to 0 to disable (not recommended)
             verbose: Whether to print LLM prompts and responses
+            cost_tracker: CostTracker instance for tracking API costs
         """
         self.db_path = db_path
         self.tanakh_db_path = tanakh_db_path
@@ -234,6 +239,13 @@ class LiturgicalLibrarian:
         self.anthropic_client = None
         self.llm_provider = None  # Track which provider is active: 'gemini', 'anthropic', or None
         self._last_request_time = 0  # Track last API call time for rate limiting
+
+        # Initialize cost tracker (import here to avoid circular dependency)
+        if cost_tracker is None:
+            from src.utils.cost_tracker import CostTracker
+            self.cost_tracker = CostTracker()
+        else:
+            self.cost_tracker = cost_tracker
 
         # Load environment variables from .env file
         load_dotenv()
@@ -1147,6 +1159,18 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                             print(f"Token usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
                         print(f"{'='*70}\n")
 
+                # Track usage and costs (Gemini)
+                if hasattr(response, 'usage_metadata'):
+                    input_tokens = response.usage_metadata.prompt_token_count
+                    output_tokens = response.usage_metadata.candidates_token_count
+                    thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
+                    self.cost_tracker.add_usage(
+                        model="gemini-2.5-pro",
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
                 # Validate summary quality
                 quality_result = self._validate_summary_quality(summary, 'phrase', psalm_chapter)
 
@@ -1329,6 +1353,18 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                                         response_text += chunk.delta.text
 
             summary = response_text.strip()
+
+            # Track usage and costs (Claude)
+            final_message = response_stream.get_final_message()
+            if hasattr(final_message, 'usage'):
+                usage = final_message.usage
+                thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                self.cost_tracker.add_usage(
+                    model="claude-sonnet-4-5",
+                    input_tokens=usage.input_tokens,
+                    output_tokens=usage.output_tokens,
+                    thinking_tokens=thinking_tokens
+                )
 
             if self.verbose:
                 print(f"[INFO] Claude Sonnet 4.5 generated summary for phrase: {psalm_phrase[:50]}...")
@@ -1641,6 +1677,18 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                             print(f"Token usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
                         print(f"{'='*70}\n")
 
+                # Track usage and costs (Gemini)
+                if hasattr(response, 'usage_metadata'):
+                    input_tokens = response.usage_metadata.prompt_token_count
+                    output_tokens = response.usage_metadata.candidates_token_count
+                    thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
+                    self.cost_tracker.add_usage(
+                        model="gemini-2.5-pro",
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
                 # Validate summary quality
                 quality_result = self._validate_summary_quality(summary, 'full_psalm', psalm_chapter)
 
@@ -1842,6 +1890,18 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                                         response_text += chunk.delta.text
 
             summary = response_text.strip()
+
+            # Track usage and costs (Claude)
+            final_message = response_stream.get_final_message()
+            if hasattr(final_message, 'usage'):
+                usage = final_message.usage
+                thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                self.cost_tracker.add_usage(
+                    model="claude-sonnet-4-5",
+                    input_tokens=usage.input_tokens,
+                    output_tokens=usage.output_tokens,
+                    thinking_tokens=thinking_tokens
+                )
 
             if self.verbose:
                 print(f"[INFO] Claude Sonnet 4.5 generated summary for full Psalm {psalm_chapter}")

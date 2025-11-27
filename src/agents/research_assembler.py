@@ -434,20 +434,21 @@ class ResearchAssembler:
         >>> print(bundle.to_markdown())
     """
 
-    def __init__(self, use_llm_summaries: bool = True):
+    def __init__(self, use_llm_summaries: bool = True, cost_tracker=None):
         """
         Initialize Research Assembler with all librarian agents.
 
         Args:
             use_llm_summaries: Enable LLM-powered liturgical summaries (Claude Haiku 4.5).
                              Requires ANTHROPIC_API_KEY environment variable.
+            cost_tracker: CostTracker instance for tracking API costs
         """
         self.bdb_librarian = BDBLibrarian()
         self.concordance_librarian = ConcordanceLibrarian()
         self.figurative_librarian = FigurativeLibrarian()
         self.commentary_librarian = CommentaryLibrarian()
         self.liturgical_librarian_sefaria = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap (fallback)
-        self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries=use_llm_summaries)  # Phase 4/5: Aggregated phrase-level
+        self.liturgical_librarian = LiturgicalLibrarian(use_llm_summaries=use_llm_summaries, cost_tracker=cost_tracker)  # Phase 4/5: Aggregated phrase-level
         self.sacks_librarian = SacksLibrarian()  # Rabbi Jonathan Sacks references
         self.hirsch_librarian = HirschLibrarian()  # R. Samson Raphael Hirsch German commentary
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager

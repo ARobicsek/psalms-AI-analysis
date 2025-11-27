@@ -246,7 +246,7 @@ def run_enhanced_pipeline(
             psalm_text = "\n".join([f"{v.verse}: {v.hebrew} / {v.english}" for v in psalm.verses])
             tracker.track_step_input("macro_analysis", psalm_text)
 
-        macro_analyst = MacroAnalyst()
+        macro_analyst = MacroAnalyst(cost_tracker=cost_tracker)
         macro_model = macro_analyst.model
         macro_analysis = macro_analyst.analyze_psalm(psalm_number)
 
@@ -335,7 +335,7 @@ def run_enhanced_pipeline(
         commentary_mode = "selective" if skip_default_commentaries else "all"
         logger.info(f"  Using commentary mode: {commentary_mode}")
 
-        micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode)
+        micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode, cost_tracker=cost_tracker)
         micro_model = micro_analyst.model
         micro_analysis, research_bundle = micro_analyst.analyze_psalm(
             psalm_number,
@@ -382,7 +382,7 @@ def run_enhanced_pipeline(
         print(f"\nSkipping Step 2 (using existing micro analysis)\n")
         # Still need to get model name for tracking
         commentary_mode = "selective" if skip_default_commentaries else "all"
-        micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode)
+        micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode, cost_tracker=cost_tracker)
         micro_model = micro_analyst.model
         tracker.track_model_for_step("micro_analysis", micro_model)
     
@@ -452,7 +452,7 @@ def run_enhanced_pipeline(
         synthesis_input = macro_analysis.to_markdown() + "\n\n" + micro_analysis.to_markdown() + "\n\n" + research_bundle_content
         tracker.track_step_input("synthesis", synthesis_input)
 
-        synthesis_writer = SynthesisWriter()
+        synthesis_writer = SynthesisWriter(cost_tracker=cost_tracker)
         synthesis_model = synthesis_writer.model
         commentary = synthesis_writer.write_commentary(
             macro_analysis=macro_analysis,
@@ -485,7 +485,7 @@ def run_enhanced_pipeline(
         logger.info(f"[STEP 3] Skipping synthesis (using existing {synthesis_intro_file})")
         print(f"\nSkipping Step 3 (using existing synthesis)\n")
         # Still need to get model name for tracking
-        synthesis_writer = SynthesisWriter()
+        synthesis_writer = SynthesisWriter(cost_tracker=cost_tracker)
         synthesis_model = synthesis_writer.model
         tracker.track_model_for_step("synthesis", synthesis_model)
 
