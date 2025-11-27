@@ -1,0 +1,367 @@
+### EDITORIAL ASSESSMENT
+
+The current draft demonstrates considerable scholarly sophistication, particularly in its treatment of the broken acrostic structure as a "formal theodicy" and its identification of the three interior monologues as the psalm's psychological center. The predator imagery analysis is well-developed, and the spatial theology framework (God standing aloof vs. wicked sitting in ambush) provides an effective organizing principle.
+
+However, several significant weaknesses require attention:
+
+**1. Insufficient Hebrew Quotation**: The draft repeatedly cites biblical parallels without quoting them. When discussing the "hidden face" motif, Psalm 13:2 and 27:9 are referenced but not shown. The figurative language database provides 7 instances of hidden face imagery and 15 instances of lion imagery—these should be quoted to demonstrate patterns, not merely mentioned.
+
+**2. Torah Temimah Underutilized**: The research bundle contains rich rabbinic material that barely surfaces. The Bava Kamma 94a passage on v.3 (blessing over stolen goods as blasphemy) is mentioned but deserves fuller treatment. The Berakhot 7b discussion on v.5 (when to engage with the wicked) and Megillah 17b on v.15 (placement of Birkat HaMinim in the Amidah) provide powerful insights into early rabbinic reception entirely missing from the commentary.
+
+**3. Concordance Patterns Unquoted**: The search showing אָמַר בְּלִבּוֹ appears only five times in the entire Tanakh (including three times in this psalm) is extraordinary—this rarity should be demonstrated with the actual Obadiah and Psalm 74:8 texts.
+
+**4. Related Psalms Unexplored**: The algorithmically detected connections to Psalms 31, 94, and 74 reveal significant vocabulary clusters (shared roots: נאץ, צרר, סתר, למה) that suggest deliberate literary relationships, yet these go unexamined.
+
+**5. Technical Terms Undefined**: Words like "Leitwort," "jussive," "prophetic perfect," and "performative utterance" appear without explanation for lay readers.
+
+**6. Liturgical Section Formatting**: Needs proper markdown heading 4 syntax and fuller quotation of actual liturgical texts.
+
+---
+
+### REVISED INTRODUCTION
+
+Psalm 10 presents an interpretive puzzle that begins with its very structure. Ancient tradition preserved in the Septuagint (the Greek translation of the Hebrew Bible from roughly the third century BCE) combined it with Psalm 9 as a single composition, and with good reason: together they form a broken acrostic poem whose Hebrew letters span both psalms yet leave conspicuous gaps where key stanzas should be. This structural fracture is not accidental. The missing acrostic lines—particularly the absence of a complete ע (*ayin*) stanza in a poem about the עָנִי (*ani*, the afflicted)—enact what the psalm describes: a world where divine order seems incomplete, where the alphabet of justice stutters and fails. If Psalm 9 celebrates God's past victories over nations, Psalm 10 confronts the present crisis of God's apparent absence while wickedness flourishes. The broken acrostic thus becomes a formal theodicy, its very incompleteness mirroring the theological problem it addresses.
+
+The psalm's opening question—לָמָה יְהֹוָה תַּעֲמֹד בְּרָחוֹק, "Why, O LORD, do You stand aloof?"—establishes a spatial theology that structures the entire composition. This precise formulation, לָמָה יְהֹוָה, appears only twice in the Psalter: here and in Psalm 88:15, where the psalmist similarly asks, לָמָה יְהֹוָה תִּזְנַח נַפְשִׁי תַּסְתִּיר פָּנֶיךָ מִמֶּנִּי, "Why, O LORD, do You reject me, do You hide Your face from me?" The coincidence is suggestive: both psalms treat divine hiddenness as their central theological crisis. Yet the verb תַּעֲמֹד (*ta'amod*, "stand") typically connotes stability and presence—God "stands" to judge in Psalm 82:1 (אֱלֹהִים נִצָּב בַּעֲדַת־אֵל, "God stands in the divine assembly"), the priest "stands" before God in service (Deuteronomy 10:8). Here it acquires an ominous passivity: God stands, but far off, frozen in a posture suggesting both presence and paralysis. This tension between God's seeming inaction and His ultimate sovereignty drives the psalm's theological argument.
+
+The centerpiece of the psalm is not the psalmist's complaint but an unprecedented psychological portrait of the wicked. Through three interior monologues introduced by the formula אָמַר בְּלִבּוֹ, "he says in his heart" (vv. 6, 11, 13), the poet exposes the wicked's theological corruption. This formula is strikingly rare in Scripture: the concordance reveals only five occurrences in the entire Hebrew Bible. Besides our three instances, it appears in Obadiah 1:3, where Edom's arrogance speaks: אֹמֵר בְּלִבּוֹ מִי יוֹרִדֵנִי אָרֶץ, "thinking in his heart, 'Who can pull me down to earth?'" And it appears in Psalm 74:8, describing enemies who resolve: אָמְרוּ בְלִבָּם נִינָם יָחַד, "They said in their heart, 'Let us destroy them altogether!'" In both parallel cases, the formula introduces the speech of oppressors whose arrogance leads to destruction. Psalm 10's wicked man stands in this typology—his interior monologue is the speech of the doomed.
+
+The three quotations reveal a progression of practical atheism: first, confident self-assertion—בַּל־אֶמּוֹט לְדֹר וָדֹר, "I shall not be shaken through all generations" (v. 6); then theological conclusion—שָׁכַח אֵל הִסְתִּיר פָּנָיו בַּל־רָאָה לָנֶצַח, "God has forgotten, He hides His face, He never looks" (v. 11); finally explicit denial—לֹא תִדְרֹשׁ, "You do not call to account" (v. 13). What makes these monologues striking is their accuracy: the wicked's theology of divine absence mirrors precisely the psalm's opening lament. Both the righteous and the wicked agree on the empirical reality—God appears hidden—but their responses diverge radically. The wicked interprets absence as permission; the psalmist interprets it as a theological crisis demanding resolution. The verb דָּרַשׁ (*darash*, "to seek, call to account") becomes the hinge of this ironic reversal: the wicked declares בַּל־יִדְרֹשׁ (v. 4) and לֹא תִדְרֹשׁ (v. 13), but the psalmist turns this verb against him—תִּדְרוֹשׁ־רִשְׁעוֹ בַל־תִּמְצָא, "seek his wickedness until You find it no more" (v. 15).
+
+The extended predator imagery (vv. 8-10) translates theological abstraction into visceral threat. The wicked יֵשֵׁב בְּמַאְרַב חֲצֵרִים, "sits in ambush of villages" (v. 8)—the verb יֵשֵׁב creating a spatial counterpoint to God's distant "standing." He lurks כְּאַרְיֵה בְסֻכֹּה, "like a lion in his lair" (v. 9). This lion simile draws on a common biblical figure: the figurative language database records fifteen instances of lion imagery in Scripture. Psalm 7:3 offers a particularly close parallel: פֶּן־יִטְרֹף כְּאַרְיֵה נַפְשִׁי פֹּרֵק וְאֵין מַצִּיל, "lest, like a lion, they tear me apart, rending in pieces, and no one save me." Psalm 17:12 elaborates: דִּמְיֹנוֹ כְּאַרְיֵה יִכְסוֹף לִטְרֹף וְכִכְפִיר יֹשֵׁב בְּמִסְתָּרִים, "He is like a lion eager for prey, a young lion lying in wait." The combination with net imagery—בְּמׇשְׁכוֹ בְרִשְׁתּוֹ, "dragging him into his net" (v. 9)—creates a mixed metaphor that compounds threat through layering: the wicked is both beast (raw predatory power) and hunter (calculated trapping). Psalm 31:5 shares this precise vocabulary: תּוֹצִיאֵנִי מֵרֶשֶׁת זוּ טָמְנוּ לִי, "free me from the net they have hidden for me," with the same archaic demonstrative זוּ appearing in both psalms, suggesting shared poetic tradition or perhaps common authorship.
+
+The psalm's theological resolution arrives not through changed circumstances but through a shift in perception. The pivotal verse 14 opens with an emphatic fronted verb that shatters the wicked's theology: רָאִתָה, "You DO look!" This perfect tense assertion—grammatically indicating completed action—contradicts everything the wicked claimed. The Talmud (Nedarim 22b) cites verse 4 to warn against anger's spiritual blindness: "One who becomes angry—even the Shekhinah is not important before him, as it says: 'The wicked, according to the height of his anger, does not seek; there is no God in all his schemes.'" The rabbinic reading locates the wicked's atheism not in intellectual conclusion but in the cognitive distortion of anger—rage blinds one to divine presence.
+
+The sudden intrusion of the kingship declaration—יְהֹוָה מֶלֶךְ עוֹלָם וָעֶד, "The LORD is king forever and ever" (v. 16)—shifts registers from petition to proclamation. The perfect verb אָבְדוּ, "have perished," functions as what grammarians call a "prophetic perfect"—grammatically past but referring to future events viewed as so certain they are described as already accomplished. The Talmud (Megillah 17b) finds in verse 15—שְׁבֹר זְרוֹעַ רָשָׁע, "Break the arm of the wicked"—the scriptural basis for the ninth blessing of the Amidah, the prayer against oppressive powers (Birkat HaMinim). The rabbinic placement recognizes the psalm's petition not as personal vengeance but as a prayer for the dismantling of systemic oppression.
+
+The final petition—לִשְׁפֹּט יָתוֹם וָדָךְ בַּל־יוֹסִיף עוֹד לַעֲרֹץ אֱנוֹשׁ מִן־הָאָרֶץ, "to champion the orphan and the downtrodden, that men who are of the earth tyrannize no more" (v. 18)—returns to Torah's covenant categories. The orphan appears throughout Israel's legal tradition as the paradigmatic vulnerable figure whom God particularly defends (Exodus 22:21-23; Deuteronomy 10:18). The phrase אֱנוֹשׁ מִן־הָאָרֶץ emphasizes human mortality in contrast to divine eternality just declared. Where the wicked boasted לְדֹר וָדֹר (v. 6), claiming perpetual stability, the psalm insists he is merely "man from the earth"—dust-born and dust-bound.
+
+Psalm 10 thus offers not a philosophical resolution to theodicy but a rhetorical one. The very possibility of protest, petition, and proclamation contradicts the wicked's claim that God does not see. By moving from spatial complaint through psychological exposure to liturgical assertion, the psalm transforms the question "Why do You stand aloof?" into the affirmation "You are king forever." The Talmud (Berakhot 31a) derives from verse 17 the principle that prayer requires kavvanah (focused intention): "One who prays must direct his heart toward heaven, as it says: תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶךָ, 'You will prepare their heart, You will incline Your ear.'" The psalm argues that even broken alphabets can spell justice, even distant kings hear the cry of the afflicted—but only when the heart is prepared to address Him.
+
+---LITURGICAL-SECTION-START---
+
+## Modern Jewish Liturgical Use
+
+#### Key verses
+
+**Verse 16**: יְהֹוָה מֶלֶךְ עוֹלָם וָעֶד אָבְדוּ גוֹיִם מֵאַרְצוֹ, "The LORD is king forever and ever; the nations have perished from His land." This verse holds a prominent position in the *Pesukei Dezimra* (Verses of Praise) of every morning service according to Sefardic and Mizrachi rites. It appears as part of *Yehi Khvod*, a curated mosaic of verses celebrating divine majesty, strategically placed as the climactic fourth element in a sequence that begins with the threefold temporal declaration: יְהֹוָה מֶלֶךְ, יְהֹוָה מָלָךְ, יְהֹוָה יִמְלֹךְ לְעֹלָם וָעֶד—"The LORD is King, the LORD was King, the LORD will be King forever and ever." Our verse follows immediately, extending the kingship proclamation across time while adding the eschatological note of judgment against opposing nations. The liturgy then continues with יְהֹוָה הֵפִיר עֲצַת־גּוֹיִם הֵנִיא מַחְשְׁבוֹת עַמִּים (Psalm 33:10), "The LORD foils the counsel of nations." This placement transforms the psalm's declaration from desperate hope into accomplished reality, structuring worshippers' consciousness toward divine sovereignty at the beginning of each day.
+
+**Verse 17**: תַּאֲוַת עֲנָוִים שָׁמַעְתָּ יְהֹוָה תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶךָ, "The desire of the humble You have heard, O LORD; You will prepare their heart, You will incline Your ear." This verse appears in multiple High Holiday contexts. In both Ashkenazi and Edot HaMizrach traditions, during the cantor's repetition of the Amidah on Rosh Hashanah and Yom Kippur, the prayer leader—feeling unworthy to represent the congregation—invokes this verse: לְחַלּוֹתְךָ שְׁלָחוּנִי מַקְהֲלוֹת הֲמוֹנֶךָ. תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶךָ—"Your teeming congregations have sent me to entreat You. Prepare their heart; incline Your ear." The liturgical shift from first person ("their heart") to second person ("Your ear") creates a chiasm—the community's hearts need firming, God's ear needs inclining—suggesting that effective prayer requires divine action at both ends. The verse also appears in the Edot HaMizrach Simchat Torah *Hakafot* during the first circuit, associated kabbalistically with the divine attribute of *Malkhut* (Kingship).
+
+**Verse 15**: שְׁבֹר זְרוֹעַ רָשָׁע, "Break the arm of the wicked." This phrase appears in the Ashkenazi Yom Kippur Musaf during the *Seder HaAvodah*, the elaborate poetic recounting of the High Priest's Temple service. Following the narrative of ancient glory, the liturgy shifts to supplication for redemption, including this verse in an alphabetical acrostic: רוּמָה עֻזֶּךָ וְרוֹמֵם שְׁפָלִים; שְׁבֹר זְרוֹעַ רֶשַׁע; תִּמְלֹךְ לְבַדְּךָ בְּקוֹרְאֵי שְׁמֶךָ—"Raise Your might and elevate the lowly; break the arm of the wicked; You alone will reign over those who call Your name." The liturgical usage transforms individual petition into communal eschatological hope.
+
+#### Phrases
+
+**Verse 1**: לָמָה יְהֹוָה תַּעֲמֹד בְּרָחוֹק, "Why, O LORD, do You stand aloof?" This plaintive cry appears in the Sefardic *Selichot* service for the 20th of Sivan, a fast day commemorating historical tragedies. It is embedded within a catena of verses expressing communal distress: כִּי אַתָּה אֲדֹנָי טוֹב וְסַלָּח וְרַב חֶסֶד לְכָל קֹרְאֶיךָ: לָמָה יְהֹוָה תַּעֲמֹד בְּרָחוֹק תַּעְלִים לְעִתּוֹת בַּצָּרָה: לָמָּה פָנֶיךָ תַסְתִּיר תִּשְׁכַּח עָנְיֵנוּ וְלַחֲצֵנוּ—"For You, Lord, are good and forgiving, abounding in steadfast love to all who call on You (Ps 86:5); Why, O LORD, do You stand aloof, heedless in times of trouble? (Ps 10:1); Why do You hide Your face, forgetting our affliction and oppression? (Ps 44:25)." The liturgical tapestry places our verse between affirmation of God's goodness and a second question of divine hiddenness, heightening the emotional tension.
+
+---
+
+### REVISED VERSE COMMENTARY
+
+**Verse 1**
+
+לָמָה יְהֹוָה תַּעֲמֹד בְּרָחוֹק; תַּעְלִים לְעִתּוֹת בַּצָּרָה.
+
+"Why, O LORD, do You stand aloof; why do You hide in times of trouble?"
+
+The psalm erupts with a double rhetorical question marked by the interrogative לָמָה (`lā-**MĀH**`), a pattern appearing at moments of acute theological crisis throughout the Psalter. The concordance search reveals that this precise formulation—לָמָה יְהֹוָה—occurs only twice in Psalms: here and in 88:15, where the psalmist similarly asks לָמָה יְהֹוָה תִּזְנַח נַפְשִׁי תַּסְתִּיר פָּנֶיךָ מִמֶּנִּי, "Why, O LORD, do You reject me, do You hide Your face from me?" Both psalms treat divine hiddenness as their central problem, and both employ the verb of concealment (here תַּעְלִים, there תַּסְתִּיר). The coincidence suggests these laments may have circulated together in ancient worship as paradigmatic expressions of abandonment.
+
+What makes this opening particularly striking is its spatial theology. The verb תַּעֲמֹד, "stand," typically connotes stability and presence—God "stands" (נִצָּב) in the divine assembly to judge (Psalm 82:1); the priest "stands" before God in service (Deuteronomy 10:8); the righteous person "stands" in the congregation (Psalm 1:5). Yet here the preposition בְּרָחוֹק, "at a distance," transforms presence into absence. The psalmist does not complain that God is gone but that He is present yet distant—watching from afar like a bystander at a crime scene. Radak captures this nuance: "David did not utter this Psalm of any one particular occasion; it is rather a prayer which anyone who is in trouble by reason of an enemy might use."
+
+The second colon intensifies with תַּעְלִים, from the root עלם, "to hide, conceal." The hiphil (causative) form suggests God actively conceals Himself rather than merely being absent. This verb often describes divine hiddenness as judgment: in Deuteronomy 31:17-18, God warns הִסְתַּרְתִּי פָנַי מֵהֶם, "I will hide My face from them." But here the hiddenness is temporally specific: לְעִתּוֹת בַּצָּרָה, "in times of trouble." The plural עִתּוֹת suggests not a single crisis but repeated occasions. As Rashi notes: תַּעְלִים עֵינַיִם לְעִתּוֹת הַצָּרָה, "You hide Your eyes in times of distress"—God's eyes, not merely His face, are averted.
+
+The phrase עִתּוֹת בַּצָּרָה appears verbatim in Psalm 9:10: מִשְׂגָּב לַדָּךְ מִשְׂגָּב לְעִתּוֹת בַּצָּרָה, "a stronghold for the oppressed, a stronghold in times of trouble"—though there God is praised as a refuge *during* such times. These two psalms thus form a deliberate diptych: Psalm 9 celebrates God as refuge in trouble; Psalm 10 protests His absence during the same. The shared acrostic structure confirms what the shared vocabulary suggests: these psalms were composed to be read together, their tension unresolved.
+
+Ibn Ezra takes a characteristically rationalist approach, suggesting the "distance" reflects human perception rather than divine reality. But the medieval Meiri reads historically: "It seems this psalm was spoken concerning the time of exile, when the nations are exalted and the chosen people humbled and trampled." Whether personal or communal, the question עַד־מָתַי, "how long," echoes through Israel's prayers whenever oppression makes divine absence feel unbearable.
+
+---
+
+**Verse 2**
+
+בְּגַאֲוַת רָשָׁע יִדְלַק עָנִי; יִתָּפְשׂוּ בִּמְזִמּוֹת זוּ חָשָׁבוּ.
+
+"In the arrogance of the wicked, the poor is hotly pursued; may they be caught in the schemes they have devised."
+
+The verse introduces the psalm's two protagonists: the רָשָׁע (wicked) and the עָנִי (poor/afflicted), establishing a causal relationship between theological arrogance and social violence. The opening phrase בְּגַאֲוַת רָשָׁע functions as an explanatory bet—"because of" or "through the arrogance of the wicked"—making גַּאֲוָה (pride) the engine of oppression. This noun appears sparingly in Psalms, predominantly describing the wicked's haughty posture toward both God and humanity. Psalm 31:19 similarly condemns שִׂפְתֵי־שָׁקֶר הַדֹּבְרוֹת עַל־צַדִּיק עָתָק בְּגַאֲוָה וָבוּז, "lying lips that speak arrogantly against the righteous with pride and contempt." The shared vocabulary with Psalm 31—including the rare phrase מֵרֶשֶׁת זוּ in 31:5 and our בִּמְזִמּוֹת זוּ here, both using the archaic demonstrative זוּ—suggests common literary tradition.
+
+The verb יִדְלַק (`yidh-**LAQ**`) is visceral: from the root דלק, "to burn, pursue hotly," it suggests passionate, relentless hunting. Rashi glosses correctly as יִרְדֹּף, "he pursues," citing Genesis 31:36 where Laban accuses Jacob: כִּי דָלַקְתָּ אַחֲרָי, "that you pursued me hotly." The imperfect tense conveys ongoing action—not a single attack but continuous predation. The word עָנִי (poor, afflicted) is the first of five different Hebrew terms for victims in this psalm (עָנִי, חֵלְכָה, נָקִי, יָתוֹם, דָּךְ), a lexical variety that prevents abstraction: the wicked prey on the vulnerable in all their forms.
+
+The second colon shifts abruptly to a jussive or passive construction: יִתָּפְשׂוּ בִּמְזִמּוֹת זוּ חָשָׁבוּ, "may they be caught in the schemes which they devised." This is the psalm's first imprecation—let the wicked fall into their own traps. The archaic demonstrative זוּ (rather than the more common אֲשֶׁר) lends the curse a formal, perhaps liturgical weight; as Radak notes, זוּ functions like אֲשֶׁר, "which," appearing also in Psalm 32:8 and Isaiah 42:24. The verb חָשַׁב ("to think, devise") will recur in verse 4, emphasizing that the wicked's violence is not impulsive but calculated—מְזִמּוֹת, "schemes," from the root זמם, "to plot."
+
+This prayer for poetic justice—the schemer ensnared by his own plots—reflects the principle of מִדָּה כְּנֶגֶד מִדָּה, "measure for measure," pervading rabbinic thought on divine justice. Psalm 9:16 expresses the identical hope: טָבְעוּ גוֹיִם בְּשַׁחַת עָשׂוּ בְּרֶשֶׁת־זוּ טָמָנוּ נִלְכְּדָה רַגְלָם, "The nations sink in the pit they have made; their own foot is caught in the net they have hidden." The shared phrase רֶשֶׁת־זוּ reinforces the Psalm 9-10 connection: justice means the oppressor's weapons turned against himself.
+
+---
+
+**Verse 3**
+
+כִּי־הִלֵּל רָשָׁע עַל־תַּאֲוַת נַפְשׁוֹ; וּבֹצֵעַ בֵּרֵךְ נִאֵץ יְהֹוָה.
+
+"For the wicked boasts about his soul's desire; the grasping man blesses himself, scorning the LORD."
+
+This verse provides the כִּי ("for") explanation of why the wicked deserves to be caught: his arrogance extends from social violence to theological rebellion. The phrase הִלֵּל עַל־תַּאֲוַת נַפְשׁוֹ is unusual—the verb הִלֵּל (piel, "to praise, boast") typically takes a direct object, but here takes the preposition עַל, creating the sense "boasting *about* his soul's desire." Rashi reads this as self-congratulation: the wicked boasts that he achieves כׇּל תַּאֲוַת נַפְשׁוֹ, "all his soul's desire," his success breeding further arrogance.
+
+The noun נֶפֶשׁ can mean "throat" (its etymological root) as well as "soul" or "life-force," creating an implied image of appetite—the wicked's soul has a "throat" that constantly desires. This same word appears in verse 17, where God hears תַּאֲוַת עֲנָוִים, "the desire of the lowly," creating deliberate contrast: the wicked boast about their desires; the humble's desires are heard by God.
+
+The second colon introduces one of Scripture's most shocking phrases: וּבֹצֵעַ בֵּרֵךְ נִאֵץ יְהֹוָה. The verb בָּצַע means "to cut off, gain by violence," and the participle בֹּצֵעַ thus means "the grasper, the one who gains by extortion." But how can the grasping one "bless" (בֵּרֵךְ) while simultaneously "scorning" (נִאֵץ) the LORD? Rashi resolves the paradox by reading בֵּרֵךְ as sarcastic self-congratulation: the robber "blesses himself," saying שָׁלוֹם יִהְיֶה לִּי, "peace will be mine" (echoing Deuteronomy 29:18), even though his actions blaspheme God.
+
+The Talmud (Bava Kamma 94a) cites this verse in a stunning halakhic context. Rabbi Eliezer ben Yaakov teaches: "If someone steals a measure of wheat, grinds it, bakes it, and separates the priestly portion—how can he bless? He is not blessing but blaspheming! Concerning this it is said: בּוֹצֵעַ בֵּרֵךְ נִאֵץ ה׳, 'the grasping one blesses, scorning the LORD.'" The rabbinic reading captures the verse's central paradox: ritual performance (blessing) combined with injustice becomes its own profanation. One cannot pronounce benedictions over stolen property; the attempt transforms blessing into blasphemy.
+
+The verb נִאֵץ ("to scorn, blaspheme") with יְהֹוָה as direct object is theologically explosive. It appears only twenty-four times in Scripture, often at covenant-crisis moments (Numbers 14:11, 23; 16:30; 2 Samuel 12:14). Psalm 74:10 uses the identical verb in similar theodicy context: עַד־מָתַי אֱלֹהִים יְחָרֶף צָר יְנָאֵץ אוֹיֵב שִׁמְךָ לָנֶצַח, "How long, O God, shall the foe blaspheme, shall the enemy forever revile Your name?" The shared vocabulary between Psalms 10 and 74—including נאץ, למה, צרר, and אַל־תִּשְׁכַּח—suggests they may have circulated as companion pieces for communal lament.
+
+---
+
+**Verse 4**
+
+רָשָׁע כְּגֹבַהּ אַפּוֹ בַּל־יִדְרֹשׁ; אֵין אֱלֹהִים כׇּל־מְזִמּוֹתָיו.
+
+"The wicked, according to the height of his nose, does not seek; 'there is no God'—all his schemes."
+
+This verse is syntactically challenging, and interpretation hinges on parsing כְּגֹבַהּ אַפּוֹ, literally "according to the height/loftiness of his nose." The noun אַף means both "nose" and, metonymically, "anger" or "countenance." Ibn Ezra correctly notes that facial height—particularly the nose—is the most visible marker of physical arrogance: when someone is haughty, they literally hold their nose high. Compare Proverbs 30:13: דּוֹר מָה־רָמוּ עֵינָיו וְעַפְעַפָּיו יִנָּשֵׂאוּ, "a generation—how lofty are its eyes, how raised its eyelids!" The physical posture of arrogance becomes a metonym for spiritual posture.
+
+The Talmud (Nedarim 22b) draws a striking lesson from this verse about the spiritual effects of anger: אָמַר רַבָּה בַּר רַב הוּנָא: כָּל הַכּוֹעֵס, אֲפִילּוּ שְׁכִינָה אֵינָהּ חֲשׁוּבָה כְּנֶגְדּוֹ, שֶׁנֶּאֱמַר: רָשָׁע כְּגֹבַהּ אַפּוֹ בַּל־יִדְרֹשׁ אֵין אֱלֹהִים כָּל־מְזִמּוֹתָיו, "Rabbah bar Rav Huna said: Anyone who becomes angry—even the Shekhinah is not important before him, as it says: 'The wicked, according to the height of his anger, does not seek; there is no God in all his schemes.'" The rabbinic reading identifies arrogance not as intellectual conclusion but as emotional state: rage blinds one to divine presence.
+
+The phrase בַּל־יִדְרֹשׁ introduces the key verb דָּרַשׁ ("to seek, inquire, call to account"), which functions as a *Leitwort*—a guiding word whose repetition structures the argument—through verses 4, 13, and 15. Here the wicked's theology is expressed negatively: "he does not seek." The object is ambiguous: does he not seek God? Or does he not believe God will seek (call to account) him? The ambiguity is deliberate, encompassing both the wicked's refusal to seek divine guidance and his confidence that God will not seek out his wickedness.
+
+The second colon, אֵין אֱלֹהִים כׇּל־מְזִמּוֹתָיו, is among the psalm's most debated. Standard translation reads it as interior quotation—the wicked "says in his heart" (implied from v. 6, 11, 13): "There is no God." This interpretation finds support in Psalm 14:1 (= 53:2): אָמַר נָבָל בְּלִבּוֹ אֵין אֱלֹהִים, "The fool says in his heart, 'There is no God.'" However, Ibn Ezra proposes alternative syntax: אֵין אֱלֹהִים means not "God does not exist" but "God is not in all his schemes"—that is, God has no place in the wicked's calculations. This captures the psalm's nuance: the wicked is less a theoretical atheist than a practical one. He lives as if there is no God who will call him to account, even if he grants God's existence in principle. Radak puts it precisely: כִּי אֵין אֱלֹהִים שֹׁפְטִים בָּאָרֶץ, "for there is no God judging on earth."
+
+---
+
+**Verse 5**
+
+יָחִילוּ דְרָכָו בְּכׇל־עֵת; מָרוֹם מִשְׁפָּטֶיךָ מִנֶּגְדּוֹ; כׇּל־צוֹרְרָיו יָפִיחַ בָּהֶם.
+
+"His ways prosper at all times; Your judgments are far removed from him; all his foes he snorts at."
+
+This verse describes the wicked's apparent success through three compact cola that build a portrait of unchecked prosperity. The opening יָחִילוּ דְרָכָו is syntactically unusual—the verb חול typically means "to writhe, be in pain" (as in childbirth), but here context demands success or stability. Rashi glosses correctly: יַצְלִיחוּ, "they prosper," comparing Job 20:21: לֹא־יָחִיל טוּבוֹ, "his prosperity will not endure." This sense of חול meaning "to be firm, prosper" appears to be a secondary semantic development.
+
+The phrase בְּכׇל־עֵת ("at all times") emphasizes continuous prosperity—not occasional success but persistent, unbroken flourishing. This creates painful contrast with verse 1's לְעִתּוֹת בַּצָּרָה ("in times of trouble"): God hides during times when help is needed, but the wicked prospers *at all times*.
+
+The Talmud (Berakhot 7b) engages this verse directly: תָּנֵי נַמֵּי הָכֵי: רַבִּי דּוֹסְתַּאי בְּרַבִּי מַתּוּן אוֹמֵר: מוּתָר לְהִתְגָּרוֹת בָּרְשָׁעִים בָּעוֹלָם הַזֶּה...אִינִי? וְהָאָמַר רַבִּי יִצְחָק: אִם רָאִיתָ רָשָׁע שֶׁהַשָּׁעָה מְשַׂחֶקֶת לוֹ אַל תִּתְגָּרֶה בוֹ, שֶׁנֶּאֱמַר: יָחִילוּ דְרָכָיו בְּכָל עֵת, "It was also taught: Rabbi Dostai ben Rabbi Matun says: It is permitted to provoke the wicked in this world... But is it so? Rabbi Yitzchak said: If you see a wicked person whom fortune favors, do not provoke him, as it says: 'His ways prosper at all times.'" The Talmud goes on to reconcile these views—one may confront wickedness in matters of heaven, but should be cautious in personal matters. The verse thus became a locus classicus for rabbinic debate about engaging with evil.
+
+The second colon introduces spatial theology: מָרוֹם מִשְׁפָּטֶיךָ מִנֶּגְדּוֹ, "Your judgments are high/far removed from before him." The adjective מָרוֹם is used predicatively: "Your judgments are *high*"—inaccessible, remote, irrelevant to his affairs. This recalls verse 1's complaint that God stands בְּרָחוֹק. Here the distance is not merely God's position but His judgments (מִשְׁפָּטִים)—the wicked experiences divine justice as something existing on a different plane entirely.
+
+The final colon depicts contemptuous dismissal: כׇּל־צוֹרְרָיו יָפִיחַ בָּהֶם, "all his foes he snorts/puffs at." The verb פוח means "to puff, blow, snort," appearing in contexts of disdainful dismissal (Psalm 12:6; Malachi 1:13). The image is visceral—the wicked literally snorts at enemies like an animal expressing contempt. Rashi explains: בְּהַפָּחַת רוּחַ הוּא מֵפִיחַ בָּהֶם, "with a breath of spirit he blows at them"—they collapse at his slightest exhalation.
+
+---
+
+**Verse 6**
+
+אָמַר בְּלִבּוֹ בַּל־אֶמּוֹט; לְדֹר וָדֹר אֲשֶׁר לֹא־בְרָע.
+
+"He says in his heart, 'I shall not be shaken, through all generations I who am not in trouble.'"
+
+This verse introduces the first of three interior monologues using the formula אָמַר בְּלִבּוֹ, literally "he said in his heart" (vv. 6, 11, 13). The concordance reveals this phrase's striking rarity: it appears only five times in the entire Hebrew Bible. Besides our three instances, it occurs in Obadiah 1:3, where Edom's arrogance speaks—זְדוֹן לִבְּךָ הִשִּׁיאֶךָ...אֹמֵר בְּלִבּוֹ מִי יוֹרִדֵנִי אָרֶץ, "Your arrogant heart has seduced you...you who say in your heart, 'Who can pull me down to earth?'"—and in Psalm 74:8, where enemies resolve: אָמְרוּ בְלִבָּם נִינָם יָחַד, "They said in their heart, 'Let us destroy them altogether!'" In each case, the formula introduces the speech of oppressors whose arrogance portends destruction. The wicked man of Psalm 10 stands in this typology.
+
+The heart (לֵב) in biblical anthropology is not the seat of emotions but of thought, will, and decision—the mind's inner sanctum where one's true theology resides. What the wicked "says in his heart" is his operating theology, not what he professes publicly.
+
+The content of this first monologue is בַּל־אֶמּוֹט, "I shall not be shaken/moved." This phrase appears throughout Psalms in both negative and positive contexts—not being shaken is a sign of divine protection (Psalms 16:8, 62:3, 7) or divine establishment (Psalms 93:1, 96:10). Psalm 16:8 offers instructive contrast: שִׁוִּיתִי יְהֹוָה לְנֶגְדִּי תָמִיד כִּי מִימִינִי בַּל־אֶמּוֹט, "I have set the LORD before me always; He is at my right hand, I shall not be shaken." The righteous person's stability comes from setting God before him; the wicked's stability comes from denying God's active involvement. The same words—בַּל־אֶמּוֹט—become parody in the mouth of the wicked.
+
+The temporal expansion לְדֹר וָדֹר, "through all generations," makes false security grandiose. The phrase appears twenty-one times in Scripture, almost always describing God's eternal attributes—His faithfulness (Psalm 119:90), His counsel (Psalm 33:11), His kingship (Psalm 146:10). The wicked claims for himself what belongs to God alone. The relative clause אֲשֶׁר לֹא־בְרָע, literally "who/which [am] not in trouble," completes the delusion: perpetual exemption from consequence.
+
+The Malbim observes a progression across the three monologues: in verse 6, the wicked boasts of personal stability (בַּל־אֶמּוֹט); in verse 11, he extends this to theological claim about God's forgetfulness (שָׁכַח אֵל); in verse 13, he makes explicit denial (לֹא תִדְרֹשׁ). This trajectory traces the intellectual journey from practical to theoretical atheism—from living as if God doesn't matter to asserting that God doesn't act.
+
+---
+
+**Verse 7**
+
+אָלָה פִּיהוּ מָלֵא וּמִרְמוֹת וָתֹךְ; תַּחַת לְשׁוֹנוֹ עָמָל וָאָוֶן.
+
+"His mouth is full of oaths, deceits, and fraud; under his tongue are mischief and iniquity."
+
+This verse shifts from the wicked's interior world (his heart, v. 6) to his exterior—specifically, his speech organs. The anatomical focus on mouth (פֶּה) and tongue (לָשׁוֹן) creates a somatic map of evil, a body-part progression that continues through eyes (v. 8), arms (v. 15), and ears (v. 17). The opening phrase אָלָה פִּיהוּ מָלֵא is emphatic: his mouth "is full" (מָלֵא functioning predicatively) with three nouns—אָלָה (oaths/curses), מִרְמוֹת (deceits), and תֹּךְ (oppression/fraud). The first, אָלָה, typically refers to covenantal oaths invoking curses for violation; here, in conjunction with "deceits," it likely means false oaths—the wicked swears by God's name while plotting harm, making his very speech an inversion of covenant language.
+
+The second colon introduces one of Scripture's most vivid anatomical metaphors: תַּחַת לְשׁוֹנוֹ עָמָל וָאָוֶן, "under his tongue [are] mischief and iniquity." The preposition תַּחַת creates a spatial image—the tongue as a landscape with an underside, a hidden space where malice lurks. This image of concealed venom under the tongue recurs in Job 20:12: אִם־יַמְתִּיק בְּפִיו רָעָה יַכְחִידֶנָּה תַּחַת לְשׁוֹנוֹ, "Though evil is sweet in his mouth and he hides it under his tongue." The tongue becomes a weapon storing poison until deployment. Radak glosses: "When he swears with the tongue, under the tongue in the heart there is עָמָל וָאָוֶן"—outward oath contradicts inner malice.
+
+The nouns עָמָל and אָוֶן function as a word-pair throughout Scripture, particularly in contexts of violence and injustice. The combination appears identically in Psalm 7:15: הִנֵּה יְחַבֶּל־אָוֶן וְהָרָה עָמָל וְיָלַד שָׁקֶר, "He conceives iniquity, is pregnant with mischief, and gives birth to falsehood." The connection between Psalms 7 and 10 extends beyond vocabulary: both employ lion imagery (7:3 // 10:9), both petition קוּמָה יְהֹוָה (7:7 // 10:12), and both contrast the wicked's schemes with divine justice. The shared diction suggests common authorship or liturgical pairing.
+
+The verse presents a striking contrast between public and hidden speech. The mouth is "full" (visible, overflowing), but what fills it is performative falsehood. Meanwhile, under the tongue—hidden, concealed—is the true content: עָמָל וָאָוֶן. This inverts the righteous person's speech described in Psalm 37:30: פִּי־צַדִּיק יֶהְגֶּה חָכְמָה וּלְשׁוֹנוֹ תְּדַבֵּר מִשְׁפָּט, "The mouth of the righteous utters wisdom, and his tongue speaks justice." Here, the wicked's mouth utters oaths while his tongue conceals injustice.
+
+---
+
+**Verse 8**
+
+יֵשֵׁב בְּמַאְרַב חֲצֵרִים; בַּמִּסְתָּרִים יַהֲרֹג נָקִי; עֵינָיו לְחֵלְכָה יִצְפֹּנוּ.
+
+"He sits in ambush of villages; in secret places he kills the innocent; his eyes spy on the helpless."
+
+This verse inaugurates the psalm's central extended metaphor: the wicked as predator. The opening verb יֵשֵׁב ("sits") creates deliberate spatial counterpoint to verse 1's תַּעֲמֹד ("stands"). Where God "stands" at a distance, the wicked "sits" in ambush—a posture of patient, calculated waiting. The phrase בְּמַאְרַב חֲצֵרִים is dense: מַאְרַב (from ארב, "to lie in wait") denotes the ambush site itself, while חֲצֵרִים ("courts" or "settlements") refers to villages or unwalled towns. Rashi identifies these as outer courtyards where people gather—ideal hunting grounds for a predator who blends into public spaces.
+
+The second colon intensifies: בַּמִּסְתָּרִים יַהֲרֹג נָקִי, "in secret places he kills the innocent." The plural מִסְתָּרִים (from סתר, "to hide") refers to hiding places, creating paradox with the first colon's public spaces. The wicked operates both openly and secretly, suggesting his predation saturates all spaces. The verb יַהֲרֹג moves beyond exploitation to murder, and its object נָקִי ("innocent, blameless") creates moral absolute—this is not the elimination of a rival but slaughter of the guiltless. The adjective נָקִי resonates with the legal category נְקִי דָּם (Deuteronomy 19:13), innocent blood that cries out for justice.
+
+The final colon introduces the hunter's method: עֵינָיו לְחֵלְכָה יִצְפֹּנוּ, "his eyes spy on the helpless." The verb צָפַן ("to hide, spy") suggests both concealment and vigilance. The object חֵלְכָה (or חֵלֶךְ) is rare, appearing also in verses 10 and 14; its etymology is debated but clearly denotes the vulnerable. Rashi interprets the unusual suffix as second-person address to God: לְחֵלְכָה = "Your helpless ones"—"To You, Your helpless ones." This makes the verse even more poignant: the wicked's eyes spy on those who belong to God.
+
+The image of watching eyes is chilling. Predators rely on vision to select and track prey. The wicked's eyes are not passive but active, searching (יִצְפֹּנוּ) for targets. This visual predation contrasts with verse 1's divine hiddenness—God has hidden His eyes (תַּעְלִים), while the wicked's eyes constantly survey. Psalm 94:6-7 employs identical vocabulary for identical outrage: אַלְמָנָה וְגֵר יַהֲרֹגוּ וִיתוֹמִים יְרַצֵּחוּ וַיֹּאמְרוּ לֹא יִרְאֶה־יָּהּ, "They kill the widow and stranger, murder the orphans, and say: 'The LORD does not see.'" The shared הרג-יתום-ראה cluster confirms the psalms' literary relationship.
+
+---
+
+**Verse 9**
+
+יֶאֱרֹב בַּמִּסְתָּר כְּאַרְיֵה בְסֻכֹּה; יֶאֱרֹב לַחֲטוֹף עָנִי; יַחְטֹף עָנִי בְּמׇשְׁכוֹ בְרִשְׁתּוֹ.
+
+"He lurks in secret like a lion in his lair; he lurks to seize the lowly; he seizes the lowly by dragging him in his net."
+
+This verse makes explicit what verse 8 implied: the wicked is a lion. The simile כְּאַרְיֵה בְסֻכֹּה, "like a lion in his lair," draws on common biblical figuration. The figurative language database records fifteen instances of lion imagery in Scripture. Psalm 7:3 offers close parallel: פֶּן־יִטְרֹף כְּאַרְיֵה נַפְשִׁי פֹּרֵק וְאֵין מַצִּיל, "lest, like a lion, they tear me apart, rending in pieces, and no one save me." Psalm 17:12 elaborates: דִּמְיֹנוֹ כְּאַרְיֵה יִכְסוֹף לִטְרֹף וְכִכְפִיר יֹשֵׁב בְּמִסְתָּרִים, "He is like a lion eager for prey, a young lion lying in wait." The shared vocabulary—אַרְיֵה, מִסְתָּר, כְפִיר—suggests a common poetic tradition for depicting enemies as predators.
+
+The noun סֻכָּה typically means "booth, shelter" (as in the festival of Sukkot), but here refers to the lion's thicket or lair—a place of concealment from which to launch attacks. Compare Job 38:40: בְּסֻכָּה יֵשֵׁבוּ, "they crouch in their dens." Intriguingly, Psalm 31:21 uses the same word for divine protection: תִּצְפְּנֵם בְּסֻכָּה מֵרִיב לְשֹׁנוֹת, "You shelter them in a booth from the strife of tongues." The word thus carries ironic freight: what should be shelter becomes ambush.
+
+The tricolon structure creates relentless rhythm: יֶאֱרֹב...יֶאֱרֹב...יַחְטֹף (`ye-'e-**RŌV**...ye-'e-**RŌV**...yaḥ-**TŌF**`). The verb ארב ("to lie in wait") repeats twice, hammering the motif of calculated waiting, before the climactic יַחְטֹף ("he seizes"). This verb חטף appears three times in two verses (vv. 9-10), creating an aural assault mimicking the violence described. The object עָנִי ("the lowly/poor") appears twice, emphasizing systematic targeting of the vulnerable.
+
+The final phrase בְּמׇשְׁכוֹ בְרִשְׁתּוֹ, "by dragging him in his net," introduces mixed metaphor—suddenly the lion becomes a net-hunter. Radak notes that nets were used to trap both animals and humans in ancient warfare, so the metaphor encompasses multiple forms of capture. The net (רֶשֶׁת) appears forty-five times in Scripture in figurative contexts of entrapment. Psalm 31:5 uses the same archaic demonstrative: תּוֹצִיאֵנִי מֵרֶשֶׁת זוּ טָמְנוּ לִי, "free me from the net they have hidden for me." The shared phrase רֶשֶׁת זוּ reinforces the Psalm 10-31 connection. The wicked is both beast (raw power) and hunter (calculated trapping)—compound metaphor compounding threat.
+
+---
+
+**Verse 10**
+
+יִדְכֶּה יָשֹׁחַ; וְנָפַל בַּעֲצוּמָיו חֵל כָּאִים.
+
+"He crouches, he bows down; and the hapless fall by his might."
+
+This verse is both phonetically and textually problematic, with significant Kethiv/Qere (written/read) variants affecting interpretation. The Masoretic Kethiv reads וְדָכָה יָשֹׁחַ ("and the crushed one bows down"), while the Qere reads יִדְכֶּה יָשֹׁחַ ("he crouches, he bows down"). The Qere makes better contextual sense: the wicked is the subject, continuing the lion imagery from verse 9. The two verbs דכה ("to crouch/be crushed") and שחח ("to bow down") both describe a low, crouched posture—the predator lowering his profile before the strike.
+
+The second colon וְנָפַל בַּעֲצוּמָיו presents further difficulty. What is בַּעֲצוּמָיו, "by his mighty [ones]"? The noun עָצוּם ("strong, mighty") appears as a plural construct with third masculine singular suffix. Options include: (1) his mighty claws or limbs, continuing the lion metaphor; (2) his mighty troops or helpers, suggesting accomplices; (3) his mighty traps, linking to רֶשֶׁת in verse 9. Rashi takes option (2): "To his strong ones the helpless fall"—victims fall into the hands of the wicked's powerful gang. Ibn Ezra prefers (1): בַּעֲצוּמָיו = his strong limbs, tools of violence.
+
+The Kethiv/Qere on the final word—Kethiv חֵלְכָּאִים as one word, Qere חֵל כָּאִים as two—further complicates. If two words, חֵל ("company, host") and כָּאִים (participle from כאה, "to be crushed"), yields "the company of the crushed ones." The hapless are not individual victims but a collective—an entire class of the vulnerable who fall prey to the predator's might.
+
+The verse completes the hunt cycle begun in verse 8: ambush (v. 8) → lurking (v. 9a) → snatching (v. 9b) → crushing/collapsing (v. 10). The predator has achieved his goal. The hapless lie fallen. This brings us to the second interior monologue (v. 11), where the wicked interprets his success theologically.
+
+---
+
+**Verse 11**
+
+אָמַר בְּלִבּוֹ שָׁכַח אֵל; הִסְתִּיר פָּנָיו בַּל־רָאָה לָנֶצַח.
+
+"He says in his heart, 'God has forgotten; He has hidden His face; He will never see.'"
+
+This verse returns to the interior monologue formula (אָמַר בְּלִבּוֹ) for the second time, now after successful predation. The wicked's theological conclusion from unchecked violence is stated in three parallel clauses creating a crescendo of divine absence. The first, שָׁכַח אֵל ("God has forgotten"), uses perfect tense to assert accomplished fact—not "God might forget" but "God *has* forgotten." The verb שכח with God as subject is theologically provocative, appearing primarily where Israel fears divine abandonment (Psalms 13:2, 42:10, 44:25). But here the wicked celebrates what the righteous lament.
+
+The second clause intensifies: הִסְתִּיר פָּנָיו, "He has hidden His face." This phrase echoes the psalmist's own complaint in verse 1 (תַּעְלִים), creating the psalm's central irony—both the righteous sufferer and the wicked perpetrator agree that God has hidden His face. But where the psalmist protests hiddenness as unjust, the wicked exploits it as permission. The idiom of "hiding the face" (הסתיר פנים) functions throughout Scripture as standard expression for divine withdrawal, particularly as covenant curse (Deuteronomy 31:17-18). The figurative language database records seven instances of this "hidden face" motif. Psalm 13:2 asks: עַד־אָנָה תַּסְתִּיר אֶת־פָּנֶיךָ מִמֶּנִּי, "How long will You hide Your face from me?" Psalm 27:9 pleads: אַל־תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי, "Do not hide Your face from me." The wicked's monologue thus appropriates the righteous person's lament and draws the opposite conclusion.
+
+The third clause provides temporal scope: בַּל־רָאָה לָנֶצַח, "He will never see." The adverb לָנֶצַח can mean "forever, permanently" or "for a long time." The wicked posits divine seeing as something that never happens across the entire temporal spectrum—God hasn't seen (שָׁכַח, past), isn't seeing (הִסְתִּיר, present), and won't see (בַּל־רָאָה, future). This forms a complete anti-theodicy: theological justification for why evil succeeds.
+
+The Malbim observes that the three monologues (vv. 6, 11, 13) represent progressive denial: first, personal exemption from consequence; then, universal divine blindness; finally, comprehensive divine inaction. The wicked's practical atheism deepens into theoretical atheism through the psalm's arc. But the verb ראה becomes the key to reversal—the wicked claims God doesn't see (בַּל־רָאָה), while the psalmist will assert emphatically that God *does* see (רָאִתָה, v. 14).
+
+---
+
+**Verse 12**
+
+קוּמָה יְהֹוָה אֵל נְשָׂא יָדֶךָ; אַל־תִּשְׁכַּח עֲנָוִים.
+
+"Arise, O LORD! O God, lift up Your hand; do not forget the lowly."
+
+This verse marks the psalm's dramatic pivot from description to petition. The imperative קוּמָה (`qū-**MĀH**`, "arise!") is standard liturgical language for divine intervention, appearing throughout Psalms at crisis moments. The concordance shows קוּמָה יְהֹוָה occurs eight times in the Psalter: Psalms 3:8, 7:7, 9:20, 10:12, 17:13, 44:27, 74:22, and 132:8. Psalm 7:7 provides the closest parallel: קוּמָה יְהֹוָה בְּאַפֶּךָ הִנָּשֵׂא בְּעַבְרוֹת צוֹרְרָי, "Arise, O LORD, in Your anger; assert Yourself against the fury of my foes." Both psalms move from lion imagery to this petition, and both employ the root נשא.
+
+The address יְהֹוָה אֵל combines the personal covenant name YHWH with the generic divine title El, creating solemn double invocation. This pairing is relatively rare and marks moments of heightened address. The shift from אֱלֹהִים (used in the wicked's monologue, v. 4) to יְהֹוָה here reasserts the personal, relational character of Israel's God.
+
+The second imperative נְשָׂא יָדֶךָ ("lift up Your hand") employs the idiom of raised hand as gesture of oath-taking or power-display. Throughout Scripture, the raised hand signifies readiness to act (Exodus 14:16, Isaiah 49:22), often specifically to strike in judgment. Rashi glosses: להראות כֹּחֲךָ, "to show Your strength." The hand (יָד) represents agency—to lift the hand is to prepare to act. This directly counters verse 5's complaint that God's judgments were מָרוֹם, "far removed."
+
+The final clause אַל־תִּשְׁכַּח עֲנָוִים creates explicit verbal linkage to verse 11: the wicked said שָׁכַח אֵל ("God has forgotten"), but the psalmist pleads אַל־תִּשְׁכַּח ("do not forget"). The same verb in contrasting forms—confident assertion becomes anxious prohibition. The object עֲנָוִים (Qere; Kethiv reads עֲנִיִּים) emphasizes not merely economic poverty but spiritual humility—those who, lacking human power, entrust themselves entirely to divine justice.
+
+The tricolon of imperatives (קוּמָה...נְשָׂא...אַל־תִּשְׁכַּח) creates rhetorical urgency through accumulation. Each addresses a different aspect of the problem: קוּמָה counters God's standing aloof (v. 1), נְשָׂא counters judgments being far removed (v. 5), and אַל־תִּשְׁכַּח counters the wicked's claim that God has forgotten (v. 11).
+
+---
+
+**Verse 13**
+
+עַל־מֶה נִאֵץ רָשָׁע אֱלֹהִים; אָמַר בְּלִבּוֹ לֹא תִדְרֹשׁ.
+
+"Why should the wicked man scorn God, thinking You do not call to account?"
+
+This verse introduces the psalm's second rhetorical question (עַל־מֶה, "on what basis?" or "why?"), now not addressed to God (as in v. 1) but posed about the wicked. The interrogative עַל־מֶה appears less frequently than לָמָה but carries similar force—it demands justification. Ibn Ezra glosses it as לְשׁוֹן תִּמָּהָא, "language of wonder": *Why* would anyone dare scorn God?
+
+The verb נִאֵץ ("to scorn, blaspheme") reappears from verse 3, now with אֱלֹהִים as direct object. This verb's rarity and gravity were noted earlier; its recurrence intensifies the theological crisis. Psalm 74:10, 18 use the identical verb in similar theodicy contexts: יְנָאֵץ אוֹיֵב שִׁמְךָ לָנֶצַח, "shall the enemy forever revile Your name?" The shared vocabulary between Psalms 10 and 74—נאץ, למה, צרר, שכח, קומה—suggests liturgical pairing for communal lament. Both psalms move from questioning divine hiddenness through extended complaint to imperative petition.
+
+The answer to "why?" comes immediately: the third and final interior monologue. What the wicked אָמַר בְּלִבּוֹ this time is לֹא תִדְרֹשׁ, "You do not call to account." The verb דרש, which appeared in verse 4 (בַּל־יִדְרֹשׁ), now recurs with God as subject. This creates the crucial wordplay across three verses:
+
+- v. 4: בַּל־יִדְרֹשׁ (he does not seek)  
+- v. 13: לֹא תִדְרֹשׁ (You do not call to account)  
+- v. 15: תִּדְרוֹשׁ־רִשְׁעוֹ (seek out his wickedness)
+
+The verb דרש spans meanings from "seek, inquire" through "investigate, demand account" to "avenge." The wicked's claim is comprehensive: God doesn't seek out evil, doesn't investigate, doesn't demand account. The psalmist's petition (v. 15) will turn this verb against him—may God דרש his wickedness until none remains.
+
+Radak notes that this verse (עַל־מֶה נִאֵץ) should be read as the psalmist's question to God: "Why do You allow the wicked to scorn You?" The question isn't merely rhetorical but accusatory—why does God permit this scorn to go unpunished? Why prove the wicked right?
+
+---
+
+**Verse 14**
+
+רָאִתָה כִּי־אַתָּה עָמָל וָכַעַס תַּבִּיט; לָתֵת בְּיָדֶךָ; עָלֶיךָ יַעֲזֹב חֵלֵכָה; יָתוֹם אַתָּה הָיִיתָ עוֹזֵר.
+
+"You DO look! For You behold mischief and vexation, to take it in hand; upon You the hapless leaves his burden; You have ever been the orphan's helper."
+
+This verse is the psalm's theological hinge, marked by the emphatic fronted perfect verb רָאִתָה, "You *have* seen" or "You *DO* see." The fronting creates maximum rhetorical force—it places "seeing" at the absolute beginning, contradicting everything the wicked claimed in verse 11 (בַּל־רָאָה לָנֶצַח, "He will never see"). The shift from the wicked's imperfect/jussive verbs to the psalmist's perfect tense is crucial: this is not hope that God *will* see but assertion that God *has* seen, *does* see. The perfect tense functions as what grammarians call a "perfective of conviction"—grammatically past but asserting present reality with the force of accomplished fact.
+
+The explanatory כִּי ("for") introduces the evidence: אַתָּה עָמָל וָכַעַס תַּבִּיט, "You behold mischief and vexation." The pronoun אַתָּה is technically redundant (רָאִתָה already indicates second person), but its presence creates emphasis: "*You*—You specifically—behold..." The objects עָמָל וָכַעַס appeared earlier: עָמָל in verse 7 described the wicked's hidden malice. Now the psalmist asserts that what the wicked hides under his tongue, God observes openly.
+
+The purpose clause לָתֵת בְּיָדֶךָ is idiomatically rich. The phrase נָתַן בְּיָד typically means "to give into [someone's] hand," signifying control or disposition. Here God takes the matter "in hand" to deal with it—that is, to take responsibility for addressing injustice.
+
+The second colon עָלֶיךָ יַעֲזֹב חֵלֵכָה introduces a new subject: the hapless one (חֵלֵכָה). The verb עזב here doesn't mean "abandon" but "leave" in the sense of "entrust"—the hapless leaves his burden עָלֶיךָ, "upon You." This idiom appears in Psalm 37:5: גּוֹל עַל־יְהוָה דַּרְכֶּךָ, "Commit your way to the LORD." The hapless has no other recourse, so he lays down his burden at God's feet.
+
+The final colon introduces the orphan (יָתוֹם) for the first time: יָתוֹם אַתָּה הָיִיתָ עוֹזֵר, "the orphan—You have been helper." The orphan throughout Scripture represents the paradigmatic defenseless person—fatherless, without legal advocate. Torah repeatedly commands protection of the orphan (Exodus 22:21-23; Deuteronomy 10:18: עֹשֶׂה מִשְׁפַּט יָתוֹם וְאַלְמָנָה, "He executes justice for the orphan and widow"). The perfect tense הָיִיתָ ("You have been") appeals to God's track record—not "You will help" but "You have a history of helping."
+
+---
+
+**Verse 15**
+
+שְׁבֹר זְרוֹעַ רָשָׁע; וָרָע תִּדְרוֹשׁ־רִשְׁעוֹ בַל־תִּמְצָא.
+
+"Break the arm of the wicked man; and as for the evil one—seek his wickedness until You find it no more."
+
+This verse returns to imperative petition, now with violent imagery. The command שְׁבֹר זְרוֹעַ רָשָׁע, "break the arm of the wicked," employs a metaphor of dismantling power. The arm (זְרוֹעַ) throughout Scripture represents strength and capacity to act—the "outstretched arm" describes God's power (Exodus 6:6; Deuteronomy 4:34). To break someone's arm is to remove their capacity to harm. Psalm 37:17 uses nearly identical language: זְרוֹעוֹת רְשָׁעִים תִּשָּׁבַרְנָה, "the arms of the wicked will be broken."
+
+The Talmud (Megillah 17b) finds in this verse the scriptural basis for the ninth blessing of the daily Amidah: וּמָה רָאוּ לוֹמַר בִּרְכַּת הַשָּׁנִים בַּתְּשִׁיעִית? אָמַר רַבִּי אֲלֶכְּסַנְדְּרִי: כְּנֶגֶד מַפְקִיעֵי שְׁעָרִים, דִּכְתִיב: שְׁבֹר זְרוֹעַ רָשָׁע, "Why was the blessing concerning the years placed ninth? Rabbi Alexandri said: Against price-gougers, as it is written: 'Break the arm of the wicked.'" The Talmud continues: וְדָוִד כִּי אֲמָרָהּ בַּתְּשִׁיעִית אֲמָרָהּ, "And when David said it, he placed it ninth"—reading Psalm 10's petition as the structural basis for the Amidah prayer against oppression. This remarkable midrash interprets "breaking the arm" not as personal vengeance but as prayer for dismantling systemic exploitation.
+
+The second colon picks up the *Leitwort* דרש for its climactic appearance: וָרָע תִּדְרוֹשׁ־רִשְׁעוֹ בַל־תִּמְצָא, "as for the evil one, seek his wickedness until You find it no more." Here is the crucial reversal: the wicked said לֹא תִדְרֹשׁ (v. 13, "You do not seek"), but the psalmist petitions תִּדְרוֹשׁ ("seek!"). The phrase תִּדְרוֹשׁ רִשְׁעוֹ functions like a legal term: "prosecute his evil," "investigate his wickedness."
+
+The final phrase בַל־תִּמְצָא is ambiguous: "until You find [it] no more" or "so that You will not find [any]." The traditional reading takes it as result: seek thoroughly until none remains. Radak explains: אִם תִּשְׁבֹּר אֶת זְרוֹעוֹ לֹא תִמְצָא רָשָׁע בָּאָרֶץ, "If You break his arm, You will not find wickedness in the land"—breaking the wicked's power and investigating his crimes together eliminate evil.
+
+---
+
+**Verse 16**
+
+יְהֹוָה מֶלֶךְ עוֹלָם וָעֶד; אָבְדוּ גוֹיִם מֵאַרְצוֹ.
+
+"The LORD is king forever and ever; the nations have perished from His land."
+
+This verse erupts as sudden hymnic declaration, shifting from petition to proclamation. The statement יְהֹוָה מֶלֶךְ ("the LORD is king") appears throughout Psalms as fundamental credal affirmation (93:1, 96:10, 97:1, 99:1, 146:10). These "enthronement psalms" declare God's cosmic sovereignty, often in contexts of creation and judgment. Here the formula appears abruptly in the midst of individual lament, creating jarring generic rupture.
+
+The phrase עוֹלָם וָעֶד ("forever and ever") emphasizes eternal, unshakeable kingship. Where the wicked boasted לְדֹר וָדֹר (v. 6, "through all generations"), claiming perpetual stability, the psalmist now asserts God's eternal kingship. The temporal adverbs create contrast: the wicked's false confidence in his own permanence versus the true permanence of divine rule.
+
+The second colon אָבְדוּ גוֹיִם מֵאַרְצוֹ employs the perfect tense אָבְדוּ ("have perished") in what appears to be a "prophetic perfect"—grammatically past but referring to future events viewed as so certain they're described as accomplished. The verb אבד ("to perish") is decisive—not "will be defeated" but "will cease to exist."
+
+Why does "nations" (גוֹיִם) suddenly appear when earlier verses described an individual wicked person (רָשָׁע)? Several possibilities: (1) the wicked individual represents foreign oppressors; (2) גוֹיִם is used idiomatically for "the wicked collectively"; (3) the verse quotes from a separate kingship hymn. Rashi reads eschatologically: "after the nations perish from His land"—the messianic future when foreign powers are removed from Israel.
+
+The liturgical positioning of this verse is significant. In Sefardic and Mizrachi morning prayers, it appears in *Pesukei Dezimra* as part of *Yehi Khvod*, following immediately after the threefold temporal declaration: יְהֹוָה מֶלֶךְ, יְהֹוָה מָלָךְ, יְהֹוָה יִמְלֹךְ לְעֹלָם וָעֶד, "The LORD is King, the LORD was King, the LORD will be King forever and ever." Our verse follows as climax, and then: יְהֹוָה הֵפִיר עֲצַת־גּוֹיִם (Psalm 33:10), "The LORD foils the counsel of nations." This liturgical sequence transforms the psalm's declaration from desperate hope into accomplished reality—divine sovereignty proved precisely by elimination of opposing powers.
+
+---
+
+**Verse 17**
+
+תַּאֲוַת עֲנָוִים שָׁמַעְתָּ יְהֹוָה; תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶךָ.
+
+"The desire of the lowly You have heard, O LORD; You will prepare their heart, You will incline Your ear."
+
+This verse shifts to accomplished confidence, using the perfect tense שָׁמַעְתָּ ("You have heard") rather than petition. The opening phrase תַּאֲוַת עֲנָוִים creates verbal link to verse 3, where the wicked boasted עַל־תַּאֲוַת נַפְשׁוֹ, "about his soul's desire." Now the psalmist asserts that God hears תַּאֲוַת עֲנָוִים—not the wicked's arrogant desires but the desires of the lowly. The same noun (תַּאֲוָה, "desire/longing") directed differently: the wicked's תַּאֲוָה is acquisitive; the humble's תַּאֲוָה is for justice.
+
+The Talmud (Berakhot 31a) derives from this verse the fundamental principle that prayer requires kavvanah (focused intention): תָּנוּ רַבָּנַן: הַמִּתְפַּלֵּל צָרִיךְ שֶׁיְּכַוֵּין אֶת לִבּוֹ לַשָּׁמַיִם. אַבָּא שָׁאוּל אוֹמֵר: סִימָן לַדָּבָר—תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶךָ, "The Rabbis taught: One who prays must direct his heart toward heaven. Abba Shaul says: The scriptural sign for this is: 'You prepare their heart, You incline Your ear.'" The rabbinic reading understands "prepare their heart" as describing God's role in enabling prayer itself—effective prayer requires divine preparation of the human heart.
+
+The phrase תָּכִין לִבָּם ("You will prepare their heart") uses the hiphil of כון, "to establish, make firm." The heart (לֵב) in biblical anthropology is the seat of thought and will—it needs divine establishing for proper prayer. The phrase תַּקְשִׁיב אָזְנֶךָ ("You will incline Your ear") uses the hiphil of קשב, meaning to prick up the ears, to pay close attention. The anthropomorphism of God inclining His ear creates intimacy—God bends down to listen.
+
+This verse appears prominently in High Holiday liturgy. In both Ashkenazi and Edot HaMizrach traditions, during the cantor's repetition of the Amidah, the prayer leader invokes: לְחַלּוֹתְךָ שְׁלָחוּנִי מַקְהֲלוֹת הֲמוֹנֶךָ. תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶךָ, "Your teeming congregations have sent me to entreat You. Prepare their heart; incline Your ear." The liturgical shift from "their heart" to "Your ear" creates chiasm—the community's hearts need firming, God's ear needs inclining—suggesting prayer requires divine action at both ends.
+
+---
+
+**Verse 18**
+
+לִשְׁפֹּט יָתוֹם וָדָךְ; בַּל־יוֹסִיף עוֹד לַעֲרֹץ אֱנוֹשׁ מִן־הָאָרֶץ.
+
+"To champion the orphan and the downtrodden; that men who are of the earth tyrannize no more."
+
+This final verse articulates the purpose (לִשְׁפֹּט) of God's attentive hearing: to execute justice for the most vulnerable. The infinitive construct לִשְׁפֹּט ("to judge, champion") takes יָתוֹם וָדָךְ ("orphan and downtrodden") as its object. The verb שָׁפַט in contexts involving the powerless means not neutral adjudication but active advocacy—"to vindicate, to champion." Deuteronomy 10:18 uses identical terminology: עֹשֶׂה מִשְׁפַּט יָתוֹם וְאַלְמָנָה, "He executes justice for the orphan and widow." The orphan and the דָּךְ ("crushed, downtrodden") together represent the absolute bottom of social hierarchy—those with no advocate.
+
+The second colon describes what will cease: בַּל־יוֹסִיף עוֹד לַעֲרֹץ אֱנוֹשׁ מִן־הָאָרֶץ. The phrase בַּל־יוֹסִיף עוֹד creates double negative emphatic: "will not continue/add again"—complete cessation. What ceases is לַעֲרֹץ, "to terrify, tyrannize." This verb ערץ appears only five times in Scripture (Deuteronomy 1:29, 7:21, 20:3, 31:6; Isaiah 8:12, 47:12; Job 13:25), always in contexts of fear before powerful threat. The subject is אֱנוֹשׁ מִן־הָאָרֶץ, "man from/of the earth."
+
+This phrase constitutes the psalm's final theological statement. The noun אֱנוֹשׁ (often translated "mortal") emphasizes human weakness and mortality in contrast to divine eternality. When paired with מִן־הָאָרֶץ ("from the earth"), it stresses human earthiness, limitation, mortality. This stands in deliberate contrast to verse 16's declaration that יְהֹוָה מֶלֶךְ עוֹלָם וָעֶד ("the LORD is King forever and ever"). God is eternal king; the oppressor is merely "man from the earth"—dust-born and dust-bound.
+
+Ibn Ezra captures this: אֱנוֹשׁ מִן־הָאָרֶץ emphasizes that humans are earthborn and will return to earth—they have no inherent right to terrorize others because they themselves are fragile and temporary. Radak adds that the phrase implies the tyrant's power comes *from the earth*—from earthly resources, weapons, alliances—not from heaven. This makes the tyranny doubly outrageous: one mortal terrorizing another, when both are dust.
+
+The psalm ends not with resolution (the wicked has not yet been destroyed) but with vision: divine justice will prevail, and אֱנוֹשׁ מִן־הָאָרֶץ, earthbound mortals, will tyrannize no more. The broken acrostic remains broken, its missing stanzas suggesting the alphabet of justice is incomplete in this age. But the psalm asserts that God's eternal kingship guarantees its eventual completion. This is theodicy through doxology—suffering acknowledged, wickedness anatomized, divine sovereignty proclaimed. Even distant kings, it turns out, hear the cry of the afflicted.

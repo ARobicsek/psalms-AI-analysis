@@ -8,8 +8,17 @@ python scripts/run_enhanced_pipeline.py 23
 # just the print ready compiler
 python scripts/run_formatter.py 145
 
+#run with opus 4.5 as the master editor
+python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
+
 # just the word output
 python scripts/run_enhanced_pipeline.py 8 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college
+
+#just all 3 word docs
+python scripts/run_enhanced_pipeline.py 10 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --output-dir output/psalm_10
+
+# GPT-5 (older model, still with high reasoning)
+python scripts/run_enhanced_pipeline.py <N> --master-editor-model gpt-5
 
 #special commands
 --skip_default_commentaries (this will ensure that only traditional commentaries requested by the Micro agent are requested)

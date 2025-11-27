@@ -5,7 +5,7 @@ Complete psalm commentary generation pipeline with all enhancements:
 1. MacroAnalyst - Structural analysis
 2. MicroAnalyst v2 - Discovery-driven research (with enhanced figurative search)
 3. SynthesisWriter - Introduction + verse commentary (with enhanced prompts)
-4. MasterEditor (GPT-5) - Editorial review and revision to "National Book Award" level
+4. MasterEditor (GPT-5.1) - Editorial review and revision to "National Book Award" level
 5. Print-Ready Formatting - Final output with Hebrew/English text
 
 Usage:
@@ -131,7 +131,7 @@ def run_enhanced_pipeline(
         skip_combined_doc: Skip combined .docx generation (main + college in one document)
         smoke_test: Run in smoke test mode (generates dummy data, no API calls)
         skip_default_commentaries: Use selective commentary mode (only request for specific verses)
-        master_editor_model: Model to use for master editor (default: "gpt-5", or "claude-opus-4-5")
+        master_editor_model: Model to use for master editor (default: "gpt-5.1", or "claude-opus-4-5")
     """
     logger = get_logger("enhanced_pipeline")
     logger.info(f"=" * 80)
@@ -528,11 +528,11 @@ def run_enhanced_pipeline(
         logger.info(f"Analysis complete. Statistics with completion date saved to {summary_json_file}")
 
     elif not skip_master_edit or not edited_intro_file.exists():
-        logger.info("\n[STEP 4] Running MasterEditor (GPT-5) for final editorial review...")
+        logger.info(f"\n[STEP 4] Running MasterEditor ({master_editor_model}) for final editorial review...")
         print(f"\n{'='*80}")
-        print(f"STEP 4: Master Editorial Review (GPT-5)")
+        print(f"STEP 4: Master Editorial Review ({master_editor_model})")
         print(f"{'='*80}\n")
-        print("This step uses GPT-5 to elevate the commentary from 'good' to 'excellent'")
+        print(f"This step uses {master_editor_model} with high reasoning effort to elevate the commentary from 'good' to 'excellent'")
         print("Expected duration: 2-5 minutes\n")
 
         step_start = time.time()
@@ -699,11 +699,11 @@ def run_enhanced_pipeline(
         )
 
         if college_needs_regeneration:
-            logger.info("\n[STEP 4b] Running MasterEditor for COLLEGE EDITION...")
+            logger.info(f"\n[STEP 4b] Running MasterEditor ({master_editor_model}) for COLLEGE EDITION...")
             print(f"\n{'='*80}")
-            print(f"STEP 4b: College Commentary Generation")
+            print(f"STEP 4b: College Commentary Generation ({master_editor_model})")
             print(f"{'='*80}\n")
-            print("This step generates a separate commentary version for college students")
+            print(f"This step uses {master_editor_model} with high reasoning to generate a separate commentary version for college students")
             print("Expected duration: 2-5 minutes\n")
 
             step_start = time.time()
@@ -1051,9 +1051,9 @@ Examples:
                        help='Run in smoke test mode (generates dummy data, no API calls)')
     parser.add_argument('--skip-default-commentaries', action='store_true',
                        help='Use selective commentary mode (only request commentaries for specific verses instead of all verses)')
-    parser.add_argument('--master-editor-model', type=str, default='gpt-5',
-                       choices=['gpt-5', 'claude-opus-4-5'],
-                       help='Model to use for master editor (default: gpt-5). Use claude-opus-4-5 for maximum thinking mode.')
+    parser.add_argument('--master-editor-model', type=str, default='gpt-5.1',
+                       choices=['gpt-5', 'gpt-5.1', 'claude-opus-4-5'],
+                       help='Model to use for master editor (default: gpt-5.1 with high reasoning). Use claude-opus-4-5 for maximum thinking mode.')
 
     args = parser.parse_args()
 
@@ -1074,8 +1074,12 @@ Examples:
         print(f"Database: {args.db_path}")
         print(f"Rate Limit Delay: {args.delay} seconds")
         print(f"Master Editor Model: {args.master_editor_model}")
-        if args.master_editor_model == 'claude-opus-4-5':
-            print(f"  → Using Claude Opus 4.5 with extended thinking (40K budget + 24K output)")
+        if args.master_editor_model == 'gpt-5.1':
+            print(f"  → Using GPT-5.1 with high reasoning effort (default)")
+        elif args.master_editor_model == 'claude-opus-4-5':
+            print(f"  → Using Claude Opus 4.5 with extended thinking (64K budget)")
+        elif args.master_editor_model == 'gpt-5':
+            print(f"  → Using GPT-5 with high reasoning effort")
         print()
 
         result = run_enhanced_pipeline(

@@ -1,8 +1,146 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-24 (Session 140 - COMPLETE ✓)
+**Last Updated**: 2025-11-26 (Session 143 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ V6 System Ready - Document Formatting & Prompt Improvements
+**Status**: ✓ GPT-5.1 Thinking Mode Now Available - Master Editor Upgraded
+
+## Session 143 Summary (COMPLETE ✓)
+
+### GPT-5.1 Thinking Mode Upgrade
+
+**Objective**: Investigate and implement GPT-5.1 thinking mode for master editor (previously blocked by TPM limits)
+**Result**: ✓ COMPLETE - GPT-5.1 with reasoning_effort="high" now operational, API token field names fixed
+
+**Background**:
+- Session 126 attempted GPT-5.1 migration but hit 30,000 TPM limit
+- User's Tier 1 account now has 500,000 TPM (increased September 2025)
+- Request size: ~116K tokens (research bundle + prompts)
+- Now fits comfortably within new limit
+
+**Changes Made**:
+
+1. **Model Upgrade** (IMPLEMENTED ✅):
+   - Updated default model: `"gpt-5"` → `"gpt-5.1"`
+   - Model explicitly uses `reasoning_effort="high"` (CRITICAL - GPT-5.1 defaults to "none"!)
+   - Comment updated to reflect GPT-5.1's default behavior difference
+
+2. **API Field Names Fixed** (BUG FIX ✅):
+   - Problem: Code used `usage.input_tokens` / `usage.output_tokens` (old field names)
+   - GPT-5.1 API uses: `usage.prompt_tokens` / `usage.completion_tokens` / `usage.reasoning_tokens`
+   - Fix: Added `getattr()` calls to safely extract tokens with fallback to 0
+   - Updated both main editor and college editor methods
+   - Added separate logging for reasoning tokens when present
+
+3. **Successful Test** (VERIFIED ✅):
+   - Tested on Psalm 10 (non-college, skip earlier steps)
+   - API call succeeded: HTTP 200 OK
+   - Usage: 151,495 input + 11,519 output tokens
+   - Cost: $0.30 (within budget)
+   - Output quality: Excellent editorial review with detailed assessment
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Model upgrade + API field fix (3 changes)
+- `scripts/run_enhanced_pipeline.py` - Updated default to gpt-5.1, display messages (5 changes)
+
+**Impact**:
+- ✅ GPT-5.1 thinking mode now available for all future psalm runs
+- ✅ 500K TPM limit easily handles ~116K token requests
+- ✅ High reasoning effort produces detailed, substantive editorial reviews
+- ✅ Proper cost tracking for all token types
+- ✅ Future-proofed with safe field extraction (works with API changes)
+
+**Key Technical Notes**:
+- GPT-5.1 defaults to `reasoning_effort="none"` (no reasoning unless explicitly set!)
+- Explicit `reasoning_effort="high"` is CRITICAL for quality output
+- Reasoning tokens may not be reported separately (embedded in completion)
+- Field names differ from older GPT models (prompt/completion vs input/output)
+
+**Next Steps**:
+- GPT-5.1 ready for production use on all future psalms
+- Can optionally A/B test against Claude Opus 4.5 using `--master-editor-model` flag
+- Monitor reasoning token usage if/when reported separately
+
+---
+
+## Session 142 Summary (COMPLETE ✓)
+
+### Combined Document Generator Fixes
+
+**Objective**: Fix markdown header rendering and duplicate liturgical section headers in combined document generator
+**Result**: ✓ COMPLETE - Headers now render correctly, duplicate liturgical headers removed
+
+**Issues Fixed**:
+
+1. **Markdown Headers Not Rendered** (RESOLVED ✅):
+   - Problem: Headers like `### The Problem This Psalm Won't Stop Asking` showing as literal hash marks instead of being rendered as headers
+   - Root cause: Intro sections used `_add_paragraph_with_markdown()` for all lines, which only handles inline markdown (bold/italic), not structural markdown (headers)
+   - Fix: Added header detection to both main and college intro sections (lines 483-492, 511-520)
+   - Now checks for `####` and `###` prefixes before calling `_add_paragraph_with_markdown()`
+
+2. **Duplicate Liturgical Headers** (RESOLVED ✅):
+   - Problem: "Modern Jewish Liturgical Use" appearing twice as headers in the document
+   - Root cause: Source markdown files contained duplicate headers (lines 19-20 in main intro, lines 57-59 in college intro), and regex only removed first occurrence
+   - Fix: Updated regex to use `re.MULTILINE` flag + added second pass to catch all occurrences (lines 522-527)
+   - First regex: `r'^## Modern Jewish Liturgical Use\s*\n'` with `flags=re.MULTILINE` (matches at start of any line)
+   - Second regex: `r'## Modern Jewish Liturgical Use\s*'` (catches any remaining instances)
+
+**Files Modified**:
+- `src/utils/combined_document_generator.py` - Added header detection + fixed duplicate header removal (16 insertions, 4 deletions)
+
+**Testing**:
+- ✅ Successfully regenerated Psalm 10 combined document
+- ✅ Markdown headers (###, ####) now render as proper Word document headers
+- ✅ Single "Modern Jewish Liturgical Use" header instead of duplicates
+- ✅ No regression in other document formatting
+
+**Impact**:
+- ✅ College intro section headers now properly formatted as Header 3 in .docx
+- ✅ Main intro section headers also properly formatted
+- ✅ Consistent with liturgical section's existing header handling
+- ✅ Improved document readability and professional formatting
+
+---
+
+## Session 141 Summary (COMPLETE ✓)
+
+### Claude Opus 4.5 Master Editor & Cost Tracking
+
+**Objective**: Add Claude Opus 4.5 as master editor option with maximum thinking mode, implement comprehensive cost tracking
+**Result**: ✓ COMPLETE - Claude Opus 4.5 with 64K thinking budget now available, full cost tracking implemented
+
+**Features Added**:
+
+1. **Cost Tracking Utility** (NEW):
+   - Created `src/utils/cost_tracker.py` (294 lines)
+   - Tracks all model usage: tokens, calls, costs
+   - Comprehensive pricing database for all models (Claude, GPT, Gemini)
+   - Displays detailed breakdown at end of pipeline run
+
+2. **Claude Opus 4.5 Master Editor** (NEW):
+   - Model: `claude-opus-4-5` (released Nov 24, 2025)
+   - Thinking budget: 64K tokens (maximum thinking mode)
+   - Pricing: $5/M input, $25/M output, $25/M thinking
+   - Supports both main and college commentary
+
+3. **Command-line Selection**:
+   - New flag: `--master-editor-model` (default: gpt-5)
+   - Options: `gpt-5` or `claude-opus-4-5`
+   - Allows A/B testing of different master editors
+
+**Files Created**:
+- `src/utils/cost_tracker.py` - Cost tracking utility
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Added Claude Opus 4.5 methods with 64K thinking
+- `scripts/run_enhanced_pipeline.py` - Integrated cost tracking + model selection
+
+**Impact**:
+- ✅ Full visibility into pipeline costs across all models
+- ✅ Claude Opus 4.5 available for highest-quality reasoning
+- ✅ Easy A/B testing between GPT-5 and Claude Opus 4.5
+- ✅ Maximum thinking mode (64K tokens) for deepest analysis
+
+---
 
 ## Session 140 Summary (COMPLETE ✓)
 

@@ -1,59 +1,101 @@
-If Psalm 9 is the victory montage, Psalm 10 is the camera that stays behind in the alley. It opens with a question you can feel in your bones: “לָמָה יְהוָה תַּעֲמֹד בְּרָחוֹק; תַּעְלִים לְעִתּוֹת בַּצָּרָה?”—“Why, LORD, do You stand far away; why do You hide in times of trouble?” (10:1). The poet doesn’t argue the problem of evil as a philosopher; he narrates it as a person who lives where the wicked hunt the weak.
+### The Problem This Psalm Won't Stop Asking
 
-A quick map of what we’re reading:
-- Psalms 9 and 10 are a pair. Many ancient readers saw them as one composition. Together they form a broken acrostic (an acrostic = a poem organized by the alphabet). The pattern starts in Psalm 9 and resumes at ל (lamed) in Psalm 10, with letters missing and out of order. The “broken alphabet” fits the poem’s world: order feels fractured.
-- Psalm 10 has three moves: (1) Complaint (v. 1) and a long, vivid profile of the wicked (vv. 2–11); (2) a turn to prayer (vv. 12–15); (3) a bold declaration of God’s kingship and attentive care (vv. 16–18). 
+Here's a question that has haunted believers for millennia: if God is good and powerful, why does evil flourish? Why do oppressors get rich while their victims suffer? Psalm 10 doesn't offer a tidy philosophical answer. Instead, it does something more interesting—it stages a confrontation between two competing theologies, letting us overhear the wicked man's internal monologue and then dramatically refuting it.
 
-Why this psalm is so gripping:
-1) The wicked’s inner monologues. Three times we’re let into what the wicked “says in his heart”—“אָמַר בְּלִבּוֹ” (vv. 6, 11, 13). That formula pulls us behind the mask to hear the ideology that powers the abuse. It unfolds like a dark staircase:
-   - v. 6: “בַּל־אֶמּוֹט” (“I won’t be shaken”)—raw invulnerability fantasy.
-   - v. 11: “שָׁכַח אֵל; הִסְתִּיר פָּנָיו; בַּל־רָאָה לָנֶצַח” (“God has forgotten; He hides His face; He never sees”)—practical atheism.
-   - v. 13: “לֹא תִדְרֹשׁ” (“You won’t call to account”)—if God won’t “seek” the crime, there’s no accountability.
+This psalm is essentially a courtroom drama set inside someone's head. We get three separate quotations of what the wicked man "says in his heart" (אָמַר בְּלִבּוֹ)—a Hebrew expression meaning something like "thinks to himself" (verses 6, 11, and 13). Through these interior monologues, the psalmist exposes the theological corruption that makes violence possible. The wicked doesn't believe God is watching. And here's the devastating irony: the psalmist opens the poem agreeing with him. "Why, O LORD, do you stand aloof?" (לָמָ֣ה יְ֭הֹוָה תַּעֲמֹ֣ד בְּרָח֑וֹק, verse 1). Both the suffering believer and the cruel oppressor see the same apparent reality—God seems absent. They just draw radically different conclusions from it.
 
-That last verb, דָּרַשׁ (darash), is the psalm’s hinge. Darash means “seek,” “inquire,” “call to account.” The wicked counts on “לֹא תִדְרֹשׁ.” The psalmist counters with a prayer that flips the word back: “תִּדְרוֹשׁ רִשְׁעוֹ”—“seek out his wickedness” (v. 15). Language becomes a battleground.
+### A Broken Alphabet for a Broken World
 
-2) Predator imagery you can picture. The wicked is not just “bad”; he’s a hunter. “יֵשֵׁב בְּמַאְרַב חֲצֵרִים; בַּמִּסְתָּרִים יַהֲרֹג נָקִי; עֵינָיו לְחֵלְכָה יִצְפֹּנוּ” (v. 8). He sits in ambush in the village squares, kills from hiding, his eyes stalking the helpless. Then the image layers: “כְּאַרְיֵה בְסֻכּוֹ”—“like a lion in his thicket,” and “בְּמָשְׁכוֹ בְּרִשְׁתּוֹ”—“dragging his net shut” (v. 9). Mixing metaphors (lion and net) here isn’t sloppy; it multiplies threat: brute force and calculated trapping.
+Before diving in, you should know something strange about this psalm's structure. Ancient Jewish tradition (preserved in the Septuagint, the Greek translation made around 250 BCE) combined Psalms 9 and 10 into a single composition—and for good reason. Together, they form what scholars call an acrostic poem, where each section begins with successive letters of the Hebrew alphabet. But here's the thing: the acrostic is broken. Letters are missing. Stanzas skip. The alphabet stutters.
 
-3) A theological pivot made of two Hebrew words: “רָאִתָּה… תַּבִּיט” (v. 14). The poet shouts the opposite of v. 11. “You DO see; You DO behold.” Quick grammar refresher: Hebrew “perfect” forms (like רָאִתָּה) typically present completed action. Here that form makes a point: God’s seeing isn’t an optimistic wish; it’s treated as reality. And that changes everything—if God sees, justice isn’t a fantasy.
+This isn't ancient sloppiness. The structural fracture *enacts* what the psalm describes. In a world where the wicked prosper and God seems distant, even the orderly alphabet of divine justice appears incomplete. The form itself becomes a kind of theological argument.
 
-How the poem argues (without sounding like an argument):
-- Spatially: the first line paints God “standing at a distance” (בְּרָחוֹק), and God’s “judgments” as “high” and “far” (מָרוֹם… מִנֶּגְדּוֹ, v. 5). Meanwhile the wicked “sits” (יֵשֵׁב) right in our space (v. 8). The geography of the poem doubles as its theology and psychology: when God feels far, predators feel near.
-- Psychologically: the wicked’s theology (“God doesn’t see, doesn’t act”) matches the psalmist’s complaint—but with a crucial twist. The psalmist protests; the wicked exploits. That irony is the psalm’s sharpest point.
-- Liturgically: mid-psalm comes a surprising line—“יְהוָה מֶלֶךְ עוֹלָם וָעֶד; אָבְדוּ גוֹיִם מֵאַרְצוֹ” (“The LORD is king forever and ever; the nations have perished from His land,” v. 16). That isn’t analysis; it’s proclamation. A “performative” line (just a fancy way to say speech that does something): by declaring kingship, the community enacts loyalty and hope when evidence is thin. Jewish prayer picks up this line and puts it in the daily “Yehi Khvod” praises, right after “The LORD is King, was King, and will be King.”
+### The Anatomy of Evil (Verses 2-11)
 
-Let’s also name the Torah heartbeat here: “לִשְׁפֹּט יָתוֹם וָדָךְ” (“to judge/vindicate the orphan and the crushed,” v. 18). In Torah, God “does justice for the orphan and the widow” (עֹשֶׂה מִשְׁפַּט יָתוֹם וְאַלְמָנָה, Deut 10:18); oppressing them is a red line (Exod 22:21–23). When Psalm 10 ends with “that a man of the earth (‘אֱנוֹשׁ מִן־הָאָרֶץ’) no longer terrify,” it draws a contrast: mortal “earthlings” don’t get the last word; the eternal King does.
+The heart of this psalm is an unprecedented psychological portrait of the oppressor. The poet doesn't just describe what the wicked *does*—he exposes what the wicked *thinks*. Watch the progression through those three interior monologues:
 
-Key cross-echoes help students see the larger choir:
-- Hidden face: compare “אַתָּה תַסְתִּיר פָּנֶיךָ” in our psalm (10:11) with Ps 13:2 “עַד־אָנָה… תַסְתִּיר אֶת־פָּנֶיךָ מִמֶּנִּי” (“How long… will You hide Your face from me?”) and Ps 44:25 “לָמָּה־פָנֶיךָ תַסְתִּיר” (“Why do You hide Your face?”). Same cry, different contexts.
-- “He won’t see” bravado: Ps 94:7 quotes the arrogant line almost verbatim: “וַיֹּאמְרוּ לֹא יִרְאֶה־יָּהּ; וְלֹא יָבִין אֱלֹהֵי יַעֲקֹב” (“They say, ‘Yah won’t see; the God of Jacob won’t understand’”).
-- Nets and self-made traps: Ps 9:16 “בְּרֶשֶׁת־זוּ טָמָנוּ נִלְכְּדָה רַגְלָם” (“In the net they hid, their own foot is caught”) sounds like Psalm 10’s hunter—but turned back on himself.
+**First monologue (verse 6):** "I shall not be shaken, through all time never be in trouble" (בַּל־אֶמּ֑וֹט לְדֹ֥ר וָ֝דֹ֗ר). This is raw self-confidence—the wicked believes his success is permanent.
 
-Why it matters. Psalm 10 teaches a way to pray when God feels far and people get hurt. It neither sugarcoats evil nor surrenders to it. It interrogates the wicked’s “theology,” asks for specific dismantling of predatory power (“שְׁבֹר זְרוֹעַ רָשָׁע,” “Break the arm of the wicked,” v. 15), and—this is crucial—keeps saying “You do see.” The psalm’s last word is not explanation but trust-in-action: God will “prepare their heart” and “incline His ear” (v. 17). That pair is beautiful: God tunes both ends of the prayer line—the human heart that prays and the divine ear that listens.
+**Second monologue (verse 11):** "God has forgotten; He hides His face; He never looks" (שָׁ֣כַֽח אֵ֑ל הִסְתִּ֥יר פָּ֝נָ֗יו בַּל־רָאָ֥ה לָנֶֽצַח). Now his confidence has become theological—God isn't paying attention.
 
-One last note on the “alphabet thing.” Don’t get hung up on perfect acrostics. What matters is the feel: the psalm lives in a world where even the alphabet—symbol of order—skips a beat. And still, the poem ends with a steady beat: “יְהוָה מֶלֶךְ עוֹלָם וָעֶד.”
+**Third monologue (verse 13):** "You do not call to account" (לֹ֣א תִדְרֹֽשׁ). The full denial: God won't investigate or punish.
 
-  
+This is what scholars call "practical atheism"—not denying God exists, but living as if God doesn't matter. Notice how this echoes Psalm 14:1, "The fool says in his heart, 'There is no God'" (אָמַר נָבָל בְּלִבּוֹ אֵין אֱלֹהִים). Same formula, same interior corruption.
+
+Between these monologues, the psalmist paints the wicked as a predator. He lurks "in ambush" (בְּמַאְרַב), hides "in secret places" (בַּמִּסְתָּרִים), and waits "like a lion in his lair" (כְּאַרְיֵ֬ה בְסֻכֹּ֗ה). Then the metaphor shifts—he's also a hunter pulling shut his net (בְּמׇשְׁכ֥וֹ בְרִשְׁתּֽוֹ). The mixing of predator images (lion AND net-hunter) might seem sloppy, but it's deliberate: the wicked is dangerous in multiple ways simultaneously. He's both raw power and calculated trap.
+
+### The Turning Point: "You DO See!"
+
+Everything shifts in verse 14. After eleven verses of complaint and description, the psalmist suddenly declares: רָאִ֡תָה כִּי־אַתָּ֤ה עָ֘מָ֤ל וָכַ֨עַס תַּבִּיט֮—"You DO look! You behold mischief and vexation!"
+
+This emphatic "You have seen" (רָאִתָה) directly contradicts the wicked's claim that God "never looks" (בַּל־רָאָ֥ה). The Hebrew verb form here (what grammarians call the "perfect tense," indicating completed action) is fronted—put first in the sentence—for maximum rhetorical punch. It's as if the psalmist interrupts himself: "Wait—You *have* seen this. You're seeing it right now."
+
+Here's the theological genius: the very act of praying contradicts the wicked's theology. If God doesn't listen, why pray? The psalmist's petition *demonstrates* that God's absence is only apparent. Prayer itself is an act of faith against the evidence.
+
+### Wordplay as Theology
+
+One of the most elegant features of this psalm is how it plays with the Hebrew root דרש (d-r-sh), which means "to seek, inquire, or call to account." Watch how it threads through the poem:
+
+- Verse 4: The wicked thinks, "He does not call to account" (בַּל־יִדְרֹ֑שׁ)
+- Verse 13: "You do not call to account" (לֹ֣א תִדְרֹֽשׁ)  
+- Verse 15: The psalmist prays, "Seek his wickedness" (תִּֽדְרוֹשׁ־רִשְׁע֥וֹ)
+
+The wicked's confident denial becomes the psalmist's petition. What the oppressor says God won't do, the psalmist asks God to do. The same word becomes the weapon of reversal.
+
+### An Unexpected Declaration
+
+Then comes verse 16, and the genre suddenly shifts. After all that complaint and petition, the psalmist declares: "The LORD is king forever and ever; the nations have perished from His land" (יְהֹוָ֣ה מֶ֭לֶךְ עוֹלָ֣ם וָעֶ֑ד אָבְד֥וּ ג֝וֹיִ֗ם מֵאַרְצֽוֹ). This isn't argument; it's proclamation. It's what linguists call a "performative utterance"—speech that doesn't just describe reality but creates it. By declaring God's kingship *despite* the evidence, the psalmist resists the wicked's worldview.
+
+The Hebrew verb "have perished" (אָבְדוּ) is grammatically past tense—as if it's already happened. This is "prophetic perfect"—using completed-action grammar for future events you're absolutely certain about. The nations *will* perish, but the psalmist's certainty makes him speak of it as done.
+
+### What This Psalm Teaches Us
+
+Psalm 10 doesn't solve the problem of evil. It doesn't explain why God sometimes seems absent while wickedness flourishes. What it does is more valuable: it gives us language for the crisis. It validates the question "Why?" while modeling how faith speaks back. The psalmist doesn't pretend everything is fine. He complains vigorously. But he also refuses to let the wicked's theology be the final word.
+
+The movement from "Why do You stand aloof?" (verse 1) to "The LORD is king forever" (verse 16) isn't a logical argument. It's a journey of faith—from honest protest through unflinching description to defiant proclamation. Both the first and last words are true: God does sometimes seem hidden, AND God is eternal king. Living with that tension, refusing to collapse it in either direction, is what this psalm teaches.
+
 ## Modern Jewish Liturgical Use
 
+## Modern Jewish Liturgical Use
+
+Psalm 10 isn't recited as a complete psalm in standard Jewish liturgy, but several of its verses have found significant homes in prayer, precisely at moments where the psalm's themes—divine hiddenness, God's attentiveness to the humble, the hope for justice—become liturgically potent.
+
 #### Key verses
-- יְהוָה מֶלֶךְ עוֹלָם וָעֶד; אָבְדוּ גוֹיִם מֵאַרְצוֹ (Ps 10:16) — “The LORD is King forever and ever; the nations have perished from His land.”
-  - Used in Pesukei DeZimra (Sefardic/Edot HaMizrach) in Yehi Khvod, immediately after: “יְהוָה מֶלֶךְ, יְהוָה מָלַךְ, יְהוָה יִמְלֹךְ לְעוֹלָם וָעֶד.” The service strings them together to proclaim God’s kingship across past, present, and future.
 
-- תַּאֲוַת עֲנָוִים שָׁמַעְתָּ יְהוָה; תָּכִין לִבָּם; תַּקְשִׁיב אָזְנֶךָ (Ps 10:17) — “The desire of the lowly You have heard, O LORD; You will make their heart firm; You will incline Your ear.”
-  - High Holidays (Ashkenazi and Edot HaMizrach): the prayer leader cites this when admitting unworthiness and asking God to ready the congregation’s hearts: “תָּכִין לִבָּם, תַּקְשִׁיב אָזְנֶךָ.”
-  - Simchat Torah (Edot HaMizrach, Hakafot): appears in a verse sequence during the first circuit, linking joy with humble dependence: “תַּאֲוַת עֲנָוִים שָׁמַעְתָּ יְהוָה, תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶךָ.”
+**Verse 16: יְהֹוָ֣ה מֶ֭לֶךְ עוֹלָ֣ם וָעֶ֑ד אָבְד֥וּ ג֝וֹיִ֗ם מֵאַרְצֽוֹ ("The LORD is king forever and ever; the nations have perished from His land")**
 
-- קוּמָה יְהוָה… אַל־תִּשְׁכַּח עֲנָוִים (Ps 10:12) — “Arise, LORD… do not forget the lowly.”
-  - Echoed conceptually in selichot; the theme “Don’t forget us” recurs throughout penitential prayers.
+This kingship declaration holds a stable position in the *Pesukei Dezimra* (Verses of Praise) in Sefardic and Mizrachi morning services. It appears within *Yehi Khvod*, a collection of verses celebrating divine sovereignty. The liturgy places it immediately after a threefold declaration of God's reign across all time:
+
+יְהֹוָה מֶֽלֶךְ, יְהֹוָה מָלָךְ, יְהֹוָה יִמְלֹךְ לְעֹלָם וָעֶד: יְהֹוָה מֶֽלֶךְ עוֹלָם וָעֶד אָבְדוּ גוֹיִם מֵאַרְצוֹ
+
+"The LORD is King, the LORD was King, the LORD will be King forever and ever; The LORD is King forever and ever; nations have perished from His land."
+
+Notice what the liturgy does: it transforms a verse born from theodicy—from wrestling with why evil prospers—into a triumphant affirmation. Every morning, worshippers declare that earthly powers ultimately collapse before God's eternal reign.
+
+**Verse 17: תָּכִ֥ין לִ֝בָּ֗ם תַּקְשִׁ֥יב אׇזְנֶֽךָ ("You will prepare their heart; You will incline Your ear")**
+
+This phrase appears during the High Holiday liturgy, specifically in the chazan's (prayer leader's) repetition of the Amidah. After declaring his unworthiness to represent the congregation, the chazan pleads:
+
+לְחַלּוֹתְךָ שְׁלָחֽוּנִי מַקְהֲלוֹת הֲמוֹנֶֽךָ. תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶֽךָ
+
+"Your teeming congregations have sent me to entreat You. Prepare their heart; incline Your ear."
+
+The shift is remarkable: the prayer leader isn't confident about his own merit, so he asks God to prepare the *worshippers'* hearts. The verse becomes a meditation on how prayer itself requires divine assistance—we can't even pray properly without God's help.
 
 #### Phrases
-- לָמָה יְהוָה תַּעֲמֹד בְּרָחוֹק (Ps 10:1) — “Why, LORD, do You stand far off?”
-  - Sefardic Selichot for the 20th of Sivan: placed among verses of lament about divine hiddenness.
-  - Edot HaMizrach (Ne’ilah, Yom Kippur): woven into a piyyut pleading, “Stand in the breach.”
 
-- שְׁבֹר זְרוֹעַ רָשָׁע (Ps 10:15) — “Break the arm of the wicked.”
-  - Ashkenazi Yom Kippur Musaf, Seder HaAvodah (after the Temple service description): appears in a piyyut asking God to shatter oppressive power: “שְׁבֹר זְרוֹעַ רֶשַׁע; תִּמְלֹךְ לְבַדֶּךָ…”
+**Verse 1: לָמָ֣ה יְ֭הֹוָה תַּעֲמֹ֣ד בְּרָח֑וֹק ("Why, O LORD, do You stand aloof?")**
 
-What to notice: prayer places v. 16 in the daily kingship chorus, puts v. 17 on the prayer-leader’s lips when hearts need help, and brings v. 15 into Yom Kippur’s bold plea to dismantle injustice. Liturgy reads Psalm 10 as words to live by in hard times.
+In Sefardic Selichot (penitential prayers) for the fast of the 20th of Sivan—commemorating historical tragedies—this cry appears in a catena of lament verses. The liturgy weaves it with Psalm 44:25's similar question: "Why do You hide Your face?" (לָֽמָּה־פָנֶ֥יךָ תַסְתִּ֑יר). The juxtaposition creates an intensified moment of communal protest, giving voice to generations who experienced God's apparent absence during persecution.
+
+**Verse 15: שְׁ֭בֹר זְר֣וֹעַ רָשָׁ֑ע ("Break the arm of the wicked")**
+
+This petition appears in the Ashkenazi Yom Kippur Musaf during the *Seder HaAvodah*, poetic recounting of Temple service. Following the narrative of ancient priestly glory, the liturgy pivots to supplication:
+
+רֽוּמָה עֻזֶּֽךָ וְרוֹמֵם שְׁפָלִים: שְׁבֹר זְרֽוֹעַ רֶֽשַׁע. תִּמְלֹךְ לְבַדְּךָ בְּקוֹרְאֵי שְׁמֶֽךָ
+
+"Raise Your might and elevate the lowly; break the arm of the wicked; You alone will reign over those who call Your name."
+
+The Talmud (Megillah 17b) connects this verse to the ninth blessing of the Amidah, which asks God to thwart oppressive powers—transforming an ancient psalm's petition into a permanent feature of Jewish daily prayer.
 
 ---

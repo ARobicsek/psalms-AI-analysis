@@ -95,9 +95,9 @@ class CombinedDocumentGenerator:
         - U+05B0-U+05BD: Vowel points (nikud)
         """
         # Pattern: base character followed by any combining marks
-        # Base: Hebrew letter (U+05D0-U+05EA) or space
+        # Base: Hebrew letter (U+05D0-U+05EA), maqqef (U+05BE), or space
         # Combining: U+0591-U+05BD, U+05BF, U+05C1-U+05C2, U+05C4-U+05C7
-        cluster_pattern = r'[\u05D0-\u05EA\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
+        cluster_pattern = r'[\u05D0-\u05EA\u05BE\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
         clusters = re.findall(cluster_pattern, text)
         return clusters
 
@@ -483,7 +483,13 @@ Methodological & Bibliographical Summary
         # Add main intro paragraphs
         for para in main_intro_without_liturgical.strip().split('\n'):
             if para.strip():
-                self._add_paragraph_with_markdown(para, style='BodySans')
+                # Handle subheadings
+                if para.strip().startswith('####'):
+                    self.document.add_heading(para.strip().replace('####', '').strip(), level=4)
+                elif para.strip().startswith('###'):
+                    self.document.add_heading(para.strip().replace('###', '').strip(), level=3)
+                else:
+                    self._add_paragraph_with_markdown(para, style='BodySans')
 
         # 4. Add College Introduction with green "College" in heading
         college_heading = self.document.add_heading('', level=2)
@@ -505,13 +511,20 @@ Methodological & Bibliographical Summary
         # Add college intro paragraphs
         for para in college_intro_without_liturgical.strip().split('\n'):
             if para.strip():
-                self._add_paragraph_with_markdown(para, style='BodySans')
+                # Handle subheadings
+                if para.strip().startswith('####'):
+                    self.document.add_heading(para.strip().replace('####', '').strip(), level=4)
+                elif para.strip().startswith('###'):
+                    self.document.add_heading(para.strip().replace('###', '').strip(), level=3)
+                else:
+                    self._add_paragraph_with_markdown(para, style='BodySans')
 
         # 5. Add Modern Jewish Liturgical Use section (from main version)
         if liturgical_section:
             self.document.add_heading('Modern Jewish Liturgical Use', level=2)
-            # Remove the heading from the section content
-            liturgical_content = re.sub(r'^## Modern Jewish Liturgical Use\s*\n', '', liturgical_section).strip()
+            # Remove ALL occurrences of the heading from the section content (handles duplicates)
+            liturgical_content = re.sub(r'^## Modern Jewish Liturgical Use\s*\n', '', liturgical_section, flags=re.MULTILINE).strip()
+            liturgical_content = re.sub(r'## Modern Jewish Liturgical Use\s*', '', liturgical_content).strip()
             for para in liturgical_content.split('\n'):
                 if para.strip():
                     # Handle subheadings
