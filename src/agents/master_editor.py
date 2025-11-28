@@ -1225,9 +1225,10 @@ class MasterEditor:
         revised_verses = ""
 
         # Find section positions - match both ## and ### variants
+        # Also handle LLM variations like "REVISED VERSE-BY-VERSE COMMENTARY"
         assessment_match = re.search(r'^#{2,3} EDITORIAL ASSESSMENT\s*$', response_text, re.MULTILINE)
         intro_match = re.search(r'^#{2,3} REVISED INTRODUCTION\s*$', response_text, re.MULTILINE)
-        verses_match = re.search(r'^#{2,3} REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
+        verses_match = re.search(r'^#{2,3} REVISED VERSE(?:-BY-VERSE)? COMMENTARY\s*$', response_text, re.MULTILINE)
 
         # Extract assessment (from EDITORIAL ASSESSMENT to REVISED INTRODUCTION)
         if assessment_match and intro_match:

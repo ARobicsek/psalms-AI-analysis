@@ -8,7 +8,32 @@ Continue working on the Psalms structural analysis project. This document provid
 
 **Phase**: V6 Production Ready
 **Version**: V6.0 - Fresh generation with Session 115 morphology fixes
-**Last Session**: Session 147 - College Commentary Hebrew Duplication Fix (2025-11-27) ✅ COMPLETE
+**Last Session**: Session 148 - College Verses Parser Fix (2025-11-28) ✅ COMPLETE
+
+## Session 148 Summary (COMPLETE ✓)
+
+**Objective**: Fix college verse commentary parser to handle LLM format variation "REVISED VERSE-BY-VERSE COMMENTARY"
+**Result**: ✓ COMPLETE - Parser updated with flexible regex, Psalm 121 college files regenerated
+
+**What Was Fixed**:
+- User ran Psalm 121 pipeline and college verses file was empty (0 bytes)
+- GPT-5.1 wrote `## REVISED VERSE-BY-VERSE COMMENTARY` instead of `## REVISED VERSE COMMENTARY`
+- Parser regex required exact match and failed to find section
+- Updated regex with optional `-BY-VERSE`: `r'^#{2,3} REVISED VERSE(?:-BY-VERSE)? COMMENTARY\s*$'`
+- File: [master_editor.py:1228-1231](../src/agents/master_editor.py#L1228-L1231)
+
+**Repair Script**:
+- Created [scripts/fix_psalm_121_college.py](../scripts/fix_psalm_121_college.py)
+- Reprocessed saved GPT-5.1 response without re-running API call
+- Successfully extracted all three sections (assessment, intro, verses)
+- Similar approach to Session 145's repair script
+
+**Impact**:
+- ✅ Parser now handles both "REVISED VERSE COMMENTARY" and "REVISED VERSE-BY-VERSE COMMENTARY"
+- ✅ Consistent with Session 145 approach: flexible parsers for LLM format variations
+- ✅ Future psalm runs more robust to LLM paraphrasing of section names
+
+---
 
 ## Session 147 Summary (COMPLETE ✓)
 
