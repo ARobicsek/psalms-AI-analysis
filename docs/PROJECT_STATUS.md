@@ -1,8 +1,66 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-11-27 (Session 147 - COMPLETE ✓)
+**Last Updated**: 2025-11-28 (Session 148 - COMPLETE ✓)
 **Current Phase**: V6 Production Ready
-**Status**: ✓ College Commentary Hebrew Verse Duplication Fixed
+**Status**: ✓ College Verses Parser Fixed for LLM Format Variations
+
+## Session 148 Summary (COMPLETE ✓)
+
+### College Verses Parser Fix - LLM Format Variation
+
+**Objective**: Fix college verse commentary parser to handle LLM writing "REVISED VERSE-BY-VERSE COMMENTARY" instead of "REVISED VERSE COMMENTARY"
+**Result**: ✓ COMPLETE - Parser updated with flexible regex, Psalm 121 college files regenerated
+
+**Issue Identified**:
+- User ran `python scripts/run_enhanced_pipeline.py 121`
+- College verses file was empty: `psalm_121_edited_verses_college.md` = 0 bytes
+- College intro worked fine: `psalm_121_edited_intro_college.md` = 35KB
+- Same symptom as Session 145 (Psalm 11), but different root cause
+
+**Root Cause**:
+- Prompt asks for: `### REVISED VERSE COMMENTARY`
+- GPT-5.1 wrote: `## REVISED VERSE-BY-VERSE COMMENTARY`
+- Parser regex required exact match: `r'^#{2,3} REVISED VERSE COMMENTARY\s*$'`
+- Added text "-BY-VERSE" caused regex mismatch
+- Result: `verses_match = None` → `revised_verses` empty → file saved as empty
+
+**Difference from Session 145**:
+- Session 145: LLM used wrong header level (`##` vs `###`)
+- Session 148: LLM changed section name itself (added "-BY-VERSE")
+- Both are LLM format compliance issues
+
+**Solution Implemented**:
+1. **Updated Parser Regex** ([master_editor.py:1231](../src/agents/master_editor.py#L1231)):
+   - Old: `r'^#{2,3} REVISED VERSE COMMENTARY\s*$'`
+   - New: `r'^#{2,3} REVISED VERSE(?:-BY-VERSE)? COMMENTARY\s*$'`
+   - `(?:-BY-VERSE)?` makes that portion optional
+   - Now matches both variations
+
+2. **Created Repair Script** ([scripts/fix_psalm_121_college.py](../scripts/fix_psalm_121_college.py)):
+   - Similar to Session 145's repair script
+   - Reprocessed saved GPT-5.1 response with updated parser
+   - No need to re-run expensive API call
+   - Successfully extracted all three sections
+
+**Files Modified**:
+- [master_editor.py:1228-1231](../src/agents/master_editor.py#L1228-L1231) - Updated verses regex with optional `-BY-VERSE`
+
+**Files Created**:
+- [scripts/fix_psalm_121_college.py](../scripts/fix_psalm_121_college.py) - Repair script for Psalm 121 (135 lines)
+
+**Results**:
+- ✅ `psalm_121_edited_verses_college.md`: 0 bytes → 18KB (15,114 chars)
+- ✅ `psalm_121_edited_intro_college.md`: 14,057 chars (unchanged)
+- ✅ `psalm_121_assessment_college.md`: 2,113 chars (unchanged)
+- ✅ All three college files now complete
+
+**Impact**:
+- ✅ Parser now robust to both "REVISED VERSE COMMENTARY" and "REVISED VERSE-BY-VERSE COMMENTARY"
+- ✅ Future psalm runs won't fail on this LLM format variation
+- ✅ Consistent with Session 145 approach: make parsers flexible, not strict
+- ✅ No regression for existing Psalm 11 files
+
+---
 
 ## Session 147 Summary (COMPLETE ✓)
 

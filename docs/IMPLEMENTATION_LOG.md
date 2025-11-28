@@ -1,5 +1,146 @@
 # Implementation Log
 
+## Session 148 - 2025-11-28 (College Verses Parser Fix - COMPLETE ✓)
+
+### Overview
+**Objective**: Fix college verse commentary parser to handle LLM format variation "REVISED VERSE-BY-VERSE COMMENTARY"
+**Approach**: Updated regex to optionally match "-BY-VERSE" in section header
+**Result**: ✓ COMPLETE - Parser now handles both variations, Psalm 121 college files regenerated
+**Session Duration**: ~20 minutes
+**Status**: Complete - parser robust to LLM format variations
+
+### Task Description
+
+**User Report**:
+"I just ran python scripts/run_enhanced_pipeline.py 121. Why did the college verses task fail?"
+
+**Investigation**:
+- `psalm_121_edited_verses_college.md` was 0 bytes (empty)
+- `psalm_121_edited_intro_college.md` was 35KB (correct)
+- `psalm_121_assessment_college.md` was 2.3KB (correct)
+- Same symptom as Session 145 (Psalm 11), but different root cause
+
+### Root Cause Analysis
+
+**Parser Mismatch**:
+
+1. **Prompt Instructions**:
+   - College editor prompt asks for: `### REVISED VERSE COMMENTARY`
+   - Lines 408, 770 in [master_editor.py](../src/agents/master_editor.py)
+
+2. **LLM Output**:
+   - GPT-5.1 wrote: `## REVISED VERSE-BY-VERSE COMMENTARY`
+   - Added "-BY-VERSE" to the section name
+   - Used `##` instead of `###` (already handled by Session 145 fix)
+
+3. **Parser Regex**:
+   - Old pattern: `r'^#{2,3} REVISED VERSE COMMENTARY\s*$'`
+   - Required exact match of "REVISED VERSE COMMENTARY"
+   - Did not match "REVISED VERSE-BY-VERSE COMMENTARY"
+   - Result: `verses_match` was None → `revised_verses` stayed empty → file saved as empty
+
+**Difference from Session 145**:
+- Session 145: LLM used `##` instead of `###` (header level variation)
+- Session 148: LLM changed section name itself (text variation)
+- Both are LLM format compliance issues where the model didn't follow exact prompt instructions
+
+### Solution Implemented
+
+**Updated Parser Regex** ([master_editor.py:1231](../src/agents/master_editor.py#L1231)):
+
+```python
+# OLD:
+verses_match = re.search(r'^#{2,3} REVISED VERSE COMMENTARY\s*$', response_text, re.MULTILINE)
+
+# NEW:
+verses_match = re.search(r'^#{2,3} REVISED VERSE(?:-BY-VERSE)? COMMENTARY\s*$', response_text, re.MULTILINE)
+```
+
+**Key Changes**:
+- `(?:-BY-VERSE)?` makes the "-BY-VERSE" portion optional
+- Now matches both:
+  - `## REVISED VERSE COMMENTARY`
+  - `## REVISED VERSE-BY-VERSE COMMENTARY`
+  - `### REVISED VERSE COMMENTARY`
+  - `### REVISED VERSE-BY-VERSE COMMENTARY`
+
+### Repair Script
+
+**Created**: [scripts/fix_psalm_121_college.py](../scripts/fix_psalm_121_college.py)
+
+**Purpose**: Regenerate Psalm 121 college files from existing API response without re-running expensive GPT-5.1 call
+
+**Approach**:
+1. Read saved response from `output/debug/college_editor_response_psalm_121.txt`
+2. Apply updated parser logic with flexible regex
+3. Extract assessment (2,113 chars), introduction (14,057 chars), verses (15,114 chars)
+4. Write all three files to output directory
+
+**Results**:
+- `psalm_121_assessment_college.md`: 2,113 chars ✓
+- `psalm_121_edited_intro_college.md`: 14,057 chars ✓
+- `psalm_121_edited_verses_college.md`: 15,114 chars ✓ (was 0 bytes)
+
+**Similar to**: Session 145's `fix_psalm_11_college.py`
+
+### Changes Made
+
+**Files Modified**:
+1. [src/agents/master_editor.py](../src/agents/master_editor.py)
+   - Line 1228: Added comment about handling LLM variations
+   - Line 1231: Updated `verses_match` regex to include `(?:-BY-VERSE)?`
+   - Impact: 2 lines modified, 1 comment added
+
+**Files Created**:
+1. [scripts/fix_psalm_121_college.py](../scripts/fix_psalm_121_college.py)
+   - 135 lines
+   - Standalone repair script for Psalm 121
+   - Similar to Session 145 repair script
+
+### Testing
+
+**Verification**:
+1. ✅ Ran repair script successfully
+2. ✅ `psalm_121_edited_verses_college.md` now 18KB (was 0 bytes)
+3. ✅ All three college files have expected content
+4. ✅ Parser now handles both format variations
+
+**No Regression**:
+- Existing Psalm 11 college files still work
+- Main (non-college) commentary parsing unchanged
+- Both `##` and `###` header levels still supported
+
+### Impact
+
+**Immediate**:
+- ✅ Psalm 121 college commentary generation complete
+- ✅ No need to re-run expensive GPT-5.1 API call
+- ✅ Parser now more robust to LLM format variations
+
+**Future**:
+- ✅ All future psalm runs will handle both "REVISED VERSE COMMENTARY" and "REVISED VERSE-BY-VERSE COMMENTARY"
+- ✅ Reduces likelihood of empty file issues from LLM format variations
+- ✅ Consistent with Session 145's approach of making parsers flexible to LLM variations
+
+### Technical Notes
+
+**LLM Behavior**:
+- GPT-5.1 sometimes paraphrases section names even when prompt gives exact format
+- This is second occurrence of this pattern (Session 145: header level, Session 148: section name)
+- Solution: Make parsers flexible rather than trying to control LLM output format perfectly
+
+**Regex Pattern**:
+- `(?:-BY-VERSE)?` is a non-capturing optional group
+- Allows "-BY-VERSE" to be present or absent
+- More maintainable than multiple separate regex patterns
+
+**Windows Unicode Issue**:
+- Initial repair script had checkmark characters (`✓`) causing UnicodeEncodeError on Windows
+- Replaced with `[OK]` and `[SUCCESS]` text markers
+- Ensures cross-platform compatibility
+
+---
+
 ## Session 147 - 2025-11-27 (College Commentary Hebrew Duplication Fix - COMPLETE ✓)
 
 ### Overview
