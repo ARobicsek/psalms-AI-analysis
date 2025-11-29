@@ -185,6 +185,8 @@ class CombinedDocumentGenerator:
             set_font: If True, explicitly set Aptos 12pt font on all runs
         """
         modified_text = self.modifier.modify_text(text)
+        # Match bold (**...**) and italic (*...*) patterns
+        # Order matters: match ** before * to avoid incorrect splits
         parts = re.split(r'(\*\*.*?\*\*|__.*?__|\*.*?\*|_.*?_)', modified_text)
 
         for part in parts:
@@ -192,17 +194,13 @@ class CombinedDocumentGenerator:
                 continue
 
             if part.startswith('**') and part.endswith('**'):
-                run = paragraph.add_run(part[2:-2])
-                run.bold = True
-                if set_font:
-                    run.font.name = 'Aptos'
-                    run.font.size = Pt(12)
+                # Bold text - recursively process inner content for nested formatting
+                inner_content = part[2:-2]
+                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
             elif part.startswith('__') and part.endswith('__'):
-                run = paragraph.add_run(part[2:-2])
-                run.bold = True
-                if set_font:
-                    run.font.name = 'Aptos'
-                    run.font.size = Pt(12)
+                # Bold text - recursively process inner content for nested formatting
+                inner_content = part[2:-2]
+                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
             elif part.startswith('*') and part.endswith('*'):
                 run = paragraph.add_run(part[1:-1])
                 run.italic = True
@@ -238,6 +236,86 @@ class CombinedDocumentGenerator:
                 if set_font:
                     run.font.name = 'Aptos'
                     run.font.size = Pt(12)
+
+    def _add_formatted_content(self, paragraph, text, bold=False, italic=False, set_font=False):
+        """
+        Add text content with specified formatting, recursively processing any nested markdown.
+        This handles cases like **bold (*italic inside bold*)**.
+
+        Args:
+            paragraph: The paragraph to add runs to
+            text: The text content to add
+            bold: Whether the text should be bold
+            italic: Whether the text should be italic
+            set_font: If True, explicitly set Aptos 12pt font
+        """
+        # Check if there's nested formatting to process
+        if '*' in text or '_' in text:
+            # Split on italic markers to handle nested formatting
+            parts = re.split(r'(\*.*?\*|_.*?_)', text)
+            for part in parts:
+                if not part:
+                    continue
+                if part.startswith('*') and part.endswith('*') and not part.startswith('**'):
+                    # Nested italic
+                    run = paragraph.add_run(part[1:-1])
+                    run.bold = bold
+                    run.italic = True  # Nested italic
+                    if set_font:
+                        run.font.name = 'Aptos'
+                        run.font.size = Pt(12)
+                elif part.startswith('_') and part.endswith('_') and not part.startswith('__'):
+                    # Nested italic
+                    run = paragraph.add_run(part[1:-1])
+                    run.bold = bold
+                    run.italic = True  # Nested italic
+                    if set_font:
+                        run.font.name = 'Aptos'
+                        run.font.size = Pt(12)
+                else:
+                    # Regular text with base formatting
+                    # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
+                    hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+                    if re.search(hebrew_paren_pattern, part):
+                        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+                        def reverse_hebrew_match(match):
+                            hebrew_text = match.group(1)
+                            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                            return f'{LRO}({reversed_hebrew}){PDF}'
+
+                        modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_match, part)
+                        run = paragraph.add_run(modified_part)
+                    else:
+                        run = paragraph.add_run(part)
+                    run.bold = bold
+                    run.italic = italic
+                    if set_font:
+                        run.font.name = 'Aptos'
+                        run.font.size = Pt(12)
+        else:
+            # No nested formatting - just add with base formatting
+            # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
+            hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+            if re.search(hebrew_paren_pattern, text):
+                LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+                def reverse_hebrew_match(match):
+                    hebrew_text = match.group(1)
+                    reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                    return f'{LRO}({reversed_hebrew}){PDF}'
+
+                modified_text = re.sub(hebrew_paren_pattern, reverse_hebrew_match, text)
+                run = paragraph.add_run(modified_text)
+            else:
+                run = paragraph.add_run(text)
+            run.bold = bold
+            run.italic = italic
+            if set_font:
+                run.font.name = 'Aptos'
+                run.font.size = Pt(12)
 
     def _add_commentary_with_bullets(self, text: str, style: str = 'Normal'):
         """
@@ -297,7 +375,7 @@ class CombinedDocumentGenerator:
 
         # If no verses found with bold format, try heading format (college uses this)
         if len(verse_blocks) <= 1:
-            verse_blocks = re.split(r'(?=^#{2,3} Verse \d+\s*\n)', content, flags=re.MULTILINE)
+            verse_blocks = re.split(r'(?=^#{2,} Verse \d+\s*\n)', content, flags=re.MULTILINE)
 
         # If still no verses found, try plain format without any markdown
         if len(verse_blocks) <= 1:
@@ -313,7 +391,7 @@ class CombinedDocumentGenerator:
             # Try all formats for verse number matching
             verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])  # **Verse X**
             if not verse_num_match:
-                verse_num_match = re.match(r'^#{2,3} Verse (\d+)\s*', lines[0])  # ### Verse X or ## Verse X
+                verse_num_match = re.match(r'^#{2,} Verse (\d+)\s*', lines[0])  # ### Verse X, ## Verse X, #### Verse X, etc.
             if not verse_num_match:
                 verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])  # Verse X
 
@@ -718,10 +796,19 @@ Methodological & Bibliographical Summary
 
                         # Process first non-empty line specially
                         if not first_word_done:
-                            # Handle bullet or regular line
+                            # Handle bullet, block quote, or regular line
                             is_bullet = line.startswith('- ')
+                            is_quote = line.startswith('>')
+
                             if is_bullet:
                                 line = line[2:]  # Remove bullet marker
+                            elif is_quote:
+                                line = line[1:].lstrip()  # Remove ">" and any leading spaces
+                                if not line:
+                                    # Empty quote line - skip and mark as done
+                                    self.document.add_paragraph()
+                                    first_word_done = True
+                                    continue
 
                             # Split on first whitespace to get first word
                             words = line.split(None, 1)
@@ -729,24 +816,34 @@ Methodological & Bibliographical Summary
                                 first_word = words[0]
                                 rest_of_line = words[1] if len(words) > 1 else ""
 
+                                # Strip markdown markers from first word (**, *, __, _)
+                                first_word_clean = re.sub(r'^\*\*|\*\*$|^\*|\*$|^__$|__$|^_$|_$', '', first_word)
+
                                 # Create paragraph
                                 if is_bullet:
                                     paragraph = self.document.add_paragraph(style='List Bullet')
                                 else:
                                     paragraph = self.document.add_paragraph(style='BodySans')
+                                    if is_quote:
+                                        paragraph.paragraph_format.left_indent = Inches(0.5)
 
                                 self._set_paragraph_ltr(paragraph)
 
-                                # Add first word with green and bold
-                                first_run = paragraph.add_run(first_word + (' ' if rest_of_line else ''))
+                                # Add first word with green and bold (using cleaned word)
+                                first_run = paragraph.add_run(first_word_clean + (' ' if rest_of_line else ''))
                                 first_run.font.color.rgb = RGBColor(0, 128, 0)  # Green
                                 first_run.bold = True
                                 first_run.font.name = 'Aptos'
                                 first_run.font.size = Pt(12)
 
-                                # Add rest of line with normal formatting
+                                # Add rest of line with normal formatting (processes markdown)
                                 if rest_of_line:
                                     self._process_markdown_formatting(paragraph, rest_of_line, set_font=True)
+
+                                # Make entire quote italic if it's a block quote
+                                if is_quote:
+                                    for run in paragraph.runs:
+                                        run.italic = True
 
                                 first_word_done = True
                             else:
@@ -759,6 +856,20 @@ Methodological & Bibliographical Summary
                                 paragraph = self.document.add_paragraph(style='List Bullet')
                                 self._set_paragraph_ltr(paragraph)
                                 self._process_markdown_formatting(paragraph, line[2:], set_font=True)
+                            elif line.startswith('>'):
+                                # Handle block quote
+                                quote_text = line[1:].lstrip()
+                                if not quote_text:
+                                    # Empty quote line
+                                    self.document.add_paragraph()
+                                else:
+                                    paragraph = self.document.add_paragraph(style='BodySans')
+                                    paragraph.paragraph_format.left_indent = Inches(0.5)
+                                    self._set_paragraph_ltr(paragraph)
+                                    self._process_markdown_formatting(paragraph, quote_text, set_font=True)
+                                    # Make the entire quote italic
+                                    for run in paragraph.runs:
+                                        run.italic = True
                             else:
                                 self._add_paragraph_with_markdown(line, style='BodySans')
 
@@ -845,7 +956,7 @@ def main():
     main_verses_path = psalm_dir / f"psalm_{psalm_num_str}_edited_verses.md"
     college_intro_path = psalm_dir / f"psalm_{psalm_num_str}_edited_intro_college.md"
     college_verses_path = psalm_dir / f"psalm_{psalm_num_str}_edited_verses_college.md"
-    stats_path = psalm_dir / f"psalm_{psalm_num_str}_pipeline_summary.json"
+    stats_path = psalm_dir / f"psalm_{psalm_num_str}_pipeline_stats.json"
     output_path = psalm_dir / f"psalm_{psalm_num_str}_commentary_combined.docx"
 
     # Check that all required files exist

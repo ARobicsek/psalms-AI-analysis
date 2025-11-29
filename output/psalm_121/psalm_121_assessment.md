@@ -1,0 +1,11 @@
+# Editorial Assessment - Psalm 121
+
+The existing introduction and commentary get several big things right. They see that Psalm 121 is not a simple travel charm but a compressed liturgy; they rightly highlight the shift from first-person “I” to second-person “you,” the six-fold שׁמר (*shamar*, “guard/keep”), and the creedal formula “maker of heaven and earth.” The discussion of Ancient Near Eastern background (sleeping gods, high places, astral deities) is sound and helpful. The liturgical section usefully catalogs some later uses of the psalm.
+
+Yet the draft suffers from a few weaknesses. Stylistically it is somewhat repetitive and abstract. It tells us, often, that something is “polemical” or “comprehensive,” but it could show this more concretely by bringing other biblical texts and actual liturgical formulas onto the page in Hebrew and English. Technical terms such as “merismus,” “anadiplosis,” or “Songs of Ascents” are used without always being defined. For an intelligent non-specialist, that is a barrier.
+
+Substantively, several opportunities are missed. The related psalms data (especially Psalms 124, 131, and 134) is barely exploited; yet Psalm 121 is woven into a small network of “help” and “maker of heaven and earth” formulas within the Songs of Ascents. The Torah Temimah’s rabbinic material—which gives vivid midrashic uses of “YHWH is your guardian” and “YHWH will guard your going out and your coming in”—is not integrated, though it throws light on how the verse was heard as a promise about mezuzah, divine “outside” protection, and the contrast with human kings. The figurative language database is cited in general but not illustrated with specific parallel texts; for example, “going out and coming in” (צֵאתְךָ וּבוֹאֶךָ) in Deuteronomy 28:6 is not quoted, though it is the obvious comparison.
+
+The verse-by-verse notes are overall strong but could be sharpened by: (1) beginning each verse with a clearly punctuated Hebrew line; (2) defining technical terms; (3) quoting at least one or two parallel passages per major motif (mountains, “heaven and earth,” sun and moon, “going out and coming in”); and (4) bringing in the Talmudic and liturgical reuses as part of the interpretive story. The result will be more compact, more concrete, and more illuminating for a sophisticated lay reader.
+
+---

@@ -1,0 +1,137 @@
+{
+  "psalm_number": 121,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Opening with double identification 'שִׁיר לַמַּעֲלוֹת' (song of ascents) establishes genre, but the immediate question 'מֵאַיִן יָבֹא עֶזְרִי' (from where will my help come?) creates dramatic tension. The mountains (הֶהָרִים) are deliberately ambiguous—are they source of help (Zion?) or source of threat (dangerous terrain/pagan high places)? The verb אֶשָּׂא (I lift) with עֵינַי (my eyes) is common pilgrimage language, but the preposition אֶל (to/toward) rather than מִן (from) leaves interpretive space. This verse sets up a question that v2 must resolve.",
+      "lexical_insights": [
+        "מֵאַיִן",
+        "עֶזְרִי",
+        "הֶהָרִים"
+      ],
+      "figurative_analysis": [
+        "mountains as potentially ambiguous symbol—threat or hope?"
+      ],
+      "thesis_connection": "Establishes pilgrim voice and mountain ambiguity that thesis identifies as key to ANE polemic",
+      "phonetic_transcription": "**SHIY**-r **LAM**-ma-ʿa-lōth 'es-**SĀ'** ʿēy-**NAY** 'el-he-hā-**RIY**-m mē-**'A**-yin yā-**VŌ'** ʿez-**RIY**"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Immediate answer to v1's question with emphatic positioning of עֶזְרִי (my help) at start. The phrase 'מֵעִם יְהֹוָה' (from with/beside the LORD) is spatially interesting—help comes from God's presence, not from mountains. The epithet 'עֹשֵׂה שָׁמַיִם וָאָרֶץ' (maker of heaven and earth) is a cosmic sovereignty claim appearing in creation contexts (Gen 1:1, 14:19, Ps 115:15, 124:8, 134:3, 146:6). This moves from particular (mountains) to universal (all creation), suggesting any localized source of help is inadequate compared to the cosmic Creator.",
+      "lexical_insights": [
+        "עֹשֵׂה",
+        "מֵעִם"
+      ],
+      "figurative_analysis": [
+        "maker epithet establishing sovereignty over all cosmic elements mentioned later"
+      ],
+      "thesis_connection": "The 'maker' title directly supports thesis about demythologizing cosmic powers—sun, moon, mountains all under YHWH's creative authority",
+      "phonetic_transcription": "ʿez-**RIY** mē-**ʿIM** yə-hō-**WĀH** ʿō-**SĒH** shā-**MA**-yim wā-**'Ā**-rets"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Dramatic voice shift from first person (vv1-2) to second person (אַל־יִתֵּן לַמּוֹט רַגְלֶךָ - 'He will not let YOUR foot slip'). This suggests liturgical dialogue—priestly response to pilgrim's question. The negation אַל with imperfect verb creates strong jussive/assurance force. First occurrence of שֹׁמְרֶךָ (your guardian), introducing the dominant motif of the psalm (שמר appears 6x total). The specific image of foot not slipping (מוֹט) is perfect for mountain travel context but also metaphorical for stability/faithfulness. The verb נוּם (slumber) is relatively rare and pairs with יָשֵׁן (sleep) in v4 for emphasis.",
+      "lexical_insights": [
+        "נוּם",
+        "שֹׁמְרֶךָ",
+        "מוֹט"
+      ],
+      "figurative_analysis": [
+        "foot slipping as metaphor for disaster/falling away",
+        "guardian as active protective presence"
+      ],
+      "thesis_connection": "Voice shift enacts the liturgical dialogue thesis proposes; first שמר begins the incantatory repetition pattern",
+      "phonetic_transcription": "'al-yi-**TĒN** lam-**MŌT** ragh-**LE**-khā 'al-yā-**NŪM** shō-mə-**RE**-khā"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Emphatic הִנֵּה (behold/see!) draws attention to the doubled negation: לֹא־יָנוּם וְלֹא יִישָׁן (neither slumbers nor sleeps). This intensification through synonymous parallelism creates absolute assurance of vigilance. Crucial expansion from 'your guardian' (v3) to 'guardian of Israel' (שׁוֹמֵר יִשְׂרָאֵל)—individual protection grounded in collective covenantal identity. The doubled sleep vocabulary (נום/ישן) may polemicize against ANE myths of sleeping/dying gods (Baal's death cycles, El's slumber, cf. 1 Kgs 18:27's mockery). The verse structure is chiastic: negation-verb, negation-verb, then subject.",
+      "lexical_insights": [
+        "הִנֵּה",
+        "יִישָׁן",
+        "יִשְׂרָאֵל"
+      ],
+      "figurative_analysis": [
+        "sleeplessness as divine attentiveness/reliability"
+      ],
+      "thesis_connection": "Directly supports thesis about ANE polemic against sleeping deities; collective 'Israel' shows liturgical function beyond individual",
+      "phonetic_transcription": "hin-**NĒH** lō'-yā-**NŪM** wə-**LŌ'** yiy-**SHĀN** shō-**MĒR** yis-rā-**'ĒL**"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Powerful anaphora: יְהֹוָה שֹׁמְרֶךָ יְהֹוָה צִלְּךָ (LORD is your guardian, LORD is your shade). The divine name יְהֹוָה appears twice in parallel cola for maximum emphasis—covenant relationship and personal care. The metaphor צֵל (shade) is multivalent: protection from sun (literal for pilgrimage), military protection (shade as covering), or even temple imagery (shadow of wings). The phrase עַל־יַד יְמִינֶךָ (at/over your right hand) suggests either military context (right hand = weapon side, divine warrior protects warrior's vulnerable side) or legal/social protection (right hand as place of honor/advocacy).",
+      "lexical_insights": [
+        "צִלְּךָ",
+        "יְמִינֶךָ"
+      ],
+      "figurative_analysis": [
+        "shade as protection metaphor—thermal, military, or spiritual?",
+        "right hand positioning"
+      ],
+      "thesis_connection": "YHWH name repetition fits thesis about covenant identity; shade metaphor will connect to sun/moon imagery in v6",
+      "phonetic_transcription": "yə-hō-**WĀH** shō-mə-**RE**-khā yə-hō-**WĀH** tsil-**LKHĀ** ʿal-**YADH** yə-miy-**NE**-khā"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Cosmic merismus: יוֹמָם הַשֶּׁמֶשׁ... וְיָרֵחַ בַּלָּֽיְלָה (by day the sun... and moon by night). Sun's striking (יַכֶּכָּה from נכה) makes sense as sunstroke danger, but moon's threat is puzzling—lunacy beliefs? demonic forces? poetic parallelism? The negation לֹא continues the emphatic assurance pattern. The temporal pair day/night creates 24-hour coverage. This verse systematically addresses celestial bodies that were worshiped in Canaanite/Mesopotamian contexts (Shamash, Yarikh), demythologizing them as mere created elements under YHWH's control rather than autonomous powers.",
+      "lexical_insights": [
+        "יַכֶּכָּה",
+        "יָרֵחַ"
+      ],
+      "figurative_analysis": [
+        "sun and moon as potential threats to be neutralized"
+      ],
+      "thesis_connection": "Directly supports thesis about demythologizing cosmic powers—sun/moon subordinated to YHWH's protection",
+      "phonetic_transcription": "yō-**MĀM** hash-**SHE**-mesh lō'-ya-**KE**-kāh wə-yā-**RĒ**-aḥ bal-**LĀ**-yə-lāh"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "Climactic intensification with שמר appearing TWICE: יִשְׁמׇרְךָ... יִשְׁמֹר (will guard you... will guard). The phrase מִכׇּל־רָע (from all harm/evil) is maximally comprehensive—no exception clauses. Second colon specifies אֶת־נַפְשֶׁךָ (your life/soul), moving from external threats to essential self. The נֶפֶשׁ can mean physical life, inner being, or whole person—comprehensive protection of total existence. This verse begins the concluding liturgical blessing formula, moving toward the temporal/spatial totality of v8.",
+      "lexical_insights": [
+        "נַפְשֶׁךָ",
+        "מִכׇּל־רָע"
+      ],
+      "figurative_analysis": [
+        "נֶפֶשׁ as whole person/life force"
+      ],
+      "thesis_connection": "Double שמר demonstrates the incantatory repetition thesis identifies; 'all harm' shows comprehensive protection claim",
+      "phonetic_transcription": "yə-hō-**WĀH** yish-mor-**KHĀ** mi-kol-**RĀʿ** yish-**MŌR** 'eth-naf-**SHE**-khā"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Grand finale with third שמר in two verses: יִשְׁמׇר־צֵאתְךָ וּבוֹאֶךָ (will guard your going out and coming in). This merismus covers all life activities—could be specific to pilgrimage (departure/return) or general (all actions). The temporal pair מֵעַתָּה וְעַד־עוֹלָם (from now and forever) creates maximum temporal scope, answering v1's 'from where' with comprehensive 'when.' The פ paragraph marker signals liturgical closure. The verse brings together spatial (going/coming), temporal (now/forever), and agent (LORD) for complete assurance package.",
+      "lexical_insights": [
+        "צֵאתְךָ",
+        "בוֹאֶךָ",
+        "עוֹלָם"
+      ],
+      "figurative_analysis": [
+        "going out/coming in as comprehensive life activity"
+      ],
+      "thesis_connection": "Completes the comprehensive protection framework; merismus pairs create totality claim; inclusio with v1 shows question→assurance arc",
+      "phonetic_transcription": "yə-hō-**WĀH** yish-mor-tsē'-thə-**KHĀ** ū-vō-**'E**-khā mē-ʿa-**TĀH** wə-ʿadh-ʿō-**LĀM** **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Six-fold שמר repetition (vv. 3, 4, 5, 7, 7, 8) creates incantatory rhythm—why six not seven?",
+    "Multiple merismus pairs accumulate: heaven/earth (v2), day/night (v6), sun/moon (v6), going/coming (v8), now/forever (v8)—rhetoric of totality",
+    "Voice shift from 1st person (vv1-2) to 2nd person (vv3-8) enacts liturgical dialogue",
+    "Movement from individual ('my help') to collective ('Israel') back to individual ('you')—identity construction",
+    "Systematic cosmic inventory: mountains, heaven, earth, sun, moon—creation theology as protection theology",
+    "Five-fold negation pattern (vv. 3, 4, 4, 6, 6) creates emphatic assurance through what God will NOT allow",
+    "Progression from question (v1) through answer (v2) to blessing (vv3-8) creates mini-narrative of faith formation"
+  ],
+  "interesting_questions": [
+    "What exactly is the semantic range and threat profile of the mountains in v1—are they dangerous terrain, pagan high places, or hopeful symbols (Zion)?",
+    "Why does the psalm use six-fold שמר repetition rather than seven (the more conventional completeness number in biblical literature)?",
+    "What is the specific nature of the moon's threat in v6—is this about lunacy beliefs, nocturnal demons, or simply poetic parallelism with sun?",
+    "How does the 'maker of heaven and earth' formula function elsewhere—is this a fixed creedal phrase, and does it have specific anti-pagan polemical force?",
+    "What is the precise imagery of YHWH as 'shade at your right hand'—military protection, desert travel relief, temple symbolism, or legal advocacy?",
+    "Does the phrase 'your going out and coming in' (v8) have technical meaning in pilgrimage, military, or temple contexts, or is it purely a general merismus?",
+    "How does the voice shift from first to second person function liturgically—who are the implied speakers (pilgrim/priest, individual/congregation)?",
+    "What ANE parallels exist for gods who 'sleep' or 'slumber' that would make v4's doubled negation particularly polemical?",
+    "Why does v4 expand from individual ('your guardian') to collective ('guardian of Israel')—what theological claim about personal/communal identity is being made?",
+    "What is the relationship between the geographical mountains (v1) and the cosmic 'heaven and earth' (v2)—is this movement from particular to universal significant?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on נוּם/יָשֵׁן (slumber/sleep) distinction, צֵל (shade) range, מוֹט (slip/totter), נֶפֶשׁ (life/soul) in protection contexts\nCONCORDANCE: Track 'maker of heaven and earth' formula across biblical corpus, 'going out and coming in' phrase, six-fold vs seven-fold patterns\nFIGURATIVE: All shade/shadow imagery in Psalms, right hand positioning symbolism, foot/path stability metaphors\nCOMMENTARY: Moon threat traditions in ANE, liturgical voice shifts in Psalms, Songs of Ascents collection features\nANE BACKGROUND: Sleeping deity myths (Baal, El), astral worship (Shamash, Yarikh), mountain deity traditions"
+}

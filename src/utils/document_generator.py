@@ -334,23 +334,21 @@ class DocumentGenerator:
             set_font: If True, explicitly set Aptos 12pt font on all runs (for bullet lists)
         """
         modified_text = self.modifier.modify_text(text)
-        # FIX: Changed \\* to \* - the double backslash was matching zero-or-more backslashes,
-        # creating thousands of empty parts. Single backslash correctly matches markdown *italic*.
-        parts = re.split(r'(\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
+        # Match bold (**...**) and italic (*...*) patterns
+        # Order matters: match ** before * to avoid incorrect splits
+        parts = re.split(r'(\*\*.*?\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
 
         for part in parts:
+            if not part:
+                continue
             if part.startswith('**') and part.endswith('**'):
-                run = paragraph.add_run(part[2:-2])
-                run.bold = True
-                if set_font:
-                    run.font.name = 'Aptos'
-                    run.font.size = Pt(12)
+                # Bold text - recursively process inner content for nested formatting
+                inner_content = part[2:-2]
+                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
             elif part.startswith('__') and part.endswith('__'):
-                run = paragraph.add_run(part[2:-2])
-                run.bold = True
-                if set_font:
-                    run.font.name = 'Aptos'
-                    run.font.size = Pt(12)
+                # Bold text - recursively process inner content for nested formatting
+                inner_content = part[2:-2]
+                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
             elif part.startswith('*') and part.endswith('*'):
                 run = paragraph.add_run(part[1:-1])
                 run.italic = True
@@ -391,6 +389,103 @@ class DocumentGenerator:
                 if set_font:
                     run.font.name = 'Aptos'
                     run.font.size = Pt(12)
+
+    def _add_formatted_content(self, paragraph, text, bold=False, italic=False, set_font=False):
+        """
+        Add text content with specified formatting, recursively processing any nested markdown.
+        This handles cases like **bold (*italic inside bold*)**.
+
+        Args:
+            paragraph: The paragraph to add runs to
+            text: The text content to add
+            bold: Whether the text should be bold
+            italic: Whether the text should be italic
+            set_font: If True, explicitly set Aptos 12pt font
+        """
+        # Check if there's nested formatting to process
+        if '*' in text or '_' in text or '`' in text:
+            # Split on italic markers to handle nested formatting
+            parts = re.split(r'(\*.*?\*|_.*?_|`.*?`)', text)
+            for part in parts:
+                if not part:
+                    continue
+                if part.startswith('*') and part.endswith('*') and not part.startswith('**'):
+                    # Nested italic
+                    run = paragraph.add_run(part[1:-1])
+                    run.bold = bold
+                    run.italic = True  # Nested italic
+                    if set_font:
+                        run.font.name = 'Aptos'
+                        run.font.size = Pt(12)
+                elif part.startswith('_') and part.endswith('_') and not part.startswith('__'):
+                    # Nested italic
+                    run = paragraph.add_run(part[1:-1])
+                    run.bold = bold
+                    run.italic = True  # Nested italic
+                    if set_font:
+                        run.font.name = 'Aptos'
+                        run.font.size = Pt(12)
+                elif part.startswith('`') and part.endswith('`'):
+                    # Nested backtick - process with _add_nested_formatting but apply bold too
+                    inner_content = part[1:-1]
+                    # For backticks, we need to handle bold + italic
+                    nested_parts = re.split(r'(\*\*.*?\*\*)', inner_content)
+                    for nested_part in nested_parts:
+                        if nested_part.startswith('**') and nested_part.endswith('**'):
+                            run = paragraph.add_run(nested_part[2:-2])
+                            run.bold = True
+                            run.italic = True
+                        else:
+                            run = paragraph.add_run(nested_part)
+                            run.bold = bold
+                            run.italic = True
+                        if set_font:
+                            run.font.name = 'Aptos'
+                            run.font.size = Pt(12)
+                else:
+                    # Regular text with base formatting
+                    # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
+                    hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+                    if re.search(hebrew_paren_pattern, part):
+                        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+                        def reverse_hebrew_match(match):
+                            hebrew_text = match.group(1)
+                            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                            return f'{LRO}({reversed_hebrew}){PDF}'
+
+                        modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_match, part)
+                        run = paragraph.add_run(modified_part)
+                    else:
+                        run = paragraph.add_run(part)
+                    run.bold = bold
+                    run.italic = italic
+                    if set_font:
+                        run.font.name = 'Aptos'
+                        run.font.size = Pt(12)
+        else:
+            # No nested formatting - just add with base formatting
+            # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
+            hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+            if re.search(hebrew_paren_pattern, text):
+                LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+                def reverse_hebrew_match(match):
+                    hebrew_text = match.group(1)
+                    reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                    return f'{LRO}({reversed_hebrew}){PDF}'
+
+                modified_text = re.sub(hebrew_paren_pattern, reverse_hebrew_match, text)
+                run = paragraph.add_run(modified_text)
+            else:
+                run = paragraph.add_run(text)
+            run.bold = bold
+            run.italic = italic
+            if set_font:
+                run.font.name = 'Aptos'
+                run.font.size = Pt(12)
 
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
@@ -525,7 +620,7 @@ class DocumentGenerator:
 
         # If no verses found with bold format, try heading format (college uses this)
         if len(verse_blocks) <= 1:
-            verse_blocks = re.split(r'(?=^#{2,3} Verse \d+\s*\n)', content, flags=re.MULTILINE)
+            verse_blocks = re.split(r'(?=^#{2,} Verse \d+\s*\n)', content, flags=re.MULTILINE)
 
         # If still no verses found, try plain format without any markdown
         if len(verse_blocks) <= 1:
@@ -541,7 +636,7 @@ class DocumentGenerator:
             # Try all formats for verse number matching
             verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])  # **Verse X**
             if not verse_num_match:
-                verse_num_match = re.match(r'^#{2,3} Verse (\d+)\s*', lines[0])  # ### Verse X or ## Verse X
+                verse_num_match = re.match(r'^#{2,} Verse (\d+)\s*', lines[0])  # ### Verse X, ## Verse X, #### Verse X, etc.
             if not verse_num_match:
                 verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])  # Verse X
 

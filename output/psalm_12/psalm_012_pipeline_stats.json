@@ -1,0 +1,399 @@
+{
+  "psalm_number": 12,
+  "pipeline_start": "2025-11-27T10:04:31.770842",
+  "pipeline_end": "2025-11-27T10:30:46.868290",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1549,
+      "input_token_estimate": 516,
+      "output_char_count": 18063,
+      "output_token_estimate": 6021,
+      "duration_seconds": 124.61503291130066,
+      "completion_date": null,
+      "timestamp": "2025-11-27T10:04:31.776649"
+    },
+    "micro_analysis": {
+      "input_char_count": 18063,
+      "input_token_estimate": 6021,
+      "output_char_count": 214154,
+      "output_token_estimate": 71384,
+      "duration_seconds": 323.3067309856415,
+      "completion_date": null,
+      "timestamp": "2025-11-27T10:08:36.414318"
+    },
+    "synthesis": {
+      "input_char_count": 232219,
+      "input_token_estimate": 77406,
+      "output_char_count": 38334,
+      "output_token_estimate": 12778,
+      "duration_seconds": 345.70408058166504,
+      "completion_date": null,
+      "timestamp": "2025-11-27T10:15:59.804809"
+    },
+    "master_editor": {
+      "input_char_count": 253431,
+      "input_token_estimate": 84477,
+      "output_char_count": 42109,
+      "output_token_estimate": 14036,
+      "duration_seconds": 301.3537678718567,
+      "completion_date": "2025-11-27T10:30:46.868290",
+      "timestamp": "2025-11-27T10:23:46.770832"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "שְּׁמִינִית",
+        "reason": "Hapax-like liturgical term - debate over musical vs. numerical meaning crucial for v.1/v.7 connection"
+      },
+      {
+        "word": "חָסִיד",
+        "reason": "Key covenant term paired with emunim - need precise semantic range to determine if synonymous or complementary"
+      },
+      {
+        "word": "אֱמוּנִים",
+        "reason": "Paired with chasid in v.2 - LXX translates as 'truth' (abstract) rather than 'faithful ones' (persons), need to understand range"
+      },
+      {
+        "word": "שָׁוְא",
+        "reason": "First word of v.3, setting tone - semantic range includes 'lies/vanity/emptiness', need to determine primary sense here"
+      },
+      {
+        "word": "חֲלָקוֹת",
+        "reason": "'Smooth' as descriptor of deceptive speech - tactile metaphor worth investigating across wisdom/prophetic literature"
+      },
+      {
+        "word": "גְּדֹלוֹת",
+        "reason": "'Great/arrogant things' in v.4 may have political/royal connotations (cf. Daniel 7) - need to trace usage"
+      },
+      {
+        "word": "נַגְבִּיר",
+        "reason": "Rare hiphil of גבר - 'prevail/be strong' with tongue as subject unusual, need semantic profile"
+      },
+      {
+        "word": "שֹׁד",
+        "reason": "Violence/plundering term in v.6 divine oracle - need to understand scope (physical vs. economic vs. social)"
+      },
+      {
+        "word": "יָפִיחַ",
+        "reason": "Major crux in v.6 - BDB essential for determining if 'breathe/puff/give relief/speak boldly'"
+      },
+      {
+        "word": "אִמְרוֹת",
+        "reason": "Chosen over common devarim in v.7 - need to understand why this lexical choice for divine speech"
+      },
+      {
+        "word": "צָרוּף",
+        "reason": "Technical metallurgical term - need to determine if real process or purely metaphorical"
+      },
+      {
+        "word": "עֲלִיל",
+        "reason": "Unclear whether 'earthen crucible' or location or process - hapax-adjacent usage"
+      },
+      {
+        "word": "מְזֻקָּק",
+        "reason": "Purification term in pual - technical vocabulary for refinement process"
+      },
+      {
+        "word": "זֻלּוּת",
+        "reason": "Hapax legomenon in v.9 - 'baseness/vileness', crucial for understanding psalm's bleak ending"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "בלב ולב",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Determine if 'heart and heart' is idiom or creative coinage for duplicity"
+      },
+      {
+        "query": "שפת חלקות",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track 'smooth lips' deception imagery across wisdom literature"
+      },
+      {
+        "query": "לשננו נגביר",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Linguistic autonomy claim - is this unique expression of tongue-as-power?"
+      },
+      {
+        "query": "מי אדון לנו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Rhetorical rejection of sovereignty - trace similar defiant questions"
+      },
+      {
+        "query": "שפתינו אתנו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Lips 'with us' as possession/autonomy claim - unique phrase?"
+      },
+      {
+        "query": "עתה אקום",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Theophanic intervention formula - track divine 'arising' in response to oppression"
+      },
+      {
+        "query": "אמרות יהוה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track 'imrot YHWH' vs. 'devarim YHWH' - does imrot suggest oracular/prophetic speech?"
+      },
+      {
+        "query": "כסף צרוף",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Silver refinement as purity metaphor - how widely used and with what nuances?"
+      },
+      {
+        "query": "שבעתים",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Sevenfold pattern - symbolic completeness or literal process references?"
+      },
+      {
+        "query": "הדור זו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "'This generation' as temporal/qualitative marker - how used elsewhere?"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Double heart as divided self - vivid body imagery for duplicity | Vehicle: heart | Related terms: hearts, lev, levav",
+        "vehicle": "heart",
+        "vehicle_terms": [
+          "heart",
+          "hearts",
+          "lev",
+          "levav"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Smooth lips as tactile metaphor for flattery/deception | Vehicle: smooth | Related terms: smoothness, flattering, flattery, slippery",
+        "vehicle": "smooth",
+        "vehicle_terms": [
+          "smooth",
+          "smoothness",
+          "flattering",
+          "flattery",
+          "slippery"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Cutting off body parts as violent judgment imagery | Vehicle: cut off | Related terms: cutting, sever, severing, destroy, destroying",
+        "vehicle": "cut off",
+        "vehicle_terms": [
+          "cut off",
+          "cutting",
+          "sever",
+          "severing",
+          "destroy",
+          "destroying"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Tongue as weapon/tool of dominance - martial metaphor | Vehicle: tongue | Related terms: tongues, lashon",
+        "vehicle": "tongue",
+        "vehicle_terms": [
+          "tongue",
+          "tongues",
+          "lashon"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "God arising as theophanic action - anthropomorphic intervention | Vehicle: arise | Related terms: arises, arising, rise, rising, stand, standing",
+        "vehicle": "arise",
+        "vehicle_terms": [
+          "arise",
+          "arises",
+          "arising",
+          "rise",
+          "rising",
+          "stand",
+          "standing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Silver refinement as purity metaphor - metallurgical imagery for divine speech | Vehicle: refined | Related terms: refine, refining, purified, purify, purifying",
+        "vehicle": "refined",
+        "vehicle_terms": [
+          "refined",
+          "refine",
+          "refining",
+          "purified",
+          "purify",
+          "purifying"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Sevenfold process as completeness imagery - numerical symbolism | Vehicle: seven | Related terms: seventh, sevenfold",
+        "vehicle": "seven",
+        "vehicle_terms": [
+          "seven",
+          "seventh",
+          "sevenfold"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Guarding/keeping as protective shepherd imagery | Vehicle: guard | Related terms: guards, guarding, keep, keeps, keeping, protect, protecting",
+        "vehicle": "guard",
+        "vehicle_terms": [
+          "guard",
+          "guards",
+          "guarding",
+          "keep",
+          "keeps",
+          "keeping",
+          "protect",
+          "protecting"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Wicked walking/roaming as spatial threat imagery - encirclement | Vehicle: walk | Related terms: walking, walks, roam, roaming, roams, wander, wandering",
+        "vehicle": "walk",
+        "vehicle_terms": [
+          "walk",
+          "walking",
+          "walks",
+          "roam",
+          "roaming",
+          "roams",
+          "wander",
+          "wandering"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "12:1",
+        "reason": "Enigmatic 'sheminith' superscription - how do commentators interpret musical vs. numerical meaning and connection to v.7?"
+      },
+      {
+        "verse": "12:2",
+        "reason": "Disappearance of chasid and emunim - classical interpretation of these paired terms and hyperbolic language"
+      },
+      {
+        "verse": "12:3",
+        "reason": "Central 'heart and heart' idiom - traditional understanding of duplicity imagery and its moral implications"
+      },
+      {
+        "verse": "12:4",
+        "reason": "Violent imprecation against speech organs - how commentators handle ethics of cutting off lips/tongue"
+      },
+      {
+        "verse": "12:5",
+        "reason": "Direct quotation of wicked speech - traditional analysis of linguistic autonomy as practical atheism"
+      },
+      {
+        "verse": "12:6",
+        "reason": "THE structural pivot with divine oracle - commentators on liturgical function and obscure 'yafiach lo'"
+      },
+      {
+        "verse": "12:7",
+        "reason": "Theological center contrasting divine/human speech - classical interpretation of sevenfold refinement metaphor"
+      },
+      {
+        "verse": "12:8",
+        "reason": "Major pronoun ambiguity crux - who/what is protected? Commentators' resolution of 'them' and 'him'"
+      },
+      {
+        "verse": "12:9",
+        "reason": "Paradoxical bleak ending after divine promise - traditional theology of eschatological tension and rare 'zullut'"
+      }
+    ],
+    "lexicon_entries_count": 34,
+    "concordance_results": {
+      "בלב ולב": 2,
+      "שפת חלקות": 2,
+      "לשננו נגביר": 1,
+      "מי אדון לנו": 1,
+      "שפתינו אתנו": 1,
+      "עתה אקום": 9,
+      "אמרות יהוה": 21,
+      "כסף צרוף": 2,
+      "שבעתים": 24,
+      "הדור זו": 1
+    },
+    "figurative_results": {
+      "total_instances_used": 370
+    },
+    "commentary_counts": {
+      "Rashi": 8,
+      "Ibn Ezra": 9,
+      "Radak": 9,
+      "Malbim": 6,
+      "Meiri": 9,
+      "Torah Temimah": 6,
+      "Metzudat David": 8
+    },
+    "sacks_references_count": 1,
+    "related_psalms_count": 3,
+    "related_psalms_list": [
+      64,
+      17,
+      34
+    ],
+    "ugaritic_parallels": [
+      {
+        "type": "Poetic Word Pair",
+        "reference": "Psalm 12:7 [Eng. 12:6]",
+        "analysis": "The symbolic use of the number seven is a widespread cultural motif in the Ancient Near East, not li..."
+      }
+    ],
+    "research_bundle_chars": 202144,
+    "research_bundle_tokens": 67381
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the precise semantic relationship between ḥāsîḏ (faithful/godly) and 'ĕmûnîm (loyal/faithful ones) in v. 2—are these synonyms or do they represent distinct aspects of covenant faithfulness?",
+      "What is the idiomatic meaning of 'heart and heart' (bəlēḇ wālēḇ) in v. 3—is this a known Hebrew expression for duplicity, and how does it contrast with biblical language of wholehearted devotion?",
+      "How common is direct divine speech (oracle) within lament psalms, and what does its presence here suggest about the psalm's liturgical function or prophetic character?",
+      "What is the technical metallurgical process behind 'refined sevenfold' in v. 7—is this describing an actual seven-stage purification, or is 'seven' purely symbolic? How does this compare to other biblical uses of metallurgical imagery?",
+      "Who is the antecedent of the pronouns in v. 8—does 'them' refer to God's words (v. 7) or the oppressed (v. 6), and does 'him' refer to an individual or collective 'righteous remnant'?",
+      "What is the significance of the phrase 'this generation' (haddôr zû) in v. 8—does it refer to a specific historical period or a moral quality (this 'type' of generation)?",
+      "How does the statement 'when baseness is exalted among the sons of men' (kərûm zullûṯ libənê 'āḏām) in v. 9 function grammatically and theologically—is it temporal ('when'), causal ('because'), or descriptive ('as/while')?",
+      "What is the relationship between the 'plundered poor' ('ăniyyîm) and 'needy' ('eḇyônîm) in v. 6 and the vanished 'faithful' in v. 2—are they the same group, or does the psalm shift focus?",
+      "How does the verb 'cut off' (yakhreṯ) in v. 4 function in judgment contexts elsewhere in the Hebrew Bible—is this covenant curse language?",
+      "What is the 'sheminith' in the superscription (v. 1), and could its meaning (eighth, octave, eight-stringed) relate thematically to the psalm's concern with perfect/complete speech?",
+      "How does Psalm 12's concern with corrupt speech relate to wisdom literature's speech ethics (Proverbs) and to prophetic denunciations of social injustice (Isaiah, Micah)?",
+      "What is the theological significance of the eschatological tension created by v. 9—why does the psalm end with the wicked still roaming rather than with divine victory?"
+    ],
+    "micro_questions": [
+      "Why does the psalmist use 'אִמְרוֹת' (imrot) instead of the more common 'דְּבָרִים' (devarim) for God's words in v.7, and does this lexical choice carry semantic significance?",
+      "What is the precise idiomatic meaning and literary function of 'בְּלֵב וָלֵב' (heart and heart) in v.3—is this a creative coinage or a known expression for duplicity?",
+      "Is the sevenfold refinement in v.7 describing an actual ancient metallurgical process with seven stages, or is 'seven' purely symbolic of completeness?",
+      "Who are the antecedents of the pronouns in v.8—does 'them' refer to God's words or the oppressed, and does 'him' refer to an individual, a collective, or back to the words?",
+      "Why does the psalm end (v.9) with the wicked still roaming after God's promise of protection (vv.6-8)—is this theological tension intentional or does it suggest liturgical incompleteness?",
+      "What does the obscure phrase 'יָפִיחַ לוֹ' (yafiach lo) in v.6 mean—is it 'breathe for him,' 'give relief,' 'speak boldly,' or something else entirely?",
+      "How does the rare word 'זֻלּוּת' (zullut - baseness/vileness) function in v.9, and why does it appear only here in the Hebrew Bible?",
+      "What is the relationship between 'חָסִיד' (chasid) and 'אֱמוּנִים' (emunim) in v.2—are these synonymous terms or do they represent distinct aspects of covenant faithfulness?",
+      "Is there a thematic or symbolic connection between 'שְּׁמִינִית' (sheminith - eighth) in the superscription and 'שִׁבְעָתָיִם' (sevenfold) in v.7, or are these independent?",
+      "What is the grammatical and theological function of 'כְּרֻם' in v.9—is it temporal ('when'), causal ('because'), or descriptive ('as'), and how does this affect the verse's meaning?",
+      "Why does the LXX translate 'אֱמוּנִים' (emunim - faithful ones) as 'ἀλήθεια' (alētheia - truth) in v.2, shifting from persons to abstract quality?",
+      "Does the direct divine oracle in v.6 suggest this psalm functioned in a liturgical setting where a prophet or priest delivered God's response to communal lament?",
+      "How does the phrase 'our lips are with us' ('שְׂפָתֵינוּ אִתָּנוּ') in v.5 function—does it imply possession, availability, alliance, or autonomy?",
+      "What is the significance of using 'אָדוֹן' (adon - master/lord) in the oppressors' question (v.5) rather than a term like 'מֶלֶךְ' (king) or directly 'יְהוָה' (YHWH)?",
+      "Why does v.7 describe silver refined 'בַּעֲלִיל לָאָרֶץ' (in an earthen crucible/on the ground)—what does this grounding of the purification process contribute to the metaphor?"
+    ],
+    "verse_count": 9
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5.1"
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "psalm_number": 121,
+  "pipeline_start": "2025-11-28T13:11:42.608027",
+  "pipeline_end": "2025-11-28T13:39:26.583613",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1061,
+      "input_token_estimate": 353,
+      "output_char_count": 17618,
+      "output_token_estimate": 5872,
+      "duration_seconds": 113.24505686759949,
+      "completion_date": null,
+      "timestamp": "2025-11-28T13:11:42.620138"
+    },
+    "micro_analysis": {
+      "input_char_count": 17618,
+      "input_token_estimate": 5872,
+      "output_char_count": 283195,
+      "output_token_estimate": 94398,
+      "duration_seconds": 496.6135952472687,
+      "completion_date": null,
+      "timestamp": "2025-11-28T13:15:35.890226"
+    },
+    "synthesis": {
+      "input_char_count": 300815,
+      "input_token_estimate": 100271,
+      "output_char_count": 42599,
+      "output_token_estimate": 14199,
+      "duration_seconds": 360.7141857147217,
+      "completion_date": null,
+      "timestamp": "2025-11-28T13:25:52.543938"
+    },
+    "master_editor": {
+      "input_char_count": 327038,
+      "input_token_estimate": 109012,
+      "output_char_count": 36352,
+      "output_token_estimate": 12117,
+      "duration_seconds": 213.31616067886353,
+      "completion_date": "2025-11-28T13:39:26.583613",
+      "timestamp": "2025-11-28T13:33:54.845144"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "מַעֲלוֹת",
+        "reason": "Technical term in 'Songs of Ascents' - pilgrimage, steps, or degrees? Etymology and cultic usage"
+      },
+      {
+        "word": "מֵאַיִן",
+        "reason": "Interrogative form opening psalm - precise semantic force and rhetorical function"
+      },
+      {
+        "word": "עֶזְרִי",
+        "reason": "Key theological term appearing twice - range of meanings (help, aid, assistance) and covenant implications"
+      },
+      {
+        "word": "מֵעִם",
+        "reason": "Unusual preposition 'from with/beside' - spatial theology of divine presence"
+      },
+      {
+        "word": "עֹשֵׂה",
+        "reason": "Participle form in creedal formula - ongoing creation vs. completed act, theological significance"
+      },
+      {
+        "word": "מוֹט",
+        "reason": "Verb of slipping/tottering - literal/metaphorical range, stability imagery in Psalms"
+      },
+      {
+        "word": "נוּם",
+        "reason": "Relatively rare term for slumber - distinction from יָשֵׁן, usage patterns"
+      },
+      {
+        "word": "שֹׁמֵר",
+        "reason": "Six-fold repetition central to psalm - guardian/keeper/watcher semantic range and covenant theology"
+      },
+      {
+        "word": "צֵל",
+        "reason": "Multivalent shade/shadow metaphor - protection, military, temple imagery ranges"
+      },
+      {
+        "word": "יַכֶּכָּה",
+        "reason": "Sun 'striking' - specific verb choice (נכה) and its violent/protective connotations"
+      },
+      {
+        "word": "יָרֵחַ",
+        "reason": "Moon as threat agent - lunar beliefs, mythological background, ANE context"
+      },
+      {
+        "word": "נֶפֶשׁ",
+        "reason": "Life/soul/person in protection context - scope of divine guardianship claim"
+      },
+      {
+        "word": "צֵאת",
+        "reason": "Going out/coming in merismus - technical pilgrimage/military/temple usage?"
+      },
+      {
+        "word": "עוֹלָם",
+        "reason": "Forever/eternity in liturgical blessing - temporal scope and eschatological implications"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "שיר למעלות",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Track 'Song of Ascents' formula across Psalms 120-134"
+      },
+      {
+        "query": "עשה שמים וארץ",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Locate 'maker of heaven and earth' creedal formula - is it fixed liturgical language?"
+      },
+      {
+        "query": "אל יתן למוט",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Find 'not let slip/totter' assurance formula patterns"
+      },
+      {
+        "query": "לא ינום ולא יישן",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Search for doubled sleep negation - unique or conventional formula?"
+      },
+      {
+        "query": "שומר ישראל",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Track 'guardian of Israel' title for YHWH - covenant theology"
+      },
+      {
+        "query": "על יד ימין",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Right hand positioning imagery - military, legal, or honor contexts"
+      },
+      {
+        "query": "יומם השמש",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Sun by day formula - literal danger or demythologizing polemic?"
+      },
+      {
+        "query": "ירח בלילה",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Moon by night threat - lunar danger traditions in biblical literature"
+      },
+      {
+        "query": "ישמר מכל רע",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Comprehensive protection formula - 'guard from all evil' usage"
+      },
+      {
+        "query": "צאתך ובואך",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Going out and coming in merismus - pilgrimage, military (Num 27:17), or general?"
+      },
+      {
+        "query": "מעתה ועד עולם",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "From now and forever formula - liturgical blessing pattern"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Mountains as ambiguous symbol - threat or hope, Zion or pagan high places | Vehicle: mountains | Related terms: mountain, hills, hill, heights, height",
+        "vehicle": "mountains",
+        "vehicle_terms": [
+          "mountains",
+          "mountain",
+          "hills",
+          "hill",
+          "heights",
+          "height"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Heaven and earth merismus - creation totality rhetoric | Vehicle: heaven and earth | Related terms: heavens and earth, sky and earth, skies and earth",
+        "vehicle": "heaven and earth",
+        "vehicle_terms": [
+          "heaven and earth",
+          "heavens and earth",
+          "sky and earth",
+          "skies and earth"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Foot slipping imagery - stability metaphor for faithfulness and disaster | Vehicle: slip | Related terms: slipping, slips, stumble, stumbles, stumbling, totter, totters, tottering, fall, falls, falling",
+        "vehicle": "slip",
+        "vehicle_terms": [
+          "slip",
+          "slipping",
+          "slips",
+          "stumble",
+          "stumbles",
+          "stumbling",
+          "totter",
+          "totters",
+          "tottering",
+          "fall",
+          "falls",
+          "falling"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Sleeplessness as divine vigilance - contrasts with ANE sleeping deity myths | Vehicle: slumber | Related terms: slumbers, slumbering, sleep, sleeps, sleeping, drowse, drowsing",
+        "vehicle": "slumber",
+        "vehicle_terms": [
+          "slumber",
+          "slumbers",
+          "slumbering",
+          "sleep",
+          "sleeps",
+          "sleeping",
+          "drowse",
+          "drowsing"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Shade/shadow as protection - thermal, military, temple, or spiritual covering | Vehicle: shade | Related terms: shadow, shadows, shelter, shelters, covering, cover",
+        "vehicle": "shade",
+        "vehicle_terms": [
+          "shade",
+          "shadow",
+          "shadows",
+          "shelter",
+          "shelters",
+          "covering",
+          "cover"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Right hand positioning - military, legal, or honor symbolism | Vehicle: right hand | Related terms: right side, right arm",
+        "vehicle": "right hand",
+        "vehicle_terms": [
+          "right hand",
+          "right side",
+          "right arm"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Sun striking as threat - literal sunstroke or demythologizing solar deity | Vehicle: strike | Related terms: strikes, striking, smite, smites, smiting, hit, hits, hitting",
+        "vehicle": "strike",
+        "vehicle_terms": [
+          "strike",
+          "strikes",
+          "striking",
+          "smite",
+          "smites",
+          "smiting",
+          "hit",
+          "hits",
+          "hitting"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Day and night merismus - 24-hour comprehensive protection rhetoric | Vehicle: day and night | Related terms: day or night, night and day",
+        "vehicle": "day and night",
+        "vehicle_terms": [
+          "day and night",
+          "day or night",
+          "night and day"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Soul/life protection - scope of divine guardianship claim | Vehicle: soul | Related terms: souls, life, lives, being, self",
+        "vehicle": "soul",
+        "vehicle_terms": [
+          "soul",
+          "souls",
+          "life",
+          "lives",
+          "being",
+          "self"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Going out and coming in - comprehensive life activity merismus | Vehicle: going out | Related terms: going forth, departure, departures, exit, exits",
+        "vehicle": "going out",
+        "vehicle_terms": [
+          "going out",
+          "going forth",
+          "departure",
+          "departures",
+          "exit",
+          "exits"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "121:1",
+        "reason": "Opening question and mountain ambiguity - how do commentators interpret the source of help and the role of mountains?"
+      },
+      {
+        "verse": "121:2",
+        "reason": "Answer with 'maker of heaven and earth' - traditional understanding of creedal formula and cosmic sovereignty claim"
+      },
+      {
+        "verse": "121:3",
+        "reason": "Voice shift to second person - liturgical dialogue structure and priestly response interpretation"
+      },
+      {
+        "verse": "121:4",
+        "reason": "Doubled sleep negation and 'guardian of Israel' - anti-pagan polemic and covenant identity"
+      },
+      {
+        "verse": "121:5",
+        "reason": "YHWH name repetition and shade metaphor - divine intimacy and right hand protection symbolism"
+      },
+      {
+        "verse": "121:6",
+        "reason": "Sun and moon threats - lunar danger traditions and astral demythologizing polemic"
+      },
+      {
+        "verse": "121:7",
+        "reason": "Double שמר and comprehensive protection - 'all evil' scope and soul/life distinction"
+      },
+      {
+        "verse": "121:8",
+        "reason": "Concluding blessing with temporal and spatial totality - going/coming and now/forever merismus"
+      }
+    ],
+    "lexicon_entries_count": 35,
+    "concordance_results": {
+      "שיר למעלות": 15,
+      "עשה שמים וארץ": 6,
+      "אל יתן למוט": 7,
+      "לא ינום ולא יישן": 2,
+      "שומר ישראל": 1,
+      "על יד ימין": 5,
+      "יומם השמש": 1,
+      "ירח בלילה": 0,
+      "ישמר מכל רע": 1,
+      "צאתך ובואך": 1,
+      "מעתה ועד עולם": 65
+    },
+    "figurative_results": {
+      "total_instances_used": 368
+    },
+    "commentary_counts": {
+      "Rashi": 1,
+      "Ibn Ezra": 7,
+      "Radak": 6,
+      "Metzudat David": 7,
+      "Malbim": 8,
+      "Meiri": 8,
+      "Torah Temimah": 2
+    },
+    "sacks_references_count": 2,
+    "related_psalms_count": 4,
+    "related_psalms_list": [
+      124,
+      134,
+      15,
+      131
+    ],
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 272309,
+    "research_bundle_tokens": 90769
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the precise semantic range and theological significance of the 'mountains' in v. 1? Are they threatening (dangerous terrain, pagan high places like Bashan/Hermon) or promising (Zion, divine dwelling)? How does this ambiguity function rhetorically?",
+      "How does the title 'maker of heaven and earth' (עשה שמים וארץ) function elsewhere in the Psalter and Hebrew Bible? Is this a credal formula? Does it have polemical force against ANE cosmologies?",
+      "What is the literary and theological significance of God 'not sleeping' in v. 4? Are there Ugaritic or ANE parallels where deities sleep/require awakening? How does this contrast with Elijah's satire in 1 Kings 18:27 or protests like Psalm 44:23?",
+      "What is the image of YHWH as 'shade at your right hand' in v. 5? Is this military protection (right hand = weapon side), travel/desert imagery (shade from heat), or temple symbolism (wings of cherubim)? How does צל function elsewhere in psalmic theology?",
+      "What is the nature of the threat from sun and moon in v. 6? Is this literal (sunstroke, believed lunar influence on mental health), mythological (demonic forces), or metaphorical? What ANE background illuminates moon as dangerous?",
+      "The six-fold repetition of שמר—is there numerological significance? Why not seven (more common completeness number)? Does the distribution pattern (1-1-1-2 across verses 3-4-5-7-8) have structural purpose?",
+      "What is the specific meaning of 'your going out and coming in' (צאתך ובואך) in v. 8? Is this a technical term for pilgrimage, a merismus for all life activities, military language (cf. Num 27:17, Deut 28:6), or temple entry/exit?",
+      "How does this psalm relate literarily and theologically to other Songs of Ascents (Psalms 120-134)? Are there shared vocabulary, themes (Zion, protection, journey), or structural features (brevity, staircase parallelism)?",
+      "What is the liturgical function of the voice shift from first to second person? Does this reflect antiphonal performance between pilgrim and priest, or movement from individual to congregation? Are there other psalms with similar dialogical structures?",
+      "How does the progression from individual ('my help,' 'your foot') to collective ('Israel,' v. 4) to individual again ('you,' vv. 5-8) construct identity? What theological claim about the relationship between personal and communal faith is being made?"
+    ],
+    "micro_questions": [
+      "What exactly is the semantic range and threat profile of the mountains in v1—are they dangerous terrain, pagan high places, or hopeful symbols (Zion)?",
+      "Why does the psalm use six-fold שמר repetition rather than seven (the more conventional completeness number in biblical literature)?",
+      "What is the specific nature of the moon's threat in v6—is this about lunacy beliefs, nocturnal demons, or simply poetic parallelism with sun?",
+      "How does the 'maker of heaven and earth' formula function elsewhere—is this a fixed creedal phrase, and does it have specific anti-pagan polemical force?",
+      "What is the precise imagery of YHWH as 'shade at your right hand'—military protection, desert travel relief, temple symbolism, or legal advocacy?",
+      "Does the phrase 'your going out and coming in' (v8) have technical meaning in pilgrimage, military, or temple contexts, or is it purely a general merismus?",
+      "How does the voice shift from first to second person function liturgically—who are the implied speakers (pilgrim/priest, individual/congregation)?",
+      "What ANE parallels exist for gods who 'sleep' or 'slumber' that would make v4's doubled negation particularly polemical?",
+      "Why does v4 expand from individual ('your guardian') to collective ('guardian of Israel')—what theological claim about personal/communal identity is being made?",
+      "What is the relationship between the geographical mountains (v1) and the cosmic 'heaven and earth' (v2)—is this movement from particular to universal significant?"
+    ],
+    "verse_count": 8
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5.1"
+  }
+}
