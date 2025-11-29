@@ -1,0 +1,520 @@
+### EDITORIAL ASSESSMENT
+
+The existing introduction and commentary have a lot going for them. They’re well‑informed, text‑centered, and notice many genuinely interesting things: the “heart and heart” idiom (בְּלֵב וָלֵב), the contrast between smooth human lips and refined divine words, the grammatical puzzle in v.8, and the unusual divine oracle in v.6. Traditional Jewish commentators are brought in intelligently, and the macro‑thesis—that Psalm 12 is about a breakdown of language—is strong.
+
+For a first‑year college audience, though, there are several problems:
+
+- **Density and jargon.** The prose leans toward dissertation‑speak. Terms like *jussive, synecdoche, ontological crisis, semantic range, chiastic, eschatological tension* appear with little or no explanation. A sharp student can handle these concepts, but they need quick, plain‑English definitions.
+
+- **Too many abstract claims, not enough concrete showing.** The draft *tells* us the imagery is “metallurgical” or that a phrase “functions as an inclusio,” but often doesn’t pause to let the reader actually *see* the Hebrew and feel how the lines work. More short, well‑chosen Hebrew+English quotations from parallels (Micah 7:2, Proverbs on speech, Psalms 17/34/64) would help.
+
+- **Missed liturgical integration.** The current liturgical section is thin. It mentions Shemini Atzeret and Selichot, but doesn’t quote the relevant prayers in Hebrew+English or explain how those contexts shape how Jews hear the psalm.
+
+- **Some research questions are raised but not clearly answered.** For example, the semantic distinction between חָסִיד and אֱמוּנִים, or the options for “them/him” in v.8, are discussed but could be synthesized more clearly.
+
+- **Tone.** The tone is generally fine but a bit solemn and “scholarly article” in places. For this audience, we want “brilliant professor explaining things over coffee,” not “conference paper.”
+
+Revisions should: (1) simplify and explain technical terms; (2) foreground the big structural arc; (3) use more examples from the Hebrew Bible and liturgy, quoted and translated; (4) explicitly answer several of the research questions; and (5) keep the focus on why these details make the poem more powerful and relevant.
+
+---
+
+### REVISED INTRODUCTION
+
+#### A quick map of what we’re reading
+
+Psalm 12 is short—nine verses in Hebrew—but it’s packed. The poet looks around and concludes that something basic has broken in his society. Not the economy. Not the army. **Language.**  
+
+People lie easily, flatter for advantage, say one thing and mean another. The ones who actually live by חֶסֶד (*ḥesed*, “steadfast loyalty”) and אֱמוּנָה (*’emunah*, “trustworthiness”) seem to have disappeared. In the middle of this complaint, God suddenly speaks—a rare moment of direct divine speech inside a lament. God promises to rise up for the exploited poor. The psalmist responds by reflecting on how utterly reliable God’s words are—“silver refined seven times” (v.7)—yet the poem ends by admitting that the wicked are still prowling around (v.9).
+
+So the emotional journey is:
+
+1. “Help, the good people are gone and everyone lies” (vv.2–3)  
+2. “Cut off these smooth, arrogant tongues!” (vv.4–5)  
+3. God: “Now I will arise because of the poor” (v.6)  
+4. “Your words are completely pure; you will guard your people—even though the wicked still roam” (vv.7–9)
+
+#### When society breaks at the level of speech
+
+The opening cry is blunt:
+
+> הוֹשִׁיעָה יְהוָה, כִּי־גָמַר חָסִיד;  
+> כִּי־פַסּוּ אֱמוּנִים, מִבְּנֵי אָדָם.  
+> “Save, LORD, for the **ḥasid** is finished;  
+> for the **faithful ones** have vanished from among the children of Adam.” (v.2)
+
+Two key words here:
+
+- **חָסִיד (*ḥāsid*)** comes from חֶסֶד (*ḥesed*), “steadfast love, covenant loyalty.” A *ḥāsid* is someone who *practices* loyal kindness—doing more than the bare minimum.
+- **אֱמוּנִים (*’emunim*)** comes from the root אמן (*’mn*), “to be firm, reliable.” These are the *trustworthy* ones, whose word you can rely on.
+
+So the poet isn’t just saying “nice people are rare.” He’s saying: people who *keep commitments* (ḥasid) and people whose *word is reliable* (’emunim) have “come to an end” (גָמַר) and “ceased” (פָסּוּ). Hyperbole? Probably, yes—biblical laments love exaggeration for effect—but it captures the feeling that you can’t trust anyone’s promises or statements anymore.
+
+Notice the phrase **מִבְּנֵי אָדָם** (“from among the children of Adam”) here, and again at the end:
+
+> כְּרֻם זֻלּוּת לִבְנֵי אָדָם  
+> “when baseness is exalted among the children of Adam.” (v.9)
+
+That repetition is an **inclusio**—a framing device where the same phrase at the beginning and end brackets the whole poem. The envelope here is “the human world,” which has gone linguistically rotten.
+
+#### “Heart and heart”: the psychology of double speech
+
+Verse 3 zooms in on how people now talk:
+
+> שָׁוְא יְדַבְּרוּ, אִישׁ אֶת־רֵעֵהוּ;  
+> שְׂפַת חֲלָקוֹת, בְּלֵב וָלֵב יְדַבֵּרוּ.  
+> “Falsehood they speak, each to his fellow;  
+> **smooth lips**—with **heart and heart** they speak.”
+
+You’ve got three images:
+
+- **שָׁוְא (*shav’*)** – “emptiness, lies, nothingness.” Their words are disconnected from reality.
+- **שְׂפַת חֲלָקוֹת (*śefat ḥalaqot*)** – literally “smooth lips.” Smooth in Hebrew often implies *slippery* or *flattering* speech—pleasant on the surface, dangerous underneath (compare Ps 55:22: *“חָלְקוּ מַחְמָאֹת פִּיו… וְהֵמָּה פְתִחֽוֹת”* – “his words were smoother than butter… yet they were drawn swords”).
+- **בְּלֵב וָלֵב (*b’lev va‑lev*)** – literally “with heart and heart.” This idiom shows up only here and once in 1 Chronicles 12:34, where the negative form means wholehearted loyalty:  
+  > וְלַעֲדֹר בְּלֹא־לֵב וָלֵב  
+  > “to help **without heart and heart**” = with an *undivided* heart.
+  
+So “heart and heart” is the opposite of the Shema’s “בְּכָל־לְבָבְךָ” (“with all your heart,” Deut 6:5). It pictures a person with two internal centers—one heart for show, one heart for what they really intend. Rashi (11th‑c. France) puts it nicely: *“לי מראים שלום, ויש שנאה טמונה בלבבם”*—“To me they show peace, but hatred is hidden in their heart.”
+
+This is why language matters so much here: it’s not only about individual lies; it’s about a *split self* leaking out through words.
+
+#### When people say, “Our lips are our own”
+
+The poem then does something clever: it *quotes* the arrogant speakers.
+
+> לִלְשֹׁנֵנוּ נַגְבִּיר; שְׂפָתֵינוּ אִתָּנוּ, מִי אָדוֹן לָנוּ.  
+> “With our tongue we will prevail;  
+> our lips are with us—who is master over us?” (v.5)
+
+Three claims in three short phrases:
+
+1. **“With our tongue we will prevail”** – speech as a weapon and tool of power.
+2. **“Our lips are with us”** – our speech organs are *ours*, under our control, owing nothing to anyone.
+3. **“Who is master over us?”** – a rhetorical question: they reject any higher authority, especially over what they say.
+
+The Talmud picks up this verse to define **לשון הרע (lashon hara)**—“evil speech.” In Arakhin 15b we read: *“כל המספר לשון הרע כאילו כפר בעיקר, שנאמר… מִי אָדוֹן לָנוּ”*—“Whoever speaks evil speech, it is as if he denied the fundamental principle [God], as it is said, ‘Who is master over us?’” In other words, claiming total autonomy over your tongue is, in practice, atheism.
+
+#### God breaks into the conversation
+
+Suddenly, in verse 6, a new voice:
+
+> מִשֹּׁד עֲנִיִּים, מֵאֶנְקַת אֶבְיוֹנִים;  
+> עַתָּה אָקוּם, יֹאמַר יְהוָה;  
+> אָשִׁית בְּיֵשַׁע, יָפִיחַ לוֹ.  
+> “Because of the devastation of the poor, the sighing of the needy—  
+> **Now I will arise**, says the LORD;  
+> I will place [him] in safety—he pants for it / I will speak it to him.”
+
+This is a little **oracle**—a direct divine message inside the psalm. That’s rare. Most laments move from complaint to confidence without quoting God. Here, by contrast, we get a mini “Thus says the LORD” moment (note the formula *יֹאמַר יְהוָה*).
+
+Two more paired words:
+
+- **עֲנִיִּים (*’aniyyim*)** – “poor, afflicted.”
+- **אֶבְיוֹנִים (*’evyonim*)** – “needy, destitute.”  
+
+These are classic prophetic terms for people being economically and socially crushed. Likely they *are* the missing ḥasid and ’emunim of v.2: the people who remain loyal and honest are exactly the ones getting exploited.
+
+The tricky phrase is **אָשִׁית בְּיֵשַׁע יָפִיחַ לוֹ**. The verb **יָפִיחַ (*yafiaḥ*)** literally means “to blow, breathe out,” and by extension “to utter, speak boldly.” Readings include:
+
+- “I will **place him in** deliverance, for which he gasps” – God rescues the one *panting* for help.
+- Or (Malbim): “I will **speak** salvation to him” – God’s *word* of help becomes the help.
+
+Either way, God’s response to corrupt speech is, fittingly, **more speech**—but speech that actually does something.
+
+#### Silver in the dirt: why God’s words are different
+
+Verse 7 then steps back and reflects:
+
+> אִמְרוֹת יְהוָה, אֲמָרוֹת טְהֹרוֹת;  
+> כֶּסֶף צָרוּף, בַּעֲלִיל לָאָרֶץ;  
+> מְזֻקָּק, שִׁבְעָתָיִם.  
+> “The sayings of the LORD are pure sayings:  
+> silver refined in an earthen crucible,  
+> purified sevenfold.”
+
+A couple of details:
+
+- **אִמְרוֹת (*imrot*)** instead of דְבָרִים (*devarim*): both mean “words,” but *imrot* is a more poetic term, often used for divine promises (cf. Ps 18:31, 119:140, Prov 30:5).
+- **כֶּסֶף צָרוּף… מְזֻקָּק שִׁבְעָתָיִם** – we’re in the world of ancient metallurgy. Silver ore was refined in a clay crucible sunk into the ground, heated repeatedly to burn off impurities. “Sevenfold” might reflect an actual multi‑stage process, but in biblical symbolism seven is “complete.” The point: God’s words have *no alloy*. No double heart, no hidden agenda.
+
+Compare Psalm 18:31:
+
+> אִמְרַת יְהוָה צְרוּפָה; מָגֵן הוּא לְכׇל הַחֹסִים בּוֹ.  
+> “The word of the LORD is *refined*; He is a shield to all who take refuge in Him.”
+
+Psalm 12 pushes this further: not just “refined,” but refined *seven times*.
+
+Notice also the subtle number play: the superscription says the psalm is “**עַל הַשְּׁמִינִית**” (*‘al ha‑sheminit*, “on the eighth [something]”)—probably a musical instruction for an eight‑stringed instrument or a lower octave. Later we meet **שִׁבְעָתָיִם** (“sevenfold”). In biblical thought, seven often signals perfection within the created order (seven days, seven years), while eight can hint at going beyond the ordinary (circumcision on the eighth day, Shemini Atzeret as the “eighth day” festival). You could hear the psalm as moving from “the eighth” in the heading, down through “sevenfold refinement” in the center, into the messy, less‑than‑perfect human world at the end.
+
+#### Who exactly is being protected?
+
+Verse 8 says:
+
+> אַתָּה יְהוָה, תִּשְׁמְרֵם;  
+> תִּצְּרֶנּוּ, מִן־הַדּוֹר זוּ לְעוֹלָם.  
+> “You, LORD, will **keep them**;  
+> you will **guard him** from this generation forever.”
+
+The shift from plural “them” (תִּשְׁמְרֵם) to singular “him” (תִּצְּרֶנּוּ) has kept commentators busy:
+
+- Traditional view (Radak, Metzudat David): “them” = the poor/needy; “him” = each individual among them. So: God will guard *all of them* and also *each one*.
+- Other readers: “them” = God’s **words** from v.7, which He preserves; “him” = the person who trusts those words. In that case: God both preserves His promises from distortion and protects the believer living in a corrupt generation.
+
+Either way, the phrase **מִן־הַדּוֹר זוּ** (“from this generation”) probably means not just “from people born between certain years,” but “from this kind of generation”—one defined by flattery, lies, and moral upside‑down.
+
+The verbs themselves matter: **שָׁמַר (*shamar*)** means “to keep, watch, guard”; **נָצַר (*natsar*)** also “to guard, protect.” Together they pile up the sense of continuous, active protection.
+
+#### A deliberately uneasy ending
+
+You might expect the last verse to celebrate victory: God has spoken, the poor are safe, the liars are silenced. Instead:
+
+> סָבִיב רְשָׁעִים יִתְהַלָּכוּן;  
+> כְּרֻם זֻלּוּת לִבְנֵי אָדָם.  
+> “All around, the wicked keep walking;  
+> when baseness is exalted among the children of Adam.” (v.9)
+
+Two things:
+
+- **סָבִיב… יִתְהַלָּכוּן** – “they walk around everywhere.” Same verb (hitpa’el of הלך) used of wandering; it suggests restless, ongoing activity. Psalm 34:8 gives the positive counterpart: *“חֹנֶה מַלְאַךְ־יְהוָה סָבִיב לִירֵאָיו”*—“the angel of the LORD encamps **around** those who fear Him.” In Psalm 12, that “around” is filled by wicked people, not protecting angels.
+- **כְּרֻם זֻלּוּת** – literally “when worthlessness (זֻלּוּת, a hapax = “vileness, baseness”) is lifted up / exalted (רום) among humans.” So the wicked roam freely *precisely* when trashy behavior is admired, trending, platformed.
+
+So Psalm 12 ends in tension. God’s words are absolutely reliable; God promises to rise and guard the oppressed; and yet—for now—the world still looks like Twitter on a bad day. That’s not a failure of faith; it’s a brutally realistic picture of what it feels like to live between promise and fulfillment, trying to keep your own tongue honest in a culture where “smooth lips” are winning.
+
+---
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+
+In the **Edot ha‑Mizrach** (Sephardi/Mizrahi) tradition, Psalm 12 is recited in full at **Ma‘ariv on Shemini Atzeret**, the “eighth day” festival after Sukkot—nicely echoing the superscription עַל־הַשְּׁמִינִית (“on the eighth”). It opens a small unit of verses before the festival *Amidah*, followed by the passage about the festivals, *אֵלֶּה מוֹעֲדֵי יְהוָה*, and then *Chatzi Kaddish*. The community thus enters the central prayer of the night having just said:
+
+> הוֹשִׁיעָה יְהוָה כִּי־גָמַר חָסִיד…  
+> “Save, LORD, for the pious one is gone…”  
+
+and
+
+> אִמְרוֹת יְהוָה אֲמָרוֹת טְהֹרוֹת…  
+> “The sayings of the LORD are pure sayings…”  
+
+That placement turns the psalm into a kind of spiritual “sound‑check”: we admit how fragile human words are and ask to stand before God relying on *His* speech, not ours.
+
+#### Key verses
+
+**Psalm 12:2 – Selichot**
+
+> הוֹשִׁיעָה יְהוָה כִּי־גָמַר חָסִיד, כִּי־פַסּוּ אֱמוּנִים מִבְּנֵי אָדָם.  
+> “Save, LORD, for the pious has ceased; for the faithful have vanished from among humankind.”
+
+This verse appears in several **Sephardi Selichot** (penitential prayers before the High Holidays), woven into strings of biblical cries. One common sequence goes:
+
+> כִּי אַתָּה אֲדֹנָי טוֹב וְסַלָּח…  
+> הוֹשִׁיעָה יְהוָה כִּי גָמַר חָסִיד כִּי פַסּוּ אֱמוּנִים מִבְּנֵי אָדָם;  
+> כִּי אָדָם אֵין צַדִּיק בָּאָרֶץ אֲשֶׁר יַעֲשֶׂה־טּוֹב וְלֹא יֶחֱטָא.  
+
+“For You, my Lord, are good and forgiving… Save, LORD, for the pious has ceased… For there is no righteous person on earth who does good and does not sin.” In this context the community basically says: “We *are* that generation with few ḥasidim and ’emunim; please save us anyway.”
+
+**Psalm 12:7 – Shir ha‑Yichud**
+
+> אִמְרוֹת יְהוָה אֲמָרוֹת טְהֹרוֹת…  
+> “The sayings of the LORD are pure sayings…”
+
+Medieval piyyutim (liturgical poems) sometimes quote this line. In **Shir ha‑Yichud** (“Song of Unity”), recited in some communities on Shabbat or Yom Kippur night, we find:
+
+> בַּעֲבוּר יִשְׁמְרוּ חֻקִּים וְתוֹרוֹת,  
+> אִמְרוֹת יְהוָה אֲמָרוֹת טְהוֹרוֹת.  
+
+“So that they may keep statutes and laws—  
+the sayings of the LORD, pure sayings.”  
+
+Here Psalm 12:7 becomes a slogan for **Torah itself** as perfectly trustworthy speech.
+
+#### Phrases
+
+Several Psalm‑12 phrases reappear in liturgical or rabbinic contexts, even when the psalm isn’t being quoted directly.
+
+- **אִישׁ אֶת־רֵעֵהוּ (“a man [to] his fellow,” v.3)** turns up in *Pirkei Avot* 3:2, studied weekly in many communities:  
+  > שֶׁאִלְמָלֵא מוֹרָאָהּ, אִישׁ אֶת־רֵעֵהוּ חַיִּים בָּלָעוּ.  
+  > “Were it not for the fear [of government], a man would swallow his fellow alive.”  
+  The phrase helps frame Psalm 12’s “each one lies to his fellow” as part of a larger Jewish worry about social breakdown.
+
+- The rabbis also cite **v.5** when talking about **lashon hara** (evil speech). In Arakhin 15b:  
+  > כׇּל הַמְסַפֵּר לָשׁוֹן הָרָע כְּאִלּוּ כָּפַר בָּעִקָּר, שֶׁנֶּאֱמַר… מִי אָדוֹן לָנוּ.  
+  > “Whoever speaks evil speech is as if he denied the fundamental [of faith], as it is said… ‘Who is master over us?’”  
+  So a line born in poetry ends up shaping halakhic and ethical discussions about how Jews speak to one another.
+
+---
+
+### REVISED VERSE COMMENTARY
+
+---
+
+#### Verse 1
+
+לַמְנַצֵּחַ עַל־הַשְּׁמִינִית; מִזְמוֹר לְדָוִד.  
+“For the conductor; on the sheminith. A psalm of David.”
+
+The superscription gives us two pieces of information and one mystery.
+
+- **לַמְנַצֵּחַ (*lamnatseach*)** – “for the conductor” or “choir director,” a standard heading in Psalms.
+- **מִזְמוֹר לְדָוִד** – “a psalm belonging to David,” either by David or in his style.
+- **עַל־הַשְּׁמִינִית (*‘al ha‑sheminit*)** – “on the sheminith,” which is the tricky part.
+
+The noun שְׁמִינִית comes from שְׁמִינִי, “eighth.” Most traditional and modern scholars take it as **musical**: either an eight‑stringed instrument (Rashi: *“כִּנּוֹר שֶׁל שְׁמוֹנָה נִימִין”* – “a harp of eight strings”) or playing in an “eighth” register (perhaps a lower octave). We don’t have ancient Israelite sheet music, so we can’t be sure.
+
+Given this psalm, another layer suggests itself. In the center (v.7), God’s words are “refined **sevenfold**” (*שִׁבְעָתָיִם*). Seven in the Bible is the number of completeness—seven days of creation, seven‑year sabbatical cycles. Eight often signals going **beyond** the normal cycle: circumcision on day eight (Gen 17:12), the festival of Shemini Atzeret (“the eighth [day] of assembly,” Lev 23:36).
+
+So you could hear a playful numerical arc: the psalm is “on the eighth,” but celebrates divine speech refined “seven times” and then drops us back into a world where wickedness still struts around. If seven = perfect refinement, eight may hint at what lies beyond perfection—God’s transcendence, or perhaps the reality that even perfectly pure words must operate in an imperfect world.
+
+There’s also a nice liturgical irony: in the Sephardi/Mizrahi tradition, this psalm is read at **Ma‘ariv on Shemini Atzeret**, literally “the Eighth [Day].” So the opening “on the sheminith” becomes almost a wink to the calendar as well as to the music.
+
+---
+
+#### Verse 2
+
+הוֹשִׁיעָה יְהוָה, כִּי־גָמַר חָסִיד;  
+כִּי־פַסּוּ אֱמוּנִים, מִבְּנֵי אָדָם.  
+“Save, LORD, for the pious one is finished;  
+for the faithful have vanished from among humankind.”
+
+The psalm dives straight into crisis with **הוֹשִׁיעָה יְהוָה** (*hoshi‘ah YHWH*), “Save, LORD.” No warm‑up. The double **כִּי** (“for/because”) in the next lines lays out the problem in two strokes.
+
+First, **חָסִיד (*ḥasid*)**. This adjective derives from **חֶסֶד (*ḥesed*)**, “steadfast, covenantal love.” According to the Brown–Driver–Briggs lexicon, it describes someone who actively *does* ḥesed—loyal kindness that goes beyond duty. Think of a person who not only returns your lost wallet but tracks you down in another city to do it.
+
+Second, **אֱמוּנִים (*’emunim*)**, from the root אמן, “to be firm, reliable.” BDB glosses the plural here as “faithful ones,” people who can be trusted—whose word and commitments are solid. This root gives us אֱמוּנָה (“faith, faithfulness”) and אָמֵן (“amen,” “it is firm”).
+
+So the poet isn’t piling up synonyms just for style. He’s mourning the loss of two complementary types:
+
+- Those who **do** covenant loyalty (*ḥasid*), and
+- Those who **are** dependable and honest (*’emunim*).
+
+The verbs are strong: **גָמַר חָסִיד** – “the ḥasid is finished / has come to an end”; **פַסּוּ אֱמוּנִים** – “the faithful have ceased.” Rashi glosses פַסּוּ with Old French *faillir* (“to fail”), catching the nuance of “have failed/are lacking.”
+
+This kind of “everyone’s corrupt” language is classic lament hyperbole. Micah 7:2 laments:
+
+> אָבַד חָסִיד מִן־הָאָרֶץ; וְיָשָׁר בָּאָדָם אָיִן.  
+> “The ḥasid has vanished from the land; there is no upright person among humankind.”
+
+The psalm frames this as a **human** problem with the phrase **מִבְּנֵי אָדָם** (“from among the children of Adam”), which returns in v.9. That inclusio signals: this isn’t just “a few bad apples”; something about the entire generation’s way of being human has gone off.
+
+In Sephardi **Selichot**, this verse is recited right after acknowledging God as “good and forgiving.” The juxtaposition is telling: “You are good and forgiving; *we* are a generation where ḥasid and ’emunim have almost disappeared. Please save us anyway.”
+
+---
+
+#### Verse 3
+
+שָׁוְא יְדַבְּרוּ, אִישׁ אֶת־רֵעֵהוּ;  
+שְׂפַת חֲלָקוֹת, בְּלֵב וָלֵב יְדַבֵּרוּ.  
+“Falsehood they speak, each to his fellow;  
+smooth‑lipped, with heart and heart they speak.”
+
+The verse dissects corrupt speech in three images.
+
+1. **שָׁוְא (*shav’*)** – “emptiness, vanity, falsehood.” It’s not just lies; it’s speech **disconnected from reality**, words as noise. The “Ten Commandments” use this word in “You shall not take the name of the LORD in vain (לַשָּׁוְא)”—in other words, don’t drag God’s name into empty talk.
+
+2. **אִישׁ אֶת־רֵעֵהוּ** – “each person to his fellow.” This is horizontal, *social* deception, not propaganda from the throne. The same phrase appears all over the Bible for ordinary interactions (e.g. Exod 21:18).
+
+3. **שְׂפַת חֲלָקוֹת (*śefat ḥalaqot*)** – “smooth lips.” The noun חֲלָקוֹת (“smoothnesses”) here means polished, slippery speech—flattery and manipulation. Compare Psalm 5:10:  
+   > “לְשׁוֹנָם יַחֲלִיקוּן” – “their tongue is **slippery**.”  
+   Or Psalm 55:22:  
+   > “חָלְקוּ מַחְמָאֹת פִּיו… רַכּוּ דְבָרָיו מִשֶּׁמֶן, וְהֵמָּה פְתִחֽוֹת.”  
+   > “Smoother than butter are his words… softer than oil, yet they are drawn swords.”
+
+   The metaphor is physical: imagine walking on an icy sidewalk. Smoothness ≈ danger.
+
+4. The coup de grâce: **בְּלֵב וָלֵב (*b’lev va‑lev*)**. Literally “with heart and heart.” As the concordance shows, this idiom appears only here and negatively in 1 Chronicles 12:34:  
+   > “וְלַעֲדֹר בְּלֹא־לֵב וָלֵב” – “to help with **no heart and heart**,” i.e., with an *undivided* heart.  
+
+So Psalm 12 pictures the exact opposite: a **split** inner life. Rashi: “They show me peace, but hatred is hidden in their heart.” Radak: “They present themselves in their words with one heart for good, but their heart is for evil.”
+
+That makes this more than just “lying.” It’s a spiritual diagnosis: when you get used to saying what people want to hear while thinking something else, you become a person of “heart and heart”—internally fractured. The psalm suggests that this double‑heartedness, multiplied “אִישׁ אֶת־רֵעֵהוּ” across a community, leads to social collapse.
+
+---
+
+#### Verse 4
+
+יַכְרֵת יְהוָה, כׇּל־שִׂפְתֵי חֲלָקוֹת;  
+לָשׁוֹן מְדַבֶּרֶת גְּדֹלוֹת.  
+“May the LORD cut off all smooth lips,  
+the tongue that speaks great [arrogant] things.”
+
+Here the psalmist moves from diagnosis to **imprecation**—calling down judgment.
+
+The verb **יַכְרֵת (*yakhret*)** is a **jussive** form (a verb form for wishes or mild commands): “may He cut off.” The root כרת (“to cut”) is loaded. In covenant texts, *to cut a covenant* (כָּרַת בְּרִית) is to solemnize it. But when God says someone “shall be cut off” (נִכְרְתָה הַנֶּפֶשׁ, e.g., Gen 17:14), it means being removed from the community—sometimes by death, sometimes by exile. So asking God to “cut off” lips and tongue uses **covenant‑curse language** for the organs of speech.
+
+We also get **synecdoche**—a figure where a part represents the whole. “Lips” and “tongue” stand for the whole person as a *speaker*. The instruments that did the damage are the ones imagined as severed.
+
+The second line, **לָשׁוֹן מְדַבֶּרֶת גְּדֹלוֹת**, literally “a tongue speaking great things,” has biblical echoes. Daniel’s vision in Aramaic uses similar wording for the arrogant “little horn”:
+
+> “וּפֻם מְמַלִּל רַבְרְבָן” – “a mouth speaking great things” (Dan 7:8, 20).
+
+There, the “great things” are blasphemies against God and boasts of power. So in Psalm 12, “speaking great things” is not just trash‑talk; it’s cosmic arrogance.
+
+Is this ethically okay—praying for people’s lips to be “cut off”? The psalm doesn’t pause to justify itself, but the context helps: these are people whose verbal manipulation has ruined trust and allowed the strong to prey on the poor (vv.2–3, 5–6). The prayer is effectively: “God, remove the power of those mouths. De‑platform them. Make their harmful speech impossible.”
+
+The Talmud (Torah Temimah cites this) notes one rabbinic voice that says the speaker of lashon hara “has no remedy,” since David already “cut them off” with *יִכְרֵת יְהוָה כׇּל־שִׂפְתֵי חֲלָקוֹת*. Another sage counters that Torah study or humility can rehabilitate a gossiper. That debate shows how seriously this psalm takes language: words can be so destructive that stopping them can feel like the only hope.
+
+---
+
+#### Verse 5
+
+אֲשֶׁר אָמְרוּ, לִלְשֹׁנֵנוּ נַגְבִּיר;  
+שְׂפָתֵינוּ אִתָּנוּ, מִי אָדוֹן לָנוּ.  
+“[Those] who say: ‘With our tongue we will prevail;  
+our lips are with us—who is master over us?’”
+
+Now we hear the villains in their own words. Quoting them gives us their **ideology of speech**.
+
+- **לִלְשֹׁנֵנוּ נַגְבִּיר** – literally “to/with our tongue we will make strong.” The preposition לְ can be instrumental (“by means of”), so “by our tongue we will prevail.” The root גבר means “to be strong, prevail.” Think of them saying, “We win with our words.”
+
+- **שְׂפָתֵינוּ אִתָּנוּ** – “our lips are with us.” Metzudat David glosses: “Our lips are in *our* control; we can say lies opposite what is in the heart.” In other words, speech belongs to us; it’s a private property we can use however we like.
+
+- **מִי אָדוֹן לָנוּ** – “Who is master over us?” Note they do **not** say, “Who is LORD (יְהוָה) over us?” They use the generic word **אָדוֹן (*adon*)**, the term for a human master. So they are rejecting **any** authority—divine *or* human—that might claim jurisdiction over what they say.
+
+The Talmud in Arakhin 15b famously uses this verse:  
+
+> “כׇּל הַמְסַפֵּר לָשׁוֹן הָרָע כְּאִלּוּ כָּפַר בָּעִקָּר, שֶׁנֶּאֱמַר… מִי אָדוֹן לָנוּ.”  
+> “Whoever speaks evil speech is as if he denied the fundamental [of faith], as it is said… ‘Who is master over us?’”
+
+That is, when you treat your tongue as answerable to no one, you are living as if there is no God (or no binding moral order). Psalm 12 anticipated this by connecting linguistic autonomy to social devastation.
+
+Notice also how v.5 mirrors v.2:
+
+- V.2: **חָסִיד… אֱמוּנִים** – people defined by loyalty and reliability.  
+- V.5: **נַגְבִּיר… מִי אָדוֹן לָנוּ** – people defined by self‑assertion and denial of accountability.
+
+The poem is drawing a sharp contrast between two “speech communities”: one that uses words to keep covenant, and one that uses words to gain power.
+
+---
+
+#### Verse 6
+
+מִשֹּׁד עֲנִיִּים, מֵאֶנְקַת אֶבְיוֹנִים;  
+עַתָּה אָקוּם, יֹאמַר יְהוָה;  
+אָשִׁית בְּיֵשַׁע, יָפִיחַ לוֹ.  
+“Because of the plundering of the poor, the sighing of the needy—  
+Now I will arise, says the LORD;  
+I will set him in deliverance—he pants for it / I will breathe [it] for him.”
+
+This is the psalm’s pivot: **God speaks**.
+
+The first line names what moved God:
+
+- **שֹׁד (*shod*)** – “violence, plunder.”  
+- **עֲנִיִּים (*’aniyyim*)** – “poor, afflicted.”  
+- **אֶנְקַת (*enqat*)** – “groaning, sighing.”  
+- **אֶבְיוֹנִים (*’evyonim*)** – “needy, destitute.”
+
+We’re meant to picture a whole class of people being squeezed and robbed until they can only groan.
+
+Then: **עַתָּה אָקוּם** – “Now I will arise.” This same divine line appears in Isaiah 33:10:
+
+> “עַתָּה אָקוּם יֹאמַר יְהוָה; עַתָּה אֵרוֹמָם, עַתָּה אֶנָּשֵׂא.”  
+> “Now I will arise, says the LORD; now I will be exalted; now I will lift myself up.”
+
+It’s the language of God getting up from the judge’s seat to intervene.
+
+The tricky clause is **אָשִׁית בְּיֵשַׁע יָפִיחַ לוֹ**. Literally: “I will place in deliverance; he/it will **yafiaḥ** for him.” The verb **פוח (*puach*)** means “to blow, breathe, puff,” and metaphorically “to utter, testify.” The same root appears in Proverbs 14:25:
+
+> “עֵד אֱמוּנִים יָפִיחַ אֱמֶת” – “A faithful witness **breathes out** truth.”
+
+So options include:
+
+- “I will place him in safety *for which he pants*.” He is like a man gasping for air, and God gives him room to breathe.
+- “I will set [him] in deliverance; **I will breathe it out for him**,” i.e., I will speak the saving word.
+- Radak, linking to Proverbs 29:8 (*“אַנְשֵׁי לָצוֹן יָפִיחוּ קִרְיָה”* – “scoffers set a city aflame”), hears a sense of “setting snares” or “inciting,” but here God flips it: those who *yafiaḥ* harm are opposed by God who *yafiaḥ* salvation.
+
+The ambiguity may be deliberate. In a poem obsessed with *human* words, God’s “breath‑speech” of salvation is itself like a gust of wind clearing the smoke.
+
+---
+
+#### Verse 7
+
+אִמְרוֹת יְהוָה, אֲמָרוֹת טְהֹרוֹת;  
+כֶּסֶף צָרוּף, בַּעֲלִיל לָאָרֶץ;  
+מְזֻקָּק, שִׁבְעָתָיִם.  
+“The sayings of the LORD are pure sayings;  
+silver refined in an earthen crucible;  
+purified sevenfold.”
+
+Here the psalmist turns God’s brief oracle (v.6) into a general claim about **all** divine speech.
+
+First, the vocabulary:
+
+- **אִמְרוֹת (*imrot*)** – a poetic word for “sayings, utterances,” often of God.
+- **טְהֹרוֹת (*tahorot*)** – “pure, clean,” used of ritually pure objects and morally pure speech.
+- **כֶּסֶף צָרוּף (*kesef tsaruf*)** – “refined silver,” from the verb צרף (“to smelt, refine, test”).
+- **בַּעֲלִיל לָאָרֶץ (*ba‘alil la’aretz*)** – literally “in an *‘alil* to the earth.” Most take *‘alil* here (a rare word) as “crucible” or “furnace.” So: “in an earthen crucible,” i.e., a clay furnace in the ground.
+- **מְזֻקָּק (*mezuqqaq*)** – “thoroughly refined,” from זקק (“to refine, purify”).
+- **שִׁבְעָתָיִם (*shiv‘atayim*)** – “sevenfold,” either literally seven cycles, or symbolically “completely, perfectly.”
+
+Ancient metalworkers would heat silver ore, skim off dross, cool, and repeat until the metal reached the desired purity. Psalm 66:10 uses the same picture:
+
+> “כִּי־בְחַנְתָּנוּ אֱלֹהִים; צְרַפְתָּנוּ כִּצְרֹף־כָּסֶף.”  
+> “You have tested us, O God; You have refined us as one refines silver.”
+
+Here, though, it’s *not* people being refined; it’s God’s *words.* That’s a brilliant inversion: human words in this psalm are “smooth” (slippery) and double‑hearted; God’s words have been through the fire **seven times**.
+
+Rashi reads this theologically: every divine promise is as reliable as meticulously refined silver. Malbim, the 19th‑c. commentator, adds a literary twist: even the *narrative* and “story” parts of Torah, which are like “garments” for deeper truths, are themselves pure and beneficial—no filler, no decorative lies.
+
+The metrical repetition **אִמְרוֹת… אֲמָרוֹת** (“sayings… sayings”) hammers home the contrast with v.3’s “שְׂפַת חֲלָקוֹת” and v.5’s “לִלְשֹׁנֵנוּ נַגְבִּיר.” You can build a life either on self‑serving speech or on speech that has been tested to the core.
+
+---
+
+#### Verse 8
+
+אַתָּה יְהוָה, תִּשְׁמְרֵם;  
+תִּצְּרֶנּוּ, מִן־הַדּוֹר זוּ לְעוֹלָם.  
+“You, LORD, will keep them;  
+You will guard him from this generation forever.”
+
+This is the psalmist’s **response** to the oracle and reflection. He now prays (or confesses) in direct address: **אַתָּה יְהוָה** – “You, LORD.”
+
+The grammar puzzle is the pronouns:
+
+- **תִּשְׁמְרֵם (*tishmerem*)** – “You will keep **them**” (masc. plural).
+- **תִּצְּרֶנּוּ (*titsrennu*)** – “You will guard **him**” (masc. singular).
+
+Who is “them”? Who is “him”?
+
+Options:
+
+1. **Traditional:** “Them” = the **poor and needy** (עֲנִיִּים / אֶבְיוֹנִים) of v.6; “him” = each individual poor person. Radak: “You will keep the poor… You will guard every poor person wherever he is among the oppressors.”
+
+2. **Literary/structural:** “Them” = God’s **sayings** from v.7, the *imrot YHWH*; “him” = the individual godly sufferer. Then the verse means: “You, LORD, will guard **Your pure words** from being corrupted, and you will guard **the one who trusts Them** from this generation.”
+
+Both readings fit the Hebrew. The proximity to v.7 slightly favors the “words + person” reading, but the whole lament has focused on people in danger, so the traditional “poor + each one” is also natural. Maybe the ambiguity is actually helpful: it hints that God’s protection of speech and of people go together.
+
+The verbs themselves:
+
+- **שָׁמַר (*shamar*)** – “to keep, watch, observe.” Used for keeping commandments and guarding flocks.
+- **נָצַר (*natsar*)** – “to guard, protect,” as in Proverbs 4:23: *“מִכׇּל מִשְׁמָר נְצֹר לִבֶּךָ”* (“Above all guarding, **guard** your heart”).
+
+And the time frame is **לְעוֹלָם** – “forever,” or at least “for a very long time.” God’s guarding isn’t a one‑time rescue; it’s an ongoing stance toward “this generation” (whether that means David’s, or any generation like it).
+
+---
+
+#### Verse 9
+
+סָבִיב רְשָׁעִים יִתְהַלָּכוּן;  
+כְּרֻם זֻלּוּת לִבְנֵי אָדָם.  
+“All around, the wicked keep walking;  
+when vileness is exalted among the children of Adam.”
+
+Instead of a tidy “and they all lived happily ever after,” the psalm ends with a snapshot of present reality.
+
+The first line: **סָבִיב רְשָׁעִים יִתְהַלָּכוּן**. The adverb **סָבִיב (*saviv*)** = “around, on every side.” The verb **יִתְהַלָּכוּן** (hitpa’el of הלך) suggests continuous, self‑directed wandering: “they walk about / prowl.” Job 1:7 uses the same form for Satan: *“מִשּׁוּט בָּאָרֶץ וּמֵהִתְהַלֵּךְ בָּהּ”* (“from roaming the earth and walking about in it”). Our line basically says: “Wherever you look, the wicked are on the move.”
+
+The second line is one of the most compact social critiques in the Bible:
+
+- **זֻלּוּת (*zullut*)** – a hapax legomenon (one‑time word) meaning “worthlessness, baseness, cheapness,” from the root זלל (“to be light, despised”).
+- **כְּרֻם (*kerum*)** – from רום, “to be high, exalted.” With the prefixed כ־ this functions roughly as “when/as [it] is exalted.” Many translate: “when vileness is exalted among the children of Adam.”
+
+So the structure is:
+
+> When **vileness is lifted up** as something impressive or admirable,  
+> at such a time the wicked roam everywhere.
+
+That is, the problem is not just that individuals do bad things. It’s that a culture starts to **praise** what is base—giving platforms, likes, and status to behavior that ought to be shameful. When that happens, the wicked feel at home “סָבִיב” (“all around”), and the ḥasid / ’emunim find themselves marginalized.
+
+Rashi reads the verse more personally: the wicked are circling David “to set traps to make me stumble,” and “when a man of low status is suddenly exalted in the eyes of people” (כְּרֻם זֻלּוּת) they resent him—hinting at David’s own rise “from following the sheep” (2 Sam 7:8). That’s possible, but the more general social reading fits the rest of the psalm’s “generation” language.
+
+This unresolved ending brings us back to the basic tension: God’s words are completely trustworthy; God has promised to act for the poor; but the visible world is still one where people with “smooth lips” can flourish and “vileness” climbs the charts. Psalm 12 invites its singers to live in that tension: to trust and speak God’s refined words while walking through a culture of flattery, fake sincerity, and double hearts.

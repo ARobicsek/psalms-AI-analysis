@@ -1,0 +1,189 @@
+### EDITORIAL ASSESSMENT
+
+The existing introduction and commentary get several big things right. They see that Psalm 121 is not a simple travel charm but a compressed liturgy; they rightly highlight the shift from first-person “I” to second-person “you,” the six-fold שׁמר (*shamar*, “guard/keep”), and the creedal formula “maker of heaven and earth.” The discussion of Ancient Near Eastern background (sleeping gods, high places, astral deities) is sound and helpful. The liturgical section usefully catalogs some later uses of the psalm.
+
+Yet the draft suffers from a few weaknesses. Stylistically it is somewhat repetitive and abstract. It tells us, often, that something is “polemical” or “comprehensive,” but it could show this more concretely by bringing other biblical texts and actual liturgical formulas onto the page in Hebrew and English. Technical terms such as “merismus,” “anadiplosis,” or “Songs of Ascents” are used without always being defined. For an intelligent non-specialist, that is a barrier.
+
+Substantively, several opportunities are missed. The related psalms data (especially Psalms 124, 131, and 134) is barely exploited; yet Psalm 121 is woven into a small network of “help” and “maker of heaven and earth” formulas within the Songs of Ascents. The Torah Temimah’s rabbinic material—which gives vivid midrashic uses of “YHWH is your guardian” and “YHWH will guard your going out and your coming in”—is not integrated, though it throws light on how the verse was heard as a promise about mezuzah, divine “outside” protection, and the contrast with human kings. The figurative language database is cited in general but not illustrated with specific parallel texts; for example, “going out and coming in” (צֵאתְךָ וּבוֹאֶךָ) in Deuteronomy 28:6 is not quoted, though it is the obvious comparison.
+
+The verse-by-verse notes are overall strong but could be sharpened by: (1) beginning each verse with a clearly punctuated Hebrew line; (2) defining technical terms; (3) quoting at least one or two parallel passages per major motif (mountains, “heaven and earth,” sun and moon, “going out and coming in”); and (4) bringing in the Talmudic and liturgical reuses as part of the interpretive story. The result will be more compact, more concrete, and more illuminating for a sophisticated lay reader.
+
+---
+
+### REVISED INTRODUCTION
+
+“I lift my eyes to the mountains; from where will my help come?” (אֶשָּׂא עֵינַי אֶל־הֶהָרִים; מֵאַיִן יָבֹא עֶזְרִי, v. 1). The opening of Psalm 121 is so familiar that it is easy to forget how odd it is. The superscription, שִׁיר לַמַּעֲלוֹת (*shir lama‘alot*, “a song of ascents”), places it among the fifteen “Songs of Ascents” (Psalms 120–134), probably associated with going *up* (עֲלִיָּה) to Jerusalem or with steps in the temple. But the scene the psalm paints is not of a pilgrim already basking in the safety of Zion. It is a moment of exposure. Someone on the road looks up at the high ridges and asks, in effect, “Where on earth is help going to come from?”
+
+The mountains (הֶהָרִים) are deliberately multivalent. In Israelite piety, mountains are both reassuring and suspect. Zion itself is “the holy mountain” (הַר־קׇדְשׁוֹ; Psalm 2:6). Psalm 125:2 says, “יְרוּשָׁלִַם הָרִים סָבִיב לָהּ; וַיהוָה סָבִיב לְעַמּוֹ” — “Jerusalem, hills surround it; and YHWH surrounds His people.” But Deuteronomy 12:2 denounces the “high mountains and hills” (הֶהָרִים הָרָמִים וְעַל־הַגְּבָעוֹת) as sites of pagan worship. The traveler looking up cannot know whether the heights promise sanctuary or danger: fortress or bandit, Zion or Baal’s hilltop shrine.
+
+Traditional Jewish commentators see this tension. Radak imagines “one who looks for help from afar, who ascends the mountains and lifts his eyes this way and that.” Ibn Ezra reads the psalm against the backdrop of siege or exile. Meiri says the phrase is “as on the mountains,” like soldiers posting lookouts. The question “מֵאַיִן יָבֹא עֶזְרִי” (me’ayin, “from where?”) is rhetorically pointed; BDB notes that this *me’ayin* form is used in elevated, anxious speech (as in Numbers 11:13: “מֵאַיִן לִּי בָשָׂר — Where am I to get meat?”). The pilgrim’s uncertainty is not pious make-believe; it is the lived reality of anyone who finds themselves small in a large, opaque landscape.
+
+Verse 2 answers swiftly: “עֶזְרִי מֵעִם יְהוָה, עֹשֵׂה שָׁמַיִם וָאָרֶץ — My help is from YHWH, maker of heaven and earth.” The preposition מֵעִם (*me‘im*) is spatial: help comes not from the terrain but “from with” God, from God’s own side. The title “maker of heaven and earth” (עֹשֵׂה שָׁמַיִם וָאָרֶץ) is more than ornament. It is a compact creed. “Heaven and earth” is what rhetoricians call a *merism*—a figure where you name two extremes to imply the whole. Genesis 1:1 sets the pattern: “בְּרֵאשִׁית בָּרָא אֱלֹהִים, אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ — In the beginning God created the heavens and the earth.” In Psalm 121, as in Psalms 115:15, 124:8, and 134:3, the phrase becomes a liturgical title: “May you be blessed by YHWH, maker of heaven and earth” (Psalm 115:15); “Our help is in the name of YHWH, maker of heaven and earth” (Psalm 124:8); “May YHWH bless you from Zion, maker of heaven and earth” (Psalm 134:3).
+
+Within the cluster of Songs of Ascents this formula is a thread stitching psalms together. Psalm 121:2 uses it for the individual (“my help”), Psalm 124:8 turns it into a communal confession (“our help”), Psalm 134:3 uses it as a priestly blessing at the close of the collection. Read as a sequence, the Songs of Ascents trace a movement: from the anxious question of 121, through the retrospective “Were it not for YHWH who was on our side” of 124, to the serene nocturnal liturgy of 134, in which temple servants bless YHWH at night and then bless the departing worshipers. The title “maker of heaven and earth” anchors that movement in a God whose reach is not confined to any hill or sanctuary.
+
+The psalm’s most striking move is the sudden change of voice between verses 2 and 3. The speaker of verses 1–2 uses the first person: “I lift my eyes… my help.” Verse 3 abruptly addresses someone else: “אַל־יִתֵּן לַמּוֹט רַגְלֶךָ; אַל־יָנוּם שֹׁמְרֶךָ — He will not let your foot slip; your guardian will not slumber.” From here to the end everything is in the second person (“your foot… your guardian… you”). Many premodern and modern readers hear here a liturgical dialogue: the pilgrim voices anxiety and trust, then a priest or fellow worshiper answers with blessing. Metzudat David glosses: “It is as if one says to another, to comfort him: ‘Behold, help is good.’”
+
+Whether we imagine a literal priest or simply the community’s answering voice, the structural effect is unmistakable. Individual trust is caught up into a communal liturgy. The figure of “your guardian” (שֹׁמְרֶךָ), introduced in verse 3, expands in verse 4 into “the guardian of Israel” (שׁוֹמֵר יִשְׂרָאֵל). The psalm oscillates between singular and collective: “your foot,” “your guardian,” then “Israel,” then “YHWH will guard you… your life… your going out and your coming in” (vv. 7–8). The implication is that no Israelite walks alone. Personal protection draws its meaning from God’s larger guardianship of the people.
+
+The verb שָׁמַר (*shamar*) is the psalm’s refrain. It occurs six times in eight verses (twice in v. 3, once in vv. 4–5, twice in v. 7, once in v. 8): “your guardian… guardian of Israel… YHWH is your guardian… YHWH will guard you… He will guard your life… YHWH will guard your going out and your coming in.” In biblical Hebrew *shamar* means more than watching; it is the verb for keeping commandments (“שְׁמֹר אֶת־יוֹם הַשַּׁבָּת — keep the sabbath day,” Deuteronomy 5:12) and tending a charge (“לְעָבְדָהּ וּלְשָׁמְרָהּ — to work it and to keep it,” Genesis 2:15). It evokes attentive, faithful care. Here the roles are reversed: not Israel keeping God’s commands, but God keeping Israel.
+
+The psalm piles up what we might call “totalizing” phrases. Verse 3 promises that “He will not let your foot slip” (a synecdoche for the whole journey). Verse 4 insists that the guardian of Israel “neither slumbers nor sleeps,” a double negation that probably alludes to the shocking thought, voiced in other psalms, that God might be “sleeping” on the job: “Awake! Why do You sleep, O Lord?” (Psalm 44:24). Elijah taunts Baal’s prophets with the same idea: “Call with a loud voice, for he is a god; perhaps he is asleep and must be awakened” (אוּלַי יָשֵׁן הוּא וְיִקָץ; 1 Kings 18:27). Against such myths the psalm declares: the God who made heaven and earth does not doze off.
+
+Verses 5–6 turn to the environment. YHWH is “your shade at your right hand” (יְהוָה צִלְּךָ עַל־יַד יְמִינֶךָ): shade in the literal Near Eastern sense of relief from baking sun, and “at your right hand” in the figurative sense of a champion at your vulnerable flank. Elsewhere, Zion’s inhabitants pray, “Because He is at my right hand, I shall not be moved” (כִּי מִימִינִי בַּל־אֶמּוֹט; Psalm 16:8). Verse 6 makes the merism explicit: “By day the sun will not strike you, nor the moon by night” (יוֹמָם הַשֶּׁמֶשׁ לֹא־יַכֶּכָּה; וְיָרֵחַ בַּלָּיְלָה). Day and night here, as in Genesis 8:22 (“day and night shall not cease”), stand for the whole cycle of time. The mention of the moon is puzzling to modern readers but made sense in a world where lunacy was literally linked to the lunar cycle and the night was a time of heightened vulnerability to disease and spirits. At another level, sun and moon were major objects of worship in the ancient Near East (Deuteronomy 4:19). To say that YHWH protects you from sun and moon is to de-divinize them: they are no longer powers to fear but creatures under a greater hand.
+
+The closing verses (7–8) carry the logic to its extreme. “YHWH will guard you from all evil (מִכָּל־רָע); He will guard your life (אֶת־נַפְשֶׁךָ). YHWH will guard your going out and your coming in (צֵאתְךָ וּבוֹאֶךָ) from now and forever (מֵעַתָּה וְעַד־עוֹלָם).” “All evil” in biblical usage covers physical harm, misfortune, moral evil, and disaster; “your *nefesh*” can mean “your life” or “your very self.” The phrase “going out and coming in” is a standard merism for the whole pattern of one’s activities: “Blessed shall you be in your coming in and blessed shall you be in your going out” (בָּרוּךְ אַתָּה בְּבֹאֶךָ; וּבָרוּךְ אַתָּה בְצֵאתֶךָ; Deuteronomy 28:6). It can have a military flavor—Moses prays for a leader “who shall go out before them and come in before them” (אֲשֶׁר יֵצֵא לִפְנֵיהֶם וַאֲשֶׁר יָבֹא לִפְנֵיהֶם; Numbers 27:17)—but at its broadest it simply means “everything you undertake.” “From now and forever” appears again in Psalm 131:3: “יַחֵל יִשְׂרָאֵל אֶל־יְהוָה מֵעַתָּה וְעַד־עוֹלָם — Let Israel hope in YHWH from now and forever.” Within the Songs of Ascents, the identical phrase frames both personal protection (Psalm 121) and communal hope (Psalm 131), reinforcing the sense of an open-ended covenantal horizon.
+
+Because the psalm’s promises are so sweeping, Jewish tradition has treated it as a portable blessing. It is recited on journeys, after the Amidah, before sleep. Rabbinic literature already uses verse 8 as proof that God guards people’s “going out and coming in” more faithfully than any human guard. The Talmud (Menachot 33b), as quoted by Torah Temimah, contrasts a human king, who sits inside while servants guard him outside, with the Holy One, who “has His servants within, but He guards them from outside,” citing “YHWH will guard your going out and your coming in” (יְהוָה יִשְׁמָר צֵאתְךָ וּבוֹאֶךָ) as support. A small psalm, memorized and murmured, becomes a kind of verbal mezuzah: a reminder that the threshold you cross is watched by One who neither slumbers nor sleeps.
+
+---LITURGICAL-SECTION-START---
+
+## Modern Jewish Liturgical Use
+
+#### Full psalm
+
+Psalm 121 is one of the most ubiquitous psalms in Jewish prayer, especially as a plea for protection. Many communities recite the entire psalm after the silent Amidah at weekday *Ma‘ariv* and Shabbat *Minchah*, as a concluding prayer of trust. In several Sephardic rites it appears on Motza’ei Shabbat within the “Veyiten Lekha” collection, just after Havdalah, to accompany the transition from sacred time back into the workweek. There it is recited in full, beginning: “שִׁיר לַמַּעֲלוֹת אֶשָּׂא עֵינַי אֶל־הֶהָרִים; מֵאַיִן יָבֹא עֶזְרִי… — A song of ascents: I lift my eyes to the mountains; from where will my help come?…” It also appears in some rites after the Megillah reading on Purim and in expanded morning praises (Pesukei de-Zimra) on Rosh Hashanah, underscoring the themes of divine help and guardianship at liminal moments.
+
+#### Key verses
+
+Verse 2, “עֶזְרִי מֵעִם יְהוָה, עֹשֵׂה שָׁמַיִם וָאָרֶץ — My help is from YHWH, maker of heaven and earth,” is used in Ashkenazic *Kaddish Shalem* as the congregation’s response to the central petition: “יְהֵא שְׁלָמָא רַבָּא מִן שְׁמַיָּא וְחַיִּים עָלֵינוּ… וְאִמְרוּ אָמֵן: עֶזְרִי מֵעִם יְהוָה, עֹשֵׂה שָׁמַיִם וָאָרֶץ — May there be abundant peace from heaven and life upon us… and say: Amen: My help is from YHWH, maker of heaven and earth.” The psalm’s private confession is thus turned into a communal acclamation after every Amidah repetition.
+
+Verse 4, “הִנֵּה לֹא־יָנוּם וְלֹא יִישָׁן, שׁוֹמֵר יִשְׂרָאֵל — Behold, the Guardian of Israel neither slumbers nor sleeps,” features prominently in the bedtime Shema (*Keri’at Shema al ha-Mittah*). After the Priestly Blessing — “יִבָרֶכְךָ יְהוָה… יִשָּׂא יְהוָה פָּנָיו אֵלֶיךָ וְיָשֵׂם לְךָ שָׁלוֹם — May YHWH bless you… may YHWH lift up His face to you and grant you peace” — many rites add: “הִנֵּה לֹא יָנוּם וְלֹא יִישָׁן, שׁוֹמֵר יִשְׂרָאֵל — Behold, the Guardian of Israel neither slumbers nor sleeps.” As one relinquishes consciousness, the psalm’s line is spoken over the bed as a verbal shield.
+
+Verse 7, “יְהוָה יִשְׁמׇרְךָ מִכָּל־רָע; יִשְׁמֹר אֶת־נַפְשֶׁךָ — YHWH will guard you from all evil; He will guard your life,” and verse 8, “יְהוָה יִשְׁמׇר צֵאתְךָ וּבוֹאֶךָ, מֵעַתָּה וְעַד־עוֹלָם — YHWH will guard your going out and your coming in, from now and forever,” are widely used as blessings at thresholds. In many Sephardic homes they are recited each Friday night after *Shalom Aleichem*, paired with Psalm 91:11: “כִּי מַלְאָכָיו יְצַוֶּה לָּךְ לִשְׁמׇרְךָ בְּכָל־דְּרָכֶיךָ; יְהוָה יִשְׁמׇר צֵאתְךָ וּבוֹאֶךָ — For He will command His angels for you, to guard you in all your ways; YHWH will guard your going out and your coming in.” Together they frame the home’s entry as a place under angelic and divine watch.
+
+#### Phrases
+
+The closing half of verse 8, “יִשְׁמׇר צֵאתְךָ וּבוֹאֶךָ מֵעַתָּה וְעַד־עוֹלָם — He will guard your going out and your coming in from now and forever,” has become almost synonymous with the Traveler’s Prayer (*Tefillat ha-Derekh*). After the main petition, many siddurim add: “כִּי מַלְאָכָיו יְצַוֶּה לָּךְ לִשְׁמׇרְךָ בְּכָל דְּרָכֶיךָ; יְהוָה יִשְׁמׇר צֵאתְךָ וּבוֹאֶךָ מֵעַתָּה וְעַד־עוֹלָם.” The psalm’s promise, originally general, is focused here on literal travel.
+
+In the *Pidyon ha-Ben* (redemption of the firstborn son) ceremony in many Sephardic communities, the kohen blesses the infant with verses from Psalm 121: “יְהוָה שֹׁמְרֶךָ; יְהוָה צִלְּךָ עַל־יַד יְמִינֶךָ… יְהוָה יִשְׁמׇרְךָ מִכָּל־רָע; יִשְׁמֹר אֶת־נַפְשֶׁךָ — YHWH is your guardian; YHWH is your shade at your right hand… YHWH will guard you from all evil; He will guard your life.” The psalm’s pilgrim becomes, in this ritual, an infant just beginning his life’s journey.
+
+---
+
+### REVISED VERSE COMMENTARY
+
+**Verse 1**
+
+שִׁיר לַמַּעֲלוֹת; אֶשָּׂא עֵינַי אֶל־הֶהָרִים; מֵאַיִן יָבֹא עֶזְרִי׃  
+
+“A song of ascents. I lift my eyes to the mountains; from where will my help come?”
+
+The superscription שִׁיר לַמַּעֲלוֹת (*shir lama‘alot*) identifies this psalm as one of the fifteen “Songs of Ascents” (Psalms 120–134). The noun מַעֲלָה in biblical Hebrew means a “step” or “stair” (e.g., מַעֲלוֹת הַמֶּלֶךְ, “the king’s steps,” 1 Kings 10:19), and by extension an upward journey. Rabbinic tradition imagined these as psalms sung by Levites ascending the temple steps; modern scholarship typically connects them with pilgrim songs for going *up* to Jerusalem.
+
+The body of the verse begins with a vivid first-person act: “אֶשָּׂא עֵינַי אֶל־הֶהָרִים — I lift my eyes to the mountains.” The verb נָשָׂא עֵינַיִם (“lift up the eyes”) is a biblical idiom for focused looking, whether in hope or calculation. In Psalm 123:1, the psalmist says, “אֵלֶיךָ נָשָׂאתִי אֶת־עֵינַי, הַיּשֵׁב בַּשָּׁמַיִם — To You I lift up my eyes, O You enthroned in heaven.” Here the direction is not yet toward God but toward “the mountains.”
+
+As noted in the introduction, these mountains are the psalm’s first ambiguity. They can be read as the literal highlands that ring Jerusalem and punctuate the pilgrim road. But in the ancient Near East, mountains were also the favored habitats of gods and the locations of high places. Deuteronomy 12:2 commands Israel, “אַבֵּד תְּאַבְּדוּ אֵת כׇּל־הַמְּקֹמוֹת אֲשֶׁר עָבְדוּ־שָׁם הַגּוֹיִם… עַל־הֶהָרִים הָרָמִים וְעַל־הַגְּבָעוֹת — You shall surely destroy all the places where the nations served their gods… on the high mountains and on the hills.” To look to the hills is, potentially, to look in the direction of rival cults.
+
+Radak reads the scene as a man climbing high ground to scan for earthly allies: “like one who looks for help from afar, ascending the mountains and lifting his eyes this way and that.” Meiri glosses אֶל־הֶהָרִים as “as on the mountains,” evoking the watchmen posted on ridges in time of war. Ibn Ezra hears the voice of Israel under siege or in exile.
+
+The question “מֵאַיִן יָבֹא עֶזְרִי — from where will my help come?” sharpens the vulnerability. BDB notes that *me’ayin* (whence?) is a slightly elevated adverb used in rhetorical or desperate speech: Moses cries, “מֵאַיִן לִי בָּשָׂר — Where am I to get meat?” (Numbers 11:13). The point is not that the psalmist has no doctrine of God; it is that in the crush of circumstance, theology can be temporarily eclipsed by the urgent, practical question: where will help actually come from?
+
+Rabbi Jonathan Sacks, reflecting on this verse, notes that much of the Torah’s spirituality is about “learning to look up” rather than down, to see beyond immediate obstacles to a larger horizon. In this psalm that learning is dramatized. Verse 1 is all horizon and question; verse 2 will name the unseen source.
+
+**Verse 2**
+
+עֶזְרִי מֵעִם יְהוָה; עֹשֵׂה שָׁמַיִם וָאָרֶץ׃  
+
+“My help is from YHWH, maker of heaven and earth.”
+
+Verse 2 answers verse 1’s question with a compact confession. The opening word, עֶזְרִי (*ezri*, “my help”), picks up the last word of verse 1, creating a kind of staircase parallelism: “from where will my help come? My help is from…” The preposition מֵעִם (*me‘im*, “from with”) suggests help that comes out of God’s own presence, not from some anonymous quarter. It corrects any temptation to see the mountains themselves as saviors.
+
+The title “עֹשֵׂה שָׁמַיִם וָאָרֶץ — maker of heaven and earth” is a liturgical formula. As a *merism* (two poles that imply the whole), “heaven and earth” means “everything that is.” Other psalms reuse it in similar contexts. Psalm 124:8 closes a communal thanksgiving with, “עֶזְרֵנוּ בְּשֵׁם יְהוָה, עֹשֵׂה שָׁמַיִם וָאָרֶץ — Our help is in the name of YHWH, maker of heaven and earth.” Psalm 134:3, the last of the Songs of Ascents, pronounces, “יְבָרֶכְךָ יְהוָה מִצִּיּוֹן, עֹשֵׂה שָׁמַיִם וָאָרֶץ — May YHWH bless you from Zion, maker of heaven and earth.” The same pattern appears in Psalm 115:15: “בְּרוּכִים אַתֶּם לַיהוָה, עֹשֵׂה שָׁמַיִם וָאָרֶץ — May you be blessed by YHWH, maker of heaven and earth.”
+
+Outside the Psalms, Melchizedek blesses Abram with “קֹנֵה שָׁמַיִם וָאָרֶץ — creator/possessor of heaven and earth” (Genesis 14:19). The fourth commandment grounds sabbath observance in the same scope: “כִּי שֵׁשֶׁת־יָמִים עָשָׂה יְהוָה אֶת־הַשָּׁמַיִם וְאֶת־הָאָרֶץ — For in six days YHWH made the heavens and the earth” (Exodus 20:11).
+
+The theological move is from geography to cosmology. Mountains are impressive but local. The gods of Israel’s neighbors were often tied to such locations: Baal to Mount Zaphon, for example. By invoking YHWH as maker of heaven and earth, the psalm asserts that the true source of help is not tied to any one mountain, shrine, or natural power. As Radak succinctly puts it, this phrase emphasizes that “הַכֹּל בְּיָדוֹ לַעֲשׂוֹת — everything is in His power to do.” For someone on a dangerous road, that is not a philosophical nicety; it is the only sort of help worth seeking.
+
+The echo with Psalm 124 is suggestive. There the community, looking back on deliverance, says “Our help is in the name of YHWH, maker of heaven and earth” (124:8). Here the individual says in advance, “My help is from YHWH, maker of heaven and earth.” One psalm voices trust in prospect, another in retrospect. Between them, the Songs of Ascents articulate an entire spiritual cycle.
+
+**Verse 3**
+
+אַל־יִתֵּן לַמּוֹט רַגְלֶךָ; אַל־יָנוּם שֹׁמְרֶךָ׃  
+
+“He will not let your foot slip; your guardian will not slumber.”
+
+With verse 3 the psalm pivots from “I” to “you.” The verbs are in the jussive form with אַל (“He will not let… he will not slumber”), but the tone is clearly not a wish but a reassurance. Many hear here the voice of another—perhaps a priest at the temple, perhaps a fellow traveler—answering the confession of verse 2.
+
+The first promise is physical and metaphorical at once: “אַל־יִתֵּן לַמּוֹט רַגְלֶךָ — He will not give your foot to slip.” The noun מוֹט (*mot*) means to totter, shake, or slide. BDB notes its frequent use in psalms for moral or existential instability: “לֹא יִמּוֹט לְעוֹלָם — he shall never be moved” (Psalm 15:5); “אֶל־יְהוָה חָסִיתִי, אֵיךְ תֹּאמְרוּ לְנַפְשִׁי, נוּדוּ הַרְכֶם צִפּוֹר — In YHWH I take refuge; how can you say to me, ‘Flee like a bird to your mountain’?” (Psalm 11:1). Here the image fits the presumed setting: a pilgrim navigating rocky paths on steep hills. A well-placed stone underfoot can mean life or death. But it also suggests God’s preserving someone from a more figurative fall.
+
+The second half of the verse introduces the central metaphor of the psalm: God as שֹׁמֵר (*shomer*), a guardian or watchman. “אַל־יָנוּם שֹׁמְרֶךָ — your guardian will not slumber.” In biblical narrative, city walls have watchmen posted on them, especially at night. Even the best of them can doze. The rare verb נוּם (*num*) denotes light sleep or drowsing—Meiri calls it “a light sleep.” Here and in the next verse it is paired with יָשֵׁן (*yashen*, deep sleep).
+
+The root שׁ–מ–ר (*sh-m-r*) is rich. It is used for guarding a deposit (Exodus 22:6), tending a flock, keeping commandments (“וְשָׁמַרְתָּ אֶת־חֻקָּיו — you shall keep His statutes,” Deuteronomy 4:6). To call God “your *shomer*” evokes not a casual glance from afar but the attentiveness of someone entrusted with a charge. Later, in liturgy, “שׁוֹמֵר יִשְׂרָאֵל — Guardian of Israel” becomes a divine title.
+
+Ibn Ezra points out that in besieged cities it was normal to station human shomrim on the walls at night; the psalm, he says, contrasts these fallible guardians with the one who does not doze. Malbim, a nineteenth-century commentator, turns the contrast into a theological point: human watchmen can grow weary and must be relieved; God neither grows tired (He does not “slumber from weakness”) nor has any need to sleep.
+
+**Verse 4**
+
+הִנֵּה לֹא־יָנוּם וְלֹא יִישָׁן; שֹׁמֵר יִשְׂרָאֵל׃  
+
+“Behold, He neither slumbers nor sleeps, the guardian of Israel.”
+
+The interjection הִנֵּה (“behold,” “see!”) flags verse 4 as an emphatic restatement and expansion of verse 3. The double negative—“לֹא־יָנוּם וְלֹא יִישָׁן — He neither slumbers nor sleeps”—covers both light dozing (*num*) and deep sleep (*yashen*). Meiri glosses: “תְּנוּמָה הִיא שֵׁינָה קַלָּה, וְהַשֵּׁינָה שֵׁינָה גְּמוּרָה — slumber is light sleep and sleep is full sleep.” The rhetoric presses the claim to the limit: there is no interruption in this guardianship.
+
+As many have noted, this description of God functions as a quiet polemic. In 1 Kings 18, Elijah mocks the prophets of Baal when their god fails to answer: “קִרְאוּ בְקוֹל גָּדוֹל כִּי אֱלֹהִים הוּא… אוּלַי יָשֵׁן הוּא וְיִקָץ — Call out with a loud voice, for he is a god… perhaps he is asleep and must be awakened” (1 Kings 18:27). In Canaanite myth, Baal’s seasonal death and restoration are described in terms of sleep and waking. Isaiah 5:27 uses a similar doublet for God’s agents: “אֵין עָיֵף וְאֵין כּוֹשֵׁל בּוֹ; לֹא יָנוּם וְלֹא יִישָׁן — None among them is weary or stumbles; none slumbers or sleeps.” Psalm 44, by contrast, dares to accuse: “עוּרָה, לָמָּה תִישַׁן אֲדֹנָי? — Rouse Yourself; why do You sleep, O Lord?” (Psalm 44:24). Our psalm stands in tension with such laments, as a liturgical counter-claim: whatever appearances, the guardian of Israel does not actually sleep.
+
+The second half of the verse universalizes what was personal in verse 3: “שֹׁמֵר יִשְׂרָאֵל — the guardian of Israel.” The singular “your guardian” (שֹׁמְרֶךָ) of verse 3 is now revealed as the same guardian who watches the whole people. Rashi notes that even in exile, when it *seems* as if God sleeps, this verse insists otherwise. In liturgy, “שׁוֹמֵר יִשְׂרָאֵל” has become the refrain of Jewish collective identity; it appears in the High Holiday prayers and in additional supplications as a reassurance that, whatever history brings, Israel’s existence is held by a wakeful God.
+
+**Verse 5**
+
+יְהוָה שֹׁמְרֶךָ; יְהוָה צִלְּךָ, עַל־יַד יְמִינֶךָ׃  
+
+“YHWH is your guardian; YHWH is your shade at your right hand.”
+
+Verse 5 brings the divine name into the foreground with striking repetition: “יְהוָה שֹׁמְרֶךָ; יְהוָה צִלְּךָ — YHWH is your guardian; YHWH is your shade.” The parallel cola and echoing sound make the line almost incantatory. What was implicit in verses 3–4 (“He”) is now said explicitly: it is YHWH, the God of Israel, who fills the role of shomer.
+
+The second colon adds an additional metaphor: “צִלְּךָ — your shade.” In a literal sense, shade is one of the most prized protections in the Levantine climate. Jonah, sitting east of Nineveh, is grateful when God “appointed a plant… to be shade over his head” (לִהְיוֹת צֵל עַל־רֹאשׁוֹ; Jonah 4:6). To call God one’s shade conjures the bodily relief of a traveler who finds shelter from the noon sun.
+
+Elsewhere in the Psalms shade language is applied to God in more explicitly theological ways. Psalm 91:1 declares, “יֹשֵׁב בְּסֵתֶר עֶלְיוֹן; בְּצֵל שַׁדַּי יִתְלוֹנָן — One who dwells in the shelter of the Most High lodges in the shadow of Shaddai.” Psalm 17:8 prays, “הַסְתִּירֵנִי בְּצֵל כְּנָפֶיךָ — Hide me in the shadow of Your wings.” Both images—shadow of the Almighty, shadow of wings—merge cool shelter with protective cover.
+
+The phrase “עַל־יַד יְמִינֶךָ — at your right hand” locates the shade in relation to the body. The right hand (יָמִין) in biblical idiom is the place of strength and honor: “שִׂית יְהוָה לְנֶגְדִּי תָמִיד; כִּי מִימִינִי בַּל־אֶמּוֹט — I have set YHWH before me always; because He is at my right hand, I shall not be moved” (Psalm 16:8). It is also the side that holds a weapon in battle, leaving it relatively exposed. Ibn Ezra suggests that the clause hints at military protection: God stands at the warrior’s right, shielding his striking arm.
+
+A charming rabbinic riff on this verse, cited by the Torah Temimah from Menachot 33b, contrasts God’s guardianship with that of earthly kings. “Come and see,” says the Talmud, “the way of flesh and blood is not like the way of the Holy One. The way of flesh and blood: the king sits inside and his servants guard him from without. But the way of the Holy One: His servants are inside and He guards them from without, as it is said: ‘YHWH is your guardian; YHWH is your shade at your right hand.’” The psalm’s metaphor thus feeds a theology of God as a sentry at the perimeter of human vulnerability.
+
+**Verse 6**
+
+יוֹמָם הַשֶּׁמֶשׁ לֹא־יַכֶּכָּה; וְיָרֵחַ בַּלָּיְלָה׃  
+
+“By day the sun will not strike you, nor the moon by night.”
+
+This verse explicates the “shade” of verse 5 in terms of concrete threats. Literally, it is about protection from extremes of climate and time. The structure is again a merism: “by day… by night.” As in Genesis 8:22, “day and night shall not cease” (וְיוֹם וָלַיְלָה לֹא יִשְׁבֹּתוּ), the pair stands for the entire daily cycle.
+
+The first half is straightforward. In the ancient Near East, prolonged exposure to the sun could kill. The verb נָכָה (*nakah*), “strike,” is commonly used for physical blows but also for plagues and disasters. Here “יַכֶּכָּה — strike you” evokes sunstroke. Jonah’s plant withers, “and the sun beat down on the head of Jonah” (וַתַּךְ הַשֶּׁמֶשׁ עַל־רֹאשׁ יוֹנָה; Jonah 4:8), making him faint. Travelers would have experienced such danger firsthand.
+
+The second half is stranger to modern ears: “nor the moon by night” (וְיָרֵחַ בַּלָּיְלָה), with the verb “strike” understood from the first colon. Ancient medicine and folklore often associated the moon with certain illnesses—our word “lunacy” preserves the link. Radak, drawing on humoral theory, explains: “The sun’s heat dries the moisture [of the body], and the moon increases moisture, from which comes coldness; and heat and cold are the cause of diseases, and God… will guard from them.” For him the pair sun/moon encodes the full range of climatic dangers: too hot and too dry, or too cold and damp.
+
+At another level, sun and moon were powers people worshiped. Deuteronomy 4:19 warns Israel “lest you lift up your eyes to heaven… and be drawn away and bow down to them and serve them, the sun and the moon and the stars.” To say “YHWH will guard you from the sun and from the moon” is, implicitly, to say: they are not gods. They are part of the “heaven and earth” God made in verse 2. Ibn Ezra, with his characteristic rationalism, notes that sun and moon are simply natural causes of harm—no need to fear them as deities.
+
+The figurative language database points out that sun and moon appear together in several judgment or salvation texts. For example, Joel 2:10 says, “לִפְנָיו רָגְזָה אֶרֶץ; רָעֲשׁוּ שָׁמַיִם; שֶׁמֶשׁ וְיָרֵחַ קָדָרוּ — Before Him the earth quakes; the heavens tremble; the sun and the moon grow dark.” The difference in Psalm 121 is that the pair is pressed into the service of reassurance rather than upheaval: all the times and luminous bodies that might terrify you are subordinated to a higher guardian.
+
+**Verse 7**
+
+יְהוָה יִשְׁמׇרְךָ מִכָּל־רָע; יִשְׁמֹר אֶת־נַפְשֶׁךָ׃  
+
+“YHWH will guard you from all evil; He will guard your life.”
+
+The root שׁ–מ–ר (*sh-m-r*, guard/keep) here appears twice in quick succession, intensifying the promise: “יִשְׁמׇרְךָ… יִשְׁמֹר — He will guard you… He will guard.” This kind of repetition, where a key word at the end of one phrase is picked up at the beginning of the next and developed further, is one form of “staircase” parallelism. It is characteristic of the Songs of Ascents.
+
+The scope is broadened to the extreme: “מִכָּל־רָע — from all evil.” The noun רָע (*ra‘*) in Hebrew is wonderfully—and alarmingly—broad. It can denote moral evil (“the wickedness of humanity,” Genesis 6:5), misfortune or disaster (“Does evil befall a city and YHWH has not done it?” Amos 3:6), sickness, or harm inflicted by enemies. Here the lack of specification allows the hearer to pour their own fears into the phrase. Radak glosses it as “that people will not harm you, nor wild animals… that you will not die from diseases.”
+
+The second colon narrows from the comprehensive to the intimate: “יִשְׁמֹר אֶת־נַפְשֶׁךָ — He will guard your *nefesh*.” The Hebrew נֶפֶשׁ (*nefesh*) is notoriously difficult to render with a single English word. It can mean “life” in the biological sense, “self,” “person,” or “soul.” Genesis 9:5 speaks of “your lifeblood (דִּמְכֶם לְנַפְשֹׁתֵיכֶם)”; Deuteronomy 6:5 commands love of God “בְּכָל־נַפְשֶׁךָ — with all your nefesh.” BDB’s range of meanings includes “living being, life, self, person, desire, appetite.”
+
+Here most translators opt for “life”: YHWH will guard your life. But the pairing of “from all evil” and “your nefesh” invites a double reading. Meiri speaks of “protection of the body and protection of the soul.” Bodily harm and inner being are both included. The psalm refuses to draw a hard line between them; they are intertwined.
+
+Liturgically, this verse often occurs with verse 8 in domestic blessings. In many Sephardic homes on Friday night, after *Shalom Aleichem*, one recites: “יוֹמָם הַשֶּׁמֶשׁ לֹא יַכֶּכָּה וְיָרֵחַ בַּלָּיְלָה; יְהוָה יִשְׁמׇרְךָ מִכָּל רָע; יִשְׁמֹר אֶת־נַפְשֶׁךָ — By day the sun will not strike you, nor the moon by night; YHWH will guard you from all evil; He will guard your life.” At the threshold of Shabbat, the home itself is imagined as the vulnerable traveler, needing a promise that extends from bodily safety to inner rest.
+
+**Verse 8**
+
+יְהוָה יִשְׁמׇר צֵאתְךָ וּבוֹאֶךָ; מֵעַתָּה וְעַד־עוֹלָם׃  
+
+“YHWH will guard your going out and your coming in, from now and forever.”
+
+The psalm’s final verse brings the sixfold *shamar* motif to a climax and wraps the poem in temporal and spatial totality. The phrase “צֵאתְךָ וּבוֹאֶךָ — your going out and your coming in” is a stock biblical merism. Deuteronomy 28:6 blesses the obedient with, “בָּרוּךְ אַתָּה בְּבֹאֶךָ; וּבָרוּךְ אַתָּה בְּצֵאתֶךָ — Blessed shall you be in your coming in; and blessed shall you be in your going out.” On the curse side the formula is inverted: “אָרוּר אַתָּה בְּבֹאֶךָ; וְאָרוּר אַתָּה בְּצֵאתֶךָ” (Deuteronomy 28:19). Numbers 27:17 uses the same pair for a leader’s comings and goings before the people.
+
+In origin the idiom may have been military—going out to battle, coming back from campaign—but by the time of the Psalms it functions more generally as “all your movements, all your affairs.” Radak, reading our verse with exile in view, says: “In your going out from the exile and your coming in to the land of Israel, you will come in peace.” Meiri makes a similar move, noting that Moses in Deuteronomy blesses “coming in” before “going out” as he speaks to a people about to enter the land, while David here reverses the order as he speaks of going out from exile and returning.
+
+The temporal phrase “מֵעַתָּה וְעַד־עוֹלָם — from now and forever” also recurs in the Psalms. Psalm 113:2 declares, “יְהִי שֵׁם יְהוָה מְבֹרָךְ, מֵעַתָּה וְעַד־עוֹלָם — Let the name of YHWH be blessed, from now and forever.” Psalm 125:2, another Song of Ascents, says, “וַיהוָה סָבִיב לְעַמּוֹ, מֵעַתָּה וְעַד־עוֹלָם — YHWH surrounds His people, from now and forever.” The noun עוֹלָם (*olam*) can mean “a very long time,” “for life,” or “eternity,” depending on context. Here it marks the promise as open-ended. There is no point at which YHWH’s duty of care expires.
+
+Rabbinic literature seizes on this verse’s expansive language. The Talmudic story about Onkelos the convert (Menachot 33b) has the Roman emperor send squads of soldiers to arrest him. Each time, Onkelos converts them by quoting verses; finally the emperor orders that they not speak to him at all. As they seize him, Onkelos lays his hand on the mezuzah and asks what it is. Told to be silent, he explains anyway: “The way of the world is that a king of flesh and blood sits inside, and his servants guard him from without; but the Holy One, blessed be He, His servants sit within and He guards them from without, as it is said: ‘YHWH will guard your going out and your coming in, from now and forever.’” The mezuzah on the doorpost becomes a concrete sign of the promise of Psalm 121:8, affixed precisely where going out and coming in occur.
+
+Within the Songs of Ascents, the phrase “מֵעַתָּה וְעַד־עוֹלָם” appears again in Psalm 131:3: “יַחֵל יִשְׂרָאֵל אֶל־יְהוָה, מֵעַתָּה וְעַד־עוֹלָם — Let Israel hope in YHWH, from now and forever.” One psalm promises that YHWH will guard your comings and goings; the other calls Israel to hope in that same YHWH without time limit. Together they suggest that Psalm 121 should not be read as a naïve guarantee that nothing bad will ever happen, but as a liturgical insistence that whatever happens, the journey—literal or metaphorical—unfolds under a guardianship that stretches beyond our present horizon.
