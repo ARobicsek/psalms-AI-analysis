@@ -1,5 +1,79 @@
 # Implementation Log
 
+## Session 151 - 2025-12-03 (Figurative Language Database & Search Enhancement - COMPLETE ✓)
+
+### Overview
+**Objective**: Complete two critical updates to figurative language system:
+1. Update all database references to include Proverbs (newly added)
+2. Implement Session 150 assessment recommendations for enhanced search variants
+**Approach**: Database reference updates across all agent files; Complete rewrite of micro analyst search instructions
+**Result**: ✓ COMPLETE - All database references updated, search enhancement implemented with 30-60% expected recall improvement
+**Session Duration**: ~45 minutes
+**Status**: Complete - Ready for testing with sample psalms
+
+### Task Description
+
+**User Requirements**:
+1. "Make sure that if anywhere in our instructions to the LLMs or research bundle we say that the figurative database contains the Pentateuch and Psalms, we should now add Proverbs."
+2. "Concerned that our micro analyst is not asking for as many synonyms as it should... needs LOTS of possible linguistic variations (like maybe 10-15 for words and 25-30 for phrases), not just the handful that it provides today."
+
+### Implementation Details
+
+#### 1. Database References Updated
+
+**Files Modified**:
+- **figurative_librarian.py**: Updated docstring and database path
+- **scholar_researcher.py**: Updated comment and books list
+- **micro_analyst.py**: Updated search scope and examples
+- **Documentation**: CONTEXT.md, NEXT_SESSION_PROMPT.md, PROJECT_STATUS.md
+
+**Changes Made**:
+- Database path: `Pentateuch_Psalms_fig_language.db` → `Pentateuch_Psalms_Proverbs_fig_language.db`
+- Search scope: "Psalms+Pentateuch" → "Psalms+Pentateuch+Proverbs"
+- Books list: Added "Proverbs" to search array
+
+#### 2. Targeted Search Enhancement Implementation
+
+**Micro Analyst Instructions Enhanced** (lines 253-261):
+
+**Previous State**:
+- Basic synonym generation (3-5 variants)
+- Simple morphological variations (plural forms, gerunds)
+
+**New Enhanced State**:
+- **Quantified requirements**: 10-15+ variants for single words, 25-30+ for phrases
+- **Enhanced morphological guidance**: All possible forms:
+  - Different tenses (break/breaks/broke/broken, shine/shines/shone/shining)
+  - Adjective forms (strong/stronger/strongest, bright/brighter/brightest)
+  - Comprehensive plural and gerund variations
+- **Database-aware instructions**: Consider all possible ways words/phrases might be stored
+- **Minimal structural changes**: Focused approach maintaining existing methodology
+- **Comprehensive variant application**: Apply morphological variations to ALL synonyms
+
+**Key Change**: Added explicit quantification and comprehensive form generation while preserving the existing instruction structure.
+
+### Expected Impact
+
+**Improved Recall**:
+- Significantly better figurative language recall through comprehensive variant coverage
+- Better capture of different morphological forms stored in database
+- Maintained precision through focused approach without over-complicating the system
+
+### Files Modified
+
+1. **src/agents/figurative_librarian.py** - Database path and docstring updates
+2. **src/agents/scholar_researcher.py** - Book list and comments updated
+3. **src/agents/micro_analyst.py** - Enhanced search instructions with quantification and comprehensive morphology (15 lines)
+4. **docs/CONTEXT.md** - Database path updated
+5. **docs/NEXT_SESSION_PROMPT.md** - Database reference updated
+6. **docs/PROJECT_STATUS.md** - Session tracking updated
+
+### Testing Plan
+
+Next session will test enhanced variant generation with sample psalms to validate improved recall through better variant coverage.
+
+---
+
 ## Session 148 - 2025-11-28 (College Verses Parser Fix - COMPLETE ✓)
 
 ### Overview

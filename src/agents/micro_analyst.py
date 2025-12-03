@@ -247,15 +247,18 @@ GENERATE RESEARCH REQUESTS:
    - **For psalms >15 verses**: Limit to 8-12 figurative searches (most striking imagery only)
    - **For psalms 10-15 verses**: Limit to 10-15 figurative searches
    - **For psalms <10 verses**: Up to 12-18 figurative searches acceptable
-   - **SEARCH SCOPE**: Default to searching both Psalms AND Pentateuch (not just Psalms)
+   - **SEARCH SCOPE**: Default to searching Psalms, Pentateuch, AND Proverbs (not just Psalms)
    - **HIERARCHICAL SEARCH STRATEGY**: For each figurative element:
      * Specify the specific vehicle (main image, e.g., "stronghold", "shepherd", "storm")
-     * Include direct synonyms (e.g., for "stronghold": "fortress", "citadel", "refuge")
+     * Include direct synonyms - GENERATE 10-15+ VARIANTS for single words, 25-30+ for phrases (e.g., for "stronghold": "fortress", "citadel", "refuge", "tower", "wall", "shield", "protection", etc.)
      * Include broader category terms (e.g., for "stronghold": "military", "protection", "defense")
-     * **INCLUDE MORPHOLOGICAL VARIATIONS** where relevant:
+     * **INCLUDE MORPHOLOGICAL VARIATIONS** - Think about ALL possible ways these words/phrases might appear in the database:
        - Singular AND plural forms (e.g., "banner" AND "banners", "wall" AND "walls")
        - Base verbs AND gerunds (e.g., "stand" AND "standing", "rise" AND "rising")
-       - Apply this to synonyms too (e.g., if searching "arise", include "arises", "arising")
+       - Different tenses (break/breaks/broke/broken, shine/shines/shone/shining)
+       - Adjective forms (strong/stronger/strongest, bright/brighter/brightest)
+       - Apply this to ALL synonyms - generate comprehensive variant lists
+       - The figurative librarian uses simple regex matching, so provide many possible forms
      * The synthesis and master editor agents will determine which results are most relevant
    - Examples of GOOD figurative requests: "pour forth" (vivid action), "fathom" (rare concept), "nostril" (specific idiom)
    - Examples of BAD figurative requests: "hand", "gaze", "mouth", "way", "mercy", "bless" (too common, will return 100s of results)
@@ -278,9 +281,9 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     {{"query": "unique phrase", "level": "consonantal", "scope": "Tanakh", "purpose": "Example with no obvious alternates", "alternates": []}}
   ],
   "figurative_checks": [
-    {{"verse": 3, "reason": "Waters as primordial chaos imagery - vivid and theologically rich", "vehicle": "waters", "vehicle_synonyms": ["water", "sea", "seas", "deep", "depths", "flood", "floods", "ocean", "oceans"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch"}},
-    {{"verse": 5, "reason": "Voice 'breaking' cedars - unusual storm personification", "vehicle": "breaking", "vehicle_synonyms": ["break", "breaks", "shatter", "shatters", "shattering", "split", "splits", "fracture", "fractures"], "broader_terms": ["power", "force", "destruction"], "scope": "Psalms+Pentateuch"}},
-    {{"verse": 7, "reason": "Stronghold imagery - architectural metaphor for divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["strongholds", "fortress", "fortresses", "citadel", "citadels", "refuge", "refuges"], "broader_terms": ["military", "protection", "defense"], "scope": "Psalms+Pentateuch"}}
+    {{"verse": 3, "reason": "Waters as primordial chaos imagery - vivid and theologically rich", "vehicle": "waters", "vehicle_synonyms": ["water", "sea", "seas", "deep", "depths", "flood", "floods", "ocean", "oceans"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch+Proverbs"}},
+    {{"verse": 5, "reason": "Voice 'breaking' cedars - unusual storm personification", "vehicle": "breaking", "vehicle_synonyms": ["break", "breaks", "shatter", "shatters", "shattering", "split", "splits", "fracture", "fractures"], "broader_terms": ["power", "force", "destruction"], "scope": "Psalms+Pentateuch+Proverbs"}},
+    {{"verse": 7, "reason": "Stronghold imagery - architectural metaphor for divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["strongholds", "fortress", "fortresses", "citadel", "citadels", "refuge", "refuges"], "broader_terms": ["military", "protection", "defense"], "scope": "Psalms+Pentateuch+Proverbs"}}
   ],
   "commentary_requests": [
     {{"verse": 1, "reason": "Opening beatitude - how do commentators interpret 'ashrei' and the threefold structure?"}},

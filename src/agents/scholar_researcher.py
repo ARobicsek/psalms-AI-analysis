@@ -299,11 +299,11 @@ class ScholarResearchRequest:
             req = {}
 
             # Parse scope to determine which books to search
-            # NOTE: Our database only contains Psalms + Pentateuch, so we don't support
+            # NOTE: Our database only contains Psalms + Pentateuch + Proverbs, so we don't support
             # searching the entire Tanakh even if requested
             if scope == "Psalms+Pentateuch" or scope == "Pentateuch+Psalms" or scope == "Tanakh":
-                # Search across Psalms and all Pentateuch books (our entire database)
-                req["books"] = ["Psalms", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"]
+                # Search across Psalms, Pentateuch books, and Proverbs (our entire database)
+                req["books"] = ["Psalms", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Proverbs"]
             elif scope == "Psalms":
                 # Search only Psalms
                 req["book"] = "Psalms"
