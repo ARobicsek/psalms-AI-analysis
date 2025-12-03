@@ -1,7 +1,7 @@
 """
 Figurative Language Librarian Agent
 
-Queries the existing figurative language database (Pentateuch + Psalms).
+Queries the existing figurative language database (Pentateuch + Psalms + Proverbs).
 This is a pure Python data retriever (not an LLM agent).
 
 Key Features:
@@ -18,7 +18,7 @@ Hierarchical Tag System:
 - Search for "fox" finds only fox-specific entries
 
 Database Location:
-- C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_fig_language.db
+- C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_Proverbs_fig_language.db
 - Contains 2,863 figurative instances in Psalms (from CONTEXT.md)
 - Includes full AI deliberations and validations
 """
@@ -32,7 +32,7 @@ from collections import Counter
 import json
 
 # Database path
-FIGURATIVE_DB_PATH = Path("C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_fig_language.db")
+FIGURATIVE_DB_PATH = Path("C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_Proverbs_fig_language.db")
 
 
 @dataclass
