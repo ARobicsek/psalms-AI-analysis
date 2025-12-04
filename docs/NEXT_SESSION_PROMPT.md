@@ -13,9 +13,52 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V8 Production Ready with Bug Fixes
-**Version**: V8.1 - Session 156 bug fixes for synthesis size + figurative search patterns
-**Last Session**: Session 156 - Two Critical Bug Fixes (2025-12-04) ✅ COMPLETE
+**Phase**: V8.1 Production Ready - Token Limit Issue Resolved
+**Version**: V8.1 - Psalm 14 token limit fix verified working
+**Last Session**: Session 157 - Psalm 14 Token Limit Fix Verification (2025-12-04) ✅ COMPLETE
+
+## Session 157 Summary (COMPLETE ✓)
+
+### Psalm 14 Token Limit Issue Successfully Resolved
+
+**Objective**: Fix the token limit overflow issue that prevented Psalm 14 pipeline from completing (prompt was 202,409 tokens > 200,000 maximum)
+
+**Result**: ✅ COMPLETE - Issue successfully resolved with 50KB Related Psalms cap
+
+**Problem Analysis**:
+- Psalm 14 pipeline failed with "prompt is too long: 202409 tokens > 200000 maximum"
+- Related Psalms section was 163,667 characters (way over 100KB cap)
+- Total research bundle was 381KB with Related Psalms alone consuming 164KB (43% of total)
+- Root cause: The 100KB cap in `related_psalms_librarian.py` wasn't being enforced properly
+
+**Solution Implemented**:
+1. **Reduced Related Psalms cap to 50KB** in `research_assembler.py`
+2. **Added debug logging** to track section sizes
+3. **Fixed logger initialization** in `related_psalms_librarian.py`
+
+**Verification Results**:
+- **Related Psalms properly capped**: 49,933 chars (just under 50KB limit)
+  - Progressive removal worked: Psalms 34 & 53 had full text removed
+- **Research bundle size reduced**: 209KB (down from 381KB)
+  - **Total reduction: 172KB (45% smaller)**
+- **Introduction prompt**: 232KB (~116K tokens) - well under 200K limit
+- **Pipeline completed successfully**: All steps completed without token limit errors
+
+**Key Log Output**:
+```
+Related Psalms final result for Psalm 14: size=49933 chars (limit=50000), psalms_without_full_text={34, 53}
+```
+
+**Files Modified**:
+- `src/agents/research_assembler.py` - Pass 50KB max_size_chars to Related Psalms
+- `src/agents/related_psalms_librarian.py` - Added logger attribute and debug logging
+
+**Next Steps**:
+- Psalm 14 pipeline now runs successfully without token limit errors
+- The 50KB cap provides good balance between content inclusion and token budget
+- All future psalms will benefit from this fix
+
+---
 
 ## Session 156 Summary (COMPLETE ✓)
 

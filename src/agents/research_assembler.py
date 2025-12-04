@@ -19,6 +19,7 @@ Output: Complete research bundle ready for Scholar-Writer agents
 """
 
 import sys
+import logging
 from pathlib import Path
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
@@ -509,6 +510,7 @@ class ResearchAssembler:
                              Requires ANTHROPIC_API_KEY environment variable.
             cost_tracker: CostTracker instance for tracking API costs
         """
+        self.logger = logging.getLogger(__name__)
         self.bdb_librarian = BDBLibrarian()
         self.concordance_librarian = ConcordanceLibrarian()
         self.figurative_librarian = FigurativeLibrarian()
@@ -519,6 +521,7 @@ class ResearchAssembler:
         self.hirsch_librarian = HirschLibrarian()  # R. Samson Raphael Hirsch German commentary
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
         self.related_psalms_librarian = RelatedPsalmsLibrarian(connections_file='data/analysis_results/top_550_connections_v6.json')  # Related psalms from top connections
+        self.related_psalms_librarian.logger = self.logger  # Pass logger for debug output
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
         """
@@ -628,8 +631,12 @@ class ResearchAssembler:
         if related_psalms:
             related_psalms_markdown = self.related_psalms_librarian.format_for_research_bundle(
                 request.psalm_chapter,
-                related_psalms
+                related_psalms,
+                max_size_chars=50000  # Reduced from default 100KB to prevent token limit overflow
             )
+            if self.logger:
+                self.logger.info(f"Related Psalms for Psalm {request.psalm_chapter}: "
+                               f"{len(related_psalms)} matches, markdown size: {len(related_psalms_markdown)} chars")
 
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,
