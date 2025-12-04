@@ -136,7 +136,8 @@ class RelatedPsalmsLibrarian:
     def format_for_research_bundle(
         self,
         psalm_number: int,
-        related_matches: List[RelatedPsalmMatch]
+        related_matches: List[RelatedPsalmMatch],
+        max_size_chars: int = 100000
     ) -> str:
         """
         Format related psalms as markdown for inclusion in research bundle.
@@ -144,6 +145,7 @@ class RelatedPsalmsLibrarian:
         Args:
             psalm_number: The psalm being analyzed
             related_matches: List of related psalm matches
+            max_size_chars: Maximum size in characters (default 100KB)
 
         Returns:
             Formatted markdown string
@@ -151,6 +153,44 @@ class RelatedPsalmsLibrarian:
         if not related_matches:
             return ""
 
+        # Build the preamble (this is always included)
+        preamble = self._build_preamble(psalm_number, related_matches)
+
+        # Try generating with full text for all psalms first
+        # Then progressively remove full text sections until under the cap
+        psalms_without_full_text = set()  # Track which psalms should omit full text
+
+        while True:
+            md = preamble
+
+            for match in related_matches:
+                include_full_text = match.psalm_number not in psalms_without_full_text
+                md += self._format_single_match(psalm_number, match, include_full_text=include_full_text)
+
+            # Check if under cap
+            if len(md) <= max_size_chars:
+                break
+
+            # Find next psalm to remove full text from (start from last/lowest-scored)
+            # related_matches is sorted by score descending, so we remove from the end first
+            removed_one = False
+            for match in reversed(related_matches):
+                if match.psalm_number not in psalms_without_full_text:
+                    psalms_without_full_text.add(match.psalm_number)
+                    removed_one = True
+                    break
+
+            # If we've already removed full text from all psalms and still over cap, stop
+            if not removed_one:
+                # Add a note that content was truncated
+                if len(md) > max_size_chars:
+                    md = md[:max_size_chars - 100] + "\n\n*[Section truncated for size]*\n"
+                break
+
+        return md
+
+    def _build_preamble(self, psalm_number: int, related_matches: List[RelatedPsalmMatch]) -> str:
+        """Build the preamble section for the Related Psalms Analysis."""
         md = f"## Related Psalms Analysis\n\n"
 
         # Build list of related psalm numbers for display
@@ -174,9 +214,6 @@ class RelatedPsalmsLibrarian:
         md += f"Below is the full text of the psalms potentially related to Psalm {psalm_number}, and for each psalm, a list of POSSIBLY related words and phrases that were algorithmically detected. These relationships might deepen your insights into the meaning, intent, posture, history, and poetics of the psalm you are analyzing. Feel free to REJECT these possible connections as spurious, but DO incorporate them into your work where relevant an insight-driving.\n\n"
 
         md += "---\n\n"
-
-        for match in related_matches:
-            md += self._format_single_match(psalm_number, match)
 
         return md
 
@@ -232,21 +269,35 @@ class RelatedPsalmsLibrarian:
 
         return prefix + " ".join(snippet_words) + suffix
 
-    def _format_single_match(self, analyzing_psalm: int, match: RelatedPsalmMatch) -> str:
-        """Format a single related psalm match."""
+    def _format_single_match(
+        self,
+        analyzing_psalm: int,
+        match: RelatedPsalmMatch,
+        include_full_text: bool = True
+    ) -> str:
+        """Format a single related psalm match.
+
+        Args:
+            analyzing_psalm: The psalm number being analyzed
+            match: The related psalm match data
+            include_full_text: Whether to include the full Hebrew text (for size control)
+        """
         md = f"### Psalm {match.psalm_number} (Connection Score: {match.final_score:.2f})\n\n"
 
         # Filter roots early so we can check if we have any displayable content
         filtered_roots = [r for r in match.shared_roots if r.get('idf', 0) >= 1]
 
-        # Full text of the related psalm (Hebrew only)
-        md += f"#### Full Text of Psalm {match.psalm_number}\n\n"
+        # Full text of the related psalm (Hebrew only) - conditionally included
+        if include_full_text:
+            md += f"#### Full Text of Psalm {match.psalm_number}\n\n"
 
-        for verse_data in match.full_text_hebrew:
-            verse_num = verse_data['verse']
-            hebrew = verse_data['hebrew']
+            for verse_data in match.full_text_hebrew:
+                verse_num = verse_data['verse']
+                hebrew = verse_data['hebrew']
 
-            md += f"**Verse {verse_num}**: {hebrew}\n\n"
+                md += f"**Verse {verse_num}**: {hebrew}\n\n"
+        else:
+            md += f"*[Full text of Psalm {match.psalm_number} omitted for size - {len(match.full_text_hebrew)} verses]*\n\n"
 
         # Shared patterns
         md += f"#### Shared Patterns\n\n"

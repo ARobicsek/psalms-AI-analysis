@@ -1,7 +1,7 @@
 """
 Figurative Language Librarian Agent
 
-Queries the existing figurative language database (Pentateuch + Psalms + Proverbs).
+Queries the existing figurative language database (Pentateuch + Psalms).
 This is a pure Python data retriever (not an LLM agent).
 
 Key Features:
@@ -18,7 +18,7 @@ Hierarchical Tag System:
 - Search for "fox" finds only fox-specific entries
 
 Database Location:
-- C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_Proverbs_fig_language.db
+- C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_fig_language.db
 - Contains 2,863 figurative instances in Psalms (from CONTEXT.md)
 - Includes full AI deliberations and validations
 """
@@ -32,7 +32,7 @@ from collections import Counter
 import json
 
 # Database path
-FIGURATIVE_DB_PATH = Path("C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_Proverbs_fig_language.db")
+FIGURATIVE_DB_PATH = Path("C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_fig_language.db")
 
 
 @dataclass
@@ -288,6 +288,81 @@ class FigurativeLibrarian:
                 f"Figurative language database not found at {self.db_path}"
             )
 
+    def _get_morphological_variants(self, term: str) -> List[str]:
+        """
+        Generate morphological variants for a search term.
+
+        Given a base term like "devour", generates variants:
+        - Base: devour
+        - Present participle/gerund: devouring
+        - Past tense: devoured
+        - Third person singular: devours
+        - Agent noun: devourer, devourers
+
+        Args:
+            term: Base form of the word to generate variants for
+
+        Returns:
+            List of morphological variants including the original term
+        """
+        term = term.lower().strip()
+        if not term:
+            return []
+
+        variants = {term}  # Use set to avoid duplicates
+
+        # Skip generating variants for multi-word phrases (they're searched as-is)
+        if ' ' in term:
+            return [term]
+
+        # Skip very short words (1-2 chars) - don't expand them
+        if len(term) <= 2:
+            return [term]
+
+        # Generate common English morphological variants
+        # Handle words ending in 'e' (e.g., "devour" doesn't, but "consume" does)
+        if term.endswith('e'):
+            # consume -> consuming, consumed, consumes, consumer
+            base = term[:-1]
+            variants.add(f"{base}ing")      # consuming
+            variants.add(f"{term}d")        # consumed
+            variants.add(f"{term}s")        # consumes
+            variants.add(f"{base}er")       # consumer
+            variants.add(f"{base}ers")      # consumers
+        elif term.endswith('y') and len(term) > 2 and term[-2] not in 'aeiou':
+            # Words ending in consonant + y: carry -> carrying, carried, carries
+            base = term[:-1]
+            variants.add(f"{term}ing")      # carrying
+            variants.add(f"{base}ied")      # carried
+            variants.add(f"{base}ies")      # carries
+            variants.add(f"{base}ier")      # carrier
+            variants.add(f"{base}iers")     # carriers
+        else:
+            # Regular words: devour -> devouring, devoured, devours, devourer
+            variants.add(f"{term}ing")      # devouring
+            variants.add(f"{term}ed")       # devoured
+            variants.add(f"{term}s")        # devours
+            variants.add(f"{term}er")       # devourer
+            variants.add(f"{term}ers")      # devourers
+
+            # Handle doubling final consonant for short vowel words
+            # e.g., "run" -> "running" (not "runing")
+            # This is a simplification - only handle common cases
+            if len(term) >= 3:
+                last_char = term[-1]
+                second_last = term[-2]
+                # If ends in single consonant preceded by single vowel
+                if (last_char not in 'aeiouwy' and
+                    second_last in 'aeiou' and
+                    (len(term) < 4 or term[-3] not in 'aeiou')):
+                    # Add doubled consonant variants
+                    variants.add(f"{term}{last_char}ing")   # running
+                    variants.add(f"{term}{last_char}ed")    # rubbed
+                    variants.add(f"{term}{last_char}er")    # runner
+                    variants.add(f"{term}{last_char}ers")   # runners
+
+        return list(variants)
+
     def search(self, request: FigurativeRequest) -> FigurativeBundle:
         """
         Search for figurative language instances.
@@ -399,47 +474,58 @@ class FigurativeLibrarian:
         # Hierarchical vehicle search: search for ANY of the provided terms
         if request.vehicle_search_terms and len(request.vehicle_search_terms) > 0:
             # Build OR conditions for all search terms (specific + synonyms + broader)
-            # Use word-boundary patterns to avoid false positives (e.g., "arm" matching "swarm" or "army")
+            # Use word-boundary patterns to avoid false positives (e.g., "arm" matching "swarm")
+            # Also include morphological variants (ing, ed, s, er, ers)
             vehicle_conditions = []
+            all_patterns = []
+
             for term in request.vehicle_search_terms:
-                # Create patterns to match whole words in JSON array, with word boundaries:
-                # JSON format: ["item1", "item2", "item3"]
-                # To prevent false positives (e.g., "arm" matching "army" or "swarm"):
-                # - Match term followed by: " (end of element), space, comma, →
-                # - Match term preceded by: [", ", " (space)
-                # Patterns:
-                # 1. ["term"   - term as complete first element
-                # 2. ["term    - term at start (may have suffix in same element)
-                # 3. ", "term" - term as complete middle/last element
-                # 4. ", "term  - term at start of middle/last element
-                # 5. " term"   - term after space, at end of element
-                # 6. " term    - term after space (in compound)
-                patterns = [
-                    f'%["{term.lower()}"%',    # Matches ["term"
-                    f'%["{term.lower()} %',    # Matches ["term ...
-                    f'%["{term.lower()},% ',   # Matches ["term, (rare but possible)
-                    f'%, "{term.lower()}"%',   # Matches , "term"
-                    f'%, "{term.lower()} %',   # Matches , "term ...
-                    f'%, "{term.lower()},% ',  # Matches , "term, (rare)
-                    f'% {term.lower()}"%',     # Matches  term" (end of compound)
-                    f'% {term.lower()} %',     # Matches  term  (middle of compound)
-                ]
-                # Combine with OR
-                pattern_condition = "(" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(patterns)) + ")"
+                # Generate morphological variants for this term
+                term_variants = self._get_morphological_variants(term.lower())
+
+                for variant in term_variants:
+                    # Word-boundary patterns that work WITHIN descriptive phrases
+                    # Database stores: ["A devouring mouth", "Predatory animal", ...]
+                    # We need to match "devour" within "A devouring mouth"
+                    patterns = [
+                        f'% {variant} %',      # " devour " - middle of phrase
+                        f'% {variant}"%',      # " devour" - end of phrase before quote
+                        f'% {variant},%',      # " devour," - before comma in phrase
+                        f'%"{variant} %',      # "devour " - start of element
+                        f'%"{variant}"%',      # "devour" - complete element (rare)
+                        f'%"{variant},%',      # "devour, - element starts with term then comma
+                        f'% {variant}]%',      # " devour] - at end of JSON array
+                    ]
+                    all_patterns.extend(patterns)
+
+            # Build single OR condition for all patterns across all terms
+            if all_patterns:
+                pattern_condition = "(" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(all_patterns)) + ")"
                 vehicle_conditions.append(pattern_condition)
-                params.extend(patterns)
-            query += " AND (" + " OR ".join(vehicle_conditions) + ")"
+                params.extend(all_patterns)
+
+            if vehicle_conditions:
+                query += " AND (" + " OR ".join(vehicle_conditions) + ")"
         elif request.vehicle_contains:
-            # Fallback to single vehicle search with word boundaries
-            term = request.vehicle_contains
-            patterns = [
-                f'%["{term.lower()}%',
-                f'%, "{term.lower()}%',
-                f'%"{term.lower()}"%',
-                f'% {term.lower()}%',
-            ]
-            query += " AND (" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(patterns)) + ")"
-            params.extend(patterns)
+            # Fallback to single vehicle search with word boundaries + morphological variants
+            term = request.vehicle_contains.lower()
+            term_variants = self._get_morphological_variants(term)
+
+            all_patterns = []
+            for variant in term_variants:
+                patterns = [
+                    f'% {variant} %',      # " term " - middle of phrase
+                    f'% {variant}"%',      # " term" - end of phrase
+                    f'% {variant},%',      # " term," - before comma
+                    f'%"{variant} %',      # "term " - start of element
+                    f'%"{variant}"%',      # "term" - complete element
+                    f'%"{variant},%',      # "term, - element starts with term
+                    f'% {variant}]%',      # " term] - at end of JSON array
+                ]
+                all_patterns.extend(patterns)
+
+            query += " AND (" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(all_patterns)) + ")"
+            params.extend(all_patterns)
 
         if request.ground_contains:
             query += " AND (f.ground LIKE ? COLLATE NOCASE)"

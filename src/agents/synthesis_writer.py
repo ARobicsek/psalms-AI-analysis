@@ -843,9 +843,9 @@ class SynthesisWriter:
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
         # Trim research bundle if needed to fit within token limits
-        # Target: ~700K chars max (~350K tokens with 2:1 ratio)
-        # Increased limit for comprehensive research inclusion
-        research_text = self._trim_research_bundle(research_bundle, max_chars=700000)
+        # Target: ~600K chars max (~300K tokens with 2:1 ratio)
+        # Reduced limit to leave room for prompt template + macro/micro analysis
+        research_text = self._trim_research_bundle(research_bundle, max_chars=600000)
 
         # Build prompt
         prompt = INTRODUCTION_ESSAY_PROMPT.format(
@@ -974,9 +974,9 @@ class SynthesisWriter:
         phonetic_section = format_phonetic_section(micro_analysis)
 
         # Trim research bundle if needed - verse commentary includes introduction essay
-        # Target: ~700K chars max (~350K tokens)
-        # Increased limit for comprehensive research inclusion
-        research_text = self._trim_research_bundle(research_bundle, max_chars=700000)
+        # Target: ~600K chars max (~300K tokens with 2:1 ratio)
+        # Reduced limit to leave room for prompt template + macro/micro analysis
+        research_text = self._trim_research_bundle(research_bundle, max_chars=600000)
 
         # Build prompt
         prompt = VERSE_COMMENTARY_PROMPT.format(
