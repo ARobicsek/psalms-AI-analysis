@@ -542,8 +542,8 @@ class FigurativeLibrarian:
             params.append(search_param)
             params.append(search_param)
 
-        # Limit results
-        query += f" LIMIT {request.max_results}"
+        # Randomize results before limiting to ensure equal chance for all matches
+        query += f" ORDER BY RANDOM() LIMIT {request.max_results}"
 
         # Execute query
         cursor.execute(query, params)

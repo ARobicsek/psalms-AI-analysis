@@ -7,9 +7,9 @@ This file now contains only recent sessions (150-157) for easier reference.
 
 ---
 
-**Last Updated**: 2025-12-04 (Session 157 - COMPLETE ✓)
-**Current Phase**: V8.1 Production Ready - Token Limit Issue Resolved
-**Status**: ✅ Psalm 14 Token Limit Fix Verified - Pipeline Running Successfully
+**Last Updated**: 2025-12-04 (Session 158 - COMPLETE ✓)
+**Current Phase**: V8.2 Production Ready - Randomized Figurative Search Results
+**Status**: ✅ Figurative Search Randomization Complete - Equal Chance for All Books
 
 ## Session 157 Summary (COMPLETE ✓)
 
@@ -67,6 +67,34 @@ This file now contains only recent sessions (150-157) for easier reference.
 - Files: `src/agents/synthesis_writer.py`
 
 **Next Step**: Re-run `python scripts/run_enhanced_pipeline.py 14` to verify fixes
+
+---
+
+## Session 158 Summary (COMPLETE ✓)
+
+### Figurative Language Search Randomization
+
+**Objective**: Ensure figurative language search results from all books have equal chance of inclusion
+
+**Result**: ✅ COMPLETE - Added ORDER BY RANDOM() to eliminate result ordering bias
+
+**Problem Identified**:
+- Database contains 842 figurative instances from Proverbs but they never appeared in results
+- SQL without ORDER BY returns results in insertion order (bias toward earlier books)
+- Only first 10-20 results per query kept due to psalm-length filtering
+
+**Solution Applied**:
+- Modified `figurative_librarian.py:546`: Added `ORDER BY RANDOM()` before LIMIT
+- Randomization applied at SQL level (500 random results)
+- Phrase match prioritization preserved in Python filtering
+
+**Impact**:
+- Equal visibility for Proverbs and other books in figurative search results
+- More diverse sampling across entire database
+- Maintains phrase match quality control
+
+**Files Modified**:
+- `src/agents/figurative_librarian.py` - Line 546
 
 ---
 
