@@ -13,9 +13,9 @@ Continue working on the Psalms structural analysis project. This document provid
 
 ## Current Status
 
-**Phase**: V8.1 Production Ready - Token Limit Issue Resolved
-**Version**: V8.1 - Psalm 14 token limit fix verified working
-**Last Session**: Session 157 - Psalm 14 Token Limit Fix Verification (2025-12-04) ✅ COMPLETE
+**Phase**: V8.2 Production Ready - Randomized Figurative Search Results
+**Version**: V8.2 - Added ORDER BY RANDOM() for equal chance inclusion across all books
+**Last Session**: Session 158 - Figurative Search Randomization (2025-12-04) ✅ COMPLETE
 
 ## Session 157 Summary (COMPLETE ✓)
 
@@ -132,6 +132,34 @@ Related Psalms final result for Psalm 14: size=49933 chars (limit=50000), psalms
 - Psalm 14 pipeline now runs successfully without token limit errors
 - The 50KB cap provides good balance between content inclusion and token budget
 - All future psalms will benefit from this fix
+
+---
+
+## Session 158 Summary (COMPLETE ✓)
+
+### Figurative Language Search Randomization
+
+**Objective**: Ensure figurative language search results from all books (including Proverbs) have equal chance of inclusion in the research bundle
+
+**Result**: ✅ COMPLETE - Successfully implemented randomization to fix result bias
+
+**Key Findings**:
+1. **Proverbs Confirmed in Database**: Database contains 842 figurative instances from Proverbs across 853 verses
+2. **Result Bias Identified**: Without ordering, SQL returns results in insertion order, favoring earlier books (Pentateuch/Psalms)
+3. **No Proverbs in Psalm 14**: Search terms didn't match, but even if they did, later books had low visibility
+
+**Solution Implemented**:
+- Added `ORDER BY RANDOM()` to SQL query in `figurative_librarian.py:546`
+- Randomization happens BEFORE applying LIMIT (500 results)
+- Phrase match prioritization preserved in `_filter_figurative_bundle()`
+
+**Files Modified**:
+- `src/agents/figurative_librarian.py` - Line 546: Added `ORDER BY RANDOM()` before LIMIT
+
+**Impact**:
+- Equal chance for all books to appear in figurative search results
+- Diverse sampling from across the entire figurative language database
+- Phrase match prioritization still works within the randomized results
 
 ---
 

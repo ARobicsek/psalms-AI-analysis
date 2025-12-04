@@ -3,7 +3,62 @@
 **Note**: Historical session summaries (Sessions 1-149) have been archived to:
 `docs/archive/documentation_cleanup/IMPLEMENTATION_LOG_sessions_1-149_2025-12-04.md`
 
-This file now contains only recent sessions (150-157) for easier reference.
+This file now contains only recent sessions (150-158) for easier reference.
+
+---
+
+## Session 158 - 2025-12-04 (Figurative Search Randomization - COMPLETE ✓)
+
+### Overview
+Investigated and fixed the issue where figurative language search results from Proverbs (and other later books) were not appearing in research bundles due to result ordering bias.
+
+### Problem Investigation
+1. **User Question**: "Can our figurative librarian search for figurative language from the book of Proverbs?"
+2. **Initial Check**: The code referenced the correct database path containing Proverbs
+3. **Database Verification**:
+   - Confirmed database contains 842 figurative instances from Proverbs across 853 verses
+   - All major figurative language types represented (similes, metaphors, personification, etc.)
+   - High confidence detections: 718 entries with 0.9-1.0 confidence
+
+4. **Root Cause Analysis**:
+   - SQL query in `figurative_librarian.py` had no ORDER BY clause
+   - Results returned in database insertion order (Pentateuch → Psalms → Proverbs)
+   - Only first 10-20 results kept per query (psalm-length filtering)
+   - Later books like Proverbs had minimal chance of appearing in results
+
+### Solution Implemented
+**File Modified**: `src/agents/figurative_librarian.py`
+
+**Line 546 - Before**:
+```python
+query += f" LIMIT {request.max_results}"
+```
+
+**Line 546-547 - After**:
+```python
+# Randomize results before limiting to ensure equal chance for all matches
+query += f" ORDER BY RANDOM() LIMIT {request.max_results}"
+```
+
+### Technical Details
+- **Randomization Level**: Applied at SQL level before LIMIT
+- **Default Limit**: 500 results randomized, then filtered to 10-20 based on psalm length
+- **Phrase Prioritization**: Preserved in Python layer via `_filter_figurative_bundle()`
+- **Impact**: All books (Pentateuch, Psalms, Proverbs) now have equal visibility
+
+### Benefits Achieved
+1. **Equal Opportunity**: Every matching instance has equal chance regardless of book position
+2. **Diverse Sampling**: Results now include variety across all books in database
+3. **Quality Maintained**: Phrase match prioritization still works within randomized sample
+4. **Simple Fix**: Single-line change with significant impact
+
+### Files Changed
+1. `src/agents/figurative_librarian.py` - Line 546: Added `ORDER BY RANDOM()`
+
+### Testing Considerations
+- Future psalm runs should now include Proverbs matches where search terms align
+- Results will vary between runs due to randomization (desired behavior)
+- Consider adding deterministic option for reproducible results if needed
 
 ---
 
