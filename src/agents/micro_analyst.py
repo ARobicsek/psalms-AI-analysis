@@ -239,29 +239,78 @@ GENERATE RESEARCH REQUESTS:
    - "consonantal" finds all forms of a root pattern regardless of vocalization
    - 5-10 strategic searches
 
-3. **FIGURATIVE LANGUAGE** - Verses with notable and interesting figurative speech
-   - **BE SELECTIVE**: Only request searches for VIVID, UNUSUAL, or THEOLOGICALLY RICH figurative language, or language CENTRAL to the psalm
-   - **AVOID very common body part imagery** unless used in surprising ways: hand, eye/gaze, mouth, heart, face, ear
-   - **AVOID very common theological terms** unless central to the psalm: mercy, fear, bless, praise
-   - **FOCUS ON**: Unusual metaphors, nature imagery, architectural imagery, rare verbs of action, surprising personification
-   - **For psalms >15 verses**: Limit to 8-12 figurative searches (most striking imagery only)
-   - **For psalms 10-15 verses**: Limit to 10-15 figurative searches
-   - **For psalms <10 verses**: Up to 12-18 figurative searches acceptable
-   - **SEARCH SCOPE**: Default to searching Psalms, Pentateuch, AND Proverbs (not just Psalms)
-   - **HIERARCHICAL SEARCH STRATEGY**: For each figurative element:
-     * Specify the specific vehicle (main image, e.g., "stronghold", "shepherd", "storm")
-     * Include direct synonyms - GENERATE 10-15+ VARIANTS for single words, 25-30+ for phrases (e.g., for "stronghold": "fortress", "citadel", "refuge", "tower", "wall", "shield", "protection", etc.)
-     * Include broader category terms (e.g., for "stronghold": "military", "protection", "defense")
-     * **INCLUDE MORPHOLOGICAL VARIATIONS** - Think about ALL possible ways these words/phrases might appear in the database:
-       - Singular AND plural forms (e.g., "banner" AND "banners", "wall" AND "walls")
-       - Base verbs AND gerunds (e.g., "stand" AND "standing", "rise" AND "rising")
-       - Different tenses (break/breaks/broke/broken, shine/shines/shone/shining)
-       - Adjective forms (strong/stronger/strongest, bright/brighter/brightest)
-       - Apply this to ALL synonyms - generate comprehensive variant lists
-       - The figurative librarian uses simple regex matching, so provide many possible forms
-     * The synthesis and master editor agents will determine which results are most relevant
-   - Examples of GOOD figurative requests: "pour forth" (vivid action), "fathom" (rare concept), "nostril" (specific idiom)
-   - Examples of BAD figurative requests: "hand", "gaze", "mouth", "way", "mercy", "bless" (too common, will return 100s of results)
+3. **FIGURATIVE LANGUAGE** - Search the figurative language database for relevant metaphors
+
+   **!!! CRITICAL - READ THIS FIRST !!!**
+
+   The database vehicle field contains JSON arrays like:
+   - ["chaff blown by wind", "agricultural byproduct", "natural element"]
+   - ["A tree planted by streams", "Plant", "Natural element"]
+   - ["dust and ashes", "inert matter", "earthly substances"]
+
+   Your search terms match via SUBSTRING within these arrays. Therefore:
+   - "tree" matches ["A tree planted by streams", ...]
+   - "chaff" matches ["chaff blown by wind", ...]
+   - "dust" matches ["dust and ashes", ...]
+
+   **YOU MUST include SIMPLE SINGLE-WORD TERMS for every concept!**
+
+   **CORRECT EXAMPLE - Tree/Plant Metaphor (Psalm 1:3)**:
+   ```json
+   {{
+     "verse": 3,
+     "reason": "Tree metaphor for righteous person planted by water",
+     "vehicle": "tree",
+     "vehicle_synonyms": ["tree", "plant", "planted", "leaf", "fruit", "root", "stream", "water", "flourish", "grow", "wither", "tree planted", "bears fruit", "by streams"],
+     "broader_terms": ["vegetation", "agriculture", "growth", "nature"],
+     "scope": "Psalms+Pentateuch+Proverbs"
+   }}
+   ```
+   Note: SIMPLE WORDS FIRST (tree, plant, leaf, fruit, water), then phrases (tree planted, bears fruit).
+
+   **CORRECT EXAMPLE - Chaff/Wind Metaphor (Psalm 1:4)**:
+   ```json
+   {{
+     "verse": 4,
+     "reason": "Chaff imagery for worthless wicked driven by wind",
+     "vehicle": "chaff",
+     "vehicle_synonyms": ["chaff", "dust", "straw", "wind", "scatter", "blow", "driven", "chaff blown", "dust in wind", "driven by wind", "blown away"],
+     "broader_terms": ["agricultural waste", "worthlessness", "impermanence"],
+     "scope": "Psalms+Pentateuch+Proverbs"
+   }}
+   ```
+   Note: SIMPLE WORDS FIRST (chaff, dust, wind, scatter, blow), then phrases.
+
+   **WRONG EXAMPLE - DO NOT DO THIS**:
+   ```json
+   {{
+     "vehicle": "righteous person as a thriving tree",
+     "vehicle_synonyms": ["progressive moral flourishing", "stability through Torah devotion"]
+   }}
+   ```
+   This will match NOTHING. The database has "tree", not "righteous person as a thriving tree".
+
+   **CHECKLIST - Every figurative_checks entry MUST have:**
+   [ ] vehicle: A simple 1-2 word term (e.g., "tree", "chaff", "dust", "face")
+   [ ] vehicle_synonyms: 10-15+ terms with:
+       - At least 5-7 simple single words (tree, plant, leaf, fruit, water, flourish, grow)
+       - 3-5 short compound phrases (tree planted, bears fruit, by streams)
+   [ ] broader_terms: 3-5 category words (vegetation, agriculture, nature)
+   [ ] scope: "Psalms+Pentateuch+Proverbs"
+
+   **COMMON PSALM METAPHOR SEARCH TERMS**:
+   - Tree/vegetation: tree, plant, planted, leaf, fruit, root, branch, vine, grass, wither, flourish, grow
+   - Water: water, stream, river, fountain, rain, dew, sea, flood, deep, drink, thirst
+   - Chaff/dust: chaff, dust, straw, ash, scatter, blow, wind, driven, tossed
+   - Light/darkness: light, lamp, shine, bright, darkness, shadow, night, dawn, sun, moon
+   - Path/way: path, way, road, walk, stand, sit, step, foot, stumble, fall
+   - Refuge/protection: refuge, shelter, rock, fortress, stronghold, tower, shield, hide, cover
+   - Body parts: face, hand, eye, mouth, heart, ear, arm, foot (use with action verbs)
+
+   **QUANTITY GUIDELINES**:
+   - Wisdom psalms: 4-6 figurative searches
+   - Lament psalms: 6-10 figurative searches (more emotional metaphors)
+   - ALL psalms: Minimum 3 figurative searches required
 
 4. **COMMENTARY** - Traditional Jewish commentary for verses
    {commentary_instructions}
@@ -281,9 +330,9 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     {{"query": "unique phrase", "level": "consonantal", "scope": "Tanakh", "purpose": "Example with no obvious alternates", "alternates": []}}
   ],
   "figurative_checks": [
-    {{"verse": 3, "reason": "Waters as primordial chaos imagery - vivid and theologically rich", "vehicle": "waters", "vehicle_synonyms": ["water", "sea", "seas", "deep", "depths", "flood", "floods", "ocean", "oceans"], "broader_terms": ["chaos", "creation", "cosmology", "primordial"], "scope": "Psalms+Pentateuch+Proverbs"}},
-    {{"verse": 5, "reason": "Voice 'breaking' cedars - unusual storm personification", "vehicle": "breaking", "vehicle_synonyms": ["break", "breaks", "shatter", "shatters", "shattering", "split", "splits", "fracture", "fractures"], "broader_terms": ["power", "force", "destruction"], "scope": "Psalms+Pentateuch+Proverbs"}},
-    {{"verse": 7, "reason": "Stronghold imagery - architectural metaphor for divine protection", "vehicle": "stronghold", "vehicle_synonyms": ["strongholds", "fortress", "fortresses", "citadel", "citadels", "refuge", "refuges"], "broader_terms": ["military", "protection", "defense"], "scope": "Psalms+Pentateuch+Proverbs"}}
+    {{"verse": 3, "reason": "Tree metaphor for righteous person planted by water", "vehicle": "tree", "vehicle_synonyms": ["tree", "plant", "planted", "leaf", "fruit", "root", "stream", "water", "flourish", "grow", "wither", "tree planted", "bears fruit", "by streams"], "broader_terms": ["vegetation", "agriculture", "growth", "nature"], "scope": "Psalms+Pentateuch+Proverbs"}},
+    {{"verse": 4, "reason": "Chaff imagery for worthless wicked driven by wind", "vehicle": "chaff", "vehicle_synonyms": ["chaff", "dust", "straw", "wind", "scatter", "blow", "driven", "chaff blown", "dust in wind", "driven by wind", "blown away"], "broader_terms": ["agricultural waste", "worthlessness", "impermanence"], "scope": "Psalms+Pentateuch+Proverbs"}},
+    {{"verse": 6, "reason": "Path/way metaphor for life choices and destiny", "vehicle": "way", "vehicle_synonyms": ["way", "path", "road", "walk", "stand", "sit", "step", "foot", "perish", "know", "righteous way", "wicked way"], "broader_terms": ["journey", "direction", "choice", "destiny"], "scope": "Psalms+Pentateuch+Proverbs"}}
   ],
   "commentary_requests": [
     {{"verse": 1, "reason": "Opening beatitude - how do commentators interpret 'ashrei' and the threefold structure?"}},
@@ -641,6 +690,13 @@ class MicroAnalystV2:
                 # Convert to ResearchRequest via ScholarResearchRequest
                 scholar_request = ScholarResearchRequest.from_dict(data)
                 request_dict = scholar_request.to_research_request(psalm_number, logger=self.logger)
+
+                # Add verse count for figurative search result filtering
+                psalm = self.db.get_psalm(psalm_number)
+                if psalm:
+                    request_dict['verse_count'] = len(psalm.verses)
+                    self.logger.info(f"  Psalm {psalm_number} has {len(psalm.verses)} verses (figurative limit: {'20' if len(psalm.verses) < 20 else '10'} per query)")
+
                 research_request = ResearchRequest.from_dict(request_dict)
 
                 self.logger.info(f"  ✓ Research requests generated")
