@@ -72,6 +72,7 @@ class RelatedPsalmsLibrarian:
         self.connections_file = Path(connections_file)
         self.db = db or TanakhDatabase()
         self.connections_data = self._load_connections()
+        self.logger = None  # Can be set by caller if needed
 
     def _load_connections(self) -> List[Dict[str, Any]]:
         """Load the connections data from JSON file."""
@@ -156,6 +157,10 @@ class RelatedPsalmsLibrarian:
         # Build the preamble (this is always included)
         preamble = self._build_preamble(psalm_number, related_matches)
 
+        if self.logger:
+            self.logger.info(f"Related Psalms formatting for Psalm {psalm_number}: "
+                           f"max_size={max_size_chars}, preamble_size={len(preamble)} chars")
+
         # Try generating with full text for all psalms first
         # Then progressively remove full text sections until under the cap
         psalms_without_full_text = set()  # Track which psalms should omit full text
@@ -186,6 +191,11 @@ class RelatedPsalmsLibrarian:
                 if len(md) > max_size_chars:
                     md = md[:max_size_chars - 100] + "\n\n*[Section truncated for size]*\n"
                 break
+
+        if self.logger:
+            self.logger.info(f"Related Psalms final result for Psalm {psalm_number}: "
+                           f"size={len(md)} chars (limit={max_size_chars}), "
+                           f"psalms_without_full_text={psalms_without_full_text}")
 
         return md
 
