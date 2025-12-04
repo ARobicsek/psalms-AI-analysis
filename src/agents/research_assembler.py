@@ -63,6 +63,7 @@ class ResearchRequest:
     figurative_requests: List[FigurativeRequest]
     commentary_requests: Optional[List[Dict[str, Any]]] = None  # [{"psalm": 27, "verse": 1, "reason": "..."}]
     notes: Optional[str] = None  # Overall research notes from Scholar
+    verse_count: Optional[int] = None  # Number of verses in the psalm (for result filtering)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'ResearchRequest':
@@ -82,7 +83,8 @@ class ResearchRequest:
                 for r in data.get('figurative', [])
             ],
             commentary_requests=data.get('commentary', []),
-            notes=data.get('notes')
+            notes=data.get('notes'),
+            verse_count=data.get('verse_count')
         )
 
 
@@ -434,6 +436,70 @@ class ResearchAssembler:
         >>> print(bundle.to_markdown())
     """
 
+    @staticmethod
+    def _filter_figurative_bundle(
+        bundle: 'FigurativeBundle',
+        max_results: int,
+        search_terms: Optional[List[str]] = None
+    ) -> 'FigurativeBundle':
+        """
+        Filter figurative bundle to limit results, prioritizing phrase matches.
+
+        Args:
+            bundle: Original FigurativeBundle with all results
+            max_results: Maximum number of instances to keep
+            search_terms: Search terms used (for phrase match prioritization)
+
+        Returns:
+            New FigurativeBundle with filtered instances
+        """
+        if len(bundle.instances) <= max_results:
+            return bundle
+
+        instances = bundle.instances
+
+        # If we have search terms, prioritize phrase matches over single-word matches
+        if search_terms:
+            # Classify each instance by match quality
+            phrase_matches = []
+            single_word_matches = []
+
+            # Identify multi-word search terms (phrases)
+            phrase_terms = [t.lower() for t in search_terms if ' ' in t]
+            single_terms = [t.lower() for t in search_terms if ' ' not in t]
+
+            for inst in instances:
+                # Check if this instance matched a phrase term
+                is_phrase_match = False
+                if inst.vehicle:
+                    vehicle_text = ' '.join(inst.vehicle).lower()
+                    for phrase in phrase_terms:
+                        if phrase in vehicle_text:
+                            is_phrase_match = True
+                            break
+
+                if is_phrase_match:
+                    phrase_matches.append(inst)
+                else:
+                    single_word_matches.append(inst)
+
+            # Prioritize phrase matches, then fill with single-word matches
+            filtered = phrase_matches[:max_results]
+            remaining_slots = max_results - len(filtered)
+            if remaining_slots > 0:
+                filtered.extend(single_word_matches[:remaining_slots])
+
+            instances = filtered
+        else:
+            # No search terms - just truncate
+            instances = instances[:max_results]
+
+        # Return new bundle with filtered instances
+        return FigurativeBundle(
+            instances=instances,
+            request=bundle.request
+        )
+
     def __init__(self, use_llm_summaries: bool = True, cost_tracker=None):
         """
         Initialize Research Assembler with all librarian agents.
@@ -487,6 +553,23 @@ class ResearchAssembler:
         figurative_bundles = []
         if request.figurative_requests:
             figurative_bundles = self.figurative_librarian.search_multiple(request.figurative_requests)
+
+            # Apply verse-count-based filtering to limit results per query
+            # <20 verses: 20 max per query; >=20 verses: 10 max per query
+            if request.verse_count is not None:
+                max_per_query = 20 if request.verse_count < 20 else 10
+
+                filtered_bundles = []
+                for bundle, fig_request in zip(figurative_bundles, request.figurative_requests):
+                    # Get search terms for phrase prioritization
+                    search_terms = fig_request.vehicle_search_terms
+                    filtered_bundle = self._filter_figurative_bundle(
+                        bundle,
+                        max_results=max_per_query,
+                        search_terms=search_terms
+                    )
+                    filtered_bundles.append(filtered_bundle)
+                figurative_bundles = filtered_bundles
 
         # Fetch traditional commentaries
         commentary_bundles = None
