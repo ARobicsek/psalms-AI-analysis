@@ -1,8 +1,42 @@
 # Psalms Project - Current Status
 
-**Last Updated**: 2025-12-04 (Session 155 - COMPLETE ✓)
-**Current Phase**: V7/V8 Production Ready with Psalm-Length-Based Filtering
-**Status**: ✅ Figurative Language Pipeline Enhanced with Result Filtering
+**Note**: Historical session summaries (Sessions 1-149) have been archived to:
+`docs/archive/documentation_cleanup/PROJECT_STATUS_sessions_1-149_2025-12-04.md`
+
+This file now contains only recent sessions (150-156) for easier reference.
+
+---
+
+**Last Updated**: 2025-12-04 (Session 156 - COMPLETE ✓)
+**Current Phase**: V8 Production Ready with Bug Fixes
+**Status**: ✅ Critical Bug Fixes Applied - Ready for Psalm 14 Re-run
+
+## Session 156 Summary (COMPLETE ✓)
+
+### Two Critical Bug Fixes: Synthesis Size & Figurative Search
+
+**Objective**: Fix two bugs discovered when running Psalm 14 pipeline
+**Result**: ✅ COMPLETE - Both bugs fixed
+
+**Bug 1: Synthesis Writer Token Limit Exceeded**
+- Error: `prompt is too long: 202219 tokens > 200000 maximum`
+- Root cause: Related Psalms Analysis section was 268KB (54% of 496KB bundle)
+- Fix: Added 100KB cap with progressive full-text removal
+- Files: `src/agents/related_psalms_librarian.py`
+
+**Bug 2: Figurative Query "devour" Returned 0 Results**
+- Root cause: Word-boundary patterns incompatible with database JSON structure
+- Database stores: `["A devouring mouth, ...]` not `["devour", ...]`
+- Fix: Rewrote patterns to match within phrases + added morphological variants
+- Files: `src/agents/figurative_librarian.py`
+
+**Bug 3: Synthesis Writer Safety Margin**
+- Reduced max_chars from 700000 to 600000
+- Files: `src/agents/synthesis_writer.py`
+
+**Next Step**: Re-run `python scripts/run_enhanced_pipeline.py 14` to verify fixes
+
+---
 
 ## Session 155 Summary (COMPLETE ✓)
 
@@ -393,66 +427,3 @@ Despite RULE 3 being in the instructions, the micro analyst did NOT implement it
 - `output/psalm_13/psalm_013_research_v2.md` - Research bundle with 31 figurative instances
 
 ---
-
-## Session 149 Summary (COMPLETE ✓)
-
-### Document Generator Markdown Formatting Fix
-
-**Objective**: Fix markdown bolding issues in college and combined document generators
-**Result**: ✓ COMPLETE - Both generators now properly format nested markdown, asterisks hidden
-
-**Issue Identified**:
-- User reported: `**לַמְנַצֵּחַ (*lamnatseach*)**` formatted incorrectly in both college and combined docx
-- College docx: Text NOT bolded at all (regex pattern mismatch)
-- Combined docx: Text bolded but asterisks visible (no nested formatting support)
-- Expected: Hebrew bold, parentheses bold, romanization bold+italic, NO asterisks
-
-**Root Causes**:
-1. **College Docx** ([document_generator.py:339](../src/utils/document_generator.py#L339)):
-   - Regex pattern `(\*\*|...)` split on just markers, not content
-   - Pattern `\*\*` without `.*?` never matched `**text**` blocks
-   - Bold check `if part.startswith('**') and part.endswith('**')` never true
-   - Result: Bold markers treated as plain text, no formatting applied
-
-2. **Combined Docx** ([combined_document_generator.py:188-240](../src/utils/combined_document_generator.py#L188-L240)):
-   - Correct regex but no recursive processing of nested formatting
-   - `**text (*italic*)**` processed as single bold run with literal asterisks
-   - Inner `*...*` for italic not parsed, asterisks rendered as content
-
-**Solution Implemented**:
-1. **Fixed Regex Pattern** (Both generators):
-   - Old: `r'(\*\*|__.*?__|...*\*|_.*?_|`.*?`)'`
-   - New: `r'(\*\*.*?\*\*|__.*?__|...*\*|_.*?_|`.*?`)'`
-   - Added `.*?` to properly capture `**...**` content blocks
-
-2. **Added Recursive Formatting Method** (Both generators):
-   - New: `_add_formatted_content(paragraph, text, bold=False, italic=False, set_font=False)`
-   - 96 lines in document_generator.py (lines 395-490)
-   - 79 lines in combined_document_generator.py (lines 242-320)
-   - Recursively processes nested markdown within bold/italic contexts
-   - Handles: `**bold (*italic*) more**`, Hebrew RTL, backticks
-
-3. **Updated Bold Processing**:
-   - Changed from: `run = paragraph.add_run(part[2:-2]); run.bold = True`
-   - Changed to: `self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)`
-   - Now recursively processes inner content for nested formatting
-
-**Files Modified**:
-- [document_generator.py](../src/utils/document_generator.py) - Regex fix + recursive method (98 lines added/modified)
-- [combined_document_generator.py](../src/utils/combined_document_generator.py) - Regex fix + recursive method (81 lines added/modified)
-
-**Results**:
-- ✅ College docx: `**text**` now properly bolded (was plain text)
-- ✅ Combined docx: `**text (*italic*)**` now bold+italic, asterisks hidden (were visible)
-- ✅ Both documents: Hebrew and romanization formatted identically
-- ✅ Psalm 12 regenerated successfully in both formats
-
-**Impact**:
-- ✅ Markdown formatting now transparent (asterisks never visible)
-- ✅ Nested formatting fully supported (arbitrary depth)
-- ✅ Consistent rendering across college and combined documents
-- ✅ Master editor can use natural markdown without formatting concerns
-
----
-
-[Rest of previous sessions 148-105 remain unchanged...]
