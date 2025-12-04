@@ -3,7 +3,7 @@
 **Note**: Historical session summaries (Sessions 1-149) have been archived to:
 `docs/archive/documentation_cleanup/PROJECT_STATUS_sessions_1-149_2025-12-04.md`
 
-This file now contains only recent sessions (150-156) for easier reference.
+This file now contains only recent sessions (150-157) for easier reference.
 
 ---
 
