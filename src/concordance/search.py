@@ -44,6 +44,19 @@ class SearchResult:
 class ConcordanceSearch:
     """Search interface for Hebrew concordance."""
 
+    # Hebrew pronominal suffixes for matching word variations
+    PRONOMINAL_SUFFIXES = [
+        'י',    # my
+        'ך',    # your (m.s.)
+        'ו',    # his/its
+        'ה',    # her/its
+        'נו',   # our
+        'כם',   # your (m.pl.)
+        'כן',   # your (f.pl.)
+        'הם',   # their (m.)
+        'הן',   # their (f.)
+    ]
+
     def __init__(self, db: Optional[TanakhDatabase] = None):
         """
         Initialize concordance search.
@@ -235,6 +248,8 @@ class ConcordanceSearch:
         """
         Check if a verse contains a phrase starting at a specific position.
 
+        Enhanced to skip empty positions (paseq marks, etc.) when matching.
+
         Args:
             book, chapter, verse: Verse location
             start_position: Position of first word
@@ -246,16 +261,281 @@ class ConcordanceSearch:
         """
         cursor = self.db.conn.cursor()
 
-        # Get words from this verse at sequential positions
-        for i, expected_word in enumerate(normalized_words):
-            cursor.execute(f"""
-                SELECT {column}
-                FROM concordance
-                WHERE book_name = ? AND chapter = ? AND verse = ? AND position = ?
-            """, (book, chapter, verse, start_position + i))
+        # Get ALL words from this verse starting from start_position
+        cursor.execute(f"""
+            SELECT position, {column}
+            FROM concordance
+            WHERE book_name = ? AND chapter = ? AND verse = ? AND position >= ?
+            ORDER BY position
+        """, (book, chapter, verse, start_position))
 
-            row = cursor.fetchone()
-            if not row or row[column] != expected_word:
+        verse_words = cursor.fetchall()
+
+        # Filter out empty positions (paseq marks, etc.)
+        non_empty_words = [(pos, word) for pos, word in verse_words if word and word.strip()]
+
+        # Check if we have enough words
+        if len(non_empty_words) < len(normalized_words):
+            return False
+
+        # Match normalized words against the first N non-empty words
+        for i, expected_word in enumerate(normalized_words):
+            if i >= len(non_empty_words):
+                return False
+            actual_word = non_empty_words[i][1]
+            if actual_word != expected_word:
+                return False
+
+        return True
+
+    def search_phrase_in_verse(self,
+                               phrase: str,
+                               level: str = 'consonantal',
+                               scope: str = 'Tanakh',
+                               limit: Optional[int] = None,
+                               use_split: bool = True) -> List[SearchResult]:
+        """
+        Search for verses containing ALL words of a phrase (any order, not necessarily adjacent).
+
+        This is a fallback/broader search when strict phrase matching fails.
+        Useful for finding conceptual matches where words appear in the same verse
+        but not necessarily next to each other.
+
+        Args:
+            phrase: Hebrew phrase (space-separated words)
+            level: Normalization level
+            scope: Search scope
+            limit: Maximum number of results
+            use_split: If True and level='consonantal', use maqqef-split column
+
+        Returns:
+            List of SearchResult objects where ALL phrase words appear in the verse
+        """
+        if not is_hebrew_text(phrase):
+            raise ValueError(f"Input must contain Hebrew text: {phrase}")
+
+        # Split and normalize phrase words
+        if use_split and level == 'consonantal':
+            from .hebrew_text_processor import normalize_for_search_split, split_on_maqqef
+            phrase_split = split_on_maqqef(phrase)
+            words = split_words(phrase_split)
+        else:
+            words = split_words(phrase)
+
+        if len(words) < 2:
+            return self.search_word(words[0] if words else phrase, level, scope, limit, use_split)
+
+        # Normalize each word
+        if use_split and level == 'consonantal':
+            from .hebrew_text_processor import normalize_for_search_split
+            normalized_words = [normalize_for_search_split(w, level) for w in words]
+        else:
+            normalized_words = normalize_word_sequence(words, level)
+
+        # Determine column
+        if use_split and level == 'consonantal':
+            column = 'word_consonantal_split'
+        elif level == 'exact':
+            column = 'word'
+        elif level == 'voweled':
+            column = 'word_voweled'
+        else:
+            column = 'word_consonantal'
+
+        # Find verses containing ALL words (any position)
+        # Strategy: Find first word (with suffix variations), then check if verse contains all other words
+        results = []
+        first_word_results = self.search_word_with_variations(words[0], level, scope, limit=None, use_split=use_split)
+
+        for first_match in first_word_results:
+            # Check if this verse contains ALL other words
+            if self._verse_contains_all_words(
+                first_match.book,
+                first_match.chapter,
+                first_match.verse,
+                normalized_words[1:],  # All words except first
+                column
+            ):
+                # Avoid duplicates
+                if not any(r.reference == first_match.reference for r in results):
+                    results.append(first_match)
+                    if limit and len(results) >= limit:
+                        return results
+
+        return results
+
+    # Hebrew final letter to regular letter mapping
+    FINAL_TO_REGULAR = {
+        'ך': 'כ',  # final kaf → kaf
+        'ם': 'מ',  # final mem → mem
+        'ן': 'נ',  # final nun → nun
+        'ף': 'פ',  # final peh → peh
+        'ץ': 'צ',  # final tsade → tsade
+    }
+
+    def _get_word_variations(self, word: str) -> set:
+        """
+        Generate all suffix variations for a word.
+        Handles:
+        - Final letter conversion (e.g., ף → פ when suffix added)
+        - Internal vowel letter removal (e.g., לשון → לשנו, not לשונו)
+
+        Args:
+            word: Normalized Hebrew word
+
+        Returns:
+            Set of word variations including the original and suffix forms
+        """
+        variations = {word}  # Include original word
+
+        # Check if word ends with a final letter
+        if word and word[-1] in self.FINAL_TO_REGULAR:
+            # Convert final letter to regular form for suffix additions
+            base = word[:-1] + self.FINAL_TO_REGULAR[word[-1]]
+        else:
+            base = word
+
+        # Add suffix variations (standard)
+        for suffix in self.PRONOMINAL_SUFFIXES:
+            variations.add(base + suffix)
+
+        # Also try removing internal vowel letters (vav/yod) before adding suffix
+        # This handles patterns like לשון → לשנו (where internal vav is removed)
+        if len(word) >= 3:
+            for i in range(1, len(word) - 1):  # Check internal positions only
+                if word[i] in ('ו', 'י'):  # Vowel letters vav or yod
+                    # Remove the vowel letter
+                    shortened = word[:i] + word[i+1:]
+                    # Handle final letter conversion on shortened form
+                    if shortened and shortened[-1] in self.FINAL_TO_REGULAR:
+                        short_base = shortened[:-1] + self.FINAL_TO_REGULAR[shortened[-1]]
+                    else:
+                        short_base = shortened
+                    # Add suffix variations for shortened form
+                    for suffix in self.PRONOMINAL_SUFFIXES:
+                        variations.add(short_base + suffix)
+
+        return variations
+
+    def search_word_with_variations(self,
+                                     word: str,
+                                     level: str = 'consonantal',
+                                     scope: str = 'Tanakh',
+                                     limit: Optional[int] = None,
+                                     use_split: bool = True) -> List[SearchResult]:
+        """
+        Search for a Hebrew word and all its suffix variations.
+
+        Args:
+            word: Hebrew word to search for
+            level: Normalization level
+            scope: Search scope
+            limit: Maximum number of results
+            use_split: If True and level='consonantal', use maqqef-split column
+
+        Returns:
+            List of SearchResult objects matching the word or any suffix variation
+        """
+        # Get all suffix variations
+        if use_split and level == 'consonantal':
+            from .hebrew_text_processor import normalize_for_search_split
+            normalized = normalize_for_search_split(word, level)
+        else:
+            normalized = normalize_for_search(word, level)
+
+        variations = self._get_word_variations(normalized)
+
+        # Determine column
+        if use_split and level == 'consonantal':
+            column = 'word_consonantal_split'
+        elif level == 'exact':
+            column = 'word'
+        elif level == 'voweled':
+            column = 'word_voweled'
+        else:
+            column = 'word_consonantal'
+
+        # Build query with IN clause for all variations
+        placeholders = ','.join('?' * len(variations))
+        query = f"""
+            SELECT DISTINCT
+                c.book_name, c.chapter, c.verse, c.word, c.position,
+                v.hebrew, v.english, v.reference
+            FROM concordance c
+            JOIN verses v ON
+                c.book_name = v.book_name AND
+                c.chapter = v.chapter AND
+                c.verse = v.verse
+            WHERE c.{column} IN ({placeholders})
+        """
+
+        params = list(variations)
+
+        # Add scope filtering
+        query, params = self._add_scope_filter(query, params, scope)
+
+        # Add ordering
+        query += " ORDER BY c.book_name, c.chapter, c.verse, c.position"
+
+        # Add limit
+        if limit:
+            query += f" LIMIT {limit}"
+
+        # Execute query
+        cursor = self.db.conn.cursor()
+        cursor.execute(query, params)
+
+        # Convert to SearchResult objects
+        results = []
+        for row in cursor.fetchall():
+            result = SearchResult(
+                book=row['book_name'],
+                chapter=row['chapter'],
+                verse=row['verse'],
+                reference=row['reference'],
+                hebrew_text=row['hebrew'],
+                english_text=row['english'],
+                matched_word=row['word'],
+                word_position=row['position']
+            )
+            results.append(result)
+
+        return results
+
+    def _verse_contains_all_words(self,
+                                   book: str,
+                                   chapter: int,
+                                   verse: int,
+                                   normalized_words: List[str],
+                                   column: str) -> bool:
+        """
+        Check if a verse contains ALL specified words (any position).
+        Supports suffix variations - a word matches if any suffix form appears.
+
+        Args:
+            book, chapter, verse: Verse location
+            normalized_words: List of normalized words that must all appear
+            column: Column to check
+
+        Returns:
+            True if ALL words (or their suffix variations) appear somewhere in the verse
+        """
+        cursor = self.db.conn.cursor()
+
+        # Get all words in this verse
+        cursor.execute(f"""
+            SELECT {column}
+            FROM concordance
+            WHERE book_name = ? AND chapter = ? AND verse = ?
+        """, (book, chapter, verse))
+
+        verse_words = set(row[0] for row in cursor.fetchall() if row[0] and row[0].strip())
+
+        # Check if all required words (or their suffix variations) are present
+        for word in normalized_words:
+            word_variations = self._get_word_variations(word)
+            # Check if ANY variation of this word appears in the verse
+            if not any(variation in verse_words for variation in word_variations):
                 return False
 
         return True
