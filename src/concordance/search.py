@@ -57,6 +57,30 @@ class ConcordanceSearch:
         'הן',   # their (f.)
     ]
 
+    # Hebrew preposition prefixes
+    PREPOSITIONS = [
+        'ב',    # in/at/with
+        'ל',    # to/for
+        'מ',    # from
+        'כ',    # like/as
+        'ה',    # the (definite article)
+        'ו',    # and (conjunction)
+        'ש',    # that/which (relative)
+    ]
+
+    # Combined prefixes (conjunction + preposition)
+    COMBINED_PREFIXES = [
+        'וב',   # and in
+        'ול',   # and to
+        'ומ',   # and from
+        'וכ',   # and like
+        'וה',   # and the
+        'בה',   # in the
+        'לה',   # to the
+        'מה',   # from the
+        'כה',   # like the
+    ]
+
     def __init__(self, db: Optional[TanakhDatabase] = None):
         """
         Initialize concordance search.
@@ -375,8 +399,10 @@ class ConcordanceSearch:
 
     def _get_word_variations(self, word: str) -> set:
         """
-        Generate all suffix variations for a word.
+        Generate all prefix and suffix variations for a word.
         Handles:
+        - Prefix additions (ב, ל, מ, כ, ה, ו, ש and combinations)
+        - Suffix additions (pronominal suffixes)
         - Final letter conversion (e.g., ף → פ when suffix added)
         - Internal vowel letter removal (e.g., לשון → לשנו, not לשונו)
 
@@ -384,10 +410,20 @@ class ConcordanceSearch:
             word: Normalized Hebrew word
 
         Returns:
-            Set of word variations including the original and suffix forms
+            Set of word variations including prefixed and suffixed forms
         """
         variations = {word}  # Include original word
 
+        # === PREFIX VARIATIONS ===
+        # Add single prefixes
+        for prefix in self.PREPOSITIONS:
+            variations.add(prefix + word)
+
+        # Add combined prefixes
+        for prefix in self.COMBINED_PREFIXES:
+            variations.add(prefix + word)
+
+        # === SUFFIX VARIATIONS ===
         # Check if word ends with a final letter
         if word and word[-1] in self.FINAL_TO_REGULAR:
             # Convert final letter to regular form for suffix additions
@@ -398,6 +434,9 @@ class ConcordanceSearch:
         # Add suffix variations (standard)
         for suffix in self.PRONOMINAL_SUFFIXES:
             variations.add(base + suffix)
+            # Also add prefixed + suffixed forms
+            for prefix in self.PREPOSITIONS:
+                variations.add(prefix + base + suffix)
 
         # Also try removing internal vowel letters (vav/yod) before adding suffix
         # This handles patterns like לשון → לשנו (where internal vav is removed)
@@ -414,6 +453,9 @@ class ConcordanceSearch:
                     # Add suffix variations for shortened form
                     for suffix in self.PRONOMINAL_SUFFIXES:
                         variations.add(short_base + suffix)
+                        # Also add prefixed + suffixed forms
+                        for prefix in self.PREPOSITIONS:
+                            variations.add(prefix + short_base + suffix)
 
         return variations
 
