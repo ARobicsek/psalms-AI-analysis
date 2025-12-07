@@ -12,7 +12,7 @@ Date: 2025 (Phase 3)
 """
 
 from dataclasses import dataclass, field, asdict
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Union
 import json
 
 
@@ -131,7 +131,7 @@ class VerseCommentary:
     """Detailed commentary for a single verse from Pass 2."""
     verse_number: int
     commentary: str  # Full verse-by-verse analysis
-    lexical_insights: List[str] = field(default_factory=list)  # Key words analyzed
+    lexical_insights: List[Union[str, Dict[str, Any]]] = field(default_factory=list)  # Key words analyzed - supports both legacy string format and new structured format with phrase/variants
     figurative_analysis: List[str] = field(default_factory=list)  # Metaphors, etc.
     thesis_connection: str = ""  # How this verse supports overall thesis
     phonetic_transcription: str = ""  # NEW: IPA-like phonetic transcription

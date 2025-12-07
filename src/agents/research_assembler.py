@@ -187,25 +187,103 @@ class ResearchBundle:
         # Concordance section
         if self.concordance_bundles:
             md += "## Concordance Searches\n\n"
-            for i, bundle in enumerate(self.concordance_bundles, 1):
-                md += f"### Search {i}: {bundle.request.query}\n"
-                md += f"**Scope**: {bundle.request.scope}  \n"
-                md += f"**Level**: {bundle.request.level}  \n"
-                md += f"**Variations searched**: {len(bundle.variations_searched)}  \n"
-                md += f"**Results**: {len(bundle.results)}  \n\n"
 
-                if bundle.results:
-                    md += "#### Top Results:\n\n"
-                    for result in bundle.results[:10]:
-                        md += f"**{result.reference}**  \n"
-                        md += f"Hebrew: {result.hebrew_text}  \n"
-                        md += f"English: {result.english_text}  \n"
-                        md += f"Matched: *{result.matched_word}* (position {result.word_position})  \n\n"
+            # Group bundles by lexical_insight_id (Phase 2 enhancement)
+            grouped_bundles = {}
+            ungrouped_bundles = []
 
-                    if len(bundle.results) > 10:
-                        md += f"*...and {len(bundle.results) - 10} more results*\n\n"
+            for bundle in self.concordance_bundles:
+                if bundle.request.lexical_insight_id:
+                    insight_id = bundle.request.lexical_insight_id
+                    if insight_id not in grouped_bundles:
+                        grouped_bundles[insight_id] = []
+                    grouped_bundles[insight_id].append(bundle)
+                else:
+                    ungrouped_bundles.append(bundle)
 
-                md += "---\n\n"
+            # Initialize search_num outside both blocks
+            search_num = 1
+            if grouped_bundles:
+                for insight_id, bundles in grouped_bundles.items():
+                    # Find primary search
+                    primary_bundle = next((b for b in bundles if b.request.is_primary_search), bundles[0])
+
+                    md += f"### Search {search_num}: {primary_bundle.request.insight_notes or primary_bundle.request.query}\n"
+                    md += f"*Lexical Insight Group*\n\n"
+
+                    # Show primary phrase and variants
+                    md += f"**Primary phrase**: {primary_bundle.request.query}\n"
+
+                    # Collect all variants from alternate_queries
+                    all_variants = set()
+                    for bundle in bundles:
+                        if bundle.request.alternate_queries:
+                            all_variants.update(bundle.request.alternate_queries)
+
+                    if all_variants:
+                        md += f"**Variants searched**: {', '.join(sorted(all_variants))}\n"
+
+                    md += f"**Total results**: {sum(len(b.results) for b in bundles)}  \n"
+                    md += f"**Scope**: {primary_bundle.request.scope} | **Level**: {primary_bundle.request.level}\n\n"
+
+                    # Show results from all bundles in the group
+                    all_results = []
+                    for bundle in bundles:
+                        for result in bundle.results:
+                            # Track which query found this result
+                            result.query_found = bundle.request.query
+                            all_results.append(result)
+
+                    # Remove duplicates (same verse reference)
+                    unique_results = []
+                    seen_refs = set()
+                    for result in all_results:
+                        if result.reference not in seen_refs:
+                            unique_results.append(result)
+                            seen_refs.add(result.reference)
+
+                    # Display top results
+                    if unique_results:
+                        md += "#### Results:\n\n"
+                        for result in unique_results[:10]:
+                            md += f"**{result.reference}**  \n"
+                            md += f"Hebrew: {result.hebrew_text}  \n"
+                            md += f"English: {result.english_text}  \n"
+                            if result.is_phrase_match:
+                                md += f"Matched: *{result.matched_phrase}*  \n\n"
+                            else:
+                                md += f"Matched: *{result.matched_word}* (position {result.word_position})  \n\n"
+
+                        if len(unique_results) > 10:
+                            md += f"*...and {len(unique_results) - 10} more results*\n\n"
+
+                    md += "---\n\n"
+                    search_num += 1
+
+            # Display ungrouped searches (legacy format)
+            if ungrouped_bundles:
+                for i, bundle in enumerate(ungrouped_bundles, search_num):
+                    md += f"### Search {i}: {bundle.request.query}\n"
+                    md += f"**Scope**: {bundle.request.scope}  \n"
+                    md += f"**Level**: {bundle.request.level}  \n"
+                    md += f"**Variations searched**: {len(bundle.variations_searched)}  \n"
+                    md += f"**Results**: {len(bundle.results)}  \n\n"
+
+                    if bundle.results:
+                        md += "#### Top Results:\n\n"
+                        for result in bundle.results[:10]:
+                            md += f"**{result.reference}**  \n"
+                            md += f"Hebrew: {result.hebrew_text}  \n"
+                            md += f"English: {result.english_text}  \n"
+                            if result.is_phrase_match:
+                                md += f"Matched: *{result.matched_phrase}*  \n\n"
+                            else:
+                                md += f"Matched: *{result.matched_word}* (position {result.word_position})  \n\n"
+
+                        if len(bundle.results) > 10:
+                            md += f"*...and {len(bundle.results) - 10} more results*\n\n"
+
+                    md += "---\n\n"
 
         # Figurative language section
         if self.figurative_bundles:
@@ -444,7 +522,7 @@ class ResearchAssembler:
         search_terms: Optional[List[str]] = None
     ) -> 'FigurativeBundle':
         """
-        Filter figurative bundle to limit results, prioritizing phrase matches.
+        Filter figurative bundle to limit results, prioritizing by priority ranking if available.
 
         Args:
             bundle: Original FigurativeBundle with all results
@@ -458,9 +536,32 @@ class ResearchAssembler:
             return bundle
 
         instances = bundle.instances
+        priority_ranking = bundle.request.priority_ranking
 
-        # If we have search terms, prioritize phrase matches over single-word matches
-        if search_terms:
+        # If we have priority ranking, sort by priority first
+        if priority_ranking:
+            def get_priority(instance):
+                """Get priority for an instance based on which search term matched."""
+                if not instance.vehicle:
+                    return 999  # Default: lowest priority
+
+                # Check vehicle hierarchy (join all levels into searchable text)
+                vehicle_hierarchy_str = ' '.join(instance.vehicle).lower()
+
+                # Find the highest priority (lowest number) match
+                best_priority = 999
+                for term, priority in priority_ranking.items():
+                    if term.lower() in vehicle_hierarchy_str:
+                        best_priority = min(best_priority, priority)
+
+                return best_priority
+
+            # Sort by priority (lower number = higher priority)
+            instances = sorted(instances, key=get_priority)
+
+        # If we have search terms (and no priority ranking or as secondary sort),
+        # prioritize phrase matches over single-word matches
+        elif search_terms:
             # Classify each instance by match quality
             phrase_matches = []
             single_word_matches = []
@@ -491,9 +592,9 @@ class ResearchAssembler:
                 filtered.extend(single_word_matches[:remaining_slots])
 
             instances = filtered
-        else:
-            # No search terms - just truncate
-            instances = instances[:max_results]
+
+        # Limit to max_results
+        instances = instances[:max_results]
 
         # Return new bundle with filtered instances
         return FigurativeBundle(
@@ -512,7 +613,7 @@ class ResearchAssembler:
         """
         self.logger = logging.getLogger(__name__)
         self.bdb_librarian = BDBLibrarian()
-        self.concordance_librarian = ConcordanceLibrarian()
+        self.concordance_librarian = ConcordanceLibrarian(logger=self.logger)
         self.figurative_librarian = FigurativeLibrarian()
         self.commentary_librarian = CommentaryLibrarian()
         self.liturgical_librarian_sefaria = SefariaLiturgicalLibrarian()  # Phase 0: Sefaria bootstrap (fallback)
@@ -550,7 +651,27 @@ class ResearchAssembler:
         # Fetch concordance results
         concordance_bundles = []
         if request.concordance_requests:
-            concordance_bundles = self.concordance_librarian.search_multiple(request.concordance_requests)
+            # Inject source_psalm into each concordance request
+            enhanced_requests = []
+            for concordance_request in request.concordance_requests:
+                # Create a new request with source_psalm and Phase 2 tracking fields added
+                enhanced_request = ConcordanceRequest(
+                    query=concordance_request.query,
+                    scope='auto',  # Let librarian determine optimal scope
+                    level=concordance_request.level,
+                    include_variations=concordance_request.include_variations,
+                    notes=concordance_request.notes,
+                    max_results=concordance_request.max_results,
+                    auto_scope_threshold=concordance_request.auto_scope_threshold,
+                    alternate_queries=concordance_request.alternate_queries,
+                    source_psalm=request.psalm_chapter,  # Inject current psalm
+                    # Phase 2 tracking fields - pass through if present
+                    lexical_insight_id=concordance_request.lexical_insight_id,
+                    is_primary_search=concordance_request.is_primary_search,
+                    insight_notes=concordance_request.insight_notes
+                )
+                enhanced_requests.append(enhanced_request)
+            concordance_bundles = self.concordance_librarian.search_multiple(enhanced_requests)
 
         # Fetch figurative language instances
         figurative_bundles = []
