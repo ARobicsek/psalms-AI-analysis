@@ -14,6 +14,9 @@ python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
 # just the word output
 python scripts/run_enhanced_pipeline.py 8 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college
 
+# only the micro
+python scripts/run_enhanced_pipeline.py 15 --skip-macro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-word-doc --skip-combined-doc
+
 #just all 3 word docs
 python scripts/run_enhanced_pipeline.py 10 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --output-dir output/psalm_10
 
