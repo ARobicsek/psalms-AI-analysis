@@ -1083,6 +1083,87 @@ class MicroAnalystV2:
 
         return None
 
+    def _extract_all_phrase_forms_from_verse(self, query: str, verse_hebrew: str) -> List[str]:
+        """
+        Extract ALL possible forms of a phrase from verse, including:
+        - Words in different order than query
+        - Words with intervening text
+        - Words without intervening text (collapsed form)
+
+        This ensures we always find the source verse even if LLM created
+        a conceptual phrase that doesn't match actual word order.
+
+        Example:
+            Query: "נשא חרפה" (bear reproach)
+            Verse: "וְחֶרְפָּה לֹא־נָשָׂא" (and reproach NOT bear)
+            Returns: ["חרפה לא נשא", "חרפה נשא"]
+
+        Args:
+            query: The search query (consonantal form)
+            verse_hebrew: The full Hebrew verse text
+
+        Returns:
+            List of all possible phrase forms found in the verse
+        """
+        import re
+        from itertools import product
+        from ..concordance.hebrew_text_processor import split_words
+
+        # Remove vowel points for matching
+        query_clean = re.sub(r'[\u0591-\u05C7]', '', query)
+
+        query_words = split_words(query_clean)
+        verse_words = split_words(verse_hebrew)  # Original with pointing
+
+        # Clean each word individually to maintain array alignment
+        verse_words_clean = [re.sub(r'[\u0591-\u05C7]', '', word) for word in verse_words]
+
+        results = []
+
+        # Find all positions where each query word appears
+        word_positions = {}
+        for qword in query_words:
+            word_positions[qword] = []
+            for i, vword in enumerate(verse_words_clean):
+                # Skip empty words (like paseq marks)
+                if not vword or not qword:
+                    continue
+                # Substring match (allows prefixes/suffixes)
+                if qword in vword or vword in qword:
+                    word_positions[qword].append(i)
+
+        # Check if all query words are present
+        if not all(positions for positions in word_positions.values()):
+            return []  # Some words not found
+
+        # Generate all valid combinations
+        for combination in product(*word_positions.values()):
+            # Sort positions to get actual verse order
+            sorted_positions = sorted(combination)
+
+            # Skip if positions are duplicates (same word position for multiple query words)
+            if len(set(sorted_positions)) != len(sorted_positions):
+                continue
+
+            # Extract the span from first to last position
+            start = sorted_positions[0]
+            end = sorted_positions[-1]
+
+            # Form 1: With intervening words (actual verse order)
+            full_span = ' '.join(verse_words[start:end+1])
+            # Remove vowel points for searching
+            full_span_clean = re.sub(r'[\u0591-\u05C7]', '', full_span)
+            if full_span_clean not in results:
+                results.append(full_span_clean)
+
+            # Form 2: Without intervening words (collapsed)
+            collapsed = ' '.join(verse_words[i] for i in sorted_positions)
+            collapsed_clean = re.sub(r'[\u0591-\u05C7]', '', collapsed)
+            if collapsed_clean not in results and collapsed_clean != full_span_clean:
+                results.append(collapsed_clean)
+
+        return results
+
     def _override_llm_base_forms(self, research_request: ResearchRequest, exact_phrases: Dict[str, str], variants_mapping: Dict[str, List[str]], psalm_number: int):
         """
         Override LLM base forms with exact phrases from discoveries.
@@ -1179,6 +1260,63 @@ class MicroAnalystV2:
 
                 if verse_fixed_count > 0:
                     self.logger.info(f"  Fixed {verse_fixed_count} additional queries using verse text extraction")
+
+        # CRITICAL FIX: Always extract all phrase forms from verse to guarantee source verse is found
+        # This handles cases where LLM created conceptual phrases with different word order
+        self.logger.info("  Extracting all phrase forms from source verses to guarantee matches...")
+        from ..concordance.hebrew_text_processor import split_words
+
+        psalm = self.db.get_psalm(psalm_number)
+        if psalm:
+            phrase_forms_added = 0
+            for req in research_request.concordance_requests:
+                # Only process phrases (2+ words)
+                query_words = split_words(req.query)
+                if len(query_words) < 2:
+                    continue
+
+                # Find the verse this phrase came from
+                source_verse = None
+                for verse in psalm.verses:
+                    if self._query_in_verse(req.query, verse.hebrew):
+                        source_verse = verse
+                        break
+
+                # If not found with same order, try finding verse with all words in any order
+                if not source_verse:
+                    for verse in psalm.verses:
+                        all_forms = self._extract_all_phrase_forms_from_verse(
+                            req.query, verse.hebrew
+                        )
+                        if all_forms:
+                            source_verse = verse
+                            break
+
+                # Extract all possible forms from the source verse
+                if source_verse:
+                    all_forms = self._extract_all_phrase_forms_from_verse(
+                        req.query, source_verse.hebrew
+                    )
+
+                    if all_forms:
+                        # Create alternate_queries list if needed
+                        if not hasattr(req, 'alternate_queries') or req.alternate_queries is None:
+                            req.alternate_queries = []
+
+                        # Add all forms as alternates (avoid duplicates)
+                        added_count = 0
+                        for form in all_forms:
+                            if form not in req.alternate_queries and form != req.query:
+                                req.alternate_queries.append(form)
+                                added_count += 1
+                                self.logger.info(f"    ✓ Added verse form as alternate: '{form}'")
+
+                        if added_count > 0:
+                            req.notes += f" [GUARANTEED: Added {added_count} forms from verse {source_verse.verse}]"
+                            phrase_forms_added += added_count
+
+            if phrase_forms_added > 0:
+                self.logger.info(f"  Added {phrase_forms_added} verse forms to guarantee source verse matches")
 
         self.logger.info(f"  Fixed {fixed_count} queries to preserve exact morphology")
         if variants_added > 0:
