@@ -253,6 +253,94 @@ class DocumentGenerator:
             for run in p.runs:
                 run.italic = True
 
+    def _process_introduction_content(self, text: str, style: str = 'Normal'):
+        """
+        Process introduction content, preserving headers while properly handling blockquotes.
+        This method processes line by line, treating headers specially but using
+        _add_commentary_with_bullets logic for blockquotes.
+        """
+        lines = text.split('\n')
+        i = 0
+
+        while i < len(lines):
+            line = lines[i].strip()
+
+            # Skip empty lines
+            if not line:
+                i += 1
+                continue
+
+            # Handle headers
+            if line.startswith('####'):
+                self.document.add_heading(line.replace('####', '').strip(), level=4)
+                i += 1
+                continue
+            elif line.startswith('###'):
+                self.document.add_heading(line.replace('###', '').strip(), level=3)
+                i += 1
+                continue
+            elif line.startswith('##'):
+                self.document.add_heading(line.replace('##', '').strip(), level=2)
+                i += 1
+                continue
+
+            # Handle blockquotes - collect consecutive blockquote lines
+            if line.startswith('>'):
+                quote_block = []
+                while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('>'):
+                    quote_text = lines[i].strip()[1:].lstrip()  # Remove ">" and leading spaces
+                    if quote_text:  # Only add non-empty quote lines
+                        quote_block.append(quote_text)
+                    i += 1
+
+                # Add quote block as indented italic paragraphs
+                from docx.shared import Inches
+                for quote_text in quote_block:
+                    p = self.document.add_paragraph(style=style)
+                    p.paragraph_format.left_indent = Inches(0.5)
+                    self._set_paragraph_ltr(p)
+                    self._process_markdown_formatting(p, quote_text, set_font=True)
+                    # Make the entire quote italic
+                    for run in p.runs:
+                        run.italic = True
+                continue
+
+            # Handle regular paragraphs
+            # Only treat as bullet if it's a true markdown list item with clear list markers
+            # and not regular text that happens to start with dash
+            # True bullets typically are short, start with lowercase, or are part of a clear list pattern
+            original_line = lines[i]  # Keep original line for indentation detection
+            is_true_bullet = (
+                original_line.lstrip().startswith('- ') and
+                len(original_line.strip()) > 5 and
+                # Don't treat as bullet if it starts with uppercase letter followed by common sentence patterns
+                not (
+                    original_line.lstrip()[2:3].isupper() and
+                    (':' in original_line[:50] or 'In ' in original_line[:10] or 'As ' in original_line[:10] or 'For ' in original_line[:10])
+                )
+            )
+
+            if is_true_bullet:
+                # Bullet point - detect leading indentation
+                leading_spaces = len(original_line) - len(original_line.lstrip())
+                p = self.document.add_paragraph(style='List Bullet')
+                self._set_paragraph_ltr(p)
+
+                # Apply indentation if present (convert spaces to inches)
+                if leading_spaces > 0:
+                    from docx.shared import Inches
+                    # Approximately 6 spaces = 0.25 inch, scale accordingly
+                    indent_inches = leading_spaces * 0.04  # Rough conversion: 1 space ≈ 0.04 inches
+                    p.paragraph_format.left_indent = Inches(indent_inches)
+
+                bullet_text = original_line.lstrip()[2:]  # Remove leading spaces and "- " prefix
+                self._process_markdown_formatting(p, bullet_text, set_font=True)
+            else:
+                # Regular paragraph - use _add_paragraph_with_markdown which handles dash characters properly
+                self._add_paragraph_with_markdown(line, style=style)
+
+            i += 1
+
     def _add_commentary_with_bullets(self, text: str, style: str = 'Normal'):
         """
         Adds commentary text, intelligently handling bullet lists and regular text.
@@ -270,19 +358,55 @@ class DocumentGenerator:
                 i += 1
                 continue
 
-            # Check if this is a bullet item
-            if line.strip().startswith('- '):
-                # Collect consecutive bullet items
-                bullet_block = []
-                while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('- '):
-                    bullet_block.append(lines[i].strip()[2:])  # Remove "- " prefix
-                    i += 1
+            # Check if this is a true bullet item (not just regular text starting with dash)
+            original_line = line  # Keep original line for indentation detection
+            line_stripped = line.strip()
+            is_true_bullet = (
+                line_stripped.startswith('- ') and
+                len(line_stripped) > 5 and
+                # Don't treat as bullet if it starts with uppercase letter followed by common sentence patterns
+                not (
+                    line_stripped[2:3].isupper() and
+                    (':' in line_stripped[:50] or 'In ' in line_stripped[:10] or 'As ' in line_stripped[:10] or 'For ' in line_stripped[:10])
+                )
+            )
 
-                # Add each bullet as a separate paragraph with List Bullet style
-                for bullet_text in bullet_block:
+            if is_true_bullet:
+                # Collect consecutive bullet items with indentation info
+                bullet_block = []
+                while i < len(lines) and lines[i].strip() and lines[i].lstrip().startswith('- '):
+                    # Apply same logic to consecutive lines
+                    bullet_line = lines[i]
+                    bullet_stripped = bullet_line.strip()
+                    is_consecutive_bullet = (
+                        len(bullet_stripped) > 5 and
+                        not (
+                            bullet_stripped[2:3].isupper() and
+                            (':' in bullet_stripped[:50] or 'In ' in bullet_stripped[:10] or 'As ' in bullet_stripped[:10] or 'For ' in bullet_stripped[:10])
+                        )
+                    )
+                    if is_consecutive_bullet:
+                        # Store both the bullet text and indentation info
+                        leading_spaces = len(bullet_line) - len(bullet_line.lstrip())
+                        bullet_text = bullet_line.lstrip()[2:]  # Remove "- " prefix
+                        bullet_block.append((bullet_text, leading_spaces))
+                        i += 1
+                    else:
+                        break
+
+                # Add each bullet as a separate paragraph with proper indentation
+                for bullet_text, leading_spaces in bullet_block:
                     p = self.document.add_paragraph(style='List Bullet')
                     # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
                     self._set_paragraph_ltr(p)
+
+                    # Apply indentation if present (convert spaces to inches)
+                    if leading_spaces > 0:
+                        from docx.shared import Inches
+                        # Approximately 6 spaces = 0.25 inch, scale accordingly
+                        indent_inches = leading_spaces * 0.04  # Rough conversion: 1 space ≈ 0.04 inches
+                        p.paragraph_format.left_indent = Inches(indent_inches)
+
                     # Process markdown formatting in bullet text with explicit font
                     self._process_markdown_formatting(p, bullet_text, set_font=True)
             # Check if this is a block quote
@@ -315,9 +439,24 @@ class DocumentGenerator:
             else:
                 # Collect consecutive non-bullet, non-quote, non-empty lines until we hit an empty line or special formatting
                 text_block = []
-                while i < len(lines) and lines[i].strip() and not lines[i].strip().startswith('- ') and not lines[i].strip().startswith('>'):
-                    text_block.append(lines[i])
-                    i += 1
+                while i < len(lines) and lines[i].strip():
+                    original_line = lines[i]
+                    line_stripped = original_line.strip()
+                    # Apply same bullet detection logic
+                    is_bullet = (
+                        line_stripped.startswith('- ') and
+                        len(line_stripped) > 5 and
+                        not (
+                            line_stripped[2:3].isupper() and
+                            (':' in line_stripped[:50] or 'In ' in line_stripped[:10] or 'As ' in line_stripped[:10] or 'For ' in line_stripped[:10])
+                        )
+                    )
+
+                    if not is_bullet and not line_stripped.startswith('>'):
+                        text_block.append(original_line)
+                        i += 1
+                    else:
+                        break
 
                 # Add as a paragraph with soft breaks
                 if text_block:
@@ -786,10 +925,8 @@ Methodological & Bibliographical Summary
         # 3. Add Introduction
         self.document.add_heading('Introduction', level=2)
         intro_content = self.intro_path.read_text(encoding='utf-8')
-        # Use single newline split to match print_ready.md formatting
-        for para in intro_content.strip().split('\n'):
-            if para.strip():
-                self._add_paragraph_with_markdown(para, style='BodySans')
+        # Use _add_commentary_with_bullets to properly handle blockquotes while preserving headers
+        self._process_introduction_content(intro_content.strip(), style='BodySans')
 
         # 4. Add Verse-by-Verse Commentary
         self.document.add_heading('Verse-by-Verse Commentary', level=2)
