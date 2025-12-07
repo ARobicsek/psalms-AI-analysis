@@ -40,7 +40,7 @@ import sys
 import os
 import json
 from pathlib import Path
-from typing import Tuple, Optional, Dict
+from typing import Tuple, Optional, Dict, List
 import anthropic
 from dotenv import load_dotenv
 
@@ -95,7 +95,15 @@ DISCOVERY TASK:
 
 Read through each verse ATOMICALLY, with FRESH EYES. For each verse, note:
 
-1. **Curious Word Choices**: Rare words? Unexpected vocabulary? Interesting verbs/nouns?
+1. **Lexical Insights**: Key words/phrases worth investigating?
+   - Extract the EXACT Hebrew form as it appears in the verse
+   - Add ONLY morphological variants (different forms of the same word: suffixes, plurals, etc.)
+   - For SINGLE words: "בלב" → variants: ["בלבבו", "בלבי", "בלבך"]
+   - For PHRASES: Only suggest variants that are realistically attested in Biblical Hebrew
+     - Example: "דובר אמת" → ["דברי אמת", "דוברי אמת"] (plural forms)
+     - Example: "ירא יהוה" → ["יראי יהוה"] (plural construct)
+     - DO NOT create artificial combinations - only variants that actually occur
+   - DO NOT include synonyms - only morphological forms of the exact word/phrase
 2. **Poetic Patterns**: Parallelism? Wordplay? Sound patterns? Repetition?
    - **IMPORTANT**: When analyzing sound patterns (alliteration, assonance), you MUST use the provided phonetic transcription as your ground truth. Do not guess at pronunciation.
 3. **Figurative Language**: Metaphors? Similes? Personification? What images are used?
@@ -127,24 +135,35 @@ These questions should guide the Synthesizer and Editor to address genuinely int
 
 OUTPUT FORMAT: Return ONLY valid JSON. Do NOT include the phonetic transcription in your output.
 
-{{
+{
   "verse_discoveries": [
-    {{
+    {
       "verse_number": 1,
       "observations": "Quick summary of what's interesting/curious in this verse (2-4 sentences). Focus on discoveries, not analysis.",
-      "curious_words": ["קוֹל", "בְּנֵי אֵלִים"],  // Hebrew words worth investigating
+      "lexical_insights": [  // Hebrew words/phrases worth investigating
+        {
+          "phrase": "בְּנֵי אֵלִים",  // Exact form from verse
+          "variants": [],  // Morphological variants of word or phrase that should be looked for
+          "notes": "Divine council beings - key theological term"  // Why worth investigating
+        },
+        {
+          "phrase": "קוֹל",
+          "variants": ["קולו", "קולך", "קולי"],  // With possessive suffixes if context suggests
+          "notes": "Voice of divine speech - repeated formula"
+        }
+      ],
       "poetic_features": ["anaphora setup", "divine council imagery"],
       "figurative_elements": ["sons of gods - metaphor or literal?"],
       "puzzles": ["Why 'sons of gods' (plural) in monotheistic psalm?"],
       "lxx_insights": "LXX uses 'υἱοὶ θεοῦ' - shows early plural divine beings interpretation",
       "macro_relation": "Supports divine council framework from thesis" // OR "Interesting independent of thesis: ..."
-    }},
-    {{
+    },
+    {
       "verse_number": 2,
       "observations": "...",
       ...
-    }},
-    ... (all {verse_count} verses)
+    },
+    ... (all Psalm {psalm_number} verses)
   ],
   "overall_patterns": [
     "Sevenfold 'voice of LORD' anaphora - completeness symbolism worth exploring",
@@ -164,7 +183,7 @@ OUTPUT FORMAT: Return ONLY valid JSON. Do NOT include the phonetic transcription
     "FIGURATIVE: All verses with water/storm/nature imagery",
     "COMMENTARY: Verses with interpretive puzzles (e.g., mabbul, divine council)"
   ]
-}}
+}
 
 Return ONLY the JSON object, no additional text.
 """
@@ -217,27 +236,16 @@ GENERATE RESEARCH REQUESTS:
    - Examples of BAD requests: יוֹם, לֵב, יָד, עַיִן, פֶּה, דֶּרֶךְ, בָּשָׂר (unless used in truly puzzling context)
 
 2. **CONCORDANCE SEARCHES** - Patterns to trace across Scripture
-   - Repeated phrases from discoveries
-   - Thematic roots identified
-   - **IMPORTANT**: Use the actual Hebrew forms from the text, including verb conjugations and suffixes
-     - Good: "מה רבו" (as it appears in the text)
-     - Bad: "מה רב" (oversimplified, will miss matches)
-   - **ALWAYS ALSO PROVIDE ALTERNATES**: For EVERY concordance search, offer your BEST GUESS of PLAUSIBLE alternate morphological and grammatical forms of the same word/phrase in the "alternates" field
-     - **This is NOT optional** - always think about what variant linguistic forms of the same word/phrase might be relevant
-     - For maqqef-connected words: provide both separated and combined forms
-       * Example: "מה־רבו" → alternates: ["מה רבו", "מהרבו"]
-     - For verbs: suggest different conjugations and binyanim
-       * Example: "ברח" (he fled) → alternates: ["יברח", "בורח", "ברחו"]
-     - For nouns: consider singular/plural, different states
-       * Example: "מה רבו" → alternate: ["מה רבים"]
-     - **DO NOT suggest variants that are SYNONYMS but not morphological variants UNLESS you are pursuing a very specific hypothesis (e.g. wanting to contrast how THIS word is used to how a SYNONYM is used)**
-     - The system will automatically generate prefix/suffix variations of all forms
-     - Even if you only have one alternate, include it - this dramatically improves search coverage
-   - The search system automatically generates some variations with prefixes/suffixes, but alternates help catch additional morphological and grammatical forms
-   - VALID LEVELS: "consonantal" (all root forms), "voweled" (distinguish homographs), "exact" (specific vocalization)
-   - **DEFAULT TO "consonantal"** - Only use "exact" if specifically concerned about homographs (same consonants, different vocalizations)
-   - "consonantal" finds all forms of a root pattern regardless of vocalization
-   - 5-10 strategic searches
+   - **For each lexical insight**: Copy the **EXACT PHRASE** from the micro analyst's discovery
+     - Use the **exact phrase** as the primary query (without niqqudot/vowels) but otherwise the same,letter-for-letter
+     - Add any **variants** as alternate queries (these are morphological forms only)
+   - **SEARCH LEVEL**: "consonantal" (finds all forms of a root pattern)
+     - Only use "exact" for homographs (same consonants, different vocalization)
+     - Only use "voweled" when vocalization is critical
+   - **IMPORTANT RESTRICTIONS**:
+     - NEVER search single-word variants of multi-word phrases (e.g., if phrase is "דבר בלב", don't search just "דבר")
+     - Variants are ONLY morphological forms (suffixes, plurals), NOT synonyms
+   - **LIMIT**: 5-15 strategic searches total
 
 3. **FIGURATIVE LANGUAGE** - Search the figurative language database for relevant metaphors
 
@@ -255,6 +263,13 @@ GENERATE RESEARCH REQUESTS:
 
    **YOU MUST include SIMPLE SINGLE-WORD TERMS for every concept!**
 
+   **PRIORITY RANKING (OPTIONAL BUT RECOMMENDED)**: You can now specify a priority_ranking to indicate which terms are most important to match:
+   - Priority 1 (highest): Most important - specific phrases or key metaphors
+   - Priority 2 (medium): Important supporting terms
+   - Priority 3 (lowest): Nice-to-have variations
+
+   This ensures the most relevant matches appear first when results are filtered down to 20 instances.
+
    **CORRECT EXAMPLE - Tree/Plant Metaphor (Psalm 1:3)**:
    ```json
    {{
@@ -263,8 +278,16 @@ GENERATE RESEARCH REQUESTS:
      "vehicle": "tree",
      "vehicle_synonyms": ["tree", "plant", "planted", "leaf", "fruit", "root", "stream", "water", "flourish", "grow", "wither", "tree planted", "bears fruit", "by streams"],
      "broader_terms": ["vegetation", "agriculture", "growth", "nature"],
-     "scope": "Psalms+Pentateuch+Proverbs"
-   }}
+     "priority_ranking": {{
+       "tree planted by streams": 1,
+       "tree planted": 1,
+       "planted": 2,
+       "tree": 2,
+       "plant": 3,
+       "leaf": 3,
+       "fruit": 3
+     }},
+        }}
    ```
    Note: SIMPLE WORDS FIRST (tree, plant, leaf, fruit, water), then phrases (tree planted, bears fruit).
 
@@ -276,8 +299,15 @@ GENERATE RESEARCH REQUESTS:
      "vehicle": "chaff",
      "vehicle_synonyms": ["chaff", "dust", "straw", "wind", "scatter", "blow", "driven", "chaff blown", "dust in wind", "driven by wind", "blown away"],
      "broader_terms": ["agricultural waste", "worthlessness", "impermanence"],
-     "scope": "Psalms+Pentateuch+Proverbs"
-   }}
+     "priority_ranking": {{
+       "chaff blown by wind": 1,
+       "chaff blown": 1,
+       "chaff": 2,
+       "dust": 2,
+       "wind": 3,
+       "scatter": 3
+     }},
+        }}
    ```
    Note: SIMPLE WORDS FIRST (chaff, dust, wind, scatter, blow), then phrases.
 
@@ -296,7 +326,6 @@ GENERATE RESEARCH REQUESTS:
        - At least 5-7 simple single words (tree, plant, leaf, fruit, water, flourish, grow)
        - 3-5 short compound phrases (tree planted, bears fruit, by streams)
    [ ] broader_terms: 3-5 category words (vegetation, agriculture, nature)
-   [ ] scope: "Psalms+Pentateuch+Proverbs"
 
    **COMMON PSALM METAPHOR SEARCH TERMS**:
    - Tree/vegetation: tree, plant, planted, leaf, fruit, root, branch, vine, grass, wither, flourish, grow
@@ -325,14 +354,14 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     {{"word": "בְּנֵי אֵלִים", "reason": "Divine council puzzle - etymology and comparative ANE usage"}}
   ],
   "concordance_searches": [
-    {{"query": "ליהוה הישועה", "level": "consonantal", "scope": "Psalms", "purpose": "Track 'voice of LORD' formula usage patterns", "alternates": ["תשועה ליהוה", "ישועה מיהוה", "ישועת יהוה"]}},
-    {{"query": "מרים ראש", "level": "consonantal", "scope": "Tanakh", "purpose": "Divine council references across Hebrew Bible", "alternates": ["רום ראש", "ירים ראשי"]}},
-    {{"query": "unique phrase", "level": "consonantal", "scope": "Tanakh", "purpose": "Example with no obvious alternates", "alternates": []}}
+    {{"query": "ליהוה הישועה", "level": "consonantal", "purpose": "Track 'voice of LORD' formula usage patterns", "alternates": ["תשועה ליהוה", "ישועה מיהוה", "ישועת יהוה"]}},
+    {{"query": "מרים ראש", "level": "consonantal", "purpose": "Divine council references across Hebrew Bible", "alternates": ["רום ראש", "ירים ראשי"]}},
+    {{"query": "unique phrase", "level": "consonantal", "purpose": "Example with no obvious alternates", "alternates": []}}
   ],
   "figurative_checks": [
-    {{"verse": 3, "reason": "Tree metaphor for righteous person planted by water", "vehicle": "tree", "vehicle_synonyms": ["tree", "plant", "planted", "leaf", "fruit", "root", "stream", "water", "flourish", "grow", "wither", "tree planted", "bears fruit", "by streams"], "broader_terms": ["vegetation", "agriculture", "growth", "nature"], "scope": "Psalms+Pentateuch+Proverbs"}},
-    {{"verse": 4, "reason": "Chaff imagery for worthless wicked driven by wind", "vehicle": "chaff", "vehicle_synonyms": ["chaff", "dust", "straw", "wind", "scatter", "blow", "driven", "chaff blown", "dust in wind", "driven by wind", "blown away"], "broader_terms": ["agricultural waste", "worthlessness", "impermanence"], "scope": "Psalms+Pentateuch+Proverbs"}},
-    {{"verse": 6, "reason": "Path/way metaphor for life choices and destiny", "vehicle": "way", "vehicle_synonyms": ["way", "path", "road", "walk", "stand", "sit", "step", "foot", "perish", "know", "righteous way", "wicked way"], "broader_terms": ["journey", "direction", "choice", "destiny"], "scope": "Psalms+Pentateuch+Proverbs"}}
+    {{"verse": 3, "reason": "Tree metaphor for righteous person planted by water", "vehicle": "tree", "vehicle_synonyms": ["tree", "plant", "planted", "leaf", "fruit", "root", "stream", "water", "flourish", "grow", "wither", "tree planted", "bears fruit", "by streams"], "broader_terms": ["vegetation", "agriculture", "growth", "nature"], "priority_ranking": {{"tree planted by streams": 1, "tree planted": 1, "planted": 2, "tree": 2, "plant": 3, "leaf": 3, "fruit": 3}}},
+    {{"verse": 4, "reason": "Chaff imagery for worthless wicked driven by wind", "vehicle": "chaff", "vehicle_synonyms": ["chaff", "dust", "straw", "wind", "scatter", "blow", "driven", "chaff blown", "dust in wind", "driven by wind", "blown away"], "broader_terms": ["agricultural waste", "worthlessness", "impermanence"], "priority_ranking": {{"chaff blown by wind": 1, "chaff blown": 1, "chaff": 2, "dust": 2, "wind": 3, "scatter": 3}}},
+    {{"verse": 6, "reason": "Path/way metaphor for life choices and destiny", "vehicle": "way", "vehicle_synonyms": ["way", "path", "road", "walk", "stand", "sit", "step", "foot", "perish", "know", "righteous way", "wicked way"], "broader_terms": ["journey", "direction", "choice", "destiny"], "priority_ranking": {{"righteous way": 1, "wicked way": 1, "way": 2, "path": 2, "road": 3, "walk": 3}}}
   ],
   "commentary_requests": [
     {{"verse": 1, "reason": "Opening beatitude - how do commentators interpret 'ashrei' and the threefold structure?"}},
@@ -490,14 +519,13 @@ class MicroAnalystV2:
         rag_formatted = self.rag_manager.format_for_prompt(rag_context, include_framework=False)
         verse_count = len(psalm.verses)
 
-        # Build prompt
-        prompt = DISCOVERY_PASS_PROMPT.format(
-            psalm_number=psalm_number,
-            macro_analysis=macro_analysis.to_markdown(),
-            psalm_text_with_phonetics=psalm_text_with_lxx,
-            rag_context=rag_formatted,
-            verse_count=verse_count
-        )
+        # Build prompt - use replace to avoid brace conflicts
+        prompt = DISCOVERY_PASS_PROMPT
+        prompt = prompt.replace('{psalm_number}', str(psalm_number))
+        prompt = prompt.replace('{macro_analysis}', macro_analysis.to_markdown())
+        prompt = prompt.replace('{psalm_text_with_phonetics}', psalm_text_with_lxx)
+        prompt = prompt.replace('{rag_context}', rag_formatted)
+        prompt = prompt.replace('{verse_count}', str(verse_count))
 
         # Call Sonnet 4.5 with retry logic
         self.logger.info("  Calling Sonnet 4.5...")
@@ -615,11 +643,9 @@ class MicroAnalystV2:
         # Log the commentary mode being used
         self.logger.info(f"  Commentary mode: {self.commentary_mode}")
 
-        # Build prompt
-        prompt = RESEARCH_REQUEST_PROMPT.format(
-            discoveries=json.dumps(discoveries, ensure_ascii=False, indent=2),
-            commentary_instructions=commentary_instructions
-        )
+        # Build prompt - use string replacement instead of format to avoid conflicts with JSON braces
+        prompt = RESEARCH_REQUEST_PROMPT.replace('{discoveries}', json.dumps(discoveries, ensure_ascii=False, indent=2))
+        prompt = prompt.replace('{commentary_instructions}', commentary_instructions)
 
         # Call Sonnet 4.5 with retry logic
         self.logger.info("  Calling Sonnet 4.5 for research request generation...")
@@ -699,6 +725,26 @@ class MicroAnalystV2:
 
                 research_request = ResearchRequest.from_dict(request_dict)
 
+                # DEBUG: Log what LLM generated before fixing
+                if self.logger:
+                    self.logger.info("=== Phrase Extraction Debug (LLM Output) ===")
+                    for i, req in enumerate(research_request.concordance_requests):
+                        self.logger.info(f"  Request {i+1}: query='{req.query}' level='{req.level}'")
+                        if hasattr(req, 'alternates') and req.alternates:
+                            self.logger.info(f"    Alternates: {req.alternates}")
+
+                # Extract exact phrases and variants from discoveries and override LLM base forms
+                exact_phrases, variants_mapping = self._extract_exact_phrases_from_discoveries(discoveries)
+
+                if exact_phrases:
+                    self.logger.info(f"  Extracted {len(exact_phrases)} exact phrases from discoveries")
+                    # Override LLM base forms with exact phrases
+                    research_request = self._override_llm_base_forms(research_request, exact_phrases, variants_mapping, psalm_number)
+                else:
+                    self.logger.warning("  No exact phrases extracted from discoveries, attempting verse text extraction")
+                    # Try to extract directly from verse text
+                    research_request = self._override_llm_base_forms(research_request, {}, {}, psalm_number)
+
                 self.logger.info(f"  ✓ Research requests generated")
                 return research_request
 
@@ -738,10 +784,25 @@ class MicroAnalystV2:
         # Convert discoveries to VerseCommentary objects
         verse_commentaries = []
         for disc in discoveries.get('verse_discoveries', []):
+            # Handle both legacy curious_words and new lexical_insights formats
+            lexical_insights = disc.get('lexical_insights', [])
+
+            # If legacy format with curious_words, convert to new structured format
+            if not lexical_insights and 'curious_words' in disc:
+                # Convert each curious word to the new structured format
+                lexical_insights = [
+                    {
+                        "phrase": word,
+                        "variants": [],  # No variants in legacy format
+                        "notes": f"Word identified for investigation (legacy format)"
+                    }
+                    for word in disc.get('curious_words', [])
+                ]
+
             vc = VerseCommentary(
                 verse_number=disc['verse_number'],
                 commentary=disc.get('observations', ''),
-                lexical_insights=disc.get('curious_words', []),
+                lexical_insights=lexical_insights,
                 figurative_analysis=disc.get('figurative_elements', []),
                 thesis_connection=disc.get('macro_relation', ''),
                 phonetic_transcription=phonetic_data.get(disc['verse_number'], '[Transcription not found]')
@@ -872,6 +933,232 @@ class MicroAnalystV2:
 
         self.logger.info("  ✓ Phonetic transcriptions with stress marking generated.")
         return phonetic_data
+
+    def _extract_exact_phrases_from_discoveries(self, discoveries: dict) -> Tuple[Dict[str, str], Dict[str, List[str]]]:
+        """
+        Extract exact phrases and variants from discoveries to override LLM base forms.
+
+        Preserves morphological prefixes/suffixes while removing vowel points for searching.
+
+        Args:
+            discoveries: Dictionary containing verse_discoveries with lexical_insights
+
+        Returns:
+            Tuple of:
+            - Dictionary mapping normalized keys to exact phrases without vowel points
+            - Dictionary mapping normalized keys to lists of variant phrases
+        """
+        import re
+        phrase_mapping = {}
+        variants_mapping = {}
+
+        for verse_disc in discoveries.get('verse_discoveries', []):
+            # Handle Phase 2 format with phrase/variants structure
+            for insight in verse_disc.get('lexical_insights', []):
+                # Handle both string format (legacy) and dict format (Phase 2)
+                if isinstance(insight, str):
+                    phrase = insight
+                    variants = []
+                else:
+                    phrase = insight.get('phrase', '')
+                    variants = insight.get('variants', [])
+
+                if not phrase:
+                    continue
+
+                # Remove vowel points but keep consonants
+                clean_phrase = re.sub(r'[\u0591-\u05C7]', '', phrase)
+
+                # Create normalized key for matching
+                key = re.sub(r'[^\u05D0-\u05EA]', '', clean_phrase)
+
+                if key and clean_phrase:
+                    phrase_mapping[key] = clean_phrase
+
+                    # Clean variants (remove vowel points)
+                    if variants:
+                        clean_variants = []
+                        for variant in variants:
+                            clean_variant = re.sub(r'[\u0591-\u05C7]', '', variant)
+                            if clean_variant and clean_variant != clean_phrase:
+                                clean_variants.append(clean_variant)
+                        if clean_variants:
+                            variants_mapping[key] = clean_variants
+
+            # Handle legacy curious_words format
+            if 'curious_words' in verse_disc and not verse_disc.get('lexical_insights'):
+                for word in verse_disc.get('curious_words', []):
+                    if word:
+                        clean_word = re.sub(r'[\u0591-\u05C7]', '', word)
+                        key = re.sub(r'[^\u05D0-\u05EA]', '', clean_word)
+                        if key and clean_word:
+                            phrase_mapping[key] = clean_word
+
+        return phrase_mapping, variants_mapping
+
+    def _query_in_verse(self, query: str, verse_hebrew: str) -> bool:
+        """
+        Check if a query phrase appears in a verse (allowing for some flexibility).
+
+        Args:
+            query: The search query (consonantal form)
+            verse_hebrew: The full Hebrew verse text
+
+        Returns:
+            True if the query appears to be in the verse
+        """
+        import re
+        from ..concordance.hebrew_text_processor import split_words
+
+        # Remove vowel points for comparison
+        query_clean = re.sub(r'[\u0591-\u05C7]', '', query)
+        verse_clean = re.sub(r'[\u0591-\u05C7]', '', verse_hebrew)
+
+        # Split into words
+        query_words = split_words(query_clean)
+        verse_words = split_words(verse_clean)
+
+        # If query has fewer words, check if it's a subsequence
+        if len(query_words) <= len(verse_words):
+            for i in range(len(verse_words) - len(query_words) + 1):
+                # Check if query words match verse words starting at position i
+                match = True
+                for j, qword in enumerate(query_words):
+                    if qword not in verse_words[i + j]:
+                        # Check for substring match (allows for prefixes/suffixes)
+                        if qword not in verse_words[i + j] and verse_words[i + j] not in qword:
+                            match = False
+                            break
+                if match:
+                    return True
+
+        return False
+
+    def _extract_exact_form_from_verse(self, query: str, verse_hebrew: str) -> str:
+        """
+        Extract the exact form of a phrase from a verse.
+
+        Args:
+            query: The search query (consonantal form)
+            verse_hebrew: The full Hebrew verse text
+
+        Returns:
+            The exact Hebrew phrase from the verse
+        """
+        import re
+        from ..concordance.hebrew_text_processor import split_words
+
+        # Remove vowel points for matching
+        query_clean = re.sub(r'[\u0591-\u05C7]', '', query)
+        verse_clean = re.sub(r'[\u0591-\u05C7]', '', verse_hebrew)
+
+        # Split into words
+        query_words = split_words(query_clean)
+        verse_words = split_words(verse_hebrew)  # Keep original pointing for result
+        verse_words_clean = split_words(verse_clean)
+
+        # Find the best matching sequence
+        best_match = None
+        best_score = 0
+
+        for i in range(len(verse_words_clean) - len(query_words) + 1):
+            score = 0
+            for j, qword in enumerate(query_words):
+                vword = verse_words_clean[i + j]
+                if qword == vword:
+                    score += 3
+                elif qword in vword:
+                    score += 2
+                elif vword in qword:
+                    score += 1
+
+            if score > best_score:
+                best_score = score
+                # Extract the original Hebrew (with pointing)
+                best_match = ' '.join(verse_words[i:i+len(query_words)])
+
+        # Require at least 2 points per word to consider it a match
+        if best_score >= len(query_words) * 2:
+            return best_match
+
+        return None
+
+    def _override_llm_base_forms(self, research_request: ResearchRequest, exact_phrases: Dict[str, str], variants_mapping: Dict[str, List[str]], psalm_number: int):
+        """
+        Override LLM base forms with exact phrases from discoveries.
+
+        Args:
+            research_request: The ResearchRequest object generated by LLM
+            exact_phrases: Dictionary of exact phrases to use
+            variants_mapping: Dictionary mapping normalized keys to variant phrases
+            psalm_number: Psalm number for fallback verse text extraction
+
+        Returns:
+            Modified ResearchRequest with exact phrases preserved
+        """
+        import re
+        fixed_count = 0
+        variants_added = 0
+
+        # Fix concordance requests
+        for req in research_request.concordance_requests:
+            original_query = req.query
+            # Normalize for matching
+            normalized = re.sub(r'[^\u05D0-\u05EA]', '', original_query)
+            normalized = re.sub(r'[\u0591-\u05C7]', '', normalized)
+
+            if normalized in exact_phrases:
+                req.query = exact_phrases[normalized]
+                req.notes += f" [FIXED: Using exact phrase]"
+                fixed_count += 1
+                self.logger.info(f"    ✓ Fixed '{original_query}' → '{req.query}'")
+
+                # Add variants from lexical insights if available
+                if normalized in variants_mapping:
+                    variants = variants_mapping[normalized]
+                    # Create alternates list if it doesn't exist
+                    if not hasattr(req, 'alternates') or not req.alternates:
+                        req.alternates = []
+                    # Add new variants (avoid duplicates)
+                    for variant in variants:
+                        if variant not in req.alternates and variant != req.query:
+                            req.alternates.append(variant)
+                            variants_added += 1
+                    self.logger.info(f"    ✓ Added {len(variants)} variants from lexical insights")
+
+        # NEW: Fallback extraction from verse text if no matches found
+        if fixed_count == 0:
+            self.logger.warning("  No exact phrase matches found in discoveries, attempting verse text extraction")
+            verse_fixed_count = 0
+
+            # Get the psalm text from database for fallback
+            psalm = self.db.get_psalm(psalm_number)
+            if psalm:
+                for req in research_request.concordance_requests:
+                    original_query = req.query
+                    if "[FIXED: Using exact phrase]" in req.notes:
+                        continue  # Skip if already fixed
+
+                    # Try to find phrase in psalm verses
+                    for verse in psalm.verses:
+                        hebrew_text = verse.hebrew
+                        if self._query_in_verse(original_query, hebrew_text):
+                            # Extract exact form from verse
+                            exact_form = self._extract_exact_form_from_verse(original_query, hebrew_text)
+                            if exact_form and exact_form != req.query:
+                                req.query = exact_form
+                                req.notes += f" [FIXED: Extracted from verse {verse.verse}]"
+                                verse_fixed_count += 1
+                                self.logger.info(f"    ✓ Fixed '{original_query}' → '{req.query}' (from verse {verse.verse})")
+                                break
+
+                if verse_fixed_count > 0:
+                    self.logger.info(f"  Fixed {verse_fixed_count} additional queries using verse text extraction")
+
+        self.logger.info(f"  Fixed {fixed_count} queries to preserve exact morphology")
+        if variants_added > 0:
+            self.logger.info(f"  Added {variants_added} variants from lexical insights")
+        return research_request
 
 
 def main():
