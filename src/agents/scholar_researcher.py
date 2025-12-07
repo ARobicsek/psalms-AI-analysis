@@ -35,10 +35,68 @@ load_dotenv()
 if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.agents.research_assembler import ResearchAssembler, ResearchRequest
+    from src.agents.figurative_librarian import FigurativeLibrarian
     from src.utils.logger import get_logger
 else:
     from .research_assembler import ResearchAssembler, ResearchRequest
+    from .figurative_librarian import FigurativeLibrarian
     from ..utils.logger import get_logger
+
+
+# Module-level cache for FigurativeLibrarian instance
+_figurative_librarian = None
+
+
+def _get_all_figurative_books() -> List[str]:
+    """
+    Get all books available in the figurative language database.
+
+    Uses a module-level singleton to avoid repeatedly initializing
+    the FigurativeLibrarian and querying the database.
+
+    Returns:
+        List of book names sorted alphabetically
+    """
+    global _figurative_librarian
+    if _figurative_librarian is None:
+        _figurative_librarian = FigurativeLibrarian()
+
+    # If the librarian doesn't have the method, query the database directly
+    if hasattr(_figurative_librarian, 'get_available_books'):
+        return _figurative_librarian.get_available_books()
+    else:
+        # Fallback: query directly
+        import sqlite3
+        from pathlib import Path
+
+        # Use the same default database as FigurativeLibrarian
+        db_path = Path("database") / "figurative_language.db"
+        if not db_path.exists():
+            db_path = Path("src") / "data" / "figurative_language.db"
+
+        # If database doesn't exist or table missing, return empty list
+        if not db_path.exists():
+            return []
+
+        conn = sqlite3.connect(str(db_path))
+        cursor = conn.cursor()
+
+        # Check if table exists
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='figurative_language'")
+        if not cursor.fetchone():
+            conn.close()
+            return []
+
+        cursor.execute("""
+            SELECT DISTINCT v.book
+            FROM figurative_language f
+            JOIN verses v ON f.verse_id = v.id
+            ORDER BY v.book
+        """)
+
+        books = [row[0] for row in cursor.fetchall()]
+        conn.close()
+        return books
 
 
 # System prompt for Scholar-Researcher agent
@@ -86,12 +144,17 @@ Generate specific research requests in the following categories:
      * "voweled": Distinguish homographs by meaning (אֵל ≠ אֶל)
      * "exact": Find specific form with exact vocalization
    - Specify scope for each:
-     * "auto": Let system auto-detect common vs. rare words (RECOMMENDED)
+     * "auto": Let system auto-detect common vs. rare words (HIGHLY RECOMMENDED)
+     * "Tanakh": Entire Hebrew Bible (good for comprehensive searches)
      * "Psalms": Search within Psalms only
      * "Torah": Pentateuch only
      * "Prophets": Nevi'im
      * "Writings": Ketuvim
-     * "Tanakh": Entire Hebrew Bible
+   - IMPORTANT: Use "auto" scope for most searches. The system intelligently:
+     * Searches full Tanakh for compound phrases
+     * Filters results based on actual frequency
+     * Prioritizes key books for common phrases
+   - WARNING: Avoid custom scopes with '+' (e.g., "Pentateuch+Prophets") as they may miss relevant verses
    - Example: {{"query": "רעה", "level": "consonantal", "scope": "auto", "purpose": "Track shepherd imagery across Psalms to identify thematic connections"}}
    - Be strategic: Don't request concordance searches for every BDB word. Focus on thematic patterns.
 
@@ -131,6 +194,7 @@ CRITICAL REQUIREMENTS:
 - Justify EVERY request. "It appears" is not a justification.
 - Align requests with macro thesis. Don't request tangential research.
 - Be MAXIMALLY COMPREHENSIVE. Request lexicon entries for ALL significant words across the entire psalm.
+- USE "auto" SCOPE for concordance searches to ensure comprehensive results. The system will intelligently filter based on actual phrase frequency.
   * For a 6-verse psalm (like Psalm 23): expect 15-25 BDB requests (2-4 words per verse)
   * For a 14-verse psalm (like Psalm 27): expect 30-50 BDB requests (2-4 words per verse)
   * For a 22-verse psalm: expect 50-80 BDB requests (2-4 words per verse)
@@ -183,8 +247,8 @@ OUTPUT FORMAT: Return ONLY a valid JSON object with this exact structure:
   ],
   "concordance_searches": [
     {{"query": "מָעוֹז", "level": "consonantal", "scope": "auto", "purpose": "Track divine protection fortress metaphor"}},
-    {{"query": "נֹעַם יְהוָה", "level": "exact", "scope": "Tanakh", "purpose": "Rare beauty of LORD phrase"}},
-    {{"query": "אַל־תַּסְתֵּר פָּנֶיךָ", "level": "exact", "scope": "Psalms", "purpose": "Hiding face lament formula"}}
+    {{"query": "נֹעַם יְהוָה", "level": "exact", "scope": "auto", "purpose": "Rare beauty of LORD phrase"}},
+    {{"query": "אַל־תַּסְתֵּר פָּנֶיךָ", "level": "exact", "scope": "auto", "purpose": "Hiding face lament formula"}}
   ],
   "figurative_checks": [
     {{"verse": 1, "reason": "Light as salvation, stronghold as protection", "vehicle": "light", "vehicle_synonyms": ["lamp", "sun", "illumination", "brightness"]}},
@@ -293,23 +357,22 @@ class ScholarResearchRequest:
             verse = check.get("verse")
             vehicle = check.get("vehicle", "")
             vehicle_synonyms = check.get("vehicle_synonyms", [])
-            scope = check.get("scope", "Psalms")  # Default to Psalms only if not specified
+            priority_ranking = check.get("priority_ranking")
+            scope = check.get("scope", "all")  # Default to all books if not specified
 
             # Build request dict based on scope
             req = {}
 
             # Parse scope to determine which books to search
-            # NOTE: Our database only contains Psalms + Pentateuch + Proverbs, so we don't support
-            # searching the entire Tanakh even if requested
-            if scope == "Psalms+Pentateuch" or scope == "Pentateuch+Psalms" or scope == "Tanakh":
-                # Search across Psalms, Pentateuch books, and Proverbs (our entire database)
-                req["books"] = ["Psalms", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Proverbs"]
-            elif scope == "Psalms":
-                # Search only Psalms
+            # Dynamically query database for available books instead of hardcoding
+            if scope == "Psalms":
+                # Search only Psalms if explicitly requested
                 req["book"] = "Psalms"
             else:
-                # Unknown scope - default to searching entire database
-                req["books"] = ["Psalms", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"]
+                # For any other scope (all, database, Tanakh, unknown), search all available books
+                # This makes the system future-proof: when new books are added to the database,
+                # they're automatically included in searches
+                req["books"] = _get_all_figurative_books()
 
             # NOTE: We do NOT filter by figurative type (metaphor, simile, etc.)
             # This was too restrictive. We let the search be broad and find all
@@ -325,6 +388,10 @@ class ScholarResearchRequest:
                 all_vehicles = [vehicle] + vehicle_synonyms if vehicle else vehicle_synonyms
                 # Store as LIST (not string) for FigurativeRequest
                 req["vehicle_search_terms"] = all_vehicles
+
+            # Add priority ranking if specified
+            if priority_ranking:
+                req["priority_ranking"] = priority_ranking
 
             # Add notes
             notes_parts = []

@@ -25,6 +25,7 @@ else:
     from .hebrew_text_processor import (
         normalize_for_search, split_words, normalize_word_sequence, is_hebrew_text
     )
+    from .root_matcher import is_root_match
     from ..data_sources.tanakh_database import TanakhDatabase, TANAKH_BOOKS
 
 
@@ -39,6 +40,9 @@ class SearchResult:
     english_text: str
     matched_word: str
     word_position: int
+    matched_phrase: Optional[str] = None  # Full phrase if this was a phrase match
+    is_phrase_match: bool = False
+    phrase_positions: Optional[List[int]] = None  # Positions of all words in phrase
 
 
 class ConcordanceSearch:
@@ -57,7 +61,7 @@ class ConcordanceSearch:
         'הן',   # their (f.)
     ]
 
-    # Hebrew preposition prefixes
+    # Hebrew prefixes (prepositions + future tense)
     PREPOSITIONS = [
         'ב',    # in/at/with
         'ל',    # to/for
@@ -66,9 +70,12 @@ class ConcordanceSearch:
         'ה',    # the (definite article)
         'ו',    # and (conjunction)
         'ש',    # that/which (relative)
+        'י',    # he/3ms future tense prefix
+        'ת',    # you/2ms future tense prefix
+        'נ',    # we/1cp future tense prefix
     ]
 
-    # Combined prefixes (conjunction + preposition)
+    # Combined prefixes (conjunction + preposition/article)
     COMBINED_PREFIXES = [
         'וב',   # and in
         'ול',   # and to
@@ -79,6 +86,28 @@ class ConcordanceSearch:
         'לה',   # to the
         'מה',   # from the
         'כה',   # like the
+        # Future tense + preposition/article combinations
+        'יב',   # he will in
+        'יל',   # he will to
+        'ימ',   # he will from
+        'יכ',   # he will like
+        'יה',   # he will the
+        'תב',   # you will in
+        'תל',   # you will to
+        'תמ',   # you will from
+        'תכ',   # you will like
+        'תה',   # you will the
+        'נב',   # we will in
+        'נל',   # we will to
+        'נמ',   # we will from
+        'נכ',   # we will like
+        'נה',   # we will the
+        # Conjunction + future tense
+        'ויה',  # and he will the
+        'ויב',  # and he will in
+        'ויל',  # and he will to
+        'וימ',  # and he will from
+        'ויכ',  # and he will like
     ]
 
     def __init__(self, db: Optional[TanakhDatabase] = None):
@@ -239,8 +268,8 @@ class ConcordanceSearch:
         # Strategy: Find first word, then check if following words match
         results = []
 
-        # Search for first word
-        first_word_results = self.search_word(words[0], level, scope, limit=None, use_split=use_split)
+        # Search for first word with variations to catch all possible forms
+        first_word_results = self.search_word_with_variations(words[0], level, scope, limit=None, use_split=use_split)
 
         for first_match in first_word_results:
             # Check if this verse contains the full phrase
@@ -254,7 +283,22 @@ class ConcordanceSearch:
             ):
                 # Add to results (avoid duplicates)
                 if not any(r.reference == first_match.reference for r in results):
-                    results.append(first_match)
+                    # Create a phrase-aware SearchResult
+                    phrase_result = SearchResult(
+                        book=first_match.book,
+                        chapter=first_match.chapter,
+                        verse=first_match.verse,
+                        reference=first_match.reference,
+                        hebrew_text=first_match.hebrew_text,
+                        english_text=first_match.english_text,
+                        matched_word=phrase,  # The full phrase, not just first word
+                        word_position=first_match.word_position,
+                        matched_phrase=phrase,
+                        is_phrase_match=True,
+                        phrase_positions=list(range(first_match.word_position,
+                                                  first_match.word_position + len(normalized_words)))
+                    )
+                    results.append(phrase_result)
 
                     # Check limit
                     if limit and len(results) >= limit:
@@ -273,6 +317,8 @@ class ConcordanceSearch:
         Check if a verse contains a phrase starting at a specific position.
 
         Enhanced to skip empty positions (paseq marks, etc.) when matching.
+        For phrase searches: allows substring matches (prefixes/suffixes) within words.
+        For single word searches: requires exact word matches.
 
         Args:
             book, chapter, verse: Verse location
@@ -303,12 +349,24 @@ class ConcordanceSearch:
             return False
 
         # Match normalized words against the first N non-empty words
+        # For phrases (len > 1), use substring matching
+        # For single words, use exact matching
+        is_phrase_search = len(normalized_words) > 1
+
         for i, expected_word in enumerate(normalized_words):
             if i >= len(non_empty_words):
                 return False
             actual_word = non_empty_words[i][1]
-            if actual_word != expected_word:
-                return False
+
+            if is_phrase_search:
+                # For phrase searches: check if expected_word is a substring of actual_word
+                # This allows matching "דבר" in "ודובר", "בלב" in "בלבבו", etc.
+                if expected_word not in actual_word:
+                    return False
+            else:
+                # For single word searches: require exact match
+                if actual_word != expected_word:
+                    return False
 
         return True
 
@@ -372,17 +430,31 @@ class ConcordanceSearch:
         first_word_results = self.search_word_with_variations(words[0], level, scope, limit=None, use_split=use_split)
 
         for first_match in first_word_results:
-            # Check if this verse contains ALL other words
+            # Check if this verse contains ALL words (including first)
             if self._verse_contains_all_words(
                 first_match.book,
                 first_match.chapter,
                 first_match.verse,
-                normalized_words[1:],  # All words except first
+                normalized_words,  # ALL words including first
                 column
             ):
                 # Avoid duplicates
                 if not any(r.reference == first_match.reference for r in results):
-                    results.append(first_match)
+                    # Create a phrase-aware SearchResult for fallback matches
+                    phrase_result = SearchResult(
+                        book=first_match.book,
+                        chapter=first_match.chapter,
+                        verse=first_match.verse,
+                        reference=first_match.reference,
+                        hebrew_text=first_match.hebrew_text,
+                        english_text=first_match.english_text,
+                        matched_word=phrase,  # The full phrase, not just first word
+                        word_position=first_match.word_position,
+                        matched_phrase=phrase,
+                        is_phrase_match=True,
+                        phrase_positions=None  # Words are not consecutive in this fallback
+                    )
+                    results.append(phrase_result)
                     if limit and len(results) >= limit:
                         return results
 
@@ -542,6 +614,65 @@ class ConcordanceSearch:
             )
             results.append(result)
 
+        # CRITICAL FIX: Include root-based matching for Hebrew morphology
+        # This handles cases like "הלך" -> "הולך" where vowel letters are inserted
+        if len(normalized) >= 2:
+            # Get all candidate words from the database for root matching
+            # For performance, we limit to words that share at least some letters
+            root_query = f"""
+                SELECT DISTINCT
+                    c.book_name, c.chapter, c.verse, c.word, c.position,
+                    v.hebrew, v.english, v.reference, c.{column} as search_word
+                FROM concordance c
+                JOIN verses v ON
+                    c.book_name = v.book_name AND
+                    c.chapter = v.chapter AND
+                    c.verse = v.verse
+                WHERE LENGTH(c.{column}) >= 2
+            """
+
+            root_params = []
+
+            # Add scope filtering
+            root_query, root_params = self._add_scope_filter(
+                root_query, root_params, scope
+            )
+
+            # Add ordering
+            root_query += " ORDER BY c.book_name, c.chapter, c.verse, c.position"
+
+            # For performance, limit the number of results we examine
+            # Especially important for full Tanakh searches
+            if limit:
+                root_query += f" LIMIT {limit * 3}"  # Get more to allow filtering
+
+            # Execute root-based search
+            cursor.execute(root_query, root_params)
+
+            # Check each candidate for root matching
+            for row in cursor.fetchall():
+                candidate_word = row['search_word']
+                if candidate_word and is_root_match(normalized, candidate_word):
+                    # Avoid duplicates
+                    reference = f"{row['book_name']} {row['chapter']}:{row['verse']}"
+                    if not any(r.reference == reference and r.word_position == row['position']
+                              for r in results):
+                        result = SearchResult(
+                            book=row['book_name'],
+                            chapter=row['chapter'],
+                            verse=row['verse'],
+                            reference=row['reference'],
+                            hebrew_text=row['hebrew'],
+                            english_text=row['english'],
+                            matched_word=row['word'],
+                            word_position=row['position']
+                        )
+                        results.append(result)
+
+                        # Apply limit if specified
+                        if limit and len(results) >= limit:
+                            break
+
         return results
 
     def _verse_contains_all_words(self,
@@ -612,6 +743,69 @@ class ConcordanceSearch:
             placeholders = ','.join('?' * len(books))
             query += f" AND c.book_name IN ({placeholders})"
             params.extend(books)
+
+        elif '+' in scope:
+            # Compound scope with '+' notation (e.g., "Pentateuch+Prophets")
+            # Parse and expand compound scopes
+            compound_scopes = {
+                'Pentateuch+Prophets': ['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy',
+                                       'Joshua', 'Judges', '1 Samuel', '2 Samuel', '1 Kings', '2 Kings',
+                                       'Isaiah', 'Jeremiah', 'Ezekiel',
+                                       'Hosea', 'Joel', 'Amos', 'Obadiah', 'Jonah', 'Micah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah', 'Malachi'],
+                'Pentateuch+Writings': ['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy',
+                                       'Psalms', 'Proverbs', 'Job', 'Song of Songs', 'Ruth', 'Lamentations', 'Ecclesiastes', 'Esther', 'Daniel', 'Ezra', 'Nehemiah', '1 Chronicles', '2 Chronicles'],
+                'Prophets+Writings': ['Joshua', 'Judges', '1 Samuel', '2 Samuel', '1 Kings', '2 Kings',
+                                      'Isaiah', 'Jeremiah', 'Ezekiel',
+                                      'Hosea', 'Joel', 'Amos', 'Obadiah', 'Jonah', 'Micah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah', 'Malachi',
+                                      'Psalms', 'Proverbs', 'Job', 'Song of Songs', 'Ruth', 'Lamentations', 'Ecclesiastes', 'Esther', 'Daniel', 'Ezra', 'Nehemiah', '1 Chronicles', '2 Chronicles'],
+                'Torah+Prophets+Writings': None,  # None means full Tanakh
+                'Psalms+Wisdom': ['Psalms', 'Proverbs', 'Job', 'Song of Songs', 'Ruth', 'Lamentations', 'Ecclesiastes', 'Esther', 'Daniel'],
+                'Psalms+Prophets': ['Psalms', 'Isaiah', 'Jeremiah', 'Ezekiel',
+                                    'Hosea', 'Joel', 'Amos', 'Obadiah', 'Jonah', 'Micah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah', 'Malachi'],
+                'Torah+Psalms': ['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy', 'Psalms']
+            }
+
+            if scope in compound_scopes:
+                books = compound_scopes[scope]
+                if books is None:  # Full Tanakh
+                    # No filter needed
+                    pass
+                else:
+                    placeholders = ','.join('?' * len(books))
+                    query += f" AND c.book_name IN ({placeholders})"
+                    params.extend(books)
+            else:
+                # Try to parse as custom combination
+                # Split by '+' and look up each component
+                components = [c.strip() for c in scope.split('+')]
+                books = []
+                for component in components:
+                    if component in TANAKH_BOOKS:
+                        books.extend([book[0] for book in TANAKH_BOOKS[component]])
+                    elif component == 'Tanakh':
+                        # If any component is Tanakh, search all
+                        books = None
+                        break
+                    elif component in ['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy',
+                                       'Joshua', 'Judges', '1 Samuel', '2 Samuel', '1 Kings', '2 Kings',
+                                       'Isaiah', 'Jeremiah', 'Ezekiel',
+                                       'Hosea', 'Joel', 'Amos', 'Obadiah', 'Jonah', 'Micah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah', 'Malachi',
+                                       'Psalms', 'Proverbs', 'Job', 'Song of Songs', 'Ruth', 'Lamentations', 'Ecclesiastes', 'Esther', 'Daniel', 'Ezra', 'Nehemiah', '1 Chronicles', '2 Chronicles']:
+                        books.append(component)
+                    else:
+                        # Unknown component, treat as single book
+                        books.append(component)
+
+                if books is None:
+                    # Full Tanakh
+                    pass
+                elif books:
+                    placeholders = ','.join('?' * len(books))
+                    query += f" AND c.book_name IN ({placeholders})"
+                    params.extend(books)
+                else:
+                    # No valid books found, fall back to no filter (full Tanakh)
+                    pass
 
         else:
             # Assume it's a single book name

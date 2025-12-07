@@ -18,7 +18,7 @@ Hierarchical Tag System:
 - Search for "fox" finds only fox-specific entries
 
 Database Location:
-- C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_fig_language.db
+- C:/Users/ariro/OneDrive/Documents/Bible/database/Biblical_fig_language.db
 - Contains 2,863 figurative instances in Psalms (from CONTEXT.md)
 - Includes full AI deliberations and validations
 """
@@ -32,7 +32,7 @@ from collections import Counter
 import json
 
 # Database path
-FIGURATIVE_DB_PATH = Path("C:/Users/ariro/OneDrive/Documents/Bible/database/Pentateuch_Psalms_fig_language.db")
+FIGURATIVE_DB_PATH = Path("C:/Users/ariro/OneDrive/Documents/Bible/database/Biblical_fig_language.db")
 
 
 @dataclass
@@ -606,6 +606,37 @@ class FigurativeLibrarian:
             List of FigurativeBundle objects (one per request)
         """
         return [self.search(req) for req in requests]
+
+    def get_available_books(self) -> List[str]:
+        """
+        Get all books available in the figurative language database.
+
+        Returns:
+            List of book names (e.g., ["Psalms", "Genesis", "Exodus"])
+        """
+        # If database doesn't exist, return empty list
+        if not self.db_path.exists():
+            return []
+
+        conn = sqlite3.connect(str(self.db_path))
+        cursor = conn.cursor()
+
+        # Check if table exists
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='figurative_language'")
+        if not cursor.fetchone():
+            conn.close()
+            return []
+
+        cursor.execute("""
+            SELECT DISTINCT v.book
+            FROM figurative_language f
+            JOIN verses v ON f.verse_id = v.id
+            ORDER BY v.book
+        """)
+
+        books = [row[0] for row in cursor.fetchall()]
+        conn.close()
+        return books
 
     def search_from_json(self, json_str: str) -> List[FigurativeBundle]:
         """

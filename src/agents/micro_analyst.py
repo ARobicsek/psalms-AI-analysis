@@ -1107,15 +1107,40 @@ class MicroAnalystV2:
             normalized = re.sub(r'[^\u05D0-\u05EA]', '', original_query)
             normalized = re.sub(r'[\u0591-\u05C7]', '', normalized)
 
-            if normalized in exact_phrases:
-                req.query = exact_phrases[normalized]
-                req.notes += f" [FIXED: Using exact phrase]"
+            # Check if normalized query is contained in any stored phrase
+            matched_phrase = None
+            matched_key = None
+            for stored_key, stored_phrase in exact_phrases.items():
+                # Check if query is substring of stored phrase (allowing suffixes/prefixes)
+                if normalized in stored_key:
+                    matched_phrase = stored_phrase
+                    matched_key = stored_key
+                    break
+
+            if matched_phrase:
+                # Store the original LLM query as an alternate if it's different
+                original_as_alternate = False
+
+                # Set the exact phrase as the primary query
+                if matched_phrase != original_query:
+                    # Create alternates list if it doesn't exist
+                    if not hasattr(req, 'alternates') or not req.alternates:
+                        req.alternates = []
+                    # Add the original query as an alternate if it's different
+                    if original_query not in req.alternates:
+                        req.alternates.append(original_query)
+                        original_as_alternate = True
+
+                req.query = matched_phrase
+                req.notes += f" [FIXED: Using exact phrase from verse]"
                 fixed_count += 1
-                self.logger.info(f"    ✓ Fixed '{original_query}' → '{req.query}'")
+                self.logger.info(f"    ✓ Fixed '{original_query}' → '{req.query}' (matched substring)")
+                if original_as_alternate:
+                    self.logger.info(f"    ✓ Added original query as alternate: '{original_query}'")
 
                 # Add variants from lexical insights if available
-                if normalized in variants_mapping:
-                    variants = variants_mapping[normalized]
+                if matched_key in variants_mapping:
+                    variants = variants_mapping[matched_key]
                     # Create alternates list if it doesn't exist
                     if not hasattr(req, 'alternates') or not req.alternates:
                         req.alternates = []
