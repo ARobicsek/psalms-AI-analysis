@@ -30,11 +30,11 @@ import json
 if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.concordance.search import ConcordanceSearch, SearchResult
-    from src.concordance.hebrew_text_processor import normalize_for_search, split_words
+    from src.concordance.hebrew_text_processor import normalize_for_search, split_words, normalize_word_sequence
     from src.data_sources.tanakh_database import TanakhDatabase
 else:
     from ..concordance.search import ConcordanceSearch, SearchResult
-    from ..concordance.hebrew_text_processor import normalize_for_search, split_words
+    from ..concordance.hebrew_text_processor import normalize_for_search, split_words, normalize_word_sequence
     from ..data_sources.tanakh_database import TanakhDatabase
 
 
@@ -47,21 +47,31 @@ class ConcordanceRequest:
     include_variations: bool = True  # Auto-search phrase variations
     notes: Optional[str] = None  # Why this search is being requested
     max_results: int = 50  # Limit results per variation
-    auto_scope_threshold: int = 30  # If 'auto' scope: words with >N results get limited scope
+    auto_scope_threshold: int = 30  # Results threshold for applying intelligent filtering
     alternate_queries: Optional[List[str]] = None  # Additional forms to search (e.g., different conjugations)
+    source_psalm: Optional[int] = None  # Current psalm being analyzed (to ensure inclusion in scope)
+    # Phase 2 tracking fields
+    lexical_insight_id: Optional[str] = None  # ID to group searches from same lexical insight
+    is_primary_search: Optional[bool] = None  # True if this is the primary phrase, False if variant
+    insight_notes: Optional[str] = None  # Notes about the lexical insight (from micro analyst)
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'ConcordanceRequest':
         """Create from dictionary."""
         return cls(
             query=data['query'],
-            scope=data.get('scope', 'Tanakh'),
+            scope='auto',  # Always use auto - librarian will determine optimal scope
             level=data.get('level', 'consonantal'),
             include_variations=data.get('include_variations', True),
             notes=data.get('notes'),
             max_results=data.get('max_results', 50),
             auto_scope_threshold=data.get('auto_scope_threshold', 30),
-            alternate_queries=data.get('alternate_queries', data.get('alternates'))  # Support both names
+            alternate_queries=data.get('alternate_queries', data.get('alternates')),  # Support both names
+            source_psalm=data.get('source_psalm'),  # Current psalm being analyzed
+            # Phase 2 tracking fields
+            lexical_insight_id=data.get('lexical_insight_id'),
+            is_primary_search=data.get('is_primary_search'),
+            insight_notes=data.get('insight_notes')
         )
 
 
@@ -83,8 +93,10 @@ class ConcordanceBundle:
                     'verse': r.verse,
                     'hebrew': r.hebrew_text,
                     'english': r.english_text,
-                    'matched_word': r.matched_word,
-                    'position': r.word_position
+                    'matched_word': r.matched_phrase if r.is_phrase_match else r.matched_word,
+                    'position': r.word_position,
+                    'is_phrase_match': r.is_phrase_match,
+                    'phrase_positions': r.phrase_positions
                 }
                 for r in self.results
             ],
@@ -146,15 +158,17 @@ class ConcordanceLibrarian:
         'הן',   # their (f.)
     ]
 
-    def __init__(self, db: Optional[TanakhDatabase] = None):
+    def __init__(self, db: Optional[TanakhDatabase] = None, logger=None):
         """
         Initialize Concordance Librarian.
 
         Args:
             db: TanakhDatabase instance (creates new if None)
+            logger: Optional logger instance
         """
         self.db = db or TanakhDatabase()
         self.search = ConcordanceSearch(self.db)
+        self.logger = logger
 
     def determine_smart_scope(self, query: str, level: str = 'consonantal', threshold: int = 30) -> str:
         """
@@ -231,6 +245,17 @@ class ConcordanceLibrarian:
         # Always include original
         variations.add(phrase)
 
+        # NEW: Handle maqqef splitting in original phrase
+        # If phrase contains maqqef (־), generate split version
+        if '־' in phrase:
+            # Split on maqqefs and rejoin with spaces
+            split_phrase = phrase.replace('־', ' ')
+            # Remove any extra spaces
+            split_phrase = ' '.join(split_phrase.split())
+            variations.add(split_phrase)
+            if self.logger:
+                self.logger.debug(f"Added split form for maqqef phrase: '{phrase}' → '{split_phrase}'")
+
         # Single-word phrases: generate word-level variations
         if len(words) == 1:
             variations.update(self._generate_word_variations(words[0]))
@@ -264,6 +289,9 @@ class ConcordanceLibrarian:
 
             # NEW: Add pronominal suffix variations to last word
             variations.update(self._generate_suffix_variations(words, level))
+
+            # NEW: Add systematic prefix+suffix combinations
+            variations.update(self._generate_combination_variations(words, level))
 
         # Normalize all variations at the requested level
         normalized = set()
@@ -333,73 +361,223 @@ class ConcordanceLibrarian:
                 combined_with_prefix = prefix + words[0] + words[1]
                 variations.add(combined_with_prefix)
 
-        # For 3-word phrases, try combining pairs
+        # For 3-word phrases, only generate full combination
         elif len(words) == 3:
-            # First two combined
-            variations.add(words[0] + words[1] + ' ' + words[2])
-            # Last two combined
-            variations.add(words[0] + ' ' + words[1] + words[2])
-            # All three combined (rare but possible)
+            # All three combined as single token (rare but possible)
             variations.add(words[0] + words[1] + words[2])
 
         return variations
 
     def _generate_suffix_variations(self, words: List[str], level: str) -> Set[str]:
         """
-        Generate variations with pronominal suffixes on the last word.
+        Generate variations with pronominal suffixes on ANY word in the phrase.
 
         Hebrew nouns and verbs often take pronominal suffixes. For example:
         - "ראש" (head) → "ראשי" (my head)
         - "מלך" (king) → "מלכו" (his king)
+        - "הר קדש" (holy mountain) → "בהר קדשך" (in your holy mountain)
 
-        This also generates combinations with prefixes on the first word,
-        since phrases like "מהר קדשו" (from his holy mountain) are common.
+        This generates combinations with:
+        - Suffixes on each word independently
+        - Suffixes on multiple words simultaneously
+        - Prefixes on first word combined with suffixes on any word
 
         Args:
             words: List of Hebrew words
             level: Normalization level
 
         Returns:
-            Set of phrase variations with suffixes on last word
+            Set of phrase variations with suffixes on any/all words
         """
         variations = set()
 
         if len(words) < 2:
             return variations
 
-        # Generate variations with each common suffix on the last word
-        for suffix in self.PRONOMINAL_SUFFIXES:
-            modified_words = words[:-1] + [words[-1] + suffix]
-            variation = ' '.join(modified_words)
-            variations.add(variation)
+        # Strategy: Generate suffix variations for EACH word independently,
+        # then also generate combinations with suffixes on multiple words
 
-            # Try with conjunction on first word
-            modified_words_with_vav = [self.CONJUNCTION + words[0]] + words[1:-1] + [words[-1] + suffix]
-            variations.add(' '.join(modified_words_with_vav))
+        # 1. Add suffix to each word independently (one at a time)
+        for word_idx in range(len(words)):
+            for suffix in self.PRONOMINAL_SUFFIXES:
+                # Create variation with suffix on this word only
+                modified_words = words.copy()
+                modified_words[word_idx] = words[word_idx] + suffix
+                variation = ' '.join(modified_words)
+                variations.add(variation)
 
-            # Try with prepositions on first word (very common pattern)
-            for prep in self.PREPOSITIONS:
-                modified_words_with_prep = [prep + words[0]] + words[1:-1] + [words[-1] + suffix]
-                variations.add(' '.join(modified_words_with_prep))
+                # Also try common prefix patterns on the FIRST word
+                # (even when suffix is on a different word)
+                if word_idx > 0:
+                    # Suffix is not on first word, so try prefixes on first word
 
-                # Conjunction + preposition on first word
-                modified_words_both = [self.CONJUNCTION + prep + words[0]] + words[1:-1] + [words[-1] + suffix]
-                variations.add(' '.join(modified_words_both))
+                    # Conjunction on first word
+                    prefixed_words = [self.CONJUNCTION + words[0]] + modified_words[1:]
+                    variations.add(' '.join(prefixed_words))
 
-            # Try with definite article on first word
-            modified_words_def = [self.DEFINITE_ARTICLE + words[0]] + words[1:-1] + [words[-1] + suffix]
-            variations.add(' '.join(modified_words_def))
+                    # Prepositions on first word
+                    for prep in self.PREPOSITIONS:
+                        prefixed_words = [prep + words[0]] + modified_words[1:]
+                        variations.add(' '.join(prefixed_words))
 
-            # Conjunction + definite on first word
-            modified_words_vav_def = [self.CONJUNCTION + self.DEFINITE_ARTICLE + words[0]] + words[1:-1] + [words[-1] + suffix]
-            variations.add(' '.join(modified_words_vav_def))
+                        # Conjunction + preposition on first word
+                        prefixed_words = [self.CONJUNCTION + prep + words[0]] + modified_words[1:]
+                        variations.add(' '.join(prefixed_words))
 
-            # Preposition + definite on first word (like מהר -> מ+ה+ר)
-            for prep in self.PREPOSITIONS:
-                modified_words_prep_def = [prep + self.DEFINITE_ARTICLE + words[0]] + words[1:-1] + [words[-1] + suffix]
-                variations.add(' '.join(modified_words_prep_def))
+                    # Definite article on first word
+                    prefixed_words = [self.DEFINITE_ARTICLE + words[0]] + modified_words[1:]
+                    variations.add(' '.join(prefixed_words))
+
+                    # Conjunction + definite on first word
+                    prefixed_words = [self.CONJUNCTION + self.DEFINITE_ARTICLE + words[0]] + modified_words[1:]
+                    variations.add(' '.join(prefixed_words))
+
+                    # Preposition + definite on first word
+                    for prep in self.PREPOSITIONS:
+                        prefixed_words = [prep + self.DEFINITE_ARTICLE + words[0]] + modified_words[1:]
+                        variations.add(' '.join(prefixed_words))
+
+                # When suffix IS on first word, also try prefixes on that same word
+                elif word_idx == 0:
+                    # Conjunction before suffix
+                    prefixed_words = [self.CONJUNCTION + modified_words[0]] + modified_words[1:]
+                    variations.add(' '.join(prefixed_words))
+
+                    # Prepositions before suffix
+                    for prep in self.PREPOSITIONS:
+                        prefixed_words = [prep + modified_words[0]] + modified_words[1:]
+                        variations.add(' '.join(prefixed_words))
+
+                        # Conjunction + preposition before suffix
+                        prefixed_words = [self.CONJUNCTION + prep + modified_words[0]] + modified_words[1:]
+                        variations.add(' '.join(prefixed_words))
+
+                    # Definite article before suffix
+                    prefixed_words = [self.DEFINITE_ARTICLE + modified_words[0]] + modified_words[1:]
+                    variations.add(' '.join(prefixed_words))
+
+                    # Conjunction + definite before suffix
+                    prefixed_words = [self.CONJUNCTION + self.DEFINITE_ARTICLE + modified_words[0]] + modified_words[1:]
+                    variations.add(' '.join(prefixed_words))
+
+                    # Preposition + definite before suffix
+                    for prep in self.PREPOSITIONS:
+                        prefixed_words = [prep + self.DEFINITE_ARTICLE + modified_words[0]] + modified_words[1:]
+                        variations.add(' '.join(prefixed_words))
+
+        # 2. For 2-word phrases, also generate variations with suffixes on BOTH words
+        # (Common pattern: "מלכי צדקי" = "my king of my righteousness")
+        if len(words) == 2:
+            for suffix1 in self.PRONOMINAL_SUFFIXES:
+                for suffix2 in self.PRONOMINAL_SUFFIXES:
+                    modified_words = [words[0] + suffix1, words[1] + suffix2]
+                    variation = ' '.join(modified_words)
+                    variations.add(variation)
+
+                    # Also with common prefixes on first word
+                    for prefix in ['ו', 'ב', 'כ', 'ל', 'מ']:
+                        prefixed_words = [prefix + modified_words[0], modified_words[1]]
+                        variations.add(' '.join(prefixed_words))
+
+        # CRITICAL FIX: Filter out incomplete variations
+        # Ensure all variations have the same number of words as the original phrase
+        original_word_count = len(words)
+        variations = {v for v in variations if len(v.split()) == original_word_count}
 
         return variations
+
+    def _generate_combination_variations(self, words: List[str], level: str) -> Set[str]:
+        """
+        Generate ALL combinations of prefixes on first word with suffixes on other words.
+
+        This ensures we capture cases like:
+        - "דבר אמת בלב" → "ודבר אמת בלבבו" (prefix + suffix)
+        - "הר קדש" → "בהר קדשך" (prefix + suffix)
+
+        Args:
+            words: List of Hebrew words
+            level: Normalization level
+
+        Returns:
+            Set of phrase variations with all prefix+suffix combinations
+        """
+        variations = set()
+
+        if len(words) < 2:
+            return variations
+
+        # Generate all prefix variations for first word
+        prefix_variants = {words[0]}  # Include original without prefix
+
+        # Add common prefixes
+        common_prepositions = list(self.PREPOSITIONS)[:5]  # Take first 5
+        for prefix in [self.CONJUNCTION, self.DEFINITE_ARTICLE] + common_prepositions:
+            prefix_variants.add(prefix + words[0])
+
+        # Generate suffix variations for each word (except first)
+        suffix_variants_by_word = []
+        for i in range(1, len(words)):
+            word_variants = {words[i]}  # Include original without suffix
+            for suffix in list(self.PRONOMINAL_SUFFIXES)[:5]:  # Limit to most common
+                word_variants.add(words[i] + suffix)
+            suffix_variants_by_word.append(word_variants)
+
+        # Generate ALL combinations
+        for prefix_variant in prefix_variants:
+            # Start with just the prefix variant on first word
+            base_phrase = [prefix_variant] + words[1:]
+            variations.add(' '.join(base_phrase))
+
+            # Now add suffix combinations for each position
+            for i in range(1, len(words)):
+                for suffix_variant in suffix_variants_by_word[i-1]:  # i-1 because suffix_variants_by_word excludes first word
+                    combo_words = [prefix_variant] + words[1:i] + [suffix_variant] + words[i+1:]
+                    variations.add(' '.join(combo_words))
+
+        # Special case: Generate the most common combination (conjunction + suffix)
+        # This handles cases like "ודבר אמת בלבבו"
+        conjunction_variant = self.CONJUNCTION + words[0]
+        for i in range(1, len(words)):
+            for suffix in list(self.PRONOMINAL_SUFFIXES)[:3]:  # Most common suffixes
+                combo_words = [conjunction_variant] + words[1:i] + [words[i] + suffix] + words[i+1:]
+                variations.add(' '.join(combo_words))
+
+        return variations
+
+    def _generate_limited_variations(self, phrase: str, level: str) -> List[str]:
+        """
+        Generate limited variations for alternate queries (basic prefixes only).
+
+        This prevents query explosion by only generating the most common
+        prefix variations for alternate phrases, not the full set of
+        combinations that we generate for the main exact phrase.
+
+        Args:
+            phrase: Hebrew phrase to generate variations for
+            level: Normalization level
+
+        Returns:
+            List of phrase variations (limited set)
+        """
+        words = split_words(phrase)
+        variations = {phrase}
+
+        if not words:
+            return [normalize_for_search(phrase, level)] if phrase else []
+
+        # Only add single prefixes to first word (no combinations)
+        for prefix in ['ה', 'ו', 'ב', 'ל', 'מ']:  # 5 most common
+            var_words = [prefix + words[0]] + words[1:]
+            variations.add(' '.join(var_words))
+
+        # Normalize and return limited set
+        normalized = []
+        for var in variations:
+            norm = normalize_for_search(var, level)
+            if norm:  # Only add non-empty
+                normalized.append(norm)
+
+        return sorted(normalized)
 
     def search_with_variations(self, request: ConcordanceRequest) -> ConcordanceBundle:
         """
@@ -417,56 +595,127 @@ class ConcordanceLibrarian:
         Example:
             >>> req = ConcordanceRequest(
             ...     query="רעה",
-            ...     scope="auto",  # Smart scoping based on frequency
+            ...     scope="Tanakh",  # Always searches full Tanakh first
             ...     level="consonantal",
-            ...     include_variations=True
+            ...     include_variations=True,
+            ...     auto_scope_threshold=30  # Filter if >30 results
             ... )
             >>> bundle = librarian.search_with_variations(req)
             >>> print(f"Found {len(bundle.results)} results")
             >>> print(f"Searched {len(bundle.variations_searched)} variations")
+
+        Search Behavior:
+            1. Always searches full Tanakh first to get accurate result counts
+            2. If results > auto_scope_threshold, applies intelligent filtering
+               prioritizing key books (Torah, Psalms, Prophets, etc.)
+            3. If explicit scope requested (not 'auto'), filters to that scope
+               after counting all results
         """
         all_results = []
         variations_searched = []
+        original_query = request.query
 
-        # Determine actual scope (handle 'auto' smart scoping)
-        actual_scope = request.scope
-        if request.scope == 'auto':
-            actual_scope = self.determine_smart_scope(
-                request.query,
-                request.level,
-                request.auto_scope_threshold
-            )
+        # Determine if this is a phrase or single word
+        words = split_words(original_query)
+        is_phrase = len(words) > 1
 
-        # Generate variations if requested
+        # ALWAYS search full Tanakh first for ALL queries
+        # This ensures we get accurate counts before any filtering
+        initial_scope = 'Tanakh'
+        use_post_search_filtering = True
+
+        # Store original requested scope for later filtering
+        original_requested_scope = request.scope
+        is_explicit_scope = request.scope != 'auto'
+
+        if self.logger:
+            self.logger.info(f"Searching '{original_query}' in full Tanakh first (will filter after if needed)")
+            self.logger.info(f"Query type: {'phrase' if is_phrase else 'single word'}")
+            if is_explicit_scope:
+                self.logger.info(f"Will filter to requested scope: '{original_requested_scope}'")
+
+        # ENSURE SOURCE PSALM INCLUSION
+        # If source_psalm is specified and scope might exclude Psalms, add it
+        if request.source_psalm and 'Psalms' not in initial_scope and initial_scope != 'Tanakh':
+            if ',' in initial_scope:
+                initial_scope += ',Psalms'
+            else:
+                initial_scope = f"{initial_scope},Psalms"
+            if self.logger:
+                self.logger.info(f"Added Psalms to scope to ensure source psalm {request.source_psalm} is included")
+
+        # CRITICAL FIX: Only generate variations for single words, NOT phrases
         if request.include_variations:
-            queries = self.generate_phrase_variations(request.query, request.level)
+            if is_phrase:
+                # For phrases, only search the exact phrase (no variations)
+                queries = [original_query]
+                if self.logger:
+                    self.logger.info(f"Phrase search: only searching exact phrase '{original_query}' (no variations)")
+            else:
+                # For single words, generate variations as before
+                queries = self.generate_phrase_variations(original_query, request.level)
+                if self.logger:
+                    self.logger.info(f"Generated {len(queries)} variations for word '{original_query}'")
         else:
-            queries = [request.query]
+            queries = [original_query]
 
-        # Add alternate queries with their variations
+        # Add alternate queries
         if request.alternate_queries:
-            for alt_query in request.alternate_queries:
-                if request.include_variations:
-                    alt_variations = self.generate_phrase_variations(alt_query, request.level)
+            # CRITICAL FIX: Limit number of alternates to prevent explosion
+            max_alternates = 10  # Reasonable limit
+            if len(request.alternate_queries) > max_alternates:
+                if self.logger:
+                    self.logger.warning(f"Limiting alternates to {max_alternates} (was {len(request.alternate_queries)})")
+                limited_alternates = request.alternate_queries[:max_alternates]
+            else:
+                limited_alternates = request.alternate_queries
+
+            if self.logger:
+                self.logger.info(f"Processing {len(limited_alternates)} alternate queries")
+
+            for alt_query in limited_alternates:
+                # Check if alternate is a phrase
+                alt_words = split_words(alt_query)
+                alt_is_phrase = len(alt_words) > 1
+
+                if request.include_variations and not alt_is_phrase:
+                    # For single words, generate variations
+                    alt_variations = self._generate_limited_variations(alt_query, request.level)
+                    if self.logger:
+                        self.logger.info(f"Generated {len(alt_variations)} variations for word alternate '{alt_query}'")
                     queries.extend(alt_variations)
                 else:
+                    # For phrases, no variations
+                    if alt_is_phrase and self.logger:
+                        self.logger.info(f"Phrase alternate: using exact form '{alt_query}' (no variations)")
                     queries.append(alt_query)
+
+        # Log total queries to be searched
+        if self.logger:
+            total_queries = len(queries)
+            if total_queries > 5000:  # Warning threshold
+                self.logger.warning(f"Generated {total_queries} total queries (may cause performance issues)")
+            else:
+                self.logger.info(f"Total queries to search: {total_queries}")
 
         # Search each variation
         seen_verses = set()  # Deduplicate: (book, chapter, verse)
+        phrase_results_count = 0
+        total_variations = len(queries)
 
-        for query in queries:
+        for i, query in enumerate(queries, 1):
             variations_searched.append(query)
 
-            # Determine if this is a phrase or single word
-            words = split_words(query)
+            # Log progress at intervals
+            if self.logger and (i == 1 or i % 500 == 0 or i == total_variations):
+                self.logger.info(f"Searching variation {i}/{total_variations}: '{query[:30]}{'...' if len(query) > 30 else ''}'")
 
-            if len(words) > 1:
-                # Phrase search
+            if is_phrase:
+                # Phrase search - try strict matching first
                 results = self.search.search_phrase(
                     phrase=query,
                     level=request.level,
-                    scope=actual_scope,  # Use actual_scope (may be auto-determined)
+                    scope=initial_scope,
                     use_split=True  # Use maqqef-split column for better phrase matching
                 )
             else:
@@ -474,9 +723,13 @@ class ConcordanceLibrarian:
                 results = self.search.search_word(
                     word=query,
                     level=request.level,
-                    scope=actual_scope,  # Use actual_scope (may be auto-determined)
+                    scope=initial_scope,
                     use_split=True  # Use maqqef-split column for better word matching
                 )
+
+            # Log result count for first few and last variation
+            if self.logger and (i <= 5 or i == total_variations):
+                self.logger.info(f"  Found {len(results)} results")
 
             # Add results, deduplicating by verse reference
             for result in results[:request.max_results]:
@@ -485,11 +738,165 @@ class ConcordanceLibrarian:
                     seen_verses.add(verse_key)
                     all_results.append(result)
 
+            # Count phrase results (only for the main query, not variations)
+            if query == original_query or query == queries[0]:  # First variation is usually the original
+                phrase_results_count = len(results)
+
+        # POST-SEARCH FILTERING FOR COMMON PHRASES AND WORDS
+        # If we found too many results, apply intelligent filtering
+        # This applies to ALL searches now since we always search full Tanakh first
+        if use_post_search_filtering and phrase_results_count > request.auto_scope_threshold:
+            if self.logger:
+                search_type = "Phrase" if is_phrase else "Word"
+                self.logger.info(f"{search_type} '{original_query}' found {phrase_results_count} results (threshold: {request.auto_scope_threshold})")
+                self.logger.info("Applying intelligent filtering to prioritize key books")
+
+            # Priority book ordering for common phrases
+            priority_books = [
+                # Torah (Foundational books)
+                'Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy',
+                # Psalms and Wisdom (Primary poetic/theological books)
+                'Psalms', 'Proverbs', 'Job',
+                # Major Prophets
+                'Isaiah', 'Jeremiah', 'Ezekiel',
+                # Historical books
+                'Joshua', 'Judges', '1 Samuel', '2 Samuel', '1 Kings', '2 Kings',
+                # Minor Prophets (key themes)
+                'Hosea', 'Joel', 'Amos', 'Jonah', 'Micah',
+                # Other Writings
+                'Song of Songs', 'Ruth', 'Lamentations', 'Ecclesiastes', 'Esther', 'Daniel',
+                # Post-exilic
+                'Ezra', 'Nehemiah', '1 Chronicles', '2 Chronicles',
+                # Remaining Minor Prophets
+                'Obadiah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah', 'Malachi'
+            ]
+
+            # Filter results maintaining priority order
+            filtered_results = []
+            seen_priority_books = set()
+
+            # First pass: get results from priority books in order
+            for result in all_results:
+                if result.book in priority_books and len(filtered_results) < request.max_results:
+                    filtered_results.append(result)
+                    seen_priority_books.add(result.book)
+
+            # Second pass: if still under max_results, add from remaining books
+            for result in all_results:
+                if len(filtered_results) >= request.max_results:
+                    break
+                if result.book not in seen_priority_books:
+                    filtered_results.append(result)
+
+            all_results = filtered_results
+            if self.logger:
+                self.logger.info(f"Filtered to {len(all_results)} results using priority book ordering")
+
+        # APPLY EXPLICIT SCOPE FILTERING (if requested)
+        # If user requested a specific scope (not 'auto'), filter to that scope
+        if is_explicit_scope and original_requested_scope != 'Tanakh':
+            if self.logger:
+                self.logger.info(f"Filtering {len(all_results)} results to requested scope: '{original_requested_scope}'")
+
+            scope_filtered_results = []
+            # Use the search class's scope filtering logic
+            for result in all_results:
+                if self._book_in_scope(result.book, original_requested_scope):
+                    scope_filtered_results.append(result)
+
+            all_results = scope_filtered_results
+            if self.logger:
+                self.logger.info(f"Scope filtering resulted in {len(all_results)} results")
+
+        # FALLBACK: If strict phrase matching found nothing, try "same verse" search
+        # This finds verses where all words appear (any order, not necessarily adjacent)
+        if not all_results and is_phrase:
+            if self.logger:
+                self.logger.info(f"Strict phrase matching failed for '{original_query}', trying 'same verse' search")
+            fallback_results = self.search.search_phrase_in_verse(
+                phrase=original_query,
+                level=request.level,
+                scope=initial_scope,
+                limit=request.max_results,
+                use_split=True
+            )
+            for result in fallback_results:
+                verse_key = (result.book, result.chapter, result.verse)
+                if verse_key not in seen_verses:
+                    seen_verses.add(verse_key)
+                    all_results.append(result)
+
+        # CRITICAL FIX: Final validation to ensure all phrase results contain ALL words
+        # This is a safety net to prevent partial matches from getting through
+        if is_phrase and all_results:
+            # Get normalized words from original query
+            original_words = split_words(original_query)
+            if request.level == 'consonantal':
+                normalized_words = normalize_word_sequence(original_words, request.level)
+            else:
+                normalized_words = original_words
+
+            validated_results = []
+            for result in all_results:
+                # Check if this verse contains ALL the words from the original phrase
+                if self.search._verse_contains_all_words(
+                    result.book, result.chapter, result.verse,
+                    normalized_words,
+                    'word_consonantal_split' if request.level == 'consonantal' and True else 'word_consonantal'
+                ):
+                    validated_results.append(result)
+                elif self.logger:
+                    self.logger.debug(
+                        f"Filtered out result {result.reference}: missing words from phrase '{original_query}'"
+                    )
+
+            all_results = validated_results
+            if self.logger and len(all_results) < len(all_results) + 0:  # Count was incorrect
+                self.logger.info(
+                    f"Final validation filtered results to ensure all words are present"
+                )
+
+        # Log final results
+        if self.logger:
+            self.logger.info(f"Search completed: {total_variations} queries, {len(all_results)} total unique results")
+
         return ConcordanceBundle(
             results=all_results,
             variations_searched=variations_searched,
             request=request
         )
+
+    def _book_in_scope(self, book: str, scope: str) -> bool:
+        """
+        Check if a book is within the specified scope.
+
+        Args:
+            book: Book name (e.g., 'Genesis', 'Psalms')
+            scope: Scope string (e.g., 'Torah', 'Psalms,Proverbs', 'Tanakh')
+
+        Returns:
+            True if book is in scope
+        """
+        if scope == 'Tanakh':
+            return True
+
+        # Check category scopes
+        if scope == 'Torah':
+            return book in ['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy']
+        elif scope == 'Prophets':
+            from ..data_sources.tanakh_database import TANAKH_BOOKS
+            return book in [b[0] for b in TANAKH_BOOKS['Prophets']]
+        elif scope == 'Writings':
+            from ..data_sources.tanakh_database import TANAKH_BOOKS
+            return book in [b[0] for b in TANAKH_BOOKS['Writings']]
+
+        # Check comma-separated book list
+        if ',' in scope:
+            scope_books = [b.strip() for b in scope.split(',')]
+            return book in scope_books
+
+        # Check single book
+        return book == scope
 
     def search_multiple(self, requests: List[ConcordanceRequest]) -> List[ConcordanceBundle]:
         """
