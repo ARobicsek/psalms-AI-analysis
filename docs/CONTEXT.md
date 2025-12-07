@@ -14,9 +14,9 @@ See [PROJECT_STATUS.md](PROJECT_STATUS.md) for current task and progress.
 - **Divine name modifications**: `C:\Users\ariro\OneDrive\Documents\Bible\docs\NON_SACRED_HEBREW.md`
 
 ## Key Resources
-- **Existing figurative language DB**: `C:\Users\ariro\OneDrive\Documents\Bible\database\Pentateuch_Psalms_Proverbs_fig_language.db`
-  - Contains 2,863 figurative language instances in Psalms
-  - 2,527 verses analyzed
+- **Existing figurative language DB**: `C:\Users\ariro\OneDrive\Documents\Bible\database\Biblical_fig_language.db`
+  - Contains figurative language instances from Pentateuch, Psalms, Proverbs, and Isaiah
+  - 2,527 verses analyzed in Psalms alone
 - **GitHub**: https://github.com/ARobicsek/psalms-AI-analysis
 - **Sefaria API**: https://www.sefaria.org/api/ (no auth required)
 - **BDB Lexicon via Sefaria**: https://www.sefaria.org/BDB

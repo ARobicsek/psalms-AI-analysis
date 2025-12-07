@@ -3,11 +3,108 @@
 **Note**: Historical session summaries (Sessions 1-149) have been archived to:
 `docs/archive/documentation_cleanup/IMPLEMENTATION_LOG_sessions_1-149_2025-12-04.md`
 
-This file now contains only recent sessions (150-175) for easier reference.
+This file now contains only recent sessions (150-176) for easier reference.
 
 ---
 
-## Session 176 - 2025-12-07 (Micro Analyst Instructions Cleanup)
+## Session 176 - 2025-12-07 (Phrase Substring Matching Fix)
+
+### Objective
+Investigate and fix why the phrase "דבר אמת בלב" didn't match Psalm 15:2 which contains "וְדֹבֵ֥ר אֱ֝מֶ֗ת בִּלְבָבֽוֹ׃".
+
+### Analysis of Psalm 15 Concordance Searches
+
+#### What the Micro Analyst Provided
+From `output/psalm_15/psalm_015_micro_v2.json`, verse 2:
+- **Phrase**: "דֹבֵר אֱמֶת בִּלְבָבוֹ" (dover emet bilvavo)
+- **Variants**: ["דובר אמת", "דברי אמת בלבבם", "דבר אמת בלבו"]
+
+#### What Was Searched
+From `output/psalm_15/psalm_015_pipeline_summary.md`:
+- **Query searched**: "דבר אמת בלב" (without suffixes)
+- **Variations searched**: 3
+- **Results**: 0 (This was the issue!)
+
+### Root Cause Identified
+The concordance search was using **exact word matching** for phrases:
+- "דבר" had to exactly match the first word
+- Psalm 15:2 has "ודובר" (with vav prefix)
+- So "דבר" ≠ "ודובER" → no match found
+
+### Solution Implemented
+
+#### Updated `_verse_contains_phrase` method in `src/concordance/search.py`:
+1. **For phrases (len > 1)**: Use substring matching within words
+   - Allows "דבר" to match in "ודובר"
+   - Allows "בלב" to match in "בלבבו"
+   - Words must appear in order within the verse
+
+2. **For single words**: Keep exact word matching (no change)
+   - Prevents false positives for single word searches
+
+#### Key Code Changes
+```python
+# Match normalized words against the first N non-empty words
+# For phrases (len > 1), use substring matching
+# For single words, use exact matching
+is_phrase_search = len(normalized_words) > 1
+
+for i, expected_word in enumerate(normalized_words):
+    # ...
+    actual_word = non_empty_words[i][1]
+
+    if is_phrase_search:
+        # For phrase searches: check if expected_word is a substring of actual_word
+        if expected_word not in actual_word:
+            return False
+    else:
+        # For single word searches: require exact match
+        if actual_word != expected_word:
+            return False
+```
+
+### Testing Results
+Created test script `test_phrase_substring_match.py` which confirmed:
+- ✅ "דבר אמת בלב" now finds Psalm 15:2
+- ✅ Phrase substring matching works correctly
+- ✅ Single word exact matching preserved
+
+### Enhanced Exact Phrase Preservation
+
+Also updated `_override_llm_base_forms` in `src/agents/micro_analyst.py` to ensure both exact phrase AND variations are searched:
+
+1. **Query Matching with Substring Logic**:
+   - Match normalized queries against stored phrase keys
+   - Allow substring matching to handle suffix differences
+   - Example: "דבר אמת בלב" matches stored "דבראמתבלבבו"
+
+2. **Alternate Generation**:
+   - Add original query as alternate when different from stored phrase
+   - Add stored exact phrase to alternates
+   - Ensures comprehensive search coverage
+
+### Supporting Infrastructure Fixes
+1. **FigurativeLibrarian**: Added missing `get_available_books` method
+2. **Scholar Researcher**: Added graceful handling for missing figurative_language table
+3. **Test Scripts**: Created `test_phrase_substring_match.py` and other debug scripts
+
+### Files Modified
+1. `src/concordance/search.py`: Updated phrase matching logic to allow substring matches for phrases
+2. `src/agents/micro_analyst.py`: Enhanced phrase preservation with substring matching
+3. `src/agents/figurative_librarian.py`: Added get_available_books method
+4. `src/agents/scholar_researcher.py`: Added graceful error handling for missing table
+5. `test_phrase_substring_match.py`: Created test to verify the fix works
+
+### Impact
+This fix ensures that:
+1. **Phrase searches are more flexible**: Can match words with prefixes/suffixes
+2. **Single word searches remain precise**: No false positives from partial matches
+3. **Original phrases are still searched**: The system searches both the exact phrase from the verse AND the variations
+4. **Pipeline runs without errors**: Graceful handling of missing database components
+
+---
+
+## Session 175 - 2025-12-07 (Micro Analyst Instructions Cleanup)
 
 ### Objective
 Clean up confusing instructions in micro_analyst.py for generating lexical insights and variants.
