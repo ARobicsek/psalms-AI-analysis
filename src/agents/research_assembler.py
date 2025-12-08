@@ -536,32 +536,36 @@ class ResearchAssembler:
             return bundle
 
         instances = bundle.instances
-        priority_ranking = bundle.request.priority_ranking
 
-        # If we have priority ranking, sort by priority first
-        if priority_ranking:
-            def get_priority(instance):
-                """Get priority for an instance based on which search term matched."""
+        # NEW: If vehicle_contains was used and we have excess results, prioritize exact vehicle matches
+        if hasattr(bundle, 'request') and hasattr(bundle.request, 'vehicle_contains') and bundle.request.vehicle_contains:
+            search_term = bundle.request.vehicle_contains.lower()
+            exact_matches = []
+            other_matches = []
+
+            for instance in instances:
                 if not instance.vehicle:
-                    return 999  # Default: lowest priority
+                    other_matches.append(instance)
+                    continue
 
-                # Check vehicle hierarchy (join all levels into searchable text)
-                vehicle_hierarchy_str = ' '.join(instance.vehicle).lower()
+                # Check if any vehicle element exactly matches the search term (case-insensitive)
+                is_exact_match = any(
+                    vehicle_element.lower() == search_term
+                    for vehicle_element in instance.vehicle
+                    if isinstance(vehicle_element, str)
+                )
 
-                # Find the highest priority (lowest number) match
-                best_priority = 999
-                for term, priority in priority_ranking.items():
-                    if term.lower() in vehicle_hierarchy_str:
-                        best_priority = min(best_priority, priority)
+                if is_exact_match:
+                    exact_matches.append(instance)
+                else:
+                    other_matches.append(instance)
 
-                return best_priority
+            # Prioritize exact matches, then fill with others
+            # This ensures "tent" exact matches appear before "tents" or compound matches
+            instances = exact_matches + other_matches
 
-            # Sort by priority (lower number = higher priority)
-            instances = sorted(instances, key=get_priority)
-
-        # If we have search terms (and no priority ranking or as secondary sort),
-        # prioritize phrase matches over single-word matches
-        elif search_terms:
+        # If we have search terms, prioritize phrase matches over single-word matches
+        if search_terms:
             # Classify each instance by match quality
             phrase_matches = []
             single_word_matches = []

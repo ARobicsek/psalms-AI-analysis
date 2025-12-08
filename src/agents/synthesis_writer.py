@@ -1182,7 +1182,12 @@ class SynthesisWriter:
             # Add discoveries if present
             lexical = get_value(verse_data, 'lexical_insights', [])
             if lexical:
-                lines.append(f"  Lexical: {', '.join(lexical)}")
+                # Handle both legacy string format and new structured dict format
+                lexical_phrases = [
+                    item['phrase'] if isinstance(item, dict) else item
+                    for item in lexical
+                ]
+                lines.append(f"  Lexical: {', '.join(lexical_phrases)}")
 
             figurative = get_value(verse_data, 'figurative_analysis', [])
             if figurative:

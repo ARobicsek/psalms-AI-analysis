@@ -475,28 +475,31 @@ class FigurativeLibrarian:
         if request.vehicle_search_terms and len(request.vehicle_search_terms) > 0:
             # Build OR conditions for all search terms (specific + synonyms + broader)
             # Use word-boundary patterns to avoid false positives (e.g., "arm" matching "swarm")
-            # Also include morphological variants (ing, ed, s, er, ers)
+            # DO NOT use morphological variants - vehicle concepts are hierarchical tags, not inflected words
             vehicle_conditions = []
             all_patterns = []
 
             for term in request.vehicle_search_terms:
-                # Generate morphological variants for this term
-                term_variants = self._get_morphological_variants(term.lower())
+                # Only use exact term and simple plural (no morphological variants)
+                term = term.lower()
 
-                for variant in term_variants:
-                    # Word-boundary patterns that work WITHIN descriptive phrases
-                    # Database stores: ["A devouring mouth", "Predatory animal", ...]
-                    # We need to match "devour" within "A devouring mouth"
-                    patterns = [
-                        f'% {variant} %',      # " devour " - middle of phrase
-                        f'% {variant}"%',      # " devour" - end of phrase before quote
-                        f'% {variant},%',      # " devour," - before comma in phrase
-                        f'%"{variant} %',      # "devour " - start of element
-                        f'%"{variant}"%',      # "devour" - complete element (rare)
-                        f'%"{variant},%',      # "devour, - element starts with term then comma
-                        f'% {variant}]%',      # " devour] - at end of JSON array
-                    ]
-                    all_patterns.extend(patterns)
+                # Word-boundary patterns that work WITHIN descriptive phrases
+                # Database stores: ["A devouring mouth", "Predatory animal", ...]
+                # We need to match "devour" within "A devouring mouth"
+                patterns = [
+                    f'% {term} %',      # " term " - middle of phrase
+                    f'% {term}"%',      # " term" - end of phrase before quote
+                    f'% {term},%',      # " term," - before comma in phrase
+                    f'%"{term} %',      # "term " - start of element
+                    f'%"{term}"%',      # "term" - complete element (rare)
+                    f'%"{term},%',      # "term, - element starts with term then comma
+                    f'% {term}]%',      # " term] - at end of JSON array
+                    # Also include simple plural
+                    f'% {term}s %',     # " terms " - middle of phrase
+                    f'% {term}s"%',     # " terms" - end of phrase
+                    f'%"{term}s %',     # "terms " - start of element
+                ]
+                all_patterns.extend(patterns)
 
             # Build single OR condition for all patterns across all terms
             if all_patterns:
@@ -507,25 +510,27 @@ class FigurativeLibrarian:
             if vehicle_conditions:
                 query += " AND (" + " OR ".join(vehicle_conditions) + ")"
         elif request.vehicle_contains:
-            # Fallback to single vehicle search with word boundaries + morphological variants
+            # Fallback to single vehicle search with word boundaries
+            # DO NOT use morphological variants - vehicle concepts are hierarchical tags, not inflected words
             term = request.vehicle_contains.lower()
-            term_variants = self._get_morphological_variants(term)
 
-            all_patterns = []
-            for variant in term_variants:
-                patterns = [
-                    f'% {variant} %',      # " term " - middle of phrase
-                    f'% {variant}"%',      # " term" - end of phrase
-                    f'% {variant},%',      # " term," - before comma
-                    f'%"{variant} %',      # "term " - start of element
-                    f'%"{variant}"%',      # "term" - complete element
-                    f'%"{variant},%',      # "term, - element starts with term
-                    f'% {variant}]%',      # " term] - at end of JSON array
-                ]
-                all_patterns.extend(patterns)
+            # Only use exact term and simple plural (no morphological variants like "living" from "live")
+            patterns = [
+                f'% {term} %',      # " term " - middle of phrase
+                f'% {term}"%',      # " term" - end of phrase
+                f'% {term},%',      # " term," - before comma
+                f'%"{term} %',      # "term " - start of element
+                f'%"{term}"%',      # "term" - complete element
+                f'%"{term},%',      # "term, - element starts with term
+                f'% {term}]%',      # " term] - at end of JSON array
+                # Also include simple plural
+                f'% {term}s %',     # " terms " - middle of phrase
+                f'% {term}s"%',     # " terms" - end of phrase
+                f'%"{term}s %',     # "terms " - start of element
+            ]
 
-            query += " AND (" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(all_patterns)) + ")"
-            params.extend(all_patterns)
+            query += " AND (" + " OR ".join(["f.vehicle LIKE ? COLLATE NOCASE"] * len(patterns)) + ")"
+            params.extend(patterns)
 
         if request.ground_contains:
             query += " AND (f.ground LIKE ? COLLATE NOCASE)"

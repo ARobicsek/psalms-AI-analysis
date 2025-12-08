@@ -966,8 +966,12 @@ class MicroAnalystV2:
                 if not phrase:
                     continue
 
+                # Replace maqqef (־) with space before removing vowel points
+                # Maqqef (U+05BE) is in vowel point range and would be removed, concatenating words
+                phrase_with_spaces = phrase.replace('\u05BE', ' ')
+
                 # Remove vowel points but keep consonants
-                clean_phrase = re.sub(r'[\u0591-\u05C7]', '', phrase)
+                clean_phrase = re.sub(r'[\u0591-\u05C7]', '', phrase_with_spaces)
 
                 # Create normalized key for matching
                 key = re.sub(r'[^\u05D0-\u05EA]', '', clean_phrase)
@@ -979,7 +983,9 @@ class MicroAnalystV2:
                     if variants:
                         clean_variants = []
                         for variant in variants:
-                            clean_variant = re.sub(r'[\u0591-\u05C7]', '', variant)
+                            # Replace maqqef with space first
+                            variant_with_spaces = variant.replace('\u05BE', ' ')
+                            clean_variant = re.sub(r'[\u0591-\u05C7]', '', variant_with_spaces)
                             if clean_variant and clean_variant != clean_phrase:
                                 clean_variants.append(clean_variant)
                         if clean_variants:
@@ -1010,9 +1016,13 @@ class MicroAnalystV2:
         import re
         from ..concordance.hebrew_text_processor import split_words
 
+        # Replace maqqef with space before removing vowel points
+        query_with_spaces = query.replace('\u05BE', ' ')
+        verse_with_spaces = verse_hebrew.replace('\u05BE', ' ')
+
         # Remove vowel points for comparison
-        query_clean = re.sub(r'[\u0591-\u05C7]', '', query)
-        verse_clean = re.sub(r'[\u0591-\u05C7]', '', verse_hebrew)
+        query_clean = re.sub(r'[\u0591-\u05C7]', '', query_with_spaces)
+        verse_clean = re.sub(r'[\u0591-\u05C7]', '', verse_with_spaces)
 
         # Split into words
         query_words = split_words(query_clean)
@@ -1048,13 +1058,17 @@ class MicroAnalystV2:
         import re
         from ..concordance.hebrew_text_processor import split_words
 
+        # Replace maqqef with space before removing vowel points
+        query_with_spaces = query.replace('\u05BE', ' ')
+        verse_with_spaces = verse_hebrew.replace('\u05BE', ' ')
+
         # Remove vowel points for matching
-        query_clean = re.sub(r'[\u0591-\u05C7]', '', query)
-        verse_clean = re.sub(r'[\u0591-\u05C7]', '', verse_hebrew)
+        query_clean = re.sub(r'[\u0591-\u05C7]', '', query_with_spaces)
+        verse_clean = re.sub(r'[\u0591-\u05C7]', '', verse_with_spaces)
 
         # Split into words
         query_words = split_words(query_clean)
-        verse_words = split_words(verse_hebrew)  # Keep original pointing for result
+        verse_words = split_words(verse_with_spaces)  # With maqqefs replaced
         verse_words_clean = split_words(verse_clean)
 
         # Find the best matching sequence
@@ -1109,11 +1123,15 @@ class MicroAnalystV2:
         from itertools import product
         from ..concordance.hebrew_text_processor import split_words
 
+        # Replace maqqef with space before removing vowel points
+        query_with_spaces = query.replace('\u05BE', ' ')
+        verse_with_spaces = verse_hebrew.replace('\u05BE', ' ')
+
         # Remove vowel points for matching
-        query_clean = re.sub(r'[\u0591-\u05C7]', '', query)
+        query_clean = re.sub(r'[\u0591-\u05C7]', '', query_with_spaces)
 
         query_words = split_words(query_clean)
-        verse_words = split_words(verse_hebrew)  # Original with pointing
+        verse_words = split_words(verse_with_spaces)  # With maqqefs replaced by spaces
 
         # Clean each word individually to maintain array alignment
         verse_words_clean = [re.sub(r'[\u0591-\u05C7]', '', word) for word in verse_words]
