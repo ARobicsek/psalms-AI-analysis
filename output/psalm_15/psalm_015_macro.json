@@ -1,0 +1,70 @@
+{
+  "psalm_number": 15,
+  "thesis_statement": "Psalm 15 presents a radical redefinition of sacred space, moving from a physical location to an ethical condition. The psalm argues that true fellowship with God is not contingent upon pilgrimage or ritual, but upon the embodiment of unwavering integrity and justice in all human relationships. By framing a liturgical entrance question with a detailed moral character sketch, it functions as a catechism for worshippers, defining the authentic 'holiness' required to dwell in the divine presence.",
+  "genre": "Liturgical Entrance Hymn (or Torah Psalm)",
+  "historical_context": "Likely composed for pre-exilic Israelite worship, possibly for use by pilgrims approaching the Temple in Jerusalem. The psalm addresses core theological questions about access to God and the nature of true holiness. It counters any notion that ritual purity or sacrifices alone grant one access to God, instead privileging ethical righteousness as the primary criterion. This ethic-centered approach resonates with the Deuteronomic tradition and the prophetic critiques of empty ritual, placing the psalm firmly within a central biblical theological debate.",
+  "structural_outline": [
+    {
+      "section": "vv. 1",
+      "theme": "The Liturgical Question: Defining the Quest for Divine Fellowship",
+      "notes": "This opening section establishes the entire psalm's premise. It uses the powerful, overlapping metaphors of 'tent' (אֹהֶל, portable sanctuary, intimacy) and 'holy mountain' (הַר קֹדֶךָ, permanent temple, grandeur) to frame the ultimate desire of the worshipper: to dwell with God. The repetitive 'who' (מִי) creates a dramatic, liturgical setting, as if a priest or the worshipper themselves poses the question before entering the sacred space."
+    },
+    {
+      "section": "vv. 2-5a",
+      "theme": "The Ethical Answer: A Portrait of the Righteous Person",
+      "notes": "This is a detailed character sketch that serves as the psalm's core answer. It is not a list of isolated deeds but a holistic description of integrity. The structure is carefully organized, moving from the general ('walks blamelessly,' v. 2a) to the specific domains of human interaction: speech (v. 2b, 3a), action towards neighbors (v. 3b), social allegiance and values (v. 4a), business ethics (v. 4b, v. 5a). The astrophoric negations ('who has not...', לֹא) create a powerful rhythmic definition by exclusion, sharpening the profile of the ideal individual."
+    },
+    {
+      "section": "v. 5b",
+      "theme": " The Promise of Divine Stability: The Ultimate Reward",
+      "notes": "This concluding verse provides a powerful, climactic answer to the initial question. The stability described ('never be shaken,' לֹא יִמּוֹט לְעוֹלָם) is the ultimate security, directly contrasting with the precariousness of a life lived without integrity. It forms a thematic inclusio with the 'dwelling' in v. 1: the one who meets the ethical conditions is granted permanent residence in the security of God's presence, a promise that moves from a physical place to an eternal state of being."
+    }
+  ],
+  "poetic_devices": [
+    {
+      "device": "Synonymous Parallelism",
+      "description": "Two or more lines express a similar thought using different words to reinforce an idea.",
+      "verses": "v. 1 ('sojourn in your tent' // 'dwell on your holy mountain'); v. 2 ('walks blamelessly' // 'does what is right')",
+      "function": "Creates a foundational sense of unity and emphasis, particularly in the opening question and the first tenet of the ethical answer."
+    },
+    {
+      "device": "Antithetic Parallelism",
+      "description": "Two lines present contrasting ideas to create a sharp distinction and define a concept by its opposite.",
+      "verses": "v. 4 ('despises a vile person' // 'honors those who fear the LORD')",
+      "function": "Defines the righteous person's values not just by what they do, but by what they reject and what they praise. This highlights the fundamental moral commitments that guide their actions."
+    },
+    {
+      "device": "Synthetic Parallelism",
+      "description": "The second or third line develops, expands, or completes the thought of the first line.",
+      "verses": "v. 2 ('does what is right,' 'and speaks truth in his heart'); v. 4 ('stands by his oath even to his hurt')",
+      "function": "Builds a layered and comprehensive portrait of righteousness. It moves from external action ('does what is right') to internal motivation ('speaks truth in his heart') and from commitment ('oath') to costly self-sacrifice ('even to his hurt')."
+    },
+    {
+      "device": "Anaphora with Negation (Astrophoric Repetition)",
+      "description": "The repetition of the negative particle 'not' (לֹא) at the beginning of successive lines to build a powerful definition by exclusion.",
+      "verses": "vv. 3-5 ('whose tongue is not...', 'has not done...', 'not taken...', 'who has never lent...')",
+      "function": "Creates a strong rhythmic and rhetorical effect, building a profile of the righteous person by itemizing the evils they shun. This technique emphasizes the moral discipline and boundary-setting required for true holiness."
+    },
+    {
+      "device": "Inclusio",
+      "description": "A structural device where a word, phrase, or theme at the beginning of a unit is repeated at its end, creating a frame for the text.",
+      "verses": "v. 1 ('dwell' / 'sojourn') and v. 5b ('never be shaken')",
+      "function": "The poem opens with a question about *where* one may dwell with God and closes with the answer: the one who lives ethically will achieve an unshakable state of being. The 'dwelling' is thus reframed from a physical place to a spiritual condition of divine security, creating a satisfying theological and structural unity."
+    },
+    {
+      "device": "Chiasmus",
+      "description": "An ABBA structure where the second half of a passage mirrors the first in reverse order.",
+      "verses": "v. 2 (Integrity in Walk [Action] -> Truth in Speech [Words]) and v. 3 (Control of Speech [Words] -> Integrity in Action [Action])",
+      "function": "This subtle structure intricately links the two opening and closing verses of the ethical description, binding together the core concepts of conduct (walk/action) and communication (speech/words) as the inseparable foundations of a blameless life."
+    }
+  ],
+  "research_questions": [
+    "What is the semantic range and theological weight of the term *tamim* (תָּם, 'blameless, whole') here, and how does it connect to concepts of integrity in priestly and wisdom literature (e.g., Genesis 6:9, Proverbs)?",
+    "How do the three epithets for the righteous person's associates in v. 3-4 (*re'ehu* [neighbor], *qarov* [kinsman/close one], *yirei YHWH* [fearers of the LORD]) delineate the expanding circles of human responsibility?",
+    "What does the verb *yachbed* (יְכַבֵּד) 'honors' imply in v. 4 beyond mere respect? Does it suggest active patronage, public praise, or a similar social behavior towards the God-fearing?",
+    "What is the specific cultural and economic context of the prohibition against interest (*neshech*) in v. 5a, and why is it paired with the prohibition against bribery (*shochad*) as the final tests of character?",
+    "How does the imagery of 'dwelling' and 'sojourning' in Psalm 15 function in contrast to its use in other pilgrimage Psalms (e.g., Psalm 84, Psalm 122) to prioritize ethical access over physical access?",
+    "Is there a deliberate chiastic structure in vv. 2-4 (A: Blameless walk, B: Truthful heart, B': Evil tongue, A': Harming neighbor), and if so, what does it emphasize about the relationship between inner disposition and outward action?"
+  ],
+  "working_notes": "The psalm's elegance lies in its transformation of a spatial question into an ethical answer. The focus is relentlessly social; it is not a meditation on abstract piety but a practical guide for living in community. The gradual expansion of the ethical requirements from the personal ('in his heart') to the interpersonal ('neighbor,' 'kinsman') to the economic ('interest,' 'bribe') shows that true worship permeates every sphere of life. The connection to the Ugaritic 'Entry Liturgy' genre is compelling, as it provides a ritual context, but Psalm 15 uniquely subverts that context by replacing ritual requirements with moral ones. This is a highly distilled piece of Hebrew poetry, every word serving a precise theological and poetic function. The concluding promise of stability ('never be shaken') is a masterstroke, reframing the entire quest as one for eternal security, not just temporary temple access."
+}

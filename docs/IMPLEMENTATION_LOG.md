@@ -7,19 +7,40 @@ This file now contains only recent sessions (150-180) for easier reference.
 
 ---
 
-## Session 180 - 2025-12-07 (Phrase Search Order Guarantee Fix)
+## Session 180 - 2025-12-07 (Phrase Search Fixes - Parts 1 & 2)
 
 ### Objective
-Fix critical bug where phrase searches return 0 results even for phrases from the source verse itself, due to word order differences between LLM's conceptual phrases and actual verse text.
+Fix TWO critical bugs causing phrase searches to return 0 results:
+1. **Part 1**: Word order differences between LLM's conceptual phrases and actual verse text
+2. **Part 2**: Maqqef (־) being removed without replacing with space, concatenating words
 
 ### Problem Analysis
 
-#### The Specific Failure
+#### Part 1: Word Order Issue (Psalm 15)
 Psalm 15:3 phrase search "נשא חרפה" (nasa charapah - "bear reproach"):
 - **Query**: "נשא חרפה" (bear reproach) - LLM's conceptual phrase
 - **Actual verse**: "וְחֶרְפָּה לֹא־נָשָׂא" (and reproach NOT bear)
 - **Issue**: Words in REVERSE order with intervening word "לא" (not)
 - **Result**: 0 matches (SHOULD find at least Psalm 15:3!)
+
+#### Part 2: Maqqef Concatenation Issue (Psalm 16)
+Psalm 16 had 4 phrases returning 0 results due to word concatenation:
+
+1. **"טובתי בלעליך"** (Search 1) - From verse 2
+   - LLM phrase: "טוֹבָתִי בַּל־עָלֶיךָ" (my good not apart from you)
+   - After vowel removal: "טובתי בלעליך" (2 words concatenated)
+   - Should be: "טובתי בל עליך" (3 separate words)
+
+2. **"קדושים אשרבארץ"** (Search 2) - From verse 3
+   - LLM phrase: "קְדוֹשִׁים אֲשֶׁר־בָּאָרֶץ" (holy ones who are in the land)
+   - After vowel removal: "קדושים אשרבארץ" (2 words concatenated)
+   - Should be: "קדושים אשר בארץ" (3 separate words)
+
+**Root Cause**:
+- Maqqef (־, U+05BE) is at position 1470 in Unicode
+- Vowel point removal range is U+0591-U+05C7 (1425-1479)
+- Maqqef IS in this range and gets removed
+- But it's not being replaced with a space, causing word concatenation
 
 #### Root Cause
 1. Micro analyst LLM extracts "interesting phrases" conceptually
@@ -83,17 +104,33 @@ Psalm 15:3 phrase search "נשא חרפה" (nasa charapah - "bear reproach"):
 - **Fix**: Skip empty words in matching logic
 - **Code**: `if not vword or not qword: continue`
 
+**Bug 3: Maqqef Concatenation**
+- **Issue**: Maqqef (־, U+05BE) removed by vowel point regex, concatenating words
+- **Fix**: Replace maqqef with space BEFORE removing vowel points
+- **Code**: `phrase_with_spaces = phrase.replace('\u05BE', ' ')`
+- **Applied to**:
+  - `_extract_exact_phrases_from_discoveries()` (lines 969-974, 986-988)
+  - `_extract_all_phrase_forms_from_verse()` (lines 1118-1120)
+  - `_query_in_verse()` (lines 1019-1021)
+  - `_extract_exact_form_from_verse()` (lines 1061-1063)
+
 ### Testing
 
-Created two test scripts:
-1. **test_phrase_order_simple.py**: Standalone test with Psalm 15:3 text
-2. **test_phrase_debug.py**: Detailed debug output showing word-by-word matching
+Created test scripts:
+1. **test_phrase_order_simple.py**: Standalone test with Psalm 15:3 text (Part 1)
+2. **test_phrase_debug.py**: Detailed debug output showing word-by-word matching (Part 1)
+3. **debug_maqqef.py**: Tests maqqef handling with Psalm 16 phrases (Part 2)
 
 **Test Results**:
+
+**Part 1 - Word Order**:
 - Query "נשא חרפה" correctly extracts "וחרפה לאנשא" as alternate ✅
 - Query "חרפה נשא" also extracts same form ✅
 - Extracted forms match original verse ✅
-- All tests pass ✅
+
+**Part 2 - Maqqef**:
+- "טוֹבָתִי בַּל־עָלֶיךָ" → "טובתי בל עליך" (2→3 words) ✅
+- "קְדוֹשִׁים אֲשֶׁר־בָּאָרֶץ" → "קדושים אשר בארץ" (2→3 words) ✅
 
 ### Files Modified
 
@@ -110,15 +147,19 @@ Created two test scripts:
 
 ### Expected Impact
 
-**Before Fix**:
-- Phrase "נשא חרפה" from Psalm 15: 0 results
-- Any phrase with different word order: 0 results
-- Phrases with intervening words: 0 results
+**Before Fixes**:
+- Part 1: Phrase "נשא חרפה" from Psalm 15: 0 results (word order)
+- Part 1: Any phrase with different word order: 0 results
+- Part 2: Phrase "טובתי בלעליך" from Psalm 16: 0 results (concatenation)
+- Part 2: Phrase "קדושים אשרבארץ" from Psalm 16: 0 results (concatenation)
+- Psalm 16 had 4 phrases total failing due to maqqef issue
 
-**After Fix**:
-- Phrase "נשא חרפה": >= 1 result (finds Psalm 15:3)
-- All phrases: Guaranteed to find source verse
-- Also finds other instances with LLM's conceptual order
+**After Fixes**:
+- Part 1: Phrase "נשא חרפה": >= 1 result (finds Psalm 15:3)
+- Part 1: All phrases: Guaranteed to find source verse
+- Part 2: "טובתי בלעליך" → "טובתי בל עליך": now searchable ✅
+- Part 2: "קדושים אשרבארץ" → "קדושים אשר בארץ": now searchable ✅
+- Part 2: All phrases with maqqef: proper word separation ✅
 
 **Performance**:
 - Only processes phrases (2+ words), not single words
@@ -128,14 +169,18 @@ Created two test scripts:
 
 ### Success Criteria
 
-1. ✅ Psalm 15 phrase "נשא חרפה" now returns >= 1 result
-2. ✅ All tests pass without regressions
-3. ⏳ Need to verify: Full Psalm 15 pipeline run with no zero-result phrases
-4. ⏳ Need to verify: No significant performance degradation
+1. ✅ Part 1: Psalm 15 phrase "נשא חרפה" now returns >= 1 result
+2. ✅ Part 2: Psalm 16 phrase "טובתי בלעליך" properly separated to 3 words
+3. ✅ Part 2: Psalm 16 phrase "קדושים אשרבארץ" properly separated to 3 words
+4. ✅ All tests pass without regressions
+5. ⏳ Need to verify: Full Psalm 16 pipeline run with no zero-result phrases
+6. ⏳ Need to verify: No significant performance degradation
 
 ### Next Steps
 
-1. Run full Psalm 15 pipeline to verify all phrase searches find results
+1. Run full Psalm 16 pipeline to verify both fixes work together:
+   - Part 1: Phrases with word order differences find source verses
+   - Part 2: Phrases with maqqef are properly separated
 2. Monitor for any performance issues
 3. Consider adding maximum span length limit if needed (currently unlimited)
 4. Document this behavior for future reference

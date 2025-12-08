@@ -1,0 +1,165 @@
+{
+  "psalm_number": 20,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Standard superscription formula (לַמְנַצֵּחַ + מִזְמוֹר + לְדָוִֽד). Curious: LXX adds definite articles (ὁ τέλος, ὁ δαυίδ), treating 'David' as proper name. The term לַמְנַצֵּחַ (lamnatseach) remains enigmatic—'for the leader/director' suggests liturgical performance context, supporting thesis of ritual setting.",
+      "lexical_insights": [
+        "לַמְנַצֵּחַ"
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Confirms royal psalm genre and liturgical performance setting from thesis",
+      "phonetic_transcription": "lam-nats-**TSĒ**-aḥ miz-**MŌR** lə-dhā-**WIDH**"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Opens with jussive יַֽעַנְךָ֣ (ya'ancha) creating liturgical wish-prayer. Interesting: שֵׁם ('name') appears as active agent—'may the name... keep you safe' (יְ֝שַׂגֶּבְךָ֗). Not 'God of Jacob' but 'name of God of Jacob'—name theology is foregrounded immediately. Sound pattern: ya'ancha... yasaggevcha (2nd person suffixes create phonetic cohesion).",
+      "lexical_insights": [
+        "יְשַׂגֶּבְךָ",
+        "שֵׁם"
+      ],
+      "figurative_analysis": [
+        "name as protective power—metonymy or hypostatization?"
+      ],
+      "thesis_connection": "Establishes name theology (v.2 → v.6 → v.8) and jussive prayer pattern supporting thesis",
+      "phonetic_transcription": "**YA**-ʿan-khā yə-hō-**WĀH** bə-**YŌM** tsā-**RĀH** yə-sa-gev-**KHĀ** **SHĒM**  'e-lō-**HĒY** ya-ʿa-**QŌV**"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Spatial precision: מִקֹּ֑דֶשׁ (miqqodesh) 'from sanctuary' parallel to וּ֝מִצִּיּ֗וֹן (umitsiyyon) 'from Zion'—dual source of divine help. Both use מִן prefix (from). Verbs: יִשְׁלַֽח (yishlach) 'may he send' and יִסְעָדֶֽךָּ (yis'adekka) 'may he sustain'—military help vocabulary. Curious: help originates spatially from sanctuary/Zion, not just 'from God.'",
+      "lexical_insights": [
+        "עֶזְרְךָ",
+        "יִסְעָדֶֽךָּ"
+      ],
+      "figurative_analysis": [
+        "sanctuary as source/origin point of divine assistance"
+      ],
+      "thesis_connection": "Establishes earthly sanctuary (v.3) preparing for heavenly sanctuary (v.7)—thesis's spatial movement",
+      "phonetic_transcription": "yish-laḥ-ʿez-**RKHĀ** miq-**QŌ**-dhesh ū-mits-tsiy-**YŌN** yis-ʿā-**DHEKH**-khā"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Two sacrifice types: מִנְחֹתֶ֑ךָ (minchoteha) 'meal offerings' and עוֹלָתְךָ֖ (olatecha) 'burnt offerings.' Verb יְדַשְּׁנֶ֣ה (yedashneh) from דשן = 'make fat/accept favorably'—unusual anthropomorphic divine response to sacrifice. SELAH pause creates liturgical caesura after sacrifice mention, possibly indicating ritual action moment. Fascinating: God 'remembers' (יִזְכֹּ֥ר) meal offerings—memory vocabulary.",
+      "lexical_insights": [
+        "יְדַשְּׁנֶ֣ה",
+        "מִנְחֹתֶ֑ךָ",
+        "עוֹלָתְךָ"
+      ],
+      "figurative_analysis": [
+        "'making fat' as metaphor for divine acceptance—sensory/physical language"
+      ],
+      "thesis_connection": "Sacrifices mentioned in thesis as potential source of oracle moment, but not analyzed in detail",
+      "phonetic_transcription": "yiz-**KŌR** kol-min-ḥō-**THE**-khā wə-ʿō-lā-thə-**KHĀ** yə-dhash-**SHNEH** **SE**-lāh"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Threefold desire vocabulary: כִלְבָבֶ֑ךָ (chilevavecha) 'according to your heart,' עֲצָתְךָ֥ (atzatecha) 'your plan/counsel,' and implied מִשְׁאֲלוֹתֶֽיךָ (mishaloteha) from v.6. Root מלא (male') 'fulfill/fill' appears—totality language. Interesting: royal interiority emphasized—heart, plan. Not just external victory but alignment of royal will with divine will.",
+      "lexical_insights": [
+        "כִלְבָבֶ֑ךָ",
+        "עֲצָתְךָ"
+      ],
+      "figurative_analysis": [
+        "heart = desire/will",
+        "counsel = strategic planning"
+      ],
+      "thesis_connection": "Supports thesis's fulfillment vocabulary (כֹּל twice in vv.5-6) but interior/exterior dimension not noted",
+      "phonetic_transcription": "yi-ten-lə-**KHĀ** khil-vā-**VE**-khā wə-khol-ʿa-tsā-thə-**KHĀ** yə-mal-**LĒ'**"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Voice shift: נְרַנְּנָ֤ה (nerannena) 'may WE shout'—community joins royal petition. Military imagery: נִדְגֹּ֑ל (nidgol) 'array banners'—from דגל, rare verb form (only here in Hiphil). Victory (יְשׁוּעָה) and fulfillment (מלא) themes converge. Tripartite structure: shout in your victory / array banners in God's name / may LORD fulfill. Sound: nə-ran-nə-na... ni-də-gol (nasal alliteration?).",
+      "lexical_insights": [
+        "נְרַנְּנָ֤ה",
+        "נִדְגֹּ֑ל",
+        "בִּ֘ישׁ֤וּעָתֶ֗ךָ"
+      ],
+      "figurative_analysis": [
+        "banners as visual representation of divine allegiance"
+      ],
+      "thesis_connection": "Thesis notes voice shift and fulfillment repetition, but banner imagery unexplored—cultic vs. military?",
+      "phonetic_transcription": "nə-ran-**NNĀH**  biy-shū-ʿā-**THE**-khā ū-və-shēm-'e-lō-**HĒY**-nū nidh-**GŌL** yə-mal-**LĒ'** yə-hō-**WĀH** kol-mish-'a-lō-**THEY**-khā"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "THE PIVOT. עַתָּ֤ה יָדַ֗עְתִּי (atta yadati) 'now I know'—perfect tense, 1st singular. WHO speaks? Prophet? King? Priest? מְשִׁ֫יח֥וֹ (meshicho) 'his anointed'—3rd person shift (from 2nd person 'you' to 'his anointed'). Spatial vertical: מִשְּׁמֵ֣י קׇדְשׁ֑וֹ (mishemei kodsho) 'from heavens of his holiness.' Military divine warrior: בִּ֝גְבֻר֗וֹת יֵ֣שַׁע יְמִינֽוֹ (bigevurot yesha yemino) 'with mighty victories of his right arm.' Sound: gevurot... yesha... yemino (y-alliteration?).",
+      "lexical_insights": [
+        "עַתָּ֤ה יָדַ֗עְתִּי",
+        "מְשִׁ֫יח֥וֹ",
+        "מִשְּׁמֵ֣י",
+        "בִּ֝גְבֻר֗וֹת"
+      ],
+      "figurative_analysis": [
+        "right arm = military power",
+        "heavenly sanctuary = throne room"
+      ],
+      "thesis_connection": "Thesis identifies this as pivot/oracle moment, but speaker identity and pronoun shift deserves more attention",
+      "phonetic_transcription": "ʿa-**TĀH** yā-**DHAʿ**-tiy **KIY** hō-**SHI**-yaʿ  yə-hō-**WĀH** mə-shiy-**ḤŌ** ya-ʿa-nē-**HŪ** mish-**SHMĒY** qodh-**SHŌ** bigh-vu-**RŌTH** **YĒ**-shaʿ yə-miy-**NŌ**"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Demonstrative pronouns: אֵ֣לֶּה... וְאֵ֣לֶּה... וַאֲנַ֓חְנוּ (elleh... ve'elleh... va'anachnu) 'these... and these... but we'—rhetorical pointing structure. Military hardware: בָ֭רֶכֶב (barekhev) 'with chariots' and בַסּוּסִ֑ים (bassusim) 'with horses'—standard ancient Near Eastern power symbols. Verb נַזְכִּֽיר (nazkhir) Hiphil of זכר 'we invoke/remember/mention'—same root as v.4 'remember.' Name theology climaxes: בְּשֵׁם־יְהֹוָ֖ה אֱלֹהֵ֣ינוּ (beshem-YHWH eloheinu) 'in name of LORD our God'—full covenant formula.",
+      "lexical_insights": [
+        "אֵ֣לֶּה",
+        "נַזְכִּֽיר",
+        "בָ֭רֶכֶב"
+      ],
+      "figurative_analysis": [
+        "chariots/horses = metonymy for military power/trust in armaments"
+      ],
+      "thesis_connection": "Thesis highlights chiastic structure and theological polemic, but verb נַזְכִּֽיר ambiguity not explored",
+      "phonetic_transcription": "**'ĒL**-leh vā-re-**KHEV** wə-**'ĒL**-leh vas-sū-**SIY**-m wa-'a-**NAḤ**-nū  bə-shēm-yə-hō-**WĀH** 'e-lō-**HĒY**-nū naz-**KIY**-r"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Perfect tense verbs (completed action): כָּרְע֣וּ (kare'u) 'they have bowed down,' וְנָפָ֑לוּ (venafalu) 'and fallen,' קַּ֝֗מְנוּ (qamnu) 'we have risen,' וַנִּתְעוֹדָֽד (vanitoʿadad) 'and stand firm.' Prophetic perfect treating future as accomplished. Physical posture contrast: bow/fall vs. rise/stand. Root עוד (ʿud) in Hithpolel = 'stand firm/be restored'—rare form. Sound: kareʿu... nafalu... qamnu... nitoʿadad (u-ending pattern in verbs).",
+      "lexical_insights": [
+        "כָּרְע֣וּ",
+        "וַנִּתְעוֹדָֽד"
+      ],
+      "figurative_analysis": [
+        "bowing/falling = military defeat",
+        "rising/standing = resilience/victory"
+      ],
+      "thesis_connection": "Thesis notes prophetic perfect and confidence, but posture imagery and rare Hithpolel form unexplored",
+      "phonetic_transcription": "hēm-**MĀH** kā-rə-**ʿŪ** wə-nā-**FĀ**-lū wa-'a-**NAḤ**-nū **QQAM**-nū wan-nith-ʿō-**DHĀDH**"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Imperative הוֹשִׁ֑יעָה (hoshiʿah) 'save/grant victory!' returns to petition after confidence. Ambiguous phrase: הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ (hammelech yaʿanenu)—'the king answer us' OR 'O King, answer us.' Is הַ֝מֶּ֗לֶךְ vocative (addressing God as King) or subject (human king answers)? Inclusio: יַעֲנֵ֥נוּ (yaʿanenu) 'answer us' echoes v.2 יַֽעַנְךָ֣ (yaʿancha) 'answer you' and v.7 יַ֭עֲנֵהוּ (yaʿanehu) 'answer him.' Temporal phrase: בְיוֹם־קׇרְאֵֽנוּ (beyom-qoreinu) 'in day of our calling' parallels v.2 בְּי֣וֹם צָרָ֑ה (beyom tsarah) 'in day of trouble.'",
+      "lexical_insights": [
+        "הַ֝מֶּ֗לֶךְ",
+        "יַעֲנֵ֥נוּ"
+      ],
+      "figurative_analysis": [
+        "'day of calling' = crisis moment"
+      ],
+      "thesis_connection": "Thesis notes ambiguity and double reference but doesn't fully explore syntactic possibilities or LXX resolution",
+      "phonetic_transcription": "yə-hō-**WĀH** hō-**SHIY**-ʿāh ham-**ME**-lekh ya-ʿa-**NĒ**-nū və-yōm-qor-**'Ē**-nū **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Triple 'answer' structure (vv.2, 7, 10) with shifting pronouns (you/him/us) traces communal participation in royal victory",
+    "Name theology progression: 'name of God of Jacob' (v.2) → 'in name of our God' (v.6) → 'in name of LORD our God' (v.8)—covenant intensification",
+    "Jussive mood (vv.2-6) → perfect tense confidence (v.7) → prophetic perfect (v.9) → imperative petition (v.10)—complex verbal aspect journey",
+    "Spatial movement: sanctuary/Zion (v.3) → heavenly sanctuary (v.7)—vertical ascent",
+    "Sound patterns deserve closer attention: ya'ancha... yasaggevcha (v.2), gevurot... yesha... yemino (v.7), kareʿu... nafalu... qamnu... nitoʿadad (v.9)",
+    "Military vocabulary: help (v.3), victory/salvation (vv.6,7,10), chariots/horses (v.8), bow/fall/rise/stand (v.9)—but transformed into theological polemic",
+    "Sacrifice vocabulary (v.4) creates ritual moment but function in liturgy underdeveloped—is this when oracle comes?",
+    "Banner imagery (v.6) unexplored—cultic? military? both?"
+  ],
+  "interesting_questions": [
+    "Who is the 'I' who speaks in v.7 (עַתָּ֤ה יָדַ֗עְתִּי)—prophet, priest, king, or collective voice? What liturgical role does this speaker have?",
+    "Why does the psalm shift from addressing the king as 'you' (vv.2-6) to referring to 'his anointed' in 3rd person (v.7)? Is this a genre signal of prophetic oracle?",
+    "What is the precise function of נַזְכִּֽיר (nazkhir) in v.8—'remember,' 'invoke,' 'call upon,' 'boast in,' or 'proclaim'? How does this relate to זכר (remember) in v.4?",
+    "Is the syntactic ambiguity in v.10 (הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ) intentional theological wordplay allowing both 'O King' (YHWH) and 'may the king' (human) simultaneously?",
+    "What does נִדְגֹּ֑ל (nidgol) 'array banners' mean in v.6—literal military standards, cultic procession banners, or metaphorical 'exalt'?",
+    "Why these specific sacrifice types in v.4 (מִנְחֹתֶ֑ךָ meal offerings and עוֹלָתְךָ֖ burnt offerings)—are they standard pre-battle ritual?",
+    "What is the rare Hithpolel form וַנִּתְעוֹדָֽד (vanitoʿadad) doing in v.9—reflexive strengthening or passive being-strengthened? What theological agency is implied?",
+    "How does עַתָּ֤ה (atta) function in v.7—temporal 'now' (liturgical present moment) or logical 'therefore' (based on sacrifices/prayer)?",
+    "Why does the psalm move from 'name of Jacob's God' (v.2) to 'name of LORD our God' (v.8)—is this covenant name intensification significant?",
+    "What sound patterns are created by the Hebrew phonetics—are there alliterations or assonances that create rhetorical force?",
+    "Does the perfect tense in v.9 (כָּרְע֣וּ וְנָפָ֑לוּ קַּ֝֗מְנוּ וַנִּתְעוֹדָֽד) indicate battle already fought, or is this prophetic perfect expressing such confidence that future is described as past?",
+    "How does the spatial theology (sanctuary → Zion → heavenly sanctuary) relate to ancient Israelite temple cosmology and the concept of temple as axis mundi?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on נַזְכִּֽיר (semantic range of זכר in Hiphil), נִדְגֹּ֑ל (דגל as verb vs. noun), וַנִּתְעוֹדָֽד (עוד in Hithpolel), יְדַשְּׁנֶ֣ה (דשן cultic usage)\nCONCORDANCE: Track 'answer' formula variations, 'name' theology across Psalter, sacrifice terminology combinations, prophetic 'now I know' formulas\nGRAMMAR: Analyze syntactic ambiguity in v.10 (הַ֝מֶּ֗לֶךְ as vocative vs. subject), verbal aspect shifts (jussive → perfect → imperative), pronoun shifts (2nd → 3rd → 1st plural)\nSOUND PATTERNS: Use phonetic transcription to identify alliteration/assonance in vv.2,7,9; examine name repetition acoustic effect\nFIGURATIVE: All military imagery (chariots, horses, banners, right arm, bow/fall/rise), name as agent (v.2), spatial theology (sanctuary movement)\nCOMMENTARY: Focus on v.7 speaker identity, v.10 ambiguity, v.6 banner imagery, v.4 sacrifice types, v.8 verb choice, prophetic perfect in v.9"
+}

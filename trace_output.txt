@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "c:\Users\ariro\OneDrive\Documents\Psalms\trace_psalm_15_words.py", line 103, in <module>
+    trace_psalm_15()
+    ~~~~~~~~~~~~~~^^
+  File "c:\Users\ariro\OneDrive\Documents\Psalms\trace_psalm_15_words.py", line 32, in trace_psalm_15
+    print(f"  Pos {pos:2d}: {word:15s} | cons: {cons:15s} | split: {split:15s}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 10-18: character maps to <undefined>

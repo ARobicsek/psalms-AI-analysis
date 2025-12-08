@@ -1,0 +1,444 @@
+{
+  "psalm_number": 20,
+  "pipeline_start": "2025-12-04T22:39:58.840447",
+  "pipeline_end": "2025-12-04T23:12:38.502680",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1626,
+      "input_token_estimate": 542,
+      "output_char_count": 19320,
+      "output_token_estimate": 6440,
+      "duration_seconds": 136.37879610061646,
+      "completion_date": null,
+      "timestamp": "2025-12-04T22:39:58.845455"
+    },
+    "micro_analysis": {
+      "input_char_count": 19320,
+      "input_token_estimate": 6440,
+      "output_char_count": 243924,
+      "output_token_estimate": 81308,
+      "duration_seconds": 522.1608188152313,
+      "completion_date": null,
+      "timestamp": "2025-12-04T22:44:15.252731"
+    },
+    "synthesis": {
+      "input_char_count": 263246,
+      "input_token_estimate": 87748,
+      "output_char_count": 58573,
+      "output_token_estimate": 19524,
+      "duration_seconds": 494.7176671028137,
+      "completion_date": null,
+      "timestamp": "2025-12-04T22:54:57.485947"
+    },
+    "master_editor": {
+      "input_char_count": 303711,
+      "input_token_estimate": 101237,
+      "output_char_count": 40738,
+      "output_token_estimate": 13579,
+      "duration_seconds": 326.2904906272888,
+      "completion_date": "2025-12-04T23:12:38.502680",
+      "timestamp": "2025-12-04T23:05:13.327807"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "לַמְנַצֵּחַ",
+        "reason": "Enigmatic superscription term - uncertain liturgical/musical function debated by scholars"
+      },
+      {
+        "word": "יְשַׂגֶּבְךָ",
+        "reason": "Rare verb in Piel - need semantic range of 'set on high/protect' and defensive imagery"
+      },
+      {
+        "word": "יִסְעָדֶךָּ",
+        "reason": "Military support vocabulary - distinguish from other 'help' terms, tactical nuance"
+      },
+      {
+        "word": "יְדַשְּׁנֶה",
+        "reason": "Unusual anthropomorphic divine response to sacrifice - 'make fat' as acceptance metaphor"
+      },
+      {
+        "word": "נִדְגֹּל",
+        "reason": "Rare Hiphil form of דגל - only occurrence as verb, uncertain whether literal banners or metaphorical"
+      },
+      {
+        "word": "מְשִׁיחוֹ",
+        "reason": "Anointed one theology - semantic development and royal/cultic usage patterns"
+      },
+      {
+        "word": "בִּגְבֻרוֹת",
+        "reason": "Plural construct 'mighty acts' - military vs. salvation acts distinction"
+      },
+      {
+        "word": "נַזְכִּיר",
+        "reason": "Critical ambiguity - Hiphil of זכר could mean remember/invoke/proclaim/boast, determines theological polemic"
+      },
+      {
+        "word": "וַנִּתְעוֹדָד",
+        "reason": "Rare Hithpolel form - only occurrence in this stem, reflexive vs. passive agency question"
+      },
+      {
+        "word": "עַתָּה",
+        "reason": "Pivot word in v.7 - temporal 'now' vs. logical 'therefore' affects liturgical interpretation"
+      },
+      {
+        "word": "מִנְחָה",
+        "reason": "Specific sacrifice type paired with burnt offering - need pre-battle ritual context"
+      },
+      {
+        "word": "עֹלָה",
+        "reason": "Burnt offering paired with meal offering - standard ritual combination significance"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "יענך",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Track 'answer' formula variations (vv.2,7,10) and divine response patterns"
+      },
+      {
+        "query": "בשם",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Name theology progression - 'in name of' invocation formula across Psalter"
+      },
+      {
+        "query": "משיחו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Anointed one references - royal vs. priestly vs. eschatological usage"
+      },
+      {
+        "query": "עתה ידעתי",
+        "scope": "Tanakh",
+        "level": "voweled",
+        "purpose": "Prophetic 'now I know' recognition formula - oracle moment parallels"
+      },
+      {
+        "query": "מקדש",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Sanctuary as spatial origin of divine help - temple theology"
+      },
+      {
+        "query": "משמי קדשו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Heavenly sanctuary references - vertical spatial theology"
+      },
+      {
+        "query": "ברכב",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Chariots as military power symbol - trust polemic contexts"
+      },
+      {
+        "query": "כרעו ונפלו",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Bow/fall military defeat imagery - prophetic perfect usage"
+      },
+      {
+        "query": "קמנו ונתעודד",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Rise/stand firm resilience vocabulary - rare Hithpolel parallels"
+      },
+      {
+        "query": "ביום צרה",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Day of trouble formula - crisis terminology in lament/royal psalms"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Name as protective agent/shield - hypostatization or metonymy? | Vehicle: name | Related terms: name, shield, protect, guard, keep safe, defend, cover, name of God, invoke name, call upon name, power of name",
+        "vehicle": "name",
+        "vehicle_terms": [
+          "name",
+          "name",
+          "shield",
+          "protect",
+          "guard",
+          "keep safe",
+          "defend",
+          "cover",
+          "name of God",
+          "invoke name",
+          "call upon name",
+          "power of name"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Sanctuary/Zion as spatial source - temple as origin point of divine action | Vehicle: sanctuary | Related terms: sanctuary, temple, Zion, holy place, dwelling, house, send from, dwell, presence, tabernacle, from sanctuary, from Zion",
+        "vehicle": "sanctuary",
+        "vehicle_terms": [
+          "sanctuary",
+          "sanctuary",
+          "temple",
+          "Zion",
+          "holy place",
+          "dwelling",
+          "house",
+          "send from",
+          "dwell",
+          "presence",
+          "tabernacle",
+          "from sanctuary",
+          "from Zion"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Divine 'remembering' and 'making fat' sacrifice - sensory/anthropomorphic divine response | Vehicle: remember | Related terms: remember, recall, memorialize, fat, accept, favorable, pleasing, offering, sacrifice, burnt offering, meal offering",
+        "vehicle": "remember",
+        "vehicle_terms": [
+          "remember",
+          "remember",
+          "recall",
+          "memorialize",
+          "fat",
+          "accept",
+          "favorable",
+          "pleasing",
+          "offering",
+          "sacrifice",
+          "burnt offering",
+          "meal offering"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Heart and counsel as interior royal agency - alignment of human/divine will | Vehicle: heart | Related terms: heart, desire, will, counsel, plan, purpose, intention, fulfill, grant, according to heart, inner desire",
+        "vehicle": "heart",
+        "vehicle_terms": [
+          "heart",
+          "heart",
+          "desire",
+          "will",
+          "counsel",
+          "plan",
+          "purpose",
+          "intention",
+          "fulfill",
+          "grant",
+          "according to heart",
+          "inner desire"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Banner imagery - military standards or cultic procession symbols? | Vehicle: banner | Related terms: banner, standard, flag, ensign, raise, lift up, array, display, rally, signal, military banner, victory banner",
+        "vehicle": "banner",
+        "vehicle_terms": [
+          "banner",
+          "banner",
+          "standard",
+          "flag",
+          "ensign",
+          "raise",
+          "lift up",
+          "array",
+          "display",
+          "rally",
+          "signal",
+          "military banner",
+          "victory banner"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Right arm as divine military power - anthropomorphic warrior imagery | Vehicle: right hand | Related terms: right hand, arm, right arm, power, strength, might, victory, save, deliver, mighty acts, strong hand",
+        "vehicle": "right hand",
+        "vehicle_terms": [
+          "right hand",
+          "right hand",
+          "arm",
+          "right arm",
+          "power",
+          "strength",
+          "might",
+          "victory",
+          "save",
+          "deliver",
+          "mighty acts",
+          "strong hand"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Heavenly sanctuary as throne room - vertical spatial cosmology | Vehicle: heaven | Related terms: heaven, heavens, sky, above, high, holy heaven, dwelling place, throne, answer from heaven, from above",
+        "vehicle": "heaven",
+        "vehicle_terms": [
+          "heaven",
+          "heaven",
+          "heavens",
+          "sky",
+          "above",
+          "high",
+          "holy heaven",
+          "dwelling place",
+          "throne",
+          "answer from heaven",
+          "from above"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Chariots and horses as metonymy for military power/trust in armaments | Vehicle: chariot | Related terms: chariot, horse, cavalry, military, war, army, trust, rely, strength, power, chariots and horses, military might",
+        "vehicle": "chariot",
+        "vehicle_terms": [
+          "chariot",
+          "chariot",
+          "horse",
+          "cavalry",
+          "military",
+          "war",
+          "army",
+          "trust",
+          "rely",
+          "strength",
+          "power",
+          "chariots and horses",
+          "military might"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Physical posture as battle outcome - bow/fall vs. rise/stand military imagery | Vehicle: bow down | Related terms: bow, fall, collapse, kneel, prostrate, stumble, rise, stand, stand firm, upright, bow and fall, rise and stand",
+        "vehicle": "bow down",
+        "vehicle_terms": [
+          "bow down",
+          "bow",
+          "fall",
+          "collapse",
+          "kneel",
+          "prostrate",
+          "stumble",
+          "rise",
+          "stand",
+          "stand firm",
+          "upright",
+          "bow and fall",
+          "rise and stand"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "20:1",
+        "reason": "Superscription formula - how do commentators understand לַמְנַצֵּחַ and liturgical setting?"
+      },
+      {
+        "verse": "20:2",
+        "reason": "Name theology opening - traditional interpretation of 'name' as protective agent vs. metonymy"
+      },
+      {
+        "verse": "20:3",
+        "reason": "Dual spatial origin (sanctuary/Zion) - commentators on temple theology and divine presence"
+      },
+      {
+        "verse": "20:4",
+        "reason": "Sacrifice vocabulary and divine 'remembering/making fat' - ritual efficacy and anthropomorphism"
+      },
+      {
+        "verse": "20:5",
+        "reason": "Heart and counsel alignment - classical view on royal agency and divine will relationship"
+      },
+      {
+        "verse": "20:6",
+        "reason": "Banner imagery and voice shift to 'we' - communal participation and נִדְגֹּל interpretation"
+      },
+      {
+        "verse": "20:7",
+        "reason": "THE PIVOT - speaker identity ('I'), pronoun shift, oracle moment, heavenly answer - critical verse"
+      },
+      {
+        "verse": "20:8",
+        "reason": "Theological polemic against chariots/horses - trust theme and נַזְכִּיר ambiguity (invoke/remember/boast)"
+      },
+      {
+        "verse": "20:9",
+        "reason": "Prophetic perfect tense - battle already won or confidence declaration? Posture imagery"
+      },
+      {
+        "verse": "20:10",
+        "reason": "Syntactic ambiguity הַמֶּלֶךְ - O King (YHWH) vs. may the king (human) answer? Intentional double reference?"
+      }
+    ],
+    "lexicon_entries_count": 23,
+    "concordance_results": {
+      "יענך": 5,
+      "בשם": 25,
+      "משיחו": 28,
+      "עתה ידעתי": 0,
+      "מקדש": 15,
+      "משמי קדשו": 1,
+      "ברכב": 108,
+      "כרעו ונפלו": 54,
+      "קמנו ונתעודד": 116,
+      "ביום צרה": 4
+    },
+    "figurative_results": {
+      "total_instances_used": 180
+    },
+    "commentary_counts": {
+      "Radak": 10,
+      "Metzudat David": 10,
+      "Malbim": 9,
+      "Meiri": 9,
+      "Rashi": 7,
+      "Ibn Ezra": 9,
+      "Torah Temimah": 1
+    },
+    "sacks_references_count": 0,
+    "related_psalms_count": 1,
+    "related_psalms_list": [
+      33
+    ],
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 231882,
+    "research_bundle_tokens": 77294
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the precise function of שֵׁם ('name') theology in Deuteronomistic literature, and how does Psalm 20's threefold use of 'name' relate to the centralization of worship and divine presence theology in Deuteronomy 12-26?",
+      "How does the perfect tense עַתָּה יָדַעְתִּי ('Now I know') in v. 7 function liturgically—does it suggest a moment of prophetic oracle reception similar to Ps 12:5, and what ancient Near Eastern parallels exist for such ritual assurance formulas?",
+      "Who is the speaker in v. 7—the king, a prophet, a priest, or the community collectively? What are the implications of each possibility for understanding the psalm's liturgical performance?",
+      "What is the historical and theological background of the prohibition against trusting in chariots and horses (vv. 8-9), and how does this psalm relate to texts like Deut 17:16, Isa 30:15-16, 31:1, and Hos 14:3?",
+      "How does the term מְשִׁיחוֹ ('His anointed') function in v. 7 within the broader Psalter, and what does it reveal about the relationship between YHWH's kingship and the Davidic king's role as covenant mediator?",
+      "What is the nature of the sacrifices mentioned in v. 4 (מִנְחֹתֶךָ and עוֹלָתְךָ)—are these specifically pre-battle offerings, and what rituals might have accompanied them based on other biblical texts?",
+      "Is there a deliberate ambiguity in v. 10 regarding 'the King' (הַמֶּלֶךְ)—could this refer to both YHWH and the human king simultaneously, and how does such wordplay function theologically?",
+      "How does the spatial movement from earthly sanctuary (מִקֹּדֶשׁ, v. 3) to heavenly sanctuary (מִשְּׁמֵי קׇדְשׁוֹ, v. 7) relate to ancient Israelite temple theology and the concept of the temple as axis mundi?",
+      "What is the significance of the military imagery 'mighty victories of His right arm' (בִּגְבֻרוֹת יֵשַׁע יְמִינוֹ) in v. 7, and how does this language function elsewhere in divine warrior texts?",
+      "How does Psalm 20 function intertextually with Psalm 21, which appears to be a post-battle thanksgiving for the king's victory—are they a liturgical pair?",
+      "What Ugaritic or broader ancient Near Eastern parallels exist for royal pre-battle liturgies, and how does Israel's theology of covenant relationship (rather than appeasement) distinguish this psalm from surrounding cultures?"
+    ],
+    "micro_questions": [
+      "Who is the 'I' who speaks in v.7 (עַתָּ֤ה יָדַ֗עְתִּי)—prophet, priest, king, or collective voice? What liturgical role does this speaker have?",
+      "Why does the psalm shift from addressing the king as 'you' (vv.2-6) to referring to 'his anointed' in 3rd person (v.7)? Is this a genre signal of prophetic oracle?",
+      "What is the precise function of נַזְכִּֽיר (nazkhir) in v.8—'remember,' 'invoke,' 'call upon,' 'boast in,' or 'proclaim'? How does this relate to זכר (remember) in v.4?",
+      "Is the syntactic ambiguity in v.10 (הַ֝מֶּ֗לֶךְ יַעֲנֵ֥נוּ) intentional theological wordplay allowing both 'O King' (YHWH) and 'may the king' (human) simultaneously?",
+      "What does נִדְגֹּ֑ל (nidgol) 'array banners' mean in v.6—literal military standards, cultic procession banners, or metaphorical 'exalt'?",
+      "Why these specific sacrifice types in v.4 (מִנְחֹתֶ֑ךָ meal offerings and עוֹלָתְךָ֖ burnt offerings)—are they standard pre-battle ritual?",
+      "What is the rare Hithpolel form וַנִּתְעוֹדָֽד (vanitoʿadad) doing in v.9—reflexive strengthening or passive being-strengthened? What theological agency is implied?",
+      "How does עַתָּ֤ה (atta) function in v.7—temporal 'now' (liturgical present moment) or logical 'therefore' (based on sacrifices/prayer)?",
+      "Why does the psalm move from 'name of Jacob's God' (v.2) to 'name of LORD our God' (v.8)—is this covenant name intensification significant?",
+      "What sound patterns are created by the Hebrew phonetics—are there alliterations or assonances that create rhetorical force?",
+      "Does the perfect tense in v.9 (כָּרְע֣וּ וְנָפָ֑לוּ קַּ֝֗מְנוּ וַנִּתְעוֹדָֽד) indicate battle already fought, or is this prophetic perfect expressing such confidence that future is described as past?",
+      "How does the spatial theology (sanctuary → Zion → heavenly sanctuary) relate to ancient Israelite temple cosmology and the concept of temple as axis mundi?"
+    ],
+    "verse_count": 10
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5.1"
+  }
+}

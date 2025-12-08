@@ -1,6 +1,6 @@
 # Pipeline Summary Report: Psalm 1
 
-**Generated**: 2025-11-16 22:34:51
+**Generated**: 2025-12-03 23:00:40
 **Total Pipeline Duration**: 1465.4 seconds (24.4 minutes)
 
 ---
@@ -19,8 +19,8 @@
 | Step | Input Chars | Input Tokens (est) | Output Chars | Output Tokens (est) | Duration (s) |
 |------|-------------|-------------------|--------------|---------------------|--------------|
 | macro_analysis | 1,270 | 423 | 17,226 | 5,742 | 133.9 |
-| micro_analysis | 17,226 | 5,742 | 241,955 | 80,651 | 253.0 |
-| → research_bundle | — | — | 230,756 | 76,918 | — |
+| micro_analysis | 17,226 | 5,742 | 169,764 | 56,588 | 318.1 |
+| → research_bundle | — | — | 161,668 | 53,889 | — |
 | synthesis | 259,183 | 86,394 | 44,486 | 14,828 | 369.4 |
 | master_editor | 288,250 | 96,083 | 23,371 | 7,790 | 229.0 |
 
@@ -28,7 +28,7 @@
 
 ## Research Requests
 
-### Lexicon Requests (12)
+### Lexicon Requests (27)
 
 | # | Hebrew Word | Reason |
 |---|-------------|--------|
@@ -44,8 +44,23 @@
 | 10 | קוּם | Judicial standing (יָקֻמוּ) - forensic vs. resurrection semantics in judgment co... |
 | 11 | עֵדָה | Assembly term (עֲדַת צַדִּיקִים) - cultic, covenantal, eschatological usage patt... |
 | 12 | יָדַע | Divine knowing (יוֹדֵעַ) - epistemological vs. covenantal vs. constitutive/ontol... |
+| 13 | אַשְׁרֵי | Beatitude formula. A precise understanding of its meaning (happy, blessed, 'how ... |
+| 14 | רְשָׁעִים | The first term in the triad of adversaries. Its precise meaning and semantic ran... |
+| 15 | חַטָּאִים | The second term in the triad. To understand the 'staircase parallelism,' the spe... |
+| 16 | לֵצִים | The third and most intense term. Its connection to scoffing, mockery, and its LX... |
+| 17 | חֶפְצוֹ | Puzzling term for 'delight.' The lexicon needs to be consulted to see if it lean... |
+| 18 | יֶהְגֶּה | Puzzling verb for 'meditate.' Its phonetics and cognates suggest a low, continuo... |
+| 19 | שָׁתוּל | Puzzling passive participle. The lexicon must be consulted to see if 'planted' c... |
+| 20 | פַלְגֵי־מָיִם | Specific term for 'streams of water.' The BDB can elucidate whether it refers to... |
+| 21 | יַצְלִיחַ | Puzzling verb for 'prosper/succeed.' Does it imply material success, spiritual f... |
+| 22 | מֹץ | Specific term for 'chaff.' An agricultural and lexical definition is needed to f... |
+| 23 | תִדְּפֶנּוּ | The verb 'scatters.' The BDB can provide insight into its onomatopoeic qualities... |
+| 24 | יָקֻמוּ | Puzzling verb 'stand.' Its use in a legal/judgment context contrasts with v.1. T... |
+| 25 | עֲדַת צַדִּיקִים | The phrase 'assembly/congregation of the righteous.' Clarifying the semantic ran... |
+| 26 | יוֹדֵעַ | Theologically loaded verb 'knows.' This is the most critical term in v.6. The BD... |
+| 27 | תֹּאבֵד | The verb 'perish.' Its form (Niphal imperfect/passive) suggests 'is lost/comes t... |
 
-### Concordance Searches (13)
+### Concordance Searches (22)
 
 | # | Query | Scope | Level | Purpose |
 |---|-------|-------|-------|---------|
@@ -62,8 +77,17 @@
 | 11 | יודע יהוה דרך | Tanakh | consonantal | YHWH knows the way - divine epistemology and covenantal reco... |
 | 12 | דרך רשעים | Tanakh | consonantal | Way of wicked - two ways theology contrast patterns |
 | 13 | תאבד | Psalms | consonantal | Perishing - self-destruction vs. divine judgment semantics i... |
+| 14 | בעצת רשעים | Tanakh | consonantal | Trace the theme of rejecting the counsel of the wicked, a ce... |
+| 15 | ובדרך חטאים לא יעמד | Tanakh | consonantal | Investigate the combined phrase for 'way/path' of sinners, c... |
+| 16 | כי אם בתורת יהוה חפצו | Tanakh | consonantal | Explore the connection between 'delight' and 'Torah,' a core... |
+| 17 | ובתורתו יהגה יומם ולילה | Tanakh | consonantal | Investigate the practice of 'meditating' (הגה) on divine tex... |
+| 18 | עץ שתול על פלגי מים | Tanakh | consonantal | Trace the emblematic simile of a flourishing, watered tree a... |
+| 19 | כמץ אשר תדפנו רוח | Tanakh | consonantal | Find all instances of the chaff-in-the-wind metaphor to unde... |
+| 20 | לא יקומו רשעים במשפט | Tanakh | consonantal | Investigate the 'standing' in 'judgment' motif, exploring it... |
+| 21 | כי יודע יהוה דרך צדיקים | Tanakh | consonantal | Investigate the theological concept of divine 'knowing' (ידע... |
+| 22 | ודרך רשעים תאבד | Tanakh | consonantal | Search for the concept of the 'way of the wicked' 'perishing... |
 
-### Figurative Language Searches (11)
+### Figurative Language Searches (17)
 
 | # | Verse | Vehicle Terms | Reason |
 |---|-------|---------------|--------|
@@ -78,8 +102,14 @@
 | 9 | None | stand, stand, standing, stands | Standing in judgment - forensic/judicial metaphor ... |
 | 10 | None | know, know, knows, knowing | Divine knowing - covenantal recognition vs. episte... |
 | 11 | None | perish, perish, perishes, perishing | Way/path perishing - ontological dissolution and c... |
+| 12 | None | social interaction as movement, social i... | Spatial movement metaphor for social association. ... |
+| 13 | None | delight as sensual engagement, delight a... | Internal emotional state expressed through a physi... |
+| 14 | None | righteousness as flourishing tree, right... | Righteous person as a plant, characterized by root... |
+| 15 | None | wickedness as chaff, wickedness as chaff... | Wicked person as worthless, insubstantial agricult... |
+| 16 | None | judgment and community as standing, judg... | Judgment and community assembly as tests of legiti... |
+| 17 | None | divine knowledge as sustaining force, di... | Divine epistemology as an active, creative, and su... |
 
-### Commentary Requests (6)
+### Commentary Requests (12)
 
 | # | Verse | Reason |
 |---|-------|--------|
@@ -89,6 +119,12 @@
 | 4 | 1:4 | Chaff imagery brevity - how commentators explain dramatic structural a... |
 | 5 | 1:5 | Judgment and assembly language - traditional eschatology of יָקֻמוּ (s... |
 | 6 | 1:6 | Two ways theology climax - how commentators frame יוֹדֵעַ (YHWH's know... |
+| 7 | 1:1 | How do commentators define the triad of 'wicked, sinners, scoffers'? I... |
+| 8 | 1:2 | What is the traditional Jewish understanding of 'delighting' in the To... |
+| 9 | 1:3 | Theological significance of the passive 'planted' (שתול). Is this seen... |
+| 10 | 1:4 | How do classical commentators explain the stark contrast and brevity o... |
+| 11 | 1:5 | Interpretation of 'the judgment' (המשפט) and the 'assembly of the righ... |
+| 12 | 1:6 | How do commentators define God's 'knowing' (יודע)? Is it cognitive, co... |
 
 ---
 
@@ -115,30 +151,39 @@
 | יודע יהוה דרך | 1 |
 | דרך רשעים | 2 |
 | תאבד | 10 |
+| בעצת רשעים | 3 |
+| ובדרך חטאים לא יעמד | 25 |
+| כי אם בתורת יהוה חפצו | 1 |
+| ובתורתו יהגה יומם ולילה | 1 |
+| עץ שתול על פלגי מים | 12 |
+| כמץ אשר תדפנו רוח | 16 |
+| לא יקומו רשעים במשפט | 0 |
+| כי יודע יהוה דרך צדיקים | 1 |
+| ודרך רשעים תאבד | 2 |
 
-**Total concordance results**: 33
+**Total concordance results**: 94
 
 ### Figurative Language Results
 
 | Query/Verse | Instances Found |
 |-------------|-----------------|
-| total_instances_used | 360 |
+| total_instances_used | 28 |
 
-**Total figurative instances**: 360
+**Total figurative instances**: 28
 
 ### Commentary Results
 
 | Commentator | Entries |
 |-------------|---------|
-| Ibn Ezra | 5 |
-| Malbim | 5 |
-| Meiri | 6 |
-| Metzudat David | 6 |
-| Radak | 6 |
-| Rashi | 6 |
-| Torah Temimah | 5 |
+| Ibn Ezra | 10 |
+| Malbim | 10 |
+| Meiri | 12 |
+| Metzudat David | 12 |
+| Radak | 12 |
+| Rashi | 12 |
+| Torah Temimah | 10 |
 
-**Total commentary entries**: 39
+**Total commentary entries**: 78
 
 ### Ugaritic & Ancient Near Eastern Parallels
 
@@ -161,29 +206,22 @@
 9. What is the function of כִּי in vv. 2 and 6? Is it causal (because), emphatic (indeed/surely), adversative (but), or asseverative? How does this affect the logical flow?
 10. How does Psalm 1 function redactionally as introduction to the Psalter? What connections exist with Psalm 2 (some manuscripts combine them; both mention meditation/muttering-הָגָה; both end with blessing)? How does it reframe the cultic psalms as Torah meditation?
 
-### MicroAnalyst Interesting Questions (13)
+### MicroAnalyst Interesting Questions (6)
 
-1. What is the precise semantic range and function of יֶהְגֶּה (meditate/mutter) in v. 2—does it indicate vocalized recitation, embodied murmuring, or silent contemplation, and how does this compare with its usage in Josh 1:8 and Ps 2:1?
-2. Why does the triadic progression in v. 1 use specifically הָלַךְ/עָמָד/יָשָׁב (walk/stand/sit)—are these technical terms for levels of social commitment, spatial metaphors for proximity to wickedness, or synonymous variations for poetic effect?
-3. What is the theological significance of שָׁתוּל (planted) being a passive participle in v. 3—does this suggest divine agency in positioning the righteous, and if so, how does this affect interpretation of human moral responsibility?
-4. How do the three wicked categories in v. 1 (רְשָׁעִים/חַטָּאִים/לֵצִים - wicked/sinners/scoffers) relate to each other—are they progressive stages of moral deterioration, distinct types of wickedness, or synonymous terms, and what is the specific nuance of לֵצִים?
-5. What does יוֹדֵעַ (knows) connote in v. 6—is this epistemological awareness, covenantal/relational recognition (as in Amos 3:2; Gen 18:19), or constitutive ontological knowing that brings reality into being?
-6. What is בַּמִּשְׁפָּט (the judgment) in v. 5—earthly legal proceeding, divine judgment scene, eschatological event, or all three, and does יָקֻמוּ (stand/arise) carry resurrection imagery or purely judicial connotations?
-7. What is the agricultural and cultural background of מֹץ (chaff) imagery in v. 4, and how does this relate to threshing floor scenes as judgment contexts elsewhere in Scripture (Ruth 3; 2 Sam 24; prophetic literature)?
-8. Why is the description of the wicked so dramatically brief compared to the righteous (structural asymmetry)—is this aesthetic choice, rhetorical strategy, or theological statement about substance vs insubstantiality?
-9. What is עֲדַת צַדִּיקִים (assembly of the righteous) in v. 5—liturgical/cultic gathering, eschatological community, covenant assembly, or metaphor for blessed state, and how does עֵדָה function elsewhere in Psalms?
-10. How does the passive תֹּאבֵד (perishes) in v. 6 differ from active divine judgment language—does the wicked way self-destruct through lack of divine knowing, or is this euphemistic language for divine destruction?
-11. What is the function of כִּי in vv. 2 and 6—causal (because), emphatic (indeed), adversative (but), or explanatory, and how does this affect the logical and theological flow of the psalm?
-12. Does פַּלְגֵי־מָיִם (streams/channels of water) in v. 3 suggest natural watercourses or engineered irrigation channels, and does this distinction matter for understanding divine vs human agency in flourishing?
-13. How does Psalm 1's use of הָגָה (meditate) in v. 2 for Torah study contrast with Psalm 2:1's use of the same verb for nations 'plotting'—is this intentional wordplay establishing contrasting meditations?
+1. What is the precise semantic relationship between the three categories of 'wicked' (רְשָׁעִים, חַטָּאִים, לֵצִים) in verse 1? Do they represent distinct types of sinners or a progressive intensification of wickedness?
+2. How should the meditation verb 'יֶהְגֶּה' in verse 2 be understood—is it silent, internal contemplation or audible, low murmuring? What does this imply about the nature of Torah study in the post-exilic period?
+3. Is the passive participle 'planted' (שָׁתוּל) in verse 3 theologically significant? Does it undermine a 'works-based' reading of righteousness by suggesting divine agency, and if so, who is the implied planter?
+4. What is the precise function of divine 'knowing' (יוֹדֵעַ) in verse 6? Is it cognitive awareness, covenantal relationship, or an ontological act where God's knowledge constitutes reality?
+5. How does the stark structural asymmetry between the description of the righteous (3 verses, lush imagery) and the wicked (3 verses, sparse imagery) function rhetorically? Is it merely a poetic device, or does it perform the psalm's central theological claim about substance vs. emptiness?
+6. What is the nature of 'the judgment' (הַמִּשְׁפָּט) and the 'assembly of the righteous' (עֲדַת צַדִּיקִים) in verse 5? Are these references to present cultic/legal realities or future eschatological hope?
 
 ---
 
 ## Token Usage Summary
 
 **Total Input Tokens (estimated)**: 188,642
-**Total Output Tokens (estimated)**: 109,011
-**Total Tokens (estimated)**: 297,653
+**Total Output Tokens (estimated)**: 84,948
+**Total Tokens (estimated)**: 273,590
 
 *Note: Token estimates are approximate (character count / 3). Actual API usage may vary.*
 
@@ -191,4 +229,4 @@
 
 
 *Report generated by PipelineSummaryTracker*
-*Psalm 1 - 2025-11-16 22:34:51*
+*Psalm 1 - 2025-12-03 23:00:40*

@@ -1,0 +1,262 @@
+{
+  "psalm_number": 15,
+  "pipeline_start": "2025-12-06T22:56:12.421031",
+  "pipeline_end": "2025-12-06T23:07:50.825961",
+  "steps": {
+    "micro_analysis": {
+      "input_char_count": 8199,
+      "input_token_estimate": 2733,
+      "output_char_count": 127260,
+      "output_token_estimate": 42420,
+      "duration_seconds": 195.38506531715393,
+      "completion_date": null,
+      "timestamp": "2025-12-06T22:56:12.811947"
+    },
+    "master_editor": {
+      "input_char_count": 150268,
+      "input_token_estimate": 50089,
+      "output_char_count": 32889,
+      "output_token_estimate": 10963,
+      "duration_seconds": 262.32553458213806,
+      "completion_date": "2025-12-06T23:07:50.825961",
+      "timestamp": "2025-12-06T23:01:29.401709"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "יָגוּר",
+        "reason": "Key verb in the opening question; implies permanent residency, not just a visit. Need to understand its semantic range in contrast to *shakhan* and the connotations of dwelling with God."
+      },
+      {
+        "word": "יִשְׁכֹּן",
+        "reason": "Parallel verb to *yagur*; also used in the context of God's presence (*Shekhinah*). Understanding its specific nuance here is crucial for the 'tent/mountain' imagery."
+      },
+      {
+        "word": "תָּם",
+        "reason": "The defining quality of the righteous person. Is it 'blameless,' 'perfect,' or 'whole'? Need to explore its connection to sacrificial language and ethical integrity."
+      },
+      {
+        "word": "רָגַל",
+        "reason": "A rare and idiosyncratic verb for slander. Its literal sense ('to go about, walk') creates a powerful physical metaphor. Researching its usage is essential to grasp the psalm's view of gossip."
+      },
+      {
+        "word": "נִמְאָס",
+        "reason": "A strong verb meaning 'to be abhorrent or loathsome.' Its rarity and intensity suggest a powerful ethical stance. Understanding its root and connotations will clarify the depth of rejection required."
+      },
+      {
+        "word": "יָמִר",
+        "reason": "The core of the puzzle in v. 4. It means to change, alter, or renege, but in the context of an oath 'to his hurt,' its meaning is complex. Is it a positive act of keeping a harmful oath or a negative one of breaking it? Lexical study is critical."
+      },
+      {
+        "word": "נֶשֶׁךְ",
+        "reason": "A technical term for interest on a loan, condemned in biblical law. Research needed to distinguish it from other forms of economic gain and understand its prohibition in wisdom literature."
+      },
+      {
+        "word": "יִמּוֹט",
+        "reason": "The concluding promise of the psalm. Does it mean physically shaken, emotionally disturbed, or overthrown? Its theological weight as the reward for righteousness needs to be fully explored."
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "אֹהֶל וְהַר־קֹדֶשׁ",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To find parallels or contrasting uses of 'tent' and 'holy mountain' together, exploring the portable/permanent sanctuary theme."
+      },
+      {
+        "query": "יָשַׁב בְּאֹהֶל יְהוָה",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To trace the broader theme of 'dwelling/residing in God's tent/sanctuary' and see how access is defined elsewhere."
+      },
+      {
+        "query": "הֹלֵךְ תָם",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To see how 'blamelessness' (*tamim*) is linked to one's 'walk' (*halakh*) in wisdom and narrative literature."
+      },
+      {
+        "query": "רָגַל עַל־לָשׁוֹן",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To find other instances of this specific idiom for slander and understand its imagery and severity."
+      },
+      {
+        "query": "נֶאֱסַף לִנְפָשׁוֹ",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To investigate the interpretation that 'וְחֶרְפָּה לֹא־נָשָׂא' means refusing to accept disgrace (as per an alternate reading) and how this phrase is used elsewhere."
+      },
+      {
+        "query": "בִזָּה נִמְאָס",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To study the ethical pairing of despising the vile and being abhorred by them, exploring this strong social polarity."
+      },
+      {
+        "query": "נִשְׁבַּע לְהָרַע",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To investigate the theological and legal weight of keeping a harmful oath, searching for similar situations or principles."
+      },
+      {
+        "query": "לֹא־יִמּוֹט לְעוֹלָם",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "To trace the eschatological promise of unshakeable security and see what conditions or contexts it appears in."
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "The psalm's opening question is built on the contrast between two metaphors for God's dwelling place, setting up the core tension. | Vehicle: tent | Related terms: tent, holy mountain, mountain, dwelling, tabernacle, sanctuary, shelter, cover, abode, tent of meeting, holy place, high hill",
+        "vehicle": "tent",
+        "vehicle_terms": [
+          "tent",
+          "tent",
+          "holy mountain",
+          "mountain",
+          "dwelling",
+          "tabernacle",
+          "sanctuary",
+          "shelter",
+          "cover",
+          "abode",
+          "tent of meeting",
+          "holy place",
+          "high hill"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "The psalm's opening question is built on the contrast between two metaphors for God's dwelling place, setting up the core tension. | Vehicle: mountain | Related terms: holy mountain, mountain, high hill, rock, summit, peak, mountain of the Lord, holy hill, eternal dwelling, permanent place",
+        "vehicle": "mountain",
+        "vehicle_terms": [
+          "mountain",
+          "holy mountain",
+          "mountain",
+          "high hill",
+          "rock",
+          "summit",
+          "peak",
+          "mountain of the Lord",
+          "holy hill",
+          "eternal dwelling",
+          "permanent place"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "A vivid physical metaphor for the act of slander, implying motion and intent. | Vehicle: walking on the tongue | Related terms: slander, gossip, talebearing, evil report, whispering, malice, scandal, defamation, false witness, backbiting, murmuring, reproach",
+        "vehicle": "walking on the tongue",
+        "vehicle_terms": [
+          "walking on the tongue",
+          "slander",
+          "gossip",
+          "talebearing",
+          "evil report",
+          "whispering",
+          "malice",
+          "scandal",
+          "defamation",
+          "false witness",
+          "backbiting",
+          "murmuring",
+          "reproach"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "The final promise is a powerful metaphor for complete security and stability, reinterpreting the 'dwelling' theme from v.1. | Vehicle: not being shaken | Related terms: shaken, moved, unstable, totter, overthrown, ruin, fall, collapse, unmoved, firm, secure, established",
+        "vehicle": "not being shaken",
+        "vehicle_terms": [
+          "not being shaken",
+          "shaken",
+          "moved",
+          "unstable",
+          "totter",
+          "overthrown",
+          "ruin",
+          "fall",
+          "collapse",
+          "unmoved",
+          "firm",
+          "secure",
+          "established"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "15:1",
+        "reason": "Opening question sets the psalm's theme. How do commentators understand the relationship between 'tent' and 'holy mountain' and the nature of the question?"
+      },
+      {
+        "verse": "15:2",
+        "reason": "Begins the ethical description. What is the nature of 'blamelessness' (*tamim*) according to the classical exegetes, and how do they view the progression from walk to heart?"
+      },
+      {
+        "verse": "15:3",
+        "reason": "Contains a significant textual and interpretive ambiguity regarding 'borne reproach.' How do the major commentators resolve this puzzle?"
+      },
+      {
+        "verse": "15:4",
+        "reason": "Presents a difficult ethical scenario about a harmful oath. How do commentators rationalize the model of one who keeps a vow to their own hurt?"
+      },
+      {
+        "verse": "15:5",
+        "reason": "Lists the final prohibitions and provides the psalm's climactic promise. What theological significance do commentators assign to the specific mention of interest and bribery, and the promise of not being shaken?"
+      }
+    ],
+    "lexicon_entries_count": 19,
+    "concordance_results": {
+      "אֹהֶל וְהַר־קֹדֶשׁ": 0,
+      "יָשַׁב בְּאֹהֶל יְהוָה": 0,
+      "הֹלֵךְ תָם": 0,
+      "רָגַל עַל־לָשׁוֹן": 0,
+      "נֶאֱסַף לִנְפָשׁוֹ": 0,
+      "בִזָּה נִמְאָס": 0,
+      "נִשְׁבַּע לְהָרַע": 1,
+      "לֹא־יִמּוֹט לְעוֹלָם": 0
+    },
+    "figurative_results": {
+      "total_instances_used": 66
+    },
+    "commentary_counts": {
+      "Ibn Ezra": 5,
+      "Radak": 5,
+      "Metzudat David": 5,
+      "Malbim": 4,
+      "Meiri": 5,
+      "Torah Temimah": 4,
+      "Rashi": 4
+    },
+    "sacks_references_count": 0,
+    "related_psalms_count": 2,
+    "related_psalms_list": [
+      121,
+      24
+    ],
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 120340,
+    "research_bundle_tokens": 40113
+  },
+  "analysis": {
+    "macro_questions": [],
+    "micro_questions": [
+      "What is the precise semantic range of the verb רָגַל (to slander) in v. 3, and how does the physical metaphor of 'walking on the tongue' contribute to the severity of the offense?",
+      "Why is the model of righteousness in v. 4 one who makes a poor oath and suffers for it, rather than someone who simply avoids making such a vow in the first place?",
+      "The psalm lists prohibitions against slander, harm, and economic exploitation. Why are interest and bribery the very last items on this ethical checklist, and what finality do they bring to the description of a righteous person?",
+      "How does the structure of vv. 2-3 (A: blameless walk/action -> B: truthful heart -> B': evil tongue -> A': harm to neighbor/action) create a comprehensive theological statement about the link between inner disposition and outward conduct?",
+      "How does the final promise in v. 5b—'The man who acts thus shall never be shaken'—function as a radical theological answer to the spatial question posed in v.1 about 'dwelling in Your tent'?"
+    ],
+    "verse_count": 0
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5.1"
+  }
+}

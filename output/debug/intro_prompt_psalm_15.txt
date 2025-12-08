@@ -1,0 +1,1626 @@
+You are a biblical scholar writing an **introduction essay** for Psalm 15.
+
+You have been provided with:
+1. **MacroAnalysis** - A macro thesis about the psalm's structure, genre, and poetic devices
+2. **MicroAnalysis** - Detailed verse-by-verse discoveries
+3. **ResearchBundle** - Deep lexical, concordance, and figurative language research
+
+## YOUR INPUTS
+
+### MACRO THESIS
+**Thesis**: Psalm 15 presents a radical redefinition of sacred space, moving from a physical location to an ethical condition. The psalm argues that true fellowship with God is not contingent upon pilgrimage or ritual, but upon the embodiment of unwavering integrity and justice in all human relationships. By framing a liturgical entrance question with a detailed moral character sketch, it functions as a catechism for worshippers, defining the authentic 'holiness' required to dwell in the divine presence.
+**Genre**: Liturgical Entrance Hymn (or Torah Psalm)
+**Context**: Likely composed for pre-exilic Israelite worship, possibly for use by pilgrims approaching the Temple in Jerusalem. The psalm addresses core theological questions about access to God and the nature of true holiness. It counters any notion that ritual purity or sacrifices alone grant one access to God, instead privileging ethical righteousness as the primary criterion. This ethic-centered approach resonates with the Deuteronomic tradition and the prophetic critiques of empty ritual, placing the psalm firmly within a central biblical theological debate.
+
+**Structure**:
+  - vv. 1: The Liturgical Question: Defining the Quest for Divine Fellowship
+  - vv. 2-5a: The Ethical Answer: A Portrait of the Righteous Person
+  - v. 5b:  The Promise of Divine Stability: The Ultimate Reward
+
+**Poetic Devices**:
+  - Synonymous Parallelism: Two or more lines express a similar thought using different words to reinforce an idea.
+  - Antithetic Parallelism: Two lines present contrasting ideas to create a sharp distinction and define a concept by its opposite.
+  - Synthetic Parallelism: The second or third line develops, expands, or completes the thought of the first line.
+  - Anaphora with Negation (Astrophoric Repetition): The repetition of the negative particle 'not' (לֹא) at the beginning of successive lines to build a powerful definition by exclusion.
+  - Inclusio: A structural device where a word, phrase, or theme at the beginning of a unit is repeated at its end, creating a frame for the text.
+  - Chiasmus: An ABBA structure where the second half of a passage mirrors the first in reverse order.
+
+**Research Questions** (from Macro Analyst):
+  1. What is the semantic range and theological weight of the term *tamim* (תָּם, 'blameless, whole') here, and how does it connect to concepts of integrity in priestly and wisdom literature (e.g., Genesis 6:9, Proverbs)?
+  2. How do the three epithets for the righteous person's associates in v. 3-4 (*re'ehu* [neighbor], *qarov* [kinsman/close one], *yirei YHWH* [fearers of the LORD]) delineate the expanding circles of human responsibility?
+  3. What does the verb *yachbed* (יְכַבֵּד) 'honors' imply in v. 4 beyond mere respect? Does it suggest active patronage, public praise, or a similar social behavior towards the God-fearing?
+  4. What is the specific cultural and economic context of the prohibition against interest (*neshech*) in v. 5a, and why is it paired with the prohibition against bribery (*shochad*) as the final tests of character?
+  5. How does the imagery of 'dwelling' and 'sojourning' in Psalm 15 function in contrast to its use in other pilgrimage Psalms (e.g., Psalm 84, Psalm 122) to prioritize ethical access over physical access?
+  6. Is there a deliberate chiastic structure in vv. 2-4 (A: Blameless walk, B: Truthful heart, B': Evil tongue, A': Harming neighbor), and if so, what does it emphasize about the relationship between inner disposition and outward action?
+
+### MICRO DISCOVERIES
+**Verse 1**
+**Phonetic**: `miz-**MŌR** lə-dhā-**WIDH** yə-hō-**WĀH** miy-yā-**GHŪR** bə-'o-ho-**LE**-khā miy-yish-**KŌN** bə-**HAR** qodh-**SHE**-khā`
+The verse opens with two parallel questions, but the metaphors chosen for 'dwelling with God' are intriguingly different. 'Tent' (אֹהֶל) suggests a mobile, intimate sanctuary, while 'holy mountain' (הַר קׇדְשֶׁךָ) implies a permanent, grand temple. The repetition of 'who' (מִי) creates a powerful, almost dramatic liturgical echo, turning a simple query into a profound theological quest.
+  Lexical: יָגוּר, יִשְׁכֹּן
+  Figurative: tent, holy mountain
+
+**Verse 2**
+**Phonetic**: `hō-**LĒ**-khə tā-miy-**M** ū-fō-**ʿĒL** **TSE**-dheq wə-dhō-**VĒR** 'e-**METH** bil-vā-**VŌ**`
+The answer to the grand question of verse 1 begins internally and holistically, not with a list of deeds. The phrasing 'speaks truth in his heart' is a striking idiom, suggesting truth is not just spoken but internalized as a core value. The progression from walking blamelessly (action) to doing right (deed) to speaking truth in the heart (thought/intention) is a masterful encapsulation of total integrity.
+  Lexical: תָּמִים
+  Figurative: 'walks blamelessly' - a metaphor for living a life of integrity
+
+**Verse 3**
+**Phonetic**: `lō'-rā-**GHAL**  ʿal-lə-shō-**NŌ** lō'-ʿā-**SĀH** lə-rē-**ʿĒ**-hū rā-**ʿĀH** wə-ḥer-**PĀH** lō'-nā-**SĀ'** ʿal-qə-rō-**VŌ**`
+This verse marks a sharp turn to what the righteous person *doesn't* do, using strong negative formulas. The opening phrase, 'לֹא־רָגַל עַל־לְשֹׁנוֹ' (literally 'does not walk with his tongue'), is a vivid and unusual idiom for slander or gossip, almost picturing the tongue as a foot that travels to spread trouble. The focus is entirely on preventing harm to others, whether by speech, action, or reputation.
+  Lexical: רָגַל, חֶרְפָּה
+  Figurative: 'walks with his tongue' - personification/metaphor for spreading slander
+
+**Verse 4**
+**Phonetic**: `niv-**ZEH**  bə-**ʿĒY**-nāy-w nim-**'ĀS** wə-'eth-yir-**'ĒY** yə-hō-**WĀH** yə-kha-**BĒDH** nish-**BAʿ** lə-hā-**RAʿ** wə-**LŌ'** yā-**MIR**`
+This verse presents a stark contrast in values, defining the righteous by who they honor and who they despise. It also introduces a demanding standard of personal commitment: keeping an oath even when it causes personal loss. This links integrity directly to sacrifice and self-control, showing that righteousness isn't convenient.
+  Lexical: נִמְאָס, יְכַבֵּד, יָמִר
+
+**Verse 5**
+**Phonetic**: `kas-**PŌ**  lō'-nā-**THAN** bə-ne-**SHEKH** wə-**SHŌ**-ḥadh ʿal-nā-**QIY** lō'-lā-**QĀḤ** ʿō-sēh-**'ĒL**-leh **LŌ'** yim-**MŌT** lə-ʿō-**LĀM** **F**`
+The final verse grounds the lofty moral ideals in the gritty realities of economics: prohibiting usury and bribery. This powerfully asserts that financial integrity is a non-negotiable aspect of holiness. The concluding promise is not wealth or power, but absolute stability—'never be shaken'—reframing the ultimate 'dwelling place' not as a location but as an unshakable spiritual state.
+  Lexical: נֶשֶׁךְ, שֹׁחַד
+  Figurative: 'never be shaken' - a metaphor for ultimate security and divine protection
+
+**Thematic Threads Across Verses:**
+  - The structure moves from a grand question (v. 1) to an internal state (v. 2), then to external negative actions (v. 3), then to active values and costly promises (v. 4), and finally to economic ethics and a climactic promise (v. 5). This creates a comprehensive and layered definition of righteousness.
+  - The use of negative definitions ('who has not...') is a dominant rhetorical strategy, sharpening the portrait of the righteous by clearly delineating the boundaries of their conduct.
+  - The psalm forms an inclusio, beginning with a question about 'dwelling' (שָׁכַן) and ending with a promise of being 'unshakable' (לֹא יִמּוֹט), transforming the concept of 'dwelling' from a place to a permanent state of security.
+
+
+**Interesting Questions** (from Micro Analyst):
+  1. Why does the psalm use two distinct metaphors—'tent' and 'holy mountain'—for God's dwelling in v. 1? Are they intended to be fully synonymous, or do they evoke different theological concepts of intimacy vs. grandeur?
+  2. What is the semantic range of the key term *tamim* (blameless, whole) in v. 2, and how does it connect to integrity in other biblical genres like wisdom literature or priestly law?
+  3. The idiom 'לֹא־רָגַל עַל־לְשֹׁנוֹ' (does not walk with his tongue) in v. 3 is striking. What is the precise picture this idiom creates, and how does it differ from a more standard term for slander?
+  4. What is the most probable meaning of the ambiguous phrase 'נִשְׁבַּע לְהָרַע' (swears to evil) in v. 4? Does it mean an oath to do harm, or an oath that brings harm to the swearer, as most translations suggest?
+  5. Why are the prohibitions against usury (*neshech*) and bribery (*shochad*) in v. 5 positioned as the final and climactic requirements for dwelling with God? What does this reveal about the psalm's view of the relationship between economics and holiness?
+
+**Synthesis Notes for Research:**
+LEXICON: Deep dive into key ethical terms: תָּמִים (blameless), רָגַל (slander idiom), נֶשֶׁךְ (usury), שֹׁחַד (bribe).
+COMMENTARY: Focus on v. 3's ambiguous phrase about reproach and v. 4's difficult 'swears to evil' clause.
+INTERTEXTUALITY: Compare the character sketch in Psalms 15 with the ethics of the Deuteronomic code and wisdom literature (e.g., Proverbs 11).
+POETICS: Analyze the structure and flow from v. 1 to v. 5, focusing on how it progressively builds a definition of righteousness.
+HISTORY: Research the economic and social context of usury and bribery in ancient Israel to understand their significance as final moral tests.
+
+### RESEARCH MATERIALS
+# Research Bundle for Psalm 15
+
+## Hebrew Lexicon Entries (BDB)
+
+### יָגוּר
+**Lexicon**: BDB Dictionary
+**Vocalized**: גּוּר  
+
+vb. sojourn (cf. Arabic جَارَ turn aside, tarry; v. especially iii. iv. viii. x; Aramaic ܓܳܪ, Ethiopic in der.)— Pf. גָּר Gn 35:27 + 3 times, וְגָר consec. Is 11:6; גַּרְתָּה Gn 21:23; גַּרְתִּי Gn 32:5 ψ 120:5; גָּרוּ Ex 6:4; Impf. יָגוּר Ex 12:48 + 12 times, וַיָּ֫גָר Gn 20:1 + 2 times, sf. יְגֻרְךָ ψ 5:5; 3 fs. וַתָּ֫גָר 2 K 8:2; 2 fs. תָּגוּרִי 2 K 8:1; cohort. אָגוּ֑רָה ψ 61:5, יָגוּרוּ Is 16:4; Imv. גּוּר Gn 26:3, גּוּ֫רִי 2 K 8:1; Inf. cstr. גּוּר Gn 12:10 + 17 times; Pt. גָּר Dt 18:6 Ju 17:7 + 17 times; f. cstr. גָּרַת Ex 3:22; pl. גָּרִים Lv 25:6 + 8 times; cstr. גָּרֵי Jb 19:15;— sojourn, dwell for a (definite or indef.) time, dwell as a new-comer (cf. גֵּר) without original rights, v. especially Gn 19:9 (J) Dt 18:6 & cf. Ju 17:7, 8, 9; 19:1; also Gn 12:10; 20:1; 21:23, 24; 32:5; 47:4 (all JE); of patriarchs in Canaan Gn 26:3 (J) 35:27 Ex 6:4 (both P) cf. ψ 105:12 = 1 Ch 16:19, Ju 19:16 2 S 4:3 2 K 8:1(×2), 2 (seven years) Is 16:4 Ru 1:1 Ezr 1:4 (in exile); cf. further Ex 3:22 (E) גָּרַת בַּיִת of a woman in another’s house as lodger or guest (v. Di), גָּרֵי בַיִת Jb 19:15; so (poet.) of worshipper in Yahweh’s house ψ 15:1; 61:5 cf. Is 33:14(×2); fig. of evil לֹא יְגֻֽרְךָ רָ֑ע ψ 5:5 evil cannot be a guest of thine (Che; sq. acc., as in Arabic جاوره iii); particularly of the גֵּר (q.v.) in Israel Ex 12:48, 49 Lv 16:29 (all P) 17:8, 10, 12, 13; 18:26; 19:33, 34; 20:2; 25:6, 45 (all H) Nu 9:14; 15:14, 15, 16, 26, 29; 19:10 Jos 20:9 (all P) Ez 14:7; 47:22, 23; of Ephraim and Manasseh sojourning with Judah and Benjamin 2 Ch 15:9; of Rechabites sojourning in Judah Je 35:7; of Israelites sojourning in Egypt Dt 26:5 Is 52:4 ψ 105:23; so of Judah, to escape from under Babylonian power Je 42:15, 17, 22; 43:2; 44:8, 12, 14, 28. abide, nearly or quite = dwell Je 43:5 cf. La 4:15, Je 49:18, 33; 50:40, also Jb 28:4; of wolf dwelling with lamb Is 11:6; stay (inactive) Ju 5:17;—in Is 5:7 read perhaps, for גָּרִים, גְּדָיִם or כָּרִים cf. 𝔊 Lo Ew Di & Che crit. n. (> Stu גֵּרִים). Pt. מִתְגּוֹרֵר 1 K 17:20 seek hospitality with, sq. עִם (cf. Arabic x); יִתְגּוֹרָ֖רוּ Ho 7:14 is dub. (cf. II. גור); AE Ki Thes Wü AV RV they assemble themselves, but text prob. error, v. גדד.
+
+---
+
+### יָגוּר
+**Lexicon**: BDB Dictionary
+**Vocalized**: גּוּר²  
+
+n.pr.loc. (sojourning, dwelling) 2 K 9:27 מַעֲלֵה־ג׳ אשׁר את־יִבְלְעָם, otherwise unknown.
+
+---
+
+### יָגוּר
+**Lexicon**: BDB Dictionary
+**Vocalized**: גּוּר³  
+
+vb. stir up strife, quarrel (cf. גרה)—so Ew Che Di RVm (Is 54:15); gather together Ges De Br cf. 𝔗 𝔙, so AV RV;— Pf. גָּר Is 54:15; Impf. יָגוּר v 15, יָגוּרוּ ψ 56:7; 59:4; 140:3 (on all cf. infr.); Inf. abs. גּוֹר Is 54:15;— stir up strife, abs. גּוֹר יָגוּר Is 54:15; cf. ψ 56:7 (but AE Che read יָגוֹדּוּ attack, v. גדד); sq. עַל־ ψ 59:4 (but Che id.; cf. ψ 94:21, wh. however Ol would emend by 56:7; 59:4); sq. acc. מִלְחָמוֹת ψ 140:3 (Hup Che read יְגָרוּ Pi. Impf. of גרה). quarrel, sq. אֶת־ with Is 54:15. Here also Hithpoʿl. Impf. Ho 7:14 יִתְגּוֹרָ֖רוּ (cf. I. גור), according to Ew, they excite themselves, but unlikely; v. גדד.
+
+---
+
+### יָגוּר
+**Lexicon**: BDB Dictionary
+**Vocalized**: גּוּר⁴  
+
+n.m. Ez 19:3, 5 whelp, young—cstr. גּוּר(אַרְיֵה) Gn 49:9 + 2 times; sf. גּוּרֶיהָ Ez 19:2, גֻּרֶיהָ Ez 19:3, 5, גּוּרֵיהֶן La 4:3;— lion’s whelps, fig. of Judah Gn 49:9; of Dan Dt 33:22; of Assyrian (prince?) Na 2:12; fig. of Israelites Ez 19:2, 3, 5 (‖ כְּפִיר). young of jackals (תַּנִּין) La 4:3.
+
+---
+
+### יָגוּר
+**Lexicon**: BDB Dictionary
+**Vocalized**: גּוּר⁵  
+
+vb. dread (cf. יָגֹר)— Impf. וַיָּגָר Nu 22:3 1 S 18:15; 2 ms. תָּגוּר Dt 18:22; אָגוּר Dt 32:27; pl. יָגוּרוּ ψ 33:8; Jb 41:17 + Ho 10:5, תָּגוּרוּ Dt 1:17; Imv. גּוּרוּ ψ 22:24 Jb 19:29;— be afraid of, sq. מִפְּנֵי Nu 22:3 Dt 1:17 1 S 18:15, גּוּרוּ לָכֶם מִפְּנֵי Jb 19:29; c. מִן 41:17 Dt 18:22; c. acc. Dt 32:27 (poet.) Ho 10:5 read prob. ינודו lament (‖ אבל, used c. לְ e.g. Na 3:7 Je 15:5 al.; cf. Che). stand in awe of, sq. מִן ψ 22:24; 33:8 (‖ יָרֵא).
+
+---
+
+### יִשְׁכֹּן
+**Lexicon**: BDB Dictionary
+**Vocalized**: שָׁכַן  
+
+vb. settle down, abide, dwell (NH id.; Ecclus 43:17d +; Ph. שכן Lzb375; Aramaic שְׁכֵין; Syriac ܫܟܶܢ, all dwell; Arabic سَكَنَ rest, dwell, cf. Assyrian šakânu, set, lay, deposit, set up (a dwelling), intrans. be situated (of city), maškanu, place, dwelling-place);— Pf. 3 ms. שׁ׳ Ex 40:35 + 5 times; שָׁכֵ֑ן Dt 33:12 + 2 times, etc.; Impf. 3 ms. יִשְׁכֹּן Gn 16:12 +; יִשְׁכָּן־ Nu 9:17 + 2 times; 3 mpl. יִשְׁכֹּ֑נוּ Je 49:31; 3 fpl. תִּשְׁכֹּ֑נָּה Ez 17:23, etc.; Imv. ms. שְׁכֹן Gn 26:2 ψ 37:27; שְׁכָן־ v 3; mpl. שִׁכְנוּ Je 48:28; Inf. cstr. בִּשְׁכֹּן (Ges§ 45 g) Gn 35:22, לִשְׁכּוֹן 2 Ch 6:1, etc.; sf. שָׁכְנִי Ex 29:46; שִׁכְנוֹ Dt 12:5 (but v. Pi. 1), etc.; Pt. שֹׁכֵן Gn 14:13 +, שֹׁכְנִי (Ges§ 90 l m) Dt 33:16 + 3 times; sf. fs. שֹׁכַנְתְּי Je 51:13; Pt. pass. appar. pl. cstr. c. art. הַשְּׁכוּנֵי Ju 8:11 (but corrupt, n.pr.loc. needed, v. GFM):— settle down to abide: of pers.: encamp Nu 24:2 (E); settle permanently ψ 102:29 (abs.: ‖ יִכּוֹן); שׁ׳ כמלך Jb 29:25 (‖ ישׁב); settle down (to remain) Ju 5:17; תַּחְתָּיו 2 S 7:10 = 1 Ch 17:9 (not to be removed); especially at rest, peace, in security, לבטח Je 23:6; 33:16; Dt 33:12, cf. בין כתפים v 12; ψ 16:9 (‖ שׂמח); בטח Dt 33:28 Pr 1:33; (ל)בדד Nu 23:9 (poem) Je 49:31; Mi 7:14; land of Egypt Je 46:26 (remain undisturbed), so 50:39; Is 13:20 (‖ תֵּשֵׁב, cf. ישׁב 4); c. acc. מרומים 33:16; abs. Na 3:18, subj. אדּירים (We יָֽשְׁנוּ, Now יִשְׁכְּבוּ; ‖ נָמוּ); Pr 7:11 her feet tarry not in her house. of animals: כְּלָבִיא Dt 33:20; ב loc. Is 34:11; Jb 37:8; שָׁם Is 13:21; birds שׁ׳ תַּחַת (under) Ez 17:23, שׁ׳ בְּצֵל, v 23; c. עַל = upon 31:13, = by ψ 104:12; c. acc. סֶלַע Jb 39:28; abs., of man under fig. of bird, אָע֫וּפָה וְאֶשְׁכֹּ֑נָה ψ 55:7. things: c. עַל of cloud, Jb 3:5 settle down over; cf. Ex 24:16; 40:35; Nu 9:17, 18, 22 (all P); c. בְּ 10:12 (P). abide, dwell: of men: abs. ψ 37:27 (לְעוֹלָם); שָׁ֫מָּה Is 65:9; c. ב loc. ψ 69:37 Jb 18:15; 30:6; Mi 4:10; Je 48:28 + 10 times; לְחוֹף יַמִּים Gn 49:13; c. עַל, by Ju 5:17; Je 51:13; upon ψ 37:29; על פני Gn 16:12 (J); c. עִם with ψ 120:5, 6; c. acc. Pr 2:21 Je 17:6 + 5 times; מִן … עַד Gn 25:18 (J); שֹׁכְנֵי אָ֑רֶץ Is 18:3 (‖ ישְׁבֵי תֵבֵל). of the dead: שֹׁכְנֵי עָפָר Is 26:19 (‖ רְפָאִים); cf. Jb 26:5 (‖ id.), so mortals, שֹׁכְנֵי בָתֵּי חֹמֶר 4:19; שׁ׳ דוּמָה ψ 94:17 (i.e. שׁאול). of God: שׁ׳ בָּֽעֲרָפֶל 1 K 8:12 = 2 Ch 6:1 (poem); מָרוֹם Is 33:5; עַד 57:15; מָרוֹם וְקָדוֹשׁ v 15; שׁ׳ סְנֶה Dt 33:16 (theoph.); בְּאָֽהֳלֵי־שֵׁם Gn 9:27 (J, v. BrMP 82; al. Japheth subj.); בְּתוֹכָם Ex 25:8; 29:46; Nu 5:3 (all P), Ez 43:9; c. בְּתוֹךְ elsewhere Ex 29:45 (P) + 6 times; ב loc. ψ 85:10; later בְּצִיּוֹן Jo 4:17, 21; בְּהַר צִיּוֹן Is 8:18; ψ 68:17, 19 (abs.) + 4 times; שֹׁכֵן יְרוּשָׁלַםִ ψ 135:21. things: אֹהֶל מוֹעֵד, c. את Lv 16:16 (P); מִשְׁכַּן י׳ שָׁם Jos 22:19 (P); אוֹר Jb 38:19. abstr. subj.: מִשְׁפָּט Is 32:16 (בַּמִּדְבָּר); חָכְמָה, c. acc. עָרְמָה Pr 8:12. Pf. 3 ms. שִׁכֵּן ψ 78:60; 1 s. שִׁכַּנְתִּי Je 7:7, 12; Impf. 1 s. אֲשַׁכְּנָה Je 7:3; Inf. cstr. שַׁכֵּן Nu 14:30 + 7 times; sf. שַׁכְּנוֹ Dt 12:5 (so read for MT לְשִׁכְנוֹ, cf. Köii. 1. 21);— make settle down, establish: אֹהֶל שׁ׳ בָּֽאָדָֽם ψ 78:60; especially in Dt, לְשַׁכֵּן שְׁמוֹ שָׁם establish his name there (cf. šakan šuma as Canaanism WklTelAm. 138 Rev. 20; 181. 6) Dt 12:11; 14:23; 16:2, 6, 11; 26:2, cf. Je 7:12 Ne 1:9; + לָשׂוּם אֶת־שְׁמוֹ שָׁם לְשִׁכְנוֹ Dt 12:5 (read לְשַׁכְּנוֹ). make to dwell: c. acc. pers., ב loc., Nu 14:30 (J) Je 7:3, 7. Pf. 1 s. הִשְׁכַּ֫נְתִּי Ez 32:4; Impf. 3 ms. juss. יַשְׁכֵּן ψ 7:6, וַיַּשְׁכֵּן Gn 3:24 ψ 78:55, etc.;— lay, כבודי לעפר ψ 7:6 lay my honour in the dust (of death); place, set, Gn 3:24 (J); place, establish, אהל מועד at Shilo Jos 18:1 (P). cause birds to settle, עַל Ez 32:4. cause to dwell, c. acc. pers., ב loc., ψ 78:55; cf. Jb 11:14.
+
+---
+
+### תָּמִים
+**Lexicon**: Klein Dictionary
+**Vocalized**: תָּמִים  
+
+complete, perfect. whole, sound, healthful (of men). without blemish (usually said of sacrificial animals). innocent, honest, upright. (colloq.) naive. man of integrity. (neuter adj. used as a n.) what is complete, what is true; completeness, truth.
+
+**Etymology**: [From תמם. Whence also Aram. תְּמִימָא, Syr. תַּמִּימָא (= perfect, innocent, harmless).]  
+
+**Derivatives**: Derivative: תְּמִימוּת.  
+
+---
+
+### תָּמִים
+**Lexicon**: BDB Dictionary
+**Vocalized**: תָּמִים  
+
+adj. complete, sound;—ת׳ Gn 6:9 +; f. תְּמִימָה Lv 3:9 +; cstr. תְּמִים Jb 36:4; 37:16; pl. תְּמִימִים Ez 43:25 +; תְּמִימֹת Lv 23:15; cstr. תְּמִימֵי ψ 119:1 Pr 11:20;— complete, whole, entire, Jb 36:4 תְּמִים דֵעוֹת, 37:16. whole, sound, healthful, of men Pr 1:12 (‖ חַיִּים); vine Ez 15:5; usually of sacrif. animals, P; Ex 12:5 + 40 times, so Ez 43:22 + 10 times complete, entire, of time: day Jos 10:13; year Lv 25:30; sabbaths 23:15. sound, wholesome, unimpaired, innocent, having integrity: of God’s way ψ 18:31 = 2 S 22:31; work Dt 32:4; law ψ 19:8; elsewhere of man Gn 6:9 17:1 (P; both ‖ אלהים (לִפְנֵי) הִתְהַלֵּךְ אֵת); ת׳ עם י׳ Dt 18:13 ψ 18:24, c. ל in ‖ 2 S 22:24; often c. דֶרֶךְ way: דֶּרֶךְ ת׳ ψ 101:2; ת׳ בִּדְרָכֶ֫יךָ Ez 28:15; תְּמִימֵי דָ֑רֶךְ Pr 11:20 ψ 119:1; וַיַּתֵּר ת׳ דרכו֯ 2 S 22:23 ‖ וַיִּתֵּן ת׳ דַּרְכִּי ψ 18:33; הלך בדרך ת׳ 101:6; דֶּרֶךְ om., הלך תמים, Pr 28:18 ψ 15:2; לב ת׳ 119:80; = noun (late), man of integrity Pr 11:5 Jb 12:4; pl. Pr 2:21; 28:10 ψ 37:18. as neuter adj. = subst. what is complete, entirely in accord with truth and fact: דֹּבֵר ת׳ Am 5:10; אִם־בֶּאֱמֶת וּבְת׳ עֲשִׂיתֶם Ju 9:16, 19; עִבְדוּ י׳ בְּת׳ וּבֶאֱמֶת Jos 24:14 (E); integrity גְּבַר ת׳ ψ 18:26 (cstr. Ges§ 93 s; ‖ 2 S 22:26 גִּבּוֹר), 84:12; הֹלְכִים בְּת׳.—1 S 14:41 v. תֹּם 4.
+
+---
+
+### רָגַל
+**Lexicon**: Klein Dictionary
+**Vocalized**: רגל ᴵ  
+
+to slander, clumniate. he slandered, calumniated (in the Bible occurring only Ps. 15:3). he slandered, calumniated. he spied out (lit.: ‘he went about as an explorer’).]
+
+**Etymology**: [Denominated from רֶגֶל (= foot). The original meaning of רגל was ‘to go about as a slanderer or as a spy’. For sense development cp. Arab. mushā (= slanderer), from mashā(y) (= he walked along), and sa‘ā(y) (= he moved quickly; he slandered), sā‘in (= slanderer). cp. also רכל.]  
+
+**Derivatives**: Derivatives: רִגּוּל, רֽגִילָה, רוֹגֽלָנִי, מֽרַגֵּל.  
+
+---
+
+### רָגַל
+**Lexicon**: BDB Dictionary
+**Vocalized**: רָגַל  
+
+vb.denom. foot it, go about;— go about (maliciously, as slanderer; cf. Arabic مُشَاةٌ and سَاعٍ slanderer, from √√ مَشَى walk along, سَعَى walk quickly), slander, Pf. 3 ms. לאֹ־ר׳ עַל־לְשֹׁנוֹ ψ 15:3 he takes no slander upon his tongue (‖ דֹּבֵר אֱמֶת v 2). Impf. 3 ms. וַיְרַגֵּל 2 S 19:28, 3 mpl. וַיְרַגְּלוּ Dt 1:24 Jos 7:2; Imv. mpl. רַגְּלוּ Jos 7:2; Inf. cstr. לְרַגֵּל Nu 21:32 + 5 times; sf. לְרַגְּלַהּ 2 S 10:3; Pt. pl. מְרַגְּלִים Gn 42:9 + 11 times;— slander (cf. Qal), וַיְר׳ בְּעַבְדְּךָ אֶל 2 S 19:28. go about as explorer, spy, c. acc. loc. Nu 21:32 Jos 6:25; 7:2, 2; 14:7 (all JE), Ju 18:2 (‖ חָקַר), v 14, 17 2 S 10:3 (‖ חָקַר), 1 Ch 19:3, so also pt. Gn 42:30 (E), Jos 6:22 (JE); pt., acc. om., as adj., אֲנַשִׁים מְרַגְּלִים Jos 2:1, cf. 6:23 (both JE); as subst., spies 1 S 26:4; 2 S 15:10, and so perhaps (as pred.) Gn 42:9, 11, 14, 16, 31, 34 (all E). Pf. 1 s. תִּרְגַּלְתִּי לְאֶכְּרַיִם Ho 11:3 I taught Ephr. to walk (si vera l.; v. Ges§ 55 h).
+
+---
+
+### חֶרְפָּה
+**Lexicon**: Klein Dictionary
+**Vocalized**: חֶרְפָּה  
+
+reproach, scorn, disgrace.
+
+**Etymology**: [Formed from חרף ᴵ and first suff. ◌ָה.]  
+
+---
+
+### חֶרְפָּה
+**Lexicon**: BDB Dictionary
+**Vocalized**: חֶרְפָּה  
+
+n.f. reproach—ח׳ Gn 34:14 + 35 times; cstr. חֶרְפַּת Jos 5:9 + 15 times; sf. חֶרְפָּֽתְךָ ψ 74:22 etc. + 17 times sfs.; pl. חֲרָפוֹת ψ 69:11 Dn 12:2; cstr. חֶרְפּוֹת ψ 69:10.— taunt of enemy 1 S 17:26; so also 1 S 25:39; reproach cast upon another, scorn, contumely Ne 3:36; 5:9 ψ 69:20, 21; 71:13; 89:51; 119:22 Pr 18:3 Is 51:7 Ez 21:33; שׁמע ח׳ Je 51:51 Zp 2:8 La 3:61; נתן ח׳ על Je 23:40; נשׂא ח׳ על ψ 15:3 (slander); נשׂא ח׳ Je 31:19 Ez 36:15 Mi 6:16 (reproach); נשׂא ח׳ על bear reproach for ψ 69:8 Je 15:15 Zp 3:18; השׁיב ח׳ Ho 12:15 Ne 3:36; חרף ח׳ ψ 69:10; 79:12; 89:51; הסיר ח׳ מעל 1 S 17:26 Is 25:8; העביר ח׳ ψ 119:39; reproaches against God ψ 69:10 (חֶרְפּוֹת חוֹרְפֶיךָ), 74:22; 79:12. reproach which rests upon one, condition of shame, disgrace: sexual 2 S 13:13 Is 47:3 Ez 16:57 Pr 6:33. barrenness of womb Gn 30:23 (E) Is 4:1; widowhood Is 54:4. hunger Ez 36:30; disease Jb 19:5. ritual, uncircumcision Gn 34:14 (P) Jos 5:9 (JE). injuries from enemies La 3:30; 5:1 Ne 1:3; 2:17 Jb 16:10 Dn 11:18(×2). a reproach, the object of reproach, the person or thing reproached חֶרְפַּת אָדָם a reproach of man ψ 22:7; ח׳ נבל 39:9; היה ח׳ ל׳ become an object of reproach to 31:12; 79:4; 89:42; 109:25 Ez 5:15; (היה) לח (ל׳) Is 30:5 Je 6:10; 20:8; 42:18; 44:8, 12; 49:13 ψ 69:11 Dn 9:16; 12:2; נתן ח׳ (ל׳) Ez 22:4 Jo 2:19 ψ 78:66; נתן לח׳ Je 24:9; 29:18 Ez 5:14 Jo 2:17; שׂים ח׳ ל׳ ψ 44:14; שׂים ח׳ על 1 S 11:2.
+
+---
+
+### נִמְאָס
+**Lexicon**: Klein Dictionary
+**Vocalized**: נִמְאָס  
+
+loathed, despised, abhorred.
+
+**Etymology**: [Part. of נִמְאַס (= was loathed, was despised, was abhorred), Niph. of מאס ᴵ.]  
+
+---
+
+### נִמְאָס
+**Lexicon**: BDB Dictionary
+**Vocalized**: מָאַס  
+
+vb. reject (NH id.; Aramaic מְאַס reject, despise; BAES 15 comp. (dub.) Arabic مَعَسَ lightly esteem (Ḳam.; Assyrian ma’âsu is perhaps destroy MeissnSuppl. 55);— Pf. 3 ms. מָאַס Is 8:6 + 4 times; sf. מְאָסָם ψ 53:6; 2 ms. מָאַסְתָּ Je 14:19 + 3 times; מָאַסְתָּה Ju 9:38 1 S 15:26 + 22 times Pf.; Impf. יִמְאַס Jb 8:20 + 3 times; יִמְאָ֑ס ψ 36:5 Jb 36:5; sf. וַיּמְאָֽסְךָ 1 S 15:23, 26; for וְאֶמְאָֽסְאךָ Ho 4:6 (so Baer, cf. DeComplut. Var. 18 f.; not וָא׳ Van d. H.) read וְאֶמְאָֽסְךָ; 3 mpl. יִמְאֲסוּ Je 6:19 + 2 times; יִמְאָס֑וּן Is 31:7; + 12 times Impf.; Inf. abs. מָאוֹס Is 7:15, 16 מָאֹס Je 14:19 La 5:22; cstr. מָֽאָסְכֶם Is 30:12; מָאֳסָם Am 2:4; Pt. מוֹאֵס Pr 15:32; מֹאֵס Is 33:15, f. מֹאֶסֶת Ez 21:15 (text dub., Co מוֹאֲסֵי; Berthol וּמְאַסֵּף), v 18 (also dub., Co מִטֻּמְאָתָם; Berthol מְאַסֵּף);— reject, refuse, c. acc.: God rejects men Ho 4:6; 9:17; 1 S 15:23, 26; 16:1, 7; 2 K 23:27; Is 41:9; Je 7:29; 14:19(×2); 33:24, 26; Lv 26:44 (H), ψ 53:6 Jb 8:20; 10:3 La 5:22(×2); זָנַחְתָּ וַתִּמְאָם ψ 89:39; men reject God Nu 11:20 (J), 1 S 8:7; 10:19; men 1 S 8:7; Jb 30:1; idols Is 31:7, evil ψ 36:5, knowledge Ho 4:6, divine תורה Am 2:4; Is 5:24; דבר 1 S 15:23, 26, חקות Ez 20:24, חקים 2 K 17:15; מוסר Jb 5:17; Pr 3:11; var. things Is 8:6 Ez 21:15 ψ 118:22; Jb 31:13. c. בְ God rejects men 2 K 17:20 Je 6:30; 31:37 ψ 78:59, 67 that in which man confides Je 2:37; men reject evil Is 7:15, 16 divine תורה Je 6:19, דבר Is 30:12; Je 8:9, חקות Lv 26:15 (H); משׁפטים v 43 (H), Ez 5:6; 20:13, 16; var. things, Nu 14:31 (J) Is 33:15; Je 4:30 ψ 106:24. despise, c. acc., God subj. שׂנאתי מאסתי חגיכם Am 5:21 I hate, I despise your feasts; elsewhere men subj. גם עוילים מ׳ בי Jb 19:18 even young children despise me; אמ׳ חיי 9:21 I despise my life, cf. מואס נפשׁוֹ Pr 15:32; הלא זה העם אשׁר מ׳ בוֹ Ju 9:38 is not this the people that thou despisedst? מ׳ עָרִים Is 33:8; obj. om. Jb 7:16 (34:33; 36:5; 42:6 (𝔖 Siegf אֶשְׁתֹּק; 𝔊 𝔙 Symm Bö אֶמָּאֵס) Ez 21:18 (but v. supr.).— be rejected: Impf. תִּמָּאֵס Is 54:6 (wife); Pt. נִמְאָס Je 6:30; (silver), ψ 15:4 (= reprobate; opp. יִרְאֵי י׳); + f. נִמְאָסָה, נִמְאֶסֶת 1 S 15:9 rejected, i.e. worthless (for ℌ נָמֵס) according to We Klo Dr Kit Bu HPS (‖ נמבזה, read נִבְזָה; cf. מסס, בזה Niph.)
+
+---
+
+### נִמְאָס
+**Lexicon**: BDB Dictionary
+**Vocalized**: מָאַס²  
+
+vb. flow, run (Aramaic id., but rare and dub.;—secondary form of מסס q.v.);—Impf. 3 ms. וַיִּמָּאֵס Jb 7:5 my skin hath hardened and run (i.e. again, afresh; > GHoffm Du read וַיִּמַּס, Bu וַיִּמָּאס, √ מסס); 3 mpl. יִמָּֽאֲסוּ כְּמוֹ מַיִם ψ 58:8 (fig. of annihilation of wicked).
+
+---
+
+### יָמִר
+**Lexicon**: BDB Dictionary
+**Vocalized**: מוּר  
+
+vb. change (NH id., Hiph.; Arabic مَارَ (med. ו) is move to and fro (intransitive); مَارَ (med. י) procure food, Aramaic ܡܳܪ buy or import food, NöZMG xl. 1886, 154);— Pf. נָמָ֑ר (as if from מרר) be changed, Je 48:11 subj. רֵיחוֹ (of wine, fig. of Moab); Pf. הֵמִיר Je 2:11; on הַהֵימִיר ib., v. Köi. 457; Impf. יָמִיר ψ 15:4 + 3 times; juss. יָמֵר Ez 48:14; sf. יְמִירֶנּוּ Lv 27:33(×2); אָמִיר Ho 4:7; וַיָּמִ֫ירוּ ψ 106:20; Inf. cstr. הָמִיר ψ 46:3; abs. הָמֵר Lv 27:10, 33;— change, alter, Mi 2:4 (obj. חֵלֶק עַמִּי; but 𝔊 יִמַּד בַּחֶבֶל, so Sta ZAW 1886, 122 f.); ψ 15:4 (no obj. expr.); Hiph. declar. 46:3 (ארץ subj., Hup Che Bae al., Ges§ 115, 2, R. 2) when the earth shews change; Krochm Gr proposes הִמּוֹג (cf. מוג v 7b ‖ מוט), but needless. exchange (sq. acc. of obj. relinquished, + בְּ before obj. acquired) Lv 27:10(×4) (2 times as Inf. abs.); Ho 4:7 ψ 106:20; cf. c. one obj. Lv 27:33(×3) (once as Inf. abs.); Je 2:11(×2) (cf. supr.); without obj. Ez 48:14 (but Ew Co יוּמַר, Hoph.). Impf. יוּמַר Ez 48:14 Ew Co, cf. Berthol.
+
+---
+
+### נֶשֶׁךְ
+**Lexicon**: BDB Dictionary
+**Vocalized**: נֶ֫שֶׁךְ  
+
+n.[m.] interest, usury (lit. something bitten off);—נ׳ abs. Ex 22:24 +; cstr. Dt 23:20;—c. שִׂים עַל־ Ex 22:24 (E); c. לָקַח מִן Lv 25:36, הֵשִׁיב מִן Ez 18:17, לָקַח 22:12 (no prep.), בְּנֶשֶׁךְ Lv 25:37 at interest, so ψ 15:5 Ez 18:8, 13; בְּנ׳ Pr 28:8 by usury; as acc. cogn. Dt 23:20(×3).
+
+---
+
+### שֹׁחַד
+**Lexicon**: BDB Dictionary
+**Vocalized**: שֹׁ֫חַד  
+
+n.m. present, specif. bribe;—שׁ׳ abs. Is 1:23 + 22 times;—bribe, usually to pervert justice, obj. of לָקַח Ex 23:8a (E), = Dt 16:19a; Dt 10:17; 1 S 8:3; 2 Ch 19:7 ψ 15:5; Pr 17:23; + inf., take bribe to do something, Dt 27:25; Ez 22:12; אָהַב שׁ׳ Is 1:23; cf. also 5:23; 33:15 Ex 23:8b (E) = Dt 16:19b, Mi 3:11 ψ 26:10; Pr 17:8; 21:14; אָהֳלֵי־שׁ׳ Jb 15:34, i.e. abode of bribe-givers; שׁ׳ Pr 6:35 (‖ כֹּפֶר) is hush-money, or (poss.) legal compensation (cf. Toy); שׁ׳ elsewhere (c. שָׁלַח) of bribing king to take sides 1 K 15:19; 2 K 16:8, cf. Is 45:13 (‖ מְחִיר).
+
+---
+
+### יִמּוֹט
+**Lexicon**: BDB Dictionary
+**Vocalized**: מוֹט  
+
+vb. totter, shake, slip (usually poet.) (NH id., der. species; Aramaic ܡܳܛ, מוּט; Arabic مَاطَ (med. י) remove, retire; deviate from right course; repel, push, thrust; Ethiopic ሜጠ turn; Assyrian maṭû is dwindle, diminish, grow weak DlHWB 405; > denom. from מוט pole, bar DlProl. 184 GerberVerb. denom. 195 f., cf. Buhl);— Pf. 3 fs. מָ֫טָה ψ 60:4 + 2 times; 3 pl. מָ֫טוּ ψ 46:7; Impf. 3 fs. תָּמוּט Dt 32:35; Is 54:10; 3 fpl. תְּמוּטֶינָה Is 54:10; Inf. cstr. מוֹט ψ 38:17; 46:3; abs. id. Is 24:19; Pt. מָט Pr 25:26; pl. מָטִים Pr 24:11;—totter, slip, subj. רֶגֶל (fig. of insecurity) Dt 32:35 ψ 38:17; 94:18: cf. (without רֶגֶל) Pr 24:11 מ׳ לַהֶרֶג; מ׳ לִפְנֵי־רָשָׁע 25:26; shake, intr., subj. יָד Lv 25:35 (H; of feebleness); subj. גְּבָעוֹת Is 54:10 (‖ מוּשׁ); מ׳ הָרִים בְּלֵב יַמִּים ψ 46:3 (‖ הֵמִיר, cf. מור) (both symb. of extreme insecurity); cf. subj. בְּרִית Is 54:10; subj. מַמְלָכוֹת ψ 46:7; subj. אֶרֶץ (= land) ψ 60:4; cf. Is 24:19 (v. sub Hithp.) Pf. 3 pl. נָמ֫וֹטוּ ψ 17:5; Impf. יִמּוֹט ψ 15:5 + 8 times, etc.;—all poet., mostly c. neg. (בַּל 13 times; לֹא 6 times), be shaken, moved, overthrown, of idols Is 40:20; 41:7; of scales of crocodile Jb 41:15; of תֵּבֵל 1 Ch 16:30 = ψ 93:1; 96:10; of אֶרֶץ ψ 104:5; of הַר־צִיּוֹן ψ 125:1, cf. 46:6; fig. of general disorder (no neg.), subj. מוֹסְדֵי אֶרֶץ ψ 82:5; often of (un)righteous, as secure, ψ (10:6) 15:5; 16:8; 21:8; 30:7; 62:3, 7; 112:6 Pr 10:30; 12:3 (subj. שֹׁרֶשׁ צַדִּיקִים); cf. (without neg.) ψ 13:5; 140:11 Qr (so appar. 𝔊 AV RV; but meaning of Niph. not suitable; Kt Hiph. q.v.); fig. of steadfast obedience (subj. פְּעָמַי) ψ 17:5. Impf. 3 mpl. יָמִ֫יטוּ ψ 55:4; 140:11 Kt (Qr Niph.);—dislodge, let fall, drop יָמִיטוּ עָלַי אָ֫וֶן ψ 55:4; cf. וימיטו עֲלֵיהֶם גֶּחָלִים 140:11 Kt, and may they drop coals upon them, De al.; יַמְטִיר (Hup Gr Bae Dr), wh. Bi Che insert. Hithpoʿl. Pf. 3 fs. מוֹט הִתְמוֹטְטָה Is 24:19 be greatly shaken (subj. אֶרֶץ, in judgment of י׳; ‖ רעע, פרר, Hithp.)
+
+---
+
+### יִמּוֹט
+**Lexicon**: BDB Dictionary
+**Vocalized**: מוֹט²  
+
+n.[m.] shaking, pole, bar of yoke;—abs. מ׳ Nu 4:10 + 5 times; sf. מֹטֵ֫הוּ Na 1:13;— a shaking, tottering (c. neg., of security) לֹא־יִתֵּן מ׳ לַצַּדִּיק ψ 55:23; לֹא נָתַן לַמּ׳ רַגְלֵנוּ ψ 66:9, cf. 121:3. pole, or bar for carrying (named from springing motion) Nu 4:10, 12 cf. especially 13:23. bar of yoke Na 1:13 (אֶשְׁבֹּר מֹטֵהוּ מֵעָלַיִךְ), fig. of oppression. Cf. following.
+
+---
+
+## Concordance Searches
+
+### Search 1: יָגוּר בְּאֹהֶל
+**Scope**: auto  
+**Level**: consonantal  
+**Variations searched**: 2394  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 15:1**  
+Hebrew: מִזְמ֗וֹר לְדָ֫וִ֥ד יְ֭הֹוָה מִי־יָג֣וּר בְּאׇהֳלֶ֑ךָ מִֽי־יִ֝שְׁכֹּ֗ן בְּהַ֣ר קׇדְשֶֽׁךָ׃  
+English: A psalm of David.
+LORD, who may sojourn in Your tent,
+who may dwell on Your holy mountain?  
+Matched: *יגור באהלך*  
+
+---
+
+### Search 2: יִשְׁכֹּן בְּהַר קׇדְשׁ
+**Scope**: auto  
+**Level**: consonantal  
+**Variations searched**: 2139  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 15:1**  
+Hebrew: מִזְמ֗וֹר לְדָ֫וִ֥ד יְ֭הֹוָה מִי־יָג֣וּר בְּאׇהֳלֶ֑ךָ מִֽי־יִ֝שְׁכֹּ֗ן בְּהַ֣ר קׇדְשֶֽׁךָ׃  
+English: A psalm of David.
+LORD, who may sojourn in Your tent,
+who may dwell on Your holy mountain?  
+Matched: *ישכן בהר קדשך*  
+
+---
+
+### Search 3: דֹּבֵר אֱמֶת בִּלְבָבוֹ
+**Scope**: auto  
+**Level**: consonantal  
+**Variations searched**: 2139  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 15:2**  
+Hebrew: הוֹלֵ֣ךְ תָּ֭מִים וּפֹעֵ֥ל צֶ֑דֶק וְדֹבֵ֥ר אֱ֝מֶ֗ת בִּלְבָבֽוֹ׃  
+English: He who lives without blame,
+who does what is right,
+and in his heart acknowledges the truth;  
+Matched: *דֹּבֵר אֱמֶת בִּלְבָבוֹ*  
+
+---
+
+### Search 4: רָגַל עַל־לְשֹׁנוֹ
+**Scope**: auto  
+**Level**: consonantal  
+**Variations searched**: 2842  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 15:3**  
+Hebrew: לֹֽא־רָגַ֨ל ׀ עַל־לְשֹׁנ֗וֹ לֹא־עָשָׂ֣ה לְרֵעֵ֣הוּ רָעָ֑ה וְ֝חֶרְפָּ֗ה לֹא־נָשָׂ֥א עַל־קְרֹבֽוֹ׃  
+English: whose tongue is not given to evil;-a
+who has never done harm to his fellow,
+or borne reproach for [his acts toward] his neighbor;  
+Matched: *רגל על לשנו*  
+
+---
+
+### Search 5: נִשְׁבַּע לְהָרַע
+**Scope**: auto  
+**Level**: consonantal  
+**Variations searched**: 3192  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 15:4**  
+Hebrew: נִבְזֶ֤ה ׀ בְּֽעֵ֘ינָ֤יו נִמְאָ֗ס וְאֶת־יִרְאֵ֣י יְהֹוָ֣ה יְכַבֵּ֑ד נִשְׁבַּ֥ע לְ֝הָרַ֗ע וְלֹ֣א יָמִֽר׃  
+English: for whom a contemptible man is abhorrent,
+but who honors those who fear the LORD;
+who stands by his oath even to his hurt;  
+Matched: *נשבע להרע*  
+
+---
+
+### Search 6: נֶשֶׁךְ וְשֹׁחַד
+**Scope**: auto  
+**Level**: consonantal  
+**Variations searched**: 3192  
+**Results**: 1  
+
+#### Top Results:
+
+**Psalms 15:5**  
+Hebrew: כַּסְפּ֤וֹ ׀ לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮ וְשֹׁ֥חַד עַל־נָקִ֗י לֹ֥א־לָ֫קָ֥ח עֹֽשֵׂה־אֵ֑לֶּה לֹ֖א יִמּ֣וֹט לְעוֹלָֽם׃ {פ}  
+English: who has never lent money at interest,
+or accepted a bribe against the innocent.
+The man who acts thus shall never be shaken.  
+Matched: *בנשך ושחד*  
+
+---
+
+### Search 7: לֹא־יִמּוֹט לְעוֹלָם
+**Scope**: auto  
+**Level**: consonantal  
+**Variations searched**: 2205  
+**Results**: 9  
+
+#### Top Results:
+
+**Psalms 15:5**  
+Hebrew: כַּסְפּ֤וֹ ׀ לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮ וְשֹׁ֥חַד עַל־נָקִ֗י לֹ֥א־לָ֫קָ֥ח עֹֽשֵׂה־אֵ֑לֶּה לֹ֖א יִמּ֣וֹט לְעוֹלָֽם׃ {פ}  
+English: who has never lent money at interest,
+or accepted a bribe against the innocent.
+The man who acts thus shall never be shaken.  
+Matched: *לא ימוט לעולם*  
+
+**Psalms 125:1**  
+Hebrew: שִׁ֗יר הַֽמַּ֫עֲל֥וֹת הַבֹּטְחִ֥ים בַּיהֹוָ֑ה כְּֽהַר־צִיּ֥וֹן לֹא־יִ֝מּ֗וֹט לְעוֹלָ֥ם יֵשֵֽׁב׃  
+English: A song of ascents.
+Those who trust in the LORD
+are like Mount Zion
+that cannot be moved,
+enduring forever.  
+Matched: *לא ימוט לעולם*  
+
+**Isaiah 40:20**  
+Hebrew: הַֽמְסֻכָּ֣ן תְּרוּמָ֔ה עֵ֥ץ לֹא־יִרְקַ֖ב יִבְחָ֑ר חָרָ֤שׁ חָכָם֙ יְבַקֶּשׁ־ל֔וֹ לְהָכִ֥ין פֶּ֖סֶל לֹ֥א יִמּֽוֹט׃ {ס}  
+English: As a gift, someone chooses the mulberryfmulberry Heb. mesukkan; according to a Jewish tradition, preserved by Jerome, a kind of wood; a similar word denotes a kind of wood in Akkadian.—A wood that does not rot—Then seeks a skillful woodworkerTo make a firm idol,That will not topple.  
+Matched: *יִמּֽוֹט׃* (position 13)  
+
+**Isaiah 41:7**  
+Hebrew: וַיְחַזֵּ֤ק חָרָשׁ֙ אֶת־צֹרֵ֔ף מַחֲלִ֥יק פַּטִּ֖ישׁ אֶת־ה֣וֹלֶם פָּ֑עַם אֹמֵ֤ר לַדֶּ֙בֶק֙ ט֣וֹב ה֔וּא וַיְחַזְּקֵ֥הוּ בְמַסְמְרִ֖ים לֹ֥א יִמּֽוֹט׃ {ס}  
+English: The woodworker encourages the smith;He who flattens with the hammer[Encourages] him who pounds the anvil.He says of the riveting, “It is good!”And he fixes it with nails,That it may not topple.  
+Matched: *יִמּֽוֹט׃* (position 16)  
+
+**Job 41:15**  
+Hebrew: מַפְּלֵ֣י בְשָׂר֣וֹ דָבֵ֑קוּ יָצ֥וּק עָ֝לָ֗יו בַּל־יִמּֽוֹט׃  
+English: The layers of his flesh stick together;He is as though cast hard; he does not totter.  
+Matched: *יִמּֽוֹט׃* (position 6)  
+
+**Proverbs 10:30**  
+Hebrew: צַ֭דִּיק לְעוֹלָ֣ם בַּל־יִמּ֑וֹט וּ֝רְשָׁעִ֗ים לֹ֣א יִשְׁכְּנוּ־אָֽרֶץ׃  
+English: The righteous will never be shaken;The wicked will not inhabit the earth.  
+Matched: *יִמּ֑וֹט* (position 3)  
+
+**Proverbs 12:3**  
+Hebrew: לֹא־יִכּ֣וֹן אָדָ֣ם בְּרֶ֑שַׁע וְשֹׁ֥רֶשׁ צַ֝דִּיקִ֗ים בַּל־יִמּֽוֹט׃  
+English: A man cannot be established in wickedness,But the root of the righteous will not be shaken loose.  
+Matched: *יִמּֽוֹט׃* (position 7)  
+
+**Psalms 21:8**  
+Hebrew: כִּֽי־הַ֭מֶּלֶךְ בֹּטֵ֣חַ בַּיהֹוָ֑ה וּבְחֶ֥סֶד עֶ֝לְי֗וֹן בַּל־יִמּֽוֹט׃  
+English: For the king trusts in the LORD;
+Through the faithfulness of the Most High
+he will not be shaken.  
+Matched: *יִמּֽוֹט׃* (position 7)  
+
+**Psalms 112:6**  
+Hebrew: כִּֽי־לְעוֹלָ֥ם לֹֽא־יִמּ֑וֹט לְזֵ֥כֶר ע֝וֹלָ֗ם יִהְיֶ֥ה צַדִּֽיק׃  
+English: He shall never be shaken;
+the beneficent man will be remembered forever.  
+Matched: *יִמּ֑וֹט* (position 3)  
+
+---
+
+## Figurative Language Instances
+
+### Query 1
+**Filters**: Vehicle contains: tent  
+**Results**: 20  
+
+**Core pattern**: tents metaphor (2/20 instances, 10%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Isaiah 54:2** (confidence: 0.96) - The commands to enlarge the tent signify Zion’s need to prepare for a coming influx of inhabitants a...
+2. ⭐ **Psalms 15:1** (confidence: 0.95) - The 'tent' (referring to the Tabernacle or Temple) is used metonymically to represent God's sacred d...
+3. ⭐ **Genesis 9:27** (confidence: 0.95) - The term 'tents' is used metonymically (specifically, synecdoche) to represent the dwelling places, ...
+
+#### All Instances (20 total):
+
+**Psalms 15:1** (metonymy) - confidence: 0.95  
+*Figurative phrase*: in Your tent  
+
+**Full verse (Hebrew)**: מִזְמ֗וֹר לְדָ֫וִ֥ד יְ֭הֹוָה מִי־יָג֣וּר בְּאׇהֳלֶ֑ךָ מִֽי־יִ֝שְׁכֹּ֗ן בְּהַ֣ר קׇדְשֶֽׁךָ  
+**Full verse (English)**: A psalm of David.LORD, who may sojourn in Your tent,who may dwell on Your holy mountain?  
+
+*Hebrew phrase*: בְּאׇהֳלֶ֑ךָ  
+*Explanation*: The 'tent' (referring to the Tabernacle or Temple) is used metonymically to represent God's sacred dwelling place and, by extension, the privilege of being in His divine presence and fellowship....  
+*Target*: divine fellowship → sacred presence → spiritual relationship  
+*Vehicle*: God's tent → sacred dwelling → physical sanctuary  
+*Ground*: association → representation → sacred space  
+*Confidence*: 0.95  
+
+**Psalms 27:5** (metaphor) - confidence: 0.90  
+*Figurative phrase*: in the hiding place of His tent  
+
+**Full verse (Hebrew)**: כִּ֤י יִצְפְּנֵ֨נִי&thinsp;׀ בְּסֻכֹּה֮ בְּי֢וֹם רָ֫עָ֥ה יַ֭סְתִּרֵנִי בְּסֵ֣תֶר אׇהֳל֑וֹ בְּ֝צ֗וּר יְרוֹמְמֵֽנִי  
+**Full verse (English)**: He will shelter me in His pavilionon an evil day,grant me the protection of His tent,raise me high upon a rock.  
+
+*Hebrew phrase*: בְּסֵ֣תֶר אׇהֳל֑וֹ  
+*Explanation*: God's tent, specifically its 'hiding place,' is a metaphor for the intimate and secure refuge God provides, shielding the psalmist from harm. God does not literally have a physical tent....  
+*Target*: psalmist's protection → divine care → spiritual security  
+*Vehicle*: hiding place of God's tent → secure dwelling → private refuge  
+*Ground*: intimacy → concealment → security  
+*Confidence*: 0.90  
+
+**Genesis 9:27** (metonymy) - confidence: 0.95  
+*Figurative phrase*: in the tents of Shem  
+
+**Full verse (Hebrew)**: יַ֤פְתְּ אֱלֹהִים֙ לְיֶ֔פֶת וְיִשְׁכֹּ֖ן בְּאׇֽהֳלֵי־שֵׁ֑ם וִיהִ֥י כְנַ֖עַן עֶ֥בֶד לָֽמוֹ  
+**Full verse (English)**: May God enlarge*enlarge Heb. yapht, play on Heb. yepheth “Japheth.” Japheth,And let him dwell in the tents of Shem;And let Canaan be a slave to them.”  
+
+*Hebrew phrase*: בְּאׇֽהֳלֵי־שֵׁ֑ם  
+*Explanation*: The term 'tents' is used metonymically (specifically, synecdoche) to represent the dwelling places, territory, people, or sphere of influence of Shem's descendants....  
+*Target*: Shem's descendants' domain → people's territory → human habitation  
+*Vehicle*: tents → physical structures → dwelling places  
+*Ground*: residence → territory → sphere of influence  
+*Confidence*: 0.95  
+
+**Psalms 104:2** (simile) - confidence: 0.95  
+*Figurative phrase*: You spread the heavens like a tent cloth  
+
+**Full verse (Hebrew)**: עֹֽטֶה־א֭וֹר כַּשַּׂלְמָ֑ה נוֹטֶ֥ה שָׁ֝מַ֗יִם כַּיְרִיעָֽה  
+**Full verse (English)**: wrapped in a robe of light;You spread the heavens like a tent cloth.  
+
+*Hebrew phrase*: נוֹטֶ֥ה שָׁ֝מַ֗יִם כַּיְרִיעָֽה  
+*Explanation*: The act of God spreading the vast heavens during creation is compared to the simple, deliberate act of spreading a tent cloth. This simile emphasizes God's effortless power, ease, and intentional desi...  
+*Target*: God's act of creation → spreading the heavens → divine power  
+*Vehicle*: spreading a tent cloth → unfurling a canopy → human action  
+*Ground*: ease → vastness → deliberate action  
+*Confidence*: 0.95  
+
+**Exodus 29:46** (metaphor) - confidence: 0.90  
+*Figurative phrase*: that I might abide among them  
+
+**Full verse (Hebrew)**: וְיָדְע֗וּ כִּ֣י אֲנִ֤י יְהֹוָה֙ אֱלֹ֣הֵיהֶ֔ם אֲשֶׁ֨ר הוֹצֵ֧אתִי אֹתָ֛ם מֵאֶ֥רֶץ מִצְרַ֖יִם לְשׇׁכְנִ֣י בְתוֹכָ֑ם אֲנִ֖י יְהֹוָ֥ה אֱלֹהֵיהֶֽם&nbsp;{פ}  
+**Full verse (English)**: And they shall know that I יהוה am their God, who brought them out from the land of Egypt that I might abide among them—I, their God יהוה.  
+
+*Hebrew phrase*: לְשׇׁכְנִ֣י בְתוֹכָ֑ם  
+*Explanation*: The verb 'to abide/dwell' (שׁכן) is used metaphorically. It applies the physical, human action of residing in a home to the theological concept of God's special, covenantal presence among His people. ...  
+*Target*: God's covenantal presence → Divine immanence → Theology  
+*Vehicle*: Dwelling in a home/tent → Human cohabitation → Human experience  
+*Ground*: Intimacy → Proximity → Sustained presence  
+*Confidence*: 0.90  
+
+**Deuteronomy 5:27** (idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: to your tents  
+
+**Full verse (Hebrew)**: לֵ֖ךְ אֱמֹ֣ר לָהֶ֑ם שׁ֥וּבוּ לָכֶ֖ם לְאׇהֳלֵיכֶֽם  
+**Full verse (English)**: Go, say to them, ‘Return to your tents.’  
+
+*Hebrew phrase*: לְאׇהֳלֵיכֶֽם  
+*Explanation*: The phrase 'to your tents' is a common biblical idiom and metonymy where 'tents' represents one's home, household, or family, signifying a return to one's domestic sphere rather than strictly a physic...  
+*Target*: home → household → domestic sphere  
+*Vehicle*: tent → dwelling structure → physical shelter  
+*Ground*: place of residence → belonging → family unit  
+*Confidence*: 0.90  
+
+**Psalms 19:5** (metaphor, personification) - confidence: 0.90  
+*Figurative phrase*: He placed in them a tent for the sun,  
+
+**Full verse (Hebrew)**: בְּכׇל־הָאָ֨רֶץ&thinsp;׀ יָ֘צָ֤א קַוָּ֗ם וּבִקְצֵ֣ה תֵ֭בֵל מִלֵּיהֶ֑ם לַ֝שֶּׁ֗מֶשׁ שָֽׂם־אֹ֥הֶל בָּהֶֽם  
+**Full verse (English)**: Their voicebCf. Septuagint, Symmachus, and Vulgate; Arabic qawwah, “to shout.” carries throughout the earth,their words to the end of the world.He placed in themcViz., the heavens. a tent for the sun,  
+
+*Hebrew phrase*: לַ֝שֶּׁ֗מֶשׁ שָֽׂם־אֹ֥הֶל בָּהֶֽם  
+*Explanation*: The sun is personified by being given a 'tent,' implying it has a dwelling place like a human. The 'tent' also functions as a metaphor for the sun's apparent dwelling or starting point in the heavens,...  
+*Target*: Sun's daily course/dwelling → Celestial body's movement → Natural phenomenon  
+*Vehicle*: Human dwelling/tent → Shelter → Abode  
+*Ground*: Established place → Regularity of movement → Orderliness  
+*Confidence*: 0.90  
+
+**Psalms 18:12** (metaphor) - confidence: 0.90  
+*Figurative phrase*: His pavilion [was] dark thunderheads, dense clouds of the sky  
+
+**Full verse (Hebrew)**: יָ֤שֶׁת־חֹ֨שֶׁךְ&thinsp;׀ סִתְר֗וֹ סְבִֽיבוֹתָ֥יו סֻכָּת֑וֹ חֶשְׁכַת־מַ֝֗יִם עָבֵ֥י שְׁחָקִֽים  
+**Full verse (English)**: He made darkness His screen;dark thunderheads, dense clouds of the skywere His pavilion round about Him.  
+
+*Hebrew phrase*: סֻכָּתוֹ חֶשְׁכַת־מַיִם עָבֵי שְׁחָקִים  
+*Explanation*: Natural atmospheric phenomena (dark waters/clouds) are directly equated with a physical dwelling (pavilion) for God. This is a cross-domain comparison where natural elements are presented as a structu...  
+*Target*: God's dwelling → divine presence → divine manifestation  
+*Vehicle*: pavilion → tent → dwelling  
+*Ground*: majesty → power → transcendence  
+*Confidence*: 0.90  
+
+**Isaiah 40:22** (simile, hyperbole) - confidence: 0.95  
+*Figurative phrase*: And spreads them out like a tent to dwell in  
+
+**Full verse (Hebrew)**: הַיֹּשֵׁב֙ עַל־ח֣וּג הָאָ֔רֶץ וְיֹשְׁבֶ֖יהָ כַּחֲגָבִ֑ים הַנּוֹטֶ֤ה כַדֹּק֙ שָׁמַ֔יִם וַיִּמְתָּחֵ֥ם כָּאֹ֖הֶל לָשָֽׁבֶת  
+**Full verse (English)**: It is [God] who is enthroned above the vault of the earth, So that its inhabitants seem as grasshoppers; Who spread out the skies like gauze, Stretched them out like a tent to dwell in—  
+
+*Hebrew phrase*: וַיִּמְתָּחֵם כָּאֹהֶל לָשָׁבֶת  
+*Explanation*: The heavens are compared to a tent that God stretches out for dwelling, a simile casting creation as a deliberate, hospitable arrangement for life....  
+*Target*: the heavens as human environment → ordered cosmos → creation as dwelling-space  
+*Vehicle*: a tent pitched for habitation → nomadic shelter → portable dwelling  
+*Ground*: providing shelter and ordered space for living → intentional arrangement for inhabitants → domestication of space  
+*Confidence*: 0.95  
+
+**Isaiah 54:2** (metaphor) - confidence: 0.96  
+*Figurative phrase*: Enlarge the site of your tent … Lengthen the ropes, and drive the pegs firm.  
+
+**Full verse (Hebrew)**: הַרְחִ֣יבִי&thinsp;׀ מְק֣וֹם אׇהֳלֵ֗ךְ וִירִיע֧וֹת מִשְׁכְּנוֹתַ֛יִךְ יַטּ֖וּ אַל־תַּחְשֹׂ֑כִי הַאֲרִ֙יכִי֙ מֵיתָרַ֔יִךְ וִיתֵדֹתַ֖יִךְ חַזֵּֽקִי  
+**Full verse (English)**: Enlarge the site of your tent, Extend the size of your dwelling,  Do not stint! Lengthen the ropes, and drive the pegs firm.  
+
+*Hebrew phrase*: הַרְחִ֣יבִי מְק֣וֹם אׇהֳלֵ֗ךְ ... הַאֲרִ֙יכִי֙ מֵיתָרַ֔יִךְ וִיתֵדֹתַ֖יִךְ חַזֵּֽקִי  
+*Explanation*: The commands to enlarge the tent signify Zion’s need to prepare for a coming influx of inhabitants and blessings; the physical tent imagery stands for corporate expansion and stability....  
+*Target*: Zion’s communal space and capacity → national territory and community life → restored covenant community  
+*Vehicle*: a nomadic tent being enlarged with extended curtains, ropes, and firm pegs → domestic dwelling structure → pastoral/nomadic living domain  
+*Ground*: making more room to accommodate greater numbers → growth, stability, and preparation for expansion → blessing and increased population after exile  
+*Confidence*: 0.96  
+
+*...and 10 more instances*
+
+**Usage breakdown**: tents (2x), God's tent (1x), hiding place of God's tent (1x)
+
+---
+
+### Query 2
+**Filters**: Vehicle contains: walk  
+**Results**: 20  
+
+**Core pattern**: physical path metaphor (3/20 instances, 15%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Psalms 119:26** (confidence: 1.00) - The term 'ways' (דְּרָכַ֣י) is a common biblical metaphor and idiom for one's conduct, actions, or t...
+2. ⭐ **Psalms 119:15** (confidence: 1.00) - The term 'ways' (אֹרְחֹתֶיךָ) is a common biblical metaphor for God's character, conduct, moral prin...
+3. ⭐ **Genesis 17:1** (confidence: 1.00) - The physical act of 'walking' (הִתְהַלֵּךְ) is used metaphorically to represent one's moral and spir...
+
+#### All Instances (20 total):
+
+**Psalms 119:26** (metaphor) - confidence: 1.00  
+*Figurative phrase*: my way  
+
+**Full verse (Hebrew)**: דְּרָכַ֣י סִ֭פַּרְתִּי וַֽתַּעֲנֵ֗נִי לַמְּדֵ֥נִי חֻקֶּֽיךָ  
+**Full verse (English)**: I have declared my way, and You have answered me;train me in Your laws.  
+
+*Hebrew phrase*: דְּרָכַ֣י  
+*Explanation*: The term 'ways' (דְּרָכַ֣י) is a common biblical metaphor and idiom for one's conduct, actions, or the overall course of one's life, rather than a literal physical path....  
+*Target*: speaker's conduct → moral behavior → human actions  
+*Vehicle*: physical path → road → journey  
+*Ground*: direction of life → pattern of behavior → choices made  
+*Confidence*: 1.00  
+
+**Psalms 116:8** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: my feet from stumbling  
+
+**Full verse (Hebrew)**: כִּ֤י חִלַּ֥צְתָּ נַפְשִׁ֗י מִ֫מָּ֥וֶת אֶת־עֵינִ֥י מִן־דִּמְעָ֑ה אֶת־רַגְלִ֥י מִדֶּֽחִי  
+**Full verse (English)**: YoubI.e., God. have delivered me from death,my eyes from tears,my feet from stumbling.  
+
+*Hebrew phrase*: אֶת־רַגְלִ֥י מִדֶּֽחִי  
+*Explanation*: This is a common biblical idiom and metaphor where 'feet' represent one's life path or conduct, and 'stumbling' signifies moral failure, misfortune, or a loss of stability in life, rather than merely ...  
+*Target*: the speaker's life path → the speaker's conduct → human stability  
+*Vehicle*: physical feet → physical stumbling → walking  
+*Ground*: stability → security → guidance  
+*Confidence*: 0.90  
+
+**Isaiah 30:11** (metaphor) - confidence: 0.97  
+*Figurative phrase*: Leave the way! Get off the path!  
+
+**Full verse (Hebrew)**: ס֚וּרוּ מִנֵּי־דֶ֔רֶךְ הַטּ֖וּ מִנֵּי־אֹ֑רַח הַשְׁבִּ֥יתוּ מִפָּנֵ֖ינוּ אֶת־קְד֥וֹשׁ יִשְׂרָאֵֽל&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: Leave the way! Get off the path! Let us hear no more About the Holy One of Israel!”  
+
+*Hebrew phrase*: סוּרוּ מִנֵּי־דֶרֶךְ הַטּוּ מִנֵּי־אֹרַח  
+*Explanation*: ‘Way’ and ‘path’ are metaphors for the course of life and obedience; here the people demand to abandon that route, exposing their rejection of God’s guidance....  
+*Target*: the prophetic/moral way of the LORD → ethical-religious conduct → covenant lifestyle/teaching  
+*Vehicle*: way/path walked on → route for travel → spatial movement  
+*Ground*: direction, guidance, progression, choice of route → structuring of behavior over time → life conduct conceptualized as walking a path  
+*Confidence*: 0.97  
+
+**Isaiah 8:14** (metaphor) - confidence: 0.98  
+*Figurative phrase*: and [He shall be] a stone one strikes against and a rock people stumble over for the two houses of Israel  
+
+**Full verse (Hebrew)**: וְהָיָ֖ה לְמִקְדָּ֑שׁ וּלְאֶ֣בֶן נֶ֠גֶף וּלְצ֨וּר מִכְשׁ֜וֹל לִשְׁנֵ֨י בָתֵּ֤י יִשְׂרָאֵל֙ לְפַ֣ח וּלְמוֹקֵ֔שׁ לְיוֹשֵׁ֖ב יְרוּשָׁלָֽ͏ִם  
+**Full verse (English)**: [God] shall become a sanctuary, A stone people strike against: A rock people stumble over For the two Houses of Israel, And a trap and a snare for those Who dwell in Jerusalem.  
+
+*Hebrew phrase*: וּלְאֶבֶן נֶגֶף וּלְצוּר מִכְשׁוֹל לִשְׁנֵי בָתֵּי יִשְׂרָאֵל  
+*Explanation*: God is metaphorically cast as a stumbling-stone and rock for Israel and Judah; their refusal to trust him turns him into the very obstacle over which they fall....  
+*Target*: the northern and southern kingdoms in their unbelief → Israel and Judah’s encounter with YHWH in disobedience → covenant people under judgment  
+*Vehicle*: a stone and rock in a path that causes people to stumble and fall → an obstructing, injurious object underfoot → terrain/obstacle imagery  
+*Ground*: unexpected collision, stumbling, and injury → what should be stable becomes cause of downfall → danger in failing to reckon with a solid obstacle  
+*Confidence*: 0.98  
+
+**Isaiah 48:17** (metaphor, idiom) - confidence: 0.97  
+*Figurative phrase*: guiding you in the way you should go  
+
+**Full verse (Hebrew)**: כֹּה־אָמַ֧ר יְהֹוָ֛ה גֹּאַלְךָ֖ קְד֣וֹשׁ יִשְׂרָאֵ֑ל אֲנִ֨י יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ מְלַמֶּדְךָ֣ לְהוֹעִ֔יל מַדְרִֽיכְךָ֖ בְּדֶ֥רֶךְ תֵּלֵֽךְ  
+**Full verse (English)**: Thus said  GOD your Redeemer, The Holy One of Israel: I  the ETERNAL One am your God, Instructing you for your own benefit. Guiding you in the way you should go.  
+
+*Hebrew phrase*: מַדְרִֽיכְךָ֖ בְּדֶ֥רֶךְ תֵּלֵֽךְ  
+*Explanation*: The verse uses the common Biblical metaphor of life as a 'way' or path, with God guiding Israel along the proper route....  
+*Target*: Israel’s conduct and choices → ethical/spiritual lifestyle → human behavior  
+*Vehicle*: a way/road one travels with a guide → path / journey → spatial movement  
+*Ground*: living according to God’s will is like walking a marked path with a guide showing the correct route → direction / guidance → travel domain mapped to moral existence  
+*Confidence*: 0.97  
+
+**Isaiah 26:8** (metaphor) - confidence: 0.90  
+*Figurative phrase*: Also, in the path of Your judgments, O LORD, we have waited for You.  
+
+**Full verse (Hebrew)**: אַ֣ף אֹ֧רַח מִשְׁפָּטֶ֛יךָ יְהֹוָ֖ה קִוִּינ֑וּךָ לְשִׁמְךָ֥ וּלְזִכְרְךָ֖ תַּאֲוַת־נָֽפֶשׁ  
+**Full verse (English)**: For Your just ways, O  ETERNAL One, we look to You; We long for the name by which You are called.  
+
+*Hebrew phrase*: אֹרַח מִשְׁפָּטֶיךָ יְהוָה קִוִּינוּךָ  
+*Explanation*: God’s judgments and the life ordered by them are conceptualized as a path along which the faithful walk and wait for Him....  
+*Target*: God’s pattern of just dealings and the lifestyle shaped by them → covenantal order/ethical obedience → moral/theological domain  
+*Vehicle*: a path on which one walks → route/way of travel → journey domain  
+*Ground*: a directed, habitual course to follow → orderly progression in a set direction → experience of walking a way  
+*Confidence*: 0.90  
+
+**Psalms 119:51** (metaphor) - confidence: 0.90  
+*Figurative phrase*: I have not swerved  
+
+**Full verse (Hebrew)**: זֵ֭דִים הֱלִיצֻ֣נִי עַד־מְאֹ֑ד מִ֝תּ֥וֹרָתְךָ֗ לֹ֣א נָטִֽיתִי  
+**Full verse (English)**: Though the arrogant have cruelly mocked me,I have not swerved from Your teaching.  
+
+*Hebrew phrase*: לֹ֣א נָטִֽיתִי  
+*Explanation*: The physical action of 'swerving' or 'turning aside' (נָטָה) is metaphorically applied to an abstract concept, 'Your teaching' (תּוֹרָה). One cannot physically swerve from a teaching; rather, it signi...  
+*Target*: deviation from teaching → moral deviation → spiritual adherence  
+*Vehicle*: swerving from a path → turning aside from a road → physical movement  
+*Ground*: steadfastness → adherence → consistency  
+*Confidence*: 0.90  
+
+**Isaiah 30:21** (metaphor) - confidence: 0.97  
+*Figurative phrase*: This is the road; walk in it, when you turn to the right or to the left  
+
+**Full verse (Hebrew)**: וְאׇזְנֶ֙יךָ֙ תִּשְׁמַ֣עְנָה דָבָ֔ר מֵאַחֲרֶ֖יךָ לֵאמֹ֑ר זֶ֤ה הַדֶּ֙רֶךְ֙ לְכ֣וּ ב֔וֹ כִּ֥י תַאֲמִ֖ינוּ וְכִ֥י תַשְׂמְאִֽילוּ  
+**Full verse (English)**: and, whenever you deviate to the right or to the left, your ears will heed the command from behind you: “This is the road; follow it!”  
+
+*Hebrew phrase*: זֶה הַדֶּרֶךְ לְכוּ בוֹ כִּי תַאֲמִינוּ וְכִי תַשְׂמְאִילוּ  
+*Explanation*: The verse uses road-walking imagery to express obedience: living rightly is ‘walking’ on a designated path without turning aside....  
+*Target*: the correct course of life in obedience to God → ethical/spiritual behavior → covenant path  
+*Vehicle*: a road to be walked, with turns right or left → journey along a path → spatial navigation  
+*Ground*: direction, choice-points, staying on or leaving a route → process of decision-making → obedience conceptualized as staying on the proper path  
+*Confidence*: 0.97  
+
+**Proverbs 4:15** (metaphor) - confidence: 0.95  
+*Figurative phrase*: Avoid it; do not pass through it; Turn away from it; pass it by.  
+
+**Full verse (Hebrew)**: פְּרָעֵ֥הוּ אַל־תַּעֲבׇר־בּ֑וֹ שְׂטֵ֖ה מֵעָלָ֣יו וַעֲבֹֽר  
+**Full verse (English)**: Avoid it; do not pass through it; Turn away from it; pass it by.  
+
+*Hebrew phrase*: פְּרָעֵהוּ אַל־תַּעֲבׇר־בּוֹ שְׂטֵה מֵעָלָיו וַעֲבֹר  
+*Explanation*: Physical instructions about not traveling on a road are used metaphorically to command moral and social distance from the paths of the wicked....  
+*Target*: rejecting participation in wicked behavior → practical moral decisions to avoid evil influences → ethical/spiritual avoidance  
+*Vehicle*: steering clear of a dangerous or undesirable path → diverting one’s route and passing by a road → spatial avoidance in travel  
+*Ground*: avoiding a perilous path by not entering or quickly passing by parallels distancing oneself from evil ways → avoidance, distance, deliberate redirection → shared structure between route-avoidance and moral shunning  
+*Confidence*: 0.95  
+
+**Leviticus 26:24** (idiom) - confidence: 0.90  
+*Figurative phrase*: I too will remain hostile to you  
+
+**Full verse (Hebrew)**: וְהָלַכְתִּ֧י אַף־אֲנִ֛י עִמָּכֶ֖ם בְּקֶ֑רִי וְהִכֵּיתִ֤י אֶתְכֶם֙ גַּם־אָ֔נִי שֶׁ֖בַע עַל־חַטֹּאתֵיכֶֽם  
+**Full verse (English)**: I too will remain hostile to you: I in turn will smite you sevenfold for your sins.  
+
+*Hebrew phrase*: וְהָלַכְתִּ֧י ... בְּקֶ֑רִי  
+*Explanation*: The verb 'to walk' (הָלַךְ) is used idiomatically with 'in hostility' (בְּקֶרִי) to describe God's sustained mode of conduct or relationship, rather than physical locomotion. It signifies a posture of...  
+*Target*: God's punitive action → divine judgment → divine interaction  
+*Vehicle*: walking in opposition → hostile conduct → human behavior  
+*Ground*: sustained opposition → reciprocal hostility → punitive response  
+*Confidence*: 0.90  
+
+*...and 10 more instances*
+
+**Usage breakdown**: physical path (3x), physical feet (1x), way/path walked on (1x)
+
+---
+
+### Query 3
+**Filters**: Vehicle contains: tongue  
+**Results**: 20  
+
+**Core pattern**: tongue metaphor (6/20 instances, 30%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Isaiah 54:17** (confidence: 0.96) - ‘Every tongue that contends with you’ uses ‘tongue’ as a metonymy for the accuser or their hostile s...
+2. ⭐ **Psalms 120:2** (confidence: 0.95) - The 'tongue' is used as a synecdoche for the deceitful speech itself or the person uttering it. This...
+3. ⭐ **Psalms 120:3** (confidence: 0.95) - The 'tongue' (לָשׁוֹן) is used metonymically (specifically synecdoche) to represent the speech produ...
+
+#### All Instances (20 total):
+
+**Psalms 31:21** (metonymy) - confidence: 0.90  
+*Figurative phrase*: from contentious tongues  
+
+**Full verse (Hebrew)**: תַּסְתִּירֵ֤ם&thinsp;׀ בְּסֵ֥תֶר פָּנֶיךָ֮ מֵרֻכְסֵ֫י־אִ֥ישׁ תִּצְפְּנֵ֥ם בְּסֻכָּ֗ה מֵרִ֥יב לְשֹׁנֽוֹת  
+**Full verse (English)**: You grant them the protection of Your presencebMeaning of Heb. uncertain.against scheming men;-bYou shelter them in Your pavilionfrom contentious tongues.  
+
+*Hebrew phrase*: מֵרִ֥יב לְשֹׁנֽוֹת  
+*Explanation*: 'Tongues' is used metonymically to represent the contentious speech or words that originate from them, rather than the physical organs themselves....  
+*Target*: contentious speech → verbal conflict → human communication  
+*Vehicle*: tongues → body part → physical organ  
+*Ground*: source of speech → instrument of communication → origin of conflict  
+*Confidence*: 0.90  
+
+**Isaiah 66:18** (metonymy) - confidence: 0.90  
+*Figurative phrase*: To gather all the nations and tongues  
+
+**Full verse (Hebrew)**: וְאָנֹכִ֗י מַֽעֲשֵׂיהֶם֙ וּמַחְשְׁבֹ֣תֵיהֶ֔ם בָּאָ֕ה לְקַבֵּ֥ץ אֶת־כׇּל־הַגּוֹיִ֖ם וְהַלְּשֹׁנ֑וֹת וּבָ֖אוּ וְרָא֥וּ אֶת־כְּבוֹדִֽי  
+**Full verse (English)**: For I [know] their deeds and purposes. [The time] has come to gather all the nations and tongues; they shall come and behold My glory.  
+
+*Hebrew phrase*: לְקַבֵּ֥ץ אֶת־כׇּל־הַגּוֹיִ֖ם וְהַלְּשֹׁנ֑וֹת  
+*Explanation*: 'Tongues' is a metonymy for language groups/peoples, and the pair 'nations and tongues' forms a merism expressing the comprehensiveness of those gathered....  
+*Target*: All human groups that will witness God's glory → Humanity in its diversity → Ethno-linguistic collectives  
+*Vehicle*: nations and tongues → Political entities and spoken languages → Sociolinguistic markers  
+*Ground*: 'tongue' standing for language/people, paired with 'nations' to indicate totality → Representative pairing (merism) → Use of parts/aspects to signify the whole  
+*Confidence*: 0.90  
+
+**Psalms 120:2** (idiom, metonymy) - confidence: 0.95  
+*Figurative phrase*: from a deceitful tongue  
+
+**Full verse (Hebrew)**: יְֽהֹוָ֗ה הַצִּ֣ילָה נַ֭פְשִׁי מִשְּׂפַת־שֶׁ֑קֶר מִלָּשׁ֥וֹן רְמִיָּֽה  
+**Full verse (English)**: O LORD, save me from treacherous lips,from a deceitful tongue!  
+
+*Hebrew phrase*: מִלָּשׁ֥וֹן רְמִיָּֽה  
+*Explanation*: The 'tongue' is used as a synecdoche for the deceitful speech itself or the person uttering it. This is a common idiom for treacherous speech, paralleling 'treacherous lips'....  
+*Target*: deceitful speech → false communication → human action  
+*Vehicle*: tongue → body part → physical entity  
+*Ground*: deceit → treachery → moral failing  
+*Confidence*: 0.95  
+
+**Psalms 35:28** (metonymy) - confidence: 0.90  
+*Figurative phrase*: my tongue shall recite  
+
+**Full verse (Hebrew)**: וּ֭לְשׁוֹנִי תֶּהְגֶּ֣ה צִדְקֶ֑ךָ כׇּל־הַ֝יּ֗וֹם תְּהִלָּתֶֽךָ&nbsp;{פ}  
+**Full verse (English)**: while my tongue shall recite Your beneficent acts,Your praises all day long.  
+
+*Hebrew phrase*: וּלְשׁוֹנִי תֶּהְגֶּה  
+*Explanation*: The tongue, as the instrument of speech, stands for the person's act of speaking or reciting. This is synecdoche, a type of metonymy, where a part represents the whole or the instrument represents the...  
+*Target*: speaker's action → human speech → human activity  
+*Vehicle*: tongue → body part → instrument of speech  
+*Ground*: instrumental action → means of expression → physical manifestation  
+*Confidence*: 0.90  
+
+**Psalms 120:3** (personification, metonymy) - confidence: 0.95  
+*Figurative phrase*: deceitful tongue  
+
+**Full verse (Hebrew)**: מַה־יִּתֵּ֣ן לְ֭ךָ וּמַה־יֹּסִ֥יף לָ֗ךְ לָשׁ֥וֹן רְמִיָּֽה  
+**Full verse (English)**: What can you profit,what can you gain,O deceitful tongue?  
+
+*Hebrew phrase*: לָשׁ֥וֹן רְמִיָּֽה  
+*Explanation*: The 'tongue' (לָשׁוֹן) is used metonymically (specifically synecdoche) to represent the speech produced by it or the person speaking deceitfully. It is also personified by attributing the human moral ...  
+*Target*: deceitful speech → deceitful speaker → human communication  
+*Vehicle*: tongue → body part → instrument of speech  
+*Ground*: deceitfulness → untrustworthiness → moral failing  
+*Confidence*: 0.95  
+
+**Psalms 51:16** (metonymy) - confidence: 0.90  
+*Figurative phrase*: my tongue  
+
+**Full verse (Hebrew)**: הַצִּ֘ילֵ֤נִי מִדָּמִ֨ים&thinsp;׀ אֱֽלֹהִ֗ים אֱלֹהֵ֥י תְשׁוּעָתִ֑י תְּרַנֵּ֥ן לְ֝שׁוֹנִ֗י צִדְקָתֶֽךָ  
+**Full verse (English)**: Save me from bloodguilt,O God, God, my deliverer,that I may sing forth Your beneficence.  
+
+*Hebrew phrase*: לְשׁוֹנִ֗י  
+*Explanation*: This is a synecdoche (a type of metonymy) where 'my tongue,' a part of the body, stands for the whole person or the speaker. The speaker, not just the tongue, will sing forth God's beneficence....  
+*Target*: the speaker → person → human being  
+*Vehicle*: tongue → body part → instrument of speech  
+*Ground*: expression of praise → vocal action → communication  
+*Confidence*: 0.90  
+
+**Exodus 4:10** (metaphor, idiom) - confidence: 0.90  
+*Figurative phrase*: and slow of tongue  
+
+**Full verse (Hebrew)**: וַיֹּ֨אמֶר מֹשֶׁ֣ה אֶל־יְהֹוָה֮ בִּ֣י אֲדֹנָי֒ לֹא֩ אִ֨ישׁ דְּבָרִ֜ים אָנֹ֗כִי גַּ֤ם מִתְּמוֹל֙ גַּ֣ם מִשִּׁלְשֹׁ֔ם גַּ֛ם מֵאָ֥ז דַּבֶּרְךָ֖ אֶל־עַבְדֶּ֑ךָ כִּ֧י כְבַד־פֶּ֛ה וּכְבַ֥ד לָשׁ֖וֹן אָנֹֽכִי  
+**Full verse (English)**: But Moses said to יהוה, “Please, O my lord, I have never been a man of words, either in times past or now that You have spoken to Your servant; I am slow of speech and slow of tongue.”  
+
+*Hebrew phrase*: וּכְבַ֥ד לָשׁ֖וֹן  
+*Explanation*: This is an idiom, literally 'heavy of tongue,' parallel to 'heavy of mouth.' 'Heaviness' is a metaphor for difficulty in articulation or fluency, reinforcing the idea of a speech impediment....  
+*Target*: Moses's speech impediment → human communication difficulty → personal physical attribute  
+*Vehicle*: heavy tongue → physically burdened body part → physical characteristic  
+*Ground*: difficulty in articulation → slowness of speech → speech impediment  
+*Confidence*: 0.90  
+
+**Psalms 78:36** (idiom, metonymy) - confidence: 0.90  
+*Figurative phrase*: with their words  
+
+**Full verse (Hebrew)**: וַיְפַתּ֥וּהוּ בְּפִיהֶ֑ם וּ֝בִלְשׁוֹנָ֗ם יְכַזְּבוּ־לֽוֹ  
+**Full verse (English)**: Yet they deceived Him with their speech,lied to Him with their words;  
+
+*Hebrew phrase*: וּ֝בִלְשׁוֹנָ֗ם  
+*Explanation*: This is an idiom (specifically, synecdoche/metonymy) where 'tongue' (לָשׁוֹן) represents the act or product of speech, i.e., their words or utterances used for lying. This is a common biblical idiom, ...  
+*Target*: deceptive words → human communication → abstract action  
+*Vehicle*: tongue → body part → physical entity  
+*Ground*: instrument of communication → source of utterance → means of action  
+*Confidence*: 0.90  
+
+**Proverbs 26:28** (metaphor, metonymy) - confidence: 0.94  
+*Figurative phrase*: A lying tongue hates those crushed by it  
+
+**Full verse (Hebrew)**: לְֽשׁוֹן־שֶׁ֭קֶר יִשְׂנָ֣א דַכָּ֑יו וּפֶ֥ה חָ֝לָ֗ק יַעֲשֶׂ֥ה מִדְחֶֽה  
+**Full verse (English)**: A lying tongue hates those crushed by it; Smooth speech throws one down.  
+
+*Hebrew phrase*: לְשׁוֹן־שֶׁקֶר יִשְׂנָא דַכָּיו  
+*Explanation*: ‘Tongue’ stands metonymically for speech; that speech is pictured as crushing people, emphasizing the violence of lies....  
+*Target*: the harmful effect of lying speech on its victims → deceptive communication → interpersonal relations  
+*Vehicle*: a tongue that lies and crushes people → body organ as agent of harm → body part/speech imagery  
+*Ground*: speech acting like a physical force that injures and oppresses → verbal harm as violence → abstract damage  
+*Confidence*: 0.94  
+
+**Proverbs 13:19** (metaphor) - confidence: 0.94  
+*Figurative phrase*: Desire realized is sweet to the soul  
+
+**Full verse (Hebrew)**: תַּאֲוָ֣ה נִ֭הְיָה תֶּעֱרַ֣ב לְנָ֑פֶשׁ וְתוֹעֲבַ֥ת כְּ֝סִילִ֗ים ס֣וּר מֵרָֽע  
+**Full verse (English)**: Desire realized is sweet to the soul; To turn away from evil is abhorrent to the stupid.  
+
+*Hebrew phrase*: תַּאֲוָה נִהְיָה תֶּעֱרַב לְנָפֶשׁ  
+*Explanation*: The pleasure of fulfilled desire is described as 'sweet' to the soul, using taste metaphors to convey emotional delight....  
+*Target*: the inner enjoyment of fulfilled desire → emotional/spiritual satisfaction → human affective experience  
+*Vehicle*: sweetness → pleasant taste on the tongue → gustatory imagery  
+*Ground*: fulfillment of longing is as delightful to the inner person as sweetness is to the palate → both evoke pleasure and gratification → sensory delight parallels emotional joy  
+*Confidence*: 0.94  
+
+*...and 10 more instances*
+
+**Usage breakdown**: tongue (6x), tongues (1x), nations and tongues (1x)
+
+---
+
+### Query 4
+**Filters**: Vehicle contains: shaken  
+**Results**: 20  
+
+**Core pattern**: stable structure metaphor (1/20 instances, 5%)
+
+**Top 3 Most Relevant** (by confidence):
+1. ⭐ **Isaiah 30:29** (confidence: 0.97) - Calling God the ‘Rock of Israel’ metaphorically emphasizes His steadfastness and protective strength...
+2. ⭐ **Isaiah 54:10** (confidence: 0.96) - The idea that mountains might move and hills shake is a hyperbolic image of cosmic upheaval, used to...
+3. ⭐ **Isaiah 40:8** (confidence: 0.96) - God's 'word' is depicted as something that 'stands' forever, using physical stability as a metaphor ...
+
+#### All Instances (20 total):
+
+**Psalms 46:6** (metaphor) - confidence: 0.95  
+*Figurative phrase*: it will not be toppled  
+
+**Full verse (Hebrew)**: אֱלֹהִ֣ים בְּ֭קִרְבָּהּ בַּל־תִּמּ֑וֹט יַעְזְרֶ֥הָ אֱ֝לֹהִ֗ים לִפְנ֥וֹת בֹּֽקֶר  
+**Full verse (English)**: God is in its midst, it will not be toppled;by daybreak God will come to its aid.  
+
+*Hebrew phrase*: בַּל־תִּמּ֑וֹט  
+*Explanation*: The phrase 'it will not be toppled' is a metaphor for the enduring stability, security, and invincibility of the protected entity (likely a city or people) against defeat or destruction, rather than m...  
+*Target*: protected entity → city/people → community/nation  
+*Vehicle*: stable structure → unshaken building → physical object  
+*Ground*: invincibility → security → endurance  
+*Confidence*: 0.95  
+
+**Proverbs 10:30** (metaphor, idiom, hyperbole) - confidence: 0.90  
+*Figurative phrase*: The righteous will never be shaken  
+
+**Full verse (Hebrew)**: צַ֭דִּיק לְעוֹלָ֣ם בַּל־יִמּ֑וֹט וּ֝רְשָׁעִ֗ים לֹ֣א יִשְׁכְּנוּ־אָֽרֶץ  
+**Full verse (English)**: The righteous will never be shaken; The wicked will not inhabit the earth.  
+
+*Hebrew phrase*: צַדִּיק לְעוֹלָם בַּל־יִמּוֹט  
+*Explanation*: The righteous person's enduring security is depicted through the metaphor of something that cannot be shaken, using hyperbolic, idiomatic language of immovability....  
+*Target*: the security and endurance of the righteous → existential stability → ethics/outcomes  
+*Vehicle*: an object that cannot be shaken or moved → immovable structure → physical stability  
+*Ground*: firmness, lack of displacement despite pressures → safety and permanence → rhetorically absolute security  
+*Confidence*: 0.90  
+
+**Isaiah 54:10** (metaphor, hyperbole) - confidence: 0.96  
+*Figurative phrase*: For the mountains may move and the hills be shaken, but My loyalty shall never move from you, nor My covenant of friendship be shaken.  
+
+**Full verse (Hebrew)**: כִּ֤י הֶהָרִים֙ יָמ֔וּשׁוּ וְהַגְּבָע֖וֹת תְּמוּטֶ֑ינָה וְחַסְדִּ֞י מֵאִתֵּ֣ךְ לֹא־יָמ֗וּשׁ וּבְרִ֤ית שְׁלוֹמִי֙ לֹ֣א תָמ֔וּט אָמַ֥ר מְרַחֲמֵ֖ךְ יְהֹוָֽה&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: For the mountains may move And the hills be shaken, But my loyalty shall never move from you, Nor My covenant of friendship be shaken —said  GOD, who takes you back in love.  
+
+*Hebrew phrase*: כִּ֤י הֶהָרִים֙ יָמ֔וּשׁוּ וְהַגְּבָע֖וֹת תְּמוּטֶ֑ינָה וְחַסְדִּ֞י מֵאִתֵּ֣ךְ לֹא־יָמ֗וּשׁ וּבְרִ֤ית שְׁלוֹמִי֙ לֹ֣א תָמ֔וּט  
+*Explanation*: The idea that mountains might move and hills shake is a hyperbolic image of cosmic upheaval, used to say that even in such an extreme scenario God’s loyal love and covenant with Zion would remain immo...  
+*Target*: the permanence of God’s kindness and covenant with Zion → divine relational stability → covenant of peace  
+*Vehicle*: mountains departing and hills being shaken versus something that cannot be moved → cosmic and geological instability contrasted with steadfastness → nature/cosmic order domain  
+*Ground*: mountains and hills normally symbolize the most stable features of creation → even if such stable things were to collapse, God’s covenant would still remain → emphasis on surpassing reliability and unchangeableness  
+*Confidence*: 0.96  
+
+**Isaiah 24:18** (metaphor, hyperbole) - confidence: 0.90  
+*Figurative phrase*: For sluices are opened on high, and earth’s foundations tremble  
+
+**Full verse (Hebrew)**: וְ֠הָיָ֠ה הַנָּ֞ס מִקּ֤וֹל הַפַּ֙חַד֙ יִפֹּ֣ל אֶל־הַפַּ֔חַת וְהָֽעוֹלֶה֙ מִתּ֣וֹךְ הַפַּ֔חַת יִלָּכֵ֖ד בַּפָּ֑ח כִּֽי־אֲרֻבּ֤וֹת מִמָּרוֹם֙ נִפְתָּ֔חוּ וַֽיִּרְעֲשׁ֖וּ מ֥וֹסְדֵי אָֽרֶץ  
+**Full verse (English)**: Whoever flees at the report of the terror Shall fall into the pit; And whoever climbs out of the pit Shall be caught in the trap. For sluices are opened on high, And earth’s foundations tremble.  
+
+*Hebrew phrase*: כִּי־אֲרֻבּוֹת מִמָּרוֹם נִפְתָּחוּ וַיִּרְעֲשׁוּ מוֹסְדֵי אָרֶץ  
+*Explanation*: Heaven is pictured as having sluice-gates that open and the earth as a structure with ‘foundations’ that shake, an architectural metaphor conveying cosmic upheaval....  
+*Target*: the onset of cosmic-scale judgment → heaven-and-earth order → cosmos  
+*Vehicle*: a building with windows and foundations shaken → architectural structure → built environment  
+*Ground*: heaven as a reservoir with openings; earth as a house whose foundations quake → total structural instability → structure/stability  
+*Confidence*: 0.90  
+
+**Isaiah 13:13** (metaphor, personification, hyperbole) - confidence: 0.94  
+*Figurative phrase*: Therefore shall heaven be shaken, and earth shall quake out of its place  
+
+**Full verse (Hebrew)**: עַל־כֵּן֙ שָׁמַ֣יִם אַרְגִּ֔יז וְתִרְעַ֥שׁ הָאָ֖רֶץ מִמְּקוֹמָ֑הּ בְּעֶבְרַת֙ יְהֹוָ֣ה צְבָא֔וֹת וּבְי֖וֹם חֲר֥וֹן אַפּֽוֹ  
+**Full verse (English)**: Therefore shall heaven be shaken,  And earth leap out of its place, At the fury of  GOD of Hosts On the day of God’s burning wrath.  
+
+*Hebrew phrase*: שָׁמַיִם אַרְגִּיז וְתִרְעַשׁ הָאָרֶץ מִמְּקוֹמָהּ  
+*Explanation*: By portraying heaven and earth as shaken and the earth moved from its place, the verse uses hyperbolic cosmic imagery to metaphorically express the far-reaching, order-upending impact of God’s wrath....  
+*Target*: the stability of the political-moral order under divine judgment → existing structures of power → historical and cosmic order as experienced by humans  
+*Vehicle*: the physical heavens and earth violently shaken out of position → cosmic earthquake → natural cataclysm  
+*Ground*: radical disturbance of what is normally stable → dislodging from accustomed position → sense that everything is overturned  
+*Confidence*: 0.94  
+
+**Psalms 62:3** (metaphor) - confidence: 0.90  
+*Figurative phrase*: I shall never be shaken  
+
+**Full verse (Hebrew)**: אַךְ־ה֣וּא צ֭וּרִי וִישׁוּעָתִ֑י מִ֝שְׂגַּבִּ֗י לֹא־אֶמּ֥וֹט רַבָּֽה  
+**Full verse (English)**: Truly He is my rock and deliverance,my haven; I shall never be shaken.  
+
+*Hebrew phrase*: לֹא־אֶמּ֥וֹט רַבָּֽה  
+*Explanation*: The speaker's stability is metaphorically described as not being 'shaken,' referring to emotional, spiritual, or existential steadfastness rather than physical movement, due to reliance on God....  
+*Target*: speaker's stability → personal steadfastness → human condition  
+*Vehicle*: unshaken object → stable structure → physical state  
+*Ground*: steadfastness → security → resilience  
+*Confidence*: 0.90  
+
+**Psalms 89:30** (simile) - confidence: 0.95  
+*Figurative phrase*: as long as the heavens last  
+
+**Full verse (Hebrew)**: וְשַׂמְתִּ֣י לָעַ֣ד זַרְע֑וֹ וְ֝כִסְא֗וֹ כִּימֵ֥י שָׁמָֽיִם  
+**Full verse (English)**: I will establish his line forever,his throne, as long as the heavens last.  
+
+*Hebrew phrase*: כִּימֵ֥י שָׁמָֽיִם  
+*Explanation*: This is a simile comparing the duration of the throne/kingship to the perceived eternal duration of the heavens, emphasizing its perpetual nature....  
+*Target*: duration of kingship → perpetuity of reign → temporal extent  
+*Vehicle*: duration of heavens → celestial permanence → natural order  
+*Ground*: eternity → perpetuity → endurance  
+*Confidence*: 0.95  
+
+**Isaiah 39:8** () - confidence: 0.85  
+*Figurative phrase*: there will be peace and truth in my days  
+
+**Full verse (Hebrew)**: וַיֹּ֤אמֶר חִזְקִיָּ֙הוּ֙ אֶֽל־יְשַׁעְיָ֔הוּ ט֥וֹב דְּבַר־יְהֹוָ֖ה אֲשֶׁ֣ר דִּבַּ֑רְתָּ וַיֹּ֕אמֶר כִּ֥י יִהְיֶ֛ה שָׁל֥וֹם וֶאֱמֶ֖ת בְּיָמָֽי&nbsp;{פ}  
+**Full verse (English)**: Hezekiah declared to Isaiah, “The word of GOD that you have spoken is good.” For he thought, “It means that safety is assured for my time.”  
+
+*Hebrew phrase*: שָׁלוֹם וֶאֱמֶת בְּיָמָי  
+*Explanation*: The collocation ‘peace and truth’ is an idiomatic hendiadys for secure, stable well-being. Hezekiah focuses on the assurance of continued order during his own lifetime....  
+*Target*: the condition of the kingdom during Hezekiah’s lifetime → national security and stability → socio-political domain  
+*Vehicle*: ‘peace and truth’ as a pair denoting secure, reliable order → well-being plus firmness/stability → ethical-relational domain  
+*Ground*: a state of undisturbed welfare where things are orderly, just, and reliable → stability / safety / order → community life / governance  
+*Confidence*: 0.85  
+
+**Isaiah 30:29** (metaphor) - confidence: 0.97  
+*Figurative phrase*: to the Rock of Israel  
+
+**Full verse (Hebrew)**: הַשִּׁיר֙ יִהְיֶ֣ה לָכֶ֔ם כְּלֵ֖יל הִתְקַדֶּשׁ־חָ֑ג וְשִׂמְחַ֣ת לֵבָ֗ב כַּהוֹלֵךְ֙ בֶּחָלִ֔יל לָב֥וֹא בְהַר־יְהֹוָ֖ה אֶל־צ֥וּר יִשְׂרָאֵֽל  
+**Full verse (English)**: For you, there shall be singing As on a night when a festival is hallowed; There shall be rejoicing as when they march With flute, with hand-drums, and with lyres  To the Rock of Israel on the Mount of  GOD.  
+
+*Hebrew phrase*: אֶל־צוּר יִשְׂרָאֵל  
+*Explanation*: Calling God the ‘Rock of Israel’ metaphorically emphasizes His steadfastness and protective strength for the nation....  
+*Target*: YHWH as the object of Israel’s worship and trust → divine character → God as protector/savior  
+*Vehicle*: rock → solid, immovable stone/cliff → natural feature of stability and protection  
+*Ground*: stability, reliability, protection, unchanging strength → character trait → God’s faithfulness conceptualized as a protective rock  
+*Confidence*: 0.97  
+
+**Isaiah 40:8** (metaphor) - confidence: 0.96  
+*Figurative phrase*: But the word of our God stands forever  
+
+**Full verse (Hebrew)**: יָבֵ֥שׁ חָצִ֖יר נָ֣בֵֽל צִ֑יץ וּדְבַר־אֱלֹהֵ֖ינוּ יָק֥וּם לְעוֹלָֽם&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+**Full verse (English)**: Grass withers, flowers fade— But the word of our God is always fulfilled!”  
+
+*Hebrew phrase*: וּדְבַר־אֱלֹהֵינוּ יָקוּם לְעוֹלָם  
+*Explanation*: God's 'word' is depicted as something that 'stands' forever, using physical stability as a metaphor for unchanging, enduring reliability....  
+*Target*: God's promise/decree → divine speech → divine commitment  
+*Vehicle*: 'standing' enduringly → an upright, unmoved figure → stability in physical space  
+*Ground*: unchangeability, firmness, endurance over time → contrast with withering life → reliability  
+*Confidence*: 0.96  
+
+*...and 10 more instances*
+
+**Usage breakdown**: stable structure (1x), an object that cannot be shaken or moved (1x), mountains departing and hills being shaken versus something that cannot be moved (1x)
+
+---
+
+## Scholarly Context (RAG Documents)
+
+### Psalm 15 Function & Genre
+**Genre**: Hymn of Praise (Temple Liturgy)  
+
+**Structure**:  
+- v. 1-2: Introductory question and affirmation of who may dwell with God  
+- v. 3-5: Description of the righteous person’s ethical conduct and reward  
+
+**Keywords**: holiness, righteousness, integrity, judgment, fellowship  
+
+## Analytical Framework for Biblical Poetry
+
+Concepts and Analytical Frameworks for Biblical Poetry: A Foundational Document for the Telescopic Analysis of the PsalmsPreamble: Purpose and Methodological StanceThis document serves as the core knowledge base for an AI-powered commentary pipeline, designed to facilitate a literary-poetic analysis of the Book of Psalms. Its structure is optimized for Retrieval-Augmented Generation (RAG) systems to provide precise, context-rich information on the artistic conventions of biblical Hebrew poetry. The methodological stance is inspired by the literary approach of scholars like Robert Alter, which treats the biblical text as a work of sophisticated literary art.1 This framework posits that poetic form is not a decorative embellishment but the primary vehicle of meaning and theological expression.3 The objective is to equip analytical agents to move beyond surface-level paraphrase to a "telescopic analysis"—a method that connects micro-level poetic devices (e.g., a single word choice, a metaphor) to the macro-level thematic and theological arguments of an entire psalm.I. The Foundational Principle: ParallelismParallelism is the most fundamental and pervasive organizing principle of biblical Hebrew poetry.5 An analysis of its dynamic nature is the prerequisite for any meaningful literary interpretation. It is a "seconding sequence" where the relationship between the parts of a line, rather than rhyme or a strict meter, creates the poetic effect.6The Dynamics of Parallelism: Defining the "A is so, and what's more, B" PrincipleThe core dynamic of parallelism is not simple repetition but a progression of thought, aptly summarized by the principle "A is so, and what's more, B." In this model, the second part of a poetic line, or colon, dynamically engages with the first. It can confirm, sharpen, specify, intensify, contrast, or complete the initial statement.4 This functional understanding represents a significant development from earlier, more static classificatory approaches, which identified types of parallelism but often under-analyzed their rhetorical purpose.2 The energy of a poetic line sweeps from the first colon to the second, creating a forward momentum that can develop an argument or unfold "miniature stories".4 This principle forces the reader—or an AI agent—to locate the primary locus of meaning in the relationship between the cola, treating them not as isolated statements but as an integrated, developing thought.10 It is the essential "rhyme of thought" that defines Hebrew verse.11Synonymous ParallelismConcept Name: Synonymous ParallelismDefinition: A form of parallelism where the second colon restates, echoes, or reinforces the thought of the first colon using different but semantically equivalent words or concepts.5Function in Poetry: The function of synonymous parallelism is rarely simple tautology. It serves to reinforce and amplify an idea, adding emotional depth and aesthetic beauty that makes the message more memorable and impactful.12 Frequently, the second colon achieves this by intensifying the first or by moving from a general term to a more specific or concrete image, making the concept more pointed and forceful.7 This progression from general to particular is a key dynamic of biblical poetry.Canonical Examples (from Psalms):Psalm 19:1: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד-אֵל // וּמַעֲשֵׂה יָדָיו מַגִּיד הָרָקִיעַ."6Psalm 24:1: "לַיהוָה הָאָרֶץ וּמְלוֹאָהּ // תֵּבֵל וְיֹשְׁבֵי בָהּ."13Psalm 120:2: "יְהוָה הַצִּילָה נַפְשִׁי מִשְּׂפַת-שֶׁקֶר // מִלָּשׁוֹן רְמִיָּה."12Analytical Questions:How does the second colon restate the first? Does it use direct synonyms or related concepts?Does the second colon specify, intensify, or make the first more concrete? If so, what is the effect of this shift?What nuances of meaning are introduced by the specific word choices in the second colon that are not present in the first?Does the second line simply repeat the first, or does it heighten the idea or emotion?Antithetic ParallelismConcept Name: Antithetic ParallelismDefinition: A form of parallelism where the second colon presents a thought that is in direct contrast or opposition to the first.5 The contrast is often, but not always, marked by a conjunction such as "but".11Function in Poetry: This device sharpens an idea by defining it against its opposite. The use of opposites clarifies both extremes, creating a starker focus on the desired message and forcing a moral or theological choice.16 It is a favored device in wisdom literature for framing the two paths of life—for example, righteousness versus wickedness, or wisdom versus folly—thereby creating tension and emphasizing the consequences of a decision.5Canonical Examples (from Psalms):Psalm 1:6: "כִּי-יוֹדֵעַ יְהוָה דֶּרֶךְ צַדִּיקִים // וְדֶרֶךְ רְשָׁעִים תֹּאבֵד."11Psalm 20:7: "אֵלֶּה בָרֶכֶב וְאֵלֶּה בַסּוּסִים // וַאֲנַחְנוּ בְּשֵׁם-יְהוָה אֱלֹהֵינוּ נַזְכִּיר."20Psalm 34:10: "כְּפִירִים רָשׁוּ וְרָעֵבוּ // וְדֹרְשֵׁי יְהוָה לֹא-יַחְסְרוּ כָל-טוֹב."16Analytical Questions:What two concepts, paths, or outcomes are being contrasted in this verse?How does the contrast in the second colon clarify or sharpen the meaning of the first?What is the central idea that is being defined by this opposition?Is the contrast marked by a conjunction like "but," or is it implied by the juxtaposition of the two lines?Synthetic (or Climactic/Staircase) ParallelismConcept Name: Synthetic (or Climactic/Staircase) ParallelismDefinition: A form of parallelism where the second colon does not restate or contrast the first but instead builds upon, extends, or completes its thought.5 The climactic or "staircase" variation is a specific type where a key word or phrase from the first colon is repeated in the second, which then adds new information to build toward a climax or completion.8Function in Poetry: This form creates narrative or logical progression within the poetic line itself, developing an argument, explaining a cause and effect, or building emotional intensity step-by-step.23 It is the most explicit embodiment of the "A is so, and what's more, B" principle, as the second line carries the thought of the first to its conclusion.Canonical Examples (from Psalms):Psalm 29:1-2: "הָבוּ לַיהוָה בְּנֵי אֵלִים // הָבוּ לַיהוָה כָּבוֹד וָעֹז. // הָבוּ לַיהוָה כְּבוֹד שְׁמוֹ..."23Psalm 14:2: "יְהוָה מִשָּׁמַיִם הִשְׁקִיף עַל-בְּנֵי-אָדָם // לִרְאוֹת הֲיֵשׁ מַשְׂכִּיל דֹּרֵשׁ אֶת-אֱלֹהִים."22Psalm 96:1-2: "שִׁירוּ לַיהוָה שִׁיר חָדָשׁ // שִׁירוּ לַיהוָה כָּל-הָאָרֶץ. // שִׁירוּ לַיהוָה בָּרְכוּ שְׁמוֹ..."20Analytical Questions:How does the second colon build upon or complete the thought of the first?Is there a cause-and-effect relationship, a question-and-answer, or a sequential development being presented?In climactic forms, what key term is repeated, and what new information is added to create a sense of rising intensity or completion?How does this progression contribute to the overall argument of the psalm?II. Poetic Diction: Economy and ConcretenessThe characteristic style of Hebrew poetry favors compact expression and tangible imagery, creating a discourse that is both dense and emotionally resonant.Terseness & ConcisenessConcept Name: Terseness & ConcisenessDefinition: A primary characteristic of biblical Hebrew poetry is its compressed and economical use of language, employing a minimum of words to express complex ideas.2 This is often achieved through the omission of common prose particles (such as the definite article or direct object marker) and conjunctions, and through the use of ellipsis, where a word from the first colon (frequently the verb) is omitted but understood in the second.6Function in Poetry: Terseness creates a heightened, dense form of discourse that focuses attention on the most semantically important words.2 By omitting explicit logical connectors, the poet forces the reader to deduce the relationship between cola from the parallel structure itself, thereby empowering the function of parallelism. This word economy also contributes to the accentual rhythm of the verse by keeping lines short and impactful.2 Imagery, in this context, becomes a primary tool for compactness, allowing the poet to communicate a rich message in very few words.14Canonical Examples (from Psalms):Psalm 114:4: "הֶהָרִים רָקְדוּ כְאֵילִים // גְּבָעוֹת כִּבְנֵי-צֹאן."25Psalm 23:1: "יְהוָה רֹעִי // לֹא אֶחְסָר."Psalm 1:3: "וְהָיָה כְּעֵץ שָׁתוּל עַל-פַּלְגֵי מָיִם // אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ."Analytical Questions:Are there words (especially verbs or conjunctions) from the first colon that are omitted but implied in the second? What is the effect of this ellipsis?How does the economy of words force a greater focus on the key nouns and verbs that are present?Does the terseness create ambiguity, or does it sharpen the focus and impact of the verse?How does the poet use a single image to convey a complex idea concisely?Concrete ImageryConcept Name: Concrete ImageryDefinition: Hebrew poetry demonstrates a marked preference for conveying theological ideas, emotional states, and moral principles through concrete, physical, and sensory images rather than through abstract philosophical or theological language.29 The ancient Hebrew imagination engaged the world not through abstract categories but through the empirical knowledge of lived experience—the life of shepherds, warriors, farmers, and priests.3Function in Poetry: Concrete images make abstract concepts tangible, emotionally resonant, and memorable.15 They ground theological claims in the physical world, allowing the poet to explore complex spiritual states through a shared, sensory vocabulary. Transforming a general term into a concrete image makes the idea "more pointed, more forceful".9 This imagery is not merely ornamental but functional, expressing significant themes and conveying implicit value judgments.30 For example, the choice between pastoral, military, or cultic imagery frames the psalmist's problem and the desired divine response.Canonical Examples (from Psalms):Psalm 18:2: "יְהוָה סַלְעִי וּמְצוּדָתִי וּמְפַלְטִי // אֵלִי צוּרִי אֶחֱסֶה-בּוֹ // מָגִנִּי וְקֶרֶן-יִשְׁעִי מִשְׂגַּבִּי."25Psalm 23:1-3: "יְהוָה רֹעִי... בִּנְאוֹת דֶּשֶׁא יַרְבִּיצֵנִי עַל-מֵי מְנֻחוֹת יְנַהֲלֵנִי..."33Psalm 1:3: "וְהָיָה כְּעֵץ שָׁתוּל עַל-פַּלְgֵי מָיִם..."34Analytical Questions:What concrete, physical image is being used in this verse? What senses does it appeal to (sight, sound, touch)?What abstract theological, emotional, or moral concept does this image represent?What specific attributes of the concrete image are being mapped onto the abstract concept (e.g., a rock's stability, a shield's protection, a tree's fruitfulness)?How does the domain of the imagery (e.g., nature, warfare, temple cult) contribute to the overall argument or emotional tone of the psalm?III. The Music of Language: Sound and WordplayThese devices leverage the phonetic qualities of the Hebrew language to create artistic effects that enhance meaning and memorability. While often lost in translation, an awareness of their function is crucial for appreciating the original artistry.ParonomasiaConcept Name: ParonomasiaDefinition: The use of words that are similar in sound but different in meaning to create a "wordplay" or "pun".35 It is a deliberate juxtaposition of like-sounding words that draws the reader's attention to a particular statement or connection.37Function in Poetry: Paronomasia forges an associative link between two otherwise disparate concepts, prompting the reader to consider their relationship. It adds a layer of wit, memorability, and rhetorical force, often underscoring a solemn or important statement that might otherwise be overlooked.35Canonical Examples (from Psalms):Psalm 56:8: "נֹדִי סָפַרְתָּה-אָתָּה // שִׂימָה דִמְעָתִי בְנֹאדֶךָ." The similar sounds of the Hebrew words for "my wanderings" ($nōdî$) and "in your bottle" ($bənōdekā$) phonetically link the cause (wandering) with the effect (tears) that God is said to collect and remember.35Psalm 96:5: "כִּי כָּל-אֱלֹהֵי הָעַמִּים אֱלִילִים // וַיהוָה שָׁמַיִם עָשָׂה." This is a common prophetic wordplay contrasting the true God ($'elohim$) with "worthless things" ($'elilim$).Analytical Questions:(For Hebrew text analysis) Are there words in close proximity that share similar root consonants or sounds but have different meanings?What new connection or idea is suggested by the phonetic link between these words?How does this wordplay contribute to the verse's rhetorical force, memorability, or theological argument?Alliteration & AssonanceConcept Name: Alliteration & AssonanceDefinition: Alliteration is the repetition of the same or similar consonant sounds in nearby words, typically at the beginning of words. Assonance is the repetition of vowel sounds within nearby words.38 While not a primary structural principle in Hebrew poetry, these sound devices are common and are used for aesthetic and emphatic effect.25Function in Poetry: These devices enhance the musicality and oral-aural quality of the poetry, making it more pleasing to the ear and more memorable.38 They can be used to link key words together, create emphasis on a particular phrase, and contribute to the emotional texture of a line. The sound itself can be mimetic, with the phonetic quality reinforcing the semantic meaning (e.g., harsh sounds for judgment, soft sounds for lament).41Canonical Examples (from Psalms):Psalm 29:1: In the Hebrew phrase kavod vā'oz (כָּבוֹד וָעֹז), the repetition of the 'o' vowel sound is an example of assonance.42Psalm 122:6: Sha'alu shalom Yerushalayim (שַׁאֲלוּ שְׁלוֹם יְרוּשָׁלָ‍ִם) features prominent alliteration of the 'sh' ($š$) and 'l' sounds.Psalm 6:6 (Hebrew 6:7): 'aśḥeh bəkol-laylāh miṭṭātî (אַשְׂחֶה בְכָל-לַיְלָה מִטָּתִי). The line is rich with sibilant 's' ($s/ś$) sounds, phonetically mimicking the sound of weeping or sighing.Analytical Questions:(For Hebrew text analysis) Is there a noticeable repetition of a particular consonant or vowel sound in this line or verse?Which words are linked by this sound repetition, and what is the significance of that link?How does the sound itself (e.g., a harsh guttural vs. a soft sibilant) contribute to the mood or meaning of the line?IV. Figurative Language: The Architecture of MeaningThis section covers devices that convey meaning by describing one thing in terms of another, creating rich layers of significance and enabling the poet to articulate complex truths.Metaphor & SimileConcept Name: Metaphor & SimileDefinition: Both are figures of speech that draw a comparison between two essentially different things to highlight a point of similarity. A simile makes the comparison explicit by using a comparative term such as "like" or "as." A metaphor makes the comparison implicitly, often by stating that A is B.34 While formally distinct, their poetic function is largely the same: to generate new understanding through analogy.44Function in Poetry: Metaphor and simile are central to poetic expression, transforming abstract concepts into concrete, understandable, and memorable images.34 They function by inviting the reader to transfer attributes from a familiar source domain (e.g., a shepherd) to a less familiar target domain (e.g., God) to generate new insight.44 They are the primary linguistic tools for expressing the ineffable nature of God and the depth of human spiritual experience, which defy literal description.15Canonical Examples (from Psalms):Simile: Psalm 1:3: "וְהָיָה כְּעֵץ שָׁתוּל עַל-פַּלְגֵי מָיִם..."25Simile: Psalm 42:1: "כְּאַיָּל תַּעֲרֹג עַל-אֲפִיקֵי-מָיִם כֵּן נַפְשִׁי תַעֲרֹג אֵלֶיךָ אֱלֹהִים."11Metaphor: Psalm 23:1: "יְהוָה רֹעִי."15Metaphor: Psalm 84:11: "כִּי שֶׁמֶשׁ וּמָגֵן יְהוָה אֱלֹהִים."11Analytical Questions:What two things are being compared? Identify the target (the main subject) and the source (what it's being compared to).What specific characteristics of the source domain are being transferred to the target domain?How does this comparison help to understand the target (e.g., God, the psalmist's soul) in a new or deeper way?Is this a standalone figure of speech, or is it part of an extended metaphor that develops across several verses?MerismConcept Name: MerismDefinition: A figure of speech in which a totality or whole is expressed by naming two opposite, contrasting, or complementary parts.46Function in Poetry: Merism is a poetic and compact rhetorical device for expressing completeness or all-encompassing scope ("everything"). By naming the boundaries or polar extremes of a category (e.g., "day and night," "heaven and earth"), it implies everything contained within them, creating a sense of totality and amplification.46Canonical Examples (from Psalms):Psalm 139:2: "אַתָּה יָדַעְתָּ שִׁבְתִּי וְקוּמִי..."Psalm 121:6: "יוֹמָם הַשֶּׁמֶשׁ לֹא-יַכֶּכָּה וְיָרֵחַ בַּלָּיְלָה."46Psalm 121:8: "יְהוָה יִשְׁמָר-צֵאתְךָ וּבוֹאֶךָ..."46Analytical Questions:What are the two opposite or complementary poles mentioned in the text?What is the whole or totality that these two extremes are meant to represent?How does using a merism create a sense of all-encompassing scope for the action or attribute being described?PersonificationConcept Name: PersonificationDefinition: The attribution of human qualities, actions, emotions, or consciousness to inanimate objects, animals, or abstract concepts.11Function in Poetry: Personification enlivens the poetic world, creating a dramatic and vivid landscape where all of creation can participate in the relationship with God. It is a powerful tool for reinforcing themes of God's universal sovereignty by depicting nature as an active participant in praise or judgment.50 It can also make abstract concepts like "justice," "peace," or "steadfast love" into active agents within a poetic narrative.50Canonical Examples (from Psalms):Psalm 98:8: "נְהָרוֹת יִמְחֲאוּ-כָף, יַחַד הָרִים יְרַנֵּנוּ."50Psalm 19:1-2: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד-אֵל... יוֹם לְיוֹם יַבִּיעַ אֹמֶר..."50Psalm 85:10: "חֶסֶד-וֶאֱמֶת נִפְגָּשׁוּ; צֶדֶק וְשָׁלוֹם נָשָׁקוּ."50Analytical Questions:What non-human entity is being given human attributes or actions?What specific human quality (e.g., speech, emotion, action) is being attributed to it?What is the poetic or theological effect of this personification? Does it make creation seem more alive, an abstract concept more active, or God's power more pervasive?V. Macro-Structures: Poetic Form and FramingThese devices organize larger blocks of text—from a few lines to an entire psalm—creating patterns that guide the reader, build emphasis, and unify the composition.Chiasmus (Chiastic Structure)Concept Name: Chiasmus (Chiastic Structure)Definition: An inverted literary structure in which a sequence of elements (words, phrases, or themes) is presented and then repeated in reverse order, creating a mirrored pattern such as A-B-B'-A' or A-B-C-B'-A'.51 The name is derived from the Greek letter Chi ($X$), which the pattern resembles when diagrammed, as lines can be drawn connecting the parallel elements.53Function in Poetry: Chiasmus is a sophisticated device used for emphasis, memorization, and to highlight the central element of the structure (the pivot or turning point), which often contains the main idea of the passage.53 By forcing the reader to process the logic of the poem both forwards and backwards, it underscores the unity of the composition and directs attention to its theological or emotional core.53Canonical Examples (from Psalms):Micro-Chiasm: Psalm 2:10: "וְעַתָּה מְלָכִים (A), הַשְׂכִּילוּ (B); // הִוָּסְרוּ (B'), שֹׁפְטֵי אָרֶץ (A')".53Macro-Chiasm: Psalm 8 is structured as a large-scale chiasm. It is framed by praise of God's name (A, v. 1 and A', v. 9), which envelops reflections on God's glory in the heavens (B, vv. 1-3) and humanity's rule on earth (B', vv. 6-8), with the central question about humanity's significance (C, vv. 4-5) at its core.53Thematic Chiasm: Psalm 106 embeds its historical narrative within a chiastic structure of key themes and repeated words, drawing attention to central motifs like Moses's intercession and the sin at Baal-Peor.55Analytical Questions:Are there repeated words, phrases, or ideas that appear in a mirrored or inverted order (A-B...B'-A')?What is the central element of the chiasm? How is it emphasized by the surrounding structure?How do the corresponding pairs (A and A', B and B') relate to each other? Does the second element resolve, expand upon, or reflect on the first?Inclusio (Envelope Structure)Concept Name: Inclusio (Envelope Structure)Definition: A literary device where a section of text is "bracketed" or "enveloped" by repeating the same or a very similar word, phrase, or theme at both the beginning and the end.56Function in Poetry: Inclusio serves to unify a poetic unit, clearly marking its beginning and end for the reader or listener.57 It highlights the central theme encapsulated within the "envelope" and encourages the interpretation of the intervening material in light of the framing statement.56 The meaning of the repeated phrase is often enriched or deepened by the content it encloses, so its final appearance carries more weight than its first.59Canonical Examples (from Psalms):Psalm 8: Begins and ends with the identical line: "יְהוָה אֲדֹנֵינוּ מָה-אַדִּיר שִׁמְךָ בְּכָל-הָאָרֶץ!" (vv. 1, 9).57Psalm 103: Begins and ends with the exhortation "בָּרְכִי נַפְשִׁי אֶת-יְהוָה" (vv. 1, 22), framing a lengthy recitation of God's benefits and merciful character.58Psalm 118: Begins and ends with the liturgical call to worship: "הוֹדוּ לַיהוָה כִּי-טוֹב כִּי לְעוֹלָם חַסְדּוֹ" (vv. 1, 29).56Analytical Questions:Does the same or a similar line, phrase, or key theme appear at both the beginning and the end of this psalm or stanza?What is the main idea of the material contained within this "envelope"?How does the repetition of the framing device guide the interpretation of the central content?Is the meaning of the closing phrase identical to the opening one, or has it been deepened by the intervening text?RefrainConcept Name: RefrainDefinition: A line, part of a line, or a group of lines repeated at regular or strategic intervals within a poem, functioning similarly to a chorus in a modern song.54Function in Poetry: A refrain serves as a primary structural marker, dividing a psalm into distinct stanzas or sections.63 Thematically, it often encapsulates the central plea, affirmation of trust, or core theme of the psalm, reinforcing it through repetition and providing an anchor point for the reader's attention and emotion.65Canonical Examples (from Psalms):Psalms 42-43: The refrain "מַה-תִּשְׁתּוֹחֲחִי נַפְשִׁי וַתֶּהֱמִי עָלָי הוֹחִילִי לֵאלֹהִים כִּי-עוֹד אוֹדֶנּוּ יְשׁוּעֹת פָּנַי וֵאלֹהָי" appears three times (42:5, 42:11; 43:5), structuring the poem and tracing the psalmist's internal struggle and self-exhortation.62Psalm 46: The refrain "יְהוָה צְבָאוֹת עִמָּנוּ מִשְׂגָּב-לָנוּ אֱלֹהֵי יַעֲקֹב סֶלָה" appears after the second and third stanzas (vv. 7, 11), acting as a powerful, climactic affirmation of trust.62Psalm 136: The refrain "כִּי לְעוֹלָם חַסְדּוֹ" is repeated after every single colon, making it the dominant structural and theological statement of the entire psalm.65Analytical Questions:Is there a line or phrase that repeats at key junctures in the psalm?How does this refrain divide the psalm into larger structural units (stanzas)?What is the central message of the refrain, and how does its repetition shape the psalm's overall theme and emotional trajectory?VI. Rhythm and CadenceThis section addresses the prosody of Hebrew poetry, clarifying the scholarly consensus on its distinctive rhythmic nature, which is tied more to logic and stress than to syllable counts.Meter & RhythmConcept Name: Meter & RhythmDefinition: Unlike much Western poetry that relies on a strict syllabic meter (a fixed number of syllables per line), the scholarly consensus is that biblical Hebrew poetry is based on an accentual rhythm.68 This means the rhythm is determined by the number of stressed or accented syllables per colon, with the number of unstressed syllables in between being variable.68 This rhythm is not an independent system imposed on the words; rather, it is an emergent property of the parallel structure itself. Because parallel lines often use parallel syntax (e.g., Noun-Verb-Object // Noun-Verb-Object), they naturally result in a similar number of stressed words, creating a "rhythm of thought" or syntactic rhythm.6Function in Poetry: The accentual rhythm creates a distinct cadence and pace appropriate for oral recitation and liturgy. The balance of stresses between the two cola of a line is a key component of parallelism, reinforcing the semantic relationship with a phonetic one. This gives the poetry a powerful, incantatory quality that enhances its emotional impact and aids in memorization.69Canonical Examples (from Psalms): (Note: Stress patterns are most apparent in Hebrew but can be approximated in translation by focusing on major content words.)Psalm 23:1: "יְהוָה רֹעִי // לֹא אֶחְסָר."Psalm 19:1: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד-אֵל // וּמַעֲשֵׂה יָדָיו מַגִּיד הָרָקִיעַ."Analytical Questions:When reading the line aloud, how many major stressed words or syllables are in the first colon versus the second?Is there a sense of rhythmic balance, or does one colon feel significantly longer or heavier than the other? How does this affect the meaning?How does the rhythm contribute to the overall feeling or impact of the line (e.g., is it stately and balanced, urgent and short, or falling in a lamenting cadence)?How does the grammatical structure of each colon contribute to its rhythmic feel?
+
+---
+
+## Traditional Commentaries
+
+Classical interpretations from traditional Jewish commentators on key verses.
+
+### About the Commentators
+
+#### 1. Rabbi Shlomo Yitzchaki (Rashi)
+
+Rabbi Shlomo Yitzchaki (1040–1105), known as Rashi, is the foundational commentator of Jewish tradition. Living in Troyes, France, his life and work were profoundly shaped by the communal precariousness following the massacres of the First Crusade. This context fueled his pedagogical mission: to make the core Jewish texts, the Tanakh and the Babylonian Talmud, accessible to ensure the continuity of Jewish knowledge. His commentaries on both became indispensable, with his Talmud commentary being printed in every subsequent edition and his Tanakh commentary holding the distinction of being the first Hebrew book ever printed (1475).
+
+Rashi's exegetical method is a revolutionary synthesis of *peshat* (plain, contextual meaning) and *derash* (rabbinic homiletics). While he stated his goal was *peshat*, his genius was not in literalism but in *curation*. He possessed an uncanny ability to anticipate a student's question—a textual redundancy, an awkward phrase, or a narrative difficulty—and would then select a concise midrashic teaching that "settles" this specific problem. Thus, *derash* is not used as a replacement for the plain meaning but as a tool to reveal a deeper coherence *within* the *peshat*. He anchors the Oral Law within the Written Law, demonstrating their inseparability. To aid his local French-speaking audience, he frequently translated difficult Hebrew terms into Old French using Hebrew letters (*la'azim*), a practice that made his work an invaluable resource for modern linguists. His philosophy was his pedagogy; he was not a formal philosopher but an educator driven by a desire to empower every Jew to study. His legacy is one of total saturation; all subsequent Jewish commentary is, in some form, a dialogue with Rashi.
+
+#### 2. Rabbi Abraham ibn Ezra
+
+Rabbi Abraham ibn Ezra (c.1092–1167) represents the zenith of the "Golden Age" of Spanish Jewry. A consummate polymath, he was a master of grammar, philosophy, mathematics, and astrology. After personal tragedies, he spent the second half of his life as an itinerant scholar, wandering through Christian Europe and acting as an intellectual bridge, introducing the sophisticated Sephardic grammatical and scientific traditions to the Jews of France, Italy, and England. His scholarly corpus is vast, including foundational works on Hebrew grammar, Neoplatonic philosophy (*Yesod Mora*), and scientific tracts that introduced the decimal system to European Jews.
+
+His philosophy was a thoroughgoing rationalism, famously stating the "intellect must be the intermediary between man and his God." This rationalism included a deep, scientific belief in astrology, which he viewed as the deterministic physics of the cosmos; the *mitzvot* (commandments), in his view, were divine tools to mitigate this astral determinism. His exegetical method is a conscious and sharp polemic against Rashi's *peshat/derash* synthesis. For Ibn Ezra, the *peshat* is discoverable only through rigorous, scientific mastery of Hebrew grammar and linguistics, and he famously rejects any rabbinic interpretation that "flies in the face of reason." His commentary is concise, witty, and often enigmatic, frequently hinting at controversial ideas with the phrase, "and the intelligent will understand" (*ve-hamaskil yavin*). Scholars agree he was alluding to conclusions that form the basis of modern biblical criticism, such as post-Mosaic authorship of certain verses and the existence of a Deutero-Isaiah. His legacy is the creation of the competing rationalist-grammatical school of exegesis.
+
+#### 3. Rabbi David Kimhi (Radak)
+
+Rabbi David Kimhi (1160–1235), or Radak, was a product of the unique intellectual climate of 13th-century Provence, a "geographic and intellectual crossroads" mediating between the Talmudism of Northern France (Rashi) and the rationalism of Spain (Ibn Ezra). A staunch defender of Maimonides during the Maimonidean Controversy, Radak's primary field was philology. His grammatical treatise, *Sefer Mikhlol*, and his lexicon, *Sefer Ha-Shorashim*, synthesized and systematized Hebrew grammar with such unparalleled clarity that they became the definitive Hebrew textbooks for centuries.
+
+Radak applied this "genius for clarification" to his biblical commentaries, most notably on the *Nevi'im* (Prophets). His exegetical approach represents the "golden mean" of medieval exegesis. He follows the methodology of Ibn Ezra, with a profound commitment to *peshat*, grammatical precision, and a Maimonidean rationalist philosophy. However, unlike the polemical Ibn Ezra, Radak comfortably integrates all his predecessors. He presents the grammatical *peshat* with the accessibility of Rashi and respectfully utilizes rabbinic *derash*, which he clearly distinguishes from the plain meaning. He provides the necessary linguistic, historical, and geographical context to make the prophetic books understandable. His commentary on *Nevi'im* became as standard as Rashi's on the Torah. Because of its clarity and precision, Radak's work became the primary resource for the Christian Hebraists of the Renaissance and Reformation, heavily influencing the translators of the King James Version of the Bible. He remains indispensable for any serious study of the Prophets.
+
+#### 4. Rabbi Menachem ben Solomon (Meiri)
+
+Rabbi Menachem ben Solomon (1249–1316), the Meiri, was a leading Maimonidean rationalist in 13th-century Provence, living at the height of the Maimonidean Controversy. His magnum opus is the *Beit HaBechirah* ("The Chosen House"), a monumental, encyclopedic digest of the Talmud. This work, which was lost for centuries and only rediscovered in the 20th century, is not a line-by-line commentary like Rashi's. Instead, it is a systematic, topical summary. The Meiri omits the "give and take" of the Talmudic debate and instead presents a lucid summary of the entire subject, collating the opinions of all preceding authorities (whom he refers to by epithets, not names) before concluding with the final *halachic* (legal) decision. This work is the ultimate expression of his Maimonidean worldview, imposing a clear, logical, and rational order on the vast sea of the Talmud.
+
+The Meiri's most radical and enduring innovation is his *halachic* position on non-Jews. The Talmud contains discriminatory laws against ancient *akum* (idolaters). The Meiri was the first major authority to rule that these laws were entirely obsolete. He did this by positing a revolutionary *halachic* category: "nations restricted by the ways of religion" (*umot ha-gedurot be-darkhei ha-datot*). He argued that the Talmud's "idolater" was a moral, not theological, category referring to lawless, barbaric ancient peoples. Contemporary Christians and Muslims, by contrast, are governed by *dat* (law, reason, and social order). Because they live by a system of law and morality, the Meiri ruled they are to be treated as equals to Jews in all matters of civil law. Since its rediscovery, his work has become the primary traditional source for modern Jewish universalism and interfaith relations.
+
+#### 5. Rabbi David Altschuler (Metzudat David)
+
+The commentary known as the *Metzudot* ("The Fortresses") is the product of an 18th-century father-son collaboration, initiated by Rabbi David Altschuler (c. 1687–1769) and completed by his son, Rabbi Yechiel Hillel Altschuler. Working in Galicia and Prague, they perceived that the study of Tanakh, particularly *Nevi'im* (Prophets) and *Ketuvim* (Writings), had "weakened." Their work, which covers only *Nevi'im* and *Ketuvim*, was a purely pedagogical intervention designed to reverse this decline.
+
+The brilliance of the *Metzudot* lies not in its content, which is intentionally not original—it is a masterful compilation and simplification based primarily on Radak—but in its revolutionary *form*. Rabbi Yechiel Hillel split the commentary into two distinct parts, printed side-by-side on the page. The first, *Metzudat Tzion* ("Fortress of Zion"), is a simple glossary whose sole function is to define individual difficult Hebrew words. The second, *Metzudat David* ("Fortress of David"), is the commentary proper, providing a clear, flowing paraphrase and explanation of the verse's meaning as a whole. This two-part system created a "frictionless reading experience." It solved the problem of earlier commentaries, like Radak's, which required a student to get bogged down in a grammatical discussion just to understand the verse. With the *Metzudot*, a student can read the flowing paraphrase of *Metzudat David* and only glance at *Metzudat Tzion* if they encounter an unfamiliar word. This pedagogical innovation was a massive success, and the *Metzudot* became a standard, indispensable starting point for any student beginning the study of the Prophets and Writings.
+
+#### 6. Rabbi Meir Leibush Wisser (Malbim)
+
+Rabbi Meir Leibush Wisser (1809–1879), the Malbim, was a "warrior" rabbi, grammarian, and polemicist whose life was defined by his fierce, uncompromising struggle against the 19th-century Haskalah (Jewish Enlightenment) and the nascent Reform movement. His stormy rabbinic career saw him expelled from Bucharest for his staunch opposition to any religious innovations. His commentary was his weapon in this war. His magnum opus, *HaTorah veHaMitzvah*, was an explicit polemic against the Reform movement's claim that the Oral Law (the Talmud) was a later, human invention separate from the "pure" Written Torah. The Malbim's goal was to prove, through systematic linguistic analysis, that the *entire* Oral Law is "implicit in the plain meaning of the verse."
+
+To achieve this, he launched an exegetical counter-reformation built on two radical linguistic principles. First, he rejected the long-held rabbinic principle that "the Torah speaks in human language." He argued that in a divine text, there are *no true synonyms* and *no redundancies*. If the Torah uses two different words for "speak" (e.g., *amar* vs. *diber*), they must have distinct, precise meanings that carry *halachic* implications. Second, in his introduction *Ayelet ha-Shachar*, he laid out a "rediscovered" system of 613 precise grammatical and syntactic rules that he claimed the Talmudic Sages used to derive the Oral Law. With this framework, the Malbim argued that what earlier commentators (like Rashi or Ibn Ezra) saw as *derash* (homiletics) was, in fact, the true, logical, grammatical *peshat* of the verse. He effectively co-opted the Enlightenment's own tools—logic and systematic rules—to defend the divine, inseparable unity of the Written and Oral Law, becoming a hero of the modern Orthodox yeshiva world.
+
+
+
+### Psalms 15:1
+**Why this verse**: To understand how classical commentators resolve the tension between the two words for 'dwell' (gur/shakhan) and the two metaphors (tent/mountain) for God's presence.  
+
+#### Ibn Ezra
+**Hebrew**: מזמור, ה' מי יגור באהלך - ביתך. וכמוהו: איש לאהליך ישראל. | בהר קדשך - הר המוריה או הר ציון ,קודם שיודע כי הוא הר המוריה בשכון הארון בציון, בבית שהכין לו דוד, ככתוב בדברי הימים.  
+
+---
+
+#### Radak
+**Hebrew**: מזמור לדוד יהוה מי יגור באהלך ומי * הוא"ו נתוספה על ידי הסופר השני; והאיש הזה היה, כפי הנראה, מדקדק גדול ועצום. ישכן בהר קדשך: אהלך הם השמים; וכנה אותם באהל, לפי שהם מתוחים כאהל; והר קדשך הוא הר המוריה ששם בית המקדש, לפי שהוא המקום הנכבד בארץ. וכן כנה אותם בהיכל כמו שאמר (תהלים יא ד) יי' בהיכל קדשו, יי' בשמים כסאו כמו שפרשנו. וכן ישמע מהיכלו קולי (שם יח ז). ומי יגור, ומי ישכן הם על הנשמה העליונה. ...  
+
+**English**: A Psalm of David. Lord, who shall sojourn in Thy Tabernacle? And who shall dwell in Thy Holy Hill? – Thy Tabernacle: that is, the heavens, and he designates them a tent because they are spread out as a tent. And Thy Holy Hill is Mount Moriah, where the Holy House was, for it was the most glorious place in the earth. And in like manner he designates them (the heavens) a palace, as he says (Ps. 11:4...  
+
+---
+
+#### Metzudat David
+**Hebrew**: מי יגור. כאלו שואל אתה ה׳‎ מי הוא הראוי לדור באהלך וזהו בית המקדש כי אין כולם ראוים וכמ״‎ש מי ביקש וכו׳‎ רמוס חצרי (ישעי׳‎ א יב):  
+
+---
+
+#### Malbim
+**Hebrew**: מזמור לדוד, חושב הדברים אשר יעשה אותם האדם וחי בהם להיות מן עבדי ה' העומדים בחצרותיו, מי יגור באהלך ומוסיף אף גם שישכן דרך שכינת עראי בהר קדשך שהוא לפני האהל, ר"ל מי הראוי לעמוד לפני ה' המתהלכים לפניו:  
+
+---
+
+#### Meiri
+**Hebrew**: כבר ביארנו בילדותנו בחבור התשובה ומתנאיה לקנות לעצמו תכונות חדשות בהסרת מדות מגונות אף במה שאינו עבירה גמורה ובקנין כל מדה מעולה אף במה שאינו מצוה מיוחדת וברדיפת פעולות החסד לפנים משורת הדין וכן לכל אדם הרוצה להשלים עצמו בתכלית שלימות צריך לאחיזת אלו הדרכים ולהודעת זה אמר ה׳ מי יגור באהלך כלומ׳ מי הוא שיוכל לעמוד בטוח להיותו מן הגרים באהלו ומן השוכנים במקום קדשו ר״ל הדבקים בו ובמחיצתו ית׳.  
+
+---
+
+#### Torah Temimah
+**Hebrew**: מִזְמוֹר לְדָוִד יְהֹוָה מִי יָגוּר בְּאָהֳלֶךָ: בא דוד והעמידן על אחת עשרה דכתיב מזמור לדוד [ה'] מי יגור באהלך מי ישכון בהר קדשך הולך תמים ופועל צדק ודובר אמת בלבבו לא רגל על לשונו לא עשה לרעהו רעה וחרפה לא נשא על קרובו נבזה בעיניו נמאס ואת יראי ה' יכבד נשבע להרע ולא ימיר כספו לא נתן בנשך ושוחד על נקי לא לקח עושה אלה לא ימוט לעולם הולך תמים זה אברהם דכתיב התהלך לפני והיה תמים וכו':(מכות כד ע"א)  
+
+---
+
+### Psalms 15:2
+**Why this verse**: To explore the traditional interpretation of the threefold structure of integrity, especially the meaning of 'tamim' (blameless) and the idiom 'speaks truth in his heart'.  
+
+#### Rashi
+**Hebrew**: וְדוֹבֵר אֱמֶת בִּלְבָבוֹ. הַטּוֹב שֶׁהוּא אוֹמֵר בִּלְבָבוֹ הוּא אֱמֶת, וְאֵינוֹ אֶחָד בַּפֶּה וְאֶחָד בַּלֵּב (ס״א אינו):  
+
+**English**: and speaks truth in his heart The good that he says in his heart is true. He is not a hypocrite [lit. one in mouth and one in heart].  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: הולך - זו תשובת מי יגור באהלך. | תמים - תאר והמתואר חסר הולך בדרך תמים בענייניו ודבריו. | ופועל צדק - עם חביריו. | ודובר אמת בלבבו - והוא כל האדם.  
+
+---
+
+#### Radak
+**Hebrew**: הולך תמים אם תמים הוא תאר רצונו לומר: הולך בדרך תמים, כמו הלך בדרך תמים הוא ישרתני (שם קא ו); ואם הוא שם, כמו אם באמת ובתמים (שופטים ט טז), רצונו לומר: הולך בתמימות, כמו ואני בתמי אלך (תהלים כו א): והענין אחד. והתמים הוא מי שיתעסק בעניני העולם הזה בדרך תמימות, שלא יעמיק במחשבתו בתחבולות העולם. | ופעל צדק שכל מעשיו יעשה בצדק. ותורות האדם: עשה ולא תעשה הם על שלשה פנים, האחד במעשה והאחד בלשון, והאחד ...  
+
+**English**: He that walketh perfectly: – If תמים (perfect) is an adjective, his meaning is, One who walks in a perfect way, as, “He that walketh in a perfect way, he shall minister unto me” (ibid. 101:6); while if it is a noun, (it is used) as (in the passage) “if in truth and perfectness (בתמים)” (Judges 9:16). He means: He who walks in perfectness (integrity), as, “But as for me I will walk in mine integrit...  
+
+---
+
+#### Metzudat David
+**Hebrew**: הולך תמים. כאלו משיב ההולך בדרך תמים וכו׳‎ הוא הוא אשר יגור בה: | בלבבו. מאמת מחשבת לבו לדבר מצוה:  
+
+---
+
+#### Malbim
+**Hebrew**: הולך, במצות שבין אדם למקום שבו יתהלך לפני ה' צריך שיהיה הולך תמים, שגדר התמימות שיעשה כל מעשיו לשם ה' בלבד בלי שום פניה חיצונית, ובמצות שבין אדם לחברו יהיה פועל צדק, ובענין האמונה יהיה דובר אמת בלבבו שלא תהיה אמונתו מן השפה ולחוץ, כי גדר האמונה הסכמת הלב עם מה שהוא מוציא בשפתיו:  
+
+---
+
+#### Meiri
+**Hebrew**: הולך תמים ר״ל לא שיתגאה וישתרר במה שיגיעהו מעבודת הבורא והוא אמרו ופעל צדק כלומ׳ עם היותו פועל צדק והוא תכלית יושר המדות הוא הולך בתמימות ובשפלות ולא יתפאר ולא יתנשא במעשיו אבל ימעטו בעיניו ודבר אמת בלבבו ר״ל שלא ימצא בו אחת בפה ואחת בלב אבל לבו ופיו שוים בכל דבר שזהו תכלית האמת ואיפשר שנרמז בה על התפלה כמאמר אודה ה׳ בכל לבי (תה׳ ט ב) רמז על האמונות שהם חובת הלבבות.  
+
+---
+
+#### Torah Temimah
+**Hebrew**: וְדֹבֵר אֱמֶת בִּלְבָבוֹ: ת"ר הלוקח ירק מן השוק ובירר והניח אפילו כל היום כולו לא קנה ולא נתחייב במעשר גמר בלבו לקנותו קנה ונתחייב במעשר להחזירו אי אפשר שכבר נתחייב במעשר ולעשרו א"א שכבר מפחיתן בדמים הא כיצד מעשרו ונותן לו דמי מעשר אטו משום דגמר בלבו לקנות קנה ונתחייב במעשר אמר רב הושעיא הכא בירא שמים עסקינן כגון רב ספרא דקיים בנפשיה ודובר אמת בלבבו:(בבא בתרא צח ע"א)  
+
+---
+
+### Psalms 15:3
+**Why this verse**: To see how commentators explain the unique idiom 'walks with his tongue' and to resolve the ambiguity of whether one accepts or casts reproach upon a neighbor.  
+
+#### Rashi
+**Hebrew**: לֹא רָגַל עַל לְשׁוֹנוֹ. אַנְקוּשָׁ״א בְּלַעַ״ז, כְּמוֹ ״וַיְרַגֵּל בְּעַבְדְּךָ״ (שמואל ב יט:כח). מִזְמוֹר זֶה לְהוֹדִיעַ מִדַּת חֲסִידוּת: | וְחֶרְפָּה לֹא נָשָׂא. רֵיפוֹרְטָ״א בְּלַעַ״ז: | עַל קְרוֹבוֹ. אִם עָבַר קְרוֹבוֹ עֲבֵרָה שֶׁיֵּשׁ בָּהּ עֹנֶשׁ, עֲנָשׁוֹ בְּמִשְׁפָּט וְלֹא נָשָׂא עָלָיו חֶרְפָּתוֹ, שֶׁיְּהֵא פִּתְחוֹן פֶּה לַמְחָרֵף לוֹמַר: כָּךְ עָבַר פְּלוֹנִי קְרוֹבְךָ וְחִפִּיתָ עָלָ...  
+
+**English**: He did not slander with his tongue Ankuza in Old French, to accuse, as (in II Sam. 19:28) “And he slandered (וירגל) your servant.” This psalm is to inform us of the [proper] measure of piety. | neither did he take up reproach Rapporta in Old French, to report. | upon his kinsman If his kinsman committed a transgression for which he was punishable, he would punish him with justice, and he did not b...  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: לא רגל על לשונו - כמו וירגל בעבדך. והטעם: לגלות המסתרים כדרך המרגלים. | לא נשא - על דרך לא תשא שמע שוא. ויש אומרים: לא עשה דבר שיחרפו בו קרוביו.  
+
+---
+
+#### Radak
+**Hebrew**: לא רגל על לשנו בזה הפסוק אמר מצות לא תעשה בלשון ובמעשה, אבל בלב לא היה צריך להזכיר כי כבר אמר: ודבר אמת בלבבו; ואם מחשבותיו אמת וצדק, אין רע במחשבותיו. ואמר: לא רגל על לשנו ולא אמר שאר מצות לא תעשה שהן בלשון, כמו לא תענה ברעך (שמות כ טז); אלהים לא תקלל (שם כב כז) והדומין להן, כי אמר אותה שהיא אמת, וכל שכן האחרות; כי הרכילות אף על פי שהיא אמת, יצא רע גדול ממנה. ולפיכך אמר ודבר אמת בלבבו, כי האמת שה...  
+
+**English**: He that slandereth not with his tongue: – In this verse he specifies certain prohibitions both as regards speech and deed; but it was not necessary for him to mention (such) of the heart, for he has already said and speaketh truth in his heart, and if his thoughts are truth and righteousness, then there is no evil in his thoughts. He says he slandereth not with his tongue, but does not enunciate t...  
+
+---
+
+#### Metzudat David
+**Hebrew**: לא נשא. לא הטיל על קרובו דבר חרפה:  
+
+---
+
+#### Malbim
+**Hebrew**: לא, ובאשר מטבע האדם לדרוש גנות חברו, ולהגיע לו רעה מצד מדת הכבוד ומדת הקנאה, אמר שלא רגל על לשונו, ר"ל לא ידבר ממנו בענין שמתוך הלשון יהיה עליו איזה רכילות, כמ"ש חז"ל ה"ד לה"ר דאמר נורא בי פלניא, וכן שלא עשה לרעהו שום רעה, ובאשר מטבע האדם לנטות אחרי קרוביו ולחפות בעדם, אומר שלא עשה לרעהו רעה אף שיגיע מזה תועלת לקרוביו, כי חרפה לא נשא בעבור קרובו, שיחפה עליו בעבור אהבת הקרובים, כי בהפך נבזה בעיניו ...  
+
+---
+
+#### Meiri
+**Hebrew**: ואמ׳ לא רגל על לשונו ר״ל שנעשו לו קלות כחמורות ורגל הוא מענין רכילות ר״ל שלא הוציא דבה ורכילות על חבירו ובכלל זה כל הרחקת לשון הרע והוא ענין לא עשה לרעהו רעה אפי׳ בדבור ובהוצאת דבה ושמץ עליו וחרפה לא נשא על קרבו ר״ל לא סבל חרפת בני אדם להיותו עוזר לקרובו במה שאין ראוי לו לעשותו ושלא לחפות עליו. וי״מ נשא במקום השיא כלומ׳ לא חרף את קרובו ולא רדפו. ואצלי לפרש לשטה זו שדרך כלל היטב מעשיו ונזהר מעשותם ...  
+
+---
+
+### Psalms 15:4
+**Why this verse**: To find the traditional interpretation of the difficult phrase 'swears to evil' and to understand the ethical weight placed on honoring the 'despised' and keeping costly oaths.  
+
+#### Rashi
+**Hebrew**: נִבְזֶה בְּעֵינָיו נִמְאָס. מִי שֶׁהוּא נִבְזֶה בְּרִשְׁעָתוֹ נִמְאָס בְּעֵינָיו שֶׁל צַדִּיק, כְּגוֹן חִזְקִיָּהוּ שֶׁגֵּרֵר עַצְמוֹת אָבִיו בְּבִזָּיוֹן: | נִשְׁבַּע לְהָרַע. לְעַצְמוֹ: | וְלֹא יָמִיר. שְׁבוּעָתוֹ, קַל וָחֹמֶר שֶׁאֵינָהּ מֵמִירָהּ בְּדָבָר שֶׁאֵינָהּ לְרָעָתוֹ:  
+
+**English**: A base person is despised in his eyes One who is base with his wickedness is despised in the eyes of the righteous man, e.g. Hezekiah, who dragged his father’s remains in disgrace. | he swears to hurt himself. | and does not retract his oath. How much more does he not retract it if it concerns something that is not to his hurt!  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: נבזה - קשור בעיניו גם נמאס. והטעם: כי עובד השם כל מצוה ששמר וכל טוב שעשה, נבזה ונקל הוא בעיניו, כנגד מה שהוא חייב לעשות לכבוד בוראו, וככה משפט הצדיקים שיבקשו לעלות אל מעלת קדוש ממנו ונכבד. ואמר: יכבד כנגד נבזה. | נשבע להרע - נפשו כמו לצום, כי יכחיש הבשר.  
+
+---
+
+#### Radak
+**Hebrew**: נבזה בעיניו נמאס וספר ממדותיו הטובות עוד: כי אף על פי שהוא הלך תמים ופעל צדק ודבר אמת אינו מתגאה בזה, אלא נבזה הוא בעיניו ונמאס, וחושב בלבבו כי לא יעשה אחת מני אלף ממה שיש עליו חובה לעשות לכבוד הבורא. | ואת יראי יהוה יכבד הוא נבזה בעיניו ומכבד יראי יי'; כי כל הטובות שעשה הוא אינו חושבן לכלום נגד מה שחושב שיש לו לעשות, והטובות שיעשה זולתו יחשבן לדברים גדולים. ויחשוב שיש ליראי יי' זולתו מעלה עליו, ו...  
+
+**English**: Despised is he in his own eyes, rejected: – He recounts further some of his good qualities. For although he walketh perfectly and worketh righteousness and speaketh truth, he does not pride himself upon this, but is despised in his own eyes and rejected, thinking in his heart that he cannot perform one-thousandth part of what it is his duty to do for the honour of his Creator. | But he honoureth t...  
+
+---
+
+#### Metzudat David
+**Hebrew**: נבזה. אדם הנבזה הוא נמאס בעיניו ולא יחניף למי: | להרע. לענות נפשו:  
+
+---
+
+#### Meiri
+**Hebrew**: נבזה בעיניו נמאס רומז לשפלות הרוח ובזות ענייני השררות וכבוד העולם ואת יראי ה׳ יכבד על הדבקו בחכמים והתנהגו על פיהם נשבע להרע ר״ל גודר בעצמו להמית תאוותיו ולנטות אל הקצה האחרון דרך רפואת נפשו ואמרו ולא ימר רומז על זכירת חטאיו תמיד לחשוב בהם ולחזק בזכירתם גדריו וסייגיו עד שידבק בזאת ההנהגה דבוק תמידי לא שיתיאש ממנה כלל.  
+
+---
+
+#### Torah Temimah
+**Hebrew**: וְאֶת יִרְאֵי יְהֹוָה יְכַבֵּד: והיינו דאמר רבי כמה גדולים מעשה חייא א"ל ר"ש ב"ר אפילו ממך א"ל אין א"ל רבי ישמעאל ברבי יוסי אפילו מאבא א"ל חס ושלום לא תהא כזאת בישראל אמר להן לבני קטן אני צריך נכנס ר' שמעון אצלו מסר לו סדרי חכמה אמר להן לבני גדול אני צריך נכנס רבן גמליאל אצלו ומסר לו סדרי נשיאות אמר לו בני נהוג נשיאותך ברמים זרוק מרה בתלמידים איני והא כתיב ואת יראי ה' יכבד ואמר מר זה יהושפט מלך יה...  
+
+---
+
+### Psalms 15:5
+**Why this verse**: To understand why prohibitions against usury and bribery are presented as the final and ultimate requirements, and to explore the nature of the promised state of being 'unshaken'.  
+
+#### Rashi
+**Hebrew**: וְשֹׁחַד לֹא לָקַח. עַל עָנִי לְהַרְשִׁיעוֹ בַּדִּין, לְהַטּוֹת מִשְׁפָּטוֹ. וְעוֹד פֵּרְשׁוּהוּ רַבּוֹתֵינוּ (ספרי דברים קמד): לֹא לָקַח שֹׁחַד עַל נָקִי לְנַקּוֹתוֹ בְּדִינוֹ, קַל וָחֹמֶר שֶׁאֵינוֹ לוֹקֵחַ שֹׁחַד לְהַטּוֹת הַמִּשְׁפָּט: | לֹא יִמּוֹט. וְהוּא רָאוּי לָגוּר בְּאָהָלֶיךָ (ספרים אחרין אינו): | לֹא יִמּוֹט לְעוֹלָם. אִם יִמּוֹט, אֵין מֻטָּתוֹ מֻטָה עוֹלָם, אֶלָּא מִתְמוֹטֵט וְעוֹלֶה:  
+
+**English**: nor did he accept a bribe, etc. against a poor man, to condemn him in judgment by judging perversely. Our Sages explained it further to mean that he would not accept a bribe to exonerate him in judgment, and he certainly will not take a bribe to pervert the judgment. | shall not falter and he deserves to sojourn in Your tent. | shall not falter forever If he falters, his faltering will not be perm...  
+
+---
+
+#### Ibn Ezra
+**Hebrew**: כספו - אמר: לא לקח כנגד לא נתן וזה הוא לשפוט דין עול. | עושה אלה - כולל מצות עשה ומצות לא תעשה, כמו לעשות את יום השבת כי הטעם כדרך תיקון, כמו: וימהר לעשות אותו.  
+
+---
+
+#### Radak
+**Hebrew**: כספו לא נתן בנשך כבר אמר: לא עשה לרעהו רעה, ובכללו שלא הונה אותו ולא גזלו ולא גנב ממנו; ועתה אמר: שאפילו ברצונו לא לקח ממונו בדבר שיש בו אסור, והוא הנשך. כי אף על פי שנותן לו ברצונו מוכרח הוא לתן, לפי שיצריך ללות ממנו; והנה הוא מחזיר ממונו והנשך יותר. והנה לוקח ממון חברו שלא כדין, אף על פי שהוא ברצונו. ולפי שהמעשה הזה יהיה אדם רגיל בו כי אין אדם קורא עליו חמס כמו על הגזלה ועל הגנבה, לפיכך החמירה ע...  
+
+**English**: He hath not given his money upon usury: – Already he has said, Nor doeth evil to his friend, and in this it is understood that he does not oppress or rob him, or steal from him. Now he says that even with his consent he does not take his money, together with something against which there is a prohibition – that is, usury. Although he gives it of his free will, he is obliged to give it, because he ...  
+
+---
+
+#### Metzudat David
+**Hebrew**: על נקי. להטות דין הנקי: | לא ימוט לעולם. לא ינטה לנפול כי את הטוב עשה וממילא ראוי הוא לשבת בבית המקדש כי חפץ בו ה׳‎:  
+
+---
+
+#### Malbim
+**Hebrew**: כספו, וגם לא יתפעל מאהבת הממון שחונן דל בג"ח ולא יקח נשך, ושופט בצדק להצדיק את הנקי ולא יקח ממנו שוחד הגם שלא יטה עי"ז את הדין כי יקח שחד מן הנקי ושכר טרחו, עושה אלה, כי גם השב ואל תעשה נחשב כמעשה, באשר יצר האדם מסית לדברים אלה והוא עושה מעשה לכבוש את יצרו, ואז לא ימוט לעולם, כי ישב עולם לפני אלהים וחסד ואמת ינצרוהו:  
+
+---
+
+#### Meiri
+**Hebrew**: ואמ׳ כספו לא נתן בנשך וכו׳ אם הכוונה על ענין הרבית הנה אינה ממין האחרות שהרי האחרות אין בהם עבירה מיוחדת ומתוך כך נראה שאף בזה רומז אל פעולת החסד והוא רומז על ענין המתנה שהוא נותן אותה ע״צ הגון ומעלה נפשית שבו ולשם שמים והנשך משל ודמיון על הגמול רוצה בו שהוא לא נתן כספו על צד שיהיה נגמל כלל ממה שנתן אם גמול מן המקבל לעבדו ולפרסמו ואם גמול מפני הקולם במיני ההתכבדות והשררות והוא שאמרו בדרש אשרי משכי...  
+
+---
+
+#### Torah Temimah
+**Hebrew**: כַּסְפּוֹ לֹא נָתַן בְּנֶשֶׁךְ: תניא ר' שמעון בן אלעזר אומר כל מי שיש לו מעות ומלוה אותם שלא ברבית עליו הכתוב אומר כספו לא נתן בנשך ושוחד על נקי לא לקח עושה אלה לא ימוט לעולם הא למדת שכל המלוה ברבית נכסיו מתמוטטין והא קא חזינן דלא מוזפי ברבית וקא מתמוטטין אמר רבי אלעזר הללו מתמוטטין ועולין והללו מתמוטטין ואינן עולין וכו':(בבא מציעא עא ע"א)  
+
+---
+
+## Modern Jewish Liturgical Use (Psalm 15)
+
+This section summarizes how Psalm 15 and its phrases are used in contemporary Jewish liturgy.
+
+### Phrase-Level Liturgical Usage
+
+The following phrases from Psalm 15 appear in various liturgical contexts:
+
+#### Phrase: יְהֹוָ֣ה יְכַבֵּ֑ד (from 15:4)
+
+The phrase from Psalm 15, יְהֹוָ֣ה יְכַבֵּ֑ד, is recontextualized within a specific liturgical poem that appears in distinct settings depending on the rite. In the Ashkenaz tradition, this poem is found among the devotional *piyyutim* recited on the night of Yom Kippur, often in the collection containing *Shir HaYichud* and *Anim Zemirot*. The same poetic passage is incorporated differently in the Sefard rite, where it is inserted into the Chazan's repetition of the Musaf Amidah on Shabbat. In both instances, the original phrase is adapted and expanded into a responsive call for the congregation to give glory to God. The liturgy proclaims, "בֵּית יִשְׂרָאֵל וְיִרְאֵי יְהֹוָה, יְכַבְּדוּ וְיוֹדוּ שִׁמְךָ יְהֹוָה" ("The house of Israel and those who fear the LORD will honor and thank Your name, O LORD"). This transformation shifts the psalmist's description of a righteous individual into a communal declaration of honor for God, fitting for both the solemnity of Yom Kippur and the sanctity of the Shabbat Musaf service.
+
+---
+
+#### Phrase: נִבְזֶ֤ה ׀ בְּֽעֵ֘ינָ֤יו נִמְאָ֗ס (from 15:4)
+
+The phrase `נִבְזֶה בְּעֵינָיו נִמְאָס` is integrated into the Ashkenazic liturgy for a single, specific occasion: the Shacharit service on Rosh Hashanah. It appears within the complex series of liturgical poems (*Kerovot*) that embellish the Chazzan's Repetition of the Amidah, specifically as part of the acrostic poems recited during the Kedushah. In its original context in Psalm 15, the phrase describes a righteous human who despises the wicked; however, the *piyyut* re-applies this attribute directly to God on the Day of Judgment. The poem creates a powerful theological contrast, stating of God: `כַּבִּיר לֹא יִמְאַס. לְנִבְזֶה בְּעֵינָיו נִמְאָס` ("The Mighty One does not despise, yet in His eyes the vile is despised"). This skillful reuse of the psalmic text serves to portray God as both a compassionate being who does not reject the humble and a righteous judge who disdains the wicked, a central theme of the High Holidays.
+
+---
+
+#### Phrase: [Psalm 15:1-4] (from 15:1-4)
+
+The opening verses of Psalm 15 find a specific and poignant liturgical role within the mourning rituals of the Edot HaMizrach tradition. This passage is designated for recitation after the conclusion of the seven-day *shiva* period, as mourners begin their transition back to communal life. The recitation presents the psalm's central question of who is worthy to dwell in God's presence, followed by an enumeration of the virtues of the righteous: "ה׳ מִי יָגוּר בְּאָהֳלֶךָ מִי יִשְׁכֹּן בְּהַר קָדְשֶׁךָ׃ הוֹלֵךְ תָּמִים וּפֹעֵל צֶדֶק וְדֹבֵר אֱמֶת בִּלְבָבוֹ" ("LORD, who may abide in Your tent? Who may dwell on Your holy mountain? He who walks without blame, and does what is right, and speaks truth in his heart."). In this solemn lifecycle context, the verses function as an elegy, presenting an idealized portrait of the deceased whose virtuous life, it is hoped, has earned them a place in the divine abode. The psalm thus serves as both a tribute to the departed and a source of comfort for the bereaved.
+
+---
+
+#### Phrase: כַּסְפּ֤וֹ ׀ לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮ וְשֹׁ֥חַד עַל־נָקִ֗י לֹ֥א־לָ֫קָ֥ח (from 15:5)
+
+The phrase `כַּסְפּ֤וֹ ׀ לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮` appears in Jewish liturgy as part of the complete recitation of Psalm 15 within the mourning rituals of the Edot HaMizrach tradition. This psalm is specifically designated for recitation by mourners after the conclusion of the seven-day shiva period. In this context, the verse describing the financial integrity of the righteous individual is recited in its entirety: `כַּסְפּ֤וֹ ׀ לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮ וְשֹׁ֥חַד עַל־נָקִ֗י לֹ֥א לָ֫קָ֥חעֹֽשֵׂה־אֵ֑לֶּה לֹ֖א יִמּ֣וֹט לְעוֹלָֽם׃` (“He does not lend his money at interest, nor take a bribe against the innocent; one who does these things shall never be moved.”). The inclusion of this psalm serves as an ethical meditation, outlining the virtues of the person worthy to dwell in God’s presence. Within the solemnity of mourning, this recitation functions both as a eulogy, attributing these righteous qualities to the deceased, and as a source of comfort, affirming the eternal stability promised to those who live a life of integrity.
+
+---
+
+
+---
+
+## Related Psalms Analysis
+
+The librarian has found that the psalm you're analyzing (Psalm 15) has some POSSIBLY interesting word and phrase relationships with other psalms (Psalms 121, 24).
+
+To understand the potential value of these connections, consider the scholarly consensus regarding Psalm 25 and Psalm 34. These two acrostics are a classic example of a "diptych," or deliberate pair, linked by numerous structural and thematic echoes.
+- **Structural Anomaly**: They both share the unique acrostic structure of omitting the Vav (ו) stanza and adding a final Pe (פ) stanza, which links them conceptually through the root פדה (padah - to redeem).
+- **The "Call and Response" Arc**: This structural link is reinforced by a clear theological arc:
+  - **The Plea (Ps 25:22)**: Concludes with the petition פְּדֵה... מִכֹּל צָרוֹתָיו (pedeh... mikol tzarotav - "Redeem... from all his troubles").
+  - **The Response (Ps 34:7, 18)**: Answers with the assurance וּמִכׇּל־צָרוֹתָיו הוֹשִׁיעוֹ (u'mikol-tzarotav hoshio - "and from all his troubles He saved him") and the final capstone statement פֹּדֶה יְהֹוָה (podeh Adonai - "The Lord redeems").
+- **Shared Wisdom Theme**: Both psalms pivot to wisdom instruction using the nearly identical rhetorical question מִי־הָאִישׁ (mi ha-ish - "Who is the man...") (Ps 25:12, Ps 34:13).
+- **Shared Thematic Vocabulary**: They are further bound by a specific vocabulary of piety and instruction, including:
+  - "Fear of the LORD" (Ps 25:12, 14; Ps 34:8, 10, 12)
+  - "The humble/afflicted" (עֲנָוִים - anavim) (Ps 25:9; Ps 34:3)
+  - "Good" (טוֹב - tov) (Ps 25:13; Ps 34:9, 11, 13)
+
+As you review the data below, ask yourself if a similar structural, thematic, or "call-and-response" dynamic is at play here, where one psalm seems to complete or answer the other. You have the entire text of the potentially related psalms, so ALSO please look beyond the word similarities to OTHER possible connections of ARCHITECTURE, THEME, LIFE EVENTS, LITURGICAL FUNCTION, etc, AND consider how these psalms DIFFER in interesting and informative ways.
+
+Below is the full text of the psalms potentially related to Psalm 15, and for each psalm, a list of POSSIBLY related words and phrases that were algorithmically detected. These relationships might deepen your insights into the meaning, intent, posture, history, and poetics of the psalm you are analyzing. Feel free to REJECT these possible connections as spurious, but DO incorporate them into your work where relevant an insight-driving.
+
+---
+
+### Psalm 121 (Connection Score: 233.51)
+
+#### Full Text of Psalm 121
+
+**Verse 1**: שִׁ֗יר לַֽמַּ֫עֲל֥וֹת אֶשָּׂ֣א עֵ֭ינַי אֶל־הֶהָרִ֑ים מֵ֝אַ֗יִן יָבֹ֥א עֶזְרִֽי׃
+
+**Verse 2**: עֶ֭זְרִי מֵעִ֣ם יְהֹוָ֑ה עֹ֝שֵׂ֗ה שָׁמַ֥יִם וָאָֽרֶץ׃
+
+**Verse 3**: אַל־יִתֵּ֣ן לַמּ֣וֹט רַגְלֶ֑ךָ אַל־יָ֝נ֗וּם שֹׁמְרֶֽךָ׃
+
+**Verse 4**: הִנֵּ֣ה לֹֽא־יָ֭נוּם וְלֹ֣א יִישָׁ֑ן שׁ֝וֹמֵ֗ר יִשְׂרָאֵֽל׃
+
+**Verse 5**: יְהֹוָ֥ה שֹׁמְרֶ֑ךָ יְהֹוָ֥ה צִ֝לְּךָ֗ עַל־יַ֥ד יְמִינֶֽךָ׃
+
+**Verse 6**: יוֹמָ֗ם הַשֶּׁ֥מֶשׁ לֹֽא־יַכֶּ֗כָּה וְיָרֵ֥חַ בַּלָּֽיְלָה׃
+
+**Verse 7**: יְֽהֹוָ֗ה יִשְׁמׇרְךָ֥ מִכׇּל־רָ֑ע יִ֝שְׁמֹ֗ר אֶת־נַפְשֶֽׁךָ׃
+
+**Verse 8**: יְֽהֹוָ֗ה יִשְׁמׇר־צֵאתְךָ֥ וּבוֹאֶ֑ךָ מֵ֝עַתָּ֗ה וְעַד־עוֹלָֽם׃ {פ}
+
+#### Shared Patterns
+
+**Shared Roots** (7 found, sorted by relevance):
+
+- Root: `וא`
+  - Psalm 15 (×1): v.4 ...׀ בְּֽעֵ֘ינָ֤יו נִמְאָ֗ס וְאֶת־יִרְאֵ֣י יְהֹוָ֣ה יְכַבֵּ֑ד נִשְׁבַּ֥ע...
+  - Psalm 121 (×1): v.8 יְֽהֹוָ֗ה יִשְׁמׇר־צֵאתְךָ֥ וּבוֹאֶ֑ךָ מֵ֝עַתָּ֗ה וְעַד־עוֹלָֽם׃ {פ}
+
+- Root: `מוט`
+  - Psalm 15 (×1): v.5 ...לֹ֥א־לָ֫קָ֥ח עֹֽשֵׂה־אֵ֑לֶּה לֹ֖א יִמּ֣וֹט לְעוֹלָֽם׃ {פ}
+  - Psalm 121 (×1): v.3 אַל־יִתֵּ֣ן לַמּ֣וֹט רַגְלֶ֑ךָ אַל־יָ֝נ֗וּם שֹׁמְרֶֽךָ׃
+
+- Root: `רגל`
+  - Psalm 15 (×1): v.3 לֹֽא־רָגַ֨ל ׀ עַל־לְשֹׁנ֗וֹ לֹא־עָשָׂ֣ה...
+  - Psalm 121 (×1): v.3 אַל־יִתֵּ֣ן לַמּ֣וֹט רַגְלֶ֑ךָ אַל־יָ֝נ֗וּם שֹׁמְרֶֽךָ׃
+
+- Root: `רע`
+  - Psalm 15 (×1): v.3 ...׀ עַל־לְשֹׁנ֗וֹ לֹא־עָשָׂ֣ה לְרֵעֵ֣הוּ רָעָ֑ה וְ֝חֶרְפָּ֗ה לֹא־נָשָׂ֥א...
+  - Psalm 121 (×1): v.7 יְֽהֹוָ֗ה יִשְׁמׇרְךָ֥ מִכׇּל־רָ֑ע יִ֝שְׁמֹ֗ר אֶת־נַפְשֶֽׁךָ׃
+
+- Root: `עין`
+  - Psalm 15 (×1): v.4 נִבְזֶ֤ה ׀ בְּֽעֵ֘ינָ֤יו נִמְאָ֗ס וְאֶת־יִרְאֵ֣י יְהֹוָ֣ה יְכַבֵּ֑ד...
+  - Psalm 121 (×1): v.1 שִׁ֗יר לַֽמַּ֫עֲל֥וֹת אֶשָּׂ֣א עֵ֭ינַי אֶל־הֶהָרִ֑ים מֵ֝אַ֗יִן יָבֹ֥א...
+
+- Root: `ולא`
+  - Psalm 15 (×1): v.4 ...יְכַבֵּ֑ד נִשְׁבַּ֥ע לְ֝הָרַ֗ע וְלֹ֣א יָמִֽר׃
+  - Psalm 121 (×1): v.4 הִנֵּ֣ה לֹֽא־יָ֭נוּם וְלֹ֣א יִישָׁ֑ן שׁ֝וֹמֵ֗ר יִשְׂרָאֵֽל׃
+
+- Root: `נתן`
+  - Psalm 15 (×1): v.5 כַּסְפּ֤וֹ ׀ לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮ וְשֹׁ֥חַד עַל־נָקִ֗י...
+  - Psalm 121 (×1): v.3 אַל־יִתֵּ֣ן לַמּ֣וֹט רַגְלֶ֑ךָ אַל־יָ֝נ֗וּם שֹׁמְרֶֽךָ׃
+
+---
+
+### Psalm 24 (Connection Score: 224.04)
+
+#### Full Text of Psalm 24
+
+**Verse 1**: לְדָוִ֗ד מִ֫זְמ֥וֹר לַֽ֭יהֹוָה הָאָ֣רֶץ וּמְלוֹאָ֑הּ תֵּ֝בֵ֗ל וְיֹ֣שְׁבֵי בָֽהּ׃
+
+**Verse 2**: כִּי־ה֭וּא עַל־יַמִּ֣ים יְסָדָ֑הּ וְעַל־נְ֝הָר֗וֹת יְכוֹנְנֶֽהָ׃
+
+**Verse 3**: מִֽי־יַעֲלֶ֥ה בְהַר־יְהֹוָ֑ה וּמִי־יָ֝ק֗וּם בִּמְק֥וֹם קׇדְשֽׁוֹ׃
+
+**Verse 4**: נְקִ֥י כַפַּ֗יִם וּֽבַר־לֵ֫בָ֥ב אֲשֶׁ֤ר ׀ לֹא־נָשָׂ֣א לַשָּׁ֣וְא נַפְשִׁ֑י וְלֹ֖א נִשְׁבַּ֣ע לְמִרְמָֽה׃
+
+**Verse 5**: יִשָּׂ֣א בְ֭רָכָה מֵאֵ֣ת יְהֹוָ֑ה וּ֝צְדָקָ֗ה מֵאֱלֹהֵ֥י יִשְׁעֽוֹ׃
+
+**Verse 6**: זֶ֭ה דּ֣וֹר דֹּרְשָׁ֑ו מְבַקְשֵׁ֨י פָנֶ֖יךָ יַעֲקֹ֣ב סֶֽלָה׃
+
+**Verse 7**: שְׂא֤וּ שְׁעָרִ֨ים ׀ רָֽאשֵׁיכֶ֗ם וְֽ֭הִנָּשְׂאוּ פִּתְחֵ֣י עוֹלָ֑ם וְ֝יָב֗וֹא מֶ֣לֶךְ הַכָּבֽוֹד׃
+
+**Verse 8**: מִ֥י זֶה֮ מֶ֤לֶךְ הַכָּ֫ב֥וֹד יְ֭הֹוָה עִזּ֣וּז וְגִבּ֑וֹר יְ֝הֹוָ֗ה גִּבּ֥וֹר מִלְחָמָֽה׃
+
+**Verse 9**: שְׂא֤וּ שְׁעָרִ֨ים ׀ רָֽאשֵׁיכֶ֗ם וּ֭שְׂאוּ פִּתְחֵ֣י עוֹלָ֑ם וְ֝יָבֹ֗א מֶ֣לֶךְ הַכָּבֽוֹד׃
+
+**Verse 10**: מִ֤י־ה֣וּא זֶה֮ מֶ֤לֶךְ הַכָּ֫ב֥וֹד יְהֹוָ֥ה צְבָא֑וֹת ה֤וּא מֶ֖לֶךְ הַכָּב֣וֹד סֶֽלָה׃ {פ}
+
+#### Shared Patterns
+
+**Contiguous Phrases** (1 found):
+
+- **לא נשא** (2-word)
+  - Psalm 15 (×1): v.3 לֹֽא־רָגַ֨ל ׀ עַל־לְשֹׁנ֗וֹ לֹא־עָשָׂ֣ה לְרֵעֵ֣הוּ רָעָ֑ה וְ֝חֶרְפָּ֗ה לֹא־נָשָׂ֥א עַל־קְרֹבֽוֹ׃
+  - Psalm 24 (×1): v.4 נְקִ֥י כַפַּ֗יִם וּֽבַר־לֵ֫בָ֥ב אֲשֶׁ֤ר ׀ לֹא־נָשָׂ֣א לַשָּׁ֣וְא נַפְשִׁ֑י וְלֹ֖א נִשְׁבַּ֣ע לְמִרְמ...
+
+**Skipgrams** (1 found):
+
+*Patterns where words appear in the same order but not necessarily adjacent*
+
+- **מִֽי בְּהַ֣ר** (2-word, 1 gap)
+  - Psalm 15 (×1): v.1 מִֽי יִ֝שְׁכֹּ֗ן בְּהַ֣ר
+  - Psalm 24 (×1): v.3 מִֽי יַעֲלֶ֥ה בְהַר
+
+**Shared Roots** (6 found, sorted by relevance):
+
+- Root: `נקי`
+  - Psalm 15 (×1): v.5 ...לֹא־נָתַ֣ן בְּנֶשֶׁךְ֮ וְשֹׁ֥חַד עַל־נָקִ֗י לֹ֥א־לָ֫קָ֥ח עֹֽשֵׂה־אֵ֑לֶּה לֹ֖א...
+  - Psalm 24 (×1): v.4 נְקִ֥י כַפַּ֗יִם וּֽבַר־לֵ֫בָ֥ב אֲשֶׁ֤ר...
+
+- Root: `נשבע`
+  - Psalm 15 (×1): v.4 ...וְאֶת־יִרְאֵ֣י יְהֹוָ֣ה יְכַבֵּ֑ד נִשְׁבַּ֥ע לְ֝הָרַ֗ע וְלֹ֣א יָמִֽר׃
+  - Psalm 24 (×1): v.4 ...לַשָּׁ֣וְא נַפְשִׁ֑י וְלֹ֖א נִשְׁבַּ֣ע לְמִרְמָֽה׃
+
+- Root: `וא`
+  - Psalm 15 (×1): v.4 ...׀ בְּֽעֵ֘ינָ֤יו נִמְאָ֗ס וְאֶת־יִרְאֵ֣י יְהֹוָ֣ה יְכַבֵּ֑ד נִשְׁבַּ֥ע...
+  - Psalm 24 (×1): v.1 ...מִ֫זְמ֥וֹר לַֽ֭יהֹוָה הָאָ֣רֶץ וּמְלוֹאָ֑הּ תֵּ֝בֵ֗ל וְיֹ֣שְׁבֵי בָֽהּ׃
+
+- Root: `צדק`
+  - Psalm 15 (×1): v.2 הוֹלֵ֣ךְ תָּ֭מִים וּפֹעֵ֥ל צֶ֑דֶק וְדֹבֵ֥ר אֱ֝מֶ֗ת בִּלְבָבֽוֹ׃
+  - Psalm 24 (×1): v.5 ...בְ֭רָכָה מֵאֵ֣ת יְהֹוָ֑ה וּ֝צְדָקָ֗ה מֵאֱלֹהֵ֥י יִשְׁעֽוֹ׃
+
+- Root: `קדש`
+  - Psalm 15 (×1): v.1 ...בְּאׇהֳלֶ֑ךָ מִֽי־יִ֝שְׁכֹּ֗ן בְּהַ֣ר קׇדְשֶֽׁךָ׃
+  - Psalm 24 (×1): v.3 ...בְהַר־יְהֹוָ֑ה וּמִי־יָ֝ק֗וּם בִּמְק֥וֹם קׇדְשֽׁוֹ׃
+
+- Root: `ולא`
+  - Psalm 15 (×1): v.4 ...יְכַבֵּ֑ד נִשְׁבַּ֥ע לְ֝הָרַ֗ע וְלֹ֣א יָמִֽר׃
+  - Psalm 24 (×1): v.4 ...לֹא־נָשָׂ֣א לַשָּׁ֣וְא נַפְשִׁ֑י וְלֹ֖א נִשְׁבַּ֣ע לְמִרְמָֽה׃
+
+---
+
+
+---
+
+## Research Summary
+
+- **Lexicon entries**: 20
+- **Concordance searches**: 7
+- **Concordance results**: 15
+- **Figurative language searches**: 4
+- **Figurative instances found**: 80
+- **Commentary verses**: 5
+- **Commentary entries**: 32
+- **Liturgical prayers (aggregated)**: 4
+- **Rabbi Sacks references**: 0
+- **Liturgical total occurrences**: 6
+- **Related psalms analyzed**: 2
+
+
+---
+
+## YOUR TASK: WRITE INTRODUCTION ESSAY (800-1200 words)
+
+Write a scholarly introduction essay that:
+
+1. **Engages the macro thesis critically**
+   - You have FULL AUTHORITY to revise, refine, or reject the macro thesis if evidence warrants
+   - If the thesis holds up, defend it with evidence from micro analysis and research
+   - If the thesis needs refinement, change it based on your synthesis
+   - If the thesis is fundamentally flawed, offer an alternative
+
+2. **Synthesizes all three sources smoothly**
+   - Integrate insights from macro structure, micro discoveries, and research materials
+   - Show how lexical evidence, concordances, and figurative analysis support (or challenge) the thesis
+   - Cite specific examples from the research bundle when relevant
+   - Make connections between poetic devices and theological meaning
+   - Novel insights are strongly encouraged. You are in conversation with the sources, not just summarizing them.
+
+3. **Addresses major interpretive questions**
+   - What is this psalm about? If there are sections that seem quite different, what theme, context or idea holds them together?
+   - What is the psalm's central message and how does it function?
+   - What are the key poetic/rhetorical strategies and why do they matter?
+   - How does this psalm relate to its Ancient Near Eastern context?
+   - What are the most significant interpretive debates or challenges?
+   - What earned this psalm its place in the biblical canon?
+   - What is fascinating or unique about this psalm from a literary perspective? From a theological perspective? From a historical perspective?
+   - **IMPORTANT**: The Macro and Micro analysts have identified interesting research questions (see their inputs above). You should attempt to answer any of these questions that can be meaningfully addressed with the available research materials. If a question is answerable, weave the answer into your essay where appropriate.
+
+4. **Engages prior scholarship and classical interpretations**
+   - Note relevant traditional rabbinic or patristic readings when available
+   - Reference how scholars have historically interpreted key passages
+   - Acknowledge interpretive debates and schools of thought
+   - Example: "Traditional interpretation sees X, but recent scholarship suggests Y..."
+
+5. **Makes intertextual connections**
+   - Cite parallel biblical texts where similar language/imagery appears
+   - Reference ANE parallels (Ugaritic, Akkadian, Egyptian texts) when relevant
+   - Show how this psalm's language echoes or innovates or is in conversation with other texts
+   - Example: "The term 'לְבָדָד' carries echoes of Deuteronomy 33:28 "וַיִּשְׁכֹּן֩ יִשְׂרָאֵ֨ל בֶּ֤טַח בָּדָד֙...אֶ֖רֶץ דָּגָ֣ן וְתִיר֑וֹשׁ" - ("Israel dwells secure, alone… in a land of grain and wine") "
+   - Carefully review the 'Related Psalms Analysis' section of the research bundle for interesting/informative parallels with other psalms, and incorporate these insights when relevant.
+
+6. **Reflects on liturgical context and reception**
+   - The research bundle includes detailed information about where and how this psalm (or specific phrases from it) appears in Jewish liturgy
+   - Pay attention to liturgical usage patterns - they reveal how the psalm has been interpreted and valued in Jewish tradition
+   - Consider what the liturgical placement tells us about the psalm's meaning and reception
+   - Integrate liturgical insights naturally into your discussion - don't treat them as a separate topic
+   - **CRITICAL: When mentioning liturgical usage, QUOTE the relevant liturgical texts in Hebrew with English translation**
+   - Example: "The daily recitation of this verse in the Amidah suggests that Jewish liturgy understood it as..."
+
+7. **SHOWS evidence through generous quotation** (CRITICAL)
+   - **Quote liberally from all sources - biblical parallels, liturgical texts, traditional commentaries**
+   - When you mention a biblical parallel (e.g., "this echoes Psalm 44:4"), QUOTE it in Hebrew with English translation
+   - When you reference liturgical usage (e.g., "appears in Shabbat Musaf"), QUOTE the relevant liturgical text in Hebrew with English
+   - When you cite multiple parallels for a pattern (e.g., "light of your face" in Ps 4:7, 44:4, 89:16, Prov 16:15), quote at least 1-2 of the most illustrative examples in Hebrew with English
+   - When you mention a linguistic pattern across psalms (e.g., בְּנֵי אִישׁ in Ps 49:3, 62:10), quote the best example(s) to show the pattern
+   - Don't just cite - SHOW the reader the actual text. Your readers are hungry to see the Hebrew evidence
+   - Think of quotations as your proof - they transform vague claims into vivid demonstrations
+
+8. **Writes for an educated general reader**
+   - Scholarly rigor but accessible prose
+   - Technical terms explained when necessary
+   - Balance depth with readability
+   - Novel insights are strongly encouraged
+
+9. **Uses proper citations with quotations**
+   - When referring to specific Hebrew verse, phrases and terms, cite in Hebrew and English
+   - In Hebrew, replace the tetragrammaton with 'ה
+   - **IMPORTANT: Most citations should be accompanied by actual quotations (Hebrew + English)**
+   - When citing research, note the source (e.g., "BDB lexicon notes...", "Concordance shows...")
+   - When referencing other texts, cite book/chapter/verse AND quote the relevant portion when illustrative (e.g., "Gen 1:2", "KTU 1.4")
+
+10. **Stylistic guidelines**
+You are a distinguished professor of biblical literature, akin to a figure like Robert Alter, Ellen F. Davis or James Kugel. Your task is to write an essay on a specific psalm for a sophisticated lay audience, such as the readers of The New Yorker or The Atlantic.
+
+Your writing style should be scholarly, lucid, and engaging. Your tone is one of measured confidence, not breathless praise. You illuminate the text's brilliance through insightful analysis rather than by simply labeling it as "brilliant" or a "masterpiece."
+
+Key Stylistic Directives:
+Tone & Persona: Adopt a voice that is authoritative yet accessible. You are a trusted guide leading the reader through the literary and theological landscape of the psalm. Your prose should be elegant and uncluttered.
+
+From Praise to Analysis: Do not use effusive or sycophantic language. Avoid words like "masterpiece," "tour de force," "breathtaking," "audacious," or "remarkable." Instead of telling the reader the psalm is sophisticated, show them through your analysis.
+
+Instead of: "The psalm's central innovation lies in its theological revolution..."
+
+Try: "The psalm's engine is the sevenfold repetition of qôl YHWH. By taking the familiar sound of the storm and attributing it solely to Israel's God, the poet re-maps the cosmos."
+
+Use Jargon Sparingly: Academic terms like "polemic," "theophany," or "cosmology" are acceptable, but they should be used to bring clarity, not to signal academic status. When used, they should feel integrated into the prose, not dropped in like keywords. Explain the concept if necessary.
+
+Instead of: "The psalm's opening summons to the bĕnê 'ēlîm immediately signals its polemical intent."
+
+Try: "The psalm opens in an unexpected place: the divine throne room, where the poet calls upon the bĕnê 'ēlîm (בני אלים), the 'sons of the gods,' to pay homage. This is a direct challenge to the surrounding polytheistic world—an act of theological appropriation from the very first line."
+
+Emphasize Action and Imagery: Use strong verbs and concrete imagery. Describe what the poet does. How do they construct the poem? What world do they build?
+
+Instead of: "The image of Lebanon's cedars being 'broken' by YHWH's voice would have been particularly striking."
+
+Try: "The poet makes the LORD's voice a physical force, a divine percussion that splinters the legendary cedars of Lebanon, trees that were ancient symbols of permanence and strength."
+
+Vary Sentence Structure: Employ a mix of shorter, punchier sentences and longer, more complex ones to create a readable and engaging rhythm. Use rhetorical questions to draw the reader into the interpretive process.
+
+Example of Stylistic Transformation:
+Here are two versions of a snippet from an essay to illustrate the point:
+
+Excessively "LLM-ish" version:
+
+"While the macro thesis correctly identifies this psalm as a 'liturgical polemic' that appropriates Baal theology, the evidence suggests an even more sophisticated literary achievement: Psalm 29 functions as a theological tour de force that systematically dismantles polytheistic cosmology by concentrating all divine power into the sevenfold qôl-YHWH (קול־ה׳, 'voice of the LORD'), culminating not in chaotic divine display but in covenantal blessing for God's people."
+
+Revised Version in the Target Style:
+
+"Scholars often describe Psalm 29 as a 'liturgical polemic,' a poem that co-opts the language of Canaanite storm-god worship to declare the supremacy of Israel's God. This is true, but it doesn't capture the poem's full artistry. The poet does more than just borrow; they dismantle and rebuild. The psalm methodically gathers the scattered powers of the Canaanite pantheon—the thunder, the flood, the quaking wilderness—and concentrates them into a single, seven-fold utterance: the qôl YHWH (קול־ה׳), the 'voice of the LORD.' The result is a startling redirection of cosmic power, moving it away from raw, chaotic display and toward a final, focused act of blessing for God's people."
+
+## CRITICAL REQUIREMENTS
+
+- **Length**: 800-1200 words (aim for the middle of this range)
+- **Tone**: Scholarly but engaging, confident but nuanced
+- **Structure**: Clear paragraphs with logical flow
+- **Authority**: You are the final voice - revise the thesis if needed
+- **Integration**: Smoothly weave together all three input sources
+
+---
+
+## OUTPUT FORMAT
+
+Write TWO sections:
+
+### 1. Introduction Essay (800-1200 words)
+[Write the main introduction essay as described above]
+
+### 2. Modern Jewish Liturgical Use (150-300 words)
+After the introduction essay, write a separate section titled "## Modern Jewish Liturgical Use" that summarizes where and how elements of this psalm appear in Jewish liturgy.
+- do NOT try to comment on liturgical use of this psalm WITHOUT carefully consulting the research bundle's liturgical information
+- for PHRASES that appear in liturgy, make sure to quote the phrases in full in Hebrew, and make sure to include enough of a quotation from the relevant prayer(s) to properly illustrate their use.
+- for individual verses and phrases that appear in the liturgy, reflect on whether their liturgical use goes with the grain of its natural ("pshat") reading or whether the compilers of the liturgy have put this verse or phrase to use in a novel way.
+
+
+This section should:
+- Summarize the liturgical usage information provided in the research bundle
+- Distinguish between full recitations of the psalm vs. individual verses or phrases quoted in prayers
+- Be specific about occasions (Weekday/Shabbat/Festivals), services (Shacharit/Mincha/Maariv), and traditions (Ashkenaz/Sefard/Edot HaMizrach)
+- Explain what the liturgical placement reveals about how Jewish tradition has understood and valued this psalm
+- Be scholarly but concise - aim for 150-300 words
+
+Example structure:
+"Psalm [X] is recited in its entirety during [occasion/service/tradition]. Verse [Y] from this psalm appears in [specific prayer], recited during [service] on [occasions]. The phrase '[Hebrew phrase]' from verse [Z] is incorporated into [prayer/piyyut] in the [tradition] nusach. This liturgical usage reflects the tradition's understanding of this psalm as..."
+
+---
+
+Write both sections below in plain text (NOT JSON). Use markdown formatting for emphasis (*italics*) and phonetic transcriptions.

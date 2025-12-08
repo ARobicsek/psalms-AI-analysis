@@ -1,0 +1,528 @@
+{
+  "psalm_number": 16,
+  "pipeline_start": "2025-12-07T18:37:24.635891",
+  "pipeline_end": "2025-12-07T19:18:28.978155",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1870,
+      "input_token_estimate": 623,
+      "output_char_count": 18701,
+      "output_token_estimate": 6233,
+      "duration_seconds": 139.9375343322754,
+      "completion_date": null,
+      "timestamp": "2025-12-07T18:37:24.638551"
+    },
+    "micro_analysis": {
+      "input_char_count": 18701,
+      "input_token_estimate": 6233,
+      "output_char_count": 279448,
+      "output_token_estimate": 93149,
+      "duration_seconds": 815.9627060890198,
+      "completion_date": null,
+      "timestamp": "2025-12-07T18:41:44.604063"
+    },
+    "synthesis": {
+      "input_char_count": 298151,
+      "input_token_estimate": 99383,
+      "output_char_count": 64687,
+      "output_token_estimate": 21562,
+      "duration_seconds": 605.5308895111084,
+      "completion_date": null,
+      "timestamp": "2025-12-07T18:57:20.662714"
+    },
+    "master_editor": {
+      "input_char_count": 335887,
+      "input_token_estimate": 111962,
+      "output_char_count": 53387,
+      "output_token_estimate": 17795,
+      "duration_seconds": 422.78647565841675,
+      "completion_date": "2025-12-07T19:18:28.978155",
+      "timestamp": "2025-12-07T19:09:27.168253"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "מִכְתָּם",
+        "reason": "Rare superscription (only Pss 16, 56-60) - etymology debated: gold? inscription? atonement?"
+      },
+      {
+        "word": "טוֹבָה",
+        "reason": "Crux interpretum in v.2 phrase טוֹבָתִי בַּל־עָלֶיךָ - semantic range needed for syntactic resolution"
+      },
+      {
+        "word": "קְדוֹשִׁים",
+        "reason": "Ambiguous referent in v.3 - can mean faithful saints OR pagan 'holy ones'/deities"
+      },
+      {
+        "word": "אַדִּיר",
+        "reason": "V.3 'mighty/noble ones' - semantic range: human nobles OR divine beings?"
+      },
+      {
+        "word": "מָהַר",
+        "reason": "Unusual verb for religious devotion in v.4 'hasten after another god' - suggests urgency"
+      },
+      {
+        "word": "נֶסֶךְ",
+        "reason": "V.4 libations terminology - what are 'libations from/of blood'?"
+      },
+      {
+        "word": "מְנָת",
+        "reason": "First of four inheritance terms in v.5 - distinguish from חֵלֶק semantically"
+      },
+      {
+        "word": "חֵלֶק",
+        "reason": "Second inheritance term in v.5 - overlap with מְנָת or distinct nuance?"
+      },
+      {
+        "word": "גּוֹרָל",
+        "reason": "Lot/fate terminology in v.5 applied to God - technical land-distribution term becoming theological metaphor"
+      },
+      {
+        "word": "חֶבֶל",
+        "reason": "V.6 measuring lines/cords - technical surveying term (Josh 17:5, Mic 2:5)"
+      },
+      {
+        "word": "כִּלְיָה",
+        "reason": "V.7 kidneys as seat of conscience/moral instruction - why not heart? Anthropological significance"
+      },
+      {
+        "word": "יָסַר",
+        "reason": "V.7 instruct/discipline - kidneys as subject of moral formation is unusual"
+      },
+      {
+        "word": "שָׁוָה",
+        "reason": "V.8 'I have set/placed' YHWH before me - intentional positioning verb"
+      },
+      {
+        "word": "כָּבוֹד",
+        "reason": "V.9 'my glory' - ambiguous: liver? soul/self? LXX has 'tongue' - major interpretive crux"
+      },
+      {
+        "word": "שַׁחַת",
+        "reason": "V.10 Pit/corruption - can mean place (pit) OR process (decay/corruption) - crucial for resurrection interpretation"
+      },
+      {
+        "word": "נֶצַח",
+        "reason": "V.11 final word - semantic range: perpetuity? eternity? victory? endurance? Shapes eschatological trajectory"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "טובתי בלעליך",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track this syntactically ambiguous phrase - does it appear elsewhere in this construction? [FIXED: Using exact phrase from verse]"
+      },
+      {
+        "query": "קדושים אשרבארץ",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Identify other 'holy ones in the land' references to clarify whether faithful or pagan [FIXED: Using exact phrase from verse] [GUARANTEED: Added 1 forms from verse 3]"
+      },
+      {
+        "query": "אחר מהרו",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track 'hasten after another god' formula - is this idiomatic for apostasy? [FIXED: Using exact phrase from verse]"
+      },
+      {
+        "query": "נסכיהם מדם",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Find other 'blood libations' references to understand cultic context [FIXED: Using exact phrase from verse]"
+      },
+      {
+        "query": "מנתחלקי",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track double inheritance language - portion of my share pattern [FIXED: Using exact phrase from verse]"
+      },
+      {
+        "query": "יהוה חלקי",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Find other 'YHWH is my portion' declarations - esp. Levitical theology (Num 18:20) [GUARANTEED: Added 1 forms from verse 5]"
+      },
+      {
+        "query": "חבלים נפלו",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track measuring lines fallen idiom for land allocation [GUARANTEED: Added 1 forms from verse 6]"
+      },
+      {
+        "query": "כליותי יסרוני",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Find other instances of kidneys as moral instructor - unique anthropology? [GUARANTEED: Added 1 forms from verse 7]"
+      },
+      {
+        "query": "שויתי יהוה לנגדי",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track 'I have set YHWH before me' formula - orientation language"
+      },
+      {
+        "query": "לא תעזב נפשי לשאול",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track 'not abandon soul to Sheol' formula - other death-transcendence texts [GUARANTEED: Added 1 forms from verse 10]"
+      },
+      {
+        "query": "לראות שחת",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Find 'see the Pit/corruption' usage elsewhere - place or process? [FIXED: Using exact phrase from verse]"
+      },
+      {
+        "query": "ארח חיים",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track 'path of life' in wisdom literature (Prov 2:19, 5:6, 10:17) vs. eschatological usage [FIXED: Using exact phrase from verse]"
+      },
+      {
+        "query": "שמחות את פניך",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track joys in God's presence formula - intimacy with divine face"
+      },
+      {
+        "query": "נעימות בימינך נצח",
+        "scope": "auto",
+        "level": "consonantal",
+        "purpose": "Track delights in God's right hand forever - eternal communion language"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Refuge metaphor - spatial/protective imagery for divine protection | Vehicle: refuge | Related terms: refuge, shelter, protect, guard, safety, hide, cover, fortress, stronghold, tower, rock, seek refuge, find shelter",
+        "vehicle": "refuge",
+        "vehicle_terms": [
+          "refuge",
+          "refuge",
+          "shelter",
+          "protect",
+          "guard",
+          "safety",
+          "hide",
+          "cover",
+          "fortress",
+          "stronghold",
+          "tower",
+          "rock",
+          "seek refuge",
+          "find shelter"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Cup imagery - possibly meal fellowship and blessing (cf. Ps 23:5) | Vehicle: cup | Related terms: cup, drink, wine, portion, share, feast, table, meal, drink offering, my cup",
+        "vehicle": "cup",
+        "vehicle_terms": [
+          "cup",
+          "cup",
+          "drink",
+          "wine",
+          "portion",
+          "share",
+          "feast",
+          "table",
+          "meal",
+          "drink offering",
+          "my cup"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Inheritance/land metaphor - territorial blessing vocabulary applied to God Himself | Vehicle: inheritance | Related terms: inheritance, portion, share, lot, land, estate, allotment, inherit, possess, territory, my portion, my inheritance, my lot",
+        "vehicle": "inheritance",
+        "vehicle_terms": [
+          "inheritance",
+          "inheritance",
+          "portion",
+          "share",
+          "lot",
+          "land",
+          "estate",
+          "allotment",
+          "inherit",
+          "possess",
+          "territory",
+          "my portion",
+          "my inheritance",
+          "my lot"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Measuring lines/surveyor imagery - land division applied metaphorically to divine portion | Vehicle: measuring line | Related terms: line, cord, measure, boundary, border, divide, survey, allot, plot, measuring line, measuring cord, boundaries",
+        "vehicle": "measuring line",
+        "vehicle_terms": [
+          "measuring line",
+          "line",
+          "cord",
+          "measure",
+          "boundary",
+          "border",
+          "divide",
+          "survey",
+          "allot",
+          "plot",
+          "measuring line",
+          "measuring cord",
+          "boundaries"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Night as revelatory time - darkness/vulnerability as context for divine instruction | Vehicle: night | Related terms: night, darkness, evening, sleep, dream, vision, midnight, nighttime, nocturnal, at night, in the night",
+        "vehicle": "night",
+        "vehicle_terms": [
+          "night",
+          "night",
+          "darkness",
+          "evening",
+          "sleep",
+          "dream",
+          "vision",
+          "midnight",
+          "nighttime",
+          "nocturnal",
+          "at night",
+          "in the night"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Right hand position - spatial metaphor for protection, honor, and power | Vehicle: right hand | Related terms: right hand, right, hand, right side, at my right, my right hand, your right hand",
+        "vehicle": "right hand",
+        "vehicle_terms": [
+          "right hand",
+          "right hand",
+          "right",
+          "hand",
+          "right side",
+          "at my right",
+          "my right hand",
+          "your right hand"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Stability/shaking imagery - earthquake metaphor for security vs. instability | Vehicle: shake | Related terms: shake, shaken, tremble, move, totter, stumble, slip, fall, stable, firm, not shake, not be shaken",
+        "vehicle": "shake",
+        "vehicle_terms": [
+          "shake",
+          "shake",
+          "shaken",
+          "tremble",
+          "move",
+          "totter",
+          "stumble",
+          "slip",
+          "fall",
+          "stable",
+          "firm",
+          "not shake",
+          "not be shaken"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Body parts as synecdoche - heart, glory/liver, flesh represent whole-person response | Vehicle: heart | Related terms: heart, flesh, body, soul, spirit, mind, being, whole person, my heart, my flesh",
+        "vehicle": "heart",
+        "vehicle_terms": [
+          "heart",
+          "heart",
+          "flesh",
+          "body",
+          "soul",
+          "spirit",
+          "mind",
+          "being",
+          "whole person",
+          "my heart",
+          "my flesh"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Sheol/Pit imagery - death realm/underworld as place of separation from God | Vehicle: Sheol | Related terms: Sheol, pit, grave, death, underworld, corruption, decay, tomb, depths, the Pit, realm of death",
+        "vehicle": "Sheol",
+        "vehicle_terms": [
+          "Sheol",
+          "Sheol",
+          "pit",
+          "grave",
+          "death",
+          "underworld",
+          "corruption",
+          "decay",
+          "tomb",
+          "depths",
+          "the Pit",
+          "realm of death"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Path/way metaphor - journey through life toward ultimate destination with God | Vehicle: path | Related terms: path, way, road, walk, journey, course, route, direction, way of life, path of life, my path",
+        "vehicle": "path",
+        "vehicle_terms": [
+          "path",
+          "path",
+          "way",
+          "road",
+          "walk",
+          "journey",
+          "course",
+          "route",
+          "direction",
+          "way of life",
+          "path of life",
+          "my path"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Face/presence imagery - intimacy with God, seeing divine face (usually forbidden) | Vehicle: face | Related terms: face, presence, countenance, see, behold, gaze, look, before, your face, your presence, in your presence",
+        "vehicle": "face",
+        "vehicle_terms": [
+          "face",
+          "face",
+          "presence",
+          "countenance",
+          "see",
+          "behold",
+          "gaze",
+          "look",
+          "before",
+          "your face",
+          "your presence",
+          "in your presence"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "16:1",
+        "reason": "Opening invocation with rare michtam superscription - how do commentators interpret its significance and the protection petition?"
+      },
+      {
+        "verse": "16:2",
+        "reason": "Crux interpretum טוֹבָתִי בַּל־עָלֶיךָ - traditional exegesis of this syntactically ambiguous phrase and divine name progression"
+      },
+      {
+        "verse": "16:3",
+        "reason": "Most obscure verse - who are the 'holy ones in the land'? Traditional identification of righteous vs. pagan 'holy ones'"
+      },
+      {
+        "verse": "16:4",
+        "reason": "Clear rejection of other gods - commentators on blood libations and refusing to speak divine names"
+      },
+      {
+        "verse": "16:5",
+        "reason": "Theological center with fourfold inheritance terminology - how commentators interpret God as portion/inheritance"
+      },
+      {
+        "verse": "16:6",
+        "reason": "Continuation of inheritance metaphor - traditional understanding of measuring lines and pleasant places"
+      },
+      {
+        "verse": "16:7",
+        "reason": "Kidneys instruct at night - commentators on visceral anthropology and nocturnal divine guidance"
+      },
+      {
+        "verse": "16:8",
+        "reason": "Setting YHWH before me continually - traditional interpretation of intentional divine orientation and stability"
+      },
+      {
+        "verse": "16:9",
+        "reason": "Triple body-part response - commentators on 'my glory' (liver? soul? tongue?) and holistic joy"
+      },
+      {
+        "verse": "16:10",
+        "reason": "Psalm's theological apex on Sheol/Pit - traditional Jewish interpretation of death-transcendence and messianic application"
+      },
+      {
+        "verse": "16:11",
+        "reason": "Climactic verse on path of life and eternal joy - commentators on seeing God's face and delights in right hand forever"
+      }
+    ],
+    "lexicon_entries_count": 40,
+    "concordance_results": {
+      "טובתי בלעליך": 0,
+      "קדושים אשרבארץ": 0,
+      "אחר מהרו": 1,
+      "נסכיהם מדם": 1,
+      "מנתחלקי": 0,
+      "יהוה חלקי": 2,
+      "חבלים נפלו": 1,
+      "כליותי יסרוני": 1,
+      "שויתי יהוה לנגדי": 1,
+      "לא תעזב נפשי לשאול": 1,
+      "לראות שחת": 1,
+      "ארח חיים": 4,
+      "שמחות את פניך": 1,
+      "נעימות בימינך נצח": 0
+    },
+    "figurative_results": {
+      "total_instances_used": 220
+    },
+    "commentary_counts": {
+      "Rashi": 10,
+      "Ibn Ezra": 9,
+      "Radak": 11,
+      "Malbim": 8,
+      "Meiri": 11,
+      "Metzudat David": 10,
+      "Torah Temimah": 7
+    },
+    "sacks_references_count": 0,
+    "related_psalms_count": 5,
+    "related_psalms_list": [
+      141,
+      63,
+      17,
+      26,
+      2
+    ],
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 258575,
+    "research_bundle_tokens": 86191
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the syntactic relationship and correct interpretation of vv. 3-4? Are the 'holy ones in the land' faithful Israelites the psalmist admires, or pagan deities/devotees? How does the grammar of v. 3b ('all my desire concerning them') connect to v. 4a?",
+      "How does the land inheritance terminology (חֶלֶק, גּוֹרָל, נַחֲלָה, חֲבָלִים) function when applied to God Himself? What are the Pentateuchal parallels for Levites receiving YHWH as their inheritance (Num 18:20; Deut 10:9, 18:1-2), and how does this psalm democratize that concept?",
+      "What is the precise meaning of טוֹבָתִי בַּל־עָלֶיךָ in v. 2? Does it mean 'my good is not apart from You' (NJPS), 'You are my good, nothing above You,' or 'my good does not reach up to You' (acknowledging human inability to benefit God, cf. Job 22:2-3)?",
+      "What is the significance of כִלְיוֹת ('kidneys') instructing the psalmist at night (v. 7)? How does this relate to other biblical references to kidneys as the seat of conscience/testing (Pss 7:10, 26:2; Jer 11:20, 17:10)?",
+      "How should v. 10's confidence about Sheol/Pit be interpreted? Is this (a) protection from premature/violent death, (b) hope for resurrection, (c) assurance of ongoing communion with God transcending death, or (d) simply metaphorical language for deliverance from danger? What are the comparative data from other Psalms (Pss 30:3, 49:15, 73:23-26)?",
+      "What is the force and aspect of שִׁוִּיתִי ('I have set/placed') YHWH before me (v. 8)? Is this a completed decisive act, or continuous practice? How does this verb choice shape the theology of intentional divine orientation?",
+      "What does כָּבוֹד ('glory') refer to in v. 9? Is it the liver (paralleling heart and flesh as body parts), the soul/self, or God's glory? What is the triadic structure of heart-glory-flesh trying to communicate about human wholeness?",
+      "How does נֶֽצַח (v. 11) function semantically—'forever,' 'perpetuity,' 'victory,' 'endurance'? Does it suggest eternal life in God's presence, or enduring joy in this life?",
+      "What is the 'path of life' (אֹרַח חַיִּים, v. 11)? Is this wisdom language (cf. Prov 2:19, 5:6, 10:17), cultic instruction, or something more eschatological? How does it relate to ANE journey-of-life metaphors?",
+      "What is the meaning and function of the 'michtam' (מִכְתָּם) designation? Does etymology from כתם ('gold'), כתם ('inscription'), or כפר ('atone') illuminate the psalm's use or original setting?"
+    ],
+    "micro_questions": [
+      "What is the exact syntactic and semantic sense of טוֹבָתִי בַּל־עָלֶיךָ in v.2? How does this phrase establish the theological foundation for vv.5-6's inheritance language?",
+      "Who are the קְדוֹשִׁים and אַדִּירֵי in v.3, and how does the ambiguous phrase כׇּל־חֶפְצִי־בָם relate syntactically to v.4's clear rejection? Is the ambiguity intentional?",
+      "How does the concentration of land-inheritance terminology in vv.5-6 (מְנָת, חֵלֶק, כּוֹס, גּוֹרָל, חֲבָלִים, נַחֲלָה) function as theological metaphor? What is gained by applying territorial language to God Himself?",
+      "Why do the kidneys (כִלְיוֹתָי) instruct the psalmist at night (v.7) rather than the heart? What is the anthropological and theological significance of this visceral internal guidance?",
+      "What is the referent of כָּבוֹד in v.9 - liver (parallel organ to heart/flesh), soul/self, or something else? How does the LXX's 'tongue' interpretation change the meaning?",
+      "How should v.10's confidence about Sheol/Pit be interpreted in its historical context - as protection from premature death, nascent resurrection hope, ongoing communion transcending death, or metaphorical deliverance language? How does this compare to Psalms 49:15 and 73:23-26?",
+      "What is the semantic range and force of נֶצַח in v.11 - perpetuity, eternity, victory, or endurance? How does the final word choice shape the psalm's eschatological trajectory?",
+      "How does the right hand inclusio (vv.8, 11) function structurally and theologically - what is the progression from God at the psalmist's right hand to delights in God's right hand?",
+      "What is the relationship between the 'path of life' (אֹרַח חַיִּים, v.11) and wisdom literature? Is this temporal guidance through earthly life or eschatological trajectory toward eternal life?",
+      "What does the michtam (מִכְתָּם) superscription signify, and how might its uncertain etymology (gold? inscription? atonement?) inform the psalm's function or theological emphasis?"
+    ],
+    "verse_count": 11
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5.1"
+  }
+}

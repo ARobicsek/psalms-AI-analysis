@@ -1,0 +1,353 @@
+{
+  "psalm_number": 13,
+  "pipeline_start": "2025-12-01T08:09:14.977680",
+  "pipeline_end": "2025-12-01T08:34:07.207838",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1066,
+      "input_token_estimate": 355,
+      "output_char_count": 17211,
+      "output_token_estimate": 5737,
+      "duration_seconds": 117.69582796096802,
+      "completion_date": null,
+      "timestamp": "2025-12-01T08:09:14.992860"
+    },
+    "micro_analysis": {
+      "input_char_count": 17211,
+      "input_token_estimate": 5737,
+      "output_char_count": 166795,
+      "output_token_estimate": 55598,
+      "duration_seconds": 348.3412663936615,
+      "completion_date": null,
+      "timestamp": "2025-12-01T08:13:12.779309"
+    },
+    "synthesis": {
+      "input_char_count": 184008,
+      "input_token_estimate": 61336,
+      "output_char_count": 34433,
+      "output_token_estimate": 11477,
+      "duration_seconds": 289.0681447982788,
+      "completion_date": null,
+      "timestamp": "2025-12-01T08:21:01.179188"
+    },
+    "master_editor": {
+      "input_char_count": 203631,
+      "input_token_estimate": 67877,
+      "output_char_count": 33527,
+      "output_token_estimate": 11175,
+      "duration_seconds": 256.95122718811035,
+      "completion_date": "2025-12-01T08:34:07.207838",
+      "timestamp": "2025-12-01T08:27:52.145071"
+    }
+  },
+  "research": {
+    "lexicon_requests": [
+      {
+        "word": "לַמְנַצֵּחַ",
+        "reason": "Liturgical technical term - root meanings (נצח) and cultic function across psalm superscriptions"
+      },
+      {
+        "word": "נֶצַח",
+        "reason": "Theological puzzle - does 'forever' mean eternity or hyperbolic duration? Semantic range crucial"
+      },
+      {
+        "word": "עֵצוֹת",
+        "reason": "Key ambiguity in v.3 - does it mean 'counsels/plans' (self-reliance) or 'cares/sorrows'? Context unclear"
+      },
+      {
+        "word": "יָגוֹן",
+        "reason": "Grief vocabulary - distinguish from other sorrow terms, trace covenant curse contexts"
+      },
+      {
+        "word": "הַבִּיטָה",
+        "reason": "Imperative demanding divine attention - semantic force vs. other 'look' verbs (ראה, שקף, פקד)"
+      },
+      {
+        "word": "הָאִירָה",
+        "reason": "Central theological verb - does it mean physical eye healing, enlightenment, or face-showing? Range critical"
+      },
+      {
+        "word": "אִישַׁן",
+        "reason": "Unusual 'sleep of death' construction - why this verb vs. simple מות? Sheol theology implications"
+      },
+      {
+        "word": "יְכָלְתִּיו",
+        "reason": "Enemy victory language - root יכל semantic range (prevail, overcome, be able) in combat contexts"
+      },
+      {
+        "word": "צָרַי",
+        "reason": "Enemy terminology - distinguish from אֹיְבִי used earlier, nuance of oppression vs. hostility"
+      },
+      {
+        "word": "אֶמּוֹט",
+        "reason": "Tottering/instability metaphor - track usage in covenant stability/judgment contexts"
+      },
+      {
+        "word": "חֶסֶד",
+        "reason": "Covenant love term - how it functions when divine face is hidden, steadfastness despite absence"
+      },
+      {
+        "word": "גָמַל",
+        "reason": "Critical verb in prophetic perfect construction - does it mean 'deal bountifully', 'recompense', or 'benefit'?"
+      }
+    ],
+    "concordance_requests": [
+      {
+        "query": "עד אנה",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Track fourfold anaphora pattern - where else does this complaint formula appear and in what density?"
+      },
+      {
+        "query": "תשכחני נצח",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Divine forgetting + forever formula - covenant crisis language across Scripture"
+      },
+      {
+        "query": "תסתיר פניך",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Hidden face formula - trace covenant curse contexts esp. Deuteronomy 31:17-18"
+      },
+      {
+        "query": "יגון בלבבי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Grief in heart formula - inward suffering language patterns"
+      },
+      {
+        "query": "ירום איבי עלי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Enemy exaltation over psalmist - spatial dominance metaphor usage"
+      },
+      {
+        "query": "האירה עיני",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Eye illumination petition - chiastic reversal of hidden face, track all contexts"
+      },
+      {
+        "query": "אישן המות",
+        "scope": "Tanakh",
+        "level": "consonantal",
+        "purpose": "Sleep of death metaphor - track Sheol theology and death-sleep connections"
+      },
+      {
+        "query": "יכלתיו",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Enemy triumph speech formula - where else do enemies speak of prevailing?"
+      },
+      {
+        "query": "בטחתי בחסדך",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Trust in steadfast love formula - lament-to-trust transition patterns"
+      },
+      {
+        "query": "יגל לבי בישועתך",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Heart rejoicing in salvation - body imagery in anticipated deliverance contexts"
+      },
+      {
+        "query": "אשירה ליהוה",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Vow to sing to YHWH - praise before deliverance patterns"
+      },
+      {
+        "query": "גמל עלי",
+        "scope": "Psalms",
+        "level": "consonantal",
+        "purpose": "Divine benefaction formula in prophetic perfect - treating future as accomplished"
+      }
+    ],
+    "figurative_requests": [
+      {
+        "verse": null,
+        "reason": "Hidden face as covenant curse reversal of Aaronic blessing - vivid and theologically central | Vehicle: hidden face | Related terms: hide face, hides face, hiding face, conceal face, conceals face, concealing face",
+        "vehicle": "hidden face",
+        "vehicle_terms": [
+          "hidden face",
+          "hide face",
+          "hides face",
+          "hiding face",
+          "conceal face",
+          "conceals face",
+          "concealing face"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Spatial metaphor of enemy 'lifted up' (ירום) over psalmist - dominance imagery | Vehicle: lifted up | Related terms: lift up, lifts up, lifting up, exalt, exalts, exalted, exalting, raise, raises, raised, raising",
+        "vehicle": "lifted up",
+        "vehicle_terms": [
+          "lifted up",
+          "lift up",
+          "lifts up",
+          "lifting up",
+          "exalt",
+          "exalts",
+          "exalted",
+          "exalting",
+          "raise",
+          "raises",
+          "raised",
+          "raising"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Eye illumination/restoration of luster - light as life metaphor central to chiasm | Vehicle: illuminate | Related terms: illuminates, illuminating, light, lights, lighting, brighten, brightens, brightening, shine, shines, shining",
+        "vehicle": "illuminate",
+        "vehicle_terms": [
+          "illuminate",
+          "illuminates",
+          "illuminating",
+          "light",
+          "lights",
+          "lighting",
+          "brighten",
+          "brightens",
+          "brightening",
+          "shine",
+          "shines",
+          "shining"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Death as sleep metaphor - eyes closed/darkness connection to Sheol theology | Vehicle: sleep of death | Related terms: sleep, sleeps, sleeping, slumber, slumbers, slumbering",
+        "vehicle": "sleep of death",
+        "vehicle_terms": [
+          "sleep of death",
+          "sleep",
+          "sleeps",
+          "sleeping",
+          "slumber",
+          "slumbers",
+          "slumbering"
+        ]
+      },
+      {
+        "verse": null,
+        "reason": "Tottering/instability (אמוט) as vulnerability - physical instability metaphor for crisis | Vehicle: totter | Related terms: totters, tottering, stumble, stumbles, stumbling, slip, slips, slipping, shake, shakes, shaking",
+        "vehicle": "totter",
+        "vehicle_terms": [
+          "totter",
+          "totters",
+          "tottering",
+          "stumble",
+          "stumbles",
+          "stumbling",
+          "slip",
+          "slips",
+          "slipping",
+          "shake",
+          "shakes",
+          "shaking"
+        ]
+      }
+    ],
+    "commentary_requests": [
+      {
+        "verse": "13:1",
+        "reason": "Superscription formula - how do commentators interpret למנצח and Davidic attribution's liturgical function?"
+      },
+      {
+        "verse": "13:2",
+        "reason": "Fourfold anaphora opening with divine forgetting and hidden face - traditional understanding of covenant crisis language"
+      },
+      {
+        "verse": "13:3",
+        "reason": "Key ambiguity of עצות (counsels vs. cares) and chronic grief specification - classical resolution of semantic puzzle"
+      },
+      {
+        "verse": "13:4",
+        "reason": "Triple imperative structure and eye illumination petition - how commentators explain chiastic reversal of hidden face"
+      },
+      {
+        "verse": "13:5",
+        "reason": "Enemy speech and theological stakes of their triumph - traditional interpretation of covenant reputation concern"
+      },
+      {
+        "verse": "13:6",
+        "reason": "Unexplained reversal and prophetic perfect (גמל עלי) - how commentators account for trust without narrative deliverance"
+      }
+    ],
+    "lexicon_entries_count": 24,
+    "concordance_results": {
+      "עד אנה": 3,
+      "תשכחני נצח": 1,
+      "תסתיר פניך": 5,
+      "יגון בלבבי": 1,
+      "ירום איבי עלי": 1,
+      "האירה עיני": 3,
+      "אישן המות": 3,
+      "יכלתיו": 1,
+      "בטחתי בחסדך": 0,
+      "יגל לבי בישועתך": 1,
+      "אשירה ליהוה": 2,
+      "גמל עלי": 3
+    },
+    "figurative_results": {
+      "total_instances_used": 112
+    },
+    "commentary_counts": {
+      "Ibn Ezra": 5,
+      "Radak": 5,
+      "Malbim": 6,
+      "Rashi": 2,
+      "Metzudat David": 5,
+      "Meiri": 5
+    },
+    "sacks_references_count": 1,
+    "related_psalms_count": 3,
+    "related_psalms_list": [
+      4,
+      21,
+      27
+    ],
+    "ugaritic_parallels": [],
+    "research_bundle_chars": 157229,
+    "research_bundle_tokens": 52409
+  },
+  "analysis": {
+    "macro_questions": [
+      "What is the theological significance of God 'forgetting' (שָׁכַח) in covenant contexts? How does this relate to God 'remembering' Noah (Gen 8:1), Rachel (Gen 30:22), and the covenant (Exod 2:24)?",
+      "How does 'hiding the face' (הסתיר פנים) function in Deuteronomistic theology (Deut 31:17-18; 32:20) versus Psalms? Is this metaphor exclusively negative, or can it be disciplinary?",
+      "What does עֵצוֹת (cares/counsels) signify in v. 3? Does this suggest mental deliberation, anxiety, or futile self-reliance versus trust in God's counsel (Ps 1:1; 73:24)?",
+      "How does the 'sleep of death' (אִישַׁן הַמָּוֶת) relate to Sheol theology and the psalmists' understanding of death as silence (Ps 6:6; 30:10; 88:11-13)?",
+      "What is the function of the enemy motif in individual laments? Are these concrete historical enemies, spiritual forces, death itself, or symbolic representatives of anti-God forces?",
+      "How does חֶסֶד (steadfast love/faithfulness) function as the theological hinge enabling the shift from complaint to trust? What is its covenantal freight?",
+      "What is the temporal logic of בָטַחְתִּי (perfect: 'I have trusted')? Does this indicate habitual past action, or is it a performative present masked as perfect?",
+      "Is גָמַל עָלָי (he has been good/dealt bountifully) a true prophetic perfect, or does it recall past deliverances as warrant for present confidence? What other psalms use this verb?",
+      "How does Psalm 13's structure compare to other brief laments (Ps 3-7)? Is the speed of transition from lament to trust proportional to psalm length, or is this uniquely abrupt?",
+      "What is the significance of singing (שׁיר) as the final verb? How does song function differently from prayer/petition in Psalms? Does singing require deliverance first, or can it precede it?",
+      "How do the LXX additions in v. 6 ('I will sing to the name of the Lord Most High') expand the psalm's theology? What does this reveal about early interpretive traditions?"
+    ],
+    "micro_questions": [
+      "What is the semantic range and theological freight of עֵצוֹת in v.3 - does it mean anxious deliberations, futile self-counseling, or simply 'cares'? How does this word choice relate to divine counsel theology elsewhere in Psalms?",
+      "Why does the psalm use the unusual phrase 'sleep of death' (אִישַׁן הַמָּוֶת) rather than simply 'die' - what does the sleep metaphor contribute to understanding Sheol/death theology in Psalms?",
+      "How does the fourfold עַד־אָנָה repetition function symbolically - is there significance to four (divine name tetragammaton, cardinal directions, completeness) or is this simply maximum tolerable repetition?",
+      "What accounts for the abrupt shift to trust in v.6 without any narrative explanation (no theophany, oracle, or tangible deliverance) - is this a performative speech act where declaring trust constitutes trust?",
+      "Is the final verb גָמַל עָלָי (v.6) a true prophetic perfect (future treated as accomplished) or does it recall past deliverances as warrant for present confidence? What other psalms use this verb in similar contexts?",
+      "Why does the petition for eye-illumination (הָאִירָה עֵינַי) specifically reverse God's hidden face rather than simply asking 'show your face' - what does the eye/light focus contribute?",
+      "Who are the enemies in vv.3,5 - personal opponents, national foes, death personified, or symbolic anti-God forces? How does their vagueness function rhetorically?",
+      "What is the relationship between חֶסֶד (steadfast love, v.6) and God's hidden פָּנִים (face, v.2) - can covenant love persist when covenant face is absent?",
+      "How does the LXX expansion in v.6 (adding 'I will sing psalms to the name of the Lord Most High') interpret the original Hebrew theology - what does this reveal about early Jewish understanding of praise-before-deliverance?",
+      "Why specify 'grief in my heart all day' (יוֹמָם) in v.3 - does night bring relief, or is this synecdoche for totality? What does temporal specification contribute to the complaint?",
+      "What is the function of direct enemy speech ('I have overcome him') in v.5 - is this hypothetical or remembered taunt, and how does it intensify the theological stakes?"
+    ],
+    "verse_count": 6
+  },
+  "model_usage": {
+    "macro_analysis": "claude-sonnet-4-5",
+    "micro_analysis": "claude-sonnet-4-5",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5.1"
+  }
+}

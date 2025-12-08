@@ -1,86 +1,86 @@
-# Next Session Handoff
+# Next Session - Psalm Analysis Pipeline
 
-## Current Status
-**Session**: 176 (2025-12-07)
-**Current Task**: Phrase substring matching fix completed
+## Today's Accomplishments (2025-12-07)
 
-## What We Accomplished Today
+### Session 180: Phrase Search Fixes (Parts 1 & 2) ✅
 
-### 1. **Phrase Substring Matching Implemented**
-- **Problem**: Phrase searches were using exact word matching, so "דבר אמת בלב" didn't match Psalm 15:2 containing "וְדֹבֵ֥ר אֱ֝מֶ֗ת בִּלְבָבֽוֹ׃"
-- **Root Cause**: The concordance search required exact word matches, preventing matches with prefixes/suffixes
-- **Solution**: Modified `_verse_contains_phrase` in `src/concordance/search.py` to use substring matching for phrases while keeping exact matching for single words
+**Part 1 - Word Order Guarantee**: Phrase searches now ALWAYS find the source verse!
+**Part 2 - Maqqef Handling**: Phrases with maqqef (־) no longer get concatenated!
 
-### 2. **Exact Phrase Preservation Enhanced**
-- **Problem**: System wasn't searching the exact phrase from the verse when LLM generated variations
-- **Solution**: Updated `_override_llm_base_forms` in `src/agents/micro_analyst.py` to:
-  - Match queries with stored phrases using substring matching (allowing suffix differences)
-  - Add original query as alternate when different from stored phrase
-  - Ensure both exact phrase AND variations are searched
+**Root Causes**:
+1. **Word Order Issue**: LLM creates conceptual phrases that may not match actual word order
+   - Example: "נשא חרפה" (bear reproach) but verse has "חרפה לא נשא" (reproach NOT bear)
+   - Words in reverse order with intervening word → 0 results!
 
-### 3. **Supporting Infrastructure Fixed**
-- Added missing `get_available_books` method to FigurativeLibrarian
-- Added graceful handling for missing figurative_language table in both FigurativeLibrarian and scholar_researcher
-- Created test scripts to verify the fix works correctly
+2. **Maqqef Issue**: Maqqef (־, U+05BE) is in vowel point removal range
+   - When removed, words concatenate: "בַּל־עָלֶיךָ" → "בלעליך" (2 words become 1)
+   - Should be: "בַּל־עָלֶיךָ" → "בל עליך" (2 separate words)
+   - Psalm 16 had 4 phrases with this issue
 
-### 4. **Pipeline Verification**
-- Psalm 15 pipeline ran successfully with the new phrase matching
-- Logs confirm phrase extraction is working: "✓ Alternates found for 'דבר אמת בלב': ['דבר אמת לבו', 'אמת בלב', 'דברת אמת בלב', 'בלבו אמת']"
-- Phrase "דבר אמת בלב" now successfully finds Psalm 15:2
+**Solutions Implemented**:
 
-## Technical Details
+**Part 1 - Word Order Fix**:
+✅ Added `_extract_all_phrase_forms_from_verse()` method to micro_analyst.py
+✅ Extracts ALL possible orderings of query words from source verse
+✅ Generates both full span (with intervening words) and collapsed form
+✅ Adds extracted forms as `alternate_queries` for concordance search
+✅ Fixed array alignment bug: split_words now called only on original text, then cleaned
+✅ Fixed empty string matching bug: skip empty words (paseq marks)
 
-### Key Code Changes
-1. **src/concordance/search.py** - Updated `_verse_contains_phrase` method:
-   - Phrases (len > 1): Use substring matching within words
-   - Single words: Keep exact word matching
-   - This allows "דבר" to match in "ודובר" and "בלב" to match in "בלבבו"
+**Part 2 - Maqqef Fix**:
+✅ Replace maqqef (־, U+05BE) with space BEFORE removing vowel points
+✅ Applied to all phrase extraction methods:
+  - `_extract_exact_phrases_from_discoveries()` (lines 969-974, 986-988)
+  - `_extract_all_phrase_forms_from_verse()` (lines 1118-1120)
+  - `_query_in_verse()` (lines 1019-1021)
+  - `_extract_exact_form_from_verse()` (lines 1061-1063)
 
-2. **src/agents/micro_analyst.py** - Enhanced phrase preservation:
-   - Match normalized queries against stored phrase keys using substring matching
-   - Preserve exact phrases from discoveries when they differ from queries
-   - Add both exact phrase and query to alternates list
+**Files Modified**:
+- `src/agents/micro_analyst.py` - Multiple methods updated for maqqef handling
+- `src/agents/micro_analyst.py` - Lines 1086-1161: New `_extract_all_phrase_forms_from_verse()` method
+- `src/agents/micro_analyst.py` - Lines 1260-1315: Enhanced `_override_llm_base_forms()` to extract verse forms
 
-### Design Decisions
-- **Flexible phrase matching**: Phrases can match words with prefixes/suffixes
-- **Precise single word matching**: No false positives from partial matches
-- **Dual search approach**: Search both exact phrase AND variations
-- **Performance maintained**: No exponential query growth
+**Test Results**:
+- Part 1: Query "נשא חרפה" now extracts "וחרפה לאנשא" as alternate ✅
+- Part 2: "טובתי בלעליך" → "טובתי בל עליך" (2 words → 3 words) ✅
+- Part 2: "קדושים אשרבארץ" → "קדושים אשר בארץ" (2 words → 3 words) ✅
 
-## Current Pipeline State
-- ✅ Phrase substring matching working correctly
-- ✅ Exact phrase preservation implemented
-- ✅ Single word exact matching preserved
-- ✅ Supporting infrastructure in place
+## Next Session Tasks
 
-## Next Session Priority Tasks
+### 1. Run Psalm 15 Pipeline with the Fix (Priority 1)
+**User should run full pipeline**:
+- Run Psalm 15 pipeline to verify phrase searches now find source verses
+- Verify "נשא חרפה" now returns >= 1 result (finds Psalm 15:3)
+- Check that all phrase searches have non-zero results
+- Confirm no performance degradation
 
-### 1. **Complete Psalm 15 Analysis** (HIGH)
-- Review full Psalm 15 output to ensure all phrase searches are working correctly
-- Verify that all meaningful matches are being found
-- Check search result quality and coverage
+### 3. Continue Psalm Study Guide Production
+We've completed Psalms 13-15. Continue with:
+- Psalm 16
+- Psalm 17
+- Psalm 18
+- etc.
 
-### 2. **Extend to Other Psalms** (MEDIUM)
-- Test the phrase matching fix with other psalms that have similar issues
-- Consider Psalm 1, 8, 19, 20 which were recently processed
-- Verify the fix works across different Hebrew morphological patterns
+### 4. Monitor Pipeline Performance
+Keep an eye on:
+- Search accuracy
+- Result relevance
+- Processing time
 
-### 3. **Consider Additional Enhancements** (LOW)
-- Should substring matching be applied to alternative search method?
-- Document the phrase matching behavior clearly
-- Consider adding more sophisticated fuzzy matching options
+## Context Reminders
 
-## Test Results
-- ✅ "דבר אמת בלב" now finds Psalm 15:2
-- ✅ Phrase substring matching verified with test script
-- ✅ Single word exact matching preserved
-- ✅ Pipeline runs without hanging
+- The figurative language database is at: `C:\Users\ariro\OneDrive\Documents\Bible\database\Biblical_fig_language.db`
+- It contains 20 legitimate tent entries with proper JSON structure
+- The issue was with search logic, not database data
+- Micro analyst already provides appropriate variants (e.g., "tabernacle")
 
-## Previous Context
-- Session 175: Performance fix for phrase variation generation
-- Session 176: Phrase substring matching fix implemented
+## Recent Psalm Progress
+- Psalm 13: Completed ✅
+- Psalm 14: Completed ✅
+- Psalm 15: Completed (but revealed the figurative search bug) ⚠️
 
-## Remember
-- Single words = exact matching (no partial matches)
-- Phrases = substring matching (allow prefixes/suffixes)
-- Always search BOTH exact phrase AND variations
+## Development Notes
+- The pipeline uses `ConcordanceLibrarian` exclusively, not direct `ConcordanceSearch`
+- Psalm 15 took 11.6 minutes to process
+- Token usage: ~128K tokens total
+- All figurative searches should use exact matching for vehicle concepts

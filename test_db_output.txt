@@ -1,0 +1,35 @@
+=== Test 1: Direct query for יגור in Psalm 15:1 ===
+Psalm 15:1 has 10 words:
+  Position 0: מִזְמ֗וֹר | מזמור | מזמור
+  Position 1: לְדָ֫וִ֥ד | לדוד | לדוד
+  Position 2: יְ֭הֹוָה | יהוה | יהוה
+  Position 3: מִי | מי | מי
+  Position 4: יָג֣וּר | יגור | יגור
+  Position 5: בְּאׇהֳלֶ֑ךָ | באהלך | באהלך
+  Position 6: מִֽי | מי | מי
+  Position 7: יִ֝שְׁכֹּ֗ן | ישכן | ישכן
+  Position 8: בְּהַ֣ר | בהר | בהר
+  Position 9: קׇדְשֶֽׁךָ׃ | קדשך | קדשך
+
+=== Test 2: Any verse with word_consonantal_split = 'יגור' ===
+Found 10 instances of 'יגור':
+  Exodus 12:48 - יָג֨וּר
+  Ezekiel 14:7 - יָג֣וּר
+  Isaiah 33:14 - יָג֣וּר
+  Isaiah 33:14 - יָג֥וּר
+  Isaiah 54:15 - יָג֛וּר
+  Jeremiah 22:25 - יָג֖וֹר
+  Jeremiah 39:17 - יָג֖וֹר
+  Jeremiah 49:18 - יָג֥וּר
+  Jeremiah 49:33 - יָג֥וּר
+  Jeremiah 50:40 - יָג֥וּר
+
+=== Test 3: Generate variations for 'גור' ===
+Generated 112 variations for 'גור'
+
+Checking if any variations appear in Psalm 15...
+
+=== Test 4: All words in Psalm 15 ===
+Psalm 15 has 46 unique consonantal-split words
+
+Words in Psalm 15 containing 'גור': ['יגור']

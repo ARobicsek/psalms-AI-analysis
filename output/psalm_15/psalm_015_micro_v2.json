@@ -1,0 +1,318 @@
+{
+  "psalm_number": 15,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "The verse uses two parallel question structures with מִי, creating liturgical tension. The pairing of 'tent' (אֹהֶל) and 'holy mountain' (הַר קׇדְשֶׁךָ) is curious - tent suggests temporality/wilderness period while mountain suggests permanence/Zion. The verbs יָגוּר (sojourn) vs יִשְׁכֹּן (dwell) create semantic gradation from temporary to permanent residence.",
+      "lexical_insights": [
+        {
+          "phrase": "יָגוּר",
+          "variants": [
+            "גּוּר",
+            "יָגוּרוּ",
+            "גָּרְתִּי",
+            "גֵּר"
+          ],
+          "notes": "Sojourn/dwell as alien - technical term for resident alien status, contrasts with permanent dwelling"
+        },
+        {
+          "phrase": "יִשְׁכֹּן",
+          "variants": [
+            "שָׁכַן",
+            "שֹׁכֵן",
+            "יִשְׁכְּנוּ",
+            "שָׁכַנְתִּי"
+          ],
+          "notes": "Permanent dwelling - stronger settlement term than gar, also used of divine presence"
+        },
+        {
+          "phrase": "בְּאׇהֳלֶךָ",
+          "variants": [
+            "אֹהֶל",
+            "בְּאֹהֶל",
+            "אָהֳלִי",
+            "אָהֳלֶיךָ"
+          ],
+          "notes": "Tent imagery - archaic worship language recalling tabernacle, surprisingly paired with temple mountain"
+        },
+        {
+          "phrase": "הַר קׇדְשֶׁךָ",
+          "variants": [
+            "הַר קֹדֶשׁ",
+            "בְּהַר קָדְשׁוֹ",
+            "הָרֵי קֹדֶשׁ"
+          ],
+          "notes": "Holy mountain - Zion temple language, creates tension with tent vocabulary"
+        }
+      ],
+      "figurative_analysis": [
+        "Tent and mountain as metaphors for divine presence - blending temporal/eternal imagery",
+        "Spatial language (in/on) as metaphor for relationship with God"
+      ],
+      "thesis_connection": "Directly establishes the spatial-to-ethical transformation thesis - opening with physical location questions that will be answered with ethical requirements",
+      "phonetic_transcription": "miz-**MŌR** lə-dhā-**WIDH** yə-hō-**WĀH** miy-yā-**GHŪR** bə-'o-ho-**LE**-khā miy-yish-**KŌN** bə-**HAR** qodh-**SHE**-khā"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "The verse presents a triadic structure moving from external behavior (הוֹלֵךְ) to active deed (וּפֹעֵל) to internal disposition (וְדֹבֵר...בִּלְבָבֽוֹ). The phrase 'speaks truth in his heart' is striking - internalized truthfulness rather than just external speech. The participles create ongoing, habitual action rather than one-time acts.",
+      "lexical_insights": [
+        {
+          "phrase": "הוֹלֵךְ תָּמִים",
+          "variants": [
+            "תָּם",
+            "תְּמִימִים",
+            "תֻּמָּתִי",
+            "בְּתָמִּי"
+          ],
+          "notes": "Walks blamelessly - tamim is crucial ethical-cultic term (wholeness, completeness, integrity), used of Noah and sacrificial animals"
+        },
+        {
+          "phrase": "פֹעֵל צֶדֶק",
+          "variants": [
+            "פֹּעֲלֵי צֶדֶק",
+            "פָּעַל צְדָקָה",
+            "פָעֳלוֹ"
+          ],
+          "notes": "Does/works righteousness - po'el suggests active manufacturing/crafting of justice"
+        },
+        {
+          "phrase": "דֹבֵר אֱמֶת בִּלְבָבוֹ",
+          "variants": [
+            "דֹּבֵר אֱמֶת",
+            "דִּבֶּר אֱמֶת",
+            "בִּלְבָבִי",
+            "בִּלְבָבְךָ"
+          ],
+          "notes": "Speaks truth in heart - unusual phrase suggesting internalized truthfulness, not just truthful speech"
+        }
+      ],
+      "figurative_analysis": [
+        "'Walking' as metaphor for total lifestyle/conduct - wisdom literature commonplace",
+        "'Working righteousness' - treating justice as craftwork/manufacturing",
+        "'Heart' as seat of thought/will, not just emotion - cognitive center"
+      ],
+      "thesis_connection": "Establishes the holistic ethical profile - external walk, active work, internal disposition - supporting thesis of comprehensive ethical requirement, not just ritual",
+      "phonetic_transcription": "hō-**LĒ**-khə tā-miy-**M** ū-fō-**ʿĒL** **TSE**-dheq wə-dhō-**VĒR** 'e-**METH** bil-vā-**VŌ**"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Shift to negative formulations (לֹא repeated three times) defining righteousness by exclusion. The phrase לֹא־רָגַל עַל־לְשֹׁנוֹ is puzzling - 'not slandered/walked on his tongue' creates unusual body-part imagery. Three social spheres mentioned: tongue (speech), רֵעֵהוּ (fellow), קְרֹבוֹ (close one/neighbor) - expanding circles of relationship.",
+      "lexical_insights": [
+        {
+          "phrase": "רָגַל עַל־לְשֹׁנוֹ",
+          "variants": [
+            "רָגַל",
+            "מְרַגֵּל",
+            "רַגְלִי"
+          ],
+          "notes": "Slandered with/on his tongue - ragal can mean spy out, slander; unusual construction with 'on tongue' - does it mean walking/going about with slander?"
+        },
+        {
+          "phrase": "רֵעֵהוּ",
+          "variants": [
+            "רֵעַ",
+            "רֵעִים",
+            "רֵעֶךָ",
+            "רֵעִי"
+          ],
+          "notes": "His fellow/neighbor - general term for associate, companion"
+        },
+        {
+          "phrase": "קְרֹבוֹ",
+          "variants": [
+            "קָרוֹב",
+            "קְרוֹבִים",
+            "קְרֹבַי",
+            "קְרוֹבָיו"
+          ],
+          "notes": "His close one/kinsman - from root meaning 'near,' suggests closer relationship than re'a, possibly family"
+        },
+        {
+          "phrase": "חֶרְפָּה",
+          "variants": [
+            "חֶרְפָּתִי",
+            "חֶרְפָּתוֹ",
+            "חֲרָפוֹת"
+          ],
+          "notes": "Reproach/disgrace - bearing or lifting up reproach, weightier than mere gossip"
+        },
+        {
+          "phrase": "נָשָׂא",
+          "variants": [
+            "נָשָׂא",
+            "נֹשֵׂא",
+            "נְשָׂאתִי",
+            "יִשָּׂא"
+          ],
+          "notes": "Lift up/bear/carry - used with cherpa suggests spreading or accepting disgraceful reports"
+        }
+      ],
+      "figurative_analysis": [
+        "Tongue as instrument/location of slander - body part metonymy",
+        "'Lifting up reproach' - spatial metaphor for spreading disgrace"
+      ],
+      "thesis_connection": "Negative definition by exclusion - supports thesis that righteousness involves discipline and boundary-setting in social relationships, not just positive actions",
+      "phonetic_transcription": "lō'-rā-**GHAL**  ʿal-lə-shō-**NŌ** lō'-ʿā-**SĀH** lə-rē-**ʿĒ**-hū rā-**ʿĀH** wə-ḥer-**PĀH** lō'-nā-**SĀ'** ʿal-qə-rō-**VŌ**"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Sharp antithetic parallelism: despising the contemptible vs honoring God-fearers. The phrase נִבְזֶה בְּעֵינָיו נִמְאָס is striking - doubled terms (despised/rejected) for single subject. The second colon introduces יִרְאֵי יְהֹוָה (fearers of LORD) as social reference group. Final clause נִשְׁבַּע לְהָרַע וְלֹא יָמִֽר is powerful - oath-keeping even to one's hurt.",
+      "lexical_insights": [
+        {
+          "phrase": "נִבְזֶה בְּעֵינָיו",
+          "variants": [
+            "בָּזָה",
+            "נִבְזֶה",
+            "בּוֹזֶה",
+            "בְּעֵינַי",
+            "בְּעֵינֵיכֶם"
+          ],
+          "notes": "Despised in his eyes - active rejection/contempt, uses evaluative 'in eyes' idiom"
+        },
+        {
+          "phrase": "נִמְאָס",
+          "variants": [
+            "מָאַס",
+            "נִמְאָסִים",
+            "מֹאֵס"
+          ],
+          "notes": "Rejected/despised one - intensifies bazah, strong rejection term used of God rejecting Saul"
+        },
+        {
+          "phrase": "יִרְאֵי יְהֹוָה",
+          "variants": [
+            "יְרֵא יְהֹוָה",
+            "יִרְאַת יְהֹוָה",
+            "יְרֵאֶיךָ"
+          ],
+          "notes": "Fearers of LORD - technical term for faithful covenant community, key identity marker"
+        },
+        {
+          "phrase": "יְכַבֵּד",
+          "variants": [
+            "כִּבֵּד",
+            "כַּבֵּד",
+            "מְכַבֵּד",
+            "כְּבָדוֹ"
+          ],
+          "notes": "Honors/gives weight to - from kaved (heavy), suggests active honoring beyond mere respect"
+        },
+        {
+          "phrase": "נִשְׁבַּע לְהָרַע",
+          "variants": [
+            "נִשְׁבַּע",
+            "שְׁבוּעָה",
+            "לְהָרַע לוֹ"
+          ],
+          "notes": "Swears to harm/hurt - taking oath even when disadvantageous to self"
+        },
+        {
+          "phrase": "יָמִר",
+          "variants": [
+            "מוּר",
+            "הֵמִיר",
+            "תָּמִיר"
+          ],
+          "notes": "Change/exchange - oath-changing, breaking commitment for advantage"
+        }
+      ],
+      "figurative_analysis": [
+        "'In his eyes' - visual/evaluative metaphor for judgment",
+        "'Heavy/weight' (kavod) - honoring as giving weightiness/importance"
+      ],
+      "thesis_connection": "Introduces social values/allegiances as ethical criterion - not just personal behavior but community alignment and costly integrity. Supports thesis of comprehensive ethical profile including social positioning.",
+      "phonetic_transcription": "niv-**ZEH**  bə-**ʿĒY**-nāy-w nim-**'ĀS** wə-'eth-yir-**'ĒY** yə-hō-**WĀH** yə-kha-**BĒDH** nish-**BAʿ** lə-hā-**RAʿ** wə-**LŌ'** yā-**MIR**"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Two economic prohibitions: lending at interest (נֶשֶׁךְ) and taking bribes against innocent. The term נֶשֶׁךְ (bite/interest) is vivid predatory imagery. Concluding promise: עֹשֵׂה־אֵלֶּה לֹא יִמּוֹט לְעוֹלָֽם - 'doing these things, never be shaken forever' - powerful stability promise creating inclusio with dwelling question of v.1.",
+      "lexical_insights": [
+        {
+          "phrase": "נֶשֶׁךְ",
+          "variants": [
+            "נֶשֶׁךְ",
+            "נָשַׁךְ",
+            "נֹשֶׁךְ"
+          ],
+          "notes": "Interest/usury - from 'bite,' vivid metaphor for exploitative lending, prohibited in Torah"
+        },
+        {
+          "phrase": "שֹׁחַד",
+          "variants": [
+            "שֹׁחַד",
+            "שׁוֹחַד",
+            "שְׁחָדִים"
+          ],
+          "notes": "Bribe - gift given to pervert justice, paired with 'against innocent'"
+        },
+        {
+          "phrase": "נָקִי",
+          "variants": [
+            "נָקִי",
+            "נְקִיִּם",
+            "נְקִיָּתִי"
+          ],
+          "notes": "Innocent/clean one - legal term for one not guilty, undeserving of judgment"
+        },
+        {
+          "phrase": "לֹא יִמּוֹט",
+          "variants": [
+            "מוֹט",
+            "יָמוֹט",
+            "תָּמוֹט",
+            "מוֹטוּ"
+          ],
+          "notes": "Not be shaken/moved - stability imagery, opposite of tottering/falling, used of righteous and Zion"
+        },
+        {
+          "phrase": "לְעוֹלָֽם",
+          "variants": [
+            "עוֹלָם",
+            "לְעוֹלְמֵי עַד",
+            "עוֹלָמִים"
+          ],
+          "notes": "Forever - eternal/age-long duration, strongest temporal language"
+        },
+        {
+          "phrase": "עֹשֵׂה־אֵלֶּה",
+          "variants": [
+            "עֹשֶׂה",
+            "עֹשִׂים",
+            "עָשִׂיתִי אֵלֶּה"
+          ],
+          "notes": "Doing these things - summarizing participle gathering all previous requirements"
+        }
+      ],
+      "figurative_analysis": [
+        "Neshech (bite) - predatory animal imagery for exploitative lending",
+        "Lo yimmot (not shaken) - stability/foundation metaphor, contrasts with tottering/falling",
+        "Spatial metaphor resolved: 'dwelling' becomes 'unshakeable stability'"
+      ],
+      "thesis_connection": "Completes the spatial-to-ethical-to-ontological transformation: physical location question (v.1) → ethical requirements (vv.2-5a) → existential stability promise (v.5b). Economic justice as climactic test supports thesis of comprehensive ethical holiness replacing ritual access.",
+      "phonetic_transcription": "kas-**PŌ**  lō'-nā-**THAN** bə-ne-**SHEKH** wə-**SHŌ**-ḥadh ʿal-nā-**QIY** lō'-lā-**QĀḤ** ʿō-sēh-**'ĒL**-leh **LŌ'** yim-**MŌT** lə-ʿō-**LĀM** **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Architectural structure: Question (v.1) → Answer in positive terms (v.2) → Answer in negative terms (vv.3-5a) → Promise (v.5b)",
+    "Progression from personal/internal (v.2: heart) to social/relational (v.3: neighbor/kinsman) to communal/economic (vv.4-5: community values, financial ethics)",
+    "Anaphoric לֹא pattern intensifying through vv.3-5, creating rhythmic negation that defines by exclusion",
+    "Inclusio between dwelling/sojourning (v.1) and never being shaken (v.5b) - spatial metaphor transformed to ontological stability",
+    "Participle dominance throughout creating timeless, habitual quality - not one-time acts but lifestyle portrait",
+    "Movement from external → internal → external in v.2-3 (walk → heart → tongue → action)",
+    "Pairing of archaic (tent) and contemporary (mountain) worship language in v.1 - theological bridge between traditions",
+    "Economic ethics climax - interest and bribery as final tests places social justice at center, not ritual purity"
+  ],
+  "interesting_questions": [
+    "Why does the psalm pair archaic 'tent' language with permanent 'holy mountain' imagery in v.1 - is this deliberate merging of tabernacle and temple traditions?",
+    "What exactly does 'speaks truth in his heart' (דֹבֵר אֱמֶת בִּלְבָבוֹ) mean - internal self-honesty, truthful thinking, or something else? How does this differ from speaking truth to others?",
+    "What is the semantic relationship between רֵעֵהוּ (fellow) and קְרֹבוֹ (close one) in v.3 - expanding circles of responsibility, synonymous parallelism, or specific social categories?",
+    "Why is the contemptible person described with doubled language (נִבְזֶה...נִמְאָס) while God-fearers get single term (יִרְאֵי יְהֹוָה) - rhetorical emphasis or semantic distinction?",
+    "Does נִשְׁבַּע לְהָרַע mean taking an oath that turns out costly, or deliberately making a costly commitment? What's the nature of this 'swearing to hurt'?",
+    "Why does the psalm climax with economic sins (interest-taking, bribery) rather than cultic/ritual offenses - what does this prioritization reveal about the psalm's theology?",
+    "How does the stability promise (לֹא יִמּוֹט לְעוֹלָֽם) answer the dwelling question (מִי־יָגוּר...מִי־יִשְׁכֹּן) - are these metaphorically equivalent or distinct concepts?",
+    "What is the significance of the LXX translating 'swears to his hurt' as 'swears to his neighbor' - which reading is original and what interpretive implications?",
+    "Why are participles used throughout for ethical description - does habitual/ongoing aspect have theological significance vs. perfect tense completion?",
+    "What's the function of the unusual phrase רָגַל עַל־לְשֹׁנוֹ - does ragal mean 'spy/slander' or literally 'walk/go about' and how does this work with 'on tongue'?"
+  ],
+  "synthesis_notes": "LEXICON: Detailed study of tamim (wholeness/blamelessness), ragal construction, neshech (interest/bite), yimmot (shaken), yir'ei YHWH (God-fearers) as technical terms\nCONCORDANCE: Track tent/mountain pairing across Psalter, participial ethical descriptions, lo yimmot stability promises, gar/shakan verb pairs\nSYNTAX: Analyze participle usage for habitual aspect, negative constructions with lo, oath-taking syntax (nishba + l-)\nFIGURATIVE: Economic metaphors (bite/interest), spatial metaphors (dwelling/shaking), body-part imagery (tongue, eyes, heart)\nCOMMENTARY: Focus on v.2 'truth in heart' puzzle, v.3 ragal tongue construction, v.4 LXX variance on oath, v.5 interest prohibition context and stability promise interpretation"
+}

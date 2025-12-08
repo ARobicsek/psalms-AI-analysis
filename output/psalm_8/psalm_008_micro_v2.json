@@ -3,150 +3,171 @@
   "verse_commentaries": [
     {
       "verse_number": 1,
-      "commentary": "Superscription contains mysterious musical term 'al-hagittith' - possibly 'on the gittith' referring to an instrument or melody. The LXX renders it as 'hyper ton lenon' (concerning the winepress), suggesting early interpretive uncertainty about this technical term.",
+      "commentary": "Superscription with enigmatic musical/liturgical term 'הַגִּתִּית' (al-hagittith) - possibly an instrument, melody, or Gittite connection? The term appears only in Psalms 8, 81, 84. Psalm attributed to David, framing the cosmic meditation that follows.",
       "lexical_insights": [
-        "הַגִּתִּית"
+        "הַגִּתִּית",
+        "לַמְנַצֵּחַ"
       ],
-      "figurative_analysis": [
-        "technical liturgical language"
-      ],
-      "thesis_connection": "Establishes liturgical context for cosmic meditation",
+      "figurative_analysis": [],
+      "thesis_connection": "Liturgical frame prepares for cosmic-scale meditation",
       "phonetic_transcription": "lam-nats-**TSĒ**-aḥ ʿal-ha-gi-**TIY**-th miz-**MŌR** lə-dhā-**WIDH**"
     },
     {
       "verse_number": 2,
-      "commentary": "Double address 'YHWH our Lord' creates hierarchical intimacy - cosmic deity yet 'our' Lord. The inclusio begins here with exact repetition in v.10. Curious verb 'tenah' (covered/set) with 'your splendor' - unusual construction suggesting active divine placement of glory above heavens.",
+      "commentary": "Opening inclusio with dramatic vocative structure: 'יְהֹוָה אֲדֹנֵינוּ' (YHWH our Lord) - double divine address creates intensity. The rhetorical question 'מָה־אַדִּיר' (how majestic) with cosmic scope 'בְּכׇל־הָאָרֶץ'. Puzzling final phrase 'אֲשֶׁ֥ר תְּנָ֥ה הוֹדְךָ֗ עַל־הַשָּׁמָֽיִם' - verb 'תְּנָה' is rare and possibly corrupted; translations vary wildly (give, set, covered).",
       "lexical_insights": [
+        "אַדִּיר",
         "תְּנָה",
-        "הוֹדְךָ"
+        "הוֹד"
       ],
       "figurative_analysis": [
-        "covering heavens with splendor - spatial metaphor"
+        "divine 'name' as representation of God's presence/glory",
+        "'splendor/majesty' (הוֹד) as quasi-physical attribute"
       ],
-      "thesis_connection": "Establishes cosmic frame that brackets human significance meditation",
+      "thesis_connection": "Establishes the inclusio framework and vertical cosmology central to thesis",
       "phonetic_transcription": "yə-hō-**WĀH** 'a-dhō-**NĒY**-nū māh-'a-**DIY**-r shim-**KHĀ** bə-khol-hā-**'Ā**-rets 'a-**SHER** tə-**NĀH** hō-dhə-**KHĀ** ʿal-hash-shā-**MĀ**-yim"
     },
     {
       "verse_number": 3,
-      "commentary": "Striking paradox of 'infants and sucklings' establishing 'strength' against 'enemies and avengers' - complete reversal of expected power dynamics. The verb 'yissadta' (founded/established) suggests permanent, architectural strength from the weakest sources.",
+      "commentary": "Shocking juxtaposition: 'מִפִּי עוֹלְלִים וְיֹנְקִים' (from mouths of infants and sucklings) establishing 'עֹז' (strength/stronghold). Divine reversal theology - weakest humans defeat God's enemies. Verb 'יִסַּדְתָּ' (you founded/established) typically used for architectural/cosmic foundations, here applied to oral praise. Triad of enemies: 'צוֹרְרֶיךָ...אוֹיֵב...מִתְנַקֵּם' (foes, enemy, avenger) - escalating hostility.",
       "lexical_insights": [
         "עוֹלְלִים",
+        "יֹנְקִים",
         "יִסַּדְתָּ",
+        "עֹז",
         "מִתְנַקֵּם"
       ],
       "figurative_analysis": [
-        "architectural metaphor - founding strength"
+        "infants as warriors - divine power through weakness",
+        "praise as fortress ('עֹז')"
       ],
-      "thesis_connection": "Introduces divine reversal theme - anticipates human insignificance/significance paradox",
+      "thesis_connection": "Introduces divine reversal theme that parallels human insignificance/significance paradox in vv. 4-9",
       "phonetic_transcription": "mi-**PIY** ʿō-lə-**LIY**-m  **WƏ**-yō-nə-qiy-m yis-sadh-**TĀ** **ʿŌZ** lə-**MA**-ʿan tsō-rə-**REY**-khā lə-hash-**BIY**-th 'ō-**YĒV** ū-mith-naq-**QĒM**"
     },
     {
       "verse_number": 4,
-      "commentary": "Intimate anthropomorphism 'work of your fingers' (not hands) suggests delicate artistry. First person 'when I behold' shifts to personal contemplation. Verb 'konanta' (established/set in place) emphasizes divine intentionality in cosmic arrangement.",
+      "commentary": "Contemplative 'כִּי־אֶרְאֶה' (when I behold) shifts to first-person reflection. Striking choice: 'מַעֲשֵׂ֣ה אֶצְבְּעֹתֶיךָ' (work of Your FINGERS) - not hands! Delicate, intimate anthropomorphism. Only moon and stars mentioned, not sun - nocturnal meditation? Verb 'כּוֹנָנְתָּה' (You established) emphasizes divine ordering/fixing in place.",
       "lexical_insights": [
         "אֶצְבְּעֹתֶיךָ",
-        "כּוֹנָֽנְתָּה"
+        "כּוֹנָנְתָּה"
       ],
       "figurative_analysis": [
-        "fingers vs hands - delicate craftsmanship"
+        "divine 'fingers' - suggests artistic delicacy, fine craftsmanship"
       ],
-      "thesis_connection": "Sets up cosmic contemplation that leads to human significance questions",
+      "thesis_connection": "Sets up cosmic insignificance for the rhetorical questions in v. 5; 'fingers' vs 'hands' may foreshadow humanity's special status",
       "phonetic_transcription": "kiy-'er-**'EH** shā-mey-**KHĀ** ma-ʿa-**SĒH** 'ets-bʿō-**THEY**-khā yā-**RĒ**-aḥ wə-khō-khā-**VIY**-m 'a-**SHER** kō-**NĀ**-nə-tāh"
     },
     {
       "verse_number": 5,
-      "commentary": "Double rhetorical questions with synonymous yet distinct terms: 'enosh' (frail humanity) and 'ben-adam' (son of earth). Verb pair 'tizkereinu/tifqedeinu' (mindful/visit) moves from memory to active attention - escalating divine involvement.",
+      "commentary": "Central rhetorical questions with synonymous parallelism but subtle variation. 'מָה־אֱנוֹשׁ' (what is enosh-humanity) paralleled with 'וּבֶן־אָדָם' (and son of adam). Two verbs: 'תִזְכְּרֶנּוּ' (You remember/are mindful) and 'תִפְקְדֶנּוּ' (You visit/attend to). The verbs suggest divine attention and care, not just awareness.",
       "lexical_insights": [
         "אֱנוֹשׁ",
-        "תִפְקְדֶֽנּוּ"
+        "תִזְכְּרֶנּוּ",
+        "תִפְקְדֶנּוּ"
       ],
       "figurative_analysis": [
-        "divine psychology - remembering and visiting"
+        "remembering/visiting as divine care"
       ],
-      "thesis_connection": "Central paradox - cosmic insignificance vs divine attention",
+      "thesis_connection": "Articulates the paradox at the heart of the psalm - cosmic insignificance met with divine attention",
       "phonetic_transcription": "māh-'e-**NŌSH** kiy-thiz-**KREN**-nū ū-ven-'ā-**DHĀM** **KIY** thif-**QDHEN**-nū"
     },
     {
       "verse_number": 6,
-      "commentary": "Crux interpretum: 'me'at me'elohim' - 'little less than God/divine beings/angels'? Royal coronation imagery with 'glory and majesty' - typically divine/royal attributes applied to humanity. The verb 'techaserehu' suggests intentional limitation.",
+      "commentary": "Resolution begins! 'וַתְּחַסְּרֵהוּ מְּעַט מֵאֱלֹהִים' - made him 'little less than elohim'. MAJOR interpretive crux: 'elohim' = God? gods? divine beings? angels? LXX chooses angels. Then coronation language: 'וְכָבוֹד וְהָדָר תְּעַטְּרֵהוּ' (with glory and majesty You crown him) - royal imagery applied to humanity universally.",
       "lexical_insights": [
-        "מֵאֱלֹהִ֑ים",
-        "תְּעַטְּרֵֽהוּ"
+        "תְּחַסְּרֵהוּ",
+        "אֱלֹהִים",
+        "כָבוֹד",
+        "הָדָר",
+        "תְּעַטְּרֵהוּ"
       ],
       "figurative_analysis": [
-        "crowning metaphor",
-        "royal investiture"
+        "crowning - royal investiture applied to all humanity",
+        "glory/majesty as royal insignia"
       ],
-      "thesis_connection": "Resolves paradox through divine elevation of humanity",
+      "thesis_connection": "Central resolution of paradox - human dignity rooted in divine appointment and near-divine status",
       "phonetic_transcription": "wat-ḥas-**SRĒ**-hū mmə-**ʿAT** mē-'e-lō-**HIY**-m wə-khā-**VŌDH** wə-hā-**DHĀR** tə-ʿat-**TRĒ**-hū"
     },
     {
       "verse_number": 7,
-      "commentary": "Shift from 'fingers' (v.4) to 'hands' (v.7) - cosmic delicacy vs human dominion strength. Royal language 'tamshilehu' (make ruler) and 'under his feet' - ancient Near Eastern royal conquest imagery. Everything placed 'under feet' suggests total subjugation.",
+      "commentary": "Dominion declared with causative verb 'תַּמְשִׁילֵהוּ' (You cause him to rule). Now 'מַעֲשֵׂי יָדֶיךָ' (works of Your HANDS) - contrasts with 'fingers' in v. 4! Body part escalation? Vivid metaphor 'שַׁתָּה תַֽחַת־רַגְלָיו' (You placed under his feet) - ancient Near Eastern conquest/dominion imagery (cf. Joshua 10:24).",
       "lexical_insights": [
         "תַּמְשִׁילֵהוּ",
-        "תַֽחַת־רַגְלָֽיו"
+        "יָדֶיךָ"
       ],
       "figurative_analysis": [
-        "conquest imagery - under feet",
-        "royal investiture"
+        "subjugation under feet - royal/military victory pose",
+        "creation as God's 'handiwork' given to humanity"
       ],
-      "thesis_connection": "Human dominion as answer to cosmic insignificance question",
+      "thesis_connection": "Articulates human dominion theme; hands vs fingers may distinguish divine artistry (heavens) from human stewardship sphere (earth)",
       "phonetic_transcription": "tam-shiy-lē-**HŪ** bə-ma-ʿa-**SĒY** yā-**DHEY**-khā **KŌL** **SHA**-tāh tha-ḥath-ragh-**LĀY**-w"
     },
     {
       "verse_number": 8,
-      "commentary": "Begins merismus catalog - domestic animals first ('sheep and oxen, all of them') then wild beasts. The phrase 'kulam' (all of them) emphasizes totality within categories. Movement from tame to wild suggests comprehensive scope.",
+      "commentary": "Catalogue begins with domestic animals: 'צֹנֶה וַאֲלָפִים כֻּלָּם' (sheep and oxen, all of them) - the 'כֻּלָּם' (all of them) is emphatic. Then shift to wild: 'וְגַם בַּהֲמוֹת שָׂדָֽי' (and also beasts of the field). Movement from tame to wild.",
       "lexical_insights": [
-        "כֻּלָּ֑ם",
-        "בַּהֲמ֥וֹת שָׂדָֽי"
+        "צֹנֶה",
+        "אֲלָפִים",
+        "כֻּלָּם",
+        "בַּהֲמוֹת"
       ],
       "figurative_analysis": [
-        "totality through representative parts"
+        "comprehensive dominion through representative categories"
       ],
-      "thesis_connection": "Concrete specification of human dominion claim",
+      "thesis_connection": "Begins the creation catalogue paralleling Genesis 1; demonstrates comprehensive human dominion",
       "phonetic_transcription": "tsō-**NEH** wa-'a-lā-**FIY**-m kul-**LĀM** wə-**GHAM** ba-ha-**MŌTH** sā-**DHĀY**"
     },
     {
       "verse_number": 9,
-      "commentary": "Completes three-realm merismus: land animals (v.8), aerial birds, aquatic fish. Curious phrase 'over orḥot yamim' (paths of the seas) - ancient geographical knowledge or poetic imagery? Suggests ordered routes through seemingly chaotic waters.",
+      "commentary": "Catalogue completes with vertical expansion: 'צִפּוֹר שָׁמַיִם' (birds of heavens), then aquatic: 'וּדְגֵי הַיָּם' (fish of the sea). Striking final phrase: 'עֹבֵר אׇרְחוֹת יַמִּֽים' (whatever passes through paths of seas) - poetic, almost mysterious description of sea creatures. 'Paths of seas' is evocative maritime imagery.",
       "lexical_insights": [
-        "אׇרְח֥וֹת יַמִּֽים"
+        "צִפּוֹר",
+        "דְגֵי",
+        "אׇרְחוֹת",
+        "יַמִּֽים"
       ],
       "figurative_analysis": [
-        "sea paths - ordered chaos imagery"
+        "'paths of the seas' - personification? poetic way to describe fish migration/swimming?"
       ],
-      "thesis_connection": "Cosmic scope of dominion matches cosmic scope of divine majesty",
+      "thesis_connection": "Completes cosmic dominion catalogue; three realms (sky/land/sea) mirror vertical cosmology of v. 2",
       "phonetic_transcription": "tsi-**PŌR** shā-ma-**YIM** ū-dhə-**GHĒY** hay-**YĀM** ʿō-**VĒR** 'or-**ḤŌTH** yam-**MIY**-m"
     },
     {
       "verse_number": 10,
-      "commentary": "Exact repetition of v.2b creates perfect inclusio - human dignity meditation bracketed by divine majesty. Notable absence of heavens reference here (present in v.2) - focus narrows to earth after cosmic journey. Circular structure suggests resolution.",
+      "commentary": "Exact repetition of v. 2a - perfect inclusio closure! 'יְהֹוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכׇל־הָאָֽרֶץ' - but notably OMITS the heavens phrase from v. 2b. The meditation returns to earth focus after cosmic journey. Petuhah paragraph marker {פ} signals major section break.",
       "lexical_insights": [
-        "same as v.2"
+        "אַדִּיר",
+        "שֵׁם"
       ],
       "figurative_analysis": [
-        "architectural framing"
+        "divine 'name' again as presence throughout earth"
       ],
-      "thesis_connection": "Human significance comprehended within divine majesty frame",
+      "thesis_connection": "Closes inclusio but with modification - perhaps suggesting that human dignity/dominion manifests divine glory on EARTH specifically, completing the theological arc",
       "phonetic_transcription": "yə-hō-**WĀH** 'a-dhō-**NĒY**-nū māh-'a-**DIY**-r shim-**KHĀ** bə-khol-hā-**'Ā**-rets **F**"
     }
   ],
   "thematic_threads": [
-    "Vertical movement: heavens (v.2,4) → human between (v.5-7) → earth creatures (v.8-9) → earth focus (v.10)",
-    "Anthropomorphic progression: divine fingers (delicate) → divine hands (strong) → human feet (dominion)",
-    "Power reversal theme: infants vs enemies (v.3), cosmic insignificance vs royal dignity (v.5-6)",
-    "Perfect inclusio creates circular meditation - divine majesty encompasses human significance",
-    "Merismus structures: heaven/earth (v.2), domestic/wild/aerial/aquatic (v.8-9)"
+    "INCLUSIO with variation: v. 2 includes heavens, v. 10 omits them - deliberate theological framing?",
+    "BODY PART PROGRESSION: God's 'fingers' (v. 4) for heavens, God's 'hands' (v. 7) for earth-creatures, humanity's 'feet' (v. 7) for dominion - descending scale of divine-to-human mediation?",
+    "DOUBLE HUMAN DESIGNATION pattern: 'enosh/ben-adam' (v. 5), parallels 'little/great' paradox",
+    "ENEMY LANGUAGE anomaly: v. 3's military imagery sits oddly in creation hymn - what's the connection?",
+    "MERISMUS structure in catalogue: domestic→wild (v. 8), then sky→sea (v. 9) - comprehensive but not systematic (where's earth explicitly?)",
+    "VERB PATTERNS: Causative constructions emphasize God's active role (founded, made, crowned, caused to rule, placed)",
+    "NIGHT CONTEMPLATION possibility: only moon/stars mentioned (no sun) suggests nocturnal setting for meditation"
   ],
   "interesting_questions": [
-    "Why does the psalm shift from 'work of Your fingers' (v.4) to 'work of Your hands' (v.7) - what theological distinction does this anthropomorphic contrast serve?",
-    "What is the precise meaning of 'elohim' in v.6 - does it refer to God himself, divine beings, or angels, and how does this affect the psalm's anthropology?",
-    "How do 'infants and sucklings' establish 'strength' against 'enemies and avengers' in v.3, and how does this relate to the creation theme?",
-    "What are the 'paths of the seas' in v.9 - ancient geographical knowledge, mythological imagery, or poetic metaphor for divine order in chaos?",
-    "Why does the inclusio in v.10 omit the heavens reference present in v.2 - is this intentional narrowing to earth after the cosmic meditation?",
-    "What is the significance of the verb progression 'mindful/visit' (zakar/paqad) in v.5 - do these represent different levels of divine attention?",
-    "How does the mysterious 'gittith' in the superscription relate to the psalm's themes, and why did early translators interpret it so differently?"
+    "Why does the psalm use 'fingers' for creating heavens (v. 4) but 'hands' for earth-works given to human dominion (v. 7)? Is this a deliberate theological distinction between divine artistry levels?",
+    "What is the meaning of 'elohim' in v. 6 - God, gods, divine beings, or angels? How does this choice affect the psalm's anthropology?",
+    "Why does v. 3 introduce enemy/avenger language in what is otherwise a creation meditation? Is there a cosmic conflict subtext?",
+    "What does the rare and possibly textually uncertain verb 'תְּנָה' in v. 2 actually mean? Why do translations vary so wildly (give, set, cover)?",
+    "Why does the closing inclusio (v. 10) deliberately omit the 'heavens' phrase from v. 2? What theological work does this truncation perform?",
+    "What is 'al-hagittith' in the superscription? Why do LXX translators render it as 'concerning winepresses'?",
+    "How do the two verbs in v. 5 ('remember' and 'visit/attend') differ semantically? Are they progressive stages of divine care?",
+    "Why are only moon and stars mentioned in v. 4, with no reference to the sun? Is this a nocturnal meditation, or is the omission theologically significant?",
+    "What is the significance of the elaborate phrase 'passes through the paths of the seas' (v. 9) rather than simply 'sea creatures'?",
+    "How does the infant/suckling imagery (v. 3) relate to the broader theme of human dignity through divine reversal?",
+    "Why does the domestic animal category get emphasized with 'all of them' (v. 8) but not the wild animals?",
+    "Is there a Genesis 1 creation order being followed or deliberately disrupted in the catalogue of vv. 8-9?"
   ],
-  "synthesis_notes": "LEXICON: Focus on 'elohim' in v.6, 'gittith' in v.1, anthropomorphic terms (fingers/hands), dominion vocabulary\nCONCORDANCE: Track 'name of YHWH' theology, finger/hand distinctions, zakar/paqad verb pairs, inclusio patterns\nFIGURATIVE: Royal coronation imagery (v.6-7), merismus structures (v.8-9), anthropomorphic language throughout\nCOMMENTARY: Interpretive cruxes in v.3 (infants/enemies), v.6 (elohim), v.9 (sea paths), inclusio variation"
+  "synthesis_notes": "LEXICON: Deep dive on 'תְּנָה' (v. 2), 'אֱלֹהִים' usage (v. 6), 'אֶצְבְּעֹתֶיךָ' vs 'יָדֶיךָ' distinction, 'תִפְקְדֶנּוּ' semantic range\nCONCORDANCE: Track 'fingers of God' elsewhere in Scripture; 'little less than elohim/angels' parallels; inclusio structures with variation; enemy language in creation contexts\nTEXTUAL: Investigate textual variants for v. 2 'תְּנָה' - is there manuscript evidence for different readings?\nINTERTEXTUAL: Genesis 1:26-28 creation/dominion parallels; relationship to Job's cosmic contemplation chapters; Hebrews 2:5-9 use of Psalm 8\nANE BACKGROUND: Ancient Near Eastern dominion imagery ('under feet'); divine council theology ('elohim'); creation through speech/fingers/hands hierarchy\nFIGURATIVE: All verses with body part imagery (fingers, hands, feet, mouth); coronation metaphor development\nCOMMENTARY: Focus on vv. 2-3 (textual and interpretive issues), v. 5 (human terminology), v. 6 (elohim translation crisis)"
 }

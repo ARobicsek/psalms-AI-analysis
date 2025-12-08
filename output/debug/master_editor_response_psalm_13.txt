@@ -1,0 +1,279 @@
+### EDITORIAL ASSESSMENT
+
+The existing introduction and commentary are already strong. They capture the psalm’s arc from protest to trust, highlight the fourfold “How long?” (עַד־אָנָה), and rightly stress that verse 6 is not the report of a miracle but an act of will. The discussion of divine “forgetting” and “hiding the face,” and the liturgical notes on verse 6 and the Bedtime Shema, are particularly helpful. Lexical work (on נֶצַח, חֶסֶד, גָמַל, etc.) is accurate and judiciously used.
+
+The weaknesses are mainly of balance and missed opportunities. The style sometimes drifts toward insider academic prose (e.g., “covenant curse language,” “performative speech-act”) without pausing to explain terms. Some interpretive questions raised in the macro/micro analysis are not fully pursued: the tension between נֶצַח (“forever”) and חֶסֶד, the nuance of the perfect בָטַחְתִּי, the wider biblical idiom of “lightening the eyes,” and the inversion of the usual theology in which humans “forget” God. The figurative-language parallels (on “forgetting,” “face,” “light,” “sleep”) are not often quoted; references are given, but readers do not see the Hebrew text that would make the pattern vivid.
+
+The verse-by-verse commentary is rich but uneven. It sometimes repeats the introduction, and sometimes buries excellent insights—such as Malbim’s spiritual reading of “sleep of death”—in dense prose. It largely ignores the related psalms flagged by the research (4, 21, 27), where motifs like light, sleep, trust, and not being “moved” (מוֹט) recur in illuminating ways. The liturgical section is informative but needs clearer structure and more quotation from the prayers themselves.
+
+In revising, I will sharpen definitions for non-specialists, integrate key biblical parallels with Hebrew and English quotations, bring in the related psalms where they genuinely clarify Psalm 13, and restructure the liturgical material under clear subheadings. I will keep the theological center—the choice to trust in an unresponsive God—but ground it more firmly in the Hebrew and in the psalm’s reception.
+
+---
+
+### REVISED INTRODUCTION
+
+Psalm 13 is a tiny poem with a large emotional range. In six verses the speaker moves from the edge of despair—“How long, LORD, will you forget me forever?”—to a vow to sing because “He has dealt bountifully with me.” No enemy is routed, no illness cured within the poem’s frame. What changes is not the situation but the speaker’s stance. Psalm 13 is less a story of rescue than a study in how faith continues when rescue has not yet come.
+
+The superscription, לַמְנַצֵּחַ מִזְמֹר לְדָוִד, “For the leader, a psalm of David,” locates the poem in Israel’s cult. The verb נצח in this form (לַמְנַצֵּחַ) is used in temple and Levitical contexts for someone who “oversees” or “directs” music (1 Chronicles 15:21). It means, in plain English, “for the choirmaster.” From the start we are meant to hear this not as a private diary entry but as something sung aloud before others. The Davidic tag matters in the same way. Whether or not David composed it, the tradition hears this lament in the voice of Israel’s paradigmatic king; one person’s crisis becomes a model prayer for everyone.
+
+The body of the psalm falls into three short movements: complaint (vv. 2–3), petition (vv. 4–5), and trust (v. 6). The complaint opens with a device that any modern poet would admire: four successive cries of “How long?” (עַד־אָנָה). Rashi famously reads the fourfold “How long?” as alluding to the four great empires—Babylon, Persia, Greece, Rome—that would oppress Israel. Whether or not one accepts that symbolism, the repetition itself is striking. Anaphora—the repeated use of the same phrase at the start of successive lines—creates a drumbeat of impatience. Here it also marks a progression.
+
+The first two questions are aimed at God’s behavior:
+
+> עַד־אָ֣נָה יְהוָה תִּשְׁכָּחֵנִי נֶצַח;  
+> עַד־אָ֓נָה ׀ תַּסְתִּיר אֶת־פָּנֶיךָ מִמֶּנִּי׃  
+>  
+> “How long, LORD, will you forget me—forever?  
+> How long will you hide your face from me?”
+
+In the Torah, it is usually Israel that “forgets” God. Deuteronomy warns, “Beware… lest you forget the LORD your God, failing to keep His commandments” (הִשָּׁמֶר לְךָ פֶּן־תִּשְׁכַּח אֶת־יְהוָה אֱלֹהֶיךָ; Deut 8:11). Psalm 106 laments, “They forgot God their savior” (שָׁכְחוּ אֵל מוֹשִׁיעָם; Ps 106:21). Psalm 13 dares to invert that theology: now it is the worshiper who feels forgotten by God.
+
+The second verb is sharper. To “hide the face” (הִסְתִּיר פָּנִים) is an idiom for withdrawing presence and favor. Deuteronomy 31:17 has God say, “I will hide my face from them” (וְהִסְתַּרְתִּי פָּנַי מֵהֶם) as a form of covenant judgment. The Psalms repeatedly turn that language into lament: “Why, LORD, do you reject me, hide your face from me?” (Ps 88:15); “You hide your face, they are terrified” (תַּסְתִּיר פָּנֶיךָ יִבָּהֵלוּן; Ps 104:29). Our psalmist fears that this most frightening possibility—God’s deliberate turning away—has become his reality, perhaps “forever” (נֶצַח). The adverb carries the dread that a temporary dark night may stretch into permanent eclipse.
+
+The second pair of “How long?” questions turns inward:
+
+> עַד־אָ֨נָה אָשִׁית עֵצוֹת בְּנַפְשִׁי;  
+> יָגוֹן בִּלְבָבִי יוֹמָם;  
+> עַד־אָ֓נָה ׀ יָרוּם אֹיְבִי עָלָי׃  
+>  
+> “How long must I set plans in my own soul,  
+> sorrow in my heart by day?  
+> How long will my enemy be exalted over me?”
+
+The phrase אָשִׁית עֵצוֹת בְּנַפְשִׁי literally means “I place counsels in my soul.” It pictures the mind churning with strategies—how to survive, how to escape—when no help is coming from outside. The words נֶפֶשׁ (soul, life) and לֵבָב (heart) trace sorrow across the inner landscape, and יוֹמָם (“by day”) implies that even the distractions of daytime cannot blunt the pain. The final “How long?” introduces the enemy. If “my enemy is exalted over me” (יָרוּם אֹיְבִי עָלָי), it is not only a personal humiliation but, in Israel’s theology, a shadow on God’s honor as Israel’s protector.
+
+At verse 4 the grammar changes. Questions give way to imperatives. Instead of “How long?” we get a series of clipped commands:
+
+> הַבִּיטָה עֲנֵנִי יְהוָה אֱלֹהָי;  
+> הָאִירָה עֵינַי פֶּן־אִישַׁן הַמָּוֶת׃  
+>  
+> “Look at me, answer me, LORD my God!  
+> Light up my eyes, lest I sleep the sleep of death.”
+
+“Look” (הַבִּיטָה) answers “You hide your face” from verse 2; “light up my eyes” counters the inner darkness of verse 3. In biblical idiom, bright eyes signal life revived. When Jonathan tastes honey in battle, “his eyes brightened” (וַתָּאֹרְנָה עֵינָיו; 1 Sam 14:27). Ezra, describing a brief respite from exile, thanks God “for giving light to our eyes” (לְהָאִיר עֵינֵינוּ; Ezra 9:8). Dimmed eyes, by contrast, herald death. So the plea “light up my eyes” is a compact prayer for renewed strength, clarity, and life itself.
+
+“Sleep the sleep of death” (אִישַׁן הַמָּוֶת) presses the point. Death is often described as sleep in Hebrew: “They shall sleep a perpetual sleep” (וְיָשְׁנוּ שְׁנַת עוֹלָם; Jer 51:39). Our poet fuses the verb and the noun—“lest I sleep death”—to suggest that without divine attention, ordinary sleep threatens to become unreawakening.
+
+The stakes are then spelled out in two “lest” clauses (פֶן):
+
+> פֶּן־יֹאמַר אֹיְבִי יְכָלְתִּיו;  
+> צָרַי יָגִילוּ כִּי אֶמּוֹט׃  
+>  
+> “lest my enemy say, ‘I have prevailed over him’;  
+> my foes will exult when I totter.”
+
+The fear is not only dying, but dying in such a way that enemies can gloat, “I have prevailed over him”—and, by implication, over his God. Elsewhere the psalmists argue in the same vein: “Why should the nations say, ‘Where is their God?’” (לָמָּה יֹאמְרוּ הַגּוֹיִם אַיֵּה אֱלֹהֵיהֶם; Ps 79:10). In the ancient imagination, a deity’s power was judged by the fortunes of its people. Personal salvation and divine reputation were bound together.
+
+Then, abruptly, the current changes:
+
+> וַאֲנִי בְּחַסְדְּךָ בָטַחְתִּי;  
+> יָגֵל לִבִּי בִּישׁוּעָתֶךָ;  
+> אָשִׁירָה לַיהוָה כִּי גָמַל עָלָי׃  
+>  
+> “But as for me, in your steadfast love I have trusted;  
+> my heart will exult in your deliverance.  
+> I will sing to the LORD, for he has dealt bountifully with me.”
+
+The little phrase וַאֲנִי (“But I”) is a hinge. With no oracle, no reported change in circumstances, the speaker crosses from anxiety to confidence. The verb בָטַחְתִּי is a perfect: “I have trusted.” In Hebrew this often describes a past action that defines a present stance. We might paraphrase: “Trust is what I have done and still do.” The object of that trust is not a specific outcome but God’s חֶסֶד.
+
+חֶסֶד is notoriously hard to translate. It is not just “kindness” or “love,” but the steadfast, covenantal loyalty by which God binds Himself to Israel—“abounding in steadfast love and faithfulness” (רַב־חֶסֶד וֶאֱמֶת; Exod 34:6). Elsewhere a similar line makes the point explicit: “But I am like a thriving olive tree in God’s house; I trust in the steadfast love of God forever and ever” (וַאֲנִי כְּזַיִת רַעֲנָן בְּבֵית אֱלֹהִים; בָּטַחְתִּי בְּחֶסֶד־אֱלֹהִים עוֹלָם וָעֶד; Ps 52:10). In Psalm 13, that covenant love is pitted against the apparent “forever” (נֶצַח) of abandonment in verse 2. The psalmist chooses to let the eternal quality of חֶסֶד outweigh the felt eternity of waiting.
+
+The verbs in verse 6 trace a quiet arc: past trust (“I have trusted”), future joy (“my heart will exult”), and an open-ended resolve (“I will sing”). The word for “exult,” יָגֵל, comes from a root (גיל) that often describes exuberant joy, sometimes over an unexpected good. It is the same root used of the enemies in verse 5—“my foes will exult (יָגִילוּ) when I totter.” The psalm thus flips its own terms: the rejoicing once anticipated for the enemy is reclaimed for the inner life of the believer.
+
+Finally, the rationale: “for he has dealt bountifully with me” (כִּי גָמַל עָלָי). The verb גמל means “to deal fully with,” for good or ill. Psalm 103 says, “He has not dealt with us according to our sins… nor repaid us according to our iniquities” (וְלֹא כַעֲוֹנֹתֵינוּ גָּמַל עָלֵינוּ; Ps 103:10). Psalm 116 turns the phrase into a refrain of gratitude: “Return, my soul, to your rest, for the LORD has dealt bountifully with you” (כִּי־יְהוָה גָמַל עָלָיִכִי; Ps 116:7). In our psalm, past experience of such bounty is the only evidence the speaker has—and it is enough. Memory of God’s prior faithfulness becomes the warrant for trusting Him now, in the dark.
+
+Later Jewish tradition often heard this short psalm as the voice not only of an individual but of Israel as a whole in the long night of exile. Radak explicitly says it “is said in the language of exile” (עַל לְשׁוֹן הַגָּלוּת). Meiri reads the four “How long?” lines as anticipating the four empires. Yet in both readings, the essential dynamic remains what Psalm 13 already enacts: the right to protest, the courage to ask for help, and the decision—unsupported by visible change—to trust in the God whose face is still hidden.
+
+---LITURGICAL-SECTION-START---
+
+#### Key verses
+
+The psalm’s last verse has had a much larger liturgical life than the psalm as a whole:
+
+> וַאֲנִי בְּחַסְדְּךָ בָטַחְתִּי;  
+> יָגֵל לִבִּי בִּישׁוּעָתֶךָ;  
+> אָשִׁירָה לַיהוָה כִּי גָמַל עָלָי׃  
+>  
+> “But I trust in Your steadfast love;  
+> my heart will exult in Your deliverance.  
+> I will sing to the LORD, for He has dealt bountifully with me.”
+
+In all major rites (Ashkenaz, Sefard, Edot HaMizrach), this verse appears in weekday *Shacharit* in *Pesukei deZimra*, immediately before *Ashrei*, as the capstone of a chain of verses about God’s help:
+
+> אַשְׁרֵי הָעָם שֶׁכָּכָה לוֹ, אַשְׁרֵי הָעָם שֶׁיְהוָה אֱלֹהָיו.  
+> וַאֲנִי בְּחַסְדְּךָ בָטַחְתִּי, יָגֵל לִבִּי בִּישׁוּעָתֶךָ;  
+> אָשִׁירָה לַיהוָה כִּי גָמַל עָלָי.  
+
+“Happy is the people for whom this is so; happy is the people whose God is the LORD. But I, in Your steadfast love I trust; my heart will exult in Your salvation. I will sing to the LORD, for He has dealt bountifully with me.”
+
+Placed on the threshold of the main morning prayers, this verse becomes a daily discipline: the community rehearses the move from trust to joy to praise before it brings its own petitions.
+
+On Shabbat and festivals in Ashkenazi and Sefardic usage, an expanded *Pesukei deZimra* pairs Psalm 13:1 and 13:6, juxtaposing the cry and the confidence:
+
+> לַמְנַצֵּחַ מִזְמוֹר לְדָוִד…  
+> וַאֲנִי בְּחַסְדְּךָ בָטַחְתִּי…  
+
+This liturgical framing compresses the psalm’s whole movement into a single breath: from “for the leader, a psalm of David” to “I have trusted in Your steadfast love.”
+
+#### Phrases
+
+Several phrases from Psalm 13 have been woven into other prayers as building blocks of Jewish piety.
+
+From verse 4:
+
+> הָאִירָה עֵינַי פֶּן־אִישַׁן הַמָּוֶת׃  
+> “Light up my eyes, lest I sleep the sleep of death.”
+
+The Bedtime Shema (*Keri’at Shema al ha-Mittah*) adapts this plea into a nightly petition:
+
+> וּתְהֵא מִטָּתִי שְׁלֵמָה לְפָנֶיךָ,  
+> וְהָאֵר עֵינַי פֶּן אִישַׁן הַמָּוֶת.  
+
+“May my bed be whole before You, and enlighten my eyes lest I sleep the sleep of death.”
+
+Here the verse is no longer about an immediate mortal danger but about the ordinary vulnerability of sleep. The tradition treats every night as a small rehearsal of death and every morning as a small resurrection, answered by the blessing that follows: “Blessed are You, LORD, who illuminates the entire world with His glory” (הַמֵּאִיר לָעוֹלָם כֻּלּוֹ בִּכְבוֹדוֹ).
+
+From verse 2, the opening cry עַד־אָנָה יְהוָה, “How long, LORD?” appears in a Sefardic *piyyut* for the fast of 20 Sivan, which commemorates historical persecutions:
+
+> סִבְרָה הָרִשְׁעָה לְהָמִיר אֱמוּנַת הָאֵל הַיּוֹצֵר.  
+> עַד אָנָה יְהוָה אֶקְרָא מִמֵּצַר.  
+
+“The wicked one schemed to uproot the faith of God the Creator. How long, LORD, shall I cry from distress?”
+
+By quoting Psalm 13’s “How long?” the poet places later Jewish suffering inside the biblical lament tradition.
+
+Finally, the joyful half of verse 6 is a favorite in Sefardic Simchat Torah *hakafot* (processions with the Torah):
+
+> וַאֲנִי בְּחַסְדְּךָ בָטַחְתִּי;  
+> יָגֵל לִבִּי בִּישׁוּעָתֶךָ;  
+> אָשִׁירָה לַיהוָה כִּי גָמַל עָלָי.  
+
+Sung as the congregation dances with the scrolls, the words “my heart will exult in Your salvation” are heard as rejoicing in the gift of Torah itself. A verse born in crisis is thus repurposed as a banner of joy.
+
+---
+
+### REVISED VERSE COMMENTARY
+
+**Verse 1**
+
+לַמְנַצֵּחַ; מִזְמוֹר לְדָוִד׃  
+
+“For the leader; a psalm of David.”
+
+The brief superscription does a surprising amount of work. לַמְנַצֵּחַ, usually rendered “for the leader” or “for the choirmaster,” points to a liturgical setting. In Chronicles the related verb נצח describes Levites “directing” music in the temple: לְנַצֵּחַ עַל־הַשְּׁמִינִית (“to lead over the low register,” 1 Chr 15:21). So this psalm was earmarked not simply for private devotion but for performance under a musical director.
+
+The phrase מִזְמוֹר לְדָוִד, “a psalm of David,” appears in fifty-seven psalms. It can mean “belonging to David,” “dedicated to David,” or “in the Davidic style.” In any case, it invites us to imagine the “I” of the poem as both personal and representative. Radak suggests that Psalm 13 “was said in the language of exile” (נאמר על לשון הגלות): the Davidic voice gives shape to Israel’s later sufferings. Rashi similarly comments that the lament is “stated concerning all Israel.” The superscription thus frames what follows as paradigmatic—a template for how a faithful person, and a faithful community, may speak to God when abandoned.
+
+It is worth noticing that this heading is shared verbatim with Psalm 21 (לַמְנַצֵּחַ מִזְמוֹר לְדָוִד) and closely with Psalm 4 (לַמְנַצֵּחַ בִּנְגִינוֹת מִזְמוֹר לְדָוִד). Psalm 4 moves from distress to peaceful sleep: “In peace, together, I will lie down and sleep, for You alone, LORD, make me dwell secure” (בְּשָׁלוֹם יַחְדָּו אֶשְׁכְּבָה וְאִישָׁן כִּי־אַתָּה יְהוָה לְבָדָד לָבֶטַח תּוֹשִׁיבֵנִי; Ps 4:9). Psalm 13, by contrast, fears “the sleep of death.” Psalm 21 celebrates a king who “trusts in the LORD” and, “by the steadfast love of the Most High, shall not totter” (וּבְחֶסֶד עֶלְיוֹן בַּל־יִמּוֹט; Ps 21:8), echoing and answering Psalm 13’s fear of tottering (אֶמּוֹט). The shared superscription links these texts as a loose liturgical cluster: different voices in the same repertoire, moving between peril, petition, and praise.
+
+By beginning with this conventional temple heading, Psalm 13 announces that the anguished words that follow are not a lapse of faith but part of the sanctioned language of worship.
+
+---
+
+**Verse 2**
+
+עַד־אָ֣נָה יְהוָה תִּשְׁכָּחֵנִי נֶצַח;  
+עַד־אָ֓נָה ׀ תַּסְתִּיר אֶת־פָּנֶיךָ מִמֶּנִּי׃  
+
+“How long, LORD, will You forget me—forever?  
+How long will You hide Your face from me?”
+
+The fourfold cry עַד־אָנָה (“How long?”) that dominates verses 2–3 is one of the psalm’s signature features. Anaphora—the repetition of a phrase at the start of successive lines—acts here like a repeated blow on the same bruise. The first question escalates with נֶצַח, a word that can mean “perpetuity” or simply “a very long time.” “How long… forever?” borders on contradiction. The psalm catches the way suffering distorts time: what is in fact finite feels endless.
+
+The verb תִּשְׁכָּחֵנִי, “will you forget me,” is theologically provocative. In the Torah and Prophets, it is people who forget God. “Take care lest you forget the LORD your God” (פֶּן־תִּשְׁכַּח אֶת־יְהוָה אֱלֹהֶיךָ; Deut 8:11); “They forgot God their savior” (שָׁכְחוּ אֵל מוֹשִׁיעָם; Ps 106:21). Psalm 13 dares to reverse the charge: the worshiper complains that God has dropped him from memory.
+
+The second line sharpens the complaint. To “hide the face” is a stock metaphor for withdrawing presence and favor. Deuteronomy 31:17 has God say, as judgment on Israel’s disloyalty, “I will hide my face from them” (וְהִסְתַּרְתִּי פָּנַי מֵהֶם). The psalmists pick up that idiom as a felt experience: “Why, LORD, do You reject me, do You hide Your face from me?” (לָמָה יְהוָה תִּזְנַח נַפְשִׁי תַּסְתִּיר פָּנֶיךָ מִמֶּנִּי; Ps 88:15); “You hide Your face, they are terrified” (Ps 104:29). Psalm 13 compresses the same terror into a single line. The “face” (פָּנִים) stands for God’s attentive presence; its hiding signifies not mere distance but a breakdown in relationship.
+
+Traditional commentators heard this verse not only as individual anguish but as a long historical condition. Meiri glosses the “hiddenness” as “the length of this exile.” Rashi hears in the four “How long?” clauses an allusion to the four foreign empires. Such readings are midrashic expansions, but they are true to the experience encoded here: sometimes both individuals and communities feel as though the covenant itself has vanished behind a hidden face.
+
+---
+
+**Verse 3**
+
+עַד־אָ֨נָה אָשִׁית עֵצוֹת בְּנַפְשִׁי;  
+יָגוֹן בִּלְבָבִי יוֹמָם;  
+עַד־אָ֓נָה ׀ יָרוּם אֹיְבִי עָלָי׃  
+
+“How long must I place counsels in my soul,  
+sorrow in my heart by day?  
+How long will my enemy be exalted over me?”
+
+The second pair of “How long?” lines shifts from God’s actions to their human consequences. The image of “placing counsels” (עֵצוֹת) “in my soul” (בְּנַפְשִׁי) portrays an agitated inner life. עֵצָה is “counsel, plan, design.” Elsewhere Moses laments a nation “void of counsel” (אֵין עֵצוֹת; Deut 32:28); here there is counsel in excess: the mind endlessly working through survival strategies in the absence of divine help. Radak paraphrases: “How long must I need to place counsels in my soul—how shall I escape from the trouble I am in?”
+
+The next clause, יָגוֹן בִּלְבָבִי יוֹמָם, maps that turmoil onto the heart. יָגוֹן is deep grief. Jeremiah promises a day when “I will turn their mourning into joy… and I will comfort them, and give them gladness instead of sorrow (יָגוֹן)” (Jer 31:13). Here the sorrow holds the heart captive “by day” (יוֹמָם). It is a bitter twist on the usual pairing “day and night” (a merism for all the time): even the busyness of daylight cannot blunt the ache.
+
+Finally, the fourth “How long?” introduces the enemy: עַד־אָנָה יָרוּם אֹיְבִי עָלָי, “How long will my enemy be exalted over me?” The verb רוּם, “to rise, be high,” often carries connotations of pride or exaltation. The preposition עַל (“over me”) makes the hierarchy explicit. In Psalm 27 the roles are reversed: “Now my head shall be raised above my enemies around me” (וְעַתָּה יָרוּם רֹאשִׁי עַל אֹיְבַי; Ps 27:6). There the psalmist’s elevation is a sign of God’s favor; here the enemy’s elevation implies that God has failed to defend His own.
+
+Rashi’s linkage of the four “How long?” lines to the four empires reaches its climax in this question, which he associates with Edom/Rome. Whether we follow that scheme or not, the literary progression is clear: from God’s absence, to inner collapse, to public humiliation. The psalm refuses to separate these. When God hides His face, psyche and society alike become arenas of suffering.
+
+---
+
+**Verse 4**
+
+הַבִּיטָה עֲנֵנִי יְהוָה אֱלֹהָי;  
+הָאִירָה עֵינַי פֶּן־אִישַׁן הַמָּוֶת׃  
+
+“Look, answer me, LORD my God!  
+Light up my eyes, lest I sleep the sleep of death.”
+
+Verse 4 marks a decisive rhetorical turn. Questions (“How long?”) give way to imperatives. The psalmist no longer circles the problem but addresses God directly with three short commands: “Look” (הַבִּיטָה), “answer” (עֲנֵנִי), “light up” (הָאִירָה). Spoken aloud, the line has a pounding insistence—Hebrew readers will hear the stress pattern in הַבִּיטָה עֲנֵנִי יְהוָה אֱלֹהָי, each imperative falling like a hammer on the table.
+
+הַבִּיטָה (“look!”) answers the earlier “You hide Your face.” The psalmist demands that God reverse His posture: no longer turned away, but looking straight on. The address is intensified by the possessive: not just “LORD” (יְהוָה) but “LORD my God” (יְהוָה אֱלֹהָי). Radak hears here an appeal to both power and covenant: “You are the LORD and the ability is in Your hand to save me; and You are my God and judge my case.”
+
+The request “light up my eyes” (הָאִירָה עֵינַי) draws on a rich biblical idiom. When Jonathan, faint from fasting, tastes honey, “his eyes brightened” (וַתָּאֹרְנָה עֵינָיו; 1 Sam 14:27)—a vivid way of saying his strength returned. Ezra thanks God “for giving us a peg in His holy place, to give light to our eyes” (לְהָאִיר עֵינֵינוּ; Ezra 9:8), meaning renewed hope. Proverbs observes, “The LORD gives light to the eyes of both” rich and poor (יְהוָה מֵאִיר עֵינֵי שְׁנֵיהֶם; Prov 29:13). In all these cases, “light to the eyes” is shorthand for life, clarity, and favor.
+
+The threat clause, פֶּן־אִישַׁן הַמָּוֶת, “lest I sleep the sleep of death,” presses the metaphor toward its edge. Sleep is a common biblical euphemism for death: God warns Babylon, “They shall sleep a perpetual sleep” (וְיָשְׁנוּ שְׁנַת עוֹלָם; Jer 51:39); kings “sleep with their fathers.” Here the unusual construct “sleep of death” fuses the two states. Malbim offers a characteristically psychological gloss: when divine providence is withdrawn, “his spiritual eyes go dark, and his soul sleeps the sleep of spiritual and intellectual death.” Whether we stay with physical mortality or adopt this spiritual reading, the stakes are maximal. Without God’s renewed attention, the psalmist’s next sleep may be his last.
+
+In Jewish practice this line has been internalized in the *Bedtime Shema*, where the worshiper prays, “Enlighten my eyes lest I sleep the sleep of death.” The community thus replays Psalm 13’s emergency petition every night, treating ordinary sleep as a space where only God’s vigilance stands between vulnerability and oblivion.
+
+---
+
+**Verse 5**
+
+פֶּן־יֹאמַר אֹיְבִי יְכָלְתִּיו;  
+צָרַי יָגִילוּ כִּי אֶמּוֹט׃  
+
+“lest my enemy say, ‘I have prevailed over him’;  
+my foes exult when I totter.”
+
+The two “lest” (פֶּן) clauses in verses 4–5 unfold the logic behind the petition. God is urged to act not only to save the speaker’s life but to forestall a theological scandal.
+
+The first fear is verbal: פֶּן־יֹאמַר אֹיְבִי יְכָלְתִּיו, “lest my enemy say, ‘I have prevailed over him.’” The verb יְכָלְתִּיו comes from יכל, “to be able, to prevail.” In form it is “I have been able (against) him,” a boast of effortless superiority. Ibn Ezra notes that it is equivalent to יָכֹלְתִּי לוֹ, “I have prevailed against him.” In the psalmist’s world this boast would not stay at the level of human rivalry. Victory over Israel’s king, or over any faithful Israelite, would be heard as victory over Israel’s God.
+
+The wider lament tradition makes this explicit. Psalm 79:10 pleads, “Why should the nations say, ‘Where is their God?’” (לָמָּה יֹאמְרוּ הַגּוֹיִם אַיֵּה אֱלֹהֵיהֶם). Joel has the priests pray, “Do not make Your heritage a reproach… Why should they say among the peoples, ‘Where is their God?’” (Joel 2:17). God’s “name,” His reputation among the nations, is at stake. Psalm 13 assumes the same: if the enemy can crow over the psalmist’s downfall, they will infer that Israel’s God is powerless or indifferent.
+
+The second line intensifies the picture: צָרַי יָגִילוּ כִּי אֶמּוֹט, “my foes will exult when I totter.” Here the adversaries are called צָרַי, literally “my oppressors” or “those who constrict me,” a more active term than אֹיֵב (“enemy”). Malbim draws a fine distinction: the אֹיֵב is the one who wishes harm; the צַר is the one who inflicts it. Both are present here: the one who boasts, and the many who rejoice.
+
+The verb אֶמּוֹט, “I totter, slip,” comes from מוֹט, a key metaphor in the Psalms. To be “moved” or “shaken” is to lose stability; to “not be moved” is to enjoy God’s protective care. Psalm 21:8 echoes our verse’s vocabulary from the other side: “For the king trusts (בֹּטֵחַ) in the LORD, and through the steadfast love of the Most High he shall not totter (בַּל־יִמּוֹט).” What Psalm 13 fears—“my foes will exult when I totter”—Psalm 21 denies for the trusting king.
+
+The verb for “exult,” יָגִילוּ, will reappear in verse 6: there, “my heart will exult” (יָגֵל לִבִּי). The psalm is carefully shaped so that the emotion anticipated for the enemies becomes, in the end, the psalmist’s own. The structure underscores the psalm’s theological claim: the apparent victory of the wicked is temporary; in the long run, joy belongs with those who trust in God’s חֶסֶד.
+
+---
+
+**Verse 6**
+
+וַאֲנִי בְּחַסְדְּךָ בָטַחְתִּי;  
+יָגֵל לִבִּי בִּישׁוּעָתֶךָ;  
+אָשִׁירָה לַיהוָה כִּי גָמַל עָלָי׃  
+
+“But as for me, in Your steadfast love I have trusted;  
+my heart will exult in Your deliverance.  
+I will sing to the LORD, for He has dealt bountifully with me.”
+
+These lines are among the most concentrated expressions of biblical faith. The opening וַאֲנִי (“But as for me”) marks a strong contrast with what went before. The grammar is simple; the decision it signals is not.
+
+בָטַחְתִּי, “I have trusted,” is a perfect verb, looking back on a completed action. Yet in Hebrew the perfect often describes a settled present stance. The psalmist is not reporting a feeling that has suddenly welled up, but reaffirming a decision that has already been made and is still operative: “Trusting You—that is what I do.”
+
+The object of that trust is בְּחַסְדְּךָ, “in Your חֶסֶד.” As the lexicons attest, חֶסֶד is more than “kindness.” It is the durable, pledged loyalty that binds God to His people: “keeping covenant and steadfast love” (שֹׁמֵר הַבְּרִית וְהַחֶסֶד; Deut 7:9). A close cousin to our verse is Psalm 52:10: “But I am like a thriving olive tree in God’s house; I trust in the steadfast love of God forever and ever” (בָּטַחְתִּי בְּחֶסֶד־אֱלֹהִים עוֹלָם וָעֶד). In both places, trust is anchored not in circumstances but in God’s character.
+
+The next clause moves into the future: יָגֵל לִבִּי בִּישׁוּעָתֶךָ, “my heart will exult in Your deliverance.” The verb גיל denotes intense joy, often over unexpected good. It is frequently paired with שָׂמַח (“rejoice”)—“Let the heavens be glad, and let the earth rejoice” (יִשְׂמְחוּ… וְתָגֵל הָאָרֶץ; Ps 96:11)—but here it stands alone, focused on the heart. As noted above, the same root described the enemies’ anticipated glee (יָגִילוּ) in verse 5. The psalm thus folds its structure back on itself: the joy that once seemed reserved for the foe is reclaimed for the inner life of the believer.
+
+Finally comes the vow of praise and its ground: אָשִׁירָה לַיהוָה כִּי גָמַל עָלָי, “I will sing to the LORD, for He has dealt bountifully with me.” The cohortative אָשִׁירָה expresses resolved intention: “I will sing”—not yet, but when the deliverance comes. The verb גָמַל (“deal fully/bountifully with”) ties this anticipated future to remembered past. Elsewhere this root appears in laments and thanksgivings:
+
+- “He has not dealt with us according to our sins… nor repaid us according to our iniquities” (וְלֹא כַעֲוֹנֹתֵינוּ גָּמַל עָלֵינוּ; Ps 103:10).  
+- “Return, my soul, to your rest, for the LORD has dealt bountifully with you” (כִּי־יְהוָה גָמַל עָלָיִכִי; Ps 116:7).  
+- “Bring my soul out of prison… for You will deal bountifully with me” (כִּי תִגְמֹל עָלָי; Ps 142:8).
+
+Psalm 13 compresses the same movement. The speaker surveys a history in which God has “dealt fully” with him for good, and on that basis chooses to trust, to anticipate joy, and to commit in advance to praise. Crucially, all this happens before any change is narrated. There is no report of healing, no declaration that the enemy has fallen. The psalm ends with a promise, not a resolution.
+
+This ending has made Psalm 13 a touchstone for later reflections on what Rabbi Joseph Soloveitchik called “the lonely man of faith.” Rabbi Jonathan Sacks, meditating on biblical figures who felt abandoned, quotes our psalm’s opening and notes how often the Psalms “explore this territory.” Yet Psalm 13 does more than explore; it models a way through. It sanctions the anguished “How long?” It teaches the desperate imperative, “Look, answer me… light up my eyes.” And it shows that, even when the face of God remains hidden, a person—or a people—can still say, “As for me, I have trusted in Your steadfast love.”

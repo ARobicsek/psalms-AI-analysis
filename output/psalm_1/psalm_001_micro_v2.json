@@ -3,123 +3,100 @@
   "verse_commentaries": [
     {
       "verse_number": 1,
-      "commentary": "Triple negative structure (לֹא repeated 3x) creates emphatic avoidance pattern. Triadic verb progression (הָלַךְ/עָמָד/יָשָׁב - walk/stand/sit) suggests intensifying entanglement—from motion through pause to settlement. Three wicked categories (רְשָׁעִים/חַטָּאִים/לֵצִים) paired with three social spaces (עֲצַת/דֶּרֶךְ/מוֹשַׁב - counsel/path/seat). The blessed person is defined by what he does NOT do—negative space establishes righteousness.",
+      "commentary": "Righteousness is defined initially through a triad of negations, creating a 'negative space' of virtue. The intensifying verbs of posture (walk/stand/sit) and types of adversaries (wicked/sinners/scoffers) form a 'staircase parallelism' that vividly portrays a progression from casual association to deep entanglement. The threefold anaphora of 'not' (לֹא) creates a drumbeat-like emphasis on avoidance.",
       "lexical_insights": [
         "אַשְׁרֵי",
-        "לֵצִים",
-        "מוֹשַׁב"
+        "רְשָׁעִים",
+        "חַטָּאִים",
+        "לֵצִים"
       ],
       "figurative_analysis": [
-        "walk/stand/sit as metaphor for progressive social involvement",
-        "three paths/spaces as ethical zones"
+        "Social interaction as spatial movement (walking/standing/sitting)"
       ],
-      "thesis_connection": "Establishes negative definition foundational to thesis—righteousness begins with avoidance/separation before positive engagement",
+      "thesis_connection": "This establishes the 'avoidance' half of the psalm's ethical dualism, defining the righteous way by what it is not.",
       "phonetic_transcription": "'ash-rēy-hā-**'IY**-sh 'a-**SHER**  **LŌ'** hā-**LAKH** ba-ʿa-**TSATH** rə-shā-**ʿIY**-m ū-və-**DHE**-rekh ḥat-tā-'iy-**M** **LŌ'** ʿā-**MĀDH** ū-və-mō-**SHAV** lē-**TSIY**-m **LŌ'** yā-**SHĀV**"
     },
     {
       "verse_number": 2,
-      "commentary": "Sharp pivot with כִּי אִם ('but rather') from negative to positive definition. חֵפֶץ (delight) suggests affective/emotional engagement, not mere duty. יֶהְגֶּה (meditate) is intriguing—elsewhere means 'mutter/growl/moan' (Isa 31:4, Ps 2:1), suggesting vocalized, embodied practice. 'Day and night' (יוֹמָם וָלָיְלָה) merismus indicates totality—continuous engagement. Synthetic parallelism: internal delight → external practice.",
+      "commentary": "The verse pivots sharply from negative to positive definition with 'but rather' (כִּי אִם). It links an internal disposition ('delight') with an external, continuous action ('meditate'). The merismus 'day and night' emphasizes totality, suggesting a constant orientation, not a scheduled activity. The meditation verb 'יֶהְגֶּה' suggests a low, continuous sound, like murmuring or muttering.",
       "lexical_insights": [
-        "חֵפֶץ",
-        "יֶהְגֶּה",
-        "תּוֹרָה"
+        "חֶפְצוֹ",
+        "יֶהְגֶּה"
       ],
       "figurative_analysis": [
-        "Torah as object of delight (usually reserved for desirable things)",
-        "meditation as continuous temporal activity"
+        "Delight as a form of embodied, sensual engagement with text"
       ],
-      "thesis_connection": "Establishes positive alternative to avoidance—Torah meditation as continuous orientation, both affective and cognitive, supporting thesis on text-centered piety",
+      "thesis_connection": "This presents the positive 'alternative' to v.1, establishing Torah engagement as the definitive 'way' of the righteous.",
       "phonetic_transcription": "**KIY** 'im-bə-thō-**RATH** yə-hō-**WĀH** ḥef-**TSŌ** ū-**VƏ**-thō-rā-thō yeh-**GEH** yō-**MĀM** wā-**LĀ**-yə-lāh"
     },
     {
       "verse_number": 3,
-      "commentary": "Extended simile with rich agricultural imagery. שָׁתוּל (planted) is passive participle—the righteous person is positioned by external agent (divine?), not self-made. Tree is located עַל־פַּלְגֵי־מָיִם (beside streams/channels of water)—plural suggests abundance. Four positive assertions about tree: yields fruit בְּעִתּוֹ (in its season—timing/appropriateness), foliage never fades (לֹא־יִבּוֹל), and comprehensive success (וְכֹל אֲשֶׁר־יַעֲשֶׂה יַצְלִיחַ). This verse is elaborate, lush, detailed—creating aesthetic experience of flourishing.",
+      "commentary": "The consequence of Torah meditation is depicted through an elaborate emblematic simile of a flourishing tree. The passive participle 'planted' (שָׁתוּל) suggests divine agency in the righteous person's stability and source of nourishment. The details are comprehensive: constant nourishment, timely fruit, perennial vitality, and universal success in all endeavors.",
       "lexical_insights": [
         "שָׁתוּל",
-        "פַּלְגֵי",
+        "פַלְגֵי־מָיִם",
         "יִבּוֹל",
         "יַצְלִיחַ"
       ],
       "figurative_analysis": [
-        "tree as righteous person",
-        "water as sustaining force (Torah?)",
-        "fruitfulness as consequence of positioning"
+        "Righteousness as a tree characterized by rootedness, productivity, and vitality."
       ],
-      "thesis_connection": "Provides positive consequence imagery supporting thesis on organic, fruitful righteousness; passive planting suggests divine agency underlying human flourishing",
+      "thesis_connection": "This provides the organic, ontological imagery for the 'way of the righteous,' showing it leads to substantial, fruitful being, not just moral correctness.",
       "phonetic_transcription": "wə-hā-**YĀH** kə-**ʿĒTS** shā-**THŪL** ʿal-pal-ghēy-**MĀ**-yim 'a-**SHER** pir-**YŌ**  yi-**TĒN** bə-ʿi-**TŌ** wə-ʿā-**LĒ**-hū lō'-yi-**BŌL** wə-**KHŌL** 'a-sher-ya-ʿa-**SEH** yats-**LI**-yaḥ"
     },
     {
       "verse_number": 4,
-      "commentary": "Dramatic shift with לֹא־כֵן (not so)—sharp contrast marker. Description is stunningly brief compared to vv. 1-3: single terse simile (כַּמֹּץ - like chaff). The wicked lack elaborate description—poetic form enacts message of insubstantiality. Chaff imagery: agricultural waste, weightless, blown away (תִּדְּפֶנּוּ רוּחַ). No rootedness, no permanence, no fruitfulness—defined entirely by absence and dispersal. Structural asymmetry is striking: 3 verses for righteous, half-verse for wicked core image.",
+      "commentary": "The antithesis to the elaborate tree image is startlingly brief and stark: 'Not so the wicked.' The single simile of chaff is spare, performing its own message of insubstantiality. Unlike the rooted tree, chaff is rootless, weightless, and utterly subject to external forces, signifying a lack of agency and essence.",
       "lexical_insights": [
-        "כֵן",
         "מֹץ",
-        "תִּדְּפֶנּוּ"
+        "תִדְּפֶנּוּ"
       ],
       "figurative_analysis": [
-        "chaff as waste/weightlessness",
-        "wind as dispersing force",
-        "contrast: rooted/planted vs blown away"
+        "The wicked as chaff: the worthless, inedible husk separated from grain, signifying what is discarded and transient."
       ],
-      "thesis_connection": "Provides antithetical imagery to tree, supporting thesis on weightlessness/insubstantiality of wicked; structural asymmetry itself communicates theological message",
+      "thesis_connection": "This is the central, visceral image for the 'way of the wicked,' establishing its defining quality as insubstantiality and ultimate dissolution.",
       "phonetic_transcription": "lō'-**KHĒN** hā-rə-shā-**ʿIY**-m **KIY** 'im-kam-**MŌTS** 'a-sher-tid-**FEN**-nū **RŪ**-aḥ"
     },
     {
       "verse_number": 5,
-      "commentary": "Consequence section beginning with עַל־כֵן (therefore). יָקֻמוּ (stand/arise) in judicial/forensic context—unable to 'stand' in judgment. בַּמִּשְׁפָּט could be legal proceeding or eschatological judgment. Parallel statement: sinners excluded from עֲדַת צַדִּיקִים (assembly of righteous)—cultic/liturgical language? Two exclusions: from judgment (vertical—divine court?) and from assembly (horizontal—community). Categories shift: רְשָׁעִים/חַטָּאִים echo v. 1 but לֵצִים absent.",
+      "commentary": "This verse moves from metaphor to consequence, explaining the fate of the chaff-like wicked. The key verb is 'stand' (יָקֻמוּ), used in legal/eschatological contexts, directly contrasting the righteous person who 'walks not in the counsel of the wicked' (v. 1). The wicked will be excluded from both divine judgment and the community of the righteous.",
       "lexical_insights": [
         "יָקֻמוּ",
         "מִשְׁפָּט",
-        "עֲדַת"
+        "עֲדַת צַדִּיקִים"
       ],
       "figurative_analysis": [
-        "standing as judicial metaphor",
-        "assembly as community belonging"
+        "Judgment and community assembly as tests of legitimacy and belonging."
       ],
-      "thesis_connection": "Extends consequences beyond earthly flourishing to judicial/eschatological realm, supporting thesis on ontological divide between ways",
+      "thesis_connection": "This describes the concrete exclusion and failure that defines the wicked way, providing the social and juridical corollary to the chaff metaphor.",
       "phonetic_transcription": "ʿal-**KĒN**  lō'-yā-**QU**-mū rə-shā-ʿiy-**M** bam-mish-**PĀT** wə-ḥat-tā-**'IY**-m ba-ʿa-**DHATH** tsa-diy-**QIY**-m"
     },
     {
       "verse_number": 6,
-      "commentary": "Crucial theological shift—focus moves from human behavior to divine knowledge. כִּי introduces explanatory clause grounding entire psalm. יוֹדֵעַ (knows) is key: not merely cognitive awareness but covenantal/relational recognition (cf. Amos 3:2 'you only have I known'). Subject is YHWH—first explicit divine name in psalm. Inclusio with דֶּרֶךְ from v. 1, but now doubled: דֶּרֶךְ צַדִּיקִים vs דֶּרֶךְ רְשָׁעִים. Asymmetry again: righteous way is 'known' by YHWH (active divine engagement), wicked way תֹּאבֵד (perishes)—impersonal, passive dissolution. The wicked way doesn't just fail morally—it ceases to exist ontologically.",
+      "commentary": "The psalm's conclusion shifts from human action and its consequences to divine epistemology as the ultimate ground of reality. The key term is 'knows' (יוֹדֵעַ), which here implies more than awareness—it suggests recognition, relationship, and constitutive acknowledgment. The 'way' (דֶּרֶךְ) from v. 1 forms an inclusio, framing the psalm. The fate of the wicked is not just punishment but 'perishing' (תֹּאבֵד)—a ceasing to be.",
       "lexical_insights": [
         "יוֹדֵעַ",
-        "תֹּאבֵד",
-        "דֶּרֶךְ"
+        "תֹּאבֵד"
       ],
       "figurative_analysis": [
-        "knowing as covenantal relationship",
-        "perishing as ontological dissolution",
-        "way as life-path"
+        "Divine knowledge as an active, creative force that sustains reality."
       ],
-      "thesis_connection": "Provides theological foundation for entire binary structure—YHWH's knowledge constitutes righteous way's reality while wicked way lacks this grounding and dissolves, supporting thesis on divine epistemology as ontological ground",
+      "thesis_connection": "This verse provides the ultimate theological foundation for the entire psalm's binary, rooting it not in human morality but in the very structure of divine knowledge and reality.",
       "phonetic_transcription": "kiy-yō-**DHĒ**-aʿ yə-hō-**WĀH** **DE**-rekh tsa-diy-**QIY**-m wə-**DHE**-rekh rə-shā-**ʿIY**-m tō'-**VĒDH** **F**"
     }
   ],
   "thematic_threads": [
-    "Inclusio structure with דֶּרֶךְ (way) framing psalm (v. 1, v. 6 twice)—creates circular theological argument",
-    "Structural asymmetry performing message: righteous get 3 verses with elaborate imagery, wicked get sparse treatment—aesthetic experience of substantiality vs insubstantiality",
-    "Progressive intensification patterns: v. 1 triadic verbs (walk→stand→sit), triadic wicked categories, spatial progression in avoidance",
-    "Negative-to-positive movement: psalm begins with what NOT to do before establishing positive alternative—pedagogical strategy",
-    "Shift from human agency (vv. 1-5) to divine agency/knowledge (v. 6)—theological grounding of ethical instruction",
-    "Tree vs chaff antithesis: rooted/planted/watered/fruitful vs weightless/dry/blown/dispersed—organic vs inorganic, substance vs absence",
-    "Temporal markers: 'day and night' (v. 2) continuous meditation, 'in season' (v. 3) appropriate timing—temporality of righteousness",
-    "Passive constructions for righteous (שָׁתוּל planted, יוֹדֵעַ known by YHWH) vs active dispersal for wicked—agency patterns"
+    "The entire psalm operates on a principle of structural asymmetry: the righteous (vv. 1-3) receive a detailed, lush, 3-verse description, while the wicked (vv. 4-6) are depicted with sparse, abrupt, shorter lines. The poem's form enacts its message about substance vs. emptiness.",
+    "A triadic structure governs the description of the wicked in v. 1 (counsel, path, company) and is mirrored in the three categories of people (wicked, sinners, scoffers), suggesting a deep-seated literary and conceptual pattern.",
+    "The psalm uses a powerful chiastic structure: negative behavior (v. 1) -> positive behavior (v. 2) -> positive simile (v. 3) || negative simile (v. 4) -> negative consequence (v. 5) -> divine resolution (v. 6)."
   ],
   "interesting_questions": [
-    "What is the precise semantic range and function of יֶהְגֶּה (meditate/mutter) in v. 2—does it indicate vocalized recitation, embodied murmuring, or silent contemplation, and how does this compare with its usage in Josh 1:8 and Ps 2:1?",
-    "Why does the triadic progression in v. 1 use specifically הָלַךְ/עָמָד/יָשָׁב (walk/stand/sit)—are these technical terms for levels of social commitment, spatial metaphors for proximity to wickedness, or synonymous variations for poetic effect?",
-    "What is the theological significance of שָׁתוּל (planted) being a passive participle in v. 3—does this suggest divine agency in positioning the righteous, and if so, how does this affect interpretation of human moral responsibility?",
-    "How do the three wicked categories in v. 1 (רְשָׁעִים/חַטָּאִים/לֵצִים - wicked/sinners/scoffers) relate to each other—are they progressive stages of moral deterioration, distinct types of wickedness, or synonymous terms, and what is the specific nuance of לֵצִים?",
-    "What does יוֹדֵעַ (knows) connote in v. 6—is this epistemological awareness, covenantal/relational recognition (as in Amos 3:2; Gen 18:19), or constitutive ontological knowing that brings reality into being?",
-    "What is בַּמִּשְׁפָּט (the judgment) in v. 5—earthly legal proceeding, divine judgment scene, eschatological event, or all three, and does יָקֻמוּ (stand/arise) carry resurrection imagery or purely judicial connotations?",
-    "What is the agricultural and cultural background of מֹץ (chaff) imagery in v. 4, and how does this relate to threshing floor scenes as judgment contexts elsewhere in Scripture (Ruth 3; 2 Sam 24; prophetic literature)?",
-    "Why is the description of the wicked so dramatically brief compared to the righteous (structural asymmetry)—is this aesthetic choice, rhetorical strategy, or theological statement about substance vs insubstantiality?",
-    "What is עֲדַת צַדִּיקִים (assembly of the righteous) in v. 5—liturgical/cultic gathering, eschatological community, covenant assembly, or metaphor for blessed state, and how does עֵדָה function elsewhere in Psalms?",
-    "How does the passive תֹּאבֵד (perishes) in v. 6 differ from active divine judgment language—does the wicked way self-destruct through lack of divine knowing, or is this euphemistic language for divine destruction?",
-    "What is the function of כִּי in vv. 2 and 6—causal (because), emphatic (indeed), adversative (but), or explanatory, and how does this affect the logical and theological flow of the psalm?",
-    "Does פַּלְגֵי־מָיִם (streams/channels of water) in v. 3 suggest natural watercourses or engineered irrigation channels, and does this distinction matter for understanding divine vs human agency in flourishing?",
-    "How does Psalm 1's use of הָגָה (meditate) in v. 2 for Torah study contrast with Psalm 2:1's use of the same verb for nations 'plotting'—is this intentional wordplay establishing contrasting meditations?"
+    "What is the precise semantic relationship between the three categories of 'wicked' (רְשָׁעִים, חַטָּאִים, לֵצִים) in verse 1? Do they represent distinct types of sinners or a progressive intensification of wickedness?",
+    "How should the meditation verb 'יֶהְגֶּה' in verse 2 be understood—is it silent, internal contemplation or audible, low murmuring? What does this imply about the nature of Torah study in the post-exilic period?",
+    "Is the passive participle 'planted' (שָׁתוּל) in verse 3 theologically significant? Does it undermine a 'works-based' reading of righteousness by suggesting divine agency, and if so, who is the implied planter?",
+    "What is the precise function of divine 'knowing' (יוֹדֵעַ) in verse 6? Is it cognitive awareness, covenantal relationship, or an ontological act where God's knowledge constitutes reality?",
+    "How does the stark structural asymmetry between the description of the righteous (3 verses, lush imagery) and the wicked (3 verses, sparse imagery) function rhetorically? Is it merely a poetic device, or does it perform the psalm's central theological claim about substance vs. emptiness?",
+    "What is the nature of 'the judgment' (הַמִּשְׁפָּט) and the 'assembly of the righteous' (עֲדַת צַדִּיקִים) in verse 5? Are these references to present cultic/legal realities or future eschatological hope?"
   ],
-  "synthesis_notes": "LEXICON: Focus on יֶהְגֶּה (meditate/mutter), יוֹדֵעַ (know) with covenantal semantics, שָׁתוּל (planted) passive forms, יָקֻמוּ (stand/arise) in judicial contexts, לֵצִים (scoffers)\nCONCORDANCE: Track דֶּרֶךְ (way) inclusio and 'two ways' theology across Psalms and Deuteronomy, הָגָה usage patterns, עֲדַת (assembly) in cultic vs eschatological contexts\nFIGURATIVE: All verses with tree imagery (v. 3), chaff imagery (v. 4), agricultural metaphors, water symbolism\nCOMMENTARY: v. 1 triadic progression and wicked categories, v. 2 meditation practice, v. 3 passive planting, v. 5 judgment and assembly language, v. 6 divine knowing as ontological ground\nSYNTACTIC: Examine כִּי functions in vv. 2 and 6, passive/active voice patterns, negative constructions (triple לֹא in v. 1), structural asymmetry as theological statement"
+  "synthesis_notes": "LEXICON: Focus on the semantic ranges of הגה, שתול, and ידע. Define the nuanced differences between רשע, חוטא, and ליץ.\nCONCORDANCE: Track 'Two Ways' language (דרך), tree imagery in Wisdom literature, and the use of 'ashrei' in beatitudes.\nCOMMENTARY: Investigate the redactional function of Psalm 1 as an introduction to the Psalter, particularly its relationship with Psalm 2.\nTHEOLOGY: Explore the concept of divine knowledge (יְדִיעָה) in the Hebrew Bible, distinguishing cognitive, covenantal, and ontological senses.\nAGRICULTURE: Research the background of chaff (מֹץ) production and threshing floor imagery as a metaphor for judgment."
 }

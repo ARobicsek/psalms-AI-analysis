@@ -1,14 +1,23 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-07 (Session 176)
+**Last Updated**: 2025-12-07 (Session 179)
 
-## Current Focus: Phrase Matching Refinement
+## Current Focus: Testing Figurative Language Search Fix
 
-### Issue: Phrase Searches Not Finding Verses with Prefixes/Suffixes
+### Issue: Vehicle Search Returns False Positives (FIXED ✅)
+When searching for "Vehicle contains: tent", the system was returning irrelevant results like "weary person metaphor" and "herd of bulls" instead of actual tent-related entries.
 
-The Psalm 15 pipeline wasn't finding matches when phrases had prefixes/suffixes (e.g., "דבר אמת בלב" didn't match Psalm 15:2 containing "וְדֹבֵ֥ר אֱ֝מֶ֗ת בִּלְבָבֽוֹ׃"). This has been fixed.
+**Root Cause**:
+- Micro analyst provided "live" as variant for "tent"
+- Librarian generated "living" as morphological variant
+- "Living" matched unrelated vehicle entries
 
-### Status: 🟢 RESOLVED - Phrase Matching Working Correctly
+**Solution Implemented (Session 179)**:
+- Removed morphological variant generation for vehicle searches
+- Added exact match prioritization in research assembler
+- Vehicle concepts now treated as hierarchical tags, not inflected words
+
+### Status: ✅ FIXED - Ready for testing
 
 ## Phase 1: Text Extraction (COMPLETE ✅)
 - [x] Extract all Tanakh text from Sefaria
@@ -47,6 +56,75 @@ The Psalm 15 pipeline wasn't finding matches when phrases had prefixes/suffixes 
 - [x] Word document generation
 
 ## Recent Accomplishments
+
+### Session 179 (2025-12-07): Figurative Vehicle Search Fix Implementation
+
+#### Completed:
+1. **Fixed Vehicle Search - Removed Morphological Variants**:
+   - Modified `src/agents/figurative_librarian.py` (lines 475-530)
+   - Removed `_get_morphological_variants()` calls for both vehicle_search_terms and vehicle_contains
+   - Vehicle concepts now treated as hierarchical tags, not inflected words
+   - Only exact term and simple plural are searched (e.g., "tent", "tents")
+   - Eliminates false positives from bad variants (e.g., "living" from "live")
+
+2. **Added Exact Match Prioritization**:
+   - Modified `src/agents/research_assembler.py` (lines 540-565)
+   - Added conditional prioritization logic to `_filter_figurative_bundle()`
+   - Only activates when vehicle_contains is set AND results exceed max_results
+   - Prioritizes instances where vehicle field exactly matches search term
+   - Ensures "tent" exact matches appear before "shepherd's tent" or "tents"
+
+3. **Expected Improvements**:
+   - Accuracy: No more "living beings" when searching for "tent"
+   - Precision: Only relevant vehicle matches returned
+   - Prioritization: Best matches first when results exceed limit
+
+### Session 178 (2025-12-07): Figurative Language Search Bug Investigation
+
+#### Completed:
+1. **Discovered False Positive Issue**: "Vehicle contains: tent" returning unrelated results
+2. **Root Cause Analysis**:
+   - Micro analyst's bad variant "live" → librarian's "living" variant
+   - Matched "living" in ["...living creatures"] and ["...living beings"]
+3. **Database Verification**: Confirmed 20 legitimate tent entries exist
+4. **Solution Design**: Remove morphological variants for vehicle searches
+5. **Implementation Plan Created**: `C:\Users\ariro\.claude\plans\deep-sparking-hartmanis.md`
+
+### Session 176 (2025-12-07): Phrase Substring Matching Fix
+
+#### Completed:
+1. **Identified Root Cause**: Phrase searches using exact word matching
+   - "דבר אמת בלב" couldn't match "וְדֹבֵ֥ר אֱ֝מֶ֗ת בִּלְבָבֽוֹ׃"
+   - Exact matching prevented matches with prefixes/suffixes
+   - Psalm 15:2 not found for its own phrase
+
+2. **Implemented Phrase Substring Matching**:
+   - Modified `src/concordance/search.py` - `_verse_contains_phrase` method
+   - **Key Change**: Phrases use substring matching, single words use exact matching
+   - Allows "דבר" to match in "ודובר" and "בלב" to match in "בלבבו"
+   - Words must appear in order within the verse
+
+3. **Enhanced Exact Phrase Preservation**:
+   - Modified `src/agents/micro_analyst.py` - `_override_llm_base_forms` method
+   - Match queries with stored phrases using substring matching
+   - Add both exact phrase AND variations to search list
+   - Ensures original verse phrases are always searched
+
+4. **Fixed Supporting Infrastructure**:
+   - Added missing `get_available_books` method to FigurativeLibrarian
+   - Added graceful handling for missing figurative_language table
+   - Created test scripts to verify the fix
+
+### Session 177 (2025-12-07): Figurative Language Search Bug Investigation
+
+#### Completed:
+1. **Discovered False Positive Issue**: "Vehicle contains: tent" returning unrelated results
+2. **Root Cause Analysis**:
+   - Micro analyst's bad variant "live" → librarian's "living" variant
+   - Matched "living" in ["...living creatures"] and ["...living beings"]
+3. **Database Verification**: Confirmed 20 legitimate tent entries exist
+4. **Solution Design**: Remove morphological variants for vehicle searches
+5. **Implementation Plan Created**: `C:\Users\ariro\.claude\plans\deep-sparking-hartmanis.md`
 
 ### Session 176 (2025-12-07): Phrase Substring Matching Fix
 
@@ -90,8 +168,13 @@ The Psalm 15 pipeline wasn't finding matches when phrases had prefixes/suffixes 
 - Psalm 97
 - Psalm 145
 
-### In Progress (Phase 3-4):
-- Psalm 15: **Performance and phrase matching issues resolved, pipeline complete**
+### Completed (All Phases):
+- Psalms 1-14
+- Psalm 15: **Pipeline complete, revealed figurative search bug**
+- Psalm 20
+- Psalm 8
+- Psalm 97
+- Psalm 145
 
 ### Next Up:
 - Psalms 16-21
@@ -130,25 +213,30 @@ The Psalm 15 pipeline wasn't finding matches when phrases had prefixes/suffixes 
 
 ## Files Modified Recently
 
-### `src/concordance/search.py`
+### `src/agents/figurative_librarian.py` (Session 179)
+- Lines 475-511: Removed morphological variants from vehicle_search_terms
+- Lines 509-530: Removed morphological variants from vehicle_contains
+- Vehicle concepts now treated as hierarchical tags, not inflected words
+- Only exact term and simple plural searched
+
+### `src/agents/research_assembler.py` (Session 179)
+- Lines 540-565: Added exact vehicle match prioritization
+- Conditional logic only activates when vehicle_contains set AND results exceed max
+- Prioritizes exact matches before compound or plural matches
+
+### `src/concordance/search.py` (Session 176)
 - Lines 244-269: Updated `_verse_contains_phrase` method
 - Implemented substring matching for phrases
 - Preserved exact matching for single words
 
-### `src/agents/micro_analyst.py`
+### `src/agents/micro_analyst.py` (Session 176)
 - Lines 1071-1159: Enhanced `_override_llm_base_forms` with substring matching
 - Lines 984-1070: Phrase extraction helper methods
 - Lines 720-726: Debug logging for LLM output
 
-### `src/agents/concordance_librarian.py`
-- Lines 613-625: Prevent phrase variations (Session 175)
-- Lines 627-656: Handle alternate queries efficiently (Session 175)
-
-### `src/agents/figurative_librarian.py`
-- Added `get_available_books` method
-
-### `src/agents/scholar_researcher.py`
-- Added graceful handling for missing figurative table
+### `src/agents/concordance_librarian.py` (Session 175)
+- Lines 613-625: Prevent phrase variations
+- Lines 627-656: Handle alternate queries efficiently
 
 ## Database Status
 - Location: `database/tanakh.db`

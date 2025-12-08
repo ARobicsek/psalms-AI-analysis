@@ -1,0 +1,163 @@
+{
+  "psalm": 13,
+  "date": "2025-01-03",
+  "implementation_status": "BEFORE enhancement",
+  "total_figurative_instances": 112,
+  "figurative_requests": [
+    {
+      "request_id": 1,
+      "verse": null,
+      "reason": "Hidden face as covenant curse reversal of Aaronic blessing - vivid and theologically central",
+      "vehicle": "hidden face",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "hidden face",
+        "hide face",
+        "hides face",
+        "hiding face",
+        "conceal face",
+        "conceals face",
+        "concealing face"
+      ],
+      "analysis": {
+        "strengths": [
+          "Good compound phrase variations",
+          "Uses both 'hide' and 'conceal' variants"
+        ],
+        "weaknesses": [
+          "Missing conceptual cluster terms: 'face', 'countenance', 'presence'",
+          "No opposites: 'show face', 'reveal face', 'turn face'",
+          "No 'turn away', 'avert face' variations",
+          "Missing 'light of face' (favor) concept"
+        ]
+      }
+    },
+    {
+      "request_id": 2,
+      "verse": null,
+      "reason": "Spatial metaphor of enemy 'lifted up' (ירום) over psalmist - dominance imagery",
+      "vehicle": "lifted up",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "lifted up",
+        "lift up",
+        "lifts up",
+        "lifting up",
+        "exalt",
+        "exalts",
+        "exalted",
+        "exalting",
+        "raise",
+        "raises",
+        "raised",
+        "raising"
+      ],
+      "analysis": {
+        "strengths": [
+          "Excellent morphological coverage",
+          "Both 'lift' and 'raise' variants included",
+          "'Exalt' variants capture divine dimension"
+        ],
+        "weaknesses": [
+          "No conceptual cluster: 'tower', 'ascend', 'mountain', 'high place'",
+          "Missing opposites: 'cast down', 'humble', 'abased', 'bring low'",
+          "No 'dominance', 'power', 'authority' connections"
+        ]
+      }
+    },
+    {
+      "request_id": 3,
+      "verse": 4,
+      "reason": "Eye illumination as life restoration - compound metaphor combining body part and light",
+      "vehicle": "eye",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "eye",
+        "eyes",
+        "sight",
+        "see",
+        "seeing",
+        "vision",
+        "enlighten",
+        "illuminate",
+        "light"
+      ],
+      "analysis": {
+        "strengths": [
+          "Good mix of body part and light terms",
+          "Includes both 'see' and 'illuminate' variants"
+        ],
+        "weaknesses": [
+          "This request was generated but may have been limited",
+          "Missing compound expressions: 'bright eyes', 'light of eyes'",
+          "No 'restore', 'revive', 'renewal' connections",
+          "No opposites: 'dim eyes', 'darkness', 'blindness'"
+        ]
+      }
+    },
+    {
+      "request_id": 4,
+      "verse": null,
+      "reason": "Sleep the sleep of death - common biblical euphemism",
+      "vehicle": "sleep",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "sleep",
+        "sleeping",
+        "death",
+        "die",
+        "dying",
+        "dead",
+        "perish",
+        "perishing",
+        "destroy",
+        "destroying"
+      ],
+      "analysis": {
+        "strengths": [
+          "Includes both sleep and death terminology",
+          "'Perish' and 'destroy' capture finality"
+        ],
+        "weaknesses": [
+          "Missing euphemistic patterns: 'sleep', 'rest', 'slumber'",
+          "No 'Sheol', 'grave', 'pit', 'abyss'",
+          "Missing conceptual cluster for death states",
+          "No life opposites: 'live', 'alive', 'arise', 'wake'"
+        ]
+      }
+    }
+  ],
+  "critical_gaps": [
+    {
+      "verse": 1,
+      "gap": "Temporal metaphor 'How long?' not searched",
+      "missed_concepts": ["time", "delay", "wait", "patience", "endure"],
+      "impact": "Misses extended patience/lament metaphors"
+    },
+    {
+      "verse": 2,
+      "gap": "Counsel/planning metaphors not captured",
+      "missed_concepts": ["counsel", "plan", "device", "scheme", "wisdom"],
+      "impact": "Limited divine-human wisdom contrast"
+    },
+    {
+      "verse": 3,
+      "gap": "Emotional state metaphors underdeveloped",
+      "missed_concepts": ["sorrow", "grief", "rejoicing", "heart", "soul"],
+      "impact": "Missing affective imagery"
+    }
+  ],
+  "missing_body_parts": {
+    "heart": "Central in lament psalms (192 expressions in database)",
+    "soul": "Life essence imagery (192 expressions in database)",
+    "mouth": "Supplication/prayer imagery (123 expressions)",
+    "hands": "Divine action metaphors (156 expressions)"
+  },
+  "expected_improvements": {
+    "face_cluster": "+60-80 matches with countenance, presence, light of face",
+    "height_cluster": "+40-60 matches with depths, abyss, opposites",
+    "light_darkness": "+50-70 matches connecting eye illumination to broader imagery",
+    "body_parts": "+100+ potential matches across heart, soul, mouth imagery",
+    "overall_increase": "Expected 40-70% improvement in total matches"
+  }
+}

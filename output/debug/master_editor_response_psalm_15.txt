@@ -1,0 +1,293 @@
+### EDITORIAL ASSESSMENT
+
+The existing introduction and commentary have a strong backbone. They correctly see Psalm 15 as an “entrance psalm” organized around a liturgical question (v. 1) and a compact ethical answer (vv. 2–5), and they give a solid account of key terms like תָּמִים (“blameless, whole”) and רָגַל (“go about as a slanderer”). The draft also gestures toward intertextual links with Psalm 24 and prophetic critiques of empty ritual, and it includes an initial (if brief) note on modern liturgical use.
+
+Several weaknesses, however, keep it from excellence.
+
+1. **Overdrawn thesis.** The introduction repeatedly contrasts “ethical” with “ritual,” as if Psalm 15 rejected cultic categories outright. But terms like תָּמִים and the imagery of tent and holy mountain are deeply cultic. The psalm relocates holiness into character without abandoning the Temple frame. That nuance is missing.
+
+2. **Underused research.**  
+   - The Torah Temimah’s rich Talmudic material is barely tapped. In *Makkot* 24a, Psalm 15 is David’s eleven-point condensation of all 613 commandments; in *Bava Batra* 88a (“Rav Safra and ‘speaks truth in his heart’”), and *Bava Metzia* 71a (interest and “not be shaken”), the psalm becomes a touchstone for rabbinic ethics. These are central for reception history and for understanding how rigorously the tradition read this psalm.  
+   - The figurative language database provides striking parallels for “tent,” “holy mountain,” and “not being shaken,” yet the draft rarely quotes them or shows patterns of usage.
+
+3. **Missed structural and literary depth.** The commentary notes “synthetic parallelism” and “inclusio” but does not define these for non-specialists. The subtle movement from inner truth (v. 2) to guarded speech (v. 3) to economic justice (v. 5) can be sharpened, as can the chiastic echo between “walking blamelessly” and “not walking about with the tongue.”
+
+4. **Figurative and liturgical use underdeveloped.** The Rosh Hashanah and Yom Kippur piyyutim that quote v. 4 are mentioned but not shown in Hebrew; the Edot ha-Mizrach mourning practice is noted but not tied deeply to the psalm’s theology. Likewise, parallels like Psalm 3:5 or 99:9 (“his holy hill”) and Proverbs 10:30 (“the righteous will never be shaken”) are alluded to but not quoted.
+
+The revision should (1) nuance the ethics–ritual relationship, (2) integrate rabbinic and liturgical reception, (3) exploit the figurative and concordance data with concrete examples in Hebrew and English, and (4) define technical terms for an intelligent lay reader.
+
+---
+
+### REVISED INTRODUCTION
+
+“LORD, who may sojourn in Your tent, who may dwell on Your holy mountain?” (יְהוָה מִי־יָגוּר בְּאָהֳלֶךָ; מִי־יִשְׁכֹּן בְּהַר קׇדְשֶׁךָ, v. 1).  
+
+Psalm 15 opens like a question shouted toward a sanctuary gate. It is one of the Bible’s most concentrated attempts to ask: *What kind of life truly belongs in God’s presence?*
+
+#### 1. Tent and mountain: where is “God’s house”?
+
+The psalm’s frame is unmistakably cultic. The “tent” (אֹהֶל) evokes the wilderness Tabernacle, the moveable shrine of God’s presence among Israel; the “holy mountain” (הַר קׇדְשֶׁךָ) points to Zion, the Temple mount. Elsewhere, that phrase is clearly a metonymy—a physical place standing in for God’s presence and rule: “I cry aloud to the LORD, and He answers me from His holy mountain” (מֵהַר קׇדְשׁוֹ, Psalm 3:5); “Bow down toward His holy hill” (לְהַר קׇדְשׁוֹ, Psalm 99:9).
+
+The first verb, יָגוּר, means “to sojourn,” to live as a temporary resident or *gēr*, a guest without full rights. By contrast, יִשְׁכֹּן (“dwell”) is the verb used for God’s own indwelling—“the LORD is enthroned… who dwells in Zion” (יְהוָה שֹׁכֵן צִיּוֹן, Psalm 9:12). The question therefore has a double edge: Who may be a guest in God’s house, and who may settle there with the stability of a citizen?
+
+Traditional commentators move in both directions. Radak takes “tent” as the heavens themselves “spread out like a tent” over the earth, echoing Isaiah’s metaphor: “He stretches out the skies like gauze, and spreads them out like a tent to dwell in” (הַנּוֹטֶה כַדֹּק שָׁמַיִם; וַיִּמְתָּחֵם כָּאֹהֶל לָשָׁבֶת, Isaiah 40:22). Others, like Ibn Ezra and Metzudat David, think more concretely of the Temple in Jerusalem. In either case, sacred space is taken seriously. The psalm is not indifferent to ritual; instead, it asks what kind of character *corresponds* to that holy place.
+
+Psalm 15 sits in a small cluster of “entrance psalms.” Psalm 24 poses an almost identical question: “Who shall ascend the hill of the LORD, and who shall stand in His holy place?” (מִי־יַעֲלֶה בְהַר־יְהוָה; וּמִי־יָקוּם בִּמְקוֹם קׇדְשׁוֹ, Psalm 24:3). But whereas Psalm 24 answers with cultic-ethical imagery—“clean hands and a pure heart… not sworn deceitfully” (נְקִי כַפַּיִם וּבַר־לֵבָב… וְלֹא נִשְׁבַּע לְמִרְמָה, 24:4)—Psalm 15 unfolds a more elaborated portrait of daily righteousness.
+
+#### 2. A life “whole” before God (v. 2)
+
+The answer begins with three compact phrases:
+
+> הוֹלֵךְ תָּמִים; וּפֹעֵל צֶדֶק; וְדֹבֵר אֱמֶת בִּלְבָבוֹ׃  
+> “One who walks blamelessly, does what is right, and speaks truth in his heart.”
+
+The verb “walks” (הוֹלֵךְ) is the Bible’s standard metaphor for the course of a life. The adjective תָּמִים does not mean “flawless” in a modern, perfectionist sense; it is the word used of unblemished sacrificial animals and of human integrity. Noah is called “a righteous man, *blameless* (תָּמִים) in his generations” (Genesis 6:9), and Abraham is commanded, “Walk before Me and be blameless” (הִתְהַלֵּךְ לְפָנַי וֶהְיֵה תָמִים, Genesis 17:1). The term straddles ritual and ethics: an unblemished offering, a whole life.
+
+The second phrase, “does what is right” (פֹּעֵל צֶדֶק), moves from character to action, especially in dealings with others. צֶדֶק in biblical Hebrew is not abstract “justice” so much as concrete rightness in relationships—fairness, honesty, reliability.
+
+The third line tightens the circle: “speaks truth in his heart” (דֹבֵר אֱמֶת בִּלְבָבוֹ). Truth must be internal, not merely a public performance. As Rashi glosses, “The good that he says in his heart is true; he is not one thing in his mouth and another in his heart” (אינו אחד בפה ואחד בלב). The Talmud seizes on this line in a story about the sage Rav Safra, who silently agreed to a price in his mind; when the buyer later offered more, Rav Safra insisted on the first, unspoken figure, having already “spoken truth in his heart” (בבא בתרא 88א).
+
+Already in verse 2, then, Psalm 15 is not opposing ethics to ritual; it is reframing the sacrificial requirement of תָּמִים as a human way of life: a “whole” walk, just deeds, and inner truth.
+
+#### 3. Three circles of responsibility (vv. 3–4)
+
+Verses 3 and 4 shift to a series of negations: “does not slander… does not do evil… does not carry reproach…” The Hebrew repeats לֹא (“not”) like fenceposts, building a boundary line around the righteous person’s conduct.
+
+First comes speech:
+
+> לֹא־רָגַל עַל־לְשׁוֹנוֹ  
+> “He does not go about on his tongue.”
+
+רָגַל is literally “to foot it,” to go about, and by extension “to spy” or “to slander.” BDB notes the Arabic parallel where “walk” words can also mean “slander.” Here the image is almost grotesque: the tongue becomes a foot that wanders from house to house carrying tales. This negative line directly balances the positive “speaks truth in his heart” in v. 2. The psalm sketches a small chiasm (an A–B–B′–A′ pattern): inner truth (heart) ↔ restrained speech (tongue); just deeds ↔ no harm to neighbor.
+
+The social horizon then widens and deepens. The righteous person:
+
+> לֹא־עָשָׂה לְרֵעֵהוּ רָעָה  
+> “has not done evil to his neighbor,”  
+
+and
+
+> וְחֶרְפָּה לֹא־נָשָׂא עַל־קְרֹבוֹ׃  
+> “has not lifted up reproach against his close relative.”
+
+רֵעַ (“neighbor, companion”) is a broad term; קָרוֹב (“close one”) is the inner circle of kin. The psalmist insists that loyalty to family must not lead to injustice. Rashi, following this line, says that if a relative commits an offense, the righteous person punishes him “with justice and does not bear his reproach”—does not cover it up and so invite scandal (on v. 3). Malbim flips the angle: he refuses to injure a distant neighbor in order to benefit a relative.
+
+At the same time, verse 4 disrupts the gravitational pull of blood ties by introducing a third circle:
+
+> וְאֶת־יִרְאֵי יְהוָה יְכַבֵּד  
+> “He honors those who fear the LORD.”
+
+Here the primary community is not clan but shared reverence. The verb כִּבֵּד (“to honor”) literally means “to make heavy,” to treat as weighty. The righteous person publicly gives weight to the God-fearing—through esteem, support, and perhaps patronage.
+
+The opening of v. 4 is notoriously hard:
+
+> נִבְזֶה בְעֵינָיו נִמְאָס׃
+
+Does this mean “The vile person is despised and rejected in his eyes” (Rashi), i.e., he refuses to flatter the wicked? Or, as Radak and Meiri read it, “Despised in his own eyes, he is rejected,” describing a self-effacing humility? Exactly this phrase is woven into a Rosh Hashanah piyyut, which speaks of God as “The Mighty One who does not despise, yet in His eyes the vile is despised” (כַּבִּיר לֹא יִמְאַס; לְנִבְזֶה בְעֵינָיו נִמְאָס). Liturgy here sides with Rashi’s more object-directed reading: the righteous, like God, must be allergic to baseness.
+
+The verse ends with a bracing test:
+
+> נִשְׁבַּע לְהָרַע וְלֹא יָמִר׃  
+> “He swears to his own hurt and does not change.”
+
+Literally, “he swears to do evil [to himself].” The rabbis hear this as self-disadvantage (לְהָרַע לְעַצְמוֹ, “to harm himself”), not malice toward others. In a culture that also warns sharply against rash oaths, Psalm 15 is making a narrower point: integrity means remaining bound by a commitment even when it becomes costly. Psalm 24, in parallel, speaks of one “who has not sworn deceitfully” (לֹא נִשְׁבַּע לְמִרְמָה, 24:4). Swearing lightly is dangerous; swearing and then wriggling out of it is intolerable.
+
+#### 4. Money, justice, and the “bite” of interest (v. 5)
+
+The last ethical tests move to money and the courts:
+
+> כַּסְפּוֹ לֹא־נָתַן בְּנֶשֶׁךְ  
+> “He has not given his money on interest,”  
+
+> וְשֹׁחַד עַל־נָקִי לֹא־לָקָח׃  
+> “and a bribe against the innocent he has not taken.”
+
+נֶשֶׁךְ literally means “a bite.” The Torah repeatedly bans this practice within the covenant community: “You shall not give him your money on interest [בְּנֶשֶׁךְ], nor give him your food for profit” (Leviticus 25:37; cf. Exodus 22:24). Radak notes that even if the borrower “consents,” need makes that consent suspect; the interest payment is effectively taking what is not yours. The psalm assumes this legal background and presents the refusal to profit from another’s desperation as a condition for God’s fellowship.
+
+שֹׁחַד (“bribe”) is equally corrosive. Rashi, citing *Sifrei*, stresses that the verse covers bribes taken even to acquit the innocent, not only to condemn; once a judge’s impartiality is purchased, justice itself has been sold.
+
+The Torah Temimah quotes a passage from *Bava Metzia* (71a) that directly links this verse to the psalm’s conclusion. Rabbi Shimon ben Elazar says: “Whoever has money and lends it without interest, about him Scripture says, ‘His money he has not given on interest… One who does these things shall not be shaken forever’ (עוֹשֵׂה אֵלֶּה לֹא יִמּוֹט לְעוֹלָם). From this you learn that whoever lends on interest, his possessions totter.” The rabbis read the vocabulary of “tottering” and “not being shaken” as a moral physics: the more you unsteady others’ lives, the more your own foundations give way.
+
+#### 5. “Not shaken forever”: the promise (v. 5b)
+
+The psalm closes:
+
+> עֹשֵׂה־אֵלֶּה לֹא יִמּוֹט לְעוֹלָם׃  
+> “One who does these things shall never be shaken.”
+
+The verb מוֹט means to totter, slip, or be dislodged. It is a favorite metaphor in the Psalms for either downfall or security. “He alone is my rock and my salvation… I shall not be shaken” (לֹא אֶמּוֹט, Psalm 62:7); “The righteous will never be shaken” (צַדִּיק לְעוֹלָם בַּל־יִמּוֹט, Proverbs 10:30); “Those who trust in the LORD are like Mount Zion, which cannot be moved” (לֹא יִמּוֹט לְעוֹלָם, Psalm 125:1).
+
+Psalm 121, another pilgrim song, uses the same verb for God’s guarding of the traveler: “He will not let your foot be moved” (אַל־יִתֵּן לַמּוֹט רַגְלֶךָ, 121:3). Psalm 15 internalizes that protection: the one who lives this ethic *becomes* like an immovable mountain.
+
+Rashi adds a realistic nuance: “If he falters, his faltering will not be forever; rather, he stumbles and rises.” The promise is not of sinless perfection, but of a life whose overall orientation is so aligned with God’s ways that it has a deep resilience.
+
+#### 6. Psalm 15 as a miniature Torah
+
+A famous Talmudic passage in *Makkot* 24a imagines a series of great figures successively “reducing” the 613 commandments to their core. David, it says, “came and established them on eleven,” and then it quotes Psalm 15 almost entire:
+
+> מִזְמוֹר לְדָוִד; יְהוָה מִי־יָגוּר בְּאָהֳלֶךָ… הוֹלֵךְ תָּמִים וּפֹעֵל צֶדֶק… כַּסְפּוֹ לֹא נָתַן בְּנֶשֶׁךְ וְשֹׁחַד עַל־נָקִי לֹא לָקָח; עֹשֵׂה אֵלֶּה לֹא יִמּוֹט לְעוֹלָם.
+
+For the rabbis, Psalm 15 is not a rival to Torah or Temple but its distillation. It does not say, “Forget sacrifices”; it says, “If you wish to stand in the courts of the LORD, this is the kind of person you must be.” The psalm moves the focus from ritual performance alone to the whole fabric of speech, loyalty, economics, and self-knowledge.
+
+In that sense, the psalm’s journey is from geography to character. It begins with the sacred tent and mountain, and ends by promising that a certain kind of person will share in their unshakeable stability. Holy space becomes, ultimately, a way of life.
+
+  
+---LITURGICAL-SECTION-START---
+
+## Modern Jewish Liturgical Use
+
+#### Full psalm
+
+In the *Edot ha-Mizrach* (Middle Eastern and North African) tradition, Psalm 15 is recited at the end of the seven-day *shiva* mourning period. As the mourners leave the tightly circumscribed world of the house of mourning and re-enter communal life, they chant:
+
+> יְהוָה מִי־יָגוּר בְּאָהֳלֶךָ; מִי־יִשְׁכֹּן בְּהַר קׇדְשֶׁךָ׃  
+> “LORD, who may sojourn in Your tent, who may dwell on Your holy mountain?”  
+
+followed by the full description of the righteous and the closing promise,  
+
+> עֹשֵׂה־אֵלֶּה לֹא יִמּוֹט לְעוֹלָם׃  
+> “One who does these things shall never be shaken.”
+
+In this setting the psalm is both eulogy and exhortation. It is implicitly applied to the deceased—may he or she be among those who “dwell on Your holy mountain”—and also offered as a moral compass to the living, who are reminded that the true measure of a life is integrity in speech, loyalty, and economic justice.
+
+#### Phrases
+
+Two phrases from verse 4 have taken on a life of their own in Ashkenazic liturgy.
+
+1. **נִבְזֶה בְעֵינָיו נִמְאָס – “Despised in his eyes, rejected” (Psalm 15:4).**  
+   In the Rosh Hashanah *Kerovot* (poetic expansions of the Amidah) for the *Kedushah*, a piyyut describes God’s judgment:
+
+   > כַּבִּיר לֹא יִמְאַס; לְנִבְזֶה בְּעֵינָיו נִמְאָס.  
+
+   “The Mighty One does not despise; yet in His eyes the vile is despised.”
+
+   The psalm originally speaks of the righteous person despising baseness. The piyyut transfers the phrase to God, sharpening the tension between divine mercy (“does not despise”) and divine moral clarity (the truly vile are, in the end, rejected). The High Holiday context thus reads Psalm 15 as a window onto God’s own character.
+
+2. **וְאֶת־יִרְאֵי יְהוָה יְכַבֵּד – “He honors those who fear the LORD” (Psalm 15:4).**  
+   A later liturgical poem, recited in some Ashkenazi rites on the eve of Yom Kippur and in Sefardic rites after the Shabbat Musaf, reworks the line into a communal call to praise:
+
+   > בֵּית יִשְׂרָאֵל וְיִרְאֵי יְהוָה, יְכַבְּדוּ וְיוֹדוּ שִׁמְךָ יְהוָה.  
+
+   “The house of Israel and those who fear the LORD will honor and thank Your name, O LORD.”
+
+   What was in the psalm a trait of the righteous individual—he honors the God-fearing—becomes in the liturgy the collective task of Israel and all “God-fearers”: to honor God Himself. The ethical stance of Psalm 15 thus flows outward into worship; honoring those who fear God becomes inseparable from honoring God’s name.
+
+---
+
+### REVISED VERSE COMMENTARY
+
+#### Verse 1
+
+יְהוָה, מִי־יָגוּר בְּאָהֳלֶךָ; מִי־יִשְׁכֹּן בְּהַר־קׇדְשֶׁךָ׃  
+
+“LORD, who may sojourn in Your tent; who may dwell on Your holy mountain?”
+
+The psalm begins with a double question, each half finely shaded. The address “LORD” (יְהוָה) is immediately followed by the interrogative מִי (“who”), repeated: “Who may sojourn… who may dwell…?” The repetition slows the line and gives it a ritual weight, as if it were part of a call-and-response at the Temple gate.
+
+The first verb, יָגוּר (from גוּר), means “to sojourn,” to live for a time as a resident alien or guest. It is the verb used of the patriarchs “sojourning” in Canaan and of the *gēr* living in Israel. To ask “who may sojourn in Your tent” is to acknowledge that even the most pious Israelite enters God’s space as a guest, not an owner. Radak, reading more cosmically, understands “Your tent” (אֹהֶלְךָ) as the heavens themselves, stretched out like a tent, echoing Isaiah’s image of God “who spreads them [the skies] out like a tent to dwell in” (וַיִּמְתָּחֵם כָּאֹהֶל לָשָׁבֶת, Isaiah 40:22).
+
+The second verb, יִשְׁכֹּן (from שָׁכַן), is the standard term for dwelling or indwelling. It is used of God’s presence in the Tabernacle (“Let them make Me a sanctuary that I may dwell among them” – וְשָׁכַנְתִּי בְּתוֹכָם, Exodus 25:8) and of people “dwelling securely” in the land. The movement from sojourning to dwelling hints at an ascent from temporary access to lasting rootedness.
+
+The parallel images—“Your tent” and “Your holy mountain”—are not simple synonyms. The tent evokes the desert Tabernacle, intimate and portable. The holy mountain suggests stability and public prominence. Psalm 48 speaks of “His holy mountain” (הַר־קׇדְשׁוֹ) as “beautiful in elevation, joy of all the earth” (יְפֵה נוֹף מְשׂוֹשׂ כָּל־הָאָרֶץ, 48:3). Psalm 3:5 and 99:9, as we have seen, use “holy mountain/hill” as a shorthand for God’s dwelling and the locus of answered prayer.
+
+The verse also stands in direct dialogue with Psalm 24:3:
+
+> מִי־יַעֲלֶה בְהַר־יְהוָה; וּמִי־יָקוּם בִּמְקוֹם קׇדְשׁוֹ׃  
+> “Who shall ascend the hill of the LORD, and who shall stand in His holy place?”
+
+There the verbs are dynamic and vertical—ascend, stand—fitting a procession of worshipers approaching the Temple. Psalm 15’s verbs—sojourn, dwell—suggest not merely a visit but a way of life. Both psalms, however, pose an entrance question whose answer will turn out to be ethical rather than genealogical or merely ritual.
+
+The Greek Septuagint, an early translation, renders “sojourn” with παροικήσει (“will dwell as a sojourner”) and “dwell” with κατασκηνώσει (“encamp”). The Greek preserves the sense of privileged, camp-like proximity. Both Hebrew and Greek, then, press us to imagine worship not as a one-off act but as taking up residence—however humbly—within God’s sphere.
+
+What follows in the psalm is best heard as a response to this opening liturgical challenge. The “tent” and “holy mountain” remain literal and symbolic; the rest of the psalm will explore what sort of character can inhabit them.
+
+#### Verse 2
+
+הוֹלֵךְ תָּמִים; וּפֹעֵל צֶדֶק; וְדֹבֵר אֱמֶת בִּלְבָבוֹ׃  
+
+“One who walks blamelessly; who does what is right; and speaks truth in his heart.”
+
+Verse 2 replies to the entrance question with a threefold sketch, moving from the general course of life (walking), to specific acts (doing), to the inner life (the heart). Each phrase adds a layer.
+
+“Walks blamelessly” (הוֹלֵךְ תָּמִים) uses the biblical idiom of “walking” to describe the overall conduct of life. תָּמִים, from the root תמם, denotes completeness or soundness. It is applied to unblemished sacrificial animals and to human beings of integrity. Jacob is called an “אִישׁ תָּם” (a “sound” or “quiet” man, Genesis 25:27), Noah is “צַדִּיק תָּמִים” (Genesis 6:9), and Abraham is commanded “הִתְהַלֵּךְ לְפָנַי וֶהְיֵה תָמִים” (“Walk before Me and be blameless,” Genesis 17:1). The psalm taps this covenantal vocabulary: to be fit for God’s tent is to live as a “whole” person, not double-minded or fractured.
+
+The next phrase, “does what is right” (פֹּעֵל צֶדֶק), shifts from overall posture to concrete deeds. צֶדֶק in biblical usage is relational rightness—fair dealing, keeping one’s word, giving each their due. Malbim, with his fine-grained distinctions, notes that this is especially about commandments “between human beings,” the social fabric.
+
+The third clause, “speaks truth in his heart” (דֹבֵר אֱמֶת בִּלְבָבוֹ), deepens the focus further. We are not told merely that he “speaks truth,” but that the truth-telling is located “in his heart.” Rashi glosses: “The good that he says in his heart is truth; he is not one thing in the mouth and another in the heart.” In other words, Psalm 15 is concerned not only with factual accuracy but with the alignment of inner conviction and outer speech.
+
+The Talmud gives this line flesh in the story of Rav Safra (בבא בתרא 88א). While he was reciting the *Shema*, a man approached to buy something and named a price. Unable to interrupt his prayer, Rav Safra did not answer. The would-be buyer, assuming refusal, raised the offer. After finishing the *Shema*, Rav Safra insisted on the *original* price, explaining that in his heart he had already accepted it. The rabbis link this to “speaks truth in his heart”: inner consent already bound him.
+
+From a literary angle, the verse exemplifies what scholars call “synthetic parallelism”—a pattern where each colon (each half-line) adds to the previous one rather than merely restating it. We might paraphrase: A life for God’s tent is one whose overall path is whole, whose dealings are just, and whose inner dialogue is truthful. Verse 3 will then sharpen this picture by saying what such a person *does not* say or do.
+
+#### Verse 3
+
+לֹא־רָגַל עַל־לְשׁוֹנוֹ; לֹא־עָשָׂה לְרֵעֵהוּ רָעָה; וְחֶרְפָּה לֹא־נָשָׂא עַל־קְרֹבוֹ׃  
+
+“Who does not go about as a slanderer on his tongue; does no evil to his neighbor; and does not lift up reproach against his close relative.”
+
+After the positive affirmations of verse 2, verse 3 sketches prohibitions. The repeated לֹא (“not”) at the start of each colon gives the line a rhythmic, almost legal feel. The focus is on avoiding harm in three spheres: speech, general neighborly relations, and ties to kin.
+
+The unusual phrase לֹא־רָגַל עַל־לְשׁוֹנוֹ (literally, “has not footed [or gone about] on his tongue”) draws on the denominative verb רָגַל, from רֶגֶל (“foot”). BDB notes two main uses: to go about as a spy and to slander. The image here is vivid: the tongue is imagined as if it had feet—tramping around, prying, carrying tales. II Samuel 19:28 uses the same verb: “He slandered your servant to my lord the king” (וַיְרַגֵּל בְּעַבְדְּךָ). Our psalm says that the righteous person simply refuses to let his tongue go roaming in that way.
+
+The next clause, “has not done evil to his neighbor” (לֹא־עָשָׂה לְרֵעֵהוּ רָעָה), balances the previous positive “does what is right.” Here רֵעַ is the general “neighbor, companion.” Harm can be active injury, but in context it includes what we might call character assassination; Radak reads verse 3 as covering both deed and word.
+
+The final phrase is difficult: “and reproach he has not lifted up against his close one” (וְחֶרְפָּה לֹא־נָשָׂא עַל־קְרֹבוֹ). The verb נָשָׂא (“lift, carry”) is the same one used in the Ninth Commandment: “You shall not *bear* false witness” (לֹא־תִשָּׂא עֵד שָׁקֵר, Exodus 20:13). Psalm 24:4, our companion entrance psalm, says of the pure-hearted worshiper: “who has not lifted up his soul to what is false” (אֲשֶׁר לֹא־נָשָׂא לַשָּׁוְא נַפְשִׁי). In Psalm 15, the object is “reproach” (חֶרְפָּה) and the target is “his close one” (קָרוֹב), a relative or intimate.
+
+Three main readings have emerged. Rashi argues that if his relative has committed a punishable offense, the righteous person does not “carry” the reproach by covering it up and so gives no one cause to say, “You hid your kinsman’s crime.” Metzudat David, more simply, takes it as “he does not cast reproach upon his relative,” i.e., he does not shame him publicly. Others hear “does not *take up* reproach against” in the sense of refusing to join in gossip or repeat a slander.
+
+The Greek translators understood it that way: “and reproach he does not *receive* against his near one” (ὀνειδισμὸν οὐ λαμβάνει ἐπὶ τὸν ἐγγὺς αὐτοῦ). The righteous person refuses both to originate and to propagate shame.
+
+The term “reproach” (חֶרְפָּה) often describes the social state of being mocked or scorned: “We have become the reproach of our neighbors, the scorn and derision of those around us” (הָיִינוּ חֶרְפָּה לִשְׁכֵנֵינוּ, Psalm 79:4). Psalm 15’s ideal worshiper is one who will neither create such a state for others nor gain social capital by trading in it.
+
+Taken together, verse 3 traces a movement from the tongue “walking” about, to the hand “doing” harm, to the heart’s attitude toward those closest to us. It concretizes the commitment of verse 2: inner truth and just action require disciplined speech and a refusal to weaponize either gossip or kinship.
+
+#### Verse 4
+
+נִבְזֶה בְעֵינָיו נִמְאָס; וְאֶת־יִרְאֵי יְהוָה יְכַבֵּד; נִשְׁבַּע לְהָרַע וְלֹא יָמִר׃  
+
+“Despised in his eyes, rejected; but those who fear the LORD he honors; he has sworn to his own hurt and does not change.”
+
+This verse probes the worshiper’s value system and reliability. It asks: Whom do you admire? Whom do you refuse to admire? And what do you do when your own promises cost you?
+
+The opening clause, נִבְזֶה בְעֵינָיו נִמְאָס, is compact and grammatically ambiguous. Both נִבְזֶה (“despised”) and נִמְאָס (“rejected, loathed”) can function as participles (“one who is despised… rejected”). The phrase could be read:
+
+- **Object-focused (Rashi, liturgy):** “The one who is vile is despised and rejected in his eyes.” That is: the righteous person does not flatter or curry favor with evildoers. Rashi illustrates with King Hezekiah, who humiliatingly dragged his idolatrous father’s bones on a bed of ropes (Pesachim 56a).
+
+- **Self-focused (Radak, Meiri):** “Despised in his own eyes, he is rejected.” Here the righteous person is deeply humble, thinking of his own merits as meagre compared to what he owes God.
+
+The Rosh Hashanah piyyut quoted above (“The Mighty One does not despise…”) cleverly uses the psalm’s phrase of human ethics to describe God’s sifting of the truly “vile” from the merely small and penitent.
+
+The second colon offers a positive counterpart: “and those who fear the LORD he honors” (וְאֶת־יִרְאֵי יְהוָה יְכַבֵּד). To “fear the LORD” (יִרְאַת יְהוָה) in biblical idiom means a posture of reverence, obedience, and awe. The righteous person uses his social capital to raise the profile of such people. As we saw, a piyyut transforms this into: “The house of Israel and those who fear the LORD will honor and thank Your name, O LORD” (בֵּית יִשְׂרָאֵל וְיִרְאֵי יְהוָה, יְכַבְּדוּ וְיוֹדוּ שִׁמְךָ יְהוָה). Human honor for the God-fearing becomes collective honor of God.
+
+The final colon introduces what is perhaps the psalm’s sternest demand: “He has sworn to his own hurt and does not change” (נִשְׁבַּע לְהָרַע וְלֹא יָמִר). Literally, he has “sworn to the evil [for himself].” Rashi reads this as “to harm himself” (לְהָרַע לְעַצְמוֹ): for example, he vows to give a generous gift or to undertake a demanding task. When circumstances change and the vow becomes genuinely costly, he does not look for technicalities to get out of it.
+
+The verb יָמִיר (“change, exchange”) appears in Leviticus 27’s laws about consecrated animals: “he shall not exchange it nor substitute it” (לֹא יַמִּיר אֹתוֹ וְלֹא יָמִיר אֹתוֹ טוֹב בְּרָע, 27:10). There, the danger is backtracking on a holy gift; here, it is backtracking on one’s word. The Septuagint generalizes: “He has sworn to his neighbor and does not nullify it” (ὁ ὀμνύων τῷ πλησίον αὐτοῦ καὶ οὐκ ἀθετῶν).
+
+There is a deliberate resonance with Psalm 24:4, which praises those who “have not sworn deceitfully” (לֹא נִשְׁבַּע לְמִרְמָה). Both psalms assume the wider biblical caution against making vows lightly (e.g., Ecclesiastes 5:3–4). The ideal is not an impulsive piety of constant oaths, but a sobriety where one’s “yes” is costly and therefore rare.
+
+In terms of structure, verse 4 continues the telescoping movement from verse 3: how one positions oneself with respect to the wicked and the devout (whom do you despise, whom do you honor?) and how one positions oneself with respect to one’s own speech (do you treat your word as binding?). Together they form a bridge between the “horizontal” ethics of verse 3 and the economic-judicial sphere of verse 5.
+
+#### Verse 5
+
+כַּסְפּוֹ לֹא־נָתַן בְּנֶשֶׁךְ; וְשֹׁחַד עַל־נָקִי לֹא־לָקָח; עֹשֵׂה־אֵלֶּה לֹא יִמּוֹט לְעוֹלָם׃  
+
+“His money he has not given at interest; and a bribe against the innocent he has not taken; one who does these things shall never be shaken.”
+
+The psalm’s ethical catalogue ends where so many human stories go wrong: with money and the law.
+
+“His money he has not given at interest” (כַּסְפּוֹ לֹא־נָתַן בְּנֶשֶׁךְ). נֶשֶׁךְ means “interest,” but its root נָשַׁךְ means “to bite.” The term pictures interest as something that bites off a piece of the debtor’s flesh. Torah law repeatedly bans this “bite” within the covenant community:
+
+> “If you lend money to My people, to the poor among you, do not be to him like a creditor; you shall not impose *interest* on him” (לֹא־תִהְיֶה לוֹ כְּנֹשֶׁה; לֹא־תְשִׂימוּן עָלָיו נֶשֶׁךְ, Exodus 22:24).  
+> “You shall not give him your money on interest, nor give him your food for profit” (לֹא־תִתֵּן לוֹ נֶשֶׁךְ; וּבְמַרְבִּית לֹא־תִתֵּן אָכְלֶךָ, Leviticus 25:37).
+
+Radak observes that even when the borrower “consents,” his need constrains him; the lender is thus taking what is not justly his. Because interest can be socially acceptable—“no one calls it robbery,” as Radak puts it—the psalm highlights it as a subtle form of injustice that easily passes under the radar.
+
+The next phrase, “and a bribe against the innocent he has not taken” (וְשֹׁחַד עַל־נָקִי לֹא־לָקָח), targets the judicial system. Exodus 23:8 already warns, “You shall not take a bribe [שֹׁחַד], for a bribe blinds the clear-sighted and subverts the words of the righteous.” Rashi, drawing on *Sifrei*, stresses that even a bribe meant to acquit an innocent person is forbidden, because it corrupts the judge’s impartiality.
+
+The Torah Temimah cites *Bava Metzia* 71a, where Rabbi Shimon ben Elazar comments on our verse: “Anyone who has money and lends it without interest—about him Scripture says, ‘His money he has not given at interest… One who does these things shall not be shaken forever.’ From this you learn that whoever lends on interest, his possessions *totter* (מתמוטטין).” The pun on מוֹט (“totter”) is deliberate, tying economic exploitation to instability.
+
+The closing promise, “One who does these things shall never be shaken” (עֹשֵׂה־אֵלֶּה לֹא יִמּוֹט לְעוֹלָם), serves as an inclusio with the question of dwelling on God’s mountain. To “not be shaken” evokes physical stability—an image used elsewhere for the security of the righteous: “He is my rock and my salvation… I shall not be shaken” (לֹא אֶמּוֹט, Psalm 62:7); “The righteous will never be shaken” (צַדִּיק לְעוֹלָם בַּל־יִמּוֹט, Proverbs 10:30); “Those who trust in the LORD are like Mount Zion, which cannot be moved but abides forever” (לֹא יִמּוֹט לְעוֹלָם, Psalm 125:1). Psalm 121, a pilgrim psalm, uses the same root for divine protection of the traveler’s footing: “He will not give your foot to be moved” (אַל־יִתֵּן לַמּוֹט רַגְלֶךָ, 121:3).
+
+Here, however, the stability is promised to “one who does *these things*.” The phrase gathers up the whole list: inner truth, guarded speech, loyalty that does not excuse wrongdoing, reverence for the God-fearing, costly fidelity to one’s word, generosity without exploitation, and unswayed justice. Malbim provocatively notes that even refraining from evil (“not doing” certain things) is called “doing” (עֹשֵׂה־אֵלֶּה), because the human impulse pulls toward self-interest; resisting that pull is itself a positive act.
+
+Rashi adds a pastoral gloss: “If he falters, his faltering will not be forever, but he stumbles and rises.” The point is not that a righteous person never has reversals, but that a life ordered around the ethics of Psalm 15 shares something of Mount Zion’s moral granite. The psalm that began by asking who might dwell on God’s holy mountain ends by promising that those who embody these traits will themselves possess a share in that mountain’s unshakable endurance.

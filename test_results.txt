@@ -1,0 +1,24 @@
+Testing Psalm 15 phrase searches...
+
+Test 1: גור באהל
+Expected: Should find Psalm 15:1 "מִי־יָגוּר בְּאׇהֳלֶךָ"
+Results: 0
+
+Test 2: הלך תמים
+Expected: Should find Psalm 15:2 "הֹלֵךְ תָּמִים"
+Results: 0
+
+The problem is clear: the search phrases are NOT matching the actual text.
+
+Issue Analysis:
+1. Micro analyst provides: "הוֹלֵךְ תָּמִים" (with vowels)
+2. Research request creates: "הלך תמים" (consonantal)
+3. Psalm text has: "הֹלֵךְ תָּמִים"
+4. Concordance librarian should find this but returns 0 results
+
+Root causes:
+1. The consonantal search "הלך תמים" should match "הֹלֵךְ תָּמִים" - this is a bug!
+2. The phrase "גור באהל" should match "יָגוּר בְּאׇהֳלֶךָ" - also a bug!
+
+The librarian IS receiving the exact phrases (including variants) and IS generating variations,
+but the search is still failing to match phrases that should obviously match.

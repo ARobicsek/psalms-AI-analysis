@@ -1,0 +1,185 @@
+{
+  "psalm": 1,
+  "date": "2025-01-03",
+  "implementation_status": "BEFORE enhancement",
+  "total_figurative_instances": 360,
+  "figurative_requests": [
+    {
+      "request_id": 1,
+      "verse": null,
+      "reason": "Walking/standing/sitting progression - spatial metaphors for moral entanglement stages",
+      "vehicle": "walk",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "walk",
+        "walking",
+        "walked",
+        "walks",
+        "go",
+        "going",
+        "goes",
+        "went"
+      ],
+      "analysis": {
+        "strengths": [
+          "Good morphological variants for 'walk'",
+          "Related motion terms included"
+        ],
+        "weaknesses": [
+          "Missing 'stand' and 'sit' from the progression",
+          "No 'path' or 'way' terms",
+          "No opposites like 'wander' or 'stray'",
+          "No conceptual cluster thinking"
+        ]
+      }
+    },
+    {
+      "request_id": 2,
+      "verse": null,
+      "reason": "Torah meditation as continuous temporal practice - day and night merismus",
+      "vehicle": "meditate",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "meditate",
+        "meditates",
+        "meditating",
+        "meditation",
+        "mutter",
+        "mutters",
+        "muttering",
+        "murmur",
+        "murmurs",
+        "murmuring"
+      ],
+      "analysis": {
+        "strengths": [
+          "Excellent morphological coverage",
+          "Includes muttering/murmuring variants"
+        ],
+        "weaknesses": [
+          "No conceptual cluster (study, ponder, reflect)",
+          "No 'day'/'night' searches",
+          "No 'delight' or 'law' connections"
+        ]
+      }
+    },
+    {
+      "request_id": 3,
+      "verse": null,
+      "reason": "Tree planted by water streams - central flourishing metaphor with passive agency",
+      "vehicle": "tree",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "tree",
+        "trees",
+        "plant",
+        "plants",
+        "planted",
+        "planting"
+      ],
+      "analysis": {
+        "strengths": [
+          "Basic coverage of tree/plant imagery"
+        ],
+        "weaknesses": [
+          "Missing fruit, leaf, branch, root components",
+          "No water/irrigation terms",
+          "No 'flourish', 'blossom', 'grow' variants",
+          "Missing 'stream', 'river', 'fountain'"
+        ]
+      }
+    },
+    {
+      "request_id": 4,
+      "verse": null,
+      "reason": "Chaff as agricultural waste - weightless, blown away imagery",
+      "vehicle": "chaff",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "chaff"
+      ],
+      "analysis": {
+        "strengths": [],
+        "weaknesses": [
+          "Single term only",
+          "No agricultural waste conceptual cluster",
+          "Missing 'dust', 'stubble', 'husk', 'straw'",
+          "No 'wind', 'blow', 'scatter' terms"
+        ]
+      }
+    },
+    {
+      "request_id": 5,
+      "verse": null,
+      "reason": "Standing in judgment - forensic/judicial metaphor",
+      "vehicle": "stand",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "stand",
+        "standing",
+        "stands",
+        "arose",
+        "arise"
+      ],
+      "analysis": {
+        "strengths": [
+          "Some morphological variants"
+        ],
+        "weaknesses": [
+          "Missing 'establish', 'endure', 'remain'",
+          "No opposites like 'fall', 'sink', 'collapse'",
+          "No 'judgment', 'court', 'tribunal' context"
+        ]
+      }
+    },
+    {
+      "request_id": 6,
+      "verse": null,
+      "reason": "Assembly of righteous - communal belonging imagery",
+      "vehicle": "assembly",
+      "scope": "Psalms",
+      "vehicle_terms": [
+        "assembly",
+        "gather",
+        "gathering",
+        "congregation"
+      ],
+      "analysis": {
+        "strengths": [
+          "Good communal gathering terms"
+        ],
+        "weaknesses": [
+          "No 'community', 'fellowship', 'company'",
+          "Missing liturgical/worship context",
+          "No opposite like 'scattered', 'exiled'"
+        ]
+      }
+    }
+  ],
+  "missed_opportunities": [
+    {
+      "category": "Body Parts",
+      "description": "No body part searches despite 'eyes' imagery common in Psalm literature",
+      "potential_terms": ["eye", "eyes", "sight", "see", "look", "gaze"],
+      "database_expressions": 1600+
+    },
+    {
+      "category": "Height/Depth",
+      "description": "Height metaphors in vv.1-3 could connect to broader spatial imagery",
+      "potential_terms": ["high", "lift", "raise", "depth", "abyss", "pit"],
+      "database_expressions": 371
+    },
+    {
+      "category": "Light/Darkness",
+      "description": "No connection between Torah and light imagery",
+      "potential_terms": ["light", "lamp", "shine", "bright", "darkness"],
+      "database_expressions": 193
+    }
+  ],
+  "expected_improvements": {
+    "conceptual_clusters": "30-50% more matches by searching related concepts",
+    "opposites": "20-30% more matches by including contrast terms",
+    "body_parts": "Significant new category representing 29% of database",
+    "phrase_priority": "Better result ordering with phrase matches prioritized"
+  }
+}

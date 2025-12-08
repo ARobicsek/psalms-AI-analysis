@@ -1,0 +1,244 @@
+{
+  "interest_words": [
+    {
+      "word": "נֶ֥שֶׁךְ",
+      "word_consonantal": "נשך",
+      "book_name": "Deuteronomy",
+      "chapter": 23,
+      "verse": 20
+    },
+    {
+      "word": "נֶ֣שֶׁךְ",
+      "word_consonantal": "נשך",
+      "book_name": "Deuteronomy",
+      "chapter": 23,
+      "verse": 20
+    },
+    {
+      "word": "נֶ֕שֶׁךְ",
+      "word_consonantal": "נשך",
+      "book_name": "Deuteronomy",
+      "chapter": 23,
+      "verse": 20
+    },
+    {
+      "word": "נֶֽשֶׁךְ׃",
+      "word_consonantal": "נשך",
+      "book_name": "Exodus",
+      "chapter": 22,
+      "verse": 24
+    },
+    {
+      "word": "בַּנֶּ֣שֶׁךְ",
+      "word_consonantal": "בנשך",
+      "book_name": "Ezekiel",
+      "chapter": 18,
+      "verse": 8
+    },
+    {
+      "word": "בַּנֶּ֧שֶׁךְ",
+      "word_consonantal": "בנשך",
+      "book_name": "Ezekiel",
+      "chapter": 18,
+      "verse": 13
+    },
+    {
+      "word": "נֶ֤שֶׁךְ",
+      "word_consonantal": "נשך",
+      "book_name": "Ezekiel",
+      "chapter": 18,
+      "verse": 17
+    },
+    {
+      "word": "נֶ֧שֶׁךְ",
+      "word_consonantal": "נשך",
+      "book_name": "Ezekiel",
+      "chapter": 22,
+      "verse": 12
+    },
+    {
+      "word": "הַנֹּשֵׁךְ֙",
+      "word_consonantal": "הנשך",
+      "book_name": "Genesis",
+      "chapter": 49,
+      "verse": 17
+    },
+    {
+      "word": "נֶ֣שֶׁךְ",
+      "word_consonantal": "נשך",
+      "book_name": "Leviticus",
+      "chapter": 25,
+      "verse": 36
+    },
+    {
+      "word": "בְּנֶ֑שֶׁךְ",
+      "word_consonantal": "בנשך",
+      "book_name": "Leviticus",
+      "chapter": 25,
+      "verse": 37
+    },
+    {
+      "word": "נָשַׁ֤ךְ",
+      "word_consonantal": "נשך",
+      "book_name": "Numbers",
+      "chapter": 21,
+      "verse": 9
+    },
+    {
+      "word": "בְּנֶ֣שֶׁךְ",
+      "word_consonantal": "בנשך",
+      "book_name": "Proverbs",
+      "chapter": 28,
+      "verse": 8
+    },
+    {
+      "word": "בְּנֶשֶׁךְ֮",
+      "word_consonantal": "בנשך",
+      "book_name": "Psalms",
+      "chapter": 15,
+      "verse": 5
+    }
+  ],
+  "silver_words": [
+    {
+      "word": "הֵאָֽסְפוּ֙",
+      "word_consonantal": "האספו",
+      "book_name": "Amos",
+      "chapter": 3,
+      "verse": 9
+    },
+    {
+      "word": "וְסָפ֛וּ",
+      "word_consonantal": "וספו",
+      "book_name": "Amos",
+      "chapter": 3,
+      "verse": 15
+    },
+    {
+      "word": "מִסְפֵּ֔ד",
+      "word_consonantal": "מספד",
+      "book_name": "Amos",
+      "chapter": 5,
+      "verse": 16
+    },
+    {
+      "word": "וּמִסְפֵּ֖ד",
+      "word_consonantal": "ומספד",
+      "book_name": "Amos",
+      "chapter": 5,
+      "verse": 16
+    },
+    {
+      "word": "מִסְפֵּ֑ד",
+      "word_consonantal": "מספד",
+      "book_name": "Amos",
+      "chapter": 5,
+      "verse": 17
+    },
+    {
+      "word": "הַסִּפִּ֗ים",
+      "word_consonantal": "הספים",
+      "book_name": "Amos",
+      "chapter": 9,
+      "verse": 1
+    },
+    {
+      "word": "סֵ֖פֶר",
+      "word_consonantal": "ספר",
+      "book_name": "Daniel",
+      "chapter": 1,
+      "verse": 4
+    },
+    {
+      "word": "סֵ֣פֶר",
+      "word_consonantal": "ספר",
+      "book_name": "Daniel",
+      "chapter": 1,
+      "verse": 17
+    },
+    {
+      "word": "וְחַסְפָּ֑א",
+      "word_consonantal": "וחספא",
+      "book_name": "Daniel",
+      "chapter": 2,
+      "verse": 34
+    },
+    {
+      "word": "חַסְפָּ֨א",
+      "word_consonantal": "חספא",
+      "book_name": "Daniel",
+      "chapter": 2,
+      "verse": 35
+    },
+    {
+      "word": "כַּסְפָּ֣א",
+      "word_consonantal": "כספא",
+      "book_name": "Daniel",
+      "chapter": 2,
+      "verse": 35
+    },
+    {
+      "word": "חַסְפָּֽא׃",
+      "word_consonantal": "חספא",
+      "book_name": "Daniel",
+      "chapter": 2,
+      "verse": 43
+    },
+    {
+      "word": "חַסְפָּא֙",
+      "word_consonantal": "חספא",
+      "book_name": "Daniel",
+      "chapter": 2,
+      "verse": 45
+    },
+    {
+      "word": "כַּסְפָּ֣א",
+      "word_consonantal": "כספא",
+      "book_name": "Daniel",
+      "chapter": 2,
+      "verse": 45
+    },
+    {
+      "word": "סָ֣פַת",
+      "word_consonantal": "ספת",
+      "book_name": "Daniel",
+      "chapter": 4,
+      "verse": 30
+    },
+    {
+      "word": "ה֥וּסְפַת",
+      "word_consonantal": "הוספת",
+      "book_name": "Daniel",
+      "chapter": 4,
+      "verse": 33
+    },
+    {
+      "word": "וְכַסְפָּ֔א",
+      "word_consonantal": "וכספא",
+      "book_name": "Daniel",
+      "chapter": 5,
+      "verse": 2
+    },
+    {
+      "word": "וְכַסְפָּ֛א",
+      "word_consonantal": "וכספא",
+      "book_name": "Daniel",
+      "chapter": 5,
+      "verse": 4
+    },
+    {
+      "word": "כַסְפָּֽא",
+      "word_consonantal": "כספא",
+      "book_name": "Daniel",
+      "chapter": 5,
+      "verse": 23
+    },
+    {
+      "word": "וְסִפְרִ֥ין",
+      "word_consonantal": "וספרין",
+      "book_name": "Daniel",
+      "chapter": 7,
+      "verse": 10
+    }
+  ]
+}
