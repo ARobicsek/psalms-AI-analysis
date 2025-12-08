@@ -52,10 +52,10 @@ class RAGManager:
         """
         self.docs_dir = Path(docs_dir)
 
-        # File paths
-        self.analytical_framework_path = self.docs_dir / "analytical_framework_for_RAG.md"
-        self.psalm_function_path = self.docs_dir / "psalm_function_for_RAG.json"
-        self.ugaritic_path = self.docs_dir / "ugaritic.json"
+        # File paths (updated for new docs organization - Session 181)
+        self.analytical_framework_path = self.docs_dir / "architecture" / "analytical_framework_for_RAG.md"
+        self.psalm_function_path = self.docs_dir / "reference" / "psalm_function_for_RAG.json"
+        self.ugaritic_path = self.docs_dir / "reference" / "ugaritic.json"
 
         # Cache for loaded documents
         self._analytical_framework: Optional[str] = None
