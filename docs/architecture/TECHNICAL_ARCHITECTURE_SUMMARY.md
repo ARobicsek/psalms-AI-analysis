@@ -44,12 +44,12 @@ Input: Psalm Number
     ↓
     [Research Bundle Assembly - 8 Python Librarians]
     → Lexicon, concordance, figurative analysis, commentary,
-      liturgical usage, related psalms, Hirsch, Sacks
+      liturgical usage, related psalms, Sacks
     ↓
 [3] Synthesis Writing (Claude Sonnet 4.5)
     → Introduction essay + verse commentary with quotations
     ↓
-[4] Master Editorial Review (GPT-5)
+[4] Master Editorial Review (GPT-5.1)
     → Critical review, fact-checking, enhancement to "National Book Award" level
     ↓
 [5] Print-Ready Formatting (Python)
@@ -205,14 +205,6 @@ Output: Scholarly Commentary (.docx + .md)
     - Removed redundant labels and scores
   - Bidirectional matching (psalm_a ↔ psalm_b)
 
-#### Hirsch Librarian
-- **Function**: Retrieves R. Samson Raphael Hirsch's 19th-century German commentary
-- **Source**: OCR-extracted commentary from Hirsch's Psalms volumes
-- **Implementation**: `src/agents/hirsch_librarian.py`
-- **Key Features**:
-  - Verse-level commentary lookup
-  - Historical German Orthodox perspective
-  - Character-by-character symbolic interpretation
 
 #### Sacks Librarian
 - **Function**: Retrieves Rabbi Jonathan Sacks' references to Psalms
@@ -234,8 +226,7 @@ Output: Scholarly Commentary (.docx + .md)
   4. Commentary Librarian (traditional Jewish commentaries)
   5. Liturgical Librarian (liturgical usage)
   6. Related Psalms Librarian (statistical connections)
-  7. Hirsch Librarian (19th-century German commentary)
-  8. Sacks Librarian (modern British Orthodox perspective)
+  7. Sacks Librarian (modern British Orthodox perspective)
 - **Key Features**:
   - JSON and Markdown serialization
   - Token limit management (700,000 character capacity - Session 109)
@@ -639,7 +630,7 @@ FROM concordance
 
 ### Cost Management
 - **8 Python Librarians**: Deterministic data retrieval without LLM costs
-  - BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Hirsch, Sacks
+  - BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Sacks
 - **Structured Outputs**: JSON schema validation reduces token usage
 - **Efficient Research**: Targeted queries vs. broad searches
 - **Token Optimization** (Sessions 118-119): 50-60% reduction in related psalms section
@@ -766,7 +757,7 @@ The Psalms Commentary Pipeline represents a sophisticated integration of AI capa
 The technical implementation addresses complex challenges in Hebrew text processing, morphological analysis, and scholarly research integration. The result is a system that produces commentary of sufficient quality for scholarly publication while maintaining efficiency and cost-effectiveness.
 
 **Key Technical Achievements (V6 System)**:
-- **8 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Hirsch, Sacks
+- **8 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Sacks
 - **V6 Statistical Analysis**: Fresh root extraction with 93.75% accuracy, 11,170 psalm pairs analyzed
 - **Related Psalms Integration**: Top 5 connections with intelligent token optimization (50-60% reduction)
 - **Enhanced Quotation System**: Prompts encourage generous Hebrew + English quotations
