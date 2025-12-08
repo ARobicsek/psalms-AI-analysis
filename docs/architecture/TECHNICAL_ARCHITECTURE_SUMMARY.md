@@ -1,8 +1,8 @@
 # Technical Architecture Summary: Psalms Commentary Pipeline
 
-**Date**: 2025-11-16
-**Version**: Enhanced Pipeline V6 (Phase 4, Sessions 105-123)
-**Status**: Production System with V6 Scoring & Related Psalms Integration
+**Date**: 2025-12-08
+**Version**: Enhanced Pipeline V6.1 (Phase 4, Sessions 105-180)
+**Status**: Production System with Refined Search & Phrase Matching
 
 ---
 
@@ -12,7 +12,14 @@ The Psalms Commentary Pipeline is a sophisticated AI-powered system that generat
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
 
-**Recent Enhancements (Sessions 105-123)**:
+**Recent Enhancements (Sessions 150-180)**:
+- **Phrase Substring Matching**: Multi-word phrases use substring matching while preserving exact matching for single words (Session 176)
+- **Performance Optimization**: Eliminated exponential query growth for phrase searches (824 → 5 queries) (Session 175)
+- **Figurative Vehicle Search Fix**: Removed morphological variants from vehicle searches, added exact match prioritization (Session 179)
+- **Maqqef Handling**: Improved word boundary detection with maqqef (־) in compound words (Session 174)
+- **Enhanced Phrase Extraction**: Added exact form preservation with fallback extraction from verse text (Session 173)
+
+**Earlier Enhancements (Sessions 105-123)**:
 - **V6 Scoring System**: Fresh statistical analysis with improved Hebrew morphology (Sessions 115-117)
 - **Related Psalms Integration**: Automatic identification and integration of top 5 related psalms (Sessions 107-119)
 - **Enhanced Quotation Emphasis**: Prompts designed to encourage generous quotation from sources (Session 122)

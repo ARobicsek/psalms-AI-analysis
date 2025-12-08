@@ -42,6 +42,14 @@ data/analysis_results/*.json
 temp/
 tmp/
 *.tmp
+nul
+Matches
+
+# Test/debug output files
+test_results*.txt
+*_output.txt
+psalm*_*.json
+!output/psalm_*/psalm_*.json
 
 # Output (may want to keep these, adjust as needed)
 # output/*.docx
@@ -69,5 +77,10 @@ monitor_log.txt
 monitor_scorer.sh
 run_scorer_with_monitoring.sh
 *.backup
+*.backup.*
+
+# Large archive directories (document in README where to get)
+archive/data_extraction/
+data/hirsch_*/
 
 data/liturgy.db
