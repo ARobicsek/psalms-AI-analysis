@@ -6,11 +6,23 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 **Start Here:**
 - `README.md` - Project overview, installation, usage
-- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 179)
+- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 181)
 - `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Technical specifications, schemas
 - `docs/guides/DEVELOPER_GUIDE.md` - Development workflow, coding standards
 
 ## Recent Major Changes (Last 5 Sessions)
+
+**Session 181 (2025-12-08)**: Comprehensive Codebase Cleanup
+- Archived 326 files into organized subdirectories (debugging, experiments, session docs)
+- Created CLAUDE.md for token-efficient session startup (80% token reduction)
+- Reorganized docs/ into logical subdirectories (architecture, guides, features, session_tracking)
+- Root directory reduced from 145+ files → 30 files (79% reduction)
+
+**Session 180 (2025-12-07)**: Phrase Search Fixes (Word Order + Maqqef)
+- Fixed word order differences: phrases now found regardless of word sequence
+- Fixed maqqef (־) concatenation bug: now properly replaced with space
+- New `_extract_all_phrase_forms_from_verse()` extracts all phrase variations
+- Guarantees every phrase search finds its source verse
 
 **Session 179 (2025-12-07)**: Figurative Vehicle Search Fix
 - Removed morphological variants from vehicle searches (tent → ~~living~~)
@@ -26,14 +38,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Eliminated exponential query growth for phrase searches
 - No variations for phrases, only exact forms
 - Reduced "גור באהל" from 824 → 5 queries
-
-**Session 174 (2025-12-06)**: Maqqef Handling Enhancement
-- Improved word boundary detection with maqqef (־)
-- Fixed compound word matching in concordance searches
-
-**Session 173 (2025-12-06)**: Enhanced Phrase Extraction
-- Added exact form preservation in micro analyst
-- Fallback extraction from verse text when LLM fails
 
 ## Quick Commands
 
