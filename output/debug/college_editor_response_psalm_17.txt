@@ -1,0 +1,808 @@
+### EDITORIAL ASSESSMENT
+
+The existing introduction and commentary contain a lot of excellent material. The theological arc (from legal plea to mystical vision), the contrast between “full bellies” and “seeing God,” and the possible temple-incubation setting are all really stimulating. The writer clearly knows the traditional commentators and uses them well, and there’s good attention to Hebrew detail and to intertextual echoes (especially Numbers 12:8, Deuteronomy 4, Psalms 16/73).
+
+For a first-year college audience, though—even one comfortable in Hebrew—the style is too dense and academic. There’s heavy use of jargon (“forensic rhetoric,” “eschatological hope,” “incubation,” “participial description”) with no quick definitions. Sentences are long and abstract, and the “why this is interesting” sometimes gets buried under piles of detail. The tone feels like a journal article more than a great class session.
+
+A few specific issues:
+
+- Technical terms (inclusio, participle, Hiphil, etc.) are not consistently defined.
+- Some research questions raised by the macro/micro analyses (esp. v. 4 syntax, v. 14 referent, חֶלֶד) could be answered more directly and clearly.
+- The liturgical section is solid but sprawling; it needs clearer structure and a few well-chosen examples rather than an exhaustive catalog.
+- The verse-by-verse commentary is rich but sometimes loses the thread; it can feel more like a collection of notes than a guided reading.
+
+Revisions needed: simplify and reorganize. Define every technical term in plain English, cut repetition, and foreground a few big through-lines: (1) courtroom + temple; (2) the eye/seeing motif; (3) the contrast between two “good lives.” Bring in the traditional and rabbinic material selectively, always explaining why a particular midrash or comment matters. Use more direct “Notice how…” teaching moves, and occasionally lighten the tone. And because the student already reads Hebrew, we can lean into Hebrew examples—but always with quick English glosses.
+
+---
+
+## REVISED INTRODUCTION
+
+### A big-picture snapshot: what is Psalm 17 doing?
+
+Imagine you’re spending the night in the Temple.
+
+You’ve been falsely accused, enemies are circling, and you’ve come to the sanctuary to get a verdict from God. You lie down in the holy place expecting a dream or some sense of God’s judgment by morning. While you wait, you pray.
+
+That’s one very plausible way to picture Psalm 17.
+
+The psalm opens like someone banging on the courtroom door of heaven:
+
+> שִׁמְעָ֤ה יְהוָ֨ה ׀ צֶ֗דֶק; הַקְשִׁ֥יבָה רִנָּתִ֗י; הַאֲזִ֥ינָה תְפִלָּתִ֑י  
+> “Hear, LORD, righteousness; listen to my cry; give ear to my prayer…” (v. 1)
+
+Three near-synonyms for “hear” pile up: **שִׁמְעָה / הַקְשִׁיבָה / הַאֲזִינָה**. That’s called **anaphora**—repeating a word or phrase at the start of successive lines—and it creates the feeling of someone who will *not* hang up until God picks up the phone.
+
+By the end, though, the psalm is somewhere very different:
+
+> אֲנִ֗י בְּצֶ֫דֶק אֶחֱזֶ֣ה פָנֶ֑יךָ; אֶשְׂבְּעָ֥ה בְהָקִ֗יץ תְּמוּנָתֶֽךָ  
+> “As for me, in righteousness I will behold Your face; when I awake, I will be satisfied with Your likeness.” (v. 15)
+
+We’ve moved from “hear me!” to “I will *see* You.” Along the way, the psalm compares two very different versions of “the good life”:
+
+- The wicked: people whose **חֶלְקָם בַּחַיִּים**—“portion is in this life”—whose **בֶּטֶן** (“belly”) is full, whose children and grandchildren inherit plenty (v. 14).
+- The righteous speaker: someone whose real satisfaction is **not** in wealth or even family, but in “beholding God’s face” (v. 15).
+
+So this isn’t only a cry for help. It’s also a meditation on what kind of life is worth wanting.
+
+### Courtroom plus sanctuary: legal language in a holy place
+
+One of the most important things to notice is how **legal** the language is. “Forensic” (from Latin *forensis*, “of the law-court”) sounds fancy; it just means “about a court case.”
+
+Look at the opening:
+
+- צֶדֶק — “righteousness / justice”
+- מִשְׁפָּטִי — “my judgment / my legal case” (v. 2)
+- מֵישָׁרִים — “uprightness, straightness” (v. 2)
+
+Verse 2 pictures God as the judge:
+
+> מִלְּפָנֶיךָ מִשְׁפָּטִי יֵצֵא; עֵינֶיךָ תֶּחֱזֶינָה מֵישָׁרִים  
+> “From before You let my judgment come forth; Your eyes behold what is upright.”
+
+The verb **יֵצֵא** (“go out”) is used for verdicts “coming out” from a court. So the speaker is basically saying, “Let *Your* decision be the one that counts. Human courts can misjudge me; I want *Your* ruling.”
+
+At the same time, we’re clearly in a sacred setting. Look at v. 3:
+
+> בָּחַנְתָּ לִבִּי; פָּקַדְתָּ לַּיְלָה; צְרַפְתַּנִי…  
+> “You have tested my heart; You have visited [me] at night; You have refined me…”
+
+Those verbs are all **perfect tense** in Hebrew—forms that usually describe completed actions. The idea is: “You’ve already run the tests.” And **פָּקַדְתָּ לַּיְלָה** (“You visited at night”) is intriguing. In the ancient Near East, people sometimes did **incubation**—they slept in temples hoping for a dream from the god that would answer a question or give a healing. If you read Psalm 17 with that in mind, a picture emerges:
+
+- Night: God “visits” and tests the psalmist.
+- Morning: “בְּהָקִיץ” (“when I awake,” v. 15) the psalmist expects some kind of vision or clarity.
+
+You don’t have to buy the incubation theory, but it fits really nicely with the night/morning language and with the Temple imagery in v. 8 (“shadow of Your wings”), which many traditional commentators (like Radak) connect to the **cherubim** over the Ark.
+
+So the psalm is like a court case *held* in the Temple: the accused comes to God’s house, spends the night, and waits for God’s verdict.
+
+### The architecture: how the poem moves
+
+Here’s a simple roadmap:
+
+1. **vv. 1–2 – Opening appeal:** “Hear my just cause, judge me Yourself.”
+2. **vv. 3–5 – Protestation of innocence:** God has already tested the psalmist’s heart, speech, and steps.
+3. **vv. 6–9 – Direct petition:** confident “You will answer me,” plus those gorgeous protection images—“apple of the eye,” “shadow of Your wings.”
+4. **vv. 10–12 – Enemies described:** fat-hearted, arrogant talkers; then they focus into a single lion.
+5. **vv. 13–14 – Battle prayer + contrast:** “Arise, LORD… rescue me from the wicked… from mortals whose portion is in this life.”
+6. **v. 15 – The punchline:** true satisfaction is seeing God’s face.
+
+Two literary tricks hold this all together:
+
+- An **inclusio** (“envelope” structure): the root **צ־ד־ק** appears at the start and end.  
+  - v. 1: *שִׁמְעָה יְהוָה צֶדֶק* — “Hear, LORD, righteousness.”  
+  - v. 15: *אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ* — “As for me, **in righteousness** I will behold Your face.”  
+  We start with righteousness as the thing God should hear; we end with righteousness as the condition for seeing God.
+- A satisfaction-word echo:  
+  - v. 14: *יִשְׂבְּעוּ בָנִים* — “they are **satisfied** with sons…”  
+  - v. 15: *אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ* — “I will be **satisfied** when I awake [with] Your likeness.”  
+  Same root **שׂ־ב־ע** (“to be full, satisfied”), radically different menu.
+
+We’ll keep referring back to these as we go through the verses: righteousness, seeing, and satisfaction.
+
+### The two “good lives”: bellies vs. God’s face
+
+Verse 14 is famously tricky, but the big idea is clear once you see the contrast.
+
+The Hebrew:
+
+> מִמְתִים יָדְךָ יְהוָה; מִמְתִים מֵחֶלֶד חֶלְקָם בַּחַיִּים;  
+> וּצְפוּנְךָ תְּמַלֵּא בִטְנָם; יִשְׂבְּעוּ בָנִים;  
+> וְהִנִּיחוּ יִתְרָם לְעוֹלְלֵיהֶם׃  
+
+A straightforward reading (Radak, most modern commentators) is:
+
+- “from men, by Your hand, LORD, from men of **חֶלֶד** (fleeting time / this present world), whose portion is in this life.”
+- God fills their **בֶּטֶן** (“belly”) with *His* stored-up good (*צְפוּנְךָ* = “Your treasure / what You have stored up”).
+- They have plenty of sons and even leave extra to their grandchildren.
+
+So we’re looking at very successful people: comfortable, fertile, with estates big enough to generate an inheritance for the next generation. If you stopped reading at v. 14, you’d think, “Okay, these are the winners.”
+
+Verse 15 then deliberately flips that:
+
+> אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ; אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ׃  
+
+“As for me”—*I*—will be satisfied not with belly or with descendants, but with **פָּנֶיךָ** (“Your face”) and **תְּמוּנָתֶךָ** (“Your form/likeness”).
+
+That’s why it matters that **שָׂבֵעַ** (“be satisfied”) appears in both verses. The poet is arguing: the real competition isn’t “me vs. my enemies”; it’s two models of flourishing:
+
+- **Model A**: eat well, have lots of kids, pass on wealth.
+- **Model B**: live righteously and wake up to the vision of God.
+
+The psalm says: Model B wins.
+
+You can see cousins of this argument in other psalms:
+
+- Psalm 73 struggles with the prosperity of the wicked, but ends:  
+  > “מִי־לִי בַשָּׁמָיִם; וְעִמְּךָ לֹא־חָפַצְתִּי בָאָרֶץ…  
+  > וַאֲנִי קִרְבַת אֱלֹהִים לִי־טוֹב”  
+  > “Whom have I in heaven but You? And having You, I desire nothing on earth… As for me, nearness to God is good.” (73:25, 28)
+- Psalm 16:11:  
+  > “שֹׂבַע שְׂמָחוֹת אֶת־פָּנֶיךָ; נְעִמוֹת בִּימִינְךָ נֶצַח”  
+  > “Fullness of joys is in Your presence; pleasures at Your right hand forever.”
+
+Psalm 17 is in that same conversation, but it gets even bolder by talking about *seeing* God’s very **תְּמוּנָה**.
+
+### “Seeing God”?! How daring is v. 15?
+
+The word תְּמוּנָה (“form, likeness”) is rare and theologically loaded. Elsewhere:
+
+- Numbers 12:8:  
+  > “וּתְמֻנַת יְהוָה יַבִּיט”  
+  > “[Moses] beholds the form (תְּמוּנָה) of the LORD.”  
+  Moses is uniquely granted this.
+- Deuteronomy 4:12:  
+  > “וּתְמוּנָה אֵינְכֶם רֹאִים זֻלָתִי קוֹל”  
+  > “You saw no form (תְּמוּנָה), only a voice.”  
+  Israel at Sinai *didn’t* see any form—hence the ban on making images.
+
+So when our psalmist says, *“I will be satisfied… with Your תְּמוּנָה,”* he is making a Moses-sized claim. That’s why medieval commentators handle this verse carefully:
+
+- **Rashi** leans toward an afterlife reading: “When the dead awaken, I’ll be satisfied with seeing Your likeness.”
+- **Radak** explicitly says: “I am hoping to behold Your face in the world to come,” earned by righteousness now.
+- **Ibn Ezra** “philosophizes” it: the vision is intellectual—understanding God’s ways in creation with the “eye of the mind,” not the physical eye.
+
+Either way, the psalm answers a very deep question: *What is the ultimate reward of being righteous?* Not just safety. Not just winning your lawsuit. Not even a happy life. The real prize is **God Himself**—experienced as presence, as vision, as unmediated relationship.
+
+And that’s why this psalm shows up in Jewish liturgy at intense moments (Yom Kippur, Birkat Kohanim, Rosh Hashanah). The community borrows its language when it most wants God to look at us—and when we dare to say that we, in turn, want to look back.
+
+---
+
+---LITURGICAL-SECTION-START---
+
+### Modern Jewish Liturgical Use
+
+#### Full psalm
+
+In the **Edot HaMizrach** (Middle Eastern) tradition, the entire psalm (vv. 1–15) is recited on **Yom Kippur morning** during *Pesukei deZimra* (the “Verses of Praise” before the main Amidah). It appears alongside other extra psalms that intensify the day’s tone of pleading for mercy. The worshiper prays:
+
+> תְּפִלָּה לְדָוִד; שִׁמְעָה יְהוָה צֶדֶק הַקְשִׁיבָה רִנָּתִי…  
+> “A prayer of David. Hear, LORD, righteousness; listen to my cry…”
+
+Later, the psalm’s closing hope—
+
+> אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ…  
+> “As for me, in righteousness I will behold Your face…”
+
+—sets a kind of emotional goal for the day: not just forgiveness, but restored intimacy with God.
+
+The **opening verses (1–3)** are also used by Edot HaMizrach in the **Selichot of Yom Kippur eve**, as part of a string of biblical cries for a hearing.
+
+#### Key verses
+
+**Psalm 17:8**  
+> שׇׁמְרֵנִי כְּאִישׁוֹן בַּת־עָיִן; בְּצֵל כְּנָפֶיךָ תַּסְתִּירֵנִי׃  
+> “Guard me like the pupil of the eye; hide me in the shadow of Your wings.”
+
+This is one of the most beloved protection verses in Jewish prayer. In the **Sefardi** Birkat Kohanim (Priestly Blessing) during Shacharit, when the kohanim say “וְיִשְׁמְרֶךָ” (“may He guard you”), the congregation responds:
+
+> שָׁמְרֵנִי אֵל כִּי חָסִיתִי בָךְ;  
+> שָׁמְרֵנִי כְּאִישׁוֹן בַּת עָיִן;  
+> בְּצֵל כְּנָפֶיךָ תַּסְתִּירֵנִי.  
+> “Guard me, O God, for I have taken refuge in You. Guard me like the pupil of the eye; hide me in the shadow of Your wings.”
+
+Here the verse turns the priestly blessing into a personal whisper: “Don’t just ‘guard us’ in general; guard me like Your own eye.”
+
+**Psalm 17:15**  
+> אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ; אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ׃  
+
+In the Sefardi Birkat Kohanim, this verse appears in a longer chain of “face” verses:
+
+> אַל תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי…  
+> אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ; אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ.  
+> “Do not hide Your face from me… As for me, in righteousness I will behold Your face; I will be satisfied when I awake with Your likeness.”
+
+So when the kohanim bless the people with “יָאֵר ה’ פָּנָיו אֵלֶיךָ” (“May the LORD make His face shine upon you”), the congregation answers with its own longing to *see* that face.
+
+This line also enters the mystical world: in the Lag BaOmer *piyyut* “Bar Yochai,” the stanza on **בִּינָה** ends with our verse, applying “in righteousness I will behold Your face” to Rabbi Shimon bar Yochai’s spiritual attainment.
+
+#### Phrases
+
+**שִׁמְעָה יְהוָה צֶדֶק** (17:1) — “Hear, LORD, righteousness”
+
+This short cry shows up in **Selichot**. For example, Sefardi Selichot before Rosh Hashanah include:
+
+> שְׁמַע יְהוָה קוֹלֵנוּ…  
+> שִׁמְעָה יְהוָה צֶדֶק; הַקְשִׁיבָה רִנָּתֵנוּ; הַאֲזִינָה תְּפִלָּתֵנוּ.  
+> “Hear, LORD, our voice… Hear, LORD, righteousness; listen to our cry; give ear to our prayer.”
+
+The psalm’s legal language (“righteousness,” “judgment from before You”) becomes a way for the community to say: we are not asking for favors; we’re asking for a fair hearing.
+
+**מִלְּפָנֶיךָ מִשְׁפָּטִי יֵצֵא** (17:2) — “From before You let my judgment come forth”
+
+In the Ashkenazi Rosh Hashanah Musaf, a *piyyut* woven into the Kedushah quotes this line when begging for a merciful verdict:
+
+> מִלְּפָנֶיךָ מִשְׁפָּטִי יֵצֵא; עֵינֶיךָ תֶּחֱזֶינָה מֵישָׁרִים.  
+> “From before You let my judgment come forth; Your eyes behold what is upright.”
+
+On the Day of Judgment, worshipers want the same thing as our psalmist: not human justice, but God’s.
+
+---
+
+## REVISED VERSE-BY-VERSE COMMENTARY
+
+---
+
+### Verse 1
+
+**תְּפִלָּה לְדָוִד; שִׁמְעָה יְהוָה צֶדֶק; הַקְשִׁיבָה רִנָּתִי; הַאֲזִינָה תְפִלָּתִי; בְּלֹא שִׂפְתֵי מִרְמָה׃**
+
+“A prayer of David. Hear, LORD, righteousness; listen to my cry; give ear to my prayer, from lips without deceit.”
+
+The superscription **תְּפִלָּה לְדָוִד** already sets the tone: this is not a hymn *about* God but a desperate address *to* God.
+
+The triple stack of verbs—**שִׁמְעָה / הַקְשִׁיבָה / הַאֲזִינָה**—is classic poetic **anaphora** (repeating the same opening). All three mean “hear,” but with slightly different flavors:
+
+- **שָׁמַע** – basic hearing: “Hear.”
+- **הִקְשִׁיב** – “pay attention carefully.”
+- **הֶאֱזִין** – literally “give ear,” lean in to listen.
+
+In English we might say: “Listen. *Really* listen. Please *pay attention*.” The repetition plus the rising intensity makes you feel the urgency.
+
+Then there’s the strange little phrase **שִׁמְעָה יְהוָה צֶדֶק**. Does that mean:
+
+1. “Hear, LORD, *righteousness*”—treat *צֶדֶק* (“justice/right”) itself as the thing heard; or  
+2. “Hear, LORD, *[my] righteous cause*”?
+
+Traditional commentators split. Ibn Ezra glosses as if it were (2): *“שִׁמְעָה כִּי צֶדֶק אֲדַבֵּר”*—“Hear, for I speak what is right.” Radak reads it as “Hear my prayer, which is in righteousness,” stressing that what he’s saying is morally straight. Modern translators often prefer “hear what is right.” The ambiguity is almost certainly deliberate: the psalmist claims both that his **case** is just and that *he himself* is not praying with hidden motives.
+
+That gets spelled out in the last colon:
+
+> בְּלֹא שִׂפְתֵי מִרְמָה  
+> “from lips without deceit.”
+
+This is a classic biblical idiom that defines something by what it *doesn’t* have: no **מִרְמָה**—no trickery, manipulation, or double-speak. Compare Psalm 32:2:
+
+> “אַשְׁרֵי אָדָם… וְאֵין בְּרוּחוֹ רְמִיָּה”  
+> “Happy is the person… in whose spirit there is no deceit.”
+
+Already in v. 1, then, the psalmist is not groveling; he’s acting like someone in court who says, “I’m ready to be cross-examined. I have nothing to hide.”
+
+In Selichot, communities borrow this line when they, too, want to claim sincerity. But they do it humbly, surrounded by confession—almost as if to say, “At least in this moment of prayer, let our lips *be* without deceit.”
+
+---
+
+### Verse 2
+
+**מִלְּפָנֶיךָ מִשְׁפָּטִי יֵצֵא; עֵינֶיךָ תֶּחֱזֶינָה מֵישָׁרִים׃**
+
+“From before You let my judgment come forth; Your eyes behold what is upright.”
+
+We are squarely in legal territory. **מִשְׁפָּטִי יֵצֵא** is courtroom language: my *judgment* or *verdict* is to “go out” from God’s presence. Instead of trusting human courts or popular opinions, the psalmist wants the decision “from before Your face” (**מִלְּפָנֶיךָ**).
+
+Rashi takes this in an unusually self-doubting direction. He paraphrases:
+
+> “עֲבֵירוֹת שֶׁבְּיָדִי… יֵצְאוּ מִלְּפָנֶיךָ, וְלֹא יָבוֹאוּ לְפָנֶיךָ בַּדִּין.”  
+> “May the sins for which I deserve punishment go *out* from before You and not come before You in judgment.”
+
+In other words: “Let those sins quietly exit the courtroom.” That’s a very rabbinic way to pray Psalm 17: even a speaker who *sounds* extremely righteous (as this psalm does) must still acknowledge an underlying layer of fault.
+
+The second colon shifts to God’s perception:
+
+> עֵינֶיךָ תֶּחֱזֶינָה מֵישָׁרִים  
+> “Your eyes behold what is straight/upright.”
+
+The verb **חָזָה** (here **תֶּחֱזֶינָה**) is important. It’s not the ordinary “see” (**רָאָה**), but a verb often used for **vision**—prophetic or deep, penetrating sight. The noun **מֵישָׁרִים** is literally “straight things,” hence “what is upright / equitable.”
+
+So God is pictured as the one judge whose eyes can see perfectly straight through all the spin. This starts an **“eye motif”** that runs through the psalm:
+
+- God’s eyes behold uprightness (v. 2).
+- The speaker begs to be guarded as the **“apple of the eye”** (v. 8).
+- The enemies’ eyes prowl the land, looking to cast down (v. 11).
+- Finally, *the psalmist’s* eyes will “behold [God’s] face” (v. 15).
+
+In other words: at first, God is the one doing the seeing and judging; by the end, the reward is that the psalmist gets to see *God*.
+
+Psalm 44:4 uses a similar cluster: “כִּי לֹא בְחַרְבָּם יָרְשׁוּ אֶרֶץ… כִּי יְמִינְךָ וּזְרוֹעֲךָ וְאוֹר פָּנֶיךָ” — “For not by their sword did they take the land… but by Your right hand, Your arm, and the light of Your face.” In both psalms, the *light of God’s face* is what makes justice and victory possible.
+
+---
+
+### Verse 3
+
+**בָּחַנְתָּ לִבִּי; פָּקַדְתָּ לַּיְלָה; צְרַפְתַּנִי בַל־תִּמְצָא; זַמֹּתִי בַל־יַעֲבׇר־פִּי׃**
+
+“You have tested my heart; You have visited me at night; You have refined me—You will find nothing; my plan shall not pass my mouth.”
+
+This is an astonishing self-portrait. Three verbs—**בָּחַנְתָּ / פָּקַדְתָּ / צְרַפְתַּנִי**—are all in the perfect (“you *have* tested… you *have* visited… you *have* refined”), as if the exam is already done and graded.
+
+- **בָּחַן** – to test, examine, often of God testing hearts.
+- **פָּקַד** – a very flexible verb; here “visit, attend to.”  
+  **פָּקַדְתָּ לַּיְלָה** is unique: “You visited [me] at night.”
+- **צָרַף** – to smelt metal, refine by fire; used metaphorically for purifying people.
+
+The smelting image shows up all over the Bible:
+
+> “צְרַפְתִּים כִּצְרֹף אֶת־הַכֶּסֶף” — “I will refine them as one refines silver” (Zechariah 13:9).  
+> “כֶּסֶף צָרוּף… מְזֻקָּק שִׁבְעָתָיִם” — “silver refined… seven times” (Psalm 12:7).
+
+Here, the psalmist says, in effect: “You’ve put me in the crucible, and there were no impurities to skim off.”
+
+What about that “night visitation”? One simple reading (Ibn Ezra) is psychological: night is when you’re alone with your thoughts, with no social mask. God has seen him in that vulnerable state. Some scholars, as you saw in the introduction, connect this to **temple incubation**—sleeping in the sanctuary hoping for a dream-response. Either way, the point is: God knows what I’m like when nobody else is watching.
+
+Then comes a double negative:
+
+> צְרַפְתַּנִי בַל־תִּמְצָא  
+> “You have refined me; You will *not* find [anything].”
+
+and
+
+> זַמֹּתִי בַל־יַעֲבׇר־פִּי  
+> “My plan [is that] it will *not* pass my mouth.”
+
+**זִמָּה** usually means “scheme, plan,” often in a bad sense (“evil plot,” or even sexual sin in Leviticus). Here it’s tricky. One way (Metzudat David) is: “I fixed it as my plan that anything improper would not pass my lips.” Malbim pushes even further: if there is a thought so shameful it shouldn’t even be *said*, he tries not to *think* it either.
+
+The **Torah Temimah** quotes a delightful midrash (Berakhot 4a) that turns this verse into a kind of “if only” prayer. When David once said, in another psalm, “בְּחָנֵנִי ה’ וְנַסֵּנִי, צָרְפָה כִלְיוֹתַי וְלִבִּי” (“Test me, LORD, and try me; refine my heart and mind,” Ps 26:2), God apparently took him up on it—with the whole Bathsheba incident. On Psalm 17:3 the midrash imagines David saying: “How I wish that boast had fallen into the mouth of someone who hates me, and that I had never said it!”
+
+So v. 3 is both bold—“You won’t find anything wrong”—and, in later Jewish reading, tinged with regret about ever daring God to test him like that.
+
+---
+
+### Verse 4
+
+**לִפְעֻלּוֹת אָדָם בִּדְבַר שְׂפָתֶיךָ; אֲנִי שָׁמַרְתִּי אׇרְחוֹת פָּרִיץ׃**
+
+“As for human deeds—by the word of Your lips—I have kept [myself] from the paths of the violent.”
+
+This verse is famously hard to parse in Hebrew. The key trouble spot is **אֲנִי שָׁמַרְתִּי אׇרְחוֹת פָּרִיץ**.
+
+- **שָׁמַר** can mean “keep, observe,” but also “guard against, keep away from.”
+- **אׇרְחוֹת פָּרִיץ** – “paths/ways of the **פָּרִיץ**,” the lawless or violent person. BDB glosses פָּרִיץ as “violent one, robber, murderer.”
+
+So do we translate “I have *kept* the paths of the violent” (i.e., I’ve lived like them), or “I have *kept away from* the paths of the violent”?
+
+Context is everything. Given vv. 3 and 5—where the psalmist insists his heart is pure and his **feet** haven’t slipped from God’s paths—the second reading makes much more sense: “I have guarded myself against the violent paths.”
+
+We can fill in the sense like this:
+
+> לִפְעֻלּוֹת אָדָם בִּדְבַר שְׂפָתֶיךָ  
+> “When it comes to human actions, guided by the word of Your lips…”
+
+What are “the word of Your lips”? God’s commands, as in Torah.
+
+So: in the whole area of **פְּעֻלּוֹת אָדָם**—things humans do—God’s speech is the standard. Against that backdrop, the speaker says:
+
+> אֲנִי שָׁמַרְתִּי אׇרְחוֹת פָּרִיץ  
+> “I have kept [myself]—watched out for myself—regarding the paths of the violent [so as not to walk there].”
+
+Radak reads this as “I did *not* act like the wicked and violent,” even though the “not” isn’t explicit. Hebrew poetry often omits such words when the contrast is obvious.
+
+You can hear an echo of Psalm 1:1:
+
+> “אַשְׁרֵי הָאִישׁ אֲשֶׁר לֹא הָלַךְ בַּעֲצַת רְשָׁעִים…”  
+> “Happy is the man who *does not walk* in the counsel of the wicked…”
+
+Same basic moral geography: there are paths out there—ways of doing things—marked “violent, exploitative, corrupt.” The righteous person refuses to walk them.
+
+The first half—**“by the word of Your lips”**—grounds all this in revelation. The psalmist isn’t just following his gut feeling of niceness; he is aligning his behavior with God’s instructions.
+
+---
+
+### Verse 5
+
+**תָּמֹךְ אֲשֻׁרַי בְּמַעְגְּלוֹתֶיךָ; בַּל־נָמוֹטּוּ פְּעָמָי׃**
+
+“Support my steps in Your tracks, that my footsteps may not slip.”
+
+Here the metaphors shift from heart and lips to **feet**.
+
+- **אֲשֻׁרַי / פְּעָמָי** – both mean “my steps.”
+- **מַעְגְּלוֹתֶיךָ** – “Your tracks / paths.” This is a more specific word than the usual **דֶּרֶךְ** (“way”): BDB describes מַעְגָּל as something like “wagon-track,” the grooves worn into the earth by repeated passage.
+
+So the picture is of God’s ways as well-worn tracks through the landscape, and the psalmist asks: “Hold my steps right in those grooves.”
+
+The verb **תָּמֹךְ** is an imperative—“support, uphold.” Radak notes it’s a **verbal noun used as command** (like “שָׁמוֹר” in “שָׁמוֹר אֶת־יוֹם הַשַּׁבָּת,” Deut 5:12).
+
+The line:
+
+> בַּל־נָמוֹטּוּ פְּעָמָי  
+> “So that my footsteps may not slip”
+
+uses **מוֹט** (“to totter, slip”), a favorite psalm word. Psalm 16:8 says “שִׁוִּיתִי ה’ לְנֶגְדִּי תָמִיד… בַּל־אֶמּוֹט” — “I have set the LORD before me always… I shall not be moved.” Psalm 121:3 promises, “אַל־יִתֵּן לַמּוֹט רַגְלֶךָ” — “He will not let your foot slip.”
+
+Malbim adds a clever nuance: he distinguishes between the straight “path” (אֹרַח) of obvious virtues and the more **“circuitous tracks”** (מַעְגָּלִים) sometimes needed to reach a good end. For example, mercy and modesty are straight paths; but in dealing with unrepentant evil, one might need to use severity or boldness—things that *look* like cruelty or pride but are in fact serving justice.
+
+On that reading, the psalmist prays not only, “Keep me walking in Your straight roads,” but also, “When I have to take the winding, morally complex roads, support me so I don’t actually fall off into real sin.”
+
+In any case, v. 5 marks a transition: having asserted past integrity (vv. 3–4), the psalmist now asks for ongoing help. Even the most righteous walker can twist an ankle.
+
+---
+
+### Verse 6
+
+**אֲנִי־קְרָאתִיךָ כִּי־תַעֲנֵנִי אֵל; הַט־אׇזְנְךָ לִי; שְׁמַע אִמְרָתִי׃**
+
+“I call on You, for You will answer me, O God; incline Your ear to me; hear my utterance.”
+
+Notice the confident logic: **“I call… because You will answer.”** Not “if,” but “because.”
+
+- **קְרָאתִיךָ** – perfect: “I have called You” (this is my pattern).
+- **כִּי־תַעֲנֵנִי** – “for You *will* answer me.”
+
+Rashi: “כִּי בָּטוּחַ אֲנִי שֶׁתַּעֲנֵנִי” — “For I am confident that You will answer me.” The Hebrew future tense here is about certainty, not just a time-line.
+
+The divine name shifts: here we get **אֵל** (“God”) rather than the Tetragrammaton alone. **אֵל** carries a connotation of power/strength, as in “אֵל שַׁדַּי” or “אֵל עֶלְיוֹן.” Given that the next lines ask God to *act*, it fits.
+
+We also get more “ear” imagery:
+
+- **הַט־אׇזְנְךָ לִי** – “Incline Your ear to me,” literally “bend Your ear toward me.” It’s a vivid anthropomorphism: God has to lean down from heaven to hear.
+- **שְׁמַע אִמְרָתִי** – “Hear my utterance.”
+
+**אִמְרָה** is often used in Psalms for God’s own “sayings” (especially in Psalm 119), but here it dignifies the psalmist’s carefully framed speech. This isn’t just a scream; it’s a considered case.
+
+You can hear an echo of Psalm 31:3:
+
+> “הַטֵּה אֵלַי אָזְנְךָ; מְהֵרָה הַצִּילֵנִי”  
+> “Incline Your ear to me; quickly rescue me.”
+
+The use of almost identical language across psalms reinforces that this is a *liturgical* phrase—something worshipers would have known by heart and reused.
+
+The structure of Psalm 17 so far:
+
+- vv. 1–2: “Hear me because my cause is just.”
+- vv. 3–5: “You’ve already tested me; my heart, words, and steps are clean.”
+- v. 6: “Therefore, I’m *sure* You will answer—so please, lean in and listen closely.”
+
+We’re now ready to ask for something big.
+
+---
+
+### Verse 7
+
+**הַפְלֵה חֲסָדֶיךָ; מוֹשִׁיעַ חוֹסִים; מִמִּתְקוֹמְמִים בִּימִינֶךָ׃**
+
+“Make Your mercies wondrous, O Savior of those who take refuge, from those who rise up [against them] with Your right hand.”
+
+The opening verb **הַפְלֵה** comes from **פלא**, the root of “wonder, marvel.” In prose, *הִפְלָה* can mean “separate, distinguish” (as in Exodus 8:18, “וְהִפְלֵיתִי בַּיּוֹם הַהוּא” — “I will set apart [the land of Goshen]”). In psalms, it often leans toward “do something extraordinary.”
+
+So:
+
+> הַפְלֵה חֲסָדֶיךָ  
+> “Make Your **חֲסָדִים**—Your covenant-loyalties—stand out as extraordinary.”
+
+**חֶסֶד** is more than “kindness”; it’s the steady, committed love God shows to those in relationship with Him. Here it’s plural—“Your acts of loyal love.”
+
+Then we get a beautiful miniature title for God:
+
+> מוֹשִׁיעַ חוֹסִים  
+> “Savior of those who take refuge [in You].”
+
+- **מוֹשִׁיעַ** – Hiphil participle of י־שׁ־ע: “one who saves.”
+- **חוֹסִים** – “those who **חסה**,” who flee to refuge. This verb is all over Psalms (e.g., 2:12, 7:2, 34:9).
+
+So God is defined by a pattern: He habitually rescues people who run to Him.
+
+The hard phrase is **מִמִּתְקוֹמְמִים בִּימִינֶךָ**. Literally: “from those who are rising up by Your right hand.” Two main readings:
+
+1. Attach בִּימִינֶךָ to **מוֹשִׁיעַ**: “You who save with Your right hand those who take refuge from their assailants.” This matches Psalm 44:4:  
+   > “כִּי לֹא בְחַרְבָּם יָרְשׁוּ אֶרֶץ… כִּי יְמִינְךָ… וְאוֹר פָּנֶיךָ”  
+   > “Not by their sword did they take the land… but by Your right hand and the light of Your face.”  
+   God’s right hand is the symbol of His power.
+2. Attach בִּימִינֶךָ to **מִתְקוֹמְמִים** (Radak): “from those who rise up *against Your right hand*.” On this view, David’s enemies are, in rebelling against the king chosen by God, actually rebelling against God Himself. Their fight is with the divine right hand that appointed David.
+
+Either way, the idea is: “Show spectacular, covenant-faithful mercy to those hiding in You—by overpowering the ones who have dared to rise up.”
+
+Liturgically, this verse is quoted in a Yehi Ratzon for the tribe of Reuven in the Seder Korban HaNesi’im (Edot HaMizrach), which prays:
+
+> “קוּמָה עֶזְרָתָה לָּנוּ… הַפְלֵה חֲסָדֶיךָ מוֹשִׁיעַ חוֹסִים”  
+> “Arise, be our help… make Your covenant-loves wondrous, O Savior of those who take refuge.”
+
+The personal “Save *me* from my enemies” of Psalm 17 becomes “Save *us*,” the whole people.
+
+---
+
+### Verse 8
+
+**שׇׁמְרֵנִי כְּאִישׁוֹן בַּת־עָיִן; בְּצֵל כְּנָפֶיךָ תַּסְתִּירֵנִי׃**
+
+“Guard me like the pupil of the eye; hide me in the shadow of Your wings.”
+
+This is one of the most intimate protection verses in the Bible, packing two vivid metaphors into a single poetic line.
+
+First: **כְּאִישׁוֹן בַּת־עָיִן**.
+
+- **אִישׁוֹן** likely comes from **אִישׁ** (“man”) with a diminutive ending: “little man.” If you look closely into someone’s pupil, you see a tiny reflection of yourself—that little “man” in their eye.
+- **בַּת־עָיִן** – literally “daughter of the eye,” a tender way to say “the eye’s center.”
+
+Deuteronomy 32:10 uses the same image:
+
+> “יִצְּרֶנְהוּ כְּאִישׁוֹן עֵינוֹ”  
+> “He guarded him like the pupil of His eye.”
+
+Zechariah 2:12 says: “הַנֹּגֵעַ בָּכֶם נֹגֵעַ בְּבָבַת עֵינוֹ” — “Whoever touches you touches the pupil of His eye.” The idea is: the pupil is your most vulnerable spot; instinctively you guard it. So to ask God to keep you as His “pupil” is to ask for the most reflexive, intense protection imaginable.
+
+Second: **בְּצֵל כְּנָפֶיךָ תַּסְתִּירֵנִי**.
+
+- **כָּנָף** – “wing.”
+- **צֵל** – “shadow.”
+
+This phrase “in the shadow of Your wings” recurs in Psalms (36:8, 57:2, 61:5, 63:8, 91:4). It can evoke:
+
+1. A mother bird sheltering her chicks under her wings (compare Deut 32:11).
+2. The wings of the cherubim over the Ark in the Holy of Holies (“סֹכְכִים בְּכַנְפֵיהֶם עַל הַכַּפֹּרֶת,” Exod 25:20).
+
+Radak explicitly opts for (2): “צֵל כְּנָפֶיךָ—כַּנְפֵי הַכְּרוּבִים.” On that reading, the psalmist is imagining himself in the very center of the sanctuary, hidden under the symbolic wings of God’s throne.
+
+The verb **תַּסְתִּירֵנִי** (from **סתר**, “hide, conceal”) adds the sense of being tucked away out of danger.
+
+In Sefardi practice, as noted above, this verse is recited responsively with the Priestly Blessing. The people say:
+
+> “שָׁמְרֵנִי כְּאִישׁוֹן בַּת עָיִן; בְּצֵל כְּנָפֶיךָ תַּסְתִּירֵנִי.”
+
+What was originally the plea of one endangered individual becomes the daily, communal request: “Treat us like Your eye; keep us in Your shadow.”
+
+---
+
+### Verse 9
+
+**מִפְּנֵי רְשָׁעִים זוּ שַׁדּוּנִי; אֹיְבַי בְּנֶפֶשׁ יַקִּיפוּ עָלָי׃**
+
+“from the wicked who despoil me, my enemies who encircle me with [desire for] my life.”
+
+Now the enemies appear explicitly.
+
+- **מִפְּנֵי רְשָׁעִים** – “from the face of the wicked,” i.e., from in front of them, from their presence.
+- **זוּ שַׁדּוּנִי** – literally “those who have plundered me.” **שָׁדַד** means to devastate, plunder, strip bare—stronger than just “annoy me.” Think of cities sacked in prophetic oracles (e.g., Isa 33:1).
+
+The little word **זוּ** is odd: it can function like “this/these” or like “who.” Here it’s probably “who”: “the wicked *who* plunder me.”
+
+The second colon:
+
+> אֹיְבַי בְּנֶפֶשׁ יַקִּיפוּ עָלָי  
+> “My enemies encircle me **בְּנֶפֶשׁ** around me.”
+
+**יַקִּיפוּ** from **נָקַף** – “encircle, surround.” We saw in Psalm 22:17: “עֲדַת מְרֵעִים הִקִּיפוּנִי” — “a band of evildoers has encircled me.”
+
+What does **בְּנֶפֶשׁ** add? **נֶפֶשׁ** can mean “life,” “soul,” or “appetite.” Two main options:
+
+1. “With [intent on my] life” — Radak: “לָקַחַת נַפְשִׁי” – “to take my life.” So they’re surrounding him to kill him.
+2. “With their whole being / passionately” — they are all in, emotionally invested in their hatred.
+
+Either way, it intensifies the danger: this isn’t casual opposition; it’s life-and-death siege.
+
+You can already feel the spatial pressure building: they “encircle” (**יַקִּיפוּ**), then in v. 11 they “surround our steps” (**סְבָבוּנוּ**), and finally in v. 12 all that threat focuses into a single lion.
+
+Psalm 12:9 describes a similar moral climate: “סָבִיב רְשָׁעִים יִתְהַלָּכוּן” — “All around, wicked people prowl.” The sense is: you can’t go anywhere without bumping into malice.
+
+---
+
+### Verse 10
+
+**חֶלְבָּמוֹ סָגְרוּ; פִּימוֹ דִּבְּרוּ בְגֵאוּת׃**
+
+“Their fat they have closed [over]; with their mouth they speak arrogantly.”
+
+This verse is a little grammatical puzzle wrapped in a vivid metaphor.
+
+First colon: **חֶלְבָּמוֹ סָגְרוּ**.
+
+- **חֵלֶב** is “fat”—especially the rich fat of sacrificial animals.
+- So literally: “Their fat they have closed.”
+
+What does that mean?
+
+Rashi takes it metaphorically: in their fatness and self-indulgence they have **“closed their heart and eyes”** to God’s works. Prosperity has made them insensitive. This picks up a familiar biblical critique:
+
+- Deut 32:15: “וַיִּשְׁמַן יְשֻׁרוּן וַיִּבְעָט” — “Jeshurun grew fat and kicked.”
+- Psalm 73:7: “יָצָא מֵחֵלֶב עֵינֵמוֹ” — “Their eyes bulge from fatness.”
+
+So “fat” becomes a symbol for complacency and moral numbness.
+
+Radak reads: “Their great sleekness has closed their mouth; *therefore* they speak with pride from their great luxury.” That sounds contradictory until you realize it’s imagery: their mouths are metaphorically so swaddled in fat that whatever does manage to come out is bloated, self-satisfied boasting.
+
+Second colon: **פִּימוֹ דִּבְּרוּ בְגֵאוּת**.
+
+- **פִּימוֹ** – literally “their mouth,” singular, with a plural verb **דִּבְּרוּ** (“they spoke”). This is likely a **collective singular**: one mouth representing their united speech.
+- **בְגֵאוּת** – “in pride, arrogance.”
+
+So we get a moral anatomy: overfed hearts, thick with fat, producing swollen, arrogant speech.
+
+Thematically, this ties verse 10 to verse 14: the wicked’s full **בֶּטֶן** and satisfied children are not neutral blessings; they can fuel the kind of self-sufficient pride seen here. Psalm 73 puts it bluntly: “Their eyes bulge from fatness… they scoff and speak with malice; loftily they threaten” (vv. 7–8).
+
+Our psalmist is surrounded by exactly that type—and he is asking God to look beneath the smooth surface of their success to see the hard interior.
+
+---
+
+### Verse 11
+
+**אַשֻּׁרֵינוּ עַתָּה סְבָבוּנוּ; עֵינֵיהֶם יָשִׁיתוּ לִנְטוֹת בָּאָרֶץ׃**
+
+“Our steps, now they surround [us]; their eyes they set to cast down in the land.”
+
+The first word, **אַשֻּׁרֵינוּ**, is “our steps” (from **אֲשֻׁר**). The crucible of danger has gone from “me” (singular, v. 9) to “us” (plural)—the psalmist’s followers are now included. There’s even a little textual flicker: the written form (Ketiv) is “סְבָבוּנִי” (“they surrounded *me*”), while the traditional reading (Qere) is “סְבָבוּנוּ” (“they surrounded *us*”). Radak says: the singular refers to David himself as the main target; the plural folds in his band.
+
+**עַתָּה** — “now”—adds urgency. This is happening *right now*, as he prays.
+
+> אַשֻּׁרֵינוּ עַתָּה סְבָבוּנוּ  
+> “Our steps—now—they’ve hemmed us in.”
+
+Picture enemies shadowing your every move, cutting off every route of escape.
+
+Second colon:
+
+> עֵינֵיהֶם יָשִׁיתוּ לִנְטוֹת בָּאָרֶץ
+
+Literally, “Their eyes they set to stretch out / cast down in the land.” The Hebrew is compressed; a natural unpacking is:
+
+- **יָשִׁיתוּ עֵינֵיהֶם** – “they set their eyes [on something],” i.e., focus intently.
+- **לִנְטוֹת בָּאָרֶץ** – “to bend [something] down to the earth,” or “to lay snares in the land.”
+
+Radak explains: they fix their eyes on our path “to spread their net in the land, to trap us.” That fits the hunting imagery in the next verse.
+
+Compare Psalm 142:4:
+
+> “בְּאֹרַח־זוּ אֲהַלֵּךְ טָמְנוּ פַּח לִי”  
+> “On the path where I walk they have hidden a trap for me.”
+
+Same idea: enemies watching your movements, looking for the perfect spot to spring a snare.
+
+So v. 11 continues the “eye” theme: God’s eyes see what is upright (v. 2), the psalmist is the “pupil of the eye” (v. 8), but the enemies’ eyes are predatory cameras, tracking his steps to pull him down to earth.
+
+---
+
+### Verse 12
+
+**דִּמְיֹנוֹ כְּאַרְיֵה יִכְסֹף לִטְרֹף; וְכִכְפִיר יֹשֵׁב בְּמִסְתָּרִים׃**
+
+“His likeness is like a lion eager to tear; and like a young lion sitting in hiding.”
+
+Here all the (plural) enemies coalesce into one archetypal predator: **“his likeness”** (**דִּמְיֹנוֹ**) is like a lion.
+
+**דִּמְיוֹן** (“likeness, semblance”) is a hapax legomenon—appears only here—which makes it stand out. The psalmist is saying: “At the level of *essence*, he’s a lion.”
+
+Two lion terms:
+
+- **אַרְיֵה** – lion, often the adult male.
+- **כְּפִיר** – “young lion,” lion in its prime.
+
+Both show up in other psalms of danger:
+
+- Psalm 7:3: “פֶּן־יִטְרֹף כְּאַרְיֵה נַפְשִׁי” — “Lest he tear my soul like a lion.”
+- Psalm 22:14: “אַרְיֵה טֹרֵף וְשֹׁאֵג” — “a lion tearing and roaring.”
+
+The verb **יִכְסֹף** (“yearns, longs for”) normally means intense desire (cf. Gen 31:30: “כִּי נִכְסֹף נִכְסַפְתָּ לְבֵית אָבִיךָ” — “you greatly longed for your father’s house”). So this is not just any lion; it is *craving* the kill.
+
+Second half:
+
+> וְכִכְפִיר יֹשֵׁב בְּמִסְתָּרִים  
+> “and like a young lion sitting in hiding.”
+
+**מִסְתָּרִים** (“hiding places”) fits standard ambush imagery. Compare Lamentations 3:10: “דֹּב אֹרֵב הוּא לִי, אַרְיֵה בְּמִסְתָּרִים” — “He is to me like a lurking bear, a lion in hiding.”
+
+Some traditional commentators, like Radak, read this as a specific enemy—Saul—based on connections with Psalm 7 (“about Cush the Benjaminite”). Whether or not you follow that, the poetic point stands: the psalmist feels hunted, not just opposed. The enemy isn’t a clumsy bear, easily avoided; he’s a patient, hungry lion, both eager (**יִכְסֹף**) and strategic (**יֹשֵׁב בְּמִסְתָּרִים**).
+
+Taken with verses 9–11, the image intensifies: first a ring of enemies, then tightly surrounding steps, now a single predator ready to spring. Precisely at this moment, in v. 13, the psalmist will call for God to arise as a counter-warrior.
+
+---
+
+### Verse 13
+
+**קוּמָה יְהוָה; קַדְּמָה פָנָיו; הַכְרִיעֵהוּ; פַּלְּטָה נַפְשִׁי מֵרָשָׁע חַרְבֶּךָ׃**
+
+“Arise, LORD! Confront him! Bring him down! Rescue my life from the wicked—Your sword.”
+
+This verse is a cascade of imperatives, like rapid-fire shouts on a battlefield:
+
+1. **קוּמָה יְהוָה** – “Arise, LORD!” This is a stock battle-cry. In Numbers 10:35, as the Ark sets out, Moses says: “קוּמָה ה’ וְיָפֻצוּ אֹיְבֶיךָ” — “Arise, LORD, and let Your enemies be scattered.”
+2. **קַדְּמָה פָנָיו** – “Confront his face,” or “meet him head-on.” The root **קדם** can mean “go before, intercept.” The picture is of God stepping in front of the charging lion.
+3. **הַכְרִיעֵהוּ** – “Make him kneel / bring him down.” From **כָּרַע**, to kneel or collapse. Rashi: “קַפַּח אֶת רַגְלָיו וְיִכְרַע וְיִפּוֹל” — “Strike his legs so he kneels and falls.”
+4. **פַּלְּטָה נַפְשִׁי** – “Deliver my soul/life.” **פּלט** means to make someone escape, to rescue.
+
+The last phrase is theologically charged:
+
+> מֵרָשָׁע חַרְבֶּךָ  
+> “from the wicked, [who is] Your sword.”
+
+Is the wicked **God’s sword** (apposition), or is this simply “from the wicked—[by] Your sword”? Radak connects it to Isaiah 10:5:
+
+> “הוֹי אַשּׁוּר, שֵׁבֶט אַפִּי”  
+> “Ah, Assyria, rod of My anger…”
+
+There, a foreign empire is the **rod** in God’s hand to punish Israel. Similarly, our verse can be read: the wicked is *currently* God’s instrument of punishment—His sword—but the psalmist asks God to now *sheath* that sword and deliver him from it.
+
+The tension is deep: in a world where even dangerous enemies can be doing (in some sense) God’s work of judgment, the sufferer still cries out to be spared. The psalm doesn’t try to solve all that philosophically; it just shouts a four-part prayer: “Get up. Confront. Knock him down. Pull me out.”
+
+---
+
+### Verse 14
+
+**מִמְתִים יָדְךָ יְהוָה; מִמְתִים מֵחֶלֶד חֶלְקָם בַּחַיִּים; וּצְפוּנְךָ תְּמַלֵּא בִטְנָם; יִשְׂבְּעוּ בָנִים; וְהִנִּיחוּ יִתְרָם לְעוֹלְלֵיהֶם׃**
+
+“from mortals—by Your hand, LORD—from mortals of fleeting [time], whose portion is in this life; and Your treasure You fill their belly with; they are satisfied with sons, and leave their surplus to their little ones.”
+
+This verse is the interpretive crux of the psalm. Who are these **“mortals”** (**מְתִים**)?
+
+One consistent reading (Radak, many moderns) is: these are the **wicked**, whose prosperity is being contrasted to the psalmist’s spiritual satisfaction.
+
+Pieces of the puzzle:
+
+- **מִמְתִים יָדְךָ** – “[Deliver me] from men, [who are] Your hand.” Parallel to v. 13 (“from the wicked, Your sword”). These are humans through whom God acts—both to maintain the world and to judge.
+- **מִמְתִים מֵחֶלֶד** – “from men of **חֶלֶד**.” **חֶלֶד** elsewhere (Ps 39:6) speaks of fleeting existence:  
+  > “הִנֵּה טְפָחוֹת נָתַתָּה יָמַי… אַךְ כׇּל־הֶבֶל כׇּל־אָדָם נִצָּב סֶלָה.”  
+  So these are “men of this passing world.”
+- **חֶלְקָם בַּחַיִּים** – “their portion is in [this] life.” Compare Ecclesiastes 9:9: “כִּי הוּא חֶלְקְךָ בַּחַיִּים” — “for that is your portion in life.”
+
+Then:
+
+> וּצְפוּנְךָ תְּמַלֵּא בִטְנָם  
+> “Your hidden [treasure] You fill their belly with.”
+
+**צָפוּן** – “hidden, stored up.” Psalm 31:20: “מָה רַב טוּבְךָ אֲשֶׁר צָפַנְתָּ לִּירֵאֶיךָ” — “How great is Your goodness that You have stored up for those who fear You.” Here, ironically, that stored-up good is filling *their* stomachs.
+
+> יִשְׂבְּעוּ בָנִים; וְהִנִּיחוּ יִתְרָם לְעוֹלְלֵיהֶם  
+> “They are satisfied with sons; they leave their surplus to their little ones.”
+
+This is the ideal ancient Israelite picture of success: many sons, and enough wealth to leave an inheritance even to grandchildren (**עוֹלְלִים**).
+
+So why are these apparently godless “men of this world” getting such a sweet deal? Psalm 73 asks exactly this. Our psalm doesn’t answer by denying their prosperity; it simply says: *that’s their entire portion*. They cash out in this age. The psalmist wants something else.
+
+Rashi offers a creative twist, reading מִמְתִים as “those who die by Your hand… those who die of old age,” and contrasting different deaths of righteous and wicked. He ends up still setting “their portion in life” against “I will see Your face.”
+
+The **Torah Temimah** quotes a Talmudic aggadah (Berakhot 5b) on the phrase “וּצְפוּנְךָ תְּמַלֵּא בִטְנָם” that goes off in a totally different direction—about positioning one’s bed between north and south to merit sons (!). That’s classic rabbinic reuse: pulling a phrase out into a new halakhic/mystical context.
+
+But in Psalm 17 itself, the meaning is simpler and sharper: “Some people get full bellies, happy children, and large inheritances. Good for them. That is **not** what I’m ultimately jealous of.”
+
+---
+
+### Verse 15
+
+**אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ; אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ׃**
+
+“But as for me, in righteousness I will behold Your face; when I awake, I will be satisfied with Your likeness.”
+
+This is the climax of the psalm.
+
+The emphatic **אֲנִי** (“as for me”) picks up over against the “they” of v. 14. **בְּצֶדֶק** (“in righteousness”) completes the **inclusio** that began in v. 1 (“שִׁמְעָה יְהוָה צֶדֶק”). Righteousness is both the ground of the plea and the condition of the vision.
+
+The verb **אֶחֱזֶה** (from **חזה**) is the “vision” verb we saw in v. 2 (“Your eyes behold uprightly”). Here the direction is reversed: God’s eyes saw justly, and now the righteous human will see God.
+
+> פָנֶיךָ  
+> “Your face”
+
+is a loaded term in the Bible. On the one hand, Exodus 33:20: “לֹא יוּכַל הָאָדָם לִרְאֹתִי וָחָי” — “Man cannot see Me and live.” On the other hand, Moses speaks to God “פָּנִים אֶל־פָּנִים” (“face to face,” Exod 33:11). Psalms constantly pray, “אַל־תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי” — “Do not hide Your face from me.”
+
+Is Psalm 17:15 claiming Moses-level theophany? The **תְּמוּנָתֶךָ** at the end pushes us in that direction:
+
+> אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ  
+> “I will be satisfied, when I awake, with Your form/likeness.”
+
+As we saw, **תְּמוּנָה** is used in Num 12:8 exactly for Moses:
+
+> “וּתְמֻנַת ה’ יַבִּיט” — “and he beholds the form of the LORD.”
+
+So the psalmist is daring to hope for a Moses-like experience.
+
+What about **בְהָקִיץ** (“when I awake”)? Three main options:
+
+1. **Literal morning** after a temple night vigil. Then the line means: “When I wake from sleep in the sanctuary, and You give me some vision of Your presence, that will satisfy me.”
+2. **Spiritual/moral awakening** from the “sleep” of crisis. More metaphorical: “When this dark night passes and I ‘wake up’ into deliverance, I will be satisfied by experiencing Your presence.”
+3. **Resurrection / world-to-come**. This is Rashi and Radak’s line: when the dead awaken, the righteous will see God’s face. Daniel 12:2 uses the same verb: “וְרַבִּים מִיְּשֵׁנֵי אַדְמַת עָפָר יָקִיצוּ” — “Many of those who sleep in the dust will awake.”
+
+Ibn Ezra, nervous about literal seeing, says this vision isn’t with the eyes but with the **intellect**, through reflecting on God’s wise works.
+
+The psalm itself keeps it intentionally open. What matters is the **reversal of v. 14**:
+
+- **They** are “satisfied” (**יִשְׂבְּעוּ**) with sons and wealth.
+- **I** will be “satisfied” (**אֶשְׂבְּעָה**) with seeing You.
+
+In Sefardi Birkat Kohanim, quoting this verse right after “Do not hide Your face from me” turns the priestly blessing (“May the LORD make His face shine upon you”) into a two-way relationship: not only “may God’s face turn toward you,” but also “may you, in righteousness, one day behold His face and find in that the deepest possible fullness.”
+
+For a first-year reader, the takeaway is simple and profound: Psalm 17 is not just about getting God to fix our problems. It is about what we ultimately want from God. And the psalm’s answer is: more than anything else, we want God Himself.

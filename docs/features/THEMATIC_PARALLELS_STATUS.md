@@ -11,8 +11,8 @@
 
 | Phase | Status | Started | Completed | Notes |
 |-------|--------|---------|-----------|-------|
-| 0. Environment Setup | ⬜ Not Started | - | - | Install chromadb, openai; create directories |
-| 1. Corpus Preparation | ⬜ Not Started | - | - | Build chunked JSONL corpus |
+| 0. Environment Setup | ✅ Complete | 2025-12-09 | 2025-12-09 | Installed chromadb, openai, tiktoken; directories created |
+| 1. Corpus Preparation | 🟡 Partial | 2025-12-09 | - | Built 6,372 chunks (sliding window). Need to evaluate Masoretic/Sefaria chunking |
 | 2. Embedding & Indexing | ⬜ Not Started | - | - | Generate embeddings, build ChromaDB |
 | 3. Retrieval Implementation | ⬜ Not Started | - | - | ThematicParallelsLibrarian |
 | 4. Pipeline Integration | ⬜ Not Started | - | - | Integrate into ResearchAssembler |
@@ -26,8 +26,8 @@
 
 ### Session 183 - 2025-12-09
 
-**Phase**: Planning
-**Duration**: ~2 hours
+**Phase**: Planning + Phase 0 + Phase 1 (Partial)
+**Duration**: ~3 hours
 **Developer**: Claude (with user)
 
 **Completed**:
@@ -36,39 +36,54 @@
 - [x] Discussed chunking strategies (Gemini analysis review)
 - [x] Created comprehensive implementation plan
 - [x] Created this status tracking file
+- [x] Phase 0: Installed dependencies (chromadb, openai, tiktoken)
+- [x] Phase 0: Created directory structure (data/thematic_corpus/, src/thematic/, tests/thematic/)
+- [x] Phase 0: Verified OpenAI API access
+- [x] Phase 1: Implemented chunk_schemas.py
+- [x] Phase 1: Implemented corpus_builder.py
+- [x] Phase 1: Created build_thematic_corpus.py script
+- [x] Phase 1: Created inspect_chunks.py script
+- [x] Phase 1: Built corpus with 6,372 chunks using sliding window
+- [x] Discovered 16,000+ Masoretic section markers in database (unused)
+- [x] Researched Sefaria API for topic/subject metadata
 
 **Blockers**:
-- None
+- Windows console unicode issues when displaying Hebrew text (partially fixed)
 
 **Next Session**:
-- [ ] Phase 0: Install dependencies (chromadb, openai)
-- [ ] Phase 0: Create directory structure
-- [ ] Phase 0: Verify OpenAI API access
-- [ ] Phase 1: Implement chunk_schemas.py
+- [ ] Implement Masoretic marker chunking for comparison
+- [ ] Implement Sefaria API integration for subject/topic chunks
+- [ ] Demonstrate both chunking methods side-by-side
+- [ ] User decision on preferred chunking strategy
+- [ ] Rebuild corpus with chosen method
+- [ ] Phase 2: Implement embedding_service.py
 
 ---
 
 ## Checkpoints Verified
 
 ### Phase 0: Environment Setup
-- [ ] chromadb installed (`pip install chromadb`)
-- [ ] openai installed (`pip install openai`)
-- [ ] tiktoken installed (`pip install tiktoken`)
-- [ ] `data/thematic_corpus/` directory created
-- [ ] `src/thematic/` directory created
-- [ ] `tests/thematic/` directory created
-- [ ] OpenAI API key verified working
-- [ ] `src/thematic/__init__.py` created
+- [x] chromadb installed (`pip install chromadb`)
+- [x] openai installed (`pip install openai`)
+- [x] tiktoken installed (`pip install tiktoken`)
+- [x] `data/thematic_corpus/` directory created
+- [x] `src/thematic/` directory created
+- [x] `tests/thematic/` directory created
+- [x] OpenAI API key verified working
+- [x] `src/thematic/__init__.py` created
 
 ### Phase 1: Corpus Preparation
-- [ ] `chunk_schemas.py` implemented
-- [ ] `corpus_builder.py` implemented
-- [ ] `build_thematic_corpus.py` script working
-- [ ] `inspect_chunks.py` script working
-- [ ] `tanakh_chunks.jsonl` generated
-- [ ] `chunk_metadata.json` generated
-- [ ] **VISUAL INSPECTION**: Reviewed 20+ chunks across Torah, Prophets, Writings
-- [ ] Chunks look sensible (right size, coherent content)
+- [x] `chunk_schemas.py` implemented
+- [x] `corpus_builder.py` implemented
+- [x] `build_thematic_corpus.py` script working
+- [x] `inspect_chunks.py` script working
+- [x] `tanakh_chunks.jsonl` generated (6,372 chunks)
+- [x] `chunk_metadata.json` generated
+- [x] **VISUAL INSPECTION**: Reviewed chunks across Genesis, Job, Proverbs
+- [x] Chunks look sensible (sliding window approach)
+- [ ] Masoretic marker chunking implemented (TODO)
+- [ ] Sefaria API subject chunking implemented (TODO)
+- [ ] User evaluation of chunking methods (TODO)
 
 ### Phase 2: Embedding & Indexing
 - [ ] `embedding_service.py` implemented (OpenAI + Mock)
@@ -110,7 +125,8 @@
 
 | Issue | Severity | Status | Notes |
 |-------|----------|--------|-------|
-| - | - | - | No issues yet |
+| Masoretic markers unused | Low | Open | 16,000+ ס/פ markers in database not used for chunking |
+| Unicode display issues | Low | Partial | Windows console can't display Hebrew (workaround available) |
 
 ---
 
@@ -156,26 +172,28 @@
 ## Files Created/Modified
 
 ### Created
-- [ ] `src/thematic/__init__.py`
-- [ ] `src/thematic/chunk_schemas.py`
-- [ ] `src/thematic/corpus_builder.py`
+- [x] `src/thematic/__init__.py`
+- [x] `src/thematic/chunk_schemas.py`
+- [x] `src/thematic/corpus_builder.py`
 - [ ] `src/thematic/embedding_service.py`
 - [ ] `src/thematic/vector_store.py`
 - [ ] `src/agents/thematic_parallels_librarian.py`
-- [ ] `scripts/build_thematic_corpus.py`
+- [x] `scripts/build_thematic_corpus.py`
 - [ ] `scripts/build_vector_index.py`
-- [ ] `scripts/inspect_chunks.py`
+- [x] `scripts/inspect_chunks.py`
+- [x] `scripts/verify_openai_setup.py`
+- [x] `scripts/check_masoretic_markers.py`
 - [ ] `scripts/test_thematic_retrieval.py`
 - [ ] `tests/thematic/conftest.py`
 - [ ] `tests/thematic/test_*.py` (multiple)
-- [ ] `data/thematic_corpus/tanakh_chunks.jsonl`
-- [ ] `data/thematic_corpus/chunk_metadata.json`
+- [x] `data/thematic_corpus/tanakh_chunks.jsonl`
+- [x] `data/thematic_corpus/chunk_metadata.json`
 - [ ] `data/thematic_corpus/chroma_db/` (directory)
 
 ### Modified
 - [ ] `src/agents/research_assembler.py`
 - [ ] `src/agents/__init__.py`
-- [ ] `requirements.txt`
+- [x] `requirements.txt`
 - [ ] `CLAUDE.md`
 - [ ] `docs/session_tracking/PROJECT_STATUS.md`
 

@@ -1,12 +1,28 @@
 
 Beginning
 
-Continuing Psalms project. Please read:
-1. @NEXT_SESSION_PROMPT.md (session handoff)
-2. @PROJECT_STATUS.md (current task)
-Note that during this work, you should make session updates to these documents and @IMPLEMENTATION_LOG.md and NOT create separate session documents.
+ Read CLAUDE.md to get up to speed on the project.
 
-What should I work on next?
+  Current task: [describe what you want to work on]
+
+  Important reminders:
+  - Follow file organization rules in CLAUDE.md
+  - Don't create new .md files unless absolutely necessary
+  - Archive test scripts to archive/debugging/ after use
+  - Update docs/session_tracking/PROJECT_STATUS.md with any major changes
+  - If significant work is done, update the "Recent Major Changes" section in CLAUDE.md
+
+  ---
+
+  If you're continuing specific work, add:
+  Continuing from Session [X]: [brief description]
+  See docs/session_tracking/PROJECT_STATUS.md for recent changes
+
+  Or if you're starting something new:
+  New task: [description]
+  Check archive/debugging/ for similar past work
+
+
 
 
 End
