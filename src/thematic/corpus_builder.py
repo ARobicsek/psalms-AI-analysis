@@ -71,6 +71,7 @@ class CorpusBuilder:
         self,
         exclude_psalms: bool = True,
         use_sefaria_sections: bool = True,
+        use_masoretic_markers: bool = False,
     ) -> ChunkMetadata:
         """
         Build the complete corpus.
@@ -78,6 +79,7 @@ class CorpusBuilder:
         Args:
             exclude_psalms: Skip Psalms (we're finding parallels TO psalms)
             use_sefaria_sections: Try Sefaria sections first, fallback to windows
+            use_masoretic_markers: Use Masoretic section markers (ס/פ) for chunking
 
         Returns:
             ChunkMetadata with corpus statistics
@@ -95,7 +97,7 @@ class CorpusBuilder:
                 continue
 
             logger.info(f"Processing {book}...")
-            book_chunks = self._chunk_book(book, use_sefaria_sections)
+            book_chunks = self._chunk_book(book, use_sefaria_sections, use_masoretic_markers)
             chunks.extend(book_chunks)
             logger.info(f"  → {len(book_chunks)} chunks")
 
@@ -145,15 +147,17 @@ class CorpusBuilder:
         self,
         book: str,
         use_sefaria_sections: bool,
+        use_masoretic_markers: bool = False,
     ) -> List[TanakhChunk]:
         """
         Chunk a single book.
 
         Strategy:
-        1. Try Sefaria sections if enabled
-        2. For Psalms: one chunk per psalm (though usually excluded)
-        3. For Proverbs: use collection boundaries
-        4. Fallback: sliding window
+        1. If use_masoretic_markers: use Masoretic section markers (ס/פ)
+        2. Try Sefaria sections if enabled
+        3. For Psalms: one chunk per psalm (though usually excluded)
+        4. For Proverbs: use collection boundaries
+        5. Fallback: sliding window
         """
         verses = self._get_book_text(book)
 
@@ -168,6 +172,9 @@ class CorpusBuilder:
             return self._chunk_proverbs(verses)
         elif book == "Job":
             return self._chunk_job(verses)
+        elif use_masoretic_markers:
+            # Use Masoretic section markers
+            return self._masoretic_marker_chunks(book, verses)
         elif use_sefaria_sections:
             # Try Sefaria sections first
             sefaria_chunks = self._try_sefaria_sections(book, verses)
@@ -337,6 +344,61 @@ class CorpusBuilder:
         # TODO: Implement Sefaria API integration
         # For now, return None to fall back to sliding window
         return None
+
+    def _masoretic_marker_chunks(
+        self,
+        book: str,
+        verses: List[Dict],
+    ) -> List[TanakhChunk]:
+        """
+        Create chunks using proper Masoretic section markers {ס} and {פ}.
+
+        The Masoretic text includes special markers that mark paragraph boundaries:
+        - {ס} (samekh in braces) marks the end of a closed section (paragraph break)
+        - {פ} (peh in braces) marks the end of an open section (new line but same paragraph)
+
+        These markers provide thematic boundaries that have been used for centuries.
+        NOTE: We look for {ס} and {פ} specifically, not standalone letters.
+        """
+        chunks = []
+        current_chunk_verses = []
+
+        for verse in verses:
+            current_chunk_verses.append(verse)
+            hebrew_text = verse["hebrew"]
+
+            # Check if this verse has a proper Masoretic marker (with braces)
+            has_samekh = '{ס}' in hebrew_text
+            has_peh = '{פ}' in hebrew_text
+
+            # If we find a section marker, create a chunk
+            if has_samekh or has_peh:
+                # Create a copy of verses for this chunk
+                chunk_verses = []
+                for v in current_chunk_verses:
+                    verse_copy = v.copy()
+                    # Remove markers from the text for cleaner output
+                    verse_copy["hebrew"] = verse_copy["hebrew"].replace('{ס}', '').replace('{פ}', '')
+                    chunk_verses.append(verse_copy)
+
+                chunk = self._create_chunk(
+                    book=book,
+                    verses=chunk_verses,
+                    chunk_type=ChunkType.SEFARIA_SECTION,  # Reuse this type for traditional sections
+                )
+                chunks.append(chunk)
+                current_chunk_verses = []
+
+        # Don't forget the last verses if no marker at book end
+        if current_chunk_verses:
+            chunk = self._create_chunk(
+                book=book,
+                verses=current_chunk_verses,
+                chunk_type=ChunkType.SEFARIA_SECTION,
+            )
+            chunks.append(chunk)
+
+        return chunks
 
     def _sliding_window_chunks(
         self,
