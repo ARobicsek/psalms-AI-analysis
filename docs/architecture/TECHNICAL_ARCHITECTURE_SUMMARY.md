@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, GPT-5) with eight specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
+The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, GPT-5.1) with eight specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
 
@@ -42,33 +42,37 @@ Input: Psalm Number
 [2] Micro Analysis + Research Request Generation (Claude Sonnet 4.5)
     → Discovery-driven verse analysis, research requests
     ↓
-    [Research Bundle Assembly - 8 Python Librarians]
+    [Research Bundle Assembly - 9 Python Librarians]
     → Lexicon, concordance, figurative analysis, commentary,
-      liturgical usage, related psalms, Sacks
+      liturgical usage, related psalms, Sacks, Hirsch
     ↓
 [3] Synthesis Writing (Claude Sonnet 4.5)
     → Introduction essay + verse commentary with quotations
     ↓
-[4] Master Editorial Review (GPT-5.1)
+[4] Master Editorial Review (GPT-5.1 or Claude Opus 4.5)
     → Critical review, fact-checking, enhancement to "National Book Award" level
+    ↓
+[4b] College Commentary Generation (GPT-5.1 or Claude Opus 4.5)
+    → Separate, more accessible version for college students
     ↓
 [5] Print-Ready Formatting (Python)
     → Markdown with divine name modifications, verse numbering
     ↓
 [6] Document Generation (Python)
-    → Professional .docx with metadata, statistics
+    → Three .docx outputs: main commentary, college edition, combined
     ↓
-Output: Scholarly Commentary (.docx + .md)
+Output: Scholarly Commentary (.docx + .md, with college edition)
 ```
 
 ### Core Components
 
-1. **AI Agents** (4 specialized LLM-based analyzers)
-2. **Librarian Agents** (8 deterministic Python data retrieval systems)
+1. **AI Agents** (4 specialized LLM-based analyzers with dual-edition output)
+2. **Librarian Agents** (9 deterministic Python data retrieval systems)
 3. **Data Sources** (SQLite databases, Sefaria API, RAG documents, V6 statistical analysis)
 4. **Pipeline Tracking** (Comprehensive statistics with resume capability)
-5. **Output Generation** (Markdown → Word document formatting)
-6. **Logging & Metrics** (Dual-format observability system)
+5. **Cost Tracking** (API usage and cost monitoring across all models)
+6. **Output Generation** (Markdown → Multiple Word document formats)
+7. **Logging & Metrics** (Dual-format observability system)
 
 ---
 
@@ -116,11 +120,18 @@ Output: Scholarly Commentary (.docx + .md)
   - **Poetic punctuation** (Session 121): LLM-generated verses with semicolons, periods, commas
   - Accessible scholarly voice (Robert Alter, Ellen Davis style)
 
-#### MasterEditor (Pass 4)
-- **Model**: GPT-5 (`gpt-5`)
+#### MasterEditor (Pass 4 & 4b)
+- **Model Options**: GPT-5.1 (`gpt-5.1`), GPT-5 (`gpt-5`), or Claude Opus 4.5 (`claude-opus-4-5`)
+  - **Default**: GPT-5.1 with high reasoning effort
+  - **Alternative**: Claude Opus 4.5 with extended thinking (64K token budget)
 - **Purpose**: Final editorial review and quality enhancement
+- **Dual Output**:
+  - **Pass 4**: Main edition for sophisticated lay readers (New Yorker/Atlantic audience)
+  - **Pass 4b**: College edition with more accessible language for undergraduate students
 - **Input**: Complete commentary, research bundle, analysis objects, psalm text
-- **Output**: Revised introduction + verse commentary + editorial assessment
+- **Output**:
+  - Main: Revised introduction + verse commentary + editorial assessment
+  - College: Revised introduction + verse commentary + editorial assessment (more accessible)
 - **Character Limit**: 350,000 characters (~175K tokens) for comprehensive review
 - **Key Features**:
   - "National Book Award" quality standards
@@ -131,6 +142,7 @@ Output: Scholarly Commentary (.docx + .md)
   - Missed opportunities identification (unused research, unanswered questions)
   - Style refinement (avoiding LLM-ish breathlessness, academic jargon)
   - Coherence and argumentation strengthening
+  - **College Edition Adaptations**: Simplified language, fewer technical terms, more context
 
 ### 2. Librarian Agent System
 
@@ -215,8 +227,18 @@ Output: Scholarly Commentary (.docx + .md)
   - Philosophical and ethical interpretations
   - Contemporary relevance emphasis
 
+#### Hirsch Librarian
+- **Function**: Retrieves R. Samson Raphael Hirsch's 19th-century German commentary
+- **Source**: OCR-extracted commentary from Hirsch's Psalms volume
+- **Implementation**: `src/agents/hirsch_librarian.py`
+- **Key Features**:
+  - 19th-century German Orthodox perspective
+  - Philosophical and symbolic interpretations
+  - Linguistic analysis with ethical applications
+  - ALWAYS included when available (no explicit request needed)
+
 #### Research Bundle Assembler
-- **Function**: Coordinates all 8 librarians and formats results
+- **Function**: Coordinates all 9 librarians and formats results
 - **Output**: Markdown format for LLM consumption
 - **Implementation**: `src/agents/research_assembler.py`
 - **Librarians Coordinated**:
@@ -224,9 +246,11 @@ Output: Scholarly Commentary (.docx + .md)
   2. Concordance Librarian (word/phrase searches)
   3. Figurative Language Librarian (metaphor analysis)
   4. Commentary Librarian (traditional Jewish commentaries)
-  5. Liturgical Librarian (liturgical usage)
-  6. Related Psalms Librarian (statistical connections)
-  7. Sacks Librarian (modern British Orthodox perspective)
+  5. Liturgical Librarian (liturgical usage - Phase 4/5 aggregated)
+  6. Liturgical Librarian Sefaria (liturgical usage - Phase 0 fallback, deprecated)
+  7. Related Psalms Librarian (statistical connections)
+  8. Sacks Librarian (modern British Orthodox perspective)
+  9. Hirsch Librarian (19th-century German Orthodox perspective)
 - **Key Features**:
   - JSON and Markdown serialization
   - Token limit management (700,000 character capacity - Session 109)
@@ -381,10 +405,13 @@ def normalize_hebrew(text: str, level: int) -> str:
 - **`--skip-micro`**: Use existing micro analysis file
 - **`--skip-synthesis`**: Use existing synthesis files
 - **`--skip-master-edit`**: Use existing master-edited files
+- **`--skip-college`**: Skip college commentary generation (use existing file)
 - **`--skip-print-ready`**: Skip print-ready formatting step
 - **`--skip-word-doc`**: Skip .docx generation step
+- **`--skip-combined-doc`**: Skip combined .docx generation (main + college in one document)
 - **`--smoke-test`**: Generate dummy data without API calls
 - **`--skip-default-commentaries`**: Use selective commentary mode
+- **`--master-editor-model`**: Model to use for master editor (choices: gpt-5, gpt-5.1, claude-opus-4-5)
 - **`--delay SECONDS`**: Rate limit delay between API-heavy steps (default: 120)
 
 ### 6. Output Generation Pipeline
@@ -401,7 +428,13 @@ def normalize_hebrew(text: str, level: int) -> str:
 
 #### Document Generator
 - **Function**: Word document creation (.docx)
-- **Implementation**: `src/utils/document_generator.py`
+- **Implementations**:
+  - `src/utils/document_generator.py` - Main and college editions
+  - `src/utils/combined_document_generator.py` - Combined edition
+- **Three Output Formats**:
+  1. **Main Edition** (`psalm_NNN_commentary.docx`): Full scholarly commentary for sophisticated lay readers
+  2. **College Edition** (`psalm_NNN_commentary_college.docx`): More accessible version for undergraduates
+  3. **Combined Edition** (`psalm_NNN_commentary_combined.docx`): Both main and college in one document
 - **Features**:
   - Professional formatting with Hebrew fonts
   - Print-ready layout
@@ -413,6 +446,7 @@ def normalize_hebrew(text: str, level: int) -> str:
   - **Sefaria footnote stripping** (Session 109): Removes `-c`, `-d` markers from English text
   - Phonetic transcription italicization
   - Divine name formatting
+  - Bidirectional text handling for Hebrew/English
 
 ### 7. Logging and Observability
 
@@ -427,6 +461,22 @@ def normalize_hebrew(text: str, level: int) -> str:
 - API call success rates
 - Research bundle statistics
 - Figurative language utilization rates
+
+#### Cost Tracking System
+- **Function**: Real-time API usage and cost monitoring
+- **Implementation**: `src/utils/cost_tracker.py`
+- **Key Features**:
+  - Tracks token usage (input and output) for all LLM calls
+  - Calculates costs based on model-specific pricing
+  - Supports multiple models (Claude Sonnet 4.5, Haiku 4.5, GPT-5, GPT-5.1, Claude Opus 4.5)
+  - Provides cost summaries at end of pipeline
+  - Enables cost projections and budgeting
+- **Models Tracked**:
+  - Claude Sonnet 4.5 (MacroAnalyst, MicroAnalyst, SynthesisWriter)
+  - Claude Haiku 4.5 (Liturgical Librarian summaries)
+  - GPT-5.1 or GPT-5 (MasterEditor main and college editions)
+  - Claude Opus 4.5 (Alternative MasterEditor with extended thinking)
+- **Output**: Summary table showing per-model usage and total costs
 
 ---
 
@@ -622,15 +672,22 @@ FROM concordance
   - MacroAnalyst (Pass 1): Structural analysis with extended thinking
   - MicroAnalystV2 (Pass 2): Discovery-driven research with extended thinking
   - SynthesisWriter (Pass 3): Commentary synthesis
-- **GPT-5** (`gpt-5`):
-  - MasterEditor (Pass 4): Final editorial review with 350K character capacity
+- **GPT-5.1** (`gpt-5.1`) or **GPT-5** (`gpt-5`) or **Claude Opus 4.5** (`claude-opus-4-5`):
+  - MasterEditor (Pass 4 & 4b): Final editorial review with 350K character capacity
+    - **Default**: GPT-5.1 with high reasoning effort
+    - **Alternative**: Claude Opus 4.5 with extended thinking (64K token budget)
+  - Dual output: Main edition + College edition
 - **Claude Haiku 4.5**:
   - Liturgical Librarian: Intelligent summarization of liturgical usage
-- **Python Librarians**: 8 deterministic data retrieval systems (no LLM costs for core research)
+- **Python Librarians**: 9 deterministic data retrieval systems (no LLM costs for core research)
 
 ### Cost Management
-- **8 Python Librarians**: Deterministic data retrieval without LLM costs
-  - BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Sacks
+- **9 Python Librarians**: Deterministic data retrieval without LLM costs
+  - BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Hirsch
+- **Cost Tracking System**: Real-time monitoring of API usage and costs across all models
+  - Tracks input/output tokens for each LLM call
+  - Calculates costs based on model-specific pricing
+  - Provides end-of-pipeline cost summary
 - **Structured Outputs**: JSON schema validation reduces token usage
 - **Efficient Research**: Targeted queries vs. broad searches
 - **Token Optimization** (Sessions 118-119): 50-60% reduction in related psalms section
@@ -638,13 +695,14 @@ FROM concordance
 - **Resume Capability**: Skip completed steps to avoid redundant API calls
 
 ### Performance Metrics (V6 System)
-- **Average Runtime**: 15-30 minutes per psalm (varies with complexity)
-- **Pipeline Steps**: 6 steps (Macro → Micro → Synthesis → Master Edit → Print-Ready → DOCX)
+- **Average Runtime**: 20-40 minutes per psalm (varies with complexity, includes dual editions)
+- **Pipeline Steps**: 8 steps (Macro → Micro → Synthesis → Master Edit → College Edit → Print-Ready → Main DOCX → College DOCX → Combined DOCX)
 - **Research Bundle Size**: Up to 700,000 characters (~350K tokens) with intelligent trimming
 - **Related Psalms**: Top 5 most related (down from 8, optimized for token efficiency)
 - **Morphology Accuracy**: 93.75% test pass rate with V6 improvements
 - **Success Rate**: >95% completion rate
 - **Token Tracking**: Comprehensive per-step tracking with PipelineSummaryTracker
+- **Cost Tracking**: Real-time monitoring via CostTracker for all LLM calls
 
 ---
 
@@ -746,23 +804,26 @@ FROM concordance
 1. **Figurative Language Utilization**: Currently lower than desired hit rate
 2. **Morphology Edge Cases**: 6.25% of test cases still challenging (very rare words)
 3. **LXX Integration**: Text available but limited analysis integration
-4. **Computational Cost**: GPT-5 usage for master editing is expensive
+4. **Computational Cost**: GPT-5.1 usage for master editing is expensive
 
 ---
 
 ## Conclusion
 
-The Psalms Commentary Pipeline represents a sophisticated integration of AI capabilities with traditional biblical scholarship. The system's success lies in its six-step architecture, which prevents common AI failure modes while leveraging the strengths of different models for specialized tasks.
+The Psalms Commentary Pipeline represents a sophisticated integration of AI capabilities with traditional biblical scholarship. The system's success lies in its eight-step architecture (with dual-edition output), which prevents common AI failure modes while leveraging the strengths of different models for specialized tasks.
 
 The technical implementation addresses complex challenges in Hebrew text processing, morphological analysis, and scholarly research integration. The result is a system that produces commentary of sufficient quality for scholarly publication while maintaining efficiency and cost-effectiveness.
 
 **Key Technical Achievements (V6 System)**:
-- **8 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical, Related Psalms, Sacks
+- **9 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Hirsch
+- **Dual-Edition Output**: Main scholarly edition + accessible college edition + combined document
+- **Flexible Master Editor**: Support for GPT-5.1, GPT-5, or Claude Opus 4.5 with configurable model selection
 - **V6 Statistical Analysis**: Fresh root extraction with 93.75% accuracy, 11,170 psalm pairs analyzed
 - **Related Psalms Integration**: Top 5 connections with intelligent token optimization (50-60% reduction)
 - **Enhanced Quotation System**: Prompts encourage generous Hebrew + English quotations
 - **Poetic Punctuation**: LLM-generated verse presentation with structural markers
 - **Pipeline Tracking**: Comprehensive statistics with resume capability
+- **Cost Tracking**: Real-time API usage and cost monitoring across all models
 - **Robust Hebrew Processing**: 4-layer normalization, ETCBC cache, hybrid root extraction
 - **Quality Assurance**: Multi-pass validation with quotation and punctuation verification
 - **Cost Optimization**: Strategic model selection, deterministic librarians, token efficiency
