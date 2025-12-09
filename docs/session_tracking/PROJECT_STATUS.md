@@ -1,23 +1,24 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-07 (Session 179)
+**Last Updated**: 2025-12-08 (Session 182)
 
-## Current Focus: Testing Figurative Language Search Fix
+## Current Focus: Lexical Insight Prompt Improvement
 
-### Issue: Vehicle Search Returns False Positives (FIXED ✅)
-When searching for "Vehicle contains: tent", the system was returning irrelevant results like "weary person metaphor" and "herd of bulls" instead of actual tent-related entries.
+### Issue: Concordance Searches Return 0 Results (FIXED ✅)
+Psalm 17 concordance searches for "פקד לילה" and "צל כנפים" returned 0 results despite phrase extraction fixes in Session 180.
 
 **Root Cause**:
-- Micro analyst provided "live" as variant for "tent"
-- Librarian generated "living" as morphological variant
-- "Living" matched unrelated vehicle entries
+- LLM extracts **conceptual phrases** (base/dictionary forms) instead of **exact forms**
+- Verse has "פקדת לילה" (conjugated) but LLM extracted "פקד לילה" (infinitive)
+- Verse has "בצל כנפיך" (with prefix/suffix) but LLM extracted "צל כנפים" (base plural)
+- Downstream matching can't recover from morphological mismatch (כנפים ≠ כנפיך)
 
-**Solution Implemented (Session 179)**:
-- Removed morphological variant generation for vehicle searches
-- Added exact match prioritization in research assembler
-- Vehicle concepts now treated as hierarchical tags, not inflected words
+**Solution Implemented (Session 182)**:
+- Improved `DISCOVERY_PASS_PROMPT` in micro_analyst.py (lines 98-107)
+- Added concrete wrong/right examples for exact form extraction
+- Added phrase-level morphological variation guidance (person, number, tense, prefix)
 
-### Status: ✅ FIXED - Ready for testing
+### Status: ✅ FIXED - Testing on Psalm 17
 
 ## Phase 1: Text Extraction (COMPLETE ✅)
 - [x] Extract all Tanakh text from Sefaria
@@ -56,6 +57,27 @@ When searching for "Vehicle contains: tent", the system was returning irrelevant
 - [x] Word document generation
 
 ## Recent Accomplishments
+
+### Session 182 (2025-12-08): Lexical Insight Prompt Fix
+
+#### Problem:
+Concordance searches for "פקד לילה" and "צל כנפים" in Psalm 17 returned 0 results.
+
+#### Root Cause:
+LLM extracted conceptual/base forms instead of exact verse forms:
+- "צל כנפים" instead of "בצל כנפיך" (missing prefix, wrong suffix)
+- "פקד לילה" instead of "פקדת לילה" (unconjugated verb)
+
+#### Solution:
+Modified `DISCOVERY_PASS_PROMPT` in `src/agents/micro_analyst.py` (lines 98-107):
+- Added concrete wrong/right example showing exact extraction requirement
+- Added phrase-level morphological variation guidance:
+  - Person: "בצל כנפי" (my), "בצל כנפיך" (your), "בצל כנפיו" (his)
+  - Number: "בצל כנף" (singular), "בצל כנפים" (plural)
+  - With/without prefix: "צל כנפיך" (without ב)
+  - Verb tenses: "פקדת לילה" (perfect), "תפקד לילה" (imperfect)
+
+---
 
 ### Session 179 (2025-12-07): Figurative Vehicle Search Fix Implementation
 

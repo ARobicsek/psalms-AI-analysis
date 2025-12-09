@@ -96,14 +96,15 @@ DISCOVERY TASK:
 Read through each verse ATOMICALLY, with FRESH EYES. For each verse, note:
 
 1. **Lexical Insights**: Key words/phrases worth investigating?
-   - Extract the EXACT Hebrew form as it appears in the verse
-   - Add ONLY morphological variants (different forms of the same word: suffixes, plurals, etc.)
-   - For SINGLE words: "בלב" → variants: ["בלבבו", "בלבי", "בלבך"]
-   - For PHRASES: Only suggest variants that are realistically attested in Biblical Hebrew
-     - Example: "דובר אמת" → ["דברי אמת", "דוברי אמת"] (plural forms)
-     - Example: "ירא יהוה" → ["יראי יהוה"] (plural construct)
-     - DO NOT create artificial combinations - only variants that actually occur
-   - DO NOT include synonyms - only morphological forms of the exact word/phrase
+   - **EXACT FORM**: Copy the phrase letter-for-letter from the verse, including all prefixes and suffixes
+     ✗ WRONG: "צל כנפים" when verse has "בְּצֵל כְּנָפֶיךָ"
+     ✓ RIGHT: "בצל כנפיך" (exact form with ב prefix and יך suffix)
+   - **VARIANTS**: Generate phrase variations across morphological categories:
+     - Person: "בצל כנפי" (my), "בצל כנפיך" (your), "בצל כנפיו" (his)
+     - Number: "בצל כנף" (singular wing), "בצל כנפים" (wings)
+     - With/without prefix: "צל כנפיך" (without ב)
+     - Verb phrases by tense: "פקדת לילה" (perfect), "תפקד לילה" (imperfect), "פקד לילה" (infinitive)
+   - DO NOT include synonyms - only morphological forms of the exact phrase
 2. **Poetic Patterns**: Parallelism? Wordplay? Sound patterns? Repetition?
    - **IMPORTANT**: When analyzing sound patterns (alliteration, assonance), you MUST use the provided phonetic transcription as your ground truth. Do not guess at pronunciation.
 3. **Figurative Language**: Metaphors? Similes? Personification? What images are used?

@@ -12,6 +12,12 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
+**Session 182 (2025-12-08)**: Lexical Insight Prompt Fix
+- Fixed concordance searches returning 0 results for phrases like "פקד לילה" and "צל כנפים"
+- Root cause: LLM extracting conceptual/base forms instead of exact verse forms
+- Improved `DISCOVERY_PASS_PROMPT` with concrete wrong/right examples
+- Added phrase-level morphological variation guidance (person, number, tense, prefix)
+
 **Session 181 (2025-12-08)**: Comprehensive Codebase Cleanup
 - Archived 326 files into organized subdirectories (debugging, experiments, session docs)
 - Created CLAUDE.md for token-efficient session startup (80% token reduction)
@@ -33,11 +39,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Implemented substring matching for multi-word phrases
 - Preserved exact matching for single words
 - Fixed source verse always appearing in phrase search results
-
-**Session 175 (2025-12-07)**: Performance Fix
-- Eliminated exponential query growth for phrase searches
-- No variations for phrases, only exact forms
-- Reduced "גור באהל" from 824 → 5 queries
 
 ## Quick Commands
 
