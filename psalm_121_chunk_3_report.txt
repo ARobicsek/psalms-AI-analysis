@@ -1,0 +1,212 @@
+PSALM 121 THEMATIC PARALLELS - CHUNK 3-7
+================================================================================
+
+QUERY CHUNK - Psalm 121:3-7:
+--------------------------------------------------
+
+Reference: Psalms 121:3-7
+
+Hebrew Text:
+אַל־יִתֵּ֣ן לַמּ֣וֹט רַגְלֶ֑ךָ אַל־יָ֝נ֗וּם שֹׁמְרֶֽךָ׃ הִנֵּ֣ה לֹֽא־יָ֭נוּם וְלֹ֣א יִישָׁ֑ן שׁ֝וֹמֵ֗ר יִשְׂרָאֵֽל׃ יְהֹוָ֥ה שֹׁמְרֶ֑ךָ יְהֹוָ֥ה צִ֝לְּךָ֗ עַל־יַ֥ד יְמִינֶֽךָ׃ יוֹמָ֗ם הַשֶּׁ֥מֶשׁ לֹֽא־יַכֶּ֗כָּה וְיָרֵ֥חַ בַּלָּֽיְלָה׃ יְֽהֹוָ֗ה יִשְׁמׇרְךָ֥ מִכׇּל־רָ֑ע יִ֝שְׁמֹ֗ר אֶת־נַפְשֶֽׁךָ׃
+
+English Translation (from tanakh.db):
+   v3: He will not let your foot give way;
+your guardian will not slumber;
+   v4: See, the guardian of Israel
+neither slumbers nor sleeps!
+   v5: The LORD is your guardian,
+the LORD is your protection
+at your right hand.
+   v6: By day the sun will not strike you,
+nor the moon by night.
+   v7: The LORD will guard you from all harm;
+He will guard your life.
+
+================================================================================
+
+TOP 5 THEMATIC PARALLELS FROM PSALMS:
+================================================================================
+
+1. Psalms 91:5-9
+   Similarity Score: 0.557509
+   Hebrew Text:
+   לֹא תִירָא מִפַּחַד לָיְלָה מֵחֵץ יָעוּף יוֹמָם׃ מִדֶּבֶר בָּאֹפֶל יַהֲלֹךְ מִקֶּטֶב יָשׁוּד צׇהֳרָיִם׃ יִפֹּל מִצִּדְּךָ אֶלֶף וּרְבָבָה מִימִינֶךָ אֵלֶיךָ לֹא יִגָּשׁ׃ רַק בְּעֵינֶיךָ תַבִּיט וְשִׁלֻּמַת רְשָׁעִים תִּרְאֶה׃ כִּי אַתָּה יְהֹוָה מַחְסִי עֶלְיוֹן שַׂמְתָּ מְעוֹנֶךָ׃
+
+   English Translation:
+   v5: You need not fear the terror by night,
+or the arrow that flies by day,
+   v6: the plague that stalks in the darkness,
+or the scourge that ravages at noon.
+   v7: A thousand may fall at your left side,
+ten thousand at your right,
+but it shall not reach you.
+   v8: You will see it with your eyes,
+you will witness the punishment of the wicked.
+   v9: Because you took the LORD—my refuge,
+the Most High—as your haven,
+
+--------------------------------------------------------------------------------
+
+2. Psalms 91:9-13
+   Similarity Score: 0.539519
+   Hebrew Text:
+   כִּי אַתָּה יְהֹוָה מַחְסִי עֶלְיוֹן שַׂמְתָּ מְעוֹנֶךָ׃ לֹא תְאֻנֶּה אֵלֶיךָ רָעָה וְנֶגַע לֹא יִקְרַב בְּאׇהֳלֶךָ׃ כִּי מַלְאָכָיו יְצַוֶּה לָּךְ לִשְׁמׇרְךָ בְּכׇל דְּרָכֶיךָ׃ עַל כַּפַּיִם יִשָּׂאוּנְךָ פֶּן תִּגֹּף בָּאֶבֶן רַגְלֶךָ׃ עַל שַׁחַל וָפֶתֶן תִּדְרֹךְ תִּרְמֹס כְּפִיר וְתַנִּין׃
+
+   English Translation:
+   v9: Because you took the LORD—my refuge,
+the Most High—as your haven,
+   v10: no harm will befall you,
+no disease touch your tent.
+   v11: For He will order His angels
+to guard you wherever you go.
+   v12: They will carry you in their hands
+lest you hurt your foot on a stone.
+   v13: You will tread on cubs and vipers;
+you will trample lions and asps.
+
+--------------------------------------------------------------------------------
+
+3. Psalms 41:3-7
+   Similarity Score: 0.531034
+   Hebrew Text:
+   יְהֹוָה יִשְׁמְרֵהוּ וִיחַיֵּהוּ (יאשר) [וְאֻשַּׁר] בָּאָרֶץ וְאַל תִּתְּנֵהוּ בְּנֶפֶשׁ אֹיְבָיו׃ יְהֹוָה יִסְעָדֶנּוּ עַל עֶרֶשׂ דְּוָי כׇּל מִשְׁכָּבוֹ הָפַכְתָּ בְחׇלְיוֹ׃ אֲנִי אָמַרְתִּי יְהֹוָה חׇנֵּנִי רְפָאָה נַפְשִׁי כִּי חָטָאתִי לָךְ׃ אוֹיְבַי יֹאמְרוּ רַע לִי מָתַי יָמוּת וְאָבַד שְׁמוֹ׃ וְאִם בָּא לִרְאוֹת שָׁוְא יְדַבֵּר לִבּוֹ יִקְבׇּץ אָוֶן לוֹ יֵצֵא לַחוּץ יְדַבֵּר׃
+
+   English Translation:
+   v3: May the LORD guard him and preserve him;
+and may he be thought happy in the land.
+Do not subject him to the will of his enemies.
+   v4: The LORD will sustain him on his sickbed;
+You shall wholly transform his bed of suffering.-a
+   v5: I said, “O LORD, have mercy on me,
+heal me, for I have sinned against You.”
+   v6: My enemies speak evilly of me,
+“When will he die and his name perish?”
+   v7: If one comes to visit, he speaks falsely;
+his mind stores up evil thoughts;
+once outside, he speaks them.
+
+--------------------------------------------------------------------------------
+
+4. Psalms 18:36-40
+   Similarity Score: 0.528284
+   Hebrew Text:
+   וַתִּתֶּן לִי מָגֵן יִשְׁעֶךָ וִימִינְךָ תִסְעָדֵנִי וְעַנְוַתְךָ תַרְבֵּנִי׃ תַּרְחִיב צַעֲדִי תַחְתָּי וְלֹא מָעֲדוּ קַרְסֻלָּי׃ אֶרְדּוֹף אוֹיְבַי וְאַשִּׂיגֵם וְלֹא אָשׁוּב עַד כַּלּוֹתָם׃ אֶמְחָצֵם וְלֹא יֻכְלוּ קוּם יִפְּלוּ תַּחַת רַגְלָי׃ וַתְּאַזְּרֵנִי חַיִל לַמִּלְחָמָה תַּכְרִיעַ קָמַי תַּחְתָּי׃
+
+   English Translation:
+   v36: You have given me the shield of Your protection;
+Your right hand has sustained me,
+Your care has made me great.
+   v37: You have let me stride on freely;
+my feet have not slipped.
+   v38: I pursued my enemies and overtook them;
+I did not turn back till I destroyed them.
+   v39: I struck them down,
+and they could rise no more;
+they lay fallen at my feet.
+   v40: You have girded me with strength for battle,
+brought my adversaries low before me,
+
+--------------------------------------------------------------------------------
+
+5. Psalms 91:8-12
+   Similarity Score: 0.527929
+   Hebrew Text:
+   רַק בְּעֵינֶיךָ תַבִּיט וְשִׁלֻּמַת רְשָׁעִים תִּרְאֶה׃ כִּי אַתָּה יְהֹוָה מַחְסִי עֶלְיוֹן שַׂמְתָּ מְעוֹנֶךָ׃ לֹא תְאֻנֶּה אֵלֶיךָ רָעָה וְנֶגַע לֹא יִקְרַב בְּאׇהֳלֶךָ׃ כִּי מַלְאָכָיו יְצַוֶּה לָּךְ לִשְׁמׇרְךָ בְּכׇל דְּרָכֶיךָ׃ עַל כַּפַּיִם יִשָּׂאוּנְךָ פֶּן תִּגֹּף בָּאֶבֶן רַגְלֶךָ׃
+
+   English Translation:
+   v8: You will see it with your eyes,
+you will witness the punishment of the wicked.
+   v9: Because you took the LORD—my refuge,
+the Most High—as your haven,
+   v10: no harm will befall you,
+no disease touch your tent.
+   v11: For He will order His angels
+to guard you wherever you go.
+   v12: They will carry you in their hands
+lest you hurt your foot on a stone.
+
+--------------------------------------------------------------------------------
+
+TOP 5 THEMATIC PARALLELS FROM OTHER BOOKS:
+================================================================================
+
+1. Proverbs 3:23-27
+   Similarity Score: 0.587215
+   Hebrew Text:
+   אָז תֵּלֵךְ לָבֶטַח דַּרְכֶּךָ וְרַגְלְךָ לֹא תִגּוֹף׃ אִם תִּשְׁכַּב לֹא תִפְחָד וְשָׁכַבְתָּ וְעָרְבָה שְׁנָתֶךָ׃ אַל תִּירָא מִפַּחַד פִּתְאֹם וּמִשֹּׁאַת רְשָׁעִים כִּי תָבֹא׃ כִּי יְהֹוָה יִהְיֶה בְכִסְלֶךָ וְשָׁמַר רַגְלְךָ מִלָּכֶד׃ אַל תִּמְנַע טוֹב מִבְּעָלָיו בִּהְיוֹת לְאֵל (ידיך) [יָדְךָ] לַעֲשׂוֹת׃
+
+   English Translation:
+   v23: Then you will go your way safelyAnd not injure your feet.
+   v24: When you lie down you will be unafraid;You will lie down and your sleep will be sweet.
+   v25: You will not fear sudden terrorOr the disaster that comes upon the wicked,
+   v26: For the LORD will be your trust;He will keep your feet from being caught.
+   v27: Do not withhold good from one whodeserves itWhen you have the power to do it [for him].
+
+--------------------------------------------------------------------------------
+
+2. Deuteronomy 23:12-16
+   Similarity Score: 0.561478
+   Hebrew Text:
+   וְהָיָה לִפְנוֹת עֶרֶב יִרְחַץ בַּמָּיִם וּכְבֹא הַשֶּׁמֶשׁ יָבֹא אֶל תּוֹךְ הַמַּחֲנֶה׃ וְיָד תִּהְיֶה לְךָ מִחוּץ לַמַּחֲנֶה וְיָצָאתָ שָּׁמָּה חוּץ׃ וְיָתֵד תִּהְיֶה לְךָ עַל אֲזֵנֶךָ וְהָיָה בְּשִׁבְתְּךָ חוּץ וְחָפַרְתָּה בָהּ וְשַׁבְתָּ וְכִסִּיתָ אֶת צֵאָתֶךָ׃ כִּי יְהֹוָה אֱלֹהֶיךָ מִתְהַלֵּךְ בְּקֶרֶב מַחֲנֶךָ לְהַצִּילְךָ וְלָתֵת אֹיְבֶיךָ לְפָנֶיךָ וְהָיָה מַחֲנֶיךָ קָדוֹשׁ וְלֹא יִרְאֶה בְךָ עֶרְוַת דָּבָר וְשָׁב מֵאַחֲרֶיךָ׃ לֹא תַסְגִּיר עֶבֶד אֶל אֲדֹנָיו אֲשֶׁר יִנָּצֵל אֵלֶיךָ מֵעִם אֲדֹנָיו׃
+
+   English Translation:
+   v12: Toward evening he shall bathe in water, and at sundown he may reenter the camp.
+   v13: Further, there shall be an area for you outside the camp, where you may relieve yourself.
+   v14: With your gear you shall have a spike, and when you have squatted you shall dig a hole with it and cover up your excrement.
+   v15: Since your God יהוה moves about in your camp to protect you and to deliver your enemies to you, let your camp be holy; let [God] not find anything unseemly among you and turn away from you.
+   v16: You shall not turn over to the master a slave who seeks refuge with you from that master.
+
+--------------------------------------------------------------------------------
+
+3. Proverbs 3:22-26
+   Similarity Score: 0.555649
+   Hebrew Text:
+   וְיִהְיוּ חַיִּים לְנַפְשֶׁךָ וְחֵן לְגַרְגְּרֹתֶיךָ׃ אָז תֵּלֵךְ לָבֶטַח דַּרְכֶּךָ וְרַגְלְךָ לֹא תִגּוֹף׃ אִם תִּשְׁכַּב לֹא תִפְחָד וְשָׁכַבְתָּ וְעָרְבָה שְׁנָתֶךָ׃ אַל תִּירָא מִפַּחַד פִּתְאֹם וּמִשֹּׁאַת רְשָׁעִים כִּי תָבֹא׃ כִּי יְהֹוָה יִהְיֶה בְכִסְלֶךָ וְשָׁמַר רַגְלְךָ מִלָּכֶד׃
+
+   English Translation:
+   v22: They will give life to your spiritAnd grace to your throat.
+   v23: Then you will go your way safelyAnd not injure your feet.
+   v24: When you lie down you will be unafraid;You will lie down and your sleep will be sweet.
+   v25: You will not fear sudden terrorOr the disaster that comes upon the wicked,
+   v26: For the LORD will be your trust;He will keep your feet from being caught.
+
+--------------------------------------------------------------------------------
+
+4. Proverbs 3:24-28
+   Similarity Score: 0.552862
+   Hebrew Text:
+   אִם תִּשְׁכַּב לֹא תִפְחָד וְשָׁכַבְתָּ וְעָרְבָה שְׁנָתֶךָ׃ אַל תִּירָא מִפַּחַד פִּתְאֹם וּמִשֹּׁאַת רְשָׁעִים כִּי תָבֹא׃ כִּי יְהֹוָה יִהְיֶה בְכִסְלֶךָ וְשָׁמַר רַגְלְךָ מִלָּכֶד׃ אַל תִּמְנַע טוֹב מִבְּעָלָיו בִּהְיוֹת לְאֵל (ידיך) [יָדְךָ] לַעֲשׂוֹת׃ אַל תֹּאמַר (לרעיך) [לְרֵעֲךָ ] לֵךְ וָשׁוּב וּמָחָר אֶתֵּן וְיֵשׁ אִתָּךְ׃
+
+   English Translation:
+   v24: When you lie down you will be unafraid;You will lie down and your sleep will be sweet.
+   v25: You will not fear sudden terrorOr the disaster that comes upon the wicked,
+   v26: For the LORD will be your trust;He will keep your feet from being caught.
+   v27: Do not withhold good from one whodeserves itWhen you have the power to do it [for him].
+   v28: Do not say to your fellow, “Come back again;I’ll give it to you tomorrow,” when you have it with you.
+
+--------------------------------------------------------------------------------
+
+5. Isaiah 60:17-21
+   Similarity Score: 0.546254
+   Hebrew Text:
+   תַּחַת הַנְּחֹשֶׁת אָבִיא זָהָב וְתַחַת הַבַּרְזֶל אָבִיא כֶסֶף וְתַחַת הָעֵצִים נְחֹשֶׁת וְתַחַת הָאֲבָנִים בַּרְזֶל וְשַׂמְתִּי פְקֻדָּתֵךְ שָׁלוֹם וְנֹגְשַׂיִךְ צְדָקָה׃ לֹא יִשָּׁמַע עוֹד חָמָס בְּאַרְצֵךְ שֹׁד וָשֶׁבֶר בִּגְבוּלָיִךְ וְקָרָאת יְשׁוּעָה חוֹמֹתַיִךְ וּשְׁעָרַיִךְ תְּהִלָּה׃ לֹא יִהְיֶה לָּךְ עוֹד הַשֶּׁמֶשׁ לְאוֹר יוֹמָם וּלְנֹגַהּ הַיָּרֵחַ לֹא יָאִיר לָךְ וְהָיָה לָךְ יְהֹוָה לְאוֹר עוֹלָם וֵאלֹהַיִךְ לְתִפְאַרְתֵּךְ׃ לֹא יָבוֹא עוֹד שִׁמְשֵׁךְ וִירֵחֵךְ לֹא יֵאָסֵף כִּי יְהֹוָה יִהְיֶה לָּךְ לְאוֹר עוֹלָם וְשָׁלְמוּ יְמֵי אֶבְלֵךְ׃ וְעַמֵּךְ כֻּלָּם צַדִּיקִים לְעוֹלָם יִירְשׁוּ אָרֶץ נֵצֶר (מטעו) [מַטָּעַי] מַעֲשֵׂה יָדַי לְהִתְפָּאֵר׃
+
+   English Translation:
+   v17: Instead of copper I will bring gold,Instead of iron I will bring silver;Instead of wood, copper—And instead of stone, iron.And I will appoint Well-being as your government,Prosperity as your officials.
+   v18: The cry “Violence!”Shall no more be heard in your land,Nor “Wrack and ruin!”Within your borders.And you shall name your walls “Victory”And your gates “Renown.”
+   v19: No longer shall you need the sunFor light by day,Nor the shining of the moonFor radiance [by night];f[by night] So 1QIsᵃ, Septuagint, and Targum. For GOD shall be your light everlasting,Your God shall be your glory.
+   v20: Your sun shall set no more,Your moon no more withdraw;For GOD shall be a light to you forever,And your days of mourning shall be ended.
+   v21: And your people, all of them righteous,Shall possess the land for all time;They are the shoot that I planted,My handiwork in which I glory.
+
+--------------------------------------------------------------------------------
+
+SUMMARY STATISTICS:
+------------------------------
+Total parallels found: 42
+From Psalms: 17
+From other books: 25
+
+Average similarity (Top 5 Psalms): 0.5369
+Average similarity (Top 5 Other): 0.5607
+
+Non-Psalms books represented (top 20): Proverbs (8), Deuteronomy (6), Isaiah (5), Job (1)

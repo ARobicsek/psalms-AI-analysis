@@ -1,0 +1,206 @@
+PSALM 8 THEMATIC PARALLELS - CHUNK 6-10
+================================================================================
+
+QUERY CHUNK - Psalm 8:6-10:
+--------------------------------------------------
+
+Reference: Psalms 8:6-10
+
+Hebrew Text:
+וַתְּחַסְּרֵ֣הוּ מְּ֭עַט מֵאֱלֹהִ֑ים וְכָב֖וֹד וְהָדָ֣ר תְּעַטְּרֵֽהוּ׃ תַּ֭מְשִׁילֵהוּ בְּמַעֲשֵׂ֣י יָדֶ֑יךָ כֹּ֝֗ל שַׁ֣תָּה תַֽחַת־רַגְלָֽיו׃ צֹנֶ֣ה וַאֲלָפִ֣ים כֻּלָּ֑ם וְ֝גַ֗ם בַּהֲמ֥וֹת שָׂדָֽי׃ צִפּ֣וֹר שָׁ֭מַיִם וּדְגֵ֣י הַיָּ֑ם עֹ֝בֵ֗ר אׇרְח֥וֹת יַמִּֽים׃ יְהֹוָ֥ה אֲדֹנֵ֑ינוּ מָה־אַדִּ֥יר שִׁ֝מְךָ֗ בְּכׇל־הָאָֽרֶץ׃ {פ}
+
+English Translation (from tanakh.db):
+   v6: that You have made him little less than divine,
+and adorned him with glory and majesty;
+   v7: You have made him master over Your handiwork,
+laying the world at his feet,
+   v8: sheep and oxen, all of them,
+and wild beasts, too;
+   v9: the birds of the heavens, the fish of the sea,
+whatever travels the paths of the seas.
+   v10: O LORD, our Lord, how majestic is Your name throughout the earth!
+
+================================================================================
+
+TOP 5 THEMATIC PARALLELS FROM PSALMS:
+================================================================================
+
+1. Psalms 103:22-104:4
+   Similarity Score: 0.578033
+   Hebrew Text:
+   בָּרְכוּ יְהֹוָה כׇּל מַעֲשָׂיו בְּכׇל מְקֹמוֹת מֶמְשַׁלְתּוֹ בָּרְכִי נַפְשִׁי אֶת יְהֹוָה׃ בָּרְכִי נַפְשִׁי אֶת יְהֹוָה יְהֹוָה אֱלֹהַי גָּדַלְתָּ מְּאֹד הוֹד וְהָדָר לָבָשְׁתָּ׃ עֹטֶה אוֹר כַּשַּׂלְמָה נוֹטֶה שָׁמַיִם כַּיְרִיעָה׃ הַמְקָרֶה בַמַּיִם עֲלִיּוֹתָיו הַשָּׂם עָבִים רְכוּבוֹ הַמְהַלֵּךְ עַל כַּנְפֵי רוּחַ׃ עֹשֶׂה מַלְאָכָיו רוּחוֹת מְשָׁרְתָיו אֵשׁ לֹהֵט׃
+
+   English Translation:
+   103:22: bless the LORD, all His works,
+through the length and breadth of His realm;
+bless the LORD, O my soul.
+   104:1: Bless the LORD, O my soul;
+O LORD, my God, You are very great;
+You are clothed in glory and majesty,
+   104:2: wrapped in a robe of light;
+You spread the heavens like a tent cloth.
+   104:3: He sets the rafters of His lofts in the waters,
+makes the clouds His chariot,
+moves on the wings of the wind.
+   104:4: He makes the winds His messengers,
+fiery flames His servants.
+
+--------------------------------------------------------------------------------
+
+2. Psalms 147:5-9
+   Similarity Score: 0.565742
+   Hebrew Text:
+   גָּדוֹל אֲדוֹנֵינוּ וְרַב כֹּחַ לִתְבוּנָתוֹ אֵין מִסְפָּר׃ מְעוֹדֵד עֲנָוִים יְהֹוָה מַשְׁפִּיל רְשָׁעִים עֲדֵי אָרֶץ׃ עֱנוּ לַיהֹוָה בְּתוֹדָה זַמְּרוּ לֵאלֹהֵינוּ בְכִנּוֹר׃ הַמְכַסֶּה שָׁמַיִם בְּעָבִים הַמֵּכִין לָאָרֶץ מָטָר הַמַּצְמִיחַ הָרִים חָצִיר׃ נוֹתֵן לִבְהֵמָה לַחְמָהּ לִבְנֵי עֹרֵב אֲשֶׁר יִקְרָאוּ׃
+
+   English Translation:
+   v5: Great is our Lord and full of power;
+His wisdom is beyond reckoning.
+   v6: The LORD gives courage to the lowly,
+and brings the wicked down to the dust.
+   v7: Sing to the LORD a song of praise,
+chant a hymn with a lyre to our God,
+   v8: who covers the heavens with clouds,
+provides rain for the earth,
+makes mountains put forth grass;
+   v9: who gives the beasts their food,
+to the raven’s brood what they cry for.
+
+--------------------------------------------------------------------------------
+
+3. Psalms 103:19-104:1
+   Similarity Score: 0.563469
+   Hebrew Text:
+   יְהֹוָה בַּשָּׁמַיִם הֵכִין כִּסְאוֹ וּמַלְכוּתוֹ בַּכֹּל מָשָׁלָה׃ בָּרְכוּ יְהֹוָה מַלְאָכָיו גִּבֹּרֵי כֹחַ עֹשֵׂי דְבָרוֹ לִשְׁמֹעַ בְּקוֹל דְּבָרוֹ׃ בָּרְכוּ יְהֹוָה כׇּל צְבָאָיו מְשָׁרְתָיו עֹשֵׂי רְצוֹנוֹ׃ בָּרְכוּ יְהֹוָה כׇּל מַעֲשָׂיו בְּכׇל מְקֹמוֹת מֶמְשַׁלְתּוֹ בָּרְכִי נַפְשִׁי אֶת יְהֹוָה׃ בָּרְכִי נַפְשִׁי אֶת יְהֹוָה יְהֹוָה אֱלֹהַי גָּדַלְתָּ מְּאֹד הוֹד וְהָדָר לָבָשְׁתָּ׃
+
+   English Translation:
+   103:19: The LORD has established His throne in heaven,
+and His sovereign rule is over all.
+   103:20: Bless the LORD, O His angels,
+mighty creatures who do His bidding,
+ever obedient to His bidding;
+   103:21: bless the LORD, all His hosts,
+His servants who do His will;
+   103:22: bless the LORD, all His works,
+through the length and breadth of His realm;
+bless the LORD, O my soul.
+   104:1: Bless the LORD, O my soul;
+O LORD, my God, You are very great;
+You are clothed in glory and majesty,
+
+--------------------------------------------------------------------------------
+
+4. Psalms 104:24-28
+   Similarity Score: 0.563279
+   Hebrew Text:
+   מָה רַבּוּ מַעֲשֶׂיךָ יְהֹוָה כֻּלָּם בְּחׇכְמָה עָשִׂיתָ מָלְאָה הָאָרֶץ קִנְיָנֶךָ׃ זֶה הַיָּם גָּדוֹל וּרְחַב יָדָיִם שָׁם רֶמֶשׂ וְאֵין מִסְפָּר חַיּוֹת קְטַנּוֹת עִם גְּדֹלוֹת׃ שָׁם אֳנִיּוֹת יְהַלֵּכוּן לִוְיָתָן זֶה יָצַרְתָּ לְשַׂחֶק בּוֹ׃ כֻּלָּם אֵלֶיךָ יְשַׂבֵּרוּן לָתֵת אׇכְלָם בְּעִתּוֹ׃ תִּתֵּן לָהֶם יִלְקֹטוּן תִּפְתַּח יָדְךָ יִשְׂבְּעוּן טוֹב׃
+
+   English Translation:
+   v24: How many are the things You have made, O LORD;
+You have made them all with wisdom;
+the earth is full of Your creations.
+   v25: There is the sea, vast and wide,
+with its creatures beyond number,
+living things, small and great.
+   v26: There go the ships,
+and Leviathan that You formed to sport with.
+   v27: All of them look to You
+to give them their food when it is due.
+   v28: Give it to them, they gather it up;
+open Your hand, they are well satisfied;
+
+--------------------------------------------------------------------------------
+
+5. Psalms 93:1-5
+   Similarity Score: 0.561663
+   Hebrew Text:
+   יְהֹוָה מָלָךְ גֵּאוּת לָבֵשׁ לָבֵשׁ יְהֹוָה עֹז הִתְאַזָּר אַף תִּכּוֹן תֵּבֵל בַּל תִּמּוֹט׃ נָכוֹן כִּסְאֲךָ מֵאָז מֵעוֹלָם אָתָּה׃ נָשְׂאוּ נְהָרוֹת יְהֹוָה נָשְׂאוּ נְהָרוֹת קוֹלָם יִשְׂאוּ נְהָרוֹת דׇּכְיָם׃ מִקֹּלוֹת מַיִם רַבִּים אַדִּירִים מִשְׁבְּרֵי יָם אַדִּיר בַּמָּרוֹם יְהֹוָה׃ עֵדֹתֶיךָ נֶאֶמְנוּ מְאֹד לְבֵיתְךָ נַאֲוָה קֹדֶשׁ יְהֹוָה לְאֹרֶךְ יָמִים׃
+
+   English Translation:
+   v1: The LORD is king,
+He is robed in grandeur;
+the LORD is robed,
+He is girded with strength.
+The world stands firm;
+it cannot be shaken.
+   v2: Your throne stands firm from of old;
+from eternity You have existed.
+   v3: The ocean sounds, O LORD,
+the ocean sounds its thunder,
+the ocean sounds its pounding.
+   v4: Above the thunder of the mighty waters,
+more majestic than the breakers of the sea
+is the LORD, majestic on high.
+   v5: Your decrees are indeed enduring;
+holiness befits Your house,
+O LORD, for all times.
+
+--------------------------------------------------------------------------------
+
+TOP 5 THEMATIC PARALLELS FROM OTHER BOOKS:
+================================================================================
+
+1. Jeremiah 32:17-21
+   Similarity Score: 0.569337
+   Hebrew Text:
+   אֲהָהּ אֲדֹנָי יֱהֹוִה הִנֵּה אַתָּה עָשִׂיתָ אֶת הַשָּׁמַיִם וְאֶת הָאָרֶץ בְּכֹחֲךָ הַגָּדוֹל וּבִזְרֹעֲךָ הַנְּטוּיָה לֹא יִפָּלֵא מִמְּךָ כׇּל דָּבָר׃ עֹשֶׂה חֶסֶד לַאֲלָפִים וּמְשַׁלֵּם עֲוֺן אָבוֹת אֶל חֵיק בְּנֵיהֶם אַחֲרֵיהֶם הָאֵל הַגָּדוֹל הַגִּבּוֹר יְהֹוָה צְבָאוֹת שְׁמוֹ׃ גְּדֹל הָעֵצָה וְרַב הָעֲלִילִיָּה אֲשֶׁר עֵינֶיךָ פְקֻחוֹת עַל כׇּל דַּרְכֵי בְּנֵי אָדָם לָתֵת לְאִישׁ כִּדְרָכָיו וְכִפְרִי מַעֲלָלָיו׃ אֲשֶׁר שַׂמְתָּ אֹתוֹת וּמֹפְתִים בְּאֶרֶץ מִצְרַיִם עַד הַיּוֹם הַזֶּה וּבְיִשְׂרָאֵל וּבָאָדָם וַתַּעֲשֶׂה לְּךָ שֵׁם כַּיּוֹם הַזֶּה׃ וַתֹּצֵא אֶת עַמְּךָ אֶת יִשְׂרָאֵל מֵאֶרֶץ מִצְרָיִם בְּאֹתוֹת וּבְמוֹפְתִים וּבְיָד חֲזָקָה וּבְאֶזְרוֹעַ נְטוּיָה וּבְמוֹרָא גָּדוֹל׃
+
+   English Translation:
+   v17: “Ah, my Sovereign GOD! You made heaven and earth with Your great might and outstretched arm. Nothing is too wondrous for You!
+   v18: You show kindness to the thousandth generation, but visit the guilt of the parents upon their children after them. O great and mighty God whose name is GOD of Hosts,
+   v19: wondrous in purpose and mighty in deed, whose eyes observe all the ways of mortals, so as to repay each one according to their ways, and with the proper fruit of their deeds!
+   v20: You displayed signs and marvels in the land of Egypt with lasting effect,ewith lasting effect Lit. “to this day.” and won renown in Israel and among humankind to this very day.
+   v21: You freed Your people Israel from the land of Egypt with signs and marvels, with a strong hand and an outstretched arm, and with great terror.
+
+--------------------------------------------------------------------------------
+
+2. I Chronicles 17:17-21
+   Similarity Score: 0.568522
+   Hebrew Text:
+   וַתִּקְטַן זֹאת בְּעֵינֶיךָ אֱלֹהִים וַתְּדַבֵּר עַל בֵּית עַבְדְּךָ לְמֵרָחוֹק וּרְאִיתַנִי כְּתוֹר הָאָדָם הַמַּעֲלָה יְהֹוָה אֱלֹהִים׃ מַה יּוֹסִיף עוֹד דָּוִיד אֵלֶיךָ לְכָבוֹד אֶת עַבְדֶּךָ וְאַתָּה אֶת עַבְדְּךָ יָדָעְתָּ׃ יְהֹוָה בַּעֲבוּר עַבְדְּךָ וּכְלִבְּךָ עָשִׂיתָ אֵת כׇּל הַגְּדוּלָּה הַזֹּאת לְהֹדִיעַ אֶת כׇּל הַגְּדֻלּוֹת׃ יְהֹוָה אֵין כָּמוֹךָ וְאֵין אֱלֹהִים זוּלָתֶךָ בְּכֹל אֲשֶׁר שָׁמַעְנוּ בְּאׇזְנֵינוּ׃ וּמִי כְּעַמְּךָ יִשְׂרָאֵל גּוֹי אֶחָד בָּאָרֶץ אֲשֶׁר הָלַךְ הָאֱלֹהִים לִפְדּוֹת לוֹ עָם לָשׂוּם לְךָ שֵׁם גְּדֻלּוֹת וְנֹרָאוֹת לְגָרֵשׁ מִפְּנֵי עַמְּךָ אֲשֶׁר פָּדִיתָ מִמִּצְרַיִם גּוֹיִם׃
+
+   English Translation: [Could not parse reference]
+
+--------------------------------------------------------------------------------
+
+3. I Chronicles 29:12-16
+   Similarity Score: 0.567032
+   Hebrew Text:
+   וְהָעֹשֶׁר וְהַכָּבוֹד מִלְּפָנֶיךָ וְאַתָּה מוֹשֵׁל בַּכֹּל וּבְיָדְךָ כֹּחַ וּגְבוּרָה וּבְיָדְךָ לְגַדֵּל וּלְחַזֵּק לַכֹּל׃ וְעַתָּה אֱלֹהֵינוּ מוֹדִים אֲנַחְנוּ לָךְ וּמְהַלְלִים לְשֵׁם תִּפְאַרְתֶּךָ׃ וְכִי מִי אֲנִי וּמִי עַמִּי כִּי נַעְצֹר כֹּחַ לְהִתְנַדֵּב כָּזֹאת כִּי מִמְּךָ הַכֹּל וּמִיָּדְךָ נָתַנּוּ לָךְ׃ כִּי גֵרִים אֲנַחְנוּ לְפָנֶיךָ וְתוֹשָׁבִים כְּכׇל אֲבֹתֵינוּ כַּצֵּל יָמֵינוּ עַל הָאָרֶץ וְאֵין מִקְוֶה׃ יְהֹוָה אֱלֹהֵינוּ כֹּל הֶהָמוֹן הַזֶּה אֲשֶׁר הֲכִינֹנוּ לִבְנוֹת לְךָ בַיִת לְשֵׁם קׇדְשֶׁךָ מִיָּדְךָ (היא) [הוּא] וּלְךָ הַכֹּל׃
+
+   English Translation: [Could not parse reference]
+
+--------------------------------------------------------------------------------
+
+4. I Chronicles 29:11-15
+   Similarity Score: 0.561884
+   Hebrew Text:
+   לְךָ יְהֹוָה הַגְּדֻלָּה וְהַגְּבוּרָה וְהַתִּפְאֶרֶת וְהַנֵּצַח וְהַהוֹד כִּי כֹל בַּשָּׁמַיִם וּבָאָרֶץ לְךָ יְהֹוָה הַמַּמְלָכָה וְהַמִּתְנַשֵּׂא לְכֹל לְרֹאשׁ׃ וְהָעֹשֶׁר וְהַכָּבוֹד מִלְּפָנֶיךָ וְאַתָּה מוֹשֵׁל בַּכֹּל וּבְיָדְךָ כֹּחַ וּגְבוּרָה וּבְיָדְךָ לְגַדֵּל וּלְחַזֵּק לַכֹּל׃ וְעַתָּה אֱלֹהֵינוּ מוֹדִים אֲנַחְנוּ לָךְ וּמְהַלְלִים לְשֵׁם תִּפְאַרְתֶּךָ׃ וְכִי מִי אֲנִי וּמִי עַמִּי כִּי נַעְצֹר כֹּחַ לְהִתְנַדֵּב כָּזֹאת כִּי מִמְּךָ הַכֹּל וּמִיָּדְךָ נָתַנּוּ לָךְ׃ כִּי גֵרִים אֲנַחְנוּ לְפָנֶיךָ וְתוֹשָׁבִים כְּכׇל אֲבֹתֵינוּ כַּצֵּל יָמֵינוּ עַל הָאָרֶץ וְאֵין מִקְוֶה׃
+
+   English Translation: [Could not parse reference]
+
+--------------------------------------------------------------------------------
+
+5. Exodus 15:10-14
+   Similarity Score: 0.560088
+   Hebrew Text:
+   נָשַׁפְתָּ בְרוּחֲךָ כִּסָּמוֹ יָם צָלְלוּ כַּעוֹפֶרֶת בְּמַיִם אַדִּירִים׃ מִי כָמֹכָה בָּאֵלִם יְהֹוָה מִי כָּמֹכָה נֶאְדָּר בַּקֹּדֶשׁ נוֹרָא תְהִלֹּת עֹשֵׂה פֶלֶא׃ נָטִיתָ יְמִינְךָ תִּבְלָעֵמוֹ אָרֶץ׃ נָחִיתָ בְחַסְדְּךָ עַם זוּ גָּאָלְתָּ נֵהַלְתָּ בְעׇזְּךָ אֶל נְוֵה קׇדְשֶׁךָ׃ שָׁמְעוּ עַמִּים יִרְגָּזוּן חִיל אָחַז יֹשְׁבֵי פְּלָשֶׁת׃
+
+   English Translation:
+   v10: You made Your wind blow, the sea covered them;They sank like lead in the majestic waters.
+   v11: Who is like You, יהוה, among the celestials;*celestials Others “mighty.” Who is like You, majestic in holiness,Awesome in splendor, working wonders!
+   v12: You put out Your right hand,The earth swallowed them.
+   v13: In Your love You lead the people You redeemed;In Your strength You guide them to Your holy abode.
+   v14: The peoples hear, they tremble;Agony grips the dwellers in Philistia.
+
+--------------------------------------------------------------------------------
+
+SUMMARY STATISTICS:
+------------------------------
+Total parallels found: 35
+From Psalms: 22
+From other books: 13
+
+Average similarity (Top 5 Psalms): 0.5664
+Average similarity (Top 5 Other): 0.5654
+
+Non-Psalms books represented (top 20): Jeremiah (3), I Chronicles (8), Exodus (1), Deuteronomy (1)

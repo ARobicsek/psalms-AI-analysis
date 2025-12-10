@@ -1,0 +1,198 @@
+PSALM 145 THEMATIC PARALLELS - CHUNK 14-18
+================================================================================
+
+QUERY CHUNK - Psalm 145:14-18:
+--------------------------------------------------
+
+Reference: Psalms 145:14-18
+
+Hebrew Text:
+סוֹמֵ֣ךְ יְ֭הֹוָה לְכׇל־הַנֹּפְלִ֑ים וְ֝זוֹקֵ֗ף לְכׇל־הַכְּפוּפִֽים׃ עֵֽינֵי־כֹ֭ל אֵלֶ֣יךָ יְשַׂבֵּ֑רוּ וְאַתָּ֤ה נֽוֹתֵן־לָהֶ֖ם אֶת־אׇכְלָ֣ם בְּעִתּֽוֹ׃ פּוֹתֵ֥חַ אֶת־יָדֶ֑ךָ וּמַשְׂבִּ֖יעַ לְכׇל־חַ֣י רָצֽוֹן׃ צַדִּ֣יק יְ֭הֹוָה בְּכׇל־דְּרָכָ֑יו וְ֝חָסִ֗יד בְּכׇל־מַעֲשָֽׂיו׃ קָר֣וֹב יְ֭הֹוָה לְכׇל־קֹרְאָ֑יו לְכֹ֤ל אֲשֶׁ֖ר יִקְרָאֻ֣הוּ בֶאֱמֶֽת׃
+
+English Translation (from tanakh.db):
+   v14: The LORD supports all who stumble,
+and makes all who are bent stand straight.
+   v15: The eyes of all look to You expectantly,
+and You give them their food when it is due.
+   v16: You give it openhandedly,
+feeding every creature to its heart’s content.
+   v17: The LORD is beneficent in all His ways
+and faithful in all His works.
+   v18: The LORD is near to all who call Him,
+to all who call Him with sincerity.
+
+================================================================================
+
+TOP 5 THEMATIC PARALLELS FROM PSALMS:
+================================================================================
+
+1. Psalms 34:16-20
+   Similarity Score: 0.578294
+   Hebrew Text:
+   עֵינֵי יְהֹוָה אֶל צַדִּיקִים וְאׇזְנָיו אֶל שַׁוְעָתָם׃ פְּנֵי יְהֹוָה בְּעֹשֵׂי רָע לְהַכְרִית מֵאֶרֶץ זִכְרָם׃ צָעֲקוּ וַיהֹוָה שָׁמֵעַ וּמִכׇּל צָרוֹתָם הִצִּילָם׃ קָרוֹב יְהֹוָה לְנִשְׁבְּרֵי לֵב וְאֶת דַּכְּאֵי רוּחַ יוֹשִׁיעַ׃ רַבּוֹת רָעוֹת צַדִּיק וּמִכֻּלָּם יַצִּילֶנּוּ יְהֹוָה׃
+
+   English Translation:
+   v16: The eyes of the LORD are on the righteous,
+His ears attentive to their cry.
+   v17: The face of the LORD is set against evildoers,
+to erase their names from the earth.
+   v18: They cry out, and the LORD hears,
+and saves them from all their troubles.
+   v19: The LORD is close to the brokenhearted;
+those crushed in spirit He delivers.
+   v20: Though the misfortunes of the righteous be many,
+the LORD will save him from them all,
+
+--------------------------------------------------------------------------------
+
+2. Psalms 36:7-11
+   Similarity Score: 0.571536
+   Hebrew Text:
+   צִדְקָתְךָ כְּהַרְרֵי אֵל מִשְׁפָּטֶיךָ תְּהוֹם רַבָּה אָדָם וּבְהֵמָה תוֹשִׁיעַ יְהֹוָה׃ מַה יָּקָר חַסְדְּךָ אֱלֹהִים וּבְנֵי אָדָם בְּצֵל כְּנָפֶיךָ יֶחֱסָיוּן׃ יִרְוְיֻן מִדֶּשֶׁן בֵּיתֶךָ וְנַחַל עֲדָנֶיךָ תַשְׁקֵם׃ כִּי עִמְּךָ מְקוֹר חַיִּים בְּאוֹרְךָ נִרְאֶה אוֹר׃ מְשֹׁךְ חַסְדְּךָ לְיֹדְעֶיךָ וְצִדְקָתְךָ לְיִשְׁרֵי לֵב׃
+
+   English Translation:
+   v7: Your beneficence is like the high mountains;
+Your justice like the great deep;
+man and beast You deliver, O LORD.
+   v8: How precious is Your faithful care, O God!
+Mankind shelters in the shadow of Your wings.
+   v9: They feast on the rich fare of Your house;
+You let them drink at Your refreshing stream.
+   v10: With You is the fountain of life;
+by Your light do we see light.
+   v11: Bestow Your faithful care on those devoted to You,
+and Your beneficence on upright men.
+
+--------------------------------------------------------------------------------
+
+3. Psalms 34:19-23
+   Similarity Score: 0.561371
+   Hebrew Text:
+   קָרוֹב יְהֹוָה לְנִשְׁבְּרֵי לֵב וְאֶת דַּכְּאֵי רוּחַ יוֹשִׁיעַ׃ רַבּוֹת רָעוֹת צַדִּיק וּמִכֻּלָּם יַצִּילֶנּוּ יְהֹוָה׃ שֹׁמֵר כׇּל עַצְמוֹתָיו אַחַת מֵהֵנָּה לֹא נִשְׁבָּרָה׃ תְּמוֹתֵת רָשָׁע רָעָה וְשֹׂנְאֵי צַדִּיק יֶאְשָׁמוּ׃ פֹּדֶה יְהֹוָה נֶפֶשׁ עֲבָדָיו וְלֹא יֶאְשְׁמוּ כׇּל הַחֹסִים בּוֹ׃
+
+   English Translation:
+   v19: The LORD is close to the brokenhearted;
+those crushed in spirit He delivers.
+   v20: Though the misfortunes of the righteous be many,
+the LORD will save him from them all,
+   v21: Keeping all his bones intact,
+not one of them being broken.
+   v22: One misfortune is the deathblow of the wicked;
+the foes of the righteous shall be ruined.
+   v23: The LORD redeems the life of His servants;
+all who take refuge in Him shall not be ruined.
+
+--------------------------------------------------------------------------------
+
+4. Psalms 34:18-22
+   Similarity Score: 0.558191
+   Hebrew Text:
+   צָעֲקוּ וַיהֹוָה שָׁמֵעַ וּמִכׇּל צָרוֹתָם הִצִּילָם׃ קָרוֹב יְהֹוָה לְנִשְׁבְּרֵי לֵב וְאֶת דַּכְּאֵי רוּחַ יוֹשִׁיעַ׃ רַבּוֹת רָעוֹת צַדִּיק וּמִכֻּלָּם יַצִּילֶנּוּ יְהֹוָה׃ שֹׁמֵר כׇּל עַצְמוֹתָיו אַחַת מֵהֵנָּה לֹא נִשְׁבָּרָה׃ תְּמוֹתֵת רָשָׁע רָעָה וְשֹׂנְאֵי צַדִּיק יֶאְשָׁמוּ׃
+
+   English Translation:
+   v18: They cry out, and the LORD hears,
+and saves them from all their troubles.
+   v19: The LORD is close to the brokenhearted;
+those crushed in spirit He delivers.
+   v20: Though the misfortunes of the righteous be many,
+the LORD will save him from them all,
+   v21: Keeping all his bones intact,
+not one of them being broken.
+   v22: One misfortune is the deathblow of the wicked;
+the foes of the righteous shall be ruined.
+
+--------------------------------------------------------------------------------
+
+5. Psalms 37:19-23
+   Similarity Score: 0.557961
+   Hebrew Text:
+   לֹא יֵבֹשׁוּ בְּעֵת רָעָה וּבִימֵי רְעָבוֹן יִשְׂבָּעוּ׃ כִּי רְשָׁעִים יֹאבֵדוּ וְאֹיְבֵי יְהֹוָה כִּיקַר כָּרִים כָּלוּ בֶעָשָׁן כָּלוּ׃ לֹוֶה רָשָׁע וְלֹא יְשַׁלֵּם וְצַדִּיק חוֹנֵן וְנוֹתֵן׃ כִּי מְבֹרָכָיו יִירְשׁוּ אָרֶץ וּמְקֻלָּלָיו יִכָּרֵתוּ׃ מֵיְהֹוָה מִצְעֲדֵי גֶבֶר כּוֹנָנוּ וְדַרְכּוֹ יֶחְפָּץ׃
+
+   English Translation:
+   v19: they shall not come to grief in bad times;
+in famine, they shall eat their fill.
+   v20: But the wicked shall perish,
+and the enemies of the LORD shall be consumed,
+like meadow grass consumed in smoke.
+   v21: The wicked man borrows and does not repay;
+the righteous is generous and keeps giving.
+   v22: Those blessed by Him shall inherit the land,
+but those cursed by Him shall be cut off.
+   v23: The steps of a man are made firm by the LORD,
+when He delights in his way.
+
+--------------------------------------------------------------------------------
+
+TOP 5 THEMATIC PARALLELS FROM OTHER BOOKS:
+================================================================================
+
+1. Isaiah 26:7-11
+   Similarity Score: 0.556500
+   Hebrew Text:
+   אֹרַח לַצַּדִּיק מֵישָׁרִים יָשָׁר מַעְגַּל צַדִּיק תְּפַלֵּס׃ אַף אֹרַח מִשְׁפָּטֶיךָ יְהֹוָה קִוִּינוּךָ לְשִׁמְךָ וּלְזִכְרְךָ תַּאֲוַת נָפֶשׁ׃ נַפְשִׁי אִוִּיתִךָ בַּלַּיְלָה אַף רוּחִי בְקִרְבִּי אֲשַׁחֲרֶךָּ כִּי כַּאֲשֶׁר מִשְׁפָּטֶיךָ לָאָרֶץ צֶדֶק לָמְדוּ יֹשְׁבֵי תֵבֵל׃ יֻחַן רָשָׁע בַּל לָמַד צֶדֶק בְּאֶרֶץ נְכֹחוֹת יְעַוֵּל וּבַל יִרְאֶה גֵּאוּת יְהֹוָה׃ יְהֹוָה רָמָה יָדְךָ בַּל יֶחֱזָיוּן יֶחֱזוּ וְיֵבֹשׁוּ קִנְאַת עָם אַף אֵשׁ צָרֶיךָ תֹאכְלֵם׃
+
+   English Translation:
+   v7: The path is level for the righteous;O Just One, You make smooth the course of the righteous.
+   v8: For Your just ways, O ETERNAL One, we look to You;We long for the name by which You are called.
+   v9: At night I yearn for You with all my being,I seek You with all the spirit within me.bthe spirit within me Emendation yields “my spirit in the morning.” For when Your judgments are wrought on earth,The inhabitants of the world learn righteousness.
+   v10: But the scoundrel, when spared, learns not righteousness;Doing wrong in a place of integrity—Ignoring GOD’s majesty.
+   v11: O ETERNAL One!They see not Your hand exalted.Let them be shamed as they beholdYour zeal for Your peopleAnd fire consuming Your adversaries.
+
+--------------------------------------------------------------------------------
+
+2. Proverbs 3:6-10
+   Similarity Score: 0.549128
+   Hebrew Text:
+   בְּכׇל דְּרָכֶיךָ דָעֵהוּ וְהוּא יְיַשֵּׁר אֹרְחֹתֶיךָ׃ אַל תְּהִי חָכָם בְּעֵינֶיךָ יְרָא אֶת יְהֹוָה וְסוּר מֵרָע׃ רִפְאוּת תְּהִי לְשׇׁרֶּךָ וְשִׁקּוּי לְעַצְמוֹתֶיךָ׃ כַּבֵּד אֶת יְהֹוָה מֵהוֹנֶךָ וּמֵרֵאשִׁית כׇּל תְּבוּאָתֶךָ׃ וְיִמָּלְאוּ אֲסָמֶיךָ שָׂבָע וְתִירוֹשׁ יְקָבֶיךָ יִפְרֹצוּ׃
+
+   English Translation:
+   v6: In all your ways acknowledge Him,And He will make your paths smooth.
+   v7: Do not be wise in your own eyes;Fear the LORD and shun evil.
+   v8: It will be a cure for your body,aLit. “navel.”A tonic for your bones.
+   v9: Honor the LORD with your wealth,With the best of all your income,
+   v10: And your barns will be filled with grain,Your vats will burst with new wine.
+
+--------------------------------------------------------------------------------
+
+3. I Chronicles 16:10-14
+   Similarity Score: 0.542602
+   Hebrew Text:
+   הִתְהַלְלוּ בְּשֵׁם קׇדְשׁוֹ יִשְׂמַח לֵב מְבַקְשֵׁי יְהֹוָה׃ דִּרְשׁוּ יְהֹוָה וְעֻזּוֹ בַּקְּשׁוּ פָנָיו תָּמִיד׃ זִכְרוּ נִפְלְאֹתָיו אֲשֶׁר עָשָׂה מֹפְתָיו וּמִשְׁפְּטֵי פִיהוּ׃ זֶרַע יִשְׂרָאֵל עַבְדּוֹ בְּנֵי יַעֲקֹב בְּחִירָיו׃ הוּא יְהֹוָה אֱלֹהֵינוּ בְּכׇל הָאָרֶץ מִשְׁפָּטָיו׃
+
+   English Translation: [Could not parse reference]
+
+--------------------------------------------------------------------------------
+
+4. Proverbs 16:4-8
+   Similarity Score: 0.541416
+   Hebrew Text:
+   כֹּל פָּעַל יְהֹוָה לַמַּעֲנֵהוּ וְגַם רָשָׁע לְיוֹם רָעָה׃ תּוֹעֲבַת יְהֹוָה כׇּל גְּבַהּ לֵב יָד לְיָד לֹא יִנָּקֶה׃ בְּחֶסֶד וֶאֱמֶת יְכֻפַּר עָוֺן וּבְיִרְאַת יְהֹוָה סוּר מֵרָע׃ בִּרְצוֹת יְהֹוָה דַּרְכֵי אִישׁ גַּם אוֹיְבָיו יַשְׁלִם אִתּוֹ׃ טוֹב מְעַט בִּצְדָקָה מֵרֹב תְּבוּאוֹת בְּלֹא מִשְׁפָּט׃
+
+   English Translation:
+   v4: The LORD made everything for a purpose,Even the wicked for an evil day.
+   v5: Every haughty person is an abomination to the LORD;Assuredly,aLit. “Hand to hand”; meaning of Heb. uncertain. he will not go unpunished.
+   v6: Iniquity is expiated by loyalty and faithfulness,And evil is avoided through fear of the LORD.
+   v7: When the LORD is pleased with a man’s conduct,He may turn even his enemies into allies.
+   v8: Better a little with righteousnessThan a large income with injustice.
+
+--------------------------------------------------------------------------------
+
+5. II Samuel 22:24-28
+   Similarity Score: 0.540097
+   Hebrew Text:
+   וָאֶהְיֶה תָמִים לוֹ וָאֶשְׁתַּמְּרָה מֵעֲוֺנִי׃ וַיָּשֶׁב יְהֹוָה לִי כְּצִדְקָתִי כְּבֹרִי לְנֶגֶד עֵינָיו׃ עִם חָסִיד תִּתְחַסָּד עִם גִּבּוֹר תָּמִים תִּתַּמָּם׃ עִם נָבָר תִּתָּבָר וְעִם עִקֵּשׁ תִּתַּפָּל׃ וְאֶת עַם עָנִי תּוֹשִׁיעַ וְעֵינֶיךָ עַל רָמִים תַּשְׁפִּיל׃
+
+   English Translation: [Could not parse reference]
+
+--------------------------------------------------------------------------------
+
+SUMMARY STATISTICS:
+------------------------------
+Total parallels found: 42
+From Psalms: 37
+From other books: 5
+
+Average similarity (Top 5 Psalms): 0.5655
+Average similarity (Top 5 Other): 0.5459
+
+Non-Psalms books represented (top 20): Isaiah (1), Proverbs (2), I Chronicles (1), II Samuel (1)
