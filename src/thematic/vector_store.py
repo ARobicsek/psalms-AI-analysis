@@ -85,14 +85,15 @@ class ChromaVectorStore(VectorStore):
         else:
             self.client = chromadb.Client(settings=settings)
 
-        # Get or create collection
-        # We'll use a simple text embedding function since we provide our own embeddings
-        if embedding_function is None:
-            embedding_function = embedding_functions.DefaultEmbeddingFunction()
+        # Always create collection without embedding function since we provide our own
+        # First delete if it exists to avoid conflicts
+        try:
+            self.client.delete_collection(name=collection_name)
+        except:
+            pass
 
-        self.collection = self.client.get_or_create_collection(
+        self.collection = self.client.create_collection(
             name=collection_name,
-            embedding_function=embedding_function,
             metadata={"description": "Tanakh thematic chunks for parallel search"}
         )
 

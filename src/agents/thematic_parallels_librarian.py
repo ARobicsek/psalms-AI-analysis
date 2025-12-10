@@ -36,7 +36,7 @@ class ThematicParallelsLibrarian:
         embedding_model: str = "text-embedding-3-large",
         similarity_threshold: float = 0.7,
         max_results: int = 10,
-        exclude_psalms: bool = True,
+        exclude_psalms: bool = False,  # Include Psalms by default, filter only exact matches
     ):
         """
         Initialize the Thematic Parallels Librarian.
