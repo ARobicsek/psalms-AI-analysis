@@ -6,6 +6,7 @@ into manageable pieces suitable for embedding and thematic search.
 """
 import json
 import logging
+import re
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Iterator
 from datetime import datetime
@@ -28,6 +29,66 @@ WRITINGS_BOOKS = [
     "Ecclesiastes", "Esther", "Daniel", "Ezra", "Nehemiah",
     "I Chronicles", "II Chronicles"
 ]
+
+
+def clean_hebrew_text(text: str) -> str:
+    """Clean Hebrew text by removing dividers and markers."""
+    if not text:
+        return text
+
+    # Remove pasuq (verse divider)
+    text = text.replace('׀', ' ')
+
+    # Remove parsha markers {פ} and {ס}
+    text = text.replace('{פ}', ' ').replace('{ס}', ' ')
+
+    # Remove maqqif (־) and replace with space
+    text = text.replace('־', ' ')
+
+    # Clean up extra spaces
+    text = re.sub(r'\s+', ' ', text)
+    text = text.strip()
+
+    return text
+
+
+def clean_english_text(text: str) -> str:
+    """Remove footnotes and translator notes from English text."""
+    if not text:
+        return text
+
+    # Remove asterisk patterns more carefully
+    # Pattern: *text* or *text
+    text = re.sub(r'\*[^*\n]*\*', ' ', text)  # *text*
+    text = re.sub(r'\*[^*\n]*', ' ', text)  # remaining *text
+
+    # Remove text between brackets
+    text = re.sub(r'\[[^\]]*\]', ' ', text)
+
+    # Remove specific patterns more carefully
+    patterns = [
+        (r'Others\s*«[^»]*»', ''),  # Others «text»
+        (r'Others\s*"[^"]*"', ''),  # Others "text"
+        (r'Others[^;,.]*', ''),  # Remaining Others...
+        (r'Heb\.[^;,.]*', ''),  # Hebrew references
+        (r'Cf\.[^;,.]*', ''),  # Cross-references
+        (r'Emendation[^;,.]*', ''),  # Emendation notes
+        (r'^\s*[^.]*\s*When\s+God\s+began\s+to\s+create', 'When God began to create'),  # Fix beginning
+    ]
+
+    for pattern, replacement in patterns:
+        text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+
+    # Remove artifacts at beginning of sentences
+    text = re.sub(r'^\s*[^a-zA-Z]*', '', text)
+
+    # Clean up extra spaces and punctuation
+    text = re.sub(r'\s+', ' ', text)
+    text = re.sub(r'\s*([,.])', r'\1', text)  # Remove space before punctuation
+    text = re.sub(r'[,.]+\s*[,.]*', '.', text)  # Fix multiple punctuation
+    text = text.strip()
+
+    return text
 
 
 def get_book_category(book: str) -> BookCategory:
@@ -461,9 +522,9 @@ class CorpusBuilder:
         # Build chunk ID
         chunk_id = f"{book.lower().replace(' ', '_')}_{first['chapter']:03d}_{first['verse']:03d}_{last['chapter']:03d}_{last['verse']:03d}"
 
-        # Combine text
-        hebrew_text = " ".join(v["hebrew"] for v in verses)
-        english_text = " ".join(v["english"] for v in verses)
+        # Combine and clean text
+        hebrew_text = clean_hebrew_text(" ".join(v["hebrew"] for v in verses))
+        english_text = clean_english_text(" ".join(v["english"] for v in verses))
 
         # Estimate tokens (rough: 1 token per 4 chars for Hebrew, per 4 chars for English)
         token_estimate = (len(hebrew_text) + len(english_text)) // 4

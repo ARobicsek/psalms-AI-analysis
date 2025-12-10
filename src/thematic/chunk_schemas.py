@@ -49,9 +49,6 @@ class TanakhChunk:
     verse_count: int                 # Number of verses
     token_estimate: int              # Approximate tokens (Hebrew + English)
 
-    # Optional enrichment
-    sefaria_topics: List[str] = field(default_factory=list)  # Topic tags if available
-
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
         return {
@@ -68,7 +65,6 @@ class TanakhChunk:
             "chunk_type": self.chunk_type.value,
             "verse_count": self.verse_count,
             "token_estimate": self.token_estimate,
-            "sefaria_topics": self.sefaria_topics,
         }
 
     @classmethod
@@ -88,7 +84,6 @@ class TanakhChunk:
             chunk_type=ChunkType(data["chunk_type"]),
             verse_count=data["verse_count"],
             token_estimate=data["token_estimate"],
-            sefaria_topics=data.get("sefaria_topics", []),
         )
 
     def embedding_text(self) -> str:
