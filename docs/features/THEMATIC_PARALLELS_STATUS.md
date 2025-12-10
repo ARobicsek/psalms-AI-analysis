@@ -146,6 +146,37 @@
 - [ ] Create ThematicParallelsLibrarian
 - [ ] Integrate into ResearchAssembler
 
+### Session 187 - 2025-12-09 (Later)
+
+**Phase**: Phase 1 Corpus Cleaning
+**Duration**: ~2 hours
+**Developer**: Claude (with user)
+
+**Completed**:
+- [x] Removed unused sefaria_topics field from chunk schema
+- [x] Added text cleaning functions to corpus_builder.py
+- [x] Cleaned Hebrew text: removed pasuq (׀), peh (פ), samech (ס), and maqqif (־)
+- [x] Attempted to clean English text of footnotes and translator notes
+- [x] Rebuilt corpus multiple times with improved cleaning
+- [x] Analyzed corpus issues (2,094 verses with pasuq, 3,446 with peh/samech, 2,729 with footnotes)
+- [x] Created plan to fix English text cleaning more thoroughly
+
+**Issues Identified**:
+- English text cleaning patterns not matching correctly
+- Duplicate words being created (e.g., "humankindhumankind")
+- Complex footnote patterns like "*dust Heb. 'afar.*" not being removed
+- Need more robust regex patterns for various footnote formats
+
+**Blockers**:
+- English text cleaning still not working properly
+- Created detailed plan in .claude/plans/wise-cooking-rivest.md for next session
+
+**Next Session**:
+- [x] Fix English text cleaning with improved patterns
+- [ ] Rebuild corpus with properly cleaned text
+- [ ] Phase 2: Implement embedding_service.py
+- [ ] Build vector index with cleaned corpus
+
 ---
 
 ## Checkpoints Verified
