@@ -62,11 +62,17 @@ def main():
 
         if args.full:
             print(f"\n   Hebrew:\n   {chunk.hebrew_text[:200]}...")
-            print(f"\n   English:\n   {chunk.english_text[:200]}...")
+            if chunk.english_text:
+                print(f"\n   English:\n   {chunk.english_text[:200]}...")
+            else:
+                print(f"\n   English: [None - Hebrew-only chunk]")
         else:
             # Skip displaying Hebrew text due to console issues
             # print(f"   Hebrew: {chunk.hebrew_text[:80]}...")
-            print(f"   English: {chunk.english_text[:100]}...")
+            if chunk.english_text:
+                print(f"   English: {chunk.english_text[:100]}...")
+            else:
+                print(f"   English: [None - Hebrew-only chunk]")
 
         print("-"*70)
 

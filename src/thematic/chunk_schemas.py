@@ -42,12 +42,12 @@ class TanakhChunk:
 
     # Content
     hebrew_text: str                 # Full Hebrew text
-    english_text: str                # Full English translation
 
     # Metadata
     chunk_type: ChunkType            # How this chunk was created
     verse_count: int                 # Number of verses
     token_estimate: int              # Approximate tokens (Hebrew + English)
+    english_text: Optional[str] = None   # Full English translation (optional)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -80,7 +80,7 @@ class TanakhChunk:
             end_chapter=data["end_chapter"],
             end_verse=data["end_verse"],
             hebrew_text=data["hebrew_text"],
-            english_text=data["english_text"],
+            english_text=data.get("english_text"),
             chunk_type=ChunkType(data["chunk_type"]),
             verse_count=data["verse_count"],
             token_estimate=data["token_estimate"],
@@ -88,7 +88,10 @@ class TanakhChunk:
 
     def embedding_text(self) -> str:
         """Text to embed (Hebrew + English combined)."""
-        return f"{self.hebrew_text}\n{self.english_text}"
+        if self.english_text:
+            return f"{self.hebrew_text}\n{self.english_text}"
+        else:
+            return self.hebrew_text
 
 
 @dataclass

@@ -32,7 +32,7 @@ WRITINGS_BOOKS = [
 
 
 def clean_hebrew_text(text: str) -> str:
-    """Clean Hebrew text by removing dividers and markers."""
+    """Clean Hebrew text by removing dividers, markers, and cantillation marks."""
     if not text:
         return text
 
@@ -45,6 +45,56 @@ def clean_hebrew_text(text: str) -> str:
     # Remove maqqif (־) and replace with space
     text = text.replace('־', ' ')
 
+    # Define cantillation marks to remove (teamim) - these are musical notation marks
+    # We specifically exclude vowel marks (nikud) from removal
+    cantillation_marks = [
+        # Etnachta group
+        '\u0591',  # Etnahta
+        '\u0592',  # Segol
+        '\u0593',  # Shalshelet
+        '\u0594',  # Zaqef Qaton
+        '\u0595',  # Zaqef Gadol
+        '\u0596',  # Zaqef Gadol (alternative)
+        '\u0597',  # Tipeha
+        '\u0598',  # Revia
+        '\u0599',  # Zarqa
+        '\u059a',  # Pashta
+        '\u059b',  # Yetiv
+        '\u059c',  # Tevir
+        '\u059d',  # Geresh
+        '\u059e',  # Geresh Muqdam
+        '\u059f',  # Gershayim
+        '\u05a0',  # Qarney Para
+        '\u05a1',  # Telisha Gedola
+        '\u05a2',  # Pazer
+        '\u05a3',  # Telisha Qetana
+        '\u05a4',  # Yerah ben Yomo
+        '\u05a5',  # Ole
+        '\u05a6',  # Iluy
+        '\u05a7',  # Dehi
+        '\u05a8',  # Zinor
+        # Disjunctive accents in lower range
+        '\u05a9',  # Munah
+        '\u05aa',  # Mahpach
+        '\u05ab',  # Mercha
+        '\u05ac',  # Mercha Kefula
+        '\u05ad',  # Darga
+        '\u05ae',  # Qadma
+        '\u05af',  # Telisha Qetana (alternative)
+        # Additional cantillation marks
+        '\u05bd',  # Meteg (sometimes considered a cantillation mark)
+        # Punctuation (not cantillation but often want to remove)
+        '\u05be',  # Maqaf (different from Unicode 05AD)
+    ]
+
+    # Remove cantillation marks
+    for mark in cantillation_marks:
+        text = text.replace(mark, '')
+
+    # Also remove sof pasuq (colon at end of verses)
+    text = text.replace('־', ' ')  # Already handled above
+    text = text.replace(':', ' ')   # Remove ASCII colon sometimes used
+
     # Clean up extra spaces
     text = re.sub(r'\s+', ' ', text)
     text = text.strip()
@@ -53,57 +103,105 @@ def clean_hebrew_text(text: str) -> str:
 
 
 def clean_english_text(text: str) -> str:
-    """Remove footnotes and translator notes from English text."""
+    """
+    Comprehensive cleaning of Sefaria English text.
+
+    Removes HTML footnotes, translator notes, cross-references,
+    and various formatting artifacts to produce clean text.
+    """
     if not text:
         return text
 
-    # Clean up malformed text from the database (e.g., "*When God began to create*When God began to create Others...")
-    # Look for the pattern: *text*text and clean it
-    text = re.sub(r'\*([^*]*)\*([^*]+)', r'\2', text)
+    # Import HTML unescape for entity conversion
+    from html import unescape
 
-    # Remove footnote patterns more carefully
-    # Pattern 1: *text* (asterisked notes)
-    text = re.sub(r'\*[^*\n]*\*', '', text)
+    # Phase 1: HTML removal
+    # Remove footnote markers and content
+    text = re.sub(r'<sup class="footnote-marker">[^<]+</sup>', '', text)
+    text = re.sub(r'<i class="footnote">[^<]*</i>', '', text)
 
-    # Pattern 2: Remaining single asterisks
-    text = re.sub(r'\*+', '', text)
+    # Remove any remaining HTML tags
+    text = re.sub(r'</?sup[^>]*>', '', text)
+    text = re.sub(r'</?i[^>]*>', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'<br\s*/?>', '\n', text)
+    text = re.sub(r'<[^>]+>', '', text)
 
-    # Pattern 3: Hebrew notes like "Heb. 'afar. Cf. the second note at 2.7."
-    text = re.sub(r'\s+Heb\.\s*[^,.]*\.?\s*(?:Cf\.\s*[^,.]*\.?)?', '', text)
+    # Convert HTML entities to readable characters
+    text = unescape(text)
 
-    # Pattern 4: Cross-references like "Cf. Ps. 19.6."
-    text = re.sub(r'\s+Cf\.\s*[^,.]*\.?', '', text)
+    # Phase 2: Fix malformed duplicate text FIRST (before other patterns)
+    # Pattern: *text*text or *text* more text
+    text = re.sub(r'\*([^*]+)\*([^*]+)', r'\2', text)
 
-    # Pattern 5: Emendation notes like "Emendation yields: '...'"
+    # Phase 3: Text-based footnote markers
+    # Remove simple footnote indicators like .-a, ,-b, -c
+    text = re.sub(r'([.,;:])?\-[a-z](?=\s|$)', r'\1', text)
+
+    # Phase 3: Translator notes and commentary
+    # Remove Hebrew language notes (with single quotes)
+    text = re.sub(r'\s+Heb\.\s*\'[^\']+\'(?:\.|\s*)(?:Cf\.\s*[^.,]+\.?)?', '', text)
+    text = re.sub(r'\s+Heb\s+[^.,;:]+\.\s*(?:Cf\.\s*[^.,;:]+\.?)?', '', text)
+
+    # Remove literal translation notes
+    text = re.sub(r'\s+Lit\.\s*\'[^\']+\'\.?', '', text)
+    text = re.sub(r'\s+Lit\.\s*\"[^\"]+\"\.?', '', text)
+
+    # Remove cross-references
+    # Pattern 1: "Cf. Book. chapter:verse." (with period after book abbreviation)
+    text = re.sub(r'\s+Cf\.\s+[A-Za-z]+\.?\s+\d+:\d+(?:\.\d+)?\.?', '', text)
+    # Pattern 2: "Cf. Book. chapter:verse-chapter:verse"
+    text = re.sub(r'\s+Cf\.\s+[A-Za-z]+\.?\s+\d+:\d+\s*-\s*\d+:\d+', '', text)
+    # Pattern 3: "Cf. Book. chapter:verse.-letter"
+    text = re.sub(r'\s+Cf\.\s+[A-Za-z]+\.?\s+\d+:\d+\.\-[a-z]', '', text)
+    # Pattern 4: "Cf. Book chapter:verse." (no period after book)
+    text = re.sub(r'\s+Cf\.\s+[A-Za-z]+\s+\d+:\d+(?:\.\d+)?\.?', '', text)
+    # Pattern 5: Any remaining "Cf. text" up to punctuation (but allow book abbreviation with period)
+    text = re.sub(r'\s+Cf\.\s+[A-Za-z]+(?:\.\s*|\s+)[^.,;:]+', '', text)
+
+    # Remove emendation notes
     text = re.sub(r'\s+Emendation[^,.]*\.?', '', text)
 
-    # Pattern 6: "Others" translations like "Others 'In the beginning God created.'"
-    text = re.sub(r'\s+Others\s*«[^»]*»\s*', '', text)
-    text = re.sub(r'\s+Others\s*"[^"]*"\s*', '', text)
+    # Remove "Others" translations (but keep the word "Others" if it's part of text)
+    text = re.sub(r'Others\s*[«\'""][^»\'""]*[»\'""]', 'Others', text)
+    text = re.sub(r'Others\s*�[^�]*�', 'Others', text)  # Special quotes
+    text = re.sub(r'Others\s*"[^"]*\.', 'Others', text)  # Handle quotes with period
 
-    # Pattern 7: Notes in parentheses like "(Heb: ḥawwaḥ)"
+    # Remove parenthetical Hebrew notes
     text = re.sub(r'\s*\([^)]*Heb[^)]*\)', '', text)
 
-    # Pattern 8: Editorial notes like "Moved up from v. 24 for clarity"
-    text = re.sub(r'\s+[^,.]*\s+Moved up from v\.\s*\d+\s+for clarity', '', text)
+    # Phase 4: Artifact cleanup
 
-    # Pattern 9: "Lit." notes like "Lit. 'soil.'"
-    text = re.sub(r'\s+Lit\.\s*\'[^\']*\'\.', '', text)
+    # Remove asterisked notes
+    text = re.sub(r'\s*\*[^*]+\*\s*', ' ', text)
 
-    # Pattern 10: Remove double punctuation artifacts
+    # Fix editorial move notes (remove only the note part)
+    text = re.sub(r'\s*Moved up from v\.\s*\d+\s+for clarity', '', text)
+
+    # Remove any remaining isolated asterisks
+    text = re.sub(r'\*+', '', text)
+
+    # Clean up punctuation artifacts from footnote removal
+    text = re.sub(r'\s*\.\s*\d+\.\-[a-z]', '', text)  # Remove ".2.-a" patterns
+    text = re.sub(r'\s*\.\s*\d+\.', '', text)  # Remove ".2." patterns
+    text = re.sub(r'\s+', ' ', text)  # Clean up extra spaces
+
+    # Phase 5: Text normalization
+    # Fix multiple periods
     text = re.sub(r'\.+', '.', text)
-    text = re.sub(r'\.+', '.', text)
 
-    # Clean up extra spaces around punctuation
+    # Fix punctuation spacing
     text = re.sub(r'\s+([,.])', r'\1', text)  # Remove space before punctuation
-    text = re.sub(r'([,.])\s+', r'\1 ', text)  # Ensure space after punctuation (but not before)
-    text = re.sub(r'\s+', ' ', text)  # Multiple spaces to single space
 
-    # Fix specific artifacts
-    # "browShall" -> "brow Shall"
+    # Fix word concatenation issues (e.g., "browShall" -> "brow Shall")
     text = re.sub(r'(\w)([A-Z][a-z])', r'\1 \2', text)
 
-    # Remove any remaining artifacts at the beginning
+    # Clean whitespace
+    lines = text.split('\n')
+    lines = [' '.join(line.split()) for line in lines if line.strip()]
+    text = '\n'.join(lines)
+
+    # Final cleanup of any remaining multiple spaces
+    text = re.sub(r'\s+', ' ', text)
     text = text.strip()
 
     return text
@@ -542,10 +640,13 @@ class CorpusBuilder:
 
         # Combine and clean text
         hebrew_text = clean_hebrew_text(" ".join(v["hebrew"] for v in verses))
-        english_text = clean_english_text(" ".join(v["english"] for v in verses))
+        # Hebrew-only approach - no English text to avoid footnotes
+        english_text = None  # Optional: just reference for identification
+        # Alternative: keep minimal reference
+        # english_text = reference
 
-        # Estimate tokens (rough: 1 token per 4 chars for Hebrew, per 4 chars for English)
-        token_estimate = (len(hebrew_text) + len(english_text)) // 4
+        # Estimate tokens (Hebrew-only: 1 token per 4 chars)
+        token_estimate = len(hebrew_text) // 4
 
         return TanakhChunk(
             chunk_id=chunk_id,

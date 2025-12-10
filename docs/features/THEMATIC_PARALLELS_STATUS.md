@@ -12,8 +12,8 @@
 | Phase | Status | Started | Completed | Notes |
 |-------|--------|---------|-----------|-------|
 | 0. Environment Setup | ✅ Complete | 2025-12-09 | 2025-12-09 | Installed chromadb, openai, tiktoken; directories created |
-| 1. Corpus Preparation | ✅ Complete | 2025-12-09 | 2025-12-09 | Compared sliding window (6,372 chunks) vs Masoretic markers (12,291 chunks) |
-| 2. Embedding & Indexing | 🟡 In Progress | 2025-12-09 | - | Generate embeddings, build ChromaDB |
+| 1. Corpus Preparation | ✅ Complete | 2025-12-09 | 2025-12-09 | Hebrew-only corpus (18,764 chunks) with cantillation marks removed |
+| 2. Embedding & Indexing | ⬜ Not Started | - | - | Generate embeddings, build ChromaDB |
 | 3. Retrieval Implementation | ⬜ Not Started | - | - | ThematicParallelsLibrarian |
 | 4. Pipeline Integration | ⬜ Not Started | - | - | Integrate into ResearchAssembler |
 | 5. Testing & Validation | ⬜ Not Started | - | - | Unit tests, integration tests, manual QA |
@@ -177,6 +177,38 @@
 - [ ] Phase 2: Implement embedding_service.py
 - [ ] Build vector index with cleaned corpus
 
+### Session 188 - 2025-12-09 (Evening)
+
+**Phase**: Phase 1 Completion - Hebrew-Only Corpus
+**Duration**: ~1 hour
+**Developer**: Claude (with user)
+
+**Completed**:
+- [x] Decided on Hebrew-only approach to avoid English footnote contamination
+- [x] Modified chunk_schemas.py to make english_text optional
+- [x] Updated corpus_builder.py to create Hebrew-only chunks
+- [x] Added cantillation mark removal while preserving vowel marks
+- [x] Fixed dataclass field ordering for optional english_text
+- [x] Updated from_dict to handle optional english_text
+- [x] Fixed inspect_chunks.py to display None for English text
+- [x] Regenerated corpus with Hebrew-only text (18,764 chunks)
+- [x] Verified average token count reduced from ~168 to ~151
+
+**Key Improvements**:
+- Corpus now contains clean Hebrew text with vowels but no musical notation
+- No English footnotes or translator notes to contaminate embeddings
+- Reduced corpus size for faster processing
+- Better semantic search potential with pure Hebrew text
+
+**Blockers**:
+- None
+
+**Next Session**:
+- [ ] Phase 2: Implement embedding_service.py
+- [ ] Create vector_store.py for ChromaDB integration
+- [ ] Build vector index with cleaned corpus
+- [ ] Create ThematicParallelsLibrarian
+
 ---
 
 ## Checkpoints Verified
@@ -310,8 +342,10 @@
 - [ ] `data/thematic_corpus/chroma_db/` (directory)
 
 ### Modified
-- [x] `src/thematic/corpus_builder.py` (Updated window_overlap from 2 to 4)
+- [x] `src/thematic/corpus_builder.py` (Updated for Hebrew-only chunks, added cantillation removal)
+- [x] `src/thematic/chunk_schemas.py` (Made english_text optional, fixed field ordering)
 - [x] `scripts/build_thematic_corpus.py` (Updated window_overlap to 4)
+- [x] `scripts/inspect_chunks.py` (Handle None english_text)
 - [x] `.gitignore` (Added data/thematic_corpus/chroma_db/)
 - [x] `docs/features/THEMATIC_PARALLELS_IMPLEMENTATION_PLAN.md` (Added chunking strategy docs)
 - [x] `docs/features/THEMATIC_PARALLELS_STATUS.md` (Session updates)
