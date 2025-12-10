@@ -37,6 +37,8 @@ if __name__ == '__main__':
     from src.agents.sacks_librarian import SacksLibrarian, SacksReference
     from src.agents.hirsch_librarian import HirschLibrarian, HirschCommentary
     from src.agents.rag_manager import RAGManager, RAGContext
+    from src.agents.related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
+    from src.agents.thematic_parallels_librarian import ThematicParallel, ThematicParallelsLibrarian, create_thematic_librarian
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
@@ -48,6 +50,7 @@ else:
     from .hirsch_librarian import HirschLibrarian, HirschCommentary
     from .rag_manager import RAGManager, RAGContext
     from .related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
+    from .thematic_parallels_librarian import ThematicParallel, ThematicParallelsLibrarian, create_thematic_librarian
 
 
 @dataclass
@@ -113,6 +116,8 @@ class ResearchBundle:
     rag_context: Optional[RAGContext]  # Phase 2d: RAG documents
     related_psalms: Optional[List[RelatedPsalmMatch]]  # Related psalms from top connections analysis
     related_psalms_markdown: Optional[str]  # Pre-formatted related psalms markdown for LLM consumption
+    thematic_parallels: Optional[List[ThematicParallel]]  # Thematic parallels from vector search
+    thematic_parallels_markdown: Optional[str]  # Pre-formatted thematic parallels markdown for LLM consumption
     request: ResearchRequest
 
     def to_dict(self) -> Dict[str, Any]:
@@ -126,6 +131,14 @@ class ResearchBundle:
             'sacks_references': [s.to_dict() for s in self.sacks_references] if self.sacks_references else [],
             'hirsch_commentaries': [h.to_dict() for h in self.hirsch_commentaries] if self.hirsch_commentaries else [],
             'related_psalms': [r.to_dict() for r in self.related_psalms] if self.related_psalms else [],
+            'thematic_parallels': [{
+                'reference': p.reference,
+                'similarity': p.similarity,
+                'hebrew_text': p.hebrew_text,
+                'book': p.book,
+                'book_category': p.book_category,
+                'context_verses': p.context_verses
+            } for p in self.thematic_parallels] if self.thematic_parallels else [],
             'summary': {
                 'lexicon_entries': len(self.lexicon_bundle.entries) if self.lexicon_bundle else 0,
                 'concordance_searches': len(self.concordance_bundles),
@@ -139,7 +152,8 @@ class ResearchBundle:
                 'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
                 'sacks_references': len(self.sacks_references) if self.sacks_references else 0,
                 'hirsch_commentaries': len(self.hirsch_commentaries) if self.hirsch_commentaries else 0,
-                'related_psalms': len(self.related_psalms) if self.related_psalms else 0
+                'related_psalms': len(self.related_psalms) if self.related_psalms else 0,
+                'thematic_parallels': len(self.thematic_parallels) if self.thematic_parallels else 0
             }
         }
 
@@ -466,6 +480,11 @@ class ResearchBundle:
             md += self.related_psalms_markdown
             md += "\n---\n\n"
 
+        # Thematic Parallels section
+        if self.thematic_parallels_markdown:
+            md += self.thematic_parallels_markdown
+            md += "\n---\n\n"
+
         # Summary
         summary = self.to_dict()['summary']
         md += "## Research Summary\n\n"
@@ -480,6 +499,7 @@ class ResearchBundle:
         md += f"- **Rabbi Sacks references**: {summary['sacks_references']}\n"
         md += f"- **Liturgical total occurrences**: {summary['liturgical_total_occurrences']}\n"
         md += f"- **Related psalms analyzed**: {summary['related_psalms']}\n"
+        md += f"- **Thematic parallels found**: {summary['thematic_parallels']}\n"
 
         return md
 
@@ -627,6 +647,7 @@ class ResearchAssembler:
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
         self.related_psalms_librarian = RelatedPsalmsLibrarian(connections_file='data/analysis_results/top_550_connections_v6.json')  # Related psalms from top connections
         self.related_psalms_librarian.logger = self.logger  # Pass logger for debug output
+        self.thematic_parallels_librarian = create_thematic_librarian()  # Thematic parallels from vector search
 
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
         """
@@ -763,6 +784,39 @@ class ResearchAssembler:
                 self.logger.info(f"Related Psalms for Psalm {request.psalm_chapter}: "
                                f"{len(related_psalms)} matches, markdown size: {len(related_psalms_markdown)} chars")
 
+        # Fetch thematic parallels from vector search (ALWAYS included)
+        thematic_parallels = None
+        thematic_parallels_markdown = None
+        try:
+            # Get verses from the concordance results to build psalm text
+            psalm_verses = self._extract_psalm_verses_from_concordance(concordance_bundles)
+
+            if psalm_verses:
+                # Use 5-verse windowing to match corpus structure
+                thematic_parallels = self.thematic_parallels_librarian.find_parallels_for_psalm_with_windowing(
+                    psalm_number=request.psalm_chapter,
+                    verses=psalm_verses,
+                    window_size=5,
+                    window_overlap=4
+                )
+
+                if thematic_parallels:
+                    # Format as markdown for LLM consumption
+                    thematic_parallels_markdown = self._format_thematic_parallels_for_bundle(
+                        thematic_parallels,
+                        psalm_chapter=request.psalm_chapter
+                    )
+
+                    if self.logger:
+                        self.logger.info(f"Thematic Parallels for Psalm {request.psalm_chapter}: "
+                                       f"{len(thematic_parallels)} matches")
+        except Exception as e:
+            # Log error but don't fail the entire assembly
+            if self.logger:
+                self.logger.error(f"Error fetching thematic parallels for Psalm {request.psalm_chapter}: {e}")
+            thematic_parallels = None
+            thematic_parallels_markdown = None
+
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,
             lexicon_bundle=lexicon_bundle,
@@ -779,6 +833,8 @@ class ResearchAssembler:
             rag_context=rag_context,
             related_psalms=related_psalms if related_psalms else None,
             related_psalms_markdown=related_psalms_markdown if related_psalms_markdown else None,
+            thematic_parallels=thematic_parallels if thematic_parallels else None,
+            thematic_parallels_markdown=thematic_parallels_markdown if thematic_parallels_markdown else None,
             request=request
         )
 
@@ -824,6 +880,93 @@ class ResearchAssembler:
         with open(filepath, 'r', encoding='utf-8') as f:
             json_str = f.read()
         return self.assemble_from_json(json_str)
+
+    def _extract_psalm_verses_from_concordance(self, concordance_bundles: List[ConcordanceBundle]) -> List[Dict[str, str]]:
+        """
+        Extract psalm verses from concordance bundles to build verse list for thematic search.
+
+        Args:
+            concordance_bundles: List of concordance bundles with search results
+
+        Returns:
+            List of verses with verse numbers and Hebrew text
+        """
+        verses_dict = {}  # verse_number -> {'verse': int, 'hebrew': str, 'english': str}
+
+        for bundle in concordance_bundles:
+            for result in bundle.results:
+                # Skip if not from the target psalm
+                if result.book != "Psalms":
+                    continue
+
+                # Extract verse number
+                verse_key = f"{result.chapter}:{result.verse}"
+                verse_num = result.verse
+
+                # Store Hebrew text (prefer non-etext versions)
+                if verse_num not in verses_dict or not result.etext:
+                    verses_dict[verse_num] = {
+                        'verse': verse_num,
+                        'hebrew': result.hebrew,
+                        'english': result.text
+                    }
+
+        # Convert to sorted list
+        verses = [verses_dict[v] for v in sorted(verses_dict.keys())]
+        return verses
+
+    def _format_thematic_parallels_for_bundle(
+        self,
+        parallels: List[ThematicParallel],
+        psalm_chapter: int
+    ) -> str:
+        """
+        Format thematic parallels as markdown for research bundle.
+
+        Args:
+            parallels: List of ThematicParallel objects
+            psalm_chapter: Current psalm chapter number
+
+        Returns:
+            Formatted markdown string
+        """
+        if not parallels:
+            return ""
+
+        md = f"## Thematic Parallels (Vector Search)\n\n"
+        md += f"*Passages thematically similar to Psalm {psalm_chapter} based on semantic analysis*\n\n"
+
+        # Group by book category
+        by_category = {}
+        for parallel in parallels:
+            category = parallel.book_category
+            if category not in by_category:
+                by_category[category] = []
+            by_category[category].append(parallel)
+
+        # Define order for categories
+        category_order = ["Torah", "Prophets", "Writings"]
+
+        for category in category_order:
+            if category not in by_category:
+                continue
+
+            md += f"### {category}\n\n"
+
+            # Sort by similarity (highest first)
+            category_parallels = sorted(by_category[category], key=lambda p: p.similarity, reverse=True)
+
+            for parallel in category_parallels:
+                # Format similarity as percentage
+                similarity_pct = int(parallel.similarity * 100)
+
+                md += f"**{parallel.reference}** (Similarity: {similarity_pct}%)\n"
+                md += f"```hebrew\n{parallel.hebrew_text}\n```\n\n"
+
+        # Add statistics
+        md += f"*Found {len(parallels)} thematic parallels across {len(by_category)} sections*\n"
+
+        return md
 
 
 def main():
