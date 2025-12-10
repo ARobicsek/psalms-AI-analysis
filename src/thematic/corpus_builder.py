@@ -345,10 +345,6 @@ class CorpusBuilder:
         # Special handling by book
         if book == "Psalms":
             return self._chunk_psalms(verses)
-        elif book == "Proverbs":
-            return self._chunk_proverbs(verses)
-        elif book == "Job":
-            return self._chunk_job(verses)
         elif use_masoretic_markers:
             # Use Masoretic section markers
             return self._masoretic_marker_chunks(book, verses)

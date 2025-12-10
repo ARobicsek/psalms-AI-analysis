@@ -1,5 +1,5 @@
 {
-  "total_chunks": 18764,
+  "total_chunks": 20565,
   "chunks_by_book": {
     "Genesis": 1530,
     "Exodus": 1207,
@@ -27,8 +27,8 @@
     "Haggai": 35,
     "Zechariah": 208,
     "Malachi": 52,
-    "Proverbs": 151,
-    "Job": 27,
+    "Proverbs": 912,
+    "Job": 1067,
     "Song of Songs": 114,
     "Ruth": 82,
     "Lamentations": 151,
@@ -43,14 +43,12 @@
   "chunks_by_category": {
     "Torah": 5831,
     "Prophets": 9233,
-    "Writings": 3700
+    "Writings": 5501
   },
   "chunks_by_type": {
-    "sliding_window": 18586,
-    "sefaria_section": 151,
-    "speaker_turn": 27
+    "sliding_window": 20565
   },
-  "avg_verse_count": 5.09,
-  "avg_token_estimate": 150.72,
-  "created_at": "2025-12-09T21:25:40.515803"
+  "avg_verse_count": 5.0,
+  "avg_token_estimate": 143.08,
+  "created_at": "2025-12-09T22:04:33.486294"
 }

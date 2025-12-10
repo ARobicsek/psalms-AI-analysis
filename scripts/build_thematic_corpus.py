@@ -82,7 +82,7 @@ def main():
 
     metadata = builder.build_corpus(
         exclude_psalms=True,
-        use_sefaria_sections=True,
+        use_sefaria_sections=False,
     )
 
     print("\n" + "="*60)
