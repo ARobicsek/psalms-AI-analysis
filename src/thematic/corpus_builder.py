@@ -57,35 +57,53 @@ def clean_english_text(text: str) -> str:
     if not text:
         return text
 
-    # Remove asterisk patterns more carefully
-    # Pattern: *text* or *text
-    text = re.sub(r'\*[^*\n]*\*', ' ', text)  # *text*
-    text = re.sub(r'\*[^*\n]*', ' ', text)  # remaining *text
+    # Clean up malformed text from the database (e.g., "*When God began to create*When God began to create Others...")
+    # Look for the pattern: *text*text and clean it
+    text = re.sub(r'\*([^*]*)\*([^*]+)', r'\2', text)
 
-    # Remove text between brackets
-    text = re.sub(r'\[[^\]]*\]', ' ', text)
+    # Remove footnote patterns more carefully
+    # Pattern 1: *text* (asterisked notes)
+    text = re.sub(r'\*[^*\n]*\*', '', text)
 
-    # Remove specific patterns more carefully
-    patterns = [
-        (r'Others\s*«[^»]*»', ''),  # Others «text»
-        (r'Others\s*"[^"]*"', ''),  # Others "text"
-        (r'Others[^;,.]*', ''),  # Remaining Others...
-        (r'Heb\.[^;,.]*', ''),  # Hebrew references
-        (r'Cf\.[^;,.]*', ''),  # Cross-references
-        (r'Emendation[^;,.]*', ''),  # Emendation notes
-        (r'^\s*[^.]*\s*When\s+God\s+began\s+to\s+create', 'When God began to create'),  # Fix beginning
-    ]
+    # Pattern 2: Remaining single asterisks
+    text = re.sub(r'\*+', '', text)
 
-    for pattern, replacement in patterns:
-        text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+    # Pattern 3: Hebrew notes like "Heb. 'afar. Cf. the second note at 2.7."
+    text = re.sub(r'\s+Heb\.\s*[^,.]*\.?\s*(?:Cf\.\s*[^,.]*\.?)?', '', text)
 
-    # Remove artifacts at beginning of sentences
-    text = re.sub(r'^\s*[^a-zA-Z]*', '', text)
+    # Pattern 4: Cross-references like "Cf. Ps. 19.6."
+    text = re.sub(r'\s+Cf\.\s*[^,.]*\.?', '', text)
 
-    # Clean up extra spaces and punctuation
-    text = re.sub(r'\s+', ' ', text)
-    text = re.sub(r'\s*([,.])', r'\1', text)  # Remove space before punctuation
-    text = re.sub(r'[,.]+\s*[,.]*', '.', text)  # Fix multiple punctuation
+    # Pattern 5: Emendation notes like "Emendation yields: '...'"
+    text = re.sub(r'\s+Emendation[^,.]*\.?', '', text)
+
+    # Pattern 6: "Others" translations like "Others 'In the beginning God created.'"
+    text = re.sub(r'\s+Others\s*«[^»]*»\s*', '', text)
+    text = re.sub(r'\s+Others\s*"[^"]*"\s*', '', text)
+
+    # Pattern 7: Notes in parentheses like "(Heb: ḥawwaḥ)"
+    text = re.sub(r'\s*\([^)]*Heb[^)]*\)', '', text)
+
+    # Pattern 8: Editorial notes like "Moved up from v. 24 for clarity"
+    text = re.sub(r'\s+[^,.]*\s+Moved up from v\.\s*\d+\s+for clarity', '', text)
+
+    # Pattern 9: "Lit." notes like "Lit. 'soil.'"
+    text = re.sub(r'\s+Lit\.\s*\'[^\']*\'\.', '', text)
+
+    # Pattern 10: Remove double punctuation artifacts
+    text = re.sub(r'\.+', '.', text)
+    text = re.sub(r'\.+', '.', text)
+
+    # Clean up extra spaces around punctuation
+    text = re.sub(r'\s+([,.])', r'\1', text)  # Remove space before punctuation
+    text = re.sub(r'([,.])\s+', r'\1 ', text)  # Ensure space after punctuation (but not before)
+    text = re.sub(r'\s+', ' ', text)  # Multiple spaces to single space
+
+    # Fix specific artifacts
+    # "browShall" -> "brow Shall"
+    text = re.sub(r'(\w)([A-Z][a-z])', r'\1 \2', text)
+
+    # Remove any remaining artifacts at the beginning
     text = text.strip()
 
     return text
