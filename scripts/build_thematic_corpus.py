@@ -77,7 +77,7 @@ def main():
         tanakh_db_path=str(tanakh_db),
         output_dir=str(output_dir),
         window_size=5,
-        window_overlap=2,
+        window_overlap=4,
     )
 
     metadata = builder.build_corpus(

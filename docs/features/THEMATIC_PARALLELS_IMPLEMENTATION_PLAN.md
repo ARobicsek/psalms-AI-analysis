@@ -279,6 +279,29 @@ __all__ = [
 
 ### Duration: 4-6 hours
 
+### Chunking Strategy: Overlapping 5-Verse Windows
+
+We use an overlapping window approach to ensure thematic continuity:
+
+1. **Window Size**: 5 verses per chunk
+2. **Overlap**: 4 verses between consecutive chunks
+3. **Result**: Moving window pattern:
+   - Chunk 1: verses a, b, c, d, e
+   - Chunk 2: verses b, c, d, e, f
+   - Chunk 3: verses c, d, e, f, g
+   - And so on...
+
+**Why this approach?**
+- Ensures no thematic elements are lost at chunk boundaries
+- Provides multiple contexts for each verse (appears in 5 different chunks)
+- Maintains local context while allowing broader thematic connections
+- Results in ~18,764 chunks from the Tanakh (excluding Psalms)
+
+**Special handling:**
+- Psalms: Excluded from corpus (we're finding parallels TO Psalms)
+- Job: Chunked by speaker/speech boundaries instead of windows
+- Proverbs: Chunked by collection boundaries where defined
+
 ### Step 1.1: Define Data Schemas
 
 ```python
@@ -448,7 +471,7 @@ class CorpusBuilder:
         tanakh_db_path: str,
         output_dir: str,
         window_size: int = 5,
-        window_overlap: int = 2,
+        window_overlap: int = 4,
     ):
         """
         Initialize corpus builder.
@@ -458,6 +481,7 @@ class CorpusBuilder:
             output_dir: Directory to write corpus files
             window_size: Default sliding window size (verses)
             window_overlap: Overlap between windows (verses)
+                              Use 4 for overlapping 5-verse windows (a,b,c,d,e → b,c,d,e,f)
         """
         self.tanakh_db_path = Path(tanakh_db_path)
         self.output_dir = Path(output_dir)

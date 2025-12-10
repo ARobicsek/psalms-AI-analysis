@@ -34,6 +34,9 @@ Desktop.ini
 data/psalm_relationships.db
 data/liturgy.db
 
+# Thematic parallels database
+data/thematic_corpus/chroma_db/
+
 # Large data/analysis files (too big for GitHub)
 data/analysis_results/*.json
 !data/analysis_results/psalm_word_counts.json

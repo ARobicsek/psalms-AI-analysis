@@ -48,7 +48,7 @@ class CorpusBuilder:
         tanakh_db_path: str,
         output_dir: str,
         window_size: int = 5,
-        window_overlap: int = 2,
+        window_overlap: int = 4,
     ):
         """
         Initialize corpus builder.

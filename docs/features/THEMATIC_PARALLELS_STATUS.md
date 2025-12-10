@@ -13,7 +13,7 @@
 |-------|--------|---------|-----------|-------|
 | 0. Environment Setup | ✅ Complete | 2025-12-09 | 2025-12-09 | Installed chromadb, openai, tiktoken; directories created |
 | 1. Corpus Preparation | ✅ Complete | 2025-12-09 | 2025-12-09 | Compared sliding window (6,372 chunks) vs Masoretic markers (12,291 chunks) |
-| 2. Embedding & Indexing | ⬜ Not Started | - | - | Generate embeddings, build ChromaDB |
+| 2. Embedding & Indexing | 🟡 In Progress | 2025-12-09 | - | Generate embeddings, build ChromaDB |
 | 3. Retrieval Implementation | ⬜ Not Started | - | - | ThematicParallelsLibrarian |
 | 4. Pipeline Integration | ⬜ Not Started | - | - | Integrate into ResearchAssembler |
 | 5. Testing & Validation | ⬜ Not Started | - | - | Unit tests, integration tests, manual QA |
@@ -112,6 +112,37 @@
 - [x] User decision on chunking strategy deferred
 - [ ] Phase 2: Implement embedding_service.py (after user decision)
 - [ ] Build vector index with chosen corpus
+- [ ] Create ThematicParallelsLibrarian
+- [ ] Integrate into ResearchAssembler
+
+### Session 186 - 2025-12-09
+
+**Phase**: Phase 1 Revision
+**Duration**: ~1 hour
+**Developer**: Claude (with user)
+
+**Completed**:
+- [x] User decided on overlapping 5-verse window chunking strategy
+- [x] Modified sliding window implementation to use 5-verse windows with 4-verse overlap
+- [x] Updated corpus_builder.py with new chunking parameters (window_size=5, window_overlap=4)
+- [x] Added chroma_db directory to .gitignore
+- [x] Rebuilt corpus with overlapping windows (18,764 chunks created)
+- [x] Updated documentation in THEMATIC_PARALLELS_IMPLEMENTATION_PLAN.md
+- [x] Verified overlapping windows working correctly (e.g., Genesis 1:1-5, 1:2-6, 1:3-7)
+
+**Implementation Details**:
+- Chunk 1: verses a, b, c, d, e
+- Chunk 2: verses b, c, d, e, f
+- Each chunk is 5 verses with 4-verse overlap to previous
+- This ensures continuity while capturing local context
+- Each verse appears in 5 different chunks for multiple contexts
+
+**Blockers**:
+- None
+
+**Next Session**:
+- [ ] Phase 2: Implement embedding_service.py
+- [ ] Build vector index with new corpus
 - [ ] Create ThematicParallelsLibrarian
 - [ ] Integrate into ResearchAssembler
 
@@ -248,6 +279,11 @@
 - [ ] `data/thematic_corpus/chroma_db/` (directory)
 
 ### Modified
+- [x] `src/thematic/corpus_builder.py` (Updated window_overlap from 2 to 4)
+- [x] `scripts/build_thematic_corpus.py` (Updated window_overlap to 4)
+- [x] `.gitignore` (Added data/thematic_corpus/chroma_db/)
+- [x] `docs/features/THEMATIC_PARALLELS_IMPLEMENTATION_PLAN.md` (Added chunking strategy docs)
+- [x] `docs/features/THEMATIC_PARALLELS_STATUS.md` (Session updates)
 - [ ] `src/agents/research_assembler.py`
 - [ ] `src/agents/__init__.py`
 - [x] `requirements.txt`
