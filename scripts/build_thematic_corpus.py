@@ -81,7 +81,7 @@ def main():
     )
 
     metadata = builder.build_corpus(
-        exclude_psalms=True,
+        exclude_psalms=False,
         use_sefaria_sections=False,
     )
 

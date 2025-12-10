@@ -85,17 +85,18 @@ class ChromaVectorStore(VectorStore):
         else:
             self.client = chromadb.Client(settings=settings)
 
-        # Always create collection without embedding function since we provide our own
-        # First delete if it exists to avoid conflicts
+        # Create or get collection without embedding function since we provide our own
         try:
-            self.client.delete_collection(name=collection_name)
+            # Try to get existing collection
+            self.collection = self.client.get_collection(name=collection_name)
+            logger.info(f"Found existing collection: {collection_name}")
         except:
-            pass
-
-        self.collection = self.client.create_collection(
-            name=collection_name,
-            metadata={"description": "Tanakh thematic chunks for parallel search"}
-        )
+            # Create new collection if it doesn't exist
+            self.collection = self.client.create_collection(
+                name=collection_name,
+                metadata={"description": "Tanakh thematic chunks for parallel search"}
+            )
+            logger.info(f"Created new collection: {collection_name}")
 
     def add_chunks(self, chunks: List[TanakhChunk], embeddings: List[List[float]]) -> None:
         """Add chunks with their embeddings to the store.
@@ -182,7 +183,7 @@ class ChromaVectorStore(VectorStore):
                     "metadata": results["metadatas"][0][i] if "metadatas" in results else None,
                     "document": results["documents"][0][i] if "documents" in results else None,
                     "distance": results["distances"][0][i] if "distances" in results else None,
-                    "similarity": 1 - results["distances"][0][i] if "distances" in results and results["distances"][0][i] is not None else None,
+                    "similarity": 1 / (1 + results["distances"][0][i]) if "distances" in results and results["distances"][0][i] is not None else None,
                 }
                 formatted_results.append(result)
 

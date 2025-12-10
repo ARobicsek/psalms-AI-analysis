@@ -1,5 +1,5 @@
 {
-  "total_chunks": 20565,
+  "total_chunks": 23089,
   "chunks_by_book": {
     "Genesis": 1530,
     "Exodus": 1207,
@@ -38,17 +38,18 @@
     "Ezra": 277,
     "Nehemiah": 402,
     "I Chronicles": 940,
-    "II Chronicles": 819
+    "II Chronicles": 819,
+    "Psalms": 2524
   },
   "chunks_by_category": {
     "Torah": 5831,
     "Prophets": 9233,
-    "Writings": 5501
+    "Writings": 8025
   },
   "chunks_by_type": {
-    "sliding_window": 20565
+    "sliding_window": 23089
   },
   "avg_verse_count": 5.0,
-  "avg_token_estimate": 143.08,
-  "created_at": "2025-12-09T22:04:33.486294"
+  "avg_token_estimate": 136.41,
+  "created_at": "2025-12-10T10:47:55.451453"
 }

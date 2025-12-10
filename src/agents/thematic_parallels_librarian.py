@@ -34,7 +34,7 @@ class ThematicParallelsLibrarian:
         vector_store_path: str = "data/thematic_corpus/chroma_db",
         embedding_provider: str = "openai",
         embedding_model: str = "text-embedding-3-large",
-        similarity_threshold: float = 0.7,
+        similarity_threshold: float = 0.4,
         max_results: int = 10,
         exclude_psalms: bool = False,  # Include Psalms by default, filter only exact matches
     ):
@@ -276,12 +276,66 @@ class ThematicParallelsLibrarian:
         Returns:
             True if this reference overlaps with query verses
         """
-        # Simple string matching for now
-        # Could enhance with more sophisticated verse range parsing
+        # Normalize book names (Psalm/Psalms)
+        normalized_ref = reference.replace("Psalms", "Psalm")
+
         for query_verse in query_verses:
-            if query_verse in reference or reference in query_verse:
+            normalized_query = query_verse.replace("Psalms", "Psalm")
+
+            # Check for overlap with verse ranges
+            if normalized_query in normalized_ref or normalized_ref in normalized_query:
                 return True
+
+            # Check for verse range overlap (e.g., Psalm 23:1 overlaps with Psalm 23:1-5)
+            if self._verses_overlap(normalized_query, normalized_ref):
+                return True
+
         return False
+
+    def _verses_overlap(self, ref1: str, ref2: str) -> bool:
+        """
+        Check if two verse references overlap.
+
+        Args:
+            ref1: First reference (e.g., "Psalm 23:1")
+            ref2: Second reference (e.g., "Psalm 23:1-5")
+
+        Returns:
+            True if the verse ranges overlap
+        """
+        # Extract book, chapter, and verses
+        import re
+
+        # Pattern to match book chapter:verse(s)
+        pattern = r"(.*?)(\d+):(\d+)(?:-(\d+))?"
+
+        m1 = re.match(pattern, ref1)
+        m2 = re.match(pattern, ref2)
+
+        if not m1 or not m2:
+            return False
+
+        book1, chapter1, verse1_start, verse1_end = m1.groups()
+        book2, chapter2, verse2_start, verse2_end = m2.groups()
+
+        # Normalize single verses to have same start/end
+        verse1_end = verse1_end or verse1_start
+        verse2_end = verse2_end or verse2_start
+
+        # Convert to integers
+        chapter1 = int(chapter1)
+        chapter2 = int(chapter2)
+        verse1_start = int(verse1_start)
+        verse1_end = int(verse1_end)
+        verse2_start = int(verse2_start)
+        verse2_end = int(verse2_end)
+
+        # Check if same book and chapter
+        if book1 != book2 or chapter1 != chapter2:
+            return False
+
+        # Check if verse ranges overlap
+        return not (verse1_end < verse2_start or verse2_end < verse1_start)
 
     def get_statistics(self) -> Dict[str, Any]:
         """

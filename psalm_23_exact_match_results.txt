@@ -1,0 +1,8 @@
+PSALM 23 EXACT MATCH TEST (HEBREW ONLY)
+==================================================
+
+Query text: [Hebrew text of Psalm 23:1-5]
+Length: 219 characters
+
+Results found: 0
+

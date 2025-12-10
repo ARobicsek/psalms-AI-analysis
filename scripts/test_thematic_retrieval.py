@@ -37,7 +37,7 @@ def test_psalm_23(librarian):
         print(f"\n{i}. {parallel.reference}")
         print(f"   Similarity: {parallel.similarity:.3f}")
         print(f"   Book: {parallel.book} ({parallel.book_category})")
-        print(f"   Hebrew: {parallel.hebrew_text[:150]}...")
+        # Skip Hebrew text display to avoid console encoding issues
 
 
 def test_psalm_139(librarian):
@@ -56,7 +56,7 @@ def test_psalm_139(librarian):
         print(f"\n{i}. {parallel.reference}")
         print(f"   Similarity: {parallel.similarity:.3f}")
         print(f"   Book: {parallel.book} ({parallel.book_category})")
-        print(f"   Hebrew: {parallel.hebrew_text[:150]}...")
+        # Skip Hebrew text display to avoid console encoding issues
 
 
 def test_psalm_1(librarian):
@@ -75,7 +75,7 @@ def test_psalm_1(librarian):
         print(f"\n{i}. {parallel.reference}")
         print(f"   Similarity: {parallel.similarity:.3f}")
         print(f"   Book: {parallel.book} ({parallel.book_category})")
-        print(f"   Hebrew: {parallel.hebrew_text[:150]}...")
+        # Skip Hebrew text display to avoid console encoding issues
 
 
 def test_psalm_73(librarian):
@@ -94,7 +94,7 @@ def test_psalm_73(librarian):
         print(f"\n{i}. {parallel.reference}")
         print(f"   Similarity: {parallel.similarity:.3f}")
         print(f"   Book: {parallel.book} ({parallel.book_category})")
-        print(f"   Hebrew: {parallel.hebrew_text[:150]}...")
+        # Skip Hebrew text display to avoid console encoding issues
 
 
 def main():
@@ -155,7 +155,7 @@ def main():
             print(f"\n{i}. {parallel.reference}")
             print(f"   Similarity: {parallel.similarity:.3f}")
             print(f"   Book: {parallel.book} ({parallel.book_category})")
-            print(f"   Hebrew: {parallel.hebrew_text[:150]}...")
+                # Skip Hebrew text display to avoid console encoding issues
     elif args.psalm:
         if args.psalm == 1:
             test_psalm_1(librarian)

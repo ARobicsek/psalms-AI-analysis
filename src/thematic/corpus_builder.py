@@ -343,9 +343,7 @@ class CorpusBuilder:
             return []
 
         # Special handling by book
-        if book == "Psalms":
-            return self._chunk_psalms(verses)
-        elif use_masoretic_markers:
+        if use_masoretic_markers:
             # Use Masoretic section markers
             return self._masoretic_marker_chunks(book, verses)
         elif use_sefaria_sections:

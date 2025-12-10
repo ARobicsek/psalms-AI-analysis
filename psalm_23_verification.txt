@@ -1,0 +1,15 @@
+PSALM 23 SELF-REFERENCE VERIFICATION RESULTS
+==================================================
+
+Psalm 23:1: FAIL
+  Top match: Psalms 23:1-5
+  Similarity: 0.5136
+
+Psalm 23:4: FAIL
+  Top match: Psalms 23:4-24:2
+  Similarity: 0.5069
+
+Psalm 23:5: FAIL
+  Top match: Psalms 18:36-40
+  Similarity: 0.5308
+
