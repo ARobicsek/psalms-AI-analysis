@@ -498,7 +498,15 @@ class SynthesisWriter:
         self.logger = logger or get_logger("synthesis_writer")
         self.cost_tracker = cost_tracker or CostTracker()
 
+        # Track whether deep research was removed due to size constraints
+        self._deep_research_removed_for_space = False
+
         self.logger.info(f"SynthesisWriter initialized with model {self.model}")
+
+    @property
+    def deep_research_removed_for_space(self) -> bool:
+        """Return whether deep research was removed due to character limits."""
+        return self._deep_research_removed_for_space
 
     def _calculate_verse_token_limit(self, num_verses: int) -> int:
         """
@@ -722,27 +730,48 @@ class SynthesisWriter:
                         f"Instances: {total_original_instances} → {total_kept_instances}.")
         return result
 
-    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 700000) -> str:
+    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 700000) -> tuple:
         """
         Intelligently trim research bundle to fit within token limits.
 
-        Priority order:
-        1. Keep all lexicon entries (most important for word analysis)
-        2. Keep all figurative language examples (critical for literary analysis)
-        3. Keep all commentary entries (provides interpretive context)
-        4. Trim concordance results (least critical - shows usage patterns)
+        Priority order for trimming (least to most important):
+        1. Deep Web Research (supplementary, removed first)
+        2. Concordance results (shows usage patterns)
+        3. Figurative language examples (critical for literary analysis)
+        4. Commentary entries (provides interpretive context)
+        5. Lexicon entries (most important for word analysis - never trimmed)
 
         Args:
             research_bundle: Full research bundle markdown
             max_chars: Maximum characters (~125k tokens with 2 chars/token ratio)
 
         Returns:
-            Trimmed research bundle
+            Tuple of (trimmed_bundle, deep_research_was_removed)
         """
+        deep_research_removed = False
+
         if len(research_bundle) <= max_chars:
-            return research_bundle
+            return research_bundle, deep_research_removed
 
         self.logger.warning(f"Research bundle too large ({len(research_bundle)} chars). Trimming to {max_chars} chars...")
+
+        # First, check if removing Deep Web Research section would help
+        if '## Deep Web Research' in research_bundle:
+            # Remove the deep research section
+            import re
+            # Match from "## Deep Web Research" to the next section or end
+            pattern = r'\n## Deep Web Research\n.*?(?=\n## [^#]|\n---\n\n## |\Z)'
+            research_bundle_without_deep = re.sub(pattern, '', research_bundle, flags=re.DOTALL)
+
+            if len(research_bundle_without_deep) <= max_chars:
+                self.logger.info(f"Removed Deep Web Research section to fit within limits. "
+                               f"Size: {len(research_bundle)} → {len(research_bundle_without_deep)} chars")
+                return research_bundle_without_deep, True
+
+            # Deep research removed but still over limit, continue with other trimming
+            research_bundle = research_bundle_without_deep
+            deep_research_removed = True
+            self.logger.info(f"Removed Deep Web Research section but still over limit. Continuing with other trimming...")
 
         # Split into sections
         sections = research_bundle.split('\n## ')
@@ -813,7 +842,7 @@ class SynthesisWriter:
         ]))
 
         self.logger.info(f"Research bundle trimmed: {len(research_bundle)} → {len(result)} chars")
-        return result
+        return result, deep_research_removed
 
     def _generate_introduction(
         self,
@@ -845,7 +874,10 @@ class SynthesisWriter:
         # Trim research bundle if needed to fit within token limits
         # Target: ~600K chars max (~300K tokens with 2:1 ratio)
         # Reduced limit to leave room for prompt template + macro/micro analysis
-        research_text = self._trim_research_bundle(research_bundle, max_chars=600000)
+        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=600000)
+
+        # Track if deep research was removed for space (will be reported in stats)
+        self._deep_research_removed_for_space = deep_research_removed
 
         # Build prompt
         prompt = INTRODUCTION_ESSAY_PROMPT.format(
@@ -976,7 +1008,11 @@ class SynthesisWriter:
         # Trim research bundle if needed - verse commentary includes introduction essay
         # Target: ~600K chars max (~300K tokens with 2:1 ratio)
         # Reduced limit to leave room for prompt template + macro/micro analysis
-        research_text = self._trim_research_bundle(research_bundle, max_chars=600000)
+        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=600000)
+
+        # Track if deep research was removed for space (could happen here if intro didn't trigger it)
+        if deep_research_removed:
+            self._deep_research_removed_for_space = True
 
         # Build prompt
         prompt = VERSE_COMMENTARY_PROMPT.format(

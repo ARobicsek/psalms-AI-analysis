@@ -12,6 +12,13 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
+**Session 209 (2025-12-11)**: Deep Web Research Integration
+- Added support for incorporating Gemini Deep Research outputs into research bundles
+- New directory: `data/deep_research/` for storing psalm-specific deep research files
+- Files named: `psalm_NNN_deep_research.txt` (e.g., `psalm_017_deep_research.txt`)
+- Auto-trimming: Deep research removed first if bundle exceeds character limits
+- Pipeline stats and docx summary now track "Deep Web Research: Yes/No"
+
 **Session 182 (2025-12-08)**: Lexical Insight Prompt Fix
 - Fixed concordance searches returning 0 results for phrases like "פקד לילה" and "צל כנפים"
 - Root cause: LLM extracting conceptual/base forms instead of exact verse forms
@@ -61,6 +68,7 @@ python scripts/cost_report.py
 - `src/agents/` - AI agent implementations (macro, micro, synthesis, editors)
 - `src/concordance/` - 4-layer Hebrew search system
 - `database/` - SQLite databases (tanakh.db, psalm_relationships.db)
+- `data/deep_research/` - Gemini Deep Research outputs (psalm_NNN_deep_research.txt)
 - `output/psalm_*/` - Generated commentary (production)
 - `archive/` - Organized historical files (debugging, experiments, session docs)
 - `scripts/utilities/` - Helper scripts (canonicalizer, score generation)
@@ -96,6 +104,7 @@ python scripts/cost_report.py
 
 ## Common Tasks
 
+**Add Deep Research:** Save Gemini Deep Research output to `data/deep_research/psalm_NNN_deep_research.txt`
 **Research a fix:** Check `archive/debugging/` for similar past issues organized by date
 **Review experiments:** Check `archive/experimental_outputs/` for test psalm runs
 **Update docs:** Maintain this section's "Recent Major Changes" after significant work

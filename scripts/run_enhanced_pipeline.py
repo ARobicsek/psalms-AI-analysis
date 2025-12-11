@@ -474,6 +474,16 @@ def run_enhanced_pipeline(
         tracker.track_step_output("synthesis", synthesis_output, duration=step_duration)
         tracker.track_model_for_step("synthesis", synthesis_model)
 
+        # Update deep research status if it was removed for space during synthesis
+        if synthesis_writer.deep_research_removed_for_space:
+            tracker.track_deep_research_status(
+                available=tracker.research.deep_research_available,
+                included=False,  # It was removed
+                removed_for_space=True,
+                char_count=tracker.research.deep_research_chars
+            )
+            logger.info("Deep Web Research was removed from research bundle due to character limits")
+
         logger.info(f"✓ Introduction saved to {synthesis_intro_file}")
         logger.info(f"✓ Verse commentary saved to {synthesis_verses_file}")
         print(f"✓ Introduction complete: {synthesis_intro_file}")

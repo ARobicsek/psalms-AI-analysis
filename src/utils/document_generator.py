@@ -866,6 +866,20 @@ class DocumentGenerator:
         else:
             prompt_chars_str = f"{prompt_chars} characters"
 
+        # Deep Web Research status
+        deep_research_available = research_data.get('deep_research_available', False)
+        deep_research_included = research_data.get('deep_research_included', False)
+        deep_research_removed = research_data.get('deep_research_removed_for_space', False)
+
+        if deep_research_included:
+            deep_research_str = "Yes"
+        elif deep_research_removed:
+            deep_research_str = "No (removed for space)"
+        elif deep_research_available:
+            deep_research_str = "No (available but not included)"
+        else:
+            deep_research_str = "No"
+
         # --- Models Used --- (This section will be built from the markdown in the generate() method)
         models_used_str = "### Models Used"
 
@@ -883,6 +897,7 @@ Methodological & Bibliographical Summary
 **Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
 **Similar Psalms Analyzed**: {related_psalms_str}
+**Deep Web Research**: {deep_research_str}
 **Master Editor Prompt Size**: {prompt_chars_str}
 
 {models_used_str}

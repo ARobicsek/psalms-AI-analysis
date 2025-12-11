@@ -1,11 +1,79 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-10 (Session 208)
+**Last Updated**: 2025-12-11 (Session 209)
 
 ## Current Focus: Psalm Commentary Production
 
 ### Phase: Pipeline Production - Complete Psalms 1-14, 8, 15-21
 Continuing with verse-by-verse commentary generation using the established pipeline.
+
+## Deep Web Research Integration (Session 209) - NEW FEATURE ✅
+
+### Overview
+Added support for incorporating Gemini Deep Research outputs into the research bundle. This allows manually-gathered scholarly research from web sources to enrich the AI-generated commentary.
+
+### How to Use
+
+1. **Run Gemini Deep Research** (manually in browser):
+   - Go to [Gemini](https://gemini.google.com/) or [NotebookLM](https://notebooklm.google.com/)
+   - Select "Deep Research" mode
+   - Use this prompt template:
+   ```
+   I'm preparing a scholarly essay on Psalm [NUMBER] for a collection of essays
+   that serve as a reader's guide to the book of psalms. Please assemble a deep
+   research package on this psalm that includes ancient, medieval and modern
+   commentary and debates; ANE scholarship; linguistics, philology, etc. Also
+   include reception, ritual and liturgical use of the psalm or any of its verses
+   or phrases. Also include literary and cultural influence that the psalm or its
+   language has had. Make sure to search widely, but include thetorah.org and
+   Sefaria as well as academic sources. When you return your results please be
+   clear and terse, to minimize tokens. You're not writing the essay; you're
+   assembling the materials for the scholar.
+   ```
+
+2. **Save the output**:
+   - Location: `data/deep_research/`
+   - Naming: `psalm_NNN_deep_research.txt` (e.g., `psalm_017_deep_research.txt`)
+   - Format: Plain text (copy/paste from Gemini output)
+
+3. **Run the pipeline normally**:
+   ```bash
+   python main.py --psalm 17
+   ```
+   The pipeline will automatically:
+   - Find and load the deep research file
+   - Include it in the research bundle as "## Deep Web Research"
+   - Remove it if the bundle exceeds character limits (600K chars)
+   - Track status in pipeline stats and final documents
+
+### Implementation Details
+
+**Files Modified**:
+- `src/agents/research_assembler.py` - Loads deep research, adds to ResearchBundle
+- `src/agents/synthesis_writer.py` - Trims deep research first if bundle too large
+- `src/utils/pipeline_summary.py` - Tracks deep research metrics
+- `src/utils/document_generator.py` - Shows "Deep Web Research: Yes/No" in summary
+- `src/utils/combined_document_generator.py` - Same for combined docs
+- `scripts/run_enhanced_pipeline.py` - Updates tracker after synthesis
+
+**New Fields in ResearchBundle**:
+- `deep_research_content: Optional[str]` - Raw content from file
+- `deep_research_included: bool` - Whether included in final bundle
+- `deep_research_removed_for_space: bool` - Whether removed due to limits
+
+**Trimming Priority** (least to most important):
+1. Deep Web Research (removed first)
+2. Concordance results
+3. Figurative language examples
+4. Commentary entries
+5. Lexicon entries (never trimmed)
+
+**Document Summary Output**:
+- "Deep Web Research: Yes" - included successfully
+- "Deep Web Research: No (removed for space)" - removed due to character limits
+- "Deep Web Research: No" - no file found
+
+---
 
 ## Thematic Parallels Feature (Sessions 183-208) - DISCONTINUED
 
@@ -91,6 +159,36 @@ Continue with production commentary pipeline
 - [x] Word document generation
 
 ## Recent Accomplishments
+
+### Session 209 (2025-12-11): Deep Web Research Integration
+
+#### Completed:
+1. **Implemented Deep Web Research Feature**:
+   - Created `data/deep_research/` directory for Gemini Deep Research outputs
+   - File naming convention: `psalm_NNN_deep_research.txt`
+   - Auto-loads into research bundle when present
+
+2. **Updated Research Assembler**:
+   - Added `_load_deep_research()` method to find and load files
+   - Added deep research fields to `ResearchBundle` dataclass
+   - Included in `to_markdown()` as "## Deep Web Research" section
+
+3. **Implemented Smart Trimming**:
+   - Deep research removed first if bundle exceeds 600K character limit
+   - Added `deep_research_removed_for_space` property to synthesis writer
+   - Pipeline tracks removal status for reporting
+
+4. **Updated Document Generators**:
+   - Both `document_generator.py` and `combined_document_generator.py` updated
+   - "Deep Web Research: Yes/No" now appears in Methodological Summary
+   - Shows appropriate status based on availability and inclusion
+
+5. **Updated Pipeline Tracking**:
+   - `ResearchStats` now includes deep research metrics
+   - JSON output includes all deep research status fields
+   - Pipeline logs when deep research is removed for space
+
+---
 
 ### Session 204 (2025-12-10): Thematic Parallels Feature Closure
 

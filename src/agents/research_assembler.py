@@ -38,7 +38,7 @@ if __name__ == '__main__':
     from src.agents.hirsch_librarian import HirschLibrarian, HirschCommentary
     from src.agents.rag_manager import RAGManager, RAGContext
     from src.agents.related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
-  else:
+else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from .figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     from .hirsch_librarian import HirschLibrarian, HirschCommentary
     from .rag_manager import RAGManager, RAGContext
     from .related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
-  
+
 
 @dataclass
 class ResearchRequest:
@@ -115,6 +115,10 @@ class ResearchBundle:
     related_psalms: Optional[List[RelatedPsalmMatch]]  # Related psalms from top connections analysis
     related_psalms_markdown: Optional[str]  # Pre-formatted related psalms markdown for LLM consumption
     request: ResearchRequest
+    # Deep Web Research (Gemini Deep Research output)
+    deep_research_content: Optional[str] = None  # Raw content from deep research file
+    deep_research_included: bool = False  # Whether deep research was included in final bundle
+    deep_research_removed_for_space: bool = False  # Whether it was removed due to character limits
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -140,7 +144,10 @@ class ResearchBundle:
                 'liturgical_total_occurrences': sum(p.occurrence_count for p in self.liturgical_usage_aggregated) if self.liturgical_usage_aggregated else 0,
                 'sacks_references': len(self.sacks_references) if self.sacks_references else 0,
                 'hirsch_commentaries': len(self.hirsch_commentaries) if self.hirsch_commentaries else 0,
-                'related_psalms': len(self.related_psalms) if self.related_psalms else 0
+                'related_psalms': len(self.related_psalms) if self.related_psalms else 0,
+                'deep_research_included': self.deep_research_included,
+                'deep_research_removed_for_space': self.deep_research_removed_for_space,
+                'deep_research_chars': len(self.deep_research_content) if self.deep_research_content else 0
             }
         }
 
@@ -467,7 +474,13 @@ class ResearchBundle:
             md += self.related_psalms_markdown
             md += "\n---\n\n"
 
-        
+        # Deep Web Research section (Gemini Deep Research output)
+        if self.deep_research_included and self.deep_research_content:
+            md += "## Deep Web Research\n\n"
+            md += "*This section contains research assembled via Gemini Deep Research, including ancient, medieval, and modern scholarly commentary; ANE parallels; linguistic and philological analysis; reception history; liturgical usage; and literary/cultural influence.*\n\n"
+            md += self.deep_research_content
+            md += "\n\n---\n\n"
+
         # Summary
         summary = self.to_dict()['summary']
         md += "## Research Summary\n\n"
@@ -482,6 +495,7 @@ class ResearchBundle:
         md += f"- **Rabbi Sacks references**: {summary['sacks_references']}\n"
         md += f"- **Liturgical total occurrences**: {summary['liturgical_total_occurrences']}\n"
         md += f"- **Related psalms analyzed**: {summary['related_psalms']}\n"
+        md += f"- **Deep web research included**: {'Yes' if summary['deep_research_included'] else 'No'}\n"
 
         return md
 
@@ -629,6 +643,33 @@ class ResearchAssembler:
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
         self.related_psalms_librarian = RelatedPsalmsLibrarian(connections_file='data/analysis_results/top_550_connections_v6.json')  # Related psalms from top connections
         self.related_psalms_librarian.logger = self.logger  # Pass logger for debug output
+
+        # Deep research directory path (resolved relative to project root)
+        self._deep_research_dir = Path(__file__).parent.parent.parent / 'data' / 'deep_research'
+
+    def _load_deep_research(self, psalm_chapter: int) -> Optional[str]:
+        """
+        Load deep research content from file if it exists.
+
+        Args:
+            psalm_chapter: Psalm number to look up
+
+        Returns:
+            Deep research content as string, or None if not found
+        """
+        filename = f"psalm_{psalm_chapter:03d}_deep_research.txt"
+        filepath = self._deep_research_dir / filename
+
+        if filepath.exists():
+            try:
+                content = filepath.read_text(encoding='utf-8').strip()
+                if content:
+                    self.logger.info(f"Loaded deep research for Psalm {psalm_chapter}: {len(content)} chars")
+                    return content
+            except Exception as e:
+                self.logger.warning(f"Failed to load deep research for Psalm {psalm_chapter}: {e}")
+
+        return None
         
     def assemble(self, request: ResearchRequest) -> ResearchBundle:
         """
@@ -765,7 +806,9 @@ class ResearchAssembler:
                 self.logger.info(f"Related Psalms for Psalm {request.psalm_chapter}: "
                                f"{len(related_psalms)} matches, markdown size: {len(related_psalms_markdown)} chars")
 
-        
+        # Load deep research content (Gemini Deep Research output) if available
+        deep_research_content = self._load_deep_research(request.psalm_chapter)
+
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,
             lexicon_bundle=lexicon_bundle,
@@ -782,7 +825,11 @@ class ResearchAssembler:
             rag_context=rag_context,
             related_psalms=related_psalms if related_psalms else None,
             related_psalms_markdown=related_psalms_markdown if related_psalms_markdown else None,
-            request=request
+            request=request,
+            # Deep research - initially included if available, may be removed for space later
+            deep_research_content=deep_research_content,
+            deep_research_included=bool(deep_research_content),
+            deep_research_removed_for_space=False
         )
 
     def assemble_from_json(self, json_str: str) -> ResearchBundle:

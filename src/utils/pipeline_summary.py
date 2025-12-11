@@ -66,6 +66,12 @@ class ResearchStats:
     research_bundle_chars: int = 0
     research_bundle_tokens: int = 0
 
+    # Deep Web Research (Gemini Deep Research)
+    deep_research_available: bool = False  # Was a deep research file found?
+    deep_research_included: bool = False  # Was it included in the final bundle?
+    deep_research_removed_for_space: bool = False  # Was it removed due to character limits?
+    deep_research_chars: int = 0  # Character count of deep research content
+
 
 @dataclass
 class AnalysisStats:
@@ -253,6 +259,34 @@ class PipelineSummaryTracker:
                     'reference': parallel.get('hebrew_psalter_source', {}).get('text_reference', ''),
                     'analysis': parallel.get('conceptual_analysis', '')[:100] + '...'
                 })
+
+        # Deep Web Research (Gemini Deep Research)
+        if hasattr(research_bundle, 'deep_research_content'):
+            self.research.deep_research_available = bool(research_bundle.deep_research_content)
+            self.research.deep_research_included = research_bundle.deep_research_included
+            self.research.deep_research_removed_for_space = research_bundle.deep_research_removed_for_space
+            self.research.deep_research_chars = len(research_bundle.deep_research_content) if research_bundle.deep_research_content else 0
+
+    def track_deep_research_status(
+        self,
+        available: bool,
+        included: bool,
+        removed_for_space: bool,
+        char_count: int = 0
+    ):
+        """
+        Track deep research status explicitly (for updates after synthesis).
+
+        Args:
+            available: Whether a deep research file was found
+            included: Whether it was included in the final bundle
+            removed_for_space: Whether it was removed due to character limits
+            char_count: Character count of deep research content
+        """
+        self.research.deep_research_available = available
+        self.research.deep_research_included = included
+        self.research.deep_research_removed_for_space = removed_for_space
+        self.research.deep_research_chars = char_count
 
     def track_macro_questions(self, questions: List[str]):
         """Track research questions from MacroAnalyst."""
@@ -593,7 +627,11 @@ class PipelineSummaryTracker:
                 'related_psalms_list': self.research.related_psalms_list,
                 'ugaritic_parallels': self.research.ugaritic_parallels,
                 'research_bundle_chars': self.research.research_bundle_chars,
-                'research_bundle_tokens': self.research.research_bundle_tokens
+                'research_bundle_tokens': self.research.research_bundle_tokens,
+                'deep_research_available': self.research.deep_research_available,
+                'deep_research_included': self.research.deep_research_included,
+                'deep_research_removed_for_space': self.research.deep_research_removed_for_space,
+                'deep_research_chars': self.research.deep_research_chars
             },
             'analysis': {
                 'macro_questions': self.analysis.macro_questions,
