@@ -726,8 +726,8 @@ class SynthesisWriter:
         final_char_len = len(result)
         
         self.logger.info(f"Figurative trim (prioritizing Psalms): "
-                        f"{original_char_len:,} → {final_char_len:,} chars. "
-                        f"Instances: {total_original_instances} → {total_kept_instances}.")
+                        f"{original_char_len:,} -> {final_char_len:,} chars. "
+                        f"Instances: {total_original_instances} -> {total_kept_instances}.")
         return result
 
     def _trim_research_bundle(self, research_bundle: str, max_chars: int = 600000) -> tuple:
@@ -757,7 +757,12 @@ class SynthesisWriter:
         import re
 
         deep_research_removed = False
+        thematic_analysis_removed = False
         original_size = len(research_bundle)
+        total_lemmas = 0
+        lemmas_kept = 0
+        total_relationships = 0
+        relationships_kept = 0
 
         if original_size <= max_chars:
             return research_bundle, deep_research_removed
@@ -807,10 +812,9 @@ class SynthesisWriter:
 
         if len(research_bundle) <= max_chars:
             self.logger.info(f"Removed Related Psalms section ({len(related_section):,} chars). "
-                           f"Size: {original_size:,} → {len(research_bundle):,} chars")
-            return research_bundle, deep_research_removed
-
-        if related_removed:
+                           f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+            # Don't return early, continue to add summary
+        else:
             self.logger.info(f"Removed Related Psalms ({len(related_section):,} chars) but still over limit...")
 
         # ========================================
@@ -830,11 +834,12 @@ class SynthesisWriter:
                 if len(test_bundle) <= max_chars:
                     if keep_ratio > 0:
                         self.logger.info(f"Trimmed Figurative Language to {keep_ratio:.0%}. "
-                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
-                        return test_bundle, deep_research_removed
+                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
+                        research_bundle = test_bundle
+                        break
                     else:
                         self.logger.info(f"Removed Figurative Language section entirely. "
-                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
+                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
                         research_bundle = test_bundle
                         break
             else:
@@ -859,11 +864,12 @@ class SynthesisWriter:
                 if len(test_bundle) <= max_chars:
                     if keep_ratio > 0:
                         self.logger.info(f"Trimmed Concordance to {keep_ratio:.0%}. "
-                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
-                        return test_bundle, deep_research_removed
+                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
+                        research_bundle = test_bundle
+                        break
                     else:
                         self.logger.info(f"Removed Concordance section entirely. "
-                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
+                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
                         research_bundle = test_bundle
                         break
             else:
@@ -878,8 +884,9 @@ class SynthesisWriter:
         if deep_section:
             if len(temp_bundle) <= max_chars:
                 self.logger.info(f"Removed Deep Web Research section ({len(deep_section):,} chars). "
-                               f"Size: {original_size:,} → {len(temp_bundle):,} chars")
-                return temp_bundle, True
+                               f"Size: {original_size:,} -> {len(temp_bundle):,} chars")
+                research_bundle = temp_bundle
+                deep_research_removed = True
             else:
                 research_bundle = temp_bundle
                 deep_research_removed = True
@@ -892,8 +899,9 @@ class SynthesisWriter:
             section, temp_bundle = extract_section(research_bundle, section_name)
             if section and len(temp_bundle) <= max_chars:
                 self.logger.warning(f"Emergency: Removed {section_name} section. "
-                                  f"Size: {original_size:,} → {len(temp_bundle):,} chars")
-                return temp_bundle, deep_research_removed
+                                  f"Size: {original_size:,} -> {len(temp_bundle):,} chars")
+                research_bundle = temp_bundle
+                break
             elif section:
                 research_bundle = temp_bundle
                 self.logger.warning(f"Emergency: Removed {section_name} but still over limit...")
@@ -906,7 +914,44 @@ class SynthesisWriter:
                             f"Performing hard truncation from {len(research_bundle):,} chars.")
             research_bundle = research_bundle[:max_chars - 100] + "\n\n[TRUNCATED FOR LENGTH]"
 
-        self.logger.info(f"Research bundle trimmed: {original_size:,} → {len(research_bundle):,} chars")
+        self.logger.info(f"Research bundle trimmed: {original_size:,} -> {len(research_bundle):,} chars")
+
+        # Add trimming summary at the bottom of the research bundle
+        trimming_summary = f"\n\n---\n## Research Bundle Processing Summary\n"
+        trimming_summary += f"- Original size: {original_size:,} characters\n"
+        trimming_summary += f"- Final size: {len(research_bundle):,} characters\n"
+        trimming_summary += f"- Removed: {original_size - len(research_bundle):,} characters ({((original_size - len(research_bundle)) / original_size * 100):.1f}%)\n"
+
+        sections_removed = []
+        if related_removed:
+            sections_removed.append("Related Psalms")
+
+        # Check which sections were trimmed/removed by examining final bundle
+        if "## Figurative Language" not in research_bundle and original_size > max_chars:
+            sections_removed.append("Figurative Language")
+        elif "Figurative Language" in research_bundle and "[Section trimmed to" in research_bundle:
+            sections_removed.append("Figurative Language (trimmed)")
+
+        if "## Concordance" not in research_bundle and original_size > max_chars:
+            sections_removed.append("Concordance")
+        elif "Concordance" in research_bundle and "[Section trimmed to" in research_bundle:
+            sections_removed.append("Concordance (trimmed)")
+
+        if deep_research_removed:
+            sections_removed.append("Deep Web Research")
+
+        # Check for emergency trims
+        for section_name in ['Rabbi Jonathan Sacks', 'Liturgical Usage', 'Scholarly Context']:
+            if f"## {section_name}" not in research_bundle and original_size > max_chars:
+                sections_removed.append(section_name)
+
+        if sections_removed:
+            trimming_summary += f"- Sections removed/trimmed: {', '.join(sections_removed)}\n"
+        else:
+            trimming_summary += "- No sections removed (within size limit)\n"
+
+        research_bundle += trimming_summary
+
         return research_bundle, deep_research_removed
 
     def _generate_introduction(
@@ -937,9 +982,9 @@ class SynthesisWriter:
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
         # Trim research bundle if needed to fit within token limits
-        # Target: ~600K chars max (~300K tokens with 2:1 ratio)
-        # Reduced limit to leave room for prompt template + macro/micro analysis
-        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=600000)
+        # Target: ~280K chars max (~160K tokens at 1.75:1 ratio)
+        # This leaves ~40K tokens for prompt template + macro/micro analysis
+        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=280000)
 
         # Track if deep research was removed for space (will be reported in stats)
         self._deep_research_removed_for_space = deep_research_removed
@@ -1071,9 +1116,9 @@ class SynthesisWriter:
         phonetic_section = format_phonetic_section(micro_analysis)
 
         # Trim research bundle if needed - verse commentary includes introduction essay
-        # Target: ~600K chars max (~300K tokens with 2:1 ratio)
-        # Reduced limit to leave room for prompt template + macro/micro analysis
-        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=600000)
+        # Target: ~210K chars max (~120K tokens at 1.75:1 ratio)
+        # This leaves ~80K tokens for intro essay + prompt template + macro/micro analysis
+        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=210000)
 
         # Track if deep research was removed for space (could happen here if intro didn't trigger it)
         if deep_research_removed:

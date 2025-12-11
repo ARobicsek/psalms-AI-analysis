@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-11 (Session 209)
+**Last Updated**: 2025-12-11 (Session 210)
 
 ## Current Focus: Psalm Commentary Production
 
@@ -142,6 +142,61 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
    - `ResearchStats` now includes deep research metrics
    - JSON output includes all deep research status fields
    - Pipeline logs when deep research is removed for space
+
+---
+
+## Session 210 (2025-12-11): Token Limit Fix & Research Bundle Optimization
+
+#### Problem Discovered:
+Psalm 18 pipeline failed with "prompt is too long: 205995 tokens > 200000 maximum" error during introduction generation. The research bundle was 361,606 characters (~206K tokens), exceeding the limit before adding prompt template and analyses.
+
+#### Completed:
+
+1. **Fixed Character Limits for Token Budget**:
+   - Introduction: Reduced from 400K → 280K characters (~160K tokens)
+   - Verse commentary: Reduced from 350K → 210K characters (~120K tokens)
+   - These limits ensure we stay within 200K token total with buffer for other content
+
+2. **Added Trimming Summary to Research Bundles**:
+   - Every trimmed bundle now includes a "## Research Bundle Processing Summary" section
+   - Shows original size, final size, percentage removed
+   - Lists which sections were removed/trimmed
+   - Example for Psalm 18: 361,606 → 159,502 characters (56% removed)
+
+3. **Fixed Early Returns in Trimming Logic**:
+   - Removed all early returns to ensure summary is always added
+   - Fixed Unicode arrows (→) causing encoding errors on Windows
+   - Ensured trimming summary appears at end of every trimmed bundle
+
+4. **Fixed Pipeline Script for Skipping Steps**:
+   - Fixed API key requirement when using --skip-macro and --skip-micro
+   - Now uses default model names for tracking when skipping steps
+   - Allows testing without requiring API keys
+
+#### Technical Details:
+
+**Token Budget Calculation (200K limit)**:
+- Introduction: 160K tokens (research) + 40K tokens (template + macro + micro)
+- Verse commentary: 120K tokens (research) + 80K tokens (intro + template + macro + micro + phonetic)
+
+**Character-to-Token Ratio**: 1.75 chars/token (based on actual error metrics)
+
+**Trimming Priority Order**:
+1. Related Psalms (removed first)
+2. Figurative Language (trimmed progressively: 75% → 50% → 25% → remove)
+3. Concordance (trimmed progressively: 75% → 50% → 25% → remove)
+4. Deep Web Research (removed entirely)
+5. Emergency: Rabbi Sacks, Liturgical Usage, Scholarly Context
+6. Last resort: Hard truncation
+
+#### Files Modified:
+- `src/agents/synthesis_writer.py`: Fixed character limits, trimming logic, Unicode issues
+- `scripts/run_enhanced_pipeline.py`: Fixed API key requirement for skipped steps
+
+#### Test Results:
+- Psalm 18 with 210K limit: Successfully trimmed to 159,502 characters
+- All required content preserved while staying within token limits
+- Trimming summary properly added to bundle
 
 ---
 

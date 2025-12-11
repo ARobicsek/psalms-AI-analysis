@@ -1,0 +1,1802 @@
+{
+  "psalm_number": 18,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Superscription is unusually elaborate - not just 'of David' but 'servant of the LORD, who addressed the words of this song.' The framing emphasizes both authorship and historical occasion (deliverance from Saul and all enemies). Notable that 'servant of the LORD' (עֶבֶד יְהֹוָה) is rare in psalm titles.",
+      "lexical_insights": [
+        {
+          "phrase": "עֶבֶד יְהֹוָה",
+          "variants": [
+            "עֶבֶד",
+            "עַבְדִּי",
+            "עַבְדְּךָ",
+            "עַבְדּוֹ"
+          ],
+          "notes": "Special designation - Moses/Joshua title applied to David, elevating status"
+        },
+        {
+          "phrase": "הַשִּׁירָה הַזֹּאת",
+          "variants": [
+            "שִׁירָה",
+            "שִׁיר",
+            "הַשִּׁיר"
+          ],
+          "notes": "Feminine form šîrâ (song) rather than šîr - significance?"
+        },
+        {
+          "phrase": "מִכַּף כׇּל־אֹיְבָיו",
+          "variants": [
+            "מִכַּף אֹיְבִי",
+            "מִכַּף אֹיְבָיו",
+            "כַּף אֹיְבִים"
+          ],
+          "notes": "'From the hand/palm' - synecdoche, enemies' power"
+        }
+      ],
+      "figurative_analysis": [
+        "kaf (palm/hand) as metonymy for power/control"
+      ],
+      "thesis_connection": "Establishes historical grounding that thesis claims will be universalized to eternal promise by end",
+      "phonetic_transcription": "lam-nats-**TSĒ**-aḥ  lə-**ʿE**-vedh yə-hō-**WĀH** lə-dhā-**WIDH** 'a-**SHER** di-**BER**  lay-hō-**WĀH** 'eth-div-**RĒY** hash-shiy-**RĀH** haz-**ZŌ'**-th bə-**YŌM** hits-tsiy-l-yə-hō-wāh-'ō-**THŌ** mi-**KAF** kol-'ō-yə-**VĀY**-w ū-miy-**YADH** shā-**'ŪL**"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Single-line emotional declaration. The verb אֶרְחָמְךָ (I love/adore you) is striking - from רחם (womb/compassion), suggesting visceral, maternal-like love directed at God. Unusual intensity for opening. Paired with 'my strength' (חִזְקִי).",
+      "lexical_insights": [
+        {
+          "phrase": "אֶרְחָמְךָ",
+          "variants": [
+            "רָחַם",
+            "רִחֵם",
+            "רַחֵם",
+            "רְחָמְךָ"
+          ],
+          "notes": "Rare verb for human→divine love; from womb/compassion root - deeply emotional"
+        },
+        {
+          "phrase": "חִזְקִי",
+          "variants": [
+            "חֹזֶק",
+            "חִזְקִי",
+            "חִזְקְךָ",
+            "חִזְקוֹ"
+          ],
+          "notes": "First of many epithets - 'my strength' begins cascade"
+        }
+      ],
+      "figurative_analysis": [
+        "strength as divine attribute personified"
+      ],
+      "thesis_connection": "Emotional intensity sets stage for passionate thanksgiving that follows",
+      "phonetic_transcription": "way-yō'-**MAR** 'er-ḥom-**KHĀ** yə-hō-**WĀH** ḥiz-**QIY**"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Epithet cascade begins - nine rapid-fire metaphors with no verbs, just nominal phrases. Mix of geological (rock, crag), military (shield, fortress), and spatial (refuge, haven) imagery. Concentration is overwhelming, almost breathless.",
+      "lexical_insights": [
+        {
+          "phrase": "סַלְעִי",
+          "variants": [
+            "סֶלַע",
+            "סַלְעִי",
+            "סַלְעֲךָ",
+            "סַלְעוֹ"
+          ],
+          "notes": "First rock term (sela') - cliff/crag, high rock"
+        },
+        {
+          "phrase": "צוּרִי",
+          "variants": [
+            "צוּר",
+            "צוּרִי",
+            "צוּרְךָ",
+            "צוּרוֹ"
+          ],
+          "notes": "Second rock term (tsur) - more general rock/boulder"
+        },
+        {
+          "phrase": "קֶרֶן־יִשְׁעִי",
+          "variants": [
+            "קֶרֶן יֶשַׁע",
+            "קֶרֶן יִשְׁעִי",
+            "קֶרֶן יִשְׁעֲךָ"
+          ],
+          "notes": "Horn of my salvation - animal/power imagery, unique phrase"
+        },
+        {
+          "phrase": "מִשְׂגַּבִּי",
+          "variants": [
+            "מִשְׂגָּב",
+            "מִשְׂגַּבִּי",
+            "מִשְׂגַּבְּךָ",
+            "מִשְׂגַּבּוֹ"
+          ],
+          "notes": "High refuge/haven - from שׂגב (be high/inaccessible)"
+        }
+      ],
+      "figurative_analysis": [
+        "geological metaphors cluster: rock, crag, fortress",
+        "military metaphors: shield, fortress, horn",
+        "spatial metaphors: refuge, haven"
+      ],
+      "thesis_connection": "Thesis calls this 'epithet cascade' creating emotional intensity - confirms overwhelming gratitude rhetoric",
+      "phonetic_transcription": "yə-hō-**WĀH**  sal-**ʿIY** ū-mə-tsū-dhā-**THIY** ū-mə-fal-**TIY** 'ē-**LIY** tsū-**RIY** 'e-ḥe-seh-**BŌ** **MĀ**-ghin-niy wə-qe-ren-yish-**ʿIY** mis-ga-**BIY**"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "First narrative verb appears - 'I called' (אֶקְרָא). Imperfect form suggests habitual or immediate action. Praise formula 'mehullal' (worthy of praise) precedes the calling. Result: deliverance from enemies.",
+      "lexical_insights": [
+        {
+          "phrase": "מְהֻלָּל",
+          "variants": [
+            "הָלַל",
+            "הִלֵּל",
+            "מְהֻלָּל",
+            "מְהֻלָּלִים"
+          ],
+          "notes": "Pual participle - 'worthy to be praised/praiseworthy' - passive intensive"
+        },
+        {
+          "phrase": "אִוָּשֵׁעַ",
+          "variants": [
+            "נוֹשַׁע",
+            "יוֹשַׁע",
+            "אִוָּשֵׁעַ",
+            "הוֹשַׁעְתִּי"
+          ],
+          "notes": "Niphal imperfect - 'I am/was saved' - passive or reflexive nuance"
+        }
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Transition from epithets to narrative - begins crisis-deliverance movement thesis identifies",
+      "phonetic_transcription": "mə-hul-**LĀL** 'eq-**RĀ'** yə-hō-**WĀH** ū-min-'ō-yə-**VAY** 'i-ū-**SHĒ**-aʿ"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Crisis section begins with mythological personifications. 'Ropes of Death' (חֶבְלֵי־מָוֶת) and 'torrents of Belial' (נַחֲלֵי בְלִיַּעַל) as active attackers. Perfect tense verbs now - narrating completed past crisis. Belial appears - is this proper name or common noun?",
+      "lexical_insights": [
+        {
+          "phrase": "חֶבְלֵי־מָוֶת",
+          "variants": [
+            "חֶבֶל מָוֶת",
+            "חֶבְלֵי מָוֶת",
+            "חֶבְלֵי"
+          ],
+          "notes": "Cords/ropes of Death - personified Death with weapons"
+        },
+        {
+          "phrase": "בְלִיַּעַל",
+          "variants": [
+            "בְּלִיַּעַל",
+            "בְלִי יַעַל"
+          ],
+          "notes": "Belial - worthlessness/chaos? Proper name of death deity? Crucial question"
+        },
+        {
+          "phrase": "יְבַעֲתוּנִי",
+          "variants": [
+            "בָּעַת",
+            "בִּעֵת",
+            "יְבַעֲתוּ",
+            "בִּעֲתַנִי"
+          ],
+          "notes": "Piel - 'terrified me' - intensive causative"
+        }
+      ],
+      "figurative_analysis": [
+        "Death personified with ropes as weapons",
+        "Belial as flood/torrent - chaos waters?"
+      ],
+      "thesis_connection": "Thesis highlights mythological language elevating crisis to cosmic scale - confirmed here with Death/Belial personification",
+      "phonetic_transcription": "'a-fā-**FŪ**-niy ḥev-lēy-**MĀ**-weth wə-na-ḥa-**LĒY** və-liy-**YA**-ʿal yə-va-ʿa-**THŪ**-niy"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Continues crisis with more death imagery. 'Ropes of Sheol' parallels v.5's 'ropes of Death'. Sheol now added to Death/Belial trio. Verbs: 'encircled' (סְבָבוּנִי) and 'confronted' (קִדְּמוּנִי) - spatial surrounding language creates claustrophobia.",
+      "lexical_insights": [
+        {
+          "phrase": "חֶבְלֵי שְׁאוֹל",
+          "variants": [
+            "חֶבֶל שְׁאוֹל",
+            "חֶבְלֵי שְׁאוֹל"
+          ],
+          "notes": "Ropes of Sheol - parallel to ropes of Death, intensifies"
+        },
+        {
+          "phrase": "מוֹקְשֵׁי מָוֶת",
+          "variants": [
+            "מוֹקֵשׁ",
+            "מוֹקְשֵׁי",
+            "מוֹקְשֵׁי מָוֶת"
+          ],
+          "notes": "Snares of Death - hunting trap imagery added to ropes/torrents"
+        },
+        {
+          "phrase": "קִדְּמוּנִי",
+          "variants": [
+            "קָדַם",
+            "קִדֵּם",
+            "קְדָמוּנִי",
+            "יְקַדְּמוּנִי"
+          ],
+          "notes": "Confronted/met me - from qdm (before/east), face-to-face encounter"
+        }
+      ],
+      "figurative_analysis": [
+        "hunting imagery: snares, traps",
+        "three realms: Death, Belial, Sheol - complete death system"
+      ],
+      "thesis_connection": "Thesis notes 'claustrophobic urgency' from repetition - confirmed by encirclement verbs",
+      "phonetic_transcription": "ḥev-**LĒY** shə-**'ŌL** sə-vā-**VŪ**-niy qid-**MŪ**-niy **MŌ**-qə-shēy **MĀ**-weth"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "THE HINGE VERSE. Shift from crisis to divine response. Two parallel clauses: 'In my distress I called... cried out' then 'He heard from His temple... my cry reached His ears.' Perfect tense throughout - completed action. Temple (הֵיכָל) location significant.",
+      "lexical_insights": [
+        {
+          "phrase": "בַּצַּר־לִי",
+          "variants": [
+            "צַר לִי",
+            "בַּצַּר לִי",
+            "בְּצָרָתִי"
+          ],
+          "notes": "In my distress - from tsar (narrow/tight place), spatial metaphor"
+        },
+        {
+          "phrase": "מֵהֵיכָלוֹ",
+          "variants": [
+            "הֵיכָל",
+            "הֵיכָלוֹ",
+            "הֵיכָלְךָ",
+            "בְּהֵיכָלוֹ"
+          ],
+          "notes": "From His temple - earthly temple (anachronistic?) or cosmic palace?"
+        },
+        {
+          "phrase": "תָּבוֹא בְאׇזְנָיו",
+          "variants": [
+            "בָּא בְּאָזְנַיִם",
+            "תָּבוֹא בְאָזְנָיו",
+            "בָּאָה בְאָזְנָיו"
+          ],
+          "notes": "Came into His ears - anthropomorphic, physical divine hearing"
+        }
+      ],
+      "figurative_analysis": [
+        "ears as synecdoche for divine attention",
+        "temple as cosmic-earthly bridge"
+      ],
+      "thesis_connection": "Thesis calls this 'hinge verse' triggering theophany - confirmed as structural pivot from crisis to divine response",
+      "phonetic_transcription": "bats-tsar-**LIY**  'eq-**RĀ'** yə-hō-**WĀH** wə-'el-'e-lō-**HAY** 'a-sha-ū-**Aʿ** yish-**MAʿ** mē-hēy-khā-**LŌ** qō-**LIY** wə-shaw-ʿā-**THIY** lə-fā-**NĀY**-w  tā-**VŌ'** və-'oz-**NĀY**-w"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "THEOPHANY BEGINS. Earth responds to divine anger with earthquake. Two verbs for shaking (תִּגְעַשׁ, תִּרְעַשׁ) create intensified trembling. Mountains' foundations move. Cause: 'He was angry' (חָרָה לוֹ). Dramatic cosmic response begins.",
+      "lexical_insights": [
+        {
+          "phrase": "וַתִּגְעַשׁ וַתִּרְעַשׁ",
+          "variants": [
+            "גָּעַשׁ",
+            "רָעַשׁ",
+            "תִּגְעַשׁ",
+            "תִּרְעַשׁ"
+          ],
+          "notes": "Double earthquake verbs - ga'ash and ra'ash - synonymous intensification?"
+        },
+        {
+          "phrase": "מוֹסְדֵי הָרִים",
+          "variants": [
+            "מוֹסָד",
+            "מוֹסְדוֹת",
+            "מוֹסְדֵי הָרִים"
+          ],
+          "notes": "Foundations of mountains - cosmic architecture exposed"
+        },
+        {
+          "phrase": "כִּי־חָרָה לוֹ",
+          "variants": [
+            "חָרָה",
+            "חָרָה לִי",
+            "חָרָה לוֹ",
+            "יִחַר"
+          ],
+          "notes": "For He was angry - from harah (burn/be hot), kindles anger"
+        }
+      ],
+      "figurative_analysis": [
+        "earthquake as divine anger manifestation",
+        "mountains' foundations - creation undone?"
+      ],
+      "thesis_connection": "Thesis emphasizes 9-verse theophany as structural center - this inaugurates the spectacular display",
+      "phonetic_transcription": "wa-tigh-**ʿASH** wa-tir-**ʿASH**  hā-**'Ā**-rets ū-mō-sə-**DHĒY** hā-**RIY**-m yir-**GĀ**-zū way-yith-gā-ʿa-**SHŪ** kiy-**ḤĀ**-rāh **LŌ**"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "Fire/smoke imagery - God's body parts become weapons. 'Smoke from His nostrils' (בְּאַפּוֹ) and 'fire from His mouth' - anthropomorphic visceral imagery. Coals blaze from Him. Volcanic? Dragon-like? Intensely physical divine presence.",
+      "lexical_insights": [
+        {
+          "phrase": "עָשָׁן בְּאַפּוֹ",
+          "variants": [
+            "עָשָׁן",
+            "עָשָׁן בְּאַפִּי",
+            "עָשָׁן בְּאַפּוֹ"
+          ],
+          "notes": "'Smoke in His nose/nostrils' - af = nose/anger, wordplay"
+        },
+        {
+          "phrase": "אֵשׁ־מִפִּיו תֹּאכֵל",
+          "variants": [
+            "אֵשׁ",
+            "אֵשׁ מִפִּיו",
+            "אֵשׁ מִפִּי"
+          ],
+          "notes": "Fire from His mouth devours - dragon/volcano imagery"
+        },
+        {
+          "phrase": "גֶּחָלִים בָּעֲרוּ מִמֶּנּוּ",
+          "variants": [
+            "גֶּחָלִים",
+            "גַּחֶלֶת",
+            "בָּעֲרוּ"
+          ],
+          "notes": "Coals blazed from Him - gachalim are burning coals"
+        }
+      ],
+      "figurative_analysis": [
+        "divine body as furnace/volcano",
+        "nostrils/mouth - breathing apparatuses become weapons"
+      ],
+      "thesis_connection": "Thesis notes 'visceral anthropomorphisms' - confirmed with smoking nostrils, fire-breathing mouth creating dramatic divine presence",
+      "phonetic_transcription": "**ʿĀ**-lāh ʿā-**SHĀN**  bə-'a-**PŌ** wə-'ēsh-mi-**PIY**-w tō'-**KHĒL** ge-ḥā-**LIY**-m bā-ʿa-**RŪ** mim-**MEN**-nū"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "Sky descent - God bends heaven itself and comes down. 'Thick cloud beneath His feet' (עֲרָפֶל תַּחַת רַגְלָיו). Vertical cosmic movement from heavenly realm to earth. Sky treated as flexible membrane.",
+      "lexical_insights": [
+        {
+          "phrase": "וַיֵּט שָׁמַיִם",
+          "variants": [
+            "נָטָה",
+            "יֵט",
+            "וַיֵּט שָׁמַיִם"
+          ],
+          "notes": "He bent/stretched sky - natah (stretch/extend), sky as tent fabric?"
+        },
+        {
+          "phrase": "עֲרָפֶל",
+          "variants": [
+            "עֲרָפֶל",
+            "בָּעֲרָפֶל"
+          ],
+          "notes": "Thick cloud/darkness - specific storm-cloud term, Sinai theophany connection?"
+        },
+        {
+          "phrase": "תַּחַת רַגְלָיו",
+          "variants": [
+            "תַּחַת רַגְלַי",
+            "תַּחַת רַגְלָיו",
+            "תַּחַת רֶגֶל"
+          ],
+          "notes": "Under His feet - divine footstool imagery"
+        }
+      ],
+      "figurative_analysis": [
+        "sky as bendable substance",
+        "cloud as divine footstool/platform"
+      ],
+      "thesis_connection": "Theophany escalates - from earth response (v.8) to divine body (v.9) to cosmic descent (v.10)",
+      "phonetic_transcription": "way-**YĒT** shā-ma-**YIM** way-yē-**RADH** wa-ʿa-rā-**FEL** **TA**-ḥath ragh-**LĀY**-w"
+    },
+    {
+      "verse_number": 11,
+      "commentary": "CHERUB RIDING - one of psalm's most striking images. God 'mounted cherub and flew' (וַיִּרְכַּב עַל־כְּרוּב וַיָּעֹף). Wings of wind as gliding medium. Cherub as divine vehicle/mount like a horse. Connections to ark, temple, Ezekiel?",
+      "lexical_insights": [
+        {
+          "phrase": "וַיִּרְכַּב עַל־כְּרוּב",
+          "variants": [
+            "רָכַב",
+            "רֹכֵב",
+            "יִרְכַּב עַל",
+            "רָכַב עַל־כְּרוּב"
+          ],
+          "notes": "He mounted/rode upon cherub - rakab = mount/ride (horse/chariot)"
+        },
+        {
+          "phrase": "כַּנְפֵי־רוּחַ",
+          "variants": [
+            "כָּנָף",
+            "כְּנָפַיִם",
+            "כַּנְפֵי רוּחַ"
+          ],
+          "notes": "Wings of wind - concrete wind or spirit/breath?"
+        },
+        {
+          "phrase": "וַיֵּדֶא",
+          "variants": [
+            "דָּאָה",
+            "יֵדֶא",
+            "דָּאָה"
+          ],
+          "notes": "He glided/swooped - rare verb, bird-like flight"
+        }
+      ],
+      "figurative_analysis": [
+        "cherub as divine mount/vehicle",
+        "wind-wings as flight medium"
+      ],
+      "thesis_connection": "Thesis cites cherub-riding as Ugaritic/Canaanite Baal parallel - Yahweh appropriating storm-god imagery",
+      "phonetic_transcription": "way-yir-**KAV** ʿal-kə-**RŪV** way-yā-**ʿŌF** way-**YĒ**-dhe' ʿal-kan-fēy-**RŪ**-aḥ"
+    },
+    {
+      "verse_number": 12,
+      "commentary": "Darkness and clouds form God's pavilion. 'He made darkness His screen/hiding' (יָשֶׁת־חֹשֶׁךְ סִתְרוֹ). Tent imagery: pavilion (סֻכָּתוֹ), surrounding (סְבִיבוֹתָיו). Multiple water/cloud terms pile up.",
+      "lexical_insights": [
+        {
+          "phrase": "סִתְרוֹ",
+          "variants": [
+            "סֵתֶר",
+            "סִתְרִי",
+            "סִתְרוֹ",
+            "בְּסֵתֶר"
+          ],
+          "notes": "His screen/hiding place - from satar (hide/conceal)"
+        },
+        {
+          "phrase": "סֻכָּתוֹ",
+          "variants": [
+            "סֻכָּה",
+            "סֻכָּתִי",
+            "סֻכָּתוֹ"
+          ],
+          "notes": "His pavilion/booth - sukkah, festival tent term"
+        },
+        {
+          "phrase": "חֶשְׁכַת־מַיִם",
+          "variants": [
+            "חֹשֶׁךְ מַיִם",
+            "חֶשְׁכַת מַיִם"
+          ],
+          "notes": "Darkness of waters - curious phrase, dark water-clouds?"
+        },
+        {
+          "phrase": "עָבֵי שְׁחָקִים",
+          "variants": [
+            "עָב",
+            "עָבִים",
+            "עֲבֵי שְׁחָקִים"
+          ],
+          "notes": "Clouds of skies - 'abe shechaqim, thick sky-clouds"
+        }
+      ],
+      "figurative_analysis": [
+        "darkness as protective covering",
+        "cloud-tent as divine dwelling"
+      ],
+      "thesis_connection": "Divine concealment within storm - mystery within revelation paradox",
+      "phonetic_transcription": "yā-sheth-**ḤŌ**-shekh  sith-**RŌ** sə-**VIY**-vō-thāy-w su-kā-**THŌ** ḥesh-khath-**MA**-yim ʿā-**VĒY** shə-ḥā-**QIY**-m"
+    },
+    {
+      "verse_number": 13,
+      "commentary": "Lightning breaks through clouds. 'From brilliance before Him' (מִנֹּגַהּ נֶגְדּוֹ) - light emerges from darkness. Hail and fire-coals pierce (עָבְרוּ) the clouds. Paradox: darkness contains light.",
+      "lexical_insights": [
+        {
+          "phrase": "מִנֹּגַהּ נֶגְדּוֹ",
+          "variants": [
+            "נֹגַהּ",
+            "נֹגַהּ נֶגְדּוֹ",
+            "מִנֹּגַהּ"
+          ],
+          "notes": "From brilliance/brightness before Him - nogah is radiant light"
+        },
+        {
+          "phrase": "עָבָיו עָבְרוּ",
+          "variants": [
+            "עָבַר",
+            "עָבְרוּ",
+            "עָבָיו"
+          ],
+          "notes": "His clouds passed/pierced through - motion verb"
+        },
+        {
+          "phrase": "בָּרָד וְגַחֲלֵי־אֵשׁ",
+          "variants": [
+            "בָּרָד",
+            "גַּחֲלֵי אֵשׁ",
+            "גֶּחָלִים"
+          ],
+          "notes": "Hail and fire-coals - ice and fire paradox?"
+        }
+      ],
+      "figurative_analysis": [
+        "brightness as divine essence emerging",
+        "clouds as barrier being pierced"
+      ],
+      "thesis_connection": "Divine hiddenness and revelation simultaneously - theological depth in contradiction",
+      "phonetic_transcription": "min-**NŌ**-ghah-h negh-**DŌ** ʿā-**VĀY**-w ʿā-və-**RŪ** bā-**RĀDH** wə-gha-ḥa-lēy-**'ĒSH**"
+    },
+    {
+      "verse_number": 14,
+      "commentary": "Thunder as divine voice. 'LORD thundered from heaven' and 'Most High gave His voice' - parallel divine names. Hail and fire-coals repeated from v.13. Voice = thunder equation made explicit.",
+      "lexical_insights": [
+        {
+          "phrase": "וַיַּרְעֵם בַּשָּׁמַיִם יְהֹוָה",
+          "variants": [
+            "רָעַם",
+            "יַרְעֵם",
+            "הַרְעֵם"
+          ],
+          "notes": "LORD thundered - ra'am (thunder verb), connection to ra'ash (shake) v.8?"
+        },
+        {
+          "phrase": "וְעֶלְיוֹן",
+          "variants": [
+            "עֶלְיוֹן",
+            "עֶלְיוֹנִים"
+          ],
+          "notes": "Most High - Elyon, ancient divine title, Canaanite connection?"
+        },
+        {
+          "phrase": "יִתֵּן קֹלוֹ",
+          "variants": [
+            "נָתַן קוֹל",
+            "יִתֵּן קוֹל",
+            "תֵּן קוֹלְךָ"
+          ],
+          "notes": "Gave His voice - qol as thunder/sound"
+        }
+      ],
+      "figurative_analysis": [
+        "thunder as divine speech"
+      ],
+      "thesis_connection": "Voice of God as storm theophany - Baal parallel (thunder = Baal's voice in Ugaritic texts)",
+      "phonetic_transcription": "way-yar-**ʿĒM** bash-shā-**MA**-yim  yə-hō-**WĀH** wə-ʿel-**YŌN** yi-**TĒN** qō-**LŌ** bā-**RĀDH** wə-gha-ḥa-lēy-**'ĒSH**"
+    },
+    {
+      "verse_number": 15,
+      "commentary": "Lightning as divine arrows. 'He sent His arrows and scattered them' (וַיִּשְׁלַח חִצָּיו) - warfare imagery applied to weather. Lightning bolts = arrows equation. Double verb: scattered (וַיְפִיצֵם) and routed (וַיְהֻמֵּם).",
+      "lexical_insights": [
+        {
+          "phrase": "חִצָּיו",
+          "variants": [
+            "חֵץ",
+            "חִצִּים",
+            "חִצָּיו",
+            "חִצֶּיךָ"
+          ],
+          "notes": "His arrows - chitsim, lightning as divine projectiles"
+        },
+        {
+          "phrase": "וּבְרָקִים רָב",
+          "variants": [
+            "בָּרָק",
+            "בְּרָקִים",
+            "בְּרָקִים רַבִּים"
+          ],
+          "notes": "Lightning abundant/many - explicit lightning identification"
+        },
+        {
+          "phrase": "וַיְהֻמֵּם",
+          "variants": [
+            "הָמַם",
+            "יְהֻמֵּם",
+            "הֻמּוּ"
+          ],
+          "notes": "He routed/confused them - hamam (throw into confusion), holy war term"
+        }
+      ],
+      "figurative_analysis": [
+        "lightning = arrows metaphor made explicit",
+        "enemies routed by storm weapons"
+      ],
+      "thesis_connection": "Storm theophany merges with warfare - divine warrior conquers through weather weapons",
+      "phonetic_transcription": "way-yish-**LAḤ** ḥits-tsāy-**W** way-fiy-**TSĒM** ū-və-rā-**QIY**-m **RĀV** way-hum-**MĒM**"
+    },
+    {
+      "verse_number": 16,
+      "commentary": "Cosmic revelation - ocean beds exposed, world's foundations laid bare. Divine rebuke (מִגַּעֲרָתְךָ) and breath of nostrils (מִנִּשְׁמַת רוּחַ אַפֶּךָ) cause cosmic stripping. Creation imagery reversed?",
+      "lexical_insights": [
+        {
+          "phrase": "אֲפִיקֵי מַיִם",
+          "variants": [
+            "אָפִיק",
+            "אֲפִיקִים",
+            "אֲפִיקֵי מַיִם"
+          ],
+          "notes": "Channels/beds of waters - ocean floor revealed"
+        },
+        {
+          "phrase": "מוֹסְדוֹת תֵּבֵל",
+          "variants": [
+            "מוֹסָד",
+            "מוֹסְדוֹת",
+            "מוֹסְדוֹת תֵּבֵל"
+          ],
+          "notes": "Foundations of world - tebel (world/earth), creation structure"
+        },
+        {
+          "phrase": "מִגַּעֲרָתְךָ",
+          "variants": [
+            "גָּעַר",
+            "גְּעָרָה",
+            "מִגַּעֲרָתְךָ"
+          ],
+          "notes": "From Your rebuke - ga'ar (rebuke/threaten), combat term"
+        },
+        {
+          "phrase": "מִנִּשְׁמַת רוּחַ אַפֶּךָ",
+          "variants": [
+            "נְשָׁמָה",
+            "רוּחַ אַף",
+            "נִשְׁמַת אַף"
+          ],
+          "notes": "From breath of wind of Your nostrils - triple construct, complex"
+        }
+      ],
+      "figurative_analysis": [
+        "divine breath as hurricane force",
+        "cosmic architecture exposed"
+      ],
+      "thesis_connection": "Thesis notes 'cosmic waters exposed' connecting to creation/chaos - confirmed here with foundations revealed",
+      "phonetic_transcription": "way-yē-rā-**'Ū**  'a-**FIY**-qēy **MA**-yim **WAY**-yi-gā-lū mō-sə-**DHŌTH** tē-**VĒL** mi-ga-ʿa-rā-thə-**KHĀ** yə-hō-**WĀH** min-nish-**MATH** **RŪ**-aḥ 'a-**PE**-khā"
+    },
+    {
+      "verse_number": 17,
+      "commentary": "God reaches down personally to rescue. 'He reached from on high, He took me' (יִשְׁלַח מִמָּרוֹם יִקָּחֵנִי). Shift from cosmic display to personal application. 'Drew me from mighty waters' - Exodus typology?",
+      "lexical_insights": [
+        {
+          "phrase": "יִשְׁלַח מִמָּרוֹם",
+          "variants": [
+            "שָׁלַח",
+            "יִשְׁלַח",
+            "שְׁלַח מִמָּרוֹם"
+          ],
+          "notes": "He sent/reached from height - shalach can mean send or reach out"
+        },
+        {
+          "phrase": "יַמְשֵׁנִי",
+          "variants": [
+            "מָשָׁה",
+            "יִמְשֹׁךְ",
+            "מְשֵׁנִי"
+          ],
+          "notes": "He drew me out - mashah, Moses' name etymology (drawn from water)"
+        },
+        {
+          "phrase": "מִמַּיִם רַבִּים",
+          "variants": [
+            "מַיִם רַבִּים",
+            "מִמַּיִם רַבִּים"
+          ],
+          "notes": "From mighty/many waters - mayim rabbim, chaos waters formula"
+        }
+      ],
+      "figurative_analysis": [
+        "mighty waters as threat/chaos",
+        "divine hand reaching down as rescue"
+      ],
+      "thesis_connection": "Thesis identifies this as narrowing from cosmic theophany to personal rescue - pivot point confirmed",
+      "phonetic_transcription": "yish-**LAḤ** mim-mā-**RŌM** yiq-qā-**ḤĒ**-niy yam-**SHĒ**-niy mim-**MA**-yim ra-**BIY**-m"
+    },
+    {
+      "verse_number": 18,
+      "commentary": "Enemies explicitly mentioned - 'fierce enemy' and 'foes too strong for me.' Shift from mythological Death/Belial to human enemies. Divine rescue explained: enemies were stronger, needed supernatural help.",
+      "lexical_insights": [
+        {
+          "phrase": "מֵאֹיְבִי עָז",
+          "variants": [
+            "אֹיֵב עָז",
+            "אֹיְבִי עָז"
+          ],
+          "notes": "From fierce/strong enemy - az (strong/mighty)"
+        },
+        {
+          "phrase": "וּמִשֹּׂנְאַי",
+          "variants": [
+            "שֹׂנֵא",
+            "שֹׂנְאִים",
+            "שֹׂנְאַי"
+          ],
+          "notes": "And from my haters - sone (active hatred verb)"
+        },
+        {
+          "phrase": "כִּי־אָמְצוּ מִמֶּנִּי",
+          "variants": [
+            "אָמַץ",
+            "אָמְצוּ",
+            "חָזַק מִמֶּנִּי"
+          ],
+          "notes": "For they were stronger than me - amets (be strong/prevail)"
+        }
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Theophany application: cosmic power deployed for personal military need",
+      "phonetic_transcription": "yats-tsiy-**LĒ**-niy mē-'ō-yə-**VIY** **ʿĀZ** ū-mis-sō-nə-**'AY** kiy-'ā-mə-**TSŪ** mim-**MEN**-niy"
+    },
+    {
+      "verse_number": 19,
+      "commentary": "Day of calamity - enemies confronted psalmist 'on day of my calamity' (בְיוֹם־אֵידִי). But LORD was 'support' (לְמִשְׁעָן). Past tense throughout - completed rescue narrative.",
+      "lexical_insights": [
+        {
+          "phrase": "בְיוֹם־אֵידִי",
+          "variants": [
+            "אֵיד",
+            "אֵידִי",
+            "יוֹם אֵיד"
+          ],
+          "notes": "Day of my calamity - eid (disaster/calamity), specific crisis moment"
+        },
+        {
+          "phrase": "לְמִשְׁעָן",
+          "variants": [
+            "מִשְׁעָן",
+            "מִשְׁעֶנֶת",
+            "מִשְׁעַנִּי"
+          ],
+          "notes": "For support/stay - mish'an (staff/support to lean on)"
+        }
+      ],
+      "figurative_analysis": [
+        "support/staff metaphor for divine help"
+      ],
+      "thesis_connection": "Continues personal narrative application of cosmic theophany",
+      "phonetic_transcription": "yə-qad-**MŪ**-niy və-yōm-'ēy-**DHIY** way-hiy-yə-hō-**WĀH** lə-mish-**ʿĀN** **LIY**"
+    },
+    {
+      "verse_number": 20,
+      "commentary": "Freedom and divine pleasure. 'He brought me to freedom' (לַמֶּרְחָב) - spatial metaphor, wide open space vs. narrow distress. Key: 'because He was pleased with me' (חָפֵץ־בִּי) - introduces merit theology.",
+      "lexical_insights": [
+        {
+          "phrase": "לַמֶּרְחָב",
+          "variants": [
+            "מֶרְחָב",
+            "מַרְחַב",
+            "רָחָב"
+          ],
+          "notes": "To wide/spacious place - merchab, opposite of tsar (narrow distress v.7)"
+        },
+        {
+          "phrase": "כִּי־חָפֵץ־בִּי",
+          "variants": [
+            "חָפֵץ",
+            "חָפֵץ בִּי",
+            "חָפֵץ בְּךָ"
+          ],
+          "notes": "Because He was pleased with me - chafets (delight/take pleasure in)"
+        }
+      ],
+      "figurative_analysis": [
+        "spaciousness as freedom/salvation"
+      ],
+      "thesis_connection": "Thesis notes v.20 'crucially introduces merit theology' - transitional verse to righteousness section",
+      "phonetic_transcription": "way-yō-tsiy-**'Ē**-niy lam-mer-**ḤĀV** yə-ḥal-**LTSĒ**-niy kiy-ḥā-fēts-**BIY**"
+    },
+    {
+      "verse_number": 21,
+      "commentary": "RIGHTEOUSNESS CLAIMS BEGIN. 'LORD rewarded me according to my merit' (כְּצִדְקִי). 'Cleanness of my hands' (כְּבֹר יָדַי). Bold self-justification - potentially problematic theologically.",
+      "lexical_insights": [
+        {
+          "phrase": "כְּצִדְקִי",
+          "variants": [
+            "צֶדֶק",
+            "צִדְקִי",
+            "צִדְקָתִי",
+            "כְּצִדְקָתִי"
+          ],
+          "notes": "According to my righteousness - tsedek (righteousness/merit)"
+        },
+        {
+          "phrase": "כְּבֹר יָדַי",
+          "variants": [
+            "בֹּר יָדַיִם",
+            "בֹּר יָדַי",
+            "כְּבֹר"
+          ],
+          "notes": "According to cleanness of my hands - bor (purity/cleanness), ritual or moral?"
+        }
+      ],
+      "figurative_analysis": [
+        "hands as synecdoche for actions/conduct"
+      ],
+      "thesis_connection": "Thesis highlights this section as 'unexpected and potentially problematic' - merit theology emerges",
+      "phonetic_transcription": "yigh-**MLĒ**-niy yə-hō-**WĀH** kə-tsidh-**QIY** kə-**VŌR** yā-**DHAY** yā-**SHIY**-v **LIY**"
+    },
+    {
+      "verse_number": 22,
+      "commentary": "Justification continues: 'I have kept to the ways of LORD' and 'not been guilty before my God.' Strong claims of perfect obedience. Past perfect tenses - sustained faithfulness.",
+      "lexical_insights": [
+        {
+          "phrase": "שָׁמַרְתִּי דַּרְכֵי יְהֹוָה",
+          "variants": [
+            "שָׁמַר דֶּרֶךְ",
+            "שָׁמַרְתִּי דְּרָכִים"
+          ],
+          "notes": "I kept/guarded ways of LORD - shamar (keep/guard), covenant language"
+        },
+        {
+          "phrase": "וְלֹא־רָשַׁעְתִּי מֵאֱלֹהָי",
+          "variants": [
+            "רָשַׁע",
+            "רָשַׁעְתִּי",
+            "לֹא רָשַׁעְתִּי"
+          ],
+          "notes": "Not acted wickedly from my God - rasha' (be wicked/guilty), negative confession"
+        }
+      ],
+      "figurative_analysis": [
+        "ways = conduct/behavior metaphor"
+      ],
+      "thesis_connection": "Continues merit theology section that contrasts with grace theology elsewhere",
+      "phonetic_transcription": "kiy-shā-mar-**TIY** dar-**KHĒY** yə-hō-**WĀH** wə-lō'-rā-**SHAʿ**-tiy mē-'e-lō-**HĀY**"
+    },
+    {
+      "verse_number": 23,
+      "commentary": "More righteousness claims: 'all His rules before me' and 'I have not disregarded His laws.' Total obedience to divine ordinances. Comprehensive claim.",
+      "lexical_insights": [
+        {
+          "phrase": "כׇּל־מִשְׁפָּטָיו לְנֶגְדִּי",
+          "variants": [
+            "מִשְׁפָּט",
+            "מִשְׁפָּטִים",
+            "מִשְׁפָּטָיו"
+          ],
+          "notes": "All His judgments/rules before me - mishpatim (legal ordinances)"
+        },
+        {
+          "phrase": "חֻקֹּתָיו",
+          "variants": [
+            "חֹק",
+            "חֻקָּה",
+            "חֻקּוֹת",
+            "חֻקֹּתָיו"
+          ],
+          "notes": "His statutes/laws - chuqqot (engraved statutes)"
+        },
+        {
+          "phrase": "לֹא־אָסִיר מֶנִּי",
+          "variants": [
+            "סוּר",
+            "הֵסִיר",
+            "אָסִיר מִן"
+          ],
+          "notes": "Not remove from me - sur (turn aside/remove)"
+        }
+      ],
+      "figurative_analysis": [
+        "laws before me = constant attention"
+      ],
+      "thesis_connection": "Peak of righteousness claims - complete Torah obedience asserted",
+      "phonetic_transcription": "**KIY** khol-mish-pā-**TĀY**-w lə-negh-**DIY** wə-ḥuq-qō-**THĀY**-w lō'-'ā-**SIY**-r **MEN**-niy"
+    },
+    {
+      "verse_number": 24,
+      "commentary": "Climax of self-justification: 'I have been blameless toward Him' (תָמִים עִמּוֹ). Tamim = perfect/complete/blameless - strong term. 'Guarded myself against sinning' (אֶשְׁתַּמֵּר מֵעֲוֺנִי).",
+      "lexical_insights": [
+        {
+          "phrase": "תָמִים עִמּוֹ",
+          "variants": [
+            "תָּמִים",
+            "תְּמִימִים",
+            "תָמִים עִם"
+          ],
+          "notes": "Blameless with Him - tamim (complete/perfect), Noah/Job descriptor"
+        },
+        {
+          "phrase": "וָאֶשְׁתַּמֵּר מֵעֲוֺנִי",
+          "variants": [
+            "שָׁמַר מִן",
+            "אֶשְׁתַּמֵּר",
+            "הִשְׁתַּמֵּר"
+          ],
+          "notes": "I guarded from my iniquity - Hitpael (reflexive), self-guardianship"
+        },
+        {
+          "phrase": "מֵעֲוֺנִי",
+          "variants": [
+            "עָוֺן",
+            "עֲוֺנִי",
+            "עֲוֺנוֹת"
+          ],
+          "notes": "From my iniquity - avon (guilt/iniquity), serious sin term"
+        }
+      ],
+      "figurative_analysis": [
+        "self-guarding as vigilance metaphor"
+      ],
+      "thesis_connection": "Thesis notes these claims create 'theological tension with grace theology' - righteousness section peaks",
+      "phonetic_transcription": "wā-'e-**HIY** thā-**MIY**-m ʿim-**MŌ** wā-'esh-tam-**MĒR** mē-ʿa-ō-**NIY**"
+    },
+    {
+      "verse_number": 25,
+      "commentary": "REPETITION of v.21 - 'LORD requited me according to my merit, cleanness of my hands.' Inclusio bracketing righteousness claims. Addition: 'in His sight' (לְנֶגֶד עֵינָיו) - God's perspective emphasized.",
+      "lexical_insights": [
+        {
+          "phrase": "וַיָּשֶׁב־יְהֹוָה לִי",
+          "variants": [
+            "שׁוּב",
+            "הֵשִׁיב",
+            "יָשֶׁב לִי"
+          ],
+          "notes": "LORD returned/requited to me - shub (return/repay), reciprocity"
+        },
+        {
+          "phrase": "לְנֶגֶד עֵינָיו",
+          "variants": [
+            "נֶגֶד עֵינַיִם",
+            "לְנֶגֶד עֵינָיו",
+            "לְעֵינֵי"
+          ],
+          "notes": "Before His eyes/in His sight - divine witnessing"
+        }
+      ],
+      "figurative_analysis": [
+        "eyes = divine knowledge/judgment"
+      ],
+      "thesis_connection": "Completes righteousness section with emphatic repetition - structural marker",
+      "phonetic_transcription": "way-yā-shev-yə-hō-**WĀH** **LIY** khə-tsidh-**QIY** kə-**VŌR** yā-**DHAY** lə-**NE**-ghedh ʿēy-**NĀY**-w"
+    },
+    {
+      "verse_number": 26,
+      "commentary": "SHIFT TO WISDOM STYLE - general principles. 'With the loyal, You deal loyally' - principle of divine reciprocity. Begins proverbial section on God's responses to different human types.",
+      "lexical_insights": [
+        {
+          "phrase": "עִם־חָסִיד תִּתְחַסָּד",
+          "variants": [
+            "חָסִיד",
+            "חֲסִידִים",
+            "תִּתְחַסָּד"
+          ],
+          "notes": "With loyal one You show loyalty - chasid (loyal/faithful), hitpael reciprocity"
+        },
+        {
+          "phrase": "עִם־גְּבַר תָּמִים תִּתַּמָּם",
+          "variants": [
+            "גֶּבֶר תָּמִים",
+            "תִּתַּמָּם"
+          ],
+          "notes": "With blameless man blamelessly - tamim again, hitpael verb form"
+        }
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Thesis identifies vv.26-28 as 'wisdom interlude' - universalizes personal righteousness into cosmic principle",
+      "phonetic_transcription": "ʿim-ḥā-**SIY**-dh tith-ḥas-**SĀDH** ʿim-gə-**VAR** tā-**MIY**-m ti-tam-**MĀM**"
+    },
+    {
+      "verse_number": 27,
+      "commentary": "Continues reciprocity principles with twist. 'With pure, You act purely; with perverse, You are wily (תִּתְפַּתָּל).' God matches human conduct - even adapts to perversity!",
+      "lexical_insights": [
+        {
+          "phrase": "עִם־נָבָר תִּתְבָּרָר",
+          "variants": [
+            "נָבָר",
+            "בָּרַר",
+            "תִּתְבָּרָר"
+          ],
+          "notes": "With pure one You purify yourself - nabar (pure/chosen), hitpael"
+        },
+        {
+          "phrase": "עִם־עִקֵּשׁ תִּתְפַּתָּל",
+          "variants": [
+            "עִקֵּשׁ",
+            "פָּתַל",
+            "תִּתְפַּתָּל"
+          ],
+          "notes": "With perverse You show yourself twisted - iqqesh (crooked), patal (twist) hitpael"
+        }
+      ],
+      "figurative_analysis": [
+        "twisting as moral perversion"
+      ],
+      "thesis_connection": "Wisdom principle: divine justice is precisely calibrated reciprocity",
+      "phonetic_transcription": "ʿim-nā-**VĀR** tith-bā-**RĀR** wə-ʿim-ʿiq-**QĒSH** tith-pa-**TĀL**"
+    },
+    {
+      "verse_number": 28,
+      "commentary": "Reciprocity applied to social categories: 'You deliver lowly folk' but 'humble haughty eyes.' Class/status dimension added. Shift from character to social position.",
+      "lexical_insights": [
+        {
+          "phrase": "עַם־עָנִי",
+          "variants": [
+            "עָם",
+            "עָנִי",
+            "עֲנִיִּים"
+          ],
+          "notes": "Lowly/afflicted people - ani (poor/humble/afflicted)"
+        },
+        {
+          "phrase": "עֵינַיִם רָמוֹת",
+          "variants": [
+            "עַיִן רָמָה",
+            "עֵינַיִם רָמוֹת"
+          ],
+          "notes": "Haughty eyes - ramot (high/lifted), eyes = pride synecdoche"
+        },
+        {
+          "phrase": "תַּשְׁפִּיל",
+          "variants": [
+            "שָׁפֵל",
+            "הִשְׁפִּיל",
+            "תַּשְׁפִּיל"
+          ],
+          "notes": "You humble/bring low - shafal (make low), hiphil causative"
+        }
+      ],
+      "figurative_analysis": [
+        "eyes as synecdoche for pride/attitude"
+      ],
+      "thesis_connection": "Wisdom section concludes - sets up David as 'lowly one' God saves vs. proud enemies",
+      "phonetic_transcription": "kiy-'a-**TĀH** ʿam-ʿā-**NIY** thō-**SHI**-yaʿ wə-ʿēy-**NA**-yim rā-**MŌTH** tash-**PIY**-l"
+    },
+    {
+      "verse_number": 29,
+      "commentary": "LIGHT METAPHOR begins transitional section. 'You light my lamp' (תָּאִיר נֵרִי) and 'God lights up my darkness' (יַגִּיהַּ חׇשְׁכִּי). Personal application returns. From wisdom principles back to individual testimony.",
+      "lexical_insights": [
+        {
+          "phrase": "תָּאִיר נֵרִי",
+          "variants": [
+            "אוֹר",
+            "הֵאִיר",
+            "נֵר",
+            "נֵרִי"
+          ],
+          "notes": "You light my lamp - ner (lamp), hiphil of or (light)"
+        },
+        {
+          "phrase": "יַגִּיהַּ חׇשְׁכִּי",
+          "variants": [
+            "נָגַהּ",
+            "יַגִּיהַּ",
+            "חֹשֶׁךְ",
+            "חׇשְׁכִּי"
+          ],
+          "notes": "Lights up my darkness - nagah (shine/give light), hiphil"
+        }
+      ],
+      "figurative_analysis": [
+        "lamp/light as guidance, knowledge, life",
+        "darkness as ignorance, danger, death"
+      ],
+      "thesis_connection": "Thesis asks if this is moral guidance, military victory, or cosmic order - polysemic richness",
+      "phonetic_transcription": "kiy-'a-**TĀH** tā-**'IY**-r nē-**RIY** yə-hō-**WĀH** 'e-lō-**HAY** ya-**GI**-yah ḥosh-**KIY**"
+    },
+    {
+      "verse_number": 30,
+      "commentary": "MILITARY EMPOWERMENT - with God, impossible feats achieved. 'Rush a barrier' (אָרֻץ גְּדוּד) and 'scale a wall' (אֲדַלֶּג־שׁוּר). Superhuman abilities through divine power.",
+      "lexical_insights": [
+        {
+          "phrase": "אָרֻץ גְּדוּד",
+          "variants": [
+            "רוּץ",
+            "אָרוּץ",
+            "גְּדוּד"
+          ],
+          "notes": "I rush/run through troop/barrier - gedud (raiding band/barrier)"
+        },
+        {
+          "phrase": "אֲדַלֶּג־שׁוּר",
+          "variants": [
+            "דָּלַג",
+            "אֲדַלֵּג",
+            "שׁוּר"
+          ],
+          "notes": "I leap/scale wall - dalag (leap/spring), shur (wall)"
+        }
+      ],
+      "figurative_analysis": [
+        "barrier/wall as obstacles overcome"
+      ],
+      "thesis_connection": "Begins divine empowerment section (vv.32-37) - God as trainer/equipper for battle",
+      "phonetic_transcription": "kiy-və-**KHĀ** 'ā-**RUTS** gə-**DHŪDH** ū-vē'-lō-**HAY** 'a-dhal-legh-**SHŪR**"
+    },
+    {
+      "verse_number": 31,
+      "commentary": "Theological foundation statement: 'Way of God is perfect; word of LORD is pure' (צְרוּפָה). God as shield to all who take refuge. Universal claim after personal testimony.",
+      "lexical_insights": [
+        {
+          "phrase": "הָאֵל תָּמִים דַּרְכּוֹ",
+          "variants": [
+            "תָּמִים דֶּרֶךְ",
+            "דַּרְכּוֹ"
+          ],
+          "notes": "The God - His way is perfect - tamim again (perfect/complete)"
+        },
+        {
+          "phrase": "אִמְרַת־יְהֹוָה צְרוּפָה",
+          "variants": [
+            "אִמְרָה",
+            "אִמְרַת יְהֹוָה",
+            "צָרַף"
+          ],
+          "notes": "Word of LORD is refined/pure - tsaraf (refined like metal), tested"
+        },
+        {
+          "phrase": "לְכֹל הַחֹסִים בּוֹ",
+          "variants": [
+            "חָסָה",
+            "חֹסֶה",
+            "חֹסִים בּוֹ"
+          ],
+          "notes": "To all taking refuge in Him - chasah (take refuge)"
+        }
+      ],
+      "figurative_analysis": [
+        "word as refined metal - testing imagery"
+      ],
+      "thesis_connection": "Provides theological foundation before military victory section - divine perfection enables success",
+      "phonetic_transcription": "hā-**'ĒL** tā-miy-**M** dar-**KŌ** 'im-rath-yə-hō-**WĀH** tsə-rū-**FĀH** mā-**GHĒN** **HŪ'** lə-**KHŌL**  ha-ḥō-**SIY**-m **BŌ**"
+    },
+    {
+      "verse_number": 32,
+      "commentary": "Rhetorical question asserting monotheism: 'Who is a god except LORD?' Parallel: 'Who is a rock but our God?' Exclusivity claim using rhetorical device.",
+      "lexical_insights": [
+        {
+          "phrase": "כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יְהֹוָה",
+          "variants": [
+            "מִי אֱלוֹהַּ",
+            "בִּלְעֲדֵי",
+            "מִבַּלְעֲדֵי יְהֹוָה"
+          ],
+          "notes": "Who is god except LORD - mibbal'adei (apart from/besides)"
+        },
+        {
+          "phrase": "וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ",
+          "variants": [
+            "צוּר",
+            "זוּלָתִי",
+            "זוּלַת אֱלֹהֵינוּ"
+          ],
+          "notes": "Who is rock besides our God - zulati (except/besides)"
+        }
+      ],
+      "figurative_analysis": [
+        "rock metaphor reprised from v.3"
+      ],
+      "thesis_connection": "Monotheistic assertion before military victory - only YHWH empowers",
+      "phonetic_transcription": "**KIY** **MIY** 'e-lō-**AH** mi-bal-ʿa-**DHĒY** yə-hō-**WĀH** ū-**MIY** **TSŪR** zū-lā-**THIY** 'e-lō-**HĒY**-nū"
+    },
+    {
+      "verse_number": 33,
+      "commentary": "Divine girding/arming begins. 'God who girded me with might' (הַמְאַזְּרֵנִי חָיִל) and 'made my way perfect' (תָּמִים דַּרְכִּי). God as armor-giver and path-maker.",
+      "lexical_insights": [
+        {
+          "phrase": "הַמְאַזְּרֵנִי חָיִל",
+          "variants": [
+            "אָזַר",
+            "מְאַזֵּר",
+            "חַיִל"
+          ],
+          "notes": "Who girds me with strength - azar (gird/equip), piel intensive"
+        },
+        {
+          "phrase": "וַיִּתֵּן תָּמִים דַּרְכִּי",
+          "variants": [
+            "נָתַן תָּמִים",
+            "דַּרְכִּי תָּמִים"
+          ],
+          "notes": "And gave/made perfect my way - natan (give), tamim (perfect)"
+        }
+      ],
+      "figurative_analysis": [
+        "girding as military preparation",
+        "way/path as life course"
+      ],
+      "thesis_connection": "Begins section thesis identifies as vv.32-37 divine empowerment for battle",
+      "phonetic_transcription": "hā-**'ĒL** ham-'az-**ZRĒ**-niy **ḤĀ**-yil way-yi-**TĒN** tā-**MIY**-m dar-**KIY**"
+    },
+    {
+      "verse_number": 34,
+      "commentary": "Deer feet imagery - 'made my legs like a deer's' (כָּאַיָּלוֹת) and 'let me stand on heights' (עַל בָּמֹתַי). Speed and sure-footedness in dangerous terrain.",
+      "lexical_insights": [
+        {
+          "phrase": "מְשַׁוֶּה רַגְלַי כָּאַיָּלוֹת",
+          "variants": [
+            "שָׁוָה",
+            "מְשַׁוֶּה",
+            "אַיָּלָה",
+            "אַיָּלוֹת"
+          ],
+          "notes": "Making my feet like hinds - ayyalot (female deer/hinds), agility"
+        },
+        {
+          "phrase": "וְעַל בָּמֹתַי יַעֲמִידֵנִי",
+          "variants": [
+            "בָּמָה",
+            "בָּמוֹת",
+            "בָּמֹתַי"
+          ],
+          "notes": "On my high places He makes me stand - bamot (heights/high places)"
+        }
+      ],
+      "figurative_analysis": [
+        "deer as speed, agility, sure-footedness",
+        "high places as dangerous terrain mastered"
+      ],
+      "thesis_connection": "Divine transformation of human capabilities - supernatural military prowess",
+      "phonetic_transcription": "mə-sha-**ŪH** ragh-**LAY** kā-'ay-yā-**LŌTH** wə-**ʿAL** bā-mō-**THAY** ya-ʿa-miy-**DHĒ**-niy"
+    },
+    {
+      "verse_number": 35,
+      "commentary": "Divine training specified: 'trained my hands for battle' (מְלַמֵּד יָדַי לַמִּלְחָמָה). Superhuman strength: 'arms can bend bronze bow' - impossible feat!",
+      "lexical_insights": [
+        {
+          "phrase": "מְלַמֵּד יָדַי לַמִּלְחָמָה",
+          "variants": [
+            "לָמַד",
+            "מְלַמֵּד",
+            "לְמִלְחָמָה"
+          ],
+          "notes": "Teaching my hands for war - lamad (teach/train), piel intensive"
+        },
+        {
+          "phrase": "וְנִחֲתָה קֶשֶׁת־נְחוּשָׁה זְרוֹעֹתָי",
+          "variants": [
+            "נָחַת",
+            "נִחֲתָה",
+            "קֶשֶׁת נְחוּשָׁה"
+          ],
+          "notes": "And descended/bent bow of bronze my arms - nachah (descend/bend), bronze impossible to bend"
+        }
+      ],
+      "figurative_analysis": [
+        "bronze bow = impossible strength achieved"
+      ],
+      "thesis_connection": "Divine empowerment reaches superhuman levels - God as military trainer",
+      "phonetic_transcription": "mə-lam-**MĒDH** yā-**DHAY** lam-mil-ḥā-**MĀH** **WƏ**-ni-ḥa-thāh qe-sheth-nə-ḥū-**SHĀH** zə-rō-ʿō-**THĀY**"
+    },
+    {
+      "verse_number": 36,
+      "commentary": "Shield of salvation given; right hand sustains. Key phrase: 'Your care/humility made me great' (עַנְוַתְךָ תַרְבֵּנִי) - enigmatic! What does divine 'humility' mean?",
+      "lexical_insights": [
+        {
+          "phrase": "מָגֵן יִשְׁעֶךָ",
+          "variants": [
+            "מָגֵן",
+            "מָגֵן יֶשַׁע",
+            "יִשְׁעֲךָ"
+          ],
+          "notes": "Shield of Your salvation - magen yish'ekha, divine protection"
+        },
+        {
+          "phrase": "וִימִינְךָ תִסְעָדֵנִי",
+          "variants": [
+            "יָמִין",
+            "יְמִינְךָ",
+            "סָעַד"
+          ],
+          "notes": "Your right hand sustained me - yamin (right hand), sa'ad (support)"
+        },
+        {
+          "phrase": "וְעַנְוַתְךָ תַרְבֵּנִי",
+          "variants": [
+            "עֲנָוָה",
+            "עַנְוָה",
+            "עַנְוַתְךָ"
+          ],
+          "notes": "Your humility/care/condescension made me great - anwah: key puzzle word!"
+        }
+      ],
+      "figurative_analysis": [
+        "right hand as power synecdoche"
+      ],
+      "thesis_connection": "Thesis highlights this crux: 'Your care/humility/condescension made me great' - theological paradox",
+      "phonetic_transcription": "wa-ti-ten-**LIY** mā-**GHĒN** yish-**ʿE**-khā **WIY**-miy-nə-khā this-ʿā-**DHĒ**-niy **WƏ**-ʿan-wath-khā thar-**BĒ**-niy"
+    },
+    {
+      "verse_number": 37,
+      "commentary": "Free movement enabled: 'You widened my steps' (תַּרְחִיב צַעֲדִי) and 'my feet have not slipped' (לֹא מָעֲדוּ קַרְסֻלָּי). Spatial freedom, sure footing.",
+      "lexical_insights": [
+        {
+          "phrase": "תַּרְחִיב צַעֲדִי תַחְתָּי",
+          "variants": [
+            "רָחַב",
+            "הִרְחִיב",
+            "צַעַד",
+            "צְעָדִי"
+          ],
+          "notes": "You widened my step/stride under me - rachab (make wide), spatial freedom"
+        },
+        {
+          "phrase": "וְלֹא מָעֲדוּ קַרְסֻלָּי",
+          "variants": [
+            "מָעַד",
+            "מָעֲדוּ",
+            "קַרְסֹל",
+            "קַרְסֻלַּי"
+          ],
+          "notes": "Not slipped my ankles - ma'ad (slip/totter), qarsol (ankle)"
+        }
+      ],
+      "figurative_analysis": [
+        "wide steps = freedom of movement",
+        "ankles not slipping = stability"
+      ],
+      "thesis_connection": "Completes divine empowerment section - freedom and stability for battle",
+      "phonetic_transcription": "tar-**ḤIY**-v tsa-ʿa-**DHIY** thaḥ-**TĀY** wə-**LŌ'** mā-ʿa-**DHŪ** qar-sul-**LĀY**"
+    },
+    {
+      "verse_number": 38,
+      "commentary": "BATTLE SECTION BEGINS - first-person military action. 'I pursued my enemies' (אֶרְדּוֹף אוֹיְבַי) and 'did not turn back till destroyed' - relentless pursuit.",
+      "lexical_insights": [
+        {
+          "phrase": "אֶרְדּוֹף אוֹיְבַי וְאַשִּׂיגֵם",
+          "variants": [
+            "רָדַף",
+            "אֶרְדֹּף",
+            "נָשַׂג",
+            "הִשִּׂיג"
+          ],
+          "notes": "I pursued my enemies and overtook - radaf (pursue), nasag (overtake)"
+        },
+        {
+          "phrase": "עַד־כַּלּוֹתָם",
+          "variants": [
+            "כָּלָה",
+            "כַּלּוֹת",
+            "כַּלּוֹתָם"
+          ],
+          "notes": "Until their destruction - kalah (finish/destroy), infinitive"
+        }
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "Thesis notes vv.38-43 as 'intense, violent, triumphant' first-person military section begins",
+      "phonetic_transcription": "'er-**DŌF** 'ō-yə-**VAY** wə-'as-siy-**GHĒM** wə-lō'-'ā-**SHŪV** ʿadh-kal-lō-**THĀM**"
+    },
+    {
+      "verse_number": 39,
+      "commentary": "Graphic violence: 'I struck them down' (אֶמְחָצֵם) and 'they could rise no more; fell at my feet.' Enemies totally defeated, helpless.",
+      "lexical_insights": [
+        {
+          "phrase": "אֶמְחָצֵם",
+          "variants": [
+            "מָחַץ",
+            "מָחַצְתִּי",
+            "אֶמְחָצֵם"
+          ],
+          "notes": "I crushed/smashed them - machats (crush/wound grievously), violent"
+        },
+        {
+          "phrase": "וְלֹא־יֻכְלוּ קוּם",
+          "variants": [
+            "יָכֹל קוּם",
+            "לֹא יוּכַל קוּם"
+          ],
+          "notes": "They could not rise - complete incapacitation"
+        },
+        {
+          "phrase": "יִפְּלוּ תַּחַת רַגְלָי",
+          "variants": [
+            "נָפַל",
+            "יִפְּלוּ",
+            "תַּחַת רֶגֶל"
+          ],
+          "notes": "They fell under my feet - complete subjugation"
+        }
+      ],
+      "figurative_analysis": [
+        "feet as dominion/subjugation"
+      ],
+      "thesis_connection": "Graphic military triumph - human agent acting with divine power",
+      "phonetic_transcription": "'em-ḥā-**TSĒM** wə-lō'-**YUKH**-lū **QŪM** yip-**LŪ** **TA**-ḥath ragh-**LĀY**"
+    },
+    {
+      "verse_number": 40,
+      "commentary": "Divine girding for battle repeated: 'You girded me with strength' (וַתְּאַזְּרֵנִי חַיִל). Enemies subdued (תַּכְרִיעַ) under me. Victory attributed back to divine source.",
+      "lexical_insights": [
+        {
+          "phrase": "וַתְּאַזְּרֵנִי חַיִל לַמִּלְחָמָה",
+          "variants": [
+            "אָזַר חַיִל",
+            "אֲזָרְתַּנִי"
+          ],
+          "notes": "You girded me with strength for war - repeats v.33 formula"
+        },
+        {
+          "phrase": "תַּכְרִיעַ קָמַי תַּחְתָּי",
+          "variants": [
+            "כָּרַע",
+            "הִכְרִיעַ",
+            "קָמִים"
+          ],
+          "notes": "You brought down my risers under me - kara' (bow down/subdue)"
+        }
+      ],
+      "figurative_analysis": [
+        "girding as arming/preparation"
+      ],
+      "thesis_connection": "Anchors human military action in divine empowerment - theological balance",
+      "phonetic_transcription": "wat-'az-**ZRĒ**-niy ḥa-**YIL** lam-mil-ḥā-**MĀH** takh-**RI**-yaʿ qā-**MAY** taḥ-**TĀY**"
+    },
+    {
+      "verse_number": 41,
+      "commentary": "Enemies flee ('gave me necks of enemies' = backs turned). 'I wiped out my foes' (אַצְמִיתֵם) - complete annihilation language.",
+      "lexical_insights": [
+        {
+          "phrase": "וְאֹיְבַי נָתַתָּה לִּי עֹרֶף",
+          "variants": [
+            "נָתַן עֹרֶף",
+            "עֹרֶף",
+            "עֹרְפִּי"
+          ],
+          "notes": "Enemies You gave me back/neck - oref (back/neck), idiom for flight"
+        },
+        {
+          "phrase": "וּמְשַׂנְאַי אַצְמִיתֵם",
+          "variants": [
+            "צָמַת",
+            "הִצְמִית",
+            "אַצְמִיתֵם"
+          ],
+          "notes": "My haters I wiped out - tsamat (destroy/silence completely)"
+        }
+      ],
+      "figurative_analysis": [
+        "neck/back as synecdoche for flight"
+      ],
+      "thesis_connection": "Total victory - enemies flee and are destroyed",
+      "phonetic_transcription": "wə-'ō-yə-**VAY** nā-**THA**-tāh **LLIY** **ʿŌ**-ref ū-mə-san-**'AY** 'ats-miy-**THĒM**"
+    },
+    {
+      "verse_number": 42,
+      "commentary": "SHOCKING CLAIM: enemies cried to LORD but weren't answered! 'They cried... to LORD, but He did not answer them.' God sides definitively with David against foes.",
+      "lexical_insights": [
+        {
+          "phrase": "יְשַׁוְּעוּ וְאֵין־מוֹשִׁיעַ",
+          "variants": [
+            "שָׁוַע",
+            "יְשַׁוְּעוּ",
+            "מוֹשִׁיעַ"
+          ],
+          "notes": "They cried for help and there was no savior - shava' (cry for help)"
+        },
+        {
+          "phrase": "עַל־יְהֹוָה וְלֹא עָנָם",
+          "variants": [
+            "עָנָה",
+            "לֹא עָנָה",
+            "עָנָם"
+          ],
+          "notes": "To LORD but He did not answer - anah (answer), divine non-response"
+        }
+      ],
+      "figurative_analysis": [],
+      "thesis_connection": "God's definitive siding with David - royal ideology peak",
+      "phonetic_transcription": "yə-sha-ū-**ʿŪ** wə-'ēy-n-mō-**SHI**-yaʿ ʿal-yə-hō-**WĀH** wə-**LŌ'** ʿā-**NĀM**"
+    },
+    {
+      "verse_number": 43,
+      "commentary": "EXTREMELY GRAPHIC: 'ground them fine as dust before wind' (כְּעָפָר עַל־פְּנֵי־רוּחַ) and 'trod them flat as street dirt' (כְּטִיט חוּצוֹת). Total pulverization.",
+      "lexical_insights": [
+        {
+          "phrase": "וְאֶשְׁחָקֵם כְּעָפָר עַל־פְּנֵי־רוּחַ",
+          "variants": [
+            "שָׁחַק",
+            "אֶשְׁחָקֵם",
+            "עָפָר"
+          ],
+          "notes": "I ground/pulverized them like dust before wind - shachaq (grind fine)"
+        },
+        {
+          "phrase": "כְּטִיט חוּצוֹת אֲרִיקֵם",
+          "variants": [
+            "טִיט",
+            "חוּצוֹת",
+            "רִיק"
+          ],
+          "notes": "Like street mud I emptied/trod them - tit (mud/clay), riq (empty out)"
+        }
+      ],
+      "figurative_analysis": [
+        "dust/mud as utter degradation, worthlessness"
+      ],
+      "thesis_connection": "Thesis notes 'graphic and unsparing' language - confirms violent rhetoric's extremity",
+      "phonetic_transcription": "wə-'esh-ḥā-**QĒM** kə-ʿā-**FĀR** ʿal-pə-nēy-**RŪ**-aḥ kə-**TIY**-t ḥū-**TSŌTH** 'a-riy-**QĒM**"
+    },
+    {
+      "verse_number": 44,
+      "commentary": "SCOPE EXPANSION: from personal enemies to international dominion! 'Set me at head of nations' - peoples unknown serve. Dramatic shift in scale.",
+      "lexical_insights": [
+        {
+          "phrase": "תְּפַלְּטֵנִי מֵרִיבֵי עָם",
+          "variants": [
+            "פָּלַט",
+            "תְּפַלְּטֵנִי",
+            "רִיב עָם"
+          ],
+          "notes": "You rescued me from strife of people - rib (strife/contention)"
+        },
+        {
+          "phrase": "תְּשִׂימֵנִי לְרֹאשׁ גּוֹיִם",
+          "variants": [
+            "שִׂים לְרֹאשׁ",
+            "רֹאשׁ גּוֹיִם"
+          ],
+          "notes": "Set me as head of nations - rosh (head/chief), goyim (nations/gentiles)"
+        },
+        {
+          "phrase": "עַם לֹא־יָדַעְתִּי יַעַבְדוּנִי",
+          "variants": [
+            "יָדַע",
+            "עָבַד",
+            "יַעַבְדוּנִי"
+          ],
+          "notes": "People I knew not serve me - foreign peoples now subjects"
+        }
+      ],
+      "figurative_analysis": [
+        "head = supremacy/leadership"
+      ],
+      "thesis_connection": "Thesis identifies vv.44-46 as 'dramatic expansion of scope' - from personal to cosmic scale confirmed",
+      "phonetic_transcription": "tə-fal-ltē-**NIY** mē-riy-**VĒY** **ʿĀM** tə-siy-mē-**NIY** lə-**RŌ'**-sh gō-**YIM** **ʿAM** lō'-yā-**DHAʿ**-tiy ya-ʿav-**DHŪ**-niy"
+    },
+    {
+      "verse_number": 45,
+      "commentary": "Instant submission: 'At mere report they are submissive' (לְשֵׁמַע אֹזֶן יִשָּׁמְעוּ). Foreign peoples cower (יְכַחֲשׁוּ) without battle.",
+      "lexical_insights": [
+        {
+          "phrase": "לְשֵׁמַע אֹזֶן יִשָּׁמְעוּ לִי",
+          "variants": [
+            "שֵׁמַע",
+            "לִשְׁמוֹעַ",
+            "יִשָּׁמְעוּ"
+          ],
+          "notes": "At hearing of ear they obey me - shema (hear/obey), wordplay"
+        },
+        {
+          "phrase": "בְּנֵי־נֵכָר",
+          "variants": [
+            "בֵּן נֵכָר",
+            "בְּנֵי נֵכָר"
+          ],
+          "notes": "Sons of foreignness - foreigners/aliens, non-Israelites"
+        },
+        {
+          "phrase": "יְכַחֲשׁוּ־לִי",
+          "variants": [
+            "כָּחַשׁ",
+            "כִּחֵשׁ",
+            "יְכַחֲשׁוּ"
+          ],
+          "notes": "They cower/cringe/feign obedience - kachash (deceive/cringe)"
+        }
+      ],
+      "figurative_analysis": [
+        "hearing = fame/reputation spreading"
+      ],
+      "thesis_connection": "Imperial rhetoric - fame alone causes submission",
+      "phonetic_transcription": "lə-shē-**MAʿ** 'ō-**ZEN** yish-**SHĀ**-mə-ʿū **LIY** bə-nēy-nē-**KHĀR** yə-kha-ḥa-shū-**LIY**"
+    },
+    {
+      "verse_number": 46,
+      "commentary": "Foreign peoples 'lose courage' (יִבֹּלוּ) and 'come trembling from strongholds' (וְיַחְרְגוּ מִמִּסְגְּרוֹתֵיהֶם). Total demoralization without battle.",
+      "lexical_insights": [
+        {
+          "phrase": "בְּנֵי־נֵכָר יִבֹּלוּ",
+          "variants": [
+            "נָבֵל",
+            "יִבֹּלוּ",
+            "בָּלָה"
+          ],
+          "notes": "Foreigners wither/fade/lose courage - nabal (wither/fade)"
+        },
+        {
+          "phrase": "וְיַחְרְגוּ מִמִּסְגְּרוֹתֵיהֶם",
+          "variants": [
+            "חָרַג",
+            "יַחְרְגוּ",
+            "מִסְגָּר"
+          ],
+          "notes": "They come trembling from their strongholds - charag (gird/tremble?), misgaret (fortress)"
+        }
+      ],
+      "figurative_analysis": [
+        "withering as loss of courage",
+        "fortresses abandoned = total defeat"
+      ],
+      "thesis_connection": "Completes international dominion section - psychological/spiritual collapse of enemies",
+      "phonetic_transcription": "bə-nēy-nē-**KHĀR** yi-**BŌ**-lū wə-yaḥ-**RGHŪ** mim-mis-grō-thēy-**HEM**"
+    },
+    {
+      "verse_number": 47,
+      "commentary": "RETURN TO PRAISE: 'The LORD lives! Blessed is my rock!' - reprises opening epithets but now validated by experience. Perfect tenses - completed deliverance.",
+      "lexical_insights": [
+        {
+          "phrase": "חַי־יְהֹוָה",
+          "variants": [
+            "חַי",
+            "חַי יְהֹוָה"
+          ],
+          "notes": "LORD lives - chai YHWH, oath formula or praise exclamation"
+        },
+        {
+          "phrase": "וּבָרוּךְ צוּרִי",
+          "variants": [
+            "בָּרוּךְ",
+            "צוּרִי"
+          ],
+          "notes": "Blessed is my rock - barukh tsuri, rock metaphor from v.3 returns"
+        },
+        {
+          "phrase": "וְיָרוּם אֱלוֹהֵי יִשְׁעִי",
+          "variants": [
+            "רוּם",
+            "יָרוּם",
+            "אֱלֹהֵי יֶשַׁע"
+          ],
+          "notes": "Exalted be God of my salvation - rum (be high/exalted)"
+        }
+      ],
+      "figurative_analysis": [
+        "living God vs. dead idols implied"
+      ],
+      "thesis_connection": "Thesis notes vv.47-49 as 'renewed praise grounded in victory' - doxology returns enriched",
+      "phonetic_transcription": "ḥay-yə-hō-**WĀH** ū-vā-**RŪ**-khə tsū-**RIY** wə-yā-**RŪM** 'e-lō-**HĒY** yish-**ʿIY**"
+    },
+    {
+      "verse_number": 48,
+      "commentary": "God as active vindicator: 'God who has vindicated me' (הַנּוֹתֵן נְקָמוֹת) and 'made peoples subject.' Victory attributed to divine agency.",
+      "lexical_insights": [
+        {
+          "phrase": "הָאֵל הַנּוֹתֵן נְקָמוֹת לִי",
+          "variants": [
+            "נָתַן נָקָם",
+            "נְקָמָה",
+            "נְקָמוֹת"
+          ],
+          "notes": "The God who gives vengeance/vindication to me - neqamot (vengeance/vindication)"
+        },
+        {
+          "phrase": "וַיַּדְבֵּר עַמִּים תַּחְתָּי",
+          "variants": [
+            "דָּבַר",
+            "דִּבֵּר",
+            "עַמִּים תַּחַת"
+          ],
+          "notes": "And subdued peoples under me - dabar (subdue/speak?), unusual verb"
+        }
+      ],
+      "figurative_analysis": [
+        "vindication = justice for righteous king"
+      ],
+      "thesis_connection": "Returns to divine agency - victory was God's work through David",
+      "phonetic_transcription": "hā-**'ĒL** han-nō-**THĒN** nə-qā-**MŌTH** **LIY** way-yadh-**BĒR** ʿam-**MIY**-m taḥ-**TĀY**"
+    },
+    {
+      "verse_number": 49,
+      "commentary": "Summary of deliverance: 'rescued from enemies,' 'raised clear of adversaries,' 'saved from lawless men.' Triple rescue formula. Violence from enemies emphasized.",
+      "lexical_insights": [
+        {
+          "phrase": "מְפַלְּטִי מֵאֹיְבָי",
+          "variants": [
+            "פָּלַט",
+            "מְפַלֵּט",
+            "פַּלֵּט"
+          ],
+          "notes": "My rescuer from enemies - palet (deliver/rescue), participle"
+        },
+        {
+          "phrase": "תְּרוֹמְמֵנִי",
+          "variants": [
+            "רוּם",
+            "רוֹמֵם",
+            "תְּרוֹמֵם"
+          ],
+          "notes": "You raised me - romem (lift up/exalt), polel intensive"
+        },
+        {
+          "phrase": "מֵאִישׁ חָמָס",
+          "variants": [
+            "אִישׁ חָמָס",
+            "חָמָס"
+          ],
+          "notes": "From man of violence - chamas (violence/wrong)"
+        }
+      ],
+      "figurative_analysis": [
+        "raising = elevation above threats"
+      ],
+      "thesis_connection": "Summarizes entire deliverance narrative before final vow",
+      "phonetic_transcription": "mə-fal-**LTIY** mē-'ō-yə-**VĀY** **'AF** min-qā-**MAY** tə-rō-mə-**MĒ**-niy mē-**'IY**-sh ḥā-**MĀS** tats-tsiy-**LĒ**-niy"
+    },
+    {
+      "verse_number": 50,
+      "commentary": "VOW OF INTERNATIONAL PRAISE: 'I sing Your praise among the nations' (אוֹדְךָ בַגּוֹיִם) - testimony becomes missionary. 'I hymn Your name' - liturgical language.",
+      "lexical_insights": [
+        {
+          "phrase": "עַל־כֵּן אוֹדְךָ בַגּוֹיִם",
+          "variants": [
+            "יָדָה",
+            "אוֹדֶה",
+            "בַּגּוֹיִם"
+          ],
+          "notes": "Therefore I praise You among nations - yadah (praise/thank), bagoyim crucial"
+        },
+        {
+          "phrase": "וּלְשִׁמְךָ אֲזַמֵּרָה",
+          "variants": [
+            "זָמַר",
+            "אֲזַמֵּר",
+            "לְשֵׁם"
+          ],
+          "notes": "And to Your name I sing - zamar (sing/make music), hymnic"
+        }
+      ],
+      "figurative_analysis": [
+        "name = divine essence/character"
+      ],
+      "thesis_connection": "Thesis notes v.50 'makes David's testimony international proclamation' - universalizes personal story",
+      "phonetic_transcription": "ʿal-**KĒN**  'ō-dhə-**KHĀ** va-gō-**YIM**  yə-hō-**WĀH** ū-lə-shim-**KHĀ** 'a-zam-**MĒ**-rāh"
+    },
+    {
+      "verse_number": 51,
+      "commentary": "CLIMACTIC CONCLUSION: 'great victories to His king,' 'keeps faith with His anointed' (לִמְשִׁיחוֹ), 'with David and his offspring FOREVER' (עַד־עוֹלָם). Eternal dynasty promise!",
+      "lexical_insights": [
+        {
+          "phrase": "מַגְדִּל יְשׁוּעוֹת מַלְכּוֹ",
+          "variants": [
+            "גָּדַל",
+            "מַגְדִּיל",
+            "יְשׁוּעָה"
+          ],
+          "notes": "Magnifies/towers salvations of His king - migdil/magdil (tower up/make great)"
+        },
+        {
+          "phrase": "וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ",
+          "variants": [
+            "עָשָׂה חֶסֶד",
+            "מָשִׁיחַ",
+            "לִמְשִׁיחוֹ"
+          ],
+          "notes": "Keeps covenant loyalty to His anointed - mashiach (anointed/messiah)!"
+        },
+        {
+          "phrase": "לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם",
+          "variants": [
+            "זֶרַע",
+            "זַרְעוֹ",
+            "עַד עוֹלָם"
+          ],
+          "notes": "To David and his seed forever - zera (seed/offspring), ad olam (forever/eternity)"
+        }
+      ],
+      "figurative_analysis": [
+        "seed = dynasty line",
+        "anointed = messianic designation"
+      ],
+      "thesis_connection": "THESIS CLIMAX: 'The word anointed (mashiach/messiah) connects specific deliverance to eternal covenant' - from Saul to forever!",
+      "phonetic_transcription": "magh-**DIL** yə-shū-**ʿŌTH** mal-**KŌ** wə-**ʿŌ**-seh **ḤE**-sedh  lim-shiy-**ḤŌ** lə-dhā-**WIDH** ū-lə-zar-**ʿŌ** ʿadh-ʿō-**LĀM** **F**"
+    }
+  ],
+  "thematic_threads": [
+    "Movement from epithets (vv.2-3) → crisis (vv.4-6) → theophany (vv.8-16) → rescue (vv.17-20) → righteousness (vv.21-25) → wisdom (vv.26-28) → empowerment (vv.29-37) → battle (vv.38-43) → dominion (vv.44-46) → praise (vv.47-51) shows carefully structured dramatic arc",
+    "Theophany section (vv.8-16) is disproportionately long (9 verses) and intense - structural and theological CENTER of psalm",
+    "Agency oscillates: divine action (theophany, empowerment) ↔ human action (righteousness claims, battle) ↔ divine attribution (praise) - complex theological dance",
+    "Scope expansion: personal enemies (Saul) → mythological enemies (Death/Belial) → cosmic intervention → international dominion → eternal dynasty - telescoping effect",
+    "Rock/stone metaphor forms inclusio (v.3 and v.47) bracketing entire psalm",
+    "Double earthquake/shaking verbs (v.8), double rock terms (v.3), double rescue formulas throughout - intensification through synonymous piling",
+    "Tense shifting: past perfect (crisis narrative) → imperfect (theophany immediacy) → perfect (completed rescue) → habitual/future (vows) - temporal complexity",
+    "Body part imagery for God: nostrils, mouth, feet, right hand, eyes, ears - sustained anthropomorphism",
+    "Water imagery recurs: torrents of Belial (v.5), mighty waters (v.17), ocean beds exposed (v.16) - chaos water motif",
+    "Righteousness section (vv.21-25) is bracketed by repetition - creates separate unit within larger structure",
+    "Light/darkness imagery (vv.12-13, 29) - paradox of hidden God who reveals",
+    "Military vocabulary dominates second half: girded, trained, arrows, enemies, pursued, struck, crushed",
+    "Sound patterns in Hebrew: ra'ash/ga'ash earthquake verbs create sonic trembling, chamas/mashiach alliteration"
+  ],
+  "interesting_questions": [
+    "Why does the psalm use TWO different Hebrew words for 'rock' (sela' and tsur) in v.3 - are they truly synonymous or do they carry distinct nuances (cliff vs. boulder, natural formation vs. worked stone)?",
+    "What exactly is 'Belial' (בְלִיַּעַל) in v.5 - is it a proper name for a deity/demon (like in Qumran texts), an abstract concept of worthlessness/chaos, or a poetic personification of destruction? How does LXX's 'lawlessness' interpretation affect meaning?",
+    "How should we interpret the shocking claim in v.36 that 'Your humility/care (עַנְוַתְךָ) made me great' - does this suggest divine condescension, gentleness, or discipline, and what does it mean theologically for God to possess 'humility'?",
+    "What is the relationship between the righteousness claims (vv.21-25) and grace theology elsewhere in Scripture - is this ancient royal ideology, conditional covenant theology, or does it represent a different theological framework than later prophetic thought?",
+    "Why does the psalm shift from mythological enemies (Death, Belial, Sheol in vv.5-6) to human enemies (v.18ff) - are these the same entities metaphorized, or does the psalm conflate spiritual and physical warfare intentionally?",
+    "How does the psalm's theophany (vv.8-16) relate to other biblical theophanies (Sinai, Elijah, Job 38-41) and to Ugaritic Baal texts - what is the theological significance of appropriating Canaanite storm-god imagery for YHWH?",
+    "What does 'horn of salvation' (קֶרֶן־יִשְׁעִי) in v.3 actually signify - altar horn, animal horn as strength symbol, or something else, and how does this relate to later 'horn of David' messianic imagery?",
+    "Is the 'temple' (הֵיכָל) in v.7 from which God hears the earthly Jerusalem temple (anachronistic for David's early reign), a heavenly temple, or a cosmic palace - and what does each option suggest about temple theology?",
+    "Why does v.42 claim enemies cried to YHWH but weren't answered - does this assume they are Israelites with covenant rights, or is it polemical rhetoric showing YHWH's definitive choice of David over all opponents?",
+    "How does the 'mighty waters' (מַיִם רַבִּים) imagery function across the psalm (vv.5, 16, 17) - is this Exodus typology (Red Sea), creation mythology (Tehom/chaos), or both, and how do these traditions interact?",
+    "What is the significance of the cherub (כְּרוּב) riding imagery in v.11 - is this ONE cherub or the cherub class, and how does it relate to ark theology, temple decoration, and Ezekiel's visions?",
+    "Why does the psalm expand from personal deliverance from Saul (v.1) to international dominion over unknown peoples (vv.44-46) - is this historical telescoping of David's reign, liturgical generalization, or eschatological vision?",
+    "How should modern readers ethically engage the graphic violence of vv.38-43 ('ground them fine as dust') - is this hyperbolic ancient Near Eastern victory rhetoric, reflection of actual warfare practices, or something to be critiqued rather than celebrated?",
+    "What is the function of the wisdom-style section (vv.26-28) within a royal victory psalm - does this represent genre mixing, or is there an integrated royal-wisdom ideology in the monarchic period?",
+    "How does the 'cleanness of hands' (בֹר יָדַי) language in vv.21, 25 function - is this about ritual purity (qualification for temple/divine audience), ethical conduct, or royal ideology where king must be blameless to receive divine empowerment?"
+  ],
+  "synthesis_notes": "LEXICON: Deep dive on key crux words: עַנְוַתְךָ (humility/care, v.36), בְלִיַּעַל (Belial, v.5), קֶרֶן־יִשְׁעִי (horn of salvation, v.3), עִקֵּשׁ/תִּתְפַּתָּל (perverse/twisted, v.27)\nLEXICON: Track double terms - two earthquake verbs (v.8), two rock words (v.3), two light verbs (v.29) - are these synonymous intensification or semantic distinctions?\nCONCORDANCE: 'Voice of LORD' formula across Psalms - does Ps 18's theophanic voice connect to Psalm 29's sevenfold voice? Storm theophany pattern?\nCONCORDANCE: Mashiach (anointed) usage - how does v.51's messianic language develop from royal ideology to eschatological hope across biblical texts?\nCONCORDANCE: 'Mighty waters' (mayim rabbim) - track across Psalms, creation texts (Genesis 1), Exodus, prophets - semantic range and theological function\nFIGURATIVE: All body-part anthropomorphisms (nostrils smoking, mouth breathing fire, feet, right hand, eyes, ears) - what pattern emerges? How physical is God?\nFIGURATIVE: Cherub-riding imagery (v.11) - compare to Ezekiel 1, 10, ark theology (Exodus 25), temple decoration (1 Kings 6) - cherub function in Israel's theology\nFIGURATIVE: Water chaos imagery (torrents of Belial, mighty waters, ocean beds exposed) - chaos combat mythology, creation theology, Exodus typology - how layers interact?\nCOMMENTARY: Righteousness claims section (vv.21-25) - how do Jewish and Christian interpreters across history handle these merit-based salvation claims? Theological problem?\nCOMMENTARY: Violence in vv.38-43 - how do interpreters handle graphic military victory rhetoric? Literal, metaphorical, problematic, or normative?\nCOMMENTARY: Relationship between Psalm 18 and 2 Samuel 22 - significant textual variants, liturgical adaptation, theological development between versions?\nCOMMENTARY: International dominion (vv.44-46, 50) - is this imperial propaganda reflecting David's actual kingdom, covenant universalism theology, or eschatological vision?"
+}

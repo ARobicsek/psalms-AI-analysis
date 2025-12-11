@@ -272,9 +272,8 @@ def run_enhanced_pipeline(
     else:
         logger.info(f"[STEP 1] Skipping macro analysis (using existing {macro_file})")
         print(f"\nSkipping Step 1 (using existing macro analysis)\n")
-        # Still need to get model name for tracking
-        macro_analyst = MacroAnalyst()
-        macro_model = macro_analyst.model
+        # Use default model name for tracking when skipping
+        macro_model = "claude-3-5-sonnet-20241022"  # Default model
         tracker.track_model_for_step("macro_analysis", macro_model)
 
     # Load macro analysis
@@ -380,10 +379,8 @@ def run_enhanced_pipeline(
     else:
         logger.info(f"[STEP 2] Skipping micro analysis (loading existing files)")
         print(f"\nSkipping Step 2 (using existing micro analysis)\n")
-        # Still need to get model name for tracking
-        commentary_mode = "selective" if skip_default_commentaries else "all"
-        micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode=commentary_mode, cost_tracker=cost_tracker)
-        micro_model = micro_analyst.model
+        # Use default model name for tracking when skipping
+        micro_model = "claude-3-5-sonnet-20241022"  # Default model
         tracker.track_model_for_step("micro_analysis", micro_model)
     
     # Always load the definitive micro_analysis and research_bundle for subsequent steps
