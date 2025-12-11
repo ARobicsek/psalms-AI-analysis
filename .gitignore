@@ -33,13 +33,25 @@ Desktop.ini
 # Large database files (too big for GitHub)
 data/psalm_relationships.db
 data/liturgy.db
+data/tanakh.db
+database/tanakh.db
 
 # Thematic parallels database
 data/thematic_corpus/chroma_db/
+data/thematic_corpus_*/chroma_db/
+data/thematic_corpus_*/tanakh_chunks.jsonl
+
+# All database files
+*.db
+*.sqlite
+*.sqlite3
 
 # Large data/analysis files (too big for GitHub)
 data/analysis_results/*.json
 !data/analysis_results/psalm_word_counts.json
+
+# Large PDF files
+Documents/*.pdf
 
 # Temporary files
 temp/
