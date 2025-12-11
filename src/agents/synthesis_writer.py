@@ -501,12 +501,45 @@ class SynthesisWriter:
         # Track whether deep research was removed due to size constraints
         self._deep_research_removed_for_space = False
 
+        # Track which model was actually used for synthesis (may switch to Gemini for large bundles)
+        self._synthesis_model_used = self.model
+
+        # Track sections removed during trimming
+        self._sections_removed = []
+
+        # Initialize Gemini client for fallback (lazy initialization)
+        self._gemini_client = None
+
         self.logger.info(f"SynthesisWriter initialized with model {self.model}")
 
     @property
     def deep_research_removed_for_space(self) -> bool:
         """Return whether deep research was removed due to character limits."""
         return self._deep_research_removed_for_space
+
+    @property
+    def synthesis_model_used(self) -> str:
+        """Return the model actually used for synthesis (may differ from default if Gemini fallback used)."""
+        return self._synthesis_model_used
+
+    @property
+    def sections_removed(self) -> list:
+        """Return list of sections removed during trimming."""
+        return self._sections_removed
+
+    def _get_gemini_client(self):
+        """Lazy initialization of Gemini client."""
+        if self._gemini_client is None:
+            try:
+                from google import genai
+                gemini_api_key = os.environ.get("GEMINI_API_KEY")
+                if not gemini_api_key:
+                    raise ValueError("GEMINI_API_KEY not found in environment")
+                self._gemini_client = genai.Client(api_key=gemini_api_key)
+                self.logger.info("Gemini client initialized for fallback")
+            except ImportError:
+                raise ImportError("google-genai package required for Gemini fallback. Install with: pip install google-genai")
+        return self._gemini_client
 
     def _calculate_verse_token_limit(self, num_verses: int) -> int:
         """
@@ -735,37 +768,39 @@ class SynthesisWriter:
         Intelligently trim research bundle to fit within token limits.
 
         Priority order for trimming (first to last - least to most important):
-        1. Related Psalms section (trim/remove first)
-        2. Figurative Language (reduce results count)
-        3. Concordance results (trim results)
-        4. Deep Web Research (remove only if still over limit)
+        1. Related Psalms section - progressive trim (remove full psalm texts first)
+        2. Related Psalms section - full removal
+        3. Figurative Language - trim to 75%
+        4. Figurative Language - trim to 50%
 
-        Preserved as long as possible (emergency trim only):
-        - Lexicon entries (most important for word analysis - never trimmed)
+        If still over limit after step 4, return a flag indicating Gemini fallback needed.
+        The Gemini 2.5 Pro model has 1M token context and can handle larger bundles.
+
+        Preserved (never trimmed unless Gemini also fails):
+        - Lexicon entries (most important for word analysis)
         - Traditional Commentaries (core interpretive context)
         - Liturgical Usage (essential for liturgical essays)
         - RAG/Scholarly Context (foundational framework)
         - Rabbi Sacks references (modern insights)
+        - Concordance results
+        - Deep Web Research
 
         Args:
             research_bundle: Full research bundle markdown
-            max_chars: Maximum characters (~300K tokens with 2 chars/token ratio)
+            max_chars: Maximum characters for Claude (~200K tokens)
 
         Returns:
-            Tuple of (trimmed_bundle, deep_research_was_removed)
+            Tuple of (trimmed_bundle, deep_research_was_removed, needs_gemini_fallback)
         """
         import re
 
         deep_research_removed = False
-        thematic_analysis_removed = False
+        needs_gemini_fallback = False
         original_size = len(research_bundle)
-        total_lemmas = 0
-        lemmas_kept = 0
-        total_relationships = 0
-        relationships_kept = 0
+        sections_removed = []
 
         if original_size <= max_chars:
-            return research_bundle, deep_research_removed
+            return research_bundle, deep_research_removed, needs_gemini_fallback
 
         self.logger.warning(f"Research bundle too large ({original_size:,} chars). Max: {max_chars:,}. Starting progressive trimming...")
 
@@ -780,141 +815,187 @@ class SynthesisWriter:
                 return section.strip(), bundle_without
             return "", bundle
 
-        # Helper function to trim a section by percentage
-        def trim_section_by_ratio(section: str, keep_ratio: float) -> str:
-            """Trim a section to keep approximately keep_ratio of its content."""
+        # Helper function to trim Related Psalms by removing full psalm texts
+        def trim_related_psalms_progressively(section: str) -> str:
+            """
+            Trim Related Psalms section by removing full psalm text blocks.
+            Keeps the preamble and word/phrase relationship data.
+            """
+            if not section:
+                return section
+
+            # Pattern to match "### Full Text of Psalm N" blocks and their content
+            # These blocks contain the entire psalm text which is the bulk of the section
+            full_text_pattern = r'### Full Text of Psalm \d+.*?(?=### (?:Full Text|Shared|Related)|## |$)'
+            trimmed = re.sub(full_text_pattern, '', section, flags=re.DOTALL)
+
+            # Add note about trimming
+            if len(trimmed) < len(section):
+                trimmed += "\n\n*[Full psalm texts removed for context length - word/phrase relationships preserved]*\n"
+
+            return trimmed
+
+        # Helper function to trim Figurative Language section
+        def trim_figurative_by_ratio(section: str, keep_ratio: float) -> str:
+            """Trim figurative language section, prioritizing instances from Psalms."""
             if not section or keep_ratio >= 1.0:
                 return section
-            lines = section.split('\n')
-            # Keep header lines (first few lines) and trim content
-            header_lines = []
-            content_lines = []
-            in_header = True
-            for line in lines:
-                if in_header and (line.startswith('##') or line.startswith('*') or line.strip() == ''):
-                    header_lines.append(line)
-                else:
-                    in_header = False
-                    content_lines.append(line)
 
-            # Keep a portion of content lines
-            keep_count = max(1, int(len(content_lines) * keep_ratio))
-            trimmed_content = content_lines[:keep_count]
-            trimmed_content.append(f"\n[Section trimmed to {keep_ratio:.0%} for context length]")
+            # Split into query blocks
+            query_pattern = r'(### Query \d+.*?)(?=### Query \d+|$)'
+            queries = re.findall(query_pattern, section, re.DOTALL)
 
-            return '\n'.join(header_lines + trimmed_content)
-
-        # ========================================
-        # STEP 1: Trim Related Psalms section first
-        # ========================================
-        related_section, research_bundle = extract_section(research_bundle, 'Related Psalms')
-        related_removed = bool(related_section)
-
-        if len(research_bundle) <= max_chars:
-            self.logger.info(f"Removed Related Psalms section ({len(related_section):,} chars). "
-                           f"Size: {original_size:,} -> {len(research_bundle):,} chars")
-            # Don't return early, continue to add summary
-        else:
-            self.logger.info(f"Removed Related Psalms ({len(related_section):,} chars) but still over limit...")
-
-        # ========================================
-        # STEP 2: Trim Figurative Language section
-        # ========================================
-        figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
-
-        if figurative_section:
-            # Try progressive trimming: 75%, 50%, 25%, then remove
-            for keep_ratio in [0.75, 0.50, 0.25, 0.0]:
-                if keep_ratio > 0:
-                    trimmed_fig = trim_section_by_ratio(figurative_section, keep_ratio)
-                    test_bundle = temp_bundle + '\n\n' + trimmed_fig
-                else:
-                    test_bundle = temp_bundle  # Remove entirely
-
-                if len(test_bundle) <= max_chars:
-                    if keep_ratio > 0:
-                        self.logger.info(f"Trimmed Figurative Language to {keep_ratio:.0%}. "
-                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
-                        research_bundle = test_bundle
-                        break
+            if not queries:
+                # Fallback: simple line-based trimming
+                lines = section.split('\n')
+                header_lines = []
+                content_lines = []
+                in_header = True
+                for line in lines:
+                    if in_header and (line.startswith('##') or line.startswith('*') or line.strip() == ''):
+                        header_lines.append(line)
                     else:
-                        self.logger.info(f"Removed Figurative Language section entirely. "
-                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
-                        research_bundle = test_bundle
-                        break
-            else:
-                # Even removing figurative entirely wasn't enough, continue
-                research_bundle = temp_bundle
-                self.logger.info(f"Removed Figurative Language but still over limit...")
+                        in_header = False
+                        content_lines.append(line)
+                keep_count = max(1, int(len(content_lines) * keep_ratio))
+                trimmed_content = content_lines[:keep_count]
+                trimmed_content.append(f"\n[Section trimmed to {keep_ratio:.0%} for context length]")
+                return '\n'.join(header_lines + trimmed_content)
 
-        # ========================================
-        # STEP 3: Trim Concordance section
-        # ========================================
-        concordance_section, temp_bundle = extract_section(research_bundle, 'Concordance')
+            trimmed_queries = []
+            for query_block in queries:
+                # Find instances section
+                match = re.match(r'(.*?#### (?:Instances|All Instances).*?:)(.*)', query_block, re.DOTALL)
+                if not match:
+                    trimmed_queries.append(query_block)
+                    continue
 
-        if concordance_section:
-            # Try progressive trimming: 75%, 50%, 25%, then remove
-            for keep_ratio in [0.75, 0.50, 0.25, 0.0]:
-                if keep_ratio > 0:
-                    trimmed_conc = trim_section_by_ratio(concordance_section, keep_ratio)
-                    test_bundle = temp_bundle + '\n\n' + trimmed_conc
+                header = match.group(1)
+                instances_text = match.group(2)
+
+                # Find individual instances (marked by **Reference**)
+                instance_pattern = r'(\*\*[^*]+\*\*.*?)(?=\*\*[^*]+\*\*|$)'
+                instances = re.findall(instance_pattern, instances_text, re.DOTALL)
+
+                if not instances:
+                    trimmed_queries.append(query_block)
+                    continue
+
+                # Prioritize Psalms instances
+                psalms_instances = [inst for inst in instances if "Psalms" in inst]
+                other_instances = [inst for inst in instances if "Psalms" not in inst]
+
+                target_count = max(1, int(len(instances) * keep_ratio))
+
+                kept = []
+                if len(psalms_instances) >= target_count:
+                    kept = psalms_instances[:target_count]
                 else:
-                    test_bundle = temp_bundle
+                    kept.extend(psalms_instances)
+                    remaining = target_count - len(psalms_instances)
+                    if remaining > 0:
+                        kept.extend(other_instances[:remaining])
 
-                if len(test_bundle) <= max_chars:
-                    if keep_ratio > 0:
-                        self.logger.info(f"Trimmed Concordance to {keep_ratio:.0%}. "
-                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
-                        research_bundle = test_bundle
-                        break
-                    else:
-                        self.logger.info(f"Removed Concordance section entirely. "
-                                       f"Size: {original_size:,} -> {len(test_bundle):,} chars")
-                        research_bundle = test_bundle
-                        break
+                omitted = len(instances) - len(kept)
+                trimmed_block = header + '\n' + ''.join(kept)
+                if omitted > 0:
+                    trimmed_block += f"\n\n[{omitted} more instances omitted for space]\n"
+
+                trimmed_queries.append(trimmed_block)
+
+            result = '## Figurative Language Instances\n\n' + '\n'.join(trimmed_queries)
+            return result
+
+        # ========================================
+        # STEP 1: Trim Related Psalms (remove full texts, keep relationships)
+        # ========================================
+        related_section, temp_bundle = extract_section(research_bundle, 'Related Psalms')
+
+        if related_section:
+            trimmed_related = trim_related_psalms_progressively(related_section)
+            test_bundle = temp_bundle + '\n\n' + trimmed_related
+
+            if len(test_bundle) <= max_chars:
+                self.logger.info(f"Trimmed Related Psalms (removed full texts). "
+                               f"Size: {original_size:,} -> {len(test_bundle):,} chars")
+                research_bundle = test_bundle
+                sections_removed.append("Related Psalms (full texts removed)")
             else:
-                research_bundle = temp_bundle
-                self.logger.info(f"Removed Concordance but still over limit...")
+                # Still over - continue to step 2
+                research_bundle = test_bundle
+                sections_removed.append("Related Psalms (full texts removed)")
+                self.logger.info(f"Trimmed Related Psalms but still over limit...")
 
         # ========================================
-        # STEP 4: Remove Deep Web Research (last resort before failure)
-        # ========================================
-        deep_section, temp_bundle = extract_section(research_bundle, 'Deep Web Research')
-
-        if deep_section:
-            if len(temp_bundle) <= max_chars:
-                self.logger.info(f"Removed Deep Web Research section ({len(deep_section):,} chars). "
-                               f"Size: {original_size:,} -> {len(temp_bundle):,} chars")
-                research_bundle = temp_bundle
-                deep_research_removed = True
-            else:
-                research_bundle = temp_bundle
-                deep_research_removed = True
-                self.logger.warning(f"Removed Deep Web Research but still over limit...")
-
-        # ========================================
-        # STEP 5: Emergency trimming - trim Sacks, Liturgical, RAG sections
-        # ========================================
-        for section_name in ['Rabbi Jonathan Sacks', 'Liturgical Usage', 'Scholarly Context']:
-            section, temp_bundle = extract_section(research_bundle, section_name)
-            if section and len(temp_bundle) <= max_chars:
-                self.logger.warning(f"Emergency: Removed {section_name} section. "
-                                  f"Size: {original_size:,} -> {len(temp_bundle):,} chars")
-                research_bundle = temp_bundle
-                break
-            elif section:
-                research_bundle = temp_bundle
-                self.logger.warning(f"Emergency: Removed {section_name} but still over limit...")
-
-        # ========================================
-        # STEP 6: Last resort - hard truncation
+        # STEP 2: Remove Related Psalms entirely
         # ========================================
         if len(research_bundle) > max_chars:
-            self.logger.error(f"Could not trim bundle below {max_chars:,} chars. "
-                            f"Performing hard truncation from {len(research_bundle):,} chars.")
-            research_bundle = research_bundle[:max_chars - 100] + "\n\n[TRUNCATED FOR LENGTH]"
+            related_section, temp_bundle = extract_section(research_bundle, 'Related Psalms')
 
-        self.logger.info(f"Research bundle trimmed: {original_size:,} -> {len(research_bundle):,} chars")
+            if related_section or "Related Psalms (full texts removed)" in sections_removed:
+                research_bundle = temp_bundle
+                # Update sections_removed - replace trimmed with removed
+                if "Related Psalms (full texts removed)" in sections_removed:
+                    sections_removed.remove("Related Psalms (full texts removed)")
+                sections_removed.append("Related Psalms")
+
+                if len(research_bundle) <= max_chars:
+                    self.logger.info(f"Removed Related Psalms entirely. "
+                                   f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+                else:
+                    self.logger.info(f"Removed Related Psalms but still over limit...")
+
+        # ========================================
+        # STEP 3: Trim Figurative Language to 75%
+        # ========================================
+        if len(research_bundle) > max_chars:
+            figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
+
+            if figurative_section:
+                trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.75)
+                test_bundle = temp_bundle + '\n\n' + trimmed_fig
+                research_bundle = test_bundle
+                sections_removed.append("Figurative Language (trimmed to 75%)")
+
+                if len(research_bundle) <= max_chars:
+                    self.logger.info(f"Trimmed Figurative Language to 75%. "
+                                   f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+                else:
+                    self.logger.info(f"Trimmed Figurative Language to 75% but still over limit...")
+
+        # ========================================
+        # STEP 4: Trim Figurative Language to 50%
+        # ========================================
+        if len(research_bundle) > max_chars:
+            figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
+
+            if figurative_section:
+                trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.50)
+                test_bundle = temp_bundle + '\n\n' + trimmed_fig
+                research_bundle = test_bundle
+                # Update sections_removed
+                if "Figurative Language (trimmed to 75%)" in sections_removed:
+                    sections_removed.remove("Figurative Language (trimmed to 75%)")
+                sections_removed.append("Figurative Language (trimmed to 50%)")
+
+                if len(research_bundle) <= max_chars:
+                    self.logger.info(f"Trimmed Figurative Language to 50%. "
+                                   f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+                else:
+                    self.logger.info(f"Trimmed Figurative Language to 50% but still over limit...")
+
+        # ========================================
+        # STEP 5: If still over limit, flag for Gemini fallback
+        # ========================================
+        if len(research_bundle) > max_chars:
+            needs_gemini_fallback = True
+            self.logger.warning(f"Bundle still {len(research_bundle):,} chars (limit: {max_chars:,}). "
+                              f"Flagging for Gemini 2.5 Pro fallback (1M token context).")
+
+        self.logger.info(f"Research bundle processing: {original_size:,} -> {len(research_bundle):,} chars")
+
+        # Store sections removed for stats tracking
+        self._sections_removed = sections_removed
 
         # Add trimming summary at the bottom of the research bundle
         trimming_summary = f"\n\n---\n## Research Bundle Processing Summary\n"
@@ -922,37 +1003,17 @@ class SynthesisWriter:
         trimming_summary += f"- Final size: {len(research_bundle):,} characters\n"
         trimming_summary += f"- Removed: {original_size - len(research_bundle):,} characters ({((original_size - len(research_bundle)) / original_size * 100):.1f}%)\n"
 
-        sections_removed = []
-        if related_removed:
-            sections_removed.append("Related Psalms")
-
-        # Check which sections were trimmed/removed by examining final bundle
-        if "## Figurative Language" not in research_bundle and original_size > max_chars:
-            sections_removed.append("Figurative Language")
-        elif "Figurative Language" in research_bundle and "[Section trimmed to" in research_bundle:
-            sections_removed.append("Figurative Language (trimmed)")
-
-        if "## Concordance" not in research_bundle and original_size > max_chars:
-            sections_removed.append("Concordance")
-        elif "Concordance" in research_bundle and "[Section trimmed to" in research_bundle:
-            sections_removed.append("Concordance (trimmed)")
-
-        if deep_research_removed:
-            sections_removed.append("Deep Web Research")
-
-        # Check for emergency trims
-        for section_name in ['Rabbi Jonathan Sacks', 'Liturgical Usage', 'Scholarly Context']:
-            if f"## {section_name}" not in research_bundle and original_size > max_chars:
-                sections_removed.append(section_name)
-
         if sections_removed:
             trimming_summary += f"- Sections removed/trimmed: {', '.join(sections_removed)}\n"
         else:
             trimming_summary += "- No sections removed (within size limit)\n"
 
+        if needs_gemini_fallback:
+            trimming_summary += "- Note: Using Gemini 2.5 Pro for synthesis (larger context window)\n"
+
         research_bundle += trimming_summary
 
-        return research_bundle, deep_research_removed
+        return research_bundle, deep_research_removed, needs_gemini_fallback
 
     def _generate_introduction(
         self,
@@ -982,9 +1043,9 @@ class SynthesisWriter:
         micro_text = self._format_micro_for_prompt(micro_analysis)
 
         # Trim research bundle if needed to fit within token limits
-        # Target: ~280K chars max (~160K tokens at 1.75:1 ratio)
-        # This leaves ~40K tokens for prompt template + macro/micro analysis
-        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=280000)
+        # Target: ~350K chars max (~200K tokens at 1.75:1 ratio)
+        # This leaves room for prompt template + macro/micro analysis
+        research_text, deep_research_removed, needs_gemini = self._trim_research_bundle(research_bundle, max_chars=350000)
 
         # Track if deep research was removed for space (will be reported in stats)
         self._deep_research_removed_for_space = deep_research_removed
@@ -1006,7 +1067,14 @@ class SynthesisWriter:
             prompt_file.write_text(prompt, encoding='utf-8')
             self.logger.info(f"Saved introduction prompt to {prompt_file}")
 
-        # Call Claude with streaming (consistent with verse commentary)
+        # Choose model based on bundle size
+        if needs_gemini:
+            return self._generate_introduction_with_gemini(prompt, psalm_number, max_tokens)
+        else:
+            return self._generate_introduction_with_claude(prompt, psalm_number, max_tokens)
+
+    def _generate_introduction_with_claude(self, prompt: str, psalm_number: int, max_tokens: int) -> str:
+        """Generate introduction using Claude Sonnet 4.5."""
         # Retry logic for transient network/API errors
         max_retries = 3
         retry_delay = 2  # seconds
@@ -1040,7 +1108,8 @@ class SynthesisWriter:
                     # Get final message for usage tracking
                     final_message = response_stream.get_final_message()
 
-                self.logger.info(f"Introduction generated: {len(introduction)} chars")
+                self.logger.info(f"Introduction generated with Claude: {len(introduction)} chars")
+                self._synthesis_model_used = self.model
 
                 # Track usage and costs
                 if hasattr(final_message, 'usage'):
@@ -1082,7 +1151,78 @@ class SynthesisWriter:
                     continue  # Retry
                 else:
                     # Not retryable or out of retries
-                    self.logger.error(f"Error generating introduction: {e}")
+                    self.logger.error(f"Error generating introduction with Claude: {e}")
+                    raise
+
+    def _generate_introduction_with_gemini(self, prompt: str, psalm_number: int, max_tokens: int) -> str:
+        """Generate introduction using Gemini 2.5 Pro (1M token context)."""
+        from google.genai import types
+
+        self.logger.info(f"Using Gemini 2.5 Pro for introduction (large bundle)")
+
+        client = self._get_gemini_client()
+
+        max_retries = 3
+        retry_delay = 2
+
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))
+                    self.logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
+
+                response = client.models.generate_content(
+                    model="gemini-2.5-pro",
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.7,
+                        thinking_config=types.ThinkingConfig(
+                            thinking_budget=8000  # Medium reasoning
+                        ),
+                        automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                            disable=True
+                        )
+                    )
+                )
+
+                introduction = response.text if response.text else ""
+                self.logger.info(f"Introduction generated with Gemini 2.5 Pro: {len(introduction)} chars")
+                self._synthesis_model_used = "gemini-2.5-pro"
+
+                # Track usage and costs
+                if hasattr(response, 'usage_metadata'):
+                    usage = response.usage_metadata
+                    input_tokens = getattr(usage, 'prompt_token_count', 0) or 0
+                    output_tokens = getattr(usage, 'candidates_token_count', 0) or 0
+                    thinking_tokens = getattr(usage, 'thoughts_token_count', 0) or 0
+                    self.cost_tracker.add_usage(
+                        model="gemini-2.5-pro",
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
+                # Log API call
+                self.logger.log_api_call(
+                    api_name="Google Gemini",
+                    endpoint="gemini-2.5-pro",
+                    status_code=200,
+                    response_time_ms=0
+                )
+
+                return introduction.strip()
+
+            except Exception as e:
+                error_msg = str(e).lower()
+                is_retryable = any(ind in error_msg for ind in ['429', 'too many requests', 'rate limit', 'try again'])
+
+                if is_retryable and attempt < max_retries - 1:
+                    self.logger.warning(f"Retryable Gemini error (attempt {attempt + 1}/{max_retries}): {e}")
+                    continue
+                else:
+                    self.logger.error(f"Error generating introduction with Gemini: {e}")
                     raise
 
     def _generate_verse_commentary(
@@ -1116,9 +1256,9 @@ class SynthesisWriter:
         phonetic_section = format_phonetic_section(micro_analysis)
 
         # Trim research bundle if needed - verse commentary includes introduction essay
-        # Target: ~210K chars max (~120K tokens at 1.75:1 ratio)
-        # This leaves ~80K tokens for intro essay + prompt template + macro/micro analysis
-        research_text, deep_research_removed = self._trim_research_bundle(research_bundle, max_chars=210000)
+        # Target: ~300K chars max (~170K tokens at 1.75:1 ratio)
+        # This leaves room for intro essay + prompt template + macro/micro analysis
+        research_text, deep_research_removed, needs_gemini = self._trim_research_bundle(research_bundle, max_chars=300000)
 
         # Track if deep research was removed for space (could happen here if intro didn't trigger it)
         if deep_research_removed:
@@ -1143,8 +1283,14 @@ class SynthesisWriter:
             prompt_file.write_text(prompt, encoding='utf-8')
             self.logger.info(f"Saved verse commentary prompt to {prompt_file}")
 
-        # Call Claude with streaming (required for large token limits)
-        # Retry logic for transient network/API errors
+        # Choose model based on bundle size
+        if needs_gemini:
+            return self._generate_verse_commentary_with_gemini(prompt, psalm_number, max_tokens)
+        else:
+            return self._generate_verse_commentary_with_claude(prompt, psalm_number, max_tokens)
+
+    def _generate_verse_commentary_with_claude(self, prompt: str, psalm_number: int, max_tokens: int) -> str:
+        """Generate verse commentary using Claude Sonnet 4.5."""
         max_retries = 3
         retry_delay = 2  # seconds
 
@@ -1177,7 +1323,8 @@ class SynthesisWriter:
                     # Get final message for usage tracking
                     final_message = response_stream.get_final_message()
 
-                self.logger.info(f"Verse commentary generated: {len(commentary)} chars")
+                self.logger.info(f"Verse commentary generated with Claude: {len(commentary)} chars")
+                self._synthesis_model_used = self.model
 
                 # Track usage and costs
                 if hasattr(final_message, 'usage'):
@@ -1219,7 +1366,78 @@ class SynthesisWriter:
                     continue  # Retry
                 else:
                     # Not retryable or out of retries
-                    self.logger.error(f"Error generating verse commentary: {e}")
+                    self.logger.error(f"Error generating verse commentary with Claude: {e}")
+                    raise
+
+    def _generate_verse_commentary_with_gemini(self, prompt: str, psalm_number: int, max_tokens: int) -> str:
+        """Generate verse commentary using Gemini 2.5 Pro (1M token context)."""
+        from google.genai import types
+
+        self.logger.info(f"Using Gemini 2.5 Pro for verse commentary (large bundle)")
+
+        client = self._get_gemini_client()
+
+        max_retries = 3
+        retry_delay = 2
+
+        for attempt in range(max_retries):
+            try:
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))
+                    self.logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
+
+                response = client.models.generate_content(
+                    model="gemini-2.5-pro",
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.7,
+                        thinking_config=types.ThinkingConfig(
+                            thinking_budget=8000  # Medium reasoning
+                        ),
+                        automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                            disable=True
+                        )
+                    )
+                )
+
+                commentary = response.text if response.text else ""
+                self.logger.info(f"Verse commentary generated with Gemini 2.5 Pro: {len(commentary)} chars")
+                self._synthesis_model_used = "gemini-2.5-pro"
+
+                # Track usage and costs
+                if hasattr(response, 'usage_metadata'):
+                    usage = response.usage_metadata
+                    input_tokens = getattr(usage, 'prompt_token_count', 0) or 0
+                    output_tokens = getattr(usage, 'candidates_token_count', 0) or 0
+                    thinking_tokens = getattr(usage, 'thoughts_token_count', 0) or 0
+                    self.cost_tracker.add_usage(
+                        model="gemini-2.5-pro",
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
+                # Log API call
+                self.logger.log_api_call(
+                    api_name="Google Gemini",
+                    endpoint="gemini-2.5-pro",
+                    status_code=200,
+                    response_time_ms=0
+                )
+
+                return commentary.strip()
+
+            except Exception as e:
+                error_msg = str(e).lower()
+                is_retryable = any(ind in error_msg for ind in ['429', 'too many requests', 'rate limit', 'try again'])
+
+                if is_retryable and attempt < max_retries - 1:
+                    self.logger.warning(f"Retryable Gemini error (attempt {attempt + 1}/{max_retries}): {e}")
+                    continue
+                else:
+                    self.logger.error(f"Error generating verse commentary with Gemini: {e}")
                     raise
 
     def _format_macro_for_prompt(self, macro) -> str:

@@ -880,6 +880,13 @@ class DocumentGenerator:
         else:
             deep_research_str = "No"
 
+        # Sections trimmed for context length
+        sections_trimmed = research_data.get('sections_trimmed', [])
+        if sections_trimmed:
+            sections_trimmed_str = ", ".join(sections_trimmed)
+        else:
+            sections_trimmed_str = "None"
+
         # --- Models Used --- (This section will be built from the markdown in the generate() method)
         models_used_str = "### Models Used"
 
@@ -898,6 +905,7 @@ Methodological & Bibliographical Summary
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
 **Similar Psalms Analyzed**: {related_psalms_str}
 **Deep Web Research**: {deep_research_str}
+**Sections Trimmed for Context**: {sections_trimmed_str}
 **Master Editor Prompt Size**: {prompt_chars_str}
 
 {models_used_str}

@@ -1,13 +1,36 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-11 (Session 210)
+**Last Updated**: 2025-12-11 (Session 211)
 
 ## Current Focus: Psalm Commentary Production
 
 ### Phase: Pipeline Production - Complete Psalms 1-14, 8, 15-21
 Continuing with verse-by-verse commentary generation using the established pipeline.
 
-## Deep Web Research Integration (Session 209) - NEW FEATURE ✅
+## Gemini 2.5 Pro Fallback for Large Psalms (Session 211) - NEW FEATURE ✅
+
+### Overview
+For large psalms where the research bundle exceeds Claude's 200K token limit even after trimming, the pipeline now automatically switches to **Gemini 2.5 Pro** (1M token context) for synthesis generation. This preserves critical research content that would otherwise be removed.
+
+### How It Works
+1. Pipeline attempts progressive trimming (Related Psalms → Figurative Language)
+2. If still over limit after trimming to 50%, flags for Gemini fallback
+3. Synthesis uses Gemini 2.5 Pro with medium reasoning (8000 thinking budget)
+4. GPT-5.1 Master Editor remains unchanged
+5. Model used is tracked in stats and shown in DOCX summary
+
+### New Trimming Priority (Session 211)
+1. **Trim** Related Psalms (remove full psalm texts, keep word relationships)
+2. **Remove** Related Psalms entirely
+3. Trim Figurative Language to 75%
+4. Trim Figurative Language to 50%
+5. **Switch to Gemini 2.5 Pro** (if still over limit)
+
+**Never trimmed**: Lexicon, Commentaries, Liturgical, Sacks, Scholarly Context, Concordance, Deep Web Research
+
+---
+
+## Deep Web Research Integration (Session 209) ✅
 
 ### Overview
 Added support for incorporating Gemini Deep Research outputs into the research bundle. This allows manually-gathered scholarly research from web sources to enrich the AI-generated commentary.
@@ -36,36 +59,6 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
    - Include it in the research bundle as "## Deep Web Research"
    - Trim other sections first if bundle exceeds character limits
    - Track status in pipeline stats and final documents
-
-### Implementation Details
-
-**Files Modified**:
-- `src/agents/research_assembler.py` - Loads deep research, adds to ResearchBundle
-- `src/agents/synthesis_writer.py` - Progressive trimming with correct priority
-- `src/utils/pipeline_summary.py` - Tracks deep research metrics
-- `src/utils/document_generator.py` - Shows "Deep Web Research: Yes/No" in summary
-- `src/utils/combined_document_generator.py` - Same for combined docs
-- `scripts/run_enhanced_pipeline.py` - Updates tracker after synthesis
-
-**New Fields in ResearchBundle**:
-- `deep_research_content: Optional[str]` - Raw content from file
-- `deep_research_included: bool` - Whether included in final bundle
-- `deep_research_removed_for_space: bool` - Whether removed due to limits
-
-**Trimming Priority** (first to last - least to most important):
-1. Related Psalms section (removed first)
-2. Figurative Language (progressive trim: 75% → 50% → 25% → remove)
-3. Concordance results (progressive trim: 75% → 50% → 25% → remove)
-4. Deep Web Research (removed only if still over limit)
-5. Emergency: Sacks, Liturgical, RAG sections
-6. Last resort: Hard truncation
-
-**Never trimmed**: Lexicon entries, Traditional Commentaries
-
-**Document Summary Output**:
-- "Deep Web Research: Yes" - included successfully
-- "Deep Web Research: No (removed for space)" - removed due to character limits
-- "Deep Web Research: No" - no file found
 
 ---
 
@@ -112,6 +105,59 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
 
 ## Recent Accomplishments
 
+### Session 211 (2025-12-11): Gemini 2.5 Pro Fallback + Improved Trimming Strategy
+
+#### Problem Discovered:
+Session 210's aggressive trimming (210K limit for verse commentary) removed critical content from large psalms like Psalm 18, including Liturgical Usage, Rabbi Sacks references, and Scholarly Context. This was over-trimming beyond what was necessary.
+
+#### Solution Implemented:
+
+1. **New Trimming Strategy** - Preserves critical content:
+   - Step 1: Trim Related Psalms (remove full psalm texts, keep word relationships)
+   - Step 2: Remove Related Psalms entirely
+   - Step 3: Trim Figurative Language to 75%
+   - Step 4: Trim Figurative Language to 50%
+   - Step 5: **Switch to Gemini 2.5 Pro** (1M token context)
+
+2. **Increased Character Limits**:
+   - Introduction: 280K → **350K** characters
+   - Verse Commentary: 210K → **300K** characters
+
+3. **Gemini 2.5 Pro Fallback**:
+   - Automatic switch when bundle still exceeds limit after step 4
+   - Uses medium reasoning (`thinking_budget=8000`)
+   - GPT-5.1 Master Editor unchanged
+   - Cost tracking integrated for Gemini usage
+
+4. **Enhanced Stats Tracking**:
+   - `synthesis_model_used` property tracks actual model (Claude or Gemini)
+   - `sections_removed` property lists what was trimmed
+   - DOCX summary shows "Sections Trimmed for Context" and actual synthesis model
+
+#### Key Benefit:
+These sections are now **NEVER trimmed** - they're preserved for Gemini to process:
+- Lexicon entries
+- Traditional Commentaries
+- Liturgical Usage
+- Rabbi Sacks references
+- Scholarly Context (RAG)
+- Concordance results
+- Deep Web Research
+
+#### Files Modified:
+- `src/agents/synthesis_writer.py` - New trimming strategy, Gemini fallback methods
+- `src/utils/pipeline_summary.py` - Added `sections_trimmed` field
+- `src/utils/document_generator.py` - Added sections trimmed to bibliographical summary
+- `scripts/run_enhanced_pipeline.py` - Track actual synthesis model and sections trimmed
+
+---
+
+### Session 210 (2025-12-11): Token Limit Fix (Superseded by Session 211)
+
+*Note: Session 210's aggressive trimming approach has been replaced by the Gemini fallback strategy in Session 211.*
+
+---
+
 ### Session 209 (2025-12-11): Deep Web Research Integration + Progressive Trimming Fix
 
 #### Completed:
@@ -142,63 +188,6 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
    - `ResearchStats` now includes deep research metrics
    - JSON output includes all deep research status fields
    - Pipeline logs when deep research is removed for space
-
----
-
-## Session 210 (2025-12-11): Token Limit Fix & Research Bundle Optimization
-
-#### Problem Discovered:
-Psalm 18 pipeline failed with "prompt is too long: 205995 tokens > 200000 maximum" error during introduction generation. The research bundle was 361,606 characters (~206K tokens), exceeding the limit before adding prompt template and analyses.
-
-#### Completed:
-
-1. **Fixed Character Limits for Token Budget**:
-   - Introduction: Reduced from 400K → 280K characters (~160K tokens)
-   - Verse commentary: Reduced from 350K → 210K characters (~120K tokens)
-   - These limits ensure we stay within 200K token total with buffer for other content
-
-2. **Added Trimming Summary to Research Bundles**:
-   - Every trimmed bundle now includes a "## Research Bundle Processing Summary" section
-   - Shows original size, final size, percentage removed
-   - Lists which sections were removed/trimmed
-   - Example for Psalm 18: 361,606 → 159,502 characters (56% removed)
-
-3. **Fixed Early Returns in Trimming Logic**:
-   - Removed all early returns to ensure summary is always added
-   - Fixed Unicode arrows (→) causing encoding errors on Windows
-   - Ensured trimming summary appears at end of every trimmed bundle
-
-4. **Fixed Pipeline Script for Skipping Steps**:
-   - Fixed API key requirement when using --skip-macro and --skip-micro
-   - Now uses default model names for tracking when skipping steps
-   - Allows testing without requiring API keys
-
-#### Technical Details:
-
-**Token Budget Calculation (200K limit)**:
-- Introduction: 160K tokens (research) + 40K tokens (template + macro + micro)
-- Verse commentary: 120K tokens (research) + 80K tokens (intro + template + macro + micro + phonetic)
-
-**Character-to-Token Ratio**: 1.75 chars/token (based on actual error metrics)
-
-**Trimming Priority Order**:
-1. Related Psalms (removed first)
-2. Figurative Language (trimmed progressively: 75% → 50% → 25% → remove)
-3. Concordance (trimmed progressively: 75% → 50% → 25% → remove)
-4. Deep Web Research (removed entirely)
-5. Emergency: Rabbi Sacks, Liturgical Usage, Scholarly Context
-6. Last resort: Hard truncation
-
-#### Files Modified:
-- `src/agents/synthesis_writer.py`: Fixed character limits, trimming logic, Unicode issues
-- `scripts/run_enhanced_pipeline.py`: Fixed API key requirement for skipped steps
-
-#### Test Results:
-- Psalm 18 with 210K limit: Successfully trimmed to 159,502 characters
-- All required content preserved while staying within token limits
-- Trimming summary properly added to bundle
-
----
 
 ### Session 204-208 (2025-12-10): Thematic Parallels Feature - DISCONTINUED
 
@@ -262,6 +251,7 @@ Modified `DISCOVERY_PASS_PROMPT` in `src/agents/micro_analyst.py` with concrete 
 
 ## Notes
 - Deep Web Research feature ready for production use
-- Progressive trimming handles large psalms (51+ verses) within token limits
+- Gemini 2.5 Pro fallback handles large psalms (51+ verses) without losing critical content
 - Phrase substring matching working correctly
 - Pipeline running without performance issues
+- Critical sections (Liturgical, Sacks, RAG, Concordance) are never trimmed - preserved for Gemini

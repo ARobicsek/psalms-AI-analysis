@@ -72,6 +72,9 @@ class ResearchStats:
     deep_research_removed_for_space: bool = False  # Was it removed due to character limits?
     deep_research_chars: int = 0  # Character count of deep research content
 
+    # Research bundle trimming info
+    sections_trimmed: List[str] = field(default_factory=list)  # Sections removed/trimmed for context length
+
 
 @dataclass
 class AnalysisStats:
@@ -287,6 +290,15 @@ class PipelineSummaryTracker:
         self.research.deep_research_included = included
         self.research.deep_research_removed_for_space = removed_for_space
         self.research.deep_research_chars = char_count
+
+    def track_sections_trimmed(self, sections: List[str]):
+        """
+        Track sections that were trimmed or removed from research bundle for context length.
+
+        Args:
+            sections: List of section names that were trimmed/removed
+        """
+        self.research.sections_trimmed = sections
 
     def track_macro_questions(self, questions: List[str]):
         """Track research questions from MacroAnalyst."""
@@ -631,7 +643,8 @@ class PipelineSummaryTracker:
                 'deep_research_available': self.research.deep_research_available,
                 'deep_research_included': self.research.deep_research_included,
                 'deep_research_removed_for_space': self.research.deep_research_removed_for_space,
-                'deep_research_chars': self.research.deep_research_chars
+                'deep_research_chars': self.research.deep_research_chars,
+                'sections_trimmed': self.research.sections_trimmed
             },
             'analysis': {
                 'macro_questions': self.analysis.macro_questions,

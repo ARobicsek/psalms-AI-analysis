@@ -469,7 +469,11 @@ def run_enhanced_pipeline(
         synthesis_output = commentary['introduction'] + "\n\n" + commentary['verse_commentary']
         step_duration = time.time() - step_start
         tracker.track_step_output("synthesis", synthesis_output, duration=step_duration)
-        tracker.track_model_for_step("synthesis", synthesis_model)
+        # Use the actual model used (may be Gemini if bundle was too large for Claude)
+        actual_synthesis_model = synthesis_writer.synthesis_model_used
+        tracker.track_model_for_step("synthesis", actual_synthesis_model)
+        if actual_synthesis_model != synthesis_model:
+            logger.info(f"Synthesis used {actual_synthesis_model} (fallback from {synthesis_model} due to bundle size)")
 
         # Update deep research status if it was removed for space during synthesis
         if synthesis_writer.deep_research_removed_for_space:
@@ -480,6 +484,11 @@ def run_enhanced_pipeline(
                 char_count=tracker.research.deep_research_chars
             )
             logger.info("Deep Web Research was removed from research bundle due to character limits")
+
+        # Track sections that were trimmed/removed for context length
+        if synthesis_writer.sections_removed:
+            tracker.track_sections_trimmed(synthesis_writer.sections_removed)
+            logger.info(f"Sections trimmed for context length: {', '.join(synthesis_writer.sections_removed)}")
 
         logger.info(f"✓ Introduction saved to {synthesis_intro_file}")
         logger.info(f"✓ Verse commentary saved to {synthesis_verses_file}")
