@@ -19,16 +19,7 @@ Added support for incorporating Gemini Deep Research outputs into the research b
    - Select "Deep Research" mode
    - Use this prompt template:
    ```
-   I'm preparing a scholarly essay on Psalm [NUMBER] for a collection of essays
-   that serve as a reader's guide to the book of psalms. Please assemble a deep
-   research package on this psalm that includes ancient, medieval and modern
-   commentary and debates; ANE scholarship; linguistics, philology, etc. Also
-   include reception, ritual and liturgical use of the psalm or any of its verses
-   or phrases. Also include literary and cultural influence that the psalm or its
-   language has had. Make sure to search widely, but include thetorah.org and
-   Sefaria as well as academic sources. When you return your results please be
-   clear and terse, to minimize tokens. You're not writing the essay; you're
-   assembling the materials for the scholar.
+I'm preparing a scholarly essay on Psalm [] for a collection of essays that serve as a reader's guide to the book of psalms. Please assemble a deep research package on this psalm that includes ancient, medieval and modern commentary and debates; ANE scholarship; linguistics, philology, poetics, etc. Also include reception, ritual and liturgical use of the psalm or any of its verses or phrases. Also include literary and cultural influence that the psalm or its language has had. Make sure to search widely, but include thetorah.org and Sefaria as well as academic sources. When you return your results please be clear and terse, to minimize tokens. You're not writing the ultimate essay; your essay is meant to assemble key materials for the scholar.
    ```
 
 2. **Save the output**:
@@ -61,12 +52,15 @@ Added support for incorporating Gemini Deep Research outputs into the research b
 - `deep_research_included: bool` - Whether included in final bundle
 - `deep_research_removed_for_space: bool` - Whether removed due to limits
 
-**Trimming Priority** (least to most important):
-1. Deep Web Research (removed first)
-2. Concordance results
-3. Figurative language examples
-4. Commentary entries
-5. Lexicon entries (never trimmed)
+**Trimming Priority** (first to last - least to most important):
+1. Related Psalms section (removed first)
+2. Figurative Language (progressive trim: 75% → 50% → 25% → remove)
+3. Concordance results (progressive trim: 75% → 50% → 25% → remove)
+4. Deep Web Research (removed only if still over limit)
+5. Emergency: Sacks, Liturgical, RAG sections
+6. Last resort: Hard truncation
+
+**Never trimmed**: Lexicon entries, Traditional Commentaries
 
 **Document Summary Output**:
 - "Deep Web Research: Yes" - included successfully
@@ -160,7 +154,7 @@ Continue with production commentary pipeline
 
 ## Recent Accomplishments
 
-### Session 209 (2025-12-11): Deep Web Research Integration
+### Session 209 (2025-12-11): Deep Web Research Integration + Progressive Trimming Fix
 
 #### Completed:
 1. **Implemented Deep Web Research Feature**:
@@ -173,10 +167,13 @@ Continue with production commentary pipeline
    - Added deep research fields to `ResearchBundle` dataclass
    - Included in `to_markdown()` as "## Deep Web Research" section
 
-3. **Implemented Smart Trimming**:
-   - Deep research removed first if bundle exceeds 600K character limit
-   - Added `deep_research_removed_for_space` property to synthesis writer
-   - Pipeline tracks removal status for reporting
+3. **Rewrote Research Bundle Trimming** (fixed Psalm 18 token overflow):
+   - Problem: Psalm 18 (51 verses) exceeded 200K token limit (211,252 tokens)
+   - Solution: Progressive trimming with correct priority order
+   - Trimming order: Related Psalms → Figurative → Concordance → Deep Research
+   - Progressive reduction: 75% → 50% → 25% → remove for each section
+   - Emergency fallback: Sacks, Liturgical, RAG sections
+   - Last resort: Hard truncation
 
 4. **Updated Document Generators**:
    - Both `document_generator.py` and `combined_document_generator.py` updated

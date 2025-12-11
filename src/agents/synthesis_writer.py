@@ -730,119 +730,184 @@ class SynthesisWriter:
                         f"Instances: {total_original_instances} → {total_kept_instances}.")
         return result
 
-    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 700000) -> tuple:
+    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 600000) -> tuple:
         """
         Intelligently trim research bundle to fit within token limits.
 
-        Priority order for trimming (least to most important):
-        1. Deep Web Research (supplementary, removed first)
-        2. Concordance results (shows usage patterns)
-        3. Figurative language examples (critical for literary analysis)
-        4. Commentary entries (provides interpretive context)
-        5. Lexicon entries (most important for word analysis - never trimmed)
+        Priority order for trimming (first to last - least to most important):
+        1. Related Psalms section (trim/remove first)
+        2. Figurative Language (reduce results count)
+        3. Concordance results (trim results)
+        4. Deep Web Research (remove only if still over limit)
+
+        Preserved as long as possible (emergency trim only):
+        - Lexicon entries (most important for word analysis - never trimmed)
+        - Traditional Commentaries (core interpretive context)
+        - Liturgical Usage (essential for liturgical essays)
+        - RAG/Scholarly Context (foundational framework)
+        - Rabbi Sacks references (modern insights)
 
         Args:
             research_bundle: Full research bundle markdown
-            max_chars: Maximum characters (~125k tokens with 2 chars/token ratio)
+            max_chars: Maximum characters (~300K tokens with 2 chars/token ratio)
 
         Returns:
             Tuple of (trimmed_bundle, deep_research_was_removed)
         """
-        deep_research_removed = False
+        import re
 
-        if len(research_bundle) <= max_chars:
+        deep_research_removed = False
+        original_size = len(research_bundle)
+
+        if original_size <= max_chars:
             return research_bundle, deep_research_removed
 
-        self.logger.warning(f"Research bundle too large ({len(research_bundle)} chars). Trimming to {max_chars} chars...")
+        self.logger.warning(f"Research bundle too large ({original_size:,} chars). Max: {max_chars:,}. Starting progressive trimming...")
 
-        # First, check if removing Deep Web Research section would help
-        if '## Deep Web Research' in research_bundle:
-            # Remove the deep research section
-            import re
-            # Match from "## Deep Web Research" to the next section or end
-            pattern = r'\n## Deep Web Research\n.*?(?=\n## [^#]|\n---\n\n## |\Z)'
-            research_bundle_without_deep = re.sub(pattern, '', research_bundle, flags=re.DOTALL)
+        # Helper function to extract and remove a section
+        def extract_section(bundle: str, section_pattern: str) -> tuple:
+            """Extract a section from the bundle, return (section_content, bundle_without_section)."""
+            pattern = rf'(## {section_pattern}.*?)(?=\n## [A-Z]|\n---\n\n## |\Z)'
+            match = re.search(pattern, bundle, flags=re.DOTALL)
+            if match:
+                section = match.group(1)
+                bundle_without = bundle[:match.start()] + bundle[match.end():]
+                return section.strip(), bundle_without
+            return "", bundle
 
-            if len(research_bundle_without_deep) <= max_chars:
-                self.logger.info(f"Removed Deep Web Research section to fit within limits. "
-                               f"Size: {len(research_bundle)} → {len(research_bundle_without_deep)} chars")
-                return research_bundle_without_deep, True
-
-            # Deep research removed but still over limit, continue with other trimming
-            research_bundle = research_bundle_without_deep
-            deep_research_removed = True
-            self.logger.info(f"Removed Deep Web Research section but still over limit. Continuing with other trimming...")
-
-        # Split into sections
-        sections = research_bundle.split('\n## ')
-        header = sections[0] if sections else ""
-
-        # Find and separate sections
-        lexicon_section = ""
-        figurative_section = ""
-        commentary_section = ""
-        concordance_section = ""
-
-        for section in sections[1:]:
-            section_name = section.split('\n')[0] if section else ''
-            if 'Lexicon Entries' in section_name:  # Match "Hebrew Lexicon Entries" or "BDB Lexicon Entries"
-                lexicon_section = '## ' + section
-            elif section_name.startswith('Figurative Language Instances'):
-                figurative_section = '## ' + section
-            elif 'Commentaries' in section_name or 'Commentary' in section_name:  # Match "Traditional Commentaries" or "Sefaria Commentary"
-                commentary_section = '## ' + section
-            elif 'Concordance' in section_name:  # Match "Concordance Searches" or "Concordance Results"
-                concordance_section = '## ' + section
-
-        # Calculate sizes
-        header_size = len(header)
-        lexicon_size = len(lexicon_section)
-        figurative_size = len(figurative_section)
-        commentary_size = len(commentary_section)
-        concordance_size = len(concordance_section)
-
-        # Try to keep everything, trim concordance first, then figurative if needed
-        available_for_concordance = max_chars - (header_size + lexicon_size + figurative_size + commentary_size)
-
-        if available_for_concordance < 0:
-            # Even without concordance we're over limit - need to trim figurative too
-            self.logger.warning(f"Research bundle exceeds limit even without concordance. Trimming figurative language proportionally.")
-            # Calculate how much figurative we can keep
-            available_for_figurative = max_chars - (header_size + lexicon_size + commentary_size + 1000)  # Leave 1k for concordance header
-            if available_for_figurative > 0 and figurative_size > 0:
-                trim_ratio = available_for_figurative / figurative_size
-                self.logger.info(f"Trimming figurative with priority for Psalms: keeping {trim_ratio:.1%} of each query's results")
-                figurative_section = self._trim_figurative_with_priority(figurative_section, trim_ratio)
-            else:
-                figurative_section = ""
-            # Drop concordance entirely
-            concordance_section = ""
-        elif available_for_concordance < concordance_size:
-            # Trim concordance section
-            self.logger.info(f"Trimming concordance from {concordance_size} to {available_for_concordance} chars")
-            concordance_lines = concordance_section.split('\n')
-            trimmed_concordance = []
-            current_size = 0
-            for line in concordance_lines:
-                if current_size + len(line) + 1 <= available_for_concordance:
-                    trimmed_concordance.append(line)
-                    current_size += len(line) + 1
+        # Helper function to trim a section by percentage
+        def trim_section_by_ratio(section: str, keep_ratio: float) -> str:
+            """Trim a section to keep approximately keep_ratio of its content."""
+            if not section or keep_ratio >= 1.0:
+                return section
+            lines = section.split('\n')
+            # Keep header lines (first few lines) and trim content
+            header_lines = []
+            content_lines = []
+            in_header = True
+            for line in lines:
+                if in_header and (line.startswith('##') or line.startswith('*') or line.strip() == ''):
+                    header_lines.append(line)
                 else:
-                    trimmed_concordance.append(f"\n[Concordance results trimmed for context length. {concordance_size - current_size} chars omitted.]")
-                    break
-            concordance_section = '\n'.join(trimmed_concordance)
+                    in_header = False
+                    content_lines.append(line)
 
-        # Reassemble
-        result = '\n\n'.join(filter(None, [
-            header,
-            lexicon_section,
-            concordance_section,
-            figurative_section,
-            commentary_section
-        ]))
+            # Keep a portion of content lines
+            keep_count = max(1, int(len(content_lines) * keep_ratio))
+            trimmed_content = content_lines[:keep_count]
+            trimmed_content.append(f"\n[Section trimmed to {keep_ratio:.0%} for context length]")
 
-        self.logger.info(f"Research bundle trimmed: {len(research_bundle)} → {len(result)} chars")
-        return result, deep_research_removed
+            return '\n'.join(header_lines + trimmed_content)
+
+        # ========================================
+        # STEP 1: Trim Related Psalms section first
+        # ========================================
+        related_section, research_bundle = extract_section(research_bundle, 'Related Psalms')
+        related_removed = bool(related_section)
+
+        if len(research_bundle) <= max_chars:
+            self.logger.info(f"Removed Related Psalms section ({len(related_section):,} chars). "
+                           f"Size: {original_size:,} → {len(research_bundle):,} chars")
+            return research_bundle, deep_research_removed
+
+        if related_removed:
+            self.logger.info(f"Removed Related Psalms ({len(related_section):,} chars) but still over limit...")
+
+        # ========================================
+        # STEP 2: Trim Figurative Language section
+        # ========================================
+        figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
+
+        if figurative_section:
+            # Try progressive trimming: 75%, 50%, 25%, then remove
+            for keep_ratio in [0.75, 0.50, 0.25, 0.0]:
+                if keep_ratio > 0:
+                    trimmed_fig = trim_section_by_ratio(figurative_section, keep_ratio)
+                    test_bundle = temp_bundle + '\n\n' + trimmed_fig
+                else:
+                    test_bundle = temp_bundle  # Remove entirely
+
+                if len(test_bundle) <= max_chars:
+                    if keep_ratio > 0:
+                        self.logger.info(f"Trimmed Figurative Language to {keep_ratio:.0%}. "
+                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
+                        return test_bundle, deep_research_removed
+                    else:
+                        self.logger.info(f"Removed Figurative Language section entirely. "
+                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
+                        research_bundle = test_bundle
+                        break
+            else:
+                # Even removing figurative entirely wasn't enough, continue
+                research_bundle = temp_bundle
+                self.logger.info(f"Removed Figurative Language but still over limit...")
+
+        # ========================================
+        # STEP 3: Trim Concordance section
+        # ========================================
+        concordance_section, temp_bundle = extract_section(research_bundle, 'Concordance')
+
+        if concordance_section:
+            # Try progressive trimming: 75%, 50%, 25%, then remove
+            for keep_ratio in [0.75, 0.50, 0.25, 0.0]:
+                if keep_ratio > 0:
+                    trimmed_conc = trim_section_by_ratio(concordance_section, keep_ratio)
+                    test_bundle = temp_bundle + '\n\n' + trimmed_conc
+                else:
+                    test_bundle = temp_bundle
+
+                if len(test_bundle) <= max_chars:
+                    if keep_ratio > 0:
+                        self.logger.info(f"Trimmed Concordance to {keep_ratio:.0%}. "
+                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
+                        return test_bundle, deep_research_removed
+                    else:
+                        self.logger.info(f"Removed Concordance section entirely. "
+                                       f"Size: {original_size:,} → {len(test_bundle):,} chars")
+                        research_bundle = test_bundle
+                        break
+            else:
+                research_bundle = temp_bundle
+                self.logger.info(f"Removed Concordance but still over limit...")
+
+        # ========================================
+        # STEP 4: Remove Deep Web Research (last resort before failure)
+        # ========================================
+        deep_section, temp_bundle = extract_section(research_bundle, 'Deep Web Research')
+
+        if deep_section:
+            if len(temp_bundle) <= max_chars:
+                self.logger.info(f"Removed Deep Web Research section ({len(deep_section):,} chars). "
+                               f"Size: {original_size:,} → {len(temp_bundle):,} chars")
+                return temp_bundle, True
+            else:
+                research_bundle = temp_bundle
+                deep_research_removed = True
+                self.logger.warning(f"Removed Deep Web Research but still over limit...")
+
+        # ========================================
+        # STEP 5: Emergency trimming - trim Sacks, Liturgical, RAG sections
+        # ========================================
+        for section_name in ['Rabbi Jonathan Sacks', 'Liturgical Usage', 'Scholarly Context']:
+            section, temp_bundle = extract_section(research_bundle, section_name)
+            if section and len(temp_bundle) <= max_chars:
+                self.logger.warning(f"Emergency: Removed {section_name} section. "
+                                  f"Size: {original_size:,} → {len(temp_bundle):,} chars")
+                return temp_bundle, deep_research_removed
+            elif section:
+                research_bundle = temp_bundle
+                self.logger.warning(f"Emergency: Removed {section_name} but still over limit...")
+
+        # ========================================
+        # STEP 6: Last resort - hard truncation
+        # ========================================
+        if len(research_bundle) > max_chars:
+            self.logger.error(f"Could not trim bundle below {max_chars:,} chars. "
+                            f"Performing hard truncation from {len(research_bundle):,} chars.")
+            research_bundle = research_bundle[:max_chars - 100] + "\n\n[TRUNCATED FOR LENGTH]"
+
+        self.logger.info(f"Research bundle trimmed: {original_size:,} → {len(research_bundle):,} chars")
+        return research_bundle, deep_research_removed
 
     def _generate_introduction(
         self,
