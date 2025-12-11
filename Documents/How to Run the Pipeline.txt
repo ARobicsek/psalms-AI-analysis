@@ -20,6 +20,9 @@ python scripts/run_enhanced_pipeline.py 15 --skip-macro --skip-synthesis --skip-
 #just all 3 word docs
 python scripts/run_enhanced_pipeline.py 10 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --output-dir output/psalm_10
 
+#run the RAG thematic match for a single verse in Psalms
+python single_verse_search.py ps 61:4
+
 # GPT-5 (older model, still with high reasoning)
 python scripts/run_enhanced_pipeline.py <N> --master-editor-model gpt-5
 

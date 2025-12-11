@@ -115,6 +115,117 @@ This caused a mismatch between how embeddings were generated (Hebrew+English) an
 - [ ] Test various verses to verify consistent high similarity scores
 - [ ] Document the Hebrew-only embedding approach
 
+### Session 206 - 2025-12-10
+
+**Phase**: Single Verse Search Analysis
+**Duration**: ~1 hour
+**Developer**: Claude (with user)
+
+**Completed**:
+- [x] Created `single_verse_search.py` script for generating thematic parallels reports for single verses
+- [x] Fixed Hebrew text retrieval by querying tanakh.db when not available in ChromaDB documents
+- [x] Generated reports for requested verses: Psalm 1:1, Psalm 145:8, Psalm 16:8
+- [x] Each report includes:
+  - Complete Hebrew and English text of query verse
+  - Top 5 thematic parallels from Psalms with similarity scores
+  - Top 5 thematic parallels from other Tanakh books with similarity scores
+  - Full Hebrew text and English translations for all matches
+- [x] Confirmed script correctly finds query verse as #1 match (e.g., Psalm 23:1 scores 0.778)
+- [x] Verified script does not filter out other verses from the same Psalm (only filters exact match)
+
+**Key Technical Fixes**:
+- Connected to existing vector store at `data/thematic_corpus_1_verse/chroma_db`
+- Query ChromaDB collection directly to get documents, metadata, and distances
+- Added database fallback for Hebrew text when not stored in vector store
+- Similarity calculation: `1 / (1 + distance)` for cosine similarity
+
+**Blockers**:
+- None
+
+**Files Created**:
+- `single_verse_search.py` - Main script for single verse thematic search
+- `psalm_1_1_final.txt` - Report for Psalm 1:1 parallels
+- `psalm_145_8_final.txt` - Report for Psalm 145:8 parallels
+- `psalm_16_8_final.txt` - Report for Psalm 16:8 parallels
+- Various debug scripts (can be archived)
+
+**Next Session**:
+- [ ] Make script interactive for user to select chapter/verse
+- [ ] Display top 10 matches from Psalms and top 10 from other books
+- [ ] Continue fixing similarity score issue (improved from 0.778 to 0.844, need to reach ~0.99)
+  - Need to match exact text cleaning used in corpus building
+  - Investigate if additional cantillation marks need to be removed
+  - PASEQ (U+05A5) mentioned in Session 205 may still be present
+
+### Session 208 - 2025-12-10
+
+**Phase**: Single Verse Search Script Final Fix
+**Duration**: ~0.5 hours
+**Developer**: Claude (with user)
+
+**Completed**:
+- [x] Fixed single verse thematic search script error message path
+- [x] Resolved user's OpenAI API key configuration issue
+- [x] Verified script working correctly for both command line and interactive modes
+- [x] Confirmed thematic search finding high-quality parallels (70-87% similarity scores)
+- [x] All Psalm 61:1-4 reports generated successfully with thematic matches
+
+**Key Fix Applied**:
+- Updated line 293 in `single_verse_search.py`
+- Changed error message path from `data/thematic_corpus/chroma_db` to `data/thematic_corpus_1_verse/chroma_db`
+- This resolved user confusion when script was working but showing wrong error path
+
+**Verification Results**:
+- Psalm 61:1: Found 10 Psalms parallels (84-87% similarity) + other books
+- Psalm 61:4: Found 10 Psalms parallels (71-77% similarity) + 9 other books
+- Isaiah 25:4 and Jeremiah 17:17 appear as top thematic matches for "refuge" theme
+- Script now fully functional for user in virtual environment
+
+**Blockers**:
+- None resolved - script is working perfectly
+
+**Files Modified**:
+- `single_verse_search.py` - Fixed error message path (line 293)
+
+**Next Session**:
+- Feature is complete and working - no additional work needed unless user requests enhancements
+
+### Session 207 - 2025-12-10
+
+**Phase**: Single Verse Search Enhancement & Bug Fixes
+**Duration**: ~1.5 hours
+**Developer**: Claude (with user)
+
+**Completed**:
+- [x] Fixed self-match similarity scores from ~84% to 99.3-100% by aligning text cleaning between corpus and search
+- [x] Confirmed PASEQ character removal was NOT the issue - both corpus and search already handled it correctly
+- [x] Enhanced script to show top 10 matches from Psalms and other books (instead of 5)
+- [x] Made script interactive for user to select chapter/verse
+- [x] Set output directory to `output/Verses_thematic_matches_RAG/` with standardized filenames
+- [x] Fixed Windows console encoding issues by removing emojis
+- [x] **CRITICAL BUG**: Fixed `parse_verse_reference()` function string replacement order:
+  - **Before**: `.replace('psalm', 'ps').replace('psalms', 'ps')` converted "psalms" → "pss" ❌
+  - **After**: `.replace('psalms', 'ps').replace('psalm', 'ps')` handles both correctly ✅
+
+**Key Discoveries**:
+- Self-match scores now excellent: 99.3% - 100.0% for all test verses
+- Interactive mode working with proper input validation
+- Command line mode works with both `ps` and `psalms` prefixes
+
+**Blockers**:
+- [ ] **ISSUE**: Interactive mode still generating "Thematic search unavailable" messages despite fixes
+- Command line mode works correctly after parsing fix
+- May be caching or initialization issue specific to interactive mode
+
+**Files Modified**:
+- `single_verse_search.py` - Enhanced with interactive mode, top 10 matches, fixed parsing
+
+**Next Session**:
+- [ ] **PRIORITY**: Debug why interactive mode still fails despite command line working
+- [ ] Investigate if there's a separate initialization issue in `run_interactive()`
+- [ ] Test if issue is with old cached files vs fresh generation
+- [ ] Clean up old error message files in output directory
+
 ### Session 183 - 2025-12-09
 
 **Phase**: Planning + Phase 0 + Phase 1 (Partial)
@@ -875,9 +986,10 @@ This caused a mismatch between how embeddings were generated (Hebrew+English) an
 - [x] `src/thematic/__init__.py`
 - [x] `src/thematic/chunk_schemas.py`
 - [x] `src/thematic/corpus_builder.py`
-- [ ] `src/thematic/embedding_service.py`
-- [ ] `src/thematic/vector_store.py`
-- [ ] `src/agents/thematic_parallels_librarian.py`
+- [x] `src/thematic/embedding_service.py`
+- [x] `src/thematic/vector_store.py`
+- [ ] `src/agents/thematic_parallels_librarian.py` (removed when discontinued)
+- [x] `single_verse_search.py` - Single verse thematic search with database integration
 - [x] `scripts/build_thematic_corpus.py`
 - [ ] `scripts/build_vector_index.py`
 - [x] `scripts/inspect_chunks.py`
