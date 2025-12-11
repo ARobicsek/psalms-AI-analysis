@@ -1,31 +1,42 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-10 (Session 204)
+**Last Updated**: 2025-12-10 (Session 208)
 
 ## Current Focus: Psalm Commentary Production
 
 ### Phase: Pipeline Production - Complete Psalms 1-14, 8, 15-21
 Continuing with verse-by-verse commentary generation using the established pipeline.
 
-## Thematic Parallels Feature (Sessions 183-203) - DISCONTINUED
+## Thematic Parallels Feature (Sessions 183-208) - DISCONTINUED
 
 ### Summary (2025-12-09 to 2025-12-10):
 Implemented and evaluated a RAG-based thematic search system for finding biblical parallels to Psalms.
 
-**Work Completed**:
+**Main Implementation (Sessions 183-203)**:
 - Built Hebrew-only corpus with 23,089 chunks using 5-verse overlapping windows
 - Created vector embeddings using OpenAI text-embedding-3-large
 - Implemented ThematicParallelsLibrarian for semantic search
 - Integrated into ResearchAssembler pipeline
 - Tested on multiple Psalms (23, 8, 121, 145)
 
-**Evaluation Results**:
-- System functioned correctly with high-quality semantic matches
-- Similarity scores 0.53-0.62 for meaningful thematic connections
-- However, parallels were too generic for scholarly commentary
-- Did not provide value to synthesis writer and master editor
+**1-Verse Chunk Experimentation (Sessions 204-208)**:
+After discontinuing the main feature, experimented with 1-verse chunks as an alternative approach:
 
-**Decision**: Feature discontinued - artifacts preserved in `docs/archive/discontinued_features/`
+- **Session 204**: Built complete 1-verse chunking system with 23,206 individual verses
+- **Session 205**: Fixed similarity scores from ~0.79 to ~0.997 by using Hebrew-only embeddings
+- **Session 206**: Created single verse search script with database integration
+- **Session 207**: Enhanced script with interactive mode and top 10 matches; fixed parsing bugs
+- **Session 208**: Final fixes made script fully functional for thematic verse search
+
+**Key Findings from 1-Verse Experiment**:
+- 1-verse chunks provide superior precision with exact verse matching
+- 80% cost reduction ($0.0786 vs $0.38 for 5-verse chunks)
+- High similarity scores (0.77-0.84) for self-matches
+- Script available as `single_verse_search.py` for future use
+
+**Final Decision**: Feature discontinued - artifacts preserved in `docs/archive/discontinued_features/`
+- 1-verse approach proved technically viable but not needed for current pipeline
+- All evaluation scripts retained for potential future scholarly applications
 
 ### Next Phase
 Continue with production commentary pipeline
