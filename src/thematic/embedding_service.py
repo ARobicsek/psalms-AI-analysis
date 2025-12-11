@@ -1,214 +1,150 @@
-"""Embedding service for generating text embeddings using OpenAI or mock provider."""
-import logging
-import numpy as np
+"""Embedding service abstraction for testability."""
 from abc import ABC, abstractmethod
-from typing import List, Union, Optional
-import os
-from openai import OpenAI
+from typing import List, Protocol
+import hashlib
+import logging
 
 logger = logging.getLogger(__name__)
 
 
-class EmbeddingService(ABC):
-    """Abstract base class for embedding services."""
+class EmbeddingService(Protocol):
+    """Protocol for embedding services."""
 
-    @abstractmethod
-    def get_embedding(self, text: str) -> List[float]:
-        """Generate embedding for a single text."""
-        pass
+    def embed(self, text: str) -> List[float]:
+        """Embed a single text."""
+        ...
 
-    @abstractmethod
-    def get_embeddings(self, texts: List[str]) -> List[List[float]]:
-        """Generate embeddings for multiple texts."""
-        pass
+    def embed_batch(self, texts: List[str], batch_size: int = 100) -> List[List[float]]:
+        """Embed multiple texts."""
+        ...
 
     @property
-    @abstractmethod
     def dimension(self) -> int:
         """Embedding dimension."""
-        pass
-
-    @property
-    @abstractmethod
-    def model_name(self) -> str:
-        """Model name identifier."""
-        pass
+        ...
 
 
-class OpenAIEmbeddings(EmbeddingService):
+class OpenAIEmbeddings:
     """OpenAI embedding service using text-embedding-3-large."""
 
-    def __init__(self, api_key: Optional[str] = None, model: str = "text-embedding-3-large"):
-        """Initialize OpenAI embedding service.
-
-        Args:
-            api_key: OpenAI API key. If None, uses OPENAI_API_KEY env var.
-            model: OpenAI embedding model to use.
-        """
+    def __init__(self, model: str = "text-embedding-3-large"):
+        from openai import OpenAI
+        self.client = OpenAI()
         self.model = model
-        self.client = OpenAI(api_key=api_key or os.getenv("OPENAI_API_KEY"))
+        self._dimension = 3072 if "large" in model else 1536
 
-        # Map models to their dimensions
-        self._dimensions = {
-            "text-embedding-3-large": 3072,
-            "text-embedding-3-small": 1536,
-            "text-embedding-ada-002": 1536,
-        }
+    @property
+    def dimension(self) -> int:
+        return self._dimension
 
-        if model not in self._dimensions:
-            raise ValueError(f"Unknown model: {model}. Known models: {list(self._dimensions.keys())}")
+    def embed(self, text: str) -> List[float]:
+        """Embed a single text."""
+        response = self.client.embeddings.create(
+            model=self.model,
+            input=text
+        )
+        return response.data[0].embedding
 
-    def get_embedding(self, text: str) -> List[float]:
-        """Generate embedding for a single text."""
-        try:
-            response = self.client.embeddings.create(
-                model=self.model,
-                input=text
-            )
-            return response.data[0].embedding
-        except Exception as e:
-            logger.error(f"Error generating embedding: {e}")
-            raise
-
-    def get_embeddings(self, texts: List[str]) -> List[List[float]]:
-        """Generate embeddings for multiple texts efficiently."""
-        if not texts:
-            return []
-
-        # Process in batches to handle rate limits
-        batch_size = 100
-        all_embeddings = []
+    def embed_batch(self, texts: List[str], batch_size: int = 100) -> List[List[float]]:
+        """Embed multiple texts in batches."""
+        embeddings = []
 
         for i in range(0, len(texts), batch_size):
             batch = texts[i:i + batch_size]
-            try:
-                response = self.client.embeddings.create(
-                    model=self.model,
-                    input=batch
-                )
-                batch_embeddings = [item.embedding for item in response.data]
-                all_embeddings.extend(batch_embeddings)
+            logger.info(f"Embedding batch {i//batch_size + 1}/{(len(texts)-1)//batch_size + 1}")
 
-                if len(batch) < batch_size:
-                    # Small batch, no need to sleep
-                    continue
+            response = self.client.embeddings.create(
+                model=self.model,
+                input=batch
+            )
 
-                # Add small delay to respect rate limits
-                import time
-                time.sleep(0.1)
+            batch_embeddings = [item.embedding for item in response.data]
+            embeddings.extend(batch_embeddings)
 
-            except Exception as e:
-                logger.error(f"Error generating embeddings for batch {i//batch_size}: {e}")
-                # Fallback: generate one by one
-                for text in batch:
-                    all_embeddings.append(self.get_embedding(text))
-
-        return all_embeddings
-
-    @property
-    def dimension(self) -> int:
-        """Embedding dimension."""
-        return self._dimensions[self.model]
-
-    @property
-    def model_name(self) -> str:
-        """Model name identifier."""
-        return self.model
-
-    def estimate_cost(self, num_texts: int, avg_tokens_per_text: int = 150) -> float:
-        """Estimate cost for embedding texts in USD.
-
-        Args:
-            num_texts: Number of texts to embed
-            avg_tokens_per_text: Average token count per text
-
-        Returns:
-            Estimated cost in USD
-        """
-        # Pricing as of 2024-12
-        pricing = {
-            "text-embedding-3-large": 0.00013 / 1000,  # $0.00013 per 1K tokens
-            "text-embedding-3-small": 0.00002 / 1000,  # $0.00002 per 1K tokens
-            "text-embedding-ada-002": 0.0001 / 1000,   # $0.0001 per 1K tokens
-        }
-
-        total_tokens = num_texts * avg_tokens_per_text
-        cost_per_token = pricing[self.model]
-        return total_tokens * cost_per_token
+        return embeddings
 
 
-class MockEmbeddings(EmbeddingService):
-    """Mock embedding service for testing without API calls.
+class MockEmbeddings:
+    """
+    Mock embedding service for testing.
 
-    Generates deterministic pseudo-random embeddings based on text hash.
+    Generates deterministic embeddings based on text hash.
+    Texts with similar words will NOT have similar embeddings
+    (this is for testing structure, not semantic similarity).
     """
 
-    def __init__(self, dimension: int = 3072, seed: int = 42):
-        """Initialize mock embedding service.
-
-        Args:
-            dimension: Embedding dimension (default: 3072 to match OpenAI large)
-            seed: Random seed for reproducibility
-        """
+    def __init__(self, dimension: int = 3072):
         self._dimension = dimension
-        self._model_name = f"mock-{dimension}d"
-        np.random.seed(seed)
-
-    def _hash_to_embedding(self, text: str) -> List[float]:
-        """Convert text hash to deterministic embedding."""
-        # Use text hash as seed
-        hash_val = hash(text)
-        rng = np.random.RandomState(hash_val % (2**32))
-
-        # Generate random embedding with unit norm
-        embedding = rng.normal(0, 1, self._dimension)
-        norm = np.linalg.norm(embedding)
-        if norm > 0:
-            embedding = embedding / norm
-
-        return embedding.tolist()
-
-    def get_embedding(self, text: str) -> List[float]:
-        """Generate mock embedding for a single text."""
-        return self._hash_to_embedding(text)
-
-    def get_embeddings(self, texts: List[str]) -> List[List[float]]:
-        """Generate mock embeddings for multiple texts."""
-        return [self.get_embedding(text) for text in texts]
 
     @property
     def dimension(self) -> int:
-        """Embedding dimension."""
         return self._dimension
 
-    @property
-    def model_name(self) -> str:
-        """Model name identifier."""
-        return self._model_name
+    def embed(self, text: str) -> List[float]:
+        """Generate deterministic embedding from text hash."""
+        # Use hash to generate deterministic "random" values
+        hash_bytes = hashlib.sha256(text.encode()).digest()
+
+        # Expand hash to fill dimension
+        embedding = []
+        for i in range(self._dimension):
+            # Cycle through hash bytes
+            byte_val = hash_bytes[i % len(hash_bytes)]
+            # Normalize to [-1, 1]
+            embedding.append((byte_val / 127.5) - 1.0)
+
+        return embedding
+
+    def embed_batch(self, texts: List[str], batch_size: int = 100) -> List[List[float]]:
+        """Embed multiple texts."""
+        return [self.embed(text) for text in texts]
 
 
-def create_embedding_service(
-    provider: str = "openai",
-    api_key: Optional[str] = None,
-    model: str = "text-embedding-3-large",
-    dimension: int = 3072,
-    seed: int = 42,
-) -> EmbeddingService:
-    """Factory function to create embedding service.
-
-    Args:
-        provider: Provider name ("openai" or "mock")
-        api_key: API key for OpenAI (optional)
-        model: Model name for OpenAI
-        dimension: Dimension for mock embeddings
-        seed: Random seed for mock embeddings
-
-    Returns:
-        EmbeddingService instance
+class SemanticMockEmbeddings:
     """
-    if provider == "openai":
-        return OpenAIEmbeddings(api_key=api_key, model=model)
-    elif provider == "mock":
-        return MockEmbeddings(dimension=dimension, seed=seed)
-    else:
-        raise ValueError(f"Unknown provider: {provider}. Use 'openai' or 'mock'")
+    Mock embeddings with basic semantic similarity for testing.
+
+    Texts containing the same words will have more similar embeddings.
+    """
+
+    def __init__(self, dimension: int = 3072):
+        self._dimension = dimension
+        self._word_vectors: dict = {}
+
+    @property
+    def dimension(self) -> int:
+        return self._dimension
+
+    def _get_word_vector(self, word: str) -> List[float]:
+        """Get or create a vector for a word."""
+        if word not in self._word_vectors:
+            # Generate deterministic vector for word
+            hash_bytes = hashlib.sha256(word.encode()).digest()
+            vector = []
+            for i in range(self._dimension):
+                byte_val = hash_bytes[i % len(hash_bytes)]
+                vector.append((byte_val / 127.5) - 1.0)
+            self._word_vectors[word] = vector
+        return self._word_vectors[word]
+
+    def embed(self, text: str) -> List[float]:
+        """Generate embedding as average of word vectors."""
+        words = text.lower().split()
+        if not words:
+            return [0.0] * self._dimension
+
+        # Average word vectors
+        result = [0.0] * self._dimension
+        for word in words:
+            word_vec = self._get_word_vector(word)
+            for i in range(self._dimension):
+                result[i] += word_vec[i]
+
+        # Normalize
+        for i in range(self._dimension):
+            result[i] /= len(words)
+
+        return result
+
+    def embed_batch(self, texts: List[str], batch_size: int = 100) -> List[List[float]]:
+        return [self.embed(text) for text in texts]

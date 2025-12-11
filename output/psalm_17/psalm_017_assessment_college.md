@@ -1,16 +1,24 @@
 # Editorial Assessment (College Edition) - Psalm 17
 
-The existing introduction and commentary contain a lot of excellent material. The theological arc (from legal plea to mystical vision), the contrast between “full bellies” and “seeing God,” and the possible temple-incubation setting are all really stimulating. The writer clearly knows the traditional commentators and uses them well, and there’s good attention to Hebrew detail and to intertextual echoes (especially Numbers 12:8, Deuteronomy 4, Psalms 16/73).
+The existing introduction and commentary show real depth: they know the Hebrew well, use BDB and concordances intelligently, and make excellent big-picture points (especially the contrast between v.14 and v.15, the “eye” imagery, and the chiastic structure with v.7 at the center). The discussion of *אִישׁוֹן בַּת־עָיִן* and *בְּצֵל כְּנָפֶיךָ* is particularly strong, as is the explanation of *תְּמוּנָה* in v.15.
 
-For a first-year college audience, though—even one comfortable in Hebrew—the style is too dense and academic. There’s heavy use of jargon (“forensic rhetoric,” “eschatological hope,” “incubation,” “participial description”) with no quick definitions. Sentences are long and abstract, and the “why this is interesting” sometimes gets buried under piles of detail. The tone feels like a journal article more than a great class session.
+However, for a first-year college audience, the draft is much too dense and jargon-heavy. Terms like “forensic rhetoric,” “Sitz im Leben,” “hiphil,” “chiastic,” and “eschatological” either go undefined or are defined only implicitly. Sentences are long and sometimes read like a journal article. The tone occasionally slips into breathless praise (“audacity,” “monumental text”), which tells the reader something is impressive instead of *showing* it.
 
-A few specific issues:
+Several missed opportunities:
 
-- Technical terms (inclusio, participle, Hiphil, etc.) are not consistently defined.
-- Some research questions raised by the macro/micro analyses (esp. v. 4 syntax, v. 14 referent, חֶלֶד) could be answered more directly and clearly.
-- The liturgical section is solid but sprawling; it needs clearer structure and a few well-chosen examples rather than an exhaustive catalog.
-- The verse-by-verse commentary is rich but sometimes loses the thread; it can feel more like a collection of notes than a guided reading.
+- More explicit use of the “related psalms” data (e.g., Ps 142:6 “חֶלְקִי בְּאֶרֶץ הַחַיִּים” as a foil to Ps 17:14).
+- Fuller integration of Torah Temimah and rabbinic midrash (e.g., Bava Batra 10a on 17:15; Berakhot 5 on 17:14).
+- A clearer, student-friendly walk-through of v.14’s options (wicked prosperity vs. God’s provision for the righteous).
+- The liturgical section is informative but not well structured for beginners; it needs headings, shorter units, more explanation of what Birkat Kohanim, Selichot, etc. actually *are*.
 
-Revisions needed: simplify and reorganize. Define every technical term in plain English, cut repetition, and foreground a few big through-lines: (1) courtroom + temple; (2) the eye/seeing motif; (3) the contrast between two “good lives.” Bring in the traditional and rabbinic material selectively, always explaining why a particular midrash or comment matters. Use more direct “Notice how…” teaching moves, and occasionally lighten the tone. And because the student already reads Hebrew, we can lean into Hebrew examples—but always with quick English glosses.
+The verse-by-verse commentary is rich but uneven: some verses get extensive treatment, others are barely started (v.15 cuts off). The style leans heavily academic, assumes familiarity with medieval commentators, and often drops technical observations (e.g., “hiphil of פלא”) without pausing to explain.
+
+The revision should:
+
+- Keep the best insights but translate them into clear, conversational prose.
+- Define every technical term on first use.
+- Use more concrete examples and cross-references with quoted Hebrew.
+- Structure both the introduction and liturgical section with clear headings.
+- Make the through-line of the psalm—two competing ideas of “satisfaction”—very explicit.
 
 ---

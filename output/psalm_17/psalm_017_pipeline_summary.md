@@ -1,7 +1,7 @@
 # Pipeline Summary Report: Psalm 17
 
-**Generated**: 2025-12-08 23:26:57
-**Total Pipeline Duration**: 3029.3 seconds (50.5 minutes)
+**Generated**: 2025-12-10 14:44:48
+**Total Pipeline Duration**: 1224.5 seconds (20.4 minutes)
 
 ---
 
@@ -19,16 +19,16 @@
 | Step | Input Chars | Input Tokens (est) | Output Chars | Output Tokens (est) | Duration (s) |
 |------|-------------|-------------------|--------------|---------------------|--------------|
 | macro_analysis | 2,841 | 947 | 18,940 | 6,313 | 134.1 |
-| micro_analysis | 18,940 | 6,313 | 311,862 | 103,954 | 1458.2 |
-| → research_bundle | — | — | 285,957 | 95,319 | — |
-| synthesis | 296,644 | 98,881 | 66,972 | 22,324 | 954.6 |
-| master_editor | 331,364 | 110,454 | 53,131 | 17,710 | 490.4 |
+| micro_analysis | 18,940 | 6,313 | 277,702 | 92,567 | 970.1 |
+| → research_bundle | — | — | 248,744 | 82,914 | — |
+| synthesis | 360,425 | 120,141 | 85,394 | 28,464 | 725.9 |
+| master_editor | 415,713 | 138,571 | 54,184 | 18,061 | 255.9 |
 
 ---
 
 ## Research Requests
 
-### Lexicon Requests (31)
+### Lexicon Requests (15)
 
 | # | Hebrew Word | Reason |
 |---|-------------|--------|
@@ -47,24 +47,8 @@
 | 13 | קָדַם | Confront/meet in v. 13 - military confrontation nuance and usage in battle conte... |
 | 14 | צָפוּן | Treasure/hidden store in v. 14 - are they God's treasure or possessors of treasu... |
 | 15 | קִיץ | Awakening in v. 15 - literal morning, death, or spiritual awakening? Eschatologi... |
-| 16 | רִנָּה | Opening appeal term - need semantic range: cry, song, or both? Relation to תְּפִ... |
-| 17 | מֵישָׁרִים | Unusual plural form in v.2 - 'straight things' or abstract 'uprightness'? Semant... |
-| 18 | פָּקַד | Night visitation in v.3 - cultic/ritual connotations vs. general 'visit'? Temple... |
-| 19 | צָרַף | Metallurgical metaphor in v.3 - refining/testing semantic field and theological ... |
-| 20 | זָמַם | CRITICAL PUZZLE v.3 - does זַמֹּתִי mean 'my plan/purpose' or 'my wickedness'? E... |
-| 21 | פָּרִיץ | Archetypal wicked one in v.4 - semantic range: violent, ruthless, oppressor? Soc... |
-| 22 | תָּמַךְ | V.5 ambiguity - is this infinitive absolute (emphatic) or perfect? Agency questi... |
-| 23 | מַעְגָּלָה | Wheel-ruts/tracks in v.5 - technical term vs. general path? Semantic precision n... |
-| 24 | הִפְלָה | V.7 - does this mean 'make wonderful/extraordinary' or 'distinguish/separate'? C... |
-| 25 | חֶלְבָּמוֹ סָגַר | MAJOR PUZZLE v.10 - idiom for hardheartedness? Or textual corruption of לִבָּם? |
-| 26 | כָּסַף | V.12 'yearn/long to tear' - combines desire + violence. Semantic field of longin... |
-| 27 | קָדַם | V.13 military term - 'confront' or 'anticipate/precede'? Tactical meaning |
-| 28 | חֶלֶד | CRITICAL v.14 - 'fleeting/temporal' or 'world/spatial'? Affects entire interpret... |
-| 29 | צָפוּן | V.14 treasure/hidden things - whose treasure (God's or wicked's)? Positive or ne... |
-| 30 | הֵקִיץ | V.15 awakening - dawn, resurrection, spiritual enlightenment, or temple ritual e... |
-| 31 | תְּמוּנָה | V.15 climactic term - form/image/likeness of God. Connection to Num 12:8 Moses p... |
 
-### Concordance Searches (25)
+### Concordance Searches (13)
 
 | # | Query | Scope | Level | Purpose |
 |---|-------|-------|-------|---------|
@@ -81,20 +65,8 @@
 | 11 | תמונה | auto | consonantal | God's form/likeness - Moses-level vision contexts and prohib... |
 | 12 | ישבעו בנים | auto | consonantal | Satisfaction vocabulary in vv. 14-15 contrast - competing fu... |
 | 13 | חלק בחיים | auto | consonantal | Portion in life theology - Ps 16:5, 73:26 connections |
-| 14 | שמע צדק | auto | consonantal | Track unusual construction 'hear justice' - how common is צד... |
-| 15 | בלא שפתי מרמה | auto | consonantal | Lips of deceit formula - frequency and contexts of moral pro... |
-| 16 | מלפניך משפטי יצא | auto | consonantal | Judgment 'going forth' from divine presence - legal verdict ... |
-| 17 | אני בצדק אחזה פניך | auto | consonantal | CRITICAL - 'behold Your face' formula across Psalms. Temple ... |
-| 18 | בצל כנפיך | auto | consonantal | Shadow of wings formula - maternal bird vs. temple cherubim ... |
-| 19 | פקד לילה | auto | consonantal | Night visitation by God - temple incubation or general testi... |
-| 20 | כאישון בת עין | auto | consonantal | Apple/pupil of eye formula - preciousness metaphor usage pat... |
-| 21 | צרפתני | auto | consonantal | Divine testing/refining metaphor - metallurgical language fo... |
-| 22 | ארחות פריץ | auto | consonantal | Paths of violent/ruthless - archetypal wicked characterizati... |
-| 23 | ממתים מחלד חלקם בחיים | auto | consonantal | Portion in life - wicked prosperity formula. Contrast with d... |
-| 24 | אשבעה...תמונתך | auto | consonantal | Satisfied with divine form/image - climactic beatific vision... |
-| 25 | בהקיץ | auto | consonantal | Awakening contexts - dawn, resurrection, spiritual arousal, ... |
 
-### Figurative Language Searches (21)
+### Figurative Language Searches (9)
 
 | # | Verse | Vehicle Terms | Reason |
 |---|-------|---------------|--------|
@@ -107,20 +79,8 @@
 | 7 | None | refine, refine, refine, smelt | Refining/smelting metaphor for divine testing and ... |
 | 8 | None | fat, fat, fat, heart | Body-part metaphor - closed fat/hearts representin... |
 | 9 | None | face, face, face, form | Face/form vision metaphor - beatific vision and di... |
-| 10 | None | eye, eye, eye, eyes | Divine eyes as moral observer - anthropomorphic vi... |
-| 11 | None | refine, refine, refine, fire | Metallurgical refining as divine testing - fire pu... |
-| 12 | None | path, path, path, way | Feet/steps held firm in divine paths - walking/jou... |
-| 13 | None | pupil, pupil, pupil, eye | Pupil/apple of eye - preciousness and vulnerabilit... |
-| 14 | None | wings, wings, wing, wings | Shadow of wings - protective shelter imagery (mate... |
-| 15 | None | surround, surround, surround, encircle | Spatial encirclement - military siege/entrapment m... |
-| 16 | None | hunt, hunt, hunt, eye | Enemy predatory eyes tracking prey - hunting gaze ... |
-| 17 | None | lion, lion, lion, young lion | Lion as apex predator - ultimate threat and violen... |
-| 18 | None | sword, sword, sword, weapon | Divine sword as weapon of judgment - military inte... |
-| 19 | None | belly, belly, belly, stomach | Belly filled with treasure - satisfaction through ... |
-| 20 | None | awaken, awaken, awaken, wake | Awakening to behold divine face - dawn/resurrectio... |
-| 21 | None | face, face, face, behold | Beholding God's face - beatific vision and theopha... |
 
-### Commentary Requests (30)
+### Commentary Requests (15)
 
 | # | Verse | Reason |
 |---|-------|--------|
@@ -139,21 +99,6 @@
 | 13 | 17:13 | Battle cry imperatives - traditional understanding of divine warrior i... |
 | 14 | 17:14 | CRITICAL interpretive crux - who is described (wicked or righteous)? C... |
 | 15 | 17:15 | Theological climax - classical interpretation of seeing God's form, Mo... |
-| 16 | 17:1 | Triple imperative opening - how do commentators understand the escalat... |
-| 17 | 17:2 | Divine eyes beholding uprightness - classical interpretation of God's ... |
-| 18 | 17:3 | Night visitation and triple testing - traditional understanding of tem... |
-| 19 | 17:4 | NOTORIOUSLY DIFFICULT SYNTAX - how do classical commentators parse thi... |
-| 20 | 17:5 | Steps held firm in divine tracks - traditional interpretation of divin... |
-| 21 | 17:6 | Confident assertion 'You will answer' - what grounds this assurance ac... |
-| 22 | 17:7 | Haphleh chasadecha formula - how do commentators interpret 'make wonde... |
-| 23 | 17:8 | Apple of eye and wing-shadow - classical understanding: maternal bird ... |
-| 24 | 17:9 | Puzzling word זוּ - how do traditional commentators handle this syntac... |
-| 25 | 17:10 | MAJOR PUZZLE 'their fat they closed' - do commentators emend to 'heart... |
-| 26 | 17:11 | Shift from singular to plural pronouns - how do commentators explain '... |
-| 27 | 17:12 | Lion simile climax - classical interpretation of shift to singular arc... |
-| 28 | 17:13 | Quadruple imperative mobilizing God - traditional understanding of div... |
-| 29 | 17:14 | EXTREMELY DIFFICULT VERSE - is this wicked prosperity (negative) or ri... |
-| 30 | 17:15 | THEOLOGICAL CRESCENDO - how do commentators handle claim to 'behold Go... |
 
 ---
 
@@ -161,7 +106,7 @@
 
 ### Lexicon Entries
 
-**Total entries returned**: 35
+**Total entries returned**: 27
 
 ### Concordance Results
 
@@ -180,39 +125,30 @@
 | תמונה | 9 |
 | ישבעו בנים | 1 |
 | חלק בחיים | 1 |
-| שמע צדק | 1 |
-| בלא שפתי מרמה | 1 |
-| מלפניך משפטי יצא | 1 |
-| אני בצדק אחזה פניך | 1 |
-| בצל כנפיך | 4 |
-| צרפתני | 10 |
-| ממתים מחלד חלקם בחיים | 1 |
-| אשבעה...תמונתך | 0 |
-| בהקיץ | 13 |
 
-**Total concordance results**: 90
+**Total concordance results**: 58
 
 ### Figurative Language Results
 
 | Query/Verse | Instances Found |
 |-------------|-----------------|
-| total_instances_used | 240 |
+| total_instances_used | 180 |
 
-**Total figurative instances**: 240
+**Total figurative instances**: 180
 
 ### Commentary Results
 
 | Commentator | Entries |
 |-------------|---------|
-| Ibn Ezra | 28 |
-| Malbim | 27 |
-| Meiri | 30 |
-| Metzudat David | 28 |
-| Radak | 30 |
-| Rashi | 28 |
-| Torah Temimah | 6 |
+| Ibn Ezra | 14 |
+| Malbim | 14 |
+| Meiri | 15 |
+| Metzudat David | 14 |
+| Radak | 15 |
+| Rashi | 14 |
+| Torah Temimah | 3 |
 
-**Total commentary entries**: 177
+**Total commentary entries**: 89
 
 ### Ugaritic & Ancient Near Eastern Parallels
 
@@ -236,28 +172,29 @@
 10. What is the relationship between Psalm 17 and Psalm 16 (which also emphasizes God as 'portion' and presence over material goods) and Psalm 73 (which resolves theodicy through sanctuary vision)? Are these a theological cluster?
 11. How does the 'apple of the eye' metaphor (אישון בת־עין, v. 8) function across biblical literature (Deut 32:10, Prov 7:2, Zech 2:8), and what is the etymology of this peculiar phrase?
 
-### MicroAnalyst Interesting Questions (12)
+### MicroAnalyst Interesting Questions (13)
 
-1. What is the precise meaning and function of the puzzling phrase 'חֶלְבָּמוֹ סָּגְרוּ' (their fat they closed, v.10) - is this idiomatic for hardheartedness, or should it be emended to 'their heart'?
-2. How does the 'awakening' (בְּהָקִיץ) in v.15 relate to the night visitation (פָּקַדְתָּ לַּיְלָה) in v.3 - does this frame indicate actual temple incubation ritual where suppliants slept in sanctuary?
-3. Why does the psalmist claim to 'behold God's face' (אֶחֱזֶה פָנֶיךָ) in v.15 given the theological danger and prohibition of seeing God's face in Exodus 33:20?
-4. What is the syntactic and theological function of the notoriously difficult verse 14 - does it describe wicked prosperity (setting up v.15 contrast) or petition for righteous provision?
-5. How does תְּמוּנָה (form/image) in v.15 relate to Moses's unique privilege of seeing God's תְּמוּנָה (Num 12:8) and the image of God (צֶלֶם) in Genesis 1:26?
-6. Why does the text shift between singular and plural enemy references, particularly the move to singular 'lion' in v.12 after plural 'they' in vv.9-11?
-7. What is the meaning of the rare/puzzling word זוּ in v.9 ('רְשָׁעִים זוּ שַׁדּוּנִי') - demonstrative, relative, or textual corruption?
-8. How does the phrase 'בְּצֵל כְּנָפֶיךָ' (shadow of Your wings, v.8) function - as maternal bird imagery, temple cherubim metaphor, or deliberate dual valence?
-9. What does חֶלֶד mean in v.14 ('מֵחֶלֶד') - 'fleeting' (temporal), 'world' (spatial), or something else? How does this affect the wicked vs. righteous contrast?
-10. Why does the psalmist use such extraordinarily strong righteousness claims (vv.3-5) - is this hyperbole, ritual language for temple entrance, or sincere moral confidence?
-11. How does Psalm 17 relate intertextually to Psalms 16 and 73, which also contrast earthly prosperity with divine presence as ultimate good?
-12. What is the significance of the triple imperative opening (שִׁמְעָה, הַקְשִׁיבָה, הַאֲזִינָה in v.1) and the quadruple imperative in v.13 (קוּמָה, קַדְּמָה, הַכְרִיעֵהוּ, פַּלְּטָה)?
+1. Why does the psalmist use the unusual construction 'hear righteousness/justice' (שִׁמְעָה צֶדֶק) rather than 'hear my righteous cause' - is צֶדֶק personified or functioning as object of hearing?
+2. What is the precise cultic-theological significance of 'night visitation' (פָּקַדְתָּ לַּיְלָה, v. 3) - does this indicate an actual temple incubation practice where suppliants slept in sanctuary awaiting divine revelation?
+3. How should the notoriously difficult verse 4 be parsed syntactically - does 'I have kept paths of the violent' mean observation or avoidance, and why is this verse so grammatically ambiguous?
+4. What accounts for the extraordinary double metaphor in v. 8 (pupil of eye AND shadow of wings) - are these complementary protective images, or do they represent different aspects of divine care (individual vs. communal, micro vs. macro)?
+5. Is the phrase 'their fat they have closed' (חֶלְבָּמוֹ סָּגְרוּ, v. 10) a Hebrew idiom for hard-heartedness, or does it relate to prosperity/satiety as moral failing?
+6. Why does the psalm shift from plural enemies (vv. 9-11) to singular enemy in the lion metaphor (v. 12) - is this poetic variation, focusing rhetoric on archetypal threat, or indicating a primary antagonist?
+7. What is the meaning of the obscure phrase 'from men of חֶלֶד' (v. 14) - is חֶלֶד temporal (fleeting/transient), spatial (world), or qualitative (perishing/mortal)?
+8. WHO is being described in v. 14 - is this the wicked's earthly prosperity (setting up contrast) or petition for provision of 'your treasured ones' - and how does the answer affect the psalm's theology?
+9. How can the psalmist claim to behold God's תְּמוּנָה (form/likeness, v. 15) when this word is used only for Moses's unique vision (Num 12:8) and Exodus 33:20 says no one can see God's face and live?
+10. What is the referent of 'awakening' (בְּהָקִיץ, v. 15) - literal morning after temple night vigil, metaphorical spiritual awakening, or proto-resurrection hope (cf. Dan 12:2)?
+11. How does the 'satisfaction' vocabulary (שׂבע) function contrastively between v. 14 (they are satisfied with earthly things) and v. 15 (I will be satisfied with God's form) - is this the theological heart of the psalm's theodicy answer?
+12. Does the 'shadow of wings' (צֵל כְּנָפֶיךָ, v. 8) refer to protective bird imagery, temple cherubim overshadowing the ark, or a deliberate fusion of natural and cultic metaphors?
+13. Why does the LXX consistently diverge from MT in interpretive choices (especially vv. 4, 14) - do these variations reveal ancient exegetical struggles with the Hebrew text or represent distinct theological traditions?
 
 ---
 
 ## Token Usage Summary
 
-**Total Input Tokens (estimated)**: 216,595
-**Total Output Tokens (estimated)**: 150,301
-**Total Tokens (estimated)**: 366,896
+**Total Input Tokens (estimated)**: 265,972
+**Total Output Tokens (estimated)**: 145,405
+**Total Tokens (estimated)**: 411,377
 
 *Note: Token estimates are approximate (character count / 3). Actual API usage may vary.*
 
@@ -265,4 +202,4 @@
 
 
 *Report generated by PipelineSummaryTracker*
-*Psalm 17 - 2025-12-08 23:26:57*
+*Psalm 17 - 2025-12-10 14:44:48*

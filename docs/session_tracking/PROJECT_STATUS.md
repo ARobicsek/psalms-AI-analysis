@@ -1,19 +1,34 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-09 (Session 185)
+**Last Updated**: 2025-12-10 (Session 204)
 
-## Current Focus: Thematic Parallels Implementation
+## Current Focus: Psalm Commentary Production
 
-### Phase: Thematic Parallels - Corpus Preparation & Analysis
-Working on implementing RAG-based thematic search for finding biblical parallels to Psalms.
+### Phase: Pipeline Production - Complete Psalms 1-14, 8, 15-21
+Continuing with verse-by-verse commentary generation using the established pipeline.
 
-**Status**: Phase 1 Complete, Phase 2 Pending
-- Fixed Masoretic marker chunking bug
-- Analyzed three chunking strategies
-- User decision deferred to next session
+## Thematic Parallels Feature (Sessions 183-203) - DISCONTINUED
+
+### Summary (2025-12-09 to 2025-12-10):
+Implemented and evaluated a RAG-based thematic search system for finding biblical parallels to Psalms.
+
+**Work Completed**:
+- Built Hebrew-only corpus with 23,089 chunks using 5-verse overlapping windows
+- Created vector embeddings using OpenAI text-embedding-3-large
+- Implemented ThematicParallelsLibrarian for semantic search
+- Integrated into ResearchAssembler pipeline
+- Tested on multiple Psalms (23, 8, 121, 145)
+
+**Evaluation Results**:
+- System functioned correctly with high-quality semantic matches
+- Similarity scores 0.53-0.62 for meaningful thematic connections
+- However, parallels were too generic for scholarly commentary
+- Did not provide value to synthesis writer and master editor
+
+**Decision**: Feature discontinued - artifacts preserved in `docs/archive/discontinued_features/`
 
 ### Next Phase
-Implement embedding service, vector store, and thematic librarian
+Continue with production commentary pipeline
 
 **Root Cause**:
 - LLM extracts **conceptual phrases** (base/dictionary forms) instead of **exact forms**
@@ -65,6 +80,27 @@ Implement embedding service, vector store, and thematic librarian
 - [x] Word document generation
 
 ## Recent Accomplishments
+
+### Session 204 (2025-12-10): Thematic Parallels Feature Closure
+
+#### Completed:
+1. **Evaluated and Discontinued Thematic Parallels Feature**:
+   - RAG-based semantic search did not provide useful texts for synthesis writer and master editor
+   - Parallels were too generic and did not enhance scholarly commentary
+   - Decision made after comprehensive testing (Sessions 183-203)
+
+2. **Code Cleanup**:
+   - Removed all thematic_parallels code from research_assembler.py
+   - Deleted src/thematic/ directory and all thematic test scripts
+   - Archived documentation to docs/archive/discontinued_features/
+   - Preserved evaluation artifacts: generate_all_requested_reports.py and psalm_reports_summary.md
+
+3. **Updated Documentation**:
+   - Marked feature as discontinued with closure summary
+   - Updated PROJECT_STATUS.md with thematic parallels sessions summary
+   - Total cost incurred: $0.45 for evaluation
+
+---
 
 ### Session 182 (2025-12-08): Lexical Insight Prompt Fix
 
