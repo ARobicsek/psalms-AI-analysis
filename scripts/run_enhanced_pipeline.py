@@ -70,9 +70,13 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         'deep_research_chars': 0
     }
 
-    # Count lexicon entries (## Hebrew Lexicon / BDB entries)
-    lexicon_matches = re.findall(r'### \*\*([^*]+)\*\* \(', markdown_content)
-    stats['lexicon_count'] = len(lexicon_matches)
+    # Count lexicon entries (### headers under ## Hebrew Lexicon section)
+    lexicon_section = re.search(r'## Hebrew Lexicon Entries.*?(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
+    if lexicon_section:
+        lexicon_matches = re.findall(r'^### [^\n]+$', lexicon_section.group(0), re.MULTILINE)
+        stats['lexicon_count'] = len(lexicon_matches)
+    else:
+        stats['lexicon_count'] = 0
 
     # Count concordance queries (### Query: or ### Phrase:)
     concordance_matches = re.findall(r'### (?:Query|Phrase):', markdown_content)
@@ -346,6 +350,15 @@ def run_enhanced_pipeline(
 
     # Load macro analysis
     macro_analysis = load_macro_analysis(str(macro_file))
+
+    # If we skipped macro, still need to track verse count for the methods section
+    if skip_macro:
+        from src.data_sources.tanakh_database import TanakhDatabase
+        db = TanakhDatabase(Path(db_path))
+        psalm = db.get_psalm(psalm_number)
+        if psalm:
+            tracker.track_verse_count(len(psalm.verses))
+            logger.info(f"Tracked verse count from database: {len(psalm.verses)} verses")
 
     # =====================================================================
     # STEP 2: Micro Analysis (Enhanced Figurative Search)

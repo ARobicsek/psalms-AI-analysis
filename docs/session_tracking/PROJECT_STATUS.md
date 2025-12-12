@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-11 (Session 213)
+**Last Updated**: 2025-12-11 (Session 214)
 
 ## Current Focus: Psalm Commentary Production
 
@@ -56,6 +56,34 @@ The main document generator (`src/utils/document_generator.py`) was using an out
 
 #### Files Modified:
 - `src/utils/document_generator.py` - Updated `_parse_verse_commentary()` method with working regex
+
+---
+
+## Pipeline Stats Tracking Fix (Session 214) ✅
+
+### Problem Discovered:
+When running the pipeline with `--skip-macro` and `--skip-micro` flags (to only regenerate later steps), the final DOCX "Research & Data Inputs" section showed incorrect zeros:
+- Psalm Verses Analyzed: 0
+- LXX (Septuagint) Texts Reviewed: 0
+- Phonetic Transcriptions Generated: 0
+- Lexicon Entries (BDB/Klein) Reviewed: 0
+
+### Root Cause:
+The `psalm_NNN_pipeline_stats.json` file wasn't being populated when steps were skipped, even though the data existed in already-generated files. Two specific issues:
+1. **Verse count not tracked** when skipping macro analysis
+2. **Lexicon count regex broken** - looking for wrong format in markdown
+
+### Solution Implemented:
+1. **Fixed Lexicon Count Parsing**: Updated regex in `_parse_research_stats_from_markdown()` to match actual format (`### עַנְוָה`) instead of wrong format (`### **word** (...)`)
+2. **Added Verse Count Tracking**: Query database directly for verse count when `--skip-macro` is used
+
+### Result:
+- All stats now correctly populated when skipping steps
+- Stats JSON remains complete and accurate regardless of which pipeline steps run
+- DOCX files can be regenerated anytime using existing stats JSON without re-running full pipeline
+
+### Files Modified:
+- `scripts/run_enhanced_pipeline.py` - Fixed lexicon regex (lines 73-79) and added verse count tracking (lines 354-361)
 
 ---
 
@@ -133,6 +161,30 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
 ---
 
 ## Recent Accomplishments
+
+### Session 214 (2025-12-11): Pipeline Stats Tracking Fix
+
+#### Problem Discovered:
+When running the pipeline with `--skip-macro` and `--skip-micro` flags, the DOCX methods section showed zeros for verse count, LXX texts, phonetic transcriptions, and lexicon entries.
+
+#### Root Cause:
+The `psalm_NNN_pipeline_stats.json` file wasn't being populated when steps were skipped. Two issues:
+1. Verse count not tracked when skipping macro
+2. Lexicon count regex looking for wrong markdown format
+
+#### Solution Implemented:
+1. **Fixed Lexicon Count Parsing**: Updated regex to match actual format (`### עַנְוָה`)
+2. **Added Verse Count Tracking**: Query database directly when `--skip-macro` used
+
+#### Result:
+- All stats correctly populated when skipping steps
+- Stats JSON always complete regardless of which steps run
+- DOCX files can be regenerated using existing stats JSON
+
+#### Files Modified:
+- `scripts/run_enhanced_pipeline.py` - Fixed lexicon regex and added verse count tracking
+
+---
 
 ### Session 213 (2025-12-11): Main DOCX Verse-by-Verse Commentary Fix
 
