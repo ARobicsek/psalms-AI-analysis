@@ -262,32 +262,37 @@
         "reason": "Inclusio closure with variation - how commentators understand circular structure and omitted heavens"
       }
     ],
-    "lexicon_entries_count": 23,
+    "lexicon_entries_count": 0,
     "concordance_results": {
-      "יהוה אדנינו": 3,
-      "שם יהוה": 12,
-      "עוללים": 3,
-      "אצבעות אלהים": 0,
-      "מעט מאלהים": 1,
-      "זכר פקד": 0,
-      "תחת רגלים": 0
+      "total_queries": 11
     },
     "figurative_results": {
-      "total_instances_used": 279
+      "total_instances_used": 90
     },
     "commentary_counts": {
       "Rashi": 5,
       "Ibn Ezra": 10,
       "Radak": 10,
-      "Malbim": 4,
-      "Meiri": 9,
       "Metzudat David": 8,
-      "Torah Temimah": 5
+      "Malbim": 4,
+      "Meiri": 9
     },
-    "sacks_references_count": 9,
+    "sacks_references_count": 8,
+    "related_psalms_count": 4,
+    "related_psalms_list": [
+      84,
+      144,
+      89,
+      91
+    ],
     "ugaritic_parallels": [],
-    "research_bundle_chars": 208792,
-    "research_bundle_tokens": 69597
+    "research_bundle_chars": 273277,
+    "research_bundle_tokens": 91092,
+    "deep_research_available": false,
+    "deep_research_included": false,
+    "deep_research_removed_for_space": false,
+    "deep_research_chars": 0,
+    "sections_trimmed": []
   },
   "analysis": {
     "macro_questions": [
@@ -313,8 +318,8 @@
     "verse_count": 10
   },
   "model_usage": {
-    "macro_analysis": "claude-sonnet-4-20250514",
-    "micro_analysis": "claude-sonnet-4-20250514",
+    "macro_analysis": "claude-3-5-sonnet-20241022",
+    "micro_analysis": "claude-3-5-sonnet-20241022",
     "synthesis": "claude-sonnet-4-20250514",
     "master_editor": "gpt-5"
   }

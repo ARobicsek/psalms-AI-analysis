@@ -773,19 +773,24 @@ class DocumentGenerator:
         english_run.italic = True
 
     def _parse_verse_commentary(self, content: str, psalm_text_data: Dict[int, Dict[str, str]]) -> List[Dict[str, str]]:
-        """Parses the verse-by-verse commentary file."""
+        """Parses the verse-by-verse commentary file.
+
+        Handles both single verses (Verse 1) and verse ranges (Verses 21-25).
+        For ranges, returns a single entry with 'number' as the range string (e.g., '21-25')
+        and 'verse_range' as a tuple (start, end).
+        """
         verses = []
-        # Try multiple formats: "**Verse X**" (main format), "### Verse X" (college format), "Verse X" (fallback)
-        # First try the expected bold format
-        verse_blocks = re.split(r'(?=^\*\*Verse \d+\*\*\s*\n)', content, flags=re.MULTILINE)
+        # Try multiple formats: "**Verse(s) X(-Y)**" (main format), "### Verse(s) X(-Y)" (college format), "Verse(s) X(-Y)" (fallback)
+        # First try the expected bold format - matches both single and range verses
+        verse_blocks = re.split(r'(?=^\*\*Verses? [\d\-–]+.*?\*\*\s*\n)', content, flags=re.MULTILINE)
 
         # If no verses found with bold format, try heading format (college uses this)
         if len(verse_blocks) <= 1:
-            verse_blocks = re.split(r'(?=^#{2,} Verse \d+\s*\n)', content, flags=re.MULTILINE)
+            verse_blocks = re.split(r'(?=^#{2,} Verses? [\d\-–]+)', content, flags=re.MULTILINE)
 
         # If still no verses found, try plain format without any markdown
         if len(verse_blocks) <= 1:
-            verse_blocks = re.split(r'(?=^Verse \d+\s*\n)', content, flags=re.MULTILINE)
+            verse_blocks = re.split(r'(?=^Verses? [\d\-–]+)', content, flags=re.MULTILINE)
 
         for block in verse_blocks:
             block = block.strip()
@@ -794,29 +799,51 @@ class DocumentGenerator:
 
             lines = block.strip().split('\n', 1)  # Split only on the first newline
 
-            # Try all formats for verse number matching
-            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])  # **Verse X**
+            # Try all formats for verse number matching (single or range)
+            # Matches: **Verse 1**, **Verses 21-25**, **Verses 21–25 (description)**, etc.
+            verse_num_match = re.match(r'^\*\*Verses? ([\d]+)(?:[\-–]([\d]+))?\s*.*?\*\*', lines[0])  # Bold format
             if not verse_num_match:
-                verse_num_match = re.match(r'^#{2,} Verse (\d+)\s*', lines[0])  # ### Verse X, ## Verse X, #### Verse X, etc.
+                # Heading format: ### Verse 1, ### Verses 21-25 (description), etc.
+                verse_num_match = re.match(r'^#{2,} Verses? ([\d]+)(?:[\-–]([\d]+))?\s*', lines[0])
             if not verse_num_match:
-                verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])  # Verse X
+                # Plain format: Verse 1, Verses 21-25, etc.
+                verse_num_match = re.match(r'^Verses? ([\d]+)(?:[\-–]([\d]+))?\s*', lines[0])
 
             if not verse_num_match:
                 continue
 
-            verse_num = verse_num_match.group(1)
+            start_verse = verse_num_match.group(1)
+            end_verse = verse_num_match.group(2)  # None if single verse
+
+            if end_verse:
+                # It's a range
+                verse_num = f"{start_verse}-{end_verse}"
+                verse_range = (int(start_verse), int(end_verse))
+            else:
+                # Single verse
+                verse_num = start_verse
+                verse_range = None
+
             commentary_text = '\n'.join(lines[1:]).strip()
 
             # Get Hebrew/English text from the database data
-            verse_info = psalm_text_data.get(int(verse_num), {})
+            # For ranges, we'll get the first verse's text as representative
+            verse_info = psalm_text_data.get(int(start_verse), {})
             hebrew_text = verse_info.get('hebrew', '[Hebrew text not found]')
             english_text = verse_info.get('english', '[English text not found]')
-            verses.append({
+
+            verse_entry = {
                 "number": verse_num,
                 "hebrew": hebrew_text,
                 "english": english_text,
                 "commentary": commentary_text
-            })
+            }
+
+            if verse_range:
+                verse_entry["verse_range"] = verse_range
+
+            verses.append(verse_entry)
+
         return verses
 
     def _format_psalm_text(self, psalm_num: int, psalm_text_data: Dict[int, Dict[str, str]]):

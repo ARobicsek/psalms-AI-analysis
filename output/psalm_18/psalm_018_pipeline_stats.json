@@ -1,17 +1,47 @@
 {
   "psalm_number": 18,
-  "pipeline_start": "2025-12-11T14:41:41.712946",
-  "pipeline_end": null,
-  "steps": {},
+  "pipeline_start": "2025-12-11T20:02:55.613730",
+  "pipeline_end": "2025-12-11T20:34:49.885501",
+  "steps": {
+    "synthesis": {
+      "input_char_count": 517286,
+      "input_token_estimate": 172428,
+      "output_char_count": 170319,
+      "output_token_estimate": 56773,
+      "duration_seconds": 1360.324304819107,
+      "completion_date": null,
+      "timestamp": "2025-12-11T18:43:46.507938"
+    },
+    "master_editor": {
+      "input_char_count": 624453,
+      "input_token_estimate": 208151,
+      "output_char_count": 44895,
+      "output_token_estimate": 14965,
+      "duration_seconds": 313.89769744873047,
+      "completion_date": "2025-12-11T20:34:49.885501",
+      "timestamp": "2025-12-11T19:10:26.973993"
+    }
+  },
   "research": {
     "lexicon_requests": [],
     "concordance_requests": [],
     "figurative_requests": [],
     "commentary_requests": [],
     "lexicon_entries_count": 0,
-    "concordance_results": {},
-    "figurative_results": {},
-    "commentary_counts": {},
+    "concordance_results": {
+      "total_queries": 20
+    },
+    "figurative_results": {
+      "total_instances_used": 366
+    },
+    "commentary_counts": {
+      "Rashi": 36,
+      "Ibn Ezra": 50,
+      "Radak": 49,
+      "Metzudat David": 46,
+      "Malbim": 29,
+      "Meiri": 47
+    },
     "sacks_references_count": 0,
     "related_psalms_count": 4,
     "related_psalms_list": [
@@ -21,12 +51,17 @@
       7
     ],
     "ugaritic_parallels": [],
-    "research_bundle_chars": 0,
-    "research_bundle_tokens": 0,
-    "deep_research_available": false,
-    "deep_research_included": false,
+    "research_bundle_chars": 425658,
+    "research_bundle_tokens": 141886,
+    "deep_research_available": true,
+    "deep_research_included": true,
     "deep_research_removed_for_space": false,
-    "deep_research_chars": 0
+    "deep_research_chars": 25801,
+    "sections_trimmed": [
+      "Related Psalms",
+      "Figurative Language (trimmed to 75%)",
+      "Figurative Language (trimmed to 50%)"
+    ]
   },
   "analysis": {
     "macro_questions": [],
@@ -35,6 +70,8 @@
   },
   "model_usage": {
     "macro_analysis": "claude-3-5-sonnet-20241022",
-    "micro_analysis": "claude-3-5-sonnet-20241022"
+    "micro_analysis": "claude-3-5-sonnet-20241022",
+    "synthesis": "claude-sonnet-4-5",
+    "master_editor": "gpt-5.1"
   }
 }

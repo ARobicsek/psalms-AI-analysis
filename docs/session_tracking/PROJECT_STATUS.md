@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-11 (Session 212)
+**Last Updated**: 2025-12-11 (Session 213)
 
 ## Current Focus: Psalm Commentary Production
 
@@ -27,6 +27,35 @@ For large psalms where the research bundle exceeds Claude's 200K token limit eve
 5. **Switch to Gemini 2.5 Pro** (if still over limit)
 
 **Never trimmed**: Lexicon, Commentaries, Liturgical, Sacks, Scholarly Context, Concordance, Deep Web Research
+
+---
+
+## Main DOCX Verse-by-Verse Commentary Fix (Session 213) ✅
+
+#### Problem Discovered:
+The main commentary document (`psalm_NNN_commentary.docx`) was missing verse-by-verse commentary, even though the markdown file existed and the combined document worked correctly.
+
+#### Root Cause:
+The main document generator (`src/utils/document_generator.py`) was using an outdated regex pattern that only matched `**Verse X**` (single verse) format. However, the actual verse files use `**Verses X-Y**` (verse ranges) with en dashes (e.g., `**Verses 1–3**`).
+
+#### Solution Implemented:
+1. **Copied Working Regex**: Updated `_parse_verse_commentary()` in `document_generator.py` with the working pattern from `combined_document_generator.py`
+
+2. **Enhanced Pattern Matching**: The new regex handles all formats:
+   - Single verses: `**Verse 1**`
+   - Verse ranges: `**Verses 1-3**` or `**Verses 21–25**` (hyphen and en dash)
+   - Optional descriptions after verse ranges
+   - Heading formats: `### Verse X`, `### Verses X-Y`
+
+3. **Range Support**: Added proper handling for verse ranges with start/end tracking
+
+#### Result:
+- Main DOCX files now correctly include verse-by-verse commentary
+- 39 verse headings successfully parsed and included in Psalm 18's main commentary document
+- Both main and combined DOCX files now have complete verse-by-verse content
+
+#### Files Modified:
+- `src/utils/document_generator.py` - Updated `_parse_verse_commentary()` method with working regex
 
 ---
 
@@ -104,6 +133,29 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
 ---
 
 ## Recent Accomplishments
+
+### Session 213 (2025-12-11): Main DOCX Verse-by-Verse Commentary Fix
+
+#### Problem Discovered:
+The main commentary document (`psalm_NNN_commentary.docx`) was missing verse-by-verse commentary, even though the markdown file existed and the combined document worked correctly.
+
+#### Root Cause:
+The main document generator was using an outdated regex pattern that only matched `**Verse X**` format, but actual verse files use `**Verses X-Y**` format with en dashes.
+
+#### Solution Implemented:
+1. **Copied Working Regex**: Updated `_parse_verse_commentary()` in `document_generator.py` with the working pattern from `combined_document_generator.py`
+2. **Enhanced Pattern Matching**: New regex handles single verses, ranges (hyphen and en dash), and optional descriptions
+3. **Range Support**: Added proper handling for verse ranges with start/end tracking
+
+#### Result:
+- Main DOCX files now correctly include verse-by-verse commentary
+- 39 verse headings successfully parsed and included in Psalm 18's main commentary document
+- Both main and combined DOCX files now have complete verse-by-verse content
+
+#### Files Modified:
+- `src/utils/document_generator.py` - Updated `_parse_verse_commentary()` method
+
+---
 
 ### Session 212 (2025-12-11): Psalm 18 Pipeline Fixes + Strategic Verse Grouping
 

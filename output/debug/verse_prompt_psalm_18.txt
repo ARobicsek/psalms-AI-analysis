@@ -1,11 +1,43 @@
-You are a biblical scholar writing an **introduction essay** for Psalm 18.
+You are a biblical scholar writing **verse-by-verse commentary** for Psalm 18.
 
 You have been provided with:
-1. **MacroAnalysis** - A macro thesis about the psalm's structure, genre, and poetic devices
-2. **MicroAnalysis** - Detailed verse-by-verse discoveries
-3. **ResearchBundle** - Deep lexical, concordance, and figurative language research
+1. **IntroductionEssay** - The introductory essay already written for this psalm
+2. **MacroAnalysis** - Overall thesis and structure
+3. **MicroAnalysis** - Verse-by-verse discoveries
+4. **ResearchBundle** - Lexical, concordance, and research materials
 
 ## YOUR INPUTS
+
+### INTRODUCTION ESSAY (already written for this psalm)
+# Introduction Essay
+
+Psalm 18 stands apart in the Psalter through a feature that immediately arrests scholarly attention: it exists in duplicate. The identical poem appears again in 2 Samuel 22, positioned as David's victory hymn after years of conflict. This textual doubling is not mere repetition but a window into the psalm's transmission history. Scholars analyzing the approximately 129 variants between the two Masoretic versions have identified distinct editorial channels—one liturgical and regulated (the Psalter), the other narrative and perhaps more archival (Samuel). The version in 2 Samuel 22 generally preserves "rougher," more archaic readings, while Psalm 18 exhibits signs of liturgical smoothing intended for corporate worship. The most telling variant occurs in the closing doxology (v. 50/51), where 2 Samuel reads *migdol* (מִגְדּוֹל, "Tower of salvation") and Psalm 18 reads *magdil* (מַגְדִּיל, "He who magnifies salvation"). This variation has transcended academic debate to shape Jewish liturgical practice: in the Grace After Meals, *Migdol* is recited on days when the Musaf offering was brought—Shabbat and Festivals—while *Magdil* is recited on weekdays, suggesting the *Migdol* reading (Tower) may be original, with *Magdil* (Magnifies) representing a later dynamic verbal interpretation common in praise poetry.
+
+The orthographic analysis pioneered by Frank Moore Cross and David Noel Freedman anchors the poem's core in the tenth century BCE. The defective spelling preserved in 2 Samuel 22—with fewer vowel letters (*matres lectionis*)—resembles the orthography of early Hebrew inscriptions like the Gezer Calendar. The survival of archaic pronominal suffixes (e.g., *-h* for "his" instead of *-o*) and specific verbal forms that predate standard Biblical Hebrew strongly counter arguments for late post-exilic composition. This textual archaeology matters because it grounds the psalm in the height of the United Monarchy, when Israel was actively negotiating its theological identity against Canaanite religious culture.
+
+The psalm's genre is complex, combining elements of royal thanksgiving, victory hymn, and theophanic display. But its most striking feature is what I call "double narration"—the same deliverance is recounted twice using radically different rhetorical modes. The first narrative (vv. 4–31) is mythic and vertical: God descends from the transcendent realm in cosmic upheaval. The earth quakes, smoke pours from divine nostrils, fire devours from God's mouth, cherubim serve as divine transport. This is not reportage but poetry that appropriates Ancient Near Eastern storm-god imagery. The second narrative (vv. 32–50) is martial and horizontal: the king, empowered by God, actively pursues enemies. "I pursued my enemies and overtook them" (אֶרְדּוֹף אוֹיְבַי וְאַשִּׂיגֵם, v. 38). "I struck them down, and they could rise no more" (אֶמְחָצֵם וְלֹא־יֻכְלוּ קוּם, v. 39). The shift from passive recipient to active agent is complete.
+
+This double structure creates theological synthesis: victory is entirely God's work (Panel I), yet it is enacted through human agency (Panel II). The pivot between these panels is the righteousness section (vv. 20–27), where the king claims, "The LORD rewarded me according to my righteousness" (יִגְמְלֵנִי ה׳ כְּצִדְקִי, v. 21). This assertion has troubled readers from the Rabbis to modern scholars. How does David's claim of clean hands (כְּבֹר יָדַי, v. 21) square with his documented sins? The answer lies in recognizing royal ideology: the king speaks not as private individual but as covenant mediator. His righteousness is relational—keeping faith with the covenant statutes (vv. 21–23), not claiming moral perfection. The Midrash asks why Saul is separated from "all his enemies" in the superscription (v. 1) and answers: Saul was unique, not a foreign pagan but "the Anointed of the Lord." David's victory over Saul was one of restraint and survival, not conquest—a righteousness of not killing the Lord's anointed when given opportunity.
+
+The theophanic center (vv. 8–16) demands attention for its polemical appropriation of Canaanite imagery. In the Ugaritic Baal Cycle, Baal holds the epithet *rkb ʿrpt* ("Rider on the Clouds"). He wields thunder, lightning, and rain to defeat cosmic enemies Yam (Sea) and Mot (Death). Psalm 18:10–11 co-opts this imagery directly: the LORD "rode upon a cherub and flew; He glided on the wings of the wind" (וַיִּרְכַּב עַל־כְּרוּב וַיָּעֹף וַיֵּדֶא עַל־כַּנְפֵי־רוּחַ). The psalm's description of God's arsenal—"hailstones and coals of fire" (בָּרָד וְגַחֲלֵי־אֵשׁ, v. 13), arrows of lightning (v. 14)—mirrors the iconography of the Ancient Near Eastern storm god. But the poet demythologizes this conflict. For David, the "floods of Belial" (נַחֲלֵי בְלִיַּעַל, v. 5) and "snares of death" (מוֹקְשֵׁי מָוֶת, v. 6) are not literal cosmic deities but metaphors for historical enemies and political chaos. Belial—whether proper name or personification of chaos—becomes in this psalm a descriptor of overwhelming threat. The message is clear: it is the LORD, not Baal, who commands the storm; it is the LORD, not any other deity, who rides the cherubim.
+
+The lexical research illuminates several cruxes. The opening declaration, "I love You, O LORD, my strength" (אֶרְחָמְךָ ה׳ חִזְקִי, v. 2), is entirely absent from 2 Samuel 22, suggesting later addition to soften the martial tone. The verb *rḥm* in the Qal stem describing a human's love for God is a *hapax legomenon*. Usually appearing in the Piel and describing superior's love for inferior, its appearance here in the Qal is striking. Some scholars detect Aramaic influence; others argue it represents intense "womb-love" or "gut-love" (*rechem*, womb)—a desperate, visceral dependence on God fitting the context of deliverance from death.
+
+The "horn of salvation" (קֶרֶן־יִשְׁעִי, v. 3) combines animal/royal imagery. In Ancient Near Eastern iconography, horns symbolize power and kingship. When applied to God, the metaphor asserts divine strength as the source of royal deliverance. The concordance shows this precise phrase appearing only here and in 2 Samuel 22:3, but similar "horn" imagery for power appears throughout scripture (Deut 33:17, Ps 89:18, 92:11). The phrase entered Jewish liturgy as part of *Ein Keloheinu*, where it stands in a catena of verses affirming God's uniqueness: "For who is God save for the LORD? And who is a Rock except our God?" (כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי ה׳ וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ, v. 32).
+
+The most interpretively vexed phrase is "Your humility makes me great" (וְעַנְוַתְךָ תַרְבֵּנִי, v. 36). The term *ʿanwah* can mean humility, care, or condescension. Radak and classical commentators favor "condescension"—God stoops from transcendence to intervene for the king. Malbim offers psychological reading: different synonyms like *Tzur* (strong rock) and *Sela* (cleft rock) represent different states of trust. Modern translations often choose "care," emphasizing divine attention rather than divine self-lowering. The ambiguity is productive: the phrase holds together God's transcendence and immanence—the One who is high must bend low to save.
+
+The climax presents international submission: "Foreigners came cringing to me; they heard, and they obeyed me" (לְשֵׁמַע אֹזֶן יִשָּׁמְעוּ לִי בְּנֵי־נֵכָר יְכַחֲשׁוּ־לִי, v. 45). The verb *kḥš* is debated—does it mean "cringe," "lie," or "grow lean"? The context suggests submission through fear, but Ibn Ezra proposes they deny allegiance to former allies because of David. This international scope transcends the superscription's claim of deliverance from Saul, suggesting the psalm "telescopes" David's entire reign—or represents liturgical/eschatological expansion. The Haftarah tradition pairs this with the Song of the Sea (Exodus 15) on the Seventh Day of Passover, juxtaposing the two archetypal redemptions of Jewish history: deliverance from Egypt (national) and deliverance of David (royal/messianic).
+
+The final verse clinches the royal theology: "He who accords great victories to His king, keeps faith with His anointed, with David and his offspring forever" (מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם, v. 51). The term *mashiaḥ* (anointed) here refers to David and his dynasty, but the "forever" clause opened this text to messianic interpretation. Radak, in explicit anti-Christian polemic, insists *zera* (seed) implies plural biological descendants of the historical dynasty. Christian readers, from Luther to Calvin, saw the psalm as typological—David prefiguring Christ. Luther found in "the cords of death" (חֶבְלֵי־מָוֶת, v. 5) Christ's agony in Gethsemane, and in the "darkness" of theophany (v. 11) the *Deus Absconditus*, the Hidden God who works salvation *sub contrario*—under the appearance of opposites.
+
+What earned this psalm its canonical place? It synthesizes Israel's foundational theological claims: the storm god is Israel's covenant Lord; military victory flows from moral fidelity; the king is God's empowered agent yet derives all power from God; personal deliverance foreshadows national and cosmic redemption. The poem moves from individual crisis to cosmic theophany to international dominion to eternal dynasty—each level containing and transcending the previous. It is not merely David's song but the paradigmatic royal song, establishing how one king's deliverance becomes foundation for an everlasting kingdom. The liturgical insertion of the opening "I love You" (*erḥāmĕkā*) in the Psalter version shows how later tradition sought to universalize this martial victory hymn into personal devotion—a move that secured its place not just in royal ceremony but in the private prayer of every Jew who cries from distress and experiences deliverance.
+
+## Modern Jewish Liturgical Use
+
+Psalm 18 is not recited in its entirety as a fixed part of standard daily liturgy, but its verses and phrases have become deeply embedded in Jewish prayer across multiple traditions. The most prominent liturgical use occurs in the Grace After Meals (*Birkat HaMazon*), where verse 51—"He accords great victories to His king, keeps faith with His anointed, with David and his offspring forever" (מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם)—serves as the climactic conclusion to the *HaRachaman* supplications. This placement transforms the meal's end into a reaffirmation of Israel's eschatological hope, directly linking the messianic promise to daily sustenance. Remarkably, the *migdol/magdil* textual variant shapes ritual practice: the 2 Samuel reading *Migdol* ("Tower of") is recited on Shabbat and Festivals to enhance the celebratory tone, while the Psalm 18 reading *Magdil* ("He magnifies") is used on weekdays.
+
+Verse 32—"For who is God save for the LORD? And who is a Rock except our God?" (כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי ה׳ וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ)—appears in multiple liturgical contexts. In Ashkenazic and Sephardic traditions, it forms part of the scriptural prelude to *Ein Keloheinu*, creating a powerful chain of verses affirming monotheism. The Edot HaMizrach tradition incorporates verses 31–32 into the Torah service, proclaiming during the procession: "The way of God is perfect; the word of the LORD is pure; He is a shield for all who seek refuge in Him. For who is God save for the LORD?" (הָאֵל תָּמִים דַּרְכּוֹ אִמְרַת־ה׳ צְרוּפָה מָגֵן הוּא לְכֹל הַחֹסִים בּוֹ כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי ה׳). This usage reframes the Torah reading as an encounter with the same divine perfection and protection celebrated in David's victory hymn, transforming royal thanksgiving into communal covenant affirmation. Individual phrases also appear in specialized contexts: verse 46 ("The LORD lives, and blessed be my Rock") occurs in various *Pesukei d'Zimra* traditions, while verses from the theophany section are recited in the mystical *Perek Shirah* as the "songs" of the Clouds of Glory and the Sword. The liturgical reception reveals how Jewish tradition read this royal psalm through increasingly universal and messianic lenses, making David's personal deliverance a template for national redemption.
 
 ### MACRO THESIS
 **Thesis**: Psalm 18 functions as a theological charter for Davidic kingship, integrating cosmic theophany, personal righteousness, and military triumph into a unified narrative of divinely legitimated royal power. The psalm's dramatic movement from individual crisis through spectacular divine intervention to international dominion establishes the paradigm by which one king's deliverance becomes the foundation for an eternal dynasty. The tension between divine agency (the cosmic warrior theophany of vv. 8-16) and human merit (the righteousness claims of vv. 21-25 and military prowess of vv. 38-43) is not contradiction but royal ideology: the anointed king is simultaneously God's empowered agent and righteous recipient of divine favor.
@@ -2885,6 +2917,8 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 
 
 
+
+
 ## Figurative Language Instances
 
 ### Query 1
@@ -2938,64 +2972,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Figurative phrase*: A man’s pride will humiliate him, but a humble man will obtain honor (lit. 'the lowly of spirit will support/have support in honor')  
 
 **Full verse (Hebrew)**: גַּאֲוַ֣ת אָ֭דָם תַּשְׁפִּילֶ֑נּוּ וּשְׁפַל־ר֝֗וּחַ יִתְמֹ֥ךְ כָּבֽוֹד  
-**Full verse (English)**: A man’s pride will humiliate him, But a humble man will obtain honor.  
-
-*Hebrew phrase*: גַּאֲוַת אָדָם תַּשְׁפִּילֶנּוּ וּשְׁפַל־רוּחַ יִתְמֹךְ כָּבוֹד  
-*Explanation*: Social elevation and disgrace are portrayed through spatial imagery of being brought low or supported in a high position, applying vertical metaphors to inner attitudes of pride and humility....  
-*Target*: the social consequences of pride vs. humility → status and reputation → moral-communal life  
-*Vehicle*: being brought down vs. being supported/exalted in a high place of honor → vertical movement and support → spatial height and stability  
-*Ground*: pride leads to a fall from an elevated position, while humility leads to being upheld in a state of honor → height as status, fall as disgrace → reversal of fortune  
-*Confidence*: 0.94  
-
-**Full verse (Hebrew)**: כִּ֤י בִ֣י חָ֭שַׁק וַאֲפַלְּטֵ֑הוּ אֲ֝שַׂגְּבֵ֗הוּ כִּֽי־יָדַ֥ע שְׁמִֽי  
-**Full verse (English)**: “Because he is devoted to Me I will deliver him;I will keep him safe, for he knows My name.  
-
-*Hebrew phrase*: אֲ֝שַׂגְּבֵ֗הוּ  
-*Explanation*: The act of 'setting on high' (from the root שׂגב) is a metaphor for granting security, protection, and elevated status. It's not a literal physical elevation, but a state of being made safe and inacce...  
-*Target*: person's security → divine protection → human well-being  
-*Vehicle*: high place → inaccessible fortress → elevated position  
-*Ground*: safety → security → invulnerability  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: הַצִּילֵ֖נִי מֵאֹיְבַ֥י&thinsp;׀&thinsp;אֱלֹהָ֑י מִֽמִּתְקוֹמְמַ֥י תְּשַׂגְּבֵֽנִי  
-**Full verse (English)**: Save me from my enemies, O my God;secure me against my assailants.  
-
-*Hebrew phrase*: תְּשַׂגְּבֵֽנִי  
-*Explanation*: The verb 'שׂגב' (sagav) means 'to be high, exalted, inaccessible'. When God 'makes one high' or 'exalts' them in the face of enemies, it is a metaphor for providing protection, making them safe, secur...  
-*Target*: security → protection → divine intervention  
-*Vehicle*: high place → fortress → inaccessible position  
-*Ground*: safety from harm → unreachability → divine safeguarding  
-*Confidence*: 0.95  
-
-**Isaiah 58:4** (metaphor, idiom, metonymy) - confidence: 0.93  
-*Figurative phrase*: To make your voice heard on high  
-
-**Full verse (Hebrew)**: הֵ֣ן לְרִ֤יב וּמַצָּה֙ תָּצ֔וּמוּ וּלְהַכּ֖וֹת בְּאֶגְרֹ֣ף רֶ֑שַׁע לֹא־תָצ֣וּמוּ כַיּ֔וֹם לְהַשְׁמִ֥יעַ בַּמָּר֖וֹם קוֹלְכֶֽם  
-**Full verse (English)**: Because you fast in strife and contention, And you strike with a wicked fist! Your fasting today is not such As to make your voice heard on high.  
-
-*Hebrew phrase*: לְהַשְׁמִיעַ בַּמָּרוֹם קוֹלְכֶם  
-*Explanation*: “On high” is a metonymy for heaven/God, and to have one’s voice ‘heard’ there is a metaphorical idiom for effective, accepted prayer, not a literal acoustic event....  
-*Target*: Their prayers being noticed and favorably received by God → religious petitions → divine-human communication  
-*Vehicle*: A voice audible up in the heights of heaven → sound reaching a high place → vertical acoustic image  
-*Ground*: Being ‘heard’ equates to gaining attention and response → height symbolizes God’s dwelling and transcendence → prayer as upward communication  
-*Confidence*: 0.93  
-
-**Exodus 9:17** (metaphor) - confidence: 0.90  
-*Figurative phrase*: exalt yourself over My people  
-
-**Full verse (Hebrew)**: עוֹדְךָ֖ מִסְתּוֹלֵ֣ל בְּעַמִּ֑י לְבִלְתִּ֖י שַׁלְּחָֽם  
-**Full verse (English)**: Yet you continue to thwart*thwart Others “exalt yourself over.” My people, and do not let them go!  
-
-*Hebrew phrase*: מִסְתּוֹלֵ֣ל בְּעַמִּ֑י  
-*Explanation*: The verb מִסְתּוֹלֵ֣ל (mistolel), from the root סלל ('to heap up,' 'to build'), in the Hithpael means 'to exalt oneself' or 'to lift oneself up.' When used in the context of 'over My people,' it is a ...  
-*Target*: Pharaoh's defiance → human opposition → power dynamics  
-*Vehicle*: physical elevation → building a high place → spatial positioning  
-*Ground*: arrogance → obstinacy → assertion of superiority  
-*Confidence*: 0.90  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 2
 **Filters**: Vehicle contains: shield  
@@ -3044,62 +3023,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Confidence*: 0.95  
 
 **Full verse (Hebrew)**: כִּ֤י שֶׁ֨מֶשׁ&thinsp;׀ וּמָגֵן֮ יְהֹוָ֢ה אֱלֹ֫הִ֥ים חֵ֣ן וְ֭כָבוֹד יִתֵּ֣ן יְהֹוָ֑ה לֹ֥א יִמְנַע־ט֝֗וֹב לַֽהֹלְכִ֥ים בְּתָמִֽים  
-**Full verse (English)**: For the LORD God is suncOr “bulwark,” with Targum; cf. Isa. 54.12. and shield;the LORD bestows grace and glory;He does not withhold His bounty from those who live without blame.  
-
-*Hebrew phrase*: וּמָגֵן  
-*Explanation*: God is metaphorically described as a 'shield,' signifying His role as protector and defender of His people....  
-*Target*: Yahweh → God → Divine Being  
-*Vehicle*: shield → defensive weapon → military equipment  
-*Ground*: protector → defender → security  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: בֵּ֣ית אַ֭הֲרֹן בִּטְח֣וּ בַיהֹוָ֑ה עֶזְרָ֖ם וּמָגִנָּ֣ם הֽוּא  
-**Full verse (English)**: O house of Aaron, trust in the LORD!He is their help and shield.  
-
-*Hebrew phrase*: וּמָגִנָּ֣ם הֽוּא  
-*Explanation*: God is metaphorically described as a shield, highlighting His role as protector and defender, not as a literal physical object....  
-*Target*: God → Divine Protector → Deity  
-*Vehicle*: shield → defensive weapon → protective object  
-*Ground*: protection → defense → security  
-*Confidence*: 0.90  
-
-**Deuteronomy 33:29** (metaphor) - confidence: 0.95  
-*Figurative phrase*: Your protecting Shield  
-
-**Full verse (Hebrew)**: אַשְׁרֶ֨יךָ*(בספרי תימן אַשְׁרֶ֨יךָ באל״ף גדולה) יִשְׂרָאֵ֜ל מִ֣י כָמ֗וֹךָ עַ֚ם נוֹשַׁ֣ע בַּֽיהֹוָ֔ה מָגֵ֣ן עֶזְרֶ֔ךָ וַאֲשֶׁר־חֶ֖רֶב גַּאֲוָתֶ֑ךָ וְיִכָּחֲשׁ֤וּ אֹיְבֶ֙יךָ֙ לָ֔ךְ וְאַתָּ֖ה עַל־בָּמוֹתֵ֥ימוֹ תִדְרֹֽךְ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: O happy Israel! Who is like you,A people delivered by יהוה,Your protecting Shield, your Sword triumphant!Your enemies shall come cringing before you,And you shall tread on their backs.  
-
-*Hebrew phrase*: מָגֵ֣ן עֶזְרֶ֔ךָ  
-*Explanation*: YHWH is metaphorically described as a 'shield' to represent God's role as Israel's protector and source of defense....  
-*Target*: YHWH → God → Divine Being  
-*Vehicle*: shield → defensive weapon → protective object  
-*Ground*: protection → defense → security  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: הָאֵל֮ תָּמִ֢ים דַּ֫רְכּ֥וֹ אִמְרַֽת־יְהֹוָ֥ה צְרוּפָ֑ה מָגֵ֥ן ה֝֗וּא לְכֹ֤ל&thinsp;׀ הַחֹסִ֬ים בּֽוֹ  
-**Full verse (English)**: the way of God is perfect;the word of the LORD is pure;He is a shield to all who seek refuge in Him.  
-
-*Hebrew phrase*: מָגֵ֥ן ה֝֗וּא  
-*Explanation*: God is not a literal physical shield. This is a metaphor where God's protective nature and ability to provide security are compared to the function of a physical shield, which defends against harm....  
-*Target*: God → divine being → deity  
-*Vehicle*: shield → protective weapon → defensive object  
-*Ground*: protection → security → defense  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: כִּ֣י לַ֭יהֹוָה מָגִנֵּ֑נוּ וְלִקְד֖וֹשׁ יִשְׂרָאֵ֣ל מַלְכֵּֽנוּ  
-**Full verse (English)**: Truly our shield is of the LORD,our king, of the Holy One of Israel.  
-
-*Hebrew phrase*: מָגִנֵּ֑נוּ  
-*Explanation*: God is metaphorically referred to as a 'shield,' indicating that the LORD provides protection and defense, not as a literal physical object, but as a source of security....  
-*Target*: The LORD → God → Divine Being  
-*Vehicle*: shield → defensive weapon → protective object  
-*Ground*: protection → security → safeguard  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: מָ֭גִנֵּנוּ רְאֵ֣ה אֱלֹהִ֑ים וְ֝הַבֵּ֗ט פְּנֵ֣י מְשִׁיחֶֽךָ  
 
 
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 3
 **Filters**: Vehicle contains: horn  
@@ -3158,58 +3084,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: deception → danger → entrapment  
 *Confidence*: 0.95  
 
-**Isaiah 12:2** (metaphor) - confidence: 0.97  
-*Figurative phrase*: For Yah, the LORD, is my strength  
-
-**Full verse (Hebrew)**: הִנֵּ֨ה אֵ֧ל יְשׁוּעָתִ֛י אֶבְטַ֖ח וְלֹ֣א אֶפְחָ֑ד כִּֽי־עׇזִּ֤י וְזִמְרָת֙ יָ֣הּ יְהֹוָ֔ה וַֽיְהִי־לִ֖י לִישׁוּעָֽה  
-**Full verse (English)**: Behold the God who gives me triumph! I am confident, unafraid; For Yah.—GOD—is my strength and might,  And has been my deliverance.”  
-
-*Hebrew phrase*: כִּי־עׇזִּי ... יָהּ יְהוָה  
-*Explanation*: Calling YHWH "my strength" metaphorically presents God as the empowering force that enables security and endurance, like physical strength does for a person....  
-*Target*: YHWH's role in sustaining and protecting the speaker → divine help and security → relationship of God to the believer  
-*Vehicle*: strength → physical power or source of support → human bodily/defensive capability  
-*Ground*: as physical strength enables a person to stand and overcome threats, so God enables and strengthens the believer → both provide capacity and stability → empowerment in the face of danger  
-*Confidence*: 0.97  
-
-**Full verse (Hebrew)**: יְֽהֹוָ֗ה בַּ֭שָּׁמַיִם הֵכִ֣ין כִּסְא֑וֹ וּ֝מַלְכוּת֗וֹ בַּכֹּ֥ל מָשָֽׁלָה  
-**Full verse (English)**: The LORD has established His throne in heaven,and His sovereign rule is over all.  
-
-*Hebrew phrase*: כִּסְא֑וֹ  
-*Explanation*: The 'throne' is a metaphor for God's ultimate authority, power, and kingship, as God is spirit and does not literally sit on a physical throne. It symbolizes His divine rule....  
-*Target*: God's authority → divine sovereignty → divine attributes  
-*Vehicle*: royal throne → seat of power → physical object  
-*Ground*: supreme power → absolute dominion → kingship  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: עׇזִּ֣י וְזִמְרָ֣ת יָ֑הּ וַֽיְהִי־לִ֝֗י לִישׁוּעָֽה  
-**Full verse (English)**: The LORD is my strength and might;cOthers “song.”He has become my deliverance.  
-
-*Hebrew phrase*: וְזִמְרָ֣ת  
-*Explanation*: God is directly identified as the speaker's might, equating the divine being with the quality or resource of power....  
-*Target*: God → Divine Being → Spiritual Entity  
-*Vehicle*: might → power → abstract quality  
-*Ground*: source of power → provider of ability → support  
-*Confidence*: 0.90  
-
-**Deuteronomy 31:27** (metaphor, idiom) - confidence: 1.00  
-*Figurative phrase*: your stiff neck  
-
-**Full verse (Hebrew)**: כִּ֣י אָנֹכִ֤י יָדַ֙עְתִּי֙ אֶֽת־מֶרְיְךָ֔ וְאֶֽת־עׇרְפְּךָ֖ הַקָּשֶׁ֑ה הֵ֣ן בְּעוֹדֶ֩נִּי֩ חַ֨י עִמָּכֶ֜ם הַיּ֗וֹם מַמְרִ֤ים הֱיִתֶם֙ עִם־יְהֹוָ֔ה וְאַ֖ף כִּי־אַחֲרֵ֥י מוֹתִֽי  
-**Full verse (English)**: Well I know how defiant and stiffnecked you are: even now, while I am still alive in your midst, you have been defiant toward יהוה; how much more, then, when I am dead!  
-
-*Hebrew phrase*: עׇרְפְּךָ֖ הַקָּשֶׁ֑ה  
-*Explanation*: This phrase is a metaphor and a common biblical idiom. It literally refers to an animal that resists the yoke, but when applied to humans, it signifies stubbornness, obstinacy, and unwillingness to su...  
-*Target*: Israel's stubbornness → human disobedience → moral character  
-*Vehicle*: stiff neck → unyielding animal → physical resistance  
-*Ground*: resistance to authority → obstinacy → recalcitrance  
-*Confidence*: 1.00  
-
-**Proverbs 26:11** (simile) - confidence: 0.99  
-*Figurative phrase*: As a dog returns to his vomit, so a dullard repeats his folly  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 4
 **Filters**: Vehicle contains: rope  
@@ -3264,62 +3141,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 **Deuteronomy 3:14** (idiom, metonymy) - confidence: 1.00  
 *Figurative phrase*: district  
 
-**Full verse (Hebrew)**: יָאִ֣יר בֶּן־מְנַשֶּׁ֗ה לָקַח֙ אֶת־כׇּל־חֶ֣בֶל אַרְגֹּ֔ב עַד־גְּב֥וּל הַגְּשׁוּרִ֖י וְהַמַּֽעֲכָתִ֑י וַיִּקְרָא֩ אֹתָ֨ם עַל־שְׁמ֤וֹ אֶת־הַבָּשָׁן֙ חַוֺּ֣ת יָאִ֔יר עַ֖ד הַיּ֥וֹם הַזֶּֽה  
-**Full verse (English)**: Jair son of Manasseh received the whole Argob district (that is, Bashan) as far as the boundary of the Geshurites and the Maacathites, and named it after himself: Havvoth-jair*Havvoth-jair I.e., “villages of Jair.” —as is still the case.  
-
-*Hebrew phrase*: חֶ֣בֶל  
-*Explanation*: The Hebrew word 'חֶבֶל' (ḥevel) literally means 'rope' or 'cord.' In this geographical context, it functions as an idiom meaning 'district' or 'portion of land.' This is a conventionalized metonymy wh...  
-*Target*: land portion → territory → geographical area  
-*Vehicle*: rope → measuring tool → physical object  
-*Ground*: demarcation → measurement → definition of space  
-*Confidence*: 1.00  
-
-**Full verse (Hebrew)**: שׇׁמְרֵ֗נִי מִ֣ידֵי פַ֭ח יָ֣קְשׁוּ לִ֑י וּ֝מֹקְשׁ֗וֹת פֹּ֣עֲלֵי אָֽוֶן  
-**Full verse (English)**: Keep me from the trap laid for me,and from the snares of evildoers.  
-
-*Hebrew phrase*: פַ֭ח  
-*Explanation*: A dangerous plot or scheme devised by evildoers is metaphorically referred to as a 'trap,' a device used to catch animals. This highlights the deceptive and harmful intent....  
-*Target*: dangerous plot → malicious scheme → human adversity  
-*Vehicle*: animal trap → hunting device → physical object  
-*Ground*: deception → danger → entrapment  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: נַפְשֵׁ֗נוּ כְּצִפּ֥וֹר נִמְלְטָה֮ מִפַּ֢ח י֫וֹקְשִׁ֥ים הַפַּ֥ח נִשְׁבָּ֗ר וַאֲנַ֥חְנוּ נִמְלָֽטְנוּ  
-**Full verse (English)**: We are like a bird escaped from the fowler’s trap;the trap broke and we escaped.  
-
-*Hebrew phrase*: נַפְשֵׁ֗נוּ כְּצִפּ֥וֹר נִמְלְטָה֮ מִפַּ֢ח י֫וֹקְשִׁ֥ים  
-*Explanation*: The speaker's deliverance from a perilous situation is explicitly compared to a bird escaping a fowler's trap, emphasizing the sudden, unexpected, and complete nature of the escape....  
-*Target*: speaker's life/being → human existence → personal experience  
-*Vehicle*: bird escaping a trap → animal deliverance → natural event  
-*Ground*: escape from danger → deliverance → freedom  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: יִפְּל֣וּ בְמַכְמֹרָ֣יו רְשָׁעִ֑ים יַ֥חַד אָ֝נֹכִ֗י עַֽד־אֶעֱבֽוֹר&nbsp;{פ}  
-**Full verse (English)**: Let the wicked fall into their netswhile I alone come through.  
-
-*Hebrew phrase*: בְמַכְמֹרָ֣יו  
-*Explanation*: The 'nets' are a metaphor for the wicked's own schemes, traps, or the consequences of their evil actions, which ultimately ensnare them, rather than literal fishing or hunting nets....  
-*Target*: wicked's schemes → evil plots → consequences of actions  
-*Vehicle*: physical nets → traps → hunting equipment  
-*Ground*: entrapment → capture → inescapable predicament  
-*Confidence*: 0.90  
-
-**Proverbs 7:23** (simile) - confidence: 0.98  
-*Figurative phrase*: He is like a bird rushing into a trap,  
-
-**Full verse (Hebrew)**: עַ֤ד יְפַלַּ֪ח חֵ֡ץ כְּֽבֵד֗וֹ כְּמַהֵ֣ר צִפּ֣וֹר אֶל־פָּ֑ח וְלֹא־יָ֝דַ֗ע כִּֽי־בְנַפְשׁ֥וֹ הֽוּא  
-**Full verse (English)**: Until the arrow pierces his liver. He is like a bird rushing into a trap, Not knowing his life is at stake.  
-
-*Hebrew phrase*: כְּמַהֵר צִפּוֹר אֶל־פָּח  
-*Explanation*: His behavior is likened to a bird quickly flying into a snare, highlighting his ignorance and the swiftness with which he meets his own downfall....  
-*Target*: the youth’s headlong rush into danger → his unthinking, self-destructive haste → human behavior under temptation  
-*Vehicle*: a bird hastening to a snare → a small creature flying eagerly into a hidden trap → hunting imagery  
-*Ground*: ignorance of the trap, speed, and vulnerability → analogy between the bird’s eager flight and the youth’s rush toward ruin → mapping animal naiveté to human folly  
-*Confidence*: 0.98  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 5
 **Filters**: Vehicle contains: flood  
@@ -3374,62 +3198,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: overwhelming nature → engulfing danger → destructive power  
 *Confidence*: 0.90  
 
-**Isaiah 28:2** (simile) - confidence: 0.96  
-*Figurative phrase*: like a storm of massive, torrential rain  
-
-**Full verse (Hebrew)**: הִנֵּ֨ה חָזָ֤ק וְאַמִּץ֙ לַֽאדֹנָ֔י כְּזֶ֥רֶם בָּרָ֖ד שַׂ֣עַר קָ֑טֶב כְּ֠זֶ֠רֶם מַ֣יִם כַּבִּירִ֥ים שֹׁטְפִ֛ים הִנִּ֥יחַ לָאָ֖רֶץ בְּיָֽד  
-**Full verse (English)**: Lo, my Sovereign has something strong and mighty, Like a storm of hail, A shower of pestilence. Something like a storm of massive, torrential rain  Shall be hurled with force to the ground.  
-
-*Hebrew phrase*: כְזֶרֶם מַיִם כַּבִּירִים שֹׁטְפִים  
-*Explanation*: The judgment is also likened to a flood of great waters, underlining its unstoppable, engulfing nature....  
-*Target*: the same divinely-sent judgment sweeping the land → instrument of judgment → historical-political realm  
-*Vehicle*: a torrent of mighty, overflowing waters → flood → natural phenomenon  
-*Ground*: unstoppable advance that sweeps everything in its path → overwhelming power → evaluative property  
-*Confidence*: 0.96  
-
-**Full verse (Hebrew)**: ק֘וּמָ֤ה יְהֹוָ֨ה&thinsp;׀ בְּאַפֶּ֗ךָ הִ֭נָּשֵׂא בְּעַבְר֣וֹת צוֹרְרָ֑י וְע֥וּרָה אֵ֝לַ֗י מִשְׁפָּ֥ט צִוִּֽיתָ  
-**Full verse (English)**: Rise, O LORD, in Your anger;assert Yourself cOr “in Your fury against my foes.”against the fury of my foes;-cbestir Yourself on my behalf;You have ordained judgment.  
-
-*Hebrew phrase*: בְּעַבְר֣וֹת  
-*Explanation*: The word for 'fury' (עֶבְרָה) is derived from the root 'to cross over' or 'overflow.' This presents the abstract concept of intense anger as a physical, overflowing, and destructive force, like a floo...  
-*Target*: enemies' fury → human emotion → abstract concept  
-*Vehicle*: overflowing substance → flood → natural force  
-*Ground*: uncontrollable power → destructiveness → intensity  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: אַל־תִּשְׁטְפֵ֤נִי&thinsp;׀ שִׁבֹּ֣לֶת מַ֭יִם וְאַל־תִּבְלָעֵ֣נִי מְצוּלָ֑ה וְאַל־תֶּאְטַר־עָלַ֖י בְּאֵ֣ר פִּֽיהָ  
-**Full verse (English)**: Let the floodwaters not sweep me away;let the deep not swallow me;let the mouth of the Pit not close over me.  
-
-*Hebrew phrase*: וְאַל־תִּבְלָעֵ֣נִי מְצוּלָ֑ה  
-*Explanation*: “The deep” (מְצוּלָה) is personified as a monstrous entity capable of actively “swallowing” the speaker, serving as a metaphor for being utterly consumed by distress or death....  
-*Target*: speaker's impending doom → consumption by distress → threat of death  
-*Vehicle*: swallowing deep → devouring abyss → predatory entity  
-*Ground*: consuming power → engulfing danger → inescapable destruction  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: אֱלֹהִ֤ים&thinsp;׀ אֵלִ֥י אַתָּ֗ה אֲֽשַׁ֫חֲרֶ֥ךָּ צָמְאָ֬ה לְךָ֨&thinsp;׀ נַפְשִׁ֗י כָּמַ֣הּ לְךָ֣ בְשָׂרִ֑י בְּאֶרֶץ־צִיָּ֖ה וְעָיֵ֣ף בְּלִי־מָֽיִם  
-**Full verse (English)**: God, You are my God;I search for You,my soul thirsts for You,my body yearns for You,as a parched and thirsty land that has no water.  
-
-*Hebrew phrase*: צָמְאָ֬ה לְךָ֨׀ נַפְשִׁ֗י  
-*Explanation*: The soul, an immaterial entity, is personified as experiencing the physical sensation of thirst, which is a metaphor for intense spiritual longing and desperate need for God....  
-*Target*: speaker's soul → human spirit → inner being  
-*Vehicle*: thirsty person → person in need of water → living being  
-*Ground*: intense longing → desperate need → vital dependence  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: לְהַשְׁקִ֣יט ל֭וֹ מִ֣ימֵי רָ֑ע עַ֤ד יִכָּרֶ֖ה לָרָשָׁ֣ע שָֽׁחַת  
-**Full verse (English)**: to give him tranquillity in times of misfortune,until a pit be dug for the wicked.  
-
-*Hebrew phrase*: שָֽׁחַת  
-*Explanation*: The 'pit' is a metaphor for destruction, ruin, or an inescapable trap that awaits the wicked as a consequence of their actions or divine judgment....  
-*Target*: destruction → ruin → downfall  
-*Vehicle*: deep pit → trap → physical confinement  
-*Ground*: inescapable → leading to demise → hidden danger  
-*Confidence*: 1.00  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 6
 **Filters**: Vehicle contains: earthquake  
@@ -3484,56 +3255,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: widespread occupation and control, leaving nothing untouched → overbuilding as sign of total domination → conceptual  
 *Confidence*: 0.81  
 
-**Full verse (Hebrew)**: כִּי־לִ֥י כׇל־חַיְתוֹ־יָ֑עַר בְּ֝הֵמ֗וֹת בְּהַרְרֵי־אָֽלֶף  
-**Full verse (English)**: For Mine is every animal of the forest,the beasts on bMeaning of Heb. uncertain.a thousand mountains.-b  
-
-*Hebrew phrase*: בְּהַרְרֵי־אָֽלֶף  
-*Explanation*: The number 'a thousand' is used hyperbolically to emphasize the vastness of God's dominion and the innumerable quantity of animals He owns, rather than a literal count of mountains....  
-*Target*: Extent of God's dominion → Divine sovereignty → God's ownership over creation  
-*Vehicle*: Innumerable mountains → Vast geographical expanse → Countless natural features  
-*Ground*: Boundlessness → Immensity → Totality  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: וַיִּ֣בֶן כְּמֽוֹ־רָ֭מִים מִקְדָּשׁ֑וֹ כְּ֝אֶ֗רֶץ יְסָדָ֥הּ לְעוֹלָֽם  
-**Full verse (English)**: He built His Sanctuary like the heavens,like the earth that He established forever.  
-
-*Hebrew phrase*: כְּ֝אֶ֗רֶץ יְסָדָ֥הּ לְעוֹלָֽם  
-*Explanation*: The Sanctuary is explicitly compared to the earth, which God established forever, using the comparative particle 'כְּ' (like), highlighting its permanence, stability, and foundational importance....  
-*Target*: Sanctuary → divine dwelling place → sacred structure  
-*Vehicle*: earth → created world → foundational entity  
-*Ground*: permanence → stability → foundational importance  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: בְּרוּכִ֣ים אַ֭תֶּם לַיהֹוָ֑ה עֹ֝שֵׂ֗ה שָׁמַ֥יִם וָאָֽרֶץ  
-**Full verse (English)**: May you be blessed by the LORD,Maker of heaven and earth.  
-
-*Hebrew phrase*: שָׁמַ֥יִם וָאָֽרֶץ  
-*Explanation*: This phrase is a merism, a figure of speech where two contrasting parts ('heaven' and 'earth') are used to represent the totality of creation or the entire cosmos. It functions as an idiom for 'everyt...  
-*Target*: the universe → creation → totality of existence  
-*Vehicle*: heaven and earth → contrasting elements → parts of a whole  
-*Ground*: comprehensiveness → all-encompassing nature → totality  
-*Confidence*: 1.00  
-
-**Isaiah 54:11** (metaphor) - confidence: 0.94  
-*Figurative phrase*: I will lay your stones with carbuncle (antimony) and make your foundations of sapphires.  
-
-**Full verse (Hebrew)**: עֲנִיָּ֥ה סֹעֲרָ֖ה לֹ֣א נֻחָ֑מָה הִנֵּ֨ה אָנֹכִ֜י מַרְבִּ֤יץ בַּפּוּךְ֙ אֲבָנַ֔יִךְ וִֽיסַדְתִּ֖יךְ בַּסַּפִּירִֽים  
-**Full verse (English)**: Unhappy, storm-tossed one, uncomforted! I will lay carbuncles as a byform of nophekh; so already Rashi. as your building stones And make your foundations of sapphires.  
-
-*Hebrew phrase*: הִנֵּ֨ה אָנֹכִ֜י מַרְבִּ֤יץ בַּפּוּךְ֙ אֲבָנַ֔יִךְ וִֽיסַדְתִּ֖יךְ בַּסַּפִּירִֽים  
-*Explanation*: The depiction of Zion’s stones and foundations as precious gems symbolizes a transformed community marked by glory, value, and enduring stability, in sharp contrast to her storm-tossed poverty....  
-*Target*: Zion’s future condition and structure as a restored community/city → status, beauty, and security of the people → eschatological restoration of Jerusalem  
-*Vehicle*: a building whose stones and foundations are made of or set with precious gems → lavishly adorned architecture → construction/ornamentation domain  
-*Ground*: precious stones connote beauty, value, and permanence → solid foundations signify security and stability → public, visible splendor replacing prior ruin  
-*Confidence*: 0.94  
-
-**Isaiah 45:8** (metaphor, personification) - confidence: 0.97  
-*Figurative phrase*: Let the earth open up and triumph/salvation sprout, and let righteousness spring up together  
-
-**Full verse (Hebrew)**: הַרְעִ֤יפוּ שָׁמַ֙יִם֙ מִמַּ֔עַל וּשְׁחָקִ֖ים יִזְּלוּ־צֶ֑דֶק תִּפְתַּח־אֶ֣רֶץ וְיִפְרוּ־יֶ֗שַׁע וּצְדָקָ֤ה תַצְמִ֙יחַ֙ יַ֔חַד אֲנִ֥י יְהֹוָ֖ה בְּרָאתִֽיו&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
 
 
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 7
 **Filters**: Vehicle contains: fire  
@@ -3588,56 +3312,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 **Exodus 9:24** (metaphor) - confidence: 0.90  
 *Figurative phrase*: fire flashing  
 
-**Full verse (Hebrew)**: וַיְהִ֣י בָרָ֔ד וְאֵ֕שׁ מִתְלַקַּ֖חַת בְּת֣וֹךְ הַבָּרָ֑ד כָּבֵ֣ד מְאֹ֔ד אֲ֠שֶׁ֠ר לֹֽא־הָיָ֤ה כָמֹ֙הוּ֙ בְּכׇל־אֶ֣רֶץ מִצְרַ֔יִם מֵאָ֖ז הָיְתָ֥ה לְגֽוֹי  
-**Full verse (English)**: The hail was very heavy—fire flashing in the midst of the hail—such as had not fallen on the land of Egypt since it had become a nation.  
-
-*Hebrew phrase*: וְאֵ֕שׁ מִתְלַקַּ֖חַת  
-*Explanation*: The term 'fire' (אֵשׁ) is used metaphorically to describe lightning. In the context of a severe storm with hail, and given biblical parallels where lightning is referred to as 'fire' (e.g., Ex 9:23-24...  
-*Target*: lightning → electrical discharge → natural phenomenon  
-*Vehicle*: fire → flames → elemental force  
-*Ground*: visual appearance → destructive power → divine manifestation  
-*Confidence*: 0.90  
-
-**Numbers 9:16** (simile) - confidence: 0.90  
-*Figurative phrase*: appearing as fire by night  
-
-**Full verse (Hebrew)**: כֵּ֚ן יִהְיֶ֣ה תָמִ֔יד הֶעָנָ֖ן יְכַסֶּ֑נּוּ וּמַרְאֵה־אֵ֖שׁ לָֽיְלָה  
-**Full verse (English)**: It was always so: the cloud covered it, appearing as fire by night.  
-
-*Hebrew phrase*: וּמַרְאֵה־אֵ֖שׁ לָֽיְלָה  
-*Explanation*: The visual manifestation of the cloud at night is compared to the appearance of fire, highlighting its luminous and awe-inspiring quality without stating it is literally fire. The phrase 'appearance o...  
-*Target*: the cloud's night appearance → divine manifestation → celestial phenomenon  
-*Vehicle*: fire → burning light → natural phenomenon  
-*Ground*: brightness → radiance → visual intensity  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: וַתִּגְעַ֬שׁ וַתִּרְעַ֨שׁ&thinsp;׀ הָאָ֗רֶץ וּמוֹסְדֵ֣י הָרִ֣ים יִרְגָּ֑זוּ וַ֝יִּתְגָּֽעֲשׁ֗וּ כִּי־חָ֥רָה לֽוֹ  
-**Full verse (English)**: Then the earth rocked and quaked;the foundations of the mountains shook,rocked by His indignation;  
-
-*Hebrew phrase*: כִּי־חָ֥רָה לֽוֹ  
-*Explanation*: This is an idiom where the physical sensation of 'heat' or 'burning' (חָרָה) is used metaphorically to describe intense anger or indignation. It represents a cross-domain comparison from physical sens...  
-*Target*: God's anger → divine emotion → spiritual state  
-*Vehicle*: burning heat → fire → physical sensation  
-*Ground*: intensity → destructive power → emotional force  
-*Confidence*: 0.95  
-
-**Numbers 22:27** (metaphor, idiom) - confidence: 0.95  
-*Figurative phrase*: and Balaam was furious  
-
-**Full verse (Hebrew)**: וַתֵּ֤רֶא הָֽאָתוֹן֙ אֶת־מַלְאַ֣ךְ יְהֹוָ֔ה וַתִּרְבַּ֖ץ תַּ֣חַת בִּלְעָ֑ם וַיִּֽחַר־אַ֣ף בִּלְעָ֔ם וַיַּ֥ךְ אֶת־הָאָת֖וֹן בַּמַּקֵּֽל  
-**Full verse (English)**: When the ass now saw the messenger of יהוה, she lay down under Balaam; and Balaam was furious and beat the ass with his stick.  
-
-*Hebrew phrase*: וַיִּֽחַר־אַ֣ף בִּלְעָ֔ם  
-*Explanation*: This is a standard biblical Hebrew idiom for becoming angry. The phrase literally translates to 'and the nose/face of Balaam burned,' employing the conceptual metaphor of ANGER IS HEAT/FIRE. It descri...  
-*Target*: Balaam's anger → human emotion → internal state  
-*Vehicle*: burning nose → fire → physical sensation  
-*Ground*: intensity → fierceness → emotional state  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: אֲ֭זַי חַיִּ֣ים בְּלָע֑וּנוּ בַּחֲר֖וֹת אַפָּ֣ם בָּֽנוּ  
 
 
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 8
 **Filters**: Vehicle contains: tent  
@@ -3696,58 +3373,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 **Exodus 16:16** (idiom, metonymy) - confidence: 0.90  
 *Figurative phrase*: in its tent  
 
-**Full verse (Hebrew)**: זֶ֤ה הַדָּבָר֙ אֲשֶׁ֣ר צִוָּ֣ה יְהֹוָ֔ה לִקְט֣וּ מִמֶּ֔נּוּ אִ֖ישׁ לְפִ֣י אׇכְל֑וֹ עֹ֣מֶר לַגֻּלְגֹּ֗לֶת מִסְפַּר֙ נַפְשֹׁ֣תֵיכֶ֔ם אִ֛ישׁ לַאֲשֶׁ֥ר בְּאׇהֳל֖וֹ תִּקָּֽחוּ  
-**Full verse (English)**: This is what יהוה has commanded: Each household shall gather as much as it requires to eat—an omer to a person for as many of you as there are; each household shall fetch according to those in its tent.”  
-
-*Hebrew phrase*: בְּאׇהֳל֖וֹ  
-*Explanation*: The Hebrew word 'אֹהֶל' (ohel), meaning 'tent,' is used metonymically to refer to the 'household' or 'family unit' residing within it. This is a common biblical idiom in the ANE context....  
-*Target*: household → family unit → group of people  
-*Vehicle*: tent → dwelling → structure  
-*Ground*: residence → belonging → grouping  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: יָ֭דַעְתִּי כׇּל־ע֣וֹף הָרִ֑ים וְזִ֥יז שָׂ֝דַ֗י עִמָּדִֽי  
-**Full verse (English)**: I know every bird of the mountains,the creatures of the field are subject to Me.  
-
-*Hebrew phrase*: כׇּל־ע֣וֹף הָרִ֑ים וְזִ֥יז שָׂ֝דַ֗י  
-*Explanation*: This is a merism, a type of metonymy where two contrasting parts (birds of the mountains and creatures of the field) are used to represent the whole (all animal life). The pairing of animals from the ...  
-*Target*: all animals → the animal kingdom → all of creation  
-*Vehicle*: birds of the mountains and creatures of the field → animals of the sky and land → contrasting parts of a whole  
-*Ground*: totality → completeness → all-encompassing scope  
-*Confidence*: 1.00  
-
-**Isaiah 38:12** (simile, metaphor) - confidence: 0.97  
-*Figurative phrase*: My dwelling is pulled up and removed from me like a shepherds’ tent  
-
-**Full verse (Hebrew)**: דּוֹרִ֗י נִסַּ֧ע וְנִגְלָ֛ה מִנִּ֖י כְּאֹ֣הֶל רֹעִ֑י קִפַּ֨דְתִּי כָאֹרֵ֤ג חַיַּי֙ מִדַּלָּ֣ה יְבַצְּעֵ֔נִי מִיּ֥וֹם עַד־לַ֖יְלָה תַּשְׁלִימֵֽנִי  
-**Full verse (English)**: My dwelling is pulled up and removed from me Like a tent of shepherds; My life is rolled up like a web And cut from the thrum. Only from daybreak to nightfall Was I kept whole,  
-
-*Hebrew phrase*: דּוֹרִי נִסַּע וְנִגְלָה מִנִּי כְּאֹהֶל רֹעִי  
-*Explanation*: He likens his life-dwelling to a shepherd’s tent that is quickly dismantled and taken away, portraying the abrupt, transient loss of his earthly stability....  
-*Target*: Hezekiah’s settled life and stability → life circumstances/home → human existence and security  
-*Vehicle*: A shepherd’s tent being taken down and moved → temporary mobile shelter → pastoral nomadic equipment  
-*Ground*: His life’s stability is like a tent suddenly struck and removed → transience, impermanence, and uprooting → quick dismantling of what had been a place of rest  
-*Confidence*: 0.97  
-
-**Isaiah 33:20** (metaphor, hyperbole) - confidence: 0.97  
-*Figurative phrase*: Jerusalem as a secure homestead, a tent not to be transported, whose pegs shall never be pulled up, and none of whose ropes shall break  
-
-**Full verse (Hebrew)**: חֲזֵ֣ה צִיּ֔וֹן קִרְיַ֖ת מוֹעֲדֵ֑נוּ עֵינֶ֩יךָ֩ תִרְאֶ֨ינָה יְרוּשָׁלַ֜͏ִם נָוֶ֣ה שַׁאֲנָ֗ן אֹ֤הֶל בַּל־יִצְעָן֙ בַּל־יִסַּ֤ע יְתֵדֹתָיו֙ לָנֶ֔צַח וְכׇל־חֲבָלָ֖יו בַּל־יִנָּתֵֽקוּ  
-**Full verse (English)**: When you gaze upon Zion, our city of assembly, Your eyes shall behold Jerusalem As a secure homestead, A tent not to be transported, Whose pegs shall never be pulled up, And none of whose ropes shall break.  
-
-*Hebrew phrase*: יְרוּשָׁלִַם נָוֶה שַׁאֲנָן אֹהֶל בַּל־יִצְעָן בַּל־יִסַּע יְתֵדֹתָיו לָנֶצַח וְכָל־חֲבָלָיו בַּל־יִנָּתֵקוּ  
-*Explanation*: Jerusalem is metaphorically portrayed as a tent whose pegs and ropes will never be disturbed, stressing its promised stability and permanence....  
-*Target*: the stability and security of Jerusalem/Zion → city/community → socio‑religious  
-*Vehicle*: a well‑pitched tent with firm pegs and unbroken ropes, standing securely → tent‑dwelling → nomadic/material culture  
-*Ground*: stability, security, and permanence despite being in principle movable → shared firmness and lack of disruption → experiential  
-*Confidence*: 0.97  
-
-**Exodus 32:13** (simile) - confidence: 1.00  
-*Figurative phrase*: as numerous as the stars of heaven  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 9
 **Filters**: Vehicle contains: chariot  
@@ -3802,56 +3430,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: darkness symbolizes fear, disorientation, and danger; loss of light symbolizes loss of hope and guidance → association of light with well-being and darkness with calamity → emotional and cognitive obscurity  
 *Confidence*: 0.94  
 
-**Full verse (Hebrew)**: רוֹמְמ֡וּ יְ֘הֹוָ֤ה אֱלֹהֵ֗ינוּ וְֽ֭הִשְׁתַּחֲווּ לְהַ֣ר קׇדְשׁ֑וֹ כִּי־קָ֝ד֗וֹשׁ יְהֹוָ֥ה אֱלֹהֵֽינוּ&nbsp;{פ}  
-**Full verse (English)**: Exalt the LORD our God,and bow toward His holy hill,for the LORD our God is holy.  
-
-*Hebrew phrase*: לְהַ֣ר קׇדְשׁ֑וֹ  
-*Explanation*: 'His holy hill' (Mount Zion/Jerusalem) is used metonymically to represent God's dwelling place or presence, towards which worship is directed....  
-*Target*: God's presence → Divine dwelling → Sacred space  
-*Vehicle*: Mount Zion → holy mountain → physical location  
-*Ground*: sacredness → divine association → place of worship  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: הֵיטִ֣יבָה בִ֭רְצוֹנְךָ אֶת־צִיּ֑וֹן תִּ֝בְנֶ֗ה חוֹמ֥וֹת יְרוּשָׁלָֽ͏ִם  
-**Full verse (English)**: May it please You to make Zion prosper;rebuild the walls of Jerusalem.  
-
-*Hebrew phrase*: צִיּ֑וֹן  
-*Explanation*: Zion, originally a specific hill in Jerusalem, is used metonymically to refer to the entire city of Jerusalem, its inhabitants, or the people of Israel associated with that location. The request to 'm...  
-*Target*: Jerusalem and its inhabitants → city and people → community, place  
-*Vehicle*: Mount Zion → geographical feature → physical location  
-*Ground*: representation by a significant part → association → identity  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: מַה־יָּקָ֥ר חַסְדְּךָ֗ אֱלֹ֫הִ֥ים וּבְנֵ֥י אָדָ֑ם בְּצֵ֥ל כְּ֝נָפֶ֗יךָ יֶחֱסָיֽוּן  
-**Full verse (English)**: How precious is Your faithful care, O God!Mankind shelters in the shadow of Your wings.  
-
-*Hebrew phrase*: בְּצֵ֥ל כְּ֝נָפֶ֗יךָ  
-*Explanation*: God's protective care and refuge are metaphorically described as 'wings,' likening divine shelter to the physical protection a bird provides under its wings. God does not literally possess physical wi...  
-*Target*: God's protection → divine care → spiritual refuge  
-*Vehicle*: bird's wings → animal's shelter → physical covering  
-*Ground*: safety → security → refuge  
-*Confidence*: 0.95  
-
-**Isaiah 7:2** (simile) - confidence: 0.99  
-*Figurative phrase*: their hearts and the hearts of their people trembled as trees of the forest sway before a wind  
-
-**Full verse (Hebrew)**: וַיֻּגַּ֗ד לְבֵ֤ית דָּוִד֙ לֵאמֹ֔ר נָ֥חָה אֲרָ֖ם עַל־אֶפְרָ֑יִם וַיָּ֤נַע לְבָבוֹ֙ וּלְבַ֣ב עַמּ֔וֹ כְּנ֥וֹעַ עֲצֵי־יַ֖עַר מִפְּנֵי־רֽוּחַ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: Now, when it was reported to the House of David that Aram had allied itself with Ephraim, their hearts and the hearts of their people trembled as trees of the forest sway before a wind.  
-
-*Hebrew phrase*: וַיָּ֤נַע לְבָבוֹ֙ וּלְבַ֣ב עַמּ֔וֹ כְּנ֥וֹעַ עֲצֵי־יַ֖עַר מִפְּנֵי־רֽוּחַ  
-*Explanation*: The inner fear of the royal house and people is compared, with an explicit 'as', to trees violently shaken by wind, highlighting how destabilized and powerless they feel....  
-*Target*: the hearts of Ahaz and his people (their fear) → human emotional state → inner human condition  
-*Vehicle*: trees of the forest swaying before the wind → natural objects moved by a storm → physical/natural world  
-*Ground*: uncontrollable shaking under an external force → instability and agitation → responses to overwhelming power  
-*Confidence*: 0.99  
-
-**Numbers 5:30** (metaphor, idiom) - confidence: 0.90  
-*Figurative phrase*: a fit of jealousy comes over him / lit. a spirit/wind of jealousy passes over him  
-
-**Full verse (Hebrew)**: א֣וֹ אִ֗ישׁ אֲשֶׁ֨ר תַּעֲבֹ֥ר עָלָ֛יו ר֥וּחַ קִנְאָ֖ה וְקִנֵּ֣א אֶת־אִשְׁתּ֑וֹ וְהֶעֱמִ֤יד אֶת־הָֽאִשָּׁה֙ לִפְנֵ֣י יְהֹוָ֔ה וְעָ֤שָׂה לָהּ֙ הַכֹּהֵ֔ן אֵ֥ת כׇּל־הַתּוֹרָ֖ה הַזֹּֽאת  
 
 
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 10
 **Filters**: Vehicle contains: darkness  
@@ -3906,62 +3487,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: wicked living involves confusion, danger, and lack of insight, much as moving in deep darkness is hazardous and disorienting → lack of visibility, danger, confusion → shared experiential pattern between darkness and moral ignorance  
 *Confidence*: 0.97  
 
-**Full verse (Hebrew)**: תָּ֭בוֹא עַד־דּ֣וֹר אֲבוֹתָ֑יו עַד־נֵ֝֗צַח לֹ֣א יִרְאוּ־אֽוֹר  
-**Full verse (English)**: yet he must join the company of his ancestors,who will never see daylight again.  
-
-*Hebrew phrase*: לֹ֣א יִרְאוּ־אֽוֹר  
-*Explanation*: Daylight (אור) is used metaphorically to represent life or existence in the world of the living. Not seeing daylight again signifies permanent death and the loss of life's experiences....  
-*Target*: death → cessation of life → human condition  
-*Vehicle*: darkness → absence of light → sensory experience  
-*Ground*: loss of life → non-existence → finality  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: כִּ֤י אָפְפֽוּ־עָלַ֨י&thinsp;׀ רָע֡וֹת עַד־אֵ֬ין מִסְפָּ֗ר הִשִּׂיג֣וּנִי עֲ֭וֺנֹתַי וְלֹא־יָכֹ֣לְתִּי לִרְא֑וֹת עָצְמ֥וּ מִשַּׂעֲר֥וֹת רֹ֝אשִׁ֗י וְלִבִּ֥י עֲזָבָֽנִי  
-**Full verse (English)**: For misfortunes without number envelop me;my iniquities have caught up with me;I cannot see;they are more than the hairs of my head;cOr “my courage fails me.”I am at my wits’ end.-c  
-
-*Hebrew phrase*: וְלֹא־יָכֹ֣לְתִּי לִרְא֑וֹת  
-*Explanation*: This is an idiom and metaphor for being overwhelmed to the point of despair, unable to perceive a way out, hope, or clarity in the situation, rather than literal physical blindness....  
-*Target*: speaker's despair → inability to cope → mental state  
-*Vehicle*: physical blindness → lack of vision → darkness  
-*Ground*: overwhelming distress → loss of hope → mental incapacitation  
-*Confidence*: 0.90  
-
-**Genesis 15:12** (metaphor) - confidence: 0.95  
-*Figurative phrase*: a great dark dread  
-
-**Full verse (Hebrew)**: וַיְהִ֤י הַשֶּׁ֙מֶשׁ֙ לָב֔וֹא וְתַרְדֵּמָ֖ה נָפְלָ֣ה עַל־אַבְרָ֑ם וְהִנֵּ֥ה אֵימָ֛ה חֲשֵׁכָ֥ה גְדֹלָ֖ה נֹפֶ֥לֶת עָלָֽיו  
-**Full verse (English)**: As the sun was about to set, a deep sleep fell upon Abram, and a great dark dread descended upon him.  
-
-*Hebrew phrase*: אֵימָ֛ה חֲשֵׁכָ֥ה גְדֹלָ֖ה  
-*Explanation*: 'Dark' is used metaphorically to describe the quality of the dread, as dread, an abstract emotion, does not literally possess color. It conveys an oppressive, ominous, or overwhelming nature....  
-*Target*: dread → emotion → psychological state  
-*Vehicle*: darkness → visual attribute → physical quality  
-*Ground*: oppressiveness → ominousness → overwhelming nature  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: הֲיִוָּדַ֣ע בַּחֹ֣שֶׁךְ פִּלְאֶ֑ךָ וְ֝צִדְקָתְךָ֗ בְּאֶ֣רֶץ נְשִׁיָּֽה  
-**Full verse (English)**: Are Your wonders made known in the netherworld,dLit. “darkness.”Your beneficent deeds in the land of oblivion?  
-
-*Hebrew phrase*: בַּחֹ֣שֶׁךְ  
-*Explanation*: Darkness (חֹשֶׁךְ) is a characteristic attribute of Sheol (the netherworld) and is used here to refer to Sheol itself, functioning as a metonymy and a common biblical idiom for the realm of the dead....  
-*Target*: Sheol → realm of the dead → underworld  
-*Vehicle*: darkness → absence of light → physical condition  
-*Ground*: obscurity → inactivity → lack of divine revelation/activity  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: הִרְחַ֣קְתָּ מִ֭מֶּנִּי אֹהֵ֣ב וָרֵ֑עַ מְֽיֻדָּעַ֥י מַחְשָֽׁךְ&nbsp;{פ}  
-**Full verse (English)**: You have put friend and neighbor far from meand my companions out of my sight.fLit. “into darkness.”  
-
-*Hebrew phrase*: מְֽיֻדָּעַ֥י מַחְשָֽׁךְ  
-*Explanation*: The phrase 'into darkness' is a metaphor for the companions being removed, lost, or made inaccessible to the speaker, rather than literally placed in a dark physical location. It signifies their absen...  
-*Target*: companions' absence → loss of presence → human experience of loss  
-*Vehicle*: darkness → obscurity → lack of light  
-*Ground*: invisibility → unavailability → removal from perception  
-*Confidence*: 0.90  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 11
 **Filters**: Vehicle contains: thunder  
@@ -4020,58 +3548,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: audibility → expression → attention-seeking  
 *Confidence*: 0.90  
 
-**Genesis 4:25** () - confidence: 1.00  
-*Figurative phrase*: God has provided me with another offspring  
-
-**Full verse (Hebrew)**: וַיֵּ֨דַע אָדָ֥ם עוֹד֙ אֶת־אִשְׁתּ֔וֹ וַתֵּ֣לֶד בֵּ֔ן וַתִּקְרָ֥א אֶת־שְׁמ֖וֹ שֵׁ֑ת כִּ֣י שָֽׁת־לִ֤י אֱלֹהִים֙ זֶ֣רַע אַחֵ֔ר תַּ֣חַת הֶ֔בֶל כִּ֥י הֲרָג֖וֹ קָֽיִן  
-**Full verse (English)**: Adam knew his wife again, and she bore a son and named him Seth, meaning, “God has provided me with*provided me with Or “established for me”; Heb. shath, connected with “Seth.” another offspring in place of Abel,” for Cain had killed him.  
-
-*Hebrew phrase*: שָֽׁת־לִ֤י אֱלֹהִים֙ זֶ֣רַע אַחֵ֔ר  
-*Explanation*: This phrase contains a paronomasia or wordplay, linking the name Seth (שֵׁ֑ת) to the verb שָׁת (shath), meaning 'to provide' or 'to establish,' explaining the significance of the name....  
-*Target*: name meaning → divine provision → human destiny  
-*Vehicle*: linguistic sound → etymological connection → verbal association  
-*Ground*: explanation → significance → divine action  
-*Confidence*: 1.00  
-
-**Full verse (Hebrew)**: נְפוּג֣וֹתִי וְנִדְכֵּ֣יתִי עַד־מְאֹ֑ד שָׁ֝אַ֗גְתִּי מִֽנַּהֲמַ֥ת לִבִּֽי  
-**Full verse (English)**: I am all benumbed and crushed;I roar because of the turmoil in my mind.  
-
-*Hebrew phrase*: מִֽנַּהֲמַ֥ת לִבִּֽי  
-*Explanation*: The 'heart/mind' (לֵב) is personified as making a 'roaring/groaning' sound (נַהֲמַת), an action it cannot literally perform. This personified sound then serves as a metaphor for the intense, overwhelm...  
-*Target*: internal turmoil → emotional distress → inner suffering  
-*Vehicle*: roaring/groaning animal → primal sound → animal behavior  
-*Ground*: intensity of sound → overwhelming nature → internal agitation  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: כִּ֣י כׇל־יָ֭מֵינוּ פָּנ֣וּ בְעֶבְרָתֶ֑ךָ כִּלִּ֖ינוּ שָׁנֵ֣ינוּ כְמוֹ־הֶֽגֶה  
-**Full verse (English)**: All our days pass away in Your wrath;we spend our years like a sigh.  
-
-*Hebrew phrase*: כְמוֹ־הֶֽגֶה  
-*Explanation*: This is a simile, explicitly comparing the brevity and fleeting nature of human years to a sigh. A sigh is a short, often involuntary expression of weariness, sorrow, or relief that quickly dissipates...  
-*Target*: The passing of human years → Human lifespan → Temporal existence  
-*Vehicle*: A sigh → Brief vocal expression → Fleeting sound  
-*Ground*: Brevity, fleetingness, insubstantiality → Temporal transience → Existential fragility  
-*Confidence*: 0.90  
-
-**Isaiah 40:24** (simile, hyperbole) - confidence: 0.97  
-*Figurative phrase*: Then he blows on them, and they wither, and the storm carries them off like stubble  
-
-**Full verse (Hebrew)**: אַ֣ף בַּל־נִטָּ֗עוּ אַ֚ף בַּל־זֹרָ֔עוּ אַ֛ף בַּל־שֹׁרֵ֥שׁ בָּאָ֖רֶץ גִּזְעָ֑ם וְגַם־נָשַׁ֤ף בָּהֶם֙ וַיִּבָ֔שׁוּ וּסְעָרָ֖ה כַּקַּ֥שׁ תִּשָּׂאֵֽם&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: Hardly are they planted, Hardly are they sown, Hardly has their stem Taken root in earth, When [God] blows upon them and they dry up, And the storm bears them off like straw.  
-
-*Hebrew phrase*: וְגַם־נָשַׁף בָּהֶם וַיִּבָשׁוּ וּסְעָרָה כַּקַּשׁ תִּשָּׂאֵם  
-*Explanation*: God's 'blowing' and the storm carrying them like stubble form a hyperbolic simile: rulers are like agricultural waste blown away by a storm, stressing how easily God eradicates them....  
-*Target*: those same rulers → ephemeral human powers → political order  
-*Vehicle*: plants/stubble withering under a scorching wind and blown away in a storm → chaff-like agricultural waste → weather events  
-*Ground*: sudden withering and removal, lightness, powerlessness to resist strong wind → ease with which God can dispose of them → ephemeral existence  
-*Confidence*: 0.97  
-
-**Deuteronomy 27:10** (idiom) - confidence: 0.90  
-*Figurative phrase*: Heed your God יהוה  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 12
 **Filters**: Vehicle contains: arrow  
@@ -4122,62 +3601,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 **Isaiah 49:6** (metaphor) - confidence: 0.98  
 *Figurative phrase*: I will also make you a light of nations  
 
-**Full verse (Hebrew)**: וַיֹּ֗אמֶר נָקֵ֨ל מִֽהְיוֹתְךָ֥ לִי֙ עֶ֔בֶד לְהָקִים֙ אֶת־שִׁבְטֵ֣י יַעֲקֹ֔ב (ונצירי) [וּנְצוּרֵ֥י] יִשְׂרָאֵ֖ל לְהָשִׁ֑יב וּנְתַתִּ֙יךָ֙ לְא֣וֹר גּוֹיִ֔ם לִהְי֥וֹת יְשׁוּעָתִ֖י עַד־קְצֵ֥ה הָאָֽרֶץ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: And [God] has said: “It is too little that you should be My servant In that I raise up the tribes of Jacob And restore the survivors of Israel: I will also make you a light of nations, That My salvation may reach the ends of the earth.”  
-
-*Hebrew phrase*: וּנְתַתִּיךָ לְאוֹר גּוֹיִם  
-*Explanation*: The servant is metaphorically made into a 'light' for nations, portraying his mission as revelation and guidance dispelling darkness among the peoples....  
-*Target*: the servant's role among the nations → mission to Gentiles → scope of salvation  
-*Vehicle*: light → luminous source → cosmic/visual phenomenon  
-*Ground*: revealing what is hidden → guiding safely → bringing life and joy where there was darkness  
-*Confidence*: 0.98  
-
-**Full verse (Hebrew)**: שַׁתָּ֣ עֲוֺנֹתֵ֣ינוּ לְנֶגְדֶּ֑ךָ עֲ֝לֻמֵ֗נוּ לִמְא֥וֹר פָּנֶֽיךָ  
-**Full verse (English)**: You have set our iniquities before You,our hidden sins in the light of Your face.  
-
-*Hebrew phrase*: לִמְא֥וֹר פָּנֶֽיךָ  
-*Explanation*: The 'light of Your face' is an idiom for God's revealing and scrutinizing presence. 'Light' here is a metaphor for revelation, exposure, and comprehensive knowledge, indicating that hidden sins are fu...  
-*Target*: exposure of hidden sins → divine revelation of sin → spiritual state, divine judgment  
-*Vehicle*: illuminating light → radiant glow → physical light, natural phenomenon  
-*Ground*: revelation, exposure → scrutiny, making manifest → divine knowledge, truth  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: וַתִּתֶּן־לִי֮ מָגֵ֢ן יִ֫שְׁעֶ֥ךָ וִֽימִינְךָ֥ תִסְעָדֵ֑נִי וְֽעַנְוַתְךָ֥ תַרְבֵּֽנִי  
-**Full verse (English)**: You have given me the shield of Your protection;Your right hand has sustained me,Your carekMeaning of Heb. uncertain; others “condescension.” has made me great.  
-
-*Hebrew phrase*: מָגֵ֢ן יִ֫שְׁעֶ֥ךָ  
-*Explanation*: God's protection is likened to a shield, emphasizing its defensive and safeguarding qualities. God does not literally provide a physical shield named 'protection'....  
-*Target*: God's protection → divine attribute → abstract concept  
-*Vehicle*: shield → defensive weapon → physical object  
-*Ground*: defense → security → safeguarding  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: לִירֹ֣ת בַּמִּסְתָּרִ֣ים תָּ֑ם פִּתְאֹ֥ם יֹ֝רֻ֗הוּ וְלֹ֣א יִירָֽאוּ  
-**Full verse (English)**: to shoot from hiding at the blameless man;they shoot him suddenly and without fear.  
-
-*Hebrew phrase*: לִירֹ֣ת בַּמִּסְתָּרִ֣ים תָּ֑ם פִּתְאֹ֥ם יֹ֝רֻ֗הוּ  
-*Explanation*: The physical act of shooting an arrow from an ambush is a metaphor for launching sudden, malicious verbal attacks (slander) or carrying out secret plots. The preceding verse (Ps 64:3) establishes this...  
-*Target*: slanderous attacks → malicious speech → wicked deeds  
-*Vehicle*: shooting arrows from hiding → ambush → archery  
-*Ground*: suddenness and secrecy → cowardly attack → malicious harm  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: יְהֹוָ֤ה&thinsp;׀ סַ֥לְעִ֥י וּמְצוּדָתִ֗י וּמְפַ֫לְטִ֥י אֵלִ֣י צ֭וּרִי אֶֽחֱסֶה־בּ֑וֹ מָֽגִנִּ֥י וְקֶֽרֶן־יִ֝שְׁעִ֗י מִשְׂגַּבִּֽי  
-**Full verse (English)**: O LORD, my crag, my fortress, my rescuer,my God, my rock in whom I seek refuge,my shield, my cLit. “horn of rescue.”mighty champion,-c my haven.  
-
-*Hebrew phrase*: מָֽגִנִּ֥י  
-*Explanation*: God is not a literal shield; the term is used metaphorically to describe God's protective power against harm and danger....  
-*Target*: God → Divine Protector → Deity  
-*Vehicle*: shield → defensive weapon → protective object  
-*Ground*: protection → defense → safety  
-*Confidence*: 0.90  
-
-**Deuteronomy 33:2** () - confidence: 1.00  
-*Figurative phrase*: And shone upon them from Seir; [God] appeared from Mount Paran  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 13
 **Filters**: Vehicle contains: foundation  
@@ -4230,64 +3656,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Confidence*: 0.90  
 
 **Full verse (Hebrew)**: כִּֽי־הִנֵּ֣ה א֭וֹיְבֶיךָ יֶהֱמָי֑וּן וּ֝מְשַׂנְאֶ֗יךָ נָ֣שְׂאוּ רֹֽאשׁ  
-**Full verse (English)**: For Your enemies rage,Your foes aLit. “lift up the head.”assert themselves.-a  
-
-*Hebrew phrase*: יֶהֱמָי֑וּן  
-*Explanation*: The verb 'rage' (from the root ה.מ.ה) often describes the roaring of the sea or wild animals. When applied to human enemies, it metaphorically likens their tumultuous, aggressive, and threatening beha...  
-*Target*: enemies → adversaries → people  
-*Vehicle*: roaring animal → surging sea → natural force  
-*Ground*: ferocity → aggression → tumultuousness  
-*Confidence*: 0.90  
-
-**Isaiah 8:14** (metaphor) - confidence: 0.96  
-*Figurative phrase*: a trap and a snare for those who dwell in Jerusalem  
-
-**Full verse (Hebrew)**: וְהָיָ֖ה לְמִקְדָּ֑שׁ וּלְאֶ֣בֶן נֶ֠גֶף וּלְצ֨וּר מִכְשׁ֜וֹל לִשְׁנֵ֨י בָתֵּ֤י יִשְׂרָאֵל֙ לְפַ֣ח וּלְמוֹקֵ֔שׁ לְיוֹשֵׁ֖ב יְרוּשָׁלָֽ͏ִם  
-**Full verse (English)**: [God] shall become a sanctuary, A stone people strike against: A rock people stumble over For the two Houses of Israel, And a trap and a snare for those Who dwell in Jerusalem.  
-
-*Hebrew phrase*: לְפַח וּלְמוֹקֵשׁ לְיוֹשֵׁב יְרוּשָׁלָ͏ִם  
-*Explanation*: For Jerusalem’s inhabitants, God is likened to hidden trapping devices that ensnare; the image depicts divine judgment as unexpected capture....  
-*Target*: the inhabitants of Jerusalem who respond wrongly to YHWH → their experience of unexpected judgment → urban Judah under divine testing  
-*Vehicle*: a trap and a snare used to catch animals or enemies → hidden devices that suddenly capture the unwary → hunting/warfare implements  
-*Ground*: sudden capture, inability to escape once caught → danger concealed until the moment of action → retributive capture of the unsuspecting  
-*Confidence*: 0.96  
-
-**Genesis 41:13** (metonymy) - confidence: 0.90  
-*Figurative phrase*: to my post  
-
-**Full verse (Hebrew)**: וַיְהִ֛י כַּאֲשֶׁ֥ר פָּֽתַר־לָ֖נוּ כֵּ֣ן הָיָ֑ה אֹתִ֛י הֵשִׁ֥יב עַל־כַּנִּ֖י וְאֹת֥וֹ תָלָֽה  
-**Full verse (English)**: And as he interpreted for us, so it came to pass: I was restored to my post, and the other was impaled.”  
-
-*Hebrew phrase*: עַל־כַּנִּ֖י  
-*Explanation*: The physical 'stand' or 'post' (כַּן) is used metonymically to represent the chief butler's official position or office in Pharaoh's court....  
-*Target*: butler's official position → official role → social status  
-*Vehicle*: physical stand → base → concrete object  
-*Ground*: established place → fixed position → stability  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: תְּבוֹאֵ֣הוּ שׁוֹאָה֮ לֹֽא־יֵ֫דָ֥ע וְרִשְׁתּ֣וֹ אֲשֶׁר־טָמַ֣ן תִּלְכְּד֑וֹ בְּ֝שׁוֹאָ֗ה יִפׇּל־בָּֽהּ  
-**Full verse (English)**: Let disaster overtake them unawares;let the net they hid catch them;let them fall into it when disaster [strikes].  
-
-*Hebrew phrase*: וְרִשְׁתּ֣וֹ אֲשֶׁר־טָמַ֣ן תִּלְכְּד֑וֹ בְּ֝שׁוֹאָ֗ה יִפׇּל־בָּֽהּ  
-*Explanation*: The 'net' metaphorically represents schemes, plots, or traps that the wicked set for others, which will ultimately ensnare themselves...  
-*Target*: wicked person's schemes → evil plots → human wickedness  
-*Vehicle*: hidden hunting net → trapping device → physical snare  
-*Ground*: self-destructive consequences → retributive justice → moral principle  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: אַל־תִּשְׁטְפֵ֤נִי&thinsp;׀ שִׁבֹּ֣לֶת מַ֭יִם וְאַל־תִּבְלָעֵ֣נִי מְצוּלָ֑ה וְאַל־תֶּאְטַר־עָלַ֖י בְּאֵ֣ר פִּֽיהָ  
-**Full verse (English)**: Let the floodwaters not sweep me away;let the deep not swallow me;let the mouth of the Pit not close over me.  
-
-*Hebrew phrase*: וְאַל־תִּבְלָעֵ֣נִי מְצוּלָ֑ה  
-*Explanation*: “The deep” (מְצוּלָה) is personified as a monstrous entity capable of actively “swallowing” the speaker, serving as a metaphor for being utterly consumed by distress or death....  
-*Target*: speaker's impending doom → consumption by distress → threat of death  
-*Vehicle*: swallowing deep → devouring abyss → predatory entity  
-*Ground*: consuming power → engulfing danger → inescapable destruction  
-*Confidence*: 0.90  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 14
 **Filters**: Vehicle contains: birth  
@@ -4340,58 +3711,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Figurative phrase*: But the mouth of the wicked blurts out evil things  
 
 **Full verse (Hebrew)**: לֵ֣ב צַ֭דִּיק יֶהְגֶּ֣ה לַעֲנ֑וֹת וּפִ֥י רְ֝שָׁעִ֗ים יַבִּ֥יעַ רָעֽוֹת  
-**Full verse (English)**: The heart of the righteous man rehearses his answer, But the mouth of the wicked blurts out evil things.  
-
-*Hebrew phrase*: וּפִ֥י רְ֝שָׁעִ֗ים יַבִּ֥יעַ רָעֽוֹת  
-*Explanation*: The 'mouth' (metonymy for speech) is portrayed as a source that 'gushes' evils, likening wicked talk to a spring pouring out corrupt water....  
-*Target*: the wicked person's speech and its harmful content → verbal output → human communication  
-*Vehicle*: a spring or fountain that bubbles/gushes out water → source of flowing liquid → natural water phenomenon  
-*Ground*: both a spring and wicked speech produce an emerging flow of something (water vs. evils) → abundant, often uncontrolled outflow → constant issuing forth from a source  
-*Confidence*: 0.96  
-
-**Proverbs 27:15** (simile, metaphor, hyperbole) - confidence: 0.92  
-*Figurative phrase*: An endless dripping on a rainy day and a contentious wife are alike.  
-
-**Full verse (Hebrew)**: דֶּ֣לֶף ט֭וֹרֵד בְּי֣וֹם סַגְרִ֑יר וְאֵ֥שֶׁת (מדונים) [מִ֝דְיָנִ֗ים] נִשְׁתָּוָֽה  
-**Full verse (English)**: An endless dripping on a rainy day And a contentious wife are alike;  
-
-*Hebrew phrase*: דֶּלֶף טוֹרֵד בְּיוֹם סַגְרִיר וְאֵשֶׁת מִדְיָנִים נִשְׁתָּוָה  
-*Explanation*: The contentious wife is likened to continual dripping, a simile/metaphor about unending irritation and the wearing effect of constant strife....  
-*Target*: living with a contentious wife → ongoing domestic strife → family life  
-*Vehicle*: continual dripping on a rainy day → persistent water leak → nature/weather/household  
-*Ground*: irritating, incessant, inescapable annoyance → duration/intensity → wearing down patience  
-*Confidence*: 0.92  
-
-**Proverbs 18:4** (metaphor) - confidence: 0.96  
-*Figurative phrase*: The words of a man’s mouth are deep waters  
-
-**Full verse (Hebrew)**: מַ֣יִם עֲ֭מֻקִּים דִּבְרֵ֣י פִי־אִ֑ישׁ נַ֥חַל נֹ֝בֵ֗עַ מְק֣וֹר חׇכְמָֽה  
-**Full verse (English)**: The words a man speaks are deep waters, A flowing stream, a fountain of wisdom.  
-
-*Hebrew phrase*: מַיִם עֲמֻקִּים דִּבְרֵי פִי־אִישׁ  
-*Explanation*: Speech is likened to 'deep waters,' suggesting it can be profound, hard to fathom, and potentially dangerous or rich....  
-*Target*: a man's words/speech → human communication → social-moral life  
-*Vehicle*: deep waters → natural water body → physical/natural world  
-*Ground*: hidden depth, difficulty of sounding, potential danger or richness → shared qualitative features → conceptual mapping of depth/obscurity onto speech  
-*Confidence*: 0.96  
-
-**Isaiah 48:1** (metaphor) - confidence: 0.90  
-*Figurative phrase*: and have issued from the waters of Judah  
-
-**Full verse (Hebrew)**: שִׁמְעוּ־זֹ֣את בֵּֽית־יַעֲקֹ֗ב הַנִּקְרָאִים֙ בְּשֵׁ֣ם יִשְׂרָאֵ֔ל וּמִמֵּ֥י יְהוּדָ֖ה יָצָ֑אוּ הַֽנִּשְׁבָּעִ֣ים&thinsp;׀ בְּשֵׁ֣ם יְהֹוָ֗ה וּבֵאלֹהֵ֤י יִשְׂרָאֵל֙ יַזְכִּ֔ירוּ לֹ֥א בֶאֱמֶ֖ת וְלֹ֥א בִצְדָקָֽה  
-**Full verse (English)**: Listen to this, O House of Jacob, Who bear the name Israel And have issued from the waters of Judah, Who swear by the name of  GOD  And invoke the God of Israel— Though not in truth and sincerity—  
-
-*Hebrew phrase*: וּמִמֵּ֥י יְהוּדָ֖ה יָצָ֑אוּ  
-*Explanation*: ‘Waters of Judah’ figuratively depicts Judah’s generative power/seed as water flowing from a source, an idiomatic metaphor for lineage....  
-*Target*: their genealogical origin from Judah → biological descent → human procreation  
-*Vehicle*: waters of Judah → flowing liquid from a source → natural element / spring  
-*Ground*: coming forth from a source in an unbroken flow, suggesting lineage and continuity → origin and continuity → causal / generative domain  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: אֱלֹהִ֤ים&thinsp;׀ אֵלִ֥י אַתָּ֗ה אֲֽשַׁ֫חֲרֶ֥ךָּ צָמְאָ֬ה לְךָ֨&thinsp;׀ נַפְשִׁ֗י כָּמַ֣הּ לְךָ֣ בְשָׂרִ֑י בְּאֶרֶץ־צִיָּ֖ה וְעָיֵ֣ף בְּלִי־מָֽיִם  
 
 
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 15
 **Filters**: Vehicle contains: space  
@@ -4450,58 +3772,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: intimacy → privacy → relational state  
 *Confidence*: 1.00  
 
-**Full verse (Hebrew)**: אַֽל־תִּזְכׇּר־לָנוּ֮ עֲוֺנֹ֢ת רִאשֹׁ֫נִ֥ים מַ֭הֵר יְקַדְּמ֣וּנוּ רַחֲמֶ֑יךָ כִּ֖י דַלּ֣וֹנוּ מְאֹֽד  
-**Full verse (English)**: Do not hold our former iniquities against us;let Your compassion come swiftly toward us,for we have sunk very low.  
-
-*Hebrew phrase*: דַּלּ֣וֹנוּ מְאֹֽד  
-*Explanation*: The physical action of 'sinking' is used metaphorically to describe a state of extreme degradation, weakness, destitution, or despair, not a literal physical descent....  
-*Target*: human condition → state of despair → national degradation  
-*Vehicle*: sinking object → physical descent → object in distress  
-*Ground*: extreme lowness → helplessness → vulnerability  
-*Confidence*: 0.95  
-
-**Deuteronomy 27:22** (idiom, metonymy) - confidence: 1.00  
-*Figurative phrase*: lies with  
-
-**Full verse (Hebrew)**: אָר֗וּר שֹׁכֵב֙ עִם־אֲחֹת֔וֹ בַּת־אָבִ֖יו א֣וֹ בַת־אִמּ֑וֹ וְאָמַ֥ר כׇּל־הָעָ֖ם אָמֵֽן&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: Cursed be the [man] who lies with his sister, whether daughter of his father or of his mother.—And all the people shall say, Amen.  
-
-*Hebrew phrase*: שֹׁכֵב֙ עִם  
-*Explanation*: The phrase 'שֹׁכֵב֙ עִם' (shokhev im), meaning 'lies with,' is a common biblical idiom and euphemism for engaging in sexual intercourse. It uses a related physical action (lying down together) to repr...  
-*Target*: sexual intercourse → sexual act → human intimacy  
-*Vehicle*: lying down together → physical proximity → shared space  
-*Ground*: intimacy → physical closeness → shared private space  
-*Confidence*: 1.00  
-
-**Isaiah 49:20** (idiom, hyperbole) - confidence: 0.90  
-*Figurative phrase*: The place is too crowded for me; Make room for me to settle.  
-
-**Full verse (Hebrew)**: ע֚וֹד יֹאמְר֣וּ בְאׇזְנַ֔יִךְ בְּנֵ֖י שִׁכֻּלָ֑יִךְ צַר־לִ֥י הַמָּק֖וֹם גְּשָׁה־לִּ֥י וְאֵשֵֽׁבָה  
-**Full verse (English)**: The children you thought you had lost  Shall yet say in your hearing, “The place is too crowded for me; Make room for me to settle.”  
-
-*Hebrew phrase*: צַר־לִי הַמָּקוֹם גְּשָׁה־לִּי וְאֵשֵׁבָה  
-*Explanation*: The imagined children complain that the place is too cramped, a hyperbolic, personified speech expressing the overflowing numbers in Zion's future....  
-*Target*: the great number of restored children → future population of Zion → abundant growth  
-*Vehicle*: cramped living space → overcrowded dwelling → spatial limitation  
-*Ground*: excess beyond capacity → pressing need for expansion → surprising abundance  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: כִּ֤י אֵ֪ין בְּפִ֡יהוּ נְכוֹנָה֮ קִרְבָּ֢ם הַ֫וּ֥וֹת קֶֽבֶר־פָּת֥וּחַ גְּרֹנָ֑ם לְ֝שׁוֹנָ֗ם יַחֲלִיקֽוּן  
-**Full verse (English)**: For there is no sincerity on their lips;cLit. “mouth.”their heart is [filled with] malice;their throat is an open grave;their tongue slippery.  
-
-*Hebrew phrase*: קֶֽבֶר־פָּת֥וּחַ גְּרֹנָ֑ם  
-*Explanation*: This is a powerful metaphor comparing the throat of the wicked, representing their speech, to an open grave. An open grave is a place of death, decay, and consumption, implying their words are deadly ...  
-*Target*: their throat → their speech → human communication  
-*Vehicle*: open grave → tomb → place of death  
-*Ground*: deadliness → danger → corruption  
-*Confidence*: 1.00  
-
-**Isaiah 64:2** (metaphor) - confidence: 0.90  
-*Figurative phrase*: You came down  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 16
 **Filters**: Vehicle contains: lamp  
@@ -4556,56 +3829,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 **Isaiah 60:5** (metaphor, personification) - confidence: 0.90  
 *Figurative phrase*: As you behold, you will glow / be radiant  
 
-**Full verse (Hebrew)**: אָ֤ז תִּרְאִי֙ וְנָהַ֔רְתְּ וּפָחַ֥ד וְרָחַ֖ב לְבָבֵ֑ךְ כִּֽי־יֵהָפֵ֤ךְ עָלַ֙יִךְ֙ הֲמ֣וֹן יָ֔ם חֵ֥יל גּוֹיִ֖ם יָבֹ֥אוּ לָֽךְ  
-**Full verse (English)**: As you behold, you will glow; Your heart will throb and thrill— For the wealth of the sea shall pass on to you, The riches of nations shall flow to you.  
-
-*Hebrew phrase*: אָ֤ז תִּרְאִי֙ וְנָהַ֔רְתְּ  
-*Explanation*: Zion is said to ‘glow’ or ‘shine’ when she sees the influx of her children and wealth, using brightness as a metaphor for exuberant joy....  
-*Target*: Zion’s emotional response to restoration → inner joy and amazement → Zion/Israel’s affective state  
-*Vehicle*: a face/body shining with light → radiant brightness → visual/light phenomena  
-*Ground*: radiance suggests joy, vitality, attractiveness → inward delight made visible → joy conceptualized as shining  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: לֹ֤א יָדְע֨וּ&thinsp;׀ וְלֹ֥א יָבִ֗ינוּ בַּחֲשֵׁכָ֥ה יִתְהַלָּ֑כוּ יִ֝מּ֗וֹטוּ כׇּל־מ֥וֹסְדֵי אָֽרֶץ  
-**Full verse (English)**: They neither know nor understand,they go about in darkness;all the foundations of the earth totter.  
-
-*Hebrew phrase*: בַּחֲשֵׁכָ֥ה יִתְהַלָּ֑כוּ  
-*Explanation*: The 'darkness' is a metaphor for spiritual, moral, or intellectual ignorance and depravity, rather than literal physical darkness. The 'going about' describes their manner of life within this state....  
-*Target*: ignorant people → morally corrupt individuals → humanity  
-*Vehicle*: people walking in physical darkness → blind individuals → living creatures  
-*Ground*: lack of knowledge → spiritual blindness → moral depravity  
-*Confidence*: 0.90  
-
-**Isaiah 2:5** (metaphor) - confidence: 0.95  
-*Figurative phrase*: Come, let us walk by the light of GOD  
-
-**Full verse (Hebrew)**: בֵּ֖ית יַעֲקֹ֑ב לְכ֥וּ וְנֵלְכָ֖ה בְּא֥וֹר יְהֹוָֽה  
-**Full verse (English)**: O House of Jacob! Come, let us walk By the light of  GOD.  
-
-*Hebrew phrase*: לְכוּ וְנֵלְכָה בְּאוֹר יְהוָה  
-*Explanation*: Life under God’s guidance is pictured as walking in His 'light', mapping physical illumination and safe travel onto spiritual insight and faithful conduct....  
-*Target*: Israel’s manner of life in relation to God → ethical-spiritual conduct → covenant obedience  
-*Vehicle*: Walking in light → illumination and clear visibility → physical environment of light  
-*Ground*: Guidance, clarity, and safety as opposed to darkness/confusion → moral/spiritual enlightenment → secure orientation  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: וָ֭אֹמַר אַךְ־חֹ֣שֶׁךְ יְשׁוּפֵ֑נִי וְ֝לַ֗יְלָה א֣וֹר בַּעֲדֵֽנִי  
-**Full verse (English)**: If I say, “Surely darkness bCf. Rashi, Ibn Ezra; meaning of Heb. uncertain.will conceal me,night will provide me with cover,”-b  
-
-*Hebrew phrase*: אַךְ־חֹשֶׁךְ יְשׁוּפֵ֑נִי  
-*Explanation*: The abstract concept of 'darkness' is attributed the active ability to 'conceal' or 'cover' the psalmist, an action typically performed by an agent. This gives an inanimate concept human-like agency....  
-*Target*: psalmist's desire to hide → human attempt at concealment → human condition  
-*Vehicle*: darkness as an active agent → concealing force → natural phenomenon with agency  
-*Ground*: ability to obscure → providing invisibility → secrecy  
-*Confidence*: 0.90  
-
-**Exodus 40:4** (idiom) - confidence: 0.90  
-*Figurative phrase*: light its lamps  
-
-**Full verse (Hebrew)**: וְהֵבֵאתָ֙ אֶת־הַשֻּׁלְחָ֔ן וְעָרַכְתָּ֖ אֶת־עֶרְכּ֑וֹ וְהֵבֵאתָ֙ אֶת־הַמְּנֹרָ֔ה וְהַעֲלֵיתָ֖ אֶת־נֵרֹתֶֽיהָ  
 
 
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 17
 **Filters**: Vehicle contains: deer  
@@ -4664,58 +3890,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: Being on the heights suggests sovereignty, safety from enemies, and honor → elevation, mastery, overview → victory context  
 *Confidence*: 0.96  
 
-**Full verse (Hebrew)**: כִּ֤י בִ֣י חָ֭שַׁק וַאֲפַלְּטֵ֑הוּ אֲ֝שַׂגְּבֵ֗הוּ כִּֽי־יָדַ֥ע שְׁמִֽי  
-**Full verse (English)**: “Because he is devoted to Me I will deliver him;I will keep him safe, for he knows My name.  
-
-*Hebrew phrase*: אֲ֝שַׂגְּבֵ֗הוּ  
-*Explanation*: The act of 'setting on high' (from the root שׂגב) is a metaphor for granting security, protection, and elevated status. It's not a literal physical elevation, but a state of being made safe and inacce...  
-*Target*: person's security → divine protection → human well-being  
-*Vehicle*: high place → inaccessible fortress → elevated position  
-*Ground*: safety → security → invulnerability  
-*Confidence*: 0.95  
-
-**Isaiah 58:4** (metaphor, idiom, metonymy) - confidence: 0.93  
-*Figurative phrase*: To make your voice heard on high  
-
-**Full verse (Hebrew)**: הֵ֣ן לְרִ֤יב וּמַצָּה֙ תָּצ֔וּמוּ וּלְהַכּ֖וֹת בְּאֶגְרֹ֣ף רֶ֑שַׁע לֹא־תָצ֣וּמוּ כַיּ֔וֹם לְהַשְׁמִ֥יעַ בַּמָּר֖וֹם קוֹלְכֶֽם  
-**Full verse (English)**: Because you fast in strife and contention, And you strike with a wicked fist! Your fasting today is not such As to make your voice heard on high.  
-
-*Hebrew phrase*: לְהַשְׁמִיעַ בַּמָּרוֹם קוֹלְכֶם  
-*Explanation*: “On high” is a metonymy for heaven/God, and to have one’s voice ‘heard’ there is a metaphorical idiom for effective, accepted prayer, not a literal acoustic event....  
-*Target*: Their prayers being noticed and favorably received by God → religious petitions → divine-human communication  
-*Vehicle*: A voice audible up in the heights of heaven → sound reaching a high place → vertical acoustic image  
-*Ground*: Being ‘heard’ equates to gaining attention and response → height symbolizes God’s dwelling and transcendence → prayer as upward communication  
-*Confidence*: 0.93  
-
-**Proverbs 9:3** (personification) - confidence: 0.97  
-*Figurative phrase*: She has sent out her maids to announce on the heights of the town  
-
-**Full verse (Hebrew)**: שָׁלְחָ֣ה נַעֲרֹתֶ֣יהָ תִקְרָ֑א עַל־גַּ֝פֵּ֗י מְרֹ֣מֵי קָֽרֶת  
-**Full verse (English)**: She has sent out her maids to announce On the heights of the town,  
-
-*Hebrew phrase*: שָׁלְחָה נַעֲרֹתֶיהָ תִקְרָא עַל־גַּפֵּי מְרֹמֵי קָרֶת  
-*Explanation*: The abstract concept of wisdom is portrayed as a woman with maidservants who publicly calls from city heights, giving her human relationships and actions....  
-*Target*: the dissemination of wisdom’s call and teaching → instructional outreach → moral-spiritual communication  
-*Vehicle*: a woman sending her maidens to proclaim from high places → household mistress with messengers → social/public sphere  
-*Ground*: intentional outreach, public proclamation, organizational agency → agentive and communicative traits → social-relational qualities  
-*Confidence*: 0.97  
-
-**Exodus 9:17** (metaphor) - confidence: 0.90  
-*Figurative phrase*: exalt yourself over My people  
-
-**Full verse (Hebrew)**: עוֹדְךָ֖ מִסְתּוֹלֵ֣ל בְּעַמִּ֑י לְבִלְתִּ֖י שַׁלְּחָֽם  
-**Full verse (English)**: Yet you continue to thwart*thwart Others “exalt yourself over.” My people, and do not let them go!  
-
-*Hebrew phrase*: מִסְתּוֹלֵ֣ל בְּעַמִּ֑י  
-*Explanation*: The verb מִסְתּוֹלֵ֣ל (mistolel), from the root סלל ('to heap up,' 'to build'), in the Hithpael means 'to exalt oneself' or 'to lift oneself up.' When used in the context of 'over My people,' it is a ...  
-*Target*: Pharaoh's defiance → human opposition → power dynamics  
-*Vehicle*: physical elevation → building a high place → spatial positioning  
-*Ground*: arrogance → obstinacy → assertion of superiority  
-*Confidence*: 0.90  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 18
 **Filters**: Vehicle contains: feet  
@@ -4768,64 +3945,9 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Confidence*: 0.95  
 
 **Full verse (Hebrew)**: לֹא־נָס֣וֹג אָח֣וֹר לִבֵּ֑נוּ וַתֵּ֥ט אֲ֝שֻׁרֵ֗ינוּ מִנִּ֥י אׇרְחֶֽךָ  
-**Full verse (English)**: Our hearts have not gone astray,nor have our feet swerved from Your path,  
-
-*Hebrew phrase*: אֲ֝שֻׁרֵ֗ינוּ  
-*Explanation*: The physical feet (אֲשׁוּרִים, steps) are used metonymically to represent one's conduct, actions, or way of life. The swerving refers to a deviation in behavior....  
-*Target*: human conduct, actions → way of life, behavior → person's journey  
-*Vehicle*: physical feet, steps → bodily appendages → means of locomotion  
-*Ground*: means of movement → direction of travel → expression of outward behavior  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: אֶ֭מְחָצֵם וְלֹא־יֻ֣כְלוּ ק֑וּם יִ֝פְּל֗וּ תַּ֣חַת רַגְלָֽי  
-**Full verse (English)**: I struck them down,and they could rise no more;they lay fallen at my feet.  
-
-*Hebrew phrase*: תַּ֣חַת רַגְלָֽי  
-*Explanation*: This phrase is an idiom signifying complete subjugation, defeat, and dominion. The enemies are not merely physically located at the speaker's feet, but are entirely under their power and control, a co...  
-*Target*: enemies' subjugation → defeat → powerlessness  
-*Vehicle*: physical position at feet → vulnerable posture → spatial relationship  
-*Ground*: complete control → absolute dominion → utter helplessness  
-*Confidence*: 0.90  
-
-**Deuteronomy 32:35** (metaphor, idiom, metonymy) - confidence: 0.95  
-*Figurative phrase*: their foot falters  
-
-**Full verse (Hebrew)**: לִ֤י נָקָם֙ וְשִׁלֵּ֔ם לְעֵ֖ת תָּמ֣וּט רַגְלָ֑ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;כִּ֤י קָרוֹב֙ י֣וֹם אֵידָ֔ם וְחָ֖שׁ עֲתִדֹ֥ת לָֽמוֹ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-**Full verse (English)**: To be My vengeance and recompense,At the time that their foot falters.Yea, their day of disaster is near,And destiny rushes upon them.  
-
-*Hebrew phrase*: תָּמ֣וּט רַגְלָ֑ם  
-*Explanation*: The term 'foot' (רֶגֶל) functions metonymically to represent the stability, standing, or foundation of the adversaries. The action of 'faltering' (תָּמ֣וּט) is then applied metaphorically to this abst...  
-*Target*: nation's stability → group's security → societal foundation  
-*Vehicle*: faltering foot → stumbling limb → physical action  
-*Ground*: instability → weakness → vulnerability  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: אַל־תְּ֭בוֹאֵנִי רֶ֣גֶל גַּאֲוָ֑ה וְיַד־רְ֝שָׁעִ֗ים אַל־תְּנִדֵֽנִי  
-**Full verse (English)**: Let not the foot of the arrogant tread on me,or the hand of the wicked drive me away.  
-
-*Hebrew phrase*: רֶ֣גֶל גַּאֲוָ֑ה  
-*Explanation*: The 'foot' is used as a metonymy (synecdoche) to represent the arrogant person and their oppressive actions or presence. It is not a literal foot acting independently....  
-*Target*: arrogant person's actions → oppressive behavior → human agency  
-*Vehicle*: foot → body part → physical entity  
-*Ground*: instrument of action → means of oppression → power, control  
-*Confidence*: 1.00  
-
-**Full verse (Hebrew)**: וַיַּכְשִׁיל֣וּהוּ עָלֵ֣ימוֹ לְשׁוֹנָ֑ם יִ֝תְנֹדְד֗וּ כׇּל־רֹ֥אֵה בָֽם  
-**Full verse (English)**: Their tongue shall be their downfall;all who see them shall recoil in horror;  
-
-*Hebrew phrase*: וַיַּכְשִׁיל֣וּהוּ עָלֵ֣ימוֹ  
-*Explanation*: The act of 'causing to stumble' or 'downfall' (from the verb הִכְשִׁיל) is used metaphorically to describe moral, social, or existential ruin or failure, rather than a literal physical tripping....  
-*Target*: ruin → failure → destruction  
-*Vehicle*: stumbling → physical fall → loss of balance  
-*Ground*: causation of failure → loss of stability → negative outcome  
-*Confidence*: 0.95  
-
-**Isaiah 52:7** (metonymy) - confidence: 0.94  
-*Figurative phrase*: How welcome on the mountain are the footsteps [lit. 'feet'] of the herald  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 ### Query 19
 **Filters**: Vehicle contains: dust  
@@ -4880,217 +4002,323 @@ Psalm 18: A Critical and Exhaustive Reader's GuideTextual Archaeology: The Doubl
 *Ground*: innumerable quantity → vastness → abundance  
 *Confidence*: 0.95  
 
-**Full verse (Hebrew)**: תַּסְתִּ֥יר פָּנֶיךָ֮ יִֽבָּהֵ֫ל֥וּן תֹּסֵ֣ף ר֭וּחָם יִגְוָע֑וּן וְֽאֶל־עֲפָרָ֥ם יְשׁוּבֽוּן  
-**Full verse (English)**: hide Your face, they are terrified;take away their breath, they perishand turn again into dust;  
-
-*Hebrew phrase*: וְֽאֶל־עֲפָרָ֥ם יְשׁוּבֽוּן  
-*Explanation*: This is a biblical idiom for death and decomposition, referring to the return of the body to the earth from which it was taken (cf. Genesis 3:19)....  
-*Target*: human body → mortal remains → physical existence  
-*Vehicle*: dust → earthly matter → basic elements  
-*Ground*: decomposition → mortality → return to origin  
-*Confidence*: 0.90  
-
-**Full verse (Hebrew)**: יָ֘בֵ֤שׁ כַּחֶ֨רֶשׂ&thinsp;׀ כֹּחִ֗י וּ֭לְשׁוֹנִי מֻדְבָּ֣ק מַלְקוֹחָ֑י וְֽלַעֲפַר־מָ֥וֶת תִּשְׁפְּתֵֽנִי  
-**Full verse (English)**: my vigor dries up like a shard;my tongue cleaves to my palate;You commit me to the dust of death.  
-
-*Hebrew phrase*: לַעֲפַר־מָ֥וֶת  
-*Explanation*: This is a common biblical idiom and metonymy where 'dust' (a symbol of decay and the earth) stands for the grave or the state of death. It refers to being brought to the point of dying or being buried...  
-*Target*: grave → death → realm of the dead  
-*Vehicle*: dust → earth → decay  
-*Ground*: finality → decay → end of life  
-*Confidence*: 1.00  
-
-**Full verse (Hebrew)**: מַה־בֶּ֥צַע בְּדָמִי֮ בְּרִדְתִּ֢י אֶ֫ל־שָׁ֥חַת הֲיוֹדְךָ֥ עָפָ֑ר הֲיַגִּ֥יד אֲמִתֶּֽךָ  
-**Full verse (English)**: “What is to be gained from my death,dLit. “blood.”from my descent into the Pit?Can dust praise You?Can it declare Your faithfulness?  
-
-*Hebrew phrase*: הֲיוֹדְךָ֥ עָפָ֑ר  
-*Explanation*: This rhetorical question personifies 'dust' (which metonymically represents a dead person) by attributing to it the human capacity to 'praise.' The dead are unable to praise God in the active sense th...  
-*Target*: dead person → deceased human → human mortality  
-*Vehicle*: dust → earthly material → physical remains  
-*Ground*: inability to act → cessation of life functions → silence in death  
-*Confidence*: 0.98  
-
-**Full verse (Hebrew)**: וְֽאֶשְׁחָקֵ֗ם כְּעָפָ֥ר עַל־פְּנֵי־ר֑וּחַ כְּטִ֖יט חוּצ֣וֹת אֲרִיקֵֽם  
-**Full verse (English)**: I ground them fine as windswept dust;I trod them flat as dirt of the streets.  
-
-*Hebrew phrase*: וְֽאֶשְׁחָקֵ֗ם כְּעָפָ֥ר עַל־פְּנֵי־ר֑וּחַ  
-*Explanation*: The speaker compares the complete destruction and dispersal of his enemies to dust that is ground fine and scattered by the wind, emphasizing their utter annihilation and insignificance. The vividness...  
-*Target*: enemies → adversaries → people  
-*Vehicle*: windswept dust → fine particles → natural elements  
-*Ground*: utter destruction → complete dispersal → insignificance  
-*Confidence*: 0.95  
-
-**Full verse (Hebrew)**: פְּ֭עָמַי הָכֵ֣ן בְּאִמְרָתֶ֑ךָ וְֽאַל־תַּשְׁלֶט־בִּ֥י כׇל־אָֽוֶן  
-**Full verse (English)**: Make my feet firm through Your promise;do not let iniquity dominate me.  
-
-*Hebrew phrase*: פְּ֭עָמַי הָכֵ֣ן  
-*Explanation*: The term 'feet' (פְּעָמַי) is a synecdoche for one's life path or conduct, and 'make firm' (הָכֵן) is a metaphor for establishing stability and steadfastness in that path....  
-*Target*: my life path → moral conduct → human existence  
-*Vehicle*: firm foundation → stable ground → physical stability  
-*Ground*: steadfastness → stability → reliability  
-*Confidence*: 0.90  
-
-**Isaiah 26:19** (metaphor) - confidence: 0.97  
-*Figurative phrase*: Awake and shout for joy, you who dwell in the dust.  
 
 
-
-[8 more instances omitted for space]
+[11 more instances omitted for space]
 
 
 ---
 ## Research Bundle Processing Summary
 - Original size: 425,658 characters
-- Final size: 318,193 characters
-- Removed: 107,465 characters (25.2%)
-- Sections removed/trimmed: Related Psalms, Figurative Language (trimmed to 75%)
+- Final size: 247,595 characters
+- Removed: 178,063 characters (41.8%)
+- Sections removed/trimmed: Related Psalms, Figurative Language (trimmed to 50%)
+
+
+### PHONETIC TRANSCRIPTIONS
+## PHONETIC TRANSCRIPTIONS
+
+*Reference these for accurate phonetic commentary. DO NOT make phonetic claims without consulting these transcriptions.*
+
+**Verse 1**: `lam-nats-**TSĒ**-aḥ  lə-**ʿE**-vedh yə-hō-**WĀH** lə-dhā-**WIDH** 'a-**SHER** di-**BER**  lay-hō-**WĀH** 'eth-div-**RĒY** hash-shiy-**RĀH** haz-**ZŌ'**-th bə-**YŌM** hits-tsiy-l-yə-hō-wāh-'ō-**THŌ** mi-**KAF** kol-'ō-yə-**VĀY**-w ū-miy-**YADH** shā-**'ŪL**`
+
+**Verse 2**: `way-yō'-**MAR** 'er-ḥom-**KHĀ** yə-hō-**WĀH** ḥiz-**QIY**`
+
+**Verse 3**: `yə-hō-**WĀH**  sal-**ʿIY** ū-mə-tsū-dhā-**THIY** ū-mə-fal-**TIY** 'ē-**LIY** tsū-**RIY** 'e-ḥe-seh-**BŌ** **MĀ**-ghin-niy wə-qe-ren-yish-**ʿIY** mis-ga-**BIY**`
+
+**Verse 4**: `mə-hul-**LĀL** 'eq-**RĀ'** yə-hō-**WĀH** ū-min-'ō-yə-**VAY** 'i-ū-**SHĒ**-aʿ`
+
+**Verse 5**: `'a-fā-**FŪ**-niy ḥev-lēy-**MĀ**-weth wə-na-ḥa-**LĒY** və-liy-**YA**-ʿal yə-va-ʿa-**THŪ**-niy`
+
+**Verse 6**: `ḥev-**LĒY** shə-**'ŌL** sə-vā-**VŪ**-niy qid-**MŪ**-niy **MŌ**-qə-shēy **MĀ**-weth`
+
+**Verse 7**: `bats-tsar-**LIY**  'eq-**RĀ'** yə-hō-**WĀH** wə-'el-'e-lō-**HAY** 'a-sha-ū-**Aʿ** yish-**MAʿ** mē-hēy-khā-**LŌ** qō-**LIY** wə-shaw-ʿā-**THIY** lə-fā-**NĀY**-w  tā-**VŌ'** və-'oz-**NĀY**-w`
+
+**Verse 8**: `wa-tigh-**ʿASH** wa-tir-**ʿASH**  hā-**'Ā**-rets ū-mō-sə-**DHĒY** hā-**RIY**-m yir-**GĀ**-zū way-yith-gā-ʿa-**SHŪ** kiy-**ḤĀ**-rāh **LŌ**`
+
+**Verse 9**: `**ʿĀ**-lāh ʿā-**SHĀN**  bə-'a-**PŌ** wə-'ēsh-mi-**PIY**-w tō'-**KHĒL** ge-ḥā-**LIY**-m bā-ʿa-**RŪ** mim-**MEN**-nū`
+
+**Verse 10**: `way-**YĒT** shā-ma-**YIM** way-yē-**RADH** wa-ʿa-rā-**FEL** **TA**-ḥath ragh-**LĀY**-w`
+
+**Verse 11**: `way-yir-**KAV** ʿal-kə-**RŪV** way-yā-**ʿŌF** way-**YĒ**-dhe' ʿal-kan-fēy-**RŪ**-aḥ`
+
+**Verse 12**: `yā-sheth-**ḤŌ**-shekh  sith-**RŌ** sə-**VIY**-vō-thāy-w su-kā-**THŌ** ḥesh-khath-**MA**-yim ʿā-**VĒY** shə-ḥā-**QIY**-m`
+
+**Verse 13**: `min-**NŌ**-ghah-h negh-**DŌ** ʿā-**VĀY**-w ʿā-və-**RŪ** bā-**RĀDH** wə-gha-ḥa-lēy-**'ĒSH**`
+
+**Verse 14**: `way-yar-**ʿĒM** bash-shā-**MA**-yim  yə-hō-**WĀH** wə-ʿel-**YŌN** yi-**TĒN** qō-**LŌ** bā-**RĀDH** wə-gha-ḥa-lēy-**'ĒSH**`
+
+**Verse 15**: `way-yish-**LAḤ** ḥits-tsāy-**W** way-fiy-**TSĒM** ū-və-rā-**QIY**-m **RĀV** way-hum-**MĒM**`
+
+**Verse 16**: `way-yē-rā-**'Ū**  'a-**FIY**-qēy **MA**-yim **WAY**-yi-gā-lū mō-sə-**DHŌTH** tē-**VĒL** mi-ga-ʿa-rā-thə-**KHĀ** yə-hō-**WĀH** min-nish-**MATH** **RŪ**-aḥ 'a-**PE**-khā`
+
+**Verse 17**: `yish-**LAḤ** mim-mā-**RŌM** yiq-qā-**ḤĒ**-niy yam-**SHĒ**-niy mim-**MA**-yim ra-**BIY**-m`
+
+**Verse 18**: `yats-tsiy-**LĒ**-niy mē-'ō-yə-**VIY** **ʿĀZ** ū-mis-sō-nə-**'AY** kiy-'ā-mə-**TSŪ** mim-**MEN**-niy`
+
+**Verse 19**: `yə-qad-**MŪ**-niy və-yōm-'ēy-**DHIY** way-hiy-yə-hō-**WĀH** lə-mish-**ʿĀN** **LIY**`
+
+**Verse 20**: `way-yō-tsiy-**'Ē**-niy lam-mer-**ḤĀV** yə-ḥal-**LTSĒ**-niy kiy-ḥā-fēts-**BIY**`
+
+**Verse 21**: `yigh-**MLĒ**-niy yə-hō-**WĀH** kə-tsidh-**QIY** kə-**VŌR** yā-**DHAY** yā-**SHIY**-v **LIY**`
+
+**Verse 22**: `kiy-shā-mar-**TIY** dar-**KHĒY** yə-hō-**WĀH** wə-lō'-rā-**SHAʿ**-tiy mē-'e-lō-**HĀY**`
+
+**Verse 23**: `**KIY** khol-mish-pā-**TĀY**-w lə-negh-**DIY** wə-ḥuq-qō-**THĀY**-w lō'-'ā-**SIY**-r **MEN**-niy`
+
+**Verse 24**: `wā-'e-**HIY** thā-**MIY**-m ʿim-**MŌ** wā-'esh-tam-**MĒR** mē-ʿa-ō-**NIY**`
+
+**Verse 25**: `way-yā-shev-yə-hō-**WĀH** **LIY** khə-tsidh-**QIY** kə-**VŌR** yā-**DHAY** lə-**NE**-ghedh ʿēy-**NĀY**-w`
+
+**Verse 26**: `ʿim-ḥā-**SIY**-dh tith-ḥas-**SĀDH** ʿim-gə-**VAR** tā-**MIY**-m ti-tam-**MĀM**`
+
+**Verse 27**: `ʿim-nā-**VĀR** tith-bā-**RĀR** wə-ʿim-ʿiq-**QĒSH** tith-pa-**TĀL**`
+
+**Verse 28**: `kiy-'a-**TĀH** ʿam-ʿā-**NIY** thō-**SHI**-yaʿ wə-ʿēy-**NA**-yim rā-**MŌTH** tash-**PIY**-l`
+
+**Verse 29**: `kiy-'a-**TĀH** tā-**'IY**-r nē-**RIY** yə-hō-**WĀH** 'e-lō-**HAY** ya-**GI**-yah ḥosh-**KIY**`
+
+**Verse 30**: `kiy-və-**KHĀ** 'ā-**RUTS** gə-**DHŪDH** ū-vē'-lō-**HAY** 'a-dhal-legh-**SHŪR**`
+
+**Verse 31**: `hā-**'ĒL** tā-miy-**M** dar-**KŌ** 'im-rath-yə-hō-**WĀH** tsə-rū-**FĀH** mā-**GHĒN** **HŪ'** lə-**KHŌL**  ha-ḥō-**SIY**-m **BŌ**`
+
+**Verse 32**: `**KIY** **MIY** 'e-lō-**AH** mi-bal-ʿa-**DHĒY** yə-hō-**WĀH** ū-**MIY** **TSŪR** zū-lā-**THIY** 'e-lō-**HĒY**-nū`
+
+**Verse 33**: `hā-**'ĒL** ham-'az-**ZRĒ**-niy **ḤĀ**-yil way-yi-**TĒN** tā-**MIY**-m dar-**KIY**`
+
+**Verse 34**: `mə-sha-**ŪH** ragh-**LAY** kā-'ay-yā-**LŌTH** wə-**ʿAL** bā-mō-**THAY** ya-ʿa-miy-**DHĒ**-niy`
+
+**Verse 35**: `mə-lam-**MĒDH** yā-**DHAY** lam-mil-ḥā-**MĀH** **WƏ**-ni-ḥa-thāh qe-sheth-nə-ḥū-**SHĀH** zə-rō-ʿō-**THĀY**`
+
+**Verse 36**: `wa-ti-ten-**LIY** mā-**GHĒN** yish-**ʿE**-khā **WIY**-miy-nə-khā this-ʿā-**DHĒ**-niy **WƏ**-ʿan-wath-khā thar-**BĒ**-niy`
+
+**Verse 37**: `tar-**ḤIY**-v tsa-ʿa-**DHIY** thaḥ-**TĀY** wə-**LŌ'** mā-ʿa-**DHŪ** qar-sul-**LĀY**`
+
+**Verse 38**: `'er-**DŌF** 'ō-yə-**VAY** wə-'as-siy-**GHĒM** wə-lō'-'ā-**SHŪV** ʿadh-kal-lō-**THĀM**`
+
+**Verse 39**: `'em-ḥā-**TSĒM** wə-lō'-**YUKH**-lū **QŪM** yip-**LŪ** **TA**-ḥath ragh-**LĀY**`
+
+**Verse 40**: `wat-'az-**ZRĒ**-niy ḥa-**YIL** lam-mil-ḥā-**MĀH** takh-**RI**-yaʿ qā-**MAY** taḥ-**TĀY**`
+
+**Verse 41**: `wə-'ō-yə-**VAY** nā-**THA**-tāh **LLIY** **ʿŌ**-ref ū-mə-san-**'AY** 'ats-miy-**THĒM**`
+
+**Verse 42**: `yə-sha-ū-**ʿŪ** wə-'ēy-n-mō-**SHI**-yaʿ ʿal-yə-hō-**WĀH** wə-**LŌ'** ʿā-**NĀM**`
+
+**Verse 43**: `wə-'esh-ḥā-**QĒM** kə-ʿā-**FĀR** ʿal-pə-nēy-**RŪ**-aḥ kə-**TIY**-t ḥū-**TSŌTH** 'a-riy-**QĒM**`
+
+**Verse 44**: `tə-fal-ltē-**NIY** mē-riy-**VĒY** **ʿĀM** tə-siy-mē-**NIY** lə-**RŌ'**-sh gō-**YIM** **ʿAM** lō'-yā-**DHAʿ**-tiy ya-ʿav-**DHŪ**-niy`
+
+**Verse 45**: `lə-shē-**MAʿ** 'ō-**ZEN** yish-**SHĀ**-mə-ʿū **LIY** bə-nēy-nē-**KHĀR** yə-kha-ḥa-shū-**LIY**`
+
+**Verse 46**: `bə-nēy-nē-**KHĀR** yi-**BŌ**-lū wə-yaḥ-**RGHŪ** mim-mis-grō-thēy-**HEM**`
+
+**Verse 47**: `ḥay-yə-hō-**WĀH** ū-vā-**RŪ**-khə tsū-**RIY** wə-yā-**RŪM** 'e-lō-**HĒY** yish-**ʿIY**`
+
+**Verse 48**: `hā-**'ĒL** han-nō-**THĒN** nə-qā-**MŌTH** **LIY** way-yadh-**BĒR** ʿam-**MIY**-m taḥ-**TĀY**`
+
+**Verse 49**: `mə-fal-**LTIY** mē-'ō-yə-**VĀY** **'AF** min-qā-**MAY** tə-rō-mə-**MĒ**-niy mē-**'IY**-sh ḥā-**MĀS** tats-tsiy-**LĒ**-niy`
+
+**Verse 50**: `ʿal-**KĒN**  'ō-dhə-**KHĀ** va-gō-**YIM**  yə-hō-**WĀH** ū-lə-shim-**KHĀ** 'a-zam-**MĒ**-rāh`
+
+**Verse 51**: `magh-**DIL** yə-shū-**ʿŌTH** mal-**KŌ** wə-**ʿŌ**-seh **ḤE**-sedh  lim-shiy-**ḤŌ** lə-dhā-**WIDH** ū-lə-zar-**ʿŌ** ʿadh-ʿō-**LĀM** **F**`
+
 
 
 ---
 
-## YOUR TASK: WRITE INTRODUCTION ESSAY (800-1200 words)
+## YOUR TASK: WRITE VERSE-BY-VERSE COMMENTARY
 
-Write a scholarly introduction essay that:
+For EACH verse in the psalm, write a commentary annotation that draws on diverse scholarly angles:
 
-1. **Engages the macro thesis critically**
-   - You have FULL AUTHORITY to revise, refine, or reject the macro thesis if evidence warrants
-   - If the thesis holds up, defend it with evidence from micro analysis and research
-   - If the thesis needs refinement, change it based on your synthesis
-   - If the thesis is fundamentally flawed, offer an alternative
+**AUDIENCE HEBREW PROFICIENCY:**
+- Your readers are familiar with biblical and rabbinic Hebrew
+- When you quote sources (biblical texts, rabbinic sources, liturgical texts), provide the Hebrew original AS WELL AS the English translation
+- Include enough Hebrew to support your point and/or demonstrate things of interest (unusual constructions, wordplay, idioms, etc.)
+- Don't rely solely on translation—let readers see the Hebrew evidence for themselves
 
-2. **Synthesizes all three sources smoothly**
-   - Integrate insights from macro structure, micro discoveries, and research materials
-   - Show how lexical evidence, concordances, and figurative analysis support (or challenge) the thesis
-   - Cite specific examples from the research bundle when relevant
-   - Make connections between poetic devices and theological meaning
-   - Novel insights are strongly encouraged. You are in conversation with the sources, not just summarizing them.
+**CRITICAL: START each verse's commentary with the Hebrew text of that verse, punctuated to show poetic structure:**
+- Present the verse using punctuation (semicolons, periods, commas) to illustrate how the verse is poetically divided
+- This punctuated presentation helps readers see the verse's structure at a glance
+- Example: Original verse "בְּקׇרְאִי עֲנֵנִי ׀ אֱלֹקֵי צִדְקִי בַּצָּר הִרְחַבְתָּ לִּי חׇנֵּנִי וּשְׁמַע תְּפִלָּתִֽי׃" becomes "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+- After presenting the punctuated verse, proceed immediately with your commentary
 
-3. **Addresses major interpretive questions**
-   - What is this psalm about? If there are sections that seem quite different, what theme, context or idea holds them together?
-   - What is the psalm's central message and how does it function?
-   - What are the key poetic/rhetorical strategies and why do they matter?
-   - How does this psalm relate to its Ancient Near Eastern context?
-   - What are the most significant interpretive debates or challenges?
-   - What earned this psalm its place in the biblical canon?
-   - What is fascinating or unique about this psalm from a literary perspective? From a theological perspective? From a historical perspective?
-   - **IMPORTANT**: The Macro and Micro analysts have identified interesting research questions (see their inputs above). You should attempt to answer any of these questions that can be meaningfully addressed with the available research materials. If a question is answerable, weave the answer into your essay where appropriate.
+**LENGTH GUIDELINES:**
+- **Target length**: 150-400 words per verse
+- **Can be longer** (400+ words) if there's a genuinely interesting finding or insight that merits extended illumination
+- Let the content determine the length - don't pad or artificially constrain
 
-4. **Engages prior scholarship and classical interpretations**
-   - Note relevant traditional rabbinic or patristic readings when available
-   - Reference how scholars have historically interpreted key passages
-   - Acknowledge interpretive debates and schools of thought
-   - Example: "Traditional interpretation sees X, but recent scholarship suggests Y..."
+**PACING FOR LONG PSALMS (35+ verses):**
+For longer psalms, you have limited output space. Plan ahead and pace yourself:
+- **Strategic grouping allowed**: You MAY group 2-4 thematically related verses together (e.g., "Verses 21-24") when they form a natural unit. Use heading format: `**Verses N-M**`
+- **Plan from the start**: If grouping is necessary, do it THROUGHOUT the psalm—not just at the end. Decide your grouping strategy before you begin writing.
+- **Equal treatment**: Later verses deserve the same quality of analysis as early verses. Do NOT rush or provide minimal content for late verses.
+- **Avoid truncation notes**: NEVER write things like "Due to length constraints, remaining verses are not included." Instead, adjust your pacing from the beginning.
+- **Quality over quantity**: A thoughtful 200-word treatment of grouped verses is better than 50 rushed words per verse at the end.
 
-5. **Makes intertextual connections**
-   - Cite parallel biblical texts where similar language/imagery appears
-   - Reference ANE parallels (Ugaritic, Akkadian, Egyptian texts) when relevant
-   - Show how this psalm's language echoes or innovates or is in conversation with other texts
-   - Example: "The term 'לְבָדָד' carries echoes of Deuteronomy 33:28 "וַיִּשְׁכֹּן֩ יִשְׂרָאֵ֨ל בֶּ֤טַח בָּדָד֙...אֶ֖רֶץ דָּגָ֣ן וְתִיר֑וֹשׁ" - ("Israel dwells secure, alone… in a land of grain and wine") "
-   - Carefully review the 'Related Psalms Analysis' section of the research bundle for interesting/informative parallels with other psalms, and incorporate these insights when relevant.
+### ITEMS OF INTEREST TO ILLUMINATE (when relevant to the verse):
 
-6. **Reflects on liturgical context and reception**
-   - The research bundle includes detailed information about where and how this psalm (or specific phrases from it) appears in Jewish liturgy
-   - Pay attention to liturgical usage patterns - they reveal how the psalm has been interpreted and valued in Jewish tradition
-   - Consider what the liturgical placement tells us about the psalm's meaning and reception
-   - Integrate liturgical insights naturally into your discussion - don't treat them as a separate topic
-   - **CRITICAL: When mentioning liturgical usage, QUOTE the relevant liturgical texts in Hebrew with English translation**
-   - Example: "The daily recitation of this verse in the Amidah suggests that Jewish liturgy understood it as..."
+The following areas are of particular interest to intelligent, well-read lay readers who desire poetic, literary, linguistic, and historical insights:
 
-7. **SHOWS evidence through generous quotation** (CRITICAL)
-   - **Quote liberally from all sources - biblical parallels, liturgical texts, traditional commentaries**
-   - When you mention a biblical parallel (e.g., "this echoes Psalm 44:4"), QUOTE it in Hebrew with English translation
-   - When you reference liturgical usage (e.g., "appears in Shabbat Musaf"), QUOTE the relevant liturgical text in Hebrew with English
-   - When you cite multiple parallels for a pattern (e.g., "light of your face" in Ps 4:7, 44:4, 89:16, Prov 16:15), quote at least 1-2 of the most illustrative examples in Hebrew with English
-   - When you mention a linguistic pattern across psalms (e.g., בְּנֵי אִישׁ in Ps 49:3, 62:10), quote the best example(s) to show the pattern
-   - Don't just cite - SHOW the reader the actual text. Your readers are hungry to see the Hebrew evidence
-   - Think of quotations as your proof - they transform vague claims into vivid demonstrations
+1. **Phonetics & Sound Patterns (CRITICAL)**
+   - You are provided with an authoritative phonetic transcription for each verse with STRESS MARKING (e.g., `**Phonetic**: pō-**TĒ**-akh et-yā-**DHE**-khā`).
+   - **STRESS NOTATION**: Syllables in **BOLD CAPS** indicate stressed syllables based on Hebrew cantillation marks (te'amim). Example: `mal-**KHŪTH**-khā` means the middle syllable KHŪTH receives the primary stress.
+   - **USE THIS DATA**: When discussing alliteration, assonance, rhythm, meter, or other sound-based poetic devices, you MUST base your claims on this transcription, not on modern pronunciation.
+   - **STRESS ANALYSIS**: You can now analyze prosodic patterns by counting stressed syllables (marked in **BOLD CAPS**). For example, "This verse has a 3+2 stress pattern with stresses on VŌDH, KHĀ, MĒ in the first colon and KHĀ, BĒ in the second."
+   - **VERIFY CLAIMS**: For example, before claiming a "soft 'f' sound," check the transcription. If it says `p` (e.g., in `pō-te-akh`), your claim is incorrect. The transcription is your ground truth for all phonetic analysis. Distinguish `p` vs `f`, `b` vs `v`, `k` vs `kh`.
+   - If you are ever providing a transcription for ANY reason, you must use the authoritative phonetic transcription provided to you; **do not make it up on your own.**
+   - **too many transcriptions clutter the prose. ONLY use transcriptions when the reader NEEDS to know how something was pronounced in order to understand your point about a poetic device. Do NOT transliterate words where the pronunciation does not pertain to the point you are making.** On the other hand, DO always provide the relevant text/words in Hebrew with English TRANSLATION.
+-
+   
+2. **Poetics**
+   - Parallelism types (synonymous, antithetical, synthetic, climactic)
+   - Wordplay (e.g. paronomasia, alliteration, assonance) - *Must be verified with phonetic transcription*
+   - Meter and rhythm
+   - Structural devices (chiasm, inclusio, envelope structure)
+   - **Unusual turns of phrase**: When a verse contains an interesting or unusual Hebrew phrase, idiom, or construction (like הֲ֭דַר כְּב֣וֹד הוֹדֶ֑ךָ or עֱז֣וּז נֽוֹרְאֹתֶ֣יךָ), comment on it - explain what makes it distinctive, how it functions poetically, and what it contributes to the verse's meaning
 
-8. **Writes for an educated general reader**
-   - Scholarly rigor but accessible prose
-   - Technical terms explained when necessary
-   - Balance depth with readability
-   - Novel insights are strongly encouraged
+   **Figurative Language Integration (CRITICAL):**
+   For each verse containing figurative language where the research provided relevant biblical parallels:
+   1. **Identify the image** and explain its meaning in this specific context
+   2. **QUOTE compelling parallel uses** from the figurative language database (at least 1-2 specific passages in Hebrew + English)
+   3. **Analyze the pattern**: How common is this image? How is it typically used across Scripture?
+   4. **Note distinctive features**: How does this psalm's use differ from or extend typical usage?
+   5. **Quote liberally** - don't just cite references. Show readers the actual Hebrew text with English translation from at least 1-2 of the best parallels. You have a unique resource for this - USE IT by showing the texts!
 
-9. **Uses proper citations with quotations**
-   - When referring to specific Hebrew verse, phrases and terms, cite in Hebrew and English
-   - In Hebrew, replace the tetragrammaton with 'ה
-   - **IMPORTANT: Most citations should be accompanied by actual quotations (Hebrew + English)**
-   - When citing research, note the source (e.g., "BDB lexicon notes...", "Concordance shows...")
-   - When referencing other texts, cite book/chapter/verse AND quote the relevant portion when illustrative (e.g., "Gen 1:2", "KTU 1.4")
+   WEAK example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11). Psalm 145 distinctively applies this human obligation metaphor to divine providence." [This just cites - it doesn't quote]
 
-10. **Stylistic guidelines**
-You are a distinguished professor of biblical literature, akin to a figure like Robert Alter, Ellen F. Davis or James Kugel. Your task is to write an essay on a specific psalm for a sophisticated lay audience, such as the readers of The New Yorker or The Atlantic.
+   STRONG example: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ ל֑וֹ ('you shall surely open your hand to him,' Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
 
-Your writing style should be scholarly, lucid, and engaging. Your tone is one of measured confidence, not breathless praise. You illuminate the text's brilliance through insightful analysis rather than by simply labeling it as "brilliant" or a "masterpiece."
+2. **Literary Insights**
+   - Narrative techniques and rhetorical strategies
+   - Genre conventions and innovations
+   - Dramatic progression and turning points
+   - Imagery and its function
+   - Irony, hyperbole, understatement
 
-Key Stylistic Directives:
-Tone & Persona: Adopt a voice that is authoritative yet accessible. You are a trusted guide leading the reader through the literary and theological landscape of the psalm. Your prose should be elegant and uncluttered.
+3. **Historical and Cultic Insights**
+   - Liturgical setting and worship context
+   - Historical period indicators (vocabulary, theology, cultural references)
+   - Temple/sanctuary practices
+   - Royal psalms and kingship theology
+   - Festival associations (Sukkot, Passover, New Year, etc.)
 
-From Praise to Analysis: Do not use effusive or sycophantic language. Avoid words like "masterpiece," "tour de force," "breathtaking," "audacious," or "remarkable." Instead of telling the reader the psalm is sophisticated, show them through your analysis.
+3a. **Modern Liturgical Context** (IMPORTANT)
+   - The research bundle includes detailed information about where and how this verse (or phrases from it) appears in Jewish liturgy
+   - When a verse appears in liturgy, comment on this usage and what it reveals about reception and interpretation
+   - **CRITICAL: QUOTE the liturgical texts in Hebrew with English translation to show HOW the verse is used**
+   - Be specific: mention the prayer name, service (Shacharit/Mincha/Maariv), occasion (Weekday/Shabbat/Festivals), and tradition (Ashkenaz/Sefard/Edot HaMizrach)
+   - Consider what the liturgical placement tells us about how Jewish tradition understood this verse
+   - Integrate liturgical insights naturally - don't treat them as a separate "trivia" item
+   - WEAK example: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..." [too vague, no quotation]
+   - STRONG example: "This verse appears in the Shabbat Musaf Amidah in the context of the sacrificial offerings: 'וְהִקְרִיבוּ לְךָ עוֹלוֹת תְּמִימִים זִבְחֵי צֶדֶק' ('and they shall offer You whole burnt-offerings, righteous sacrifices'), suggesting the tradition read this psalm's call for righteous sacrifices as..."
 
-Instead of: "The psalm's central innovation lies in its theological revolution..."
+4. **Comparative Religion**
+   - Ancient Near Eastern parallels (Ugaritic, Akkadian, Egyptian)
+   - Polemic against Canaanite/Mesopotamian religion
+   - Appropriation and transformation of ANE motifs
+   - Cite specific texts (KTU numbers, Enuma Elish, etc.)
 
-Try: "The psalm's engine is the sevenfold repetition of qôl YHWH. By taking the familiar sound of the storm and attributing it solely to Israel's God, the poet re-maps the cosmos."
+5. **Grammar and Syntax** (when illuminating)
+   - Rare or ambiguous grammatical forms
+   - Verb tenses and aspect (especially jussive, cohortative, imperative)
+   - Word order significance
+   - Difficult constructions that affect meaning
 
-Use Jargon Sparingly: Academic terms like "polemic," "theophany," or "cosmology" are acceptable, but they should be used to bring clarity, not to signal academic status. When used, they should feel integrated into the prose, not dropped in like keywords. Explain the concept if necessary.
+6. **Textual Criticism**
+   - Comparison of Masoretic Text (MT) vs Septuagint (LXX)
+   - What LXX choices reveal about the Vorlage (Hebrew base text)
+   - Textual variants and their implications
+   - Translation challenges and scholarly debates
 
-Instead of: "The psalm's opening summons to the bĕnê 'ēlîm immediately signals its polemical intent."
+7. **Lexical Analysis**
+   - Etymology when theologically illuminating
+   - Semantic range of key terms (use BDB data)
+   - Rare vocabulary and hapax legomena
+   - Technical terminology (legal, cultic, military, agricultural)
 
-Try: "The psalm opens in an unexpected place: the divine throne room, where the poet calls upon the bĕnê 'ēlîm (בני אלים), the 'sons of the gods,' to pay homage. This is a direct challenge to the surrounding polytheistic world—an act of theological appropriation from the very first line."
+8. **Comparative Biblical Usage**
+   - Concordance insights: how this word/phrase appears elsewhere
+   - **CRITICAL: When mentioning parallel uses, QUOTE at least one illustrative example (Hebrew + English)**
+   - Development of theological concepts across Scripture - show this through quoted examples
+   - Formulaic language and its variations - demonstrate with quotations
+   - Quotation and allusion to other biblical texts - show the actual texts
+   - Insights from the 'Related Psalms Analysis' section - when there are convincing parallels, QUOTE the relevant Hebrew from the other psalm(s) with English translation
+   - Don't just say "this appears in Psalm X" - show readers what Psalm X actually says
 
-Emphasize Action and Imagery: Use strong verbs and concrete imagery. Describe what the poet does. How do they construct the poem? What world do they build?
+9. **Figurative Language**
+   - How vehicles (metaphors, similes) function in this verse
+   - How the same figurative vehicles are used across Scripture
+   - Target (what the figuration is ABOUT)-vehicle (what the target is likened to)-ground (what characteristics of the target are illuminated by this choice of vehicle)
+   -posture analysis
+   - Evolution of metaphorical meaning
 
-Instead of: "The image of Lebanon's cedars being 'broken' by YHWH's voice would have been particularly striking."
+10. **Timing/Composition Clues**
+    - Vocabulary that suggests dating (Persian loanwords, Aramaisms, etc.)
+    - Theological development indicators
+    - Historical allusions (Babylonian exile, monarchy, etc.)
+    - Liturgical evolution markers
 
-Try: "The poet makes the LORD's voice a physical force, a divine percussion that splinters the legendary cedars of Lebanon, trees that were ancient symbols of permanence and strength."
+11. **Interpretation and Reception**
+    - *Influence of verse and their use in aggada and halacha by the Mishna, Talum, Midrashim, etc as provided in the Torah Temimah* - MAKE SURE to carefully review the Torah Temimah material in the research bundle
+    - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)* - see research bundle
+    - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)* - see research bundle
+    - Make sure to read the "### About the Commentators" section in the research bundle for context on these commentators
+    - Targum renderings
+    - Church fathers (Augustine, Jerome, etc.)
+    - Medieval Christian interpretation
+    - Modern critical scholarship debates
+    
 
-Vary Sentence Structure: Employ a mix of shorter, punchier sentences and longer, more complex ones to create a readable and engaging rhythm. Use rhetorical questions to draw the reader into the interpretive process.
+### VALIDATION CHECK - Figurative Language:
 
-Example of Stylistic Transformation:
-Here are two versions of a snippet from an essay to illustrate the point:
+Before finalizing, review each verse with figurative language identified in the research:
+- ✓ Does the commentary cite at least ONE specific biblical parallel from the database?
+- ✓ Does it use the comparison to generate an insight about THIS verse?
+- ✓ Does it provide pattern analysis (e.g., "This imagery appears 11x in Psalms, predominantly in contexts of...")?
 
-Excessively "LLM-ish" version:
+If any check fails, REVISE to incorporate comparative analysis using the database.
 
-"While the macro thesis correctly identifies this psalm as a 'liturgical polemic' that appropriates Baal theology, the evidence suggests an even more sophisticated literary achievement: Psalm 29 functions as a theological tour de force that systematically dismantles polytheistic cosmology by concentrating all divine power into the sevenfold qôl-YHWH (קול־ה׳, 'voice of the LORD'), culminating not in chaotic divine display but in covenantal blessing for God's people."
+### IMPORTANT NOTES:
 
-Revised Version in the Target Style:
+- **Relationship to Introduction Essay**: You have the complete introduction essay. Your verse commentary should COMPLEMENT (not repeat) the introduction. If the introduction discussed a theme at length, you can allude to it briefly but focus on verse-specific details not covered in the introduction.
+- **Address interesting questions**: The Macro and Micro analysts have identified interesting research questions (see their inputs above). When commenting on specific verses, if any of these questions are relevant to that verse and can be meaningfully answered with the available research materials, address them in your commentary.
+- **Independence from macro thesis**: The verse commentary need NOT always relate to the macro thesis - follow what's interesting in each verse
+- **Reader interest**: Focus on what would genuinely interest and inform an intelligent, well-read lay reader who desires poetic, literary, linguistic, and historical insights
+- **Flexibility**: Some verses may focus on poetics, others on Vorlage, others on Ugaritic parallels, others on figurative language patterns - let the verse and research materials guide you
+- **Depth over breadth**: Better to explore 2-3 angles deeply than mention everything superficially
+- **Evidence-based**: Ground all observations in the research materials provided (BDB, concordances, figurative language database, traditional commentaries)
+- **Use research bundle effectively**: The research bundle contains:
+  * BDB lexicon entries with semantic ranges, etymologies, and usage patterns
+  * Concordance data showing where Hebrew terms appear elsewhere in Scripture - cite these parallels!
+  * Figurative language instances showing how vehicles/metaphors are used across the Bible - use them produce insights about the intent of the poet and their selection of this figuration here
+  * Traditional commentary excerpts from Rashi, Ibn Ezra, Radak, Meiri, Metzudat David and Malbim - engage with these interpretive traditions!
+  * The Torah Temimah identifies instances where a given text was mined for aggadic and halachic purposes - make sure to carefully review and incorporate these materials where relevant
+  * LXX text showing ancient Greek interpretation
+- **Define technical terms**: When using jargon (jussive, anaphora, chiasm, inclusio, polemic, theophany, hendiadys, etc.), provide brief, accessible definitions for lay readers
+- **Vary your approach**: Don't use the same scholarly angles for every verse - alternate between poetics, historical context, textual criticism, figurative analysis, etc.
+- **Comment on unusual phrases and poetic devices**: When a verse contains interesting or unusual Hebrew phrases, idioms, wordplay, or poetic devices, make sure to comment on them. These linguistic and literary features are precisely what intelligent lay readers find fascinating.
 
-"Scholars often describe Psalm 29 as a 'liturgical polemic,' a poem that co-opts the language of Canaanite storm-god worship to declare the supremacy of Israel's God. This is true, but it doesn't capture the poem's full artistry. The poet does more than just borrow; they dismantle and rebuild. The psalm methodically gathers the scattered powers of the Canaanite pantheon—the thunder, the flood, the quaking wilderness—and concentrates them into a single, seven-fold utterance: the qôl YHWH (קול־ה׳), the 'voice of the LORD.' The result is a startling redirection of cosmic power, moving it away from raw, chaotic display and toward a final, focused act of blessing for God's people."
+### FORMAT FOR EACH VERSE:
+
+**Verse [N]**
+
+[START with the Hebrew text of the verse, punctuated to show poetic structure. Then provide 150-400 words of commentary drawing on relevant scholarly angles. Include Hebrew text when quoting sources—readers are familiar with biblical and rabbinic Hebrew.]
+
+---
 
 ## CRITICAL REQUIREMENTS
 
-- **Length**: 800-1200 words (aim for the middle of this range)
-- **Tone**: Scholarly but engaging, confident but nuanced
-- **Structure**: Clear paragraphs with logical flow
-- **Authority**: You are the final voice - revise the thesis if needed
-- **Integration**: Smoothly weave together all three input sources
+- **Cover ALL verses** in the psalm — NEVER truncate or skip verses
+- **Length**: 150-400 words per verse (can and should be longer—400+ words—if there's genuinely interesting material to illuminate, such as unusual Hebrew phrases, complex poetic devices, significant textual variants, or important interpretive questions to address)
+- **Pacing**: For long psalms (35+ verses), plan your pacing from the START. You may group thematically related verses, but do so consistently throughout—not just to rush through the end. NEVER write "remaining verses not included" or similar truncation notes.
+- **Variety**: Don't use the same angles for every verse - vary your approach across poetics, textual criticism, figurative language, historical context, etc.
+- **Evidence**: Cite Hebrew terms, concordance patterns, research findings, traditional commentators
+- **Readability**: Scholarly but accessible for intelligent lay readers (New Yorker/Atlantic level)
+- **Define terms**: Explain technical terminology when used
+- **Independence**: Don't force connections to the macro thesis if they're not natural - follow what's interesting in each verse
+- **Emphasize the interesting**: Make sure to comment on unusual turns of phrase, distinctive Hebrew idioms, and poetic devices. These are what make the commentary valuable and engaging.
+- **Equal treatment for all verses**: The final verses of the psalm deserve the same thoughtful analysis as the opening verses. Plan accordingly.
 
 ---
 
-## OUTPUT FORMAT
-
-Write TWO sections:
-
-### 1. Introduction Essay (800-1200 words)
-[Write the main introduction essay as described above]
-
-### 2. Modern Jewish Liturgical Use (150-300 words)
-After the introduction essay, write a separate section titled "## Modern Jewish Liturgical Use" that summarizes where and how elements of this psalm appear in Jewish liturgy.
-- do NOT try to comment on liturgical use of this psalm WITHOUT carefully consulting the research bundle's liturgical information
-- for PHRASES that appear in liturgy, make sure to quote the phrases in full in Hebrew, and make sure to include enough of a quotation from the relevant prayer(s) to properly illustrate their use.
-- for individual verses and phrases that appear in the liturgy, reflect on whether their liturgical use goes with the grain of its natural ("pshat") reading or whether the compilers of the liturgy have put this verse or phrase to use in a novel way.
-
-
-This section should:
-- Summarize the liturgical usage information provided in the research bundle
-- Distinguish between full recitations of the psalm vs. individual verses or phrases quoted in prayers
-- Be specific about occasions (Weekday/Shabbat/Festivals), services (Shacharit/Mincha/Maariv), and traditions (Ashkenaz/Sefard/Edot HaMizrach)
-- Explain what the liturgical placement reveals about how Jewish tradition has understood and valued this psalm
-- Be scholarly but concise - aim for 150-300 words
-
-Example structure:
-"Psalm [X] is recited in its entirety during [occasion/service/tradition]. Verse [Y] from this psalm appears in [specific prayer], recited during [service] on [occasions]. The phrase '[Hebrew phrase]' from verse [Z] is incorporated into [prayer/piyyut] in the [tradition] nusach. This liturgical usage reflects the tradition's understanding of this psalm as..."
-
----
-
-Write both sections below in plain text (NOT JSON). Use markdown formatting for emphasis (*italics*) and phonetic transcriptions.
+Write the verse-by-verse commentary below in plain text (NOT JSON). Use markdown formatting.
