@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-11 (Session 211)
+**Last Updated**: 2025-12-11 (Session 212)
 
 ## Current Focus: Psalm Commentary Production
 
@@ -104,6 +104,58 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
 ---
 
 ## Recent Accomplishments
+
+### Session 212 (2025-12-11): Psalm 18 Pipeline Fixes + Strategic Verse Grouping
+
+#### Problems Fixed:
+
+1. **JSON Truncation in MicroAnalyst**
+   - Problem: 51-verse Psalm 18 caused JSON truncation error (max_tokens=8192 too low)
+   - Fix: Increased to 16384 tokens in `src/agents/micro_analyst.py`
+
+2. **Max Tokens Exceeding 64K Limit**
+   - Problem: 51 verses × 1800 tokens = 91,800 exceeded Claude's 64K limit
+   - Fix: Added cap at 64,000 tokens in `synthesis_writer.py:_calculate_verse_token_limit()`
+
+3. **Missing Trimmed Research File**
+   - Problem: `sections_removed` was overwritten on 2nd trimming call
+   - Fix: Changed to accumulate sections instead of overwrite
+
+4. **N/A in Bibliographical Summary**
+   - Problem: Stats not extracted when using `--skip-micro`
+   - Fix: Added `_parse_research_stats_from_markdown()` in pipeline script
+
+5. **DOCX Markdown Heading Format**
+   - Problem: `###` headings not converted to Word heading styles
+   - Fix: Added markdown heading parsing to `_add_commentary_with_bullets()` in both document generators
+
+6. **Combined DOCX Verse Range Merging**
+   - Problem: Grouped verses (e.g., "Verses 21-25") not matched correctly
+   - Fix: Added range-aware matching with `college_range_map` keyed by end verse
+
+#### New Feature: Strategic Verse Grouping with Pacing
+
+Instead of truncation at end of long psalms, models can now strategically group verses:
+
+- **Synthesis Writer**: Updated `VERSE_COMMENTARY_PROMPT` with pacing guidance
+- **Master Editor**: Updated `MASTER_EDITOR_PROMPT` with pacing guidance
+- **College Editor**: Changed from "NEVER combine" to strategic grouping with pacing
+
+**Pacing Rules**:
+- Strategic grouping allowed for 2-4 thematically related verses
+- Plan from the start - if grouping needed, do it throughout
+- Equal treatment for later verses - no rushing at the end
+- Never write "remaining verses not included" truncation notes
+
+#### Files Modified:
+- `src/agents/micro_analyst.py` - Increased max_tokens to 16384
+- `src/agents/synthesis_writer.py` - 64K cap, sections accumulation, pacing prompt
+- `src/agents/master_editor.py` - Pacing guidance in both editor prompts
+- `src/utils/document_generator.py` - Markdown heading handling
+- `src/utils/combined_document_generator.py` - Range-aware verse matching, heading handling
+- `scripts/run_enhanced_pipeline.py` - Stats extraction for skip-micro case
+
+---
 
 ### Session 211 (2025-12-11): Gemini 2.5 Pro Fallback + Improved Trimming Strategy
 
@@ -252,6 +304,7 @@ Modified `DISCOVERY_PASS_PROMPT` in `src/agents/micro_analyst.py` with concrete 
 ## Notes
 - Deep Web Research feature ready for production use
 - Gemini 2.5 Pro fallback handles large psalms (51+ verses) without losing critical content
+- Strategic verse grouping with pacing guidance prevents truncation in long psalms
 - Phrase substring matching working correctly
 - Pipeline running without performance issues
 - Critical sections (Liturgical, Sacks, RAG, Concordance) are never trimmed - preserved for Gemini

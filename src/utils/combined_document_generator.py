@@ -333,8 +333,25 @@ class CombinedDocumentGenerator:
             if line in ('---', '___', '***', '—', '–'):
                 continue
 
+            # Check if this is a markdown heading (###, ##, ####)
+            if line.startswith('#'):
+                # Parse heading level and text
+                heading_match = re.match(r'^(#{1,6})\s+(.+)$', line)
+                if heading_match:
+                    hashes = heading_match.group(1)
+                    heading_text = heading_match.group(2)
+                    # Map markdown heading levels to Word heading levels
+                    level = len(hashes)
+                    word_heading_level = min(level, 4)  # Cap at Heading 4
+
+                    # Add as a Word heading
+                    p = self.document.add_heading(heading_text, level=word_heading_level)
+                    self._set_paragraph_ltr(p)
+                else:
+                    # Malformed heading, treat as normal text
+                    self._add_paragraph_with_markdown(line, style=style)
             # Check if this is a bullet point
-            if line.startswith('- '):
+            elif line.startswith('- '):
                 # Create a bulleted paragraph
                 paragraph = self.document.add_paragraph(style='List Bullet')
                 self._set_paragraph_ltr(paragraph)
@@ -367,19 +384,25 @@ class CombinedDocumentGenerator:
         self._add_paragraph_with_markdown(text, style='SummaryText')
 
     def _parse_verse_commentary(self, content: str, psalm_text_data: Dict[int, Dict[str, str]]) -> List[Dict[str, str]]:
-        """Parses the verse-by-verse commentary file."""
+        """Parses the verse-by-verse commentary file.
+
+        Handles both single verses (Verse 1) and verse ranges (Verses 21-25).
+        For ranges, returns a single entry with 'number' as the range string (e.g., '21-25')
+        and 'verse_range' as a tuple (start, end).
+        """
         verses = []
-        # Try multiple formats: "**Verse X**" (main format), "### Verse X" (college format), "Verse X" (fallback)
+        # Try multiple formats: "**Verse(s) X(-Y)**" (main format), "### Verse(s) X(-Y)" (college format)
+        # Match both singular "Verse" and plural "Verses" with optional range
         # First try the expected bold format
-        verse_blocks = re.split(r'(?=^\*\*Verse \d+\*\*\s*\n)', content, flags=re.MULTILINE)
+        verse_blocks = re.split(r'(?=^\*\*Verses? [\d\-–]+.*?\*\*\s*\n)', content, flags=re.MULTILINE)
 
         # If no verses found with bold format, try heading format (college uses this)
         if len(verse_blocks) <= 1:
-            verse_blocks = re.split(r'(?=^#{2,} Verse \d+\s*\n)', content, flags=re.MULTILINE)
+            verse_blocks = re.split(r'(?=^#{2,} Verses? [\d\-–]+)', content, flags=re.MULTILINE)
 
         # If still no verses found, try plain format without any markdown
         if len(verse_blocks) <= 1:
-            verse_blocks = re.split(r'(?=^Verse \d+\s*\n)', content, flags=re.MULTILINE)
+            verse_blocks = re.split(r'(?=^Verses? [\d\-–]+)', content, flags=re.MULTILINE)
 
         for block in verse_blocks:
             block = block.strip()
@@ -388,29 +411,48 @@ class CombinedDocumentGenerator:
 
             lines = block.strip().split('\n', 1)  # Split only on the first newline
 
-            # Try all formats for verse number matching
-            verse_num_match = re.match(r'^\*\*Verse (\d+)\*\*\s*', lines[0])  # **Verse X**
+            # Try all formats for verse number matching (single or range)
+            # Matches: **Verse 1**, **Verses 21-25**, **Verses 21–25 (description)**, etc.
+            verse_num_match = re.match(r'^\*\*Verses? ([\d]+)(?:[\-–]([\d]+))?\s*.*?\*\*', lines[0])  # Bold format
             if not verse_num_match:
-                verse_num_match = re.match(r'^#{2,} Verse (\d+)\s*', lines[0])  # ### Verse X, ## Verse X, #### Verse X, etc.
+                # Heading format: ### Verse 1, ### Verses 21-25 (description), etc.
+                verse_num_match = re.match(r'^#{2,} Verses? ([\d]+)(?:[\-–]([\d]+))?\s*', lines[0])
             if not verse_num_match:
-                verse_num_match = re.match(r'^Verse (\d+)\s*', lines[0])  # Verse X
+                # Plain format: Verse 1, Verses 21-25, etc.
+                verse_num_match = re.match(r'^Verses? ([\d]+)(?:[\-–]([\d]+))?\s*', lines[0])
 
             if not verse_num_match:
                 continue
 
-            verse_num = verse_num_match.group(1)
+            start_verse = verse_num_match.group(1)
+            end_verse = verse_num_match.group(2)  # None if single verse
+
+            if end_verse:
+                # It's a range
+                verse_num = f"{start_verse}-{end_verse}"
+                verse_range = (int(start_verse), int(end_verse))
+            else:
+                # Single verse
+                verse_num = start_verse
+                verse_range = None
+
             commentary_text = '\n'.join(lines[1:]).strip()
 
             # Get Hebrew/English text from the database data
-            verse_info = psalm_text_data.get(int(verse_num), {})
+            verse_info = psalm_text_data.get(int(start_verse), {})
             hebrew_text = verse_info.get('hebrew', '[Hebrew text not found]')
             english_text = verse_info.get('english', '[English text not found]')
-            verses.append({
+
+            verse_entry = {
                 "number": verse_num,
                 "hebrew": hebrew_text,
                 "english": english_text,
                 "commentary": commentary_text
-            })
+            }
+            if verse_range:
+                verse_entry["verse_range"] = verse_range
+
+            verses.append(verse_entry)
         return verses
 
     def _format_psalm_text(self, psalm_num: int, psalm_text_data: Dict[int, Dict[str, str]]):
@@ -734,11 +776,23 @@ Methodological & Bibliographical Summary
         main_parsed_verses = self._parse_verse_commentary(main_verses_content, psalm_text_data)
         college_parsed_verses = self._parse_verse_commentary(college_verses_content, psalm_text_data)
 
-        # Create a mapping for easy lookup
-        college_verse_map = {v['number']: v for v in college_parsed_verses}
+        # Create mappings for easy lookup
+        # For college, we need to handle both exact matches and range matches
+        college_verse_map = {}  # Direct number -> verse mapping
+        college_range_map = {}  # For ranges: stores {end_verse: verse_entry}
+        for v in college_parsed_verses:
+            college_verse_map[v['number']] = v
+            if 'verse_range' in v:
+                # Store by end verse for range matching
+                start, end = v['verse_range']
+                college_range_map[end] = v
+
+        # Track which college ranges have been displayed
+        displayed_college_ranges = set()
 
         for i, main_verse in enumerate(main_parsed_verses):
             verse_num = main_verse['number']
+            verse_num_int = int(verse_num) if verse_num.isdigit() else int(verse_num.split('-')[0])
 
             # Add verse heading
             self.document.add_heading(f'Verse {verse_num}', level=3)
@@ -746,11 +800,26 @@ Methodological & Bibliographical Summary
             # Add main commentary
             self._add_commentary_with_bullets(main_verse["commentary"], style='BodySans')
 
-            # Add college commentary if it exists
+            # Check for college commentary
+            # First try exact match
+            college_verse = None
+            college_key = None
+
             if verse_num in college_verse_map:
+                college_verse = college_verse_map[verse_num]
+                college_key = verse_num
+            else:
+                # Check if this main verse is the END of a college range
+                # This ensures the college block appears after the last verse in the range
+                if verse_num_int in college_range_map:
+                    college_verse = college_range_map[verse_num_int]
+                    college_key = college_verse['number']
+
+            # Only display if we found a match and haven't displayed this range yet
+            if college_verse and college_key not in displayed_college_ranges:
                 # Add em dash separator between main and college
                 self._add_em_dash_separator()
-                college_verse = college_verse_map[verse_num]
+                displayed_college_ranges.add(college_key)
                 college_commentary = college_verse["commentary"]
 
                 # Remove any leading Hebrew verse lines and English translation

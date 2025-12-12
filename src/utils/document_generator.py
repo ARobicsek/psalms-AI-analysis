@@ -409,8 +409,29 @@ class DocumentGenerator:
 
                     # Process markdown formatting in bullet text with explicit font
                     self._process_markdown_formatting(p, bullet_text, set_font=True)
+            # Check if this is a markdown heading (###, ##, ####)
+            elif line_stripped.startswith('#'):
+                # Parse heading level and text
+                heading_match = re.match(r'^(#{1,6})\s+(.+)$', line_stripped)
+                if heading_match:
+                    hashes = heading_match.group(1)
+                    heading_text = heading_match.group(2)
+                    # Map markdown heading levels to Word heading levels
+                    # ## = Heading 2, ### = Heading 3, #### = Heading 4
+                    level = len(hashes)
+                    word_heading_level = min(level, 4)  # Cap at Heading 4
+
+                    # Add as a Word heading
+                    p = self.document.add_heading(heading_text, level=word_heading_level)
+                    self._set_paragraph_ltr(p)
+                else:
+                    # Malformed heading, treat as normal text
+                    p = self.document.add_paragraph(style=style)
+                    self._set_paragraph_ltr(p)
+                    self._process_markdown_formatting(p, line_stripped, set_font=False)
+                i += 1
             # Check if this is a block quote
-            elif line.strip().startswith('>'):
+            elif line_stripped.startswith('>'):
                 # Collect consecutive block quote lines
                 quote_block = []
                 while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('>'):
@@ -452,7 +473,8 @@ class DocumentGenerator:
                         )
                     )
 
-                    if not is_bullet and not line_stripped.startswith('>'):
+                    # Stop if we hit a bullet, quote, or markdown heading
+                    if not is_bullet and not line_stripped.startswith('>') and not line_stripped.startswith('#'):
                         text_block.append(original_line)
                         i += 1
                     else:

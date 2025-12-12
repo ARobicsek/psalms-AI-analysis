@@ -296,6 +296,13 @@ Rewrite the verse-by-verse commentary to address identified weaknesses. For each
 
   Remember: intelligent lay readers are HUNGRY for substantive analysis of linguistic and literary features. Don't shortchange them!
 
+- **PACING FOR LONG PSALMS (35+ verses)**: For longer psalms, you have limited output space. Plan ahead:
+  * **Strategic grouping allowed**: You MAY group 2-4 thematically related verses together (e.g., "**Verses 21-24**") when they form a natural unit
+  * **Plan from the start**: If grouping is necessary, do it THROUGHOUT the psalm—not just at the end
+  * **Equal treatment**: Later verses deserve the same quality as early verses. Do NOT rush the end.
+  * **NEVER truncate**: Do NOT write "Due to length constraints, remaining verses are not included" or similar. Instead, adjust your pacing from the beginning.
+  * A thoughtful 200-word treatment of grouped verses is better than 50 rushed words per verse at the end.
+
 - **Scholarly Grounding**: Your analysis must be grounded in the provided research bundle and demonstrate awareness of the principles in the **ANALYTICAL FRAMEWORK** document. Use its terminology (e.g., "telescopic analysis," "A is so, and what's more, B") where appropriate to frame your insights.
 
 - **Discretion**: You have full editorial discretion. You are not required to include every detail from the synthesizer's commentary. Your role is to *evaluate* the synthesizer's choices regarding phonetic and figurative language, and then decide whether to retain, enhance, rewrite, or replace them to achieve the highest level of scholarly excellence.
@@ -673,6 +680,15 @@ For each verse:
 **Length**: 300-500 words per verse (PLUS the verse itself)
 - Shorter (200-250) acceptable for simple verses
 - Longer (500-800) encouraged for verses with unusual phrases, complex devices, textual variants, rich figurative language, or rabbinic interpretation
+
+**PACING FOR LONG PSALMS (35+ verses):**
+For longer psalms, you have limited output space. Plan ahead and pace yourself:
+- **Strategic grouping allowed**: You MAY group 2-4 thematically related verses together (e.g., "### Verses 21-24") when they form a natural unit
+- **Plan from the start**: If grouping is necessary, do it THROUGHOUT the psalm—not just at the end. Decide your grouping strategy before you begin writing.
+- **Equal treatment**: Later verses deserve the same quality of analysis as early verses. Do NOT rush or provide minimal content for late verses.
+- **Avoid truncation notes**: NEVER write things like "Due to length constraints..." or "I'll summarize more briskly..." Instead, adjust your pacing from the beginning.
+- **Quality over quantity**: A thoughtful 200-word treatment of grouped verses is better than 50 rushed words per verse at the end.
+- **Use `### Verse N` or `### Verses N-M`** heading format consistently
 
 **Tone and Style for College Audience:**
 - **Conversational and direct** — write like you're explaining something fascinating to a friend

@@ -46,6 +46,74 @@ from src.utils.pipeline_summary import PipelineSummaryTracker
 from src.utils.cost_tracker import CostTracker
 
 
+def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
+    """
+    Parse research statistics from a research bundle markdown file.
+
+    Used when skipping micro analysis to still capture stats for the bibliographical summary.
+
+    Args:
+        markdown_content: The full research bundle markdown text
+
+    Returns:
+        Dictionary with extracted stats
+    """
+    import re
+
+    stats = {
+        'lexicon_count': 0,
+        'concordance_count': 0,
+        'figurative_count': 0,
+        'commentary_counts': {},
+        'sacks_count': 0,
+        'deep_research_available': False,
+        'deep_research_chars': 0
+    }
+
+    # Count lexicon entries (## Hebrew Lexicon / BDB entries)
+    lexicon_matches = re.findall(r'### \*\*([^*]+)\*\* \(', markdown_content)
+    stats['lexicon_count'] = len(lexicon_matches)
+
+    # Count concordance queries (### Query: or ### Phrase:)
+    concordance_matches = re.findall(r'### (?:Query|Phrase):', markdown_content)
+    stats['concordance_count'] = len(concordance_matches)
+
+    # Count figurative language instances (- Psalm X (A-N): or similar patterns)
+    figurative_matches = re.findall(r'- (?:Psalm|[A-Za-z]+) \d+[^:]*: v\.\d+', markdown_content)
+    stats['figurative_count'] = len(figurative_matches)
+
+    # Count traditional commentaries by name
+    commentary_patterns = [
+        (r'### Rashi', 'Rashi'),
+        (r'### Ibn Ezra', 'Ibn Ezra'),
+        (r'### Radak', 'Radak'),
+        (r'### Metzudat David', 'Metzudat David'),
+        (r'### Malbim', 'Malbim'),
+        (r'### Sforno', 'Sforno'),
+        (r'### Meiri', 'Meiri'),
+    ]
+    for pattern, name in commentary_patterns:
+        matches = re.findall(pattern, markdown_content)
+        if matches:
+            stats['commentary_counts'][name] = len(matches)
+
+    # Check for Rabbi Sacks references
+    if '## Rabbi Sacks' in markdown_content or 'Rabbi Jonathan Sacks' in markdown_content:
+        # Count individual references
+        sacks_matches = re.findall(r'### [^#\n]+Sacks|Rabbi Sacks|Jonathan Sacks', markdown_content)
+        stats['sacks_count'] = max(1, len(sacks_matches))
+
+    # Check for Deep Web Research section
+    if '## Deep Web Research' in markdown_content:
+        stats['deep_research_available'] = True
+        # Find the section and measure its length
+        deep_match = re.search(r'## Deep Web Research\s*\n(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
+        if deep_match:
+            stats['deep_research_chars'] = len(deep_match.group(1))
+
+    return stats
+
+
 def _parse_related_psalms_from_markdown(markdown_content: str) -> list:
     """
     Parse the related psalms section from a research bundle markdown file.
@@ -391,17 +459,41 @@ def run_enhanced_pipeline(
             research_bundle_content = f.read()
         logger.info(f"Successfully loaded {micro_file} and {research_file} for subsequent steps.")
 
-        # If we skipped micro analysis, we need to manually extract related psalms data from the markdown
-        # so it gets captured in pipeline stats
+        # If we skipped micro analysis, we need to manually extract research stats from the markdown
+        # so it gets captured in pipeline stats for the bibliographical summary
         if skip_micro:
+            # Extract related psalms
             related_psalms = _parse_related_psalms_from_markdown(research_bundle_content)
             if related_psalms:
                 tracker.research.related_psalms_count = len(related_psalms)
                 tracker.research.related_psalms_list = related_psalms
                 logger.info(f"Extracted {len(related_psalms)} related psalms from research bundle markdown")
-                # Save immediately so the update persists
-                tracker.save_json(str(output_path))
-                logger.info(f"Saved updated stats with related psalms data")
+
+            # Extract other research stats (lexicon, concordance, figurative, commentaries, etc.)
+            research_stats = _parse_research_stats_from_markdown(research_bundle_content)
+            tracker.research.lexicon_entries_count = research_stats['lexicon_count']
+            tracker.research.concordance_results = {'total_queries': research_stats['concordance_count']}
+            tracker.research.figurative_results = {'total_instances_used': research_stats['figurative_count']}
+            tracker.research.commentary_counts = research_stats['commentary_counts']
+            tracker.research.sacks_references_count = research_stats['sacks_count']
+            tracker.research.deep_research_available = research_stats['deep_research_available']
+            tracker.research.deep_research_included = research_stats['deep_research_available']  # If available, it was included
+            tracker.research.deep_research_chars = research_stats['deep_research_chars']
+
+            # Track research bundle size
+            tracker.research.research_bundle_chars = len(research_bundle_content)
+            tracker.research.research_bundle_tokens = len(research_bundle_content) // 3  # Estimate
+
+            logger.info(f"Extracted research stats from markdown: "
+                       f"lexicon={research_stats['lexicon_count']}, "
+                       f"concordance={research_stats['concordance_count']}, "
+                       f"figurative={research_stats['figurative_count']}, "
+                       f"commentaries={len(research_stats['commentary_counts'])}, "
+                       f"deep_research={'Yes' if research_stats['deep_research_available'] else 'No'}")
+
+            # Save immediately so the update persists
+            tracker.save_json(str(output_path))
+            logger.info(f"Saved updated stats with research data from markdown")
     except Exception as e:
         logger.error(f"FATAL: Could not load micro analysis or research file: {e}")
         print(f"⚠ FATAL: Could not load required analysis files. Exiting.")
@@ -489,6 +581,14 @@ def run_enhanced_pipeline(
         if synthesis_writer.sections_removed:
             tracker.track_sections_trimmed(synthesis_writer.sections_removed)
             logger.info(f"Sections trimmed for context length: {', '.join(synthesis_writer.sections_removed)}")
+
+        # Always save the trimmed research bundle when trimming occurred (has summary at bottom)
+        trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
+        if synthesis_writer.trimmed_research_bundle:
+            with open(trimmed_research_file, 'w', encoding='utf-8') as f:
+                f.write(synthesis_writer.trimmed_research_bundle)
+            logger.info(f"✓ Trimmed research bundle saved to {trimmed_research_file}")
+            print(f"✓ Trimmed research bundle: {trimmed_research_file}")
 
         logger.info(f"✓ Introduction saved to {synthesis_intro_file}")
         logger.info(f"✓ Verse commentary saved to {synthesis_verses_file}")

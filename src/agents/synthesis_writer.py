@@ -261,6 +261,14 @@ For EACH verse in the psalm, write a commentary annotation that draws on diverse
 - **Can be longer** (400+ words) if there's a genuinely interesting finding or insight that merits extended illumination
 - Let the content determine the length - don't pad or artificially constrain
 
+**PACING FOR LONG PSALMS (35+ verses):**
+For longer psalms, you have limited output space. Plan ahead and pace yourself:
+- **Strategic grouping allowed**: You MAY group 2-4 thematically related verses together (e.g., "Verses 21-24") when they form a natural unit. Use heading format: `**Verses N-M**`
+- **Plan from the start**: If grouping is necessary, do it THROUGHOUT the psalm—not just at the end. Decide your grouping strategy before you begin writing.
+- **Equal treatment**: Later verses deserve the same quality of analysis as early verses. Do NOT rush or provide minimal content for late verses.
+- **Avoid truncation notes**: NEVER write things like "Due to length constraints, remaining verses are not included." Instead, adjust your pacing from the beginning.
+- **Quality over quantity**: A thoughtful 200-word treatment of grouped verses is better than 50 rushed words per verse at the end.
+
 ### ITEMS OF INTEREST TO ILLUMINATE (when relevant to the verse):
 
 The following areas are of particular interest to intelligent, well-read lay readers who desire poetic, literary, linguistic, and historical insights:
@@ -414,14 +422,16 @@ If any check fails, REVISE to incorporate comparative analysis using the databas
 
 ## CRITICAL REQUIREMENTS
 
-- **Cover ALL verses** in the psalm
+- **Cover ALL verses** in the psalm — NEVER truncate or skip verses
 - **Length**: 150-400 words per verse (can and should be longer—400+ words—if there's genuinely interesting material to illuminate, such as unusual Hebrew phrases, complex poetic devices, significant textual variants, or important interpretive questions to address)
+- **Pacing**: For long psalms (35+ verses), plan your pacing from the START. You may group thematically related verses, but do so consistently throughout—not just to rush through the end. NEVER write "remaining verses not included" or similar truncation notes.
 - **Variety**: Don't use the same angles for every verse - vary your approach across poetics, textual criticism, figurative language, historical context, etc.
 - **Evidence**: Cite Hebrew terms, concordance patterns, research findings, traditional commentators
 - **Readability**: Scholarly but accessible for intelligent lay readers (New Yorker/Atlantic level)
 - **Define terms**: Explain technical terminology when used
 - **Independence**: Don't force connections to the macro thesis if they're not natural - follow what's interesting in each verse
 - **Emphasize the interesting**: Make sure to comment on unusual turns of phrase, distinctive Hebrew idioms, and poetic devices. These are what make the commentary valuable and engaging.
+- **Equal treatment for all verses**: The final verses of the psalm deserve the same thoughtful analysis as the opening verses. Plan accordingly.
 
 ---
 
@@ -507,6 +517,9 @@ class SynthesisWriter:
         # Track sections removed during trimming
         self._sections_removed = []
 
+        # Store the trimmed research bundle for external access (debugging/logging)
+        self._trimmed_research_bundle = None
+
         # Initialize Gemini client for fallback (lazy initialization)
         self._gemini_client = None
 
@@ -526,6 +539,11 @@ class SynthesisWriter:
     def sections_removed(self) -> list:
         """Return list of sections removed during trimming."""
         return self._sections_removed
+
+    @property
+    def trimmed_research_bundle(self) -> str:
+        """Return the trimmed research bundle text (after size reduction)."""
+        return self._trimmed_research_bundle
 
     def _get_gemini_client(self):
         """Lazy initialization of Gemini client."""
@@ -547,6 +565,7 @@ class SynthesisWriter:
 
         Target: ~1800 tokens per verse to maintain consistent depth across all psalms.
         Minimum: 16000 tokens (for psalms with fewer than 9 verses).
+        Maximum: 64000 tokens (Claude Sonnet 4.5 API limit).
 
         Args:
             num_verses: Number of verses in the psalm
@@ -555,8 +574,10 @@ class SynthesisWriter:
             Token limit for verse commentary generation
         """
         BASE_TOKENS_PER_VERSE = 1800
+        MAX_TOKENS_LIMIT = 64000  # Claude Sonnet 4.5 max output tokens
         calculated = BASE_TOKENS_PER_VERSE * num_verses
-        return max(16000, calculated)  # Minimum 16K, scales up for longer psalms
+        # Cap at API limit, minimum 16K
+        return min(MAX_TOKENS_LIMIT, max(16000, calculated))
 
     def write_commentary(
         self,
@@ -593,6 +614,10 @@ class SynthesisWriter:
         # Calculate verse token limit if not provided
         if max_tokens_verse is None:
             max_tokens_verse = self._calculate_verse_token_limit(num_verses)
+            ideal_tokens = 1800 * num_verses
+            if ideal_tokens > 64000:
+                self.logger.warning(f"Long psalm ({num_verses} verses): capped at 64K tokens (ideal: {ideal_tokens})")
+                self.logger.warning(f"  Effective tokens per verse: {max_tokens_verse // num_verses} (target: 1800)")
             self.logger.info(f"Calculated verse token limit for {num_verses} verses: {max_tokens_verse} tokens")
 
         self.logger.info(f"Synthesizing commentary for Psalm {psalm_number}")
@@ -994,8 +1019,12 @@ class SynthesisWriter:
 
         self.logger.info(f"Research bundle processing: {original_size:,} -> {len(research_bundle):,} chars")
 
-        # Store sections removed for stats tracking
-        self._sections_removed = sections_removed
+        # Store sections removed for stats tracking (accumulate, don't overwrite)
+        # This ensures we capture trimming from both intro and verse commentary calls
+        if sections_removed:
+            for section in sections_removed:
+                if section not in self._sections_removed:
+                    self._sections_removed.append(section)
 
         # Add trimming summary at the bottom of the research bundle
         trimming_summary = f"\n\n---\n## Research Bundle Processing Summary\n"
@@ -1046,6 +1075,11 @@ class SynthesisWriter:
         # Target: ~350K chars max (~200K tokens at 1.75:1 ratio)
         # This leaves room for prompt template + macro/micro analysis
         research_text, deep_research_removed, needs_gemini = self._trim_research_bundle(research_bundle, max_chars=350000)
+
+        # Store trimmed bundle for external access (debugging/logging)
+        # Only set on first call (intro) - this captures the most aggressive trimming
+        if self._trimmed_research_bundle is None:
+            self._trimmed_research_bundle = research_text
 
         # Track if deep research was removed for space (will be reported in stats)
         self._deep_research_removed_for_space = deep_research_removed

@@ -662,10 +662,11 @@ class MicroAnalystV2:
                     self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
                     time.sleep(wait_time)
 
-                # Use streaming to avoid potential timeout (8K is safer but being consistent)
+                # Use streaming to avoid potential timeout
+                # Psalm 18 (51 verses) requires ~26K chars of JSON output, so we need high max_tokens
                 stream = self.client.messages.stream(
                     model=self.model,
-                    max_tokens=8192,  # Doubled from 4K to ensure no output constraint per verse
+                    max_tokens=16384,  # Increased from 8K to handle long psalms like Psalm 18 (51 verses)
                     messages=[{
                         "role": "user",
                         "content": prompt
@@ -692,6 +693,12 @@ class MicroAnalystV2:
                         output_tokens=usage.output_tokens,
                         thinking_tokens=thinking_tokens
                     )
+
+                # Check for truncation (stop_reason == 'max_tokens' means output was cut off)
+                stop_reason = getattr(final_message, 'stop_reason', None)
+                if stop_reason == 'max_tokens':
+                    self.logger.warning(f"  ⚠ Response was truncated at max_tokens limit ({len(response_text)} chars)")
+                    self.logger.warning(f"  This may cause JSON parsing errors for long psalms")
 
                 self.logger.debug(f"Response text preview: {response_text[:500]}")
 
