@@ -39,7 +39,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.agents.macro_analyst import MacroAnalyst
 from src.agents.micro_analyst import MicroAnalystV2
 from src.agents.synthesis_writer import SynthesisWriter
-from src.agents.master_editor import MasterEditor
+from src.agents.master_editor import MasterEditorV2 as MasterEditor
+from src.agents.master_editor_old import MasterEditor as MasterEditorOld
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
@@ -183,7 +184,8 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "gpt-5"
+    master_editor_model: str = "gpt-5",
+    master_editor_old: bool = False
 ):
     """
     Run complete enhanced pipeline for a single psalm.
@@ -204,6 +206,7 @@ def run_enhanced_pipeline(
         smoke_test: Run in smoke test mode (generates dummy data, no API calls)
         skip_default_commentaries: Use selective commentary mode (only request for specific verses)
         master_editor_model: Model to use for master editor (default: "gpt-5.1", or "claude-opus-4-5")
+        master_editor_old: Use OLD prompt (pre-V2). Default is now V2 (restructured, Deep Research emphasis)
     """
     logger = get_logger("enhanced_pipeline")
     logger.info(f"=" * 80)
@@ -739,7 +742,12 @@ def run_enhanced_pipeline(
         )
         tracker.track_step_input("master_editor", editor_input)
 
-        master_editor = MasterEditor(
+        # Select editor based on flag (V2 is now default)
+        EditorClass = MasterEditorOld if master_editor_old else MasterEditor
+        editor_version = "OLD" if master_editor_old else "V2"
+        logger.info(f"Using Master Editor {editor_version}")
+
+        master_editor = EditorClass(
             main_model=master_editor_model,
             cost_tracker=cost_tracker
         )
@@ -795,7 +803,8 @@ def run_enhanced_pipeline(
         logger.info(f"[STEP 4] Skipping master edit (using existing {edited_intro_file})")
         print(f"\nSkipping Step 4 (using existing master-edited files)\n")
         # Still need to get model name for tracking
-        master_editor = MasterEditor(
+        EditorClass = MasterEditorOld if master_editor_old else MasterEditor
+        master_editor = EditorClass(
             main_model=master_editor_model,
             cost_tracker=cost_tracker
         )
@@ -820,11 +829,14 @@ def run_enhanced_pipeline(
     if not skip_college and not smoke_test:
         # Check if college files need regeneration:
         # 1. College file doesn't exist, OR
-        # 2. Synthesis files are newer than college files (synthesis was re-run)
+        # 2. Synthesis files are newer than college files (synthesis was re-run), OR
+        # 3. Main edited files are newer than college files (main editor was re-run)
         college_needs_regeneration = (
             not edited_intro_college_file.exists() or
             (synthesis_intro_file.exists() and
-             synthesis_intro_file.stat().st_mtime > edited_intro_college_file.stat().st_mtime)
+             synthesis_intro_file.stat().st_mtime > edited_intro_college_file.stat().st_mtime) or
+            (edited_intro_file.exists() and
+             edited_intro_file.stat().st_mtime > edited_intro_college_file.stat().st_mtime)
         )
 
         if college_needs_regeneration:
@@ -839,21 +851,36 @@ def run_enhanced_pipeline(
 
             # Use the same inputs as regular master editor
             # College editor uses same model as main editor for consistency
-            master_editor_college = MasterEditor(
+            EditorClass = MasterEditorOld if master_editor_old else MasterEditor
+            editor_version = "OLD" if master_editor_old else "V2"
+            logger.info(f"Using Master Editor {editor_version} for college edition")
+
+            master_editor_college = EditorClass(
                 main_model=master_editor_model,
                 college_model=master_editor_model,  # Use same model for college
                 cost_tracker=cost_tracker
             )
 
             try:
-                result_college = master_editor_college.edit_commentary_college(
-                    introduction_file=synthesis_intro_file,
-                    verse_file=synthesis_verses_file,
-                    research_file=research_file,
-                    macro_file=macro_file,
-                    micro_file=micro_file,
-                    psalm_number=psalm_number
-                )
+                # V2 (default) uses edit_college_commentary, OLD uses edit_commentary_college
+                if master_editor_old:
+                    result_college = master_editor_college.edit_commentary_college(
+                        introduction_file=synthesis_intro_file,
+                        verse_file=synthesis_verses_file,
+                        research_file=research_file,
+                        macro_file=macro_file,
+                        micro_file=micro_file,
+                        psalm_number=psalm_number
+                    )
+                else:
+                    result_college = master_editor_college.edit_college_commentary(
+                        introduction_file=synthesis_intro_file,
+                        verse_file=synthesis_verses_file,
+                        research_file=research_file,
+                        macro_file=macro_file,
+                        micro_file=micro_file,
+                        psalm_number=psalm_number
+                    )
             except openai.RateLimitError as e:
                 logger.error(f"PIPELINE HALTED: OpenAI API quota exceeded during College Editor step. {e}")
                 print(f"\n⚠️ PIPELINE HALTED: OpenAI API quota exceeded. Please check your plan and billing details.")
@@ -1183,6 +1210,8 @@ Examples:
     parser.add_argument('--master-editor-model', type=str, default='gpt-5.1',
                        choices=['gpt-5', 'gpt-5.1', 'claude-opus-4-5'],
                        help='Model to use for master editor (default: gpt-5.1 with high reasoning). Use claude-opus-4-5 for maximum thinking mode.')
+    parser.add_argument('--master-editor-old', action='store_true',
+                       help='Use OLD master editor prompt (pre-V2). Default is now V2 (restructured, explicit Deep Research guidance, aggressive Hebrew+English enforcement)')
 
     args = parser.parse_args()
 
@@ -1209,6 +1238,10 @@ Examples:
             print(f"  → Using Claude Opus 4.5 with extended thinking (64K budget)")
         elif args.master_editor_model == 'gpt-5':
             print(f"  → Using GPT-5 with high reasoning effort")
+        if args.master_editor_old:
+            print(f"  → Using OLD prompt (pre-V2)")
+        else:
+            print(f"  → Using V2 prompt (restructured, Deep Research emphasis) [DEFAULT]")
         print()
 
         result = run_enhanced_pipeline(
@@ -1226,7 +1259,8 @@ Examples:
             skip_combined_doc=args.skip_combined_doc,
             smoke_test=args.smoke_test,
             skip_default_commentaries=args.skip_default_commentaries,
-            master_editor_model=args.master_editor_model
+            master_editor_model=args.master_editor_model,
+            master_editor_old=args.master_editor_old
         )
 
         return 0

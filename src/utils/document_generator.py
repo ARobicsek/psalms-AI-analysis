@@ -270,6 +270,12 @@ class DocumentGenerator:
                 i += 1
                 continue
 
+            # Handle liturgical section marker - convert to proper heading
+            if line == '---LITURGICAL-SECTION-START---':
+                self.document.add_heading('Modern Jewish Liturgical Use', level=2)
+                i += 1
+                continue
+
             # Handle headers
             if line.startswith('####'):
                 self.document.add_heading(line.replace('####', '').strip(), level=4)

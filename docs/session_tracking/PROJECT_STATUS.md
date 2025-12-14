@@ -1,11 +1,64 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-11 (Session 214)
+**Last Updated**: 2025-12-13 (Session 215)
 
 ## Current Focus: Psalm Commentary Production
 
 ### Phase: Pipeline Production - Complete Psalms 1-14, 8, 15-21
 Continuing with verse-by-verse commentary generation using the established pipeline.
+
+## Master Editor V2 Prompt Restructure (Session 215) - NEW DEFAULT ✅
+
+### Overview
+Completely restructured the Master Editor prompt for clearer organization, explicit Deep Research guidance, and aggressive Hebrew+English enforcement. V2 is now the **default**; the old prompt is available via `--master-editor-old` flag.
+
+### Key Changes
+
+1. **Cleaner Organization**:
+   - Consolidated "Ground Rules" section at the top (non-negotiable requirements)
+   - Reduced redundancy (~40% reduction in repeated instructions)
+   - Hebrew+English rule stated ONCE prominently instead of 15+ times scattered
+
+2. **Explicit Deep Research Utilization**:
+   - Specific guidance for cultural/artistic afterlife (Brahms, Zionism, etc.)
+   - Scholarly debates made accessible to lay readers
+   - Reception history and famous rabbinic narratives
+   - ANE parallels with real insight (not just "cf. Ugaritic text")
+
+3. **"Aha! Moment" Focus**:
+   - Mission framed as creating insights that "could never have existed before"
+   - Emphasis on synthesis across ALL sources
+   - More provocative section headers in output
+
+4. **College Edition Improvements**:
+   - More pedagogically-oriented (teaches students how to read, not just what to think)
+   - Better question-based opening hooks
+   - Self-reflective questions at end of verses
+   - Richer reception history integration
+
+### A/B Testing Results (Psalm 126)
+- V2 produced significantly better college edition with more engaging prose
+- Better integration of Deep Research material (Honi story, Zionism, Brahms)
+- Improved section headers ("The structure: how the poem argues" vs "A quick map")
+- More vivid imagery ("buy land, plant vines, drain swamps")
+
+### Files Changed
+- `src/agents/master_editor.py` - NEW V2 prompt (was master_editor_v2.py)
+- `src/agents/master_editor_old.py` - Old prompt preserved
+- `scripts/run_enhanced_pipeline.py` - V2 is default, `--master-editor-old` for old
+- `src/utils/document_generator.py` - Fixed `---LITURGICAL-SECTION-START---` marker
+- `src/utils/combined_document_generator.py` - Fixed liturgical section extraction
+
+### Usage
+```bash
+# Default (V2)
+python scripts/run_enhanced_pipeline.py 126
+
+# Use old prompt
+python scripts/run_enhanced_pipeline.py 126 --master-editor-old
+```
+
+---
 
 ## Gemini 2.5 Pro Fallback for Large Psalms (Session 211) - NEW FEATURE ✅
 
@@ -161,6 +214,58 @@ I'm preparing a scholarly essay on Psalm [] for a collection of essays that serv
 ---
 
 ## Recent Accomplishments
+
+### Session 215 (2025-12-13): Master Editor V2 Prompt Restructure
+
+#### Objective:
+Improve Master Editor prompt to better utilize Deep Research materials and create more engaging "aha! moment" commentary for curious lay readers.
+
+#### Problem Analysis:
+- Original prompt had accumulated cruft through iterative development (~440 lines)
+- Hebrew+English rule repeated 15+ times but still frequently violated
+- Deep Research (cultural afterlife, reception history) not explicitly surfaced
+- No clear guidance on "aha! moment" creation
+
+#### Solution Implemented:
+
+1. **Created `master_editor_v2.py`** with restructured prompt:
+   - **Ground Rules** section at top with unmissable Hebrew+English requirement
+   - **Explicit Deep Research guidance**: cultural/artistic afterlife, scholarly debates, reception history, famous rabbinic narratives, ANE parallels with insight
+   - **"Aha! Moment" focus**: framed mission as creating insights that couldn't exist before LLMs
+   - **Reduced redundancy**: ~40% fewer repeated instructions
+
+2. **Updated College Edition prompt** with same improvements:
+   - More pedagogically-oriented (teaches how to read, not just what to think)
+   - Question-based opening hooks
+   - Self-reflective questions inviting reader engagement
+
+3. **A/B tested on Psalm 126** with Deep Research:
+   - V2 produced significantly better essays
+   - Richer integration of Honi story, Zionism, Brahms
+   - More provocative section headers
+   - Better closing paragraphs with reader engagement
+
+4. **Made V2 the default**:
+   - Renamed `master_editor.py` → `master_editor_old.py`
+   - Renamed `master_editor_v2.py` → `master_editor.py`
+   - Added `--master-editor-old` flag for using old prompt
+
+5. **Fixed liturgical section formatting**:
+   - `---LITURGICAL-SECTION-START---` marker now properly converted to heading
+   - Combined document generator now extracts liturgical section from both formats
+
+6. **Fixed college regeneration logic**:
+   - Added check for main edited files being newer than college files
+   - Ensures college regenerates when main editor is re-run
+
+#### Files Modified:
+- `src/agents/master_editor.py` - NEW V2 prompt (restructured)
+- `src/agents/master_editor_old.py` - Old prompt preserved
+- `scripts/run_enhanced_pipeline.py` - V2 default, `--master-editor-old` flag
+- `src/utils/document_generator.py` - Liturgical marker handling
+- `src/utils/combined_document_generator.py` - Liturgical extraction fix
+
+---
 
 ### Session 214 (2025-12-11): Pipeline Stats Tracking Fix
 
@@ -406,6 +511,8 @@ Modified `DISCOVERY_PASS_PROMPT` in `src/agents/micro_analyst.py` with concrete 
 ---
 
 ## Notes
+- **Master Editor V2 is now the default** - restructured prompt with explicit Deep Research guidance
+- Use `--master-editor-old` flag to run with the original prompt
 - Deep Web Research feature ready for production use
 - Gemini 2.5 Pro fallback handles large psalms (51+ verses) without losing critical content
 - Strategic verse grouping with pacing guidance prevents truncation in long psalms

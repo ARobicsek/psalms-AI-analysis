@@ -486,11 +486,21 @@ class CombinedDocumentGenerator:
         """
         Extracts the 'Modern Jewish Liturgical Use' section from the intro content.
         Returns the section content or empty string if not found.
+
+        Handles both:
+        - Header-based: ## Modern Jewish Liturgical Use
+        - Marker-based: ---LITURGICAL-SECTION-START---
         """
-        # Look for the section header
+        # First try the header-based format
         match = re.search(r'## Modern Jewish Liturgical Use\s*\n(.*)', intro_content, re.DOTALL | re.IGNORECASE)
         if match:
             return "## Modern Jewish Liturgical Use\n" + match.group(1).strip()
+
+        # Try the marker-based format (used by V2 prompts)
+        match = re.search(r'---LITURGICAL-SECTION-START---\s*\n(.*)', intro_content, re.DOTALL)
+        if match:
+            return "## Modern Jewish Liturgical Use\n" + match.group(1).strip()
+
         return ""
 
     def _format_bibliographical_summary(self, stats: Dict[str, Any]) -> str:
@@ -631,8 +641,9 @@ Methodological & Bibliographical Summary
         liturgical_section = self._extract_liturgical_section(main_intro_content)
 
         # Remove liturgical section from main intro
+        # Handle both header-based (## Modern Jewish Liturgical Use) and marker-based (---LITURGICAL-SECTION-START---)
         main_intro_without_liturgical = re.sub(
-            r'## Modern Jewish Liturgical Use.*',
+            r'(## Modern Jewish Liturgical Use.*|---LITURGICAL-SECTION-START---.*)',
             '',
             main_intro_content,
             flags=re.DOTALL | re.IGNORECASE
