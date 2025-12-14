@@ -1,66 +1,177 @@
-Psalm 18 is one of the rare places in the Hebrew Bible where we can watch a poem travel. It appears twice, once here in the Psalter and once, almost verbatim, in 2 Samuel 22. In Samuel it is lodged in narrative: David, near the end of his career, sings “on the day YHWH saved him from the hand of all his enemies and from the hand of Saul” (בְּיוֹם הִצִּיל־יְהוָה אֹתוֹ מִכַּף כׇּל־אֹיְבָיו וּמִיַּד שָׁאוּל, 18:1). In Psalms, by contrast, it is framed “for the leader” (לַמְנַצֵּחַ), as liturgy.
+The superscription of Psalm 18 sounds almost like a colophon to a life’s work:  
 
-Comparing the two versions shows what happens when a fiercely personal victory song is taken up into public worship. The Samuel text preserves older, more “defective” spelling and some rougher turns of phrase; the psalm smooths these into later orthography, adds an opening line of devotion—“I love You, YHWH, my strength” (אֶרְחָמְךָ יְהוָה חִזְקִי, 18:2), absent from 2 Samuel—and slightly reworks some phrases in the direction of congregational praise. At the end, a single letter changes the sense of the closing doxology. Samuel reads מִגְדּוֹל יְשׁוּעוֹת מַלְכּוֹ, “a tower of victories to His king,” while Psalm 18 reads מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ, “He magnifies victories for His king” (18:51). The image of a fortress‑tower becomes a verb of ongoing magnification. Jewish liturgy preserved both: *Migdol* is recited in Birkat HaMazon on Shabbat and festivals, *Magdil* on weekdays.
+> לַמְנַצֵּחַ לְעֶבֶד יְהוָה לְדָוִד, אֲשֶׁר דִּבֶּר לַיהוָה אֶת־דִּבְרֵי הַשִּׁירָה הַזֹּאת, בְּיוֹם הִצִּיל־יְהוָה אֹתוֹ מִכַּף כָּל־אֹיְבָיו וּמִיַּד שָׁאוּל׃  
+> “For the leader. Of the servant of YHWH, of David, who spoke to YHWH the words of this song, on the day YHWH rescued him from the hand of all his enemies and from the hand of Saul.”
 
-The poem itself is architecturally intricate. It moves in a great arc: from suffocating crisis, through an earth‑shaking appearance of God, to the king’s renewed strength, wide dominion, and the promise of an eternal dynasty.
+The heading places us at the far side of danger. David, now “servant of YHWH” (עֶבֶד יְהוָה), looks back on years of pursuit, ambush, civil war. “Servant” is a loaded word: it is how Moses dies in Deuteronomy—“מֹשֶׁה עֶבֶד יְהוָה”—and how Isaiah’s mysterious figure will later be named. Here it sits where we expect “king.” The psalm announces its thesis before David sings a note: kingship in Israel is, or ought to be, a specialized form of servanthood.
 
-The first movement (vv. 4–7) plunges us into danger. Death is not an abstraction but a hunter: “Cords of Death encompassed me… torrents of Belial terrified me; cords of Sheol encircled me, snares of Death confronted me” (אֲפָפוּנִי חֶבְלֵי־מָוֶת… נַחֲלֵי בְלִיַּעַל… חֶבְלֵי שְׁאוֹל… מוֹקְשֵׁי מָוֶת). The idiom “cords of death” recurs in Psalm 116:3—“אֲפָפוּנִי חֶבְלֵי־מָוֶת וּמְצָרֵי שְׁאוֹל מְצָאוּנִי, צָרָה וְיָגוֹן אֶמְצָא, the cords of death encompassed me, the torments of Sheol found me”—a stock way of talking about a crisis that feels like drowning and capture at once. “Belial” (בְלִיַּעַל), elsewhere simply “worthlessness” or a “base fellow,” here joins Death and Sheol in a little pantheon of threats. Medievals knew the philology (בְּלִי + יַעַל: “without worth”), but in this poetic register it is more like a personification of sheer ruin—the black flood that sweeps everything away.
+Yet what follows is no modest servant’s prayer. The poem opens with an intimacy almost embarrassing in its ardor:
 
-The turn comes in verse 7: “In my distress I called on YHWH… from His temple He heard my voice” (בַּצַּר־לִי אֶקְרָא יְהוָה… מֵהֵיכָלוֹ). “Temple” (הֵיכָל) can mean the earthly sanctuary or the heavenly palace. For David—long before Solomon’s building—Radak takes it as heaven itself: YHWH’s court. In later liturgical use, when this psalm is recited in the context of the actual Temple or synagogue, the ambiguity is fruitful: prayer rises to the unseen Temple above even as it sounds beneath carved stone.
+> אֶרְחָמְךָ יְהוָה חִזְקִי׃  
+> “I love You, YHWH, my strength” (v.2).
 
-Then the poem erupts. Verses 8–16 are a classical “theophany,” a description of God’s appearing. The earth buckles: “The earth shook and quaked; the foundations of the mountains trembled… because He was angry” (וַתִּגְעַשׁ וַתִּרְעַשׁ הָאָרֶץ; וּמוֹסְדֵי הָרִים יִרְגָּזוּ… כִּי־חָרָה לוֹ). Smoke pours from God’s nostrils, fire from His mouth (v. 9). He “bends the heavens and comes down” (וַיֵּט שָׁמַיִם וַיֵּרַד, v. 10), rides a cherub, and “flies, gliding on the wings of the wind” (וַיִּרְכַּב עַל־כְּרוּב וַיָּעֹף, וַיֵּדֶא עַל־כַּנְפֵי־רוּחַ, v. 11).
+The verb אֶרְחָמְךָ comes from רָחַם, the root of רֶחֶם, “womb.” Normally this root appears in the intensive stem to describe a superior’s compassion: “As a mother comforts her child” (כְּאִישׁ אֲשֶׁר אִמּוֹ תְנַחֲמֶנּוּ, Isa 66:13), “so will I comfort you.” Here, uniquely, the psalmist dares to say, in the simple stem, “I womb-love You.” Grammarians notice the anomaly; the ear hears the risk. A human addresses God not with covenantal loyalty alone, but with something like infant attachment.
 
-This is not private mysticism. It is also polemic. At Ugarit, the god Baal is called “Rider on the Clouds” and is pictured hurling thunderbolts against the Sea god. Psalm 18 borrows that visual vocabulary—storm clouds, thunder, lightning—but wrests it away from Baal. YHWH, not any Canaanite storm‑god, rides the cherub‑chariot. The forces He subdues are no longer personified deities like “Sea” and “Death” but very real armies and political chaos. The poet has demythologized the myth.
+Within a breath that tenderness hardens into geology and armory. Nine titles pile up in one verse:
 
-Yet even here there is paradox. “He made darkness His hiding place; around Him, His pavilion, darkness of waters, thick clouds of skies” (יָשֶׁת־חֹשֶׁךְ סִתְרוֹ; סְבִיבוֹתָיו סֻכָּתוֹ; חֶשְׁכַת־מַיִם עָבֵי שְׁחָקִים, v. 12). At the moment of revelation God wraps Himself in obscurity. The Talmud (Ḥagigah 12a), playing with this verse, imagines “darkness and cloud and thick gloom surrounding Him,” then asks: is there really darkness before the One for whom “night shines like day” (Ps 139:12)? It answers by distinguishing God’s “inner” and “outer” chambers—a way of saying that even when human beings perceive darkness, God is not dimmed. Medieval Jewish commentators like Radak take the darkness here as a metaphor for God’s hiddenness from the wicked, His help withdrawn from them even as He intervenes to rescue the king.
+> יְהוָה סַלְעִי וּמְצוּדָתִי וּמְפַלְטִי;  
+> אֵלִי צ֭וּרִי אֶֽחֱסֶה־בּוֹ;  
+> מָגִנִּי וְקֶֽרֶן־יִשְׁעִי מִשְׂגַּבִּי׃  
+> “YHWH is my crag and my fortress and my deliverer;  
+> my God, my rock in whom I take refuge;  
+> my shield and horn of my salvation, my stronghold” (v.3).
 
-After the storm comes the rescue in human scale. God “reaches down from on high” (יִשְׁלַח מִמָּרוֹם) and draws David “out of mighty waters” (יַמְשֵׁנִי מִמַּיִם רַבִּים, v. 17). The verb מָשָׁה appears, strikingly, in only one other story: Pharaoh’s daughter naming the infant Moses, “כִּי מִן־הַמַּיִם מְשִׁיתִהוּ, for I drew him out of the water” (Exod 2:10). David here undergoes a sort of second, royal Exodus; like Moses he is a man plucked from perilous waters to become a leader of Israel. Rabbinic imagination links such verses: when the Torah Temimah notes “וַיֵּרָאוּ אֲפִיקֵי מַיִם… מִנִּשְׁמַת רוּחַ אַפֶּךָ” (“the channels of water were seen… from the blast of the breath of Your nostrils,” v. 16) it immediately thinks of the Red Sea: God’s “blast” that split the waters for the people.
+Those metaphors are not abstract. They belong to a particular landscape: the broken limestone of the Judean wilderness, riddled with caves and outcrops. David did in fact hide in סֶלַע (“crag”) and מְצוּדָה (“fortress”) when Saul hunted him. Psalm 31 borrows this language for a still-besieged David—“כִּי־סַלְעִי וּמְצוּדָתִי אָתָּה” (“For You are my crag and my fortress,” Ps 31:4)—but Psalm 18 narrates the rescue itself. The geography of fugitive survival is re-inscribed as theology: God is the topography in which the king lives.
 
-The hinge of the psalm is the notoriously bold section on righteousness (vv. 21–25). “YHWH rewarded me according to my righteousness; according to the cleanness of my hands He repaid me” (יִגְמְלֵנִי יְהוָה כְּצִדְקִי; כְּבֹר יָדַי יָשִׁיב לִי). Given that the historical David commits adultery and orchestrates a killing, how can he talk this way? The traditional answer is two‑fold. First, Rashi and Radak narrow the frame: here David speaks primarily of his conduct toward Saul, “the LORD’s anointed.” He repeatedly had Saul in his power and refused to kill him. In that limited but crucial sense, his “hands” are clean. Second, the language is covenantal rather than perfectionist. “I have kept the ways of YHWH… all His judgments were before me, and His statutes I did not turn away from me” (18:22–23). This is the Deuteronomic idiom of loyalty; it does not mean sinlessness, but fidelity to the terms of the relationship. When verse 25 repeats the claim and adds “before His eyes” (לְנֶגֶד עֵינָיו), it underscores that this is God’s appraisal, not David’s self‑flattery.
+From there the poem swings into nightmare:
 
-Immediately after, the poem briefly becomes a miniature wisdom text: “With the loyal You act loyally; with the blameless man, blamelessly; with the pure You show Yourself pure, but with the crooked You show Yourself twisted” (עִם־חָסִיד תִּתְחַסָּד… וְעִם־עִקֵּשׁ תִּתְפַּתָּל, vv. 26–27). The Hebrew verb תִּתְפַּתָּל, “You twist Yourself,” is deliberately startling. Ibn Ezra and Radak hasten to say this means that God meets the crooked on their own terms: He out‑maneuvers them, “wrestles” them to the ground, as in Rachel’s pun on נִפְתַּלְתִּי (“I have wrestled,” Gen 30:8). It is a compact statement of moral reciprocity: God is experienced as merciful by the merciful, and as a wily opponent by the devious.
+> אֲפָפוּנִי חֶבְלֵי־מָוֶת;  
+> וְנַחֲלֵי בְלִיַּעַל יְבַעֲתוּנִי׃  
+> חֶבְלֵי שְׁאוֹל סְבָבוּנִי;  
+> קִדְּמוּנִי מוֹקְשֵׁי מָוֶת׃  
+> “The cords of Death encompassed me;  
+> torrents of Belial terrified me.  
+> Cords of Sheol encircled me;  
+> snares of Death confronted me” (vv.5–6).
 
-From there the poem shifts voice. In the first half, almost every important verb had God as subject. In the second, the empowered king steps onto the stage: “With You I rush a troop; with my God I scale a wall” (כִּי־בְךָ אָרֻץ גְּדוּד; וּבֵאלֹהַי אֲדַלֶּג־שׁוּר, v. 30). God “girds me with strength… makes my feet like deer’s… trains my hands for battle, so that my arms can bend a bow of bronze” (vv. 33–35). The ANE royal inscriptions brag in similar terms—pharaohs who alone can string the great bow—but here the pride is derailed: every boast is grammatically tethered to a prior divine “You.”
+“Cords” (חֶבְלֵי) can be ropes or birth-pangs. Rashi leans into the hunter’s snare; the Targum hears labor pains. Either way, Death is not mere event but a character with tools, as are Sheol and that shadowy figure בְלִיַּעַל (“Belial”), whose “torrents” evoke both flood and moral chaos. Elsewhere in the Psalter, the same phrase—“אֲפָפוּנִי חֶבְלֵי־מָוֶת”—is used by an anonymous supplicant (Ps 116:3). What Psalm 18 does is weld that individual lament to royal ideology: David’s brush with “cords of death” is not a private crisis but a threat against the entire dynastic project.
 
-In that light, one of the most theologically rich lines is also one of the strangest: “Your humility makes me great” (וְעַנְוַתְךָ תַרְבֵּנִי, v. 36). The noun עֲנָוָה usually means human humility. Applied to God it cannot mean “modesty” in a human sense. Classical Jewish commentators take it as God’s condescension—His willingness to “lower” Himself, to pay attention to an insignificant human life. Radak paraphrases: God, in His humility, “diminishes” His own exaltedness, as it were, to look after David; that is what “magnifies” the king. Malbim adds a psychological nuance: God’s “humility” is His readiness to work through the small and weak, to empower the one who does not trust his own might. For a modern reader used to more abstract talk of “grace,” this earthy phrase is worth savoring: the God whose nostrils breathe fire also stoops.
+At the hinge of the poem, in a verse that feels like an intake of breath, mere pleading becomes world-shaking:
 
-The final stretch widens the horizon from David’s survival to his international stature. “You have rescued me from the strife of peoples; You have set me as head of nations; a people I did not know serve me” (תְּפַלְּטֵנִי מֵרִיבֵי עָם; תְּשִׂימֵנִי לְרֹאשׁ גּוֹיִם; עַם לֹא־יָדַעְתִּי יַעַבְדֻנִי, v. 44). Foreigners “cringe” (יְכַחֲשׁוּ־לִי), their courage “withers” (יִבֹּלוּ), they “come trembling out of their strongholds” (יִחְרְגוּ מִמִּסְגְּרוֹתֵיהֶם, vv. 45–46). Some of this can be read in terms of David’s actual empire over Moab, Aram, and Edom (2 Sam 8), but the language spills over into aspiration. Jewish tradition heard in it a sketch of messianic dominion; Christian readers from early on saw in it a type of the nations turning to Christ.
+> בַּצַּר־לִי אֶקְרָא יְהוָה;  
+> וְאֶל־אֱלֹהַי אֲשַׁוֵּעַ.  
+> יִשְׁמַע מֵהֵיכָלוֹ קוֹלִי;  
+> וְשַׁוְעָתִי לְפָנָיו תָּבוֹא בְאׇזְנָיו׃  
+> “In my distress I called upon YHWH,  
+> and to my God I cried for help.  
+> From His temple He heard my voice;  
+> my cry before Him came into His ears” (v.7).
 
-All of this culminates in a closing vow of praise and a promise: “Therefore I acclaim You among the nations, YHWH, and sing to Your name: He magnifies victories for His king, and does ḥesed—steadfast love—to His anointed, to David and to his seed forever” (עַל־כֵּן אוֹדְךָ בַגּוֹיִם יְהוָה, וּלְשִׁמְךָ אֲזַמֵּרָה. מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ; וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ, לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם, vv. 50–51). The word “anointed” (מָשִׁיחַ) here first of all means David himself and the line of kings descended from him. But with the little phrase “to his seed forever,” the poem opens itself to later readings. Medieval Jewish commentators like Radak vigorously insist that זֶרַע is plural—successive kings of the Davidic house, culminating in the Messiah of Israel; Christian exegetes from the Fathers through Calvin read the singular Messiah. Either way, the psalm does more than recount a narrow escape. It presents David’s deliverance as charter story: this is how God deals with His king, and will go on dealing.
+The cry travels: “לְפָנָיו תָּבוֹא בְאׇזְנָיו” (“it comes before Him, into His ears”). That little journey—from mouth to ear, earth to “temple” (הֵיכָל, which Radak reads as heaven itself)—triggers one of the most elaborate theophanies in the Bible. Earth and mountains convulse, smoke pours from God’s nostrils, devouring fire from His mouth, coals blaze from Him (vv.8–9). He “bends the heavens” (וַיֵּט שָׁמַיִם) and “descends” (וַיֵּרַד), riding on a single cherub, gliding “עַל־כַּנְפֵי־רוּחַ” (“on the wings of the wind,” v.11). He wraps Himself not in light but in “חֹשֶׁךְ” (“darkness”) and “עָבֵי שְׁחָקִים” (“thick clouds of the skies,” v.12), only to shatter that storm-cloud tent with “נֹגַהּ” (“brightness”) and artillery of hail and lightning (vv.13–15).
 
-For that reason, Psalm 18 has belonged not only to David but to communities ever since: sung after meals, recited with the Torah, placed in the mouth of every worshiper who calls in distress and tastes rescue.
+For an ancient Israelite audience, this was not generic special effects. It was a direct challenge to Canaanite religion. In Ugaritic poetry, the storm-god Baal is “rider on the clouds,” flinging lightning as spears. When Psalm 18 says YHWH “rode on a cherub” and flew, and “walked on the wings of the wind,” it is borrowing Baal’s chariot and stabling it in YHWH’s courts. But the point of this cosmic descent is startlingly modest:
 
-  
-## Modern Jewish Liturgical Use
+> יִשְׁלַח מִמָּרוֹם יִקָּחֵנִי;  
+> יַמְשֵׁנִי מִמַּיִם רַבִּים׃  
+> “He reached down from on high, He took me;  
+> He drew me out of mighty waters” (v.17).
 
-#### Full psalm
+The “mighty waters” (מַיִם רַבִּים), a stock metaphor for chaos, are here both mythic sea and very human danger. The verb מָשָׁה (“to draw out”) is the one that explains Moses’ name—“כִּי מִן־הַמַּיִם מְשִׁיתִהוּ” (“for I drew him out of the water,” Exod 2:10). David’s rescue recapitulates Israel’s founding rescue; the king’s story is grafted into the Exodus.
 
-The full text of Psalm 18 is not part of the fixed daily synagogue service, but its twin, 2 Samuel 22, is chanted as the haftarah on the Seventh Day of Passover, paired with the Song at the Sea (Exodus 15). In that setting, David’s song of deliverance is heard as a royal echo of Israel’s primal redemption from Egypt. The same chapter in Samuel also appears as the haftarah for Parashat Ha’azinu in some rites, again underscoring the connection between covenant, song, and kingship.
+Then, disconcertingly, the storm clears into moral accounting:
+
+> יִגְמְלֵנִי יְהוָה כְּצִדְקִי;  
+> כְּבֹר יָדַי יָשִׁיב לִי׃  
+> “YHWH has rewarded me according to my righteousness;  
+> according to the cleanness of my hands He has repaid me” (v.21).
+
+The psalmist insists, at length (vv.21–25), that his deliverance is a matter of desert. He has “kept the ways of YHWH” (שָׁמַרְתִּי דַּרְכֵי יְהוָה), not “acted wickedly” away from his God, kept all divine ordinances before him, been “תָּמִים עִמּוֹ” (“blameless with Him”). Medieval Jewish commentators scramble to square this with the Bathsheba-Uriah episode. Rashi restricts it to David’s restraint toward Saul—he had Saul in his cave and did not strike (1 Sam 24). Radak suggests relative righteousness: “the right was with me and wrongdoing with my enemies.” Modern readers, aware of David’s full dossier, may want to wince away.
+
+Two clarifications help. First, this is royal ideology: the way a Davidic king is supposed to speak of himself as covenant partner and vicegerent. In Egyptian and Assyrian inscriptions, kings claim to “establish justice” and to be beloved of the gods; Psalm 18 clothes that rhetoric in Israel’s vocabulary of Torah and covenant. Second, the righteousness block is framed and interpreted by a miniature wisdom poem:
+
+> עִם־חָסִיד תִּתְחַסָּד;  
+> עִם־גְּבַר תָּמִים תִּתַּמָּם.  
+> עִם־נָבָר תִּתְבָּרָר;  
+> וְעִם־עִקֵּשׁ תִּתְפַּתָּל׃  
+> “With the loyal You show Yourself loyal;  
+> with the blameless man You show Yourself blameless.  
+> With the pure You show Yourself pure;  
+> and with the crooked You show Yourself twisted” (vv.26–27).
+
+This is *middah keneged middah*—measure-for-measure theology—compressed into four lines. God’s dealings with humans are not arbitrary; they “fit” the moral shape they encounter. That makes David’s righteousness claim less self-congratulation than worked example: my story enacts the general rule. The shocking last line—God “twists” Himself to the twisted—has troubled commentators. Most, like Rashi and Ibn Ezra, take it phenomenologically: to the morally warped, divine justice feels like perversity. Alternatively, as Malbim suggests, God “wrestles” the crooked in their own crooked idiom to bring them down. Either way, the cosmic Warrior of the theophany is also a skilled moral mimeticist.
+
+From verse 29 on, the psalm’s camera angle drops entirely to ground level. God “lights my lamp” (נֵרִי) and “illumines my darkness” (חׇשְׁכִּי, v.29); with this light the king can “rush a troop” and “scale a wall” (אָרוּץ גְּדוּד… אֲדַלֶּג־שׁוּר, v.30). The metaphor of lamp and darkness belongs to a network that includes Job’s “when His lamp shone upon my head” (בְּהִלּוֹ נֵרוֹ עֲלֵי רֹאשִׁי, Job 29:3) and the proverb “for the commandment is a lamp and the teaching a light” (כִּי נֵר מִצְוָה וְתוֹרָה אוֹר, Prov 6:23). In Psalm 18, that light is not abstract instruction but tactical clarity, the inner equipment by which God’s warrior-king moves through battle and politics without slipping.
+
+The military boasts that follow are extravagant even by ancient Near Eastern standards:
+
+> אֶרְדּוֹף אֹיְבַי וְאַשִּׂיגֵם;  
+> וְלֹא־אָשׁוּב עַד־כַּלּוֹתָם׃  
+> אֶמְחָצֵם וְלֹא־יֻכְלוּ קוּם;  
+> יִפְּלוּ תַּחַת רַגְלָי׃  
+> “I pursued my enemies and overtook them;  
+> I did not turn back till they were destroyed.  
+> I crushed them so that they could not rise;  
+> they fell beneath my feet” (vv.38–39).
+
+Then: “I ground them fine as dust before the wind” (וְאֶשְׁחָקֵם כְּעָפָר עַל־פְּנֵי־רוּחַ) and “emptied them out like street-mud” (כְּטִיט חוּצוֹת אֲרִיקֵם, v.43). Assyrian kings talk this way about their vanquished; the Moabite king Mesha boasts of “making Israel perish forever.” But David’s boast is carefully threaded back into divine agency: “וַתְּאַזְּרֵנִי חַיִל לַמִּלְחָמָה” (“You girded me with strength for battle,” v.40); “הָאֵל הַנּוֹתֵן נְקָמוֹת לִי” (“God who grants me vengeance,” v.48). The human “I” rides on a divine “You.”
+
+At the end the psalm zooms all the way out, from one rescue to an imperial horizon:
+
+> תְּפַלְּטֵנִי מֵרִיבֵי עָם;  
+> תְּשִׂימֵנִי לְרֹאשׁ גּוֹיִם.  
+> עַם לֹא־יָדַעְתִּי יַעַבְדוּנִי׃  
+> “You delivered me from the strife of peoples;  
+> You set me at the head of nations;  
+> a people I had not known serve me” (v.44).
+
+Whether you hear here David’s subjugation of Edom and Aram (2 Sam 8) or a more idealized Solomonic reach, the effect is the same: the tale of one man’s “day of calamity” becomes a charter for an entire imperial theology. And the last verse then telescopes personal, political, and eschatological time into a single promise:
+
+> מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ;  
+> וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ;  
+> לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם׃  
+> “He magnifies victories for His king,  
+> and performs steadfast love for His anointed,  
+> for David and his seed forever” (v.51).
+
+“His anointed” (לִמְשִׁיחוֹ) is at once the historical David, every king who sits on David’s throne, and—in later Jewish and Christian reading—the future Messiah. The Masoretic text of Psalm 18 reads מַגְדִּיל (“He makes great”); 2 Samuel 22’s parallel has מִגְדּוֹל (“tower of”). Jewish grace after meals turns that variant into liturgy: weekday Birkat HaMazon says מַגְדִּיל יְשׁוּעוֹת (“He magnifies salvations”), Shabbat and festivals say מִגְדּוֹל יְשׁוּעוֹת (“tower of salvations”). Weekday redemption is dynamic process; Shabbat redemption is already a structure, a refuge.
+
+This double life—in the Psalter and in Samuel, in synagogue and on the battlefield, in Bach’s baroque harmonies and in the rhetoric of Louis XIII’s siege of La Rochelle—reveals the psalm’s power and its peril. Psalm 18 can be prayed as David’s grateful memory of being dragged, wet and gasping, from “mighty waters.” It can also be brandished as license: “I ground them like dust.” The psalm itself insists on a condition between those two: “וָאֶשְׁתַּמֵּר מֵעֲוֺנִי” (“I kept myself from my iniquity,” v.24). Whether we believe David fully achieved that or not, the psalm refuses to separate military success from moral accountability, cosmic storm from whispered prayer, imperial reach from the obscure daily work of keeping statutes “before my eyes.”  
+
+It is, in the oldest sense of the word, a *song of deliverance*—but a song that, once heard, keeps finding new mouths and new dangers in which to be sung.
+
+---LITURGICAL-SECTION-START---
 
 #### Key verses
 
-Several verses have slipped the bounds of the psalm to become pillars of Jewish prayer. Most prominent is 18:51, “מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ… לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם, He magnifies victories for His king… to David and his seed forever,” which concludes *Birkat HaMazon*. After a string of petitions beginning הָרַחֲמָן (“May the Merciful One…”), the blessing closes: 
+**Psalm 18:32 — כִּ֤י מִ֣י אֱ֭לוֹהַּ מִבַּלְעֲדֵ֣י יְהוָ֑ה; וּמִ֥י צ֝וּר זוּלָתִ֥י אֱלֹהֵֽינוּ׃**  
+“For who is God except YHWH? And who is a rock apart from our God?”  
 
-> מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ, וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ, לְדָוִד וּלְזַרְעוֹ עַד עוֹלָם.  
+This verse is woven into the beloved hymn *Ein Keloheinu*. Many communities introduce the hymn with a chain of verses:  
 
-> “He magnifies victories for His king, and does steadfast love to His anointed, to David and his descendants forever.”
+> כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יְהוָה; וּמִי צ֣וּר זוּלָתִי אֱלֹהֵינוּ.  
+> “For who is God except YHWH? And who is a Rock apart from our God?”  
 
-On Shabbat and festivals, following the Samuel version, the opening word is *מִגְדּוֹל* (“a tower of victories”). Thus the ordinary act of eating is closed with a quiet reaffirmation of Davidic hope.
+followed by:  
 
-Verses 31–32, “הָאֵל תָּמִים דַּרְכּוֹ… כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יְהוָה וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ,” are recited in many communities before *Ein Keloheinu*, forming a scriptural ramp up to the hymn’s refrain “אֵין כֵּאלֹהֵינוּ, there is none like our God.” In the Edot HaMizrach Torah service, they are also said while the scroll is carried through the congregation, linked with “תּוֹרָה צִוָּה־לָנוּ מֹשֶׁה”: God’s “refined word” is concretely the Torah they see.
+> אֵין כֵּאלֹהֵינוּ, אֵין כַּאדֹנֵינוּ…  
+> “There is none like our God, none like our Lord…”  
+
+In Ashkenazic and Sephardic practice this appears near the end of Shacharit, turning David’s royal polemic into a communal doxology: not Baal, not any other “rock,” but the God of Israel alone.
+
+**Psalm 18:31 — הָאֵ֤ל תָּמִ֣ים דַּ֭רְכּוֹ; אִמְרַת־יְהוָ֣ה צְרוּפָ֑ה; מָגֵ֥ן ה֝֗וּא לְכׇל־הַחֹסִ֥ים בּֽוֹ׃**  
+“God—His way is perfect; the word of YHWH is refined; He is a shield to all who take refuge in Him.”  
+
+In the Edot HaMizrach (Eastern) rite, this verse is recited during the Rosh Hashanah Torah service. As the scroll is lifted (*Hagbah*), congregants proclaim:  
+
+> הָאֵל תָּמִים דַּרְכּוֹ; אִמְרַת־יְהוָה צְרוּפָה; מָגֵן הוּא לְכׇל־הַחֹסִים בּוֹ.  
+> “God—His way is perfect; the word of YHWH is refined; He is a shield to all who take refuge in Him.”  
+
+Placed immediately after “תּוֹרָה צִוָּה־לָנוּ מֹשֶׁה” (“Moses commanded us a Torah,” Deut 33:4), the verse is implicitly glossing Torah as that “refined word,” turning a Davidic battle-psalm into a theology of Scripture.
+
+**Psalm 18:51 — מַגְדִּ֤יל יְשׁוּעוֹת֮ מַלְכּוֹ֪; וְעֹשֶׂ֤ה חֶ֨סֶד ׀ לִמְשִׁיחוֹ; לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם׃**  
+“He magnifies victories for His king, and performs steadfast love for His anointed, for David and for his seed forever.”  
+
+This closes *Birkat HaMazon* (Grace After Meals) in all rites. The blessing’s petitions for messianic redemption crescendo into:
+
+> מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ; וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ, לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם.  
+> “He magnifies salvations for His king, and performs steadfast love for His anointed, for David and for his seed forever.”  
+
+On weekdays, the Psalms reading מַגְדִּיל is used; on Shabbat and festivals, the Samuel reading מִגְדּוֹל (“tower of salvations”) replaces it. The table thus becomes a place where David’s personal thanksgiving is revoiced as messianic hope.
 
 #### Phrases
 
-A number of shorter phrases serve as liturgical building blocks. “מְהֻלָּל אֶקְרָא יְהוָה, Worthy of praise I call on YHWH” (18:4) appears in some Sephardic communities in *Hakafot* for Simḥat Torah, embedded in a piyyut that circles the bimah with the scrolls. 
+**Psalm 18:4 — מְהֻלָּ֣ל אֶקְרָ֣א יְהוָה; וּמִן־אֹיְבַ֗י אִוָּשֵֽׁעַ׃**  
+“Praised, I call upon YHWH, and from my enemies I am saved.”  
 
-The interrogative of 18:32, “כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יְהוָה וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ,” is quoted directly in the prelude to *Ein Keloheinu*:  
+This line appears in some Sephardic Simchat Torah rites during the *Hakafot* (Torah circuits), within a litany praising God as savior in battle and in joy. The verse’s original combat-liturgical context amplifies the ecstatic, triumphant mood of dancing with the scrolls.
 
-> כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי ה׳, וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ.  
+**Psalm 18:29 — כִּי־אַתָּה תָאִיר נֵרִי; יְהוָה אֱלֹהַי יַגִּיהַּ חׇשְׁכִּי׃**  
+“For You light my lamp; YHWH my God illumines my darkness.”  
 
-> “For who is God except YHWH, and who is a Rock but our God?”
+In some Yom Kippur *Avodah* poems in Eastern traditions, this phrase is echoed as a plea that God’s light dispel the “darkness” of exile and sin. The psalm’s original metaphor—for tactical clarity and survival—is reread as spiritual illumination on the Day of Atonement.
 
-Here the verse’s original polemic against Baal and every other claimant to divinity is turned into a daily declaration of exclusive loyalty.
+**Psalm 18:32–33, 46 (composite)**  
 
-Even more compact fragments—“נֵרִי יְהוָה אֱלֹהַי יַגִּיהַּ חָשְׁכִּי, YHWH my God lights up my darkness” (18:29); “חַי־יְהוָה וּבָרוּךְ צוּרִי, YHWH lives; blessed is my rock” (18:47)—are woven into Yom Kippur and Shabbat poems, where David’s personal experience of guidance and stability becomes the congregation’s plea for light and firm ground in seasons of judgment.
+The declaration “כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יְהוָה” (“For who is God except YHWH?” v.32) and the doxology “חַי־יְהוָה וּבָרוּךְ צוּרִי” (“YHWH lives, and blessed is my Rock,” v.47) are used as thematic anchors in various piyyutim and in the expanded Kiddush of some Sephardic communities, where they frame God as both living protector and giver of Torah. Here the royal voice becomes the voice of the congregation, and “my Rock” (צוּרִי) is heard as the steady presence of God in the volatility of exile.
 
 ---

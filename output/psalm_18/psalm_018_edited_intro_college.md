@@ -1,154 +1,148 @@
-#### A psalm with two lives
+### What’s this psalm actually about?
 
-Psalm 18 is a bit of a celebrity in the Bible, because it shows up twice. You get it here in the Psalter, and almost the same poem again in 2 Samuel 22. It’s like having both the studio track and the live recording of the same song.
+If you only read Psalm 18 in English, it feels like three different poems stitched together:
 
-That double appearance matters. It tells us this wasn’t just “one more nice psalm,” but a foundational statement about David and his God. The Samuel version sits in David’s life story as his big victory hymn “after the LORD had saved him from the hand of all his enemies and from the hand of Saul” (2 Sam 22:1). The Psalms version has been slightly “liturgized” – smoothed for public worship – and given musical instructions (*למנצח*, “for the choirmaster”).
+1. It opens with surprisingly intimate devotion:  
+   **אֶרְחָמְךָ יְהוָה חִזְקִי** – “I love You, YHWH, my strength” (v. 2).  
+   The verb **אֶרְחָמְךָ** (*’erḥamkha*) comes from **רֶחֶם** (*reḥem*, “womb”). It’s “womb‑love,” deep gut‑level affection.
 
-Already in the superscription David is called **עֶבֶד יְהוָה** (*eved YHWH*, “servant of the LORD”). That’s a royal title in the Bible: the king is both powerful ruler and loyal servant. The tension in the whole psalm—who’s really doing the work, God or David?—is contained in that phrase.
+2. It then explodes into a cosmic storm scene:  
+   **עָלָה עָשָׁן בְּאַפּוֹ וְאֵשׁ מִפִּיו תֹּאכֵל** – “Smoke went up from His nostrils, and fire from His mouth devoured” (v. 9).  
+   Mountains shake, the heavens bend, God “rides on a cherub” through thunder and lightning.
 
-#### A quick map of the psalm
+3. Finally, the speaker sounds like a triumphant war‑king:  
+   **אֶרְדּוֹף אוֹיְבַי וְאַשִּׂיגֵם** – “I pursued my enemies and overtook them” (v. 38),  
+   and ends with a dynastic promise: God shows **חֶסֶד** (*ḥesed*, covenant loyalty) “to David and his seed forever” (v. 51).
 
-If you zoom out, the psalm has a very clear storyline:
+So which is it—a love song, a mythic storm vision, or a battlefield boast? The answer is: **it’s all three on purpose.**
 
-1. **Opening praise (vv. 2–4)**  
-   David begins with “I love You, LORD, my strength” (אֶרְחָמְךָ יְהוָה חִזְקִי) and then fires off nine metaphors for God: rock, fortress, rescuer, shield, horn of salvation, high tower, and so on.
+Psalm 18 is David’s “big retrospective.” The superscription tells you the setting:  
+**בְּיוֹם הִצִּיל יְהוָה אֹתוֹ מִכַּף כׇּל־אֹיְבָיו וּמִיַּד שָׁאוּל** – “on the day YHWH delivered him from the hand of all his enemies and from the hand of Saul” (v. 1).  
+Looking back over years of being hunted, fighting, and finally ruling, the poet wants to say one thing: **my whole story—private feelings, cosmic events, battlefield victories—has been one long interaction with this God.**
 
-2. **Near‑death crisis (vv. 5–7)**  
-   He describes himself as tangled in “the cords of Death” (חֶבְלֵי מָוֶת), overwhelmed by “torrents of Belial” and “snares of Death.” It sounds mythic—like a fight with cosmic forces—but he’s talking about real enemies and real political chaos.
+And intriguingly, we have this psalm twice: once here, and once as 2 Samuel 22, embedded in the historical narrative. That second copy is slightly rougher Hebrew, probably closer to an early oral victory song. The version in the Psalter has been polished for worship (for example, it adds the “I love You” line). Already in ancient Israel this poem was doing double duty: history and liturgy, archive and prayer.
 
-3. **The cry and the answer (v. 7)**  
-   “In my distress I called on the LORD… from His temple He heard my voice.” This is the hinge: David cries out; God responds.
+### The structure: how the poem argues
 
-4. **Cosmic rescue: God comes down (vv. 8–16)**  
-   The earth quakes, smoke pours from God’s nostrils, fire from his mouth, He bends the heavens, rides a cherub, thunders, hurls lightning, and even exposes “the channels of the waters” and “foundations of the world.” This is a full‑blown **theophany**—a visible, dramatic appearance of God.
+The psalm isn’t just a random flow of praise; it actually **argues** something by the way it’s built. Very roughly:
 
-5. **Personal rescue: out of the waters (vv. 17–20)**  
-   Having shaken the universe, God reaches down and “draws me out of mighty waters” (יַמְשֵׁנִי מִמַּיִם רַבִּים). The verb *מָשָׁה* (*mashah*, “draw out”) is the same root used to name Moses (מֹשֶׁה, “for I drew him out of the water,” Exod 2:10). David is being cast as a new kind of Moses.
+1. **Superscription and opening (vv. 1–3)**  
+   Historical frame (David vs. Saul and “all his enemies”), then that startling love line and a nine‑fold cascade of titles for God: “my rock, my fortress, my deliverer… the horn of my salvation.”
 
-6. **“Because I was righteous…” (vv. 21–25)**  
-   Then comes the controversial part. David says, “The LORD rewarded me according to my righteousness” (יִגְמְלֵנִי יְהוָה כְּצִדְקִי). He claims he kept God’s ways, was “blameless” (תָמִים) with God, and guarded himself from his own sin.
+2. **Crisis described (vv. 4–6)**  
+   The poet is nearly killed. But instead of saying, “Saul almost speared me,” he uses mythic imagery:  
+   **חֶבְלֵי־מָוֶת… נַחֲלֵי בְלִיַּעַל** – “cords of Death… torrents of Belial,”  
+   **חֶבְלֵי שְׁאוֹל… מוֹקְשֵׁי מָוֶת** – “cords of Sheol… snares of Death.”  
+   Death, Sheol, and Belial are hunters laying traps; he’s the prey.
 
-7. **Wisdom interlude: God mirrors people (vv. 26–28)**  
-   A little wisdom‑style section explains this: with the loyal one (חָסִיד) God shows Himself loyal; with the blameless, blameless; with the pure, pure; but with the crooked, God shows Himself “twisty” (עִם־עִקֵּשׁ תִּתְפַּתָּל). In other words, God’s dealings with you match your character.
+3. **Turning point: the cry and the answer (v. 7)**  
+   He calls: **בַּצַּר־לִי אֶקְרָא יְהוָה** – “In my distress I call on YHWH.”  
+   God hears “from His temple” and the cry “comes into His ears.” That image, of sound traveling into God’s ears, is the hinge of the psalm.
 
-8. **Empowered king (vv. 29–37)**  
-   With this God, David says, “I can rush a troop… I can scale a wall” (כִּי־בְךָ אָרוּץ גְּדוּד וּבֵאלֹהַי אֲדַלֶּג־שׁוּר). God girds him with strength, makes his feet like a deer’s on high places, trains his hands for war so his arms can bend a “bow of bronze.”
+4. **Cosmic theophany (vv. 8–16)**  
+   *Theophany* means a visible appearance of God. Here, the whole cosmos reacts to divine anger: the earth quakes, mountains shake, smoke and fire pour from God’s body, the sky is bent down, God rides a cherub and storms through clouds, thunder, hail, and lightning.  
+   This is very close to Canaanite poetry about the storm‑god Baal, “Rider on the Clouds.” Psalm 18 deliberately borrows that imagery and hands it to YHWH: **our** God is the one who commands storms.
 
-9. **Battle report (vv. 38–45)**  
-   David now narrates the victory from his side: “I pursued my enemies and overtook them” (אֶרְדּוֹף אֹיְבַי וְאַשִּׂיגֵם), struck them down so they couldn’t get up, ground them “like dust before the wind.”
+5. **Personal rescue (vv. 17–19)**  
+   Suddenly the camera zooms in:  
+   **יִשְׁלַח מִמָּרוֹם יִקָּחֵנִי יַמְשֵׁנִי מִמַּיִם רַבִּים** – “He reached down from on high, He took me; He drew me out of mighty waters” (v. 17).  
+   The terrifying cosmic waters become a metaphor for enemies and chaos. The God who split the Red Sea now “splits” David’s crisis.
 
-10. **From local enemies to global rule (vv. 44–46)**  
-    God sets David as “head of nations” (לְרֹאשׁ גּוֹיִם); foreign peoples submit “at the hearing of the ear” (לְשֵׁמַע אֹזֶן), just by reputation.
+6. **Why God rescued him: righteousness (vv. 20–25)**  
+   Here comes the controversial part. The king claims:  
+   **יִגְמְלֵנִי יְהוָה כְּצִדְקִי** – “YHWH rewarded me according to my righteousness” (v. 21),  
+   and repeats it almost word‑for‑word in v. 25. He insists he has kept God’s ways, not turned wickedly, been **תָּמִים** (*tamim*, “blameless, whole”) with God.  
+   For later readers who know David’s Bathsheba story, this raises eyebrows. But in royal ideology—how kings talk about themselves in the ancient Near East—this is standard. It doesn’t mean “sinless forever,” it means: in this conflict (with Saul, with rebels), **my cause was just; I acted with integrity.**
+
+7. **General principle: God mirrors people (vv. 26–28)**  
+   The psalm zooms out into wisdom language:  
+   **עִם־חָסִיד תִּתְחַסָּד… וְעִם־עִקֵּשׁ תִּתְפַּתָּל** –  
+   “With the loyal You show Yourself loyal… with the crooked You show Yourself twisted.”  
+   This is a theological “law of reflection”: God’s dealings with you will somehow match your posture toward Him.
+
+8. **From protection to empowerment (vv. 29–36)**  
+   Now we get a different kind of salvation. God doesn’t just pull David out of danger; He **equips** him:  
+   - “You light my lamp” (v. 29) – insight, guidance, hope.  
+   - “With You I rush a troop; with my God I scale a wall” (v. 30) – impossible military feats.  
+   - God girds him with strength, gives him deer‑like feet on high places, trains his hands for war, even to bend a **קֶשֶׁת נְחוּשָׁה** (“bow of bronze,” v. 35)—a famous ANE image of royal strength.
+
+9. **Battle narrative (vv. 37–42)**  
+   First‑person verbs take over: **אֶרְדּוֹף… אַשִּׂיגֵם… אֶמְחָצֵם** – “I pursue… I overtake… I crush.”  
+   But this is sandwiched by reminders that the strength and victory came from God (vv. 32–36, 39–40). It’s a theology of **empowered agency**: God acts through the king’s action.
+
+10. **From one king to many nations (vv. 43–46)**  
+    Local enemies disappear; foreign nations submit. David becomes **לְרֹאשׁ גּוֹיִם** – “head of nations” (v. 44). Some of this fits David’s historical empire; some stretches beyond, into ideal or future kingship.
 
 11. **Doxology and dynasty (vv. 47–51)**  
-    The psalm ends by blessing “the LORD who lives” and praising God who “magnifies salvations for His king” and “does ḥesed (loyal love) to His anointed, to David and to his seed forever” (עֹשֶׂה חֶסֶד… לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם).
+    The psalm ends with praise and promise.  
+    **חַי־יְהוָה וּבָרוּךְ צוּרִי** – “YHWH lives! Blessed be my Rock” (v. 47).  
+    And then:  
+    **מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ… לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם** –  
+    “He magnifies victories for His king… to David and his seed forever” (v. 51).  
+    One man’s rescue has become a template for an eternal Davidic line.
 
-That progression—from personal crisis to cosmic theophany to international dominion to eternal dynasty—is the arc of the psalm.
+So the structure itself argues: the God who hears one terrified person, who can shake heaven and earth, is the one who legitimates the Davidic king and his dynasty.
 
-#### Two versions of the same rescue: vertical and horizontal
+### Why this psalm still matters
 
-One of the most interesting features of Psalm 18 is its **double narration** of the same deliverance.
+A few reasons this psalm has stayed important across Jewish and Christian history—and why it’s worth your time:
 
-- In the first telling (roughly vv. 5–20), everything is **vertical** and mythic. God tears open heaven, rides a cherub, thunders, hurls lightning, and single‑handedly pulls David out of the flood of death.
-- In the second telling (vv. 29–45), everything is **horizontal** and martial. David runs, leaps over walls, bends bronze bows, swings his sword, and tramples enemies.
+- **It’s a live laboratory for textual criticism.** Because Psalm 18 and 2 Samuel 22 are basically the same poem in two different books, we can watch how Hebrew poetry traveled and changed. Small differences—like **מַגְדִּיל** (*magdil*, “He magnifies”) in Psalm 18 vs. **מִגְדּוֹל** (*migdol*, “tower of”) in 2 Samuel 22:51—became liturgically significant. To this day, in *Birkat HaMazon* (Grace After Meals), many Jews say *magdil* on weekdays and *migdol* on Shabbat and festivals.
 
-So which is it? Did God save David, or did David win the battle? The psalm’s answer is: yes. The two stories are not contradictions but two angles. The theological point is that the king’s military success is a *form* of God’s saving action, not something independent of it.
+- **It shows Israel “talking back” to Canaanite religion.** When the poet says God “rode on a cherub… on the wings of the wind” (**וַיִּרְכַּב עַל־כְּרוּב… עַל־כַּנְפֵי־רוּחַ**, v. 11), he’s deliberately echoing Baal’s title “Rider of the Clouds.” But here, the cosmic storm doesn’t just show off; it comes down to rescue one servant. That’s a huge theological claim: ultimate power is tied to covenant loyalty, not to random cosmic dominance.
 
-The pivot between them is that righteousness section (vv. 21–25). God’s miraculous rescue is not random; it’s tied to David’s role as a covenant‑keeping king.
+- **It forces us to think about righteousness and grace.** How do we read “YHWH rewarded me according to my righteousness” (**יִגְמְלֵנִי יְהוָה כְּצִדְקִי**, v. 21) alongside other texts that stress mercy and forgiveness? Jewish and Christian interpreters wrestled with this for centuries: is this relative innocence (innocent in this conflict), an ideal royal voice, or something else? Psalm 18 is a great case‑study in how theology gets negotiated inside the Bible, not just in later theology books.
 
-#### “I was righteous”? What about Bathsheba?
+- **It doesn’t hide the violence.** The king “grinds” his enemies “like dust before the wind” (**כְּעָפָר עַל־פְּנֵי־רוּחַ**, v. 43). That’s disturbing—and historically realistic for ANE war rhetoric. Reading this psalm invites ethical questions: how do we handle sacred texts that celebrate total victory? What’s the difference between describing ancient wars and prescribing behavior now?
 
-If you know David’s story, you might hear vv. 21–24 and think, “Really? Clean hands?” Medieval Jewish commentators also struggled with this.
+- **It underlies later messianic hope.** The final line—covenant loyalty “to David and his offspring forever” (**עַד־עוֹלָם**)—became one of the seeds of Jewish messianic expectation: if the Davidic line appears broken, God still owes David “forever.” Christians then read this psalm through a Christological lens. Either way, Psalm 18 sits near the root system of later messianic thinking.
 
-A key move is to ask **“Righteous compared to what, and in what situation?”** Rashi (11th c.) and Radak (12th–13th c.) connect David’s “cleanness of hands” (בֹּר יָדַי) especially to the Saul episodes: twice David has a chance to kill Saul, and twice he refuses, saying, “Who can stretch out his hand against the LORD’s anointed and be guiltless?” (1 Sam 26:9). In that arena—how to treat the current king—David can say, honestly, “I didn’t take revenge; I didn’t grab the throne by murder.”
+In short, Psalm 18 is like a prism: shine the light of history, theology, or poetics through it, and you get a whole spectrum of questions and insights.
 
-Also, in biblical Hebrew **צֶדֶק / צְדָקָה** (“righteousness”) often means covenant loyalty rather than absolute moral perfection. When David says, “כִּי שָׁמַרְתִּי דַּרְכֵי יְהוָה” (“For I have kept the ways of the LORD,” v. 22), he’s claiming that as God’s anointed king he’s kept faith with God and with the office, not that he’s never sinned in anything.
+---
 
-That’s still bold—but it fits royal ideology: the king stands for the people. If the king keeps the covenant, the nation can be blessed.
-
-#### Storm‑God imagery, but with a twist
-
-The theophany (vv. 8–16) would have felt very familiar to ancient Canaanites. In Ugaritic texts, the god Baal is called **רֹכֵב עֲרָבוֹת**—“rider on the clouds”—and battles the sea god with thunder and lightning. Our psalm borrows that “storm‑god” toolkit and transfers it to YHWH:
-
-> “He rode on a cherub and flew;  
-> He soared on the wings of the wind.” (וַיִּרְכַּב עַל־כְּרוּב וַיָּעֹף; וַיֵּדֶא עַל־כַּנְפֵי־רוּחַ, v. 11)  
->  
-> “The LORD thundered in the heavens,  
-> the Most High gave forth His voice—  
-> hail and coals of fire.” (v. 14)
-
-But here the “cosmic battle” is not YHWH vs. some rival god. It’s YHWH vs. the things swallowing *David*: death, chaos, and very human enemies. The poet is basically saying: the God who split the Sea and shook Sinai just used that same power to get me out of danger.
-
-#### A few strange and beautiful words
-
-Because your Hebrew is strong, some of the rare words in this psalm are worth pausing over:
-
-- **אֶרְחָמְךָ יְהוָה** (“I love You, LORD,” v. 2). The root רחמ (*r-ḥ-m*) is usually used for compassion from a superior to an inferior, and it’s related to רֶחֶם (*reḥem*, “womb”). Here it’s in an unusual form, with a human speaking to God. Many see it as “I love You with deep, gut‑level love.”
-- **מִגְדּוֹל / מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ** (“tower / one who magnifies salvations of His king,” 2 Sam 22:51 // Ps 18:51). The Samuel text calls God a *tower* of salvation; Psalm 18 turns that into a dynamic verb, “He makes great salvations.” Jewish liturgy keeps both: *מגדול* on Shabbat and festivals, *מגדיל* on weekdays in *Birkat HaMazon*.
-- **וְעַנְוַתְךָ תַרְבֵּנִי** (“Your ‘anvah’ makes me great,” v. 36). עֲנָוָה usually means humility or lowliness. Medieval commentators often gloss it here as “Your condescension” or “Your gracious attention”—God “stoops down” to care for David. It’s a quietly radical line: God’s “humility” is what exalts the king.
-
-#### Why this psalm mattered—and still does
-
-For ancient Israel, Psalm 18 was more than David’s personal diary. It became a **charter for Davidic kingship**:
-
-- It says: the real storm‑god is Israel’s covenant LORD.
-- It says: military victory without moral integrity is not the biblical ideal; God saves the king *because* he keeps God’s ways.
-- It says: David’s story is not one‑and‑done—God’s ḥesed extends “to David and his seed forever,” which opened the door to messianic readings.
-
-That’s why Jewish tradition pulls its lines into daily practice: when you say after a meal, *מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ… לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם*, you are echoing this psalm’s final confidence that God hasn’t retired from the “great salvations” business.
-
-And for you as a reader, Psalm 18 gives you a compact case study in biblical poetry: bold metaphors, recycled mythic imagery used in a new way, a complex “I–You” relationship between king and God, and a very honest tension between “God did it all” and “I fought hard.” It’s a great text to practice reading both the Hebrew poetry *and* the theology at the same time.
-
-  
-## Modern Jewish Liturgical Use
+---LITURGICAL-SECTION-START---
 
 #### Full psalm
 
-The complete text of Psalm 18 is not part of the standard fixed daily liturgy in most communities. Its “twin,” however—2 Samuel 22—is read publicly as the *Haftarah* (prophetic/other biblical reading) on the seventh day of Passover in many traditions, paired with the Song at the Sea (Exodus 15). So David’s song of rescue is liturgically linked to Israel’s rescue from Egypt.
+There is no standard Jewish service where **all** of Psalm 18 is recited as a fixed unit (unlike, say, Psalms 145–150 in *Pesukei deZimra*). Instead, the psalm is “mined” for key lines and images that show up in central prayers.
 
 #### Key verses
 
-**Psalm 18:32 – כִּ֤י מִ֣י אֱ֭לוֹהַּ מִבַּלְעֲדֵ֣י יְהוָ֑ה וּמִ֥י צ֝וּר זוּלָתִ֥י אֱלֹהֵֽינוּ׃**  
-“For who is God except the LORD, and who is a Rock but our God?”
+1. **Birkat HaMazon (Grace After Meals)**  
 
-This verse is recited in many communities as a scriptural prelude to *Ein Keloheinu*. A common Ashkenazi sequence is:
+   **Hebrew:**  
+   מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ, וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ, לְדָוִד וּלְזַרְעוֹ עַד־עוֹלָם׃ (תהילים י״ח:נ״א)  
+   **English:** “He magnifies victories for His king, and does *ḥesed* (covenant love) for His anointed, for David and his offspring forever.”  
 
-> אֵין קָדוֹשׁ כַּה׳ כִּי אֵין בִּלְתֶּךָ, וְאֵין צוּר כֵּאלֹהֵינוּ.  
-> כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי ה׳, וּמִי צוּר זוּלָתֵנוּ אֱלֹהֵינוּ.  
-> “There is none holy like the LORD, for there is none besides You, and there is no Rock like our God.  
-> For who is God except the LORD? And who is a Rock, except our God?”
+   This verse (or its twin in 2 Samuel 22:51) is the very last line of *Birkat HaMazon* in all traditions. Weekdays usually use **מַגְדִּיל** (*magdil*, “He magnifies”); Shabbat and festivals use **מִגְדּוֹל** (*migdol*, “a tower of”). You’ll hear it right after the line “הָרַחֲמָן הוּא יְבָרֵךְ” (“May the Merciful One bless…”). Ending grace with this verse turns an ordinary meal into a moment of messianic hope: the God who “saved David” will one day complete that salvation for David’s line.
 
-Here the psalm’s polemic against other gods becomes a weekly declaration of radical monotheism.
+2. **Ein Keloheinu prelude / Torah service**
 
-**Psalm 18:51 – מַגְדִּ֣יל יְשׁוּע֢וֹת מַ֫לְכּ֥וֹ וְעֹ֤שֶׂה חֶ֨סֶד ׀ לִמְשִׁיח֗וֹ לְדָוִ֥ד וּלְזַרְע֗וֹ עַד־עוֹלָֽם׃**  
-“He makes great salvations for His king, and shows ḥesed to His anointed, to David and to his seed forever.”
+   **Hebrew:**  
+   כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יְהוָה, וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ׃ (תהילים י״ח:ל״ב)  
+   **English:** “For who is God apart from YHWH, and who is a Rock besides our God?”  
 
-This is the closing biblical verse of *Birkat HaMazon* (Grace after Meals). On weekdays most siddurim print:
+   In many Ashkenazi and Sephardi communities, this verse appears just before the beloved hymn **אֵין כֵּאלֹהֵינוּ** (“There is none like our God”) or in the Torah‑service verses. It functions as a scriptural “thesis sentence” for the hymn: we’re not just saying “our God is great” because we feel like it; the psalm already said, poetically and polemically, that there is **no rival**.
 
-> מַגְדִּיל יְשׁוּעוֹת מַלְכּוֹ, וְעוֹשֶׂה חֶסֶד לִמְשִׁיחוֹ, לְדָוִד וּלְזַרְעוֹ עַד עוֹלָם.  
-> “He magnifies salvations for His king, and shows kindness to His anointed, to David and to his seed forever.”
+3. **Torah procession (Edot Mizraḥ / Eastern communities)**  
 
-On Shabbat and festivals, many Nusḥaot switch to the Samuel reading *מִגְדּוֹל יְשׁוּעוֹת* (“a tower of salvations”). Every meal thus ends with echo of Psalm 18’s closing promise that God remains faithful to David’s line.
+   In some Middle Eastern rites, Psalm 18:31–32 is recited when the Torah is lifted and shown:  
+
+   **Hebrew:**  
+   הָאֵל תָּמִים דַּרְכּוֹ; אִמְרַת־יְהוָה צְרוּפָה; מָגֵן הוּא, לְכֹל הַחֹסִים בּוֹ. (תהילים י״ח:ל״א)  
+   **English:** “The God—His way is perfect; the word of YHWH is refined; He is a shield to all who take refuge in Him.”  
+
+   Here, the “refined word” (**אִמְרַת־יְהוָה צְרוּפָה**) is identified with the physical Torah scroll everyone is looking at. It’s a liturgical way of saying: this text you’re seeing is exactly the kind of trustworthy, tested word Psalm 18 celebrates.
 
 #### Phrases
 
-**“חַי־יְהוָה וּבָרוּךְ צוּרִי” – “The LORD lives, and blessed is my Rock” (v. 47)**  
-This line opens a Shabbat‑day *piyyut* in some Sephardi customs:
+- **חַי־יְהוָה וּבָרוּךְ צוּרִי** – “YHWH lives, and blessed is my Rock” (Ps 18:47).  
+  In some Sephardi Shabbat‑day rituals, this line opens a *piyyut* (liturgical poem) before Kiddush over wine, turning David’s battlefield exclamation into a weekly affirmation of God’s living presence.
 
-> חַי ה׳ וּבָרוּךְ צוּרִי, בַּה׳ תִּתְהַלֵּל נַפְשִׁי…  
-> “The LORD lives, and blessed is my Rock; in the LORD my soul will boast…”
+- **כִּֽי־אַתָּה תָּאִיר נֵרִי** – “For You light my lamp” (Ps 18:29).  
+  This imagery gets echoed in various devotional poems and commentaries connected with Yom Kippur and other times when themes of darkness/light and guidance are in focus.
 
-The psalm’s doxology becomes a sung frame for Shabbat joy.
-
-**“יְהוָה סַלְעִי וּמְצוּדָתִי וּמְפַלְטִי” – “The LORD is my rock and my fortress and my deliverer” (v. 3)**  
-A shortened form appears in High Holiday poetry (Seder *Avodah* on Yom Kippur) as an individual plea:
-
-> יָהּ קוֹמֵם נוֹפְלִי וְשִׁפְלִי, סַלְעִי וּמְצוּדָתִי וּמְפַלְטִי־לִי.  
-> “O God, raise me from my fall and lowliness, my rock, my fortress, and my deliverer—for me.”
-
-David’s royal metaphors are borrowed by every worshiper needing a personal refuge.
-
-**“מַגְדִּיל יְשׁוּעוֹת” and “כִּי מִי אֱלוֹהַּ”** have many additional appearances (e.g. Torah procession in Eastern rites), but the examples above give you the basic feel: the psalm’s language of rock, salvation, and God’s uniqueness has become part of the everyday soundscape of Jewish prayer.
-
+So even if you’ve never sat down and read Psalm 18 straight through, you’ve very likely sung or heard parts of it—in table blessings, Torah processions, and Shabbat songs—without realizing they all come from one long, complex royal psalm.
 
 ---

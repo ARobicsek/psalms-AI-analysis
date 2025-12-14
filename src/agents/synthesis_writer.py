@@ -1026,8 +1026,29 @@ class SynthesisWriter:
         # This ensures we capture trimming from both intro and verse commentary calls
         if sections_removed:
             for section in sections_removed:
-                if section not in self._sections_removed:
-                    self._sections_removed.append(section)
+                # Check if this is a replacement for an existing entry
+                if "Figurative Language (trimmed to 75%)" in section and "Figurative Language (trimmed to 50%)" in self._sections_removed:
+                    # Don't add the 75% entry if 50% is already there
+                    continue
+                elif "Figurative Language (trimmed to 50%)" in section:
+                    # Replace any existing 75% entry with 50%
+                    if "Figurative Language (trimmed to 75%)" in self._sections_removed:
+                        self._sections_removed.remove("Figurative Language (trimmed to 75%)")
+                    if section not in self._sections_removed:
+                        self._sections_removed.append(section)
+                elif "Related Psalms (full texts removed)" in section and "Related Psalms" in self._sections_removed:
+                    # Don't add the partial entry if full removal is already there
+                    continue
+                elif "Related Psalms" in section:
+                    # Replace any existing partial entry with full removal
+                    if "Related Psalms (full texts removed)" in self._sections_removed:
+                        self._sections_removed.remove("Related Psalms (full texts removed)")
+                    if section not in self._sections_removed:
+                        self._sections_removed.append(section)
+                else:
+                    # Add other sections normally
+                    if section not in self._sections_removed:
+                        self._sections_removed.append(section)
 
         # Add trimming summary at the bottom of the research bundle
         trimming_summary = f"\n\n---\n## Research Bundle Processing Summary\n"

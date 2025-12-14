@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-13 (Session 216)
+**Last Updated**: 2025-12-13 (Session 217)
 
 ## Current Focus: Psalm Commentary Production
 
@@ -509,6 +509,29 @@ Modified `DISCOVERY_PASS_PROMPT` in `src/agents/micro_analyst.py` with concrete 
 - Archived 326 files into organized subdirectories
 - Created CLAUDE.md for token-efficient session startup
 - Root directory reduced from 145+ files → 30 files (79% reduction)
+
+### Session 217 (2025-12-13): Sections Trimmed Duplication Fix
+
+#### Problem Discovered:
+When the pipeline trimmed the Figurative Language section multiple times (e.g., from 75% to 50%), both entries appeared in the final DOCX output:
+"Related Psalms, Figurative Language (trimmed to 75%), Figurative Language (trimmed to 50%)"
+
+#### Root Cause:
+The `_sections_removed` list in `synthesis_writer.py` was accumulating entries without checking for replacements. When upgrading from 75% to 50% trimming, both entries were kept.
+
+#### Solution Implemented:
+Updated the section tracking logic in `synthesis_writer.py` (lines 1027-1051) to:
+1. **Replace entries intelligently**: When upgrading from 75% to 50%, remove the 75% entry
+2. **Handle Related Psalms**: Replace "Related Psalms (full texts removed)" with "Related Psalms"
+3. **Prevent duplicates**: Check for existing entries before adding new ones
+
+#### Result:
+- DOCX outputs now show only the final trimming state without duplicates
+- Example: "Related Psalms, Figurative Language (trimmed to 50%)" instead of showing both 75% and 50%
+- Clean, accurate representation of what was actually trimmed from the research bundle
+
+#### Files Modified:
+- `src/agents/synthesis_writer.py` - Enhanced section tracking with replacement logic (lines 1027-1051)
 
 ---
 
