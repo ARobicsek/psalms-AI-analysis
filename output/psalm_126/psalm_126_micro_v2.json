@@ -1,0 +1,325 @@
+{
+  "psalm_number": 126,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "Triple temporal/conditional ambiguity: בְּשׁוּב can be past ('when restored'), present conditional ('whenever restores'), or future ('when will restore'). The phrase כְּחֹלְמִֽים (like dreamers/dreaming) intensifies ambiguity—either restoration was so amazing it seemed unreal, OR they're still only dreaming/hoping for it. The construct אֶת־שִׁיבַ֣ת צִיּ֑וֹן itself is puzzling: שִׁיבַת can mean 'captivity' or 'fortunes' (idiom).",
+      "lexical_insights": [
+        {
+          "phrase": "בְּשׁוּב יְהֹוָה",
+          "variants": [
+            "שׁוּב יְהֹוָה",
+            "שׁוּבָה יְהֹוָה",
+            "שׁוּבֵנוּ יְהֹוָה",
+            "שָׁב יְהֹוָה"
+          ],
+          "notes": "Infinitive construct with temporal/conditional force—grammatically ambiguous between past/present/future"
+        },
+        {
+          "phrase": "אֶת־שִׁיבַת צִיּוֹן",
+          "variants": [
+            "שִׁיבַת",
+            "שְׁבוּת",
+            "שְׁבִית",
+            "שִׁיבָה"
+          ],
+          "notes": "Root שׁוב/שׁבה—disputed etymology: 'captivity' vs. 'fortunes' idiom; occurs again in v.4"
+        },
+        {
+          "phrase": "כְּחֹלְמִֽים",
+          "variants": [
+            "חֹלְמִים",
+            "כַּחֲלוֹם",
+            "חֹלֵם",
+            "חֲלוֹם"
+          ],
+          "notes": "Participle with כְּ comparative—'like those dreaming/dreamers'; could suggest unreality OR ongoing vision"
+        },
+        {
+          "phrase": "הָיִינוּ",
+          "variants": [
+            "הָיִיתִי",
+            "הָיִיתָ",
+            "הָיָה",
+            "נִהְיֶה"
+          ],
+          "notes": "Perfect tense 'we were/became'—but if v.1a is future, creates temporal contradiction unless prophetic perfect"
+        }
+      ],
+      "figurative_analysis": [
+        "Simile כְּחֹלְמִֽים—dreamers as state of wonder OR unrealized hope",
+        "Zion personified as subject of restoration"
+      ],
+      "thesis_connection": "Core thesis element: temporal ambiguity allows text to function for multiple historical moments—not fixed in single past",
+      "phonetic_transcription": "**SHIY**-r **HAM**-ma-ʿa-lōth bə-**SHŪV** yə-hō-**WĀH** 'eth-shiy-**VATH** tsiy-**YŌN** hā-**YIY**-nū kə-ḥō-lə-**MIY**-m"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "Double אָז anaphora creates emphatic consequentiality—'THEN... THEN...' marking inevitable results. Striking shift from nations' speech (עִם־אֵֽלֶּה 'for/with them') to Israel's appropriation in v.3 (עִמָּ֗נוּ 'with us'). The phrase הִגְדִּיל יְהֹוָה לַעֲשׂוֹת appears identically in v.2b and v.3a—rare exact repetition across speaker shift. Somatic imagery: mouths/tongues as vessels to be filled.",
+      "lexical_insights": [
+        {
+          "phrase": "אָז יִמָּלֵא שְׂחוֹק פִּינוּ",
+          "variants": [
+            "יִמָּלֵא פִּי",
+            "מָלֵא פִּי",
+            "מִלֵּא",
+            "מְלֵא פֶּה"
+          ],
+          "notes": "Niphal imperfect passive—mouth as container 'being filled' with laughter; divine agency implied"
+        },
+        {
+          "phrase": "הִגְדִּיל יְהֹוָה לַעֲשׂוֹת",
+          "variants": [
+            "גָּדַל יְהֹוָה",
+            "הִגְדִּיל לַעֲשׂוֹת",
+            "גָּדוֹל מַעֲשֵׂה",
+            "הִגְדִּיל עֲשׂוֹת"
+          ],
+          "notes": "Hiphil perfect + infinitive construct—'magnified/made great to do'; repeated exactly in v.3"
+        },
+        {
+          "phrase": "עִם־אֵֽלֶּה",
+          "variants": [
+            "עִמָּנוּ",
+            "עִמּוֹ",
+            "עִמָּם",
+            "עִמִּי"
+          ],
+          "notes": "Preposition with demonstrative pronoun—'with/for these/them'; contrasts with עִמָּנוּ in v.3"
+        },
+        {
+          "phrase": "בַגּוֹיִם",
+          "variants": [
+            "גּוֹיִם",
+            "בַּגּוֹי",
+            "לַגּוֹיִם",
+            "הַגּוֹיִם"
+          ],
+          "notes": "Nations as witnesses—prophetic theme of Israel as YHWH's demonstration"
+        }
+      ],
+      "figurative_analysis": [
+        "Mouths and tongues personified as containers to be filled",
+        "Laughter and song as visible/audible evidence of divine action"
+      ],
+      "thesis_connection": "Supports thesis about nations' witness being theological claim—Israel's restoration is YHWH's self-revelation to world",
+      "phonetic_transcription": "**'ĀZ** yim-mā-**LĒ'** sə-**ḤŌQ** piy-**NŪ** ū-lə-shō-nē-**NŪ** rin-**NĀH** **'ĀZ** yō'-mə-**RŪ** va-gō-**YIM** high-**DIY**-l yə-hō-**WĀH** la-ʿa-**SŌTH** ʿim-**'ĒL**-leh"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "Verbatim repetition of הִגְדִּיל יְהֹוָה לַעֲשׂוֹת but with crucial pronoun shift from אֵלֶּה (them) to עִמָּנוּ (us)—Israel appropriates nations' declaration. Extremely terse second colon: הָיִינוּ שְׂמֵחִים (we were/became rejoicing) with no elaboration. Creates pivot between looking back (vv.1-3) and looking forward (v.4+). The perfect tense verbs here contrast sharply with imperative in v.4.",
+      "lexical_insights": [
+        {
+          "phrase": "עִמָּנוּ",
+          "variants": [
+            "עִמִּי",
+            "עִמְּךָ",
+            "עִמּוֹ",
+            "עִמָּכֶם"
+          ],
+          "notes": "1st person plural suffix—'with us'; direct contrast to עִם־אֵלֶּה in v.2"
+        },
+        {
+          "phrase": "הָיִינוּ שְׂמֵחִים",
+          "variants": [
+            "שְׂמֵחִים",
+            "שָׂמַחְנוּ",
+            "נִשְׂמַח",
+            "שָׂמֵחַ"
+          ],
+          "notes": "Perfect + participle/adjective—'we were/became joyful'; stative result"
+        }
+      ],
+      "figurative_analysis": [
+        "Joy as past accomplished fact—but v.4 will complicate this"
+      ],
+      "thesis_connection": "Thesis pivot point: vv.1-3 could be past thanksgiving OR prophetic vision—v.4 will reveal incompleteness",
+      "phonetic_transcription": "high-**DIY**-l yə-hō-**WĀH** la-ʿa-**SŌTH** ʿim-**MĀ**-nū hā-**YIY**-nū sə-mē-**ḤIY**-m"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "Dramatic shift to imperative mood: שׁוּבָה (restore!). This reveals vv.1-3 as either incomplete past or envisioned future—they STILL need restoration. Creates inclusio with v.1 (בְּשׁוּב...שׁוּבָה). The simile כַּאֲפִיקִים בַּנֶּגֶב is geographically/meteorologically specific—wadis in Negeb that suddenly flood. The Ketiv/Qere variation (שבותנו/שביתנו) repeats the שִׁיבַת puzzle from v.1.",
+      "lexical_insights": [
+        {
+          "phrase": "שׁוּבָה יְהֹוָה",
+          "variants": [
+            "שׁוּב",
+            "שׁוּבָה",
+            "שׁוּבֵנוּ",
+            "שׁוּב נָא"
+          ],
+          "notes": "Imperative—direct command to YHWH to restore; echoes בְּשׁוּב from v.1"
+        },
+        {
+          "phrase": "אֶת־שְׁבִיתֵנוּ",
+          "variants": [
+            "שְׁבִית",
+            "שְׁבוּת",
+            "שִׁיבָה",
+            "שֶׁבִי"
+          ],
+          "notes": "Ketiv שבותנו/Qere שביתנו—same captivity/fortunes ambiguity as v.1; now with 1st plural suffix"
+        },
+        {
+          "phrase": "כַּאֲפִיקִים בַּנֶּגֶב",
+          "variants": [
+            "אֲפִיקִים",
+            "אָפִיק",
+            "בַּנֶּגֶב",
+            "נֶגֶב"
+          ],
+          "notes": "Watercourses/wadis in the Negeb—specific geographic/meteorological phenomenon"
+        }
+      ],
+      "figurative_analysis": [
+        "Simile of Negeb wadis—sudden, dramatic, life-giving transformation from nothing",
+        "Desert watercourses as metaphor for impossible-seeming restoration"
+      ],
+      "thesis_connection": "Critical thesis support: petition reveals temporal ambiguity was intentional—restoration is both remembered AND still needed",
+      "phonetic_transcription": "shū-**VĀH** yə-hō-**WĀH** 'eth-shə-viy-**THĒ**-nū ka-'a-fiy-**QIY**-m ban-**NE**-ghev"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "Genre shift to proverbial wisdom—universal principle rather than specific historical claim. Perfect antithetical parallelism: sowing/reaping + tears/joy. The participle הַזֹּרְעִים (those who sow) is plural generalizing—'whoever sows.' Terse, memorable formulation suitable for proverbial quotation. No mention of YHWH—natural/creation order language.",
+      "lexical_insights": [
+        {
+          "phrase": "הַזֹּרְעִים בְּדִמְעָה",
+          "variants": [
+            "זֹרֵעַ",
+            "זָרַע",
+            "זֹרְעִים",
+            "לִזְרֹעַ בְּדִמְעָה"
+          ],
+          "notes": "Participle with definite article—'the ones sowing in tears'; universal/proverbial style"
+        },
+        {
+          "phrase": "בְּרִנָּה יִקְצֹֽרוּ",
+          "variants": [
+            "יִקְצְרוּ",
+            "קָצַר",
+            "קוֹצְרִים",
+            "קָצְרוּ בְרִנָּה"
+          ],
+          "notes": "Imperfect—future/modal 'shall reap' with certainty; antithesis to בְּדִמְעָה"
+        },
+        {
+          "phrase": "בְּדִמְעָה",
+          "variants": [
+            "דִּמְעָה",
+            "דְּמָעוֹת",
+            "בִּדְמָעוֹת",
+            "דִּמְעָתִי"
+          ],
+          "notes": "Singular 'in/with tear(s)'—collective singular for weeping"
+        },
+        {
+          "phrase": "בְּרִנָּה",
+          "variants": [
+            "רִנָּה",
+            "רִנּוֹת",
+            "בְּרִנּוֹת",
+            "רִנָּתִי"
+          ],
+          "notes": "Joy/shouting—appears in v.2 and returns here, connecting sections"
+        }
+      ],
+      "figurative_analysis": [
+        "Agricultural cycle as metaphor for suffering-to-joy transformation",
+        "Tears and joy as contrasting emotional/experiential states",
+        "Sowing/reaping as temporal progression with guaranteed outcome"
+      ],
+      "thesis_connection": "Thesis climax: universal agricultural wisdom grounds specific theological hope—same Creator who ordered harvest ordered redemption",
+      "phonetic_transcription": "haz-zō-rə-**ʿIY**-m bə-dhim-**ʿĀH** bə-rin-**NĀH** yiq-**TSŌ**-rū"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "Intensifying verbal forms הָלוֹךְ יֵלֵךְ and בֹּא־יָבֹא (absolute infinitive + finite verb)—'going he goes,' 'coming he comes' with emphatic/durative force. Shift from plural (v.5) to singular—universalizes to individual experience. The progression מֶשֶׁךְ־הַזָּרַע (seed-bag/trail of seed) → אֲלֻמֹּתָיו (his sheaves) suggests quantitative contrast: little seed carried out, abundant harvest carried back. Chiastic structure: going-weeping / coming-rejoicing.",
+      "lexical_insights": [
+        {
+          "phrase": "הָלוֹךְ יֵלֵךְ",
+          "variants": [
+            "יֵלֵךְ",
+            "הָלַךְ",
+            "הוֹלֵךְ",
+            "לֶכֶת"
+          ],
+          "notes": "Absolute infinitive + imperfect—intensive construction emphasizing continuity or certainty"
+        },
+        {
+          "phrase": "בֹּא־יָבֹא",
+          "variants": [
+            "יָבֹא",
+            "בָּא",
+            "בּוֹא",
+            "לָבוֹא"
+          ],
+          "notes": "Same intensive construction—'surely coming' with emphatic certainty"
+        },
+        {
+          "phrase": "מֶשֶׁךְ־הַזָּרַע",
+          "variants": [
+            "מֶשֶׁךְ",
+            "זֶרַע",
+            "הַזֶּרַע",
+            "זְרָעִים"
+          ],
+          "notes": "Rare phrase—'drawing/trail of seed' or 'seed-bag'; hapax construction"
+        },
+        {
+          "phrase": "אֲלֻמֹּתָיו",
+          "variants": [
+            "אֲלֻמָּה",
+            "אֲלֻמּוֹת",
+            "אֲלֻמָּתוֹ",
+            "אֲלֻמֹּתֵינוּ"
+          ],
+          "notes": "Sheaves with 3rd masc. sg. suffix—abundant harvest contrasts with seed"
+        },
+        {
+          "phrase": "וּבָכֹה",
+          "variants": [
+            "בָּכָה",
+            "בֹּכֶה",
+            "בָּכוֹ",
+            "יִבְכֶּה"
+          ],
+          "notes": "Infinitive absolute—'weeping' parallels going out"
+        }
+      ],
+      "figurative_analysis": [
+        "Journey metaphor: going out to field / returning home",
+        "Agricultural cycle as complete narrative arc",
+        "Seed-bag vs. sheaves suggests multiplication/abundance",
+        "Tears and songs as contrasting soundscapes of journey"
+      ],
+      "thesis_connection": "Thesis conclusion: from passive recipients (vv.1-3) to active participants (vv.5-6)—community must sow through tears to reap joy",
+      "phonetic_transcription": "**HĀ**-lō-khə yē-**LĒ**-khə  ū-vā-**KHŌH** nō-**SĒ'** me-shekh-haz-**ZĀ**-raʿ bō'-yā-**VŌ'** və-rin-**NĀH** nō-**SĒ'** 'a-lum-mō-**THĀY**-w **F**"
+    }
+  ],
+  "thematic_threads": [
+    "TEMPORAL AMBIGUITY STRATEGY: V.1's בְּשׁוּב deliberately allows past/present/future readings—enables perpetual liturgical relevance",
+    "INCLUSIO VIA שׁוּב ROOT: V.1 בְּשׁוּב and v.4 שׁוּבָה frame the psalm with restoration language, but shift from description to petition",
+    "STRUCTURAL PIVOT AT V.4: Perfect/past verbs (vv.1-3) shift to imperative (v.4) then proverbial imperfect (vv.5-6)—three distinct temporal moods",
+    "METAPHORICAL PROGRESSION: From dreamlike (v.1) to hydrological (v.4) to agricultural (vv.5-6)—increasingly concrete and participatory imagery",
+    "PRONOUN SHIFT SEQUENCE: Nations say 'them' (v.2) → Israel says 'us' (v.3) → generalizing 'they who sow' (v.5) → individual 'he' (v.6)",
+    "VERBATIM REPETITION: הִגְדִּיל יְהֹוָה לַעֲשׂוֹת appears identically in vv.2-3—quotation-appropriation structure",
+    "SOUND PATTERN: רִנָּה (joy/singing) appears in vv.2, 5, 6—sonic thread connecting testimony and agricultural metaphor",
+    "GENRE MODULATION: Thanksgiving/vision (vv.1-3) → petition (v.4) → wisdom saying (vv.5-6)—allows multiple liturgical functions",
+    "ACTIVE/PASSIVE TRANSFORMATION: Community shifts from passive subjects of divine action (vv.1-3) to active agents of sowing/reaping (vv.5-6)"
+  ],
+  "interesting_questions": [
+    "Why is the temporal reference of בְּשׁוּב in v.1 ambiguous—is this deliberate liturgical strategy allowing multiple generations to inhabit the text, or textual/grammatical issue?",
+    "What is the precise meaning and etymology of שִׁיבַת/שְׁבִית in vv.1,4—'captivity,' 'fortunes,' or both—and why does the Ketiv/Qere variation exist?",
+    "How does the simile כְּחֹלְמִים ('like dreamers') function—does it suggest restoration seemed unreal (too wonderful), or that they're still only dreaming (unfulfilled hope)?",
+    "Why do the nations speak first in v.2, then Israel echoes them in v.3—is this theological claim about Israel learning identity through others' witness, or rhetorical structure?",
+    "What are the specific meteorological/agricultural realities of אֲפִיקִים בַּנֶּגֶב (watercourses in Negeb)—how often do they flood, what triggers it, and what transformation occurs?",
+    "Is the proverbial saying in vv.5-6 quoting a known wisdom tradition, or creating original proverb in traditional style—are there ANE parallels to sowing-in-tears/reaping-in-joy?",
+    "What is מֶשֶׁךְ־הַזָּרַע in v.6—'seed-bag,' 'trail of seed,' 'drawing out seed'—and is there implied quantitative contrast with אֲלֻמֹּתָיו (sheaves)?",
+    "Why the intensive verbal constructions הָלוֹךְ יֵלֵךְ and בֹּא־יָבֹא in v.6—do these emphasize certainty, duration, or processual journey?",
+    "Is there wordplay between זֶרַע (seed) and זֶרַע (offspring/descendants) in vv.5-6, connecting agricultural metaphor to restoration of Israel's posterity?",
+    "How does the progression from plural 'they who sow' (v.5) to singular 'he' (v.6) function—universalization, individuation, or both?",
+    "Does the agricultural journey in v.6 (going out/coming back) metaphorically encode pilgrimage to Jerusalem in the Songs of Ascents collection?",
+    "Why does רִנָּה (joyful singing) appear in vv.2, 5, and 6—is this accidental or deliberate sonic/thematic thread connecting sections?"
+  ],
+  "synthesis_notes": "LEXICON: Focus on שׁוּב/שִׁיבַת/שְׁבִית etymology and semantic range; חֹלְמִים (dream imagery); מֶשֶׁךְ־הַזָּרַע (rare phrase); אֲפִיקִים terminology\nCONCORDANCE: Track שׁוּב in restoration contexts; הִגְדִּיל יְהֹוָה לַעֲשׂוֹת phrase occurrences; absolute infinitive constructions; nations-witness theme; רִנָּה across Psalms\nFIGURATIVE: All verses—dream simile (v.1), Negeb watercourses (v.4), sowing/reaping metaphor (vv.5-6)\nCOMMENTARY: V.1 (temporal ambiguity and dream interpretation), v.2-3 (nations' witness theology), v.4 (Negeb wadi phenomenon), v.6 (intensive verbal forms and מֶשֶׁךְ־הַזָּרַע)"
+}

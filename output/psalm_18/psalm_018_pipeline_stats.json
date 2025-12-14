@@ -27,12 +27,12 @@
     "concordance_requests": [],
     "figurative_requests": [],
     "commentary_requests": [],
-    "lexicon_entries_count": 0,
+    "lexicon_entries_count": 36,
     "concordance_results": {
       "total_queries": 20
     },
     "figurative_results": {
-      "total_instances_used": 366
+      "total_instances_used": 217
     },
     "commentary_counts": {
       "Rashi": 36,
@@ -66,7 +66,7 @@
   "analysis": {
     "macro_questions": [],
     "micro_questions": [],
-    "verse_count": 0
+    "verse_count": 51
   },
   "model_usage": {
     "macro_analysis": "claude-3-5-sonnet-20241022",

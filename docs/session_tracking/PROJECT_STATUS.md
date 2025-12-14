@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-13 (Session 215)
+**Last Updated**: 2025-12-13 (Session 216)
 
 ## Current Focus: Psalm Commentary Production
 
@@ -264,6 +264,33 @@ Improve Master Editor prompt to better utilize Deep Research materials and creat
 - `scripts/run_enhanced_pipeline.py` - V2 default, `--master-editor-old` flag
 - `src/utils/document_generator.py` - Liturgical marker handling
 - `src/utils/combined_document_generator.py` - Liturgical extraction fix
+
+---
+
+### Session 216 (2025-12-13): Figurative Language Counting Fix
+
+#### Problem Discovered:
+When running the pipeline with skip flags (e.g., `--skip-micro`), the figurative language count in `psalm_NNN_pipeline_stats.json` showed 0, even though the research bundle contained hundreds of figurative language instances.
+
+#### Root Cause:
+The regex pattern in `_parse_research_stats_from_markdown()` was looking for an outdated format:
+- Old pattern: `r'- (?:Psalm|[A-Za-z]+) \d+[^:]*: v\.\d+'` (looking for dash-prefixed entries)
+- Actual format: `**Book X:Y** (type) - confidence:`
+
+#### Solution Implemented:
+1. **Updated Figurative Language Regex**: Changed from dash-prefixed pattern to match actual markdown format:
+   - New pattern: `r'^\*\*[A-Za-z]+ \d+:\d+\*\*'` with `re.MULTILINE` flag
+   - Correctly matches entries like: `**Psalms 126:1** (simile) - confidence: 0.90`
+
+2. **Counts Unique Verse References**: The regex counts unique verse references rather than total instances, which is appropriate for the bibliographical summary.
+
+#### Result:
+- Figurative language counts now correctly populated when skipping steps
+- Tested successfully on Psalms 126 (73 instances), 18 (217 instances), and 8 (125 instances)
+- Pipeline stats always complete regardless of which steps run
+
+#### Files Modified:
+- `scripts/run_enhanced_pipeline.py` - Fixed figurative language regex (lines 86-89)
 
 ---
 

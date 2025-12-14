@@ -14,6 +14,12 @@ python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
 # just the word output
 python scripts/run_enhanced_pipeline.py 8 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college
 
+#use the OLD master editor
+python scripts/run_enhanced_pipeline.py 126 --master-editor-old
+
+#run only college
+python scripts/run_enhanced_pipeline.py 126 --skip-macro --skip-micro --skip-synthesis --skip-master-edit 
+
 # only the micro
 python scripts/run_enhanced_pipeline.py 15 --skip-macro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-word-doc --skip-combined-doc
 

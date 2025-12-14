@@ -1,0 +1,212 @@
+### EDITORIAL ASSESSMENT
+
+The existing introduction and commentary do many things well. They are philologically informed, structurally aware, and generally lucid. The temporal ambiguity of בְּשׁוּב יְהוָה אֶת־שִׁיבַת צִיּוֹן is clearly foregrounded; the tension between joy and petition is well traced; the two great images—Negev watercourses and sowing/reaping—are unpacked with historical and agricultural sensitivity. The commentary rightly notices the pronominal shift from “them” to “us” and the intensifying verbal forms in verse 6, and it integrates medieval commentators with some sophistication. The nods to modern reception (Zionism, Brahms, gospel hymnody) are apt and engaging.
+
+The weaknesses are of several kinds. Stylistically, the tone sometimes drifts toward insider academic prose—heavy with grammatical jargon (“Hiphil perfect,” “construct state,” “pt. as subst.”) that is not always unpacked for a non-specialist reader. The introduction occasionally piles on learned material (especially the Baal-cycle parallel) without pausing to show why it matters for reading this psalm. 
+
+Several resources in the bundle are underused. Torah Temimah’s rich citations (Berakhot 31a on “filling the mouth with laughter,” Ta’anit 5a and 8b on sowing and rain) are barely integrated. Figurative-language parallels are referenced but not often quoted in Hebrew and English; the reader hears of patterns but seldom sees them. The liturgical section is informative but not well structured, and it could quote the actual prayers more generously. Some macro questions raised by the analytical framework—like the function of dream imagery elsewhere in the Psalms, or how often אֲפִיקִים is used for flash-flood channels—can be answered from the supplied material and should be woven in.
+
+Poetically, more could be done with sound (e.g., the double אָז, the tight assonance of שְׂחוֹק פִּינוּ // לְשׁוֹנֵנוּ רִנָּה) and with comparison to key biblical parallels (Psalm 73:20; Job 8:21; Hosea 10:12), which the database conveniently supplies. Overall, the draft is already strong; with clearer definitions, more quoted texts, and a slightly leaner, more narrative exposition, it can become genuinely excellent.
+
+---
+
+### REVISED INTRODUCTION
+
+“When the LORD restored the fortunes of Zion, we were like dreamers” — הָיִינוּ כְּחֹלְמִים (Psalm 126:1). Six short verses, scarcely forty-five Hebrew words, manage to compress an entire theology of history into that opening line. The psalm remembers a homecoming so astonishing it felt unreal, yet in the same breath it asks for restoration still to come. It is a poem about joy that will not let go of its tears.
+
+Everything turns on the verb in the first clause: בְּשׁוּב יְהוָה אֶת־שִׁיבַת צִיּוֹן. Grammatically, בְּשׁוּב can mean “when the LORD restored” (past) or “when the LORD restores” (future). Medieval Jewish commentators divide along this fault line. Ibn Ezra, the grammarian, takes it historically: after 538 BCE, when Cyrus allowed the exiles to return, “the LORD restored the return of Zion.” Rashi, reading the psalm as an eschatological vision, hears it as prophetic future: “When God will restore our return, we will have been like dreamers.” Radak splits the difference. He grants that the Babylonian return lies behind the poem, but notes that verse 4 still cries, “Restore our fortunes, O LORD” — שׁוּבָה יְהוָה אֶת־שְׁבִיתֵנוּ. The first homecoming was real, but not final.
+
+That doubleness is baked into the Hebrew. The noun in verse 1, שִׁיבַת צִיּוֹן, hovers between two roots that are written alike: שׁ־ו־ב, “to return,” and שׁ־ב־ה, “to take captive.” In other passages we meet the idiom שׁוּב שְׁבוּת, “to turn back captivity” or, more broadly, “to reverse fortunes”: 
+
+> וְשָׁב יְהוָה אֱלֹהֶיךָ אֶת־שְׁבוּתְךָ (Deuteronomy 30:3) —  
+> “The LORD your God will restore your fortunes / your captivity.”
+
+Our psalm plays on this idiom and its ambiguity. God both brings people home and undoes their state of bondage. Modern Zionist readers, understandably, stressed the first: *shivat Tzion* as literal, physical immigration. The older phrase, *sh’vut Tzion*, leans toward a more total reversal of fate.
+
+The second half of verse 1 is just as slippery: הָיִינוּ כְּחֹלְמִים. The obvious sense is “we were like dreamers.” Elsewhere dreams mark the border between illusion and reality. Psalm 73, reflecting on the apparent prosperity of the wicked, says of God, “כַּחֲלוֹם מֵהָקִיץ… בָּעִיר צַלְמָם תִּבְזֶה” — “Like a dream upon waking… you despise their image” (73:20). Waking shows that what seemed solid was evanescent. In Psalm 126 the polarity reverses: the misery of exile proves to have been the dream, the restoration the waking. The joy is so extreme it feels unreal.
+
+Some modern philologists, however, have suggested that כְּחֹלְמִים comes not from “to dream” (חָלַם I) but from a rarer homonym meaning “to be healthy, robust” (חָלַם II), as in Job 39:4, “בְּנֵיהֶם יַחְלְמוּ” — “their young ones grow strong.” On this reading the line would mean, “we were like those restored to health,” the nation recovering its strength after the wasting disease of exile. That sense sits comfortably beside verse 4’s image of desert riverbeds suddenly surging with water. As wadis are revived by downpours, so Zion is revived by return. The Hebrew allows both meanings at once: astonished dreamers, newly vigorous invalids.
+
+The psalm’s structure traces an arc through three time zones. Verses 1–3 speak in the perfect tense (“the LORD *has done* great things”), the biblical way of describing either completed action or a future so certain it can be spoken of as past. The community’s mouths are “filled with laughter” (אָז יִמָּלֵא שְׂחוֹק פִּינוּ), and foreign nations watch and say, “הִגְדִּיל יְהוָה לַעֲשׂוֹת עִם־אֵלֶּה” — “The LORD has done great things for these” (v. 2). Israel then repeats the line with a pronoun shift: “הִגְדִּיל יְהוָה לַעֲשׂוֹת עִמָּנוּ; הָיִינוּ שְׂמֵחִים” — “The LORD has done great things *for us*; we were joyful” (v. 3). 
+
+That echo is not mere redundancy. The recognition moves from outside to inside, from diplomatic astonishment to covenantal gratitude. As Malbim notes, the nations marvel at political improbability; Israel hears in the same events God’s faithfulness to promise.
+
+Then, midstream, the tone fractures. Verse 4 abandons narrative for plea: “שׁוּבָה יְהוָה אֶת־שְׁבִיתֵנוּ; כַּאֲפִיקִים בַּנֶּגֶב” — “Restore our fortunes, O LORD, like watercourses in the Negev.” The verb switches to imperative. The people who have just finished saying “we *were* joyful” now admit that joy is not yet complete. This jolt is the theological center of the psalm. The community lives between restoration remembered and restoration still begged for. Every redemption, it suggests, is provisional.
+
+The simile “like watercourses in the Negev” is not generic. אֲפִיקִים (afikim) are the deep, dry channels that score the southern desert. For most of the year they are nothing but dust. In winter, rains in the Judean hills can send sudden flash floods roaring down them, transforming the landscape in hours. Other biblical texts use the word for precisely this kind of fierce, contained flow: “כְּאַיָּל תַּעֲרֹג עַל־אֲפִיקֵי־מָיִם” — “As a deer longs for channels of water” (Psalm 42:2). The psalmist is not asking for a gentle drizzle of improvement but for a deluge, a change as unmistakable as a dry ravine turning into a river.
+
+Rabbinic tradition loves this image. The Talmud declares, “Great is the day of rain, like the day of the ingathering of exiles, as it is said, ‘Restore our fortunes, O LORD, like watercourses in the Negev’” (Ta’anit 8b). Rain and return are twinned acts of divine generosity; the simile becomes an equivalence.
+
+Verses 5–6 pivot again, this time into the idiom of wisdom. “הַזֹּרְעִים בְּדִמְעָה; בְּרִנָּה יִקְצֹרוּ” — “Those who sow in tears shall reap with songs of joy.” At first glance this sounds like a general proverb about perseverance. But in the subsistence economy of post-exilic Judah, “sowing in tears” was concrete. Seed grain was a family’s most precious resource: food that could be eaten now, or buried in the hope of a harvest. In drought, putting seed into the ground really was a life-or-death wager. The rare phrase מֶשֶׁךְ הַזָּרַע (meshekh ha-zera‘, v. 6) probably means either the carefully measured “drawing out” of seed along the furrow or the small seed-bag itself — in either case emphasizing scarcity.
+
+The psalm lingers on the pathos: “הָלוֹךְ יֵלֵךְ וּבָכֹה; נֹשֵׂא מֶשֶׁךְ הַזָּרַע” — “Going he goes and weeping, bearing the measure of seed” (v. 6). Hebrew intensifies the action by pairing the verb with its infinitive (“going he goes”), a way of saying: he keeps on walking. The man tramps out to the field in tears, because with every handful dropped he risks his children’s bread. The promise is that “בֹּא־יָבֹא בְרִנָּה; נֹשֵׂא אֲלֻמֹּתָיו” — “he will surely come back with song, carrying his sheaves.” The meager seed-bag has become armfuls of harvested grain.
+
+Here, too, rabbinic imagination moves quickly from field to history. Radak and Meiri read the “sowing” as the practices of Torah and mitzvot kept in the bitterness of exile; the “sheaves” are the reward of redemption. Hosea had already moralized the same agricultural metaphor: “זִרְעוּ לָכֶם לִצְדָקָה; קִצְרוּ לְפִי־חֶסֶד” — “Sow for yourselves righteousness, reap according to kindness” (Hosea 10:12). Psalm 126 stands in that line but remains closer to the field. Its point is not that virtue automatically pays off, but that God honors risky trust.
+
+Rabbinic stories push further into the texture of time. The Babylonian Talmud (Ta’anit 23a) tells of Honi the Circle-Drawer, who puzzles over our psalm’s line, “We were like dreamers”: “Is it possible,” he asks, “for a person to sleep and dream for seventy years?” He then falls asleep for exactly that span, waking to find the world altered and himself unrecognized. The “seventy-year dream” of exile, in this reading, is not only communal joy but personal dislocation. To wake in a redeemed world is also to find that the world you knew is gone.
+
+Liturgical tradition leans in a different direction. On Shabbat and festivals, Jews customarily begin Birkat HaMazon, Grace after Meals, by singing Psalm 126. The weekday psalm “By the rivers of Babylon” (Psalm 137), a raw lament over destruction, gives way to this more ambivalent song of return. Around a table piled with food, the community rehearses the memory of homecoming and the promise that “those who sow in tears shall reap with songs of joy.” Kabbalistic teachers would later say that the meal itself is a kind of sowing; the “sheaves” are sparks of holiness gathered up from the material world.
+
+Modern movements have seized on the psalm’s language with their own emphases. Zionist writers titled collections *Shivat Tzion* and heard in “those who sow in tears” a literal call to agricultural settlement. Church composers, from Brahms in his *German Requiem* to the evangelical hymn “Bringing in the Sheaves,” have universalized verses 5–6 into a promise that present grief is a prelude to comfort.
+
+What holds all these readings together is the psalm’s refusal to declare the story finished. It blesses God for great things already done; it pleads for a flood of grace still unrealized; it assures the sower that his tears are not wasted. To pray Psalm 126 is to inhabit all three tenses at once: remembering, asking, and trusting. We live, it suggests, always between the dry wadi and the flash flood, the seed-bag and the sheaves.
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+
+In contemporary Jewish practice Psalm 126, known by its opening words *Shir HaMa‘alot*, is best known as the song that opens *Birkat HaMazon* (Grace after Meals) on Shabbat, festivals, and at joyous occasions such as weddings. Before the leader invites the formal grace, the table joins in:
+
+> שִׁיר הַמַּעֲלוֹת; בְּשׁוּב יְהוָה אֶת־שִׁיבַת צִיּוֹן הָיִינוּ כְּחֹלְמִים.  
+> אָז יִמָּלֵא שְׂחוֹק פִּינוּ וּלְשׁוֹנֵנוּ רִנָּה…  
+
+“A song of ascents. When the LORD restored the fortunes of Zion, we were like dreamers. Then our mouth was filled with laughter, our tongue with songs of joy…”
+
+At the Passover Seder, this same recitation marks the transition from the festive meal to the blessings after it. The exodus from Egypt and the future return to Zion are thus folded into the simple act of thanking God for bread.
+
+In many communities the whole cycle of fifteen Songs of Ascents (Psalms 120–134) is recited after the Shabbat afternoon service in the winter months; Psalm 126 there functions as one station in a broader pilgrimage liturgy. In the Edot HaMizrach tradition it also appears in *Tikkun Chatzot* — the midnight lament for the Temple — and in *Birkat Ha’Ilanot*, the blessing over blossoming trees in Nisan, where its images of sowing and harvest resonate with the renewed fertility of the land.
+
+#### Key verses
+
+Verse 2 — “אָז יִמָּלֵא שְׂחוֹק פִּינוּ וּלְשׁוֹנֵנוּ רִנָּה” (“Then our mouth was filled with laughter, our tongue with songs of joy”) — is woven into the great Shabbat prayer *Nishmat Kol Chai*. There it is amplified into a vast catalogue of hyperbolic praise:
+
+> וְאִלּוּ פִינוּ מָלֵא שִׁירָה כַּיָּם, וּלְשׁוֹנֵנוּ רִנָּה כַּהֲמוֹן גַּלָּיו…  
+> “Were our mouth as full of song as the sea, and our tongue with joyous song like the multitude of its waves…”
+
+The verse’s original context — astonished joy at return from exile — is universalized into a confession that even such overflowing praise would be inadequate to God.
+
+Verses 5–6 — “הַזֹּרְעִים בְּדִמְעָה בְּרִנָּה יִקְצֹרוּ. הָלוֹךְ יֵלֵךְ וּבָכֹה… בֹּא יָבֹא בְרִנָּה נֹשֵׂא אֲלֻמֹּתָיו” — surface in several ritual settings among Edot HaMizrach. They are recited, for example, in *Birkat Ha’Ilanot*, the blessing over fruit trees, linking the risky work of sowing to the budding of the trees and the hope for rain in its season.
+
+#### Phrases
+
+Liturgy often isolates short phrases from the psalm and repurposes them. The most striking inversion occurs on Yom Kippur. In the long confession *Vidui HaGadol* of Rabbeinu Nissim, worshipers admit:
+
+> מִלֵּאנוּ שְׂחוֹק פִּינוּ בָּעוֹלָם הַזֶּה…  
+> “We have filled our mouths with laughter in this world…”
+
+Here the verb and object from Psalm 126:2 become not a blessing but a fault — frivolous laughter in a broken world.
+
+Another phrase, “פִּינוּ וּלְשׁוֹנֵנוּ” (“our mouth and our tongue”), is reused in a weekday morning meditation on guarding one’s speech for Shabbat: “לִשְׁמוֹר פִינוּ וּלְשׁוֹנֵנוּ שֶׁלֹּא נְדַבֵּר בַּשַּׁבָּת דִּבּוּר שֶׁל חוֹל” — “to guard our mouth and our tongue, that we not speak weekday talk on Shabbat.” The organs that once could not help breaking into song become organs that must be restrained.
+
+The rabbis also built halakhic and ethical teachings on this psalm. Citing “אָז יִמָּלֵא שְׂחוֹק פִּינוּ,” the Talmud rules: “It is forbidden for a person to fill his mouth with laughter in this world” until the final redemption (Berakhot 31a). Joy is permitted, but unguarded, absolute laughter belongs to the messianic future when Psalm 126 will be fulfilled without remainder.
+
+---
+
+### REVISED VERSE COMMENTARY
+
+**Verse 1**
+
+שִׁיר הַמַּעֲלוֹת; בְּשׁוּב יְהוָה אֶת־שִׁיבַת צִיּוֹן; הָיִינוּ כְּחֹלְמִים׃  
+
+The superscription “שִׁיר הַמַּעֲלוֹת” (“A song of ascents”) places this poem within the small collection of pilgrimage psalms (120–134), probably sung by worshipers “going up” to Jerusalem. The ascent here, however, is not only topographical; it is historical. The first full line — “When the LORD restored the fortunes of Zion, we were like dreamers” — is grammatically, and theologically, unstable.
+
+The opening phrase, בְּשׁוּב יְהוָה אֶת־שִׁיבַת צִיּוֹן, can mean “when the LORD *restored* the fortunes of Zion” (looking back) or “when the LORD *restores*…” (looking ahead). Biblical Hebrew often uses this kind of clause as a general “when-whenever,” and the perfect tense (“restored”) can describe either past action or a future event viewed as certain. This ambiguity underlies the medieval debate: Ibn Ezra roots the line firmly in the return from Babylonian exile; Rashi hears it as a prophetic preview of a still-future redemption.
+
+The noun שִׁיבַת (shivat) itself is a crux. Many manuscripts read שְׁבִית, from the root “to take captive”; elsewhere we find the idiom שׁוּב שְׁבוּת, “to turn back captivity / restore fortunes,” as in “וְשָׁב יְהוָה אֱלֹהֶיךָ אֶת־שְׁבוּתְךָ” (“the LORD your God will restore your fortunes,” Deuteronomy 30:3). Our verse seems to allude to that idiom while also hinting at physical “return” (שׁוּב). The phrase thus carries both the movement of people back to Zion and the reversal of their condition.
+
+The simile “הָיִינוּ כְּחֹלְמִים” — “we were like dreamers” — invites several layers of reading. On the surface it evokes the sheer unreality of the change: the exiles pinch themselves; it feels too good to be true. Elsewhere the Psalms use dream language precisely to mark the extreme transience of apparent reality. Psalm 73, reflecting on the downfall of the wicked, says:
+
+> כַּחֲלוֹם מֵהָקִיץ אֲדֹנָי; בָּעִיר צַלְמָם תִּבְזֶה׃  
+> “Like a dream upon waking, O Lord; in the city you despise their image” (Psalm 73:20).
+
+When God “wakes,” the solidity of the wicked proves as insubstantial as a dream. Our psalm inverts that polarity: the nightmare of exile gives way to the “waking” of redemption, which itself feels dreamlike.
+
+A minority of modern scholars, noting cognates in other Semitic languages, hear a different resonance. The root ח־ל־ם can also mean “to be healthy, robust,” as in Job 39:4, “בְּנֵיהֶם יַחְלְמוּ” — “their young grow strong.” On this reading, “we were like those restored to health.” Exile becomes illness; homecoming, recovery. The psalm’s second image in verse 4 — dry desert channels suddenly filled with water — supports this more somatic nuance: land and people alike are rehydrated, made whole.
+
+Rabbinic tradition lingers over the dream. The Talmud (Ta’anit 23a) tells how Honi the Circle-Drawer read this verse and wondered, “Is it possible for a person to sleep and dream for seventy years?” He then falls into a seventy-year sleep and wakes to a transformed Judea and a study-house that no longer recognizes him. For Honi, the “dream” of restoration is double-edged: it brings redemption, but at the cost of continuity. In that story, Psalm 126 already encodes the rupture of exile alongside its joy.
+
+The line’s compressed music reinforces its theme. The cluster of *sh* and *s* sounds — בְּשׁוּב יְהוָה אֶת־שִׁיבַת צִיּוֹן — binds together “return,” “the LORD,” and “Zion” in a single hissed breath. One cannot be said without the others.
+
+---
+
+**Verse 2**
+
+אָז יִמָּלֵא שְׂחוֹק פִּינוּ; וּלְשׁוֹנֵנוּ רִנָּה; אָז יֹאמְרוּ בַגּוֹיִם, הִגְדִּיל יְהוָה לַעֲשׂוֹת עִם־אֵלֶּה׃  
+
+The verse opens with a double “אָז” (“then”), two beats of consequence: *then* our mouths will be filled with laughter, *then* the nations will speak. The first colon offers a vivid bodily picture. שְׂחוֹק (“laughter”) and רִנָּה (“ringing cry, song of joy”) do not merely describe moods; they are said to “fill” the mouth and tongue. The verb יִמָּלֵא (“will be filled”) treats the mouth as a vessel into which joy overflows. 
+
+Job uses similar language when picturing vindication: “עַד יְמַלֶּה שְׂחוֹק פִּיךָ; וּשְׂפָתֶיךָ תְּרוּעָה” — “Till he fills your mouth with laughter, and your lips with shouts of joy” (Job 8:21). In both texts, laughter is not a polite smile but an eruption that occupies the whole face.
+
+The noun רִנָּה has a wide range, from pleading cry to jubilant shout. In many psalms it pairs with rescue — “קוֹל רִנָּה וִישׁוּעָה בְּאָהֳלֵי צַדִּיקִים” (“the sound of ringing joy and salvation in the tents of the righteous,” Psalm 118:15). Here, alongside laughter, it clearly signals jubilation.
+
+The second half of the verse shifts the camera’s angle. Suddenly others are speaking: “אָז יֹאמְרוּ בַגּוֹיִם, הִגְדִּיל יְהוָה לַעֲשׂוֹת עִם־אֵלֶּה” — “Then they will say among the nations, ‘The LORD has done great things for these.’” The Hiphil form הִגְדִּיל (“has made great”) with לַעֲשׂוֹת (“to do”) is an idiom for extraordinary deeds. Outside our psalm it appears only in Joel 2:21, addressed to the land after a locust plague: “אַל־תִּירְאִי אֲדָמָה… כִּי־הִגְדִּיל יְהוָה לַעֲשׂוֹת” — “Fear not, O soil… for the LORD has done great things.” In both cases the phrase marks a reversal of ecological and national ruin.
+
+Theologically, the nations’ acknowledgment places Psalm 126 within the orbit of Deutero-Isaiah and Ezekiel, where Israel’s restoration is meant to be publicly visible. Isaiah proclaims, “וְרָאוּ כָל־אַפְסֵי־אָרֶץ אֵת יְשׁוּעַת אֱלֹהֵינוּ” — “All the ends of the earth shall see the salvation of our God” (Isaiah 52:10). Ezekiel, speaking of Israel’s renewal, has God say, “וְנִקְדַּשְׁתִּי בָכֶם לְעֵינֵיהֶם; וְיָדְעוּ הַגּוֹיִם כִּי אֲנִי יְהוָה” — “I will be sanctified through you in their sight; and the nations shall know that I am the LORD” (Ezekiel 36:23). Our psalm condenses that motif: the nations become an involuntary chorus affirming Israel’s God.
+
+Rabbinic tradition both cherishes and qualifies this scene. Citing “אָז יִמָּלֵא שְׂחוֹק פִּינוּ,” the Talmud rules: “אסור לאדם שֶׁיְמַלֵּא שְׂחוֹק פִּיו בָּעוֹלָם הַזֶּה” — “It is forbidden for a person to fill his mouth with laughter in this world” (Berakhot 31a), until that “then” has truly come. Rabbi Yehudah ha-Nasi is said never to have laughed with full abandon after hearing this teaching. The psalm’s picture of unreserved joy becomes, paradoxically, a limit on present merriment; it is reserved for the day when redemption is no longer partial, and when the nations’ recognition is complete.
+
+Liturgically, the phrase “וּלְשׁוֹנֵנוּ רִנָּה” is extracted and set into *Nishmat Kol Chai*, where it helps catalogue hypothetical human capacities for praise that still fall short. There the laughter and song of our verse are not tied to one historical deliverance but to the general impossibility of ever doing justice to God’s goodness. The line thus travels from particular to universal, from Zion’s story to the human condition.
+
+---
+
+**Verse 3**
+
+הִגְדִּיל יְהוָה לַעֲשׂוֹת עִמָּנוּ; הָיִינוּ שְׂמֵחִים׃  
+
+Verse 3 repeats almost verbatim the nations’ exclamation from verse 2, but with a crucial twist: “הִגְדִּיל יְהוָה לַעֲשׂוֹת עִמָּנוּ” — “The LORD has done great things for us.” Where the nations said “עִם־אֵלֶּה” (“for these”), Israel now says “עִמָּנוּ” (“for *us*”). The people adopt the outsider’s testimony as their own creed.
+
+This rhetorical move is more than echo. It dramatizes the movement from being an object of observation to becoming a subject who confesses. First the world comments on Israel’s fortune; then Israel internalizes the observation and claims it. In terms of the psalm’s structure, this line is the hinge between international spectacle (v. 2) and intimate speech addressed directly to God (v. 4).
+
+The second colon, “הָיִינוּ שְׂמֵחִים” (“we were joyful”), is startlingly terse — two words in Hebrew. It mirrors “הָיִינוּ כְּחֹלְמִים” (“we were like dreamers”) in verse 1, using the same verb. The inclusio is suggestive: to be “like dreamers” and to “have been joyful” are two faces of the same experience. The psalmist does not describe the content of the joy; its very existence suffices.
+
+Yet even as the verse sounds conclusive — “the LORD has done great things… we were joyful” — we know what follows: “שׁוּבָה יְהוָה אֶת־שְׁבִיתֵנוּ” (“Restore our fortunes, O LORD,” v. 4). This juxtaposition invites what modern scholars call the “prophetic perfect”: a future event described in the past tense to express its certainty. Meiri explicitly reads the verbs this way, noting that “the whole is past in place of future, as is the way of prophetic language.” The joy is as good as done, even if not yet experienced.
+
+The medieval commentaries tune this verse finely. Metzudat David imagines a dialogue: the nations marvel (“The LORD has done great things with these”), and Israel responds, “Indeed — הִגְדִּיל יְהוָה לַעֲשׂוֹת עִמָּנוּ; הָיִינוּ שְׂמֵחִים — the LORD has done great things with us; because we trusted this would come, we were already joyful even while in exile.” On that reading, the joy is anticipatory: they rejoiced in God’s promise before it materialized.
+
+This interiorization of praise has liturgical afterlives. In some Sephardi texts recited during the days of Nisan, verse 3 is quoted as part of a *Yehi Ratzon* prayer that pleads for a future redemption so manifest that “אָז יֹאמְרוּ בַגּוֹיִם… הִגְדִּיל יְהוָה לַעֲשׂוֹת עִם־אֵלֶּה” and Israel can answer with our verse. The psalm thus becomes a template for how the final redemption should be experienced and narrated: first recognized from without, then owned from within.
+
+---
+
+**Verse 4**
+
+שׁוּבָה יְהוָה אֶת־שְׁבִיתֵנוּ; כַּאֲפִיקִים בַּנֶּגֶב׃  
+
+With verse 4 the psalm’s mood pivots from recollection to petition. After three verses of “the LORD has done… we were joyful,” the people suddenly cry, “שׁוּבָה יְהוָה אֶת־שְׁבִיתֵנוּ” — “Restore our fortunes, O LORD!” The imperative שׁוּבָה (“restore!”) answers the earlier noun שִׁיבַת (“restoration”) and creates a kind of envelope around the psalm: God’s “restoring” in verse 1 is now requested anew.
+
+The phrase “אֶת־שְׁבִיתֵנוּ” (or, in the Ketiv, “שְׁבוּתֵנוּ”) replays the ambiguity of verse 1. Is it “our captivity” (from שׁבה, to take captive) or “our fortunes” in a broader sense? In many biblical texts the idiom “שׁוּב שְׁבוּת” functions as a technical term for radical reversal, whether or not literal prisoners of war are in view. Jeremiah, for instance, has God promise: “וְשַׁבְתִּי אֶת־שְׁבוּת עַמִּי יִשְׂרָאֵל וִיהוּדָה… וַהֲשִׁבֹתִים אֶל־הָאָרֶץ” — “I will restore the fortunes of my people Israel and Judah… and I will bring them back to the land” (Jeremiah 30:3). Our psalm’s use of the same formula hints that the earlier “restoration” (perhaps under Persian auspices) did not exhaust the promise.
+
+The simile that follows is among the most evocative in the Psalter: “כַּאֲפִיקִים בַּנֶּגֶב” — “like watercourses in the Negev.” אֲפִיקִים are the deep channels that hold and confine waters; elsewhere we see “אֲפִיקֵי־מָיִם” (“channels of water,” Psalm 42:2) and “אֲפִיקֵי נְחָלִים” (“channels of streams,” Job 6:15). The Negev is the arid south; its wadis are dusty scars for most of the year, suddenly transformed into torrents when winter rains come.
+
+To agricultural eyes, the image is exhilarating and terrifying. A dry ravine can within hours become a rushing river, bringing both life to the landscape and danger to the unwary. Radak glosses: “The Negev is always dry and thirsty for water; if streams pass through it, it is a great wonder and a great good — so the return from exile.” The community prays not for a slow seepage of improvement but for such a dramatic, unmistakable change.
+
+The rabbis treat this simile as more than comparison. “Great is the day of rains,” says the Talmud, “like the day of the ingathering of exiles, as it is said, ‘Restore our fortunes, O LORD, like watercourses in the Negev’” (Ta’anit 8b). Rain itself becomes sacramental evidence that God still turns back captivity.
+
+Spiritually, the verse acknowledges a disjunction that pious memory can be tempted to smooth over. Yes, God has “done great things,” and yes, there was a moment when the community “was joyful.” But the present still feels like a desert. The psalm allows both to be spoken in the same breath: gratitude that does not cancel longing, prayer that leans on remembered grace.
+
+---
+
+**Verse 5**
+
+הַזֹּרְעִים בְּדִמְעָה; בְּרִנָּה יִקְצֹרוּ׃  
+
+Verse 5 shifts register from direct address (“Restore, O LORD”) to proverbial observation. The plural participle “הַזֹּרְעִים” (“those who sow”) and the future “יִקְצֹרוּ” (“they will reap”) are generic: this is how the world works. Yet in the psalm’s context the saying clearly speaks to the community’s situation.
+
+The antithesis is elegant and compact: sowing / reaping, tears / song. דִּמְעָה (“tears”) here are literal; they sting the eyes of the farmer casting precious seed on uncertain ground. The noun רִנָּה, which in verse 2 named the mouth’s song when Zion was restored, now stands over against those tears. The same root can mean a cry of distress or of praise; here the parallel with weeping makes it the jubilant answer to sorrow.
+
+Hosea 10:12 offers a close prophetic cousin: “זִרְעוּ לָכֶם לִצְדָקָה; קִצְרוּ לְפִי־חֶסֶד” — “Sow for yourselves righteousness; reap according to kindness.” There, “sowing” is ethical behavior and “reaping” divine response. Our psalm seems to stand half-way between literal fieldwork and that moral metaphor. Historically situated in a small, drought-prone agrarian society, the line speaks first of actual planting: the people have gone back to ruined fields, turned the soil, and entrusted their survival to weather they do not control. Yet like Hosea, the psalm knows this is also an image of living faithfully in hope of God’s mercy.
+
+Radak makes the bridge explicit: “The exile is like the Negev land, and the sowing is the performance of the commandments. They do them in tears because of the trouble of the exile; ‘they shall reap in song’ is the good recompense.” In later midrashic reading, mitzvot done under oppression are like seed sown in parched ground, especially beloved by God.
+
+The Talmud associates our verse with a very specific historical moment. Discussing the first generations after the return from Babylon, it notes that the Omer offering of new grain was brought from barley that had taken an unusually long time to ripen, “and about that generation it is said: ‘Those who sow in tears shall reap in joy; going he goes and weeping… he shall surely come with song’” (Ta’anit 5a). The proverb thus becomes a caption for the precarious agricultural efforts of a fragile restored community.
+
+Christian and modern receptions have tended to lift the line out of its concrete setting. Johannes Brahms sets the German “Die mit Tränen säen, werden mit Freuden ernten” in his *German Requiem* to comfort mourners; the American hymn “Bringing in the Sheaves” (1874) interprets the “seed” as acts of kindness or the Gospel and the “sheaves” as saved souls. Those adaptations, while far from the psalm’s original national frame, have sensed its core claim: that certain forms of costly labor, sustained in hope, are not wasted.
+
+---
+
+**Verse 6**
+
+הָלוֹךְ יֵלֵךְ וּבָכֹה נֹשֵׂא מֶשֶׁךְ־הַזָּרַע; בֹּא־יָבֹא בְרִנָּה נֹשֵׂא אֲלֻמֹּתָיו׃  
+
+The final verse unfolds the general maxim of verse 5 into a miniature scene. Hebrew heightens its drama with a construction called the “infinitive absolute”: pairing a verb in its basic, non-finite form with a finite form from the same root, as in “הָלוֹךְ יֵלֵךְ” (“going he goes”) and “בֹּא־יָבֹא” (“coming he comes”). The effect is to stress duration or certainty: he *surely* goes on, he *indeed* comes back.
+
+We first follow the sower out: “הָלוֹךְ יֵלֵךְ וּבָכֹה; נֹשֵׂא מֶשֶׁךְ־הַזָּרַע” — “Going he goes and weeping, bearing the meshekh of seed.” As he walks, he is already crying. The phrase מֶשֶׁךְ הַזָּרַע is rare. The Brown–Driver–Briggs lexicon suggests “a drawing, a trail” (from the verb מָשַׁךְ, to draw), hence the thin line of seed that falls behind him. Traditional commentators like Ibn Ezra take it as the vessel holding the seed — the seed-bag. Either way, the emphasis falls on the small, hard-won quantity he carries. There is no surplus; every kernel counts.
+
+The return contrasts sharply: “בֹּא־יָבֹא בְרִנָּה; נֹשֵׂא אֲלֻמֹּתָיו” — “He will surely come back with song, bearing his sheaves.” The singular אֲלֻמָּה (“sheaf”) appears elsewhere almost only in Joseph’s dream: “וְהִנֵּה קָמָה אֲלֻמָּתִי וְגַם־נִצָּבָה; וְהִנֵּה סְבִיבוֹת תְּסֻבֶּינָה אֲלֻמֹּתֵיכֶם” — “Look, my sheaf rose and stood upright; and your sheaves gathered around” (Genesis 37:7). There, sheaves figure future dominance; here, they stand simply for abundance. The man who feared he might sow and reap nothing now staggers home under the weight of multiplied grain.
+
+The verse’s structure is nearly chiastic (A–B–C / C'–B'–A'): going / weeping / bearing seed; bearing sheaves / singing / coming. The constant is נֹשֵׂא (“bearing”): the man is always carrying something; what changes is the content, from fragile seed to substantial sheaves, and the affect, from tears to song. It is an embodied picture of transformed burden.
+
+Rabbinic interpretation mines even small details. In Ta’anit 5a, the rabbis imagine an ox that “goes and weeps” as it plows — as if its labor is all loss — but on the way back from the field it eats from the new sprouts and so “comes with song.” The image cheekily literalizes our verse and underlines its point: the path of obedience may feel like pure expenditure, yet it is on that same path that one tastes the first fruits.
+
+Mystical tradition takes a further step, reading the “seed” as divine sparks scattered through the world and the “sheaves” as gathered holiness in the time of redemption. In Lurianic Kabbalah, human actions “sow” in the broken world, often with tears; the final ingathering of exiles will be the great harvest of these scattered sparks.
+
+Yet even without those later accretions, the psalm’s close is exquisitely poised. It does not say when the joyful return will come, only that it “will surely” come. The last word, אֲלֻמֹּתָיו (“his sheaves”), hangs without a closing verb to complete it. We are left with an image, not a conclusion: a once-weeping figure trudging back from the fields, arms full, mouth open in song. The community reciting this verse becomes that figure, still somewhere between the going and the coming, but clinging to the promise that tears themselves are a kind of seed.

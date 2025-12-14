@@ -83,8 +83,9 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
     concordance_matches = re.findall(r'### (?:Query|Phrase):', markdown_content)
     stats['concordance_count'] = len(concordance_matches)
 
-    # Count figurative language instances (- Psalm X (A-N): or similar patterns)
-    figurative_matches = re.findall(r'- (?:Psalm|[A-Za-z]+) \d+[^:]*: v\.\d+', markdown_content)
+    # Count figurative language instances (Figurative entries start with **Book X:Y**)
+    # This matches patterns like: **Psalms 126:1** (simile) - confidence: 0.90
+    figurative_matches = re.findall(r'^\*\*[A-Za-z]+ \d+:\d+\*\*', markdown_content, re.MULTILINE)
     stats['figurative_count'] = len(figurative_matches)
 
     # Count traditional commentaries by name
