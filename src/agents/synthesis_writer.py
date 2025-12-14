@@ -78,6 +78,7 @@ Write a scholarly introduction essay that:
    - Cite specific examples from the research bundle when relevant
    - Make connections between poetic devices and theological meaning
    - Novel insights are strongly encouraged. You are in conversation with the sources, not just summarizing them.
+   - Interesting historical anecdotes and literary and scholarly insights are welcome to enliven and enrich the essay
 
 3. **Addresses major interpretive questions**
    - What is this psalm about? If there are sections that seem quite different, what theme, context or idea holds them together?
@@ -86,7 +87,6 @@ Write a scholarly introduction essay that:
    - How does this psalm relate to its Ancient Near Eastern context?
    - What are the most significant interpretive debates or challenges?
    - What earned this psalm its place in the biblical canon?
-   - What is fascinating or unique about this psalm from a literary perspective? From a theological perspective? From a historical perspective?
    - **IMPORTANT**: The Macro and Micro analysts have identified interesting research questions (see their inputs above). You should attempt to answer any of these questions that can be meaningfully addressed with the available research materials. If a question is answerable, weave the answer into your essay where appropriate.
 
 4. **Engages prior scholarship and classical interpretations**
@@ -94,10 +94,11 @@ Write a scholarly introduction essay that:
    - Reference how scholars have historically interpreted key passages
    - Acknowledge interpretive debates and schools of thought
    - Example: "Traditional interpretation sees X, but recent scholarship suggests Y..."
+   - Discuss scholarly debates when they are engaging for a smart, curious lay audience
 
 5. **Makes intertextual connections**
    - Cite parallel biblical texts where similar language/imagery appears
-   - Reference ANE parallels (Ugaritic, Akkadian, Egyptian texts) when relevant
+   - Reference ANE parallels (Ugaritic, Akkadian, Egyptian texts) when relevant. The Deep Web Research section may contain useful information here.
    - Show how this psalm's language echoes or innovates or is in conversation with other texts
    - Example: "The term 'לְבָדָד' carries echoes of Deuteronomy 33:28 "וַיִּשְׁכֹּן֩ יִשְׂרָאֵ֨ל בֶּ֤טַח בָּדָד֙...אֶ֖רֶץ דָּגָ֣ן וְתִיר֑וֹשׁ" - ("Israel dwells secure, alone… in a land of grain and wine") "
    - Carefully review the 'Related Psalms Analysis' section of the research bundle for interesting/informative parallels with other psalms, and incorporate these insights when relevant.
@@ -109,6 +110,7 @@ Write a scholarly introduction essay that:
    - Integrate liturgical insights naturally into your discussion - don't treat them as a separate topic
    - **CRITICAL: When mentioning liturgical usage, QUOTE the relevant liturgical texts in Hebrew with English translation**
    - Example: "The daily recitation of this verse in the Amidah suggests that Jewish liturgy understood it as..."
+   - The Deep Web Research section may contain interesting information about the cultural afterlife of this psalm. Use it to enliven the essay.
 
 7. **SHOWS evidence through generous quotation** (CRITICAL)
    - **Quote liberally from all sources - biblical parallels, liturgical texts, traditional commentaries**
@@ -315,6 +317,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - Temple/sanctuary practices
    - Royal psalms and kingship theology
    - Festival associations (Sukkot, Passover, New Year, etc.)
+   - Later cultural, political, religious influence and afterlife
 
 3a. **Modern Liturgical Context** (IMPORTANT)
    - The research bundle includes detailed information about where and how this verse (or phrases from it) appears in Jewish liturgy
