@@ -27,6 +27,7 @@ import sys
 import os
 import json
 import argparse
+import shutil
 import time
 from pathlib import Path
 from datetime import datetime
@@ -287,9 +288,13 @@ def run_si_pipeline(
     # STEP 7: Save Pipeline Statistics (_SI.json)
     # =========================================================================
 
-    # Mark pipeline complete and save to SI stats file
+    # Mark pipeline complete and save
     tracker.mark_pipeline_complete()
-    si_stats_file = tracker.save_json(str(output_path))
+    saved_stats_file = tracker.save_json(str(output_path))
+
+    # Copy to _SI.json file (tracker.save_json uses standard filename)
+    si_stats_file = si_output_files["pipeline_stats"]
+    shutil.copy(saved_stats_file, si_stats_file)
 
     logger.info(f"✓ SI pipeline statistics saved to: {si_stats_file}")
 
