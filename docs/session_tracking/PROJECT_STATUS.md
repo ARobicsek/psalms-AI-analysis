@@ -444,3 +444,9 @@ python main.py --psalm 119 --dry-run
 - Gemini 2.5 Pro fallback handles large psalms without content loss
 - Strategic verse grouping prevents truncation in long psalms
 - Pipeline running smoothly with all major fixes implemented
+
+### Documentation Maintenance
+- **Session Documentation Prompts**: See `docs/session_tracking/SESSION_DOCUMENTATION_PROMPT.md` for:
+  - **Session START Prompt**: Establish context and goals before beginning work
+  - **Session END Prompt**: Update documentation structure after completion
+- Use these prompts to maintain consistent session workflow and documentation
