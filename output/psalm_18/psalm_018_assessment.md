@@ -1,9 +1,0 @@
-# Editorial Assessment - Psalm 18
-
-The existing material on Psalm 18 is already rich: it recognizes the psalm’s triple register (love song, storm-theophany, royal victory), notes the double transmission with 2 Samuel 22, and offers solid verse-by-verse work with Rashi, Ibn Ezra, Radak, Malbim, and Meiri. It also gestures toward ANE storm-god imagery and some liturgical usage.  
-
-What’s missing are a few consolidating “aha” moves and some sharpening. The double-text issue (Psalm 18 // 2 Samuel 22) can be used more imaginatively: not just as a textual note, but as a way into how the same song functions differently in narrative and in liturgy. The theophany section could profit from a clearer comparison with Ugaritic Baal texts—showing how “rider on the clouds” theology is being displaced—without drowning readers in jargon. The troubling reciprocity line, “וְעִם־עִקֵּשׁ תִּתְפַּתָּל” (“with the crooked You show Yourself twisted,” v.27), and the enigmatic “וְעַנְוָתְךָ תַרְבֵּנִי” (“Your humility/condescension makes me great,” v.36) deserve more theological unpacking.  
-
-From Deep Research, the history of reception—Luther’s *Deus absconditus*, Baroque musical settings, and the political weaponization of this psalm (e.g., La Rochelle)—offers precisely the kind of surprising cultural afterlife that would engage thoughtful lay readers, but is not yet integrated. The liturgical material is strong but scattered; it needs to be gathered and structured. Technically, Hebrew is usually paired with English, but in a few places references to other psalms lack quotation; the revised version will correct that. Terms like “theophany,” “Chaoskampf,” and “lectio difficilior” must be defined in passing. Overall, the ingredients are present; the revision’s task is to distill, connect, and occasionally complicate.
-
----

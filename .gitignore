@@ -99,3 +99,7 @@ archive/data_extraction/
 data/hirsch_*/
 
 data/liturgy.db
+
+# Stop tracking all output and logs
+output/
+logs/

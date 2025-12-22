@@ -27,7 +27,7 @@ import sys
 import sqlite3
 from pathlib import Path
 from typing import List, Dict, Optional, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from collections import Counter
 import json
 
@@ -383,6 +383,68 @@ class FigurativeLibrarian:
         """
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
+        
+        try:
+            # Handle priority vehicle search (ordered by term sequence)
+            if request.vehicle_search_terms and len(request.vehicle_search_terms) > 0:
+                return self._priority_search(conn, request)
+            
+            return self._execute_search(conn, request)
+        finally:
+            conn.close()
+
+    def _priority_search(self, conn: sqlite3.Connection, original_request: FigurativeRequest) -> FigurativeBundle:
+        """
+        Execute search prioritizing the order of vehicle search terms.
+        
+        Instead of one big OR query, this runs sequential queries for each term
+        until max_results is reached, ensuring higher priority terms fill the quota first.
+        """
+        # Note: replace is imported at module level
+        
+        all_instances = []
+        seen_verse_ids = set()
+        
+        # Deduplicate terms while preserving order
+        terms = []
+        seen_terms = set()
+        for t in original_request.vehicle_search_terms:
+            t_clean = t.strip()
+            t_lower = t_clean.lower()
+            if t_clean and t_lower not in seen_terms:
+                terms.append(t_clean)
+                seen_terms.add(t_lower)
+        
+        for term in terms:
+            remaining_slots = original_request.max_results - len(all_instances)
+            if remaining_slots <= 0:
+                break
+            
+            # Create sub-request for this specific term
+            # We clear vehicle_search_terms so _execute_search uses vehicle_contains
+            sub_request = replace(
+                original_request,
+                vehicle_search_terms=None,
+                vehicle_contains=term,
+                max_results=remaining_slots
+            )
+            
+            # Execute search for this term
+            bundle = self._execute_search(conn, sub_request)
+            
+            # Add unique instances
+            for inst in bundle.instances:
+                if inst.verse_id not in seen_verse_ids:
+                    all_instances.append(inst)
+                    seen_verse_ids.add(inst.verse_id)
+        
+        return FigurativeBundle(
+            instances=all_instances,
+            request=original_request
+        )
+
+    def _execute_search(self, conn: sqlite3.Connection, request: FigurativeRequest) -> FigurativeBundle:
+        """Execute a single SQL search query."""
         cursor = conn.cursor()
 
         # Build query
@@ -593,7 +655,7 @@ class FigurativeLibrarian:
             )
             instances.append(instance)
 
-        conn.close()
+        # Connection closed by caller
 
         return FigurativeBundle(
             instances=instances,
