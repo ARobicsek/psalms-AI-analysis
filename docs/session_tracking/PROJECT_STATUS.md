@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-21 (Session 219)
+**Last Updated**: 2025-12-22 (Session 220)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -14,14 +14,12 @@
 
 ## Executive Summary
 
-### Current Phase: Pipeline Production - Complete Psalms 1-14, 8, 15-21
-Continuing with verse-by-verse commentary generation using the established pipeline.
+### Current Phase: Pipeline Production
+Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Completed Psalms**: 1-14, 15, 20, 8, 97, 145 (18 total)
-- **Next Psalms**: 16-21
-- **Current Session**: 219
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration
+- **Current Session**: 220
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline
 
 ---
 
@@ -34,7 +32,7 @@ Continuing with verse-by-verse commentary generation using the established pipel
 | Phase 1: Text Extraction | ✅ Complete | All Tanakh text extracted and stored in SQLite |
 | Phase 2: Macro Analysis | ✅ Complete | All psalms analyzed for themes and structure |
 | Phase 3: Micro Analysis | ✅ Complete | Verse-by-verse phrase extraction complete |
-| Phase 4: Research Assembly | 🟠 In Progress | Optimizing figurative language search and trimming |
+| Phase 4: Research Assembly | ✅ Complete | Optimizing figurative language search and trimming |
 | Phase 5: Synthesis Generation | ✅ Complete | Commentary generation with Gemini fallback |
 | Phase 6: Editing and Publication | ✅ Complete | Master Editor V2, DOCX generation |
 
@@ -46,13 +44,17 @@ Continuing with verse-by-verse commentary generation using the established pipel
 - **Pipeline Skip Logic**: New `--resume` flag for automatic step detection
 
 ### Known Limitations
-- Figurative language search prioritization needs refinement
 - Large psalms may require Gemini fallback (additional cost)
 - Deep research must be manually prepared via Gemini browser interface
 
 ---
 
 ## Recent Work Summary
+
+### Session 220 (2025-12-22): Special Instruction Pipeline Implementation
+- Created `MasterEditorSI` class extending `MasterEditorV2` with author directive prompts
+- Implemented `run_si_pipeline.py` script for V2 commentary rewrites with _SI suffix outputs
+- Added three .docx generation (Main SI, College SI, Combined SI) with separate stats tracking
 
 ### Session 219 (2025-12-21): Pipeline Skip Logic Fix & Resume Feature
 - Fixed skip flags being ignored when output files didn't exist
@@ -73,12 +75,6 @@ Continuing with verse-by-verse commentary generation using the established pipel
 - Fixed regex pattern for parsing figurative language instances
 - Stats now correctly populated when using skip flags
 - Tested on Psalms 126, 18, and 8
-
-### Session 215 (2025-12-13): Master Editor V2 Prompt Restructure
-- Complete restructure of Master Editor prompt (now default)
-- Explicit Deep Research guidance integration
-- Reduced redundancy by ~40%
-- Better "aha! moment" focus
 
 ---
 
@@ -124,6 +120,23 @@ Support for manually prepared Gemini Deep Research outputs:
 
 ### Pipeline Features
 
+#### Special Instruction Pipeline (Session 220) ✅
+Author-directed commentary revisions without altering standard pipeline:
+- Extends `MasterEditorV2` via inheritance (`MasterEditorSI` class)
+- Special instruction prompts with "SPECIAL AUTHOR DIRECTIVE" section
+- All outputs use `_SI` suffix (never overwrites originals)
+- Generates three .docx documents: Main SI, College SI, Combined SI
+- Separate pipeline stats tracking (`_SI.json`)
+
+Usage:
+```bash
+# Create instruction file
+echo "Focus on theme of divine refuge..." > data/special_instructions/special_instructions_Psalm_019.txt
+
+# Run SI pipeline
+python scripts/run_si_pipeline.py 19
+```
+
 #### Skip Logic & Resume (Session 219) ✅
 - Fixed skip flags to NEVER run specified steps
 - Added `--resume` flag for automatic step detection
@@ -157,7 +170,53 @@ Fixed stats showing zeros when skipping steps:
 
 ## Session History
 
-### Sessions 200-219: Full Details
+### Sessions 200-220: Full Details
+
+#### Session 220 (2025-12-22): Special Instruction Pipeline Implementation
+**Objective**: Create supplementary pipeline for author-directed commentary revisions
+
+**Problems Identified**:
+- Need for "V2" rewrites based on specific thematic ideas without altering standard pipeline
+- Author wants ability to inject overriding instructions into Master Editor generation
+
+**Solutions Implemented**:
+1. Created `src/agents/master_editor_si.py` extending `MasterEditorV2` via inheritance
+2. Added `MASTER_EDITOR_PROMPT_SI` and `COLLEGE_EDITOR_PROMPT_SI` with "SPECIAL AUTHOR DIRECTIVE" section
+3. Created `scripts/run_si_pipeline.py` for dedicated SI workflow
+4. All outputs use `_SI` suffix (never overwrites original files)
+5. Copies original pipeline stats to new `_SI.json` file
+6. Generates three .docx documents: Main SI, College SI, Combined SI
+
+**Key Design Constraints**:
+- NO modifications to `scripts/run_enhanced_pipeline.py` or `src/agents/master_editor.py`
+- Uses "SI" naming convention throughout
+- Strict input validation (exits if analysis files missing)
+
+**Files Created**:
+- `src/agents/master_editor_si.py` - Extended Master Editor with SI prompts
+- `scripts/run_si_pipeline.py` - Dedicated SI pipeline script
+- `data/special_instructions/` - Directory for author instruction files
+
+**Usage**:
+```bash
+# Create instruction file
+echo "Focus on theme of divine refuge..." > data/special_instructions/special_instructions_Psalm_019.txt
+
+# Run SI pipeline
+python scripts/run_si_pipeline.py 19
+```
+
+**Output Files** (all in `output/psalm_NNN/`):
+- `psalm_NNN_edited_intro_SI.md`
+- `psalm_NNN_edited_verses_SI.md`
+- `psalm_NNN_assessment_SI.md`
+- `psalm_NNN_edited_intro_college_SI.md`
+- `psalm_NNN_edited_verses_college_SI.md`
+- `psalm_NNN_assessment_college_SI.md`
+- `psalm_NNN_pipeline_stats_SI.json`
+- `psalm_NNN_commentary_SI.docx`
+- `psalm_NNN_commentary_college_SI.docx`
+- `psalm_NNN_commentary_combined_SI.docx`
 
 #### Session 219 (2025-12-21): Pipeline Skip Logic Fix & Resume Feature
 **Objective**: Fix skip flags being ignored and add resume functionality
@@ -411,6 +470,9 @@ python main.py --psalms 1-10
 # Resume from last completed step
 python scripts/run_enhanced_pipeline.py 23 --resume
 
+# Special Instruction pipeline (V2 rewrite with author notes)
+python scripts/run_si_pipeline.py 19
+
 # Check costs (dry run)
 python main.py --psalm 119 --dry-run
 ```
@@ -420,13 +482,10 @@ python main.py --psalm 119 --dry-run
 - `src/concordance/` - 4-layer Hebrew search system
 - `database/` - SQLite databases
 - `data/deep_research/` - Gemini Deep Research outputs
+- `data/special_instructions/` - Author directive files for SI pipeline
 - `output/psalm_*/` - Generated commentary
 - `archive/` - Historical files organized by date
 
-### Pipeline Status by Psalm
-**Completed (All Phases)**: 1-14, 15, 20, 8, 97, 145
-**In Progress**: 16-21
-**Remaining**: 22-150
 
 ### Database Status
 - Location: `database/tanakh.db`
