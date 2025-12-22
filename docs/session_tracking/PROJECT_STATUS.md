@@ -533,6 +533,82 @@ Updated the section tracking logic in `synthesis_writer.py` (lines 1027-1051) to
 #### Files Modified:
 - `src/agents/synthesis_writer.py` - Enhanced section tracking with replacement logic (lines 1027-1051)
 
+### Session 219 (2025-12-21): Pipeline Skip Logic Fix & Resume Feature
+
+#### Problem:
+The pipeline's skip flags (`--skip-synthesis`, etc.) were being ignored when output files didn't exist. This violated user expectations - if a user specifies `--skip-synthesis`, they expect synthesis to NEVER run, regardless of whether files exist.
+
+#### Root Cause:
+The logic used `OR` condition: `elif not skip_step OR not file_exists():`
+- This meant steps ran if EITHER: skip flag was false OR file didn't exist
+- Users were surprised when their explicit skip commands were ignored
+
+#### Solution Implemented:
+
+1. **Fixed Skip Logic**:
+   - Changed from `OR` to simple condition: `elif not skip_step:`
+   - Now: If skip flag is True → NEVER runs that step
+   - Now: If skip flag is False → ALWAYS runs, even if files exist (overwrites them)
+
+2. **Added `--resume` Flag**:
+   - Automatically detects last completed step based on existing files
+   - Sets appropriate skip flags automatically
+   - No need to manually specify multiple `--skip-*` flags
+
+3. **Added Dependency Checking**:
+   - When skipping steps, pipeline verifies required files exist
+   - Provides clear error messages if files are missing
+   - Tells user exactly what to do to fix the issue
+
+4. **Updated Documentation**:
+   - Help text now clarifies that skip flags mean "NEVER runs"
+   - Added examples for resume mode and selective step execution
+
+#### Usage Examples:
+```bash
+# Resume from where you left off
+python scripts/run_enhanced_pipeline.py 23 --resume
+
+# Run only the micro analysis
+python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-synthesis --skip-master-edit
+
+# Generate fresh analysis (overwrites existing files)
+python scripts/run_enhanced_pipeline.py 23
+```
+
+#### Files Modified:
+- `scripts/run_enhanced_pipeline.py` - Fixed skip logic, added resume feature, updated documentation
+
+---
+
+### Session 218 (2025-12-21): Prioritized Figurative Language Search & Output Simplification
+
+#### Objective:
+Fix the issue where Figurative Language search results were dominated by random matches instead of respecting the priority of vehicle search terms provided by the Micro Analyst. Also simplify the research bundle output.
+
+#### Solution Implemented:
+
+1. **Prioritized Search Logic**:
+   - Implemented `_priority_search` in `FigurativeLibrarian`
+   - Search terms are now processed sequentially (e.g., "back" -> "shoulder" -> "retreat")
+   - High-priority terms fill the result quota first
+   - Only moves to secondary terms if slots remain
+
+2. **Output Simplification**:
+   - Removed "Core pattern" summary statistics
+   - Removed "Top 3 Most Relevant" section
+   - Now lists up to 20 instances directly in "All Instances" section
+   - cleaner, less cluttered research bundle
+
+3. **Git Configuration**:
+   - Updated `.gitignore` to stop tracking `output/` and `logs/` directories
+   - Prevents repository bloat from generated artifacts
+
+#### Files Modified:
+- `src/agents/figurative_librarian.py` - Implemented priority search logic
+- `src/agents/research_assembler.py` - Simplified markdown output generation
+- `.gitignore` - Added output and logs directories
+
 ---
 
 ## Pipeline Status by Psalm

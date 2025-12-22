@@ -11,8 +11,11 @@ python scripts/run_formatter.py 145
 #run with opus 4.5 as the master editor
 python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
 
-# just the word output
-python scripts/run_enhanced_pipeline.py 8 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college
+# skip everything
+python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
+
+# resume for where the pipeline left off
+python scripts/run_enhanced_pipeline.py 9 --resume
 
 #use the OLD master editor
 python scripts/run_enhanced_pipeline.py 126 --master-editor-old

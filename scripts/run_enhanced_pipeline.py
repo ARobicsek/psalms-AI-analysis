@@ -175,6 +175,7 @@ def run_enhanced_pipeline(
     output_dir: str = "output",
     db_path: str = "database/tanakh.db",
     delay_between_steps: int = 120,
+    resume: bool = False,
     skip_macro: bool = False,
     skip_micro: bool = False,
     skip_synthesis: bool = False,
@@ -196,11 +197,12 @@ def run_enhanced_pipeline(
         output_dir: Output directory for all files
         db_path: Path to Tanakh database
         delay_between_steps: Seconds to wait between API-heavy steps (for rate limits)
-        skip_macro: Skip macro analysis (use existing file)
-        skip_micro: Skip micro analysis (use existing file)
-        skip_synthesis: Skip synthesis (use existing file)
-        skip_master_edit: Skip master editing (use existing file)
-        skip_college: Skip college commentary generation (use existing file)
+        resume: Resume from the last completed step (auto-detects based on existing files)
+        skip_macro: Skip macro analysis (NEVER runs this step, even if files don't exist)
+        skip_micro: Skip micro analysis (NEVER runs this step, even if files don't exist)
+        skip_synthesis: Skip synthesis (NEVER runs this step, even if files don't exist)
+        skip_master_edit: Skip master editing (NEVER runs this step, even if files don't exist)
+        skip_college: Skip college commentary generation (NEVER runs this step, even if files don't exist)
         skip_print_ready: Skip print-ready formatting
         skip_word_doc: Skip .docx generation
         skip_combined_doc: Skip combined .docx generation (main + college in one document)
@@ -272,6 +274,50 @@ def run_enhanced_pipeline(
     # Combined document file path
     docx_output_combined_file = output_path / f"psalm_{psalm_number:03d}_commentary_combined.docx"
 
+    # Handle resume mode - auto-detect last completed step
+    if resume and not smoke_test:
+        logger.info("RESUME MODE: Auto-detecting last completed step...")
+
+        # Check each step in order to find where to resume
+        if not edited_intro_file.exists():
+            # Master editor hasn't run, need to check synthesis
+            if not synthesis_intro_file.exists():
+                # Synthesis hasn't run, need to check micro
+                if not research_file.exists():
+                    # Micro hasn't run, need to check macro
+                    if not macro_file.exists():
+                        # Nothing exists, start from beginning
+                        logger.info("No existing files found. Starting from beginning.")
+                        resume = False
+                    else:
+                        # Macro exists, resume from micro
+                        logger.info(f"Resuming from micro analysis (macro exists at {macro_file})")
+                        skip_macro = True
+                else:
+                    # Micro exists, resume from synthesis
+                    logger.info(f"Resuming from synthesis (micro exists at {research_file})")
+                    skip_macro = True
+                    skip_micro = True
+            else:
+                # Synthesis exists, resume from master editor
+                logger.info(f"Resuming from master editor (synthesis exists at {synthesis_intro_file})")
+                skip_macro = True
+                skip_micro = True
+                skip_synthesis = True
+        else:
+            # Master editor exists, check if we need college or formatting
+            logger.info(f"Master editor complete. Checking for college/formatting steps.")
+            skip_macro = True
+            skip_micro = True
+            skip_synthesis = True
+            skip_master_edit = True
+
+            # Don't auto-skip college/print-ready/docx steps as user may want to regenerate those
+            logger.info("Use specific skip flags if you want to skip college, formatting, or document generation steps.")
+
+        # Set resume to False after setting appropriate skip flags
+        resume = False
+
     # =====================================================================
     # STEP 1: Macro Analysis
     # =====================================================================
@@ -304,7 +350,7 @@ def run_enhanced_pipeline(
         logger.info(f"✓ SMOKE TEST: Dummy macro analysis saved to {macro_file}")
         print(f"✓ SMOKE TEST: Dummy macro analysis complete: {macro_file}\n")
 
-    elif not skip_macro or not macro_file.exists():
+    elif not skip_macro:
         logger.info("\n[STEP 1] Running MacroAnalyst...")
         print(f"\n{'='*80}")
         print(f"STEP 1: Macro Analysis (Structural Thesis)")
@@ -346,13 +392,20 @@ def run_enhanced_pipeline(
         # Rate limit delay
         time.sleep(delay_between_steps)
     else:
-        logger.info(f"[STEP 1] Skipping macro analysis (using existing {macro_file})")
-        print(f"\nSkipping Step 1 (using existing macro analysis)\n")
+        # skip_macro is True - explicitly skipped by user
+        logger.info(f"[STEP 1] Skipping macro analysis (--skip-macro flag set)")
+        print(f"\nSkipping Step 1 (macro analysis explicitly skipped)\n")
         # Use default model name for tracking when skipping
         macro_model = "claude-3-5-sonnet-20241022"  # Default model
         tracker.track_model_for_step("macro_analysis", macro_model)
 
     # Load macro analysis
+    if skip_macro and not macro_file.exists():
+        logger.error(f"FATAL: Cannot skip macro analysis - {macro_file} does not exist")
+        print(f"\n⚠️ FATAL: Macro analysis was skipped but required file does not exist: {macro_file}")
+        print(f"Either remove --skip-macro flag or run pipeline from beginning to generate missing files.")
+        sys.exit(1)
+
     macro_analysis = load_macro_analysis(str(macro_file))
 
     # If we skipped macro, still need to track verse count for the methods section
@@ -404,7 +457,7 @@ def run_enhanced_pipeline(
         print(f"✓ SMOKE TEST: Dummy micro analysis complete: {micro_file}")
         print(f"✓ SMOKE TEST: Dummy research bundle complete: {research_file}\n")
 
-    elif not skip_micro or not micro_file.exists():
+    elif not skip_micro:
         logger.info("\n[STEP 2] Running MicroAnalyst v2 (with enhanced figurative search)...")
         print(f"\n{'='*80}")
         print(f"STEP 2: Micro Analysis (Discovery + Enhanced Research)")
@@ -462,13 +515,29 @@ def run_enhanced_pipeline(
         # Rate limit delay
         time.sleep(delay_between_steps)
     else:
-        logger.info(f"[STEP 2] Skipping micro analysis (loading existing files)")
-        print(f"\nSkipping Step 2 (using existing micro analysis)\n")
+        # skip_micro is True - explicitly skipped by user
+        logger.info(f"[STEP 2] Skipping micro analysis (--skip-micro flag set)")
+        print(f"\nSkipping Step 2 (micro analysis explicitly skipped)\n")
         # Use default model name for tracking when skipping
         micro_model = "claude-3-5-sonnet-20241022"  # Default model
         tracker.track_model_for_step("micro_analysis", micro_model)
-    
+
     # Always load the definitive micro_analysis and research_bundle for subsequent steps
+    # First check if files exist when skipping
+    if skip_micro and (not micro_file.exists() or not research_file.exists()):
+        missing_files = []
+        if not micro_file.exists():
+            missing_files.append(str(micro_file))
+        if not research_file.exists():
+            missing_files.append(str(research_file))
+
+        logger.error(f"FATAL: Cannot skip micro analysis - required files do not exist: {', '.join(missing_files)}")
+        print(f"\n⚠️ FATAL: Micro analysis was skipped but required file(s) are missing:")
+        for file in missing_files:
+            print(f"  - {file}")
+        print(f"\nEither remove --skip-micro flag or run pipeline from beginning to generate missing files.")
+        sys.exit(1)
+
     try:
         from src.schemas.analysis_schemas import load_micro_analysis
         micro_analysis = load_micro_analysis(str(micro_file))
@@ -546,7 +615,7 @@ def run_enhanced_pipeline(
         print(f"✓ SMOKE TEST: Dummy introduction complete: {synthesis_intro_file}")
         print(f"✓ SMOKE TEST: Dummy verse commentary complete: {synthesis_verses_file}\n")
 
-    elif not skip_synthesis or not synthesis_intro_file.exists():
+    elif not skip_synthesis:
         logger.info("\n[STEP 3] Running SynthesisWriter (with enhanced prompts)...")
         print(f"\n{'='*80}")
         print(f"STEP 3: Synthesis (Introduction + Verse Commentary)")
@@ -615,8 +684,25 @@ def run_enhanced_pipeline(
         # Rate limit delay
         time.sleep(delay_between_steps)
     else:
-        logger.info(f"[STEP 3] Skipping synthesis (using existing {synthesis_intro_file})")
-        print(f"\nSkipping Step 3 (using existing synthesis)\n")
+        # skip_synthesis is True - explicitly skipped by user
+        logger.info(f"[STEP 3] Skipping synthesis (--skip-synthesis flag set)")
+        print(f"\nSkipping Step 3 (synthesis explicitly skipped)\n")
+
+        # Check if synthesis files exist when skipping
+        if not synthesis_intro_file.exists() or not synthesis_verses_file.exists():
+            missing_files = []
+            if not synthesis_intro_file.exists():
+                missing_files.append(str(synthesis_intro_file))
+            if not synthesis_verses_file.exists():
+                missing_files.append(str(synthesis_verses_file))
+
+            logger.error(f"FATAL: Cannot skip synthesis - required files do not exist: {', '.join(missing_files)}")
+            print(f"\n⚠️ FATAL: Synthesis was skipped but required file(s) are missing:")
+            for file in missing_files:
+                print(f"  - {file}")
+            print(f"\nEither remove --skip-synthesis flag or run pipeline from beginning to generate missing files.")
+            sys.exit(1)
+
         # Still need to get model name for tracking
         synthesis_writer = SynthesisWriter(cost_tracker=cost_tracker)
         synthesis_model = synthesis_writer.model
@@ -660,7 +746,7 @@ def run_enhanced_pipeline(
         summary_json_file = tracker.save_json(str(output_path))
         logger.info(f"Analysis complete. Statistics with completion date saved to {summary_json_file}")
 
-    elif not skip_master_edit or not edited_intro_file.exists():
+    elif not skip_master_edit:
         logger.info(f"\n[STEP 4] Running MasterEditor ({master_editor_model}) for final editorial review...")
         print(f"\n{'='*80}")
         print(f"STEP 4: Master Editorial Review ({master_editor_model})")
@@ -801,8 +887,27 @@ def run_enhanced_pipeline(
         summary_json_file = tracker.save_json(str(output_path))
         logger.info(f"Analysis complete. Statistics with completion date saved to {summary_json_file}")
     else:
-        logger.info(f"[STEP 4] Skipping master edit (using existing {edited_intro_file})")
-        print(f"\nSkipping Step 4 (using existing master-edited files)\n")
+        # skip_master_edit is True - explicitly skipped by user
+        logger.info(f"[STEP 4] Skipping master edit (--skip-master-edit flag set)")
+        print(f"\nSkipping Step 4 (master editor explicitly skipped)\n")
+
+        # Check if master editor files exist when skipping
+        if not edited_intro_file.exists() or not edited_verses_file.exists() or not edited_assessment_file.exists():
+            missing_files = []
+            if not edited_intro_file.exists():
+                missing_files.append(str(edited_intro_file))
+            if not edited_verses_file.exists():
+                missing_files.append(str(edited_verses_file))
+            if not edited_assessment_file.exists():
+                missing_files.append(str(edited_assessment_file))
+
+            logger.error(f"FATAL: Cannot skip master edit - required files do not exist: {', '.join(missing_files)}")
+            print(f"\n⚠️ FATAL: Master editor was skipped but required file(s) are missing:")
+            for file in missing_files:
+                print(f"  - {file}")
+            print(f"\nEither remove --skip-master-edit flag or run pipeline from beginning to generate missing files.")
+            sys.exit(1)
+
         # Still need to get model name for tracking
         EditorClass = MasterEditorOld if master_editor_old else MasterEditor
         master_editor = EditorClass(
@@ -1169,10 +1274,13 @@ Examples:
   # Custom output directory
   python scripts/run_enhanced_pipeline.py 51 --output-dir output/psalm_51
 
-  # Resume from synthesis step (skip macro and micro)
-  python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro
+  # Resume from last completed step (auto-detect)
+  python scripts/run_enhanced_pipeline.py 23 --resume
 
-  # Skip master editing (use existing synthesis)
+  # Run only micro analysis (skip all other steps)
+  python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-synthesis --skip-master-edit
+
+  # Skip master editing (NEVER runs, even if files don't exist)
   python scripts/run_enhanced_pipeline.py 2 --skip-master-edit
         """
     )
@@ -1188,16 +1296,18 @@ Examples:
     parser.add_argument('--delay', type=int,
                        default=120,
                        help='Delay between API-heavy steps in seconds (default: 120)')
+    parser.add_argument('--resume', action='store_true',
+                       help='Resume from last completed step (auto-detects based on existing files)')
     parser.add_argument('--skip-macro', action='store_true',
-                       help='Skip macro analysis (use existing file)')
+                       help='Skip macro analysis (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-micro', action='store_true',
-                       help='Skip micro analysis (use existing file)')
+                       help='Skip micro analysis (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-synthesis', action='store_true',
-                       help='Skip synthesis (use existing file)')
+                       help='Skip synthesis (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-master-edit', action='store_true',
-                       help='Skip master editing (use existing file)')
+                       help='Skip master editing (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-college', action='store_true',
-                       help='Skip college commentary generation (use existing file)')
+                       help='Skip college commentary generation (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-print-ready', action='store_true',
                        help='Skip print-ready formatting')
     parser.add_argument('--skip-word-doc', action='store_true',
@@ -1250,6 +1360,7 @@ Examples:
             output_dir=args.output_dir,
             db_path=args.db_path,
             delay_between_steps=args.delay,
+            resume=args.resume,
             skip_macro=args.skip_macro,
             skip_micro=args.skip_micro,
             skip_synthesis=args.skip_synthesis,
