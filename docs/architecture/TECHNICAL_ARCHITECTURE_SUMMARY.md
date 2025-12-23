@@ -35,9 +35,9 @@ Input: Psalm Number
 [2] Micro Analysis + Research Request Generation (Claude Sonnet 4.5)
     → Discovery-driven verse analysis, research requests
     ↓
-    [Research Bundle Assembly - 10 Python Librarians]
+    [Research Bundle Assembly - 9 Python Librarians]
     → Lexicon, concordance, figurative analysis, commentary,
-      liturgical usage, related psalms, Sacks, Hirsch, Deep Web Research
+      liturgical usage, related psalms, Sacks, Deep Web Research
     ↓
 [3] Synthesis Writing (Claude Sonnet 4.5 OR Gemini 2.5 Pro)
     → Introduction essay + verse commentary with quotations
@@ -67,7 +67,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
 ### Core Components
 
 1. **AI Agents** (4 specialized LLM-based analyzers with dual-edition output)
-2. **Librarian Agents** (10 deterministic Python data retrieval systems)
+2. **Librarian Agents** (9 deterministic Python data retrieval systems)
 3. **Data Sources** (SQLite databases, Sefaria API, RAG documents, V6 statistical analysis)
 4. **Pipeline Tracking** (Comprehensive statistics with resume capability)
 5. **Cost Tracking** (API usage and cost monitoring across all models)
@@ -208,7 +208,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
 - **Key Features**:
   - Verse-level and sub-verse phrase detection
   - Coverage across 3 traditions (Ashkenaz, Sefard, Edot HaMizrach)
-  - Claude Haiku 4.5 LLM-powered intelligent summarization
+  - Gemini 2.5 Pro LLM-powered intelligent summarization (primary), with Claude Sonnet 4.5 fallback
   - Aggregation by prayer name (prevents duplicate contexts)
   - Quality validation with automatic retry logic
   - Misattribution detection (prevents wrong psalm references)
@@ -237,16 +237,6 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Philosophical and ethical interpretations
   - Contemporary relevance emphasis
 
-#### Hirsch Librarian
-- **Function**: Retrieves R. Samson Raphael Hirsch's 19th-century German commentary
-- **Source**: OCR-extracted commentary from Hirsch's Psalms volume
-- **Implementation**: `src/agents/hirsch_librarian.py`
-- **Key Features**:
-  - 19th-century German Orthodox perspective
-  - Philosophical and symbolic interpretations
-  - Linguistic analysis with ethical applications
-  - ALWAYS included when available (no explicit request needed)
-
 #### Deep Web Research Librarian (Session 209)
 - **Function**: Loads manually prepared Gemini Deep Research outputs into research bundle
 - **Source**: `data/deep_research/psalm_NNN_deep_research.txt`
@@ -259,7 +249,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Pipeline stats track "Deep Web Research: Yes/No"
 
 #### Research Bundle Assembler
-- **Function**: Coordinates all 10 librarians and formats results
+- **Function**: Coordinates all 9 librarians and formats results
 - **Output**: Markdown format for LLM consumption
 - **Implementation**: `src/agents/research_assembler.py`
 - **Librarians Coordinated**:
@@ -271,8 +261,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   6. Liturgical Librarian Sefaria (liturgical usage - Phase 0 fallback, deprecated)
   7. Related Psalms Librarian (statistical connections)
   8. Sacks Librarian (modern British Orthodox perspective)
-  9. Hirsch Librarian (19th-century German Orthodox perspective)
-  10. Deep Web Research Librarian (cultural afterlife, reception history)
+  9. Deep Web Research Librarian (cultural afterlife, reception history)
 - **Key Features**:
   - JSON and Markdown serialization
   - Token limit management (700,000 character capacity - Session 109)
@@ -473,7 +462,8 @@ def normalize_hebrew(text: str, level: int) -> str:
 - **Implementation**: `src/utils/cost_tracker.py`
 - **Models Tracked**:
   - Claude Sonnet 4.5 (MacroAnalyst, MicroAnalyst, SynthesisWriter)
-  - Claude Haiku 4.5 (Liturgical Librarian summaries)
+  - Gemini 2.5 Pro (Liturgical Librarian summaries - primary)
+  - Claude Sonnet 4.5 (Liturgical Librarian summaries - fallback)
   - GPT-5.1 or GPT-5 (MasterEditor main and college editions)
   - Claude Opus 4.5 (Alternative MasterEditor with extended thinking)
 - **Output**: Summary table showing per-model usage and total costs
@@ -552,10 +542,11 @@ def normalize_hebrew(text: str, level: int) -> str:
 | GPT-5.1 (`gpt-5.1`) | MasterEditor (default) | High reasoning effort |
 | GPT-5 (`gpt-5`) | MasterEditor (legacy option) | High reasoning effort |
 | Claude Opus 4.5 (`claude-opus-4-5`) | MasterEditor alternative | 64K extended thinking |
-| Claude Haiku 4.5 | Liturgical Librarian summaries | Fast, cost-effective |
+| Gemini 2.5 Pro | Liturgical Librarian summaries (primary) | Extended thinking |
+| Claude Sonnet 4.5 | Liturgical Librarian summaries (fallback) | Extended thinking |
 
 ### Cost Management
-- **10 Python Librarians**: Deterministic data retrieval without LLM costs
+- **9 Python Librarians**: Deterministic data retrieval without LLM costs
 - **Cost Tracking System**: Real-time monitoring across all models
 - **Token Optimization** (Sessions 118-119): 50-60% reduction in related psalms section
 - **Resume Capability**: Skip completed steps to avoid redundant API calls
@@ -658,7 +649,7 @@ def normalize_hebrew(text: str, level: int) -> str:
 The Psalms Commentary Pipeline represents a sophisticated integration of AI capabilities with traditional biblical scholarship. The system's success lies in its multi-step architecture with dual-edition output, which prevents common AI failure modes while leveraging the strengths of different models for specialized tasks.
 
 **Key Technical Achievements (V6.2 System)**:
-- **10 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Hirsch, Deep Web Research
+- **9 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Deep Web Research
 - **Dual-Edition Output**: Main scholarly edition + accessible college edition + combined document
 - **Flexible Master Editor**: Support for GPT-5.1 (default), GPT-5 (legacy), or Claude Opus 4.5
 - **V2 Prompt**: Restructured with explicit Deep Research guidance (Session 215)
