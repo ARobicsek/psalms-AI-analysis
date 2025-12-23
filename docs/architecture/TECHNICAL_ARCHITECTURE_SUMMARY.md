@@ -1,8 +1,8 @@
 # Technical Architecture Summary: Psalms Commentary Pipeline
 
-**Date**: 2025-12-08
-**Version**: Enhanced Pipeline V6.1 (Phase 4, Sessions 105-180)
-**Status**: Production System with Refined Search & Phrase Matching
+**Date**: 2025-12-22
+**Version**: Enhanced Pipeline V6.2 (Phase 4, Sessions 200-220)
+**Status**: Production System with SI Pipeline, Gemini Fallback, V2 Prompts
 
 ---
 
@@ -11,6 +11,14 @@
 The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, GPT-5.1) with eight specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
+
+**Latest Enhancements (Sessions 200-220)**:
+- **Special Instruction Pipeline**: Author-directed commentary revisions without altering standard pipeline (Session 220)
+- **Master Editor V2**: Restructured prompt with explicit Deep Research guidance, now default (Session 215)
+- **Gemini 2.5 Pro Fallback**: Automatic switching for large psalms (51+ verses) with 1M token context (Session 211)
+- **Resume Feature**: `--resume` flag for automatic step detection (Session 219)
+- **Strategic Verse Grouping**: Prevents truncation in long psalms (Session 212)
+- **Deep Web Research Integration**: Manual Gemini Deep Research outputs auto-load into research bundle (Session 209)
 
 **Recent Enhancements (Sessions 150-180)**:
 - **Phrase Substring Matching**: Multi-word phrases use substring matching while preserving exact matching for single words (Session 176)
@@ -42,14 +50,17 @@ Input: Psalm Number
 [2] Micro Analysis + Research Request Generation (Claude Sonnet 4.5)
     → Discovery-driven verse analysis, research requests
     ↓
-    [Research Bundle Assembly - 9 Python Librarians]
+    [Research Bundle Assembly - 10 Python Librarians]
     → Lexicon, concordance, figurative analysis, commentary,
-      liturgical usage, related psalms, Sacks, Hirsch
+      liturgical usage, related psalms, Sacks, Hirsch, Deep Web Research
     ↓
-[3] Synthesis Writing (Claude Sonnet 4.5)
+[3] Synthesis Writing (Claude Sonnet 4.5 OR Gemini 2.5 Pro)
     → Introduction essay + verse commentary with quotations
+    → Gemini fallback for large psalms (51+ verses, 1M token context)
     ↓
 [4] Master Editorial Review (GPT-5.1 or Claude Opus 4.5)
+    → V2 prompt (default): Restructured with explicit Deep Research guidance
+    → OLD prompt: Available via --master-editor-old flag
     → Critical review, fact-checking, enhancement to "National Book Award" level
     ↓
 [4b] College Commentary Generation (GPT-5.1 or Claude Opus 4.5)
@@ -61,13 +72,17 @@ Input: Psalm Number
 [6] Document Generation (Python)
     → Three .docx outputs: main commentary, college edition, combined
     ↓
+[OPTIONAL] Special Instruction Pipeline
+    → Author-directed revisions using MasterEditorSI
+    → Separate _SI suffixed outputs (main, college, combined)
+    ↓
 Output: Scholarly Commentary (.docx + .md, with college edition)
 ```
 
 ### Core Components
 
 1. **AI Agents** (4 specialized LLM-based analyzers with dual-edition output)
-2. **Librarian Agents** (9 deterministic Python data retrieval systems)
+2. **Librarian Agents** (10 deterministic Python data retrieval systems)
 3. **Data Sources** (SQLite databases, Sefaria API, RAG documents, V6 statistical analysis)
 4. **Pipeline Tracking** (Comprehensive statistics with resume capability)
 5. **Cost Tracking** (API usage and cost monitoring across all models)
@@ -106,10 +121,16 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Three-stage process: Discovery → Research Requests → Bundle Assembly
 
 #### SynthesisWriter (Pass 3)
-- **Model**: Claude Sonnet 4.5 (`claude-sonnet-4-20250514`)
+- **Model**: Claude Sonnet 4.5 (`claude-sonnet-4-20250514`) with **Gemini 2.5 Pro fallback**
 - **Purpose**: Integration of all analysis into coherent commentary
 - **Input**: `MacroAnalysis`, `MicroAnalysis`, `ResearchBundle`
 - **Output**: Introduction essay + verse-by-verse commentary
+- **Gemini Fallback** (Session 211):
+  - Automatic switching to `gemini-2.5-pro` when research bundle exceeds ~350K chars
+  - Gemini 2.5 Pro provides 1M token context vs Claude's 200K limit
+  - Progressive trimming before fallback: Related Psalms → Figurative Language (75% → 50%)
+  - Never trimmed: Lexicon, Commentaries, Liturgical, Sacks, RAG, Concordance, Deep Research
+  - `synthesis_model_used` property tracks which model was actually used
 - **Key Features**:
   - 800-1200 word introduction essay
   - 150-400+ words per verse commentary
@@ -119,11 +140,19 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Integration of liturgical usage and related psalms insights
   - **Poetic punctuation** (Session 121): LLM-generated verses with semicolons, periods, commas
   - Accessible scholarly voice (Robert Alter, Ellen Davis style)
+  - **Strategic Verse Grouping** (Session 212): For long psalms (35+ verses), 2-4 related verses can be grouped with pacing guidance
 
 #### MasterEditor (Pass 4 & 4b)
 - **Model Options**: GPT-5.1 (`gpt-5.1`), GPT-5 (`gpt-5`), or Claude Opus 4.5 (`claude-opus-4-5`)
   - **Default**: GPT-5.1 with high reasoning effort
   - **Alternative**: Claude Opus 4.5 with extended thinking (64K token budget)
+- **Prompt Versions** (Session 215):
+  - **V2 (default)**: Restructured prompt with:
+    - Consolidated "Ground Rules" section with unmissable Hebrew+English requirement
+    - Explicit Deep Research guidance (cultural afterlife, reception history)
+    - Reduced redundancy (~40% reduction in repeated instructions)
+    - "Aha! moment" focus for curious lay readers
+  - **OLD**: Available via `--master-editor-old` flag
 - **Purpose**: Final editorial review and quality enhancement
 - **Dual Output**:
   - **Pass 4**: Main edition for sophisticated lay readers (New Yorker/Atlantic audience)
@@ -237,8 +266,19 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Linguistic analysis with ethical applications
   - ALWAYS included when available (no explicit request needed)
 
+#### Deep Web Research Librarian (Session 209)
+- **Function**: Loads manually prepared Gemini Deep Research outputs into research bundle
+- **Source**: `data/deep_research/psalm_NNN_deep_research.txt`
+- **Implementation**: `src/agents/research_assembler.py`
+- **Key Features**:
+  - Material prepared via Gemini browser interface
+  - Auto-loads into research bundle after Concordance
+  - Included in priority (never trimmed unless all else fails)
+  - Cultural and artistic afterlife, scholarly debates, political reception
+  - Pipeline stats track "Deep Web Research: Yes/No"
+
 #### Research Bundle Assembler
-- **Function**: Coordinates all 9 librarians and formats results
+- **Function**: Coordinates all 10 librarians and formats results
 - **Output**: Markdown format for LLM consumption
 - **Implementation**: `src/agents/research_assembler.py`
 - **Librarians Coordinated**:
@@ -251,6 +291,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   7. Related Psalms Librarian (statistical connections)
   8. Sacks Librarian (modern British Orthodox perspective)
   9. Hirsch Librarian (19th-century German Orthodox perspective)
+  10. Deep Web Research Librarian (cultural afterlife, reception history)
 - **Key Features**:
   - JSON and Markdown serialization
   - Token limit management (700,000 character capacity - Session 109)
@@ -409,10 +450,32 @@ def normalize_hebrew(text: str, level: int) -> str:
 - **`--skip-print-ready`**: Skip print-ready formatting step
 - **`--skip-word-doc`**: Skip .docx generation step
 - **`--skip-combined-doc`**: Skip combined .docx generation (main + college in one document)
+- **`--resume`**: **NEW (Session 219)** - Resume from last completed step (auto-detects based on existing files)
 - **`--smoke-test`**: Generate dummy data without API calls
 - **`--skip-default-commentaries`**: Use selective commentary mode
 - **`--master-editor-model`**: Model to use for master editor (choices: gpt-5, gpt-5.1, claude-opus-4-5)
+- **`--master-editor-old`**: **NEW (Session 215)** - Use OLD prompt (V2 is now default)
 - **`--delay SECONDS`**: Rate limit delay between API-heavy steps (default: 120)
+
+#### Special Instruction Pipeline (Session 220)
+- **Script**: `python scripts/run_si_pipeline.py PSALM_NUMBER`
+- **Input**: Special instruction file at `data/special_instructions/special_instructions_Psalm_NNN.txt`
+- **Output Files** (all with `_SI` suffix):
+  - `psalm_NNN_edited_intro_SI.md`
+  - `psalm_NNN_edited_verses_SI.md`
+  - `psalm_NNN_assessment_SI.md`
+  - `psalm_NNN_edited_intro_college_SI.md`
+  - `psalm_NNN_edited_verses_college_SI.md`
+  - `psalm_NNN_assessment_college_SI.md`
+  - `psalm_NNN_pipeline_stats_SI.json`
+  - `psalm_NNN_commentary_SI.docx`
+  - `psalm_NNN_commentary_college_SI.docx`
+  - `psalm_NNN_commentary_combined_SI.docx`
+- **Key Design**:
+  - Extends `MasterEditorV2` via inheritance (`MasterEditorSI` class)
+  - SPECIAL AUTHOR DIRECTIVE section in prompt (highest priority)
+  - Never overwrites original pipeline files
+  - Separate stats tracking
 
 ### 6. Output Generation Pipeline
 
@@ -480,7 +543,148 @@ def normalize_hebrew(text: str, level: int) -> str:
 
 ---
 
-## Recent Enhancements (Sessions 105-123)
+## Latest Enhancements (Sessions 200-220)
+
+### Session 220 (2025-12-22): Special Instruction Pipeline
+**Objective**: Create supplementary pipeline for author-directed commentary revisions
+
+**Problems Identified**:
+- Need for "V2" rewrites based on specific thematic ideas without altering standard pipeline
+- Author wants ability to inject overriding instructions into Master Editor generation
+
+**Solutions Implemented**:
+1. Created `src/agents/master_editor_si.py` extending `MasterEditorV2` via inheritance
+2. Added `MASTER_EDITOR_PROMPT_SI` and `COLLEGE_EDITOR_PROMPT_SI` with "SPECIAL AUTHOR DIRECTIVE" section
+3. Created `scripts/run_si_pipeline.py` for dedicated SI workflow
+4. All outputs use `_SI` suffix (never overwrites original files)
+5. Copies original pipeline stats to new `_SI.json` file
+6. Generates three .docx documents: Main SI, College SI, Combined SI
+
+**Key Design Constraints**:
+- NO modifications to `scripts/run_enhanced_pipeline.py` or `src/agents/master_editor.py`
+- Uses "SI" naming convention throughout
+- Strict input validation (exits if analysis files missing)
+
+### Session 219 (2025-12-21): Pipeline Skip Logic Fix & Resume Feature
+**Objective**: Fix skip flags being ignored and add resume functionality
+
+**Problems Identified**:
+- Skip flags used OR condition: `elif not skip_step OR not file_exists()`
+- Users surprised when explicit skip commands were ignored
+
+**Solutions Implemented**:
+1. Fixed skip logic to simple condition: `elif not skip_step:`
+2. Added `--resume` flag for automatic step detection
+3. Added dependency checking for skipped steps
+4. Updated help documentation
+
+### Session 218 (2025-12-21): Prioritized Figurative Language Search & Output Simplification
+**Objective**: Fix figurative language search dominated by random matches
+
+**Solutions Implemented**:
+1. Implemented `_priority_search` for sequential term processing
+2. Removed "Core pattern" and "Top 3" sections
+3. Simplified to list up to 20 instances directly
+4. Updated `.gitignore` to exclude `output/` and `logs/`
+
+### Session 217 (2025-12-13): Sections Trimmed Duplication Fix
+**Objective**: Fix duplicate entries when sections trimmed multiple times
+
+**Solutions Implemented**:
+1. Intelligent section replacement logic
+2. Handle Related Psalms format changes
+3. Prevent duplicates before adding
+
+### Session 216 (2025-12-13): Figurative Language Counting Fix
+**Objective**: Fix figurative language count showing 0 when skipping steps
+
+**Solutions Implemented**:
+1. Updated regex to match actual markdown format
+2. Added `re.MULTILINE` flag
+3. Count unique verse references appropriately
+
+### Session 215 (2025-12-13): Master Editor V2 Prompt Restructure
+**Objective**: Restructure prompt for better Deep Research utilization
+
+**Problems Identified**:
+- ~440 lines with accumulated cruft
+- Hebrew+English rule repeated 15+ times
+- Deep Research not explicitly surfaced
+
+**Solutions Implemented**:
+1. Created restructured prompt with clear organization
+2. Explicit Deep Research guidance section
+3. "Aha! Moment" focus framing
+4. Made V2 the default
+5. Fixed liturgical section formatting
+
+**Results**:
+- A/B testing on Psalm 126 showed significantly better output
+- Richer integration of research materials
+- More provocative section headers
+
+### Session 214 (2025-12-11): Pipeline Stats Tracking Fix
+**Objective**: Fix zeros in DOCX methods section when skipping steps
+
+**Solutions Implemented**:
+1. Fixed lexicon count regex to match `### עַנְוָה` format
+2. Added verse count tracking from database when `--skip-macro`
+
+### Session 213 (2025-12-11): Main DOCX Verse-by-Verse Commentary Fix
+**Objective**: Fix missing verse commentary in main DOCX
+
+**Solutions Implemented**:
+1. Copied working regex from combined document generator
+2. Enhanced pattern for all formats (single, ranges, descriptions)
+3. Added range support with start/end tracking
+
+### Session 212 (2025-12-11): Psalm 18 Pipeline Fixes + Strategic Verse Grouping
+**Objective**: Fix multiple issues with 51-verse psalm processing
+
+**Solutions Implemented**:
+1. Fixed JSON truncation in MicroAnalyst (max_tokens too low)
+2. Fixed max tokens exceeding 64K limit
+3. Fixed missing trimmed research file
+4. Fixed N/A in bibliographical summary
+5. Fixed DOCX markdown heading format
+6. Fixed combined DOCX verse range merging
+
+**Strategic Verse Grouping Feature**:
+- Updated prompts with pacing guidance
+- College Editor changed from "NEVER combine" to strategic grouping
+- Equal treatment for all verses, no rushing
+
+### Session 211 (2025-12-11): Gemini 2.5 Pro Fallback + Improved Trimming Strategy
+**Objective**: Prevent critical content loss in large psalms
+
+**Problems Identified**:
+- Session 210's aggressive trimming removed Liturgical Usage, Sacks, RAG
+
+**Solutions Implemented**:
+1. New trimming strategy preserving critical content
+2. Increased character limits (350K intro, 300K verse commentary)
+3. Gemini 2.5 Pro fallback with 1M token context
+4. Enhanced stats tracking
+
+**Key Benefit**: Never trim Lexicon, Commentaries, Liturgical, Sacks, RAG, Concordance, Deep Research
+
+### Session 209 (2025-12-11): Deep Web Research Integration + Progressive Trimming Fix
+**Objective**: Add support for Gemini Deep Research outputs
+
+**Completed**:
+1. Deep Web Research Feature:
+   - Created `data/deep_research/` directory
+   - File naming: `psalm_NNN_deep_research.txt`
+   - Auto-loads into research bundle
+
+2. Progressive Trimming Rewrite:
+   - Fixed Psalm 18 token overflow (211,252 tokens)
+   - Progressive reduction: 75% → 50% → 25% → remove
+   - Trimming order: Related Psalms → Figurative → Concordance → Deep Research
+
+---
+
+## Enhancements (Sessions 105-123)
 
 ### Session 123: User Guide Documentation Updates
 - Created comprehensive suggestions for updating "How Psalms Readers Guide works.docx"
@@ -672,18 +876,25 @@ FROM concordance
   - MacroAnalyst (Pass 1): Structural analysis with extended thinking
   - MicroAnalystV2 (Pass 2): Discovery-driven research with extended thinking
   - SynthesisWriter (Pass 3): Commentary synthesis
+    - **Gemini 2.5 Pro fallback** for large psalms (research bundle > 350K chars)
+    - Gemini provides 1M token context vs Claude's 200K
 - **GPT-5.1** (`gpt-5.1`) or **GPT-5** (`gpt-5`) or **Claude Opus 4.5** (`claude-opus-4-5`):
   - MasterEditor (Pass 4 & 4b): Final editorial review with 350K character capacity
     - **Default**: GPT-5.1 with high reasoning effort
     - **Alternative**: Claude Opus 4.5 with extended thinking (64K token budget)
+    - **V2 prompt**: Default (Session 215) - restructured with explicit Deep Research guidance
+    - **OLD prompt**: Available via `--master-editor-old` flag
   - Dual output: Main edition + College edition
+- **Gemini 2.5 Pro** (`gemini-2.5-pro`):
+  - SynthesisWriter fallback for large psalms (Session 211)
+  - 1M token context window
 - **Claude Haiku 4.5**:
   - Liturgical Librarian: Intelligent summarization of liturgical usage
-- **Python Librarians**: 9 deterministic data retrieval systems (no LLM costs for core research)
+- **Python Librarians**: 10 deterministic data retrieval systems (no LLM costs for core research)
 
 ### Cost Management
-- **9 Python Librarians**: Deterministic data retrieval without LLM costs
-  - BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Hirsch
+- **10 Python Librarians**: Deterministic data retrieval without LLM costs
+  - BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Hirsch, Deep Web Research
 - **Cost Tracking System**: Real-time monitoring of API usage and costs across all models
   - Tracks input/output tokens for each LLM call
   - Calculates costs based on model-specific pricing
@@ -814,10 +1025,14 @@ The Psalms Commentary Pipeline represents a sophisticated integration of AI capa
 
 The technical implementation addresses complex challenges in Hebrew text processing, morphological analysis, and scholarly research integration. The result is a system that produces commentary of sufficient quality for scholarly publication while maintaining efficiency and cost-effectiveness.
 
-**Key Technical Achievements (V6 System)**:
-- **9 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Hirsch
+**Key Technical Achievements (V6.2 System)**:
+- **10 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Hirsch, Deep Web Research
 - **Dual-Edition Output**: Main scholarly edition + accessible college edition + combined document
 - **Flexible Master Editor**: Support for GPT-5.1, GPT-5, or Claude Opus 4.5 with configurable model selection
+- **V2 Prompt (Session 215)**: Restructured with explicit Deep Research guidance, now default
+- **Gemini 2.5 Pro Fallback (Session 211)**: Automatic switching for large psalms with 1M token context
+- **Special Instruction Pipeline (Session 220)**: Author-directed revisions without altering standard pipeline
+- **Resume Feature (Session 219)**: `--resume` flag for automatic step detection
 - **V6 Statistical Analysis**: Fresh root extraction with 93.75% accuracy, 11,170 psalm pairs analyzed
 - **Related Psalms Integration**: Top 5 connections with intelligent token optimization (50-60% reduction)
 - **Enhanced Quotation System**: Prompts encourage generous Hebrew + English quotations
@@ -828,8 +1043,8 @@ The technical implementation addresses complex challenges in Hebrew text process
 - **Quality Assurance**: Multi-pass validation with quotation and punctuation verification
 - **Cost Optimization**: Strategic model selection, deterministic librarians, token efficiency
 
-**Recent Evolution (Sessions 105-123)**:
-The system has undergone significant enhancement through 19 development sessions, improving morphological accuracy, adding statistical psalm relationships, optimizing token usage, and refining prompt quality to ensure generous quotation from sources. These enhancements demonstrate the system's continued refinement and adaptation to produce increasingly scholarly output.
+**Recent Evolution (Sessions 200-220)**:
+The system has undergone significant enhancement through 21 development sessions, implementing a Special Instruction pipeline for author-directed revisions, adding Gemini 2.5 Pro fallback for large psalms, restructuring the Master Editor prompt to V2, adding resume capability, and implementing strategic verse grouping to prevent truncation. These enhancements demonstrate the system's continued refinement and adaptation to production use.
 
 The system demonstrates that AI can be effectively integrated into scholarly workflows when properly architected with domain expertise, technical rigor, and continuous iterative improvement based on real-world usage and feedback.
 
