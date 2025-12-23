@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-22 (Session 220)
+**Last Updated**: 2025-12-23 (Session 221)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 220
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline
+- **Current Session**: 221
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor
 
 ---
 
@@ -51,6 +51,11 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
+### Session 221 (2025-12-23): Converse with Editor Script
+- Created `scripts/converse_with_editor.py` for multi-turn conversation with Master Editor about completed psalms
+- Interactive context selection with character counts for research sections
+- Streaming API responses with cost tracking and transcript saving
+
 ### Session 220 (2025-12-22): Special Instruction Pipeline Implementation
 - Created `MasterEditorSI` class extending `MasterEditorV2` with author directive prompts
 - Implemented `run_si_pipeline.py` script for V2 commentary rewrites with _SI suffix outputs
@@ -70,11 +75,6 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Fixed duplicate entries when sections upgraded (75% → 50%)
 - Implemented intelligent section replacement logic
 - Cleaner DOCX output showing final trimming state
-
-### Session 216 (2025-12-13): Figurative Language Counting Fix
-- Fixed regex pattern for parsing figurative language instances
-- Stats now correctly populated when using skip flags
-- Tested on Psalms 126, 18, and 8
 
 ---
 
@@ -117,6 +117,26 @@ Support for manually prepared Gemini Deep Research outputs:
 - Fixed word order differences (Session 180)
 - Fixed maqqef (־) concatenation bug (Session 180)
 - Fixed conceptual vs exact form extraction (Session 182)
+
+### Interactive Tools
+
+#### Converse with Editor (Session 221) ✅
+Multi-turn conversation with the Master Editor (GPT-5.1) about a completed psalm commentary:
+- Load commentary, research bundle sections, and analysis files
+- Interactive context selection with character counts
+- Streaming API responses for real-time feedback
+- Cost tracking with $1 threshold warnings
+- Transcript saving to markdown files
+
+Usage:
+```bash
+python scripts/converse_with_editor.py 21
+python scripts/converse_with_editor.py 21 --edition college
+```
+
+Commands during conversation:
+- `quit` - Exit and show cost summary
+- `save` - Save transcript to markdown file
 
 ### Pipeline Features
 
@@ -170,7 +190,38 @@ Fixed stats showing zeros when skipping steps:
 
 ## Session History
 
-### Sessions 200-220: Full Details
+### Sessions 200-221: Full Details
+
+#### Session 221 (2025-12-23): Converse with Editor Script
+**Objective**: Create interactive CLI tool for multi-turn conversation with Master Editor about completed psalm commentary
+
+**Problems Identified**:
+- Need to discuss editorial decisions, ask follow-up questions, explore alternative interpretations
+- Standard pipeline produces commentary but offers no way to interrogate the editor's choices
+
+**Solutions Implemented**:
+1. Created `scripts/converse_with_editor.py` implementing full plan from `docs/plans/CONVERSE_WITH_EDITOR_PLAN.md`
+2. Interactive context selection showing character counts for each section
+3. Core materials always included (psalm text, edited intro/verses, assessment)
+4. Optional inclusion of macro/micro analysis and research bundle sections
+5. Streaming API responses with GPT-5.1 for real-time feedback
+6. Cost tracking with usage summary and $1 threshold warnings
+7. Transcript saving to markdown files in psalm output directory
+
+**Key Features**:
+- Argument parsing: psalm number (1-150), optional `--edition main|college`
+- Research bundle parsing into named sections (Lexicon, Concordance, etc.)
+- System prompt positions LLM as "the editor who wrote this commentary"
+- Handles both `psalm_N` and `psalm_NNN` directory naming conventions
+
+**Files Created**:
+- `scripts/converse_with_editor.py` - Complete interactive conversation script
+
+**Usage**:
+```bash
+python scripts/converse_with_editor.py 21
+python scripts/converse_with_editor.py 21 --edition college
+```
 
 #### Session 220 (2025-12-22): Special Instruction Pipeline Implementation
 **Objective**: Create supplementary pipeline for author-directed commentary revisions
@@ -472,6 +523,9 @@ python scripts/run_enhanced_pipeline.py 23 --resume
 
 # Special Instruction pipeline (V2 rewrite with author notes)
 python scripts/run_si_pipeline.py 19
+
+# Converse with Master Editor about completed psalm
+python scripts/converse_with_editor.py 21
 
 # Check costs (dry run)
 python main.py --psalm 119 --dry-run
