@@ -239,6 +239,7 @@ GENERATE RESEARCH REQUESTS:
 2. **CONCORDANCE SEARCHES** - Patterns to trace across Scripture
    - **For each lexical insight**: Copy the **EXACT PHRASE** from the micro analyst's discovery
      - Use the **exact phrase** as the primary query (without niqqudot/vowels) but otherwise the same,letter-for-letter
+     - **Limit to phrase length: 3 words or fewer**
      - Add any **variants** as alternate queries (these are morphological forms only)
    - **SEARCH LEVEL**: "consonantal" (finds all forms of a root pattern)
      - Only use "exact" for homographs (same consonants, different vocalization)
@@ -246,6 +247,7 @@ GENERATE RESEARCH REQUESTS:
    - **IMPORTANT RESTRICTIONS**:
      - NEVER search single-word variants of multi-word phrases (e.g., if phrase is "דבר בלב", don't search just "דבר")
      - Variants are ONLY morphological forms (suffixes, plurals), NOT synonyms
+     - **Limit to phrase length: 3 words or fewer**
    - **LIMIT**: 5-15 strategic searches total
 
 3. **FIGURATIVE LANGUAGE** - Search the figurative language database for relevant metaphors
