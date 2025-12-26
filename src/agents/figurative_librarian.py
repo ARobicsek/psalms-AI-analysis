@@ -71,6 +71,9 @@ class FigurativeInstance:
     detection_deliberation: Optional[str]
     tagging_deliberation: Optional[str]
 
+    # Search priority (set during priority search)
+    term_priority: Optional[int] = None  # Search term index (0 = highest priority)
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
         return {
@@ -415,11 +418,11 @@ class FigurativeLibrarian:
                 terms.append(t_clean)
                 seen_terms.add(t_lower)
         
-        for term in terms:
+        for term_index, term in enumerate(terms):
             remaining_slots = original_request.max_results - len(all_instances)
             if remaining_slots <= 0:
                 break
-            
+
             # Create sub-request for this specific term
             # We clear vehicle_search_terms so _execute_search uses vehicle_contains
             sub_request = replace(
@@ -428,13 +431,14 @@ class FigurativeLibrarian:
                 vehicle_contains=term,
                 max_results=remaining_slots
             )
-            
+
             # Execute search for this term
             bundle = self._execute_search(conn, sub_request)
-            
-            # Add unique instances
+
+            # Add unique instances WITH priority tag
             for inst in bundle.instances:
                 if inst.verse_id not in seen_verse_ids:
+                    inst.term_priority = term_index  # Lower index = higher priority
                     all_instances.append(inst)
                     seen_verse_ids.add(inst.verse_id)
         

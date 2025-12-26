@@ -1,7 +1,7 @@
 # Technical Architecture Summary: Psalms Commentary Pipeline
 
-**Date**: 2025-12-22
-**Version**: Enhanced Pipeline V6.2 (Phase 4, Sessions 200-220)
+**Date**: 2025-12-26
+**Version**: Enhanced Pipeline V6.3 (Phase 4, Sessions 200-222)
 **Status**: Production System with SI Pipeline, Gemini Fallback, V2 Prompts
 
 ---
@@ -185,6 +185,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Hierarchical tag matching via SQL LIKE
   - **Vehicle terms as conceptual tags, not inflected words** (Session 179): Morphological variants NOT used for vehicle searches
   - **Priority search** (Session 218): Sequential term processing for ordered search results
+  - **Priority-based sorting and trimming** (Session 222): Results tagged with `term_priority`, sorted by priority with randomization within groups, trimmed from lowest priority first
   - Vehicle and tenor-based searches
   - Metaphor family expansion
   - Usage pattern analysis
@@ -265,7 +266,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
 - **Key Features**:
   - JSON and Markdown serialization
   - Token limit management (700,000 character capacity - Session 109)
-  - **Priority-based content trimming**: Lexicon and commentary always preserved; Concordance trimmed first; Figurative trimmed second (Psalms examples prioritized)
+  - **Priority-based content trimming**: Lexicon and commentary always preserved; Related Psalms trimmed first; Figurative trimmed second (lowest-priority terms removed first, Session 222)
 
 ### 3. Hebrew Text Processing System
 
@@ -472,10 +473,11 @@ def normalize_hebrew(text: str, level: int) -> str:
 
 ## Recent Enhancements
 
-### Sessions 200-220
+### Sessions 200-222
 
 | Session | Date | Feature | Description |
 |---------|------|---------|-------------|
+| 222 | 2025-12-26 | Priority-Based Figurative Trimming | LLM-decided term priority, sorted results, lowest-priority trimmed first |
 | 220 | 2025-12-22 | Special Instruction Pipeline | Author-directed commentary revisions without altering standard pipeline |
 | 219 | 2025-12-21 | Resume Feature | `--resume` flag for automatic step detection |
 | 218 | 2025-12-21 | Figurative Priority Search | Sequential term processing, output simplification |
@@ -613,7 +615,7 @@ def normalize_hebrew(text: str, level: int) -> str:
 
 ## Future Enhancements
 
-### Completed (Sessions 105-220)
+### Completed (Sessions 105-222)
 1. ✅ ETCBC Morphology Integration (Session 105)
 2. ✅ Related Psalms Integration (Sessions 107-119)
 3. ✅ Quality Filtering (Session 111)
@@ -626,6 +628,7 @@ def normalize_hebrew(text: str, level: int) -> str:
 10. ✅ Gemini 2.5 Pro Fallback (Session 211)
 11. ✅ Master Editor V2 (Session 215)
 12. ✅ Resume Feature (Session 219)
+13. ✅ Priority-Based Figurative Trimming (Session 222)
 
 ### Planned Improvements
 1. **Figurative Language Database Utilization**: Increase from current levels to 15-25% utilization
@@ -648,7 +651,7 @@ def normalize_hebrew(text: str, level: int) -> str:
 
 The Psalms Commentary Pipeline represents a sophisticated integration of AI capabilities with traditional biblical scholarship. The system's success lies in its multi-step architecture with dual-edition output, which prevents common AI failure modes while leveraging the strengths of different models for specialized tasks.
 
-**Key Technical Achievements (V6.2 System)**:
+**Key Technical Achievements (V6.3 System)**:
 - **9 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Deep Web Research
 - **Dual-Edition Output**: Main scholarly edition + accessible college edition + combined document
 - **Flexible Master Editor**: Support for GPT-5.1 (default), GPT-5 (legacy), or Claude Opus 4.5
@@ -658,7 +661,7 @@ The Psalms Commentary Pipeline represents a sophisticated integration of AI capa
 - **Resume Feature**: `--resume` flag for automatic step detection (Session 219)
 - **V6 Statistical Analysis**: Fresh root extraction with 93.75% accuracy, 11,170 psalm pairs analyzed
 - **Enhanced Phrase Matching**: Substring matching for phrases, word order flexibility, maqqef handling (Sessions 176-180)
-- **Figurative Language Search**: Vehicle terms as hierarchical tags, priority search (Sessions 218-219)
+- **Figurative Language Search**: Vehicle terms as hierarchical tags, priority search with LLM-decided ordering, lowest-priority trimmed first (Sessions 218-222)
 - **Quality Assurance**: Multi-pass validation with quotation and punctuation verification
 
 The system demonstrates that AI can be effectively integrated into scholarly workflows when properly architected with domain expertise, technical rigor, and continuous iterative improvement based on real-world usage and feedback.

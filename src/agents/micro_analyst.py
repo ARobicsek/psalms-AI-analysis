@@ -266,12 +266,14 @@ GENERATE RESEARCH REQUESTS:
 
    **YOU MUST include SIMPLE SINGLE-WORD TERMS for every concept!**
 
-   **PRIORITY RANKING (OPTIONAL BUT RECOMMENDED)**: You can now specify a priority_ranking to indicate which terms are most important to match:
-   - Priority 1 (highest): Most important - specific phrases or key metaphors
-   - Priority 2 (medium): Important supporting terms
-   - Priority 3 (lowest): Nice-to-have variations
+   **IMPORTANT: TERM ORDER = PRIORITY**
+   The order of terms in vehicle_synonyms determines search priority:
+   - First terms are searched first and fill the results quota
+   - Later terms may be TRUNCATED if space is limited (only top 20 results kept per query)
 
-   This ensures the most relevant matches appear first when results are filtered down to 20 instances.
+   **Order your terms from MOST IMPORTANT to LEAST IMPORTANT for your analysis.**
+   Consider: Which terms best support your thesis? Which matches would be most
+   valuable for the synthesis writer to see? Put those first.
 
    **CORRECT EXAMPLE - Tree/Plant Metaphor (Psalm 1:3)**:
    ```json
@@ -292,7 +294,6 @@ GENERATE RESEARCH REQUESTS:
      }},
         }}
    ```
-   Note: SIMPLE WORDS FIRST (tree, plant, leaf, fruit, water), then phrases (tree planted, bears fruit).
 
    **CORRECT EXAMPLE - Chaff/Wind Metaphor (Psalm 1:4)**:
    ```json
@@ -312,7 +313,6 @@ GENERATE RESEARCH REQUESTS:
      }},
         }}
    ```
-   Note: SIMPLE WORDS FIRST (chaff, dust, wind, scatter, blow), then phrases.
 
    **WRONG EXAMPLE - DO NOT DO THIS**:
    ```json
@@ -325,9 +325,10 @@ GENERATE RESEARCH REQUESTS:
 
    **CHECKLIST - Every figurative_checks entry MUST have:**
    [ ] vehicle: A simple 1-2 word term (e.g., "tree", "chaff", "dust", "face")
-   [ ] vehicle_synonyms: 10-15+ terms with:
-       - At least 5-7 simple single words (tree, plant, leaf, fruit, water, flourish, grow)
-       - 3-5 short compound phrases (tree planted, bears fruit, by streams)
+   [ ] vehicle_synonyms: 10-15+ terms ORDERED BY YOUR PRIORITY:
+       - Put the most important terms for your analysis FIRST
+       - Later terms may be truncated when results are filtered
+       - Include both phrases and single words as appropriate for matching
    [ ] broader_terms: 3-5 category words (vegetation, agriculture, nature)
 
    **COMMON PSALM METAPHOR SEARCH TERMS**:

@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
 import json
+import random
 
 # Handle imports for both module and script usage
 if __name__ == '__main__':
@@ -593,6 +594,23 @@ class ResearchAssembler:
                 filtered.extend(single_word_matches[:remaining_slots])
 
             instances = filtered
+
+        # Sort by term_priority and randomize within each priority group
+        if any(hasattr(inst, 'term_priority') and inst.term_priority is not None for inst in instances):
+            # Group instances by term priority
+            priority_groups = {}
+            for inst in instances:
+                priority = getattr(inst, 'term_priority', 999)  # Unknown = lowest priority
+                if priority not in priority_groups:
+                    priority_groups[priority] = []
+                priority_groups[priority].append(inst)
+
+            # Shuffle each group and reassemble in priority order
+            instances = []
+            for priority in sorted(priority_groups.keys()):
+                group = priority_groups[priority]
+                random.shuffle(group)  # Randomize within same priority
+                instances.extend(group)
 
         # Limit to max_results
         instances = instances[:max_results]

@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-23 (Session 221)
+**Last Updated**: 2025-12-26 (Session 222)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 221
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor
+- **Current Session**: 222
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming
 
 ---
 
@@ -50,6 +50,13 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ---
 
 ## Recent Work Summary
+
+### Session 222 (2025-12-26): Priority-Based Figurative Language Sorting and Trimming
+- Updated MicroAnalyst prompt to inform LLM about term order priority and truncation consequences
+- Added `term_priority` attribute to `FigurativeInstance` class for tracking search term index
+- Implemented priority-based sorting with randomization within same priority in research assembler
+- Simplified trimming logic to remove lowest-priority instances first (removed Psalms book preference)
+- LLM now decides its own priority order based on thesis/analysis rather than prescribed order
 
 ### Session 221 (2025-12-23): Converse with Editor Script
 - Created `scripts/converse_with_editor.py` for multi-turn conversation with Master Editor about completed psalms
@@ -190,7 +197,34 @@ Fixed stats showing zeros when skipping steps:
 
 ## Session History
 
-### Sessions 200-221: Full Details
+### Sessions 200-222: Full Details
+
+#### Session 222 (2025-12-26): Priority-Based Figurative Language Sorting and Trimming
+**Objective**: Implement priority-based sorting and trimming for figurative language results
+
+**Problems Identified**:
+- Figurative results not sorted by priority within top 20 shown
+- Trimming removed arbitrary instances rather than lowest-priority ones
+- MicroAnalyst prompt prescribed arbitrary "simple words first" order instead of letting LLM decide
+
+**Solutions Implemented**:
+1. Updated `RESEARCH_REQUEST_PROMPT` in `micro_analyst.py` to inform LLM about term order = priority
+2. Added `term_priority: Optional[int]` to `FigurativeInstance` dataclass
+3. Modified `_priority_search()` in `figurative_librarian.py` to tag instances with term index
+4. Added priority grouping with randomization in `_filter_figurative_bundle()` in `research_assembler.py`
+5. Simplified `trim_figurative_by_ratio()` in `synthesis_writer.py` to take first N instances (priority-ordered)
+
+**Key Design Decisions**:
+- LLM decides priority order based on its analysis (no prescribed phrase vs word order)
+- Within same term priority, instances are randomized for variety
+- No hard-coded book preferences (removed Psalms prioritization)
+- Backward compatible with `hasattr()` checks for existing instances
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` - Updated prompt with priority/truncation awareness
+- `src/agents/figurative_librarian.py` - Added `term_priority` attribute and tagging
+- `src/agents/research_assembler.py` - Added priority sorting with randomization
+- `src/agents/synthesis_writer.py` - Simplified trimming to respect priority order
 
 #### Session 221 (2025-12-23): Converse with Editor Script
 **Objective**: Create interactive CLI tool for multi-turn conversation with Master Editor about completed psalm commentary

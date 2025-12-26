@@ -909,20 +909,10 @@ class SynthesisWriter:
                     trimmed_queries.append(query_block)
                     continue
 
-                # Prioritize Psalms instances
-                psalms_instances = [inst for inst in instances if "Psalms" in inst]
-                other_instances = [inst for inst in instances if "Psalms" not in inst]
-
+                # Instances are already sorted by priority from assembly
+                # Simply take the first target_count (highest priority first)
                 target_count = max(1, int(len(instances) * keep_ratio))
-
-                kept = []
-                if len(psalms_instances) >= target_count:
-                    kept = psalms_instances[:target_count]
-                else:
-                    kept.extend(psalms_instances)
-                    remaining = target_count - len(psalms_instances)
-                    if remaining > 0:
-                        kept.extend(other_instances[:remaining])
+                kept = instances[:target_count]
 
                 omitted = len(instances) - len(kept)
                 trimmed_block = header + '\n' + ''.join(kept)
