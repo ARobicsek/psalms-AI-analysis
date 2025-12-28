@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-26 (Session 222)
+**Last Updated**: 2025-12-28 (Session 223)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 222
+- **Current Session**: 223
 - **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming
 
 ---
@@ -50,6 +50,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ---
 
 ## Recent Work Summary
+
+### Session 223 (2025-12-28): Divine Names Modifier - שְׁדּי vs שַׁדַּי Fix
+- Fixed incorrect replacement of שְׁדּי (*shadei* = "breasts") with שְׁקֵי in Psalm 22:10
+- Added vowel check to require PATACH (U+05B7) or KAMATZ (U+05B8) under shin for divine name
+- Words with SHEVA (U+05B0) under shin (like שְׁדּי) are now correctly excluded
+- Updated test file with new test cases for Psalm 22:10 phrase
 
 ### Session 222 (2025-12-26): Priority-Based Figurative Language Sorting and Trimming
 - Updated MicroAnalyst prompt to inform LLM about term order priority and truncation consequences
@@ -197,7 +203,34 @@ Fixed stats showing zeros when skipping steps:
 
 ## Session History
 
-### Sessions 200-222: Full Details
+### Sessions 200-223: Full Details
+
+#### Session 223 (2025-12-28): Divine Names Modifier - שְׁדּי vs שַׁדַּי Fix
+**Objective**: Fix divine names modifier incorrectly replacing שְׁדּי (breasts) with שְׁקֵי
+
+**Problem Identified**:
+- Psalm 22:10 contains מַבְטִיחִי עַל־שְׁדּי אִמִּי ("made me secure on my mother's breasts")
+- Divine names modifier was replacing שְׁדּי with שְׁקֵי, treating it as the divine name שַׁדַּי
+- Existing regex checked for SHIN dot vs SIN dot but not the vowel under the shin
+
+**Root Cause Analysis**:
+- Divine name שַׁדַּי has PATACH (ַ U+05B7) or KAMATZ (ָ U+05B8) under shin
+- Word שְׁדּי (breasts) has SHEVA (ְ U+05B0) under shin
+- The regex needed to check vowels, not just shin/sin distinction
+
+**Solution Implemented**:
+1. Added positive lookahead `(?=[\u0591-\u05C7]*[\u05B7\u05B8])` requiring PATACH or KAMATZ
+2. Words with SHEVA under the shin are now correctly excluded from modification
+3. Added comprehensive test cases including Psalm 22:10 phrase
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Added vowel check to `_modify_el_shaddai()` regex (line 175)
+- `archive/development_scripts/root/test_divine_names_shin_sin.py` - Added SHIN+SHEVA test cases
+
+**Test Cases Added**:
+- שְׁדּי → שְׁדּי (breasts with SHEVA - NOT modified)
+- עַל־שְׁדּי אִמִּי → עַל־שְׁדּי אִמִּי (Psalm 22:10 phrase - NOT modified)
+- שַׁדַּי → שַׁקַּי (divine name with PATACH - modified)
 
 #### Session 222 (2025-12-26): Priority-Based Figurative Language Sorting and Trimming
 **Objective**: Implement priority-based sorting and trimming for figurative language results

@@ -20,10 +20,16 @@ def test_shin_vs_sin():
     # Test cases
     test_cases = [
         # (input, expected_output, description)
-        # SHIN cases (should be modified - divine name שַׁדַּי)
-        ('שַׁדַּי', 'שַׁקַּי', 'Divine name with SHIN - should be modified'),
+        # SHIN + PATACH cases (should be modified - divine name שַׁדַּי)
+        ('שַׁדַּי', 'שַׁקַּי', 'Divine name with SHIN+PATACH - should be modified'),
         ('וְשַׁדַּי יְבָרֵךְ אֶתְכֶם', 'וְשַׁקַּי יְבָרֵךְ אֶתְכֶם', 'Divine name with prefix - should be modified'),
         ('שדי', 'שקי', 'Completely unvoweled - should be modified (no shin/sin distinction possible)'),
+        ('וְאֵל שַׁדַּי יְבָרֵךְ', 'וְאֵל שַׁקַּי יְבָרֵךְ', 'El Shaddai phrase - should be modified'),
+
+        # SHIN + SHEVA cases (should NOT be modified - שְׁדּי = breasts, not divine name)
+        ('שְׁדּי', 'שְׁדּי', 'Word with SHIN+SHEVA (shadei=breasts) - should NOT be modified'),
+        ('עַל־שְׁדּי אִמִּי', 'עַל־שְׁדּי אִמִּי', 'Psalm 22:10 phrase (breasts) - should NOT be modified'),
+        ('מַבְטִיחִי עַל־שְׁדּי אִמִּי', 'מַבְטִיחִי עַל־שְׁדּי אִמִּי', 'Full Psalm 22:10 clause - should NOT be modified'),
 
         # SIN cases (should NOT be modified - not divine name, has שׂ not שׁ)
         ('שָׂדָֽי', 'שָׂדָֽי', 'Word with SIN (sadai) - should NOT be modified'),
