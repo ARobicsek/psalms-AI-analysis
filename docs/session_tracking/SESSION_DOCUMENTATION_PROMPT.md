@@ -91,9 +91,6 @@ Session will be considered successful if:
 - [ ] Code is committed with clear message
 
 
-
-
-
 ### Notes for Session End
 
 **Things to remember for documentation**:
@@ -103,6 +100,9 @@ Session will be considered successful if:
 - [Issues encountered and resolved]
 
 ---
+
+
+
 
 ## Session END Prompt
 

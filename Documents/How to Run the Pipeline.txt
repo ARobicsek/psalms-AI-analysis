@@ -5,8 +5,18 @@ Examples:
 # Generate complete commentary for Psalm 23
 python scripts/run_enhanced_pipeline.py 23
 
-# just the print ready compiler
-python scripts/run_formatter.py 145
+# Generate master editor commentaries using SPECIAL INSTRUCTIONS
+
+A - place special instructions here data/special_instructions/special_instructions_Psalm_019.txt
+B - python scripts/run_si_pipeline.py 19
+Note: all files preceding the master editor need to have already been created
+
+# 2. Run the SI pipeline
+python scripts/run_si_pipeline.py 19
+
+# Or with custom instruction file
+python scripts/run_si_pipeline.py 19 --special-instruction my_notes.txt
+
 
 #run with opus 4.5 as the master editor
 python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5

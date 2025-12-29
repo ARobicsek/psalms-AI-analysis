@@ -530,12 +530,17 @@ Focus on searches that will help answer: WHY did the poet choose THIS specific v
             psalm_lines.append(f"v{verse_num}: {hebrew[:60]}... | {english[:80]}...")
         psalm_formatted = "\n".join(psalm_lines)
 
-        # Format all results
+        # Format all results and track which vehicles have results
         all_results_formatted = []
+        vehicles_with_results = []
         for vehicle, bundle in all_results.items():
             if bundle.instances:
+                vehicles_with_results.append(f"{vehicle} ({len(bundle.instances)})")
                 all_results_formatted.append(f"\n### '{vehicle}' ({len(bundle.instances)} results)\n")
                 all_results_formatted.append(self._format_instances_for_prompt(bundle.instances, max_per_query=12))
+
+        vehicles_summary = ", ".join(vehicles_with_results)
+        num_vehicles_with_results = len(vehicles_with_results)
 
         prompt = f"""You are synthesizing insights about the figurative language of Psalm {psalm_number}.
 
@@ -545,48 +550,72 @@ Focus on searches that will help answer: WHY did the poet choose THIS specific v
 ## ALL SEARCH RESULTS FROM FIGURATIVE CONCORDANCE
 {''.join(all_results_formatted)}
 
+## VEHICLES WITH RESULTS: {num_vehicles_with_results}
+{vehicles_summary}
+
 ## PHASE 1 ANALYSIS (for context)
 Key elements: {json.dumps(phase1_analysis.get('analysis', {}).get('key_figurative_elements', []), indent=2)}
 
 ## YOUR TASK: SYNTHESIZE FIGURATIVE INSIGHTS
 
-Based on ALL the concordance data, generate:
+Based on ALL the concordance data, generate comprehensive output. You MUST be thorough.
 
-### 1. CURATED EXAMPLES BY VEHICLE (5-15 examples per major vehicle)
-For EACH major vehicle in Psalm {psalm_number}, select the 5-15 most illuminating examples from the concordance results.
-Group examples by vehicle. For each example, ALWAYS include:
+### 1. CURATED EXAMPLES BY VEHICLE
+
+**CRITICAL REQUIREMENTS:**
+- Provide curated examples for **ALL vehicles that returned results** (you have {num_vehicles_with_results} vehicles with results - provide examples for ALL of them, not just 5)
+- Each vehicle should have **5-15 examples** - this is PER VEHICLE, not total
+- If you searched for it and got results, you MUST include curated examples for it
+- Do NOT skip vehicles just because they seem minor - even 3-5 examples from minor vehicles help
+
+**ESPECIALLY IMPORTANT:**
+- If the psalm has a TITLE with figurative language (e.g., "hind of the dawn" in Ps 22), you MUST analyze that vehicle thoroughly
+- Title imagery often sets the interpretive key for the entire psalm
+
+For each example, ALWAYS include:
 - The Hebrew text (both the figurative phrase AND the full verse if available)
 - Why this example illuminates the psalm's use of this vehicle
 
 The number of examples per vehicle should reflect usefulness:
-- 5-7 examples: If the vehicle is minor or examples are repetitive
-- 8-12 examples: For major vehicles with diverse, illuminating parallels
-- 12-15 examples: For central vehicles (like "shepherd" in Ps 23) where the range of usage is critical
+- 5-7 examples: For vehicles with fewer results or more repetitive patterns
+- 8-12 examples: For vehicles with diverse, illuminating parallels
+- 12-15 examples: For central/controlling vehicles where the range of usage is critical
 
-### 2. FIGURATIVE INSIGHTS (3-5 prose paragraphs)
-Write 3-5 substantial insights (100-150 words each) that a commentary writer could directly incorporate. Each insight should:
+### 2. FIGURATIVE INSIGHTS
+
+**CRITICAL REQUIREMENTS:**
+- Provide **4-5 insights** (aim for 5) - three is NOT enough for thorough analysis
+- Each insight should be **100-150 words** (substantial paragraphs, not brief notes)
+- Cover different aspects of the psalm's figurative language - don't cluster all insights around one verse
+
+Each insight should:
 - Identify a specific figurative element in Psalm {psalm_number}
-- Show what the concordance reveals about this vehicle's usage elsewhere
+- Show what the concordance reveals about this vehicle's usage elsewhere in Scripture
 - Explain what the poet's CHOICE of this vehicle tells us
-- Answer: "Why this and not alternatives?"
+- Answer: "Why this vehicle and not alternatives?"
 
-Focus on questions like:
+**Topics to consider for insights:**
 - Why this specific vehicle rather than alternatives used for similar targets?
 - What ground is being activated that other vehicles would not provide?
 - How does this vehicle's usage elsewhere illuminate its meaning here?
-- Are there surprising patterns, absences, or transformations?
+- Are there surprising patterns, absences, or INVERSIONS of typical usage?
+- How do vehicle transitions within the psalm create meaning?
+- Does the title imagery connect to the body of the psalm?
 
 ### 3. FIGURATIVE STRUCTURE SUMMARY
-Create a summary of the psalm's figurative architecture. This should show how vehicles relate to each other and to the psalm's movement.
 
-**Be creative and adapt the format to the psalm's actual structure:**
-- For psalms with a clear journey/progression (like Ps 23): Show the movement from one vehicle domain to another
-- For psalms with contrasting pairs (e.g., wicked vs. righteous): Show the binary opposition of vehicle clusters
-- For psalms with a single dominant metaphor: Show how the metaphor is developed and varied
-- For psalms with chiastic structure: Show how vehicles mirror each other around a center
-- For psalms with thematic clustering: Group vehicles by the domain they illuminate
+**CRITICAL: Choose the structure_type that ACTUALLY fits this psalm:**
 
-The key is to reveal the psalm's figurative LOGIC - how do the metaphors work together?
+- **"descent"** or **"descent_ascent"**: For psalms that move from despair to hope, or from danger to deliverance (e.g., Ps 22 moves from abandonment → dissolution → predators → eventual rescue)
+- **"contrast"**: For psalms with binary opposition (wicked vs. righteous, death vs. life, enemies vs. God)
+- **"journey"**: For psalms with clear spatial/temporal progression (e.g., Ps 23: pasture → valley → table → house)
+- **"dominant_metaphor"**: When one vehicle controls the entire psalm
+- **"chiastic"**: When vehicles mirror around a center point
+- **"thematic_clusters"**: When vehicles group by domain rather than sequence
+- **"lament_structure"**: Complaint → petition → confidence → praise
+- **"other"**: With explanation
+
+Do NOT default to "journey" just because it's the example. Analyze what THIS psalm actually does with its figurative language.
 
 Return as JSON:
 
@@ -611,10 +640,10 @@ Return as JSON:
         "reason_selected": "Shepherd actively seeking lost sheep - illuminates 'he leads me' in Ps 23:2-3"
       }}
     ],
-    "table": [
+    "hind": [
       {{
-        "reference": "Ezekiel 39:20",
-        "type": "metaphor",
+        "reference": "...",
+        "type": "...",
         "figurative_text_english": "...",
         "figurative_text_hebrew": "...",
         "full_verse_hebrew": "...",
@@ -625,24 +654,52 @@ Return as JSON:
   "figurative_insights": [
     {{
       "title": "Why Shepherd Over King?",
-      "insight": "The concordance reveals...",
+      "insight": "The concordance reveals... [100-150 words of substantive analysis]",
       "verses_addressed": ["23:1"]
+    }},
+    {{
+      "title": "Second Insight Title",
+      "insight": "[100-150 words]...",
+      "verses_addressed": ["..."]
+    }},
+    {{
+      "title": "Third Insight Title",
+      "insight": "[100-150 words]...",
+      "verses_addressed": ["..."]
+    }},
+    {{
+      "title": "Fourth Insight Title",
+      "insight": "[100-150 words]...",
+      "verses_addressed": ["..."]
+    }},
+    {{
+      "title": "Fifth Insight Title",
+      "insight": "[100-150 words]...",
+      "verses_addressed": ["..."]
     }}
   ],
   "vehicle_map": {{
-    "structure_type": "journey|contrast|dominant_metaphor|chiastic|thematic_clusters|other",
-    "structure": "shepherd (vv1-4) → host (v5) → permanent dweller (v6)",
-    "structure_meaning": "Movement from pastoral dependence through royal banquet to temple presence",
+    "structure_type": "descent|descent_ascent|contrast|journey|dominant_metaphor|chiastic|thematic_clusters|lament_structure|other",
+    "structure": "[describe the actual structure, e.g., 'abandonment (vv1-2) → bodily dissolution (vv14-15) → predator attack (vv12-13, 16-18) → deliverance hope (vv19-31)']",
+    "structure_meaning": "[what this structure communicates about the psalm's theology/message]",
     "key_elements": [
       {{
-        "element": "shepherd/sheep → host/guest transition",
-        "location": "v5",
-        "significance": "Shift from animal to human status; from wilderness to civilization"
+        "element": "[specific vehicle transition or cluster]",
+        "location": "[verse(s)]",
+        "significance": "[why this matters]"
       }}
     ]
   }}
 }}
 ```
+
+**FINAL CHECKLIST before responding:**
+- [ ] Did I include curated examples for ALL {num_vehicles_with_results} vehicles that had results?
+- [ ] Does each vehicle have 5-15 examples (not 15 total)?
+- [ ] Did I provide 4-5 insights (preferably 5)?
+- [ ] Is each insight 100-150 words?
+- [ ] Did I analyze title imagery if present?
+- [ ] Does my structure_type actually match THIS psalm's pattern?
 
 IMPORTANT: For EVERY curated example, include BOTH the Hebrew figurative phrase AND the full Hebrew verse. The Hebrew text is essential for scholarly commentary.
 
@@ -1221,11 +1278,19 @@ Examples:
     # Format and output results
     formatted = format_output(output)
 
+    # Determine output path - auto-save to output/psalm_N/ by default
     if args.output:
         output_path = Path(args.output)
-        output_path.write_text(formatted, encoding='utf-8')
-        print(f"\nOutput written to: {output_path}")
     else:
+        # Auto-save to output/psalm_N/figurative_curator_output.md
+        output_dir = PROJECT_ROOT / "output" / f"psalm_{args.psalm:02d}"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        output_path = output_dir / "figurative_curator_output.md"
+
+    output_path.write_text(formatted, encoding='utf-8')
+    print(f"\nOutput written to: {output_path}")
+
+    if args.verbose:
         print("\n" + "=" * 60)
         print(formatted)
 

@@ -9,30 +9,31 @@ The **Figurative Curator** is an LLM-enhanced agent that transforms raw figurati
 1. Execute searches against the figurative language database
 2. Iteratively refine searches based on results
 3. Curate 5-15 examples per vehicle with Hebrew text
-4. Synthesize prose insights for commentary writers
+4. Synthesize 4-5 prose insights for commentary writers
 
 ## Current Location
 
 - **Test script**: `scripts/test_figurative_curator.py`
 - **Figurative DB**: `C:/Users/ariro/OneDrive/Documents/Bible/database/Biblical_fig_language.db`
 - **Hebrew source**: `database/tanakh.db`
+- **Output**: `output/psalm_NN/figurative_curator_output.md` (auto-saved)
 
 ## Running the Test Script
 
 ```bash
-# Basic usage (Psalm 23)
-python scripts/test_figurative_curator.py
+# Basic usage (Psalm 23) - outputs to output/psalm_23/figurative_curator_output.md
+python scripts/test_figurative_curator.py --psalm 23
 
 # Different psalm
 python scripts/test_figurative_curator.py --psalm 22
 
 # Dry run (no LLM calls, shows prompts)
-python scripts/test_figurative_curator.py --dry-run
+python scripts/test_figurative_curator.py --psalm 23 --dry-run
 
 # Verbose output
-python scripts/test_figurative_curator.py --verbose
+python scripts/test_figurative_curator.py --psalm 22 --verbose
 
-# Save to specific file
+# Save to specific file (overrides auto-save location)
 python scripts/test_figurative_curator.py --psalm 23 --output output/psalm_23/curator_output.md
 ```
 
@@ -65,9 +66,9 @@ FigurativeCurator          - Main agent class
    - Thinking budget: 4096 tokens per review
 
 4. PHASE 2: SYNTHESIS
-   - Curate 5-15 examples per vehicle
-   - Write 3-5 prose insights
-   - Generate figurative structure summary
+   - Curate 5-15 examples per vehicle (for ALL vehicles with results)
+   - Write 4-5 prose insights (100-150 words each)
+   - Generate figurative structure summary with appropriate structure_type
    - Thinking budget: 12288 tokens
 ```
 
@@ -83,7 +84,7 @@ The curator tracks precise costs using Gemini 3 Pro pricing:
 
 Cost is accumulated per LLM call and stored in `token_usage["cost"]`.
 
-Typical run: ~$0.15-0.25 per psalm.
+Typical run: ~$0.30-0.50 per psalm (with comprehensive output).
 
 ## Key Configuration Constants
 
@@ -101,8 +102,8 @@ FOLLOWUP_SEARCH_CAP = 30     # Results per follow-up search
 | Field | Type | Description |
 |-------|------|-------------|
 | `psalm_number` | int | The psalm analyzed |
-| `curated_examples_by_vehicle` | Dict[str, List] | 5-15 examples per vehicle |
-| `figurative_insights` | List[Dict] | 3-5 prose insights |
+| `curated_examples_by_vehicle` | Dict[str, List] | 5-15 examples per vehicle (ALL vehicles) |
+| `figurative_insights` | List[Dict] | 4-5 prose insights (100-150 words each) |
 | `search_summary` | Dict | Search stats + vehicle_map |
 | `iteration_log` | List[Dict] | Debug log of each iteration |
 | `token_usage` | Dict | input, output, thinking, cost |
@@ -123,24 +124,94 @@ FOLLOWUP_SEARCH_CAP = 30     # Results per follow-up search
 
 ### Figurative Structure Summary
 
-The `vehicle_map` field adapts to psalm structure:
+The `vehicle_map` field adapts to psalm structure. Available structure types:
 
+| Structure Type | When to Use |
+|---------------|-------------|
+| `journey` | Clear spatial/temporal progression (Ps 23: pasture → valley → table → house) |
+| `descent` | Movement from suffering to deeper suffering |
+| `descent_ascent` | From despair to hope, danger to deliverance (Ps 22) |
+| `contrast` | Binary opposition (wicked vs. righteous, death vs. life) |
+| `dominant_metaphor` | One vehicle controls entire psalm |
+| `chiastic` | Vehicles mirror around a center point |
+| `thematic_clusters` | Vehicles group by domain rather than sequence |
+| `lament_structure` | Complaint → petition → confidence → praise |
+| `other` | With explanation |
+
+Example for Psalm 22 (descent_ascent):
 ```json
 {
-  "structure_type": "journey|contrast|dominant_metaphor|chiastic|thematic_clusters|other",
-  "structure": "shepherd (vv1-4) → host (v5) → permanent dweller (v6)",
-  "structure_meaning": "Movement from pastoral dependence to temple presence",
+  "structure_type": "descent_ascent",
+  "structure": "Abandonment (v2) → Bodily Dissolution (vv15-16) → Predator Attack (vv13-18) → Deliverance Hope (vv19-31)",
+  "structure_meaning": "Figurative language tracks descent into animalistic noise and physical disintegration, followed by sudden restoration",
   "key_elements": [
     {
-      "element": "shepherd/sheep → host/guest transition",
-      "location": "v5",
-      "significance": "Shift from animal to human status"
+      "element": "Roaring (Human vs Beast)",
+      "location": "vv2, 14",
+      "significance": "Blurring of human/animal lines in suffering"
     }
   ]
 }
 ```
 
 ## Integration into Main Pipeline
+
+### CRITICAL Integration Reminders
+
+Before integrating the Figurative Curator, address these three items:
+
+#### 1. Remove Figurative Trimming Logic
+
+The research bundle currently has trimming logic that reduces the size of figurative output when the bundle is too large. **This must be removed** for curator output since the data is now pre-curated by the LLM.
+
+**Files to check:**
+- `src/research/research_assembler.py` - Look for figurative trimming/truncation code
+- Any bundle size limiting that affects figurative data
+
+**Why:** The curator's output is already optimized (5-15 curated examples per vehicle, 4-5 prose insights). Trimming this would destroy the carefully selected examples.
+
+#### 2. Incorporate Cost Tracking into Final Cost Tracker
+
+The curator returns precise cost in `token_usage["cost"]`. This must be added to the pipeline's total cost tracking.
+
+**Files to modify:**
+- `scripts/run_enhanced_pipeline.py` - Add curator cost to total
+- `scripts/cost_report.py` - Include "Figurative Curator" as a line item
+
+**Example:**
+```python
+pipeline_costs["figurative_curator"] = curator_output.token_usage.get("cost", 0.0)
+pipeline_costs["total"] += pipeline_costs["figurative_curator"]
+```
+
+#### 3. Update Methods Section in Word Documents
+
+The three Word documents we produce have a "Methods" section that enumerates figurative parallels reviewed. **Update this to show ALL results the curator considered**, not just the curated examples.
+
+**Current format (inadequate):**
+> "We reviewed figurative parallels for shepherd, table, and cup imagery."
+
+**New format (use `search_summary.results_by_vehicle`):**
+> "Figurative Parallels Reviewed:
+> - **hind**: 28 results
+> - **roaring**: 42 results
+> - **worm**: 22 results
+> - **bulls**: 18 results
+> - **lion**: 50 results
+> - **water**: 50 results
+> - *(etc.)*"
+
+**Data source:** `curator_output.search_summary["results_by_vehicle"]` contains a dict like:
+```python
+{
+  "hind": 28,
+  "roaring": 42,
+  "worm": 22,
+  # ...
+}
+```
+
+---
 
 ### Step 1: Create Production Module
 
@@ -227,12 +298,14 @@ def build_prompt(self, bundle):
 
 Before integration, verify:
 
-- [ ] Test on Psalm 23 (journey structure) - should produce ~5 insights
-- [ ] Test on Psalm 22 (contrast structure) - should adapt vehicle_map
+- [x] Test on Psalm 23 (journey structure) - should produce 4-5 insights, ~10 vehicle groups
+- [x] Test on Psalm 22 (descent_ascent structure) - should produce 5 insights, 15 vehicle groups, ~75 curated examples
 - [ ] Test on Psalm 1 (binary contrast) - should identify wicked/righteous opposition
-- [ ] Verify Hebrew text retrieval works for all book name formats
-- [ ] Check cost tracking produces accurate totals
-- [ ] Confirm no boolean syntax in LLM search requests (e.g., "rod OR staff" should fail)
+- [x] Verify Hebrew text retrieval works for all book name formats (Roman numerals for tanakh.db)
+- [x] Check cost tracking produces accurate totals (~$0.30-0.50 per psalm)
+- [x] Confirm no boolean syntax in LLM search requests (e.g., "rod OR staff" should fail)
+- [x] Verify title imagery is analyzed when present (e.g., "hind of the dawn" in Ps 22)
+- [x] Confirm structure_type is appropriate (not defaulting to "journey")
 
 ## Common Issues
 
@@ -291,9 +364,22 @@ class ResearchAssembler:
 
 ## Next Steps
 
-1. Run test script on several psalms to validate output quality
-2. Extract production class to `src/agents/`
+1. ~~Run test script on several psalms to validate output quality~~ ✓ (Ps 22, 23 tested)
+2. Extract production class to `src/agents/figurative_curator.py`
 3. Add unit tests in `tests/test_figurative_curator.py`
-4. Integrate with research assembler
-5. Update synthesis prompts to use curator insights
-6. Add to pipeline cost tracking
+4. **Remove figurative trimming logic from research assembler** (CRITICAL)
+5. Integrate with research assembler
+6. **Add curator cost to pipeline cost tracking** (CRITICAL)
+7. Update synthesis prompts to use curator insights
+8. **Update Word doc Methods section to list all results reviewed** (CRITICAL)
+
+## Session Notes
+
+**Session 225 (2025-12-29):** Improved Phase 2 prompt to produce more thorough output:
+- Increased insight requirement from 3-5 to 4-5 (aim for 5)
+- Added explicit requirement for curated examples from ALL vehicles with results
+- Emphasized 5-15 examples is PER VEHICLE (not total)
+- Added title imagery analysis requirement (e.g., "hind of the dawn")
+- Expanded structure_type options (added descent, descent_ascent, lament_structure)
+- Added final checklist for LLM to verify completeness
+- Ps 22 now produces: 5 insights, 15 vehicle groups, 75 curated examples, correct "descent_ascent" structure
