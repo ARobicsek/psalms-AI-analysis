@@ -98,6 +98,14 @@ PRICING = {
         "cache_read": 0.30,  # 10% of input (approximate)
         "cache_write": 3.75,  # 25% markup (approximate)
     },
+    # Gemini 3.0 Pro (Google)
+    "gemini-3-pro-preview": {
+        "input": 2.00,
+        "output": 12.00,
+        "thinking": 12.00,  # Thinking tokens charged at output rate
+        "cache_read": 0.0,  # Not applicable yet
+        "cache_write": 0.0,  # Not applicable yet
+    },
 }
 
 

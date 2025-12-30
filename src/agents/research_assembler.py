@@ -22,7 +22,7 @@ import sys
 import logging
 from pathlib import Path
 from typing import List, Dict, Optional, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import json
 import random
 
@@ -39,6 +39,7 @@ if __name__ == '__main__':
     from src.agents.hirsch_librarian import HirschLibrarian, HirschCommentary
     from src.agents.rag_manager import RAGManager, RAGContext
     from src.agents.related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
+    from src.agents.figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
@@ -50,6 +51,7 @@ else:
     from .hirsch_librarian import HirschLibrarian, HirschCommentary
     from .rag_manager import RAGManager, RAGContext
     from .related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
+    from .figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
 
 
 @dataclass
@@ -120,6 +122,11 @@ class ResearchBundle:
     deep_research_content: Optional[str] = None  # Raw content from deep research file
     deep_research_included: bool = False  # Whether deep research was included in final bundle
     deep_research_removed_for_space: bool = False  # Whether it was removed due to character limits
+    # Figurative Curator (LLM-enhanced figurative insights)
+    figurative_curator_output: Optional[FigurativeCuratorOutput] = None  # Curated figurative insights from Gemini 3 Pro
+    
+    # Track models used by sub-agents
+    models_used: Dict[str, str] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -149,7 +156,8 @@ class ResearchBundle:
                 'deep_research_included': self.deep_research_included,
                 'deep_research_removed_for_space': self.deep_research_removed_for_space,
                 'deep_research_chars': len(self.deep_research_content) if self.deep_research_content else 0
-            }
+            },
+            'models_used': self.models_used
         }
 
     def to_json(self) -> str:
@@ -295,7 +303,66 @@ class ResearchBundle:
                     md += "---\n\n"
 
         # Figurative language section
-        if self.figurative_bundles:
+        # If curator output is available, use that instead of raw instances
+        if self.figurative_curator_output:
+            md += "## Figurative Language Insights (Curated)\n\n"
+            curator = self.figurative_curator_output
+
+            # Add search summary
+            md += f"*Searches performed*: {curator.search_summary.get('initial_searches', 0)} initial, "
+            md += f"{curator.search_summary.get('total_iterations', 1)} iterations  \n"
+            md += f"*Total results reviewed*: {curator.search_summary.get('total_results', 0)}  \n"
+            md += f"*Vehicles analyzed*: {', '.join(curator.search_summary.get('vehicles_searched', []))}  \n\n"
+
+            # Results by vehicle (for Methods section tracking)
+            if curator.search_summary.get('results_by_vehicle'):
+                md += "**Figurative Parallels Reviewed**:\n"
+                for vehicle, count in sorted(curator.search_summary['results_by_vehicle'].items()):
+                    md += f"- **{vehicle}**: {count} results\n"
+                md += "\n"
+
+            # Add figurative insights
+            if curator.figurative_insights:
+                md += "### Prose Insights\n\n"
+                for i, insight in enumerate(curator.figurative_insights, 1):
+                    title = insight.get('title', f'Insight {i}')
+                    text = insight.get('insight', '')
+                    verses = insight.get('verses_addressed', [])
+
+                    md += f"#### {i}. {title}\n"
+                    if verses:
+                        md += f"*Addresses verses*: {', '.join(verses)}  \n\n"
+                    md += f"{text}\n\n"
+                    md += "---\n\n"
+
+            # Add curated examples by vehicle
+            if curator.curated_examples_by_vehicle:
+                md += "### Curated Examples by Vehicle\n\n"
+                for vehicle, examples in curator.curated_examples_by_vehicle.items():
+                    md += f"#### Vehicle: {vehicle.upper()} ({len(examples)} curated examples)\n\n"
+
+                    for i, ex in enumerate(examples, 1):
+                        ref = ex.get('reference', 'Unknown')
+                        fig_type = ex.get('type', '?')
+                        text_en = ex.get('figurative_text_english', ex.get('figurative_text', ''))
+                        text_he = ex.get('figurative_text_hebrew', '')
+                        full_verse_he = ex.get('full_verse_hebrew', '')
+                        reason = ex.get('reason_selected', '')
+
+                        md += f"**{i}. {ref}** ({fig_type})  \n"
+                        if text_en:
+                            md += f"*English*: {text_en}  \n"
+                        if text_he:
+                            md += f"*Hebrew phrase*: {text_he}  \n"
+                        if full_verse_he and full_verse_he != text_he:
+                            md += f"*Full verse*: {full_verse_he}  \n"
+                        if reason:
+                            md += f"*Why selected*: {reason}  \n"
+                        md += "\n"
+
+                    md += "---\n\n"
+
+        elif self.figurative_bundles:
             md += "## Figurative Language Instances\n\n"
             for i, bundle in enumerate(self.figurative_bundles, 1):
                 md += f"### Query {i}\n"
@@ -478,6 +545,11 @@ class ResearchBundle:
         md += f"- **Liturgical total occurrences**: {summary['liturgical_total_occurrences']}\n"
         md += f"- **Related psalms analyzed**: {summary['related_psalms']}\n"
         md += f"- **Deep web research included**: {'Yes' if summary['deep_research_included'] else 'No'}\n"
+        
+        if self.models_used:
+            md += "\n### Models Used in Research\n"
+            for agent, model in self.models_used.items():
+                md += f"- **{agent.replace('_', ' ').title()}**: {model}\n"
 
         return md
 
@@ -621,7 +693,7 @@ class ResearchAssembler:
             request=bundle.request
         )
 
-    def __init__(self, use_llm_summaries: bool = True, cost_tracker=None):
+    def __init__(self, use_llm_summaries: bool = True, cost_tracker=None, use_figurative_curator: bool = True):
         """
         Initialize Research Assembler with all librarian agents.
 
@@ -629,6 +701,8 @@ class ResearchAssembler:
             use_llm_summaries: Enable LLM-powered liturgical summaries (Claude Haiku 4.5).
                              Requires ANTHROPIC_API_KEY environment variable.
             cost_tracker: CostTracker instance for tracking API costs
+            use_figurative_curator: Enable Figurative Curator for LLM-enhanced insights (Gemini 3 Pro).
+                                   Requires GEMINI_API_KEY environment variable. Default: True.
         """
         self.logger = logging.getLogger(__name__)
         self.bdb_librarian = BDBLibrarian()
@@ -642,6 +716,19 @@ class ResearchAssembler:
         self.rag_manager = RAGManager()  # Phase 2d: RAG document manager
         self.related_psalms_librarian = RelatedPsalmsLibrarian(connections_file='data/analysis_results/top_550_connections_v6.json')  # Related psalms from top connections
         self.related_psalms_librarian.logger = self.logger  # Pass logger for debug output
+
+        # Figurative Curator for LLM-enhanced figurative insights (Session 226)
+        self.use_figurative_curator = use_figurative_curator
+        self.figurative_curator = None
+        if use_figurative_curator:
+            try:
+                self.figurative_curator = FigurativeCurator(verbose=False)
+                if self.logger:
+                    self.logger.info("Figurative Curator enabled (Gemini 3 Pro)")
+            except Exception as e:
+                if self.logger:
+                    self.logger.warning(f"Figurative Curator initialization failed: {e}. Falling back to standard figurative output.")
+                self.use_figurative_curator = False
 
         # Deep research directory path (resolved relative to project root)
         self._deep_research_dir = Path(__file__).parent.parent.parent / 'data' / 'deep_research'
@@ -741,6 +828,40 @@ class ResearchAssembler:
                     filtered_bundles.append(filtered_bundle)
                 figurative_bundles = filtered_bundles
 
+        # Curate figurative insights with Figurative Curator (if enabled)
+        figurative_curator_output = None
+        if self.use_figurative_curator and self.figurative_curator and request.figurative_requests:
+            try:
+                # Convert FigurativeRequest objects to FigurativeSearchRequest objects
+                curator_requests = []
+                for fig_req in request.figurative_requests:
+                    curator_req = FigurativeSearchRequest(
+                        vehicle_contains=fig_req.vehicle_contains or "",
+                        vehicle_search_terms=fig_req.vehicle_search_terms or [],
+                        notes=fig_req.notes or ""
+                    )
+                    curator_requests.append(curator_req)
+
+                if self.logger:
+                    self.logger.info(f"Curating figurative insights for Psalm {request.psalm_chapter} with {len(curator_requests)} search requests...")
+
+                # Run the curator
+                figurative_curator_output = self.figurative_curator.curate(
+                    psalm_number=request.psalm_chapter,
+                    micro_analyst_requests=curator_requests
+                )
+
+                if self.logger and figurative_curator_output:
+                    total_examples = sum(len(exs) for exs in figurative_curator_output.curated_examples_by_vehicle.values())
+                    cost = figurative_curator_output.token_usage.get("cost", 0.0)
+                    self.logger.info(f"Curator produced {len(figurative_curator_output.figurative_insights)} insights, "
+                                   f"{total_examples} curated examples across {len(figurative_curator_output.curated_examples_by_vehicle)} vehicles. "
+                                   f"Cost: ${cost:.4f}")
+            except Exception as e:
+                if self.logger:
+                    self.logger.error(f"Figurative Curator failed: {e}. Falling back to standard figurative output.")
+                figurative_curator_output = None
+
         # Fetch traditional commentaries
         commentary_bundles = None
         if request.commentary_requests:
@@ -808,6 +929,14 @@ class ResearchAssembler:
         # Load deep research content (Gemini Deep Research output) if available
         deep_research_content = self._load_deep_research(request.psalm_chapter)
 
+        # Collect models used
+        models_used = {}
+        if self.liturgical_librarian:
+            models_used['liturgical_librarian'] = self.liturgical_librarian.active_model
+        
+        if self.use_figurative_curator and self.figurative_curator and figurative_curator_output:
+            models_used['figurative_curator'] = self.figurative_curator.active_model
+
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,
             lexicon_bundle=lexicon_bundle,
@@ -828,7 +957,10 @@ class ResearchAssembler:
             # Deep research - initially included if available, may be removed for space later
             deep_research_content=deep_research_content,
             deep_research_included=bool(deep_research_content),
-            deep_research_removed_for_space=False
+            deep_research_removed_for_space=False,
+            # Figurative curator - LLM-enhanced insights (Session 226)
+            figurative_curator_output=figurative_curator_output,
+            models_used=models_used
         )
 
     def assemble_from_json(self, json_str: str) -> ResearchBundle:

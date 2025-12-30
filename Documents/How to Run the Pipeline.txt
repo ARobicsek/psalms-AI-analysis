@@ -18,11 +18,17 @@ python scripts/run_si_pipeline.py 19
 python scripts/run_si_pipeline.py 19 --special-instruction my_notes.txt
 
 
+# have a conversation with the master editor
+  python scripts/converse_with_editor.py 19
+  python scripts/converse_with_editor.py 19 --edition college
+  python scripts/converse_with_editor.py 23 --edition main
+
+
 #run with opus 4.5 as the master editor
 python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
 
 # skip everything
-python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
+python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
 
 # resume for where the pipeline left off
 python scripts/run_enhanced_pipeline.py 9 --resume
@@ -86,26 +92,10 @@ python scripts/run_enhanced_pipeline.py 1 --skip-macro --skip-micro
 # Skip master editing (use existing synthesis)
 python scripts/run_enhanced_pipeline.py 2 --skip-master-edit
 
-# Adjust rate limit delay (default is 120 seconds)
-python scripts/run_enhanced_pipeline.py 100 --delay 60
-What the pipeline does:
-STEP 1: Macro Analysis - Structural thesis generation
-STEP 2: Micro Analysis - Discovery-driven research with enhanced figurative language search
-STEP 3: Synthesis - Introduction + verse-by-verse commentary
-STEP 4: Master Editor (GPT-5) - Editorial review and revision to "National Book Award" level
-STEP 5: Print-Ready Formatting - Final output with Hebrew/English text and divine names modifications
-Output files created (in output/test_psalm_NNN/ by default):
-psalm_NNN_macro.json - Structural analysis
-psalm_NNN_micro_v2.json - Discovery notes
-psalm_NNN_research_v2.md - Research bundle (lexicon, concordance, figurative, commentary)
-psalm_NNN_synthesis_intro.md - Introduction (pre-edit)
-psalm_NNN_synthesis_verses.md - Verse commentary (pre-edit)
-psalm_NNN_assessment.md - Editorial assessment
-psalm_NNN_edited_intro.md - Revised introduction
-psalm_NNN_edited_verses.md - Revised verses
-psalm_NNN_print_ready.md - FINAL OUTPUT for Word
-Key features:
-Automatic rate limiting (120-second delays between API-heavy steps by default)
-Skip flags to resume from any step
-All intermediate files saved for review
-UTF-8 handling for Hebrew text
+# testing for figurative librarian
+python scripts/test_figurative_curator.py                    # Default: Psalm 23
+python scripts/test_figurative_curator.py --psalm 22         # Different psalm
+python scripts/test_figurative_curator.py --dry-run          # See prompts, no LLM
+python scripts/test_figurative_curator.py --verbose          # Detailed progress
+
+

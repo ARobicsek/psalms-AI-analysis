@@ -140,6 +140,20 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         if deep_match:
             stats['deep_research_chars'] = len(deep_match.group(1))
 
+    # Check for Models Used section (new in Phase 4)
+    models_used = {}
+    models_section = re.search(r'### Models Used in Research(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
+    if models_section:
+        section_text = models_section.group(1)
+        # Match lines like "- **Liturgical Librarian**: gemini-2.5-pro"
+        model_matches = re.findall(r'- \*\*(.*?)\*\*: (.*?)(?:\n|$)', section_text)
+        for agent, model in model_matches:
+            # Normalize agent name to key format (Liturgical Librarian -> liturgical_librarian)
+            agent_key = agent.lower().replace(' ', '_')
+            models_used[agent_key] = model.strip()
+    
+    stats['models_used'] = models_used
+
     return stats
 
 
@@ -539,6 +553,12 @@ def run_enhanced_pipeline(
             len(research_bundle_text) // 3  # Estimate ~3 chars per token
         )
 
+        # Track models used by sub-agents (Liturgical Librarian, Figurative Curator)
+        if hasattr(research_bundle, 'models_used') and research_bundle.models_used:
+            for agent, model in research_bundle.models_used.items():
+                tracker.track_model_for_step(agent, model)
+            logger.info(f"Tracked research models: {research_bundle.models_used}")
+
         # Track micro questions
         if micro_analysis.interesting_questions:
             tracker.track_micro_questions(micro_analysis.interesting_questions)
@@ -602,6 +622,12 @@ def run_enhanced_pipeline(
             tracker.research.deep_research_available = research_stats['deep_research_available']
             tracker.research.deep_research_included = research_stats['deep_research_available']  # If available, it was included
             tracker.research.deep_research_chars = research_stats['deep_research_chars']
+
+            # Track models used in research (extracted from markdown)
+            if research_stats.get('models_used'):
+                for agent, model in research_stats['models_used'].items():
+                    tracker.track_model_for_step(agent, model)
+                logger.info(f"Extracted research models from markdown: {research_stats['models_used']}")
 
             # Track research bundle size
             tracker.research.research_bundle_chars = len(research_bundle_content)

@@ -100,6 +100,7 @@ data/hirsch_*/
 
 data/liturgy.db
 
-# Stop tracking all output and logs
+# Stop tracking all output and logs and data directories
 output/
 logs/
+data/

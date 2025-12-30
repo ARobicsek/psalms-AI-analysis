@@ -289,6 +289,19 @@ class LiturgicalLibrarian:
                 print("[WARNING] No LLM provider available (tried Gemini and Claude). Using code-only summaries.")
                 self.use_llm_summaries = False
 
+    @property
+    def active_model(self) -> str:
+        """Return the name of the active LLM model."""
+        if not self.use_llm_summaries:
+            return "None (Code-only)"
+        
+        if self.llm_provider == 'gemini':
+            return "gemini-2.5-pro"
+        elif self.llm_provider == 'anthropic':
+            return "claude-sonnet-4-5"
+        else:
+            return "None"
+
     def _enforce_rate_limit(self):
         """
         Enforce rate limiting between API calls to avoid burst requests.

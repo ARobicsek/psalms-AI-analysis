@@ -362,16 +362,29 @@ class ResearchAssembler:
 +           bundle.figurative_curator_output = curator_output
 ```
 
-## Next Steps
+## Next Steps (Integration Status)
 
 1. ~~Run test script on several psalms to validate output quality~~ ✓ (Ps 22, 23 tested)
-2. Extract production class to `src/agents/figurative_curator.py`
-3. Add unit tests in `tests/test_figurative_curator.py`
-4. **Remove figurative trimming logic from research assembler** (CRITICAL)
-5. Integrate with research assembler
-6. **Add curator cost to pipeline cost tracking** (CRITICAL)
-7. Update synthesis prompts to use curator insights
-8. **Update Word doc Methods section to list all results reviewed** (CRITICAL)
+2. ~~Extract production class to `src/agents/figurative_curator.py`~~ ✓ (Session 226)
+3. ~~Remove figurative trimming logic from synthesis writer~~ ✓ (Session 226 - skips trimming when curator output present)
+4. ~~Integrate with research assembler~~ ✓ (Session 226)
+5. ~~Add curator cost to pipeline cost tracking~~ ✓ (Session 227)
+6. ~~Update Word doc Methods section to list all results reviewed~~ ✓ (Session 227)
+7. Update synthesis prompts to use curator insights (In progress via standard bundle structure)
+
+## Integration Complete (Session 227)
+
+The Figurative Curator is now fully integrated into the production pipeline.
+
+- **Enabled by default**: Controlled by `use_figurative_curator` in `ResearchAssembler`
+- **Output**: Curated insights and examples appear in the research bundle
+- **Trimming**: Synthesis Writer detects curator output and skips potentially destructive trimming
+- **Reporting**:
+  - Costs are tracked in the pipeline summary
+  - Methods section in generated Word docs lists all figurative parallels reviewed
+  - Research bundle markdown includes a "Curated" section with prose insights
+
+To disable for a run (e.g. for testing old behavior), you would need to modify `ResearchAssembler` initialization or add a CLI flag (future work).
 
 ## Session Notes
 

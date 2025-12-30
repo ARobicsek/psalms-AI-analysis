@@ -54,6 +54,7 @@ class ResearchStats:
     lexicon_entries_count: int = 0
     concordance_results: Dict[str, int] = field(default_factory=dict)  # query -> count
     figurative_results: Dict[str, int] = field(default_factory=dict)  # verse -> count
+    figurative_parallels_reviewed: Dict[str, int] = field(default_factory=dict)  # vehicle -> count (for curated output)
     commentary_counts: Dict[str, int] = field(default_factory=dict)  # commentator -> count
     sacks_references_count: int = 0  # Rabbi Jonathan Sacks references
     related_psalms_count: int = 0  # Related psalms from top connections analysis
@@ -231,7 +232,17 @@ class PipelineSummaryTracker:
         # Figurative language results - Count all instances from all bundles
         # This ensures we count from the full, untrimmed bundle that the MasterEditor sees.
         total_figurative_instances = 0
-        if research_bundle.figurative_bundles:
+        
+        # If curator output exists, capture its specific stats
+        if hasattr(research_bundle, 'figurative_curator_output') and research_bundle.figurative_curator_output:
+            curator_output = research_bundle.figurative_curator_output
+            # Capture results by vehicle for the Methods section
+            self.research.figurative_parallels_reviewed = curator_output.search_summary.get('results_by_vehicle', {})
+            # Use total results reviewed as the count
+            total_figurative_instances = curator_output.search_summary.get('total_results', 0)
+        
+        # Fallback/Addition: Count from bundles if not already counted (or if curator disabled)
+        elif research_bundle.figurative_bundles:
             for bundle in research_bundle.figurative_bundles:
                 total_figurative_instances += len(bundle.instances)
         
@@ -633,6 +644,7 @@ class PipelineSummaryTracker:
                 'lexicon_entries_count': self.research.lexicon_entries_count,
                 'concordance_results': self.research.concordance_results,
                 'figurative_results': self.research.figurative_results,
+                'figurative_parallels_reviewed': self.research.figurative_parallels_reviewed,
                 'commentary_counts': self.research.commentary_counts,
                 'sacks_references_count': self.research.sacks_references_count,
                 'related_psalms_count': self.research.related_psalms_count,

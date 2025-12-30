@@ -51,7 +51,11 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ---
 
-### Session 228 (2025-12-29): Figurative Stats Formatting & Pipeline Resume Fix
+### Session 228 (2025-12-29): Figurative Stats Formatting & Model Tracking
+- **Feature**: Added programmatic tracking of LLM models used in the Methods section of Word documents.
+  - Exposed `active_model` property in `LiturgicalLibrarian` and `FigurativeCurator`.
+  - Updated `ResearchAssembler` to capture models in the `ResearchBundle`.
+  - Updated pipeline and document generators to extract and display these models.
 - **Fixed**: Incorrect figurative statistics parsing when resuming pipeline by updating `scripts/run_enhanced_pipeline.py`.
 - **Formatted**: Updated Word document generators to use inline formatting for figurative matches and renamed label to "**Figurative Concordance Matches Reviewed**".
 - **Resolved**: Enabled generation of College/Combined documents when skipping AI steps, decoupling document generation from analysis logic.
@@ -215,23 +219,31 @@ Fixed stats showing zeros when skipping steps:
 
 ### Sessions 200-228: Full Details
 
-#### Session 228 (2025-12-29): Figurative Stats Formatting & Pipeline Resume Fix
+#### Session 228 (2025-12-29): Figurative Stats Formatting & Model Tracking
 **Objective**: Fix incorrect figurative statistics when resuming the pipeline and improve document formatting/generation logic.
 
 **Problems Identified**:
 - "Figurative Language Instances Reviewed" showed incorrect/incomplete counts when skipping micro-analysis (resume mode) due to outdated parsing logic.
 - Pipeline prevented generation of College/Combined DOCX files when `--skip-college` was used, even if the source files existed.
 - User requested specific formatting change for figurative stats (inline list vs newline) and label change.
+- Models used for liturgical librarian and figurative curator were not documented in the Methods section.
 
 **Solutions Implemented**:
 1. Updated `scripts/run_enhanced_pipeline.py` to correctly parse the new "Figurative Language Insights (Curated)" section from markdown.
 2. Decoupled document generation from AI generation in the pipeline script; docs now generate if files exist, regardless of skip flags.
 3. Modified `src/utils/document_generator.py` and `src/utils/combined_document_generator.py` to use inline format `(vehicle (count); ...)` and renamed label to "**Figurative Concordance Matches Reviewed**".
+4. Implemented programmatic model tracking:
+   - Exposed `active_model` property in `LiturgicalLibrarian` and `FigurativeCurator`.
+   - Updated `ResearchAssembler` to capture models in the `ResearchBundle`.
+   - Updated pipeline and document generators to extract and display these models.
 
 **Files Modified**:
 - `scripts/run_enhanced_pipeline.py` - Updated stats parsing and document generation logic.
 - `src/utils/document_generator.py` - Updated formatting and label.
 - `src/utils/combined_document_generator.py` - Updated formatting and label.
+- `src/agents/liturgical_librarian.py` - Exposed active model.
+- `src/agents/figurative_curator.py` - Exposed active model.
+- `src/agents/research_assembler.py` - Captured models in bundle.
 
 #### Session 227 (2025-12-29): Figurative Curator - Testing & Finalization
 **Objective**: Verify Figurative Curator integration, implement cost tracking, and update document generation.

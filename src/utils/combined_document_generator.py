@@ -991,6 +991,13 @@ Methodological & Bibliographical Summary
             if model_usage:
                 summary_text += f"\n**Structural Analysis (Macro)**: {model_usage.get('macro_analysis', 'N/A')}"
                 summary_text += f"\n**Verse Discovery (Micro)**: {model_usage.get('micro_analysis', 'N/A')}"
+                
+                if 'liturgical_librarian' in model_usage:
+                    summary_text += f"\n**Liturgical Librarian**: {model_usage.get('liturgical_librarian', 'N/A')}"
+                
+                if 'figurative_curator' in model_usage:
+                    summary_text += f"\n**Figurative Curator**: {model_usage.get('figurative_curator', 'N/A')}"
+                
                 summary_text += f"\n**Commentary Synthesis**: {model_usage.get('synthesis', 'N/A')}"
                 summary_text += f"\n**Editorial Review**: {model_usage.get('master_editor', 'N/A')}"
             else:

@@ -966,41 +966,56 @@ class SynthesisWriter:
         # ========================================
         # STEP 3: Trim Figurative Language to 75%
         # ========================================
+        # IMPORTANT: Skip trimming if this is CURATOR output (pre-curated by LLM)
+        # Curator output is marked with "Insights (Curated)" in the header
         if len(research_bundle) > max_chars:
             figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
 
             if figurative_section:
-                trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.75)
-                test_bundle = temp_bundle + '\n\n' + trimmed_fig
-                research_bundle = test_bundle
-                sections_removed.append("Figurative Language (trimmed to 75%)")
+                # Check if this is curator output (pre-curated, should not be trimmed)
+                is_curator_output = '(Curated)' in figurative_section or 'Curated Insights' in figurative_section
 
-                if len(research_bundle) <= max_chars:
-                    self.logger.info(f"Trimmed Figurative Language to 75%. "
-                                   f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+                if is_curator_output:
+                    self.logger.info("Figurative Language is curated output - skipping trimming (pre-optimized by LLM)")
                 else:
-                    self.logger.info(f"Trimmed Figurative Language to 75% but still over limit...")
+                    trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.75)
+                    test_bundle = temp_bundle + '\n\n' + trimmed_fig
+                    research_bundle = test_bundle
+                    sections_removed.append("Figurative Language (trimmed to 75%)")
+
+                    if len(research_bundle) <= max_chars:
+                        self.logger.info(f"Trimmed Figurative Language to 75%. "
+                                       f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+                    else:
+                        self.logger.info(f"Trimmed Figurative Language to 75% but still over limit...")
 
         # ========================================
         # STEP 4: Trim Figurative Language to 50%
         # ========================================
+        # IMPORTANT: Skip trimming if this is CURATOR output (pre-curated by LLM)
         if len(research_bundle) > max_chars:
             figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
 
             if figurative_section:
-                trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.50)
-                test_bundle = temp_bundle + '\n\n' + trimmed_fig
-                research_bundle = test_bundle
-                # Update sections_removed
-                if "Figurative Language (trimmed to 75%)" in sections_removed:
-                    sections_removed.remove("Figurative Language (trimmed to 75%)")
-                sections_removed.append("Figurative Language (trimmed to 50%)")
+                # Check if this is curator output (pre-curated, should not be trimmed)
+                is_curator_output = '(Curated)' in figurative_section or 'Curated Insights' in figurative_section
 
-                if len(research_bundle) <= max_chars:
-                    self.logger.info(f"Trimmed Figurative Language to 50%. "
-                                   f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+                if is_curator_output:
+                    self.logger.info("Figurative Language is curated output - skipping trimming (pre-optimized by LLM)")
                 else:
-                    self.logger.info(f"Trimmed Figurative Language to 50% but still over limit...")
+                    trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.50)
+                    test_bundle = temp_bundle + '\n\n' + trimmed_fig
+                    research_bundle = test_bundle
+                    # Update sections_removed
+                    if "Figurative Language (trimmed to 75%)" in sections_removed:
+                        sections_removed.remove("Figurative Language (trimmed to 75%)")
+                    sections_removed.append("Figurative Language (trimmed to 50%)")
+
+                    if len(research_bundle) <= max_chars:
+                        self.logger.info(f"Trimmed Figurative Language to 50%. "
+                                       f"Size: {original_size:,} -> {len(research_bundle):,} chars")
+                    else:
+                        self.logger.info(f"Trimmed Figurative Language to 50% but still over limit...")
 
         # ========================================
         # STEP 5: If still over limit, flag for Gemini fallback
