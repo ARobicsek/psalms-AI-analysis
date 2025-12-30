@@ -198,7 +198,7 @@ The Deep Web Research section may contain material that NO previous commentary h
 
 - **ANE parallels with real insight:** Not just "cf. Ugaritic text"—show what the parallel illuminates. How does knowing the Baal Cycle change how we hear "rider on the clouds"?
 
-**From Concordance and Figurative Language Database:**
+**From Concordance and Figurative Language Insights:**
 - Patterns cited but not QUOTED (show the Hebrew + English!)
 - Comparisons that illuminate THIS psalm's distinctive usage
 - Missed connections to related psalms
@@ -248,6 +248,7 @@ Create an essay that:
 - Creates genuine "aha!" moments—connections readers haven't seen before
 - Engages specific texts with Hebrew + English quotations
 - Addresses interesting questions raised by Macro/Micro analysts
+- Integrates illuminating insights from the curated Figurative Language Insights
 - Integrates cultural/reception history where Deep Web Research provides it
 - Maintains scholarly rigor with accessible prose
 - Defines technical terms for lay readers
