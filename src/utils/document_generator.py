@@ -901,6 +901,13 @@ class DocumentGenerator:
         figurative_results = research_data.get('figurative_results', {}) or {}
         figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
 
+        # Figurative parallels breakdown
+        figurative_parallels = research_data.get('figurative_parallels_reviewed', {})
+        figurative_breakdown_str = ""
+        if figurative_parallels:
+            items = [f"{v} ({c})" for v, c in sorted(figurative_parallels.items())]
+            figurative_breakdown_str = f" ({'; '.join(items)})"
+
         sacks_count = research_data.get('sacks_references_count', 0)
         related_psalms_count = research_data.get('related_psalms_count', 0)
         related_psalms_list = research_data.get('related_psalms_list', [])
@@ -956,7 +963,7 @@ Methodological & Bibliographical Summary
 **Lexicon Entries (BDB/Klein) Reviewed**: {lexicon_count}
 **Traditional Commentaries Reviewed**: {total_commentaries}{commentary_details}
 **Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}
-**Figurative Language Instances Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}
+**Figurative Concordance Matches Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}{figurative_breakdown_str}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
 **Similar Psalms Analyzed**: {related_psalms_str}
 **Deep Web Research**: {deep_research_str}

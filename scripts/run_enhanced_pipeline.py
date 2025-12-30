@@ -65,6 +65,7 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         'lexicon_count': 0,
         'concordance_count': 0,
         'figurative_count': 0,
+        'figurative_parallels_reviewed': {},
         'commentary_counts': {},
         'sacks_count': 0,
         'deep_research_available': False,
@@ -83,10 +84,32 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
     concordance_matches = re.findall(r'### (?:Query|Phrase):', markdown_content)
     stats['concordance_count'] = len(concordance_matches)
 
-    # Count figurative language instances (Figurative entries start with **Book X:Y**)
-    # This matches patterns like: **Psalms 126:1** (simile) - confidence: 0.90
-    figurative_matches = re.findall(r'^\*\*[A-Za-z]+ \d+:\d+\*\*', markdown_content, re.MULTILINE)
-    stats['figurative_count'] = len(figurative_matches)
+    # Count figurative language instances
+    # Check for new Curated format first (Session 226+)
+    curated_section = re.search(r'## Figurative Language Insights \(Curated\)(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
+    
+    if curated_section:
+        section_text = curated_section.group(1)
+        
+        # Extract total results reviewed
+        total_match = re.search(r'\*Total results reviewed\*: (\d+)', section_text)
+        if total_match:
+            stats['figurative_count'] = int(total_match.group(1))
+            
+        # Extract breakdown by vehicle
+        # Look for "**Figurative Parallels Reviewed**:" followed by list items
+        breakdown_match = re.search(r'\*\*Figurative Parallels Reviewed\*\*:(.*?)(?=\n\n|\Z)', section_text, re.DOTALL)
+        if breakdown_match:
+            breakdown_text = breakdown_match.group(1)
+            # Match lines like "- **vehicle**: 10 results"
+            parallels = re.findall(r'- \*\*(.*?)\*\*: (\d+) results', breakdown_text)
+            for vehicle, count in parallels:
+                stats['figurative_parallels_reviewed'][vehicle] = int(count)
+    else:
+        # Fallback to old format (Figurative entries start with **Book X:Y**)
+        # This matches patterns like: **Psalms 126:1** (simile) - confidence: 0.90
+        figurative_matches = re.findall(r'^\*\*[A-Za-z]+ \d+:\d+\*\*', markdown_content, re.MULTILINE)
+        stats['figurative_count'] = len(figurative_matches)
 
     # Count traditional commentaries by name
     commentary_patterns = [
@@ -496,6 +519,19 @@ def run_enhanced_pipeline(
         tracker.track_research_requests(research_bundle.request)
         tracker.track_research_bundle(research_bundle)
 
+        # Add Figurative Curator cost if available
+        if research_bundle.figurative_curator_output:
+            curator_output = research_bundle.figurative_curator_output
+            token_usage = curator_output.token_usage
+            cost_tracker.add_usage(
+                model="gemini-3-pro-preview",
+                input_tokens=token_usage.get("input", 0),
+                output_tokens=token_usage.get("output", 0),
+                thinking_tokens=token_usage.get("thinking", 0)
+            )
+            if token_usage.get('cost', 0.0) > 0:
+                logger.info(f"Added Figurative Curator cost: ${token_usage.get('cost', 0.0):.4f}")
+
         # Track research bundle size
         research_bundle_text = research_bundle.to_markdown()
         tracker.track_research_bundle_size(
@@ -560,6 +596,7 @@ def run_enhanced_pipeline(
             tracker.research.lexicon_entries_count = research_stats['lexicon_count']
             tracker.research.concordance_results = {'total_queries': research_stats['concordance_count']}
             tracker.research.figurative_results = {'total_instances_used': research_stats['figurative_count']}
+            tracker.research.figurative_parallels_reviewed = research_stats.get('figurative_parallels_reviewed', {})
             tracker.research.commentary_counts = research_stats['commentary_counts']
             tracker.research.sacks_references_count = research_stats['sacks_count']
             tracker.research.deep_research_available = research_stats['deep_research_available']
@@ -1117,42 +1154,45 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 6b: Generate College .docx Document
     # =====================================================================
-    if not skip_word_doc and not skip_college and not smoke_test:
-        logger.info("\n[STEP 6b] Creating college edition .docx document...")
-        print(f"\n{'='*80}")
-        print(f"STEP 6b: Generating College Edition Word Document (.docx)")
-        print(f"{'='*80}\n")
-
-        from src.utils.document_generator import DocumentGenerator
-
-        summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
-
-        # Use college-specific files if they exist, otherwise fall back to synthesis
-        intro_for_college_docx = edited_intro_college_file if edited_intro_college_file.exists() else synthesis_intro_file
-        verses_for_college_docx = edited_verses_college_file if edited_verses_college_file.exists() else synthesis_verses_file
-
-        if intro_for_college_docx.exists() and verses_for_college_docx.exists() and summary_json_file.exists():
-            try:
-                generator_college = DocumentGenerator(
-                    psalm_num=psalm_number,
-                    intro_path=intro_for_college_docx,
-                    verses_path=verses_for_college_docx,
-                    stats_path=summary_json_file,
-                    output_path=docx_output_college_file
-                )
-                generator_college.generate()
-                logger.info(f"Successfully generated college edition Word document for Psalm {psalm_number}.")
-                print(f"✓ College edition Word document: {docx_output_college_file}\n")
-            except Exception as e:
-                logger.error(f"Failed to generate college .docx file for Psalm {psalm_number}: {e}", exc_info=True)
-                print(f"⚠ Error in college Word document generation (see logs for details)\n")
+    if not skip_word_doc and not smoke_test:
+        # Check if we should skip based on flag AND missing files
+        # If skip_college is True, we only proceed if the files ALREADY exist
+        if skip_college and not (edited_intro_college_file.exists() and edited_verses_college_file.exists()):
+            logger.info(f"[STEP 6b] Skipping college .docx generation (--skip-college flag set and files not found)")
         else:
-            logger.warning("Skipping college .docx generation because input files (markdown or stats) were not found.")
-            print(f"⚠ Skipping college Word document generation: input files not found.\n")
+            logger.info("\n[STEP 6b] Creating college edition .docx document...")
+            print(f"\n{'='*80}")
+            print(f"STEP 6b: Generating College Edition Word Document (.docx)")
+            print(f"{'='*80}\n")
+
+            from src.utils.document_generator import DocumentGenerator
+
+            summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+
+            # Use college-specific files if they exist, otherwise fall back to synthesis
+            intro_for_college_docx = edited_intro_college_file if edited_intro_college_file.exists() else synthesis_intro_file
+            verses_for_college_docx = edited_verses_college_file if edited_verses_college_file.exists() else synthesis_verses_file
+
+            if intro_for_college_docx.exists() and verses_for_college_docx.exists() and summary_json_file.exists():
+                try:
+                    generator_college = DocumentGenerator(
+                        psalm_num=psalm_number,
+                        intro_path=intro_for_college_docx,
+                        verses_path=verses_for_college_docx,
+                        stats_path=summary_json_file,
+                        output_path=docx_output_college_file
+                    )
+                    generator_college.generate()
+                    logger.info(f"Successfully generated college edition Word document for Psalm {psalm_number}.")
+                    print(f"✓ College edition Word document: {docx_output_college_file}\n")
+                except Exception as e:
+                    logger.error(f"Failed to generate college .docx file for Psalm {psalm_number}: {e}", exc_info=True)
+                    print(f"⚠ Error in college Word document generation (see logs for details)\n")
+            else:
+                logger.warning("Skipping college .docx generation because input files (markdown or stats) were not found.")
+                print(f"⚠ Skipping college Word document generation: input files not found.\n")
     else:
-        if skip_college:
-            logger.info(f"[STEP 6b] Skipping college .docx generation (--skip-college flag set)")
-        elif skip_word_doc:
+        if skip_word_doc:
             logger.info(f"[STEP 6b] Skipping college .docx generation (--skip-word-doc flag set)")
         else:
             logger.info(f"[STEP 6b] Skipping college .docx in smoke test mode")
@@ -1160,51 +1200,54 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 6c: Generate Combined .docx Document (Main + College)
     # =====================================================================
-    if not skip_combined_doc and not skip_college and not smoke_test:
-        logger.info("\\n[STEP 6c] Creating combined .docx document (main + college)...")
-        print(f"\\n{'='*80}")
-        print(f"STEP 6c: Generating Combined Word Document (.docx)")
-        print(f"{'='*80}\\n")
-
-        from src.utils.combined_document_generator import CombinedDocumentGenerator
-
-        summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
-
-        # Check if all required files exist
-        required_files = [
-            edited_intro_file,
-            edited_verses_file,
-            edited_intro_college_file,
-            edited_verses_college_file,
-            summary_json_file
-        ]
-
-        if all(f.exists() for f in required_files):
-            try:
-                generator_combined = CombinedDocumentGenerator(
-                    psalm_num=psalm_number,
-                    main_intro_path=edited_intro_file,
-                    main_verses_path=edited_verses_file,
-                    college_intro_path=edited_intro_college_file,
-                    college_verses_path=edited_verses_college_file,
-                    stats_path=summary_json_file,
-                    output_path=docx_output_combined_file
-                )
-                generator_combined.generate()
-                logger.info(f"Successfully generated combined Word document for Psalm {psalm_number}.")
-                print(f"✓ Combined Word document: {docx_output_combined_file}\\n")
-            except Exception as e:
-                logger.error(f"Failed to generate combined .docx file for Psalm {psalm_number}: {e}", exc_info=True)
-                print(f"⚠ Error in combined Word document generation (see logs for details)\\n")
+    if not skip_combined_doc and not smoke_test:
+        # Check if we should skip based on flag AND missing files
+        # If skip_college is True, we only proceed if the files ALREADY exist
+        if skip_college and not (edited_intro_college_file.exists() and edited_verses_college_file.exists()):
+            logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-college flag set and college files not found)")
         else:
-            missing = [f for f in required_files if not f.exists()]
-            logger.warning(f"Skipping combined .docx generation because required files were not found: {missing}")
-            print(f"⚠ Skipping combined Word document generation: required files not found.\\n")
+            logger.info("\n[STEP 6c] Creating combined .docx document (main + college)...")
+            print(f"\n{'='*80}")
+            print(f"STEP 6c: Generating Combined Word Document (.docx)")
+            print(f"{'='*80}\n")
+
+            from src.utils.combined_document_generator import CombinedDocumentGenerator
+
+            summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+
+            # Check if all required files exist
+            required_files = [
+                edited_intro_file,
+                edited_verses_file,
+                edited_intro_college_file,
+                edited_verses_college_file,
+                summary_json_file
+            ]
+
+            if all(f.exists() for f in required_files):
+                try:
+                    generator_combined = CombinedDocumentGenerator(
+                        psalm_num=psalm_number,
+                        main_intro_path=edited_intro_file,
+                        main_verses_path=edited_verses_file,
+                        college_intro_path=edited_intro_college_file,
+                        college_verses_path=edited_verses_college_file,
+                        stats_path=summary_json_file,
+                        output_path=docx_output_combined_file
+                    )
+                    generator_combined.generate()
+                    logger.info(f"Successfully generated combined Word document for Psalm {psalm_number}.")
+                    print(f"✓ Combined Word document: {docx_output_combined_file}\n")
+                except Exception as e:
+                    logger.error(f"Failed to generate combined .docx file for Psalm {psalm_number}: {e}", exc_info=True)
+                    print(f"⚠ Error in combined Word document generation (see logs for details)\n")
+            else:
+                missing = [f for f in required_files if not f.exists()]
+                logger.warning(f"Skipping combined .docx generation because required files were not found: {missing}")
+                print(f"⚠ Skipping combined Word document generation: required files not found.\n")
     else:
         if skip_combined_doc:
             logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-combined-doc flag set)")
-        elif skip_college:
-            logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-college flag set)")
         elif skip_word_doc:
             logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-word-doc flag set)")
         else:

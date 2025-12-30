@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-28 (Session 223)
+**Last Updated**: 2025-12-29 (Session 228)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 223
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming
+- **Current Session**: 228
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator (✅ Active)
 
 ---
 
@@ -42,52 +42,42 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms with pacing guidance
 - **Pipeline Skip Logic**: New `--resume` flag for automatic step detection
+- **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3 Pro (fully integrated)
 
 ### Known Limitations
 - Large psalms may require Gemini fallback (additional cost)
 - Deep research must be manually prepared via Gemini browser interface
+- Figurative Curator adds ~$0.30-0.50 per psalm to processing cost
 
 ---
 
-## Recent Work Summary
+### Session 228 (2025-12-29): Figurative Stats Formatting & Pipeline Resume Fix
+- **Fixed**: Incorrect figurative statistics parsing when resuming pipeline by updating `scripts/run_enhanced_pipeline.py`.
+- **Formatted**: Updated Word document generators to use inline formatting for figurative matches and renamed label to "**Figurative Concordance Matches Reviewed**".
+- **Resolved**: Enabled generation of College/Combined documents when skipping AI steps, decoupling document generation from analysis logic.
+
+### Session 227 (2025-12-29): Figurative Curator - Testing & Finalization
+- **Verified Integration**: Confirmed Psalm 23 run produced expected curated output
+- **Cost Tracking**: Added `gemini-3-pro-preview` pricing and integrated curator costs into pipeline stats
+- **Methods Section**: Updated main and combined DOCX generators to list all figurative parallels reviewed by the curator
+- **Documentation**: Marked integration complete
+
+### Session 226 (2025-12-29): Figurative Curator - Production Integration
+- Created production module [src/agents/figurative_curator.py](src/agents/figurative_curator.py) with all core functionality
+- Modified trimming logic to skip curator output (checks for "(Curated)" marker in section header)
+- Fully integrated curator into research assembler with automatic curation and formatted markdown output
+- **Blocker**: google-genai package missing in venv (resolved by user before Session 227)
+
+### Session 225 (2025-12-29): Figurative Curator - Comprehensive Output Improvements
+- Improved Phase 2 prompt to require 4-5 insights (not 3) and curated examples for ALL vehicles
+- Added explicit requirements: 5-15 examples PER vehicle, title imagery analysis, appropriate structure_type
+- Ps 22 now produces: 5 insights, 15 vehicle groups, 75 curated examples, correct "descent_ascent" structure
+- Updated integration guide with 3 critical reminders: remove trimming, add cost tracking, update Methods section
 
 ### Session 223 (2025-12-28): Divine Names Modifier - שְׁדּי vs שַׁדַּי Fix
 - Fixed incorrect replacement of שְׁדּי (*shadei* = "breasts") with שְׁקֵי in Psalm 22:10
 - Added vowel check to require PATACH (U+05B7) or KAMATZ (U+05B8) under shin for divine name
 - Words with SHEVA (U+05B0) under shin (like שְׁדּי) are now correctly excluded
-- Updated test file with new test cases for Psalm 22:10 phrase
-
-### Session 222 (2025-12-26): Priority-Based Figurative Language Sorting and Trimming
-- Updated MicroAnalyst prompt to inform LLM about term order priority and truncation consequences
-- Added `term_priority` attribute to `FigurativeInstance` class for tracking search term index
-- Implemented priority-based sorting with randomization within same priority in research assembler
-- Simplified trimming logic to remove lowest-priority instances first (removed Psalms book preference)
-- LLM now decides its own priority order based on thesis/analysis rather than prescribed order
-
-### Session 221 (2025-12-23): Converse with Editor Script
-- Created `scripts/converse_with_editor.py` for multi-turn conversation with Master Editor about completed psalms
-- Interactive context selection with character counts for research sections
-- Streaming API responses with cost tracking and transcript saving
-
-### Session 220 (2025-12-22): Special Instruction Pipeline Implementation
-- Created `MasterEditorSI` class extending `MasterEditorV2` with author directive prompts
-- Implemented `run_si_pipeline.py` script for V2 commentary rewrites with _SI suffix outputs
-- Added three .docx generation (Main SI, College SI, Combined SI) with separate stats tracking
-
-### Session 219 (2025-12-21): Pipeline Skip Logic Fix & Resume Feature
-- Fixed skip flags being ignored when output files didn't exist
-- Added `--resume` flag for automatic step detection
-- Improved dependency checking for skipped steps
-
-### Session 218 (2025-12-21): Prioritized Figurative Language Search
-- Implemented priority-based search for vehicle terms
-- Simplified research bundle output format
-- Fixed git ignore for output and logs directories
-
-### Session 217 (2025-12-13): Sections Trimmed Duplication Fix
-- Fixed duplicate entries when sections upgraded (75% → 50%)
-- Implemented intelligent section replacement logic
-- Cleaner DOCX output showing final trimming state
 
 ---
 
@@ -117,6 +107,26 @@ Prevents truncation in long psalms through intelligent grouping:
 - 2-4 thematically related verses can be grouped
 - Pacing guidance ensures equal treatment
 - No "remaining verses" truncation notes
+
+#### Figurative Curator (Sessions 224-227) ✅ Integrated & Active
+LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3 Pro:
+- **Fully integrated into research assembler** (Session 226)
+- Executes searches against figurative language database (50 results/search initial, 30 follow-up)
+- Iteratively refines searches (up to 3 iterations) based on gap analysis
+- Curates 5-15 examples per vehicle with Hebrew text
+- Synthesizes 4-5 prose insights (100-150 words each) for commentary writers
+- Adapts structure_type to psalm pattern (journey, descent_ascent, contrast, etc.)
+- Cost: ~$0.30-0.50 per psalm
+
+**Integration Status (Session 227)**:
+- ✅ Production module created: `src/agents/figurative_curator.py`
+- ✅ Trimming logic updated to skip curator output
+- ✅ Fully integrated into `ResearchAssembler` with markdown formatting
+- ✅ Cost tracking implemented
+- ✅ Word doc Methods section updated to list parallels reviewed
+
+Test script: `python scripts/test_figurative_curator.py --psalm 22`
+Integration guide: `docs/guides/FIGURATIVE_CURATOR_INTEGRATION.md`
 
 ### Research Integration
 
@@ -203,7 +213,133 @@ Fixed stats showing zeros when skipping steps:
 
 ## Session History
 
-### Sessions 200-223: Full Details
+### Sessions 200-228: Full Details
+
+#### Session 228 (2025-12-29): Figurative Stats Formatting & Pipeline Resume Fix
+**Objective**: Fix incorrect figurative statistics when resuming the pipeline and improve document formatting/generation logic.
+
+**Problems Identified**:
+- "Figurative Language Instances Reviewed" showed incorrect/incomplete counts when skipping micro-analysis (resume mode) due to outdated parsing logic.
+- Pipeline prevented generation of College/Combined DOCX files when `--skip-college` was used, even if the source files existed.
+- User requested specific formatting change for figurative stats (inline list vs newline) and label change.
+
+**Solutions Implemented**:
+1. Updated `scripts/run_enhanced_pipeline.py` to correctly parse the new "Figurative Language Insights (Curated)" section from markdown.
+2. Decoupled document generation from AI generation in the pipeline script; docs now generate if files exist, regardless of skip flags.
+3. Modified `src/utils/document_generator.py` and `src/utils/combined_document_generator.py` to use inline format `(vehicle (count); ...)` and renamed label to "**Figurative Concordance Matches Reviewed**".
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Updated stats parsing and document generation logic.
+- `src/utils/document_generator.py` - Updated formatting and label.
+- `src/utils/combined_document_generator.py` - Updated formatting and label.
+
+#### Session 227 (2025-12-29): Figurative Curator - Testing & Finalization
+**Objective**: Verify Figurative Curator integration, implement cost tracking, and update document generation.
+
+**Problems Identified**:
+- Cost tracking was missing for the new Gemini 3 Pro model used by the curator.
+- The "Methods" section in the generated Word documents didn't reflect the comprehensive figurative analysis performed by the curator.
+
+**Solutions Implemented**:
+1. Added `gemini-3-pro-preview` pricing to `CostTracker`.
+2. Updated `ResearchStats` to track "Figurative Parallels Reviewed" (raw count of search results considered).
+3. Integrated curator cost tracking into the main pipeline script.
+4. Updated both main and combined document generators to list reviewed figurative parallels in the Methodological Summary.
+
+**Files Modified**:
+- `src/utils/cost_tracker.py` - Added Gemini 3 Pro pricing
+- `src/utils/pipeline_summary.py` - Added `figurative_parallels_reviewed` field
+- `scripts/run_enhanced_pipeline.py` - Integrated curator cost tracking
+- `src/utils/document_generator.py` - Updated summary generation
+- `src/utils/combined_document_generator.py` - Updated summary generation
+- `docs/guides/FIGURATIVE_CURATOR_INTEGRATION.md` - Marked integration complete
+
+#### Session 226 (2025-12-29): Figurative Curator - Production Integration
+**Objective**: Integrate Figurative Curator from test script into main pipeline production workflow
+
+**Solutions Implemented**:
+1. **Created production module** `src/agents/figurative_curator.py`:
+   - Extracted FigurativeCurator class from test script
+   - Removed test-specific code (argparse, sample requests, output formatting)
+   - Kept core curator functionality with Gemini 3 Pro integration
+   - Added tanakh_db_path parameter for flexible database location
+
+2. **Modified trimming logic** in `src/agents/synthesis_writer.py` (lines 969-1018):
+   - Added checks for curator output markers: "(Curated)" or "Curated Insights" in section header
+   - Skip figurative trimming steps 3 & 4 when curator output detected
+   - Logs: "Figurative Language is curated output - skipping trimming (pre-optimized by LLM)"
+   - Preserves pre-curated data integrity (5-15 examples per vehicle already optimized)
+
+3. **Fully integrated curator into research assembler** `src/agents/research_assembler.py`:
+   - Added imports: FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
+   - Added `figurative_curator_output` field to ResearchBundle dataclass
+   - Added `use_figurative_curator` parameter to ResearchAssembler.__init__ (default: True)
+   - Curator initialization with graceful fallback if API key missing
+   - Convert FigurativeRequest → FigurativeSearchRequest and call curator.curate()
+   - Log curator results: insights count, examples count, vehicles count, cost
+   - Pass curator output to ResearchBundle
+
+4. **Formatted curator output in research bundle markdown**:
+   - Section header: "## Figurative Language Insights (Curated)" (enables trimming skip)
+   - Search summary with iterations and total results reviewed
+   - **Figurative Parallels Reviewed** list (vehicle: count format) for Methods section
+   - Prose insights with titles and verse addresses
+   - Curated examples grouped by vehicle with Hebrew text and selection rationale
+
+**Blocker Encountered**:
+- Curator initialization failed with "google-genai package not installed" error
+- **Root Cause**: Package installed in global Python but not in virtual environment (venv)
+- **Solution**: Ran `pip install google-genai` in activated virtual environment
+- **Impact**: Integration testing delayed until Session 227
+
+**Pending for Session 227**:
+- [ ] Test integration on Psalm 23 (run enhanced pipeline with curator)
+- [ ] Fix any bugs discovered during testing
+- [ ] Add curator cost to pipeline cost tracking
+- [ ] Update Word doc Methods section to extract parallels reviewed list
+- [ ] Update FIGURATIVE_CURATOR_INTEGRATION.md to mark integration complete
+
+**Files Modified**:
+- `src/agents/figurative_curator.py` - NEW: Production module (extracted from test script)
+- `src/agents/synthesis_writer.py` - Skip trimming for curator output (lines 969-1018)
+- `src/agents/research_assembler.py` - Full curator integration with markdown formatting
+
+**Environment Requirements**:
+- Added dependency: `google-genai` package (install in venv with `pip install google-genai`)
+- Requires `GEMINI_API_KEY` in `.env` file
+
+#### Session 225 (2025-12-29): Figurative Curator - Comprehensive Output Improvements
+**Objective**: Improve Figurative Curator output quality to produce thorough, comprehensive analysis
+
+**Problems Identified**:
+- Only 3 insights produced (expected 4-5)
+- Only 5 vehicle groups with curated examples (out of 16 searched)
+- Only 15 total curated examples (should be 5-15 PER vehicle)
+- Title imagery ("hind of the dawn" in Ps 22) not analyzed despite 28 results
+- Structure type defaulted to "journey" when actual pattern was descent/contrast
+
+**Solutions Implemented**:
+1. Added explicit vehicle count tracking: "you have {N} vehicles with results - provide examples for ALL of them"
+2. Added "CRITICAL REQUIREMENTS" sections with specific output targets
+3. Added title imagery requirement: "If the psalm has a TITLE with figurative language... you MUST analyze that vehicle thoroughly"
+4. Expanded structure_type options (added descent, descent_ascent, lament_structure)
+5. Added warning: "Do NOT default to 'journey' just because it's the example"
+6. Added final checklist for LLM to verify completeness before responding
+
+**Results**:
+- Ps 22 now produces: 5 insights, 15 vehicle groups, 75 curated examples
+- Structure correctly identified as "descent_ascent"
+- Title "hind" imagery fully analyzed with 5 examples
+- Cost increased slightly (~$0.45 vs ~$0.30) but output quality significantly improved
+
+**Integration Reminders Added to Guide**:
+1. Remove figurative trimming logic from research assembler (curator output is pre-curated)
+2. Add curator cost to pipeline cost tracking
+3. Update Word doc Methods section to list all results reviewed (e.g., "**hind**: 28; **roaring**: 42...")
+
+**Files Modified**:
+- `scripts/test_figurative_curator.py` - Improved Phase 2 prompt with explicit requirements
+- `docs/guides/FIGURATIVE_CURATOR_INTEGRATION.md` - Added critical integration reminders, updated testing checklist
 
 #### Session 223 (2025-12-28): Divine Names Modifier - שְׁדּי vs שַׁדַּי Fix
 **Objective**: Fix divine names modifier incorrectly replacing שְׁדּי (breasts) with שְׁקֵי
@@ -594,6 +730,9 @@ python scripts/run_si_pipeline.py 19
 # Converse with Master Editor about completed psalm
 python scripts/converse_with_editor.py 21
 
+# Test Figurative Curator (in testing, not yet integrated)
+python scripts/test_figurative_curator.py --psalm 22
+
 # Check costs (dry run)
 python main.py --psalm 119 --dry-run
 ```
@@ -623,6 +762,7 @@ python main.py --psalm 119 --dry-run
 - Deep Web Research feature ready for production use
 - Gemini 2.5 Pro fallback handles large psalms without content loss
 - Strategic verse grouping prevents truncation in long psalms
+- **Figurative Curator in testing** - produces 4-5 insights, 5-15 examples per vehicle, adaptive structure types
 - Pipeline running smoothly with all major fixes implemented
 
 ### Documentation Maintenance
