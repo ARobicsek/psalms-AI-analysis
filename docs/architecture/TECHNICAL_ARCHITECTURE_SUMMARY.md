@@ -421,7 +421,65 @@ def normalize_hebrew(text: str, level: int) -> str:
 - Never overwrites original pipeline files
 - Separate stats tracking
 
-### 7. Output Generation Pipeline
+### 7. Tribal Blessings Analyzer (Session 229) - Reusable Non-Psalm Analysis
+
+**Purpose**: Analyze figurative language in structured biblical passages outside the Psalms (e.g., Genesis 49's tribal blessings, Deuteronomy 33, Numbers 23-24).
+
+**Architecture**: Adapts the FigurativeCurator pattern for non-Psalm passages organized by named segments (tribes, nations, etc.).
+
+**Components**:
+- **`src/agents/tribal_curator.py`**: Core curator class with configurable passage analysis
+- **`scripts/tribal_blessings_analyzer.py`**: CLI script for running analysis
+
+**Key Features**:
+- **Configurable Passages**: Uses `PassageAnalysisConfig` dataclass for any book/chapter/segment structure
+- **Segment-Based Analysis**: Analyzes by named segments (tribes, nations) rather than verse-by-verse
+- **Vehicle + Target Searches**: Searches for figurative vehicles AND segment names as targets
+- **3-Iteration Refinement**: Uses Gemini 3 Pro with iterative search refinement
+- **1000-2000 Word Insights**: Scholarly essays with Hebrew quotations
+- **Reception History**: Includes cultural impact, art, politics, interpretive traditions
+- **5+ Biblical Parallels**: Curated examples with relevance explanations
+- **Deep Research Integration**: Auto-loads from `data/deep_research/` directory
+
+**Pre-Configured Passages**:
+```python
+GENESIS_49_CONFIG = PassageAnalysisConfig(
+    book="Genesis",
+    chapter=49,
+    name="Jacob's Tribal Blessings",
+    segments={
+        "Reuben": SegmentConfig(verses=[3, 4], blessing_type="rebuke"),
+        "Simeon and Levi": SegmentConfig(verses=[5, 6, 7], blessing_type="rebuke"),
+        "Judah": SegmentConfig(verses=[8, 9, 10, 11, 12], blessing_type="royal_blessing"),
+        # ... etc.
+    }
+)
+```
+
+**Usage**:
+```bash
+# Analyze single tribe
+python scripts/tribal_blessings_analyzer.py --tribe Judah
+
+# Analyze all tribes
+python scripts/tribal_blessings_analyzer.py --all --verbose
+
+# List available tribes
+python scripts/tribal_blessings_analyzer.py --list
+```
+
+**Output**:
+- Individual tribe markdown files: `output/genesis_49/tribe_judah.md`
+- Combined summary: `output/genesis_49/tribal_analysis_summary.md`
+- Statistics: `output/genesis_49/analysis_stats.json`
+
+**Future Applications**: The `PassageAnalysisConfig` pattern can be extended for:
+- Deuteronomy 33 (Moses' Blessings)
+- Numbers 23-24 (Balaam's Oracles)
+- Isaiah 13-23 (Oracles Against Nations)
+- Ezekiel 27-28 (Laments)
+
+### 8. Output Generation Pipeline
 
 #### Commentary Formatter
 - **Function**: Markdown to structured commentary

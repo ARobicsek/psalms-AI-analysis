@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-29 (Session 228)
+**Last Updated**: 2025-12-30 (Session 229)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 228
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator (✅ Active)
+- **Current Session**: 229
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator (✅ Active), Tribal Blessings Analyzer (✅ NEW)
 
 ---
 
@@ -50,6 +50,20 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Figurative Curator adds ~$0.30-0.50 per psalm to processing cost
 
 ---
+
+### Session 229 (2025-12-30): Tribal Blessings Analyzer for Genesis 49
+- **NEW Feature**: Created standalone analysis system for Genesis 49 tribal blessings
+  - `src/agents/tribal_curator.py` - Adapted FigurativeCurator for non-Psalm passages
+  - `scripts/tribal_blessings_analyzer.py` - CLI script for running analysis
+- **Capabilities**:
+  - Analyzes figurative language for each of the 12 tribes in Genesis 49
+  - Searches figurative concordance for vehicles AND tribe-as-target patterns
+  - Uses 3-iteration refinement approach with Gemini 3 Pro
+  - Generates 1000-2000 word scholarly insights per tribe
+  - Includes reception history, cultural impact, and 5+ biblical parallels
+  - Supports deep research file integration
+- **Output**: Individual tribe markdown files + combined summary in `output/genesis_49/`
+- **Design**: Generalizable `PassageAnalysisConfig` pattern for future use on other passages (Deut 33, Numbers 23-24, etc.)
 
 ### Session 228 (2025-12-29): Figurative Stats Formatting & Model Tracking
 - **Feature**: Added programmatic tracking of LLM models used in the Methods section of Word documents.
