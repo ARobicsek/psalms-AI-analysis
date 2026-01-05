@@ -655,6 +655,10 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 2b: Question Curation (Reader Questions)
     # =====================================================================
+    # Run question curation if:
+    # 1. Not a smoke test
+    # 2. Macro and micro analysis files exist (regardless of whether they were just run or pre-existing)
+    # 3. Reader questions file doesn't already exist (to avoid regenerating)
     if smoke_test:
         logger.info("\n[STEP 2b] SMOKE TEST: Generating dummy reader questions...")
         print(f"\n{'='*80}")
@@ -671,7 +675,13 @@ def run_enhanced_pipeline(
         logger.info(f"✓ SMOKE TEST: Dummy reader questions saved to {reader_questions_file}")
         print(f"✓ SMOKE TEST: Dummy reader questions complete: {reader_questions_file}\n")
         
-    elif not skip_micro:  # Generate questions if micro was run
+    elif reader_questions_file.exists():
+        # Skip if questions already exist (e.g., from a previous run)
+        logger.info(f"[STEP 2b] Reader questions already exist, skipping curation")
+        print(f"\nSkipping Step 2b (reader questions already exist: {reader_questions_file})\n")
+        
+    elif macro_file.exists() and micro_file.exists():
+        # Run question curation if analysis files exist (regardless of skip flags)
         logger.info("\n[STEP 2b] Curating reader questions from macro/micro analysis...")
         print(f"\n{'='*80}")
         print(f"STEP 2b: Question Curation (Questions for the Reader)")
@@ -699,8 +709,8 @@ def run_enhanced_pipeline(
             logger.warning(f"Question curation failed (non-fatal): {e}")
             print(f"⚠ Question curation failed (continuing pipeline): {e}\n")
     else:
-        logger.info(f"[STEP 2b] Skipping question curation (micro analysis was skipped)")
-        print(f"\nSkipping Step 2b (question curation - depends on macro/micro output)\n")
+        logger.info(f"[STEP 2b] Skipping question curation (macro/micro files not found)")
+        print(f"\nSkipping Step 2b (question curation - macro/micro files required)\n")
 
 
     # =====================================================================

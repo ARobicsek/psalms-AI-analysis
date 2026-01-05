@@ -16,7 +16,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches
