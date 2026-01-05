@@ -41,6 +41,7 @@ from src.agents.micro_analyst import MicroAnalystV2
 from src.agents.synthesis_writer import SynthesisWriter
 from src.agents.master_editor import MasterEditorV2 as MasterEditor
 from src.agents.master_editor_old import MasterEditor as MasterEditorOld
+from src.agents.question_curator import QuestionCurator
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
@@ -310,6 +311,8 @@ def run_enhanced_pipeline(
     docx_output_college_file = output_path / f"psalm_{psalm_number:03d}_commentary_college.docx"
     # Combined document file path
     docx_output_combined_file = output_path / f"psalm_{psalm_number:03d}_commentary_combined.docx"
+    # Reader questions file
+    reader_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions.json"
 
     # Handle resume mode - auto-detect last completed step
     if resume and not smoke_test:
@@ -650,8 +653,60 @@ def run_enhanced_pipeline(
 
 
     # =====================================================================
+    # STEP 2b: Question Curation (Reader Questions)
+    # =====================================================================
+    if smoke_test:
+        logger.info("\n[STEP 2b] SMOKE TEST: Generating dummy reader questions...")
+        print(f"\n{'='*80}")
+        print(f"STEP 2b: SMOKE TEST - Question Curation")
+        print(f"{'='*80}\n")
+        
+        dummy_questions = {
+            'psalm_number': psalm_number,
+            'curated_questions': ["Is this a smoke test question?"],
+            'source_questions': {'macro_source': [], 'micro_source': []}
+        }
+        with open(reader_questions_file, 'w', encoding='utf-8') as f:
+            json.dump(dummy_questions, f, ensure_ascii=False, indent=2)
+        logger.info(f"✓ SMOKE TEST: Dummy reader questions saved to {reader_questions_file}")
+        print(f"✓ SMOKE TEST: Dummy reader questions complete: {reader_questions_file}\n")
+        
+    elif not skip_micro:  # Generate questions if micro was run
+        logger.info("\n[STEP 2b] Curating reader questions from macro/micro analysis...")
+        print(f"\n{'='*80}")
+        print(f"STEP 2b: Question Curation (Questions for the Reader)")
+        print(f"{'='*80}\n")
+        
+        try:
+            question_curator = QuestionCurator(cost_tracker=cost_tracker)
+            curated_questions, source_questions = question_curator.curate_questions(
+                psalm_number=psalm_number,
+                macro_file=macro_file,
+                micro_file=micro_file
+            )
+            
+            question_curator.save_questions(
+                questions=curated_questions,
+                source_questions=source_questions,
+                output_path=output_path,
+                psalm_number=psalm_number
+            )
+            
+            logger.info(f"✓ Reader questions curated: {len(curated_questions)} questions")
+            print(f"✓ Reader questions: {reader_questions_file}\n")
+            
+        except Exception as e:
+            logger.warning(f"Question curation failed (non-fatal): {e}")
+            print(f"⚠ Question curation failed (continuing pipeline): {e}\n")
+    else:
+        logger.info(f"[STEP 2b] Skipping question curation (micro analysis was skipped)")
+        print(f"\nSkipping Step 2b (question curation - depends on macro/micro output)\n")
+
+
+    # =====================================================================
     # STEP 3: Synthesis (Enhanced Prompts)
     # =====================================================================
+
     if smoke_test:
         logger.info("\n[STEP 3] SMOKE TEST: Generating dummy SynthesisWriter output...")
         print(f"\n{'='*80}")
@@ -909,7 +964,8 @@ def run_enhanced_pipeline(
                 research_file=research_file,
                 macro_file=macro_file,
                 micro_file=micro_file,
-                psalm_number=psalm_number
+                psalm_number=psalm_number,
+                reader_questions_file=reader_questions_file if reader_questions_file.exists() else None
             )
         except openai.RateLimitError as e:
             logger.error(f"PIPELINE HALTED: OpenAI API quota exceeded during Master Editor step. {e}")
@@ -1162,7 +1218,8 @@ def run_enhanced_pipeline(
                     intro_path=intro_for_docx,
                     verses_path=verses_for_docx,
                     stats_path=summary_json_file,
-                    output_path=docx_output_file
+                    output_path=docx_output_file,
+                    reader_questions_path=reader_questions_file if reader_questions_file.exists() else None
                 )
                 generator.generate()
                 logger.info(f"Successfully generated Word document for Psalm {psalm_number}.")
@@ -1259,7 +1316,8 @@ def run_enhanced_pipeline(
                         college_intro_path=edited_intro_college_file,
                         college_verses_path=edited_verses_college_file,
                         stats_path=summary_json_file,
-                        output_path=docx_output_combined_file
+                        output_path=docx_output_combined_file,
+                        reader_questions_path=reader_questions_file if reader_questions_file.exists() else None
                     )
                     generator_combined.generate()
                     logger.info(f"Successfully generated combined Word document for Psalm {psalm_number}.")

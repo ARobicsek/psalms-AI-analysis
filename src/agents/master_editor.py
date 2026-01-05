@@ -165,6 +165,9 @@ You are a teacher creating "aha!" moments. If an extra sentence would illuminate
 ### ANALYTICAL FRAMEWORK (poetic conventions reference)
 {analytical_framework}
 
+### READER QUESTIONS (questions readers will see before reading)
+{reader_questions}
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -355,6 +358,7 @@ Return your response with these THREE sections:
 ☐ Liturgical section has actual content with #### subsections
 ☐ Each verse commentary starts with punctuated Hebrew text
 ☐ Phonetic transcriptions only appear where sound matters
+☐ READER QUESTIONS: Each question from the READER QUESTIONS section is addressed somewhere in the intro essay or verse commentary
 
 Begin your editorial review and revision.
 """
@@ -688,7 +692,8 @@ class MasterEditorV2:
         macro_file: Path,
         micro_file: Path,
         psalm_text_file: Optional[Path] = None,
-        psalm_number: Optional[int] = None
+        psalm_number: Optional[int] = None,
+        reader_questions_file: Optional[Path] = None
     ) -> Dict[str, str]:
         """
         Perform master editorial review and revision.
@@ -701,6 +706,7 @@ class MasterEditorV2:
             micro_file: Path to micro analysis JSON
             psalm_text_file: Path to psalm text (optional)
             psalm_number: Psalm number (extracted from files if not provided)
+            reader_questions_file: Path to reader questions JSON (optional)
 
         Returns:
             Dictionary with 'assessment', 'revised_introduction', 'revised_verses', 'psalm_number'
@@ -740,6 +746,20 @@ class MasterEditorV2:
         self.logger.info(f"  Verse commentary: {len(verse_commentary)} chars")
         self.logger.info(f"  Research bundle: {len(research_bundle)} chars")
 
+        # Load reader questions if available
+        reader_questions = "[No reader questions provided]"
+        if reader_questions_file and reader_questions_file.exists():
+            try:
+                import json
+                with open(reader_questions_file, 'r', encoding='utf-8') as f:
+                    rq_data = json.load(f)
+                questions = rq_data.get('curated_questions', [])
+                if questions:
+                    reader_questions = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
+                    self.logger.info(f"  Reader questions: {len(questions)} questions loaded")
+            except Exception as e:
+                self.logger.warning(f"Could not load reader questions: {e}")
+
         # Perform editorial review
         result = self._perform_editorial_review(
             psalm_number=psalm_number,
@@ -749,7 +769,8 @@ class MasterEditorV2:
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
             psalm_text=psalm_text,
-            analytical_framework=analytical_framework
+            analytical_framework=analytical_framework,
+            reader_questions=reader_questions
         )
 
         self.logger.info("Master editorial review complete (V2)")
@@ -768,18 +789,21 @@ class MasterEditorV2:
         macro_analysis: Dict,
         micro_analysis: Dict,
         psalm_text: str,
-        analytical_framework: str
+        analytical_framework: str,
+        reader_questions: str = "[No reader questions provided]"
     ) -> Dict[str, str]:
         """Route to appropriate model implementation."""
         if "claude" in self.model.lower():
             return self._perform_editorial_review_claude(
                 psalm_number, introduction, verse_commentary, research_bundle,
-                macro_analysis, micro_analysis, psalm_text, analytical_framework
+                macro_analysis, micro_analysis, psalm_text, analytical_framework,
+                reader_questions
             )
         else:
             return self._perform_editorial_review_gpt(
                 psalm_number, introduction, verse_commentary, research_bundle,
-                macro_analysis, micro_analysis, psalm_text, analytical_framework
+                macro_analysis, micro_analysis, psalm_text, analytical_framework,
+                reader_questions
             )
 
     def _perform_editorial_review_gpt(
@@ -791,7 +815,8 @@ class MasterEditorV2:
         macro_analysis: Dict,
         micro_analysis: Dict,
         psalm_text: str,
-        analytical_framework: str
+        analytical_framework: str,
+        reader_questions: str = "[No reader questions provided]"
     ) -> Dict[str, str]:
         """Call GPT-5.1 for editorial review."""
         self.logger.info(f"Calling {self.model} for editorial review")
@@ -809,7 +834,8 @@ class MasterEditorV2:
             psalm_text=psalm_text or "[Psalm text not available]",
             macro_analysis=macro_text,
             micro_analysis=micro_text,
-            analytical_framework=analytical_framework
+            analytical_framework=analytical_framework,
+            reader_questions=reader_questions
         )
 
         # Save prompt for debugging
@@ -866,7 +892,8 @@ class MasterEditorV2:
         macro_analysis: Dict,
         micro_analysis: Dict,
         psalm_text: str,
-        analytical_framework: str
+        analytical_framework: str,
+        reader_questions: str = "[No reader questions provided]"
     ) -> Dict[str, str]:
         """Call Claude Opus 4.5 for editorial review with extended thinking."""
         self.logger.info(f"Calling {self.model} for editorial review with extended thinking")
@@ -884,8 +911,10 @@ class MasterEditorV2:
             psalm_text=psalm_text or "[Psalm text not available]",
             macro_analysis=macro_text,
             micro_analysis=micro_text,
-            analytical_framework=analytical_framework
+            analytical_framework=analytical_framework,
+            reader_questions=reader_questions
         )
+
 
         # Save prompt for debugging
         prompt_file = Path(f"output/debug/master_editor_v2_prompt_psalm_{psalm_number}.txt")

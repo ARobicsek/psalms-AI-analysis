@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2025-12-30 (Session 229)
+**Last Updated**: 2026-01-05 (Session 230)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 229
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator (✅ Active), Tribal Blessings Analyzer (✅ NEW)
+- **Current Session**: 230
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Questions for the Reader (✅ NEW)
 
 ---
 
@@ -32,6 +32,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 | Phase 1: Text Extraction | ✅ Complete | All Tanakh text extracted and stored in SQLite |
 | Phase 2: Macro Analysis | ✅ Complete | All psalms analyzed for themes and structure |
 | Phase 3: Micro Analysis | ✅ Complete | Verse-by-verse phrase extraction complete |
+| Phase 3b: Question Curation | ✅ Complete | LLM-curated reader questions from analysis |
 | Phase 4: Research Assembly | ✅ Complete | Optimizing figurative language search and trimming |
 | Phase 5: Synthesis Generation | ✅ Complete | Commentary generation with Gemini fallback |
 | Phase 6: Editing and Publication | ✅ Complete | Master Editor V2, DOCX generation |
@@ -42,14 +43,37 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms with pacing guidance
 - **Pipeline Skip Logic**: New `--resume` flag for automatic step detection
-- **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3 Pro (fully integrated)
+- **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3 Pro
+- **Questions for the Reader**: LLM-curated questions appear before Introduction to prime reader engagement
 
 ### Known Limitations
 - Large psalms may require Gemini fallback (additional cost)
 - Deep research must be manually prepared via Gemini browser interface
 - Figurative Curator adds ~$0.30-0.50 per psalm to processing cost
+- Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
 
 ---
+
+### Session 230 (2026-01-05): Questions for the Reader Feature
+- **NEW Feature**: LLM-curated "Questions for the Reader" section before Introduction
+  - `src/agents/question_curator.py` - Extracts questions from macro/micro analysis, uses Gemini Flash to curate 4-6 engaging questions
+  - Questions placed immediately after psalm text, before Introduction in .docx output
+  - MasterEditor prompt updated to verify all questions are addressed in commentary
+- **Pipeline Integration**:
+  - Added STEP 2b: Question Curation (after micro analysis, before synthesis)
+  - DocumentGenerator and CombinedDocumentGenerator updated to render questions
+  - Output: `psalm_XXX_reader_questions.json` per psalm
+- **Design Decisions**:
+  - Questions sourced from `research_questions` (macro) and `interesting_questions` (micro)
+  - Gemini Flash for cost-effective curation (~$0.01-0.02 per psalm)
+  - Style: "Engaging scholarly" - specific to the psalm, spans structure/language/theology
+  - Retroactive generation for completed psalms: NOT implemented (per user request)
+- **Files Created/Modified**:
+  - `src/agents/question_curator.py` (NEW)
+  - `src/agents/master_editor.py` (prompt + code changes)
+  - `scripts/run_enhanced_pipeline.py` (STEP 2b + parameter passing)
+  - `src/utils/document_generator.py` (render questions section)
+  - `src/utils/combined_document_generator.py` (render questions section)
 
 ### Session 229 (2025-12-30): Tribal Blessings Analyzer for Genesis 49
 - **NEW Feature**: Created standalone analysis system for Genesis 49 tribal blessings
@@ -66,6 +90,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - **Design**: Generalizable `PassageAnalysisConfig` pattern for future use on other passages (Deut 33, Numbers 23-24, etc.)
 
 ### Session 228 (2025-12-29): Figurative Stats Formatting & Model Tracking
+
 - **Feature**: Added programmatic tracking of LLM models used in the Methods section of Word documents.
   - Exposed `active_model` property in `LiturgicalLibrarian` and `FigurativeCurator`.
   - Updated `ResearchAssembler` to capture models in the `ResearchBundle`.

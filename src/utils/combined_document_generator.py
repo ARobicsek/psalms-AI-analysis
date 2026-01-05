@@ -66,7 +66,8 @@ class CombinedDocumentGenerator:
     def __init__(self, psalm_num: int,
                  main_intro_path: Path, main_verses_path: Path,
                  college_intro_path: Path, college_verses_path: Path,
-                 stats_path: Path, output_path: Path):
+                 stats_path: Path, output_path: Path,
+                 reader_questions_path: Path = None):
         self.psalm_num = psalm_num
         self.main_intro_path = main_intro_path
         self.main_verses_path = main_verses_path
@@ -74,6 +75,7 @@ class CombinedDocumentGenerator:
         self.college_verses_path = college_verses_path
         self.stats_path = stats_path
         self.output_path = output_path
+        self.reader_questions_path = reader_questions_path
         self.document = Document()
         self._set_default_styles()
         self.modifier = DivineNamesModifier()
@@ -639,6 +641,31 @@ Methodological & Bibliographical Summary
         # Add a page break after the psalm text table
         self.document.add_paragraph() # Add a paragraph to attach the break to
         self.document.add_page_break()
+
+        # 2b. Add Questions for the Reader (if available)
+        if self.reader_questions_path and self.reader_questions_path.exists():
+            try:
+                questions_data = json.loads(self.reader_questions_path.read_text(encoding='utf-8'))
+                questions = questions_data.get('curated_questions', [])
+                if questions:
+                    self.document.add_heading('Questions for the Reader', level=2)
+                    
+                    # Add introductory italic text
+                    intro_p = self.document.add_paragraph(style='BodySans')
+                    intro_run = intro_p.add_run('Before reading this commentary, consider the following questions:')
+                    intro_run.italic = True
+                    
+                    # Add each question as a numbered paragraph
+                    for i, question in enumerate(questions, 1):
+                        q_p = self.document.add_paragraph(style='BodySans')
+                        q_p.add_run(f"{i}. ").bold = True
+                        self._process_markdown_formatting(q_p, question, set_font=False)
+                    
+                    # Add spacing after questions
+                    self.document.add_paragraph()
+            except Exception as e:
+                # Log but don't fail if questions can't be loaded
+                print(f"Warning: Could not load reader questions: {e}")
 
         # 3. Add Main Introduction
         self.document.add_heading('Introduction', level=2)
