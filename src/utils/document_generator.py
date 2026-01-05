@@ -957,7 +957,7 @@ Methodological & Bibliographical Summary
 
 ### Research & Data Inputs
 **Psalm Verses Analyzed**: {verse_count}
-**LXX (Septuagint) Texts Reviewed**: {verse_count}
+**LXX (Septuagint) Verses Reviewed**: {verse_count}
 **Phonetic Transcriptions Generated**: {verse_count}
 **Ugaritic Parallels Reviewed**: {ugaritic_count}
 **Lexicon Entries (BDB/Klein) Reviewed**: {lexicon_count}

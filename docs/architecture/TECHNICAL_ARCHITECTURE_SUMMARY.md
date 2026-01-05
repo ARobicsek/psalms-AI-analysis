@@ -1,18 +1,21 @@
 # Technical Architecture Summary: Psalms Commentary Pipeline
 
-**Date**: 2025-12-26
-**Version**: Enhanced Pipeline V6.3 (Phase 4, Sessions 200-222)
-**Status**: Production System with SI Pipeline, Gemini Fallback, V2 Prompts
+**Date**: 2026-01-04
+**Version**: Enhanced Pipeline V6.4 (Phase 4, Sessions 200-229)
+**Status**: Production System with Figurative Curator, SI Pipeline, Gemini Fallback, V2 Prompts
 
 ---
 
 ## Executive Summary
 
-The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, GPT-5.1) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
+The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, GPT-5.1, Gemini 3 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
 
-**Latest Enhancements (Sessions 200-220)**:
+**Latest Enhancements (Sessions 200-229)**:
+- **Figurative Curator**: LLM-enhanced agent using Gemini 3 Pro to curate figurative language insights (Sessions 224-227)
+- **Tribal Blessings Analyzer**: Reusable non-Psalm analysis for structured biblical passages (Session 229)
+- **Divine Names Fix**: Correct handling of שְׁדּי (breasts) vs שַׁדַּי (Shaddai) (Session 223)
 - **Special Instruction Pipeline**: Author-directed commentary revisions without altering standard pipeline (Session 220)
 - **Master Editor V2**: Restructured prompt with explicit Deep Research guidance, now default (Session 215)
 - **Gemini 2.5 Pro Fallback**: Automatic switching for large psalms (51+ verses) with 1M token context (Session 211)
@@ -249,20 +252,34 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Cultural and artistic afterlife, scholarly debates, political reception
   - Pipeline stats track "Deep Web Research: Yes/No"
 
+#### Figurative Curator (Sessions 224-227)
+- **Function**: LLM-enhanced agent that transforms raw figurative concordance results into curated scholarly insights
+- **Model**: Gemini 3 Pro (`gemini-3-pro-preview`) with high reasoning
+- **Implementation**: `src/agents/figurative_curator.py`
+- **Key Features**:
+  - Executes searches against figurative language database (50 results/search initial, 30 follow-up)
+  - 3-iteration refinement process based on gap analysis
+  - Curates 5-15 examples per vehicle with full Hebrew text
+  - Synthesizes 4-5 prose insights (100-150 words each) connecting examples to psalm themes
+  - Adapts analysis structure to psalm pattern (journey, descent_ascent, lament_structure, etc.)
+  - Cost: ~$0.30-0.50 per psalm
+  - Output bypasses standard figurative trimming (curator pre-optimizes content)
+
 #### Research Bundle Assembler
-- **Function**: Coordinates all 9 librarians and formats results
+- **Function**: Coordinates all 10 librarians and formats results
 - **Output**: Markdown format for LLM consumption
 - **Implementation**: `src/agents/research_assembler.py`
 - **Librarians Coordinated**:
   1. BDB Librarian (lexicon entries)
   2. Concordance Librarian (word/phrase searches)
   3. Figurative Language Librarian (metaphor analysis)
-  4. Commentary Librarian (traditional Jewish commentaries)
-  5. Liturgical Librarian (liturgical usage - Phase 4/5 aggregated)
-  6. Liturgical Librarian Sefaria (liturgical usage - Phase 0 fallback, deprecated)
-  7. Related Psalms Librarian (statistical connections)
-  8. Sacks Librarian (modern British Orthodox perspective)
-  9. Deep Web Research Librarian (cultural afterlife, reception history)
+  4. Figurative Curator (LLM-curated insights from figurative database)
+  5. Commentary Librarian (traditional Jewish commentaries)
+  6. Liturgical Librarian (liturgical usage - Phase 4/5 aggregated)
+  7. Liturgical Librarian Sefaria (liturgical usage - Phase 0 fallback, deprecated)
+  8. Related Psalms Librarian (statistical connections)
+  9. Sacks Librarian (modern British Orthodox perspective)
+  10. Deep Web Research Librarian (cultural afterlife, reception history)
 - **Key Features**:
   - JSON and Markdown serialization
   - Token limit management (700,000 character capacity - Session 109)
@@ -531,10 +548,16 @@ python scripts/tribal_blessings_analyzer.py --list
 
 ## Recent Enhancements
 
-### Sessions 200-222
+### Sessions 200-229
 
 | Session | Date | Feature | Description |
 |---------|------|---------|-------------|
+| 229 | 2025-12-30 | Tribal Blessings Analyzer | Reusable non-Psalm analysis for Genesis 49 and similar passages |
+| 228 | 2025-12-29 | Figurative Stats Formatting | Model tracking in Methods section, inline stats formatting |
+| 227 | 2025-12-29 | Figurative Curator Finalization | Cost tracking, Methods section updates, integration verified |
+| 226 | 2025-12-29 | Figurative Curator Integration | Production module, trimming logic, research assembler integration |
+| 225 | 2025-12-29 | Figurative Curator Improvements | 4-5 insights, 5-15 examples per vehicle, adaptive structure types |
+| 223 | 2025-12-28 | Divine Names שְׁדּי Fix | Vowel check to distinguish שְׁדּי (breasts) from שַׁדַּי (Shaddai) |
 | 222 | 2025-12-26 | Priority-Based Figurative Trimming | LLM-decided term priority, sorted results, lowest-priority trimmed first |
 | 220 | 2025-12-22 | Special Instruction Pipeline | Author-directed commentary revisions without altering standard pipeline |
 | 219 | 2025-12-21 | Resume Feature | `--resume` flag for automatic step detection |

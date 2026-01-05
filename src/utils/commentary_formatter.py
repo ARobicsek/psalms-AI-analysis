@@ -161,7 +161,7 @@ class CommentaryFormatter:
         analysis_data = stats.get('analysis', {}) or {}
         verse_count = analysis_data.get('verse_count', 'N/A') 
         lines.append(f"- **Psalm Verses Analyzed**: {verse_count}")
-        lines.append(f"- **LXX (Septuagint) Texts Reviewed**: {verse_count}") # Assumes LXX is reviewed for all verses
+        lines.append(f"- **LXX (Septuagint) Verses Reviewed**: {verse_count}") # Assumes LXX is reviewed for all verses
         lines.append(f"- **Phonetic Transcriptions Generated**: {verse_count}") # Assumes one per verse
 
         research_data = stats.get('research', {}) or {}
