@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-05 (Session 230)
+**Last Updated**: 2026-01-08 (Session 231)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 230
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Questions for the Reader (✅ NEW)
+- **Current Session**: 231
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Questions for the Reader, RTL Hebrew Text Formatting (✅ NEW)
 
 ---
 
@@ -53,6 +53,22 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
 
 ---
+
+### Session 231 (2026-01-08): Fixed RTL Text Rendering for Psalm 100:3
+- **Objective**: Correctly render standalone Hebrew verse lines and Ketiv/Qere variants in produced .docx files (specifically Psalm 100:3).
+- **Problems Fixed**:
+  - Hebrew text inside square brackets `[]` (Ketiv/Qere) was not being reversed for RTL display.
+  - Standalone Hebrew verse lines (like Ps 100:3) were displaying jumbled word order because the LTR paragraph setting forced LTR on the entire line.
+  - Parentheses/brackets were pointing in the wrong direction after RTL reversal.
+- **Solutions Implemented**:
+  1. **Extended Regex Support**: Updated `hebrew_paren_pattern` to also handle `[]` brackets.
+  2. **Primarily-Hebrew Line Detection**: Added `_is_primarily_hebrew()` to detect standalone verse lines (requires sof-pasuq `׃` AND <5% ASCII characters).
+  3. **Full-Line Reversal**: Added `_reverse_primarily_hebrew_line()` to reverse entire verse lines while preserving word-internal grapheme order.
+  4. **Bracket Mirroring**: Added logic to swap `(` ↔ `)` and `[` ↔ `]` during reversal to correct directional display.
+  5. **Applied to All Generators**: Fixes implemented in both `DocumentGenerator` and `CombinedDocumentGenerator`.
+- **Files Modified**:
+  - `src/utils/document_generator.py`
+  - `src/utils/combined_document_generator.py`
 
 ### Session 230 (2026-01-05): Questions for the Reader Feature
 - **NEW Feature**: LLM-curated "Questions for the Reader" section before Introduction

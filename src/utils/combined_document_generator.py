@@ -120,6 +120,95 @@ class CombinedDocumentGenerator:
         reversed_clusters = clusters[::-1]
         return ''.join(reversed_clusters)
 
+    @staticmethod
+    def _is_primarily_hebrew(text: str) -> bool:
+        """
+        Detect if a line is a standalone Hebrew verse line (not mixed Hebrew/English).
+        
+        A line is a standalone Hebrew verse if:
+        - Contains sof-pasuq (׃) - the Hebrew end-of-verse marker
+        - Has very few or no ASCII letters (< 5% of total letters)
+        
+        This is intentionally strict to avoid triggering on English commentary
+        paragraphs that contain many Hebrew quotations.
+        """
+        if not text.strip():
+            return False
+        
+        # Must have sof-pasuq to be considered a complete Hebrew verse line
+        has_sof_pasuq = '׃' in text
+        if not has_sof_pasuq:
+            return False
+        
+        # Count Hebrew letters (U+05D0-U+05EA)
+        hebrew_letters = len(re.findall(r'[\u05D0-\u05EA]', text))
+        # Count ASCII letters
+        ascii_letters = len(re.findall(r'[a-zA-Z]', text))
+        
+        total_letters = hebrew_letters + ascii_letters
+        if total_letters == 0:
+            return False
+        
+        # Require very low ASCII ratio (< 5%) to be considered primarily Hebrew
+        # This excludes mixed paragraphs like "This is the psalm's theological center..."
+        ascii_ratio = ascii_letters / total_letters
+        
+        return ascii_ratio < 0.05
+
+    @staticmethod
+    def _reverse_primarily_hebrew_line(text: str) -> str:
+        """
+        Reverse an entire primarily-Hebrew line for correct RTL display in LTR paragraphs.
+        
+        Handles:
+        - Hebrew words (reversed by grapheme clusters)
+        - Punctuation mirroring (brackets/parentheses swap directions)
+        - Spaces and separators
+        
+        The approach: split by spaces, reverse each Hebrew word, reverse the word order,
+        mirror bracket characters.
+        """
+        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+        
+        # Mirror map for brackets/parentheses - these need to swap in RTL
+        MIRROR_MAP = {
+            '(': ')',
+            ')': '(',
+            '[': ']',
+            ']': '[',
+            '{': '}',
+            '}': '{',
+            '<': '>',
+            '>': '<',
+        }
+        
+        # Pattern to split on word boundaries while keeping delimiters
+        # This captures spaces, semicolons, parentheses, brackets
+        tokens = re.split(r'(\s+|[;:,.()\[\]׃])', text)
+        
+        reversed_tokens = []
+        for token in tokens:
+            if not token:
+                continue
+            # If token contains Hebrew letters, reverse by grapheme clusters
+            if re.search(r'[\u05D0-\u05EA]', token):
+                reversed_token = CombinedDocumentGenerator._reverse_hebrew_by_clusters(token)
+                reversed_tokens.append(reversed_token)
+            elif token in MIRROR_MAP:
+                # Mirror brackets/parentheses for RTL display
+                reversed_tokens.append(MIRROR_MAP[token])
+            else:
+                # Keep other punctuation and spaces as-is
+                reversed_tokens.append(token)
+        
+        # Reverse the entire token list to get RTL word order
+        reversed_tokens.reverse()
+        
+        # Join and wrap with LRO to force display in reversed order
+        result = ''.join(reversed_tokens)
+        return f'{LRO}{result}{PDF}'
+
     def _set_default_styles(self):
         """Set default font for the document."""
         # Set default font
@@ -216,24 +305,36 @@ class CombinedDocumentGenerator:
                     run.font.name = 'Aptos'
                     run.font.size = Pt(12)
             else:
-                # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
-                # This prevents punctuation from being reversed or moved around
-                hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-                if re.search(hebrew_paren_pattern, part):
-                    LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-                    PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-
-                    def reverse_hebrew_match(match):
-                        hebrew_text = match.group(1)
-                        # Reverse by grapheme clusters (keeps nikud attached)
-                        reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                        # Wrap with LRO to force LTR display
-                        return f'{LRO}({reversed_hebrew}){PDF}'
-
-                    modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_match, part)
+                # Check if this is a primarily-Hebrew line (like a verse text)
+                # If so, apply full-line RTL reversal for correct display
+                if self._is_primarily_hebrew(part):
+                    modified_part = self._reverse_primarily_hebrew_line(part)
                     run = paragraph.add_run(modified_part)
                 else:
-                    run = paragraph.add_run(part)
+                    # Handle parenthesized/bracketed Hebrew with grapheme cluster reversal + LRO
+                    # This prevents punctuation from being reversed or moved around
+                    hebrew_paren_pattern = r'\(([֐-׿ְ-ֽֿׁ-ׂׄ-ׇ\s]+)\)'
+                    hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
+                    
+                    modified_part = part
+                    LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                    PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+                    
+                    if re.search(hebrew_paren_pattern, modified_part):
+                        def reverse_hebrew_paren(match):
+                            hebrew_text = match.group(1)
+                            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                            return f'{LRO}({reversed_hebrew}){PDF}'
+                        modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_part)
+                    
+                    if re.search(hebrew_bracket_pattern, modified_part):
+                        def reverse_hebrew_bracket(match):
+                            hebrew_text = match.group(1)
+                            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                            return f'{LRO}[{reversed_hebrew}]{PDF}'
+                        modified_part = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_part)
+                    
+                    run = paragraph.add_run(modified_part)
 
                 if set_font:
                     run.font.name = 'Aptos'
@@ -276,21 +377,34 @@ class CombinedDocumentGenerator:
                         run.font.size = Pt(12)
                 else:
                     # Regular text with base formatting
-                    # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
-                    hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-                    if re.search(hebrew_paren_pattern, part):
-                        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-                        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-
-                        def reverse_hebrew_match(match):
-                            hebrew_text = match.group(1)
-                            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                            return f'{LRO}({reversed_hebrew}){PDF}'
-
-                        modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_match, part)
+                    # Check if primarily Hebrew and apply full-line reversal
+                    if self._is_primarily_hebrew(part):
+                        modified_part = self._reverse_primarily_hebrew_line(part)
                         run = paragraph.add_run(modified_part)
                     else:
-                        run = paragraph.add_run(part)
+                        # Handle parenthesized/bracketed Hebrew with grapheme cluster reversal + LRO
+                        hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+                        hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
+                        
+                        modified_part = part
+                        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+                        
+                        if re.search(hebrew_paren_pattern, modified_part):
+                            def reverse_hebrew_paren(match):
+                                hebrew_text = match.group(1)
+                                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                                return f'{LRO}({reversed_hebrew}){PDF}'
+                            modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_part)
+                        
+                        if re.search(hebrew_bracket_pattern, modified_part):
+                            def reverse_hebrew_bracket(match):
+                                hebrew_text = match.group(1)
+                                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                                return f'{LRO}[{reversed_hebrew}]{PDF}'
+                            modified_part = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_part)
+                        
+                        run = paragraph.add_run(modified_part)
                     run.bold = bold
                     run.italic = italic
                     if set_font:
@@ -298,21 +412,34 @@ class CombinedDocumentGenerator:
                         run.font.size = Pt(12)
         else:
             # No nested formatting - just add with base formatting
-            # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
-            hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-            if re.search(hebrew_paren_pattern, text):
-                LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-                PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-
-                def reverse_hebrew_match(match):
-                    hebrew_text = match.group(1)
-                    reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                    return f'{LRO}({reversed_hebrew}){PDF}'
-
-                modified_text = re.sub(hebrew_paren_pattern, reverse_hebrew_match, text)
+            # Check if primarily Hebrew and apply full-line reversal
+            if self._is_primarily_hebrew(text):
+                modified_text = self._reverse_primarily_hebrew_line(text)
                 run = paragraph.add_run(modified_text)
             else:
-                run = paragraph.add_run(text)
+                # Handle parenthesized/bracketed Hebrew with grapheme cluster reversal + LRO
+                hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+                hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
+                
+                modified_text = text
+                LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+                
+                if re.search(hebrew_paren_pattern, modified_text):
+                    def reverse_hebrew_paren(match):
+                        hebrew_text = match.group(1)
+                        reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                        return f'{LRO}({reversed_hebrew}){PDF}'
+                    modified_text = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_text)
+                
+                if re.search(hebrew_bracket_pattern, modified_text):
+                    def reverse_hebrew_bracket(match):
+                        hebrew_text = match.group(1)
+                        reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                        return f'{LRO}[{reversed_hebrew}]{PDF}'
+                    modified_text = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_text)
+                
+                run = paragraph.add_run(modified_text)
             run.bold = bold
             run.italic = italic
             if set_font:
