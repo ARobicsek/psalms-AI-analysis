@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-08 (Session 231)
+**Last Updated**: 2026-01-11 (Session 233)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 231
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Questions for the Reader, RTL Hebrew Text Formatting (✅ NEW)
+- **Current Session**: 233
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Questions for the Reader, RTL Hebrew Text Formatting (✅ IMPROVED), Model Tracking (Single Source of Truth)
 
 ---
 
@@ -53,6 +53,40 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
 
 ---
+
+### Session 233 (2026-01-11): RTL Display Fixes - Verse References and Hebrew Punctuation
+- **Objective**: Fix display bugs in .docx outputs related to RTL handling.
+- **Problems Fixed**:
+  1. **Verse Reference Reversal**: References like `(26:6–7)` were being displayed as `(7–26:6)` in Hebrew contexts because Word's bidi algorithm was reversing the digits.
+  2. **Hebrew Trailing Punctuation**: Periods and semicolons at the end of Hebrew text were floating to the far left of the line instead of staying adjacent to the final Hebrew character.
+- **Solutions Implemented**:
+  1. **LRO/PDF Wrapping for Verse References**: Pattern `\(\d+:\d+(?:[–\-]\d+)?\)` matched and wrapped with LEFT-TO-RIGHT OVERRIDE to force correct digit display.
+  2. **RLM After Hebrew Punctuation**: Added RIGHT-TO-LEFT MARK (U+200F) after trailing punctuation in Hebrew-heavy text to anchor periods/semicolons to the RTL context.
+  3. **Applied to All Code Paths**: Fixes implemented in `_process_markdown_formatting()`, `_add_formatted_content()`, `_add_paragraph_with_soft_breaks()`, and `_reverse_primarily_hebrew_line()`.
+- **Files Modified**:
+  - `src/utils/document_generator.py`
+  - `src/utils/combined_document_generator.py`
+
+### Session 232 (2026-01-10): Model Name Tracking - Single Source of Truth Pattern
+- **Objective**: Investigate pipeline model usage discrepancy between Psalm 26 and 27; implement robust model tracking.
+- **Investigation Findings**:
+  - Pipeline stats JSON showed different model names: Psalm 26 had `claude-3-5-sonnet-20241022` while Psalm 27 had `claude-sonnet-4-5` for macro/micro analysis.
+  - Log files confirmed BOTH runs actually used `claude-sonnet-4-5` - the discrepancy was a metadata recording artifact, not an actual processing difference.
+  - Root cause: Hardcoded fallback model names in `run_enhanced_pipeline.py` used outdated model identifiers when skip flags were active.
+- **Solutions Implemented**:
+  1. **Added class-level constants**: `DEFAULT_MODEL` constants added to `MacroAnalyst` and `MicroAnalystV2` classes.
+  2. **Updated agent `__init__` methods**: Now use `self.DEFAULT_MODEL` instead of hardcoded strings.
+  3. **Updated pipeline skip logic**: References `MacroAnalyst.DEFAULT_MODEL` and `MicroAnalystV2.DEFAULT_MODEL` instead of hardcoded strings.
+  4. **Corrected Psalm 26 stats**: Updated `psalm_026_pipeline_stats.json` to show correct model names.
+- **Benefits**:
+  - Single source of truth for model names (change once in agent class, updates everywhere).
+  - No hardcoded fallbacks that can become stale.
+  - Future model upgrades require only one change per agent.
+- **Files Modified**:
+  - `src/agents/macro_analyst.py` - Added `DEFAULT_MODEL` class constant
+  - `src/agents/micro_analyst.py` - Added `DEFAULT_MODEL` class constant
+  - `scripts/run_enhanced_pipeline.py` - Uses class constants for skip-step tracking
+  - `output/psalm_26/psalm_026_pipeline_stats.json` - Corrected model names
 
 ### Session 231 (2026-01-08): Fixed RTL Text Rendering for Psalm 100:3
 - **Objective**: Correctly render standalone Hebrew verse lines and Ketiv/Qere variants in produced .docx files (specifically Psalm 100:3).

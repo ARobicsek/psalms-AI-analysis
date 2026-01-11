@@ -435,8 +435,8 @@ def run_enhanced_pipeline(
         # skip_macro is True - explicitly skipped by user
         logger.info(f"[STEP 1] Skipping macro analysis (--skip-macro flag set)")
         print(f"\nSkipping Step 1 (macro analysis explicitly skipped)\n")
-        # Use default model name for tracking when skipping
-        macro_model = "claude-3-5-sonnet-20241022"  # Default model
+        # Use the class constant for the model name (single source of truth)
+        macro_model = MacroAnalyst.DEFAULT_MODEL
         tracker.track_model_for_step("macro_analysis", macro_model)
 
     # Load macro analysis
@@ -577,8 +577,8 @@ def run_enhanced_pipeline(
         # skip_micro is True - explicitly skipped by user
         logger.info(f"[STEP 2] Skipping micro analysis (--skip-micro flag set)")
         print(f"\nSkipping Step 2 (micro analysis explicitly skipped)\n")
-        # Use default model name for tracking when skipping
-        micro_model = "claude-3-5-sonnet-20241022"  # Default model
+        # Use the class constant for the model name (single source of truth)
+        micro_model = MicroAnalystV2.DEFAULT_MODEL
         tracker.track_model_for_step("micro_analysis", micro_model)
 
     # Always load the definitive micro_analysis and research_bundle for subsequent steps

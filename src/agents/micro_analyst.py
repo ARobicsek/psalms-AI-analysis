@@ -391,6 +391,9 @@ class MicroAnalystV2:
     3. Assemble research bundle
     """
 
+    # Class-level constant for the default model (single source of truth)
+    DEFAULT_MODEL = "claude-sonnet-4-5"
+
     def __init__(
         self,
         api_key: Optional[str] = None,
@@ -419,7 +422,7 @@ class MicroAnalystV2:
             raise ValueError(f"Invalid commentary_mode: {commentary_mode}. Must be 'all' or 'selective'")
 
         self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = "claude-sonnet-4-5"  # Sonnet 4.5
+        self.model = self.DEFAULT_MODEL  # Use class constant for single source of truth
         self.rag_manager = RAGManager(docs_dir)
         self.db = TanakhDatabase(Path(db_path))
         self.cost_tracker = cost_tracker or CostTracker()

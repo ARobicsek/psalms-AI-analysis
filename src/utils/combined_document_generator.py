@@ -164,12 +164,22 @@ class CombinedDocumentGenerator:
         - Hebrew words (reversed by grapheme clusters)
         - Punctuation mirroring (brackets/parentheses swap directions)
         - Spaces and separators
+        - Verse references like (26:6) or (26:6–7) are extracted and appended outside the LRO wrapper
         
         The approach: split by spaces, reverse each Hebrew word, reverse the word order,
         mirror bracket characters.
         """
         LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
         PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+        
+        # Extract trailing verse reference (if any) to append OUTSIDE the LRO wrapper
+        # Pattern matches trailing space + (N:N) or (N:N–N) or (N:N-N) at end of text
+        trailing_ref_pattern = r'(\s*\(\d+:\d+(?:[–\-]\d+)?\)\s*)$'
+        trailing_ref_match = re.search(trailing_ref_pattern, text)
+        trailing_ref = ''
+        if trailing_ref_match:
+            trailing_ref = trailing_ref_match.group(1)
+            text = text[:trailing_ref_match.start()]  # Remove trailing ref from main text
         
         # Mirror map for brackets/parentheses - these need to swap in RTL
         MIRROR_MAP = {
@@ -185,7 +195,7 @@ class CombinedDocumentGenerator:
         
         # Pattern to split on word boundaries while keeping delimiters
         # This captures spaces, semicolons, parentheses, brackets
-        tokens = re.split(r'(\s+|[;:,.()\[\]׃])', text)
+        tokens = re.split(r'(\s+|[;:,.()\\[\\]׃])', text)
         
         reversed_tokens = []
         for token in tokens:
@@ -207,7 +217,9 @@ class CombinedDocumentGenerator:
         
         # Join and wrap with LRO to force display in reversed order
         result = ''.join(reversed_tokens)
-        return f'{LRO}{result}{PDF}'
+        
+        # Return with LRO wrapper, then append trailing verse reference OUTSIDE the wrapper
+        return f'{LRO}{result}{PDF}{trailing_ref}'
 
     def _set_default_styles(self):
         """Set default font for the document."""
@@ -334,6 +346,21 @@ class CombinedDocumentGenerator:
                             return f'{LRO}[{reversed_hebrew}]{PDF}'
                         modified_part = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_part)
                     
+                    # Wrap verse references with LRO/PDF to prevent Word's bidi algorithm from reversing them
+                    # Pattern matches (N:N) or (N:N–N) or (N:N-N) 
+                    verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
+                    if re.search(verse_ref_pattern, modified_part):
+                        def wrap_verse_ref(match):
+                            return f'{LRO}{match.group(1)}{PDF}'
+                        modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
+                    
+                    # If text contains significant Hebrew and ends with punctuation,
+                    # add RLM (Right-to-Left Mark) to anchor punctuation to the RTL context
+                    RLM = '\u200F'  # RIGHT-TO-LEFT MARK
+                    hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_part))
+                    if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_part):
+                        modified_part = modified_part + RLM
+                    
                     run = paragraph.add_run(modified_part)
 
                 if set_font:
@@ -404,6 +431,19 @@ class CombinedDocumentGenerator:
                                 return f'{LRO}[{reversed_hebrew}]{PDF}'
                             modified_part = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_part)
                         
+                        # Wrap verse references with LRO/PDF
+                        verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
+                        if re.search(verse_ref_pattern, modified_part):
+                            def wrap_verse_ref(match):
+                                return f'{LRO}{match.group(1)}{PDF}'
+                            modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
+                        
+                        # Add RLM for Hebrew trailing punctuation
+                        RLM = '\u200F'
+                        hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_part))
+                        if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_part):
+                            modified_part = modified_part + RLM
+                        
                         run = paragraph.add_run(modified_part)
                     run.bold = bold
                     run.italic = italic
@@ -438,6 +478,19 @@ class CombinedDocumentGenerator:
                         reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
                         return f'{LRO}[{reversed_hebrew}]{PDF}'
                     modified_text = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_text)
+                
+                # Wrap verse references with LRO/PDF
+                verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
+                if re.search(verse_ref_pattern, modified_text):
+                    def wrap_verse_ref(match):
+                        return f'{LRO}{match.group(1)}{PDF}'
+                    modified_text = re.sub(verse_ref_pattern, wrap_verse_ref, modified_text)
+                
+                # Add RLM for Hebrew trailing punctuation
+                RLM = '\u200F'
+                hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_text))
+                if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_text):
+                    modified_text = modified_text + RLM
                 
                 run = paragraph.add_run(modified_text)
             run.bold = bold

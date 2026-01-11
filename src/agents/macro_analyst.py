@@ -187,6 +187,9 @@ class MacroAnalyst:
         >>> print(analysis.to_markdown())
     """
 
+    # Class-level constant for the default model (single source of truth)
+    DEFAULT_MODEL = "claude-sonnet-4-5"
+
     def __init__(
         self,
         api_key: Optional[str] = None,
@@ -210,7 +213,7 @@ class MacroAnalyst:
             raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
 
         self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = "claude-sonnet-4-5"  # Sonnet 4.5 with extended thinking
+        self.model = self.DEFAULT_MODEL  # Use class constant for single source of truth
         self.logger = logger or get_logger("macro_analyst")
         self.cost_tracker = cost_tracker or CostTracker()
 
