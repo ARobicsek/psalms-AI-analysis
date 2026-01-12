@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-12 (Session 236)
+**Last Updated**: 2026-01-12 (Session 237)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 236
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync (✅ NEW)
+- **Current Session**: 237
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Codebase Cleanup & Archiving (✅ NEW)
 
 ---
 
@@ -53,6 +53,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
 
 ---
+
+### Session 237 (2026-01-12): Codebase Cleanup and Archiving
+- **Archived**: Moved 40+ obsolete scripts and documentation files to `archive/` structure
+- **Data Cleanup**: Archived ~450MB of unused Hirsch/Thematic data (large files excluded from git)
+- **Refactoring**: Decoupled and removed `HirschLibrarian` from `ResearchAssembler`; archived `hirsch_librarian.py`
+- **Verification**: Confirmed all production pipelines remain functional
 
 ### Session 236 (2026-01-12): Session Management System Cleanup
 - Archived obsolete `NEXT_SESSION_PROMPT.md` and `SESSION_DOCUMENTATION_PROMPT.md` to archive folder

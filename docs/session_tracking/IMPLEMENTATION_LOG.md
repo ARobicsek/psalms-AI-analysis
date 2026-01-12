@@ -8,6 +8,30 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 237 (2026-01-12): Codebase Cleanup and Archiving
+
+**Objective**: Comprehensive codebase cleanup to archive obsolete scripts, data, and documentation not used in production.
+
+**Problems Identified**:
+- Project root and `scripts/` directory cluttered with unused development scripts (40+ files)
+- `data/` directory contained abandoned Hirsch commentary assets (~450MB) and thematic corpora
+- `src/agents/hirsch_librarian.py` was unused but still imported by `research_assembler.py`
+- Git push failed due to large files (>100MB) in the archive folder
+
+**Solutions Implemented**:
+1. **Archived Assets**: Moved root-level docs/scripts and unused `data/` folders to `archive/`
+2. **Logic Decoupling**: Removed all `HirschLibrarian` dependencies from `ResearchAssembler`
+3. **Large File Management**: Identified and excluded files >100MB (`data_level0.bin`, large PNGs) from git to fix push errors
+4. **Verification**: Confirmed production pipelines (`run_enhanced_pipeline`, `run_si`, `converse`) remain functional via import checks and smoke test
+
+**Files Modified**:
+- `src/agents/research_assembler.py` - Removed Hirsch dependencies
+- `src/agents/hirsch_librarian.py` - Archived
+- `.gitignore` - Added exclusion for large archived files
+- `verify_cleanup_phase2.py` - Created and deleted (verification tool)
+
+---
+
 ## Session 236 (2026-01-12): Session Management System Cleanup
 
 **Objective**: Clean up and right-size the session tracking system.
