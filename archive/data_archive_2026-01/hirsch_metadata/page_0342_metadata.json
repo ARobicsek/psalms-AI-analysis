@@ -1,0 +1,22 @@
+{
+  "page": "page_0342",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n14 תחלים מג הסוח\n1000004000 | אקתמום 4אב) ל) מהת'ד ;תם 2% 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "2",
+      "position": 453,
+      "marker": "V.2"
+    },
+    {
+      "verse": "3",
+      "position": 678,
+      "marker": "V.3"
+    }
+  ],
+  "text_length": 2015,
+  "text_file": "page_0342.txt"
+}

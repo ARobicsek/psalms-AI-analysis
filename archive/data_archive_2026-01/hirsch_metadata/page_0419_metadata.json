@@ -1,0 +1,17 @@
+{
+  "page": "page_0419",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים נו 1 סוחס\n1"
+  },
+  "verse_markers": [
+    {
+      "verse": "14",
+      "position": 1447,
+      "marker": "V.14"
+    }
+  ],
+  "text_length": 1812,
+  "text_file": "page_0419.txt"
+}

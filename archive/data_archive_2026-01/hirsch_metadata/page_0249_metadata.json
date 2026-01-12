@@ -1,0 +1,27 @@
+{
+  "page": "page_0249",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n0-9 ₪ סוחס\n6 אנילד; ואשמחר; בהסדף 4םג קמסוש: 56 [אא 1 (8 /-"
+  },
+  "verse_markers": [
+    {
+      "verse": "8",
+      "position": 1095,
+      "marker": "V. 8"
+    },
+    {
+      "verse": "10",
+      "position": 1333,
+      "marker": "V. 10"
+    },
+    {
+      "verse": "12",
+      "position": 1639,
+      "marker": "V. 12"
+    }
+  ],
+  "text_length": 1850,
+  "text_file": "page_0249.txt"
+}

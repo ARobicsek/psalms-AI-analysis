@@ -1,0 +1,22 @@
+{
+  "page": "page_0336",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nב תחלים מב סוחס\n, התתתתתתת-- 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "3",
+      "position": 1403,
+      "marker": "V. 3"
+    },
+    {
+      "verse": "4",
+      "position": 1914,
+      "marker": "V. 4"
+    }
+  ],
+  "text_length": 2282,
+  "text_file": "page_0336.txt"
+}

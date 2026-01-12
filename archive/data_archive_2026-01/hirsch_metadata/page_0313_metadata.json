@@ -1,0 +1,27 @@
+{
+  "page": "page_0313",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים לח 6 סוחס\n-22 12 2.60 01/40 מתאש =הוה] שתק :התן 2% 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "9",
+      "position": 464,
+      "marker": "V. 9"
+    },
+    {
+      "verse": "10",
+      "position": 585,
+      "marker": "V. 10"
+    },
+    {
+      "verse": "12",
+      "position": 1123,
+      "marker": "V. 12"
+    }
+  ],
+  "text_length": 1259,
+  "text_file": "page_0313.txt"
+}

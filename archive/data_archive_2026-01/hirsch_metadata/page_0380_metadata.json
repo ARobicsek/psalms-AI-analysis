@@ -1,0 +1,24 @@
+{
+  "page": "page_0380",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": [
+      117
+    ],
+    "raw_hebrew": "| חס הסוזס|5ר\n| תהלים מט חס5וח50\n8 תבורק התדיהי-וראל רחש צות ות6666: ואו 6206 )ט (16 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "16",
+      "position": 1960,
+      "marker": "V. 16"
+    },
+    {
+      "verse": "17",
+      "position": 1975,
+      "marker": "V. 17"
+    }
+  ],
+  "text_length": 2113,
+  "text_file": "page_0380.txt"
+}

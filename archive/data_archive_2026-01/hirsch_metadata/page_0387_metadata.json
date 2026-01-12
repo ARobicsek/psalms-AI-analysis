@@ -1,0 +1,22 @@
+{
+  "page": "page_0387",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים נ ב סוחס\n4 2 הש \\דצ 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "17",
+      "position": 1951,
+      "marker": "V.17"
+    },
+    {
+      "verse": "18",
+      "position": 2529,
+      "marker": "V. 18"
+    }
+  ],
+  "text_length": 2589,
+  "text_file": "page_0387.txt"
+}

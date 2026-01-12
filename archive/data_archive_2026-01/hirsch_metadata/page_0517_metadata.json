@@ -1,0 +1,22 @@
+{
+  "page": "page_0517",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים עא 49 הסוח 50\n1"
+  },
+  "verse_markers": [
+    {
+      "verse": "8",
+      "position": 833,
+      "marker": "V. 8"
+    },
+    {
+      "verse": "9-11",
+      "position": 1103,
+      "marker": "V. 9-11"
+    }
+  ],
+  "text_length": 1815,
+  "text_file": "page_0517.txt"
+}

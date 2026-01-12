@@ -1,0 +1,22 @@
+{
+  "page": "page_0389",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתההלים נ 1 סוחס\n0-2 ₪ = ונ 1 400] ה] .בה) ]הפטסה) טס 086+ 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "22",
+      "position": 851,
+      "marker": "V. 22"
+    },
+    {
+      "verse": "23",
+      "position": 1397,
+      "marker": "V. 23"
+    }
+  ],
+  "text_length": 2219,
+  "text_file": "page_0389.txt"
+}

@@ -1,0 +1,17 @@
+{
+  "page": "page_0401",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים נב ב סוחס"
+  },
+  "verse_markers": [
+    {
+      "verse": "10",
+      "position": 1034,
+      "marker": "V. 10"
+    }
+  ],
+  "text_length": 2001,
+  "text_file": "page_0401.txt"
+}

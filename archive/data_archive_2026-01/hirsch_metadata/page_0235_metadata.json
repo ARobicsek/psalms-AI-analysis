@@ -1,0 +1,22 @@
+{
+  "page": "page_0235",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים כט טב הס0 50\n4 לזיהוד רר כל 5-5 106 6ם) ]0 ססוסצ שת (4 1צ"
+  },
+  "verse_markers": [
+    {
+      "verse": "4",
+      "position": 1363,
+      "marker": "V. 4"
+    },
+    {
+      "verse": "5",
+      "position": 1967,
+      "marker": "V.5"
+    }
+  ],
+  "text_length": 2038,
+  "text_file": "page_0235.txt"
+}

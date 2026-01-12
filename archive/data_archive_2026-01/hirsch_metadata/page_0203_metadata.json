@@ -1,0 +1,22 @@
+{
+  "page": "page_0203",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים כר 155 5050\n₪ ישא ברכה מאת והוה. ושדכה 15928ט 8 סווסססת 5311 146\" (5 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "5",
+      "position": 0,
+      "marker": "V. 5"
+    },
+    {
+      "verse": "6",
+      "position": 843,
+      "marker": "V. 6"
+    }
+  ],
+  "text_length": 2316,
+  "text_file": "page_0203.txt"
+}

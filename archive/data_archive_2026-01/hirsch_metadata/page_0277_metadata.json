@@ -1,0 +1,24 @@
+{
+  "page": "page_0277",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": [
+      34
+    ],
+    "raw_hebrew": "| חס הסוזס|5ר\nתהלים לד-לח 29 50150"
+  },
+  "verse_markers": [
+    {
+      "verse": "22",
+      "position": 835,
+      "marker": "V. 22"
+    },
+    {
+      "verse": "1",
+      "position": 1548,
+      "marker": "V.1"
+    }
+  ],
+  "text_length": 1843,
+  "text_file": "page_0277.txt"
+}

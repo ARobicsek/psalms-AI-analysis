@@ -1,0 +1,24 @@
+{
+  "page": "page_0405",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": [
+      53
+    ],
+    "raw_hebrew": "| חס הסוזס|5ר\nתהלים נג-נד 0 סוחס\nנב תת 2 ת- 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "1",
+      "position": 506,
+      "marker": "V. 1"
+    },
+    {
+      "verse": "2",
+      "position": 1324,
+      "marker": "V. 2"
+    }
+  ],
+  "text_length": 1589,
+  "text_file": "page_0405.txt"
+}

@@ -1,0 +1,22 @@
+{
+  "page": "page_0343",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\nתחלים מג-מד 15 סוחס\nוה'ַ[י[]י]י\"-. השהן תעה וצהת) זוב שחעט 5% 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "5",
+      "position": 500,
+      "marker": "V.5"
+    },
+    {
+      "verse": "1",
+      "position": 546,
+      "marker": "V. 1"
+    }
+  ],
+  "text_length": 2021,
+  "text_file": "page_0343.txt"
+}

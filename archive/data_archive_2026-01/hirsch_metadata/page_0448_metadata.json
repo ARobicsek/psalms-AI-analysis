@@ -1,0 +1,22 @@
+{
+  "page": "page_0448",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "| חס הסוזס|5ר\n40 תחלים פב סוחס\n2 - ב .42ב טמ 606% 306) 2:6 טכ ט|םל) 2% 1"
+  },
+  "verse_markers": [
+    {
+      "verse": "3",
+      "position": 671,
+      "marker": "V. 3"
+    },
+    {
+      "verse": "4",
+      "position": 1220,
+      "marker": "V. 4"
+    }
+  ],
+  "text_length": 1903,
+  "text_file": "page_0448.txt"
+}

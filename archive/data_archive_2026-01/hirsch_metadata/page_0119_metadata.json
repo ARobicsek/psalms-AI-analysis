@@ -1,0 +1,22 @@
+{
+  "page": "page_0119",
+  "status": "SUCCESS",
+  "chapter_info": {
+    "psalm_numbers": null,
+    "raw_hebrew": "חס הסוזס|5ר\nתחלים יב 2 הו 50\n4 אתה חוה העתרה מש | 0% ₪18 ,100 02 ,טסמך (8 1צ"
+  },
+  "verse_markers": [
+    {
+      "verse": "8",
+      "position": 1891,
+      "marker": "V. 8"
+    },
+    {
+      "verse": "9",
+      "position": 2571,
+      "marker": "V.9"
+    }
+  ],
+  "text_length": 2660,
+  "text_file": "page_0119.txt"
+}
