@@ -171,6 +171,9 @@ AUTHOR'S INSTRUCTIONS:
 ### ANALYTICAL FRAMEWORK (poetic conventions reference)
 {analytical_framework}
 
+### READER QUESTIONS (questions readers will see before reading)
+{reader_questions}
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -249,6 +252,7 @@ What works? What's missing? What needs revision? Specifically note:
 **Section 1: Introduction Essay (800-1500 words)**
 
 Create an essay that:
+- **Opens with a hook related to READER QUESTIONS**—a puzzle, paradox, or surprising detail that sets up the questions readers have seen
 - Gives readers a clear sense of what this psalm IS ABOUT
 - Synthesizes insights from ALL your sources (traditional commentary, ANE parallels, concordance patterns, Deep Web Research)
 - Creates genuine "aha!" moments—connections readers haven't seen before
@@ -361,7 +365,30 @@ Return your response with these THREE sections:
 ☐ Liturgical section has actual content with #### subsections
 ☐ Each verse commentary starts with punctuated Hebrew text
 ☐ Phonetic transcriptions only appear where sound matters
+☐ Does the introduction open with a hook/puzzle (not a bland summary)?
+☐ READER QUESTIONS: Each question from the READER QUESTIONS section is addressed somewhere in the intro essay or verse commentary
 ☐ **The Author's Special Instruction has been followed as the highest priority**
+
+### STAGE 4: REFINED READER QUESTIONS
+
+Based on your full editorial review, generate **4-6 refined "Questions for the Reader"** that will appear BEFORE the commentary.
+
+You have access to the ORIGINAL questions (from early analysis) plus the FULL research bundle. Use this broader context to craft questions that:
+
+1. **Hook curiosity** — Make readers eager to dig into the text
+2. **Set up insights** — Prime readers for the "aha!" moments you discovered in editing
+3. **Include specifics** — Reference specific verses, Hebrew terms, or textual puzzles
+4. **Span multiple angles** — Cover language, structure, theology, reception, liturgy
+
+Output format: After your REVISED VERSE COMMENTARY section, add:
+
+### REFINED READER QUESTIONS
+1. [Question 1]
+2. [Question 2]
+3. [Question 3]
+4. [Question 4]
+5. [Question 5 - optional]
+6. [Question 6 - optional]
 
 Begin your editorial review and revision.
 """
@@ -490,6 +517,9 @@ AUTHOR'S INSTRUCTIONS:
 ### ANALYTICAL FRAMEWORK (poetic conventions reference)
 {analytical_framework}
 
+### READER QUESTIONS (questions readers will see before reading)
+{reader_questions}
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -547,6 +577,7 @@ Use **Heading 3 markdown** (`###`) to break the essay into digestible sections w
 - `### Why this psalm still matters`
 
 Create an essay that:
+- **Opens with a hook related to READER QUESTIONS**—a puzzle or surprising detail that draws students in
 - Orients students clearly—what is this psalm, what's happening in it?
 - Creates "aha!" moments through clear explanation
 - Uses concrete examples and vivid analogies
@@ -628,8 +659,29 @@ Your commentary should:
 ☐ Deep Web Research material utilized where engaging
 ☐ Liturgical section has actual content with #### subsections
 ☐ Each verse starts with punctuated Hebrew
+☐ Does the introduction open with a hook/puzzle (not a bland summary)?
 ☐ Would a bright first-year student understand and enjoy this?
 ☐ **The Author's Special Instruction has been followed as the highest priority**
+
+### STAGE 4: REFINED READER QUESTIONS
+
+Based on your full editorial review, generate **4-6 refined "Questions for the Reader"** for college students.
+
+Craft questions that:
+1. **Hook curiosity** — Make students want to read further
+2. **Set up insights** — Prime them for discoveries in the commentary
+3. **Include specifics** — Reference verses, Hebrew terms, textual puzzles
+4. **Be accessible** — No unexplained jargon in the questions themselves
+
+Output format: After your REVISED VERSE COMMENTARY section, add:
+
+### REFINED READER QUESTIONS
+1. [Question 1]
+2. [Question 2]
+3. [Question 3]
+4. [Question 4]
+5. [Question 5 - optional]
+6. [Question 6 - optional]
 
 Begin your editorial review and revision.
 """
@@ -778,7 +830,8 @@ class MasterEditorSI(MasterEditorV2):
         macro_analysis: Dict,
         micro_analysis: Dict,
         psalm_text: str,
-        analytical_framework: str
+        analytical_framework: str,
+        reader_questions: str = "[No reader questions provided]"
     ) -> Dict[str, str]:
         """Call GPT-5.1 for editorial review with special instruction."""
         self.logger.info(f"Calling {self.model} for editorial review (SI Edition)")
@@ -797,6 +850,7 @@ class MasterEditorSI(MasterEditorV2):
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             analytical_framework=analytical_framework,
+            reader_questions=reader_questions,
             special_instruction=self.special_instruction or "[No special instruction provided]"
         )
 
@@ -854,7 +908,8 @@ class MasterEditorSI(MasterEditorV2):
         macro_analysis: Dict,
         micro_analysis: Dict,
         psalm_text: str,
-        analytical_framework: str
+        analytical_framework: str,
+        reader_questions: str = "[No reader questions provided]"
     ) -> Dict[str, str]:
         """Call Claude Opus 4.5 for editorial review with special instruction."""
         self.logger.info(f"Calling {self.model} for editorial review with extended thinking (SI Edition)")
@@ -873,6 +928,7 @@ class MasterEditorSI(MasterEditorV2):
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             analytical_framework=analytical_framework,
+            reader_questions=reader_questions,
             special_instruction=self.special_instruction or "[No special instruction provided]"
         )
 
@@ -932,7 +988,8 @@ class MasterEditorSI(MasterEditorV2):
         macro_analysis: Dict,
         micro_analysis: Dict,
         psalm_text: str,
-        analytical_framework: str
+        analytical_framework: str,
+        reader_questions: str = "[No reader questions provided]"
     ) -> Dict[str, str]:
         """Perform college edition review using SI prompt."""
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
@@ -948,6 +1005,7 @@ class MasterEditorSI(MasterEditorV2):
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             analytical_framework=analytical_framework,
+            reader_questions=reader_questions,
             special_instruction=self.special_instruction or "[No special instruction provided]"
         )
 

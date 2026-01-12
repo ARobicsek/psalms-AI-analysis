@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-11 (Session 234)
+**Last Updated**: 2026-01-12 (Session 235)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 234
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions (✅ NEW), Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking
+- **Current Session**: 235
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync (✅ NEW)
 
 ---
 
@@ -53,6 +53,11 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
 
 ---
+
+### Session 235 (2026-01-12): SI Pipeline Engagement Improvements Sync
+- Synchronized `MasterEditorSI` prompts with Session 234 improvements (hook-first, Stage 4 refined questions)
+- Added question extraction logic to `run_si_pipeline.py` for both main and college editions
+- Fixed regex to handle both `##` and `###` question headings; all 3 SI docx formats now show questions before essays
 
 ### Session 234 (2026-01-11): Engagement Improvements - Hook-First Intros & Refined Questions
 - Integrated hook-first opening instructions and unique findings surfacing into `synthesis_writer.py`
@@ -303,7 +308,40 @@ Fixed stats showing zeros when skipping steps:
 
 ## Session History
 
-### Sessions 200-234: Full Details
+### Sessions 200-235: Full Details
+
+#### Session 235 (2026-01-12): SI Pipeline Engagement Improvements Sync
+**Objective**: Ensure Session 234 engagement improvements (hook-first intros, refined reader questions) are applied when using the Special Instructions (SI) pipeline.
+
+**Problems Identified**:
+- `MasterEditorSI` prompts lacked the hook-first opening requirement added in Session 234
+- `MasterEditorSI` prompts were missing Stage 4 refined reader questions generation
+- `run_si_pipeline.py` did not extract refined questions from master editor output
+- Document generators in SI pipeline were not receiving question paths
+- Question extraction regex only matched `###` headings, but LLM sometimes outputs `##`
+
+**Solutions Implemented**:
+1. **master_editor_si.py prompt updates**:
+   - Added `{reader_questions}` input placeholder to both main and college SI prompts
+   - Added hook-first opening requirement in Stage 2 Introduction Essay
+   - Added Stage 4: REFINED READER QUESTIONS section for 4-6 question generation
+   - Updated FINAL CHECKLIST with hook and reader questions verification items
+   - Updated `_perform_editorial_review_gpt()`, `_perform_editorial_review_claude()`, and `_perform_college_review()` method signatures to accept `reader_questions` parameter
+
+2. **run_si_pipeline.py updates**:
+   - Added `re` module import for regex-based question extraction
+   - Added output file paths for `_reader_questions_refined_SI.json` and `_reader_questions_college_refined_SI.json`
+   - Added question extraction logic after main SI outputs (extracts, saves JSON, strips from verses file)
+   - Added question extraction logic after college SI outputs
+   - Updated main/college/combined document generator calls to pass `reader_questions_path`
+
+3. **Fixed regex pattern for question extraction**:
+   - Changed from exact string `"### REFINED READER QUESTIONS"` match
+   - To regex `r'\n(#{2,3})\s*REFINED READER QUESTIONS'` to handle both `##` and `###`
+
+**Files Modified**:
+- `src/agents/master_editor_si.py` - Hook-first, reader questions input, Stage 4, checklist, method signatures
+- `scripts/run_si_pipeline.py` - Question extraction, JSON saving, document generator question paths
 
 #### Session 234 (2026-01-11): Engagement Improvements - Hook-First Intros & Refined Questions
 **Objective**: Integrate tested engagement improvements into production agents to increase reader engagement through mystery-leading introductions, refined questions, and reduced redundancy.

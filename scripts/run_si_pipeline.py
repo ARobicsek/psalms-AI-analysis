@@ -29,6 +29,7 @@ import json
 import argparse
 import shutil
 import time
+import re
 from pathlib import Path
 from datetime import datetime
 
@@ -156,6 +157,8 @@ def run_si_pipeline(
         "docx_main": output_path / f"psalm_{psalm_number:03d}_commentary_SI.docx",
         "docx_college": output_path / f"psalm_{psalm_number:03d}_commentary_college_SI.docx",
         "docx_combined": output_path / f"psalm_{psalm_number:03d}_commentary_combined_SI.docx",
+        "reader_questions_refined": output_path / f"psalm_{psalm_number:03d}_reader_questions_refined_SI.json",
+        "reader_questions_college_refined": output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined_SI.json",
     }
 
     # =========================================================================
@@ -221,6 +224,47 @@ def run_si_pipeline(
     with open(si_output_files["edited_verses"], 'w', encoding='utf-8') as f:
         f.write(result_main['revised_verses'])
 
+    # Extract refined reader questions from verse output (if present)
+    verse_content = result_main['revised_verses']
+    # Match both ## and ### REFINED READER QUESTIONS
+    questions_match = re.search(r'\n(#{2,3})\s*REFINED READER QUESTIONS', verse_content)
+    if questions_match:
+        try:
+            marker_start = questions_match.start()
+            questions_section = verse_content[questions_match.end():]
+            # Find where questions end (next ## header or end)
+            next_header = re.search(r'\n##', questions_section)
+            if next_header:
+                questions_text = questions_section[:next_header.start()]
+            else:
+                questions_text = questions_section
+            
+            # Extract numbered questions
+            questions = []
+            for line in questions_text.strip().split('\n'):
+                line = line.strip()
+                match = re.match(r'^(\d+)\.\s+(.+)$', line)
+                if match:
+                    q = match.group(2).strip()
+                    if q and len(q) > 10:
+                        questions.append(q)
+            
+            if questions:
+                with open(si_output_files["reader_questions_refined"], 'w', encoding='utf-8') as f:
+                    json.dump({
+                        'psalm_number': psalm_number,
+                        'curated_questions': questions,
+                        'source': 'master_editor_si_refined'
+                    }, f, ensure_ascii=False, indent=2)
+                logger.info(f"✓ Extracted {len(questions)} refined reader questions to {si_output_files['reader_questions_refined'].name}")
+                
+                # Strip questions from the saved verse file for clean output
+                clean_verses = verse_content[:marker_start].strip()
+                with open(si_output_files["edited_verses"], 'w', encoding='utf-8') as f:
+                    f.write(clean_verses)
+        except Exception as e:
+            logger.warning(f"Could not extract refined reader questions: {e}")
+
     step_duration = time.time() - step_start
 
     logger.info(f"✓ Main SI editorial assessment saved to: {si_output_files['assessment'].name}")
@@ -269,6 +313,45 @@ def run_si_pipeline(
     with open(si_output_files["edited_verses_college"], 'w', encoding='utf-8') as f:
         f.write(result_college['revised_verses'])
 
+    # Extract refined reader questions from college verse output (if present)
+    college_verse_content = result_college['revised_verses']
+    # Match both ## and ### REFINED READER QUESTIONS
+    college_questions_match = re.search(r'\n(#{2,3})\s*REFINED READER QUESTIONS', college_verse_content)
+    if college_questions_match:
+        try:
+            marker_start = college_questions_match.start()
+            questions_section = college_verse_content[college_questions_match.end():]
+            next_header = re.search(r'\n##', questions_section)
+            if next_header:
+                questions_text = questions_section[:next_header.start()]
+            else:
+                questions_text = questions_section
+            
+            questions = []
+            for line in questions_text.strip().split('\n'):
+                line = line.strip()
+                match = re.match(r'^(\d+)\.\s+(.+)$', line)
+                if match:
+                    q = match.group(2).strip()
+                    if q and len(q) > 10:
+                        questions.append(q)
+            
+            if questions:
+                with open(si_output_files["reader_questions_college_refined"], 'w', encoding='utf-8') as f:
+                    json.dump({
+                        'psalm_number': psalm_number,
+                        'curated_questions': questions,
+                        'source': 'college_editor_si_refined'
+                    }, f, ensure_ascii=False, indent=2)
+                logger.info(f"✓ Extracted {len(questions)} college refined questions to {si_output_files['reader_questions_college_refined'].name}")
+                
+                # Strip questions from the saved verse file for clean output
+                clean_verses = college_verse_content[:marker_start].strip()
+                with open(si_output_files["edited_verses_college"], 'w', encoding='utf-8') as f:
+                    f.write(clean_verses)
+        except Exception as e:
+            logger.warning(f"Could not extract college refined questions: {e}")
+
     step_duration = time.time() - step_start
 
     logger.info(f"✓ College SI editorial assessment saved to: {si_output_files['assessment_college'].name}")
@@ -308,12 +391,16 @@ def run_si_pipeline(
     print(f"{'='*80}\n")
 
     try:
+        # Use refined questions if available
+        main_questions = si_output_files["reader_questions_refined"] if si_output_files["reader_questions_refined"].exists() else None
+        
         generator_main = DocumentGenerator(
             psalm_num=psalm_number,
             intro_path=si_output_files["edited_intro"],
             verses_path=si_output_files["edited_verses"],
             stats_path=si_output_files["pipeline_stats"],
-            output_path=si_output_files["docx_main"]
+            output_path=si_output_files["docx_main"],
+            reader_questions_path=main_questions
         )
         generator_main.generate()
         logger.info(f"✓ Main SI Word document saved to: {si_output_files['docx_main'].name}")
@@ -332,12 +419,16 @@ def run_si_pipeline(
     print(f"{'='*80}\n")
 
     try:
+        # Use college refined questions if available
+        college_questions = si_output_files["reader_questions_college_refined"] if si_output_files["reader_questions_college_refined"].exists() else None
+        
         generator_college = DocumentGenerator(
             psalm_num=psalm_number,
             intro_path=si_output_files["edited_intro_college"],
             verses_path=si_output_files["edited_verses_college"],
             stats_path=si_output_files["pipeline_stats"],
-            output_path=si_output_files["docx_college"]
+            output_path=si_output_files["docx_college"],
+            reader_questions_path=college_questions
         )
         generator_college.generate()
         logger.info(f"✓ College SI Word document saved to: {si_output_files['docx_college'].name}")
@@ -356,6 +447,10 @@ def run_si_pipeline(
     print(f"{'='*80}\n")
 
     try:
+        # Use refined questions for both main and college if available
+        main_qs = si_output_files["reader_questions_refined"] if si_output_files["reader_questions_refined"].exists() else None
+        college_qs = si_output_files["reader_questions_college_refined"] if si_output_files["reader_questions_college_refined"].exists() else None
+        
         generator_combined = CombinedDocumentGenerator(
             psalm_num=psalm_number,
             main_intro_path=si_output_files["edited_intro"],
@@ -363,7 +458,9 @@ def run_si_pipeline(
             college_intro_path=si_output_files["edited_intro_college"],
             college_verses_path=si_output_files["edited_verses_college"],
             stats_path=si_output_files["pipeline_stats"],
-            output_path=si_output_files["docx_combined"]
+            output_path=si_output_files["docx_combined"],
+            reader_questions_path=main_qs,
+            college_questions_path=college_qs
         )
         generator_combined.generate()
         logger.info(f"✓ Combined SI Word document saved to: {si_output_files['docx_combined'].name}")
