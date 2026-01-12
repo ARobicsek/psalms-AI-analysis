@@ -28,6 +28,7 @@ import sys
 import os
 import time
 import json
+import re
 import argparse
 from pathlib import Path
 import subprocess
@@ -993,6 +994,48 @@ def run_enhanced_pipeline(
         with open(edited_verses_file, 'w', encoding='utf-8') as f:
             f.write(result['revised_verses'])
 
+        # Extract refined reader questions from verse output (if present)
+        refined_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
+        verse_content = result['revised_verses']
+        if "### REFINED READER QUESTIONS" in verse_content:
+            try:
+                marker = "### REFINED READER QUESTIONS"
+                parts = verse_content.split(marker)
+                if len(parts) > 1:
+                    questions_section = parts[1]
+                    # Find where questions end (next ## header or end)
+                    next_header = re.search(r'\n##', questions_section)
+                    if next_header:
+                        questions_text = questions_section[:next_header.start()]
+                    else:
+                        questions_text = questions_section
+                    
+                    # Extract numbered questions
+                    questions = []
+                    for line in questions_text.strip().split('\n'):
+                        line = line.strip()
+                        match = re.match(r'^(\d+)\.\s+(.+)$', line)
+                        if match:
+                            q = match.group(2).strip()
+                            if q and len(q) > 10:
+                                questions.append(q)
+                    
+                    if questions:
+                        with open(refined_questions_file, 'w', encoding='utf-8') as f:
+                            json.dump({
+                                'psalm_number': psalm_number,
+                                'curated_questions': questions,
+                                'source': 'master_editor_refined'
+                            }, f, ensure_ascii=False, indent=2)
+                        logger.info(f"✓ Extracted {len(questions)} refined reader questions to {refined_questions_file}")
+                        
+                        # Also strip questions from the saved verse file for clean output
+                        clean_verses = parts[0].strip()
+                        with open(edited_verses_file, 'w', encoding='utf-8') as f:
+                            f.write(clean_verses)
+            except Exception as e:
+                logger.warning(f"Could not extract refined reader questions: {e}")
+
         # Track output
         editor_output = result['assessment'] + "\n\n" + result['revised_introduction'] + "\n\n" + result['revised_verses']
         step_duration = time.time() - step_start
@@ -1132,6 +1175,46 @@ def run_enhanced_pipeline(
             with open(edited_verses_college_file, 'w', encoding='utf-8') as f:
                 f.write(result_college['revised_verses'])
 
+            # Extract refined reader questions from college verse output (if present)
+            refined_questions_college_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
+            college_verse_content = result_college['revised_verses']
+            if "### REFINED READER QUESTIONS" in college_verse_content:
+                try:
+                    marker = "### REFINED READER QUESTIONS"
+                    parts = college_verse_content.split(marker)
+                    if len(parts) > 1:
+                        questions_section = parts[1]
+                        next_header = re.search(r'\n##', questions_section)
+                        if next_header:
+                            questions_text = questions_section[:next_header.start()]
+                        else:
+                            questions_text = questions_section
+                        
+                        questions = []
+                        for line in questions_text.strip().split('\n'):
+                            line = line.strip()
+                            match = re.match(r'^(\d+)\.\s+(.+)$', line)
+                            if match:
+                                q = match.group(2).strip()
+                                if q and len(q) > 10:
+                                    questions.append(q)
+                        
+                        if questions:
+                            with open(refined_questions_college_file, 'w', encoding='utf-8') as f:
+                                json.dump({
+                                    'psalm_number': psalm_number,
+                                    'curated_questions': questions,
+                                    'source': 'college_editor_refined'
+                                }, f, ensure_ascii=False, indent=2)
+                            logger.info(f"✓ Extracted {len(questions)} college refined questions to {refined_questions_college_file}")
+                            
+                            # Strip questions from the saved verse file for clean output
+                            clean_verses = parts[0].strip()
+                            with open(edited_verses_college_file, 'w', encoding='utf-8') as f:
+                                f.write(clean_verses)
+                except Exception as e:
+                    logger.warning(f"Could not extract college refined questions: {e}")
+
             step_duration = time.time() - step_start
 
             logger.info(f"✓ College editorial assessment saved to {edited_assessment_college_file}")
@@ -1223,13 +1306,17 @@ def run_enhanced_pipeline(
 
         if intro_for_docx.exists() and verses_for_docx.exists() and summary_json_file.exists():
             try:
+                # Use refined questions if available, fallback to original
+                refined_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
+                main_questions = refined_questions_file if refined_questions_file.exists() else (reader_questions_file if reader_questions_file.exists() else None)
+                
                 generator = DocumentGenerator(
                     psalm_num=psalm_number,
                     intro_path=intro_for_docx,
                     verses_path=verses_for_docx,
                     stats_path=summary_json_file,
                     output_path=docx_output_file,
-                    reader_questions_path=reader_questions_file if reader_questions_file.exists() else None
+                    reader_questions_path=main_questions
                 )
                 generator.generate()
                 logger.info(f"Successfully generated Word document for Psalm {psalm_number}.")
@@ -1268,12 +1355,17 @@ def run_enhanced_pipeline(
 
             if intro_for_college_docx.exists() and verses_for_college_docx.exists() and summary_json_file.exists():
                 try:
+                    # Use college refined questions if available
+                    refined_questions_college_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
+                    college_questions = refined_questions_college_file if refined_questions_college_file.exists() else None
+                    
                     generator_college = DocumentGenerator(
                         psalm_num=psalm_number,
                         intro_path=intro_for_college_docx,
                         verses_path=verses_for_college_docx,
                         stats_path=summary_json_file,
-                        output_path=docx_output_college_file
+                        output_path=docx_output_college_file,
+                        reader_questions_path=college_questions
                     )
                     generator_college.generate()
                     logger.info(f"Successfully generated college edition Word document for Psalm {psalm_number}.")
@@ -1319,6 +1411,13 @@ def run_enhanced_pipeline(
 
             if all(f.exists() for f in required_files):
                 try:
+                    # Use refined questions if available, fallback to original
+                    refined_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
+                    refined_questions_college_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
+                    
+                    main_questions = refined_questions_file if refined_questions_file.exists() else (reader_questions_file if reader_questions_file.exists() else None)
+                    college_questions = refined_questions_college_file if refined_questions_college_file.exists() else None
+                    
                     generator_combined = CombinedDocumentGenerator(
                         psalm_num=psalm_number,
                         main_intro_path=edited_intro_file,
@@ -1327,7 +1426,8 @@ def run_enhanced_pipeline(
                         college_verses_path=edited_verses_college_file,
                         stats_path=summary_json_file,
                         output_path=docx_output_combined_file,
-                        reader_questions_path=reader_questions_file if reader_questions_file.exists() else None
+                        reader_questions_path=main_questions,
+                        college_questions_path=college_questions
                     )
                     generator_combined.generate()
                     logger.info(f"Successfully generated combined Word document for Psalm {psalm_number}.")

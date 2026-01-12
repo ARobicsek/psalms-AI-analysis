@@ -67,7 +67,8 @@ class CombinedDocumentGenerator:
                  main_intro_path: Path, main_verses_path: Path,
                  college_intro_path: Path, college_verses_path: Path,
                  stats_path: Path, output_path: Path,
-                 reader_questions_path: Path = None):
+                 reader_questions_path: Path = None,
+                 college_questions_path: Path = None):
         self.psalm_num = psalm_num
         self.main_intro_path = main_intro_path
         self.main_verses_path = main_verses_path
@@ -76,9 +77,11 @@ class CombinedDocumentGenerator:
         self.stats_path = stats_path
         self.output_path = output_path
         self.reader_questions_path = reader_questions_path
+        self.college_questions_path = college_questions_path
         self.document = Document()
         self._set_default_styles()
         self.modifier = DivineNamesModifier()
+
 
     @staticmethod
     def _split_into_grapheme_clusters(text: str) -> List[str]:
@@ -896,7 +899,37 @@ Methodological & Bibliographical Summary
                 else:
                     self._add_paragraph_with_markdown(para, style='BodySans')
 
-        # 4. Add College Introduction with green "College" in heading
+        # 4. Add College Questions (if available) - before college intro
+        if self.college_questions_path and self.college_questions_path.exists():
+            try:
+                questions_data = json.loads(self.college_questions_path.read_text(encoding='utf-8'))
+                questions = questions_data.get('curated_questions', [])
+                if questions:
+                    # Add college questions heading with green "College" label
+                    q_heading = self.document.add_heading('', level=2)
+                    q_heading.add_run('Questions for the Reader - ')
+                    college_label = q_heading.add_run('College')
+                    college_label.font.color.rgb = RGBColor(0, 128, 0)  # Green color
+                    q_heading.add_run(' version')
+                    
+                    # Add introductory italic text
+                    intro_p = self.document.add_paragraph(style='BodySans')
+                    intro_run = intro_p.add_run('Before reading this commentary, consider the following questions:')
+                    intro_run.italic = True
+                    
+                    # Add each question as a numbered paragraph
+                    for i, question in enumerate(questions, 1):
+                        q_p = self.document.add_paragraph(style='BodySans')
+                        q_p.add_run(f"{i}. ").bold = True
+                        self._process_markdown_formatting(q_p, question, set_font=False)
+                    
+                    # Add spacing after questions
+                    self.document.add_paragraph()
+            except Exception as e:
+                # Log but don't fail if questions can't be loaded
+                print(f"Warning: Could not load college reader questions: {e}")
+
+        # 5. Add College Introduction with green "College" in heading
         college_heading = self.document.add_heading('', level=2)
         college_heading.add_run('Introduction - ')
         college_run = college_heading.add_run('College')

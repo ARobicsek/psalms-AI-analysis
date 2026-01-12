@@ -64,6 +64,8 @@ You have been provided with:
 
 ## YOUR TASK: WRITE INTRODUCTION ESSAY (800-1200 words)
 
+**HOOK FIRST—AND CONNECT TO READER QUESTIONS**: Open with something surprising, counterintuitive, or puzzling about this psalm. Look at the READER QUESTIONS (provided at the end of your inputs)—your hook should set up one or more of these questions. Avoid bland summary openings like "Psalm 24 is a threshold poem..." Instead, start with a specific textual mystery, an unexpected connection, or a provocative question.
+
 Write a scholarly introduction essay that:
 
 1. **Engages the macro thesis critically**
@@ -121,20 +123,26 @@ Write a scholarly introduction essay that:
    - Don't just cite - SHOW the reader the actual text. Your readers are hungry to see the Hebrew evidence
    - Think of quotations as your proof - they transform vague claims into vivid demonstrations
 
-8. **Writes for an educated general reader**
+8. **SURFACE UNIQUE FINDINGS** (the "only here" factor)
+   - When the research reveals something rare (hapax legomenon, unusual construction, "appears nowhere else"), HIGHLIGHT it
+   - When liturgical usage recontextualizes the verse surprisingly, SHOW the surprise
+   - When a phrase or image is distinctive to this psalm, draw attention to it
+   - These moments make this commentary distinctive—don't bury them
+
+9. **Writes for an educated general reader**
    - Scholarly rigor but accessible prose
    - Technical terms explained when necessary
    - Balance depth with readability
    - Novel insights are strongly encouraged
 
-9. **Uses proper citations with quotations**
+10. **Uses proper citations with quotations**
    - When referring to specific Hebrew verse, phrases and terms, cite in Hebrew and English
    - In Hebrew, replace the tetragrammaton with 'ה
    - **IMPORTANT: Most citations should be accompanied by actual quotations (Hebrew + English)**
    - When citing research, note the source (e.g., "BDB lexicon notes...", "Concordance shows...")
    - When referencing other texts, cite book/chapter/verse AND quote the relevant portion when illustrative (e.g., "Gen 1:2", "KTU 1.4")
 
-10. **Stylistic guidelines**
+11. **Stylistic guidelines**
 You are a distinguished professor of biblical literature, akin to a figure like Robert Alter, Ellen F. Davis or James Kugel. Your task is to write an essay on a specific psalm for a sophisticated lay audience, such as the readers of The New Yorker or The Atlantic.
 
 Your writing style should be scholarly, lucid, and engaging. Your tone is one of measured confidence, not breathless praise. You illuminate the text's brilliance through insightful analysis rather than by simply labeling it as "brilliant" or a "masterpiece."
@@ -270,6 +278,9 @@ For longer psalms, you have limited output space. Plan ahead and pace yourself:
 - **Equal treatment**: Later verses deserve the same quality of analysis as early verses. Do NOT rush or provide minimal content for late verses.
 - **Avoid truncation notes**: NEVER write things like "Due to length constraints, remaining verses are not included." Instead, adjust your pacing from the beginning.
 - **Quality over quantity**: A thoughtful 200-word treatment of grouped verses is better than 50 rushed words per verse at the end.
+
+**RELATIONSHIP TO INTRODUCTION ESSAY (CRITICAL):**
+Your verse commentary should COMPLEMENT (not repeat) the introduction. The introduction has already been written and is provided above. Before writing about each verse, ask: "What can I add that the intro didn't say?" If the intro made a point about a verse, add something NEW here—a different commentator's view, a liturgical deployment not mentioned, a textual variant, a specific philological oddity. Avoid restating what readers already learned in the introduction.
 
 ### ITEMS OF INTEREST TO ILLUMINATE (when relevant to the verse):
 

@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-11 (Session 233)
+**Last Updated**: 2026-01-11 (Session 234)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 233
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Questions for the Reader, RTL Hebrew Text Formatting (✅ IMPROVED), Model Tracking (Single Source of Truth)
+- **Current Session**: 234
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions (✅ NEW), Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking
 
 ---
 
@@ -54,18 +54,15 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ---
 
+### Session 234 (2026-01-11): Engagement Improvements - Hook-First Intros & Refined Questions
+- Integrated hook-first opening instructions and unique findings surfacing into `synthesis_writer.py`
+- Added Stage 4 refined question generation to `master_editor.py` for both main and college editions
+- Pipeline now extracts and saves refined questions; all 3 docx formats display questions before essays
+
 ### Session 233 (2026-01-11): RTL Display Fixes - Verse References and Hebrew Punctuation
-- **Objective**: Fix display bugs in .docx outputs related to RTL handling.
-- **Problems Fixed**:
-  1. **Verse Reference Reversal**: References like `(26:6–7)` were being displayed as `(7–26:6)` in Hebrew contexts because Word's bidi algorithm was reversing the digits.
-  2. **Hebrew Trailing Punctuation**: Periods and semicolons at the end of Hebrew text were floating to the far left of the line instead of staying adjacent to the final Hebrew character.
-- **Solutions Implemented**:
-  1. **LRO/PDF Wrapping for Verse References**: Pattern `\(\d+:\d+(?:[–\-]\d+)?\)` matched and wrapped with LEFT-TO-RIGHT OVERRIDE to force correct digit display.
-  2. **RLM After Hebrew Punctuation**: Added RIGHT-TO-LEFT MARK (U+200F) after trailing punctuation in Hebrew-heavy text to anchor periods/semicolons to the RTL context.
-  3. **Applied to All Code Paths**: Fixes implemented in `_process_markdown_formatting()`, `_add_formatted_content()`, `_add_paragraph_with_soft_breaks()`, and `_reverse_primarily_hebrew_line()`.
-- **Files Modified**:
-  - `src/utils/document_generator.py`
-  - `src/utils/combined_document_generator.py`
+- Fixed verse reference reversal (e.g., `(26:6–7)` displayed as `(7–26:6)`) with LRO/PDF wrapping
+- Fixed Hebrew trailing punctuation floating to far left with RLM anchoring
+- Applied fixes to all code paths in both document generators
 
 ### Session 232 (2026-01-10): Model Name Tracking - Single Source of Truth Pattern
 - **Objective**: Investigate pipeline model usage discrepancy between Psalm 26 and 27; implement robust model tracking.
@@ -306,7 +303,54 @@ Fixed stats showing zeros when skipping steps:
 
 ## Session History
 
-### Sessions 200-228: Full Details
+### Sessions 200-234: Full Details
+
+#### Session 234 (2026-01-11): Engagement Improvements - Hook-First Intros & Refined Questions
+**Objective**: Integrate tested engagement improvements into production agents to increase reader engagement through mystery-leading introductions, refined questions, and reduced redundancy.
+
+**Problems Identified**:
+- Existing introductions could start with bland summaries instead of engaging hooks
+- Reader questions (from Curator) were generic; didn't leverage full research bundle
+- Verse commentary sometimes repeated intro content instead of adding new insights
+
+**Solutions Implemented**:
+1. **synthesis_writer.py modifications**:
+   - Added "HOOK FIRST—AND CONNECT TO READER QUESTIONS" instruction before main task
+   - Added item #8 "SURFACE UNIQUE FINDINGS" for hapax, rare constructions, liturgical surprises
+   - Added "RELATIONSHIP TO INTRODUCTION ESSAY" note in verse commentary to reduce redundancy
+
+2. **master_editor.py modifications**:
+   - Added hook requirement to Stage 2 essay guidelines (opens with puzzle/paradox)
+   - Added hook checklist item to FINAL CHECKLIST
+   - Added Stage 4: REFINED READER QUESTIONS (4-6 questions for both main and college editions)
+
+3. **run_enhanced_pipeline.py modifications**:
+   - Extracts refined questions from master editor verse output (parses ### REFINED READER QUESTIONS section)
+   - Saves to `psalm_NNN_reader_questions_refined.json` and `..._college_refined.json`
+   - Strips questions from verse files after extraction for clean output
+   - All 3 docx generators now use refined questions with fallback to original
+
+**Files Modified**:
+- `src/agents/synthesis_writer.py` - Hook-first, unique findings, verse-intro relationship
+- `src/agents/master_editor.py` - Hook requirement, checklist, Stage 4 refined questions
+- `src/utils/combined_document_generator.py` - Added `college_questions_path` parameter
+- `scripts/run_enhanced_pipeline.py` - Question extraction, refined Qs in all docx formats
+
+#### Session 233 (2026-01-11): RTL Display Fixes - Verse References and Hebrew Punctuation
+**Objective**: Fix display bugs in .docx outputs related to RTL handling.
+
+**Problems Identified**:
+- Verse references like `(26:6–7)` displayed as `(7–26:6)` due to Word's bidi algorithm
+- Hebrew trailing punctuation floating to far left of line
+
+**Solutions Implemented**:
+1. LRO/PDF wrapping for verse references to force correct digit display
+2. RLM after Hebrew punctuation to anchor periods/semicolons to RTL context
+3. Applied to all code paths in both document generators
+
+**Files Modified**:
+- `src/utils/document_generator.py`
+- `src/utils/combined_document_generator.py`
 
 #### Session 228 (2025-12-29): Figurative Stats Formatting & Model Tracking
 **Objective**: Fix incorrect figurative statistics when resuming the pipeline and improve document formatting/generation logic.
