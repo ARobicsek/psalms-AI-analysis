@@ -11,21 +11,18 @@ Copy and paste to your LLM at the beginning of each session:
 ```
 I'm starting a new development session on the Psalms AI Analysis project.
 
-**Quick context:**
-- Project location: C:\Users\ariro\OneDrive\Documents\Psalms
-- Current status: See docs/session_tracking/PROJECT_STATUS.md
-- Recent history: See docs/session_tracking/IMPLEMENTATION_LOG.md
+**Project location:** C:\Users\ariro\OneDrive\Documents\Psalms
 
-**Please do the following before we begin:**
-1. Read PROJECT_STATUS.md to understand:
-   - Current session number (update +1 for this session)
-   - Active features and their status
-   - Recent work summary (last 5 sessions)
-   - Any known limitations that might affect today's work
+**Please read these files before we begin:**
+1. `docs/session_tracking/PROJECT_STATUS.md` - Current session number, active features, recent work
+2. `docs/session_tracking/IMPLEMENTATION_LOG.md` - Most recent session details
+3. `docs/session_tracking/scriptReferences.md` - All 50+ scripts with namespaces & descriptions (READ THIS FIRST when looking for code)
 
-2. Check the IMPLEMENTATION_LOG.md for the most recent session to understand what was just completed.
+**Key files to know:**
+- `CLAUDE.md` - Project summary for LLM context
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - System architecture
 
-3. Then ask me: "What would you like to work on in Session [N]?"
+**After reading, ask me:** "What would you like to work on in Session [N]?"
 
 **Today's goal:** [Describe what you want to accomplish]
 ```
@@ -39,7 +36,7 @@ Copy and paste when you're finishing a session:
 ```
 We're wrapping up this session. Please update the session documentation:
 
-**1. Update IMPLEMENTATION_LOG.md** - Add this session's entry at the TOP (after the header/archive links, before Session 236):
+**1. Update IMPLEMENTATION_LOG.md** - Add this session's entry at the TOP:
 ---
 ## Session [N] (YYYY-MM-DD): [Brief Title]
 
@@ -57,41 +54,15 @@ We're wrapping up this session. Please update the session documentation:
 
 **2. Update PROJECT_STATUS.md** in THREE places:
 - **Header (lines 3, 21)**: Update "Last Updated" date and "Current Session" number
-- **Recent Work Summary (after line 55)**: Add a new 3-bullet entry AT THE TOP of the list (before the previous session)
+- **Recent Work Summary (after line 55)**: Add a new 3-bullet entry AT THE TOP
 - **Active Features (line 22)**: Add any new features if applicable
 
-**3. Confirm what was accomplished** in a brief summary for my records.
+**3. Update scriptReferences.md** if you created or significantly modified any scripts:
+- Add new scripts with namespace, description, and file link
+- Update descriptions if functionality changed significantly
+
+**4. Confirm what was accomplished** in a brief summary for my records.
 ```
-
----
-
-## 💡 Tips for Effective Sessions
-
-### Starting Well
-- **Be specific** about your goal — "Fix the login bug" is better than "Improve auth"
-- **Mention blockers** — If something didn't work last session, say so upfront
-- **Share context** — Open relevant files before starting so the LLM can see them
-
-### Ending Well
-- **Complete the docs** before ending — it takes 2 minutes and saves future confusion
-- **Note unfinished work** — If you stopped mid-task, add it to the session notes
-- **Test before closing** — Verify your changes work
-
-### Session Numbering
-- Sessions are numbered sequentially (1, 2, 3... currently at 235+)
-- Each new conversation = new session number
-- Check PROJECT_STATUS.md line 21 for the current number
-
----
-
-## Quick Reference: Key Files
-
-| File | Purpose |
-|------|---------|
-| `docs/session_tracking/PROJECT_STATUS.md` | Current state, features, recent work |
-| `docs/session_tracking/IMPLEMENTATION_LOG.md` | Detailed session history |
-| `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` | System architecture overview |
-| `CLAUDE.md` | Project summary for LLM context |
 
 ---
 
