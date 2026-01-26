@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-26 (Session 242)
+**Last Updated**: 2026-01-26 (Session 243)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -19,7 +19,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ### Progress Summary
 - **Current Session**: 242
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated)
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated), College Editor Insights (✅ Integrated)
 
 ---
 
@@ -57,6 +57,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.5)
 
 ---
+
+### Session 243 (2026-01-26): Insight Quality Improvements — College Editor & Pipeline Flags (Phase 4)
+- **Enhanced College Prompt**: Updated `COLLEGE_EDITOR_PROMPT_V2` in `master_editor.py` to prioritize `{curated_insights}` "aha!" moments.
+- **Pipeline Controls**: Added `--skip-insights` flag to `run_enhanced_pipeline.py` for better execution control.
+- **Integration**: Plumbed insights file through `MasterEditor` execution path for college edition.
+- **Outcome**: College edition now benefits from the same high-quality curated insights as the main synthesis.
 
 ### Session 242 (2026-01-26): Insight Quality Improvements — Pipeline Integration (Phase 2b-2c)
 - **Executed Phase 2b**: Integrated `InsightExtractor` into `run_enhanced_pipeline.py` (Step 2c).

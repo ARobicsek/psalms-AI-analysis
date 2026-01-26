@@ -557,6 +557,9 @@ If you catch yourself using these words, stop and ask: "What is actually happeni
 ### FULL RESEARCH BUNDLE
 {research_bundle}
 
+### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)
+{curated_insights}
+
 ### MACRO THESIS (structural analysis)
 {macro_analysis}
 
@@ -580,6 +583,10 @@ If you catch yourself using these words, stop and ask: "What is actually happeni
 - Missing "so what?"—why should students care about this detail?
 
 ### 2. MISSED OPPORTUNITIES FOR ENGAGEMENT
+
+**From Insight Extractor:**
+- These are high-value "aha!" moments curated specifically for this psalm. Use them!
+- If an insight is listed in "PRIORITIZED INSIGHTS", it should likely appear in your commentary.
 
 **From Deep Web Research:**
 - Cultural connections that would fascinate students (musical settings, political uses, famous stories)
@@ -817,6 +824,7 @@ class MasterEditorV2:
         research_file: Path,
         macro_file: Path,
         micro_file: Path,
+        insights_file: Optional[Path] = None,
         psalm_text_file: Optional[Path] = None,
         psalm_number: Optional[int] = None,
         reader_questions_file: Optional[Path] = None
@@ -896,7 +904,8 @@ class MasterEditorV2:
             micro_analysis=micro_analysis,
             psalm_text=psalm_text,
             analytical_framework=analytical_framework,
-            reader_questions=reader_questions
+            reader_questions=reader_questions,
+            curated_insights=curated_insights
         )
 
         self.logger.info("Master editorial review complete (V2)")
@@ -916,7 +925,8 @@ class MasterEditorV2:
         micro_analysis: Dict,
         psalm_text: str,
         analytical_framework: str,
-        reader_questions: str = "[No reader questions provided]"
+        reader_questions: str = "[No reader questions provided]",
+        curated_insights: Dict = None
     ) -> Dict[str, str]:
         """Route to appropriate model implementation."""
         if "claude" in self.model.lower():
@@ -942,7 +952,8 @@ class MasterEditorV2:
         micro_analysis: Dict,
         psalm_text: str,
         analytical_framework: str,
-        reader_questions: str = "[No reader questions provided]"
+        reader_questions: str = "[No reader questions provided]",
+        curated_insights: Dict = None
     ) -> Dict[str, str]:
         """Call GPT-5.1 for editorial review."""
         self.logger.info(f"Calling {self.model} for editorial review")
@@ -1019,7 +1030,8 @@ class MasterEditorV2:
         micro_analysis: Dict,
         psalm_text: str,
         analytical_framework: str,
-        reader_questions: str = "[No reader questions provided]"
+        reader_questions: str = "[No reader questions provided]",
+        curated_insights: Dict = None
     ) -> Dict[str, str]:
         """Call Claude Opus 4.5 for editorial review with extended thinking."""
         self.logger.info(f"Calling {self.model} for editorial review with extended thinking")
@@ -1099,6 +1111,7 @@ class MasterEditorV2:
         research_file: Path,
         macro_file: Path,
         micro_file: Path,
+        insights_file: Optional[Path] = None,
         psalm_text_file: Optional[Path] = None,
         psalm_number: Optional[int] = None
     ) -> Dict[str, str]:
@@ -1144,8 +1157,10 @@ class MasterEditorV2:
             research_bundle=research_bundle,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
+
             psalm_text=psalm_text,
-            analytical_framework=analytical_framework
+            analytical_framework=analytical_framework,
+            curated_insights=curated_insights
         )
 
         self.logger.info("College edition complete (V2)")
@@ -1160,7 +1175,8 @@ class MasterEditorV2:
         macro_analysis: Dict,
         micro_analysis: Dict,
         psalm_text: str,
-        analytical_framework: str
+        analytical_framework: str,
+        curated_insights: Dict = None
     ) -> Dict[str, str]:
         """Perform college edition review using appropriate model."""
 
@@ -1176,7 +1192,8 @@ class MasterEditorV2:
             psalm_text=psalm_text or "[Psalm text not available]",
             macro_analysis=macro_text,
             micro_analysis=micro_text,
-            analytical_framework=analytical_framework
+            analytical_framework=analytical_framework,
+            curated_insights=insights_text
         )
 
         # Save prompt for debugging
@@ -1379,6 +1396,50 @@ class MasterEditorV2:
 
         return str(analysis)
 
+    def _format_insights_for_prompt(self, insights: Dict) -> str:
+        """Format curated insights for prompt inclusion."""
+        if not insights:
+            return "[No curated insights provided]"
+            
+        lines = []
+        
+        # Psalm-level insights
+        psalm_insights = insights.get('psalm_level_insights', [])
+        if psalm_insights:
+            lines.append("**MAJOR PSALM-LEVEL INSIGHTS:**")
+            for i, insight in enumerate(psalm_insights, 1):
+                text = insight.get('insight', '')
+                evidence = insight.get('evidence', '')
+                why = insight.get('why_it_matters', '')
+                lines.append(f"{i}. **{text}**")
+                if evidence:
+                    lines.append(f"   - *Evidence:* {evidence}")
+                if why:
+                    lines.append(f"   - *Significance:* {why}")
+            lines.append("")
+            
+        # Verse-level insights
+        verse_insights = insights.get('verse_insights', {})
+        # Filter out "STANDARD" placeholders
+        real_verse_insights = {k: v for k, v in verse_insights.items() if v != "STANDARD"}
+        
+        if real_verse_insights:
+            lines.append("**VERSE-LEVEL DISCOVERIES:**")
+            # Sort by verse number (try to parse int)
+            try:
+                sorted_keys = sorted(real_verse_insights.keys(), key=lambda x: int(re.sub(r'\D', '', str(x))) if re.sub(r'\D', '', str(x)) else 0)
+            except:
+                sorted_keys = sorted(real_verse_insights.keys())
+                
+            for v_num in sorted_keys:
+                insight = real_verse_insights[v_num]
+                lines.append(f"- **Verse {v_num}:** {insight}")
+                
+        if not lines:
+            return "[No significant insights found]"
+            
+        return "\n".join(lines)
+
 
 # Alias for backward compatibility
 MasterEditor = MasterEditorV2
@@ -1404,6 +1465,8 @@ def main():
                        help='Path to macro analysis JSON')
     parser.add_argument('--micro', type=str, required=True,
                        help='Path to micro analysis JSON')
+    parser.add_argument('--insights', type=str, default=None,
+                       help='Path to insights JSON (optional)')
     parser.add_argument('--psalm-text', type=str, default=None,
                        help='Path to psalm text file (optional)')
     parser.add_argument('--output-dir', type=str, default='output',
@@ -1442,6 +1505,7 @@ def main():
                 research_file=Path(args.research),
                 macro_file=Path(args.macro),
                 micro_file=Path(args.micro),
+                insights_file=Path(args.insights) if args.insights else None,
                 psalm_text_file=Path(args.psalm_text) if args.psalm_text else None
             )
 

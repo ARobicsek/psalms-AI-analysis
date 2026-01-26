@@ -8,6 +8,34 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 243 (2026-01-26): Insight Quality Improvements — College Editor & Pipeline Flags (Phase 4)
+
+**Objective**: Ensure the College Editor utilizes the new curated insights and implement execution controls to skip insight extraction.
+
+**Problems Addressed**:
+- The College Editor prompt (`COLLEGE_EDITOR_PROMPT_V2`) was missing the input slot for curated insights, meaning the college edition wasn't benefiting from the Phase 2b/2c improvements.
+- The pipeline (`run_enhanced_pipeline.py`) didn't have a way to skip the insight extraction step (`--skip-insights`) for debugging or resuming.
+
+**Solutions Implemented**:
+1.  **Enhanced College Editor Prompt**:
+    - Updated `MasterEditor.COLLEGE_EDITOR_PROMPT_V2` to include `{curated_insights}`.
+    - Added specific instructions: "PRIORITIZED INSIGHTS... These are high-value 'aha!' moments curated specifically for this psalm. Use them!"
+    - Updated `MasterEditor` methods (`edit_college_commentary`, `_perform_college_review`) to accept and process the insights file.
+
+2.  **Pipeline Turn-Key Controls**:
+    - Added `--skip-insights` flag to `scripts/run_enhanced_pipeline.py`.
+    - Implemented logic to respect this flag (similar to existing `--skip-macro`, etc.).
+    - Updated pipeline to pass the insights file path to the `MasterEditor` during college edition generation.
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Prompt update + method signature updates.
+- `scripts/run_enhanced_pipeline.py` - Argument parsing + execution logic.
+
+**Next Steps**:
+- Verify content quality of generated college commentaries.
+
+---
+
 ## Session 242 (2026-01-26): Insight Quality Improvements — Pipeline Integration (Phase 2b-2c)
 
 **Objective**: Complete the integration of the Insight Extractor into the production pipeline and implement intelligent research bundle trimming.

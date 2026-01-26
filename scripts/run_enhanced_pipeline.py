@@ -228,7 +228,8 @@ def run_enhanced_pipeline(
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
     master_editor_model: str = "gpt-5",
-    master_editor_old: bool = False
+    master_editor_old: bool = False,
+    skip_insights: bool = False
 ):
     """
     Run complete enhanced pipeline for a single psalm.
@@ -251,6 +252,7 @@ def run_enhanced_pipeline(
         skip_default_commentaries: Use selective commentary mode (only request for specific verses)
         master_editor_model: Model to use for master editor (default: "gpt-5.1", or "claude-opus-4-5")
         master_editor_old: Use OLD prompt (pre-V2). Default is now V2 (restructured, Deep Research emphasis)
+        skip_insights: Skip insight extraction (Phase 2b). (NEVER runs this step, even if files don't exist)
     """
     logger = get_logger("enhanced_pipeline")
     logger.info(f"=" * 80)
@@ -264,7 +266,7 @@ def run_enhanced_pipeline(
     summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
     
     # Check if we are resuming a run (any skip flag is true)
-    is_resuming = any([skip_macro, skip_micro, skip_synthesis, skip_master_edit, skip_college, skip_print_ready, skip_word_doc]) and not smoke_test
+    is_resuming = any([skip_macro, skip_micro, skip_insights, skip_synthesis, skip_master_edit, skip_college, skip_print_ready, skip_word_doc]) and not smoke_test
 
     # Determine if this is a "true resume" (only skipping to output steps) vs "reusing research" (running fresh analysis)
     # If synthesis or master_editor are NOT skipped, this is a fresh analysis run
@@ -340,21 +342,30 @@ def run_enhanced_pipeline(
                         logger.info(f"Resuming from micro analysis (macro exists at {macro_file})")
                         skip_macro = True
                 else:
-                    # Micro exists, resume from synthesis
-                    logger.info(f"Resuming from synthesis (micro exists at {research_file})")
-                    skip_macro = True
-                    skip_micro = True
+                    # Micro exists, check insights
+                    if not insights_file.exists():
+                        logger.info(f"Resuming from insights extraction (micro exists at {research_file})")
+                        skip_macro = True
+                        skip_micro = True
+                    else:
+                        # Insights exist, resume from synthesis
+                        logger.info(f"Resuming from synthesis (insights exist at {insights_file})")
+                        skip_macro = True
+                        skip_micro = True
+                        skip_insights = True
             else:
                 # Synthesis exists, resume from master editor
                 logger.info(f"Resuming from master editor (synthesis exists at {synthesis_intro_file})")
                 skip_macro = True
                 skip_micro = True
+                skip_insights = True
                 skip_synthesis = True
         else:
             # Master editor exists, check if we need college or formatting
             logger.info(f"Master editor complete. Checking for college/formatting steps.")
             skip_macro = True
             skip_micro = True
+            skip_insights = True
             skip_synthesis = True
             skip_master_edit = True
 
@@ -748,61 +759,76 @@ def run_enhanced_pipeline(
         logger.info(f"✓ SMOKE TEST: Dummy insights saved to {insights_file}")
         print(f"✓ SMOKE TEST: Dummy insights complete: {insights_file}\n")
         
-    elif insights_file.exists():
-        logger.info(f"[STEP 2c] Insights file already exists, loading from disk")
-        print(f"\nSkipping Step 2c (insights already exist: {insights_file})\n")
-        try:
-            with open(insights_file, 'r', encoding='utf-8') as f:
-                curated_insights = json.load(f)
-        except Exception as e:
-            logger.error(f"Failed to load existing insights: {e}")
-            
-    elif macro_file.exists() and micro_file.exists() and research_file.exists():
-        logger.info("\n[STEP 2c] Extracting transformative insights...")
-        print(f"\n{'='*80}")
-        print(f"STEP 2c: Insight Extraction (Curating Transformative Insights)")
-        print(f"{'='*80}\n")
-        
-        try:
-            # Load research bundle content if not already loaded (required for trimming)
-            if 'research_bundle_content' not in locals():
-                with open(research_file, 'r', encoding='utf-8') as f:
-                    research_bundle_content = f.read()
 
-            # Trim research bundle for Insight Extractor (Opus 4.5 has 200k limit)
-            # We target 400k chars (~100-130k tokens) to be safe and leave room for prompt + output
-            trimmed_research_bundle, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+
+    elif not skip_insights:
+         if insights_file.exists():
+            logger.info(f"[STEP 2c] Insights file already exists, skipping curation to avoid overwrite")
+            print(f"\nSkipping Step 2c (insights already exist: {insights_file})\n")
+            try:
+                with open(insights_file, 'r', encoding='utf-8') as f:
+                    curated_insights = json.load(f)
+            except Exception as e:
+                logger.error(f"Failed to load existing insights: {e}")
+         elif macro_file.exists() and micro_file.exists() and research_file.exists():
+            logger.info("\n[STEP 2c] Extracting transformative insights...")
+            print(f"\n{'='*80}")
+            print(f"STEP 2c: Insight Extraction (Curating Transformative Insights)")
+            print(f"{'='*80}\n")
             
-            insight_extractor = InsightExtractor(cost_tracker=cost_tracker)
-            
-            # Load psalm text
-            db = TanakhDatabase(Path(db_path))
-            psalm = db.get_psalm(psalm_number)
-            psalm_text_str = ""
-            if psalm:
-                psalm_text_str = "\n".join([f"{v.verse}: {v.hebrew}" for v in psalm.verses])
-            
-            curated_insights = insight_extractor.extract_insights(
-                psalm_number=psalm_number,
-                psalm_text=psalm_text_str,
-                micro_analysis_data=micro_analysis,
-                research_bundle_content=trimmed_research_bundle
-            )
-            
-            insight_extractor.save_insights(curated_insights, insights_file)
-            
-            num_psalm = len(curated_insights.get('psalm_level_insights', []))
-            num_verse = len([v for k, v in curated_insights.get('verse_insights', {}).items() if v != 'STANDARD'])
-            
-            logger.info(f"✓ Insights extracted: {num_psalm} psalm-level, {num_verse} verse-level")
-            print(f"✓ Insight extraction complete: {insights_file}\n")
-            
-        except Exception as e:
-            logger.warning(f"Insight extraction failed (non-fatal): {e}")
-            print(f"⚠ Insight extraction failed (continuing pipeline): {e}\n")
+            try:
+                # Load research bundle content if not already loaded (required for trimming)
+                if 'research_bundle_content' not in locals():
+                    with open(research_file, 'r', encoding='utf-8') as f:
+                        research_bundle_content = f.read()
+
+                # Trim research bundle for Insight Extractor (Opus 4.5 has 200k limit)
+                # We target 400k chars (~100-130k tokens) to be safe and leave room for prompt + output
+                trimmed_research_bundle, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+                
+                insight_extractor = InsightExtractor(cost_tracker=cost_tracker)
+                
+                # Load psalm text
+                db = TanakhDatabase(Path(db_path))
+                psalm = db.get_psalm(psalm_number)
+                psalm_text_str = ""
+                if psalm:
+                    psalm_text_str = "\n".join([f"{v.verse}: {v.hebrew}" for v in psalm.verses])
+                
+                curated_insights = insight_extractor.extract_insights(
+                    psalm_number=psalm_number,
+                    psalm_text=psalm_text_str,
+                    micro_analysis_data=micro_analysis,
+                    research_bundle_content=trimmed_research_bundle
+                )
+                
+                insight_extractor.save_insights(curated_insights, insights_file)
+                
+                num_psalm = len(curated_insights.get('psalm_level_insights', []))
+                num_verse = len([v for k, v in curated_insights.get('verse_insights', {}).items() if v != 'STANDARD'])
+                
+                logger.info(f"✓ Insights extracted: {num_psalm} psalm-level, {num_verse} verse-level")
+                print(f"✓ Insight extraction complete: {insights_file}\n")
+                
+            except Exception as e:
+                logger.warning(f"Insight extraction failed (non-fatal): {e}")
+                print(f"⚠ Insight extraction failed (continuing pipeline): {e}\n")
+         else:
+            logger.info(f"[STEP 2c] Skipping insight extraction (required files not found)")
+            print(f"\nSkipping Step 2c (insight extraction - micro/research files required)\n")
     else:
-        logger.info(f"[STEP 2c] Skipping insight extraction (required files not found)")
-        print(f"\nSkipping Step 2c (insight extraction - micro/research files required)\n")
+        # skip_insights is True
+        logger.info(f"[STEP 2c] Skipping insight extraction (--skip-insights flag set)")
+        print(f"\nSkipping Step 2c (insight extraction explicitly skipped)\n")
+        
+        # Load existing if available (best effort)
+        if insights_file.exists():
+            try:
+                with open(insights_file, 'r', encoding='utf-8') as f:
+                    curated_insights = json.load(f)
+                logger.info(f"Loaded existing insights from {insights_file}")
+            except Exception as e:
+                logger.warning(f"Could not load skipped insights file: {e}")
 
 
     # =====================================================================
@@ -1631,6 +1657,8 @@ Examples:
                        help='Skip macro analysis (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-micro', action='store_true',
                        help='Skip micro analysis (NEVER runs, even if files don\'t exist)')
+    parser.add_argument('--skip-insights', action='store_true',
+                       help='Skip insight extraction (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-synthesis', action='store_true',
                        help='Skip synthesis (NEVER runs, even if files don\'t exist)')
     parser.add_argument('--skip-master-edit', action='store_true',
@@ -1701,7 +1729,8 @@ Examples:
             smoke_test=args.smoke_test,
             skip_default_commentaries=args.skip_default_commentaries,
             master_editor_model=args.master_editor_model,
-            master_editor_old=args.master_editor_old
+            master_editor_old=args.master_editor_old,
+            skip_insights=args.skip_insights
         )
 
         return 0
