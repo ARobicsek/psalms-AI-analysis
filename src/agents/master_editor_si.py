@@ -286,6 +286,7 @@ Then write the liturgical section using **Heading 4 markdown** (`####`) for subs
 - Always provide English translations
 - Be specific: prayer name, service (Shacharit/Mincha/Maariv), occasion, tradition
 - Reflect on whether liturgical use follows the plain sense or reinterprets the text
+- Often readers wonder: why is THIS verse/phrase or psalm used HERE liturgically? Address this question with insight and clarity of thought.
 - OMIT subsections that don't apply to this psalm
 
 ### STAGE 3: REVISED VERSE COMMENTARY

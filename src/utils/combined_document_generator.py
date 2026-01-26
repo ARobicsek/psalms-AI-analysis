@@ -159,6 +159,69 @@ class CombinedDocumentGenerator:
         return ascii_ratio < 0.05
 
     @staticmethod
+    def _is_hebrew_dominant(text: str) -> bool:
+        """
+        Check if text is predominantly Hebrew (>80% Hebrew letters, min 2).
+        Unlike _is_primarily_hebrew, does NOT require sof-pasuq.
+        Safe for content already isolated by markdown formatting markers.
+        """
+        hebrew_letters = len(re.findall(r'[\u05D0-\u05EA]', text))
+        ascii_letters = len(re.findall(r'[a-zA-Z]', text))
+        total = hebrew_letters + ascii_letters
+        if total == 0:
+            return False
+        return (hebrew_letters / total) > 0.8 and hebrew_letters >= 2
+
+    def _process_text_rtl(self, text):
+        """
+        Process text for RTL display. Returns modified text string.
+
+        Handles: primarily-Hebrew lines, Hebrew-dominant text,
+        parenthesized/bracketed Hebrew, verse refs, trailing punctuation.
+        """
+        # Full reversal for primarily Hebrew or Hebrew-dominant text
+        if self._is_primarily_hebrew(text) or self._is_hebrew_dominant(text):
+            return self._reverse_primarily_hebrew_line(text)
+
+        # Standard RTL processing for mixed content
+        modified = text
+        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+        # Hebrew in parentheses
+        hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+        if re.search(hebrew_paren_pattern, modified):
+            def reverse_hebrew_paren(match):
+                hebrew_text = match.group(1)
+                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                return f'{LRO}({reversed_hebrew}){PDF}'
+            modified = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified)
+
+        # Hebrew in square brackets
+        hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
+        if re.search(hebrew_bracket_pattern, modified):
+            def reverse_hebrew_bracket(match):
+                hebrew_text = match.group(1)
+                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                return f'{LRO}[{reversed_hebrew}]{PDF}'
+            modified = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified)
+
+        # Verse references
+        verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
+        if re.search(verse_ref_pattern, modified):
+            def wrap_verse_ref(match):
+                return f'{LRO}{match.group(1)}{PDF}'
+            modified = re.sub(verse_ref_pattern, wrap_verse_ref, modified)
+
+        # Trailing punctuation RLM anchor
+        RLM = '\u200F'  # RIGHT-TO-LEFT MARK
+        hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified))
+        if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified):
+            modified = modified + RLM
+
+        return modified
+
+    @staticmethod
     def _reverse_primarily_hebrew_line(text: str) -> str:
         """
         Reverse an entire primarily-Hebrew line for correct RTL display in LTR paragraphs.
@@ -308,13 +371,15 @@ class CombinedDocumentGenerator:
                 inner_content = part[2:-2]
                 self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
             elif part.startswith('*') and part.endswith('*'):
-                run = paragraph.add_run(part[1:-1])
+                processed = self._process_text_rtl(part[1:-1])
+                run = paragraph.add_run(processed)
                 run.italic = True
                 if set_font:
                     run.font.name = 'Aptos'
                     run.font.size = Pt(12)
             elif part.startswith('_') and part.endswith('_'):
-                run = paragraph.add_run(part[1:-1])
+                processed = self._process_text_rtl(part[1:-1])
+                run = paragraph.add_run(processed)
                 run.italic = True
                 if set_font:
                     run.font.name = 'Aptos'
@@ -390,16 +455,18 @@ class CombinedDocumentGenerator:
                 if not part:
                     continue
                 if part.startswith('*') and part.endswith('*') and not part.startswith('**'):
-                    # Nested italic
-                    run = paragraph.add_run(part[1:-1])
+                    # Nested italic - with RTL processing
+                    processed = self._process_text_rtl(part[1:-1])
+                    run = paragraph.add_run(processed)
                     run.bold = bold
                     run.italic = True  # Nested italic
                     if set_font:
                         run.font.name = 'Aptos'
                         run.font.size = Pt(12)
                 elif part.startswith('_') and part.endswith('_') and not part.startswith('__'):
-                    # Nested italic
-                    run = paragraph.add_run(part[1:-1])
+                    # Nested italic - with RTL processing
+                    processed = self._process_text_rtl(part[1:-1])
+                    run = paragraph.add_run(processed)
                     run.bold = bold
                     run.italic = True  # Nested italic
                     if set_font:

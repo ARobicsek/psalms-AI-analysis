@@ -104,3 +104,6 @@ data/liturgy.db
 output/
 logs/
 data/
+# Large archived files (>100MB)
+archive/data_archive_2026-01/thematic_corpus_1_verse/chroma_db/10ab0db2-72ca-4744-9228-d453cadb18d8/data_level0.bin
+archive/data_archive_2026-01/thematic_corpus_1_verse/chroma_db/c7ce5f58-c5f7-4a1b-bf36-25004c0ee3e3/data_level0.bin

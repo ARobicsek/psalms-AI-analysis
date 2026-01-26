@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-12 (Session 237)
+**Last Updated**: 2026-01-23 (Session 238)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 237
+- **Current Session**: 238
 - **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Codebase Cleanup & Archiving (✅ NEW)
 
 ---
@@ -53,6 +53,11 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
 
 ---
+
+### Session 238 (2026-01-23): Divine Names Modifier Markdown Fix
+- **Bug Fix**: Fixed `DivineNamesModifier` to correctly detect and modify divine names (e.g., אֵל → קֵל) when wrapped in markdown formatting (italics/bold).
+- **Verification**: Confirmed fix handles `*אֵל הַכָּבוֹד*` correctly.
+- **Impact**: Ensures consistent divine name modification in generated commentary regardless of formatting.
 
 ### Session 237 (2026-01-12): Codebase Cleanup and Archiving
 - **Archived**: Moved 40+ obsolete scripts and documentation files to `archive/` structure

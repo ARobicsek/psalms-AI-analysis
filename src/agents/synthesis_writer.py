@@ -335,7 +335,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - When a verse appears in liturgy, comment on this usage and what it reveals about reception and interpretation
    - **CRITICAL: QUOTE the liturgical texts in Hebrew with English translation to show HOW the verse is used**
    - Be specific: mention the prayer name, service (Shacharit/Mincha/Maariv), occasion (Weekday/Shabbat/Festivals), and tradition (Ashkenaz/Sefard/Edot HaMizrach)
-   - Consider what the liturgical placement tells us about how Jewish tradition understood this verse
+   - Consider what the liturgical placement tells us about how Jewish tradition understood this verse. WHY is THIS psalm, verse or phrase used where it is in prayer?
    - Integrate liturgical insights naturally - don't treat them as a separate "trivia" item
    - WEAK example: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..." [too vague, no quotation]
    - STRONG example: "This verse appears in the Shabbat Musaf Amidah in the context of the sacrificial offerings: 'וְהִקְרִיבוּ לְךָ עוֹלוֹת תְּמִימִים זִבְחֵי צֶדֶק' ('and they shall offer You whole burnt-offerings, righteous sacrifices'), suggesting the tradition read this psalm's call for righteous sacrifices as..."

@@ -8,6 +8,21 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 238 (2026-01-23): Divine Names Modifier Markdown Fix
+
+**Objective**: Fix divine names modifier to correctly handle Hebrew text inside markdown formatting (e.g., italics).
+
+**Problems Identified**:
+- The word אֵל in `*אֵל הַכָּבוֹד*` (Psalm 29:3) was not converting to `קֵל` because the regex didn't treat the asterisk `*` as a word boundary.
+
+**Solutions Implemented**:
+1. **Regex Update**: Updated `_modify_el_tzere` in `divine_names_modifier.py` to include markdown formatting characters (`*` and `_`) as valid word boundaries.
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Updated regex pattern for `_modify_el_tzere` to support markdown boundaries.
+
+---
+
 ## Session 237 (2026-01-12): Codebase Cleanup and Archiving
 
 **Objective**: Comprehensive codebase cleanup to archive obsolete scripts, data, and documentation not used in production.

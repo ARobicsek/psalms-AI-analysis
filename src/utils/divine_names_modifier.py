@@ -114,7 +114,8 @@ class DivineNamesModifier:
 
     def _modify_el_tzere(self, text: str) -> str:
         """Replace אֵל (with tzere) with קֵל, but NOT אֶל (with segol)"""
-        pattern = r'(^|[\s\-\u05BE])אֵ([\u0591-\u05C7]*)ל(?=[\s\-\u05BE]|$)'
+        # Include markdown formatting chars (*_) as valid word boundaries
+        pattern = r'(^|[\s\-\u05BE*_])אֵ([\u0591-\u05C7]*)ל(?=[\s\-\u05BE*_]|$)'
 
         def replacer(match):
             prefix = match.group(1)
