@@ -56,6 +56,9 @@ Your job is to FILTER, not to write. You will receive extensive research materia
 3. **Productive ambiguities:** Cases where the text deliberately sustains multiple readings
 4. **Surprising parallels:** Connections to other texts that create unexpected meaning
 5. **Commentator gems:** Traditional interpretations that are genuinely illuminating (not just pious)
+6. **Liturgical insights:** Insights that reveal why the psalm or its elements are used in the way they are liturgically
+7. **Historical insights:** Insights about sitz-im-leben or polemical use of the psalm, or interesting facts about the afterlife or reception history of the psalm or its elements
+8. **Poetic insights:** Illuminating insights about poetic devices and figurative language that will enhance the reader's appreciation of the psalm as a literary work
 
 ## WHAT DOES NOT COUNT
 
