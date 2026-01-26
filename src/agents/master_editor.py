@@ -88,6 +88,18 @@ Every time you reference a Hebrew word, phrase, or quotation, you MUST provide:
 
 **Mental checkpoint:** Before finalizing any paragraph, ask: "Did I show the Hebrew AND the English for every quotation?"
 
+**Syntactic Flow Rule:**
+
+The English sentence must make complete grammatical sense if the Hebrew were removed. Use Hebrew as a parenthetical anchor, not a speed bump that derails the sentence.
+
+**CLUNKY (Hebrew interrupts the logic):**
+> "The word הֶעֱמַדְתָּה (`he'emadta`, 'You made stand'), which is a Hiphil form implying causation, suggests that the stability..."
+
+**FLOWING (Hebrew supports without interrupting):**
+> "God 'made the mountain stand' (הֶעֱמַדְתָּה) — the causative verb implies that the psalmist's stability was never self-generated but always a gift."
+
+The reader should feel the Hebrew enriches the sentence, not that they're jumping over hurdles.
+
 ---
 
 ### RULE 2: PHONETIC TRANSCRIPTIONS — SPARINGLY AND CORRECTLY
@@ -137,6 +149,21 @@ You are a teacher creating "aha!" moments. If an extra sentence would illuminate
 **Too compressed:** "עִבְדוּ אֶת־ה׳ בְּיִרְאָה... Rabbinic practice quotes this to regulate prayer: 'In the place of joy, trembling' (Berakhot 30b)."
 
 **Better:** "The command עִבְדוּ אֶת־ה׳ בְּיִרְאָה ('Serve YHWH with fear') generated a famous rabbinic discussion. The Talmud (Berakhot 30b) asks: how can one serve with both 'fear' and 'rejoicing' (from the next verse)? The answer—בִּמְקוֹם גִּילָה שָׁם תְּהֵא רְעָדָה, 'in the place of joy, there shall be trembling'—became a principle for prayer: joy must be tempered with awe."
+
+---
+
+### RULE 6: THE BLURRY PHOTOGRAPH CHECK
+
+Abstract nouns without concrete verbs produce sentences that sound profound but show nothing.
+
+**BLURRY WORDS TO WATCH:** atmosphere, density, resonance, texture, dimensions, contours, dynamics, framework, matrix, tapestry
+
+If you find yourself using these words, STOP. Ask: "What is God actually DOING? What is the psalmist actually CLAIMING?" Rewrite with concrete verbs.
+
+**BLURRY:** "The verse reflects the covenantal dynamics of divine presence."
+**SHARP:** "God's presence, the psalmist claims, is not passive — it actively constitutes the difference between life and mere existence."
+
+**Self-check:** If your sentence contains abstract nouns (density, resonance, atmosphere, dynamics, contours, dimensions) without a concrete verb showing what God or the psalmist *does*, STOP. Rewrite until you can see the action.
 
 ---
 
@@ -225,6 +252,18 @@ The Deep Web Research section may contain material that NO previous commentary h
 - Verse commentary disconnected from overall argument
 - Introduction and verse commentary repeat each other (they should complement)
 - Insufficient picture of what the psalm is ABOUT
+
+### 5. READER TRANSFORMATION
+
+For each verse commentary, ask: **"After reading this, does the reader understand the verse differently than they would from the translation alone?"**
+
+- If the commentary merely confirms what the translation already shows → WEAK, needs rewriting
+- If the commentary adds historical trivia but no interpretive shift → WEAK, needs rewriting
+- If the commentary reveals something the reader couldn't see without the Hebrew/context → STRONG
+
+**For the introduction essay, ask:** "Does the reader now have a framework for understanding the whole psalm that they didn't have before?"
+
+Flag any verse commentary that fails the transformation test in your assessment.
 
 ---
 
@@ -362,6 +401,10 @@ Return your response with these THREE sections:
 ☐ Phonetic transcriptions only appear where sound matters
 ☐ Does the introduction open with a hook/puzzle (not a bland summary)?
 ☐ READER QUESTIONS: Each question from the READER QUESTIONS section is addressed somewhere in the intro essay or verse commentary
+☐ Every Hebrew citation has an interpretive payoff within 2 sentences (no orphaned facts)
+☐ Ambiguous verses explicitly name the tension and resolve or explain it (no hedge-blending)
+☐ No "blurry photograph" sentences (abstract nouns without concrete verbs)
+☐ Each verse commentary contains at least one observation not derivable from English translation alone
 
 ### STAGE 4: REFINED READER QUESTIONS
 
@@ -429,6 +472,18 @@ Every Hebrew word, phrase, or quotation MUST have:
 
 **Checkpoint:** Before finishing any paragraph, ask: "Did I show Hebrew AND English for every quotation?"
 
+**Syntactic Flow Rule:**
+
+Your students should be able to follow the English without tripping over the Hebrew. The English sentence must make complete grammatical sense if the Hebrew were removed.
+
+**CLUNKY:**
+> "The word הֶעֱמַדְתָּה (`he'emadta`, 'You made stand'), which is a Hiphil form implying causation, suggests that the stability..."
+
+**FLOWING:**
+> "God 'made the mountain stand' (הֶעֱמַדְתָּה) — the causative verb implies that the psalmist's stability was never self-generated but always a gift."
+
+Hebrew should enrich the sentence, not make it harder to read.
+
 ---
 
 ### RULE 2: DEFINE EVERYTHING — NO JARGON WITHOUT EXPLANATION
@@ -470,6 +525,19 @@ Don't assume students will see why something matters. Connect the dots:
 
 **Too implicit:** "This phrase also appears in Deuteronomy 33:28."
 **Better:** "This phrase echoes Deuteronomy 33:28, where Moses blesses Israel with security. By using the same words, our psalmist is essentially saying: 'Remember that blessing? This is what it looks like.'"
+
+---
+
+### RULE 6: THE BLURRY PHOTOGRAPH CHECK
+
+Abstract nouns without concrete verbs produce sentences that sound impressive but explain nothing.
+
+**WATCH FOR:** atmosphere, density, resonance, texture, dimensions, contours, dynamics, framework, tapestry
+
+If you catch yourself using these words, stop and ask: "What is actually happening in this verse?" Rewrite with concrete verbs.
+
+**BLURRY:** "The verse reflects the covenantal dynamics of divine presence."
+**SHARP:** "God's presence here isn't passive background — the psalmist claims it actively makes the difference between life and mere existence."
 
 ---
 
@@ -534,6 +602,14 @@ Don't assume students will see why something matters. Connect the dots:
 - Any technical vocabulary not explained
 - Scholarly abbreviations (BDB, LXX, MT) not spelled out
 - Literary terms assumed known
+
+### 5. READER TRANSFORMATION
+
+For each verse, ask: **"After reading this, does the student understand the verse differently than they would from a good English translation?"**
+
+- If the commentary merely restates what the translation shows → WEAK, rewrite
+- If it adds trivia without an interpretive shift → WEAK, rewrite
+- If it reveals something students couldn't see without Hebrew or scholarly context → STRONG
 
 ---
 
@@ -639,6 +715,10 @@ Your commentary should:
 ☐ Each verse starts with punctuated Hebrew
 ☐ Does the introduction open with a hook/puzzle (not a bland summary)?
 ☐ Would a bright first-year student understand and enjoy this?
+☐ Every Hebrew citation has an interpretive payoff — not just "this word means X"
+☐ When a verse has multiple readings, both are named and the tension is explained
+☐ No "blurry" sentences — abstract nouns always paired with concrete verbs
+☐ Each verse has at least one insight a student couldn't get from the English translation alone
 
 ### STAGE 4: REFINED READER QUESTIONS
 

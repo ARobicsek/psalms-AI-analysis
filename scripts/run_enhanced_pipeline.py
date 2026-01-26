@@ -43,10 +43,12 @@ from src.agents.synthesis_writer import SynthesisWriter
 from src.agents.master_editor import MasterEditorV2 as MasterEditor
 from src.agents.master_editor_old import MasterEditor as MasterEditorOld
 from src.agents.question_curator import QuestionCurator
+from src.agents.insight_extractor import InsightExtractor
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
 from src.utils.cost_tracker import CostTracker
+from src.utils.research_trimmer import ResearchTrimmer
 
 
 def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
@@ -289,6 +291,7 @@ def run_enhanced_pipeline(
 
     # Initialize cost tracker for API usage and costs
     cost_tracker = CostTracker()
+    research_trimmer = ResearchTrimmer(logger=logger)
     logger.info("Cost tracking enabled for all models.")
 
     # Create output directory
@@ -314,6 +317,8 @@ def run_enhanced_pipeline(
     docx_output_combined_file = output_path / f"psalm_{psalm_number:03d}_commentary_combined.docx"
     # Reader questions file
     reader_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions.json"
+    # Insight extraction file
+    insights_file = output_path / f"psalm_{psalm_number:03d}_insights.json"
 
     # Handle resume mode - auto-detect last completed step
     if resume and not smoke_test:
@@ -715,6 +720,92 @@ def run_enhanced_pipeline(
 
 
     # =====================================================================
+    # STEP 2c: Insight Extraction (Phase 2b)
+    # =====================================================================
+    curated_insights = None
+    
+    if smoke_test:
+        logger.info("\n[STEP 2c] SMOKE TEST: Generating dummy insights...")
+        print(f"\n{'='*80}")
+        print(f"STEP 2c: SMOKE TEST - Insight Extraction")
+        print(f"{'='*80}\n")
+        
+        curated_insights = {
+            "psalm_level_insights": [
+                {
+                    "insight": "Smoke test insight.",
+                    "evidence": "Smoke test evidence.",
+                    "affects_verses": [1],
+                    "why_it_matters": "It matters because smoke test."
+                }
+            ],
+            "verse_insights": {
+                "1": "Smoke test verse insight."
+            }
+        }
+        with open(insights_file, 'w', encoding='utf-8') as f:
+            json.dump(curated_insights, f, ensure_ascii=False, indent=2)
+        logger.info(f"✓ SMOKE TEST: Dummy insights saved to {insights_file}")
+        print(f"✓ SMOKE TEST: Dummy insights complete: {insights_file}\n")
+        
+    elif insights_file.exists():
+        logger.info(f"[STEP 2c] Insights file already exists, loading from disk")
+        print(f"\nSkipping Step 2c (insights already exist: {insights_file})\n")
+        try:
+            with open(insights_file, 'r', encoding='utf-8') as f:
+                curated_insights = json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load existing insights: {e}")
+            
+    elif macro_file.exists() and micro_file.exists() and research_file.exists():
+        logger.info("\n[STEP 2c] Extracting transformative insights...")
+        print(f"\n{'='*80}")
+        print(f"STEP 2c: Insight Extraction (Curating Transformative Insights)")
+        print(f"{'='*80}\n")
+        
+        try:
+            # Load research bundle content if not already loaded (required for trimming)
+            if 'research_bundle_content' not in locals():
+                with open(research_file, 'r', encoding='utf-8') as f:
+                    research_bundle_content = f.read()
+
+            # Trim research bundle for Insight Extractor (Opus 4.5 has 200k limit)
+            # We target 400k chars (~100-130k tokens) to be safe and leave room for prompt + output
+            trimmed_research_bundle, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+            
+            insight_extractor = InsightExtractor(cost_tracker=cost_tracker)
+            
+            # Load psalm text
+            db = TanakhDatabase(Path(db_path))
+            psalm = db.get_psalm(psalm_number)
+            psalm_text_str = ""
+            if psalm:
+                psalm_text_str = "\n".join([f"{v.verse}: {v.hebrew}" for v in psalm.verses])
+            
+            curated_insights = insight_extractor.extract_insights(
+                psalm_number=psalm_number,
+                psalm_text=psalm_text_str,
+                micro_analysis_data=micro_analysis,
+                research_bundle_content=trimmed_research_bundle
+            )
+            
+            insight_extractor.save_insights(curated_insights, insights_file)
+            
+            num_psalm = len(curated_insights.get('psalm_level_insights', []))
+            num_verse = len([v for k, v in curated_insights.get('verse_insights', {}).items() if v != 'STANDARD'])
+            
+            logger.info(f"✓ Insights extracted: {num_psalm} psalm-level, {num_verse} verse-level")
+            print(f"✓ Insight extraction complete: {insights_file}\n")
+            
+        except Exception as e:
+            logger.warning(f"Insight extraction failed (non-fatal): {e}")
+            print(f"⚠ Insight extraction failed (continuing pipeline): {e}\n")
+    else:
+        logger.info(f"[STEP 2c] Skipping insight extraction (required files not found)")
+        print(f"\nSkipping Step 2c (insight extraction - micro/research files required)\n")
+
+
+    # =====================================================================
     # STEP 3: Synthesis (Enhanced Prompts)
     # =====================================================================
 
@@ -762,7 +853,8 @@ def run_enhanced_pipeline(
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
             research_bundle_content=research_bundle_content,
-            psalm_number=psalm_number
+            psalm_number=psalm_number,
+            curated_insights=curated_insights
         )
 
         # Save outputs

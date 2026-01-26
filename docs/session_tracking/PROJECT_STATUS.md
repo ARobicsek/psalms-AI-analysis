@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-25 (Session 239)
+**Last Updated**: 2026-01-26 (Session 242)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 239
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Codebase Cleanup & Archiving (✅ NEW)
+- **Current Session**: 242
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated)
 
 ---
 
@@ -33,12 +33,15 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 | Phase 2: Macro Analysis | ✅ Complete | All psalms analyzed for themes and structure |
 | Phase 3: Micro Analysis | ✅ Complete | Verse-by-verse phrase extraction complete |
 | Phase 3b: Question Curation | ✅ Complete | LLM-curated reader questions from analysis |
+| Phase 3c: Insight Extraction | ✅ Complete | Curates high-value insights from research bundle (Step 2c) |
 | Phase 4: Research Assembly | ✅ Complete | Optimizing figurative language search and trimming |
 | Phase 5: Synthesis Generation | ✅ Complete | Commentary generation with Gemini fallback |
 | Phase 6: Editing and Publication | ✅ Complete | Master Editor V2, DOCX generation |
 
 ### Active Features
 - **Master Editor V2**: Restructured prompt with explicit Deep Research guidance (default)
+- **Insight Extractor**: Dedicated agent (Claude Opus 4.5) to curate "aha!" moments from research
+- **Research Trimmer**: Dedicated utility for intelligent context window management
 - **Gemini 2.5 Pro Fallback**: Handles large psalms (51+ verses) without content loss
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms with pacing guidance
@@ -51,8 +54,27 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Deep research must be manually prepared via Gemini browser interface
 - Figurative Curator adds ~$0.30-0.50 per psalm to processing cost
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
+- Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.5)
 
 ---
+
+### Session 242 (2026-01-26): Insight Quality Improvements — Pipeline Integration (Phase 2b-2c)
+- **Executed Phase 2b**: Integrated `InsightExtractor` into `run_enhanced_pipeline.py` (Step 2c).
+- **Executed Phase 2c**: Updated `SynthesisWriter` to consume `curated_insights` and inject them into the prompt.
+- **Refactoring**: Created `src/utils/research_trimmer.py` to centralize and improve trimming logic; removed duplicate code from synthesis writer.
+- **Outcome**: Full pipeline is now running with the new Insight Extractor (verified on Psalm 30).
+
+### Session 241 (2026-01-26): Insight Quality Improvements — Execution (Phase 1 & 2a)
+- **Executed Phase 1**: Implemented 5 "Insight Quality Rules" (A-E) in `synthesis_writer.py` and enhanced `master_editor.py` with Flow Rule, Blurry Photo Check, and Reader Transformation criterion.
+- **Executed Phase 2a**: Created `src/agents/insight_extractor.py` (Claude Opus 4.5) to curate research bundles for high-value insights.
+- **Outcome**: Prompts are now rigorous against "fluff"; new agent is ready for pipeline integration (Phase 2b).
+
+### Session 240 (2026-01-26): Insight Quality Improvements — Planning & Documentation
+- **Objective**: Transform commentary from data aggregation to interpretive synthesis
+- **Reviewed**: `docs/archive/implementation_notes/insights_improvement.md` — diagnosis of "fluff problem" with concrete before/after examples
+- **Planned**: Two-phase approach: (1) Add 5 Insight Quality Rules (A-E) to all 6 prompts across synthesis_writer.py, master_editor.py, and master_editor_si.py; (2) Create new Insight Extractor agent (Claude Opus 4.5) for pre-synthesis filtering
+- **Documented**: Detailed execution plan with exact insertion points, text blocks, and verification checklist at `docs/archive/implementation_notes/insights_improvement_execution_plan.md`
+- **Status**: Plan approved, implementation deferred to Session 241 (context limit reached)
 
 ### Session 239 (2026-01-25): Fix RTL Italic Processing & Punctuation Loss in Docx
 - **Bug Fix (Italic RTL)**: Added RTL processing to all 8 italic code paths across both document generators — previously italic text had zero RTL handling while bold and plain text did.

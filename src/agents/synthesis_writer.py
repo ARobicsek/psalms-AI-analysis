@@ -22,7 +22,7 @@ Date: 2025-10-17 (Phase 3c)
 import sys
 import os
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 import anthropic
 from dotenv import load_dotenv
 
@@ -35,10 +35,12 @@ if __name__ == '__main__':
     from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
+    from src.utils.research_trimmer import ResearchTrimmer
 else:
     from ..schemas.analysis_schemas import MacroAnalysis, MicroAnalysis
     from ..utils.logger import get_logger
     from ..utils.cost_tracker import CostTracker
+    from ..utils.research_trimmer import ResearchTrimmer
 
 
 # System prompt for Introduction Essay
@@ -59,6 +61,9 @@ You have been provided with:
 
 ### RESEARCH MATERIALS
 {research_bundle}
+
+### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)
+{curated_insights}
 
 ---
 
@@ -181,6 +186,81 @@ Revised Version in the Target Style:
 
 "Scholars often describe Psalm 29 as a 'liturgical polemic,' a poem that co-opts the language of Canaanite storm-god worship to declare the supremacy of Israel's God. This is true, but it doesn't capture the poem's full artistry. The poet does more than just borrow; they dismantle and rebuild. The psalm methodically gathers the scattered powers of the Canaanite pantheon—the thunder, the flood, the quaking wilderness—and concentrates them into a single, seven-fold utterance: the qôl YHWH (קול־ה׳), the 'voice of the LORD.' The result is a startling redirection of cosmic power, moving it away from raw, chaotic display and toward a final, focused act of blessing for God's people."
 
+## ═══════════════════════════════════════════════════════════════════════════
+## INSIGHT QUALITY RULES (NON-NEGOTIABLE)
+## ═══════════════════════════════════════════════════════════════════════════
+
+These rules exist because the greatest risk in biblical commentary is sounding scholarly while saying nothing. Our readers are intelligent and will notice when we're filling space.
+
+### RULE A: NO ORPHANED FACTS (The "So What?" Test)
+
+Every linguistic, historical, or philological observation MUST have an immediate interpretive payoff. You are FORBIDDEN from stating a fact without explaining how it changes the reader's understanding.
+
+**Test:** After writing any sentence that mentions a Hebrew root, grammatical form, or parallel text, ask: "So what? What does the reader now understand that they didn't before?"
+
+If you cannot answer in one sentence, either:
+1. Develop the observation until it has payoff, OR
+2. Delete it
+
+**ORPHANED (BAD):**
+> "The root רצה appears in cultic contexts for sacrificial acceptance. Here it conveys divine favor."
+
+**PAYOFF (GOOD):**
+> "The root רצה is altar-language — it's what makes a sacrifice 'accepted' rather than rejected (Lev 1:3). By applying this term to life itself, the psalmist suggests that existence is a daily offering, either accepted or refused."
+
+---
+
+### RULE B: COMMIT TO AMBIGUITY (Don't Hedge-Blend)
+
+When a verse admits multiple readings, you MUST explicitly name the tension and then:
+- **Commit** to one reading with reasons, OR
+- **Explain** why the ambiguity itself is theologically productive
+
+**FORBIDDEN (the hedge-blend):**
+> "The phrase suggests both X and Y, reflecting the rich theological texture of the verse."
+
+This commits to nothing. It is the enemy.
+
+**REQUIRED (explicit + resolution):**
+> "The Hebrew sustains two readings: X (supported by the parallelism) and Y (supported by the cultic vocabulary). The ambiguity may be intentional — by refusing to resolve it, the psalmist forces the reader to hold both claims simultaneously: favor is both durable AND constitutive of life itself."
+
+---
+
+### RULE C: THE BLURRY PHOTOGRAPH CHECK
+
+Abstract nouns without concrete verbs produce sentences that sound profound but show nothing.
+
+**BLURRY WORDS TO WATCH:** atmosphere, density, resonance, texture, dimensions, contours, dynamics, framework, matrix, tapestry
+
+If you find yourself using these words, STOP. Ask: "What is God actually DOING? What is the psalmist actually CLAIMING?" Rewrite with concrete verbs.
+
+**BLURRY:** "The verse reflects the covenantal dynamics of divine presence."
+**SHARP:** "God's presence, the psalmist claims, is not passive — it actively constitutes the difference between life and mere existence."
+
+---
+
+### RULE D: DEPTH BEATS BREADTH
+
+You have access to many scholarly angles. DO NOT try to cover all of them for every verse.
+
+For each verse, choose the 1-3 angles that actually TRANSFORM the reading. Pursue those deeply. Ignore the rest.
+
+**Ask:**
+- Which angle makes this verse *surprising*?
+- Which angle would make a reader say "I never thought of it that way"?
+- Which angle connects to something the reader already cares about?
+
+A reader who learns ONE transformative thing will remember it. A reader shown TEN mildly interesting facts will remember none.
+
+---
+
+### RULE E: THE TRANSLATION TEST
+
+Before finalizing any verse commentary, ask: "Could the reader figure this out from a good English translation alone?"
+
+If yes → the observation is too obvious. Either cut it or develop it further.
+If no → good. This is what we're here for.
+
 ## CRITICAL REQUIREMENTS
 
 - **Length**: 800-1200 words (aim for the middle of this range)
@@ -246,6 +326,9 @@ You have been provided with:
 
 ### PHONETIC TRANSCRIPTIONS
 {phonetic_section}
+
+### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)
+{curated_insights}
 
 
 ---
@@ -406,6 +489,81 @@ Before finalizing, review each verse with figurative language identified in the 
 
 If any check fails, REVISE to incorporate comparative analysis using the database.
 
+## ═══════════════════════════════════════════════════════════════════════════
+## INSIGHT QUALITY RULES (NON-NEGOTIABLE)
+## ═══════════════════════════════════════════════════════════════════════════
+
+These rules exist because the greatest risk in biblical commentary is sounding scholarly while saying nothing. Our readers are intelligent and will notice when we're filling space.
+
+### RULE A: NO ORPHANED FACTS (The "So What?" Test)
+
+Every linguistic, historical, or philological observation MUST have an immediate interpretive payoff. You are FORBIDDEN from stating a fact without explaining how it changes the reader's understanding.
+
+**Test:** After writing any sentence that mentions a Hebrew root, grammatical form, or parallel text, ask: "So what? What does the reader now understand that they didn't before?"
+
+If you cannot answer in one sentence, either:
+1. Develop the observation until it has payoff, OR
+2. Delete it
+
+**ORPHANED (BAD):**
+> "The root רצה appears in cultic contexts for sacrificial acceptance. Here it conveys divine favor."
+
+**PAYOFF (GOOD):**
+> "The root רצה is altar-language — it's what makes a sacrifice 'accepted' rather than rejected (Lev 1:3). By applying this term to life itself, the psalmist suggests that existence is a daily offering, either accepted or refused."
+
+---
+
+### RULE B: COMMIT TO AMBIGUITY (Don't Hedge-Blend)
+
+When a verse admits multiple readings, you MUST explicitly name the tension and then:
+- **Commit** to one reading with reasons, OR
+- **Explain** why the ambiguity itself is theologically productive
+
+**FORBIDDEN (the hedge-blend):**
+> "The phrase suggests both X and Y, reflecting the rich theological texture of the verse."
+
+This commits to nothing. It is the enemy.
+
+**REQUIRED (explicit + resolution):**
+> "The Hebrew sustains two readings: X (supported by the parallelism) and Y (supported by the cultic vocabulary). The ambiguity may be intentional — by refusing to resolve it, the psalmist forces the reader to hold both claims simultaneously: favor is both durable AND constitutive of life itself."
+
+---
+
+### RULE C: THE BLURRY PHOTOGRAPH CHECK
+
+Abstract nouns without concrete verbs produce sentences that sound profound but show nothing.
+
+**BLURRY WORDS TO WATCH:** atmosphere, density, resonance, texture, dimensions, contours, dynamics, framework, matrix, tapestry
+
+If you find yourself using these words, STOP. Ask: "What is God actually DOING? What is the psalmist actually CLAIMING?" Rewrite with concrete verbs.
+
+**BLURRY:** "The verse reflects the covenantal dynamics of divine presence."
+**SHARP:** "God's presence, the psalmist claims, is not passive — it actively constitutes the difference between life and mere existence."
+
+---
+
+### RULE D: DEPTH BEATS BREADTH
+
+You have access to many scholarly angles. DO NOT try to cover all of them for every verse.
+
+For each verse, choose the 1-3 angles that actually TRANSFORM the reading. Pursue those deeply. Ignore the rest.
+
+**Ask:**
+- Which angle makes this verse *surprising*?
+- Which angle would make a reader say "I never thought of it that way"?
+- Which angle connects to something the reader already cares about?
+
+A reader who learns ONE transformative thing will remember it. A reader shown TEN mildly interesting facts will remember none.
+
+---
+
+### RULE E: THE TRANSLATION TEST
+
+Before finalizing any verse commentary, ask: "Could the reader figure this out from a good English translation alone?"
+
+If yes → the observation is too obvious. Either cut it or develop it further.
+If no → good. This is what we're here for.
+
 ### IMPORTANT NOTES:
 
 - **Relationship to Introduction Essay**: You have the complete introduction essay. Your verse commentary should COMPLEMENT (not repeat) the introduction. If the introduction discussed a theme at length, you can allude to it briefly but focus on verse-specific details not covered in the introduction.
@@ -413,7 +571,7 @@ If any check fails, REVISE to incorporate comparative analysis using the databas
 - **Independence from macro thesis**: The verse commentary need NOT always relate to the macro thesis - follow what's interesting in each verse
 - **Reader interest**: Focus on what would genuinely interest and inform an intelligent, well-read lay reader who desires poetic, literary, linguistic, and historical insights
 - **Flexibility**: Some verses may focus on poetics, others on Vorlage, others on Ugaritic parallels, others on figurative language patterns - let the verse and research materials guide you
-- **Depth over breadth**: Better to explore 2-3 angles deeply than mention everything superficially
+
 - **Evidence-based**: Ground all observations in the research materials provided (BDB, concordances, figurative language database, traditional commentaries)
 - **Use research bundle effectively**: The research bundle contains:
   * BDB lexicon entries with semantic ranges, etymologies, and usage patterns
@@ -530,6 +688,9 @@ class SynthesisWriter:
 
         # Track sections removed during trimming
         self._sections_removed = []
+        
+        # Initialize ResearchTrimmer
+        self.research_trimmer = ResearchTrimmer(logger=self.logger)
 
         # Store the trimmed research bundle for external access (debugging/logging)
         self._trimmed_research_bundle = None
@@ -558,6 +719,42 @@ class SynthesisWriter:
     def trimmed_research_bundle(self) -> str:
         """Return the trimmed research bundle text (after size reduction)."""
         return self._trimmed_research_bundle
+
+    def _format_insights_for_prompt(self, insights: Optional[Dict[str, Any]]) -> str:
+        """Format curated insights for inclusion in prompt."""
+        if not insights:
+            return "No curated insights available."
+            
+        lines = []
+        
+        # Psalm-level insights
+        psalm_insights = insights.get('psalm_level_insights', [])
+        if psalm_insights:
+            lines.append("#### PSALM-WIDE TRANSFORMATIVE INSIGHTS")
+            for idx, item in enumerate(psalm_insights, 1):
+                lines.append(f"{idx}. **{item.get('insight', '')}**")
+                lines.append(f"   - Evidence: {item.get('evidence', '')}")
+                lines.append(f"   - Why it matters: {item.get('why_it_matters', '')}")
+                if item.get('affects_verses'):
+                    lines.append(f"   - Affects verses: {item.get('affects_verses')}")
+            lines.append("")
+
+        # Verse-level insights
+        verse_insights = insights.get('verse_insights', {})
+        # Filter out STANDARD ones just in case not filtered before
+        significant_verses = {k: v for k, v in verse_insights.items() if v != 'STANDARD'}
+        
+        if significant_verses:
+            lines.append("#### VERSE-SPECIFIC INSIGHTS")
+            try:
+                sorted_items = sorted(significant_verses.items(), key=lambda x: int(x[0]) if x[0].isdigit() else 999)
+            except ValueError:
+                sorted_items = sorted(significant_verses.items())
+                
+            for verse, insight in sorted_items:
+                lines.append(f"- **Verse {verse}**: {insight}")
+                
+        return "\n".join(lines)
 
     def _get_gemini_client(self):
         """Lazy initialization of Gemini client."""
@@ -600,7 +797,8 @@ class SynthesisWriter:
         research_bundle_content: str,
         psalm_number: int,
         max_tokens_intro: int = 4000,
-        max_tokens_verse: int = None  # Now optional, will be calculated if not provided
+        max_tokens_verse: int = None,  # Now optional, will be calculated if not provided
+        curated_insights: Optional[Dict[str, Any]] = None
     ) -> Dict[str, str]:
         """
         Generate complete commentary from analysis objects.
@@ -671,7 +869,8 @@ class SynthesisWriter:
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
             research_bundle=research_bundle_content,
-            max_tokens=max_tokens_intro
+            max_tokens=max_tokens_intro,
+            curated_insights=curated_insights
         )
 
         # Step 3: Generate verse commentary (now with access to introduction)
@@ -681,7 +880,8 @@ class SynthesisWriter:
             micro_analysis=micro_analysis,
             research_bundle=research_bundle_content,
             max_tokens=max_tokens_verse,
-            introduction_essay=introduction  # Pass the introduction to verse commentary
+            introduction_essay=introduction,  # Pass the introduction to verse commentary
+            curated_insights=curated_insights
         )
 
         self.logger.info("Commentary synthesis complete")
@@ -715,374 +915,7 @@ class SynthesisWriter:
 #        with open(file_path, 'r', encoding='utf-8') as f:
 #            return f.read()
 
-    def _trim_figurative_with_priority(self, figurative_section: str, keep_ratio: float) -> str:
-        """
-        Intelligently trim figurative language section, prioritizing instances from Psalms.
 
-        Instead of simple proportional trimming, this function categorizes instances
-        by source (Psalms vs. other books) and discards non-Psalms instances first.
-
-        Args:
-            figurative_section: The full figurative language section markdown.
-            keep_ratio: The proportion of original instances to keep (0.0 to 1.0).
-
-        Returns:
-            Trimmed figurative language section with Psalms instances prioritized.
-        """
-        import re
-
-        # Split into individual query blocks (### Query N)
-        query_pattern = r'(### Query \d+.*?)(?=### Query \d+|$)'
-        queries = re.findall(query_pattern, figurative_section, re.DOTALL)
-
-        if not queries:
-            # Fallback: simple truncation if no queries are found
-            target_size = int(len(figurative_section) * keep_ratio)
-            return figurative_section[:target_size] + f"\n\n[Trimmed {len(figurative_section) - target_size} chars]"
-
-        trimmed_queries = []
-        total_original_instances = 0
-        total_kept_instances = 0
-
-        for query_block in queries:
-            # Extract query header and instances text
-            match = re.match(r'(.*?#### Instances:)(.*)', query_block, re.DOTALL)
-            if not match:
-                trimmed_queries.append(query_block)
-                continue
-
-            header = match.group(1)
-            instances_text = match.group(2)
-
-            # Find all individual instances
-            instance_pattern = r'(\*\*[^*]+\*\*.*?)(?=\*\*[^*]+\*\*|$)'
-            instances = re.findall(instance_pattern, instances_text, re.DOTALL)
-
-            if not instances:
-                trimmed_queries.append(query_block)
-                continue
-
-            total_original_instances += len(instances)
-
-            # --- New Prioritization Logic ---
-            psalms_instances = [inst for inst in instances if "Psalms" in inst]
-            other_instances = [inst for inst in instances if "Psalms" not in inst]
-
-            target_keep_count = max(1, int(len(instances) * keep_ratio))
-
-            kept_instances = []
-            # Prioritize keeping instances from Psalms
-            if len(psalms_instances) >= target_keep_count:
-                # If we have enough Psalms instances, take from them
-                kept_instances = psalms_instances[:target_keep_count]
-            else:
-                # If not, take all Psalms instances and fill the rest from other books
-                kept_instances.extend(psalms_instances)
-                remaining_needed = target_keep_count - len(psalms_instances)
-                if remaining_needed > 0:
-                    kept_instances.extend(other_instances[:remaining_needed])
-            
-            total_kept_instances += len(kept_instances)
-            omitted_count = len(instances) - len(kept_instances)
-
-            # Reassemble the query block
-            trimmed_block = header + '\n' + ''.join(kept_instances)
-            if omitted_count > 0:
-                trimmed_block += f"\n\n[{omitted_count} more instances omitted for space]\n"
-
-            trimmed_queries.append(trimmed_block)
-
-        result = '## Figurative Language Instances\n\n' + '\n'.join(trimmed_queries)
-        
-        original_char_len = len(figurative_section)
-        final_char_len = len(result)
-        
-        self.logger.info(f"Figurative trim (prioritizing Psalms): "
-                        f"{original_char_len:,} -> {final_char_len:,} chars. "
-                        f"Instances: {total_original_instances} -> {total_kept_instances}.")
-        return result
-
-    def _trim_research_bundle(self, research_bundle: str, max_chars: int = 600000) -> tuple:
-        """
-        Intelligently trim research bundle to fit within token limits.
-
-        Priority order for trimming (first to last - least to most important):
-        1. Related Psalms section - progressive trim (remove full psalm texts first)
-        2. Related Psalms section - full removal
-        3. Figurative Language - trim to 75%
-        4. Figurative Language - trim to 50%
-
-        If still over limit after step 4, return a flag indicating Gemini fallback needed.
-        The Gemini 2.5 Pro model has 1M token context and can handle larger bundles.
-
-        Preserved (never trimmed unless Gemini also fails):
-        - Lexicon entries (most important for word analysis)
-        - Traditional Commentaries (core interpretive context)
-        - Liturgical Usage (essential for liturgical essays)
-        - RAG/Scholarly Context (foundational framework)
-        - Rabbi Sacks references (modern insights)
-        - Concordance results
-        - Deep Web Research
-
-        Args:
-            research_bundle: Full research bundle markdown
-            max_chars: Maximum characters for Claude (~200K tokens)
-
-        Returns:
-            Tuple of (trimmed_bundle, deep_research_was_removed, needs_gemini_fallback)
-        """
-        import re
-
-        deep_research_removed = False
-        needs_gemini_fallback = False
-        original_size = len(research_bundle)
-        sections_removed = []
-
-        if original_size <= max_chars:
-            return research_bundle, deep_research_removed, needs_gemini_fallback
-
-        self.logger.warning(f"Research bundle too large ({original_size:,} chars). Max: {max_chars:,}. Starting progressive trimming...")
-
-        # Helper function to extract and remove a section
-        def extract_section(bundle: str, section_pattern: str) -> tuple:
-            """Extract a section from the bundle, return (section_content, bundle_without_section)."""
-            pattern = rf'(## {section_pattern}.*?)(?=\n## [A-Z]|\n---\n\n## |\Z)'
-            match = re.search(pattern, bundle, flags=re.DOTALL)
-            if match:
-                section = match.group(1)
-                bundle_without = bundle[:match.start()] + bundle[match.end():]
-                return section.strip(), bundle_without
-            return "", bundle
-
-        # Helper function to trim Related Psalms by removing full psalm texts
-        def trim_related_psalms_progressively(section: str) -> str:
-            """
-            Trim Related Psalms section by removing full psalm text blocks.
-            Keeps the preamble and word/phrase relationship data.
-            """
-            if not section:
-                return section
-
-            # Pattern to match "### Full Text of Psalm N" blocks and their content
-            # These blocks contain the entire psalm text which is the bulk of the section
-            full_text_pattern = r'### Full Text of Psalm \d+.*?(?=### (?:Full Text|Shared|Related)|## |$)'
-            trimmed = re.sub(full_text_pattern, '', section, flags=re.DOTALL)
-
-            # Add note about trimming
-            if len(trimmed) < len(section):
-                trimmed += "\n\n*[Full psalm texts removed for context length - word/phrase relationships preserved]*\n"
-
-            return trimmed
-
-        # Helper function to trim Figurative Language section
-        def trim_figurative_by_ratio(section: str, keep_ratio: float) -> str:
-            """Trim figurative language section, prioritizing instances from Psalms."""
-            if not section or keep_ratio >= 1.0:
-                return section
-
-            # Split into query blocks
-            query_pattern = r'(### Query \d+.*?)(?=### Query \d+|$)'
-            queries = re.findall(query_pattern, section, re.DOTALL)
-
-            if not queries:
-                # Fallback: simple line-based trimming
-                lines = section.split('\n')
-                header_lines = []
-                content_lines = []
-                in_header = True
-                for line in lines:
-                    if in_header and (line.startswith('##') or line.startswith('*') or line.strip() == ''):
-                        header_lines.append(line)
-                    else:
-                        in_header = False
-                        content_lines.append(line)
-                keep_count = max(1, int(len(content_lines) * keep_ratio))
-                trimmed_content = content_lines[:keep_count]
-                trimmed_content.append(f"\n[Section trimmed to {keep_ratio:.0%} for context length]")
-                return '\n'.join(header_lines + trimmed_content)
-
-            trimmed_queries = []
-            for query_block in queries:
-                # Find instances section
-                match = re.match(r'(.*?#### (?:Instances|All Instances).*?:)(.*)', query_block, re.DOTALL)
-                if not match:
-                    trimmed_queries.append(query_block)
-                    continue
-
-                header = match.group(1)
-                instances_text = match.group(2)
-
-                # Find individual instances (marked by **Reference**)
-                instance_pattern = r'(\*\*[^*]+\*\*.*?)(?=\*\*[^*]+\*\*|$)'
-                instances = re.findall(instance_pattern, instances_text, re.DOTALL)
-
-                if not instances:
-                    trimmed_queries.append(query_block)
-                    continue
-
-                # Instances are already sorted by priority from assembly
-                # Simply take the first target_count (highest priority first)
-                target_count = max(1, int(len(instances) * keep_ratio))
-                kept = instances[:target_count]
-
-                omitted = len(instances) - len(kept)
-                trimmed_block = header + '\n' + ''.join(kept)
-                if omitted > 0:
-                    trimmed_block += f"\n\n[{omitted} more instances omitted for space]\n"
-
-                trimmed_queries.append(trimmed_block)
-
-            result = '## Figurative Language Instances\n\n' + '\n'.join(trimmed_queries)
-            return result
-
-        # ========================================
-        # STEP 1: Trim Related Psalms (remove full texts, keep relationships)
-        # ========================================
-        related_section, temp_bundle = extract_section(research_bundle, 'Related Psalms')
-
-        if related_section:
-            trimmed_related = trim_related_psalms_progressively(related_section)
-            test_bundle = temp_bundle + '\n\n' + trimmed_related
-
-            if len(test_bundle) <= max_chars:
-                self.logger.info(f"Trimmed Related Psalms (removed full texts). "
-                               f"Size: {original_size:,} -> {len(test_bundle):,} chars")
-                research_bundle = test_bundle
-                sections_removed.append("Related Psalms (full texts removed)")
-            else:
-                # Still over - continue to step 2
-                research_bundle = test_bundle
-                sections_removed.append("Related Psalms (full texts removed)")
-                self.logger.info(f"Trimmed Related Psalms but still over limit...")
-
-        # ========================================
-        # STEP 2: Remove Related Psalms entirely
-        # ========================================
-        if len(research_bundle) > max_chars:
-            related_section, temp_bundle = extract_section(research_bundle, 'Related Psalms')
-
-            if related_section or "Related Psalms (full texts removed)" in sections_removed:
-                research_bundle = temp_bundle
-                # Update sections_removed - replace trimmed with removed
-                if "Related Psalms (full texts removed)" in sections_removed:
-                    sections_removed.remove("Related Psalms (full texts removed)")
-                sections_removed.append("Related Psalms")
-
-                if len(research_bundle) <= max_chars:
-                    self.logger.info(f"Removed Related Psalms entirely. "
-                                   f"Size: {original_size:,} -> {len(research_bundle):,} chars")
-                else:
-                    self.logger.info(f"Removed Related Psalms but still over limit...")
-
-        # ========================================
-        # STEP 3: Trim Figurative Language to 75%
-        # ========================================
-        # IMPORTANT: Skip trimming if this is CURATOR output (pre-curated by LLM)
-        # Curator output is marked with "Insights (Curated)" in the header
-        if len(research_bundle) > max_chars:
-            figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
-
-            if figurative_section:
-                # Check if this is curator output (pre-curated, should not be trimmed)
-                is_curator_output = '(Curated)' in figurative_section or 'Curated Insights' in figurative_section
-
-                if is_curator_output:
-                    self.logger.info("Figurative Language is curated output - skipping trimming (pre-optimized by LLM)")
-                else:
-                    trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.75)
-                    test_bundle = temp_bundle + '\n\n' + trimmed_fig
-                    research_bundle = test_bundle
-                    sections_removed.append("Figurative Language (trimmed to 75%)")
-
-                    if len(research_bundle) <= max_chars:
-                        self.logger.info(f"Trimmed Figurative Language to 75%. "
-                                       f"Size: {original_size:,} -> {len(research_bundle):,} chars")
-                    else:
-                        self.logger.info(f"Trimmed Figurative Language to 75% but still over limit...")
-
-        # ========================================
-        # STEP 4: Trim Figurative Language to 50%
-        # ========================================
-        # IMPORTANT: Skip trimming if this is CURATOR output (pre-curated by LLM)
-        if len(research_bundle) > max_chars:
-            figurative_section, temp_bundle = extract_section(research_bundle, 'Figurative Language')
-
-            if figurative_section:
-                # Check if this is curator output (pre-curated, should not be trimmed)
-                is_curator_output = '(Curated)' in figurative_section or 'Curated Insights' in figurative_section
-
-                if is_curator_output:
-                    self.logger.info("Figurative Language is curated output - skipping trimming (pre-optimized by LLM)")
-                else:
-                    trimmed_fig = trim_figurative_by_ratio(figurative_section, 0.50)
-                    test_bundle = temp_bundle + '\n\n' + trimmed_fig
-                    research_bundle = test_bundle
-                    # Update sections_removed
-                    if "Figurative Language (trimmed to 75%)" in sections_removed:
-                        sections_removed.remove("Figurative Language (trimmed to 75%)")
-                    sections_removed.append("Figurative Language (trimmed to 50%)")
-
-                    if len(research_bundle) <= max_chars:
-                        self.logger.info(f"Trimmed Figurative Language to 50%. "
-                                       f"Size: {original_size:,} -> {len(research_bundle):,} chars")
-                    else:
-                        self.logger.info(f"Trimmed Figurative Language to 50% but still over limit...")
-
-        # ========================================
-        # STEP 5: If still over limit, flag for Gemini fallback
-        # ========================================
-        if len(research_bundle) > max_chars:
-            needs_gemini_fallback = True
-            self.logger.warning(f"Bundle still {len(research_bundle):,} chars (limit: {max_chars:,}). "
-                              f"Flagging for Gemini 2.5 Pro fallback (1M token context).")
-
-        self.logger.info(f"Research bundle processing: {original_size:,} -> {len(research_bundle):,} chars")
-
-        # Store sections removed for stats tracking (accumulate, don't overwrite)
-        # This ensures we capture trimming from both intro and verse commentary calls
-        if sections_removed:
-            for section in sections_removed:
-                # Check if this is a replacement for an existing entry
-                if "Figurative Language (trimmed to 75%)" in section and "Figurative Language (trimmed to 50%)" in self._sections_removed:
-                    # Don't add the 75% entry if 50% is already there
-                    continue
-                elif "Figurative Language (trimmed to 50%)" in section:
-                    # Replace any existing 75% entry with 50%
-                    if "Figurative Language (trimmed to 75%)" in self._sections_removed:
-                        self._sections_removed.remove("Figurative Language (trimmed to 75%)")
-                    if section not in self._sections_removed:
-                        self._sections_removed.append(section)
-                elif "Related Psalms (full texts removed)" in section and "Related Psalms" in self._sections_removed:
-                    # Don't add the partial entry if full removal is already there
-                    continue
-                elif "Related Psalms" in section:
-                    # Replace any existing partial entry with full removal
-                    if "Related Psalms (full texts removed)" in self._sections_removed:
-                        self._sections_removed.remove("Related Psalms (full texts removed)")
-                    if section not in self._sections_removed:
-                        self._sections_removed.append(section)
-                else:
-                    # Add other sections normally
-                    if section not in self._sections_removed:
-                        self._sections_removed.append(section)
-
-        # Add trimming summary at the bottom of the research bundle
-        trimming_summary = f"\n\n---\n## Research Bundle Processing Summary\n"
-        trimming_summary += f"- Original size: {original_size:,} characters\n"
-        trimming_summary += f"- Final size: {len(research_bundle):,} characters\n"
-        trimming_summary += f"- Removed: {original_size - len(research_bundle):,} characters ({((original_size - len(research_bundle)) / original_size * 100):.1f}%)\n"
-
-        if sections_removed:
-            trimming_summary += f"- Sections removed/trimmed: {', '.join(sections_removed)}\n"
-        else:
-            trimming_summary += "- No sections removed (within size limit)\n"
-
-        if needs_gemini_fallback:
-            trimming_summary += "- Note: Using Gemini 2.5 Pro for synthesis (larger context window)\n"
-
-        research_bundle += trimming_summary
-
-        return research_bundle, deep_research_removed, needs_gemini_fallback
 
     def _generate_introduction(
         self,
@@ -1090,7 +923,8 @@ class SynthesisWriter:
         macro_analysis,  # MacroAnalysis object or Dict
         micro_analysis,  # MicroAnalysis object or Dict
         research_bundle: str,
-        max_tokens: int
+        max_tokens: int,
+        curated_insights: Optional[Dict[str, Any]] = None
     ) -> str:
         """
         Generate introduction essay.
@@ -1110,11 +944,15 @@ class SynthesisWriter:
         # Format inputs
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
+        insights_text = self._format_insights_for_prompt(curated_insights)
 
         # Trim research bundle if needed to fit within token limits
         # Target: ~350K chars max (~200K tokens at 1.75:1 ratio)
         # This leaves room for prompt template + macro/micro analysis
-        research_text, deep_research_removed, needs_gemini = self._trim_research_bundle(research_bundle, max_chars=350000)
+        # Trim research bundle if needed to fit within token limits
+        # Target: ~350K chars max (~200K tokens at 1.75:1 ratio)
+        # This leaves room for prompt template + macro/micro analysis
+        research_text, deep_research_removed, needs_gemini = self.research_trimmer.trim_bundle(research_bundle, max_chars=350000)
 
         # Store trimmed bundle for external access (debugging/logging)
         # Only set on first call (intro) - this captures the most aggressive trimming
@@ -1129,7 +967,8 @@ class SynthesisWriter:
             psalm_number=psalm_number,
             macro_analysis=macro_text,
             micro_analysis=micro_text,
-            research_bundle=research_text
+            research_bundle=research_text,
+            curated_insights=insights_text
         )
 
         # Log prompt for debugging (optional)
@@ -1306,7 +1145,8 @@ class SynthesisWriter:
         micro_analysis,  # MicroAnalysis object or Dict
         research_bundle: str,
         max_tokens: int,
-        introduction_essay: str = ""
+        introduction_essay: str = "",
+        curated_insights: Optional[Dict[str, Any]] = None
     ) -> str:
         """
         Generate verse-by-verse commentary.
@@ -1328,11 +1168,16 @@ class SynthesisWriter:
         macro_text = self._format_macro_for_prompt(macro_analysis)
         micro_text = self._format_micro_for_prompt(micro_analysis)
         phonetic_section = format_phonetic_section(micro_analysis)
+        insights_text = self._format_insights_for_prompt(curated_insights)
 
         # Trim research bundle if needed - verse commentary includes introduction essay
         # Target: ~300K chars max (~170K tokens at 1.75:1 ratio)
         # This leaves room for intro essay + prompt template + macro/micro analysis
-        research_text, deep_research_removed, needs_gemini = self._trim_research_bundle(research_bundle, max_chars=300000)
+        # Trim research bundle if needed - verse commentary includes introduction essay
+        # Target: ~300K chars max (~170K tokens at 1.75:1 ratio)
+        # This leaves room for intro essay + prompt template + macro/micro analysis
+        # Verse commentary context is often tighter
+        research_text, deep_research_removed, needs_gemini = self.research_trimmer.trim_bundle(research_bundle, max_chars=300000)
 
         # Track if deep research was removed for space (could happen here if intro didn't trigger it)
         if deep_research_removed:
@@ -1345,7 +1190,8 @@ class SynthesisWriter:
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             research_bundle=research_text,
-            phonetic_section=phonetic_section
+            phonetic_section=phonetic_section,
+            curated_insights=insights_text
         )
 
         # Log prompt for debugging
