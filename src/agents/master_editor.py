@@ -894,6 +894,16 @@ class MasterEditorV2:
             except Exception as e:
                 self.logger.warning(f"Could not load reader questions: {e}")
 
+        # Load curated insights if available
+        curated_insights = None
+        if insights_file and insights_file.exists():
+            try:
+                with open(insights_file, 'r', encoding='utf-8') as f:
+                    curated_insights = json.load(f)
+                self.logger.info(f"  Curated insights loaded from {insights_file}")
+            except Exception as e:
+                self.logger.warning(f"Could not load curated insights: {e}")
+
         # Perform editorial review
         result = self._perform_editorial_review(
             psalm_number=psalm_number,

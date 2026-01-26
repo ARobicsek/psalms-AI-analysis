@@ -27,6 +27,10 @@ This file contains detailed session history for sessions 200 and later.
     - Implemented logic to respect this flag (similar to existing `--skip-macro`, etc.).
     - Updated pipeline to pass the insights file path to the `MasterEditor` during college edition generation.
 
+3.  **Bug Fixes**:
+    - Fixed `NameError` in `edit_commentary` by ensuring `curated_insights` is loaded from file if not passed explicitly (critical for resume/skip workflows).
+    - Fixed duplicate argument errors in `master_editor.py` method signatures.
+
 **Files Modified**:
 - `src/agents/master_editor.py` - Prompt update + method signature updates.
 - `scripts/run_enhanced_pipeline.py` - Argument parsing + execution logic.
