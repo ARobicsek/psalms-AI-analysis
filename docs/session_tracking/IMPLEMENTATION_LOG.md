@@ -8,6 +8,27 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 239 (2026-01-25): Fix RTL Italic Processing & Punctuation Loss in Docx
+
+**Objective**: Fix two RTL/LTR display bugs in Psalm 30 docx output: (1) Hebrew blockquote terminal punctuation appearing on wrong side / disappearing, (2) two inline italic Hebrew words displaying in flipped order.
+
+**Problems Identified**:
+1. **Italic text had zero RTL processing**: The `*...*` and `_..._` italic code paths in `_process_markdown_formatting()` and `_add_formatted_content()` called `paragraph.add_run(part[1:-1])` with no RTL handling. Bold and plain text paths had full 20+ line RTL processing blocks, but italic was missed entirely.
+2. **Regex bug in `_reverse_primarily_hebrew_line()` silently dropped punctuation**: The tokenizer regex `r'(\s+|[;:,.()\\[\\]׃])'` used double-backslash escapes (`\\[`, `\\]`) in a raw string. The regex engine consumed `\\` as a literal backslash, then the next `]` closed the character class prematurely. The sof-pasuq `׃` and final `]` ended up outside the class, turning the second branch into a 3-character sequence that never matched. Punctuation (`;`, `.`) was absorbed into Hebrew word tokens and silently dropped by `_reverse_hebrew_by_clusters()`.
+
+**Solutions Implemented**:
+1. **New helper methods**: Added `_is_hebrew_dominant()` (broader Hebrew detection without sof-pasuq requirement) and `_process_text_rtl()` (consolidates RTL processing into one callable method).
+2. **Fixed 8 italic code paths**: Routed all 4 italic paths in each file through `_process_text_rtl()` instead of raw `add_run()`.
+3. **Fixed tokenizer regex**: Changed from `r'(\s+|[;:,.()\\[\\]׃])'` to `r'(\s+|[;:,.()\[\]׃])'` — single-backslash escapes keep brackets inside the character class without premature closure.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added `_is_hebrew_dominant()`, `_process_text_rtl()`, fixed 4 italic paths, fixed tokenizer regex
+- `src/utils/combined_document_generator.py` — Same changes mirrored
+
+**Verification**: Regenerated Psalm 30 docx — both bugs resolved (word order correct, punctuation preserved).
+
+---
+
 ## Session 238 (2026-01-23): Divine Names Modifier Markdown Fix
 
 **Objective**: Fix divine names modifier to correctly handle Hebrew text inside markdown formatting (e.g., italics).

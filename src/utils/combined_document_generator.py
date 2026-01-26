@@ -261,7 +261,9 @@ class CombinedDocumentGenerator:
         
         # Pattern to split on word boundaries while keeping delimiters
         # This captures spaces, semicolons, parentheses, brackets
-        tokens = re.split(r'(\s+|[;:,.()\\[\\]׃])', text)
+        # Note: \[ and \] (single backslash) escape brackets inside the character class
+        # Using \\[ would create a literal backslash + unescaped bracket, breaking the class
+        tokens = re.split(r'(\s+|[;:,.()\[\]׃])', text)
         
         reversed_tokens = []
         for token in tokens:

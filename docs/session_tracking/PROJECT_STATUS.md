@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-23 (Session 238)
+**Last Updated**: 2026-01-25 (Session 239)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 238
+- **Current Session**: 239
 - **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Codebase Cleanup & Archiving (✅ NEW)
 
 ---
@@ -53,6 +53,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
 
 ---
+
+### Session 239 (2026-01-25): Fix RTL Italic Processing & Punctuation Loss in Docx
+- **Bug Fix (Italic RTL)**: Added RTL processing to all 8 italic code paths across both document generators — previously italic text had zero RTL handling while bold and plain text did.
+- **Bug Fix (Regex)**: Fixed broken tokenizer regex in `_reverse_primarily_hebrew_line()` — double-backslash escapes (`\\[\\]`) closed the character class prematurely, silently dropping all punctuation (`;`, `.`).
+- **New Methods**: `_is_hebrew_dominant()` (broader Hebrew detection) and `_process_text_rtl()` (consolidated RTL helper).
+- **Verification**: Psalm 30 docx regenerated; both issues resolved (word order + punctuation).
 
 ### Session 238 (2026-01-23): Divine Names Modifier Markdown Fix
 - **Bug Fix**: Fixed `DivineNamesModifier` to correctly detect and modify divine names (e.g., אֵל → קֵל) when wrapped in markdown formatting (italics/bold).

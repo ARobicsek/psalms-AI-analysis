@@ -248,8 +248,10 @@ class DocumentGenerator:
         
         # Pattern to split on word boundaries while keeping delimiters
         # This captures spaces, semicolons, parentheses, brackets
-        tokens = re.split(r'(\s+|[;:,.()\\[\\]׃])', text)
-        
+        # Note: \[ and \] (single backslash) escape brackets inside the character class
+        # Using \\[ would create a literal backslash + unescaped bracket, breaking the class
+        tokens = re.split(r'(\s+|[;:,.()\[\]׃])', text)
+
         reversed_tokens = []
         for token in tokens:
             if not token:
@@ -264,7 +266,7 @@ class DocumentGenerator:
             else:
                 # Keep other punctuation and spaces as-is
                 reversed_tokens.append(token)
-        
+
         # Reverse the entire token list to get RTL word order
         reversed_tokens.reverse()
         
