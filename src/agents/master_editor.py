@@ -1157,6 +1157,17 @@ class MasterEditorV2:
             self.logger.warning(f"Could not load analytical framework: {e}")
             analytical_framework = "[Analytical framework not available]"
 
+        # Load curated insights if available
+        curated_insights = None
+        if insights_file and insights_file.exists():
+            try:
+                import json
+                with open(insights_file, 'r', encoding='utf-8') as f:
+                    curated_insights = json.load(f)
+                self.logger.info(f"  Curated insights loaded from {insights_file}")
+            except Exception as e:
+                self.logger.warning(f"Could not load curated insights: {e}")
+
         self.logger.info(f"Creating college edition for Psalm {psalm_number}")
 
         # Use college model and prompt

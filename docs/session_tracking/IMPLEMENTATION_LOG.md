@@ -28,7 +28,8 @@ This file contains detailed session history for sessions 200 and later.
     - Updated pipeline to pass the insights file path to the `MasterEditor` during college edition generation.
 
 3.  **Bug Fixes**:
-    - Fixed `NameError` in `edit_commentary` by ensuring `curated_insights` is loaded from file if not passed explicitly (critical for resume/skip workflows).
+    - Fixed `NameError` in `edit_commentary` by ensuring `curated_insights` is loaded from file (critical for resume/skip workflows).
+    - Fixed identical `NameError` in `edit_college_commentary` for the college edition workflow.
     - Fixed duplicate argument errors in `master_editor.py` method signatures.
 
 **Files Modified**:
