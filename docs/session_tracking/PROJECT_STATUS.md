@@ -62,7 +62,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - **Enhanced College Prompt**: Updated `COLLEGE_EDITOR_PROMPT_V2` in `master_editor.py` to prioritize `{curated_insights}` "aha!" moments.
 - **Pipeline Controls**: Added `--skip-insights` flag to `run_enhanced_pipeline.py` for better execution control.
 - **Integration**: Plumbed insights file through `MasterEditor` execution path for college edition.
-- **Outcome**: College edition now benefits from the same high-quality curated insights as the main synthesis.
+- **Outcome**: College edition integration partially complete; pending final variable formatting fix in `_perform_college_review`.
 
 ### Session 242 (2026-01-26): Insight Quality Improvements — Pipeline Integration (Phase 2b-2c)
 - **Executed Phase 2b**: Integrated `InsightExtractor` into `run_enhanced_pipeline.py` (Step 2c).

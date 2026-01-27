@@ -30,7 +30,11 @@ This file contains detailed session history for sessions 200 and later.
 3.  **Bug Fixes**:
     - Fixed `NameError` in `edit_commentary` by ensuring `curated_insights` is loaded from file (critical for resume/skip workflows).
     - Fixed identical `NameError` in `edit_college_commentary` for the college edition workflow.
+    - Fixed `NameError` in `edit_college_commentary` for the college edition workflow.
     - Fixed duplicate argument errors in `master_editor.py` method signatures.
+
+**Known Issues (To Fix Next Session)**:
+- `_perform_college_review` fails with `NameError: name 'insights_text' is not defined`. This is because `curated_insights` (dict) needs to be formatted into a string (e.g., using `_format_insights_for_prompt`) before being passed to the prompt template.
 
 **Files Modified**:
 - `src/agents/master_editor.py` - Prompt update + method signature updates.
