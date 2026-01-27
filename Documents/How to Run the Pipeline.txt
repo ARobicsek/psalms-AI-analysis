@@ -28,7 +28,7 @@ python scripts/run_si_pipeline.py 19 --special-instruction my_notes.txt
 python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
 
 # skip everything
-python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
+python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-insights --skip-synthesis --skip-master-edit --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
 
 # resume for where the pipeline left off
 python scripts/run_enhanced_pipeline.py 9 --resume
@@ -43,7 +43,7 @@ python scripts/run_enhanced_pipeline.py 126 --skip-macro --skip-micro --skip-syn
 python scripts/run_enhanced_pipeline.py 15 --skip-macro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-word-doc --skip-combined-doc
 
 #just all 3 word docs
-python scripts/run_enhanced_pipeline.py 100 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-college --output-dir output/psalm_10
+python scripts/run_enhanced_pipeline.py 100 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-college --output-dir output/psalm_100
 
 #run the RAG thematic match for a single verse in Psalms
 python single_verse_search.py ps 61:4

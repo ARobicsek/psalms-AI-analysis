@@ -10,6 +10,7 @@ Always read this file first when you need to find code.
 | Script | Namespace | Description | Link |
 |--------|-----------|-------------|------|
 | `run_enhanced_pipeline.py` | `scripts` | Complete psalm commentary generation pipeline orchestrating all agents (Macro/Micro Analyst, Insight Extractor, Synthesis Writer, Master Editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline.py) |
+| `run_enhanced_pipeline_TEST.py` | `scripts` | **EXPERIMENTAL**: Single-pass pipeline that eliminates the Synthesis Writer step — Master Editor writes commentary directly from research inputs (Macro/Micro Analyst → Master Writer → College Writer → Doc Gen). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_TEST.py) |
 | `run_si_pipeline.py` | `scripts` | Special Instruction pipeline that allows human editor ("The Author") to inject overriding instructions into Master Editor generation. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |
 | `converse_with_editor.py` | `scripts` | Enables multi-turn conversation with Master Editor (GPT-5.1) about a completed psalm commentary with full research context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/converse_with_editor.py) |
 
@@ -22,7 +23,7 @@ Always read this file first when you need to find code.
 | `macro_analyst.py` | `src.agents` | Pass 1: Produces chapter-level thesis and structural framework using Claude Sonnet 4.5 with RAG context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/macro_analyst.py) |
 | `micro_analyst.py` | `src.agents` | Pass 2: Discovery-driven verse-by-verse research using Claude Sonnet 4.5 with extended thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/micro_analyst.py) |
 | `synthesis_writer.py` | `src.agents` | Pass 3: Final commentary synthesis combining macro thesis, micro discoveries, and research bundle. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/synthesis_writer.py) |
-| `master_editor.py` | `src.agents` | Pass 4: Final review and enhancement agent that produces polished scholarly commentary. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
+| `master_editor.py` | `src.agents` | Pass 4: Final review and enhancement agent that produces polished scholarly commentary. Also contains experimental `write_commentary()`/`write_college_commentary()` methods for single-pass Master Writer pipeline. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
 | `master_editor_si.py` | `src.agents` | Special Instruction variant of Master Editor that supports author directives for alternative versions. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_si.py) |
 | `master_editor_old.py` | `src.agents` | Legacy Master Editor implementation (archived). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_old.py) |
 | `phonetic_analyst.py` | `src.agents` | Transcribes Hebrew text into phonetic/syllabic structure based on reconstructed Biblical Hebrew phonology. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/phonetic_analyst.py) |

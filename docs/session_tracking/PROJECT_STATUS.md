@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-26 (Session 243)
+**Last Updated**: 2026-01-27 (Session 245)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 242
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated), College Editor Insights (✅ Integrated)
+- **Current Session**: 245
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated), College Editor Insights (✅ Integrated), Master Writer Experiment (🧪 TEST pipeline)
 
 ---
 
@@ -57,6 +57,17 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.5)
 
 ---
+
+### Session 245 (2026-01-27): Code Review — Master Writer Experiment (No Synthesis Writer)
+- **Code Review**: Reviewed junior dev's `run_enhanced_pipeline_TEST.py` — a single-pass pipeline that replaces two-pass (SynthesisWriter → MasterEditor) with a direct "Master Writer" approach.
+- **Prompt Enrichment**: Enriched `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT` with critical guidance from synthesis writer (11 Items of Interest, WEAK/STRONG examples, Translation Test, blurry words, Torah Temimah references).
+- **Infrastructure Fixes**: Fixed 16 code issues (output path, argparse flags, hardcoded model, dead imports, combined doc gen, rate limit handling, progress output, UTF-8 encoding).
+- **Design**: All changes to `master_editor.py` are additive-only — both old and new pipelines coexist seamlessly.
+
+### Session 244 (2026-01-26): Fixing College Edition Crash & Insight Attribution
+- **College Edition Fix**: Resolved `NameError` crash by ensuring `curated_insights` is properly formatted string before prompt injection.
+- **Model Attribution**: Integrated "Insights Extraction" model tracking into pipeline stats.
+- **Documentation**: Updated both `DocumentGenerator` and `CombinedDocumentGenerator` to display the Insight model in the Methodology summary.
 
 ### Session 243 (2026-01-26): Insight Quality Improvements — College Editor & Pipeline Flags (Phase 4)
 - **Enhanced College Prompt**: Updated `COLLEGE_EDITOR_PROMPT_V2` in `master_editor.py` to prioritize `{curated_insights}` "aha!" moments.

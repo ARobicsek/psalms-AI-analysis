@@ -1307,8 +1307,16 @@ Methodological & Bibliographical Summary
                 if 'figurative_curator' in model_usage:
                     summary_text += f"\n**Figurative Curator**: {model_usage.get('figurative_curator', 'N/A')}"
                 
-                summary_text += f"\n**Commentary Synthesis**: {model_usage.get('synthesis', 'N/A')}"
-                summary_text += f"\n**Editorial Review**: {model_usage.get('master_editor', 'N/A')}"
+                if 'insight_extractor' in model_usage:
+                    summary_text += f"\n**Insights Extraction**: {model_usage.get('insight_extractor', 'N/A')}"
+
+                if 'master_writer' in model_usage:
+                    # Single-pass pipeline (no synthesis writer)
+                    summary_text += f"\n**Commentary (Master Writer)**: {model_usage.get('master_writer', 'N/A')}"
+                else:
+                    # Standard two-pass pipeline (synthesis + editor)
+                    summary_text += f"\n**Commentary Synthesis**: {model_usage.get('synthesis', 'N/A')}"
+                    summary_text += f"\n**Editorial Review**: {model_usage.get('master_editor', 'N/A')}"
             else:
                 summary_text += "\nModel attribution data not available."
 

@@ -770,6 +770,9 @@ def run_enhanced_pipeline(
                     curated_insights = json.load(f)
             except Exception as e:
                 logger.error(f"Failed to load existing insights: {e}")
+            
+            # Track the model even if skipping (assuming default)
+            tracker.track_model_for_step("insight_extractor", "claude-opus-4-5")
          elif macro_file.exists() and micro_file.exists() and research_file.exists():
             logger.info("\n[STEP 2c] Extracting transformative insights...")
             print(f"\n{'='*80}")
@@ -798,9 +801,11 @@ def run_enhanced_pipeline(
                 curated_insights = insight_extractor.extract_insights(
                     psalm_number=psalm_number,
                     psalm_text=psalm_text_str,
-                    micro_analysis_data=micro_analysis,
-                    research_bundle_content=trimmed_research_bundle
+                    micro_analysis=micro_analysis,
+                    research_bundle=trimmed_research_bundle
                 )
+                
+                tracker.track_model_for_step("insight_extractor", insight_extractor.model)
                 
                 insight_extractor.save_insights(curated_insights, insights_file)
                 

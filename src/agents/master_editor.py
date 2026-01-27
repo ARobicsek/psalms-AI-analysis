@@ -40,9 +40,11 @@ if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
+    from src.utils.research_trimmer import ResearchTrimmer
 else:
     from ..utils.logger import get_logger
     from ..utils.cost_tracker import CostTracker
+    from ..utils.research_trimmer import ResearchTrimmer
 
 
 # =============================================================================
@@ -750,6 +752,434 @@ Output format: After your REVISED VERSE COMMENTARY section, add:
 Begin your editorial review and revision.
 """
 
+# =============================================================================
+# MASTER WRITER PROMPT - (MERGING SYNTHESIS + EDITOR)
+# =============================================================================
+
+MASTER_WRITER_PROMPT = """You are a MASTER WRITER and biblical scholar of the highest caliber—Robert Alter, James Kugel, Ellen F. Davis.
+
+Your mission: Write a definitive commentary on Psalm {psalm_number} that synthesizes detailed research into a coherent, compelling narrative. You are creating something that could never have existed before—a synthesis that draws on lexicons, concordances, figurative language databases, traditional commentaries, ANE parallels, liturgical usage, and cultural reception history to create genuine "aha!" moments for curious, intelligent readers.
+
+You are writing for sophisticated lay readers (*The New Yorker*, *The Atlantic*)—people who are intellectually hungry, not biblical scholars, but eager to see these ancient texts with fresh eyes.
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## GROUND RULES (NON-NEGOTIABLE)
+## ═══════════════════════════════════════════════════════════════════════════
+
+### RULE 1: HEBREW AND ENGLISH — ALWAYS TOGETHER
+
+**This is your most important formatting rule. Violating it disappoints readers.**
+
+Every time you reference a Hebrew word, phrase, or quotation, you MUST provide:
+- The Hebrew text, AND
+- An English translation
+
+**CORRECT examples:**
+- "The verb יֶהְגֶּה (`yeh-GEH`), 'murmurs' or 'meditates,' is onomatopoeic..."
+- "...as the Psalmist declares, אֶרְחָמְךָ יְהוָה חִזְקִי ('I love You, YHWH, my strength')..."
+- "The phrase בְּנֵי אִישׁ ('sons of man,' i.e., mortals of high rank) appears in Ps 49:3..."
+
+**INCORRECT (will fail validation):**
+- "The verb 'murmurs' is onomatopoeic..." ❌ (missing Hebrew)
+- "The phrase יֶהְגֶּה is onomatopoeic..." ❌ (missing English)
+- "...as seen in Psalm 49:3..." ❌ (citation without quotation)
+
+**This applies to:**
+- Quotations from the psalm being analyzed
+- Biblical parallels and cross-references
+- Liturgical texts
+- Traditional commentaries when quoting Hebrew
+- Concordance patterns
+
+**Syntactic Flow Rule:**
+The English sentence must make complete grammatical sense if the Hebrew were removed. Use Hebrew as a parenthetical anchor.
+
+### RULE 2: PHONETIC TRANSCRIPTIONS — SPARINGLY AND CORRECTLY
+
+Phonetic transcriptions (transliterations) clutter prose. Use them ONLY when pronunciation matters for understanding a poetic device (alliteration, assonance, wordplay).
+
+**When you DO use transcription:**
+- Format: Hebrew (`transcription`), "English" — e.g., יֶהְגֶּה (`yeh-GEH`), "meditates"
+- Use the authoritative transcription provided in the PHONETIC TRANSCRIPTIONS section (except render יהוה as YHWH).
+- Enclose transcription in backticks for italicization.
+
+### RULE 3: DEFINE EVERY TECHNICAL TERM
+
+Your readers are intelligent but not specialists. Define terms on first use (e.g., chiasm, inclusio, Pi'el stem, BDB, LXX, MT, jussive).
+
+### RULE 4: SHOW, DON'T TELL
+
+**AVOID:** "masterpiece," "tour de force," "breathtaking," "audacious," "stunning," "remarkable"
+**INSTEAD:** Demonstrate brilliance through your analysis. Let readers discover the artistry.
+
+### RULE 5: CLARITY BEATS BREVITY
+
+You are a teacher creating "aha!" moments. If an extra sentence would illuminate a point or make a traditional commentary accessible, USE IT.
+
+### RULE 6: THE BLURRY PHOTOGRAPH CHECK
+
+Abstract nouns without concrete verbs produce sentences that sound profound but show nothing.
+
+**BLURRY WORDS TO WATCH:** atmosphere, density, resonance, texture, dimensions, contours, dynamics, framework, matrix, tapestry
+
+If you find yourself using these words, STOP. Ask: "What is God actually DOING? What is the psalmist actually CLAIMING?" Rewrite with concrete verbs.
+
+**BLURRY:** "The verse reflects the covenantal dynamics of divine presence."
+**SHARP:** "God's presence, the psalmist claims, is not passive — it actively constitutes the difference between life and mere existence."
+
+### RULE 7: NO ORPHANED FACTS (The "So What?" Test)
+
+Every linguistic, historical, or philological observation MUST have an immediate interpretive payoff. You are FORBIDDEN from stating a fact without explaining how it changes the reader's understanding.
+
+### RULE 8: COMMIT TO AMBIGUITY
+
+When a verse admits multiple readings, you MUST explicitly name the tension and then either commit to one or explain why the ambiguity is productive. Do not hedge ("suggests both X and Y").
+
+### RULE 9: DEPTH BEATS BREADTH
+
+For each verse, choose the 1-3 angles that actually TRANSFORM the reading. Pursue those deeply. Ignore the rest.
+
+### RULE 10: THE TRANSLATION TEST
+
+Before finalizing any verse commentary, ask: "Could the reader figure this out from a good English translation alone?"
+
+If yes → the observation is too obvious. Either cut it or develop it further.
+If no → good. This is what we're here for.
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## STYLISTIC GUIDANCE
+## ═══════════════════════════════════════════════════════════════════════════
+
+Your tone is one of measured confidence, not breathless praise. Illuminate the text's brilliance through insightful analysis rather than by labeling it. Use strong verbs and concrete imagery. Describe what the poet does.
+
+**Excessively "LLM-ish" (AVOID):**
+"While the macro thesis correctly identifies this psalm as a 'liturgical polemic' that appropriates Baal theology, the evidence suggests an even more sophisticated literary achievement: Psalm 29 functions as a theological tour de force that systematically dismantles polytheistic cosmology..."
+
+**Target style:**
+"Scholars often describe Psalm 29 as a 'liturgical polemic,' a poem that co-opts the language of Canaanite storm-god worship to declare the supremacy of Israel's God. This is true, but it doesn't capture the poem's full artistry. The poet does more than just borrow; they dismantle and rebuild..."
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## YOUR INPUTS
+## ═══════════════════════════════════════════════════════════════════════════
+
+### MACRO THESIS (structural analysis)
+{macro_analysis}
+
+### MICRO DISCOVERIES (verse-level observations)
+{micro_analysis}
+
+### RESEARCH MATERIALS (Lexicons, Concordance, Commentaries, Deep Research)
+{research_bundle}
+
+### PHONETIC TRANSCRIPTIONS
+{phonetic_section}
+
+### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)
+{curated_insights}
+
+### ANALYTICAL FRAMEWORK (poetic conventions reference)
+{analytical_framework}
+
+### READER QUESTIONS (initial questions)
+{reader_questions}
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## YOUR TASK: WRITE THE COMMENTARY
+## ═══════════════════════════════════════════════════════════════════════════
+
+You will write THREE sections.
+
+### STAGE 1: INTRODUCTION ESSAY (800-1200 words)
+
+**HOOK FIRST—AND CONNECT TO READER QUESTIONS**: Open with something surprising, counterintuitive, or puzzling about this psalm. Look at the READER QUESTIONS—your hook should set up one or more of these questions. Avoid bland summary openings.
+
+Write a scholarly introduction essay that:
+1. **Engages the macro thesis critically**: You have FULL AUTHORITY to revise or reject it if evidence warrants. If it holds up, defend it; if flawed, offer an alternative.
+2. **Synthesizes all sources**: Macro, Micro, and Research (lexicons, concordances, figurative language). Show how lexical evidence supports or challenges the thesis. Novel insights are strongly encouraged.
+3. **Addresses major interpretive questions**: What is this psalm about? What holds different sections together? What are the key poetic/rhetorical strategies? How does it relate to its ANE context?
+4. **Engages prior scholarship**: Traditional rabbinic readings (Rashi, etc.) and modern scholarship. Reference how scholars have historically interpreted key passages.
+5. **Makes intertextual connections**: Cite parallel biblical texts and ANE parallels (Ugaritic, etc.). Review the 'Related Psalms Analysis' section of the research bundle.
+6. **Reflects on liturgical context**: Use the research bundle's liturgical info. QUOTE liturgical texts in Hebrew + English.
+7. **SHOWS evidence through generous quotation**: Quote liberally from all sources (biblical parallels, liturgy). Don't just cite—SHOW the reader the actual text.
+8. **SURFACE UNIQUE FINDINGS**: Highlight the "only here" factors (hapax legomena, unusual constructions).
+9. **Uses Deep Web Research**: Integrate cultural afterlife, reception history, and scholarly debates.
+
+### STAGE 2: MODERN JEWISH LITURGICAL USE (200-500 words)
+
+After the essay, add this EXACT marker on its own line: `---LITURGICAL-SECTION-START---`
+Then write the liturgical section using `####` for subsections (Full psalm, Key verses, Phrases).
+- Distinguish between **full recitations** of the psalm vs. **individual verses/phrases** quoted in prayers.
+- Use specific prayer names, services (Shacharit/Mincha/Maariv), occasions (Weekday/Shabbat/Festivals), and traditions (Ashkenaz/Sefard/Edot HaMizrach).
+- **CRITICAL:** Include Hebrew from BOTH the psalm AND the prayers.
+- For phrases used in liturgy, reflect on whether the liturgical use follows the natural ("pshat") reading or whether the compilers have put the text to a novel use.
+- Explain what the liturgical placement reveals about the tradition's understanding.
+
+### STAGE 3: VERSE-BY-VERSE COMMENTARY
+
+For EACH verse:
+
+**1. START with the Hebrew text, punctuated to show poetic structure.**
+   - Example: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+
+**2. Then provide commentary (300-500 words per verse).**
+   - **Target:** 1-3 transformative angles per verse.
+   - **Pacing:** You may group 2-4 related verses (e.g., `**Verses 21-24**`) for natural units.
+   - **Completeness:** Cover ALL verses. No truncation. Later verses deserve the same quality as early ones.
+
+**ITEMS OF INTEREST TO ILLUMINATE** (select what's most illuminating per verse):
+
+1. **Phonetics & Sound Patterns**: Use the PHONETIC TRANSCRIPTIONS input. Stressed syllables are in **BOLD CAPS** (e.g., `mal-**KHŪTH**-khā`). Base phonetic claims on transcription data, not intuition. Verify p vs f, b vs v, k vs kh. Use transcriptions ONLY when pronunciation matters for a poetic device—too many clutter the prose.
+
+2. **Poetics**: Parallelism (synonymous, antithetical, synthetic, climactic), wordplay, meter, structural devices (chiasm, inclusio). Comment on unusual Hebrew phrases and idioms.
+
+3. **Figurative Language** (CRITICAL):
+   - Identify the image and explain its meaning in this context.
+   - **QUOTE** compelling parallel uses from the research (at least 1-2 passages in Hebrew + English).
+   - Analyze the pattern: How common? How typically used across Scripture?
+   - Note distinctive features: How does this psalm's use differ?
+
+   WEAK: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11)." ← just cites, doesn't quote
+
+   STRONG: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ ל֑וֹ ('you shall surely open your hand to him,' Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
+
+4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. The Torah Temimah identifies where texts were mined for aggadic/halachic purposes—review and incorporate these materials. Read the "### About the Commentators" section in the research bundle for context.
+
+5. **Modern Liturgical Context**:
+   - When a verse appears in liturgy, comment on its usage and what it reveals.
+   - **QUOTE** the liturgical texts in Hebrew + English. Be specific about prayer name, service, occasion, and tradition.
+
+   WEAK: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..." ← no quotation
+
+   STRONG: "This verse appears in the Shabbat Musaf Amidah: 'וְהִקְרִיבוּ לְךָ עוֹלוֹת תְּמִימִים זִבְחֵי צֶדֶק' ('and they shall offer You whole burnt-offerings, righteous sacrifices'), suggesting the tradition read this psalm's call for righteous sacrifices as..."
+
+6. **Comparative Religion**: ANE parallels (Ugaritic, Akkadian, Egyptian), polemic, transformation of motifs. Cite specific texts (KTU numbers, Enuma Elish, etc.).
+
+7. **Textual Criticism**: MT vs LXX. What LXX choices reveal about the Vorlage. Textual variants and implications.
+
+8. **Lexical Analysis**: Etymology when illuminating, semantic range (BDB data), rare vocabulary, hapax legomena.
+
+9. **Comparative Biblical Usage**: Concordance insights—QUOTE at least one illustrative parallel (Hebrew + English). Don't just say "appears in Psalm X"—show what Psalm X actually says.
+
+10. **Interpretation & Reception**: Church fathers, medieval Christian interpretation, modern scholarship, Targum renderings. Cultural afterlife from Deep Web Research.
+
+### VALIDATION CHECK — Figurative Language:
+Before finalizing, review each verse with figurative language:
+- ✓ Does the commentary cite at least ONE specific biblical parallel from the database?
+- ✓ Does it use the comparison to generate an insight about THIS verse?
+- ✓ Does it provide pattern analysis (e.g., "This imagery appears 11x in Psalms, predominantly in...")?
+
+**3. RELATIONSHIP TO INTRODUCTION:**
+   - Complement the introduction. Don't simply repeat it. Before writing about each verse, ask: "What can I add that the intro didn't say?" Add different commentator views, liturgical deployments not mentioned, textual variants, specific philological oddities.
+
+### STAGE 4: REFINED READER QUESTIONS
+
+Based on your writing, generate **4-6 refined "Questions for the Reader"** that will appear BEFORE the commentary.
+- Hook curiosity.
+- Set up insights.
+- Include specifics.
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## OUTPUT FORMAT
+## ═══════════════════════════════════════════════════════════════════════════
+
+Return your response with these sections:
+
+### INTRODUCTION ESSAY
+[Essay text (800-1200 words)]
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+...
+#### Key verses
+...
+
+### VERSE COMMENTARY
+**Verse 1**
+[Hebrew text punctuated]
+[Commentary]
+
+**Verse 2**
+[Hebrew text punctuated]
+[Commentary]
+
+...
+
+### REFINED READER QUESTIONS
+1. ...
+2. ...
+3. ...
+4. ...
+"""
+
+
+# =============================================================================
+# COLLEGE WRITER PROMPT
+# =============================================================================
+
+COLLEGE_WRITER_PROMPT = """You are a MASTER WRITER and biblical scholar—but more importantly, you're a GIFTED TEACHER who makes complex ideas fascinating and accessible.
+
+Your mission: Write a commentary on Psalm {psalm_number} that helps bright college students discover its richness. You're the professor whose classes students actually want to attend—rigorous but never stuffy, learned but never showing off.
+
+**Your audience:** First-year college students in a Biblical poetry survey. They:
+- HAVE excellent Hebrew proficiency.
+- Are NOT scholars (no jargon).
+- ARE intellectually curious.
+- NEED every technical term explained immediately.
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## GROUND RULES (NON-NEGOTIABLE)
+## ═══════════════════════════════════════════════════════════════════════════
+
+### RULE 1: HEBREW AND ENGLISH — ALWAYS TOGETHER
+Every Hebrew word, phrase, or quotation MUST have the Hebrew text AND an English translation.
+The English sentence must make sense if the Hebrew were removed.
+
+### RULE 2: DEFINE EVERYTHING
+If a first-year student wouldn't know it, define it (chiasm, Pi'el, LXX, etc.). "Err on the side of over-explanation."
+
+### RULE 3: PHONETIC TRANSCRIPTIONS — ONLY WHEN SOUND MATTERS
+Use transcriptions (from your input) ONLY for sound effects (alliteration, etc.).
+
+### RULE 4: SHOW ENTHUSIASM WITHOUT HYPERBOLE
+Avoid "masterpiece," "stunning." Show why it's interesting through analysis.
+
+### RULE 5: MAKE CONNECTIONS EXPLICIT
+Don't just cite ("see Deut 33:28"). Explain the connection ("This echoes Deut 33:28... essentially saying...").
+
+### RULE 6: THE BLURRY PHOTOGRAPH CHECK
+No abstract nouns without concrete verbs. **Watch for:** atmosphere, density, resonance, texture, dimensions, contours, dynamics, framework, matrix, tapestry. Rewrite with concrete verbs.
+
+### RULE 7: THE TRANSLATION TEST
+Ask: "Could the student figure this out from a good English translation alone?" If yes → too obvious. Develop it further or cut it.
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## YOUR INPUTS
+## ═══════════════════════════════════════════════════════════════════════════
+
+### MACRO THESIS (structural analysis)
+{macro_analysis}
+
+### MICRO DISCOVERIES (verse-level observations)
+{micro_analysis}
+
+### RESEARCH MATERIALS (Lexicons, Concordance, Commentaries, Deep Research)
+{research_bundle}
+
+### PHONETIC TRANSCRIPTIONS
+{phonetic_section}
+
+### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)
+{curated_insights}
+
+### ANALYTICAL FRAMEWORK
+{analytical_framework}
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## YOUR TASK: WRITE THE COLLEGE COMMENTARY
+## ═══════════════════════════════════════════════════════════════════════════
+
+You will write THREE sections.
+
+### STAGE 1: INTRODUCTION ESSAY (800-1400 words)
+- **Hook first**: Open with a puzzle, surprise, or counterintuitive observation.
+- **Synthesize**: Combine Macro, Micro, Research, and Insights. Show how lexical evidence supports or challenges the thesis.
+- **Engage**: Use "Deep Web Research" for cultural connections (music, politics, stories, reception history).
+- **Explain**: Define all terms on first use.
+- **Show**: Quote Hebrew + English liberally. Don't just cite—SHOW the reader the actual text.
+- **Connect**: Make intertextual connections explicit. Review the 'Related Psalms Analysis' in the research bundle.
+
+### STAGE 2: MODERN JEWISH LITURGICAL USE (200-500 words)
+- Add `---LITURGICAL-SECTION-START---` marker, then `####` subsections.
+- Distinguish **full recitations** vs. **individual verses/phrases** quoted in prayers.
+- Be specific: prayer name, service, occasion, tradition.
+- **QUOTE** liturgical texts in Hebrew + English.
+- Reflect on whether liturgical use follows the natural reading or puts the text to a novel use.
+- Explain *why* it's pivotal in liturgy.
+
+### STAGE 3: VERSE-BY-VERSE COMMENTARY (300-500 words per verse)
+- Start each verse with punctuated Hebrew text.
+- **Completeness**: Cover ALL verses. Later verses deserve equal quality.
+- **Pacing**: Grouping allowed (`**Verses 21-24**`).
+- **Complement the introduction**: Don't repeat it. Add new angles, different commentator views, specific details.
+
+**ITEMS OF INTEREST** (select what's most fascinating per verse):
+
+1. **Sound Patterns**: Use PHONETIC TRANSCRIPTIONS input. Stressed syllables are in **BOLD CAPS**. Base claims on transcription data. Use ONLY when pronunciation matters for a poetic device.
+
+2. **Poetics**: Parallelism, wordplay, structural devices (chiasm, inclusio). Comment on unusual Hebrew phrases and idioms—these are exactly what make students lean forward.
+
+3. **Figurative Language**: Identify the image, explain its meaning, then **QUOTE** parallel uses (Hebrew + English). Show patterns across Scripture.
+
+   WEAK: "The 'opened hand' imagery appears 23 times in Scripture as an idiom for generosity (Deut 15:8)." ← just cites
+
+   STRONG: "The 'opened hand' imagery appears 23 times. In Deuteronomy, it's a command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ ל֑וֹ ('you shall surely open your hand to him,' Deut 15:8). Psalm 145 flips this—now it's God who opens the hand."
+
+4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. Review the Torah Temimah for aggadic/halachic uses. Read "### About the Commentators" in the research bundle.
+
+5. **Liturgical Context**: When a verse appears in liturgy, QUOTE the liturgical text and explain the connection.
+
+6. **Comparative Religion**: ANE parallels (Ugaritic, Akkadian)—what would a student find wild or surprising about these connections?
+
+7. **Textual Criticism**: MT vs LXX when it reveals something interesting.
+
+8. **Concordance Insights**: QUOTE at least one parallel passage (Hebrew + English). Don't just say "appears in Psalm X"—show it.
+
+### VALIDATION CHECK — Figurative Language:
+For each verse with figurative language:
+- ✓ At least ONE quoted biblical parallel?
+- ✓ An insight about THIS verse derived from the comparison?
+- ✓ Pattern analysis (how common, where else)?
+
+### STAGE 4: REFINED READER QUESTIONS (College Level)
+- 4-6 questions that hook curiosity and set up insights.
+- Accessible language.
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## OUTPUT FORMAT
+## ═══════════════════════════════════════════════════════════════════════════
+
+Return your response with these sections:
+
+### INTRODUCTION ESSAY
+[Essay text]
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+...
+
+### VERSE COMMENTARY
+**Verse 1**
+[Hebrew text punctuated]
+[Commentary]
+
+...
+
+### REFINED READER QUESTIONS
+1. ...
+"""
+
+
+
 
 # =============================================================================
 # MASTER EDITOR CLASS
@@ -813,6 +1243,11 @@ class MasterEditorV2:
                 raise ValueError("Anthropic API key required for Claude models")
             self.anthropic_client = anthropic.Anthropic(api_key=anthropic_key)
             self.logger.info("✓ Anthropic client initialized")
+
+        # Initialize ResearchTrimmer
+        self.research_trimmer = ResearchTrimmer(logger=self.logger)
+        self._trimmed_research_bundle = None
+        self._deep_research_removed_for_space = False
 
         self.logger.info(f"MasterEditorV2 initialized with main model: {self.model}")
         self.logger.info(f"  College model: {self.college_model}")
@@ -993,12 +1428,19 @@ class MasterEditorV2:
 
         # Call GPT-5.1
         try:
-            response = self.openai_client.chat.completions.create(
-                model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                reasoning_effort="high",
-                max_completion_tokens=65536
-            )
+            kwargs = {
+                "model": self.model,
+                "messages": [{"role": "user", "content": prompt}],
+            }
+            # Only apply reasoning_effort and high token limit for reasoning models
+            if self.model.startswith("o") or "gpt-5" in self.model:
+                kwargs["reasoning_effort"] = "high"
+                kwargs["max_completion_tokens"] = 65536
+            else:
+                # Standard models (gpt-4o) have lower limits
+                kwargs["max_tokens"] = 16000 # Safe upper bound for gpt-4o output
+
+            response = self.openai_client.chat.completions.create(**kwargs)
 
             response_text = response.choices[0].message.content
 
@@ -1203,6 +1645,7 @@ class MasterEditorV2:
 
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
         micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+        insights_text = self._format_insights_for_prompt(curated_insights)
 
         # Build prompt using college V2 template
         prompt = COLLEGE_EDITOR_PROMPT_V2.format(
@@ -1231,12 +1674,18 @@ class MasterEditorV2:
     def _call_gpt_college(self, prompt: str, psalm_number: int) -> Dict[str, str]:
         """Call GPT for college edition."""
         try:
-            response = self.openai_client.chat.completions.create(
-                model=self.college_model,
-                messages=[{"role": "user", "content": prompt}],
-                reasoning_effort="high",
-                max_completion_tokens=65536
-            )
+            kwargs = {
+                "model": self.college_model,
+                "messages": [{"role": "user", "content": prompt}],
+            }
+            # Only apply reasoning_effort and high token limit for reasoning models
+            if self.college_model.startswith("o") or "gpt-5" in self.college_model:
+                kwargs["reasoning_effort"] = "high"
+                kwargs["max_completion_tokens"] = 65536
+            else:
+                 kwargs["max_tokens"] = 16000
+
+            response = self.openai_client.chat.completions.create(**kwargs)
 
             response_text = response.choices[0].message.content
 
@@ -1332,6 +1781,348 @@ class MasterEditorV2:
             result['revised_verses'] = ""
 
         return result
+
+    # =========================================================================
+    # WRITER METHODS (Phase 3+4 Synthesis Replacement)
+    # =========================================================================
+
+    def write_commentary(
+        self,
+        macro_file: Path,
+        micro_file: Path,
+        research_file: Path,
+        insights_file: Optional[Path] = None,
+        psalm_number: Optional[int] = None,
+        reader_questions_file: Optional[Path] = None
+    ) -> Dict[str, str]:
+        """
+        Generate definitive commentary (Writer Mode).
+        Replaces Synthesis Writer.
+        """
+        self.logger.info("Starting Master Writer commentary generation")
+
+        # Load inputs
+        macro_analysis = self._load_json_file(macro_file)
+        micro_analysis = self._load_json_file(micro_file)
+
+        # Determine psalm number
+        if not psalm_number:
+            psalm_number = macro_analysis.get('psalm_number', 0)
+
+        # Load research bundle (with optional trimming)
+        research_bundle_raw = self._load_text_file(research_file)
+
+        # Trim research bundle if needed (~350K chars max)
+        research_bundle, deep_research_removed, needs_gemini = self.research_trimmer.trim_bundle(
+            research_bundle_raw, max_chars=350000
+        )
+        self._deep_research_removed_for_space = deep_research_removed
+        self.logger.info(f"Research bundle loaded: {len(research_bundle_raw)} -> {len(research_bundle)} chars")
+
+        # Load insights
+        curated_insights = None
+        if insights_file and insights_file.exists():
+            curated_insights = self._load_json_file(insights_file)
+            self.logger.info(f"Curated insights loaded from {insights_file}")
+
+        # Load analytical framework
+        try:
+            from src.agents.rag_manager import RAGManager
+            rag_manager = RAGManager("docs")
+            analytical_framework = rag_manager.load_analytical_framework()
+        except Exception as e:
+            self.logger.warning(f"Could not load analytical framework: {e}")
+            analytical_framework = "[Analytical framework not available]"
+
+        phonetic_section = self._format_phonetic_section(micro_analysis)
+
+        # Load curated reader questions if available, else fall back to raw macro/micro questions
+        reader_questions = "[No reader questions provided]"
+        if reader_questions_file and Path(reader_questions_file).exists():
+            try:
+                with open(reader_questions_file, 'r', encoding='utf-8') as f:
+                    rq_data = json.load(f)
+                questions = rq_data.get('curated_questions', [])
+                if questions:
+                    reader_questions = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
+                    self.logger.info(f"  Reader questions: {len(questions)} curated questions loaded")
+            except Exception as e:
+                self.logger.warning(f"Could not load curated reader questions: {e}")
+
+        if reader_questions == "[No reader questions provided]":
+            # Fall back to raw macro/micro questions
+            reader_questions_list = macro_analysis.get('research_questions', []) + micro_analysis.get('interesting_questions', [])
+            if reader_questions_list:
+                reader_questions = "\n".join(f"{i+1}. {q}" for i, q in enumerate(reader_questions_list[:10]))
+
+        self.logger.info(f"Writing commentary for Psalm {psalm_number}")
+        
+        # Perform writing
+        return self._perform_writer_synthesis(
+            psalm_number=psalm_number,
+            macro_analysis=macro_analysis,
+            micro_analysis=micro_analysis,
+            research_bundle=research_bundle,
+            phonetic_section=phonetic_section,
+            curated_insights=curated_insights,
+            analytical_framework=analytical_framework,
+            reader_questions=reader_questions,
+            is_college=False
+        )
+
+    def write_college_commentary(
+        self,
+        macro_file: Path,
+        micro_file: Path,
+        research_file: Path,
+        insights_file: Optional[Path] = None,
+        psalm_number: Optional[int] = None
+    ) -> Dict[str, str]:
+        """
+        Generate college commentary (Writer Mode).
+        """
+        self.logger.info("Starting Master Writer COLLEGE commentary generation")
+        
+        # Load inputs (Similar to above)
+        macro_analysis = self._load_json_file(macro_file)
+        micro_analysis = self._load_json_file(micro_file)
+        if not psalm_number:
+            psalm_number = macro_analysis.get('psalm_number', 0)
+            
+        research_bundle_raw = self._load_text_file(research_file)
+        research_bundle, _, _ = self.research_trimmer.trim_bundle(research_bundle_raw, max_chars=350000)
+        
+        curated_insights = None
+        if insights_file and insights_file.exists():
+            curated_insights = self._load_json_file(insights_file)
+
+        try:
+            from src.agents.rag_manager import RAGManager
+            rag_manager = RAGManager("docs")
+            analytical_framework = rag_manager.load_analytical_framework()
+        except Exception:
+            analytical_framework = "[Analytical framework not available]"
+            
+        phonetic_section = self._format_phonetic_section(micro_analysis)
+        reader_questions = "" # College prompt doesn't explicitly look for reader questions input, but uses them? 
+        # Actually COLLEGE_WRITER_PROMPT doesn't have {reader_questions} in inputs section!
+        # Let's check. Yes it does NOT. It has {analytical_framework}.
+        # So we skip reader_questions for college prompt inputs.
+
+        self.logger.info(f"Writing COLLEGE commentary for Psalm {psalm_number}")
+        
+        return self._perform_writer_synthesis(
+            psalm_number=psalm_number,
+            macro_analysis=macro_analysis,
+            micro_analysis=micro_analysis,
+            research_bundle=research_bundle,
+            phonetic_section=phonetic_section,
+            curated_insights=curated_insights,
+            analytical_framework=analytical_framework,
+            reader_questions="", # Not used for college
+            is_college=True
+        )
+
+    def _perform_writer_synthesis(
+        self,
+        psalm_number: int,
+        macro_analysis: Dict,
+        micro_analysis: Dict,
+        research_bundle: str,
+        phonetic_section: str,
+        curated_insights: Dict,
+        analytical_framework: str,
+        reader_questions: str,
+        is_college: bool
+    ) -> Dict[str, str]:
+        """Execute the writer prompt with appropriate model."""
+        
+        # Format common inputs
+        macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
+        micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+        insights_text = self._format_insights_for_prompt(curated_insights)
+        
+        # Select prompt and model
+        if is_college:
+            prompt_template = COLLEGE_WRITER_PROMPT
+            model = self.college_model
+            # College prompt doesn't use reader_questions input
+            prompt = prompt_template.format(
+                psalm_number=psalm_number,
+                macro_analysis=macro_text,
+                micro_analysis=micro_text,
+                research_bundle=research_bundle,
+                phonetic_section=phonetic_section,
+                curated_insights=insights_text,
+                analytical_framework=analytical_framework
+            )
+            debug_prefix = "college_writer"
+        else:
+            prompt_template = MASTER_WRITER_PROMPT
+            model = self.model
+            prompt = prompt_template.format(
+                psalm_number=psalm_number,
+                macro_analysis=macro_text,
+                micro_analysis=micro_text,
+                research_bundle=research_bundle,
+                phonetic_section=phonetic_section,
+                curated_insights=insights_text,
+                analytical_framework=analytical_framework,
+                reader_questions=reader_questions
+            )
+            debug_prefix = "master_writer"
+
+        # Save prompt
+        prompt_file = Path(f"output/debug/{debug_prefix}_prompt_psalm_{psalm_number}.txt")
+        prompt_file.parent.mkdir(parents=True, exist_ok=True)
+        prompt_file.write_text(prompt, encoding='utf-8')
+        self.logger.info(f"Saved {debug_prefix} prompt to {prompt_file}")
+
+        # Call model
+        if "claude" in model.lower():
+            return self._call_claude_writer(model, prompt, psalm_number, debug_prefix)
+        else:
+            return self._call_gpt_writer(model, prompt, psalm_number, debug_prefix)
+
+    def _call_gpt_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
+        """Call GPT for writer mode."""
+        try:
+            kwargs = {
+                "model": model,
+                "messages": [{"role": "user", "content": prompt}],
+            }
+            # Only apply reasoning_effort and high token limit for reasoning models
+            if model.startswith("o") or "gpt-5" in model:
+                kwargs["reasoning_effort"] = "high"
+                kwargs["max_completion_tokens"] = 65536
+            else:
+                 kwargs["max_tokens"] = 16000
+
+            response = self.openai_client.chat.completions.create(**kwargs)
+            response_text = response.choices[0].message.content
+            
+            # Track usage
+            usage = response.usage
+            self.cost_tracker.add_usage(
+                model=model,
+                input_tokens=getattr(usage, 'prompt_tokens', 0),
+                output_tokens=getattr(usage, 'completion_tokens', 0),
+                thinking_tokens=getattr(usage, 'reasoning_tokens', 0)
+            )
+
+            # Save response
+            response_file = Path(f"output/debug/{debug_prefix}_response_psalm_{psalm_number}.txt")
+            response_file.write_text(response_text, encoding='utf-8')
+
+            return self._parse_writer_response(response_text, psalm_number)
+
+        except Exception as e:
+            self.logger.error(f"Error in GPT writer: {e}")
+            raise
+
+    def _call_claude_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
+        """Call Claude for writer mode."""
+        try:
+            # Map friendly names to API model IDs
+            model_id = model
+            if model == "claude-opus-4-5":
+                model_id = "claude-opus-4-5-20250514"
+            response = self.anthropic_client.messages.create(
+                model=model_id,
+                max_tokens=64000,
+                thinking={"type": "enabled", "budget_tokens": 40000},
+                messages=[{"role": "user", "content": prompt}]
+            )
+            
+            response_text = ""
+            for block in response.content:
+                if block.type == "text":
+                    response_text = block.text
+
+            # Track usage
+            usage = response.usage
+            self.cost_tracker.add_usage(
+                model=model,
+                input_tokens=getattr(usage, 'input_tokens', 0),
+                output_tokens=getattr(usage, 'output_tokens', 0),
+                thinking_tokens=0
+            )
+
+            # Save response
+            response_file = Path(f"output/debug/{debug_prefix}_response_psalm_{psalm_number}.txt")
+            response_file.write_text(response_text, encoding='utf-8')
+
+            return self._parse_writer_response(response_text, psalm_number)
+
+        except Exception as e:
+            self.logger.error(f"Error in Claude writer: {e}")
+            raise
+
+    def _parse_writer_response(self, response_text: str, psalm_number: int) -> Dict[str, str]:
+        """Parse the writer response into sections."""
+        import re
+        
+        result = {
+            'introduction': '',
+            'verse_commentary': '',
+            'reader_questions': '',
+            'psalm_number': psalm_number
+        }
+        
+        # 1. Introduction (including Liturgical section)
+        # Look for start of intro until start of verses
+        intro_match = re.search(
+            r'###?\s*INTRODUCTION ESSAY\s*\n(.*?)(?=###?\s*VERSE COMMENTARY|$)',
+            response_text, re.DOTALL | re.IGNORECASE
+        )
+        if intro_match:
+            result['introduction'] = intro_match.group(1).strip()
+            
+        # 2. Verse Commentary
+        # Look for start of verses until Reader Questions (or end)
+        verse_match = re.search(
+            r'###?\s*VERSE COMMENTARY\s*\n(.*?)(?=###?\s*REFINED READER QUESTIONS|$)',
+            response_text, re.DOTALL | re.IGNORECASE
+        )
+        if verse_match:
+            result['verse_commentary'] = verse_match.group(1).strip()
+            
+        # 3. Reader Questions
+        # Look for refined reader questions
+        rq_match = re.search(
+            r'###?\s*REFINED READER QUESTIONS\s*\n(.*?)$',
+            response_text, re.DOTALL | re.IGNORECASE
+        )
+        if rq_match:
+            result['reader_questions'] = rq_match.group(1).strip()
+            
+        return result
+
+    def _format_phonetic_section(self, micro_analysis: Dict) -> str:
+        """Format phonetic transcription for inclusion in prompts."""
+        lines = ["## PHONETIC TRANSCRIPTIONS\n"]
+        lines.append("*Reference these for accurate phonetic commentary. DO NOT make phonetic claims without consulting these transcriptions.*\n")
+
+        # Helper to get attribute/key value
+        def get_value(obj, key, default=''):
+            if isinstance(obj, dict):
+                return obj.get(key, default)
+            return getattr(obj, key, default)
+
+        verses = []
+        # Handle both Pydantic and Dict
+        if hasattr(micro_analysis, 'verse_commentaries'):
+            verses = micro_analysis.verse_commentaries
+        elif isinstance(micro_analysis, dict):
+            verses = micro_analysis.get('verse_commentaries', [])
+
+        for vc in verses:
+            phonetic = get_value(vc, 'phonetic_transcription')
+            verse_num = get_value(vc, 'verse_number') or get_value(vc, 'verse')
+            if phonetic:
+                lines.append(f"**Verse {verse_num}**: `{phonetic}`\n")
+
+        return "\n".join(lines)
 
     def _load_text_file(self, file_path: Path) -> str:
         """Load text file content."""
