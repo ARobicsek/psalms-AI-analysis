@@ -8,6 +8,34 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 245 (2026-01-27): Master Writer Experiment (No Synthesis Writer)
+
+**Objective**: Eliminate the Synthesis Writer step, replacing the two-pass pipeline (SynthesisWriter → MasterEditor) with a single-pass "Master Writer" approach where the MasterEditor creates commentary directly from research inputs.
+
+**Problems Identified**:
+- `SynthesisWriter` created an "unnecessary hop" / telephone game effect.
+- `gpt-4o` failed with `reasoning_effort` and `max_completion_tokens` parameters (API compatibility).
+- Stale "Synthesis" data persisted in reporting when re-running the pipeline in the same folder.
+- Methodology section needed to reflect "Master Writer" instead of "Editorial Review".
+
+**Solutions Implemented**:
+1.  **Created Test Pipeline**:
+    - Created `scripts/run_enhanced_pipeline_TEST.py` to bypass synthesis and call `MasterEditor.write_commentary()`.
+    - Added auto-cleanup of stale "synthesis" stats in `pipeline_stats.json`.
+
+2.  **Master Writer Implementation**:
+    - Implemented `write_commentary` and `write_college_commentary` in `src/agents/master_editor.py`.
+    - Added new prompts: `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT`.
+    - Added conditional logic for `reasoning_effort` (only for reasoning models) and `max_tokens` (fallback for standard models).
+
+3.  **Reporting Updates**:
+    - Updated `src/utils/commentary_formatter.py` to display "Master Writer" and hide "Commentary Synthesis" if not run.
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Added Writer methods/prompts, fixed API compatibility.
+- `scripts/run_enhanced_pipeline_TEST.py` - (NEW) Single-pass pipeline orchestrator.
+- `src/utils/commentary_formatter.py` - Updated logic for report labels.
+
 ## Session 245 (2026-01-27): Code Review — Master Writer Experiment (No Synthesis Writer)
 
 **Objective**: Review and fix a junior dev's experimental pipeline (`run_enhanced_pipeline_TEST.py`) that eliminates the Synthesis Writer step, replacing the two-pass pipeline (SynthesisWriter → MasterEditor) with a single-pass "Master Writer" approach where the MasterEditor creates commentary directly from research inputs.
