@@ -1166,6 +1166,17 @@ def run_enhanced_pipeline(
         tracker.track_step_output("master_editor", editor_output, duration=step_duration)
         tracker.track_model_for_step("master_editor", editor_model)
 
+        # Override input_char_count with the actual prompt size from the API call
+        # (track_step_input above measured raw concatenated inputs, not the formatted prompt)
+        if 'input_char_count' in result:
+            tracker.track_step_usage(
+                "master_editor",
+                input_chars=result['input_char_count'],
+                input_tokens=result.get('input_token_count', 0),
+                output_chars=len(editor_output),
+                output_tokens=result.get('output_token_count', 0)
+            )
+
         logger.info(f"✓ Editorial assessment saved to {edited_assessment_file}")
         logger.info(f"✓ Revised introduction saved to {edited_intro_file}")
         logger.info(f"✓ Revised verses saved to {edited_verses_file}")

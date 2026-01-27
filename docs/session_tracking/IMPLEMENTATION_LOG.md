@@ -8,6 +8,34 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 246 (2026-01-27): Fix Methodology Section Accounting & Insight Model Tracking
+
+**Objective**: Fix incorrect "Master Editor Prompt Size" character count in Methodology section and add programmatic Insight Extractor model attribution to both pipelines.
+
+**Problems Identified**:
+- **Stale prompt size in TEST pipeline**: When running `run_enhanced_pipeline_TEST.py` with `--skip-macro --skip-micro`, the print-ready formatter (a subprocess) read the JSON from disk before it was updated with the current run's master_editor data, showing a stale value (298,295 instead of 291,290).
+- **Inaccurate prompt size in old pipeline**: `run_enhanced_pipeline.py` used `track_step_input()` which measured a manual concatenation of raw inputs, not the actual prompt sent to the API (which includes the prompt template text).
+- **Stale synthesis step data**: The TEST pipeline cleaned `synthesis` from `model_usage` but not from `steps`, leaving stale synthesis step data in the JSON.
+- **Missing insight extractor model**: The TEST pipeline did not track the Insight Extractor model, so it never appeared in Methodology's "Models Used" section.
+- **Commentary formatter gap**: `commentary_formatter.py` (print-ready markdown) had no line for the Insight Extractor model, even though the docx generators already supported it.
+
+**Solutions Implemented**:
+1. **`run_enhanced_pipeline_TEST.py`**: Added `tracker.save_json()` before Step 5 (print-ready) so the subprocess reads current data. Extended stale data cleanup to remove `steps.synthesis` in addition to `model_usage.synthesis`. Added `tracker.track_model_for_step("insight_extractor", ...)` in three code paths (loading existing, fresh extraction, and skip-with-existing).
+2. **`run_enhanced_pipeline.py`**: Added `tracker.track_step_usage()` after master editor completes, using `result['input_char_count']` (the actual `len(prompt)` from the API call) to override the earlier `track_step_input()` value.
+3. **`commentary_formatter.py`**: Added Insight Extractor model line to "Models Used" section, matching the docx generators.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline_TEST.py` - Stale data cleanup, JSON save timing, insight model tracking
+- `scripts/run_enhanced_pipeline.py` - Actual prompt size tracking via `track_step_usage()`
+- `src/utils/commentary_formatter.py` - Added insight_extractor model to Models Used section
+
+**Analysis Notes** (for next session):
+- Old pipeline (`MASTER_EDITOR_PROMPT_V2`) includes `{psalm_text}` but does NOT inject `{curated_insights}` despite loading them
+- New pipeline (`MASTER_WRITER_PROMPT`) includes `{phonetic_section}` and `{curated_insights}` but does NOT have `{psalm_text}`
+- Both gaps should be addressed to ensure the master editor in each pipeline receives psalm text, phonetics, and curated insights
+
+---
+
 ## Session 245 (2026-01-27): Master Writer Experiment (No Synthesis Writer)
 
 **Objective**: Eliminate the Synthesis Writer step, replacing the two-pass pipeline (Synthesis → Editor) with a single-pass "Master Writer" approach where the MasterEditor creates commentary directly from research inputs.

@@ -180,10 +180,13 @@ def run_enhanced_pipeline(
                 
             # CLEANUP: If we are running the TEST pipeline, we should remove stale synthesis data
             # even if we loaded it from a previous run.
-            if initial_data and 'model_usage' in initial_data:
-                if 'synthesis' in initial_data['model_usage']:
+            if initial_data:
+                if 'model_usage' in initial_data and 'synthesis' in initial_data['model_usage']:
                     logger.info("Removing stale 'synthesis' model data from loaded stats")
                     del initial_data['model_usage']['synthesis']
+                if 'steps' in initial_data and 'synthesis' in initial_data['steps']:
+                    logger.info("Removing stale 'synthesis' step data from loaded stats")
+                    del initial_data['steps']['synthesis']
         except Exception as e:
             logger.warning(f"Could not load existing stats file, starting fresh. Error: {e}")
 
@@ -387,25 +390,32 @@ def run_enhanced_pipeline(
         if insights_file.exists():
             logger.info("Insights exist, loading...")
             with open(insights_file, 'r', encoding='utf-8') as f: curated_insights = json.load(f)
+            # Track the model even when loading existing insights
+            tracker.track_model_for_step("insight_extractor", "claude-opus-4-5")
         else:
             logger.info("[STEP 2c] Extracting Insights...")
             try:
                 # Load content if needed
                 if 'research_bundle_content' not in locals():
                     with open(research_file, 'r', encoding='utf-8') as f: research_bundle_content = f.read()
-                
+
                 trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
                 extractor = InsightExtractor(cost_tracker=cost_tracker)
-                
+
                 # Get psalm text
                 db = TanakhDatabase(Path(db_path))
                 p = db.get_psalm(psalm_number)
                 p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
-                
+
                 curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, trimmed)
+                tracker.track_model_for_step("insight_extractor", extractor.model)
                 extractor.save_insights(curated_insights, insights_file)
             except Exception as e:
                 logger.warning(f"Insight extraction failed: {e}")
+    else:
+        # skip_insights is True — still track the model if insights file exists
+        if insights_file.exists():
+            tracker.track_model_for_step("insight_extractor", "claude-opus-4-5")
 
     # =====================================================================
     # STEP 3: Synthesis (REMOVED)
@@ -547,6 +557,9 @@ def run_enhanced_pipeline(
             logger.error(f"College Writer failed: {e}", exc_info=True)
 
         time.sleep(delay_between_steps)
+
+    # --- Save stats to disk before print-ready step (which reads the JSON as a subprocess) ---
+    tracker.save_json(str(output_path))
 
     # =====================================================================
     # STEP 5: Print-Ready

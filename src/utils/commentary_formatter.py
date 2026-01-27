@@ -208,14 +208,16 @@ class CommentaryFormatter:
         if agent_models:
             lines.append(f"**Structural Analysis (Macro)**: {agent_models.get('macro_analysis', 'N/A')}")
             lines.append(f"**Verse Discovery (Micro)**: {agent_models.get('micro_analysis', 'N/A')}")
+            if agent_models.get('insight_extractor'):
+                lines.append(f"**Insights Extraction**: {agent_models.get('insight_extractor')}")
             if agent_models.get('synthesis'):
                 lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis', 'N/A')}")
-            
+
             # Use "Master Writer" if available, else "Editorial Review"
             if agent_models.get('master_writer'):
                 lines.append(f"**Master Writer**: {agent_models.get('master_writer', 'N/A')}")
             else:
-                 lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")
+                lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")
         else:
             lines.append("Model attribution data not available.")
 
