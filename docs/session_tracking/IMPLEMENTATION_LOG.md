@@ -117,6 +117,11 @@ This file contains detailed session history for sessions 200 and later.
 **Next Steps**:
 - Verify College Editor utilization: Ensure the college edition also benefits from these insights (Session 243).
 
+
+- **Bug Fix**: Addressed "Master Editor Prompt Size" discrepancy.
+    - Context: `run_enhanced_pipeline_TEST.py` was inheriting stale stats from previous runs because it lacked explicit tracking for the `master_editor` step input when running with `--skip` flags.
+    - Fix: Added `track_step_usage` to `PipelineSummaryTracker` and patched `MasterEditor`'s `_call_gpt_writer` and `_call_claude_writer` methods to correctly return usage stats to the pipeline.
+
 ---
 
 ## Session 241 (2026-01-26): Insight Quality Improvements — Execution (Phase 1 & 2a)

@@ -1466,7 +1466,14 @@ class MasterEditorV2:
             self.logger.info(f"Saved V2 response to {response_file}")
 
             # Parse response
-            return self._parse_editorial_response(response_text, psalm_number)
+            result = self._parse_editorial_response(response_text, psalm_number)
+            
+            # Add stats to result
+            result['input_char_count'] = len(prompt)
+            result['input_token_count'] = input_tokens
+            result['output_token_count'] = output_tokens
+            
+            return result
 
         except Exception as e:
             self.logger.error(f"Error in GPT editorial review: {e}")
@@ -1550,7 +1557,13 @@ class MasterEditorV2:
             response_file = Path(f"output/debug/master_editor_v2_response_psalm_{psalm_number}.txt")
             response_file.write_text(response_text, encoding='utf-8')
 
-            return self._parse_editorial_response(response_text, psalm_number)
+            # Parse response and add stats
+            result = self._parse_editorial_response(response_text, psalm_number)
+            result['input_char_count'] = len(prompt)
+            result['input_token_count'] = input_tokens
+            result['output_token_count'] = output_tokens
+
+            return result
 
         except Exception as e:
             self.logger.error(f"Error in Claude editorial review: {e}")
@@ -2014,7 +2027,14 @@ class MasterEditorV2:
             response_file = Path(f"output/debug/{debug_prefix}_response_psalm_{psalm_number}.txt")
             response_file.write_text(response_text, encoding='utf-8')
 
-            return self._parse_writer_response(response_text, psalm_number)
+            result = self._parse_writer_response(response_text, psalm_number)
+            
+            # Add stats
+            result['input_char_count'] = len(prompt)
+            result['input_token_count'] = getattr(usage, 'prompt_tokens', 0)
+            result['output_token_count'] = getattr(usage, 'completion_tokens', 0)
+
+            return result
 
         except Exception as e:
             self.logger.error(f"Error in GPT writer: {e}")
@@ -2052,7 +2072,14 @@ class MasterEditorV2:
             response_file = Path(f"output/debug/{debug_prefix}_response_psalm_{psalm_number}.txt")
             response_file.write_text(response_text, encoding='utf-8')
 
-            return self._parse_writer_response(response_text, psalm_number)
+            result = self._parse_writer_response(response_text, psalm_number)
+
+            # Add stats
+            result['input_char_count'] = len(prompt)
+            result['input_token_count'] = getattr(usage, 'input_tokens', 0)
+            result['output_token_count'] = getattr(usage, 'output_tokens', 0)
+
+            return result
 
         except Exception as e:
             self.logger.error(f"Error in Claude writer: {e}")

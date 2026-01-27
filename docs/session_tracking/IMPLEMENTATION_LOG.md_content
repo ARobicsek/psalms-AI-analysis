@@ -1,0 +1,24 @@
+## Session 244 (2026-01-26): Fixing College Edition Crash & Insight Attribution
+
+**Objective**: Fix `NameError` crash in College Edition generation and ensure Insight Extraction model attribution appears in pipeline stats and generated DOCX files.
+
+**Problems Identified**:
+- `NameError: name 'insights_text' is not defined` in `master_editor.py` inside `_perform_college_review`, causing the College Edition generation to crash.
+- Use of the "Insight Extractor" model (Claude Opus 4.5) was not being tracked in the pipeline summary statistics, leading to missing attribution in the "Methodological & Bibliographical Summary".
+
+**Solutions Implemented**:
+1. **Fixed College Edition Crash**:
+   - In `master_editor.py`, added logic to format `curated_insights` using `self._format_insights_for_prompt()` before passing it to the prompt template.
+
+2. **Added Model Tracking**:
+   - Updated `run_enhanced_pipeline.py` to explicitly track the model used for the `insight_extractor` step in the `PipelineSummaryTracker`.
+   - Added tracking for the default model even when the step is skipped (for complete documentation).
+
+3. **Updated Documentation Generators**:
+   - Modified `src/utils/document_generator.py` and `src/utils/combined_document_generator.py` to read the `insight_extractor` model usage from statistics and include an "**Insights Extraction**" line in the final Word document summary.
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Fixed variable scope error.
+- `scripts/run_enhanced_pipeline.py` - Added model tracking logic.
+- `src/utils/document_generator.py` - Added model attribution to Main DOCX.
+- `src/utils/combined_document_generator.py` - Added model attribution to Combined DOCX.

@@ -61,7 +61,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ### Session 245 (2026-01-27): Master Writer Experiment (No Synthesis Writer)
 - **Objective**: Eliminated "Synthesis Writer" step in favor of a single-pass "Master Writer" to reduce information loss.
 - **Implementation**: Created `scripts/run_enhanced_pipeline_TEST.py` and implemented `MasterEditor.write_commentary()` with new definitive prompts.
-- **Fixes**: Resolved `gpt-4o` API compatibility issues (reasoning effort/token limits) and fixed stale reporting data in `commentary_formatter.py`.
+- **Fixes**: Resolved `gpt-4o` API compatibility issues; fixed "Master Editor Prompt Size" discrepancy (stale stats).
 - **Outcome**: Test pipeline fully functional. Master Writer now generates Introduction, Verse Commentary, and College Edition directly from research.
 - **Code Review**: Reviewed junior dev's `run_enhanced_pipeline_TEST.py` — a single-pass pipeline that replaces two-pass (SynthesisWriter → MasterEditor) with a direct "Master Writer" approach.
 - **Prompt Enrichment**: Enriched `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT` with critical guidance from synthesis writer (11 Items of Interest, WEAK/STRONG examples, Translation Test, blurry words, Torah Temimah references).

@@ -195,9 +195,9 @@ class CommentaryFormatter:
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
         if isinstance(prompt_chars, int):
-            lines.append(f"- **Master Editor Prompt Size**: {prompt_chars:,} characters")
+            lines.append(f"- **Master Editor/Writer Prompt Size**: {prompt_chars:,} characters")
         else:
-            lines.append(f"- **Master Editor Prompt Size**: {prompt_chars} characters")
+            lines.append(f"- **Master Editor/Writer Prompt Size**: {prompt_chars} characters")
 
         lines.append("") # Add a space before the next section
         
@@ -208,8 +208,14 @@ class CommentaryFormatter:
         if agent_models:
             lines.append(f"**Structural Analysis (Macro)**: {agent_models.get('macro_analysis', 'N/A')}")
             lines.append(f"**Verse Discovery (Micro)**: {agent_models.get('micro_analysis', 'N/A')}")
-            lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis', 'N/A')}")
-            lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")
+            if agent_models.get('synthesis'):
+                lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis', 'N/A')}")
+            
+            # Use "Master Writer" if available, else "Editorial Review"
+            if agent_models.get('master_writer'):
+                lines.append(f"**Master Writer**: {agent_models.get('master_writer', 'N/A')}")
+            else:
+                 lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")
         else:
             lines.append("Model attribution data not available.")
 

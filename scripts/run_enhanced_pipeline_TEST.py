@@ -177,6 +177,13 @@ def run_enhanced_pipeline(
             logger.info(f"Resuming pipeline run. Loading existing stats from {summary_json_file}")
             with open(summary_json_file, 'r', encoding='utf-8') as f:
                 initial_data = json.load(f)
+                
+            # CLEANUP: If we are running the TEST pipeline, we should remove stale synthesis data
+            # even if we loaded it from a previous run.
+            if initial_data and 'model_usage' in initial_data:
+                if 'synthesis' in initial_data['model_usage']:
+                    logger.info("Removing stale 'synthesis' model data from loaded stats")
+                    del initial_data['model_usage']['synthesis']
         except Exception as e:
             logger.warning(f"Could not load existing stats file, starting fresh. Error: {e}")
 
@@ -465,6 +472,16 @@ def run_enhanced_pipeline(
             tracker.track_step_output("master_editor", editor_output)
             tracker.track_model_for_step("master_writer", master_editor.model)
 
+            # Track usage stats explicitly to ensure prompt size is captured
+            if 'input_char_count' in result:
+                tracker.track_step_usage(
+                    "master_editor",
+                    input_chars=result['input_char_count'],
+                    input_tokens=result.get('input_token_count', 0),
+                    output_chars=len(editor_output),
+                    output_tokens=result.get('output_token_count', 0)
+                )
+
             logger.info(f"Master Writer complete for Psalm {psalm_number}")
             print(f"  Introduction: {edited_intro_file}")
             print(f"  Verses: {edited_verses_file}\n")
@@ -505,6 +522,13 @@ def run_enhanced_pipeline(
                 insights_file=insights_file if insights_file.exists() else None,
                 psalm_number=psalm_number
             )
+            
+            # Track college writer stats
+            # We treat this as a separate step or part of master_writer logic, 
+            # but usually pipeline_summary tracks main steps.
+            # If we want to track it, we'd need a new step name or just log it.
+            if 'input_char_count' in result:
+                logger.info(f"College Writer usage: {result['input_char_count']} chars input, {result.get('input_token_count', 0)} tokens")
             
             with open(edited_intro_college_file, 'w', encoding='utf-8') as f:
                 f.write(result['introduction'])

@@ -173,6 +173,21 @@ class PipelineSummaryTracker:
         step.output_token_estimate = step.estimate_tokens(output_text)
         step.duration_seconds = duration
 
+    def track_step_usage(self, step_name: str, input_chars: int, input_tokens: int, output_chars: int, output_tokens: int):
+        """
+        Manually track usage statistics for a step.
+        Useful when the full input/output text is not available or handled internally by an agent.
+        Overwrites existing values.
+        """
+        if step_name not in self.steps:
+            self.steps[step_name] = StepStats(step_name=step_name)
+
+        step = self.steps[step_name]
+        step.input_char_count = input_chars
+        step.input_token_estimate = input_tokens
+        step.output_char_count = output_chars
+        step.output_token_estimate = output_tokens
+
     def track_research_requests(self, research_request):
         """Track research requests from MicroAnalyst."""
         # Lexicon requests
