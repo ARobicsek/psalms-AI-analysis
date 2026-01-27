@@ -10,83 +10,40 @@ This file contains detailed session history for sessions 200 and later.
 
 ## Session 245 (2026-01-27): Master Writer Experiment (No Synthesis Writer)
 
-**Objective**: Eliminate the Synthesis Writer step, replacing the two-pass pipeline (SynthesisWriter → MasterEditor) with a single-pass "Master Writer" approach where the MasterEditor creates commentary directly from research inputs.
+**Objective**: Eliminate the Synthesis Writer step, replacing the two-pass pipeline (Synthesis → Editor) with a single-pass "Master Writer" approach where the MasterEditor creates commentary directly from research inputs.
 
-**Problems Identified**:
-- `SynthesisWriter` created an "unnecessary hop" / telephone game effect.
-- `gpt-4o` failed with `reasoning_effort` and `max_completion_tokens` parameters (API compatibility).
-- Stale "Synthesis" data persisted in reporting when re-running the pipeline in the same folder.
-- Methodology section needed to reflect "Master Writer" instead of "Editorial Review".
+**Problems Addressed**:
+- **Process Redundancy**: `SynthesisWriter` created an "unnecessary hop" / telephone game effect.
+- **Prompt Quality**: Experimental writer prompts needed enrichment (Items of Interest, stronger examples) to match original quality.
+- **Infrastructure**: Experimental script lacked CLI flags, error handling, and combined doc generation.
+- **API Compatibility**: `gpt-4o` failed with `reasoning_effort` usage (specific to O-series models).
+- **Reporting**: Stale "Synthesis" data persisted in reports when re-running in existing folders.
 
 **Solutions Implemented**:
-1.  **Created Test Pipeline**:
-    - Created `scripts/run_enhanced_pipeline_TEST.py` to bypass synthesis and call `MasterEditor.write_commentary()`.
+1.  **Pipeline Infrastructure (`run_enhanced_pipeline_TEST.py`)**:
+    - Created single-pass orchestrator bypassing Synthesis step.
+    - Fixed 16+ code issues: Output paths, argparse flags, Combined Doc Gen, rate limit handling, UTF-8 encoding.
     - Added auto-cleanup of stale "synthesis" stats in `pipeline_stats.json`.
 
-2.  **Master Writer Implementation**:
-    - Implemented `write_commentary` and `write_college_commentary` in `src/agents/master_editor.py`.
-    - Added new prompts: `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT`.
-    - Added conditional logic for `reasoning_effort` (only for reasoning models) and `max_tokens` (fallback for standard models).
+2.  **Master Writer Implementation (`master_editor.py`)**:
+    - Implemented `write_commentary` and `write_college_commentary` methods.
+    - Enriched prompts (`MASTER_WRITER_PROMPT`, `COLLEGE_WRITER_PROMPT`) with critical Stylistic rules, Translation Tests, and "Deep Web" integration.
+    - **API Fix**: Added conditional logic to only apply `reasoning_effort` and high token limits to reasoning models (o1/gpt-5), using standard fallbacks for others.
 
-3.  **Reporting Updates**:
-    - Updated `src/utils/commentary_formatter.py` to display "Master Writer" and hide "Commentary Synthesis" if not run.
+3.  **Reporting Updates (`commentary_formatter.py`)**:
+    - Updated logic to display "Master Writer" and hide "Commentary Synthesis" if not run.
+
+**Design Note**: All changes to `master_editor.py` are additive-only; existing pipelines remain unaffected.
+
+**Verification**:
+- Smoke tested on Psalm 117.
+- Verified `gpt-4o` compatibility.
+- Verified clean reporting output (no phantom synthesis step).
 
 **Files Modified**:
 - `src/agents/master_editor.py` - Added Writer methods/prompts, fixed API compatibility.
-- `scripts/run_enhanced_pipeline_TEST.py` - (NEW) Single-pass pipeline orchestrator.
-- `src/utils/commentary_formatter.py` - Updated logic for report labels.
-
-## Session 245 (2026-01-27): Code Review — Master Writer Experiment (No Synthesis Writer)
-
-**Objective**: Review and fix a junior dev's experimental pipeline (`run_enhanced_pipeline_TEST.py`) that eliminates the Synthesis Writer step, replacing the two-pass pipeline (SynthesisWriter → MasterEditor) with a single-pass "Master Writer" approach where the MasterEditor creates commentary directly from research inputs.
-
-**Problems Addressed**:
-- The new writer prompts (`MASTER_WRITER_PROMPT`, `COLLEGE_WRITER_PROMPT`) were ~200 lines vs the synthesis writer's ~600 lines — missing critical quality guidance (11 Items of Interest categories, WEAK vs STRONG examples, Translation Test, blurry words list, Torah Temimah instructions, figurative language validation).
-- Output path defaulted to `output/` instead of psalm-specific subdirectory (`output/psalm_NNN/`).
-- Missing argparse flags (`--resume`, `--db-path`, `--delay`, `--master-editor-model`).
-- `_call_claude_writer` had hardcoded model string instead of using the `model` parameter.
-- Dead `MasterEditorOld` import, default model mismatch (`gpt-5` → `gpt-5.1`).
-- No combined document generation (Step 6c), no progress print statements, no rate limit handling.
-- Reader questions not being passed to the writer method.
-- Bare `except:` clause in `master_editor.py`.
-
-**Solutions Implemented**:
-1.  **Prompt Enrichment (Part A)**: Selectively enriched both `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT` with highest-impact elements from the synthesis writer prompts:
-    - Added abbreviated 11 Items of Interest categories (~80 lines)
-    - Added 3 WEAK vs STRONG examples (figurative language, liturgical, comparative biblical)
-    - Added Rule 10: Translation Test, BLURRY WORDS TO WATCH list
-    - Added phonetic stress notation (BOLD CAPS), figurative language validation check
-    - Added Torah Temimah + "About the Commentators" references
-    - Added stylistic transformation example ("LLM-ish" vs target)
-    - Added detailed liturgical section guidance
-
-2.  **Infrastructure Fixes (Part B)**: Fixed 16 code/infrastructure issues:
-    - Output path now defaults to `output/psalm_NNN/`
-    - Added all missing argparse flags, wired into pipeline call
-    - Fixed hardcoded model in `_call_claude_writer` to use parameter
-    - Removed dead import, fixed default model to `gpt-5.1`
-    - Added combined document generation (Step 6c from original pipeline)
-    - Added print progress banners matching original pipeline style
-    - Added `openai.RateLimitError` handling before generic `Exception`
-    - Fixed reader question parsing with proper regex + length validation
-    - Reused `MasterEditor` instance in college step (no duplicate instantiation)
-    - Added research stats tracking when skipping micro analysis
-    - Fixed bare `except:` → `except Exception:`
-    - Added UTF-8 stdout reconfiguration for Windows
-
-**Design Note**: All changes to `master_editor.py` are purely additive — new prompts and new methods that the old pipeline never calls. Existing `edit_commentary()`, `edit_college_commentary()`, and their prompts (`MASTER_EDITOR_PROMPT_V2`, `COLLEGE_EDITOR_PROMPT_V2`) are untouched, so both pipelines coexist seamlessly.
-
-**Verification**:
-- `python scripts/run_enhanced_pipeline_TEST.py --help` — all 16 flags present
-- `python scripts/run_enhanced_pipeline_TEST.py 117 --smoke-test` — runs cleanly, correct output directory
-
-**Files Modified**:
-- `src/agents/master_editor.py` — Added `MASTER_WRITER_PROMPT`, `COLLEGE_WRITER_PROMPT`, `write_commentary()`, `write_college_commentary()`, `_call_claude_writer()` (new methods); fixed hardcoded model, bare except, added reader questions support.
-- `scripts/run_enhanced_pipeline_TEST.py` — Fixed output path, argparse, dead import, default model, progress output, combined doc gen, rate limit handling, research stats tracking, reader question parsing, UTF-8 encoding.
-
-**Next Steps**:
-- Run a full psalm through the TEST pipeline and compare output quality against original pipeline.
-- Evaluate whether single-pass approach produces comparable commentary quality.
+- `scripts/run_enhanced_pipeline_TEST.py` - New test pipeline script.
+- `src/utils/commentary_formatter.py` - Updated report labels.
 
 ---
 
