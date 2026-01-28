@@ -8,6 +8,36 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 248 (2026-01-28): Master Writer Refactoring & SI Pipeline Parity
+
+**Objective**: Eliminate the experimental "TEST" pipeline by promoting the single-pass "Master Writer" approach to become the default standard, while preserving the legacy "Synthesis Writer" approach in dedicated scripts. Ensure feature parity for Special Instructions (SI) pipelines.
+
+**Refactoring Performed**:
+1.  **Main Pipeline**:
+    *   Renamed `run_enhanced_pipeline_TEST.py` → `run_enhanced_pipeline.py` (New Default).
+    *   Created `run_enhanced_pipeline_with_synthesis.py` (New Legacy) from the old default.
+    *   Deleted obsolete `run_enhanced_pipeline_TEST.py`.
+2.  **SI Pipeline**:
+    *   Updated `run_si_pipeline.py` to mirror the new Master Writer architecture.
+    *   Created `run_si_pipeline_with_synthesis.py` to mirror the legacy Synthesis Writer architecture.
+3.  **Agents**:
+    *   Updated `MasterEditorSI` to override `write_commentary` (Master Writer mode) in addition to `edit_commentary` (Legacy mode).
+    *   Injected `special_instruction` into writer prompts.
+
+**Outcome**:
+*   Simplified project structure: "Default" = Master Writer.
+*   Preserved backward compatibility: "With Synthesis" = Legacy.
+*   Full SI support across both architectures.
+
+**Files Modified**:
+*   `scripts/run_enhanced_pipeline.py`
+*   `scripts/run_enhanced_pipeline_with_synthesis.py`
+*   `scripts/run_si_pipeline.py`
+*   `scripts/run_si_pipeline_with_synthesis.py`
+*   `src/agents/master_editor_si.py`
+
+---
+
 ## Session 247 (2026-01-27): Pipeline Input Completeness (Master Editor/Writer)
 
 **Objective**: Ensure the Master Editor/Writer in BOTH pipelines receives all required inputs (psalm text, curated insights, reader questions) and that reader questions are elegantly addressed in the commentary output.

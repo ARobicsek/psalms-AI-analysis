@@ -9,9 +9,10 @@ Always read this file first when you need to find code.
 
 | Script | Namespace | Description | Link |
 |--------|-----------|-------------|------|
-| `run_enhanced_pipeline.py` | `scripts` | Complete psalm commentary generation pipeline orchestrating all agents (Macro/Micro Analyst, Insight Extractor, Synthesis Writer, Master Editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline.py) |
-| `run_enhanced_pipeline_TEST.py` | `scripts` | **EXPERIMENTAL**: Single-pass pipeline that eliminates the Synthesis Writer step — Master Editor writes commentary directly from research inputs (Macro/Micro Analyst → Master Writer → College Writer → Doc Gen). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_TEST.py) |
-| `run_si_pipeline.py` | `scripts` | Special Instruction pipeline that allows human editor ("The Author") to inject overriding instructions into Master Editor generation. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |
+| `run_enhanced_pipeline.py` | `scripts` | **NEW DEFAULT**: Master Writer pipeline (formerly TEST). Single-pass generation from research inputs. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline.py) |
+| `run_enhanced_pipeline_with_synthesis.py` | `scripts` | **LEGACY**: Original Synthesis Writer pipeline (Pass 3 Synthesis → Pass 4 Master Editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_with_synthesis.py) |
+| `run_si_pipeline.py` | `scripts` | **NEW SI**: Special Instruction pipeline using Master Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |
+| `run_si_pipeline_with_synthesis.py` | `scripts` | **LEGACY SI**: Special Instruction pipeline using Synthesis Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline_with_synthesis.py) |
 | `converse_with_editor.py` | `scripts` | Enables multi-turn conversation with Master Editor (GPT-5.1) about a completed psalm commentary with full research context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/converse_with_editor.py) |
 
 ---

@@ -2,8 +2,9 @@
 The pipeline script is: run_enhanced_pipeline.py Basic Usage:
 python scripts/run_enhanced_pipeline.py PSALM_NUMBER
 Examples:
+
 # Generate complete commentary for Psalm 23
-python scripts/run_enhanced_pipeline.py 23
+python scripts/run_enhanced_pipeline.py 23 [This is the new pipeline WITHOUT the synthesis writer.]
 
 # Generate master editor commentaries using SPECIAL INSTRUCTIONS
 
@@ -11,7 +12,10 @@ A - place special instructions here data/special_instructions/special_instructio
 B - python scripts/run_si_pipeline.py 19
 Note: all files preceding the master editor need to have already been created
 
-# 2. Run the SI pipeline
+# Run the OLD pipeline (without a synthesis writer)
+scripts/run_enhanced_pipeline_with_synthesis.py 30
+
+# Run the SI pipeline
 python scripts/run_si_pipeline.py 19
 
 # Or with custom instruction file
@@ -43,7 +47,7 @@ python scripts/run_enhanced_pipeline.py 126 --skip-macro --skip-micro --skip-syn
 python scripts/run_enhanced_pipeline.py 15 --skip-macro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-word-doc --skip-combined-doc
 
 #just all 3 word docs
-python scripts/run_enhanced_pipeline.py 100 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-college --output-dir output/psalm_100
+python scripts/run_enhanced_pipeline.py 100 --skip-macro --skip-micro --skip-synthesis --skip-master-edit --skip-college
 
 #run the RAG thematic match for a single verse in Psalms
 python single_verse_search.py ps 61:4

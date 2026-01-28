@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-27 (Session 247)
+**Last Updated**: 2026-01-28 (Session 248)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 247
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated), College Editor Insights (✅ Integrated), Master Writer Experiment (✅ Test Pipeline Ready)
+- **Current Session**: 248
+- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated), College Editor Insights (✅ Integrated), Master Writer Pipeline (✅ Default Standard)
 
 ---
 
@@ -57,6 +57,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.5)
 
 ---
+
+### Session 248 (2026-01-28): Master Writer Refactoring & SI Pipeline Parity
+- **Refactoring Main**: Promoted `run_enhanced_pipeline_TEST.py` (Master Writer) to default `run_enhanced_pipeline.py`. Preserved legacy flow in `run_enhanced_pipeline_with_synthesis.py`.
+- **Refactoring SI**: Updated `run_si_pipeline.py` to use Master Writer architecture. Created `run_si_pipeline_with_synthesis.py` for legacy SI flow.
+- **Agent Update**: Updated `MasterEditorSI` to support both Editor (Legacy) and Writer (New) modes with special instructions.
+- **Outcome**: Full architectural parity achieved between main and SI pipelines, with "Master Writer" (single-pass) now the default standard.
 
 ### Session 247 (2026-01-27): Pipeline Input Completeness & Reader Questions
 - **Bug Fix**: Closed input gaps — old pipeline now receives `{curated_insights}`, new pipeline now receives `{psalm_text}`, college edition now saves refined reader questions.
