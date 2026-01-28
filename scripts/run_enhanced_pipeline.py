@@ -403,12 +403,37 @@ def run_enhanced_pipeline(
                 trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
                 extractor = InsightExtractor(cost_tracker=cost_tracker)
 
-                # Get psalm text
-                db = TanakhDatabase(Path(db_path))
-                p = db.get_psalm(psalm_number)
-                p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
+                # Get rich psalm text from micro_analysis for prompt
+                p_text = ""
+                verses = []
+                if hasattr(micro_analysis, 'verse_commentaries'):
+                    verses = micro_analysis.verse_commentaries
+                elif isinstance(micro_analysis, dict):
+                    verses = micro_analysis.get('verse_commentaries', [])
+                    
+                if verses:
+                    verse_texts = []
+                    for v in verses:
+                         # Handle Pydantic object or dict
+                         def get_attr(obj, name, default=''):
+                             if isinstance(obj, dict): return obj.get(name, default)
+                             return getattr(obj, name, default)
+                             
+                         v_num = get_attr(v, 'verse_number') or get_attr(v, 'verse', 0)
+                         heb = get_attr(v, 'hebrew_text', '')
+                         eng = get_attr(v, 'english_text', '')
+                         phon = get_attr(v, 'phonetic_transcription', '')
+                         
+                         verse_block = f"Verse {v_num}:\nHebrew: {heb}\nEnglish: {eng}\nPhonetic: {phon}"
+                         verse_texts.append(verse_block)
+                    p_text = "\n\n".join(verse_texts)
 
-                curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, trimmed)
+                if not p_text:
+                    db = TanakhDatabase(Path(db_path))
+                    p = db.get_psalm(psalm_number)
+                    p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
+
+                curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, macro_analysis, trimmed)
                 tracker.track_model_for_step("insight_extractor", extractor.model)
                 extractor.save_insights(curated_insights, insights_file)
             except Exception as e:

@@ -8,6 +8,40 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 251 (2026-01-28): Debugging Question Curator
+
+**Objective**: Debug and fix the Question Curator which was returning empty results for Psalm 31.
+
+**Problems Identified**:
+- Question Curator produced empty lists because of a mismatch between the prompt instructions (requesting a JSON array) and the parsing logic (expecting a JSON object with a specific key).
+- The prompt template also lacked proper escaping for JSON braces, causing string formatting errors.
+
+**Solutions Implemented**:
+1. **Prompt Alignment**: Updated `CURATION_PROMPT` in `question_curator.py` to explicitly request a JSON object with a `curated_questions` key, matching the code's expectation.
+2. **Prompt Fix**: Escaped JSON braces (replaced `{` with `{{`) in the prompt template to prevent formatting failures.
+
+**Files Modified**:
+- `src/agents/question_curator.py` - Updated prompt structure and fixed formatting syntax.
+
+## Session 250 (2026-01-28): Insight Pipeline Integration & College Writer Fixes
+
+**Objective**: Ensure Insight Extractor receives full data context and fix College Writer prompt to include insights and questions.
+
+**Problems Identified**:
+- Insight Extractor was missing `macro_analysis` context and received only raw Hebrew text, limiting insight quality.
+- College Writer prompt lacked reader questions because the Question Generator returned an empty list and no fallback logic existed (unlike the Main Writer).
+- User suspected College Writer wasn't receiving insights (verified it was provided, but improved upstream data quality).
+
+**Solutions Implemented**:
+1. **Insight Extractor Upgrade**: Updated `extract_insights` to accept `macro_analysis` and included it in `INSIGHT_EXTRACTOR_PROMPT`.
+2. **Rich Text Pipeline**: Updated `run_enhanced_pipeline.py` to construct full psalm text (Hebrew + English + Phonetics) from `micro_analysis` for the Insight Extractor.
+3. **College Writer Fallback**: Added logic to `master_editor.py` in `write_college_commentary` to default to raw macro/micro questions if curated questions are missing/empty.
+
+**Files Modified**:
+- `src/agents/insight_extractor.py` - Added macro analysis input and prompt section.
+- `scripts/run_enhanced_pipeline.py` - Implemented rich text construction and passed macro data.
+- `src/agents/master_editor.py` - Added reader question fallback logic for College edition.
+
 ## Session 249 (2026-01-28): Model Updates & Methodology Reporting
 
 **Objective**: Switch Question Curator to Claude Opus 4.5 and fix methodology reporting in generated documentation.

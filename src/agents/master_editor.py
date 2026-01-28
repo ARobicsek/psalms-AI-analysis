@@ -1987,6 +1987,12 @@ class MasterEditorV2:
             except Exception as e:
                 self.logger.warning(f"Could not load reader questions: {e}")
 
+        if reader_questions == "[No reader questions provided]":
+            # Fall back to raw macro/micro questions
+            reader_questions_list = macro_analysis.get('research_questions', []) + micro_analysis.get('interesting_questions', [])
+            if reader_questions_list:
+                reader_questions = "\n".join(f"{i+1}. {q}" for i, q in enumerate(reader_questions_list[:10]))
+
         self.logger.info(f"Writing COLLEGE commentary for Psalm {psalm_number}")
 
         return self._perform_writer_synthesis(

@@ -51,31 +51,35 @@ The commentary will address these questions, so readers can appreciate the insig
 
 ## Your Task
 
-Select and adapt 4-6 questions that will:
+Generate 4-6 questions that will:
 1. **Prime curiosity** - Make readers want to look carefully at the psalm
 2. **Span different aspects** - Structure, language, theological puzzles, reception
 3. **Be specific to THIS psalm** - Not generic "what is the main theme?" questions
 4. **Use engaging scholarly style** - Accessible but intellectually serious
 
-## Transformation Guidelines
+## Guidelines
 
-- Convert scholarly phrasing to inviting phrasing where helpful
+- Use the macro and micro questions as a starting point, but feel free to generate your own question. You have much more information available to you than the agents that generated those questions (they only had the text of the psalm to work with).
+- Keep the phrasing inviting but scholarly
 - Keep Hebrew terms (with English) when they add specificity
-- Add verse references when questions focus on specific passages
-- Ensure questions can be answered by careful reading + the commentary
+- Use verse references when questions focus on specific passages
+- Ensure questions can be answered by careful reading + the research materials.
+- Questions should be thought provoking and original
 
 ## Output Format
 
-Return ONLY a JSON array of 4-6 question strings. Example:
-[
-    "The psalm opens with 'El' but switches to 'YHWH' in verse 8. Why might the poet change divine names?",
-    "Verse 4 says the heavens 'speak' but have 'no words.' Is this a contradiction or something deeper?",
-    "The sun is compared to both a 'bridegroom' and a 'warrior' (v. 6). What do these images together suggest?",
-    "After celebrating Torah's perfection (vv. 8-10), why does the psalmist confess to 'hidden faults' (v. 13)?",
-    "The final verse offers 'words of my mouth' as a kind of sacrifice (v. 15). What does it mean to offer speech to God?"
-]
+Return ONLY a JSON object with a single key "curated_questions" containing the list of strings. Example:
+{{
+    "curated_questions": [
+        "The psalm opens with 'El' but switches to 'YHWH' in verse 8. Why might the poet change divine names?",
+        "Verse 4 says the heavens 'speak' but have 'no words.' Is this a contradiction or something deeper?",
+        "The sun is compared to both a 'bridegroom' and a 'warrior' (v. 6). What do these images together suggest?",
+        "After celebrating Torah's perfection (vv. 8-10), why does the psalmist confess to 'hidden faults' (v. 13)?",
+        "The final verse offers 'words of my mouth' as a kind of sacrifice (v. 15). What does it mean to offer speech to God?"
+    ]
+}}
 
-Return ONLY the JSON array, no additional text.
+Return ONLY the JSON object, no additional text.
 """
 
 
@@ -146,7 +150,7 @@ class QuestionCurator:
         num_questions: int = 5
     ) -> Tuple[List[str], Dict[str, List[str]]]:
         """
-        Curate reader questions from macro/micro analysis files.
+        Curate reader questions.
         
         Args:
             psalm_number: Psalm number

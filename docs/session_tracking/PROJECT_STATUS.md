@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-28 (Session 249)
+**Last Updated**: 2026-01-28 (Session 251)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 249
-- **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated), College Editor Insights (✅ Integrated), Master Writer Pipeline (✅ Default Standard)
+- **Current Session**: 251
+- **Active Features**: Insight Extractor, Master Writer V2, College Writer V2, Question Curator V2, Research Trimmer
 
 ---
 
@@ -58,15 +58,14 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ---
 
-## Recent Work Summary
+## ═══════════════════════════════════════════════════════════════════════════
+## RECENT WORK SUMMARY (Last 3 Sessions)
+## ═══════════════════════════════════════════════════════════════════════════
 
-### Session 249 (2026-01-28): Model Updates & Methodology Reporting
-- **Question Curator**: Switched from Gemini Flash to Claude Opus 4.5 for higher quality reader questions.
-- **Methodology**: Updated DOCX generation to explicitly report "Question Generation" models and fixed "Date Produced" bug.
-- **Pipeline**: Refactored pipeline tracking to ensure completion date is recorded before document generation.
-
-### Session 248 (2026-01-28): Master Writer Refactoring & SI Pipeline Parity
-- **Refactoring Main**: Promoted `run_enhanced_pipeline_TEST.py` (Master Writer) to default `run_enhanced_pipeline.py`. Preserved legacy flow in `run_enhanced_pipeline_with_synthesis.py`.
+*   **Session 251**: Debugged and fixed the Question Curator. Resolved a prompt/parser mismatch where the agent returned a list but the code expected an object. Fixed JSON template escaping. Verified with Psalm 31.
+*   **Session 250**: Upgraded Insight Extractor to receive full psalm text (Hebrew/English/Phonetic) and Macro Analysis context. Fixed College Writer to correctly import Reader Questions, with robust fallback to raw questions if curation fails.
+*   **Session 249**: Switched Question Curator to Claude Opus 4.5 for higher reasoning quality. Fixed methodology reporting in DOCX to correctly list the Question Generator model and the specific completion date.
+*   **Session 248**: Refactored Special Instructions (SI) pipeline to align with the main Master Writer logic. Created `run_si_pipeline_with_synthesis.py` and `run_si_pipeline.py`. Updated documentation to reflect SI integration. Preserved legacy flow in `run_enhanced_pipeline_with_synthesis.py`.
 - **Refactoring SI**: Updated `run_si_pipeline.py` to use Master Writer architecture. Created `run_si_pipeline_with_synthesis.py` for legacy SI flow.
 - **Agent Update**: Updated `MasterEditorSI` to support both Editor (Legacy) and Writer (New) modes with special instructions.
 - **Outcome**: Full architectural parity achieved between main and SI pipelines, with "Master Writer" (single-pass) now the default standard.

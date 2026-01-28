@@ -73,6 +73,9 @@ Your job is to FILTER, not to write. You will receive extensive research materia
 ### PSALM TEXT
 {psalm_text}
 
+### MACRO ANALYSIS (structural analysis)
+{macro_analysis}
+
 ### MICRO ANALYSIS (verse discoveries)
 {micro_analysis}
 
@@ -150,6 +153,7 @@ class InsightExtractor:
         psalm_number: int,
         psalm_text: str,
         micro_analysis: MicroAnalysis,
+        macro_analysis: Dict,
         research_bundle: str,
         max_tokens: int = 4000
     ) -> Dict[str, Any]:
@@ -160,6 +164,7 @@ class InsightExtractor:
             psalm_number: Psalm number
             psalm_text: Full text of the psalm
             micro_analysis: MicroAnalysis object
+            macro_analysis: Macro analysis dictionary
             research_bundle: Full research bundle text
             max_tokens: Max output tokens
 
@@ -171,11 +176,22 @@ class InsightExtractor:
         # Prepare inputs
         micro_markdown = micro_analysis.to_markdown() if hasattr(micro_analysis, 'to_markdown') else str(micro_analysis)
         
+        # Format macro analysis
+        macro_lines = []
+        macro_lines.append(f"**Thesis:** {macro_analysis.get('thesis_statement', 'N/A')}")
+        macro_lines.append(f"**Genre:** {macro_analysis.get('genre', 'N/A')}")
+        if 'structural_outline' in macro_analysis:
+            macro_lines.append("\n**Structure:**")
+            for div in macro_analysis['structural_outline']:
+                macro_lines.append(f"  - {div.get('section', '')}: {div.get('theme', '')}")
+        macro_markdown = "\n".join(macro_lines)
+        
         # Construct prompt
         prompt = INSIGHT_EXTRACTOR_PROMPT.format(
             psalm_number=psalm_number,
             psalm_text=psalm_text,
             micro_analysis=micro_markdown,
+            macro_analysis=macro_markdown,
             research_bundle=research_bundle
         )
         

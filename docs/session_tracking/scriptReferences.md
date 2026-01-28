@@ -24,7 +24,7 @@ Always read this file first when you need to find code.
 | `macro_analyst.py` | `src.agents` | Pass 1: Produces chapter-level thesis and structural framework using Claude Sonnet 4.5 with RAG context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/macro_analyst.py) |
 | `micro_analyst.py` | `src.agents` | Pass 2: Discovery-driven verse-by-verse research using Claude Sonnet 4.5 with extended thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/micro_analyst.py) |
 | `synthesis_writer.py` | `src.agents` | Pass 3: Final commentary synthesis combining macro thesis, micro discoveries, and research bundle. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/synthesis_writer.py) |
-| `master_editor.py` | `src.agents` | Pass 4: Final review and enhancement agent that produces polished scholarly commentary. Also contains experimental `write_commentary()`/`write_college_commentary()` methods for single-pass Master Writer pipeline. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
+| `master_editor.py` | `src.agents` | Pass 4: Final review and enhancement agent (Main and College editions). Includes robust question fallback logic. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
 | `master_editor_si.py` | `src.agents` | Special Instruction variant of Master Editor that supports author directives for alternative versions. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_si.py) |
 | `master_editor_old.py` | `src.agents` | Legacy Master Editor implementation (archived). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_old.py) |
 | `phonetic_analyst.py` | `src.agents` | Transcribes Hebrew text into phonetic/syllabic structure based on reconstructed Biblical Hebrew phonology. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/phonetic_analyst.py) |
@@ -48,7 +48,7 @@ Always read this file first when you need to find code.
 | `rag_manager.py` | `src.agents` | Manages RAG documents (analytical framework, psalm functions, Ugaritic parallels) for agent prompts. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/rag_manager.py) |
 | `scholar_researcher.py` | `src.agents` | Coordinates research requests by generating specific requests for librarian agents from macro overview. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/scholar_researcher.py) |
 | `question_curator.py` | `src.agents` | Generates "Questions for the Reader" from macro/micro analysis using Claude Opus 4.5. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/question_curator.py) |
-| `insight_extractor.py` | `src.agents` | **NEW**: Filters research materials for transformative insights using Claude Opus 4.5 (Phase 2a). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/insight_extractor.py) |
+| `insight_extractor.py` | `src.agents` | **NEW**: Filters research materials for transformative insights using Claude Opus 4.5. Now uses full psalm text and macro context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/insight_extractor.py) |
 
 ---
 
