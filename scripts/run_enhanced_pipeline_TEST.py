@@ -530,7 +530,8 @@ def run_enhanced_pipeline(
                 micro_file=micro_file,
                 research_file=research_file,
                 insights_file=insights_file if insights_file.exists() else None,
-                psalm_number=psalm_number
+                psalm_number=psalm_number,
+                reader_questions_file=reader_questions_file if reader_questions_file.exists() else None
             )
             
             # Track college writer stats

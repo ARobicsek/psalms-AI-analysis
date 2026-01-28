@@ -1292,7 +1292,9 @@ def run_enhanced_pipeline(
                         research_file=research_file,
                         macro_file=macro_file,
                         micro_file=micro_file,
-                        psalm_number=psalm_number
+                        insights_file=insights_file if insights_file.exists() else None,
+                        psalm_number=psalm_number,
+                        reader_questions_file=reader_questions_file if reader_questions_file.exists() else None
                     )
             except openai.RateLimitError as e:
                 logger.error(f"PIPELINE HALTED: OpenAI API quota exceeded during College Editor step. {e}")

@@ -58,10 +58,10 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ---
 
-### Session 247 (2026-01-27): Pipeline Input Completeness (Master Editor/Writer)
-- **Bug Fix**: Old pipeline (`MASTER_EDITOR_PROMPT_V2`) now receives `{curated_insights}` — previously loaded but silently dropped at the `.format()` call.
-- **Bug Fix**: New pipeline (`MASTER_WRITER_PROMPT` + `COLLEGE_WRITER_PROMPT`) now receives `{psalm_text}` (Hebrew, English, LXX, Phonetic) as a standalone reference block.
-- **Bug Fix**: New pipeline college edition now extracts and saves refined reader questions, and passes them to the Word doc generator.
+### Session 247 (2026-01-27): Pipeline Input Completeness & Reader Questions
+- **Bug Fix**: Closed input gaps — old pipeline now receives `{curated_insights}`, new pipeline now receives `{psalm_text}`, college edition now saves refined reader questions.
+- **Feature**: All four prompts (main/college × editor/writer) now receive `{reader_questions}`, have hook-to-questions instructions, and validate that questions are elegantly addressed in the output.
+- **Plumbing**: Updated both pipeline scripts to pass `reader_questions_file` and `insights_file` to college methods.
 
 ### Session 246 (2026-01-27): Fix Methodology Section Accounting & Insight Model Tracking
 - **Bug Fix**: Fixed stale "Master Editor Prompt Size" in Methodology section — print-ready formatter was reading pre-update JSON (298,295 vs correct 291,290).

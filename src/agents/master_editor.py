@@ -574,6 +574,9 @@ If you catch yourself using these words, stop and ask: "What is actually happeni
 ### ANALYTICAL FRAMEWORK (poetic conventions reference)
 {analytical_framework}
 
+### READER QUESTIONS (questions readers will see before reading)
+{reader_questions}
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -731,6 +734,7 @@ Your commentary should:
 ☐ When a verse has multiple readings, both are named and the tension is explained
 ☐ No "blurry" sentences — abstract nouns always paired with concrete verbs
 ☐ Each verse has at least one insight a student couldn't get from the English translation alone
+☐ READER QUESTIONS: Each question from the READER QUESTIONS input is elegantly addressed somewhere in the intro essay or verse commentary — not by restating the question, but by ensuring the reader discovers the answer naturally
 
 ### STAGE 4: REFINED READER QUESTIONS
 
@@ -985,6 +989,12 @@ Before finalizing, review each verse with figurative language:
 **3. RELATIONSHIP TO INTRODUCTION:**
    - Complement the introduction. Don't simply repeat it. Before writing about each verse, ask: "What can I add that the intro didn't say?" Add different commentator views, liturgical deployments not mentioned, textual variants, specific philological oddities.
 
+### VALIDATION CHECK — Reader Questions:
+Before finalizing, review the READER QUESTIONS input:
+- ✓ Is each question elegantly addressed somewhere in the introduction essay or verse commentary?
+- ✓ The answer should emerge naturally from the analysis — don't restate the question, let the reader discover the answer.
+- ✓ If a question isn't addressed, weave relevant material into the appropriate section.
+
 ### STAGE 4: REFINED READER QUESTIONS
 
 Based on your writing, generate **4-6 refined "Questions for the Reader"** that will appear BEFORE the commentary.
@@ -1098,6 +1108,9 @@ Ask: "Could the student figure this out from a good English translation alone?" 
 ### ANALYTICAL FRAMEWORK
 {analytical_framework}
 
+### READER QUESTIONS (questions readers will see before reading)
+{reader_questions}
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -1107,7 +1120,7 @@ Ask: "Could the student figure this out from a good English translation alone?" 
 You will write THREE sections.
 
 ### STAGE 1: INTRODUCTION ESSAY (800-1400 words)
-- **Hook first**: Open with a puzzle, surprise, or counterintuitive observation.
+- **Hook first—and connect to READER QUESTIONS**: Open with a puzzle, surprise, or counterintuitive observation. Look at the READER QUESTIONS—your hook should set up one or more of these questions.
 - **Synthesize**: Combine Macro, Micro, Research, and Insights. Show how lexical evidence supports or challenges the thesis.
 - **Engage**: Use "Deep Web Research" for cultural connections (music, politics, stories, reception history).
 - **Explain**: Define all terms on first use.
@@ -1155,6 +1168,12 @@ For each verse with figurative language:
 - ✓ At least ONE quoted biblical parallel?
 - ✓ An insight about THIS verse derived from the comparison?
 - ✓ Pattern analysis (how common, where else)?
+
+### VALIDATION CHECK — Reader Questions:
+Before finalizing, review the READER QUESTIONS input:
+- ✓ Is each question elegantly addressed somewhere in the introduction essay or verse commentary?
+- ✓ The answer should emerge naturally from the analysis — don't restate the question, let the reader discover the answer.
+- ✓ If a question isn't addressed, weave relevant material into the appropriate section.
 
 ### STAGE 4: REFINED READER QUESTIONS (College Level)
 - 4-6 questions that hook curiosity and set up insights.
@@ -1590,7 +1609,8 @@ class MasterEditorV2:
         micro_file: Path,
         insights_file: Optional[Path] = None,
         psalm_text_file: Optional[Path] = None,
-        psalm_number: Optional[int] = None
+        psalm_number: Optional[int] = None,
+        reader_questions_file: Optional[Path] = None
     ) -> Dict[str, str]:
         """
         Generate college edition commentary.
@@ -1635,6 +1655,19 @@ class MasterEditorV2:
             except Exception as e:
                 self.logger.warning(f"Could not load curated insights: {e}")
 
+        # Load reader questions if available
+        reader_questions = "[No reader questions provided]"
+        if reader_questions_file and reader_questions_file.exists():
+            try:
+                with open(reader_questions_file, 'r', encoding='utf-8') as f:
+                    rq_data = json.load(f)
+                questions = rq_data.get('curated_questions', [])
+                if questions:
+                    reader_questions = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
+                    self.logger.info(f"  Reader questions: {len(questions)} questions loaded")
+            except Exception as e:
+                self.logger.warning(f"Could not load reader questions: {e}")
+
         self.logger.info(f"Creating college edition for Psalm {psalm_number}")
 
         # Use college model and prompt
@@ -1645,10 +1678,10 @@ class MasterEditorV2:
             research_bundle=research_bundle,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
-
             psalm_text=psalm_text,
             analytical_framework=analytical_framework,
-            curated_insights=curated_insights
+            curated_insights=curated_insights,
+            reader_questions=reader_questions
         )
 
         self.logger.info("College edition complete (V2)")
@@ -1664,7 +1697,8 @@ class MasterEditorV2:
         micro_analysis: Dict,
         psalm_text: str,
         analytical_framework: str,
-        curated_insights: Dict = None
+        curated_insights: Dict = None,
+        reader_questions: str = "[No reader questions provided]"
     ) -> Dict[str, str]:
         """Perform college edition review using appropriate model."""
 
@@ -1682,7 +1716,8 @@ class MasterEditorV2:
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             analytical_framework=analytical_framework,
-            curated_insights=insights_text
+            curated_insights=insights_text,
+            reader_questions=reader_questions
         )
 
         # Save prompt for debugging
@@ -1906,14 +1941,15 @@ class MasterEditorV2:
         micro_file: Path,
         research_file: Path,
         insights_file: Optional[Path] = None,
-        psalm_number: Optional[int] = None
+        psalm_number: Optional[int] = None,
+        reader_questions_file: Optional[Path] = None
     ) -> Dict[str, str]:
         """
         Generate college commentary (Writer Mode).
         """
         self.logger.info("Starting Master Writer COLLEGE commentary generation")
-        
-        # Load inputs (Similar to above)
+
+        # Load inputs
         macro_analysis = self._load_json_file(macro_file)
         micro_analysis = self._load_json_file(micro_file)
         if not psalm_number:
@@ -1938,6 +1974,19 @@ class MasterEditorV2:
 
         phonetic_section = self._format_phonetic_section(micro_analysis)
 
+        # Load reader questions if available
+        reader_questions = "[No reader questions provided]"
+        if reader_questions_file and Path(reader_questions_file).exists():
+            try:
+                with open(reader_questions_file, 'r', encoding='utf-8') as f:
+                    rq_data = json.load(f)
+                questions = rq_data.get('curated_questions', [])
+                if questions:
+                    reader_questions = "\n".join(f"{i}. {q}" for i, q in enumerate(questions, 1))
+                    self.logger.info(f"  Reader questions: {len(questions)} questions loaded for college")
+            except Exception as e:
+                self.logger.warning(f"Could not load reader questions: {e}")
+
         self.logger.info(f"Writing COLLEGE commentary for Psalm {psalm_number}")
 
         return self._perform_writer_synthesis(
@@ -1949,7 +1998,7 @@ class MasterEditorV2:
             phonetic_section=phonetic_section,
             curated_insights=curated_insights,
             analytical_framework=analytical_framework,
-            reader_questions="", # Not used for college
+            reader_questions=reader_questions,
             is_college=True
         )
 
@@ -1977,7 +2026,6 @@ class MasterEditorV2:
         if is_college:
             prompt_template = COLLEGE_WRITER_PROMPT
             model = self.college_model
-            # College prompt doesn't use reader_questions input
             prompt = prompt_template.format(
                 psalm_number=psalm_number,
                 psalm_text=psalm_text,
@@ -1986,7 +2034,8 @@ class MasterEditorV2:
                 research_bundle=research_bundle,
                 phonetic_section=phonetic_section,
                 curated_insights=insights_text,
-                analytical_framework=analytical_framework
+                analytical_framework=analytical_framework,
+                reader_questions=reader_questions
             )
             debug_prefix = "college_writer"
         else:

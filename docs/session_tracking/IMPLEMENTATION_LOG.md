@@ -10,25 +10,30 @@ This file contains detailed session history for sessions 200 and later.
 
 ## Session 247 (2026-01-27): Pipeline Input Completeness (Master Editor/Writer)
 
-**Objective**: Ensure the Master Editor/Writer in BOTH pipelines receives all required inputs: psalm text (Hebrew + English), phonetic transcriptions, and curated insights.
+**Objective**: Ensure the Master Editor/Writer in BOTH pipelines receives all required inputs (psalm text, curated insights, reader questions) and that reader questions are elegantly addressed in the commentary output.
 
 **Problems Identified**:
-- **Old pipeline (`MASTER_EDITOR_PROMPT_V2`)**: `{curated_insights}` placeholder missing from prompt template. `_perform_editorial_review_gpt()` and `_perform_editorial_review_claude()` accepted `curated_insights` parameter but never injected it into the `.format()` call — insights were loaded from disk, passed through the call chain, then silently dropped.
-- **New pipeline (`MASTER_WRITER_PROMPT` + `COLLEGE_WRITER_PROMPT`)**: No `{psalm_text}` section providing the Hebrew, English, and LXX text as a standalone reference block. `write_commentary()` and `write_college_commentary()` never called `_get_psalm_text()`.
-- **New pipeline college reader questions**: `run_enhanced_pipeline_TEST.py` Step 4b did not extract or save refined reader questions from the college writer response, and Step 6b passed `None` to the college Word doc generator for the questions file.
+- **Old pipeline (`MASTER_EDITOR_PROMPT_V2`)**: `{curated_insights}` placeholder missing from prompt template — insights silently dropped at `.format()` call.
+- **New pipeline (`MASTER_WRITER_PROMPT` + `COLLEGE_WRITER_PROMPT`)**: No `{psalm_text}` section providing Hebrew, English, and LXX text as a standalone reference block.
+- **New pipeline college reader questions**: `run_enhanced_pipeline_TEST.py` did not extract/save refined reader questions from college writer, and passed `None` to doc generator.
+- **Reader questions gap**: Only `MASTER_EDITOR_PROMPT_V2` (old main) had all three elements: receives `{reader_questions}` input, hook instruction, and "ensure answered" checklist. The other three prompts were missing one or more.
 
 **Solutions Implemented**:
-1. Added `### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)` / `{curated_insights}` placeholder to `MASTER_EDITOR_PROMPT_V2` template.
-2. Added `insights_text = self._format_insights_for_prompt(curated_insights)` and `curated_insights=insights_text` to both `_perform_editorial_review_gpt()` and `_perform_editorial_review_claude()` format calls.
-3. Added `### PSALM TEXT (Hebrew, English, LXX, Phonetic)` / `{psalm_text}` placeholder to both `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT` templates.
-4. Added `psalm_text = self._get_psalm_text(psalm_number, micro_analysis)` loading in `write_commentary()` and `write_college_commentary()`.
-5. Updated `_perform_writer_synthesis()` signature to accept `psalm_text` and inject it into both main and college `.format()` calls.
-6. Added college reader question extraction logic in `run_enhanced_pipeline_TEST.py` Step 4b (mirrors main writer pattern).
-7. Updated Step 6b to pass `_reader_questions_college_refined.json` to `DocumentGenerator` instead of `None`.
+1. Added `{curated_insights}` placeholder to `MASTER_EDITOR_PROMPT_V2` and both GPT/Claude format calls.
+2. Added `{psalm_text}` placeholder to `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT`; loaded via `_get_psalm_text()` in both writer methods; threaded through `_perform_writer_synthesis()`.
+3. Added college reader question extraction in `run_enhanced_pipeline_TEST.py` Step 4b and college question pass-through to doc gen (Step 6b).
+4. Added `{reader_questions}` input to `COLLEGE_EDITOR_PROMPT_V2` and `COLLEGE_WRITER_PROMPT` templates.
+5. Added "VALIDATION CHECK — Reader Questions" to `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT` (ensure each question is elegantly addressed in essay or verse commentary).
+6. Added reader questions checklist item to `COLLEGE_EDITOR_PROMPT_V2` FINAL CHECKLIST.
+7. Updated hook instruction in `COLLEGE_WRITER_PROMPT` Stage 1 to connect to reader questions.
+8. Plumbed `reader_questions` through `edit_college_commentary()`, `_perform_college_review()`, `write_college_commentary()`, and `_perform_writer_synthesis()` college branch.
+9. Updated `run_enhanced_pipeline.py` to pass `insights_file` and `reader_questions_file` to `edit_college_commentary()`.
+10. Updated `run_enhanced_pipeline_TEST.py` to pass `reader_questions_file` to `write_college_commentary()`.
 
 **Files Modified**:
-- `src/agents/master_editor.py` - Added `{curated_insights}` to old pipeline prompt + format calls; added `{psalm_text}` to new pipeline prompts + writer methods + `_perform_writer_synthesis()`
-- `scripts/run_enhanced_pipeline_TEST.py` - Added college reader question extraction (Step 4b) and college question pass-through to doc gen (Step 6b)
+- `src/agents/master_editor.py` - All four prompt templates updated; method signatures and format calls updated for curated_insights, psalm_text, and reader_questions
+- `scripts/run_enhanced_pipeline.py` - Old pipeline now passes insights_file and reader_questions_file to college editor
+- `scripts/run_enhanced_pipeline_TEST.py` - College reader question extraction (Step 4b), doc gen pass-through (Step 6b), reader_questions_file to college writer
 
 ---
 
