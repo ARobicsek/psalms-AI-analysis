@@ -545,6 +545,28 @@ def run_enhanced_pipeline(
             with open(edited_verses_college_file, 'w', encoding='utf-8') as f:
                 f.write(result['verse_commentary'])
 
+            # Extract refined reader questions from college writer output
+            if result.get('reader_questions'):
+                refined_questions_college_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
+                questions_text = result['reader_questions']
+                questions = []
+                for line in questions_text.strip().split('\n'):
+                    line = line.strip()
+                    match = re.match(r'^(\d+)\.\s+(.+)$', line)
+                    if match:
+                        q = match.group(2).strip()
+                        if q and len(q) > 10:
+                            questions.append(q)
+
+                if questions:
+                    with open(refined_questions_college_file, 'w', encoding='utf-8') as f:
+                        json.dump({
+                            'psalm_number': psalm_number,
+                            'curated_questions': questions,
+                            'source': 'college_writer_refined'
+                        }, f, ensure_ascii=False, indent=2)
+                    logger.info(f"Extracted {len(questions)} college refined reader questions")
+
             logger.info(f"College Writer complete for Psalm {psalm_number}")
             print(f"  College Introduction: {edited_intro_college_file}")
             print(f"  College Verses: {edited_verses_college_file}\n")
@@ -611,7 +633,9 @@ def run_enhanced_pipeline(
         print(f"STEP 6b: College Word Document (.docx)")
         print(f"{'='*80}\n")
         try:
-            gen = DocumentGenerator(psalm_number, edited_intro_college_file, edited_verses_college_file, summary_json_file, docx_output_college_file, None)
+            refined_q_college = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
+            college_q_file = refined_q_college if refined_q_college.exists() else None
+            gen = DocumentGenerator(psalm_number, edited_intro_college_file, edited_verses_college_file, summary_json_file, docx_output_college_file, college_q_file)
             gen.generate()
             print(f"  College Word doc: {docx_output_college_file}\n")
         except Exception as e:

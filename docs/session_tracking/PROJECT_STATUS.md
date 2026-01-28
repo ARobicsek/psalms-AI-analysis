@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-27 (Session 246)
+**Last Updated**: 2026-01-27 (Session 247)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 246
+- **Current Session**: 247
 - **Active Features**: Master Editor V2, Gemini 2.5 Pro Fallback, Deep Web Research Integration, Special Instruction Pipeline, Converse with Editor, Priority-Based Figurative Trimming, Figurative Curator, Refined Reader Questions, Hook-First Introductions, RTL Hebrew Text Formatting, Model Tracking, SI Pipeline Engagement Sync, Insight Quality Rules (✅ Phase 1-2c Complete), Insight Extractor (✅ Integrated), College Editor Insights (✅ Integrated), Master Writer Experiment (✅ Test Pipeline Ready)
 
 ---
@@ -57,6 +57,11 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.5)
 
 ---
+
+### Session 247 (2026-01-27): Pipeline Input Completeness (Master Editor/Writer)
+- **Bug Fix**: Old pipeline (`MASTER_EDITOR_PROMPT_V2`) now receives `{curated_insights}` — previously loaded but silently dropped at the `.format()` call.
+- **Bug Fix**: New pipeline (`MASTER_WRITER_PROMPT` + `COLLEGE_WRITER_PROMPT`) now receives `{psalm_text}` (Hebrew, English, LXX, Phonetic) as a standalone reference block.
+- **Bug Fix**: New pipeline college edition now extracts and saves refined reader questions, and passes them to the Word doc generator.
 
 ### Session 246 (2026-01-27): Fix Methodology Section Accounting & Insight Model Tracking
 - **Bug Fix**: Fixed stale "Master Editor Prompt Size" in Methodology section — print-ready formatter was reading pre-update JSON (298,295 vs correct 291,290).

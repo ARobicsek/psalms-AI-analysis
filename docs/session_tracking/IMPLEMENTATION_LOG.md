@@ -8,6 +8,30 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 247 (2026-01-27): Pipeline Input Completeness (Master Editor/Writer)
+
+**Objective**: Ensure the Master Editor/Writer in BOTH pipelines receives all required inputs: psalm text (Hebrew + English), phonetic transcriptions, and curated insights.
+
+**Problems Identified**:
+- **Old pipeline (`MASTER_EDITOR_PROMPT_V2`)**: `{curated_insights}` placeholder missing from prompt template. `_perform_editorial_review_gpt()` and `_perform_editorial_review_claude()` accepted `curated_insights` parameter but never injected it into the `.format()` call — insights were loaded from disk, passed through the call chain, then silently dropped.
+- **New pipeline (`MASTER_WRITER_PROMPT` + `COLLEGE_WRITER_PROMPT`)**: No `{psalm_text}` section providing the Hebrew, English, and LXX text as a standalone reference block. `write_commentary()` and `write_college_commentary()` never called `_get_psalm_text()`.
+- **New pipeline college reader questions**: `run_enhanced_pipeline_TEST.py` Step 4b did not extract or save refined reader questions from the college writer response, and Step 6b passed `None` to the college Word doc generator for the questions file.
+
+**Solutions Implemented**:
+1. Added `### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)` / `{curated_insights}` placeholder to `MASTER_EDITOR_PROMPT_V2` template.
+2. Added `insights_text = self._format_insights_for_prompt(curated_insights)` and `curated_insights=insights_text` to both `_perform_editorial_review_gpt()` and `_perform_editorial_review_claude()` format calls.
+3. Added `### PSALM TEXT (Hebrew, English, LXX, Phonetic)` / `{psalm_text}` placeholder to both `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT` templates.
+4. Added `psalm_text = self._get_psalm_text(psalm_number, micro_analysis)` loading in `write_commentary()` and `write_college_commentary()`.
+5. Updated `_perform_writer_synthesis()` signature to accept `psalm_text` and inject it into both main and college `.format()` calls.
+6. Added college reader question extraction logic in `run_enhanced_pipeline_TEST.py` Step 4b (mirrors main writer pattern).
+7. Updated Step 6b to pass `_reader_questions_college_refined.json` to `DocumentGenerator` instead of `None`.
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Added `{curated_insights}` to old pipeline prompt + format calls; added `{psalm_text}` to new pipeline prompts + writer methods + `_perform_writer_synthesis()`
+- `scripts/run_enhanced_pipeline_TEST.py` - Added college reader question extraction (Step 4b) and college question pass-through to doc gen (Step 6b)
+
+---
+
 ## Session 246 (2026-01-27): Fix Methodology Section Accounting & Insight Model Tracking
 
 **Objective**: Fix incorrect "Master Editor Prompt Size" character count in Methodology section and add programmatic Insight Extractor model attribution to both pipelines.

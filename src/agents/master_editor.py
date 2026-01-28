@@ -197,6 +197,9 @@ If you find yourself using these words, STOP. Ask: "What is God actually DOING? 
 ### READER QUESTIONS (questions readers will see before reading)
 {reader_questions}
 
+### PRIORITIZED INSIGHTS (FROM INSIGHT EXTRACTOR)
+{curated_insights}
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -868,6 +871,9 @@ Your tone is one of measured confidence, not breathless praise. Illuminate the t
 ## YOUR INPUTS
 ## ═══════════════════════════════════════════════════════════════════════════
 
+### PSALM TEXT (Hebrew, English, LXX, Phonetic)
+{psalm_text}
+
 ### MACRO THESIS (structural analysis)
 {macro_analysis}
 
@@ -1070,6 +1076,9 @@ Ask: "Could the student figure this out from a good English translation alone?" 
 ## ═══════════════════════════════════════════════════════════════════════════
 ## YOUR INPUTS
 ## ═══════════════════════════════════════════════════════════════════════════
+
+### PSALM TEXT (Hebrew, English, LXX, Phonetic)
+{psalm_text}
 
 ### MACRO THESIS (structural analysis)
 {macro_analysis}
@@ -1406,6 +1415,7 @@ class MasterEditorV2:
         # Format inputs
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
         micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+        insights_text = self._format_insights_for_prompt(curated_insights)
 
         # Build prompt using V2 template
         prompt = MASTER_EDITOR_PROMPT_V2.format(
@@ -1417,7 +1427,8 @@ class MasterEditorV2:
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             analytical_framework=analytical_framework,
-            reader_questions=reader_questions
+            reader_questions=reader_questions,
+            curated_insights=insights_text
         )
 
         # Save prompt for debugging
@@ -1498,6 +1509,7 @@ class MasterEditorV2:
         # Format inputs
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
         micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+        insights_text = self._format_insights_for_prompt(curated_insights)
 
         # Build prompt
         prompt = MASTER_EDITOR_PROMPT_V2.format(
@@ -1509,9 +1521,9 @@ class MasterEditorV2:
             macro_analysis=macro_text,
             micro_analysis=micro_text,
             analytical_framework=analytical_framework,
-            reader_questions=reader_questions
+            reader_questions=reader_questions,
+            curated_insights=insights_text
         )
-
 
         # Save prompt for debugging
         prompt_file = Path(f"output/debug/master_editor_v2_prompt_psalm_{psalm_number}.txt")
@@ -1822,6 +1834,10 @@ class MasterEditorV2:
         if not psalm_number:
             psalm_number = macro_analysis.get('psalm_number', 0)
 
+        # Load psalm text (Hebrew, English, phonetic)
+        psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
+        self.logger.info(f"  Psalm text: {len(psalm_text)} chars")
+
         # Load research bundle (with optional trimming)
         research_bundle_raw = self._load_text_file(research_file)
 
@@ -1869,13 +1885,14 @@ class MasterEditorV2:
                 reader_questions = "\n".join(f"{i+1}. {q}" for i, q in enumerate(reader_questions_list[:10]))
 
         self.logger.info(f"Writing commentary for Psalm {psalm_number}")
-        
+
         # Perform writing
         return self._perform_writer_synthesis(
             psalm_number=psalm_number,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
             research_bundle=research_bundle,
+            psalm_text=psalm_text,
             phonetic_section=phonetic_section,
             curated_insights=curated_insights,
             analytical_framework=analytical_framework,
@@ -1901,10 +1918,13 @@ class MasterEditorV2:
         micro_analysis = self._load_json_file(micro_file)
         if not psalm_number:
             psalm_number = macro_analysis.get('psalm_number', 0)
-            
+
+        # Load psalm text (Hebrew, English, phonetic)
+        psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
+
         research_bundle_raw = self._load_text_file(research_file)
         research_bundle, _, _ = self.research_trimmer.trim_bundle(research_bundle_raw, max_chars=350000)
-        
+
         curated_insights = None
         if insights_file and insights_file.exists():
             curated_insights = self._load_json_file(insights_file)
@@ -1915,20 +1935,17 @@ class MasterEditorV2:
             analytical_framework = rag_manager.load_analytical_framework()
         except Exception:
             analytical_framework = "[Analytical framework not available]"
-            
+
         phonetic_section = self._format_phonetic_section(micro_analysis)
-        reader_questions = "" # College prompt doesn't explicitly look for reader questions input, but uses them? 
-        # Actually COLLEGE_WRITER_PROMPT doesn't have {reader_questions} in inputs section!
-        # Let's check. Yes it does NOT. It has {analytical_framework}.
-        # So we skip reader_questions for college prompt inputs.
 
         self.logger.info(f"Writing COLLEGE commentary for Psalm {psalm_number}")
-        
+
         return self._perform_writer_synthesis(
             psalm_number=psalm_number,
             macro_analysis=macro_analysis,
             micro_analysis=micro_analysis,
             research_bundle=research_bundle,
+            psalm_text=psalm_text,
             phonetic_section=phonetic_section,
             curated_insights=curated_insights,
             analytical_framework=analytical_framework,
@@ -1942,6 +1959,7 @@ class MasterEditorV2:
         macro_analysis: Dict,
         micro_analysis: Dict,
         research_bundle: str,
+        psalm_text: str,
         phonetic_section: str,
         curated_insights: Dict,
         analytical_framework: str,
@@ -1949,12 +1967,12 @@ class MasterEditorV2:
         is_college: bool
     ) -> Dict[str, str]:
         """Execute the writer prompt with appropriate model."""
-        
+
         # Format common inputs
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
         micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
         insights_text = self._format_insights_for_prompt(curated_insights)
-        
+
         # Select prompt and model
         if is_college:
             prompt_template = COLLEGE_WRITER_PROMPT
@@ -1962,6 +1980,7 @@ class MasterEditorV2:
             # College prompt doesn't use reader_questions input
             prompt = prompt_template.format(
                 psalm_number=psalm_number,
+                psalm_text=psalm_text,
                 macro_analysis=macro_text,
                 micro_analysis=micro_text,
                 research_bundle=research_bundle,
@@ -1975,6 +1994,7 @@ class MasterEditorV2:
             model = self.model
             prompt = prompt_template.format(
                 psalm_number=psalm_number,
+                psalm_text=psalm_text,
                 macro_analysis=macro_text,
                 micro_analysis=micro_text,
                 research_bundle=research_bundle,
