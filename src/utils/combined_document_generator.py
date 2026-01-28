@@ -1307,6 +1307,9 @@ Methodological & Bibliographical Summary
                 if 'figurative_curator' in model_usage:
                     summary_text += f"\n**Figurative Curator**: {model_usage.get('figurative_curator', 'N/A')}"
                 
+                if 'question_curator' in model_usage:
+                    summary_text += f"\n**Question Generation**: {model_usage.get('question_curator', 'N/A')}"
+                
                 if 'insight_extractor' in model_usage:
                     summary_text += f"\n**Insights Extraction**: {model_usage.get('insight_extractor', 'N/A')}"
 

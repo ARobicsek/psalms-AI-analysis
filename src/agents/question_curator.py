@@ -101,19 +101,41 @@ class QuestionCurator:
         self.logger = logger or get_logger("question_curator")
         self.cost_tracker = cost_tracker or CostTracker()
         
-        # Initialize Gemini client
-        self.gemini_api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-        if not self.gemini_api_key:
-            self.logger.warning("No Gemini API key found. Question curation will use fallback extraction.")
+    @property
+    def active_model(self) -> str:
+        """Return the active model identifier."""
+        return self.model
+
+    def __init__(
+        self,
+        logger=None,
+        cost_tracker: Optional[CostTracker] = None,
+        model: str = "claude-opus-4-5"
+    ):
+        """
+        Initialize QuestionCurator.
+        
+        Args:
+            logger: Logger instance
+            cost_tracker: CostTracker instance for tracking API costs
+            model: Model identifier to use (default: claude-opus-4-5)
+        """
+        self.logger = logger or get_logger("question_curator")
+        self.cost_tracker = cost_tracker or CostTracker()
+        self.model = model
+        
+        # Initialize Anthropic client
+        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not self.api_key:
+            self.logger.warning("No ANTHROPIC_API_KEY found. Question curation will use fallback extraction.")
             self.client = None
         else:
             try:
-                import google.generativeai as genai
-                genai.configure(api_key=self.gemini_api_key)
-                self.client = genai.GenerativeModel("gemini-2.0-flash")
-                self.logger.info("QuestionCurator initialized with Gemini Flash")
+                import anthropic
+                self.client = anthropic.Anthropic(api_key=self.api_key)
+                self.logger.info(f"QuestionCurator initialized with {self.model}")
             except ImportError:
-                self.logger.warning("google-generativeai not installed. Using fallback extraction.")
+                self.logger.warning("anthropic library not installed. Using fallback extraction.")
                 self.client = None
     
     def curate_questions(
@@ -199,8 +221,12 @@ class QuestionCurator:
         micro_questions: List[str],
         num_questions: int
     ) -> List[str]:
-        """Use Gemini Flash to curate questions."""
-        self.logger.info("  Using Gemini Flash for question curation")
+        """Use Claude to curate questions."""
+        if not self.client:
+            self.logger.warning("No LLM client available, skipping LLM curation")
+            return []
+            
+        self.logger.info(f"  Using {self.model} for question curation")
         
         # Format questions for prompt
         macro_formatted = "\n".join(f"- {q}" for q in macro_questions) if macro_questions else "(none available)"
@@ -212,43 +238,46 @@ class QuestionCurator:
             micro_questions=micro_formatted
         )
         
-        # Call Gemini Flash
-        response = self.client.generate_content(prompt)
-        
-        # Track usage
-        if hasattr(response, 'usage_metadata'):
-            usage = response.usage_metadata
-            self.cost_tracker.add_usage(
-                model="gemini-2.0-flash",
-                input_tokens=getattr(usage, 'prompt_token_count', 0),
-                output_tokens=getattr(usage, 'candidates_token_count', 0)
+        try:
+            # Call Anthropic API
+            message = self.client.messages.create(
+                model=self.model,
+                max_tokens=2048,
+                temperature=0.7,
+                system="You are an expert biblical scholar and editor helping to curate questions for a study application.",
+                messages=[
+                    {"role": "user", "content": prompt}
+                ]
             )
-        
-        # Parse response
-        response_text = response.text.strip()
-        
-        # Clean up response if wrapped in markdown
-        if response_text.startswith("```"):
-            lines = response_text.split('\n')
-            json_lines = []
-            in_json = False
-            for line in lines:
-                if line.startswith("```"):
-                    if in_json:
-                        break
-                    in_json = True
-                    continue
-                if in_json:
-                    json_lines.append(line)
-            response_text = '\n'.join(json_lines)
-        
-        questions = json.loads(response_text)
-        
-        if not isinstance(questions, list):
-            raise ValueError("Expected list of questions from LLM")
-        
-        self.logger.info(f"  ✓ LLM curated {len(questions)} questions")
-        return questions[:num_questions + 1]  # Allow up to 6
+            
+            # Track usage
+            if hasattr(message, 'usage'):
+                self.cost_tracker.add_usage(
+                    model=self.model,
+                    input_tokens=message.usage.input_tokens,
+                    output_tokens=message.usage.output_tokens
+                )
+                
+            response_text = message.content[0].text
+            
+            # Parse JSON from response
+            # Look for JSON block
+            import re
+            json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
+            if json_match:
+                try:
+                    data = json.loads(json_match.group(0))
+                    # Handle case where response might be wrapped in dict or just list
+                    # But prompt asks for valid JSON with specific key usually
+                    return data.get("curated_questions", [])
+                except json.JSONDecodeError:
+                    self.logger.warning("Failed to parse JSON from LLM response")
+            
+            return []
+            
+        except Exception as e:
+            self.logger.error(f"Error calling LLM: {e}")
+            return []
     
     def _fallback_extraction(
         self,

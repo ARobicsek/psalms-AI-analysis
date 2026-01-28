@@ -400,6 +400,7 @@ def run_enhanced_pipeline(
             curator = QuestionCurator(cost_tracker=cost_tracker)
             q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
             curator.save_questions(q, s, output_path, psalm_number)
+            tracker.track_model_for_step("question_curator", curator.active_model)
         except Exception as e:
             logger.warning(f"Question curation failed: {e}")
 

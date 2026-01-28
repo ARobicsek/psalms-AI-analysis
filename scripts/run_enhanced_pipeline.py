@@ -375,6 +375,7 @@ def run_enhanced_pipeline(
             curator = QuestionCurator(cost_tracker=cost_tracker)
             q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
             curator.save_questions(q, s, output_path, psalm_number)
+            tracker.track_model_for_step("question_curator", curator.active_model)
         except Exception as e:
             logger.warning(f"Question curation failed: {e}")
 
@@ -582,6 +583,7 @@ def run_enhanced_pipeline(
         time.sleep(delay_between_steps)
 
     # --- Save stats to disk before print-ready step (which reads the JSON as a subprocess) ---
+    tracker.mark_pipeline_complete() # Ensure completion date is recorded for docs
     tracker.save_json(str(output_path))
 
     # =====================================================================

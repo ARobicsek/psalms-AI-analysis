@@ -8,6 +8,28 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 249 (2026-01-28): Model Updates & Methodology Reporting
+
+**Objective**: Switch Question Curator to Claude Opus 4.5 and fix methodology reporting in generated documentation.
+
+**Problems Identified**:
+- Question Curator was using `GEMINI-2.0-FLASH` which produced suboptimal questions.
+- Methodology section in DOCX did not list the model used for Question Generation.
+- "Date Produced" field in DOCX output showed "Date not available".
+
+**Solutions Implemented**:
+1.  **Question Curator Upgrade**: Refactored `QuestionCurator` to use `claude-opus-4-5` via Anthropic API.
+2.  **Methodology Reporting**: Updated `document_generator.py` and `combined_document_generator.py` to explicitly list `Question Generation` model usage.
+3.  **Date Produced Fix**: Moved pipeline completion tracking (which sets the date) to occur *before* document generation in `run_enhanced_pipeline.py`.
+
+**Files Modified**:
+- `src/agents/question_curator.py` - Switched to Anthropic client and Opus 4.5 model.
+- `scripts/run_enhanced_pipeline.py` - Added model tracking and fixed completion date timing.
+- `scripts/run_enhanced_pipeline_with_synthesis.py` - Added model tracking.
+- `scripts/run_si_pipeline.py` - Added model tracking.
+- `src/utils/document_generator.py` - Added Question Generation model to methodology summary.
+- `src/utils/combined_document_generator.py` - Added Question Generation model to methodology summary.
+
 ## Session 248 (2026-01-28): Master Writer Refactoring & SI Pipeline Parity
 
 **Objective**: Eliminate the experimental "TEST" pipeline by promoting the single-pass "Master Writer" approach to become the default standard, while preserving the legacy "Synthesis Writer" approach in dedicated scripts. Ensure feature parity for Special Instructions (SI) pipelines.

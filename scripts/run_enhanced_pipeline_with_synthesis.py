@@ -718,6 +718,7 @@ def run_enhanced_pipeline(
                 output_path=output_path,
                 psalm_number=psalm_number
             )
+            tracker.track_model_for_step("question_curator", question_curator.active_model)
             
             logger.info(f"✓ Reader questions curated: {len(curated_questions)} questions")
             print(f"✓ Reader questions: {reader_questions_file}\n")
