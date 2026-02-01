@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-01-28 (Session 251)
+**Last Updated**: 2026-02-01 (Session 252)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 251
+- **Current Session**: 252
 - **Active Features**: Insight Extractor, Master Writer V2, College Writer V2, Question Curator V2, Research Trimmer
 
 ---
@@ -62,9 +62,9 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
 
+*   **Session 252**: Fixed Divine Names Modifier incorrectly modifying לְשַׁדִּי (my moisture) to לְשַׁקִּי in Psalm 32. Added vowel check for dalet: divine name has patach (שַׁדַּי), possessive form has chiriq (לְשַׁדִּי). All regression tests pass, including Session 223 sheva fix.
 *   **Session 251**: Debugged and fixed the Question Curator. Resolved a prompt/parser mismatch where the agent returned a list but the code expected an object. Fixed JSON template escaping. Verified with Psalm 31.
 *   **Session 250**: Upgraded Insight Extractor to receive full psalm text (Hebrew/English/Phonetic) and Macro Analysis context. Fixed College Writer to correctly import Reader Questions, with robust fallback to raw questions if curation fails.
-*   **Session 249**: Switched Question Curator to Claude Opus 4.5 for higher reasoning quality. Fixed methodology reporting in DOCX to correctly list the Question Generator model and the specific completion date.
 *   **Session 248**: Refactored Special Instructions (SI) pipeline to align with the main Master Writer logic. Created `run_si_pipeline_with_synthesis.py` and `run_si_pipeline.py`. Updated documentation to reflect SI integration. Preserved legacy flow in `run_enhanced_pipeline_with_synthesis.py`.
 - **Refactoring SI**: Updated `run_si_pipeline.py` to use Master Writer architecture. Created `run_si_pipeline_with_synthesis.py` for legacy SI flow.
 - **Agent Update**: Updated `MasterEditorSI` to support both Editor (Legacy) and Writer (New) modes with special instructions.
@@ -227,6 +227,13 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
   - Supports deep research file integration
 - **Output**: Individual tribe markdown files + combined summary in `output/genesis_49/`
 - **Design**: Generalizable `PassageAnalysisConfig` pattern for future use on other passages (Deut 33, Numbers 23-24, etc.)
+
+### Session 252 (2026-02-01): Divine Names Modifier - Dalet Vowel Check
+- **Bug Fix**: Fixed incorrect replacement of לְשַׁדִּי (my moisture) with לְשַׁקִּי in Psalm 32:4
+- **Root Cause**: Pattern only checked shin vowel, not dalet vowel
+- **Solution**: Added check for patach/kamatz under dalet (chiriq indicates possessive suffix, not divine name)
+- **Linguistic**: Divine name שַׁדַּי has patach under dalet; "my moisture" לְשַׁדִּי has chiriq under dalet
+- **Regression Tests**: All tests pass, Session 223 sheva fix preserved
 
 ### Session 228 (2025-12-29): Figurative Stats Formatting & Model Tracking
 

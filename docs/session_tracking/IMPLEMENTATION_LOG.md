@@ -8,6 +8,41 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 252 (2026-02-01): Divine Names Modifier Fix - Dalet Vowel Check
+
+**Objective**: Fix incorrect modification of לְשַׁדִּי (my moisture) to לְשַׁקִּי in Psalm 32.
+
+**Problem Identified**:
+- The word לְשַׁדִּי (leshaddi, "my moisture" - Numbers 11:8) was incorrectly modified to לְשַׁקִּי
+- Root cause: Pattern only checked vowel under shin, not under dalet
+- The divine name שַׁדַּי has **patach under dalet** (שַׁדַּי)
+- But "my moisture" has **chiriq under dalet** (לְשַׁדִּי) ← This is the key distinction!
+
+**Solution Implemented**:
+Added vowel check for dalet: must have patach (ַ) or kamatz (ָ), not chiriq (ִ) or other vowels.
+
+**Key Distinctions**:
+- Divine name שַׁדַּי: patach under shin AND dalet → Modified to שַׁקַּי ✓
+- "My moisture" לְשַׁדִּי: patach under shin, **chiriq under dalet** → NOT modified ✓
+- "Breasts" שְׁדֵי: sheva under shin → NOT modified ✓ (Session 223 fix preserved)
+- With any prefix: checks dalet vowel, not prefix type
+
+**Linguistic Rationale**:
+The vowel under dalet distinguishes:
+1. Divine name: שַׁדַּי (shaddai) - patach/kamatz under dalet
+2. Construct form "my moisture": לְשַׁדִּי (leshaddi) - chiriq under dalet (first person possessive suffix)
+
+**Regression Testing**:
+- All 5 core tests passed
+- Verified Session 223 fix (sheva under shin) remains intact
+- Confirmed correct handling with all prefixes (vav, lamed, bet, etc.)
+- Test case showed לְשַׁדַּי (hypothetical with patach) would be modified, confirming vowel-based logic works correctly
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Updated `_modify_el_shaddai()` with dalet vowel check
+
+---
+
 ## Session 251 (2026-01-28): Debugging Question Curator
 
 **Objective**: Debug and fix the Question Curator which was returning empty results for Psalm 31.

@@ -790,6 +790,11 @@ def run_enhanced_pipeline(
                 # We target 400k chars (~100-130k tokens) to be safe and leave room for prompt + output
                 trimmed_research_bundle, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
                 
+                # Save trimmed research for inspection
+                trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
+                with open(trimmed_research_file, 'w', encoding='utf-8') as f:
+                    f.write(trimmed_research_bundle)
+                
                 insight_extractor = InsightExtractor(cost_tracker=cost_tracker)
                 
                 # Load psalm text
@@ -803,6 +808,7 @@ def run_enhanced_pipeline(
                     psalm_number=psalm_number,
                     psalm_text=psalm_text_str,
                     micro_analysis=micro_analysis,
+                    macro_analysis=macro_analysis,
                     research_bundle=trimmed_research_bundle
                 )
                 

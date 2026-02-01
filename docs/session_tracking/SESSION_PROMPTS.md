@@ -34,7 +34,7 @@ I'm starting a new development session on the Psalms AI Analysis project.
 Copy and paste when you're finishing a session:
 
 ```
-We're wrapping up this session. Please update the session documentation:
+We're wrapping up this session. Please update the session documentation, then commit.
 
 **1. Update IMPLEMENTATION_LOG.md** - Add this session's entry at the TOP:
 ---

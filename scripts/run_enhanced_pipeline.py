@@ -401,6 +401,11 @@ def run_enhanced_pipeline(
                     with open(research_file, 'r', encoding='utf-8') as f: research_bundle_content = f.read()
 
                 trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+                
+                # Save trimmed research for inspection
+                trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
+                with open(trimmed_research_file, 'w', encoding='utf-8') as f:
+                    f.write(trimmed)
                 extractor = InsightExtractor(cost_tracker=cost_tracker)
 
                 # Get rich psalm text from micro_analysis for prompt

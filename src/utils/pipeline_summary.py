@@ -296,6 +296,11 @@ class PipelineSummaryTracker:
             self.research.deep_research_removed_for_space = research_bundle.deep_research_removed_for_space
             self.research.deep_research_chars = len(research_bundle.deep_research_content) if research_bundle.deep_research_content else 0
 
+        # Track models used (Liturgical Librarian, Figurative Curator, etc.)
+        if hasattr(research_bundle, 'models_used') and research_bundle.models_used:
+            for agent, model in research_bundle.models_used.items():
+                self.track_model_for_step(agent, model)
+
     def track_deep_research_status(
         self,
         available: bool,

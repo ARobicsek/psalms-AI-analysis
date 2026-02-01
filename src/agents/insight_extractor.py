@@ -176,14 +176,31 @@ class InsightExtractor:
         # Prepare inputs
         micro_markdown = micro_analysis.to_markdown() if hasattr(micro_analysis, 'to_markdown') else str(micro_analysis)
         
+        # Helper to safely get values from macro_analysis (which might be dict or object)
+        def get_macro_val(key, default='N/A'):
+            if isinstance(macro_analysis, dict):
+                return macro_analysis.get(key, default)
+            return getattr(macro_analysis, key, default)
+
         # Format macro analysis
         macro_lines = []
-        macro_lines.append(f"**Thesis:** {macro_analysis.get('thesis_statement', 'N/A')}")
-        macro_lines.append(f"**Genre:** {macro_analysis.get('genre', 'N/A')}")
-        if 'structural_outline' in macro_analysis:
+        macro_lines.append(f"**Thesis:** {get_macro_val('thesis_statement')}")
+        macro_lines.append(f"**Genre:** {get_macro_val('genre')}")
+        
+        # Handle structural outline which might be nested list of objects or dicts
+        structure = get_macro_val('structural_outline', [])
+        if structure:
             macro_lines.append("\n**Structure:**")
-            for div in macro_analysis['structural_outline']:
-                macro_lines.append(f"  - {div.get('section', '')}: {div.get('theme', '')}")
+            for div in structure:
+                # Handle division item which might be dict or object
+                if isinstance(div, dict):
+                    sec = div.get('section', '')
+                    theme = div.get('theme', '')
+                else:
+                    sec = getattr(div, 'section', '')
+                    theme = getattr(div, 'theme', '')
+                macro_lines.append(f"  - {sec}: {theme}")
+        
         macro_markdown = "\n".join(macro_lines)
         
         # Construct prompt

@@ -160,26 +160,31 @@ class DivineNamesModifier:
 
         # Voweled form with cantillation marks
         # CRITICAL: Must have SHIN dot (U+05C1) and NOT have SIN dot (U+05C2)
-        # CRITICAL: Must have PATACH (U+05B7) or KAMATZ (U+05B8) under shin - NOT SHEVA
-        #           This distinguishes divine name שַׁדַּי from שְׁדּי (breasts)
+        # CRITICAL: Must have PATACH (U+05B7) or KAMATZ (U+05B8) under SHIN - NOT SHEVA
+        #           This distinguishes divine name שַׁדַּי from שְׁדֵי (breasts)
+        # CRITICAL: Must have PATACH (U+05B7) or KAMATZ (U+05B8) under DALET - NOT CHIRIQ
+        #           This distinguishes divine name שַׁדַּי from לְשַׁדִּי (my moisture)
         # Pattern breakdown:
         # - (^|[\s\-\u05BE.,;:!?]|[וּ]?[\u0591-\u05C7]*) - word boundary or prefix with marks
         # - ש - shin/sin letter
-        # - (?=[\u0591-\u05C7]*[\u05B7\u05B8]) - positive lookahead: must have PATACH or KAMATZ
+        # - (?=[\u0591-\u05C7]*[\u05B7\u05B8]) - positive lookahead: shin must have PATACH or KAMATZ
         # - (?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1) - positive lookahead: must contain SHIN dot
         # - (?![\u0591-\u05C7]*\u05C2) - negative lookahead: must NOT contain SIN dot
-        # - [\u0591-\u05C7]* - cantillation and vowel marks
+        # - [\u0591-\u05C7]* - cantillation and vowel marks after shin
         # - ד - dalet (to be replaced)
-        # - [\u0591-\u05C7]* - more marks
+        # - (?=[\u0591-\u05C7]*[\u05B7\u05B8]) - positive lookahead: dalet must have PATACH or KAMATZ
+        # - [\u0591-\u05C7]* - cantillation and vowel marks after dalet
         # - י - yod
         # - (?=[\u0591-\u05C7]*(?:[\s\-\u05BE.,;:!?]|$)) - word boundary after
-        shaddai_pattern = r'(^|[\s\-\u05BE.,;:!?]|[וּ]?[\u0591-\u05C7]*)ש(?=[\u0591-\u05C7]*[\u05B7\u05B8])(?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1)(?![\u0591-\u05C7]*\u05C2)[\u0591-\u05C7]*ד[\u0591-\u05C7]*י(?=[\u0591-\u05C7]*(?:[\s\-\u05BE.,;:!?]|$))'
+        shaddai_pattern = r'(^|[\s\-\u05BE.,;:!?]|[וּ]?[\u0591-\u05C7]*)ש(?=[\u0591-\u05C7]*[\u05B7\u05B8])(?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1)(?![\u0591-\u05C7]*\u05C2)[\u0591-\u05C7]*ד(?=[\u0591-\u05C7]*[\u05B7\u05B8])[\u0591-\u05C7]*י(?=[\u0591-\u05C7]*(?:[\s\-\u05BE.,;:!?]|$))'
+
         def shaddai_replacer(match):
             prefix = match.group(1)
             modified_word = match.group()[len(prefix):].replace('ד', 'ק')
             return f"{prefix}{modified_word}"
 
         modified = re.sub(shaddai_pattern, shaddai_replacer, modified)
+
         return modified
 
 
