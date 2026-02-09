@@ -564,14 +564,24 @@ class MicroAnalystV2:
                     }]
                 )
 
-                # Collect response chunks
+                # Collect response chunks (separate thinking from text, like macro_analyst)
+                thinking_text = ""
                 response_text = ""
                 with stream as response_stream:
                     for chunk in response_stream:
-                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
-                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
-                                if chunk.delta.type == 'text_delta':
-                                    response_text += chunk.delta.text
+                        if hasattr(chunk, 'type'):
+                            if chunk.type == 'content_block_start':
+                                if hasattr(chunk, 'content_block') and hasattr(chunk.content_block, 'type'):
+                                    self.logger.debug(f"Starting {chunk.content_block.type} block")
+                            elif chunk.type == 'content_block_delta':
+                                if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                    if chunk.delta.type == 'thinking_delta':
+                                        thinking_text += chunk.delta.thinking
+                                    elif chunk.delta.type == 'text_delta':
+                                        response_text += chunk.delta.text
+
+                self.logger.info(f"  Thinking collected: {len(thinking_text)} chars")
+                self.logger.info(f"  Response collected: {len(response_text)} chars")
 
                 # Track usage and costs (discovery pass)
                 final_message = response_stream.get_final_message()
@@ -585,7 +595,7 @@ class MicroAnalystV2:
                         thinking_tokens=thinking_tokens
                     )
 
-                self.logger.debug(f"Response text preview: {response_text[:500]}")
+                self.logger.debug(f"Response text preview: {response_text[:500] if response_text else 'EMPTY'}")
 
                 # Try to extract JSON from markdown code blocks if present
                 if response_text.startswith("```"):
@@ -603,6 +613,13 @@ class MicroAnalystV2:
                             json_lines.append(line)
                     response_text = '\n'.join(json_lines)
                     self.logger.debug(f"Extracted from code block, length: {len(response_text)}")
+
+                # Check for empty response before parsing
+                if not response_text or not response_text.strip():
+                    self.logger.error("ERROR: Empty text block received from API!")
+                    self.logger.error(f"Model: {self.model}")
+                    self.logger.error(f"Thinking text length: {len(thinking_text)}")
+                    raise ValueError("MicroAnalyst returned empty text block. This may be due to adaptive thinking mode allocating all tokens to thinking.")
 
                 discoveries = json.loads(response_text)
 
