@@ -282,6 +282,14 @@ def run_enhanced_pipeline(
         macro_analysis = macro_analyst.analyze_psalm(psalm_number)
         from src.schemas.analysis_schemas import save_analysis
         save_analysis(macro_analysis, str(macro_file), format="json")
+        
+        # Append model_used to the JSON for persistence across pipeline resumes
+        with open(macro_file, 'r', encoding='utf-8') as f:
+            macro_json = json.load(f)
+        macro_json['model_used'] = macro_analyst.model
+        with open(macro_file, 'w', encoding='utf-8') as f:
+            json.dump(macro_json, f, ensure_ascii=False, indent=2)
+        
         tracker.track_step_output("macro_analysis", macro_analysis.to_markdown())
         tracker.track_model_for_step("macro_analysis", macro_analyst.model)
         time.sleep(delay_between_steps)
@@ -291,6 +299,16 @@ def run_enhanced_pipeline(
             logger.error(f"FATAL: Missing {macro_file}")
             sys.exit(1)
         macro_analysis = load_macro_analysis(str(macro_file))
+        
+        # Track the model even when skipping - try to read from JSON or use default
+        try:
+            with open(macro_file, 'r', encoding='utf-8') as f:
+                macro_json = json.load(f)
+                # Check if model was stored in the JSON (new format)
+                model_used = macro_json.get('model_used', MacroAnalyst.DEFAULT_MODEL)
+        except Exception:
+            model_used = MacroAnalyst.DEFAULT_MODEL
+        tracker.track_model_for_step("macro_analysis", model_used)
 
     # =====================================================================
     # STEP 2: Micro Analysis
@@ -322,6 +340,14 @@ def run_enhanced_pipeline(
         
         from src.schemas.analysis_schemas import save_analysis
         save_analysis(micro_analysis, str(micro_file), format="json")
+        
+        # Append model_used to the JSON for persistence across pipeline resumes
+        with open(micro_file, 'r', encoding='utf-8') as f:
+            micro_json = json.load(f)
+        micro_json['model_used'] = micro_analyst.model
+        with open(micro_file, 'w', encoding='utf-8') as f:
+            json.dump(micro_json, f, ensure_ascii=False, indent=2)
+        
         with open(research_file, 'w', encoding='utf-8') as f:
             f.write(research_bundle.to_markdown())
             
@@ -357,6 +383,15 @@ def run_enhanced_pipeline(
         if research_stats.get('models_used'):
             for agent, model in research_stats['models_used'].items():
                 tracker.track_model_for_step(agent, model)
+
+        # Track micro_analysis model when skipping - try to read from JSON or use default
+        try:
+            with open(micro_file, 'r', encoding='utf-8') as mf:
+                micro_json = json.load(mf)
+                micro_model_used = micro_json.get('model_used', MicroAnalystV2.DEFAULT_MODEL)
+        except Exception:
+            micro_model_used = MicroAnalystV2.DEFAULT_MODEL
+        tracker.track_model_for_step("micro_analysis", micro_model_used)
 
         related_psalms = _parse_related_psalms_from_markdown(research_bundle_content)
         if related_psalms:
