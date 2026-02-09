@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Sonnet 4.5, GPT-5.1, Gemini 3 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
+The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Opus 4.6, Claude Sonnet 4.5, GPT-5.1, Gemini 3 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
 
@@ -32,10 +32,10 @@ The Psalms Commentary Pipeline is a sophisticated AI-powered system that generat
 ```
 Input: Psalm Number
     ↓
-[1] Macro Analysis (Claude Sonnet 4.5)
+[1] Macro Analysis (Claude Opus 4.6)
     → Structural thesis, poetic devices, research questions
     ↓
-[2] Micro Analysis + Research Request Generation (Claude Sonnet 4.5)
+[2] Micro Analysis + Research Request Generation (Claude Opus 4.6)
     → Discovery-driven verse analysis, research requests
     ↓
     [Research Bundle Assembly - 9 Python Librarians]
@@ -84,7 +84,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
 ### 1. AI Agent Architecture
 
 #### MacroAnalyst (Pass 1)
-- **Model**: Claude Sonnet 4.5 (`claude-sonnet-4-20250514`)
+- **Model**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking (effort=max)
 - **Purpose**: High-level thesis formation and structural analysis
 - **Input**: Psalm text (Hebrew/English), RAG context
 - **Output**: `MacroAnalysis` object (JSON schema)
@@ -95,7 +95,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Thesis formation with supporting evidence
 
 #### MicroAnalyst v2 (Pass 2)
-- **Model**: Claude Sonnet 4.5 (`claude-sonnet-4-20250514`)
+- **Model**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking (effort=max)
 - **Purpose**: Verse-by-verse discovery and research request generation
 - **Input**: `MacroAnalysis`, Psalm text, phonetic transcriptions
 - **Output**: `MicroAnalysis` object + `ResearchBundle` requests
@@ -537,7 +537,8 @@ python scripts/tribal_blessings_analyzer.py --list
 - **Function**: Real-time API usage and cost monitoring
 - **Implementation**: `src/utils/cost_tracker.py`
 - **Models Tracked**:
-  - Claude Sonnet 4.5 (MacroAnalyst, MicroAnalyst, SynthesisWriter)
+  - Claude Opus 4.6 (MacroAnalyst, MicroAnalyst - with adaptive thinking)
+  - Claude Sonnet 4.5 (SynthesisWriter)
   - Gemini 2.5 Pro (Liturgical Librarian summaries - primary)
   - Claude Sonnet 4.5 (Liturgical Librarian summaries - fallback)
   - GPT-5.1 or GPT-5 (MasterEditor main and college editions)
@@ -620,7 +621,8 @@ python scripts/tribal_blessings_analyzer.py --list
 ### Model Selection Strategy
 | Model | Usage | Context |
 |-------|-------|---------|
-| Claude Sonnet 4.5 (`claude-sonnet-4-20250514`) | MacroAnalyst, MicroAnalyst, SynthesisWriter | 200K tokens |
+| Claude Opus 4.6 (`claude-opus-4-6`) | MacroAnalyst, MicroAnalyst | 200K tokens, adaptive thinking |
+| Claude Sonnet 4.5 (`claude-sonnet-4-20250514`) | SynthesisWriter | 200K tokens |
 | Gemini 2.5 Pro (`gemini-2.5-pro`) | SynthesisWriter fallback (large psalms) | 1M tokens |
 | GPT-5.1 (`gpt-5.1`) | MasterEditor (default) | High reasoning effort |
 | GPT-5 (`gpt-5`) | MasterEditor (legacy option) | High reasoning effort |

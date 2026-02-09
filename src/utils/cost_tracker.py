@@ -2,6 +2,7 @@
 Cost Tracking Utility for Pipeline
 
 Tracks API usage and costs across all models used in the pipeline:
+- Claude Opus 4.6
 - Claude Opus 4.5
 - Claude Sonnet 4.5
 - GPT-5
@@ -55,6 +56,14 @@ PRICING = {
         "input": 5.00,
         "output": 25.00,
         "thinking": 25.00,  # Thinking tokens charged at output rate
+        "cache_read": 0.50,  # 10% of input price
+        "cache_write": 6.25,  # 25% markup on input
+    },
+    # Claude Opus 4.6 (released Feb 2026) - Adaptive thinking model
+    "claude-opus-4-6": {
+        "input": 5.00,
+        "output": 25.00,
+        "thinking": 25.00,  # Adaptive thinking charged at output rate
         "cache_read": 0.50,  # 10% of input price
         "cache_write": 6.25,  # 25% markup on input
     },

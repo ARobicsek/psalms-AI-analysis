@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-01 (Session 252)
+**Last Updated**: 2026-02-09 (Session 253)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 252
+- **Current Session**: 253
 - **Active Features**: Insight Extractor, Master Writer V2, College Writer V2, Question Curator V2, Research Trimmer
 
 ---
@@ -62,9 +62,9 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
 
+*   **Session 253**: Upgraded macro_analyst and micro_analyst from Claude Sonnet 4.5 to Claude Opus 4.6 with adaptive thinking (effort=max). Added Opus 4.6 pricing to cost_tracker. Updated scriptReferences.md.
 *   **Session 252**: Fixed Divine Names Modifier incorrectly modifying לְשַׁדִּי (my moisture) to לְשַׁקִּי in Psalm 32. Added vowel check for dalet: divine name has patach (שַׁדַּי), possessive form has chiriq (לְשַׁדִּי). All regression tests pass, including Session 223 sheva fix.
 *   **Session 251**: Debugged and fixed the Question Curator. Resolved a prompt/parser mismatch where the agent returned a list but the code expected an object. Fixed JSON template escaping. Verified with Psalm 31.
-*   **Session 250**: Upgraded Insight Extractor to receive full psalm text (Hebrew/English/Phonetic) and Macro Analysis context. Fixed College Writer to correctly import Reader Questions, with robust fallback to raw questions if curation fails.
 *   **Session 248**: Refactored Special Instructions (SI) pipeline to align with the main Master Writer logic. Created `run_si_pipeline_with_synthesis.py` and `run_si_pipeline.py`. Updated documentation to reflect SI integration. Preserved legacy flow in `run_enhanced_pipeline_with_synthesis.py`.
 - **Refactoring SI**: Updated `run_si_pipeline.py` to use Master Writer architecture. Created `run_si_pipeline_with_synthesis.py` for legacy SI flow.
 - **Agent Update**: Updated `MasterEditorSI` to support both Editor (Legacy) and Writer (New) modes with special instructions.

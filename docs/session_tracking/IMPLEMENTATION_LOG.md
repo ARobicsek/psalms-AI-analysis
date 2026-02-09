@@ -8,6 +8,56 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 253 (2026-02-09): Claude Opus 4.6 Upgrade - Macro/Micro Analysts
+
+**Objective**: Upgrade macro_analyst and micro_analyst from Claude Sonnet 4.5 to Claude Opus 4.6 with maximum adaptive thinking, and ensure correct cost tracking.
+
+**API Changes**:
+- New adaptive thinking mode replaces deprecated `budget_tokens` parameter
+- Old: `thinking: { type: "enabled", budget_tokens: 10000 }`
+- New: `thinking: { type: "adaptive", effort: "max" }`
+
+**Changes Implemented**:
+1. **`src/agents/macro_analyst.py`**:
+   - Updated `DEFAULT_MODEL` from `claude-sonnet-4-5` to `claude-opus-4-6`
+   - Changed thinking configuration from `budget_tokens: 10000` to `effort: "max"`
+   - Updated docstrings and CLI description
+2. **`src/agents/micro_analyst.py`**:
+   - Updated `DEFAULT_MODEL` from `claude-sonnet-4-5` to `claude-opus-4-6`
+   - Added adaptive thinking with `effort: "max"` to discovery pass (was previously not using thinking mode)
+   - Updated docstrings and log messages
+3. **`src/utils/cost_tracker.py`**:
+   - Added `claude-opus-4-6` pricing entry (same tier as Opus 4.5)
+4. **`docs/session_tracking/scriptReferences.md`**:
+   - Updated model descriptions for macro_analyst and micro_analyst
+
+**Verification**:
+- Confirmed `MacroAnalyst.DEFAULT_MODEL = "claude-opus-4-6"`
+- Confirmed `MicroAnalystV2.DEFAULT_MODEL = "claude-opus-4-6"`
+- Confirmed `claude-opus-4-6` pricing exists in cost tracker
+
+**Bug Fix (Same Session)**:
+Initial implementation placed `effort` inside `thinking` object, but the API rejected with:
+`'thinking.adaptive.effort: Extra inputs are not permitted'`
+
+Per official Anthropic docs, the correct format is:
+```python
+thinking={"type": "adaptive"},
+output_config={"effort": "max"}
+```
+
+**SDK Upgrade**:
+- Upgraded anthropic SDK from 0.68.1 (system) / 0.70.0 (venv) to 0.79.0
+- Required for `output_config` parameter support in `messages.stream()`
+
+**Documentation Updated**:
+- `docs/session_tracking/scriptReferences.md`: Updated macro/micro analyst descriptions
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md`: Updated all model references
+
+**Note**: The DOCX Methodology section automatically reflects the new model names since it reads from `model_usage['macro_analysis']` and `model_usage['micro_analysis']` in the pipeline stats JSON.
+
+---
+
 ## Session 252 (2026-02-01): Divine Names Modifier Fix - Dalet Vowel Check
 
 **Objective**: Fix incorrect modification of לְשַׁדִּי (my moisture) to לְשַׁקִּי in Psalm 32.

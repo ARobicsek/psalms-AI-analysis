@@ -5,14 +5,14 @@ Phase 3a: Chapter-level analysis with analytical framework
 This agent produces the initial high-level thesis for a psalm, leveraging:
 - RAG context (genre, structure, Ugaritic parallels)
 - Analytical framework (poetic methodology)
-- Extended thinking mode for deep analysis
+- Adaptive thinking mode for deep analysis
 
-Model: Claude Sonnet 4.5 with extended thinking
+Model: Claude Opus 4.6 with adaptive thinking (effort=max)
 Input: Psalm text (Hebrew + English) + RAG context
 Output: MacroAnalysis with thesis, structure, poetic devices, research questions
 
 Author: Claude (Anthropic)
-Date: 2025 (Phase 3a)
+Date: 2025 (Phase 3a), Updated Feb 2026 for Opus 4.6
 """
 
 import sys
@@ -175,7 +175,7 @@ Take your time. Think deeply. Produce a thesis that will guide meaningful verse-
 
 class MacroAnalyst:
     """
-    Pass 1: Macro Analysis Agent using Claude Sonnet 4.5.
+    Pass 1: Macro Analysis Agent using Claude Opus 4.6.
 
     Produces chapter-level thesis and structural framework for a psalm,
     leveraging RAG context and analytical framework.
@@ -188,7 +188,7 @@ class MacroAnalyst:
     """
 
     # Class-level constant for the default model (single source of truth)
-    DEFAULT_MODEL = "claude-sonnet-4-5"
+    DEFAULT_MODEL = "claude-opus-4-6"
 
     def __init__(
         self,
@@ -296,8 +296,10 @@ class MacroAnalyst:
                     model=self.model,
                     max_tokens=max_tokens,
                     thinking={
-                        "type": "enabled",
-                        "budget_tokens": 10000  # Allow extended thinking
+                        "type": "adaptive"  # Adaptive thinking for Opus 4.6
+                    },
+                    output_config={
+                        "effort": "max"  # Maximum effort for deep analysis
                     },
                     messages=[{
                         "role": "user",
@@ -518,7 +520,7 @@ def main():
         sys.stdout.reconfigure(encoding='utf-8')
 
     parser = argparse.ArgumentParser(
-        description='Generate macro-level analysis for a Psalm (Claude Sonnet 4.5)'
+        description='Generate macro-level analysis for a Psalm (Claude Opus 4.6)'
     )
     parser.add_argument('psalm_number', type=int,
                        help='Psalm number (1-150)')
