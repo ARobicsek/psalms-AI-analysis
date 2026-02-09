@@ -8,6 +8,31 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 254 (2026-02-09): Opus 4.6 Bug Fixes + Skipped Step Model Tracking
+
+**Objective**: Fix micro_analyst JSON parsing issues with Opus 4.6 adaptive thinking and ensure model usage is tracked even when pipeline steps are skipped.
+
+**Problems Identified**:
+1. Opus 4.6 adaptive thinking returns thinking blocks mixed with text blocks, causing JSON parse failures
+2. Response sometimes has leading newline before `\`\`\`json` code block, breaking extraction
+3. When using `--skip-macro` or `--skip-micro`, model usage shows "N/A" in Methodology section
+
+**Solutions Implemented**:
+1. **Thinking Block Separation** (`micro_analyst.py`):
+   - Added proper `thinking_delta` vs `text_delta` separation in stream processing
+   - Added empty response check with descriptive error message
+   - Added `response_text.strip()` before code block detection
+2. **Model Tracking for Skipped Steps** (`run_enhanced_pipeline.py`):
+   - When macro/micro steps run: saves `model_used` field to output JSON
+   - When steps are skipped: reads `model_used` from JSON, or falls back to agent's `DEFAULT_MODEL`
+   - Ensures Methodology section shows correct models when resuming pipeline
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` - Thinking block handling, whitespace stripping, empty response check
+- `scripts/run_enhanced_pipeline.py` - Model persistence in JSON, skip-step tracking
+
+---
+
 ## Session 253 (2026-02-09): Claude Opus 4.6 Upgrade - Macro/Micro Analysts
 
 **Objective**: Upgrade macro_analyst and micro_analyst from Claude Sonnet 4.5 to Claude Opus 4.6 with maximum adaptive thinking, and ensure correct cost tracking.
