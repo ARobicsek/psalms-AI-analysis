@@ -597,6 +597,9 @@ class MicroAnalystV2:
 
                 self.logger.debug(f"Response text preview: {response_text[:500] if response_text else 'EMPTY'}")
 
+                # Strip leading/trailing whitespace before processing
+                response_text = response_text.strip()
+
                 # Try to extract JSON from markdown code blocks if present
                 if response_text.startswith("```"):
                     # Extract from code block
