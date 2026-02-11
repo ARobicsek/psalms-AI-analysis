@@ -10,6 +10,7 @@ Always read this file first when you need to find code.
 | Script | Namespace | Description | Link |
 |--------|-----------|-------------|------|
 | `run_enhanced_pipeline.py` | `scripts` | **NEW DEFAULT**: Master Writer pipeline (formerly TEST). Single-pass generation from research inputs. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline.py) |
+| `run_enhanced_pipeline_TEST.py` | `scripts` | **PHASE 1 TEST**: V3 Prompt Overhaul test pipeline. Suffixes output with `_TEST`. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_TEST.py) |
 | `run_enhanced_pipeline_with_synthesis.py` | `scripts` | **LEGACY**: Original Synthesis Writer pipeline (Pass 3 Synthesis → Pass 4 Master Editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_with_synthesis.py) |
 | `run_si_pipeline.py` | `scripts` | **NEW SI**: Special Instruction pipeline using Master Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |
 | `run_si_pipeline_with_synthesis.py` | `scripts` | **LEGACY SI**: Special Instruction pipeline using Synthesis Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline_with_synthesis.py) |
@@ -25,6 +26,7 @@ Always read this file first when you need to find code.
 | `micro_analyst.py` | `src.agents` | Pass 2: Discovery-driven verse-by-verse research using Claude Opus 4.6 with adaptive thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/micro_analyst.py) |
 | `synthesis_writer.py` | `src.agents` | Pass 3: Final commentary synthesis combining macro thesis, micro discoveries, and research bundle. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/synthesis_writer.py) |
 | `master_editor.py` | `src.agents` | Pass 4: Final review and enhancement agent (Main and College editions). Includes robust question fallback logic. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
+| `master_editor_v3.py` | `src.agents` | **PHASE 1 TEST**: V3 Prompt Overhaul variant. Implements 9 major prompt changes. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_v3.py) |
 | `master_editor_si.py` | `src.agents` | Special Instruction variant of Master Editor that supports author directives for alternative versions. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_si.py) |
 | `master_editor_old.py` | `src.agents` | Legacy Master Editor implementation (archived). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_old.py) |
 | `phonetic_analyst.py` | `src.agents` | Transcribes Hebrew text into phonetic/syllabic structure based on reconstructed Biblical Hebrew phonology. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/phonetic_analyst.py) |

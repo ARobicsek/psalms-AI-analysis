@@ -551,7 +551,7 @@ class MicroAnalystV2:
                 # Use streaming to avoid 10-minute timeout for large token requests
                 stream = self.client.messages.stream(
                     model=self.model,
-                    max_tokens=32768,  # Doubled to 32K to ensure no output constraint (was 16K, originally 8K)
+                    max_tokens=65536,  # 64K to accommodate adaptive thinking + large JSON (was 32K, truncated on 22-verse psalms)
                     thinking={
                         "type": "adaptive"  # Adaptive thinking for Opus 4.6
                     },
