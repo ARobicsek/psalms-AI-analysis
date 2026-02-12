@@ -8,7 +8,7 @@ a reader understands the text.
 
 It prevents the Synthesis Writer from getting overwhelmed and defaulting to summary.
 
-Model: Claude Opus 4.5 (high reasoning)
+Model: Claude Opus 4.6 (high reasoning)
 Input: MicroAnalysis + ResearchBundle + Psalm Text
 Output: JSON with prioritized psalm-level and verse-level insights
 
@@ -142,7 +142,7 @@ class InsightExtractor:
             raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
 
         self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = "claude-opus-4-5"  # High reasoning model
+        self.model = "claude-opus-4-6"  # High reasoning model
         self.logger = logger or get_logger("insight_extractor")
         self.cost_tracker = cost_tracker or CostTracker()
         

@@ -114,7 +114,7 @@ class QuestionCurator:
         self,
         logger=None,
         cost_tracker: Optional[CostTracker] = None,
-        model: str = "claude-opus-4-5"
+        model: str = "claude-opus-4-6"
     ):
         """
         Initialize QuestionCurator.
@@ -122,7 +122,7 @@ class QuestionCurator:
         Args:
             logger: Logger instance
             cost_tracker: CostTracker instance for tracking API costs
-            model: Model identifier to use (default: claude-opus-4-5)
+            model: Model identifier to use (default: claude-opus-4-6)
         """
         self.logger = logger or get_logger("question_curator")
         self.cost_tracker = cost_tracker or CostTracker()

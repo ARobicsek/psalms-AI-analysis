@@ -49,8 +49,8 @@ Always read this file first when you need to find code.
 | `related_psalms_librarian.py` | `src.agents` | Retrieves related psalms with shared roots, phrases, and skipgrams from top connections analysis. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/related_psalms_librarian.py) |
 | `rag_manager.py` | `src.agents` | Manages RAG documents (analytical framework, psalm functions, Ugaritic parallels) for agent prompts. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/rag_manager.py) |
 | `scholar_researcher.py` | `src.agents` | Coordinates research requests by generating specific requests for librarian agents from macro overview. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/scholar_researcher.py) |
-| `question_curator.py` | `src.agents` | Generates "Questions for the Reader" from macro/micro analysis using Claude Opus 4.5. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/question_curator.py) |
-| `insight_extractor.py` | `src.agents` | **NEW**: Filters research materials for transformative insights using Claude Opus 4.5. Now uses full psalm text and macro context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/insight_extractor.py) |
+| `question_curator.py` | `src.agents` | Generates "Questions for the Reader" from macro/micro analysis using Claude Opus 4.6. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/question_curator.py) |
+| `insight_extractor.py` | `src.agents` | **NEW**: Filters research materials for transformative insights using Claude Opus 4.6. Now uses full psalm text and macro context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/insight_extractor.py) |
 
 ---
 

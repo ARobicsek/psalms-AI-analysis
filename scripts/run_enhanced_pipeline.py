@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.agents.macro_analyst import MacroAnalyst
 from src.agents.micro_analyst import MicroAnalystV2
 # SynthesisWriter REMOVED
-from src.agents.master_editor import MasterEditorV2 as MasterEditor
+from src.agents.master_editor import MasterEditor
 from src.agents.question_curator import QuestionCurator
 from src.agents.insight_extractor import InsightExtractor
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
@@ -427,7 +427,7 @@ def run_enhanced_pipeline(
             logger.info("Insights exist, loading...")
             with open(insights_file, 'r', encoding='utf-8') as f: curated_insights = json.load(f)
             # Track the model even when loading existing insights
-            tracker.track_model_for_step("insight_extractor", "claude-opus-4-5")
+            tracker.track_model_for_step("insight_extractor", "claude-opus-4-6")
         else:
             logger.info("[STEP 2c] Extracting Insights...")
             try:
@@ -481,7 +481,7 @@ def run_enhanced_pipeline(
     else:
         # skip_insights is True — still track the model if insights file exists
         if insights_file.exists():
-            tracker.track_model_for_step("insight_extractor", "claude-opus-4-5")
+            tracker.track_model_for_step("insight_extractor", "claude-opus-4-6")
 
     # =====================================================================
     # STEP 3: Synthesis (REMOVED)
@@ -800,7 +800,7 @@ if __name__ == "__main__":
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
     parser.add_argument("--master-editor-model", type=str, default="gpt-5.1",
-                       choices=["gpt-5", "gpt-5.1", "claude-opus-4-5"],
+                       choices=["gpt-5", "gpt-5.1", "claude-opus-4-5", "claude-opus-4-6"],
                        help="Model for Master Writer (default: gpt-5.1)")
     parser.add_argument("--skip-insights", action="store_true")
 
