@@ -161,14 +161,6 @@ Return ONLY a valid JSON object with this exact structure:
   "working_notes": "Optional additional observations..."
 }}
 
-## WRITING STYLE
-Your output will be consumed by downstream AI agents, not humans. Write telegraphically:
-- Sentence fragments and bullets over full sentences
-- Drop articles (the, a, an) and filler words where meaning is preserved
-- No transition sentences ("Moving on to...", "As we can see...")
-- Dense notation: use abbreviations, compact references
-- Exception: thesis_statement should still be a complete, clear sentence
-
 ## CRITICAL REQUIREMENTS
 
 1. **Be SPECIFIC**: Avoid vague generalities like "this psalm is about trust"
@@ -177,6 +169,14 @@ Your output will be consumed by downstream AI agents, not humans. Write telegrap
 4. **Think DEEPLY**: Use extended thinking to find non-obvious insights
 5. **Be THOROUGH**: Identify ALL major structural divisions and poetic devices
 6. **Return ONLY JSON**: No text before or after the JSON object
+
+## MANDATORY WRITING STYLE — ALL JSON STRING VALUES
+Your output feeds downstream AI agents, NOT human readers. Every string value in your JSON MUST use telegraphic style:
+- Sentence fragments, NOT full prose. E.g., "Chiastic pivot v.6; shame-vocabulary inclusio vv.4↔26" NOT "There is a chiastic structure with the pivot point at verse 6, and the shame vocabulary creates an inclusio between verses 4 and 26."
+- Drop articles (the, a, an), drop filler ("it is worth noting", "interestingly", "we can see that")
+- Use dense notation: vv., cf., →, ↔, +, =, //
+- NO transition sentences
+- Exception: thesis_statement may be 1-2 complete sentences for clarity
 
 Take your time. Think deeply. Produce a thesis that will guide meaningful verse-by-verse analysis."""
 
@@ -394,14 +394,8 @@ class MacroAnalyst:
                 # Step 7: Create MacroAnalysis object
                 analysis = MacroAnalysis.from_dict(data)
 
-                # Add thinking to working notes if available
-                if thinking_text:
-                    analysis.working_notes = (
-                        "=== EXTENDED THINKING ===\n\n" +
-                        thinking_text +
-                        "\n\n=== END THINKING ===\n\n" +
-                        analysis.working_notes
-                    )
+                # Thinking text is used for reasoning but not saved to working_notes
+                # (extended thinking was consuming ~15K+ chars in the JSON output)
 
                 # Log results
                 self.logger.info(f"Macro analysis complete for Psalm {psalm_number}")

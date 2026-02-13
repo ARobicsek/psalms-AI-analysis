@@ -12,12 +12,13 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
-**Session 258 (2026-02-12)**: Token Reduction Phase B
+**Session 258 (2026-02-13)**: Token Reduction Phase B
 - B1: Related psalms default to no full texts (`include_full_text=False`), saving ~13K chars
 - B2: BDB lexicon entries truncated to ~500 chars max (from ~2,400 avg), saving ~21K chars
 - B3: Compact markdown formatting: merged lexicon headers, inline concordance results, compact commentary
 - B4: Added telegraphic writing instructions to macro/micro analyst prompts for denser AI output
 - Updated preamble text in related_psalms_librarian to reflect no-full-text default
+- Post-PS35 review: removed extended thinking dump from macro working_notes (~15K saved), removed figurative confidence scores, strengthened macro telegraphic prompt
 
 **Session 257 (2026-02-12)**: Token Reduction Phase A
 - Removed 10,724 chars of static commentator biographical essays from research bundle (replaced with dates only)

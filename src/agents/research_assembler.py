@@ -401,7 +401,8 @@ class ResearchBundle:
                         if inst.ground:
                             md += f"*Ground*: {' → '.join(inst.ground[:3])}  \n"
 
-                        md += f"*Confidence*: {inst.confidence:.2f}  \n\n"
+
+
 
                     if len(bundle.instances) > 20:
                         md += f"*...and {len(bundle.instances) - 20} more instances*\n\n"

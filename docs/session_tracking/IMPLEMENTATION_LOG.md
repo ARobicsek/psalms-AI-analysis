@@ -51,6 +51,16 @@ This file contains detailed session history for sessions 200 and later.
 - Related psalms measured: PS34 total 49,005 → 34,286 chars (30% reduction)
 - Preamble measured: 2,417 → 615 chars (75% reduction)
 
+**Post-Run Review (PS35)**:
+- Micro analyst output IS telegraphic — fragments, dense notation, no filler
+- Macro analyst output was NOT telegraphic — full prose despite instruction. Fix: strengthened prompt with "MANDATORY" header, concrete before/after examples, repositioned to end of prompt
+- Extended thinking (~15K chars) was being dumped into `working_notes` JSON field — removed (no downstream consumer uses it since S257 `include_working_notes=False`)
+- Figurative section had 80 lines of `*Confidence*: 0.XX` — removed from `to_markdown()` output
+
+**Additional Files Modified**:
+- `src/agents/macro_analyst.py` — removed extended thinking dump from working_notes; strengthened telegraphic instruction
+- `src/agents/research_assembler.py` — removed figurative confidence score line
+
 ---
 
 ## Session 257 (2026-02-12): Token Reduction Phase A — Zero-Risk Quick Wins
