@@ -8,6 +8,96 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 258 (2026-02-12): Token Reduction Phase B — Bundle Compaction
+
+**Objective**: Implement Phase B token reduction tasks (B1-B4) from `docs/architecture/TOKEN_REDUCTION_PHASE_B.md` to further reduce per-psalm pipeline cost.
+
+**Wins Implemented**:
+
+1. **B1 (Win 4) — Related psalms: no full texts + telegraphic preamble** (`related_psalms_librarian.py`):
+   - Added `include_full_text: bool = False` parameter to `format_for_research_bundle()`
+   - Default behavior now omits full Hebrew text of related psalms, keeping relationship metadata + shared patterns
+   - Rewrote `_build_preamble()` telegraphically: 2,417 → 615 chars (75% reduction)
+   - Preserved essential Ps25+34 diptych example in compact form
+   - Measured total savings on PS34: 49,005 → 34,286 chars = **14,719 chars saved (30%)**
+
+2. **B2 (Win 2) — BDB truncation to ~500 chars** (`research_assembler.py`):
+   - Added `_truncate_bdb_entry()` helper function (finds natural break at newline or period)
+   - Applied to `entry.entry_text` in `to_markdown()` lexicon section
+   - Small buffer (600 chars) avoids cutting entries that are only slightly over limit
+   - Estimated savings: ~21K chars (25 entries × ~1,900 chars saved each)
+
+3. **B3 (Win 6) — Compact markdown formatting** (`research_assembler.py`):
+   - **Lexicon**: Merged 4 separate metadata lines into single header: `### טַעַם [BDB H2940] *ta'am*`; Klein data on one line
+   - **Concordance**: Merged header metadata into title line; inline result format replacing multi-line per-result blocks
+   - **Commentary**: Merged verse/commentator into single header; removed redundant "Why this verse" label formatting
+   - Removed Sefaria URL links from lexicon entries (not used by downstream agents)
+
+4. **B4 (Win 9) — Telegraphic macro/micro prompts** (`macro_analyst.py`, `micro_analyst.py`):
+   - Added "WRITING STYLE" section to macro analyst prompt: fragments over sentences, drop articles/filler, no transitions
+   - Added "WRITING DENSITY" section to micro analyst prompt: dense notation, no hedging phrases
+   - Both exceptions preserve complete sentences where JSON schema requires them (e.g., thesis_statement)
+
+**Files Modified**:
+- `src/agents/related_psalms_librarian.py` — B1 (include_full_text param, preamble text)
+- `src/agents/research_assembler.py` — B2 + B3 (_truncate_bdb_entry, compact markdown)
+- `src/agents/macro_analyst.py` — B4 (telegraphic writing instructions)
+- `src/agents/micro_analyst.py` — B4 (writing density instructions)
+
+**Verification**:
+- All 4 files pass Python syntax checks
+- Module imports succeed
+- `_truncate_bdb_entry()` tested: 2,720 chars → 481 chars with clean line break
+- Related psalms measured: PS34 total 49,005 → 34,286 chars (30% reduction)
+- Preamble measured: 2,417 → 615 chars (75% reduction)
+
+---
+
+## Session 257 (2026-02-12): Token Reduction Phase A — Zero-Risk Quick Wins
+
+**Objective**: Reduce per-psalm pipeline cost (~$5 for PS34) by auditing all content passed to LLM agents and eliminating waste. Phase A implements zero-risk changes; Phase B (BDB truncation, related psalms trimming, compact markdown, telegraphic outputs) deferred to next session.
+
+**Analysis Findings** (PS34 research bundle: 291,731 chars):
+- Hebrew Lexicon (BDB): 33,677 (11.5%) — full entries averaging 2,400 chars each
+- Concordance: 19,894 (6.8%)
+- Figurative Language (Curated): 47,747 (16.4%)
+- Analytical Framework: 25,794 (8.8%) — **duplicated** (also passed separately to Master Writer)
+- Traditional Commentaries: 41,878 (14.4%) — includes 10,724 chars of static commentator bios
+- Related Psalms: 49,129 (16.8%) — includes full texts of 5 related psalms
+- Deep Web Research: 38,253 (13.1%)
+- Macro working_notes: 26,845 chars passed unnecessarily to micro analyst
+
+**Wins Implemented (Phase A)**:
+
+1. **Win 1 — Commentator intros → dates only** (`research_assembler.py`):
+   - Replaced ~10,724 chars of biographical essays for 7 commentators with compact date-only reference (~200 chars)
+   - Savings: ~10,500 chars × 3 consumers (IE + MW + CW)
+
+2. **Win 3 — Deduplicate analytical framework** (`research_assembler.py`):
+   - Removed framework embedding from research bundle (was already passed separately via `{analytical_framework}` prompt variable in Master Writer)
+   - Savings: ~9,239-25,794 chars removed from bundle
+
+3. **Win 8 — Strip macro working_notes from micro analyst** (`analysis_schemas.py`, `micro_analyst.py`):
+   - Added `include_working_notes` parameter to `MacroAnalysis.to_markdown()`
+   - Micro analyst now calls `to_markdown(include_working_notes=False)`
+   - Savings: ~26,845 chars of Opus 4.6 input per psalm
+
+**Total Estimated Savings**: ~45,314 tokens per psalm (~36K from bundle + ~9K from micro input)
+
+**Phase B Plan** (deferred, documented in `C:\Users\ariro\.claude\plans\purring-marinating-token.md`):
+- Win 2: Truncate BDB entries to ~500 chars max
+- Win 4: Always trim related psalms (no full texts by default)
+- Win 6: Compact markdown formatting throughout research bundle
+- Win 9: Telegraphic writing instructions for macro/micro analyst prompts
+
+**Files Modified**:
+- `src/agents/research_assembler.py` — Wins 1 & 3 (commentator dates, remove framework from bundle)
+- `src/schemas/analysis_schemas.py` — Win 8 (added `include_working_notes` param)
+- `src/agents/micro_analyst.py` — Win 8 (pass `include_working_notes=False`)
+- `src/agents/master_editor.py` — Win 1 (removed references to "About the Commentators" section)
+
+---
+
 ## Session 256 (2026-02-12): Prompt Overhaul Phase 1 - Completion & Opus 4.6 Upgrade
 
 **Objective**: Finalize Prompt Overhaul Phase 1 (migration to Master Writer V3) and upgrade Insight/Question agents to Opus 4.6.

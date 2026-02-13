@@ -161,6 +161,14 @@ Return ONLY a valid JSON object with this exact structure:
   "working_notes": "Optional additional observations..."
 }}
 
+## WRITING STYLE
+Your output will be consumed by downstream AI agents, not humans. Write telegraphically:
+- Sentence fragments and bullets over full sentences
+- Drop articles (the, a, an) and filler words where meaning is preserved
+- No transition sentences ("Moving on to...", "As we can see...")
+- Dense notation: use abbreviations, compact references
+- Exception: thesis_statement should still be a complete, clear sentence
+
 ## CRITICAL REQUIREMENTS
 
 1. **Be SPECIFIC**: Avoid vague generalities like "this psalm is about trust"

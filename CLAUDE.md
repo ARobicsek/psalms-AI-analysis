@@ -12,40 +12,30 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
-**Session 209 (2025-12-11)**: Deep Web Research Integration
-- Added support for incorporating Gemini Deep Research outputs into research bundles
-- New directory: `data/deep_research/` for storing psalm-specific deep research files
-- Files named: `psalm_NNN_deep_research.txt` (e.g., `psalm_017_deep_research.txt`)
-- Auto-trimming: Deep research removed first if bundle exceeds character limits
-- Pipeline stats and docx summary now track "Deep Web Research: Yes/No"
+**Session 258 (2026-02-12)**: Token Reduction Phase B
+- B1: Related psalms default to no full texts (`include_full_text=False`), saving ~13K chars
+- B2: BDB lexicon entries truncated to ~500 chars max (from ~2,400 avg), saving ~21K chars
+- B3: Compact markdown formatting: merged lexicon headers, inline concordance results, compact commentary
+- B4: Added telegraphic writing instructions to macro/micro analyst prompts for denser AI output
+- Updated preamble text in related_psalms_librarian to reflect no-full-text default
 
-**Session 182 (2025-12-08)**: Lexical Insight Prompt Fix
-- Fixed concordance searches returning 0 results for phrases like "פקד לילה" and "צל כנפים"
-- Root cause: LLM extracting conceptual/base forms instead of exact verse forms
-- Improved `DISCOVERY_PASS_PROMPT` with concrete wrong/right examples
-- Added phrase-level morphological variation guidance (person, number, tense, prefix)
+**Session 257 (2026-02-12)**: Token Reduction Phase A
+- Removed 10,724 chars of static commentator biographical essays from research bundle (replaced with dates only)
+- Fixed analytical framework duplication bug: was embedded in research bundle AND passed separately to Master Writer
+- Added `include_working_notes=False` to strip 26,845 chars from micro analyst input
+- Total savings: ~45K tokens per psalm across all consumers
 
-**Session 181 (2025-12-08)**: Comprehensive Codebase Cleanup
-- Archived 326 files into organized subdirectories (debugging, experiments, session docs)
-- Created CLAUDE.md for token-efficient session startup (80% token reduction)
-- Reorganized docs/ into logical subdirectories (architecture, guides, features, session_tracking)
-- Root directory reduced from 145+ files → 30 files (79% reduction)
+**Session 256 (2026-02-12)**: Prompt Overhaul Phase 1 Completion & Opus 4.6 Upgrade
+- Migrated V3 prompt logic to `master_editor.py`, archived legacy editors
+- Upgraded InsightExtractor and QuestionCurator to claude-opus-4-6
 
-**Session 180 (2025-12-07)**: Phrase Search Fixes (Word Order + Maqqef)
-- Fixed word order differences: phrases now found regardless of word sequence
-- Fixed maqqef (־) concatenation bug: now properly replaced with space
-- New `_extract_all_phrase_forms_from_verse()` extracts all phrase variations
-- Guarantees every phrase search finds its source verse
+**Session 255 (2026-02-11)**: Prompt Overhaul Phase 1 - V3 Editor
+- Created `master_editor_v3.py` with 9 key prompt changes
+- Fixed MicroAnalyst JSON truncation (increased output tokens to 65k)
 
-**Session 179 (2025-12-07)**: Figurative Vehicle Search Fix
-- Removed morphological variants from vehicle searches (tent → ~~living~~)
-- Added exact match prioritization in research assembler
-- Vehicle concepts now treated as hierarchical tags, not inflected words
-
-**Session 176 (2025-12-07)**: Phrase Substring Matching Fix
-- Implemented substring matching for multi-word phrases
-- Preserved exact matching for single words
-- Fixed source verse always appearing in phrase search results
+**Session 254 (2026-02-09)**: Opus 4.6 Bug Fixes + Model Tracking
+- Fixed adaptive thinking JSON parsing in micro_analyst
+- Added model tracking for skipped pipeline steps
 
 ## Quick Commands
 
@@ -79,6 +69,7 @@ python scripts/cost_report.py
 - `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Complete technical specs
 - `docs/architecture/CONTEXT.md` - Quick reference guide
 - `docs/architecture/analytical_framework_for_RAG.md` - RAG system design
+- `docs/architecture/TOKEN_REDUCTION_PHASE_B.md` - **NEXT UP**: Ready-to-implement token reduction tasks (Wins 2, 4, 6, 9)
 
 **Features:**
 - `docs/features/PHRASE_EXTRACTION_FIX.md` - Exact phrase preservation

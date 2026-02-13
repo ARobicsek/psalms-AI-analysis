@@ -138,7 +138,8 @@ class RelatedPsalmsLibrarian:
         self,
         psalm_number: int,
         related_matches: List[RelatedPsalmMatch],
-        max_size_chars: int = 100000
+        max_size_chars: int = 100000,
+        include_full_text: bool = False
     ) -> str:
         """
         Format related psalms as markdown for inclusion in research bundle.
@@ -147,6 +148,8 @@ class RelatedPsalmsLibrarian:
             psalm_number: The psalm being analyzed
             related_matches: List of related psalm matches
             max_size_chars: Maximum size in characters (default 100KB)
+            include_full_text: Whether to include full Hebrew text of related psalms
+                             (default False — relationship metadata + shared phrases retained)
 
         Returns:
             Formatted markdown string
@@ -159,18 +162,33 @@ class RelatedPsalmsLibrarian:
 
         if self.logger:
             self.logger.info(f"Related Psalms formatting for Psalm {psalm_number}: "
-                           f"max_size={max_size_chars}, preamble_size={len(preamble)} chars")
+                           f"max_size={max_size_chars}, include_full_text={include_full_text}, "
+                           f"preamble_size={len(preamble)} chars")
 
-        # Try generating with full text for all psalms first
-        # Then progressively remove full text sections until under the cap
-        psalms_without_full_text = set()  # Track which psalms should omit full text
+        # If full text not requested, format all matches compactly
+        if not include_full_text:
+            md = preamble
+            for match in related_matches:
+                md += self._format_single_match(psalm_number, match, include_full_text=False)
+
+            # Still respect max_size_chars cap
+            if len(md) > max_size_chars:
+                md = md[:max_size_chars - 100] + "\n\n*[Section truncated for size]*\n"
+
+            if self.logger:
+                self.logger.info(f"Related Psalms final result for Psalm {psalm_number}: "
+                               f"size={len(md)} chars (compact, no full texts)")
+            return md
+
+        # Full text mode: progressively remove full text sections until under the cap
+        psalms_without_full_text = set()
 
         while True:
             md = preamble
 
             for match in related_matches:
-                include_full_text = match.psalm_number not in psalms_without_full_text
-                md += self._format_single_match(psalm_number, match, include_full_text=include_full_text)
+                has_full_text = match.psalm_number not in psalms_without_full_text
+                md += self._format_single_match(psalm_number, match, include_full_text=has_full_text)
 
             # Check if under cap
             if len(md) <= max_size_chars:
@@ -201,28 +219,16 @@ class RelatedPsalmsLibrarian:
 
     def _build_preamble(self, psalm_number: int, related_matches: List[RelatedPsalmMatch]) -> str:
         """Build the preamble section for the Related Psalms Analysis."""
-        md = f"## Related Psalms Analysis\n\n"
-
-        # Build list of related psalm numbers for display
         psalm_numbers = ", ".join([str(m.psalm_number) for m in related_matches])
 
-        md += f"The librarian has found that the psalm you're analyzing (Psalm {psalm_number}) has some POSSIBLY interesting word and phrase relationships with other psalms (Psalms {psalm_numbers}).\n\n"
-
-        md += "To understand the potential value of these connections, consider the scholarly consensus regarding Psalm 25 and Psalm 34. These two acrostics are a classic example of a \"diptych,\" or deliberate pair, linked by numerous structural and thematic echoes.\n"
-        md += "- **Structural Anomaly**: They both share the unique acrostic structure of omitting the Vav (ו) stanza and adding a final Pe (פ) stanza, which links them conceptually through the root פדה (padah - to redeem).\n"
-        md += "- **The \"Call and Response\" Arc**: This structural link is reinforced by a clear theological arc:\n"
-        md += "  - **The Plea (Ps 25:22)**: Concludes with the petition פְּדֵה... מִכֹּל צָרוֹתָיו (pedeh... mikol tzarotav - \"Redeem... from all his troubles\").\n"
-        md += "  - **The Response (Ps 34:7, 18)**: Answers with the assurance וּמִכׇּל־צָרוֹתָיו הוֹשִׁיעוֹ (u'mikol-tzarotav hoshio - \"and from all his troubles He saved him\") and the final capstone statement פֹּדֶה יְהֹוָה (podeh Adonai - \"The Lord redeems\").\n"
-        md += "- **Shared Wisdom Theme**: Both psalms pivot to wisdom instruction using the nearly identical rhetorical question מִי־הָאִישׁ (mi ha-ish - \"Who is the man...\") (Ps 25:12, Ps 34:13).\n"
-        md += "- **Shared Thematic Vocabulary**: They are further bound by a specific vocabulary of piety and instruction, including:\n"
-        md += "  - \"Fear of the LORD\" (Ps 25:12, 14; Ps 34:8, 10, 12)\n"
-        md += "  - \"The humble/afflicted\" (עֲנָוִים - anavim) (Ps 25:9; Ps 34:3)\n"
-        md += "  - \"Good\" (טוֹב - tov) (Ps 25:13; Ps 34:9, 11, 13)\n\n"
-
-        md += "As you review the data below, ask yourself if a similar structural, thematic, or \"call-and-response\" dynamic is at play here, where one psalm seems to complete or answer the other. You have the entire text of the potentially related psalms, so ALSO please look beyond the word similarities to OTHER possible connections of ARCHITECTURE, THEME, LIFE EVENTS, LITURGICAL FUNCTION, etc, AND consider how these psalms DIFFER in interesting and informative ways.\n\n"
-
-        md += f"Below is the full text of the psalms potentially related to Psalm {psalm_number}, and for each psalm, a list of POSSIBLY related words and phrases that were algorithmically detected. These relationships might deepen your insights into the meaning, intent, posture, history, and poetics of the psalm you are analyzing. Feel free to REJECT these possible connections as spurious, but DO incorporate them into your work where relevant an insight-driving.\n\n"
-
+        md = f"## Related Psalms Analysis\n\n"
+        md += f"Psalm {psalm_number} shares word/phrase connections with Psalms {psalm_numbers}.\n\n"
+        md += "**Model diptych** — Ps 25 + 34: both omit Vav stanza, add Pe stanza (→ פדה). "
+        md += "Plea (25:22 פְּדֵה מִכֹּל צָרוֹתָיו) → Response (34:7 וּמִכׇּל־צָרוֹתָיו הוֹשִׁיעוֹ). "
+        md += "Shared מִי־הָאִישׁ formula (25:12, 34:13), shared vocabulary (יִרְאַת ה׳, עֲנָוִים, טוֹב).\n\n"
+        md += "**Your task**: Look for similar structural/thematic/call-and-response dynamics. "
+        md += "Go beyond word matches — consider architecture, theme, life events, liturgical function, and meaningful DIFFERENCES. "
+        md += "Reject spurious connections; incorporate genuine ones.\n\n"
         md += "---\n\n"
 
         return md

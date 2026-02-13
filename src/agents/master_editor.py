@@ -287,7 +287,7 @@ For EACH verse:
 
    STRONG: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ לוֹ ('you shall surely open your hand to him,' Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
 
-4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. The Torah Temimah identifies where texts were mined for aggadic/halachic purposes—review and incorporate these materials. Read the "### About the Commentators" section in the research bundle for context.
+4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. The Torah Temimah identifies where texts were mined for aggadic/halachic purposes—review and incorporate these materials.
 
 5. **Modern Liturgical Context**:
    - When a verse appears in liturgy, comment on its usage and what it reveals.
@@ -550,7 +550,7 @@ The introduction essay and the verse commentary serve fundamentally different pu
 
    STRONG: "The 'opened hand' imagery appears 23 times. In Deuteronomy, it's a command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ לוֹ ('you shall surely open your hand to him,' Deut 15:8). Psalm 145 flips this—now it's God who opens the hand."
 
-4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. Review the Torah Temimah for aggadic/halachic uses. Read "### About the Commentators" in the research bundle.
+4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. Review the Torah Temimah for aggadic/halachic uses.
 
 5. **Liturgical Context**: When a verse appears in liturgy, QUOTE the liturgical text and explain the connection.
 

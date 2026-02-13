@@ -31,4 +31,20 @@ This document outlines a two-pronged strategy to maximize the context window eff
 **Benefit:** Massive reduction in token overhead for the largest input component (Research Bundle), freeing up ~3000+ tokens per call for actual reasoning and synthesis.
 
 ---
-**Status:** PROPOSAL (Deferred to Future Session)
+**Status:** PARTIALLY IMPLEMENTED (Session 257)
+
+### Implemented (Session 257 — Phase A):
+- Removed static commentator biographical essays from bundle (10,724 chars → 200 chars)
+- Fixed analytical framework duplication (removed from bundle; kept as separate prompt variable)
+- Added `include_working_notes=False` to strip macro working notes from micro analyst input
+
+### Remaining (Phase B — Next Session):
+- Telegraphic style for macro/micro outputs (this proposal's item 1)
+- Compact markdown formatting in research bundle (dense headers, reduced separators)
+- BDB lexicon entry truncation (~500 chars max per entry)
+- Related psalms default trimming (no full texts)
+
+### Deferred Indefinitely:
+- JSON for Research Bundle (this proposal's item 2) — content-level reductions are higher impact
+
+### Full Plan: See `C:\Users\ariro\.claude\plans\purring-marinating-token.md`

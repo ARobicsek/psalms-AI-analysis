@@ -82,8 +82,13 @@ class MacroAnalysis:
             working_notes=data.get('working_notes', '')
         )
 
-    def to_markdown(self) -> str:
-        """Format as markdown for human reading and Pass 2 input."""
+    def to_markdown(self, include_working_notes: bool = True) -> str:
+        """Format as markdown for human reading and Pass 2 input.
+
+        Args:
+            include_working_notes: If False, omit the working_notes section to save tokens.
+                                  Useful when passing to downstream agents that don't need them.
+        """
         lines = [
             f"# Macro Analysis: Psalm {self.psalm_number}",
             "",
@@ -119,7 +124,7 @@ class MacroAnalysis:
             for i, question in enumerate(self.research_questions, 1):
                 lines.append(f"{i}. {question}")
 
-        if self.working_notes:
+        if include_working_notes and self.working_notes:
             lines.append("\n## Working Notes")
             lines.append(self.working_notes)
 

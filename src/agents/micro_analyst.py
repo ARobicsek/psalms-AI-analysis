@@ -134,6 +134,12 @@ Examples of good questions:
 
 These questions should guide the Synthesizer and Editor to address genuinely interesting aspects of the psalm.
 
+## WRITING DENSITY
+Output consumed by downstream AI agents. Maximize information density:
+- Fragments over full sentences in all fields except where JSON schema requires sentences
+- Drop articles/filler. E.g., "Chiastic structure vv.3-9, pivot at v.6" not "There is a chiastic structure spanning verses 3-9, with the pivot point at verse 6"
+- Lexical insights: word + meaning + significance only. No "interestingly" or "it is worth noting"
+
 OUTPUT FORMAT: Return ONLY valid JSON. Do NOT include the phonetic transcription in your output.
 
 {
@@ -529,7 +535,7 @@ class MicroAnalystV2:
         # Build prompt - use replace to avoid brace conflicts
         prompt = DISCOVERY_PASS_PROMPT
         prompt = prompt.replace('{psalm_number}', str(psalm_number))
-        prompt = prompt.replace('{macro_analysis}', macro_analysis.to_markdown())
+        prompt = prompt.replace('{macro_analysis}', macro_analysis.to_markdown(include_working_notes=False))
         prompt = prompt.replace('{psalm_text_with_phonetics}', psalm_text_with_lxx)
         prompt = prompt.replace('{rag_context}', rag_formatted)
         prompt = prompt.replace('{verse_count}', str(verse_count))

@@ -54,6 +54,20 @@ else:
     from .figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
 
 
+def _truncate_bdb_entry(text: str, max_chars: int = 500) -> str:
+    """Truncate a BDB lexicon entry to max_chars, preserving complete lines."""
+    if len(text) <= max_chars + 100:  # Small buffer to avoid cutting near end
+        return text
+    # Find last newline or period before max_chars
+    truncated = text[:max_chars]
+    last_newline = truncated.rfind('\n')
+    last_period = truncated.rfind('. ')
+    break_point = max(last_newline, last_period + 1)
+    if break_point > max_chars * 0.5:  # Only use natural break if it's past halfway
+        truncated = text[:break_point + 1]
+    return truncated.rstrip() + "\n[...]"
+
+
 @dataclass
 class ResearchRequest:
     """
@@ -176,29 +190,30 @@ class ResearchBundle:
         if self.lexicon_bundle and self.lexicon_bundle.entries:
             md += "## Hebrew Lexicon Entries (BDB)\n\n"
             for entry in self.lexicon_bundle.entries:
-                md += f"### {entry.word}\n"
-                md += f"**Lexicon**: {entry.lexicon_name}\n"
-
-                # Show disambiguation metadata
-                if entry.headword:
-                    md += f"**Vocalized**: {entry.headword}  \n"
+                # Compact header: word [Lexicon Strong's] *transliteration*
+                header_parts = [f"### {entry.word}"]
+                meta = []
+                if entry.lexicon_name:
+                    meta.append(entry.lexicon_name)
                 if entry.strong_number:
-                    md += f"**Strong's**: {entry.strong_number}  \n"
+                    meta.append(entry.strong_number)
+                if meta:
+                    header_parts.append(f"[{' '.join(meta)}]")
                 if entry.transliteration:
-                    md += f"**Pronunciation**: {entry.transliteration}  \n"
+                    header_parts.append(f"*{entry.transliteration}*")
+                md += " ".join(header_parts) + "\n"
 
-                md += f"\n{entry.entry_text}\n\n"
+                md += f"{_truncate_bdb_entry(entry.entry_text)}\n\n"
 
-                # Show etymology notes if found (Klein Dictionary)
+                # Compact Klein data on one line if present
+                klein_parts = []
                 if entry.etymology_notes:
-                    md += f"**Etymology**: {entry.etymology_notes}  \n\n"
-
-                # Show derivatives if found (Klein Dictionary)
+                    klein_parts.append(f"Klein: {entry.etymology_notes}")
                 if entry.derivatives:
-                    md += f"**Derivatives**: {entry.derivatives}  \n\n"
+                    klein_parts.append(f"Derivatives: {entry.derivatives}")
+                if klein_parts:
+                    md += ". ".join(klein_parts) + "\n\n"
 
-                if entry.url:
-                    md += f"[View on Sefaria]({entry.url})\n\n"
                 md += "---\n\n"
 
         # Concordance section
@@ -224,12 +239,9 @@ class ResearchBundle:
                 for insight_id, bundles in grouped_bundles.items():
                     # Find primary search
                     primary_bundle = next((b for b in bundles if b.request.is_primary_search), bundles[0])
+                    total_results = sum(len(b.results) for b in bundles)
 
-                    md += f"### Search {search_num}: {primary_bundle.request.insight_notes or primary_bundle.request.query}\n"
-                    md += f"*Lexical Insight Group*\n\n"
-
-                    # Show primary phrase and variants
-                    md += f"**Primary phrase**: {primary_bundle.request.query}\n"
+                    md += f"### {primary_bundle.request.insight_notes or primary_bundle.request.query} ({total_results} results, {primary_bundle.request.scope}, {primary_bundle.request.level})\n"
 
                     # Collect all variants from alternate_queries
                     all_variants = set()
@@ -238,16 +250,13 @@ class ResearchBundle:
                             all_variants.update(bundle.request.alternate_queries)
 
                     if all_variants:
-                        md += f"**Variants searched**: {', '.join(sorted(all_variants))}\n"
-
-                    md += f"**Total results**: {sum(len(b.results) for b in bundles)}  \n"
-                    md += f"**Scope**: {primary_bundle.request.scope} | **Level**: {primary_bundle.request.level}\n\n"
+                        md += f"Variants: {', '.join(sorted(all_variants))}\n"
+                    md += "\n"
 
                     # Show results from all bundles in the group
                     all_results = []
                     for bundle in bundles:
                         for result in bundle.results:
-                            # Track which query found this result
                             result.query_found = bundle.request.query
                             all_results.append(result)
 
@@ -259,17 +268,10 @@ class ResearchBundle:
                             unique_results.append(result)
                             seen_refs.add(result.reference)
 
-                    # Display top results
                     if unique_results:
-                        md += "#### Results:\n\n"
                         for result in unique_results[:10]:
-                            md += f"**{result.reference}**  \n"
-                            md += f"Hebrew: {result.hebrew_text}  \n"
-                            md += f"English: {result.english_text}  \n"
-                            if result.is_phrase_match:
-                                md += f"Matched: *{result.matched_phrase}*  \n\n"
-                            else:
-                                md += f"Matched: *{result.matched_word}* (position {result.word_position})  \n\n"
+                            matched = result.matched_phrase if result.is_phrase_match else f"{result.matched_word} (pos {result.word_position})"
+                            md += f"**{result.reference}** | {result.hebrew_text} | {result.english_text} | *{matched}*\n\n"
 
                         if len(unique_results) > 10:
                             md += f"*...and {len(unique_results) - 10} more results*\n\n"
@@ -280,22 +282,12 @@ class ResearchBundle:
             # Display ungrouped searches (legacy format)
             if ungrouped_bundles:
                 for i, bundle in enumerate(ungrouped_bundles, search_num):
-                    md += f"### Search {i}: {bundle.request.query}\n"
-                    md += f"**Scope**: {bundle.request.scope}  \n"
-                    md += f"**Level**: {bundle.request.level}  \n"
-                    md += f"**Variations searched**: {len(bundle.variations_searched)}  \n"
-                    md += f"**Results**: {len(bundle.results)}  \n\n"
+                    md += f"### {bundle.request.query} ({len(bundle.results)} results, {bundle.request.scope}, {bundle.request.level})\n\n"
 
                     if bundle.results:
-                        md += "#### Top Results:\n\n"
                         for result in bundle.results[:10]:
-                            md += f"**{result.reference}**  \n"
-                            md += f"Hebrew: {result.hebrew_text}  \n"
-                            md += f"English: {result.english_text}  \n"
-                            if result.is_phrase_match:
-                                md += f"Matched: *{result.matched_phrase}*  \n\n"
-                            else:
-                                md += f"Matched: *{result.matched_word}* (position {result.word_position})  \n\n"
+                            matched = result.matched_phrase if result.is_phrase_match else f"{result.matched_word} (pos {result.word_position})"
+                            md += f"**{result.reference}** | {result.hebrew_text} | {result.english_text} | *{matched}*\n\n"
 
                         if len(bundle.results) > 10:
                             md += f"*...and {len(bundle.results) - 10} more results*\n\n"
@@ -450,42 +442,34 @@ class ResearchBundle:
                     md += f"**{parallel.get('parallel_type')}** ({heb.get('text_reference')})  \n"
                     md += f"*Conceptual Analysis*: {parallel.get('conceptual_analysis', '')[:300]}...  \n\n"
 
-            # Include full analytical framework
-            if self.rag_context.analytical_framework:
-                md += "## Analytical Framework for Biblical Poetry\n\n"
-                md += self.rag_context.analytical_framework
-                md += "\n\n---\n\n"
-            else:
-                md += "*Note: Full analytical framework available to Writer agent*\n\n"
-                md += "---\n\n"
+            # Analytical framework is passed separately to consuming agents via their
+            # prompt templates (e.g., {analytical_framework} in master_editor.py).
+            # Not embedded in the research bundle to avoid duplication.
+            md += "---\n\n"
 
         # Commentary section
         if self.commentary_bundles:
             md += "## Traditional Commentaries\n\n"
-            md += "Classical interpretations from traditional Jewish commentators on key verses.\n\n"
-            md += "### About the Commentators\n\n#### 1. Rabbi Shlomo Yitzchaki (Rashi)\n\nRabbi Shlomo Yitzchaki (1040–1105), known as Rashi, is the foundational commentator of Jewish tradition. Living in Troyes, France, his life and work were profoundly shaped by the communal precariousness following the massacres of the First Crusade. This context fueled his pedagogical mission: to make the core Jewish texts, the Tanakh and the Babylonian Talmud, accessible to ensure the continuity of Jewish knowledge. His commentaries on both became indispensable, with his Talmud commentary being printed in every subsequent edition and his Tanakh commentary holding the distinction of being the first Hebrew book ever printed (1475).\n\nRashi's exegetical method is a revolutionary synthesis of *peshat* (plain, contextual meaning) and *derash* (rabbinic homiletics). While he stated his goal was *peshat*, his genius was not in literalism but in *curation*. He possessed an uncanny ability to anticipate a student's question—a textual redundancy, an awkward phrase, or a narrative difficulty—and would then select a concise midrashic teaching that \"settles\" this specific problem. Thus, *derash* is not used as a replacement for the plain meaning but as a tool to reveal a deeper coherence *within* the *peshat*. He anchors the Oral Law within the Written Law, demonstrating their inseparability. To aid his local French-speaking audience, he frequently translated difficult Hebrew terms into Old French using Hebrew letters (*la'azim*), a practice that made his work an invaluable resource for modern linguists. His philosophy was his pedagogy; he was not a formal philosopher but an educator driven by a desire to empower every Jew to study. His legacy is one of total saturation; all subsequent Jewish commentary is, in some form, a dialogue with Rashi.\n\n#### 2. Rabbi Abraham ibn Ezra\n\nRabbi Abraham ibn Ezra (c.1092–1167) represents the zenith of the \"Golden Age\" of Spanish Jewry. A consummate polymath, he was a master of grammar, philosophy, mathematics, and astrology. After personal tragedies, he spent the second half of his life as an itinerant scholar, wandering through Christian Europe and acting as an intellectual bridge, introducing the sophisticated Sephardic grammatical and scientific traditions to the Jews of France, Italy, and England. His scholarly corpus is vast, including foundational works on Hebrew grammar, Neoplatonic philosophy (*Yesod Mora*), and scientific tracts that introduced the decimal system to European Jews.\n\nHis philosophy was a thoroughgoing rationalism, famously stating the \"intellect must be the intermediary between man and his God.\" This rationalism included a deep, scientific belief in astrology, which he viewed as the deterministic physics of the cosmos; the *mitzvot* (commandments), in his view, were divine tools to mitigate this astral determinism. His exegetical method is a conscious and sharp polemic against Rashi's *peshat/derash* synthesis. For Ibn Ezra, the *peshat* is discoverable only through rigorous, scientific mastery of Hebrew grammar and linguistics, and he famously rejects any rabbinic interpretation that \"flies in the face of reason.\" His commentary is concise, witty, and often enigmatic, frequently hinting at controversial ideas with the phrase, \"and the intelligent will understand\" (*ve-hamaskil yavin*). Scholars agree he was alluding to conclusions that form the basis of modern biblical criticism, such as post-Mosaic authorship of certain verses and the existence of a Deutero-Isaiah. His legacy is the creation of the competing rationalist-grammatical school of exegesis.\n\n#### 3. Rabbi David Kimhi (Radak)\n\nRabbi David Kimhi (1160–1235), or Radak, was a product of the unique intellectual climate of 13th-century Provence, a \"geographic and intellectual crossroads\" mediating between the Talmudism of Northern France (Rashi) and the rationalism of Spain (Ibn Ezra). A staunch defender of Maimonides during the Maimonidean Controversy, Radak's primary field was philology. His grammatical treatise, *Sefer Mikhlol*, and his lexicon, *Sefer Ha-Shorashim*, synthesized and systematized Hebrew grammar with such unparalleled clarity that they became the definitive Hebrew textbooks for centuries.\n\nRadak applied this \"genius for clarification\" to his biblical commentaries, most notably on the *Nevi'im* (Prophets). His exegetical approach represents the \"golden mean\" of medieval exegesis. He follows the methodology of Ibn Ezra, with a profound commitment to *peshat*, grammatical precision, and a Maimonidean rationalist philosophy. However, unlike the polemical Ibn Ezra, Radak comfortably integrates all his predecessors. He presents the grammatical *peshat* with the accessibility of Rashi and respectfully utilizes rabbinic *derash*, which he clearly distinguishes from the plain meaning. He provides the necessary linguistic, historical, and geographical context to make the prophetic books understandable. His commentary on *Nevi'im* became as standard as Rashi's on the Torah. Because of its clarity and precision, Radak's work became the primary resource for the Christian Hebraists of the Renaissance and Reformation, heavily influencing the translators of the King James Version of the Bible. He remains indispensable for any serious study of the Prophets.\n\n#### 4. Rabbi Menachem ben Solomon (Meiri)\n\nRabbi Menachem ben Solomon (1249–1316), the Meiri, was a leading Maimonidean rationalist in 13th-century Provence, living at the height of the Maimonidean Controversy. His magnum opus is the *Beit HaBechirah* (\"The Chosen House\"), a monumental, encyclopedic digest of the Talmud. This work, which was lost for centuries and only rediscovered in the 20th century, is not a line-by-line commentary like Rashi's. Instead, it is a systematic, topical summary. The Meiri omits the \"give and take\" of the Talmudic debate and instead presents a lucid summary of the entire subject, collating the opinions of all preceding authorities (whom he refers to by epithets, not names) before concluding with the final *halachic* (legal) decision. This work is the ultimate expression of his Maimonidean worldview, imposing a clear, logical, and rational order on the vast sea of the Talmud.\n\nThe Meiri's most radical and enduring innovation is his *halachic* position on non-Jews. The Talmud contains discriminatory laws against ancient *akum* (idolaters). The Meiri was the first major authority to rule that these laws were entirely obsolete. He did this by positing a revolutionary *halachic* category: \"nations restricted by the ways of religion\" (*umot ha-gedurot be-darkhei ha-datot*). He argued that the Talmud's \"idolater\" was a moral, not theological, category referring to lawless, barbaric ancient peoples. Contemporary Christians and Muslims, by contrast, are governed by *dat* (law, reason, and social order). Because they live by a system of law and morality, the Meiri ruled they are to be treated as equals to Jews in all matters of civil law. Since its rediscovery, his work has become the primary traditional source for modern Jewish universalism and interfaith relations.\n\n#### 5. Rabbi David Altschuler (Metzudat David)\n\nThe commentary known as the *Metzudot* (\"The Fortresses\") is the product of an 18th-century father-son collaboration, initiated by Rabbi David Altschuler (c. 1687–1769) and completed by his son, Rabbi Yechiel Hillel Altschuler. Working in Galicia and Prague, they perceived that the study of Tanakh, particularly *Nevi'im* (Prophets) and *Ketuvim* (Writings), had \"weakened.\" Their work, which covers only *Nevi'im* and *Ketuvim*, was a purely pedagogical intervention designed to reverse this decline.\n\nThe brilliance of the *Metzudot* lies not in its content, which is intentionally not original—it is a masterful compilation and simplification based primarily on Radak—but in its revolutionary *form*. Rabbi Yechiel Hillel split the commentary into two distinct parts, printed side-by-side on the page. The first, *Metzudat Tzion* (\"Fortress of Zion\"), is a simple glossary whose sole function is to define individual difficult Hebrew words. The second, *Metzudat David* (\"Fortress of David\"), is the commentary proper, providing a clear, flowing paraphrase and explanation of the verse's meaning as a whole. This two-part system created a \"frictionless reading experience.\" It solved the problem of earlier commentaries, like Radak's, which required a student to get bogged down in a grammatical discussion just to understand the verse. With the *Metzudot*, a student can read the flowing paraphrase of *Metzudat David* and only glance at *Metzudat Tzion* if they encounter an unfamiliar word. This pedagogical innovation was a massive success, and the *Metzudot* became a standard, indispensable starting point for any student beginning the study of the Prophets and Writings.\n\n#### 6. Rabbi Meir Leibush Wisser (Malbim)\n\nRabbi Meir Leibush Wisser (1809–1879), the Malbim, was a \"warrior\" rabbi, grammarian, and polemicist whose life was defined by his fierce, uncompromising struggle against the 19th-century Haskalah (Jewish Enlightenment) and the nascent Reform movement. His stormy rabbinic career saw him expelled from Bucharest for his staunch opposition to any religious innovations. His commentary was his weapon in this war. His magnum opus, *HaTorah veHaMitzvah*, was an explicit polemic against the Reform movement's claim that the Oral Law (the Talmud) was a later, human invention separate from the \"pure\" Written Torah. The Malbim's goal was to prove, through systematic linguistic analysis, that the *entire* Oral Law is \"implicit in the plain meaning of the verse.\"\n\nTo achieve this, he launched an exegetical counter-reformation built on two radical linguistic principles. First, he rejected the long-held rabbinic principle that \"the Torah speaks in human language.\" He argued that in a divine text, there are *no true synonyms* and *no redundancies*. If the Torah uses two different words for \"speak\" (e.g., *amar* vs. *diber*), they must have distinct, precise meanings that carry *halachic* implications. Second, in his introduction *Ayelet ha-Shachar*, he laid out a \"rediscovered\" system of 613 precise grammatical and syntactic rules that he claimed the Talmudic Sages used to derive the Oral Law. With this framework, the Malbim argued that what earlier commentators (like Rashi or Ibn Ezra) saw as *derash* (homiletics) was, in fact, the true, logical, grammatical *peshat* of the verse. He effectively co-opted the Enlightenment's own tools—logic and systematic rules—to defend the divine, inseparable unity of the Written and Oral Law, becoming a hero of the modern Orthodox yeshiva world.\n\n\n\n"
+            md += "Rashi (1040–1105), Ibn Ezra (c.1092–1167), Radak (1160–1235), "
+            md += "Meiri (1249–1316), Metzudat David (c.1687–1769), Malbim (1809–1879), "
+            md += "Torah Temimah (1860–1941).\n\n"
 
             for bundle in self.commentary_bundles:
-                md += f"### Psalms {bundle.psalm}:{bundle.verse}\n"
-                md += f"**Why this verse**: {bundle.reason}  \n\n"
-
                 if bundle.commentaries:
                     for comm in bundle.commentaries:
-                        md += f"#### {comm.commentator}\n"
+                        md += f"### {bundle.psalm}:{bundle.verse} — {comm.commentator}\n"
+                        md += f"*{bundle.reason}*\n"
 
-                        # Show Hebrew (truncate if too long)
                         if comm.hebrew:
                             hebrew_text = comm.hebrew if len(comm.hebrew) <= 400 else f"{comm.hebrew[:400]}..."
-                            md += f"**Hebrew**: {hebrew_text}  \n\n"
+                            md += f"{hebrew_text}\n"
 
-                        # Show English (truncate if too long)
                         if comm.english:
                             english_text = comm.english if len(comm.english) <= 400 else f"{comm.english[:400]}..."
-                            md += f"**English**: {english_text}  \n\n"
-
-                        md += "---\n\n"
+                            md += f"{english_text}\n\n"
                 else:
-                    md += "*No commentaries available for this verse.*\n\n"
+                    md += f"### {bundle.psalm}:{bundle.verse}\n"
+                    md += "*No commentaries available.*\n\n"
 
         # Liturgical Usage section (Phase 4/5: Aggregated phrase-level data)
         if self.liturgical_markdown:
