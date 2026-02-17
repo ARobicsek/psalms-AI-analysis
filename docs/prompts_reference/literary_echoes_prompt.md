@@ -1,16 +1,10 @@
-# Literary Echoes — Gemini Deep Research Prompt
-
-Use this prompt in Gemini Deep Research to generate cross-cultural literary comparison files for each psalm. Save the output as `data/literary_echoes/psalm_XXX_literary_echoes.txt`.
-
----
-
 PSALM [NUMBER] LITERARY ECHOES
 
 
 ```
 You are a comparatist scholar mapping this Psalm against world literature, poetry, oratory, and song. Your audience is a reader's guide that treats each psalm as a literary work of art.
 
-TASK: Identify 4-10 major verse or image clusters in the Psalm above. For each, find 1-3 STRONGLY resonant passages from world literature — places where another poet, orator, or songwriter reached for the same metaphor, emotional arc, structural move, or theological gesture, arriving at a similar or very different destination.
+TASK: Identify 4-10 major verse or image clusters in the Psalm above. For each, find 2-3 STRONGLY resonant passages from world literature — places where another poet, orator, or songwriter reached for the same metaphor, emotional arc, structural move, or theological gesture, arriving at a similar or quite different destination. These passages should be illuminating, amusing or particularly beautiful.
 
 === CRITICAL RULES ===
 
