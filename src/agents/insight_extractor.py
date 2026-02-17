@@ -59,6 +59,8 @@ Your job is to FILTER, not to write. You will receive extensive research materia
 6. **Liturgical insights:** Insights that reveal why the psalm or its elements are used in the way they are liturgically
 7. **Historical insights:** Insights about sitz-im-leben or polemical use of the psalm, or interesting facts about the afterlife or reception history of the psalm or its elements
 8. **Poetic insights:** Illuminating insights about poetic devices and figurative language that will enhance the reader's appreciation of the psalm as a literary work
+9. **Historical & Cultural points of interest**: Insights gained by examining the adoption of the psalm or elements of its content in later historical cotexts (e.g. Continental congress, American natives, German leider, R&B music, etc.)
+10. **Cross-cultural literary echoes**: Connections between this psalm's imagery, structure, or emotional logic and works from world literature — Shakespeare, Homer, Rumi, Li Bai, Dickinson, Neruda, political speeches, folk traditions. Focus on cases where the comparison illuminates the psalm: a shared metaphor used differently, a parallel emotional arc, a contrasting approach to the same human experience. Do NOT force connections — only flag comparisons where the juxtaposition genuinely deepens understanding of the psalm's craft or meaning.
 
 ## WHAT DOES NOT COUNT
 

@@ -233,6 +233,8 @@ Write a scholarly introduction essay that:
 
 6. **Names the human experience**: The best commentary connects the psalm to recognizable human situations — loneliness, gratitude, bewilderment at injustice, the terror of mortality, the vertigo of unmerited grace. Where appropriate, name the experience the psalmist is articulating and show how the poetic craft serves that experience. This is not sentimentality; it is the reason these poems have survived three millennia.
 
+7. **Cross-cultural resonance (sparingly, only when strong and natural)**: When a comparison to world literature — a Shakespeare soliloquy, a Chinese poem, a political speech — genuinely illuminates the psalm's craft or emotional logic, it can serve as a powerful hook or closing insight. Use at most 1-2 in the essay, and ONLY when the comparison is so strong that omitting it would feel like a missed opportunity. Always quote the source text in the original language (with English translation if not English). The primary home for cross-cultural material is the verse commentary.
+
 7. **Treats the poet as a craftsman with intentions**: Don't just catalog poetic devices ("this is a chiasm"). Show WHY the poet made this choice. What does the chiasm DO to the reader? What effect does the word order create? What would be lost if the poet had said the same thing in prose? The poet is a character in your essay — someone making deliberate, skilled decisions.
 
 **CLOSING**: End your essay with the ONE insight you most want the reader to carry away — the single observation that makes this psalm impossible to read the same way again. This should feel like a destination your essay has been building toward, not a tacked-on summary. One or two sentences.
@@ -306,6 +308,36 @@ For EACH verse:
 9. **Comparative Biblical Usage**: Concordance insights—QUOTE at least one illustrative parallel (Hebrew + English). Don't just say "appears in Psalm X"—show what Psalm X actually says.
 
 10. **Interpretation & Reception**: Church fathers, medieval Christian interpretation, modern scholarship, Targum renderings. Cultural afterlife from Deep Web Research.
+
+11. **Historical & Cultural points of interest**: adoption of the psalm or elements of its content in later historical cotexts (e.g. Continental congress, American natives, German leider, R&B music, etc.)
+
+12. **Cross-Cultural Literary Echoes** (WHEN GENUINELY ILLUMINATING):
+   When a verse's imagery, emotional logic, or poetic technique has a striking parallel in world literature, use it to deepen the reader's appreciation — but ONLY when the comparison earns its place.
+
+   **The test:** Does the comparison make the reader see something NEW in the psalm? If it merely shows the psalm is "universal," skip it.
+
+   **PLACEMENT:** The verse commentary is the PRIMARY home for these comparisons (aim for 2-4 per psalm). Each comparison should be anchored to a specific verse or verse-group where it illuminates the psalm's craft.
+
+   **QUOTATION RULE (NON-NEGOTIABLE):** When referencing a comparison text, you MUST quote at least a key phrase or line in the ORIGINAL LANGUAGE, with English translation if the original is not English. This mirrors our Hebrew + English rule and gives readers direct contact with the source text's sound and texture. Quotations of more than a few words should be on a new line, indented, and italicized.
+
+   WEAK: "This theme of mortality also appears in Shakespeare's sonnets." ← no quotation, too vague
+
+   STRONG: "The psalmist's fury-becoming-prayer mirrors King Lear's storm scene:
+
+   > *'Blow, winds, and crack your cheeks! rage! blow!'* (III.ii.1)
+
+   Both poets understood that fury, pushed past its breaking point, becomes petition."
+
+   STRONG: "Li Bai's '静夜思' ('Quiet Night Thought') compresses the same homesickness into four lines:
+
+   > *举头望明月 / 低头思故乡*
+   > *'I raise my head to gaze at the bright moon / I lower my head and think of home'*
+
+   Where Li Bai lets the moonlight do all the work, the psalmist needs to rehearse the whole geography of Zion — the courts, the gates, the stones — as if the act of naming might close the distance."
+
+   - Draw on Deep Research and Literary Echoes data for documented connections
+   - Never let the comparison overshadow the psalm itself
+   - The psalm is always the subject; world literature is the lens
 
 ### VALIDATION CHECK — Figurative Language:
 Before finalizing, review each verse with figurative language:
@@ -386,6 +418,7 @@ Before submitting, verify:
 ☐ FIGURATIVE LANGUAGE: Each verse with figurative language cites at least ONE biblical parallel (Hebrew + English) and generates an insight.
 ☐ TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
 ☐ THE POET: Have you shown the poet making at least 2-3 deliberate craft choices and explained WHY those choices matter?
+☐ CROSS-CULTURAL ECHOES: If literary comparisons are used, does each one (a) quote the source in the original language, (b) anchor to a specific verse, (c) reveal something new about the psalm?
 """
 
 
@@ -510,6 +543,8 @@ You will write THREE sections.
 
 - **Show the poet at work**: Don't just identify poetic devices ("this is a chiasm"). Show WHY the poet chose this structure. What does it DO? What would be lost without it? Treat the poet as a skilled craftsman making deliberate choices, not as a channel for abstract theological ideas.
 
+- **Cross-cultural resonance (sparingly, only when strong and natural)**: When a comparison to world literature genuinely illuminates the psalm's craft or emotional logic, it can serve as a powerful hook or closing insight. Use at most 1-2 in the essay, and ONLY when the comparison is so strong that omitting it would feel like a missed opportunity. Always quote the source text in the original language (with English translation if not English). The primary home for cross-cultural material is the verse commentary.
+
 - **End with "The One Thing"**: Close your essay with a single, memorable insight — the one observation that changes how the student reads this psalm. Not a summary. A destination. One or two sentences that the student will remember next time they encounter this text.
 
 ### STAGE 2: MODERN JEWISH LITURGICAL USE (200-500 words)
@@ -559,6 +594,30 @@ The introduction essay and the verse commentary serve fundamentally different pu
 7. **Textual Criticism**: MT vs LXX when it reveals something interesting.
 
 8. **Concordance Insights**: QUOTE at least one parallel passage (Hebrew + English). Don't just say "appears in Psalm X"—show it.
+
+9. **Historical & Cultural points of interest**: adoption of the psalm or elements of its content in later historical cotexts (e.g. Continental congress, American natives, German leider, R&B music, etc.)
+
+10. **Cross-Cultural Literary Echoes** (WHEN GENUINELY ILLUMINATING):
+   When a verse's imagery, emotional logic, or poetic technique has a striking parallel in world literature, use it to deepen the reader's appreciation — but ONLY when the comparison earns its place.
+
+   **The test:** Does the comparison make the reader see something NEW in the psalm? If it merely shows the psalm is "universal," skip it.
+
+   **PLACEMENT:** The verse commentary is the PRIMARY home (aim for 2-4 per psalm). Anchor each comparison to a specific verse.
+
+   **QUOTATION RULE (NON-NEGOTIABLE):** Quote at least a key phrase or line in the ORIGINAL LANGUAGE, with English translation if not English. Quotations of more than a few words should be on a new line, indented, and italicized.
+
+   WEAK: "This theme of mortality also appears in Shakespeare's sonnets." ← no quotation, too vague
+
+   STRONG: "Li Bai's '静夜思' ('Quiet Night Thought') compresses the same homesickness into four lines:
+
+   > *举头望明月 / 低头思故乡*
+   > *'I raise my head to gaze at the bright moon / I lower my head and think of home'*
+
+   Where Li Bai lets the moonlight do all the work, the psalmist needs to rehearse the whole geography of Zion."
+
+   - Draw on Deep Research and Literary Echoes data
+   - Never let the comparison overshadow the psalm
+   - The psalm is always the subject; world literature is the lens
 
 ### VALIDATION CHECK — Figurative Language:
 For each verse with figurative language:
@@ -624,6 +683,7 @@ Before submitting, verify:
 ☐ FIGURATIVE LANGUAGE: Each verse with figurative language cites at least ONE biblical parallel (Hebrew + English) and generates an insight.
 ☐ TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
 ☐ THE POET: Have you shown the poet making at least 2-3 deliberate craft choices and explained WHY those choices matter?
+☐ CROSS-CULTURAL ECHOES: If literary comparisons are used, does each one (a) quote the source in the original language, (b) anchor to a specific verse, (c) reveal something new about the psalm?
 """
 
 

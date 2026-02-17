@@ -283,11 +283,28 @@ class DocumentGenerator:
         font.name = 'Times New Roman'
         font.size = Pt(12)
         
+        # Set complex-script fallback font on Normal style so Arabic/Persian text
+        # renders correctly (Aptos and Times New Roman lack Arabic glyphs in some installs)
+        normal_rPr = self.document.styles['Normal'].element.get_or_add_rPr()
+        normal_rFonts = normal_rPr.find(ns.qn('w:rFonts'))
+        if normal_rFonts is None:
+            normal_rFonts = OxmlElement('w:rFonts')
+            normal_rPr.append(normal_rFonts)
+        normal_rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+
         # Create a new style for the sans-serif body text (intro and commentary)
         style = self.document.styles.add_style('BodySans', 1) # 1 for paragraph style
         style.base_style = self.document.styles['Normal']
         style.font.name = 'Aptos'
         style.font.size = Pt(12) # Aptos 12pt for intro and commentary
+
+        # Set complex-script fallback on BodySans too (Aptos is Latin-only)
+        body_rPr = style.element.get_or_add_rPr()
+        body_rFonts = body_rPr.find(ns.qn('w:rFonts'))
+        if body_rFonts is None:
+            body_rFonts = OxmlElement('w:rFonts')
+            body_rPr.append(body_rFonts)
+        body_rFonts.set(ns.qn('w:cs'), 'Times New Roman')
 
         # Create a new style for the methodological summary
         summary_style = self.document.styles.add_style('SummaryText', 1) # 1 for paragraph style
@@ -313,6 +330,44 @@ class DocumentGenerator:
             section.bottom_margin = Pt(72)
             section.left_margin = Pt(72)
             section.right_margin = Pt(72)
+
+    def _fix_complex_script_fonts(self):
+        """Post-processing pass: fix fonts for Arabic/Persian/Urdu text in all runs.
+        
+        python-docx's font.name setter overrides the CS (complex script) font attribute,
+        causing Arabic text to render as boxes when the Latin font (e.g. Aptos) lacks
+        Arabic glyphs. This method iterates all runs and explicitly sets the CS font
+        to 'Times New Roman' on any run containing Arabic-range characters.
+        """
+        import re
+        arabic_pattern = re.compile(r'[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]')
+        fixed_count = 0
+        for paragraph in self.document.paragraphs:
+            for run in paragraph.runs:
+                if run.text and arabic_pattern.search(run.text):
+                    rPr = run._element.get_or_add_rPr()
+                    rFonts = rPr.find(ns.qn('w:rFonts'))
+                    if rFonts is None:
+                        rFonts = OxmlElement('w:rFonts')
+                        rPr.append(rFonts)
+                    rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+                    fixed_count += 1
+        # Also check table cells
+        for table in self.document.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    for paragraph in cell.paragraphs:
+                        for run in paragraph.runs:
+                            if run.text and arabic_pattern.search(run.text):
+                                rPr = run._element.get_or_add_rPr()
+                                rFonts = rPr.find(ns.qn('w:rFonts'))
+                                if rFonts is None:
+                                    rFonts = OxmlElement('w:rFonts')
+                                    rPr.append(rFonts)
+                                rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+                                fixed_count += 1
+        if fixed_count > 0:
+            print(f"  Fixed complex-script fonts on {fixed_count} run(s) containing Arabic text.")
 
     def _set_paragraph_ltr(self, paragraph):
         """
@@ -1217,6 +1272,17 @@ class DocumentGenerator:
         else:
             deep_research_str = "No"
 
+        # Literary Echoes Research status
+        literary_echoes_included = research_data.get('literary_echoes_included', False)
+        literary_echoes_available = research_data.get('literary_echoes_available', False)
+
+        if literary_echoes_included:
+            literary_echoes_str = "Yes"
+        elif literary_echoes_available:
+            literary_echoes_str = "No (available but not included)"
+        else:
+            literary_echoes_str = "No"
+
         # Sections trimmed for context length
         sections_trimmed = research_data.get('sections_trimmed', [])
         if sections_trimmed:
@@ -1242,6 +1308,7 @@ Methodological & Bibliographical Summary
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
 **Similar Psalms Analyzed**: {related_psalms_str}
 **Deep Web Research**: {deep_research_str}
+**Literary Echoes Research**: {literary_echoes_str}
 **Sections Trimmed for Context**: {sections_trimmed_str}
 **Master Editor Prompt Size**: {prompt_chars_str}
 
@@ -1393,7 +1460,8 @@ Methodological & Bibliographical Summary
         p = footer.paragraphs[0] if footer.paragraphs else footer.add_paragraph()
         add_page_number(p)
 
-        # 6. Save Document
+        # 6. Fix complex-script fonts (Arabic/Persian) and Save Document
+        self._fix_complex_script_fonts()
         self.document.save(self.output_path)
         print(f"Successfully generated Word document: {self.output_path}")
 

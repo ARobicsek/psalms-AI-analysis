@@ -73,6 +73,11 @@ class ResearchStats:
     deep_research_removed_for_space: bool = False  # Was it removed due to character limits?
     deep_research_chars: int = 0  # Character count of deep research content
 
+    # Literary Echoes (Cross-cultural literary comparisons)
+    literary_echoes_available: bool = False  # Was a literary echoes file found?
+    literary_echoes_included: bool = False  # Was it included in the final bundle?
+    literary_echoes_chars: int = 0  # Character count of literary echoes content
+
     # Research bundle trimming info
     sections_trimmed: List[str] = field(default_factory=list)  # Sections removed/trimmed for context length
 
@@ -295,6 +300,12 @@ class PipelineSummaryTracker:
             self.research.deep_research_included = research_bundle.deep_research_included
             self.research.deep_research_removed_for_space = research_bundle.deep_research_removed_for_space
             self.research.deep_research_chars = len(research_bundle.deep_research_content) if research_bundle.deep_research_content else 0
+
+        # Literary Echoes (Cross-cultural literary comparisons)
+        if hasattr(research_bundle, 'literary_echoes_content'):
+            self.research.literary_echoes_available = bool(research_bundle.literary_echoes_content)
+            self.research.literary_echoes_included = research_bundle.literary_echoes_included
+            self.research.literary_echoes_chars = len(research_bundle.literary_echoes_content) if research_bundle.literary_echoes_content else 0
 
         # Track models used (Liturgical Librarian, Figurative Curator, etc.)
         if hasattr(research_bundle, 'models_used') and research_bundle.models_used:
@@ -676,6 +687,9 @@ class PipelineSummaryTracker:
                 'deep_research_included': self.research.deep_research_included,
                 'deep_research_removed_for_space': self.research.deep_research_removed_for_space,
                 'deep_research_chars': self.research.deep_research_chars,
+                'literary_echoes_available': self.research.literary_echoes_available,
+                'literary_echoes_included': self.research.literary_echoes_included,
+                'literary_echoes_chars': self.research.literary_echoes_chars,
                 'sections_trimmed': self.research.sections_trimmed
             },
             'analysis': {

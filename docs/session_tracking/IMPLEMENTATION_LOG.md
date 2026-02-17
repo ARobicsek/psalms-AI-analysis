@@ -8,6 +8,31 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 259 (2026-02-16): Cross-Cultural Literary Echoes Feature
+
+**Objective**: Create a new "Literary Echoes" pipeline feature to integrate cross-cultural literary comparisons from Gemini Deep Research into psalm commentaries, and fix Arabic font rendering in DOCX output.
+
+**Solutions Implemented**:
+1. **Literary Echoes Prompt** — Created `docs/prompts_reference/literary_echoes_prompt.md` with detailed Gemini Deep Research prompt for generating cross-cultural literary comparisons (4-10 verse clusters, 8-20 comparisons per psalm, original-language quotations required)
+2. **Pipeline Integration** — Modified `research_assembler.py` to load `.txt` files from `data/literary_echoes/`, added `literary_echoes_content` and `literary_echoes_included` fields to `ResearchBundle`, integrated as `## Cross-Cultural Literary Echoes` section in the research bundle markdown
+3. **Pipeline Summary Tracking** — Added `literary_echoes_available`, `literary_echoes_included`, and `literary_echoes_chars` fields to `ResearchStats` dataclass in `pipeline_summary.py`
+4. **Methods Section Reporting** — Added "Literary Echoes Research" status line to Methods section in both `document_generator.py` and `combined_document_generator.py`
+5. **Arabic Font Fix (Partial)** — Added `_fix_complex_script_fonts()` post-processing method to both document generators that detects Arabic text in runs and sets `w:rFonts/@w:cs` to "Times New Roman" at the run level. Fix detects and patches runs but does not fully resolve rendering — deferred to next session.
+
+**Problems Identified**:
+- Arabic/Persian text from literary echoes renders as empty boxes in DOCX. Aptos font lacks Arabic glyphs. Style-level CS font override insufficient because `python-docx`'s `font.name` setter overrides `w:cs` at run level. Run-level post-processing fix detects Arabic runs (confirmed: "Fixed complex-script fonts on 2 run(s)") but rendering issue persists — requires deeper investigation in next session.
+
+**Files Modified**:
+- `docs/prompts_reference/literary_echoes_prompt.md` — **[NEW]** Gemini Deep Research prompt for literary echoes
+- `data/literary_echoes/README.md` — **[NEW]** Documentation for literary echoes data directory
+- `data/literary_echoes/psalm_036_literary_echoes.txt` — **[NEW]** Generated echoes for Psalm 36
+- `src/agents/research_assembler.py` — Added literary echoes loading, fields, and markdown integration
+- `src/utils/pipeline_summary.py` — Added literary echoes tracking fields to ResearchStats
+- `src/utils/document_generator.py` — Added Literary Echoes Methods status + `_fix_complex_script_fonts()` post-processing
+- `src/utils/combined_document_generator.py` — Added Literary Echoes Methods status + `_fix_complex_script_fonts()` post-processing
+
+---
+
 ## Session 258 (2026-02-12): Token Reduction Phase B — Bundle Compaction
 
 **Objective**: Implement Phase B token reduction tasks (B1-B4) from `docs/architecture/TOKEN_REDUCTION_PHASE_B.md` to further reduce per-psalm pipeline cost.
