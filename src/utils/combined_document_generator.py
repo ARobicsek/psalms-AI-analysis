@@ -351,34 +351,72 @@ class CombinedDocumentGenerator:
         causing Arabic text to render as boxes when the Latin font (e.g. Aptos) lacks
         Arabic glyphs. This method iterates all runs and explicitly sets the CS font
         to 'Times New Roman' on any run containing Arabic-range characters.
+
+        Crucially, we also force the 'w:rtl' property on these runs. Without explicit
+        RTL marking, Word often defaults to the ASCII/hAnsi font slot (Aptos) even
+        for Arabic characters in an LTR paragraph, ignoring the CS font setting.
         """
         import re
+        # Arabic/Persian/Urdu range
         arabic_pattern = re.compile(r'[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]')
+        # CJK Unified Ideographs (4E00-9FFF), Hiragana (3040-309F), Katakana (30A0-30FF)
+        cjk_pattern = re.compile(r'[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]')
+        
         fixed_count = 0
+        
+        def processing_run(run):
+            nonlocal fixed_count
+            if not run.text:
+                return
+
+            # Arabic processing
+            if arabic_pattern.search(run.text):
+                rPr = run._element.get_or_add_rPr()
+                
+                # 1. Ensure w:rFonts is present and first child
+                rFonts = rPr.find(ns.qn('w:rFonts'))
+                if rFonts is None:
+                    rFonts = OxmlElement('w:rFonts')
+                    rPr.insert(0, rFonts)
+                
+                # Set CS font
+                rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+                
+                # 2. Force w:rtl property for Arabic
+                if rPr.find(ns.qn('w:rtl')) is None:
+                    rtl = OxmlElement('w:rtl')
+                    rPr.append(rtl)
+                
+                fixed_count += 1
+            
+            # CJK processing
+            if cjk_pattern.search(run.text):
+                rPr = run._element.get_or_add_rPr()
+                
+                # 1. Ensure w:rFonts is present and first child
+                rFonts = rPr.find(ns.qn('w:rFonts'))
+                if rFonts is None:
+                    rFonts = OxmlElement('w:rFonts')
+                    rPr.insert(0, rFonts)
+                
+                # Set East Asia font
+                # DengXian is a good modern sans-serif for CJK in Office
+                rFonts.set(ns.qn('w:eastAsia'), 'DengXian')
+                
+                fixed_count += 1
+
         for paragraph in self.document.paragraphs:
             for run in paragraph.runs:
-                if run.text and arabic_pattern.search(run.text):
-                    rPr = run._element.get_or_add_rPr()
-                    rFonts = rPr.find(ns.qn('w:rFonts'))
-                    if rFonts is None:
-                        rFonts = OxmlElement('w:rFonts')
-                        rPr.append(rFonts)
-                    rFonts.set(ns.qn('w:cs'), 'Times New Roman')
-                    fixed_count += 1
+                processing_run(run)
+                
         # Also check table cells
         for table in self.document.tables:
             for row in table.rows:
                 for cell in row.cells:
                     for paragraph in cell.paragraphs:
                         for run in paragraph.runs:
-                            if run.text and arabic_pattern.search(run.text):
-                                rPr = run._element.get_or_add_rPr()
-                                rFonts = rPr.find(ns.qn('w:rFonts'))
-                                if rFonts is None:
-                                    rFonts = OxmlElement('w:rFonts')
-                                    rPr.append(rFonts)
-                                rFonts.set(ns.qn('w:cs'), 'Times New Roman')
-                                fixed_count += 1
+                            processing_run(run)
+
         if fixed_count > 0:
             print(f"  Fixed complex-script fonts on {fixed_count} run(s) containing Arabic text.")
 

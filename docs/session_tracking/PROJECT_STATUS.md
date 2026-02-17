@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-16 (Session 259)
+**Last Updated**: 2026-02-16 (Session 260)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 259
-- **Active Features**: Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration
+- **Current Session**: 260
+- **Active Features**: Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, **Complex Script Font Support (Arabic/CJK)**
 
 ---
 
@@ -36,7 +36,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 | Phase 3c: Insight Extraction | ✅ Complete | Curates high-value insights from research bundle (Step 2c) |
 | Phase 4: Research Assembly | ✅ Complete | Optimizing figurative language search and trimming |
 | Phase 5: Synthesis Generation | ✅ Complete | Commentary generation with Gemini fallback |
-| Phase 6: Editing and Publication | ✅ Complete | Master Editor V2, DOCX generation |
+| Phase 6: Editing and Publication | ✅ Complete | Master Editor V2, DOCX generation (RTL/Arabic supported) |
 
 ### Active Features
 - **Master Editor V2**: Restructured prompt with explicit Deep Research guidance (default)
@@ -62,9 +62,9 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
 
-*   **Session 259**: Cross-Cultural Literary Echoes — created Gemini Deep Research prompt, integrated literary echoes into pipeline (research_assembler, pipeline_summary, document generators), generated Psalm 36 echoes. Added `_fix_complex_script_fonts()` post-processing to both DOCX generators for Arabic text (partial fix — rendering issue persists, deferred).
-*   **Session 258**: Token Reduction Phase B — related psalms no full texts + telegraphic preamble (~15K saved), BDB entries truncated to ~500 chars (~21K saved), compact markdown formatting, telegraphic macro/micro prompts (micro confirmed working; macro prompt strengthened after PS35 review), removed extended thinking dump from macro working_notes (~15K saved), removed figurative confidence scores (80 lines/psalm).
-*   **Session 257**: Token Reduction Phase A — removed 10K chars of static commentator bios from research bundle (dates only now), fixed analytical framework duplication bug (was embedded in bundle AND passed separately), added `include_working_notes=False` to strip 27K chars of macro working notes from micro analyst input. Total: ~45K tokens saved per psalm.
+*   **Session 260**: Fixed Arabic font rendering in generated DOCX files. Identified that Word requires strict XML ordering (`w:rFonts` first) and `w:rtl` property. Updated both document generators to enforce correct schema (`insert(0, rFonts)`) and verified fix with Literary Echoes text. Extended support to include Chinese and Japanese (CJK) characters via `w:eastAsia` attribute.
+*   **Session 259**: Cross-Cultural Literary Echoes — created Gemini Deep Research prompt, integrated literary echoes into pipeline (research_assembler, pipeline_summary, document generators), generated Psalm 36 echoes. Added `_fix_complex_script_fonts()` (initial implementation).
+*   **Session 258**: Token Reduction Phase B — related psalms no full texts + telegraphic preamble (~15K saved), BDB entries truncated to ~500 chars (~21K saved), compact markdown formatting, telegraphic macro/micro prompts, removed extended thinking dump from macro working_notes (~15K saved).
 *   **Session 256**: Finalized Prompt Overhaul Phase 1 by migrating V3 logic to `master_editor.py`, updating pipeline scripts, and archiving legacy code. Upgraded `InsightExtractor` and `QuestionCurator` to `claude-opus-4-6` (from 4.5) and updated documentation/tracking.
 *   **Session 255**: Implemented Phase 1 of Prompt Overhaul. Created `master_editor_v3.py` with 9 key prompt changes and `run_enhanced_pipeline_TEST.py` for safe testing. Fixed MicroAnalyst JSON truncation by increasing output token limit to 65k.
 *   **Session 253**: Upgraded macro_analyst and micro_analyst from Claude Sonnet 4.5 to Claude Opus 4.6 with adaptive thinking (effort=max). Added Opus 4.6 pricing to cost_tracker. Updated scriptReferences.md.

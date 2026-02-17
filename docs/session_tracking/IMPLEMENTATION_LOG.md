@@ -8,6 +8,39 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 260 (2026-02-16): Fix Arabic Font Rendering
+
+**Objective**: Fix the rendering of Arabic text in generated DOCX files, which was appearing as empty squares due to missing Complex Script (CS) font instructions and Right-to-Left (RTL) markers.
+
+**Problem Analysis**:
+- Arabic text requires a specific "Complex Script" font (like Times New Roman or Arabic Typesetting) to be set via the `w:cs` attribute.
+- Simply setting the font name via `run.font.name` primarily affects the ASCII/High-ANSI slots, often ignored for Arabic.
+- **Critical Discovery**: Word is extremely strict about OOXML schema ordering. The `<w:rFonts>` element **must** be the first child of `<w:rPr>`. The initial fix attempt failed because it appended `w:rFonts` to the end of the properties list, causing Word to silently ignore it.
+- Additionally, the `<w:rtl/>` property is required to trigger correct shaping behavior.
+
+**Solutions Implemented**:
+1.  **Refined Font Application Logic**:
+    - Updated `_fix_complex_script_fonts` in `document_generator.py` and `combined_document_generator.py`.
+    - Logic now ensures `<w:rFonts>` is **inserted at index 0** of the run properties (`rPr`) to satisfy schema requirements.
+    - Sets `w:cs="Times New Roman"` (a reliable standard Windows font with Arabic support).
+    - Explicitly adds the `w:rtl` property to runs containing Arabic characters.
+
+2.  **Verification**:
+    - Created reproduction scripts (`debug_arabic_font.py`) and XML verification tools (`verify_xml_rtl_v2.py`).
+    - Verified that generated DOCX files now contain correctly ordered XML: `<w:rPr><w:rFonts .../><w:rtl/>...</w:rPr>`.
+    - Confirmed visual rendering of Arabic text (Literary Echoes) is correct.
+
+3.  **Experimental CJK Support**:
+    - Extended font fixer to also detect CJK characters (Unified Ideographs, Hiragana, Katakana).
+    - Sets `w:eastAsia="DengXian"` for these runs (no RTL needed).
+    - Verified with Chinese/Japanese test text.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Updated `_fix_complex_script_fonts` with `insert(0)` logic.
+- `src/utils/combined_document_generator.py` — Updated `_fix_complex_script_fonts` with `insert(0)` logic.
+
+---
+
 ## Session 259 (2026-02-16): Cross-Cultural Literary Echoes Feature
 
 **Objective**: Create a new "Literary Echoes" pipeline feature to integrate cross-cultural literary comparisons from Gemini Deep Research into psalm commentaries, and fix Arabic font rendering in DOCX output.
