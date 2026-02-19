@@ -2122,25 +2122,32 @@ class MasterEditorV2:
             model_id = model
             if model == "claude-opus-4-5":
                 model_id = "claude-opus-4-5-20250514"
-            response = self.anthropic_client.messages.create(
+            
+            # Use streaming API as required for long-thinking models (e.g. Opus 4.6)
+            response_text = ""
+            input_tokens = 0
+            output_tokens = 0
+            
+            with self.anthropic_client.messages.stream(
                 model=model_id,
                 max_tokens=64000,
                 thinking={"type": "enabled", "budget_tokens": 40000},
                 messages=[{"role": "user", "content": prompt}]
-            )
-            
-            response_text = ""
-            for block in response.content:
-                if block.type == "text":
-                    response_text = block.text
+            ) as stream:
+                for text in stream.text_stream:
+                    response_text += text
+                
+                # Get final message usage
+                final_message = stream.get_final_message()
+                input_tokens = final_message.usage.input_tokens
+                output_tokens = final_message.usage.output_tokens
 
             # Track usage
-            usage = response.usage
             self.cost_tracker.add_usage(
                 model=model,
-                input_tokens=getattr(usage, 'input_tokens', 0),
-                output_tokens=getattr(usage, 'output_tokens', 0),
-                thinking_tokens=0
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                thinking_tokens=0 
             )
 
             # Save response
@@ -2151,8 +2158,8 @@ class MasterEditorV2:
 
             # Add stats
             result['input_char_count'] = len(prompt)
-            result['input_token_count'] = getattr(usage, 'input_tokens', 0)
-            result['output_token_count'] = getattr(usage, 'output_tokens', 0)
+            result['input_token_count'] = input_tokens
+            result['output_token_count'] = output_tokens
 
             return result
 
@@ -2386,7 +2393,7 @@ def main():
     parser.add_argument('--output-dir', type=str, default='output',
                        help='Output directory')
     parser.add_argument('--model', type=str, default='gpt-5.1',
-                       choices=['gpt-5', 'gpt-5.1', 'claude-opus-4-5'],
+                       choices=['gpt-5', 'gpt-5.1', 'claude-opus-4-5', 'claude-opus-4-6'],
                        help='Model to use for editing')
     parser.add_argument('--college', action='store_true',
                        help='Generate college edition instead of main edition')

@@ -1,24 +1,28 @@
-## Session 244 (2026-01-26): Fixing College Edition Crash & Insight Attribution
 
-**Objective**: Fix `NameError` crash in College Edition generation and ensure Insight Extraction model attribution appears in pipeline stats and generated DOCX files.
+## Session 262 (2026-02-18): Opus 4.6 for Master Writer
+
+**Objective**: Integrate Claude Opus 4.6 into the Master Writer pipeline to improve commentary quality and address generation timeouts.
 
 **Problems Identified**:
-- `NameError: name 'insights_text' is not defined` in `master_editor.py` inside `_perform_college_review`, causing the College Edition generation to crash.
-- Use of the "Insight Extractor" model (Claude Opus 4.5) was not being tracked in the pipeline summary statistics, leading to missing attribution in the "Methodological & Bibliographical Summary".
+1. **Streaming Requirement**: Opus 4.6 generation times exceeded the `httpx` default read timeout, causing pipeline failures.
+2. **Model Tracking**: Pipeline stats did not accurately reflect the specific model (`claude-opus-4-6`) used for the writing step.
 
 **Solutions Implemented**:
-1. **Fixed College Edition Crash**:
-   - In `master_editor.py`, added logic to format `curated_insights` using `self._format_insights_for_prompt()` before passing it to the prompt template.
-
-2. **Added Model Tracking**:
-   - Updated `run_enhanced_pipeline.py` to explicitly track the model used for the `insight_extractor` step in the `PipelineSummaryTracker`.
-   - Added tracking for the default model even when the step is skipped (for complete documentation).
-
-3. **Updated Documentation Generators**:
-   - Modified `src/utils/document_generator.py` and `src/utils/combined_document_generator.py` to read the `insight_extractor` model usage from statistics and include an "**Insights Extraction**" line in the final Word document summary.
+1. **Streaming Implementation**:
+   - Modified `MasterEditorV2._call_claude_writer` in `src/agents/archive/master_editor_v2.py` (inherited by `MasterEditor`) to use `client.messages.stream`.
+   - Replaced single `messages.create` call with `with client.messages.stream(...) as stream:`.
+   - Configured `thinking={"type": "adaptive", "budget_tokens": 16000}` (noted deprecation warning for `thinking.type=enabled`, switched to adaptive).
+   - Added logic to accumulate text deltas while ignoring thinking blocks.
+2. **Pipeline Support**:
+   - Updated `MasterEditor` argument parser to explicitly support `claude-opus-4-6`.
+   - Verified `run_enhanced_pipeline.py` correctly passes the model argument.
+3. **Verification**:
+   - Ran full pipeline test on Psalm 100 with `--master-editor-model claude-opus-4-6`.
+   - Confirmed `pipeline_stats.json` records `master_writer: claude-opus-4-6`.
+   - Confirmed `document_generator.py` logic correctly displays the model in the Methodological Summary.
 
 **Files Modified**:
-- `src/agents/master_editor.py` - Fixed variable scope error.
-- `scripts/run_enhanced_pipeline.py` - Added model tracking logic.
-- `src/utils/document_generator.py` - Added model attribution to Main DOCX.
-- `src/utils/combined_document_generator.py` - Added model attribution to Combined DOCX.
+- `src/agents/archive/master_editor_v2.py` — Implemented streaming for long generations.
+- `scripts/run_enhanced_pipeline.py` — (Verified support).
+
+---

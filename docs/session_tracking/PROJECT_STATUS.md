@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-18 (Session 261)
+**Last Updated**: 2026-02-18 (Session 262)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 261
-- **Active Features**: Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, **Complex Script Font Support (Arabic/CJK)**
+- **Current Session**: 262
+- **Active Features**: **Opus 4.6 Master Writer**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
 
@@ -61,6 +61,8 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## ═══════════════════════════════════════════════════════════════════════════
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
+
+*   **Session 262**: Upgraded Master Writer pipeline to use `claude-opus-4-6`. Implemented streaming in `_call_claude_writer` to resolve timeout errors ("Streaming is required") for long generations. Updated CLI arguments and verified full pipeline execution on Psalm 100, confirming correct model tracking in `pipeline_stats.json` and Methodological Summary.
 
 *   **Session 261**: Fixed "Literary Echoes" missing from Main Writer output. Identified root cause as strict "Depth Beats Breadth" rule in `MASTER_WRITER_PROMPT_V3`. Updated prompt to explicitly allow high-quality cross-cultural echoes as an exception to the rule, and added explicit "Cross-Cultural Literary Echoes" label to input headers for both Master and College writers. Verified fix with debug prompts and pipeline run.
 *   **Session 260**: Fixed Arabic font rendering in generated DOCX files. Identified that Word requires strict XML ordering (`w:rFonts` first) and `w:rtl` property. Updated both document generators to enforce correct schema (`insert(0, rFonts)`) and verified fix with Literary Echoes text. Extended support to include Chinese and Japanese (CJK) characters via `w:eastAsia` attribute.
