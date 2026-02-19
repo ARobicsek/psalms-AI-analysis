@@ -126,7 +126,7 @@ When a verse admits multiple readings, you MUST explicitly name the tension and 
 
 ### RULE 9: DEPTH BEATS BREADTH
 
-For each verse, choose the 1-3 angles that actually TRANSFORM the reading. Pursue those deeply. Ignore the rest.
+For each verse, choose the 1-3 angles that actually TRANSFORM the reading. Pursue those deeply. Ignore the rest. (EXCEPTION: A striking cross-cultural literary echo that illuminates the psalm's human dimension should always be considered for inclusion, even if it adds breadth.)
 
 ### RULE 10: THE TRANSLATION TEST
 
@@ -182,7 +182,7 @@ Your tone is one of measured confidence, not breathless praise. Illuminate the t
 ### VERSE-LEVEL NOTES
 {micro_analysis}
 
-### RESEARCH MATERIALS (Lexicons, Concordance, Commentaries, Deep Research)
+### RESEARCH MATERIALS (Lexicons, Concordance, Commentaries, Deep Research, Cross-Cultural Literary Echoes)
 {research_bundle}
 
 ### PHONETIC TRANSCRIPTIONS
@@ -311,32 +311,11 @@ For EACH verse:
 
 11. **Historical & Cultural points of interest**: adoption of the psalm or elements of its content in later historical cotexts (e.g. Continental congress, American natives, German leider, R&B music, etc.)
 
-12. **Cross-Cultural Literary Echoes** (WHEN GENUINELY ILLUMINATING):
-   When a verse's imagery, emotional logic, or poetic technique has a striking parallel in world literature, use it to deepen the reader's appreciation — but ONLY when the comparison earns its place.
+12. **Cross-Cultural Literary Echoes**:
+   Avoid cheap universalism. DO NOT ignore high-quality literary parallels provided in the Cross-Cultural Literary Echoes section that are interesting, beautiful, or amusing. Treat these as valid "Depth" analysis. Aim to include at least 2-3 such comparisons in the verse-by-verse commentary if available and 1-2 in the essay as well if they fit the flow. Your readers will appreciate these.
 
-   **The test:** Does the comparison make the reader see something NEW in the psalm? If it merely shows the psalm is "universal," skip it.
-
-   **PLACEMENT:** The verse commentary is the PRIMARY home for these comparisons (aim for 2-4 per psalm). Each comparison should be anchored to a specific verse or verse-group where it illuminates the psalm's craft.
-
-   **QUOTATION RULE (NON-NEGOTIABLE):** When referencing a comparison text, you MUST quote at least a key phrase or line in the ORIGINAL LANGUAGE, with English translation if the original is not English. This mirrors our Hebrew + English rule and gives readers direct contact with the source text's sound and texture. Quotations of more than a few words should be on a new line, indented, and italicized.
-
-   WEAK: "This theme of mortality also appears in Shakespeare's sonnets." ← no quotation, too vague
-
-   STRONG: "The psalmist's fury-becoming-prayer mirrors King Lear's storm scene:
-
-   > *'Blow, winds, and crack your cheeks! rage! blow!'* (III.ii.1)
-
-   Both poets understood that fury, pushed past its breaking point, becomes petition."
-
-   STRONG: "Li Bai's '静夜思' ('Quiet Night Thought') compresses the same homesickness into four lines:
-
-   > *举头望明月 / 低头思故乡*
-   > *'I raise my head to gaze at the bright moon / I lower my head and think of home'*
-
-   Where Li Bai lets the moonlight do all the work, the psalmist needs to rehearse the whole geography of Zion — the courts, the gates, the stones — as if the act of naming might close the distance."
-
-   - Draw on Deep Research and Literary Echoes data for documented connections
-   - Never let the comparison overshadow the psalm itself
+   - These literary echoes can add richness, points of interest, variation, emotional resonance and potential sources of amusement to your commentary.
+   - Draw on Deep Research and Literary Echoes data
    - The psalm is always the subject; world literature is the lens
 
 ### VALIDATION CHECK — Figurative Language:
@@ -494,7 +473,7 @@ You are writing for publication. Your output must read as if written by a single
 ### VERSE-LEVEL NOTES
 {micro_analysis}
 
-### RESEARCH MATERIALS (Lexicons, Concordance, Commentaries, Deep Research)
+### RESEARCH MATERIALS (Lexicons, Concordance, Commentaries, Deep Research, Cross-Cultural Literary Echoes)
 {research_bundle}
 
 ### PHONETIC TRANSCRIPTIONS
@@ -597,26 +576,11 @@ The introduction essay and the verse commentary serve fundamentally different pu
 
 9. **Historical & Cultural points of interest**: adoption of the psalm or elements of its content in later historical cotexts (e.g. Continental congress, American natives, German leider, R&B music, etc.)
 
-10. **Cross-Cultural Literary Echoes** (WHEN GENUINELY ILLUMINATING):
-   When a verse's imagery, emotional logic, or poetic technique has a striking parallel in world literature, use it to deepen the reader's appreciation — but ONLY when the comparison earns its place.
+10. **Cross-Cultural Literary Echoes**:
+   Avoid cheap universalism. DO NOT ignore high-quality literary parallels provided in the Cross-Cultural Literary Echoes section that are interesting, beautiful, or amusing. Treat these as valid "Depth" analysis. Aim to include at least 2-3 such comparisons in the verse-by-verse commentary if available and 1-2 in the essay as well if they fit the flow. Your readers will appreciate these.
 
-   **The test:** Does the comparison make the reader see something NEW in the psalm? If it merely shows the psalm is "universal," skip it.
-
-   **PLACEMENT:** The verse commentary is the PRIMARY home (aim for 2-4 per psalm). Anchor each comparison to a specific verse.
-
-   **QUOTATION RULE (NON-NEGOTIABLE):** Quote at least a key phrase or line in the ORIGINAL LANGUAGE, with English translation if not English. Quotations of more than a few words should be on a new line, indented, and italicized.
-
-   WEAK: "This theme of mortality also appears in Shakespeare's sonnets." ← no quotation, too vague
-
-   STRONG: "Li Bai's '静夜思' ('Quiet Night Thought') compresses the same homesickness into four lines:
-
-   > *举头望明月 / 低头思故乡*
-   > *'I raise my head to gaze at the bright moon / I lower my head and think of home'*
-
-   Where Li Bai lets the moonlight do all the work, the psalmist needs to rehearse the whole geography of Zion."
-
+   - These literary echoes can add richness, points of interest, variation, emotional resonance and potential sources of amusement to your commentary.
    - Draw on Deep Research and Literary Echoes data
-   - Never let the comparison overshadow the psalm
    - The psalm is always the subject; world literature is the lens
 
 ### VALIDATION CHECK — Figurative Language:

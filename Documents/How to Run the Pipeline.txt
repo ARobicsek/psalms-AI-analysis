@@ -3,8 +3,11 @@ The pipeline script is: run_enhanced_pipeline.py Basic Usage:
 python scripts/run_enhanced_pipeline.py PSALM_NUMBER
 Examples:
 
-# Generate complete commentary for Psalm 23
-python scripts/run_enhanced_pipeline.py 23 [This is the new pipeline WITHOUT the synthesis writer.]
+# Generate complete commentary for Psalm XX
+python scripts/run_enhanced_pipeline.py XX [This is the new pipeline WITHOUT the synthesis writer.]
+
+#just all 3 word docs
+python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-writer --skip-college --skip-insights
 
 # Generate master editor commentaries using SPECIAL INSTRUCTIONS
 
@@ -46,8 +49,6 @@ python scripts/run_enhanced_pipeline.py 126 --skip-macro --skip-micro --skip-syn
 # only the micro
 python scripts/run_enhanced_pipeline.py 15 --skip-macro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-word-doc --skip-combined-doc
 
-#just all 3 word docs
-python scripts/run_enhanced_pipeline.py 100 --skip-macro --skip-micro --skip-writer --skip-college --skip-insights
 
 #run the RAG thematic match for a single verse in Psalms
 python single_verse_search.py ps 61:4

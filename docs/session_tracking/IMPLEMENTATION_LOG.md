@@ -8,6 +8,29 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 261 (2026-02-18): Literary Echoes Integration Fix
+
+**Objective**: Fix the issue where "Literary Echoes" were missing from the Main (Master) Writer output despite being enabled in the pipeline.
+
+**Problems Identified**:
+- **Missing Content**: "Cross-Cultural Literary Echoes" section appeared in College Edition but not Main Edition.
+- **Root Cause**: The `MASTER_WRITER_PROMPT_V3` contained strict rules ("Rule 9: Depth Beats Breadth" and "Universalism Check") that filtered out broad cultural comparisons unless they were strictly "transporting." The College prompt was more permissive.
+- **Verification**: Debug prompts confirmed the data *was* present in the input, but the LLM effectively ignored it due to the "Depth" rule.
+
+**Solutions Implemented**:
+1.  **Prompt Engineering (Master Writer)**:
+    - **Rule 9 Exception**: Explicitly added an exception to "Depth Beats Breadth" for "striking cross-cultural literary echoes."
+    - **Instruction Update**: Rewrote the "Cross-Cultural Literary Echoes" item to encourage inclusion ("Avoid cheap universalism" but "DO NOT ignore high-quality parallels").
+    - **Explicit Input**: Added "Cross-Cultural Literary Echoes" to the `## RESEARCH MATERIALS` input header to signal its importance.
+2.  **Prompt Engineering (College Writer)**:
+    - applied similar updates to the College prompt to align instructions and ensure consistent labeled inputs.
+3.  **SI Agent Alignment**: Verified that `AnswerEditorSI` instructions inherit these changes automatically via import.
+
+**Files Modified**:
+- `src/agents/master_editor.py` — Updated `MASTER_WRITER_PROMPT_V3` and `COLLEGE_WRITER_PROMPT_V3`.
+
+---
+
 ## Session 260 (2026-02-16): Fix Arabic Font Rendering
 
 **Objective**: Fix the rendering of Arabic text in generated DOCX files, which was appearing as empty squares due to missing Complex Script (CS) font instructions and Right-to-Left (RTL) markers.

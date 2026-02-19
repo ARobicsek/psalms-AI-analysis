@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-16 (Session 260)
+**Last Updated**: 2026-02-18 (Session 261)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 260
+- **Current Session**: 261
 - **Active Features**: Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, **Complex Script Font Support (Arabic/CJK)**
 
 ---
@@ -62,6 +62,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
 
+*   **Session 261**: Fixed "Literary Echoes" missing from Main Writer output. Identified root cause as strict "Depth Beats Breadth" rule in `MASTER_WRITER_PROMPT_V3`. Updated prompt to explicitly allow high-quality cross-cultural echoes as an exception to the rule, and added explicit "Cross-Cultural Literary Echoes" label to input headers for both Master and College writers. Verified fix with debug prompts and pipeline run.
 *   **Session 260**: Fixed Arabic font rendering in generated DOCX files. Identified that Word requires strict XML ordering (`w:rFonts` first) and `w:rtl` property. Updated both document generators to enforce correct schema (`insert(0, rFonts)`) and verified fix with Literary Echoes text. Extended support to include Chinese and Japanese (CJK) characters via `w:eastAsia` attribute.
 *   **Session 259**: Cross-Cultural Literary Echoes — created Gemini Deep Research prompt, integrated literary echoes into pipeline (research_assembler, pipeline_summary, document generators), generated Psalm 36 echoes. Added `_fix_complex_script_fonts()` (initial implementation).
 *   **Session 258**: Token Reduction Phase B — related psalms no full texts + telegraphic preamble (~15K saved), BDB entries truncated to ~500 chars (~21K saved), compact markdown formatting, telegraphic macro/micro prompts, removed extended thinking dump from macro working_notes (~15K saved).
