@@ -8,6 +8,30 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 263 (2026-02-19): Fix Mixed-Script DOCX Jumble (Arabic + English/Hebrew)
+
+**Objective**: Fix garbled text in DOCX output when a paragraph contains mixed Arabic, Hebrew, and English text (e.g., the Imru' al-Qais *qasida* quote in Psalm 100 Verse 5 commentary).
+
+**Problems Identified**:
+- **Mixed-script run corruption**: `_fix_complex_script_fonts()` applied `w:rtl` to entire runs containing Arabic characters, even when those runs also contained English and Hebrew text. Word then treated all text in the run as RTL base direction, causing English prose to be reordered/jumbled.
+- **Root cause**: The post-processing pass had no concept of mixed-script runs — it treated any run with Arabic characters as a pure Arabic run.
+
+**Solutions Implemented**:
+1.  **Run-splitting for mixed Arabic/non-Arabic content**:
+    - Added `_split_text_by_script()` static method that splits text into segments of Arabic vs non-Arabic characters.
+    - Updated `_fix_complex_script_fonts()` to detect mixed-script runs (containing both Arabic letters and non-Arabic letters).
+    - For mixed runs: splits into multiple OOXML `w:r` elements, each preserving the original run's formatting (bold, italic, font, size via deep-copied `w:rPr`).
+    - Arabic-only segments get `w:rtl` + CS font (`Times New Roman`); non-Arabic segments explicitly have `w:rtl` removed.
+    - Pure Arabic runs (no non-Arabic letters) continue to be handled directly without splitting.
+2.  **Applied to both document generators**: `document_generator.py` and `combined_document_generator.py`.
+3.  **Verification**: Regenerated Psalm 100 DOCX and confirmed via XML inspection that Arabic words (`عَبَدَ`, `قِفَا`, `نَبْكِ`, etc.) each have their own RTL-marked runs while surrounding English/Hebrew text has no `w:rtl` flag.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added `_split_text_by_script()`, rewrote `_fix_complex_script_fonts()` with run-splitting logic.
+- `src/utils/combined_document_generator.py` — Same changes applied for consistency.
+
+---
+
 ## Session 262 (2026-02-18): Opus 4.6 for Master Writer
 
 **Objective**: Integrate Claude Opus 4.6 into the Master Writer pipeline to improve commentary quality, addressing a "Streaming is required" error due to long generation times.

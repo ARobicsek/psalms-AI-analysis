@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-18 (Session 262)
+**Last Updated**: 2026-02-19 (Session 263)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 262
+- **Current Session**: 263
 - **Active Features**: **Opus 4.6 Master Writer**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
@@ -61,6 +61,8 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## ═══════════════════════════════════════════════════════════════════════════
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
+
+*   **Session 263**: Fixed mixed-script DOCX jumble when paragraphs contain Arabic + English/Hebrew. The `_fix_complex_script_fonts()` post-processor was applying `w:rtl` to entire runs containing Arabic, even when those runs also had English text — causing Word to reorder English prose as RTL. Implemented run-splitting logic that isolates Arabic text into separate OOXML runs with `w:rtl`, preserving correct LTR rendering for surrounding text. Applied to both `document_generator.py` and `combined_document_generator.py`.
 
 *   **Session 262**: Upgraded Master Writer pipeline to use `claude-opus-4-6`. Implemented streaming in `_call_claude_writer` to resolve timeout errors ("Streaming is required") for long generations. Updated CLI arguments and verified full pipeline execution on Psalm 100, confirming correct model tracking in `pipeline_stats.json` and Methodological Summary.
 

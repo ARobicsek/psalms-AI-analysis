@@ -331,81 +331,181 @@ class DocumentGenerator:
             section.left_margin = Pt(72)
             section.right_margin = Pt(72)
 
+    @staticmethod
+    def _split_text_by_script(text: str, arabic_pattern) -> List[dict]:
+        """Split text into segments of Arabic vs non-Arabic content.
+
+        Returns a list of dicts: [{"text": "...", "is_arabic": bool}, ...]
+        Adjacent characters of the same type are grouped together.
+        """
+        segments = []
+        current_text = []
+        current_is_arabic = None
+
+        for char in text:
+            is_arabic = bool(arabic_pattern.search(char))
+            if current_is_arabic is None:
+                current_is_arabic = is_arabic
+
+            if is_arabic == current_is_arabic:
+                current_text.append(char)
+            else:
+                segments.append({"text": ''.join(current_text), "is_arabic": current_is_arabic})
+                current_text = [char]
+                current_is_arabic = is_arabic
+
+        if current_text:
+            segments.append({"text": ''.join(current_text), "is_arabic": current_is_arabic})
+
+        return segments
+
     def _fix_complex_script_fonts(self):
         """Post-processing pass: fix fonts for Arabic/Persian/Urdu text in all runs.
-        
+
         python-docx's font.name setter overrides the CS (complex script) font attribute,
         causing Arabic text to render as boxes when the Latin font (e.g. Aptos) lacks
         Arabic glyphs. This method iterates all runs and explicitly sets the CS font
         to 'Times New Roman' on any run containing Arabic-range characters.
 
-        Crucially, we also force the 'w:rtl' property on these runs. Without explicit
-        RTL marking, Word often defaults to the ASCII/hAnsi font slot (Aptos) even
-        for Arabic characters in an LTR paragraph, ignoring the CS font setting.
+        For runs containing ONLY Arabic text, we also set w:rtl to trigger correct
+        shaping. For MIXED runs (Arabic + Latin/Hebrew), we split the run into
+        separate runs so that w:rtl applies only to the Arabic segments — preventing
+        Word's bidi algorithm from jumbling the non-Arabic text.
         """
-        import re
+        import copy
         # Arabic/Persian/Urdu range
         arabic_pattern = re.compile(r'[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]')
         # CJK Unified Ideographs (4E00-9FFF), Hiragana (3040-309F), Katakana (30A0-30FF)
         cjk_pattern = re.compile(r'[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF]')
-        
-        fixed_count = 0
-        
-        def processing_run(run):
-            nonlocal fixed_count
-            if not run.text:
-                return
 
-            # Arabic processing
-            if arabic_pattern.search(run.text):
-                rPr = run._element.get_or_add_rPr()
-                
-                # 1. Ensure w:rFonts is present and first child
-                rFonts = rPr.find(ns.qn('w:rFonts'))
-                if rFonts is None:
-                    rFonts = OxmlElement('w:rFonts')
-                    rPr.insert(0, rFonts)
-                
-                # Set CS font
-                rFonts.set(ns.qn('w:cs'), 'Times New Roman')
-                
-                # 2. Force w:rtl property for Arabic
-                if rPr.find(ns.qn('w:rtl')) is None:
-                    rtl = OxmlElement('w:rtl')
-                    rPr.append(rtl)
-                
-                fixed_count += 1
-            
-            # CJK processing
-            if cjk_pattern.search(run.text):
-                rPr = run._element.get_or_add_rPr()
-                
-                # 1. Ensure w:rFonts is present and first child
-                rFonts = rPr.find(ns.qn('w:rFonts'))
-                if rFonts is None:
-                    rFonts = OxmlElement('w:rFonts')
-                    rPr.insert(0, rFonts)
-                
-                # Set East Asia font
-                # DengXian is a good modern sans-serif for CJK in Office
-                rFonts.set(ns.qn('w:eastAsia'), 'DengXian')
-                
-                fixed_count += 1
+        fixed_count = 0
+        split_count = 0
+
+        def _has_non_arabic_letters(text, arabic_pat):
+            """Check if text contains any non-Arabic letter characters."""
+            for ch in text:
+                if ch.isalpha() and not arabic_pat.search(ch):
+                    return True
+            return False
+
+        def process_paragraph_runs(paragraph):
+            """Process all runs in a paragraph, splitting mixed Arabic/non-Arabic runs."""
+            nonlocal fixed_count, split_count
+
+            # Collect runs to process (iterate over a snapshot since we may modify the XML)
+            runs_to_process = list(paragraph.runs)
+
+            for run in runs_to_process:
+                if not run.text:
+                    continue
+
+                text = run.text
+                has_arabic = bool(arabic_pattern.search(text))
+                has_non_arabic = _has_non_arabic_letters(text, arabic_pattern)
+
+                # CJK processing (independent of Arabic handling)
+                if cjk_pattern.search(text):
+                    rPr = run._element.get_or_add_rPr()
+                    rFonts = rPr.find(ns.qn('w:rFonts'))
+                    if rFonts is None:
+                        rFonts = OxmlElement('w:rFonts')
+                        rPr.insert(0, rFonts)
+                    rFonts.set(ns.qn('w:eastAsia'), 'DengXian')
+                    fixed_count += 1
+
+                if not has_arabic:
+                    continue
+
+                if has_arabic and not has_non_arabic:
+                    # Pure Arabic run — apply CS font + RTL directly
+                    rPr = run._element.get_or_add_rPr()
+                    rFonts = rPr.find(ns.qn('w:rFonts'))
+                    if rFonts is None:
+                        rFonts = OxmlElement('w:rFonts')
+                        rPr.insert(0, rFonts)
+                    rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+                    if rPr.find(ns.qn('w:rtl')) is None:
+                        rtl_elem = OxmlElement('w:rtl')
+                        rPr.append(rtl_elem)
+                    fixed_count += 1
+                else:
+                    # MIXED run — split into Arabic vs non-Arabic segments
+                    segments = self._split_text_by_script(text, arabic_pattern)
+                    if len(segments) <= 1:
+                        # Shouldn't happen given the checks above, but handle gracefully
+                        rPr = run._element.get_or_add_rPr()
+                        rFonts = rPr.find(ns.qn('w:rFonts'))
+                        if rFonts is None:
+                            rFonts = OxmlElement('w:rFonts')
+                            rPr.insert(0, rFonts)
+                        rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+                        fixed_count += 1
+                        continue
+
+                    # Get the original run's XML element and its parent
+                    original_r = run._element
+                    parent = original_r.getparent()
+
+                    # Save the original run properties (deep copy)
+                    original_rPr = original_r.find(ns.qn('w:rPr'))
+
+                    # Insert new runs BEFORE the original, then remove the original
+                    for seg in segments:
+                        new_r = OxmlElement('w:r')
+
+                        # Copy run properties from original
+                        if original_rPr is not None:
+                            new_rPr = copy.deepcopy(original_rPr)
+                        else:
+                            new_rPr = OxmlElement('w:rPr')
+
+                        if seg["is_arabic"]:
+                            # Set CS font on Arabic segment
+                            rFonts = new_rPr.find(ns.qn('w:rFonts'))
+                            if rFonts is None:
+                                rFonts = OxmlElement('w:rFonts')
+                                new_rPr.insert(0, rFonts)
+                            rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+                            # Add w:rtl for Arabic segment
+                            if new_rPr.find(ns.qn('w:rtl')) is None:
+                                rtl_elem = OxmlElement('w:rtl')
+                                new_rPr.append(rtl_elem)
+                        else:
+                            # Non-Arabic segment: ensure NO w:rtl
+                            existing_rtl = new_rPr.find(ns.qn('w:rtl'))
+                            if existing_rtl is not None:
+                                new_rPr.remove(existing_rtl)
+
+                        new_r.append(new_rPr)
+
+                        # Add the text element
+                        new_t = OxmlElement('w:t')
+                        new_t.text = seg["text"]
+                        # Preserve whitespace
+                        new_t.set(ns.qn('xml:space'), 'preserve')
+                        new_r.append(new_t)
+
+                        parent.insert(list(parent).index(original_r), new_r)
+
+                    # Remove the original run
+                    parent.remove(original_r)
+                    split_count += 1
+                    fixed_count += 1
 
         for paragraph in self.document.paragraphs:
-            for run in paragraph.runs:
-                processing_run(run)
-                
+            process_paragraph_runs(paragraph)
+
         # Also check table cells
         for table in self.document.tables:
             for row in table.rows:
                 for cell in row.cells:
                     for paragraph in cell.paragraphs:
-                        for run in paragraph.runs:
-                            processing_run(run)
+                        process_paragraph_runs(paragraph)
 
         if fixed_count > 0:
-            print(f"  Fixed complex-script fonts on {fixed_count} run(s) containing Arabic text.")
+            print(f"  Fixed complex-script fonts on {fixed_count} run(s) containing Arabic/CJK text.")
+        if split_count > 0:
+            print(f"  Split {split_count} mixed-script run(s) into separate Arabic/non-Arabic segments.")
 
     def _set_paragraph_ltr(self, paragraph):
         """
