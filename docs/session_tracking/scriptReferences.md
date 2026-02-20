@@ -23,7 +23,7 @@ Always read this file first when you need to find code.
 | Script | Namespace | Description | Link |
 |--------|-----------|-------------|------|
 | `macro_analyst.py` | `src.agents` | Pass 1: Produces chapter-level thesis and structural framework using Claude Opus 4.6 with RAG context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/macro_analyst.py) |
-| `micro_analyst.py` | `src.agents` | Pass 2: Discovery-driven verse-by-verse research using Claude Opus 4.6 with adaptive thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/micro_analyst.py) |
+| `micro_analyst.py` | `src.agents` | Pass 2: Discovery-driven verse-by-verse research using Claude Sonnet 4.6 with adaptive thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/micro_analyst.py) |
 | `synthesis_writer.py` | `src.agents` | Pass 3: Final commentary synthesis combining macro thesis, micro discoveries, and research bundle. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/synthesis_writer.py) |
 | `master_editor.py` | `src.agents` | Pass 4: Final review and enhancement agent (Main and College editions). Supports **Opus 4.6** with streaming for long generations. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
 | `master_editor_v3.py` | `src.agents` | **PHASE 1 TEST**: V3 Prompt Overhaul variant. Implements 9 major prompt changes. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_v3.py) |

@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-19 (Session 263)
+**Last Updated**: 2026-02-20 (Session 264)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 263
-- **Active Features**: **Opus 4.6 Master Writer**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
+- **Current Session**: 264
+- **Active Features**: **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
 
@@ -61,6 +61,8 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## ═══════════════════════════════════════════════════════════════════════════
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
+
+*   **Session 264**: Replaced Claude Opus 4.6 with Claude Sonnet 4.6 for MicroAnalyst agent. Added Sonnet 4.6 pricing to cost tracker. Verified on Psalm 36 — 40% cost reduction on micro analysis step ($1.16 vs ~$1.93 per psalm).
 
 *   **Session 263**: Fixed mixed-script DOCX jumble when paragraphs contain Arabic + English/Hebrew. The `_fix_complex_script_fonts()` post-processor was applying `w:rtl` to entire runs containing Arabic, even when those runs also had English text — causing Word to reorder English prose as RTL. Implemented run-splitting logic that isolates Arabic text into separate OOXML runs with `w:rtl`, preserving correct LTR rendering for surrounding text. Applied to both `document_generator.py` and `combined_document_generator.py`.
 

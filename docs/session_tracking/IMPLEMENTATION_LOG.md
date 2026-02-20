@@ -8,6 +8,22 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 264 (2026-02-20): Sonnet 4.6 for Micro Analyst (Cost Reduction)
+
+**Objective**: Replace Claude Opus 4.6 with the new Claude Sonnet 4.6 for the micro analyst agent to reduce per-psalm costs while maintaining high thinking quality.
+
+**Solutions Implemented**:
+1. **Model Swap**: Changed `MicroAnalystV2.DEFAULT_MODEL` from `claude-opus-4-6` to `claude-sonnet-4-6`. Adaptive thinking (`type: "adaptive"`) and `effort=max` configuration remain unchanged.
+2. **Cost Tracker**: Added `claude-sonnet-4-6` pricing entry ($3/$15/$15 per MTok for input/output/thinking — same as Sonnet 4.5, 40% cheaper than Opus 4.6).
+3. **Verification**: Ran full pipeline on Psalm 36 (`--skip-macro --skip-college`). Confirmed `pipeline_stats.json` correctly records `"micro_analysis": "claude-sonnet-4-6"`. Actual cost for micro step: $1.16 (Sonnet 4.6) vs estimated $1.93 (Opus 4.6) — 40% savings.
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` — Changed `DEFAULT_MODEL` to `claude-sonnet-4-6`, updated docstring and log messages.
+- `src/utils/cost_tracker.py` — Added `claude-sonnet-4-6` pricing entry.
+- `docs/session_tracking/scriptReferences.md` — Updated micro_analyst description to reflect Sonnet 4.6.
+
+---
+
 ## Session 263 (2026-02-19): Fix Mixed-Script DOCX Jumble (Arabic + English/Hebrew)
 
 **Objective**: Fix garbled text in DOCX output when a paragraph contains mixed Arabic, Hebrew, and English text (e.g., the Imru' al-Qais *qasida* quote in Psalm 100 Verse 5 commentary).

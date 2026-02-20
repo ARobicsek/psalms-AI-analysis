@@ -28,12 +28,12 @@ Stage 3: Assemble Research Bundle
     - Call Research Assembler with requests
     - Return MicroAnalysis (discovery notes) + ResearchBundle
 
-Model: Claude Opus 4.6 with adaptive thinking (effort=max)
+Model: Claude Sonnet 4.6 with adaptive thinking (effort=max)
 Input: MacroAnalysis + Psalm text (Hebrew/English/LXX) + RAG context
 Output: MicroAnalysis (discovery notes) + ResearchBundle
 
 Author: Claude (Anthropic)
-Date: 2025-10-17 (Phase 3b redesign), Updated Feb 2026 for Opus 4.6
+Date: 2025-10-17 (Phase 3b redesign), Updated Feb 2026 for Sonnet 4.6
 """
 
 import sys
@@ -398,7 +398,7 @@ class MicroAnalystV2:
     """
 
     # Class-level constant for the default model (single source of truth)
-    DEFAULT_MODEL = "claude-opus-4-6"
+    DEFAULT_MODEL = "claude-sonnet-4-6"
 
     def __init__(
         self,
@@ -540,8 +540,8 @@ class MicroAnalystV2:
         prompt = prompt.replace('{rag_context}', rag_formatted)
         prompt = prompt.replace('{verse_count}', str(verse_count))
 
-        # Call Opus 4.6 with adaptive thinking and retry logic
-        self.logger.info("  Calling Opus 4.6...")
+        # Call Sonnet 4.6 with adaptive thinking and retry logic
+        self.logger.info("  Calling Sonnet 4.6...")
 
         max_retries = 3
         retry_delay = 2  # seconds

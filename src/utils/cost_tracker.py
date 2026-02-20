@@ -67,6 +67,14 @@ PRICING = {
         "cache_read": 0.50,  # 10% of input price
         "cache_write": 6.25,  # 25% markup on input
     },
+    # Claude Sonnet 4.6 (released Feb 2026) - Adaptive thinking, same pricing as Sonnet 4.5
+    "claude-sonnet-4-6": {
+        "input": 3.00,
+        "output": 15.00,
+        "thinking": 15.00,  # Thinking tokens charged at output rate
+        "cache_read": 0.30,  # 10% of input price
+        "cache_write": 3.75,  # 25% markup on input
+    },
     # Claude Sonnet 4.5
     "claude-sonnet-4-5": {
         "input": 3.00,
