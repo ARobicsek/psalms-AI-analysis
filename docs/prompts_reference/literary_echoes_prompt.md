@@ -38,13 +38,12 @@ TASK: Identify 4-10 major verse or image clusters in the Psalm above. For each, 
    - Do NOT prioritize Western canon exclusively — cast a wide net
 
 5. BREADTH
-   Aim for geographic, temporal, and genre diversity:
-   - Renaissance/Early Modern (e.g. Shakespeare, Donne, Milton, Sor Juana, Kabir, etc.)
-   - Modern (e.g. Dickinson, Bob Dylan, W.S. Merwin, Rilke, Neruda, Akhmatova, Amichai, Darwish, Celan, etc.)
-   - Ancient (e.g. Homer, Sappho, Pindar, Vedic hymns, Egyptian poetry, Sumerian laments, etc.)
+   Aim for breadth, with a leaning toward modern and renaissance/early modern sources:
+    - **Modern** (e.g. Dickinson, Bob Dylan, W.S. Merwin, Rilke, Neruda, Akhmatova, Amichai, Darwish, Celan, song lyricists, etc.)
+    - **Renaissance/Early Modern** (e.g. Shakespeare, Donne, Milton, Sor Juana, Kabir, etc.)
    - Classical/Medieval (e.g. Virgil, Ovid, Rumi, Hafez, Li Bai, Du Fu, Dante, troubadours, etc.)
-   - Oral/Folk (e.g. spirituals, folk ballads, Indigenous traditions, liturgical poetry, etc.)
-   - Non-poetic (e.g. political speeches, philosophical prose, song lyrics, etc.) when genuinely illuminating
+   - Ancient (e.g. Homer, Sappho, Pindar, Vedic hymns, Egyptian poetry, Sumerian laments, etc.)
+   - Non-poetic (e.g. political speeches, philosophical prose, etc.) when genuinely illuminating
 
 6. DENSITY & FORMAT
    This document must be INFORMATION-DENSE. Do not pad with generalities.
@@ -82,20 +81,6 @@ Organize by verse or verse cluster. For each:
 [Continue for each relevant verse cluster]
 
 === EXAMPLES (from Psalm 35) ===
-
-### Psalm 35:5-6 — Chaff and the Pursuing Angel
-
-**יִהְיוּ כְּמֹץ לִפְנֵי־רוּחַ וּמַלְאַךְ יְהֹוָה דּוֹחֶה / יְהִי־דַרְכָּם חֹשֶׁךְ וַחֲלַקְלַקֹּת וּמַלְאַךְ יְהֹוָה רֹדְפָם**
-**"Let them be as chaff in the wind, GOD's angel driving them on. / Let their path be dark and slippery, with GOD's angel in pursuit."**
-
-#### Homer, *Iliad* (c. 8th century BCE)
-> οἵη περ φύλλων γενεὴ τοίη δὲ καὶ ἀνδρῶν.
-> φύλλα τὰ μέν τ' ἄνεμος χαμάδις χέει, ἄλλα δέ θ' ὕλη
-> τηλεθόωσα φύει, ἔαρος δ' ἐπιγίγνεται ὥρη·
-> "As is the generation of leaves, so too of men. / The wind scatters some leaves on the ground, but the forest / burgeons and puts forth others, as the season of spring comes on."
-> — *Iliad* 6.146–149
-
-Homer's leaf simile is elegiac — the scattering carries a note of natural renewal ("the forest burgeons"). The psalmist's chaff image is harsher: מֹץ (chaff) is waste, not fallen leaves, and the agent of scattering is not impersonal wind but a divine pursuer (מַלְאַךְ יְהֹוָה). Where Homer finds melancholy beauty in human transience, the psalmist weaponizes the image — the enemy's insubstantiality is not a shared human condition but a targeted divine verdict. The doubling across vv.5-6 (driven → pursued, wind → dark slippery path) shows a cinematic intensification foreign to Homer's single-image technique.
 
 #### Rumi, *Masnavi* (13th century CE)
 > بادِ خَوف از پادشاهان می‌وَزَد / خاک و خاشاک از سَرِ ره می‌بَرَد

@@ -48,6 +48,23 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 265 (2026-02-22): Fixing Traditional Commentaries Counts
+
+**Objective**: Fix the bug causing "N/A" to appear for "Traditional Commentaries Reviewed" in the generated DOCX file.
+
+**Problems Identified**:
+- When the enhanced pipeline resumed using a previously generated research bundle (e.g. via `--skip-micro`), the regex pattern `r'### Rashi'` failed to find any matches.
+- This was because `ResearchAssembler` prefixes the commentator headings in the markdown with the verse reference (e.g. `### 36:1 — Rashi`), breaking the exact match regex.
+
+**Solutions Implemented**:
+1. Updated the regex patterns in `_parse_research_stats_from_markdown` to include `.*` before the commentator's name, allowing it to successfully match headings that include verse references (e.g. `r'### .*Rashi'`).
+2. Verified the fix by successfully regenerating the DOCX for Psalm 36, confirming that the "Traditional Commentaries Reviewed" section correctly outputs the count of commentaries consulted.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Updated `commentary_patterns` regex to allow for verse prefix matching.
+
+---
+
 ## Session 262 (2026-02-18): Opus 4.6 for Master Writer
 
 **Objective**: Integrate Claude Opus 4.6 into the Master Writer pipeline to improve commentary quality, addressing a "Streaming is required" error due to long generation times.

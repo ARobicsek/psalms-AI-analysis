@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-20 (Session 264)
+**Last Updated**: 2026-02-22 (Session 265)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 264
+- **Current Session**: 265
 - **Active Features**: **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
@@ -57,6 +57,13 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.5)
 
 ---
+
+## Recent Work Summary
+
+### 1. Fixing Traditional Commentary Counts (Session 265)
+- Diagnosed why "Traditional Commentaries Reviewed" showed "N/A" in the generated DOCX when resuming the pipeline.
+- Fixed the regex parsing logic in `scripts/run_enhanced_pipeline.py` to properly match markdown headers that include verse numbers alongside the commentator's name (e.g. `### 36:1 — Rashi`).
+- Verified the fix by fully regenerating the Psalm 36 DOCX, confirming the commentary counts correctly populate in the methodological summary.
 
 ## ═══════════════════════════════════════════════════════════════════════════
 ## RECENT WORK SUMMARY (Last 3 Sessions)

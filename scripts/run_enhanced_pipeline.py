@@ -78,9 +78,9 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
 
     # Count traditional commentaries
     commentary_patterns = [
-        (r'### Rashi', 'Rashi'), (r'### Ibn Ezra', 'Ibn Ezra'), (r'### Radak', 'Radak'),
-        (r'### Metzudat David', 'Metzudat David'), (r'### Malbim', 'Malbim'),
-        (r'### Sforno', 'Sforno'), (r'### Meiri', 'Meiri'),
+        (r'### .*Rashi', 'Rashi'), (r'### .*Ibn Ezra', 'Ibn Ezra'), (r'### .*Radak', 'Radak'),
+        (r'### .*Metzudat David', 'Metzudat David'), (r'### .*Malbim', 'Malbim'),
+        (r'### .*Sforno', 'Sforno'), (r'### .*Meiri', 'Meiri'),
     ]
     for pattern, name in commentary_patterns:
         matches = re.findall(pattern, markdown_content)

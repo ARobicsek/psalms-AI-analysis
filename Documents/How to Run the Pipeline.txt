@@ -34,8 +34,11 @@ python scripts/run_si_pipeline.py 19 --special-instruction my_notes.txt
 #run with opus 4.5 as the master editor
 python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
 
+#run with opus 4.6 as the master editor
+python scripts/run_enhanced_pipeline.py 100 --master-editor-model claude-opus-4-6
+
 # skip everything
-python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-insights --skip-synthesis --skip-master-edit --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
+python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-insights --skip-synthesis --skip-writer [skips main writer, not college] --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
 
 # resume for where the pipeline left off
 python scripts/run_enhanced_pipeline.py 9 --resume
