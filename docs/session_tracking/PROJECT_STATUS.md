@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-23 (Session 268)
+**Last Updated**: 2026-02-24 (Session 270)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 268
-- **Active Features**: **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
+- **Current Session**: 270
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
 
@@ -36,10 +36,10 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 | Phase 3c: Insight Extraction | ✅ Complete | Curates high-value insights from research bundle (Step 2c) |
 | Phase 4: Research Assembly | ✅ Complete | Optimizing figurative language search and trimming |
 | Phase 5: Synthesis Generation | ✅ Complete | Commentary generation with Gemini fallback |
-| Phase 6: Editing and Publication | ✅ Complete | Master Editor V2, DOCX generation (RTL/Arabic supported) |
+| Phase 6: Editing and Publication | ✅ Complete | Unified Writer V4, DOCX generation (RTL/Arabic supported) |
 
 ### Active Features
-- **Master Editor V2**: Restructured prompt with explicit Deep Research guidance (default)
+- **Unified Writer V4**: Single prompt merging Main + College editions; halves pipeline cost (default)
 - **Insight Extractor**: Dedicated agent (Claude Opus 4.5) to curate "aha!" moments from research
 - **Research Trimmer**: Dedicated utility for intelligent context window management
 - **Gemini 2.5 Pro Fallback**: Handles large psalms (51+ verses) without content loss
@@ -60,25 +60,35 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Fix SI Pipeline for Opus 4.6 Re-runs (Session 268)
-- Fixed fatal exit when `--skip-writer` was used without existing SI output files; college writer now runs independently.
-- Synced Session 265 commentary regex fix to `run_si_pipeline.py` so DOCX methodology stats populate correctly.
-- Added model tracking to the college writer step so the DOCX correctly reports the actual model (e.g., `claude-opus-4-6` instead of stale `gpt-5.1`).
+### 1. Unified Writer V4 Documentation Updates (Session 270)
+- Updated architecture summary to reflect the removal of the College Writer step and document the new unified V4 prompt.
+- Indicated Unified Writer V4 as the new default active feature in project status.
+- Updated script references to reflect the V4 roles for master editor scripts and deprecated old models.
 
-### 2. Fix Question Generator Model Attribution (Session 267)
+### 2. Unified Writer V4 (Session 269)
+- Replaced dual Main/College commentary system with single `MASTER_WRITER_PROMPT_V4`.
+- Unified audience ("Intelligent, curious readers") and tone ("Scholar at dinner").
+- Merged Depth rules with Pedagogical clarity rules, retaining all 12 Items of Interest.
+- Removed Steps 4b/6b/6c from pipelines and made `--skip-college` a silent no-op.
+- Halved the cost of the most expensive pipeline step by generating a single, unified commentary.
+
+### 3. Fix SI Pipeline for Opus 4.6 Re-runs (Session 268)
+- Fixed fatal exit when `--skip-writer` was used without existing SI output files; downstream steps now proceed gracefully.
+- Synced Session 265 commentary regex fix to `run_si_pipeline.py` so DOCX methodology stats populate correctly.
+- Added model tracking so the DOCX correctly reports the actual model (`claude-opus-4-6`).
+
+### 4. Fix Question Generator Model Attribution (Session 267)
 - Identified that `gpt-5.1` was incorrectly appearing as the question generator due to a missing attribution key in the document generators.
 - Renamed the reporting label to "Question Generator" across all formatting scripts to match preferred terminology.
-- Explicitly added the `question_curator` attribution key to `document_generator.py` and `combined_document_generator.py` to ensure the correct model (`claude-opus-4-6`) is printed in the Methodological & Bibliographical Summary.
+- Explicitly added the `question_curator` attribution key to `document_generator.py` and `combined_document_generator.py` to ensure the correct model (`claude-opus-4-6`) is printed.
 
-### 2. Fix College Edition Pipeline Bugs & Error Handling (Session 266)
+### 5. Fix College Edition Pipeline Bugs & Error Handling (Session 266)
 - Diagnosed and fixed a silent `NameError` crash during the College Writer step that prevented DOCX generation when the Main Writer was skipped.
 - Rewrote pipeline logic to unconditionally generate the `research_trimmed.md` bundle independent of the insight extraction step logic.
-- Improved terminal error handling to prevent silent failures in the College pipeline.
 
-### 2. Fixing Traditional Commentary Counts (Session 265)
+### 6. Fixing Traditional Commentary Counts (Session 265)
 - Diagnosed why "Traditional Commentaries Reviewed" showed "N/A" in the generated DOCX when resuming the pipeline.
 - Fixed the regex parsing logic in `scripts/run_enhanced_pipeline.py` to properly match markdown headers that include verse numbers alongside the commentator's name (e.g. `### 36:1 — Rashi`).
-- Verified the fix by fully regenerating the Psalm 36 DOCX, confirming the commentary counts correctly populate in the methodological summary.
 
 ## ═══════════════════════════════════════════════════════════════════════════
 ## RECENT WORK SUMMARY (Last 3 Sessions)
@@ -517,7 +527,7 @@ python main.py --psalm 119 --dry-run
 ---
 
 ## Notes
-- **Master Editor V2 is now the default** with explicit Deep Research guidance
+- **Unified Writer V4 is now the default**, halving pipeline generation cost
 - Use `--master-editor-old` flag for original prompt
 - Deep Web Research feature ready for production use
 - Gemini 2.5 Pro fallback handles large psalms without content loss

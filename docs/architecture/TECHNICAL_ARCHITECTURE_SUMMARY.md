@@ -46,23 +46,20 @@ Input: Psalm Number
     → Introduction essay + verse commentary with quotations
     → Gemini fallback for large psalms (51+ verses, 1M token context)
     ↓
-[4] Master Editorial Review (GPT-5.1 or Claude Opus 4.5)
-    → V2 prompt (default): Restructured with explicit Deep Research guidance
-    → OLD prompt: Available via --master-editor-old flag
-    → Critical review, fact-checking, enhancement to "National Book Award" level
-    ↓
-[4b] College Commentary Generation (GPT-5.1 or Claude Opus 4.5)
-    → Separate, more accessible version for college students
+[4] Master Writer V4 (Claude Opus 4.6 or GPT-5.1)
+    → Unified prompt merging Main + College depth and pedagogical clarity
+    → Audience: Intelligent, curious readers with Hebrew proficiency
+    → Tone: Scholar at dinner — relaxed, precise, occasionally witty
     ↓
 [5] Print-Ready Formatting (Python)
     → Markdown with divine name modifications, verse numbering
     ↓
 [6] Document Generation (Python)
-    → Three .docx outputs: main commentary, college edition, combined
+    → Single .docx output: unified scholarly commentary
     ↓
 [OPTIONAL] Special Instruction Pipeline
     → Author-directed revisions using MasterEditorSI
-    → Separate _SI suffixed outputs (main, college, combined)
+    → Separate _SI suffixed outputs (unified commentary)
     ↓
 Output: Scholarly Commentary (.docx + .md, with college edition)
 ```
@@ -130,22 +127,24 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Accessible scholarly voice (Robert Alter, Ellen Davis style)
   - **Strategic Verse Grouping** (Session 212): For long psalms (35+ verses), 2-4 related verses can be grouped with pacing guidance
 
-#### MasterEditor (Pass 4 & 4b)
+#### Master Editor / Unified Writer V4 (Pass 4)
 - **Model Options**:
-  - **Default**: GPT-5.1 (`gpt-5.1`) with high reasoning effort
+  - **Default**: Claude Opus 4.6 (`claude-opus-4-6`) or GPT-5.1 (`gpt-5.1`) with high reasoning effort
   - **Alternative**: GPT-5 (`gpt-5`) with high reasoning effort (legacy)
   - **Alternative**: Claude Opus 4.5 (`claude-opus-4-5`) with extended thinking (64K token budget)
-- **Prompt Versions** (Session 215):
-  - **V2 (default)**: Restructured prompt with consolidated "Ground Rules," explicit Deep Research guidance, reduced redundancy
-  - **OLD**: Available via `--master-editor-old` flag
-- **Purpose**: Final editorial review and quality enhancement
-- **Dual Output**:
-  - **Pass 4**: Main edition for sophisticated lay readers (New Yorker/Atlantic audience)
-  - **Pass 4b**: College edition with more accessible language for undergraduate students
-- **Input**: Complete commentary, research bundle, analysis objects, psalm text
-- **Output**: Revised introduction + verse commentary + editorial assessment (main and college versions)
+- **Prompt Version** (Session 269):
+  - **V4 (default)**: Unified prompt merging Main and College workflows
+  - **OLD**: Available via backward-compat aliases or flags if needed
+- **Purpose**: Content generation and synthesis into unified commentary
+- **Audience**: Intelligent, curious readers with Hebrew proficiency
+- **Tone**: Scholar at dinner — relaxed, precise, occasionally witty, never performing
+- **Input**: Complete research bundle, analysis objects, psalm text, curated insights, reader questions
+- **Output**: Single unified scholarly introduction + verse commentary + editorial assessment
 - **Character Limit**: 350,000 characters (~175K tokens) for comprehensive review
 - **Key Features**:
+  - **12 Ground Rules**: Merged depth of Main and pedagogical clarity of College (e.g., Translation Test, Make Connections Explicit, Scholar Not Pipeline)
+  - **12 Items of Interest**: Fully retained from Main V3, with pedagogical framing woven in
+  - **Cost Savings**: Halves the cost of the most expensive pipeline step by generating only one version
   - "National Book Award" quality standards
   - **Enhanced quotation checking** (Session 122): Ensures sources are quoted, not just cited
   - **Poetic punctuation verification** (Session 121): Ensures verses include punctuation
@@ -154,7 +153,6 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Missed opportunities identification (unused research, unanswered questions)
   - Style refinement (avoiding LLM-ish breathlessness, academic jargon)
   - Coherence and argumentation strengthening
-  - **College Edition Adaptations**: Simplified language, fewer technical terms, more context
 
 ### 2. Librarian Agent System
 
@@ -398,10 +396,10 @@ def normalize_hebrew(text: str, level: int) -> str:
 - **`--skip-micro`**: Use existing micro analysis file
 - **`--skip-synthesis`**: Use existing synthesis files
 - **`--skip-master-edit`**: Use existing master-edited files
-- **`--skip-college`**: Skip college commentary generation (use existing file)
+- **`--skip-college`**: *(Deprecated V4)* Silent no-op
 - **`--skip-print-ready`**: Skip print-ready formatting step
 - **`--skip-word-doc`**: Skip .docx generation step
-- **`--skip-combined-doc`**: Skip combined .docx generation
+- **`--skip-combined-doc`**: *(Deprecated V4)* Silent no-op
 - **`--resume`**: Resume from last completed step (auto-detects based on existing files)
 - **`--smoke-test`**: Generate dummy data without API calls
 - **`--skip-default-commentaries`**: Use selective commentary mode
@@ -541,7 +539,7 @@ python scripts/tribal_blessings_analyzer.py --list
   - Claude Sonnet 4.5 (SynthesisWriter)
   - Gemini 2.5 Pro (Liturgical Librarian summaries - primary)
   - Claude Sonnet 4.5 (Liturgical Librarian summaries - fallback)
-  - GPT-5.1 or GPT-5 (MasterEditor main and college editions)
+  - GPT-5.1 or GPT-5 (Unified MasterWriter edition)
   - Claude Opus 4.5 (Alternative MasterEditor with extended thinking)
 - **Output**: Summary table showing per-model usage and total costs
 
@@ -734,11 +732,11 @@ python scripts/tribal_blessings_analyzer.py --list
 
 The Psalms Commentary Pipeline represents a sophisticated integration of AI capabilities with traditional biblical scholarship. The system's success lies in its multi-step architecture with dual-edition output, which prevents common AI failure modes while leveraging the strengths of different models for specialized tasks.
 
-**Key Technical Achievements (V6.3 System)**:
+**Key Technical Achievements (V6.4 System)**:
 - **9 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Deep Web Research
-- **Dual-Edition Output**: Main scholarly edition + accessible college edition + combined document
-- **Flexible Master Editor**: Support for GPT-5.1 (default), GPT-5 (legacy), or Claude Opus 4.5
-- **V2 Prompt**: Restructured with explicit Deep Research guidance (Session 215)
+- **Single-Edition Output**: Unified scholarly commentary combining depth and pedagogical clarity
+- **Flexible Master Writer**: Support for Claude Opus 4.6 (default), GPT-5.1, or Claude Opus 4.5
+- **V4 Prompt**: Unified prompt delivering "scholar at dinner" tone and halving pipeline cost (Session 269)
 - **Gemini 2.5 Pro Fallback**: Automatic switching for large psalms with 1M token context (Session 211)
 - **Special Instruction Pipeline**: Author-directed revisions without altering standard pipeline (Session 220)
 - **Resume Feature**: `--resume` flag for automatic step detection (Session 219)

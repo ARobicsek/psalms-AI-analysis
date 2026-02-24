@@ -25,9 +25,9 @@ Always read this file first when you need to find code.
 | `macro_analyst.py` | `src.agents` | Pass 1: Produces chapter-level thesis and structural framework using Claude Opus 4.6 with RAG context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/macro_analyst.py) |
 | `micro_analyst.py` | `src.agents` | Pass 2: Discovery-driven verse-by-verse research using Claude Sonnet 4.6 with adaptive thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/micro_analyst.py) |
 | `synthesis_writer.py` | `src.agents` | Pass 3: Final commentary synthesis combining macro thesis, micro discoveries, and research bundle. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/synthesis_writer.py) |
-| `master_editor.py` | `src.agents` | Pass 4: Final review and enhancement agent (Main and College editions). Supports **Opus 4.6** with streaming for long generations. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
+| `master_editor.py` | `src.agents` | Pass 4: Unified Master Writer V4 — single prompt replacing Main + College. Supports **Opus 4.6** with streaming for long generations. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor.py) |
 | `master_editor_v3.py` | `src.agents` | **PHASE 1 TEST**: V3 Prompt Overhaul variant. Implements 9 major prompt changes. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_v3.py) |
-| `master_editor_si.py` | `src.agents` | Special Instruction variant of Master Editor that supports author directives for alternative versions. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_si.py) |
+| `master_editor_si.py` | `src.agents` | Master Writer V4 with Special Instructions that supports author directives for alternative versions. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_si.py) |
 | `master_editor_old.py` | `src.agents` | Legacy Master Editor implementation (archived). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_old.py) |
 | `phonetic_analyst.py` | `src.agents` | Transcribes Hebrew text into phonetic/syllabic structure based on reconstructed Biblical Hebrew phonology. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/phonetic_analyst.py) |
 
@@ -117,7 +117,7 @@ Always read this file first when you need to find code.
 |--------|-----------|-------------|------|
 | `research_trimmer.py` | `src.utils` | **NEW**: Utility for intelligently trimming research bundles to fit token limits. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/research_trimmer.py) |
 | `document_generator.py` | `src.utils` | Generates print-ready Word (.docx) documents from pipeline outputs. **Now supports Arabic/Hebrew (RTL) and CJK fonts.** | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/document_generator.py) |
-| `combined_document_generator.py` | `src.utils` | Generates combined Word document with both main and college commentary versions. **Now supports Arabic/Hebrew (RTL) and CJK fonts.** | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/combined_document_generator.py) |
+| `combined_document_generator.py` | `src.utils` | *(Deprecated V4)* — was Main + College combined doc. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/combined_document_generator.py) |
 | `commentary_formatter.py` | `src.utils` | Formats commentary output for various purposes. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/commentary_formatter.py) |
 | `divine_names_modifier.py` | `src.utils` | Modifies divine names (YHWH, etc.) according to style preferences. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/divine_names_modifier.py) |
 | `cost_tracker.py` | `src.utils` | Tracks API costs across all LLM calls during pipeline execution. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/cost_tracker.py) |

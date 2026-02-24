@@ -107,3 +107,18 @@ python scripts/test_figurative_curator.py --dry-run          # See prompts, no L
 python scripts/test_figurative_curator.py --verbose          # Detailed progress
 
 
+All current skip commands
+For run_enhanced_pipeline.py:
+
+Flag	Status	Effect
+--skip-macro	Active	Skip macro analysis (use existing file)
+--skip-micro	Active	Skip micro analysis + research bundle
+--skip-insights	Active	Skip insight extraction
+--skip-writer	Active	Skip Master Writer V4 step
+--skip-print-ready	Active	Skip print-ready markdown formatting
+--skip-word-doc	Active	Skip .docx generation
+--skip-college	Hidden no-op	Accepted silently, does nothing
+--skip-combined-doc	Hidden no-op	Accepted silently, does nothing
+--skip-default-commentaries	Active	Use selective commentary mode in micro analysis
+--resume	Active	Auto-detect last completed step
+--smoke-test	Active	Dry run with dummy data, no API calls
