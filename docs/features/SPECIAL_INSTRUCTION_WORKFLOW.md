@@ -1,7 +1,9 @@
 # Special Instructions (SI) Pipeline Implementation Guide
 
+> **V4 Update (Session 269)**: The SI pipeline now uses the unified V4 prompt (single commentary output). College-specific SI outputs have been removed. The `--college` flag on `master_editor_si.py` is a hidden no-op.
+
 ## Overview
-We are creating a supplementary pipeline workflow that allows a human editor ("The Author") to inject specific, overriding instructions into the Master Editor's generation process. This allows for "V2" rewrites of commentaries based on specific thematic ideas or corrections, without altering the behavior of the standard pipeline.
+We are creating a supplementary pipeline workflow that allows a human editor ("The Author") to inject specific, overriding instructions into the Master Editor's generation process. This allows for alternative rewrites of commentaries based on specific thematic ideas or corrections, without altering the behavior of the standard pipeline.
 
 ## Core Constraints
 1.  **Safety First:** Do **NOT** modify the existing `scripts/run_enhanced_pipeline.py` or `src/agents/master_editor.py` files. We must preserve the stability of the current "V1" pipeline.
