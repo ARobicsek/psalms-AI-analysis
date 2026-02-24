@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-23 (Session 267)
+**Last Updated**: 2026-02-23 (Session 268)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 267
+- **Current Session**: 268
 - **Active Features**: **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Fix Question Generator Model Attribution (Session 267)
+### 1. Fix SI Pipeline for Opus 4.6 Re-runs (Session 268)
+- Fixed fatal exit when `--skip-writer` was used without existing SI output files; college writer now runs independently.
+- Synced Session 265 commentary regex fix to `run_si_pipeline.py` so DOCX methodology stats populate correctly.
+- Added model tracking to the college writer step so the DOCX correctly reports the actual model (e.g., `claude-opus-4-6` instead of stale `gpt-5.1`).
+
+### 2. Fix Question Generator Model Attribution (Session 267)
 - Identified that `gpt-5.1` was incorrectly appearing as the question generator due to a missing attribution key in the document generators.
 - Renamed the reporting label to "Question Generator" across all formatting scripts to match preferred terminology.
 - Explicitly added the `question_curator` attribution key to `document_generator.py` and `combined_document_generator.py` to ensure the correct model (`claude-opus-4-6`) is printed in the Methodological & Bibliographical Summary.

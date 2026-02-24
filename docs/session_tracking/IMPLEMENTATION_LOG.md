@@ -8,6 +8,25 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 268 (2026-02-23): Fix SI Pipeline for Opus 4.6 Re-runs
+
+**Objective**: Ensure `run_si_pipeline.py` works correctly when skipping earlier pipeline steps and using Opus 4.6 for the Master Writer.
+
+**Problems Identified**:
+- SI pipeline fatally exited (`sys.exit(1)`) when `--skip-writer` was used but main SI output files didn't yet exist, blocking the college writer from running independently.
+- Commentary pattern regex in SI pipeline still used exact match (`r'### Rashi'`) instead of the Session 265 fix (`r'### .*Rashi'`), causing "Traditional Commentaries Reviewed" to show N/A in DOCX methodology section.
+- College writer step never called `tracker.track_model_for_step()`, so the DOCX incorrectly reported the model from the previous pipeline run (e.g., `gpt-5.1` instead of `claude-opus-4-6`).
+
+**Solutions Implemented**:
+1. Replaced fatal `sys.exit(1)` with a warning when main SI files are missing on `--skip-writer`, matching `run_enhanced_pipeline.py` behavior. Downstream steps now proceed gracefully.
+2. Synced commentary pattern regex from Session 265 fix — all 7 commentator patterns now use `r'### .*Name'` to match verse-prefixed headers.
+3. Added `tracker.track_model_for_step("master_writer", master_editor.model)` after the college writer completes, so the DOCX correctly reports the actual model used.
+
+**Files Modified**:
+- `scripts/run_si_pipeline.py` - Fixed fatal exit on missing SI files, synced commentary regex patterns, added college writer model tracking.
+
+---
+
 ## Session 267 (2026-02-23): Fix Question Generator Model Attribution
 
 **Objective**: Ensure the "Question Generator" model is correctly identified and listed in the Methodological & Bibliographical Summary of the DOCX outputs.

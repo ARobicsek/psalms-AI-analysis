@@ -542,8 +542,7 @@ def run_enhanced_pipeline(
     else:
         logger.info("[STEP 4] Skipping Master Writer")
         if not edited_intro_file.exists():
-            logger.error("FATAL: Missing edited files")
-            sys.exit(1)
+            logger.warning("[STEP 4] Main SI commentary files missing. Proceeding without them (downstream steps requiring them will be skipped).")
 
     # =====================================================================
     # STEP 4b: College Writer
@@ -604,6 +603,7 @@ def run_enhanced_pipeline(
                     logger.info(f"Extracted {len(questions)} college refined reader questions")
 
             logger.info(f"College Writer complete for Psalm {psalm_number}")
+            tracker.track_model_for_step("master_writer", master_editor.model)
             print(f"  College Introduction: {edited_intro_college_file}")
             print(f"  College Verses: {edited_verses_college_file}\n")
 
