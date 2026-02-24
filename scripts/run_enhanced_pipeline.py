@@ -382,6 +382,13 @@ def run_enhanced_pipeline(
         tracker.research.deep_research_available = research_stats['deep_research_available']
         tracker.research.deep_research_included = research_stats['deep_research_available']
         tracker.research.deep_research_chars = research_stats['deep_research_chars']
+        tracker.research.literary_echoes_available = research_stats.get('literary_echoes_available', False)
+        tracker.research.literary_echoes_included = research_stats.get('literary_echoes_available', False)
+        if tracker.research.literary_echoes_available:
+            le_match = re.search(r'## Cross-Cultural Literary Echoes\s*\n(.*?)(?=\n## [^#]|\Z)', research_bundle_content, re.DOTALL)
+            if le_match:
+                tracker.research.literary_echoes_chars = len(le_match.group(1))
+        
         tracker.research.research_bundle_chars = len(research_bundle_content)
         tracker.research.research_bundle_tokens = len(research_bundle_content) // 3
 
@@ -409,15 +416,20 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 2b: Question Curation
     # =====================================================================
-    if not smoke_test and not reader_questions_file.exists() and macro_file.exists() and micro_file.exists():
-        logger.info("[STEP 2b] Curating questions...")
-        try:
-            curator = QuestionCurator(cost_tracker=cost_tracker)
-            q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
-            curator.save_questions(q, s, output_path, psalm_number)
-            tracker.track_model_for_step("question_curator", curator.active_model)
-        except Exception as e:
-            logger.warning(f"Question curation failed: {e}")
+    if not smoke_test and macro_file.exists() and micro_file.exists():
+        if reader_questions_file.exists():
+            logger.info("Reader questions exist, skipping generation...")
+            # Track the model even when skipping
+            tracker.track_model_for_step("question_curator", "claude-opus-4-6")
+        else:
+            logger.info("[STEP 2b] Curating questions...")
+            try:
+                curator = QuestionCurator(cost_tracker=cost_tracker)
+                q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
+                curator.save_questions(q, s, output_path, psalm_number)
+                tracker.track_model_for_step("question_curator", curator.active_model)
+            except Exception as e:
+                logger.warning(f"Question curation failed: {e}")
 
     # =====================================================================
     # STEP 2c: Insight Extraction
@@ -716,6 +728,7 @@ def run_enhanced_pipeline(
         print(f"\n{'='*80}")
         print(f"STEP 6b: College Word Document (.docx)")
         print(f"{'='*80}\n")
+        from src.utils.document_generator import DocumentGenerator
         try:
             refined_q_college = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
             college_q_file = refined_q_college if refined_q_college.exists() else None

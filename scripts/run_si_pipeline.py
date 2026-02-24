@@ -46,7 +46,8 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         'commentary_counts': {},
         'sacks_count': 0,
         'deep_research_available': False,
-        'deep_research_chars': 0
+        'deep_research_chars': 0,
+        'literary_echoes_available': False
     }
 
     # Count lexicon entries
@@ -78,9 +79,9 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
 
     # Count traditional commentaries
     commentary_patterns = [
-        (r'### Rashi', 'Rashi'), (r'### Ibn Ezra', 'Ibn Ezra'), (r'### Radak', 'Radak'),
-        (r'### Metzudat David', 'Metzudat David'), (r'### Malbim', 'Malbim'),
-        (r'### Sforno', 'Sforno'), (r'### Meiri', 'Meiri'),
+        (r'### .*Rashi', 'Rashi'), (r'### .*Ibn Ezra', 'Ibn Ezra'), (r'### .*Radak', 'Radak'),
+        (r'### .*Metzudat David', 'Metzudat David'), (r'### .*Malbim', 'Malbim'),
+        (r'### .*Sforno', 'Sforno'), (r'### .*Meiri', 'Meiri'),
     ]
     for pattern, name in commentary_patterns:
         matches = re.findall(pattern, markdown_content)
@@ -98,6 +99,10 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         deep_match = re.search(r'## Deep Web Research\s*\n(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
         if deep_match:
             stats['deep_research_chars'] = len(deep_match.group(1))
+
+    # Check for Literary Echoes
+    if '## Cross-Cultural Literary Echoes' in markdown_content:
+        stats['literary_echoes_available'] = True
 
     # Check for Models Used
     models_used = {}
@@ -373,9 +378,11 @@ def run_enhanced_pipeline(
         tracker.research.figurative_parallels_reviewed = research_stats.get('figurative_parallels_reviewed', {})
         tracker.research.commentary_counts = research_stats['commentary_counts']
         tracker.research.sacks_references_count = research_stats['sacks_count']
-        tracker.research.deep_research_available = research_stats['deep_research_available']
-        tracker.research.deep_research_included = research_stats['deep_research_available']
-        tracker.research.deep_research_chars = research_stats['deep_research_chars']
+        tracker.research.deep_research_available = research_stats.get('deep_research_available', False)
+        tracker.research.deep_research_included = research_stats.get('deep_research_available', False)
+        tracker.research.deep_research_chars = research_stats.get('deep_research_chars', 0)
+        tracker.research.literary_echoes_available = research_stats.get('literary_echoes_available', False)
+        tracker.research.literary_echoes_included = research_stats.get('literary_echoes_available', False)
         tracker.research.research_bundle_chars = len(research_bundle_content)
         tracker.research.research_bundle_tokens = len(research_bundle_content) // 3
 
@@ -661,6 +668,7 @@ def run_enhanced_pipeline(
         print(f"\n{'='*80}")
         print(f"STEP 6b: College Word Document (.docx)")
         print(f"{'='*80}\n")
+        from src.utils.document_generator import DocumentGenerator
         try:
             refined_q_college = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
             college_q_file = refined_q_college if refined_q_college.exists() else None

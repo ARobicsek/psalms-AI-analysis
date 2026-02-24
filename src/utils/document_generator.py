@@ -1557,15 +1557,14 @@ Methodological & Bibliographical Summary
                     summary_text += f"\n**Insights Extraction**: {model_usage.get('insight_extractor', 'N/A')}"
 
                 if 'question_curator' in model_usage:
-                    summary_text += f"\n**Question Generation**: {model_usage.get('question_curator', 'N/A')}"
+                    summary_text += f"\n**Question Generator**: {model_usage.get('question_curator', 'N/A')}"
 
-                if 'master_writer' in model_usage:
-                    # Single-pass pipeline (no synthesis writer)
-                    summary_text += f"\n**Commentary (Master Writer)**: {model_usage.get('master_writer', 'N/A')}"
-                else:
-                    # Standard two-pass pipeline (synthesis + editor)
+                if 'synthesis' in model_usage:
                     summary_text += f"\n**Commentary Synthesis**: {model_usage.get('synthesis', 'N/A')}"
                     summary_text += f"\n**Editorial Review**: {model_usage.get('master_editor', 'N/A')}"
+                else:
+                    writer_model = model_usage.get('master_writer') or model_usage.get('master_editor', 'N/A')
+                    summary_text += f"\n**Commentary (Master Writer)**: {writer_model}"
             else:
                 summary_text += "\nModel attribution data not available."
 

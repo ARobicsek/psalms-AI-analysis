@@ -191,6 +191,42 @@ class CommentaryFormatter:
         sacks_count = research_data.get('sacks_references_count', 0)
         lines.append(f"- **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}")
 
+        # Deep Web Research status
+        deep_research_available = research_data.get('deep_research_available', False)
+        deep_research_included = research_data.get('deep_research_included', False)
+        deep_research_removed = research_data.get('deep_research_removed_for_space', False)
+
+        if deep_research_included:
+            deep_research_str = "Yes"
+        elif deep_research_removed:
+            deep_research_str = "No (removed for space)"
+        elif deep_research_available:
+            deep_research_str = "No (available but not included)"
+        else:
+            deep_research_str = "No"
+
+        # Literary Echoes Research status
+        literary_echoes_included = research_data.get('literary_echoes_included', False)
+        literary_echoes_available = research_data.get('literary_echoes_available', False)
+
+        if literary_echoes_included:
+            literary_echoes_str = "Yes"
+        elif literary_echoes_available:
+            literary_echoes_str = "No (available but not included)"
+        else:
+            literary_echoes_str = "No"
+
+        # Sections trimmed for context length
+        sections_trimmed = research_data.get('sections_trimmed', [])
+        if sections_trimmed:
+            sections_trimmed_str = ", ".join(sections_trimmed)
+        else:
+            sections_trimmed_str = "None"
+            
+        lines.append(f"- **Deep Web Research**: {deep_research_str}")
+        lines.append(f"- **Literary Echoes Research**: {literary_echoes_str}")
+        lines.append(f"- **Sections Trimmed for Context**: {sections_trimmed_str}")
+
         # Get Master Editor prompt size from the 'steps' section
         master_editor_stats = stats.get('steps', {}).get('master_editor', {})
         prompt_chars = master_editor_stats.get('input_char_count', 'N/A')
@@ -208,16 +244,20 @@ class CommentaryFormatter:
         if agent_models:
             lines.append(f"**Structural Analysis (Macro)**: {agent_models.get('macro_analysis', 'N/A')}")
             lines.append(f"**Verse Discovery (Micro)**: {agent_models.get('micro_analysis', 'N/A')}")
+            if agent_models.get('liturgical_librarian'):
+                lines.append(f"**Liturgical Librarian**: {agent_models.get('liturgical_librarian')}")
+            if agent_models.get('figurative_curator'):
+                lines.append(f"**Figurative Curator**: {agent_models.get('figurative_curator')}")
             if agent_models.get('insight_extractor'):
                 lines.append(f"**Insights Extraction**: {agent_models.get('insight_extractor')}")
+            if agent_models.get('question_curator'):
+                lines.append(f"**Question Generator**: {agent_models.get('question_curator')}")
             if agent_models.get('synthesis'):
                 lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis', 'N/A')}")
-
-            # Use "Master Writer" if available, else "Editorial Review"
-            if agent_models.get('master_writer'):
-                lines.append(f"**Master Writer**: {agent_models.get('master_writer', 'N/A')}")
-            else:
                 lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")
+            else:
+                writer_model = agent_models.get('master_writer') or agent_models.get('master_editor', 'N/A')
+                lines.append(f"**Commentary (Master Writer)**: {writer_model}")
         else:
             lines.append("Model attribution data not available.")
 

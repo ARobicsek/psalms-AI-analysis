@@ -8,6 +8,24 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 267 (2026-02-23): Fix Question Generator Model Attribution
+
+**Objective**: Ensure the "Question Generator" model is correctly identified and listed in the Methodological & Bibliographical Summary of the DOCX outputs.
+
+**Problems Identified**:
+- The `Question Generation` key was entirely missing from the DOCX Methodological & Bibliographical summary due to a missing attribution key in the document generators, causing `gpt-5.1` (the Editorial Review model which appeared last) to be incorrectly interpreted as the question generator.
+
+**Solutions Implemented**:
+1. Renamed the reporting label from "Question Generation" to "Question Generator" across the formatting scripts to match preferred terminology.
+2. Ensured the correct programmatic key (`question_curator`) is explicitly printed in the Methodological & Bibliographical Summary for all document outputs (Markdown, Main DOCX, College DOCX, Combined DOCX).
+
+**Files Modified**:
+- `src/utils/commentary_formatter.py` - Updated attribution label.
+- `src/utils/document_generator.py` - Added missing `question_curator` attribution logic and updated label.
+- `src/utils/combined_document_generator.py` - Added missing `question_curator` attribution logic and updated label.
+
+---
+
 ## Session 266 (2026-02-23): Fix College Edition Pipeline Bugs & Master Writer Error Handling
 
 **Objective**: Ensure the College Edition word document generates correctly by fixing pipeline skipping logic and silent variable initialization errors.

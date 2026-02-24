@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-23 (Session 266)
+**Last Updated**: 2026-02-23 (Session 267)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 266
+- **Current Session**: 267
 - **Active Features**: **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, Prompt Overhaul V3 (Test), Insight Extractor, Master Writer V2, College Writer V2, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Fix College Edition Pipeline Bugs & Error Handling (Session 266)
+### 1. Fix Question Generator Model Attribution (Session 267)
+- Identified that `gpt-5.1` was incorrectly appearing as the question generator due to a missing attribution key in the document generators.
+- Renamed the reporting label to "Question Generator" across all formatting scripts to match preferred terminology.
+- Explicitly added the `question_curator` attribution key to `document_generator.py` and `combined_document_generator.py` to ensure the correct model (`claude-opus-4-6`) is printed in the Methodological & Bibliographical Summary.
+
+### 2. Fix College Edition Pipeline Bugs & Error Handling (Session 266)
 - Diagnosed and fixed a silent `NameError` crash during the College Writer step that prevented DOCX generation when the Main Writer was skipped.
 - Rewrote pipeline logic to unconditionally generate the `research_trimmed.md` bundle independent of the insight extraction step logic.
 - Improved terminal error handling to prevent silent failures in the College pipeline.
