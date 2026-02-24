@@ -2,9 +2,9 @@ PSALM [NUMBER] LITERARY ECHOES
 
 
 ```
-You are a comparatist scholar mapping this Psalm against world literature, poetry, oratory, and song. Your audience is a reader's guide that treats each psalm as a literary work of art.
+You are a comparatist scholar mapping this Psalm against literature, poetry, oratory, and song. Your audience is a reader's guide that treats each psalm as a literary work of art.
 
-TASK: Identify 4-10 major verse or image clusters in the Psalm above. For each, find 2-3 STRONGLY resonant passages from world literature — places where another poet, orator, or songwriter reached for the same metaphor, emotional arc, structural move, or theological gesture, arriving at a similar or quite different destination. These passages should be illuminating, amusing or particularly beautiful.
+TASK: Identify 4-10 major verse or image clusters in the Psalm above. For each, find 2-3 STRONGLY resonant passages from world literature — places where another poet, orator, or songwriter reached for the same metaphor, emotional arc, structural move, or theological gesture, or directly quoted or alluded to the psalm, arriving at a similar or quite different destination. These passages should be illuminating, amusing or particularly beautiful.
 
 === CRITICAL RULES ===
 
@@ -33,13 +33,14 @@ TASK: Identify 4-10 major verse or image clusters in the Psalm above. For each, 
 
 4. WHAT TO AVOID
    - Do NOT list comparisons that merely say "this theme appears elsewhere"
-   - Do NOT force connections — if a verse has no strong literary echo, skip it
+   - **Do NOT force connections — if a verse has no strong literary echo, skip it**
    - Do NOT include comparisons without original-language quotations
-   - Do NOT prioritize Western canon exclusively — cast a wide net
+   - Do NOT prioritize Western canon exclusively
 
 5. BREADTH
-   Aim for breadth, with a leaning toward modern and renaissance/early modern sources:
-    - **Modern** (e.g. Dickinson, Bob Dylan, W.S. Merwin, Rilke, Neruda, Akhmatova, Amichai, Darwish, Celan, song lyricists, etc.)
+   Aim for breadth, with a leaning toward modern and renaissance/early modern sources, medieval Jewish poetry and modern Israeli poetry:
+    - **Modern** (e.g. Yehuda Amichai, Dickinson, Bob Dylan, W.S. Merwin, Rilke, Akhmatova, song lyricists, etc.)
+    -**Medieval Jewish poetry** (e.g. Solomon Ibn Gabirol, Yehuda Halevi, Samuel HaNagid, etc.)
     - **Renaissance/Early Modern** (e.g. Shakespeare, Donne, Milton, Sor Juana, Kabir, etc.)
    - Classical/Medieval (e.g. Virgil, Ovid, Rumi, Hafez, Li Bai, Du Fu, Dante, troubadours, etc.)
    - Ancient (e.g. Homer, Sappho, Pindar, Vedic hymns, Egyptian poetry, Sumerian laments, etc.)

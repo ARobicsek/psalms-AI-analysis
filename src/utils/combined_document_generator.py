@@ -816,6 +816,9 @@ class CombinedDocumentGenerator:
     def _add_summary_paragraph(self, text: str):
         """Add a summary paragraph with the SummaryText style."""
         self._add_paragraph_with_markdown(text, style='SummaryText')
+        if self.document.paragraphs:
+            for run in self.document.paragraphs[-1].runs:
+                run.font.name = 'Aptos'
 
     def _parse_verse_commentary(self, content: str, psalm_text_data: Dict[int, Dict[str, str]]) -> List[Dict[str, str]]:
         """Parses the verse-by-verse commentary file.
@@ -1483,7 +1486,9 @@ Methodological & Bibliographical Summary
         # 7. Add Methodological Summary
         if self.stats_path.exists():
             self.document.add_page_break()
-            self.document.add_heading('Methodological & Bibliographical Summary', level=2)
+            p = self.document.add_heading('Methodological & Bibliographical Summary', level=2)
+            for r in p.runs:
+                r.font.name = 'Aptos'
             stats_data = json.loads(self.stats_path.read_text(encoding='utf-8'))
             summary_text = self._format_bibliographical_summary(stats_data)
 
@@ -1533,9 +1538,13 @@ Methodological & Bibliographical Summary
                 if not stripped_line:
                     continue
                 if stripped_line.startswith('###'):
-                    self.document.add_heading(line.replace('###', '').strip(), level=3)
+                    p = self.document.add_heading(line.replace('###', '').strip(), level=3)
+                    for r in p.runs:
+                        r.font.name = 'Aptos'
                 elif stripped_line.startswith('##'):
-                     self.document.add_heading(line.replace('##', '').strip(), level=2)
+                     p = self.document.add_heading(line.replace('##', '').strip(), level=2)
+                     for r in p.runs:
+                         r.font.name = 'Aptos'
                 elif "Methodological & Bibliographical Summary" in stripped_line:
                     continue  # Skip the redundant title line
                 elif stripped_line.startswith('- '): # Old format

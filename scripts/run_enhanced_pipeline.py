@@ -46,7 +46,8 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         'commentary_counts': {},
         'sacks_count': 0,
         'deep_research_available': False,
-        'deep_research_chars': 0
+        'deep_research_chars': 0,
+        'literary_echoes_available': False
     }
 
     # Count lexicon entries
@@ -98,6 +99,10 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         deep_match = re.search(r'## Deep Web Research\s*\n(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
         if deep_match:
             stats['deep_research_chars'] = len(deep_match.group(1))
+
+    # Check for Literary Echoes
+    if '## Cross-Cultural Literary Echoes' in markdown_content:
+        stats['literary_echoes_available'] = True
 
     # Check for Models Used
     models_used = {}
@@ -418,6 +423,21 @@ def run_enhanced_pipeline(
     # STEP 2c: Insight Extraction
     # =====================================================================
     curated_insights = None
+    # Always trim research first, as other steps (or the user) may rely on it
+    trimmed = None
+    if not smoke_test:
+        if 'research_bundle_content' not in locals():
+            if research_file.exists():
+                with open(research_file, 'r', encoding='utf-8') as f: research_bundle_content = f.read()
+            else:
+                research_bundle_content = ""
+                
+        if research_bundle_content:
+            trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+            trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
+            with open(trimmed_research_file, 'w', encoding='utf-8') as f:
+                f.write(trimmed)
+
     if smoke_test:
         logger.info("[STEP 2c] SMOKE TEST Insights")
         curated_insights = {"psalm_level_insights": [], "verse_insights": {}}
@@ -431,16 +451,6 @@ def run_enhanced_pipeline(
         else:
             logger.info("[STEP 2c] Extracting Insights...")
             try:
-                # Load content if needed
-                if 'research_bundle_content' not in locals():
-                    with open(research_file, 'r', encoding='utf-8') as f: research_bundle_content = f.read()
-
-                trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
-                
-                # Save trimmed research for inspection
-                trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
-                with open(trimmed_research_file, 'w', encoding='utf-8') as f:
-                    f.write(trimmed)
                 extractor = InsightExtractor(cost_tracker=cost_tracker)
 
                 # Get rich psalm text from micro_analysis for prompt
@@ -574,8 +584,7 @@ def run_enhanced_pipeline(
     else:
         logger.info("[STEP 4] Skipping Master Writer")
         if not edited_intro_file.exists():
-            logger.error("FATAL: Missing edited files")
-            sys.exit(1)
+            logger.warning("[STEP 4] Main commentary files missing. Proceeding without them (downstream steps requiring them will be skipped).")
 
     # =====================================================================
     # STEP 4b: College Writer
@@ -587,7 +596,12 @@ def run_enhanced_pipeline(
         print(f"{'='*80}\n")
 
         # Reuse existing MasterEditor instance if available, otherwise create one
-        if 'master_editor' not in locals() or master_editor is None:
+        try:
+            _ = master_editor
+        except NameError:
+            master_editor = None
+            
+        if master_editor is None:
             master_editor = MasterEditor(main_model=master_editor_model, college_model=master_editor_model, cost_tracker=cost_tracker)
 
         try:
@@ -644,6 +658,7 @@ def run_enhanced_pipeline(
             sys.exit(1)
         except Exception as e:
             logger.error(f"College Writer failed: {e}", exc_info=True)
+            print(f"Error generating College Writer commentary: {e}")
 
         time.sleep(delay_between_steps)
 
@@ -654,7 +669,7 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 5: Print-Ready
     # =====================================================================
-    if not skip_print_ready:
+    if not skip_print_ready and edited_intro_file.exists() and edited_verses_file.exists():
         logger.info("[STEP 5] Print-Ready Formatting...")
         print(f"\n{'='*80}")
         print(f"STEP 5: Print-Ready Formatting")
@@ -676,7 +691,7 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 6: Word Doc
     # =====================================================================
-    if not skip_word_doc:
+    if not skip_word_doc and edited_intro_file.exists() and edited_verses_file.exists():
         logger.info("[STEP 6] Word Doc Generation...")
         print(f"\n{'='*80}")
         print(f"STEP 6: Word Document Generation (.docx)")
@@ -690,7 +705,8 @@ def run_enhanced_pipeline(
             gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file, docx_output_file, q_file)
             gen.generate()
         except Exception as e:
-            logger.warning(f"Doc gen failed: {e}")
+            logger.error(f"Doc gen failed: {e}", exc_info=True)
+            print(f"Error generating Word document: {e}")
             
     # =====================================================================
     # STEP 6b: College Word Doc
@@ -707,7 +723,8 @@ def run_enhanced_pipeline(
             gen.generate()
             print(f"  College Word doc: {docx_output_college_file}\n")
         except Exception as e:
-            logger.warning(f"College Doc gen failed: {e}")
+            logger.error(f"College Doc gen failed: {e}", exc_info=True)
+            print(f"Error generating College Word document: {e}")
 
     # =====================================================================
     # STEP 6c: Generate Combined .docx Document (Main + College)

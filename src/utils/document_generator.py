@@ -1464,6 +1464,9 @@ Methodological & Bibliographical Summary
         else:
             p.add_run(line)
 
+        for run in p.runs:
+            run.font.name = 'Aptos'
+
     def generate(self):
         """Main method to generate the .docx file, mirroring print_ready.md structure."""
         # Fetch psalm text data from the database first
@@ -1532,7 +1535,9 @@ Methodological & Bibliographical Summary
         # 5. Add Methodological Summary
         if self.stats_path.exists():
             self.document.add_page_break()
-            self.document.add_heading('Methodological & Bibliographical Summary', level=2)
+            p = self.document.add_heading('Methodological & Bibliographical Summary', level=2)
+            for r in p.runs:
+                r.font.name = 'Aptos'
             stats_data = json.loads(self.stats_path.read_text(encoding='utf-8'))
             summary_text = self._format_bibliographical_summary(stats_data)
 
@@ -1548,11 +1553,11 @@ Methodological & Bibliographical Summary
                 if 'figurative_curator' in model_usage:
                     summary_text += f"\n**Figurative Curator**: {model_usage.get('figurative_curator', 'N/A')}"
 
-                if 'question_curator' in model_usage:
-                    summary_text += f"\n**Question Generation**: {model_usage.get('question_curator', 'N/A')}"
-
                 if 'insight_extractor' in model_usage:
                     summary_text += f"\n**Insights Extraction**: {model_usage.get('insight_extractor', 'N/A')}"
+
+                if 'question_curator' in model_usage:
+                    summary_text += f"\n**Question Generation**: {model_usage.get('question_curator', 'N/A')}"
 
                 if 'master_writer' in model_usage:
                     # Single-pass pipeline (no synthesis writer)
@@ -1582,9 +1587,13 @@ Methodological & Bibliographical Summary
                 if not stripped_line:
                     continue
                 if stripped_line.startswith('###'):
-                    self.document.add_heading(line.replace('###', '').strip(), level=3)
+                    p = self.document.add_heading(line.replace('###', '').strip(), level=3)
+                    for r in p.runs:
+                        r.font.name = 'Aptos'
                 elif stripped_line.startswith('##'):
-                     self.document.add_heading(line.replace('##', '').strip(), level=2)
+                     p = self.document.add_heading(line.replace('##', '').strip(), level=2)
+                     for r in p.runs:
+                         r.font.name = 'Aptos'
                 elif "Methodological & Bibliographical Summary" in stripped_line:
                     continue  # Skip the redundant title line
                 elif stripped_line.startswith('- '): # Old format

@@ -8,6 +8,24 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 266 (2026-02-23): Fix College Edition Pipeline Bugs & Master Writer Error Handling
+
+**Objective**: Ensure the College Edition word document generates correctly by fixing pipeline skipping logic and silent variable initialization errors.
+
+**Problems Identified**:
+- The trimmed research markdown (`psalm_XXX_research_trimmed.md`) was skipped entirely if `skip_insights` was active or an insights file already existed.
+- When the Main Writer was skipped (`--skip-writer`), the College Writer step crashed with a silent `NameError` because it checked for the `master_editor` variable using `locals().get()`, which failed due to Python scoping rules. The error was swallowed by the logger, preventing the College DOCX from being generated.
+
+**Solutions Implemented**:
+1. Decoupled `research_trimmer` from the insight extraction condition in Step 2c, ensuring the trimmed research bundle is always generated.
+2. Replaced the faulty `locals()` check for `master_editor` in Step 4b with a robust `try...except NameError` block.
+3. Added explicit terminal printing for College Writer exceptions so they don't fail silently.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Moved `trim_bundle` logic up, fixed `master_editor` variable initialization, added print statements for error handling.
+
+---
+
 ## Session 264 (2026-02-20): Sonnet 4.6 for Micro Analyst (Cost Reduction)
 
 **Objective**: Replace Claude Opus 4.6 with the new Claude Sonnet 4.6 for the micro analyst agent to reduce per-psalm costs while maintaining high thinking quality.
