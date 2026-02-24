@@ -12,6 +12,15 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
+**Session 269 (2026-02-24)**: Unified Writer V4 — Merge Main + College
+- Replaced dual Main/College commentary system with single MASTER_WRITER_PROMPT_V4
+- New audience: "Intelligent, curious readers with Hebrew proficiency"
+- New tone: "Scholar at dinner — relaxed, precise, occasionally witty, never performing"
+- Merged ground rules (Main's depth + College's pedagogical clarity), all 12 Items of Interest
+- Removed Steps 4b/6b/6c from pipelines; `--skip-college` → hidden no-op
+- Updated MasterEditorSI, converse_with_editor, all documentation
+- Halves the cost of the most expensive pipeline step
+
 **Session 258 (2026-02-13)**: Token Reduction Phase B
 - B1: Related psalms default to no full texts (`include_full_text=False`), saving ~13K chars
 - B2: BDB lexicon entries truncated to ~500 chars max (from ~2,400 avg), saving ~21K chars
@@ -33,10 +42,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 **Session 255 (2026-02-11)**: Prompt Overhaul Phase 1 - V3 Editor
 - Created `master_editor_v3.py` with 9 key prompt changes
 - Fixed MicroAnalyst JSON truncation (increased output tokens to 65k)
-
-**Session 254 (2026-02-09)**: Opus 4.6 Bug Fixes + Model Tracking
-- Fixed adaptive thinking JSON parsing in micro_analyst
-- Added model tracking for skipped pipeline steps
 
 ## Quick Commands
 

@@ -1,13 +1,16 @@
 """
-Enhanced Pipeline Runner - TEST VERSION (Master Writer Integration)
+SI Pipeline Runner - V4 Unified Writer
+
+Single-audience commentary pipeline using MASTER_WRITER_PROMPT_V4.
+College Writer was retired in Session 269 (merged into unified V4 writer).
 
 Changes from original:
 1. REMOVED Synthesis Writer step entirely.
 2. REPLACED Master Editor step with Master Writer (creation mode).
-3. UPDATED College step to use College Writer (creation mode).
+3. College Writer RETIRED — V4 unified writer serves all audiences.
 
 Usage:
-    python scripts/run_enhanced_pipeline_TEST.py PSALM_NUMBER [options]
+    python scripts/run_si_pipeline.py PSALM_NUMBER [options]
 """
 
 import sys
@@ -154,10 +157,10 @@ def run_enhanced_pipeline(
     skip_macro: bool = False,
     skip_micro: bool = False,
     skip_writer: bool = False,  # Changed from skip_synthesis/skip_master_edit
-    skip_college: bool = False,
+    skip_college: bool = False,  # DEPRECATED V4: silent no-op
     skip_print_ready: bool = False,
     skip_word_doc: bool = False,
-    skip_combined_doc: bool = False,
+    skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
     master_editor_model: str = "gpt-5.1",
@@ -224,13 +227,7 @@ def run_enhanced_pipeline(
     
     docx_output_file = output_path / f"psalm_{psalm_number:03d}_commentary_SI.docx"
     
-    # College edition file paths
-    edited_intro_college_file = output_path / f"psalm_{psalm_number:03d}_intro_college_SI.md"
-    edited_verses_college_file = output_path / f"psalm_{psalm_number:03d}_verses_college_SI.md"
-    docx_output_college_file = output_path / f"psalm_{psalm_number:03d}_commentary_college_SI.docx"
-    
-    # Combined document file path
-    docx_output_combined_file = output_path / f"psalm_{psalm_number:03d}_commentary_combined_SI.docx"
+    # College/Combined file paths — RETIRED (Session 269, V4 unified writer)
     
     # Reader questions file
     reader_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions.json"
@@ -544,77 +541,7 @@ def run_enhanced_pipeline(
         if not edited_intro_file.exists():
             logger.warning("[STEP 4] Main SI commentary files missing. Proceeding without them (downstream steps requiring them will be skipped).")
 
-    # =====================================================================
-    # STEP 4b: College Writer
-    # =====================================================================
-    if not skip_college and not smoke_test:
-        logger.info(f"\n[STEP 4b] Running College WRITER ({master_editor_model})...")
-        print(f"\n{'='*80}")
-        print(f"STEP 4b: College Writer ({master_editor_model})")
-        print(f"{'='*80}\n")
-
-        # Reuse existing MasterEditor instance if available, otherwise create one
-        if 'master_editor' not in locals() or master_editor is None:
-            master_editor = MasterEditorSI(main_model=master_editor_model, college_model=master_editor_model, cost_tracker=cost_tracker)
-
-        try:
-            result = master_editor.write_college_commentary(
-                macro_file=macro_file,
-                micro_file=micro_file,
-                research_file=research_file,
-                insights_file=insights_file if insights_file.exists() else None,
-                psalm_number=psalm_number,
-                reader_questions_file=reader_questions_file if reader_questions_file.exists() else None,
-                special_instruction=special_instruction
-            )
-            
-            # Track college writer stats
-            # We treat this as a separate step or part of master_writer logic, 
-            # but usually pipeline_summary tracks main steps.
-            # If we want to track it, we'd need a new step name or just log it.
-            if 'input_char_count' in result:
-                logger.info(f"College Writer usage: {result['input_char_count']} chars input, {result.get('input_token_count', 0)} tokens")
-            
-            with open(edited_intro_college_file, 'w', encoding='utf-8') as f:
-                f.write(result['introduction'])
-            with open(edited_verses_college_file, 'w', encoding='utf-8') as f:
-                f.write(result['verse_commentary'])
-
-            # Extract refined reader questions from college writer output
-            if result.get('reader_questions'):
-                refined_questions_college_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
-                questions_text = result['reader_questions']
-                questions = []
-                for line in questions_text.strip().split('\n'):
-                    line = line.strip()
-                    match = re.match(r'^(\d+)\.\s+(.+)$', line)
-                    if match:
-                        q = match.group(2).strip()
-                        if q and len(q) > 10:
-                            questions.append(q)
-
-                if questions:
-                    with open(refined_questions_college_file, 'w', encoding='utf-8') as f:
-                        json.dump({
-                            'psalm_number': psalm_number,
-                            'curated_questions': questions,
-                            'source': 'college_writer_refined'
-                        }, f, ensure_ascii=False, indent=2)
-                    logger.info(f"Extracted {len(questions)} college refined reader questions")
-
-            logger.info(f"College Writer complete for Psalm {psalm_number}")
-            tracker.track_model_for_step("master_writer", master_editor.model)
-            print(f"  College Introduction: {edited_intro_college_file}")
-            print(f"  College Verses: {edited_verses_college_file}\n")
-
-        except openai.RateLimitError as e:
-            logger.error(f"PIPELINE HALTED: OpenAI API quota exceeded during College Writer step. {e}")
-            print(f"\nPIPELINE HALTED: OpenAI API quota exceeded. Please check your plan and billing details.")
-            sys.exit(1)
-        except Exception as e:
-            logger.error(f"College Writer failed: {e}", exc_info=True)
-
-        time.sleep(delay_between_steps)
+    # STEP 4b: College Writer — RETIRED (Session 269, V4 unified writer)
 
     # --- Save stats to disk before print-ready step (which reads the JSON as a subprocess) ---
     tracker.save_json(str(output_path))
@@ -660,77 +587,7 @@ def run_enhanced_pipeline(
         except Exception as e:
             logger.warning(f"Doc gen failed: {e}")
             
-    # =====================================================================
-    # STEP 6b: College Word Doc
-    # =====================================================================
-    if not skip_word_doc and not smoke_test and edited_intro_college_file.exists():
-        logger.info("[STEP 6b] College Word Doc...")
-        print(f"\n{'='*80}")
-        print(f"STEP 6b: College Word Document (.docx)")
-        print(f"{'='*80}\n")
-        from src.utils.document_generator import DocumentGenerator
-        try:
-            refined_q_college = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
-            college_q_file = refined_q_college if refined_q_college.exists() else None
-            gen = DocumentGenerator(psalm_number, edited_intro_college_file, edited_verses_college_file, summary_json_file, docx_output_college_file, college_q_file)
-            gen.generate()
-            print(f"  College Word doc: {docx_output_college_file}\n")
-        except Exception as e:
-            logger.warning(f"College Doc gen failed: {e}")
-
-    # =====================================================================
-    # STEP 6c: Generate Combined .docx Document (Main + College)
-    # =====================================================================
-    if not skip_combined_doc and not smoke_test:
-        if skip_college and not (edited_intro_college_file.exists() and edited_verses_college_file.exists()):
-            logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-college flag set and college files not found)")
-        else:
-            logger.info("\n[STEP 6c] Creating combined .docx document (main + college)...")
-            print(f"\n{'='*80}")
-            print(f"STEP 6c: Generating Combined Word Document (.docx)")
-            print(f"{'='*80}\n")
-
-            from src.utils.combined_document_generator import CombinedDocumentGenerator
-
-            required_files = [
-                edited_intro_file,
-                edited_verses_file,
-                edited_intro_college_file,
-                edited_verses_college_file,
-                summary_json_file
-            ]
-
-            if all(f.exists() for f in required_files):
-                try:
-                    refined_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
-                    refined_questions_college_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_college_refined.json"
-
-                    main_questions = refined_questions_file if refined_questions_file.exists() else (reader_questions_file if reader_questions_file.exists() else None)
-                    college_questions = refined_questions_college_file if refined_questions_college_file.exists() else None
-
-                    generator_combined = CombinedDocumentGenerator(
-                        psalm_num=psalm_number,
-                        main_intro_path=edited_intro_file,
-                        main_verses_path=edited_verses_file,
-                        college_intro_path=edited_intro_college_file,
-                        college_verses_path=edited_verses_college_file,
-                        stats_path=summary_json_file,
-                        output_path=docx_output_combined_file,
-                        reader_questions_path=main_questions,
-                        college_questions_path=college_questions
-                    )
-                    generator_combined.generate()
-                    logger.info(f"Successfully generated combined Word document for Psalm {psalm_number}.")
-                    print(f"  Combined Word document: {docx_output_combined_file}\n")
-                except Exception as e:
-                    logger.error(f"Failed to generate combined .docx file for Psalm {psalm_number}: {e}", exc_info=True)
-                    print(f"  Error in combined Word document generation (see logs for details)\n")
-            else:
-                missing = [f for f in required_files if not f.exists()]
-                logger.warning(f"Skipping combined .docx generation because required files were not found: {missing}")
-                print(f"  Skipping combined Word document generation: required files not found.\n")
-    elif skip_combined_doc:
-        logger.info(f"[STEP 6c] Skipping combined .docx generation (--skip-combined-doc flag set)")
+    # STEP 6b/6c: College/Combined Word Docs — RETIRED (Session 269, V4 unified writer)
 
     # =====================================================================
     # COMPLETE - Pipeline Summary
@@ -762,10 +619,10 @@ if __name__ == "__main__":
     parser.add_argument("--skip-macro", action="store_true")
     parser.add_argument("--skip-micro", action="store_true")
     parser.add_argument("--skip-writer", action="store_true", help="Skip Master Writer step")
-    parser.add_argument("--skip-college", action="store_true")
+    parser.add_argument("--skip-college", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--skip-print-ready", action="store_true")
     parser.add_argument("--skip-word-doc", action="store_true")
-    parser.add_argument("--skip-combined-doc", action="store_true")
+    parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
     parser.add_argument("--master-editor-model", type=str, default="gpt-5.1",

@@ -4,8 +4,12 @@ Master Editor Conversation Script
 Enables multi-turn conversation with the Master Editor (GPT-5.1) about
 a completed psalm commentary, with full context from research materials.
 
+As of V4 (Session 269), the dual Main/College edition system has been replaced
+by a single unified writer. The --edition flag is retained as a hidden no-op
+for backward compatibility.
+
 Usage:
-    python scripts/converse_with_editor.py PSALM_NUMBER [--edition main|college]
+    python scripts/converse_with_editor.py PSALM_NUMBER
 
 Author: Claude (Anthropic)
 Date: 2025-12-23
@@ -38,8 +42,7 @@ def parse_arguments():
         epilog="""
 Examples:
   python scripts/converse_with_editor.py 19
-  python scripts/converse_with_editor.py 19 --edition college
-  python scripts/converse_with_editor.py 23 --edition main
+  python scripts/converse_with_editor.py 23
         """
     )
 
@@ -47,7 +50,7 @@ Examples:
                         help='Psalm number (1-150)')
     parser.add_argument('--edition', type=str, default='main',
                         choices=['main', 'college'],
-                        help='Which edition to discuss (default: main)')
+                        help=argparse.SUPPRESS)
 
     return parser.parse_args()
 
@@ -555,6 +558,13 @@ def main():
     args = parse_arguments()
     psalm_number = args.psalm_number
     edition = args.edition
+
+    # V4 unified writer: --edition is a deprecated no-op
+    if edition != 'main':
+        print(f"Note: --edition {edition} is deprecated. "
+              "V4 uses a unified writer (no separate college edition). "
+              "Using main edition.")
+        edition = 'main'
 
     # Validate psalm number
     if not 1 <= psalm_number <= 150:

@@ -2019,9 +2019,13 @@ class MasterEditorV2:
         curated_insights: Dict,
         analytical_framework: str,
         reader_questions: str,
-        is_college: bool
+        is_college: bool = False  # Default added for V4 backward compat
     ) -> Dict[str, str]:
-        """Execute the writer prompt with appropriate model."""
+        """Execute the writer prompt with appropriate model.
+
+        Note: In V4, is_college is ignored (unified prompt). Default=False
+        added so V4's MasterEditor can call super() without passing is_college.
+        """
 
         # Format common inputs
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
