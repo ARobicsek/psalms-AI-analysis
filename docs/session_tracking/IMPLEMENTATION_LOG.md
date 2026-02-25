@@ -8,6 +8,39 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 271 (2026-02-24): Pipeline Robustness — Token Truncation & Model Hygiene
+
+**Objective**: Fix a cascade of token truncation crashes when running Psalm 37 (40-verse acrostic), and enforce Opus 4.6 across all agents.
+
+**Problems Identified**:
+- MacroAnalyst crashed with `Invalid JSON from MacroAnalyst: Unterminated string` — response truncated mid-JSON because Opus 4.6 adaptive thinking + text shared a 32K token budget
+- MicroAnalyst discovery pass crashed with `Empty text block received` — adaptive thinking consumed all 65K tokens, leaving zero for the JSON output
+- InsightExtractor wrote a silent `{"error": "JSON parse failed"}` fallback — `max_tokens=4000` too small for a 40-verse psalm; no retry logic; no thinking at all
+- InsightExtractor verse count estimated from newlines (`// 3`) overestimated by 67% (yielded 67 for a 40-verse psalm) due to multi-line verse block format
+- QuestionCurator used `temperature=0.7` (incompatible with thinking) and no adaptive thinking despite being Opus 4.6
+- `master_editor_v2.py` (base class still in active use) had deprecated `thinking.type=enabled` for Opus 4.6, generating `UserWarning` on every run
+- `master_editor_v2.py` and pipeline scripts hardcoded `claude-opus-4-5` model references
+- Pipeline header showed `TEST - MASTER WRITER` and `Master Writer Model: gpt-5.1`
+
+**Solutions Implemented**:
+1. **MacroAnalyst truncation fix**: Raised default `max_tokens` 32K→48K; added `stop_reason == 'max_tokens'` detection that retries with 1.5× budget instead of crashing
+2. **MicroAnalyst empty-response fix**: Added `use_budgeted_thinking` flag; long psalms (>25 verses) start with budgeted thinking capped at 70% of `max_tokens`, guaranteeing 30% for JSON output; adaptive thinking failures now retry with budgeted mode instead of crashing
+3. **InsightExtractor overhaul**: Switched from `messages.create()` to streaming; added `thinking={"type": "adaptive"}`; scaled `max_tokens` from actual verse count (from `micro_analysis.verse_commentaries`); added `stop_reason` truncation detection with 1.5× retry; JSON parse failures now retry with more tokens instead of silently returning empty structure
+4. **QuestionCurator thinking**: Removed `temperature=0.7`; added `thinking={"type": "adaptive"}`; switched to streaming; bumped `max_tokens` 2K→4K; cost tracking now includes `thinking_tokens`
+5. **Model hygiene**: Fixed deprecated `thinking.type=enabled` → `adaptive` in `master_editor_v2.py` for the Opus 4.6 writer path; updated hardcoded `claude-opus-4-5-20250514` → `claude-opus-4-6` in `_call_claude_main` and `_call_claude_college`; removed `claude-opus-4-5` from `choices` lists in both production pipeline scripts; fixed `run_si_pipeline.py` default model from `gpt-5.1` → `claude-opus-4-6`
+6. **Pipeline header**: Removed `(TEST - MASTER WRITER)` label; corrected `Master Writer Model` default from `gpt-5.1` to `claude-opus-4-6` in both function signature and argparse
+
+**Files Modified**:
+- `src/agents/macro_analyst.py` — truncation detection + retry, raised default max_tokens to 48K
+- `src/agents/micro_analyst.py` — budgeted thinking for long psalms (>25 verses), empty-response retry
+- `src/agents/insight_extractor.py` — adaptive thinking, streaming, verse-count-scaled tokens, retry on truncation/JSON failure, fixed verse count source
+- `src/agents/question_curator.py` — adaptive thinking, streaming, removed temperature
+- `src/agents/archive/master_editor_v2.py` — `enabled`→`adaptive` for Opus 4.6 path; `opus-4-5`→`opus-4-6` in hardcoded calls and model mapping
+- `scripts/run_enhanced_pipeline.py` — removed `TEST - MASTER WRITER` label, fixed default model to `claude-opus-4-6`
+- `scripts/run_si_pipeline.py` — fixed default model to `claude-opus-4-6`, removed `claude-opus-4-5` from choices
+
+---
+
 ## Session 270 (2026-02-24): Unified Writer V4 Documentation Updates
 
 **Objective**: Update project documentation to reflect the new Unified Writer V4 architecture from Session 269.

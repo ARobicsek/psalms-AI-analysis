@@ -243,26 +243,34 @@ class QuestionCurator:
         )
         
         try:
-            # Call Anthropic API
-            message = self.client.messages.create(
+            # Call Anthropic API with adaptive thinking (streaming required)
+            response_text = ""
+            with self.client.messages.stream(
                 model=self.model,
-                max_tokens=2048,
-                temperature=0.7,
+                max_tokens=4096,
+                thinking={"type": "adaptive"},
                 system="You are an expert biblical scholar and editor helping to curate questions for a study application.",
                 messages=[
                     {"role": "user", "content": prompt}
                 ]
-            )
-            
+            ) as stream:
+                for chunk in stream:
+                    if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                        if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                            if chunk.delta.type == 'text_delta':
+                                response_text += chunk.delta.text
+                final_message = stream.get_final_message()
+
             # Track usage
-            if hasattr(message, 'usage'):
+            if hasattr(final_message, 'usage'):
+                usage = final_message.usage
+                thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
                 self.cost_tracker.add_usage(
                     model=self.model,
-                    input_tokens=message.usage.input_tokens,
-                    output_tokens=message.usage.output_tokens
+                    input_tokens=usage.input_tokens,
+                    output_tokens=usage.output_tokens,
+                    thinking_tokens=thinking_tokens
                 )
-                
-            response_text = message.content[0].text
             
             # Parse JSON from response
             # Look for JSON block

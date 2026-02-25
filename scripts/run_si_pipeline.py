@@ -625,9 +625,9 @@ if __name__ == "__main__":
     parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
-    parser.add_argument("--master-editor-model", type=str, default="gpt-5.1",
-                       choices=["gpt-5", "gpt-5.1", "claude-opus-4-5", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: gpt-5.1)")
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-6",
+                       choices=["gpt-5", "gpt-5.1", "claude-opus-4-6"],
+                       help="Model for Master Writer (default: claude-opus-4-6)")
     parser.add_argument("--skip-insights", action="store_true")
     parser.add_argument("--special-instruction", type=str, default=None,
                        help="Path to special instruction file")

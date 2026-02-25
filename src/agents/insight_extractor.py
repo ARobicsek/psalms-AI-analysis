@@ -214,60 +214,102 @@ class InsightExtractor:
             research_bundle=research_bundle
         )
         
-        self.logger.info(f"  Input size: {len(prompt)} chars")
-        
-        try:
-            response = self.client.messages.create(
-                model=self.model,
-                max_tokens=max_tokens,
-                temperature=0.0,  # Strict adherence to instructions
-                system="You are a rigorous scholarly editor who hates fluff. Your goal is to identify only the observations that genuinely transform understanding.",
-                messages=[
-                    {"role": "user", "content": prompt}
-                ]
-            )
-            
-            # Track cost
-            if hasattr(response, 'usage'):
-                self.cost_tracker.add_usage(
-                    model=self.model,
-                    input_tokens=response.usage.input_tokens,
-                    output_tokens=response.usage.output_tokens
-                )
-            
-            # Extract content
-            content = response.content[0].text
-            
-            # Parse JSON
+        # Scale max_tokens with verse count: base + ~150 tokens per verse for JSON output
+        # Get actual verse count from micro_analysis rather than estimating from newlines
+        if hasattr(micro_analysis, 'verse_commentaries'):
+            verse_count = len(micro_analysis.verse_commentaries)
+        elif isinstance(micro_analysis, dict):
+            verse_count = len(micro_analysis.get('verse_commentaries', []))
+        else:
+            verse_count = max(10, psalm_text.count('\n') // 5 + 1)  # fallback: ~5 newlines per verse
+        scaled_max_tokens = max(max_tokens, 5000 + verse_count * 150)
+        self.logger.info(f"  Input size: {len(prompt)} chars, verses: {verse_count}, max_tokens: {scaled_max_tokens}")
+
+        max_retries = 3
+        retry_delay = 2
+
+        for attempt in range(max_retries):
             try:
-                # Find JSON block if wrapped in markdown
+                if attempt > 0:
+                    import time
+                    wait_time = retry_delay * (2 ** (attempt - 1))
+                    self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
+                    time.sleep(wait_time)
+
+                # Use streaming to support adaptive thinking
+                thinking_text = ""
+                content = ""
+
+                with self.client.messages.stream(
+                    model=self.model,
+                    max_tokens=scaled_max_tokens,
+                    thinking={"type": "adaptive"},
+                    system="You are a rigorous scholarly editor who hates fluff. Your goal is to identify only the observations that genuinely transform understanding.",
+                    messages=[{"role": "user", "content": prompt}]
+                ) as stream:
+                    for chunk in stream:
+                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                if chunk.delta.type == 'thinking_delta':
+                                    thinking_text += chunk.delta.thinking
+                                elif chunk.delta.type == 'text_delta':
+                                    content += chunk.delta.text
+                    final_message = stream.get_final_message()
+
+                # Track cost
+                if hasattr(final_message, 'usage'):
+                    usage = final_message.usage
+                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                    self.cost_tracker.add_usage(
+                        model=self.model,
+                        input_tokens=usage.input_tokens,
+                        output_tokens=usage.output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
+
+                self.logger.info(f"  Thinking: {len(thinking_text)} chars, Response: {len(content)} chars")
+
+                # Check for truncation
+                stop_reason = getattr(final_message, 'stop_reason', None)
+                if stop_reason == 'max_tokens':
+                    if attempt < max_retries - 1:
+                        scaled_max_tokens = int(scaled_max_tokens * 1.5)
+                        self.logger.warning(f"  Response truncated. Retrying with max_tokens={scaled_max_tokens}...")
+                        continue
+                    else:
+                        self.logger.error("  Response truncated on final attempt")
+
+                # Parse JSON
+                content = content.strip()
                 if "```json" in content:
                     content = content.split("```json")[1].split("```")[0].strip()
                 elif "```" in content:
                     content = content.split("```")[1].split("```")[0].strip()
-                
-                insights = json.loads(content)
-                
-                num_psalm_insights = len(insights.get('psalm_level_insights', []))
-                num_verse_insights = len([v for k, v in insights.get('verse_insights', {}).items() if v != 'STANDARD'])
-                
-                self.logger.info(f"  ✓ Extraction complete: {num_psalm_insights} psalm insights, {num_verse_insights} verse insights found")
-                
-                return insights
-                
-            except json.JSONDecodeError as e:
-                self.logger.error(f"Failed to parse JSON response: {e}")
-                self.logger.debug(f"Raw response: {content[:500]}...")
-                # Return empty structure on failure
-                return {
-                    "psalm_level_insights": [],
-                    "verse_insights": {},
-                    "error": "JSON parse failed"
-                }
-                
-        except Exception as e:
-            self.logger.error(f"LLM extraction failed: {e}")
-            raise
+
+                try:
+                    insights = json.loads(content)
+                    num_psalm_insights = len(insights.get('psalm_level_insights', []))
+                    num_verse_insights = len([v for v in insights.get('verse_insights', {}).values() if v != 'STANDARD'])
+                    self.logger.info(f"  ✓ Extraction complete: {num_psalm_insights} psalm insights, {num_verse_insights} verse insights found")
+                    return insights
+
+                except json.JSONDecodeError as e:
+                    self.logger.error(f"Failed to parse JSON response: {e}")
+                    self.logger.debug(f"Raw response: {content[:500]}...")
+                    if attempt < max_retries - 1:
+                        scaled_max_tokens = int(scaled_max_tokens * 1.5)
+                        self.logger.warning(f"  JSON parse failed (likely truncation). Retrying with max_tokens={scaled_max_tokens}...")
+                        continue
+                    # Final attempt failed — return graceful fallback
+                    return {
+                        "psalm_level_insights": [],
+                        "verse_insights": {},
+                        "error": "JSON parse failed"
+                    }
+
+            except Exception as e:
+                self.logger.error(f"LLM extraction failed: {e}")
+                raise
 
     def save_insights(self, insights: Dict[str, Any], output_path: Path):
         """Save extracted insights to JSON file."""

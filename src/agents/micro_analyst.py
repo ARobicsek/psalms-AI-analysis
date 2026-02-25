@@ -545,6 +545,14 @@ class MicroAnalystV2:
 
         max_retries = 3
         retry_delay = 2  # seconds
+        current_max_tokens = 65536  # 64K to accommodate adaptive thinking + large JSON
+
+        # For long psalms (>25 verses), start with budgeted thinking to guarantee tokens for text output.
+        # Adaptive thinking can consume the entire budget on complex psalms, leaving nothing for JSON.
+        LONG_PSALM_THRESHOLD = 25
+        use_budgeted_thinking = verse_count > LONG_PSALM_THRESHOLD
+        if use_budgeted_thinking:
+            self.logger.info(f"  Long psalm ({verse_count} verses > {LONG_PSALM_THRESHOLD}): starting with budgeted thinking")
 
         for attempt in range(max_retries):
             try:
@@ -554,13 +562,19 @@ class MicroAnalystV2:
                     self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
                     time.sleep(wait_time)
 
+                # Build thinking config: adaptive by default, budgeted on retry if adaptive burned all tokens
+                if use_budgeted_thinking:
+                    thinking_budget = int(current_max_tokens * 0.7)  # Reserve 30% for text output
+                    thinking_config = {"type": "enabled", "budget_tokens": thinking_budget}
+                    self.logger.info(f"  Using budgeted thinking: {thinking_budget} tokens (30% reserved for text)")
+                else:
+                    thinking_config = {"type": "adaptive"}
+
                 # Use streaming to avoid 10-minute timeout for large token requests
                 stream = self.client.messages.stream(
                     model=self.model,
-                    max_tokens=65536,  # 64K to accommodate adaptive thinking + large JSON (was 32K, truncated on 22-verse psalms)
-                    thinking={
-                        "type": "adaptive"  # Adaptive thinking for Opus 4.6
-                    },
+                    max_tokens=current_max_tokens,
+                    thinking=thinking_config,
                     output_config={
                         "effort": "max"  # Maximum effort for deep discovery
                     },
@@ -628,7 +642,14 @@ class MicroAnalystV2:
                     self.logger.error("ERROR: Empty text block received from API!")
                     self.logger.error(f"Model: {self.model}")
                     self.logger.error(f"Thinking text length: {len(thinking_text)}")
-                    raise ValueError("MicroAnalyst returned empty text block. This may be due to adaptive thinking mode allocating all tokens to thinking.")
+                    if attempt < max_retries - 1:
+                        # Adaptive thinking consumed all tokens — switch to budgeted mode to reserve space for text
+                        use_budgeted_thinking = True
+                        current_max_tokens = 65536  # Keep at max; thinking budget will be capped at 70%
+                        self.logger.warning("Adaptive thinking consumed all tokens. Retrying with budgeted thinking (70% cap)...")
+                        continue
+                    else:
+                        raise ValueError("MicroAnalyst returned empty text block. This may be due to adaptive thinking mode allocating all tokens to thinking.")
 
                 discoveries = json.loads(response_text)
 

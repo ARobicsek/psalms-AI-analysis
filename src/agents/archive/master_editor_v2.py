@@ -1552,11 +1552,10 @@ class MasterEditorV2:
 
         try:
             response = self.anthropic_client.messages.create(
-                model="claude-opus-4-5-20250514",
+                model="claude-opus-4-6",
                 max_tokens=24000,
                 thinking={
-                    "type": "enabled",
-                    "budget_tokens": 40000
+                    "type": "adaptive"
                 },
                 messages=[{"role": "user", "content": prompt}]
             )
@@ -1771,9 +1770,9 @@ class MasterEditorV2:
         """Call Claude for college edition."""
         try:
             response = self.anthropic_client.messages.create(
-                model="claude-opus-4-5-20250514",
+                model="claude-opus-4-6",
                 max_tokens=24000,
-                thinking={"type": "enabled", "budget_tokens": 40000},
+                thinking={"type": "adaptive"},
                 messages=[{"role": "user", "content": prompt}]
             )
 
@@ -2125,7 +2124,7 @@ class MasterEditorV2:
             # Map friendly names to API model IDs
             model_id = model
             if model == "claude-opus-4-5":
-                model_id = "claude-opus-4-5-20250514"
+                model_id = "claude-opus-4-6"  # 4-5 retired; redirect to 4-6
             
             # Use streaming API as required for long-thinking models (e.g. Opus 4.6)
             response_text = ""
@@ -2135,7 +2134,7 @@ class MasterEditorV2:
             with self.anthropic_client.messages.stream(
                 model=model_id,
                 max_tokens=64000,
-                thinking={"type": "enabled", "budget_tokens": 40000},
+                thinking={"type": "adaptive"},
                 messages=[{"role": "user", "content": prompt}]
             ) as stream:
                 for text in stream.text_stream:

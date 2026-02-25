@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-24 (Session 270)
+**Last Updated**: 2026-02-24 (Session 271)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 270
-- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
+- **Current Session**: 271
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
 
@@ -40,7 +40,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ### Active Features
 - **Unified Writer V4**: Single prompt merging Main + College editions; halves pipeline cost (default)
-- **Insight Extractor**: Dedicated agent (Claude Opus 4.5) to curate "aha!" moments from research
+- **Insight Extractor**: Dedicated agent (Claude Opus 4.6) to curate "aha!" moments from research; now uses adaptive thinking + streaming
 - **Research Trimmer**: Dedicated utility for intelligent context window management
 - **Gemini 2.5 Pro Fallback**: Handles large psalms (51+ verses) without content loss
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
@@ -54,13 +54,18 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - Deep research must be manually prepared via Gemini browser interface
 - Figurative Curator adds ~$0.30-0.50 per psalm to processing cost
 - Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
-- Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.5)
+- Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.6)
 
 ---
 
 ## Recent Work Summary
 
-### 1. Unified Writer V4 Documentation Updates (Session 270)
+### 1. Pipeline Robustness — Token Truncation & Model Hygiene (Session 271)
+- Fixed three separate token truncation crashes in MacroAnalyst, MicroAnalyst, and InsightExtractor when processing long psalms (Psalm 37, 40 verses); all agents now detect `stop_reason == 'max_tokens'` and auto-retry with increased budgets.
+- Added adaptive thinking to all Opus 4.6 agents (InsightExtractor, QuestionCurator); MicroAnalyst now starts with budgeted thinking (70% cap) for psalms >25 verses to guarantee tokens for JSON output.
+- Purged all `claude-opus-4-5` references from production code paths; fixed deprecated `thinking.type=enabled` → `adaptive` in master_editor base class; corrected pipeline header and default model labels.
+
+### 2. Unified Writer V4 Documentation Updates (Session 270)
 - Updated architecture summary to reflect the removal of the College Writer step and document the new unified V4 prompt.
 - Indicated Unified Writer V4 as the new default active feature in project status.
 - Updated script references to reflect the V4 roles for master editor scripts and deprecated old models.

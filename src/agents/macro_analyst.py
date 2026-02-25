@@ -236,7 +236,7 @@ class MacroAnalyst:
     def analyze_psalm(
         self,
         psalm_number: int,
-        max_tokens: int = 32000,  # Doubled from 16K to ensure no output constraint
+        max_tokens: int = 48000,  # Increased for Opus 4.6 adaptive thinking (thinking + text share budget)
         include_full_framework: bool = False
     ) -> MacroAnalysis:
         """
@@ -353,6 +353,19 @@ class MacroAnalyst:
                     )
 
                     self.logger.info(f"Usage tracked: {usage.input_tokens} input, {usage.output_tokens} output, {thinking_tokens} thinking tokens")
+
+                # Check for truncation (stop_reason == 'max_tokens' means output was cut off)
+                stop_reason = getattr(final_message, 'stop_reason', None)
+                if stop_reason == 'max_tokens':
+                    self.logger.warning(f"Response was truncated at max_tokens limit ({len(response_text)} chars collected)")
+                    if attempt < max_retries - 1:
+                        # Increase max_tokens by 50% and retry
+                        old_max = max_tokens
+                        max_tokens = int(max_tokens * 1.5)
+                        self.logger.warning(f"Retrying with increased max_tokens: {old_max} -> {max_tokens}")
+                        continue
+                    else:
+                        self.logger.error("Response truncated on final attempt — cannot retry")
 
                 # Check if we got a text response
                 if not response_text or not response_text.strip():

@@ -160,7 +160,7 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "gpt-5.1",
+    master_editor_model: str = "claude-opus-4-6",
     skip_insights: bool = False
 ):
     logger = get_logger("enhanced_pipeline_test")
@@ -687,9 +687,9 @@ if __name__ == "__main__":
     parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)  # Deprecated V4: no combined doc
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
-    parser.add_argument("--master-editor-model", type=str, default="gpt-5.1",
-                       choices=["gpt-5", "gpt-5.1", "claude-opus-4-5", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: gpt-5.1)")
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-6",
+                       choices=["gpt-5", "gpt-5.1", "claude-opus-4-6"],
+                       help="Model for Master Writer (default: claude-opus-4-6)")
     parser.add_argument("--skip-insights", action="store_true")
 
     args = parser.parse_args()
@@ -704,7 +704,7 @@ if __name__ == "__main__":
         sys.stderr.reconfigure(encoding='utf-8')
 
     print(f"\n{'='*80}")
-    print(f"ENHANCED COMMENTARY PIPELINE (TEST - MASTER WRITER) - Psalm {args.psalm_number}")
+    print(f"ENHANCED COMMENTARY PIPELINE - Psalm {args.psalm_number}")
     print(f"{'='*80}\n")
     print(f"Output Directory: {args.output_dir}")
     print(f"Database: {args.db_path}")
