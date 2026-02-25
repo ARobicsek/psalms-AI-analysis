@@ -9,7 +9,7 @@ Always read this file first when you need to find code.
 
 | Script | Namespace | Description | Link |
 |--------|-----------|-------------|------|
-| `run_enhanced_pipeline.py` | `scripts` | **NEW DEFAULT**: Master Writer pipeline (formerly TEST). Single-pass generation from research inputs. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline.py) |
+| `run_enhanced_pipeline.py` | `scripts` | **NEW DEFAULT**: Master Writer pipeline. Single-pass generation from research inputs. Supports `--skip-questions` to omit Reader Questions section. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline.py) |
 | `run_enhanced_pipeline_TEST.py` | `scripts` | **PHASE 1 TEST**: V3 Prompt Overhaul test pipeline. Suffixes output with `_TEST`. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_TEST.py) |
 | `run_enhanced_pipeline_with_synthesis.py` | `scripts` | **LEGACY**: Original Synthesis Writer pipeline (Pass 3 Synthesis → Pass 4 Master Editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_with_synthesis.py) |
 | `run_si_pipeline.py` | `scripts` | **NEW SI**: Special Instruction pipeline using Master Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |

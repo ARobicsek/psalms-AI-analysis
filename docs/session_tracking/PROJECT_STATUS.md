@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-24 (Session 271)
+**Last Updated**: 2026-02-25 (Session 272)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 271
+- **Current Session**: 272
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
@@ -45,7 +45,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - **Gemini 2.5 Pro Fallback**: Handles large psalms (51+ verses) without content loss
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms with pacing guidance
-- **Pipeline Skip Logic**: New `--resume` flag for automatic step detection
+- **Pipeline Skip Logic**: `--resume` flag for automatic step detection, `--skip-questions` to omit Reader Questions
 - **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3 Pro
 - **Questions for the Reader**: LLM-curated questions appear before Introduction to prime reader engagement
 
@@ -60,24 +60,29 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Pipeline Robustness — Token Truncation & Model Hygiene (Session 271)
+### 1. Skip Questions Flag (Session 272)
+- Added `--skip-questions` CLI flag to `run_enhanced_pipeline.py` to skip the Question Curator step and produce commentary without the Reader Questions section.
+- Master Writer prompt surgery: 6 targeted string replacements strip all 11 question references from the V4 prompt when questions are empty/placeholder.
+- Enables cheaper re-runs (skip one Opus call) and question-free commentary variants.
+
+### 2. Pipeline Robustness — Token Truncation & Model Hygiene (Session 271)
 - Fixed three separate token truncation crashes in MacroAnalyst, MicroAnalyst, and InsightExtractor when processing long psalms (Psalm 37, 40 verses); all agents now detect `stop_reason == 'max_tokens'` and auto-retry with increased budgets.
 - Added adaptive thinking to all Opus 4.6 agents (InsightExtractor, QuestionCurator); MicroAnalyst now starts with budgeted thinking (70% cap) for psalms >25 verses to guarantee tokens for JSON output.
 - Purged all `claude-opus-4-5` references from production code paths; fixed deprecated `thinking.type=enabled` → `adaptive` in master_editor base class; corrected pipeline header and default model labels.
 
-### 2. Unified Writer V4 Documentation Updates (Session 270)
+### 3. Unified Writer V4 Documentation Updates (Session 270)
 - Updated architecture summary to reflect the removal of the College Writer step and document the new unified V4 prompt.
 - Indicated Unified Writer V4 as the new default active feature in project status.
 - Updated script references to reflect the V4 roles for master editor scripts and deprecated old models.
 
-### 2. Unified Writer V4 (Session 269)
+### 4. Unified Writer V4 (Session 269)
 - Replaced dual Main/College commentary system with single `MASTER_WRITER_PROMPT_V4`.
 - Unified audience ("Intelligent, curious readers") and tone ("Scholar at dinner").
 - Merged Depth rules with Pedagogical clarity rules, retaining all 12 Items of Interest.
 - Removed Steps 4b/6b/6c from pipelines and made `--skip-college` a silent no-op.
 - Halved the cost of the most expensive pipeline step by generating a single, unified commentary.
 
-### 3. Fix SI Pipeline for Opus 4.6 Re-runs (Session 268)
+### 5. Fix SI Pipeline for Opus 4.6 Re-runs (Session 268)
 - Fixed fatal exit when `--skip-writer` was used without existing SI output files; downstream steps now proceed gracefully.
 - Synced Session 265 commentary regex fix to `run_si_pipeline.py` so DOCX methodology stats populate correctly.
 - Added model tracking so the DOCX correctly reports the actual model (`claude-opus-4-6`).

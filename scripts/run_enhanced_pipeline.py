@@ -161,7 +161,8 @@ def run_enhanced_pipeline(
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
     master_editor_model: str = "claude-opus-4-6",
-    skip_insights: bool = False
+    skip_insights: bool = False,
+    skip_questions: bool = False
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -417,7 +418,9 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 2b: Question Curation
     # =====================================================================
-    if not smoke_test and macro_file.exists() and micro_file.exists():
+    if skip_questions:
+        logger.info("[STEP 2b] Skipping question curation (--skip-questions)")
+    elif not smoke_test and macro_file.exists() and micro_file.exists():
         if reader_questions_file.exists():
             logger.info("Reader questions exist, skipping generation...")
             # Track the model even when skipping
@@ -535,7 +538,7 @@ def run_enhanced_pipeline(
                 research_file=research_file,
                 insights_file=insights_file if insights_file.exists() else None,
                 psalm_number=psalm_number,
-                reader_questions_file=reader_questions_file if reader_questions_file.exists() else None
+                reader_questions_file=None if skip_questions else (reader_questions_file if reader_questions_file.exists() else None)
             )
             
             # Save outputs
@@ -544,8 +547,8 @@ def run_enhanced_pipeline(
             with open(edited_verses_file, 'w', encoding='utf-8') as f:
                 f.write(result['verse_commentary'])
                 
-            # Handle reader questions
-            if result.get('reader_questions'):
+            # Handle reader questions (skip if --skip-questions)
+            if not skip_questions and result.get('reader_questions'):
                 refined_q_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
                 questions_text = result['reader_questions']
                 questions = []
@@ -639,9 +642,12 @@ def run_enhanced_pipeline(
         from src.utils.document_generator import DocumentGenerator
         
         try:
-            refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
-            q_file = refined_q if refined_q.exists() else (reader_questions_file if reader_questions_file.exists() else None)
-            
+            if skip_questions:
+                q_file = None
+            else:
+                refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
+                q_file = refined_q if refined_q.exists() else (reader_questions_file if reader_questions_file.exists() else None)
+
             gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file, docx_output_file, q_file)
             gen.generate()
         except Exception as e:
@@ -691,6 +697,8 @@ if __name__ == "__main__":
                        choices=["gpt-5", "gpt-5.1", "claude-opus-4-6"],
                        help="Model for Master Writer (default: claude-opus-4-6)")
     parser.add_argument("--skip-insights", action="store_true")
+    parser.add_argument("--skip-questions", action="store_true",
+                       help="Skip all question generation and remove questions from writer prompt")
 
     args = parser.parse_args()
 
@@ -728,5 +736,6 @@ if __name__ == "__main__":
         smoke_test=args.smoke_test,
         skip_default_commentaries=args.skip_default_commentaries,
         master_editor_model=args.master_editor_model,
-        skip_insights=args.skip_insights
+        skip_insights=args.skip_insights,
+        skip_questions=args.skip_questions
     )

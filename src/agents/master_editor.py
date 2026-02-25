@@ -503,6 +503,53 @@ class MasterEditor(MasterEditorV2):
             reader_questions=reader_questions
         )
 
+        # Strip all question-related sections when no questions are provided
+        if reader_questions == "[No reader questions provided]" or not reader_questions.strip():
+            self.logger.info("No reader questions — stripping question sections from prompt")
+            # 1. Remove the READER QUESTIONS input block
+            prompt = prompt.replace(
+                "### READER QUESTIONS (initial questions)\n[No reader questions provided]\n",
+                ""
+            )
+            # 2. Remove question reference from STAGE 1 hook instruction
+            prompt = prompt.replace(
+                "**HOOK FIRST — AND CONNECT TO READER QUESTIONS**: Open with something surprising, counterintuitive, or puzzling about this psalm. Look at the READER QUESTIONS — your hook should set up one or more of these questions. Avoid bland summary openings.",
+                "**HOOK FIRST**: Open with something surprising, counterintuitive, or puzzling about this psalm. Avoid bland summary openings."
+            )
+            # 3. Remove the VALIDATION CHECK for reader questions
+            prompt = prompt.replace(
+                "### VALIDATION CHECK — Reader Questions:\n"
+                "Before finalizing, review the READER QUESTIONS input:\n"
+                "- Is each question elegantly addressed somewhere in the introduction essay or verse commentary?\n"
+                "- The answer should emerge naturally from the analysis — don't restate the question, let the reader discover the answer.\n"
+                "- If a question isn't addressed, weave relevant material into the appropriate section.\n",
+                ""
+            )
+            # 4. Remove STAGE 4: REFINED READER QUESTIONS
+            prompt = prompt.replace(
+                "### STAGE 4: REFINED READER QUESTIONS\n"
+                "\n"
+                "Based on your writing, generate **4-6 refined \"Questions for the Reader\"** that will appear BEFORE the commentary.\n"
+                "- Hook curiosity.\n"
+                "- Set up insights.\n"
+                "- Include specifics.\n",
+                ""
+            )
+            # 5. Remove REFINED READER QUESTIONS from OUTPUT FORMAT
+            prompt = prompt.replace(
+                "### REFINED READER QUESTIONS\n"
+                "1. ...\n"
+                "2. ...\n"
+                "3. ...\n"
+                "4. ...\n",
+                ""
+            )
+            # 6. Remove reader questions line from FINAL VALIDATION CHECKLIST
+            prompt = prompt.replace(
+                "- READER QUESTIONS: Each question from READER QUESTIONS is addressed somewhere in the essay or commentary.\n",
+                ""
+            )
+
         # Save prompt for debugging
         prompt_file = Path(f"output/debug/{debug_prefix}_prompt_psalm_{psalm_number}.txt")
         prompt_file.parent.mkdir(parents=True, exist_ok=True)

@@ -8,6 +8,20 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 272 (2026-02-25): Skip Questions Flag for Master Writer
+
+**Objective**: Add `--skip-questions` CLI flag to allow running the Master Writer without the Reader Questions section, enabling faster/cheaper re-runs focused on commentary only.
+
+**Solutions Implemented**:
+1. **Pipeline flag (`run_enhanced_pipeline.py`)**: Added `skip_questions: bool = False` parameter and `--skip-questions` CLI flag. When active: skips Question Curator step entirely, passes `reader_questions_file=None` to writer, skips refined question extraction from output, forces `q_file=None` for DOCX generation (even if old question files exist on disk).
+2. **Prompt surgery (`master_editor.py`)**: In `_perform_writer_synthesis()`, when `reader_questions` is empty or placeholder, applies 6 surgical string replacements that remove every question reference from the V4 prompt: the `### READER QUESTIONS` input block, "AND CONNECT TO READER QUESTIONS" from the hook instruction, the Validation Check for reader questions, STAGE 4: Refined Reader Questions output instruction, the `### REFINED READER QUESTIONS` output format section, and the reader questions line from the final checklist. All 11 question references → 0 after stripping.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` — Added `skip_questions` parameter, `--skip-questions` CLI flag, skip logic for Question Curator step and DOCX question file
+- `src/agents/master_editor.py` — Added 6 string replacements in `_perform_writer_synthesis()` to strip all question references when questions are empty/placeholder
+
+---
+
 ## Session 271 (2026-02-24): Pipeline Robustness — Token Truncation & Model Hygiene
 
 **Objective**: Fix a cascade of token truncation crashes when running Psalm 37 (40-verse acrostic), and enforce Opus 4.6 across all agents.
