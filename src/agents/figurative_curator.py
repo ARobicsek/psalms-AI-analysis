@@ -130,8 +130,8 @@ class FigurativeCurator:
         """Return the name of the active LLM model."""
         if self.dry_run:
             return "None (Dry Run)"
-        # Default to Gemini 3 Pro Preview as configured in _call_gemini
-        return "gemini-3-pro-preview"
+        # Default to Gemini 3.1 Pro Preview as configured in _call_gemini
+        return "gemini-3.1-pro-preview"
 
     def _get_psalm_text(self, psalm_number: int) -> List[Tuple[int, str, str]]:
         """
@@ -191,7 +191,7 @@ class FigurativeCurator:
         # Options: "none", "low", "medium", "high"
         try:
             response = self.gemini_client.models.generate_content(
-                model="gemini-3-pro-preview",
+                model="gemini-3.1-pro-preview",
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     temperature=temperature,

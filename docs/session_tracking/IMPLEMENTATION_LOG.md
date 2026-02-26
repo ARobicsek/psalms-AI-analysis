@@ -8,6 +8,26 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 275 (2026-02-26): Gemini 3.1 Pro Preview Migration
+
+**Objective**: Migrate all hardcoded references of the deprecated `gemini-3-pro-preview` model to `gemini-3.1-pro-preview`.
+
+**Problems Identified**:
+- Google announced the deprecation of Gemini 3 Pro Preview effective March 9, 2026, recommending a migration to Gemini 3.1 Pro Preview.
+- The `gemini-3-pro-preview` model was explicitly hardcoded in the `FigurativeCurator` agent and its associated cost tracking/pipeline scripts, rather than using the `-latest` alias.
+- High thinking config was verified via web search to still be `thinking_level="high"`, requiring no code changes for reasoning depth.
+
+**Solutions Implemented**:
+1. Renamed model strings in the agent configuration, cost tracking prices, and pipeline analytic calls to explicitly use `"gemini-3.1-pro-preview"`.
+
+**Files Modified**:
+- `src/agents/figurative_curator.py` - Updated `active_model` property and `generate_content` API call to explicitly use `gemini-3.1-pro-preview`.
+- `src/utils/cost_tracker.py` - Renamed the pricing dictionary key from `gemini-3-pro-preview` to `gemini-3.1-pro-preview`.
+- `scripts/run_enhanced_pipeline_with_synthesis.py` - Updated pipeline model usage tracking string.
+- `scripts/run_si_pipeline_with_synthesis.py` - Updated pipeline model usage tracking string.
+
+---
+
 ## Session 274 (2026-02-26): Divine Names Modifier Punctuation Fix
 
 **Objective**: Fix inconsistent conversion of 'El' to 'Kel' when followed by punctuation.

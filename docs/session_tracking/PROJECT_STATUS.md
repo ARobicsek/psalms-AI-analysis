@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-26 (Session 274)
+**Last Updated**: 2026-02-26 (Session 275)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 274
-- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
+- **Current Session**: 275
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK), **Gemini 3.1 Pro Upgrade**
 
 ---
 
@@ -46,7 +46,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms with pacing guidance
 - **Pipeline Skip Logic**: `--resume` flag for automatic step detection, `--skip-questions` to omit Reader Questions
-- **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3 Pro
+- **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3.1 Pro Preview
 - **Questions for the Reader**: LLM-curated questions appear before Introduction to prime reader engagement
 
 ### Known Limitations
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Divine Names Modifier Fix (Session 274)
+### 1. Gemini 3.1 Pro Preview Migration (Session 275)
+- Migrated all hardcoded references of the deprecated `gemini-3-pro-preview` model to the recommended `gemini-3.1-pro-preview`.
+- Updated the `FigurativeCurator` agent's active model property and API generation configuration.
+- Verified via API documentation that the existing `thinking_level="high"` configuration remains the correct and optimal method for maximum reasoning depth on the 3.1 model.
+
+### 2. Divine Names Modifier Fix (Session 274)
 - Fixed inconsistent conversion of 'El' (אֵל) to 'Kel' (קֵל) when the word is immediately followed or preceded by punctuation.
 - Expanded the regex boundary pattern in `divine_names_modifier.py` to include standard punctuation marks, quotes, and brackets.
 - Re-tested formatting successfully utilizing the run pipeline against Psalm 36.
@@ -108,6 +113,8 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## ═══════════════════════════════════════════════════════════════════════════
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
+
+*   **Session 275**: Migrated all hardcoded references from `gemini-3-pro-preview` to `gemini-3.1-pro-preview` ahead of the March 2026 deprecation deadline, specifically updating the `FigurativeCurator` agent and cost tracking scripts.
 
 *   **Session 274**: Fixed inconsistent conversion of the divine name 'El' to 'Kel' by expanding the regex word boundaries in `divine_names_modifier.py` to include punctuation, quotes, and brackets.
 
