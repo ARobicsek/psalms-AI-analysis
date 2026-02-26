@@ -8,6 +8,21 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 274 (2026-02-26): Divine Names Modifier Punctuation Fix
+
+**Objective**: Fix inconsistent conversion of 'El' to 'Kel' when followed by punctuation.
+
+**Problems Identified**:
+- The regex pattern `_modify_el_tzere` in `divine_names_modifier.py` failed to account for punctuation marks in its word boundary check. As a result, when "אֵל" was immediately followed by a comma, semicolon, or other punctuation (e.g., in Psalm 36), it was not converted to "קֵל".
+
+**Solutions Implemented**:
+1. Expanded the word boundaries in the regex pattern to include standard punctuation marks, quotes, and brackets: `(^|[\s\-\u05BE*_.,;:!?\"\'()\[\]{}])אֵ([\u0591-\u05C7]*)ל(?=[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]|$)`
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Updated the regex pattern in `_modify_el_tzere`.
+
+---
+
 ## Session 273 (2026-02-26): Increase Hebrew Font Size in DOCX Generation
 
 **Objective**: Increase the font size of the Hebrew psalm text at the beginning of the generated DOCX files from the default 11pt to 12pt for better readability.
