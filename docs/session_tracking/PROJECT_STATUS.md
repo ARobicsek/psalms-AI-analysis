@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-25 (Session 272)
+**Last Updated**: 2026-02-26 (Session 273)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 272
+- **Current Session**: 273
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK)
 
 ---
@@ -103,6 +103,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ## ═══════════════════════════════════════════════════════════════════════════
 ## RECENT WORK SUMMARY (Last 3 Sessions)
 ## ═══════════════════════════════════════════════════════════════════════════
+
+*   **Session 273**: Increased the Hebrew font size in the psalm text at the beginning of the generated DOCX files from the default 11pt to 12pt for better readability in both `document_generator.py` and `combined_document_generator.py`.
+
+*   **Session 272**: Added `--skip-questions` CLI flag to allow running the Master Writer without the Reader Questions section, enabling faster/cheaper re-runs focused on commentary only. Adjusted `run_enhanced_pipeline.py` and `master_editor.py`.
+
+*   **Session 271**: Implemented comprehensive model response parsing using `json_repair` to extract complete valid JSON from truncated or malformed responses. Prevented pipeline crashes on large psalms.
 
 *   **Session 264**: Replaced Claude Opus 4.6 with Claude Sonnet 4.6 for MicroAnalyst agent. Added Sonnet 4.6 pricing to cost tracker. Verified on Psalm 36 — 40% cost reduction on micro analysis step ($1.16 vs ~$1.93 per psalm).
 

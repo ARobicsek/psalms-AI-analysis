@@ -8,6 +8,19 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 273 (2026-02-26): Increase Hebrew Font Size in DOCX Generation
+
+**Objective**: Increase the font size of the Hebrew psalm text at the beginning of the generated DOCX files from the default 11pt to 12pt for better readability.
+
+**Solutions Implemented**:
+1. **Font Size Adjustment**: Modified `_format_psalm_text` in both document generators to explicitly set `font.size = Pt(12)` on the run containing the Hebrew text and the verse number.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added explicit 12pt font size for Hebrew psalm text.
+- `src/utils/combined_document_generator.py` — Added explicit 12pt font size for Hebrew psalm text.
+
+---
+
 ## Session 272 (2026-02-25): Skip Questions Flag for Master Writer
 
 **Objective**: Add `--skip-questions` CLI flag to allow running the Master Writer without the Reader Questions section, enabling faster/cheaper re-runs focused on commentary only.

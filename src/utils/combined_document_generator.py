@@ -911,8 +911,12 @@ class CombinedDocumentGenerator:
 
             # Hebrew cell (left, but text is RTL)
             p_heb = row_cells[0].paragraphs[0]
-            p_heb.add_run(f"{verse_num}. ").bold = True
-            p_heb.add_run(modified_hebrew).font.rtl = True
+            num_run = p_heb.add_run(f"{verse_num}. ")
+            num_run.bold = True
+            num_run.font.size = Pt(12)
+            heb_run = p_heb.add_run(modified_hebrew)
+            heb_run.font.rtl = True
+            heb_run.font.size = Pt(12)
 
             # English cell (right)
             p_eng = row_cells[1].paragraphs[0]
