@@ -8,6 +8,26 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 278 (2026-03-01): Fix Research Stats in Skip-Micro Pipeline Path
+
+**Objective**: Fix incorrect concordance entry counts and missing Torah Temimah commentary counts in the DOCX Methodology section when the pipeline is run with `--skip-micro`.
+
+**Problems Identified**:
+- When `--skip-micro` is used, `_parse_research_stats_from_markdown` is called instead of the live `track_research_bundle`. This function had two bugs causing the Methodology section to show wrong numbers compared to a full run.
+- **Concordance count wrong (99 → 11)**: The regex `### (?:Query|Phrase):` was unanchored, so it accidentally matched `#### Phrase:` sub-headers in the micro analyst section as substrings. It was also counting *queries* rather than summing *results per query*.
+- **Torah Temimah missing (126 → 123)**: The hardcoded `commentary_patterns` list did not include Torah Temimah, so its 3 entries were silently dropped whenever stats were parsed from markdown.
+- The key `'total_queries'` stored in `concordance_results` was a misnomer — it held a query count, not a result count — adding to the confusion.
+
+**Solutions Implemented**:
+1. Replaced the broken concordance regex with `^### .+\((\d+) results` (anchored, MULTILINE) to extract result counts from actual concordance query headers and sum them.
+2. Added `(r'### .*Torah Temimah', 'Torah Temimah')` to the `commentary_patterns` list.
+3. Renamed the stored key from `'total_queries'` to `'total_results'` for clarity.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Fixed concordance regex/summation, added Torah Temimah pattern, renamed key
+
+---
+
 ## Session 277 (2026-03-01): Pipeline Skip/Exclude Flag Refactor
 
 **Objective**: Give `--skip-insights` and `--skip-questions` consistent semantics, and add `--exclude-*` counterparts for fully suppressing existing files.

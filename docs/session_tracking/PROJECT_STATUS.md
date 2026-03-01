@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-01 (Session 277)
+**Last Updated**: 2026-03-01 (Session 278)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 277
+- **Current Session**: 278
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Pipeline Skip/Exclude Flag Refactor (Session 277)
+### 1. Research Stats Fix for Skip-Micro Path (Session 278)
+- Fixed concordance count in `_parse_research_stats_from_markdown`: unanchored regex was matching `#### Phrase:` micro analyst sub-headers instead of actual concordance query lines; now parses and sums result counts from query headers directly (99 vs. the erroneous 11 for Psalm 38).
+- Added Torah Temimah to the commentary patterns list so skip-micro runs no longer drop its entries from the Methodology section.
+- Renamed stored key `'total_queries'` → `'total_results'` for clarity.
+
+### 2. Pipeline Skip/Exclude Flag Refactor (Session 277)
 - Unified `--skip-insights` and `--skip-questions` to mean "don't regenerate, use existing file if present".
 - Added `--exclude-insights` and `--exclude-questions` for "don't regenerate AND don't pass to writer/doc".
 - Fixed inconsistency where old `--skip-questions` had exclude semantics while `--skip-insights` had skip semantics.

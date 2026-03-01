@@ -56,9 +56,9 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         lexicon_matches = re.findall(r'^### [^\n]+$', lexicon_section.group(0), re.MULTILINE)
         stats['lexicon_count'] = len(lexicon_matches)
 
-    # Count concordance queries
-    concordance_matches = re.findall(r'### (?:Query|Phrase):', markdown_content)
-    stats['concordance_count'] = len(concordance_matches)
+    # Count concordance results by parsing actual query headers: "### <query> (N results, ...)"
+    concordance_result_counts = re.findall(r'^### .+\((\d+) results', markdown_content, re.MULTILINE)
+    stats['concordance_count'] = sum(int(n) for n in concordance_result_counts)
 
     # Count figurative language instances
     curated_section = re.search(r'## Figurative Language Insights \(Curated\)(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
@@ -82,6 +82,7 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         (r'### .*Rashi', 'Rashi'), (r'### .*Ibn Ezra', 'Ibn Ezra'), (r'### .*Radak', 'Radak'),
         (r'### .*Metzudat David', 'Metzudat David'), (r'### .*Malbim', 'Malbim'),
         (r'### .*Sforno', 'Sforno'), (r'### .*Meiri', 'Meiri'),
+        (r'### .*Torah Temimah', 'Torah Temimah'),
     ]
     for pattern, name in commentary_patterns:
         matches = re.findall(pattern, markdown_content)
@@ -378,7 +379,7 @@ def run_enhanced_pipeline(
         # Track stats from markdown (same approach as original pipeline)
         research_stats = _parse_research_stats_from_markdown(research_bundle_content)
         tracker.research.lexicon_entries_count = research_stats['lexicon_count']
-        tracker.research.concordance_results = {'total_queries': research_stats['concordance_count']}
+        tracker.research.concordance_results = {'total_results': research_stats['concordance_count']}
         tracker.research.figurative_results = {'total_instances_used': research_stats['figurative_count']}
         tracker.research.figurative_parallels_reviewed = research_stats.get('figurative_parallels_reviewed', {})
         tracker.research.commentary_counts = research_stats['commentary_counts']
