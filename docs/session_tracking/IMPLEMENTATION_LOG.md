@@ -8,6 +8,25 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 277 (2026-03-01): Pipeline Skip/Exclude Flag Refactor
+
+**Objective**: Give `--skip-insights` and `--skip-questions` consistent semantics, and add `--exclude-*` counterparts for fully suppressing existing files.
+
+**Problems Identified**:
+- `--skip-questions` had "exclude" semantics (did not regenerate AND did not pass existing file to writer), while `--skip-insights` had "skip" semantics (did not regenerate but DID pass existing file to writer). Inconsistent and confusing.
+- No way to exclude insights from the writer without renaming/deleting the file.
+
+**Solutions Implemented**:
+1. Redefined `--skip-*` flags uniformly: do not regenerate, but use existing file if present.
+2. Added `--exclude-insights` and `--exclude-questions` flags: do not regenerate AND do not pass existing file to writer (or word doc generator).
+3. Changed `--skip-questions` generation gate to `skip_questions or exclude_questions` so both flags suppress curation.
+4. Fixed the word doc step and refined-questions save step to gate on `exclude_questions` instead of `skip_questions`.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Added `exclude_insights`/`exclude_questions` params, updated all gating logic and argparse.
+
+---
+
 ## Session 276 (2026-03-01): Complex Script Font Fix (Docx Generation)
 
 **Objective**: Fix the `python-docx` rendering issue that caused Hebrew text at the beginning of the generated Word document to display in 11pt instead of the intended 12pt.

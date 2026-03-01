@@ -162,7 +162,9 @@ def run_enhanced_pipeline(
     skip_default_commentaries: bool = False,
     master_editor_model: str = "claude-opus-4-6",
     skip_insights: bool = False,
-    skip_questions: bool = False
+    skip_questions: bool = False,
+    exclude_insights: bool = False,
+    exclude_questions: bool = False
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -418,8 +420,8 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 2b: Question Curation
     # =====================================================================
-    if skip_questions:
-        logger.info("[STEP 2b] Skipping question curation (--skip-questions)")
+    if skip_questions or exclude_questions:
+        logger.info("[STEP 2b] Skipping question curation")
     elif not smoke_test and macro_file.exists() and micro_file.exists():
         if reader_questions_file.exists():
             logger.info("Reader questions exist, skipping generation...")
@@ -536,9 +538,9 @@ def run_enhanced_pipeline(
                 macro_file=macro_file,
                 micro_file=micro_file,
                 research_file=research_file,
-                insights_file=insights_file if insights_file.exists() else None,
+                insights_file=None if exclude_insights else (insights_file if insights_file.exists() else None),
                 psalm_number=psalm_number,
-                reader_questions_file=None if skip_questions else (reader_questions_file if reader_questions_file.exists() else None)
+                reader_questions_file=None if exclude_questions else (reader_questions_file if reader_questions_file.exists() else None)
             )
             
             # Save outputs
@@ -548,7 +550,7 @@ def run_enhanced_pipeline(
                 f.write(result['verse_commentary'])
                 
             # Handle reader questions (skip if --skip-questions)
-            if not skip_questions and result.get('reader_questions'):
+            if not exclude_questions and result.get('reader_questions'):
                 refined_q_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
                 questions_text = result['reader_questions']
                 questions = []
@@ -642,7 +644,7 @@ def run_enhanced_pipeline(
         from src.utils.document_generator import DocumentGenerator
         
         try:
-            if skip_questions:
+            if exclude_questions:
                 q_file = None
             else:
                 refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
@@ -696,9 +698,14 @@ if __name__ == "__main__":
     parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-6",
                        choices=["gpt-5", "gpt-5.1", "claude-opus-4-6"],
                        help="Model for Master Writer (default: claude-opus-4-6)")
-    parser.add_argument("--skip-insights", action="store_true")
+    parser.add_argument("--skip-insights", action="store_true",
+                       help="Skip insights generation; use existing file if present")
     parser.add_argument("--skip-questions", action="store_true",
-                       help="Skip all question generation and remove questions from writer prompt")
+                       help="Skip question curation; use existing file if present")
+    parser.add_argument("--exclude-insights", action="store_true",
+                       help="Skip insights generation and exclude from writer even if file exists")
+    parser.add_argument("--exclude-questions", action="store_true",
+                       help="Skip question curation and exclude from writer/doc even if file exists")
 
     args = parser.parse_args()
 
@@ -737,5 +744,7 @@ if __name__ == "__main__":
         skip_default_commentaries=args.skip_default_commentaries,
         master_editor_model=args.master_editor_model,
         skip_insights=args.skip_insights,
-        skip_questions=args.skip_questions
+        skip_questions=args.skip_questions,
+        exclude_insights=args.exclude_insights,
+        exclude_questions=args.exclude_questions
     )

@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-01 (Session 276)
+**Last Updated**: 2026-03-01 (Session 277)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 276
+- **Current Session**: 277
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -45,7 +45,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 - **Gemini 2.5 Pro Fallback**: Handles large psalms (51+ verses) without content loss
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms with pacing guidance
-- **Pipeline Skip Logic**: `--resume` flag for automatic step detection, `--skip-questions` to omit Reader Questions
+- **Pipeline Skip/Exclude Logic**: `--resume` for auto step detection; `--skip-*` to skip regeneration but use existing file; `--exclude-*` to skip regeneration AND omit existing file from writer/doc
 - **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3.1 Pro Preview
 - **Questions for the Reader**: LLM-curated questions appear before Introduction to prime reader engagement
 
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Complex Script Font Fix (Session 276)
+### 1. Pipeline Skip/Exclude Flag Refactor (Session 277)
+- Unified `--skip-insights` and `--skip-questions` to mean "don't regenerate, use existing file if present".
+- Added `--exclude-insights` and `--exclude-questions` for "don't regenerate AND don't pass to writer/doc".
+- Fixed inconsistency where old `--skip-questions` had exclude semantics while `--skip-insights` had skip semantics.
+
+### 2. Complex Script Font Fix (Session 276)
 - Investigated Opus 4.6 API calls made during Psalm 38 generation, correctly mapping them to Macro, Curator, Extractor, and Editor.
 - Corrected a document generation bug where Hebrew text was defaulting to 11pt instead of 12pt due to Word's Complex Script requirements.
 - Configured Python-docx elements to properly assign the `w:szCs` attribute.
