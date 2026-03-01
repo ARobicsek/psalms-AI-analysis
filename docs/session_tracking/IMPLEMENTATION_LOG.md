@@ -8,6 +8,24 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 276 (2026-03-01): Complex Script Font Fix (Docx Generation)
+
+**Objective**: Fix the `python-docx` rendering issue that caused Hebrew text at the beginning of the generated Word document to display in 11pt instead of the intended 12pt.
+
+**Problems Identified**:
+- The `python-docx` library's standard `run.font.size` property only applies to Latin text (the `w:sz` XML element).
+- Microsoft Word considers Hebrew a "Complex Script" and requires the `w:szCs` (Complex Script Size) XML element to be explicitly set. Since it was missing, Word fell back to the 11pt default size for the Hebrew verse text.
+
+**Solutions Implemented**:
+1. Added explicit OxmlElement manipulation to inject the `w:szCs` tag with a value of '24' (12pt measured in half-points) to both the Hebrew verse numbers and the Hebrew text in the docx compilation.
+2. Regenerated the `psalm_038_commentary.docx` explicitly to verify the font size fix.
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Explicitly set `w:szCs` to 24 half-points for the Hebrew format block.
+- `src/utils/combined_document_generator.py` - Applied the identical `w:szCs` fix to the combined variant generator.
+
+---
+
 ## Session 275 (2026-02-26): Gemini 3.1 Pro Preview Migration
 
 **Objective**: Migrate all hardcoded references of the deprecated `gemini-3-pro-preview` model to `gemini-3.1-pro-preview`.

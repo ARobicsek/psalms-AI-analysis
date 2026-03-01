@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-02-26 (Session 275)
+**Last Updated**: 2026-03-01 (Session 276)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 275
-- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK), **Gemini 3.1 Pro Upgrade**
+- **Current Session**: 276
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
 
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Gemini 3.1 Pro Preview Migration (Session 275)
+### 1. Complex Script Font Fix (Session 276)
+- Investigated Opus 4.6 API calls made during Psalm 38 generation, correctly mapping them to Macro, Curator, Extractor, and Editor.
+- Corrected a document generation bug where Hebrew text was defaulting to 11pt instead of 12pt due to Word's Complex Script requirements.
+- Configured Python-docx elements to properly assign the `w:szCs` attribute.
+
+### 2. Gemini 3.1 Pro Preview Migration (Session 275)
 - Migrated all hardcoded references of the deprecated `gemini-3-pro-preview` model to the recommended `gemini-3.1-pro-preview`.
 - Updated the `FigurativeCurator` agent's active model property and API generation configuration.
 - Verified via API documentation that the existing `thinking_level="high"` configuration remains the correct and optimal method for maximum reasoning depth on the 3.1 model.

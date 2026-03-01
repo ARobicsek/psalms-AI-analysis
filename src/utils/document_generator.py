@@ -1342,9 +1342,22 @@ class DocumentGenerator:
             num_run = p_heb.add_run(f"{verse_num}. ")
             num_run.bold = True
             num_run.font.size = Pt(12)
+            
+            # Explicitly set Complex Script font size (24 half-points = 12pt)
+            rPr_num = num_run._element.get_or_add_rPr()
+            szCs_num = OxmlElement('w:szCs')
+            szCs_num.set(ns.qn('w:val'), '24')
+            rPr_num.append(szCs_num)
+
             heb_run = p_heb.add_run(modified_hebrew)
             heb_run.font.rtl = True
             heb_run.font.size = Pt(12)
+            
+            # Explicitly set Complex Script font size (24 half-points = 12pt)
+            rPr_heb = heb_run._element.get_or_add_rPr()
+            szCs_heb = OxmlElement('w:szCs')
+            szCs_heb.set(ns.qn('w:val'), '24')
+            rPr_heb.append(szCs_heb)
 
             # English cell (right)
             p_eng = row_cells[1].paragraphs[0]
