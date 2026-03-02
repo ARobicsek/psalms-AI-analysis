@@ -8,6 +8,62 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 280 (2026-03-02): Copy Editor Pipeline Integration
+
+**Objective**: Integrate the copy editor into the main pipeline as a default step, generate DOCX from copy-edited content, and change default behavior for questions/insights.
+
+**Problems Identified**:
+- Copy editor output uses single `\n` between paragraphs; DOCX generator expects `\n\n` — caused missing paragraph spacing in generated DOCX.
+- Pipeline stats `verse_count` is 0 on resumed runs (macro step skipped), causing Methodology section to show "0" for verses analyzed/LXX/phonetic.
+
+**Solutions Implemented**:
+1. Added Step 5b (Copy Editor) and Step 5c (section extraction) to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+2. `_extract_sections_from_copy_edited()` helper parses `copy_edited.md`, extracts intro and verse-commentary sections, and restores `\n\n` paragraph breaks.
+3. Originals preserved with `_pre_copy_edit` suffix before overwriting with copy-edited content.
+4. Changed defaults: questions and insights now skipped by default; added `--include-questions` and `--include-insights` opt-in flags.
+5. Added `--skip-copy-editor` flag (copy editor runs by default).
+6. Added database fallback for `verse_count` in `document_generator.py` Methodology section.
+7. Added `copy_editor` model entry to DOCX Methodology section.
+8. Modified `CopyEditor.__init__` to accept optional external `cost_tracker` for pipeline integration.
+
+**Files Modified**:
+- `src/agents/copy_editor.py` — added optional `cost_tracker` parameter to `__init__`
+- `scripts/run_enhanced_pipeline.py` — Step 5b/5c, `--skip-copy-editor`, `--include-questions/insights`, default flag changes
+- `scripts/run_si_pipeline.py` — mirrored all pipeline changes for SI parity
+- `src/utils/document_generator.py` — copy_editor model in Methodology; database fallback for verse_count
+
+---
+
+## Session 279 (2026-03-02): Copy Editor Agent
+
+**Objective**: Implement a standalone copy editor agent that applies a 6-category error taxonomy to existing psalm commentary, making targeted corrections while preserving all formatting for downstream DOCX generation.
+
+**Error Categories**: (1) False structural claims, (2) Internal inconsistencies, (3) Form/content confusion, (4) Negative citations, (5) Hebrew script integrity, (6) Weak cross-cultural parallels.
+
+**Architecture**: Two-zone approach — parses `print_ready.md` into PROTECTED zones (headers, psalm text, methodology section — never sent to LLM) and EDITABLE zones (intro essay, liturgical section, verse commentary — sent for editing). Preserves all formatting (bold, italic, backticks, Hebrew text, RTL markers, `---LITURGICAL-SECTION-START---`) programmatically.
+
+**Files Created**:
+- `src/agents/copy_editor.py` — `CopyEditor` class with adaptive thinking, streaming, retry logic (3 attempts with backoff for connection drops), structural validation, diff generation, progress logging
+- `scripts/run_copy_editor.py` — CLI runner supporting batch processing (`python scripts/run_copy_editor.py 36 37 38`), `--dry-run` mode, custom `--input-file`/`--output-dir`/`--model`
+
+**Test Results — Psalm 38** (5 changes, $0.62, ~9.5 min):
+1. Hebrew vowel pointing fix (Cat 5): הוֹחַלְתִּי → הוֹחָלְתִּי
+2. Form/content confusion (Cat 3): removed "thudding like a stone" phonosemantic overreach
+3. Internal inconsistency (Cat 2): "double אַל" corrected per earlier analysis
+4. Redundant definition (Cat 2): polyptoton already defined at v. 3
+5. Redundant definition (Cat 2): Hiphil "causative stem" already defined in intro
+
+**Known Issues Fixed During Session**:
+- Increased `max_tokens` from 16,384 to 32,768 (first run truncated at Verse 14)
+- Switched from deprecated `thinking.type=enabled` to `thinking.type=adaptive`
+- Added retry logic for `httpx.ReadError` on large psalms (Psalm 37 = 62K chars)
+- Added streaming progress logging (phase + char count every 5s)
+- Fixed diff generator to normalize trailing whitespace (eliminated phantom diffs)
+
+**Next Session**: (a) Test DOCX output using copy-edited version, (b) Add `--skip-copy-editor` flag to pipeline scripts.
+
+---
+
 ## Session 278 (2026-03-01): Fix Research Stats in Skip-Micro Pipeline Path
 
 **Objective**: Fix incorrect concordance entry counts and missing Torah Temimah commentary counts in the DOCX Methodology section when the pipeline is run with `--skip-micro`.

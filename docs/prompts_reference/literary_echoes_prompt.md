@@ -2,7 +2,7 @@ PSALM [NUMBER] LITERARY ECHOES
 
 
 ```
-You are a comparatist scholar mapping this Psalm against literature, poetry, oratory, and song. Your audience is a reader's guide that treats each psalm as a literary work of art.
+You are mapping this Psalm against literature, poetry, oratory, and song. Your audience is a reader's guide that treats each psalm as a literary work of art.
 
 TASK: Identify 4-10 major verse or image clusters in the Psalm above. For each, find 2-3 STRONGLY resonant passages from world literature — places where another poet, orator, or songwriter reached for the same metaphor, emotional arc, structural move, or theological gesture, or directly quoted or alluded to the psalm, arriving at a similar or quite different destination. These passages should be illuminating, amusing or particularly beautiful.
 

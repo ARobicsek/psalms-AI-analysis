@@ -29,6 +29,7 @@ from src.agents.micro_analyst import MicroAnalystV2
 from src.agents.master_editor import MasterEditor
 from src.agents.question_curator import QuestionCurator
 from src.agents.insight_extractor import InsightExtractor
+from src.agents.copy_editor import CopyEditor
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
@@ -146,6 +147,62 @@ def _parse_related_psalms_from_markdown(markdown_content: str) -> list:
     return related_psalms
 
 
+def _extract_sections_from_copy_edited(copy_edited_path: Path) -> tuple:
+    """Extract introduction and verse commentary sections from a copy-edited markdown file.
+    
+    The copy_edited.md has the same structure as print_ready.md:
+      # Commentary on Psalm N
+      ---
+      ## Introduction
+      <intro text including liturgical section>
+      ---
+      ## Psalm N
+      <psalm text>
+      ---
+      ## Verse-by-Verse Commentary
+      <verse commentary>
+      ------
+      ## Methodological...
+    
+    The copy editor outputs each paragraph on a single line (separated by \\n).
+    The DOCX generator expects \\n\\n between paragraphs. This function restores
+    the double-newline paragraph breaks after extraction.
+    
+    Returns:
+        (intro_text, verses_text) — the raw text content of each section,
+        with paragraph breaks restored for DOCX generation.
+    """
+    content = copy_edited_path.read_text(encoding='utf-8')
+    
+    # Extract introduction: from "## Introduction\n" to the first standalone "---" line
+    # that precedes "## Psalm" or "## Verse-by-Verse"
+    intro_match = re.search(
+        r'^## Introduction\n(.*?)(?=^---\s*$\n^## (?:Psalm|Verse))',
+        content, re.DOTALL | re.MULTILINE
+    )
+    intro_text = intro_match.group(1).strip() if intro_match else ''
+    
+    # Extract verse commentary: from "## Verse-by-Verse Commentary\n" to the end marker
+    # (either "------" or "## Methodological")
+    verses_match = re.search(
+        r'^## Verse-by-Verse Commentary\n(.*?)(?=^-{4,}\s*$\n^## Methodo|\Z)',
+        content, re.DOTALL | re.MULTILINE
+    )
+    verses_text = verses_match.group(1).strip() if verses_match else ''
+    
+    # Restore paragraph breaks: the copy editor collapses \n\n to \n.
+    # Convert every single \n to \n\n so the DOCX generator sees paragraph boundaries.
+    # First collapse any existing \n\n to \n (normalize), then expand all to \n\n.
+    if intro_text:
+        intro_text = re.sub(r'\n+', '\n', intro_text)  # normalize
+        intro_text = intro_text.replace('\n', '\n\n')   # restore double-newlines
+    if verses_text:
+        verses_text = re.sub(r'\n+', '\n', verses_text)  # normalize
+        verses_text = verses_text.replace('\n', '\n\n')   # restore double-newlines
+    
+    return intro_text, verses_text
+
+
 def run_enhanced_pipeline(
     psalm_number: int,
     output_dir: str = "output",
@@ -162,10 +219,11 @@ def run_enhanced_pipeline(
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
     master_editor_model: str = "claude-opus-4-6",
-    skip_insights: bool = False,
-    skip_questions: bool = False,
+    skip_insights: bool = True,      # Session 280: skipped by default, use --include-insights
+    skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
     exclude_insights: bool = False,
-    exclude_questions: bool = False
+    exclude_questions: bool = False,
+    skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -615,12 +673,12 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 5: Print-Ready
     # =====================================================================
+    print_ready_file = output_path / f"psalm_{psalm_number:03d}_print_ready.md"
     if not skip_print_ready and edited_intro_file.exists() and edited_verses_file.exists():
         logger.info("[STEP 5] Print-Ready Formatting...")
         print(f"\n{'='*80}")
         print(f"STEP 5: Print-Ready Formatting")
         print(f"{'='*80}\n")
-        print_ready_file = output_path / f"psalm_{psalm_number:03d}_print_ready.md"
         
         command = [
             sys.executable,
@@ -633,6 +691,66 @@ def run_enhanced_pipeline(
             "--db-path", db_path
         ]
         subprocess.run(command, check=False) # Don't crash on format error
+
+    # =====================================================================
+    # STEP 5b: Copy Editor (Session 280)
+    # =====================================================================
+    copy_edited_file = output_path / f"psalm_{psalm_number:03d}_copy_edited.md"
+    if not skip_copy_editor and not smoke_test and print_ready_file.exists():
+        if copy_edited_file.exists():
+            logger.info("[STEP 5b] Copy-edited file exists, skipping copy editor")
+            tracker.track_model_for_step("copy_editor", CopyEditor.DEFAULT_MODEL)
+        else:
+            logger.info("[STEP 5b] Running Copy Editor...")
+            print(f"\n{'='*80}")
+            print(f"STEP 5b: Copy Editor")
+            print(f"{'='*80}\n")
+            try:
+                copy_editor = CopyEditor(cost_tracker=cost_tracker)
+                ce_result = copy_editor.edit_commentary(
+                    psalm_number=psalm_number,
+                    input_file=print_ready_file,
+                    output_dir=output_path,
+                )
+                tracker.track_model_for_step("copy_editor", copy_editor.model)
+                logger.info(f"Copy Editor complete: {ce_result['edited_file']}")
+            except Exception as e:
+                logger.error(f"Copy Editor failed: {e}", exc_info=True)
+                print(f"Copy Editor error (non-fatal): {e}")
+    elif skip_copy_editor:
+        logger.info("[STEP 5b] Skipping Copy Editor")
+        # Still track model if copy-edited file exists from a previous run
+        if copy_edited_file.exists():
+            tracker.track_model_for_step("copy_editor", CopyEditor.DEFAULT_MODEL)
+
+    # =====================================================================
+    # STEP 5c: Extract copy-edited sections for DOCX generation
+    # =====================================================================
+    if copy_edited_file.exists() and not skip_copy_editor:
+        logger.info("[STEP 5c] Extracting sections from copy-edited file for DOCX...")
+        try:
+            intro_text, verses_text = _extract_sections_from_copy_edited(copy_edited_file)
+            if intro_text and verses_text:
+                # Preserve originals before overwriting
+                pre_ce_intro = output_path / f"psalm_{psalm_number:03d}_edited_intro_pre_copy_edit.md"
+                pre_ce_verses = output_path / f"psalm_{psalm_number:03d}_edited_verses_pre_copy_edit.md"
+                if edited_intro_file.exists() and not pre_ce_intro.exists():
+                    import shutil
+                    shutil.copy2(edited_intro_file, pre_ce_intro)
+                    logger.info(f"  Preserved original intro → {pre_ce_intro.name}")
+                if edited_verses_file.exists() and not pre_ce_verses.exists():
+                    import shutil
+                    shutil.copy2(edited_verses_file, pre_ce_verses)
+                    logger.info(f"  Preserved original verses → {pre_ce_verses.name}")
+                
+                # Overwrite with copy-edited content
+                edited_intro_file.write_text(intro_text, encoding='utf-8')
+                edited_verses_file.write_text(verses_text, encoding='utf-8')
+                logger.info(f"  Updated intro ({len(intro_text):,} chars) and verses ({len(verses_text):,} chars) from copy-edited source")
+            else:
+                logger.warning("Could not extract sections from copy-edited file; using original writer output for DOCX")
+        except Exception as e:
+            logger.warning(f"Failed to extract copy-edited sections: {e}; using original writer output for DOCX")
 
     # =====================================================================
     # STEP 6: Word Doc
@@ -677,7 +795,7 @@ def run_enhanced_pipeline(
     print(cost_tracker.get_summary())
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run Enhanced Pipeline TEST (Master Writer)")
+    parser = argparse.ArgumentParser(description="Run Enhanced Pipeline (Master Writer V4)")
     parser.add_argument("psalm_number", type=int, help="Psalm number")
     parser.add_argument("--output-dir", type=str, default=None,
                        help="Output directory (default: output/psalm_NNN)")
@@ -699,20 +817,32 @@ if __name__ == "__main__":
     parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-6",
                        choices=["gpt-5", "gpt-5.1", "claude-opus-4-6"],
                        help="Model for Master Writer (default: claude-opus-4-6)")
+    # Session 280: questions and insights are SKIPPED by default.
+    # --include-* flags opt back in; --skip-* flags remain for backward compat.
     parser.add_argument("--skip-insights", action="store_true",
-                       help="Skip insights generation; use existing file if present")
+                       help="(Default behavior) Skip insights generation; use existing file if present")
     parser.add_argument("--skip-questions", action="store_true",
-                       help="Skip question curation; use existing file if present")
+                       help="(Default behavior) Skip question curation; use existing file if present")
+    parser.add_argument("--include-insights", action="store_true",
+                       help="Enable insights generation (overrides default skip)")
+    parser.add_argument("--include-questions", action="store_true",
+                       help="Enable question curation (overrides default skip)")
     parser.add_argument("--exclude-insights", action="store_true",
                        help="Skip insights generation and exclude from writer even if file exists")
     parser.add_argument("--exclude-questions", action="store_true",
                        help="Skip question curation and exclude from writer/doc even if file exists")
+    parser.add_argument("--skip-copy-editor", action="store_true",
+                       help="Skip the copy editor step (runs by default)")
 
     args = parser.parse_args()
 
     # Set output directory with psalm-specific subdirectory
     if not args.output_dir:
         args.output_dir = f"output/psalm_{args.psalm_number}"
+
+    # Resolve include/skip logic: --include-* overrides the default skip
+    effective_skip_insights = not args.include_insights  # default: True (skipped)
+    effective_skip_questions = not args.include_questions  # default: True (skipped)
 
     # Ensure UTF-8 encoding on Windows
     if sys.platform == 'win32':
@@ -726,6 +856,9 @@ if __name__ == "__main__":
     print(f"Database: {args.db_path}")
     print(f"Rate Limit Delay: {args.delay} seconds")
     print(f"Master Writer Model: {args.master_editor_model}")
+    print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
+    print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
+    print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
     print()
 
     run_enhanced_pipeline(
@@ -744,8 +877,9 @@ if __name__ == "__main__":
         smoke_test=args.smoke_test,
         skip_default_commentaries=args.skip_default_commentaries,
         master_editor_model=args.master_editor_model,
-        skip_insights=args.skip_insights,
-        skip_questions=args.skip_questions,
+        skip_insights=effective_skip_insights,
+        skip_questions=effective_skip_questions,
         exclude_insights=args.exclude_insights,
-        exclude_questions=args.exclude_questions
+        exclude_questions=args.exclude_questions,
+        skip_copy_editor=args.skip_copy_editor,
     )

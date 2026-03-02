@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-01 (Session 278)
+**Last Updated**: 2026-03-02 (Session 280)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 278
-- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
+- **Current Session**: 280
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
 
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Research Stats Fix for Skip-Micro Path (Session 278)
+### 1. Copy Editor Pipeline Integration (Session 280)
+- Integrated copy editor as default Step 5b in both `run_enhanced_pipeline.py` and `run_si_pipeline.py`; DOCX now generated from copy-edited content with originals preserved as `_pre_copy_edit.md` files.
+- Changed defaults: questions and insights now skipped by default (`--include-questions`/`--include-insights` to opt in); copy editor runs by default (`--skip-copy-editor` to opt out).
+- Fixed paragraph spacing loss in extraction (restored `\n\n` breaks) and methodology zeros (database fallback for verse count on resumed runs).
+
+### 2. Research Stats Fix for Skip-Micro Path (Session 278)
 - Fixed concordance count in `_parse_research_stats_from_markdown`: unanchored regex was matching `#### Phrase:` micro analyst sub-headers instead of actual concordance query lines; now parses and sums result counts from query headers directly (99 vs. the erroneous 11 for Psalm 38).
 - Added Torah Temimah to the commentary patterns list so skip-micro runs no longer drop its entries from the Methodology section.
 - Renamed stored key `'total_queries'` → `'total_results'` for clarity.

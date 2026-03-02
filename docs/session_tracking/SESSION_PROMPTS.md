@@ -24,7 +24,8 @@ I'm starting a new development session on the Psalms AI Analysis project.
 
 **After reading, ask me:** "What would you like to work on in Session [N]?"
 
-**Today's goal:** [Describe what you want to accomplish]
+**Today's goal:** please see C:\Users\ariro\OneDrive\Documents\Psalms\docs\features\Copy_editor_plan.md
+Note that I'd like to implement this copy editor agent and then run some tests to see how it would have modified existing readers guides. So however we implement, we need to be able to run it as a standalone against existing output and readily see what it changes. VERY important - we have worked very carefully to get the writer output formatted correctly. the copy editor must not change any elements of formatting; it must preserve formatting meticulously. we use that formatting to help create the final docxs.
 ```
 
 ---

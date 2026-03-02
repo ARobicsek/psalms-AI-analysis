@@ -4,7 +4,7 @@ python scripts/run_enhanced_pipeline.py PSALM_NUMBER
 Examples:
 
 # Generate complete commentary for Psalm XX
-python scripts/run_enhanced_pipeline.py XX [This is the new pipeline WITHOUT the synthesis writer.]
+python scripts/run_enhanced_pipeline.py XX [**I need to SPECIFY --skip-questions --skip-insights**]
 
 #just all 3 word docs
 python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-writer --skip-college --skip-insights
@@ -59,6 +59,11 @@ python single_verse_search.py ps 61:4
 # GPT-5 (older model, still with high reasoning)
 python scripts/run_enhanced_pipeline.py <N> --master-editor-model gpt-5
 
+# New default behavior (March 2, 2026):
+
+Copy editor runs by default → --skip-copy-editor to disable
+Questions/insights skipped by default → --include-questions / --include-insights to enable
+
 #special commands
 --skip_default_commentaries (this will ensure that only traditional commentaries requested by the Micro agent are requested)
 --skip-macro 
@@ -69,6 +74,14 @@ python scripts/run_enhanced_pipeline.py <N> --master-editor-model gpt-5
 --skip-print-ready
 --skip-word-doc
 --skip-combined-doc
+
+
+Flag			Regenerate?	Use existing file?
+--skip-insights		No		Yes
+--exclude-insights	No		No
+--skip-questions	No		Yes
+--exclude-questions	No		No
+
 
 #running Chrome in debug mode (where selenium works)
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:/temp/chrome_debug"
@@ -107,18 +120,3 @@ python scripts/test_figurative_curator.py --dry-run          # See prompts, no L
 python scripts/test_figurative_curator.py --verbose          # Detailed progress
 
 
-All current skip commands
-For run_enhanced_pipeline.py:
-
-Flag	Status	Effect
---skip-macro	Active	Skip macro analysis (use existing file)
---skip-micro	Active	Skip micro analysis + research bundle
---skip-insights	Active	Skip insight extraction
---skip-writer	Active	Skip Master Writer V4 step
---skip-print-ready	Active	Skip print-ready markdown formatting
---skip-word-doc	Active	Skip .docx generation
---skip-college	Hidden no-op	Accepted silently, does nothing
---skip-combined-doc	Hidden no-op	Accepted silently, does nothing
---skip-default-commentaries	Active	Use selective commentary mode in micro analysis
---resume	Active	Auto-detect last completed step
---smoke-test	Active	Dry run with dummy data, no API calls

@@ -14,6 +14,7 @@ Always read this file first when you need to find code.
 | `run_enhanced_pipeline_with_synthesis.py` | `scripts` | **LEGACY**: Original Synthesis Writer pipeline (Pass 3 Synthesis → Pass 4 Master Editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_enhanced_pipeline_with_synthesis.py) |
 | `run_si_pipeline.py` | `scripts` | **NEW SI**: Special Instruction pipeline using Master Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |
 | `run_si_pipeline_with_synthesis.py` | `scripts` | **LEGACY SI**: Special Instruction pipeline using Synthesis Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline_with_synthesis.py) |
+| `run_copy_editor.py` | `scripts` | Standalone copy editor runner. Applies 6-category error taxonomy to existing `print_ready.md`. Supports batch (`36 37 38`), `--dry-run`, `--model`. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_copy_editor.py) |
 | `converse_with_editor.py` | `scripts` | Enables multi-turn conversation with Master Editor (GPT-5.1) about a completed psalm commentary with full research context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/converse_with_editor.py) |
 
 ---
@@ -30,6 +31,7 @@ Always read this file first when you need to find code.
 | `master_editor_si.py` | `src.agents` | Master Writer V4 with Special Instructions that supports author directives for alternative versions. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_si.py) |
 | `master_editor_old.py` | `src.agents` | Legacy Master Editor implementation (archived). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_old.py) |
 | `phonetic_analyst.py` | `src.agents` | Transcribes Hebrew text into phonetic/syllabic structure based on reconstructed Biblical Hebrew phonology. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/phonetic_analyst.py) |
+| `copy_editor.py` | `src.agents` | Post-generation QA: 6-category error taxonomy (structural claims, inconsistencies, form/content confusion, negative citations, Hebrew script, weak parallels). Opus 4.6 with adaptive thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/copy_editor.py) |
 
 ---
 
