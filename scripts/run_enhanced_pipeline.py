@@ -183,12 +183,19 @@ def _extract_sections_from_copy_edited(copy_edited_path: Path) -> tuple:
     intro_text = intro_match.group(1).strip() if intro_match else ''
     
     # Extract verse commentary: from "## Verse-by-Verse Commentary\n" to the end marker
-    # (either "------" or "## Methodological")
+    # The end marker may be "------\n## Methodological" or just "## Methodological" directly
     verses_match = re.search(
-        r'^## Verse-by-Verse Commentary\n(.*?)(?=^-{4,}\s*$\n^## Methodo|\Z)',
+        r'^## Verse-by-Verse Commentary\n(.*?)(?=^-{3,}\s*$\n^## Methodo|^## Methodo|\Z)',
         content, re.DOTALL | re.MULTILINE
     )
     verses_text = verses_match.group(1).strip() if verses_match else ''
+    
+    # Strip any trailing section separators (--- lines) from extracted text.
+    # The separator may be on its own line (\n---) or concatenated to text (word---)
+    if intro_text:
+        intro_text = re.sub(r'-{3,}\s*$', '', intro_text).strip()
+    if verses_text:
+        verses_text = re.sub(r'-{3,}\s*$', '', verses_text).strip()
     
     # Restore paragraph breaks: the copy editor collapses \n\n to \n.
     # Convert every single \n to \n\n so the DOCX generator sees paragraph boundaries.
