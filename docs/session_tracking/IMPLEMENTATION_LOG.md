@@ -15,6 +15,8 @@ This file contains detailed session history for sessions 200 and later.
 **Problems Identified**:
 - Copy editor output uses single `\n` between paragraphs; DOCX generator expects `\n\n` — caused missing paragraph spacing in generated DOCX.
 - Pipeline stats `verse_count` is 0 on resumed runs (macro step skipped), causing Methodology section to show "0" for verses analyzed/LXX/phonetic.
+- Extraction regex required `------` before `## Methodological` but some copy-edited files have no dashes — caused duplicate methodology sections in DOCX.
+- Trailing `---` separator sometimes concatenated directly to last paragraph text (no newline) — appeared as visible `---` at end of verse commentary.
 
 **Solutions Implemented**:
 1. Added Step 5b (Copy Editor) and Step 5c (section extraction) to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
@@ -25,10 +27,12 @@ This file contains detailed session history for sessions 200 and later.
 6. Added database fallback for `verse_count` in `document_generator.py` Methodology section.
 7. Added `copy_editor` model entry to DOCX Methodology section.
 8. Modified `CopyEditor.__init__` to accept optional external `cost_tracker` for pipeline integration.
+9. Fixed extraction regex to match `## Methodological` with or without preceding dash separator.
+10. Fixed trailing `---` stripping to handle both newline-separated and concatenated cases.
 
 **Files Modified**:
 - `src/agents/copy_editor.py` — added optional `cost_tracker` parameter to `__init__`
-- `scripts/run_enhanced_pipeline.py` — Step 5b/5c, `--skip-copy-editor`, `--include-questions/insights`, default flag changes
+- `scripts/run_enhanced_pipeline.py` — Step 5b/5c, `--skip-copy-editor`, `--include-questions/insights`, default flag changes, extraction regex fixes
 - `scripts/run_si_pipeline.py` — mirrored all pipeline changes for SI parity
 - `src/utils/document_generator.py` — copy_editor model in Methodology; database fallback for verse_count
 

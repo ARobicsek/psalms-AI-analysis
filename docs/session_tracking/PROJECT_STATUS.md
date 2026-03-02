@@ -63,7 +63,7 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ### 1. Copy Editor Pipeline Integration (Session 280)
 - Integrated copy editor as default Step 5b in both `run_enhanced_pipeline.py` and `run_si_pipeline.py`; DOCX now generated from copy-edited content with originals preserved as `_pre_copy_edit.md` files.
 - Changed defaults: questions and insights now skipped by default (`--include-questions`/`--include-insights` to opt in); copy editor runs by default (`--skip-copy-editor` to opt out).
-- Fixed paragraph spacing loss in extraction (restored `\n\n` breaks) and methodology zeros (database fallback for verse count on resumed runs).
+- Fixed paragraph spacing loss in extraction (restored `\n\n` breaks), methodology zeros (database fallback for verse count), duplicate methodology sections (regex now handles missing `---` separator), and trailing `---` concatenated to text.
 
 ### 2. Research Stats Fix for Skip-Micro Path (Session 278)
 - Fixed concordance count in `_parse_research_stats_from_markdown`: unanchored regex was matching `#### Phrase:` micro analyst sub-headers instead of actual concordance query lines; now parses and sums result counts from query headers directly (99 vs. the erroneous 11 for Psalm 38).
