@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-03 (Session 282)
+**Last Updated**: 2026-03-03 (Session 283)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Fix DOCX Paragraph Spacing for Hebrew Verses (Session 282)
+### 1. Fix Divine Name Punctuation Dropping (Session 283)
+- Investigated and fixed an issue where the Hebrew divine name `ה׳` (YHWH replacement) was rendering incorrectly as `ה` without the trailing Geresh in generated DOCX files (e.g., Psalm 37).
+- Discovered that the `_split_into_grapheme_clusters` regex in both document generators (`document_generator.py` and `combined_document_generator.py`) did not include Unicode Hebrew punctuation characters like Geresh and Gershayim as valid base characters.
+- Updated the regex pattern to explicitly include Geresh (`\u05F3`), Gershayim (`\u05F4`), and Paseq (`\u05C0`), preventing these characters from being silently dropped during RTL reversal algorithms.
+
+### 2. Fix DOCX Paragraph Spacing for Hebrew Verses (Session 282)
 - Fixed an issue where consecutive Hebrew verses were rendered with unwanted extra paragraph spacing in the DOCX output.
 - Refactored `_add_commentary_with_bullets` in both document generators to intelligently bridge empty lines between primarily-Hebrew text blocks using a `while` loop lookahead.
 - Added missing `_add_paragraph_with_soft_breaks` and related formatting helpers to the `CombinedDocumentGenerator` to ensure parity with the standard document generator.

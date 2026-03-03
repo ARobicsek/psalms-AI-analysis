@@ -8,6 +8,26 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 283 (2026-03-03): Fix Divine Name Punctuation Dropping
+
+**Objective**: Investigate and fix an issue where the Hebrew divine name YHWH is being rendered as `ה` instead of `ה׳` (dropping the trailing Geresh) in the final DOCX output.
+
+**Problems Identified**:
+- The `_split_into_grapheme_clusters` function inside both `document_generator.py` and `combined_document_generator.py` uses a regular expression to tokenize Hebrew words into base characters and modifiers. 
+- The regex only included standard Hebrew letters (`\u05D0-\u05EA`), spaces, and maqqef (`\u05BE`) as base characters.
+- Unicode Hebrew punctuation characters like the Geresh (`׳`, U+05F3) and Gershayim (`״`, U+05F4) were excluded from the pattern, causing `re.findall` to silently drop them during the Right-to-Left (RTL) text reversal algorithm.
+
+**Solutions Implemented**:
+1. Added Geresh (`\u05F3`), Gershayim (`\u05F4`), and Paseq (`\u05C0`) to the base character class in the `cluster_pattern` regex in `_split_into_grapheme_clusters`.
+2. Applied the identical regex fix to both `DocumentGenerator` and `CombinedDocumentGenerator`.
+3. Verified the fix locally and generated a successful DOCX output for Psalm 37, confirming the apostrophe is now correctly preserved inline.
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Updated `_split_into_grapheme_clusters` regex.
+- `src/utils/combined_document_generator.py` - Updated `_split_into_grapheme_clusters` regex.
+
+---
+
 ## Session 282 (2026-03-03): Fix DOCX Paragraph Spacing for Hebrew Verses
 
 **Objective**: Fix the rendering of Hebrew verse ranges in the generated DOCX document to ensure they flow together with soft line breaks instead of hard paragraph breaks.
