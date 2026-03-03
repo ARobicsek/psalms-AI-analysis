@@ -8,6 +8,24 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 282 (2026-03-03): Fix DOCX Paragraph Spacing for Hebrew Verses
+
+**Objective**: Fix the rendering of Hebrew verse ranges in the generated DOCX document to ensure they flow together with soft line breaks instead of hard paragraph breaks.
+
+**Problems Identified**:
+- Consecutive primarily-Hebrew lines (e.g., multi-verse citations) separated by empty lines in the parsing stage were being treated as separate paragraphs, resulting in unwanted extra paragraph spacing in the DOCX output.
+- `CombinedDocumentGenerator` was missing the `_add_paragraph_with_soft_breaks` and nested formatting helper methods that had been recently added to `DocumentGenerator`.
+
+**Solutions Implemented**:
+1. Refactored `_add_commentary_with_bullets` in both generators to use a `while` loop with lookahead to bridge empty lines between consecutive primarily-Hebrew lines, grouping them into a single soft-broken paragraph.
+2. Copied `_add_paragraph_with_soft_breaks`, `_add_nested_formatting`, and `_add_nested_formatting_with_breaks` from `DocumentGenerator` into `CombinedDocumentGenerator` to maintain feature parity.
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Updated `_add_commentary_with_bullets` bridging logic.
+- `src/utils/combined_document_generator.py` - Updated bridging logic and added missing layout helpers.
+
+---
+
 ## Session 281 (2026-03-02): Architectural Documentation Update
 
 **Objective**: Update `TECHNICAL_ARCHITECTURE_SUMMARY.md` and `scriptReferences.md` to reflect recent pipeline enhancements and current system state (V6.5).

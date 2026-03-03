@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-02 (Session 281)
+**Last Updated**: 2026-03-03 (Session 282)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 281
+- **Current Session**: 282
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Architectural Documentation Update (Session 281)
+### 1. Fix DOCX Paragraph Spacing for Hebrew Verses (Session 282)
+- Fixed an issue where consecutive Hebrew verses were rendered with unwanted extra paragraph spacing in the DOCX output.
+- Refactored `_add_commentary_with_bullets` in both document generators to intelligently bridge empty lines between primarily-Hebrew text blocks using a `while` loop lookahead.
+- Added missing `_add_paragraph_with_soft_breaks` and related formatting helpers to the `CombinedDocumentGenerator` to ensure parity with the standard document generator.
+
+### 2. Architectural Documentation Update (Session 281)
 - Updated `TECHNICAL_ARCHITECTURE_SUMMARY.md` from V6.4 to V6.5, mapping the updated pipeline flow with newly integrated AI agents (Copy Editor, Insight Extractor, Question Curator).
 - Updated LLM references across the architectures to match the current system state, such as Claude Sonnet 4.6 for Micro Analyst, and Gemini 3.1 Pro Preview for Figurative Curator.
 - Updated `scriptReferences.md` and pipeline flag documentation for the new defaults (`--exclude` and `--include` semantics, and `--skip-copy-editor`).

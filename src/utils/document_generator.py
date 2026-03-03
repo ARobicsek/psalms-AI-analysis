@@ -826,7 +826,28 @@ class DocumentGenerator:
             else:
                 # Collect consecutive non-bullet, non-quote, non-empty lines until we hit an empty line or special formatting
                 text_block = []
-                while i < len(lines) and lines[i].strip():
+                while i < len(lines):
+                    if not lines[i].strip():
+                        # We hit an empty line. Let's look ahead to see if both the current collected 
+                        # block AND the next block are primarily Hebrew. If they are, we can bridge 
+                        # the gap to keep them in the same paragraph with a soft break.
+                        if text_block and all(self._is_primarily_hebrew(l) for l in text_block):
+                            # Look ahead for next non-empty line
+                            next_i = i + 1
+                            while next_i < len(lines) and not lines[next_i].strip():
+                                next_i += 1
+                                
+                            if next_i < len(lines):
+                                next_line_stripped = lines[next_i].strip()
+                                if self._is_primarily_hebrew(next_line_stripped) and not next_line_stripped.startswith('>') and not next_line_stripped.startswith('#') and not next_line_stripped.startswith('- '):
+                                    # Bridge the gap! Add a newline to the block and skip the empty lines
+                                    # No need to actually add the newline string, as join handles it later. 
+                                    # But we do need to advance `i` past the empty lines.
+                                    i = next_i
+                                    continue
+                        # If we didn't bridge the gap, break the block
+                        break
+                        
                     original_line = lines[i]
                     line_stripped = original_line.strip()
                     # Apply same bullet detection logic
@@ -1626,10 +1647,8 @@ Methodological & Bibliographical Summary
                          r.font.name = 'Aptos'
                 elif "Methodological & Bibliographical Summary" in stripped_line:
                     continue  # Skip the redundant title line
-                elif stripped_line.startswith('- '): # Old format
+                else:
                     self._add_summary_paragraph(stripped_line.lstrip('- '))
-                elif stripped_line:
-                    self._add_summary_paragraph(stripped_line)
 
         # 6. Add Page Numbers to Footer
         section = self.document.sections[0]

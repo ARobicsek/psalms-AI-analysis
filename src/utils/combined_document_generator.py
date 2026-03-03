@@ -751,30 +751,208 @@ class CombinedDocumentGenerator:
                 run.font.name = 'Aptos'
                 run.font.size = Pt(12)
 
+    def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
+        """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
+        modified_text = self.modifier.modify_text(text)
+        p = self.document.add_paragraph(style=style)
+
+        # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
+        self._set_paragraph_ltr(p)
+
+        # Split the entire text by markdown markers first
+        parts = re.split(r'(\$\$|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
+
+        for part in parts:
+            is_bold = (part.startswith('**') and part.endswith('**')) or \
+                      (part.startswith('__') and part.endswith('__'))
+            is_backtick = part.startswith('`') and part.endswith('`')
+            is_italic = (part.startswith('*') and part.endswith('*')) or \
+                        (part.startswith('_') and part.endswith('_')) or \
+                        is_backtick
+
+            content = part[2:-2] if is_bold else (part[1:-1] if is_italic else part)
+
+            # Handle backticks with nested bold (for stressed syllables)
+            if is_backtick:
+                self._add_nested_formatting_with_breaks(p, content, base_italic=True)
+            else:
+                # Handle soft breaks within the content
+                lines = content.split('\n')
+                for i, line in enumerate(lines):
+                    if line:
+                        # Check if this is a primarily-Hebrew line (like a verse text)
+                        if self._is_primarily_hebrew(line):
+                            modified_line = self._reverse_primarily_hebrew_line(line)
+                            run = p.add_run(modified_line)
+                        else:
+                            # Handle parenthesized/bracketed Hebrew with grapheme cluster reversal + LRO
+                            hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
+                            hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
+                            
+                            modified_line = line
+                            LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+                            PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+                            
+                            if re.search(hebrew_paren_pattern, modified_line):
+                                def reverse_hebrew_paren(match):
+                                    hebrew_text = match.group(1)
+                                    reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                                    return f'{LRO}({reversed_hebrew}){PDF}'
+                                modified_line = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_line)
+                            
+                            if re.search(hebrew_bracket_pattern, modified_line):
+                                def reverse_hebrew_bracket(match):
+                                    hebrew_text = match.group(1)
+                                    reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
+                                    return f'{LRO}[{reversed_hebrew}]{PDF}'
+                                modified_line = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_line)
+                            
+                            # Wrap verse references with LRO/PDF
+                            verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
+                            if re.search(verse_ref_pattern, modified_line):
+                                def wrap_verse_ref(match):
+                                    return f'{LRO}{match.group(1)}{PDF}'
+                                modified_line = re.sub(verse_ref_pattern, wrap_verse_ref, modified_line)
+                            
+                            # Add RLM for Hebrew trailing punctuation
+                            RLM = '\u200F'
+                            hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_line))
+                            if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_line):
+                                modified_line = modified_line + RLM
+                            
+                            run = p.add_run(modified_line)
+                        run.bold = is_bold
+                        run.italic = is_italic
+                    if i < len(lines) - 1:
+                        p.add_run().add_break()
+
+    def _add_nested_formatting(self, paragraph, text: str, base_italic: bool = False):
+        """
+        Add text with nested formatting (e.g., **BOLD** inside italic context).
+        Used for phonetic transcriptions where stressed syllables are in **BOLD CAPS**.
+
+        Args:
+            paragraph: The docx paragraph object to add runs to
+            text: The text content (e.g., "tə-**HIL**-lāh")
+            base_italic: Whether the base text should be italic (True for backtick context)
+        """
+        # Split by bold markers
+        parts = re.split(r'(\$\$|\*\*)', text)
+        for part in parts:
+            if part.startswith('**') and part.endswith('**'):
+                # Bold text (stressed syllable)
+                run = paragraph.add_run(part[2:-2])
+                run.bold = True
+                run.italic = base_italic  # Maintain italic if in backtick context
+            else:
+                # Regular text
+                run = paragraph.add_run(part)
+                run.italic = base_italic
+
+    def _add_nested_formatting_with_breaks(self, paragraph, text: str, base_italic: bool = False):
+        """
+        Add text with nested formatting AND support for soft breaks.
+        Used for phonetic transcriptions in verse commentary.
+
+        Args:
+            paragraph: The docx paragraph object to add runs to
+            text: The text content with possible newlines
+            base_italic: Whether the base text should be italic
+        """
+        # First split by newlines
+        lines = text.split('\n')
+        for i, line in enumerate(lines):
+            if line:
+                # Then handle bold within each line
+                parts = re.split(r'(\$\$|\*\*)', line)
+                for part in parts:
+                    if part.startswith('**') and part.endswith('**'):
+                        run = paragraph.add_run(part[2:-2])
+                        run.bold = True
+                        run.italic = base_italic
+                    else:
+                        run = paragraph.add_run(part)
+                        run.italic = base_italic
+            if i < len(lines) - 1:
+                paragraph.add_run().add_break()
+
     def _add_commentary_with_bullets(self, text: str, style: str = 'Normal'):
         """
-        Add commentary text with proper bullet formatting.
-        Handles both regular text and bullet points.
+        Adds commentary text, intelligently handling bullet lists and regular text.
+        Bullet list items (lines starting with "- ") are converted to proper Word bullets.
+        Regular text blocks use soft breaks, with empty lines creating paragraph breaks.
         """
         lines = text.split('\n')
+        i = 0
 
-        for line in lines:
-            line = line.strip()
-            if not line:
+        while i < len(lines):
+            line = lines[i]
+
+            # Check if this is an empty line (paragraph break)
+            if not line.strip():
+                i += 1
                 continue
 
-            # Skip horizontal rule markers (---, ___, ***)
-            if line in ('---', '___', '***', '—', '–'):
-                continue
+            # Check if this is a true bullet item (not just regular text starting with dash)
+            original_line = line  # Keep original line for indentation detection
+            line_stripped = line.strip()
+            is_true_bullet = (
+                line_stripped.startswith('- ') and
+                len(line_stripped) > 5 and
+                # Don't treat as bullet if it starts with uppercase letter followed by common sentence patterns
+                not (
+                    line_stripped[2:3].isupper() and
+                    (':' in line_stripped[:50] or 'In ' in line_stripped[:10] or 'As ' in line_stripped[:10] or 'For ' in line_stripped[:10])
+                )
+            )
 
+            if is_true_bullet:
+                # Collect consecutive bullet items with indentation info
+                bullet_block = []
+                while i < len(lines) and lines[i].strip() and lines[i].lstrip().startswith('- '):
+                    # Apply same logic to consecutive lines
+                    bullet_line = lines[i]
+                    bullet_stripped = bullet_line.strip()
+                    is_consecutive_bullet = (
+                        len(bullet_stripped) > 5 and
+                        not (
+                            bullet_stripped[2:3].isupper() and
+                            (':' in bullet_stripped[:50] or 'In ' in bullet_stripped[:10] or 'As ' in bullet_stripped[:10] or 'For ' in bullet_stripped[:10])
+                        )
+                    )
+                    if is_consecutive_bullet:
+                        # Store both the bullet text and indentation info
+                        leading_spaces = len(bullet_line) - len(bullet_line.lstrip())
+                        bullet_text = bullet_line.lstrip()[2:]  # Remove "- " prefix
+                        bullet_block.append((bullet_text, leading_spaces))
+                        i += 1
+                    else:
+                        break
+
+                # Add each bullet as a separate paragraph with proper indentation
+                for bullet_text, leading_spaces in bullet_block:
+                    p = self.document.add_paragraph(style='List Bullet')
+                    # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
+                    self._set_paragraph_ltr(p)
+
+                    # Apply indentation if present (convert spaces to inches)
+                    if leading_spaces > 0:
+                        from docx.shared import Inches
+                        # Approximately 6 spaces = 0.25 inch, scale accordingly
+                        indent_inches = leading_spaces * 0.04  # Rough conversion: 1 space ≈ 0.04 inches
+                        p.paragraph_format.left_indent = Inches(indent_inches)
+
+                    # Process markdown formatting in bullet text with explicit font
+                    self._process_markdown_formatting(p, bullet_text, set_font=True)
             # Check if this is a markdown heading (###, ##, ####)
-            if line.startswith('#'):
+            elif line_stripped.startswith('#'):
                 # Parse heading level and text
-                heading_match = re.match(r'^(#{1,6})\s+(.+)$', line)
+                heading_match = re.match(r'^(#{1,6})\s+(.+)$', line_stripped)
                 if heading_match:
                     hashes = heading_match.group(1)
                     heading_text = heading_match.group(2)
                     # Map markdown heading levels to Word heading levels
+                    # ## = Heading 2, ### = Heading 3, #### = Heading 4
                     level = len(hashes)
                     word_heading_level = min(level, 4)  # Cap at Heading 4
 
@@ -783,35 +961,82 @@ class CombinedDocumentGenerator:
                     self._set_paragraph_ltr(p)
                 else:
                     # Malformed heading, treat as normal text
-                    self._add_paragraph_with_markdown(line, style=style)
-            # Check if this is a bullet point
-            elif line.startswith('- '):
-                # Create a bulleted paragraph
-                paragraph = self.document.add_paragraph(style='List Bullet')
-                self._set_paragraph_ltr(paragraph)
-                line_without_bullet = line[2:]  # Remove "- "
-                # Process with proper formatting
-                self._process_markdown_formatting(paragraph, line_without_bullet, set_font=True)
+                    p = self.document.add_paragraph(style=style)
+                    self._set_paragraph_ltr(p)
+                    self._process_markdown_formatting(p, line_stripped, set_font=False)
+                i += 1
             # Check if this is a block quote
-            elif line.startswith('>'):
-                # Check if it's an empty quote line (just ">" with optional spaces)
-                quote_text = line[1:].lstrip() if len(line) > 1 else ''  # Remove ">" and any leading spaces
-                if not quote_text:
-                    # Empty quote line - add a blank paragraph
-                    self.document.add_paragraph()
-                else:
-                    # Non-empty quote line - create a block quote paragraph with indentation and italic
-                    paragraph = self.document.add_paragraph(style=style)
-                    self._set_paragraph_ltr(paragraph)
-                    paragraph.paragraph_format.left_indent = Inches(0.5)
-                    # Process with proper formatting
-                    self._process_markdown_formatting(paragraph, quote_text, set_font=True)
-                    # Make the entire quote italic
-                    for run in paragraph.runs:
-                        run.italic = True
+            elif line_stripped.startswith('>'):
+                # Collect consecutive block quote lines
+                quote_block = []
+                while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('>'):
+                    # Remove ">" and any leading spaces after it
+                    quote_text = lines[i].strip()[1:].lstrip()
+                    quote_block.append(quote_text)
+                    i += 1
+
+                # Add each quote line as a separate paragraph with indentation and italic
+                from docx.shared import Inches
+                for quote_text in quote_block:
+                    if not quote_text:
+                        # Empty quote line - add a blank paragraph
+                        self.document.add_paragraph()
+                    else:
+                        # Non-empty quote line
+                        p = self.document.add_paragraph(style=style)
+                        p.paragraph_format.left_indent = Inches(0.5)
+                        # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
+                        self._set_paragraph_ltr(p)
+                        # Process markdown formatting in quote text with explicit font
+                        self._process_markdown_formatting(p, quote_text, set_font=True)
+                        # Make the entire quote italic
+                        for run in p.runs:
+                            run.italic = True
             else:
-                # Regular paragraph
-                self._add_paragraph_with_markdown(line, style=style)
+                # Collect consecutive non-bullet, non-quote, non-empty lines until we hit an empty line or special formatting
+                text_block = []
+                while i < len(lines):
+                    if not lines[i].strip():
+                        # We hit an empty line. Let's look ahead to see if both the current collected 
+                        # block AND the next block are primarily Hebrew. If they are, we can bridge 
+                        # the gap to keep them in the same paragraph with a soft break.
+                        if text_block and all(self._is_primarily_hebrew(l) for l in text_block):
+                            # Look ahead for next non-empty line
+                            next_i = i + 1
+                            while next_i < len(lines) and not lines[next_i].strip():
+                                next_i += 1
+                                
+                            if next_i < len(lines):
+                                next_line_stripped = lines[next_i].strip()
+                                if self._is_primarily_hebrew(next_line_stripped) and not next_line_stripped.startswith('>') and not next_line_stripped.startswith('#') and not next_line_stripped.startswith('- '):
+                                    # Bridge the gap! Add a newline to the block and skip the empty lines
+                                    i = next_i
+                                    continue
+                        # If we didn't bridge the gap, break the block
+                        break
+                        
+                    original_line = lines[i]
+                    line_stripped = original_line.strip()
+                    # Apply same bullet detection logic
+                    is_bullet = (
+                        line_stripped.startswith('- ') and
+                        len(line_stripped) > 5 and
+                        not (
+                            line_stripped[2:3].isupper() and
+                            (':' in line_stripped[:50] or 'In ' in line_stripped[:10] or 'As ' in line_stripped[:10] or 'For ' in line_stripped[:10])
+                        )
+                    )
+
+                    # Stop if we hit a bullet, quote, or markdown heading
+                    if not is_bullet and not line_stripped.startswith('>') and not line_stripped.startswith('#'):
+                        text_block.append(original_line)
+                        i += 1
+                    else:
+                        break
+
+                # Add as a paragraph with soft breaks
+                if text_block:
+                    self._add_paragraph_with_soft_breaks('\n'.join(text_block), style=style)
 
     def _add_summary_paragraph(self, text: str):
         """Add a summary paragraph with the SummaryText style."""
@@ -1563,10 +1788,8 @@ Methodological & Bibliographical Summary
                          r.font.name = 'Aptos'
                 elif "Methodological & Bibliographical Summary" in stripped_line:
                     continue  # Skip the redundant title line
-                elif stripped_line.startswith('- '): # Old format
+                else:
                     self._add_summary_paragraph(stripped_line.lstrip('- '))
-                elif stripped_line:
-                    self._add_summary_paragraph(stripped_line)
 
         # 8. Add Page Numbers to Footer
         section = self.document.sections[0]
