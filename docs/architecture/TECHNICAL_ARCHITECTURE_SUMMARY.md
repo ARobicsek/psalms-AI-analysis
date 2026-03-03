@@ -1,27 +1,26 @@
 # Technical Architecture Summary: Psalms Commentary Pipeline
 
-**Date**: 2026-01-04
-**Version**: Enhanced Pipeline V6.4 (Phase 4, Sessions 200-229)
-**Status**: Production System with Figurative Curator, SI Pipeline, Gemini Fallback, V2 Prompts
+**Date**: 2026-03-02
+**Version**: Enhanced Pipeline V6.5 (Phase 4, Sessions 200-280)
+**Status**: Production System with Unified Writer V4, Copy Editor, Insight Extractor, Figurative Curator, SI Pipeline, Gemini Fallback
 
 ---
 
 ## Executive Summary
 
-The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Opus 4.6, Claude Sonnet 4.5, GPT-5.1, Gemini 3 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
+The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Opus 4.6, Claude Sonnet 4.6, GPT-5.1, Gemini 3.1 Pro Preview, Gemini 2.5 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
 
-**Latest Enhancements (Sessions 200-229)**:
-- **Figurative Curator**: LLM-enhanced agent using Gemini 3 Pro to curate figurative language insights (Sessions 224-227)
-- **Tribal Blessings Analyzer**: Reusable non-Psalm analysis for structured biblical passages (Session 229)
-- **Divine Names Fix**: Correct handling of שְׁדּי (breasts) vs שַׁדַּי (Shaddai) (Session 223)
-- **Special Instruction Pipeline**: Author-directed commentary revisions without altering standard pipeline (Session 220)
-- **Master Editor V2**: Restructured prompt with explicit Deep Research guidance, now default (Session 215)
-- **Gemini 2.5 Pro Fallback**: Automatic switching for large psalms (51+ verses) with 1M token context (Session 211)
-- **Resume Feature**: `--resume` flag for automatic step detection (Session 219)
-- **Strategic Verse Grouping**: Prevents truncation in long psalms (Session 212)
-- **Deep Web Research Integration**: Manual Gemini Deep Research outputs auto-load into research bundle (Session 209)
+**Latest Enhancements (Sessions 200-280)**:
+- **Copy Editor Agent**: Post-generation QA with 6-category error taxonomy using Opus 4.6 adaptive thinking (Session 280)
+- **Flag Refactor**: Unified pipeline controls with --exclude and --include flags (Session 277)
+- **Gemini 3.1 Pro Migration**: Upgraded models and preserved reasoning configurations (Session 275)
+- **Unified Writer V4**: Single prompt merging Main and College depth and clarity, halving pipeline cost (Session 269)
+- **Cross-Cultural Literary Echoes**: Integration of Gemini Deep Research for cross-cultural comparisons (Session 259)
+- **Insight Extractor**: Dedicated agent to curate "aha!" moments before synthesis (Session 241/250)
+- **Questions for the Reader**: LLM-curated questions appearing before the introduction (Session 230)
+- **Figurative Curator**: LLM-enhanced agent using Gemini 3.1 Pro to curate figurative language insights (Sessions 224-227)
 
 ---
 
@@ -35,39 +34,43 @@ Input: Psalm Number
 [1] Macro Analysis (Claude Opus 4.6)
     → Structural thesis, poetic devices, research questions
     ↓
-[2] Micro Analysis + Research Request Generation (Claude Opus 4.6)
+[2] Micro Analysis + Research Request Generation (Claude Sonnet 4.6)
     → Discovery-driven verse analysis, research requests
     ↓
-    [Research Bundle Assembly - 9 Python Librarians]
+    [Research Bundle Assembly - 10 Python Librarians]
     → Lexicon, concordance, figurative analysis, commentary,
-      liturgical usage, related psalms, Sacks, Deep Web Research
+      liturgical usage, related psalms, Sacks, Deep Web Research, Echoes
     ↓
-[3] Synthesis Writing (Claude Sonnet 4.5 OR Gemini 2.5 Pro)
-    → Introduction essay + verse commentary with quotations
-    → Gemini fallback for large psalms (51+ verses, 1M token context)
+    [2b] Question Curation (Claude Opus 4.6)
+    → LLM-curated engaging questions (Optional / Auto-skipped by default)
     ↓
-[4] Master Writer V4 (Claude Opus 4.6 or GPT-5.1)
+    [2c] Insight Extraction (Claude Opus 4.6)
+    → High-value curated "aha!" moments (Optional / Auto-skipped by default)
+    ↓
+[3] Master Writer V4 (Claude Opus 4.6 or GPT-5.1)
     → Unified prompt merging Main + College depth and pedagogical clarity
-    → Audience: Intelligent, curious readers with Hebrew proficiency
     → Tone: Scholar at dinner — relaxed, precise, occasionally witty
     ↓
-[5] Print-Ready Formatting (Python)
+[4] Print-Ready Formatting (Python)
     → Markdown with divine name modifications, verse numbering
     ↓
+[5] Copy Editor (Claude Opus 4.6)
+    → QA against 6-category taxonomy (structural, consistency, form/content)
+    ↓
 [6] Document Generation (Python)
-    → Single .docx output: unified scholarly commentary
+    → Single .docx output: unified scholarly commentary (supports Arabic + CJK)
     ↓
 [OPTIONAL] Special Instruction Pipeline
     → Author-directed revisions using MasterEditorSI
-    → Separate _SI suffixed outputs (unified commentary)
+    → Separate _SI suffixed outputs
     ↓
-Output: Scholarly Commentary (.docx + .md, with college edition)
+Output: Scholarly Commentary (.docx + .md)
 ```
 
 ### Core Components
 
-1. **AI Agents** (4 specialized LLM-based analyzers with dual-edition output)
-2. **Librarian Agents** (9 deterministic Python data retrieval systems)
+1. **AI Agents** (6 specialized LLM-based analyzers with unified output)
+2. **Librarian Agents** (10 deterministic Python data retrieval systems)
 3. **Data Sources** (SQLite databases, Sefaria API, RAG documents, V6 statistical analysis)
 4. **Pipeline Tracking** (Comprehensive statistics with resume capability)
 5. **Cost Tracking** (API usage and cost monitoring across all models)
@@ -92,40 +95,36 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
   - Thesis formation with supporting evidence
 
 #### MicroAnalyst v2 (Pass 2)
-- **Model**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking (effort=max)
+- **Model**: Claude Sonnet 4.6 (`claude-sonnet-4-6`) with adaptive thinking (effort=max)
 - **Purpose**: Verse-by-verse discovery and research request generation
 - **Input**: `MacroAnalysis`, Psalm text, phonetic transcriptions
 - **Output**: `MicroAnalysis` object + `ResearchBundle` requests
 - **Commentary Mode**: `all` (default) or `selective` (request only for specific verses)
 - **Key Features**:
   - Discovery-driven (not thesis-driven) verse analysis
+  - Budgeted thinking for long psalms to guarantee JSON fulfillment
   - Curiosity-focused approach to find patterns, puzzles, surprises
   - Phonetic transcription integration for sound pattern analysis
   - Research request generation (lexicon, concordance, figurative, commentary)
-  - Pattern recognition and interesting question formulation
-  - Three-stage process: Discovery → Research Requests → Bundle Assembly
 
-#### SynthesisWriter (Pass 3)
-- **Model**: Claude Sonnet 4.5 (`claude-sonnet-4-20250514`) with **Gemini 2.5 Pro fallback**
-- **Purpose**: Integration of all analysis into coherent commentary
-- **Input**: `MacroAnalysis`, `MicroAnalysis`, `ResearchBundle`
-- **Output**: Introduction essay + verse-by-verse commentary
-- **Gemini Fallback** (Session 211):
-  - Automatic switching to `gemini-2.5-pro` when research bundle exceeds ~350K chars
-  - Gemini 2.5 Pro provides 1M token context vs Claude's 200K limit
-  - Progressive trimming before fallback: Related Psalms → Figurative Language (75% → 50%)
-  - Never trimmed: Lexicon, Commentaries, Liturgical, Sacks, RAG, Concordance, Deep Research
-  - `synthesis_model_used` property tracks which model was actually used
+#### QuestionCurator (Pass 2b)
+- **Model**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking
+- **Purpose**: Extracts "Questions for the Reader" from macro/micro analysis
+- **Input**: `MacroAnalysis`, `MicroAnalysis`
+- **Output**: LLM-curated questions appearing before Introduction
 - **Key Features**:
-  - 800-1200 word introduction essay
-  - 150-400+ words per verse commentary
-  - **Enhanced quotation emphasis** (Session 122): Generous quoting from sources in Hebrew + English
-  - Critical engagement with sources and prior scholarship
-  - Intertextual connections with biblical parallels
-  - Integration of liturgical usage and related psalms insights
-  - **Poetic punctuation** (Session 121): LLM-generated verses with semicolons, periods, commas
-  - Accessible scholarly voice (Robert Alter, Ellen Davis style)
-  - **Strategic Verse Grouping** (Session 212): For long psalms (35+ verses), 2-4 related verses can be grouped with pacing guidance
+  - Curation of 4-6 engaging scholarly questions
+  - Auto-skipped by default, enabled via `--include-questions`
+
+#### InsightExtractor (Pass 2c)
+- **Model**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking
+- **Purpose**: Curates the massive research bundle for high-value insights
+- **Input**: Full `ResearchBundle`, `MacroAnalysis`, Psalm text
+- **Output**: Extracted "aha!" moments passed to the Master Writer
+- **Key Features**:
+  - Focuses on transformative insights that wouldn't exist without AI
+  - Protects the Master Writer's context window from fluff
+  - Auto-skipped by default, enabled via `--include-insights`
 
 #### Master Editor / Unified Writer V4 (Pass 4)
 - **Model Options**:
@@ -252,7 +251,7 @@ Output: Scholarly Commentary (.docx + .md, with college edition)
 
 #### Figurative Curator (Sessions 224-227)
 - **Function**: LLM-enhanced agent that transforms raw figurative concordance results into curated scholarly insights
-- **Model**: Gemini 3 Pro (`gemini-3-pro-preview`) with high reasoning
+- **Model**: Gemini 3.1 Pro (`gemini-3.1-pro-preview`) with high reasoning
 - **Implementation**: `src/agents/figurative_curator.py`
 - **Key Features**:
   - Executes searches against figurative language database (50 results/search initial, 30 follow-up)
@@ -394,16 +393,21 @@ def normalize_hebrew(text: str, level: int) -> str:
 #### Pipeline Control Flags
 - **`--skip-macro`**: Use existing macro analysis file
 - **`--skip-micro`**: Use existing micro analysis file
-- **`--skip-synthesis`**: Use existing synthesis files
+- **`--skip-synthesis`**: *(Deprecated V4)* Silent no-op
 - **`--skip-master-edit`**: Use existing master-edited files
 - **`--skip-college`**: *(Deprecated V4)* Silent no-op
+- **`--skip-copy-editor`**: Skip the copy editor pass (enabled by default)
+- **`--include-questions`**: Run Question Curator (skipped by default)
+- **`--include-insights`**: Run Insight Extractor (skipped by default)
+- **`--exclude-insights`**: Do not regenerate and omit existing file from writer
+- **`--exclude-questions`**: Do not regenerate and omit existing file from writer
 - **`--skip-print-ready`**: Skip print-ready formatting step
 - **`--skip-word-doc`**: Skip .docx generation step
 - **`--skip-combined-doc`**: *(Deprecated V4)* Silent no-op
 - **`--resume`**: Resume from last completed step (auto-detects based on existing files)
 - **`--smoke-test`**: Generate dummy data without API calls
 - **`--skip-default-commentaries`**: Use selective commentary mode
-- **`--master-editor-model`**: Model to use for master editor (choices: gpt-5, gpt-5.1, claude-opus-4-5)
+- **`--master-editor-model`**: Model to use for master editor (choices: gpt-5, gpt-5.1, claude-opus-4-6)
 - **`--master-editor-old`**: Use OLD prompt (V2 is now default)
 - **`--delay SECONDS`**: Rate limit delay between API-heavy steps (default: 120)
 
@@ -509,14 +513,12 @@ python scripts/tribal_blessings_analyzer.py --list
 #### Document Generator
 - **Function**: Word document creation (.docx)
 - **Implementations**:
-  - `src/utils/document_generator.py` - Main and college editions
-  - `src/utils/combined_document_generator.py` - Combined edition
-- **Three Output Formats**:
-  1. **Main Edition** (`psalm_NNN_commentary.docx`): Full scholarly commentary
-  2. **College Edition** (`psalm_NNN_commentary_college.docx`): More accessible version
-  3. **Combined Edition** (`psalm_NNN_commentary_combined.docx`): Both in one document
+  - `src/utils/document_generator.py` - Main scholarly commentary
+  - `src/utils/combined_document_generator.py` - *(Deprecated)*
+- **Output Formats**:
+  1. **Unified Edition** (`psalm_NNN_commentary.docx`): Full scholarly commentary with pedagogical clarity
 - **Features**:
-  - Professional formatting with Hebrew fonts
+  - Professional formatting with Hebrew/Arabic/CJK fonts
   - Print-ready layout
   - Pipeline statistics, related psalms, research bundle statistics
   - Sefaria footnote stripping
@@ -535,10 +537,11 @@ python scripts/tribal_blessings_analyzer.py --list
 - **Function**: Real-time API usage and cost monitoring
 - **Implementation**: `src/utils/cost_tracker.py`
 - **Models Tracked**:
-  - Claude Opus 4.6 (MacroAnalyst, MicroAnalyst - with adaptive thinking)
-  - Claude Sonnet 4.5 (SynthesisWriter)
-  - Gemini 2.5 Pro (Liturgical Librarian summaries - primary)
-  - Claude Sonnet 4.5 (Liturgical Librarian summaries - fallback)
+  - Claude Opus 4.6 (MacroAnalyst, InsightExtractor, QuestionCurator, CopyEditor, MasterWriter)
+  - Claude Sonnet 4.6 (MicroAnalyst)
+  - Gemini 3.1 Pro Preview (Figurative Curator)
+  - Gemini 2.5 Pro (SynthesisWriter fallback, Liturgical Librarian primary)
+  - Claude Sonnet 4.5 (SynthesisWriter legacy, Liturgical Librarian fallback)
   - GPT-5.1 or GPT-5 (Unified MasterWriter edition)
   - Claude Opus 4.5 (Alternative MasterEditor with extended thinking)
 - **Output**: Summary table showing per-model usage and total costs

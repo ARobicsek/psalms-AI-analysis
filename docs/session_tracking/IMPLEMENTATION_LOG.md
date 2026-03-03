@@ -8,6 +8,21 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 281 (2026-03-02): Architectural Documentation Update
+
+**Objective**: Update `TECHNICAL_ARCHITECTURE_SUMMARY.md` and `scriptReferences.md` to reflect recent pipeline enhancements and current system state (V6.5).
+
+**Solutions Implemented**:
+1. Updated `TECHNICAL_ARCHITECTURE_SUMMARY.md` to version V6.5, added the Copy Editor agent to the high-level flow and components list, corrected the pipeline flow diagram to reflect current defaults, and updated LLM references (e.g., Sonnet 4.6 for Micro Analyst, Gemini 3.1 Pro for Figurative Curator).
+2. Updated pipeline control flags documentation to match the new `--exclude` and `--include` semantics.
+3. Updated `scriptReferences.md` to reflect the new default skip behavior, `include`/`skip-copy-editor` flags for `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+
+**Files Modified**:
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Updated to V6.5 and reflected new agents/flow.
+- `docs/session_tracking/scriptReferences.md` - Updated pipeline script descriptions.
+
+---
+
 ## Session 280 (2026-03-02): Copy Editor Pipeline Integration
 
 **Objective**: Integrate the copy editor into the main pipeline as a default step, generate DOCX from copy-edited content, and change default behavior for questions/insights.

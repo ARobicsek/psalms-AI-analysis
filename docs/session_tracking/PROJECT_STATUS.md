@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-02 (Session 280)
+**Last Updated**: 2026-03-02 (Session 281)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 280
+- **Current Session**: 281
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Copy Editor Pipeline Integration (Session 280)
+### 1. Architectural Documentation Update (Session 281)
+- Updated `TECHNICAL_ARCHITECTURE_SUMMARY.md` from V6.4 to V6.5, mapping the updated pipeline flow with newly integrated AI agents (Copy Editor, Insight Extractor, Question Curator).
+- Updated LLM references across the architectures to match the current system state, such as Claude Sonnet 4.6 for Micro Analyst, and Gemini 3.1 Pro Preview for Figurative Curator.
+- Updated `scriptReferences.md` and pipeline flag documentation for the new defaults (`--exclude` and `--include` semantics, and `--skip-copy-editor`).
+
+### 2. Copy Editor Pipeline Integration (Session 280)
 - Integrated copy editor as default Step 5b in both `run_enhanced_pipeline.py` and `run_si_pipeline.py`; DOCX now generated from copy-edited content with originals preserved as `_pre_copy_edit.md` files.
 - Changed defaults: questions and insights now skipped by default (`--include-questions`/`--include-insights` to opt in); copy editor runs by default (`--skip-copy-editor` to opt out).
 - Fixed paragraph spacing loss in extraction (restored `\n\n` breaks), methodology zeros (database fallback for verse count), duplicate methodology sections (regex now handles missing `---` separator), and trailing `---` concatenated to text.
