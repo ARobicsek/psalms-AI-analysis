@@ -8,6 +8,32 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 284 (2026-03-04): Micro Agent Cost Investigation & Optimization Proposal
+
+**Objective**: Investigate why Psalm 22's pipeline run cost >$6 (with $3+ from Sonnet 4.6 alone) and propose cost reduction strategies for the micro analyst agent.
+
+**Problems Identified**:
+- Stage 1 (Discovery Pass) was called **3 times** for Psalm 22 due to JSON truncation — the 70%/30% thinking/text budget split left only ~19K tokens for text output, but the model needed ~25K+ tokens. Two retries = 2/3 of the Sonnet 4.6 cost wasted.
+- Multiple output fields (`thesis_connection`, `poetic_features`, `lxx_insights`, `puzzles`) are generated but never consumed by any active downstream agent.
+- `_get_psalm_text()` in `master_editor_v2.py` and Insight Extractor pipeline code read `hebrew_text` and `english_text` from micro JSON, but those fields don't exist in the `VerseCommentary` schema — results in empty strings.
+- `commentary` field is generated at full length (~200-400 words per verse) but the Master Writer truncates it to 500 chars.
+- With Insight Extractor and Question Curator now skipped by default (since Session 280), the only active consumers of micro output are Stage 2 (research requests) and the Master Writer.
+
+**Research Conducted**:
+1. Traced complete data flow from micro JSON through all downstream consumers (Stage 2, Insight Extractor, Question Curator, Master Writer).
+2. Analyzed Psalm 22 log file (`micro_analyst_v2_20260302_225416.log`) — confirmed 3 API calls, each with ~45K thinking tokens + ~25K output tokens.
+3. Documented which JSON fields are used by each consumer and which are dead weight.
+4. Confirmed phonetic transcription is programmatically generated (not LLM), stored in micro JSON as data shuttle, and correctly passed to Master Writer via `_format_phonetic_section()`.
+
+**Deliverable**:
+- Created `docs/architecture/MICRO_AGENT_OPTIMIZATION_PROPOSAL.md` with 5 optimization options (A-E), estimated savings, and recommended implementation order.
+- Key recommendation: Slim the discovery schema (Option A) to prevent retries — expected to reduce micro cost from ~$3.20 to ~$0.77-1.20 per psalm.
+
+**Files Created**:
+- `docs/architecture/MICRO_AGENT_OPTIMIZATION_PROPOSAL.md` — Full optimization proposal with cost analysis
+
+---
+
 ## Session 283 (2026-03-03): Fix Divine Name Punctuation Dropping
 
 **Objective**: Investigate and fix an issue where the Hebrew divine name YHWH is being rendered as `ה` instead of `ה׳` (dropping the trailing Geresh) in the final DOCX output.

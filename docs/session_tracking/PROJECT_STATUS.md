@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-03 (Session 283)
+**Last Updated**: 2026-03-04 (Session 284)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 282
+- **Current Session**: 284
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Fix Divine Name Punctuation Dropping (Session 283)
+### 1. Micro Agent Cost Investigation & Optimization Proposal (Session 284)
+- Investigated Psalm 22 pipeline cost ($6+ total, $3+ from Sonnet 4.6 micro agent alone); root cause: **3 retries** of Stage 1 Discovery Pass due to JSON output truncation (70% thinking budget left insufficient room for ~25K tokens of text output).
+- Traced complete data flow from micro JSON through all downstream consumers; identified multiple unused output fields and a `hebrew_text`/`english_text` bug in `_get_psalm_text()`.
+- Created `docs/architecture/MICRO_AGENT_OPTIMIZATION_PROPOSAL.md` with 5 optimization options; recommended schema slimming + thinking budget reduction to cut micro cost from ~$3.20 to ~$0.77-1.20 per psalm.
+
+### 2. Fix Divine Name Punctuation Dropping (Session 283)
 - Investigated and fixed an issue where the Hebrew divine name `ה׳` (YHWH replacement) was rendering incorrectly as `ה` without the trailing Geresh in generated DOCX files (e.g., Psalm 37).
 - Discovered that the `_split_into_grapheme_clusters` regex in both document generators (`document_generator.py` and `combined_document_generator.py`) did not include Unicode Hebrew punctuation characters like Geresh and Gershayim as valid base characters.
 - Updated the regex pattern to explicitly include Geresh (`\u05F3`), Gershayim (`\u05F4`), and Paseq (`\u05C0`), preventing these characters from being silently dropped during RTL reversal algorithms.
