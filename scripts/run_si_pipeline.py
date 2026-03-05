@@ -525,8 +525,9 @@ def run_enhanced_pipeline(
                 research_file=research_file,
                 insights_file=insights_file if insights_file.exists() else None,
                 psalm_number=psalm_number,
-                reader_questions_file=reader_questions_file if reader_questions_file.exists() else None,
-                special_instruction=special_instruction
+                reader_questions_file=None if skip_questions else (reader_questions_file if reader_questions_file.exists() else None),
+                special_instruction=special_instruction,
+                suppress_questions=skip_questions
             )
             
             # Save outputs
@@ -535,8 +536,8 @@ def run_enhanced_pipeline(
             with open(edited_verses_file, 'w', encoding='utf-8') as f:
                 f.write(result['verse_commentary'])
                 
-            # Handle reader questions
-            if result.get('reader_questions'):
+            # Handle reader questions (only save if questions are enabled)
+            if not skip_questions and result.get('reader_questions'):
                 refined_q_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
                 questions_text = result['reader_questions']
                 questions = []
@@ -676,6 +677,9 @@ def run_enhanced_pipeline(
         except Exception as e:
             logger.warning(f"Failed to extract copy-edited sections: {e}; using original writer output for DOCX")
 
+    # --- Save stats again after copy editor (so DOCX picks up copy_editor model) ---
+    tracker.save_json(str(output_path))
+
     # =====================================================================
     # STEP 6: Word Doc
     # =====================================================================
@@ -685,10 +689,13 @@ def run_enhanced_pipeline(
         print(f"STEP 6: Word Document Generation (.docx)")
         print(f"{'='*80}\n")
         from src.utils.document_generator import DocumentGenerator
-        
+
         try:
-            refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
-            q_file = refined_q if refined_q.exists() else (reader_questions_file if reader_questions_file.exists() else None)
+            if skip_questions:
+                q_file = None
+            else:
+                refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
+                q_file = refined_q if refined_q.exists() else (reader_questions_file if reader_questions_file.exists() else None)
             
             gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file, docx_output_file, q_file)
             gen.generate()

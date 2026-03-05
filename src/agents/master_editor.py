@@ -417,13 +417,16 @@ class MasterEditor(MasterEditorV2):
     """
 
     def _format_analysis_for_prompt(self, analysis: Dict, analysis_type: str) -> str:
-        """Override to use v4 labels (no pipeline terminology).
+        """Override to use v4 labels and include lexical insights for micro.
 
         Changes from V2:
           - **Thesis:** -> **Central Reading:**
           - **Research Questions:** -> **Open Questions:**
           - **Interesting Questions:** -> **Open Questions:**
+          - Micro: includes lexical_insights (phrase + notes) per verse
         """
+        NL = "\n"
+
         if analysis_type == "macro":
             lines = []
             lines.append(f"**Central Reading:** {analysis.get('thesis_statement', 'N/A')}")
@@ -432,7 +435,7 @@ class MasterEditor(MasterEditorV2):
 
             structure = analysis.get('structural_outline', [])
             if structure:
-                lines.append("\\n**Structure:**")
+                lines.append(f"{NL}**Structure:**")
                 for div in structure:
                     section = div.get('section', '')
                     theme = div.get('theme', '')
@@ -440,11 +443,11 @@ class MasterEditor(MasterEditorV2):
 
             questions = analysis.get('research_questions', [])
             if questions:
-                lines.append("\\n**Open Questions:**")
+                lines.append(f"{NL}**Open Questions:**")
                 for i, q in enumerate(questions, 1):
                     lines.append(f"  {i}. {q}")
 
-            return "\\n".join(lines)
+            return NL.join(lines)
 
         elif analysis_type == "micro":
             lines = []
@@ -453,17 +456,108 @@ class MasterEditor(MasterEditorV2):
             for v in verses:
                 verse_num = v.get('verse_number', v.get('verse', 0))
                 commentary = v.get('commentary', '')
-                lines.append(f"**Verse {verse_num}:** {commentary[:500]}...")
+                lines.append(f"**Verse {verse_num}:** {commentary[:500]}")
+
+                # Include lexical insights (phrase + notes) for the writer
+                lexical = v.get('lexical_insights', [])
+                for insight in lexical:
+                    if isinstance(insight, dict):
+                        phrase = insight.get('phrase', '')
+                        notes = insight.get('notes', '')
+                        if phrase and notes:
+                            lines.append(f"- {phrase}: {notes}")
+                    elif isinstance(insight, str):
+                        lines.append(f"- {insight}")
 
             questions = analysis.get('interesting_questions', [])
             if questions:
-                lines.append("\\n**Open Questions:**")
+                lines.append(f"{NL}**Open Questions:**")
                 for i, q in enumerate(questions, 1):
                     lines.append(f"  {i}. {q}")
 
-            return "\\n".join(lines)
+            return NL.join(lines)
 
         return str(analysis)
+
+    def write_commentary(
+        self,
+        macro_file: Path,
+        micro_file: Path,
+        research_file: Path,
+        insights_file: Optional[Path] = None,
+        psalm_number: Optional[int] = None,
+        reader_questions_file: Optional[Path] = None,
+        suppress_questions: bool = False
+    ) -> Dict[str, str]:
+        """Override V2 to add suppress_questions parameter.
+
+        When suppress_questions=True, all question sections are stripped from
+        the Writer prompt (saving output tokens) and no questions are returned.
+        """
+        self._suppress_questions = suppress_questions
+        result = super().write_commentary(
+            macro_file=macro_file,
+            micro_file=micro_file,
+            research_file=research_file,
+            insights_file=insights_file,
+            psalm_number=psalm_number,
+            reader_questions_file=reader_questions_file
+        )
+        self._suppress_questions = False
+
+        if suppress_questions:
+            result.pop('reader_questions', None)
+
+        return result
+
+    def _get_psalm_text(self, psalm_number: int, micro_analysis: Dict) -> str:
+        """Override V2 method to use database lookup for Hebrew/English text.
+
+        The V2 version tried to read hebrew_text/english_text from the micro JSON,
+        but those fields never existed in the VerseCommentary schema. This override
+        pulls actual text from the database and phonetics from the micro JSON.
+        """
+        from src.data_sources.tanakh_database import TanakhDatabase
+
+        lines = [f"## Psalm {psalm_number} Text\n"]
+
+        # Get actual Hebrew/English from database
+        try:
+            db = TanakhDatabase(Path("database/tanakh.db"))
+            psalm = db.get_psalm(psalm_number)
+            if psalm:
+                # Build a verse lookup from micro analysis for phonetics
+                verses_micro = micro_analysis.get('verse_commentaries', micro_analysis.get('verses', []))
+                phonetic_map = {}
+                for v in verses_micro:
+                    vn = v.get('verse_number', v.get('verse', 0))
+                    phonetic_map[vn] = v.get('phonetic_transcription', '')
+
+                for verse in psalm.verses:
+                    v_num = verse.verse
+                    lines.append(f"### Verse {v_num}")
+                    lines.append(f"**Hebrew:** {verse.hebrew}")
+                    lines.append(f"**English:** {verse.english}")
+                    phonetic = phonetic_map.get(v_num, '')
+                    if phonetic:
+                        lines.append(f"**Phonetic:** {phonetic}")
+                    lines.append("")
+
+                return "\n".join(lines)
+        except Exception as e:
+            self.logger.warning(f"Database lookup failed for psalm text: {e}")
+
+        # Fallback: phonetics only from micro JSON (original V2 behavior)
+        verses = micro_analysis.get('verse_commentaries', micro_analysis.get('verses', []))
+        for v in verses:
+            verse_num = v.get('verse_number', v.get('verse', 0))
+            phonetic = v.get('phonetic_transcription', '')
+            lines.append(f"### Verse {verse_num}")
+            if phonetic:
+                lines.append(f"**Phonetic:** {phonetic}")
+            lines.append("")
+
+        return "\n".join(lines)
 
     def _perform_writer_synthesis(
         self,
@@ -480,6 +574,10 @@ class MasterEditor(MasterEditorV2):
     ) -> Dict[str, str]:
         """Override to use unified V4 prompt. The is_college flag is accepted
         for backward compatibility but ignored — V4 uses a single prompt."""
+
+        # Force-suppress questions when suppress_questions flag is set by write_commentary
+        if getattr(self, '_suppress_questions', False):
+            reader_questions = "[No reader questions provided]"
 
         # Format common inputs
         macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")

@@ -103,12 +103,14 @@ class MasterEditorSI(MasterEditor):
         insights_file: Optional[Path] = None,
         psalm_number: Optional[int] = None,
         reader_questions_file: Optional[Path] = None,
-        special_instruction: str = None
+        special_instruction: str = None,
+        suppress_questions: bool = False
     ) -> Dict[str, str]:
         """
         Generate unified commentary WITH Special Instruction.
         Overrides MasterEditor.write_commentary.
         """
+        self._suppress_questions = suppress_questions
         self.special_instruction = special_instruction
         self.logger.info("Starting Master Writer commentary generation (SI V4 Edition)")
 
@@ -154,7 +156,7 @@ class MasterEditorSI(MasterEditor):
            except Exception as e:
                self.logger.warning(f"Could not load reader questions: {e}")
 
-        if reader_questions == "[No reader questions provided]":
+        if not suppress_questions and reader_questions == "[No reader questions provided]":
              reader_questions_list = macro_analysis.get('research_questions', []) + micro_analysis.get('interesting_questions', [])
              if reader_questions_list:
                  reader_questions = "\\n".join(f"{i+1}. {q}" for i, q in enumerate(reader_questions_list[:10]))

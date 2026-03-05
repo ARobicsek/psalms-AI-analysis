@@ -545,22 +545,34 @@ def run_enhanced_pipeline(
                 elif isinstance(micro_analysis, dict):
                     verses = micro_analysis.get('verse_commentaries', [])
                     
+                # Build psalm text from database (hebrew_text/english_text don't exist in micro JSON)
+                # and add phonetics from micro analysis
                 if verses:
-                    verse_texts = []
+                    # Handle Pydantic object or dict
+                    def get_attr(obj, name, default=''):
+                        if isinstance(obj, dict): return obj.get(name, default)
+                        return getattr(obj, name, default)
+
+                    # Build phonetic lookup from micro analysis
+                    phonetic_map = {}
                     for v in verses:
-                         # Handle Pydantic object or dict
-                         def get_attr(obj, name, default=''):
-                             if isinstance(obj, dict): return obj.get(name, default)
-                             return getattr(obj, name, default)
-                             
-                         v_num = get_attr(v, 'verse_number') or get_attr(v, 'verse', 0)
-                         heb = get_attr(v, 'hebrew_text', '')
-                         eng = get_attr(v, 'english_text', '')
-                         phon = get_attr(v, 'phonetic_transcription', '')
-                         
-                         verse_block = f"Verse {v_num}:\nHebrew: {heb}\nEnglish: {eng}\nPhonetic: {phon}"
-                         verse_texts.append(verse_block)
-                    p_text = "\n\n".join(verse_texts)
+                        v_num = get_attr(v, 'verse_number') or get_attr(v, 'verse', 0)
+                        phon = get_attr(v, 'phonetic_transcription', '')
+                        if phon:
+                            phonetic_map[v_num] = phon
+
+                    # Get actual text from database
+                    db = TanakhDatabase(Path(db_path))
+                    p = db.get_psalm(psalm_number)
+                    if p:
+                        verse_texts = []
+                        for pv in p.verses:
+                            phon = phonetic_map.get(pv.verse, '')
+                            verse_block = f"Verse {pv.verse}:\nHebrew: {pv.hebrew}\nEnglish: {pv.english}"
+                            if phon:
+                                verse_block += f"\nPhonetic: {phon}"
+                            verse_texts.append(verse_block)
+                        p_text = "\n\n".join(verse_texts)
 
                 if not p_text:
                     db = TanakhDatabase(Path(db_path))
@@ -606,7 +618,8 @@ def run_enhanced_pipeline(
                 research_file=research_file,
                 insights_file=None if exclude_insights else (insights_file if insights_file.exists() else None),
                 psalm_number=psalm_number,
-                reader_questions_file=None if exclude_questions else (reader_questions_file if reader_questions_file.exists() else None)
+                reader_questions_file=None if (exclude_questions or skip_questions) else (reader_questions_file if reader_questions_file.exists() else None),
+                suppress_questions=(exclude_questions or skip_questions)
             )
             
             # Save outputs
@@ -615,8 +628,8 @@ def run_enhanced_pipeline(
             with open(edited_verses_file, 'w', encoding='utf-8') as f:
                 f.write(result['verse_commentary'])
                 
-            # Handle reader questions (skip if --skip-questions)
-            if not exclude_questions and result.get('reader_questions'):
+            # Handle reader questions (only save if questions are enabled)
+            if not exclude_questions and not skip_questions and result.get('reader_questions'):
                 refined_q_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
                 questions_text = result['reader_questions']
                 questions = []
@@ -759,6 +772,9 @@ def run_enhanced_pipeline(
         except Exception as e:
             logger.warning(f"Failed to extract copy-edited sections: {e}; using original writer output for DOCX")
 
+    # --- Save stats again after copy editor (so DOCX picks up copy_editor model) ---
+    tracker.save_json(str(output_path))
+
     # =====================================================================
     # STEP 6: Word Doc
     # =====================================================================
@@ -770,7 +786,7 @@ def run_enhanced_pipeline(
         from src.utils.document_generator import DocumentGenerator
         
         try:
-            if exclude_questions:
+            if exclude_questions or skip_questions:
                 q_file = None
             else:
                 refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"

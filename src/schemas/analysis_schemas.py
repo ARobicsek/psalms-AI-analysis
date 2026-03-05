@@ -135,11 +135,11 @@ class MacroAnalysis:
 class VerseCommentary:
     """Detailed commentary for a single verse from Pass 2."""
     verse_number: int
-    commentary: str  # Full verse-by-verse analysis
-    lexical_insights: List[Union[str, Dict[str, Any]]] = field(default_factory=list)  # Key words analyzed - supports both legacy string format and new structured format with phrase/variants
+    commentary: str  # 1-2 sentence observation summary
+    lexical_insights: List[Union[str, Dict[str, Any]]] = field(default_factory=list)  # Key words analyzed - supports both legacy string format and new structured format with phrase/variants/notes
     figurative_analysis: List[str] = field(default_factory=list)  # Metaphors, etc.
-    thesis_connection: str = ""  # How this verse supports overall thesis
-    phonetic_transcription: str = ""  # NEW: IPA-like phonetic transcription
+    thesis_connection: str = ""  # LEGACY — no longer generated, kept for backward compat with existing JSON files
+    phonetic_transcription: str = ""  # IPA-like phonetic transcription (programmatically generated, not LLM)
 
 
 @dataclass
@@ -151,9 +151,9 @@ class MicroAnalysis:
     """
     psalm_number: int
     verse_commentaries: List[VerseCommentary] = field(default_factory=list)
-    thematic_threads: List[str] = field(default_factory=list)  # Themes across verses
+    thematic_threads: List[str] = field(default_factory=list)  # LEGACY — no longer generated, kept for backward compat
     interesting_questions: List[str] = field(default_factory=list)  # Questions about words, phrases, devices
-    synthesis_notes: str = ""  # Notes for Pass 3 synthesis
+    synthesis_notes: str = ""  # LEGACY — no longer generated, kept for backward compat
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
@@ -180,7 +180,7 @@ class MicroAnalysis:
         )
 
     def to_markdown(self) -> str:
-        """Format as markdown for human reading and Pass 3 input."""
+        """Format as markdown for human reading."""
         lines = [
             f"# Micro Analysis: Psalm {self.psalm_number}",
             "",
@@ -190,7 +190,6 @@ class MicroAnalysis:
         for vc in self.verse_commentaries:
             lines.append(f"\n### Verse {vc.verse_number}")
 
-            # NEW: Add phonetic transcription before commentary
             if vc.phonetic_transcription:
                 lines.append(f"\n**Phonetic**: `{vc.phonetic_transcription}`\n")
 
@@ -199,16 +198,23 @@ class MicroAnalysis:
             if vc.lexical_insights:
                 lines.append("\n**Lexical Insights:**")
                 for insight in vc.lexical_insights:
-                    lines.append(f"- {insight}")
+                    if isinstance(insight, dict):
+                        phrase = insight.get('phrase', '')
+                        notes = insight.get('notes', '')
+                        lines.append(f"- {phrase}: {notes}" if notes else f"- {phrase}")
+                    else:
+                        lines.append(f"- {insight}")
 
             if vc.figurative_analysis:
                 lines.append("\n**Figurative Analysis:**")
                 for analysis in vc.figurative_analysis:
                     lines.append(f"- {analysis}")
 
+            # Legacy fields — render only if present (backward compat with old JSON)
             if vc.thesis_connection:
                 lines.append(f"\n**Connection to Thesis:** {vc.thesis_connection}")
 
+        # Legacy fields — render only if present
         if self.thematic_threads:
             lines.append("\n## Thematic Threads")
             for i, thread in enumerate(self.thematic_threads, 1):

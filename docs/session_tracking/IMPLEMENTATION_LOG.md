@@ -8,6 +8,43 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 285 (2026-03-04): Micro Agent Optimization — Implementation
+
+**Objective**: Implement the micro agent optimization proposal from Session 284: slim the discovery schema, pass lexical insights to the Writer, reduce thinking budget, and fix multiple pipeline bugs.
+
+**Problems Identified**:
+- Discovery Pass prompt requested 7 per-verse fields; 3 were discarded by Python (`poetic_features`, `lxx_insights`, `puzzles`), 3 were stored but never consumed (`thesis_connection`, `thematic_threads`, `synthesis_notes`). ~65-68% of micro output was dead weight.
+- `lexical_insights.notes` — the richest philological content — was invisible to the Master Writer. Only `commentary[:500]` and `interesting_questions` reached it.
+- `_get_psalm_text()` in `master_editor_v2.py` read `hebrew_text`/`english_text` from micro JSON, but those fields don't exist. Writer received empty Hebrew/English text for all previous runs.
+- `_format_analysis_for_prompt()` in V4 `MasterEditor` used double-escaped `\\n` instead of `\n`, producing single-line output instead of formatted text. Pre-existing bug since Session 269.
+- Master Writer generated "Refined Reader Questions" even when `--include-questions` was NOT used (default skip), because the fallback logic populated questions from macro/micro analysis.
+- Copy editor model not listed in DOCX methodology because `pipeline_stats.json` was saved to disk before the copy editor ran, and the DOCX generator read the stale file.
+- Insight Extractor psalm text builder tried `hebrew_text`/`english_text` from micro JSON (always empty), with a broken fallback that never triggered.
+
+**Solutions Implemented**:
+1. **Slimmed Discovery Prompt**: Removed `poetic_features`, `lxx_insights`, `puzzles`, `macro_relation`, `overall_patterns`, `research_priorities` from JSON schema. Instructed model to fold LXX/poetic/puzzle observations into `lexical_insights.notes` and `observations`.
+2. **Capped observations**: From "2-4 sentences" to "1-2 sentences" (Writer truncates to 500 chars anyway).
+3. **Reduced thinking budget**: 70% → 50% of `max_tokens` for long psalms.
+4. **Lexical insights passed to Writer**: `_format_analysis_for_prompt()` now includes `- phrase: notes` lines per verse.
+5. **Database-backed `_get_psalm_text()`**: New override in V4 `MasterEditor` pulls Hebrew/English from `tanakh.db`.
+6. **Fixed `\\n` bug**: Rewrote `_format_analysis_for_prompt()` using `NL = "\n"` variable to avoid escape issues.
+7. **Question suppression**: Added `suppress_questions` parameter to `write_commentary()` in both `MasterEditor` and `MasterEditorSI`; `_perform_writer_synthesis` intercepts and forces sentinel value so prompt-stripping logic removes all question sections. Pipeline passes `suppress_questions=True` when questions are skipped (default).
+8. **Copy editor stats timing**: Added `tracker.save_json()` after Step 5c (copy editor) and before Step 6 (DOCX) in both pipeline scripts.
+9. **Fixed Insight Extractor psalm text**: Uses database lookup instead of nonexistent micro JSON fields.
+10. **Updated `to_markdown()`**: Renders `lexical_insights` as `phrase: notes` instead of raw dict repr.
+
+**Test Run**: Psalm 134 (3 verses) — full pipeline, no errors, no retries. Micro output: 16,840 chars (all consumed). Writer prompt confirmed: Hebrew/English text present, lexical insights visible per verse, no question sections.
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` — Slimmed `DISCOVERY_PASS_PROMPT`, reduced thinking budget 70%→50%
+- `src/agents/master_editor.py` — Added `write_commentary(suppress_questions)`, `_get_psalm_text()` db override, lexical insights in `_format_analysis_for_prompt()`, fixed `\\n` bug
+- `src/agents/master_editor_si.py` — Added `suppress_questions` parameter, guarded question fallback
+- `src/schemas/analysis_schemas.py` — Marked legacy fields, improved `to_markdown()` for structured lexical insights
+- `scripts/run_enhanced_pipeline.py` — `suppress_questions` plumbing, `skip_questions` guards for question file saving/DOCX inclusion, stats save before DOCX, fixed Insight Extractor psalm text
+- `scripts/run_si_pipeline.py` — Same pipeline fixes (questions, stats timing)
+
+---
+
 ## Session 284 (2026-03-04): Micro Agent Cost Investigation & Optimization Proposal
 
 **Objective**: Investigate why Psalm 22's pipeline run cost >$6 (with $3+ from Sonnet 4.6 alone) and propose cost reduction strategies for the micro analyst agent.

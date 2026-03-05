@@ -105,13 +105,9 @@ Read through each verse ATOMICALLY, with FRESH EYES. For each verse, note:
      - With/without prefix: "צל כנפיך" (without ב)
      - Verb phrases by tense: "פקדת לילה" (perfect), "תפקד לילה" (imperfect), "פקד לילה" (infinitive)
    - DO NOT include synonyms - only morphological forms of the exact phrase
-2. **Poetic Patterns**: Parallelism? Wordplay? Sound patterns? Repetition?
-   - **IMPORTANT**: When analyzing sound patterns (alliteration, assonance), you MUST use the provided phonetic transcription as your ground truth. Do not guess at pronunciation.
-3. **Figurative Language**: Metaphors? Similes? Personification? What images are used?
-4. **Puzzles/Conundrums**: Ambiguous phrasing? Interpretive challenges? Strange syntax?
-5. **Surprises**: Anything unexpected given the genre/context?
-6. **LXX Insights**: How did ancient Greek translators interpret the Hebrew? Any revealing choices?
-7. **Connections**: Does this verse relate to macro thesis? If so, how? If NOT, what else is interesting?
+   - **NOTES**: Dense philological observation — root analysis, semantic range, wordplay, cross-references, theological significance. This is the most important field; it feeds directly to the commentary writer.
+2. **Figurative Language**: Metaphors? Similes? Personification? What images are used?
+3. **Observations**: 1-2 sentence summary of the verse's most interesting discovery. Be selective — highlight the single most striking or puzzling feature.
 
 IMPORTANT PRINCIPLES:
 - Be CURIOUS, not confirmatory
@@ -119,6 +115,7 @@ IMPORTANT PRINCIPLES:
 - The macro thesis may be WRONG or incomplete - find what's genuinely interesting
 - Look for LINGUISTIC puzzles, poetic cleverness, theological depth
 - Don't force everything to "support the thesis" - find intrinsic interest
+- Fold any LXX insights, poetic features, puzzles, or macro connections into `lexical_insights.notes` or `observations` — do NOT create separate fields for these
 
 After noting discoveries for each verse, formulate 5 or more **INTERESTING QUESTIONS** about:
 - Unusual word choices and phrases (e.g., why THIS word/phrase and not another?)
@@ -132,7 +129,7 @@ Examples of good questions:
 - "What is the function of the unusual phrase 'הֲדַר כְּבוֹד הוֹדֶךָ' - is this poetic accumulation or does each word contribute distinct meaning?"
 - "Why does the psalmist shift from perfect tense to imperfect at verse 7?"
 
-These questions should guide the Synthesizer and Editor to address genuinely interesting aspects of the psalm.
+These questions should guide the Master Writer to address genuinely interesting aspects of the psalm.
 
 ## WRITING DENSITY
 Output consumed by downstream AI agents. Maximize information density:
@@ -146,24 +143,20 @@ OUTPUT FORMAT: Return ONLY valid JSON. Do NOT include the phonetic transcription
   "verse_discoveries": [
     {
       "verse_number": 1,
-      "observations": "Quick summary of what's interesting/curious in this verse (2-4 sentences). Focus on discoveries, not analysis.",
-      "lexical_insights": [  // Hebrew words/phrases worth investigating
+      "observations": "1-2 sentence summary of the verse's most striking discovery.",
+      "lexical_insights": [
         {
-          "phrase": "בְּנֵי אֵלִים",  // Exact form from verse
-          "variants": [],  // Morphological variants of word or phrase that should be looked for
-          "notes": "Divine council beings - key theological term"  // Why worth investigating
+          "phrase": "בְּנֵי אֵלִים",
+          "variants": [],
+          "notes": "Divine council beings — key theological term. LXX 'υἱοὶ θεοῦ' preserves plural, showing early divine-beings interpretation. Rare in Psalter; cf. Job 1:6, 38:7"
         },
         {
           "phrase": "קוֹל",
-          "variants": ["קולו", "קולך", "קולי"],  // With possessive suffixes if context suggests
-          "notes": "Voice of divine speech - repeated formula"
+          "variants": ["קולו", "קולך", "קולי"],
+          "notes": "Voice of divine speech — repeated formula. Sevenfold anaphora = completeness. Sound pattern with surrounding consonants worth tracing"
         }
       ],
-      "poetic_features": ["anaphora setup", "divine council imagery"],
-      "figurative_elements": ["sons of gods - metaphor or literal?"],
-      "puzzles": ["Why 'sons of gods' (plural) in monotheistic psalm?"],
-      "lxx_insights": "LXX uses 'υἱοὶ θεοῦ' - shows early plural divine beings interpretation",
-      "macro_relation": "Supports divine council framework from thesis" // OR "Interesting independent of thesis: ..."
+      "figurative_elements": ["sons of gods - metaphor or literal?"]
     },
     {
       "verse_number": 2,
@@ -172,23 +165,12 @@ OUTPUT FORMAT: Return ONLY valid JSON. Do NOT include the phonetic transcription
     },
     ... (all Psalm {psalm_number} verses)
   ],
-  "overall_patterns": [
-    "Sevenfold 'voice of LORD' anaphora - completeness symbolism worth exploring",
-    "Geographic progression (waters → Lebanon → wilderness → temple) - cosmological journey?",
-    "Shift from imperative (vv.1-2) to descriptive (vv.3-9) to blessing (vv.10-11) - rhetorical strategy"
-  ],
   "interesting_questions": [
     "Why did the poet choose the phrase 'בְּנֵי אֵלִים' (sons of gods) rather than a more monotheistic formulation?",
     "What is the significance of the sevenfold repetition of 'קוֹל יְהוָה' (voice of the LORD)?",
     "How do the unusual word combinations like 'הֲדַר כְּבוֹד הוֹדֶךָ' function poetically?",
     "Why does the psalm shift from imperative to descriptive mood at verse 3?",
     "What does the rare word 'מַבּוּל' (flood) contribute to the cosmological imagery?"
-  ],
-  "research_priorities": [
-    "LEXICON: Focus on storm vocabulary, divine epithets, rare geographical terms",
-    "CONCORDANCE: Track 'voice of LORD' formula, divine council language, geographic patterns",
-    "FIGURATIVE: All verses with water/storm/nature imagery",
-    "COMMENTARY: Verses with interpretive puzzles (e.g., mabbul, divine council)"
   ]
 }
 
@@ -564,9 +546,9 @@ class MicroAnalystV2:
 
                 # Build thinking config: adaptive by default, budgeted on retry if adaptive burned all tokens
                 if use_budgeted_thinking:
-                    thinking_budget = int(current_max_tokens * 0.7)  # Reserve 30% for text output
+                    thinking_budget = int(current_max_tokens * 0.5)  # Reserve 50% for text output
                     thinking_config = {"type": "enabled", "budget_tokens": thinking_budget}
-                    self.logger.info(f"  Using budgeted thinking: {thinking_budget} tokens (30% reserved for text)")
+                    self.logger.info(f"  Using budgeted thinking: {thinking_budget} tokens (50% reserved for text)")
                 else:
                     thinking_config = {"type": "adaptive"}
 
@@ -871,7 +853,7 @@ class MicroAnalystV2:
                 commentary=disc.get('observations', ''),
                 lexical_insights=lexical_insights,
                 figurative_analysis=disc.get('figurative_elements', []),
-                thesis_connection=disc.get('macro_relation', ''),
+                thesis_connection=disc.get('macro_relation', ''),  # Legacy field — empty for new runs
                 phonetic_transcription=phonetic_data.get(disc['verse_number'], '[Transcription not found]')
             )
             verse_commentaries.append(vc)
@@ -880,9 +862,9 @@ class MicroAnalystV2:
         micro = MicroAnalysis(
             psalm_number=psalm_number,
             verse_commentaries=verse_commentaries,
-            thematic_threads=discoveries.get('overall_patterns', []),
+            thematic_threads=discoveries.get('overall_patterns', []),  # Legacy — empty for new runs
             interesting_questions=discoveries.get('interesting_questions', []),
-            synthesis_notes="\n".join(discoveries.get('research_priorities', []))
+            synthesis_notes="\n".join(discoveries.get('research_priorities', []))  # Legacy — empty for new runs
         )
 
         return micro

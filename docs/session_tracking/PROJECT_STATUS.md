@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-04 (Session 284)
+**Last Updated**: 2026-03-04 (Session 285)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 284
+- **Current Session**: 285
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Micro Agent Cost Investigation & Optimization Proposal (Session 284)
+### 1. Micro Agent Optimization — Implementation (Session 285)
+- Implemented Session 284 proposal: slimmed discovery schema (removed 6 dead fields), passed `lexical_insights` (phrase + notes) to Master Writer, reduced thinking budget 70%→50%. Expected ~75% micro cost reduction.
+- Fixed 5 bugs: `_get_psalm_text()` empty Hebrew/English (now uses database), `\\n` formatting bug in V4 `_format_analysis_for_prompt()`, questions generated when skipped (added `suppress_questions` plumbing), copy editor model missing from DOCX (stats save timing), Insight Extractor psalm text builder.
+- Test run: Psalm 134 full pipeline — no errors, no retries, all micro output consumed by downstream steps.
+
+### 2. Micro Agent Cost Investigation & Optimization Proposal (Session 284)
 - Investigated Psalm 22 pipeline cost ($6+ total, $3+ from Sonnet 4.6 micro agent alone); root cause: **3 retries** of Stage 1 Discovery Pass due to JSON output truncation (70% thinking budget left insufficient room for ~25K tokens of text output).
 - Traced complete data flow from micro JSON through all downstream consumers; identified multiple unused output fields and a `hebrew_text`/`english_text` bug in `_get_psalm_text()`.
 - Created `docs/architecture/MICRO_AGENT_OPTIMIZATION_PROPOSAL.md` with 5 optimization options; recommended schema slimming + thinking budget reduction to cut micro cost from ~$3.20 to ~$0.77-1.20 per psalm.
