@@ -113,16 +113,32 @@ class DivineNamesModifier:
         return modified
 
     def _modify_el_tzere(self, text: str) -> str:
-        """Replace אֵל (with tzere) with קֵל, but NOT אֶל (with segol)"""
+        """Replace אֵל (with tzere) with קֵל, but NOT אֶל (with segol). Also handles אֵלִי (my God)."""
+        modified = text
+        
+        # Pattern 1: Basic אֵל (El)
         # Include markdown formatting chars (*_) and punctuation as valid word boundaries
-        pattern = r'(^|[\s\-\u05BE*_.,;:!?\"\'()\[\]{}])אֵ([\u0591-\u05C7]*)ל(?=[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]|$)'
+        pattern_base = r'(^|[\s\-\u05BE*_.,;:!?\"\'()\[\]{}])אֵ([\u0591-\u05C7]*)ל(?=[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]|$)'
 
-        def replacer(match):
+        def replacer_base(match):
             prefix = match.group(1)
             cantillation = match.group(2)
             return f"{prefix}קֵ{cantillation}ל"
 
-        modified = re.sub(pattern, replacer, text)
+        modified = re.sub(pattern_base, replacer_base, modified)
+        
+        # Pattern 2: אֵלִי (Eli - "my God")
+        # Exact match for Alef-Tzere-Lamed-Chiriq-Yod to avoid names like Elijah
+        pattern_eli = r'(^|[\s\-\u05BE*_.,;:!?\"\'()\[\]{}])אֵ([\u0591-\u05C7]*)לִ([\u0591-\u05C7]*)י(?=[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]|$)'
+        
+        def replacer_eli(match):
+            prefix = match.group(1)
+            cantillation1 = match.group(2)
+            cantillation2 = match.group(3)
+            return f"{prefix}קֵ{cantillation1}לִ{cantillation2}י"
+
+        modified = re.sub(pattern_eli, replacer_eli, modified)
+
         return modified
 
     def _modify_tzevaot(self, text: str) -> str:
@@ -213,6 +229,7 @@ class DivineNamesModifier:
             r'יהוה',  # Tetragrammaton
             r'אלהים',  # Elohim
             r'(^|[\s\-\u05BE])אֵ[\u0591-\u05C7]*ל(?=[\s\-\u05BE]|$)',  # El
+            r'(^|[\s\-\u05BE])אֵ[\u0591-\u05C7]*לִ[\u0591-\u05C7]*י(?=[\s\-\u05BE]|$)',  # Eli
             r'צבאות',  # Tzevaot
             r'(^|[\s\-\u05BE.,;:!?])שדי',  # Shaddai
             r'אלוה',  # Eloah

@@ -8,6 +8,22 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 286 (2026-03-04): Fixing Divine Names Modifier for Eli
+
+**Objective**: Fix the divine names modifier to correctly capture the possessive suffix forms like `אֵלִי` (Eli) without matching improper prefixes.
+
+**Problems Identified**:
+- `אֵלִי` ("My God") wasn't picked up by the Divine Names modifier in Psalm 22 because the Regex for El with Tzere (`_modify_el_tzere`) explicitly demanded a word boundary or punctuation immediately after the Lamed (`ל`), skipping forms with possessive suffixes.
+
+**Solutions Implemented**:
+1. Added a specific regex pattern `pattern_eli` to `_modify_el_tzere` to explicitly match `אֵלִי` (Alef-Tzere-Lamed-Chiriq-Yod) bounded by word boundaries, ensuring proper names like Eli or Elijah are ignored while still modifying the divine reference in Psalm 22:2.
+2. Updated `has_divine_names()` to detect the `אֵלִי` pattern.
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Updated `_modify_el_tzere` and `has_divine_names` with specific `אֵלִי` regex adjustments.
+
+---
+
 ## Session 285 (2026-03-04): Micro Agent Optimization — Implementation
 
 **Objective**: Implement the micro agent optimization proposal from Session 284: slim the discovery schema, pass lexical insights to the Writer, reduce thinking budget, and fix multiple pipeline bugs.

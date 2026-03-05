@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-04 (Session 285)
+**Last Updated**: 2026-03-04 (Session 286)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 285
+- **Current Session**: 286
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -59,6 +59,11 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 ---
 
 ## Recent Work Summary
+
+### 1. Fix Divine Names Modifier for Eli (Session 286)
+- Identified that `אֵלִי` ("My God") in Psalm 22:2 was safely ignored by the divine names modifier because the regex for `אֵל` requires an immediate word boundary after the Lamed (`ל`).
+- Added a highly specific exception regex pattern (`pattern_eli`) in `divine_names_modifier.py` explicitly for Alef-Tzere-Lamed-Chiriq-Yod.
+- Confirmed fix accurately captures Psalm 22:2 (`קֵלִי קֵלִי`) without falsely translating proper names possessing different vowel points or initial letters (e.g., `עֵלִי` or `אֵלִיָּהוּ`).
 
 ### 1. Micro Agent Optimization — Implementation (Session 285)
 - Implemented Session 284 proposal: slimmed discovery schema (removed 6 dead fields), passed `lexical_insights` (phrase + notes) to Master Writer, reduced thinking budget 70%→50%. Expected ~75% micro cost reduction.
