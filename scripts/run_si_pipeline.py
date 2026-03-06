@@ -282,14 +282,24 @@ def run_enhanced_pipeline(
     insights_file = output_path / f"psalm_{psalm_number:03d}_insights.json"
     
     # Load Special Instruction
+    # Auto-detect from data/special_instructions/ if not explicitly provided
     special_instruction = None
+    if not special_instruction_file:
+        project_root = Path(__file__).parent.parent
+        auto_si_path = project_root / "data" / "special_instructions" / f"special_instructions_Psalm_{psalm_number:03d}.txt"
+        if auto_si_path.exists():
+            special_instruction_file = str(auto_si_path)
+            logger.info(f"Auto-detected special instruction file: {auto_si_path}")
+        else:
+            logger.info(f"No special instruction file found at {auto_si_path} (this is OK)")
+
     if special_instruction_file:
         si_path = Path(special_instruction_file)
         if si_path.exists():
             try:
                 with open(si_path, 'r', encoding='utf-8') as f:
                     special_instruction = f.read()
-                logger.info(f"Loaded special instruction from {si_path}")
+                logger.info(f"Loaded special instruction ({len(special_instruction):,} chars) from {si_path}")
             except Exception as e:
                 logger.error(f"Failed to load special instruction file: {e}")
         else:
@@ -458,9 +468,25 @@ def run_enhanced_pipeline(
             logger.warning(f"Question curation failed: {e}")
 
     # =====================================================================
-    # STEP 2c: Insight Extraction
+    # STEP 2c: Research Trimming + Insight Extraction
     # =====================================================================
     curated_insights = None
+    # Always trim research first and save to disk, as other steps may rely on it
+    trimmed = None
+    if not smoke_test:
+        if 'research_bundle_content' not in locals():
+            if research_file.exists():
+                with open(research_file, 'r', encoding='utf-8') as f: research_bundle_content = f.read()
+            else:
+                research_bundle_content = ""
+
+        if research_bundle_content:
+            trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
+            trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
+            with open(trimmed_research_file, 'w', encoding='utf-8') as f:
+                f.write(trimmed)
+            logger.info(f"Saved trimmed research bundle ({len(trimmed):,} chars) to {trimmed_research_file}")
+
     if smoke_test:
         logger.info("[STEP 2c] SMOKE TEST Insights")
         curated_insights = {"psalm_level_insights": [], "verse_insights": {}}
@@ -474,11 +500,6 @@ def run_enhanced_pipeline(
         else:
             logger.info("[STEP 2c] Extracting Insights...")
             try:
-                # Load content if needed
-                if 'research_bundle_content' not in locals():
-                    with open(research_file, 'r', encoding='utf-8') as f: research_bundle_content = f.read()
-
-                trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
                 extractor = InsightExtractor(cost_tracker=cost_tracker)
 
                 # Get psalm text
@@ -782,6 +803,9 @@ if __name__ == "__main__":
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
     print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
     print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
+    # Show SI status: auto-detect if not explicitly provided
+    si_display = args.special_instruction if args.special_instruction else "AUTO-DETECT"
+    print(f"Special Instruction: {si_display}")
     print()
 
     run_enhanced_pipeline(

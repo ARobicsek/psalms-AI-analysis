@@ -8,6 +8,23 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 287 (2026-03-05): Fix SI Pipeline Auto-Detection & Research Trimming
+
+**Objective**: Ensure the `run_si_pipeline.py` script automatically detects special instruction files and correctly generates the trimmed research bundle.
+
+**Problems Identified**:
+- `run_si_pipeline.py` did not automatically load special instructions from `data/special_instructions/` based on the psalm number; it only loaded them if `--special-instruction` was explicitly passed. This resulted in the Master Writer ignoring the instruction entirely.
+- Unlike `run_enhanced_pipeline.py`, the SI pipeline trimmed the research bundle in memory for Insight Extraction but **failed to save it to disk** as `psalm_NNN_research_trimmed.md`, breaking the expected file outputs.
+
+**Solutions Implemented**:
+1. Added auto-detection logic to `run_si_pipeline.py` checking for `data/special_instructions/special_instructions_Psalm_NNN.txt` when no explicit flag is provided. Added an SI status indicator to the startup banner.
+2. Added the missing file generation step to save `psalm_NNN_research_trimmed.md` to disk *before* Insight Extraction runs. Refactored the Insight Extractor block to use this newly trimmed variable instead of unnecessarily re-trimming the bundle.
+
+**Files Modified**:
+- `scripts/run_si_pipeline.py` - Implemented auto-detection of SI files and generation/saving of `research_trimmed.md`.
+
+---
+
 ## Session 286 (2026-03-04): Fixing Divine Names Modifier for Eli
 
 **Objective**: Fix the divine names modifier to correctly capture the possessive suffix forms like `אֵלִי` (Eli) without matching improper prefixes.

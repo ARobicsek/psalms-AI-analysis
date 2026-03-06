@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-04 (Session 286)
+**Last Updated**: 2026-03-05 (Session 287)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 286
+- **Current Session**: 287
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Fix Divine Names Modifier for Eli (Session 286)
+### 1. Fix SI Pipeline Auto-Detection & Research Trimming (Session 287)
+- Identified that `run_si_pipeline.py` required manual `--special-instruction` flags to pass author directives to the Master Writer, breaking the intended automation. Implemented auto-detection logic to automatically load matching files from the `data/special_instructions/` directory.
+- Discovered that the SI pipeline was trimming the research bundle in memory for Insight Extraction but failing to save the expected `psalm_NNN_research_trimmed.md` artifact to disk.
+- Added generation of the trimmed research file explicitly prior to Insight Extraction and refactored the extraction logic to consume the newly created artifact instead of unnecessarily re-trimming the text.
+
+### 2. Fix Divine Names Modifier for Eli (Session 286)
 - Identified that `אֵלִי` ("My God") in Psalm 22:2 was safely ignored by the divine names modifier because the regex for `אֵל` requires an immediate word boundary after the Lamed (`ל`).
 - Added a highly specific exception regex pattern (`pattern_eli`) in `divine_names_modifier.py` explicitly for Alef-Tzere-Lamed-Chiriq-Yod.
 - Confirmed fix accurately captures Psalm 22:2 (`קֵלִי קֵלִי`) without falsely translating proper names possessing different vowel points or initial letters (e.g., `עֵלִי` or `אֵלִיָּהוּ`).
