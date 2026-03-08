@@ -8,6 +8,55 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 290 (2026-03-08): Interactive Hebrew Concordance Tool
+
+**Objective**: Implement a standalone interactive CLI tool for Hebrew concordance searching across the Tanakh.
+
+**Solutions Implemented**:
+1. **Created `scripts/concordance_tool.py`** (~600 lines) — menu-driven CLI for searching Hebrew words/phrases across the entire Tanakh. Features:
+   - Input handling: accepts Hebrew with/without diacritics, normalizes to consonantal form
+   - 4 match modes: exact, prefix/suffix variations, substring/root, substring + AI filter
+   - 4 scope options: Tanakh, Torah, Prophets, Writings, or pick specific books
+   - 3 result modes: canonical order, random sample, AI-curated (Claude Haiku 4.5)
+   - Phrase search: consecutive words or same-verse any order
+   - Lexicon lookup: BDB + Klein dictionary entries via Sefaria API
+   - AI commentary: semantic range analysis via Claude Haiku 4.5
+   - AI false-match filter: removes unrelated substring matches using morphological analysis
+   - Cost display: shows token counts and dollar cost after every AI call
+   - Markdown export: saves to `output/concordance/search_{word}_{timestamp}.md`
+   - Post-results loop: refine, new search, export, AI commentary, lexicon lookup
+2. Added `dotenv` loading for `.env` file API key access
+
+**Files Created**:
+- `scripts/concordance_tool.py` — Interactive Hebrew concordance CLI tool
+
+---
+
+## Session 289 (2026-03-08): Session Management Cleanup
+
+**Objective**: Reduce session startup context from ~150KB to ~20KB and eliminate documentation duplication/staleness.
+
+**Problems Identified**:
+- `PROJECT_STATUS.md` (47KB) had duplicate "Recent Work" sections — the numbered list (25 entries) AND a stale "Last 3 Sessions" block (actually 15 sessions, stuck at Session 275)
+- Sessions 223-252 appeared verbatim in both `PROJECT_STATUS.md` and `IMPLEMENTATION_LOG.md`
+- `CLAUDE.md` was stale at Session 181 — 107 sessions behind
+- Session START prompt required reading 3 files (~150KB total context) when only 1 was needed
+- `scriptReferences.md` had stale "6-category" description for copy editor (expanded to 9 in Session 288)
+
+**Solutions Implemented**:
+1. **Restructured `PROJECT_STATUS.md`** — Added Quick Context section (project one-liner, key directories, quick commands), trimmed Recent Work to last 5 sessions only, deleted stale "Last 3 Sessions" block, removed duplicate session history, consolidated Reference Materials. File reduced from 47KB/632 lines to ~10KB/271 lines.
+2. **Rewrote `SESSION_PROMPTS.md`** — Tiered loading: only `PROJECT_STATUS.md` is required reading at startup; `scriptReferences.md`, `TECHNICAL_ARCHITECTURE_SUMMARY.md`, and `IMPLEMENTATION_LOG.md` are listed as "load if needed". Simplified END prompt to update only 2 places instead of 3.
+3. **Refreshed `CLAUDE.md`** — Updated "Recent Major Changes" to sessions 285-289 (was 255-269), updated "Current Status" from Session 181 to 289.
+4. **Fixed `scriptReferences.md`** — Updated `run_copy_editor.py` description from "6-category" to "9-category" error taxonomy.
+
+**Files Modified**:
+- `docs/session_tracking/PROJECT_STATUS.md` — Major restructure (47KB → ~10KB)
+- `docs/session_tracking/SESSION_PROMPTS.md` — Complete rewrite with tiered loading
+- `CLAUDE.md` — Refreshed from Session 181 to 289
+- `docs/session_tracking/scriptReferences.md` — Fixed stale copy editor description
+
+---
+
 ## Session 288 (2026-03-07): Copy Editor Expansion — Categories 7-9 & Grammar Bloat Prevention
 
 **Objective**: Expand the copy editor's error taxonomy and the Master Writer's ground rules to catch factual errors, Hebrew grammar bloat, and strained arguments that slipped through in Psalm 38 review.
