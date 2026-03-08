@@ -8,6 +8,31 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 288 (2026-03-07): Copy Editor Expansion — Categories 7-9 & Grammar Bloat Prevention
+
+**Objective**: Expand the copy editor's error taxonomy and the Master Writer's ground rules to catch factual errors, Hebrew grammar bloat, and strained arguments that slipped through in Psalm 38 review.
+
+**Problems Identified**:
+- Copy editor (6 categories) missed four classes of error in Psalm 38: (1) reversed Hebrew word order when citing Ps 22:20, (2) a "descending causal chain" with arrows pointing from effects to causes, (3) incorrect "third-person" label for first-person verses, (4) excessive Hebrew grammar parsing labels (Hiphil perfect, Niphal, etc.) with no interpretive purpose.
+- `max_tokens=32768` was insufficient for the copy editor — output truncated mid-verse-13, losing the Changes section entirely.
+- Unicode box-drawing characters (`═`) in `_print_summary()` crashed on Windows cp1252 console.
+
+**Solutions Implemented**:
+1. Added **Category 7 (Factual/Textual Accuracy)** — verifies claims about biblical texts (word order, grammatical person, shared phrasing).
+2. Added **Category 8 (Hebrew Grammar Bloat)** — removes stem/tense/person annotations that add no interpretive value.
+3. Added **Category 9 (Strained Arguments)** — catches reversed causation, forced categories, non sequitur conclusions, and strained intertextual logic.
+4. Added **Rule 3b (Don't Over-Label Hebrew Grammar)** to `MASTER_WRITER_PROMPT_V4` with before/after examples.
+5. Increased copy editor `max_tokens` from 32768 to 65536.
+6. Fixed Windows encoding crash: replaced `═` with `=` in `_print_summary()`.
+7. Verified: re-run on Psalm 38 caught all 4 original issues plus 5 bonus corrections (9 total changes).
+
+**Files Modified**:
+- `src/agents/copy_editor.py` - Added categories 7-9, increased max_tokens, fixed Windows encoding, updated docstrings and count ranges
+- `src/agents/master_editor.py` - Added Rule 3b (Don't Over-Label Hebrew Grammar) to MASTER_WRITER_PROMPT_V4
+- `docs/session_tracking/scriptReferences.md` - Updated copy_editor.py description to 9-category taxonomy
+
+---
+
 ## Session 287 (2026-03-05): Fix SI Pipeline Auto-Detection & Research Trimming
 
 **Objective**: Ensure the `run_si_pipeline.py` script automatically detects special instruction files and correctly generates the trimmed research bundle.

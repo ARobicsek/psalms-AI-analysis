@@ -31,7 +31,7 @@ Always read this file first when you need to find code.
 | `master_editor_si.py` | `src.agents` | Master Writer V4 with Special Instructions that supports author directives for alternative versions. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_si.py) |
 | `master_editor_old.py` | `src.agents` | Legacy Master Editor implementation (archived). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/master_editor_old.py) |
 | `phonetic_analyst.py` | `src.agents` | Transcribes Hebrew text into phonetic/syllabic structure based on reconstructed Biblical Hebrew phonology. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/phonetic_analyst.py) |
-| `copy_editor.py` | `src.agents` | Post-generation QA: 6-category error taxonomy (structural claims, inconsistencies, form/content confusion, negative citations, Hebrew script, weak parallels). Opus 4.6 with adaptive thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/copy_editor.py) |
+| `copy_editor.py` | `src.agents` | Post-generation QA: 9-category error taxonomy (structural claims, inconsistencies, form/content confusion, negative citations, Hebrew script, weak parallels, factual/textual accuracy, grammar bloat, strained arguments). Opus 4.6 with adaptive thinking. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/agents/copy_editor.py) |
 
 ---
 

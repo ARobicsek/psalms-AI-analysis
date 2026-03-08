@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-05 (Session 287)
+**Last Updated**: 2026-03-07 (Session 288)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,8 +18,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 287
-- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (Pipeline-Integrated)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
+- **Current Session**: 288
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
 
@@ -60,7 +60,12 @@ Continuing with tweaks and improvements to the psalm readers guide generation pi
 
 ## Recent Work Summary
 
-### 1. Fix SI Pipeline Auto-Detection & Research Trimming (Session 287)
+### 1. Copy Editor Expansion — 9-Category Taxonomy (Session 288)
+- Expanded copy editor from 6 to 9 error categories: added factual/textual accuracy (7), Hebrew grammar bloat (8), and strained arguments (9) with sub-patterns for reversed causation, forced categories, non sequiturs, and strained intertextual logic.
+- Added Rule 3b (Don't Over-Label Hebrew Grammar) to Master Writer prompt to prevent grammar bloat at generation time.
+- Fixed copy editor truncation (max_tokens 32K→64K) and Windows encoding crash. Verified: Psalm 38 re-run caught all 4 originally-missed issues plus 5 bonus corrections.
+
+### 2. Fix SI Pipeline Auto-Detection & Research Trimming (Session 287)
 - Identified that `run_si_pipeline.py` required manual `--special-instruction` flags to pass author directives to the Master Writer, breaking the intended automation. Implemented auto-detection logic to automatically load matching files from the `data/special_instructions/` directory.
 - Discovered that the SI pipeline was trimming the research bundle in memory for Insight Extraction but failing to save the expected `psalm_NNN_research_trimmed.md` artifact to disk.
 - Added generation of the trimmed research file explicitly prior to Insight Extraction and refactored the extraction logic to consume the newly created artifact instead of unnecessarily re-trimming the text.

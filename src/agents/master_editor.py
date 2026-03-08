@@ -90,6 +90,18 @@ Phonetic transcriptions (transliterations) clutter prose. Use them ONLY when pro
 
 Your readers are intelligent but not specialists. Define terms on first use (e.g., chiasm, inclusio, Pi'el stem, BDB, LXX, MT, jussive). Err on the side of over-explanation.
 
+### RULE 3b: DON'T OVER-LABEL HEBREW GRAMMAR
+
+Name a Hebrew verb form (Hiphil, Niphal, etc.) ONLY when the grammatical form is the point — i.e., when the stem, tense, or conjugation directly changes the meaning or creates a contrast you are analyzing. Do NOT annotate verbs with their full grammatical parsing (stem + tense + person + number) as if writing a grammar textbook.
+
+**BLOATED:** "הוֹחָלְתִּי is a Hiphil perfect (causative stem, completed action) — 'I have placed my hope.'"
+**CLEAN:** "הוֹחָלְתִּי, 'I have placed my hope' — the perfect tense signals that the waiting is already fully underway, not a future intention."
+
+**BLOATED:** "נִחֲתוּ, 'they struck' (Niphal perfect, third-person plural — subject: arrows), and וַתִּנְחַת, 'it came down' (Qal waw-consecutive — subject: hand)."
+**CLEAN:** "נִחֲתוּ, 'they struck' (subject: arrows), and וַתִּנְחַת, 'it came down' (subject: hand) — same root נחת, different conjugations, different subjects, one verse."
+
+The test: if removing the grammar label loses nothing interpretive, remove it. If the Hiphil (causative) matters because causation is the point, name it. If you're just labeling a Niphal because it's a Niphal, skip it.
+
 ### RULE 4: SHOW, DON'T TELL
 
 **AVOID:** "masterpiece," "tour de force," "breathtaking," "audacious," "stunning," "remarkable"

@@ -1,7 +1,7 @@
 """
 Copy Editor Agent — Psalm Commentary Quality Control
 
-Session 279: Standalone agent that applies a 6-category error taxonomy to existing
+Session 279: Standalone agent that applies a 9-category error taxonomy to existing
 commentary output, making minimal, targeted corrections while preserving all formatting.
 
 Error Categories:
@@ -11,6 +11,9 @@ Error Categories:
   4. Negative or empty citations (citing a scholar's silence)
   5. Hebrew script integrity (romanized substitutions)
   6. Weak cross-cultural parallels (surface-level comparisons)
+  7. Factual/textual accuracy (misquoted texts, wrong grammatical person, inverted logic)
+  8. Hebrew grammar bloat (unnecessary stem/tense/person annotations)
+  9. Strained arguments (e.g. evidence does not support the claim)
 
 Usage:
     from src.agents.copy_editor import CopyEditor
@@ -103,6 +106,43 @@ Correct the following categories of error:
    the contrast (if any) genuinely illuminates the psalm's distinctive
    theological move.
 
+7. FACTUAL AND TEXTUAL ACCURACY. Verify claims about biblical texts
+   against the actual text. If the commentary claims two passages share
+   identical phrasing, check that claim. If a verse is described as "third-person" or "first-person," check that claim. Correct factual
+   errors; do not remove the observation if it can be salvaged with
+   accurate wording.
+
+8. HEBREW GRAMMAR BLOAT. The audience are NOT grammarians! The more technical the grammatial statement, the more it must be earned.
+If a Hebrew verb or noun is annotated with
+grammatical parsing (esp. stem name)
+   and the grammatical label adds no interpretive value, remove the
+   label while keeping the translation and any interpretive point.
+   Retain grammar labels ONLY when the form itself is the point of
+   analysis (e.g., naming the Hiphil because causation matters, or
+   noting a Niphal because passivity is the insight). Remove labels
+   that are pure annotation — e.g., "(Niphal perfect, third-person
+   plural)" when the commentary makes no interpretive use of that
+   information. Terms like 'first persion' and 'pleural' are fine if they are relevant to the point being made.
+
+9. STRAINED ARGUMENTS AND POORLY REASONED CLAIMS. Claims must be convincing! If the commentary
+   makes an argument (e.g. about a specificausal chain, progression,
+   contrast, equivalence, use of a poetic device. etc.) check whether the evidence supports the claim.
+    Throughout, ask yourself - does this argument actually hold water?
+    Examples of common failures:
+   (a) REVERSED CAUSATION. A chain like "divine wrath → sin → folly"
+       presents effects as causes. If folly leads to sin which
+       provokes wrath, the arrows point the wrong way. Reverse the
+       chain or (usually better) reword the argument.
+   (b) NON SEQUITUR CONCLUSIONS. A paragraph builds an observation
+       (wordplay, intertextual link, structural pattern) but then
+       draws a conclusion that does not follow from the evidence
+       presented, or overstates what the evidence supports.
+   (c) STRAINED INTERTEXTUAL LOGIC. Citing a parallel passage and
+       asserting a relationship (influence, allusion, contrast) that
+       the shared language does not actually sustain.
+   Do not remove arguments that can be salvaged; fix them. If the argument
+   cannot be salvaged, remove entirely but maintain smooth flow of the text.
+
 CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:
 
 - Do NOT change any markdown header levels (e.g., ##, ###, ####).
@@ -116,6 +156,7 @@ CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:
 - Do NOT change verse reference formats like (vv. 14–15) or (v. 10).
 - Do NOT alter parenthetical Hebrew transliterations.
 - Do NOT restructure the liturgical sections (marked by ---LITURGICAL-SECTION-START---).
+- Do NOT revert or alter modified divine names (e.g., Kel, Elokim, Hashem, G-d, L-rd, and their Hebrew equivalents like קֵל, אלקים, ה׳, צבקות, שקי, אלוק). Leave them exactly as written.
 - Preserve all line breaks and paragraph structure exactly as given.
 
 After the corrected text, append a "## Changes" section listing each change
@@ -129,7 +170,7 @@ still append a "## Changes" section stating "No changes required."
 # =============================================================================
 
 class CopyEditor:
-    """Applies the 6-category error taxonomy to existing psalm commentary."""
+    """Applies the 9-category error taxonomy to existing psalm commentary."""
 
     DEFAULT_MODEL = "claude-opus-4-6"
 
@@ -468,7 +509,7 @@ class CopyEditor:
 
                 with self.client.messages.stream(
                     model=self.model,
-                    max_tokens=32768,
+                    max_tokens=65536,
                     thinking={
                         "type": "adaptive"
                     },
@@ -664,7 +705,7 @@ class CopyEditor:
 
     def _count_changes(self, changes_text: str) -> Dict[str, int]:
         """Count changes by category from the Changes section."""
-        counts = {f"Category {i}": 0 for i in range(1, 7)}
+        counts = {f"Category {i}": 0 for i in range(1, 10)}
         counts['total'] = 0
 
         # Look for patterns like "1." or "Category 1" or "[1]" etc.
@@ -672,7 +713,7 @@ class CopyEditor:
             line = line.strip()
             if not line or line.startswith('#'):
                 continue
-            for i in range(1, 7):
+            for i in range(1, 10):
                 if re.search(rf'(?:^|\b){i}[.:\])]', line) or f'Category {i}' in line:
                     counts[f'Category {i}'] += 1
                     counts['total'] += 1
@@ -682,9 +723,9 @@ class CopyEditor:
 
     def _print_summary(self, psalm_number: int, usage: dict, changes_count: dict, changes_text: str):
         """Print a formatted summary of the copy edit run."""
-        print("\n" + "═" * 60)
-        print(f"  COPY EDITOR SUMMARY — Psalm {psalm_number}")
-        print("═" * 60)
+        print("\n" + "=" * 60)
+        print(f"  COPY EDITOR SUMMARY - Psalm {psalm_number}")
+        print("=" * 60)
         print(f"  Model: {self.model}")
         print(f"  Input tokens:  {usage.get('input_tokens', 0):,}")
         print(f"  Output tokens: {usage.get('output_tokens', 0):,}")
@@ -692,7 +733,7 @@ class CopyEditor:
         print(f"  Time: {usage.get('elapsed_seconds', 0):.1f}s")
         print()
         print(f"  Total changes: {changes_count.get('total', 0)}")
-        for i in range(1, 7):
+        for i in range(1, 10):
             cat_labels = {
                 1: "Structural claims",
                 2: "Internal inconsistencies",
@@ -700,8 +741,11 @@ class CopyEditor:
                 4: "Negative citations",
                 5: "Hebrew script",
                 6: "Weak parallels",
+                7: "Factual/textual accuracy",
+                8: "Hebrew grammar bloat",
+                9: "Strained arguments",
             }
             count = changes_count.get(f'Category {i}', 0)
             if count > 0:
                 print(f"    [{i}] {cat_labels[i]}: {count}")
-        print("═" * 60 + "\n")
+        print("=" * 60 + "\n")
