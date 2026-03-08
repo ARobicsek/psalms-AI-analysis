@@ -259,6 +259,12 @@ Then write the liturgical section using `####` for subsections (Full psalm, Key 
 - For phrases used in liturgy, reflect on whether the liturgical use follows the natural ("pshat") reading or whether the compilers have put the text to a novel use.
 - Explain what the liturgical placement reveals about the tradition's understanding.
 
+**NUSACH DISAMBIGUATION (do not confuse these!):**
+- **Nusach Ashkenaz** = the traditional rite of non-Hasidic Ashkenazi Jewry (Lithuanian, German, etc.)
+- **Nusach Sefard** = the HASIDIC rite. Despite containing "Sefard," this is used by ASHKENAZI (Hasidic) Jews — Lubavitch, Breslov, Satmar, etc. The name derives from the Ari's (R. Isaac Luria) preference for Sephardic prayer arrangements, NOT from Spanish Jewry. NEVER call this "Sephardic" or "the Sephardic rite."
+- **Edot HaMizrach** = the rites of Mizrachi/Sephardic communities (Yemenite, Iraqi, Moroccan, Syrian, Persian, etc.). These are the actual Sephardic and Middle Eastern traditions. They vary considerably among themselves.
+When the research data says "Sefard" or "Siddur Sefard," it means the HASIDIC rite. When something appears in all three nusachot, say "across all major rites" or "in Ashkenazi, Hasidic, and Mizrachi/Sephardic traditions."
+
 ### THE ESSAY/COMMENTARY RELATIONSHIP
 
 The introduction essay and the verse commentary serve fundamentally different purposes:

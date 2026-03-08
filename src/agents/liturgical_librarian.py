@@ -1022,7 +1022,7 @@ CRITICAL REQUIREMENTS:
    - "Amidah (Ashkenaz)" + "Amidah (Sefard)" + "Amidah (Edot_HaMizrach)"
      → "Amidah across all Jewish traditions"
    - "Menorah Lighting (Sefard) on Chanukah"
-     → "Menorah Lighting ceremony in the Sefard rite during Chanukah"
+     → "Menorah Lighting ceremony in the Hasidic (Sefard) rite during Chanukah"
    - Look for patterns and group intelligently
 
 3. **PRIORITIZE BY MATCH TYPE**
@@ -1051,6 +1051,7 @@ CRITICAL REQUIREMENTS:
 6. **SYNTHESIS AND THINKING**
    - Identify liturgical patterns and their significance
    - Mention if usage varies by tradition (Ashkenaz vs. Sefard vs. Edot HaMizrach)
+   - **NUSACH NOTE:** "Sefard" = the Hasidic rite (Ashkenazi Jews — Lubavitch, Breslov, etc.), NOT Sephardic Jews. "Edot HaMizrach" = actual Sephardic/Mizrachi communities. NEVER call Nusach Sefard "Sephardic."
    - Note when phrase appears in special occasions vs. daily liturgy
    - Explain liturgical context where helpful
 
@@ -1582,7 +1583,7 @@ CRITICAL REQUIREMENTS:
 
 5. **SYNTHESIS AND SIGNIFICANCE**
    - Explain liturgical context and meaning
-   - Note variations by tradition if significant
+   - Note variations by tradition if significant. **NUSACH NOTE:** "Sefard" = the Hasidic rite (Ashkenazi Jews), NOT Sephardic Jews. "Edot HaMizrach" = actual Sephardic/Mizrachi communities.
    - Mention both regular and special occasion usage
 
 6. **DISTINGUISH MAIN PRAYER VS. SUPPLEMENT** (CRITICAL):

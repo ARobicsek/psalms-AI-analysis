@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-08 (Session 290)
+**Last Updated**: 2026-03-08 (Session 291)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +18,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 290
+- **Current Session**: 291
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -89,6 +89,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 291 (2026-03-08): Nusach Disambiguation — Fix Sefard/Sephardic Confusion
+- Fixed systemic confusion between Nusach Sefard (Hasidic rite) and actual Sephardic/Mizrachi traditions
+- Added disambiguation guidance to master writer, synthesis writer, and liturgical librarian LLM prompts
+- Corrected database metadata label from "Sephardic/Hasidic" to "Hasidic (Nusach Sefard)"
+
 ### Session 290 (2026-03-08): Interactive Hebrew Concordance Tool
 - Created `scripts/concordance_tool.py` — standalone CLI for searching Hebrew words/phrases across the Tanakh
 - 4 match modes (exact, variations, substring, substring + AI filter), 4 scopes, 3 result modes
@@ -106,9 +111,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ### Session 287 (2026-03-05): Fix SI Pipeline Auto-Detection & Research Trimming
 - Implemented auto-detection logic in `run_si_pipeline.py` for special instruction files
 - Added generation of `psalm_NNN_research_trimmed.md` artifact to disk
-
-### Session 286 (2026-03-04): Fix Divine Names Modifier for Eli
-- Added specific regex pattern for `אֵלִי` ("My God") in `divine_names_modifier.py`
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

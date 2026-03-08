@@ -85,8 +85,10 @@ def _insert_metadata(cursor):
         # Nusachim (Liturgical Traditions)
         ('nusach', 'Ashkenaz', 'Ashkenazi', 'אשכנז',
          'Central and Eastern European Jewish tradition', 'Widespread'),
-        ('nusach', 'Sefard', 'Sephardic/Hasidic', 'ספרד',
-         'Hasidic version based on Lurianic kabbalah', 'Common in Hasidic communities'),
+        ('nusach', 'Sefard', 'Hasidic (Nusach Sefard)', 'ספרד',
+         'Hasidic rite incorporating Lurianic kabbalistic elements into an Ashkenazi framework. '
+         'Despite the name "Sefard," its users are Ashkenazi (Hasidic) Jews — NOT Sephardic Jews.',
+         'Common in Hasidic communities worldwide'),
         ('nusach', 'Edot_HaMizrach', 'Edot HaMizrach', 'עדות המזרח',
          'Middle Eastern and North African Jewish tradition', 'Common in Israel'),
 

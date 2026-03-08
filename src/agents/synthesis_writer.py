@@ -289,6 +289,7 @@ This section should:
 - Summarize the liturgical usage information provided in the research bundle
 - Distinguish between full recitations of the psalm vs. individual verses or phrases quoted in prayers
 - Be specific about occasions (Weekday/Shabbat/Festivals), services (Shacharit/Mincha/Maariv), and traditions (Ashkenaz/Sefard/Edot HaMizrach)
+- **NUSACH DISAMBIGUATION:** "Nusach Sefard" = the HASIDIC rite (Ashkenazi Jews — Lubavitch, Breslov, Satmar, etc.), NOT Sephardic Jews. The name derives from R. Isaac Luria's kabbalistic preferences. "Edot HaMizrach" = the actual Sephardic/Mizrachi communities (Yemenite, Iraqi, Moroccan, etc.). NEVER call Nusach Sefard "Sephardic."
 - Explain what the liturgical placement reveals about how Jewish tradition has understood and valued this psalm
 - Be scholarly but concise - aim for 150-300 words
 
@@ -417,7 +418,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
    - The research bundle includes detailed information about where and how this verse (or phrases from it) appears in Jewish liturgy
    - When a verse appears in liturgy, comment on this usage and what it reveals about reception and interpretation
    - **CRITICAL: QUOTE the liturgical texts in Hebrew with English translation to show HOW the verse is used**
-   - Be specific: mention the prayer name, service (Shacharit/Mincha/Maariv), occasion (Weekday/Shabbat/Festivals), and tradition (Ashkenaz/Sefard/Edot HaMizrach)
+   - Be specific: mention the prayer name, service (Shacharit/Mincha/Maariv), occasion (Weekday/Shabbat/Festivals), and tradition (Ashkenaz/Sefard/Edot HaMizrach). Remember: "Sefard" = Hasidic rite (NOT Sephardic); "Edot HaMizrach" = actual Sephardic/Mizrachi communities.
    - Consider what the liturgical placement tells us about how Jewish tradition understood this verse. WHY is THIS psalm, verse or phrase used where it is in prayer?
    - Integrate liturgical insights naturally - don't treat them as a separate "trivia" item
    - WEAK example: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..." [too vague, no quotation]

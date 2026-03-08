@@ -8,6 +8,31 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 291 (2026-03-08): Nusach Disambiguation — Fix Sefard/Sephardic Confusion
+
+**Objective**: Fix systemic confusion between Nusach Sefard (Hasidic rite) and actual Sephardic/Mizrachi traditions across the entire pipeline.
+
+**Problems Identified**:
+- Database metadata labeled Nusach Sefard as "Sephardic/Hasidic," causing LLM writers to call the Hasidic rite "Sephardic"
+- No disambiguation guidance in any writer or librarian prompt — LLMs (and humans) routinely conflate "Sefard" with "Sephardic"
+- Sample output (e.g., Psalm 30) wrote "Ashkenazic, Sefardic, and Mizrachi" when it should distinguish Hasidic from actual Sephardic
+
+**Solutions Implemented**:
+1. **Fixed metadata** in `create_liturgy_db.py` — changed `display_name_english` from `"Sephardic/Hasidic"` to `"Hasidic (Nusach Sefard)"` with corrected description
+2. **Added NUSACH DISAMBIGUATION block** to `MASTER_WRITER_PROMPT_V4` in `master_editor.py` — full explanation of all three traditions with explicit "NEVER call this Sephardic" instruction
+3. **Added compact disambiguation** to both liturgical prompt sections in `synthesis_writer.py` (introduction + verse commentary)
+4. **Added NUSACH NOTE** to both LLM summarization prompts in `liturgical_librarian.py` (phrase-level + full-psalm); fixed deduplication example from "Sefard rite" to "Hasidic (Sefard) rite"
+5. **Updated live `data/liturgy.db`** metadata row in-place (no destructive rebuild)
+
+**Files Modified**:
+- `src/data_sources/create_liturgy_db.py` — Corrected Nusach Sefard metadata label and description
+- `src/agents/master_editor.py` — Added nusach disambiguation block to Stage 2 liturgical section
+- `src/agents/synthesis_writer.py` — Added disambiguation to both liturgical prompt sections
+- `src/agents/liturgical_librarian.py` — Added nusach notes to both LLM summarization prompts, fixed deduplication example
+- `data/liturgy.db` — Updated Sefard metadata row in-place
+
+---
+
 ## Session 290 (2026-03-08): Interactive Hebrew Concordance Tool
 
 **Objective**: Implement a standalone interactive CLI tool for Hebrew concordance searching across the Tanakh.
