@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-09 (Session 296)
+**Last Updated**: 2026-03-09 (Session 297)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 296
+- **Current Session**: 297
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 297 (2026-03-09): Micro Analyst JSON Repair & Validation
+- Integrated the `json-repair` library into the Micro Analyst to salvage outputs that are truncated due to streaming connection drops or internal cutoff.
+- Added structural validation: repaired JSON is only accepted if it contains the correct number of `verse_discoveries` (matching the database verse count) and at least 3 `interesting_questions`.
+- Invalid structural repairs fall back to the existing token retry logic, preventing faulty JSON from breaking downstream pipeline agents.
+
 ### Session 296 (2026-03-09): Micro Analyst Truncation Investigation & JSON Repair Recommendation
 - Investigated whether raising token limits would prevent costly micro analyst retries — **ruled out**: `max_tokens` truncation has never fired.
 - Identified actual root causes: streaming connection drops (`RemoteProtocolError`) and unterminated JSON strings from mid-stream cutoffs.
@@ -109,12 +114,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Diagnosed why Claude Sonnet 4.6 fell back to budgeted thinking on short psalms like Psalm 39.
 - Identified that the 50% thinking budget optimization only applied to psalms >25 verses, leaving short psalms to use unrestricted adaptive thinking and consume their entire token limit on thought.
 - User selected Option 1 fix (always apply budgeted thinking), to be implemented next session.
-
-### Session 292 (2026-03-08): Converse with Editor Upgrades
-- Upgraded `converse_with_editor.py` script to use `prompt_toolkit` to fix Windows clipboard pasting issues and enable multi-line input.
-- Added dynamic model selection menu with interactive choice of LLM (Anthropic, Gemini, OpenAI).
-- Replaced hardcoded pricing with dynamic calculation imported from `src.utils.cost_tracker.PRICING`.
-- Refactored `run_conversation` to support API streaming across Google Gemini, Anthropic Claude, and OpenAI GPT models.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

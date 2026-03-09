@@ -8,6 +8,28 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 297 (2026-03-09): Micro Analyst JSON Repair & Validation
+
+**Objective**: Implement the fallback `json-repair` logic for the Micro Analyst to salvage API responses that are truncated during generation, preventing costly retries.
+
+**Problems Identified**:
+- As identified in Session 296, the Anthropic API occasionally truncates Sonnet 4.6 output mid-JSON string (due to `RemoteProtocolError` streaming drops or mid-stream cutoffs), losing ~1-3 dollars per failed discovery pass retry, particularly on long psalms.
+
+**Solutions Implemented**:
+1. Installed the `json-repair` python package.
+2. Updated `MicroAnalystV2._discovery_pass()` catching `json.JSONDecodeError` to attempt repairing the stripped `response_text`.
+3. Added structural validation post-repair:
+   - `len(verse_discoveries) == verse_count`: ensures no verses were lost during mid-array truncation.
+   - `len(interesting_questions) >= 3`: ensures the final questions array fundamentally exists and contains results.
+4. If validation passes, the repaired JSON is accepted; if it fails, the script naturally degrades back into the existing retry-backoff logic to request a clean generation.
+5. Added `tests/test_json_repair_logic.py` to statically test valid, repairable, and severely truncated JSON permutations to prove the structural validation works before live API calls occur.
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` - Integrated `repair_json` and structural validation logic into `_discovery_pass`.
+- `tests/test_json_repair_logic.py` - **[NEW]** Test suite simulating parsing, repair, and structurally invalidating behavior.
+
+---
+
 ## Session 296 (2026-03-09): Micro Analyst Truncation Investigation & JSON Repair Recommendation
 
 **Objective**: Investigate whether raising the token limit for long psalms (≥25 verses) would prevent costly micro analyst retries, and recommend a better solution.

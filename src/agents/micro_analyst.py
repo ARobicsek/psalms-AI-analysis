@@ -43,6 +43,7 @@ from pathlib import Path
 from typing import Tuple, Optional, Dict, List
 import anthropic
 from dotenv import load_dotenv
+from json_repair import repair_json
 
 # Load environment variables
 load_dotenv()
@@ -643,14 +644,39 @@ class MicroAnalystV2:
                 return discoveries
 
             except json.JSONDecodeError as e:
-                if attempt < max_retries - 1:
-                    self.logger.warning(f"JSON parsing error (attempt {attempt + 1}/{max_retries}): {e}")
-                    self.logger.warning("  Retrying with fresh request...")
-                    continue  # Retry
-                else:
-                    # Out of retries
-                    self.logger.error(f"Failed to parse discovery JSON after {max_retries} attempts: {e}")
-                    raise ValueError(f"Invalid JSON from discovery pass: {e}")
+                self.logger.warning(f"JSON parsing error on attempt {attempt + 1}/{max_retries}: {e}")
+                self.logger.info("  Attempting to repair truncated JSON...")
+                
+                try:
+                    repaired_text = repair_json(response_text.strip(), return_objects=False)
+                    if not repaired_text:
+                        raise ValueError("JSON repair returned empty string")
+                        
+                    discoveries = json.loads(repaired_text)
+                    
+                    # --- STRUCTURAL VALIDATION ---
+                    # 1. Check if all verses are present
+                    parsed_verse_count = len(discoveries.get('verse_discoveries', []))
+                    if parsed_verse_count != verse_count:
+                        raise ValueError(f"Structural validation failed: Expected {verse_count} verses, but found {parsed_verse_count}")
+                        
+                    # 2. Check if questions are present
+                    questions = discoveries.get('interesting_questions', [])
+                    if not questions or len(questions) < 3:
+                        raise ValueError(f"Structural validation failed: Missing or insufficient interesting_questions (found {len(questions) if isinstance(questions, list) else 0})")
+                        
+                    self.logger.info("  ✓ Successfully repaired and validated truncated JSON!")
+                    return discoveries
+                    
+                except Exception as repair_e:
+                    if attempt < max_retries - 1:
+                        self.logger.warning(f"JSON repair/validation failed: {repair_e}")
+                        self.logger.warning("  Retrying with fresh request...")
+                        continue  # Retry
+                    else:
+                        # Out of retries
+                        self.logger.error(f"Failed to parse and repair discovery JSON after {max_retries} attempts. Last error: {repair_e}")
+                        raise ValueError(f"Invalid JSON from discovery pass (repair failed): {repair_e}")
 
             except Exception as e:
                 # Check if it's a retryable error (API or network/streaming issues)
