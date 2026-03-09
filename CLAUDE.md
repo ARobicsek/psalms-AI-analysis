@@ -6,42 +6,31 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 **Start Here:**
 - `README.md` - Project overview, installation, usage
-- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 181)
+- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 289)
 - `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Technical specifications, schemas
 - `docs/guides/DEVELOPER_GUIDE.md` - Development workflow, coding standards
 
 ## Recent Major Changes (Last 5 Sessions)
 
-**Session 269 (2026-02-24)**: Unified Writer V4 — Merge Main + College
-- Replaced dual Main/College commentary system with single MASTER_WRITER_PROMPT_V4
-- New audience: "Intelligent, curious readers with Hebrew proficiency"
-- New tone: "Scholar at dinner — relaxed, precise, occasionally witty, never performing"
-- Merged ground rules (Main's depth + College's pedagogical clarity), all 12 Items of Interest
-- Removed Steps 4b/6b/6c from pipelines; `--skip-college` → hidden no-op
-- Updated MasterEditorSI, converse_with_editor, all documentation
-- Halves the cost of the most expensive pipeline step
+**Session 289 (2026-03-08)**: Session Management Cleanup
+- Restructured session docs to cut startup context from ~150KB to ~20KB (~85% token savings)
+- Added Quick Context section to PROJECT_STATUS (replaces need to read CLAUDE.md separately)
+- Rewrote SESSION_PROMPTS.md with tiered loading: only PROJECT_STATUS required at startup
 
-**Session 258 (2026-02-13)**: Token Reduction Phase B
-- B1: Related psalms default to no full texts (`include_full_text=False`), saving ~13K chars
-- B2: BDB lexicon entries truncated to ~500 chars max (from ~2,400 avg), saving ~21K chars
-- B3: Compact markdown formatting: merged lexicon headers, inline concordance results, compact commentary
-- B4: Added telegraphic writing instructions to macro/micro analyst prompts for denser AI output
-- Updated preamble text in related_psalms_librarian to reflect no-full-text default
-- Post-PS35 review: removed extended thinking dump from macro working_notes (~15K saved), removed figurative confidence scores, strengthened macro telegraphic prompt
+**Session 288 (2026-03-07)**: Copy Editor Expansion — 9-Category Taxonomy
+- Expanded copy editor from 6 to 9 error categories
+- Added Rule 3b (Don't Over-Label Hebrew Grammar) to Master Writer prompt
 
-**Session 257 (2026-02-12)**: Token Reduction Phase A
-- Removed 10,724 chars of static commentator biographical essays from research bundle (replaced with dates only)
-- Fixed analytical framework duplication bug: was embedded in research bundle AND passed separately to Master Writer
-- Added `include_working_notes=False` to strip 26,845 chars from micro analyst input
-- Total savings: ~45K tokens per psalm across all consumers
+**Session 287 (2026-03-05)**: Fix SI Pipeline Auto-Detection & Research Trimming
+- Implemented auto-detection of special instruction files
+- Added `research_trimmed.md` artifact generation
 
-**Session 256 (2026-02-12)**: Prompt Overhaul Phase 1 Completion & Opus 4.6 Upgrade
-- Migrated V3 prompt logic to `master_editor.py`, archived legacy editors
-- Upgraded InsightExtractor and QuestionCurator to claude-opus-4-6
+**Session 286 (2026-03-04)**: Fix Divine Names Modifier for Eli
+- Added specific regex pattern for `אֵלִי` ("My God") in Psalm 22:2
 
-**Session 255 (2026-02-11)**: Prompt Overhaul Phase 1 - V3 Editor
-- Created `master_editor_v3.py` with 9 key prompt changes
-- Fixed MicroAnalyst JSON truncation (increased output tokens to 65k)
+**Session 285 (2026-03-04)**: Micro Agent Optimization
+- Slimmed discovery schema, reduced thinking budget 70%→50%, ~75% micro cost reduction
+- Fixed 5 bugs across master_editor, pipeline scripts, and insight extractor
 
 ## Quick Commands
 
@@ -94,10 +83,9 @@ python scripts/cost_report.py
 
 ## Current Status
 
-**Phase**: Phase 4 - Production Commentary Generation
-**Completed**: Psalms 1-14, 20, 8, 97, 145 (all phases)
-**Next Up**: Psalms 16-21
-**Last Updated**: Session 181 (2025-12-08)
+**Phase**: Pipeline Production — tweaks and improvements
+**Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro
+**Last Updated**: Session 289 (2026-03-08)
 
 ## Common Tasks
 

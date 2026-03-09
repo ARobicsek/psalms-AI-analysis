@@ -8,6 +8,29 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 294 (2026-03-09): Model Reversions and Micro Analyst Cleanup
+
+**Objective**: Revert Macro and Micro Analyst models to Anthropic equivalents for higher quality and permanently implement the budgeted thinking optimization.
+
+**Problems Identified**:
+- In the previous session, we tested GPT-5.1 for the Micro Analyst to save costs but found its internal reasoning produced significantly fewer explicit tokens and missed the detailed "inner monologue" characteristic of Anthropic models.
+- The Macro Analyst was also temporarily using GPT-5.4, but the user preferred Claude Opus 4.6 for its superior analytical quality.
+- The Micro Analyst still contained a large block of extraneous OpenAI client routing and error handling code that was no longer needed since the GPT migration was aborted.
+
+**Solutions Implemented**:
+1. **Reverted Macro Analyst**: Set `DEFAULT_MODEL` in `macro_analyst.py` back to `claude-opus-4-6`. Updated `run_enhanced_pipeline.py` and `run_si_pipeline.py` default arguments.
+2. **Reverted Micro Analyst**: Set `DEFAULT_MODEL` in `micro_analyst.py` back to `claude-sonnet-4-6`.
+3. **Fixed Token Exhaustion Bug**: Universally applied the 50% `budgeted_thinking` constraint in `micro_analyst.py` regardless of psalm length, fixing the empty text crash for short psalms.
+4. **Code Cleanup**: Stripped out all unused OpenAI integration logic, client initialization, routing conditionals, and API error handling from `micro_analyst.py`.
+
+**Files Modified**:
+- `src/agents/macro_analyst.py` - Reverted to `claude-opus-4-6`.
+- `src/agents/micro_analyst.py` - Reverted to `claude-sonnet-4-6`, removed OpenAI logic, applied universal 50% thinking budget.
+- `scripts/run_enhanced_pipeline.py` - Updated `macro_model` default argument.
+- `scripts/run_si_pipeline.py` - Updated `macro_model` default argument.
+
+---
+
 ## Session 293 (2026-03-08): Micro Analyst Token Fallback Investigation
 
 **Objective**: Investigate why Claude Sonnet 4.6 fell back to budgeted thinking on short psalms, causing a costly Stage 1 retry.

@@ -129,24 +129,33 @@ class InsightExtractor:
         self,
         api_key: Optional[str] = None,
         logger=None,
-        cost_tracker: Optional[CostTracker] = None
+        cost_tracker: Optional[CostTracker] = None,
+        model: Optional[str] = None
     ):
         """
         Initialize InsightExtractor agent.
 
         Args:
             api_key: Anthropic API key (or set ANTHROPIC_API_KEY env var)
-            logger: Logger instance (or will create default)
+            logger: Optional logger instance
             cost_tracker: CostTracker instance
+            model: Model to use (default: gpt-5.4)
         """
-        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
-        if not self.api_key:
-            raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
-
-        self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = "claude-opus-4-6"  # High reasoning model
+        self.model = model or "gpt-5.4"  # High reasoning model
         self.logger = logger or get_logger("insight_extractor")
         self.cost_tracker = cost_tracker or CostTracker()
+        
+        self.anthropic_client = None
+        self.openai_client = None
+
+        if "gpt" in self.model.lower() or self.model.startswith("o"):
+            from openai import OpenAI
+            self.openai_client = OpenAI()
+        else:
+            self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+            if not self.api_key:
+                raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
+            self.anthropic_client = anthropic.Anthropic(api_key=self.api_key)
         
         self.logger.info(f"InsightExtractor initialized with model {self.model}")
 
@@ -240,32 +249,68 @@ class InsightExtractor:
                 thinking_text = ""
                 content = ""
 
-                with self.client.messages.stream(
-                    model=self.model,
-                    max_tokens=scaled_max_tokens,
-                    thinking={"type": "adaptive"},
-                    system="You are a rigorous scholarly editor who hates fluff. Your goal is to identify only the observations that genuinely transform understanding.",
-                    messages=[{"role": "user", "content": prompt}]
-                ) as stream:
-                    for chunk in stream:
-                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
-                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
-                                if chunk.delta.type == 'thinking_delta':
-                                    thinking_text += chunk.delta.thinking
-                                elif chunk.delta.type == 'text_delta':
-                                    content += chunk.delta.text
-                    final_message = stream.get_final_message()
-
-                # Track cost
-                if hasattr(final_message, 'usage'):
-                    usage = final_message.usage
-                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                if self.openai_client:
+                    kwargs = {
+                        "model": self.model,
+                        "messages": [
+                            {"role": "system", "content": "You are a rigorous scholarly editor who hates fluff. Your goal is to identify only the observations that genuinely transform understanding."},
+                            {"role": "user", "content": prompt}
+                        ]
+                    }
+                    if "gpt-5" in self.model.lower() or self.model.startswith("o"):
+                        kwargs["reasoning_effort"] = "high"
+                        kwargs["max_completion_tokens"] = scaled_max_tokens
+                    else:
+                        kwargs["max_tokens"] = scaled_max_tokens
+                        
+                    response = self.openai_client.chat.completions.create(**kwargs)
+                    content = response.choices[0].message.content
+                    
+                    if hasattr(response.usage, 'reasoning_tokens') and response.usage.reasoning_tokens:
+                        thinking_text = "Reasoning used " + str(response.usage.reasoning_tokens) + " tokens."
+                    
+                    prompt_tokens = getattr(response.usage, 'prompt_tokens', 0)
+                    completion_tokens = getattr(response.usage, 'completion_tokens', 0)
+                    reason_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+                    
                     self.cost_tracker.add_usage(
                         model=self.model,
-                        input_tokens=usage.input_tokens,
-                        output_tokens=usage.output_tokens,
-                        thinking_tokens=thinking_tokens
+                        input_tokens=prompt_tokens,
+                        output_tokens=completion_tokens,
+                        thinking_tokens=reason_tokens
                     )
+                    
+                    # Create a dummy final_message object to avoid issues downstream
+                    class DummyMessage:
+                        pass
+                    final_message = DummyMessage()
+                else:
+                    with self.anthropic_client.messages.stream(
+                        model=self.model,
+                        max_tokens=scaled_max_tokens,
+                        thinking={"type": "adaptive"},
+                        system="You are a rigorous scholarly editor who hates fluff. Your goal is to identify only the observations that genuinely transform understanding.",
+                        messages=[{"role": "user", "content": prompt}]
+                    ) as stream:
+                        for chunk in stream:
+                            if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                                if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                    if chunk.delta.type == 'thinking_delta':
+                                        thinking_text += chunk.delta.thinking
+                                    elif chunk.delta.type == 'text_delta':
+                                        content += chunk.delta.text
+                        final_message = stream.get_final_message()
+
+                    # Track cost
+                    if hasattr(final_message, 'usage'):
+                        usage = final_message.usage
+                        thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                        self.cost_tracker.add_usage(
+                            model=self.model,
+                            input_tokens=usage.input_tokens,
+                            output_tokens=usage.output_tokens,
+                            thinking_tokens=thinking_tokens
+                        )
 
                 self.logger.info(f"  Thinking: {len(thinking_text)} chars, Response: {len(content)} chars")
 

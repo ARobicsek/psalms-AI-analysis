@@ -71,7 +71,7 @@ Examples:
         "--model",
         type=str,
         default=None,
-        help="Override the model (default: claude-opus-4-6)"
+        help="Override the model (default: gpt-5.4)"
     )
 
     args = parser.parse_args()

@@ -204,7 +204,8 @@ class MacroAnalyst:
         db_path: Optional[Path] = None,
         docs_dir: str = "docs",
         logger=None,
-        cost_tracker: Optional[CostTracker] = None
+        cost_tracker: Optional[CostTracker] = None,
+        model: Optional[str] = None
     ):
         """
         Initialize MacroAnalyst agent.
@@ -215,15 +216,23 @@ class MacroAnalyst:
             docs_dir: Path to docs directory (for RAG documents)
             logger: Logger instance (or will create default)
             cost_tracker: CostTracker instance for tracking API costs
+            model: Model to use (default: claude-opus-4-6)
         """
-        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
-        if not self.api_key:
-            raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
-
-        self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = self.DEFAULT_MODEL  # Use class constant for single source of truth
+        self.model = model or self.DEFAULT_MODEL  # Use class constant for single source of truth
         self.logger = logger or get_logger("macro_analyst")
         self.cost_tracker = cost_tracker or CostTracker()
+
+        self.anthropic_client = None
+        self.openai_client = None
+
+        if "gpt" in self.model.lower() or self.model.startswith("o"):
+            from openai import OpenAI
+            self.openai_client = OpenAI()
+        else:
+            self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+            if not self.api_key:
+                raise ValueError("Anthropic API key required (pass api_key or set ANTHROPIC_API_KEY)")
+            self.anthropic_client = anthropic.Anthropic(api_key=self.api_key)
 
         # Initialize RAG Manager
         self.rag_manager = RAGManager(docs_dir=docs_dir)
@@ -297,65 +306,89 @@ class MacroAnalyst:
                     self.logger.info(f"Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
                     time.sleep(wait_time)
 
-                self.logger.info(f"Calling Claude API with model: {self.model} (streaming enabled)")
+                self.logger.info(f"Calling API with model: {self.model}")
 
-                # Use streaming to avoid 10-minute timeout for large token requests
-                stream = self.client.messages.stream(
-                    model=self.model,
-                    max_tokens=max_tokens,
-                    thinking={
-                        "type": "adaptive"  # Adaptive thinking for Opus 4.6
-                    },
-                    output_config={
-                        "effort": "max"  # Maximum effort for deep analysis
-                    },
-                    messages=[{
-                        "role": "user",
-                        "content": prompt
-                    }]
-                )
-
-                # Collect response chunks
                 thinking_text = ""
                 response_text = ""
 
-                with stream as response_stream:
-                    for chunk in response_stream:
-                        if hasattr(chunk, 'type'):
-                            if chunk.type == 'content_block_start':
-                                if hasattr(chunk, 'content_block') and hasattr(chunk.content_block, 'type'):
-                                    self.logger.debug(f"Starting {chunk.content_block.type} block")
-                            elif chunk.type == 'content_block_delta':
-                                if hasattr(chunk, 'delta'):
-                                    if hasattr(chunk.delta, 'type'):
-                                        if chunk.delta.type == 'thinking_delta':
-                                            thinking_text += chunk.delta.thinking
-                                        elif chunk.delta.type == 'text_delta':
-                                            response_text += chunk.delta.text
+                if self.openai_client:
+                    kwargs = {
+                        "model": self.model,
+                        "messages": [{"role": "user", "content": prompt}]
+                    }
+                    if "gpt-5" in self.model.lower() or self.model.startswith("o"):
+                        kwargs["reasoning_effort"] = "high"
+                        kwargs["max_completion_tokens"] = max_tokens
+                    else:
+                        kwargs["max_tokens"] = max_tokens
+                        
+                    response = self.openai_client.chat.completions.create(**kwargs)
+                    response_text = response.choices[0].message.content
+                    
+                    if hasattr(response.usage, 'reasoning_tokens') and response.usage.reasoning_tokens:
+                        thinking_text = "Reasoning used " + str(response.usage.reasoning_tokens) + " tokens."
+                    
+                    self.cost_tracker.add_usage(
+                        model=self.model,
+                        input_tokens=getattr(response.usage, 'prompt_tokens', 0),
+                        output_tokens=getattr(response.usage, 'completion_tokens', 0),
+                        thinking_tokens=getattr(response.usage, 'reasoning_tokens', 0) or 0
+                    )
+                    
+                    stop_reason = response.choices[0].finish_reason
+                    if stop_reason == 'length':
+                        stop_reason = 'max_tokens'
+                else:
+                    # Use streaming to avoid 10-minute timeout for large token requests
+                    stream = self.anthropic_client.messages.stream(
+                        model=self.model,
+                        max_tokens=max_tokens,
+                        thinking={
+                            "type": "adaptive"  # Adaptive thinking for Opus 4.6
+                        },
+                        output_config={
+                            "effort": "max"  # Maximum effort for deep analysis
+                        },
+                        messages=[{
+                            "role": "user",
+                            "content": prompt
+                        }]
+                    )
 
-                self.logger.info("API streaming call successful")
+                    # Collect response chunks
+                    with stream as response_stream:
+                        for chunk in response_stream:
+                            if hasattr(chunk, 'type'):
+                                if chunk.type == 'content_block_start':
+                                    if hasattr(chunk, 'content_block') and hasattr(chunk.content_block, 'type'):
+                                        self.logger.debug(f"Starting {chunk.content_block.type} block")
+                                elif chunk.type == 'content_block_delta':
+                                    if hasattr(chunk, 'delta'):
+                                        if hasattr(chunk.delta, 'type'):
+                                            if chunk.delta.type == 'thinking_delta':
+                                                thinking_text += chunk.delta.thinking
+                                            elif chunk.delta.type == 'text_delta':
+                                                response_text += chunk.delta.text
+
+                    final_message = response_stream.get_final_message()
+                    if hasattr(final_message, 'usage'):
+                        usage = final_message.usage
+                        thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+
+                        self.cost_tracker.add_usage(
+                            model=self.model,
+                            input_tokens=usage.input_tokens,
+                            output_tokens=usage.output_tokens,
+                            thinking_tokens=thinking_tokens
+                        )
+                    
+                    stop_reason = getattr(final_message, 'stop_reason', None)
+
+                self.logger.info("API call successful")
                 self.logger.info(f"Thinking collected: {len(thinking_text)} chars")
                 self.logger.info(f"Response collected: {len(response_text)} chars")
 
-                self.logger.info(f"Response received. Thinking tokens: {len(thinking_text.split()) if thinking_text else 0}")
-
-                # Track usage and costs
-                final_message = response_stream.get_final_message()
-                if hasattr(final_message, 'usage'):
-                    usage = final_message.usage
-                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
-
-                    self.cost_tracker.add_usage(
-                        model=self.model,
-                        input_tokens=usage.input_tokens,
-                        output_tokens=usage.output_tokens,
-                        thinking_tokens=thinking_tokens
-                    )
-
-                    self.logger.info(f"Usage tracked: {usage.input_tokens} input, {usage.output_tokens} output, {thinking_tokens} thinking tokens")
-
                 # Check for truncation (stop_reason == 'max_tokens' means output was cut off)
-                stop_reason = getattr(final_message, 'stop_reason', None)
                 if stop_reason == 'max_tokens':
                     self.logger.warning(f"Response was truncated at max_tokens limit ({len(response_text)} chars collected)")
                     if attempt < max_retries - 1:

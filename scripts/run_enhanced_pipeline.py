@@ -231,6 +231,10 @@ def run_enhanced_pipeline(
     exclude_insights: bool = False,
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
+    macro_model: str = "claude-opus-4-6",
+    insight_model: str = "gpt-5.4",
+    question_model: str = "gpt-5.4",
+    copy_model: str = "gpt-5.4",
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -353,7 +357,7 @@ def run_enhanced_pipeline(
             tracker.track_step_input("macro_analysis", psalm_text)
             tracker.track_verse_count(len(psalm.verses))
 
-        macro_analyst = MacroAnalyst(cost_tracker=cost_tracker)
+        macro_analyst = MacroAnalyst(cost_tracker=cost_tracker, model=macro_model)
         macro_analysis = macro_analyst.analyze_psalm(psalm_number)
         from src.schemas.analysis_schemas import save_analysis
         save_analysis(macro_analysis, str(macro_file), format="json")
@@ -492,11 +496,11 @@ def run_enhanced_pipeline(
         if reader_questions_file.exists():
             logger.info("Reader questions exist, skipping generation...")
             # Track the model even when skipping
-            tracker.track_model_for_step("question_curator", "claude-opus-4-6")
+            tracker.track_model_for_step("question_curator", "gpt-5.4")
         else:
             logger.info("[STEP 2b] Curating questions...")
             try:
-                curator = QuestionCurator(cost_tracker=cost_tracker)
+                curator = QuestionCurator(cost_tracker=cost_tracker, model=question_model)
                 q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
                 curator.save_questions(q, s, output_path, psalm_number)
                 tracker.track_model_for_step("question_curator", curator.active_model)
@@ -531,11 +535,11 @@ def run_enhanced_pipeline(
             logger.info("Insights exist, loading...")
             with open(insights_file, 'r', encoding='utf-8') as f: curated_insights = json.load(f)
             # Track the model even when loading existing insights
-            tracker.track_model_for_step("insight_extractor", "claude-opus-4-6")
+            tracker.track_model_for_step("insight_extractor", "gpt-5.4")
         else:
             logger.info("[STEP 2c] Extracting Insights...")
             try:
-                extractor = InsightExtractor(cost_tracker=cost_tracker)
+                extractor = InsightExtractor(cost_tracker=cost_tracker, model=insight_model)
 
                 # Get rich psalm text from micro_analysis for prompt
                 p_text = ""
@@ -587,7 +591,7 @@ def run_enhanced_pipeline(
     else:
         # skip_insights is True — still track the model if insights file exists
         if insights_file.exists():
-            tracker.track_model_for_step("insight_extractor", "claude-opus-4-6")
+            tracker.track_model_for_step("insight_extractor", "gpt-5.4")
 
     # =====================================================================
     # STEP 3: Synthesis (REMOVED)
@@ -726,7 +730,7 @@ def run_enhanced_pipeline(
             print(f"STEP 5b: Copy Editor")
             print(f"{'='*80}\n")
             try:
-                copy_editor = CopyEditor(cost_tracker=cost_tracker)
+                copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model)
                 ce_result = copy_editor.edit_commentary(
                     psalm_number=psalm_number,
                     input_file=print_ready_file,
@@ -856,6 +860,12 @@ if __name__ == "__main__":
                        help="Skip question curation and exclude from writer/doc even if file exists")
     parser.add_argument("--skip-copy-editor", action="store_true",
                        help="Skip the copy editor step (runs by default)")
+    parser.add_argument("--gpt-5-4-all", action="store_true", help="Use GPT-5.4 for all eligible agents")
+    parser.add_argument("--gpt-5-4-macro", action="store_true", help="Use GPT-5.4 for Macro Analyst")
+    parser.add_argument("--gpt-5-4-insight", action="store_true", help="Use GPT-5.4 for Insight Extractor")
+    parser.add_argument("--gpt-5-4-question", action="store_true", help="Use GPT-5.4 for Question Curator")
+    parser.add_argument("--gpt-5-4-copy", action="store_true", help="Use GPT-5.4 for Copy Editor")
+    parser.add_argument("--gpt-5-4-writer", action="store_true", help="Use GPT-5.4 for Master Writer")
 
     args = parser.parse_args()
 
@@ -882,6 +892,24 @@ if __name__ == "__main__":
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
     print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
     print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
+    
+    macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-6"
+    insight_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_insight) else "gpt-5.4"
+    question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.4"
+    copy_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_copy) else "gpt-5.4"
+    
+    if args.gpt_5_4_all or args.gpt_5_4_writer:
+        args.master_editor_model = "gpt-5.4"
+    if args.gpt_5_4_all or args.gpt_5_4_writer:
+        print(f"Override: Master Writer using GPT-5.4")
+    if args.gpt_5_4_all or args.gpt_5_4_macro:
+        print(f"Override: Macro Analyst using GPT-5.4")
+    if args.gpt_5_4_all or args.gpt_5_4_insight:
+        print(f"Override: Insight Extractor using GPT-5.4")
+    if args.gpt_5_4_all or args.gpt_5_4_question:
+        print(f"Override: Question Curator using GPT-5.4")
+    if args.gpt_5_4_all or args.gpt_5_4_copy:
+        print(f"Override: Copy Editor using GPT-5.4")
     print()
 
     run_enhanced_pipeline(
@@ -905,4 +933,8 @@ if __name__ == "__main__":
         exclude_insights=args.exclude_insights,
         exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
+        macro_model=macro_mdl,
+        insight_model=insight_mdl,
+        question_model=question_mdl,
+        copy_model=copy_mdl,
     )

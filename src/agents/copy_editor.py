@@ -172,13 +172,22 @@ still append a "## Changes" section stating "No changes required."
 class CopyEditor:
     """Applies the 9-category error taxonomy to existing psalm commentary."""
 
-    DEFAULT_MODEL = "claude-opus-4-6"
+    # Default model for copy editing (requires high nuance and precision)
+    DEFAULT_MODEL = "gpt-5.4"
 
     def __init__(self, model: str = None, logger=None, cost_tracker=None):
         self.model = model or self.DEFAULT_MODEL
         self.logger = logger or get_logger("copy_editor")
-        self.client = anthropic.Anthropic()
         self.cost_tracker = cost_tracker or CostTracker()
+        
+        self.anthropic_client = None
+        self.openai_client = None
+        
+        if "gpt" in self.model.lower() or self.model.startswith("o"):
+            from openai import OpenAI
+            self.openai_client = OpenAI()
+        else:
+            self.anthropic_client = anthropic.Anthropic()
 
     # -------------------------------------------------------------------------
     # Public API
@@ -500,58 +509,82 @@ class CopyEditor:
             try:
                 start_time = time.time()
 
-                # Use streaming (required for Opus 4.6 long generations)
                 full_text = ""
                 thinking_text = ""
                 usage_data = {}
                 last_progress_time = time.time()
                 progress_interval = 5  # seconds between progress updates
 
-                with self.client.messages.stream(
-                    model=self.model,
-                    max_tokens=65536,
-                    thinking={
-                        "type": "adaptive"
-                    },
-                    system=COPY_EDITOR_SYSTEM_PROMPT,
-                    messages=[
-                        {"role": "user", "content": user_message}
-                    ]
-                ) as stream:
-                    for event in stream:
-                        if hasattr(event, 'type'):
-                            if event.type == 'content_block_delta':
-                                if hasattr(event.delta, 'text'):
-                                    full_text += event.delta.text
-                                elif hasattr(event.delta, 'thinking'):
-                                    thinking_text += event.delta.thinking
+                if self.openai_client:
+                    kwargs = {
+                        "model": self.model,
+                        "messages": [
+                            {"role": "system", "content": COPY_EDITOR_SYSTEM_PROMPT},
+                            {"role": "user", "content": user_message}
+                        ]
+                    }
+                    if "gpt-5" in self.model.lower() or self.model.startswith("o"):
+                        kwargs["reasoning_effort"] = "high"
+                        kwargs["max_completion_tokens"] = 65536
+                    else:
+                        kwargs["max_tokens"] = 16000
+                        
+                    response = self.openai_client.chat.completions.create(**kwargs)
+                    full_text = response.choices[0].message.content
+                    
+                    if hasattr(response.usage, 'reasoning_tokens') and response.usage.reasoning_tokens:
+                        thinking_text = "Reasoning used " + str(response.usage.reasoning_tokens) + " tokens."
+                    
+                    usage_data = {
+                        'input_tokens': getattr(response.usage, 'prompt_tokens', 0),
+                        'output_tokens': getattr(response.usage, 'completion_tokens', 0),
+                    }
+                else:
+                    with self.anthropic_client.messages.stream(
+                        model=self.model,
+                        max_tokens=65536,
+                        thinking={
+                            "type": "adaptive"
+                        },
+                        system=COPY_EDITOR_SYSTEM_PROMPT,
+                        messages=[
+                            {"role": "user", "content": user_message}
+                        ]
+                    ) as stream:
+                        for event in stream:
+                            if hasattr(event, 'type'):
+                                if event.type == 'content_block_delta':
+                                    if hasattr(event.delta, 'text'):
+                                        full_text += event.delta.text
+                                    elif hasattr(event.delta, 'thinking'):
+                                        thinking_text += event.delta.thinking
 
-                        # Periodic progress update
-                        now = time.time()
-                        if now - last_progress_time >= progress_interval:
-                            elapsed = now - start_time
-                            if thinking_text and not full_text:
-                                phase = "thinking"
-                                chars = len(thinking_text)
-                            else:
-                                phase = "writing"
-                                chars = len(full_text)
-                            self.logger.info(
-                                f"  ⏳ {elapsed:.0f}s — {phase}: {chars:,} chars received"
-                            )
-                            last_progress_time = now
+                            # Periodic progress update
+                            now = time.time()
+                            if now - last_progress_time >= progress_interval:
+                                elapsed = now - start_time
+                                if thinking_text and not full_text:
+                                    phase = "thinking"
+                                    chars = len(thinking_text)
+                                else:
+                                    phase = "writing"
+                                    chars = len(full_text)
+                                self.logger.info(
+                                    f"  ⏳ {elapsed:.0f}s — {phase}: {chars:,} chars received"
+                                )
+                                last_progress_time = now
 
-                    # Get final message for usage stats
-                    final_message = stream.get_final_message()
-                    if final_message and final_message.usage:
-                        usage_data = {
-                            'input_tokens': final_message.usage.input_tokens,
-                            'output_tokens': final_message.usage.output_tokens,
-                        }
-                        if hasattr(final_message.usage, 'cache_creation_input_tokens'):
-                            usage_data['cache_creation_input_tokens'] = final_message.usage.cache_creation_input_tokens
-                        if hasattr(final_message.usage, 'cache_read_input_tokens'):
-                            usage_data['cache_read_input_tokens'] = final_message.usage.cache_read_input_tokens
+                        # Get final message for usage stats
+                        final_message = stream.get_final_message()
+                        if final_message and final_message.usage:
+                            usage_data = {
+                                'input_tokens': final_message.usage.input_tokens,
+                                'output_tokens': final_message.usage.output_tokens,
+                            }
+                            if hasattr(final_message.usage, 'cache_creation_input_tokens'):
+                                usage_data['cache_creation_input_tokens'] = final_message.usage.cache_creation_input_tokens
+                            if hasattr(final_message.usage, 'cache_read_input_tokens'):
+                                usage_data['cache_read_input_tokens'] = final_message.usage.cache_read_input_tokens
 
                 elapsed = time.time() - start_time
                 self.logger.info(f"Response received in {elapsed:.1f}s")

@@ -13,19 +13,15 @@ I'm starting a new development session on the Psalms AI Analysis project.
 
 **Project location:** C:\Users\ariro\OneDrive\Documents\Psalms
 
-**Please read these files before we begin:**
-1. `docs/session_tracking/PROJECT_STATUS.md` - Current session number, active features, recent work
-2. `docs/session_tracking/IMPLEMENTATION_LOG.md` - Most recent session details
-3. `docs/session_tracking/scriptReferences.md` - All 50+ scripts with namespaces & descriptions (READ THIS FIRST when looking for code)
+**Please read this file before we begin:**
+- `docs/session_tracking/PROJECT_STATUS.md` — Current session number, active features, recent work, quick commands, key directories
 
-**Key files to know:**
-- `CLAUDE.md` - Project summary for LLM context
-- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - System architecture
+**Read these ONLY if needed for today's task:**
+- `docs/session_tracking/scriptReferences.md` — When you need to find a specific script
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` — When you need to understand system architecture
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — When you need details on a past session
 
-**After reading, ask me:** "What would you like to work on in Session [N]?"
-
-**Today's goal:** please see C:\Users\ariro\OneDrive\Documents\Psalms\docs\features\Copy_editor_plan.md
-Note that I'd like to implement this copy editor agent and then run some tests to see how it would have modified existing readers guides. So however we implement, we need to be able to run it as a standalone against existing output and readily see what it changes. VERY important - we have worked very carefully to get the writer output formatted correctly. the copy editor must not change any elements of formatting; it must preserve formatting meticulously. we use that formatting to help create the final docxs.
+**Today's goal:** 
 ```
 
 ---
@@ -35,9 +31,9 @@ Note that I'd like to implement this copy editor agent and then run some tests t
 Copy and paste when you're finishing a session:
 
 ```
-We're wrapping up this session. Please update the session documentation, then commit.
+We're wrapping up this session. Please update the session documentation, then commit your work.
 
-**1. Update IMPLEMENTATION_LOG.md** - Add this session's entry at the TOP:
+**1. Update IMPLEMENTATION_LOG.md** — Add this session's entry at the TOP:
 ---
 ## Session [N] (YYYY-MM-DD): [Brief Title]
 
@@ -53,14 +49,11 @@ We're wrapping up this session. Please update the session documentation, then co
 - `path/to/file.py` - [brief description]
 ---
 
-**2. Update PROJECT_STATUS.md** in THREE places:
-- **Header (lines 3, 21)**: Update "Last Updated" date and "Current Session" number
-- **Recent Work Summary (after line 55)**: Add a new 3-bullet entry AT THE TOP
-- **Active Features (line 22)**: Add any new features if applicable
+**2. Update PROJECT_STATUS.md** in TWO places:
+- **Header (line 3)**: Update "Last Updated" date and session number
+- **Recent Work Summary**: Replace the OLDEST of the 5 entries with a new entry for this session AT THE TOP (keep only 5)
 
-**3. Update scriptReferences.md** if you created or significantly modified any scripts:
-- Add new scripts with namespace, description, and file link
-- Update descriptions if functionality changed significantly
+**3. Update scriptReferences.md** if you created or significantly modified any scripts.
 
 **4. Confirm what was accomplished** in a brief summary for my records.
 ```

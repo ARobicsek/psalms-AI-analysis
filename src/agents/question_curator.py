@@ -92,8 +92,9 @@ class QuestionCurator:
     
     def __init__(
         self,
+        api_key: Optional[str] = None,
         logger=None,
-        cost_tracker: Optional[CostTracker] = None
+        model: str = "gpt-5.4"
     ):
         """
         Initialize QuestionCurator.
@@ -101,46 +102,33 @@ class QuestionCurator:
         Args:
             logger: Logger instance
             cost_tracker: CostTracker instance for tracking API costs
-        """
-        self.logger = logger or get_logger("question_curator")
-        self.cost_tracker = cost_tracker or CostTracker()
-        
-    @property
-    def active_model(self) -> str:
-        """Return the active model identifier."""
-        return self.model
-
-    def __init__(
-        self,
-        logger=None,
-        cost_tracker: Optional[CostTracker] = None,
-        model: str = "claude-opus-4-6"
-    ):
-        """
-        Initialize QuestionCurator.
-        
-        Args:
-            logger: Logger instance
-            cost_tracker: CostTracker instance for tracking API costs
-            model: Model identifier to use (default: claude-opus-4-6)
+            model: Model identifier to use (default: gpt-5.4)
         """
         self.logger = logger or get_logger("question_curator")
         self.cost_tracker = cost_tracker or CostTracker()
         self.model = model
         
-        # Initialize Anthropic client
-        self.api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not self.api_key:
-            self.logger.warning("No ANTHROPIC_API_KEY found. Question curation will use fallback extraction.")
-            self.client = None
+        self.anthropic_client = None
+        self.openai_client = None
+        
+        if "gpt" in self.model.lower() or self.model.startswith("o"):
+            from openai import OpenAI
+            self.openai_client = OpenAI()
+            self.client = self.openai_client  # Ensure client is truthy for the fallback check
         else:
-            try:
-                import anthropic
-                self.client = anthropic.Anthropic(api_key=self.api_key)
-                self.logger.info(f"QuestionCurator initialized with {self.model}")
-            except ImportError:
-                self.logger.warning("anthropic library not installed. Using fallback extraction.")
+            self.api_key = os.environ.get("ANTHROPIC_API_KEY")
+            if not self.api_key:
+                self.logger.warning("No ANTHROPIC_API_KEY found. Question curation will use fallback extraction.")
                 self.client = None
+            else:
+                try:
+                    import anthropic
+                    self.anthropic_client = anthropic.Anthropic(api_key=self.api_key)
+                    self.client = self.anthropic_client
+                    self.logger.info(f"QuestionCurator initialized with {self.model}")
+                except ImportError:
+                    self.logger.warning("anthropic library not installed. Using fallback extraction.")
+                    self.client = None
     
     def curate_questions(
         self,
@@ -243,34 +231,63 @@ class QuestionCurator:
         )
         
         try:
-            # Call Anthropic API with adaptive thinking (streaming required)
             response_text = ""
-            with self.client.messages.stream(
-                model=self.model,
-                max_tokens=4096,
-                thinking={"type": "adaptive"},
-                system="You are an expert biblical scholar and editor helping to curate questions for a study application.",
-                messages=[
-                    {"role": "user", "content": prompt}
-                ]
-            ) as stream:
-                for chunk in stream:
-                    if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
-                        if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
-                            if chunk.delta.type == 'text_delta':
-                                response_text += chunk.delta.text
-                final_message = stream.get_final_message()
-
-            # Track usage
-            if hasattr(final_message, 'usage'):
-                usage = final_message.usage
-                thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+            
+            if self.openai_client:
+                kwargs = {
+                    "model": self.model,
+                    "messages": [
+                        {"role": "system", "content": "You are an expert biblical scholar and editor helping to curate questions for a study application."},
+                        {"role": "user", "content": prompt}
+                    ]
+                }
+                if "gpt-5" in self.model.lower() or self.model.startswith("o"):
+                    kwargs["reasoning_effort"] = "high"
+                    kwargs["max_completion_tokens"] = 4096
+                else:
+                    kwargs["max_tokens"] = 4096
+                    
+                response = self.openai_client.chat.completions.create(**kwargs)
+                response_text = response.choices[0].message.content
+                
+                prompt_tokens = getattr(response.usage, 'prompt_tokens', 0)
+                completion_tokens = getattr(response.usage, 'completion_tokens', 0)
+                reason_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+                
                 self.cost_tracker.add_usage(
                     model=self.model,
-                    input_tokens=usage.input_tokens,
-                    output_tokens=usage.output_tokens,
-                    thinking_tokens=thinking_tokens
+                    input_tokens=prompt_tokens,
+                    output_tokens=completion_tokens,
+                    thinking_tokens=reason_tokens
                 )
+            else:
+                # Call Anthropic API with adaptive thinking (streaming required)
+                with self.anthropic_client.messages.stream(
+                    model=self.model,
+                    max_tokens=4096,
+                    thinking={"type": "adaptive"},
+                    system="You are an expert biblical scholar and editor helping to curate questions for a study application.",
+                    messages=[
+                        {"role": "user", "content": prompt}
+                    ]
+                ) as stream:
+                    for chunk in stream:
+                        if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
+                            if hasattr(chunk, 'delta') and hasattr(chunk.delta, 'type'):
+                                if chunk.delta.type == 'text_delta':
+                                    response_text += chunk.delta.text
+                    final_message = stream.get_final_message()
+
+                # Track usage
+                if hasattr(final_message, 'usage'):
+                    usage = final_message.usage
+                    thinking_tokens = getattr(usage, 'thinking_tokens', 0) if hasattr(usage, 'thinking_tokens') else 0
+                    self.cost_tracker.add_usage(
+                        model=self.model,
+                        input_tokens=usage.input_tokens,
+                        output_tokens=usage.output_tokens,
+                        thinking_tokens=thinking_tokens
+                    )
             
             # Parse JSON from response
             # Look for JSON block

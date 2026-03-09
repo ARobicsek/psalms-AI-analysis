@@ -1,6 +1,7 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-08 (Session 293)
+**Last Updated**: 2026-03-09 (Session 294)
+
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -18,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 291
+- **Current Session**: 294
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -89,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 294 (2026-03-09): Model Reversions and Micro Analyst Cleanup
+- Reverted Macro Analyst to `claude-opus-4-6` for superior analytical quality.
+- Reverted Micro Analyst to `claude-sonnet-4-6` and stripped out extraneous OpenAI integration logic.
+- Implemented universal 50% budgeted thinking cap in Micro Analyst to fix token exhaustion bugs for all psalm lengths.
+
 ### Session 293 (2026-03-08): Micro Analyst Token Fallback Investigation
 - Diagnosed why Claude Sonnet 4.6 fell back to budgeted thinking on short psalms like Psalm 39.
 - Identified that the 50% thinking budget optimization only applied to psalms >25 verses, leaving short psalms to use unrestricted adaptive thinking and consume their entire token limit on thought.
@@ -110,10 +116,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - 4 match modes (exact, variations, substring, substring + AI filter), 4 scopes, 3 result modes
 - AI features: curated results, semantic commentary, false-match filtering — all with cost display
 - Lexicon lookup (BDB + Klein), markdown export to `output/concordance/`
-
-### Session 289 (2026-03-08): Session Management Cleanup
-- Restructured session documentation to cut startup context from ~150KB to ~20KB (~85% token savings)
-- Rewrote SESSION_PROMPTS.md with tiered loading: only PROJECT_STATUS required at startup
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

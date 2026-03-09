@@ -107,6 +107,14 @@ PRICING = {
         "cache_read": 0.0,  # Not applicable
         "cache_write": 0.0,  # Not applicable
     },
+    # GPT-5.4 (OpenAI)
+    "gpt-5.4": {
+        "input": 2.50,
+        "output": 15.00,
+        "thinking": 15.00,  # Reasoning tokens charged at output rate
+        "cache_read": 0.0,  # Not applicable
+        "cache_write": 0.0,  # Not applicable
+    },
     # Gemini 2.5 Pro (Google)
     "gemini-2.5-pro": {
         "input": 3.00,

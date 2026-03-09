@@ -389,28 +389,32 @@ class MicroAnalystV2:
         docs_dir: str = "docs",
         logger=None,
         commentary_mode: str = "all",
-        cost_tracker: Optional[CostTracker] = None
+        cost_tracker: Optional[CostTracker] = None,
+        model: Optional[str] = None
     ):
         """Initialize MicroAnalyst v2 agent.
 
         Args:
-            api_key: Anthropic API key
+            api_key: Target API key (Anthropic or OpenAI) depending on model
             db_path: Path to tanakh database
             docs_dir: Directory for RAG documents
             logger: Optional logger instance
             commentary_mode: "all" (request all 7 commentaries for all verses) or
                            "selective" (only request commentaries for specific verses)
             cost_tracker: CostTracker instance for tracking API costs
+            model: Optional model identifier to override default
         """
-        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
-        if not self.api_key:
-            raise ValueError("Anthropic API key required")
+        self.model = model or self.DEFAULT_MODEL
+        # Initialize Anthropic API
+        self.client = None
+        anthropic_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
+        if not anthropic_key:
+            raise ValueError("Anthropic API key required for Claude models")
+        self.client = anthropic.Anthropic(api_key=anthropic_key)
 
         if commentary_mode not in ["all", "selective"]:
             raise ValueError(f"Invalid commentary_mode: {commentary_mode}. Must be 'all' or 'selective'")
 
-        self.client = anthropic.Anthropic(api_key=self.api_key)
-        self.model = self.DEFAULT_MODEL  # Use class constant for single source of truth
         self.rag_manager = RAGManager(docs_dir)
         self.db = TanakhDatabase(Path(db_path))
         self.cost_tracker = cost_tracker or CostTracker()
@@ -522,19 +526,18 @@ class MicroAnalystV2:
         prompt = prompt.replace('{rag_context}', rag_formatted)
         prompt = prompt.replace('{verse_count}', str(verse_count))
 
-        # Call Sonnet 4.6 with adaptive thinking and retry logic
-        self.logger.info("  Calling Sonnet 4.6...")
+        # Call model with appropriate routing and retry logic
+        self.logger.info(f"  Calling {self.model}...")
 
         max_retries = 3
         retry_delay = 2  # seconds
-        current_max_tokens = 65536  # 64K to accommodate adaptive thinking + large JSON
+        current_max_tokens = 65536  # 64K to accommodate large JSON/thinking
 
-        # For long psalms (>25 verses), start with budgeted thinking to guarantee tokens for text output.
-        # Adaptive thinking can consume the entire budget on complex psalms, leaving nothing for JSON.
+        # Anthropics adaptive thinking can consume the entire budget, leaving nothing for JSON.
         LONG_PSALM_THRESHOLD = 25
-        use_budgeted_thinking = verse_count > LONG_PSALM_THRESHOLD
+        use_budgeted_thinking = verse_count > LONG_PSALM_THRESHOLD and not self.openai_client
         if use_budgeted_thinking:
-            self.logger.info(f"  Long psalm ({verse_count} verses > {LONG_PSALM_THRESHOLD}): starting with budgeted thinking")
+            self.logger.info(f"  Long psalm ({verse_count} verses > {LONG_PSALM_THRESHOLD}): starting with budgeted thinking for Anthropic model")
 
         for attempt in range(max_retries):
             try:
@@ -544,6 +547,9 @@ class MicroAnalystV2:
                     self.logger.info(f"  Retry attempt {attempt + 1}/{max_retries} after {wait_time}s delay...")
                     time.sleep(wait_time)
 
+                thinking_text = ""
+                response_text = ""
+                # Anthropic Routing (Sonnet, Opus)
                 # Build thinking config: adaptive by default, budgeted on retry if adaptive burned all tokens
                 if use_budgeted_thinking:
                     thinking_budget = int(current_max_tokens * 0.5)  # Reserve 50% for text output
@@ -567,8 +573,6 @@ class MicroAnalystV2:
                 )
 
                 # Collect response chunks (separate thinking from text, like macro_analyst)
-                thinking_text = ""
-                response_text = ""
                 with stream as response_stream:
                     for chunk in response_stream:
                         if hasattr(chunk, 'type'):
@@ -583,7 +587,6 @@ class MicroAnalystV2:
                                         response_text += chunk.delta.text
 
                 self.logger.info(f"  Thinking collected: {len(thinking_text)} chars")
-                self.logger.info(f"  Response collected: {len(response_text)} chars")
 
                 # Track usage and costs (discovery pass)
                 final_message = response_stream.get_final_message()
@@ -597,6 +600,7 @@ class MicroAnalystV2:
                         thinking_tokens=thinking_tokens
                     )
 
+                self.logger.info(f"  Response collected: {len(response_text)} chars")
                 self.logger.debug(f"Response text preview: {response_text[:500] if response_text else 'EMPTY'}")
 
                 # Strip leading/trailing whitespace before processing
@@ -653,13 +657,24 @@ class MicroAnalystV2:
                 import anthropic
                 import httpx
                 import httpcore
-                is_retryable = isinstance(e, (
-                    anthropic.InternalServerError,
-                    anthropic.RateLimitError,
-                    anthropic.APIConnectionError,
-                    httpx.RemoteProtocolError,
-                    httpcore.RemoteProtocolError
-                ))
+                
+                is_retryable = False
+                if self.openai_client:
+                    import openai
+                    is_retryable = isinstance(e, (
+                        openai.APIError,
+                        openai.APIConnectionError,
+                        openai.RateLimitError,
+                        openai.InternalServerError
+                    ))
+                else:
+                    is_retryable = isinstance(e, (
+                        anthropic.InternalServerError,
+                        anthropic.RateLimitError,
+                        anthropic.APIConnectionError,
+                        httpx.RemoteProtocolError,
+                        httpcore.RemoteProtocolError
+                    ))
 
                 if is_retryable and attempt < max_retries - 1:
                     self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
@@ -689,8 +704,8 @@ class MicroAnalystV2:
         prompt = RESEARCH_REQUEST_PROMPT.replace('{discoveries}', json.dumps(discoveries, ensure_ascii=False, indent=2))
         prompt = prompt.replace('{commentary_instructions}', commentary_instructions)
 
-        # Call Sonnet 4.5 with retry logic
-        self.logger.info("  Calling Sonnet 4.5 for research request generation...")
+        # Call model with retry logic
+        self.logger.info(f"  Calling {self.model} for research request generation...")
 
         max_retries = 3
         retry_delay = 2  # seconds
@@ -715,7 +730,6 @@ class MicroAnalystV2:
                 )
 
                 # Collect response chunks
-                response_text = ""
                 with stream as response_stream:
                     for chunk in response_stream:
                         if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
@@ -806,6 +820,7 @@ class MicroAnalystV2:
                 import anthropic
                 import httpx
                 import httpcore
+                
                 is_retryable = isinstance(e, (
                     anthropic.InternalServerError,
                     anthropic.RateLimitError,
