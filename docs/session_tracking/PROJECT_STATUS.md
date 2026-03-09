@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-08 (Session 292)
+**Last Updated**: 2026-03-08 (Session 293)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -89,6 +89,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 293 (2026-03-08): Micro Analyst Token Fallback Investigation
+- Diagnosed why Claude Sonnet 4.6 fell back to budgeted thinking on short psalms like Psalm 39.
+- Identified that the 50% thinking budget optimization only applied to psalms >25 verses, leaving short psalms to use unrestricted adaptive thinking and consume their entire token limit on thought.
+- User selected Option 1 fix (always apply budgeted thinking), to be implemented next session.
+
 ### Session 292 (2026-03-08): Converse with Editor Upgrades
 - Upgraded `converse_with_editor.py` script to use `prompt_toolkit` to fix Windows clipboard pasting issues and enable multi-line input.
 - Added dynamic model selection menu with interactive choice of LLM (Anthropic, Gemini, OpenAI).
@@ -109,10 +114,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ### Session 289 (2026-03-08): Session Management Cleanup
 - Restructured session documentation to cut startup context from ~150KB to ~20KB (~85% token savings)
 - Rewrote SESSION_PROMPTS.md with tiered loading: only PROJECT_STATUS required at startup
-
-### Session 288 (2026-03-07): Copy Editor Expansion — 9-Category Taxonomy
-- Expanded copy editor from 6 to 9 error categories: added factual/textual accuracy (7), Hebrew grammar bloat (8), and strained arguments (9)
-- Fixed copy editor truncation (max_tokens 32K→64K) and Windows encoding crash
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

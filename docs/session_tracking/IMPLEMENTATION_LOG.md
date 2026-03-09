@@ -8,6 +8,23 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 293 (2026-03-08): Micro Analyst Token Fallback Investigation
+
+**Objective**: Investigate why Claude Sonnet 4.6 fell back to budgeted thinking on short psalms, causing a costly Stage 1 retry.
+
+**Problems Identified**:
+- In Session 285, an optimization was added to cap the thinking budget at 50% (`use_budgeted_thinking`), but it only applied to psalms with more than 25 verses (`LONG_PSALM_THRESHOLD = 25`).
+- For Psalm 39 (14 verses), the threshold was not met, so the Micro Analyst used unrestricted adaptive thinking.
+- Sonnet 4.6 consumed the entire 64,000 max token budget on thinking alone, returning an empty text block, crashing, and forcing a retry.
+
+**Solutions Implemented**:
+1. Diagnosed the logic flaw in `src/agents/micro_analyst.py`.
+2. Proposed two fixes for the next session (Session 294): either universally apply the 50% thinking budget (remove the threshold) or increase the `max_tokens` limit to 128K for short psalms.
+3. User selected Option 1 (always apply budgeted thinking), to be implemented next session.
+
+**Files Modified**:
+- None in this session (Investigation and planning only).
+
 ## Session 292 (2026-03-08): Converse with Editor Upgrades
 
 **Objective**: Fix clipboard pasting on Windows and enable dynamic model selection to ensure accurate LLM pricing estimates.
