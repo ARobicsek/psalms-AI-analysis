@@ -8,6 +8,36 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 298 (2026-03-09): Error and Retry Tracking in Cost Summary
+
+**Objective**: Enhance the terminal cost tracking summary to include information about errors and retries (e.g. JSON validation failures or API timeouts) so processes generating unexpected costs can be monitored.
+
+**Problems Identified**:
+- The `CostTracker` showed API call counts and dollar costs, but silently consumed the cost of retries.
+- Micro Analyst and other agents logged retryable exceptions, but the final pipeline summary lacked visibility into these events, making it difficult to spot cost-generating loop issues at a glance.
+- Pre-existing bug: `response_text` was not initialized before the streaming loop in `_generate_research_requests()`, causing an `UnboundLocalError` crash on the research request generation pass.
+
+**Solutions Implemented**:
+1. Added an `events: List[Dict[str, str]]` field and a `log_event()` method to the `CostTracker`.
+2. Updated the `get_summary()` method to append a "PIPELINE EVENTS & RETRIES" section if any events were recorded.
+3. Hooked `self.cost_tracker.log_event()` into the `JSONDecodeError`, validation failure, truncation, and API exception retry loops across:
+   - `src/agents/micro_analyst.py`
+   - `src/agents/macro_analyst.py`
+   - `src/agents/insight_extractor.py`
+   - `src/agents/question_curator.py`
+4. Fixed the `UnboundLocalError` in `_generate_research_requests()` by initializing `response_text = ""` before the streaming loop.
+5. Wrote `scripts/test_cost_tracker_events.py` to verify the tracker formatting without running costly API calls.
+
+**Files Modified**:
+- `src/utils/cost_tracker.py` - Added event tracking array and summary formatting.
+- `src/agents/micro_analyst.py` - Added log_event hooks into retry logic.
+- `src/agents/macro_analyst.py` - Added log_event hooks for truncation and connection retries.
+- `src/agents/insight_extractor.py` - Added log_event hooks for JSON and token truncation retries.
+- `src/agents/question_curator.py` - Added log_event hook for exception handling.
+- `scripts/test_cost_tracker_events.py` - **[NEW]** Test script for summary formatting.
+
+---
+
 ## Session 297 (2026-03-09): Micro Analyst JSON Repair & Validation
 
 **Objective**: Implement the fallback `json-repair` logic for the Micro Analyst to salvage API responses that are truncated during generation, preventing costly retries.

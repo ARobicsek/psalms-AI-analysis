@@ -320,6 +320,7 @@ class InsightExtractor:
                     if attempt < max_retries - 1:
                         scaled_max_tokens = int(scaled_max_tokens * 1.5)
                         self.logger.warning(f"  Response truncated. Retrying with max_tokens={scaled_max_tokens}...")
+                        self.cost_tracker.log_event("Insight Extractor", "Retry", f"Response truncated, max_tokens={scaled_max_tokens}")
                         continue
                     else:
                         self.logger.error("  Response truncated on final attempt")
@@ -344,6 +345,7 @@ class InsightExtractor:
                     if attempt < max_retries - 1:
                         scaled_max_tokens = int(scaled_max_tokens * 1.5)
                         self.logger.warning(f"  JSON parse failed (likely truncation). Retrying with max_tokens={scaled_max_tokens}...")
+                        self.cost_tracker.log_event("Insight Extractor", "Retry", f"JSON parse failed, max_tokens={scaled_max_tokens}")
                         continue
                     # Final attempt failed — return graceful fallback
                     return {

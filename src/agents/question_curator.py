@@ -306,6 +306,7 @@ class QuestionCurator:
             
         except Exception as e:
             self.logger.error(f"Error calling LLM: {e}")
+            self.cost_tracker.log_event("Question Curator", "Error", f"LLM error: {e}")
             return []
     
     def _fallback_extraction(

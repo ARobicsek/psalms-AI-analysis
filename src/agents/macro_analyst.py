@@ -396,6 +396,7 @@ class MacroAnalyst:
                         old_max = max_tokens
                         max_tokens = int(max_tokens * 1.5)
                         self.logger.warning(f"Retrying with increased max_tokens: {old_max} -> {max_tokens}")
+                        self.cost_tracker.log_event("Macro Analyst", "Retry", f"Response truncated, increasing max_tokens to {max_tokens}")
                         continue
                     else:
                         self.logger.error("Response truncated on final attempt — cannot retry")
@@ -466,6 +467,7 @@ class MacroAnalyst:
 
                 if is_retryable and attempt < max_retries - 1:
                     self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.cost_tracker.log_event("Macro Analyst", "Retry", f"{type(e).__name__} (attempt {attempt + 1})")
                     self.logger.warning("  Retrying with fresh request...")
                     continue  # Retry
                 else:

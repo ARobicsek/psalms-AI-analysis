@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-09 (Session 297)
+**Last Updated**: 2026-03-09 (Session 298)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 297
+- **Current Session**: 298
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -90,6 +90,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 298 (2026-03-09): Error and Retry Tracking in Cost Summary
+- Enhanced `CostTracker` to maintain a log of pipeline events (`log_event()`).
+- Updated `get_summary()` to display a dedicated "PIPELINE EVENTS & RETRIES" section reporting which agents hit token truncations, JSON repair failures, or API timeouts.
+- Injected logging hooks into the retry loops of the Micro Analyst, Macro Analyst, Insight Extractor, and Question Curator.
+- Fixed `UnboundLocalError` in `_generate_research_requests()` (missing `response_text` initialization).
+
 ### Session 297 (2026-03-09): Micro Analyst JSON Repair & Validation
 - Integrated the `json-repair` library into the Micro Analyst to salvage outputs that are truncated due to streaming connection drops or internal cutoff.
 - Added structural validation: repaired JSON is only accepted if it contains the correct number of `verse_discoveries` (matching the database verse count) and at least 3 `interesting_questions`.
@@ -109,11 +115,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Reverted Macro Analyst to `claude-opus-4-6` for superior analytical quality.
 - Reverted Micro Analyst to `claude-sonnet-4-6` and stripped out extraneous OpenAI integration logic.
 - Implemented universal 50% budgeted thinking cap in Micro Analyst to fix token exhaustion bugs for all psalm lengths.
-
-### Session 293 (2026-03-08): Micro Analyst Token Fallback Investigation
-- Diagnosed why Claude Sonnet 4.6 fell back to budgeted thinking on short psalms like Psalm 39.
-- Identified that the 50% thinking budget optimization only applied to psalms >25 verses, leaving short psalms to use unrestricted adaptive thinking and consume their entire token limit on thought.
-- User selected Option 1 fix (always apply budgeted thinking), to be implemented next session.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

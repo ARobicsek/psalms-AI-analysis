@@ -671,6 +671,7 @@ class MicroAnalystV2:
                 except Exception as repair_e:
                     if attempt < max_retries - 1:
                         self.logger.warning(f"JSON repair/validation failed: {repair_e}")
+                        self.cost_tracker.log_event("Micro Analyst", "Retry", f"JSON repair/validation failed (attempt {attempt + 1})")
                         self.logger.warning("  Retrying with fresh request...")
                         continue  # Retry
                     else:
@@ -694,6 +695,7 @@ class MicroAnalystV2:
 
                 if is_retryable and attempt < max_retries - 1:
                     self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.cost_tracker.log_event("Micro Analyst", "Retry", f"{type(e).__name__} (attempt {attempt + 1})")
                     self.logger.warning("  Retrying with fresh request...")
                     continue  # Retry
                 else:
@@ -746,6 +748,7 @@ class MicroAnalystV2:
                 )
 
                 # Collect response chunks
+                response_text = ""
                 with stream as response_stream:
                     for chunk in response_stream:
                         if hasattr(chunk, 'type') and chunk.type == 'content_block_delta':
@@ -847,6 +850,7 @@ class MicroAnalystV2:
 
                 if is_retryable and attempt < max_retries - 1:
                     self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
+                    self.cost_tracker.log_event("Micro Analyst", "Retry", f"Research request gen: {type(e).__name__} (attempt {attempt + 1})")
                     self.logger.warning("  Retrying with fresh request...")
                     continue  # Retry
                 else:

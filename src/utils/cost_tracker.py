@@ -147,6 +147,15 @@ class CostTracker:
 
     def __init__(self):
         self.usage_by_model: Dict[str, ModelUsage] = {}
+        self.events: List[Dict[str, str]] = []
+
+    def log_event(self, agent_name: str, event_type: str, message: str):
+        """Log a pipeline event (e.g., error, retry)."""
+        self.events.append({
+            "agent": agent_name,
+            "type": event_type,
+            "message": message
+        })
 
     def add_usage(
         self,
@@ -283,6 +292,14 @@ class CostTracker:
         lines.append(f"GRAND TOTAL: ${grand_total:.4f}")
         lines.append("=" * 80 + "\n")
 
+        if self.events:
+            lines.append("\n" + "=" * 80)
+            lines.append("PIPELINE EVENTS & RETRIES")
+            lines.append("=" * 80)
+            for event in self.events:
+                lines.append(f"  [{event['agent']}] {event['type']}: {event['message']}")
+            lines.append("=" * 80 + "\n")
+
         return "\n".join(lines)
 
     def to_dict(self) -> Dict:
@@ -300,4 +317,5 @@ class CostTracker:
                 "costs": costs
             }
         result["total_cost"] = self.get_total_cost()
+        result["events"] = self.events
         return result
