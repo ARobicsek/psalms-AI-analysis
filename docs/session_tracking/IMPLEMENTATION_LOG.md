@@ -8,9 +8,26 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
-## Session 291 (2026-03-08): Nusach Disambiguation — Fix Sefard/Sephardic Confusion
+## Session 292 (2026-03-08): Converse with Editor Upgrades
 
-**Objective**: Fix systemic confusion between Nusach Sefard (Hasidic rite) and actual Sephardic/Mizrachi traditions across the entire pipeline.
+**Objective**: Fix clipboard pasting on Windows and enable dynamic model selection to ensure accurate LLM pricing estimates.
+
+**Problems Identified**:
+- Original script `converse_with_editor.py` used standard `input()`, which intercepts `Ctrl+V` on Windows as explicit `^V` keystrokes instead of pasting the clipboard text, preventing users from copy-pasting into the dialog.
+- Standard input also evaluated pressing `Enter` as an immediate message submission, blocking users from writing or pasting multi-line paragraphs.
+- Script used hardcoded GPT-5.1 pricing information and hardcoded the `gpt-5.1` string for API calls, limiting flexibility to experiment with other conversational models (e.g. Claude Opus or Gemini) and failing to provide accurate cost tracking for differing models.
+
+**Solutions Implemented**:
+1. Installed and implemented `prompt_toolkit.PromptSession` to replace `input()`, which natively supports multiline text and correctly handles system clipboard pastes on Windows. Set explicit submit triggers to `Alt+Enter` or `Esc` -> `Enter`.
+2. Created an interactive model selection prompt letting the user pick any model defined in the `PRICING` dictionary, dynamically updating estimated costs and the API client.
+3. Added robust client abstraction in `run_conversation` to support streaming from `openai` (GPT), `anthropic` (Claude), and `google.genai` (Gemini) APIs depending on the user's selected model prefix.
+
+**Files Modified**:
+- `scripts/converse_with_editor.py` - Integrated `prompt_toolkit`, dynamic API instantiations, usage extractions, and `CostTracker` dynamic model inputs.
+
+---
+
+## Session 291 (2026-03-08): Nusach Disambiguation — Fix Sefard/Sephardic Confusion
 
 **Problems Identified**:
 - Database metadata labeled Nusach Sefard as "Sephardic/Hasidic," causing LLM writers to call the Hasidic rite "Sephardic"

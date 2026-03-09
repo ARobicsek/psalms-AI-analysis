@@ -23,15 +23,17 @@ from pathlib import Path
 from datetime import datetime
 from openai import OpenAI
 from dotenv import load_dotenv
+from prompt_toolkit import PromptSession
+from prompt_toolkit.styles import Style
 
 load_dotenv()
 
 # Add project root to path
+# Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# GPT-5.1 pricing (per 1M tokens) - update if needed
-GPT51_INPUT_COST_PER_M = 2.00   # $2.00 per 1M input tokens
-GPT51_OUTPUT_COST_PER_M = 8.00  # $8.00 per 1M output tokens
+from src.utils.cost_tracker import PRICING
+
 
 
 def parse_arguments():
@@ -51,13 +53,16 @@ Examples:
     parser.add_argument('--edition', type=str, default='main',
                         choices=['main', 'college'],
                         help=argparse.SUPPRESS)
+    parser.add_argument('--model', type=str, default='gpt-5.1',
+                        help='Model to converse with (default: gpt-5.1)')
 
     return parser.parse_args()
 
 
-def resolve_file_paths(psalm_number: int, edition: str) -> dict:
+def resolve_file_paths(psalm_number: int) -> dict:
     """
     Resolve all file paths for the given psalm.
+    Detects standard V4, SI, and fallback to legacy depending on what exists.
 
     Returns dict with keys:
         - output_dir: Path to psalm output directory
@@ -66,8 +71,9 @@ def resolve_file_paths(psalm_number: int, edition: str) -> dict:
         - research: Path to research bundle markdown
         - edited_intro: Path to edited introduction
         - edited_verses: Path to edited verses
-        - assessment: Path to editorial assessment
-        - edition_suffix: '' for main, '_college' for college
+        - insights: Path to insights JSON (optional)
+        - questions: Path to reader questions JSON (optional)
+        - edition_name: e.g. "Standard V4", "Special Instruction", or "Legacy"
     """
     # Try both naming conventions (psalm_N and psalm_NNN)
     base_dir = Path("output")
@@ -83,19 +89,56 @@ def resolve_file_paths(psalm_number: int, edition: str) -> dict:
             f"Please run the full pipeline first."
         )
 
-    # Determine edition suffix
-    edition_suffix = "" if edition == "main" else "_college"
+    # Determine paths and edition
+    # Standard V4
+    intro_v4 = psalm_dir / f"psalm_{psalm_number:03d}_edited_intro.md"
+    verses_v4 = psalm_dir / f"psalm_{psalm_number:03d}_edited_verses.md"
+    
+    # SI V4
+    intro_si = psalm_dir / f"psalm_{psalm_number:03d}_intro_SI.md"
+    verses_si = psalm_dir / f"psalm_{psalm_number:03d}_verses_SI.md"
+    
+    # Legacy / Old Synthesis
+    intro_old = psalm_dir / f"psalm_{psalm_number:03d}_synthesis_intro.md"
+    verses_old = psalm_dir / f"psalm_{psalm_number:03d}_synthesis_verses.md"
+    
+    if intro_v4.exists() and verses_v4.exists():
+        edited_intro = intro_v4
+        edited_verses = verses_v4
+        edition_name = "Standard V4"
+    elif intro_si.exists() and verses_si.exists():
+        edited_intro = intro_si
+        edited_verses = verses_si
+        edition_name = "Special Instruction"
+    elif intro_old.exists() and verses_old.exists():
+        edited_intro = intro_old
+        edited_verses = verses_old
+        edition_name = "Legacy"
+    else:
+        raise FileNotFoundError(f"Could not find introduction and verse commentary files in {psalm_dir}")
+
+    # Determine research bundle (prefer trimmed)
+    research_trimmed = psalm_dir / f"psalm_{psalm_number:03d}_research_trimmed.md"
+    research_standard = psalm_dir / f"psalm_{psalm_number:03d}_research_v2.md"
+    research_file = research_trimmed if research_trimmed.exists() else research_standard
+
+    # Insights and Questions
+    insights_file = psalm_dir / f"psalm_{psalm_number:03d}_insights.json"
+    questions_refined = psalm_dir / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
+    questions_standard = psalm_dir / f"psalm_{psalm_number:03d}_reader_questions.json"
+    questions_file = questions_refined if questions_refined.exists() else questions_standard
 
     # Build paths dict
     paths = {
         'output_dir': psalm_dir,
         'macro': psalm_dir / f"psalm_{psalm_number:03d}_macro.json",
         'micro': psalm_dir / f"psalm_{psalm_number:03d}_micro_v2.json",
-        'research': psalm_dir / f"psalm_{psalm_number:03d}_research_v2.md",
-        'edited_intro': psalm_dir / f"psalm_{psalm_number:03d}_edited_intro{edition_suffix}.md",
-        'edited_verses': psalm_dir / f"psalm_{psalm_number:03d}_edited_verses{edition_suffix}.md",
-        'assessment': psalm_dir / f"psalm_{psalm_number:03d}_assessment{edition_suffix}.md",
-        'edition_suffix': edition_suffix,
+        'research': research_file,
+        'edited_intro': edited_intro,
+        'edited_verses': edited_verses,
+        'insights': insights_file,
+        'questions': questions_file,
+        'edition_name': edition_name,
     }
 
     return paths
@@ -199,11 +242,12 @@ def load_all_context(paths: dict, psalm_number: int) -> dict:
             'psalm_text': (content, char_count),
             'edited_intro': (content, char_count),
             'edited_verses': (content, char_count),
-            'assessment': (content, char_count),
         },
         'analysis': {
             'Macro analysis': (content, char_count),
             'Micro analysis': (content, char_count),
+            'Insights (JSON)': (content, char_count),
+            'Reader Questions': (content, char_count),
         },
         'research': {
             'Lexicon': (content, char_count),
@@ -222,9 +266,8 @@ def load_all_context(paths: dict, psalm_number: int) -> dict:
     psalm_text = load_psalm_text(psalm_number)
     context['core']['Psalm text'] = (psalm_text, len(psalm_text))
 
-    for key, display_name in [('edited_intro', 'Edited introduction'),
-                               ('edited_verses', 'Edited verses'),
-                               ('assessment', 'Editorial assessment')]:
+    for key, display_name in [('edited_intro', 'Intro / Theme'),
+                               ('edited_verses', 'Commentary verses')]:
         if paths[key].exists():
             content = paths[key].read_text(encoding='utf-8')
             context['core'][display_name] = (content, len(content))
@@ -239,6 +282,46 @@ def load_all_context(paths: dict, psalm_number: int) -> dict:
     if paths['micro'].exists():
         content = paths['micro'].read_text(encoding='utf-8')
         context['analysis']['Micro analysis'] = (content, len(content))
+        
+    if 'insights' in paths and paths['insights'].exists():
+        try:
+            with open(paths['insights'], 'r', encoding='utf-8') as f:
+                insights_data = json.load(f)
+                
+            formatted = ["## Extracted Insights\n"]
+            if 'psalm_level_insights' in insights_data:
+                formatted.append("### Psalm-Level Insights")
+                for insight in insights_data['psalm_level_insights']:
+                    formatted.append(f"- **{insight.get('type', 'Insight')}**: {insight.get('description', '')}")
+            
+            if 'verse_insights' in insights_data:
+                formatted.append("\n### Verse Insights")
+                for v_num, v_insights in insights_data['verse_insights'].items():
+                    formatted.append(f"\n#### Verse {v_num}")
+                    for insight in v_insights:
+                        formatted.append(f"- **{insight.get('type', 'Insight')}**: {insight.get('description', '')}")
+                        
+            content = '\n'.join(formatted)
+            context['analysis']['Insights'] = (content, len(content))
+        except Exception as e:
+            msg = f"[Could not parse insights JSON: {e}]"
+            context['analysis']['Insights'] = (msg, len(msg))
+            
+    if 'questions' in paths and paths['questions'].exists():
+        try:
+            with open(paths['questions'], 'r', encoding='utf-8') as f:
+                questions_data = json.load(f)
+                
+            formatted = ["## Reader Questions\n"]
+            if 'curated_questions' in questions_data:
+                for i, q in enumerate(questions_data['curated_questions'], 1):
+                    formatted.append(f"{i}. {q}")
+            
+            content = '\n'.join(formatted)
+            context['analysis']['Reader Questions'] = (content, len(content))
+        except Exception as e:
+            msg = f"[Could not parse questions JSON: {e}]"
+            context['analysis']['Reader Questions'] = (msg, len(msg))
 
     # Load research bundle sections (selectable)
     research_sections = parse_research_bundle(paths['research'])
@@ -272,6 +355,8 @@ def select_context_sections(context: dict) -> tuple:
     # Select analysis files
     print("\nAnalysis Files (ENTER=include, 'x'=exclude):")
     included_analysis = []
+    
+    # We can just use standard input() here since it's just single-char responses
     for name, (content, char_count) in context['analysis'].items():
         response = input(f"  [{name}] ({char_count:,} chars): ").strip().lower()
         if response != 'x':
@@ -351,11 +436,17 @@ Speak as yourself—the editor who crafted this commentary. Be direct, scholarly
 class CostTracker:
     """Track API costs during conversation."""
 
-    def __init__(self):
+    def __init__(self, model: str):
+        self.model = model
         self.total_input_tokens = 0
         self.total_output_tokens = 0
         self.exchanges = 0
         self.last_warning_threshold = 0  # Last $ threshold we warned at
+        
+        # Get pricing from master dict, fallback if not found
+        pricing = PRICING.get(model, {"input": 1.25, "output": 10.00, "thinking": 10.00})
+        self.input_cost_per_m = pricing["input"]
+        self.output_cost_per_m = pricing["output"]
 
     def add_usage(self, input_tokens: int, output_tokens: int):
         """Add token usage from an API call."""
@@ -365,8 +456,8 @@ class CostTracker:
 
     def get_total_cost(self) -> float:
         """Calculate total cost in dollars."""
-        input_cost = (self.total_input_tokens / 1_000_000) * GPT51_INPUT_COST_PER_M
-        output_cost = (self.total_output_tokens / 1_000_000) * GPT51_OUTPUT_COST_PER_M
+        input_cost = (self.total_input_tokens / 1_000_000) * self.input_cost_per_m
+        output_cost = (self.total_output_tokens / 1_000_000) * self.output_cost_per_m
         return input_cost + output_cost
 
     def check_threshold_warning(self) -> str | None:
@@ -409,7 +500,7 @@ def save_transcript(output_dir: Path, psalm_number: int, edition: str,
         f"# Conversation with Master Editor - Psalm {psalm_number} ({edition.title()} Edition)",
         f"",
         f"**Date**: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
-        f"**Model**: GPT-5.1 (high reasoning)",
+        f"**Model**: {cost_tracker.model} (high reasoning)",
         f"",
         f"## Context Included",
         "",
@@ -450,23 +541,59 @@ def save_transcript(output_dir: Path, psalm_number: int, edition: str,
     return filepath
 
 
-def run_conversation(client: OpenAI, system_prompt: str,
+def run_conversation(system_prompt: str,
                      output_dir: Path, psalm_number: int, edition: str,
-                     included_sections: list) -> None:
+                     included_sections: list, model: str) -> None:
     """Run the interactive conversation loop."""
 
+    # Initialize appropriate client
+    client_type = ""
+    client = None
+    if "claude" in model.lower():
+        import anthropic
+        api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not api_key:
+            print(f"\nError: ANTHROPIC_API_KEY environment variable not set for {model}.")
+            return
+        client = anthropic.Anthropic(api_key=api_key)
+        client_type = "anthropic"
+    elif "gemini" in model.lower():
+        from google import genai
+        from google.genai import types
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            print(f"\nError: GEMINI_API_KEY environment variable not set for {model}.")
+            return
+        client = genai.Client(api_key=api_key)
+        client_type = "gemini"
+    else:  # Assume OpenAI (gpt-*)
+        from openai import OpenAI
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            print(f"\nError: OPENAI_API_KEY environment variable not set for {model}.")
+            return
+        client = OpenAI(api_key=api_key)
+        client_type = "openai"
+
     messages = [{"role": "system", "content": system_prompt}]
-    cost_tracker = CostTracker()
+    cost_tracker = CostTracker(model)
 
     print("\n" + "=" * 70)
-    print("CONVERSATION READY")
+    print("CONVERSATION INSTRUCTIONS")
     print("=" * 70)
-    print("Commands: 'quit' to exit | 'save' to save transcript")
+    print("- Type your message and press [Alt+Enter] or [Esc] then [Enter] to submit.")
+    print("- You can freely copy and paste multi-line content into the dialog.")
+    print("- Commands: type 'quit' to exit, or 'save' to save transcript.")
     print("=" * 70 + "\n")
+
+    style = Style.from_dict({
+        'prompt': 'ansicyan bold',
+    })
+    session = PromptSession(style=style)
 
     while True:
         try:
-            user_input = input("You: ").strip()
+            user_input = session.prompt("You: ", multiline=True).strip()
         except (EOFError, KeyboardInterrupt):
             print("\n")
             user_input = "quit"
@@ -494,33 +621,80 @@ def run_conversation(client: OpenAI, system_prompt: str,
         try:
             print("\nMaster Editor: ", end="", flush=True)
 
-            # Use streaming to show response as it arrives
-            stream = client.chat.completions.create(
-                model="gpt-5.1",
-                messages=messages,
-                reasoning_effort="high",
-                max_completion_tokens=4096,
-                stream=True,
-                stream_options={"include_usage": True}
-            )
-
-            # Collect response chunks
             assistant_message = ""
             input_tokens = 0
             output_tokens = 0
 
-            for chunk in stream:
-                # Handle usage info (comes at the end)
-                if chunk.usage:
-                    input_tokens = chunk.usage.prompt_tokens
-                    output_tokens = chunk.usage.completion_tokens
+            if client_type == "openai":
+                kwargs = {
+                    "model": model,
+                    "messages": messages,
+                    "max_completion_tokens": 4096,
+                    "stream": True,
+                    "stream_options": {"include_usage": True}
+                }
+                if "gpt-5" in model:
+                    kwargs["reasoning_effort"] = "high"
 
-                # Handle content deltas
-                if chunk.choices and len(chunk.choices) > 0:
-                    delta = chunk.choices[0].delta
-                    if delta and delta.content:
-                        print(delta.content, end="", flush=True)
-                        assistant_message += delta.content
+                stream = client.chat.completions.create(**kwargs)
+
+                for chunk in stream:
+                    if chunk.usage:
+                        input_tokens = chunk.usage.prompt_tokens
+                        output_tokens = chunk.usage.completion_tokens
+                    if chunk.choices and len(chunk.choices) > 0:
+                        delta = chunk.choices[0].delta
+                        if delta and delta.content:
+                            print(delta.content, end="", flush=True)
+                            assistant_message += delta.content
+
+            elif client_type == "anthropic":
+                system_msg = messages[0]["content"]
+                anthropic_msgs = messages[1:]
+                
+                with client.messages.stream(
+                    model=model,
+                    max_tokens=4096,
+                    system=system_msg,
+                    messages=anthropic_msgs
+                ) as stream:
+                    for text in stream.text_stream:
+                        print(text, end="", flush=True)
+                        assistant_message += text
+                    
+                    final_msg = stream.get_final_message()
+                    input_tokens = final_msg.usage.input_tokens
+                    output_tokens = final_msg.usage.output_tokens
+
+            elif client_type == "gemini":
+                from google.genai import types
+                
+                system_instruction = messages[0]["content"]
+                gemini_msgs = []
+                for m in messages[1:]:
+                    role = "user" if m["role"] == "user" else "model"
+                    gemini_msgs.append(types.Content(role=role, parts=[types.Part.from_text(text=m["content"])]))
+                
+                stream = client.models.generate_content_stream(
+                    model=model,
+                    contents=gemini_msgs,
+                    config=types.GenerateContentConfig(
+                        system_instruction=system_instruction,
+                        max_output_tokens=4096,
+                    )
+                )
+                for chunk in stream:
+                    if chunk.text:
+                        print(chunk.text, end="", flush=True)
+                        assistant_message += chunk.text
+                    if chunk.usage_metadata:
+                        input_tokens = chunk.usage_metadata.prompt_token_count
+                        output_tokens = chunk.usage_metadata.candidates_token_count
+                
+                # Fallback if usage is 0
+                if input_tokens == 0:
+                    input_tokens = len(str(gemini_msgs) + system_instruction) // 4
+                    output_tokens = len(assistant_message) // 4
 
             print()  # Newline after streamed response
 
@@ -564,27 +738,28 @@ def main():
         print(f"Note: --edition {edition} is deprecated. "
               "V4 uses a unified writer (no separate college edition). "
               "Using main edition.")
-        edition = 'main'
 
     # Validate psalm number
     if not 1 <= psalm_number <= 150:
         print(f"Error: Psalm number must be between 1 and 150, got {psalm_number}")
         return 1
 
-    print("\n" + "=" * 70)
-    print(f"MASTER EDITOR CONVERSATION - Psalm {psalm_number} ({edition.title()} Edition)")
-    print("=" * 70)
-
-    # Resolve file paths
+    # Resolve file paths (this auto-detects Standard/SI/Legacy)
     try:
-        paths = resolve_file_paths(psalm_number, edition)
-        print(f"\nLoading from: {paths['output_dir']}")
+        paths = resolve_file_paths(psalm_number)
     except FileNotFoundError as e:
         print(f"\nError: {e}")
         return 1
+        
+    edition_name = paths.get('edition_name', 'Unknown')
+
+    print("\n" + "=" * 70)
+    print(f"MASTER EDITOR CONVERSATION - Psalm {psalm_number} ({edition_name} Edition)")
+    print("=" * 70)
+    print(f"\nLoading from: {paths['output_dir']}")
 
     # Validate required files exist
-    required = ['edited_intro', 'edited_verses', 'assessment']
+    required = ['edited_intro', 'edited_verses']
     missing = [name for name in required if not paths[name].exists()]
     if missing:
         print(f"\nError: Required files missing:")
@@ -592,6 +767,25 @@ def main():
             print(f"  - {paths[name]}")
         print(f"\nPlease run the pipeline for Psalm {psalm_number} first.")
         return 1
+
+    # Interactive Model Selection
+    print("\n" + "=" * 50)
+    print("MODEL SELECTION")
+    print("=" * 50)
+    models = list(PRICING.keys())
+    for i, m in enumerate(models, 1):
+        default_marker = " (default)" if m == args.model else ""
+        print(f"  {i}. {m}{default_marker}")
+    
+    selected_model = args.model
+    while True:
+        choice = input(f"\nSelect model (1-{len(models)}) or press ENTER for {args.model}: ").strip()
+        if not choice:
+            break
+        if choice.isdigit() and 1 <= int(choice) <= len(models):
+            selected_model = models[int(choice)-1]
+            break
+        print("Invalid selection.")
 
     # Load all context
     print("\nLoading context...")
@@ -609,11 +803,13 @@ def main():
 
     # Show summary and get confirmation
     estimated_tokens = total_chars // 4  # Rough estimate
-    estimated_cost = (estimated_tokens / 1_000_000) * GPT51_INPUT_COST_PER_M
+    
+    pricing = PRICING.get(selected_model, {"input": 1.25, "output": 10.00, "thinking": 10.00})
+    estimated_cost = (estimated_tokens / 1_000_000) * pricing["input"]
 
     print("\n" + "-" * 50)
     print(f"Total context: ~{total_chars:,} characters (~{estimated_tokens:,} tokens)")
-    print(f"Estimated cost per exchange: ${estimated_cost:.2f} - ${estimated_cost * 2:.2f}")
+    print(f"Estimated cost per exchange using {selected_model}: ${estimated_cost:.2f} - ${estimated_cost * 2:.2f}")
     print("-" * 50)
 
     confirm = input("\nProceed with conversation? (y/n): ").strip().lower()
@@ -623,25 +819,17 @@ def main():
 
     # Build system prompt
     system_prompt = build_system_prompt(
-        psalm_number, edition, context,
+        psalm_number, edition_name, context,
         included_analysis, included_research
     )
 
-    # Initialize OpenAI client
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("\nError: OPENAI_API_KEY environment variable not set.")
-        return 1
-
-    client = OpenAI(api_key=api_key)
-
-    print("\nInitializing conversation with GPT-5.1...")
+    print(f"\nInitializing conversation with {selected_model}...")
 
     # Run conversation
     run_conversation(
-        client, system_prompt,
-        paths['output_dir'], psalm_number, edition,
-        included_sections
+        system_prompt,
+        paths['output_dir'], psalm_number, edition_name,
+        included_sections, selected_model
     )
 
     return 0

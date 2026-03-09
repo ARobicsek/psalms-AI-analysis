@@ -15,7 +15,7 @@ Always read this file first when you need to find code.
 | `run_si_pipeline.py` | `scripts` | **NEW SI**: Special Instruction pipeline using Master Writer approach. Matches enhanced pipeline controls (including copy editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |
 | `run_si_pipeline_with_synthesis.py` | `scripts` | **LEGACY SI**: Special Instruction pipeline using Synthesis Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline_with_synthesis.py) |
 | `run_copy_editor.py` | `scripts` | Standalone copy editor runner. Applies 9-category error taxonomy to existing `print_ready.md`. Supports batch (`36 37 38`), `--dry-run`, `--model`. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_copy_editor.py) |
-| `converse_with_editor.py` | `scripts` | Enables multi-turn conversation with Master Editor (GPT-5.1) about a completed psalm commentary with full research context. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/converse_with_editor.py) |
+| `converse_with_editor.py` | `scripts` | Enables multi-turn conversation with Master Editor about a completed psalm commentary with full research context. Supports multi-line copy/pasting and interactive model selection (Claude, Gemini, GPT). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/converse_with_editor.py) |
 | `concordance_tool.py` | `scripts` | Interactive Hebrew concordance CLI. 4 match modes (exact, variations, substring, substring + AI filter), lexicon lookup (BDB/Klein), AI commentary, cost tracking, markdown export. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/concordance_tool.py) |
 
 ---

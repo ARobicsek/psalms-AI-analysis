@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-08 (Session 291)
+**Last Updated**: 2026-03-08 (Session 292)
 
 ## Table of Contents
 1. [Executive Summary](#executive-summary)
@@ -89,6 +89,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 292 (2026-03-08): Converse with Editor Upgrades
+- Upgraded `converse_with_editor.py` script to use `prompt_toolkit` to fix Windows clipboard pasting issues and enable multi-line input.
+- Added dynamic model selection menu with interactive choice of LLM (Anthropic, Gemini, OpenAI).
+- Replaced hardcoded pricing with dynamic calculation imported from `src.utils.cost_tracker.PRICING`.
+- Refactored `run_conversation` to support API streaming across Google Gemini, Anthropic Claude, and OpenAI GPT models.
+
 ### Session 291 (2026-03-08): Nusach Disambiguation — Fix Sefard/Sephardic Confusion
 - Fixed systemic confusion between Nusach Sefard (Hasidic rite) and actual Sephardic/Mizrachi traditions
 - Added disambiguation guidance to master writer, synthesis writer, and liturgical librarian LLM prompts
@@ -107,10 +113,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ### Session 288 (2026-03-07): Copy Editor Expansion — 9-Category Taxonomy
 - Expanded copy editor from 6 to 9 error categories: added factual/textual accuracy (7), Hebrew grammar bloat (8), and strained arguments (9)
 - Fixed copy editor truncation (max_tokens 32K→64K) and Windows encoding crash
-
-### Session 287 (2026-03-05): Fix SI Pipeline Auto-Detection & Research Trimming
-- Implemented auto-detection logic in `run_si_pipeline.py` for special instruction files
-- Added generation of `psalm_NNN_research_trimmed.md` artifact to disk
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 
