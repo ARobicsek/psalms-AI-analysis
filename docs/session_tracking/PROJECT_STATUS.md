@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-09 (Session 294)
+**Last Updated**: 2026-03-09 (Session 295)
 
 
 ## Table of Contents
@@ -70,7 +70,7 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ### Active Features
 - **Unified Writer V4**: Single prompt merging Main + College editions; halves pipeline cost (default)
-- **Insight Extractor**: Dedicated agent (Claude Opus 4.6) to curate "aha!" moments from research; now uses adaptive thinking + streaming
+- **Insight Extractor**: Dedicated agent (gpt-5.4) to curate "aha!" moments from research; now uses streaming
 - **Research Trimmer**: Dedicated utility for intelligent context window management
 - **Gemini 2.5 Pro Fallback**: Handles large psalms (51+ verses) without content loss
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
@@ -83,12 +83,17 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Large psalms may require Gemini fallback (additional cost)
 - Deep research must be manually prepared via Gemini browser interface
 - Figurative Curator adds ~$0.30-0.50 per psalm to processing cost
-- Questions for Reader adds ~$0.01-0.02 per psalm (Gemini Flash)
-- Insight Extractor adds ~$0.50-1.00 per psalm (Claude Opus 4.6)
+- Questions for Reader adds ~$0.01-0.02 per psalm (gpt-5.4)
+- Insight Extractor adds ~$0.50-1.00 per psalm (gpt-5.4)
 
 ---
 
 ## Recent Work Summary (Last 5 Sessions)
+
+### Session 295 (2026-03-09): Pipeline Model Configuration Audit
+- Clarified model configurations globally via `PROJECT_STATUS.md` and `scriptReferences.md`, formally standardizing Insight Extractor, Question Curator, and Copy Editor on `gpt-5.4`.
+- Scrubbed legacy hardcoded default arguments (e.g., `gpt-5.1`, `claude-opus-4-5`) from the primary pipeline argument parsers, cementing `claude-opus-4-6` as the Master Editor default.
+- Refactored `run_enhanced_pipeline.py` and `run_si_pipeline.py` pipeline stats logs to track programmatic model variables rather than hardcoded strings, ensuring DOCX artifacts accurately reflect runtime models.
 
 ### Session 294 (2026-03-09): Model Reversions and Micro Analyst Cleanup
 - Reverted Macro Analyst to `claude-opus-4-6` for superior analytical quality.
@@ -110,12 +115,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Fixed systemic confusion between Nusach Sefard (Hasidic rite) and actual Sephardic/Mizrachi traditions
 - Added disambiguation guidance to master writer, synthesis writer, and liturgical librarian LLM prompts
 - Corrected database metadata label from "Sephardic/Hasidic" to "Hasidic (Nusach Sefard)"
-
-### Session 290 (2026-03-08): Interactive Hebrew Concordance Tool
-- Created `scripts/concordance_tool.py` — standalone CLI for searching Hebrew words/phrases across the Tanakh
-- 4 match modes (exact, variations, substring, substring + AI filter), 4 scopes, 3 result modes
-- AI features: curated results, semantic commentary, false-match filtering — all with cost display
-- Lexicon lookup (BDB + Klein), markdown export to `output/concordance/`
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

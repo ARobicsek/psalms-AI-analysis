@@ -8,6 +8,28 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 295 (2026-03-09): Pipeline Model Configuration Audit
+
+**Objective**: Audit and standardize LLM configurations across documentation and codebase defaults, and correct model tracking logic for generated DOCX artifacts.
+
+**Problems Identified**:
+- Documentation (`PROJECT_STATUS.md`, `scriptReferences.md`) had conflicting default model listings for secondary agents.
+- The pipeline scripts (`run_enhanced_pipeline.py`, `run_si_pipeline.py`) presented legacy options (`gpt-5.1`, `claude-opus-4-5`) in help texts and default parser arguments.
+- The programmatic log `pipeline_stats.json` was recording hardcoded `"gpt-5.4"` strings during the tracking of the `question_curator` and `insight_extractor` steps, causing the Methodological Summary section of the generated Word Document to inaccurately reflect the parameters actually passed to the scripts.
+
+**Solutions Implemented**:
+1. Updated `PROJECT_STATUS.md` and `scriptReferences.md` to uniformly list `gpt-5.4` as the active model for the Copy Editor, Insight Extractor, and Question Curator.
+2. Removed legacy defaults from the argument parsers of all pipeline scripts, standardizing the Master Editor fallbacks to `claude-opus-4-6`.
+3. Fixed stats tracker assignments in `run_enhanced_pipeline.py` and `run_si_pipeline.py` to utilize programmatic variables (e.g., `tracker.track_model_for_step("insight_extractor", insight_model)`), resolving the downstream reporting gap.
+
+**Files Modified**:
+- `docs/session_tracking/PROJECT_STATUS.md` - Updated active feature model listings
+- `docs/session_tracking/scriptReferences.md` - Updated `copy_editor.py`, `question_curator.py`, `insight_extractor.py` documentation
+- `scripts/run_si_pipeline.py` - Cleaned up default `master_editor_model` args and fixed hardcoded model tracking
+- `scripts/run_enhanced_pipeline.py` - Cleaned up default `master_editor_model` args and fixed hardcoded model tracking
+
+---
+
 ## Session 294 (2026-03-09): Model Reversions and Micro Analyst Cleanup
 
 **Objective**: Revert Macro and Micro Analyst models to Anthropic equivalents for higher quality and permanently implement the budgeted thinking optimization.

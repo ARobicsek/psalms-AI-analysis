@@ -496,7 +496,7 @@ def run_enhanced_pipeline(
         if reader_questions_file.exists():
             logger.info("Reader questions exist, skipping generation...")
             # Track the model even when skipping
-            tracker.track_model_for_step("question_curator", "gpt-5.4")
+            tracker.track_model_for_step("question_curator", question_model)
         else:
             logger.info("[STEP 2b] Curating questions...")
             try:
@@ -535,7 +535,7 @@ def run_enhanced_pipeline(
             logger.info("Insights exist, loading...")
             with open(insights_file, 'r', encoding='utf-8') as f: curated_insights = json.load(f)
             # Track the model even when loading existing insights
-            tracker.track_model_for_step("insight_extractor", "gpt-5.4")
+            tracker.track_model_for_step("insight_extractor", insight_model)
         else:
             logger.info("[STEP 2c] Extracting Insights...")
             try:
@@ -591,7 +591,7 @@ def run_enhanced_pipeline(
     else:
         # skip_insights is True — still track the model if insights file exists
         if insights_file.exists():
-            tracker.track_model_for_step("insight_extractor", "gpt-5.4")
+            tracker.track_model_for_step("insight_extractor", insight_model)
 
     # =====================================================================
     # STEP 3: Synthesis (REMOVED)
@@ -842,7 +842,7 @@ if __name__ == "__main__":
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
     parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-6",
-                       choices=["gpt-5", "gpt-5.1", "claude-opus-4-6"],
+                       choices=["claude-opus-4-6"],
                        help="Model for Master Writer (default: claude-opus-4-6)")
     # Session 280: questions and insights are SKIPPED by default.
     # --include-* flags opt back in; --skip-* flags remain for backward compat.

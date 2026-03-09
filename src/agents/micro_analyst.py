@@ -534,10 +534,10 @@ class MicroAnalystV2:
         current_max_tokens = 65536  # 64K to accommodate large JSON/thinking
 
         # Anthropics adaptive thinking can consume the entire budget, leaving nothing for JSON.
-        LONG_PSALM_THRESHOLD = 25
-        use_budgeted_thinking = verse_count > LONG_PSALM_THRESHOLD and not self.openai_client
+        # Session 294 Fix: Apply budgeted thinking universally for all psalm lengths to prevent token exhaustion.
+        use_budgeted_thinking = True
         if use_budgeted_thinking:
-            self.logger.info(f"  Long psalm ({verse_count} verses > {LONG_PSALM_THRESHOLD}): starting with budgeted thinking for Anthropic model")
+            self.logger.info(f"  Starting with budgeted thinking (50% cap) to prevent token exhaustion")
 
         for attempt in range(max_retries):
             try:
@@ -658,23 +658,13 @@ class MicroAnalystV2:
                 import httpx
                 import httpcore
                 
-                is_retryable = False
-                if self.openai_client:
-                    import openai
-                    is_retryable = isinstance(e, (
-                        openai.APIError,
-                        openai.APIConnectionError,
-                        openai.RateLimitError,
-                        openai.InternalServerError
-                    ))
-                else:
-                    is_retryable = isinstance(e, (
-                        anthropic.InternalServerError,
-                        anthropic.RateLimitError,
-                        anthropic.APIConnectionError,
-                        httpx.RemoteProtocolError,
-                        httpcore.RemoteProtocolError
-                    ))
+                is_retryable = isinstance(e, (
+                    anthropic.InternalServerError,
+                    anthropic.RateLimitError,
+                    anthropic.APIConnectionError,
+                    httpx.RemoteProtocolError,
+                    httpcore.RemoteProtocolError
+                ))
 
                 if is_retryable and attempt < max_retries - 1:
                     self.logger.warning(f"Retryable error (attempt {attempt + 1}/{max_retries}): {type(e).__name__}: {e}")
