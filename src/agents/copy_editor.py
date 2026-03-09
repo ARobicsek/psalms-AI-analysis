@@ -696,6 +696,22 @@ class CopyEditor:
             elif marker in original:
                 self.logger.info(f"✅ {name} preserved")
 
+        # Check for displaced liturgical key verse content
+        # If the intro has #### Key Verses and Phrases but the content after it
+        # is < 100 chars, the key verse entries may have been displaced
+        if '#### Key Verses and Phrases' in corrected:
+            key_verses_pos = corrected.find('#### Key Verses and Phrases')
+            # Find the first **Verse N** header (start of verse commentary)
+            first_verse_match = re.search(r'\*\*Verse[s]?\s+\d+', corrected[key_verses_pos:])
+            if first_verse_match:
+                content_between = corrected[key_verses_pos + len('#### Key Verses and Phrases'):key_verses_pos + first_verse_match.start()].strip()
+                if len(content_between) < 100:
+                    self.logger.warning(
+                        f"⚠️  Liturgical key verse content may be displaced! "
+                        f"Only {len(content_between)} chars between '#### Key Verses and Phrases' "
+                        f"header and first **Verse** header. Expected substantial liturgical content here."
+                    )
+
     # -------------------------------------------------------------------------
     # Diff generation
     # -------------------------------------------------------------------------

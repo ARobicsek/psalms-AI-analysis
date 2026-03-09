@@ -307,7 +307,8 @@ For EACH verse:
 
 4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. The Torah Temimah identifies where texts were mined for aggadic/halachic purposes—review and incorporate these materials.
 
-5. **Modern Liturgical Context**:
+5. **Modern Liturgical Context** (CRITICAL - DO NOT SKIP MATERIAL):
+   - You MUST incorporate EVERY specific liturgical reference provided in your research bundle.
    - When a verse appears in liturgy, comment on its usage and what it reveals.
    - **QUOTE** the liturgical texts in Hebrew + English. Be specific about prayer name, service, occasion, and tradition.
 

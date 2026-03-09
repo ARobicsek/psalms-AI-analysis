@@ -149,17 +149,25 @@ def _parse_related_psalms_from_markdown(markdown_content: str) -> list:
     return related_psalms
 
 
-def _extract_sections_from_copy_edited(copy_edited_path: Path) -> tuple:
+def _extract_sections_from_copy_edited(copy_edited_path: Path, logger=None) -> tuple:
     """Extract introduction and verse commentary sections from a copy-edited markdown file.
     
     The copy editor outputs each paragraph on a single line (separated by \\n).
     The DOCX generator expects \\n\\n between paragraphs. This function restores
     the double-newline paragraph breaks after extraction.
     
+    This function also detects and corrects a known LLM failure mode where the
+    copy editor displaces liturgical key verse content from the introduction
+    section into the verse commentary section.
+    
     Returns:
         (intro_text, verses_text) — the raw text content of each section,
         with paragraph breaks restored for DOCX generation.
     """
+    _log = logger or (lambda msg: None)
+    if logger:
+        _log = logger.info
+    
     content = copy_edited_path.read_text(encoding='utf-8')
     
     intro_match = re.search(
@@ -175,14 +183,39 @@ def _extract_sections_from_copy_edited(copy_edited_path: Path) -> tuple:
     verses_text = verses_match.group(1).strip() if verses_match else ''
     
     # Strip any trailing section separators (--- lines) from extracted text.
-    # The separator may be on its own line (\n---) or concatenated to text (word---)
     if intro_text:
         intro_text = re.sub(r'-{3,}\s*$', '', intro_text).strip()
     if verses_text:
         verses_text = re.sub(r'-{3,}\s*$', '', verses_text).strip()
     
+    # -----------------------------------------------------------------------
+    # HARDENING: Detect and recover displaced liturgical content
+    # The copy editor LLM sometimes moves liturgical key verse content from
+    # the intro (after #### Key Verses and Phrases) to the start of the verse
+    # commentary section. Detect this and move it back.
+    # -----------------------------------------------------------------------
+    has_liturgical_marker = '---LITURGICAL-SECTION-START---' in intro_text
+    has_key_verses_header = '#### Key Verses and Phrases' in intro_text
+    
+    if has_liturgical_marker and has_key_verses_header:
+        key_verses_pos = intro_text.find('#### Key Verses and Phrases')
+        content_after_key_verses = intro_text[key_verses_pos + len('#### Key Verses and Phrases'):].strip()
+        
+        if len(content_after_key_verses) < 100:
+            first_verse_match = re.search(r'^\*\*Verse[s]?\s+\d+', verses_text, re.MULTILINE)
+            if first_verse_match and first_verse_match.start() > 50:
+                displaced_content = verses_text[:first_verse_match.start()].strip()
+                
+                if re.search(r'\*\*Verse\s+\d+\s+(?:in|on|before|during)', displaced_content):
+                    _log(f"  ⚠️  RECOVERY: Detected displaced liturgical content ({len(displaced_content):,} chars) "
+                         f"at start of verse commentary. Moving back to introduction.")
+                    
+                    intro_text = intro_text.rstrip() + '\n' + displaced_content
+                    verses_text = verses_text[first_verse_match.start():].strip()
+                    
+                    _log(f"  ✅ Liturgical content restored to introduction section")
+    
     # Restore paragraph breaks: the copy editor collapses \n\n to \n.
-    # Convert every single \n to \n\n so the DOCX generator sees paragraph boundaries.
     if intro_text:
         intro_text = re.sub(r'\n+', '\n', intro_text)  # normalize
         intro_text = intro_text.replace('\n', '\n\n')   # restore double-newlines
@@ -679,7 +712,7 @@ def run_enhanced_pipeline(
     if copy_edited_file.exists() and not skip_copy_editor:
         logger.info("[STEP 5c] Extracting sections from copy-edited file for DOCX...")
         try:
-            intro_text, verses_text = _extract_sections_from_copy_edited(copy_edited_file)
+            intro_text, verses_text = _extract_sections_from_copy_edited(copy_edited_file, logger=logger)
             if intro_text and verses_text:
                 # Preserve originals before overwriting
                 pre_ce_intro = output_path / f"psalm_{psalm_number:03d}_intro_SI_pre_copy_edit.md"

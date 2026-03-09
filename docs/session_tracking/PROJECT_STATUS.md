@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-09 (Session 298)
+**Last Updated**: 2026-03-09 (Session 299)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 298
+- **Current Session**: 299
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 299 (2026-03-09): Fixing Psalm 40 Pipeline Issues
+- Hardened pipeline section extraction to detect and recover liturgical content displaced by the copy editor LLM, fixing malformed DOCX outputs.
+- Added structural validation for displaced content to `CopyEditor`.
+- Strengthened `MASTER_WRITER_PROMPT_V4` to enforce the inclusion of all specific liturgical references found in the research bundle.
+
 ### Session 298 (2026-03-09): Error and Retry Tracking in Cost Summary
 - Enhanced `CostTracker` to maintain a log of pipeline events (`log_event()`).
 - Updated `get_summary()` to display a dedicated "PIPELINE EVENTS & RETRIES" section reporting which agents hit token truncations, JSON repair failures, or API timeouts.
@@ -111,10 +116,7 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Scrubbed legacy hardcoded default arguments (e.g., `gpt-5.1`, `claude-opus-4-5`) from the primary pipeline argument parsers, cementing `claude-opus-4-6` as the Master Editor default.
 - Refactored `run_enhanced_pipeline.py` and `run_si_pipeline.py` pipeline stats logs to track programmatic model variables rather than hardcoded strings, ensuring DOCX artifacts accurately reflect runtime models.
 
-### Session 294 (2026-03-09): Model Reversions and Micro Analyst Cleanup
-- Reverted Macro Analyst to `claude-opus-4-6` for superior analytical quality.
-- Reverted Micro Analyst to `claude-sonnet-4-6` and stripped out extraneous OpenAI integration logic.
-- Implemented universal 50% budgeted thinking cap in Micro Analyst to fix token exhaustion bugs for all psalm lengths.
+
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

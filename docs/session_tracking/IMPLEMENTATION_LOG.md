@@ -8,6 +8,27 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 299 (2026-03-09): Fixing Psalm 40 Pipeline Issues
+
+**Objective**: Fix section extraction and liturgical prompt issues driving malformed DOCX outputs.
+
+**Problems Identified**:
+- The copy editor LLM displaced liturgical content (from `#### Key Verses and Phrases`) into the verse commentary section.
+- The `_extract_sections_from_copy_edited()` function truncated the intro at the liturgical section, losing the displaced content and leading to a malformed DOCX structure.
+- The Master Writer LLM ignored specific liturgical research findings (e.g., 17th of Tammuz fast day usage) despite them being provided in the research bundle.
+
+**Solutions Implemented**:
+1. Hardened the `_extract_sections_from_copy_edited()` function in both pipeline scripts to detect displaced liturgical content, automatically recover it, move it back to the intro section, and log a warning.
+2. Added identical structural validation logic to the `CopyEditor` agent to optionally warn the operator at generation time.
+3. Updated the `Modern Liturgical Context` instruction in `MASTER_WRITER_PROMPT_V4` to explicitly require the inclusion of *all* specific liturgical references provided in the research bundle.
+4. Restored Psalm 40 pre-copy-edit files and successfully regenerated the corrected DOCX.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Hardened section extraction with recovery logic.
+- `scripts/run_si_pipeline.py` - Mirrored section extraction hardening.
+- `src/agents/copy_editor.py` - Added structural validation check for displaced liturgical content.
+- `src/agents/master_editor.py` - Strengthened liturgical instruction in `MASTER_WRITER_PROMPT_V4`.
+
 ## Session 298 (2026-03-09): Error and Retry Tracking in Cost Summary
 
 **Objective**: Enhance the terminal cost tracking summary to include information about errors and retries (e.g. JSON validation failures or API timeouts) so processes generating unexpected costs can be monitored.
