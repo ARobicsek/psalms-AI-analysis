@@ -8,6 +8,39 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 296 (2026-03-09): Micro Analyst Truncation Investigation & JSON Repair Recommendation
+
+**Objective**: Investigate whether raising the token limit for long psalms (≥25 verses) would prevent costly micro analyst retries, and recommend a better solution.
+
+**Problems Identified**:
+- Micro analyst `_discovery_pass()` frequently requires 2-3 retry attempts on longer psalms, wasting $1-3 per failed attempt in API costs.
+- Initial hypothesis (token limit too low) was **ruled out** — the `max_tokens` truncation warning (`stop_reason == 'max_tokens'`) has **never** fired across all pipeline logs. The 64K limit with 50% thinking cap provides ample headroom.
+- **Actual root cause**: Two failure modes identified:
+  1. **Streaming connection drops** (`RemoteProtocolError: peer closed connection without sending complete message body`) — Anthropic API intermittently drops connections mid-stream.
+  2. **Unterminated JSON strings** — the model produces valid JSON for 90%+ of the response, then the output gets cut off mid-string (likely from streaming hiccups), producing unparseable JSON.
+- Example: Psalm 22 (32 verses) failed twice with "Unterminated string" at ~76K chars before succeeding on the 3rd attempt with 85K chars — well within token budget.
+- Example: Psalm 19 (15 verses) failed with `RemoteProtocolError` on attempt 1, then "Unterminated string" at 9.5K chars on attempt 2, before succeeding on attempt 3 with 40K chars.
+
+**Research Conducted**:
+1. Analyzed all micro analyst logs in `logs/` directory for `max_tokens` truncation warnings — found zero instances.
+2. Analyzed all `Unterminated string` and `JSON parsing error` patterns — found them consistently across psalms of all lengths (not correlated with verse count).
+3. Analyzed all `empty text block` errors — confirmed these were pre-Session 294 (fixed by universal budgeted thinking).
+4. Reviewed the `_discovery_pass()` JSON schema to identify all required top-level sections for validation.
+
+**Recommendation for Next Session — Implement JSON Repair with Structural Validation**:
+- Add `json-repair` library (or equivalent) to attempt fixing truncated JSON before falling back to a full retry.
+- **Critical safety check**: After repair, validate that the repaired JSON contains:
+  1. `verse_discoveries` array with `len == verse_count` (all verses present)
+  2. `interesting_questions` array with `len >= 3` (non-empty questions section)
+- If validation fails (e.g., truncation happened mid-verse-array, losing later verses), fall back to the existing retry mechanism.
+- If validation passes, accept the repaired JSON — the error was just a syntax glitch (missing comma, unclosed string) in trailing data.
+- **Expected savings**: Eliminates ~$1-3 per failed retry on long psalms where the truncation occurs after all verse data is complete.
+
+**Files Modified**:
+- None (investigation and planning only).
+
+---
+
 ## Session 295 (2026-03-09): Pipeline Model Configuration Audit
 
 **Objective**: Audit and standardize LLM configurations across documentation and codebase defaults, and correct model tracking logic for generated DOCX artifacts.

@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-09 (Session 295)
+**Last Updated**: 2026-03-09 (Session 296)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 294
+- **Current Session**: 296
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 296 (2026-03-09): Micro Analyst Truncation Investigation & JSON Repair Recommendation
+- Investigated whether raising token limits would prevent costly micro analyst retries — **ruled out**: `max_tokens` truncation has never fired.
+- Identified actual root causes: streaming connection drops (`RemoteProtocolError`) and unterminated JSON strings from mid-stream cutoffs.
+- Recommended implementing JSON repair with structural validation (verse count + required sections check) for next session.
+
 ### Session 295 (2026-03-09): Pipeline Model Configuration Audit
 - Clarified model configurations globally via `PROJECT_STATUS.md` and `scriptReferences.md`, formally standardizing Insight Extractor, Question Curator, and Copy Editor on `gpt-5.4`.
 - Scrubbed legacy hardcoded default arguments (e.g., `gpt-5.1`, `claude-opus-4-5`) from the primary pipeline argument parsers, cementing `claude-opus-4-6` as the Master Editor default.
@@ -110,11 +115,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Added dynamic model selection menu with interactive choice of LLM (Anthropic, Gemini, OpenAI).
 - Replaced hardcoded pricing with dynamic calculation imported from `src.utils.cost_tracker.PRICING`.
 - Refactored `run_conversation` to support API streaming across Google Gemini, Anthropic Claude, and OpenAI GPT models.
-
-### Session 291 (2026-03-08): Nusach Disambiguation — Fix Sefard/Sephardic Confusion
-- Fixed systemic confusion between Nusach Sefard (Hasidic rite) and actual Sephardic/Mizrachi traditions
-- Added disambiguation guidance to master writer, synthesis writer, and liturgical librarian LLM prompts
-- Corrected database metadata label from "Sephardic/Hasidic" to "Hasidic (Nusach Sefard)"
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 
