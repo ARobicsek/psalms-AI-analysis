@@ -1,0 +1,107 @@
+PSALM {NUMBER} — LITERARY ECHOES (Pass 1: Core Generation)
+
+[PSALM FULL TEXT]
+
+```
+You are mapping this Psalm against literature, poetry, oratory, and song. Your audience is a reader's guide that treats each psalm as a literary work of art. The reader is literate, curious, and already owns a Bible commentary — they do NOT need you to explain what the psalm means. They want to be surprised and delighted by unexpected resonances.
+
+TASK: Identify 5-8 major verse or image clusters in the Psalm above. For each cluster, find 1-2 STRONGLY resonant passages from world literature — places where another poet, orator, or songwriter reached for the same metaphor, emotional arc, structural move, or theological gesture, or directly quoted or alluded to the psalm, arriving at a similar or quite different destination.
+
+Target: roughly 1 excellent echo per 1-2 verses of the psalm. Quality over quantity. A total of 8-14 comparisons for a typical psalm.
+
+=== DIVERSITY REQUIREMENTS (HARD CONSTRAINTS) ===
+
+These are quotas, not suggestions. Verify compliance before submitting.
+
+☐ At least 4 comparisons must come from works written AFTER 1850.
+☐ At least 2 comparisons must come from works written AFTER 1950.
+☐ No more than 2 comparisons total from works written before 500 CE.
+☐ At least 2 comparisons must come from HEBREW-LANGUAGE or YIDDISH poetry (medieval piyyut, Andalusian Hebrew verse, modern Israeli/Hebrew poetry — e.g. Yehuda Halevi, Solomon Ibn Gabirol, Samuel HaNagid, Moses Ibn Ezra, Yehuda Amichai, Leah Goldberg, Rachel, Nathan Alterman, Dahlia Ravikovitch, Dan Pagis, Tuvia Ruebner, Zelda, Haim Nachman Bialik, Shin Shalom, modern Yiddish poetry - e.g. Morris Rosenfeld, Peretz Markish, Itzik Manger, Avrom Sutzkever, Kadya Molodowsky, Celia Dropkin, Jacob Glatstein, Moyshe-Leyb Halpern).
+☐ At least 1 comparison from a song lyric, libretto, or oratory (e.g. Bob Dylan, Leonard Cohen, Joni Mitchell, Nick Cave, Kendrick Lamar, spirituals, blues, political speeches).
+☐ No author may appear more than ONCE in the entire document.
+☐ The following authors are BANNED (overused in prior psalms): Homer, Dante, Virgil, Ovid. Find fresher sources.
+
+=== WHAT MAKES A GOOD ECHO ===
+
+A good echo makes the reader say "oh!" — either because:
+- The similarity is uncanny (two poets 2000 years apart reaching for the same image)
+- The difference is illuminating (same artistic problem, opposite solution)
+- The quoted passage is itself beautiful, moving, or funny
+- The connection reveals something about the psalm's CRAFT (not just its theme)
+
+BAD example: "Both texts explore the theme of suffering and betrayal." (This is a thematic label, not an insight.)
+BAD example: Comparing any psalm about betrayal to Dante's Judas in Inferno XXXIV. (Every commentary already does this. The reader is bored.)
+GOOD example: Comparing a psalm's false visitor to Bob Dylan's "Positively 4th Street" — because the specific mechanism (the grinning friend who visits your sickbed to gloat) is identical, but the tone (Dylan's acid sarcasm vs. the psalmist's wounded paranoia) reveals something about each poet's rhetorical strategy.
+
+=== SOURCE TEXT QUOTATION (NON-NEGOTIABLE) ===
+
+For EVERY comparison, you MUST supply:
+- The passage in its ORIGINAL LANGUAGE (Greek, Persian, Hebrew, German, Russian, etc.)
+- An English translation immediately after
+- The specific work title, section/canto/line number
+
+Format each quotation block as:
+> [Original language text]
+> "[English translation]" **do not include if the original language is English**
+> — Author, *Work*, section/line
+
+If the original language uses a non-Latin script, provide the original script first. Transliteration is optional but welcome.
+
+IMPORTANT: Choose SHORT quotations — 2-4 lines maximum. The quotation should be a needle, not a haystack. Pick the most resonant lines, not the full stanza.
+
+=== ANALYSIS RULES ===
+
+For each comparison, write EXACTLY 2-3 sentences of analysis. These sentences must:
+- Name a SPECIFIC formal or rhetorical feature (e.g. "the chiastic structure," "the shift from third person to second person," "the jussive mood")
+- Explain what the juxtaposition REVEALS about the psalm's craft or meaning
+- Identify what is DIFFERENT between the two texts and why that difference matters
+
+Do NOT:
+- Summarize what the psalm verse means (the reader already knows)
+- Summarize what the comparison text means (that's what the quotation is for)
+- Write more than 3 sentences of analysis per comparison
+- Use phrases like "both texts explore," "this theme is universal," "similarly, X also..."
+
+=== OUTPUT FORMAT ===
+
+Jump straight into comparisons. No title, no introduction, no conclusion.
+
+### Psalm {NUMBER}:[verse(s)] — [Image/Theme Label]
+
+**[Psalm quotation in Hebrew + English translation]**
+
+#### [Author], *[Work]* ([date/period])
+> [Original language quotation — 2-4 lines max]
+> "[English translation]"
+> — *[Work]*, [section/line]
+
+[2-3 sentences of analysis]
+
+#### [Next Author], *[Next Work]* ([date/period])
+> [Original language quotation]
+> "[English translation]" **do not include if original language is English**
+> — *[Work]*, [section/line]
+
+[2-3 sentences of analysis]
+
+---
+
+[Next verse cluster]
+
+=== FINAL CHECKLIST ===
+
+Before submitting, verify:
+☐ Every comparison has an original-language quotation (not just English)
+☐ Every comparison is anchored to a specific psalm verse
+☐ At least 4 post-1850 sources
+☐ At least 2 post-1950 sources
+☐ No more than 2 pre-500 CE sources
+☐ At least 2 Hebrew or Yiddish-language sources (medieval or modern)
+☐ At least 1 song/oratory source
+☐ No author appears twice
+☐ Homer, Dante, Virgil, Ovid do not appear
+☐ No analysis paragraph exceeds 3 sentences
+☐ No comparison merely states "this theme is universal"
+☐ Each analysis names a specific formal/rhetorical feature
+☐ Total comparisons: 8-14
+```

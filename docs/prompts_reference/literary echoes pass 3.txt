@@ -1,0 +1,47 @@
+PSALM {NUMBER} — LITERARY ECHOES (Pass 3: Source Verification)
+
+Below is a literary echoes document for Psalm {NUMBER}. Your job is to AUDIT every quotation for accuracy. This is a verification task, not a creative task.
+
+[PASTE COMBINED PASS 1 + PASS 2 OUTPUT HERE]
+
+---
+
+```
+For EACH quotation in the document above, do the following:
+
+1. VERIFY the quotation exists in the attributed work. Search for the text. Check the author, work title, and section/line number.
+
+2. VERIFY the original-language text. Is the Hebrew/Greek/Latin/Persian/German/Russian/etc. text accurate? Are there obvious errors (wrong script, garbled characters, words from the wrong language)?
+
+3. VERIFY the English translation is a reasonable rendering of the original-language text.
+
+4. VERIFY the line/section attribution. Is the quotation actually from the cited canto, act, scene, line, stanza, or section?
+
+=== OUTPUT FORMAT ===
+
+For each quotation, report one of:
+
+✅ **[Author], *[Work]*, [section]** — Verified. [Optional: minor correction, e.g. "line number is 312, not 310"]
+
+⚠️ **[Author], *[Work]*, [section]** — Partially verified. [Explain: e.g. "The quotation is real but comes from Act II, not Act III" or "The Hebrew is correct but the English translation is loose — a more accurate rendering would be..."]
+
+❌ **[Author], *[Work]*, [section]** — Cannot verify. [Explain: e.g. "I cannot confirm this quotation exists in the cited work" or "The Persian text appears garbled" or "This ghazal number does not match standard editions"]
+
+🔄 **[Author], *[Work]*, [section]** — Corrected. [Provide the corrected quotation, language text, or attribution]
+
+=== SPECIAL ATTENTION ===
+
+Pay extra attention to:
+- Medieval Hebrew poetry (piyyut, Andalusian verse) — quotations are frequently fabricated or misattributed by LLMs
+- Persian and Arabic poetry — divan/ghazal numbers are often wrong; the poetry itself may be real but misattributed to the wrong poet or wrong section
+- Chinese and Japanese poetry — characters may be garbled or from the wrong poem
+- Line numbers for long works (Iliad, Aeneid, Divine Comedy, Paradise Lost) — these are frequently off by 10-50 lines
+- Song lyrics — often paraphrased rather than quoted accurately (note: if the lyrics are substantially correct in meaning but not word-perfect, mark ⚠️ not ❌)
+
+=== IMPORTANT NOTES ===
+
+- If you are UNSURE whether a quotation is accurate, say so honestly. "I cannot verify this" is a valid and useful answer. Do not guess.
+- Do NOT evaluate whether the comparisons are good or illuminating — that is not your job here. Only verify factual accuracy of sources.
+- If a quotation is fabricated but the comparison idea is good, say: "❌ Quotation cannot be verified. However, [Author] does address [theme] in [actual work] — consider replacing with a verified passage."
+- For well-known works (Shakespeare, Milton, Sappho fragments), you can verify with high confidence. For obscure works, be transparent about your confidence level.
+```

@@ -1,0 +1,70 @@
+LITERARY ECHOES (Pass 2: Gap-Filling and Enrichment)
+
+
+```
+You are enriching the literary echoes that you generated above. Your job is to fill gaps — verses or images that deserve a comparison but don't have one yet, and categories of literature that are underrepresented.
+
+TASK: Review the existing echoes and the full psalm text. Then add 3-6 NEW comparisons following the rules below.
+
+=== WHAT TO LOOK FOR ===
+
+1. UNCOVERED VERSES: Are there verses or striking images in the psalm that have NO echo yet? These are your first priority. Not every verse needs one — but if a verse contains a vivid image, an unusual word, or a dramatic structural turn, it probably deserves a comparison.
+
+2. MISSING CATEGORIES: Check whether the existing document is thin in any of these areas and prioritize accordingly:
+   - Modern Hebrew poetry (Amichai, Goldberg, Rachel, Pagis, Ravikovitch, Zelda, Alterman, Bialik, Shin Shalom, Tuvia Ruebner)
+   - Yiddish poetry (Morris Rosenfeld, Peretz Markish, Itzik Manger,Avrom Sutzkever,Kadya Molodowsky, Celia Dropkin, Jacob Glatstein, Moyshe-Leyb Halpern)
+   - Medieval Hebrew/Andalusian poetry (Ibn Gabirol, Halevi, HaNagid, Moses Ibn Ezra)
+   - Song lyrics (Dylan, Cohen, Cave, Mitchell, spirituals, blues, hip-hop)
+   - Non-Western poetry (Arabic, Persian, Chinese, Japanese, Sanskrit, Urdu)
+   - 20th/21st-century poetry in any language (Celan, Szymborska, Darwish, Hikmet, Neruda, Plath, Sexton, Rich, Zagajewski, Milosz, Herbert, Tranströmer)
+   - Prose or oratory when genuinely illuminating (Kafka, Primo Levi, Baldwin, King, Lincoln)
+
+3. REPLACEMENTS: If any existing comparison is weak — meaning the connection is generic ("both deal with suffering"), the quoted passage is dull, or the author is too predictable — you may REPLACE it. Flag the replacement clearly: "REPLACES: [Author], [Work] for Psalm X:Y"
+
+=== HARD CONSTRAINTS ===
+
+☐ No author who already appears in the existing document may be used again.
+☐ Homer, Dante, Virgil, and Ovid remain BANNED.
+☐ Every new comparison must include an original-language quotation (2-4 lines).
+☐ Every new comparison must be anchored to a specific psalm verse.
+☐ Analysis: exactly 2-3 sentences per comparison, naming a specific formal feature.
+☐ Quotations should be SHORT — the most resonant 2-4 lines, not a full stanza.
+
+=== SELECTION PRINCIPLE ===
+
+When choosing between two possible echoes, prefer the one where:
+- The quoted passage is more BEAUTIFUL or STRIKING on its own
+- The connection is more SPECIFIC (a shared image, a shared syntactic move, a shared rhetorical strategy — not just a shared theme)
+- The reader is less likely to have encountered the comparison before
+- The analysis reveals something about the psalm's CRAFT, not just its content
+
+=== OUTPUT FORMAT ===
+
+Use the same format as the existing document:
+
+### Psalm {NUMBER}:[verse(s)] — [Image/Theme Label]
+
+**[Psalm quotation in Hebrew + English translation]**
+
+#### [Author], *[Work]* ([date/period])
+> [Original language quotation]
+> "[English translation]" **don't include of original language is English**
+> — *[Work]*, [section/line]
+
+[2-3 sentences of analysis]
+
+---
+
+If replacing an existing comparison, begin with:
+**REPLACES: [Author], *[Work]* for Psalm {NUMBER}:[verse(s)]**
+
+=== FINAL CHECKLIST ===
+
+☐ 3-6 new comparisons added
+☐ No author duplicated from existing document
+☐ Banned authors not used
+☐ Every comparison has original-language quotation
+☐ Every analysis ≤ 3 sentences and names a formal feature
+☐ At least 1 new comparison from a category underrepresented in the existing document
+☐ Any replacements are clearly flagged
+```
