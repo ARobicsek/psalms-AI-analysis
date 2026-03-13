@@ -1,36 +1,34 @@
 # Psalms AI Commentary Pipeline - Quick Reference
 
-AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude AI (Sonnet 4.5, Haiku 4.5) with multi-agent framework and Hebrew concordance integration.
+AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent framework and Hebrew concordance integration.
 
 ## Essential Documentation
 
 **Start Here:**
 - `README.md` - Project overview, installation, usage
-- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 289)
+- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 300)
 - `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Technical specifications, schemas
 - `docs/guides/DEVELOPER_GUIDE.md` - Development workflow, coding standards
 
 ## Recent Major Changes (Last 5 Sessions)
 
+**Session 300 (2026-03-13)**: Model Swap — Figurative Curator & Liturgical Librarian
+- Swapped Figurative Curator from `gemini-3.1-pro-preview` → `gpt-5.4` (high reasoning)
+- Swapped Liturgical Librarian from `gemini-2.5-pro` → `gpt-5.1` (high reasoning)
+- Kept `gemini-2.5-pro` only for Synthesis Writer large-psalm fallback
+
+**Session 299 (2026-03-09)**: Fixing Psalm 40 Pipeline Issues
+- Hardened pipeline section extraction for displaced liturgical content
+- Strengthened Master Writer liturgical prompt
+
+**Session 298 (2026-03-09)**: Error and Retry Tracking in Cost Summary
+- Added event tracking to CostTracker for pipeline retry visibility
+
+**Session 297 (2026-03-09)**: Micro Analyst JSON Repair & Validation
+- Integrated `json-repair` library with structural validation for truncated outputs
+
 **Session 289 (2026-03-08)**: Session Management Cleanup
 - Restructured session docs to cut startup context from ~150KB to ~20KB (~85% token savings)
-- Added Quick Context section to PROJECT_STATUS (replaces need to read CLAUDE.md separately)
-- Rewrote SESSION_PROMPTS.md with tiered loading: only PROJECT_STATUS required at startup
-
-**Session 288 (2026-03-07)**: Copy Editor Expansion — 9-Category Taxonomy
-- Expanded copy editor from 6 to 9 error categories
-- Added Rule 3b (Don't Over-Label Hebrew Grammar) to Master Writer prompt
-
-**Session 287 (2026-03-05)**: Fix SI Pipeline Auto-Detection & Research Trimming
-- Implemented auto-detection of special instruction files
-- Added `research_trimmed.md` artifact generation
-
-**Session 286 (2026-03-04)**: Fix Divine Names Modifier for Eli
-- Added specific regex pattern for `אֵלִי` ("My God") in Psalm 22:2
-
-**Session 285 (2026-03-04)**: Micro Agent Optimization
-- Slimmed discovery schema, reduced thinking budget 70%→50%, ~75% micro cost reduction
-- Fixed 5 bugs across master_editor, pipeline scripts, and insight extractor
 
 ## Quick Commands
 
@@ -84,8 +82,8 @@ python scripts/cost_report.py
 ## Current Status
 
 **Phase**: Pipeline Production — tweaks and improvements
-**Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro
-**Last Updated**: Session 289 (2026-03-08)
+**Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro, GPT-5.4 Figurative Curator, GPT-5.1 Liturgical Librarian
+**Last Updated**: Session 300 (2026-03-13)
 
 ## Common Tasks
 

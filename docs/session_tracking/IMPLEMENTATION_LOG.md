@@ -8,6 +8,46 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 300 (2026-03-13): Model Swap — Figurative Curator & Liturgical Librarian
+
+**Objective**: Replace Gemini models with OpenAI models for better quality/cost balance; keep Gemini 2.5 Pro only for the Synthesis Writer large-psalm fallback.
+
+**Changes Implemented**:
+1. **Figurative Curator**: Swapped from `gemini-3.1-pro-preview` (thinking_level=high) to `gpt-5.4` (reasoning_effort=high).
+   - Replaced Google Gemini SDK calls with OpenAI SDK calls.
+   - Updated `_call_gemini()` → `_call_llm()` with GPT-5.4 chat completions API.
+   - Updated pricing constants from Gemini 3.1 Pro rates to GPT-5.4 rates.
+   - `active_model` property now returns `"gpt-5.4"`.
+
+2. **Liturgical Librarian**: Swapped from `gemini-2.5-pro` (thinking_budget) to `gpt-5.1` (reasoning_effort=high).
+   - Replaced `_call_gemini_with_retry()` (tenacity-based) with `_call_openai()` returning (text, input_tokens, output_tokens, reasoning_tokens).
+   - Replaced Gemini response extraction (candidates/parts structure) with simple OpenAI response handling.
+   - Updated validation method from Gemini to GPT-5.1 (with reasoning_effort=low for simple validation).
+   - Removed `_is_retryable_gemini_error()` helper and `tenacity` import (no longer needed).
+   - Claude Sonnet 4.5 remains as fallback if GPT-5.1 fails.
+   - `active_model` property now returns `"gpt-5.1"`.
+
+3. **Legacy Pipeline Scripts**: Updated hardcoded `"gemini-3.1-pro-preview"` cost tracking model names to `"gpt-5.4"` in `run_enhanced_pipeline_with_synthesis.py` and `run_si_pipeline_with_synthesis.py`.
+
+4. **DOCX Model Attribution**: Verified the `active_model` → `models_used` → `pipeline_stats.json` → `document_generator.py` chain is fully dynamic — no hardcoded model names in the tracking path.
+
+**Cost Impact**:
+- Figurative Curator: ~$0.31/psalm (Gemini) → ~$0.39/psalm (GPT-5.4) — +$0.08 for better quality
+- Liturgical Librarian: ~$0.08/psalm (Gemini) → ~$0.06/psalm (GPT-5.1) — -$0.02 savings
+- Net: roughly neutral (~$0.06 more per psalm)
+
+**Files Modified**:
+- `src/agents/figurative_curator.py` - Full model swap: Gemini → GPT-5.4
+- `src/agents/liturgical_librarian.py` - Full model swap: Gemini → GPT-5.1
+- `scripts/run_enhanced_pipeline_with_synthesis.py` - Updated hardcoded cost model name
+- `scripts/run_si_pipeline_with_synthesis.py` - Updated hardcoded cost model name
+- `docs/session_tracking/PROJECT_STATUS.md` - Session 300 entry, active features, descriptions
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` - This entry
+- `docs/session_tracking/scriptReferences.md` - Updated Figurative Curator description
+- `CLAUDE.md` - Updated project description, recent changes, current status
+
+---
+
 ## Session 299 (2026-03-09): Fixing Psalm 40 Pipeline Issues
 
 **Objective**: Fix section extraction and liturgical prompt issues driving malformed DOCX outputs.

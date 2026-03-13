@@ -2,11 +2,11 @@
 Figurative Curator - LLM-enhanced agent for curating figurative language insights.
 
 This agent transforms raw figurative concordance results into interpretive insights
-using Gemini 3 Pro with high reasoning capabilities.
+using GPT-5.4 with high reasoning effort.
 
 Author: Claude Code
 Date: 2025-12-29
-Session: 226
+Session: 226 (model swap Session 300: Gemini 3.1 Pro → GPT-5.4)
 """
 
 import json
@@ -71,11 +71,10 @@ class FigurativeCurator:
     INITIAL_SEARCH_CAP = 50  # Cap for initial micro analyst searches
     FOLLOWUP_SEARCH_CAP = 30  # Cap for follow-up searches
 
-    # Gemini 3 Pro pricing (as of Nov 2025)
-    # https://ai.google.dev/gemini-api/docs/pricing
-    GEMINI_3_PRO_INPUT_COST_PER_M = 2.00   # $2.00 per million input tokens (≤200K context)
-    GEMINI_3_PRO_OUTPUT_COST_PER_M = 12.00  # $12.00 per million output tokens
-    GEMINI_3_PRO_THINKING_COST_PER_M = 12.00  # Thinking tokens billed as output
+    # GPT-5.4 pricing (per million tokens)
+    GPT54_INPUT_COST_PER_M = 2.50
+    GPT54_OUTPUT_COST_PER_M = 15.00
+    GPT54_THINKING_COST_PER_M = 15.00  # Reasoning tokens billed at output rate
 
     def __init__(
         self,
@@ -89,7 +88,7 @@ class FigurativeCurator:
         Initialize the Figurative Curator.
 
         Args:
-            google_api_key: Google API key (defaults to GEMINI_API_KEY env var)
+            google_api_key: Unused (kept for backward compatibility)
             verbose: Print detailed progress
             dry_run: Don't call LLM, just show prompts
             max_iterations: Maximum review → search → review cycles (default 3)
@@ -98,7 +97,7 @@ class FigurativeCurator:
         self.verbose = verbose
         self.dry_run = dry_run
         self.max_iterations = max_iterations
-        self.gemini_client = None
+        self.openai_client = None
 
         # Set database path
         if tanakh_db_path:
@@ -111,27 +110,22 @@ class FigurativeCurator:
         # Initialize figurative librarian
         self.figurative_librarian = FigurativeLibrarian()
 
-        # Initialize Gemini client
+        # Initialize OpenAI client (GPT-5.4)
         if not dry_run:
             try:
-                from google import genai
-                api_key = google_api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-                if api_key:
-                    self.gemini_client = genai.Client(api_key=api_key)
-                    if verbose:
-                        print("[INFO] Initialized Gemini 3.0 Pro client")
-                else:
-                    raise ValueError("No Google API key found. Set GEMINI_API_KEY in .env")
+                from openai import OpenAI
+                self.openai_client = OpenAI()
+                if verbose:
+                    print("[INFO] Initialized GPT-5.4 client for Figurative Curator")
             except ImportError:
-                raise ImportError("google-genai package not installed. Run: pip install google-genai")
+                raise ImportError("openai package not installed. Run: pip install openai")
 
     @property
     def active_model(self) -> str:
         """Return the name of the active LLM model."""
         if self.dry_run:
             return "None (Dry Run)"
-        # Default to Gemini 3.1 Pro Preview as configured in _call_gemini
-        return "gemini-3.1-pro-preview"
+        return "gpt-5.4"
 
     def _get_psalm_text(self, psalm_number: int) -> List[Tuple[int, str, str]]:
         """
@@ -154,98 +148,63 @@ class FigurativeCurator:
         conn.close()
         return verses
 
-    def _call_gemini(
+    def _call_llm(
         self,
         prompt: str,
         temperature: float = 0.3,
         thinking_budget: int = 8192
     ) -> Tuple[str, Dict[str, int]]:
         """
-        Call Gemini 3.0 Pro with high reasoning.
+        Call GPT-5.4 with high reasoning effort.
 
         Args:
             prompt: The prompt to send
-            temperature: Generation temperature
-            thinking_budget: Token budget for reasoning phase
+            temperature: Generation temperature (unused for GPT-5.4 reasoning models)
+            thinking_budget: Unused (kept for API compatibility)
 
         Returns:
             Tuple of (response_text, token_usage_dict)
         """
         if self.dry_run:
             print("\n" + "="*80)
-            print("DRY RUN - Would send this prompt to Gemini 3.0 Pro:")
+            print("DRY RUN - Would send this prompt to GPT-5.4:")
             print("="*80)
             print(prompt[:3000] + "..." if len(prompt) > 3000 else prompt)
             print("="*80 + "\n")
             return "[DRY RUN - No LLM response]", {"input": 0, "output": 0}
 
-        from google.genai import types
-
         if self.verbose:
-            print(f"[API] Calling Gemini 3 Pro (thinking_level=high)...")
+            print(f"[API] Calling GPT-5.4 (reasoning_effort=high)...")
 
         start_time = time.time()
 
-        # Use Gemini 3 Pro with high reasoning level
-        # Gemini 3 uses thinking_level instead of thinking_budget
-        # Options: "none", "low", "medium", "high"
-        try:
-            response = self.gemini_client.models.generate_content(
-                model="gemini-3.1-pro-preview",
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=temperature,
-                    thinking_config=types.ThinkingConfig(
-                        thinking_level="high"  # Maximum reasoning depth
-                    ),
-                    automatic_function_calling=types.AutomaticFunctionCallingConfig(
-                        disable=True
-                    )
-                )
-            )
-        except Exception as e:
-            # Fallback to Gemini 2.5 Pro if 3.0 not available
-            if self.verbose:
-                print(f"[WARNING] Gemini 3 Pro failed ({e}), falling back to 2.5 Pro...")
-            response = self.gemini_client.models.generate_content(
-                model="gemini-2.5-pro",
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=temperature,
-                    thinking_config=types.ThinkingConfig(
-                        thinking_budget=thinking_budget
-                    ),
-                    automatic_function_calling=types.AutomaticFunctionCallingConfig(
-                        disable=True
-                    )
-                )
-            )
+        response = self.openai_client.chat.completions.create(
+            model="gpt-5.4",
+            reasoning_effort="high",
+            messages=[
+                {"role": "system", "content": "You are an expert biblical scholar specializing in figurative language analysis across the Hebrew Bible. Return structured JSON when requested."},
+                {"role": "user", "content": prompt}
+            ]
+        )
 
         elapsed = time.time() - start_time
         if self.verbose:
             print(f"[API] Response received in {elapsed:.1f}s")
 
         # Extract text from response
-        response_text = ""
-        if response.candidates and len(response.candidates) > 0:
-            candidate = response.candidates[0]
-            if candidate.content and candidate.content.parts:
-                for part in candidate.content.parts:
-                    if hasattr(part, 'text') and part.text:
-                        response_text += part.text
+        response_text = response.choices[0].message.content or ""
 
         # Get token usage
         token_usage = {"input": 0, "output": 0, "thinking": 0, "cost": 0.0}
-        if hasattr(response, 'usage_metadata'):
-            usage = response.usage_metadata
-            token_usage["input"] = getattr(usage, 'prompt_token_count', 0) or 0
-            token_usage["output"] = getattr(usage, 'candidates_token_count', 0) or 0
-            token_usage["thinking"] = getattr(usage, 'thoughts_token_count', 0) or 0
+        if response.usage:
+            token_usage["input"] = getattr(response.usage, 'prompt_tokens', 0) or 0
+            token_usage["output"] = getattr(response.usage, 'completion_tokens', 0) or 0
+            token_usage["thinking"] = getattr(response.usage, 'reasoning_tokens', 0) or 0
 
             # Calculate precise cost
-            input_cost = (token_usage["input"] / 1_000_000) * self.GEMINI_3_PRO_INPUT_COST_PER_M
-            output_cost = (token_usage["output"] / 1_000_000) * self.GEMINI_3_PRO_OUTPUT_COST_PER_M
-            thinking_cost = (token_usage["thinking"] / 1_000_000) * self.GEMINI_3_PRO_THINKING_COST_PER_M
+            input_cost = (token_usage["input"] / 1_000_000) * self.GPT54_INPUT_COST_PER_M
+            output_cost = (token_usage["output"] / 1_000_000) * self.GPT54_OUTPUT_COST_PER_M
+            thinking_cost = (token_usage["thinking"] / 1_000_000) * self.GPT54_THINKING_COST_PER_M
             token_usage["cost"] = input_cost + output_cost + thinking_cost
 
         return response_text, token_usage
@@ -870,7 +829,7 @@ Be strategic: Don't suggest searches just to search. Each additional search cost
             psalm_number, psalm_text, micro_analyst_requests, all_search_results
         )
 
-        phase1_response, phase1_tokens = self._call_gemini(phase1_prompt, thinking_budget=8192)
+        phase1_response, phase1_tokens = self._call_llm(phase1_prompt, thinking_budget=8192)
         total_tokens["input"] += phase1_tokens["input"]
         total_tokens["output"] += phase1_tokens["output"]
         total_tokens["thinking"] += phase1_tokens.get("thinking", 0)
@@ -944,7 +903,7 @@ Be strategic: Don't suggest searches just to search. Each additional search cost
                 review_prompt = self._build_iterative_review_prompt(
                     psalm_number, iteration, all_counts, failed_searches, psalm_text
                 )
-                review_response, review_tokens = self._call_gemini(review_prompt, thinking_budget=4096)
+                review_response, review_tokens = self._call_llm(review_prompt, thinking_budget=4096)
                 total_tokens["input"] += review_tokens["input"]
                 total_tokens["output"] += review_tokens["output"]
                 total_tokens["thinking"] += review_tokens.get("thinking", 0)
@@ -976,7 +935,7 @@ Be strategic: Don't suggest searches just to search. Each additional search cost
             psalm_number, psalm_text, all_search_results, phase1_analysis
         )
 
-        phase2_response, phase2_tokens = self._call_gemini(phase2_prompt, thinking_budget=12288)
+        phase2_response, phase2_tokens = self._call_llm(phase2_prompt, thinking_budget=12288)
         total_tokens["input"] += phase2_tokens["input"]
         total_tokens["output"] += phase2_tokens["output"]
         total_tokens["thinking"] += phase2_tokens.get("thinking", 0)

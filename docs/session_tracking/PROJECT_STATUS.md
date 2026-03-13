@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-09 (Session 299)
+**Last Updated**: 2026-03-13 (Session 300)
 
 
 ## Table of Contents
@@ -19,14 +19,14 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 299
-- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **Gemini 3.1 Pro Upgrade**
+- **Current Session**: 300
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
 
 ## Quick Context
 
-AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6) and Gemini (3.1 Pro, 2.5 Pro) with a multi-agent pipeline and Hebrew concordance integration.
+AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with a multi-agent pipeline and Hebrew concordance integration.
 
 **Key Directories**:
 - `src/agents/` — AI agent implementations (macro, micro, synthesis, editors, copy editor)
@@ -76,7 +76,7 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms with pacing guidance
 - **Pipeline Skip/Exclude Logic**: `--resume` for auto step detection; `--skip-*` to skip regeneration but use existing file; `--exclude-*` to skip regeneration AND omit existing file from writer/doc
-- **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3.1 Pro Preview
+- **Figurative Curator**: LLM-enhanced agent that transforms raw figurative concordance data into curated insights using GPT-5.4
 - **Questions for the Reader**: LLM-curated questions appear before Introduction to prime reader engagement
 
 ### Known Limitations
@@ -89,6 +89,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ---
 
 ## Recent Work Summary (Last 5 Sessions)
+
+### Session 300 (2026-03-13): Model Swap — Figurative Curator & Liturgical Librarian
+- Replaced Figurative Curator model from `gemini-3.1-pro-preview` to `gpt-5.4` (high reasoning effort) for better figurative analysis quality.
+- Replaced Liturgical Librarian model from `gemini-2.5-pro` to `gpt-5.1` (high reasoning effort) for cost reduction on summarization tasks.
+- Kept `gemini-2.5-pro` only for Synthesis Writer large-psalm fallback (1M context window dependency).
+- Updated legacy pipeline scripts, documentation, and verified DOCX model attribution tracks new models programmatically.
 
 ### Session 299 (2026-03-09): Fixing Psalm 40 Pipeline Issues
 - Hardened pipeline section extraction to detect and recover liturgical content displaced by the copy editor LLM, fixing malformed DOCX outputs.
@@ -110,11 +116,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Investigated whether raising token limits would prevent costly micro analyst retries — **ruled out**: `max_tokens` truncation has never fired.
 - Identified actual root causes: streaming connection drops (`RemoteProtocolError`) and unterminated JSON strings from mid-stream cutoffs.
 - Recommended implementing JSON repair with structural validation (verse count + required sections check) for next session.
-
-### Session 295 (2026-03-09): Pipeline Model Configuration Audit
-- Clarified model configurations globally via `PROJECT_STATUS.md` and `scriptReferences.md`, formally standardizing Insight Extractor, Question Curator, and Copy Editor on `gpt-5.4`.
-- Scrubbed legacy hardcoded default arguments (e.g., `gpt-5.1`, `claude-opus-4-5`) from the primary pipeline argument parsers, cementing `claude-opus-4-6` as the Master Editor default.
-- Refactored `run_enhanced_pipeline.py` and `run_si_pipeline.py` pipeline stats logs to track programmatic model variables rather than hardcoded strings, ensuring DOCX artifacts accurately reflect runtime models.
 
 
 
@@ -150,7 +151,7 @@ Prevents truncation in long psalms through intelligent grouping:
 - No "remaining verses" truncation notes
 
 #### Figurative Curator (Sessions 224-227) ✅ Integrated & Active
-LLM-enhanced agent that transforms raw figurative concordance data into curated insights using Gemini 3 Pro:
+LLM-enhanced agent that transforms raw figurative concordance data into curated insights using GPT-5.4:
 - **Fully integrated into research assembler** (Session 226)
 - Executes searches against figurative language database (50 results/search initial, 30 follow-up)
 - Iteratively refines searches (up to 3 iterations) based on gap analysis

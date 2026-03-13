@@ -579,7 +579,7 @@ def run_enhanced_pipeline(
             curator_output = research_bundle.figurative_curator_output
             token_usage = curator_output.token_usage
             cost_tracker.add_usage(
-                model="gemini-3.1-pro-preview",
+                model="gpt-5.4",
                 input_tokens=token_usage.get("input", 0),
                 output_tokens=token_usage.get("output", 0),
                 thinking_tokens=token_usage.get("thinking", 0)

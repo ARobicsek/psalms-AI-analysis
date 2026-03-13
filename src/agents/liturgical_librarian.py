@@ -6,10 +6,12 @@ with intelligent aggregation to prevent duplicate prayer contexts.
 
 Features:
 - Aggregates matches by prayer name (handles "Amidah" appearing 79x)
-- Uses Google Gemini 2.5 Pro with extended thinking for intelligent context summarization
-- Automatic fallback to Claude Sonnet 4.5 with extended thinking if Gemini quota exhausted
+- Uses GPT-5.1 with high reasoning effort for intelligent context summarization
+- Automatic fallback to Claude Sonnet 4.5 with extended thinking if GPT fails
 - Handles inconsistent metadata (e.g., "Avot" vs "Patriarchs")
 - Provides both aggregated and detailed views
+
+Model swap Session 300: Gemini 2.5 Pro → GPT-5.1
 
 Usage:
     from src.agents.liturgical_librarian import LiturgicalLibrarian
@@ -31,70 +33,10 @@ from typing import List, Optional, Dict, Any, TYPE_CHECKING
 from dataclasses import dataclass
 from collections import defaultdict
 from dotenv import load_dotenv
-from tenacity import retry, stop_after_attempt, wait_exponential
 
 if TYPE_CHECKING:
     from src.utils.cost_tracker import CostTracker
 
-
-def _is_retryable_gemini_error(exception, verbose=False):
-    """
-    Determine if a Gemini API exception is retryable (temporary rate limit) vs permanent (quota exhausted).
-
-    Returns True for temporary errors that should be retried with backoff.
-    Returns False for quota exhaustion errors that should trigger Claude fallback.
-
-    Args:
-        exception: The exception to classify
-        verbose: Whether to print classification info
-
-    Returns:
-        bool: True if retryable, False otherwise
-    """
-    error_msg = str(exception).lower()
-
-    # Check for daily quota exhaustion indicators
-    # These should NOT be retried - switch to Claude immediately
-    quota_indicators = [
-        'quota exceeded',
-        'resource exhausted',
-        'daily limit',
-        '10,000 rpd',
-        'quota has been exceeded'
-    ]
-
-    if any(indicator in error_msg for indicator in quota_indicators):
-        if verbose:
-            print(f"[INFO] Detected quota exhaustion (not retrying, will switch to Claude)")
-        return False
-
-    # Temporary rate limit errors - safe to retry with backoff
-    rate_limit_indicators = [
-        '429',
-        'too many requests',
-        'rate limit',
-        'try again'
-    ]
-
-    if any(indicator in error_msg for indicator in rate_limit_indicators):
-        if verbose:
-            print(f"[INFO] Detected temporary rate limit (will retry with backoff)")
-        return True
-
-    # Network/transient errors - safe to retry
-    transient_indicators = [
-        'timeout',
-        'connection',
-        'network',
-        'unavailable',
-        'internal error'
-    ]
-
-    if any(indicator in error_msg for indicator in transient_indicators):
-        return True
-
-    # Default: don't retry unknown errors
-    return False
 
 
 @dataclass
@@ -215,16 +157,11 @@ class LiturgicalLibrarian:
         Args:
             db_path: Path to liturgy database
             tanakh_db_path: Path to tanakh database (for psalm verse text)
-            use_llm_summaries: Whether to use LLM for intelligent summaries (Gemini 2.5 Pro primary, Claude Sonnet 4.5 fallback)
-            google_api_key: Google API key (defaults to GOOGLE_API_KEY env var)
+            use_llm_summaries: Whether to use LLM for intelligent summaries (GPT-5.1 primary, Claude Sonnet 4.5 fallback)
+            google_api_key: Unused (kept for backward compatibility)
             anthropic_api_key: Anthropic API key for fallback (defaults to ANTHROPIC_API_KEY env var)
-            thinking_budget: Token budget for Gemini's reasoning phase (default 4096)
-                           - Higher values (up to 24576) for more complex reasoning
-                           - Set to -1 for dynamic thinking (model decides)
-                           - Set to 0 to disable thinking (not recommended)
+            thinking_budget: Unused (kept for backward compatibility)
             request_delay: Delay in seconds between API calls to avoid rate limits (default 0.5)
-                         - Gemini Tier 1: 150 RPM = 2.5 req/sec max
-                         - 0.5s delay = 2 req/sec (safely under limit)
                          - Set to 0 to disable (not recommended)
             verbose: Whether to print LLM prompts and responses
             cost_tracker: CostTracker instance for tracking API costs
@@ -235,9 +172,9 @@ class LiturgicalLibrarian:
         self.thinking_budget = thinking_budget
         self.request_delay = request_delay
         self.verbose = verbose
-        self.gemini_client = None
+        self.openai_client = None
         self.anthropic_client = None
-        self.llm_provider = None  # Track which provider is active: 'gemini', 'anthropic', or None
+        self.llm_provider = None  # Track which provider is active: 'openai', 'anthropic', or None
         self._last_request_time = 0  # Track last API call time for rate limiting
 
         # Initialize cost tracker (import here to avoid circular dependency)
@@ -252,32 +189,26 @@ class LiturgicalLibrarian:
 
         # Initialize LLM clients if needed
         if use_llm_summaries:
-            # Try Gemini 2.5 Pro first (primary)
+            # Try GPT-5.1 first (primary)
             try:
-                from google import genai
-                api_key = google_api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-                if api_key:
-                    # Initialize Gemini client
-                    # Note: SDK retry config (RetryConfig) not available in this SDK version
-                    # Using tenacity-based retry decorator instead (see _call_gemini_with_retry)
-                    self.gemini_client = genai.Client(api_key=api_key)
-                    self.llm_provider = 'gemini'
-                    print("[INFO] Liturgical Librarian: Using Gemini 2.5 Pro with tenacity-based retry logic")
+                from openai import OpenAI
+                self.openai_client = OpenAI()
+                self.llm_provider = 'openai'
+                print("[INFO] Liturgical Librarian: Using GPT-5.1 with high reasoning effort")
             except ImportError:
                 if self.verbose:
-                    print("[INFO] google-genai package not installed. Will try Claude Sonnet fallback.")
+                    print("[INFO] openai package not installed. Will try Claude Sonnet fallback.")
 
-            # ALWAYS try to initialize Claude Sonnet 4.5 as fallback (even if Gemini available)
-            # This ensures Claude is available if Gemini quota is exhausted at runtime
+            # ALWAYS try to initialize Claude Sonnet 4.5 as fallback (even if OpenAI available)
             try:
                 import anthropic
                 api_key = anthropic_api_key or os.getenv('ANTHROPIC_API_KEY')
                 if api_key:
                     self.anthropic_client = anthropic.Anthropic(api_key=api_key)
-                    # Only set as primary provider if Gemini not available
+                    # Only set as primary provider if OpenAI not available
                     if not self.llm_provider:
                         self.llm_provider = 'anthropic'
-                        print("[INFO] Liturgical Librarian: Using Claude Sonnet 4.5 for summaries (Gemini unavailable)")
+                        print("[INFO] Liturgical Librarian: Using Claude Sonnet 4.5 for summaries (GPT unavailable)")
                     else:
                         print("[INFO] Liturgical Librarian: Claude Sonnet 4.5 initialized as fallback")
             except ImportError:
@@ -286,7 +217,7 @@ class LiturgicalLibrarian:
 
             # If neither provider available, fall back to code-only
             if not self.llm_provider:
-                print("[WARNING] No LLM provider available (tried Gemini and Claude). Using code-only summaries.")
+                print("[WARNING] No LLM provider available (tried GPT and Claude). Using code-only summaries.")
                 self.use_llm_summaries = False
 
     @property
@@ -294,9 +225,9 @@ class LiturgicalLibrarian:
         """Return the name of the active LLM model."""
         if not self.use_llm_summaries:
             return "None (Code-only)"
-        
-        if self.llm_provider == 'gemini':
-            return "gemini-2.5-pro"
+
+        if self.llm_provider == 'openai':
+            return "gpt-5.1"
         elif self.llm_provider == 'anthropic':
             return "claude-sonnet-4-5"
         else:
@@ -305,9 +236,6 @@ class LiturgicalLibrarian:
     def _enforce_rate_limit(self):
         """
         Enforce rate limiting between API calls to avoid burst requests.
-
-        Gemini Tier 1 has 150 RPM limit = 2.5 req/sec burst rate.
-        This method ensures we don't exceed the configured request_delay.
         """
         if self.request_delay > 0:
             elapsed = time.time() - self._last_request_time
@@ -318,63 +246,41 @@ class LiturgicalLibrarian:
                 time.sleep(sleep_time)
             self._last_request_time = time.time()
 
-    @retry(
-        retry=lambda retry_state: (
-            retry_state.outcome.failed and
-            retry_state.outcome.exception() is not None and
-            _is_retryable_gemini_error(retry_state.outcome.exception())
-        ),
-        stop=stop_after_attempt(5),
-        wait=wait_exponential(multiplier=1, min=2, max=10),
-        reraise=True
-    )
-    def _call_gemini_with_retry(self, prompt: str, temperature: float, thinking_budget: int):
+    def _call_openai(self, prompt: str, temperature: float = 0.6, thinking_budget: int = 4096):
         """
-        Call Gemini API with exponential backoff retry for transient errors only.
-
-        Retries up to 5 times with exponential backoff (2s, 4s, 8s, 10s, 10s) for:
-        - Temporary rate limit errors (429 burst limit)
-        - Network errors (timeouts, connection issues)
-
-        Does NOT retry for:
-        - Quota exhaustion (daily limit) - switches to Claude immediately
-        - Other permanent errors
+        Call GPT-5.1 with high reasoning effort.
 
         Args:
-            prompt: The prompt to send to Gemini
-            temperature: Temperature setting for generation
-            thinking_budget: Token budget for thinking phase
+            prompt: The prompt to send
+            temperature: Unused for GPT-5.1 reasoning models (kept for API compat)
+            thinking_budget: Unused (kept for API compat)
 
         Returns:
-            Response object from Gemini API
+            Tuple of (summary_text, input_tokens, output_tokens, reasoning_tokens)
 
         Raises:
-            Exception: Re-raises exception for non-retryable errors or after all retries exhausted
+            Exception: Re-raises on API errors
         """
-        from google.genai import types
-
         if self.verbose:
-            print(f"[API] Calling Gemini 2.5 Pro...")
+            print(f"[API] Calling GPT-5.1 (reasoning_effort=high)...")
 
-        response = self.gemini_client.models.generate_content(
-            model="gemini-2.5-pro",
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                # NOTE: max_output_tokens conflicts with thinking_config, causing response.text to be None
-                # Gemini will automatically allocate tokens between thinking and output
-                temperature=temperature,
-                thinking_config=types.ThinkingConfig(
-                    thinking_budget=thinking_budget
-                ),
-                # Explicitly disable Automatic Function Calling to prevent internal burst requests
-                # AFC can make up to 10 internal API calls which triggers 429 errors
-                automatic_function_calling=types.AutomaticFunctionCallingConfig(
-                    disable=True
-                )
-            )
+        self._enforce_rate_limit()
+
+        response = self.openai_client.chat.completions.create(
+            model="gpt-5.1",
+            reasoning_effort="high",
+            messages=[
+                {"role": "system", "content": "You are a scholarly liturgist writing for a Biblical commentary. Write narrative prose, not lists."},
+                {"role": "user", "content": prompt}
+            ]
         )
 
-        return response
+        summary = response.choices[0].message.content or ""
+        input_tokens = getattr(response.usage, 'prompt_tokens', 0) or 0
+        output_tokens = getattr(response.usage, 'completion_tokens', 0) or 0
+        reasoning_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+
+        return summary.strip(), input_tokens, output_tokens, reasoning_tokens
 
     def generate_research_bundle(self, psalm_chapter: int) -> Dict[str, Any]:
         """
@@ -950,7 +856,7 @@ class LiturgicalLibrarian:
         matches: List[LiturgicalMatch]
     ) -> str:
         """
-        Use LLM (Gemini 2.5 Pro or Claude Sonnet 4.5) to generate intelligent summary for a specific psalm phrase.
+        Use LLM (GPT-5.1 or Claude Sonnet 4.5 fallback) to generate intelligent summary for a specific psalm phrase.
 
         This prompt is designed for PHRASE-level descriptions, not prayer-level.
         Uses canonical classification fields and location_description to understand context.
@@ -1122,33 +1028,14 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
             while attempt < max_attempts:
                 attempt += 1
 
-                # Call Gemini API with automatic retry for transient errors (429, network issues, etc.)
-                response = self._call_gemini_with_retry(
+                # Call GPT-5.1 API
+                summary, input_tokens, output_tokens, reasoning_tokens = self._call_openai(
                     prompt=prompt,
-                    temperature=0.6,  # Increased from 0.3 for more synthesis/narrative flow
-                    thinking_budget=self.thinking_budget
+                    temperature=0.6
                 )
 
-                # Extract text from response - handle different response structures
-                summary = None
-
-                # Try method 1: response.text (simple access)
-                if hasattr(response, 'text') and response.text:
-                    summary = response.text.strip()
-
-                # Try method 2: candidates structure
-                if not summary and hasattr(response, 'candidates') and response.candidates:
-                    candidate = response.candidates[0]
-                    if hasattr(candidate, 'content') and candidate.content:
-                        if hasattr(candidate.content, 'parts') and candidate.content.parts:
-                            # Extract from parts list
-                            for part in candidate.content.parts:
-                                if hasattr(part, 'text') and part.text:
-                                    summary = part.text.strip()
-                                    break
-
                 if not summary:
-                    raise ValueError(f"Could not extract text from response. Response type: {type(response)}, has text: {hasattr(response, 'text')}, has candidates: {hasattr(response, 'candidates')}")
+                    raise ValueError("GPT-5.1 returned empty response")
 
                 if self.verbose:
                     try:
@@ -1156,34 +1043,21 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                         print(f"LLM RESPONSE FOR PHRASE (Attempt {attempt}/{max_attempts}): {psalm_phrase}")
                         print(f"{'='*70}")
                         print(summary)
-                        # Gemini token usage
-                        if hasattr(response, 'usage_metadata'):
-                            input_tokens = response.usage_metadata.prompt_token_count
-                            output_tokens = response.usage_metadata.candidates_token_count
-                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
-                            print(f"\nToken usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
+                        print(f"\nToken usage: {input_tokens} input, {output_tokens} output, {reasoning_tokens} reasoning")
                         print(f"{'='*70}\n")
                     except UnicodeEncodeError:
                         print(f"\n{'='*70}")
                         print(f"LLM RESPONSE FOR PHRASE (Attempt {attempt}/{max_attempts}): [Hebrew text - encoding error]")
-                        if hasattr(response, 'usage_metadata'):
-                            input_tokens = response.usage_metadata.prompt_token_count
-                            output_tokens = response.usage_metadata.candidates_token_count
-                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
-                            print(f"Token usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
+                        print(f"Token usage: {input_tokens} input, {output_tokens} output, {reasoning_tokens} reasoning")
                         print(f"{'='*70}\n")
 
-                # Track usage and costs (Gemini)
-                if hasattr(response, 'usage_metadata'):
-                    input_tokens = response.usage_metadata.prompt_token_count
-                    output_tokens = response.usage_metadata.candidates_token_count
-                    thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
-                    self.cost_tracker.add_usage(
-                        model="gemini-2.5-pro",
-                        input_tokens=input_tokens,
-                        output_tokens=output_tokens,
-                        thinking_tokens=thinking_tokens
-                    )
+                # Track usage and costs
+                self.cost_tracker.add_usage(
+                    model="gpt-5.1",
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    thinking_tokens=reasoning_tokens
+                )
 
                 # Validate summary quality
                 quality_result = self._validate_summary_quality(summary, 'phrase', psalm_chapter)
@@ -1247,9 +1121,9 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                 print(f"[DEBUG] Exception in phrase summary: {error_type}: {error_msg[:200]}")
                 print(f"[DEBUG] Provider: {self.llm_provider}, Has Claude: {self.anthropic_client is not None}")
 
-            # If Gemini failed and Claude available, switch to Claude
-            if self.llm_provider == 'gemini' and self.anthropic_client:
-                print(f"[WARNING] Gemini API error. Switching to Claude Sonnet 4.5 fallback.")
+            # If OpenAI failed and Claude available, switch to Claude
+            if self.llm_provider == 'openai' and self.anthropic_client:
+                print(f"[WARNING] GPT-5.1 API error. Switching to Claude Sonnet 4.5 fallback.")
                 print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
                 self.llm_provider = 'anthropic'
                 # Retry with Claude
@@ -1258,8 +1132,8 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                 except Exception as claude_error:
                     print(f"[WARNING] Claude also failed: {type(claude_error).__name__}: {str(claude_error)[:100]}")
                     # Fall through to code-only summary
-            elif self.llm_provider == 'gemini':
-                print(f"[WARNING] Gemini API error and no Claude fallback available. Using code-only summaries.")
+            elif self.llm_provider == 'openai':
+                print(f"[WARNING] GPT-5.1 API error and no Claude fallback available. Using code-only summaries.")
                 print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
             else:
                 print(f"[WARNING] LLM summarization failed ({error_type}: {error_msg[:100]}). Using code-only fallback.")
@@ -1277,12 +1151,12 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
         matches: List[LiturgicalMatch]
     ) -> str:
         """
-        Use Claude Sonnet 4.5 with extended thinking to generate intelligent summary (fallback when Gemini quota exhausted).
+        Use Claude Sonnet 4.5 with extended thinking to generate intelligent summary (fallback when primary LLM fails).
         """
         if not self.anthropic_client:
             return self._generate_phrase_code_summary(psalm_phrase, prayer_contexts, contexts)
 
-        # Build same context as Gemini version
+        # Build same context as primary LLM version
         context_lines = []
         context_lines.append(f"Psalm phrase: {psalm_phrase} (from verse {psalm_verse_range})")
         context_lines.append(f"Total occurrences: {total_count}")
@@ -1318,7 +1192,7 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
 
         context_description = "\n".join(context_lines)
 
-        # Use same prompt structure as Gemini (without extended thinking references)
+        # Use same prompt structure as primary LLM (without extended thinking references)
         prompt = f'''You are a scholarly liturgist writing for a Biblical commentary. Your task is to describe how a specific phrase from Psalms is used in Jewish liturgy.
 
 PHRASE BEING ANALYZED:
@@ -1471,7 +1345,7 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                 location_descriptions[prayer_name] = match.canonical_location_description or ""
 
         # Use LLM for intelligent summary if available
-        if self.gemini_client and len(matches) >= 1:
+        if self.openai_client and len(matches) >= 1:
             # Enforce rate limiting before API call
             self._enforce_rate_limit()
 
@@ -1640,33 +1514,14 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
             while attempt < max_attempts:
                 attempt += 1
 
-                # Call Gemini API with automatic retry for transient errors (429, network issues, etc.)
-                response = self._call_gemini_with_retry(
+                # Call GPT-5.1 API
+                summary, input_tokens, output_tokens, reasoning_tokens = self._call_openai(
                     prompt=prompt,
-                    temperature=0.6,
-                    thinking_budget=self.thinking_budget
+                    temperature=0.6
                 )
 
-                # Extract text from response - handle different response structures
-                summary = None
-
-                # Try method 1: response.text (simple access)
-                if hasattr(response, 'text') and response.text:
-                    summary = response.text.strip()
-
-                # Try method 2: candidates structure
-                if not summary and hasattr(response, 'candidates') and response.candidates:
-                    candidate = response.candidates[0]
-                    if hasattr(candidate, 'content') and candidate.content:
-                        if hasattr(candidate.content, 'parts') and candidate.content.parts:
-                            # Extract from parts list
-                            for part in candidate.content.parts:
-                                if hasattr(part, 'text') and part.text:
-                                    summary = part.text.strip()
-                                    break
-
                 if not summary:
-                    raise ValueError(f"Could not extract text from response. Response type: {type(response)}, has text: {hasattr(response, 'text')}, has candidates: {hasattr(response, 'candidates')}")
+                    raise ValueError("GPT-5.1 returned empty response")
 
                 if self.verbose:
                     try:
@@ -1674,34 +1529,21 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                         print(f"LLM RESPONSE FOR FULL PSALM {psalm_chapter} (Attempt {attempt}/{max_attempts})")
                         print(f"{'='*70}")
                         print(summary)
-                        # Gemini token usage
-                        if hasattr(response, 'usage_metadata'):
-                            input_tokens = response.usage_metadata.prompt_token_count
-                            output_tokens = response.usage_metadata.candidates_token_count
-                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
-                            print(f"\nToken usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
+                        print(f"\nToken usage: {input_tokens} input, {output_tokens} output, {reasoning_tokens} reasoning")
                         print(f"{'='*70}\n")
                     except UnicodeEncodeError:
                         print(f"\n{'='*70}")
                         print(f"LLM RESPONSE FOR FULL PSALM {psalm_chapter} (Attempt {attempt}/{max_attempts}) [encoding error]")
-                        if hasattr(response, 'usage_metadata'):
-                            input_tokens = response.usage_metadata.prompt_token_count
-                            output_tokens = response.usage_metadata.candidates_token_count
-                            thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
-                            print(f"Token usage: {input_tokens} input, {output_tokens} output, {thinking_tokens} thinking")
+                        print(f"Token usage: {input_tokens} input, {output_tokens} output, {reasoning_tokens} reasoning")
                         print(f"{'='*70}\n")
 
-                # Track usage and costs (Gemini)
-                if hasattr(response, 'usage_metadata'):
-                    input_tokens = response.usage_metadata.prompt_token_count
-                    output_tokens = response.usage_metadata.candidates_token_count
-                    thinking_tokens = getattr(response.usage_metadata, 'thoughts_token_count', 0)
-                    self.cost_tracker.add_usage(
-                        model="gemini-2.5-pro",
-                        input_tokens=input_tokens,
-                        output_tokens=output_tokens,
-                        thinking_tokens=thinking_tokens
-                    )
+                # Track usage and costs
+                self.cost_tracker.add_usage(
+                    model="gpt-5.1",
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    thinking_tokens=reasoning_tokens
+                )
 
                 # Validate summary quality
                 quality_result = self._validate_summary_quality(summary, 'full_psalm', psalm_chapter)
@@ -1765,9 +1607,9 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                 print(f"[DEBUG] Exception in full psalm summary: {error_type}: {error_msg[:200]}")
                 print(f"[DEBUG] Provider: {self.llm_provider}, Has Claude: {self.anthropic_client is not None}")
 
-            # If Gemini failed and Claude available, switch to Claude
-            if self.llm_provider == 'gemini' and self.anthropic_client:
-                print(f"[WARNING] Gemini API error. Switching to Claude Sonnet 4.5 fallback.")
+            # If OpenAI failed and Claude available, switch to Claude
+            if self.llm_provider == 'openai' and self.anthropic_client:
+                print(f"[WARNING] GPT-5.1 API error. Switching to Claude Sonnet 4.5 fallback.")
                 print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
                 self.llm_provider = 'anthropic'
                 # Retry with Claude
@@ -1776,8 +1618,8 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
                 except Exception as claude_error:
                     print(f"[WARNING] Claude also failed: {type(claude_error).__name__}: {str(claude_error)[:100]}")
                     # Fall through to code-only summary
-            elif self.llm_provider == 'gemini':
-                print(f"[WARNING] Gemini API error and no Claude fallback available. Using code-only summaries.")
+            elif self.llm_provider == 'openai':
+                print(f"[WARNING] GPT-5.1 API error and no Claude fallback available. Using code-only summaries.")
                 print(f"[INFO] Error: {error_type}: {error_msg[:150]}")
             else:
                 print(f"[WARNING] LLM summarization failed ({error_type}: {error_msg[:100]}). Using code-only fallback.")
@@ -1801,7 +1643,7 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
         location_descriptions: Dict[str, str] = None
     ) -> str:
         """
-        Use Claude Sonnet 4.5 with extended thinking to generate summary for full psalm (fallback when Gemini quota exhausted).
+        Use Claude Sonnet 4.5 with extended thinking to generate summary for full psalm (fallback when primary LLM fails).
         """
         if not self.anthropic_client:
             # Fallback to code-only
@@ -1818,7 +1660,7 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
 
         location_descriptions = location_descriptions or {}
 
-        # Build same context as Gemini version
+        # Build same context as primary LLM version
         context_lines = []
         context_lines.append(f"Psalm {psalm_chapter} usage in Jewish liturgy:")
         context_lines.append(f"Total prayer contexts: {len(prayer_contexts)}")
@@ -1855,7 +1697,7 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
 
         context_description = "\n".join(context_lines)
 
-        # Use same prompt structure as Gemini
+        # Use same prompt structure as primary LLM
         prompt = f'''You are a scholarly liturgist writing for a Biblical commentary. Your task is to describe where and how an entire Psalm is recited in Jewish liturgy.
 
 PSALM BEING ANALYZED:
@@ -2127,7 +1969,7 @@ Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" l
         Returns:
             ValidationResult with is_valid, confidence, reason, and optional quote/translation
         """
-        if not self.gemini_client:
+        if not self.openai_client:
             # Without LLM, accept all matches
             return ValidationResult(
                 is_valid=True,
@@ -2232,41 +2074,29 @@ Output ONLY the JSON.'''
                 pass  # Skip printing on Windows console with encoding issues
 
         try:
-            # Import types for config
-            from google.genai import types
-
-            response = self.gemini_client.models.generate_content(
-                model="gemini-2.5-pro",
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    # NOTE: max_output_tokens conflicts with thinking_config
-                    temperature=0.1,  # Low temperature for factual validation
-                    thinking_config=types.ThinkingConfig(
-                        thinking_budget=1024  # Lower budget for simple validation task
-                    )
-                )
+            response = self.openai_client.chat.completions.create(
+                model="gpt-5.1",
+                reasoning_effort="low",
+                messages=[
+                    {"role": "system", "content": "You are a meticulous biblical scholar. Respond with JSON only."},
+                    {"role": "user", "content": prompt}
+                ]
             )
 
-            # Extract text from response - handle different response structures
-            result_text = None
+            result_text = response.choices[0].message.content or ""
+            result_text = result_text.strip()
 
-            # Try method 1: response.text (simple access)
-            if hasattr(response, 'text') and response.text:
-                result_text = response.text.strip()
-
-            # Try method 2: candidates structure
-            if not result_text and hasattr(response, 'candidates') and response.candidates:
-                candidate = response.candidates[0]
-                if hasattr(candidate, 'content') and candidate.content:
-                    if hasattr(candidate.content, 'parts') and candidate.content.parts:
-                        # Extract from parts list
-                        for part in candidate.content.parts:
-                            if hasattr(part, 'text') and part.text:
-                                result_text = part.text.strip()
-                                break
+            # Track validation cost
+            if response.usage:
+                self.cost_tracker.add_usage(
+                    model="gpt-5.1",
+                    input_tokens=getattr(response.usage, 'prompt_tokens', 0) or 0,
+                    output_tokens=getattr(response.usage, 'completion_tokens', 0) or 0,
+                    thinking_tokens=getattr(response.usage, 'reasoning_tokens', 0) or 0
+                )
 
             if not result_text:
-                raise ValueError(f"Could not extract text from validation response. Response type: {type(response)}")
+                raise ValueError("GPT-5.1 returned empty validation response")
 
             if self.verbose:
                 try:
