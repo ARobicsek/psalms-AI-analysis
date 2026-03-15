@@ -200,6 +200,11 @@ class DocumentGenerator:
                 return f'{LRO}{match.group(1)}{PDF}'
             modified = re.sub(verse_ref_pattern, wrap_verse_ref, modified)
 
+        # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
+        LRM = '\u200E'  # LEFT-TO-RIGHT MARK
+        bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
+        modified = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified)
+
         # Trailing punctuation RLM anchor
         RLM = '\u200F'  # RIGHT-TO-LEFT MARK
         hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified))
@@ -955,13 +960,18 @@ class DocumentGenerator:
                             return f'{LRO}{match.group(1)}{PDF}'
                         modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
                     
+                    # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
+                    LRM = '\u200E'  # LEFT-TO-RIGHT MARK
+                    bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
+                    modified_part = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_part)
+
                     # If text contains significant Hebrew and ends with punctuation,
                     # add RLM (Right-to-Left Mark) to anchor punctuation to the RTL context
                     RLM = '\u200F'  # RIGHT-TO-LEFT MARK
                     hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_part))
                     if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_part):
                         modified_part = modified_part + RLM
-                    
+
                     run = paragraph.add_run(modified_part)
 
                 if set_font:
@@ -1058,12 +1068,17 @@ class DocumentGenerator:
                                 return f'{LRO}{match.group(1)}{PDF}'
                             modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
                         
+                        # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
+                        LRM = '\u200E'  # LEFT-TO-RIGHT MARK
+                        bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
+                        modified_part = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_part)
+
                         # Add RLM for Hebrew trailing punctuation
                         RLM = '\u200F'
                         hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_part))
                         if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_part):
                             modified_part = modified_part + RLM
-                        
+
                         run = paragraph.add_run(modified_part)
                     run.bold = bold
                     run.italic = italic
@@ -1106,12 +1121,17 @@ class DocumentGenerator:
                         return f'{LRO}{match.group(1)}{PDF}'
                     modified_text = re.sub(verse_ref_pattern, wrap_verse_ref, modified_text)
                 
+                # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
+                LRM = '\u200E'  # LEFT-TO-RIGHT MARK
+                bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
+                modified_text = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_text)
+
                 # Add RLM for Hebrew trailing punctuation
                 RLM = '\u200F'
                 hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_text))
                 if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_text):
                     modified_text = modified_text + RLM
-                
+
                 run = paragraph.add_run(modified_text)
             run.bold = bold
             run.italic = italic
@@ -1182,12 +1202,17 @@ class DocumentGenerator:
                                     return f'{LRO}{match.group(1)}{PDF}'
                                 modified_line = re.sub(verse_ref_pattern, wrap_verse_ref, modified_line)
                             
+                            # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
+                            LRM = '\u200E'  # LEFT-TO-RIGHT MARK
+                            bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
+                            modified_line = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_line)
+
                             # Add RLM for Hebrew trailing punctuation
                             RLM = '\u200F'
                             hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_line))
                             if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_line):
                                 modified_line = modified_line + RLM
-                            
+
                             run = p.add_run(modified_line)
                         run.bold = is_bold
                         run.italic = is_italic

@@ -8,6 +8,28 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 303 (2026-03-15): BiDi DOCX Fix — LRM Insertion
+
+**Objective**: Implement the LRM-based BiDi fix planned in Session 302 to prevent Word from scrambling Hebrew+punctuation+Hebrew sequences.
+
+**Problems Identified**:
+- When a neutral character (colon, semicolon, comma) appears between two Hebrew segments in an LTR paragraph, Word's BiDi algorithm resolves the neutral to RTL, causing the entire Hebrew+neutral+Hebrew sequence to display as one RTL run — visually scrambling word order (e.g., `חפץ: חָפָצְתִּי` in Psalm 40 verses 9 and 15).
+- Previous attempt (Session 301) used RLI/PDI (Unicode 6.3 isolates) which Word renders as visible dashed boxes.
+
+**Solutions Implemented**:
+1. **LRM insertion in all 5 DOCX code paths**: Added `re.sub(r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])', rf'\1\2{LRM}', text)` after verse-reference handling and before trailing-punctuation RLM anchoring. The LRM (U+200E) creates an explicit LTR boundary that prevents the neutral character from joining the RTL run.
+   - `_process_text_rtl()` — centralized function
+   - `_process_markdown_formatting()` plain text else branch
+   - `_add_formatted_content()` nested formatting else branch
+   - `_add_formatted_content()` no-nested else branch
+   - `_add_paragraph_with_soft_breaks()` else branch
+2. **Tested**: Regenerated Psalm 40 and Psalm 22 DOCX files successfully — no errors, no regressions.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — LRM insertion in 5 code paths (15 lines added)
+
+---
+
 ## Session 302 (2026-03-15): Copy Editor Critical Reading Stance & BiDi Plan
 
 **Objective**: Address the 3 remaining content quality issues the copy editor missed in Session 301 (false contrast v.1, opaque logic v.6, weak parallel v.8), and document a ready-to-implement BiDi fix plan for next session.

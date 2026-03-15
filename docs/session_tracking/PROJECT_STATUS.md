@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-15 (Session 302)
+**Last Updated**: 2026-03-15 (Session 303)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 302
+- **Current Session**: 303
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -89,6 +89,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ---
 
 ## Recent Work Summary (Last 5 Sessions)
+
+### Session 303 (2026-03-15): BiDi DOCX Fix — LRM Insertion
+- Implemented LRM (U+200E) insertion after Hebrew+punctuation sequences in all 5 DOCX code paths in `document_generator.py`.
+- Fixes Word scrambling Hebrew word order when colons/semicolons/commas appear between Hebrew segments (e.g., Psalm 40 verses 9, 15).
+- Regenerated Psalm 40 and Psalm 22 DOCX files successfully — no errors or regressions.
 
 ### Session 302 (2026-03-15): Copy Editor Critical Reading Stance
 - Added "CRITICAL READING STANCE" meta-reasoning preamble to copy editor prompt: for each paragraph, identify claim + evidence, ask "would a thoughtful reader find this convincing?"

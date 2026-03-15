@@ -12,6 +12,11 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
+**Session 303 (2026-03-15)**: BiDi DOCX Fix — LRM Insertion
+- Implemented LRM (U+200E) insertion after Hebrew+punctuation in all 5 DOCX code paths
+- Fixes Word scrambling Hebrew word order with colons/semicolons between Hebrew segments
+- Regenerated Psalm 40 and 22 DOCX successfully
+
 **Session 302 (2026-03-15)**: Copy Editor Critical Reading Stance
 - Added "CRITICAL READING STANCE" meta-reasoning preamble; strengthened categories 6, 9d, 9f with concrete self-tests
 - Re-ran Psalm 40: now catches all 5 target issues (was 2/5), 17 total changes
@@ -30,9 +35,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 **Session 299 (2026-03-09)**: Fixing Psalm 40 Pipeline Issues
 - Hardened pipeline section extraction for displaced liturgical content
 - Strengthened Master Writer liturgical prompt
-
-**Session 298 (2026-03-09)**: Error and Retry Tracking in Cost Summary
-- Added event tracking to CostTracker for pipeline retry visibility
 
 ## Quick Commands
 
@@ -87,7 +89,7 @@ python scripts/cost_report.py
 
 **Phase**: Pipeline Production — tweaks and improvements
 **Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro, GPT-5.4 Figurative Curator, GPT-5.1 Liturgical Librarian
-**Last Updated**: Session 302 (2026-03-15)
+**Last Updated**: Session 303 (2026-03-15)
 
 ## Common Tasks
 
