@@ -8,6 +8,52 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 302 (2026-03-15): Copy Editor Critical Reading Stance & BiDi Plan
+
+**Objective**: Address the 3 remaining content quality issues the copy editor missed in Session 301 (false contrast v.1, opaque logic v.6, weak parallel v.8), and document a ready-to-implement BiDi fix plan for next session.
+
+**Problems Identified**:
+- The copy editor's category-based scanning was pattern-matching rather than reasoning about arguments. 3/5 targeted issues were missed despite having correct categories (9d, 9f, 6).
+- The BiDi DOCX fix from Session 301 used RLI/PDI (Unicode 6.3 isolates), which Word renders as visible dashed boxes — fundamentally wrong approach.
+
+**Changes Implemented**:
+
+1. **Copy Editor — Critical Reading Stance (meta-reasoning preamble)**:
+   - Added "CRITICAL READING STANCE" section before the error categories, instructing the LLM to identify each paragraph's core claim and evidence, then ask: "Would a thoughtful first-time reader find this convincing?"
+   - This shifts the cognitive approach from pattern-matching to argument evaluation.
+
+2. **Category 6 — Strengthened with concrete test**:
+   - Added: "Test: does the parallel illuminate something specific about the psalm that would be harder to see without it?"
+   - Added: "Remove or replace parallels that share only a keyword."
+   - Added warning about "but where X does Y, the psalmist does Z" pattern as a signal of forced comparison.
+
+3. **Category 9d — Added concrete test for false contrasts**:
+   - Added: "Test: cover the conjunction and read the two statements — are they complementary rather than opposed?"
+
+4. **Category 9f — Added concrete test for opaque logic**:
+   - Added: "Test: can you explain, from what is written in the text alone, each logical step from citation to conclusion?"
+
+5. **Re-run Results — Psalm 40**: 17 changes (up from 14 in Session 301).
+   - All 3 previously missed issues now caught: false contrast v.1 (9d), opaque logic v.6 (9f), weak parallel v.8 (6).
+   - Category 6 now more aggressive — also removed Horace, Baudelaire, Euripides, Beckett parallels. Some may be overcorrections where the contrast itself is the insight.
+
+6. **BiDi Fix Plan — Documented for Next Session**:
+   - Approach: Use LRM (U+200E) instead of RLI/PDI. Insert after Hebrew+punctuation to create directional boundaries.
+   - Detailed implementation plan with code, 5 code paths identified, safety analysis, and testing checklist.
+   - Saved in `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md` (appended Session 302 section).
+
+**Files Modified**:
+- `src/agents/copy_editor.py` — Critical reading stance, strengthened categories 6, 9d, 9f
+- `output/psalm_40/psalm_040_copy_edited.md` — Re-run output (17 changes)
+- `output/psalm_40/psalm_040_copy_edit_changes.md` — Change list
+- `output/psalm_40/psalm_040_copy_edit_diff.md` — Diff
+- `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md` — Session 302 implementation plan appended
+- `docs/session_tracking/PROJECT_STATUS.md` — Session 302 entry
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+- `CLAUDE.md` — Updated recent changes
+
+---
+
 ## Session 301 (2026-03-14): Copy Editor Prompt Hardening (9d–9g)
 
 **Objective**: Address 7 issues found during Psalm 40 review — 5 content quality gaps the copy editor missed, and 2 bidirectional text rendering bugs (markdown and DOCX).

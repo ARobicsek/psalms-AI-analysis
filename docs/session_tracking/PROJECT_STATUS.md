@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-14 (Session 301)
+**Last Updated**: 2026-03-15 (Session 302)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 301
+- **Current Session**: 302
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -89,6 +89,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ---
 
 ## Recent Work Summary (Last 5 Sessions)
+
+### Session 302 (2026-03-15): Copy Editor Critical Reading Stance
+- Added "CRITICAL READING STANCE" meta-reasoning preamble to copy editor prompt: for each paragraph, identify claim + evidence, ask "would a thoughtful reader find this convincing?"
+- Strengthened categories 6 (weak parallels), 9d (false contrasts), 9f (opaque logic) with concrete self-tests.
+- Re-ran for Psalm 40: now catches all 5 target issues (was 2/5). 17 total changes (up from 14). Category 6 now more aggressive — may need tuning to preserve strong contrasts.
+- Documented ready-to-implement BiDi DOCX fix plan using LRM (U+200E) instead of RLI/PDI.
 
 ### Session 301 (2026-03-14): Copy Editor Prompt Hardening (9d–9g)
 - Added 4 new sub-categories to copy editor prompt: false contrasts (9d), overclaimed scope (9e), opaque scholarly logic (9f), factually wrong analogies (9g). Fixed 4 typos.

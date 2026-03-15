@@ -59,6 +59,23 @@ commentary). Readers may be reading only one psalm guide. Remove a
 definition only if the same term was already defined earlier in the same
 psalm's commentary.
 
+CRITICAL READING STANCE — apply throughout:
+
+For every substantive paragraph, pause and identify: (1) the core claim or
+point being made, and (2) the evidence or reasoning offered for it. Then ask:
+"If I were a thoughtful reader encountering this for the first time, would
+this argument convince me? Can I follow each step of the reasoning without
+needing outside knowledge the text hasn't provided?"
+
+If the answer is no — if there is a gap between evidence and conclusion, if
+a comparison feels forced, if a conjunction implies a tension that doesn't
+exist, if a scholarly citation leads to a conclusion through steps the text
+doesn't spell out — then the paragraph contains an error. Diagnose it using
+the categories below and fix it.
+
+This stance catches problems that category-level pattern-matching misses:
+arguments that are technically well-formed but substantively unconvincing.
+
 Correct the following categories of error:
 
 1. STRUCTURAL CLAIMS. If the text labels a pattern as chiasmus, verify
@@ -102,9 +119,15 @@ Correct the following categories of error:
    character. Fix inconsistent vowel pointing within a single word.
 
 6. WEAK CROSS-CULTURAL PARALLELS. If a literary parallel from outside
-   the biblical/rabbinic tradition is introduced the connection should feel strong and not forced. Keep parallels where the connection is substantive and
-   the contrast (if any) genuinely illuminates the psalm's distinctive
-   theological move.
+   the biblical/rabbinic tradition is introduced, the connection must run
+   deeper than a shared word or surface concept. Test: does the parallel
+   illuminate something specific about the psalm that would be harder to
+   see without it? If the two contexts are so different that the comparison
+   requires extensive qualification ("but where X does Y, the psalmist
+   does Z"), the parallel is likely obscuring rather than illuminating.
+   Keep parallels where the connection is substantive and the contrast
+   (if any) genuinely illuminates the psalm's distinctive theological
+   move. Remove or replace parallels that share only a keyword.
 
 7. FACTUAL AND TEXTUAL ACCURACY. Verify claims about biblical texts
    against the actual text. If the commentary claims two passages share
@@ -145,7 +168,9 @@ grammatical parsing (esp. stem name)
        contradiction between two statements — but the two statements
        are not actually in tension. If A does not contradict or
        complicate B, then linking them with an adversative conjunction
-       is misleading. Remove the false contrast or replace the
+       is misleading. Test: cover the conjunction and read the two
+       statements — are they complementary rather than opposed? If so,
+       the contrast is false. Remove the false contrast or replace the
        conjunction with a neutral connector ("and," "moreover," a
        semicolon).
    (e) OVERCLAIMED SCOPE. A sentence claims a verse or image "spans
@@ -156,10 +181,13 @@ grammatical parsing (esp. stem name)
    (f) OPAQUE SCHOLARLY LOGIC. A rabbinic or scholarly source is cited
        and a conclusion is drawn, but the reasoning that connects the
        source to the conclusion is not explained. The reader cannot
-       follow the argument without already knowing the source. Either
-       fill in the missing logical steps so the reader can follow, or
-       remove the citation if the logic cannot be made clear in a
-       sentence or two.
+       follow the argument without already knowing the source. Test:
+       can you explain, from what is written in the text alone, each
+       logical step from citation to conclusion? If a step requires
+       knowledge the text does not provide, the logic is opaque.
+       Either fill in the missing logical steps so the reader can
+       follow, or remove the citation if the logic cannot be made
+       clear in a sentence or two.
    (g) FACTUALLY WRONG ANALOGIES. A comparison to the physical world
        or common experience is factually incorrect (e.g., calling
        head-hairs "the most countable thing on the human body" when
