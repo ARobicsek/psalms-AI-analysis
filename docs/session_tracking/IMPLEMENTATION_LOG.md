@@ -8,6 +8,30 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 304 (2026-03-15): Copy Editor Output Readability — Word-Level Diff & Rationale
+
+**Objective**: Improve the copy editor's diff and changes output files so changes are easy to find and understand.
+
+**Problems Identified**:
+- The diff file used Python's `unified_diff` which showed entire paragraphs as +/- lines. Since each paragraph is one long line, a single word change made the whole paragraph appear as changed, burying the actual edit.
+- The changes file listed *what* changed but not *why* — e.g., no explanation for why the Mesha Stele reference was removed.
+- No cross-references between the changes and diff files.
+- `_count_changes` had a bug: numbered list items like `1. [7]...` were counted as Category 1 instead of Category 7.
+
+**Solutions Implemented**:
+1. **System prompt update**: Changed the `## Changes` instructions to request numbered changes with verse/section location and a WHY rationale sentence explaining what was wrong with the original.
+2. **Word-level diff generator**: Replaced `unified_diff` with a `SequenceMatcher`-based approach that finds word-level changes within each paragraph, shows only ~12 words of context on each side, and bolds the changed words. Added merge logic (MERGE_GAP=6) so nearby word changes within a paragraph produce a single diff entry.
+3. **Section tracking**: New `_track_sections()` method labels each diff with its verse/section (e.g., "Verse 6", "The Intelligence of Compassion", "Liturgical — Full Psalm").
+4. **Cross-reference links**: Changes file header links to the diff file; diff file header links to the changes file.
+5. **Fixed `_count_changes`**: Now looks specifically for `[N]` bracket format instead of matching item numbers.
+
+**Tested**: Ran against existing Psalm 41 original vs. copy-edited files — 37 raw word changes merged to 22 focused diff entries.
+
+**Files Modified**:
+- `src/agents/copy_editor.py` — System prompt changes section, replaced `_generate_diff()`, added `_track_sections()`, `_find_word_changes()`, `_truncate()`, fixed `_count_changes()`, added cross-reference in `edit_commentary()`
+
+---
+
 ## Session 303 (2026-03-15): BiDi DOCX Fix — LRM Insertion
 
 **Objective**: Implement the LRM-based BiDi fix planned in Session 302 to prevent Word from scrambling Hebrew+punctuation+Hebrew sequences.

@@ -121,8 +121,7 @@ Correct the following categories of error:
 6. WEAK CROSS-CULTURAL PARALLELS. If a literary parallel from outside
    the biblical/rabbinic tradition is introduced, the connection must run
    deeper than a shared word or surface concept. Test: does the parallel
-   illuminate something specific about the psalm that would be harder to
-   see without it? If the two contexts are so different that the comparison
+   illuminate something specific about the psalm? If the two contexts are so different that the comparison
    requires extensive qualification ("but where X does Y, the psalmist
    does Z"), the parallel is likely obscuring rather than illuminating.
    Keep parallels where the connection is substantive and the contrast
@@ -212,9 +211,26 @@ CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:
 - Do NOT revert or alter modified divine names (e.g., Kel, Elokim, Hashem, G-d, L-rd, and their Hebrew equivalents like קֵל, אלקים, ה׳, צבקות, שקי, אלוק). Leave them exactly as written.
 - Preserve all line breaks and paragraph structure exactly as given.
 
-After the corrected text, append a "## Changes" section listing each change
-with its category number and a one-line explanation. If no changes are needed,
-still append a "## Changes" section stating "No changes required."
+After the corrected text, append a "## Changes" section. Number each change
+and include:
+- Category number(s) in square brackets
+- The verse number or section where the change occurs (e.g., "Verse 6",
+  "Introduction", "Liturgical — Full Psalm")
+- A brief description of what was changed
+- A sentence explaining WHY the change was needed — what was wrong with the
+  original and what principle or evidence motivated the correction
+
+Format example:
+1. [8] **Verse 2**: Removed "Hiphil participle" label from מַשְׂכִּיל — the
+   stem name wasn't driving any interpretive point; it added grammatical jargon
+   without illumination.
+2. [7] **Verse 3**: Corrected LXX rendering from plural "hands of enemies" to
+   singular "hands of his enemy" — the LXX reads ἐχθροῦ αὐτοῦ (singular).
+3. [6] **Verse 2**: Removed Whitman comparison — the parallel shared only a
+   surface keyword ("attention") and required extensive qualification,
+   obscuring rather than illuminating the psalm's point.
+
+If no changes are needed, still append "## Changes\nNo changes required."
 """
 
 
@@ -306,7 +322,16 @@ class CopyEditor:
         diff_path = output_dir / f"{prefix}_copy_edit_diff.md"
 
         edited_path.write_text(full_edited, encoding='utf-8')
-        changes_path.write_text(changes_text, encoding='utf-8')
+        # Add cross-reference to diff file in changes output
+        if changes_text.startswith('## Changes'):
+            changes_output = changes_text.replace(
+                '## Changes\n',
+                f'## Changes\n*For exact before/after text, see [{prefix}_copy_edit_diff.md]({prefix}_copy_edit_diff.md).*\n\n',
+                1
+            )
+        else:
+            changes_output = changes_text
+        changes_path.write_text(changes_output, encoding='utf-8')
         diff_path.write_text(diff_text, encoding='utf-8')
 
         self.logger.info(f"Saved: {edited_path}")
@@ -770,36 +795,232 @@ class CopyEditor:
     # -------------------------------------------------------------------------
 
     def _generate_diff(self, original: str, corrected: str, psalm_number: int) -> str:
-        """Generate a readable diff between original and corrected content."""
-        # Normalize trailing whitespace to avoid phantom diffs from
-        # the LLM not reproducing invisible trailing spaces
-        orig_lines = [line.rstrip() + '\n' for line in original.splitlines()]
-        edit_lines = [line.rstrip() + '\n' for line in corrected.splitlines()]
+        """Generate a focused, word-level diff between original and corrected content."""
+        # Normalize trailing whitespace
+        orig_lines = [line.rstrip() for line in original.split('\n')]
+        edit_lines = [line.rstrip() for line in corrected.split('\n')]
 
-        diff = difflib.unified_diff(
-            orig_lines,
-            edit_lines,
-            fromfile=f"psalm_{psalm_number:03d}_print_ready.md (original)",
-            tofile=f"psalm_{psalm_number:03d}_copy_edited.md (edited)",
-            lineterm=''
+        # Track section context for each original line
+        orig_sections = self._track_sections(orig_lines)
+
+        # Match lines using SequenceMatcher
+        sm = difflib.SequenceMatcher(None, orig_lines, edit_lines)
+
+        changes = []
+
+        for tag, i1, i2, j1, j2 in sm.get_opcodes():
+            if tag == 'equal':
+                continue
+
+            if tag == 'replace':
+                n_orig = i2 - i1
+                n_edit = j2 - j1
+                pairs = min(n_orig, n_edit)
+
+                # Paired replacements — do word-level diff within each line
+                for k in range(pairs):
+                    oi = i1 + k
+                    ei = j1 + k
+                    if orig_lines[oi].rstrip() == edit_lines[ei].rstrip():
+                        continue  # whitespace-only change
+                    section = orig_sections[oi] if oi < len(orig_sections) else "Unknown"
+                    word_changes = self._find_word_changes(orig_lines[oi], edit_lines[ei])
+                    for wc in word_changes:
+                        changes.append({
+                            'section': section,
+                            'before': wc['before'],
+                            'after': wc['after'],
+                        })
+
+                # Extra original lines (deletions)
+                for k in range(pairs, n_orig):
+                    oi = i1 + k
+                    if orig_lines[oi].strip():
+                        section = orig_sections[oi] if oi < len(orig_sections) else "Unknown"
+                        changes.append({
+                            'section': section,
+                            'before': self._truncate(orig_lines[oi], 200),
+                            'after': '*(line removed)*',
+                        })
+
+                # Extra edited lines (insertions)
+                for k in range(pairs, n_edit):
+                    ei = j1 + k
+                    if edit_lines[ei].strip():
+                        changes.append({
+                            'section': '(inserted)',
+                            'before': '*(none)*',
+                            'after': self._truncate(edit_lines[ei], 200),
+                        })
+
+            elif tag == 'delete':
+                for idx in range(i1, i2):
+                    if orig_lines[idx].strip():
+                        section = orig_sections[idx] if idx < len(orig_sections) else "Unknown"
+                        changes.append({
+                            'section': section,
+                            'before': self._truncate(orig_lines[idx], 200),
+                            'after': '*(line removed)*',
+                        })
+
+            elif tag == 'insert':
+                for idx in range(j1, j2):
+                    if edit_lines[idx].strip():
+                        changes.append({
+                            'section': '(inserted)',
+                            'before': '*(none)*',
+                            'after': self._truncate(edit_lines[idx], 200),
+                        })
+
+        if not changes:
+            return (
+                f"# Copy Editor Diff — Psalm {psalm_number}\n\n"
+                f"No differences found. The commentary passed copy editing without changes.\n"
+            )
+
+        # Format output
+        prefix = f"psalm_{psalm_number:03d}"
+        output = []
+        output.append(f"# Copy Editor Diff — Psalm {psalm_number}\n")
+        output.append(f"**{len(changes)} changes found**  ")
+        output.append(
+            f"See [{prefix}_copy_edit_changes.md]({prefix}_copy_edit_changes.md) "
+            f"for rationale behind each change.\n"
         )
 
-        diff_lines = list(diff)
+        for i, c in enumerate(changes, 1):
+            output.append("---\n")
+            output.append(f"### Diff {i} — {c['section']}\n")
+            output.append(f"**Before:** {c['before']}  ")
+            output.append(f"**After:** {c['after']}\n")
 
-        if not diff_lines:
-            return f"# Copy Editor Diff — Psalm {psalm_number}\n\nNo differences found. The commentary passed copy editing without changes.\n"
+        return '\n'.join(output)
 
-        # Count changes
-        additions = sum(1 for l in diff_lines if l.startswith('+') and not l.startswith('+++'))
-        deletions = sum(1 for l in diff_lines if l.startswith('-') and not l.startswith('---'))
+    def _track_sections(self, lines: list) -> list:
+        """Track the section label for each line based on headers."""
+        sections = []
+        current_label = "Introduction"
 
-        header = f"# Copy Editor Diff — Psalm {psalm_number}\n\n"
-        header += f"**Lines added:** {additions}  \n"
-        header += f"**Lines removed:** {deletions}  \n\n"
-        header += "```diff\n"
-        footer = "\n```\n"
+        for line in lines:
+            stripped = line.strip()
+            verse_match = re.match(r'\*\*Verse[s]?\s+([\d–\-]+)\*\*', stripped)
+            if verse_match:
+                current_label = f"Verse {verse_match.group(1)}"
+            elif stripped.startswith('#### '):
+                sub = stripped.lstrip('# ').strip()
+                current_label = f"Liturgical — {sub}"
+            elif stripped.startswith('### '):
+                current_label = stripped.lstrip('# ').strip()
+            elif stripped == '---LITURGICAL-SECTION-START---':
+                current_label = "Liturgical"
+            sections.append(current_label)
 
-        return header + ''.join(diff_lines) + footer
+        return sections
+
+    def _find_word_changes(self, orig_line: str, edit_line: str) -> list:
+        """Find word-level changes between two lines, returning focused before/after snippets.
+
+        Merges nearby changes (within MERGE_GAP words) into a single diff entry
+        so that one logical edit doesn't produce multiple scattered entries.
+        """
+        CONTEXT_WORDS = 12
+        MAX_HIGHLIGHT_WORDS = 30
+        MERGE_GAP = 6  # merge changes within this many words of each other
+
+        orig_words = orig_line.split()
+        edit_words = edit_line.split()
+        sm = difflib.SequenceMatcher(None, orig_words, edit_words)
+
+        # Collect non-equal opcodes
+        raw_changes = []
+        for tag, i1, i2, j1, j2 in sm.get_opcodes():
+            if tag != 'equal':
+                raw_changes.append((i1, i2, j1, j2))
+
+        if not raw_changes:
+            return []
+
+        # Merge nearby changes so one logical edit = one diff entry
+        merged = [list(raw_changes[0])]
+        for i1, i2, j1, j2 in raw_changes[1:]:
+            prev = merged[-1]
+            gap = i1 - prev[1]  # gap in original between end of prev and start of current
+            if gap <= MERGE_GAP:
+                merged[-1] = [prev[0], i2, prev[2], j2]
+            else:
+                merged.append([i1, i2, j1, j2])
+
+        # Build snippets for each merged change
+        changes = []
+        for i1, i2, j1, j2 in merged:
+            # --- Build "before" snippet ---
+            ctx_start = max(0, i1 - CONTEXT_WORDS)
+            ctx_end = min(len(orig_words), i2 + CONTEXT_WORDS)
+
+            highlighted = orig_words[i1:i2]
+            if len(highlighted) > MAX_HIGHLIGHT_WORDS:
+                hl_display = (
+                    ' '.join(highlighted[:12]) + ' … '
+                    + ' '.join(highlighted[-8:])
+                )
+            else:
+                hl_display = ' '.join(highlighted)
+
+            before_parts = []
+            if ctx_start > 0:
+                before_parts.append('...')
+            ctx_before = orig_words[ctx_start:i1]
+            if ctx_before:
+                before_parts.append(' '.join(ctx_before))
+            if hl_display:
+                before_parts.append(f'**{hl_display}**')
+            ctx_after = orig_words[i2:ctx_end]
+            if ctx_after:
+                before_parts.append(' '.join(ctx_after))
+            if ctx_end < len(orig_words):
+                before_parts.append('...')
+            before_snippet = ' '.join(before_parts)
+
+            # --- Build "after" snippet ---
+            ectx_start = max(0, j1 - CONTEXT_WORDS)
+            ectx_end = min(len(edit_words), j2 + CONTEXT_WORDS)
+
+            highlighted_edit = edit_words[j1:j2]
+            if len(highlighted_edit) > MAX_HIGHLIGHT_WORDS:
+                hl_edit_display = (
+                    ' '.join(highlighted_edit[:12]) + ' … '
+                    + ' '.join(highlighted_edit[-8:])
+                )
+            else:
+                hl_edit_display = ' '.join(highlighted_edit)
+
+            after_parts = []
+            if ectx_start > 0:
+                after_parts.append('...')
+            ectx_before = edit_words[ectx_start:j1]
+            if ectx_before:
+                after_parts.append(' '.join(ectx_before))
+            if hl_edit_display:
+                after_parts.append(f'**{hl_edit_display}**')
+            ectx_after = edit_words[j2:ectx_end]
+            if ectx_after:
+                after_parts.append(' '.join(ectx_after))
+            if ectx_end < len(edit_words):
+                after_parts.append('...')
+            after_snippet = ' '.join(after_parts)
+
+            changes.append({
+                'before': before_snippet,
+                'after': after_snippet,
+            })
+
+        return changes
+
+    def _truncate(self, text: str, max_len: int) -> str:
+        """Truncate text to max_len characters with ellipsis."""
+        if len(text) <= max_len:
+            return text
+        return text[:max_len] + '...'
 
     # -------------------------------------------------------------------------
     # Summary and reporting
@@ -810,16 +1031,19 @@ class CopyEditor:
         counts = {f"Category {i}": 0 for i in range(1, 10)}
         counts['total'] = 0
 
-        # Look for patterns like "1." or "Category 1" or "[1]" etc.
         for line in changes_text.split('\n'):
             line = line.strip()
-            if not line or line.startswith('#'):
+            if not line or line.startswith('#') or line.startswith('*'):
                 continue
-            for i in range(1, 10):
-                if re.search(rf'(?:^|\b){i}[.:\])]', line) or f'Category {i}' in line:
-                    counts[f'Category {i}'] += 1
-                    counts['total'] += 1
-                    break
+            # Look for category markers in [N] or [N,M] format
+            bracket_matches = re.findall(r'\[(\d+(?:,\s*\d+)*)\]', line)
+            if bracket_matches:
+                counts['total'] += 1
+                for match in bracket_matches:
+                    for num_str in match.split(','):
+                        num = int(num_str.strip())
+                        if 1 <= num <= 9:
+                            counts[f'Category {num}'] += 1
 
         return counts
 

@@ -6,11 +6,16 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 **Start Here:**
 - `README.md` - Project overview, installation, usage
-- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 300)
+- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 304)
 - `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Technical specifications, schemas
 - `docs/guides/DEVELOPER_GUIDE.md` - Development workflow, coding standards
 
 ## Recent Major Changes (Last 5 Sessions)
+
+**Session 304 (2026-03-15)**: Copy Editor Output Readability
+- Replaced unified diff with word-level diff showing ~12 words of context, changed words bolded, nearby changes merged
+- Updated prompt to request numbered changes with verse location and WHY rationale
+- Added cross-reference links between changes and diff files; fixed `_count_changes` bug
 
 **Session 303 (2026-03-15)**: BiDi DOCX Fix — LRM Insertion
 - Implemented LRM (U+200E) insertion after Hebrew+punctuation in all 5 DOCX code paths
@@ -31,10 +36,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Swapped Figurative Curator from `gemini-3.1-pro-preview` → `gpt-5.4` (high reasoning)
 - Swapped Liturgical Librarian from `gemini-2.5-pro` → `gpt-5.1` (high reasoning)
 - Kept `gemini-2.5-pro` only for Synthesis Writer large-psalm fallback
-
-**Session 299 (2026-03-09)**: Fixing Psalm 40 Pipeline Issues
-- Hardened pipeline section extraction for displaced liturgical content
-- Strengthened Master Writer liturgical prompt
 
 ## Quick Commands
 
@@ -89,7 +90,7 @@ python scripts/cost_report.py
 
 **Phase**: Pipeline Production — tweaks and improvements
 **Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro, GPT-5.4 Figurative Curator, GPT-5.1 Liturgical Librarian
-**Last Updated**: Session 303 (2026-03-15)
+**Last Updated**: Session 304 (2026-03-15)
 
 ## Common Tasks
 

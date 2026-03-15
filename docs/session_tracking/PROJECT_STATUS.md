@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-15 (Session 303)
+**Last Updated**: 2026-03-15 (Session 304)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 303
+- **Current Session**: 304
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 304 (2026-03-15): Copy Editor Output Readability
+- Replaced unified diff with word-level diff: shows only ~12 words of context around each change with changed words bolded, merges nearby changes within paragraphs.
+- Updated copy editor prompt to request numbered changes with verse location and WHY rationale explaining what was wrong with the original.
+- Added cross-reference links between changes and diff files; fixed `_count_changes` category-counting bug.
+
 ### Session 303 (2026-03-15): BiDi DOCX Fix — LRM Insertion
 - Implemented LRM (U+200E) insertion after Hebrew+punctuation sequences in all 5 DOCX code paths in `document_generator.py`.
 - Fixes Word scrambling Hebrew word order when colons/semicolons/commas appear between Hebrew segments (e.g., Psalm 40 verses 9, 15).
@@ -116,18 +121,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Hardened pipeline section extraction to detect and recover liturgical content displaced by the copy editor LLM, fixing malformed DOCX outputs.
 - Added structural validation for displaced content to `CopyEditor`.
 - Strengthened `MASTER_WRITER_PROMPT_V4` to enforce the inclusion of all specific liturgical references found in the research bundle.
-
-### Session 298 (2026-03-09): Error and Retry Tracking in Cost Summary
-- Enhanced `CostTracker` to maintain a log of pipeline events (`log_event()`).
-- Updated `get_summary()` to display a dedicated "PIPELINE EVENTS & RETRIES" section reporting which agents hit token truncations, JSON repair failures, or API timeouts.
-- Injected logging hooks into the retry loops of the Micro Analyst, Macro Analyst, Insight Extractor, and Question Curator.
-- Fixed `UnboundLocalError` in `_generate_research_requests()` (missing `response_text` initialization).
-
-### Session 297 (2026-03-09): Micro Analyst JSON Repair & Validation
-- Integrated the `json-repair` library into the Micro Analyst to salvage outputs that are truncated due to streaming connection drops or internal cutoff.
-- Added structural validation: repaired JSON is only accepted if it contains the correct number of `verse_discoveries` (matching the database verse count) and at least 3 `interesting_questions`.
-- Invalid structural repairs fall back to the existing token retry logic, preventing faulty JSON from breaking downstream pipeline agents.
-
 
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
