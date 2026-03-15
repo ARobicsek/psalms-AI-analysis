@@ -12,6 +12,11 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
+**Session 301 (2026-03-14)**: Copy Editor Prompt Hardening (9d–9g)
+- Added copy editor sub-categories 9d–9g (false contrasts, overclaimed scope, opaque logic, wrong analogies)
+- Re-ran copy editor for Psalm 40; auto-caught 2 of 5 identified issues
+- BiDi fixes attempted but reverted due to regressions (notes in `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md`)
+
 **Session 300 (2026-03-13)**: Model Swap — Figurative Curator & Liturgical Librarian
 - Swapped Figurative Curator from `gemini-3.1-pro-preview` → `gpt-5.4` (high reasoning)
 - Swapped Liturgical Librarian from `gemini-2.5-pro` → `gpt-5.1` (high reasoning)
@@ -26,9 +31,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 **Session 297 (2026-03-09)**: Micro Analyst JSON Repair & Validation
 - Integrated `json-repair` library with structural validation for truncated outputs
-
-**Session 289 (2026-03-08)**: Session Management Cleanup
-- Restructured session docs to cut startup context from ~150KB to ~20KB (~85% token savings)
 
 ## Quick Commands
 
@@ -83,7 +85,7 @@ python scripts/cost_report.py
 
 **Phase**: Pipeline Production — tweaks and improvements
 **Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro, GPT-5.4 Figurative Curator, GPT-5.1 Liturgical Librarian
-**Last Updated**: Session 300 (2026-03-13)
+**Last Updated**: Session 301 (2026-03-14)
 
 ## Common Tasks
 

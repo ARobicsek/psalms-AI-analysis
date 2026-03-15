@@ -112,7 +112,7 @@ Correct the following categories of error:
    errors; do not remove the observation if it can be salvaged with
    accurate wording.
 
-8. HEBREW GRAMMAR BLOAT. The audience are NOT grammarians! The more technical the grammatial statement, the more it must be earned.
+8. HEBREW GRAMMAR BLOAT. The audience are NOT grammarians! The more technical the grammatical statement, the more it must be earned.
 If a Hebrew verb or noun is annotated with
 grammatical parsing (esp. stem name)
    and the grammatical label adds no interpretive value, remove the
@@ -122,12 +122,12 @@ grammatical parsing (esp. stem name)
    noting a Niphal because passivity is the insight). Remove labels
    that are pure annotation — e.g., "(Niphal perfect, third-person
    plural)" when the commentary makes no interpretive use of that
-   information. Terms like 'first persion' and 'pleural' are fine if they are relevant to the point being made.
+   information. Terms like 'first person' and 'plural' are fine if they are relevant to the point being made.
 
 9. STRAINED ARGUMENTS AND POORLY REASONED CLAIMS. Claims must be convincing! If the commentary
-   makes an argument (e.g. about a specificausal chain, progression,
-   contrast, equivalence, use of a poetic device. etc.) check whether the evidence supports the claim.
-    Throughout, ask yourself - does this argument actually hold water?
+   makes an argument (e.g. about a specific causal chain, progression,
+   contrast, equivalence, use of a poetic device, etc.) check whether the evidence supports the claim.
+    Throughout, ask yourself — does this argument actually hold water?
     Examples of common failures:
    (a) REVERSED CAUSATION. A chain like "divine wrath → sin → folly"
        presents effects as causes. If folly leads to sin which
@@ -140,6 +140,31 @@ grammatical parsing (esp. stem name)
    (c) STRAINED INTERTEXTUAL LOGIC. Citing a parallel passage and
        asserting a relationship (influence, allusion, contrast) that
        the shared language does not actually sustain.
+   (d) FALSE CONTRASTS. A sentence uses "yet," "but," "however,"
+       "nevertheless," or "although" to imply a tension or
+       contradiction between two statements — but the two statements
+       are not actually in tension. If A does not contradict or
+       complicate B, then linking them with an adversative conjunction
+       is misleading. Remove the false contrast or replace the
+       conjunction with a neutral connector ("and," "moreover," a
+       semicolon).
+   (e) OVERCLAIMED SCOPE. A sentence claims a verse or image "spans
+       the entire cosmos," "encompasses all of human experience,"
+       "covers the full range of X," or uses similar totalizing
+       language — but the actual evidence in the paragraph is much
+       more limited. Scale the claim down to match the evidence.
+   (f) OPAQUE SCHOLARLY LOGIC. A rabbinic or scholarly source is cited
+       and a conclusion is drawn, but the reasoning that connects the
+       source to the conclusion is not explained. The reader cannot
+       follow the argument without already knowing the source. Either
+       fill in the missing logical steps so the reader can follow, or
+       remove the citation if the logic cannot be made clear in a
+       sentence or two.
+   (g) FACTUALLY WRONG ANALOGIES. A comparison to the physical world
+       or common experience is factually incorrect (e.g., calling
+       head-hairs "the most countable thing on the human body" when
+       fingers and toes are far more countable). Fix the analogy or
+       remove it.
    Do not remove arguments that can be salvaged; fix them. If the argument
    cannot be salvaged, remove entirely but maintain smooth flow of the text.
 

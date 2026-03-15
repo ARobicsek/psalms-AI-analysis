@@ -8,6 +8,40 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 301 (2026-03-14): Copy Editor Prompt Hardening (9d–9g)
+
+**Objective**: Address 7 issues found during Psalm 40 review — 5 content quality gaps the copy editor missed, and 2 bidirectional text rendering bugs (markdown and DOCX).
+
+**Problems Identified**:
+- 5 content quality issues the copy editor should have caught: false contrast (v. 1), overclaimed scope (v. 3), opaque scholarly logic (v. 6), weak literary parallel (v. 8), factually wrong analogy (v. 13)
+- 2 BiDi rendering bugs: Hebrew word order scrambled in markdown (v. 15) and DOCX (v. 9) when neutral characters (colons) appear between Hebrew words
+
+**Changes Implemented**:
+
+1. **Copy Editor Prompt — 4 New Sub-categories (9d–9g)**:
+   - **(d) FALSE CONTRASTS**: Flags adversative conjunctions ("yet," "but") where no actual tension exists.
+   - **(e) OVERCLAIMED SCOPE**: Catches totalizing language ("spans the entire cosmos") unsupported by evidence.
+   - **(f) OPAQUE SCHOLARLY LOGIC**: Requires citations to include the reasoning chain, not just a reference.
+   - **(g) FACTUALLY WRONG ANALOGIES**: Catches incorrect physical-world comparisons (e.g., head-hairs as "most countable").
+   - Also fixed 4 typos in the existing prompt ("grammatial," "first persion," "pleural," "specificausal").
+
+2. **Copy Editor Re-run for Psalm 40**: Re-ran with new prompt; auto-caught 2 of 5 issues (overclaimed scope in v. 3, factually wrong head-hair analogy in v. 13) plus 12 other corrections.
+
+3. **BiDi Fixes — Attempted and Reverted**:
+   - Attempted MD fix (LRM insertion after Hebrew+punctuation) and DOCX fix (RLI/PDI wrapping for bare inline Hebrew) plus code deduplication in `document_generator.py`.
+   - Both introduced serious regressions and were fully reverted.
+   - Detailed notes saved in `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md` for next session.
+
+**Files Modified**:
+- `src/agents/copy_editor.py` — New sub-categories 9d–9g, typo fixes
+- `output/psalm_40/psalm_040_copy_edited.md` — Copy editor re-run output (14 auto-changes)
+- `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md` — BiDi fix notes for retry next session
+- `docs/session_tracking/PROJECT_STATUS.md` — Session 301 entry
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+- `CLAUDE.md` — Updated recent changes
+
+---
+
 ## Session 300 (2026-03-13): Model Swap — Figurative Curator & Liturgical Librarian
 
 **Objective**: Replace Gemini models with OpenAI models for better quality/cost balance; keep Gemini 2.5 Pro only for the Synthesis Writer large-psalm fallback.

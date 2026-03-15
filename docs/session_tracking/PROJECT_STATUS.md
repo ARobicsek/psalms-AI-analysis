@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-13 (Session 300)
+**Last Updated**: 2026-03-14 (Session 301)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 300
+- **Current Session**: 301
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 301 (2026-03-14): Copy Editor Prompt Hardening (9d–9g)
+- Added 4 new sub-categories to copy editor prompt: false contrasts (9d), overclaimed scope (9e), opaque scholarly logic (9f), factually wrong analogies (9g). Fixed 4 typos.
+- Re-ran copy editor for Psalm 40: auto-caught 2 of 5 identified issues plus 12 other corrections.
+- BiDi rendering fixes (MD LRM, DOCX RLI/PDI) attempted but reverted due to regressions. Notes saved for next session.
+
 ### Session 300 (2026-03-13): Model Swap — Figurative Curator & Liturgical Librarian
 - Replaced Figurative Curator model from `gemini-3.1-pro-preview` to `gpt-5.4` (high reasoning effort) for better figurative analysis quality.
 - Replaced Liturgical Librarian model from `gemini-2.5-pro` to `gpt-5.1` (high reasoning effort) for cost reduction on summarization tasks.
@@ -111,11 +116,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Integrated the `json-repair` library into the Micro Analyst to salvage outputs that are truncated due to streaming connection drops or internal cutoff.
 - Added structural validation: repaired JSON is only accepted if it contains the correct number of `verse_discoveries` (matching the database verse count) and at least 3 `interesting_questions`.
 - Invalid structural repairs fall back to the existing token retry logic, preventing faulty JSON from breaking downstream pipeline agents.
-
-### Session 296 (2026-03-09): Micro Analyst Truncation Investigation & JSON Repair Recommendation
-- Investigated whether raising token limits would prevent costly micro analyst retries — **ruled out**: `max_tokens` truncation has never fired.
-- Identified actual root causes: streaming connection drops (`RemoteProtocolError`) and unterminated JSON strings from mid-stream cutoffs.
-- Recommended implementing JSON repair with structural validation (verse count + required sections check) for next session.
 
 
 
