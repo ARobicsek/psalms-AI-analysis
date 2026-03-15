@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-15 (Session 304)
+**Last Updated**: 2026-03-15 (Session 305)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 304
+- **Current Session**: 305
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 305 (2026-03-15): Remove Auto-Skip-If-Exists Behavior
+- Removed implicit "skip if output exists" checks in Steps 2b (Questions), 2c (Insights), and 5b (Copy Editor) — pipeline steps now always run and overwrite unless explicitly skipped via `--skip-*` flags.
+- Fixed Step 5c (copy-edit extraction) gating so existing copy-edited content is used for DOCX even when `--skip-copy-editor` is passed.
+- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+
 ### Session 304 (2026-03-15): Copy Editor Output Readability
 - Replaced unified diff with word-level diff: shows only ~12 words of context around each change with changed words bolded, merges nearby changes within paragraphs.
 - Updated copy editor prompt to request numbered changes with verse location and WHY rationale explaining what was wrong with the original.
@@ -116,12 +121,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Replaced Liturgical Librarian model from `gemini-2.5-pro` to `gpt-5.1` (high reasoning effort) for cost reduction on summarization tasks.
 - Kept `gemini-2.5-pro` only for Synthesis Writer large-psalm fallback (1M context window dependency).
 - Updated legacy pipeline scripts, documentation, and verified DOCX model attribution tracks new models programmatically.
-
-### Session 299 (2026-03-09): Fixing Psalm 40 Pipeline Issues
-- Hardened pipeline section extraction to detect and recover liturgical content displaced by the copy editor LLM, fixing malformed DOCX outputs.
-- Added structural validation for displaced content to `CopyEditor`.
-- Strengthened `MASTER_WRITER_PROMPT_V4` to enforce the inclusion of all specific liturgical references found in the research bundle.
-
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

@@ -537,19 +537,14 @@ def run_enhanced_pipeline(
     if skip_questions or exclude_questions:
         logger.info("[STEP 2b] Skipping question curation")
     elif not smoke_test and macro_file.exists() and micro_file.exists():
-        if reader_questions_file.exists():
-            logger.info("Reader questions exist, skipping generation...")
-            # Track the model even when skipping
-            tracker.track_model_for_step("question_curator", question_model)
-        else:
-            logger.info("[STEP 2b] Curating questions...")
-            try:
-                curator = QuestionCurator(cost_tracker=cost_tracker, model=question_model)
-                q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
-                curator.save_questions(q, s, output_path, psalm_number)
-                tracker.track_model_for_step("question_curator", curator.active_model)
-            except Exception as e:
-                logger.warning(f"Question curation failed: {e}")
+        logger.info("[STEP 2b] Curating questions...")
+        try:
+            curator = QuestionCurator(cost_tracker=cost_tracker, model=question_model)
+            q, s = curator.curate_questions(psalm_number, macro_file, micro_file)
+            curator.save_questions(q, s, output_path, psalm_number)
+            tracker.track_model_for_step("question_curator", curator.active_model)
+        except Exception as e:
+            logger.warning(f"Question curation failed: {e}")
 
     # =====================================================================
     # STEP 2c: Insight Extraction
@@ -575,63 +570,57 @@ def run_enhanced_pipeline(
         curated_insights = {"psalm_level_insights": [], "verse_insights": {}}
         with open(insights_file, 'w') as f: json.dump(curated_insights, f)
     elif not skip_insights:
-        if insights_file.exists():
-            logger.info("Insights exist, loading...")
-            with open(insights_file, 'r', encoding='utf-8') as f: curated_insights = json.load(f)
-            # Track the model even when loading existing insights
-            tracker.track_model_for_step("insight_extractor", insight_model)
-        else:
-            logger.info("[STEP 2c] Extracting Insights...")
-            try:
-                extractor = InsightExtractor(cost_tracker=cost_tracker, model=insight_model)
+        logger.info("[STEP 2c] Extracting Insights...")
+        try:
+            extractor = InsightExtractor(cost_tracker=cost_tracker, model=insight_model)
 
-                # Get rich psalm text from micro_analysis for prompt
-                p_text = ""
-                verses = []
-                if hasattr(micro_analysis, 'verse_commentaries'):
-                    verses = micro_analysis.verse_commentaries
-                elif isinstance(micro_analysis, dict):
-                    verses = micro_analysis.get('verse_commentaries', [])
-                    
-                # Build psalm text from database (hebrew_text/english_text don't exist in micro JSON)
-                # and add phonetics from micro analysis
-                if verses:
-                    # Handle Pydantic object or dict
-                    def get_attr(obj, name, default=''):
-                        if isinstance(obj, dict): return obj.get(name, default)
-                        return getattr(obj, name, default)
+            # Get rich psalm text from micro_analysis for prompt
+            p_text = ""
+            verses = []
+            if hasattr(micro_analysis, 'verse_commentaries'):
+                verses = micro_analysis.verse_commentaries
+            elif isinstance(micro_analysis, dict):
+                verses = micro_analysis.get('verse_commentaries', [])
 
-                    # Build phonetic lookup from micro analysis
-                    phonetic_map = {}
-                    for v in verses:
-                        v_num = get_attr(v, 'verse_number') or get_attr(v, 'verse', 0)
-                        phon = get_attr(v, 'phonetic_transcription', '')
+            # Build psalm text from database (hebrew_text/english_text don't exist in micro JSON)
+            # and add phonetics from micro analysis
+            if verses:
+                # Handle Pydantic object or dict
+                def get_attr(obj, name, default=''):
+                    if isinstance(obj, dict): return obj.get(name, default)
+                    return getattr(obj, name, default)
+
+                # Build phonetic lookup from micro analysis
+                phonetic_map = {}
+                for v in verses:
+                    v_num = get_attr(v, 'verse_number') or get_attr(v, 'verse', 0)
+                    phon = get_attr(v, 'phonetic_transcription', '')
+                    if phon:
+                        phonetic_map[v_num] = phon
+
+                # Get actual text from database
+                db = TanakhDatabase(Path(db_path))
+                p = db.get_psalm(psalm_number)
+                if p:
+                    verse_texts = []
+                    for pv in p.verses:
+                        phon = phonetic_map.get(pv.verse, '')
+                        verse_block = f"Verse {pv.verse}:\nHebrew: {pv.hebrew}\nEnglish: {pv.english}"
                         if phon:
-                            phonetic_map[v_num] = phon
+                            verse_block += f"\nPhonetic: {phon}"
+                        verse_texts.append(verse_block)
+                    p_text = "\n\n".join(verse_texts)
 
-                    # Get actual text from database
-                    db = TanakhDatabase(Path(db_path))
-                    p = db.get_psalm(psalm_number)
-                    if p:
-                        verse_texts = []
-                        for pv in p.verses:
-                            phon = phonetic_map.get(pv.verse, '')
-                            verse_block = f"Verse {pv.verse}:\nHebrew: {pv.hebrew}\nEnglish: {pv.english}"
-                            if phon:
-                                verse_block += f"\nPhonetic: {phon}"
-                            verse_texts.append(verse_block)
-                        p_text = "\n\n".join(verse_texts)
+            if not p_text:
+                db = TanakhDatabase(Path(db_path))
+                p = db.get_psalm(psalm_number)
+                p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
 
-                if not p_text:
-                    db = TanakhDatabase(Path(db_path))
-                    p = db.get_psalm(psalm_number)
-                    p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
-
-                curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, macro_analysis, trimmed)
-                tracker.track_model_for_step("insight_extractor", extractor.model)
-                extractor.save_insights(curated_insights, insights_file)
-            except Exception as e:
-                logger.warning(f"Insight extraction failed: {e}")
+            curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, macro_analysis, trimmed)
+            tracker.track_model_for_step("insight_extractor", extractor.model)
+            extractor.save_insights(curated_insights, insights_file)
+        except Exception as e:
+            logger.warning(f"Insight extraction failed: {e}")
     else:
         # skip_insights is True — still track the model if insights file exists
         if insights_file.exists():
@@ -765,26 +754,22 @@ def run_enhanced_pipeline(
     # =====================================================================
     copy_edited_file = output_path / f"psalm_{psalm_number:03d}_copy_edited.md"
     if not skip_copy_editor and not smoke_test and print_ready_file.exists():
-        if copy_edited_file.exists():
-            logger.info("[STEP 5b] Copy-edited file exists, skipping copy editor")
-            tracker.track_model_for_step("copy_editor", CopyEditor.DEFAULT_MODEL)
-        else:
-            logger.info("[STEP 5b] Running Copy Editor...")
-            print(f"\n{'='*80}")
-            print(f"STEP 5b: Copy Editor")
-            print(f"{'='*80}\n")
-            try:
-                copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model)
-                ce_result = copy_editor.edit_commentary(
-                    psalm_number=psalm_number,
-                    input_file=print_ready_file,
-                    output_dir=output_path,
-                )
-                tracker.track_model_for_step("copy_editor", copy_editor.model)
-                logger.info(f"Copy Editor complete: {ce_result['edited_file']}")
-            except Exception as e:
-                logger.error(f"Copy Editor failed: {e}", exc_info=True)
-                print(f"Copy Editor error (non-fatal): {e}")
+        logger.info("[STEP 5b] Running Copy Editor...")
+        print(f"\n{'='*80}")
+        print(f"STEP 5b: Copy Editor")
+        print(f"{'='*80}\n")
+        try:
+            copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model)
+            ce_result = copy_editor.edit_commentary(
+                psalm_number=psalm_number,
+                input_file=print_ready_file,
+                output_dir=output_path,
+            )
+            tracker.track_model_for_step("copy_editor", copy_editor.model)
+            logger.info(f"Copy Editor complete: {ce_result['edited_file']}")
+        except Exception as e:
+            logger.error(f"Copy Editor failed: {e}", exc_info=True)
+            print(f"Copy Editor error (non-fatal): {e}")
     elif skip_copy_editor:
         logger.info("[STEP 5b] Skipping Copy Editor")
         # Still track model if copy-edited file exists from a previous run
@@ -794,7 +779,7 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 5c: Extract copy-edited sections for DOCX generation
     # =====================================================================
-    if copy_edited_file.exists() and not skip_copy_editor:
+    if copy_edited_file.exists():
         logger.info("[STEP 5c] Extracting sections from copy-edited file for DOCX...")
         try:
             intro_text, verses_text = _extract_sections_from_copy_edited(copy_edited_file, logger=logger)

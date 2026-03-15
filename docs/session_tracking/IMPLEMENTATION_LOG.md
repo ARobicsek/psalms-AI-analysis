@@ -8,6 +8,33 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 305 (2026-03-15): Remove Auto-Skip-If-Exists Behavior
+
+**Objective**: Eliminate implicit "skip if output exists" behavior so every pipeline step always runs and overwrites previous output unless explicitly skipped by the user.
+
+**Problems Identified**:
+- Steps 2b (Questions), 2c (Insights), and 5b (Copy Editor) silently skipped regeneration when their output files already existed, even without `--resume` or `--skip-*` flags.
+- Step 5c (copy-edit extraction) was gated on `not skip_copy_editor`, so passing `--skip-copy-editor` also prevented extraction of existing copy-edited content into the intro/verses files needed for DOCX generation.
+- This caused `--skip-macro --skip-micro --skip-writer --skip-copy-editor` (intending to regenerate DOCX only) to produce no DOCX, because the intro/verses files were missing and Step 5c refused to recreate them.
+
+**Solutions Implemented**:
+1. **Removed auto-skip in Step 2b (Questions)**: Removed `if reader_questions_file.exists(): skip` check. Now always regenerates when `--include-questions` is passed. Default behavior (skipped) unchanged.
+2. **Removed auto-skip in Step 2c (Insights)**: Removed `if insights_file.exists(): load existing` check. Now always regenerates when `--include-insights` is passed. Default behavior (skipped) unchanged.
+3. **Removed auto-skip in Step 5b (Copy Editor)**: Removed `if copy_edited_file.exists(): skip` check. Now always runs unless `--skip-copy-editor` is passed.
+4. **Fixed Step 5c gating**: Changed condition from `copy_edited_file.exists() and not skip_copy_editor` to just `copy_edited_file.exists()`. Extraction of existing copy-edited content now works even when the copy editor step itself is skipped.
+5. **Applied all changes to both pipelines**: `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+
+**Preserved Behavior**:
+- `--resume` flag still auto-detects completed steps (explicit user choice)
+- `--skip-*` flags still prevent their respective steps from running
+- Questions and insights still default to skipped (opt-in via `--include-questions`/`--include-insights`)
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` — Removed auto-skip checks in Steps 2b, 2c, 5b; fixed Step 5c gating
+- `scripts/run_si_pipeline.py` — Same changes as enhanced pipeline
+
+---
+
 ## Session 304 (2026-03-15): Copy Editor Output Readability — Word-Level Diff & Rationale
 
 **Objective**: Improve the copy editor's diff and changes output files so changes are easy to find and understand.

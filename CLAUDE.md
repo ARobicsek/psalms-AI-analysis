@@ -6,11 +6,16 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 **Start Here:**
 - `README.md` - Project overview, installation, usage
-- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 304)
+- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 305)
 - `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Technical specifications, schemas
 - `docs/guides/DEVELOPER_GUIDE.md` - Development workflow, coding standards
 
 ## Recent Major Changes (Last 5 Sessions)
+
+**Session 305 (2026-03-15)**: Remove Auto-Skip-If-Exists Behavior
+- Removed implicit "skip if output exists" checks in Steps 2b, 2c, 5b — steps now always run and overwrite unless explicitly skipped
+- Fixed Step 5c gating so DOCX-only runs work with `--skip-copy-editor` (extracts from existing copy-edited file)
+- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`
 
 **Session 304 (2026-03-15)**: Copy Editor Output Readability
 - Replaced unified diff with word-level diff showing ~12 words of context, changed words bolded, nearby changes merged
@@ -31,11 +36,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Added copy editor sub-categories 9d–9g (false contrasts, overclaimed scope, opaque logic, wrong analogies)
 - Re-ran copy editor for Psalm 40; auto-caught 2 of 5 identified issues
 - BiDi fixes attempted but reverted due to regressions (notes in `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md`)
-
-**Session 300 (2026-03-13)**: Model Swap — Figurative Curator & Liturgical Librarian
-- Swapped Figurative Curator from `gemini-3.1-pro-preview` → `gpt-5.4` (high reasoning)
-- Swapped Liturgical Librarian from `gemini-2.5-pro` → `gpt-5.1` (high reasoning)
-- Kept `gemini-2.5-pro` only for Synthesis Writer large-psalm fallback
 
 ## Quick Commands
 
@@ -90,7 +90,7 @@ python scripts/cost_report.py
 
 **Phase**: Pipeline Production — tweaks and improvements
 **Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro, GPT-5.4 Figurative Curator, GPT-5.1 Liturgical Librarian
-**Last Updated**: Session 304 (2026-03-15)
+**Last Updated**: Session 305 (2026-03-15)
 
 ## Common Tasks
 

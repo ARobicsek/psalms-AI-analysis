@@ -494,7 +494,7 @@ def run_enhanced_pipeline(
     # =====================================================================
     if skip_questions:
         logger.info("[STEP 2b] Skipping question curation")
-    elif not smoke_test and not reader_questions_file.exists() and macro_file.exists() and micro_file.exists():
+    elif not smoke_test and macro_file.exists() and micro_file.exists():
         logger.info("[STEP 2b] Curating questions...")
         try:
             curator = QuestionCurator(cost_tracker=cost_tracker, model=question_model)
@@ -529,26 +529,20 @@ def run_enhanced_pipeline(
         curated_insights = {"psalm_level_insights": [], "verse_insights": {}}
         with open(insights_file, 'w') as f: json.dump(curated_insights, f)
     elif not skip_insights:
-        if insights_file.exists():
-            logger.info("Insights exist, loading...")
-            with open(insights_file, 'r', encoding='utf-8') as f: curated_insights = json.load(f)
-            # Track the model even when loading existing insights
-            tracker.track_model_for_step("insight_extractor", insight_model)
-        else:
-            logger.info("[STEP 2c] Extracting Insights...")
-            try:
-                extractor = InsightExtractor(cost_tracker=cost_tracker, model=insight_model)
+        logger.info("[STEP 2c] Extracting Insights...")
+        try:
+            extractor = InsightExtractor(cost_tracker=cost_tracker, model=insight_model)
 
-                # Get psalm text
-                db = TanakhDatabase(Path(db_path))
-                p = db.get_psalm(psalm_number)
-                p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
+            # Get psalm text
+            db = TanakhDatabase(Path(db_path))
+            p = db.get_psalm(psalm_number)
+            p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
 
-                curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, trimmed)
-                tracker.track_model_for_step("insight_extractor", extractor.model)
-                extractor.save_insights(curated_insights, insights_file)
-            except Exception as e:
-                logger.warning(f"Insight extraction failed: {e}")
+            curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, trimmed)
+            tracker.track_model_for_step("insight_extractor", extractor.model)
+            extractor.save_insights(curated_insights, insights_file)
+        except Exception as e:
+            logger.warning(f"Insight extraction failed: {e}")
     else:
         # skip_insights is True — still track the model if insights file exists
         if insights_file.exists():
@@ -681,26 +675,22 @@ def run_enhanced_pipeline(
     # =====================================================================
     copy_edited_file = output_path / f"psalm_{psalm_number:03d}_copy_edited.md"
     if not skip_copy_editor and not smoke_test and print_ready_file.exists():
-        if copy_edited_file.exists():
-            logger.info("[STEP 5b] Copy-edited file exists, skipping copy editor")
-            tracker.track_model_for_step("copy_editor", CopyEditor.DEFAULT_MODEL)
-        else:
-            logger.info("[STEP 5b] Running Copy Editor...")
-            print(f"\n{'='*80}")
-            print(f"STEP 5b: Copy Editor")
-            print(f"{'='*80}\n")
-            try:
-                copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model)
-                ce_result = copy_editor.edit_commentary(
-                    psalm_number=psalm_number,
-                    input_file=print_ready_file,
-                    output_dir=output_path,
-                )
-                tracker.track_model_for_step("copy_editor", copy_editor.model)
-                logger.info(f"Copy Editor complete: {ce_result['edited_file']}")
-            except Exception as e:
-                logger.error(f"Copy Editor failed: {e}", exc_info=True)
-                print(f"Copy Editor error (non-fatal): {e}")
+        logger.info("[STEP 5b] Running Copy Editor...")
+        print(f"\n{'='*80}")
+        print(f"STEP 5b: Copy Editor")
+        print(f"{'='*80}\n")
+        try:
+            copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model)
+            ce_result = copy_editor.edit_commentary(
+                psalm_number=psalm_number,
+                input_file=print_ready_file,
+                output_dir=output_path,
+            )
+            tracker.track_model_for_step("copy_editor", copy_editor.model)
+            logger.info(f"Copy Editor complete: {ce_result['edited_file']}")
+        except Exception as e:
+            logger.error(f"Copy Editor failed: {e}", exc_info=True)
+            print(f"Copy Editor error (non-fatal): {e}")
     elif skip_copy_editor:
         logger.info("[STEP 5b] Skipping Copy Editor")
         if copy_edited_file.exists():
@@ -709,7 +699,7 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 5c: Extract copy-edited sections for DOCX generation
     # =====================================================================
-    if copy_edited_file.exists() and not skip_copy_editor:
+    if copy_edited_file.exists():
         logger.info("[STEP 5c] Extracting sections from copy-edited file for DOCX...")
         try:
             intro_text, verses_text = _extract_sections_from_copy_edited(copy_edited_file, logger=logger)
