@@ -12,6 +12,11 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 
 ## Recent Major Changes (Last 5 Sessions)
 
+**Session 306 (2026-03-15)**: Fix Displaced Liturgical Content Recovery in DOCX
+- Fixed DOCX bug where liturgy section was interrupted by spurious "Verse-by-Verse Commentary" / "Verse 9" headers (Psalm 42)
+- Replaced flawed `< 100` char threshold and position-0 regex heuristics with standalone verse header detection
+- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`
+
 **Session 305 (2026-03-15)**: Remove Auto-Skip-If-Exists Behavior
 - Removed implicit "skip if output exists" checks in Steps 2b, 2c, 5b — steps now always run and overwrite unless explicitly skipped
 - Fixed Step 5c gating so DOCX-only runs work with `--skip-copy-editor` (extracts from existing copy-edited file)
@@ -31,11 +36,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Added "CRITICAL READING STANCE" meta-reasoning preamble; strengthened categories 6, 9d, 9f with concrete self-tests
 - Re-ran Psalm 40: now catches all 5 target issues (was 2/5), 17 total changes
 - Documented LRM-based BiDi DOCX fix plan in `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md`
-
-**Session 301 (2026-03-14)**: Copy Editor Prompt Hardening (9d–9g)
-- Added copy editor sub-categories 9d–9g (false contrasts, overclaimed scope, opaque logic, wrong analogies)
-- Re-ran copy editor for Psalm 40; auto-caught 2 of 5 identified issues
-- BiDi fixes attempted but reverted due to regressions (notes in `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md`)
 
 ## Quick Commands
 
@@ -90,7 +90,7 @@ python scripts/cost_report.py
 
 **Phase**: Pipeline Production — tweaks and improvements
 **Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro, GPT-5.4 Figurative Curator, GPT-5.1 Liturgical Librarian
-**Last Updated**: Session 305 (2026-03-15)
+**Last Updated**: Session 306 (2026-03-15)
 
 ## Common Tasks
 

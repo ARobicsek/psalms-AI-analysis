@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-15 (Session 305)
+**Last Updated**: 2026-03-15 (Session 306)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 305
+- **Current Session**: 306
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 306 (2026-03-15): Fix Displaced Liturgical Content Recovery in DOCX
+- Fixed DOCX bug where liturgy section was interrupted by spurious "Verse-by-Verse Commentary" and "Verse 9" headers (Psalm 42).
+- Replaced flawed `< 100` char threshold and position-0 regex heuristics with standalone verse header detection that correctly distinguishes inline liturgical references from actual verse commentary headers.
+- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+
 ### Session 305 (2026-03-15): Remove Auto-Skip-If-Exists Behavior
 - Removed implicit "skip if output exists" checks in Steps 2b (Questions), 2c (Insights), and 5b (Copy Editor) — pipeline steps now always run and overwrite unless explicitly skipped via `--skip-*` flags.
 - Fixed Step 5c (copy-edit extraction) gating so existing copy-edited content is used for DOCX even when `--skip-copy-editor` is passed.
@@ -115,12 +120,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Added 4 new sub-categories to copy editor prompt: false contrasts (9d), overclaimed scope (9e), opaque scholarly logic (9f), factually wrong analogies (9g). Fixed 4 typos.
 - Re-ran copy editor for Psalm 40: auto-caught 2 of 5 identified issues plus 12 other corrections.
 - BiDi rendering fixes (MD LRM, DOCX RLI/PDI) attempted but reverted due to regressions. Notes saved for next session.
-
-### Session 300 (2026-03-13): Model Swap — Figurative Curator & Liturgical Librarian
-- Replaced Figurative Curator model from `gemini-3.1-pro-preview` to `gpt-5.4` (high reasoning effort) for better figurative analysis quality.
-- Replaced Liturgical Librarian model from `gemini-2.5-pro` to `gpt-5.1` (high reasoning effort) for cost reduction on summarization tasks.
-- Kept `gemini-2.5-pro` only for Synthesis Writer large-psalm fallback (1M context window dependency).
-- Updated legacy pipeline scripts, documentation, and verified DOCX model attribution tracks new models programmatically.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

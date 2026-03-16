@@ -8,6 +8,29 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 306 (2026-03-15): Fix Displaced Liturgical Content Recovery in DOCX
+
+**Objective**: Fix a bug where the liturgy section in the generated DOCX was interrupted by spurious "Verse-by-Verse Commentary" and "Verse 9" headers (Psalm 42).
+
+**Problems Identified**:
+- The copy editor LLM displaced per-verse liturgical key verse entries (`**Verse 9** is the most liturgically mobile...`, `**Verse 2's** imagery...`, etc.) from the introduction's "Key Verses and Phrases in Liturgy" section into the start of the "Verse-by-Verse Commentary" section.
+- The existing recovery heuristic in `_extract_sections_from_copy_edited()` failed for two reasons:
+  1. The intro's Key Verses section retained an introductory paragraph (~200 chars), so the `< 100` char threshold check passed incorrectly, concluding the section was fully populated.
+  2. The regex `^\*\*Verse[s]?\s+\d+` matched the displaced `**Verse 9**` at position 0 of the verse text, so the `> 50` offset check also failed — the displaced content *started with* a bold verse reference.
+- As a result, the DOCX generator treated `**Verse 9**` as the first verse commentary entry, producing a "Verse 9" heading containing liturgical content inside what should have been the liturgy section.
+
+**Solutions Implemented**:
+1. **Replaced detection logic with standalone verse header regex**: Instead of looking for any `**Verse N**` pattern (which matches inline liturgical references), the recovery now searches for the first **standalone** verse header — one where `**Verse N**` is the entire line content (`^\*\*Verses?\s+\d+(?:\s*[-–]\s*\d+)?\*\*\s*$`). This correctly distinguishes liturgical entries like `**Verse 9** is the most liturgically mobile verse...` (text continues on same line) from actual verse commentary headers like `**Verse 1**` (standalone line followed by Hebrew text).
+2. **Removed the flawed `< 100` char threshold**: The old heuristic checked whether the intro's Key Verses section had < 100 chars of content after the header. This failed when the LLM kept the introductory paragraph but displaced the per-verse entries. The new logic does not depend on intro content length — it works entirely from the verses section side.
+3. **Applied to both pipelines**: `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+4. **Verified**: Re-ran Psalm 42 extraction + DOCX generation. Recovery triggered correctly (2,468 chars of displaced liturgical content moved back), producing a clean DOCX.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` — Replaced displaced liturgical content detection in `_extract_sections_from_copy_edited()` with standalone verse header regex
+- `scripts/run_si_pipeline.py` — Same fix applied
+
+---
+
 ## Session 305 (2026-03-15): Remove Auto-Skip-If-Exists Behavior
 
 **Objective**: Eliminate implicit "skip if output exists" behavior so every pipeline step always runs and overwrites previous output unless explicitly skipped by the user.

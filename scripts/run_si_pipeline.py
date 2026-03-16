@@ -193,27 +193,45 @@ def _extract_sections_from_copy_edited(copy_edited_path: Path, logger=None) -> t
     # The copy editor LLM sometimes moves liturgical key verse content from
     # the intro (after #### Key Verses and Phrases) to the start of the verse
     # commentary section. Detect this and move it back.
+    #
+    # Detection strategy: find the first "standalone" verse header in the
+    # verses section — one where **Verse N** is the entire line content,
+    # not followed by same-line text. Liturgical key verse entries look like
+    #   **Verse 9** is the most liturgically mobile verse...
+    #   **Verse 2's** imagery of the thirsting deer...
+    # while actual verse commentary headers look like
+    #   **Verse 1**
+    #   <Hebrew text on next line>
+    # If there is content before the first standalone header, it is
+    # displaced liturgical content that belongs in the introduction.
     # -----------------------------------------------------------------------
     has_liturgical_marker = '---LITURGICAL-SECTION-START---' in intro_text
     has_key_verses_header = '#### Key Verses and Phrases' in intro_text
-    
+
     if has_liturgical_marker and has_key_verses_header:
-        key_verses_pos = intro_text.find('#### Key Verses and Phrases')
-        content_after_key_verses = intro_text[key_verses_pos + len('#### Key Verses and Phrases'):].strip()
-        
-        if len(content_after_key_verses) < 100:
-            first_verse_match = re.search(r'^\*\*Verse[s]?\s+\d+', verses_text, re.MULTILINE)
-            if first_verse_match and first_verse_match.start() > 50:
-                displaced_content = verses_text[:first_verse_match.start()].strip()
-                
-                if re.search(r'\*\*Verse\s+\d+\s+(?:in|on|before|during)', displaced_content):
-                    _log(f"  ⚠️  RECOVERY: Detected displaced liturgical content ({len(displaced_content):,} chars) "
-                         f"at start of verse commentary. Moving back to introduction.")
-                    
-                    intro_text = intro_text.rstrip() + '\n' + displaced_content
-                    verses_text = verses_text[first_verse_match.start():].strip()
-                    
-                    _log(f"  ✅ Liturgical content restored to introduction section")
+        # Find the first standalone verse header: **Verse N** (or **Verses N-M**)
+        # as the entire content of a line (no trailing text on the same line).
+        standalone_verse_re = re.compile(
+            r'^\*\*Verses?\s+\d+(?:\s*[-–]\s*\d+)?\*\*\s*$',
+            re.MULTILINE
+        )
+        first_standalone = standalone_verse_re.search(verses_text)
+
+        if first_standalone and first_standalone.start() > 50:
+            # There's substantial content before the first actual verse header —
+            # this is likely the displaced liturgical key verse content
+            displaced_content = verses_text[:first_standalone.start()].strip()
+
+            # Verify it contains bold verse references (typical of liturgical entries)
+            if re.search(r'\*\*Verse\s+\d+', displaced_content):
+                _log(f"  ⚠️  RECOVERY: Detected displaced liturgical content ({len(displaced_content):,} chars) "
+                     f"at start of verse commentary. Moving back to introduction.")
+
+                # Move it back: append to intro, remove from verses
+                intro_text = intro_text.rstrip() + '\n' + displaced_content
+                verses_text = verses_text[first_standalone.start():].strip()
+
+                _log(f"  ✅ Liturgical content restored to introduction section")
     
     # Restore paragraph breaks: the copy editor collapses \n\n to \n.
     if intro_text:
