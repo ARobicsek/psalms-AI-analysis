@@ -159,6 +159,40 @@ class DocumentGenerator:
             return False
         return (hebrew_letters / total) > 0.8 and hebrew_letters >= 2
 
+    @staticmethod
+    def _reverse_bare_hebrew_segments(text: str) -> str:
+        """
+        Detect and reverse bare (non-parenthesized) multi-word Hebrew segments
+        in mixed English/Hebrew text.
+
+        When 3+ consecutive Hebrew words appear inline in an LTR paragraph,
+        Word's BiDi algorithm can garble their visual order — especially when
+        internal punctuation (colons, semicolons) splits the segment into
+        separate RTL runs that Word reorders independently.
+
+        Fix: reverse each segment by grapheme clusters and wrap with LRO/PDF,
+        exactly as done for parenthesized Hebrew, so Word displays them in the
+        correct visual order.
+        """
+        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
+
+        # Hebrew word: base letter (+ geresh/gershayim) followed by combining marks
+        heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
+        # Separator between Hebrew words: spaces, colons, semicolons, commas, maqqef
+        separator = r'[\s:;,\u05BE]+'
+        # Match 3+ consecutive Hebrew words (possibly with internal punctuation)
+        # Lookbehind: not preceded by Hebrew chars (prevents partial matches)
+        # Lookahead: not followed by Hebrew base letter
+        bare_hebrew = rf'(?<![\u05D0-\u05EA\u0590-\u05FF])({heb_word}(?:{separator}{heb_word}){{2,}})(?![\u05D0-\u05EA])'
+
+        def reverse_segment(match):
+            segment = match.group(1)
+            reversed_segment = DocumentGenerator._reverse_hebrew_by_clusters(segment)
+            return f'{LRO}{reversed_segment}{PDF}'
+
+        return re.sub(bare_hebrew, reverse_segment, text)
+
     def _process_text_rtl(self, text):
         """
         Process text for RTL display. Returns modified text string.
@@ -199,6 +233,9 @@ class DocumentGenerator:
             def wrap_verse_ref(match):
                 return f'{LRO}{match.group(1)}{PDF}'
             modified = re.sub(verse_ref_pattern, wrap_verse_ref, modified)
+
+        # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
+        modified = self._reverse_bare_hebrew_segments(modified)
 
         # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
         LRM = '\u200E'  # LEFT-TO-RIGHT MARK
@@ -562,6 +599,74 @@ class DocumentGenerator:
             rPr.append(szCs)
         szCs.set(ns.qn('w:val'), str(font_size * 2))  # Word uses half-points
 
+    def _split_long_hebrew_block(self, text: str):
+        """
+        Check if text contains a bare Hebrew segment of 6+ words.
+
+        Long inline Hebrew segments wrap awkwardly in LTR paragraphs because
+        the LRO-reversed text wraps top-to-bottom (English style), making the
+        beginning of the Hebrew quote appear on the LOWER line. For these long
+        segments, it's better to extract them into standalone RTL paragraphs
+        where Word handles Hebrew line-wrapping natively.
+
+        Returns (before, hebrew, after) tuple if found, or None.
+        """
+        heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
+        separator = r'[\s:;,\u05BE]+'
+        # Match 6+ consecutive Hebrew words
+        bare_hebrew = rf'(?<![\u05D0-\u05EA\u0590-\u05FF])({heb_word}(?:{separator}{heb_word}){{5,}})(?![\u05D0-\u05EA])'
+
+        match = re.search(bare_hebrew, text)
+        if not match:
+            return None
+
+        hebrew = match.group(1).strip()
+
+        # Skip verse quotations — these contain sof-pasuq (׃) and should
+        # remain in their original rendering (Aptos 12pt via _reverse_primarily_hebrew_line)
+        if '׃' in hebrew:
+            return None
+
+        before = text[:match.start()].rstrip()
+        after = text[match.end():].lstrip()
+        # Strip orphaned leading comma/punctuation from the continuation text
+        # (the Hebrew was inline, so the original often had ", translation...")
+        after = re.sub(r'^[,;:]\s*', '', after)
+        return (before, hebrew, after)
+
+    def _add_hebrew_block_paragraph(self, hebrew_text: str, style: str = 'Normal'):
+        """
+        Add a standalone RTL paragraph for long Hebrew text.
+
+        Uses native RTL paragraph direction (w:bidi=1) so Word handles
+        line-wrapping correctly — first line on the right, continuation
+        wrapping to the next line from the right, matching natural Hebrew
+        reading direction.
+        """
+        from docx.shared import Inches
+
+        p = self.document.add_paragraph(style=style)
+
+        # Set paragraph to RTL for native Hebrew rendering
+        pPr = p._element.get_or_add_pPr()
+        bidi_elem = pPr.find(ns.qn('w:bidi'))
+        if bidi_elem is not None:
+            pPr.remove(bidi_elem)
+        bidi_elem = OxmlElement('w:bidi')
+        bidi_elem.set(ns.qn('w:val'), '1')  # RTL
+        pPr.append(bidi_elem)
+
+        # Right-align for RTL block
+        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+        # Indent slightly to distinguish as a quotation
+        p.paragraph_format.left_indent = Inches(0.3)
+        p.paragraph_format.right_indent = Inches(0.3)
+
+        # Add the Hebrew text as-is (Word handles RTL display natively)
+        run = p.add_run(hebrew_text)
+        self._set_run_font_xml(run, font_name='Times New Roman', font_size=13)
+
     def _add_paragraph_with_markdown(self, text: str, style: str = 'Normal'):
         """Adds a paragraph, parsing basic markdown for bold/italics, including nested formatting."""
         # Apply divine name modification to the entire paragraph text first.
@@ -576,6 +681,17 @@ class DocumentGenerator:
             return
         elif modified_text.startswith('##'):
             self.document.add_heading(modified_text.replace('##', '').strip(), level=2)
+            return
+
+        # Check for long bare Hebrew segments — render as standalone RTL block
+        split = self._split_long_hebrew_block(modified_text)
+        if split:
+            before, hebrew, after = split
+            if before:
+                self._add_paragraph_with_markdown(before, style=style)
+            self._add_hebrew_block_paragraph(hebrew, style=style)
+            if after:
+                self._add_paragraph_with_markdown(after, style=style)
             return
 
         # Handle bullet lists (lines starting with "- ")
@@ -960,6 +1076,9 @@ class DocumentGenerator:
                             return f'{LRO}{match.group(1)}{PDF}'
                         modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
                     
+                    # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
+                    modified_part = self._reverse_bare_hebrew_segments(modified_part)
+
                     # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
                     LRM = '\u200E'  # LEFT-TO-RIGHT MARK
                     bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
@@ -1068,6 +1187,9 @@ class DocumentGenerator:
                                 return f'{LRO}{match.group(1)}{PDF}'
                             modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
                         
+                        # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
+                        modified_part = self._reverse_bare_hebrew_segments(modified_part)
+
                         # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
                         LRM = '\u200E'  # LEFT-TO-RIGHT MARK
                         bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
@@ -1121,6 +1243,9 @@ class DocumentGenerator:
                         return f'{LRO}{match.group(1)}{PDF}'
                     modified_text = re.sub(verse_ref_pattern, wrap_verse_ref, modified_text)
                 
+                # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
+                modified_text = self._reverse_bare_hebrew_segments(modified_text)
+
                 # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
                 LRM = '\u200E'  # LEFT-TO-RIGHT MARK
                 bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
@@ -1142,6 +1267,18 @@ class DocumentGenerator:
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
         modified_text = self.modifier.modify_text(text)
+
+        # Check for long bare Hebrew segments — render as standalone RTL block
+        split = self._split_long_hebrew_block(modified_text)
+        if split:
+            before, hebrew, after = split
+            if before:
+                self._add_paragraph_with_soft_breaks(before, style=style)
+            self._add_hebrew_block_paragraph(hebrew, style=style)
+            if after:
+                self._add_paragraph_with_soft_breaks(after, style=style)
+            return
+
         p = self.document.add_paragraph(style=style)
 
         # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs

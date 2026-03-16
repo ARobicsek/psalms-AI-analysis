@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-15 (Session 306)
+**Last Updated**: 2026-03-16 (Session 307)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 306
+- **Current Session**: 307
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -90,6 +90,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 307 (2026-03-16): Fix Garbled Inline Hebrew in DOCX
+- Fixed garbled 15-word Hebrew quotation in Psalm 41 DOCX caused by Word's BiDi algorithm splitting long inline Hebrew into separate RTL runs.
+- Added `_reverse_bare_hebrew_segments` for 3-5 word inline Hebrew (LRO reversal) and block extraction for 6+ word segments (standalone RTL paragraphs with native Hebrew line-wrapping).
+- Block paragraphs use 13pt TNR, 0.3" indent; verse quotations (with sof-pasuq) excluded to preserve original styling.
+
 ### Session 306 (2026-03-15): Fix Displaced Liturgical Content Recovery in DOCX
 - Fixed DOCX bug where liturgy section was interrupted by spurious "Verse-by-Verse Commentary" and "Verse 9" headers (Psalm 42).
 - Replaced flawed `< 100` char threshold and position-0 regex heuristics with standalone verse header detection that correctly distinguishes inline liturgical references from actual verse commentary headers.
@@ -109,17 +114,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Implemented LRM (U+200E) insertion after Hebrew+punctuation sequences in all 5 DOCX code paths in `document_generator.py`.
 - Fixes Word scrambling Hebrew word order when colons/semicolons/commas appear between Hebrew segments (e.g., Psalm 40 verses 9, 15).
 - Regenerated Psalm 40 and Psalm 22 DOCX files successfully — no errors or regressions.
-
-### Session 302 (2026-03-15): Copy Editor Critical Reading Stance
-- Added "CRITICAL READING STANCE" meta-reasoning preamble to copy editor prompt: for each paragraph, identify claim + evidence, ask "would a thoughtful reader find this convincing?"
-- Strengthened categories 6 (weak parallels), 9d (false contrasts), 9f (opaque logic) with concrete self-tests.
-- Re-ran for Psalm 40: now catches all 5 target issues (was 2/5). 17 total changes (up from 14). Category 6 now more aggressive — may need tuning to preserve strong contrasts.
-- Documented ready-to-implement BiDi DOCX fix plan using LRM (U+200E) instead of RLI/PDI.
-
-### Session 301 (2026-03-14): Copy Editor Prompt Hardening (9d–9g)
-- Added 4 new sub-categories to copy editor prompt: false contrasts (9d), overclaimed scope (9e), opaque scholarly logic (9f), factually wrong analogies (9g). Fixed 4 typos.
-- Re-ran copy editor for Psalm 40: auto-caught 2 of 5 identified issues plus 12 other corrections.
-- BiDi rendering fixes (MD LRM, DOCX RLI/PDI) attempted but reverted due to regressions. Notes saved for next session.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

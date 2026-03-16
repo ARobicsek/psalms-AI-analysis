@@ -8,6 +8,27 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 307 (2026-03-16): Fix Garbled Inline Hebrew in DOCX — Block Extraction for Long Segments
+
+**Objective**: Fix garbled multi-word Hebrew text in Psalm 41's DOCX output, where Word's BiDi algorithm scrambled the visual order of a 15-word liturgical Hebrew quotation embedded inline in an English paragraph.
+
+**Problems Identified**:
+- Long inline Hebrew segments (6+ words) containing internal punctuation (colons, semicolons) are split by Word's BiDi algorithm into separate RTL runs, which Word then reorders independently — garbling the visual word order.
+- The existing LRM fix (Session 303) correctly handled Hebrew+punctuation boundaries for short segments but was insufficient for long multi-word segments where the RTL run reordering was the core issue.
+- Even after fixing word order with LRO reversal, long Hebrew segments wrapped awkwardly across lines: the LRO-forced LTR display caused the beginning of the quote to appear on the LOWER line (English-style wrapping instead of RTL wrapping).
+
+**Solutions Implemented**:
+1. **`_reverse_bare_hebrew_segments` method**: New centralized handler that detects 3+ consecutive Hebrew words in mixed English/Hebrew text and applies grapheme-cluster reversal + LRO/PDF wrapping. Integrated into all 5 DOCX BiDi code paths (`_process_text_rtl`, `_process_markdown_formatting`, `_add_formatted_content` x2, `_add_paragraph_with_soft_breaks`).
+2. **Block extraction for long segments (6+ words)**: `_split_long_hebrew_block` detects inline Hebrew of 6+ words and `_add_hebrew_block_paragraph` renders them as standalone RTL paragraphs (w:bidi=1, right-aligned, 0.3" indent, 13pt TNR). Word handles Hebrew line-wrapping natively in RTL paragraphs, fixing the visual wrap direction.
+3. **Comma stripping**: Orphaned leading commas/punctuation are stripped from continuation text after extracted Hebrew blocks.
+4. **Verse quotation exclusion**: Hebrew segments containing sof-pasuq (׃) are excluded from block extraction so full verse quotations retain their original Aptos 12pt styling via the existing `_reverse_primarily_hebrew_line` path.
+5. **Full coverage**: Block extraction integrated into both `_add_paragraph_with_markdown` (intro/liturgical) and `_add_paragraph_with_soft_breaks` (verse-by-verse commentary).
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added `_reverse_bare_hebrew_segments`, `_split_long_hebrew_block`, `_add_hebrew_block_paragraph`; integrated bare Hebrew reversal into 5 code paths; added block extraction to 2 paragraph-creating methods
+
+---
+
 ## Session 306 (2026-03-15): Fix Displaced Liturgical Content Recovery in DOCX
 
 **Objective**: Fix a bug where the liturgy section in the generated DOCX was interrupted by spurious "Verse-by-Verse Commentary" and "Verse 9" headers (Psalm 42).
