@@ -1,10 +1,7 @@
 PSALM {NUMBER} — LITERARY ECHOES (Pass 3: Source Verification)
 
-Below is a literary echoes document for Psalm {NUMBER}. Your job is to AUDIT every quotation for accuracy. This is a verification task, not a creative task.
+Attached is a literary echoes document for the Psalm numbered above. Your job is to AUDIT every quotation for accuracy. This is a verification task, not a creative task.
 
-[PASTE COMBINED PASS 1 + PASS 2 OUTPUT HERE]
-
----
 
 ```
 For EACH quotation in the document above, do the following:

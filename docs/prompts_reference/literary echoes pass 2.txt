@@ -11,13 +11,14 @@ TASK: Review the existing echoes and the full psalm text. Then add 3-6 NEW compa
 1. UNCOVERED VERSES: Are there verses or striking images in the psalm that have NO echo yet? These are your first priority. Not every verse needs one — but if a verse contains a vivid image, an unusual word, or a dramatic structural turn, it probably deserves a comparison.
 
 2. MISSING CATEGORIES: Check whether the existing document is thin in any of these areas and prioritize accordingly:
-   - Modern Hebrew poetry (Amichai, Goldberg, Rachel, Pagis, Ravikovitch, Zelda, Alterman, Bialik, Shin Shalom, Tuvia Ruebner)
-   - Yiddish poetry (Morris Rosenfeld, Peretz Markish, Itzik Manger,Avrom Sutzkever,Kadya Molodowsky, Celia Dropkin, Jacob Glatstein, Moyshe-Leyb Halpern)
-   - Medieval Hebrew/Andalusian poetry (Ibn Gabirol, Halevi, HaNagid, Moses Ibn Ezra)
-   - Song lyrics (Dylan, Cohen, Cave, Mitchell, spirituals, blues, hip-hop)
-   - Non-Western poetry (Arabic, Persian, Chinese, Japanese, Sanskrit, Urdu)
-   - 20th/21st-century poetry in any language (Celan, Szymborska, Darwish, Hikmet, Neruda, Plath, Sexton, Rich, Zagajewski, Milosz, Herbert, Tranströmer)
-   - Prose or oratory when genuinely illuminating (Kafka, Primo Levi, Baldwin, King, Lincoln)
+   - Modern Hebrew poetry (e.g. Amichai, Goldberg, Rachel, Pagis, Ravikovitch, Zelda, Alterman, Bialik, Shin Shalom, Tuvia Ruebner)
+   - Yiddish poetry (e.g. Morris Rosenfeld, Peretz Markish, Itzik Manger,Avrom Sutzkever,Kadya Molodowsky, Celia Dropkin, Jacob Glatstein, Moyshe-Leyb Halpern)
+   - Medieval Hebrew/Andalusian poetry (e.g. Ibn Gabirol, Halevi, HaNagid, Moses Ibn Ezra)
+   - Contemporary English-language poetry (e.g. Mary Oliver, Ada Limón, Billy Collins, Ocean Vuong, Carol Ann Duffy, W.S. Merwin, Seamus Heaney)
+   - Song lyrics (e.g. Dylan, Cohen, Cave, Sondheim, Mitchell, spirituals, blues, hip-hop)
+   - Non-Western poetry (e.g. Arabic, Persian, Chinese, Japanese, Sanskrit, Urdu)
+   - 20th/21st-century poetry in any language (e.g. Celan, Szymborska, Darwish, Hikmet, Neruda, Plath, Sexton, Rich, Zagajewski, Milosz, Herbert, Tranströmer)
+   - Prose or oratory when genuinely illuminating (e.g. Kafka, Primo Levi, Baldwin, King, Lincoln)
 
 3. REPLACEMENTS: If any existing comparison is weak — meaning the connection is generic ("both deal with suffering"), the quoted passage is dull, or the author is too predictable — you may REPLACE it. Flag the replacement clearly: "REPLACES: [Author], [Work] for Psalm X:Y"
 
