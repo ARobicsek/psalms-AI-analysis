@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-17 (Session 308)
+**Last Updated**: 2026-03-17 (Session 309)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 308
+- **Current Session**: 309
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, **Scripture Citation Verifier**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -91,6 +91,11 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 309 (2026-03-17): Citation Verifier Refinements & Copy Editor Integration Hardening
+- Softened `format_fix_prompt()` with methodology disclaimer and `[CITATION FIX]` tag so the copy editor applies citation corrections with judgment rather than over-correcting on false positives.
+- Added `_strip_echoed_supplementary()` to copy editor to prevent leaked citation-check instructions from appearing in DOCX output.
+- Added Pattern C citation extraction (Hebrew inside parentheticals, e.g. `(Gen 27:36: Hebrew, "English")`) — found in 18 psalms; zero regressions across 15-psalm test suite.
+
 ### Session 308 (2026-03-17): Scripture Citation Verifier
 - Built `src/utils/scripture_verifier.py` — zero-LLM-cost module that compares quoted Hebrew scripture passages against `tanakh.db` using regex extraction + substring matching.
 - Normalization handles cantillation stripping, divine name variants (`ה׳`→`יהוה`, `אלק`→`אלה`), with consonantal-only fallback for vowel differences.
@@ -112,11 +117,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Removed implicit "skip if output exists" checks in Steps 2b (Questions), 2c (Insights), and 5b (Copy Editor) — pipeline steps now always run and overwrite unless explicitly skipped via `--skip-*` flags.
 - Fixed Step 5c (copy-edit extraction) gating so existing copy-edited content is used for DOCX even when `--skip-copy-editor` is passed.
 - Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
-
-### Session 303 (2026-03-15): BiDi DOCX Fix — LRM Insertion
-- Implemented LRM (U+200E) insertion after Hebrew+punctuation sequences in all 5 DOCX code paths in `document_generator.py`.
-- Fixes Word scrambling Hebrew word order when colons/semicolons/commas appear between Hebrew segments (e.g., Psalm 40 verses 9, 15).
-- Regenerated Psalm 40 and Psalm 22 DOCX files successfully — no errors or regressions.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

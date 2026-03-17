@@ -94,13 +94,14 @@ Examples:
         if args.input_file:
             input_file = args.input_file
         else:
-            # Prefer copy-edited, fall back to print-ready
-            copy_edited = psalm_dir / f"psalm_{psalm_num:03d}_copy_edited.md"
+            # Prefer print-ready (pre-copy-editor — matches pipeline Step 5a½),
+            # fall back to copy-edited
             print_ready = psalm_dir / f"psalm_{psalm_num:03d}_print_ready.md"
-            if copy_edited.exists():
-                input_file = copy_edited
-            elif print_ready.exists():
+            copy_edited = psalm_dir / f"psalm_{psalm_num:03d}_copy_edited.md"
+            if print_ready.exists():
                 input_file = print_ready
+            elif copy_edited.exists():
+                input_file = copy_edited
             else:
                 logger.error(f"No commentary file found for Psalm {psalm_num}")
                 errors.append(psalm_num)

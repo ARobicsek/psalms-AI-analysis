@@ -324,6 +324,34 @@ _CITATION_PAREN_RE = re.compile(
 )
 
 
+# Pattern C: Hebrew text INSIDE the citation parenthetical, after a colon.
+# e.g.  (Gen 27:36: עֲקָבַנִי זֶה פַעֲמַיִם, "he has supplanted me...")
+# This is a separate regex so the existing Pattern A/B logic is untouched.
+_CITATION_INLINE_RE = re.compile(
+    r'\('
+    r'((?:1|2|I{1,2})?\s*'                      # optional numbered prefix
+    r'(?:Gen(?:esis)?|Ex(?:od(?:us)?)?|Lev(?:iticus)?|Num(?:bers)?|'
+    r'Deut(?:eronomy)?|Josh(?:ua)?|Judg(?:es)?|'
+    r'(?:1|2|I{1,2})\s*(?:Sam(?:uel)?|Kgs|Kings?|Chr(?:on(?:icles)?)?)|'
+    r'Isa(?:iah)?|Jer(?:emiah)?|Ezek(?:iel)?|'
+    r'Hos(?:ea)?|Joel|Am(?:os)?|Obad(?:iah)?|Jonah?|Mic(?:ah)?|'
+    r'Nah(?:um)?|Hab(?:akkuk)?|Zeph(?:aniah)?|Hag(?:gai)?|'
+    r'Zech(?:ariah)?|Mal(?:achi)?|'
+    r'Ps(?:s|a(?:lms?)?)?|Prov(?:erbs)?|Job|'
+    r'Song(?:\s+of\s+Songs)?|Ruth|Lam(?:entations)?|'
+    r'Eccl(?:esiastes)?|Qoh|Esth(?:er)?|Dan(?:iel)?|'
+    r'Ezra|Neh(?:emiah)?)'
+    r')\s+'                                       # book name + space
+    r'(\d+)'                                      # chapter number
+    r':'
+    r'(\d+)'                                      # verse number
+    r'(?:\s*[–\-]\s*\d+)?'                        # optional verse range
+    r':\s*'                                        # colon + space separating ref from content
+    r'([^)]+)'                                     # content inside parens (Hebrew + optional English)
+    r'\)',
+    re.IGNORECASE
+)
+
 # Minimum Hebrew words required to consider something a "quotation" vs. a
 # single-word lexical reference.  A phrase like יָצוּק (1 Kgs 7:24) is a
 # word reference, not a quotation; we don't verify those.
@@ -332,6 +360,47 @@ MIN_HEBREW_WORDS = 3
 # Regex that matches a single Hebrew "word" — a contiguous run of characters
 # in the Hebrew Unicode block (letters, vowels, cantillation, maqaf, etc.)
 _HEBREW_WORD_RE = re.compile(r'[\u0590-\u05FF\uFB1D-\uFB4F]+')
+
+
+def _extract_hebrew_from_inline(content: str) -> Optional[str]:
+    """
+    Extract the Hebrew quotation from the content portion of a Pattern C
+    citation like ``(Gen 27:36: עֲקָבַנִי זֶה פַעֲמַיִם, "English")``.
+
+    The content after the colon may contain:
+      - Hebrew text (what we want)
+      - English translations in quotes
+      - Commas, em-dashes separating Hebrew from English
+
+    Strategy: collect all Hebrew words, group consecutive ones into phrases
+    (same logic as _extract_hebrew_before_citation), return the longest
+    phrase that meets MIN_HEBREW_WORDS.
+    """
+    words = list(_HEBREW_WORD_RE.finditer(content))
+    if not words:
+        return None
+
+    # Group consecutive Hebrew words into phrases
+    phrases = []
+    phrase_words = [words[0].group()]
+    for i in range(1, len(words)):
+        gap = content[words[i - 1].end():words[i].start()]
+        has_latin = bool(re.search(r'[a-zA-Z]', gap))
+        if has_latin or len(gap) > 10:
+            phrases.append(phrase_words)
+            phrase_words = [words[i].group()]
+        else:
+            phrase_words.append(words[i].group())
+    phrases.append(phrase_words)
+
+    # Return the longest phrase with enough words
+    best = None
+    for p in phrases:
+        if len(p) >= MIN_HEBREW_WORDS:
+            candidate = ' '.join(p)
+            if best is None or len(p) > len(best.split()):
+                best = candidate
+    return best
 
 
 def _extract_hebrew_before_citation(
@@ -553,6 +622,76 @@ def verify_citations(
             normalized_actual=norm_actual,
         ))
 
+    # ----- Pattern C: Hebrew text INSIDE the citation parenthetical -----
+    # e.g.  (Gen 27:36: עֲקָבַנִי זֶה פַעֲמַיִם, "he has supplanted...")
+    # These are invisible to _CITATION_PAREN_RE (which requires ')' right
+    # after the verse number), so we run a separate pass here.
+    for match in _CITATION_INLINE_RE.finditer(text):
+        raw_book = match.group(1).strip()
+        chapter = int(match.group(2))
+        verse_num = int(match.group(3))
+        inline_content = match.group(4)
+        cite_ref = f"({raw_book} {chapter}:{verse_num})"
+
+        db_book_name = _resolve_book_name(raw_book)
+        if db_book_name is None:
+            continue
+
+        hebrew_quoted = _extract_hebrew_from_inline(inline_content)
+        if hebrew_quoted is None:
+            continue
+
+        # Self-quote filter (same logic as Pattern A/B)
+        cons_quoted = _strip_to_consonants(hebrew_quoted)
+        is_self_quote = False
+        if psalm_consonants:
+            for pv_cons in psalm_consonants:
+                if cons_quoted in pv_cons:
+                    is_self_quote = True
+                    break
+        if is_self_quote:
+            if db_book_name == "Psalms" and chapter == psalm_number:
+                pass
+            else:
+                continue
+
+        verse_obj = db.get_verse(db_book_name, chapter, verse_num)
+        if verse_obj is None:
+            line_num = text[:match.start()].count('\n') + 1
+            location = _find_current_verse_header(text, match.start())
+            issues.append(CitationIssue(
+                quoted_hebrew=hebrew_quoted,
+                citation_ref=cite_ref,
+                actual_hebrew="",
+                location_hint=location,
+                issue_type="BOOK_NOT_IN_DB",
+                line_number=line_num,
+            ))
+            continue
+
+        actual_hebrew = verse_obj.hebrew
+        norm_quoted = _normalize_hebrew(hebrew_quoted)
+        norm_actual = _normalize_hebrew(actual_hebrew)
+
+        if norm_quoted in norm_actual:
+            continue
+        cons_actual = _strip_to_consonants(actual_hebrew)
+        if cons_quoted in cons_actual:
+            continue
+
+        line_num = text[:match.start()].count('\n') + 1
+        location = _find_current_verse_header(text, match.start())
+        issues.append(CitationIssue(
+            quoted_hebrew=hebrew_quoted,
+            citation_ref=cite_ref,
+            actual_hebrew=actual_hebrew,
+            location_hint=location,
+            issue_type="NOT_SUBSTRING",
+            line_number=line_num,
+            normalized_quoted=norm_quoted,
+            normalized_actual=norm_actual,
+        ))
+
     db.close()
     return issues
 
@@ -663,12 +802,29 @@ def format_fix_prompt(issues: List[CitationIssue]) -> str:
 
     lines = [
         "",
-        "SCRIPTURE CITATION ERRORS DETECTED — FIX THESE FIRST:",
+        "SCRIPTURE CITATION CHECK (automated — apply with judgment):",
         "",
-        "The following Hebrew quotations do not match the actual biblical text.",
-        "Correct each quoted Hebrew to match the actual verse. If the commentary",
-        "intentionally quotes only a fragment, ensure the fragment is a contiguous",
-        "substring of the actual verse (do not omit words from the middle).",
+        "An automated regex-based tool compared quoted Hebrew passages against the",
+        "canonical biblical text in our database.  It uses substring matching after",
+        "normalizing vowels, cantillation, and divine-name variants.  This approach",
+        "is useful but imperfect — it can produce FALSE POSITIVES in cases such as:",
+        "  - Liturgical / piyyut texts that adapt or paraphrase biblical wording",
+        "  - Deliberate partial quotes or allusions (not meant as exact citations)",
+        "  - Vowel/pointing differences that survive normalization",
+        "",
+        "For each item below, use your own scholarly judgment:",
+        "  - If the quoted Hebrew genuinely misquotes the cited verse (e.g. a word",
+        "    was dropped or garbled), correct it to match the actual verse text.",
+        "  - If the passage is a liturgical adaptation, allusion, or intentional",
+        "    paraphrase, leave it as-is (no correction needed).",
+        "  - If the commentary quotes only a fragment, ensure the fragment is a",
+        "    contiguous substring of the actual verse (do not omit words from the",
+        "    middle).",
+        "",
+        "IMPORTANT: In your ## Changes section, prefix any correction you make based",
+        "on this citation check with [CITATION FIX] so the author can quickly spot",
+        "citation-driven changes.  Example:",
+        '  6. [CITATION FIX] [7] **Verse 7**: Corrected the Ex 20:7 quotation…',
         "",
     ]
 

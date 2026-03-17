@@ -8,6 +8,38 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 309 (2026-03-17): Citation Verifier Refinements & Copy Editor Integration Hardening
+
+**Objective**: Make the citation verifier's output safe for copy editor consumption (avoiding false-positive overreaction), fix leaked instructions in DOCX, add Pattern C citation extraction, and test pipeline end-to-end on Psalm 41.
+
+**Problems Identified**:
+- The `format_fix_prompt()` used commanding language ("FIX THESE FIRST") that primed the copy editor into an overly aggressive correction posture, producing more changes than necessary.
+- The copy editor echoed the supplementary citation-check instructions verbatim into its output, which then appeared in the generated DOCX as visible content.
+- The verifier only detected Hebrew quotations that appear *before* a citation parenthetical (Patterns A/B). A common format — Hebrew text *inside* the parenthetical after a colon, e.g. `(Gen 27:36: עֲקָבַנִי זֶה פַעֲמַיִם, "...")` — was invisible (Pattern C, found in 18 psalms).
+- The standalone `run_scripture_verifier.py` defaulted to `copy_edited.md` over `print_ready.md`, which masked errors already corrected by the copy editor.
+
+**Solutions Implemented**:
+1. **Softened citation fix prompt** (`scripture_verifier.py`): Replaced "SCRIPTURE CITATION ERRORS DETECTED — FIX THESE FIRST" with "SCRIPTURE CITATION CHECK (automated — apply with judgment)" plus methodology disclaimer explaining false-positive scenarios (liturgical adaptations, allusions, vowel differences). Added instruction to prefix citation-driven corrections with `[CITATION FIX]` in the Changes section.
+2. **Strip echoed supplementary prompt** (`copy_editor.py`): Added `_strip_echoed_supplementary()` method that detects and removes any "SCRIPTURE CITATION CHECK" text the LLM echoes into its output, called between LLM response and `_split_changes()`.
+3. **Pattern C citation extraction** (`scripture_verifier.py`): Added `_CITATION_INLINE_RE` regex and `_extract_hebrew_from_inline()` helper for citations with Hebrew inside parentheticals. Runs as a second pass in `verify_citations()` — existing Pattern A/B logic untouched. Includes same self-quote filter and MIN_HEBREW_WORDS threshold.
+4. **Fixed standalone runner default** (`run_scripture_verifier.py`): Changed file priority from copy_edited → print_ready to print_ready → copy_edited, matching pipeline Step 5a½ behavior.
+
+**Test Results — Psalm 41**:
+- Copy editor correctly fixed Ex 20:7 misquote (tagged `[CITATION FIX]`), left false positive alone, and independently caught Gen 27:36 conjugation error.
+- DOCX output clean — no leaked instructions.
+- Pattern C tested across 15 psalms: zero regressions, new legitimate catches in Psalms 5, 7, 34 (paraphrases, spelling, word reordering).
+
+**Files Modified**:
+- `src/utils/scripture_verifier.py` — Softened `format_fix_prompt()` with methodology disclaimer and `[CITATION FIX]` tag instruction; added `_CITATION_INLINE_RE` regex, `_extract_hebrew_from_inline()`, and Pattern C pass in `verify_citations()`
+- `src/agents/copy_editor.py` — Added `_strip_echoed_supplementary()` to remove echoed citation instructions from LLM output
+- `scripts/run_scripture_verifier.py` — Changed default input file priority to print_ready over copy_edited
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+- `docs/session_tracking/PROJECT_STATUS.md` — Session 309 entry
+
+**Next Session Consideration**: Evaluate whether using Haiku to identify quotations, launch DB searches, and filter false positives would improve citation verification accuracy beyond the current regex approach.
+
+---
+
 ## Session 308 (2026-03-17): Scripture Citation Verifier
 
 **Objective**: Build a zero-LLM-cost scripture citation verifier to catch misquoted Hebrew passages, and integrate it into the pipeline to feed corrections to the copy editor.

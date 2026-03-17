@@ -309,6 +309,9 @@ class CopyEditor:
             supplementary_prompt=supplementary_prompt,
         )
 
+        # 3b. Strip any echoed supplementary prompt from the response
+        edited_content = self._strip_echoed_supplementary(edited_content)
+
         # 4. Separate corrected text from Changes section
         corrected_text, changes_text = self._split_changes(edited_content)
 
@@ -732,6 +735,26 @@ class CopyEditor:
     # -------------------------------------------------------------------------
     # Response parsing
     # -------------------------------------------------------------------------
+
+    @staticmethod
+    def _strip_echoed_supplementary(text: str) -> str:
+        """Remove any echoed citation-check instructions the LLM copied into its output."""
+        marker = "SCRIPTURE CITATION CHECK (automated"
+        idx = text.find(marker)
+        if idx == -1:
+            return text
+        # Find the end: the block ends at the last numbered issue line + blank,
+        # or at the next major section (## Changes, or a verse/intro header).
+        # Safest: cut from marker to the next "## " header or end of text.
+        after = text[idx:]
+        # Look for the next markdown heading that signals real content resumes
+        end_match = re.search(r'^(?:## |\*\*Verse|\*\*Introduction|---)', after, re.MULTILINE)
+        if end_match:
+            remove_end = idx + end_match.start()
+        else:
+            remove_end = len(text)
+        stripped = text[:idx] + text[remove_end:]
+        return stripped.strip() + "\n"
 
     def _split_changes(self, response: str) -> Tuple[str, str]:
         """Split the LLM response into corrected text and Changes section."""
