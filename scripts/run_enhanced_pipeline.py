@@ -759,6 +759,41 @@ def run_enhanced_pipeline(
         subprocess.run(command, check=False) # Don't crash on format error
 
     # =====================================================================
+    # STEP 5a½: Scripture Citation Verification (Session 308)
+    # Zero-cost DB-only check for misquoted biblical verses.
+    # Runs BEFORE the copy editor so findings can feed into it.
+    # =====================================================================
+    citation_fix_prompt = None
+    if not smoke_test and print_ready_file.exists():
+        logger.info("[STEP 5a½] Scripture Citation Verification...")
+        try:
+            from src.utils.scripture_verifier import (
+                verify_citations, format_verification_report, format_fix_prompt,
+            )
+            verify_text = print_ready_file.read_text(encoding='utf-8')
+            citation_issues = verify_citations(
+                verify_text, db_path=db_path, psalm_number=psalm_number,
+            )
+            report = format_verification_report(citation_issues, psalm_number=psalm_number)
+            report_path = output_path / f"psalm_{psalm_number:03d}_citation_verification.md"
+            report_path.write_text(report, encoding='utf-8')
+            if citation_issues:
+                logger.warning(
+                    f"[STEP 5a½] {len(citation_issues)} citation issue(s) detected "
+                    f"— see {report_path.name}"
+                )
+                for issue in citation_issues:
+                    logger.warning(f"  {issue.issue_type}: {issue.citation_ref} at {issue.location_hint}")
+                # Build a fix prompt for the copy editor
+                citation_fix_prompt = format_fix_prompt(citation_issues)
+                if citation_fix_prompt:
+                    logger.info("[STEP 5a½] Fix prompt generated for Copy Editor")
+            else:
+                logger.info("[STEP 5a½] All citations verified — no misquotes detected")
+        except Exception as e:
+            logger.warning(f"[STEP 5a½] Citation verification failed (non-fatal): {e}")
+
+    # =====================================================================
     # STEP 5b: Copy Editor (Session 280)
     # =====================================================================
     copy_edited_file = output_path / f"psalm_{psalm_number:03d}_copy_edited.md"
@@ -773,6 +808,7 @@ def run_enhanced_pipeline(
                 psalm_number=psalm_number,
                 input_file=print_ready_file,
                 output_dir=output_path,
+                supplementary_prompt=citation_fix_prompt,
             )
             tracker.track_model_for_step("copy_editor", copy_editor.model)
             logger.info(f"Copy Editor complete: {ce_result['edited_file']}")

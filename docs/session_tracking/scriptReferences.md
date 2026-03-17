@@ -15,6 +15,7 @@ Always read this file first when you need to find code.
 | `run_si_pipeline.py` | `scripts` | **NEW SI**: Special Instruction pipeline using Master Writer approach. Matches enhanced pipeline controls (including copy editor). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline.py) |
 | `run_si_pipeline_with_synthesis.py` | `scripts` | **LEGACY SI**: Special Instruction pipeline using Synthesis Writer approach. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_si_pipeline_with_synthesis.py) |
 | `run_copy_editor.py` | `scripts` | Standalone copy editor runner. Applies 9-category error taxonomy to existing `print_ready.md`. Supports batch (`36 37 38`), `--dry-run`, `--model`. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_copy_editor.py) |
+| `run_scripture_verifier.py` | `scripts` | Standalone scripture citation verifier. Checks quoted Hebrew against `tanakh.db`. Supports batch psalms, `--fix` for copy-editor fix pass. Zero LLM cost. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/run_scripture_verifier.py) |
 | `converse_with_editor.py` | `scripts` | Enables multi-turn conversation with Master Editor about a completed psalm commentary with full research context. Supports multi-line copy/pasting and interactive model selection (Claude, Gemini, GPT). | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/converse_with_editor.py) |
 | `concordance_tool.py` | `scripts` | Interactive Hebrew concordance CLI. 4 match modes (exact, variations, substring, substring + AI filter), lexicon lookup (BDB/Klein), AI commentary, cost tracking, markdown export. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/scripts/concordance_tool.py) |
 
@@ -125,6 +126,7 @@ Always read this file first when you need to find code.
 | `divine_names_modifier.py` | `src.utils` | Modifies divine names (YHWH, etc.) according to style preferences. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/divine_names_modifier.py) |
 | `cost_tracker.py` | `src.utils` | Tracks API costs across all LLM calls during pipeline execution. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/cost_tracker.py) |
 | `pipeline_summary.py` | `src.utils` | Generates summary statistics and reports for pipeline runs. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/pipeline_summary.py) |
+| `scripture_verifier.py` | `src.utils` | Zero-LLM-cost scripture citation verifier. Extracts Hebrew quotations with parenthetical citations, normalizes text (cantillation, divine names, consonantal fallback), checks against `tanakh.db`. Pipeline Step 5a½. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/scripture_verifier.py) |
 | `logger.py` | `src.utils` | Centralized logging configuration for the project. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/logger.py) |
 
 ---

@@ -8,6 +8,35 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 308 (2026-03-17): Scripture Citation Verifier
+
+**Objective**: Build a zero-LLM-cost scripture citation verifier to catch misquoted Hebrew passages, and integrate it into the pipeline to feed corrections to the copy editor.
+
+**Problems Identified**:
+- Psalm 41 commentary contained a misquote from Ex 20:7 — `לֹא תִשָּׂא אֶת שֵׁם ה׳ לַשָּׁוְא` is missing `אֱלֹהֶיךָ`. The writer LLM dropped the word and the copy editor didn't catch it.
+- Initial verifier had high false-positive rate (19 issues) due to greedy regex, vowel pointing differences, self-quotes, and shared Hebrew phrases matching multiple citations.
+
+**Solutions Implemented**:
+1. **`src/utils/scripture_verifier.py`** (new, ~690 lines): Regex-based citation extraction, word-level Hebrew phrase detection, text normalization (cantillation stripping, divine name variants `ה׳`→`יהוה`, `אלק`→`אלה`), substring matching with consonantal-only fallback.
+2. **False-positive mitigations** (7 techniques across 5 iterations): MIN_HEBREW_WORDS=3 threshold, psalm self-quote filter, intervening-citation check, expanded divine name normalization, punctuation stripping in consonantal comparison.
+3. **`scripts/run_scripture_verifier.py`** (new): Standalone runner with `--fix` flag for copy-editor fix pass.
+4. **Pipeline integration**: Added Step 5a½ to both `run_enhanced_pipeline.py` and `run_si_pipeline.py` — runs verifier on print-ready file BEFORE the copy editor, generates fix prompt via `format_fix_prompt()`, passes to copy editor via new `supplementary_prompt` parameter.
+5. **`src/agents/copy_editor.py`**: Added `supplementary_prompt` parameter to `edit_commentary()` and `_call_editor()`, appended to user message to provide citation verification context.
+
+**Test Results — Psalm 41**: Correctly detects Ex 20:7 misquote with only 1 false positive (piyyut text) out of ~30+ citations. False positives reduced from 19 → 1 across 5 iterations.
+
+**Files Modified**:
+- `src/utils/scripture_verifier.py` — **[NEW]** Core verifier module
+- `scripts/run_scripture_verifier.py` — **[NEW]** Standalone runner
+- `src/agents/copy_editor.py` — Added `supplementary_prompt` parameter
+- `scripts/run_enhanced_pipeline.py` — Added Step 5a½ citation verification before copy editor
+- `scripts/run_si_pipeline.py` — Same Step 5a½ integration
+- `docs/session_tracking/PROJECT_STATUS.md` — Session 308 entry
+- `docs/session_tracking/scriptReferences.md` — New verifier entries
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+
+---
+
 ## Session 307 (2026-03-16): Fix Garbled Inline Hebrew in DOCX — Block Extraction for Long Segments
 
 **Objective**: Fix garbled multi-word Hebrew text in Psalm 41's DOCX output, where Word's BiDi algorithm scrambled the visual order of a 15-word liturgical Hebrew quotation embedded inline in an English paragraph.

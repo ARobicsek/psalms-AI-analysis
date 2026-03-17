@@ -267,6 +267,7 @@ class CopyEditor:
         psalm_number: int,
         input_file: Optional[Path] = None,
         output_dir: Optional[Path] = None,
+        supplementary_prompt: Optional[str] = None,
     ) -> Dict[str, str]:
         """
         Run the copy editor on an existing psalm commentary.
@@ -275,6 +276,8 @@ class CopyEditor:
             psalm_number: The psalm number (e.g., 38).
             input_file: Path to print_ready.md. Defaults to standard location.
             output_dir: Where to save outputs. Defaults to psalm's output dir.
+            supplementary_prompt: Optional extra context (e.g., citation verification
+                report) to append to the LLM prompt.
 
         Returns:
             Dict with keys: 'edited_file', 'changes_file', 'diff_file', 'changes_summary'
@@ -301,7 +304,10 @@ class CopyEditor:
         self.logger.info(f"Editable content: {len(editable_content):,} chars")
 
         # 3. Call the LLM
-        edited_content, raw_response, usage = self._call_editor(editable_content, psalm_number)
+        edited_content, raw_response, usage = self._call_editor(
+            editable_content, psalm_number,
+            supplementary_prompt=supplementary_prompt,
+        )
 
         # 4. Separate corrected text from Changes section
         corrected_text, changes_text = self._split_changes(edited_content)
@@ -572,13 +578,19 @@ class CopyEditor:
     # LLM call
     # -------------------------------------------------------------------------
 
-    def _call_editor(self, editable_content: str, psalm_number: int) -> Tuple[str, str, dict]:
+    def _call_editor(self, editable_content: str, psalm_number: int,
+                     supplementary_prompt: Optional[str] = None) -> Tuple[str, str, dict]:
         """Call Claude Opus 4.6 with the copy editor prompt. Retries on connection errors."""
         self.logger.info(f"Calling {self.model} with adaptive thinking...")
 
         user_message = f"""Here is the commentary for Psalm {psalm_number}. Apply the copy editing rules from your system prompt. Return the FULL corrected text followed by a ## Changes section.
 
 {editable_content}"""
+
+        # Append supplementary context (e.g., citation verification report)
+        if supplementary_prompt:
+            user_message += f"\n\n{supplementary_prompt}"
+            self.logger.info(f"Appended supplementary prompt ({len(supplementary_prompt):,} chars)")
 
         max_retries = 3
         retry_delays = [10, 30, 60]  # seconds between retries

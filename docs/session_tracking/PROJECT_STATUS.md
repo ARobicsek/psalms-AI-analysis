@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-16 (Session 307)
+**Last Updated**: 2026-03-17 (Session 308)
 
 
 ## Table of Contents
@@ -19,8 +19,8 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 307
-- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
+- **Current Session**: 308
+- **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, **Scripture Citation Verifier**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
 
@@ -43,6 +43,7 @@ python scripts/run_enhanced_pipeline.py 23          # Process single psalm
 python scripts/run_enhanced_pipeline.py 23 --resume  # Resume from last step
 python scripts/run_si_pipeline.py 19                 # Special Instruction pipeline
 python scripts/run_copy_editor.py 36 37 38           # Standalone copy editor
+python scripts/run_scripture_verifier.py 41            # Standalone citation verifier
 python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ```
 
@@ -90,6 +91,13 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 308 (2026-03-17): Scripture Citation Verifier
+- Built `src/utils/scripture_verifier.py` — zero-LLM-cost module that compares quoted Hebrew scripture passages against `tanakh.db` using regex extraction + substring matching.
+- Normalization handles cantillation stripping, divine name variants (`ה׳`→`יהוה`, `אלק`→`אלה`), with consonantal-only fallback for vowel differences.
+- False-positive mitigations: psalm self-quote filter, intervening-citation check, MIN_HEBREW_WORDS=3 threshold.
+- Pipeline integration: runs as Step 5a½ BEFORE the copy editor on the print-ready file, pipes `format_fix_prompt()` to the copy editor via `supplementary_prompt` for single-pass correction.
+- Standalone runner: `scripts/run_scripture_verifier.py` with `--fix` flag for targeted fix passes.
+
 ### Session 307 (2026-03-16): Fix Garbled Inline Hebrew in DOCX
 - Fixed garbled 15-word Hebrew quotation in Psalm 41 DOCX caused by Word's BiDi algorithm splitting long inline Hebrew into separate RTL runs.
 - Added `_reverse_bare_hebrew_segments` for 3-5 word inline Hebrew (LRO reversal) and block extraction for 6+ word segments (standalone RTL paragraphs with native Hebrew line-wrapping).
@@ -104,11 +112,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Removed implicit "skip if output exists" checks in Steps 2b (Questions), 2c (Insights), and 5b (Copy Editor) — pipeline steps now always run and overwrite unless explicitly skipped via `--skip-*` flags.
 - Fixed Step 5c (copy-edit extraction) gating so existing copy-edited content is used for DOCX even when `--skip-copy-editor` is passed.
 - Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
-
-### Session 304 (2026-03-15): Copy Editor Output Readability
-- Replaced unified diff with word-level diff: shows only ~12 words of context around each change with changed words bolded, merges nearby changes within paragraphs.
-- Updated copy editor prompt to request numbered changes with verse location and WHY rationale explaining what was wrong with the original.
-- Added cross-reference links between changes and diff files; fixed `_count_changes` category-counting bug.
 
 ### Session 303 (2026-03-15): BiDi DOCX Fix — LRM Insertion
 - Implemented LRM (U+200E) insertion after Hebrew+punctuation sequences in all 5 DOCX code paths in `document_generator.py`.
