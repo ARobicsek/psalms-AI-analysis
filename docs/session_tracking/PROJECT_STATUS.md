@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-17 (Session 309)
+**Last Updated**: 2026-03-17 (Session 310)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 309
+- **Current Session**: 310
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, **Scripture Citation Verifier**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -91,6 +91,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 310 (2026-03-17): Hybrid Haiku Citation Filter & Verifier Improvements
+- Added `--haiku-filter` flag: Claude Haiku 4.5 judges regex verifier mismatches to filter false positives (~$0.002/psalm). Correctly eliminated Ps 72:18-19 piyyut false positive while keeping Gen 27:36 conjugation error.
+- Fixed report contamination: `_strip_appended_reports()` removes previously-embedded verification reports before analysis, eliminating the Ex 20:7 false issue.
+- Replaced consonantal substring matching with word-level matching (`_words_match()`), catching conjugation mismatches like `עֲקָבַנִי` vs `וַיַּעְקְבֵנִי` (Gen 27:36).
+- Integrated `--haiku-filter` into both `run_enhanced_pipeline.py` and `run_si_pipeline.py`. Added Haiku 4.5 pricing to cost tracker.
+
 ### Session 309 (2026-03-17): Citation Verifier Refinements & Copy Editor Integration Hardening
 - Softened `format_fix_prompt()` with methodology disclaimer and `[CITATION FIX]` tag so the copy editor applies citation corrections with judgment rather than over-correcting on false positives.
 - Added `_strip_echoed_supplementary()` to copy editor to prevent leaked citation-check instructions from appearing in DOCX output.
@@ -111,11 +117,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ### Session 306 (2026-03-15): Fix Displaced Liturgical Content Recovery in DOCX
 - Fixed DOCX bug where liturgy section was interrupted by spurious "Verse-by-Verse Commentary" and "Verse 9" headers (Psalm 42).
 - Replaced flawed `< 100` char threshold and position-0 regex heuristics with standalone verse header detection that correctly distinguishes inline liturgical references from actual verse commentary headers.
-- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
-
-### Session 305 (2026-03-15): Remove Auto-Skip-If-Exists Behavior
-- Removed implicit "skip if output exists" checks in Steps 2b (Questions), 2c (Insights), and 5b (Copy Editor) — pipeline steps now always run and overwrite unless explicitly skipped via `--skip-*` flags.
-- Fixed Step 5c (copy-edit extraction) gating so existing copy-edited content is used for DOCX even when `--skip-copy-editor` is passed.
 - Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).

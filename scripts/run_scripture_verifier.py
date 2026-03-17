@@ -26,6 +26,7 @@ from src.utils.scripture_verifier import (
     verify_citations,
     format_verification_report,
     format_fix_prompt,
+    filter_false_positives,
 )
 from src.utils.logger import get_logger
 
@@ -69,6 +70,11 @@ Examples:
         type=str,
         default="gpt-5.4",
         help="Model for copy editor fix pass (default: gpt-5.4)"
+    )
+    parser.add_argument(
+        "--haiku-filter",
+        action="store_true",
+        help="Use Claude Haiku to filter false positives (~$0.003/psalm)"
     )
 
     args = parser.parse_args()
@@ -118,6 +124,18 @@ Examples:
 
         # Run verification
         issues = verify_citations(text, db_path=args.db_path, psalm_number=psalm_num)
+
+        # Optional Haiku false-positive filter
+        haiku_stats = None
+        if args.haiku_filter and issues:
+            fixable_count = len([i for i in issues if i.issue_type == "NOT_SUBSTRING"])
+            if fixable_count > 0:
+                print(f"  🔍 Running Haiku false-positive filter on {fixable_count} issue(s)...")
+                issues, haiku_stats = filter_false_positives(issues, commentary_text=text)
+                kept = haiku_stats.get("kept_count", 0)
+                filtered = haiku_stats.get("filtered_count", 0)
+                print(f"  ✅ Haiku: kept {kept}, filtered {filtered} false positive(s) "
+                      f"(${haiku_stats.get('cost', 0):.4f})")
 
         # Generate report
         report = format_verification_report(issues, psalm_number=psalm_num)

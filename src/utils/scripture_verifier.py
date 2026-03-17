@@ -19,6 +19,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Optional
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # ---------------------------------------------------------------------------
 # Data structures
 # ---------------------------------------------------------------------------
@@ -490,6 +493,50 @@ def _find_current_verse_header(text: str, position: int) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Pre-processing helpers
+# ---------------------------------------------------------------------------
+
+def _strip_appended_reports(text: str) -> str:
+    """
+    Strip any previously-appended verification report from the text.
+
+    The pipeline appends a "SCRIPTURE CITATION CHECK" block to the
+    print-ready file before handing it to the copy editor.  If the verifier
+    re-reads that file later, it would match citations inside its own
+    report — a "report contamination" false positive.
+    """
+    marker = "SCRIPTURE CITATION CHECK"
+    idx = text.find(marker)
+    if idx != -1:
+        # Walk backward to the newline before the marker
+        newline_before = text.rfind('\n', 0, idx)
+        if newline_before != -1:
+            text = text[:newline_before]
+    return text
+
+
+def _words_match(quoted_consonants: str, actual_consonants: str) -> bool:
+    """
+    Word-level consonantal match: every quoted word must appear as a
+    *complete* word in the actual verse, in sequence.
+
+    Unlike pure substring matching, this catches conjugation mismatches
+    like עקבני (from עֲקָבַנִי) vs ויעקבני (from וַיַּעְקְבֵנִי) where the
+    shorter form is a character-level substring but a different word.
+    """
+    q_words = quoted_consonants.split()
+    a_words = actual_consonants.split()
+    if not q_words:
+        return True
+
+    # Try to find q_words as a contiguous sub-sequence of a_words
+    for start in range(len(a_words) - len(q_words) + 1):
+        if a_words[start:start + len(q_words)] == q_words:
+            return True
+    return False
+
+
+# ---------------------------------------------------------------------------
 # Main verification function
 # ---------------------------------------------------------------------------
 
@@ -510,6 +557,10 @@ def verify_citations(
         List of CitationIssue objects for each failed verification
     """
     from src.data_sources.tanakh_database import TanakhDatabase
+
+    # Strip any previously-appended verification report to avoid re-reading
+    # our own output as citations (report contamination).
+    text = _strip_appended_reports(text)
 
     db = TanakhDatabase(Path(db_path))
     issues = []
@@ -601,12 +652,12 @@ def verify_citations(
         if norm_quoted in norm_actual:
             continue  # pass
 
-        # Check 2: consonantal-only fallback
-        # Handles cases where the commentary uses slightly different vowel
-        # pointing than the Masoretic text (e.g., דַל vs דַּל)
+        # Check 2: consonantal word-level match
+        # Handles vowel pointing differences (e.g., דַל vs דַּל) while
+        # catching conjugation mismatches (e.g., עֲקָבַנִי vs וַיַּעְקְבֵנִי)
         cons_actual = _strip_to_consonants(actual_hebrew)
-        if cons_quoted in cons_actual:
-            continue  # pass — consonantal match
+        if _words_match(cons_quoted, cons_actual):
+            continue  # pass — consonantal word match
 
         # Failed both checks — record the issue
         line_num = text[:match.start()].count('\n') + 1
@@ -676,7 +727,7 @@ def verify_citations(
         if norm_quoted in norm_actual:
             continue
         cons_actual = _strip_to_consonants(actual_hebrew)
-        if cons_quoted in cons_actual:
+        if _words_match(cons_quoted, cons_actual):
             continue
 
         line_num = text[:match.start()].count('\n') + 1
@@ -839,3 +890,165 @@ def format_fix_prompt(issues: List[CitationIssue]) -> str:
         lines.append("")
 
     return '\n'.join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Haiku false-positive filter (optional, ~$0.003 per psalm)
+# ---------------------------------------------------------------------------
+
+_HAIKU_JUDGE_SYSTEM = """You are a Hebrew scripture verification judge. You receive pairs of
+(quoted Hebrew from a psalm commentary, actual verse text from a database) that an
+automated tool flagged as mismatches. Determine whether each is a genuine citation
+error or a false positive.
+
+For each pair, output a JSON object with:
+- "index": the pair number (1-based)
+- "verdict": one of:
+  - "GENUINE_ERROR" — the quoted text materially misrepresents the cited verse
+    (wrong conjugation, dropped word from the middle, garbled text)
+  - "FALSE_POSITIVE" — the mismatch is expected and NOT an error. Reasons include:
+    - The Hebrew text is from a liturgical/piyyut source, not the cited verse
+    - The citation is mentioned editorially (e.g. "parallel to Ps 72:18") and
+      the Hebrew text nearby belongs to a DIFFERENT source
+    - The quote is a deliberate partial quote that doesn't drop words from the middle
+  - "MINOR" — a trivial orthographic difference that doesn't constitute an error
+- "explanation": 1-2 sentences explaining your reasoning
+
+IMPORTANT: Scholarly commentaries routinely quote fragments of verses. A partial quote
+is NOT an error unless it drops words from the MIDDLE of a quoted phrase. Quoting only
+the beginning or end of a verse is standard practice.
+
+CONJUGATION DIFFERENCES ARE GENUINE ERRORS: If the quoted verb form differs from the
+actual verse's verb form (e.g. עֲקָבַנִי Qal perfect vs וַיַּעְקְבֵנִי wayyiqtol, or
+any prefix/suffix change that alters the conjugation), that IS a GENUINE_ERROR — not
+MINOR. The commentary presents it as a direct quotation, so the verb form must match
+the biblical text exactly. Do NOT classify verb conjugation mismatches as MINOR.
+
+Also watch for this common regex false positive: the automated tool may associate Hebrew
+text from a piyyut or liturgical quotation with a biblical citation that appears in a
+DIFFERENT clause or sentence. If the Hebrew clearly doesn't belong to the cited verse
+reference, that is a FALSE_POSITIVE.
+
+Output ONLY a JSON array — no other text."""
+
+
+def filter_false_positives(
+    issues: List[CitationIssue],
+    commentary_text: str = "",
+) -> tuple:
+    """
+    Use Claude Haiku to filter false positives from the regex verifier's output.
+
+    Sends mismatched citation pairs to Haiku for judgment, removing issues
+    that Haiku classifies as FALSE_POSITIVE or MINOR.
+
+    Args:
+        issues: List of CitationIssue objects from verify_citations()
+        commentary_text: Optional full commentary text for context extraction
+
+    Returns:
+        (filtered_issues, stats_dict) where filtered_issues contains only
+        GENUINE_ERROR issues plus any non-NOT_SUBSTRING issues unchanged.
+    """
+    import json
+    import os
+
+    fixable = [i for i in issues if i.issue_type == "NOT_SUBSTRING"]
+    non_fixable = [i for i in issues if i.issue_type != "NOT_SUBSTRING"]
+
+    if not fixable:
+        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+                        "filtered_count": 0, "kept_count": 0}
+
+    try:
+        import anthropic
+    except ImportError:
+        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+                        "filtered_count": 0, "kept_count": len(fixable)}
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+                        "filtered_count": 0, "kept_count": len(fixable)}
+
+    # Build the pairs text
+    pair_lines = []
+    for j, issue in enumerate(fixable, 1):
+        pair_lines.append(f"\nPair {j}:")
+        pair_lines.append(f"  Reference: {issue.citation_ref}")
+        pair_lines.append(f"  Location: {issue.location_hint}")
+        pair_lines.append(f"  Quoted Hebrew: {issue.quoted_hebrew}")
+        pair_lines.append(f"  Actual verse text: {issue.actual_hebrew}")
+
+        # Extract ~300 chars of context around the citation for disambiguation
+        if commentary_text and issue.line_number > 0:
+            lines = commentary_text.splitlines()
+            line_idx = min(issue.line_number - 1, len(lines) - 1)
+            context_line = lines[line_idx]
+            if len(context_line) > 300:
+                ref_pos = context_line.find(issue.citation_ref.strip('()'))
+                if ref_pos >= 0:
+                    start = max(0, ref_pos - 150)
+                    end = min(len(context_line), ref_pos + 150)
+                    context_line = "..." + context_line[start:end] + "..."
+                else:
+                    context_line = context_line[:300] + "..."
+            pair_lines.append(f"  Surrounding text: {context_line}")
+
+    user_msg = (
+        f"Judge these {len(fixable)} quotation-vs-actual pairs. "
+        f"Output ONLY a JSON array.\n"
+        + '\n'.join(pair_lines)
+    )
+
+    client = anthropic.Anthropic(api_key=api_key)
+
+    response = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=2048,
+        system=_HAIKU_JUDGE_SYSTEM,
+        messages=[{"role": "user", "content": user_msg}],
+    )
+
+    raw = response.content[0].text.strip()
+    if raw.startswith("```"):
+        raw = re.sub(r'^```(?:json)?\s*', '', raw)
+        raw = re.sub(r'\s*```$', '', raw)
+
+    try:
+        judgments = json.loads(raw)
+    except json.JSONDecodeError:
+        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+                        "filtered_count": 0, "kept_count": len(fixable),
+                        "error": "JSON parse failed"}
+
+    # Build a map of index → verdict
+    verdict_map = {}
+    for j in judgments:
+        idx = j.get("index", 0) - 1  # 0-based
+        verdict_map[idx] = (j.get("verdict", ""), j.get("explanation", ""))
+
+    # Filter: keep only GENUINE_ERROR issues
+    filtered = list(non_fixable)
+    for idx, issue in enumerate(fixable):
+        verdict, explanation = verdict_map.get(idx, ("GENUINE_ERROR", ""))
+        if verdict == "GENUINE_ERROR":
+            if explanation:
+                issue.normalized_quoted = (
+                    issue.normalized_quoted + f" [Haiku: {explanation}]"
+                )
+            filtered.append(issue)
+
+    usage = response.usage
+    input_tokens = usage.input_tokens
+    output_tokens = usage.output_tokens
+    cost = (input_tokens / 1_000_000) * 0.80 + (output_tokens / 1_000_000) * 4.00
+
+    kept = len([i for i in filtered if i.issue_type == "NOT_SUBSTRING"])
+    return filtered, {
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "cost": cost,
+        "filtered_count": len(fixable) - kept,
+        "kept_count": kept,
+    }

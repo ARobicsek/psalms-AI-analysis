@@ -8,6 +8,45 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 310 (2026-03-17): Hybrid Haiku Citation Filter & Verifier Improvements
+
+**Objective**: Explore using Claude Haiku 4.5 to improve citation verification accuracy by filtering false positives, and fix two underlying verifier issues (report contamination, loose consonantal matching).
+
+**Problems Identified**:
+- The regex verifier produced false positives when piyyut/liturgical Hebrew appeared near editorial citations in different clauses (e.g., Ps 72:18-19 in Psalm 41 — the regex associated piyyut text with a later editorial reference).
+- Previously-appended verification reports were embedded in print-ready files. When the verifier re-read the file, it matched citations inside its own old report ("report contamination"), producing phantom errors like the Ex 20:7 issue.
+- Pure consonantal substring matching was too loose: `עקבני` (from `עֲקָבַנִי`) passed as a substring of `ויעקבני` (from `וַיַּעְקְבֵנִי`), missing the Gen 27:36 conjugation error.
+
+**Solutions Implemented**:
+1. **Hybrid Haiku false-positive filter** (`scripture_verifier.py`): New `filter_false_positives()` function sends regex verifier mismatches to Claude Haiku 4.5 with surrounding context. Haiku classifies each as GENUINE_ERROR, FALSE_POSITIVE, or MINOR. Cost: ~$0.002/psalm. Activated via `--haiku-filter` flag on standalone runner and both pipeline runners.
+2. **Report contamination fix** (`scripture_verifier.py`): New `_strip_appended_reports()` strips any "SCRIPTURE CITATION CHECK" block from the text before analysis, preventing the verifier from re-reading its own old output.
+3. **Word-level consonantal matching** (`scripture_verifier.py`): New `_words_match()` replaces pure substring check — each quoted consonantal word must appear as a *complete* word in the actual verse, in sequence. Catches conjugation mismatches (e.g., `עקבני` vs `ויעקבני`) while still passing legitimate vowel-pointing differences.
+4. **Pipeline integration**: Added `--haiku-filter` argument to `run_enhanced_pipeline.py`, `run_si_pipeline.py`, and `run_scripture_verifier.py`. Added Claude Haiku 4.5 pricing to `cost_tracker.py`.
+
+**Prototype Exploration — Full Haiku Extraction (test_haiku_verifier.py)**:
+- Also tested a two-step approach where Haiku extracts ALL citations (Step 1) and judges mismatches (Step 2). Cost: ~$0.023/psalm.
+- Haiku extraction eliminated false positives perfectly but risked silently "correcting" quoted Hebrew during extraction (e.g., adding the missing `אֱלֹהֶיךָ` to Ex 20:7).
+- The hybrid approach (regex extraction + Haiku judgment) was chosen as the better architecture: cheaper ($0.002 vs $0.023), no extraction risk, and the regex catches all citation patterns programmatically.
+
+**Test Results — Psalm 41 (hybrid)**:
+- Ps 72:18-19 false positive: FILTERED by Haiku (correctly identified piyyut/editorial mismatch)
+- Gen 27:36 conjugation error: KEPT by Haiku (correctly identified verb form mismatch as genuine)
+- Ex 20:7 report contamination: ELIMINATED by `_strip_appended_reports()` (was never a real error)
+- Batch test (Ps 22, 34): Haiku correctly filtered 3 additional false positives ($0.0036 total)
+
+**Files Modified**:
+- `src/utils/scripture_verifier.py` — Added `_strip_appended_reports()`, `_words_match()`, `filter_false_positives()`; replaced consonantal substring with word-level match in both Pattern A/B and Pattern C paths
+- `src/utils/cost_tracker.py` — Added `claude-haiku-4-5-20251001` pricing
+- `scripts/run_scripture_verifier.py` — Added `--haiku-filter` flag and `filter_false_positives` integration
+- `scripts/run_enhanced_pipeline.py` — Added `--haiku-filter` flag and Step 5a½ Haiku filter integration
+- `scripts/run_si_pipeline.py` — Same `--haiku-filter` integration
+- `scripts/test_haiku_verifier.py` — **[NEW]** Prototype exploration script (two-step Haiku extraction + judgment)
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+- `docs/session_tracking/PROJECT_STATUS.md` — Session 310 entry
+- `docs/session_tracking/scriptReferences.md` — Updated verifier descriptions
+
+---
+
 ## Session 309 (2026-03-17): Citation Verifier Refinements & Copy Editor Integration Hardening
 
 **Objective**: Make the citation verifier's output safe for copy editor consumption (avoiding false-positive overreaction), fix leaked instructions in DOCX, add Pattern C citation extraction, and test pipeline end-to-end on Psalm 41.

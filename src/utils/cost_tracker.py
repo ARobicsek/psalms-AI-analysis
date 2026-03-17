@@ -91,6 +91,14 @@ PRICING = {
         "cache_read": 0.10,
         "cache_write": 1.25,
     },
+    # Claude Haiku 4.5 (for citation verifier false-positive filter)
+    "claude-haiku-4-5-20251001": {
+        "input": 0.80,
+        "output": 4.00,
+        "thinking": 4.00,
+        "cache_read": 0.08,
+        "cache_write": 1.00,
+    },
     # GPT-5 (OpenAI)
     "gpt-5": {
         "input": 1.25,

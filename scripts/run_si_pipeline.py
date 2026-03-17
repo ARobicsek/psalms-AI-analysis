@@ -699,11 +699,27 @@ def run_enhanced_pipeline(
         try:
             from src.utils.scripture_verifier import (
                 verify_citations, format_verification_report, format_fix_prompt,
+                filter_false_positives,
             )
             verify_text = print_ready_file.read_text(encoding='utf-8')
             citation_issues = verify_citations(
                 verify_text, db_path=db_path, psalm_number=psalm_number,
             )
+
+            # Optional Haiku false-positive filter
+            if getattr(args, 'haiku_filter', False) and citation_issues:
+                fixable_count = len([i for i in citation_issues if i.issue_type == "NOT_SUBSTRING"])
+                if fixable_count > 0:
+                    logger.info(f"[STEP 5a½] Running Haiku filter on {fixable_count} issue(s)...")
+                    citation_issues, haiku_stats = filter_false_positives(
+                        citation_issues, commentary_text=verify_text,
+                    )
+                    logger.info(
+                        f"[STEP 5a½] Haiku: kept {haiku_stats['kept_count']}, "
+                        f"filtered {haiku_stats['filtered_count']} "
+                        f"(${haiku_stats['cost']:.4f})"
+                    )
+
             report = format_verification_report(citation_issues, psalm_number=psalm_number)
             report_path = output_path / f"psalm_{psalm_number:03d}_citation_verification.md"
             report_path.write_text(report, encoding='utf-8')
@@ -864,6 +880,8 @@ if __name__ == "__main__":
     parser.add_argument("--gpt-5-4-question", action="store_true", help="Use GPT-5.4 for Question Curator")
     parser.add_argument("--gpt-5-4-copy", action="store_true", help="Use GPT-5.4 for Copy Editor")
     parser.add_argument("--gpt-5-4-writer", action="store_true", help="Use GPT-5.4 for Master Writer")
+    parser.add_argument("--haiku-filter", action="store_true",
+                       help="Use Claude Haiku to filter citation verifier false positives (~$0.003/psalm)")
 
     args = parser.parse_args()
 
