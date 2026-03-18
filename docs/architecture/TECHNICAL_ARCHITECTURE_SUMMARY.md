@@ -8,12 +8,13 @@
 
 ## Executive Summary
 
-The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Opus 4.6, Claude Sonnet 4.6, GPT-5.1, Gemini 3.1 Pro Preview, Gemini 2.5 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
+The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Opus 4.6, Claude Sonnet 4.6, GPT-5.1, GPT-5.4, Gemini 3.1 Pro Preview, Gemini 2.5 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
 
-**Latest Enhancements (Sessions 200-280)**:
-- **Copy Editor Agent**: Post-generation QA with 6-category error taxonomy using Opus 4.6 adaptive thinking (Session 280)
+**Latest Enhancements (Sessions 200-314)**:
+- **Scripture Citation Verifier**: Regex-based Hebrew citation extraction with GPT-5.1 false-positive filter (default); feeds fix prompts to Copy Editor (Sessions 308-314)
+- **Copy Editor Agent**: Post-generation QA with 9-category error taxonomy using GPT-5.4 (Session 280+)
 - **Flag Refactor**: Unified pipeline controls with --exclude and --include flags (Session 277)
 - **Gemini 3.1 Pro Migration**: Upgraded models and preserved reasoning configurations (Session 275)
 - **Unified Writer V4**: Single prompt merging Main and College depth and clarity, halving pipeline cost (Session 269)
@@ -54,8 +55,12 @@ Input: Psalm Number
 [4] Print-Ready Formatting (Python)
     → Markdown with divine name modifications, verse numbering
     ↓
-[5] Copy Editor (Claude Opus 4.6)
-    → QA against 6-category taxonomy (structural, consistency, form/content)
+[4½] Scripture Citation Verifier (Regex + GPT-5.1 judge)
+    → Extracts Hebrew citations, compares against tanakh.db,
+      GPT-5.1 filters false positives; feeds fix prompt to Copy Editor
+    ↓
+[5] Copy Editor (GPT-5.4)
+    → QA against 9-category taxonomy (structural, consistency, form/content)
     ↓
 [6] Document Generation (Python)
     → Single .docx output: unified scholarly commentary (supports Arabic + CJK)

@@ -706,19 +706,30 @@ def run_enhanced_pipeline(
                 verify_text, db_path=db_path, psalm_number=psalm_number,
             )
 
-            # Optional Haiku false-positive filter
-            if getattr(args, 'haiku_filter', False) and citation_issues:
+            # LLM false-positive filter (GPT-5.1 by default, Haiku if --haiku-filter)
+            use_gpt = getattr(args, 'gpt_filter', True) and not getattr(args, 'no_gpt_filter', False)
+            use_haiku = getattr(args, 'haiku_filter', False)
+            filter_model = None
+            if use_haiku:
+                filter_model = "haiku"
+            elif use_gpt:
+                filter_model = "gpt"
+
+            if filter_model and citation_issues:
                 fixable_count = len([i for i in citation_issues if i.issue_type == "NOT_SUBSTRING"])
                 if fixable_count > 0:
-                    logger.info(f"[STEP 5a½] Running Haiku filter on {fixable_count} issue(s)...")
-                    citation_issues, haiku_stats = filter_false_positives(
-                        citation_issues, commentary_text=verify_text,
+                    label = "GPT-5.1" if filter_model == "gpt" else "Haiku"
+                    logger.info(f"[STEP 5a½] Running {label} filter on {fixable_count} issue(s)...")
+                    citation_issues, filter_stats = filter_false_positives(
+                        citation_issues, commentary_text=verify_text, model=filter_model,
                     )
                     logger.info(
-                        f"[STEP 5a½] Haiku: kept {haiku_stats['kept_count']}, "
-                        f"filtered {haiku_stats['filtered_count']} "
-                        f"(${haiku_stats['cost']:.4f})"
+                        f"[STEP 5a½] {label}: kept {filter_stats['kept_count']}, "
+                        f"filtered {filter_stats['filtered_count']} "
+                        f"(${filter_stats['cost']:.4f})"
                     )
+                    filter_model_name = "gpt-5.1" if filter_model == "gpt" else "claude-haiku-4-5"
+                    tracker.track_model_for_step("citation_filter", filter_model_name)
 
             # Optional tool-use verifier for broader citation coverage
             if getattr(args, 'tooluse_verify', False):
@@ -903,6 +914,10 @@ if __name__ == "__main__":
     parser.add_argument("--gpt-5-4-writer", action="store_true", help="Use GPT-5.4 for Master Writer")
     parser.add_argument("--haiku-filter", action="store_true",
                        help="Use Claude Haiku to filter citation verifier false positives (~$0.003/psalm)")
+    parser.add_argument("--gpt-filter", action="store_true", default=True,
+                       help="Use GPT-5.1 to filter citation verifier false positives (~$0.05/psalm, default)")
+    parser.add_argument("--no-gpt-filter", action="store_true",
+                       help="Disable the default GPT-5.1 false-positive filter")
     parser.add_argument("--tooluse-verify", action="store_true",
                        help="Also run Haiku tool-use citation verifier for broader coverage (~$0.04/psalm)")
 

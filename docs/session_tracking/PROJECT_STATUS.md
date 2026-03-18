@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-17 (Session 313)
+**Last Updated**: 2026-03-17 (Session 314)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 313
+- **Current Session**: 314
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, **Scripture Citation Verifier**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -91,6 +91,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 314 (2026-03-17): GPT Filter Default, End-to-End Citation Fix Verified
+- Made `--gpt-filter` the default in all three pipeline/verifier scripts; added `--no-gpt-filter` to disable. Haiku remains as `--haiku-filter` alternative.
+- Fixed standalone verifier `--fix` bug: `fix_prompt` was generated but never passed to the copy editor's `supplementary_prompt`.
+- **Full end-to-end test on Psalm 41**: Regex found 7 issues → GPT-5.1 filtered 2 FPs → copy editor corrected all 5 genuine errors ($0.53 total). All corrections verified accurate.
+- Added citation filter model to DOCX "Models Used" section (both document generators). Updated TECHNICAL_ARCHITECTURE_SUMMARY and scriptReferences.
+
 ### Session 313 (2026-03-17): Citation Verifier — GPT-5.1 Judge, Precise Difference Hints
 - Fixed `_describe_difference()`: replaced buggy walk-through (noisy trailing words) with greedy word alignment — now reports only the specific missing/added words (e.g., `אֱלֹהֶיךָ` instead of 6 unrelated words).
 - Added doubled-word detection: `Counter`-based check catches words appearing more times in quote than in actual verse (e.g., `רֵקִים` doubled in 2 Chr 13:7).
@@ -116,11 +122,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Fixed report contamination: `_strip_appended_reports()` removes previously-embedded verification reports before analysis, eliminating the Ex 20:7 false issue.
 - Replaced consonantal substring matching with word-level matching (`_words_match()`), catching conjugation mismatches like `עֲקָבַנִי` vs `וַיַּעְקְבֵנִי` (Gen 27:36).
 - Integrated `--haiku-filter` into both `run_enhanced_pipeline.py` and `run_si_pipeline.py`. Added Haiku 4.5 pricing to cost tracker.
-
-### Session 309 (2026-03-17): Citation Verifier Refinements & Copy Editor Integration Hardening
-- Softened `format_fix_prompt()` with methodology disclaimer and `[CITATION FIX]` tag so the copy editor applies citation corrections with judgment rather than over-correcting on false positives.
-- Added `_strip_echoed_supplementary()` to copy editor to prevent leaked citation-check instructions from appearing in DOCX output.
-- Added Pattern C citation extraction (Hebrew inside parentheticals, e.g. `(Gen 27:36: Hebrew, "English")`) — found in 18 psalms; zero regressions across 15-psalm test suite.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

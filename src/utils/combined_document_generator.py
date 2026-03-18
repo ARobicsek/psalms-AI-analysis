@@ -1758,6 +1758,12 @@ Methodological & Bibliographical Summary
                 else:
                     writer_model = model_usage.get('master_writer') or model_usage.get('master_editor', 'N/A')
                     summary_text += f"\n**Commentary (Master Writer)**: {writer_model}"
+
+                if 'citation_filter' in model_usage:
+                    summary_text += f"\n**Citation Verifier Filter**: {model_usage.get('citation_filter', 'N/A')}"
+
+                if 'copy_editor' in model_usage:
+                    summary_text += f"\n**Copy Editor**: {model_usage.get('copy_editor', 'N/A')}"
             else:
                 summary_text += "\nModel attribution data not available."
 

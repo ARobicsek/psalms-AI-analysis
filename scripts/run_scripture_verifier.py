@@ -80,7 +80,13 @@ Examples:
     parser.add_argument(
         "--gpt-filter",
         action="store_true",
-        help="Use GPT-5.1 to filter false positives (~$0.01/psalm)"
+        default=True,
+        help="Use GPT-5.1 to filter false positives (~$0.05/psalm, default)"
+    )
+    parser.add_argument(
+        "--no-gpt-filter",
+        action="store_true",
+        help="Disable the default GPT-5.1 false-positive filter"
     )
     parser.add_argument(
         "--tooluse-verify",
@@ -136,13 +142,13 @@ Examples:
         # Run verification
         issues = verify_citations(text, db_path=args.db_path, psalm_number=psalm_num)
 
-        # Optional LLM false-positive filter
+        # LLM false-positive filter (GPT-5.1 by default, Haiku if --haiku-filter)
         filter_stats = None
         filter_model = None
-        if args.gpt_filter:
-            filter_model = "gpt"
-        elif args.haiku_filter:
+        if args.haiku_filter:
             filter_model = "haiku"
+        elif args.gpt_filter and not args.no_gpt_filter:
+            filter_model = "gpt"
 
         if filter_model and issues:
             fixable_count = len([i for i in issues if i.issue_type == "NOT_SUBSTRING"])
@@ -225,6 +231,7 @@ Examples:
                     result = editor.edit_commentary(
                         psalm_number=psalm_num,
                         input_file=input_file,
+                        supplementary_prompt=fix_prompt,
                     )
 
                     print(f"  ✅ Fix pass complete: {result['edited_file']}")
