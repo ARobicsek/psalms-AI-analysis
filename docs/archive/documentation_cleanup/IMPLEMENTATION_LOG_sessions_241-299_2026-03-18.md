@@ -1,0 +1,1484 @@
+# Implementation Log — Sessions 241-299
+
+Archived from IMPLEMENTATION_LOG.md on 2026-03-18.
+
+---
+
+## Session 300 (2026-03-13): Model Swap — Figurative Curator & Liturgical Librarian
+
+**Objective**: Replace Gemini models with OpenAI models for better quality/cost balance; keep Gemini 2.5 Pro only for the Synthesis Writer large-psalm fallback.
+
+**Changes Implemented**:
+1. **Figurative Curator**: Swapped from `gemini-3.1-pro-preview` (thinking_level=high) to `gpt-5.4` (reasoning_effort=high).
+   - Replaced Google Gemini SDK calls with OpenAI SDK calls.
+   - Updated `_call_gemini()` → `_call_llm()` with GPT-5.4 chat completions API.
+   - Updated pricing constants from Gemini 3.1 Pro rates to GPT-5.4 rates.
+   - `active_model` property now returns `"gpt-5.4"`.
+
+2. **Liturgical Librarian**: Swapped from `gemini-2.5-pro` (thinking_budget) to `gpt-5.1` (reasoning_effort=high).
+   - Replaced `_call_gemini_with_retry()` (tenacity-based) with `_call_openai()` returning (text, input_tokens, output_tokens, reasoning_tokens).
+   - Replaced Gemini response extraction (candidates/parts structure) with simple OpenAI response handling.
+   - Updated validation method from Gemini to GPT-5.1 (with reasoning_effort=low for simple validation).
+   - Removed `_is_retryable_gemini_error()` helper and `tenacity` import (no longer needed).
+   - Claude Sonnet 4.5 remains as fallback if GPT-5.1 fails.
+   - `active_model` property now returns `"gpt-5.1"`.
+
+3. **Legacy Pipeline Scripts**: Updated hardcoded `"gemini-3.1-pro-preview"` cost tracking model names to `"gpt-5.4"` in `run_enhanced_pipeline_with_synthesis.py` and `run_si_pipeline_with_synthesis.py`.
+
+4. **DOCX Model Attribution**: Verified the `active_model` → `models_used` → `pipeline_stats.json` → `document_generator.py` chain is fully dynamic — no hardcoded model names in the tracking path.
+
+**Cost Impact**:
+- Figurative Curator: ~$0.31/psalm (Gemini) → ~$0.39/psalm (GPT-5.4) — +$0.08 for better quality
+- Liturgical Librarian: ~$0.08/psalm (Gemini) → ~$0.06/psalm (GPT-5.1) — -$0.02 savings
+- Net: roughly neutral (~$0.06 more per psalm)
+
+**Files Modified**:
+- `src/agents/figurative_curator.py` - Full model swap: Gemini → GPT-5.4
+- `src/agents/liturgical_librarian.py` - Full model swap: Gemini → GPT-5.1
+- `scripts/run_enhanced_pipeline_with_synthesis.py` - Updated hardcoded cost model name
+- `scripts/run_si_pipeline_with_synthesis.py` - Updated hardcoded cost model name
+- `docs/session_tracking/PROJECT_STATUS.md` - Session 300 entry, active features, descriptions
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` - This entry
+- `docs/session_tracking/scriptReferences.md` - Updated Figurative Curator description
+- `CLAUDE.md` - Updated project description, recent changes, current status
+
+---
+
+## Session 299 (2026-03-09): Fixing Psalm 40 Pipeline Issues
+
+**Objective**: Fix section extraction and liturgical prompt issues driving malformed DOCX outputs.
+
+**Problems Identified**:
+- The copy editor LLM displaced liturgical content (from `#### Key Verses and Phrases`) into the verse commentary section.
+- The `_extract_sections_from_copy_edited()` function truncated the intro at the liturgical section, losing the displaced content and leading to a malformed DOCX structure.
+- The Master Writer LLM ignored specific liturgical research findings (e.g., 17th of Tammuz fast day usage) despite them being provided in the research bundle.
+
+**Solutions Implemented**:
+1. Hardened the `_extract_sections_from_copy_edited()` function in both pipeline scripts to detect displaced liturgical content, automatically recover it, move it back to the intro section, and log a warning.
+2. Added identical structural validation logic to the `CopyEditor` agent to optionally warn the operator at generation time.
+3. Updated the `Modern Liturgical Context` instruction in `MASTER_WRITER_PROMPT_V4` to explicitly require the inclusion of *all* specific liturgical references provided in the research bundle.
+4. Restored Psalm 40 pre-copy-edit files and successfully regenerated the corrected DOCX.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Hardened section extraction with recovery logic.
+- `scripts/run_si_pipeline.py` - Mirrored section extraction hardening.
+- `src/agents/copy_editor.py` - Added structural validation check for displaced liturgical content.
+- `src/agents/master_editor.py` - Strengthened liturgical instruction in `MASTER_WRITER_PROMPT_V4`.
+
+## Session 298 (2026-03-09): Error and Retry Tracking in Cost Summary
+
+**Objective**: Enhance the terminal cost tracking summary to include information about errors and retries (e.g. JSON validation failures or API timeouts) so processes generating unexpected costs can be monitored.
+
+**Problems Identified**:
+- The `CostTracker` showed API call counts and dollar costs, but silently consumed the cost of retries.
+- Micro Analyst and other agents logged retryable exceptions, but the final pipeline summary lacked visibility into these events, making it difficult to spot cost-generating loop issues at a glance.
+- Pre-existing bug: `response_text` was not initialized before the streaming loop in `_generate_research_requests()`, causing an `UnboundLocalError` crash on the research request generation pass.
+
+**Solutions Implemented**:
+1. Added an `events: List[Dict[str, str]]` field and a `log_event()` method to the `CostTracker`.
+2. Updated the `get_summary()` method to append a "PIPELINE EVENTS & RETRIES" section if any events were recorded.
+3. Hooked `self.cost_tracker.log_event()` into the `JSONDecodeError`, validation failure, truncation, and API exception retry loops across:
+   - `src/agents/micro_analyst.py`
+   - `src/agents/macro_analyst.py`
+   - `src/agents/insight_extractor.py`
+   - `src/agents/question_curator.py`
+4. Fixed the `UnboundLocalError` in `_generate_research_requests()` by initializing `response_text = ""` before the streaming loop.
+5. Wrote `scripts/test_cost_tracker_events.py` to verify the tracker formatting without running costly API calls.
+
+**Files Modified**:
+- `src/utils/cost_tracker.py` - Added event tracking array and summary formatting.
+- `src/agents/micro_analyst.py` - Added log_event hooks into retry logic.
+- `src/agents/macro_analyst.py` - Added log_event hooks for truncation and connection retries.
+- `src/agents/insight_extractor.py` - Added log_event hooks for JSON and token truncation retries.
+- `src/agents/question_curator.py` - Added log_event hook for exception handling.
+- `scripts/test_cost_tracker_events.py` - **[NEW]** Test script for summary formatting.
+
+---
+
+## Session 297 (2026-03-09): Micro Analyst JSON Repair & Validation
+
+**Objective**: Implement the fallback `json-repair` logic for the Micro Analyst to salvage API responses that are truncated during generation, preventing costly retries.
+
+**Problems Identified**:
+- As identified in Session 296, the Anthropic API occasionally truncates Sonnet 4.6 output mid-JSON string (due to `RemoteProtocolError` streaming drops or mid-stream cutoffs), losing ~1-3 dollars per failed discovery pass retry, particularly on long psalms.
+
+**Solutions Implemented**:
+1. Installed the `json-repair` python package.
+2. Updated `MicroAnalystV2._discovery_pass()` catching `json.JSONDecodeError` to attempt repairing the stripped `response_text`.
+3. Added structural validation post-repair:
+   - `len(verse_discoveries) == verse_count`: ensures no verses were lost during mid-array truncation.
+   - `len(interesting_questions) >= 3`: ensures the final questions array fundamentally exists and contains results.
+4. If validation passes, the repaired JSON is accepted; if it fails, the script naturally degrades back into the existing retry-backoff logic to request a clean generation.
+5. Added `tests/test_json_repair_logic.py` to statically test valid, repairable, and severely truncated JSON permutations to prove the structural validation works before live API calls occur.
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` - Integrated `repair_json` and structural validation logic into `_discovery_pass`.
+- `tests/test_json_repair_logic.py` - **[NEW]** Test suite simulating parsing, repair, and structurally invalidating behavior.
+
+---
+
+## Session 296 (2026-03-09): Micro Analyst Truncation Investigation & JSON Repair Recommendation
+
+**Objective**: Investigate whether raising the token limit for long psalms (≥25 verses) would prevent costly micro analyst retries, and recommend a better solution.
+
+**Problems Identified**:
+- Micro analyst `_discovery_pass()` frequently requires 2-3 retry attempts on longer psalms, wasting $1-3 per failed attempt in API costs.
+- Initial hypothesis (token limit too low) was **ruled out** — the `max_tokens` truncation warning (`stop_reason == 'max_tokens'`) has **never** fired across all pipeline logs. The 64K limit with 50% thinking cap provides ample headroom.
+- **Actual root cause**: Two failure modes identified:
+  1. **Streaming connection drops** (`RemoteProtocolError: peer closed connection without sending complete message body`) — Anthropic API intermittently drops connections mid-stream.
+  2. **Unterminated JSON strings** — the model produces valid JSON for 90%+ of the response, then the output gets cut off mid-string (likely from streaming hiccups), producing unparseable JSON.
+- Example: Psalm 22 (32 verses) failed twice with "Unterminated string" at ~76K chars before succeeding on the 3rd attempt with 85K chars — well within token budget.
+- Example: Psalm 19 (15 verses) failed with `RemoteProtocolError` on attempt 1, then "Unterminated string" at 9.5K chars on attempt 2, before succeeding on attempt 3 with 40K chars.
+
+**Research Conducted**:
+1. Analyzed all micro analyst logs in `logs/` directory for `max_tokens` truncation warnings — found zero instances.
+2. Analyzed all `Unterminated string` and `JSON parsing error` patterns — found them consistently across psalms of all lengths (not correlated with verse count).
+3. Analyzed all `empty text block` errors — confirmed these were pre-Session 294 (fixed by universal budgeted thinking).
+4. Reviewed the `_discovery_pass()` JSON schema to identify all required top-level sections for validation.
+
+**Recommendation for Next Session — Implement JSON Repair with Structural Validation**:
+- Add `json-repair` library (or equivalent) to attempt fixing truncated JSON before falling back to a full retry.
+- **Critical safety check**: After repair, validate that the repaired JSON contains:
+  1. `verse_discoveries` array with `len == verse_count` (all verses present)
+  2. `interesting_questions` array with `len >= 3` (non-empty questions section)
+- If validation fails (e.g., truncation happened mid-verse-array, losing later verses), fall back to the existing retry mechanism.
+- If validation passes, accept the repaired JSON — the error was just a syntax glitch (missing comma, unclosed string) in trailing data.
+- **Expected savings**: Eliminates ~$1-3 per failed retry on long psalms where the truncation occurs after all verse data is complete.
+
+**Files Modified**:
+- None (investigation and planning only).
+
+---
+
+## Session 295 (2026-03-09): Pipeline Model Configuration Audit
+
+**Objective**: Audit and standardize LLM configurations across documentation and codebase defaults, and correct model tracking logic for generated DOCX artifacts.
+
+**Problems Identified**:
+- Documentation (`PROJECT_STATUS.md`, `scriptReferences.md`) had conflicting default model listings for secondary agents.
+- The pipeline scripts (`run_enhanced_pipeline.py`, `run_si_pipeline.py`) presented legacy options (`gpt-5.1`, `claude-opus-4-5`) in help texts and default parser arguments.
+- The programmatic log `pipeline_stats.json` was recording hardcoded `"gpt-5.4"` strings during the tracking of the `question_curator` and `insight_extractor` steps, causing the Methodological Summary section of the generated Word Document to inaccurately reflect the parameters actually passed to the scripts.
+
+**Solutions Implemented**:
+1. Updated `PROJECT_STATUS.md` and `scriptReferences.md` to uniformly list `gpt-5.4` as the active model for the Copy Editor, Insight Extractor, and Question Curator.
+2. Removed legacy defaults from the argument parsers of all pipeline scripts, standardizing the Master Editor fallbacks to `claude-opus-4-6`.
+3. Fixed stats tracker assignments in `run_enhanced_pipeline.py` and `run_si_pipeline.py` to utilize programmatic variables (e.g., `tracker.track_model_for_step("insight_extractor", insight_model)`), resolving the downstream reporting gap.
+
+**Files Modified**:
+- `docs/session_tracking/PROJECT_STATUS.md` - Updated active feature model listings
+- `docs/session_tracking/scriptReferences.md` - Updated `copy_editor.py`, `question_curator.py`, `insight_extractor.py` documentation
+- `scripts/run_si_pipeline.py` - Cleaned up default `master_editor_model` args and fixed hardcoded model tracking
+- `scripts/run_enhanced_pipeline.py` - Cleaned up default `master_editor_model` args and fixed hardcoded model tracking
+
+---
+
+## Session 294 (2026-03-09): Model Reversions and Micro Analyst Cleanup
+
+**Objective**: Revert Macro and Micro Analyst models to Anthropic equivalents for higher quality and permanently implement the budgeted thinking optimization.
+
+**Problems Identified**:
+- In the previous session, we tested GPT-5.1 for the Micro Analyst to save costs but found its internal reasoning produced significantly fewer explicit tokens and missed the detailed "inner monologue" characteristic of Anthropic models.
+- The Macro Analyst was also temporarily using GPT-5.4, but the user preferred Claude Opus 4.6 for its superior analytical quality.
+- The Micro Analyst still contained a large block of extraneous OpenAI client routing and error handling code that was no longer needed since the GPT migration was aborted.
+
+**Solutions Implemented**:
+1. **Reverted Macro Analyst**: Set `DEFAULT_MODEL` in `macro_analyst.py` back to `claude-opus-4-6`. Updated `run_enhanced_pipeline.py` and `run_si_pipeline.py` default arguments.
+2. **Reverted Micro Analyst**: Set `DEFAULT_MODEL` in `micro_analyst.py` back to `claude-sonnet-4-6`.
+3. **Fixed Token Exhaustion Bug**: Universally applied the 50% `budgeted_thinking` constraint in `micro_analyst.py` regardless of psalm length, fixing the empty text crash for short psalms.
+4. **Code Cleanup**: Stripped out all unused OpenAI integration logic, client initialization, routing conditionals, and API error handling from `micro_analyst.py`.
+
+**Files Modified**:
+- `src/agents/macro_analyst.py` - Reverted to `claude-opus-4-6`.
+- `src/agents/micro_analyst.py` - Reverted to `claude-sonnet-4-6`, removed OpenAI logic, applied universal 50% thinking budget.
+- `scripts/run_enhanced_pipeline.py` - Updated `macro_model` default argument.
+- `scripts/run_si_pipeline.py` - Updated `macro_model` default argument.
+
+---
+
+## Session 293 (2026-03-08): Micro Analyst Token Fallback Investigation
+
+**Objective**: Investigate why Claude Sonnet 4.6 fell back to budgeted thinking on short psalms, causing a costly Stage 1 retry.
+
+**Problems Identified**:
+- In Session 285, an optimization was added to cap the thinking budget at 50% (`use_budgeted_thinking`), but it only applied to psalms with more than 25 verses (`LONG_PSALM_THRESHOLD = 25`).
+- For Psalm 39 (14 verses), the threshold was not met, so the Micro Analyst used unrestricted adaptive thinking.
+- Sonnet 4.6 consumed the entire 64,000 max token budget on thinking alone, returning an empty text block, crashing, and forcing a retry.
+
+**Solutions Implemented**:
+1. Diagnosed the logic flaw in `src/agents/micro_analyst.py`.
+2. Proposed two fixes for the next session (Session 294): either universally apply the 50% thinking budget (remove the threshold) or increase the `max_tokens` limit to 128K for short psalms.
+3. User selected Option 1 (always apply budgeted thinking), to be implemented next session.
+
+**Files Modified**:
+- None in this session (Investigation and planning only).
+
+## Session 292 (2026-03-08): Converse with Editor Upgrades
+
+**Objective**: Fix clipboard pasting on Windows and enable dynamic model selection to ensure accurate LLM pricing estimates.
+
+**Problems Identified**:
+- Original script `converse_with_editor.py` used standard `input()`, which intercepts `Ctrl+V` on Windows as explicit `^V` keystrokes instead of pasting the clipboard text, preventing users from copy-pasting into the dialog.
+- Standard input also evaluated pressing `Enter` as an immediate message submission, blocking users from writing or pasting multi-line paragraphs.
+- Script used hardcoded GPT-5.1 pricing information and hardcoded the `gpt-5.1` string for API calls, limiting flexibility to experiment with other conversational models (e.g. Claude Opus or Gemini) and failing to provide accurate cost tracking for differing models.
+
+**Solutions Implemented**:
+1. Installed and implemented `prompt_toolkit.PromptSession` to replace `input()`, which natively supports multiline text and correctly handles system clipboard pastes on Windows. Set explicit submit triggers to `Alt+Enter` or `Esc` -> `Enter`.
+2. Created an interactive model selection prompt letting the user pick any model defined in the `PRICING` dictionary, dynamically updating estimated costs and the API client.
+3. Added robust client abstraction in `run_conversation` to support streaming from `openai` (GPT), `anthropic` (Claude), and `google.genai` (Gemini) APIs depending on the user's selected model prefix.
+
+**Files Modified**:
+- `scripts/converse_with_editor.py` - Integrated `prompt_toolkit`, dynamic API instantiations, usage extractions, and `CostTracker` dynamic model inputs.
+
+---
+
+## Session 291 (2026-03-08): Nusach Disambiguation — Fix Sefard/Sephardic Confusion
+
+**Problems Identified**:
+- Database metadata labeled Nusach Sefard as "Sephardic/Hasidic," causing LLM writers to call the Hasidic rite "Sephardic"
+- No disambiguation guidance in any writer or librarian prompt — LLMs (and humans) routinely conflate "Sefard" with "Sephardic"
+- Sample output (e.g., Psalm 30) wrote "Ashkenazic, Sefardic, and Mizrachi" when it should distinguish Hasidic from actual Sephardic
+
+**Solutions Implemented**:
+1. **Fixed metadata** in `create_liturgy_db.py` — changed `display_name_english` from `"Sephardic/Hasidic"` to `"Hasidic (Nusach Sefard)"` with corrected description
+2. **Added NUSACH DISAMBIGUATION block** to `MASTER_WRITER_PROMPT_V4` in `master_editor.py` — full explanation of all three traditions with explicit "NEVER call this Sephardic" instruction
+3. **Added compact disambiguation** to both liturgical prompt sections in `synthesis_writer.py` (introduction + verse commentary)
+4. **Added NUSACH NOTE** to both LLM summarization prompts in `liturgical_librarian.py` (phrase-level + full-psalm); fixed deduplication example from "Sefard rite" to "Hasidic (Sefard) rite"
+5. **Updated live `data/liturgy.db`** metadata row in-place (no destructive rebuild)
+
+**Files Modified**:
+- `src/data_sources/create_liturgy_db.py` — Corrected Nusach Sefard metadata label and description
+- `src/agents/master_editor.py` — Added nusach disambiguation block to Stage 2 liturgical section
+- `src/agents/synthesis_writer.py` — Added disambiguation to both liturgical prompt sections
+- `src/agents/liturgical_librarian.py` — Added nusach notes to both LLM summarization prompts, fixed deduplication example
+- `data/liturgy.db` — Updated Sefard metadata row in-place
+
+---
+
+## Session 290 (2026-03-08): Interactive Hebrew Concordance Tool
+
+**Objective**: Implement a standalone interactive CLI tool for Hebrew concordance searching across the Tanakh.
+
+**Solutions Implemented**:
+1. **Created `scripts/concordance_tool.py`** (~600 lines) — menu-driven CLI for searching Hebrew words/phrases across the entire Tanakh. Features:
+   - Input handling: accepts Hebrew with/without diacritics, normalizes to consonantal form
+   - 4 match modes: exact, prefix/suffix variations, substring/root, substring + AI filter
+   - 4 scope options: Tanakh, Torah, Prophets, Writings, or pick specific books
+   - 3 result modes: canonical order, random sample, AI-curated (Claude Haiku 4.5)
+   - Phrase search: consecutive words or same-verse any order
+   - Lexicon lookup: BDB + Klein dictionary entries via Sefaria API
+   - AI commentary: semantic range analysis via Claude Haiku 4.5
+   - AI false-match filter: removes unrelated substring matches using morphological analysis
+   - Cost display: shows token counts and dollar cost after every AI call
+   - Markdown export: saves to `output/concordance/search_{word}_{timestamp}.md`
+   - Post-results loop: refine, new search, export, AI commentary, lexicon lookup
+2. Added `dotenv` loading for `.env` file API key access
+
+**Files Created**:
+- `scripts/concordance_tool.py` — Interactive Hebrew concordance CLI tool
+
+---
+
+## Session 289 (2026-03-08): Session Management Cleanup
+
+**Objective**: Reduce session startup context from ~150KB to ~20KB and eliminate documentation duplication/staleness.
+
+**Problems Identified**:
+- `PROJECT_STATUS.md` (47KB) had duplicate "Recent Work" sections — the numbered list (25 entries) AND a stale "Last 3 Sessions" block (actually 15 sessions, stuck at Session 275)
+- Sessions 223-252 appeared verbatim in both `PROJECT_STATUS.md` and `IMPLEMENTATION_LOG.md`
+- `CLAUDE.md` was stale at Session 181 — 107 sessions behind
+- Session START prompt required reading 3 files (~150KB total context) when only 1 was needed
+- `scriptReferences.md` had stale "6-category" description for copy editor (expanded to 9 in Session 288)
+
+**Solutions Implemented**:
+1. **Restructured `PROJECT_STATUS.md`** — Added Quick Context section (project one-liner, key directories, quick commands), trimmed Recent Work to last 5 sessions only, deleted stale "Last 3 Sessions" block, removed duplicate session history, consolidated Reference Materials. File reduced from 47KB/632 lines to ~10KB/271 lines.
+2. **Rewrote `SESSION_PROMPTS.md`** — Tiered loading: only `PROJECT_STATUS.md` is required reading at startup; `scriptReferences.md`, `TECHNICAL_ARCHITECTURE_SUMMARY.md`, and `IMPLEMENTATION_LOG.md` are listed as "load if needed". Simplified END prompt to update only 2 places instead of 3.
+3. **Refreshed `CLAUDE.md`** — Updated "Recent Major Changes" to sessions 285-289 (was 255-269), updated "Current Status" from Session 181 to 289.
+4. **Fixed `scriptReferences.md`** — Updated `run_copy_editor.py` description from "6-category" to "9-category" error taxonomy.
+
+**Files Modified**:
+- `docs/session_tracking/PROJECT_STATUS.md` — Major restructure (47KB → ~10KB)
+- `docs/session_tracking/SESSION_PROMPTS.md` — Complete rewrite with tiered loading
+- `CLAUDE.md` — Refreshed from Session 181 to 289
+- `docs/session_tracking/scriptReferences.md` — Fixed stale copy editor description
+
+---
+
+## Session 288 (2026-03-07): Copy Editor Expansion — Categories 7-9 & Grammar Bloat Prevention
+
+**Objective**: Expand the copy editor's error taxonomy and the Master Writer's ground rules to catch factual errors, Hebrew grammar bloat, and strained arguments that slipped through in Psalm 38 review.
+
+**Problems Identified**:
+- Copy editor (6 categories) missed four classes of error in Psalm 38: (1) reversed Hebrew word order when citing Ps 22:20, (2) a "descending causal chain" with arrows pointing from effects to causes, (3) incorrect "third-person" label for first-person verses, (4) excessive Hebrew grammar parsing labels (Hiphil perfect, Niphal, etc.) with no interpretive purpose.
+- `max_tokens=32768` was insufficient for the copy editor — output truncated mid-verse-13, losing the Changes section entirely.
+- Unicode box-drawing characters (`═`) in `_print_summary()` crashed on Windows cp1252 console.
+
+**Solutions Implemented**:
+1. Added **Category 7 (Factual/Textual Accuracy)** — verifies claims about biblical texts (word order, grammatical person, shared phrasing).
+2. Added **Category 8 (Hebrew Grammar Bloat)** — removes stem/tense/person annotations that add no interpretive value.
+3. Added **Category 9 (Strained Arguments)** — catches reversed causation, forced categories, non sequitur conclusions, and strained intertextual logic.
+4. Added **Rule 3b (Don't Over-Label Hebrew Grammar)** to `MASTER_WRITER_PROMPT_V4` with before/after examples.
+5. Increased copy editor `max_tokens` from 32768 to 65536.
+6. Fixed Windows encoding crash: replaced `═` with `=` in `_print_summary()`.
+7. Verified: re-run on Psalm 38 caught all 4 original issues plus 5 bonus corrections (9 total changes).
+
+**Files Modified**:
+- `src/agents/copy_editor.py` - Added categories 7-9, increased max_tokens, fixed Windows encoding, updated docstrings and count ranges
+- `src/agents/master_editor.py` - Added Rule 3b (Don't Over-Label Hebrew Grammar) to MASTER_WRITER_PROMPT_V4
+- `docs/session_tracking/scriptReferences.md` - Updated copy_editor.py description to 9-category taxonomy
+
+---
+
+## Session 287 (2026-03-05): Fix SI Pipeline Auto-Detection & Research Trimming
+
+**Objective**: Ensure the `run_si_pipeline.py` script automatically detects special instruction files and correctly generates the trimmed research bundle.
+
+**Problems Identified**:
+- `run_si_pipeline.py` did not automatically load special instructions from `data/special_instructions/` based on the psalm number; it only loaded them if `--special-instruction` was explicitly passed. This resulted in the Master Writer ignoring the instruction entirely.
+- Unlike `run_enhanced_pipeline.py`, the SI pipeline trimmed the research bundle in memory for Insight Extraction but **failed to save it to disk** as `psalm_NNN_research_trimmed.md`, breaking the expected file outputs.
+
+**Solutions Implemented**:
+1. Added auto-detection logic to `run_si_pipeline.py` checking for `data/special_instructions/special_instructions_Psalm_NNN.txt` when no explicit flag is provided. Added an SI status indicator to the startup banner.
+2. Added the missing file generation step to save `psalm_NNN_research_trimmed.md` to disk *before* Insight Extraction runs. Refactored the Insight Extractor block to use this newly trimmed variable instead of unnecessarily re-trimming the bundle.
+
+**Files Modified**:
+- `scripts/run_si_pipeline.py` - Implemented auto-detection of SI files and generation/saving of `research_trimmed.md`.
+
+---
+
+## Session 286 (2026-03-04): Fixing Divine Names Modifier for Eli
+
+**Objective**: Fix the divine names modifier to correctly capture the possessive suffix forms like `אֵלִי` (Eli) without matching improper prefixes.
+
+**Problems Identified**:
+- `אֵלִי` ("My God") wasn't picked up by the Divine Names modifier in Psalm 22 because the Regex for El with Tzere (`_modify_el_tzere`) explicitly demanded a word boundary or punctuation immediately after the Lamed (`ל`), skipping forms with possessive suffixes.
+
+**Solutions Implemented**:
+1. Added a specific regex pattern `pattern_eli` to `_modify_el_tzere` to explicitly match `אֵלִי` (Alef-Tzere-Lamed-Chiriq-Yod) bounded by word boundaries, ensuring proper names like Eli or Elijah are ignored while still modifying the divine reference in Psalm 22:2.
+2. Updated `has_divine_names()` to detect the `אֵלִי` pattern.
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Updated `_modify_el_tzere` and `has_divine_names` with specific `אֵלִי` regex adjustments.
+
+---
+
+## Session 285 (2026-03-04): Micro Agent Optimization — Implementation
+
+**Objective**: Implement the micro agent optimization proposal from Session 284: slim the discovery schema, pass lexical insights to the Writer, reduce thinking budget, and fix multiple pipeline bugs.
+
+**Problems Identified**:
+- Discovery Pass prompt requested 7 per-verse fields; 3 were discarded by Python (`poetic_features`, `lxx_insights`, `puzzles`), 3 were stored but never consumed (`thesis_connection`, `thematic_threads`, `synthesis_notes`). ~65-68% of micro output was dead weight.
+- `lexical_insights.notes` — the richest philological content — was invisible to the Master Writer. Only `commentary[:500]` and `interesting_questions` reached it.
+- `_get_psalm_text()` in `master_editor_v2.py` read `hebrew_text`/`english_text` from micro JSON, but those fields don't exist. Writer received empty Hebrew/English text for all previous runs.
+- `_format_analysis_for_prompt()` in V4 `MasterEditor` used double-escaped `\\n` instead of `\n`, producing single-line output instead of formatted text. Pre-existing bug since Session 269.
+- Master Writer generated "Refined Reader Questions" even when `--include-questions` was NOT used (default skip), because the fallback logic populated questions from macro/micro analysis.
+- Copy editor model not listed in DOCX methodology because `pipeline_stats.json` was saved to disk before the copy editor ran, and the DOCX generator read the stale file.
+- Insight Extractor psalm text builder tried `hebrew_text`/`english_text` from micro JSON (always empty), with a broken fallback that never triggered.
+
+**Solutions Implemented**:
+1. **Slimmed Discovery Prompt**: Removed `poetic_features`, `lxx_insights`, `puzzles`, `macro_relation`, `overall_patterns`, `research_priorities` from JSON schema. Instructed model to fold LXX/poetic/puzzle observations into `lexical_insights.notes` and `observations`.
+2. **Capped observations**: From "2-4 sentences" to "1-2 sentences" (Writer truncates to 500 chars anyway).
+3. **Reduced thinking budget**: 70% → 50% of `max_tokens` for long psalms.
+4. **Lexical insights passed to Writer**: `_format_analysis_for_prompt()` now includes `- phrase: notes` lines per verse.
+5. **Database-backed `_get_psalm_text()`**: New override in V4 `MasterEditor` pulls Hebrew/English from `tanakh.db`.
+6. **Fixed `\\n` bug**: Rewrote `_format_analysis_for_prompt()` using `NL = "\n"` variable to avoid escape issues.
+7. **Question suppression**: Added `suppress_questions` parameter to `write_commentary()` in both `MasterEditor` and `MasterEditorSI`; `_perform_writer_synthesis` intercepts and forces sentinel value so prompt-stripping logic removes all question sections. Pipeline passes `suppress_questions=True` when questions are skipped (default).
+8. **Copy editor stats timing**: Added `tracker.save_json()` after Step 5c (copy editor) and before Step 6 (DOCX) in both pipeline scripts.
+9. **Fixed Insight Extractor psalm text**: Uses database lookup instead of nonexistent micro JSON fields.
+10. **Updated `to_markdown()`**: Renders `lexical_insights` as `phrase: notes` instead of raw dict repr.
+
+**Test Run**: Psalm 134 (3 verses) — full pipeline, no errors, no retries. Micro output: 16,840 chars (all consumed). Writer prompt confirmed: Hebrew/English text present, lexical insights visible per verse, no question sections.
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` — Slimmed `DISCOVERY_PASS_PROMPT`, reduced thinking budget 70%→50%
+- `src/agents/master_editor.py` — Added `write_commentary(suppress_questions)`, `_get_psalm_text()` db override, lexical insights in `_format_analysis_for_prompt()`, fixed `\\n` bug
+- `src/agents/master_editor_si.py` — Added `suppress_questions` parameter, guarded question fallback
+- `src/schemas/analysis_schemas.py` — Marked legacy fields, improved `to_markdown()` for structured lexical insights
+- `scripts/run_enhanced_pipeline.py` — `suppress_questions` plumbing, `skip_questions` guards for question file saving/DOCX inclusion, stats save before DOCX, fixed Insight Extractor psalm text
+- `scripts/run_si_pipeline.py` — Same pipeline fixes (questions, stats timing)
+
+---
+
+## Session 284 (2026-03-04): Micro Agent Cost Investigation & Optimization Proposal
+
+**Objective**: Investigate why Psalm 22's pipeline run cost >$6 (with $3+ from Sonnet 4.6 alone) and propose cost reduction strategies for the micro analyst agent.
+
+**Problems Identified**:
+- Stage 1 (Discovery Pass) was called **3 times** for Psalm 22 due to JSON truncation — the 70%/30% thinking/text budget split left only ~19K tokens for text output, but the model needed ~25K+ tokens. Two retries = 2/3 of the Sonnet 4.6 cost wasted.
+- Multiple output fields (`thesis_connection`, `poetic_features`, `lxx_insights`, `puzzles`) are generated but never consumed by any active downstream agent.
+- `_get_psalm_text()` in `master_editor_v2.py` and Insight Extractor pipeline code read `hebrew_text` and `english_text` from micro JSON, but those fields don't exist in the `VerseCommentary` schema — results in empty strings.
+- `commentary` field is generated at full length (~200-400 words per verse) but the Master Writer truncates it to 500 chars.
+- With Insight Extractor and Question Curator now skipped by default (since Session 280), the only active consumers of micro output are Stage 2 (research requests) and the Master Writer.
+
+**Research Conducted**:
+1. Traced complete data flow from micro JSON through all downstream consumers (Stage 2, Insight Extractor, Question Curator, Master Writer).
+2. Analyzed Psalm 22 log file (`micro_analyst_v2_20260302_225416.log`) — confirmed 3 API calls, each with ~45K thinking tokens + ~25K output tokens.
+3. Documented which JSON fields are used by each consumer and which are dead weight.
+4. Confirmed phonetic transcription is programmatically generated (not LLM), stored in micro JSON as data shuttle, and correctly passed to Master Writer via `_format_phonetic_section()`.
+
+**Deliverable**:
+- Created `docs/architecture/MICRO_AGENT_OPTIMIZATION_PROPOSAL.md` with 5 optimization options (A-E), estimated savings, and recommended implementation order.
+- Key recommendation: Slim the discovery schema (Option A) to prevent retries — expected to reduce micro cost from ~$3.20 to ~$0.77-1.20 per psalm.
+
+**Files Created**:
+- `docs/architecture/MICRO_AGENT_OPTIMIZATION_PROPOSAL.md` — Full optimization proposal with cost analysis
+
+---
+
+## Session 283 (2026-03-03): Fix Divine Name Punctuation Dropping
+
+**Objective**: Investigate and fix an issue where the Hebrew divine name YHWH is being rendered as `ה` instead of `ה׳` (dropping the trailing Geresh) in the final DOCX output.
+
+**Problems Identified**:
+- The `_split_into_grapheme_clusters` function inside both `document_generator.py` and `combined_document_generator.py` uses a regular expression to tokenize Hebrew words into base characters and modifiers. 
+- The regex only included standard Hebrew letters (`\u05D0-\u05EA`), spaces, and maqqef (`\u05BE`) as base characters.
+- Unicode Hebrew punctuation characters like the Geresh (`׳`, U+05F3) and Gershayim (`״`, U+05F4) were excluded from the pattern, causing `re.findall` to silently drop them during the Right-to-Left (RTL) text reversal algorithm.
+
+**Solutions Implemented**:
+1. Added Geresh (`\u05F3`), Gershayim (`\u05F4`), and Paseq (`\u05C0`) to the base character class in the `cluster_pattern` regex in `_split_into_grapheme_clusters`.
+2. Applied the identical regex fix to both `DocumentGenerator` and `CombinedDocumentGenerator`.
+3. Verified the fix locally and generated a successful DOCX output for Psalm 37, confirming the apostrophe is now correctly preserved inline.
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Updated `_split_into_grapheme_clusters` regex.
+- `src/utils/combined_document_generator.py` - Updated `_split_into_grapheme_clusters` regex.
+
+---
+
+## Session 282 (2026-03-03): Fix DOCX Paragraph Spacing for Hebrew Verses
+
+**Objective**: Fix the rendering of Hebrew verse ranges in the generated DOCX document to ensure they flow together with soft line breaks instead of hard paragraph breaks.
+
+**Problems Identified**:
+- Consecutive primarily-Hebrew lines (e.g., multi-verse citations) separated by empty lines in the parsing stage were being treated as separate paragraphs, resulting in unwanted extra paragraph spacing in the DOCX output.
+- `CombinedDocumentGenerator` was missing the `_add_paragraph_with_soft_breaks` and nested formatting helper methods that had been recently added to `DocumentGenerator`.
+
+**Solutions Implemented**:
+1. Refactored `_add_commentary_with_bullets` in both generators to use a `while` loop with lookahead to bridge empty lines between consecutive primarily-Hebrew lines, grouping them into a single soft-broken paragraph.
+2. Copied `_add_paragraph_with_soft_breaks`, `_add_nested_formatting`, and `_add_nested_formatting_with_breaks` from `DocumentGenerator` into `CombinedDocumentGenerator` to maintain feature parity.
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Updated `_add_commentary_with_bullets` bridging logic.
+- `src/utils/combined_document_generator.py` - Updated bridging logic and added missing layout helpers.
+
+---
+
+## Session 281 (2026-03-02): Architectural Documentation Update
+
+**Objective**: Update `TECHNICAL_ARCHITECTURE_SUMMARY.md` and `scriptReferences.md` to reflect recent pipeline enhancements and current system state (V6.5).
+
+**Solutions Implemented**:
+1. Updated `TECHNICAL_ARCHITECTURE_SUMMARY.md` to version V6.5, added the Copy Editor agent to the high-level flow and components list, corrected the pipeline flow diagram to reflect current defaults, and updated LLM references (e.g., Sonnet 4.6 for Micro Analyst, Gemini 3.1 Pro for Figurative Curator).
+2. Updated pipeline control flags documentation to match the new `--exclude` and `--include` semantics.
+3. Updated `scriptReferences.md` to reflect the new default skip behavior, `include`/`skip-copy-editor` flags for `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+
+**Files Modified**:
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Updated to V6.5 and reflected new agents/flow.
+- `docs/session_tracking/scriptReferences.md` - Updated pipeline script descriptions.
+
+---
+
+## Session 280 (2026-03-02): Copy Editor Pipeline Integration
+
+**Objective**: Integrate the copy editor into the main pipeline as a default step, generate DOCX from copy-edited content, and change default behavior for questions/insights.
+
+**Problems Identified**:
+- Copy editor output uses single `\n` between paragraphs; DOCX generator expects `\n\n` — caused missing paragraph spacing in generated DOCX.
+- Pipeline stats `verse_count` is 0 on resumed runs (macro step skipped), causing Methodology section to show "0" for verses analyzed/LXX/phonetic.
+- Extraction regex required `------` before `## Methodological` but some copy-edited files have no dashes — caused duplicate methodology sections in DOCX.
+- Trailing `---` separator sometimes concatenated directly to last paragraph text (no newline) — appeared as visible `---` at end of verse commentary.
+
+**Solutions Implemented**:
+1. Added Step 5b (Copy Editor) and Step 5c (section extraction) to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+2. `_extract_sections_from_copy_edited()` helper parses `copy_edited.md`, extracts intro and verse-commentary sections, and restores `\n\n` paragraph breaks.
+3. Originals preserved with `_pre_copy_edit` suffix before overwriting with copy-edited content.
+4. Changed defaults: questions and insights now skipped by default; added `--include-questions` and `--include-insights` opt-in flags.
+5. Added `--skip-copy-editor` flag (copy editor runs by default).
+6. Added database fallback for `verse_count` in `document_generator.py` Methodology section.
+7. Added `copy_editor` model entry to DOCX Methodology section.
+8. Modified `CopyEditor.__init__` to accept optional external `cost_tracker` for pipeline integration.
+9. Fixed extraction regex to match `## Methodological` with or without preceding dash separator.
+10. Fixed trailing `---` stripping to handle both newline-separated and concatenated cases.
+
+**Files Modified**:
+- `src/agents/copy_editor.py` — added optional `cost_tracker` parameter to `__init__`
+- `scripts/run_enhanced_pipeline.py` — Step 5b/5c, `--skip-copy-editor`, `--include-questions/insights`, default flag changes, extraction regex fixes
+- `scripts/run_si_pipeline.py` — mirrored all pipeline changes for SI parity
+- `src/utils/document_generator.py` — copy_editor model in Methodology; database fallback for verse_count
+
+---
+
+## Session 279 (2026-03-02): Copy Editor Agent
+
+**Objective**: Implement a standalone copy editor agent that applies a 6-category error taxonomy to existing psalm commentary, making targeted corrections while preserving all formatting for downstream DOCX generation.
+
+**Error Categories**: (1) False structural claims, (2) Internal inconsistencies, (3) Form/content confusion, (4) Negative citations, (5) Hebrew script integrity, (6) Weak cross-cultural parallels.
+
+**Architecture**: Two-zone approach — parses `print_ready.md` into PROTECTED zones (headers, psalm text, methodology section — never sent to LLM) and EDITABLE zones (intro essay, liturgical section, verse commentary — sent for editing). Preserves all formatting (bold, italic, backticks, Hebrew text, RTL markers, `---LITURGICAL-SECTION-START---`) programmatically.
+
+**Files Created**:
+- `src/agents/copy_editor.py` — `CopyEditor` class with adaptive thinking, streaming, retry logic (3 attempts with backoff for connection drops), structural validation, diff generation, progress logging
+- `scripts/run_copy_editor.py` — CLI runner supporting batch processing (`python scripts/run_copy_editor.py 36 37 38`), `--dry-run` mode, custom `--input-file`/`--output-dir`/`--model`
+
+**Test Results — Psalm 38** (5 changes, $0.62, ~9.5 min):
+1. Hebrew vowel pointing fix (Cat 5): הוֹחַלְתִּי → הוֹחָלְתִּי
+2. Form/content confusion (Cat 3): removed "thudding like a stone" phonosemantic overreach
+3. Internal inconsistency (Cat 2): "double אַל" corrected per earlier analysis
+4. Redundant definition (Cat 2): polyptoton already defined at v. 3
+5. Redundant definition (Cat 2): Hiphil "causative stem" already defined in intro
+
+**Known Issues Fixed During Session**:
+- Increased `max_tokens` from 16,384 to 32,768 (first run truncated at Verse 14)
+- Switched from deprecated `thinking.type=enabled` to `thinking.type=adaptive`
+- Added retry logic for `httpx.ReadError` on large psalms (Psalm 37 = 62K chars)
+- Added streaming progress logging (phase + char count every 5s)
+- Fixed diff generator to normalize trailing whitespace (eliminated phantom diffs)
+
+**Next Session**: (a) Test DOCX output using copy-edited version, (b) Add `--skip-copy-editor` flag to pipeline scripts.
+
+---
+
+## Session 278 (2026-03-01): Fix Research Stats in Skip-Micro Pipeline Path
+
+**Objective**: Fix incorrect concordance entry counts and missing Torah Temimah commentary counts in the DOCX Methodology section when the pipeline is run with `--skip-micro`.
+
+**Problems Identified**:
+- When `--skip-micro` is used, `_parse_research_stats_from_markdown` is called instead of the live `track_research_bundle`. This function had two bugs causing the Methodology section to show wrong numbers compared to a full run.
+- **Concordance count wrong (99 → 11)**: The regex `### (?:Query|Phrase):` was unanchored, so it accidentally matched `#### Phrase:` sub-headers in the micro analyst section as substrings. It was also counting *queries* rather than summing *results per query*.
+- **Torah Temimah missing (126 → 123)**: The hardcoded `commentary_patterns` list did not include Torah Temimah, so its 3 entries were silently dropped whenever stats were parsed from markdown.
+- The key `'total_queries'` stored in `concordance_results` was a misnomer — it held a query count, not a result count — adding to the confusion.
+
+**Solutions Implemented**:
+1. Replaced the broken concordance regex with `^### .+\((\d+) results` (anchored, MULTILINE) to extract result counts from actual concordance query headers and sum them.
+2. Added `(r'### .*Torah Temimah', 'Torah Temimah')` to the `commentary_patterns` list.
+3. Renamed the stored key from `'total_queries'` to `'total_results'` for clarity.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Fixed concordance regex/summation, added Torah Temimah pattern, renamed key
+
+---
+
+## Session 277 (2026-03-01): Pipeline Skip/Exclude Flag Refactor
+
+**Objective**: Give `--skip-insights` and `--skip-questions` consistent semantics, and add `--exclude-*` counterparts for fully suppressing existing files.
+
+**Problems Identified**:
+- `--skip-questions` had "exclude" semantics (did not regenerate AND did not pass existing file to writer), while `--skip-insights` had "skip" semantics (did not regenerate but DID pass existing file to writer). Inconsistent and confusing.
+- No way to exclude insights from the writer without renaming/deleting the file.
+
+**Solutions Implemented**:
+1. Redefined `--skip-*` flags uniformly: do not regenerate, but use existing file if present.
+2. Added `--exclude-insights` and `--exclude-questions` flags: do not regenerate AND do not pass existing file to writer (or word doc generator).
+3. Changed `--skip-questions` generation gate to `skip_questions or exclude_questions` so both flags suppress curation.
+4. Fixed the word doc step and refined-questions save step to gate on `exclude_questions` instead of `skip_questions`.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Added `exclude_insights`/`exclude_questions` params, updated all gating logic and argparse.
+
+---
+
+## Session 276 (2026-03-01): Complex Script Font Fix (Docx Generation)
+
+**Objective**: Fix the `python-docx` rendering issue that caused Hebrew text at the beginning of the generated Word document to display in 11pt instead of the intended 12pt.
+
+**Problems Identified**:
+- The `python-docx` library's standard `run.font.size` property only applies to Latin text (the `w:sz` XML element).
+- Microsoft Word considers Hebrew a "Complex Script" and requires the `w:szCs` (Complex Script Size) XML element to be explicitly set. Since it was missing, Word fell back to the 11pt default size for the Hebrew verse text.
+
+**Solutions Implemented**:
+1. Added explicit OxmlElement manipulation to inject the `w:szCs` tag with a value of '24' (12pt measured in half-points) to both the Hebrew verse numbers and the Hebrew text in the docx compilation.
+2. Regenerated the `psalm_038_commentary.docx` explicitly to verify the font size fix.
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Explicitly set `w:szCs` to 24 half-points for the Hebrew format block.
+- `src/utils/combined_document_generator.py` - Applied the identical `w:szCs` fix to the combined variant generator.
+
+---
+
+## Session 275 (2026-02-26): Gemini 3.1 Pro Preview Migration
+
+**Objective**: Migrate all hardcoded references of the deprecated `gemini-3-pro-preview` model to `gemini-3.1-pro-preview`.
+
+**Problems Identified**:
+- Google announced the deprecation of Gemini 3 Pro Preview effective March 9, 2026, recommending a migration to Gemini 3.1 Pro Preview.
+- The `gemini-3-pro-preview` model was explicitly hardcoded in the `FigurativeCurator` agent and its associated cost tracking/pipeline scripts, rather than using the `-latest` alias.
+- High thinking config was verified via web search to still be `thinking_level="high"`, requiring no code changes for reasoning depth.
+
+**Solutions Implemented**:
+1. Renamed model strings in the agent configuration, cost tracking prices, and pipeline analytic calls to explicitly use `"gemini-3.1-pro-preview"`.
+
+**Files Modified**:
+- `src/agents/figurative_curator.py` - Updated `active_model` property and `generate_content` API call to explicitly use `gemini-3.1-pro-preview`.
+- `src/utils/cost_tracker.py` - Renamed the pricing dictionary key from `gemini-3-pro-preview` to `gemini-3.1-pro-preview`.
+- `scripts/run_enhanced_pipeline_with_synthesis.py` - Updated pipeline model usage tracking string.
+- `scripts/run_si_pipeline_with_synthesis.py` - Updated pipeline model usage tracking string.
+
+---
+
+## Session 274 (2026-02-26): Divine Names Modifier Punctuation Fix
+
+**Objective**: Fix inconsistent conversion of 'El' to 'Kel' when followed by punctuation.
+
+**Problems Identified**:
+- The regex pattern `_modify_el_tzere` in `divine_names_modifier.py` failed to account for punctuation marks in its word boundary check. As a result, when "אֵל" was immediately followed by a comma, semicolon, or other punctuation (e.g., in Psalm 36), it was not converted to "קֵל".
+
+**Solutions Implemented**:
+1. Expanded the word boundaries in the regex pattern to include standard punctuation marks, quotes, and brackets: `(^|[\s\-\u05BE*_.,;:!?\"\'()\[\]{}])אֵ([\u0591-\u05C7]*)ל(?=[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]|$)`
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Updated the regex pattern in `_modify_el_tzere`.
+
+---
+
+## Session 273 (2026-02-26): Increase Hebrew Font Size in DOCX Generation
+
+**Objective**: Increase the font size of the Hebrew psalm text at the beginning of the generated DOCX files from the default 11pt to 12pt for better readability.
+
+**Solutions Implemented**:
+1. **Font Size Adjustment**: Modified `_format_psalm_text` in both document generators to explicitly set `font.size = Pt(12)` on the run containing the Hebrew text and the verse number.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added explicit 12pt font size for Hebrew psalm text.
+- `src/utils/combined_document_generator.py` — Added explicit 12pt font size for Hebrew psalm text.
+
+---
+
+## Session 272 (2026-02-25): Skip Questions Flag for Master Writer
+
+**Objective**: Add `--skip-questions` CLI flag to allow running the Master Writer without the Reader Questions section, enabling faster/cheaper re-runs focused on commentary only.
+
+**Solutions Implemented**:
+1. **Pipeline flag (`run_enhanced_pipeline.py`)**: Added `skip_questions: bool = False` parameter and `--skip-questions` CLI flag. When active: skips Question Curator step entirely, passes `reader_questions_file=None` to writer, skips refined question extraction from output, forces `q_file=None` for DOCX generation (even if old question files exist on disk).
+2. **Prompt surgery (`master_editor.py`)**: In `_perform_writer_synthesis()`, when `reader_questions` is empty or placeholder, applies 6 surgical string replacements that remove every question reference from the V4 prompt: the `### READER QUESTIONS` input block, "AND CONNECT TO READER QUESTIONS" from the hook instruction, the Validation Check for reader questions, STAGE 4: Refined Reader Questions output instruction, the `### REFINED READER QUESTIONS` output format section, and the reader questions line from the final checklist. All 11 question references → 0 after stripping.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` — Added `skip_questions` parameter, `--skip-questions` CLI flag, skip logic for Question Curator step and DOCX question file
+- `src/agents/master_editor.py` — Added 6 string replacements in `_perform_writer_synthesis()` to strip all question references when questions are empty/placeholder
+
+---
+
+## Session 271 (2026-02-24): Pipeline Robustness — Token Truncation & Model Hygiene
+
+**Objective**: Fix a cascade of token truncation crashes when running Psalm 37 (40-verse acrostic), and enforce Opus 4.6 across all agents.
+
+**Problems Identified**:
+- MacroAnalyst crashed with `Invalid JSON from MacroAnalyst: Unterminated string` — response truncated mid-JSON because Opus 4.6 adaptive thinking + text shared a 32K token budget
+- MicroAnalyst discovery pass crashed with `Empty text block received` — adaptive thinking consumed all 65K tokens, leaving zero for the JSON output
+- InsightExtractor wrote a silent `{"error": "JSON parse failed"}` fallback — `max_tokens=4000` too small for a 40-verse psalm; no retry logic; no thinking at all
+- InsightExtractor verse count estimated from newlines (`// 3`) overestimated by 67% (yielded 67 for a 40-verse psalm) due to multi-line verse block format
+- QuestionCurator used `temperature=0.7` (incompatible with thinking) and no adaptive thinking despite being Opus 4.6
+- `master_editor_v2.py` (base class still in active use) had deprecated `thinking.type=enabled` for Opus 4.6, generating `UserWarning` on every run
+- `master_editor_v2.py` and pipeline scripts hardcoded `claude-opus-4-5` model references
+- Pipeline header showed `TEST - MASTER WRITER` and `Master Writer Model: gpt-5.1`
+
+**Solutions Implemented**:
+1. **MacroAnalyst truncation fix**: Raised default `max_tokens` 32K→48K; added `stop_reason == 'max_tokens'` detection that retries with 1.5× budget instead of crashing
+2. **MicroAnalyst empty-response fix**: Added `use_budgeted_thinking` flag; long psalms (>25 verses) start with budgeted thinking capped at 70% of `max_tokens`, guaranteeing 30% for JSON output; adaptive thinking failures now retry with budgeted mode instead of crashing
+3. **InsightExtractor overhaul**: Switched from `messages.create()` to streaming; added `thinking={"type": "adaptive"}`; scaled `max_tokens` from actual verse count (from `micro_analysis.verse_commentaries`); added `stop_reason` truncation detection with 1.5× retry; JSON parse failures now retry with more tokens instead of silently returning empty structure
+4. **QuestionCurator thinking**: Removed `temperature=0.7`; added `thinking={"type": "adaptive"}`; switched to streaming; bumped `max_tokens` 2K→4K; cost tracking now includes `thinking_tokens`
+5. **Model hygiene**: Fixed deprecated `thinking.type=enabled` → `adaptive` in `master_editor_v2.py` for the Opus 4.6 writer path; updated hardcoded `claude-opus-4-5-20250514` → `claude-opus-4-6` in `_call_claude_main` and `_call_claude_college`; removed `claude-opus-4-5` from `choices` lists in both production pipeline scripts; fixed `run_si_pipeline.py` default model from `gpt-5.1` → `claude-opus-4-6`
+6. **Pipeline header**: Removed `(TEST - MASTER WRITER)` label; corrected `Master Writer Model` default from `gpt-5.1` to `claude-opus-4-6` in both function signature and argparse
+
+**Files Modified**:
+- `src/agents/macro_analyst.py` — truncation detection + retry, raised default max_tokens to 48K
+- `src/agents/micro_analyst.py` — budgeted thinking for long psalms (>25 verses), empty-response retry
+- `src/agents/insight_extractor.py` — adaptive thinking, streaming, verse-count-scaled tokens, retry on truncation/JSON failure, fixed verse count source
+- `src/agents/question_curator.py` — adaptive thinking, streaming, removed temperature
+- `src/agents/archive/master_editor_v2.py` — `enabled`→`adaptive` for Opus 4.6 path; `opus-4-5`→`opus-4-6` in hardcoded calls and model mapping
+- `scripts/run_enhanced_pipeline.py` — removed `TEST - MASTER WRITER` label, fixed default model to `claude-opus-4-6`
+- `scripts/run_si_pipeline.py` — fixed default model to `claude-opus-4-6`, removed `claude-opus-4-5` from choices
+
+---
+
+## Session 270 (2026-02-24): Unified Writer V4 Documentation Updates
+
+**Objective**: Update project documentation to reflect the new Unified Writer V4 architecture from Session 269.
+
+**Solutions Implemented**:
+1. Merged V4 unified prompt documentation into `TECHNICAL_ARCHITECTURE_SUMMARY.md`.
+2. Updated `PROJECT_STATUS.md` and `scriptReferences.md` to reflect V4 as the new default architecture and mark college/combined scripts as deprecated.
+3. Created session records for Session 269 and 270 to ensure log completeness.
+
+**Files Modified**:
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Reflected Unified Writer V4.
+- `docs/session_tracking/PROJECT_STATUS.md` - Added Session 269 & 270 summaries.
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` - Added recent session logs.
+- `docs/session_tracking/scriptReferences.md` - Updated master writer descriptions.
+- `CLAUDE.md` - Verified V4 sync.
+
+---
+
+## Session 269 (2026-02-24): Unified Writer V4 — Merge Main + College
+
+**Objective**: Merge the Main and College commentary prompts into a single `MASTER_WRITER_PROMPT_V4` to eliminate redundancy and halve the pipeline cost, while retaining the depth of the Main edition and the pedagogical clarity of the College edition.
+
+**Rationale**: The outputs for Main and College editions were converging in quality. Maintaining two prompts doubled the API cost without a proportional benefit. A unified "scholar at dinner" tone serves both audiences better.
+
+**Changes Implemented**:
+1. **Unified Prompt (`MASTER_WRITER_PROMPT_V4`)**:
+   - **Audience**: "Intelligent, curious readers with Hebrew proficiency"
+   - **Tone**: "Scholar at dinner — relaxed, precise, occasionally witty, never performing"
+   - **Ground Rules**: Merged the 11 Main rules with College's "Make Connections Explicit" rule (now 12 rules).
+   - **Items of Interest**: Retained all 12 items from Main V3, weaving in pedagogical framing where helpful.
+2. **Pipeline Simplification**:
+   - Removed Steps 4b (College Writer), 6b (College DOCX), and 6c (Combined DOCX) from `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+   - Made the `--skip-college` and `--skip-combined-doc` flags silent no-ops for backward compatibility.
+3. **Agent Refactoring**:
+   - `MasterEditor`: Completely rewritten to use the V4 prompt. Simplified the class and added backward-compatibility aliases (`MASTER_WRITER_PROMPT_V3 = MASTER_WRITER_PROMPT_V4`).
+   - `MasterEditorSI`: Rewritten for V4. Removed `write_college_commentary()` method.
+   - `master_editor_v2.py` (Archive): Added `is_college: bool = False` default for backward compatibility.
+   - `master_editor_v3_prompts.py` (Archive): Created full archive of both V3 Main and V3 College prompts.
+4. **Interactive Tools**:
+   - `converse_with_editor.py`: Made `--edition` flag a hidden no-op with a deprecation notice.
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Complete rewrite for V4 unified prompt.
+- `src/agents/master_editor_si.py` - Rewritten for V4.
+- `src/agents/archive/master_editor_v2.py` - Compatibility updates.
+- `src/agents/archive/master_editor_v3_prompts.py` - **[NEW]** Archive of V3 prompts.
+- `scripts/run_enhanced_pipeline.py` - Removed college steps.
+- `scripts/run_si_pipeline.py` - Removed college steps.
+- `scripts/converse_with_editor.py` - Deprecated edition flag.
+
+
+## Session 268 (2026-02-23): Fix SI Pipeline for Opus 4.6 Re-runs
+
+**Objective**: Ensure `run_si_pipeline.py` works correctly when skipping earlier pipeline steps and using Opus 4.6 for the Master Writer.
+
+**Problems Identified**:
+- SI pipeline fatally exited (`sys.exit(1)`) when `--skip-writer` was used but main SI output files didn't yet exist, blocking the college writer from running independently.
+- Commentary pattern regex in SI pipeline still used exact match (`r'### Rashi'`) instead of the Session 265 fix (`r'### .*Rashi'`), causing "Traditional Commentaries Reviewed" to show N/A in DOCX methodology section.
+- College writer step never called `tracker.track_model_for_step()`, so the DOCX incorrectly reported the model from the previous pipeline run (e.g., `gpt-5.1` instead of `claude-opus-4-6`).
+
+**Solutions Implemented**:
+1. Replaced fatal `sys.exit(1)` with a warning when main SI files are missing on `--skip-writer`, matching `run_enhanced_pipeline.py` behavior. Downstream steps now proceed gracefully.
+2. Synced commentary pattern regex from Session 265 fix — all 7 commentator patterns now use `r'### .*Name'` to match verse-prefixed headers.
+3. Added `tracker.track_model_for_step("master_writer", master_editor.model)` after the college writer completes, so the DOCX correctly reports the actual model used.
+
+**Files Modified**:
+- `scripts/run_si_pipeline.py` - Fixed fatal exit on missing SI files, synced commentary regex patterns, added college writer model tracking.
+
+---
+
+## Session 267 (2026-02-23): Fix Question Generator Model Attribution
+
+**Objective**: Ensure the "Question Generator" model is correctly identified and listed in the Methodological & Bibliographical Summary of the DOCX outputs.
+
+**Problems Identified**:
+- The `Question Generation` key was entirely missing from the DOCX Methodological & Bibliographical summary due to a missing attribution key in the document generators, causing `gpt-5.1` (the Editorial Review model which appeared last) to be incorrectly interpreted as the question generator.
+
+**Solutions Implemented**:
+1. Renamed the reporting label from "Question Generation" to "Question Generator" across the formatting scripts to match preferred terminology.
+2. Ensured the correct programmatic key (`question_curator`) is explicitly printed in the Methodological & Bibliographical Summary for all document outputs (Markdown, Main DOCX, College DOCX, Combined DOCX).
+
+**Files Modified**:
+- `src/utils/commentary_formatter.py` - Updated attribution label.
+- `src/utils/document_generator.py` - Added missing `question_curator` attribution logic and updated label.
+- `src/utils/combined_document_generator.py` - Added missing `question_curator` attribution logic and updated label.
+
+---
+
+## Session 266 (2026-02-23): Fix College Edition Pipeline Bugs & Master Writer Error Handling
+
+**Objective**: Ensure the College Edition word document generates correctly by fixing pipeline skipping logic and silent variable initialization errors.
+
+**Problems Identified**:
+- The trimmed research markdown (`psalm_XXX_research_trimmed.md`) was skipped entirely if `skip_insights` was active or an insights file already existed.
+- When the Main Writer was skipped (`--skip-writer`), the College Writer step crashed with a silent `NameError` because it checked for the `master_editor` variable using `locals().get()`, which failed due to Python scoping rules. The error was swallowed by the logger, preventing the College DOCX from being generated.
+
+**Solutions Implemented**:
+1. Decoupled `research_trimmer` from the insight extraction condition in Step 2c, ensuring the trimmed research bundle is always generated.
+2. Replaced the faulty `locals()` check for `master_editor` in Step 4b with a robust `try...except NameError` block.
+3. Added explicit terminal printing for College Writer exceptions so they don't fail silently.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Moved `trim_bundle` logic up, fixed `master_editor` variable initialization, added print statements for error handling.
+
+---
+
+## Session 264 (2026-02-20): Sonnet 4.6 for Micro Analyst (Cost Reduction)
+
+**Objective**: Replace Claude Opus 4.6 with the new Claude Sonnet 4.6 for the micro analyst agent to reduce per-psalm costs while maintaining high thinking quality.
+
+**Solutions Implemented**:
+1. **Model Swap**: Changed `MicroAnalystV2.DEFAULT_MODEL` from `claude-opus-4-6` to `claude-sonnet-4-6`. Adaptive thinking (`type: "adaptive"`) and `effort=max` configuration remain unchanged.
+2. **Cost Tracker**: Added `claude-sonnet-4-6` pricing entry ($3/$15/$15 per MTok for input/output/thinking — same as Sonnet 4.5, 40% cheaper than Opus 4.6).
+3. **Verification**: Ran full pipeline on Psalm 36 (`--skip-macro --skip-college`). Confirmed `pipeline_stats.json` correctly records `"micro_analysis": "claude-sonnet-4-6"`. Actual cost for micro step: $1.16 (Sonnet 4.6) vs estimated $1.93 (Opus 4.6) — 40% savings.
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` — Changed `DEFAULT_MODEL` to `claude-sonnet-4-6`, updated docstring and log messages.
+- `src/utils/cost_tracker.py` — Added `claude-sonnet-4-6` pricing entry.
+- `docs/session_tracking/scriptReferences.md` — Updated micro_analyst description to reflect Sonnet 4.6.
+
+---
+
+## Session 263 (2026-02-19): Fix Mixed-Script DOCX Jumble (Arabic + English/Hebrew)
+
+**Objective**: Fix garbled text in DOCX output when a paragraph contains mixed Arabic, Hebrew, and English text (e.g., the Imru' al-Qais *qasida* quote in Psalm 100 Verse 5 commentary).
+
+**Problems Identified**:
+- **Mixed-script run corruption**: `_fix_complex_script_fonts()` applied `w:rtl` to entire runs containing Arabic characters, even when those runs also contained English and Hebrew text. Word then treated all text in the run as RTL base direction, causing English prose to be reordered/jumbled.
+- **Root cause**: The post-processing pass had no concept of mixed-script runs — it treated any run with Arabic characters as a pure Arabic run.
+
+**Solutions Implemented**:
+1.  **Run-splitting for mixed Arabic/non-Arabic content**:
+    - Added `_split_text_by_script()` static method that splits text into segments of Arabic vs non-Arabic characters.
+    - Updated `_fix_complex_script_fonts()` to detect mixed-script runs (containing both Arabic letters and non-Arabic letters).
+    - For mixed runs: splits into multiple OOXML `w:r` elements, each preserving the original run's formatting (bold, italic, font, size via deep-copied `w:rPr`).
+    - Arabic-only segments get `w:rtl` + CS font (`Times New Roman`); non-Arabic segments explicitly have `w:rtl` removed.
+    - Pure Arabic runs (no non-Arabic letters) continue to be handled directly without splitting.
+2.  **Applied to both document generators**: `document_generator.py` and `combined_document_generator.py`.
+3.  **Verification**: Regenerated Psalm 100 DOCX and confirmed via XML inspection that Arabic words (`عَبَدَ`, `قِفَا`, `نَبْكِ`, etc.) each have their own RTL-marked runs while surrounding English/Hebrew text has no `w:rtl` flag.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added `_split_text_by_script()`, rewrote `_fix_complex_script_fonts()` with run-splitting logic.
+- `src/utils/combined_document_generator.py` — Same changes applied for consistency.
+
+---
+
+## Session 265 (2026-02-22): Fixing Traditional Commentaries Counts
+
+**Objective**: Fix the bug causing "N/A" to appear for "Traditional Commentaries Reviewed" in the generated DOCX file.
+
+**Problems Identified**:
+- When the enhanced pipeline resumed using a previously generated research bundle (e.g. via `--skip-micro`), the regex pattern `r'### Rashi'` failed to find any matches.
+- This was because `ResearchAssembler` prefixes the commentator headings in the markdown with the verse reference (e.g. `### 36:1 — Rashi`), breaking the exact match regex.
+
+**Solutions Implemented**:
+1. Updated the regex patterns in `_parse_research_stats_from_markdown` to include `.*` before the commentator's name, allowing it to successfully match headings that include verse references (e.g. `r'### .*Rashi'`).
+2. Verified the fix by successfully regenerating the DOCX for Psalm 36, confirming that the "Traditional Commentaries Reviewed" section correctly outputs the count of commentaries consulted.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Updated `commentary_patterns` regex to allow for verse prefix matching.
+
+---
+
+## Session 262 (2026-02-18): Opus 4.6 for Master Writer
+
+**Objective**: Integrate Claude Opus 4.6 into the Master Writer pipeline to improve commentary quality, addressing a "Streaming is required" error due to long generation times.
+
+**Problems Identified**:
+- **Streaming Requirement**: Opus 4.6 generations exceeded the standard timeout, causing `httpx.ReadTimeout` errors and returning a "Streaming is required" error message from the API.
+- **Model Availability**: The pipeline scripts and `MasterEditor` argument parsers needed updates to explicitly support and track `claude-opus-4-6`.
+
+**Solutions Implemented**:
+1.  **Streaming Implementation**:
+    -   Modified `_call_claude_writer` in `src/agents/archive/master_editor_v2.py` (which is inherited/used by `MasterEditor`) to use `client.messages.stream`.
+    -   Implemented a `StreamAccumulator` pattern to capture the full response similarly to the non-streaming version.
+    -   Added the recommended `thinking={"type": "adaptive", "budget_tokens": 16000}` configuration (and later updated to `thinking={"type": "adaptive"}` based on deprecation warning, though code currently uses a compatible approach).
+2.  **Pipeline Integration**:
+    -   Updated `src/agents/archive/master_editor_v2.py` CLI arguments to include `claude-opus-4-6`.
+    -   Verified `scripts/run_enhanced_pipeline.py` passes the model argument correctly.
+3.  **Verification**:
+    -   Ran a full test on Psalm 100 with `--master-editor-model claude-opus-4-6`.
+    -   Confirmed `pipeline_stats.json` records the correct model.
+    -   Confirmed `document_generator.py` reflects "Commentary (Master Writer): claude-opus-4-6" in the Methodological Summary.
+
+**Files Modified**:
+- `src/agents/archive/master_editor_v2.py` — Implemented streaming for `_call_claude_writer`, updated CLI args.
+- `scripts/run_enhanced_pipeline.py` — (Verified support, no major logic change needed for basic integration).
+
+---
+
+## Session 261 (2026-02-18): Literary Echoes Integration Fix
+
+**Objective**: Fix the issue where "Literary Echoes" were missing from the Main (Master) Writer output despite being enabled in the pipeline.
+
+**Problems Identified**:
+- **Missing Content**: "Cross-Cultural Literary Echoes" section appeared in College Edition but not Main Edition.
+- **Root Cause**: The `MASTER_WRITER_PROMPT_V3` contained strict rules ("Rule 9: Depth Beats Breadth" and "Universalism Check") that filtered out broad cultural comparisons unless they were strictly "transporting." The College prompt was more permissive.
+- **Verification**: Debug prompts confirmed the data *was* present in the input, but the LLM effectively ignored it due to the "Depth" rule.
+
+**Solutions Implemented**:
+1.  **Prompt Engineering (Master Writer)**:
+    - **Rule 9 Exception**: Explicitly added an exception to "Depth Beats Breadth" for "striking cross-cultural literary echoes."
+    - **Instruction Update**: Rewrote the "Cross-Cultural Literary Echoes" item to encourage inclusion ("Avoid cheap universalism" but "DO NOT ignore high-quality parallels").
+    - **Explicit Input**: Added "Cross-Cultural Literary Echoes" to the `## RESEARCH MATERIALS` input header to signal its importance.
+2.  **Prompt Engineering (College Writer)**:
+    - applied similar updates to the College prompt to align instructions and ensure consistent labeled inputs.
+3.  **SI Agent Alignment**: Verified that `AnswerEditorSI` instructions inherit these changes automatically via import.
+
+**Files Modified**:
+- `src/agents/master_editor.py` — Updated `MASTER_WRITER_PROMPT_V3` and `COLLEGE_WRITER_PROMPT_V3`.
+
+---
+
+## Session 260 (2026-02-16): Fix Arabic Font Rendering
+
+**Objective**: Fix the rendering of Arabic text in generated DOCX files, which was appearing as empty squares due to missing Complex Script (CS) font instructions and Right-to-Left (RTL) markers.
+
+**Problem Analysis**:
+- Arabic text requires a specific "Complex Script" font (like Times New Roman or Arabic Typesetting) to be set via the `w:cs` attribute.
+- Simply setting the font name via `run.font.name` primarily affects the ASCII/High-ANSI slots, often ignored for Arabic.
+- **Critical Discovery**: Word is extremely strict about OOXML schema ordering. The `<w:rFonts>` element **must** be the first child of `<w:rPr>`. The initial fix attempt failed because it appended `w:rFonts` to the end of the properties list, causing Word to silently ignore it.
+- Additionally, the `<w:rtl/>` property is required to trigger correct shaping behavior.
+
+**Solutions Implemented**:
+1.  **Refined Font Application Logic**:
+    - Updated `_fix_complex_script_fonts` in `document_generator.py` and `combined_document_generator.py`.
+    - Logic now ensures `<w:rFonts>` is **inserted at index 0** of the run properties (`rPr`) to satisfy schema requirements.
+    - Sets `w:cs="Times New Roman"` (a reliable standard Windows font with Arabic support).
+    - Explicitly adds the `w:rtl` property to runs containing Arabic characters.
+
+2.  **Verification**:
+    - Created reproduction scripts (`debug_arabic_font.py`) and XML verification tools (`verify_xml_rtl_v2.py`).
+    - Verified that generated DOCX files now contain correctly ordered XML: `<w:rPr><w:rFonts .../><w:rtl/>...</w:rPr>`.
+    - Confirmed visual rendering of Arabic text (Literary Echoes) is correct.
+
+3.  **Experimental CJK Support**:
+    - Extended font fixer to also detect CJK characters (Unified Ideographs, Hiragana, Katakana).
+    - Sets `w:eastAsia="DengXian"` for these runs (no RTL needed).
+    - Verified with Chinese/Japanese test text.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Updated `_fix_complex_script_fonts` with `insert(0)` logic.
+- `src/utils/combined_document_generator.py` — Updated `_fix_complex_script_fonts` with `insert(0)` logic.
+
+---
+
+## Session 259 (2026-02-16): Cross-Cultural Literary Echoes Feature
+
+**Objective**: Create a new "Literary Echoes" pipeline feature to integrate cross-cultural literary comparisons from Gemini Deep Research into psalm commentaries, and fix Arabic font rendering in DOCX output.
+
+**Solutions Implemented**:
+1. **Literary Echoes Prompt** — Created `docs/prompts_reference/literary_echoes_prompt.md` with detailed Gemini Deep Research prompt for generating cross-cultural literary comparisons (4-10 verse clusters, 8-20 comparisons per psalm, original-language quotations required)
+2. **Pipeline Integration** — Modified `research_assembler.py` to load `.txt` files from `data/literary_echoes/`, added `literary_echoes_content` and `literary_echoes_included` fields to `ResearchBundle`, integrated as `## Cross-Cultural Literary Echoes` section in the research bundle markdown
+3. **Pipeline Summary Tracking** — Added `literary_echoes_available`, `literary_echoes_included`, and `literary_echoes_chars` fields to `ResearchStats` dataclass in `pipeline_summary.py`
+4. **Methods Section Reporting** — Added "Literary Echoes Research" status line to Methods section in both `document_generator.py` and `combined_document_generator.py`
+5. **Arabic Font Fix (Partial)** — Added `_fix_complex_script_fonts()` post-processing method to both document generators that detects Arabic text in runs and sets `w:rFonts/@w:cs` to "Times New Roman" at the run level. Fix detects and patches runs but does not fully resolve rendering — deferred to next session.
+
+**Problems Identified**:
+- Arabic/Persian text from literary echoes renders as empty boxes in DOCX. Aptos font lacks Arabic glyphs. Style-level CS font override insufficient because `python-docx`'s `font.name` setter overrides `w:cs` at run level. Run-level post-processing fix detects Arabic runs (confirmed: "Fixed complex-script fonts on 2 run(s)") but rendering issue persists — requires deeper investigation in next session.
+
+**Files Modified**:
+- `docs/prompts_reference/literary_echoes_prompt.md` — **[NEW]** Gemini Deep Research prompt for literary echoes
+- `data/literary_echoes/README.md` — **[NEW]** Documentation for literary echoes data directory
+- `data/literary_echoes/psalm_036_literary_echoes.txt` — **[NEW]** Generated echoes for Psalm 36
+- `src/agents/research_assembler.py` — Added literary echoes loading, fields, and markdown integration
+- `src/utils/pipeline_summary.py` — Added literary echoes tracking fields to ResearchStats
+- `src/utils/document_generator.py` — Added Literary Echoes Methods status + `_fix_complex_script_fonts()` post-processing
+- `src/utils/combined_document_generator.py` — Added Literary Echoes Methods status + `_fix_complex_script_fonts()` post-processing
+
+---
+
+## Session 258 (2026-02-12): Token Reduction Phase B — Bundle Compaction
+
+**Objective**: Implement Phase B token reduction tasks (B1-B4) from `docs/architecture/TOKEN_REDUCTION_PHASE_B.md` to further reduce per-psalm pipeline cost.
+
+**Wins Implemented**:
+
+1. **B1 (Win 4) — Related psalms: no full texts + telegraphic preamble** (`related_psalms_librarian.py`):
+   - Added `include_full_text: bool = False` parameter to `format_for_research_bundle()`
+   - Default behavior now omits full Hebrew text of related psalms, keeping relationship metadata + shared patterns
+   - Rewrote `_build_preamble()` telegraphically: 2,417 → 615 chars (75% reduction)
+   - Preserved essential Ps25+34 diptych example in compact form
+   - Measured total savings on PS34: 49,005 → 34,286 chars = **14,719 chars saved (30%)**
+
+2. **B2 (Win 2) — BDB truncation to ~500 chars** (`research_assembler.py`):
+   - Added `_truncate_bdb_entry()` helper function (finds natural break at newline or period)
+   - Applied to `entry.entry_text` in `to_markdown()` lexicon section
+   - Small buffer (600 chars) avoids cutting entries that are only slightly over limit
+   - Estimated savings: ~21K chars (25 entries × ~1,900 chars saved each)
+
+3. **B3 (Win 6) — Compact markdown formatting** (`research_assembler.py`):
+   - **Lexicon**: Merged 4 separate metadata lines into single header: `### טַעַם [BDB H2940] *ta'am*`; Klein data on one line
+   - **Concordance**: Merged header metadata into title line; inline result format replacing multi-line per-result blocks
+   - **Commentary**: Merged verse/commentator into single header; removed redundant "Why this verse" label formatting
+   - Removed Sefaria URL links from lexicon entries (not used by downstream agents)
+
+4. **B4 (Win 9) — Telegraphic macro/micro prompts** (`macro_analyst.py`, `micro_analyst.py`):
+   - Added "WRITING STYLE" section to macro analyst prompt: fragments over sentences, drop articles/filler, no transitions
+   - Added "WRITING DENSITY" section to micro analyst prompt: dense notation, no hedging phrases
+   - Both exceptions preserve complete sentences where JSON schema requires them (e.g., thesis_statement)
+
+**Files Modified**:
+- `src/agents/related_psalms_librarian.py` — B1 (include_full_text param, preamble text)
+- `src/agents/research_assembler.py` — B2 + B3 (_truncate_bdb_entry, compact markdown)
+- `src/agents/macro_analyst.py` — B4 (telegraphic writing instructions)
+- `src/agents/micro_analyst.py` — B4 (writing density instructions)
+
+**Verification**:
+- All 4 files pass Python syntax checks
+- Module imports succeed
+- `_truncate_bdb_entry()` tested: 2,720 chars → 481 chars with clean line break
+- Related psalms measured: PS34 total 49,005 → 34,286 chars (30% reduction)
+- Preamble measured: 2,417 → 615 chars (75% reduction)
+
+**Post-Run Review (PS35)**:
+- Micro analyst output IS telegraphic — fragments, dense notation, no filler
+- Macro analyst output was NOT telegraphic — full prose despite instruction. Fix: strengthened prompt with "MANDATORY" header, concrete before/after examples, repositioned to end of prompt
+- Extended thinking (~15K chars) was being dumped into `working_notes` JSON field — removed (no downstream consumer uses it since S257 `include_working_notes=False`)
+- Figurative section had 80 lines of `*Confidence*: 0.XX` — removed from `to_markdown()` output
+
+**Additional Files Modified**:
+- `src/agents/macro_analyst.py` — removed extended thinking dump from working_notes; strengthened telegraphic instruction
+- `src/agents/research_assembler.py` — removed figurative confidence score line
+
+---
+
+## Session 257 (2026-02-12): Token Reduction Phase A — Zero-Risk Quick Wins
+
+**Objective**: Reduce per-psalm pipeline cost (~$5 for PS34) by auditing all content passed to LLM agents and eliminating waste. Phase A implements zero-risk changes; Phase B (BDB truncation, related psalms trimming, compact markdown, telegraphic outputs) deferred to next session.
+
+**Analysis Findings** (PS34 research bundle: 291,731 chars):
+- Hebrew Lexicon (BDB): 33,677 (11.5%) — full entries averaging 2,400 chars each
+- Concordance: 19,894 (6.8%)
+- Figurative Language (Curated): 47,747 (16.4%)
+- Analytical Framework: 25,794 (8.8%) — **duplicated** (also passed separately to Master Writer)
+- Traditional Commentaries: 41,878 (14.4%) — includes 10,724 chars of static commentator bios
+- Related Psalms: 49,129 (16.8%) — includes full texts of 5 related psalms
+- Deep Web Research: 38,253 (13.1%)
+- Macro working_notes: 26,845 chars passed unnecessarily to micro analyst
+
+**Wins Implemented (Phase A)**:
+
+1. **Win 1 — Commentator intros → dates only** (`research_assembler.py`):
+   - Replaced ~10,724 chars of biographical essays for 7 commentators with compact date-only reference (~200 chars)
+   - Savings: ~10,500 chars × 3 consumers (IE + MW + CW)
+
+2. **Win 3 — Deduplicate analytical framework** (`research_assembler.py`):
+   - Removed framework embedding from research bundle (was already passed separately via `{analytical_framework}` prompt variable in Master Writer)
+   - Savings: ~9,239-25,794 chars removed from bundle
+
+3. **Win 8 — Strip macro working_notes from micro analyst** (`analysis_schemas.py`, `micro_analyst.py`):
+   - Added `include_working_notes` parameter to `MacroAnalysis.to_markdown()`
+   - Micro analyst now calls `to_markdown(include_working_notes=False)`
+   - Savings: ~26,845 chars of Opus 4.6 input per psalm
+
+**Total Estimated Savings**: ~45,314 tokens per psalm (~36K from bundle + ~9K from micro input)
+
+**Phase B Plan** (deferred, documented in `C:\Users\ariro\.claude\plans\purring-marinating-token.md`):
+- Win 2: Truncate BDB entries to ~500 chars max
+- Win 4: Always trim related psalms (no full texts by default)
+- Win 6: Compact markdown formatting throughout research bundle
+- Win 9: Telegraphic writing instructions for macro/micro analyst prompts
+
+**Files Modified**:
+- `src/agents/research_assembler.py` — Wins 1 & 3 (commentator dates, remove framework from bundle)
+- `src/schemas/analysis_schemas.py` — Win 8 (added `include_working_notes` param)
+- `src/agents/micro_analyst.py` — Win 8 (pass `include_working_notes=False`)
+- `src/agents/master_editor.py` — Win 1 (removed references to "About the Commentators" section)
+
+---
+
+## Session 256 (2026-02-12): Prompt Overhaul Phase 1 - Completion & Opus 4.6 Upgrade
+
+**Objective**: Finalize Prompt Overhaul Phase 1 (migration to Master Writer V3) and upgrade Insight/Question agents to Opus 4.6.
+
+**Accomplishments**:
+1.  **Finalized Prompt Overhaul Phase 1**:
+    -   Successfully migrated `MasterEditorV3` logic to `src/agents/master_editor.py`.
+    -   Updated `scripts/run_enhanced_pipeline.py` and `scripts/run_si_pipeline.py` to use the new V3 prompts and logic.
+    -   Archived legacy editors (`master_editor_v2.py`, `master_editor_si.py`, `master_editor_old.py`) to `src/agents/archive/`.
+    -   Verified migration with `scripts/verify_migration.py` and smoke tests on Psalm 33.
+2.  **Upgraded to Opus 4.6**:
+    -   Updated `InsightExtractor` and `QuestionCurator` to use `claude-opus-4-6` (previously 4.5).
+    -   Updated documentation string and model tracking in `src/agents/insight_extractor.py` and `src/agents/question_curator.py`.
+    -   Updated pipeline scripts to track `claude-opus-4-6` correctly.
+
+**Files Modified**:
+-   `src/agents/master_editor.py` - Replaced with V3 logic.
+-   `src/agents/insight_extractor.py` - Updated to Opus 4.6.
+-   `src/agents/question_curator.py` - Updated to Opus 4.6.
+-   `scripts/run_enhanced_pipeline.py` - Updated to use V3 logic and Opus 4.6 tracking.
+-   `scripts/run_si_pipeline.py` - Updated to use V3 logic and Opus 4.6 tracking.
+-   `src/agents/archive/` - Archived old editor files.
+
+---
+
+## Session 255 (2026-02-11): Prompt Overhaul Phase 1 - V3 Editor & Test Pipeline
+
+**Objective**: Implement Phase 1 of the Prompt Overhaul Plan: create V3 prompts avoiding production code changes, set up a test pipeline, and resolve MicroAnalyst truncation issues.
+
+**Accomplishments**:
+1.  **Created `src/agents/master_editor_v3.py`**:
+    - Implemented `MasterEditorV3` class inheriting from V2.
+    - Added `MASTER_WRITER_PROMPT_V3` and `COLLEGE_WRITER_PROMPT_V3` with 9 key changes (no "Thesis" labels, structural outlines, insight integration, etc.).
+2.  **Created `scripts/run_enhanced_pipeline_TEST.py`**:
+    - Test pipeline that uses `MasterEditorV3`.
+    - Automatically suffixes all writer outputs with `_TEST` (e.g., `_commentary_TEST.docx`).
+    - Skips macro/micro/research steps if files exist, enabling fast iteration.
+3.  **Fixed MicroAnalyst Truncation**:
+    - Increased `max_tokens` from 32,768 to 65,536 in `src/agents/micro_analyst.py`.
+    - Solved issue where Opus 4.6 "adaptive thinking" (consuming ~30k tokens) left insufficient room for JSON output in medium-length psalms (e.g., Ps 33).
+
+**Validation**:
+- Smoke tested on Psalm 100.
+- User conducting full test runs on Psalm 100 and Psalm 33.
+
+**Files Created/Modified**:
+- `src/agents/master_editor_v3.py` (NEW)
+- `scripts/run_enhanced_pipeline_TEST.py` (NEW)
+- `src/agents/micro_analyst.py` (Modified max_tokens)
+
+---
+
+## Session 254 (2026-02-09): Opus 4.6 Bug Fixes + Skipped Step Model Tracking
+
+**Objective**: Fix micro_analyst JSON parsing issues with Opus 4.6 adaptive thinking and ensure model usage is tracked even when pipeline steps are skipped.
+
+**Problems Identified**:
+1. Opus 4.6 adaptive thinking returns thinking blocks mixed with text blocks, causing JSON parse failures
+2. Response sometimes has leading newline before `\`\`\`json` code block, breaking extraction
+3. When using `--skip-macro` or `--skip-micro`, model usage shows "N/A" in Methodology section
+
+**Solutions Implemented**:
+1. **Thinking Block Separation** (`micro_analyst.py`):
+   - Added proper `thinking_delta` vs `text_delta` separation in stream processing
+   - Added empty response check with descriptive error message
+   - Added `response_text.strip()` before code block detection
+2. **Model Tracking for Skipped Steps** (`run_enhanced_pipeline.py`):
+   - When macro/micro steps run: saves `model_used` field to output JSON
+   - When steps are skipped: reads `model_used` from JSON, or falls back to agent's `DEFAULT_MODEL`
+   - Ensures Methodology section shows correct models when resuming pipeline
+
+**Files Modified**:
+- `src/agents/micro_analyst.py` - Thinking block handling, whitespace stripping, empty response check
+- `scripts/run_enhanced_pipeline.py` - Model persistence in JSON, skip-step tracking
+
+---
+
+## Session 253 (2026-02-09): Claude Opus 4.6 Upgrade - Macro/Micro Analysts
+
+**Objective**: Upgrade macro_analyst and micro_analyst from Claude Sonnet 4.5 to Claude Opus 4.6 with maximum adaptive thinking, and ensure correct cost tracking.
+
+**API Changes**:
+- New adaptive thinking mode replaces deprecated `budget_tokens` parameter
+- Old: `thinking: { type: "enabled", budget_tokens: 10000 }`
+- New: `thinking: { type: "adaptive", effort: "max" }`
+
+**Changes Implemented**:
+1. **`src/agents/macro_analyst.py`**:
+   - Updated `DEFAULT_MODEL` from `claude-sonnet-4-5` to `claude-opus-4-6`
+   - Changed thinking configuration from `budget_tokens: 10000` to `effort: "max"`
+   - Updated docstrings and CLI description
+2. **`src/agents/micro_analyst.py`**:
+   - Updated `DEFAULT_MODEL` from `claude-sonnet-4-5` to `claude-opus-4-6`
+   - Added adaptive thinking with `effort: "max"` to discovery pass (was previously not using thinking mode)
+   - Updated docstrings and log messages
+3. **`src/utils/cost_tracker.py`**:
+   - Added `claude-opus-4-6` pricing entry (same tier as Opus 4.5)
+4. **`docs/session_tracking/scriptReferences.md`**:
+   - Updated model descriptions for macro_analyst and micro_analyst
+
+**Verification**:
+- Confirmed `MacroAnalyst.DEFAULT_MODEL = "claude-opus-4-6"`
+- Confirmed `MicroAnalystV2.DEFAULT_MODEL = "claude-opus-4-6"`
+- Confirmed `claude-opus-4-6` pricing exists in cost tracker
+
+**Bug Fix (Same Session)**:
+Initial implementation placed `effort` inside `thinking` object, but the API rejected with:
+`'thinking.adaptive.effort: Extra inputs are not permitted'`
+
+Per official Anthropic docs, the correct format is:
+```python
+thinking={"type": "adaptive"},
+output_config={"effort": "max"}
+```
+
+**SDK Upgrade**:
+- Upgraded anthropic SDK from 0.68.1 (system) / 0.70.0 (venv) to 0.79.0
+- Required for `output_config` parameter support in `messages.stream()`
+
+**Documentation Updated**:
+- `docs/session_tracking/scriptReferences.md`: Updated macro/micro analyst descriptions
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md`: Updated all model references
+
+**Note**: The DOCX Methodology section automatically reflects the new model names since it reads from `model_usage['macro_analysis']` and `model_usage['micro_analysis']` in the pipeline stats JSON.
+
+---
+
+## Session 252 (2026-02-01): Divine Names Modifier Fix - Dalet Vowel Check
+
+**Objective**: Fix incorrect modification of לְשַׁדִּי (my moisture) to לְשַׁקִּי in Psalm 32.
+
+**Problem Identified**:
+- The word לְשַׁדִּי (leshaddi, "my moisture" - Numbers 11:8) was incorrectly modified to לְשַׁקִּי
+- Root cause: Pattern only checked vowel under shin, not under dalet
+- The divine name שַׁדַּי has **patach under dalet** (שַׁדַּי)
+- But "my moisture" has **chiriq under dalet** (לְשַׁדִּי) ← This is the key distinction!
+
+**Solution Implemented**:
+Added vowel check for dalet: must have patach (ַ) or kamatz (ָ), not chiriq (ִ) or other vowels.
+
+**Key Distinctions**:
+- Divine name שַׁדַּי: patach under shin AND dalet → Modified to שַׁקַּי ✓
+- "My moisture" לְשַׁדִּי: patach under shin, **chiriq under dalet** → NOT modified ✓
+- "Breasts" שְׁדֵי: sheva under shin → NOT modified ✓ (Session 223 fix preserved)
+- With any prefix: checks dalet vowel, not prefix type
+
+**Linguistic Rationale**:
+The vowel under dalet distinguishes:
+1. Divine name: שַׁדַּי (shaddai) - patach/kamatz under dalet
+2. Construct form "my moisture": לְשַׁדִּי (leshaddi) - chiriq under dalet (first person possessive suffix)
+
+**Regression Testing**:
+- All 5 core tests passed
+- Verified Session 223 fix (sheva under shin) remains intact
+- Confirmed correct handling with all prefixes (vav, lamed, bet, etc.)
+- Test case showed לְשַׁדַּי (hypothetical with patach) would be modified, confirming vowel-based logic works correctly
+
+**Files Modified**:
+- `src/utils/divine_names_modifier.py` - Updated `_modify_el_shaddai()` with dalet vowel check
+
+---
+
+## Session 251 (2026-01-28): Debugging Question Curator
+
+**Objective**: Debug and fix the Question Curator which was returning empty results for Psalm 31.
+
+**Problems Identified**:
+- Question Curator produced empty lists because of a mismatch between the prompt instructions (requesting a JSON array) and the parsing logic (expecting a JSON object with a specific key).
+- The prompt template also lacked proper escaping for JSON braces, causing string formatting errors.
+
+**Solutions Implemented**:
+1. **Prompt Alignment**: Updated `CURATION_PROMPT` in `question_curator.py` to explicitly request a JSON object with a `curated_questions` key, matching the code's expectation.
+2. **Prompt Fix**: Escaped JSON braces (replaced `{` with `{{`) in the prompt template to prevent formatting failures.
+
+**Files Modified**:
+- `src/agents/question_curator.py` - Updated prompt structure and fixed formatting syntax.
+
+## Session 250 (2026-01-28): Insight Pipeline Integration & College Writer Fixes
+
+**Objective**: Ensure Insight Extractor receives full data context and fix College Writer prompt to include insights and questions.
+
+**Problems Identified**:
+- Insight Extractor was missing `macro_analysis` context and received only raw Hebrew text, limiting insight quality.
+- College Writer prompt lacked reader questions because the Question Generator returned an empty list and no fallback logic existed (unlike the Main Writer).
+- User suspected College Writer wasn't receiving insights (verified it was provided, but improved upstream data quality).
+
+**Solutions Implemented**:
+1. **Insight Extractor Upgrade**: Updated `extract_insights` to accept `macro_analysis` and included it in `INSIGHT_EXTRACTOR_PROMPT`.
+2. **Rich Text Pipeline**: Updated `run_enhanced_pipeline.py` to construct full psalm text (Hebrew + English + Phonetics) from `micro_analysis` for the Insight Extractor.
+3. **College Writer Fallback**: Added logic to `master_editor.py` in `write_college_commentary` to default to raw macro/micro questions if curated questions are missing/empty.
+
+**Files Modified**:
+- `src/agents/insight_extractor.py` - Added macro analysis input and prompt section.
+- `scripts/run_enhanced_pipeline.py` - Implemented rich text construction and passed macro data.
+- `src/agents/master_editor.py` - Added reader question fallback logic for College edition.
+
+## Session 249 (2026-01-28): Model Updates & Methodology Reporting
+
+**Objective**: Switch Question Curator to Claude Opus 4.5 and fix methodology reporting in generated documentation.
+
+**Problems Identified**:
+- Question Curator was using `GEMINI-2.0-FLASH` which produced suboptimal questions.
+- Methodology section in DOCX did not list the model used for Question Generation.
+- "Date Produced" field in DOCX output showed "Date not available".
+
+**Solutions Implemented**:
+1.  **Question Curator Upgrade**: Refactored `QuestionCurator` to use `claude-opus-4-5` via Anthropic API.
+2.  **Methodology Reporting**: Updated `document_generator.py` and `combined_document_generator.py` to explicitly list `Question Generation` model usage.
+3.  **Date Produced Fix**: Moved pipeline completion tracking (which sets the date) to occur *before* document generation in `run_enhanced_pipeline.py`.
+
+**Files Modified**:
+- `src/agents/question_curator.py` - Switched to Anthropic client and Opus 4.5 model.
+- `scripts/run_enhanced_pipeline.py` - Added model tracking and fixed completion date timing.
+- `scripts/run_enhanced_pipeline_with_synthesis.py` - Added model tracking.
+- `scripts/run_si_pipeline.py` - Added model tracking.
+- `src/utils/document_generator.py` - Added Question Generation model to methodology summary.
+- `src/utils/combined_document_generator.py` - Added Question Generation model to methodology summary.
+
+## Session 248 (2026-01-28): Master Writer Refactoring & SI Pipeline Parity
+
+**Objective**: Eliminate the experimental "TEST" pipeline by promoting the single-pass "Master Writer" approach to become the default standard, while preserving the legacy "Synthesis Writer" approach in dedicated scripts. Ensure feature parity for Special Instructions (SI) pipelines.
+
+**Refactoring Performed**:
+1.  **Main Pipeline**:
+    *   Renamed `run_enhanced_pipeline_TEST.py` → `run_enhanced_pipeline.py` (New Default).
+    *   Created `run_enhanced_pipeline_with_synthesis.py` (New Legacy) from the old default.
+    *   Deleted obsolete `run_enhanced_pipeline_TEST.py`.
+2.  **SI Pipeline**:
+    *   Updated `run_si_pipeline.py` to mirror the new Master Writer architecture.
+    *   Created `run_si_pipeline_with_synthesis.py` to mirror the legacy Synthesis Writer architecture.
+3.  **Agents**:
+    *   Updated `MasterEditorSI` to override `write_commentary` (Master Writer mode) in addition to `edit_commentary` (Legacy mode).
+    *   Injected `special_instruction` into writer prompts.
+
+**Outcome**:
+*   Simplified project structure: "Default" = Master Writer.
+*   Preserved backward compatibility: "With Synthesis" = Legacy.
+*   Full SI support across both architectures.
+
+**Files Modified**:
+*   `scripts/run_enhanced_pipeline.py`
+*   `scripts/run_enhanced_pipeline_with_synthesis.py`
+*   `scripts/run_si_pipeline.py`
+*   `scripts/run_si_pipeline_with_synthesis.py`
+*   `src/agents/master_editor_si.py`
+
+---
+
+## Session 247 (2026-01-27): Pipeline Input Completeness (Master Editor/Writer)
+
+**Objective**: Ensure the Master Editor/Writer in BOTH pipelines receives all required inputs (psalm text, curated insights, reader questions) and that reader questions are elegantly addressed in the commentary output.
+
+**Problems Identified**:
+- **Old pipeline (`MASTER_EDITOR_PROMPT_V2`)**: `{curated_insights}` placeholder missing from prompt template — insights silently dropped at `.format()` call.
+- **New pipeline (`MASTER_WRITER_PROMPT` + `COLLEGE_WRITER_PROMPT`)**: No `{psalm_text}` section providing Hebrew, English, and LXX text as a standalone reference block.
+- **New pipeline college reader questions**: `run_enhanced_pipeline_TEST.py` did not extract/save refined reader questions from college writer, and passed `None` to doc generator.
+- **Reader questions gap**: Only `MASTER_EDITOR_PROMPT_V2` (old main) had all three elements: receives `{reader_questions}` input, hook instruction, and "ensure answered" checklist. The other three prompts were missing one or more.
+
+**Solutions Implemented**:
+1. Added `{curated_insights}` placeholder to `MASTER_EDITOR_PROMPT_V2` and both GPT/Claude format calls.
+2. Added `{psalm_text}` placeholder to `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT`; loaded via `_get_psalm_text()` in both writer methods; threaded through `_perform_writer_synthesis()`.
+3. Added college reader question extraction in `run_enhanced_pipeline_TEST.py` Step 4b and college question pass-through to doc gen (Step 6b).
+4. Added `{reader_questions}` input to `COLLEGE_EDITOR_PROMPT_V2` and `COLLEGE_WRITER_PROMPT` templates.
+5. Added "VALIDATION CHECK — Reader Questions" to `MASTER_WRITER_PROMPT` and `COLLEGE_WRITER_PROMPT` (ensure each question is elegantly addressed in essay or verse commentary).
+6. Added reader questions checklist item to `COLLEGE_EDITOR_PROMPT_V2` FINAL CHECKLIST.
+7. Updated hook instruction in `COLLEGE_WRITER_PROMPT` Stage 1 to connect to reader questions.
+8. Plumbed `reader_questions` through `edit_college_commentary()`, `_perform_college_review()`, `write_college_commentary()`, and `_perform_writer_synthesis()` college branch.
+9. Updated `run_enhanced_pipeline.py` to pass `insights_file` and `reader_questions_file` to `edit_college_commentary()`.
+10. Updated `run_enhanced_pipeline_TEST.py` to pass `reader_questions_file` to `write_college_commentary()`.
+
+**Files Modified**:
+- `src/agents/master_editor.py` - All four prompt templates updated; method signatures and format calls updated for curated_insights, psalm_text, and reader_questions
+- `scripts/run_enhanced_pipeline.py` - Old pipeline now passes insights_file and reader_questions_file to college editor
+- `scripts/run_enhanced_pipeline_TEST.py` - College reader question extraction (Step 4b), doc gen pass-through (Step 6b), reader_questions_file to college writer
+
+---
+
+## Session 246 (2026-01-27): Fix Methodology Section Accounting & Insight Model Tracking
+
+**Objective**: Fix incorrect "Master Editor Prompt Size" character count in Methodology section and add programmatic Insight Extractor model attribution to both pipelines.
+
+**Problems Identified**:
+- **Stale prompt size in TEST pipeline**: When running `run_enhanced_pipeline_TEST.py` with `--skip-macro --skip-micro`, the print-ready formatter (a subprocess) read the JSON from disk before it was updated with the current run's master_editor data, showing a stale value (298,295 instead of 291,290).
+- **Inaccurate prompt size in old pipeline**: `run_enhanced_pipeline.py` used `track_step_input()` which measured a manual concatenation of raw inputs, not the actual prompt sent to the API (which includes the prompt template text).
+- **Stale synthesis step data**: The TEST pipeline cleaned `synthesis` from `model_usage` but not from `steps`, leaving stale synthesis step data in the JSON.
+- **Missing insight extractor model**: The TEST pipeline did not track the Insight Extractor model, so it never appeared in Methodology's "Models Used" section.
+- **Commentary formatter gap**: `commentary_formatter.py` (print-ready markdown) had no line for the Insight Extractor model, even though the docx generators already supported it.
+
+**Solutions Implemented**:
+1. **`run_enhanced_pipeline_TEST.py`**: Added `tracker.save_json()` before Step 5 (print-ready) so the subprocess reads current data. Extended stale data cleanup to remove `steps.synthesis` in addition to `model_usage.synthesis`. Added `tracker.track_model_for_step("insight_extractor", ...)` in three code paths (loading existing, fresh extraction, and skip-with-existing).
+2. **`run_enhanced_pipeline.py`**: Added `tracker.track_step_usage()` after master editor completes, using `result['input_char_count']` (the actual `len(prompt)` from the API call) to override the earlier `track_step_input()` value.
+3. **`commentary_formatter.py`**: Added Insight Extractor model line to "Models Used" section, matching the docx generators.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline_TEST.py` - Stale data cleanup, JSON save timing, insight model tracking
+- `scripts/run_enhanced_pipeline.py` - Actual prompt size tracking via `track_step_usage()`
+- `src/utils/commentary_formatter.py` - Added insight_extractor model to Models Used section
+
+**Analysis Notes** (for next session):
+- Old pipeline (`MASTER_EDITOR_PROMPT_V2`) includes `{psalm_text}` but does NOT inject `{curated_insights}` despite loading them
+- New pipeline (`MASTER_WRITER_PROMPT`) includes `{phonetic_section}` and `{curated_insights}` but does NOT have `{psalm_text}`
+- Both gaps should be addressed to ensure the master editor in each pipeline receives psalm text, phonetics, and curated insights
+
+---
+
+## Session 245 (2026-01-27): Master Writer Experiment (No Synthesis Writer)
+
+**Objective**: Eliminate the Synthesis Writer step, replacing the two-pass pipeline (Synthesis → Editor) with a single-pass "Master Writer" approach where the MasterEditor creates commentary directly from research inputs.
+
+**Problems Addressed**:
+- **Process Redundancy**: `SynthesisWriter` created an "unnecessary hop" / telephone game effect.
+- **Prompt Quality**: Experimental writer prompts needed enrichment (Items of Interest, stronger examples) to match original quality.
+- **Infrastructure**: Experimental script lacked CLI flags, error handling, and combined doc generation.
+- **API Compatibility**: `gpt-4o` failed with `reasoning_effort` usage (specific to O-series models).
+- **Reporting**: Stale "Synthesis" data persisted in reports when re-running in existing folders.
+
+**Solutions Implemented**:
+1.  **Pipeline Infrastructure (`run_enhanced_pipeline_TEST.py`)**:
+    - Created single-pass orchestrator bypassing Synthesis step.
+    - Fixed 16+ code issues: Output paths, argparse flags, Combined Doc Gen, rate limit handling, UTF-8 encoding.
+    - Added auto-cleanup of stale "synthesis" stats in `pipeline_stats.json`.
+
+2.  **Master Writer Implementation (`master_editor.py`)**:
+    - Implemented `write_commentary` and `write_college_commentary` methods.
+    - Enriched prompts (`MASTER_WRITER_PROMPT`, `COLLEGE_WRITER_PROMPT`) with critical Stylistic rules, Translation Tests, and "Deep Web" integration.
+    - **API Fix**: Added conditional logic to only apply `reasoning_effort` and high token limits to reasoning models (o1/gpt-5), using standard fallbacks for others.
+
+3.  **Reporting Updates (`commentary_formatter.py`)**:
+    - Updated logic to display "Master Writer" and hide "Commentary Synthesis" if not run.
+
+**Design Note**: All changes to `master_editor.py` are additive-only; existing pipelines remain unaffected.
+
+**Verification**:
+- Smoke tested on Psalm 117.
+- Verified `gpt-4o` compatibility.
+- Verified clean reporting output (no phantom synthesis step).
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Added Writer methods/prompts, fixed API compatibility.
+- `scripts/run_enhanced_pipeline_TEST.py` - New test pipeline script.
+- `src/utils/commentary_formatter.py` - Updated report labels.
+
+---
+
+## Session 243 (2026-01-26): Insight Quality Improvements — College Editor & Pipeline Flags (Phase 4)
+
+**Objective**: Ensure the College Editor utilizes the new curated insights and implement execution controls to skip insight extraction.
+
+**Problems Addressed**:
+- The College Editor prompt (`COLLEGE_EDITOR_PROMPT_V2`) was missing the input slot for curated insights, meaning the college edition wasn't benefiting from the Phase 2b/2c improvements.
+- The pipeline (`run_enhanced_pipeline.py`) didn't have a way to skip the insight extraction step (`--skip-insights`) for debugging or resuming.
+
+**Solutions Implemented**:
+1.  **Enhanced College Editor Prompt**:
+    - Updated `MasterEditor.COLLEGE_EDITOR_PROMPT_V2` to include `{curated_insights}`.
+    - Added specific instructions: "PRIORITIZED INSIGHTS... These are high-value 'aha!' moments curated specifically for this psalm. Use them!"
+    - Updated `MasterEditor` methods (`edit_college_commentary`, `_perform_college_review`) to accept and process the insights file.
+
+2.  **Pipeline Turn-Key Controls**:
+    - Added `--skip-insights` flag to `scripts/run_enhanced_pipeline.py`.
+    - Implemented logic to respect this flag (similar to existing `--skip-macro`, etc.).
+    - Updated pipeline to pass the insights file path to the `MasterEditor` during college edition generation.
+
+3.  **Bug Fixes**:
+    - Fixed `NameError` in `edit_commentary` by ensuring `curated_insights` is loaded from file (critical for resume/skip workflows).
+    - Fixed identical `NameError` in `edit_college_commentary` for the college edition workflow.
+    - Fixed `NameError` in `edit_college_commentary` for the college edition workflow.
+    - Fixed duplicate argument errors in `master_editor.py` method signatures.
+
+**Known Issues (To Fix Next Session)**:
+- `_perform_college_review` fails with `NameError: name 'insights_text' is not defined`. This is because `curated_insights` (dict) needs to be formatted into a string (e.g., using `_format_insights_for_prompt`) before being passed to the prompt template.
+
+**Files Modified**:
+- `src/agents/master_editor.py` - Prompt update + method signature updates.
+- `scripts/run_enhanced_pipeline.py` - Argument parsing + execution logic.
+
+**Next Steps**:
+- Verify content quality of generated college commentaries.
+
+---
+
+## Session 242 (2026-01-26): Insight Quality Improvements — Pipeline Integration (Phase 2b-2c)
+
+**Objective**: Complete the integration of the Insight Extractor into the production pipeline and implement intelligent research bundle trimming.
+
+**Problems Addressed**:
+- `run_enhanced_pipeline.py` needed Step 2c logic to invoke the new `InsightExtractor`.
+- `synthesis_writer.py` prompts needed the "Prioritized Insights" block injected.
+- The research bundle was too large for the Insight Extractor's context window (Opus 4.5 limit), causing potential errors.
+- Duplicate trimming logic existed in `synthesis_writer.py` and potentially other agents.
+
+**Solutions Implemented**:
+1.  **Refactored Trimming Logic**: 
+    - Created `src/utils/research_trimmer.py`, a dedicated utility class for intelligent bundle reduction (Related Psalms -> Figurative -> Gemini fallback).
+    - Removed duplicate trimming code from `synthesis_writer.py` and updated it to use the new utility.
+    - Integrated `ResearchTrimmer` into `run_enhanced_pipeline.py`.
+
+2.  **Pipeline Integration (Phase 2b)**:
+    - Updated `run_enhanced_pipeline.py` to insert Step 2c.
+    - Logic added: Load research bundle -> **Trim Bundle** (using new utility) -> Extract Insights -> Save JSON.
+    - Curated insights are saved to `output/psalm_NNN/psalm_NNN_insights.json`.
+
+3.  **Synthesis Update (Phase 2c)**:
+    - Updated `synthesis_writer.py` to accept `curated_insights` in `write_commentary`.
+    - Updated prompts to include a "## PRIORITIZED INSIGHTS" section, giving the writer direct access to the extractor's "aha!" moments.
+
+**Files Modified**:
+- `src/utils/research_trimmer.py` (NEW) - Trimming utility.
+- `src/agents/synthesis_writer.py` - Removed old trimming, added new utility, updated prompts.
+- `scripts/run_enhanced_pipeline.py` - Integrated Step 2c and trimming.
+
+**Next Steps**:
+- Verify College Editor utilization: Ensure the college edition also benefits from these insights (Session 243).
+
+
+- **Bug Fix**: Addressed "Master Editor Prompt Size" discrepancy.
+    - Context: `run_enhanced_pipeline_TEST.py` was inheriting stale stats from previous runs because it lacked explicit tracking for the `master_editor` step input when running with `--skip` flags.
+    - Fix: Added `track_step_usage` to `PipelineSummaryTracker` and patched `MasterEditor`'s `_call_gpt_writer` and `_call_claude_writer` methods to correctly return usage stats to the pipeline.
+
+---
+
+## Session 241 (2026-01-26): Insight Quality Improvements — Execution (Phase 1 & 2a)

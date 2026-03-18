@@ -1,111 +1,73 @@
-# Psalms AI Commentary Pipeline - Quick Reference
+# Psalms AI Commentary Pipeline
 
-AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent framework and Hebrew concordance integration.
+**Session**: 316 (2026-03-18)
+**Phase**: Pipeline Production — tweaks and improvements
 
-## Essential Documentation
+AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
-**Start Here:**
-- `README.md` - Project overview, installation, usage
-- `docs/session_tracking/PROJECT_STATUS.md` - Current phase, tasks, metrics (Session 305)
-- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Technical specifications, schemas
-- `docs/guides/DEVELOPER_GUIDE.md` - Development workflow, coding standards
+## Recent Work (Last 5 Sessions)
 
-## Recent Major Changes (Last 5 Sessions)
+**Session 316 (2026-03-18)**: Session Management Overhaul
+- Restructured session management: CLAUDE.md is now single startup doc for both Claude Code and Gemini
+- Archived IMPLEMENTATION_LOG sessions 241-299; moved feature docs to FEATURE_ARCHIVE.md
+- Created Claude Code persistent memory; slimmed PROJECT_STATUS.md to stable reference
 
-**Session 306 (2026-03-15)**: Fix Displaced Liturgical Content Recovery in DOCX
-- Fixed DOCX bug where liturgy section was interrupted by spurious "Verse-by-Verse Commentary" / "Verse 9" headers (Psalm 42)
-- Replaced flawed `< 100` char threshold and position-0 regex heuristics with standalone verse header detection
-- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`
+**Session 315 (2026-03-18)**: Divine Name Normalization & Citation Difference Accuracy
+- Added reverse divine name mappings to citation verifier (El/Eli/Shaddai/Eloah patterns)
+- Added NFC Unicode normalization; fixed `_describe_difference()` annotation stripping
+- Psalm 42: 4 to 3 issues (eliminated false positive)
 
-**Session 305 (2026-03-15)**: Remove Auto-Skip-If-Exists Behavior
-- Removed implicit "skip if output exists" checks in Steps 2b, 2c, 5b — steps now always run and overwrite unless explicitly skipped
-- Fixed Step 5c gating so DOCX-only runs work with `--skip-copy-editor` (extracts from existing copy-edited file)
-- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`
+**Session 314 (2026-03-17)**: GPT Filter Default, End-to-End Citation Fix Verified
+- Made `--gpt-filter` default in all pipeline/verifier scripts; added `--no-gpt-filter`
+- Fixed standalone verifier `--fix` bug; full end-to-end test on Psalm 41 passed ($0.53)
 
-**Session 304 (2026-03-15)**: Copy Editor Output Readability
-- Replaced unified diff with word-level diff showing ~12 words of context, changed words bolded, nearby changes merged
-- Updated prompt to request numbered changes with verse location and WHY rationale
-- Added cross-reference links between changes and diff files; fixed `_count_changes` bug
+**Session 313 (2026-03-17)**: Citation Verifier — GPT-5.1 Judge, Precise Difference Hints
+- Fixed `_describe_difference()` with greedy word alignment; added doubled-word detection
+- Added `--gpt-filter` flag: GPT-5.1 achieves 5/5 real errors kept, 0 false positives
 
-**Session 303 (2026-03-15)**: BiDi DOCX Fix — LRM Insertion
-- Implemented LRM (U+200E) insertion after Hebrew+punctuation in all 5 DOCX code paths
-- Fixes Word scrambling Hebrew word order with colons/semicolons between Hebrew segments
-- Regenerated Psalm 40 and 22 DOCX successfully
-
-**Session 302 (2026-03-15)**: Copy Editor Critical Reading Stance
-- Added "CRITICAL READING STANCE" meta-reasoning preamble; strengthened categories 6, 9d, 9f with concrete self-tests
-- Re-ran Psalm 40: now catches all 5 target issues (was 2/5), 17 total changes
-- Documented LRM-based BiDi DOCX fix plan in `docs/session_tracking/BIDI_FIX_NOTES_SESSION_301.md`
+**Session 312 (2026-03-17)**: Haiku Tool-Use Citation Verifier Architecture
+- Built `verify_citations_tooluse()` with prompt caching ($0.04/psalm)
+- Regex verifier outperforms tool-use in accuracy and cost; integrated as optional `--tooluse-verify`
 
 ## Quick Commands
 
 ```bash
-# Process single psalm
-python main.py --psalm 23
-
-# Process range
-python main.py --psalms 1-10
-
-# Check costs (dry run)
-python main.py --psalm 119 --dry-run
-
-# View cost report
-python scripts/cost_report.py
+python scripts/run_enhanced_pipeline.py 23          # Process single psalm
+python scripts/run_enhanced_pipeline.py 23 --resume  # Resume from last step
+python scripts/run_si_pipeline.py 19                 # Special Instruction pipeline
+python scripts/run_copy_editor.py 36 37 38           # Standalone copy editor
+python scripts/run_scripture_verifier.py 41          # Standalone citation verifier
+python scripts/converse_with_editor.py 21            # Chat with Master Editor
 ```
 
 ## Key Directories
 
-- `src/agents/` - AI agent implementations (macro, micro, synthesis, editors)
-- `src/concordance/` - 4-layer Hebrew search system
-- `database/` - SQLite databases (tanakh.db, psalm_relationships.db)
-- `data/deep_research/` - Gemini Deep Research outputs (psalm_NNN_deep_research.txt)
-- `output/psalm_*/` - Generated commentary (production)
-- `archive/` - Organized historical files (debugging, experiments, session docs)
-- `scripts/utilities/` - Helper scripts (canonicalizer, score generation)
+- `src/agents/` — AI agent implementations (macro, micro, synthesis, editors, copy editor)
+- `src/concordance/` — 4-layer Hebrew search system
+- `database/` — SQLite databases (tanakh.db, psalm_relationships.db)
+- `data/deep_research/` — Gemini Deep Research outputs
+- `data/special_instructions/` — Author directive files for SI pipeline
+- `output/psalm_*/` — Generated commentary (production)
+- `scripts/` — Pipeline runners and utilities
 
-## Find Specific Information
+## Reference Docs (read only when needed)
 
-**Architecture & Design:**
-- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - Complete technical specs
-- `docs/architecture/CONTEXT.md` - Quick reference guide
-- `docs/architecture/analytical_framework_for_RAG.md` - RAG system design
-- `docs/architecture/TOKEN_REDUCTION_PHASE_B.md` - **NEXT UP**: Ready-to-implement token reduction tasks (Wins 2, 4, 6, 9)
-
-**Features:**
-- `docs/features/PHRASE_EXTRACTION_FIX.md` - Exact phrase preservation
-- `docs/features/PHONETIC_SYSTEM.md` - Phonetic transcription system
-- `docs/features/FIGURATIVE_LIBRARIAN_FILTERING_DETAILED.md` - Search filtering
-
-**Development:**
-- `docs/guides/DEVELOPER_GUIDE.md` - Coding standards, workflow
-- `docs/guides/OPERATIONAL_GUIDE.md` - Day-to-day operations
-- `docs/guides/PHONETIC_DEVELOPER_GUIDE.md` - Phonetic system usage
-
-**Session History:**
-- `docs/session_tracking/IMPLEMENTATION_LOG.md` - Development journal
-- `docs/session_tracking/NEXT_SESSION_PROMPT.md` - Next steps planning
-- `archive/session_documentation/` - Historical session summaries
-
-## Current Status
-
-**Phase**: Pipeline Production — tweaks and improvements
-**Active**: Unified Writer V4, Copy Editor (9-category), Opus 4.6 Master Writer, Sonnet 4.6 Micro, GPT-5.4 Figurative Curator, GPT-5.1 Liturgical Librarian
-**Last Updated**: Session 306 (2026-03-15)
-
-## Common Tasks
-
-**Add Deep Research:** Save Gemini Deep Research output to `data/deep_research/psalm_NNN_deep_research.txt`
-**Research a fix:** Check `archive/debugging/` for similar past issues organized by date
-**Review experiments:** Check `archive/experimental_outputs/` for test psalm runs
-**Update docs:** Maintain this section's "Recent Major Changes" after significant work
-**Add utility:** Place in `scripts/utilities/` and document in DEVELOPER_GUIDE
+- `docs/session_tracking/scriptReferences.md` — All scripts with descriptions
+- `docs/session_tracking/PROJECT_STATUS.md` — Pipeline phases, active features, databases
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — Detailed session history (300+)
+- `docs/session_tracking/FEATURE_ARCHIVE.md` — Detailed docs for completed features
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` — Full system architecture
+- `docs/architecture/TOKEN_REDUCTION_PHASE_B.md` — Ready-to-implement token reduction tasks
 
 ## File Organization Rules
 
-- **Production code:** `src/`, `main.py`, `scripts/utilities/`
+- **Production code:** `src/`, `main.py`, `scripts/`
 - **Experimental/test:** Use during session, archive immediately after
-- **Archive after 1 session:** Test scripts, debug outputs, temp files
+- **Archive after 1 session:** Test scripts, debug outputs, temp files → `archive/`
 - **Never commit:** `*.log`, `*_output.txt`, temp analysis files (in .gitignore)
 
----
-*For full project overview, see README.md. For current work, see docs/session_tracking/PROJECT_STATUS.md.*
+## End-of-Session Checklist
+
+1. **Update this file (CLAUDE.md)**: Increment session number (line 3), replace oldest of 5 recent entries
+2. **Update IMPLEMENTATION_LOG.md**: Add detailed session entry at top
+3. **Update scriptReferences.md**: If scripts were created or significantly changed
