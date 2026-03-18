@@ -8,6 +8,34 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 315 (2026-03-18): Divine Name Normalization & Citation Difference Accuracy
+
+**Objective**: Fix citation verifier to recognize programmatic divine name modifications (geniza-style) and improve the accuracy of "Likely issue" diagnostic messages.
+
+**Problems Identified**:
+- Psalm 22:2 `קֵלִי קֵלִי` was flagged as a misquote, but it's actually the divine name modifier's output for `אֵלִי אֵלִי` — the verifier lacked reverse mappings for El/Eli, Shaddai, and Eloah divine name patterns
+- Existing `אלק` → `אלה` reverse mapping only worked on unvoweled Hebrew (consecutive consonants), failing on voweled forms like `אֱלֹקֵינוּ`
+- Unicode diacritics ordering differences (dagesh+kamatz vs kamatz+dagesh) caused false substring mismatches even after correct normalization
+- "Likely issue" message always said "Word(s) appear more times in quote than in actual verse" even when the real issue was word substitution, conjugation change, or word reordering
+- GPT-5.1 judge annotations appended to `normalized_quoted` polluted the `_describe_difference()` analysis
+
+**Solutions Implemented**:
+1. Added reverse divine name mappings to `_DIVINE_NAME_PATTERNS`: `קֵלִי` → `אֵלִי`, `קֵל` → `אֵל`, `שקי` → `שדי`, `אלוק` → `אלוה`
+2. Fixed `אלק` → `אלה` pattern to allow diacritics between consonants (voweled Hebrew support)
+3. Added NFC Unicode normalization to `_normalize_hebrew()` — resolves diacritics ordering inconsistencies
+4. Rewrote difference detection in `_describe_difference()`: distinguishes "word(s) not found in verse" from genuinely doubled words; strips `[GPT-5.1: ...]` annotations before analysis
+
+**Results**:
+- Psalm 42: 4 issues → 3 issues (Psalm 22:2 divine name false positive eliminated)
+- Issue 3 (Ps 18:32): `אֱלֹקֵינוּ` now properly normalized, only `בִּלְעֲדֵי` flagged as unfound
+- All "Likely issue" messages now accurately describe the problem
+- Psalm 41 regression test passes (7 issues unchanged)
+
+**Files Modified**:
+- `src/utils/scripture_verifier.py` — Added divine name reverse mappings, NFC normalization, fixed voweled `אלק` pattern, improved `_describe_difference()` with annotation stripping and accurate word categorization
+
+---
+
 ## Session 314 (2026-03-17): GPT Filter Default, End-to-End Citation Fix Verified
 
 **Objective**: Make the GPT-5.1 false-positive filter the default for citation verification across all pipeline runners, and run a full end-to-end test confirming all 5 planted errors in Psalm 41 are detected and corrected.

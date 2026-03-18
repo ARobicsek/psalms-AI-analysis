@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-17 (Session 314)
+**Last Updated**: 2026-03-18 (Session 315)
 
 
 ## Table of Contents
@@ -91,6 +91,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 315 (2026-03-18): Divine Name Normalization & Citation Difference Accuracy
+- Added reverse divine name mappings to citation verifier: `קֵלִי` → `אֵלִי`, `קֵל` → `אֵל`, `שקי` → `שדי`, `אלוק` → `אלוה`. Fixed voweled `אלק` → `אלה` pattern.
+- Added NFC Unicode normalization to `_normalize_hebrew()` — fixes diacritics ordering mismatches causing false substring failures.
+- Fixed `_describe_difference()`: strips GPT/Haiku annotations before analysis; distinguishes "word(s) not found in verse" from genuinely doubled words.
+- **Psalm 42 test**: 4 → 3 issues (Psalm 22:2 `קֵלִי` divine name false positive eliminated). All "Likely issue" messages now accurate.
+
 ### Session 314 (2026-03-17): GPT Filter Default, End-to-End Citation Fix Verified
 - Made `--gpt-filter` the default in all three pipeline/verifier scripts; added `--no-gpt-filter` to disable. Haiku remains as `--haiku-filter` alternative.
 - Fixed standalone verifier `--fix` bug: `fix_prompt` was generated but never passed to the copy editor's `supplementary_prompt`.
@@ -116,12 +122,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Added ellipsis-fragment splitting — Hebrew quotes containing `...` are split and each fragment verified independently (caught truncated `מְשַׂ` → should be `מְשַׂנְאִי` in Ps 55:13).
 - Fixed Tetragrammaton normalization (`יְהֹוָה` → `יהוה`) and meteg stripping (U+05BD) so `_describe_difference()` correctly identifies missing middle words.
 - Added `"Psalm"` (singular) to book abbreviation map. Improved Haiku prompt with automated difference hints.
-
-### Session 310 (2026-03-17): Hybrid Haiku Citation Filter & Verifier Improvements
-- Added `--haiku-filter` flag: Claude Haiku 4.5 judges regex verifier mismatches to filter false positives (~$0.002/psalm). Correctly eliminated Ps 72:18-19 piyyut false positive while keeping Gen 27:36 conjugation error.
-- Fixed report contamination: `_strip_appended_reports()` removes previously-embedded verification reports before analysis, eliminating the Ex 20:7 false issue.
-- Replaced consonantal substring matching with word-level matching (`_words_match()`), catching conjugation mismatches like `עֲקָבַנִי` vs `וַיַּעְקְבֵנִי` (Gen 27:36).
-- Integrated `--haiku-filter` into both `run_enhanced_pipeline.py` and `run_si_pipeline.py`. Added Haiku 4.5 pricing to cost tracker.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

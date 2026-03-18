@@ -185,8 +185,15 @@ _DIVINE_NAME_PATTERNS = [
     # Full Tetragrammaton with any vowels → consonantal יהוה
     (re.compile(r'י' + _DIACRITICS_CLASS + r'ה' + _DIACRITICS_CLASS +
                 r'ו' + _DIACRITICS_CLASS + r'ה'), 'יהוה'),
-    (re.compile(r'אלק'), 'אלה'),                  # אלקים→אלהים, אלקי→אלהי, etc.
+    (re.compile(r'(א' + _DIACRITICS_CLASS + r'ל' + _DIACRITICS_CLASS + r')ק'), r'\1ה'),  # אלקים→אלהים, אלקי→אלהי, etc.
     (re.compile(r'צבקות'), 'צבאות'),               # reverential form → standard
+    # Reverse El-with-tzere modification: קֵלִי→אֵלִי, קֵל→אֵל
+    (re.compile(r'קֵ' + _DIACRITICS_CLASS + r'לִ' + _DIACRITICS_CLASS + r'י'), 'אֵלִי'),
+    (re.compile(r'(?<![א-ת])קֵ' + _DIACRITICS_CLASS + r'ל(?![א-ת])'), 'אֵל'),
+    # Reverse Shaddai modification: שקי→שדי
+    (re.compile(r'שקי'), 'שדי'),
+    # Reverse Eloah modification: אלוק→אלוה (standalone, not אלקים which is handled above)
+    (re.compile(r'אלוק(?!י)'), 'אלוה'),
 ]
 
 
@@ -230,6 +237,10 @@ def _normalize_hebrew(text: str) -> str:
 
     # Collapse whitespace and strip
     normalized = re.sub(r'\s+', ' ', normalized).strip()
+
+    # NFC normalization — ensures diacritics ordering is consistent
+    # (e.g., dagesh+kamatz vs kamatz+dagesh on the same consonant)
+    normalized = unicodedata.normalize('NFC', normalized)
 
     return normalized
 
@@ -1049,19 +1060,30 @@ def format_verification_report(
 
 def _describe_difference(norm_quoted: str, norm_actual: str) -> str:
     """Try to describe the difference between quoted and actual text."""
+    # Strip any LLM judge annotations (e.g., "[GPT-5.1: ...]") before analysis
+    norm_quoted = re.sub(r'\s*\[(?:GPT-5\.1|Haiku):.*$', '', norm_quoted)
+
     q_words = norm_quoted.split()
     a_words = norm_actual.split()
 
     # --- Check for added/doubled words ---
-    # If a word appears MORE times in the quote than in the actual verse,
-    # that's a fabrication (e.g., "רֵקִים רֵקִים" when verse has one "רֵקִים").
     from collections import Counter
     q_counts = Counter(q_words)
     a_counts = Counter(a_words)
     doubled = [w for w, c in q_counts.items() if c > a_counts.get(w, 0)]
     if doubled:
-        return (f"Word(s) appear more times in quote than in actual verse: "
-                f"{' '.join(doubled)}")
+        # Distinguish truly doubled words from words not found in the verse at all
+        not_in_verse = [w for w in doubled if a_counts.get(w, 0) == 0]
+        genuinely_doubled = [w for w in doubled if a_counts.get(w, 0) > 0]
+        parts = []
+        if not_in_verse:
+            parts.append(f"Quote contains word(s) not found in the cited verse: "
+                         f"{' '.join(not_in_verse)}")
+        if genuinely_doubled:
+            parts.append(f"Word(s) appear more times in quote than in actual verse: "
+                         f"{' '.join(genuinely_doubled)}")
+        if parts:
+            return '; '.join(parts)
 
     # --- Check for missing middle words ---
     # Try to align quoted words onto actual words as a subsequence,
