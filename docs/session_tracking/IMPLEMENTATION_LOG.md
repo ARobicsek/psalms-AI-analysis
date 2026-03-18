@@ -8,6 +8,36 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 313 (2026-03-17): Citation Verifier — GPT-5.1 Judge, Precise Difference Hints
+
+**Objective**: Test the citation verifier against Psalm 41's 5 known errors, fix the `_describe_difference` hint noise, and add GPT-5.1 as a smarter false-positive filter alternative to Haiku.
+
+**Problems Identified**:
+- `_describe_difference()` generated noisy hints — listed trailing verse words as "missing from middle" (e.g., Ex 20:7 hint included 5 unrelated words after `אֱלֹהֶיךָ`). This confused Haiku into filtering real errors.
+- Doubled-word errors (e.g., `רֵקִים רֵקִים` in 2 Chr 13:7 when verse has one `רֵקִים`) were completely undetected.
+- Haiku judge was too aggressive: even with improved prompt, it filtered Ex 20:7 (a genuine missing-word error) because the English translation nearby included the missing word.
+
+**Solutions Implemented**:
+1. **Fixed `_describe_difference()`**: Replaced buggy walk-through (which never turned off `in_quote` flag, causing all trailing words to be reported) with greedy left-to-right word alignment. Now reports only words between matched positions. Ex 20:7 hint: `Missing word(s) from middle of quote: אֱלֹהֶיךָ` (was: `אֱלֹהֶיךָ כִּי יְנַקֶּה אֵת אֲשֶׁר יִשָּׂא שְׁמוֹ`).
+2. **Added doubled-word detection**: New check using `Counter` to detect words appearing more times in the quote than in the actual verse. Catches 2 Chr 13:7 (`רֵקִים` doubled).
+3. **Strengthened Haiku judge prompt**: Replaced generic partial-quote guidance with numbered "AUTOMATED ANALYSIS HINTS" section — concrete examples for middle-word drops, doubled words, and conjugation differences with explicit DEFAULT verdicts.
+4. **Added GPT-5.1 false-positive filter** (`--gpt-filter`): Uses GPT-5.1 with `reasoning.effort=medium` as an alternative to Haiku. Refactored `filter_false_positives()` into shared helpers (`_build_judge_pairs`, `_apply_judgments`) with separate `_filter_via_haiku` and `_filter_via_gpt` backends.
+
+**Test Results — Psalm 41 (5 known errors)**:
+| Filter | Real errors kept | False positives filtered | Cost |
+|--------|:---:|:---:|---:|
+| Regex only | 5/5 + 2 FP | — | $0.000 |
+| Haiku (improved) | 4/5 (misses Ex 20:7) | 3 (1 wrong) | $0.007 |
+| **GPT-5.1** | **5/5** | **2 (both correct)** | **$0.047** |
+
+**Next Session Plan**: (1) Make `--gpt-filter` the default in pipeline runners, (2) full end-to-end test: run citation verifier + copy editor on Psalm 41 print-ready file to confirm all 5 errors get corrected and appear in the copy editor changes file.
+
+**Files Modified**:
+- `src/utils/scripture_verifier.py` — Fixed `_describe_difference()` (precise alignment, doubled-word detection), strengthened `_HAIKU_JUDGE_SYSTEM` prompt, refactored `filter_false_positives()` with `model` param, added `_filter_via_gpt()`, `_build_judge_pairs()`, `_apply_judgments()`
+- `scripts/run_scripture_verifier.py` — Added `--gpt-filter` flag, unified filter invocation for both Haiku and GPT backends
+
+---
+
 ## Session 312 (2026-03-17): Haiku Tool-Use Citation Verifier Architecture
 
 **Objective**: Build a tool-use verification architecture where Haiku identifies all citations, calls a DB lookup tool to retrieve actual verse text, and the system compares them programmatically. Goal: eliminate regex pattern coverage gaps.

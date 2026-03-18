@@ -1052,22 +1052,43 @@ def _describe_difference(norm_quoted: str, norm_actual: str) -> str:
     q_words = norm_quoted.split()
     a_words = norm_actual.split()
 
-    # Check if all quoted words appear in actual (but not contiguously)
+    # --- Check for added/doubled words ---
+    # If a word appears MORE times in the quote than in the actual verse,
+    # that's a fabrication (e.g., "רֵקִים רֵקִים" when verse has one "רֵקִים").
+    from collections import Counter
+    q_counts = Counter(q_words)
+    a_counts = Counter(a_words)
+    doubled = [w for w, c in q_counts.items() if c > a_counts.get(w, 0)]
+    if doubled:
+        return (f"Word(s) appear more times in quote than in actual verse: "
+                f"{' '.join(doubled)}")
+
+    # --- Check for missing middle words ---
+    # Try to align quoted words onto actual words as a subsequence,
+    # then report any actual words skipped BETWEEN matched positions.
     all_present = all(w in a_words for w in q_words)
     if all_present and norm_quoted not in norm_actual:
-        # Words are present but not in the right order or missing words in between
-        # Find which words from the actual are missing in the quoted
-        missing = []
-        q_set = set(q_words)
-        # Walk through actual words and find gaps
-        in_quote = False
-        for w in a_words:
-            if w in q_set:
-                in_quote = True
-            elif in_quote:
-                missing.append(w)
-        if missing:
-            return f"Missing word(s) from middle of verse: {' '.join(missing)}"
+        # Greedy left-to-right alignment of q_words onto a_words
+        match_positions = []
+        search_from = 0
+        for qw in q_words:
+            for i in range(search_from, len(a_words)):
+                if a_words[i] == qw:
+                    match_positions.append(i)
+                    search_from = i + 1
+                    break
+
+        if len(match_positions) == len(q_words) and len(match_positions) >= 2:
+            # Collect words between matched positions (the gaps)
+            missing = []
+            for k in range(len(match_positions) - 1):
+                gap_start = match_positions[k] + 1
+                gap_end = match_positions[k + 1]
+                if gap_end > gap_start:
+                    missing.extend(a_words[gap_start:gap_end])
+            if missing:
+                return (f"Missing word(s) from middle of quote: "
+                        f"{' '.join(missing)}")
 
     # Check if it's a reordering
     if set(q_words) == set(a_words):
@@ -1163,65 +1184,41 @@ For each pair, output a JSON object with:
 
 IMPORTANT: Scholarly commentaries routinely quote fragments of verses. A partial quote
 is NOT an error unless it drops words from the MIDDLE of a quoted phrase. Quoting only
-the beginning or end of a verse is standard practice. However, if the automated tool
-reports "Missing word(s) from middle of verse" — that IS typically a GENUINE_ERROR,
-because the quoted text skips over words that should appear between two quoted words.
-Pay close attention to this hint.
+the beginning or end of a verse is standard practice.
 
-CONJUGATION DIFFERENCES ARE GENUINE ERRORS: If the quoted verb form differs from the
-actual verse's verb form (e.g. עֲקָבַנִי Qal perfect vs וַיַּעְקְבֵנִי wayyiqtol, or
-any prefix/suffix change that alters the conjugation), that IS a GENUINE_ERROR — not
-MINOR. The commentary presents it as a direct quotation, so the verb form must match
-the biblical text exactly. Do NOT classify verb conjugation mismatches as MINOR.
+AUTOMATED ANALYSIS HINTS — treat these as strong signals, not weak suggestions:
 
-Also watch for this common regex false positive: the automated tool may associate Hebrew
-text from a piyyut or liturgical quotation with a biblical citation that appears in a
-DIFFERENT clause or sentence. If the Hebrew clearly doesn't belong to the cited verse
-reference, that is a FALSE_POSITIVE.
+1. "Missing word(s) from middle of quote: X" means the quoted text bridges over word(s)
+   that actually appear between two quoted words in the biblical text. This is almost
+   always a GENUINE_ERROR. Example: quoting "וּבָרֵךְ אֶת עַבְדְּךָ" when the actual
+   verse reads "וּבָרֵךְ אֶת בֵּית עַבְדְּךָ" — the reader is misled into thinking
+   "אֶת" directly precedes "עַבְדְּךָ" in the Bible, but it doesn't.
+   DEFAULT: GENUINE_ERROR unless the Hebrew clearly belongs to a different source.
+
+2. "Word(s) appear more times in quote than in actual verse: X" means the quote
+   fabricates a repetition not present in the biblical text (e.g. "רֵקִים רֵקִים"
+   when the verse has only one "רֵקִים"). DEFAULT: GENUINE_ERROR unless the surrounding
+   text shows this is a piyyut/liturgical adaptation rather than a biblical citation.
+
+3. CONJUGATION DIFFERENCES ARE GENUINE ERRORS: If the quoted verb form differs from the
+   actual verse's verb form (e.g. עֲקָבַנִי Qal perfect vs וַיַּעְקְבֵנִי wayyiqtol),
+   that IS a GENUINE_ERROR — not MINOR. The commentary presents it as a direct quotation,
+   so the verb form must match the biblical text exactly.
+
+REGEX FALSE POSITIVE PATTERN: The automated tool may associate Hebrew text from a
+piyyut or liturgical quotation with a biblical citation that appears in a DIFFERENT
+clause or sentence. Check the "Surrounding text" — if the citation is a structural
+cross-reference (e.g. "parallel formulas at the end of Books II (Ps 72:18–19)") rather
+than attributing the nearby Hebrew, that is a FALSE_POSITIVE.
 
 Output ONLY a JSON array — no other text."""
 
 
-def filter_false_positives(
-    issues: List[CitationIssue],
+def _build_judge_pairs(
+    fixable: List[CitationIssue],
     commentary_text: str = "",
-) -> tuple:
-    """
-    Use Claude Haiku to filter false positives from the regex verifier's output.
-
-    Sends mismatched citation pairs to Haiku for judgment, removing issues
-    that Haiku classifies as FALSE_POSITIVE or MINOR.
-
-    Args:
-        issues: List of CitationIssue objects from verify_citations()
-        commentary_text: Optional full commentary text for context extraction
-
-    Returns:
-        (filtered_issues, stats_dict) where filtered_issues contains only
-        GENUINE_ERROR issues plus any non-NOT_SUBSTRING issues unchanged.
-    """
-    import json
-    import os
-
-    fixable = [i for i in issues if i.issue_type == "NOT_SUBSTRING"]
-    non_fixable = [i for i in issues if i.issue_type != "NOT_SUBSTRING"]
-
-    if not fixable:
-        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
-                        "filtered_count": 0, "kept_count": 0}
-
-    try:
-        import anthropic
-    except ImportError:
-        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
-                        "filtered_count": 0, "kept_count": len(fixable)}
-
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
-                        "filtered_count": 0, "kept_count": len(fixable)}
-
-    # Build the pairs text
+) -> str:
+    """Build the pairs text for the false-positive judge (shared by all backends)."""
     pair_lines = []
     for j, issue in enumerate(fixable, 1):
         pair_lines.append(f"\nPair {j}:")
@@ -1251,14 +1248,108 @@ def filter_false_positives(
                     context_line = context_line[:300] + "..."
             pair_lines.append(f"  Surrounding text: {context_line}")
 
-    user_msg = (
+    return (
         f"Judge these {len(fixable)} quotation-vs-actual pairs. "
         f"Output ONLY a JSON array.\n"
         + '\n'.join(pair_lines)
     )
 
-    client = anthropic.Anthropic(api_key=api_key)
 
+def _apply_judgments(
+    raw_json: str,
+    fixable: List[CitationIssue],
+    non_fixable: List[CitationIssue],
+    model_label: str,
+) -> List[CitationIssue]:
+    """Parse JSON judgments and filter issues (shared by all backends)."""
+    import json
+
+    if raw_json.startswith("```"):
+        raw_json = re.sub(r'^```(?:json)?\s*', '', raw_json)
+        raw_json = re.sub(r'\s*```$', '', raw_json)
+
+    judgments = json.loads(raw_json)  # caller handles JSONDecodeError
+
+    verdict_map = {}
+    for j in judgments:
+        idx = j.get("index", 0) - 1  # 0-based
+        verdict_map[idx] = (j.get("verdict", ""), j.get("explanation", ""))
+
+    filtered = list(non_fixable)
+    for idx, issue in enumerate(fixable):
+        verdict, explanation = verdict_map.get(idx, ("GENUINE_ERROR", ""))
+        if verdict == "GENUINE_ERROR":
+            if explanation:
+                issue.normalized_quoted = (
+                    issue.normalized_quoted + f" [{model_label}: {explanation}]"
+                )
+            filtered.append(issue)
+
+    return filtered
+
+
+def filter_false_positives(
+    issues: List[CitationIssue],
+    commentary_text: str = "",
+    model: str = "haiku",
+) -> tuple:
+    """
+    Use an LLM judge to filter false positives from the regex verifier's output.
+
+    Sends mismatched citation pairs to the judge model, removing issues
+    classified as FALSE_POSITIVE or MINOR.
+
+    Args:
+        issues: List of CitationIssue objects from verify_citations()
+        commentary_text: Optional full commentary text for context extraction
+        model: Judge model — "haiku" (Claude Haiku 4.5) or "gpt" (GPT-5.1)
+
+    Returns:
+        (filtered_issues, stats_dict) where filtered_issues contains only
+        GENUINE_ERROR issues plus any non-NOT_SUBSTRING issues unchanged.
+    """
+    import json
+    import os
+
+    fixable = [i for i in issues if i.issue_type == "NOT_SUBSTRING"]
+    non_fixable = [i for i in issues if i.issue_type != "NOT_SUBSTRING"]
+    empty_stats = {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+                   "filtered_count": 0, "kept_count": 0}
+
+    if not fixable:
+        return issues, empty_stats
+
+    user_msg = _build_judge_pairs(fixable, commentary_text)
+
+    if model == "gpt":
+        return _filter_via_gpt(fixable, non_fixable, user_msg)
+    else:
+        return _filter_via_haiku(fixable, non_fixable, user_msg)
+
+
+def _filter_via_haiku(
+    fixable: List[CitationIssue],
+    non_fixable: List[CitationIssue],
+    user_msg: str,
+) -> tuple:
+    """Run false-positive filter using Claude Haiku 4.5."""
+    import json
+    import os
+
+    try:
+        import anthropic
+    except ImportError:
+        return fixable + non_fixable, {
+            "input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+            "filtered_count": 0, "kept_count": len(fixable)}
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return fixable + non_fixable, {
+            "input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+            "filtered_count": 0, "kept_count": len(fixable)}
+
+    client = anthropic.Anthropic(api_key=api_key)
     response = client.messages.create(
         model="claude-haiku-4-5-20251001",
         max_tokens=2048,
@@ -1267,38 +1358,79 @@ def filter_false_positives(
     )
 
     raw = response.content[0].text.strip()
-    if raw.startswith("```"):
-        raw = re.sub(r'^```(?:json)?\s*', '', raw)
-        raw = re.sub(r'\s*```$', '', raw)
-
     try:
-        judgments = json.loads(raw)
+        filtered = _apply_judgments(raw, fixable, non_fixable, "Haiku")
     except json.JSONDecodeError:
-        return issues, {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
-                        "filtered_count": 0, "kept_count": len(fixable),
-                        "error": "JSON parse failed"}
-
-    # Build a map of index → verdict
-    verdict_map = {}
-    for j in judgments:
-        idx = j.get("index", 0) - 1  # 0-based
-        verdict_map[idx] = (j.get("verdict", ""), j.get("explanation", ""))
-
-    # Filter: keep only GENUINE_ERROR issues
-    filtered = list(non_fixable)
-    for idx, issue in enumerate(fixable):
-        verdict, explanation = verdict_map.get(idx, ("GENUINE_ERROR", ""))
-        if verdict == "GENUINE_ERROR":
-            if explanation:
-                issue.normalized_quoted = (
-                    issue.normalized_quoted + f" [Haiku: {explanation}]"
-                )
-            filtered.append(issue)
+        return fixable + non_fixable, {
+            "input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+            "filtered_count": 0, "kept_count": len(fixable),
+            "error": "JSON parse failed"}
 
     usage = response.usage
     input_tokens = usage.input_tokens
     output_tokens = usage.output_tokens
     cost = (input_tokens / 1_000_000) * 0.80 + (output_tokens / 1_000_000) * 4.00
+
+    kept = len([i for i in filtered if i.issue_type == "NOT_SUBSTRING"])
+    return filtered, {
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "cost": cost,
+        "filtered_count": len(fixable) - kept,
+        "kept_count": kept,
+    }
+
+
+def _filter_via_gpt(
+    fixable: List[CitationIssue],
+    non_fixable: List[CitationIssue],
+    user_msg: str,
+) -> tuple:
+    """Run false-positive filter using GPT-5.1 with moderate thinking."""
+    import json
+    import os
+
+    try:
+        from openai import OpenAI
+    except ImportError:
+        return fixable + non_fixable, {
+            "input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+            "filtered_count": 0, "kept_count": len(fixable)}
+
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        return fixable + non_fixable, {
+            "input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+            "filtered_count": 0, "kept_count": len(fixable)}
+
+    client = OpenAI(api_key=api_key)
+    response = client.responses.create(
+        model="gpt-5.1",
+        instructions=_HAIKU_JUDGE_SYSTEM,
+        input=user_msg,
+        reasoning={"effort": "medium"},
+    )
+
+    raw = response.output_text.strip()
+    try:
+        filtered = _apply_judgments(raw, fixable, non_fixable, "GPT-5.1")
+    except json.JSONDecodeError:
+        return fixable + non_fixable, {
+            "input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+            "filtered_count": 0, "kept_count": len(fixable),
+            "error": "JSON parse failed"}
+
+    usage = response.usage
+    input_tokens = usage.input_tokens
+    output_tokens = usage.output_tokens
+    thinking_tokens = getattr(usage, 'output_tokens_details', None)
+    thinking_cost_tokens = 0
+    if thinking_tokens:
+        thinking_cost_tokens = getattr(thinking_tokens, 'reasoning_tokens', 0)
+    non_thinking_output = output_tokens - thinking_cost_tokens
+    cost = ((input_tokens / 1_000_000) * 1.25 +
+            (non_thinking_output / 1_000_000) * 10.00 +
+            (thinking_cost_tokens / 1_000_000) * 10.00)
 
     kept = len([i for i in filtered if i.issue_type == "NOT_SUBSTRING"])
     return filtered, {

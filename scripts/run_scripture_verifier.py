@@ -75,7 +75,12 @@ Examples:
     parser.add_argument(
         "--haiku-filter",
         action="store_true",
-        help="Use Claude Haiku to filter false positives (~$0.003/psalm)"
+        help="Use Claude Haiku to filter false positives (~$0.008/psalm)"
+    )
+    parser.add_argument(
+        "--gpt-filter",
+        action="store_true",
+        help="Use GPT-5.1 to filter false positives (~$0.01/psalm)"
     )
     parser.add_argument(
         "--tooluse-verify",
@@ -131,17 +136,25 @@ Examples:
         # Run verification
         issues = verify_citations(text, db_path=args.db_path, psalm_number=psalm_num)
 
-        # Optional Haiku false-positive filter
-        haiku_stats = None
-        if args.haiku_filter and issues:
+        # Optional LLM false-positive filter
+        filter_stats = None
+        filter_model = None
+        if args.gpt_filter:
+            filter_model = "gpt"
+        elif args.haiku_filter:
+            filter_model = "haiku"
+
+        if filter_model and issues:
             fixable_count = len([i for i in issues if i.issue_type == "NOT_SUBSTRING"])
             if fixable_count > 0:
-                print(f"  Running Haiku false-positive filter on {fixable_count} issue(s)...")
-                issues, haiku_stats = filter_false_positives(issues, commentary_text=text)
-                kept = haiku_stats.get("kept_count", 0)
-                filtered = haiku_stats.get("filtered_count", 0)
-                print(f"  Haiku: kept {kept}, filtered {filtered} false positive(s) "
-                      f"(${haiku_stats.get('cost', 0):.4f})")
+                label = "GPT-5.1" if filter_model == "gpt" else "Haiku"
+                print(f"  Running {label} false-positive filter on {fixable_count} issue(s)...")
+                issues, filter_stats = filter_false_positives(
+                    issues, commentary_text=text, model=filter_model)
+                kept = filter_stats.get("kept_count", 0)
+                filtered = filter_stats.get("filtered_count", 0)
+                print(f"  {label}: kept {kept}, filtered {filtered} false positive(s) "
+                      f"(${filter_stats.get('cost', 0):.4f})")
 
         # Optional tool-use verifier for broader coverage
         if args.tooluse_verify:

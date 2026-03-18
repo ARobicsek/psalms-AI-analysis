@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-17 (Session 312)
+**Last Updated**: 2026-03-17 (Session 313)
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@
 Continuing with tweaks and improvements to the psalm readers guide generation pipeline.
 
 ### Progress Summary
-- **Current Session**: 310
+- **Current Session**: 313
 - **Active Features**: **Unified Writer V4**, **Opus 4.6 Master Writer**, **Sonnet 4.6 Micro Analyst**, **Adaptive Thinking (all Opus agents)**, **Copy Editor Agent (9-Category Taxonomy)**, **Scripture Citation Verifier**, Insight Extractor, Literary Echoes Integration, Complex Script Font Support (Arabic/CJK/Hebrew docx rendering), **GPT-5.4 Figurative Curator**, **GPT-5.1 Liturgical Librarian**
 
 ---
@@ -91,6 +91,13 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 313 (2026-03-17): Citation Verifier — GPT-5.1 Judge, Precise Difference Hints
+- Fixed `_describe_difference()`: replaced buggy walk-through (noisy trailing words) with greedy word alignment — now reports only the specific missing/added words (e.g., `אֱלֹהֶיךָ` instead of 6 unrelated words).
+- Added doubled-word detection: `Counter`-based check catches words appearing more times in quote than in actual verse (e.g., `רֵקִים` doubled in 2 Chr 13:7).
+- Strengthened Haiku judge prompt with numbered "AUTOMATED ANALYSIS HINTS" — concrete examples, explicit DEFAULT verdicts. Improved Haiku from 2/5 to 4/5 real errors kept.
+- Added `--gpt-filter` flag: GPT-5.1 with `reasoning.effort=medium` as alternative false-positive judge. Achieves **5/5 real errors kept, 0 false positives** on Psalm 41 ($0.047/psalm).
+- Refactored `filter_false_positives()` into shared helpers with separate Haiku and GPT backends.
+
 ### Session 312 (2026-03-17): Haiku Tool-Use Citation Verifier Architecture
 - Built `verify_citations_tooluse()` — Haiku identifies citations via tool-use (calls `lookup_verse` to query tanakh.db), Python does programmatic comparison, Haiku filters false positives.
 - Prompt caching (`cache_control: ephemeral`) reduces multi-turn cost from $0.21 to $0.04/psalm.
@@ -114,13 +121,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Softened `format_fix_prompt()` with methodology disclaimer and `[CITATION FIX]` tag so the copy editor applies citation corrections with judgment rather than over-correcting on false positives.
 - Added `_strip_echoed_supplementary()` to copy editor to prevent leaked citation-check instructions from appearing in DOCX output.
 - Added Pattern C citation extraction (Hebrew inside parentheticals, e.g. `(Gen 27:36: Hebrew, "English")`) — found in 18 psalms; zero regressions across 15-psalm test suite.
-
-### Session 308 (2026-03-17): Scripture Citation Verifier
-- Built `src/utils/scripture_verifier.py` — zero-LLM-cost module that compares quoted Hebrew scripture passages against `tanakh.db` using regex extraction + substring matching.
-- Normalization handles cantillation stripping, divine name variants (`ה׳`→`יהוה`, `אלק`→`אלה`), with consonantal-only fallback for vowel differences.
-- False-positive mitigations: psalm self-quote filter, intervening-citation check, MIN_HEBREW_WORDS=3 threshold.
-- Pipeline integration: runs as Step 5a½ BEFORE the copy editor on the print-ready file, pipes `format_fix_prompt()` to the copy editor via `supplementary_prompt` for single-pass correction.
-- Standalone runner: `scripts/run_scripture_verifier.py` with `--fix` flag for targeted fix passes.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 
