@@ -9,6 +9,51 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 317 (2026-03-18): SI Pipeline Parity Update
+
+**Objective**: Bring `run_si_pipeline.py` fully up to date with all improvements that had accumulated in `run_enhanced_pipeline.py`.
+
+**Problems Identified**:
+- SI pipeline had drifted behind the enhanced pipeline in 12+ areas over many sessions
+- Latent bug: `extract_insights()` call in SI pipeline passed only 4 args (missing `macro_analysis`) — would crash if insights were ever enabled via `--include-insights`
+- Concordance counting used old method (counting query headers vs summing actual result counts)
+- Missing `--exclude-insights` / `--exclude-questions` flags (added in enhanced pipeline)
+- No file existence guards on print-ready and Word doc steps
+- Doc gen error handling used `.warning()` instead of `.error()` with traceback
+- `tracker.mark_pipeline_complete()` called too late (after print-ready instead of before)
+- Deprecated `--use-o1` flag and `gpt-5` model choice still present
+- Duplicate print statements in startup section
+- `skip_college` still in `is_resuming` check
+- Torah Temimah missing from commentary patterns
+- Docstring/comments for `_extract_sections_from_copy_edited` less detailed than enhanced
+
+**Solutions Implemented**:
+1. Ported concordance counting fix (sum actual result numbers from `(N results` headers)
+2. Added Torah Temimah to commentary pattern list
+3. Added `exclude_insights` / `exclude_questions` flags to function signature, argparse, write_commentary call, reader questions save logic, and Word doc question logic
+4. Ported rich insight extractor with phonetic text from micro_analysis + `macro_analysis` as 5th param
+5. Added file existence guards on print-ready (`edited_intro_file.exists() and edited_verses_file.exists()`) and Word doc steps
+6. Upgraded doc gen error handling to `logger.error()` with `exc_info=True` + stdout print
+7. Moved `tracker.mark_pipeline_complete()` before print-ready step (matching enhanced)
+8. Removed deprecated `--use-o1` flag and `gpt-5` from `--master-editor-model` choices
+9. Updated help text for skip-insights/questions; added Session 280 comment
+10. Cleaned up duplicate print statements in startup section
+11. Removed `skip_college` from `is_resuming` check
+12. Ported enhanced docstring and inline comments for `_extract_sections_from_copy_edited`
+
+**Intentionally kept different** (by-design SI distinctions):
+- `MasterEditorSI` class (vs `MasterEditor`)
+- Special instruction loading + `--special-instruction` arg
+- `_SI` filename suffixes
+- `special_instruction=` param in `write_commentary` call
+
+**Files Modified**:
+- `scripts/run_si_pipeline.py` — All 12 improvements ported from enhanced pipeline
+
+**Verification**: Smoke test passed (`--smoke-test --skip-copy-editor --skip-word-doc`), syntax check passed.
+
+---
+
 ## Session 316 (2026-03-18): Session Management Overhaul
 
 **Objective**: Review and restructure session management system to reduce startup token cost and improve cross-session knowledge carry-over for both Claude Code and Gemini.

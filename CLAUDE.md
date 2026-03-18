@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 316 (2026-03-18)
+**Session**: 317 (2026-03-18)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 317 (2026-03-18)**: SI Pipeline Parity Update
+- Brought `run_si_pipeline.py` fully up to date with `run_enhanced_pipeline.py`
+- Ported 12 improvements: concordance counting, exclude flags, macro_analysis in insights, file guards, error handling, etc.
+- Fixed latent bug: insight extractor would crash if enabled (missing macro_analysis param)
 
 **Session 316 (2026-03-18)**: Session Management Overhaul
 - Restructured session management: CLAUDE.md is now single startup doc for both Claude Code and Gemini
@@ -24,10 +29,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 **Session 313 (2026-03-17)**: Citation Verifier — GPT-5.1 Judge, Precise Difference Hints
 - Fixed `_describe_difference()` with greedy word alignment; added doubled-word detection
 - Added `--gpt-filter` flag: GPT-5.1 achieves 5/5 real errors kept, 0 false positives
-
-**Session 312 (2026-03-17)**: Haiku Tool-Use Citation Verifier Architecture
-- Built `verify_citations_tooluse()` with prompt caching ($0.04/psalm)
-- Regex verifier outperforms tool-use in accuracy and cost; integrated as optional `--tooluse-verify`
 
 ## Quick Commands
 

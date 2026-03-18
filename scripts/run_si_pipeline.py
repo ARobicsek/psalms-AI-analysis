@@ -60,9 +60,9 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         lexicon_matches = re.findall(r'^### [^\n]+$', lexicon_section.group(0), re.MULTILINE)
         stats['lexicon_count'] = len(lexicon_matches)
 
-    # Count concordance queries
-    concordance_matches = re.findall(r'### (?:Query|Phrase):', markdown_content)
-    stats['concordance_count'] = len(concordance_matches)
+    # Count concordance results by parsing actual query headers: "### <query> (N results, ...)"
+    concordance_result_counts = re.findall(r'^### .+\((\d+) results', markdown_content, re.MULTILINE)
+    stats['concordance_count'] = sum(int(n) for n in concordance_result_counts)
 
     # Count figurative language instances
     curated_section = re.search(r'## Figurative Language Insights \(Curated\)(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)
@@ -86,6 +86,7 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         (r'### .*Rashi', 'Rashi'), (r'### .*Ibn Ezra', 'Ibn Ezra'), (r'### .*Radak', 'Radak'),
         (r'### .*Metzudat David', 'Metzudat David'), (r'### .*Malbim', 'Malbim'),
         (r'### .*Sforno', 'Sforno'), (r'### .*Meiri', 'Meiri'),
+        (r'### .*Torah Temimah', 'Torah Temimah'),
     ]
     for pattern, name in commentary_patterns:
         matches = re.findall(pattern, markdown_content)
@@ -151,15 +152,29 @@ def _parse_related_psalms_from_markdown(markdown_content: str) -> list:
 
 def _extract_sections_from_copy_edited(copy_edited_path: Path, logger=None) -> tuple:
     """Extract introduction and verse commentary sections from a copy-edited markdown file.
-    
+
+    The copy_edited.md has the same structure as print_ready.md:
+      # Commentary on Psalm N
+      ---
+      ## Introduction
+      <intro text including liturgical section>
+      ---
+      ## Psalm N
+      <psalm text>
+      ---
+      ## Verse-by-Verse Commentary
+      <verse commentary>
+      ------
+      ## Methodological...
+
     The copy editor outputs each paragraph on a single line (separated by \\n).
     The DOCX generator expects \\n\\n between paragraphs. This function restores
     the double-newline paragraph breaks after extraction.
-    
+
     This function also detects and corrects a known LLM failure mode where the
     copy editor displaces liturgical key verse content from the introduction
     section into the verse commentary section.
-    
+
     Returns:
         (intro_text, verses_text) — the raw text content of each section,
         with paragraph breaks restored for DOCX generation.
@@ -167,22 +182,27 @@ def _extract_sections_from_copy_edited(copy_edited_path: Path, logger=None) -> t
     _log = logger or (lambda msg: None)
     if logger:
         _log = logger.info
-    
+
     content = copy_edited_path.read_text(encoding='utf-8')
-    
+
+    # Extract introduction: from "## Introduction\n" to the first standalone "---" line
+    # that precedes "## Psalm" or "## Verse-by-Verse"
     intro_match = re.search(
         r'^## Introduction\n(.*?)(?=^---\s*$\n^## (?:Psalm|Verse))',
         content, re.DOTALL | re.MULTILINE
     )
     intro_text = intro_match.group(1).strip() if intro_match else ''
-    
+
+    # Extract verse commentary: from "## Verse-by-Verse Commentary\n" to the end marker
+    # The end marker may be "------\n## Methodological" or just "## Methodological" directly
     verses_match = re.search(
         r'^## Verse-by-Verse Commentary\n(.*?)(?=^-{3,}\s*$\n^## Methodo|^## Methodo|\Z)',
         content, re.DOTALL | re.MULTILINE
     )
     verses_text = verses_match.group(1).strip() if verses_match else ''
-    
+
     # Strip any trailing section separators (--- lines) from extracted text.
+    # The separator may be on its own line (\n---) or concatenated to text (word---)
     if intro_text:
         intro_text = re.sub(r'-{3,}\s*$', '', intro_text).strip()
     if verses_text:
@@ -234,6 +254,8 @@ def _extract_sections_from_copy_edited(copy_edited_path: Path, logger=None) -> t
                 _log(f"  ✅ Liturgical content restored to introduction section")
     
     # Restore paragraph breaks: the copy editor collapses \n\n to \n.
+    # Convert every single \n to \n\n so the DOCX generator sees paragraph boundaries.
+    # First collapse any existing \n\n to \n (normalize), then expand all to \n\n.
     if intro_text:
         intro_text = re.sub(r'\n+', '\n', intro_text)  # normalize
         intro_text = intro_text.replace('\n', '\n\n')   # restore double-newlines
@@ -262,6 +284,8 @@ def run_enhanced_pipeline(
     master_editor_model: str = "claude-opus-4-6",
     skip_insights: bool = True,      # Session 280: skipped by default, use --include-insights
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
+    exclude_insights: bool = False,
+    exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     special_instruction_file: str = None,
     macro_model: str = "claude-opus-4-6",
@@ -280,7 +304,7 @@ def run_enhanced_pipeline(
     output_path = Path(output_dir)
     summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
     
-    is_resuming = any([skip_macro, skip_micro, skip_insights, skip_writer, skip_college, skip_print_ready, skip_word_doc]) and not smoke_test
+    is_resuming = any([skip_macro, skip_micro, skip_insights, skip_writer, skip_print_ready, skip_word_doc]) and not smoke_test
     
     initial_data = None
     if is_resuming and summary_json_file.exists():
@@ -551,12 +575,44 @@ def run_enhanced_pipeline(
         try:
             extractor = InsightExtractor(cost_tracker=cost_tracker, model=insight_model)
 
-            # Get psalm text
-            db = TanakhDatabase(Path(db_path))
-            p = db.get_psalm(psalm_number)
-            p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
+            # Get rich psalm text from micro_analysis for prompt
+            p_text = ""
+            verses = []
+            if hasattr(micro_analysis, 'verse_commentaries'):
+                verses = micro_analysis.verse_commentaries
+            elif isinstance(micro_analysis, dict):
+                verses = micro_analysis.get('verse_commentaries', [])
 
-            curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, trimmed)
+            if verses:
+                def get_attr(obj, name, default=''):
+                    if isinstance(obj, dict): return obj.get(name, default)
+                    return getattr(obj, name, default)
+
+                phonetic_map = {}
+                for v in verses:
+                    v_num = get_attr(v, 'verse_number') or get_attr(v, 'verse', 0)
+                    phon = get_attr(v, 'phonetic_transcription', '')
+                    if phon:
+                        phonetic_map[v_num] = phon
+
+                db = TanakhDatabase(Path(db_path))
+                p = db.get_psalm(psalm_number)
+                if p:
+                    verse_texts = []
+                    for pv in p.verses:
+                        phon = phonetic_map.get(pv.verse, '')
+                        verse_block = f"Verse {pv.verse}:\nHebrew: {pv.hebrew}\nEnglish: {pv.english}"
+                        if phon:
+                            verse_block += f"\nPhonetic: {phon}"
+                        verse_texts.append(verse_block)
+                    p_text = "\n\n".join(verse_texts)
+
+            if not p_text:
+                db = TanakhDatabase(Path(db_path))
+                p = db.get_psalm(psalm_number)
+                p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
+
+            curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, macro_analysis, trimmed)
             tracker.track_model_for_step("insight_extractor", extractor.model)
             extractor.save_insights(curated_insights, insights_file)
         except Exception as e:
@@ -593,11 +649,11 @@ def run_enhanced_pipeline(
                 macro_file=macro_file,
                 micro_file=micro_file,
                 research_file=research_file,
-                insights_file=insights_file if insights_file.exists() else None,
+                insights_file=None if exclude_insights else (insights_file if insights_file.exists() else None),
                 psalm_number=psalm_number,
-                reader_questions_file=None if skip_questions else (reader_questions_file if reader_questions_file.exists() else None),
+                reader_questions_file=None if (exclude_questions or skip_questions) else (reader_questions_file if reader_questions_file.exists() else None),
                 special_instruction=special_instruction,
-                suppress_questions=skip_questions
+                suppress_questions=(exclude_questions or skip_questions)
             )
             
             # Save outputs
@@ -607,7 +663,7 @@ def run_enhanced_pipeline(
                 f.write(result['verse_commentary'])
                 
             # Handle reader questions (only save if questions are enabled)
-            if not skip_questions and result.get('reader_questions'):
+            if not exclude_questions and not skip_questions and result.get('reader_questions'):
                 refined_q_file = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
                 questions_text = result['reader_questions']
                 questions = []
@@ -664,13 +720,14 @@ def run_enhanced_pipeline(
     # STEP 4b: College Writer — RETIRED (Session 269, V4 unified writer)
 
     # --- Save stats to disk before print-ready step (which reads the JSON as a subprocess) ---
+    tracker.mark_pipeline_complete() # Ensure completion date is recorded for docs
     tracker.save_json(str(output_path))
 
     # =====================================================================
     # STEP 5: Print-Ready
     # =====================================================================
     print_ready_file = output_path / f"psalm_{psalm_number:03d}_print_ready.md"
-    if not skip_print_ready:
+    if not skip_print_ready and edited_intro_file.exists() and edited_verses_file.exists():
         logger.info("[STEP 5] Print-Ready Formatting...")
         print(f"\n{'='*80}")
         print(f"STEP 5: Print-Ready Formatting")
@@ -832,7 +889,7 @@ def run_enhanced_pipeline(
     # =====================================================================
     # STEP 6: Word Doc
     # =====================================================================
-    if not skip_word_doc:
+    if not skip_word_doc and edited_intro_file.exists() and edited_verses_file.exists():
         logger.info("[STEP 6] Word Doc Generation...")
         print(f"\n{'='*80}")
         print(f"STEP 6: Word Document Generation (.docx)")
@@ -840,7 +897,7 @@ def run_enhanced_pipeline(
         from src.utils.document_generator import DocumentGenerator
 
         try:
-            if skip_questions:
+            if exclude_questions or skip_questions:
                 q_file = None
             else:
                 refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
@@ -849,8 +906,9 @@ def run_enhanced_pipeline(
             gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file, docx_output_file, q_file)
             gen.generate()
         except Exception as e:
-            logger.warning(f"Doc gen failed: {e}")
-            
+            logger.error(f"Doc gen failed: {e}", exc_info=True)
+            print(f"Error generating Word document: {e}")
+
     # STEP 6b/6c: College/Combined Word Docs — RETIRED (Session 269, V4 unified writer)
 
     # =====================================================================
@@ -887,21 +945,25 @@ if __name__ == "__main__":
     parser.add_argument("--skip-print-ready", action="store_true")
     parser.add_argument("--skip-word-doc", action="store_true")
     parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)
-    parser.add_argument("--use-o1", action="store_true", help="Use o1-preview for the main writer/synthesis agent")
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
     parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-6",
-                       choices=["gpt-5", "claude-opus-4-6"],
+                       choices=["claude-opus-4-6"],
                        help="Model for Master Writer (default: claude-opus-4-6)")
-    # --- Checkpoint arguments ---questions and insights are SKIPPED by default.
+    # Session 280: questions and insights are SKIPPED by default.
+    # --include-* flags opt back in; --skip-* flags remain for backward compat.
     parser.add_argument("--skip-insights", action="store_true",
-                       help="(Default behavior) Skip insights generation")
+                       help="(Default behavior) Skip insights generation; use existing file if present")
     parser.add_argument("--skip-questions", action="store_true",
-                       help="(Default behavior) Skip question curation")
+                       help="(Default behavior) Skip question curation; use existing file if present")
     parser.add_argument("--include-insights", action="store_true",
                        help="Enable insights generation (overrides default skip)")
     parser.add_argument("--include-questions", action="store_true",
                        help="Enable question curation (overrides default skip)")
+    parser.add_argument("--exclude-insights", action="store_true",
+                       help="Skip insights generation and exclude from writer even if file exists")
+    parser.add_argument("--exclude-questions", action="store_true",
+                       help="Skip question curation and exclude from writer/doc even if file exists")
     parser.add_argument("--skip-copy-editor", action="store_true",
                        help="Skip the copy editor step (runs by default)")
     parser.add_argument("--special-instruction", type=str, default=None,
@@ -941,20 +1003,22 @@ if __name__ == "__main__":
     print(f"{'='*80}\n")
     print(f"Output Directory: {args.output_dir}")
     print(f"Database: {args.db_path}")
+    print(f"Rate Limit Delay: {args.delay} seconds")
+    print(f"Master Writer Model: {args.master_editor_model}")
+    print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
+    print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
+    print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
+    # Show SI status: auto-detect if not explicitly provided
+    si_display = args.special_instruction if args.special_instruction else "AUTO-DETECT"
+    print(f"Special Instruction: {si_display}")
 
     macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-6"
     insight_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_insight) else "gpt-5.4"
     question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.4"
     copy_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_copy) else "gpt-5.4"
-    
+
     if args.gpt_5_4_all or args.gpt_5_4_writer:
         args.master_editor_model = "gpt-5.4"
-        
-    print(f"Master Writer Model: {args.master_editor_model}")
-    print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
-    print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
-    print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
-        
     if args.gpt_5_4_all or args.gpt_5_4_writer:
         print(f"Override: Master Writer using GPT-5.4")
     if args.gpt_5_4_all or args.gpt_5_4_macro:
@@ -965,15 +1029,6 @@ if __name__ == "__main__":
         print(f"Override: Question Curator using GPT-5.4")
     if args.gpt_5_4_all or args.gpt_5_4_copy:
         print(f"Override: Copy Editor using GPT-5.4")
-    print()
-    print(f"Rate Limit Delay: {args.delay} seconds")
-    print(f"Master Writer Model: {args.master_editor_model}")
-    print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
-    print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
-    print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
-    # Show SI status: auto-detect if not explicitly provided
-    si_display = args.special_instruction if args.special_instruction else "AUTO-DETECT"
-    print(f"Special Instruction: {si_display}")
     print()
 
     run_enhanced_pipeline(
@@ -994,6 +1049,8 @@ if __name__ == "__main__":
         master_editor_model=args.master_editor_model,
         skip_insights=effective_skip_insights,
         skip_questions=effective_skip_questions,
+        exclude_insights=args.exclude_insights,
+        exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
         special_instruction_file=args.special_instruction,
         macro_model=macro_mdl,
