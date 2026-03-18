@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-17 (Session 310)
+**Last Updated**: 2026-03-17 (Session 311)
 
 
 ## Table of Contents
@@ -91,6 +91,12 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 311 (2026-03-17): Citation Verifier — Pattern D, Ellipsis Fragments, Normalization Fixes
+- Added Pattern D: forward inline citation extraction for non-parenthetical references (e.g., `2 Samuel 7:29 —`, `Psalm 55:13–14,`). Includes intervening-citation check and early-verify logic.
+- Added ellipsis-fragment splitting — Hebrew quotes containing `...` are split and each fragment verified independently (caught truncated `מְשַׂ` → should be `מְשַׂנְאִי` in Ps 55:13).
+- Fixed Tetragrammaton normalization (`יְהֹוָה` → `יהוה`) and meteg stripping (U+05BD) so `_describe_difference()` correctly identifies missing middle words.
+- Added `"Psalm"` (singular) to book abbreviation map. Improved Haiku prompt with automated difference hints.
+
 ### Session 310 (2026-03-17): Hybrid Haiku Citation Filter & Verifier Improvements
 - Added `--haiku-filter` flag: Claude Haiku 4.5 judges regex verifier mismatches to filter false positives (~$0.002/psalm). Correctly eliminated Ps 72:18-19 piyyut false positive while keeping Gen 27:36 conjugation error.
 - Fixed report contamination: `_strip_appended_reports()` removes previously-embedded verification reports before analysis, eliminating the Ex 20:7 false issue.
@@ -113,11 +119,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - Fixed garbled 15-word Hebrew quotation in Psalm 41 DOCX caused by Word's BiDi algorithm splitting long inline Hebrew into separate RTL runs.
 - Added `_reverse_bare_hebrew_segments` for 3-5 word inline Hebrew (LRO reversal) and block extraction for 6+ word segments (standalone RTL paragraphs with native Hebrew line-wrapping).
 - Block paragraphs use 13pt TNR, 0.3" indent; verse quotations (with sof-pasuq) excluded to preserve original styling.
-
-### Session 306 (2026-03-15): Fix Displaced Liturgical Content Recovery in DOCX
-- Fixed DOCX bug where liturgy section was interrupted by spurious "Verse-by-Verse Commentary" and "Verse 9" headers (Psalm 42).
-- Replaced flawed `< 100` char threshold and position-0 regex heuristics with standalone verse header detection that correctly distinguishes inline liturgical references from actual verse commentary headers.
-- Applied to both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

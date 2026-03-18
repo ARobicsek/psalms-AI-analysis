@@ -8,6 +8,42 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 311 (2026-03-17): Citation Verifier — Pattern D, Ellipsis Fragments, Normalization Fixes
+
+**Objective**: Test the citation verifier against Psalm 41 with user-planted errors in verses 7, 10, and 13, then fix the gaps revealed by the test.
+
+**Problems Identified**:
+- The verifier only caught citations in parenthetical format `(Book Ch:V)`. Inline references like `2 Samuel 7:29 —` and `Psalm 55:13–14, ...` were invisible (no Pattern D).
+- Ellipsis-separated Hebrew fragments (e.g., `כִּי לֹא אוֹיֵב... לֹא מְשַׂ עָלַי הִגְדִּיל...`) were treated as a single string and not verified per-fragment.
+- The Haiku FP filter incorrectly filtered genuine errors (Ex 20:7, 2 Sam 7:29) because the `_describe_difference()` hint function failed: the Tetragrammaton `יְהֹוָה` (with vowels) didn't match the normalized `יהוה` (from `ה׳`), and meteg (U+05BD) caused word mismatches like `שֵׁם` ≠ `שֵֽׁם`.
+- `Psalm` (singular) was missing from `_BOOK_ABBREVS`, so `Psalm 55:13` couldn't resolve to "Psalms" in the database.
+
+**Solutions Implemented**:
+1. **Pattern D: Forward inline citation extraction** (`scripture_verifier.py`): New `_CITATION_FORWARD_RE` regex and `_extract_hebrew_after_citation()` function. Matches non-parenthetical references like `2 Samuel 7:29 — Hebrew...` or `Psalm 55:13–14, ...Hebrew...`. Includes forward intervening-citation check, early-verify logic (short matching phrase near citation prevents false flagging of distant phrases), and parenthetical exclusion to avoid overlap with Patterns A/B/C.
+2. **Ellipsis fragment splitting** (`scripture_verifier.py`): New `_split_ellipsis_fragments()` splits extracted Hebrew on `...`/`…` into independent fragments, each verified separately against the cited verse. Catches truncated words like `מְשַׂ` (should be `מְשַׂנְאִי`) within multi-fragment quotes.
+3. **Divine name normalization fix** (`scripture_verifier.py`): Added Tetragrammaton pattern `יְהֹוָה` → `יהוה` with any diacritics between consonants, so the full voweled form normalizes to the same consonantal form as `ה׳`. This makes `_describe_difference()` correctly detect missing words in citations containing the divine name.
+4. **Meteg stripping** (`scripture_verifier.py`): Added U+05BD (meteg/stress mark) to the stripped characters in `_normalize_hebrew()`, preventing false word mismatches like `שֵׁם` ≠ `שֵֽׁם`.
+5. **Book name fix**: Added `"Psalm": "Psalms"` to `_BOOK_ABBREVS` for singular form resolution.
+6. **Haiku prompt improvements** (`scripture_verifier.py`): Strengthened system prompt to flag "Missing word(s) from middle of verse" as typically GENUINE_ERROR. Added automated `_describe_difference()` output as a hint in each pair sent to Haiku.
+
+**Test Results — Psalm 41 (regex-only, 6 issues)**:
+- Gen 27:36 conjugation error: CAUGHT (existing)
+- Ex 20:7 missing `אֱלֹהֶיךָ`: CAUGHT (existing)
+- Ps 55:13 truncated `מְשַׂנְאִי` → `מְשַׂ`: CAUGHT (NEW, Pattern D + ellipsis fragments)
+- 2 Sam 7:29 missing `בֵּית`: CAUGHT (NEW, Pattern D)
+- Ps 72:18-19 piyyut: flagged (FP, Haiku filters correctly)
+- Jer 20:10 plene/defective spelling: flagged (FP, Haiku filters correctly)
+
+**Next Session**: Build Haiku tool-use verification architecture — Haiku identifies all citations, calls DB lookup tool, then judges matches. Eliminates regex pattern coverage gaps entirely (~$0.02/psalm).
+
+**Files Modified**:
+- `src/utils/scripture_verifier.py` — Added Pattern D (`_CITATION_FORWARD_RE`, `_extract_hebrew_after_citation`, forward-verify loop with intervening-citation check and early-verify), `_split_ellipsis_fragments()`, Tetragrammaton normalization, meteg stripping, `"Psalm"` book name, Haiku prompt improvements with difference hints
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+- `docs/session_tracking/PROJECT_STATUS.md` — Session 311 entry
+- `docs/session_tracking/scriptReferences.md` — Updated verifier description
+
+---
+
 ## Session 310 (2026-03-17): Hybrid Haiku Citation Filter & Verifier Improvements
 
 **Objective**: Explore using Claude Haiku 4.5 to improve citation verification accuracy by filtering false positives, and fix two underlying verifier issues (report contamination, loose consonantal matching).

@@ -68,7 +68,7 @@ _BOOK_ABBREVS = {
     "Zech": "Zechariah",
     "Mal": "Malachi",
     # Writings
-    "Ps": "Psalms", "Pss": "Psalms", "Psa": "Psalms",
+    "Ps": "Psalms", "Pss": "Psalms", "Psa": "Psalms", "Psalm": "Psalms",
     "Prov": "Proverbs", "Pr": "Proverbs",
     "Song": "Song of Songs",
     "Lam": "Lamentations",
@@ -179,8 +179,12 @@ def _resolve_book_name(raw_book: str) -> Optional[str]:
 _CANTILLATION_RANGE = set(range(0x0591, 0x05B0))  # trope/cantillation marks
 
 # Divine name normalization patterns
+_DIACRITICS_CLASS = '[\u05B0-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7]*'
 _DIVINE_NAME_PATTERNS = [
     (re.compile(r'ה[׳\']'), 'יהוה'),            # ה׳ or ה' → יהוה
+    # Full Tetragrammaton with any vowels → consonantal יהוה
+    (re.compile(r'י' + _DIACRITICS_CLASS + r'ה' + _DIACRITICS_CLASS +
+                r'ו' + _DIACRITICS_CLASS + r'ה'), 'יהוה'),
     (re.compile(r'אלק'), 'אלה'),                  # אלקים→אלהים, אלקי→אלהי, etc.
     (re.compile(r'צבקות'), 'צבאות'),               # reverential form → standard
 ]
@@ -199,6 +203,9 @@ def _normalize_hebrew(text: str) -> str:
         cp = ord(ch)
         # Skip cantillation marks
         if cp in _CANTILLATION_RANGE:
+            continue
+        # Skip meteg (stress mark, doesn't affect reading)
+        if cp == 0x05BD:
             continue
         # Skip sof-pasuq
         if cp == 0x05C3:
@@ -354,6 +361,75 @@ _CITATION_INLINE_RE = re.compile(
     r'\)',
     re.IGNORECASE
 )
+
+# Pattern D: Inline forward citation — book reference NOT in parentheses,
+# followed by Hebrew text.  Matches patterns like:
+#   2 Samuel 7:29 — וּבָרֵךְ אֶת עַבְדְּךָ ...
+#   Psalm 55:13–14, ... כִּי לֹא אוֹיֵב ...
+# The regex captures the reference; Hebrew extraction uses a forward scan.
+_BOOK_NAMES_PATTERN = (
+    r'(?:Gen(?:esis)?|Ex(?:od(?:us)?)?|Lev(?:iticus)?|Num(?:bers)?|'
+    r'Deut(?:eronomy)?|Josh(?:ua)?|Judg(?:es)?|'
+    r'(?:1|2|I{1,2})\s*(?:Sam(?:uel)?|Kgs|Kings?|Chr(?:on(?:icles)?)?)|'
+    r'Isa(?:iah)?|Jer(?:emiah)?|Ezek(?:iel)?|'
+    r'Hos(?:ea)?|Joel|Am(?:os)?|Obad(?:iah)?|Jonah?|Mic(?:ah)?|'
+    r'Nah(?:um)?|Hab(?:akkuk)?|Zeph(?:aniah)?|Hag(?:gai)?|'
+    r'Zech(?:ariah)?|Mal(?:achi)?|'
+    r'Ps(?:alm)?s?|Prov(?:erbs)?|Job|'
+    r'Song(?:\s+of\s+Songs)?|Ruth|Lam(?:entations)?|'
+    r'Eccl(?:esiastes)?|Qoh|Esth(?:er)?|Dan(?:iel)?|'
+    r'Ezra|Neh(?:emiah)?)'
+)
+
+_CITATION_FORWARD_RE = re.compile(
+    r'(?<!\()'                                   # NOT preceded by open paren
+    r'((?:1|2|I{1,2})?\s*'                       # optional numbered prefix
+    + _BOOK_NAMES_PATTERN +
+    r')\s+'                                       # book name + space
+    r'(\d+)'                                      # chapter number
+    r':'
+    r'(\d+)'                                      # first verse number
+    r'(?:\s*[–\-]\s*(\d+))?',                     # optional verse range end
+    re.IGNORECASE
+)
+
+
+def _extract_hebrew_after_citation(
+    text: str, citation_end: int
+) -> Optional[List[str]]:
+    """
+    Look forward from an inline citation to find Hebrew text being quoted.
+
+    Scans up to 300 chars forward for Hebrew words, grouping consecutive ones
+    into phrases (same logic as _extract_hebrew_before_citation but forward).
+
+    Returns a list of ALL Hebrew phrases found (ordered closest-first),
+    or None if no Hebrew is found.  The caller decides which phrases to
+    verify (some may be too short, others may match the verse immediately).
+    """
+    lookahead_end = min(len(text), citation_end + 300)
+    lookahead = text[citation_end:lookahead_end]
+
+    words = list(_HEBREW_WORD_RE.finditer(lookahead))
+    if not words:
+        return None
+
+    # Group consecutive Hebrew words into phrases
+    phrases = []
+    phrase_words = [words[0].group()]
+    for i in range(1, len(words)):
+        gap = lookahead[words[i - 1].end():words[i].start()]
+        has_latin = bool(re.search(r'[a-zA-Z]', gap))
+        has_newline = '\n' in gap
+        if has_latin or has_newline or len(gap) > 10:
+            phrases.append(' '.join(phrase_words))
+            phrase_words = [words[i].group()]
+        else:
+            phrase_words.append(words[i].group())
+    phrases.append(' '.join(phrase_words))
+
+    return phrases if phrases else None
+
 
 # Minimum Hebrew words required to consider something a "quotation" vs. a
 # single-word lexical reference.  A phrase like יָצוּק (1 Kgs 7:24) is a
@@ -743,8 +819,179 @@ def verify_citations(
             normalized_actual=norm_actual,
         ))
 
+    # ----- Pattern D: Inline forward citations (NOT in parentheses) -----
+    # e.g.  2 Samuel 7:29 — וּבָרֵךְ אֶת עַבְדְּךָ ...
+    #        Psalm 55:13–14, ... כִּי לֹא אוֹיֵב ...
+    # These are invisible to Patterns A/B/C which require parenthetical refs.
+
+    # Build a set of already-checked (book, chapter, verse, line_number) to
+    # avoid double-flagging citations that Pattern A/B/C already processed.
+    checked_refs = set()
+    for match in _CITATION_PAREN_RE.finditer(text):
+        raw_book = match.group(1).strip()
+        chapter = int(match.group(2))
+        verse_num = int(match.group(3))
+        line_num = text[:match.start()].count('\n') + 1
+        checked_refs.add((raw_book.lower(), chapter, verse_num, line_num))
+    for match in _CITATION_INLINE_RE.finditer(text):
+        raw_book = match.group(1).strip()
+        chapter = int(match.group(2))
+        verse_num = int(match.group(3))
+        line_num = text[:match.start()].count('\n') + 1
+        checked_refs.add((raw_book.lower(), chapter, verse_num, line_num))
+
+    for match in _CITATION_FORWARD_RE.finditer(text):
+        # Skip if this match is inside a parenthetical (Pattern A/B/C territory)
+        if match.start() > 0 and text[match.start() - 1] == '(':
+            continue
+        # Also skip if the preceding non-space char is '('
+        pre = text[:match.start()].rstrip()
+        if pre and pre[-1] == '(':
+            continue
+
+        raw_book = match.group(1).strip()
+        chapter = int(match.group(2))
+        verse_num = int(match.group(3))
+        verse_end = int(match.group(4)) if match.group(4) else verse_num
+        cite_ref = f"({raw_book} {chapter}:{verse_num})"
+
+        # Skip if already checked by Pattern A/B/C on same line
+        line_num = text[:match.start()].count('\n') + 1
+        if (raw_book.lower(), chapter, verse_num, line_num) in checked_refs:
+            continue
+
+        db_book_name = _resolve_book_name(raw_book)
+        if db_book_name is None:
+            continue
+
+        # Extract Hebrew phrases AFTER the citation (ordered closest-first)
+        all_phrases = _extract_hebrew_after_citation(text, match.end())
+        if all_phrases is None:
+            continue
+
+        # Find the first phrase with enough words for verification
+        hebrew_quoted = None
+        for phrase in all_phrases:
+            if len(_HEBREW_WORD_RE.findall(phrase)) >= MIN_HEBREW_WORDS:
+                hebrew_quoted = phrase
+                break
+        if hebrew_quoted is None:
+            continue
+
+        # --- Forward intervening-citation check ---
+        # If another scripture citation (inline or parenthetical) appears
+        # between this reference and the Hebrew text, the Hebrew likely belongs
+        # to that closer citation, not this one.  Skip to avoid false matches.
+        hebrew_pos = text.find(hebrew_quoted[:20], match.end())
+        if hebrew_pos > 0:
+            gap_text = text[match.end():hebrew_pos]
+            has_intervening = (
+                _CITATION_PAREN_RE.search(gap_text)
+                or _CITATION_INLINE_RE.search(gap_text)
+                or _CITATION_FORWARD_RE.search(gap_text)
+            )
+            if has_intervening:
+                continue
+
+        # Look up all verses in the range for early-verify and full checking
+        actual_verses = {}
+        for v in range(verse_num, verse_end + 1):
+            verse_obj = db.get_verse(db_book_name, chapter, v)
+            if verse_obj:
+                actual_verses[v] = verse_obj.hebrew
+
+        if not actual_verses:
+            continue
+
+        combined_actual = ' '.join(actual_verses.values())
+        norm_actual = _normalize_hebrew(combined_actual)
+        cons_actual = _strip_to_consonants(combined_actual)
+
+        # --- Early-verify check ---
+        # If a CLOSER phrase (even below MIN_HEBREW_WORDS) matches the verse,
+        # the citation is verified by that short quote.  This prevents false
+        # positives where a matching 2-word phrase is skipped and a distant
+        # non-matching phrase is flagged instead.
+        early_verified = False
+        for phrase in all_phrases:
+            if phrase == hebrew_quoted:
+                break  # reached the phrase we'll verify — stop early-check
+            # Even 1-word phrases can verify if they're a valid substring
+            norm_p = _normalize_hebrew(phrase)
+            if len(norm_p) >= 3 and norm_p in norm_actual:
+                early_verified = True
+                break
+            cons_p = _strip_to_consonants(phrase)
+            if len(cons_p) >= 3 and _words_match(cons_p, cons_actual):
+                early_verified = True
+                break
+        if early_verified:
+            continue
+
+        # Self-quote filter (same logic as Pattern A/B)
+        cons_quoted_full = _strip_to_consonants(hebrew_quoted)
+        is_self_quote = False
+        if psalm_consonants:
+            for pv_cons in psalm_consonants:
+                if cons_quoted_full in pv_cons:
+                    is_self_quote = True
+                    break
+        if is_self_quote:
+            if db_book_name == "Psalms" and chapter == psalm_number:
+                pass
+            else:
+                continue
+
+        # Split on ellipsis to get fragments for independent verification
+        fragments = _split_ellipsis_fragments(hebrew_quoted)
+
+        # Verify each fragment independently
+        for fragment in fragments:
+            frag_words = _HEBREW_WORD_RE.findall(fragment)
+            if len(frag_words) < MIN_HEBREW_WORDS:
+                continue
+
+            norm_frag = _normalize_hebrew(fragment)
+            if norm_frag in norm_actual:
+                continue
+
+            cons_frag = _strip_to_consonants(fragment)
+            if _words_match(cons_frag, cons_actual):
+                continue
+
+            # Failed — record the issue
+            location = _find_current_verse_header(text, match.start())
+            issues.append(CitationIssue(
+                quoted_hebrew=fragment,
+                citation_ref=cite_ref,
+                actual_hebrew=combined_actual,
+                location_hint=location,
+                issue_type="NOT_SUBSTRING",
+                line_number=line_num,
+                normalized_quoted=norm_frag,
+                normalized_actual=norm_actual,
+            ))
+
     db.close()
     return issues
+
+
+def _split_ellipsis_fragments(hebrew_text: str) -> List[str]:
+    """
+    Split a Hebrew quotation on ellipsis markers (... or …) into
+    independent fragments for separate verification.
+
+    If no ellipsis is present, returns a single-element list with the
+    original text.
+    """
+    # Split on ... or … (Unicode ellipsis U+2026)
+    parts = re.split(r'\.{3}|…', hebrew_text)
+    fragments = []
+    for part in parts:
+        stripped = part.strip(' ,;:\u2014\u2013-"\'')
+        if stripped and _HEBREW_WORD_RE.search(stripped):
+            fragments.append(stripped)
+    return fragments if fragments else [hebrew_text]
 
 
 # ---------------------------------------------------------------------------
@@ -916,7 +1163,10 @@ For each pair, output a JSON object with:
 
 IMPORTANT: Scholarly commentaries routinely quote fragments of verses. A partial quote
 is NOT an error unless it drops words from the MIDDLE of a quoted phrase. Quoting only
-the beginning or end of a verse is standard practice.
+the beginning or end of a verse is standard practice. However, if the automated tool
+reports "Missing word(s) from middle of verse" — that IS typically a GENUINE_ERROR,
+because the quoted text skips over words that should appear between two quoted words.
+Pay close attention to this hint.
 
 CONJUGATION DIFFERENCES ARE GENUINE ERRORS: If the quoted verb form differs from the
 actual verse's verb form (e.g. עֲקָבַנִי Qal perfect vs וַיַּעְקְבֵנִי wayyiqtol, or
@@ -979,6 +1229,12 @@ def filter_false_positives(
         pair_lines.append(f"  Location: {issue.location_hint}")
         pair_lines.append(f"  Quoted Hebrew: {issue.quoted_hebrew}")
         pair_lines.append(f"  Actual verse text: {issue.actual_hebrew}")
+
+        # Include the automated difference analysis as a hint
+        if issue.normalized_quoted and issue.normalized_actual:
+            diff_hint = _describe_difference(issue.normalized_quoted, issue.normalized_actual)
+            if diff_hint:
+                pair_lines.append(f"  Automated analysis: {diff_hint}")
 
         # Extract ~300 chars of context around the citation for disambiguation
         if commentary_text and issue.line_number > 0:
