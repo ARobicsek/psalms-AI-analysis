@@ -1,6 +1,6 @@
 # Psalms Project Status
 
-**Last Updated**: 2026-03-17 (Session 311)
+**Last Updated**: 2026-03-17 (Session 312)
 
 
 ## Table of Contents
@@ -91,6 +91,13 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Recent Work Summary (Last 5 Sessions)
 
+### Session 312 (2026-03-17): Haiku Tool-Use Citation Verifier Architecture
+- Built `verify_citations_tooluse()` — Haiku identifies citations via tool-use (calls `lookup_verse` to query tanakh.db), Python does programmatic comparison, Haiku filters false positives.
+- Prompt caching (`cache_control: ephemeral`) reduces multi-turn cost from $0.21 to $0.04/psalm.
+- Testing on Psalm 41 and 22 showed regex verifier ($0.003) outperforms tool-use ($0.04) in both accuracy and cost. Haiku misses some citations and can fabricate Hebrew text.
+- Integrated as optional `--tooluse-verify` flag in all pipeline runners (runs alongside regex, merges results).
+- Architecture is ready for future improvement when Haiku extraction reliability improves.
+
 ### Session 311 (2026-03-17): Citation Verifier — Pattern D, Ellipsis Fragments, Normalization Fixes
 - Added Pattern D: forward inline citation extraction for non-parenthetical references (e.g., `2 Samuel 7:29 —`, `Psalm 55:13–14,`). Includes intervening-citation check and early-verify logic.
 - Added ellipsis-fragment splitting — Hebrew quotes containing `...` are split and each fragment verified independently (caught truncated `מְשַׂ` → should be `מְשַׂנְאִי` in Ps 55:13).
@@ -114,11 +121,6 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 - False-positive mitigations: psalm self-quote filter, intervening-citation check, MIN_HEBREW_WORDS=3 threshold.
 - Pipeline integration: runs as Step 5a½ BEFORE the copy editor on the print-ready file, pipes `format_fix_prompt()` to the copy editor via `supplementary_prompt` for single-pass correction.
 - Standalone runner: `scripts/run_scripture_verifier.py` with `--fix` flag for targeted fix passes.
-
-### Session 307 (2026-03-16): Fix Garbled Inline Hebrew in DOCX
-- Fixed garbled 15-word Hebrew quotation in Psalm 41 DOCX caused by Word's BiDi algorithm splitting long inline Hebrew into separate RTL runs.
-- Added `_reverse_bare_hebrew_segments` for 3-5 word inline Hebrew (LRO reversal) and block extraction for 6+ word segments (standalone RTL paragraphs with native Hebrew line-wrapping).
-- Block paragraphs use 13pt TNR, 0.3" indent; verse quotations (with sof-pasuq) excluded to preserve original styling.
 
 For earlier sessions, see [IMPLEMENTATION_LOG.md](IMPLEMENTATION_LOG.md).
 

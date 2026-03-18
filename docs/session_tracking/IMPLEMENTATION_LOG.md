@@ -8,6 +8,54 @@ This file contains detailed session history for sessions 200 and later.
 
 ---
 
+## Session 312 (2026-03-17): Haiku Tool-Use Citation Verifier Architecture
+
+**Objective**: Build a tool-use verification architecture where Haiku identifies all citations, calls a DB lookup tool to retrieve actual verse text, and the system compares them programmatically. Goal: eliminate regex pattern coverage gaps.
+
+**Architecture Explored**:
+Three approaches were tested and compared on Psalm 41 and Psalm 22:
+
+1. **Pure Haiku comparison** (v1): Haiku extracts citations via tool-use, looks up verses, AND judges matches itself. Result: $0.21/psalm, found only 1/4 genuine errors. Haiku is unreliable at consonantal Hebrew comparison — too lenient.
+
+2. **Hybrid approach** (v2, final): Haiku extracts citations via tool-use → Python does programmatic comparison (existing `_normalize_hebrew` + `_words_match`) → Haiku filters false positives. Result: $0.03-0.04/psalm, found 2-3 genuine errors.
+
+3. **Regex + Haiku filter** (existing, Session 310): Regex patterns A/B/C/D extract citations → programmatic comparison → Haiku filters FPs. Result: $0.003/psalm, found 4 genuine errors.
+
+**Key Findings**:
+- Haiku's citation extraction is unreliable: it misses some citations (Ex 20:7, 2 Sam 7:29 in Psalm 41; 4 citations in Psalm 22) and occasionally fabricates Hebrew text that doesn't appear in the commentary (Ps 7:5 hallucination in Psalm 41).
+- Haiku is great at judging mismatches (false positive filtering) but bad at extracting Hebrew exactly.
+- Prompt caching (`cache_control: ephemeral`) reduced tool-use cost from $0.21 to $0.04 by avoiding re-sending the full commentary each turn.
+- The regex approach remains the better primary verifier: it's free, faster (<1s vs 65-80s), and catches more genuine errors.
+
+**Implementation**:
+1. `verify_citations_tooluse()` in `scripture_verifier.py`: Full hybrid tool-use verifier with prompt caching, batched tool calls, programmatic comparison, and optional Haiku FP filter.
+2. `--tooluse-verify` flag added to `run_enhanced_pipeline.py`, `run_si_pipeline.py`, and `run_scripture_verifier.py`. Runs alongside the regex verifier and merges results (deduplication by reference).
+3. `test_haiku_tooluse_verifier.py` test script with comparison output.
+
+**Test Results — Psalm 41**:
+| Approach | Genuine Errors | False Positives | Cost | Time |
+|----------|---------------|-----------------|------|------|
+| Regex only | 4 genuine + 3 FP | 3 | Free | <1s |
+| Regex + Haiku filter | 4 genuine | 0 | $0.003 | ~5s |
+| Tool-use hybrid | 2 genuine + 1 fabricated | 1 | $0.038 | 65s |
+
+**Test Results — Psalm 22**:
+- Tool-use: 2 issues (both also found by regex), 0 novel finds
+- Regex: 6 issues (4 additional not caught by tool-use)
+
+**Conclusion**: The tool-use architecture is implemented and integrated as an optional supplementary mode. The regex+filter approach ($0.003/psalm) remains the recommended default. Tool-use adds coverage in theory but Haiku's extraction reliability needs to improve before it can be a primary verifier.
+
+**Files Modified**:
+- `src/utils/scripture_verifier.py` — Added `_TOOLUSE_EXTRACT_SYSTEM`, `_TOOLUSE_TOOLS` (lookup_verse, report_citations), `verify_citations_tooluse()` with prompt caching and hybrid comparison
+- `scripts/test_haiku_tooluse_verifier.py` — **[NEW]** Tool-use verifier test script with regex comparison
+- `scripts/run_enhanced_pipeline.py` — Added `--tooluse-verify` flag and tool-use integration in Step 5a½
+- `scripts/run_si_pipeline.py` — Same `--tooluse-verify` integration
+- `scripts/run_scripture_verifier.py` — Added `--tooluse-verify` flag with merge logic
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+- `docs/session_tracking/PROJECT_STATUS.md` — Session 312 entry
+
+---
+
 ## Session 311 (2026-03-17): Citation Verifier — Pattern D, Ellipsis Fragments, Normalization Fixes
 
 **Objective**: Test the citation verifier against Psalm 41 with user-planted errors in verses 7, 10, and 13, then fix the gaps revealed by the test.

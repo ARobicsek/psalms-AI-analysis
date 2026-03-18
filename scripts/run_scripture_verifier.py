@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.utils.scripture_verifier import (
     verify_citations,
+    verify_citations_tooluse,
     format_verification_report,
     format_fix_prompt,
     filter_false_positives,
@@ -75,6 +76,11 @@ Examples:
         "--haiku-filter",
         action="store_true",
         help="Use Claude Haiku to filter false positives (~$0.003/psalm)"
+    )
+    parser.add_argument(
+        "--tooluse-verify",
+        action="store_true",
+        help="Also run Haiku tool-use verifier for broader coverage (~$0.04/psalm)"
     )
 
     args = parser.parse_args()
@@ -130,12 +136,34 @@ Examples:
         if args.haiku_filter and issues:
             fixable_count = len([i for i in issues if i.issue_type == "NOT_SUBSTRING"])
             if fixable_count > 0:
-                print(f"  🔍 Running Haiku false-positive filter on {fixable_count} issue(s)...")
+                print(f"  Running Haiku false-positive filter on {fixable_count} issue(s)...")
                 issues, haiku_stats = filter_false_positives(issues, commentary_text=text)
                 kept = haiku_stats.get("kept_count", 0)
                 filtered = haiku_stats.get("filtered_count", 0)
-                print(f"  ✅ Haiku: kept {kept}, filtered {filtered} false positive(s) "
+                print(f"  Haiku: kept {kept}, filtered {filtered} false positive(s) "
                       f"(${haiku_stats.get('cost', 0):.4f})")
+
+        # Optional tool-use verifier for broader coverage
+        if args.tooluse_verify:
+            print(f"  Running Haiku tool-use verifier...")
+            tooluse_issues, tooluse_stats = verify_citations_tooluse(
+                text, db_path=args.db_path, psalm_number=psalm_num,
+                haiku_filter=True,
+            )
+            print(f"  Tool-use: {tooluse_stats.get('total_citations_found', 0)} citations, "
+                  f"{len(tooluse_issues)} issue(s) "
+                  f"(${tooluse_stats['cost']:.4f})")
+            # Merge tool-use issues with regex issues (deduplicate by reference)
+            existing_refs = {i.citation_ref.strip("()").lower() for i in issues}
+            new_count = 0
+            for ti in tooluse_issues:
+                ref_key = ti.citation_ref.strip("()").lower()
+                if ref_key not in existing_refs:
+                    issues.append(ti)
+                    existing_refs.add(ref_key)
+                    new_count += 1
+            if new_count:
+                print(f"  Tool-use found {new_count} additional issue(s) not caught by regex")
 
         # Generate report
         report = format_verification_report(issues, psalm_number=psalm_num)

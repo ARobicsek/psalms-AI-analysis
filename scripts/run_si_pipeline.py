@@ -699,7 +699,7 @@ def run_enhanced_pipeline(
         try:
             from src.utils.scripture_verifier import (
                 verify_citations, format_verification_report, format_fix_prompt,
-                filter_false_positives,
+                filter_false_positives, verify_citations_tooluse,
             )
             verify_text = print_ready_file.read_text(encoding='utf-8')
             citation_issues = verify_citations(
@@ -719,6 +719,27 @@ def run_enhanced_pipeline(
                         f"filtered {haiku_stats['filtered_count']} "
                         f"(${haiku_stats['cost']:.4f})"
                     )
+
+            # Optional tool-use verifier for broader citation coverage
+            if getattr(args, 'tooluse_verify', False):
+                logger.info("[STEP 5a½] Running Haiku tool-use verifier...")
+                tooluse_issues, tooluse_stats = verify_citations_tooluse(
+                    verify_text, db_path=db_path, psalm_number=psalm_number,
+                    haiku_filter=True,
+                )
+                logger.info(
+                    f"[STEP 5a½] Tool-use: {tooluse_stats.get('total_citations_found', 0)} citations, "
+                    f"{len(tooluse_issues)} issue(s) "
+                    f"(${tooluse_stats['cost']:.4f})"
+                )
+                # Merge tool-use issues with regex issues (deduplicate by reference)
+                existing_refs = {i.citation_ref.strip("()").lower() for i in citation_issues}
+                for ti in tooluse_issues:
+                    ref_key = ti.citation_ref.strip("()").lower()
+                    if ref_key not in existing_refs:
+                        citation_issues.append(ti)
+                        existing_refs.add(ref_key)
+                        logger.info(f"[STEP 5a½] Tool-use found additional: {ti.citation_ref}")
 
             report = format_verification_report(citation_issues, psalm_number=psalm_number)
             report_path = output_path / f"psalm_{psalm_number:03d}_citation_verification.md"
@@ -882,6 +903,8 @@ if __name__ == "__main__":
     parser.add_argument("--gpt-5-4-writer", action="store_true", help="Use GPT-5.4 for Master Writer")
     parser.add_argument("--haiku-filter", action="store_true",
                        help="Use Claude Haiku to filter citation verifier false positives (~$0.003/psalm)")
+    parser.add_argument("--tooluse-verify", action="store_true",
+                       help="Also run Haiku tool-use citation verifier for broader coverage (~$0.04/psalm)")
 
     args = parser.parse_args()
 

@@ -1308,3 +1308,426 @@ def filter_false_positives(
         "filtered_count": len(fixable) - kept,
         "kept_count": kept,
     }
+
+
+# ---------------------------------------------------------------------------
+# Haiku tool-use citation verifier  (~$0.01–0.02 per psalm)
+# ---------------------------------------------------------------------------
+
+_TOOLUSE_EXTRACT_SYSTEM = """You are a Hebrew scripture citation extractor for scholarly psalm commentary.
+
+Your job: read the commentary text and find every place the author quotes Hebrew scripture
+(3+ Hebrew words) and attributes it to a specific biblical verse. For each citation found,
+call lookup_verse to get the actual verse text from the database.
+
+STEP-BY-STEP INSTRUCTIONS:
+1. Read through the commentary carefully.
+2. Identify every Hebrew quotation of 3+ words paired with a biblical reference.
+   Citations may appear as:
+   - Parenthetical: "...Hebrew text... (Ex 20:7)"
+   - Inline after colon: "(Gen 27:36: Hebrew text, 'English')"
+   - Forward reference: "2 Samuel 7:29 — Hebrew text..."
+3. For EACH citation, call lookup_verse to retrieve the actual verse.
+   IMPORTANT: Batch as many lookup_verse calls as possible into each response.
+4. After ALL lookups are complete, call report_citations once with every citation
+   you found, including the quoted Hebrew EXACTLY as it appears in the commentary.
+
+WHAT TO EXTRACT:
+- Direct quotations: Hebrew text presented as quoting a specific verse
+- Partial quotations: Fragments attributed to a verse
+
+WHAT TO SKIP:
+- Single-word or two-word Hebrew terms (lexical glosses, not quotations)
+- Hebrew text from Psalm {psalm_number} itself (the psalm being discussed)
+- Liturgical/piyyut Hebrew that is NOT directly attributed to a verse citation
+
+CRITICAL: Copy the Hebrew text EXACTLY as it appears in the document, character for
+character. Do NOT correct, fix, or normalize the Hebrew in any way. If the author
+wrote a word incorrectly or omitted a word, copy it exactly as written. The whole
+point of this extraction is to verify whether the author quoted correctly — if you
+"fix" the quote, we cannot detect errors."""
+
+# Tool definitions for the Anthropic API
+_TOOLUSE_TOOLS = [
+    {
+        "name": "lookup_verse",
+        "description": (
+            "Look up the actual Hebrew text of a biblical verse from the Tanakh database. "
+            "Use standard English book names: Genesis, Exodus, Leviticus, Numbers, "
+            "Deuteronomy, Joshua, Judges, I Samuel, II Samuel, I Kings, II Kings, "
+            "Isaiah, Jeremiah, Ezekiel, Hosea, Joel, Amos, Obadiah, Jonah, Micah, "
+            "Nahum, Habakkuk, Zephaniah, Haggai, Zechariah, Malachi, Psalms, "
+            "Proverbs, Job, Song of Songs, Ruth, Lamentations, Ecclesiastes, "
+            "Esther, Daniel, Ezra, Nehemiah, I Chronicles, II Chronicles."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "book": {
+                    "type": "string",
+                    "description": "Book name (e.g. 'Exodus', 'I Samuel', 'Psalms')"
+                },
+                "chapter": {
+                    "type": "integer",
+                    "description": "Chapter number"
+                },
+                "verse": {
+                    "type": "integer",
+                    "description": "Verse number"
+                }
+            },
+            "required": ["book", "chapter", "verse"]
+        }
+    },
+    {
+        "name": "report_citations",
+        "description": (
+            "Report ALL citations found in the commentary. Call this ONCE after "
+            "all lookup_verse calls are complete. Include EVERY citation you found, "
+            "regardless of whether it seems to match or not. The comparison will be "
+            "done programmatically after you report."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "citations": {
+                    "type": "array",
+                    "description": "List of all Hebrew scripture citations found",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "citation_ref": {
+                                "type": "string",
+                                "description": "The biblical reference (e.g. 'Ex 20:7', '2 Samuel 7:29')"
+                            },
+                            "quoted_hebrew": {
+                                "type": "string",
+                                "description": "The Hebrew text as quoted in the commentary — COPY EXACTLY, do NOT fix"
+                            },
+                            "location_hint": {
+                                "type": "string",
+                                "description": "Approximate location (e.g. 'Verse 7 section', 'Introduction')"
+                            },
+                            "quote_type": {
+                                "type": "string",
+                                "enum": ["direct", "partial", "liturgical", "allusion"],
+                                "description": "Type of citation"
+                            }
+                        },
+                        "required": ["citation_ref", "quoted_hebrew"]
+                    }
+                },
+                "total_found": {
+                    "type": "integer",
+                    "description": "Total number of citations found and reported"
+                }
+            },
+            "required": ["citations", "total_found"]
+        }
+    }
+]
+
+
+def verify_citations_tooluse(
+    text: str,
+    db_path: str = "database/tanakh.db",
+    psalm_number: int = 0,
+    haiku_filter: bool = True,
+) -> tuple:
+    """
+    Verify Hebrew scripture citations using a hybrid Haiku tool-use approach.
+
+    Architecture:
+      1. Haiku reads the commentary and identifies all citations (tool-use with
+         lookup_verse to get actual text from tanakh.db)
+      2. Python does programmatic comparison (normalization + word-level matching)
+      3. Optionally, Haiku filters false positives from the mismatches
+
+    This eliminates regex pattern coverage gaps while maintaining reliable
+    Hebrew text comparison.
+
+    Args:
+        text: Full commentary text (markdown)
+        db_path: Path to the tanakh.db SQLite database
+        psalm_number: The psalm being analyzed (for self-quote filtering)
+        haiku_filter: Whether to run Haiku false-positive filter on mismatches
+
+    Returns:
+        (issues: List[CitationIssue], stats: dict)
+    """
+    import json
+    import os
+    import time
+
+    # Strip any previously-appended verification report
+    text = _strip_appended_reports(text)
+
+    try:
+        import anthropic
+    except ImportError:
+        return [], {"error": "anthropic package not installed"}
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return [], {"error": "ANTHROPIC_API_KEY not set"}
+
+    from src.data_sources.tanakh_database import TanakhDatabase
+    db = TanakhDatabase(Path(db_path))
+
+    client = anthropic.Anthropic(api_key=api_key)
+
+    system_prompt = _TOOLUSE_EXTRACT_SYSTEM.format(psalm_number=psalm_number)
+
+    # Use structured content blocks with cache_control for prompt caching.
+    system_blocks = [
+        {
+            "type": "text",
+            "text": system_prompt,
+            "cache_control": {"type": "ephemeral"},
+        }
+    ]
+
+    user_msg_blocks = [
+        {
+            "type": "text",
+            "text": (
+                f"Find all Hebrew scripture citations in this Psalm {psalm_number} commentary. "
+                f"For each citation of 3+ Hebrew words paired with a biblical reference, "
+                f"call lookup_verse to retrieve the actual verse text. "
+                f"IMPORTANT: Batch as many lookup_verse calls as possible into each response.\n"
+                f"After all lookups, call report_citations with every citation you found.\n\n"
+                f"---\n\n{text}"
+            ),
+            "cache_control": {"type": "ephemeral"},
+        }
+    ]
+
+    messages = [{"role": "user", "content": user_msg_blocks}]
+
+    total_input_tokens = 0
+    total_output_tokens = 0
+    total_cache_read_tokens = 0
+    total_cache_creation_tokens = 0
+    lookups_performed = 0
+    # Store lookup results for programmatic comparison
+    lookup_cache = {}  # (book, chapter, verse) → hebrew text
+    start_time = time.time()
+    report_result = None
+
+    # Phase 1: Haiku extracts citations via tool-use
+    MAX_TURNS = 30
+    for turn in range(MAX_TURNS):
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=8192,
+            system=system_blocks,
+            messages=messages,
+            tools=_TOOLUSE_TOOLS,
+        )
+
+        total_input_tokens += response.usage.input_tokens
+        total_output_tokens += response.usage.output_tokens
+        total_cache_read_tokens += getattr(response.usage, 'cache_read_input_tokens', 0) or 0
+        total_cache_creation_tokens += getattr(response.usage, 'cache_creation_input_tokens', 0) or 0
+
+        if response.stop_reason == "end_turn":
+            break
+        if response.stop_reason != "tool_use":
+            break
+
+        tool_results = []
+        for block in response.content:
+            if block.type != "tool_use":
+                continue
+
+            if block.name == "lookup_verse":
+                book_raw = block.input.get("book", "")
+                chapter = block.input.get("chapter", 0)
+                verse_num = block.input.get("verse", 0)
+
+                db_book_name = _resolve_book_name(book_raw)
+                if db_book_name is None:
+                    db_book_name = book_raw
+
+                verse_obj = db.get_verse(db_book_name, chapter, verse_num)
+                if verse_obj:
+                    lookup_cache[(db_book_name, chapter, verse_num)] = verse_obj.hebrew
+                    result_text = json.dumps({
+                        "book": db_book_name,
+                        "chapter": chapter,
+                        "verse": verse_num,
+                        "hebrew": verse_obj.hebrew,
+                        "reference": verse_obj.reference,
+                    }, ensure_ascii=False)
+                else:
+                    result_text = json.dumps({
+                        "error": f"Verse not found: {db_book_name} {chapter}:{verse_num}"
+                    })
+
+                lookups_performed += 1
+                tool_results.append({
+                    "type": "tool_result",
+                    "tool_use_id": block.id,
+                    "content": result_text,
+                })
+
+            elif block.name == "report_citations":
+                report_result = block.input
+                tool_results.append({
+                    "type": "tool_result",
+                    "tool_use_id": block.id,
+                    "content": "Citations received. Programmatic comparison will follow.",
+                })
+
+        messages.append({"role": "assistant", "content": response.content})
+        messages.append({"role": "user", "content": tool_results})
+
+        if report_result is not None:
+            break
+
+    db.close()
+    extraction_elapsed = time.time() - start_time
+
+    # Phase 2: Programmatic comparison of each citation
+    raw_citations = report_result.get("citations", []) if report_result else []
+    total_found = report_result.get("total_found", len(raw_citations)) if report_result else 0
+
+    # Build psalm self-quote set for filtering
+    psalm_consonants = set()
+    if psalm_number > 0:
+        db2 = TanakhDatabase(Path(db_path))
+        psalm_obj = db2.get_psalm(psalm_number)
+        if psalm_obj:
+            for v in psalm_obj.verses:
+                psalm_consonants.add(_strip_to_consonants(v.hebrew))
+        db2.close()
+
+    issues = []
+    auto_passed = 0
+    skipped = 0
+
+    for cit in raw_citations:
+        quoted_hebrew = cit.get("quoted_hebrew", "")
+        ref_str = cit.get("citation_ref", "")
+        location = cit.get("location_hint", "Unknown")
+        quote_type = cit.get("quote_type", "direct")
+
+        # Skip liturgical/allusion types
+        if quote_type in ("liturgical", "allusion"):
+            skipped += 1
+            continue
+
+        # Check word count
+        word_count = len(_HEBREW_WORD_RE.findall(quoted_hebrew))
+        if word_count < MIN_HEBREW_WORDS:
+            skipped += 1
+            continue
+
+        # Parse the reference to look up actual text
+        ref_match = re.match(
+            r'((?:1|2|I{1,2})?\s*[A-Za-z]+(?:\s+of\s+[A-Za-z]+)?)\s+(\d+):(\d+)',
+            ref_str
+        )
+        if not ref_match:
+            skipped += 1
+            continue
+
+        raw_book = ref_match.group(1).strip()
+        chapter = int(ref_match.group(2))
+        verse_num = int(ref_match.group(3))
+
+        db_book_name = _resolve_book_name(raw_book)
+        if db_book_name is None:
+            skipped += 1
+            continue
+
+        # Get actual verse text from lookup cache
+        actual_hebrew = lookup_cache.get((db_book_name, chapter, verse_num))
+        if not actual_hebrew:
+            skipped += 1
+            continue
+
+        # Self-quote filter
+        cons_quoted = _strip_to_consonants(quoted_hebrew)
+        is_self_quote = False
+        if psalm_consonants:
+            for pv_cons in psalm_consonants:
+                if cons_quoted in pv_cons:
+                    is_self_quote = True
+                    break
+        if is_self_quote:
+            if db_book_name == "Psalms" and chapter == psalm_number:
+                pass
+            else:
+                skipped += 1
+                continue
+
+        # Split on ellipsis for fragment verification
+        fragments = _split_ellipsis_fragments(quoted_hebrew)
+
+        for fragment in fragments:
+            frag_words = _HEBREW_WORD_RE.findall(fragment)
+            if len(frag_words) < MIN_HEBREW_WORDS:
+                continue
+
+            # Programmatic comparison (same logic as verify_citations)
+            norm_frag = _normalize_hebrew(fragment)
+            norm_actual = _normalize_hebrew(actual_hebrew)
+
+            if norm_frag in norm_actual:
+                auto_passed += 1
+                continue
+
+            cons_frag = _strip_to_consonants(fragment)
+            cons_actual = _strip_to_consonants(actual_hebrew)
+            if _words_match(cons_frag, cons_actual):
+                auto_passed += 1
+                continue
+
+            # Mismatch found — record as issue
+            cite_ref = f"({ref_str})"
+            issues.append(CitationIssue(
+                quoted_hebrew=fragment,
+                citation_ref=cite_ref,
+                actual_hebrew=actual_hebrew,
+                location_hint=location,
+                issue_type="NOT_SUBSTRING",
+                normalized_quoted=norm_frag,
+                normalized_actual=norm_actual,
+            ))
+
+    # Phase 3: Optional Haiku false-positive filter
+    filter_stats = {"input_tokens": 0, "output_tokens": 0, "cost": 0.0,
+                    "filtered_count": 0, "kept_count": len(issues)}
+    if haiku_filter and issues:
+        issues, filter_stats = filter_false_positives(issues, commentary_text=text)
+
+    # Cost calculation
+    non_cached_input = total_input_tokens - total_cache_read_tokens - total_cache_creation_tokens
+    extraction_cost = (
+        (non_cached_input / 1_000_000) * 0.80
+        + (total_cache_read_tokens / 1_000_000) * 0.08
+        + (total_cache_creation_tokens / 1_000_000) * 1.00
+        + (total_output_tokens / 1_000_000) * 4.00
+    )
+    total_cost = extraction_cost + filter_stats["cost"]
+
+    stats = {
+        "input_tokens": total_input_tokens + filter_stats["input_tokens"],
+        "output_tokens": total_output_tokens + filter_stats["output_tokens"],
+        "cache_read_tokens": total_cache_read_tokens,
+        "cache_creation_tokens": total_cache_creation_tokens,
+        "cost": total_cost,
+        "extraction_cost": extraction_cost,
+        "filter_cost": filter_stats["cost"],
+        "elapsed": time.time() - start_time,
+        "lookups_performed": lookups_performed,
+        "total_citations_found": total_found,
+        "auto_passed": auto_passed,
+        "skipped": skipped,
+        "mismatches_before_filter": filter_stats.get("kept_count", 0) + filter_stats.get("filtered_count", 0),
+        "filtered_count": filter_stats.get("filtered_count", 0),
+        "turns": turn + 1,
+    }
+
+    return issues, stats
