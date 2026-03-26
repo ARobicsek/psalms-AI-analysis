@@ -177,6 +177,17 @@ class DocumentGenerator:
         LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
         PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
 
+        # Protect existing LRO...PDF blocks from being re-processed.
+        # Without this, Hebrew already reversed and wrapped by the paren/bracket
+        # handler gets matched as "bare" Hebrew and reversed a second time,
+        # producing nested LRO wrappers that garble Word's display.
+        placeholders = {}
+        def _save_lro_block(match):
+            key = f'\x00BIDI{len(placeholders)}\x00'
+            placeholders[key] = match.group(0)
+            return key
+        text = re.sub(r'\u202D[^\u202C]*\u202C', _save_lro_block, text)
+
         # Hebrew word: base letter (+ geresh/gershayim) followed by combining marks
         heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
         # Separator between Hebrew words: spaces, colons, semicolons, commas, maqqef
@@ -191,7 +202,13 @@ class DocumentGenerator:
             reversed_segment = DocumentGenerator._reverse_hebrew_by_clusters(segment)
             return f'{LRO}{reversed_segment}{PDF}'
 
-        return re.sub(bare_hebrew, reverse_segment, text)
+        result = re.sub(bare_hebrew, reverse_segment, text)
+
+        # Restore protected LRO...PDF blocks
+        for key, value in placeholders.items():
+            result = result.replace(key, value)
+
+        return result
 
     def _process_text_rtl(self, text):
         """
@@ -1339,6 +1356,9 @@ class DocumentGenerator:
                                     return f'{LRO}{match.group(1)}{PDF}'
                                 modified_line = re.sub(verse_ref_pattern, wrap_verse_ref, modified_line)
                             
+                            # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
+                            modified_line = self._reverse_bare_hebrew_segments(modified_line)
+
                             # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
                             LRM = '\u200E'  # LEFT-TO-RIGHT MARK
                             bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'

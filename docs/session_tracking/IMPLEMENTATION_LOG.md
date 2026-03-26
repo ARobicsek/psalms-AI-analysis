@@ -9,6 +9,25 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 318 (2026-03-26): BiDi Double-Reversal Fix
+
+**Objective**: Fix garbled Hebrew text in parentheses in Psalm 43's DOCX output — `(תְּפִלָּה לִשְׁלוֹם הַמְּדִינָה)` displayed with scrambled word order.
+
+**Problems Identified**:
+- `_reverse_bare_hebrew_segments()` double-processed Hebrew text that was already reversed and wrapped with LRO/PDF by the parenthesized Hebrew handler. The bare segment regex matched reversed Hebrew characters inside the LRO wrapper as a new 3+ word segment, reversing them a second time and producing nested `LRO(LRO…PDF)PDF` — garbled display in Word.
+- `_add_paragraph_with_soft_breaks()` was missing the `_reverse_bare_hebrew_segments()` call that all other 4 BiDi code paths included.
+
+**Solutions Implemented**:
+1. Added placeholder protection to `_reverse_bare_hebrew_segments()`: existing `LRO…PDF` blocks are replaced with null-byte placeholders before the bare Hebrew regex runs, then restored after — preventing double-processing.
+2. Added the missing `_reverse_bare_hebrew_segments()` call to `_add_paragraph_with_soft_breaks()`, matching the other code paths.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Placeholder protection in `_reverse_bare_hebrew_segments()` (+11 lines); added bare-segment call to `_add_paragraph_with_soft_breaks()` (+2 lines)
+
+**Verification**: Diagnostic script confirmed single LRO/PDF wrapper (no nesting). Psalm 43 and Psalm 40 DOCX files regenerated successfully.
+
+---
+
 ## Session 317 (2026-03-18): SI Pipeline Parity Update
 
 **Objective**: Bring `run_si_pipeline.py` fully up to date with all improvements that had accumulated in `run_enhanced_pipeline.py`.

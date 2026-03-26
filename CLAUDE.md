@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 317 (2026-03-18)
+**Session**: 318 (2026-03-26)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 318 (2026-03-26)**: BiDi Double-Reversal Fix
+- Fixed `_reverse_bare_hebrew_segments()` double-processing Hebrew already wrapped by paren/bracket handler
+- Added placeholder protection for existing LRO/PDF blocks; added missing bare-segment call to soft-breaks path
+- Psalm 43 `(תְּפִלָּה לִשְׁלוֹם הַמְּדִינָה)` now displays correctly in DOCX
 
 **Session 317 (2026-03-18)**: SI Pipeline Parity Update
 - Brought `run_si_pipeline.py` fully up to date with `run_enhanced_pipeline.py`
@@ -25,10 +30,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 **Session 314 (2026-03-17)**: GPT Filter Default, End-to-End Citation Fix Verified
 - Made `--gpt-filter` default in all pipeline/verifier scripts; added `--no-gpt-filter`
 - Fixed standalone verifier `--fix` bug; full end-to-end test on Psalm 41 passed ($0.53)
-
-**Session 313 (2026-03-17)**: Citation Verifier — GPT-5.1 Judge, Precise Difference Hints
-- Fixed `_describe_difference()` with greedy word alignment; added doubled-word detection
-- Added `--gpt-filter` flag: GPT-5.1 achieves 5/5 real errors kept, 0 false positives
 
 ## Quick Commands
 
