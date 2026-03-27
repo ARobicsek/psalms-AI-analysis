@@ -629,7 +629,7 @@ class DocumentGenerator:
         Returns (before, hebrew, after) tuple if found, or None.
         """
         heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
-        separator = r'[\s:;,\u05BE]+'
+        separator = r'(?:[\s:;,/\u05BE]|\*{1,2})+'
         # Match 6+ consecutive Hebrew words
         bare_hebrew = rf'(?<![\u05D0-\u05EA\u0590-\u05FF])({heb_word}(?:{separator}{heb_word}){{5,}})(?![\u05D0-\u05EA])'
 
@@ -680,9 +680,15 @@ class DocumentGenerator:
         p.paragraph_format.left_indent = Inches(0.3)
         p.paragraph_format.right_indent = Inches(0.3)
 
-        # Add the Hebrew text as-is (Word handles RTL display natively)
-        run = p.add_run(hebrew_text)
-        self._set_run_font_xml(run, font_name='Times New Roman', font_size=13)
+        # Parse **bold** markers and create separate runs
+        parts = re.split(r'\*\*(.+?)\*\*', hebrew_text)
+        for i, part in enumerate(parts):
+            if not part:
+                continue
+            run = p.add_run(part)
+            self._set_run_font_xml(run, font_name='Times New Roman', font_size=13)
+            if i % 2 == 1:  # Odd indices are the bold-captured groups
+                run.bold = True
 
     def _add_paragraph_with_markdown(self, text: str, style: str = 'Normal'):
         """Adds a paragraph, parsing basic markdown for bold/italics, including nested formatting."""

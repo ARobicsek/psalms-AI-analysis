@@ -1,0 +1,4 @@
+LITERARY ECHOES (Pass 4: Final version)
+
+Attached is the original literary echoes document. Please review ALL the data above and FULLY RECONSTUCT the attached document, BUT with all errors corrected to the extent possible. Hallucinated quotations should be removed.
+Please output the entire document in a manner such that when I copy and paste it, the output will NOT show citation references.

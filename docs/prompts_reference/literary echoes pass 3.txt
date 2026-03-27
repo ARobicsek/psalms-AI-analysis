@@ -1,10 +1,9 @@
-PSALM {NUMBER} — LITERARY ECHOES (Pass 3: Source Verification)
+PSALM  — LITERARY ECHOES (Pass 3: Source Verification)
 
-Attached is a literary echoes document for the Psalm numbered above. Your job is to AUDIT every quotation for accuracy. This is a verification task, not a creative task.
-
+Attached is a literary echoes document for a Psalm. Your job is to AUDIT **EVERY** quotation for accuracy. This is a verification task, not a creative task. Do not audit a sample of the quotations - find and audit them all.
 
 ```
-For EACH quotation in the document above, do the following:
+For EACH quotation in the attached document, do the following:
 
 1. VERIFY the quotation exists in the attributed work. Search for the text. Check the author, work title, and section/line number.
 

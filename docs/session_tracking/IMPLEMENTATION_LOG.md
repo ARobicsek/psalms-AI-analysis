@@ -9,6 +9,26 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 319 (2026-03-27): Fix Split Block Quote Formatting in DOCX
+
+**Objective**: Fix DOCX formatting issue where long Hebrew quotations containing markdown bold markers (`**`) or poetry line-break markers (`/`) were split between inline format (Aptos 12) and block quote format (Times New Roman 13).
+
+**Problems Identified**:
+- `_split_long_hebrew_block` regex required 6+ consecutive Hebrew words, but `**` bold markers around `עַל־כֵּן` interrupted the sequence, splitting one quotation into two segments — only the longer segment was extracted as a block quote
+- Same issue with `/` poetry line-break separator in a Yiddish quotation (Kadya Molodowsky passage)
+- Extracted Hebrew blocks lost bold formatting because `**` markers were stripped without being rendered
+
+**Solutions Implemented**:
+1. Updated separator regex in `_split_long_hebrew_block` to allow `**` bold markers and `/` as valid separators between Hebrew words: `r'(?:[\s:;,/\u05BE]|\*{1,2})+'`
+2. Updated `_add_hebrew_block_paragraph` to parse `**...**` markers and create separate bold/non-bold runs instead of a single plain run
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Updated separator regex in `_split_long_hebrew_block`; added bold-aware run creation in `_add_hebrew_block_paragraph`
+
+**Verification**: Regenerated Psalm 45 DOCX. Both "The Logic of Therefore" quotations and the Molodowsky Yiddish quotation now render as unified block quotes with bold preserved.
+
+---
+
 ## Session 318 (2026-03-26): BiDi Double-Reversal Fix
 
 **Objective**: Fix garbled Hebrew text in parentheses in Psalm 43's DOCX output — `(תְּפִלָּה לִשְׁלוֹם הַמְּדִינָה)` displayed with scrambled word order.
