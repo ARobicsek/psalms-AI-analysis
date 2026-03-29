@@ -629,7 +629,7 @@ class DocumentGenerator:
         Returns (before, hebrew, after) tuple if found, or None.
         """
         heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
-        separator = r'(?:[\s:;,/\u05BE]|\*{1,2})+'
+        separator = r'(?:[\s:;,./?!()\[\]"\'\-–—\u05BE\u05C0\u05C3]|\*{1,2})+'
         # Match 6+ consecutive Hebrew words
         bare_hebrew = rf'(?<![\u05D0-\u05EA\u0590-\u05FF])({heb_word}(?:{separator}{heb_word}){{5,}})(?![\u05D0-\u05EA])'
 

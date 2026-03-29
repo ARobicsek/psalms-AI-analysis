@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 319 (2026-03-27)
+**Session**: 320 (2026-03-29)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 320 (2026-03-29)**: DOCX Formatting Fixes for Psalms 44, 49, and 50
+- Fixed `_extract_sections_from_copy_edited` to use a flexible regex for "Key Verses" header, correctly restoring displaced liturgical content in Psalm 44.
+- Expanded `_split_long_hebrew_block` regex to support punctuation like `!`, `?`, `—`, `׃`, and `׀` inside Hebrew blocks.
+- Prevented 14-word and punctuation-heavy Hebrew block quotes in Psalms 49 and 50 from being improperly split.
 
 **Session 319 (2026-03-27)**: Fix Split Block Quote Formatting in DOCX
 - Fixed `_split_long_hebrew_block` regex: `**` bold markers and `/` poetry separators now allowed between Hebrew words
@@ -27,10 +32,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Archived IMPLEMENTATION_LOG sessions 241-299; moved feature docs to FEATURE_ARCHIVE.md
 - Created Claude Code persistent memory; slimmed PROJECT_STATUS.md to stable reference
 
-**Session 315 (2026-03-18)**: Divine Name Normalization & Citation Difference Accuracy
-- Added reverse divine name mappings to citation verifier (El/Eli/Shaddai/Eloah patterns)
-- Added NFC Unicode normalization; fixed `_describe_difference()` annotation stripping
-- Psalm 42: 4 to 3 issues (eliminated false positive)
 ## Quick Commands
 
 ```bash

@@ -9,6 +9,26 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 320 (2026-03-29): DOCX Formatting Fixes for Psalms 44, 49, and 50
+
+**Objective**: Resolve three specific formatting issues in the DOCX outputs: displaced liturgical headers in Psalm 44, incorrect inline styling for a full verse quotation in Psalm 49, and improperly split block formatting for a punctuated Hebrew quotation in Psalm 50.
+
+**Problems Identified**:
+- Psalm 44: The recovery script for displaced liturgical content was strictly looking for `#### Key Verses and Phrases`, but the LLM output `#### Key Verses`, causing the recovery to silently fail and leave liturgical headers inside the verse commentary.
+- Psalm 49: The `_split_long_hebrew_block` regex did not recognize the `׀` (paseq) mark or `׃` (sof-pasuq) as valid separators, causing a full verse quotation to be incorrectly extracted as a block quote and split into three pieces.
+- Psalm 50: The same regex did not recognize standard punctuation (`!`, `?`, `—`, etc.), causing a long Bialik Hebrew quotation to be chopped into pieces, with only the middle piece receiving block-quote formatting.
+
+**Solutions Implemented**:
+1. Updated the key verses header detection in `run_enhanced_pipeline.py` to use a flexible regex (`r'####\s*Key Verse'`).
+2. Expanded the `separator` regex in `document_generator.py` to include basic punctuation (`!`, `?`, `.`, `-`, `–`, `—`, `(`, `)`, `[`, `]`, `'`, `"`) as well as `\u05C0` (paseq) and `\u05C3` (sof-pasuq).
+3. Verified the fixes by regenerating the docx files for Psalms 44, 49, and 50 (created local testing script `test_fix_50.py`).
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` - Loosened the displaced liturgical recovery heuristic.
+- `src/utils/document_generator.py` - Expanded the `separator` character class in `_split_long_hebrew_block`.
+
+---
+
 ## Session 319 (2026-03-27): Fix Split Block Quote Formatting in DOCX
 
 **Objective**: Fix DOCX formatting issue where long Hebrew quotations containing markdown bold markers (`**`) or poetry line-break markers (`/`) were split between inline format (Aptos 12) and block quote format (Times New Roman 13).
