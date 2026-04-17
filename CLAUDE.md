@@ -1,36 +1,33 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 320 (2026-03-29)
+**Session**: 324 (2026-04-17)
 **Phase**: Pipeline Production — tweaks and improvements
 
-AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
+AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 324 (2026-04-17)**: Upgrade Master Writer to Claude Opus 4.7
+- Changed Master Writer default model from `claude-opus-4-6` to `claude-opus-4-7` in both pipeline scripts
+- Added `claude-opus-4-7` pricing entry to cost_tracker.py; updated all documentation (architecture, scriptReferences, How to Run)
+- Macro Analyst remains on Opus 4.6; DOCX methodology page picks up model dynamically — no code change needed there
+
+**Session 323 (2026-04-14)**: Master Editor Outline Prompt Documentation
+- Archived the experimental paragraph outline mapping prompt into `docs/archive/deprecated/OLD_master_editor_paragraph_outline_prompt.md`
+- Reverted the uncommitted test modifications from `src/agents/master_editor.py` so they don't persist in the pipeline
+
+**Session 322 (2026-04-09)**: ASCII Hyphen BiDi Fix for DOCX Hebrew Processing
+- Added ASCII hyphen (U+002D) support to `_split_into_grapheme_clusters`, `_reverse_bare_hebrew_segments`, and `_reverse_primarily_hebrew_line`
+- Psalm 47 verse headers no longer lose maqqaf-hyphens; inline multi-word Hebrew with hyphens no longer garbled
+
+**Session 321 (2026-04-09)**: Ellipsis BiDi Fix in DOCX Hebrew Block Detection
+- Added Unicode ellipsis (`…`, U+2026) to separator regexes in both `_split_long_hebrew_block` and `_reverse_bare_hebrew_segments`
+- Psalm 49 Selichot quotation (10 Hebrew words split by `…`) now correctly detected as a long block and rendered as standalone RTL paragraph
 
 **Session 320 (2026-03-29)**: DOCX Formatting Fixes for Psalms 44, 49, and 50
 - Fixed `_extract_sections_from_copy_edited` to use a flexible regex for "Key Verses" header, correctly restoring displaced liturgical content in Psalm 44.
 - Expanded `_split_long_hebrew_block` regex to support punctuation like `!`, `?`, `—`, `׃`, and `׀` inside Hebrew blocks.
 - Prevented 14-word and punctuation-heavy Hebrew block quotes in Psalms 49 and 50 from being improperly split.
-
-**Session 319 (2026-03-27)**: Fix Split Block Quote Formatting in DOCX
-- Fixed `_split_long_hebrew_block` regex: `**` bold markers and `/` poetry separators now allowed between Hebrew words
-- Long Hebrew quotations with inline markdown are correctly extracted as unified block quotes with bold preserved
-- Psalm 45 "The Logic of Therefore" and Molodowsky Yiddish quotation now render correctly
-
-**Session 318 (2026-03-26)**: BiDi Double-Reversal Fix
-- Fixed `_reverse_bare_hebrew_segments()` double-processing Hebrew already wrapped by paren/bracket handler
-- Added placeholder protection for existing LRO/PDF blocks; added missing bare-segment call to soft-breaks path
-- Psalm 43 `(תְּפִלָּה לִשְׁלוֹם הַמְּדִינָה)` now displays correctly in DOCX
-
-**Session 317 (2026-03-18)**: SI Pipeline Parity Update
-- Brought `run_si_pipeline.py` fully up to date with `run_enhanced_pipeline.py`
-- Ported 12 improvements: concordance counting, exclude flags, macro_analysis in insights, file guards, error handling, etc.
-- Fixed latent bug: insight extractor would crash if enabled (missing macro_analysis param)
-
-**Session 316 (2026-03-18)**: Session Management Overhaul
-- Restructured session management: CLAUDE.md is now single startup doc for both Claude Code and Gemini
-- Archived IMPLEMENTATION_LOG sessions 241-299; moved feature docs to FEATURE_ARCHIVE.md
-- Created Claude Code persistent memory; slimmed PROJECT_STATUS.md to stable reference
 
 ## Quick Commands
 

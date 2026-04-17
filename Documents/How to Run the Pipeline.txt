@@ -4,10 +4,15 @@ python scripts/run_enhanced_pipeline.py PSALM_NUMBER
 Examples:
 
 # Generate complete commentary for Psalm XX
-python scripts/run_enhanced_pipeline.py XX [**I need to SPECIFY --skip-questions --skip-insights**]
+python scripts/run_enhanced_pipeline.py XX
 
-#just all 3 word docs
-python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-writer --skip-college --skip-insights
+#just all word docs
+python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-writer --skip-copy-editor
+OR
+test_fix_XX.py
+
+#CONCORDANCE
+python scripts/concordance_tool.py
 
 # Generate master editor commentaries using SPECIAL INSTRUCTIONS
 
@@ -31,10 +36,7 @@ python scripts/run_si_pipeline.py 19 --special-instruction my_notes.txt
   python scripts/converse_with_editor.py 23 --edition main
 
 
-#run with opus 4.5 as the master editor
-python scripts/run_enhanced_pipeline.py 9 --master-editor-model claude-opus-4-5
-
-#run with opus 4.6 as the master editor
+#run with opus 4.6 as the master editor (4.7 is now the default)
 python scripts/run_enhanced_pipeline.py 100 --master-editor-model claude-opus-4-6
 
 # skip everything
@@ -43,21 +45,16 @@ python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-insi
 # resume for where the pipeline left off
 python scripts/run_enhanced_pipeline.py 9 --resume
 
-#use the OLD master editor
-python scripts/run_enhanced_pipeline.py 126 --master-editor-old
 
 #run only college
 python scripts/run_enhanced_pipeline.py 126 --skip-macro --skip-micro --skip-synthesis --skip-master-edit 
 
-# only the micro
-python scripts/run_enhanced_pipeline.py 15 --skip-macro --skip-synthesis --skip-master-edit --skip-print-ready --skip-college --skip-word-doc --skip-combined-doc
 
+# Only run copy editor
+python scripts/run_enhanced_pipeline.py 38 --skip-macro --skip-micro --skip-writer --skip-print-ready --delay 0
+OR
+python scripts/run_copy_editor.py 41
 
-#run the RAG thematic match for a single verse in Psalms
-python single_verse_search.py ps 61:4
-
-# GPT-5 (older model, still with high reasoning)
-python scripts/run_enhanced_pipeline.py <N> --master-editor-model gpt-5
 
 # New default behavior (March 2, 2026):
 
@@ -85,20 +82,6 @@ Flag			Regenerate?	Use existing file?
 
 #running Chrome in debug mode (where selenium works)
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:/temp/chrome_debug"
-
-#View the exact bundle passed to commentary agents
-python view_research_bundle.py [psalm_number] [--format json|text|both]
-RESEARCH_BUNDLE_VIEWING_GUIDE.md - Documentation on bundle structure
-
-
-#Targeted Re-indexing Script
-Created: scripts/reindex_specific_psalms.py
-Features: Re-index specific Psalms, ranges, or all 150
-Usage examples:
-python scripts/reindex_specific_psalms.py 1 145 148
-python scripts/reindex_specific_psalms.py --range 1-50
-python scripts/reindex_specific_psalms.py --all
-python scripts/reindex_specific_psalms.py --stats
 
 
 # run a smoke test

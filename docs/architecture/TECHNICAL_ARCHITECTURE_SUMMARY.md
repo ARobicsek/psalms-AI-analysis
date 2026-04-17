@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Opus 4.6, Claude Sonnet 4.6, GPT-5.1, GPT-5.4, Gemini 3.1 Pro Preview, Gemini 2.5 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
+The Psalms Commentary Pipeline is a sophisticated AI-powered system that generates scholarly biblical commentary through a six-step agent architecture. The system combines multiple Large Language Models (Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, GPT-5.1, GPT-5.4, Gemini 3.1 Pro Preview, Gemini 2.5 Pro) with ten specialized Python librarians to produce publication-quality commentary that rivals traditional scholarly work.
 
 **Key Innovation**: The system prevents common AI failure modes through a "telescopic analysis" approach—breaking complex tasks into specialized passes, each building on previous work while maintaining focus on specific aspects of analysis.
 
@@ -48,7 +48,7 @@ Input: Psalm Number
     [2c] Insight Extraction (Claude Opus 4.6)
     → High-value curated "aha!" moments (Optional / Auto-skipped by default)
     ↓
-[3] Master Writer V4 (Claude Opus 4.6 or GPT-5.1)
+[3] Master Writer V4 (Claude Opus 4.7 or GPT-5.1)
     → Unified prompt merging Main + College depth and pedagogical clarity
     → Tone: Scholar at dinner — relaxed, precise, occasionally witty
     ↓
@@ -133,7 +133,8 @@ Output: Scholarly Commentary (.docx + .md)
 
 #### Master Editor / Unified Writer V4 (Pass 4)
 - **Model Options**:
-  - **Default**: Claude Opus 4.6 (`claude-opus-4-6`) or GPT-5.1 (`gpt-5.1`) with high reasoning effort
+  - **Default**: Claude Opus 4.7 (`claude-opus-4-7`) with adaptive thinking
+  - **Alternative**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking
   - **Alternative**: GPT-5 (`gpt-5`) with high reasoning effort (legacy)
   - **Alternative**: Claude Opus 4.5 (`claude-opus-4-5`) with extended thinking (64K token budget)
 - **Prompt Version** (Session 269):
@@ -412,7 +413,7 @@ def normalize_hebrew(text: str, level: int) -> str:
 - **`--resume`**: Resume from last completed step (auto-detects based on existing files)
 - **`--smoke-test`**: Generate dummy data without API calls
 - **`--skip-default-commentaries`**: Use selective commentary mode
-- **`--master-editor-model`**: Model to use for master editor (choices: gpt-5, gpt-5.1, claude-opus-4-6)
+- **`--master-editor-model`**: Model to use for master editor (choices: claude-opus-4-7, claude-opus-4-6)
 - **`--master-editor-old`**: Use OLD prompt (V2 is now default)
 - **`--delay SECONDS`**: Rate limit delay between API-heavy steps (default: 120)
 
@@ -542,7 +543,8 @@ python scripts/tribal_blessings_analyzer.py --list
 - **Function**: Real-time API usage and cost monitoring
 - **Implementation**: `src/utils/cost_tracker.py`
 - **Models Tracked**:
-  - Claude Opus 4.6 (MacroAnalyst, InsightExtractor, QuestionCurator, CopyEditor, MasterWriter)
+  - Claude Opus 4.7 (MasterWriter default)
+  - Claude Opus 4.6 (MacroAnalyst, InsightExtractor, QuestionCurator, CopyEditor)
   - Claude Sonnet 4.6 (MicroAnalyst)
   - Gemini 3.1 Pro Preview (Figurative Curator)
   - Gemini 2.5 Pro (SynthesisWriter fallback, Liturgical Librarian primary)
@@ -627,10 +629,10 @@ python scripts/tribal_blessings_analyzer.py --list
 ### Model Selection Strategy
 | Model | Usage | Context |
 |-------|-------|---------|
+| Claude Opus 4.7 (`claude-opus-4-7`) | MasterWriter (default) | 200K tokens, adaptive thinking |
 | Claude Opus 4.6 (`claude-opus-4-6`) | MacroAnalyst, MicroAnalyst | 200K tokens, adaptive thinking |
 | Claude Sonnet 4.5 (`claude-sonnet-4-20250514`) | SynthesisWriter | 200K tokens |
 | Gemini 2.5 Pro (`gemini-2.5-pro`) | SynthesisWriter fallback (large psalms) | 1M tokens |
-| GPT-5.1 (`gpt-5.1`) | MasterEditor (default) | High reasoning effort |
 | GPT-5 (`gpt-5`) | MasterEditor (legacy option) | High reasoning effort |
 | Claude Opus 4.5 (`claude-opus-4-5`) | MasterEditor alternative | 64K extended thinking |
 | Gemini 2.5 Pro | Liturgical Librarian summaries (primary) | Extended thinking |
@@ -743,7 +745,7 @@ The Psalms Commentary Pipeline represents a sophisticated integration of AI capa
 **Key Technical Achievements (V6.4 System)**:
 - **9 Specialized Librarians**: BDB, Concordance, Figurative, Commentary, Liturgical (Phase 4/5), Liturgical Sefaria (Phase 0 fallback), Related Psalms, Sacks, Deep Web Research
 - **Single-Edition Output**: Unified scholarly commentary combining depth and pedagogical clarity
-- **Flexible Master Writer**: Support for Claude Opus 4.6 (default), GPT-5.1, or Claude Opus 4.5
+- **Flexible Master Writer**: Support for Claude Opus 4.7 (default), Claude Opus 4.6, or Claude Opus 4.5
 - **V4 Prompt**: Unified prompt delivering "scholar at dinner" tone and halving pipeline cost (Session 269)
 - **Gemini 2.5 Pro Fallback**: Automatic switching for large psalms with 1M token context (Session 211)
 - **Special Instruction Pipeline**: Author-directed revisions without altering standard pipeline (Session 220)

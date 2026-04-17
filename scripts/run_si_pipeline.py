@@ -281,7 +281,7 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "claude-opus-4-6",
+    master_editor_model: str = "claude-opus-4-7",
     skip_insights: bool = True,      # Session 280: skipped by default, use --include-insights
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
     exclude_insights: bool = False,
@@ -947,9 +947,9 @@ if __name__ == "__main__":
     parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
-    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-6",
-                       choices=["claude-opus-4-6"],
-                       help="Model for Master Writer (default: claude-opus-4-6)")
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-7",
+                       choices=["claude-opus-4-7", "claude-opus-4-6"],
+                       help="Model for Master Writer (default: claude-opus-4-7)")
     # Session 280: questions and insights are SKIPPED by default.
     # --include-* flags opt back in; --skip-* flags remain for backward compat.
     parser.add_argument("--skip-insights", action="store_true",

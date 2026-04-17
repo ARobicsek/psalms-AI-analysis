@@ -9,6 +9,90 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 324 (2026-04-17): Upgrade Master Writer to Claude Opus 4.7
+
+**Objective**: Switch the Master Writer's default model from Claude Opus 4.6 to the newly released Claude Opus 4.7, keeping the Macro Analyst on Opus 4.6.
+
+**Research**:
+- Opus 4.7 released 2026-04-16; same per-token pricing ($5/$25 per MTok) but new tokenizer may increase token count 0–35%, especially on non-English text (Hebrew)
+- Confirmed the DOCX methodology page reads the model string dynamically from `stats_data['model_usage']` — no code change needed for DOCX flow
+
+**Solutions Implemented**:
+1. Changed `master_editor_model` default from `"claude-opus-4-6"` to `"claude-opus-4-7"` in both `run_enhanced_pipeline.py` and `run_si_pipeline.py`
+2. Updated argparse `choices` to `["claude-opus-4-7", "claude-opus-4-6"]` so 4.6 remains available as a fallback
+3. Added `"claude-opus-4-7"` pricing entry to `cost_tracker.py` (same rates as 4.6)
+4. Updated all documentation: CLAUDE.md, TECHNICAL_ARCHITECTURE_SUMMARY.md, scriptReferences.md, How to Run the Pipeline.txt
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` — Default master editor model → `claude-opus-4-7`, updated choices
+- `scripts/run_si_pipeline.py` — Same changes as enhanced pipeline
+- `src/utils/cost_tracker.py` — Added `claude-opus-4-7` pricing entry
+- `CLAUDE.md` — Updated model list and session info
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` — 6 edits: exec summary, flow diagram, Master Editor options, CLI flags, cost tracking, model table, key achievements
+- `docs/session_tracking/scriptReferences.md` — master_editor.py description updated to Opus 4.7
+- `Documents/How to Run the Pipeline.txt` — Clarified 4.6 is now the fallback option
+
+---
+
+## Session 323 (2026-04-14): Master Editor Outline Prompt Documentation
+
+**Objective**: Archive the experimental paragraph outline prompt iteration for the master editor and restore the active production version.
+
+**Changes Implemented**:
+1. **Archived Experimental Prompt**: Saved the test prompt instructions (which forced the master editor to outline each paragraph's argument and its relationship to the thesis before writing) to `docs/archive/deprecated/OLD_master_editor_paragraph_outline_prompt.md`.
+2. **Reverted Pipeline**: Used `git restore` on `src/agents/master_editor.py` to remove the outline instructions and return the production prompt to its prior state.
+
+**Files Modified**:
+- `docs/archive/deprecated/OLD_master_editor_paragraph_outline_prompt.md` — **[NEW]** Archived prompt text
+- `src/agents/master_editor.py` — Reverted test changes via git restore
+
+---
+
+## Session 322 (2026-04-09): ASCII Hyphen BiDi Fix for DOCX Hebrew Processing
+
+**Objective**: Fix two DOCX rendering bugs in Psalm 47 caused by ASCII hyphens (U+002D) being used as maqqaf substitutes in the edited verses markdown.
+
+**Problems Identified**:
+1. **Verse header maqqafs vanishing**: Hebrew verse lines like `כׇּל-הָעַמִּים תִּקְעוּ-כָף` had their hyphens silently dropped, producing `כׇּלהָעַמִּים תִּקְעוּכָף` (words missing spaces). This only affected Psalm 47 because its markdown uses ASCII hyphens (U+002D) while other psalms (46, 48, etc.) use actual Hebrew maqqaf (U+05BE).
+2. **Inline Hebrew garbling**: Multi-word Hebrew like `מֶלֶךְ גָּדוֹל עַל-כׇּל-הָאָרֶץ` was only partially matched by `_reverse_bare_hebrew_segments` (3 of 5 words, stopping at the first `-`), leaving orphaned unreversed Hebrew that Word's BiDi algorithm garbled.
+
+**Root Cause**: Three regex patterns in `document_generator.py` handled Hebrew maqqaf (U+05BE) but not ASCII hyphen (U+002D):
+- `_split_into_grapheme_clusters`: base character class didn't include `-`, so hyphens were silently dropped during cluster extraction
+- `_reverse_bare_hebrew_segments`: separator pattern didn't include `-`, so hyphen-separated words weren't recognized as part of the same Hebrew segment
+- `_reverse_primarily_hebrew_line`: tokenizer didn't split on `-`, so hyphens were swallowed into Hebrew word tokens
+
+**Solutions Implemented**:
+1. Added `\-` to `_split_into_grapheme_clusters` base character class (line 92) — hyphens now preserved as their own grapheme cluster during reversal.
+2. Added `\-` to `_reverse_bare_hebrew_segments` separator pattern (line 194) — multi-word Hebrew with ASCII hyphens now fully detected and reversed as a single segment.
+3. Added `\-` to `_reverse_primarily_hebrew_line` tokenizer split pattern (line 312) — hyphens treated as word separators alongside semicolons, commas, etc.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Three regex updates (lines 92, 194, 312).
+
+**Verification**: Regenerated Psalm 47 DOCX — both verse header hyphens and inline Hebrew now render correctly. Regenerated Psalm 46 DOCX as regression test (uses U+05BE maqqaf) — no issues.
+
+---
+
+## Session 321 (2026-04-09): Ellipsis BiDi Fix in DOCX Hebrew Block Detection
+
+**Objective**: Fix garbled Hebrew in Psalm 49 DOCX where a 10-word Hebrew quotation containing a Unicode ellipsis (`…`, U+2026) was not detected as a long block and rendered inline with BiDi corruption.
+
+**Problem Identified**:
+- Psalm 49 Selichot passage: `הַחוֹשְׁבִים לְהַשְׁכִּיחַ שֵׁם קֹדֶשׁ הַנִּכְבָּד… זֶה דַּרְכָּם טוּבֵי עָם אִבָּד` — 10 Hebrew words, well above the 6-word threshold for block extraction.
+- The Unicode ellipsis `…` (U+2026) was not in the `separator` regex of `_split_long_hebrew_block`, splitting the sequence into two 5-word halves — neither reaching the 6-word threshold.
+- Both halves were individually reversed by `_reverse_bare_hebrew_segments` and LRO-wrapped, but Word's BiDi algorithm garbled the visual ordering between the two reversed segments and the intervening ellipsis.
+
+**Solution Implemented**:
+1. Added `\u2026` (horizontal ellipsis) to the `separator` character class in `_split_long_hebrew_block` — the full 10-word sequence is now detected as one long block and rendered as a standalone RTL paragraph.
+2. Added `\u2026` to the `separator` character class in `_reverse_bare_hebrew_segments` as a fallback — ensures ellipsis-separated Hebrew is treated as a single segment for inline reversal too.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Two separator regex updates (lines 632, 194).
+
+**Verification**: Regenerated Psalm 49 DOCX. The Selichot Hebrew quotation now renders as a properly formatted RTL block quote.
+
+---
+
 ## Session 320 (2026-03-29): DOCX Formatting Fixes for Psalms 44, 49, and 50
 
 **Objective**: Resolve three specific formatting issues in the DOCX outputs: displaced liturgical headers in Psalm 44, incorrect inline styling for a full verse quotation in Psalm 49, and improperly split block formatting for a punctuated Hebrew quotation in Psalm 50.
