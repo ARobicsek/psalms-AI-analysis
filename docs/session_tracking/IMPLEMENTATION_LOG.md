@@ -11,7 +11,7 @@ This file contains detailed session history for sessions 300 and later.
 
 ## Session 327 (2026-04-18): Fix Pipeline Cost Accounting for GPT/Gemini Thinking Tokens
 
-**Objective**: Implement the 4 billing fixes identified in Session 326's audit, plus cost JSON persistence.
+**Objective**: Implement all 5 fixes identified in Session 326's audit: 4 billing bugs, cost JSON persistence, and Master Writer thinking visibility.
 
 **Solutions Implemented**:
 
@@ -23,6 +23,8 @@ This file contains detailed session history for sessions 300 and later.
 
 4. **Fix 3 — `scripture_verifier.py` three silent sites**: Added `cost_tracker=None` to `filter_false_positives` (public wrapper), `_filter_via_haiku`, `_filter_via_gpt`, and `verify_citations_tooluse`. Each logs to `cost_tracker.add_usage()` after its API call. Tool-use verifier logs aggregated totals across all turns after the loop. Pipeline scripts (`run_enhanced_pipeline.py`, `run_si_pipeline.py`) updated to pass `cost_tracker=cost_tracker` at both call sites.
 
+5. **Fix 5 — Master Writer thinking visibility** (`src/agents/archive/master_editor_v2.py`): Switched `_call_claude_writer` from `stream.text_stream` to full event iteration. Accumulates `thinking_chars` from `thinking_delta` events alongside response text. After stream closes, logs: `"Master Writer used ~N thinking tokens (included in the M output total)"`. `thinking_tokens=0` in `add_usage()` kept intentional — Anthropic folds thinking into `output_tokens`; passing it would double-bill.
+
 **Files Modified**:
 - `src/agents/copy_editor.py` — Fix 1: capture GPT reasoning_tokens and pass to cost_tracker
 - `src/agents/figurative_curator.py` — Fix 2: add cost_tracker param and log usage
@@ -30,8 +32,7 @@ This file contains detailed session history for sessions 300 and later.
 - `src/utils/scripture_verifier.py` — Fix 3: add cost_tracker to 4 functions, log usage at all 3 sites
 - `scripts/run_enhanced_pipeline.py` — Fix 3 plumbing + Fix 4 (cost JSON)
 - `scripts/run_si_pipeline.py` — Fix 3 plumbing + Fix 4 (cost JSON)
-
-**Not implemented**: Fix 5 (Master Writer thinking visibility) — deferred, not a billing bug.
+- `src/agents/archive/master_editor_v2.py` — Fix 5: event-based stream iteration for thinking visibility
 
 ---
 

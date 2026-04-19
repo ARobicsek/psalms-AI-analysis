@@ -1,16 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 327 (2026-04-18)
+**Session**: 328 (2026-04-18)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
 
-**Session 327 (2026-04-18)**: Fix Pipeline Cost Accounting for GPT/Gemini Thinking Tokens
-- Fixed 4 billing bugs: `copy_editor.py` GPT path now passes `reasoning_tokens` to cost tracker; `figurative_curator.py` now accepts and logs to `cost_tracker`; `scripture_verifier.py` all three call sites (`_filter_via_gpt`, `_filter_via_haiku`, `verify_citations_tooluse`) now accept and log `cost_tracker`; `research_assembler.py` passes `cost_tracker` to `FigurativeCurator`
-- Added cost JSON persistence: both pipeline scripts now write `psalm_NNN_cost.json` to the output directory before printing the summary
-- Pipeline callers (`run_enhanced_pipeline.py`, `run_si_pipeline.py`) updated to pass `cost_tracker` to `filter_false_positives` and `verify_citations_tooluse`
+**Session 327 (2026-04-18)**: Fix Pipeline Cost Accounting + Master Writer Thinking Visibility
+- Fixed 4 billing bugs: `copy_editor.py` GPT path passes `reasoning_tokens`; `figurative_curator.py` logs to `cost_tracker`; `scripture_verifier.py` all 3 call sites log; `research_assembler.py` passes tracker to `FigurativeCurator`; both pipelines persist cost to `psalm_NNN_cost.json`
+- Fix 5: `master_editor_v2.py` `_call_claude_writer` switched to event-based stream iteration; now logs `~N thinking tokens (included in M output total)` after each Master Writer run
+- All 5 fixes from the Session 326 audit plan implemented; `thinking_tokens=0` in `add_usage()` kept intentional — Anthropic folds thinking into `output_tokens`
 
 **Session 326 (2026-04-18)**: Audit of Pipeline Cost Accounting — Plan for Session 327
 - Audited every LLM call site reachable from `run_enhanced_pipeline.py` / `run_si_pipeline.py`; verified via Anthropic docs that Claude's `output_tokens` already includes thinking tokens (billing correct as-is)
@@ -26,10 +26,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Changed Master Writer default model from `claude-opus-4-6` to `claude-opus-4-7` in both pipeline scripts
 - Added `claude-opus-4-7` pricing entry to cost_tracker.py; updated all documentation (architecture, scriptReferences, How to Run)
 - Macro Analyst remains on Opus 4.6; DOCX methodology page picks up model dynamically — no code change needed there
-
-**Session 323 (2026-04-14)**: Master Editor Outline Prompt Documentation
-- Archived the experimental paragraph outline mapping prompt into `docs/archive/deprecated/OLD_master_editor_paragraph_outline_prompt.md`
-- Reverted the uncommitted test modifications from `src/agents/master_editor.py` so they don't persist in the pipeline
 
 
 ## Quick Commands
