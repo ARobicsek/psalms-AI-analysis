@@ -1,11 +1,18 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 325 (2026-04-18)
+**Session**: 326 (2026-04-18)
 **Phase**: Pipeline Production — tweaks and improvements
+
+> **⚠ NEXT-SESSION PRIORITY**: Read [`docs/session_tracking/NEXT_SESSION_BRIEF.md`](docs/session_tracking/NEXT_SESSION_BRIEF.md) first. It contains the full implementation plan for fixing pipeline cost-accounting bugs (Session 327 work).
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 326 (2026-04-18)**: Audit of Pipeline Cost Accounting — Plan for Session 327
+- Audited every LLM call site reachable from `run_enhanced_pipeline.py` / `run_si_pipeline.py`; verified via Anthropic docs that Claude's `output_tokens` already includes thinking tokens (billing correct as-is)
+- Identified 5 silent billing bugs (GPT/Gemini `reasoning_tokens` not logged): `copy_editor.py`, `figurative_curator.py` (never logs), `scripture_verifier.py` (3 sites: GPT filter, Haiku filter, tool-use verifier); also: cost summary is never persisted to JSON
+- Full implementation plan written to `docs/session_tracking/NEXT_SESSION_BRIEF.md`; recommended Sonnet 4.6 for Session 327 (mechanical plumbing work, clear patterns already in the codebase)
 
 **Session 325 (2026-04-18)**: Master Writer on Opus 4.7 — Max Effort
 - Confirmed via Anthropic docs that Opus 4.7 removed `budget_tokens` (400 error if set); adaptive is the only thinking mode, with a new `effort` param replacing fixed budgets
@@ -24,10 +31,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 **Session 322 (2026-04-09)**: ASCII Hyphen BiDi Fix for DOCX Hebrew Processing
 - Added ASCII hyphen (U+002D) support to `_split_into_grapheme_clusters`, `_reverse_bare_hebrew_segments`, and `_reverse_primarily_hebrew_line`
 - Psalm 47 verse headers no longer lose maqqaf-hyphens; inline multi-word Hebrew with hyphens no longer garbled
-
-**Session 321 (2026-04-09)**: Ellipsis BiDi Fix in DOCX Hebrew Block Detection
-- Added Unicode ellipsis (`…`, U+2026) to separator regexes in both `_split_long_hebrew_block` and `_reverse_bare_hebrew_segments`
-- Psalm 49 Selichot quotation (10 Hebrew words split by `…`) now correctly detected as a long block and rendered as standalone RTL paragraph
 
 ## Quick Commands
 
@@ -52,6 +55,7 @@ python scripts/converse_with_editor.py 21            # Chat with Master Editor
 
 ## Reference Docs (read only when needed)
 
+- **`docs/session_tracking/NEXT_SESSION_BRIEF.md` — Hit-the-ground-running plan for the upcoming session (check here first if present)**
 - `docs/session_tracking/scriptReferences.md` — All scripts with descriptions
 - `docs/session_tracking/PROJECT_STATUS.md` — Pipeline phases, active features, databases
 - `docs/session_tracking/IMPLEMENTATION_LOG.md` — Detailed session history (300+)

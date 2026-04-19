@@ -9,6 +9,37 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 326 (2026-04-18): Audit of Pipeline Cost Accounting
+
+**Objective**: Audit the enhanced + SI pipelines for places where LLM cost tracking silently drops reasoning/thinking tokens, and produce a clear implementation plan for the next session.
+
+**Research**:
+- Confirmed via Anthropic's [extended thinking docs](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) that `usage.output_tokens` on Claude API responses **already includes thinking tokens** (billed at output rate). So Claude call sites that pass `thinking_tokens=0` to `cost_tracker.add_usage()` are NOT billing bugs — billing stays accurate via `output_tokens × output_rate`.
+- OpenAI GPT-5.x exposes `reasoning_tokens` as a SEPARATE field from `completion_tokens` — these must be passed explicitly or they're missing from billing.
+- Google Gemini exposes `thoughts_token_count` as a SEPARATE field from `candidates_token_count` — same consideration as OpenAI.
+
+**Problems Identified**:
+- `src/agents/copy_editor.py:691` — GPT branch extracts `reasoning_tokens` at line 628 but doesn't pass them to `add_usage()`. Billing bug when `self.model` is GPT-5.x.
+- `src/agents/figurative_curator.py` — Never calls `cost_tracker.add_usage()` at all. Constructed without a tracker at `src/agents/research_assembler.py:720`. Entire GPT-5.4 cost (with `reasoning_effort="high"`) is missing from the pipeline summary.
+- `src/utils/scripture_verifier.py:1429` (`_filter_via_gpt`) — Never logs to `cost_tracker`. GPT-5.1 reasoning tokens invisible.
+- `src/utils/scripture_verifier.py:1380` (`_filter_via_haiku`) — Never logs to `cost_tracker`.
+- `src/utils/scripture_verifier.py:1674` (tool-use verifier, opt-in flag) — Never logs to `cost_tracker`.
+- Both pipeline scripts — `cost_tracker.get_summary()` is `print()`-ed to stdout but never persisted as JSON, making after-the-fact run comparisons impossible.
+
+**Solutions Implemented** (this session — planning only):
+1. Wrote `docs/session_tracking/NEXT_SESSION_BRIEF.md` with a detailed, sequential implementation plan: punch list of 5 fixes, exact patterns to follow, files/lines to touch, and verification steps.
+2. Added a prominent pointer to the brief at the top of `CLAUDE.md` so the next session picks it up immediately.
+3. Recommended Claude Sonnet 4.6 for the implementation session (mechanical plumbing work, clear patterns already in the codebase — Opus is overkill).
+
+**Files Modified**:
+- `docs/session_tracking/NEXT_SESSION_BRIEF.md` — NEW: detailed implementation plan for Session 327
+- `CLAUDE.md` — Added next-session pointer; bumped session number; updated recent-5 list; added brief to Reference Docs section
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — This entry
+
+**Next session (327)**: Implement the 5 fixes in `NEXT_SESSION_BRIEF.md`. Expected output: 6–7 files modified, commit as "Session 327: Fix pipeline cost accounting for GPT/Gemini thinking tokens".
+
+---
+
 ## Session 325 (2026-04-18): Master Writer on Opus 4.7 — Max Effort
 
 **Objective**: Verify the recommended thinking configuration for Claude Opus 4.7 (now the Master Writer's default model) and tune it for maximum reasoning depth.
