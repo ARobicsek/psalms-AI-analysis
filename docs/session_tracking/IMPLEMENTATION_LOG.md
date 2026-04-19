@@ -9,6 +9,45 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 331 (2026-04-19): Opus 4.7 Prompt Polish — Parenthetical Translations + Stray Quotes Around Hebrew
+
+**Objective**: Stop Opus 4.7 from wrapping every English translation in parentheses (e.g., `אַל־יֶחֱרַשׁ ("let Him not be silent")`) — a regression vs. Opus 4.6 — and eliminate stray straight quotes around long Hebrew citations that orphan visually in DOCX output.
+
+**Problems Identified**:
+- After the Session 325 switch to Opus 4.7 as Master Writer, every Hebrew quotation in Psalm 50's output had its English translation in parens (`Hebrew ("English")`). Opus 4.6 hadn't done this. User preference: English in parens ONLY when the whole Hebrew+English unit is itself a parenthetical aside.
+- Root cause: `MASTER_WRITER_PROMPT_V4` Rule 1 "CORRECT examples" at `master_editor.py:60-63` inconsistent — line 61 used the comma pattern (`Hebrew, "English"`) but lines 62-63 used the parens pattern (`Hebrew ("English")`). Opus 4.7 pattern-matched on the examples literally; Opus 4.6 inferred the intent better from adjacent language like "Use Hebrew as a parenthetical anchor."
+- Related bug: Opus 4.7 sometimes wraps long Hebrew citations in straight double quotes (e.g., `"רָם וְנִשָּׂא דִּבֶּר וַיִּקְרָא אָרֶץ מְלֹא כָל הָאָרֶץ"`). In DOCX, BiDi line-wrapping often sets long Hebrew on its own line, orphaning the quotes as floating marks before and after the Hebrew block.
+- Confirmed via `output/debug/master_writer_v4_response_psalm_50.txt` that the parentheses come straight from the Master Writer — not introduced by the Copy Editor.
+
+**Solutions Implemented**:
+1. **Rewrote Rule 1 in `MASTER_WRITER_PROMPT_V4`** with an explicit **Parentheses Rule (CRITICAL)** section that offers three acceptable patterns and explicitly forbids the Opus-4.7 default:
+   - **Pattern A — FLOWING** (preferred for mid-sentence embedding): English in quotes in main clause, Hebrew in parens as anchor — e.g., `The plea "let Him not be silent" (אַל־יֶחֱרַשׁ) is the psalm's ironic engine.`
+   - **Pattern B — APPOSITION**: `Hebrew, "English," ...` — e.g., `The psalm ends with יֵשַׁע אֱלֹקִים, "the salvation of God."`
+   - **Pattern C — WHOLE UNIT PARENTHETICAL**: `(Hebrew, "English")` — used only when the apposition is genuinely an aside; no nested parens.
+   - Added a rhythm test: "Read the sentence aloud with the Hebrew removed. If you have a stranded `("...")` fragment, you've defaulted to the forbidden annotation style — rewrite as A or B."
+   - Rule covers Greek (LXX), Aramaic, Latin translations too.
+2. **Added explicit "Never wrap source text in quotation marks" rule** to Rule 1 with a correct/incorrect pair using the Psalm 50 Kedushah example. The source script is already visually distinct; surrounding quotes orphan under BiDi line-wrapping.
+3. **Fixed two matching STRONG examples** at `master_editor.py:306, 317` that still showed `Hebrew ('English', Deut 15:8)` — rewrote as `Hebrew, 'English' (Deut 15:8)`.
+4. **Added `CopyEditor._strip_quotes_around_source_text`** static method (`copy_editor.py:742`) — regex strips matched-pair straight or curly quotes when the body contains at least one Hebrew (U+0590-U+05FF) or Greek (U+0370-U+03FF, U+1F00-U+1FFF) letter AND no ASCII Latin letters. Rejects mismatched pairings (e.g., `"` opening with `'` closing) to avoid false positives.
+5. **Wired into `edit_commentary` as step 7b** (`copy_editor.py:323-329`) — runs after diff generation but before saving, so the copy-edit diff stays clean and shows only substantive LLM edits, not deterministic cleanup. Logs strip count.
+6. **Archived `master_editor_v2.py` also updated** (`MASTER_EDITOR_PROMPT_V2`, `COLLEGE_EDITOR_PROMPT_V2`, `MASTER_WRITER_PROMPT`, `COLLEGE_WRITER_PROMPT`) for consistency even though those prompts are no longer wired into the production pipeline (production uses `master_editor.py:MASTER_WRITER_PROMPT_V4`, and `master_editor_si.py` inherits via `.replace()`).
+
+**Verification**:
+- Regex tested against 5 representative inputs:
+  - ✓ Strips `"רָם וְנִשָּׂא...הָאָרֶץ"` (Psalm 50 Kedushah case)
+  - ✓ Strips `"θεὸς θεῶν κύριος"` (pure Greek)
+  - ✓ Strips `("אֱלֹקִים")` when Hebrew sits inside parens
+  - ✗ Leaves `"I love יְהוָה"` untouched (mixed script)
+  - ✗ Leaves `יֵשַׁע אֱלֹקִים, "the salvation of God"` untouched (Pattern B — English is what's quoted)
+- User declined to re-run Psalm 50 for verification — effects will show on next pipeline run.
+
+**Files Modified**:
+- `src/agents/master_editor.py` — Rewrote Rule 1 in `MASTER_WRITER_PROMPT_V4` with the Parentheses Rule (3 patterns) + "never wrap source text in quotes" rule; fixed 2 STRONG examples at lines 306 and 317.
+- `src/agents/copy_editor.py` — Added `_strip_quotes_around_source_text` static method; wired as post-processing step 7b in `edit_commentary`.
+- `src/agents/archive/master_editor_v2.py` — Same Parentheses Rule applied to `MASTER_EDITOR_PROMPT_V2`, `COLLEGE_EDITOR_PROMPT_V2`, `MASTER_WRITER_PROMPT`, `COLLEGE_WRITER_PROMPT` for consistency (archived file, not in production path).
+
+---
+
 ## Session 330 (2026-04-19): Concordance Entries Breakdown in DOCX Methods Section
 
 **Objective**: Add per-query breakdown to the "Concordance Entries Reviewed" line in the DOCX methods section, matching the existing format used by "Figurative Concordance Matches Reviewed."

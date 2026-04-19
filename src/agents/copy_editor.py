@@ -321,8 +321,19 @@ class CopyEditor:
         # 6. Reassemble the full document
         full_edited = self._reassemble(zones, corrected_text)
 
-        # 7. Generate diff
+        # 7. Generate diff BEFORE cosmetic post-processing so the diff shows
+        #    only substantive LLM edits, not deterministic cleanup.
         diff_text = self._generate_diff(editable_content, corrected_text, psalm_number)
+
+        # 7b. Post-processing: strip redundant quotes wrapping pure-Hebrew/Greek
+        #     spans. The source script is already visually distinct, and
+        #     wrapping quotes orphan when BiDi line-wrapping sets long Hebrew
+        #     on its own line in DOCX.
+        full_edited, stripped_count = self._strip_quotes_around_source_text(full_edited)
+        if stripped_count:
+            self.logger.info(
+                f"Stripped {stripped_count} redundant quote pair(s) around Hebrew/Greek text"
+            )
 
         # 8. Save output files
         prefix = f"psalm_{psalm_number:03d}"
@@ -738,6 +749,49 @@ class CopyEditor:
     # -------------------------------------------------------------------------
     # Response parsing
     # -------------------------------------------------------------------------
+
+    @staticmethod
+    def _strip_quotes_around_source_text(text: str) -> Tuple[str, int]:
+        """Strip straight/curly quotes that wrap a pure non-Latin source-language span.
+
+        When the Writer wraps a long Hebrew or Greek quotation in quotes
+        (e.g., "רָם וְנִשָּׂא ..."), the quotes orphan visually when BiDi line-
+        wrapping sets the source text on its own line in DOCX. This helper
+        removes such wrapping quotes while leaving quotes around English
+        translations and mixed-script content untouched.
+
+        A quoted span is stripped only when its contents contain at least one
+        Hebrew (U+0590-U+05FF) or Greek (U+0370-U+03FF, U+1F00-U+1FFF) letter
+        AND contain no ASCII Latin letters. Returns (text, strip_count).
+        """
+        # Opening quote → matching closing quote, content has no Latin letters
+        # and contains at least one Hebrew/Greek letter.
+        pattern = re.compile(
+            r'(?P<open>["\u201C\u201D\u2018\u2019\'])'
+            r'(?P<body>[^"\u201C\u201D\u2018\u2019\'A-Za-z\n]*'
+            r'[\u0590-\u05FF\u0370-\u03FF\u1F00-\u1FFF]'
+            r'[^"\u201C\u201D\u2018\u2019\'A-Za-z\n]*)'
+            r'(?P<close>["\u201C\u201D\u2018\u2019\'])'
+        )
+        count = 0
+
+        def _replace(m):
+            nonlocal count
+            # Only strip matched pairs: "/" "/" or straight/straight.
+            # For mixed pairings (e.g., " opening with ' closing), leave alone.
+            open_q, close_q = m.group('open'), m.group('close')
+            straight_double = {'"'}
+            curly_double = {'\u201C', '\u201D'}
+            straight_single = {"'"}
+            curly_single = {'\u2018', '\u2019'}
+            pairs = [straight_double, curly_double, straight_single, curly_single]
+            if not any(open_q in p and close_q in p for p in pairs):
+                return m.group(0)
+            count += 1
+            return m.group('body')
+
+        stripped = pattern.sub(_replace, text)
+        return stripped, count
 
     @staticmethod
     def _strip_echoed_supplementary(text: str) -> str:

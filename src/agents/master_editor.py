@@ -59,13 +59,15 @@ Every time you reference a Hebrew word, phrase, or quotation, you MUST provide:
 
 **CORRECT examples:**
 - "The verb יֶהְגֶּה (`yeh-GEH`), 'murmurs' or 'meditates,' is onomatopoeic..."
-- "...as the Psalmist declares, אֶרְחָמְךָ יְהוָה חִזְקִי ('I love You, YHWH, my strength')..."
-- "The phrase בְּנֵי אִישׁ ('sons of man,' i.e., mortals of high rank) appears in Ps 49:3..."
+- "...as the Psalmist declares, אֶרְחָמְךָ יְהוָה חִזְקִי, 'I love You, YHWH, my strength.'"
+- "The phrase בְּנֵי אִישׁ, 'sons of man' (i.e., mortals of high rank), appears in Ps 49:3..."
+- "God 'made the mountain stand' (הֶעֱמַדְתָּה) — the causative verb implies divine agency."
 
 **INCORRECT (will fail validation):**
 - "The verb 'murmurs' is onomatopoeic..." (missing Hebrew)
 - "The phrase יֶהְגֶּה is onomatopoeic..." (missing English)
 - "...as seen in Psalm 49:3..." (citation without quotation)
+- "...the Psalmist declares אֶרְחָמְךָ יְהוָה חִזְקִי ('I love You, YHWH, my strength')..." (English translation in parentheses — see Parentheses Rule below)
 
 **This applies to:**
 - Quotations from the psalm being analyzed
@@ -73,6 +75,35 @@ Every time you reference a Hebrew word, phrase, or quotation, you MUST provide:
 - Liturgical texts
 - Traditional commentaries when quoting Hebrew
 - Concordance patterns
+- Translations from Greek (LXX), Aramaic, Latin, or any other source language
+
+**Parentheses Rule (CRITICAL):**
+
+The translation NEVER appears alone in parentheses as a floating annotation. The translation is part of the prose. You have THREE acceptable patterns — pick the one that reads most naturally for the sentence:
+
+**Pattern A — FLOWING (preferred for mid-sentence embedding):** English in quotes in the main clause, Hebrew in parens as an anchor.
+> The plea "let Him not be silent" (אַל־יֶחֱרַשׁ) is the psalm's ironic engine.
+> God "made the mountain stand" (הֶעֱמַדְתָּה) — the causative verb implies divine agency.
+
+**Pattern B — APPOSITION:** Hebrew, comma, English in quotes, comma (or em-dash, or period).
+> The psalm ends with יֵשַׁע אֱלֹקִים, "the salvation of God" — a final benediction.
+> The LXX renders this as θεὸς θεῶν κύριος, "God of gods, the LORD."
+
+**Pattern C — WHOLE UNIT PARENTHETICAL:** Used when the Hebrew+English apposition is genuinely an aside to the main sentence. Put translation in quotes inside the existing parens; do NOT nest a second pair.
+> The Sinai formula (אֱלֹקִים אֱלֹקֶיךָ אָנֹכִי, "I am the LORD your God") is echoed in v. 7.
+> The psalm turns on a single plea (אַל־יֶחֱרַשׁ, "let Him not be silent") that God answers with irony.
+
+**INCORRECT (translation alone in parens as the default annotation style):**
+> The plea אַל־יֶחֱרַשׁ ("let Him not be silent") is the psalm's ironic engine. ❌
+> The psalm ends with יֵשַׁע אֱלֹקִים ("the salvation of God"). ❌
+> The LXX renders this as θεὸς θεῶν κύριος ("God of gods, the LORD"). ❌
+
+Rhythm test: read the sentence aloud with the Hebrew removed. If the English still flows, you're using Pattern A or B correctly. If you have a stranded `("...")` fragment, you've defaulted to the forbidden annotation style — rewrite as A or B.
+
+**Never wrap Hebrew (or Greek, Aramaic, Latin) source text in quotation marks.** The script is already visually distinct; surrounding quotes are redundant and orphan awkwardly when long source-language spans get set off by line-wrapping in the final document. Only the English translation carries quotes.
+
+**CORRECT:** The piyyut reads רָם וְנִשָּׂא דִּבֶּר וַיִּקְרָא אָרֶץ, "exalted and lifted up, He spoke and summoned the earth."
+**INCORRECT:** The piyyut reads "רָם וְנִשָּׂא דִּבֶּר וַיִּקְרָא אָרֶץ," "exalted and lifted up…" ❌ (Hebrew itself is quoted)
 
 **Syntactic Flow Rule:**
 The English sentence must make complete grammatical sense if the Hebrew were removed. Use Hebrew as a parenthetical anchor.
@@ -303,7 +334,7 @@ For EACH verse:
 
    WEAK: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11)." <- just cites, doesn't quote
 
-   STRONG: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ לוֹ ('you shall surely open your hand to him,' Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
+   STRONG: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ לוֹ, 'you shall surely open your hand to him' (Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
 
 4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. The Torah Temimah identifies where texts were mined for aggadic/halachic purposes—review and incorporate these materials.
 
@@ -314,7 +345,7 @@ For EACH verse:
 
    WEAK: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..." <- no quotation
 
-   STRONG: "This verse appears in the Shabbat Musaf Amidah: 'וְהִקְרִיבוּ לְךָ עוֹלוֹת תְּמִימִים זִבְחֵי צֶדֶק' ('and they shall offer You whole burnt-offerings, righteous sacrifices'), suggesting the tradition read this psalm's call for righteous sacrifices as..."
+   STRONG: "This verse appears in the Shabbat Musaf Amidah: וְהִקְרִיבוּ לְךָ עוֹלוֹת תְּמִימִים זִבְחֵי צֶדֶק, 'and they shall offer You whole burnt-offerings, righteous sacrifices,' suggesting the tradition read this psalm's call for righteous sacrifices as..."
 
 6. **Comparative Religion**: ANE parallels (Ugaritic, Akkadian, Egyptian), polemic, transformation of motifs. Cite specific texts (KTU numbers, Enuma Elish, etc.).
 

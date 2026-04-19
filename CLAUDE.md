@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 330 (2026-04-19)
+**Session**: 331 (2026-04-19)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 331 (2026-04-19)**: Opus 4.7 Prompt Polish — Parenthetical Translations + Stray Quotes Around Hebrew
+- Diagnosed why Opus 4.7 wrapped every English translation in parens (e.g., `אַל־יֶחֱרַשׁ ("let Him not be silent")`): the Master Writer prompt's "CORRECT examples" at `master_editor.py:60-63` put English in parens, and Opus 4.7 pattern-matched on them literally (Opus 4.6 inferred intent better); rewrote Rule 1 with a new Parentheses Rule offering three acceptable patterns (FLOWING, apposition, whole-unit parenthetical) and explicit INCORRECT examples — same rule applied to Greek/Aramaic/Latin translations
+- Fixed a related bug surfaced in Psalm 50: Opus 4.7 wraps long Hebrew citations in straight quotes (`"רָם וְנִשָּׂא..."`) which orphan visually when BiDi line-wrapping sets the Hebrew on its own line in DOCX; added `CopyEditor._strip_quotes_around_source_text` static method that strips matched-pair quotes around pure Hebrew/Greek spans (no Latin letters between) and wired it into `edit_commentary` step 7b — after diff generation so the copy-edit diff stays clean
+- Prompt changes applied to production `master_editor.py:MASTER_WRITER_PROMPT_V4` (auto-propagates to `master_editor_si.py` via `.replace()`); matching fixes applied to archived `master_editor_v2.py` prompts for consistency; regex verified against 5 test cases (strips Hebrew/Greek spans, leaves mixed-script and Pattern-B Hebrew+English untouched)
 
 **Session 330 (2026-04-19)**: Concordance Entries Breakdown in DOCX Methods Section
 - Added per-query breakdown to "Concordance Entries Reviewed" line (matching format of "Figurative Concordance Matches Reviewed") — now shows total count + each search term with its result count in parentheses
@@ -26,12 +31,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Audited every LLM call site reachable from `run_enhanced_pipeline.py` / `run_si_pipeline.py`; verified via Anthropic docs that Claude's `output_tokens` already includes thinking tokens (billing correct as-is)
 - Identified 5 silent billing bugs (GPT/Gemini `reasoning_tokens` not logged): `copy_editor.py`, `figurative_curator.py` (never logs), `scripture_verifier.py` (3 sites: GPT filter, Haiku filter, tool-use verifier); also: cost summary is never persisted to JSON
 - Full implementation plan written to `docs/session_tracking/NEXT_SESSION_BRIEF.md`; recommended Sonnet 4.6 for Session 327 (mechanical plumbing work, clear patterns already in the codebase)
-
-**Session 325 (2026-04-18)**: Master Writer on Opus 4.7 — Max Effort
-- Confirmed via Anthropic docs that Opus 4.7 removed `budget_tokens` (400 error if set); adaptive is the only thinking mode, with a new `effort` param replacing fixed budgets
-- Added `output_config={"effort": "max"}` to the Claude writer streaming call in `src/agents/archive/master_editor_v2.py`, gated by `"opus-4-7" in model_id` so Opus 4.6 callers are unaffected
-- Rationale: Master Writer is long-form, high-stakes synthesis where quality matters more than latency/cost — max effort sits above xhigh and is the top capability tier
-
 
 ## Quick Commands
 
