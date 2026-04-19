@@ -717,7 +717,7 @@ class ResearchAssembler:
         self.figurative_curator = None
         if use_figurative_curator:
             try:
-                self.figurative_curator = FigurativeCurator(verbose=False)
+                self.figurative_curator = FigurativeCurator(verbose=False, cost_tracker=self.cost_tracker)
                 if self.logger:
                     self.logger.info("Figurative Curator enabled (Gemini 3 Pro)")
             except Exception as e:

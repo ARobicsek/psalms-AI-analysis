@@ -1,13 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 326 (2026-04-18)
+**Session**: 327 (2026-04-18)
 **Phase**: Pipeline Production — tweaks and improvements
-
-> **⚠ NEXT-SESSION PRIORITY**: Read [`docs/session_tracking/NEXT_SESSION_BRIEF.md`](docs/session_tracking/NEXT_SESSION_BRIEF.md) first. It contains the full implementation plan for fixing pipeline cost-accounting bugs (Session 327 work).
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 327 (2026-04-18)**: Fix Pipeline Cost Accounting for GPT/Gemini Thinking Tokens
+- Fixed 4 billing bugs: `copy_editor.py` GPT path now passes `reasoning_tokens` to cost tracker; `figurative_curator.py` now accepts and logs to `cost_tracker`; `scripture_verifier.py` all three call sites (`_filter_via_gpt`, `_filter_via_haiku`, `verify_citations_tooluse`) now accept and log `cost_tracker`; `research_assembler.py` passes `cost_tracker` to `FigurativeCurator`
+- Added cost JSON persistence: both pipeline scripts now write `psalm_NNN_cost.json` to the output directory before printing the summary
+- Pipeline callers (`run_enhanced_pipeline.py`, `run_si_pipeline.py`) updated to pass `cost_tracker` to `filter_false_positives` and `verify_citations_tooluse`
 
 **Session 326 (2026-04-18)**: Audit of Pipeline Cost Accounting — Plan for Session 327
 - Audited every LLM call site reachable from `run_enhanced_pipeline.py` / `run_si_pipeline.py`; verified via Anthropic docs that Claude's `output_tokens` already includes thinking tokens (billing correct as-is)
@@ -28,9 +31,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Archived the experimental paragraph outline mapping prompt into `docs/archive/deprecated/OLD_master_editor_paragraph_outline_prompt.md`
 - Reverted the uncommitted test modifications from `src/agents/master_editor.py` so they don't persist in the pipeline
 
-**Session 322 (2026-04-09)**: ASCII Hyphen BiDi Fix for DOCX Hebrew Processing
-- Added ASCII hyphen (U+002D) support to `_split_into_grapheme_clusters`, `_reverse_bare_hebrew_segments`, and `_reverse_primarily_hebrew_line`
-- Psalm 47 verse headers no longer lose maqqaf-hyphens; inline multi-word Hebrew with hyphens no longer garbled
 
 ## Quick Commands
 

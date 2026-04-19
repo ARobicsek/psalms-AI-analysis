@@ -82,7 +82,8 @@ class FigurativeCurator:
         verbose: bool = False,
         dry_run: bool = False,
         max_iterations: int = 3,
-        tanakh_db_path: Optional[Path] = None
+        tanakh_db_path: Optional[Path] = None,
+        cost_tracker=None,
     ):
         """
         Initialize the Figurative Curator.
@@ -98,6 +99,7 @@ class FigurativeCurator:
         self.dry_run = dry_run
         self.max_iterations = max_iterations
         self.openai_client = None
+        self.cost_tracker = cost_tracker
 
         # Set database path
         if tanakh_db_path:
@@ -206,6 +208,14 @@ class FigurativeCurator:
             output_cost = (token_usage["output"] / 1_000_000) * self.GPT54_OUTPUT_COST_PER_M
             thinking_cost = (token_usage["thinking"] / 1_000_000) * self.GPT54_THINKING_COST_PER_M
             token_usage["cost"] = input_cost + output_cost + thinking_cost
+
+            if self.cost_tracker is not None:
+                self.cost_tracker.add_usage(
+                    model="gpt-5.4",
+                    input_tokens=token_usage["input"],
+                    output_tokens=token_usage["output"],
+                    thinking_tokens=token_usage["thinking"],
+                )
 
         return response_text, token_usage
 

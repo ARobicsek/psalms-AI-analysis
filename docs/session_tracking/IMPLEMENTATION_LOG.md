@@ -9,6 +9,32 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 327 (2026-04-18): Fix Pipeline Cost Accounting for GPT/Gemini Thinking Tokens
+
+**Objective**: Implement the 4 billing fixes identified in Session 326's audit, plus cost JSON persistence.
+
+**Solutions Implemented**:
+
+1. **Fix 4 — Cost JSON persistence** (`run_enhanced_pipeline.py`, `run_si_pipeline.py`): Before printing the summary, both scripts now serialize `cost_tracker.to_dict()` to `output/psalm_NNN/psalm_NNN_cost.json`. Enables after-the-fact cost comparisons between runs.
+
+2. **Fix 1 — `copy_editor.py` GPT reasoning tokens**: Extracted `reasoning_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0` in the GPT branch, stored as `usage_data['thinking_tokens']`, and passed as `thinking_tokens=usage_data.get('thinking_tokens', 0)` to `cost_tracker.add_usage()`. Claude branch unaffected (correctly passes 0).
+
+3. **Fix 2 — `figurative_curator.py` never logged to tracker**: Added `cost_tracker=None` param to `__init__`, stored as `self.cost_tracker`. In `_call_llm`, after the local cost calculation, calls `self.cost_tracker.add_usage(model="gpt-5.4", ...)` if tracker provided. In `research_assembler.py` line 720, changed `FigurativeCurator(verbose=False)` to `FigurativeCurator(verbose=False, cost_tracker=self.cost_tracker)`.
+
+4. **Fix 3 — `scripture_verifier.py` three silent sites**: Added `cost_tracker=None` to `filter_false_positives` (public wrapper), `_filter_via_haiku`, `_filter_via_gpt`, and `verify_citations_tooluse`. Each logs to `cost_tracker.add_usage()` after its API call. Tool-use verifier logs aggregated totals across all turns after the loop. Pipeline scripts (`run_enhanced_pipeline.py`, `run_si_pipeline.py`) updated to pass `cost_tracker=cost_tracker` at both call sites.
+
+**Files Modified**:
+- `src/agents/copy_editor.py` — Fix 1: capture GPT reasoning_tokens and pass to cost_tracker
+- `src/agents/figurative_curator.py` — Fix 2: add cost_tracker param and log usage
+- `src/agents/research_assembler.py` — Fix 2 plumbing: pass cost_tracker to FigurativeCurator
+- `src/utils/scripture_verifier.py` — Fix 3: add cost_tracker to 4 functions, log usage at all 3 sites
+- `scripts/run_enhanced_pipeline.py` — Fix 3 plumbing + Fix 4 (cost JSON)
+- `scripts/run_si_pipeline.py` — Fix 3 plumbing + Fix 4 (cost JSON)
+
+**Not implemented**: Fix 5 (Master Writer thinking visibility) — deferred, not a billing bug.
+
+---
+
 ## Session 326 (2026-04-18): Audit of Pipeline Cost Accounting
 
 **Objective**: Audit the enhanced + SI pipelines for places where LLM cost tracking silently drops reasoning/thinking tokens, and produce a clear implementation plan for the next session.

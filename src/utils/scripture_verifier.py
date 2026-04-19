@@ -1314,6 +1314,7 @@ def filter_false_positives(
     issues: List[CitationIssue],
     commentary_text: str = "",
     model: str = "haiku",
+    cost_tracker=None,
 ) -> tuple:
     """
     Use an LLM judge to filter false positives from the regex verifier's output.
@@ -1344,15 +1345,16 @@ def filter_false_positives(
     user_msg = _build_judge_pairs(fixable, commentary_text)
 
     if model == "gpt":
-        return _filter_via_gpt(fixable, non_fixable, user_msg)
+        return _filter_via_gpt(fixable, non_fixable, user_msg, cost_tracker=cost_tracker)
     else:
-        return _filter_via_haiku(fixable, non_fixable, user_msg)
+        return _filter_via_haiku(fixable, non_fixable, user_msg, cost_tracker=cost_tracker)
 
 
 def _filter_via_haiku(
     fixable: List[CitationIssue],
     non_fixable: List[CitationIssue],
     user_msg: str,
+    cost_tracker=None,
 ) -> tuple:
     """Run false-positive filter using Claude Haiku 4.5."""
     import json
@@ -1393,6 +1395,14 @@ def _filter_via_haiku(
     output_tokens = usage.output_tokens
     cost = (input_tokens / 1_000_000) * 0.80 + (output_tokens / 1_000_000) * 4.00
 
+    if cost_tracker is not None:
+        cost_tracker.add_usage(
+            model="claude-haiku-4-5-20251001",
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            thinking_tokens=0,
+        )
+
     kept = len([i for i in filtered if i.issue_type == "NOT_SUBSTRING"])
     return filtered, {
         "input_tokens": input_tokens,
@@ -1407,6 +1417,7 @@ def _filter_via_gpt(
     fixable: List[CitationIssue],
     non_fixable: List[CitationIssue],
     user_msg: str,
+    cost_tracker=None,
 ) -> tuple:
     """Run false-positive filter using GPT-5.1 with moderate thinking."""
     import json
@@ -1453,6 +1464,14 @@ def _filter_via_gpt(
     cost = ((input_tokens / 1_000_000) * 1.25 +
             (non_thinking_output / 1_000_000) * 10.00 +
             (thinking_cost_tokens / 1_000_000) * 10.00)
+
+    if cost_tracker is not None:
+        cost_tracker.add_usage(
+            model="gpt-5.1",
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            thinking_tokens=thinking_cost_tokens,
+        )
 
     kept = len([i for i in filtered if i.issue_type == "NOT_SUBSTRING"])
     return filtered, {
@@ -1587,6 +1606,7 @@ def verify_citations_tooluse(
     db_path: str = "database/tanakh.db",
     psalm_number: int = 0,
     haiku_filter: bool = True,
+    cost_tracker=None,
 ) -> tuple:
     """
     Verify Hebrew scripture citations using a hybrid Haiku tool-use approach.
@@ -1741,6 +1761,16 @@ def verify_citations_tooluse(
 
     db.close()
     extraction_elapsed = time.time() - start_time
+
+    if cost_tracker is not None:
+        cost_tracker.add_usage(
+            model="claude-haiku-4-5-20251001",
+            input_tokens=total_input_tokens,
+            output_tokens=total_output_tokens,
+            thinking_tokens=0,
+            cache_read_tokens=total_cache_read_tokens,
+            cache_write_tokens=total_cache_creation_tokens,
+        )
 
     # Phase 2: Programmatic comparison of each citation
     raw_citations = report_result.get("citations", []) if report_result else []

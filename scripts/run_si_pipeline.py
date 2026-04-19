@@ -779,6 +779,7 @@ def run_enhanced_pipeline(
                     logger.info(f"[STEP 5a½] Running {label} filter on {fixable_count} issue(s)...")
                     citation_issues, filter_stats = filter_false_positives(
                         citation_issues, commentary_text=verify_text, model=filter_model,
+                        cost_tracker=cost_tracker,
                     )
                     logger.info(
                         f"[STEP 5a½] {label}: kept {filter_stats['kept_count']}, "
@@ -793,7 +794,7 @@ def run_enhanced_pipeline(
                 logger.info("[STEP 5a½] Running Haiku tool-use verifier...")
                 tooluse_issues, tooluse_stats = verify_citations_tooluse(
                     verify_text, db_path=db_path, psalm_number=psalm_number,
-                    haiku_filter=True,
+                    haiku_filter=True, cost_tracker=cost_tracker,
                 )
                 logger.info(
                     f"[STEP 5a½] Tool-use: {tooluse_stats.get('total_citations_found', 0)} citations, "
@@ -925,6 +926,12 @@ def run_enhanced_pipeline(
     print(f"\n{'='*80}")
     print(f"PIPELINE COMPLETE - Psalm {psalm_number}")
     print(f"{'='*80}")
+    cost_file = output_path / f"psalm_{psalm_number:03d}_cost.json"
+    cost_file.write_text(
+        json.dumps(cost_tracker.to_dict(), indent=2, ensure_ascii=False),
+        encoding='utf-8'
+    )
+    logger.info(f"Cost data saved to {cost_file.name}")
     print(cost_tracker.get_summary())
 
 if __name__ == "__main__":

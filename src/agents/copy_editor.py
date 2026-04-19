@@ -625,12 +625,14 @@ class CopyEditor:
                     response = self.openai_client.chat.completions.create(**kwargs)
                     full_text = response.choices[0].message.content
                     
-                    if hasattr(response.usage, 'reasoning_tokens') and response.usage.reasoning_tokens:
-                        thinking_text = "Reasoning used " + str(response.usage.reasoning_tokens) + " tokens."
-                    
+                    reasoning_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+                    if reasoning_tokens:
+                        thinking_text = "Reasoning used " + str(reasoning_tokens) + " tokens."
+
                     usage_data = {
                         'input_tokens': getattr(response.usage, 'prompt_tokens', 0),
                         'output_tokens': getattr(response.usage, 'completion_tokens', 0),
+                        'thinking_tokens': reasoning_tokens,
                     }
                 else:
                     with self.anthropic_client.messages.stream(
@@ -688,7 +690,8 @@ class CopyEditor:
                 # Track cost
                 input_tokens = usage_data.get('input_tokens', 0)
                 output_tokens = usage_data.get('output_tokens', 0)
-                self.cost_tracker.add_usage(self.model, input_tokens=input_tokens, output_tokens=output_tokens)
+                self.cost_tracker.add_usage(self.model, input_tokens=input_tokens, output_tokens=output_tokens,
+                                            thinking_tokens=usage_data.get('thinking_tokens', 0))
                 cost_breakdown = self.cost_tracker.calculate_cost(self.model)
                 cost = cost_breakdown['total_cost']
                 self.logger.info(f"Tokens: {input_tokens:,} in / {output_tokens:,} out — Cost: ${cost:.4f}")
