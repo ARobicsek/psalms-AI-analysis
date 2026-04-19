@@ -9,6 +9,36 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 325 (2026-04-18): Master Writer on Opus 4.7 — Max Effort
+
+**Objective**: Verify the recommended thinking configuration for Claude Opus 4.7 (now the Master Writer's default model) and tune it for maximum reasoning depth.
+
+**Research**:
+- Anthropic removed `budget_tokens` on Opus 4.7 — `thinking: {"type": "enabled", "budget_tokens": N}` returns a 400 error
+- Adaptive thinking is the only supported thinking-on mode; interleaved thinking is auto-enabled with no beta header required
+- A new `effort` parameter replaces `budget_tokens` with five tiers: `low`, `medium`, `high` (default), `xhigh` (Claude Code default), `max`
+- Anthropic's internal evals: adaptive thinking "reliably outperforms extended thinking with a fixed budget_tokens" on bimodal and long-horizon tasks
+- Recommended `max_tokens=64000` for high/xhigh/max effort — matches our existing setting
+
+**Problems Identified**:
+- Prior to this session, the Master Writer was running on adaptive + default (`high`) effort with no explicit `output_config`. For a long-form synthesis task, max effort is a better trade-off.
+- Opus 4.6 callers (e.g., Macro Analyst) cannot receive `output_config` without error, so the change must be gated.
+
+**Solutions Implemented**:
+1. In `_call_claude_writer` (`src/agents/archive/master_editor_v2.py`), refactored the `messages.stream(...)` call to build a `stream_kwargs` dict
+2. Added `stream_kwargs["output_config"] = {"effort": "max"}` conditionally when `"opus-4-7" in model_id`
+3. Left `thinking={"type": "adaptive"}` unchanged (correct and only supported mode on 4.7)
+4. Left `max_tokens=64000` unchanged (matches Anthropic's recommendation for max effort)
+
+**Files Modified**:
+- `src/agents/archive/master_editor_v2.py` — Added model-gated `output_config={"effort": "max"}` in `_call_claude_writer` streaming call
+
+**Follow-ups / Watch-outs**:
+- Max effort at 64k max_tokens will run hotter than plain adaptive. Monitor token usage on the first 1–2 psalms before a batch run.
+- Requires a reasonably current `anthropic` Python SDK. If an `unexpected keyword` error surfaces, `pip install -U anthropic`.
+
+---
+
 ## Session 324 (2026-04-17): Upgrade Master Writer to Claude Opus 4.7
 
 **Objective**: Switch the Master Writer's default model from Claude Opus 4.6 to the newly released Claude Opus 4.7, keeping the Macro Analyst on Opus 4.6.

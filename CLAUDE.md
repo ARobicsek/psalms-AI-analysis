@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 324 (2026-04-17)
+**Session**: 325 (2026-04-18)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 325 (2026-04-18)**: Master Writer on Opus 4.7 — Max Effort
+- Confirmed via Anthropic docs that Opus 4.7 removed `budget_tokens` (400 error if set); adaptive is the only thinking mode, with a new `effort` param replacing fixed budgets
+- Added `output_config={"effort": "max"}` to the Claude writer streaming call in `src/agents/archive/master_editor_v2.py`, gated by `"opus-4-7" in model_id` so Opus 4.6 callers are unaffected
+- Rationale: Master Writer is long-form, high-stakes synthesis where quality matters more than latency/cost — max effort sits above xhigh and is the top capability tier
 
 **Session 324 (2026-04-17)**: Upgrade Master Writer to Claude Opus 4.7
 - Changed Master Writer default model from `claude-opus-4-6` to `claude-opus-4-7` in both pipeline scripts
@@ -23,11 +28,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 **Session 321 (2026-04-09)**: Ellipsis BiDi Fix in DOCX Hebrew Block Detection
 - Added Unicode ellipsis (`…`, U+2026) to separator regexes in both `_split_long_hebrew_block` and `_reverse_bare_hebrew_segments`
 - Psalm 49 Selichot quotation (10 Hebrew words split by `…`) now correctly detected as a long block and rendered as standalone RTL paragraph
-
-**Session 320 (2026-03-29)**: DOCX Formatting Fixes for Psalms 44, 49, and 50
-- Fixed `_extract_sections_from_copy_edited` to use a flexible regex for "Key Verses" header, correctly restoring displaced liturgical content in Psalm 44.
-- Expanded `_split_long_hebrew_block` regex to support punctuation like `!`, `?`, `—`, `׃`, and `׀` inside Hebrew blocks.
-- Prevented 14-word and punctuation-heavy Hebrew block quotes in Psalms 49 and 50 from being improperly split.
 
 ## Quick Commands
 

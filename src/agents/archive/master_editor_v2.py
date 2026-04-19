@@ -2130,13 +2130,21 @@ class MasterEditorV2:
             response_text = ""
             input_tokens = 0
             output_tokens = 0
-            
-            with self.anthropic_client.messages.stream(
-                model=model_id,
-                max_tokens=64000,
-                thinking={"type": "adaptive"},
-                messages=[{"role": "user", "content": prompt}]
-            ) as stream:
+
+            # Session 325: Opus 4.7 replaces budget_tokens with an effort parameter
+            # (low/medium/high/xhigh/max). Use max effort for the Master Writer —
+            # quality matters more than latency here. Older models (e.g. Opus 4.6)
+            # don't accept output_config, so gate the param on 4.7.
+            stream_kwargs = {
+                "model": model_id,
+                "max_tokens": 64000,
+                "thinking": {"type": "adaptive"},
+                "messages": [{"role": "user", "content": prompt}],
+            }
+            if "opus-4-7" in model_id:
+                stream_kwargs["output_config"] = {"effort": "max"}
+
+            with self.anthropic_client.messages.stream(**stream_kwargs) as stream:
                 for text in stream.text_stream:
                     response_text += text
                 
