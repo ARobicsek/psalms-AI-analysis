@@ -2128,6 +2128,7 @@ class MasterEditorV2:
             
             # Use streaming API as required for long-thinking models (e.g. Opus 4.6)
             response_text = ""
+            thinking_chars = 0
             input_tokens = 0
             output_tokens = 0
 
@@ -2145,20 +2146,31 @@ class MasterEditorV2:
                 stream_kwargs["output_config"] = {"effort": "max"}
 
             with self.anthropic_client.messages.stream(**stream_kwargs) as stream:
-                for text in stream.text_stream:
-                    response_text += text
-                
+                for event in stream:
+                    if hasattr(event, 'type') and event.type == 'content_block_delta':
+                        if hasattr(event.delta, 'text'):
+                            response_text += event.delta.text
+                        elif hasattr(event.delta, 'thinking'):
+                            thinking_chars += len(event.delta.thinking)
+
                 # Get final message usage
                 final_message = stream.get_final_message()
                 input_tokens = final_message.usage.input_tokens
                 output_tokens = final_message.usage.output_tokens
 
-            # Track usage
+            if thinking_chars:
+                self.logger.info(
+                    f"Master Writer used ~{thinking_chars // 4:,} thinking tokens "
+                    f"(included in the {output_tokens:,} output total)"
+                )
+
+            # Track usage — thinking_tokens=0 intentional: Anthropic billing already
+            # folds thinking into output_tokens, so passing it here would double-bill.
             self.cost_tracker.add_usage(
                 model=model,
                 input_tokens=input_tokens,
                 output_tokens=output_tokens,
-                thinking_tokens=0 
+                thinking_tokens=0
             )
 
             # Save response
