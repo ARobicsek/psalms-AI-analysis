@@ -813,18 +813,21 @@ class CopyEditor:
                 self.logger.info(f"✅ {name} preserved")
 
         # Check for displaced liturgical key verse content
-        # If the intro has #### Key Verses and Phrases but the content after it
-        # is < 100 chars, the key verse entries may have been displaced
-        if '#### Key Verses and Phrases' in corrected:
-            key_verses_pos = corrected.find('#### Key Verses and Phrases')
+        # If the intro has a "#### Key verses" (or "Key Verses and Phrases") header
+        # but the content after it is < 100 chars, the key verse entries may have
+        # been displaced.
+        key_header_match = re.search(r'####\s*Key\s+[Vv]erse[^\n]*', corrected)
+        if key_header_match:
+            key_verses_pos = key_header_match.start()
+            header_len = len(key_header_match.group(0))
             # Find the first **Verse N** header (start of verse commentary)
-            first_verse_match = re.search(r'\*\*Verse[s]?\s+\d+', corrected[key_verses_pos:])
+            first_verse_match = re.search(r'\*\*Verse[s]?\s+\d+', corrected[key_verses_pos + header_len:])
             if first_verse_match:
-                content_between = corrected[key_verses_pos + len('#### Key Verses and Phrases'):key_verses_pos + first_verse_match.start()].strip()
+                content_between = corrected[key_verses_pos + header_len:key_verses_pos + header_len + first_verse_match.start()].strip()
                 if len(content_between) < 100:
                     self.logger.warning(
                         f"⚠️  Liturgical key verse content may be displaced! "
-                        f"Only {len(content_between)} chars between '#### Key Verses and Phrases' "
+                        f"Only {len(content_between)} chars between '{key_header_match.group(0)}' "
                         f"header and first **Verse** header. Expected substantial liturgical content here."
                     )
 

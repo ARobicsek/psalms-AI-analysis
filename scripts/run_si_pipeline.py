@@ -226,7 +226,7 @@ def _extract_sections_from_copy_edited(copy_edited_path: Path, logger=None) -> t
     # displaced liturgical content that belongs in the introduction.
     # -----------------------------------------------------------------------
     has_liturgical_marker = '---LITURGICAL-SECTION-START---' in intro_text
-    has_key_verses_header = '#### Key Verses and Phrases' in intro_text
+    has_key_verses_header = bool(re.search(r'####\s*Key\s+[Vv]erse', intro_text))
 
     if has_liturgical_marker and has_key_verses_header:
         # Find the first standalone verse header: **Verse N** (or **Verses N-M**)

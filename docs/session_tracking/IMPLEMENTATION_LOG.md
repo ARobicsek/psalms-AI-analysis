@@ -9,6 +9,29 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 328 (2026-04-18): Fix Displaced-Liturgical-Content Recovery for Opus 4.7 Headers
+
+**Objective**: Diagnose and fix a Psalm 50 DOCX formatting bug where "Key verses" liturgical entries were misplaced under the verse-by-verse commentary section after the Opus 4.7 Master Writer upgrade.
+
+**Problems Identified**:
+- Psalm 50 DOCX showed the `Modern Jewish Liturgical Use → Key verses` subsection empty except for a one-sentence intro, while the bold `**Verse 1** (...) appears in Ashkenazi Yom Kippur...` entries (and 5 more like it) appeared above the first real verse commentary, rendered by the DocumentGenerator as a bogus "Verse 1" header with no content.
+- Root cause traced through the pipeline: Master Writer output (Opus 4.7) places the entries correctly in the intro. Print-ready file preserves the structure. **Copy Editor displaces the content** — it moves the 6 bold verse entries out of `## Introduction` and into `## Verse-by-Verse Commentary` (separated by `---` from the real verse commentary that follows).
+- A recovery routine for this displacement exists in `_extract_sections_from_copy_edited` in both pipeline scripts. It gates on `has_liturgical_marker AND has_key_verses_header`. The `has_key_verses_header` check used `re.search(r'####\s*Key Verse', ...)` — **case-sensitive**. The old Opus 4.6 header was `#### Key Verses and Phrases` (capital V), which matched as a substring; Opus 4.7 emits `#### Key verses` (lowercase v, faithfully following the prompt at `master_editor.py:255`), which does not match. Recovery branch never fired; displaced content stayed in the verses file; DOCX rendered incorrectly.
+
+**Solutions Implemented**:
+1. `scripts/run_enhanced_pipeline.py:226` — changed `re.search(r'####\s*Key Verse', intro_text)` to `re.search(r'####\s*Key\s+[Vv]erse', intro_text)` so both old and new header formats match.
+2. `scripts/run_si_pipeline.py:229` — converted exact-string check `'#### Key Verses and Phrases' in intro_text` to the same regex `re.search(r'####\s*Key\s+[Vv]erse', intro_text)` for consistency with the enhanced pipeline.
+3. `src/agents/copy_editor.py:818-832` — the displacement-warning check also hard-coded `#### Key Verses and Phrases`. Rewrote using `re.search(r'####\s*Key\s+[Vv]erse[^\n]*', corrected)` to capture whichever header variant is present and use `header_len = len(match.group(0))` for slicing. Warning message now includes the matched header string for clarity.
+4. Re-ran the post-copy-edit extraction and DOCX regeneration on Psalm 50 without a new API call (copy-edited file already contained the data). Log confirmed: `RECOVERY: Detected displaced liturgical content (2,888 chars) at start of verse commentary. Moving back to introduction.` → `Liturgical content restored to introduction section`. Verified: `edited_intro.md` now ends with the 6 `**Verse N** (...)` liturgical entries after `#### Key verses`; `edited_verses.md` now starts cleanly with `**Verse 1**` on its own line (real commentary).
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` — case-insensitive regex for "Key verses"/"Key Verses and Phrases" header detection in the displacement-recovery branch
+- `scripts/run_si_pipeline.py` — same fix for the SI pipeline's copy of the extraction function
+- `src/agents/copy_editor.py` — same fix for the post-edit displacement-warning check; capture header variant in the match object and use it for slicing + logging
+- `output/psalm_50/psalm_050_edited_intro.md`, `psalm_050_edited_verses.md`, `psalm_050_commentary.docx` — regenerated via the fixed extraction path
+
+---
+
 ## Session 327 (2026-04-18): Fix Pipeline Cost Accounting for GPT/Gemini Thinking Tokens
 
 **Objective**: Implement all 5 fixes identified in Session 326's audit: 4 billing bugs, cost JSON persistence, and Master Writer thinking visibility.
