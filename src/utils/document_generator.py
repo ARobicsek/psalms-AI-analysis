@@ -87,9 +87,10 @@ class DocumentGenerator:
         - U+05B0-U+05BD: Vowel points (nikud)
         """
         # Pattern: base character followed by any combining marks
-        # Base: Hebrew letter (U+05D0-U+05EA), maqqef (U+05BE), geresh (U+05F3), gershayim (U+05F4), paseq (U+05C0), or space
+        # Base: Hebrew letter (U+05D0-U+05EA), maqqef (U+05BE), ASCII hyphen (used as maqqef substitute),
+        #        geresh (U+05F3), gershayim (U+05F4), paseq (U+05C0), or space
         # Combining: U+0591-U+05BD, U+05BF, U+05C1-U+05C2, U+05C4-U+05C7
-        cluster_pattern = r'[\u05D0-\u05EA\u05BE\u05F3\u05F4\u05C0\s][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
+        cluster_pattern = r'[\u05D0-\u05EA\u05BE\u05F3\u05F4\u05C0\s\-][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
         clusters = re.findall(cluster_pattern, text)
         return clusters
 
@@ -190,8 +191,8 @@ class DocumentGenerator:
 
         # Hebrew word: base letter (+ geresh/gershayim) followed by combining marks
         heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
-        # Separator between Hebrew words: spaces, colons, semicolons, commas, maqqef
-        separator = r'[\s:;,\u05BE]+'
+        # Separator between Hebrew words: spaces, colons, semicolons, commas, maqqef, ASCII hyphen
+        separator = r'[\s:;,\u2026\u05BE\-]+'
         # Match 3+ consecutive Hebrew words (possibly with internal punctuation)
         # Lookbehind: not preceded by Hebrew chars (prevents partial matches)
         # Lookahead: not followed by Hebrew base letter
@@ -309,7 +310,7 @@ class DocumentGenerator:
         # This captures spaces, semicolons, parentheses, brackets
         # Note: \[ and \] (single backslash) escape brackets inside the character class
         # Using \\[ would create a literal backslash + unescaped bracket, breaking the class
-        tokens = re.split(r'(\s+|[;:,.()\[\]׃])', text)
+        tokens = re.split(r'(\s+|[;:,.\-()\[\]׃])', text)
 
         reversed_tokens = []
         for token in tokens:
@@ -629,7 +630,7 @@ class DocumentGenerator:
         Returns (before, hebrew, after) tuple if found, or None.
         """
         heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
-        separator = r'(?:[\s:;,./?!()\[\]"\'\-–—\u05BE\u05C0\u05C3]|\*{1,2})+'
+        separator = r'(?:[\s:;,./?!()\[\]"\'\-–—\u2026\u05BE\u05C0\u05C3]|\*{1,2})+'
         # Match 6+ consecutive Hebrew words
         bare_hebrew = rf'(?<![\u05D0-\u05EA\u0590-\u05FF])({heb_word}(?:{separator}{heb_word}){{5,}})(?![\u05D0-\u05EA])'
 
@@ -1601,7 +1602,16 @@ class DocumentGenerator:
             commentary_lines = [f"{c} ({n})" for c, n in sorted(commentaries.items())]
             commentary_details = f" ({'; '.join(commentary_lines)})"
 
-        concordance_total = sum((research_data.get('concordance_results', {}) or {}).values())
+        concordance_results = research_data.get('concordance_results', {}) or {}
+        concordance_total = sum(concordance_results.values())
+
+        # Concordance entries breakdown (query -> count)
+        concordance_breakdown_str = ""
+        # Filter out the legacy 'total_results' key to get per-query entries
+        concordance_per_query = {k: v for k, v in concordance_results.items() if k != 'total_results'}
+        if concordance_per_query:
+            items = [f"{self.modifier.modify_text(q)} ({c})" for q, c in sorted(concordance_per_query.items())]
+            concordance_breakdown_str = f" ({'; '.join(items)})"
 
         figurative_results = research_data.get('figurative_results', {}) or {}
         figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
@@ -1678,7 +1688,7 @@ Methodological & Bibliographical Summary
 **Ugaritic Parallels Reviewed**: {ugaritic_count}
 **Lexicon Entries (BDB/Klein) Reviewed**: {lexicon_count}
 **Traditional Commentaries Reviewed**: {total_commentaries}{commentary_details}
-**Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}
+**Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}{concordance_breakdown_str}
 **Figurative Concordance Matches Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}{figurative_breakdown_str}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
 **Similar Psalms Analyzed**: {related_psalms_str}

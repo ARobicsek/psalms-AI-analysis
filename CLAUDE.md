@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 329 (2026-04-18)
+**Session**: 330 (2026-04-19)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 330 (2026-04-19)**: Concordance Entries Breakdown in DOCX Methods Section
+- Added per-query breakdown to "Concordance Entries Reviewed" line (matching format of "Figurative Concordance Matches Reviewed") — now shows total count + each search term with its result count in parentheses
+- All concordance search terms run through `DivineNamesModifier` before display, ensuring divine names are properly modified in the methods section
+- Updated all 3 formatters: `document_generator.py`, `combined_document_generator.py`, `commentary_formatter.py`; backward-compatible with legacy stats files that only have `total_results`
 
 **Session 328 (2026-04-18)**: Fix Displaced-Liturgical-Content Recovery for Opus 4.7 Headers
 - Diagnosed a Psalm 50 DOCX bug where "Key verses" liturgical entries (bold `**Verse N** (...) appears in...`) showed up under "Verse-by-Verse Commentary" instead of the Modern Jewish Liturgical Use section; confirmed Master Writer output is correct — the Copy Editor displaces them, and a recovery routine in the pipeline was silently failing due to a case-sensitive regex
@@ -26,11 +31,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Confirmed via Anthropic docs that Opus 4.7 removed `budget_tokens` (400 error if set); adaptive is the only thinking mode, with a new `effort` param replacing fixed budgets
 - Added `output_config={"effort": "max"}` to the Claude writer streaming call in `src/agents/archive/master_editor_v2.py`, gated by `"opus-4-7" in model_id` so Opus 4.6 callers are unaffected
 - Rationale: Master Writer is long-form, high-stakes synthesis where quality matters more than latency/cost — max effort sits above xhigh and is the top capability tier
-
-**Session 324 (2026-04-17)**: Upgrade Master Writer to Claude Opus 4.7
-- Changed Master Writer default model from `claude-opus-4-6` to `claude-opus-4-7` in both pipeline scripts
-- Added `claude-opus-4-7` pricing entry to cost_tracker.py; updated all documentation (architecture, scriptReferences, How to Run)
-- Macro Analyst remains on Opus 4.6; DOCX methodology page picks up model dynamically — no code change needed there
 
 
 ## Quick Commands

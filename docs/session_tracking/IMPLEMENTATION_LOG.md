@@ -9,6 +9,22 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 330 (2026-04-19): Concordance Entries Breakdown in DOCX Methods Section
+
+**Objective**: Add per-query breakdown to the "Concordance Entries Reviewed" line in the DOCX methods section, matching the existing format used by "Figurative Concordance Matches Reviewed."
+
+**Solutions Implemented**:
+1. **Concordance breakdown string**: In all 3 formatters, replaced the bare total with a total + parenthesized per-query breakdown. Reads from `concordance_results` in `pipeline_stats.json` (dict of `query → count`). Filters out the legacy `total_results` key (used by older pipeline runs that didn't store per-query data). Output format: `13 (אלהי מעוזי (1); הר קדשׁך (3); ...)`.
+2. **Divine names modifier**: All concordance search terms are now passed through `self.modifier.modify_text()` before display, ensuring divine names like יהוה are properly modified in the methods section output.
+3. **Backward compatibility**: Legacy stats files (Psalms ≤42, 50) that only have `{"total_results": N}` display just the total with no breakdown — same as before.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added concordance breakdown with divine names modification (single-psalm DOCX)
+- `src/utils/combined_document_generator.py` — Same change (combined main+college DOCX)
+- `src/utils/commentary_formatter.py` — Same change (markdown print-ready formatter)
+
+---
+
 ## Session 328 (2026-04-18): Fix Displaced-Liturgical-Content Recovery for Opus 4.7 Headers
 
 **Objective**: Diagnose and fix a Psalm 50 DOCX formatting bug where "Key verses" liturgical entries were misplaced under the verse-by-verse commentary section after the Opus 4.7 Master Writer upgrade.
