@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 331 (2026-04-19)
+**Session**: 332 (2026-04-21)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 332 (2026-04-21)**: Fix Psalm 51 Pipeline — Curator Bug, Token Limit, Input Bloat
+- Diagnosed Psalm 51 truncation (Master Writer stopped mid-verse-8): `max_tokens=64000` in `master_editor_v2.py` was consumed by adaptive thinking + max effort, leaving insufficient budget for 21-verse commentary. Fixed: bumped to `128000`
+- Found and fixed a Session 327 regression in `research_assembler.py:720` — `FigurativeCurator(cost_tracker=self.cost_tracker)` referenced an unset attribute (`self.cost_tracker` never assigned; should use local param `cost_tracker`). The `try/except` silently disabled the curator for ALL runs since April 18, causing raw figurative data (118K chars) to replace curated output (36K chars), bloating the Master Writer prompt by ~82K chars and leaving `figurative_parallels_reviewed` empty
+- Both fixes verified via code analysis; Psalm 51 re-run triggered from this session to validate full 21-verse output, curator activation, and figurative breakdown population
 
 **Session 331 (2026-04-19)**: Opus 4.7 Prompt Polish — Parenthetical Translations + Stray Quotes Around Hebrew
 - Diagnosed why Opus 4.7 wrapped every English translation in parens (e.g., `אַל־יֶחֱרַשׁ ("let Him not be silent")`): the Master Writer prompt's "CORRECT examples" at `master_editor.py:60-63` put English in parens, and Opus 4.7 pattern-matched on them literally (Opus 4.6 inferred intent better); rewrote Rule 1 with a new Parentheses Rule offering three acceptable patterns (FLOWING, apposition, whole-unit parenthetical) and explicit INCORRECT examples — same rule applied to Greek/Aramaic/Latin translations
@@ -26,11 +31,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Fixed 4 billing bugs: `copy_editor.py` GPT path passes `reasoning_tokens`; `figurative_curator.py` logs to `cost_tracker`; `scripture_verifier.py` all 3 call sites log; `research_assembler.py` passes tracker to `FigurativeCurator`; both pipelines persist cost to `psalm_NNN_cost.json`
 - Fix 5: `master_editor_v2.py` `_call_claude_writer` switched to event-based stream iteration; now logs `~N thinking tokens (included in M output total)` after each Master Writer run
 - All 5 fixes from the Session 326 audit plan implemented; `thinking_tokens=0` in `add_usage()` kept intentional — Anthropic folds thinking into `output_tokens`
-
-**Session 326 (2026-04-18)**: Audit of Pipeline Cost Accounting — Plan for Session 327
-- Audited every LLM call site reachable from `run_enhanced_pipeline.py` / `run_si_pipeline.py`; verified via Anthropic docs that Claude's `output_tokens` already includes thinking tokens (billing correct as-is)
-- Identified 5 silent billing bugs (GPT/Gemini `reasoning_tokens` not logged): `copy_editor.py`, `figurative_curator.py` (never logs), `scripture_verifier.py` (3 sites: GPT filter, Haiku filter, tool-use verifier); also: cost summary is never persisted to JSON
-- Full implementation plan written to `docs/session_tracking/NEXT_SESSION_BRIEF.md`; recommended Sonnet 4.6 for Session 327 (mechanical plumbing work, clear patterns already in the codebase)
 
 ## Quick Commands
 

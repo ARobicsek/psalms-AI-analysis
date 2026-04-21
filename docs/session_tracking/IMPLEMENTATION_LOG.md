@@ -9,6 +9,38 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 332 (2026-04-21): Fix Psalm 51 Pipeline — Curator Bug, Token Limit, Input Bloat
+
+**Objective**: Diagnose and fix three interconnected issues causing Psalm 51's truncated verse commentary, missing figurative vehicle breakdown, and inflated Master Writer input size.
+
+**Problems Identified**:
+- **Truncation**: Master Writer (Claude Opus 4.7 with adaptive thinking + max effort) hit the hard `max_tokens=64000` ceiling. ~34K tokens consumed by internal reasoning left insufficient budget for the full 21-verse commentary, causing a hard cutoff mid-sentence during verse 8.
+- **Curator regression (Session 327)**: Commit `04b78e8` (April 18) changed `FigurativeCurator(verbose=False)` to `FigurativeCurator(verbose=False, cost_tracker=self.cost_tracker)` in `research_assembler.py:720`. But `self.cost_tracker` was never assigned as an instance attribute — the `cost_tracker` parameter is a local variable. This raised `AttributeError`, caught silently by the `try/except` block, disabling the curator for ALL pipeline runs since Session 327.
+- **Input bloat**: Without the curator, raw figurative instances (118K chars) replaced curated output (36K chars) — **+82K chars** of prompt bloat. This inflated the Master Writer input from an expected ~280K to 407K chars, making token limit exhaustion much more likely.
+- **Missing figurative breakdown**: `figurative_parallels_reviewed` in `pipeline_stats.json` was empty because the curator (which populates it) never ran. The bibliographical summary showed `120 total instances` but no per-vehicle breakdown.
+
+**Root Cause Timeline**:
+- March 28: Psalm 50 ran fine — curator created as `FigurativeCurator(verbose=False)` (no cost_tracker)
+- April 18 (Session 327): commit added `cost_tracker=self.cost_tracker` — `AttributeError` → curator silently disabled
+- April 21: Psalm 51 ran without curator → raw data flooded prompt → token limit hit → truncation
+
+**Solutions Implemented**:
+1. **Curator bug fix** (`research_assembler.py:720`): Changed `self.cost_tracker` → `cost_tracker` (use local parameter instead of non-existent instance attribute).
+2. **Token limit increase** (`master_editor_v2.py:2204`): Changed `max_tokens` from `64000` to `128000`. Opus 4.7 supports up to 128K output tokens; this provides sufficient budget for both extended thinking and full verse commentary even for long psalms.
+
+**Files Modified**:
+- `src/agents/research_assembler.py` — Line 720: `self.cost_tracker` → `cost_tracker` (curator init fix)
+- `src/agents/archive/master_editor_v2.py` — Line 2204: `max_tokens: 64000` → `128000`
+
+**Verification Plan**: Re-run Psalm 51 pipeline with `--skip-macro` (triggered during this session). Expected:
+- Research bundle contains `## Figurative Language Insights (Curated)` (not raw instances)
+- Research bundle size drops from ~394K to ~280-300K
+- Master Writer output covers all 21 verses without truncation
+- `figurative_parallels_reviewed` populated with per-vehicle counts
+- Bibliographical summary shows vehicle breakdown
+
+---
+
 ## Session 331 (2026-04-19): Opus 4.7 Prompt Polish — Parenthetical Translations + Stray Quotes Around Hebrew
 
 **Objective**: Stop Opus 4.7 from wrapping every English translation in parentheses (e.g., `אַל־יֶחֱרַשׁ ("let Him not be silent")`) — a regression vs. Opus 4.6 — and eliminate stray straight quotes around long Hebrew citations that orphan visually in DOCX output.

@@ -2201,7 +2201,7 @@ class MasterEditorV2:
             # don't accept output_config, so gate the param on 4.7.
             stream_kwargs = {
                 "model": model_id,
-                "max_tokens": 64000,
+                "max_tokens": 128000,
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": prompt}],
             }
