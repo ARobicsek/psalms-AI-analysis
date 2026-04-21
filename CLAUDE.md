@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 333 (2026-04-21)
+**Session**: 334 (2026-04-21)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 334 (2026-04-21)**: Fix Hebrew Verse Punctuation Alignment in DOCX
+- Resolved a Word BiDi rendering issue where trailing punctuation on verses erroneously appeared on the visual right edge for both long block quotes and short inline verses.
+- Added explicit RLM (`\u200F`) injection to `_add_hebrew_block_paragraph` for multi-line blocks, and updated nested format parsing to properly apply `_is_hebrew_dominant` logic for short inline verses, ensuring full LRO reversal.
+- Added `scripts/run_docx_only.py` to allow isolated regeneration of Word documents without re-running earlier pipeline steps.
 
 **Session 333 (2026-04-21)**: Verified Psalm 51 Pipeline Fixes
 - Monitored the end-to-end re-run of the Psalm 51 pipeline (`--skip-macro`) to confirm the previous session's fixes were successful.
@@ -27,10 +32,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - All concordance search terms run through `DivineNamesModifier` before display, ensuring divine names are properly modified in the methods section
 - Updated all 3 formatters: `document_generator.py`, `combined_document_generator.py`, `commentary_formatter.py`; backward-compatible with legacy stats files that only have `total_results`
 
-**Session 328 (2026-04-18)**: Fix Displaced-Liturgical-Content Recovery for Opus 4.7 Headers
-- Diagnosed a Psalm 50 DOCX bug where "Key verses" liturgical entries (bold `**Verse N** (...) appears in...`) showed up under "Verse-by-Verse Commentary" instead of the Modern Jewish Liturgical Use section; confirmed Master Writer output is correct — the Copy Editor displaces them, and a recovery routine in the pipeline was silently failing due to a case-sensitive regex
-- Opus 4.7 faithfully emits `#### Key verses` (lowercase, per prompt at `master_editor.py:255`), but the detection regex `####\s*Key Verse` in `_extract_sections_from_copy_edited` was case-sensitive — so the recovery branch never fired on Opus 4.7 output (it worked on Opus 4.6's `#### Key Verses and Phrases` purely by substring luck)
-- Fixed three call sites (`run_enhanced_pipeline.py:226`, `run_si_pipeline.py:229`, `copy_editor.py:818`) to use `####\s*Key\s+[Vv]erse` regex, re-extracted + regenerated Psalm 50 DOCX (recovery moved 2,888 chars back to the intro); all three sites now handle both old and new header variants
 
 ## Quick Commands
 

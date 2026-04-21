@@ -9,6 +9,25 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 334 (2026-04-21): Fix Hebrew Verse Punctuation Alignment in DOCX
+
+**Objective**: Resolve a Word BiDi rendering issue where trailing punctuation on verses erroneously appeared on the visual right edge.
+
+**Problems Identified**:
+- Trailing periods on native RTL block paragraphs (long verse quotes) were visually rendering on the right side because Word natively parses punctuation without an explicit semantic direction sequence into neutral placement.
+- Trailing periods on LTR short verse paragraphs were visually rendering on the right side because they bypassed `_is_hebrew_dominant` formatting blocks due to lacking the `sof-pasuq`, sending them to the legacy bare-Hebrew chunker which left trailing punctuation outside the reversing Left-To-Right Override block.
+
+**Solutions Implemented**:
+1. Added explicit RLM (`\u200F`) injection to `_add_hebrew_block_paragraph` when text trails in periods, colons, or semicolons, anchoring trailing dots natively to the left edge inside RTL paragraphs.
+2. Modified the formatting sub-parser in `_add_nested_formatting_with_breaks` to check `_is_hebrew_dominant(part)` exactly like `_process_markdown_formatting` does, so standalone verses missing sof-pasuq uniformly reverse their textual strings completely instead of piecemeal.
+3. Created `scripts/run_docx_only.py` to allow isolated regeneration of Word documents without re-running earlier pipeline modules like the Copy Editor.
+
+**Files Modified**:
+- `src/utils/document_generator.py` - Fixed punctuation and LRO bugs for rendering verse blocks and added `_is_hebrew_dominant` logic to the internal nested format loop.
+- `scripts/run_docx_only.py` - New generic DOCX-only executor created for fast output iteration.
+
+---
+
 ## Session 333 (2026-04-21): Verified Psalm 51 Pipeline Fixes
 
 **Objective**: Verify that the Session 332 fixes properly addressed the Psalm 51 pipeline truncation and figurative curator issues.

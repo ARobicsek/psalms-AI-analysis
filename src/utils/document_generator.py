@@ -681,6 +681,12 @@ class DocumentGenerator:
         p.paragraph_format.left_indent = Inches(0.3)
         p.paragraph_format.right_indent = Inches(0.3)
 
+        # Add RLM if the block ends in a period, colon, or semicolon 
+        # so Word's native bidi engine doesn't incorrectly send it to the right side
+        hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', hebrew_text))
+        if hebrew_count >= 3 and re.search(r'[.;:,!?]\s*$', hebrew_text):
+            hebrew_text = hebrew_text.rstrip() + '\u200F'
+
         # Parse **bold** markers and create separate runs
         parts = re.split(r'\*\*(.+?)\*\*', hebrew_text)
         for i, part in enumerate(parts):
@@ -711,6 +717,18 @@ class DocumentGenerator:
         split = self._split_long_hebrew_block(modified_text)
         if split:
             before, hebrew, after = split
+            
+            # If 'before' or 'after' are merely orphaned punctuation, whitespace, 
+            # or verse references with no English words, merge them back into the Hebrew 
+            # block to prevent empty vertical space and orphaned dots on their own lines.
+            if before and not re.search(r'[a-zA-Z]', before):
+                hebrew = before + hebrew
+                before = ""
+                
+            if after and not re.search(r'[a-zA-Z]', after):
+                hebrew = hebrew + after
+                after = ""
+                
             if before:
                 self._add_paragraph_with_markdown(before, style=style)
             self._add_hebrew_block_paragraph(hebrew, style=style)
@@ -1063,7 +1081,7 @@ class DocumentGenerator:
             else:
                 # Check if this is a primarily-Hebrew line (like a verse text)
                 # If so, apply full-line RTL reversal for correct display
-                if self._is_primarily_hebrew(part):
+                if self._is_primarily_hebrew(part) or self._is_hebrew_dominant(part):
                     modified_part = self._reverse_primarily_hebrew_line(part)
                     run = paragraph.add_run(modified_part)
                 else:
@@ -1178,7 +1196,7 @@ class DocumentGenerator:
                 else:
                     # Regular text with base formatting
                     # Check if primarily Hebrew and apply full-line reversal
-                    if self._is_primarily_hebrew(part):
+                    if self._is_primarily_hebrew(part) or self._is_hebrew_dominant(part):
                         modified_part = self._reverse_primarily_hebrew_line(part)
                         run = paragraph.add_run(modified_part)
                     else:
@@ -1234,7 +1252,7 @@ class DocumentGenerator:
         else:
             # No nested formatting - just add with base formatting
             # Check if primarily Hebrew and apply full-line reversal
-            if self._is_primarily_hebrew(text):
+            if self._is_primarily_hebrew(text) or self._is_hebrew_dominant(text):
                 modified_text = self._reverse_primarily_hebrew_line(text)
                 run = paragraph.add_run(modified_text)
             else:
@@ -1296,6 +1314,18 @@ class DocumentGenerator:
         split = self._split_long_hebrew_block(modified_text)
         if split:
             before, hebrew, after = split
+            
+            # If 'before' or 'after' are merely orphaned punctuation, whitespace, 
+            # or verse references with no English words, merge them back into the Hebrew 
+            # block to prevent empty vertical space and orphaned dots on their own lines.
+            if before and not re.search(r'[a-zA-Z]', before):
+                hebrew = before + hebrew
+                before = ""
+                
+            if after and not re.search(r'[a-zA-Z]', after):
+                hebrew = hebrew + after
+                after = ""
+                
             if before:
                 self._add_paragraph_with_soft_breaks(before, style=style)
             self._add_hebrew_block_paragraph(hebrew, style=style)
