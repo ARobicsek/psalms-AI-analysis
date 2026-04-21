@@ -9,6 +9,20 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 333 (2026-04-21): Verified Psalm 51 Pipeline Fixes
+
+**Objective**: Verify that the Session 332 fixes properly addressed the Psalm 51 pipeline truncation and figurative curator issues.
+
+**Solutions Implemented**:
+1. Monitored the end-to-end processing of Psalm 51 (`scripts/run_enhanced_pipeline.py 51 --skip-macro`).
+2. Confirmed that the `max_tokens=128000` increase on the Master Writer gave enough budget for Opus 4.7 to generate the full commentary for all 21 verses without the verse 8 truncation issue.
+3. Verified the `cost_tracker` initialization fix in the `ResearchAssembler`, which restored the `FigurativeCurator`. This eliminated 82K characters of raw instance data from the research bundle and successfully restored the curated per-vehicle breakdown within the generated pipeline stats and the final DOCX methodology section.
+
+**Files Modified**:
+- (No code modifications this session; verified previous fixes)
+
+---
+
 ## Session 332 (2026-04-21): Fix Psalm 51 Pipeline — Curator Bug, Token Limit, Input Bloat
 
 **Objective**: Diagnose and fix three interconnected issues causing Psalm 51's truncated verse commentary, missing figurative vehicle breakdown, and inflated Master Writer input size.

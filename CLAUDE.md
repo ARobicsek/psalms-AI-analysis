@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 332 (2026-04-21)
+**Session**: 333 (2026-04-21)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 333 (2026-04-21)**: Verified Psalm 51 Pipeline Fixes
+- Monitored the end-to-end re-run of the Psalm 51 pipeline (`--skip-macro`) to confirm the previous session's fixes were successful.
+- Verified that the Master Writer completed commentary for all 21 verses without truncation, confirming the `max_tokens` increase to 128K provided sufficient reasoning budget.
+- Confirmed the Figurative Curator initialized properly, eliminating the 82K character input bloat from raw instances and successfully restoring the per-vehicle breakdown in the DOCX methodology section.
 
 **Session 332 (2026-04-21)**: Fix Psalm 51 Pipeline — Curator Bug, Token Limit, Input Bloat
 - Diagnosed Psalm 51 truncation (Master Writer stopped mid-verse-8): `max_tokens=64000` in `master_editor_v2.py` was consumed by adaptive thinking + max effort, leaving insufficient budget for 21-verse commentary. Fixed: bumped to `128000`
@@ -26,11 +31,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Diagnosed a Psalm 50 DOCX bug where "Key verses" liturgical entries (bold `**Verse N** (...) appears in...`) showed up under "Verse-by-Verse Commentary" instead of the Modern Jewish Liturgical Use section; confirmed Master Writer output is correct — the Copy Editor displaces them, and a recovery routine in the pipeline was silently failing due to a case-sensitive regex
 - Opus 4.7 faithfully emits `#### Key verses` (lowercase, per prompt at `master_editor.py:255`), but the detection regex `####\s*Key Verse` in `_extract_sections_from_copy_edited` was case-sensitive — so the recovery branch never fired on Opus 4.7 output (it worked on Opus 4.6's `#### Key Verses and Phrases` purely by substring luck)
 - Fixed three call sites (`run_enhanced_pipeline.py:226`, `run_si_pipeline.py:229`, `copy_editor.py:818`) to use `####\s*Key\s+[Vv]erse` regex, re-extracted + regenerated Psalm 50 DOCX (recovery moved 2,888 chars back to the intro); all three sites now handle both old and new header variants
-
-**Session 327 (2026-04-18)**: Fix Pipeline Cost Accounting + Master Writer Thinking Visibility
-- Fixed 4 billing bugs: `copy_editor.py` GPT path passes `reasoning_tokens`; `figurative_curator.py` logs to `cost_tracker`; `scripture_verifier.py` all 3 call sites log; `research_assembler.py` passes tracker to `FigurativeCurator`; both pipelines persist cost to `psalm_NNN_cost.json`
-- Fix 5: `master_editor_v2.py` `_call_claude_writer` switched to event-based stream iteration; now logs `~N thinking tokens (included in M output total)` after each Master Writer run
-- All 5 fixes from the Session 326 audit plan implemented; `thinking_tokens=0` in `add_usage()` kept intentional — Anthropic folds thinking into `output_tokens`
 
 ## Quick Commands
 
