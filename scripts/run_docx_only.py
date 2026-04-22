@@ -44,7 +44,10 @@ def main():
          print(f"Error: Missing required markdown files in {base_dir}")
          return
 
-    summary_json_file = base_dir / f"psalm_{psalm_number:03d}_summary.json"
+    summary_json_file = base_dir / f"psalm_{psalm_number:03d}_pipeline_stats.json"
+    if not summary_json_file.exists():
+        summary_json_file = base_dir / f"psalm_{psalm_number:03d}_summary.json"
+        
     docx_output_file = base_dir / f"psalm_{psalm_number:03d}_commentary.docx"
     
     refined_q = base_dir / f"psalm_{psalm_number:03d}_reader_questions_refined.json"

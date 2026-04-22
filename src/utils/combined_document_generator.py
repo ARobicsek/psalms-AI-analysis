@@ -569,7 +569,7 @@ class CombinedDocumentGenerator:
             else:
                 # Check if this is a primarily-Hebrew line (like a verse text)
                 # If so, apply full-line RTL reversal for correct display
-                if self._is_primarily_hebrew(part):
+                if self._is_primarily_hebrew(part) or self._is_hebrew_dominant(part):
                     modified_part = self._reverse_primarily_hebrew_line(part)
                     run = paragraph.add_run(modified_part)
                 else:
@@ -781,7 +781,7 @@ class CombinedDocumentGenerator:
                 for i, line in enumerate(lines):
                     if line:
                         # Check if this is a primarily-Hebrew line (like a verse text)
-                        if self._is_primarily_hebrew(line):
+                        if self._is_primarily_hebrew(line) or self._is_hebrew_dominant(line):
                             modified_line = self._reverse_primarily_hebrew_line(line)
                             run = p.add_run(modified_line)
                         else:

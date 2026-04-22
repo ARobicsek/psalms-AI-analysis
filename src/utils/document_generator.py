@@ -652,7 +652,7 @@ class DocumentGenerator:
         after = re.sub(r'^[,;:]\s*', '', after)
         return (before, hebrew, after)
 
-    def _add_hebrew_block_paragraph(self, hebrew_text: str, style: str = 'Normal'):
+    def _add_hebrew_block_paragraph(self, hebrew_text: str, style: str = 'Normal', font_name: str = 'Times New Roman'):
         """
         Add a standalone RTL paragraph for long Hebrew text.
 
@@ -693,7 +693,7 @@ class DocumentGenerator:
             if not part:
                 continue
             run = p.add_run(part)
-            self._set_run_font_xml(run, font_name='Times New Roman', font_size=13)
+            self._set_run_font_xml(run, font_name=font_name, font_size=13)
             if i % 2 == 1:  # Odd indices are the bold-captured groups
                 run.bold = True
 
@@ -729,9 +729,12 @@ class DocumentGenerator:
                 hebrew = hebrew + after
                 after = ""
                 
+            # If the Hebrew block is at the very beginning of the string and spans a whole line, it's a verse
+            font_to_use = 'Aptos' if not before and (not after or after.startswith('\n')) else 'Times New Roman'
+                
             if before:
                 self._add_paragraph_with_markdown(before, style=style)
-            self._add_hebrew_block_paragraph(hebrew, style=style)
+            self._add_hebrew_block_paragraph(hebrew, style=style, font_name=font_to_use)
             if after:
                 self._add_paragraph_with_markdown(after, style=style)
             return
@@ -870,7 +873,7 @@ class DocumentGenerator:
 
             i += 1
 
-    def _add_commentary_with_bullets(self, text: str, style: str = 'Normal'):
+    def _add_commentary_with_bullets(self, text: str, style: str = 'Normal', is_verse_commentary: bool = False):
         """
         Adds commentary text, intelligently handling bullet lists and regular text.
         Bullet list items (lines starting with "- ") are converted to proper Word bullets.
@@ -989,6 +992,7 @@ class DocumentGenerator:
             else:
                 # Collect consecutive non-bullet, non-quote, non-empty lines until we hit an empty line or special formatting
                 text_block = []
+                is_first_block = (i == 0)
                 while i < len(lines):
                     if not lines[i].strip():
                         # We hit an empty line. Let's look ahead to see if both the current collected 
@@ -1032,7 +1036,11 @@ class DocumentGenerator:
 
                 # Add as a paragraph with soft breaks
                 if text_block:
-                    self._add_paragraph_with_soft_breaks('\n'.join(text_block), style=style)
+                    self._add_paragraph_with_soft_breaks(
+                        '\n'.join(text_block), 
+                        style=style, 
+                        is_verse_header=(is_verse_commentary and is_first_block)
+                    )
 
     def _process_markdown_formatting(self, paragraph, text, set_font=False):
         """
@@ -1306,7 +1314,7 @@ class DocumentGenerator:
                 run.font.name = 'Aptos'
                 run.font.size = Pt(12)
 
-    def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal'):
+    def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal', is_verse_header: bool = False):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
         modified_text = self.modifier.modify_text(text)
 
@@ -1326,11 +1334,15 @@ class DocumentGenerator:
                 hebrew = hebrew + after
                 after = ""
                 
+            # Force Aptos exactly when this block is flagged as the core verse header.
+            # Otherwise use the default Times New Roman block font for long quotes.
+            font_to_use = 'Aptos' if is_verse_header else 'Times New Roman'
+                
             if before:
-                self._add_paragraph_with_soft_breaks(before, style=style)
-            self._add_hebrew_block_paragraph(hebrew, style=style)
+                self._add_paragraph_with_soft_breaks(before, style=style, is_verse_header=is_verse_header)
+            self._add_hebrew_block_paragraph(hebrew, style=style, font_name=font_to_use)
             if after:
-                self._add_paragraph_with_soft_breaks(after, style=style)
+                self._add_paragraph_with_soft_breaks(after, style=style, is_verse_header=False)
             return
 
         p = self.document.add_paragraph(style=style)
@@ -1360,7 +1372,7 @@ class DocumentGenerator:
                 for i, line in enumerate(lines):
                     if line:
                         # Check if this is a primarily-Hebrew line (like a verse text)
-                        if self._is_primarily_hebrew(line):
+                        if self._is_primarily_hebrew(line) or self._is_hebrew_dominant(line):
                             modified_line = self._reverse_primarily_hebrew_line(line)
                             run = p.add_run(modified_line)
                         else:
@@ -1807,7 +1819,7 @@ Methodological & Bibliographical Summary
             self.document.add_heading(f'Verse {verse["number"]}', level=3)
 
             # Commentary now includes the verse text with punctuation from the LLM
-            self._add_commentary_with_bullets(verse["commentary"], style='BodySans')
+            self._add_commentary_with_bullets(verse["commentary"], style='BodySans', is_verse_commentary=True)
 
         # 5. Add Methodological Summary
         if self.stats_path.exists():

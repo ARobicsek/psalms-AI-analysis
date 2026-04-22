@@ -9,6 +9,42 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 336 (2026-04-21): Stabilize Aptos Fonts and Methodology Summary for DOCX
+
+**Objective**: Strictly differentiate primary verse headings from inline Hebrew quotes to stabilize font rendering, and fix missing methodology pages on manual DOCX generation runs.
+
+**Problems Identified**:
+- Because Psalm 51 dropped the explicit *sof-pasuq* marker at the end of verses, the structural verse headings (6+ words) were incorrectly captured by the generic _split_long_hebrew_block chunker, forcing verses that should be rendered in Aptos into Times New Roman.
+- The DOCX-only regeneration script mistakenly pointed to a deprecated file summary.json instead of the current pipeline_stats.json, causing the Methodology page to silently strip from manually regenerated documents.
+- The previous text-based heuristic for distinguishing standalone inline quotes from primary verse headings broke consistently for multi-line LLM outputs.
+
+**Solutions Implemented**:
+1. Corrected scripts/run_docx_only.py to point to pipeline_stats.json, then gracefully fallback to summary.json if missing. 
+2. Set up an explicit Boolean typing chain (is_verse_commentary -> is_verse_header) cascading down from _parse_verse_commentary to precisely target primary commentary block verse headings.
+3. Updated _add_hebrew_block_paragraph to conditionally support an Aptos override if triggered by the flag.
+
+**Files Modified**:
+- scripts/run_docx_only.py - Pointed summary_json_file correctly to pipeline_stats.json.
+- src/utils/document_generator.py - Rewrote logic across _add_hebrew_block_paragraph, _add_paragraph_with_soft_breaks, and _add_commentary_with_bullets to programmatically protect primary verses in Aptos.
+---
+
+## Session 335 (2026-04-21): Complete Fix Hebrew Verse Punctuation Alignment in DOCX
+
+**Objective**: Complete the fix for Word BiDi rendering issue where trailing punctuation on verses erroneously appeared on the visual right edge, which still affected short continuous verses without sof-pasuq.
+
+**Problems Identified**:
+- In the previous session, although _is_hebrew_dominant was used to ensure LRO reverse parsing was applied for short inline verses, this check was critically missing in the _add_paragraph_with_soft_breaks handler function in document_generator.py and across multiple methods in combined_document_generator.py. This caused short formatting verse blocks like Ps 51:1 (3 words) to bypass reverse processing and leak punctuation to the wrong visual side.
+
+**Solutions Implemented**:
+1. Added or self._is_hebrew_dominant(line) inside the primary Hebrew check loop of _add_paragraph_with_soft_breaks within document_generator.py, effectively resolving the placement of trailing periods on brief verse extracts.
+2. Formally propagated the _is_hebrew_dominant logic across the same parallel formatting functions in combined_document_generator.py to ensure cross-generator formatting stability.
+
+**Files Modified**:
+- src/utils/document_generator.py
+- src/utils/combined_document_generator.py
+
+---
+
 ## Session 334 (2026-04-21): Fix Hebrew Verse Punctuation Alignment in DOCX
 
 **Objective**: Resolve a Word BiDi rendering issue where trailing punctuation on verses erroneously appeared on the visual right edge.

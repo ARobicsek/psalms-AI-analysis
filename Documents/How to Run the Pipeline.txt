@@ -8,8 +8,8 @@ python scripts/run_enhanced_pipeline.py XX
 
 #just all word docs
 python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-writer --skip-copy-editor
-OR
-test_fix_XX.py
+OR BETTER:
+python scripts/run_docx_only.py XX
 
 #CONCORDANCE
 python scripts/concordance_tool.py
@@ -44,10 +44,6 @@ python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-insi
 
 # resume for where the pipeline left off
 python scripts/run_enhanced_pipeline.py 9 --resume
-
-
-#run only college
-python scripts/run_enhanced_pipeline.py 126 --skip-macro --skip-micro --skip-synthesis --skip-master-edit 
 
 
 # Only run copy editor
