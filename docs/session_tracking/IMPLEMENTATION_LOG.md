@@ -9,6 +9,43 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 339 (2026-04-24): Surface Literary Echoes Models in DOCX + Lit Echoes Cost Subtotal in Terminal Tally
+
+**Objective**: Ensure the DOCX "Models Used" section lists the Gemini 3.1 Pro model used for Literary Echoes passes 1 & 2 (and, by extension, the GPT-5.4 model used for passes 3 & 4), and ensure the Literary Echoes cost is visible as its own line in the pipeline's final terminal tally rather than being buried inside the per-model roll-up.
+
+**Problems Identified**:
+1. **"Models Used" section omitted Literary Echoes.** The pipeline runners already called `tracker.track_model_for_step("literary_echoes_pass_1", ...)` through `pass_4` in STEP 1b, so the keys were present in `pipeline_stats.json`. But none of the three renderers that emit the Methodological Summary (`document_generator.py`, `combined_document_generator.py`, `commentary_formatter.py`) referenced those keys — they only looked for `macro_analysis`, `micro_analysis`, `liturgical_librarian`, `figurative_curator`, `question_curator`, `insight_extractor`, `synthesis`/`master_editor`/`master_writer`, `citation_filter`, and `copy_editor`. So the Gemini 3.1 Pro attribution for the creative generation passes never made it into the final DOCX.
+2. **Literary Echoes cost buried in per-model rollup.** `CostTracker.get_summary()` aggregates every API call under its model key. Since Pass 3+4 of lit_echoes use `gpt-5.4` (shared with the Figurative Curator and other GPT components) and Pass 1+2 use `gemini-3.1-pro-preview` (not used elsewhere), there was no way to read off the lit_echoes-specific cost from the terminal output without cross-referencing `output/psalm_NNN/literary_echoes/cost_report.json`.
+
+**Solutions Implemented**:
+1. In all three renderers, added two conditional lines to the "Models Used" block, placed after the existing `copy_editor` check:
+   ```python
+   if 'literary_echoes_pass_1' in model_usage:
+       summary_text += f"\n**Literary Echoes (Passes 1 & 2 — Generation)**: {model_usage.get('literary_echoes_pass_1', 'N/A')}"
+   if 'literary_echoes_pass_3' in model_usage:
+       summary_text += f"\n**Literary Echoes (Passes 3 & 4 — Verify + Reconstruct)**: {model_usage.get('literary_echoes_pass_3', 'N/A')}"
+   ```
+   (commentary_formatter.py uses `lines.append(...)` instead of string concatenation but is otherwise identical.) Both lines are guarded by presence checks so older psalms whose pipeline_stats.json predates Session 338 still render cleanly.
+2. In both pipeline runners, introduced a `lit_echoes_cost = 0.0` local variable right after `cost_tracker = CostTracker()`, set it to `lit_result.total_cost` inside STEP 1b's try block (only on success, so a failure leaves it at 0), and printed the subtotal after `cost_tracker.get_summary()`:
+   ```python
+   if lit_echoes_cost > 0:
+       print(f"Literary Echoes subtotal (Passes 1-4): ${lit_echoes_cost:.4f}")
+       print("  (already included in the grand total above — shown separately "
+             "because pass costs are lumped with other uses of gemini-3.1-pro-preview / gpt-5.4)\n")
+   ```
+   The subtotal is sourced from `lit_result.total_cost` (summed from all 4 `PassResult` objects using their recorded token counts) rather than a re-query of the cost_tracker, so the number is authoritative for the lit_echoes agent itself.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — Added two conditional lines to the Models Used section of `_format_bibliographical_summary`'s caller (around L1864-1867).
+- `src/utils/combined_document_generator.py` — Same two lines (around L1777-1780).
+- `src/utils/commentary_formatter.py` — Same two lines in the markdown formatter (around L271-274).
+- `scripts/run_enhanced_pipeline.py` — Declared `lit_echoes_cost = 0.0` near the cost_tracker init, captured `lit_result.total_cost` in STEP 1b, printed subtotal after `cost_tracker.get_summary()`.
+- `scripts/run_si_pipeline.py` — Same three changes mirrored from the enhanced pipeline.
+
+**Verification**: `python -c "import ast; ast.parse(...)"` on all 5 edited files returned clean. No new scripts created; no changes to pipeline step ordering or to the `LiteraryEchoesAgent` itself.
+
+---
+
 ## Session 338 (2026-04-23): Built `lit_echoes` Agent — Automated 4-Pass Literary Echoes in the Pipeline
 
 **Objective**: Replace the manual Gemini-web 4-pass literary-echoes workflow with an automated in-pipeline agent that (a) solves the cross-psalm author-repetition problem via a rolling exclusion list, (b) integrates into both `run_enhanced_pipeline.py` and `run_si_pipeline.py` as a default-on step, and (c) can also be run standalone for a single psalm.

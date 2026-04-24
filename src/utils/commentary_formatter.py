@@ -267,6 +267,11 @@ class CommentaryFormatter:
             else:
                 writer_model = agent_models.get('master_writer') or agent_models.get('master_editor', 'N/A')
                 lines.append(f"**Commentary (Master Writer)**: {writer_model}")
+
+            if 'literary_echoes_pass_1' in agent_models:
+                lines.append(f"**Literary Echoes (Passes 1 & 2 — Generation)**: {agent_models.get('literary_echoes_pass_1', 'N/A')}")
+            if 'literary_echoes_pass_3' in agent_models:
+                lines.append(f"**Literary Echoes (Passes 3 & 4 — Verify + Reconstruct)**: {agent_models.get('literary_echoes_pass_3', 'N/A')}")
         else:
             lines.append("Model attribution data not available.")
 

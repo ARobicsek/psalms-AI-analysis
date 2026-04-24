@@ -333,6 +333,7 @@ def run_enhanced_pipeline(
     cost_tracker = CostTracker()
     research_trimmer = ResearchTrimmer(logger=logger)
     output_path.mkdir(parents=True, exist_ok=True)
+    lit_echoes_cost = 0.0  # Populated by STEP 1b; printed in the final tally
 
     # File paths
     macro_file = output_path / f"psalm_{psalm_number:03d}_macro.json"
@@ -484,6 +485,7 @@ def run_enhanced_pipeline(
             tracker.track_model_for_step("literary_echoes_pass_2", "gemini-3.1-pro-preview")
             tracker.track_model_for_step("literary_echoes_pass_3", "gpt-5.4")
             tracker.track_model_for_step("literary_echoes_pass_4", "gpt-5.4")
+            lit_echoes_cost = lit_result.total_cost
             logger.info(
                 f"[STEP 1b] Literary echoes complete — ${lit_result.total_cost:.4f} "
                 f"({len(lit_result.exclusion_authors)} authors excluded from last "
@@ -972,6 +974,10 @@ def run_enhanced_pipeline(
     )
     logger.info(f"Cost data saved to {cost_file.name}")
     print(cost_tracker.get_summary())
+    if lit_echoes_cost > 0:
+        print(f"Literary Echoes subtotal (Passes 1-4): ${lit_echoes_cost:.4f}")
+        print("  (already included in the grand total above — shown separately "
+              "because pass costs are lumped with other uses of gemini-3.1-pro-preview / gpt-5.4)\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run SI Pipeline (Master Writer V4)")

@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 338 (2026-04-23)
+**Session**: 339 (2026-04-24)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 339 (2026-04-24)**: Surface Literary Echoes Models in DOCX + Lit Echoes Cost Subtotal in Terminal Tally
+- Added Literary Echoes models to the "Models Used" section of the Methodological & Bibliographical Summary in all three renderers (`src/utils/document_generator.py`, `src/utils/combined_document_generator.py`, `src/utils/commentary_formatter.py`). Two new conditional lines render only if the corresponding `literary_echoes_pass_*` keys are present in `pipeline_stats.json`: "**Literary Echoes (Passes 1 & 2 — Generation)**" → `gemini-3.1-pro-preview` and "**Literary Echoes (Passes 3 & 4 — Verify + Reconstruct)**" → `gpt-5.4`. The tracker already recorded these keys via `track_model_for_step` in STEP 1b — the renderers just weren't reading them.
+- Added a Literary Echoes subtotal to the final terminal cost tally in both `scripts/run_enhanced_pipeline.py` and `scripts/run_si_pipeline.py`. Introduced a `lit_echoes_cost` variable initialized to `0.0` before STEP 1b, populated from `lit_result.total_cost` on success, and printed after `cost_tracker.get_summary()` as "Literary Echoes subtotal (Passes 1-4): $X.XXXX" with a note that it's already included in the grand total (needed because the CostTracker aggregates by model, so lit-echoes Gemini/GPT usage gets lumped with other pipeline components that share those models).
+- All five edited files parse clean via `ast.parse`. No new scripts; no change to pipeline step ordering or control flow.
 
 **Session 338 (2026-04-23)**: Built `lit_echoes` Agent — Automated 4-Pass Literary Echoes in the Pipeline
 - Built `src/agents/literary_echoes_agent.py` orchestrating the 4-pass workflow (Gemini 3.1 Pro generate → Gemini 3.1 Pro gap-fill → GPT-5.4 Responses-API with `web_search_preview` tool verify → GPT-5.4 Chat-Completions reconstruct). Rolling exclusion list scans the 4 most-recently-rendered `data/literary_echoes/*.txt` files by mtime and extracts authors via `^####\s+([^,]+),` regex, injecting them into both Pass 1 AND Pass 2 prompts as hard bans. Per-pass raw outputs + exact prompts sent + cost report saved to `output/psalm_NNN/literary_echoes/`; final copied to canonical `data/literary_echoes/psalm_NNN_literary_echoes.txt`. Created `scripts/run_literary_echoes.py` standalone runner and wired new STEP 1b (default-on, regenerate-and-overwrite, `--skip-lit-echoes` opt-out) into both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
@@ -31,11 +36,6 @@ un_docx_only.py pointing to an outdated filename summary.json, restoring compili
 - Resolved a Word BiDi rendering issue where trailing punctuation on verses erroneously appeared on the visual right edge for both long block quotes and short inline verses.
 - Added explicit RLM (`\u200F`) injection to `_add_hebrew_block_paragraph` for multi-line blocks, and updated nested format parsing to properly apply `_is_hebrew_dominant` logic for short inline verses, ensuring full LRO reversal.
 - Added `scripts/run_docx_only.py` to allow isolated regeneration of Word documents without re-running earlier pipeline steps.
-
-**Session 333 (2026-04-21)**: Verified Psalm 51 Pipeline Fixes
-- Monitored the end-to-end re-run of the Psalm 51 pipeline (`--skip-macro`) to confirm the previous session's fixes were successful.
-- Verified that the Master Writer completed commentary for all 21 verses without truncation, confirming the `max_tokens` increase to 128K provided sufficient reasoning budget.
-- Confirmed the Figurative Curator initialized properly, eliminating the 82K character input bloat from raw instances and successfully restoring the per-vehicle breakdown in the DOCX methodology section.
 
 ## Quick Commands
 
