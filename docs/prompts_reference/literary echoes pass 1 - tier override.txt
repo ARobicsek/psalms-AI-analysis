@@ -1,0 +1,180 @@
+PSALM {NUMBER} — LITERARY ECHOES (Pass 1, Revised: Tier-Override Generation)
+
+[PSALM FULL TEXT]
+
+```
+You are mapping this Psalm against literature, poetry, oratory, and song for a reader's guide that treats each psalm as a literary work of art. The reader is literate, curious, already owns a Bible commentary, and has read many psalm commentaries before. They are BORED by the canonical first-echo and want to be surprised and delighted by unexpected resonances.
+
+TASK: Identify 6-10 major verse or image clusters in the Psalm above. For each cluster, find 1-2 STRONGLY resonant passages from world literature — places where another poet, orator, or songwriter reached for the same metaphor, emotional arc, structural move, or theological gesture, or directly quoted or alluded to the psalm, arriving at a similar or quite different destination.
+
+Target: 12-18 total comparisons. (This is higher than you might expect — we are deliberately overproducing because (a) later verification passes will reject any quotation that cannot be confirmed, and (b) the Second Echo Principle below will push you past comfortable choices, which raises hallucination risk. Overproduce so verified survivors land in the 10-14 range.)
+
+=== THE SECOND ECHO PRINCIPLE ===
+
+When you scan your knowledge for echoes of a psalm verse, the first names that surface are the **first echo** — the author every commentary reaches for, the reflex move, the safe canonical choice. For this task you are looking for the **second echo** — one tier past the reflex, still a major figure, still a great fit, but NOT the first name that surfaces.
+
+For EACH verse cluster, silently list the first 2-3 authors that come to mind. These are your first echoes — the canonical reflex. Do not use them unless the fit is genuinely uncanny (see "Earned Canonical Slots" below). Instead, push past them to the author whose work also fits but whom no one expects to see cited.
+
+=== DEFAULT MOVES TO AVOID ===
+
+These are the pairings every psalm commentary already makes. Do not default to them. If you find yourself reaching for one, ask: is this genuinely the best echo for THIS specific verse, or is it my first-available-match reflex?
+
+- Psalm of warfare → Homer, *Iliad*
+- Psalm of descent / underworld → Dante, *Inferno*
+- Psalm of awe or creation → Rilke, *Duino Elegies*
+- Psalm of modernity's anguish → Baudelaire, *Les Fleurs du Mal*
+- Psalm after catastrophe → Paul Celan, "Todesfuge"
+- Any Davidic psalm → Leonard Cohen, "Hallelujah"
+- Psalm of prophetic accusation → Bob Dylan, "Masters of War" / "The Times They Are A-Changin'"
+- Psalm of Jerusalem → Yehuda Amichai
+- Psalm of exile / longing → Yehuda Halevi
+- Psalm of maternal lament → Kadya Molodowsky
+- Psalm of interior solitude → Emily Dickinson
+- Psalm of love → Shakespeare, *Sonnets*
+- Psalm of mortality → John Donne, "Death Be Not Proud" / "Meditation XVII"
+- Psalm of national destruction → Bialik, "In the City of Slaughter"
+
+=== EARNED CANONICAL SLOTS ===
+
+You MAY use UP TO TWO authors from the following list across the entire pipeline (Pass 1 + Pass 2 combined) — and only if the fit is genuinely uncanny (shared specific image, shared syntactic move, shared rhetorical structure — not just shared theme). In this Pass 1 you may use up to 2. Picking one of these is a privilege, not a default:
+
+Shakespeare, Baudelaire, Bob Dylan, Leonard Cohen, Yehuda Amichai, Yehuda Halevi, Kadya Molodowsky, Paul Celan, Haim Nachman Bialik, Emily Dickinson, John Donne, Rainer Maria Rilke, Franz Kafka, Aeschylus.
+
+The following authors remain FULLY BANNED (zero appearances): Homer, Dante, Virgil, Ovid, Kendrick Lamar.
+
+=== TIER-SPECIFICATION: WHERE TO LOOK INSTEAD ===
+
+For each literary tradition, reach one tier past the top-3. This is a palette, not a menu — use it to orient your search, then choose whichever poet best fits the specific verse:
+
+- **American theater:** past Shakespeare / O'Neill → Arthur Miller, Tennessee Williams, Tony Kushner, Suzan-Lori Parks, Caryl Churchill, August Wilson, Sam Shepard, Lynn Nottage
+- **Opera libretto:** past the standard repertoire → Lorenzo Da Ponte, Pietro Metastasio, Arrigo Boito, Hugo von Hofmannsthal, Francesco Maria Piave, W.H. Auden/Chester Kallman
+- **Musical theater:** past Sondheim → Kurt Weill / Bertolt Brecht, Kander & Ebb, Jason Robert Brown, Harold Arlen / E.Y. Harburg, Jerome Kern / Oscar Hammerstein
+- **American songwriting:** past Dylan / Cohen → Tom Waits, Randy Newman, Gillian Welch, Lucinda Williams, Sufjan Stevens, Fiona Apple, Phil Ochs, Townes Van Zandt, Warren Zevon, Joanna Newsom
+- **Hip-hop:** past Jay-Z / Tupac → Mos Def (Yasiin Bey), Rakim, Nas, Ghostface Killah, MF DOOM, Jean Grae, Saul Williams, Gil Scott-Heron, The Last Poets
+- **Spirituals / blues / gospel:** Charley Patton, Blind Willie Johnson, Son House, Mahalia Jackson, Sister Rosetta Tharpe, Dorothy Love Coates
+- **Modern Hebrew poetry:** past Amichai / Halevi → Avot Yeshurun, Yona Wallach, Agi Mishol, Admiel Kosman, Tuvia Ruebner, Shimon Adaf, Rivka Miriam, Hezy Leskly, Esther Raab, Raquel Chalfi, Hedva Harechavi
+- **Yiddish poetry:** past Molodowsky → Anna Margolin, Rachel Korn, Avrom Sutzkever, Mani Leib, H. Leivick, Rokhl Fishman, Malka Heifetz Tussman, Moyshe-Leyb Halpern
+- **Medieval Hebrew / Andalusian:** past Halevi / Ibn Gabirol → Todros Abulafia, Meshullam DaPiera, Yitzhak Ibn Khalfun, Isaac ibn Mar Saul, Joseph Ibn Tzaddik, Abraham Ibn Ezra, Dunash ben Labrat
+- **20th-c. European poetry:** past Celan / Rilke → Tadeusz Różewicz, Zbigniew Herbert, Nelly Sachs, Ingeborg Bachmann, Yves Bonnefoy, Philippe Jaccottet, Cesare Pavese, Eugenio Montale, Attila József, Miroslav Holub, Vasko Popa
+- **Arabic poetry:** past Darwish → Adonis, Saadi Youssef, Nazik al-Malaika, Badr Shakir al-Sayyab, Fadwa Tuqan, Nizar Qabbani, Abu Nuwas, Al-Ma'arri, Muhammad Mahdi al-Jawahiri
+- **Persian poetry:** past Rumi / Hafez → Forugh Farrokhzad, Sohrab Sepehri, Ahmad Shamlou, Nima Yushij, Simin Behbahani, Parvin E'tesami
+- **South Asian poetry:** Kabir, Mirza Ghalib, Faiz Ahmed Faiz, Agha Shahid Ali, Arun Kolatkar, A.K. Ramanujan, Kamala Das, Jibanananda Das
+- **East Asian poetry:** past Basho / Li Bai → Du Fu, Bei Dao, Yosano Akiko, Shuntaro Tanikawa, Ko Un, Ishikawa Takuboku, Han Shan, Saigyo, Yi Sang, Yu Xuanji
+- **Latin American poetry:** past Neruda → César Vallejo, Gabriela Mistral, Alejandra Pizarnik, Jorge Luis Borges, Rosario Castellanos, Idea Vilariño, Nicanor Parra, José Lezama Lima
+- **African poetry / oratory:** Wole Soyinka, Christopher Okigbo, Léopold Senghor, Tchicaya U Tam'si, Warsan Shire, Kofi Awoonor, Dennis Brutus, Niyi Osundare, Mongane Wally Serote
+- **Contemporary English-language:** past Heaney → Ocean Vuong, Ada Limón, Ilya Kaminsky, Kay Ryan, Carol Ann Duffy, Linda Gregg, Jack Gilbert, Jane Hirshfield, Louise Glück, Christian Wiman, Natalie Diaz, Tracy K. Smith
+- **Prose / oratory:** past Baldwin / King / Lincoln → James Agee, W.E.B. Du Bois, Hannah Arendt, Ta-Nehisi Coates, Rebecca Solnit, John Ruskin, Simone Weil, Primo Levi's lesser-cited works
+
+=== DIVERSITY REQUIREMENTS (HARD CONSTRAINTS) ===
+
+These are quotas, not suggestions. Verify compliance before submitting.
+
+☐ At least 5 comparisons from works written AFTER 1850.
+☐ At least 3 comparisons from works written AFTER 1950.
+☐ No more than 2 comparisons from works written before 500 CE.
+☐ At least 1 comparison from MEDIEVAL Hebrew or Andalusian Hebrew poetry (piyyut, Andalusian verse, pre-1500).
+☐ At least 1 comparison from MODERN Hebrew or Yiddish poetry (19th-21st century).
+☐ At least 1 comparison from a song lyric, libretto, spiritual, or recorded oratory.
+☐ At least 2 comparisons from traditions OUTSIDE the Anglo-European-Hebrew axis (African, East Asian, South Asian, Latin American, Arabic, Persian, Indigenous, Pacific).
+☐ No author appears more than ONCE in the entire document.
+☐ At most 2 Earned Canonical Slot authors across Pass 1 + Pass 2 combined (Pass 1 alone may use up to 2).
+☐ Zero Homer, Dante, Virgil, Ovid, Kendrick Lamar.
+
+=== OFFENSIVE-LANGUAGE FILTER (HARD CONSTRAINT) ===
+
+This document is read by an audience that expects the dignified register of biblical poetic commentary. Do NOT quote passages that contain the most severe English profanity — specifically the three most-bleeped four-letter words for the sex act, for excrement, and for female anatomy, and their direct cognates or slurs. This is a very narrow filter: historical mild scatology (Rabelais, Chaucer's bawdy, Luther's "Scheisse", "damn", "hell", "piss", "ass" in the biblical donkey sense or as mild insult) is acceptable. For song lyrics with a radio-edit or sanitized alternative, use the clean version. When in doubt, pick a different passage by the same author whose specific lines you can recall accurately. This filter applies regardless of artistic merit — the quoted passage must be something a reader of a mainstream religious commentary can encounter without being shocked.
+
+=== WHAT MAKES A GOOD ECHO ===
+
+A good echo makes the reader say "oh!" — either because:
+- The similarity is uncanny (two poets 2000 years apart reaching for the same image)
+- The difference is illuminating (same artistic problem, opposite solution)
+- The quoted passage is itself beautiful, moving, or funny
+- The connection reveals something about the psalm's CRAFT (not just its theme)
+
+BAD: "Both texts explore the theme of suffering and betrayal." (Thematic label, not insight.)
+BAD: Comparing any betrayal psalm to Dante's Judas in Inferno XXXIV. (Banned anyway, but also: every commentary does this.)
+GOOD: Comparing a psalm's false visitor to Bob Dylan's "Positively 4th Street" — because the specific mechanism (grinning friend visiting your sickbed to gloat) is identical, but the tone (Dylan's acid sarcasm vs. the psalmist's wounded paranoia) reveals something about each poet's rhetorical strategy. (Note: Dylan is now an Earned Canonical Slot — use only if the mechanism is this specific.)
+
+=== SOURCE TEXT QUOTATION (NON-NEGOTIABLE) ===
+
+For EVERY comparison, supply:
+- The passage in its ORIGINAL LANGUAGE (Greek, Persian, Hebrew, German, Russian, Japanese, Yoruba, etc.)
+- An English translation immediately after (OMIT if the original language is English)
+- The specific work title, section / canto / act / line / stanza
+
+Format each quotation block as:
+> [Original-language text]
+> "[English translation]"
+> — Author, *Work*, section/line
+
+If the original language uses a non-Latin script, provide the original script first. Transliteration is optional but welcome for Hebrew/Arabic/Sanskrit/Chinese/Japanese.
+
+Choose SHORT quotations — 2-4 lines maximum. The quotation should be a needle, not a haystack. Pick the most resonant lines, not the full stanza.
+
+**ANTI-FABRICATION RULE:** If you cannot confidently recall an exact quotation from a poet you want to cite, DO NOT FABRICATE A QUOTATION. Instead, choose a different poet whose specific lines you can recall accurately, or choose a different, better-remembered work by the same poet. It is better to submit 12 verified comparisons than 18 with invented quotations. Pass 3 verification will reject fabrications anyway; fabricating just wastes your own effort.
+
+=== ANALYSIS RULES ===
+
+For each comparison, write EXACTLY 2-3 sentences of analysis. These sentences must:
+- Name a SPECIFIC formal or rhetorical feature (chiastic structure, shift from third to second person, jussive mood, enjambment across stanza break, anaphoric repetition, etc.)
+- Explain what the juxtaposition REVEALS about the psalm's craft or meaning
+- Identify what is DIFFERENT between the two texts and why that difference matters
+
+Do NOT:
+- Summarize what the psalm verse means (the reader already knows)
+- Summarize what the comparison text means (that's what the quotation is for)
+- Write more than 3 sentences of analysis per comparison
+- Use phrases like "both texts explore," "this theme is universal," "similarly, X also..."
+
+=== OUTPUT FORMAT ===
+
+Jump straight into comparisons. No title, no introduction, no conclusion.
+
+### Psalm {NUMBER}:[verse(s)] — [Image/Theme Label]
+
+**[Psalm quotation in Hebrew + English translation]**
+
+*Default bypassed: [the canonical first-echo most commentaries would reach for here — name author + work in one line, even if it's not on the banned/canonical lists. This is your cognitive-forcing move.]*
+
+#### [Author], *[Work]* ([date/period])
+> [Original-language quotation — 2-4 lines max]
+> "[English translation]"
+> — *[Work]*, [section/line]
+
+[2-3 sentences of analysis]
+
+#### [Next Author], *[Next Work]* ([date/period])
+> [Original-language quotation]
+> "[English translation]"
+> — *[Work]*, [section/line]
+
+[2-3 sentences of analysis]
+
+---
+
+[Next verse cluster]
+
+=== FINAL CHECKLIST ===
+
+Before submitting, verify:
+☐ Every verse cluster has a "Default bypassed:" line naming the canonical reflex you avoided
+☐ At most 2 Earned Canonical Slot authors appear (Pass 1 + Pass 2 combined; Pass 1 alone may use up to 2)
+☐ Zero Homer, Dante, Virgil, Ovid, Kendrick Lamar
+☐ No quotation contains the severe profanity defined in the Offensive-Language Filter
+☐ Every comparison has an original-language quotation (not just English)
+☐ Every comparison is anchored to a specific psalm verse
+☐ At least 5 post-1850 sources
+☐ At least 3 post-1950 sources
+☐ No more than 2 pre-500 CE sources
+☐ At least 1 medieval Hebrew or Andalusian Hebrew source
+☐ At least 1 modern Hebrew or Yiddish source
+☐ At least 1 song / libretto / oratory source
+☐ At least 2 non-Anglo-European-Hebrew sources
+☐ No author appears twice
+☐ No analysis paragraph exceeds 3 sentences
+☐ Each analysis names a specific formal or rhetorical feature
+☐ No comparison merely states "this theme is universal"
+☐ Total comparisons: 12-18
+☐ No fabricated quotations — if uncertain, swapped to a verified source
+```

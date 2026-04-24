@@ -1,0 +1,126 @@
+LITERARY ECHOES (Pass 2, Revised: Tier-Override Gap-Filling and Enrichment)
+
+```
+You are enriching the literary echoes document above, which was generated using tier-override constraints. Your job is to fill gaps — verses or images that deserve a comparison but don't have one yet, categories of literature that are underrepresented, or comparisons that are weak.
+
+The document above follows the Tier-Override Pass 1 rules. Key conventions:
+- Each verse cluster begins with a "*Default bypassed:*" line naming the canonical first-echo the author deliberately avoided during Pass 1
+- Each echo must come from a SECOND-TIER source (major but not most-canonical in its tradition)
+- Certain "Earned Canonical Slot" authors (Shakespeare, Baudelaire, Bob Dylan, Leonard Cohen, Yehuda Amichai, Yehuda Halevi, Kadya Molodowsky, Paul Celan, Haim Nachman Bialik, Emily Dickinson, John Donne, Rainer Maria Rilke, Franz Kafka, Aeschylus) are capped at 2 appearances per document TOTAL across Pass 1 + Pass 2
+- Homer, Dante, Virgil, Ovid, Kendrick Lamar are fully banned
+
+TASK: Review the existing echoes and full psalm text. Add 5-10 NEW comparisons per the rules below.
+
+=== FIRST: AUDIT WHAT'S MISSING ===
+
+Before adding anything, count the existing document against these quotas and name explicitly what is under-met. Output this audit as the first paragraph of your response (3-5 lines is enough).
+
+Check:
+1. **Medieval Hebrew/Andalusian (≥1):** any piyyut, Andalusian verse, or pre-1500 Hebrew poem? If zero, PRIORITIZE filling.
+2. **Modern Hebrew or Yiddish (≥1):** any 19th-21st c. Hebrew or Yiddish poem? If zero, PRIORITIZE filling.
+3. **Song/libretto/oratory (≥1):** any song lyric, libretto, spiritual, or oratorical text? If zero, fill it.
+4. **Non-Anglo-European-Hebrew (≥2):** African, East Asian, South Asian, Latin American, Arabic, Persian, Indigenous, Pacific. If under-met, fill toward it.
+5. **Post-1850 (≥5) and Post-1950 (≥3):** usually met, but verify.
+6. **Earned Canonical Slots used in Pass 1:** count the number (0, 1, or 2). Combined total across Pass 1 + Pass 2 must be ≤ 2. So: if Pass 1 used 2, you may use 0; if Pass 1 used 1, you may use 1; if Pass 1 used 0, you may use up to 2.
+7. **Uncovered verses:** any vivid images or structural turns in the psalm with no echo yet.
+
+=== TIER-OVERRIDE FOR NEW ADDITIONS ===
+
+Every new echo must follow the Second Echo Principle — reach one tier past the canonical reflex.
+
+If you are adding a NEW verse cluster that Pass 1 did not cover, you MUST include a new "*Default bypassed:*" line identifying the canonical reflex for that verse.
+
+If you are adding to an EXISTING cluster, do not emit a new "*Default bypassed:*" line — the Pass 1 one still governs.
+
+**Tier palette reminders** (same as Pass 1 — reach one tier past the canonical top):
+
+- **American theater:** past Shakespeare/O'Neill → Miller, Williams, Kushner, Parks, Churchill, August Wilson, Shepard, Nottage
+- **Opera libretto:** Da Ponte, Metastasio, Boito, Hofmannsthal, Piave, Auden/Kallman
+- **Musical theater:** past Sondheim → Weill/Brecht, Kander/Ebb, Jason Robert Brown, Arlen/Harburg, Kern/Hammerstein
+- **American songwriting:** past Dylan/Cohen → Waits, Newman, Welch, Lucinda Williams, Sufjan Stevens, Fiona Apple, Phil Ochs, Townes Van Zandt, Zevon, Joanna Newsom
+- **Hip-hop:** past Jay-Z / Tupac → Mos Def, Rakim, Nas, Ghostface Killah, MF DOOM, Jean Grae, Saul Williams, Gil Scott-Heron, The Last Poets
+- **Spirituals/blues/gospel:** Charley Patton, Blind Willie Johnson, Son House, Mahalia Jackson, Sister Rosetta Tharpe, Dorothy Love Coates
+- **Modern Hebrew:** past Amichai/Halevi → Avot Yeshurun, Yona Wallach, Agi Mishol, Admiel Kosman, Tuvia Ruebner, Shimon Adaf, Rivka Miriam, Hezy Leskly, Esther Raab, Raquel Chalfi, Hedva Harechavi
+- **Yiddish:** past Molodowsky → Anna Margolin, Rachel Korn, Sutzkever, Mani Leib, H. Leivick, Rokhl Fishman, Malka Heifetz Tussman, Moyshe-Leyb Halpern
+- **Medieval Hebrew/Andalusian:** past Halevi/Ibn Gabirol → Todros Abulafia, Meshullam DaPiera, Yitzhak Ibn Khalfun, Isaac ibn Mar Saul, Joseph Ibn Tzaddik, Abraham Ibn Ezra, Dunash ben Labrat
+- **20th-c. European:** past Celan/Rilke → Różewicz, Zbigniew Herbert, Nelly Sachs, Bachmann, Bonnefoy, Jaccottet, Pavese, Montale, Attila József, Miroslav Holub, Vasko Popa
+- **Arabic:** past Darwish → Adonis, Saadi Youssef, Nazik al-Malaika, Badr Shakir al-Sayyab, Fadwa Tuqan, Qabbani, Abu Nuwas, Al-Ma'arri
+- **Persian:** past Rumi/Hafez → Forugh Farrokhzad, Sohrab Sepehri, Ahmad Shamlou, Nima Yushij, Simin Behbahani, Parvin E'tesami
+- **South Asian:** Kabir, Ghalib, Faiz Ahmed Faiz, Agha Shahid Ali, Arun Kolatkar, A.K. Ramanujan, Kamala Das, Jibanananda Das
+- **East Asian:** past Basho/Li Bai → Du Fu, Bei Dao, Yosano Akiko, Shuntaro Tanikawa, Ko Un, Ishikawa Takuboku, Han Shan, Saigyo, Yi Sang, Yu Xuanji
+- **Latin American:** past Neruda → Vallejo, Gabriela Mistral, Pizarnik, Borges, Castellanos, Vilariño, Nicanor Parra, Lezama Lima
+- **African:** Soyinka, Okigbo, Senghor, Tchicaya U Tam'si, Warsan Shire, Awoonor, Dennis Brutus, Osundare, Serote
+- **Contemporary English:** past Heaney → Ocean Vuong, Ada Limón, Ilya Kaminsky, Kay Ryan, Duffy, Linda Gregg, Jack Gilbert, Hirshfield, Glück, Wiman, Natalie Diaz, Tracy K. Smith
+- **Prose/oratory:** past Baldwin/King/Lincoln → James Agee, W.E.B. Du Bois, Arendt, Ta-Nehisi Coates, Solnit, Ruskin, Simone Weil
+
+=== WHAT TO LOOK FOR ===
+
+1. **UNCOVERED VERSES (first priority):** Verses with vivid images or structural turns that have no echo yet.
+2. **UNDER-MET QUOTAS (second priority):** Any category flagged in the audit.
+3. **REPLACEMENTS (third priority):** If any existing comparison is weak — connection is generic, the quotation is dull, or the author is one of the Default Moves listed in Pass 1 — you may REPLACE it. Flag clearly: **REPLACES: [Author], *[Work]* for Psalm X:Y**
+
+=== OFFENSIVE-LANGUAGE FILTER (HARD CONSTRAINT) ===
+
+This document is read by an audience that expects the dignified register of biblical poetic commentary. Do NOT quote passages that contain the most severe English profanity — specifically the three most-bleeped four-letter words for the sex act, for excrement, and for female anatomy, and their direct cognates or slurs. This is a very narrow filter: historical mild scatology (Rabelais, Chaucer's bawdy, Luther's "Scheisse", "damn", "hell", "piss", "ass" in the biblical donkey sense or as mild insult) is acceptable. For song lyrics with a radio-edit or sanitized alternative, use the clean version. When in doubt, pick a different passage by the same author whose specific lines you can recall accurately.
+
+=== HARD CONSTRAINTS ===
+
+☐ No author who already appears in the existing document may be used again.
+☐ Homer, Dante, Virgil, Ovid, Kendrick Lamar remain BANNED.
+☐ Combined Earned Canonical Slot authors across Pass 1 + Pass 2 must be ≤ 2. If Pass 1 used 2, add none; if Pass 1 used 1, add at most 1; if Pass 1 used 0, add up to 2.
+☐ Every new comparison must include an original-language quotation (2-4 lines).
+☐ Every new comparison must be anchored to a specific psalm verse.
+☐ Analysis: exactly 2-3 sentences per comparison, naming a specific formal/rhetorical feature.
+☐ Quotations should be SHORT — the most resonant 2-4 lines, not a full stanza.
+☐ **ANTI-FABRICATION:** if you cannot recall a specific quotation accurately, swap to a verified source. Do not invent.
+
+=== SELECTION PRINCIPLE ===
+
+When choosing between possible echoes, prefer the one where:
+- The quoted passage is more BEAUTIFUL or STRIKING on its own
+- The connection is more SPECIFIC (a shared image, syntactic move, rhetorical strategy — not just a shared theme)
+- The reader is less likely to have encountered the comparison before
+- The analysis reveals something about the psalm's CRAFT, not its content
+
+=== OUTPUT FORMAT ===
+
+Begin with a brief audit paragraph (3-5 lines) naming which quotas were under-met in the existing document and which gaps you are targeting.
+
+Then the new comparisons, using the same format as Pass 1:
+
+### Psalm {NUMBER}:[verse(s)] — [Image/Theme Label]
+
+**[Psalm quotation in Hebrew + English translation]**
+
+*Default bypassed: [only required if this is a NEW cluster Pass 1 didn't cover]*
+
+#### [Author], *[Work]* ([date/period])
+> [Original-language quotation]
+> "[English translation]"
+> — *[Work]*, [section/line]
+
+[2-3 sentences of analysis]
+
+---
+
+If replacing an existing comparison, begin that entry with:
+**REPLACES: [Author], *[Work]* for Psalm {NUMBER}:[verse(s)]**
+
+=== FINAL CHECKLIST ===
+
+☐ Audit block at top naming which quotas were under-met and which are being filled
+☐ 5-10 new comparisons added
+☐ No author duplicated from existing document
+☐ Banned authors (Homer, Dante, Virgil, Ovid, Kendrick Lamar) not used
+☐ No quotation contains the severe profanity defined in the Offensive-Language Filter
+☐ At most 2 Earned Canonical Slot authors in the COMBINED document (Pass 1 + Pass 2)
+☐ Every new comparison has original-language quotation
+☐ Every new analysis ≤ 3 sentences and names a formal feature
+☐ New "*Default bypassed:*" lines added for any NEW verse clusters (not for existing ones)
+☐ Medieval Hebrew/Andalusian quota (≥1) met in combined document
+☐ Modern Hebrew or Yiddish quota (≥1) met in combined document
+☐ Song/libretto/oratory (≥1) met in combined document
+☐ Non-Anglo-European-Hebrew (≥2) met in combined document
+☐ Any replacements flagged with **REPLACES: ...**
+☐ No fabricated quotations
+```

@@ -34,6 +34,10 @@ Pay extra attention to:
 - Line numbers for long works (Iliad, Aeneid, Divine Comedy, Paradise Lost) — these are frequently off by 10-50 lines
 - Song lyrics — often paraphrased rather than quoted accurately (note: if the lyrics are substantially correct in meaning but not word-perfect, mark ⚠️ not ❌)
 
+=== PROFANITY FILTER ===
+
+Additionally, flag as ❌ any quotation that contains severe English profanity — specifically the three most-bleeped four-letter words for the sex act, for excrement, and for female anatomy, and their direct cognates or slurs. This is a very narrow filter: historical mild scatology (Rabelais, Chaucer's bawdy, "damn", "hell", "piss", "ass" as mild insult) does NOT trigger this filter. A quotation that would not appear in a mainstream religious commentary for register reasons should be marked ❌ so it is stripped in Pass 4, even if the attribution is factually correct. If a sanitized or radio-edit version of a song lyric exists, mark it 🔄 and provide the clean version.
+
 === IMPORTANT NOTES ===
 
 - If you are UNSURE whether a quotation is accurate, say so honestly. "I cannot verify this" is a valid and useful answer. Do not guess.

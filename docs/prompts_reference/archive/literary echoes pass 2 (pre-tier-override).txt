@@ -15,7 +15,7 @@ TASK: Review the existing echoes and the full psalm text. Then add 3-6 NEW compa
    - Yiddish poetry (e.g. Morris Rosenfeld, Peretz Markish, Itzik Manger,Avrom Sutzkever,Kadya Molodowsky, Celia Dropkin, Jacob Glatstein, Moyshe-Leyb Halpern)
    - Medieval Hebrew/Andalusian poetry (e.g. Ibn Gabirol, Halevi, HaNagid, Moses Ibn Ezra)
    - Contemporary English-language poetry (e.g. Mary Oliver, Ada Limón, Billy Collins, Ocean Vuong, Carol Ann Duffy, W.S. Merwin, Seamus Heaney)
-   - Song lyrics (e.g. Dylan, Cohen, Cave, Sondheim, Mitchell, spirituals, blues, hip-hop)
+   - Song lyrics (e.g. Dylan, Cole Porter, Cohen, Cave, Sondheim, Mitchell, spirituals, blues, hip-hop)
    - Non-Western poetry (e.g. Arabic, Persian, Chinese, Japanese, Sanskrit, Urdu)
    - 20th/21st-century poetry in any language (e.g. Celan, Szymborska, Darwish, Hikmet, Neruda, Plath, Sexton, Rich, Zagajewski, Milosz, Herbert, Tranströmer)
    - Prose or oratory when genuinely illuminating (e.g. Kafka, Primo Levi, Baldwin, King, Lincoln)

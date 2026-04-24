@@ -1,11 +1,21 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 336 (2026-04-21)
+**Session**: 338 (2026-04-23)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 338 (2026-04-23)**: Built `lit_echoes` Agent — Automated 4-Pass Literary Echoes in the Pipeline
+- Built `src/agents/literary_echoes_agent.py` orchestrating the 4-pass workflow (Gemini 3.1 Pro generate → Gemini 3.1 Pro gap-fill → GPT-5.4 Responses-API with `web_search_preview` tool verify → GPT-5.4 Chat-Completions reconstruct). Rolling exclusion list scans the 4 most-recently-rendered `data/literary_echoes/*.txt` files by mtime and extracts authors via `^####\s+([^,]+),` regex, injecting them into both Pass 1 AND Pass 2 prompts as hard bans. Per-pass raw outputs + exact prompts sent + cost report saved to `output/psalm_NNN/literary_echoes/`; final copied to canonical `data/literary_echoes/psalm_NNN_literary_echoes.txt`. Created `scripts/run_literary_echoes.py` standalone runner and wired new STEP 1b (default-on, regenerate-and-overwrite, `--skip-lit-echoes` opt-out) into both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+- Prompt edits to `docs/prompts_reference/literary echoes pass {1,2} - tier override.txt`: removed Kendrick Lamar from Earned Canonical Slots and added to fully-banned list (alongside Homer/Dante/Virgil/Ovid); swapped "past Kendrick" hip-hop palette anchor to "past Jay-Z / Tupac"; added a narrow Offensive-Language Filter (three most-severe four-letter words only, historical mild scatology explicitly permitted); Pass 2 target bumped from 3-6 to 5-10 new comparisons. Pass 3 prompt got a one-line profanity-flag instruction so Pass 4 can strip. Archived the three pre-tier-override pass templates to `docs/prompts_reference/archive/`.
+- Two bugs surfaced during Psalm 53 testing and fixed: (1) `gpt-5.1` at every `reasoning.effort` level self-terminated after one verse cluster on the ~30K-char Pass 4 reconstruction prompt — switched Pass 4 to `gpt-5.4` via `chat.completions` (Responses API triggered `content_filter` on the same content), net cost delta ~$0.04/psalm; (2) Pass 2 was using canonical-slot authors (Aeschylus, Paul Celan) that were on the cross-psalm exclusion list because the ban block was only injected into Pass 1 — fixed by propagating it to Pass 2 as well with explicit override of the canonical-slot allowance. Psalm 53 test run produced 7 clusters / 21 authors / 14K chars at total cost $0.945 across all 4 passes in ~10 minutes.
+
+**Session 337 (2026-04-22)**: Tier-Override Prompts for Literary Echoes + Plan for `lit_echoes` Agent
+- Diagnosed the literary echoes monotony as prompt-self-anchoring: Pass 1/2 listed the same poets (Halevi, Amichai, Cohen, Dylan, Celan, Molodowsky, Kendrick) as "examples" that kept recurring in every psalm. Every heavy repeater in the output frequency data was named in the prompt.
+- Designed and tested tier-override prompts (Second Echo Principle, Default Moves to Avoid, Earned Canonical Slots capped at 2 combined Pass 1+2, 18-tradition palette, required `*Default bypassed:*` cognitive-forcing lines, Hebrew quota split into medieval + modern). Created `literary echoes pass {1,2,4} - tier override.txt` under `docs/prompts_reference/`.
+- Tested on Psalms 48, 49, 50, 52 (Pass 1 only, manual Gemini): within-psalm variety and aptness dramatically improved (13-14 authors per psalm, consistent non-Anglo-European-Hebrew reach). But cross-psalm second-tier repetition (Faiz, Kabir, Saadi, Vallejo, Ibn Ezra, Douglass, Dorsey) emerged at ~2-of-3 rate — confirming prompt-craft cannot solve cross-psalm memory. Plan pivot: build a `lit_echoes` agent in the main pipeline using Gemini 3.1 Pro API with N=4 rolling exclusion from recent psalms. See `NEXT_SESSION_BRIEF.md`.
 
 **Session 336 (2026-04-21)**: Stabilize Aptos Fonts and Methodology Summary for DOCX
 - Fixed 
@@ -27,28 +37,13 @@ un_docx_only.py pointing to an outdated filename summary.json, restoring compili
 - Verified that the Master Writer completed commentary for all 21 verses without truncation, confirming the `max_tokens` increase to 128K provided sufficient reasoning budget.
 - Confirmed the Figurative Curator initialized properly, eliminating the 82K character input bloat from raw instances and successfully restoring the per-vehicle breakdown in the DOCX methodology section.
 
-**Session 332 (2026-04-21)**: Fix Psalm 51 Pipeline — Curator Bug, Token Limit, Input Bloat
-- Diagnosed Psalm 51 truncation (Master Writer stopped mid-verse-8): `max_tokens=64000` in `master_editor_v2.py` was consumed by adaptive thinking + max effort, leaving insufficient budget for 21-verse commentary. Fixed: bumped to `128000`
-- Found and fixed a Session 327 regression in `research_assembler.py:720` — `FigurativeCurator(cost_tracker=self.cost_tracker)` referenced an unset attribute (`self.cost_tracker` never assigned; should use local param `cost_tracker`). The `try/except` silently disabled the curator for ALL runs since April 18, causing raw figurative data (118K chars) to replace curated output (36K chars), bloating the Master Writer prompt by ~82K chars and leaving `figurative_parallels_reviewed` empty
-- Both fixes verified via code analysis; Psalm 51 re-run triggered from this session to validate full 21-verse output, curator activation, and figurative breakdown population
-
-**: Opus 4.7 Prompt Polish — Parenthetical Translations + Stray Quotes Around Hebrew
-- Diagnosed why Opus 4.7 wrapped every English translation in parens (e.g., `אַל־יֶחֱרַשׁ ("let Him not be silent")`): the Master Writer prompt's "CORRECT examples" at `master_editor.py:60-63` put English in parens, and Opus 4.7 pattern-matched on them literally (Opus 4.6 inferred intent better); rewrote Rule 1 with a new Parentheses Rule offering three acceptable patterns (FLOWING, apposition, whole-unit parenthetical) and explicit INCORRECT examples — same rule applied to Greek/Aramaic/Latin translations
-- Fixed a related bug surfaced in Psalm 50: Opus 4.7 wraps long Hebrew citations in straight quotes (`"רָם וְנִשָּׂא..."`) which orphan visually when BiDi line-wrapping sets the Hebrew on its own line in DOCX; added `CopyEditor._strip_quotes_around_source_text` static method that strips matched-pair quotes around pure Hebrew/Greek spans (no Latin letters between) and wired it into `edit_commentary` step 7b — after diff generation so the copy-edit diff stays clean
-- Prompt changes applied to production `master_editor.py:MASTER_WRITER_PROMPT_V4` (auto-propagates to `master_editor_si.py` via `.replace()`); matching fixes applied to archived `master_editor_v2.py` prompts for consistency; regex verified against 5 test cases (strips Hebrew/Greek spans, leaves mixed-script and Pattern-B Hebrew+English untouched)
-
-**: Concordance Entries Breakdown in DOCX Methods Section
-- Added per-query breakdown to "Concordance Entries Reviewed" line (matching format of "Figurative Concordance Matches Reviewed") — now shows total count + each search term with its result count in parentheses
-- All concordance search terms run through `DivineNamesModifier` before display, ensuring divine names are properly modified in the methods section
-- Updated all 3 formatters: `document_generator.py`, `combined_document_generator.py`, `commentary_formatter.py`; backward-compatible with legacy stats files that only have `total_results`
-
-
 ## Quick Commands
 
 ```bash
 python scripts/run_enhanced_pipeline.py 23          # Process single psalm
 python scripts/run_enhanced_pipeline.py 23 --resume  # Resume from last step
 python scripts/run_si_pipeline.py 19                 # Special Instruction pipeline
+python scripts/run_literary_echoes.py 53             # Standalone 4-pass literary echoes (default: regenerate)
 python scripts/run_copy_editor.py 36 37 38           # Standalone copy editor
 python scripts/run_scripture_verifier.py 41          # Standalone citation verifier
 python scripts/converse_with_editor.py 21            # Chat with Master Editor

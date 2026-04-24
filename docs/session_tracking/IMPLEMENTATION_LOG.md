@@ -9,6 +9,123 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 338 (2026-04-23): Built `lit_echoes` Agent — Automated 4-Pass Literary Echoes in the Pipeline
+
+**Objective**: Replace the manual Gemini-web 4-pass literary-echoes workflow with an automated in-pipeline agent that (a) solves the cross-psalm author-repetition problem via a rolling exclusion list, (b) integrates into both `run_enhanced_pipeline.py` and `run_si_pipeline.py` as a default-on step, and (c) can also be run standalone for a single psalm.
+
+**Design decisions**:
+1. **Per-pass model assignments** (final, after live testing on Psalm 53):
+   - Pass 1 (generation): Gemini 3.1 Pro (`gemini-3.1-pro-preview`), `thinking_budget=24000`.
+   - Pass 2 (gap-fill): Gemini 3.1 Pro, same thinking budget. Target bumped 3-6 → 5-10 new comparisons.
+   - Pass 3 (verification): GPT-5.4 via **Responses API** with `tools=[{"type":"web_search_preview"}]` — real web lookups with inline citation URLs returned in the verification notes.
+   - Pass 4 (reconstruction): Originally spec'd as `gpt-5.1` for cheapness; had to switch to `gpt-5.4` (see bug (1) below). Chat Completions API, `reasoning_effort="medium"`, `max_completion_tokens=32000`.
+2. **Exclusion scan** = last 4 files by mtime (NOT by psalm number) in `data/literary_echoes/`, excluding the current psalm's own file. Authors extracted via `^####\s+([^,\n*]+?)\s*,` regex and deduped case-insensitively.
+3. **Default behavior is regenerate-and-overwrite.** `--skip-lit-echoes` on the pipeline, or `--skip-if-exists` on the standalone runner, preserves the existing file.
+4. **Non-fatal on failure**: downstream `research_assembler._load_literary_echoes` already tolerates a missing file, so any Gemini/GPT failure logs a warning and the pipeline continues.
+
+**Problems Identified and Fixed During Testing on Psalm 53**:
+1. **`gpt-5.1` self-terminated at every `reasoning.effort` on the 30K-char Pass 4 prompt.** At `minimal` the API rejects the value outright (`gpt-5.1` supports `{none, low, medium, high}`, not `minimal`). At `low`, `medium`, and `high`, the model produced only the first verse cluster (~800 chars) then stopped. Separately, the Responses-API content filter flagged the combined multilingual religious/literary Pass 4 input as `incomplete_details.reason='content_filter'` with zero usage tokens. Resolution: switched Pass 4 to `gpt-5.4` via `client.chat.completions.create` (no content-filter rejection, produces the full 14K-char reconstruction reliably). Net cost ~$0.04 higher per psalm — acceptable.
+2. **Pass 2 used canonical-slot authors already on the exclusion list.** Aeschylus and Paul Celan appeared in both Psalm 53's output and in the 45-author exclusion block built from Psalms 49-52. Pass 2 picked them as Earned Canonical Slot choices because the exclusion block was only being injected into Pass 1. Fixed by also injecting the exclusion block into Pass 2's prompt, with explicit language: "This applies even to Earned Canonical Slot authors — if a canonical-slot author appears below, skip them and pick a different second-tier voice." The Psalm 53 test output still has those two names; the fix applies on next run.
+
+**Solutions Implemented**:
+1. Built `src/agents/literary_echoes_agent.py` with:
+   - `LiteraryEchoesAgent.generate(psalm_number, psalm_output_dir, skip_if_exists)` orchestration method returning a `LiteraryEchoesResult` with per-pass `PassResult` entries (model, in/out/thinking tokens, cost, elapsed).
+   - Gemini client via `google-genai` (same pattern as `synthesis_writer.py`). OpenAI client via the standard SDK. `load_dotenv()` at module top.
+   - Exponential backoff retry (3 attempts) on 429/rate/5xx errors for Gemini.
+   - Prompt builders that substitute `{NUMBER}` and `[PSALM FULL TEXT]` in Pass 1, and prepend psalm + prior-pass outputs to Pass 2/3/4 templates.
+   - Per-pass cost calculated from pricing in `cost_tracker.py` (Gemini 3.1 Pro: $2/$12/$12; GPT-5.4: $2.50/$15/$15) and also pushed into the shared `CostTracker` so the psalm-level `cost.json` picks it up.
+   - Per-psalm output artifacts written to `output/psalm_NNN/literary_echoes/`: `pass_{1,2}_raw.txt`, `pass_3_verification.txt`, `pass_4_final.txt`, `exclusion_list.txt`, `cost_report.json`, and `gemini_prompts/pass_{1,2,3,4}_full.txt` (exact resolved prompts). Final file also copied to canonical `data/literary_echoes/psalm_NNN_literary_echoes.txt`.
+2. Created `scripts/run_literary_echoes.py` — standalone runner with `--skip-if-exists`, `--output-dir`, `--db-path` flags. Prints per-pass cost breakdown at the end.
+3. Wired new **STEP 1b** into both `scripts/run_enhanced_pipeline.py` and `scripts/run_si_pipeline.py` between Macro (STEP 1) and Micro (STEP 2). Added `--skip-lit-echoes` CLI flag and `skip_lit_echoes: bool = False` to the pipeline function signatures. STEP 1b is `not skip_lit_echoes and not smoke_test`, wrapped in try/except so a Gemini/GPT failure logs a warning but doesn't halt the pipeline. Models registered with the pipeline tracker so per-pass costs show up in the psalm summary.
+4. Edited `docs/prompts_reference/literary echoes pass 1 - tier override.txt` and `literary echoes pass 2 - tier override.txt`:
+   - Removed Kendrick Lamar from the "Earned Canonical Slots" allowlist.
+   - Added Kendrick Lamar to the fully-banned list (previously: Homer, Dante, Virgil, Ovid).
+   - Swapped the hip-hop palette anchor from "past Kendrick" to "past Jay-Z / Tupac" (kept the second-tier alternatives: Mos Def, Rakim, Nas, Ghostface, MF DOOM, Jean Grae, Saul Williams, Gil Scott-Heron, The Last Poets).
+   - Added an "Offensive-Language Filter" hard-constraint block — deliberately narrow: only the three most-severe four-letter words (sex act, excrement, female anatomy) and direct cognates/slurs. Explicitly allows historical mild scatology (Rabelais, Chaucer, Luther's "Scheisse", "damn", "hell", "piss", "ass" as mild insult).
+   - Updated both final-checklist sections with the new constraint lines.
+   - Pass 2: target comparison count bumped from 3-6 to 5-10.
+5. Edited `docs/prompts_reference/literary echoes pass 3.txt`: added a "PROFANITY FILTER" section instructing the verifier to flag quotations containing severe profanity as ❌ (so Pass 4 strips them) or 🔄 (if a sanitized radio-edit version exists).
+6. Archived three pre-tier-override templates via `git mv` to `docs/prompts_reference/archive/` for provenance: the original non-tier-override Pass 1, 2, 4 templates renamed with "(pre-tier-override)" suffixes. (The tier-override versions are now canonical; `docs/prompts_reference/literary echoes pass 3.txt` stays in place — it's the only Pass 3 template.)
+
+**Live test on Psalm 53** (clean run, no existing file preserved):
+- Exclusion scan found 45 unique authors from Psalms 52, 51, 50, 49 (sorted by mtime).
+- Pass 1: 142.8s, $0.2153 (4,630 in / 4,296 out / 12,871 thinking).
+- Pass 2: 95.0s, $0.1600 (7,823 in / 1,524 out / 10,509 thinking).
+- Pass 3: 280.4s, $0.4585 (114,232 in / 11,525 out / 9,403 reasoning — note the 114K input is from web-search tool results injected into context).
+- Pass 4: 85.6s, $0.1107 (9,713 in / 5,759 out / 1,635 reasoning).
+- **Total: ~10 minutes, $0.9445.**
+- Final output: 7 verse clusters (53:1 through 53:7), 21 authors, 14,193 chars. Zero Homer/Dante/Virgil/Ovid/Kendrick. All `*Default bypassed:*` lines stripped. Pass 2 audit paragraph stripped. All ✅/⚠️/❌/🔄 verification markers stripped. No severe profanity.
+- Pass 3's web search actually caught a real fabrication: the Moyshe-Leyb Halpern quotation Pass 1 produced couldn't be verified in searchable sources — flagged ❌ and stripped by Pass 4. Also corrected Dunash ben Labrat's Hebrew wording (`שִׁמְכֶם` → `שִׁירְכֶם`), Randy Newman's lyric phrasing, Różewicz's Polish (`słowami` → `wyrazami`), and the Lucretius line number.
+- Cross-psalm diversity visibly improved: traditions represented include Greek, Persian, Arabic, Polish, Spanish, Chinese, American prose, reggae, musical theater, medieval Andalusian Hebrew, modern Hebrew (Rachel Bluwstein), German (Celan).
+
+**Files Modified / Created**:
+- `src/agents/literary_echoes_agent.py` — NEW, 490 lines. Main agent.
+- `scripts/run_literary_echoes.py` — NEW. Standalone runner.
+- `scripts/run_enhanced_pipeline.py` — added import, STEP 1b, `--skip-lit-echoes` flag, `skip_lit_echoes` param threading.
+- `scripts/run_si_pipeline.py` — same changes as enhanced pipeline.
+- `docs/prompts_reference/literary echoes pass 1 - tier override.txt` — Kendrick ban + profanity filter + checklist updates.
+- `docs/prompts_reference/literary echoes pass 2 - tier override.txt` — same edits + target 3-6 → 5-10.
+- `docs/prompts_reference/literary echoes pass 3.txt` — added profanity-flag instruction.
+- `docs/prompts_reference/archive/literary echoes pass {1,2,4} (pre-tier-override).txt` — MOVED via `git mv`.
+- `docs/prompts_reference/literary echoes pass 4 - tier override.txt` — unchanged (used as-is by agent).
+
+**Open risks for future sessions**:
+- The exclusion-list regex (`^####\s+([^,\n*]+?)\s*,`) assumes all final outputs keep the "#### Author, *Work* (date)" convention. If Pass 4 ever emits an author block without a trailing comma (e.g., just "#### Author (date)"), that author will not be captured in future exclusion scans.
+- GPT-5.4 Responses API `web_search_preview` tool is still "preview" — if it's deprecated or the content-filter behavior tightens, Pass 3 may need to switch to a different provider or drop web search.
+- Pass 3 cost is dominated by input ($0.2856 of $0.4585 on Psalm 53). If this becomes too expensive across 150 psalms (~$70 just for Pass 3), downgrading to `gpt-5.1` via Responses API is possible but tested-likely to hit the same content-filter problem that forced the Pass 4 switch. User asked about this at end of session and we explicitly left Pass 3 on `gpt-5.4` for reliability.
+
+---
+
+## Session 337 (2026-04-22): Tier-Override Prompts for Literary Echoes + Plan for `lit_echoes` Agent
+
+**Objective**: Diagnose the monotony problem in the literary echoes outputs (Baudelaire, Cohen, Halevi, Amichai, Dylan, Celan, Molodowsky, Kendrick recurring across almost every psalm), design a prompt-level fix, test it, and decide next steps.
+
+**Problem Diagnosed**:
+- Pass 1 and Pass 2 prompts named the repeating poets as examples ("Hebrew poetry — e.g. Halevi, Amichai, Molodowsky…", "song lyrics — e.g. Dylan, Cohen, Cave, Kendrick…"). Cross-checking usage data against the prompt text showed every heavy repeater was an example. The prompts were self-anchoring to the same names across every run — the model was doing exactly what it was told.
+- Compounding: LLM training-data gravity pulls toward famous names (Baudelaire 7/10, Shakespeare 5/10, Aeschylus 4/10) even when not named in the prompt.
+
+**Solutions Implemented**:
+1. Designed a "tier-override" prompt approach attacking three distinct mechanisms:
+   - **The Second Echo Principle** — explicit framing that the first name to surface is the reflex to bypass, the second name is the target.
+   - **Default Moves to Avoid** — 15 named reflex pairings (Rilke for awe, Cohen for Davidic psalms, Amichai for Jerusalem, Celan for catastrophe, Kendrick for judgment, etc.) so the model recognizes its own reflex.
+   - **Earned Canonical Slots** — 15 named heavy-repeater poets soft-capped at 2 combined uses across Pass 1 + Pass 2, usable only for genuinely uncanny fits.
+   - **Tier-specification palette** — 18 traditions with explicit "past X → try these" redirections (e.g., American theater: past Shakespeare/O'Neill → Miller, Williams, Kushner, Parks, Churchill; hip-hop: past Kendrick → Mos Def, Rakim, Nas, MF DOOM, Saul Williams, Gil Scott-Heron).
+   - **`*Default bypassed:*` cognitive-forcing line** required per verse cluster — model must explicitly name the canonical reflex it's avoiding. Pass 4 strips these lines before final output.
+
+2. Created three new prompt templates at `docs/prompts_reference/`:
+   - `literary echoes pass 1 - tier override.txt` (generation, 12-18 comparison target)
+   - `literary echoes pass 2 - tier override.txt` (gap-fill, opens with a quota audit; enforces combined Pass 1+2 Earned Canonical Slot cap ≤ 2)
+   - `literary echoes pass 4 - tier override.txt` (final reconstruction; strips `*Default bypassed:*` scaffolding and the Pass 2 audit block)
+   - Pass 3 (verification) not modified — style-agnostic.
+
+3. Split the Hebrew/Yiddish quota into two separate constraints: ≥1 medieval Hebrew/Andalusian + ≥1 modern Hebrew or Yiddish. Prevents a single Yiddish poem from satisfying the whole Hebrew slot.
+
+4. Bumped target comparison count from 8-14 to 12-18 to compensate for higher Pass 3 rejection risk when the model is pushed past its training-data comfort zone.
+
+**Testing** (manual, Gemini 3.1 Pro web UI — Pass 1 only):
+- Ran on Psalms 48, 49, 50, 52. Compared side-by-side to existing old-prompt outputs.
+- **Within-psalm variety**: dramatically improved. 13-14 authors per psalm vs 9-12 old. Non-Anglo-European-Hebrew representation (Persian, Chinese, Hindi, Arabic, Hungarian, Polish, Peruvian, Urdu, Yoruba…) went from near-zero to consistent and plural.
+- **Aptness**: subjectively better on most verse clusters. Standout picks: Li Qingzhao's imperative to the wind for the Tarshish fleet (Ps 48:7-8); Różewicz's "I saw: / carts of chopped-up people" against "what we heard we have witnessed" (Ps 48:9); Zbigniew Herbert's "carry the city within himself on the roads of exile" for the walk-around-Zion verse (Ps 48:13-15); Rivka Miriam's "I put on the city, walls upon walls" (same cluster); Nicanor Parra's "God doesn't need your alms, just don't bust His balls" for the hungry-God mockery (Ps 50:12-13); Agi Mishol's "swollen liver of the geese" for the sacrifice rejection (same verse); Lu Xun's "eat people!" scrawled over Confucian morality for the covenant-hypocrite verse (Ps 50:18-20); Celan's "Psalm" ("Gelobt seist du, Niemand") as an earned canonical slot for Ps 50:21-23.
+- **`*Default bypassed:*` lines worked as designed**: the labels (Shelley/Ozymandias, Keats/Grecian Urn, Rilke/First Elegy, Molière/Tartuffe, Calvino/Invisible Cities) were exactly the authors the OLD Pass 1 actually picked. Confirms the cognitive-forcing is doing real work, not just decorative.
+- **Cross-psalm second-tier repetition emerged**: across just 3 new psalms (48, 49, 50), 7 authors repeated in 2 of 3 — Faiz Ahmed Faiz, César Vallejo, Abraham Ibn Ezra, Kabir, Saadi Shirazi, Frederick Douglass, Thomas A. Dorsey. The old first-tier canonical-gravity problem (Baudelaire 7/10, Cohen 7/10) was eliminated, but a new second-tier pattern is forming at a comparable rate. This confirms the session-start hypothesis: **prompt-craft moves the center of mass but cannot solve cross-psalm memory** — the model has no knowledge of what it used in the previous psalm.
+
+**Plan pivot at end of session**:
+- Original plan: build a standalone Python script that generates per-psalm prompts with exclusion lists, for the user to paste manually into Gemini (manual workflow).
+- User decided to pivot: **incorporate the full 4-pass literary echoes workflow into the main pipeline as a `lit_echoes` agent** using Gemini 3.1 Pro API. Rolling exclusion from last N=4 psalms. Per-pass raw outputs logged separately for debuggability.
+- Session 338 brief with full design and testing plan written to `NEXT_SESSION_BRIEF.md`.
+
+**Also applied**: bumped Earned Canonical Slot cap from 1 → 2 (combined Pass 1 + Pass 2) in response to user feedback that single slot was too restrictive.
+
+**Files Modified**:
+- `docs/prompts_reference/literary echoes pass 1 - tier override.txt` (created)
+- `docs/prompts_reference/literary echoes pass 2 - tier override.txt` (created)
+- `docs/prompts_reference/literary echoes pass 4 - tier override.txt` (created)
+- `docs/session_tracking/NEXT_SESSION_BRIEF.md` (rewrote with Session 338 plan)
+
+**No code changes this session.** All work was prompt design and evaluation. Agent implementation deferred to Session 338.
+
+---
+
 ## Session 336 (2026-04-21): Stabilize Aptos Fonts and Methodology Summary for DOCX
 
 **Objective**: Strictly differentiate primary verse headings from inline Hebrew quotes to stabilize font rendering, and fix missing methodology pages on manual DOCX generation runs.

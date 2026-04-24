@@ -1,0 +1,19 @@
+LITERARY ECHOES (Pass 4, Tier-Override: Final Reconstruction)
+
+Attached is the full literary echoes document (Pass 1 tier-override + Pass 2 tier-override additions + Pass 3 verification notes). Please FULLY RECONSTRUCT the document, with all corrections from Pass 3 applied and hallucinated quotations removed.
+
+This tier-override version requires the following additional cleanup steps — apply them all:
+
+1. **STRIP all "*Default bypassed:*" lines from the output.** These were cognitive-forcing scaffolding used during generation — they are not part of the reader's final document. Remove the entire italicized line, including any blank line left behind.
+
+2. **STRIP the audit paragraph at the top of the Pass 2 additions** (the 3-5 line block where Pass 2 named which quotas were under-met). This is internal reasoning, not reader-facing content.
+
+3. **Apply Pass 3 corrections inline.** For any comparison with a ⚠️ or 🔄 correction (wrong line number, loose translation, different work), incorporate the correction into the text silently. For any comparison marked ❌ (quotation cannot be verified), omit it entirely.
+
+4. **Merge Pass 1 and Pass 2 entries cleanly.** If Pass 2 added comparisons to an existing cluster, interleave them into that cluster in verse order. If Pass 2 added a new cluster, place it at the correct verse position. If Pass 2 replaced a Pass 1 entry (flagged as **REPLACES: ...**), use the Pass 2 replacement and drop the original — do not retain both, and strip the REPLACES header itself.
+
+5. **Output the document such that when copied and pasted, NO citation references or verification markers (✅, ⚠️, ❌, 🔄) appear.**
+
+6. **Preserve the cluster structure:** `### Psalm N:verse — Label` headings, psalm quotations in Hebrew + English, individual author blocks with original-language quotation + translation + attribution, and 2-3 sentence analyses.
+
+7. **Do not add new comparisons or substantively alter surviving ones** beyond the Pass 3 corrections and the cleanup above.

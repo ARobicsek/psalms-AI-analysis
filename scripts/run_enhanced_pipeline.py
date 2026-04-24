@@ -30,6 +30,7 @@ from src.agents.master_editor import MasterEditor
 from src.agents.question_curator import QuestionCurator
 from src.agents.insight_extractor import InsightExtractor
 from src.agents.copy_editor import CopyEditor
+from src.agents.literary_echoes_agent import LiteraryEchoesAgent
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
@@ -284,6 +285,7 @@ def run_enhanced_pipeline(
     exclude_insights: bool = False,
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
+    skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
     macro_model: str = "claude-opus-4-6",
     insight_model: str = "gpt-5.4",
     question_model: str = "gpt-5.4",
@@ -441,6 +443,43 @@ def run_enhanced_pipeline(
         except Exception:
             model_used = MacroAnalyst.DEFAULT_MODEL
         tracker.track_model_for_step("macro_analysis", model_used)
+
+    # =====================================================================
+    # STEP 1b: Literary Echoes Generation (Session 338)
+    # Default: regenerate and overwrite data/literary_echoes/psalm_NNN_literary_echoes.txt
+    # so downstream research_assembler picks up fresh content.
+    # Skipped silently if --skip-lit-echoes is passed.
+    # Non-fatal on failure — downstream research_assembler tolerates missing file.
+    # =====================================================================
+    if not skip_lit_echoes and not smoke_test:
+        logger.info("\n[STEP 1b] Generating Literary Echoes (4-pass workflow)...")
+        print(f"\n{'='*80}")
+        print(f"STEP 1b: Literary Echoes (Gemini 3.1 Pro → GPT-5.4 verify → GPT-5.4 reconstruct)")
+        print(f"{'='*80}\n")
+        try:
+            lit_echoes_agent = LiteraryEchoesAgent(
+                cost_tracker=cost_tracker,
+                db_path=db_path,
+                logger=logger,
+            )
+            lit_result = lit_echoes_agent.generate(
+                psalm_number=psalm_number,
+                psalm_output_dir=output_path,
+                skip_if_exists=False,   # Default overwrite
+            )
+            tracker.track_model_for_step("literary_echoes_pass_1", "gemini-3.1-pro-preview")
+            tracker.track_model_for_step("literary_echoes_pass_2", "gemini-3.1-pro-preview")
+            tracker.track_model_for_step("literary_echoes_pass_3", "gpt-5.4")
+            tracker.track_model_for_step("literary_echoes_pass_4", "gpt-5.4")
+            logger.info(
+                f"[STEP 1b] Literary echoes complete — ${lit_result.total_cost:.4f} "
+                f"({len(lit_result.exclusion_authors)} authors excluded from last "
+                f"{len(lit_result.exclusion_source_files)} files)"
+            )
+        except Exception as e:
+            logger.warning(f"[STEP 1b] Literary echoes failed (non-fatal): {e}", exc_info=True)
+    elif skip_lit_echoes:
+        logger.info("[STEP 1b] Skipping literary echoes (--skip-lit-echoes)")
 
     # =====================================================================
     # STEP 2: Micro Analysis
@@ -989,6 +1028,8 @@ if __name__ == "__main__":
                        help="Skip question curation and exclude from writer/doc even if file exists")
     parser.add_argument("--skip-copy-editor", action="store_true",
                        help="Skip the copy editor step (runs by default)")
+    parser.add_argument("--skip-lit-echoes", action="store_true",
+                       help="Skip the literary echoes generation step (runs by default, regenerating the file on every pipeline run)")
     parser.add_argument("--gpt-5-4-all", action="store_true", help="Use GPT-5.4 for all eligible agents")
     parser.add_argument("--gpt-5-4-macro", action="store_true", help="Use GPT-5.4 for Macro Analyst")
     parser.add_argument("--gpt-5-4-insight", action="store_true", help="Use GPT-5.4 for Insight Extractor")
@@ -1070,6 +1111,7 @@ if __name__ == "__main__":
         exclude_insights=args.exclude_insights,
         exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
+        skip_lit_echoes=args.skip_lit_echoes,
         macro_model=macro_mdl,
         insight_model=insight_mdl,
         question_model=question_mdl,
