@@ -9,6 +9,26 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 340 (2026-04-25): Evaluated GPT-5.5 Pro for Master Editor
+
+**Objective**: Integrate and evaluate the new `gpt-5.5-pro` model as the Master Editor for the Psalms AI pipeline to determine if it outperforms the Claude Opus 4.7 baseline.
+
+**Problems Identified**:
+- `gpt-5.5-pro` requires the OpenAI Responses API rather than the traditional chat completions endpoint.
+- Unicode checkmarks in loggers were causing `UnicodeEncodeError` crashes on Windows.
+- The massive 200,000-token input prompt with high reasoning effort triggered immense, invisible "thinking token" generation billed at output token rates, costing ~$12.60 per psalm instead of the typical ~$2.00, rapidly draining API quota.
+- `CombinedDocumentGenerator` initialization changed recently, requiring all arguments in `__init__`, breaking the DOCX generation fallback in the test script.
+
+**Solutions Implemented**:
+1. Updated `scripts/run_master_editor_gpt5_5_test.py` to correctly parse outputs and utilize the standard `DocumentGenerator` instead of `CombinedDocumentGenerator`.
+2. Replaced the `✓` symbol with `[OK]` in `src/agents/archive/master_editor_v2.py` logging to ensure Windows stability.
+3. Extracted the successfully generated `gpt-5.5-pro` commentary output from local cache after the pipeline crashed mid-run, preventing a duplicate $12 charge.
+4. Concluded that the quality of the `gpt-5.5-pro` output did not justify the 6x cost increase over Claude Opus 4.7.
+
+**Files Modified**:
+- `scripts/run_master_editor_gpt5_5_test.py` - Fixed key parsing and switched to `DocumentGenerator`.
+- `src/agents/archive/master_editor_v2.py` - Fixed Unicode logging crash.
+
 ## Session 339 (2026-04-24): Surface Literary Echoes Models in DOCX + Lit Echoes Cost Subtotal in Terminal Tally
 
 **Objective**: Ensure the DOCX "Models Used" section lists the Gemini 3.1 Pro model used for Literary Echoes passes 1 & 2 (and, by extension, the GPT-5.4 model used for passes 3 & 4), and ensure the Literary Echoes cost is visible as its own line in the pipeline's final terminal tally rather than being buried inside the per-model roll-up.

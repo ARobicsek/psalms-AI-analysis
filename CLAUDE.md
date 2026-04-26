@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 339 (2026-04-24)
+**Session**: 340 (2026-04-25)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+
+**Session 340 (2026-04-25)**: Evaluated GPT-5.5 Pro for Master Editor
+- Created and executed a test harness (`scripts/run_master_editor_gpt5_5_test.py`) to run the `gpt-5.5-pro` model as the Master Editor for Psalm 51 using the OpenAI Responses API.
+- Fixed a Unicode encode error (`[OK]` replacement) and successfully generated a commentary docx using `DocumentGenerator` as fallback.
+- Determined that `gpt-5.5-pro` with high reasoning effort provides insufficient quality improvement over Claude Opus 4.7 to justify the dramatic cost increase (~$12 vs ~$2 per psalm), largely due to the massive invisible thinking token consumption on the ~200k context window.
 
 **Session 339 (2026-04-24)**: Surface Literary Echoes Models in DOCX + Lit Echoes Cost Subtotal in Terminal Tally
 - Added Literary Echoes models to the "Models Used" section of the Methodological & Bibliographical Summary in all three renderers (`src/utils/document_generator.py`, `src/utils/combined_document_generator.py`, `src/utils/commentary_formatter.py`). Two new conditional lines render only if the corresponding `literary_echoes_pass_*` keys are present in `pipeline_stats.json`: "**Literary Echoes (Passes 1 & 2 — Generation)**" → `gemini-3.1-pro-preview` and "**Literary Echoes (Passes 3 & 4 — Verify + Reconstruct)**" → `gpt-5.4`. The tracker already recorded these keys via `track_model_for_step` in STEP 1b — the renderers just weren't reading them.
@@ -32,10 +37,7 @@ un_docx_only.py pointing to an outdated filename summary.json, restoring compili
 - Discovered that the _is_hebrew_dominant check was missing in _add_paragraph_with_soft_breaks, causing short verses without sof-pasuq (like Ps 51:1,4) to be routed to the fallback processing which left trailing punctuation outside the LRO block and therefore visually rendered on the wrong side.
 - Propagated the _is_hebrew_dominant logic to _add_paragraph_with_soft_breaks in document_generator.py and combined_document_generator.py formatting methods to ensure proper RLM/LRO handling for all short verses.
 
-**Session 334 (2026-04-21)**: Fix Hebrew Verse Punctuation Alignment in DOCX
-- Resolved a Word BiDi rendering issue where trailing punctuation on verses erroneously appeared on the visual right edge for both long block quotes and short inline verses.
-- Added explicit RLM (`\u200F`) injection to `_add_hebrew_block_paragraph` for multi-line blocks, and updated nested format parsing to properly apply `_is_hebrew_dominant` logic for short inline verses, ensuring full LRO reversal.
-- Added `scripts/run_docx_only.py` to allow isolated regeneration of Word documents without re-running earlier pipeline steps.
+
 
 ## Quick Commands
 

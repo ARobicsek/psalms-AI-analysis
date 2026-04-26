@@ -1326,14 +1326,14 @@ class MasterEditorV2:
             if not openai_key:
                 raise ValueError("OpenAI API key required for GPT models")
             self.openai_client = OpenAI(api_key=openai_key)
-            self.logger.info("✓ OpenAI client initialized")
+            self.logger.info("[OK] OpenAI client initialized")
 
         if any("claude" in m.lower() for m in models_used):
             anthropic_key = os.environ.get("ANTHROPIC_API_KEY")
             if not anthropic_key:
                 raise ValueError("Anthropic API key required for Claude models")
             self.anthropic_client = anthropic.Anthropic(api_key=anthropic_key)
-            self.logger.info("✓ Anthropic client initialized")
+            self.logger.info("[OK] Anthropic client initialized")
 
         # Initialize ResearchTrimmer
         self.research_trimmer = ResearchTrimmer(logger=self.logger)
@@ -2141,28 +2141,66 @@ class MasterEditorV2:
     def _call_gpt_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
         """Call GPT for writer mode."""
         try:
-            kwargs = {
-                "model": model,
-                "messages": [{"role": "user", "content": prompt}],
-            }
-            # Only apply reasoning_effort and high token limit for reasoning models
-            if model.startswith("o") or "gpt-5" in model:
-                kwargs["reasoning_effort"] = "high"
-                kwargs["max_completion_tokens"] = 65536
+            if model == "gpt-5.5-pro":
+                # The GPT-5.5 Pro model uses the new Responses API
+                response = self.openai_client.responses.create(
+                    model=model,
+                    input=[{"role": "user", "content": prompt}],
+                    reasoning={"effort": "high"},
+                    max_output_tokens=65536,
+                    timeout=3600.0
+                )
+                
+                # Extract text from output messages
+                response_text = ""
+                for item in getattr(response, "output", []):
+                    if getattr(item, "type", "") == "message" and hasattr(item, "content"):
+                        for content_item in item.content:
+                            if getattr(content_item, "type", "") == "output_text":
+                                response_text += content_item.text
+                
+                # Track usage
+                usage = getattr(response, "usage", None)
+                input_tokens = getattr(usage, "input_tokens", 0) if usage else 0
+                output_tokens = getattr(usage, "output_tokens", 0) if usage else 0
+                
+                thinking_tokens = 0
+                if usage and hasattr(usage, "output_tokens_details") and usage.output_tokens_details:
+                    thinking_tokens = getattr(usage.output_tokens_details, "reasoning_tokens", 0)
+                    
+                self.cost_tracker.add_usage(
+                    model=model,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    thinking_tokens=thinking_tokens
+                )
             else:
-                 kwargs["max_tokens"] = 16000
+                kwargs = {
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                }
+                # Only apply reasoning_effort and high token limit for reasoning models
+                if model.startswith("o") or "gpt-5" in model:
+                    kwargs["reasoning_effort"] = "high"
+                    kwargs["max_completion_tokens"] = 65536
+                else:
+                     kwargs["max_tokens"] = 16000
 
-            response = self.openai_client.chat.completions.create(**kwargs)
-            response_text = response.choices[0].message.content
-            
-            # Track usage
-            usage = response.usage
-            self.cost_tracker.add_usage(
-                model=model,
-                input_tokens=getattr(usage, 'prompt_tokens', 0),
-                output_tokens=getattr(usage, 'completion_tokens', 0),
-                thinking_tokens=getattr(usage, 'reasoning_tokens', 0)
-            )
+                response = self.openai_client.chat.completions.create(**kwargs)
+                response_text = response.choices[0].message.content
+                
+                # Track usage
+                usage = response.usage
+                input_tokens = getattr(usage, 'prompt_tokens', 0)
+                output_tokens = getattr(usage, 'completion_tokens', 0)
+                thinking_tokens = getattr(usage, 'reasoning_tokens', 0)
+                
+                self.cost_tracker.add_usage(
+                    model=model,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    thinking_tokens=thinking_tokens
+                )
 
             # Save response
             response_file = Path(f"output/debug/{debug_prefix}_response_psalm_{psalm_number}.txt")
