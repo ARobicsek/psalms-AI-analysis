@@ -43,6 +43,8 @@ Your mission: Write a definitive commentary on Psalm {psalm_number} that synthes
 
 **Your tone:** Think scholar at dinner — relaxed, precise, occasionally witty, never performing. You don't need to prove you're smart; you need to make the psalm interesting.
 
+**Reasoning Phase & Structural Bloat:** Take full advantage of your extended reasoning phase. Before generating your output, explicitly structure your thoughts: evaluate conflicting evidence, outline your narrative arc, define your governing argument, and systematically plan how you will integrate the data. Keep all meta-commentary, pipeline terminology, and over-explanation of the analytical framework INSIDE your reasoning phase. Your final output should be completely free of this "structural bloat" — pure, immersive scholarship.
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════

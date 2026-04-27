@@ -131,6 +131,7 @@ Always read this file first when you need to find code.
 | `pipeline_summary.py` | `src.utils` | Generates summary statistics and reports for pipeline runs. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/pipeline_summary.py) |
 | `scripture_verifier.py` | `src.utils` | Scripture citation verifier. Two modes: (1) **Regex** (default, free): 4 extraction patterns A/B/C/D with normalization, word-level consonantal matching, ellipsis-fragment splitting, optional Haiku FP filter (~$0.003/psalm). (2) **Tool-use** (`verify_citations_tooluse()`, ~$0.04/psalm): Haiku identifies citations via tool-use (`lookup_verse`), Python does programmatic comparison, Haiku filters FPs. Prompt caching reduces multi-turn cost. Pipeline Step 5a½. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/scripture_verifier.py) |
 | `logger.py` | `src.utils` | Centralized logging configuration for the project. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/logger.py) |
+| `api_guard.py` | `src.utils` | **NEW (Session 342)**: API quota exhaustion detection and pipeline halt utility. `is_quota_exhaustion(exc)` distinguishes permanent billing errors (OpenAI `insufficient_quota`, Anthropic `credit balance too low`, Google `RESOURCE_EXHAUSTED`) from transient rate limits. `halt_on_quota()` saves partial costs, prints halt message, plays audible alert (Windows), exits code 2. Used by both pipeline runners at every non-fatal except block. | [file](file:///c:/Users/ariro/OneDrive/Documents/Psalms/src/utils/api_guard.py) |
 
 ---
 

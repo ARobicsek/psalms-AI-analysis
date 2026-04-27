@@ -9,6 +9,33 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 342 (2026-04-26): API Quota Guard — Fail-Fast on Billing Exhaustion
+
+**Objective**: Prevent silent pipeline degradation when API billing quota is exhausted — ensure immediate halt with clear notification instead of producing incomplete DOCX files.
+
+**Problems Identified**:
+- The Psalm 67 pipeline ran with an exhausted OpenAI balance. 6 of 8 pipeline steps used non-fatal `except Exception` blocks that caught `429 insufficient_quota` errors, logged warnings, and continued. The pipeline produced a final DOCX that appeared complete but was missing Literary Echoes (passes 3-4), Scripture Citation Verification, and Copy Editor processing.
+- Only Step 4 (Master Writer) had a specific `openai.RateLimitError` catch — but it only detected OpenAI quota errors, not Anthropic or Google/Gemini billing exhaustion.
+
+**Solutions Implemented**:
+1. Created `src/utils/api_guard.py` — centralized quota-detection utility with three exports:
+   - `is_quota_exhaustion(exc)` — inspects exception type + message to distinguish permanent billing errors from transient rate limits. Covers OpenAI (`insufficient_quota`, `billing hard limit`), Anthropic (`credit balance is too low`), and Google (`RESOURCE_EXHAUSTED` + quota language). Returns `(True, "ProviderName")` or `(False, "")`.
+   - `halt_on_quota(exc, step_name, ...)` — if quota detected: saves partial cost JSON, logs clear halt message, plays 3 descending beeps via `winsound.Beep()` (Windows), exits with code 2.
+   - `QuotaExhaustionError` — exception class for programmatic use.
+2. Modified `scripts/run_enhanced_pipeline.py` — added `halt_on_quota()` call to all 7 `except` blocks (Steps 1b, 2b, 2c, 4, 5a½, 5b, 6). Replaced the Step 4 hand-coded `except openai.RateLimitError` with the unified utility. Removed `import openai`.
+3. Applied identical changes to `scripts/run_si_pipeline.py`.
+4. Created `scripts/test_api_guard.py` — 8 unit tests covering OpenAI quota, billing hard limit, transient rate limits (should NOT trigger), Anthropic credit balance, Google RESOURCE_EXHAUSTED, generic non-API errors, and the exception class. All pass.
+
+**Files Modified**:
+- `src/utils/api_guard.py` — **[NEW]** Centralized API quota detection and pipeline halt utility
+- `scripts/run_enhanced_pipeline.py` — Added `halt_on_quota()` import and calls in 7 except blocks; removed `import openai` and hand-coded `RateLimitError` catch
+- `scripts/run_si_pipeline.py` — Same changes as enhanced pipeline
+- `scripts/test_api_guard.py` — **[NEW]** Unit tests for api_guard.py (8 tests)
+
+**Verification**: All 3 modified files pass `ast.parse` syntax check. All 8 unit tests pass.
+
+---
+
 ## Session 341 (2026-04-26): Investigate Psalm 67 Pipeline + Fix Resume-Mode Literary Echoes
 
 **Objective**: Diagnose why Psalm 67's pipeline run cost only $2.43 (lower than expected), and fix a resume-mode bug that caused unnecessary Literary Echoes regeneration.

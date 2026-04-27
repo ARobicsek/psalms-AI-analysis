@@ -6,6 +6,9 @@ Examples:
 # Generate complete commentary for Psalm XX
 python scripts/run_enhanced_pipeline.py XX
 
+#just literary echoes
+python scripts/run_literary_echoes.py XX
+
 #just all word docs
 python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-writer --skip-copy-editor
 OR BETTER:

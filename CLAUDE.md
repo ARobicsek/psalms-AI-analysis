@@ -1,11 +1,15 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 341 (2026-04-26)
+**Session**: 342 (2026-04-26)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 342 (2026-04-26)**: API Quota Guard — Fail-Fast on Billing Exhaustion
+- Built `src/utils/api_guard.py`: centralized utility that distinguishes permanent quota/billing errors (OpenAI `insufficient_quota`, Anthropic `credit balance too low`, Google `RESOURCE_EXHAUSTED`) from transient rate limits. Includes `halt_on_quota()` which saves partial costs, prints a clear halt message, plays 3 descending beeps (Windows), and exits with code 2.
+- Modified all 7 `except` blocks in both `run_enhanced_pipeline.py` and `run_si_pipeline.py` to call `halt_on_quota()` before falling through to non-fatal handling. Replaced the hand-coded `openai.RateLimitError` catch in Step 4 with the unified utility. Created `scripts/test_api_guard.py` (8 unit tests, all pass).
+
 **Session 341 (2026-04-26)**: Investigate Psalm 67 Pipeline + Fix Resume-Mode Literary Echoes
 - Investigated why Psalm 67's pipeline cost was lower than expected ($2.43). Diagnosed three OpenAI `429 insufficient_quota` failures: Literary Echoes passes 3-4, Scripture Citation Verifier, and Copy Editor all failed non-fatally. Core pipeline (Macro, Micro, Master Writer) ran successfully.
 - Fixed `--resume` mode in `run_enhanced_pipeline.py` to auto-skip Literary Echoes when `data/literary_echoes/psalm_NNN_literary_echoes.txt` already exists, preventing expensive regeneration on resume. Full fresh runs still regenerate as intended.
@@ -24,11 +28,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Built `src/agents/literary_echoes_agent.py` orchestrating the 4-pass workflow (Gemini 3.1 Pro generate → Gemini 3.1 Pro gap-fill → GPT-5.4 Responses-API with `web_search_preview` tool verify → GPT-5.4 Chat-Completions reconstruct). Rolling exclusion list scans the 4 most-recently-rendered `data/literary_echoes/*.txt` files by mtime and extracts authors via `^####\s+([^,]+),` regex, injecting them into both Pass 1 AND Pass 2 prompts as hard bans. Per-pass raw outputs + exact prompts sent + cost report saved to `output/psalm_NNN/literary_echoes/`; final copied to canonical `data/literary_echoes/psalm_NNN_literary_echoes.txt`. Created `scripts/run_literary_echoes.py` standalone runner and wired new STEP 1b (default-on, regenerate-and-overwrite, `--skip-lit-echoes` opt-out) into both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
 - Prompt edits to `docs/prompts_reference/literary echoes pass {1,2} - tier override.txt`: removed Kendrick Lamar from Earned Canonical Slots and added to fully-banned list (alongside Homer/Dante/Virgil/Ovid); swapped "past Kendrick" hip-hop palette anchor to "past Jay-Z / Tupac"; added a narrow Offensive-Language Filter (three most-severe four-letter words only, historical mild scatology explicitly permitted); Pass 2 target bumped from 3-6 to 5-10 new comparisons. Pass 3 prompt got a one-line profanity-flag instruction so Pass 4 can strip. Archived the three pre-tier-override pass templates to `docs/prompts_reference/archive/`.
 - Two bugs surfaced during Psalm 53 testing and fixed: (1) `gpt-5.1` at every `reasoning.effort` level self-terminated after one verse cluster on the ~30K-char Pass 4 reconstruction prompt — switched Pass 4 to `gpt-5.4` via `chat.completions` (Responses API triggered `content_filter` on the same content), net cost delta ~$0.04/psalm; (2) Pass 2 was using canonical-slot authors (Aeschylus, Paul Celan) that were on the cross-psalm exclusion list because the ban block was only injected into Pass 1 — fixed by propagating it to Pass 2 as well with explicit override of the canonical-slot allowance. Psalm 53 test run produced 7 clusters / 21 authors / 14K chars at total cost $0.945 across all 4 passes in ~10 minutes.
-
-**Session 337 (2026-04-22)**: Tier-Override Prompts for Literary Echoes + Plan for `lit_echoes` Agent
-- Diagnosed the literary echoes monotony as prompt-self-anchoring: Pass 1/2 listed the same poets (Halevi, Amichai, Cohen, Dylan, Celan, Molodowsky, Kendrick) as "examples" that kept recurring in every psalm. Every heavy repeater in the output frequency data was named in the prompt.
-- Designed and tested tier-override prompts (Second Echo Principle, Default Moves to Avoid, Earned Canonical Slots capped at 2 combined Pass 1+2, 18-tradition palette, required `*Default bypassed:*` cognitive-forcing lines, Hebrew quota split into medieval + modern). Created `literary echoes pass {1,2,4} - tier override.txt` under `docs/prompts_reference/`.
-- Tested on Psalms 48, 49, 50, 52 (Pass 1 only, manual Gemini): within-psalm variety and aptness dramatically improved (13-14 authors per psalm, consistent non-Anglo-European-Hebrew reach). But cross-psalm second-tier repetition (Faiz, Kabir, Saadi, Vallejo, Ibn Ezra, Douglass, Dorsey) emerged at ~2-of-3 rate — confirming prompt-craft cannot solve cross-psalm memory. Plan pivot: build a `lit_echoes` agent in the main pipeline using Gemini 3.1 Pro API with N=4 rolling exclusion from recent psalms. See `NEXT_SESSION_BRIEF.md`.
 
 
 

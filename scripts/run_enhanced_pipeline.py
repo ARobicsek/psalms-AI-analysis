@@ -18,7 +18,6 @@ import re
 import argparse
 from pathlib import Path
 import subprocess
-import openai
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -36,6 +35,7 @@ from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
 from src.utils.cost_tracker import CostTracker
 from src.utils.research_trimmer import ResearchTrimmer
+from src.utils.api_guard import halt_on_quota
 
 
 def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
@@ -485,6 +485,7 @@ def run_enhanced_pipeline(
                 f"{len(lit_result.exclusion_source_files)} files)"
             )
         except Exception as e:
+            halt_on_quota(e, "STEP 1b: Literary Echoes", logger, cost_tracker, output_path, psalm_number)
             logger.warning(f"[STEP 1b] Literary echoes failed (non-fatal): {e}", exc_info=True)
     elif skip_lit_echoes:
         logger.info("[STEP 1b] Skipping literary echoes (--skip-lit-echoes)")
@@ -600,6 +601,7 @@ def run_enhanced_pipeline(
             curator.save_questions(q, s, output_path, psalm_number)
             tracker.track_model_for_step("question_curator", curator.active_model)
         except Exception as e:
+            halt_on_quota(e, "STEP 2b: Question Curator", logger, cost_tracker, output_path, psalm_number)
             logger.warning(f"Question curation failed: {e}")
 
     # =====================================================================
@@ -676,6 +678,7 @@ def run_enhanced_pipeline(
             tracker.track_model_for_step("insight_extractor", extractor.model)
             extractor.save_insights(curated_insights, insights_file)
         except Exception as e:
+            halt_on_quota(e, "STEP 2c: Insight Extractor", logger, cost_tracker, output_path, psalm_number)
             logger.warning(f"Insight extraction failed: {e}")
     else:
         # skip_insights is True — still track the model if insights file exists
@@ -762,11 +765,8 @@ def run_enhanced_pipeline(
             print(f"  Introduction: {edited_intro_file}")
             print(f"  Verses: {edited_verses_file}\n")
 
-        except openai.RateLimitError as e:
-            logger.error(f"PIPELINE HALTED: OpenAI API quota exceeded during Master Writer step. {e}")
-            print(f"\nPIPELINE HALTED: OpenAI API quota exceeded. Please check your plan and billing details.")
-            sys.exit(1)
         except Exception as e:
+            halt_on_quota(e, "STEP 4: Master Writer", logger, cost_tracker, output_path, psalm_number)
             logger.error(f"Master Writer failed: {e}", exc_info=True)
             sys.exit(1)
             
@@ -887,6 +887,7 @@ def run_enhanced_pipeline(
             else:
                 logger.info("[STEP 5a½] All citations verified — no misquotes detected")
         except Exception as e:
+            halt_on_quota(e, "STEP 5a½: Scripture Verifier", logger, cost_tracker, output_path, psalm_number)
             logger.warning(f"[STEP 5a½] Citation verification failed (non-fatal): {e}")
 
     # =====================================================================
@@ -909,6 +910,7 @@ def run_enhanced_pipeline(
             tracker.track_model_for_step("copy_editor", copy_editor.model)
             logger.info(f"Copy Editor complete: {ce_result['edited_file']}")
         except Exception as e:
+            halt_on_quota(e, "STEP 5b: Copy Editor", logger, cost_tracker, output_path, psalm_number)
             logger.error(f"Copy Editor failed: {e}", exc_info=True)
             print(f"Copy Editor error (non-fatal): {e}")
     elif skip_copy_editor:
@@ -969,6 +971,7 @@ def run_enhanced_pipeline(
             gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file, docx_output_file, q_file)
             gen.generate()
         except Exception as e:
+            halt_on_quota(e, "STEP 6: DOCX Generation", logger, cost_tracker, output_path, psalm_number)
             logger.error(f"Doc gen failed: {e}", exc_info=True)
             print(f"Error generating Word document: {e}")
             
