@@ -1,11 +1,14 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 340 (2026-04-25)
+**Session**: 341 (2026-04-26)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 341 (2026-04-26)**: Investigate Psalm 67 Pipeline + Fix Resume-Mode Literary Echoes
+- Investigated why Psalm 67's pipeline cost was lower than expected ($2.43). Diagnosed three OpenAI `429 insufficient_quota` failures: Literary Echoes passes 3-4, Scripture Citation Verifier, and Copy Editor all failed non-fatally. Core pipeline (Macro, Micro, Master Writer) ran successfully.
+- Fixed `--resume` mode in `run_enhanced_pipeline.py` to auto-skip Literary Echoes when `data/literary_echoes/psalm_NNN_literary_echoes.txt` already exists, preventing expensive regeneration on resume. Full fresh runs still regenerate as intended.
 
 **Session 340 (2026-04-25)**: Evaluated GPT-5.5 Pro for Master Editor
 - Created and executed a test harness (`scripts/run_master_editor_gpt5_5_test.py`) to run the `gpt-5.5-pro` model as the Master Editor for Psalm 51 using the OpenAI Responses API.
@@ -26,16 +29,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Diagnosed the literary echoes monotony as prompt-self-anchoring: Pass 1/2 listed the same poets (Halevi, Amichai, Cohen, Dylan, Celan, Molodowsky, Kendrick) as "examples" that kept recurring in every psalm. Every heavy repeater in the output frequency data was named in the prompt.
 - Designed and tested tier-override prompts (Second Echo Principle, Default Moves to Avoid, Earned Canonical Slots capped at 2 combined Pass 1+2, 18-tradition palette, required `*Default bypassed:*` cognitive-forcing lines, Hebrew quota split into medieval + modern). Created `literary echoes pass {1,2,4} - tier override.txt` under `docs/prompts_reference/`.
 - Tested on Psalms 48, 49, 50, 52 (Pass 1 only, manual Gemini): within-psalm variety and aptness dramatically improved (13-14 authors per psalm, consistent non-Anglo-European-Hebrew reach). But cross-psalm second-tier repetition (Faiz, Kabir, Saadi, Vallejo, Ibn Ezra, Douglass, Dorsey) emerged at ~2-of-3 rate — confirming prompt-craft cannot solve cross-psalm memory. Plan pivot: build a `lit_echoes` agent in the main pipeline using Gemini 3.1 Pro API with N=4 rolling exclusion from recent psalms. See `NEXT_SESSION_BRIEF.md`.
-
-**Session 336 (2026-04-21)**: Stabilize Aptos Fonts and Methodology Summary for DOCX
-- Fixed 
-un_docx_only.py pointing to an outdated filename summary.json, restoring compiling of the Methodology page on manual regenerations.
-- Replaced ambiguous spacing logic in inline verse blocks with an explicit is_verse_header parameter passed from the top-down parsing logic.
-- Ensured long standalone quotes reliably use default Times New Roman while true primary verses reliably render in Aptos.
-
-**Session 335 (2026-04-21)**: Completely Fix Hebrew Verse Punctuation Alignment in DOCX
-- Discovered that the _is_hebrew_dominant check was missing in _add_paragraph_with_soft_breaks, causing short verses without sof-pasuq (like Ps 51:1,4) to be routed to the fallback processing which left trailing punctuation outside the LRO block and therefore visually rendered on the wrong side.
-- Propagated the _is_hebrew_dominant logic to _add_paragraph_with_soft_breaks in document_generator.py and combined_document_generator.py formatting methods to ensure proper RLM/LRO handling for all short verses.
 
 
 

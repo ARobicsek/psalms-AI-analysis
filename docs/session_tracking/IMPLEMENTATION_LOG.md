@@ -9,6 +9,23 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 341 (2026-04-26): Investigate Psalm 67 Pipeline + Fix Resume-Mode Literary Echoes
+
+**Objective**: Diagnose why Psalm 67's pipeline run cost only $2.43 (lower than expected), and fix a resume-mode bug that caused unnecessary Literary Echoes regeneration.
+
+**Problems Identified**:
+- Three pipeline steps failed silently due to OpenAI API `429 insufficient_quota` errors: Literary Echoes passes 3-4 (GPT-5.4), Scripture Citation Verifier (GPT-5.1), and Copy Editor (GPT-5.4). All were caught by non-fatal error handling, so the pipeline completed but produced output without copy editing or citation verification.
+- The `--resume` flag in `run_enhanced_pipeline.py` correctly auto-detected and skipped Macro, Micro, and Master Writer steps, but had no awareness of Literary Echoes. Since Literary Echoes defaults to regenerate-and-overwrite, every `--resume` run re-executed the full 4-pass workflow (~$0.95, ~10 minutes) even when the output file already existed.
+
+**Solutions Implemented**:
+1. Diagnosed the cost discrepancy by examining `psalm_067_pipeline_stats.json`, `psalm_067_cost.json`, and the enhanced pipeline log. Confirmed all core steps (Macro, Micro, Master Writer) ran successfully; only the GPT-dependent downstream steps failed.
+2. Added Literary Echoes skip logic to the `--resume` block in `run_enhanced_pipeline.py`: checks for `data/literary_echoes/psalm_NNN_literary_echoes.txt` and sets `skip_lit_echoes = True` if the file exists. This is scoped entirely within the `if resume` block, so full fresh runs (without `--resume`) still regenerate Literary Echoes as intended.
+
+**Files Modified**:
+- `scripts/run_enhanced_pipeline.py` — Added Literary Echoes file-existence check to the `--resume` auto-detection logic (lines 362-365).
+
+---
+
 ## Session 340 (2026-04-25): Evaluated GPT-5.5 Pro for Master Editor
 
 **Objective**: Integrate and evaluate the new `gpt-5.5-pro` model as the Master Editor for the Psalms AI pipeline to determine if it outperforms the Claude Opus 4.7 baseline.

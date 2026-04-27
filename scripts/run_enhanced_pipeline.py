@@ -359,6 +359,12 @@ def run_enhanced_pipeline(
     # Resume logic
     if resume and not smoke_test:
         logger.info("RESUME MODE: Auto-detecting last completed step...")
+        
+        # Check if literary echoes is already completed
+        lit_echoes_file = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
+        if lit_echoes_file.exists():
+            skip_lit_echoes = True
+
         if not edited_intro_file.exists():
              if not insights_file.exists():
                  if not research_file.exists():
