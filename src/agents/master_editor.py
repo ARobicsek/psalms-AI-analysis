@@ -711,3 +711,41 @@ class MasterEditor(MasterEditorV2):
             return self._call_claude_writer(model, prompt, psalm_number, debug_prefix)
         else:
             return self._call_gpt_writer(model, prompt, psalm_number, debug_prefix)
+
+    def _call_claude_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
+        """Override V2 to add automatic retry on content-filter blocks.
+
+        Anthropic's output content filter is stochastic — the same prompt can
+        succeed or fail depending on the exact text the model generates.  On a
+        'content filtering policy' error we retry up to MAX_RETRIES times with
+        a short delay, giving the model a chance to produce slightly different
+        (and filter-safe) output.
+        """
+        import time
+
+        MAX_RETRIES = 2
+        last_err = None
+
+        for attempt in range(1 + MAX_RETRIES):
+            try:
+                return super()._call_claude_writer(model, prompt, psalm_number, debug_prefix)
+            except Exception as e:
+                err_str = str(e)
+                if "content filtering policy" in err_str.lower():
+                    last_err = e
+                    if attempt < MAX_RETRIES:
+                        wait = 5 * (attempt + 1)
+                        self.logger.warning(
+                            f"Content filter blocked output (attempt {attempt + 1}/{1 + MAX_RETRIES}). "
+                            f"Retrying in {wait}s — the filter is stochastic so a retry often succeeds."
+                        )
+                        time.sleep(wait)
+                    else:
+                        self.logger.error(
+                            f"Content filter blocked output on all {1 + MAX_RETRIES} attempts. "
+                            f"The prompt for Psalm {psalm_number} may need manual review."
+                        )
+                        raise
+                else:
+                    # Non-filter error — don't retry
+                    raise
