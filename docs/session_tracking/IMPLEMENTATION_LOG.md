@@ -9,6 +9,28 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 343 (2026-05-05): Fix Resume-Mode Literary Echoes Model Tracking
+
+**Objective**: Ensure "Literary Echoes" models appear in the DOCX Methodological Summary even when the pipeline is resumed and the generation step is skipped.
+
+**Problems Identified**:
+- When the pipeline was resumed, the `skip_lit_echoes` logic bypassed the model tracking calls.
+- The `ResearchAssembler` did not include the Literary Echoes models in the `research_v2.md` bundle, preventing `_parse_research_stats_from_markdown` from recovering them during Step 2 skips.
+
+**Solutions Implemented**:
+1. Added explicit `tracker.track_model_for_step` calls for Passes 1-4 inside the `skip_lit_echoes` block of both `run_enhanced_pipeline.py` and `run_si_pipeline.py`.
+2. Updated `_parse_research_stats_from_markdown` in both pipeline scripts to accurately parse "Literary Echoes" models from the `research_v2.md` file.
+3. Modified `src/agents/research_assembler.py` to permanently inject `GEMINI_MODEL` and `GPT_VERIFY_MODEL` into the `models_used` dictionary of the `ResearchBundle`.
+
+**Files Modified**:
+- `src/agents/research_assembler.py` - Injected Literary Echoes models into the research bundle metadata.
+- `scripts/run_enhanced_pipeline.py` - Added model tracking during skip and improved markdown parsing.
+- `scripts/run_si_pipeline.py` - Same changes as enhanced pipeline.
+- `CLAUDE.md` - Session updated.
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` - This entry.
+
+---
+
 ## Session 342 (2026-04-26): API Quota Guard — Fail-Fast on Billing Exhaustion
 
 **Objective**: Prevent silent pipeline degradation when API billing quota is exhausted — ensure immediate halt with clear notification instead of producing incomplete DOCX files.

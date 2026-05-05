@@ -40,6 +40,7 @@ if __name__ == '__main__':
     from src.agents.rag_manager import RAGManager, RAGContext
     from src.agents.related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
     from src.agents.figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
+    from src.agents.literary_echoes_agent import GEMINI_MODEL, GPT_VERIFY_MODEL
 else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
@@ -52,6 +53,7 @@ else:
     from .rag_manager import RAGManager, RAGContext
     from .related_psalms_librarian import RelatedPsalmsLibrarian, RelatedPsalmMatch
     from .figurative_curator import FigurativeCurator, FigurativeCuratorOutput, FigurativeSearchRequest
+    from .literary_echoes_agent import GEMINI_MODEL, GPT_VERIFY_MODEL
 
 
 def _truncate_bdb_entry(text: str, max_chars: int = 500) -> str:
@@ -957,6 +959,10 @@ class ResearchAssembler:
         
         if self.use_figurative_curator and self.figurative_curator and figurative_curator_output:
             models_used['figurative_curator'] = self.figurative_curator.active_model
+            
+        if literary_echoes_content:
+            models_used['literary_echoes_pass_1'] = GEMINI_MODEL
+            models_used['literary_echoes_pass_3'] = GPT_VERIFY_MODEL
 
         return ResearchBundle(
             psalm_chapter=request.psalm_chapter,

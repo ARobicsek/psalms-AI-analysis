@@ -117,8 +117,16 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         section_text = models_section.group(1)
         model_matches = re.findall(r'- \*\*(.*?)\*\*: (.*?)(?:\n|$)', section_text)
         for agent, model in model_matches:
-            agent_key = agent.lower().replace(' ', '_')
-            models_used[agent_key] = model.strip()
+            if "Literary Echoes" in agent:
+                if "Passes 1 & 2" in agent:
+                    models_used['literary_echoes_pass_1'] = model.strip()
+                    models_used['literary_echoes_pass_2'] = model.strip()
+                elif "Passes 3 & 4" in agent:
+                    models_used['literary_echoes_pass_3'] = model.strip()
+                    models_used['literary_echoes_pass_4'] = model.strip()
+            else:
+                agent_key = agent.lower().replace(' ', '_')
+                models_used[agent_key] = model.strip()
     stats['models_used'] = models_used
 
     return stats
@@ -496,6 +504,13 @@ def run_enhanced_pipeline(
             logger.warning(f"[STEP 1b] Literary echoes failed (non-fatal): {e}", exc_info=True)
     elif skip_lit_echoes:
         logger.info("[STEP 1b] Skipping literary echoes (--skip-lit-echoes)")
+        # If the canonical file exists, assume it was generated with the standard pipeline models
+        lit_echoes_file = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
+        if lit_echoes_file.exists():
+            tracker.track_model_for_step("literary_echoes_pass_1", "gemini-3.1-pro-preview")
+            tracker.track_model_for_step("literary_echoes_pass_2", "gemini-3.1-pro-preview")
+            tracker.track_model_for_step("literary_echoes_pass_3", "gpt-5.4")
+            tracker.track_model_for_step("literary_echoes_pass_4", "gpt-5.4")
 
     # =====================================================================
     # STEP 2: Micro Analysis
