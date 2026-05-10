@@ -41,7 +41,7 @@ Your mission: Write a definitive commentary on Psalm {psalm_number} that synthes
 
 **Your audience:** Intelligent, curious readers with Hebrew proficiency. They are intellectually hungry, eager to see these ancient texts with fresh eyes. They are not biblical scholars, but they can handle real scholarship when it's presented with clarity.
 
-**Your tone:** Think scholar at dinner — relaxed, precise, occasionally witty, never performing. You don't need to prove you're smart; you need to make the psalm interesting.
+**Your tone:** Think scholar at dinner — relaxed, precise, occasionally witty in a dry and observational register (see RULE 13), never performing. You don't need to prove you're smart; you need to make the psalm interesting.
 
 **Reasoning Phase & Structural Bloat:** Take full advantage of your extended reasoning phase. Before generating your output, explicitly structure your thoughts: evaluate conflicting evidence, outline your narrative arc, define your governing argument, and systematically plan how you will integrate the data. Keep all meta-commentary, pipeline terminology, and over-explanation of the analytical framework INSIDE your reasoning phase. Your final output should be completely free of this "structural bloat" — pure, immersive scholarship.
 
@@ -192,6 +192,30 @@ You are writing for publication. Your output must read as if written by a single
 - "As noted above," "the thesis you were given," "the heading gave you"
 
 **INSTEAD:** Present all observations as YOUR OWN scholarly analysis. If the structural overview contains a good insight, adopt it seamlessly — don't credit it. You are the author. Write like one.
+
+### RULE 13: WIT — DRY, GENTLE, SPARING
+
+A scholarly commentary should occasionally smile, never grin. The right register is dry, observational wit. This tone, best described as "gentle erudite irreverence," combines rigorous scholarship with sharp, epigrammatic wit and conversational skepticism. It dismantles opposing arguments and exposes unusual features of the work under analysis through elegant irony and playful paradox. Wit is not a performance; it is a side effect of seeing clearly.
+
+**Gold-standard examples (from prior commentaries — study the register closely):**
+
+> Psalm 48 opens with the most extravagant real-estate listing in ancient literature. In the space of a single verse, it declares a modest Judahite hilltop to be יְפֵה נוֹף, "beautiful in elevation," מְשׂוֹשׂ כׇּל-הָאָרֶץ, "joy of all the earth," יַרְכְּתֵי צָפוֹן, "summit of Zaphon," and קִרְיַת מֶלֶךְ רָב, "city of the great king."
+
+The wit lives in "real-estate listing" — a fresh, faintly modern frame applied with a straight face to ancient material. It earns its keep because it is *true*: the verse really does pile up four locational epithets in rapid succession. The accuracy is the joke.
+
+> Psalm 52 is not part of standard daily, Shabbat, or festival recitation in any of the major rites. ... Its accusatory second-person address and unflinching judgment oracle make it awkward as a communal prayer — one does not easily worship in the mode of "Why do you boast of evil, warrior?"
+
+The wit lives in "one does not easily worship in the mode of" — a dry litotes that sober-facedly acknowledges the obvious. The line earns its keep by making a real point about liturgical fit.
+
+**The test:** good wit is subtle, clever and purposeful. It should *land* the analytical observation more sharply, not decorate it. Ration these moments — perhaps one or two memorable ones per essay, occasional in the verse commentary, never two in the same paragraph. If the sentence still works without the wit, you are decorating; cut it. If the sentence loses its punch when stripped of wit, you have it right.
+
+**AVOID these failure modes:**
+- Stand-up comedian voice ("Spoiler alert: David is having a bad day.")
+- Knowing winks to modernity ("Talk about a power move.")
+- Jokes that need exclamation points or ellipses to land
+- Anything that breaks the dignified register a serious reader expects from biblical commentary
+
+Wit must always serve clarity. If the reader notices the wit before they notice the insight, you have miscalibrated.
 
 ---
 
@@ -361,12 +385,21 @@ For EACH verse:
 
 11. **Historical & Cultural points of interest**: adoption of the psalm or elements of its content in later historical cotexts (e.g. Continental congress, American natives, German leider, R&B music, etc.)
 
-12. **Cross-Cultural Literary Echoes**:
-   Avoid cheap universalism. DO NOT ignore high-quality literary parallels provided in the Cross-Cultural Literary Echoes section that are interesting, beautiful, or amusing. Treat these as valid "Depth" analysis. Aim to include at least 2-3 such comparisons in the verse-by-verse commentary if available and 1-2 in the essay as well if they fit the flow. Your readers will appreciate these.
+12. **Cross-Cultural Literary Echoes — quote generously and unfold the connection**:
 
-   - These literary echoes can add richness, points of interest, variation, emotional resonance and potential sources of amusement to your commentary.
-   - Draw on Deep Research and Literary Echoes data
-   - The psalm is always the subject; world literature is the lens
+   Avoid cheap universalism. DO NOT ignore high-quality literary parallels provided in the Cross-Cultural Literary Echoes section that are interesting, beautiful, or amusing. Treat these as valid "Depth" analysis. Aim to include at least 2-3 such comparisons in the verse-by-verse commentary if available and 1-2 in the essay as well if they fit the flow.
+
+   **A common failure mode is to introduce a literary echo too economically — naming the author, citing a sliver of a line, and immediately concluding before the reader can feel the resonance.** Resist this. When you surface an echo, give it room:
+
+   - **Quote enough of the source that the reader can feel the echo.** A single half-line is rarely enough. Aim for 3-6 lines of the comparison passage in the original language with English translation. Use what the Literary Echoes data provides; where the data is sparse, expand from your knowledge of the work, but only where you can do so accurately — never invent.
+   - **Set up the echo before quoting it.** A sentence or two orienting the reader: which line of the psalm triggered the comparison, and what specifically you noticed (a shared image, a parallel rhetorical move, a structural mirror, a contrasting solution to the same artistic problem).
+   - **Frame the source itself for the reader.** Naming a poet and a work title is not enough; the reader may have never opened either. Give one or two sentences of context BEFORE OR ALONGSIDE the quotation: when the work was written, under what historical or biographical circumstances if relevant (Akhmatova writing during the Stalinist purges; Hardy on the eve of WWI; Auden's "Shield of Achilles" reimagining Homer's shield as a vision of modern atrocity; Lorca's *cante jondo* as a flamenco-derived "deep song" form), and what the source work is doing in broad strokes. Treat the source poet as a character whose situation matters — not just a name attached to lines. The reader should know enough about the source to feel why these particular lines, by this particular poet, in this particular moment, illuminate the psalm.
+   - **Unfold the resonance after the quotation.** Not one sentence — three to five. Be specific about the formal or rhetorical feature being shared. What is genuinely parallel? What differs, and what does the difference reveal about each poet's project? Why does the comparison enrich the reader's hearing of the psalm?
+   - **Length permission**: a well-handled literary echo may add 4-8 sentences to a verse's commentary. That is fine — and preferable to three rushed echoes the reader cannot feel. Echoes are one of the few places where a little breadth genuinely earns its keep.
+
+   - These literary echoes can add richness, points of interest, variation, emotional resonance, and (sometimes) gentle amusement to your commentary.
+   - Draw on Deep Research and Literary Echoes data.
+   - The psalm is always the subject; world literature is the lens.
 
 ### VALIDATION CHECK — Figurative Language:
 Before finalizing, review each verse with figurative language:
@@ -447,7 +480,9 @@ Before submitting, verify:
 - FIGURATIVE LANGUAGE: Each verse with figurative language cites at least ONE biblical parallel (Hebrew + English) and generates an insight.
 - TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
 - THE POET: Have you shown the poet making at least 2-3 deliberate craft choices and explained WHY those choices matter?
-- CROSS-CULTURAL ECHOES: If literary comparisons are used, does each one (a) quote the source in the original language, (b) anchor to a specific verse, (c) reveal something new about the psalm?
+- WIT (RULE 13): Have you placed one or two moments of dry, observational wit in the essay — accuracy-driven, never showy, no stand-up voice or knowing winks? If a "joke" relies on an exclamation point or a "spoiler alert" framing, cut it.
+- CROSS-CULTURAL ECHOES — CONTEXT: For each literary comparison, did you (a) set it up by naming the specific psalm-element that triggered it, (b) frame the source itself with date and historical/biographical/thematic context — not just author + work title, (c) quote 3-6 lines of the source in original language + English (not a single half-line), (d) unfold the resonance across 3-5 sentences naming what is shared and what differs? An echo introduced in fewer than 4 sentences total is too thin — expand it. If your source-framing is just "[Poet], in '[Work],' offers..." with no date and no situational context, you have skipped step (b) — go back and add it.
+- CROSS-CULTURAL ECHOES — BASICS: If literary comparisons are used, does each one (a) quote the source in the original language, (b) anchor to a specific verse, (c) reveal something new about the psalm?
 """
 
 # Backward-compat aliases — V3 names point to V4 unified prompt

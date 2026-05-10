@@ -68,10 +68,10 @@ This document is read by an audience that expects the dignified register of bibl
 ☐ No author who already appears in the existing document may be used again.
 ☐ Homer, Dante, Virgil, Ovid, Kendrick Lamar remain BANNED.
 ☐ Combined Earned Canonical Slot authors across Pass 1 + Pass 2 must be ≤ 2. If Pass 1 used 2, add none; if Pass 1 used 1, add at most 1; if Pass 1 used 0, add up to 2.
-☐ Every new comparison must include an original-language quotation (2-4 lines).
+☐ Every new comparison must include an original-language quotation (4-8 lines, tight cluster).
 ☐ Every new comparison must be anchored to a specific psalm verse.
-☐ Analysis: exactly 2-3 sentences per comparison, naming a specific formal/rhetorical feature.
-☐ Quotations should be SHORT — the most resonant 2-4 lines, not a full stanza.
+☐ Analysis: 3-5 sentences per comparison, naming a specific formal/rhetorical feature and giving a downstream writer enough interpretive scaffolding to expand the echo into reader-facing prose.
+☐ Quotations should be RESONANT, not minimal — pick the 4-8 lines where the parallel actually lives, enough that a reader unfamiliar with the source can feel the connection. Not the full stanza, not a single decontextualized fragment.
 ☐ **ANTI-FABRICATION:** if you cannot recall a specific quotation accurately, swap to a verified source. Do not invent.
 
 === SELECTION PRINCIPLE ===
@@ -99,7 +99,7 @@ Then the new comparisons, using the same format as Pass 1:
 > "[English translation]"
 > — *[Work]*, [section/line]
 
-[2-3 sentences of analysis]
+[3-5 sentences of analysis]
 
 ---
 
@@ -114,8 +114,8 @@ If replacing an existing comparison, begin that entry with:
 ☐ Banned authors (Homer, Dante, Virgil, Ovid, Kendrick Lamar) not used
 ☐ No quotation contains the severe profanity defined in the Offensive-Language Filter
 ☐ At most 2 Earned Canonical Slot authors in the COMBINED document (Pass 1 + Pass 2)
-☐ Every new comparison has original-language quotation
-☐ Every new analysis ≤ 3 sentences and names a formal feature
+☐ Every new comparison has original-language quotation (4-8 lines, tight cluster)
+☐ Every new analysis is 3-5 sentences and names a formal feature
 ☐ New "*Default bypassed:*" lines added for any NEW verse clusters (not for existing ones)
 ☐ Medieval Hebrew/Andalusian quota (≥1) met in combined document
 ☐ Modern Hebrew or Yiddish quota (≥1) met in combined document

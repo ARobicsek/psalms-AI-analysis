@@ -110,21 +110,22 @@ Format each quotation block as:
 
 If the original language uses a non-Latin script, provide the original script first. Transliteration is optional but welcome for Hebrew/Arabic/Sanskrit/Chinese/Japanese.
 
-Choose SHORT quotations — 2-4 lines maximum. The quotation should be a needle, not a haystack. Pick the most resonant lines, not the full stanza.
+Choose RESONANT quotations — 4-8 lines, depending on what the reader needs to actually hear the echo. A single decontextualized fragment is rarely enough; downstream consumers of this document expand each echo into reader-facing prose, and they need a tight cluster to work from. Pick the lines where the parallel actually lives — not the full stanza, but enough that someone unfamiliar with the source can feel the connection without consulting the original work.
 
 **ANTI-FABRICATION RULE:** If you cannot confidently recall an exact quotation from a poet you want to cite, DO NOT FABRICATE A QUOTATION. Instead, choose a different poet whose specific lines you can recall accurately, or choose a different, better-remembered work by the same poet. It is better to submit 12 verified comparisons than 18 with invented quotations. Pass 3 verification will reject fabrications anyway; fabricating just wastes your own effort.
 
 === ANALYSIS RULES ===
 
-For each comparison, write EXACTLY 2-3 sentences of analysis. These sentences must:
+For each comparison, write 3-5 sentences of analysis. These sentences must:
 - Name a SPECIFIC formal or rhetorical feature (chiastic structure, shift from third to second person, jussive mood, enjambment across stanza break, anaphoric repetition, etc.)
 - Explain what the juxtaposition REVEALS about the psalm's craft or meaning
 - Identify what is DIFFERENT between the two texts and why that difference matters
+- Give a downstream writer enough interpretive scaffolding to expand the echo into reader-facing prose without inventing material
 
 Do NOT:
 - Summarize what the psalm verse means (the reader already knows)
 - Summarize what the comparison text means (that's what the quotation is for)
-- Write more than 3 sentences of analysis per comparison
+- Pad past 5 sentences — be specific, not chatty
 - Use phrases like "both texts explore," "this theme is universal," "similarly, X also..."
 
 === OUTPUT FORMAT ===
@@ -138,18 +139,18 @@ Jump straight into comparisons. No title, no introduction, no conclusion.
 *Default bypassed: [the canonical first-echo most commentaries would reach for here — name author + work in one line, even if it's not on the banned/canonical lists. This is your cognitive-forcing move.]*
 
 #### [Author], *[Work]* ([date/period])
-> [Original-language quotation — 2-4 lines max]
+> [Original-language quotation — 4-8 lines, tight cluster]
 > "[English translation]"
 > — *[Work]*, [section/line]
 
-[2-3 sentences of analysis]
+[3-5 sentences of analysis]
 
 #### [Next Author], *[Next Work]* ([date/period])
 > [Original-language quotation]
 > "[English translation]"
 > — *[Work]*, [section/line]
 
-[2-3 sentences of analysis]
+[3-5 sentences of analysis]
 
 ---
 
@@ -172,8 +173,8 @@ Before submitting, verify:
 ☐ At least 1 song / libretto / oratory source
 ☐ At least 2 non-Anglo-European-Hebrew sources
 ☐ No author appears twice
-☐ No analysis paragraph exceeds 3 sentences
-☐ Each analysis names a specific formal or rhetorical feature
+☐ Each analysis is 3-5 sentences and names a specific formal or rhetorical feature
+☐ Quotations are 4-8 lines (a tight cluster, not a single fragment, not a full stanza)
 ☐ No comparison merely states "this theme is universal"
 ☐ Total comparisons: 12-18
 ☐ No fabricated quotations — if uncertain, swapped to a verified source
