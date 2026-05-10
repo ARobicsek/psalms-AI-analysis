@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 343 (2026-05-05)
+**Session**: 344 (2026-05-10)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 344 (2026-05-10)**: Improve Wit + Literary Echoes Context in Master Writer Prompt
+- Added RULE 13 (WIT — DRY, GENTLE, SPARING) to `MASTER_WRITER_PROMPT_V4` in `src/agents/master_editor.py`, anchored to Ps 48 "real-estate listing" and Ps 52 "one does not easily worship" as gold-standard examples; added explicit AVOID list (stand-up voice, knowing winks, exclamation-point jokes) plus matching FINAL VALIDATION CHECKLIST entry. The new RULE flows automatically through `MasterEditorSI` since the SI agent injects into the same V4 template.
+- Restructured item 12 (Cross-Cultural Literary Echoes) into a four-step pattern: set up the trigger → frame the source itself with date and historical/biographical/thematic context (not just author + work title) → quote 3-6 lines original + English → unfold the resonance across 3-5 sentences. Explicit length permission (4-8 sentences per echo) plus three new checklist items (depth, source framing, basics).
+- Relaxed quotation cap from 2-4 lines → 4-8 lines (tight cluster) and analysis cap from EXACTLY 2-3 sentences → 3-5 sentences in `docs/prompts_reference/literary echoes pass 1 - tier override.txt` and `pass 2 - tier override.txt`, giving the master writer richer raw scaffolding. Verified on Psalm 53: v1 had 2 thin echoes; v2 yields 7 well-contextualized echoes (Lorca, Stevens, Hardy, Auden, Miller, Akhmatova, Farrokhzad) with 4-6 line source quotations and dry observational wit ("the world's most polite recruiting pitch"; "their hearts speak the same sentence; only their footnotes differ").
+
 **Session 343 (2026-05-05)**: Fix Resume-Mode Literary Echoes Model Tracking
 - Fixed a data persistence issue where Literary Echoes models were missing from the Methodological Summary when the pipeline was resumed and Step 1b was skipped.
 - Updated `run_enhanced_pipeline.py` and `run_si_pipeline.py` to register the models into the tracker during skip logic, and updated the markdown parser to recover them.
@@ -23,14 +28,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Created and executed a test harness (`scripts/run_master_editor_gpt5_5_test.py`) to run the `gpt-5.5-pro` model as the Master Editor for Psalm 51 using the OpenAI Responses API.
 - Fixed a Unicode encode error (`[OK]` replacement) and successfully generated a commentary docx using `DocumentGenerator` as fallback.
 - Determined that `gpt-5.5-pro` with high reasoning effort provides insufficient quality improvement over Claude Opus 4.7 to justify the dramatic cost increase (~$12 vs ~$2 per psalm), largely due to the massive invisible thinking token consumption on the ~200k context window.
-
-**Session 339 (2026-04-24)**: Surface Literary Echoes Models in DOCX + Lit Echoes Cost Subtotal in Terminal Tally
-- Added Literary Echoes models to the "Models Used" section of the Methodological & Bibliographical Summary in all three renderers (`src/utils/document_generator.py`, `src/utils/combined_document_generator.py`, `src/utils/commentary_formatter.py`). Two new conditional lines render only if the corresponding `literary_echoes_pass_*` keys are present in `pipeline_stats.json`: "**Literary Echoes (Passes 1 & 2 — Generation)**" → `gemini-3.1-pro-preview` and "**Literary Echoes (Passes 3 & 4 — Verify + Reconstruct)**" → `gpt-5.4`. The tracker already recorded these keys via `track_model_for_step` in STEP 1b — the renderers just weren't reading them.
-- Added a Literary Echoes subtotal to the final terminal cost tally in both `scripts/run_enhanced_pipeline.py` and `scripts/run_si_pipeline.py`. Introduced a `lit_echoes_cost` variable initialized to `0.0` before STEP 1b, populated from `lit_result.total_cost` on success, and printed after `cost_tracker.get_summary()` as "Literary Echoes subtotal (Passes 1-4): $X.XXXX" with a note that it's already included in the grand total (needed because the CostTracker aggregates by model, so lit-echoes Gemini/GPT usage gets lumped with other pipeline components that share those models).
-- All five edited files parse clean via `ast.parse`. No new scripts; no change to pipeline step ordering or control flow.
-
-
-
 
 ## Quick Commands
 

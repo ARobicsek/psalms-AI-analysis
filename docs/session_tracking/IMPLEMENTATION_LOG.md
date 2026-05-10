@@ -9,6 +9,72 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 344 (2026-05-10): Improve Wit + Literary Echoes Context in Master Writer Prompt
+
+**Objective**: Address two qualitative weaknesses in production commentary output: (1) the final essay/commentary rarely deploys gentle, dry wit even when the material rewards it, and (2) cross-cultural literary echoes are introduced too economically — author + work title + a sliver of a line — without enough context for the reader to feel the resonance.
+
+**Reference examples supplied by the user** (gold-standard wit from prior commentaries):
+- Psalm 48: *"Psalm 48 opens with the most extravagant real-estate listing in ancient literature. In the space of a single verse, it declares a modest Judahite hilltop to be יְפֵה נוֹף, ..."* — fresh modern frame ("real-estate listing") applied to ancient material with a straight face.
+- Psalm 52: *"...one does not easily worship in the mode of 'Why do you boast of evil, warrior?'"* — dry litotes acknowledging the obvious.
+
+The user's diagnosis was that wit needs to be observational and accuracy-driven (the joke is the accuracy), and that echoes need both fuller source-context (when written, under what circumstances) and fuller unfolding (3-5 sentences naming what's shared and what differs).
+
+**Solutions Implemented**:
+
+1. **`src/agents/master_editor.py` — `MASTER_WRITER_PROMPT_V4`**:
+   - **Added RULE 13: WIT — DRY, GENTLE, SPARING.** The new rule defines the desired register (dry, observational, sober naming of something the reader hadn't quite noticed was funny or strange about the psalm), shows both user-supplied gold-standard examples with annotation explaining *why* each works, and lists explicit failure modes to avoid (stand-up comedian voice, knowing winks to modernity, jokes that need exclamation points or "spoiler alert" framing). The rationing test: *"good wit is invisible until you re-read."*
+   - **Punched up the `**Your tone**` line** at the top of the prompt to reference RULE 13 explicitly (`occasionally witty in a dry and observational register (see RULE 13)`).
+   - **Restructured item 12 (Cross-Cultural Literary Echoes)** from a one-paragraph hand-wave into a four-step structural pattern with a fourth iteration added during the session after reviewing v1/v2 of Psalm 53:
+     1. **Set up the echo before quoting it** — name the specific psalm-element that triggered the comparison.
+     2. **Frame the source itself for the reader** — date, historical/biographical context (Akhmatova writing during the Stalinist purges; Hardy on the eve of WWI; Auden's *Shield of Achilles* reimagining Homer's shield as modern atrocity; Lorca's *cante jondo* as a flamenco-derived "deep song" form), and what the source work is doing in broad strokes. *"Treat the source poet as a character whose situation matters — not just a name attached to lines."* (This bullet was added after spot-checking the v2 output revealed half the echoes still came in flat.)
+     3. **Quote 3-6 lines** in original language + English — not a single half-line.
+     4. **Unfold the resonance across 3-5 sentences** — formal feature shared, what differs, why the comparison enriches.
+     - Explicit length permission: *"a well-handled literary echo may add 4-8 sentences to a verse's commentary. That is fine — and preferable to three rushed echoes the reader cannot feel."*
+   - **Added three new FINAL VALIDATION CHECKLIST items**: WIT (RULE 13), CROSS-CULTURAL ECHOES — CONTEXT (depth + source framing), CROSS-CULTURAL ECHOES — BASICS (the original quote/anchor/insight check, kept as a separate floor).
+   - The changes flow through `MasterEditorSI` automatically since the SI agent injects its directive into the same V4 template via string replacement.
+
+2. **`docs/prompts_reference/literary echoes pass 1 - tier override.txt`** and **`pass 2 - tier override.txt`**:
+   - **Quotation cap**: `2-4 lines maximum` → `4-8 lines, tight cluster`. Rationale baked into the new prose: *"downstream consumers of this document expand each echo into reader-facing prose, and they need a tight cluster to work from."*
+   - **Analysis cap**: `EXACTLY 2-3 sentences` → `3-5 sentences`. New language: *"Give a downstream writer enough interpretive scaffolding to expand the echo into reader-facing prose without inventing material."*
+   - All matching mentions in the output-format templates and final checklists were updated for consistency.
+   - Pass 3 (verification) and Pass 4 (reconstruction) prompts were left untouched — they don't impose length caps; they preserve what came before.
+
+**Verification — A/B comparison on Psalm 53**:
+
+The user supplied `Psalm 53 v1.docx` (run before changes) and `Psalm 53 v2.docx` (run after). Extracted text via `python-docx`:
+
+| Metric | v1 | v2 |
+|---|---|---|
+| Document length | 19,276 chars | 26,073 chars (+35%) |
+| Cross-cultural echoes | 2 (Amichai v.3, Lu Xun v.5) | 7 (Lorca v.1, Stevens v.2, Hardy v.3, Auden v.4, Miller v.5, Akhmatova v.6, Farrokhzad v.7) |
+| Typical source-quote length | 1-2 lines | 4-6 lines (e.g., Lorca *cante jondo* opening = 6 lines + translation; Hardy "Channel Firing" = 6 lines; Auden "Shield of Achilles" = 6 lines) |
+| Setup before quote | One sentence | One to two sentences naming the trigger |
+| Unfolding after quote | 1 sentence | 3-5 sentences naming shared formal feature + difference + insight |
+
+**Wit examples that landed in v2** (in the requested register — none of these were in v1):
+- *"every reader who can hear the wordplay is being invited to become what God could not find. The text positions you as the answer to its own search. (One could call this the world's most polite recruiting pitch.)"*
+- *"Their hearts speak the same sentence; only their footnotes differ."*
+- *"Diagnosis becomes taunt-song."*
+- *"Practical atheism with imperial reach scales the damage."*
+- *"The label brackets futility with confidence."*
+
+The wit is sparingly placed (~5 distinct moments across the document, never two in the same paragraph), no stand-up voice, no exclamation-point jokes.
+
+**Echoes that received strong source-context in v2**: Akhmatova (*Requiem*, "composed during the Stalinist purges"), Hardy ("Channel Firing" 1914, "God speaks to the dead in their graves about the gunnery practice that has woken them"), Miller (Willy Loman's situation sketched in one sentence). Echoes still thin on context (the gap that motivated adding the explicit "Frame the source itself" bullet mid-session): Lorca, Stevens, Auden, Farrokhzad — each named only with author + work title without date or thematic context. The added bullet + checklist requirement should close this gap on the next run.
+
+**Files Modified**:
+- `src/agents/master_editor.py` — RULE 13, tone-line tweak, restructured item 12 (with mid-session "Frame the source" bullet added), three new FINAL VALIDATION CHECKLIST items.
+- `docs/prompts_reference/literary echoes pass 1 - tier override.txt` — quotation cap 2-4 → 4-8 lines, analysis cap 2-3 → 3-5 sentences, output-format and checklist updates.
+- `docs/prompts_reference/literary echoes pass 2 - tier override.txt` — same caps relaxed in HARD CONSTRAINTS, output-format example, and final checklist.
+
+**Verification**: `ast.parse` clean on `master_editor.py`; both `MASTER_WRITER_PROMPT_V4` and `MASTER_WRITER_PROMPT_SI` `.format()` cleanly with all expected placeholders (no rogue braces in new Hebrew quotations or example text); prompt files no longer contain the old caps. End-to-end production run on Psalm 53 produced the comparison data above.
+
+**Open follow-ups** (not blocking):
+- v2 placed all 7 echoes in verse commentary; the prompt suggests "1-2 in the essay if they fit" — consider tightening to "include at least 1 in the essay" if the next test psalm shows the same pattern.
+- Confirm on a second psalm (e.g. one without 7 vivid verse-image clusters) that the wit + echo-context improvements aren't an artifact of Psalm 53 specifically.
+
+---
+
 ## Session 343 (2026-05-05): Fix Resume-Mode Literary Echoes Model Tracking
 
 **Objective**: Ensure "Literary Echoes" models appear in the DOCX Methodological Summary even when the pipeline is resumed and the generation step is skipped.
