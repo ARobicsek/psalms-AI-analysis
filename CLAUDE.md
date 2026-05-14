@@ -1,15 +1,15 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 344 (2026-05-10)
+**Session**: 345 (2026-05-13)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
-**Session 344 (2026-05-10)**: Improve Wit + Literary Echoes Context in Master Writer Prompt
-- Added RULE 13 (WIT — DRY, GENTLE, SPARING) to `MASTER_WRITER_PROMPT_V4` in `src/agents/master_editor.py`, anchored to Ps 48 "real-estate listing" and Ps 52 "one does not easily worship" as gold-standard examples; added explicit AVOID list (stand-up voice, knowing winks, exclamation-point jokes) plus matching FINAL VALIDATION CHECKLIST entry. The new RULE flows automatically through `MasterEditorSI` since the SI agent injects into the same V4 template.
-- Restructured item 12 (Cross-Cultural Literary Echoes) into a four-step pattern: set up the trigger → frame the source itself with date and historical/biographical/thematic context (not just author + work title) → quote 3-6 lines original + English → unfold the resonance across 3-5 sentences. Explicit length permission (4-8 sentences per echo) plus three new checklist items (depth, source framing, basics).
-- Relaxed quotation cap from 2-4 lines → 4-8 lines (tight cluster) and analysis cap from EXACTLY 2-3 sentences → 3-5 sentences in `docs/prompts_reference/literary echoes pass 1 - tier override.txt` and `pass 2 - tier override.txt`, giving the master writer richer raw scaffolding. Verified on Psalm 53: v1 had 2 thin echoes; v2 yields 7 well-contextualized echoes (Lorca, Stevens, Hardy, Auden, Miller, Akhmatova, Farrokhzad) with 4-6 line source quotations and dry observational wit ("the world's most polite recruiting pitch"; "their hearts speak the same sentence; only their footnotes differ").
+**Session 345 (2026-05-13)**: Verse-Coverage + Anti-Jargon Rules in Master Writer Prompt
+- Added "Phrase coverage (CRITICAL — read this twice)" bullet to STAGE 3 of `MASTER_WRITER_PROMPT_V4` in `src/agents/master_editor.py`, requiring every distinct phrase/clause in each verse to receive either a substantive analytical sentence or a brief inline deferral pointer to where it lands later. Driven by Psalm 53 v2 verse 2 fully developing the נָבָל / בְּלִבּוֹ / אֵין אֱלֹקִים first half while letting הִשְׁחִיתוּ / וְהִתְעִיבוּ / עָוֶל / אֵין עֹשֵׂה־טוֹב evaporate into a single grammatical aside. Matching FINAL VALIDATION CHECKLIST item added.
+- Added RULE 3c (NO LINGUISTICS JARGON — NAME THE PHENOMENON, NOT THE TECHNICAL TERM FOR THE PHENOMENON). The Psalm 53 v2 verse 6 opening — "abrupt deixis ... deictic ruptures function as stage directions in prophetic poetry ... the judgment archetypal scope ... wherever the conditions of vv. 2-5 obtain ... the geography is moral, not Cartesian" — is now in the prompt verbatim as the BLOATED counter-example, with a "cinematic cut into a scene already in progress" rewrite as the CLEAN one. Explicit anti-list: Latinate verbs (obtain→hold, render→make, evince→show), abstract nominalizations (foregrounding of, deployment of), and bare linguistics terms (deixis, anaphora, paratactic, telic, isocolon).
+- Added matching DINNER-PARTY REGISTER / READ-ALOUD TEST item to FINAL VALIDATION CHECKLIST: the test is not "is this defensible scholarship?" but "would I actually say this sentence to a friend over dinner?" Awaiting user verification on a re-run of Psalm 53 with the new prompt.
 
 **Session 343 (2026-05-05)**: Fix Resume-Mode Literary Echoes Model Tracking
 - Fixed a data persistence issue where Literary Echoes models were missing from the Methodological Summary when the pipeline was resumed and Step 1b was skipped.
@@ -23,11 +23,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 **Session 341 (2026-04-26)**: Investigate Psalm 67 Pipeline + Fix Resume-Mode Literary Echoes
 - Investigated why Psalm 67's pipeline cost was lower than expected ($2.43). Diagnosed three OpenAI `429 insufficient_quota` failures: Literary Echoes passes 3-4, Scripture Citation Verifier, and Copy Editor all failed non-fatally. Core pipeline (Macro, Micro, Master Writer) ran successfully.
 - Fixed `--resume` mode in `run_enhanced_pipeline.py` to auto-skip Literary Echoes when `data/literary_echoes/psalm_NNN_literary_echoes.txt` already exists, preventing expensive regeneration on resume. Full fresh runs still regenerate as intended.
-
-**Session 340 (2026-04-25)**: Evaluated GPT-5.5 Pro for Master Editor
-- Created and executed a test harness (`scripts/run_master_editor_gpt5_5_test.py`) to run the `gpt-5.5-pro` model as the Master Editor for Psalm 51 using the OpenAI Responses API.
-- Fixed a Unicode encode error (`[OK]` replacement) and successfully generated a commentary docx using `DocumentGenerator` as fallback.
-- Determined that `gpt-5.5-pro` with high reasoning effort provides insufficient quality improvement over Claude Opus 4.7 to justify the dramatic cost increase (~$12 vs ~$2 per psalm), largely due to the massive invisible thinking token consumption on the ~200k context window.
 
 ## Quick Commands
 

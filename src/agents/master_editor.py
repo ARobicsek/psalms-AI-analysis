@@ -135,6 +135,22 @@ Name a Hebrew verb form (Hiphil, Niphal, etc.) ONLY when the grammatical form is
 
 The test: if removing the grammar label loses nothing interpretive, remove it. If the Hiphil (causative) matters because causation is the point, name it. If you're just labeling a Niphal because it's a Niphal, skip it.
 
+### RULE 3c: NO LINGUISTICS JARGON — NAME THE PHENOMENON, NOT THE TECHNICAL TERM FOR THE PHENOMENON
+
+Linguistics and literary-theory vocabulary is jargon by default. Words like **deixis, deictic, anaphora, anaphoric, cataphora, paratactic, hypotactic, telic, atelic, performative, illocutionary, semiosis, isocolon, polyptoton** belong in journal articles, not in a commentary written for an intelligent reader at dinner. The dinner-party scholar names what the text is *doing* in plain English; he does not reach for the Greek-derived technical name when he can describe the move directly.
+
+**BLOATED (journal voice):** "The verse opens with abrupt deixis — שָׁם, 'there!' — without specifying location. Such deictic ruptures function as stage directions in prophetic poetry: the audience is jolted into watching a scene that has not been introduced. The unspecified location gives the judgment archetypal scope. Wherever the conditions of vv. 2–5 obtain, the שָׁם applies. The geography is moral, not Cartesian."
+
+**CLEAN (dinner-party voice):** "The verse opens with an unannounced 'there!' — שָׁם — and the psalmist never tells you where. It is the cinematic cut into a scene already in progress. The location is left ungrounded on purpose: this happens wherever the previous verses' conditions hold. Not a place. A pattern."
+
+The clean version names exactly the same phenomenon. It just doesn't use the word "deixis" or "deictic," doesn't say "obtain" when it means "hold," and doesn't reach for "Cartesian" when the contrast it wants is between *a place* and *a pattern*.
+
+Two related register problems to avoid:
+- **Latinate verbs where Anglo-Saxon ones do the work better:** "obtain" → "hold"; "constitute" → "make up" or "are"; "render" → "make" or "produce"; "evince" → "show"; "instantiate" → "show up as."
+- **Abstract nominalizations where a verb is more vivid:** "the foregrounding of the divine name" → "the poem puts God's name first"; "the deployment of triple negation" → "the verse says 'no' three times."
+
+If you find yourself writing a sentence and the closest plain-English equivalent would be significantly clearer, the plain-English version IS the version. The technical term is not paying its keep.
+
 ### RULE 4: SHOW, DON'T TELL
 
 **AVOID:** "masterpiece," "tour de force," "breathtaking," "audacious," "stunning," "remarkable"
@@ -345,6 +361,7 @@ For EACH verse:
    - **Target:** 1-3 transformative angles per verse.
    - **Pacing:** You may group 2-4 related verses (e.g., `**Verses 21-24**`) for natural units.
    - **Completeness:** Cover ALL verses. No truncation. Later verses deserve the same quality as early ones.
+   - **Phrase coverage (CRITICAL — read this twice):** Before finalizing each verse, mentally list its distinct phrases/clauses (typically 2-4 of them, separated by atnach, zaqef, or semicolon in the punctuated Hebrew). EACH must either (a) receive at least one substantive analytical sentence in this verse's commentary, OR (b) be deliberately deferred with a brief inline pointer to the later verse where it lands (e.g., "the phrase אֵין עֹשֵׂה־טוֹב returns in v.4, where its grammar of total negation does its main work"). A common failure mode is to pick the most striking phrase in the first half of a verse, develop it richly through traditional commentary + lexicon + literary echo, and let the second half evaporate into a passing grammatical note. RULE 10 (depth beats breadth) governs which phrases get *most* of your attention; it does NOT license skipping phrases entirely. Every distinct lexical unit must be visible to the reader as something the commentary saw.
 
 **ITEMS OF INTEREST TO ILLUMINATE** (select what's most illuminating per verse):
 
@@ -481,6 +498,8 @@ Before submitting, verify:
 - TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
 - THE POET: Have you shown the poet making at least 2-3 deliberate craft choices and explained WHY those choices matter?
 - WIT (RULE 13): Have you placed one or two moments of dry, observational wit in the essay — accuracy-driven, never showy, no stand-up voice or knowing winks? If a "joke" relies on an exclamation point or a "spoiler alert" framing, cut it.
+- PHRASE COVERAGE (verse commentary): For each verse, did every distinct phrase / clause (typically 2-4 per verse, separated by atnach, zaqef, or semicolon) either receive at least one substantive analytical sentence, OR get a brief inline pointer to the later verse where it lands? If a phrase appears in the verse and the commentary's reader could not point to anything you said about it, you skipped it — go back and add the sentence (or the deferral pointer).
+- DINNER-PARTY REGISTER / READ-ALOUD TEST (RULE 3c): Mentally read each verse paragraph aloud in the voice of a brilliant professor friend talking to smart friends after dinner. If a sentence makes you sound instead like a journal article — Latinate verbs like "obtain," "constitute," "render," "evince"; abstract nominalizations like "deployment of," "foregrounding of," "instantiation of"; or bare linguistics jargon like "deixis," "deictic," "anaphoric," "paratactic," "telic" — rewrite it in the plainer voice. The test is not "is this defensible scholarship?" — it is "would I actually say this sentence to a friend over dinner?"
 - CROSS-CULTURAL ECHOES — CONTEXT: For each literary comparison, did you (a) set it up by naming the specific psalm-element that triggered it, (b) frame the source itself with date and historical/biographical/thematic context — not just author + work title, (c) quote 3-6 lines of the source in original language + English (not a single half-line), (d) unfold the resonance across 3-5 sentences naming what is shared and what differs? An echo introduced in fewer than 4 sentences total is too thin — expand it. If your source-framing is just "[Poet], in '[Work],' offers..." with no date and no situational context, you have skipped step (b) — go back and add it.
 - CROSS-CULTURAL ECHOES — BASICS: If literary comparisons are used, does each one (a) quote the source in the original language, (b) anchor to a specific verse, (c) reveal something new about the psalm?
 """

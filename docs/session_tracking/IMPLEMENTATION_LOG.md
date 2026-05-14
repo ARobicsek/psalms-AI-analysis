@@ -9,6 +9,55 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 345 (2026-05-13): Verse-Coverage + Anti-Jargon Rules in Master Writer Prompt
+
+**Objective**: Fix two qualitative failures the user identified in the Session-344 Psalm 53 v2 output: (1) verse 2's commentary developed the נָבָל / בְּלִבּוֹ / אֵין אֱלֹקִים first half richly while letting the second half's vocabulary (הִשְׁחִיתוּ / וְהִתְעִיבוּ / עָוֶל / אֵין עֹשֵׂה־טוֹב) evaporate into a passing grammatical note; (2) the prose register slipped from "scholar at dinner" into "quarterly biblical journal" under syntactic pressure, especially in verse 6's "abrupt deixis ... deictic ruptures ... archetypal scope ... wherever the conditions obtain ... moral, not Cartesian" paragraph.
+
+**Problems Identified**:
+
+1. **Verse-half neglect.** RULE 10 (depth beats breadth: "choose the 1-3 angles that actually transform the reading") plus no explicit verse-coverage check were combining to license the writer to pick three angles in a verse's first clause and treat the second clause as already-handled-elsewhere. Verse 2's second half names the Flood vocabulary (שחת — Gen 6:11–12) and Levitical/Deuteronomic moral-purity vocabulary (תעב), and adds a third moral term (עָוֶל) distinct from חטא/פשע/רע. None of that lexical/intertextual material was unpacked. The phrase אֵין עֹשֵׂה־טוֹב was implicitly saved for v.4 where it recurs — but its v.2 occurrence has different work to do (it lands the second-half cascade), and that cross-reference between the two appearances is itself an analytical move that went unmade.
+
+2. **Linguistics-jargon register slip.** The prompt's "scholar at dinner" framing (line 44) and "Authorial voice (TARGET)" example (line 235) ARE dinner-party-warm — and the model proves it can hit that register when it wants to (verse 1's "Three technical instructions stack atop the poem like rigging on a ship" is exactly the voice). But under syntactic-feature pressure, the model reaches for journal vocabulary: *abrupt deixis, deictic ruptures, archetypal scope, obtain, Cartesian*. RULE 3 ("define every technical term") only triggers on terms the writer notices are technical — and *deixis* apparently slipped past as ambient vocabulary. No checklist item enforces the dinner-party voice itself.
+
+**Solutions Implemented**:
+
+1. **`src/agents/master_editor.py` — `MASTER_WRITER_PROMPT_V4` — STAGE 3: VERSE-BY-VERSE COMMENTARY** (after the "Completeness" bullet at line ~347):
+   - **New bullet "Phrase coverage (CRITICAL — read this twice)"**: instructs the writer to mentally list each verse's distinct phrases/clauses (typically 2-4 per verse, separated by atnach, zaqef, or semicolon in the punctuated Hebrew) before finalizing. EACH must either (a) receive at least one substantive analytical sentence, OR (b) be deliberately deferred with a brief inline pointer to the later verse where it lands (example given: *"the phrase אֵין עֹשֵׂה־טוֹב returns in v.4, where its grammar of total negation does its main work"*). The bullet explicitly names the failure mode (developing the first half through commentary + lexicon + literary echo and letting the second half evaporate) and reconciles with RULE 10: depth-beats-breadth governs WHICH phrases get *most* attention, NOT whether phrases can be skipped entirely. *"Every distinct lexical unit must be visible to the reader as something the commentary saw."*
+
+2. **`src/agents/master_editor.py` — `MASTER_WRITER_PROMPT_V4` — new RULE 3c** (inserted after RULE 3b at line ~138):
+   - **Title**: "NO LINGUISTICS JARGON — NAME THE PHENOMENON, NOT THE TECHNICAL TERM FOR THE PHENOMENON".
+   - Names the offending vocabulary explicitly: **deixis, deictic, anaphora, anaphoric, cataphora, paratactic, hypotactic, telic, atelic, performative, illocutionary, semiosis, isocolon, polyptoton**.
+   - Uses the user's verse 6 paragraph verbatim as the BLOATED example, with a "cinematic cut into a scene already in progress / Not a place. A pattern." rewrite as the CLEAN example. Both versions name the same phenomenon; the clean one names what the text is *doing* in plain English rather than reaching for the Greek-derived technical name.
+   - Calls out two related register problems with specific substitutions: Latinate verbs (*obtain → hold, constitute → make up or are, render → make or produce, evince → show, instantiate → show up as*) and abstract nominalizations (*the foregrounding of the divine name → the poem puts God's name first; the deployment of triple negation → the verse says "no" three times*).
+   - Pay-its-keep test: *"If you find yourself writing a sentence and the closest plain-English equivalent would be significantly clearer, the plain-English version IS the version."*
+
+3. **`src/agents/master_editor.py` — `MASTER_WRITER_PROMPT_V4` — FINAL VALIDATION CHECKLIST** (added after the WIT (RULE 13) item):
+   - **PHRASE COVERAGE (verse commentary)**: forces the writer to point to either an analytical sentence or a deferral pointer for every phrase in each verse.
+   - **DINNER-PARTY REGISTER / READ-ALOUD TEST (RULE 3c)**: *"Mentally read each verse paragraph aloud in the voice of a brilliant professor friend talking to smart friends after dinner."* Specific flags listed (Latinate verbs, abstract nominalizations, bare linguistics jargon). The test framed not as *"is this defensible scholarship?"* but *"would I actually say this sentence to a friend over dinner?"*
+
+**Why these particular fixes, and tradeoff acknowledgment**:
+
+The phrase-coverage rule could theoretically tilt verses back toward bloat (more phrases covered = more sentences per verse), which the prompt has been actively fighting since the V4 unification. The "deferred with a one-line pointer" escape valve is the mitigation: when a phrase genuinely belongs in a later verse's analysis, the writer is licensed to say so in a sentence and move on. Net effect should be: phrases never silently disappear, but the verse's analytical center of gravity is still chosen.
+
+The anti-jargon rule is pure-win in expectation, low risk. Model behavior on style rules is always somewhat probabilistic — the "scholar at dinner" framing was already there and only partially landing — but adding a *verbatim BLOATED counter-example* (the actual paragraph the user objected to) plus a paired CLEAN rewrite gives the model a concrete pattern to learn from in a way that abstract guidance has not.
+
+**Verification plan**:
+
+The user will re-run Master Writer onwards on Psalm 53 (instructions provided in conversation: delete `psalm_053_edited_*`, `_pre_copy_edit*`, `_copy_edit*`, `_citation_verification`, `_print_ready`, `_commentary.docx` from `output/psalm_53/`; then `python scripts/run_enhanced_pipeline.py 53 --resume --skip-questions`). Resume mode auto-skips macro / micro / literary echoes / insights (all files intact in `output/psalm_53/` and `data/literary_echoes/psalm_053_literary_echoes.txt`). Expected cost: ~$2.85 (writer + copy editor + citation filter).
+
+**Specific things to look for in the v3 output**:
+- **Verse 2**: does הִשְׁחִיתוּ now trigger the Gen 6:11–12 Flood-vocabulary intertext (וַתִּשָּׁחֵת הָאָרֶץ ... כִּי הִשְׁחִית כָּל בָּשָׂר)? Does תעב get framed as Levitical/Deuteronomic moral-purity vocabulary? Does עָוֶל get distinguished from חטא/פשע/רע? Does the v.2 vs v.4 occurrence of אֵין עֹשֵׂה־טוֹב get cross-referenced explicitly?
+- **Verse 6**: does the opening paragraph still use *deixis / deictic*? Does it still use *obtain* where *hold* would work, or *Cartesian* where *a pattern* would? Or has the model produced something closer to the CLEAN rewrite that lives in the prompt?
+
+**Files Modified**:
+- `src/agents/master_editor.py` — added "Phrase coverage" bullet to STAGE 3, added RULE 3c (NO LINGUISTICS JARGON), added two new FINAL VALIDATION CHECKLIST items (PHRASE COVERAGE, DINNER-PARTY REGISTER / READ-ALOUD TEST). All three additions flow through `MasterEditorSI` automatically since the SI agent injects its directive into the same V4 template via string replacement.
+
+**Files NOT modified** (deliberately):
+- The literary-echoes pass-1 and pass-2 tier-override prompts were left untouched; today's failures were about the master writer's *handling* of source material, not about the source material itself. Session 344's loosening of quote/analysis caps (which made the 7-echoes v2 output possible) remains correct.
+- No script changes; `scripts/run_enhanced_pipeline.py` resume logic already correctly auto-skips upstream steps when their output files exist, so no plumbing was required.
+
+---
+
 ## Session 344 (2026-05-10): Improve Wit + Literary Echoes Context in Master Writer Prompt
 
 **Objective**: Address two qualitative weaknesses in production commentary output: (1) the final essay/commentary rarely deploys gentle, dry wit even when the material rewards it, and (2) cross-cultural literary echoes are introduced too economically — author + work title + a sliver of a line — without enough context for the reader to feel the resonance.
