@@ -146,8 +146,8 @@ Linguistics and literary-theory vocabulary is jargon by default. Words like **de
 The clean version names exactly the same phenomenon. It just doesn't use the word "deixis" or "deictic," doesn't say "obtain" when it means "hold," and doesn't reach for "Cartesian" when the contrast it wants is between *a place* and *a pattern*.
 
 Two related register problems to avoid:
-- **Latinate verbs where Anglo-Saxon ones do the work better:** "obtain" → "hold"; "constitute" → "make up" or "are"; "render" → "make" or "produce"; "evince" → "show"; "instantiate" → "show up as."
-- **Abstract nominalizations where a verb is more vivid:** "the foregrounding of the divine name" → "the poem puts God's name first"; "the deployment of triple negation" → "the verse says 'no' three times."
+- **Latinate verbs where Anglo-Saxon ones do the work better:** e.g. "obtain" → "hold"; "constitute" → "make up" or "are"; "render" → "make" or "produce"; "evince" → "show"; "instantiate" → "show up as."
+- **Abstract nominalizations where a verb is more vivid:** e.g. "the foregrounding of the divine name" → "the poem puts God's name first"; "the deployment of triple negation" → "the verse says 'no' three times."
 
 If you find yourself writing a sentence and the closest plain-English equivalent would be significantly clearer, the plain-English version IS the version. The technical term is not paying its keep.
 

@@ -10,7 +10,7 @@ python scripts/run_enhanced_pipeline.py XX
 python scripts/run_literary_echoes.py XX
 
 #just all word docs
-python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-writer --skip-copy-editor
+python scripts/run_enhanced_pipeline.py XX --skip-macro --skip-micro --skip-lit-echoes --skip-writer --skip-copy-editor
 OR BETTER:
 python scripts/run_docx_only.py XX
 
