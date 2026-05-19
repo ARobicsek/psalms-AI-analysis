@@ -9,6 +9,89 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 346 (2026-05-19): RULE 7b / Phrase-Coverage Proportionality + Two-Call Synthesis Experiment
+
+**Objective**: Investigate two Ps 54 passages the user flagged as "trivial points dressed in stilted language," diagnose where the prompt went astray, fix it, then go further and test whether a dedicated cross-verse synthesis architecture would systematically address the missing-synthesis pattern.
+
+**Problems Identified**:
+
+1. **Ps 54 inflation regression.** The user flagged two passages: (a) the מִסְתַּתֵּר reflexive paragraph ("the reflexive verb names David's last remaining agency in the narrative — and that agency is precisely what gets handed to Saul"), and (b) the נְדָבָה closing ("Religion at its required minimum gives what is owed; gratitude at its peak gives what was not asked for"). Both are aphoristic-inflation — a small true observation dressed in balanced, chiastic, "sounds-profound-but-restates-the-definition" prose. Diagnosis: Session 345's new **Phrase Coverage** rule combined with the pre-existing **RULE 8 absolutism** ("FORBIDDEN from stating a fact without an immediate interpretive payoff") was structurally forcing the writer to manufacture significance for routine phrases. RULE 13's "epigrammatic wit" was the available register for that manufactured significance. No rule named the aphoristic-inflation failure mode.
+
+2. **Insight density on long psalms.** Even with the inflation fixed, the deeper question: does the pipeline maximize its capacity for genuine cross-verse syntheses? The shipped one-call writer was *good* — but the verse-by-verse commentary kept losing syntheses that lived only across multiple verses (the v.3↔v.18 שׂיח/המה mirror, the v.4↔v.23 מוט reversal, the ק-ר-ב dual-lexeme reading). The verse-by-verse format's coverage mandate rewarded cataloguing; cross-verse syntheses fell into the gap between essay (which forces ONE governing argument) and verse commentary (which forces *coverage*).
+
+**Solutions Implemented**:
+
+### Part 1 — Production prompt fixes (live in `src/agents/master_editor.py`)
+
+1. **RULE 7b: NO FALSE PROFUNDITY** — added between RULE 7 (Blurry Photograph) and RULE 8. Names the failure mode explicitly: "dictionary in epigram's clothing," "tautology with a cadence," "escalating restatement," "manufactured frame" (the "X at its minimum / Y at its peak" / "not A but B" / "not a place — a pattern" structures). Includes the user's two flagged Ps 54 passages **verbatim as BLOATED counter-examples**, each paired with a CLEAN rewrite in the prompt's existing house style. Provides a strip-the-cadence test: "Read the sentence with its balance removed. Does the reader know something the plain verse did not already tell them — or only the definition of a word?" Plus matching FINAL VALIDATION CHECKLIST item.
+
+2. **RULE 8 carve-out** — the rule was absolutist ("FORBIDDEN from stating a fact without payoff," with "explain the payoff" as the only offered remedy). Added: *"The remedy for a fact that has no real payoff is to CUT it or state it in one plain clause — NEVER to manufacture a payoff by dressing the fact in profound-sounding language (see RULE 7b). 'No orphaned facts' means *drop the orphan*, not *adopt it with a grand speech*."*
+
+3. **Phrase Coverage proportionality option** — Session 345's "each phrase must either (a) receive a substantive analytical sentence or (b) be deferred" was over-correcting. Added option **(b): one honest proportionate sentence when the phrase is a routine construction**, with explicit instruction to NOT manufacture significance. The new framing: *"Coverage means the phrase is visible to the reader as something the commentary saw — NOT that every phrase must be made to sound profound."* Plus updated FINAL VALIDATION CHECKLIST item that flags forced inflation as a misapplication of the coverage rule.
+
+These three changes flow through `MasterEditorSI` automatically via the shared `MASTER_WRITER_PROMPT_V4` template. **Verified on a Ps 54 re-run via the two-call experiment's Call 2 (which uses the same prompt with the new rules injected as an addendum on top of the saved May-14 prompt body):** the מִסְתַּתֵּר paragraph is now one calibrated sentence ("מִסְתַּתֵּר is reflexive — 'hiding himself,' not merely 'hidden.' The active form quietly registers that David's concealment is something he is *doing*, and it is exactly that doing the Ziphites hand to Saul"), and the נְדָבָה passage is now ("A נְדָבָה is by definition the offering no law compels — which is the point: the psalmist vows not the sacrifice he owes but one he is under no obligation to bring"). Both regressions held.
+
+### Part 2 — Two-call synthesis architecture (experimental, discardable)
+
+Built two standalone scripts, **deliberately not touching production code**, to test whether a dedicated cross-verse synthesis pass would address the missing-synthesis problem.
+
+- **`scripts/EXPERIMENT_two_call_synthesis.py`** — reuses the EXACT saved production writer prompt (`output/debug/master_writer_v4_prompt_psalm_NNN.txt`) split at the `## YOUR TASK: WRITE THE COMMENTARY` marker. Call 1 = persona + ground rules + ALL inputs + custom **synthesis-discovery task** (brainstorm 8–10 candidates, adversarial novelty filter, output a structured spine of governing thesis + secondary/core syntheses with anchor-verse assignments). Call 2 = full saved prompt + live-extracted new rule text (RULE 7b, RULE 8 carve-out, phrase-coverage update from the current `MASTER_WRITER_PROMPT_V4`) + the approved spine as an addendum + instructions to build essay and verse commentary around the spine with veto license retained. Same model both calls: `claude-opus-4-7` with `effort=max`, adaptive thinking, 128k max_tokens, streaming, with retry/resume hardening (Call 2 dropped 3× on the 24-verse Ps 55 run and succeeded on attempt 4).
+
+- **`scripts/EXPERIMENT_two_call_finalize.py`** — mirrors production STEP 5 → 5a½ → 5b → 5c → 6 (print-ready → scripture verifier with GPT-5.1 FP filter → copy editor at gpt-5.4 with citation-fix prompt → section extraction → DOCX). **All writes isolated to `output/psalm_NNN/EXPERIMENT_two_call/`**; touched only read-only production files (the existing `psalm_NNN_pipeline_stats.json` for DOCX methodology, `database/tanakh.db` for citation checks). Deliberately did NOT use `scripts/run_scripture_verifier.py` or `scripts/run_docx_only.py` — both hardcode production output paths and would overwrite shipped files.
+
+**Iteration**:
+
+- **Run 1 — Ps 54, 3–4 syntheses cap, no evidence-honesty guardrail.** Result: produced a strong spine including my "verb-mood migration is the plot" insight (Secondary 2) and the שֵׁם syntactic-flip reading (Secondary 1, sharper than the shipped essay's "tool→destination"). Call 2 carried the spine well: each secondary thesis developed at its anchor verse with explicit signals at touched verses. The RULE 7b regressions stayed fixed. The Arabic *ṣammata* cognate claim (Secondary 3 acoustic architecture) flagged as the confabulation-risk zone.
+
+- **Run 2a — Ps 55, 3–4 syntheses cap, no guardrail.** The 24-verse breadth test. Result: 5 syntheses, with 2 genuinely new ones (the שׁלם v.19↔v.21 contestation; the counter-Pentateuch city reading at vv.10–12+16 including the Exod 13:22 לֹא־יָמִישׁ inversion). Lost two cross-verse moves the shipped one-call had on its own: the v.3↔v.18 שׂיח+המה mirror and the מוט reversal (the cap was discarding real syntheses). Copy editor: **20 changes**, including walking back "homophony" → "consonantal overlap" (the spine had overclaimed phonetic identity), softening "verbatim" Korah formula to "clear echo," and removing an *invented Exodus 10:3 prooftext* the writer fabricated.
+
+- **Run 2b — Ps 55, scaled + evidence-honesty guardrail.** Removed the count cap (target: ~1 core synthesis per 3–4 verses, no ceiling, two-tier CORE/ADDITIONAL structure). Added Step 2b "Evidence-Honesty Filter" to the synthesis prompt addressing: homophony vs. consonantal overlap, echo vs. verbatim, no invented or stretched prooftexts, no "signature root" claims, match assertion strength to evidence. Result: spine produced **1 governing + 8 core + 3 additional = 12 syntheses**, recovering both syntheses the cap dropped (the שׂיח+המה mirror became the *governing* thesis; מוט reversal became Core 5). The guardrail caught the specific failure modes I named (no "homophony" overclaim; Babel handled via Gen 10:25 Peleg without claiming פלג is Babel's "signature root"; no invented Exodus 10:3 prooftext; "near-verbatim" instead of "verbatim" for Korah). **But the copy editor still made 32 changes** — the writer found *new* over-reaches the rule list didn't anticipate (חלל = "stab through" the covenant, עָמָל = "birth-labor," "prayer begins where evil cannot follow" non-sequitur, three plain counting errors — "eight movements" → "ten"; "eight words" → "five"; "the final two words" → "the closing clause"). 3 citation issues (vs cap-3/4's 1). Lesson: the synthesis pass needs a more *general* calibration principle than an enumerable list of forbidden patterns.
+
+### Part 3 — Blind 3-way external evaluation
+
+Assembled `output/psalm_55/THREE_WAY_COMPARISON/` with the three DOCXs randomized A/B/C and a sealed `_MAPPING_KEY.md`. Composed a structured evaluation prompt (target reader, 6 criteria, required quoted evidence, contrarian-honesty probes). User ran it through two external LLMs.
+
+**Results**:
+- **Gemini Pro Extended (first read) → picked B (shipped one-call)**: "best blend of compelling prose, illuminating literary echoes, and solid structural analysis."
+- **Gemini Pro Extended (second read) → picked A (scaled+guardrail)**: "the most disciplined; A earns every single claim it makes, ensuring the reader's trust is never broken."
+- **Claude Opus 4.7 → picked C (cap-3/4)**: "the ק-ר-ב insight is the largest single thing a reader will carry. The trade-off I'm accepting: B is a smoother reading experience hour-for-hour and has the most genuinely thoughtful world-literature comparisons."
+
+**Critical finding**: **Gemini twice hallucinated a "fatal" Hebrew error in C** — claimed the source spelled the root as ב-ר-ק (*baraq*, "lightning") instead of ק-ר-ב, calling this "disqualifying." The actual file source uses ק-ר-ב correctly throughout (lines 7, 19, 123, 177, 191, 231, 252, 277 of `psalm_055_copy_edited.md` in the cap-3/4 dir). This is a BiDi (right-to-left) rendering failure mode — Gemini misread the visual order in mixed Hebrew/English text. Claude Opus 4.7 did NOT make this error and correctly recognized C's ק-ר-ב insight as the most original. The hallucination drove both Gemini reads' "Weak" trustworthiness and Hebrew-handling judgments against C; with it removed, the 3-way split remains genuine but C's substance ranking should rise.
+
+**Convergent findings worth banking**:
+- Claude caught that **all three guides over-claim the Exod 13:22 לֹא־יָמִישׁ uniqueness** ("the only other place" / "exactly one comparable formula") — Jeremiah 17:8 and Joshua 1:8 belong to the same family. The synthesis spine seeded this in A and C; B picked it up independently.
+- Cross-cultural echoes are uniformly the weak spot: Manger in A, Wang Wei in B, Milton in C each flagged as decorative by at least one evaluator. The "Smiling Faces Sometimes" Motown reference appears in all three.
+- The architecture's gain is *concentrated*: a small number of specific cross-verse philological moves (ק-ר-ב dual-lexeme; Exod 13:22 inversion; שׁלם contestation) that the one-call demonstrably does not surface. The prose-quality gain is not consistent.
+
+### Part 4 — Design proposal for Session 347 (in `NEXT_SESSION_BRIEF.md`)
+
+**Synthesis as discovery tool, not structural spine.** The two-call architecture's spine-deployment over-corrected: it forced anchored arcs, raised over-claim surface area, and produced a more "architecturally engineered" reading that two of three external evaluators ranked below the shipped one-call on prose quality. But the *insights themselves* are real and load-bearing. The fix: build a synthesis-discovery agent (`src/agents/synthesis_discovery.py`) whose output sits in the writer prompt as a sidecar `CROSS-VERSE OBSERVATIONS (use where they fit; do NOT structure your commentary around them)` block — alongside the existing `KEY INSIGHTS TO INCORPORATE` slot. Gated behind a `--synthesis-discovery` flag, default OFF, until validated on 2–3 psalms. Why this works where the old `InsightExtractor` curator didn't (it was extractive and emitted one-sentence labels; this is generative and emits full claims with per-verse Hebrew evidence). Why this works where the spine architecture over-corrected (the spine wasn't actually needed to land the insights in prose — the writer carried them wherever they belonged). Full design in `NEXT_SESSION_BRIEF.md`.
+
+**Files Modified**:
+
+- `src/agents/master_editor.py` — added RULE 7b, RULE 8 carve-out, STAGE 3 phrase-coverage option (b), plus two new FINAL VALIDATION CHECKLIST items (NO FALSE PROFUNDITY; updated PHRASE COVERAGE). All within `MASTER_WRITER_PROMPT_V4`.
+
+**Files Created**:
+
+- `scripts/EXPERIMENT_two_call_synthesis.py` — discardable two-call experiment runner.
+- `scripts/EXPERIMENT_two_call_finalize.py` — discardable downstream-finalize runner with isolated paths.
+- `docs/session_tracking/NEXT_SESSION_BRIEF.md` — overwritten with Session-347 design proposal (was stale from Session 337).
+- `output/psalm_55/THREE_WAY_COMPARISON/` — three DOCXs (A/B/C, randomized) + sealed `_MAPPING_KEY.md`.
+- `output/psalm_54/EXPERIMENT_two_call/` and `output/psalm_55/EXPERIMENT_two_call_v1_cap34/`, `output/psalm_55/EXPERIMENT_two_call/` — all experimental output, untouched production files.
+
+**Files NOT Modified** (deliberately):
+
+- No production pipeline runners. The experiment lives entirely in `scripts/EXPERIMENT_*.py` and writes only under `output/psalm_NN/EXPERIMENT_*/`. To discard the entire experiment: delete those two scripts and the experiment subdirs. The Session-346 production rule changes (RULE 7b, RULE 8 carve-out, phrase coverage option b) are independent and stand on their own.
+- `src/agents/insight_extractor.py` was diagnosed (its filter-not-synthesizer architecture; its one-sentence-label output; its sidecar-not-spine deployment) but not touched. The Session-347 plan superseding it is in `NEXT_SESSION_BRIEF.md`.
+
+**Verification**:
+
+- The Ps 54 re-run (via Call 2 with the new rules injected) confirmed the מִסְתַּתֵּר and נְדָבָה regressions are fixed.
+- The cap-3/4 Ps 54 review DOCX exists at `output/psalm_54/EXPERIMENT_two_call/psalm_54_TWO_CALL_commentary.docx` (the user has it).
+- The Ps 55 three-way comparison is in `output/psalm_55/THREE_WAY_COMPARISON/` with sealed mapping.
+
+---
+
 ## Session 345 (2026-05-13): Verse-Coverage + Anti-Jargon Rules in Master Writer Prompt
 
 **Objective**: Fix two qualitative failures the user identified in the Session-344 Psalm 53 v2 output: (1) verse 2's commentary developed the נָבָל / בְּלִבּוֹ / אֵין אֱלֹקִים first half richly while letting the second half's vocabulary (הִשְׁחִיתוּ / וְהִתְעִיבוּ / עָוֶל / אֵין עֹשֵׂה־טוֹב) evaporate into a passing grammatical note; (2) the prose register slipped from "scholar at dinner" into "quarterly biblical journal" under syntactic pressure, especially in verse 6's "abrupt deixis ... deictic ruptures ... archetypal scope ... wherever the conditions obtain ... moral, not Cartesian" paragraph.
