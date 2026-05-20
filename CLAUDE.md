@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 346 (2026-05-19)
+**Session**: 347 (2026-05-20)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 347 (2026-05-20)**: Synthesis-Discovery Sidecar — production wiring + Ps 55 validation
+- Built `src/agents/synthesis_discovery.py` (Opus 4.7, mirrors writer's max-effort config) as a sidecar that feeds cross-verse OBSERVATIONS into the production one-call writer. Replaces the Session-346 two-call SPINE approach per `NEXT_SESSION_BRIEF.md`: the writer keeps full authorial discretion (no anchor verses, no "develop in full" mandate). Hardened the evidence-honesty filter to 9 named failure modes (a–i) plus a meta-rule that demands the model name two more failure modes it didn't already check. Extended `MasterEditor.write_commentary(synthesis_discovery_file=...)` and added `discover_cross_verse_observations()`. New `--synthesis-discovery` flag in `run_enhanced_pipeline.py` runs STEP 3.5 between micro and writer. Default path (flag off) leaves the writer prompt byte-identical to production.
+- Validated on Ps 55 in `output/psalm_55/EXPERIMENT_synthesis_discovery/` (sidecar dir, shipped baseline untouched). Discovery produced 14 calibrated observations (1 governing + 9 core + 4 additional). The three insights the Session-346 brief identified as "must-recover" all landed in the final copy-edited prose: **ק-ר-ב dual-lexeme** as the intro's headline argument with all 6 occurrences traced; **Exod 13:22 לֹא־יָמִישׁ inversion** developed at vv. 11 and 12 (calibrated as "most famous biblical use," not "the only"); **שׁלם v.19↔v.21 contestation** at both verses. Copy editor: **23 changes** — better than two-call A's 32, in the same ballpark as C's 20. New failure modes the copy editor still caught (Ps 88:16 invented phrase, בלע/בלל false consonantal claim, חצה/פלג false cognate) were writer-side, not seeded by the spine — exactly the population the evidence-honesty filter is *not* designed to prevent.
+- Total run cost: **$5.80** (Opus 4.7 discovery $1.83 + writer $3.16; gpt-5.4 copy editor $0.76; gpt-5.1 citation FP filter $0.05). Sidecar adds ~$2 per psalm vs the bare writer chain — basically the cost of the discovery call. Three artifacts now exist side-by-side in `output/psalm_55/EXPERIMENT_synthesis_discovery/psalm_055_commentary.docx` for comparison against THREE_WAY_COMPARISON guides A/B/C. Flag default remains OFF pending broader validation across 2–3 more psalms.
+
 **Session 346 (2026-05-19)**: RULE 7b / Phrase-Coverage Proportionality + Two-Call Synthesis Experiment
 - Added **RULE 7b (NO FALSE PROFUNDITY)** + **RULE 8 carve-out** + **STAGE 3 phrase-coverage proportionality option** to `MASTER_WRITER_PROMPT_V4` in `src/agents/master_editor.py`. Driven by two passages the user flagged in Ps 54: the מִסְתַּתֵּר reflexive paragraph and the נְדָבָה fortune-cookie chiasmus. Verified clean on a Ps 54 re-run. The Session-345 phrase-coverage rule was over-correcting — coverage now permits option (b): one honest proportionate sentence for a routine phrase. The fixes are live in production.
 - Built and ran a **discardable two-call synthesis experiment** (`scripts/EXPERIMENT_two_call_synthesis.py` + `EXPERIMENT_two_call_finalize.py`) on Ps 54 and Ps 55. The two-call architecture (synthesis-discovery → write-with-spine) surfaced cross-verse insights the one-call misses (ק-ר-ב dual-lexeme reading; Exod 13:22 לֹא־יָמִישׁ inversion; שׁלם v.19↔v.21 contestation), but raised copy-editor correction load (32 vs 20 on scaled vs cap-3/4) and the evidence-honesty guardrail caught the specific failure modes I named, not the ones I didn't (חלל "stab through," counting errors, "prayer outcovers evil" non-sequiturs). Three blind external evaluations (Gemini ×2, Claude Opus 4.7) split 3-way — including one hallucinated "fatal" Hebrew error from Gemini that doesn't exist (BiDi rendering failure).
@@ -25,15 +30,12 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Built `src/utils/api_guard.py`: centralized utility that distinguishes permanent quota/billing errors (OpenAI `insufficient_quota`, Anthropic `credit balance too low`, Google `RESOURCE_EXHAUSTED`) from transient rate limits. Includes `halt_on_quota()` which saves partial costs, prints a clear halt message, plays 3 descending beeps (Windows), and exits with code 2.
 - Modified all 7 `except` blocks in both `run_enhanced_pipeline.py` and `run_si_pipeline.py` to call `halt_on_quota()` before falling through to non-fatal handling. Replaced the hand-coded `openai.RateLimitError` catch in Step 4 with the unified utility. Created `scripts/test_api_guard.py` (8 unit tests, all pass).
 
-**Session 341 (2026-04-26)**: Investigate Psalm 67 Pipeline + Fix Resume-Mode Literary Echoes
-- Investigated why Psalm 67's pipeline cost was lower than expected ($2.43). Diagnosed three OpenAI `429 insufficient_quota` failures: Literary Echoes passes 3-4, Scripture Citation Verifier, and Copy Editor all failed non-fatally. Core pipeline (Macro, Micro, Master Writer) ran successfully.
-- Fixed `--resume` mode in `run_enhanced_pipeline.py` to auto-skip Literary Echoes when `data/literary_echoes/psalm_NNN_literary_echoes.txt` already exists, preventing expensive regeneration on resume. Full fresh runs still regenerate as intended.
-
 ## Quick Commands
 
 ```bash
-python scripts/run_enhanced_pipeline.py 23          # Process single psalm
-python scripts/run_enhanced_pipeline.py 23 --resume  # Resume from last step
+python scripts/run_enhanced_pipeline.py 23                       # Process single psalm
+python scripts/run_enhanced_pipeline.py 23 --resume               # Resume from last step
+python scripts/run_enhanced_pipeline.py 23 --synthesis-discovery  # +Cross-verse synthesis sidecar (Session 347, ~+$2)
 python scripts/run_si_pipeline.py 19                 # Special Instruction pipeline
 python scripts/run_literary_echoes.py 53             # Standalone 4-pass literary echoes (default: regenerate)
 python scripts/run_copy_editor.py 36 37 38           # Standalone copy editor

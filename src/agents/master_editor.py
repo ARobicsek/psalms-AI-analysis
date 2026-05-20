@@ -614,28 +614,146 @@ class MasterEditor(MasterEditorV2):
         insights_file: Optional[Path] = None,
         psalm_number: Optional[int] = None,
         reader_questions_file: Optional[Path] = None,
-        suppress_questions: bool = False
+        suppress_questions: bool = False,
+        synthesis_discovery_file: Optional[Path] = None,
     ) -> Dict[str, str]:
-        """Override V2 to add suppress_questions parameter.
+        """Override V2 to add suppress_questions + synthesis_discovery_file.
 
         When suppress_questions=True, all question sections are stripped from
         the Writer prompt (saving output tokens) and no questions are returned.
+
+        When synthesis_discovery_file is provided and exists, its contents are
+        spliced into the writer prompt as a new INPUT block labelled
+        "CROSS-VERSE OBSERVATIONS". The writer is instructed to use them where
+        they fit but NOT to structure commentary around them — they are
+        additional input, not overriding instruction. See Session 347 brief.
         """
         self._suppress_questions = suppress_questions
-        result = super().write_commentary(
-            macro_file=macro_file,
-            micro_file=micro_file,
-            research_file=research_file,
-            insights_file=insights_file,
-            psalm_number=psalm_number,
-            reader_questions_file=reader_questions_file
-        )
-        self._suppress_questions = False
+        self._cross_verse_observations = None
+        if synthesis_discovery_file is not None:
+            sdf = Path(synthesis_discovery_file)
+            if sdf.exists():
+                content = sdf.read_text(encoding="utf-8").strip()
+                if content:
+                    self._cross_verse_observations = content
+                    self.logger.info(
+                        f"Cross-verse observations loaded from {sdf} "
+                        f"({len(content):,} chars)"
+                    )
+                else:
+                    self.logger.warning(
+                        f"Cross-verse observations file is empty: {sdf} — "
+                        "writer will run without observations"
+                    )
+            else:
+                self.logger.warning(
+                    f"Cross-verse observations file not found: {sdf} — "
+                    "writer will run without observations"
+                )
+
+        try:
+            result = super().write_commentary(
+                macro_file=macro_file,
+                micro_file=micro_file,
+                research_file=research_file,
+                insights_file=insights_file,
+                psalm_number=psalm_number,
+                reader_questions_file=reader_questions_file,
+            )
+        finally:
+            self._suppress_questions = False
+            self._cross_verse_observations = None
 
         if suppress_questions:
             result.pop('reader_questions', None)
 
         return result
+
+    def discover_cross_verse_observations(
+        self,
+        macro_file: Path,
+        micro_file: Path,
+        research_file: Path,
+        psalm_number: int,
+        output_path: Path,
+        skip_if_exists: bool = True,
+        model: str = "claude-opus-4-7",
+    ) -> Path:
+        """Run the SynthesisDiscoveryAgent and save observations to disk.
+
+        Reuses the same input-loading code paths as write_commentary so the
+        discovery pass reasons over byte-identical evidence to what the writer
+        will see. Returns the path to the saved observations file.
+
+        The output file path is:
+            output_path / f"psalm_{psalm_number:03d}_synthesis_discovery.md"
+
+        When skip_if_exists is True and the file already exists with content,
+        this returns immediately without calling the API.
+        """
+        from src.agents.synthesis_discovery import SynthesisDiscoveryAgent
+
+        output_path = Path(output_path)
+        output_path.mkdir(parents=True, exist_ok=True)
+        discovery_file = output_path / f"psalm_{psalm_number:03d}_synthesis_discovery.md"
+
+        if skip_if_exists and discovery_file.exists() and discovery_file.stat().st_size > 200:
+            self.logger.info(
+                f"[SYNTHESIS DISCOVERY] reusing existing file ({discovery_file.name}) — skipping API call"
+            )
+            return discovery_file
+
+        # Load inputs the same way write_commentary does, so the discovery pass
+        # sees the same dossier the writer will see.
+        macro_analysis = self._load_json_file(Path(macro_file))
+        micro_analysis = self._load_json_file(Path(micro_file))
+        research_bundle_raw = self._load_text_file(Path(research_file))
+        research_bundle, _, _ = self.research_trimmer.trim_bundle(
+            research_bundle_raw, max_chars=350000
+        )
+        psalm_text = self._get_psalm_text(psalm_number, micro_analysis)
+        phonetic_section = self._format_phonetic_section(micro_analysis)
+        macro_text = self._format_analysis_for_prompt(macro_analysis, "macro")
+        micro_text = self._format_analysis_for_prompt(micro_analysis, "micro")
+
+        try:
+            from src.agents.rag_manager import RAGManager
+            rag_manager = RAGManager("docs")
+            analytical_framework = rag_manager.load_analytical_framework()
+        except Exception as e:
+            self.logger.warning(f"Could not load analytical framework: {e}")
+            analytical_framework = "[Analytical framework not available]"
+
+        agent = SynthesisDiscoveryAgent(
+            cost_tracker=self.cost_tracker,
+            model=model,
+            logger=self.logger,
+        )
+        result = agent.discover(
+            psalm_number=psalm_number,
+            psalm_text=psalm_text,
+            macro_analysis_text=macro_text,
+            micro_analysis_text=micro_text,
+            research_bundle=research_bundle,
+            phonetic_section=phonetic_section,
+            analytical_framework=analytical_framework,
+            debug_dir=Path("output/debug"),
+        )
+
+        observations_md = result["observations_markdown"]
+        if not observations_md or len(observations_md) < 100:
+            raise RuntimeError(
+                f"Synthesis discovery returned no observations for Psalm {psalm_number} "
+                f"(response was {len(observations_md)} chars). Aborting rather than "
+                "writing an empty sidecar file."
+            )
+
+        discovery_file.write_text(observations_md, encoding="utf-8")
+        self.logger.info(
+            f"[SYNTHESIS DISCOVERY] saved {len(observations_md):,} chars to {discovery_file.name} "
+            f"(in={result['input_tokens']:,} out={result['output_tokens']:,} tokens)"
+        )
+        return discovery_file
 
     def _get_psalm_text(self, psalm_number: int, micro_analysis: Dict) -> str:
         """Override V2 method to use database lookup for Hebrew/English text.
@@ -727,6 +845,41 @@ class MasterEditor(MasterEditorV2):
             analytical_framework=analytical_framework,
             reader_questions=reader_questions
         )
+
+        # Splice cross-verse observations (Session 347 synthesis-discovery sidecar)
+        # as a new INPUT block right before ANALYTICAL FRAMEWORK. Only fires when
+        # write_commentary received synthesis_discovery_file pointing at content.
+        # Default path (flag off / file missing) leaves the prompt byte-identical.
+        cross_verse = getattr(self, '_cross_verse_observations', None)
+        if cross_verse:
+            anchor = "### ANALYTICAL FRAMEWORK (poetic conventions reference)"
+            if anchor not in prompt:
+                self.logger.warning(
+                    "Could not find ANALYTICAL FRAMEWORK anchor in writer prompt — "
+                    "skipping cross-verse observations splice"
+                )
+            else:
+                observations_block = (
+                    "### CROSS-VERSE OBSERVATIONS "
+                    "(use where they fit; do NOT structure your commentary around them)\n"
+                    "These are cross-verse patterns surfaced by a dedicated discovery "
+                    "pass over this same dossier. They are ADDITIONAL INPUT, not "
+                    "overriding instruction. The writer retains full authorial "
+                    "discretion: weave in what serves the prose, demote what does "
+                    "not, and let your own reading of the psalm govern the structure. "
+                    "Each observation has already been evidence-honesty-calibrated; "
+                    "keep its phrasing strength as you find it (e.g., do not promote "
+                    "\"echoes\" to \"verbatim,\" or \"consonantal play\" to \"the same "
+                    "word\"). Phrase coverage, RULE 7b (no false profundity), RULE 8 "
+                    "(no manufactured significance), and the dinner-party register "
+                    "all still apply with full force.\n\n"
+                    f"{cross_verse}\n\n"
+                )
+                prompt = prompt.replace(anchor, observations_block + anchor)
+                self.logger.info(
+                    f"Spliced cross-verse observations block ({len(cross_verse):,} chars) "
+                    "into writer prompt before ANALYTICAL FRAMEWORK"
+                )
 
         # Strip all question-related sections when no questions are provided
         if reader_questions == "[No reader questions provided]" or not reader_questions.strip():

@@ -298,6 +298,7 @@ def run_enhanced_pipeline(
     insight_model: str = "gpt-5.4",
     question_model: str = "gpt-5.4",
     copy_model: str = "gpt-5.4",
+    synthesis_discovery: bool = False,
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -722,6 +723,36 @@ def run_enhanced_pipeline(
 
         master_editor = MasterEditor(main_model=master_editor_model, cost_tracker=cost_tracker)
 
+        # STEP 3.5 (optional, Session 347): Cross-verse synthesis discovery sidecar.
+        # Produces a calibrated observation list that gets spliced into the writer
+        # prompt as additional input. Default OFF: only fires when --synthesis-discovery
+        # is set. Skips itself if the output file already exists (resume-safe).
+        synthesis_discovery_file = None
+        if synthesis_discovery:
+            logger.info("\n[STEP 3.5] Cross-Verse Synthesis Discovery (experimental sidecar)")
+            print(f"\n{'='*80}")
+            print(f"STEP 3.5: Cross-Verse Synthesis Discovery (Session 347 experimental)")
+            print(f"{'='*80}\n")
+            try:
+                synthesis_discovery_file = master_editor.discover_cross_verse_observations(
+                    macro_file=macro_file,
+                    micro_file=micro_file,
+                    research_file=research_file,
+                    psalm_number=psalm_number,
+                    output_path=output_path,
+                    skip_if_exists=True,
+                    model=master_editor_model if "claude" in master_editor_model.lower() else "claude-opus-4-7",
+                )
+                tracker.track_model_for_step("synthesis_discovery", "claude-opus-4-7")
+                print(f"  Observations: {synthesis_discovery_file}\n")
+            except Exception as e:
+                halt_on_quota(e, "STEP 3.5: Synthesis Discovery", logger, cost_tracker, output_path, psalm_number)
+                logger.error(
+                    f"Synthesis discovery failed (FATAL — flag was explicitly set): {e}",
+                    exc_info=True,
+                )
+                sys.exit(1)
+
         try:
             result = master_editor.write_commentary(
                 macro_file=macro_file,
@@ -730,7 +761,8 @@ def run_enhanced_pipeline(
                 insights_file=None if exclude_insights else (insights_file if insights_file.exists() else None),
                 psalm_number=psalm_number,
                 reader_questions_file=None if (exclude_questions or skip_questions) else (reader_questions_file if reader_questions_file.exists() else None),
-                suppress_questions=(exclude_questions or skip_questions)
+                suppress_questions=(exclude_questions or skip_questions),
+                synthesis_discovery_file=synthesis_discovery_file,
             )
             
             # Save outputs
@@ -1074,6 +1106,11 @@ if __name__ == "__main__":
                        help="Disable the default GPT-5.1 false-positive filter")
     parser.add_argument("--tooluse-verify", action="store_true",
                        help="Also run Haiku tool-use citation verifier for broader coverage (~$0.04/psalm)")
+    parser.add_argument("--synthesis-discovery", action="store_true",
+                       help="(Session 347 EXPERIMENTAL) Run a cross-verse synthesis discovery pass "
+                            "before the Master Writer and feed its observations into the writer prompt "
+                            "as additional input. Sidecar; does NOT structure the commentary. "
+                            "Output: output/psalm_NNN/psalm_NNN_synthesis_discovery.md")
 
     args = parser.parse_args()
 
@@ -1146,4 +1183,5 @@ if __name__ == "__main__":
         insight_model=insight_mdl,
         question_model=question_mdl,
         copy_model=copy_mdl,
+        synthesis_discovery=args.synthesis_discovery,
     )

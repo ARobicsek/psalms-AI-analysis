@@ -9,6 +9,90 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 347 (2026-05-20): Synthesis-Discovery Sidecar — Production Wiring + Ps 55 Validation
+
+**Objective**: Execute the design proposed in `NEXT_SESSION_BRIEF.md` — replace the Session-346 two-call SPINE architecture with a sidecar synthesis-DISCOVERY pass that feeds cross-verse observations into the production one-call writer as additional input (not overriding instruction), behind a flag, with no impact on the default writer path. Validate end-to-end on Ps 55 (full chain: discovery → writer → print-ready → citation verifier → copy editor → DOCX) into a sidecar directory so the shipped Ps 55 baseline stays untouched.
+
+**Problems Identified**:
+
+1. **Two failed earlier attempts at "more synthesis."** The retired `InsightExtractor` was *extractive*: it could only filter what was already in the research bundle, which structurally cannot construct cross-verse claims like the ק-ר-ב dual-lexeme reading (that claim isn't *in* the bundle — it emerges only when you read multiple verses together). The Session-346 two-call experiment was *generative* but over-engineered the prose: forcing anchored arcs into specific verses raised the over-claim surface area (32 copy-editor changes on scaled-with-guardrail vs. 20 on cap-3/4). The lesson from the 3-way blind eval was that the *insights themselves* carried; the spine wasn't actually needed to land them in the prose.
+
+2. **The Session-346 evidence-honesty filter was incomplete.** It caught the failure modes I named (no "homophony" overclaim, no "signature root" Babel, no invented Exod 10:3 prooftext) but missed an entire population the writer found: counting errors ("eight movements" / "ten"), strained etymology (חלל "stab through" the covenant), non-sequitur synthesis ("prayer begins where evil cannot follow"), fabricated parallels (Ps 88:16 "אֵמֵי מָוֶת" — phrase doesn't exist), non-uniqueness claims (Exod 13:22 "the only" comparable formula — Jer 17:8 and Josh 1:8 are cousins). Calibration needs to be enumerable failure modes *plus* a meta-rule that demands self-audit beyond the named modes.
+
+3. **Production must not regress while we experiment.** The shipped one-call writer was one evaluator's favourite in the 3-way blind eval; the Session-346 RULE 7b / RULE 8 carve-out / phrase-coverage changes need broader validation before they're disturbed. So the discovery sidecar must go behind a flag, the writer prompt must be byte-identical on the default path, and the sidecar's output must be a separate inspectable file the user can review before committing to a fresh writer call.
+
+**Solutions Implemented**:
+
+### Part 1 — New agent: `src/agents/synthesis_discovery.py`
+
+Single-purpose generative cross-verse discovery agent (Opus 4.7, max effort, adaptive thinking, 64K max_tokens, streaming with retry/resume on transient drops — same config family as the writer for evidence parity). Reuses the Session-346 `SYNTHESIS_TASK` prompt structure but with two deliberate changes per the brief:
+
+- **DROPPED**: anchor-verse assignments and "how to signal at other verses" fields. Those existed only because the two-call spine architecture needed them; here the writer decides where things land.
+- **KEPT**: tiered survivors (governing + core + additional), per-verse Hebrew evidence, novelty check.
+- **HARDENED** the evidence-honesty filter to 9 named failure modes (a–i) plus a meta-rule (j) — exactly the regression set from the Session-346 Ps 55 scaled-with-guardrail copy-edit log:
+  - (a) homophony vs. consonantal overlap; (b) echo vs. verbatim; (c) primary lexical meaning is what survives (named חלל "stab through" explicitly); (d) no invented or stretched prooftexts (every claimed parallel must be a literal contiguous quotation); (e) uniqueness claims require checking ("the only place" is almost always wrong — name 3-5 cousins as default); (f) count before you cite a number; (g) non-sequitur synthesis (named "prayer begins where evil cannot follow" explicitly); (h) no "signature root" / etymology claims unless certain; (i) match assertion strength to evidence.
+  - (j) META-RULE: "Can I name two failure modes from (a)–(i) that I did NOT already check on this particular observation? If yes, check them. If you can't generate two more failure modes you haven't already audited, you haven't checked enough."
+
+Output format: machine-extractable block bracketed by `---CROSS-VERSE-OBSERVATIONS-START---` / `---CROSS-VERSE-OBSERVATIONS-END---`. Agent's `discover()` method returns dict with `observations_markdown` (the parsed block), `full_response`, and exact token counts. Cost tracker registers as `claude-opus-4-7` automatically. Debug prompt and response saved to `output/debug/synthesis_discovery_{prompt,response}_psalm_NNN.txt` for inspection.
+
+### Part 2 — Master Editor extension (no default-path regression)
+
+Modified `src/agents/master_editor.py`:
+
+- `write_commentary(synthesis_discovery_file: Optional[Path] = None)` — new optional kwarg. When provided and the file exists with content, the file's text is stored on `self._cross_verse_observations` for the prompt assembly step.
+
+- `_perform_writer_synthesis()` — after rendering the standard writer prompt, if `self._cross_verse_observations` is non-empty, splice a new INPUT block ("**CROSS-VERSE OBSERVATIONS** *(use where they fit; do NOT structure your commentary around them)*") into the prompt at a stable anchor (`### ANALYTICAL FRAMEWORK`). The splice header explicitly tells the writer: keep phrasing strength as-is, RULE 7b / RULE 8 / phrase coverage / dinner-party register all still apply. Default path (file is None or empty): the prompt is byte-identical to production. Verified: on the Ps 55 sidecar run the log reports "Spliced cross-verse observations block (16,258 chars) into writer prompt before ANALYTICAL FRAMEWORK."
+
+- New `discover_cross_verse_observations(macro_file, micro_file, research_file, psalm_number, output_path, skip_if_exists=True)` — orchestrator method that loads the inputs (same code paths as `write_commentary` so the discovery pass sees byte-identical evidence to the writer), runs `SynthesisDiscoveryAgent`, validates the response is non-trivial (≥100 chars), writes to `output/psalm_NNN/psalm_NNN_synthesis_discovery.md`, and returns the path. `skip_if_exists=True` makes the call resume-safe.
+
+### Part 3 — Pipeline runner: `--synthesis-discovery` flag
+
+Modified `scripts/run_enhanced_pipeline.py`:
+
+- New CLI flag `--synthesis-discovery` (default OFF, marked experimental).
+- New STEP 3.5 between STEP 2 (micro) and STEP 4 (writer): when the flag is set, calls `master_editor.discover_cross_verse_observations()` and passes the returned path into `master_editor.write_commentary(synthesis_discovery_file=...)`. Quota guard wraps the call. Fatal on failure (the flag was explicitly set, so silent fallthrough would defeat the purpose). Cost tracked through the existing `cost_tracker`; tracker registers `synthesis_discovery: claude-opus-4-7` in the pipeline summary.
+
+### Part 4 — End-to-end Ps 55 validation in a sidecar directory
+
+Ran the full pipeline (discovery → writer → print-ready → citation verifier → copy editor → DOCX) on Ps 55, into `output/psalm_55/EXPERIMENT_synthesis_discovery/`, with `--resume --synthesis-discovery --skip-lit-echoes --output-dir output/psalm_55/EXPERIMENT_synthesis_discovery`. Macro / micro / research_v2.md copied into the sidecar so resume mode skipped the upstream steps cleanly. Shipped Ps 55 baseline untouched.
+
+**Discovery results**: 14 calibrated observations (1 governing + 9 core + 4 additional, 16,258 chars). The governing observation is the ק-ר-ב dual-lexeme reading: "the psalm of betrayal is silently structured by a question its surface never names: what does proximity mean when a friend's nearness is itself the wound?" Discovery cost: $1.83 (153,781 in / 42,604 out at Opus 4.7).
+
+**Writer pass with spliced observations**: 32-minute Opus 4.7 max-effort call (173,743 in / 91,466 out). Cost: $3.16. Output picked up the observations naturally — all three brief-mandated insights landed in the final copy-edited prose:
+- **ק-ר-ב dual-lexeme**: front-and-center in the intro essay ("The consonants ק-ר-ב appear six times in Psalm 55 — more times than in any comparable Davidic psalm — and they do quiet, devastating double duty"), with full migration narrative through all 6 occurrences (vv. 5, 11, 12, 16, 19, 22) developed across the verse commentary.
+- **Exod 13:22 לֹא־יָמִישׁ inversion**: at v. 11 *and* v. 12, calibrated as "Its most famous biblical use is Exod 13:22" — no "the only" overclaim.
+- **שׁלם v.19↔v.21 contestation**: at v. 19 ("Two verses, two appearances of שׁלם, contested ownership") *and* v. 21 ("owned by divine rescue on one side and human violation on the other"). Same calibrated framing the discovery shipped.
+
+The B/A-shared v.4↔v.23 מוט reversal also lands in the intro. The prose feels organic rather than spine-organized — the writer wove the observations in where they fit, exactly the brief's intent.
+
+**Copy editor count: 23 changes** — between two-call A's 32 (scaled+guardrail) and C's 20 (cap-3/4). Two `[CITATION FIX]` items in the changes: Ps 88:16 invented phrase corrected to actual singular אֵימֶיךָ; Jer 23:18 phrase corrected to actual contiguous מִי עָמַד בְּסוֹד ה׳. The hardened evidence-honesty filter prevented the failure modes it was designed for (no homophony overclaim survived discovery, no Babel/פלג signature-root claim, no invented Exodus prooftexts) — but the writer freshly introduced new overreaches (בלע/בלל "same consonants" — wrong; חצה "near-cognate" of פלג — wrong; ק-ר-ב "more than any comparable Davidic psalm" — unverified). These are writer-side errors, not seeded by the discovery output, and they confirm the filter's failure-mode coverage is sound for what it can control.
+
+**Total cost: $5.80** (sidecar exact, from `psalm_055_cost.json`). Apples-to-apples increment over the bare writer chain: ~$2/psalm — essentially the discovery call cost. Cost compared to May-14 shipped Ps 55 baseline ($7.16, which included macro/micro/lit-echoes that this run cached): sidecar's incremental cost is similar magnitude to running lit-echoes once.
+
+### Part 5 — Production-default invariant verified
+
+The Session-346 rule changes (RULE 7b, RULE 8 carve-out, phrase-coverage proportionality) are untouched. With the flag OFF the writer prompt remains byte-identical to what shipped May 14. Independent of the discovery sidecar, the production path continues working exactly as it did at the end of Session 346.
+
+**Files Modified**:
+
+- `src/agents/synthesis_discovery.py` — **NEW** (435 lines). The discovery agent with hardened evidence-honesty filter and meta-rule.
+- `src/agents/master_editor.py` — added `synthesis_discovery_file` kwarg to `write_commentary()`; new `discover_cross_verse_observations()` method; splice logic in `_perform_writer_synthesis()` (no-op on default path).
+- `scripts/run_enhanced_pipeline.py` — new `--synthesis-discovery` flag; new STEP 3.5 between micro and writer; flag plumbed through `run_enhanced_pipeline()` signature.
+- `docs/session_tracking/CLAUDE.md` — session header bumped to 347; new entry at top of Recent Work; Session 341 removed (kept rolling 5); new `--synthesis-discovery` quick command.
+- `docs/session_tracking/scriptReferences.md` — added `synthesis_discovery.py` entry under Analysis Agents; updated `run_enhanced_pipeline.py` to mention the new flag.
+
+**Artifacts for inspection / comparison**:
+
+- `output/psalm_55/EXPERIMENT_synthesis_discovery/psalm_055_synthesis_discovery.md` — the 14 calibrated observations.
+- `output/psalm_55/EXPERIMENT_synthesis_discovery/psalm_055_commentary.docx` — the final guide, comparable to `output/psalm_55/THREE_WAY_COMPARISON/psalm55_guide_{A,B,C}.docx`.
+- `output/psalm_55/EXPERIMENT_synthesis_discovery/psalm_055_copy_edit_changes.md` — the 23 copy-editor changes (regression test set for any future filter tightening).
+- `output/psalm_55/EXPERIMENT_synthesis_discovery/psalm_055_cost.json` — exact cost breakdown.
+- Shipped `output/psalm_55/psalm_055_commentary.docx` and `THREE_WAY_COMPARISON/` untouched.
+
+**Pending for next session**: run the flag on 2–3 more psalms (the brief suggested a short one like Ps 117/134, plus a long one like Ps 18 or 22) to confirm scaling at both ends before considering the flag as a production default.
+
+---
+
 ## Session 346 (2026-05-19): RULE 7b / Phrase-Coverage Proportionality + Two-Call Synthesis Experiment
 
 **Objective**: Investigate two Ps 54 passages the user flagged as "trivial points dressed in stilted language," diagnose where the prompt went astray, fix it, then go further and test whether a dedicated cross-verse synthesis architecture would systematically address the missing-synthesis pattern.
