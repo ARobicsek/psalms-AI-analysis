@@ -1848,6 +1848,9 @@ Methodological & Bibliographical Summary
                 if 'question_curator' in model_usage:
                     summary_text += f"\n**Question Generator**: {model_usage.get('question_curator', 'N/A')}"
 
+                if 'synthesis_discovery' in model_usage:
+                    summary_text += f"\n**Cross-Verse Synthesis Discovery**: {model_usage.get('synthesis_discovery', 'N/A')}"
+
                 if 'synthesis' in model_usage:
                     summary_text += f"\n**Commentary Synthesis**: {model_usage.get('synthesis', 'N/A')}"
                     summary_text += f"\n**Editorial Review**: {model_usage.get('master_editor', 'N/A')}"

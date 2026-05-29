@@ -104,14 +104,40 @@ class MasterEditorSI(MasterEditor):
         psalm_number: Optional[int] = None,
         reader_questions_file: Optional[Path] = None,
         special_instruction: str = None,
-        suppress_questions: bool = False
+        suppress_questions: bool = False,
+        synthesis_discovery_file: Optional[Path] = None,
     ) -> Dict[str, str]:
         """
         Generate unified commentary WITH Special Instruction.
         Overrides MasterEditor.write_commentary.
+
+        When synthesis_discovery_file is provided and exists, its contents are
+        spliced into the writer prompt as a CROSS-VERSE OBSERVATIONS input
+        block (same mechanism as MasterEditor — see Session 347).
         """
         self._suppress_questions = suppress_questions
         self.special_instruction = special_instruction
+        self._cross_verse_observations = None
+        if synthesis_discovery_file is not None:
+            sdf = Path(synthesis_discovery_file)
+            if sdf.exists():
+                content = sdf.read_text(encoding="utf-8").strip()
+                if content:
+                    self._cross_verse_observations = content
+                    self.logger.info(
+                        f"Cross-verse observations loaded from {sdf} "
+                        f"({len(content):,} chars)"
+                    )
+                else:
+                    self.logger.warning(
+                        f"Cross-verse observations file is empty: {sdf} — "
+                        "writer will run without observations"
+                    )
+            else:
+                self.logger.warning(
+                    f"Cross-verse observations file not found: {sdf} — "
+                    "writer will run without observations"
+                )
         self.logger.info("Starting Master Writer commentary generation (SI V4 Edition)")
 
         if special_instruction:
@@ -213,6 +239,39 @@ class MasterEditorSI(MasterEditor):
             reader_questions=reader_questions,
             special_instruction=self.special_instruction or "[No special instruction provided]"
         )
+
+        # Splice cross-verse observations (Session 347 synthesis-discovery sidecar)
+        # Mirrors the splice in MasterEditor._perform_writer_synthesis.
+        cross_verse = getattr(self, '_cross_verse_observations', None)
+        if cross_verse:
+            anchor = "### ANALYTICAL FRAMEWORK (poetic conventions reference)"
+            if anchor not in prompt:
+                self.logger.warning(
+                    "Could not find ANALYTICAL FRAMEWORK anchor in SI writer prompt — "
+                    "skipping cross-verse observations splice"
+                )
+            else:
+                observations_block = (
+                    "### CROSS-VERSE OBSERVATIONS "
+                    "(use where they fit; do NOT structure your commentary around them)\n"
+                    "These are cross-verse patterns surfaced by a dedicated discovery "
+                    "pass over this same dossier. They are ADDITIONAL INPUT, not "
+                    "overriding instruction. The writer retains full authorial "
+                    "discretion: weave in what serves the prose, demote what does "
+                    "not, and let your own reading of the psalm govern the structure. "
+                    "Each observation has already been evidence-honesty-calibrated; "
+                    "keep its phrasing strength as you find it (e.g., do not promote "
+                    "\"echoes\" to \"verbatim,\" or \"consonantal play\" to \"the same "
+                    "word\"). Phrase coverage, RULE 7b (no false profundity), RULE 8 "
+                    "(no manufactured significance), and the dinner-party register "
+                    "all still apply with full force.\n\n"
+                    f"{cross_verse}\n\n"
+                )
+                prompt = prompt.replace(anchor, observations_block + anchor)
+                self.logger.info(
+                    f"Spliced cross-verse observations block ({len(cross_verse):,} chars) "
+                    "into SI writer prompt before ANALYTICAL FRAMEWORK"
+                )
 
         # Save prompt for debugging
         prompt_file = Path(f"output/debug/{debug_prefix}_prompt_psalm_{psalm_number}.txt")

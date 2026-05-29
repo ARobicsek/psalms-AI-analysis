@@ -33,10 +33,10 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 ## Quick Commands
 
 ```bash
-python scripts/run_enhanced_pipeline.py 23                       # Process single psalm
-python scripts/run_enhanced_pipeline.py 23 --resume               # Resume from last step
-python scripts/run_enhanced_pipeline.py 23 --synthesis-discovery  # +Cross-verse synthesis sidecar (Session 347, ~+$2)
-python scripts/run_si_pipeline.py 19                 # Special Instruction pipeline
+python scripts/run_enhanced_pipeline.py 23                             # Process single psalm (synthesis-discovery sidecar ON by default, ~+$2)
+python scripts/run_enhanced_pipeline.py 23 --resume                     # Resume from last step
+python scripts/run_enhanced_pipeline.py 23 --skip-synthesis-discovery   # Disable the Session-347 cross-verse synthesis sidecar
+python scripts/run_si_pipeline.py 19                 # Special Instruction pipeline (synthesis-discovery sidecar ON by default)
 python scripts/run_literary_echoes.py 53             # Standalone 4-pass literary echoes (default: regenerate)
 python scripts/run_copy_editor.py 36 37 38           # Standalone copy editor
 python scripts/run_scripture_verifier.py 41          # Standalone citation verifier

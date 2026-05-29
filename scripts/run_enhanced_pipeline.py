@@ -287,7 +287,7 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "claude-opus-4-7",
+    master_editor_model: str = "claude-opus-4-8",
     skip_insights: bool = True,      # Session 280: skipped by default, use --include-insights
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
     exclude_insights: bool = False,
@@ -298,7 +298,7 @@ def run_enhanced_pipeline(
     insight_model: str = "gpt-5.4",
     question_model: str = "gpt-5.4",
     copy_model: str = "gpt-5.4",
-    synthesis_discovery: bool = False,
+    synthesis_discovery: bool = True,
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -339,6 +339,7 @@ def run_enhanced_pipeline(
     research_trimmer = ResearchTrimmer(logger=logger)
     output_path.mkdir(parents=True, exist_ok=True)
     lit_echoes_cost = 0.0  # Populated by STEP 1b; printed in the final tally
+    synthesis_discovery_cost = 0.0  # Populated by STEP 3.5; printed in the final tally
 
     # File paths
     macro_file = output_path / f"psalm_{psalm_number:03d}_macro.json"
@@ -723,16 +724,19 @@ def run_enhanced_pipeline(
 
         master_editor = MasterEditor(main_model=master_editor_model, cost_tracker=cost_tracker)
 
-        # STEP 3.5 (optional, Session 347): Cross-verse synthesis discovery sidecar.
+        # STEP 3.5 (Session 347): Cross-verse synthesis discovery sidecar.
         # Produces a calibrated observation list that gets spliced into the writer
-        # prompt as additional input. Default OFF: only fires when --synthesis-discovery
-        # is set. Skips itself if the output file already exists (resume-safe).
+        # prompt as additional input. Runs by default; skipped with
+        # --skip-synthesis-discovery. ALWAYS overwrites any prior observations
+        # file so each pipeline run gets fresh cross-verse analysis.
         synthesis_discovery_file = None
         if synthesis_discovery:
-            logger.info("\n[STEP 3.5] Cross-Verse Synthesis Discovery (experimental sidecar)")
+            logger.info("\n[STEP 3.5] Cross-Verse Synthesis Discovery (sidecar)")
             print(f"\n{'='*80}")
-            print(f"STEP 3.5: Cross-Verse Synthesis Discovery (Session 347 experimental)")
+            print(f"STEP 3.5: Cross-Verse Synthesis Discovery (Session 347)")
             print(f"{'='*80}\n")
+            sd_model = master_editor_model if "claude" in master_editor_model.lower() else "claude-opus-4-8"
+            sd_cost_before = cost_tracker.get_total_cost()
             try:
                 synthesis_discovery_file = master_editor.discover_cross_verse_observations(
                     macro_file=macro_file,
@@ -740,18 +744,25 @@ def run_enhanced_pipeline(
                     research_file=research_file,
                     psalm_number=psalm_number,
                     output_path=output_path,
-                    skip_if_exists=True,
-                    model=master_editor_model if "claude" in master_editor_model.lower() else "claude-opus-4-7",
+                    skip_if_exists=False,  # Force overwrite on every run
+                    model=sd_model,
                 )
-                tracker.track_model_for_step("synthesis_discovery", "claude-opus-4-7")
-                print(f"  Observations: {synthesis_discovery_file}\n")
+                synthesis_discovery_cost = cost_tracker.get_total_cost() - sd_cost_before
+                tracker.track_model_for_step("synthesis_discovery", sd_model)
+                logger.info(
+                    f"[STEP 3.5] Synthesis discovery complete — ${synthesis_discovery_cost:.4f}"
+                )
+                print(f"  Observations: {synthesis_discovery_file}")
+                print(f"  Cost: ${synthesis_discovery_cost:.4f}\n")
             except Exception as e:
                 halt_on_quota(e, "STEP 3.5: Synthesis Discovery", logger, cost_tracker, output_path, psalm_number)
                 logger.error(
-                    f"Synthesis discovery failed (FATAL — flag was explicitly set): {e}",
+                    f"Synthesis discovery failed: {e}",
                     exc_info=True,
                 )
                 sys.exit(1)
+        else:
+            logger.info("[STEP 3.5] Skipping Cross-Verse Synthesis Discovery (--skip-synthesis-discovery)")
 
         try:
             result = master_editor.write_commentary(
@@ -1050,6 +1061,10 @@ def run_enhanced_pipeline(
         print(f"Literary Echoes subtotal (Passes 1-4): ${lit_echoes_cost:.4f}")
         print("  (already included in the grand total above — shown separately "
               "because pass costs are lumped with other uses of gemini-3.1-pro-preview / gpt-5.4)\n")
+    if synthesis_discovery_cost > 0:
+        print(f"Synthesis Discovery subtotal: ${synthesis_discovery_cost:.4f}")
+        print("  (already included in the grand total above — shown separately "
+              "because its model is shared with the Master Writer)\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Enhanced Pipeline (Master Writer V4)")
@@ -1071,9 +1086,9 @@ if __name__ == "__main__":
     parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)  # Deprecated V4: no combined doc
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
-    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-7",
-                       choices=["claude-opus-4-7", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: claude-opus-4-7)")
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-8",
+                       choices=["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
+                       help="Model for Master Writer (default: claude-opus-4-8)")
     # Session 280: questions and insights are SKIPPED by default.
     # --include-* flags opt back in; --skip-* flags remain for backward compat.
     parser.add_argument("--skip-insights", action="store_true",
@@ -1106,11 +1121,11 @@ if __name__ == "__main__":
                        help="Disable the default GPT-5.1 false-positive filter")
     parser.add_argument("--tooluse-verify", action="store_true",
                        help="Also run Haiku tool-use citation verifier for broader coverage (~$0.04/psalm)")
-    parser.add_argument("--synthesis-discovery", action="store_true",
-                       help="(Session 347 EXPERIMENTAL) Run a cross-verse synthesis discovery pass "
-                            "before the Master Writer and feed its observations into the writer prompt "
-                            "as additional input. Sidecar; does NOT structure the commentary. "
-                            "Output: output/psalm_NNN/psalm_NNN_synthesis_discovery.md")
+    parser.add_argument("--skip-synthesis-discovery", action="store_true",
+                       help="Skip the cross-verse synthesis discovery sidecar (Session 347). "
+                            "Runs by default before the Master Writer; when run it overwrites any "
+                            "prior observations file. Output: output/psalm_NNN/psalm_NNN_synthesis_discovery.md")
+    parser.add_argument("--synthesis-discovery", action="store_true", help=argparse.SUPPRESS)  # legacy no-op (default-on now)
 
     args = parser.parse_args()
 
@@ -1135,6 +1150,7 @@ if __name__ == "__main__":
     print(f"Rate Limit Delay: {args.delay} seconds")
     print(f"Master Writer Model: {args.master_editor_model}")
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
+    print(f"Synthesis Discovery: {'SKIP' if args.skip_synthesis_discovery else 'ON'}")
     print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
     print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
     
@@ -1183,5 +1199,5 @@ if __name__ == "__main__":
         insight_model=insight_mdl,
         question_model=question_mdl,
         copy_model=copy_mdl,
-        synthesis_discovery=args.synthesis_discovery,
+        synthesis_discovery=not args.skip_synthesis_discovery,
     )

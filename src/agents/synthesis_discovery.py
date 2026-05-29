@@ -52,7 +52,7 @@ from src.utils.logger import get_logger
 load_dotenv()
 
 
-DEFAULT_MODEL = "claude-opus-4-7"
+DEFAULT_MODEL = "claude-opus-4-8"
 
 
 # =============================================================================
@@ -419,6 +419,8 @@ class SynthesisDiscoveryAgent:
             }
             if "opus-4-7" in self.model:
                 stream_kwargs["output_config"] = {"effort": "max"}
+            elif "opus-4-8" in self.model:
+                stream_kwargs["output_config"] = {"effort": "high"}
 
             try:
                 with self.client.messages.stream(**stream_kwargs) as stream:

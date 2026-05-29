@@ -677,7 +677,7 @@ class MasterEditor(MasterEditorV2):
         psalm_number: int,
         output_path: Path,
         skip_if_exists: bool = True,
-        model: str = "claude-opus-4-7",
+        model: str = "claude-opus-4-8",
     ) -> Path:
         """Run the SynthesisDiscoveryAgent and save observations to disk.
 

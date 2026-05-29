@@ -261,6 +261,9 @@ class CommentaryFormatter:
                 lines.append(f"**Insights Extraction**: {agent_models.get('insight_extractor')}")
             if agent_models.get('question_curator'):
                 lines.append(f"**Question Generator**: {agent_models.get('question_curator')}")
+            if agent_models.get('synthesis_discovery'):
+                lines.append(f"**Cross-Verse Synthesis Discovery**: {agent_models.get('synthesis_discovery', 'N/A')}")
+
             if agent_models.get('synthesis'):
                 lines.append(f"**Commentary Synthesis**: {agent_models.get('synthesis', 'N/A')}")
                 lines.append(f"**Editorial Review**: {agent_models.get('master_editor', 'N/A')}")

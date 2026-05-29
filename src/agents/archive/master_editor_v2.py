@@ -2245,6 +2245,8 @@ class MasterEditorV2:
             }
             if "opus-4-7" in model_id:
                 stream_kwargs["output_config"] = {"effort": "max"}
+            elif "opus-4-8" in model_id:
+                stream_kwargs["output_config"] = {"effort": "high"}
 
             with self.anthropic_client.messages.stream(**stream_kwargs) as stream:
                 for event in stream:

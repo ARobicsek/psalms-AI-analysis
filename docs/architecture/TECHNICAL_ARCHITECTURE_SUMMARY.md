@@ -133,7 +133,7 @@ Output: Scholarly Commentary (.docx + .md)
 
 #### Master Editor / Unified Writer V4 (Pass 4)
 - **Model Options**:
-  - **Default**: Claude Opus 4.7 (`claude-opus-4-7`) with adaptive thinking
+  - **Default**: Claude Opus 4.8 (`claude-opus-4-8`) with adaptive thinking
   - **Alternative**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking
   - **Alternative**: GPT-5 (`gpt-5`) with high reasoning effort (legacy)
   - **Alternative**: Claude Opus 4.5 (`claude-opus-4-5`) with extended thinking (64K token budget)
@@ -413,7 +413,7 @@ def normalize_hebrew(text: str, level: int) -> str:
 - **`--resume`**: Resume from last completed step (auto-detects based on existing files)
 - **`--smoke-test`**: Generate dummy data without API calls
 - **`--skip-default-commentaries`**: Use selective commentary mode
-- **`--master-editor-model`**: Model to use for master editor (choices: claude-opus-4-7, claude-opus-4-6)
+- **`--master-editor-model`**: Model to use for master editor (choices: claude-opus-4-8, claude-opus-4-7, claude-opus-4-6)
 - **`--master-editor-old`**: Use OLD prompt (V2 is now default)
 - **`--delay SECONDS`**: Rate limit delay between API-heavy steps (default: 120)
 
@@ -629,7 +629,8 @@ python scripts/tribal_blessings_analyzer.py --list
 ### Model Selection Strategy
 | Model | Usage | Context |
 |-------|-------|---------|
-| Claude Opus 4.7 (`claude-opus-4-7`) | MasterWriter (default) | 200K tokens, adaptive thinking |
+| Claude Opus 4.8 (`claude-opus-4-8`) | MasterWriter (default) | 200K tokens, adaptive thinking |
+| Claude Opus 4.7 (`claude-opus-4-7`) | MasterWriter (legacy) | 200K tokens, adaptive thinking |
 | Claude Opus 4.6 (`claude-opus-4-6`) | MacroAnalyst, MicroAnalyst | 200K tokens, adaptive thinking |
 | Claude Sonnet 4.5 (`claude-sonnet-4-20250514`) | SynthesisWriter | 200K tokens |
 | Gemini 2.5 Pro (`gemini-2.5-pro`) | SynthesisWriter fallback (large psalms) | 1M tokens |
