@@ -1,11 +1,16 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 347 (2026-05-20)
+**Session**: 348 (2026-05-29)
 **Phase**: Pipeline Production — tweaks and improvements
 
-AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
+AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 348 (2026-05-29)**: Switch Default Master Writer to Opus 4.8
+- Conducted reversible experiment on Psalm 57 to compare Opus 4.8 vs 4.7 with high effort configuration.
+- Permanently updated `master_editor.py`, `synthesis_discovery.py`, and runner scripts to use `claude-opus-4-8` as default.
+- Added Opus 4.8 pricing to `cost_tracker.py` and updated architecture documentation.
+
 **Session 347 (2026-05-20)**: Synthesis-Discovery Sidecar — production wiring + Ps 55 validation
 - Built `src/agents/synthesis_discovery.py` (Opus 4.7, mirrors writer's max-effort config) as a sidecar that feeds cross-verse OBSERVATIONS into the production one-call writer. Replaces the Session-346 two-call SPINE approach per `NEXT_SESSION_BRIEF.md`: the writer keeps full authorial discretion (no anchor verses, no "develop in full" mandate). Hardened the evidence-honesty filter to 9 named failure modes (a–i) plus a meta-rule that demands the model name two more failure modes it didn't already check. Extended `MasterEditor.write_commentary(synthesis_discovery_file=...)` and added `discover_cross_verse_observations()`. New `--synthesis-discovery` flag in `run_enhanced_pipeline.py` runs STEP 3.5 between micro and writer. Default path (flag off) leaves the writer prompt byte-identical to production.
 - Validated on Ps 55 in `output/psalm_55/EXPERIMENT_synthesis_discovery/` (sidecar dir, shipped baseline untouched). Discovery produced 14 calibrated observations (1 governing + 9 core + 4 additional). The three insights the Session-346 brief identified as "must-recover" all landed in the final copy-edited prose: **ק-ר-ב dual-lexeme** as the intro's headline argument with all 6 occurrences traced; **Exod 13:22 לֹא־יָמִישׁ inversion** developed at vv. 11 and 12 (calibrated as "most famous biblical use," not "the only"); **שׁלם v.19↔v.21 contestation** at both verses. Copy editor: **23 changes** — better than two-call A's 32, in the same ballpark as C's 20. New failure modes the copy editor still caught (Ps 88:16 invented phrase, בלע/בלל false consonantal claim, חצה/פלג false cognate) were writer-side, not seeded by the spine — exactly the population the evidence-honesty filter is *not* designed to prevent.
@@ -26,8 +31,7 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Updated `run_enhanced_pipeline.py` and `run_si_pipeline.py` to register the models into the tracker during skip logic, and updated the markdown parser to recover them.
 - Updated `ResearchAssembler` to permanently store the models in the `research_v2.md` bundle. Verified fix via mock resume on Psalm 53.
 
-**Session 342 (2026-04-26)**: API Quota Guard — Fail-Fast on Billing Exhaustion
-- Built `src/utils/api_guard.py`: centralized utility that distinguishes permanent quota/billing errors (OpenAI `insufficient_quota`, Anthropic `credit balance too low`, Google `RESOURCE_EXHAUSTED`) from transient rate limits. Includes `halt_on_quota()` which saves partial costs, prints a clear halt message, plays 3 descending beeps (Windows), and exits with code 2.
+
 - Modified all 7 `except` blocks in both `run_enhanced_pipeline.py` and `run_si_pipeline.py` to call `halt_on_quota()` before falling through to non-fatal handling. Replaced the hand-coded `openai.RateLimitError` catch in Step 4 with the unified utility. Created `scripts/test_api_guard.py` (8 unit tests, all pass).
 
 ## Quick Commands
