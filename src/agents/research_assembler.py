@@ -425,35 +425,7 @@ class ResearchBundle:
 
                 md += "---\n\n"
 
-        # RAG Context section (Phase 2d)
-        if self.rag_context:
-            from .rag_manager import RAGManager
-            rag_mgr = RAGManager()
 
-            md += "## Scholarly Context (RAG Documents)\n\n"
-
-            # Psalm Function/Genre
-            if self.rag_context.psalm_function:
-                pf = self.rag_context.psalm_function
-                md += f"### Psalm {pf['psalm']} Function & Genre\n"
-                md += f"**Genre**: {pf['genre']}  \n\n"
-                md += f"**Structure**:  \n"
-                for line in pf['structure']:
-                    md += f"- {line}  \n"
-                md += f"\n**Keywords**: {', '.join(pf['keywords'])}  \n\n"
-
-            # Ugaritic Parallels
-            if self.rag_context.ugaritic_parallels:
-                md += f"### Ugaritic & Ancient Near Eastern Parallels ({len(self.rag_context.ugaritic_parallels)} found)\n\n"
-                for parallel in self.rag_context.ugaritic_parallels:
-                    heb = parallel.get('hebrew_psalter_source', {})
-                    md += f"**{parallel.get('parallel_type')}** ({heb.get('text_reference')})  \n"
-                    md += f"*Conceptual Analysis*: {parallel.get('conceptual_analysis', '')[:300]}...  \n\n"
-
-            # Analytical framework is passed separately to consuming agents via their
-            # prompt templates (e.g., {analytical_framework} in master_editor.py).
-            # Not embedded in the research bundle to avoid duplication.
-            md += "---\n\n"
 
         # Commentary section
         if self.commentary_bundles:

@@ -290,9 +290,7 @@ class MacroAnalyst:
         # Log prompt stats
         self.logger.info(f"Prompt length: {len(prompt)} characters")
         self.logger.info(f"Psalm verses: {psalm_text.verse_count}")
-        self.logger.info(f"RAG: Genre={rag_context.psalm_function['genre'] if rag_context.psalm_function else 'N/A'}, "
-                        f"Ugaritic={len(rag_context.ugaritic_parallels)} parallels")
-
+        self.logger.info("RAG context fetched.")
         # Step 5: Call Claude Sonnet 4.5 with extended thinking (using streaming for long requests)
         # Retry logic for transient network/API errors
         max_retries = 3

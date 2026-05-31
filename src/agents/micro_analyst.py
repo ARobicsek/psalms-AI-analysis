@@ -492,8 +492,7 @@ class MicroAnalystV2:
 
         # Check RAG/LXX availability
         rag_context = self.rag_manager.get_rag_context(psalm_number)
-        self.logger.info(f"  RAG Genre: {rag_context.psalm_function['genre'] if rag_context.psalm_function else 'N/A'}")
-        self.logger.info(f"  Ugaritic Parallels: {len(rag_context.ugaritic_parallels)}")
+        self.logger.info("  RAG Context loaded.")
         self.logger.info(f"  LXX Available: {'Yes' if rag_context.lxx_text else 'No'}")
         if rag_context.lxx_text:
             lxx_verses = rag_context.lxx_text.count('\n') + 1

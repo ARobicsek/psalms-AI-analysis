@@ -165,8 +165,7 @@ class CommentaryFormatter:
         lines.append(f"- **Phonetic Transcriptions Generated**: {verse_count}") # Assumes one per verse
 
         research_data = stats.get('research', {}) or {}
-        ugaritic_count = len(research_data.get('ugaritic_parallels', []))
-        lines.append(f"- **Ugaritic Parallels Reviewed**: {ugaritic_count}")
+
 
         lexicon_count = research_data.get('lexicon_entries_count', 'N/A')
         lines.append(f"- **Lexicon Entries (BDB/Klein) Reviewed**: {lexicon_count}")

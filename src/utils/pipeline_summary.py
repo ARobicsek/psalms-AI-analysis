@@ -60,8 +60,7 @@ class ResearchStats:
     related_psalms_count: int = 0  # Related psalms from top connections analysis
     related_psalms_list: List[int] = field(default_factory=list)  # List of psalm numbers analyzed
 
-    # Ugaritic parallels
-    ugaritic_parallels: List[Dict[str, str]] = field(default_factory=list)
+
 
     # Research bundle size (total bundle generated in Step 2)
     research_bundle_chars: int = 0
@@ -285,14 +284,7 @@ class PipelineSummaryTracker:
             self.research.related_psalms_count = len(research_bundle.related_psalms)
             self.research.related_psalms_list = [p.psalm_number for p in research_bundle.related_psalms]
 
-        # Ugaritic parallels (from RAG context)
-        if research_bundle.rag_context and research_bundle.rag_context.ugaritic_parallels:
-            for parallel in research_bundle.rag_context.ugaritic_parallels:
-                self.research.ugaritic_parallels.append({
-                    'type': parallel.get('parallel_type', ''),
-                    'reference': parallel.get('hebrew_psalter_source', {}).get('text_reference', ''),
-                    'analysis': parallel.get('conceptual_analysis', '')[:100] + '...'
-                })
+
 
         # Deep Web Research (Gemini Deep Research)
         if hasattr(research_bundle, 'deep_research_content'):
@@ -568,21 +560,7 @@ class PipelineSummaryTracker:
         else:
             lines.append("*No commentary results.*\n")
 
-        # Ugaritic parallels
-        lines.append(f"### Ugaritic & Ancient Near Eastern Parallels\n")
-        if self.research.ugaritic_parallels:
-            lines.append(f"**Total parallels**: {len(self.research.ugaritic_parallels)}\n")
-            lines.append("| Type | Reference | Analysis Preview |")
-            lines.append("|------|-----------|------------------|")
-            for parallel in self.research.ugaritic_parallels:
-                ptype = parallel.get('type', 'N/A')
-                ref = parallel.get('reference', 'N/A')
-                analysis = parallel.get('analysis', '')
-                lines.append(f"| {ptype} | {ref} | {analysis} |")
-        else:
-            lines.append("*No Ugaritic parallels found.*")
 
-        lines.append("\n---\n")
 
         # Section 4: Analysis Questions
         lines.append("## Analysis Questions\n")
@@ -680,7 +658,6 @@ class PipelineSummaryTracker:
                 'sacks_references_count': self.research.sacks_references_count,
                 'related_psalms_count': self.research.related_psalms_count,
                 'related_psalms_list': self.research.related_psalms_list,
-                'ugaritic_parallels': self.research.ugaritic_parallels,
                 'research_bundle_chars': self.research.research_bundle_chars,
                 'research_bundle_tokens': self.research.research_bundle_tokens,
                 'deep_research_available': self.research.deep_research_available,
