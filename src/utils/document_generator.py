@@ -1634,7 +1634,6 @@ class DocumentGenerator:
                 verse_count = 'N/A'
         
         research_data = stats.get('research', {})
-        ugaritic_count = len(research_data.get('ugaritic_parallels', []))
         lexicon_count = research_data.get('lexicon_entries_count', 'N/A')
         
         commentaries = research_data.get('commentary_counts', {})
@@ -1727,7 +1726,6 @@ Methodological & Bibliographical Summary
 **Psalm Verses Analyzed**: {verse_count}
 **LXX (Septuagint) Verses Reviewed**: {verse_count}
 **Phonetic Transcriptions Generated**: {verse_count}
-**Ugaritic Parallels Reviewed**: {ugaritic_count}
 **Lexicon Entries (BDB/Klein) Reviewed**: {lexicon_count}
 **Traditional Commentaries Reviewed**: {total_commentaries}{commentary_details}
 **Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}{concordance_breakdown_str}

@@ -1,11 +1,15 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 348 (2026-05-29)
+**Session**: 349 (2026-05-30)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 349 (2026-05-30)**: Remove JSON Dependencies from Pipeline
+- Removed `psalm_function_for_RAG.json` and `ugaritic.json` data loading from `RAGManager` as they are now superseded by deep research.
+- Removed Ugaritic metrics from DOCX methodological summaries in `document_generator.py` and `combined_document_generator.py`.
+- Cleaned up documentation references in `CONTEXT.md` and `DEVELOPER_GUIDE.md`.
 **Session 348 (2026-05-29)**: Switch Default Master Writer to Opus 4.8
 - Conducted reversible experiment on Psalm 57 to compare Opus 4.8 vs 4.7 with high effort configuration.
 - Permanently updated `master_editor.py`, `synthesis_discovery.py`, and runner scripts to use `claude-opus-4-8` as default.
@@ -26,13 +30,7 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Added RULE 3c (NO LINGUISTICS JARGON — NAME THE PHENOMENON, NOT THE TECHNICAL TERM FOR THE PHENOMENON). The Psalm 53 v2 verse 6 opening — "abrupt deixis ... deictic ruptures function as stage directions in prophetic poetry ... the judgment archetypal scope ... wherever the conditions of vv. 2-5 obtain ... the geography is moral, not Cartesian" — is now in the prompt verbatim as the BLOATED counter-example, with a "cinematic cut into a scene already in progress" rewrite as the CLEAN one. Explicit anti-list: Latinate verbs (obtain→hold, render→make, evince→show), abstract nominalizations (foregrounding of, deployment of), and bare linguistics terms (deixis, anaphora, paratactic, telic, isocolon).
 - Added matching DINNER-PARTY REGISTER / READ-ALOUD TEST item to FINAL VALIDATION CHECKLIST: the test is not "is this defensible scholarship?" but "would I actually say this sentence to a friend over dinner?" Awaiting user verification on a re-run of Psalm 53 with the new prompt.
 
-**Session 343 (2026-05-05)**: Fix Resume-Mode Literary Echoes Model Tracking
-- Fixed a data persistence issue where Literary Echoes models were missing from the Methodological Summary when the pipeline was resumed and Step 1b was skipped.
-- Updated `run_enhanced_pipeline.py` and `run_si_pipeline.py` to register the models into the tracker during skip logic, and updated the markdown parser to recover them.
-- Updated `ResearchAssembler` to permanently store the models in the `research_v2.md` bundle. Verified fix via mock resume on Psalm 53.
 
-
-- Modified all 7 `except` blocks in both `run_enhanced_pipeline.py` and `run_si_pipeline.py` to call `halt_on_quota()` before falling through to non-fatal handling. Replaced the hand-coded `openai.RateLimitError` catch in Step 4 with the unified utility. Created `scripts/test_api_guard.py` (8 unit tests, all pass).
 
 ## Quick Commands
 

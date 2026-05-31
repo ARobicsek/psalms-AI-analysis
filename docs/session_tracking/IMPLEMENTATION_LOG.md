@@ -9,6 +9,31 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 349 (2026-05-30): Remove JSON Dependencies from Pipeline
+
+**Objective**: Remove `psalm_function_for_RAG.json` and `ugaritic.json` dependencies from the pipeline as they are now superseded by deep research.
+
+**Problems Identified**:
+- The pipeline was still parsing and preparing Ugaritic parallels and psalm functions from static JSON databases in `rag_manager.py` to inject into the `RAGContext`.
+- The document generators were displaying statistics for Ugaritic parallels that were no longer relevant to the actual deep research results.
+- Old references to these files existed in the architecture and developer documentation.
+
+**Solutions Implemented**:
+1. Cleaned up `src/agents/rag_manager.py` by removing the loading and parsing logic for the two JSON files, along with formatting code for the prompt context.
+2. Modified `src/utils/document_generator.py` and `src/utils/combined_document_generator.py` to remove the Ugaritic count from the "Research & Data Inputs" methodological summary in generated DOCX output.
+3. Removed mentions of these obsolete RAG components from `docs/architecture/CONTEXT.md` and `docs/guides/DEVELOPER_GUIDE.md`.
+4. Updated session history and tracking in `CLAUDE.md`.
+
+**Files Modified**:
+- `src/agents/rag_manager.py` - Removed JSON loading and processing
+- `src/utils/document_generator.py` - Removed Ugaritic count
+- `src/utils/combined_document_generator.py` - Removed Ugaritic count
+- `docs/architecture/CONTEXT.md` - Cleaned up docs
+- `docs/guides/DEVELOPER_GUIDE.md` - Cleaned up docs
+- `CLAUDE.md` - Updated session log
+
+---
+
 ## Session 347 (2026-05-20): Synthesis-Discovery Sidecar — Production Wiring + Ps 55 Validation
 
 **Objective**: Execute the design proposed in `NEXT_SESSION_BRIEF.md` — replace the Session-346 two-call SPINE architecture with a sidecar synthesis-DISCOVERY pass that feeds cross-verse observations into the production one-call writer as additional input (not overriding instruction), behind a flag, with no impact on the default writer path. Validate end-to-end on Ps 55 (full chain: discovery → writer → print-ready → citation verifier → copy editor → DOCX) into a sidecar directory so the shipped Ps 55 baseline stays untouched.

@@ -21,8 +21,7 @@ This project generates scholarly biblical commentary on the Book of Psalms using
 
 - **AI Agents** (Claude Sonnet 4.5, GPT-5) for analysis and writing
 - **Librarian Agents** (Python scripts) for data retrieval
-- **Research Databases** (Sefaria API, local concordances, figurative language database)
-- **RAG Documents** (genre analysis, Ugaritic parallels, analytical framework)
+- **RAG Documents** (analytical framework)
 
 The result is National Book Award-level commentary suitable for sophisticated lay readers.
 
@@ -42,10 +41,8 @@ src/
 └── output/              # Generated files (not in repo)
 
 docs/                    # RAG documents and documentation
-├── rag/                 # Retrieval-augmented generation data
-│   ├── psalm_function/  # Genre and structural analysis
-│   └── ugaritic/        # Ancient Near Eastern parallels
-└── analytical_framework.md  # Poetic analysis methodology
+└── architecture/        # Architecture documentation
+    └── analytical_framework_for_RAG.md  # Poetic analysis methodology
 
 tests/                   # Unit and integration tests
 database/                # SQLite database files
@@ -278,7 +275,7 @@ SynthesisWriter (AI) analyzes bundle and writes commentary
 
 2. MACRO ANALYST
    ├─ Fetches: Psalm text (Hebrew/English) from TanakhDatabase
-   ├─ Fetches: RAG context (genre, structure, Ugaritic parallels)
+   ├─ Fetches: RAG context (analytical framework)
    └─ Produces: MacroAnalysis
       ├─ thesis_statement
       ├─ structural_outline
@@ -798,10 +795,8 @@ with MacroAnalyst() as analyst:
 
 ### Key Documentation
 
-- `docs/TECHNICAL_ARCHITECTURE_SUMMARY.md` - System architecture overview
-- `docs/rag/analytical_framework.md` - Poetic analysis methodology
-- `docs/rag/psalm_function/` - Genre and structure analysis
-- `docs/rag/ugaritic/` - Ancient Near Eastern parallels
+- `docs/architecture/TECHNICAL_ARCHITECTURE_SUMMARY.md` - System architecture overview
+- `docs/architecture/analytical_framework_for_RAG.md` - Poetic analysis methodology
 
 ### External APIs
 
@@ -837,7 +832,6 @@ The local SQLite database (`database/tanakh.db`) contains:
 - Concordance patterns across Scripture
 - Figurative language comparative analysis
 - Traditional Jewish interpretation
-- Ancient Near Eastern context
 - Modern critical scholarship
 
 **Audience-Aware**: Writing targets sophisticated lay readers (New Yorker/Atlantic level) - scholarly but accessible.
