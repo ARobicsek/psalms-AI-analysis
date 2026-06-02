@@ -9,6 +9,32 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 350 (2026-06-02): Concordance Value-Add — Distinctive-Root Searches
+
+**Objective**: The concordance was suspected of leaving value on the table — searches were lifting verbatim multi-word phrases from each verse, which rarely recur elsewhere in Tanakh.
+
+**Diagnosis** (measured across the last 5 psalms run, 54–58; 50 searches):
+- **62%** returned ONLY the source verse (self-match, zero marginal value), **14%** returned nothing, only **24%** surfaced any external parallel. 3-word queries: **0/12** external.
+- Root causes: (1) the Stage-2 prompt forced the *exact phrase* and **explicitly forbade** single-word searches (`micro_analyst.py`); (2) `_override_llm_base_forms` clobbered any query into the verse phrase and force-added verse forms to *guarantee* a self-match; (3) phrase matching is surface-exact with no morphological expansion (e.g. `פלג לשון` → 0, can't even match its own `פַּלַּג לְשׁוֹנָם`); (4) a latent bug — analyst variants were written to `req.alternates` but the librarian reads `req.alternate_queries`, so they were never searched.
+
+**Solutions (A/B/C, all shipped to production)**:
+1. **A — distinctive-root searches**: rewrote the Stage-2 concordance prompt to trace the single most distinctive root per insight (with a common-word avoid-list); fixed `_override_llm_base_forms` to leave ≤2-word queries untouched; added `_augment_with_root_searches` (deterministic rarest-distinctive-root derivation) + new helper `src/concordance/root_selection.py`. Root traces are independent top-level requests that bypass the alternates bug.
+2. **B — 2-word cap** on collocations (3-word queries had 0% external yield).
+3. **C — honest reporting**: `ConcordanceLibrarian` drops source-psalm self-matches (`self_match_count`/`only_self` on the bundle); `research_assembler.py` reports "external" counts and "appears only in this psalm"; post-search distinctiveness guard drops single words with >`COMMON_CAP`(=60) external matches (bare frequency proved unreliable — Hebrew roots surface as inflections).
+4. **Follow-ups from review**: random (seeded, reproducible) canon-spread sampling of which ≤10 matches are displayed (`_sample_for_display`, replacing the clustered `[:10]`); dropped the English gloss from concordance result lines (Hebrew only, ~47% token saving per line); stopped expanding 2-word collocations to the verse form (was legacy self-match behavior, caused drift).
+
+**Validation** (reusing production Stage-1 discoveries via `scripts/EXPERIMENT_concordance_eval.py`; trace via `scripts/EXPERIMENT_concordance_trace.py`): external-match yield **24% → ~90%** (Ps 54: 4/10→20/22; 55: 1/10→~22/22; 56: 0/10→21/23; 57: 5/10→23/24; 58: 2/10→19/23). Recovered non-obvious intertexts the old pipeline missed: `פלג`→Gen 10-11 (Babel), `נוד`→Gen 4 (Cain/Nod), `מוש`→Exod 13:22 (pillar that did not depart), `נאד`→Ps 119:83 (wineskin in smoke), `חסד אמת`→Exod 34:6 (Thirteen Attributes).
+
+**Token cost**: concordance section grows from ~2.7% of the research bundle to ~15–20% (≈ +8–11K tokens/psalm pre-English-drop; ~half that after). Full bundle still well under the 350K-char writer trim cap, so the whole (larger) concordance reaches both the synthesis-discovery and master-writer calls.
+
+**Methods/DOCX note**: the "Concordance Entries Reviewed" line now lists roots/collocations (e.g. `פלג (10)`) instead of the verse phrase, with honest external counts.
+
+**Deferred to next session (D & E)**: true morphology-aware root + 2-word search via a `lemma`/`root` column on the `concordance` table, populated from the already-built-but-unwired ETCBC/BHSA data. Full design in `docs/architecture/LEMMA_ROOT_SEARCH_PROPOSAL.md`; plan in `docs/session_tracking/NEXT_SESSION_BRIEF.md`.
+
+**Files changed**: `src/agents/micro_analyst.py`, `src/agents/concordance_librarian.py`, `src/agents/research_assembler.py`, `src/concordance/root_selection.py` (new); docs: `LEMMA_ROOT_SEARCH_PROPOSAL.md`, `NEXT_SESSION_BRIEF.md`; harnesses: `scripts/EXPERIMENT_concordance_eval.py`, `scripts/EXPERIMENT_concordance_trace.py`.
+
+---
+
 ## Session 349 (2026-05-30): Remove JSON Dependencies from Pipeline
 
 **Objective**: Remove `psalm_function_for_RAG.json` and `ugaritic.json` dependencies from the pipeline as they are now superseded by deep research.

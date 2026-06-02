@@ -1,11 +1,15 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 349 (2026-05-30)
+**Session**: 350 (2026-06-02)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 350 (2026-06-02)**: Concordance Value-Add — Distinctive-Root Searches
+- Diagnosed that concordance searches were lifting verbatim multi-word phrases from each verse; across Ps 54–58, **62% returned only the source verse (self-match), 14% nothing, only 24% any external parallel** (3-word queries: 0/12). Root cause: the agent was forbidden from searching single distinctive roots, and the override clobbered any root query into the verse phrase.
+- Shipped **A** (trace distinctive single roots — prompt rewrite in `micro_analyst.py`, fixed `_override_llm_base_forms` to leave ≤2-word queries intact, new deterministic `_augment_with_root_searches` + `src/concordance/root_selection.py`), **B** (collocations capped at 2 words), **C** (self-match filtering + honest "external"/"appears only in this psalm" counts in `concordance_librarian.py`/`research_assembler.py`, post-search common-word guard `COMMON_CAP=60`). Also: random (seeded) canon-spread sampling of displayed matches; Hebrew-only result lines (dropped English gloss, ~47% token saving); no verse-form expansion of collocations. Measured yield **24% → ~90%** external (e.g. Ps 56: 0/10 → 21/23), surfacing non-obvious intertexts (`פלג`→Babel Gen 10-11, `נוד`→Cain Gen 4, `מוש`→Exod 13:22 pillar, `חסד אמת`→Exod 34:6).
+- **D & E are the next session** (see `docs/session_tracking/NEXT_SESSION_BRIEF.md` + `docs/architecture/LEMMA_ROOT_SEARCH_PROPOSAL.md`): wire the already-built but unused ETCBC/BHSA lemma data into a `lemma`/`root` column on the `concordance` table for true morphology-aware root + 2-word search. Eval/trace harnesses: `scripts/EXPERIMENT_concordance_eval.py`, `scripts/EXPERIMENT_concordance_trace.py`.
 **Session 349 (2026-05-30)**: Remove JSON Dependencies from Pipeline
 - Removed `psalm_function_for_RAG.json` and `ugaritic.json` data loading from `RAGManager` as they are now superseded by deep research.
 - Removed Ugaritic metrics from DOCX methodological summaries in `document_generator.py` and `combined_document_generator.py`.
@@ -24,13 +28,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Added **RULE 7b (NO FALSE PROFUNDITY)** + **RULE 8 carve-out** + **STAGE 3 phrase-coverage proportionality option** to `MASTER_WRITER_PROMPT_V4` in `src/agents/master_editor.py`. Driven by two passages the user flagged in Ps 54: the מִסְתַּתֵּר reflexive paragraph and the נְדָבָה fortune-cookie chiasmus. Verified clean on a Ps 54 re-run. The Session-345 phrase-coverage rule was over-correcting — coverage now permits option (b): one honest proportionate sentence for a routine phrase. The fixes are live in production.
 - Built and ran a **discardable two-call synthesis experiment** (`scripts/EXPERIMENT_two_call_synthesis.py` + `EXPERIMENT_two_call_finalize.py`) on Ps 54 and Ps 55. The two-call architecture (synthesis-discovery → write-with-spine) surfaced cross-verse insights the one-call misses (ק-ר-ב dual-lexeme reading; Exod 13:22 לֹא־יָמִישׁ inversion; שׁלם v.19↔v.21 contestation), but raised copy-editor correction load (32 vs 20 on scaled vs cap-3/4) and the evidence-honesty guardrail caught the specific failure modes I named, not the ones I didn't (חלל "stab through," counting errors, "prayer outcovers evil" non-sequiturs). Three blind external evaluations (Gemini ×2, Claude Opus 4.7) split 3-way — including one hallucinated "fatal" Hebrew error from Gemini that doesn't exist (BiDi rendering failure).
 - **`docs/session_tracking/NEXT_SESSION_BRIEF.md`** has the Session-347 design proposal: rebuild the synthesis pass as a *discovery tool* feeding the production one-call writer (sidecar, behind a flag), not as a *structural spine*. Three DOCXs preserved in `output/psalm_55/THREE_WAY_COMPARISON/` (mapping sealed). All Session 346 prod rule changes verified stable.
-
-**Session 345 (2026-05-13)**: Verse-Coverage + Anti-Jargon Rules in Master Writer Prompt
-- Added "Phrase coverage (CRITICAL — read this twice)" bullet to STAGE 3 of `MASTER_WRITER_PROMPT_V4` in `src/agents/master_editor.py`, requiring every distinct phrase/clause in each verse to receive either a substantive analytical sentence or a brief inline deferral pointer to where it lands later. Driven by Psalm 53 v2 verse 2 fully developing the נָבָל / בְּלִבּוֹ / אֵין אֱלֹקִים first half while letting הִשְׁחִיתוּ / וְהִתְעִיבוּ / עָוֶל / אֵין עֹשֵׂה־טוֹב evaporate into a single grammatical aside. Matching FINAL VALIDATION CHECKLIST item added.
-- Added RULE 3c (NO LINGUISTICS JARGON — NAME THE PHENOMENON, NOT THE TECHNICAL TERM FOR THE PHENOMENON). The Psalm 53 v2 verse 6 opening — "abrupt deixis ... deictic ruptures function as stage directions in prophetic poetry ... the judgment archetypal scope ... wherever the conditions of vv. 2-5 obtain ... the geography is moral, not Cartesian" — is now in the prompt verbatim as the BLOATED counter-example, with a "cinematic cut into a scene already in progress" rewrite as the CLEAN one. Explicit anti-list: Latinate verbs (obtain→hold, render→make, evince→show), abstract nominalizations (foregrounding of, deployment of), and bare linguistics terms (deixis, anaphora, paratactic, telic, isocolon).
-- Added matching DINNER-PARTY REGISTER / READ-ALOUD TEST item to FINAL VALIDATION CHECKLIST: the test is not "is this defensible scholarship?" but "would I actually say this sentence to a friend over dinner?" Awaiting user verification on a re-run of Psalm 53 with the new prompt.
-
-
 
 ## Quick Commands
 

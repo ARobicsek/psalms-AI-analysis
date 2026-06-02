@@ -77,10 +77,18 @@ class ConcordanceRequest:
 
 @dataclass
 class ConcordanceBundle:
-    """Bundle of concordance search results."""
+    """Bundle of concordance search results.
+
+    Session 350: `results` holds EXTERNAL matches only (the source psalm's own
+    verses are excluded when `source_psalm` is set on the request), so callers
+    see an honest count of genuine parallels rather than a self-match masquerading
+    as "1 result". `self_match_count` and `only_self` preserve the dropped info.
+    """
     results: List[SearchResult]
     variations_searched: List[str]  # All variations that were searched
     request: ConcordanceRequest
+    self_match_count: int = 0  # how many results fell in the source psalm (dropped from `results`)
+    only_self: bool = False    # True if the source verse(s) were the ONLY thing found
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -101,6 +109,8 @@ class ConcordanceBundle:
                 for r in self.results
             ],
             'total_results': len(self.results),
+            'self_match_count': self.self_match_count,
+            'only_self': self.only_self,
             'variations_searched': self.variations_searched,
             'request': {
                 'query': self.request.query,
@@ -856,15 +866,59 @@ class ConcordanceLibrarian:
                     f"Final validation filtered results to ensure all words are present"
                 )
 
+        # SELF-MATCH FILTERING (Session 350, change C)
+        # A search lifted from a verse will always match that verse. Reporting the
+        # source verse as a "result" gives the writer a phantom parallel and inflates
+        # the apparent yield. When we know which psalm the query came from, drop its
+        # own verses from `results` and record what we dropped.
+        self_match_count = 0
+        only_self = False
+        if request.source_psalm is not None:
+            external = []
+            for r in all_results:
+                if r.book == 'Psalms' and r.chapter == request.source_psalm:
+                    self_match_count += 1
+                else:
+                    external.append(r)
+            only_self = (len(external) == 0 and self_match_count > 0)
+            all_results = external
+
         # Log final results
         if self.logger:
-            self.logger.info(f"Search completed: {total_variations} queries, {len(all_results)} total unique results")
+            self.logger.info(
+                f"Search completed: {total_variations} queries, {len(all_results)} external results"
+                f" ({self_match_count} self-matches dropped)"
+            )
 
         return ConcordanceBundle(
             results=all_results,
             variations_searched=variations_searched,
-            request=request
+            request=request,
+            self_match_count=self_match_count,
+            only_self=only_self
         )
+
+    def tanakh_frequency(self, word: str) -> int:
+        """
+        Count occurrences of a single consonantal word across the whole Tanakh.
+
+        Used to gauge how *distinctive* a candidate root is when deciding whether it
+        is worth tracing on its own (see src/concordance/root_selection.py). Cached
+        per librarian instance since the same root often recurs across insights.
+        """
+        if not hasattr(self, '_freq_cache'):
+            self._freq_cache = {}
+        if word in self._freq_cache:
+            return self._freq_cache[word]
+        try:
+            results = self.search.search_word(
+                word=word, level='consonantal', scope='Tanakh', use_split=True
+            )
+            freq = len(results)
+        except Exception:
+            freq = 0
+        self._freq_cache[word] = freq
+        return freq
 
     def _book_in_scope(self, book: str, scope: str) -> bool:
         """

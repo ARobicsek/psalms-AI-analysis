@@ -25,6 +25,7 @@ from typing import List, Dict, Optional, Any
 from dataclasses import dataclass, field
 import json
 import random
+import hashlib
 
 # Handle imports for both module and script usage
 if __name__ == '__main__':
@@ -68,6 +69,47 @@ def _truncate_bdb_entry(text: str, max_chars: int = 500) -> str:
     if break_point > max_chars * 0.5:  # Only use natural break if it's past halfway
         truncated = text[:break_point + 1]
     return truncated.rstrip() + "\n[...]"
+
+
+# Session 350: how many concordance matches to render per search in the bundle.
+MAX_DISPLAY_RESULTS = 10
+
+_CANON_ORDER_CACHE: Dict[str, int] = {}
+
+
+def _canon_order() -> Dict[str, int]:
+    """Map each book name -> its canonical (Torah, Prophets, Writings) position. Cached."""
+    if not _CANON_ORDER_CACHE:
+        try:
+            from ..data_sources.tanakh_database import TANAKH_BOOKS
+        except ImportError:
+            from src.data_sources.tanakh_database import TANAKH_BOOKS
+        i = 0
+        for section in ('Torah', 'Prophets', 'Writings'):
+            for entry in TANAKH_BOOKS.get(section, []):
+                _CANON_ORDER_CACHE[entry[0]] = i
+                i += 1
+    return _CANON_ORDER_CACHE
+
+
+def _sample_for_display(results: list, n: int, seed_str: str) -> list:
+    """
+    Pick up to `n` concordance matches to render, spread across Tanakh.
+
+    The librarian returns matches in a deterministic, non-representative order (by
+    surface-variation, then alphabetical book name), so a naive `[:n]` slice clusters
+    and over-represents whatever sorts first. Instead we take a RANDOM sample (seeded by
+    the query, so a given search is reproducible across runs) and then sort it into
+    canonical book order for readability. The full count is reported separately, so this
+    only affects which examples are shown, not the tally.
+    """
+    if len(results) <= n:
+        chosen = list(results)
+    else:
+        rng = random.Random(int(hashlib.md5(seed_str.encode('utf-8')).hexdigest(), 16))
+        chosen = rng.sample(results, n)
+    order = _canon_order()
+    return sorted(chosen, key=lambda r: (order.get(r.book, 999), r.chapter, r.verse))
 
 
 @dataclass
@@ -248,7 +290,11 @@ class ResearchBundle:
                     primary_bundle = next((b for b in bundles if b.request.is_primary_search), bundles[0])
                     total_results = sum(len(b.results) for b in bundles)
 
-                    md += f"### {primary_bundle.request.insight_notes or primary_bundle.request.query} ({total_results} results, {primary_bundle.request.scope}, {primary_bundle.request.level})\n"
+                    # Session 350: `results` are external-only (source-psalm self-matches dropped).
+                    if total_results == 0 and any(getattr(b, 'only_self', False) for b in bundles):
+                        md += f"### {primary_bundle.request.insight_notes or primary_bundle.request.query} (0 external parallels — appears only in this psalm, {primary_bundle.request.scope}, {primary_bundle.request.level})\n"
+                    else:
+                        md += f"### {primary_bundle.request.insight_notes or primary_bundle.request.query} ({total_results} external results, {primary_bundle.request.scope}, {primary_bundle.request.level})\n"
 
                     # Collect all variants from alternate_queries
                     all_variants = set()
@@ -276,12 +322,15 @@ class ResearchBundle:
                             seen_refs.add(result.reference)
 
                     if unique_results:
-                        for result in unique_results[:10]:
+                        shown = _sample_for_display(unique_results, MAX_DISPLAY_RESULTS, primary_bundle.request.query)
+                        for result in shown:
                             matched = result.matched_phrase if result.is_phrase_match else f"{result.matched_word} (pos {result.word_position})"
-                            md += f"**{result.reference}** | {result.hebrew_text} | {result.english_text} | *{matched}*\n\n"
+                            # Session 350: Hebrew only (no English gloss) — the writer/synthesis
+                            # models read Hebrew; the gloss was ~47% of each line's token cost.
+                            md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*\n\n"
 
-                        if len(unique_results) > 10:
-                            md += f"*...and {len(unique_results) - 10} more results*\n\n"
+                        if len(unique_results) > len(shown):
+                            md += f"*...and {len(unique_results) - len(shown)} more results (random spread shown)*\n\n"
 
                     md += "---\n\n"
                     search_num += 1
@@ -289,15 +338,23 @@ class ResearchBundle:
             # Display ungrouped searches (legacy format)
             if ungrouped_bundles:
                 for i, bundle in enumerate(ungrouped_bundles, search_num):
-                    md += f"### {bundle.request.query} ({len(bundle.results)} results, {bundle.request.scope}, {bundle.request.level})\n\n"
+                    # Session 350: `results` are external-only (source-psalm self-matches dropped),
+                    # so the header reports genuine parallels, not a self-match counted as "1 result".
+                    ext = len(bundle.results)
+                    if ext == 0 and getattr(bundle, 'only_self', False):
+                        md += f"### {bundle.request.query} (0 external parallels — appears only in this psalm, {bundle.request.scope}, {bundle.request.level})\n\n"
+                    else:
+                        md += f"### {bundle.request.query} ({ext} external results, {bundle.request.scope}, {bundle.request.level})\n\n"
 
                     if bundle.results:
-                        for result in bundle.results[:10]:
+                        shown = _sample_for_display(bundle.results, MAX_DISPLAY_RESULTS, bundle.request.query)
+                        for result in shown:
                             matched = result.matched_phrase if result.is_phrase_match else f"{result.matched_word} (pos {result.word_position})"
-                            md += f"**{result.reference}** | {result.hebrew_text} | {result.english_text} | *{matched}*\n\n"
+                            # Session 350: Hebrew only (no English gloss) — see grouped path above.
+                            md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*\n\n"
 
-                        if len(bundle.results) > 10:
-                            md += f"*...and {len(bundle.results) - 10} more results*\n\n"
+                        if len(bundle.results) > len(shown):
+                            md += f"*...and {len(bundle.results) - len(shown)} more results (random spread shown)*\n\n"
 
                     md += "---\n\n"
 
@@ -804,6 +861,24 @@ class ResearchAssembler:
                 )
                 enhanced_requests.append(enhanced_request)
             concordance_bundles = self.concordance_librarian.search_multiple(enhanced_requests)
+
+            # Session 350: distinctiveness guard on ACTUAL yield. A single-word query that
+            # returns a flood of external matches (e.g. שכן→142, שחת→107) is a common root
+            # already known to any reader and only adds noise to the writer's input — the
+            # concordance's value is in distinctive words. Bare-form frequency is an unreliable
+            # predictor (Hebrew roots surface mostly as inflections), so we gate here, after the
+            # search, on the real external count. Multi-word collocations are exempt.
+            from ..concordance.hebrew_text_processor import split_words as _split_words_g
+            COMMON_CAP = 60
+            kept_bundles = []
+            for b in concordance_bundles:
+                if len(_split_words_g(b.request.query)) <= 1 and len(b.results) > COMMON_CAP:
+                    if self.logger:
+                        self.logger.info(f"  [Session 350] Dropped over-common single-word search "
+                                         f"'{b.request.query}' ({len(b.results)} external matches)")
+                    continue
+                kept_bundles.append(b)
+            concordance_bundles = kept_bundles
 
         # Fetch figurative language instances
         figurative_bundles = []

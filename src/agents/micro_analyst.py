@@ -225,19 +225,30 @@ GENERATE RESEARCH REQUESTS:
    - Examples of GOOD requests: rare verbs, divine epithets, unusual compounds, technical cultic terms, words used in surprising ways
    - Examples of BAD requests: יוֹם, לֵב, יָד, עַיִן, פֶּה, דֶּרֶךְ, בָּשָׂר (unless used in truly puzzling context)
 
-2. **CONCORDANCE SEARCHES** - Patterns to trace across Scripture
-   - **For each lexical insight**: Copy the **EXACT PHRASE** from the micro analyst's discovery
-     - Use the **exact phrase** as the primary query (without niqqudot/vowels) but otherwise the same,letter-for-letter
-     - **Limit to phrase length: 3 words or fewer**
-     - Add any **variants** as alternate queries (these are morphological forms only)
-   - **SEARCH LEVEL**: "consonantal" (finds all forms of a root pattern)
+2. **CONCORDANCE SEARCHES** - Trace DISTINCTIVE ROOTS/LEXEMES across Scripture
+   The concordance earns its keep ONLY when it surfaces a connection that is (a) not
+   obvious to a well-read reader, and (b) not already covered by the single-word BDB/Klein
+   lookup — i.e. WHERE ELSE a distinctive word/root occurs and in what company. A long
+   exact phrase lifted from the verse almost never recurs anywhere else, so it returns
+   only the verse it came from (zero added value). Therefore:
+   - **PRIMARY — for most insights, trace the single most DISTINCTIVE word/root on its own**
+     (1-word query, consonantal). Choose the rare, striking, or theologically loaded word
+     whose OTHER occurrences would illuminate this verse.
+     - e.g. for "אַרְחִיק נְדֹד" trace **נדד** (→ Cain's נוד, Gen 4:16); for "פַּלַּג לְשׁוֹנָם"
+       trace **פלג** (→ Babel / division of tongues, Gen 10-11).
+     - **NEVER trace a COMMON word alone.** Avoid-list: יום, איש, ארץ, שמים, לב, יד, עין, פה,
+       דרך, אדם, בן, עם, דבר, plus particles and the divine names (יהוה, אלהים, אדני). If an
+       insight contains only common words, use a 2-word collocation instead (below).
+   - **SECONDARY — only when the word-PAIRING itself is the point: a 2-word collocation**
+     (consonantal, **MAXIMUM 2 words**) — a fixed idiom or a striking juxtaposition whose
+     co-occurrence elsewhere would be meaningful. Do NOT exceed 2 words: 3+ word phrases do
+     not recur and waste the search.
+   - **SEARCH LEVEL**: "consonantal" (matches across inflections of a form)
      - Only use "exact" for homographs (same consonants, different vocalization)
      - Only use "voweled" when vocalization is critical
-   - **IMPORTANT RESTRICTIONS**:
-     - NEVER search single-word variants of multi-word phrases (e.g., if phrase is "דבר בלב", don't search just "דבר")
-     - Variants are ONLY morphological forms (suffixes, plurals), NOT synonyms
-     - **Limit to phrase length: 3 words or fewer**
-   - **LIMIT**: 5-15 strategic searches total
+   - **alternates**: morphological forms of the SAME word/phrase only (suffixes, plurals,
+     tense/binyan forms), NOT synonyms. Include an empty array [] if none.
+   - **LIMIT**: 8-15 strategic searches total (favor distinctive single roots)
 
 3. **FIGURATIVE LANGUAGE** - Search the figurative language database for relevant metaphors
 
@@ -347,9 +358,9 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     {{"word": "בְּנֵי אֵלִים", "reason": "Divine council puzzle - etymology and comparative ANE usage"}}
   ],
   "concordance_searches": [
-    {{"query": "ליהוה הישועה", "level": "consonantal", "purpose": "Track 'voice of LORD' formula usage patterns", "alternates": ["תשועה ליהוה", "ישועה מיהוה", "ישועת יהוה"]}},
-    {{"query": "מרים ראש", "level": "consonantal", "purpose": "Divine council references across Hebrew Bible", "alternates": ["רום ראש", "ירים ראשי"]}},
-    {{"query": "unique phrase", "level": "consonantal", "purpose": "Example with no obvious alternates", "alternates": []}}
+    {{"query": "נדד", "level": "consonantal", "purpose": "PRIMARY root trace: wander/flee root from 'arḥiq nedod' — Cain's נוד (Gen 4:16), exile motif", "alternates": ["נוד", "מנוד"]}},
+    {{"query": "פלג", "level": "consonantal", "purpose": "PRIMARY root trace: split/divide root from 'pallag leshonam' — Babel, division of tongues (Gen 10-11)", "alternates": []}},
+    {{"query": "חסד אמת", "level": "consonantal", "purpose": "SECONDARY collocation (2 words): fixed covenant word-pair, the juxtaposition itself is meaningful", "alternates": []}}
   ],
   "figurative_checks": [
     {{"verse": 3, "reason": "Tree metaphor for righteous person planted by water", "vehicle": "tree", "vehicle_synonyms": ["tree", "plant", "planted", "leaf", "fruit", "root", "stream", "water", "flourish", "grow", "wither", "tree planted", "bears fruit", "by streams"], "broader_terms": ["vegetation", "agriculture", "growth", "nature"], "priority_ranking": {{"tree planted by streams": 1, "tree planted": 1, "planted": 2, "tree": 2, "plant": 3, "leaf": 3, "fruit": 3}}},
@@ -826,6 +837,10 @@ class MicroAnalystV2:
                     # Try to extract directly from verse text
                     research_request = self._override_llm_base_forms(research_request, {}, {}, psalm_number)
 
+                # Session 350 (changes A + B): cap collocations at 2 words and add
+                # deterministic distinctive-root traces derived from the lexical insights.
+                research_request = self._augment_with_root_searches(research_request, psalm_number, discoveries)
+
                 self.logger.info(f"  ✓ Research requests generated")
                 return research_request
 
@@ -1265,6 +1280,83 @@ class MicroAnalystV2:
 
         return results
 
+    def _augment_with_root_searches(self, research_request: ResearchRequest, psalm_number: int, discoveries: dict):
+        """
+        Session 350 (changes A + B): make the concordance trace DISTINCTIVE ROOTS, not just
+        verbatim multi-word collocations.
+
+        - (B) Cap every existing collocation query at 2 words, keeping the 2 rarest words.
+        - (A) For each lexical insight, deterministically derive the single most distinctive
+          content word (rarest in Tanakh within a sensible frequency window) and add it as a
+          standalone 1-word concordance search. These bypass the exact-phrase override, get
+          the librarian's full prefix/suffix variation treatment, and are the searches most
+          likely to surface non-obvious intertexts (e.g. נדד→Gen 4:16, פלג→Gen 10-11).
+
+        Roots are deduplicated against each other and against existing queries, and the total
+        number of added root traces is capped to keep search volume sane.
+        """
+        from ..concordance.root_selection import select_distinctive_roots, to_consonantal
+        from ..concordance.hebrew_text_processor import split_words as _split_words
+        from .concordance_librarian import ConcordanceRequest as _ConcordanceRequest
+
+        librarian = self.research_assembler.concordance_librarian
+        freq_fn = librarian.tanakh_frequency
+
+        # --- (B) cap existing collocation queries at 2 words ---
+        for req in research_request.concordance_requests:
+            words = _split_words(req.query)
+            if len(words) > 2:
+                ranked = sorted(words, key=lambda w: freq_fn(to_consonantal(w)))
+                keep = set(ranked[:2])
+                new_words = [w for w in words if w in keep][:2]
+                if new_words:
+                    old_q = req.query
+                    req.query = ' '.join(new_words)
+                    req.notes = (req.notes or '') + f" [CAPPED to 2 words from '{old_q}']"
+                    if self.logger:
+                        self.logger.info(f"    [Session 350] Capped collocation '{old_q}' -> '{req.query}'")
+
+        # consonantal forms already being searched (avoid duplicate root traces)
+        existing = {to_consonantal(req.query) for req in research_request.concordance_requests}
+
+        # --- (A) derive one distinctive root per lexical insight ---
+        derived = []  # (root, freq, source_phrase)
+        seen_roots = set()
+        for vd in discoveries.get('verse_discoveries', []):
+            for insight in vd.get('lexical_insights', []):
+                if isinstance(insight, str):
+                    phrase, variants = insight, []
+                else:
+                    phrase = insight.get('phrase', '')
+                    variants = insight.get('variants', []) or []
+                if not phrase:
+                    continue
+                for root, freq in select_distinctive_roots(phrase, variants, freq_fn, top_n=1):
+                    if root in seen_roots or root in existing:
+                        continue
+                    seen_roots.add(root)
+                    derived.append((root, freq, phrase))
+
+        derived.sort(key=lambda t: t[1])  # rarest (most distinctive) first
+        MAX_ROOT_SEARCHES = 12
+        added = 0
+        for root, freq, phrase in derived[:MAX_ROOT_SEARCHES]:
+            research_request.concordance_requests.append(_ConcordanceRequest(
+                query=root,
+                scope='auto',
+                level='consonantal',
+                include_variations=True,
+                notes=f"[root trace; Tanakh freq {freq}] distinctive root of '{phrase}'",
+                source_psalm=psalm_number,
+            ))
+            added += 1
+        if self.logger:
+            self.logger.info(f"  [Session 350] Added {added} distinctive-root searches "
+                             f"(from {len(derived)} candidates, cap {MAX_ROOT_SEARCHES})")
+        # Note: over-common single words are gated AFTER searching (on real external yield)
+        # in ResearchAssembler.assemble — bare-form frequency is an unreliable predictor.
+        return research_request
+
     def _override_llm_base_forms(self, research_request: ResearchRequest, exact_phrases: Dict[str, str], variants_mapping: Dict[str, List[str]], psalm_number: int):
         """
         Override LLM base forms with exact phrases from discoveries.
@@ -1283,8 +1375,17 @@ class MicroAnalystV2:
         variants_added = 0
 
         # Fix concordance requests
+        from ..concordance.hebrew_text_processor import split_words as _split_words_ov
         for req in research_request.concordance_requests:
             original_query = req.query
+            # Session 350: leave SHORT queries (1-word root traces AND 2-word
+            # collocations) untouched. The exact-phrase override below was built to force
+            # a query to its full verse form so the SOURCE verse would self-match \u2014 now
+            # obsolete, since change C drops self-matches. Applied to a deliberate root or
+            # 2-word pick it only causes drift (e.g. "\u05E4\u05DC\u05D2"\u2192"\u05E4\u05DC\u05D2 \u05DC\u05E9\u05D5\u05E0\u05DD", or the analyst's
+            # 2-word "\u05D9\u05E8\u05D3\u05D5 \u05E9\u05D0\u05D5\u05DC" expanded to 3 words then re-cut to a different pair).
+            if len(_split_words_ov(original_query)) <= 2:
+                continue
             # Normalize for matching
             normalized = re.sub(r'[^\u05D0-\u05EA]', '', original_query)
             normalized = re.sub(r'[\u0591-\u05C7]', '', normalized)
@@ -1343,6 +1444,9 @@ class MicroAnalystV2:
             if psalm:
                 for req in research_request.concordance_requests:
                     original_query = req.query
+                    # Session 350: never rewrite a 1-word root trace or a 2-word collocation.
+                    if len(_split_words_ov(original_query)) <= 2:
+                        continue
                     if "[FIXED: Using exact phrase]" in req.notes:
                         continue  # Skip if already fixed
 
@@ -1371,9 +1475,11 @@ class MicroAnalystV2:
         if psalm:
             phrase_forms_added = 0
             for req in research_request.concordance_requests:
-                # Only process phrases (2+ words)
+                # Session 350: only expand 3+ word phrases (rare). 1-word root traces and
+                # 2-word collocations are searched as chosen — no verse-form expansion,
+                # since self-matches are dropped downstream and expansion only drifts.
                 query_words = split_words(req.query)
-                if len(query_words) < 2:
+                if len(query_words) <= 2:
                     continue
 
                 # Find the verse this phrase came from
