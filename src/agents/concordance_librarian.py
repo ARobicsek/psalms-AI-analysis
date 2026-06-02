@@ -654,8 +654,43 @@ class ConcordanceLibrarian:
             if self.logger:
                 self.logger.info(f"Added Psalms to scope to ensure source psalm {request.source_psalm} is included")
 
+        # === Session 351: morphology-aware retrieval via the BHSA `lemma` column ===
+        # Single-word root traces and <=2-word collocations (the whole Session-350
+        # search population) match on lemma when it resolves: exact, indexed, and
+        # tolerant of prefixes/suffixes/conjugation/word order — no string explosion,
+        # no is_root_match false positives. We fall back to the legacy surface path
+        # only when a lemma cannot be resolved (rare/foreign spellings, cache misses).
+        lemma_mode = None        # None | 'single' | 'colloc'
+        colloc_lemmas = None
+        if request.level == 'consonantal':
+            if not is_phrase:
+                sl = self.search._resolve_lemma(original_query)
+                if sl:
+                    lemma_mode = 'single'
+                    # Also trace analyst-supplied sibling roots (single-word alternates)
+                    # as their own lemmas, e.g. נדד + נוד.
+                    queries = [sl]
+                    for alt in (request.alternate_queries or []):
+                        if len(split_words(alt)) == 1:
+                            al = self.search._resolve_lemma(alt)
+                            if al and al not in queries:
+                                queries.append(al)
+            elif len(words) == 2:
+                ls = [self.search._resolve_lemma(w) for w in words]
+                if all(ls):
+                    lemma_mode = 'colloc'
+                    # rarest lemma first → fewest candidate verses to scan
+                    colloc_lemmas = sorted(dict.fromkeys(ls), key=self.lemma_frequency)
+                    queries = [original_query]
+
+        if lemma_mode:
+            if self.logger:
+                self.logger.info(
+                    f"Lemma search ({lemma_mode}) for '{original_query}': "
+                    f"{colloc_lemmas if lemma_mode == 'colloc' else queries}"
+                )
         # CRITICAL FIX: Only generate variations for single words, NOT phrases
-        if request.include_variations:
+        elif request.include_variations:
             if is_phrase:
                 # For phrases, only search the exact phrase (no variations)
                 queries = [original_query]
@@ -669,8 +704,9 @@ class ConcordanceLibrarian:
         else:
             queries = [original_query]
 
-        # Add alternate queries
-        if request.alternate_queries:
+        # Add alternate queries (legacy surface path only; the lemma path already
+        # folded single-word alternates in above as sibling-lemma traces)
+        if request.alternate_queries and not lemma_mode:
             # CRITICAL FIX: Limit number of alternates to prevent explosion
             max_alternates = 10  # Reasonable limit
             if len(request.alternate_queries) > max_alternates:
@@ -720,7 +756,17 @@ class ConcordanceLibrarian:
             if self.logger and (i == 1 or i % 500 == 0 or i == total_variations):
                 self.logger.info(f"Searching variation {i}/{total_variations}: '{query[:30]}{'...' if len(query) > 30 else ''}'")
 
-            if is_phrase:
+            if lemma_mode == 'colloc':
+                # `query` is the original phrase; retrieval is by the resolved lemmas
+                results = self.search.search_lemmas_in_verse(
+                    colloc_lemmas, scope=initial_scope, limit=request.max_results
+                )
+            elif lemma_mode == 'single':
+                # `query` is an already-resolved lemma
+                results = self.search.search_lemma(
+                    query, scope=initial_scope, limit=request.max_results
+                )
+            elif is_phrase:
                 # Phrase search - try strict matching first
                 results = self.search.search_phrase(
                     phrase=query,
@@ -819,8 +865,10 @@ class ConcordanceLibrarian:
                 self.logger.info(f"Scope filtering resulted in {len(all_results)} results")
 
         # FALLBACK: If strict phrase matching found nothing, try "same verse" search
-        # This finds verses where all words appear (any order, not necessarily adjacent)
-        if not all_results and is_phrase:
+        # This finds verses where all words appear (any order, not necessarily adjacent).
+        # Skipped under lemma_mode: the lemma collocation search is already the broad,
+        # morphology-aware "all lemmas in verse" search.
+        if not all_results and is_phrase and not lemma_mode:
             if self.logger:
                 self.logger.info(f"Strict phrase matching failed for '{original_query}', trying 'same verse' search")
             fallback_results = self.search.search_phrase_in_verse(
@@ -837,8 +885,10 @@ class ConcordanceLibrarian:
                     all_results.append(result)
 
         # CRITICAL FIX: Final validation to ensure all phrase results contain ALL words
-        # This is a safety net to prevent partial matches from getting through
-        if is_phrase and all_results:
+        # This is a safety net to prevent partial matches from getting through.
+        # Skipped under lemma_mode: validation compares *surface* words and would wrongly
+        # discard genuine lemma matches (e.g. חסד אמת ↔ חסדו ואמתו).
+        if is_phrase and all_results and not lemma_mode:
             # Get normalized words from original query
             original_words = split_words(original_query)
             if request.level == 'consonantal':
@@ -918,6 +968,34 @@ class ConcordanceLibrarian:
         except Exception:
             freq = 0
         self._freq_cache[word] = freq
+        return freq
+
+    def lemma_frequency(self, word: str) -> int:
+        """
+        Count Tanakh occurrences of a word's *lemma* (Session 351).
+
+        This is the true distinctiveness signal the surface-frequency heuristic only
+        approximated: it counts all inflected/affixed forms of the lexeme as one. Used
+        by root selection (src/concordance/root_selection.py) to pick the rarest root
+        worth tracing. Falls back to surface frequency when no lemma resolves. Cached.
+        """
+        if not hasattr(self, '_lemfreq_cache'):
+            self._lemfreq_cache = {}
+        if word in self._lemfreq_cache:
+            return self._lemfreq_cache[word]
+        lemma = self.search._resolve_lemma(word)
+        if not lemma:
+            freq = self.tanakh_frequency(word)
+        else:
+            try:
+                cur = self.db.conn.cursor()
+                row = cur.execute(
+                    "SELECT COUNT(*) FROM concordance WHERE lemma = ?", (lemma,)
+                ).fetchone()
+                freq = row[0] if row else 0
+            except Exception:
+                freq = 0
+        self._lemfreq_cache[word] = freq
         return freq
 
     def _book_in_scope(self, book: str, scope: str) -> bool:

@@ -12,9 +12,14 @@ BDB/Klein lookups and an LLM's training data do not already supply.
 This module picks, from a lexical insight (its exact phrase plus the analyst's
 morphological variants), the single most *distinctive* content word worth tracing
 on its own — "distinctive" being operationalised as Tanakh frequency: rare enough
-to be meaningful, common enough to actually recur. It is deliberately conservative
-(no aggressive prefix stripping); smarter lemma/root resolution is a separate,
-larger piece of work (see NEXT_SESSION_BRIEF / the morphology proposal).
+to be meaningful, common enough to actually recur.
+
+Session 351: the caller now passes `librarian.lemma_frequency` as `frequency_fn`, so
+distinctiveness is measured on the BHSA-derived lemma (all inflections counted as one)
+rather than the surface form, and the chosen word is resolved to its lemma at search
+time (see src/concordance/search.py `_resolve_lemma`). The earlier "deliberately
+conservative, no prefix stripping" caveat no longer applies — prefix/suffix stripping
+is now exact via morphology.
 """
 
 import re
@@ -119,11 +124,12 @@ def select_distinctive_roots(
             continue
         if min_freq <= freq <= max_freq:
             scored.append((cand, freq))
-    # Prefer BARE ROOTS over rare inflections. Hebrew triliteral roots are usually 3
-    # letters, while a rare conjugated/suffixed form (e.g. אַרְחִיק, כְּנָפֶיךָ) is longer and
-    # can score a deceptively low surface frequency. So sort by length bucket first
-    # (3-letter forms first), then by frequency (rarest = most distinctive) within bucket.
-    scored.sort(key=lambda t: (len(t[0]), t[1]))
+    # Session 351: rank by TRUE (lemma) frequency — rarest = most distinctive. When
+    # `frequency_fn` is lemma-based (librarian.lemma_frequency), a rare conjugated form
+    # like אַרְחִיק scores its lexeme's real frequency rather than a deceptively low surface
+    # count, so the old "prefer 3-letter forms" length bucket is no longer needed; word
+    # length is kept only as a deterministic tie-break.
+    scored.sort(key=lambda t: (t[1], len(t[0])))
     # dedupe preserving order
     result: List[Tuple[str, int]] = []
     seen = set()

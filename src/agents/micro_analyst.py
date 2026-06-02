@@ -1300,7 +1300,10 @@ class MicroAnalystV2:
         from .concordance_librarian import ConcordanceRequest as _ConcordanceRequest
 
         librarian = self.research_assembler.concordance_librarian
-        freq_fn = librarian.tanakh_frequency
+        # Session 351: rank by TRUE lemma frequency (all inflections counted as one),
+        # not surface frequency. This is the real distinctiveness signal the
+        # "prefer 3-letter forms" heuristic only approximated.
+        freq_fn = librarian.lemma_frequency
 
         # --- (B) cap existing collocation queries at 2 words ---
         for req in research_request.concordance_requests:
@@ -1346,7 +1349,7 @@ class MicroAnalystV2:
                 scope='auto',
                 level='consonantal',
                 include_variations=True,
-                notes=f"[root trace; Tanakh freq {freq}] distinctive root of '{phrase}'",
+                notes=f"[root trace; Tanakh lemma freq {freq}] distinctive root of '{phrase}'",
                 source_psalm=psalm_number,
             ))
             added += 1

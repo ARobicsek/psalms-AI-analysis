@@ -23,7 +23,7 @@ from src.agents.micro_analyst import MicroAnalystV2
 from src.concordance.hebrew_text_processor import split_words
 
 LIVE_DB = "database/tanakh.db"
-COMMON_CAP = 60
+COMMON_CAP = 120  # Session 351: aligned with lemma-frequency selection window
 
 
 def load_discoveries(psalm: int) -> dict:

@@ -59,7 +59,7 @@ def evaluate(psalm: int, analyst: MicroAnalystV2):
     research_request = analyst._generate_research_requests(discoveries, psalm)
     librarian = analyst.research_assembler.concordance_librarian
 
-    COMMON_CAP = 60  # mirror ResearchAssembler post-search distinctiveness guard
+    COMMON_CAP = 120  # mirror ResearchAssembler post-search distinctiveness guard (Session 351)
     rows = []
     for req in research_request.concordance_requests:
         req.source_psalm = psalm  # ensure self-filter applies

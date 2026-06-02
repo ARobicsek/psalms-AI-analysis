@@ -862,14 +862,16 @@ class ResearchAssembler:
                 enhanced_requests.append(enhanced_request)
             concordance_bundles = self.concordance_librarian.search_multiple(enhanced_requests)
 
-            # Session 350: distinctiveness guard on ACTUAL yield. A single-word query that
-            # returns a flood of external matches (e.g. שכן→142, שחת→107) is a common root
-            # already known to any reader and only adds noise to the writer's input — the
-            # concordance's value is in distinctive words. Bare-form frequency is an unreliable
-            # predictor (Hebrew roots surface mostly as inflections), so we gate here, after the
-            # search, on the real external count. Multi-word collocations are exempt.
+            # Session 350/351: distinctiveness guard on ACTUAL yield. A single-word query
+            # that returns a flood of external matches is a common root already known to any
+            # reader and only adds noise to the writer's input. Session 351 selection now
+            # gates by TRUE lemma frequency (window [2,120]) before searching, so this
+            # post-search guard is mostly a thin safety net (chiefly for surface-fallback
+            # searches whose lemma did not resolve); it is aligned to the same upper bound so
+            # it never drops a lemma the selector already deemed distinctive enough.
+            # Multi-word collocations are exempt.
             from ..concordance.hebrew_text_processor import split_words as _split_words_g
-            COMMON_CAP = 60
+            COMMON_CAP = 120
             kept_bundles = []
             for b in concordance_bundles:
                 if len(_split_words_g(b.request.query)) <= 1 and len(b.results) > COMMON_CAP:

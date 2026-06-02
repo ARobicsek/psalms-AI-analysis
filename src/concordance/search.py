@@ -953,6 +953,142 @@ class ConcordanceSearch:
 
         return results
 
+    # === Session 351: lemma-based (morphology-aware) search ===
+    # Backed by the `lemma` column populated from ETCBC/BHSA (scripts/add_lemma_column.py).
+    # These give exact, indexed root/lemma matching that is tolerant of prefixes,
+    # suffixes, conjugation and word order — replacing the brittle surface string
+    # expansion + is_root_match heuristics for the Session-350 search population.
+
+    def _resolve_lemma(self, word: str) -> Optional[str]:
+        """
+        Resolve a Hebrew query word to its lemma as stored in `concordance.lemma`.
+
+        Strategy: the most common lemma among concordance tokens whose surface
+        consonantal form equals the (normalized) query. If no surface token matches
+        but the query is itself a stored lemma, use it directly. Returns None when no
+        lemma is known — the caller then falls back to surface search. Cached per
+        instance (the same root recurs across a psalm's insights).
+        """
+        if not word or not is_hebrew_text(word):
+            return None
+        norm = normalize_for_search(word, 'consonantal')
+        if not norm:
+            return None
+        if not hasattr(self, '_lemma_cache'):
+            self._lemma_cache = {}
+        if norm in self._lemma_cache:
+            return self._lemma_cache[norm]
+        cursor = self.db.conn.cursor()
+        row = cursor.execute(
+            """SELECT lemma, COUNT(*) AS c
+               FROM concordance
+               WHERE word_consonantal_split = ? AND lemma IS NOT NULL
+               GROUP BY lemma ORDER BY c DESC LIMIT 1""",
+            (norm,)
+        ).fetchone()
+        lemma = row['lemma'] if row else None
+        if lemma is None:
+            # The query may already be a lemma that only ever surfaces with affixes.
+            r2 = cursor.execute(
+                "SELECT 1 FROM concordance WHERE lemma = ? LIMIT 1", (norm,)
+            ).fetchone()
+            if r2:
+                lemma = norm
+        self._lemma_cache[norm] = lemma
+        return lemma
+
+    def search_lemma(self,
+                     lemma: str,
+                     scope: str = 'Tanakh',
+                     limit: Optional[int] = None) -> List[SearchResult]:
+        """
+        Find every concordance token whose lemma equals `lemma` (exact, indexed).
+
+        `lemma` must already be a resolved lemma value (see _resolve_lemma). This is
+        the morphology-aware equivalent of search_word: it returns all inflected /
+        prefixed / suffixed forms of the lexeme with no string explosion.
+        """
+        query = """
+            SELECT DISTINCT
+                c.book_name, c.chapter, c.verse, c.word, c.position,
+                v.hebrew, v.english, v.reference
+            FROM concordance c
+            JOIN verses v ON
+                c.book_name = v.book_name AND
+                c.chapter = v.chapter AND
+                c.verse = v.verse
+            WHERE c.lemma = ?
+        """
+        params = [lemma]
+        query, params = self._add_scope_filter(query, params, scope)
+        query += " ORDER BY c.book_name, c.chapter, c.verse, c.position"
+        if limit:
+            query += f" LIMIT {limit}"
+
+        cursor = self.db.conn.cursor()
+        cursor.execute(query, params)
+        results = []
+        for row in cursor.fetchall():
+            results.append(SearchResult(
+                book=row['book_name'],
+                chapter=row['chapter'],
+                verse=row['verse'],
+                reference=row['reference'],
+                hebrew_text=row['hebrew'],
+                english_text=row['english'],
+                matched_word=row['word'],
+                word_position=row['position'],
+            ))
+        return results
+
+    def verse_lemmas(self, book: str, chapter: int, verse: int) -> set:
+        """Return the set of (non-null) lemmas present in a verse."""
+        cursor = self.db.conn.cursor()
+        cursor.execute(
+            """SELECT DISTINCT lemma FROM concordance
+               WHERE book_name = ? AND chapter = ? AND verse = ? AND lemma IS NOT NULL""",
+            (book, chapter, verse)
+        )
+        return {row[0] for row in cursor.fetchall()}
+
+    def search_lemmas_in_verse(self,
+                               lemmas: List[str],
+                               scope: str = 'Tanakh',
+                               limit: Optional[int] = None) -> List[SearchResult]:
+        """
+        Find verses containing ALL of `lemmas` (any order/position) — the
+        morphology-aware collocation search. So `חסד`+`אמת` matches `חסדו ואמתו`.
+        """
+        if not lemmas:
+            return []
+        target = set(lemmas)
+        # Anchor on the first lemma's verses, then keep verses that contain them all.
+        anchor = self.search_lemma(lemmas[0], scope=scope, limit=None)
+        results = []
+        seen = set()
+        for r in anchor:
+            key = (r.book, r.chapter, r.verse)
+            if key in seen:
+                continue
+            if target.issubset(self.verse_lemmas(r.book, r.chapter, r.verse)):
+                seen.add(key)
+                results.append(SearchResult(
+                    book=r.book,
+                    chapter=r.chapter,
+                    verse=r.verse,
+                    reference=r.reference,
+                    hebrew_text=r.hebrew_text,
+                    english_text=r.english_text,
+                    matched_word=' '.join(lemmas),
+                    word_position=r.word_position,
+                    matched_phrase=' '.join(lemmas),
+                    is_phrase_match=True,
+                    phrase_positions=None,
+                ))
+                if limit and len(results) >= limit:
+                    break
+        return results
+
     def close(self):
         """Close database connection if we own it."""
         if self._own_db:

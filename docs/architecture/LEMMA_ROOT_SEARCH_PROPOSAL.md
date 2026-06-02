@@ -1,6 +1,28 @@
 # Lemma/Root Concordance Search — Design Proposal (D/E)
 
-**Status:** proposal (not implemented). Written Session 350 after the A/B/C
+> **STATUS: IMPLEMENTED in Session 351 (2026-06-02), with two corrections to this
+> proposal that the data forced.** See `IMPLEMENTATION_LOG.md` (Session 351) for the
+> shipped version. The two corrections:
+>
+> 1. **`root` is unusable; we shipped `lemma` only.** BHSA's `root` feature covers just
+>    **16.9%** of words (None on *every* verb, most nouns, and on every Session-350
+>    target — פלג, נוד, נדד, חסד, אמת) and is ETCBC-transliterated with no converter in
+>    the installed TF version. `lex_utf8` (lemma) is 100% coverage and clean Hebrew, so
+>    the shipped column is **`lemma`** (lex), not `root`. Lemma grouping turns out to
+>    deliver all the brief's target intertexts anyway (it's affix/conjugation tolerant).
+> 2. **The "positional join" (§4 step 2) is wrong; we used per-verse concat-alignment.**
+>    BHSA tokenizes proclitics (ב/כ/ל/מ/ו/ה) as separate word nodes while our concordance
+>    keeps them attached, so position-by-position alignment is only ~26%. Our token is
+>    always the *concatenation of consecutive BHSA tokens*, so a greedy concat-alignment
+>    (assigning the group's content lemma) hits **96.3%**; misses stay NULL → naive
+>    fallback, never a wrong lemma. Also: `T.sectionFromNode` returns English book names
+>    (`2_Kings`, `Song_of_songs`), not the Latin `F.book.v` names — map off the former.
+>
+> The sections below are the original Session-350 proposal, preserved for context.
+
+---
+
+**Status (original):** proposal (not implemented). Written Session 350 after the A/B/C
 distinctive-root changes shipped.
 **Question it answers:** "What would it take to make root-based (and 2-word
 root-based) concordance search *much* smarter, and would it actually add value to

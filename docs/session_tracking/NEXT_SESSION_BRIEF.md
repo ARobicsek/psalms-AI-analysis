@@ -1,37 +1,71 @@
-# Next Session Brief — Lemma/Root-Aware Concordance (D & E)
+# Next Session Brief — Macro → Opus 4.8 (adaptive/high) + lemma-dedup
 
-**Written:** end of Session 350 (2026-06-02). **Prereq reading:** `docs/architecture/LEMMA_ROOT_SEARCH_PROPOSAL.md` (full design + findings), then this file.
+**Written:** end of Session 351 (2026-06-02). Both tasks came out of Session 351's Ps 59
+end-to-end validation run + a cost analysis of the macro/micro agents.
+(Per user, the micro agent **stays on claude-sonnet-4-6** — the earlier gpt-5.4 idea is dropped.)
 
-## Where we left off (Session 350)
-We made the concordance trace **distinctive single roots** instead of verbatim verse phrases, lifting external-match yield from **24% → ~90%** across Ps 54–58 (changes A/B/C, all in production). But that win rides on **runtime string-expansion against a surface-form column** — there is still **no lemma/root data** in the database. Three known weaknesses remain, all rooted in the missing morphology:
-1. Root selection uses *surface* frequency, which confuses a rare inflection with a rare root (mitigated only by a "prefer 3-letter forms" heuristic, not a fact).
-2. Prefixes/suffixes leak into queries (`בְּצֵל` traces as `בצל`, not the bare root `צל`).
-3. Phrase/collocation matching misses genuine conjugation differences (`חסד אמת` won't catch `חסדו ואמתו`) and cross-verse spans; `is_root_match` over-matches (`אב`~`אבד`).
+## Prior session (351) — DONE, for context
+D & E lemma-aware concordance shipped: a **`lemma`** column on `concordance` (96.3%
+coverage, from ETCBC/BHSA `lex_utf8` via greedy concat-alignment), root traces + ≤2-word
+collocations now match on an exact indexed `WHERE lemma = ?`. Eval yield **24%→96%**.
+Full detail: `IMPLEMENTATION_LOG.md` (Session 351); `LEMMA_ROOT_SEARCH_PROPOSAL.md` STATUS
+banner. DB backup: `database/tanakh.db.pre_lemma_bak`.
 
-## The job this session: D & E — wire in true morphology
-**Goal:** add persistent `lemma` and `root` columns to the `concordance` table (312K rows, `database/tanakh.db`), populated once from ETCBC/BHSA, so root search becomes an exact indexed `WHERE root = ?` and 2-word search matches on lemma (conjugation/order/affix tolerant).
+---
 
-**The shortcut that makes this cheap:** the project already built the ETCBC pipeline (`src/hebrew_analysis/morphology.py`, `cache_builder.py`) and a **Psalms-only** surface→lemma cache (`src/hebrew_analysis/data/psalms_morphology_cache.json`). It was never connected to search. So this is integration, not a build.
+## Task 1 — Macro agent: `claude-opus-4-6` → `claude-opus-4-8` (adaptive, effort=HIGH)
 
-### Recommended order of work (from the proposal §4)
-1. **Build full-Tanakh BHSA annotation.** `pip install text-fabric`; extend `cache_builder.py` to also read `F.root` (not just `F.lex`) and emit **per-token** `(book, chapter, verse, position) → (lemma, root)` for the whole Bible. Positional keying avoids the global-dict collisions and the shin/sin-dot join problem.
-2. **Schema migration** (new `scripts/add_lemma_column.py`): `ALTER TABLE concordance ADD COLUMN lemma TEXT; ADD COLUMN root TEXT;` backfill by joining BHSA token order to our `position` ordering per verse; `CREATE INDEX idx_conc_root ON concordance(root)` (+ `lemma`). **Validate positional alignment on Psalms first** against the existing cache — this is the main risk (ETCBC tokenization vs our maqqef-split). Normalize shin/sin dots on ingest (21% of keys).
-3. **Search layer** (`src/concordance/search.py`): add a `column='root'`/`'lemma'` branch to `search_word`; rewrite `_verse_contains_phrase`/`_verse_contains_all_words` to compare on `root`/`lemma`; remove `is_root_match` (`root_matcher.py`) and the phrase-variation suppression in `concordance_librarian.py`.
-4. **Selection layer** (`src/concordance/root_selection.py`): replace the surface-frequency heuristic with true root frequency; retire the `COMMON_CAP` post-search heuristic in favor of exact root frequency.
-5. Keep a naive fallback only for genuine cache misses; log misses to monitor coverage.
+**Cost:** budget-neutral. All Opus tiers (4-5/4-6/4-7/4-8) are priced identically ($5/$25 per
+1M in/out); macro avg ≈ 4.7K in / 13.4K out ⇒ **~$0.36/psalm before and after** (Session-351
+analysis of Ps 54–58 `psalm_0NN_cost.json`). Only variable: if 4.8 emits a longer macro JSON
+(~$0.025 per +1K out). **Micro stays claude-sonnet-4-6 (no change).**
 
-### Watch-items
-- **Positional alignment** (validate on Psalms before full Tanakh) — the real hazard.
-- **Lexeme vs root**: populate BOTH (`lex` groups inflections of one word; `root` groups cognates — the current cache only has `lex`, so it would NOT group חיים with חיה).
-- **License**: ETCBC is CC BY-NC (fine, non-commercial). If that ever changes, OSHB/morphhb is CC BY with per-word positional IDs.
+**Params — match the Master Writer exactly = adaptive + effort `"high"` (NOT max).** Confirmed:
+`MasterEditorV2._call_claude_writer` runs Opus 4.8 with `thinking={"type":"adaptive"}` and
+`output_config={"effort":"high"}` — gated by model: opus-4-7 → `"max"`, **opus-4-8 → `"high"`**
+(`src/agents/archive/master_editor_v2.py:2243-2249`). The macro **currently** runs adaptive +
+effort **`"max"`** (`src/agents/macro_analyst.py:344-348`), so this is **two changes**, not just a
+model-ID swap: the model ID **and** dropping effort `max → high` for 4.8.
 
-### How to validate the win
-Re-run `python scripts/EXPERIMENT_concordance_eval.py 54 55 56 57 58` (reuses production Stage-1 discoveries from each `micro_v2.json`; no re-discovery needed) and compare external-yield **and match quality** against Session-350 numbers. Spot-check previously-broken cases now work: `פלג לשון` self-matches; `חסד אמת` catches `חסדו ואמתו`; `בצל כנפיך` traces `צל`/`כנף` cleanly; confirm `is_root_match` false positives are gone. Then run one psalm through the full pipeline to confirm bundle/DOCX render correctly.
+**Change spots:**
+- **Model default** → `claude-opus-4-8`: `MacroAnalyst.DEFAULT_MODEL` (`src/agents/macro_analyst.py:199`).
+- **Effort** `max → high`: the `output_config={"effort":"max"}` in the macro streaming call
+  (`macro_analyst.py:347-348`). Best to mirror the Master Writer's **model-gated** pattern so it's
+  robust to the model arg: opus-4-8 → `"high"`, and note opus-4-6 historically did **not** accept
+  `output_config` at all, so gate the param by model rather than passing it unconditionally (the
+  current code passes it always — fine for 4-6 today only because the API tolerates it).
+- **Pipeline defaults**: `macro_model="claude-opus-4-6"` at `scripts/run_enhanced_pipeline.py:301`
+  and the `macro_mdl = ... else "claude-opus-4-6"` fallback (~line 1157); `scripts/run_si_pipeline.py:301`.
 
-### Decisions still open (ask the user)
-- Render the Methods "Concordance Entries Reviewed" line as `root ⟵ source phrase` instead of the bare root? (Deferred from Session 350.)
-- Should lemma search default to `root` (cognate-grouping) or `lemma` (inflection-grouping) for the writer's purposes?
+Low risk (same family, *lighter* effort than today). A 1-psalm sanity run is cheap but no formal
+quality gate is needed.
 
-## Session-350 context you may want
-- Knobs as shipped: `MAX_ROOT_SEARCHES=12` (augmentation), `COMMON_CAP=60` (post-search drop), `MAX_DISPLAY_RESULTS=10` (Hebrew-only, random canon-spread sample), collocations ≤2 words and no longer expanded to the verse form.
-- The concordance section now reaches the writer/synthesis in full (no trim; bundle stays under the 350K-char cap). Dropping the English gloss already roughly halved its footprint.
+---
+
+## Task 2 — Dedupe augmented root traces by RESOLVED LEMMA
+
+**Problem (observed in the Session-351 Ps 59 run):** `_augment_with_root_searches`
+(`src/agents/micro_analyst.py` ~line 1283) dedups added distinctive-root queries against
+existing ones **by consonantal string** (`existing = {to_consonantal(req.query) for ...}`).
+After the Session-351 lemma work, multiple *different surface strings resolve to the same
+lemma*, so the same lemma gets traced in several separate bundles → the concordance section
+repeats identical verse-lists under different headers (token noise for the writer/synthesis).
+Seen on Ps 59:
+- lemma **משגב** traced 3×: via `שגב` (which folds in sibling lemma משגב) + standalone `משגב` + `משגבי`
+- lemma **נוע** traced 2×: via `נוע` + `ינועו`
+
+**Fix:** dedupe on the **resolved lemma**, not the surface string.
+- Resolve each candidate root's lemma with `self.research_assembler.concordance_librarian.search._resolve_lemma(...)`.
+- Build the `existing` / `seen_roots` sets from resolved **lemmas** (note: a query can fold in
+  multiple sibling lemmas — see the librarian's single-word path — so dedupe against the full set).
+- Also dedupe the LLM's own primary picks against the augmented roots by lemma (a primary pick
+  and an augmented root can collide on lemma, as `שגב`/`משגב` did).
+- Keep the naive consonantal fallback for queries whose lemma doesn't resolve.
+
+**Acceptance:** re-run `python scripts/EXPERIMENT_concordance_trace.py 59` (or `_eval.py`) and
+confirm no two bundles trace the same lemma; the concordance section / bundle char-count shrinks;
+external-match yield is unchanged. Inspect `output/psalm_59/` from the Session-351 run for the
+before-state.
+
+**Files:** `src/agents/micro_analyst.py` (`_augment_with_root_searches`), plus the search/librarian
+helpers from Session 351 (`src/concordance/search.py` `_resolve_lemma`).
