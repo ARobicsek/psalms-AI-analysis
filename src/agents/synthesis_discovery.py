@@ -4,8 +4,8 @@ Synthesis Discovery Agent (Session 347)
 Cross-verse synthesis DISCOVERY pass — a sidecar that produces calibrated
 cross-verse observations the production one-call Master Writer can weave into
 its commentary at its own discretion. NOT a structural spine: the writer keeps
-full authorial control. See docs/session_tracking/NEXT_SESSION_BRIEF.md
-(Session 347 brief) for the design rationale and what failed in earlier
+full authorial control. See docs/session_tracking/IMPLEMENTATION_LOG.md
+(Session 347) for the design rationale and what failed in earlier
 attempts (`InsightExtractor` was too extractive; the two-call spine
 architecture over-engineered the prose by forcing anchored arcs).
 

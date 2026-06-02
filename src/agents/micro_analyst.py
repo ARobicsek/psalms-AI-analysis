@@ -1292,8 +1292,10 @@ class MicroAnalystV2:
           the librarian's full prefix/suffix variation treatment, and are the searches most
           likely to surface non-obvious intertexts (e.g. נדד→Gen 4:16, פלג→Gen 10-11).
 
-        Roots are deduplicated against each other and against existing queries, and the total
-        number of added root traces is capped to keep search volume sane.
+        Roots are deduplicated against each other and against existing queries BY RESOLVED
+        LEMMA (Session 352 — different surface spellings that share one lemma trace identical
+        verse-lists), and the total number of added root traces is capped to keep search
+        volume sane.
         """
         from ..concordance.root_selection import select_distinctive_roots, to_consonantal
         from ..concordance.hebrew_text_processor import split_words as _split_words
@@ -1319,12 +1321,43 @@ class MicroAnalystV2:
                     if self.logger:
                         self.logger.info(f"    [Session 350] Capped collocation '{old_q}' -> '{req.query}'")
 
-        # consonantal forms already being searched (avoid duplicate root traces)
-        existing = {to_consonantal(req.query) for req in research_request.concordance_requests}
+        # Session 352: dedupe added root traces by their RESOLVED LEMMA, not by
+        # surface string. After lemma-aware retrieval, several different surface spellings
+        # resolve to one lemma (e.g. שגב/משגב/משגבי → מִשְׂגָּב), so a string-only dedup let the
+        # same lemma be traced in several bundles — identical verse-lists under different
+        # headers, pure token noise for the writer/synthesis.
+        search = librarian.search
+
+        def _traced_lemmas(req):
+            """Lemmas a SINGLE-WORD request will actually trace: its own lemma plus those
+            of its single-word alternates (the librarian folds sibling roots in via the
+            single-word lemma path). 2-word collocation requests trace a conjunction — a
+            different result set — so they never pre-empt a standalone root and are
+            excluded here."""
+            if len(_split_words(req.query)) != 1:
+                return set()
+            out = set()
+            main = search._resolve_lemma(req.query)
+            if main:
+                out.add(main)
+            for alt in (req.alternate_queries or []):
+                if len(_split_words(alt)) == 1:
+                    al = search._resolve_lemma(alt)
+                    if al:
+                        out.add(al)
+            return out
+
+        # Lemmas already covered by the LLM's own (primary + sibling) single-word picks.
+        existing_lemmas = set()
+        for req in research_request.concordance_requests:
+            existing_lemmas |= _traced_lemmas(req)
+        # Consonantal fallback, for candidate roots whose lemma doesn't resolve.
+        existing_consonantal = {to_consonantal(req.query) for req in research_request.concordance_requests}
 
         # --- (A) derive one distinctive root per lexical insight ---
         derived = []  # (root, freq, source_phrase)
-        seen_roots = set()
+        seen_lemmas = set()
+        seen_consonantal = set()
         for vd in discoveries.get('verse_discoveries', []):
             for insight in vd.get('lexical_insights', []):
                 if isinstance(insight, str):
@@ -1335,9 +1368,17 @@ class MicroAnalystV2:
                 if not phrase:
                     continue
                 for root, freq in select_distinctive_roots(phrase, variants, freq_fn, top_n=1):
-                    if root in seen_roots or root in existing:
-                        continue
-                    seen_roots.add(root)
+                    lemma = search._resolve_lemma(root)
+                    if lemma:
+                        if lemma in existing_lemmas or lemma in seen_lemmas:
+                            continue
+                        seen_lemmas.add(lemma)
+                    else:
+                        # naive consonantal fallback when no lemma resolves
+                        cons = to_consonantal(root)
+                        if cons in existing_consonantal or cons in seen_consonantal:
+                            continue
+                        seen_consonantal.add(cons)
                     derived.append((root, freq, phrase))
 
         derived.sort(key=lambda t: t[1])  # rarest (most distinctive) first

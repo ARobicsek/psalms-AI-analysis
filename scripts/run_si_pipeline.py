@@ -298,7 +298,7 @@ def run_enhanced_pipeline(
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
     special_instruction_file: str = None,
-    macro_model: str = "claude-opus-4-6",
+    macro_model: str = "claude-opus-4-8",
     insight_model: str = "gpt-5.4",
     question_model: str = "gpt-5.4",
     copy_model: str = "gpt-5.4",
@@ -1135,7 +1135,7 @@ if __name__ == "__main__":
     si_display = args.special_instruction if args.special_instruction else "AUTO-DETECT"
     print(f"Special Instruction: {si_display}")
 
-    macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-6"
+    macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-8"
     insight_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_insight) else "gpt-5.4"
     question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.4"
     copy_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_copy) else "gpt-5.4"

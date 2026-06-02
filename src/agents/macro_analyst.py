@@ -183,7 +183,7 @@ Take your time. Think deeply. Produce a thesis that will guide meaningful verse-
 
 class MacroAnalyst:
     """
-    Pass 1: Macro Analysis Agent using Claude Opus 4.6.
+    Pass 1: Macro Analysis Agent using Claude Opus 4.8.
 
     Produces chapter-level thesis and structural framework for a psalm,
     leveraging RAG context and analytical framework.
@@ -196,7 +196,7 @@ class MacroAnalyst:
     """
 
     # Class-level constant for the default model (single source of truth)
-    DEFAULT_MODEL = "claude-opus-4-6"
+    DEFAULT_MODEL = "claude-opus-4-8"
 
     def __init__(
         self,
@@ -216,7 +216,7 @@ class MacroAnalyst:
             docs_dir: Path to docs directory (for RAG documents)
             logger: Logger instance (or will create default)
             cost_tracker: CostTracker instance for tracking API costs
-            model: Model to use (default: claude-opus-4-6)
+            model: Model to use (default: claude-opus-4-8)
         """
         self.model = model or self.DEFAULT_MODEL  # Use class constant for single source of truth
         self.logger = logger or get_logger("macro_analyst")
@@ -245,7 +245,7 @@ class MacroAnalyst:
     def analyze_psalm(
         self,
         psalm_number: int,
-        max_tokens: int = 48000,  # Increased for Opus 4.6 adaptive thinking (thinking + text share budget)
+        max_tokens: int = 48000,  # Increased for Opus adaptive thinking (thinking + text share budget)
         include_full_framework: bool = False
     ) -> MacroAnalysis:
         """
@@ -337,21 +337,26 @@ class MacroAnalyst:
                     if stop_reason == 'length':
                         stop_reason = 'max_tokens'
                 else:
-                    # Use streaming to avoid 10-minute timeout for large token requests
-                    stream = self.anthropic_client.messages.stream(
-                        model=self.model,
-                        max_tokens=max_tokens,
-                        thinking={
-                            "type": "adaptive"  # Adaptive thinking for Opus 4.6
-                        },
-                        output_config={
-                            "effort": "max"  # Maximum effort for deep analysis
-                        },
-                        messages=[{
+                    # Use streaming to avoid 10-minute timeout for large token requests.
+                    # Effort is model-gated to mirror the Master Writer (master_editor_v2
+                    # ._call_claude_writer): opus-4-7 -> "max", opus-4-8 -> "high". Older
+                    # models (e.g. Opus 4.6) don't accept output_config, so omit it rather
+                    # than passing unconditionally.
+                    stream_kwargs = {
+                        "model": self.model,
+                        "max_tokens": max_tokens,
+                        "thinking": {"type": "adaptive"},
+                        "messages": [{
                             "role": "user",
                             "content": prompt
                         }]
-                    )
+                    }
+                    if "opus-4-8" in self.model:
+                        stream_kwargs["output_config"] = {"effort": "high"}
+                    elif "opus-4-7" in self.model:
+                        stream_kwargs["output_config"] = {"effort": "max"}
+
+                    stream = self.anthropic_client.messages.stream(**stream_kwargs)
 
                     # Collect response chunks
                     with stream as response_stream:
