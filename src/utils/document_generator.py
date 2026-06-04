@@ -59,6 +59,10 @@ def add_page_number(paragraph):
 class DocumentGenerator:
     """Generates a .docx commentary from pipeline artifacts."""
 
+    # Complex-script font used for native-RTL Hebrew runs. Times New Roman ships with
+    # full Hebrew + nikud coverage and matches the surrounding serif body text.
+    HEBREW_FONT = 'Times New Roman'
+
     def __init__(self, psalm_num: int, intro_path: Path, verses_path: Path, stats_path: Path, output_path: Path, reader_questions_path: Optional[Path] = None):
         self.psalm_num = psalm_num
         self.intro_path = intro_path
@@ -70,46 +74,7 @@ class DocumentGenerator:
         self._set_default_styles()
         self.modifier = DivineNamesModifier()
 
-    @staticmethod
-    def _split_into_grapheme_clusters(text: str) -> List[str]:
-        """
-        Split Hebrew text into grapheme clusters (base letter + combining marks).
 
-        A grapheme cluster consists of:
-        - A base character (Hebrew letter or space)
-        - Followed by zero or more combining characters (nikud, cantillation, shin/sin dot, etc.)
-
-        Combining character ranges:
-        - U+0591-U+05BD: Cantillation marks
-        - U+05BF: Rafe
-        - U+05C1-U+05C2: Shin/Sin dots
-        - U+05C4-U+05C7: Other marks
-        - U+05B0-U+05BD: Vowel points (nikud)
-        """
-        # Pattern: base character followed by any combining marks
-        # Base: Hebrew letter (U+05D0-U+05EA), maqqef (U+05BE), ASCII hyphen (used as maqqef substitute),
-        #        geresh (U+05F3), gershayim (U+05F4), paseq (U+05C0), or space
-        # Combining: U+0591-U+05BD, U+05BF, U+05C1-U+05C2, U+05C4-U+05C7
-        cluster_pattern = r'[\u05D0-\u05EA\u05BE\u05F3\u05F4\u05C0\s\-][\u0591-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7]*'
-        clusters = re.findall(cluster_pattern, text)
-        return clusters
-
-    @staticmethod
-    def _reverse_hebrew_by_clusters(hebrew_text: str) -> str:
-        """
-        Reverse Hebrew text by grapheme clusters (keeping letter+nikud together).
-
-        Example:
-        - Input: "שִׁלוֹם" (shalom) = [שִׁ, ל, וֹ, ם]
-        - Output: "םוֹלשִׁ" (reversed clusters)
-
-        This prevents combining marks (nikud) from detaching from their base letters,
-        which would cause dotted circle placeholders to appear.
-        """
-        clusters = DocumentGenerator._split_into_grapheme_clusters(hebrew_text)
-        # Reverse the order of clusters (but keep each cluster intact)
-        reversed_clusters = clusters[::-1]
-        return ''.join(reversed_clusters)
 
     @staticmethod
     def _is_primarily_hebrew(text: str) -> bool:
@@ -146,195 +111,121 @@ class DocumentGenerator:
         
         return ascii_ratio < 0.05
 
+
+
+
+
+    # ------------------------------------------------------------------
+    # Native bidirectional rendering (logical order + w:rtl). This replaces
+    # the legacy "reverse the Hebrew + LEFT-TO-RIGHT OVERRIDE" approach, which
+    # garbled word order across markdown spans and broke line-wrapping. Word's
+    # own bidi engine handles ordering, nikud, and wrapping correctly when each
+    # Hebrew run carries w:rtl — exactly how the verse table and Arabic already work.
+    # ------------------------------------------------------------------
     @staticmethod
-    def _is_hebrew_dominant(text: str) -> bool:
-        """
-        Check if text is predominantly Hebrew (>80% Hebrew letters, min 2).
-        Unlike _is_primarily_hebrew, does NOT require sof-pasuq.
-        Safe for content already isolated by markdown formatting markers.
-        """
-        hebrew_letters = len(re.findall(r'[\u05D0-\u05EA]', text))
-        ascii_letters = len(re.findall(r'[a-zA-Z]', text))
-        total = hebrew_letters + ascii_letters
-        if total == 0:
-            return False
-        return (hebrew_letters / total) > 0.8 and hebrew_letters >= 2
+    def _segment_by_script(text: str) -> List[tuple]:
+        """Split text (kept in LOGICAL order — NOT reversed) into [(segment, is_hebrew), ...].
 
-    @staticmethod
-    def _reverse_bare_hebrew_segments(text: str) -> str:
-        """
-        Detect and reverse bare (non-parenthesized) multi-word Hebrew segments
-        in mixed English/Hebrew text.
-
-        When 3+ consecutive Hebrew words appear inline in an LTR paragraph,
-        Word's BiDi algorithm can garble their visual order — especially when
-        internal punctuation (colons, semicolons) splits the segment into
-        separate RTL runs that Word reorders independently.
-
-        Fix: reverse each segment by grapheme clusters and wrap with LRO/PDF,
-        exactly as done for parenthesized Hebrew, so Word displays them in the
-        correct visual order.
-        """
-        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-
-        # Protect existing LRO...PDF blocks from being re-processed.
-        # Without this, Hebrew already reversed and wrapped by the paren/bracket
-        # handler gets matched as "bare" Hebrew and reversed a second time,
-        # producing nested LRO wrappers that garble Word's display.
-        placeholders = {}
-        def _save_lro_block(match):
-            key = f'\x00BIDI{len(placeholders)}\x00'
-            placeholders[key] = match.group(0)
-            return key
-        text = re.sub(r'\u202D[^\u202C]*\u202C', _save_lro_block, text)
-
-        # Hebrew word: base letter (+ geresh/gershayim) followed by combining marks
-        heb_word = r'[\u05D0-\u05EA\u05F3\u05F4][\u0590-\u05FF]*'
-        # Separator between Hebrew words: spaces, colons, semicolons, commas, maqqef, ASCII hyphen
-        separator = r'[\s:;,\u2026\u05BE\-]+'
-        # Match 3+ consecutive Hebrew words (possibly with internal punctuation)
-        # Lookbehind: not preceded by Hebrew chars (prevents partial matches)
-        # Lookahead: not followed by Hebrew base letter
-        bare_hebrew = rf'(?<![\u05D0-\u05EA\u0590-\u05FF])({heb_word}(?:{separator}{heb_word}){{2,}})(?![\u05D0-\u05EA])'
-
-        def reverse_segment(match):
-            segment = match.group(1)
-            reversed_segment = DocumentGenerator._reverse_hebrew_by_clusters(segment)
-            return f'{LRO}{reversed_segment}{PDF}'
-
-        result = re.sub(bare_hebrew, reverse_segment, text)
-
-        # Restore protected LRO...PDF blocks
-        for key, value in placeholders.items():
-            result = result.replace(key, value)
-
-        return result
-
-    def _process_text_rtl(self, text):
-        """
-        Process text for RTL display. Returns modified text string.
-
-        Handles: primarily-Hebrew lines, Hebrew-dominant text,
-        parenthesized/bracketed Hebrew, verse refs, trailing punctuation.
-        """
-        # Full reversal for primarily Hebrew or Hebrew-dominant text
-        if self._is_primarily_hebrew(text) or self._is_hebrew_dominant(text):
-            return self._reverse_primarily_hebrew_line(text)
-
-        # Standard RTL processing for mixed content
-        modified = text
-        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-
-        # Hebrew in parentheses
-        hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-        if re.search(hebrew_paren_pattern, modified):
-            def reverse_hebrew_paren(match):
-                hebrew_text = match.group(1)
-                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                return f'{LRO}({reversed_hebrew}){PDF}'
-            modified = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified)
-
-        # Hebrew in square brackets
-        hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
-        if re.search(hebrew_bracket_pattern, modified):
-            def reverse_hebrew_bracket(match):
-                hebrew_text = match.group(1)
-                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                return f'{LRO}[{reversed_hebrew}]{PDF}'
-            modified = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified)
-
-        # Verse references
-        verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
-        if re.search(verse_ref_pattern, modified):
-            def wrap_verse_ref(match):
-                return f'{LRO}{match.group(1)}{PDF}'
-            modified = re.sub(verse_ref_pattern, wrap_verse_ref, modified)
-
-        # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
-        modified = self._reverse_bare_hebrew_segments(modified)
-
-        # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
-        LRM = '\u200E'  # LEFT-TO-RIGHT MARK
-        bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
-        modified = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified)
-
-        # Trailing punctuation RLM anchor
-        RLM = '\u200F'  # RIGHT-TO-LEFT MARK
-        hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified))
-        if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified):
-            modified = modified + RLM
-
-        return modified
-
-    @staticmethod
-    def _reverse_primarily_hebrew_line(text: str) -> str:
-        """
-        Reverse an entire primarily-Hebrew line for correct RTL display in LTR paragraphs.
-        
-        Handles:
-        - Hebrew words (reversed by grapheme clusters)
-        - Punctuation mirroring (brackets/parentheses swap directions)
-        - Spaces and separators
-        - Verse references like (26:6) or (26:6–7) are extracted and appended outside the LRO wrapper
-        
-        The approach: split by spaces, reverse each Hebrew word, reverse the word order,
-        mirror bracket characters.
-        """
-        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-        
-        # Extract trailing verse reference (if any) to append OUTSIDE the LRO wrapper
-        # Pattern matches trailing space + (N:N) or (N:N–N) or (N:N-N) at end of text
-        trailing_ref_pattern = r'(\s*\(\d+:\d+(?:[–\-]\d+)?\)\s*)$'
-        trailing_ref_match = re.search(trailing_ref_pattern, text)
-        trailing_ref = ''
-        if trailing_ref_match:
-            trailing_ref = trailing_ref_match.group(1)
-            text = text[:trailing_ref_match.start()]  # Remove trailing ref from main text
-        
-        # Mirror map for brackets/parentheses - these need to swap in RTL
-        MIRROR_MAP = {
-            '(': ')',
-            ')': '(',
-            '[': ']',
-            ']': '[',
-            '{': '}',
-            '}': '{',
-            '<': '>',
-            '>': '<',
-        }
-        
-        # Pattern to split on word boundaries while keeping delimiters
-        # This captures spaces, semicolons, parentheses, brackets
-        # Note: \[ and \] (single backslash) escape brackets inside the character class
-        # Using \\[ would create a literal backslash + unescaped bracket, breaking the class
-        tokens = re.split(r'(\s+|[;:,.\-()\[\]׃])', text)
-
-        reversed_tokens = []
-        for token in tokens:
-            if not token:
-                continue
-            # If token contains Hebrew letters, reverse by grapheme clusters
-            if re.search(r'[\u05D0-\u05EA]', token):
-                reversed_token = DocumentGenerator._reverse_hebrew_by_clusters(token)
-                reversed_tokens.append(reversed_token)
-            elif token in MIRROR_MAP:
-                # Mirror brackets/parentheses for RTL display
-                reversed_tokens.append(MIRROR_MAP[token])
+        Whitespace / maqqef / ASCII-hyphen that sits *between* two Hebrew words is glued
+        into the Hebrew segment, so a multi-word Hebrew phrase becomes a single RTL run
+        (and a trailing space before English correctly stays with the English run)."""
+        def is_heb(c: str) -> bool:
+            return '֐' <= c <= '׿'
+        GLUE = {' ', ' ', '־', '-'}  # space, nbsp, maqqef, ASCII hyphen
+        APOS = {"'", "’"}  # ASCII / curly apostrophe used as a Hebrew abbreviation mark
+        n = len(text)
+        segs: List[tuple] = []
+        cur: List[str] = []
+        cur_heb: Optional[bool] = None
+        for i, c in enumerate(text):
+            if is_heb(c):
+                ch = True
+            elif c in APOS and i > 0 and is_heb(text[i - 1]):
+                ch = True  # geresh-style abbreviation mark stays with its Hebrew letter
+            elif c in GLUE and cur_heb:
+                j = i + 1
+                while j < n and (text[j] in GLUE or text[j] in APOS):
+                    j += 1
+                ch = (j < n and is_heb(text[j]))
             else:
-                # Keep other punctuation and spaces as-is
-                reversed_tokens.append(token)
+                ch = False
+            if cur_heb is None:
+                cur_heb = ch
+            if ch == cur_heb:
+                cur.append(c)
+            else:
+                segs.append((''.join(cur), bool(cur_heb)))
+                cur, cur_heb = [c], ch
+        if cur:
+            segs.append((''.join(cur), bool(cur_heb)))
+        return segs
 
-        # Reverse the entire token list to get RTL word order
-        reversed_tokens.reverse()
-        
-        # Join and wrap with LRO to force display in reversed order
-        result = ''.join(reversed_tokens)
-        
-        # Return with LRO wrapper, then append trailing verse reference OUTSIDE the wrapper
-        return f'{LRO}{result}{PDF}{trailing_ref}'
+    def _mark_run_hebrew(self, run, font_size: Optional[int] = None):
+        """Mark a run as native RTL Hebrew: complex-script font + w:rtl (no reversal)."""
+        rPr = run._element.get_or_add_rPr()
+        rFonts = rPr.find(ns.qn('w:rFonts'))
+        if rFonts is None:
+            rFonts = OxmlElement('w:rFonts')
+            rPr.insert(0, rFonts)
+        rFonts.set(ns.qn('w:cs'), self.HEBREW_FONT)
+        if rPr.find(ns.qn('w:rtl')) is None:
+            rPr.append(OxmlElement('w:rtl'))
+        if font_size is not None:
+            szCs = rPr.find(ns.qn('w:szCs'))
+            if szCs is None:
+                szCs = OxmlElement('w:szCs')
+                rPr.append(szCs)
+            szCs.set(ns.qn('w:val'), str(int(font_size * 2)))
+
+    def _add_inline_runs(self, paragraph, text: str, *, bold: bool = False, italic: bool = False,
+                          set_font: bool = False, font_name: str = 'Aptos', font_size: int = 12):
+        """Add `text` to `paragraph`, emitting Hebrew as native RTL runs (logical order)
+        and everything else as ordinary LTR runs.
+
+        This is the single funnel that all prose/markdown code paths use for mixed
+        Hebrew/English text. `text` must already have divine-name modification applied.
+        """
+        for seg_text, is_heb in self._segment_by_script(text):
+            if not seg_text:
+                continue
+            run = paragraph.add_run(seg_text)
+            run.bold = bold
+            run.italic = italic
+            if is_heb:
+                self._mark_run_hebrew(run, font_size=font_size if set_font else None)
+            elif set_font:
+                run.font.name = font_name
+                run.font.size = Pt(font_size)
+
+    @staticmethod
+    def _set_style_complex_size(style, pt: int):
+        """Set the complex-script size (w:szCs) on a paragraph style. python-docx's
+        font.size only sets w:sz (Latin); without a matching szCs, Hebrew (a complex
+        script) falls back to Word's default size and renders too small."""
+        rPr = style.element.get_or_add_rPr()
+        szCs = rPr.find(ns.qn('w:szCs'))
+        if szCs is None:
+            szCs = OxmlElement('w:szCs')
+            rPr.append(szCs)
+        szCs.set(ns.qn('w:val'), str(int(pt * 2)))
+
+    def _add_primarily_hebrew_line(self, text: str, style: str = 'Normal', font_size: int = 13):
+        """Render a standalone primarily-Hebrew line (e.g. a verse header) as native RTL
+        run(s) — one per soft-break line — at `font_size`. The whole line is a single RTL
+        run so internal punctuation (';', sof-pasuq) between cola keeps correct R->L order;
+        segmenting it in an LTR paragraph would split the punctuation into its own LTR run
+        and make Word reorder the cola as separate islands."""
+        p = self.document.add_paragraph(style=style)
+        self._set_paragraph_ltr(p)
+        lines = text.split('\n')
+        for i, line in enumerate(lines):
+            if line.strip():
+                run = p.add_run(line)
+                self._mark_run_hebrew(run, font_size=font_size)
+                run.font.size = Pt(font_size)
+            if i < len(lines) - 1:
+                p.add_run().add_break()
+        return p
 
     def _set_default_styles(self):
         """Set default font for the document."""
@@ -351,6 +242,10 @@ class DocumentGenerator:
             normal_rFonts = OxmlElement('w:rFonts')
             normal_rPr.append(normal_rFonts)
         normal_rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+        # Hebrew (Times New Roman) reads visually smaller than the Aptos body text at the
+        # same point size, so set the complex-script size 1pt larger (13 vs 12pt body) to
+        # match. python-docx's font.size sets w:sz (Latin) but not w:szCs (complex script).
+        self._set_style_complex_size(self.document.styles['Normal'], 13)
 
         # Create a new style for the sans-serif body text (intro and commentary)
         style = self.document.styles.add_style('BodySans', 1) # 1 for paragraph style
@@ -365,12 +260,14 @@ class DocumentGenerator:
             body_rFonts = OxmlElement('w:rFonts')
             body_rPr.append(body_rFonts)
         body_rFonts.set(ns.qn('w:cs'), 'Times New Roman')
+        self._set_style_complex_size(style, 13)  # Hebrew in BodySans (intro/commentary) = 13pt (1pt over 12pt Latin)
 
         # Create a new style for the methodological summary
         summary_style = self.document.styles.add_style('SummaryText', 1) # 1 for paragraph style
         summary_style.base_style = self.document.styles['Normal']
         summary_style.font.name = 'Times New Roman'
         summary_style.font.size = Pt(9) # Times New Roman 9pt for summary
+        self._set_style_complex_size(summary_style, 10)  # Hebrew in summary = 10pt (1pt over 9pt Latin)
         summary_style.paragraph_format.line_spacing = 0.8 # 70% line spacing
 
         # Set spacing for all heading levels to be tighter
@@ -418,6 +315,38 @@ class DocumentGenerator:
             segments.append({"text": ''.join(current_text), "is_arabic": current_is_arabic})
 
         return segments
+
+    def _join_rtl_runs_across_whitespace(self):
+        """Post-pass: a *neutral-only* run (whitespace + punctuation such as the ';' or
+        ':' between two Hebrew cola, with no Latin letters or digits) sitting between two
+        RTL (Hebrew) runs must itself be RTL. Otherwise Word treats the two Hebrew runs as
+        separate bidi islands and reorders them, garbling word order — e.g. when a
+        bold/italic marker splits a Hebrew phrase, or a semicolon separates two cola.
+        Runs containing Latin letters/digits, and Hebrew<->English boundary punctuation
+        (only one neighbour is RTL), are left LTR (correct)."""
+        def is_rtl(run):
+            rPr = run._element.find(ns.qn('w:rPr'))
+            return rPr is not None and rPr.find(ns.qn('w:rtl')) is not None
+
+        def process(paragraph):
+            runs = [r for r in paragraph.runs if r.text]
+            for i, run in enumerate(runs):
+                if re.search(r'[A-Za-z0-9]', run.text):
+                    continue  # skip runs with strong-LTR content; only neutral runs qualify
+                prev_rtl = i > 0 and is_rtl(runs[i - 1])
+                next_rtl = i < len(runs) - 1 and is_rtl(runs[i + 1])
+                if prev_rtl and next_rtl:
+                    rPr = run._element.get_or_add_rPr()
+                    if rPr.find(ns.qn('w:rtl')) is None:
+                        rPr.append(OxmlElement('w:rtl'))
+
+        for paragraph in self.document.paragraphs:
+            process(paragraph)
+        for table in self.document.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    for paragraph in cell.paragraphs:
+                        process(paragraph)
 
     def _fix_complex_script_fonts(self):
         """Post-processing pass: fix fonts for Arabic/Persian/Urdu text in all runs.
@@ -640,8 +569,8 @@ class DocumentGenerator:
 
         hebrew = match.group(1).strip()
 
-        # Skip verse quotations — these contain sof-pasuq (׃) and should
-        # remain in their original rendering (Aptos 12pt via _reverse_primarily_hebrew_line)
+        # Skip verse quotations — these contain sof-pasuq (׃) and are rendered inline
+        # as native RTL runs (Aptos 12pt) by _add_inline_runs, not as standalone blocks.
         if '׃' in hebrew:
             return None
 
@@ -737,6 +666,13 @@ class DocumentGenerator:
             self._add_hebrew_block_paragraph(hebrew, style=style, font_name=font_to_use)
             if after:
                 self._add_paragraph_with_markdown(after, style=style)
+            return
+
+        # A standalone primarily-Hebrew line renders as native RTL run(s) at 13pt so its
+        # cola stay ordered (internal ';'/punctuation would otherwise split the run and
+        # make Word reorder the cola as separate islands).
+        if self._is_primarily_hebrew(modified_text):
+            self._add_primarily_hebrew_line(modified_text, style=style, font_size=13)
             return
 
         # Handle bullet lists (lines starting with "- ")
@@ -1068,84 +1004,16 @@ class DocumentGenerator:
                 # Bold text - recursively process inner content for nested formatting
                 inner_content = part[2:-2]
                 self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
-            elif part.startswith('*') and part.endswith('*'):
-                processed = self._process_text_rtl(part[1:-1])
-                run = paragraph.add_run(processed)
-                run.italic = True
-                if set_font:
-                    run.font.name = 'Aptos'
-                    run.font.size = Pt(12)
-            elif part.startswith('_') and part.endswith('_'):
-                processed = self._process_text_rtl(part[1:-1])
-                run = paragraph.add_run(processed)
-                run.italic = True
-                if set_font:
-                    run.font.name = 'Aptos'
-                    run.font.size = Pt(12)
+            elif (part.startswith('*') and part.endswith('*')) or \
+                 (part.startswith('_') and part.endswith('_')):
+                self._add_inline_runs(paragraph, part[1:-1], italic=True, set_font=set_font)
             elif part.startswith('`') and part.endswith('`'):
                 inner_content = part[1:-1]
                 self._add_nested_formatting(paragraph, inner_content, base_italic=True)
                 # Note: nested formatting handles its own font settings
             else:
-                # Check if this is a primarily-Hebrew line (like a verse text)
-                # If so, apply full-line RTL reversal for correct display
-                if self._is_primarily_hebrew(part) or self._is_hebrew_dominant(part):
-                    modified_part = self._reverse_primarily_hebrew_line(part)
-                    run = paragraph.add_run(modified_part)
-                else:
-                    # Handle parenthesized Hebrew with grapheme cluster reversal + LRO
-                    # Solution: Reverse Hebrew by clusters, then apply LEFT-TO-RIGHT OVERRIDE
-                    # This keeps text inside parentheses with correct RTL appearance
-                    hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-                    # Also handle square brackets (used for Ketiv/Qere textual variants)
-                    hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
-                    
-                    modified_part = part
-                    LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-                    PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-                    
-                    if re.search(hebrew_paren_pattern, modified_part):
-                        def reverse_hebrew_paren(match):
-                            hebrew_text = match.group(1)
-                            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                            return f'{LRO}({reversed_hebrew}){PDF}'
-                        modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_part)
-                    
-                    if re.search(hebrew_bracket_pattern, modified_part):
-                        def reverse_hebrew_bracket(match):
-                            hebrew_text = match.group(1)
-                            reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                            return f'{LRO}[{reversed_hebrew}]{PDF}'
-                        modified_part = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_part)
-                    
-                    # Wrap verse references with LRO/PDF to prevent Word's bidi algorithm from reversing them
-                    # Pattern matches (N:N) or (N:N–N) or (N:N-N) 
-                    verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
-                    if re.search(verse_ref_pattern, modified_part):
-                        def wrap_verse_ref(match):
-                            return f'{LRO}{match.group(1)}{PDF}'
-                        modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
-                    
-                    # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
-                    modified_part = self._reverse_bare_hebrew_segments(modified_part)
-
-                    # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
-                    LRM = '\u200E'  # LEFT-TO-RIGHT MARK
-                    bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
-                    modified_part = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_part)
-
-                    # If text contains significant Hebrew and ends with punctuation,
-                    # add RLM (Right-to-Left Mark) to anchor punctuation to the RTL context
-                    RLM = '\u200F'  # RIGHT-TO-LEFT MARK
-                    hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_part))
-                    if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_part):
-                        modified_part = modified_part + RLM
-
-                    run = paragraph.add_run(modified_part)
-
-                if set_font:
-                    run.font.name = 'Aptos'
-                    run.font.size = Pt(12)
+                # Mixed Hebrew/English prose: native RTL runs (logical order, no reversal).
+                self._add_inline_runs(paragraph, part, set_font=set_font)
 
     def _add_formatted_content(self, paragraph, text, bold=False, italic=False, set_font=False):
         """
@@ -1167,23 +1035,11 @@ class DocumentGenerator:
                 if not part:
                     continue
                 if part.startswith('*') and part.endswith('*') and not part.startswith('**'):
-                    # Nested italic - with RTL processing
-                    processed = self._process_text_rtl(part[1:-1])
-                    run = paragraph.add_run(processed)
-                    run.bold = bold
-                    run.italic = True  # Nested italic
-                    if set_font:
-                        run.font.name = 'Aptos'
-                        run.font.size = Pt(12)
+                    # Nested italic
+                    self._add_inline_runs(paragraph, part[1:-1], bold=bold, italic=True, set_font=set_font)
                 elif part.startswith('_') and part.endswith('_') and not part.startswith('__'):
-                    # Nested italic - with RTL processing
-                    processed = self._process_text_rtl(part[1:-1])
-                    run = paragraph.add_run(processed)
-                    run.bold = bold
-                    run.italic = True  # Nested italic
-                    if set_font:
-                        run.font.name = 'Aptos'
-                        run.font.size = Pt(12)
+                    # Nested italic
+                    self._add_inline_runs(paragraph, part[1:-1], bold=bold, italic=True, set_font=set_font)
                 elif part.startswith('`') and part.endswith('`'):
                     # Nested backtick - process with _add_nested_formatting but apply bold too
                     inner_content = part[1:-1]
@@ -1202,117 +1058,11 @@ class DocumentGenerator:
                             run.font.name = 'Aptos'
                             run.font.size = Pt(12)
                 else:
-                    # Regular text with base formatting
-                    # Check if primarily Hebrew and apply full-line reversal
-                    if self._is_primarily_hebrew(part) or self._is_hebrew_dominant(part):
-                        modified_part = self._reverse_primarily_hebrew_line(part)
-                        run = paragraph.add_run(modified_part)
-                    else:
-                        # Handle parenthesized/bracketed Hebrew with grapheme cluster reversal + LRO
-                        hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-                        hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
-                        
-                        modified_part = part
-                        LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-                        PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-                        
-                        if re.search(hebrew_paren_pattern, modified_part):
-                            def reverse_hebrew_paren(match):
-                                hebrew_text = match.group(1)
-                                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                                return f'{LRO}({reversed_hebrew}){PDF}'
-                            modified_part = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_part)
-                        
-                        if re.search(hebrew_bracket_pattern, modified_part):
-                            def reverse_hebrew_bracket(match):
-                                hebrew_text = match.group(1)
-                                reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                                return f'{LRO}[{reversed_hebrew}]{PDF}'
-                            modified_part = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_part)
-                        
-                        # Wrap verse references with LRO/PDF
-                        verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
-                        if re.search(verse_ref_pattern, modified_part):
-                            def wrap_verse_ref(match):
-                                return f'{LRO}{match.group(1)}{PDF}'
-                            modified_part = re.sub(verse_ref_pattern, wrap_verse_ref, modified_part)
-                        
-                        # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
-                        modified_part = self._reverse_bare_hebrew_segments(modified_part)
-
-                        # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
-                        LRM = '\u200E'  # LEFT-TO-RIGHT MARK
-                        bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
-                        modified_part = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_part)
-
-                        # Add RLM for Hebrew trailing punctuation
-                        RLM = '\u200F'
-                        hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_part))
-                        if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_part):
-                            modified_part = modified_part + RLM
-
-                        run = paragraph.add_run(modified_part)
-                    run.bold = bold
-                    run.italic = italic
-                    if set_font:
-                        run.font.name = 'Aptos'
-                        run.font.size = Pt(12)
+                    # Regular text with base formatting (native RTL runs, logical order).
+                    self._add_inline_runs(paragraph, part, bold=bold, italic=italic, set_font=set_font)
         else:
-            # No nested formatting - just add with base formatting
-            # Check if primarily Hebrew and apply full-line reversal
-            if self._is_primarily_hebrew(text) or self._is_hebrew_dominant(text):
-                modified_text = self._reverse_primarily_hebrew_line(text)
-                run = paragraph.add_run(modified_text)
-            else:
-                # Handle parenthesized/bracketed Hebrew with grapheme cluster reversal + LRO
-                hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-                hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
-                
-                modified_text = text
-                LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-                PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-                
-                if re.search(hebrew_paren_pattern, modified_text):
-                    def reverse_hebrew_paren(match):
-                        hebrew_text = match.group(1)
-                        reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                        return f'{LRO}({reversed_hebrew}){PDF}'
-                    modified_text = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_text)
-                
-                if re.search(hebrew_bracket_pattern, modified_text):
-                    def reverse_hebrew_bracket(match):
-                        hebrew_text = match.group(1)
-                        reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                        return f'{LRO}[{reversed_hebrew}]{PDF}'
-                    modified_text = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_text)
-                
-                # Wrap verse references with LRO/PDF
-                verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
-                if re.search(verse_ref_pattern, modified_text):
-                    def wrap_verse_ref(match):
-                        return f'{LRO}{match.group(1)}{PDF}'
-                    modified_text = re.sub(verse_ref_pattern, wrap_verse_ref, modified_text)
-                
-                # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
-                modified_text = self._reverse_bare_hebrew_segments(modified_text)
-
-                # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
-                LRM = '\u200E'  # LEFT-TO-RIGHT MARK
-                bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
-                modified_text = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_text)
-
-                # Add RLM for Hebrew trailing punctuation
-                RLM = '\u200F'
-                hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_text))
-                if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_text):
-                    modified_text = modified_text + RLM
-
-                run = paragraph.add_run(modified_text)
-            run.bold = bold
-            run.italic = italic
-            if set_font:
-                run.font.name = 'Aptos'
-                run.font.size = Pt(12)
+            # No nested formatting - native RTL runs (logical order).
+            self._add_inline_runs(paragraph, text, bold=bold, italic=italic, set_font=set_font)
 
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal', is_verse_header: bool = False):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
@@ -1345,6 +1095,18 @@ class DocumentGenerator:
                 self._add_paragraph_with_soft_breaks(after, style=style, is_verse_header=False)
             return
 
+        # Verse-header verse lines, and any standalone primarily-Hebrew line, render as a
+        # single native RTL run (one per soft-break line) at 13pt. Keeping the whole line
+        # in one RTL run gives correct native placement to cola separators (';'), ketiv/qere
+        # [brackets], and the final sof-pasuq; rendered inline in an LTR paragraph, that edge
+        # punctuation is pushed to the wrong side and the cola can be reordered.
+        heb = len(re.findall(r'[א-ת]', modified_text))
+        asc = len(re.findall(r'[a-zA-Z]', modified_text))
+        heb_dominant = heb >= 2 and (asc == 0 or heb / (heb + asc) > 0.8)
+        if self._is_primarily_hebrew(modified_text) or (is_verse_header and heb_dominant):
+            self._add_primarily_hebrew_line(modified_text, style=style, font_size=13)
+            return
+
         p = self.document.add_paragraph(style=style)
 
         # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
@@ -1371,57 +1133,7 @@ class DocumentGenerator:
                 lines = content.split('\n')
                 for i, line in enumerate(lines):
                     if line:
-                        # Check if this is a primarily-Hebrew line (like a verse text)
-                        if self._is_primarily_hebrew(line) or self._is_hebrew_dominant(line):
-                            modified_line = self._reverse_primarily_hebrew_line(line)
-                            run = p.add_run(modified_line)
-                        else:
-                            # Handle parenthesized/bracketed Hebrew with grapheme cluster reversal + LRO
-                            hebrew_paren_pattern = r'\(([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\)'
-                            hebrew_bracket_pattern = r'\[([\u0590-\u05FF\u05B0-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\s]+)\]'
-                            
-                            modified_line = line
-                            LRO = '\u202D'  # LEFT-TO-RIGHT OVERRIDE
-                            PDF = '\u202C'  # POP DIRECTIONAL FORMATTING
-                            
-                            if re.search(hebrew_paren_pattern, modified_line):
-                                def reverse_hebrew_paren(match):
-                                    hebrew_text = match.group(1)
-                                    reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                                    return f'{LRO}({reversed_hebrew}){PDF}'
-                                modified_line = re.sub(hebrew_paren_pattern, reverse_hebrew_paren, modified_line)
-                            
-                            if re.search(hebrew_bracket_pattern, modified_line):
-                                def reverse_hebrew_bracket(match):
-                                    hebrew_text = match.group(1)
-                                    reversed_hebrew = self._reverse_hebrew_by_clusters(hebrew_text)
-                                    return f'{LRO}[{reversed_hebrew}]{PDF}'
-                                modified_line = re.sub(hebrew_bracket_pattern, reverse_hebrew_bracket, modified_line)
-                            
-                            # Wrap verse references with LRO/PDF
-                            verse_ref_pattern = r'(\(\d+:\d+(?:[–\-]\d+)?\))'
-                            if re.search(verse_ref_pattern, modified_line):
-                                def wrap_verse_ref(match):
-                                    return f'{LRO}{match.group(1)}{PDF}'
-                                modified_line = re.sub(verse_ref_pattern, wrap_verse_ref, modified_line)
-                            
-                            # Reverse bare multi-word Hebrew segments (3+ words) to prevent BiDi garbling
-                            modified_line = self._reverse_bare_hebrew_segments(modified_line)
-
-                            # LRM after Hebrew+punctuation to prevent neutral chars joining RTL runs
-                            LRM = '\u200E'  # LEFT-TO-RIGHT MARK
-                            bare_hebrew_punct = r'([\u05D0-\u05EA][\u0590-\u05FF]*)([:;,])'
-                            modified_line = re.sub(bare_hebrew_punct, rf'\1\2{LRM}', modified_line)
-
-                            # Add RLM for Hebrew trailing punctuation
-                            RLM = '\u200F'
-                            hebrew_count = len(re.findall(r'[\u05D0-\u05EA]', modified_line))
-                            if hebrew_count >= 3 and re.search(r'[.;:,!?]$', modified_line):
-                                modified_line = modified_line + RLM
-
-                            run = p.add_run(modified_line)
-                        run.bold = is_bold
-                        run.italic = is_italic
+                        self._add_inline_runs(p, line, bold=is_bold, italic=is_italic)
                     if i < len(lines) - 1:
                         p.add_run().add_break()
 
@@ -1742,13 +1454,69 @@ Methodological & Bibliographical Summary
         return summary
 
     def _add_summary_paragraph(self, line: str):
-        """Adds a paragraph to the summary, bolding the label."""
-        p = self.document.add_paragraph(style='SummaryText')
+        """Adds a paragraph to the summary, bolding the label.
+
+        When the value contains Hebrew (e.g. the concordance root breakdown), the
+        Hebrew list is rendered in a separate native-RTL paragraph so Word pairs each
+        root with its count correctly. An LTR paragraph scrambles a long mixed
+        Hebrew/number list, which is the source of the unreadable summary line.
+        """
         if ':' in line:
             label, value = line.split(':', 1)
-            p.add_run(label.strip().strip('**')).bold = True
+            label = label.strip().strip('**')
+            m = re.search(r'[֐-׿]', value)
+            if m:
+                # Hebrew-containing value = the concordance root breakdown. Render it as a
+                # native RTL paragraph of "root — count; ..." entries: an em-dash binds each
+                # count to its own root (NBSP so an entry never splits across a line break),
+                # and "; " separates entries. The parenthesized inline form is unreadable —
+                # the count floats ambiguously between two roots and wraps mid-entry.
+                pairs = re.findall(r'([א-ת][֐-׿  ־׳״\-]*?)\s*\((\d+)\)', value)
+                mnum = re.match(r'\s*\(*\s*([\d,]+)', value)
+                total = mnum.group(1) if mnum else ''
+
+                # Label line (LTR): "Label: total"
+                p = self.document.add_paragraph(style='SummaryText')
+                self._set_paragraph_ltr(p)
+                p.add_run(label).bold = True
+                p.add_run(f": {total}" if total else ":")
+                for run in p.runs:
+                    run.font.name = 'Aptos'
+                p.paragraph_format.space_after = Pt(0)  # hug the breakdown line below
+
+                # Breakdown line: native RTL paragraph.
+                p2 = self.document.add_paragraph(style='SummaryText')
+                pPr = p2._element.get_or_add_pPr()
+                bidi = OxmlElement('w:bidi')
+                bidi.set(ns.qn('w:val'), '1')
+                pPr.append(bidi)
+                p2.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+                if pairs:
+                    NBSP = ' '
+                    for i, (root, count) in enumerate(pairs):
+                        last = (i == len(pairs) - 1)
+                        # The whole entry "root — count;" is ONE RTL run with only
+                        # non-breaking spaces inside, so it can never split across a line
+                        # (a root run + a separate LTR "— count" run breaks at that
+                        # directional boundary even with an NBSP between them). The single
+                        # breakable point is the plain space between entries.
+                        entry = (root.strip().replace(' ', NBSP) + NBSP + '—' + NBSP
+                                 + count + ('' if last else ';'))
+                        run = p2.add_run(entry)
+                        self._mark_run_hebrew(run)
+                        if not last:
+                            sep = p2.add_run(' ')  # breakable: wraps happen only between entries
+                            sep.font.name = 'Aptos'
+                else:
+                    # Fallback: couldn't parse pairs — render the raw Hebrew value as-is.
+                    self._add_inline_runs(p2, value.strip())
+                return
+
+            p = self.document.add_paragraph(style='SummaryText')
+            p.add_run(label).bold = True
             p.add_run(f":{value}")
         else:
+            p = self.document.add_paragraph(style='SummaryText')
             p.add_run(line)
 
         for run in p.runs:
@@ -1906,6 +1674,7 @@ Methodological & Bibliographical Summary
         add_page_number(p)
 
         # 6. Fix complex-script fonts (Arabic/Persian) and Save Document
+        self._join_rtl_runs_across_whitespace()
         self._fix_complex_script_fonts()
         self.document.save(self.output_path)
         print(f"Successfully generated Word document: {self.output_path}")

@@ -1,11 +1,17 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 352 (2026-06-02)
+**Session**: 353 (2026-06-04)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 353 (2026-06-04)**: DOCX BiDi — native RTL runs replace the reverse+LRO engine
+- Fixed 3 reported Hebrew-rendering bugs in the generated DOCX (`src/utils/document_generator.py`), all from one root cause: inline Hebrew was **pre-reversed into visual order + wrapped in LEFT-TO-RIGHT OVERRIDE**. (1) garbled word order when a bold/italic marker split a phrase; (2) backwards line-wrap (end of quote on the upper line) — inherent to LRO; (3) the "Concordance Entries Reviewed" summary scrambled.
+- **Fix = native RTL** (what the verse table + Arabic path already do): keep Hebrew in logical order, mark runs `w:rtl` + cs font, paragraph stays LTR; Word's bidi engine handles order/nikud/wrapping. New `_add_inline_runs` + `_segment_by_script` (glues intra-phrase spaces/maqqef and the geresh-style `ה'` apostrophe; leaves English `king's`) + `_mark_run_hebrew` replace all ~6 reverse+LRO paths. `_join_rtl_runs_across_whitespace` (post-pass) fixes the bold-split boundary space. `_add_summary_paragraph` renders a Hebrew breakdown as a native RTL paragraph. Removed ~227 lines of dead reversal methods.
+- **Round 2 (3 more, on DOCX review)**: (a) verse-header verse lines were garbled (a `;` between cola swapped them) → standalone primarily-Hebrew lines now render as a **single native RTL run** (`_add_primarily_hebrew_line`), which also fixes ketiv/qere `[brackets]` + final sof-pasuq placement; (b) verse headers now **13pt**; (c) inline body Hebrew was ~11pt → set `szCs` on the Normal/BodySans/SummaryText styles (python-docx sets `w:sz` but not `w:szCs`). Also generalized the RTL-join post-pass to neutral-only runs (`;`/`:`/`,` between cola), excluding directional brackets/parens.
+- **Round 3 (concordance + sizing)**: concordance breakdown reformatted to readable `root — count;` entries (each a single RTL run so it can't split across a wrap; em-dash binds count to its root — fixes the unreadable parenthesized form). All Hebrew bumped +1pt to match the Aptos English visually (body 12→**13pt**, summary 9→**10pt**), since Times New Roman Hebrew reads smaller. `run_docx_only.py` confirmed to use the new rendering.
+- **Verified by rendering DOCX→PDF via Word COM + PyMuPDF size/coordinate extraction** (no LLM cost; existing markdown only): Ps 67 all issues fixed (coordinate-verified incl. `ה'` apostrophe-name and v.2 header order/size); Ps 51/9/50/18 clean for ketiv/qere `[brackets]`, block quotes, parens, smart quotes, paseq, long superscriptions, verse-header sizing. `combined_document_generator.py` left as-is (retired path) with a ⚠️ docstring flagging its outdated BiDi. Regenerate any psalm's DOCX with `python scripts/run_docx_only.py N`.
 **Session 352 (2026-06-02)**: Macro → Opus 4.8 (adaptive/high) + lemma-dedup of root traces
 - **Task 1 — Macro agent now `claude-opus-4-8`** (was 4-6), budget-neutral (all Opus tiers priced identically; macro ≈ $0.36/psalm). Mirrored the Master Writer's **model-gated effort**: opus-4-8 → `output_config={"effort":"high"}`, opus-4-7 → `"max"`, **opus-4-6 → omit `output_config`** (older models reject it) — so this was two changes (model ID + effort `max→high`), not just an ID swap. Spots: `MacroAnalyst.DEFAULT_MODEL` + the streaming call (`src/agents/macro_analyst.py`), and the `macro_model`/`macro_mdl` defaults in `scripts/run_enhanced_pipeline.py` + `scripts/run_si_pipeline.py`.
 - **Task 2 — `_augment_with_root_searches` dedups by RESOLVED LEMMA, not surface string** (`src/agents/micro_analyst.py`). After Session 351, different spellings resolve to one lemma, so the old consonantal dedup let the same lemma be traced in several bundles (Ps 59: משגב≡משגבי, נוע≡ינועו → identical verse-lists, token noise). Now each candidate root + each existing single-word pick (incl. its single-word alternates the librarian folds in) is resolved via `search._resolve_lemma`; dedup is on the lemma set, with a consonantal fallback when no lemma resolves. Verified deterministically (no LLM call) on Ps 59: **0 duplicated lemmas** across the 12 root traces; a seeded `נוע` pick correctly suppresses derived `ינועו`, freeing the cap slot for another distinct lemma. Yield unchanged (same lemma → same verses).
@@ -22,11 +28,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Removed `psalm_function_for_RAG.json` and `ugaritic.json` data loading from `RAGManager` as they are now superseded by deep research.
 - Removed Ugaritic metrics from DOCX methodological summaries in `document_generator.py` and `combined_document_generator.py`.
 - Cleaned up documentation references in `CONTEXT.md` and `DEVELOPER_GUIDE.md`.
-**Session 348 (2026-05-29)**: Switch Default Master Writer to Opus 4.8
-- Conducted reversible experiment on Psalm 57 to compare Opus 4.8 vs 4.7 with high effort configuration.
-- Permanently updated `master_editor.py`, `synthesis_discovery.py`, and runner scripts to use `claude-opus-4-8` as default.
-- Added Opus 4.8 pricing to `cost_tracker.py` and updated architecture documentation.
-
 ## Quick Commands
 
 ```bash

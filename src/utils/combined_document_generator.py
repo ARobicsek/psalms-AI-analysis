@@ -61,7 +61,17 @@ def add_page_number(paragraph):
     run._r.append(fldChar_end)
 
 class CombinedDocumentGenerator:
-    """Generates a combined .docx with main and college commentaries."""
+    """Generates a combined .docx with main and college commentaries.
+
+    ⚠️ OUTDATED BIDI LOGIC (Session 353, 2026-06-04): This generator still uses the
+    legacy "reverse Hebrew + LEFT-TO-RIGHT OVERRIDE" approach, which garbles inline
+    Hebrew word order and breaks line-wrapping. It was NOT updated when
+    `document_generator.py` switched to native RTL runs (w:rtl, logical order) because
+    the combined/college doc is retired from the current pipeline (run_si_pipeline.py /
+    run_enhanced_pipeline.py do not call it). If this path is ever revived, port the
+    native-RTL fix from document_generator.py first: _segment_by_script, _mark_run_hebrew,
+    _add_inline_runs, _join_rtl_runs_across_whitespace, and the _add_summary_paragraph
+    RTL handling, then rewire the reverse+LRO blocks the same way."""
 
     def __init__(self, psalm_num: int,
                  main_intro_path: Path, main_verses_path: Path,
