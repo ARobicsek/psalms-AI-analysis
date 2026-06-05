@@ -1,9 +1,5 @@
 # How the Psalms Commentary Pipeline Works
 
-*A description for a technically literate reader — written to explain not just the moving parts, but why each one exists and what it contributes to the finished commentary.*
-
----
-
 ## What this system is
 
 This is an AI pipeline that writes scholarly, verse-by-verse commentary on the
