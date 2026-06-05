@@ -9,6 +9,25 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 354 (2026-06-04): DOCX BiDi — verse-table Hebrew size + final polish
+
+**Objective**: Complete the Session 353 BiDi work by bumping the verse-table Hebrew (top-of-DOCX full-psalm table) to 13pt, matching all other Hebrew in the document, and applying the dash-bound concordance format and body-Hebrew size bump that were done interactively in Session 353.
+
+**Problems Identified**:
+- The verse-table Hebrew (top-of-DOCX psalm text, two-column table) was still at 12pt while all other Hebrew had been moved to 13pt during Session 353. This inconsistency was caught on DOCX review.
+
+**Solutions Implemented**:
+1. **Verse-table Hebrew 13pt** (`_format_psalm_text` in `document_generator.py`): bumped `heb_run.font.size` from `Pt(12)` to `Pt(13)` and the explicit `w:szCs` value from `24` (12pt in half-points) to `26` (13pt). This makes all Hebrew in the document uniformly 13pt — verse table, verse headers, body prose, block quotes. English in the verse table is unchanged.
+
+**Files Modified**:
+- `src/utils/document_generator.py` — `_format_psalm_text`: verse-table Hebrew 12→13pt (font.size + szCs)
+- `CLAUDE.md` — session number → 354, new entry, dropped oldest
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — this entry
+
+**Note**: The concordance dash-bound format, global Hebrew +1pt, and verse-header single-RTL-run fixes were all implemented and committed in Session 353 (commit `21a7d53`). This session adds only the verse-table size fix and wraps up the documentation.
+
+---
+
 ## Session 353 (2026-06-04): DOCX BiDi — native RTL runs replace the reverse+LRO engine
 
 **Objective**: Fix three long-standing Hebrew rendering bugs in the generated DOCX (reported on the Ps 67 run): (1) inline Hebrew quotes garbled into the wrong word order; (2) any Hebrew quote that straddles a line break wraps *backwards* (end of phrase on the upper line); (3) the "Concordance Entries Reviewed" methodological-summary line is an unreadable scramble of roots, counts, and semicolons.

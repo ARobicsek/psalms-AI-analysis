@@ -1,11 +1,14 @@
 # Psalms AI Commentary Pipeline
 
-**Session**: 353 (2026-06-04)
+**Session**: 354 (2026-06-04)
 **Phase**: Pipeline Production — tweaks and improvements
 
 AI-powered system generating scholarly verse-by-verse commentary for all 150 Psalms using Claude (Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6), GPT (5.1, 5.4), and Gemini (2.5 Pro fallback) with multi-agent pipeline and Hebrew concordance integration.
 
 ## Recent Work (Last 5 Sessions)
+**Session 354 (2026-06-04)**: DOCX BiDi — verse-table Hebrew 13pt + final size/format tweaks
+- Bumped verse-table Hebrew (top-of-DOCX psalm text table) from 12pt → **13pt** (`_format_psalm_text`, both `font.size` and `szCs`). All Hebrew now uniformly 13pt across the document.
+- No new scripts. Production Ps 67 DOCX regenerated; committed and pushed to `main`.
 **Session 353 (2026-06-04)**: DOCX BiDi — native RTL runs replace the reverse+LRO engine
 - Fixed 3 reported Hebrew-rendering bugs in the generated DOCX (`src/utils/document_generator.py`), all from one root cause: inline Hebrew was **pre-reversed into visual order + wrapped in LEFT-TO-RIGHT OVERRIDE**. (1) garbled word order when a bold/italic marker split a phrase; (2) backwards line-wrap (end of quote on the upper line) — inherent to LRO; (3) the "Concordance Entries Reviewed" summary scrambled.
 - **Fix = native RTL** (what the verse table + Arabic path already do): keep Hebrew in logical order, mark runs `w:rtl` + cs font, paragraph stays LTR; Word's bidi engine handles order/nikud/wrapping. New `_add_inline_runs` + `_segment_by_script` (glues intra-phrase spaces/maqqef and the geresh-style `ה'` apostrophe; leaves English `king's`) + `_mark_run_hebrew` replace all ~6 reverse+LRO paths. `_join_rtl_runs_across_whitespace` (post-pass) fixes the bold-split boundary space. `_add_summary_paragraph` renders a Hebrew breakdown as a native RTL paragraph. Removed ~227 lines of dead reversal methods.
@@ -24,10 +27,6 @@ AI-powered system generating scholarly verse-by-verse commentary for all 150 Psa
 - Diagnosed that concordance searches were lifting verbatim multi-word phrases from each verse; across Ps 54–58, **62% returned only the source verse (self-match), 14% nothing, only 24% any external parallel** (3-word queries: 0/12). Root cause: the agent was forbidden from searching single distinctive roots, and the override clobbered any root query into the verse phrase.
 - Shipped **A** (trace distinctive single roots — prompt rewrite in `micro_analyst.py`, fixed `_override_llm_base_forms` to leave ≤2-word queries intact, new deterministic `_augment_with_root_searches` + `src/concordance/root_selection.py`), **B** (collocations capped at 2 words), **C** (self-match filtering + honest "external"/"appears only in this psalm" counts in `concordance_librarian.py`/`research_assembler.py`, post-search common-word guard `COMMON_CAP=60`). Also: random (seeded) canon-spread sampling of displayed matches; Hebrew-only result lines (dropped English gloss, ~47% token saving); no verse-form expansion of collocations. Measured yield **24% → ~90%** external (e.g. Ps 56: 0/10 → 21/23), surfacing non-obvious intertexts (`פלג`→Babel Gen 10-11, `נוד`→Cain Gen 4, `מוש`→Exod 13:22 pillar, `חסד אמת`→Exod 34:6).
 - **D & E were the next session** (design in `docs/architecture/LEMMA_ROOT_SEARCH_PROPOSAL.md`; shipped in Session 351): wire the already-built but unused ETCBC/BHSA lemma data into a `lemma`/`root` column on the `concordance` table for true morphology-aware root + 2-word search. Eval/trace harnesses: `scripts/EXPERIMENT_concordance_eval.py`, `scripts/EXPERIMENT_concordance_trace.py`.
-**Session 349 (2026-05-30)**: Remove JSON Dependencies from Pipeline
-- Removed `psalm_function_for_RAG.json` and `ugaritic.json` data loading from `RAGManager` as they are now superseded by deep research.
-- Removed Ugaritic metrics from DOCX methodological summaries in `document_generator.py` and `combined_document_generator.py`.
-- Cleaned up documentation references in `CONTEXT.md` and `DEVELOPER_GUIDE.md`.
 ## Quick Commands
 
 ```bash

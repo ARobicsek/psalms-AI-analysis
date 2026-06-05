@@ -1315,12 +1315,12 @@ class DocumentGenerator:
 
             heb_run = p_heb.add_run(modified_hebrew)
             heb_run.font.rtl = True
-            heb_run.font.size = Pt(12)
-            
-            # Explicitly set Complex Script font size (24 half-points = 12pt)
+            heb_run.font.size = Pt(13)
+
+            # Explicitly set Complex Script font size (26 half-points = 13pt)
             rPr_heb = heb_run._element.get_or_add_rPr()
             szCs_heb = OxmlElement('w:szCs')
-            szCs_heb.set(ns.qn('w:val'), '24')
+            szCs_heb.set(ns.qn('w:val'), '26')
             rPr_heb.append(szCs_heb)
 
             # English cell (right)
