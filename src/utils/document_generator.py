@@ -569,9 +569,13 @@ class DocumentGenerator:
 
         hebrew = match.group(1).strip()
 
-        # Skip verse quotations — these contain sof-pasuq (׃) and are rendered inline
-        # as native RTL runs (Aptos 12pt) by _add_inline_runs, not as standalone blocks.
-        if '׃' in hebrew:
+        # Skip verse quotations — a sof-pasuq (׃) marks a complete verse, which is rendered
+        # inline as native RTL runs (matching every other verse header), not as a standalone
+        # block. The ׃ can sit just past the matched Hebrew when a ketiv/qere closes the verse
+        # (e.g. "…[וַעֲנֵנִי]׃"): the closing bracket ends the Hebrew run before the sof-pasuq,
+        # so it falls outside group(1). Check a short trailing window too, not just the match.
+        trailing = text[match.end():match.end() + 5]
+        if '׃' in hebrew or '׃' in trailing:
             return None
 
         before = text[:match.start()].rstrip()
@@ -658,8 +662,9 @@ class DocumentGenerator:
                 hebrew = hebrew + after
                 after = ""
                 
-            # If the Hebrew block is at the very beginning of the string and spans a whole line, it's a verse
-            font_to_use = 'Aptos' if not before and (not after or after.startswith('\n')) else 'Times New Roman'
+            # Keep all standalone Hebrew blocks in the Times New Roman complex-script font for
+            # visual consistency with the rest of the document's Hebrew.
+            font_to_use = self.HEBREW_FONT
                 
             if before:
                 self._add_paragraph_with_markdown(before, style=style)
@@ -1084,9 +1089,12 @@ class DocumentGenerator:
                 hebrew = hebrew + after
                 after = ""
                 
-            # Force Aptos exactly when this block is flagged as the core verse header.
-            # Otherwise use the default Times New Roman block font for long quotes.
-            font_to_use = 'Aptos' if is_verse_header else 'Times New Roman'
+            # Render every standalone Hebrew block in the same Times New Roman complex-script
+            # font as the rest of the document's Hebrew (verse headers, inline quotes, the
+            # verse table). A long verse-header colon — 6+ words with no sof-pasuq inside the
+            # matched span — used to land here and force Aptos, making that one header render
+            # in a different typeface than every other verse header.
+            font_to_use = self.HEBREW_FONT
                 
             if before:
                 self._add_paragraph_with_soft_breaks(before, style=style, is_verse_header=is_verse_header)

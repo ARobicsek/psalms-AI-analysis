@@ -9,6 +9,30 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 356 (2026-06-09): DOCX BiDi — verse header ending in a ketiv/qere rendered in the wrong typeface
+
+**Objective**: User reported that in a generated DOCX, the verse-7 Hebrew header above its commentary rendered in a *different typeface* (Aptos 13) than every other Hebrew in the document (Times New Roman 13). Initially reported as Ps 67, later corrected to **Ps 60**.
+
+**Root cause** (`src/utils/document_generator.py`):
+- Verse-header Hebrew has two render paths: the native-RTL `_add_primarily_hebrew_line` (→ Times New Roman, LTR paragraph, no indent — the normal path) and the "long bare Hebrew block" `_add_hebrew_block_paragraph` (→ a right-aligned, 0.3″-indented RTL block, and for `is_verse_header` it **hardcoded Aptos**).
+- `_split_long_hebrew_block` decides between them. It matches 6+ consecutive Hebrew words and is supposed to bail (`return None`) on anything containing a sof-pasuq ׃ (a complete verse), so verses route to the normal path. **But the guard only checked the matched group** (`match.group(1)`).
+- Ps 60 v7 ends in a **ketiv/qere**: `לְמַעַן יֵחָלְצוּן יְדִידֶיךָ; הוֹשִׁיעָה יְמִינְךָ (ועננו) [וַעֲנֵנִי]׃`. The closing `]` is not a Hebrew character, so the regex's final `heb_word` ends at `וַעֲנֵנִי` and the trailing `]׃` falls **outside** `group(1)`. The guard saw no ׃ → treated the header as a bare Hebrew block → Aptos + block indentation. Every other verse ends in a bare `…ם׃` (the ׃ glued to the last word, inside the match) → guard fires → normal TNR path. Hence exactly one header looked wrong.
+- This affects **any** psalm whose verse closes with a bracketed qere before the sof-pasuq — common in Psalms — not a Ps-60-specific fluke.
+
+**Forensics**:
+- Confirmed the symptom by scanning the actual DOCX XML: `output/psalm_60/psalm_060_commentary.docx` had exactly **1 Aptos-fonted Hebrew run** — the v7 header (`לְמַעַן יֵחָלְצוּן…`) — out of ~248 Hebrew runs (rest Times New Roman).
+- The earlier Ps 67 detour was a false lead: Ps 67 v7 ends in a bare `…אֱלֹקֵינוּ׃`, so its guard fires and it was already uniform TNR. Verified byte-identical v6/v7 run properties in both the pipeline `_SI.docx` and the Word-resaved `Psalm 67 v2.docx` (0 Aptos Hebrew). That file simply doesn't exhibit the bug; the real case was Ps 60.
+
+**Fix (two parts)**:
+1. **Guard** (`_split_long_hebrew_block`): also inspect a 5-char trailing window past the match — `trailing = text[match.end():match.end()+5]` — and bail if `'׃' in hebrew or '׃' in trailing`. A `[qere]׃` verse is now recognized as a complete verse and routes through `_add_primarily_hebrew_line` like every other header, fixing **both** the font and the alignment/indent in one move.
+2. **Font safety net**: the two block-path branches that hardcoded `'Aptos'` — the `is_verse_header` branch in `_add_paragraph_with_soft_breaks` and the "whole-line at string start" branch in `_add_paragraph_with_markdown` — now use `self.HEBREW_FONT` (Times New Roman). So even a genuinely punctuation-less long Hebrew header can never render Aptos.
+
+**Verification** (deterministic, no LLM cost):
+- Unit-traced the exact v7 string through the real `DocumentGenerator`: `_split_long_hebrew_block(...) is None` now True; rendering v7 vs a normal header (v6) yields identical run/paragraph properties (`cs=Times New Roman`, `bidi`, no alignment override, no indent).
+- Regenerated `output/psalm_60/psalm_060_commentary.docx` (`python scripts/run_docx_only.py 60`) and rescanned: **0 Aptos-fonted Hebrew runs** (234 explicit Times New Roman + 14 inherited→TNR). The v7 header paragraph is now `align=default, indent=False`. The one remaining right-aligned/indented Hebrew block is a legitimate long-quote of v7 under the intro heading "Key verses and phrases" — intended block-quote rendering, now Times New Roman.
+
+**Files changed**: `src/utils/document_generator.py` only. No scripts created or changed. Pipeline artifact `output/psalm_60/psalm_060_commentary.docx` regenerated; the user's study-guide copy (`Documents/Psalm study guide/Psalm 60.docx`) left untouched for the user to re-copy.
+
 ## Session 355 (2026-06-08): Post-migration path fix — figurative-language DB
 
 **Objective**: Get the pipeline running again after the repo was migrated from OneDrive to the C drive (`C:\dev\personal\psalms`). Two failures surfaced when the user ran `python scripts/run_enhanced_pipeline.py 60`.
