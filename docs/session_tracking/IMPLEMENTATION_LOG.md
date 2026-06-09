@@ -9,6 +9,39 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 355 (2026-06-08): Post-migration path fix — figurative-language DB
+
+**Objective**: Get the pipeline running again after the repo was migrated from OneDrive to the C drive (`C:\dev\personal\psalms`). Two failures surfaced when the user ran `python scripts/run_enhanced_pipeline.py 60`.
+
+**Problems Identified**:
+1. **Environment (not a code bug)**: In **git bash**, `python` resolved to the *global* `C:\Python313` install (loading `anthropic` from `AppData\Roaming\Python\Python313\site-packages`) instead of the venv — the slow import was Ctrl-C'd (the `KeyboardInterrupt` in the traceback, not a crash). The user's `c:\dev\…\venv\Scripts\activate` also failed because git bash treats backslashes as escapes. The venv itself is healthy (`pyvenv.cfg` → `C:\Python313`, `anthropic 0.79.0` imports in ~1.7s). Resolution is to activate with `source venv/Scripts/activate` (forward slashes) in git bash; PowerShell already auto-resolves the venv.
+2. **Real migration casualty**: Step 2 (Micro Analysis) crashed with `FileNotFoundError: Figurative language database not found at C:\Users\ariro\OneDrive\Documents\Bible\database\Biblical_fig_language.db`. The figurative-language DB is **not** in the psalms repo — it lives in a **separate `bible` repo** that was also migrated to `C:\dev\personal\bible` (sibling of `psalms`). `FIGURATIVE_DB_PATH` in `src/agents/figurative_librarian.py` was hardcoded to the now-dead OneDrive location.
+
+**Solutions Implemented**:
+1. **`figurative_librarian.py` path made migration-resilient** (`src/agents/figurative_librarian.py:35`): replaced the hardcoded absolute path with a repo-relative default plus an env-var override:
+   ```python
+   _DEFAULT_FIGURATIVE_DB_PATH = (
+       Path(__file__).resolve().parents[2].parent / "bible" / "database" / "Biblical_fig_language.db"
+   )
+   FIGURATIVE_DB_PATH = Path(os.environ.get("FIGURATIVE_DB_PATH", _DEFAULT_FIGURATIVE_DB_PATH))
+   ```
+   `parents[2]` is the psalms repo root, `.parent` is the repos root (`C:\dev\personal`), so it finds `…/bible/database/Biblical_fig_language.db` regardless of where the repos root sits, as long as `bible` and `psalms` remain siblings. Added `import os` and updated the module docstring's "Database Location" note.
+2. **Chose the live migrated copy, not the OneDrive archive**: the user suggested `C:\Users\ariro\OneDrive\Documents\_Archive\Migrated repos (originals)`, but that is a backup still inside OneDrive (the location being abandoned). The live copy at `C:\dev\personal\bible\database\Biblical_fig_language.db` is byte-identical (152 MB, 2026-01-10) and lives in the properly migrated repo, so the repo-relative default points there.
+
+**Verification** (no LLM cost):
+- `FIGURATIVE_DB_PATH` resolves to `C:\dev\personal\bible\database\Biblical_fig_language.db`, `.exists()` → True; DB opens (tables: `verses`, `figurative_language`).
+- `FigurativeLibrarian()` instantiates, and the full construction chain that died — `MicroAnalystV2(...)` → `ResearchAssembler` → `FigurativeLibrarian` (line 535 of `run_enhanced_pipeline.py`) — builds cleanly, with the Sacks / tanakh / liturgical librarians all resolving their paths inside the psalms repo.
+- Grepped `src/` + `scripts/` for `OneDrive` / `C:/Users` paths: **this was the only such reference in production code**; all remaining ones are in `archive/` and `scratch/` (not used by the pipeline).
+
+**Files Modified**:
+- `src/agents/figurative_librarian.py` — `import os`; `FIGURATIVE_DB_PATH` now repo-relative with `FIGURATIVE_DB_PATH` env override; docstring updated
+- `CLAUDE.md` — session number → 355, new entry, dropped oldest (Session 350)
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — this entry
+
+**Standing note for future migrations**: the psalms pipeline has a hard runtime dependency on the sibling `bible` repo for the figurative-language DB. If the two repos are ever separated, set the `FIGURATIVE_DB_PATH` env var to bridge them. No scripts created/changed → `scriptReferences.md` untouched.
+
+---
+
 ## Session 354 (2026-06-04): DOCX BiDi — verse-table Hebrew size + final polish
 
 **Objective**: Complete the Session 353 BiDi work by bumping the verse-table Hebrew (top-of-DOCX full-psalm table) to 13pt, matching all other Hebrew in the document, and applying the dash-bound concordance format and body-Hebrew size bump that were done interactively in Session 353.

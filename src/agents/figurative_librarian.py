@@ -18,11 +18,13 @@ Hierarchical Tag System:
 - Search for "fox" finds only fox-specific entries
 
 Database Location:
-- C:/Users/ariro/OneDrive/Documents/Bible/database/Biblical_fig_language.db
+- Lives in the sibling `bible` repo: <repos_root>/bible/database/Biblical_fig_language.db
+- Override with the FIGURATIVE_DB_PATH environment variable if it lives elsewhere
 - Contains 2,863 figurative instances in Psalms (from CONTEXT.md)
 - Includes full AI deliberations and validations
 """
 
+import os
 import sys
 import sqlite3
 from pathlib import Path
@@ -31,8 +33,13 @@ from dataclasses import dataclass, replace
 from collections import Counter
 import json
 
-# Database path
-FIGURATIVE_DB_PATH = Path("C:/Users/ariro/OneDrive/Documents/Bible/database/Biblical_fig_language.db")
+# Database path. The figurative-language DB lives in the sibling `bible` repo
+# (both `psalms` and `bible` sit under the same repos root, e.g. C:/dev/personal).
+# Allow an explicit override via the FIGURATIVE_DB_PATH env var.
+_DEFAULT_FIGURATIVE_DB_PATH = (
+    Path(__file__).resolve().parents[2].parent / "bible" / "database" / "Biblical_fig_language.db"
+)
+FIGURATIVE_DB_PATH = Path(os.environ.get("FIGURATIVE_DB_PATH", _DEFAULT_FIGURATIVE_DB_PATH))
 
 
 @dataclass
