@@ -5,6 +5,7 @@ Examples:
 
 # Generate complete commentary for Psalm XX
 python scripts/run_enhanced_pipeline.py XX
+(or if that doesn't work: venv/Scripts/python scripts/run_enhanced_pipeline.py XX) to activate the venv
 
 #just literary echoes
 python scripts/run_literary_echoes.py XX
