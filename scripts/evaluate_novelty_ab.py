@@ -42,6 +42,13 @@ import zipfile
 from pathlib import Path
 from typing import Optional, Tuple
 
+# Pick up API keys from the project .env, like every pipeline agent does.
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 OLD_DIR_DEFAULT = "output/psalm_{n}"
