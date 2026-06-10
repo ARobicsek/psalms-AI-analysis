@@ -1,0 +1,13 @@
+## Changes
+*For exact before/after text, see [psalm_059_copy_edit_diff.md](psalm_059_copy_edit_diff.md).*
+
+1. [7] **Introduction**: Changed "Eighteen verses later" to "Seventeen verses later." The superscription is v. 1 and the final verse is v. 18, so the interval is seventeen verses, not eighteen.
+2. [7] **Introduction**: Changed "three verses later" to "four verses later" in the Cain-parallel paragraph. The prayer of v. 12 is answered in v. 16, which is four verses later.
+3. [7] **Liturgical — Full psalm**: Removed the phrase "second-person" from "Its unrelenting second-person enemies." The enemies in Psalm 59 are spoken of in the third person, so the original grammatical description was incorrect.
+4. [7] **Verse 5**: Replaced "Three terms, three different negating particles" with "Three terms, repeated negation." The verse sequence uses repeated negation, but not three different negating particles.
+5. [7] **Verse 11**: Changed "The last two words ... are unambiguously 'my faithful love'" to "The closing phrase ... is unambiguously in the 'my' form." The full phrase אֱלֹקֵי חַסְדִּי does not translate as "my faithful love"; the point at issue is the suffix on חַסְדִּי.
+6. [2, 7] **Verse 11**: Revised "a fourth watching-word" to "another watching-word" and broadened the frame to "the larger theme of perception." The original count treated שֹׁמֵעַ ("hears," v. 8) as a watching-word, which contradicted the commentary's own earlier emphasis on hearing and perception.
+7. [9e] **Verse 11**: Changed "protection in every compass-direction" to "protection from more than one direction." The paragraph names protection above, between, and ahead; "every compass-direction" overstated the evidence.
+8. [7, 9b] **Verse 14**: Removed the sentence linking אַפְסֵי הָאָרֶץ to אֶפֶס as "nothing, zero." In this context the phrase means "the ends of the earth"; the lexical aside did not support the geographic conclusion and strained the argument.
+9. [3, 7] **Verse 16**: Reworked "The degradation is also acoustic ... a pathetic whimper" into a contrast of verbs without attributing a specific sound-value to וַיָּלִֽינוּ. The original sentence treated the effect as sound-based and implied a meaning ("whimper") the verb itself does not carry; the form here supports a lexical contrast, not onomatopoeia.
+10. [2, 7] **Verse 17**: Changed "the verb עֻזֶּךָ֮" to "the word עֻזֶּךָ֮" and corrected the progression so v. 10 still refers to the enemy's strength. עֻזֶּךָ is a noun with suffix, not a verb, and the original sentence contradicted the earlier interpretation of v. 10.
