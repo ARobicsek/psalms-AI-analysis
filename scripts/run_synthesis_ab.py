@@ -72,7 +72,20 @@ CONTAM_TERMS = {
 def assemble_inputs(me: MasterEditorSI, psalm_number: int) -> dict:
     """Reproduce, byte-for-byte, the input assembly in
     MasterEditor.discover_cross_verse_observations (Step 3.5)."""
-    output_path = PROJECT_ROOT / "output" / f"psalm_{psalm_number:03d}"
+    # Pipeline convention (run_si_pipeline.py): directory is NOT zero-padded
+    # (output/psalm_67) but the filenames inside ARE (psalm_067_macro.json).
+    # Accept either directory form.
+    candidates = [
+        PROJECT_ROOT / "output" / f"psalm_{psalm_number}",
+        PROJECT_ROOT / "output" / f"psalm_{psalm_number:03d}",
+    ]
+    output_path = next((p for p in candidates if p.is_dir()), None)
+    if output_path is None:
+        raise FileNotFoundError(
+            f"No output directory for Psalm {psalm_number} "
+            f"(tried {', '.join(str(p) for p in candidates)}).\n"
+            "Run this on the machine that holds the real pipeline outputs."
+        )
     macro_file = output_path / f"psalm_{psalm_number:03d}_macro.json"
     micro_file = output_path / f"psalm_{psalm_number:03d}_micro_v2.json"
     research_file = output_path / f"psalm_{psalm_number:03d}_research_v2.md"
