@@ -128,6 +128,65 @@ byte-identical to round 1, also worth a direct eyeball: did the r2 essay
 choose a different organizing insight than the sidecar's governing pick where
 round 1's choice was the strained one (58, 60)?
 
+## Round 3 (Session 358, after the round-2 verdict)
+
+**Round-2 result: OLD won 3–0 again** (six straight verdicts). Decisive
+diagnostics: (1) the round-2 writer-empowerment patch did not move the writer
+— all three essays kept the sidecar's governing pick as their spine, and
+overreach did not drop; **R1 is falsified** across two variants. (2) Judge
+noise was measured for free (the OLD text was byte-identical across rounds,
+yet its best-5 moved up to ±1.0 and gold counts ±4) — margins are near the
+noise floor but 6/6 same-signed verdicts is real signal. (3) Forensics on the
+v2 sidecar files: it FOUND the judges' favorite observation (Ps 59 ־מוֹ
+badge) but tiered it ADDITIONAL while strained constructions wore GOVERNING;
+it missed Ps 60's Edom preposition track (v1 had found it) and produced only
+a weak local form of Ps 58's name-withholding. The sidecar's discovery is
+good and its *tiering judgment* is bad — and the writer obeys tiers.
+
+**Round-3 changes:**
+1. **R1 fully reverted** — the Master Writer prompt and the splice block are
+   back to the proven production baseline (S357 state). Thesis selection is
+   entirely the writer's call, with zero added selection mandates. (R5's
+   macro pass-through and the SI conjecture drift fix are retained.)
+2. **Sidecar v2.1** (`synthesis_discovery.py`, prompt-only):
+   - **De-tiered output**: a flat, UNRANKED observation list ordered by
+     primary verse — no GOVERNING/CORE/ADDITIONAL, no salience signals;
+     Type/Confidence/Anchors/Payoff retained (Confidence is calibration,
+     not salience). Selecting and weighting is explicitly named as the
+     Master Writer's job. Extraction markers unchanged.
+   - **Additive DISTRIBUTIONAL sweep** in the collision pass: pick axes the
+     psalm's own surface suggests, tabulate them in reasoning, inspect for
+     lopsidedness including CONSPICUOUS ABSENCES ("a table you never build
+     is a pattern you never see"). Explicitly a generator, NOT a gate: the
+     qualitative TYPE P sweep is unchanged and needs no tabulation.
+   - Honesty filters (a)-(j) untouched. Judge untouched.
+3. **Copy editor**: retains R2 + the hedge-hardening check (unproven but
+   principled; no observed harm).
+
+**Round-3 run** (regenerates synthesis-discovery + writer + downstream on the
+byte-identical round-1 macro/micro/research; ~$5.7/psalm ≈ $17 + ~$3 judge):
+
+```bash
+git pull
+python scripts/run_novelty_ab.py 58 59 60 --reuse-upstream output/ab_novelty --out-root output/ab_novelty_r3 --regen-synthesis
+python scripts/evaluate_novelty_ab.py 58 59 60 --new-dir "output/ab_novelty_r3/psalm_{n}" --out output/ab_novelty_r3/eval
+```
+
+Reading round 3 — three questions, in order:
+1. Do the v2.1 sidecar files now contain the known pattern gold (Edom
+   preposition track; whole-poem name-withholding; ־מוֹ badge present
+   without being buried)? Eyeball the three
+   `psalm_0NN_synthesis_discovery.md` files first — this is checkable
+   before judging.
+2. With the baseline writer free of tier anchoring, do the essays choose
+   stronger spines (e.g., does 58's essay organize around something other
+   than the anatomical scheme)?
+3. The verdicts. Given measured judge noise (~±1.0), read sign-consistency
+   across the three psalms, not margins; a 2-1 or 3-0 split either way at
+   small margins means "rough parity with the old arm," which — combined
+   with the kept plumbing wins — would already justify adopting the
+   non-writer changes.
+
 ## Adoption path
 
 If the new arm wins: merge this branch to `main` (R1-R6 + runner + runbook).

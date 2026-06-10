@@ -84,10 +84,14 @@ def main() -> int:
                     help="Baseline output dir template for the macro copy "
                          f"(default: {BASELINE_DIR_TEMPLATE})")
     ap.add_argument("--reuse-upstream", default=None, metavar="ROOT",
-                    help="Round-2 mode: copy macro/micro/research/synthesis-discovery "
-                         "from ROOT/psalm_N and rerun only writer + downstream "
-                         "(e.g. --reuse-upstream output/ab_novelty). Combine with "
-                         "--out-root output/ab_novelty_r2.")
+                    help="Copy cached upstream artifacts from ROOT/psalm_N and rerun "
+                         "only the later chain (e.g. --reuse-upstream output/ab_novelty). "
+                         "By default also reuses the cached synthesis-discovery file "
+                         "(writer-only rerun, ~$3.7/psalm). Combine with --out-root.")
+    ap.add_argument("--regen-synthesis", action="store_true",
+                    help="With --reuse-upstream: copy only macro/micro/research and "
+                         "REGENERATE the synthesis-discovery pass (tests sidecar prompt "
+                         "changes; ~$5.7/psalm: sidecar + writer + downstream).")
     ap.add_argument("--fresh-macro", action="store_true",
                     help="Run macro fresh instead of copying the baseline macro JSON")
     ap.add_argument("--with-lit-echoes", action="store_true",
@@ -127,15 +131,18 @@ def main() -> int:
                   "(accepts the overwrite + variance) or restore the file first.")
 
         if args.reuse_upstream:
-            # Round-2 mode: byte-identical upstream evidence from a prior round;
-            # rerun only the writer-and-downstream chain.
+            # Reuse mode: byte-identical upstream evidence from a prior round.
+            # Default reruns only the writer-and-downstream chain; with
+            # --regen-synthesis the sidecar regenerates too (fresh prompt, same
+            # macro/micro/research inputs).
             src_dir = PROJECT_ROOT / args.reuse_upstream / f"psalm_{n}"
             upstream = [
                 f"psalm_{n:03d}_macro.json",
                 f"psalm_{n:03d}_micro_v2.json",
                 f"psalm_{n:03d}_research_v2.md",
-                f"psalm_{n:03d}_synthesis_discovery.md",
             ]
+            if not args.regen_synthesis:
+                upstream.append(f"psalm_{n:03d}_synthesis_discovery.md")
             missing = [f for f in upstream if not (src_dir / f).exists()]
             if missing:
                 print(f"  [FAIL] --reuse-upstream: missing in {src_dir}: {missing}")
@@ -144,13 +151,18 @@ def main() -> int:
             if not args.dry_run:
                 for f in upstream:
                     shutil.copy2(src_dir / f, arm_dir / f)
+            held = "macro/micro/research" + ("" if args.regen_synthesis
+                                             else "/synthesis-discovery")
+            regen = " (synthesis-discovery REGENERATES with current prompt)" \
+                if args.regen_synthesis else ""
             print(f"  upstream reused from {src_dir} ({len(upstream)} files — "
-                  "macro/micro/research/synthesis-discovery held byte-identical)")
+                  f"{held} held byte-identical){regen}")
 
             cmd = [sys.executable, "scripts/run_enhanced_pipeline.py", str(n),
                    "--output-dir", str(arm_dir),
-                   "--skip-macro", "--skip-micro", "--skip-lit-echoes",
-                   "--reuse-synthesis-discovery"]
+                   "--skip-macro", "--skip-micro", "--skip-lit-echoes"]
+            if not args.regen_synthesis:
+                cmd.append("--reuse-synthesis-discovery")
             if args.delay is not None:
                 cmd += ["--delay", str(args.delay)]
         else:
