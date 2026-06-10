@@ -369,12 +369,15 @@ def main() -> int:
                          "psalm from (seed, psalm) so order varies across psalms "
                          "— a single fixed order across all judgments would "
                          "confound the verdict with LLM position bias.")
-    ap.add_argument("--order", choices=["shuffle", "old-first", "new-first"],
-                    default="shuffle",
-                    help="Presentation order of the two commentaries. Default "
-                         "'shuffle' (per-psalm seeded). Use the explicit orders "
-                         "for position-bias control runs: judge the same files "
-                         "twice, once per order, and compare verdicts.")
+    ap.add_argument("--order", choices=["both", "shuffle", "old-first", "new-first"],
+                    default="both",
+                    help="Presentation order of the two commentaries. Default 'both': "
+                         "judge each psalm TWICE (old-first and new-first) and report "
+                         "position-debiased averages plus an order-agreement flag — "
+                         "a control run on identical files showed the judge favored "
+                         "the second-presented commentary in 12 of 12 judgments, so "
+                         "single-order verdicts are unreliable. Single-order modes "
+                         "cost half and are kept for quick looks.")
     ap.add_argument("--skip-judge", action="store_true",
                     help="Deterministic metrics only — no LLM call, $0")
     ap.add_argument("--max-arm-chars", type=int, default=300000,
@@ -421,57 +424,124 @@ def main() -> int:
 
         summary = {"psalm": n}
         if client is not None:
-            arms = [("old", old_text), ("new", new_text)]
-            if args.order == "old-first":
-                pass  # already old, new
-            elif args.order == "new-first":
-                arms.reverse()
-            else:
-                # Per-psalm seeding: a fresh Random(seed) per invocation used to
-                # yield the SAME order for every psalm (rounds 1-3 presented
-                # new-first in all nine judgments — a position-bias confound).
-                random.Random(f"{args.seed}:{n}").shuffle(arms)
-            mapping = {"A": arms[0][0], "B": arms[1][0]}
-            prompt = JUDGE_PROMPT.format(
-                psalm_number=n,
-                psalm_text_block=psalm_text_block(n, args.db_path),
-                text_a=arms[0][1],
-                text_b=arms[1][1],
-            )
-            print(f"Psalm {n}: judging (blind: A={mapping['A']}, B={mapping['B']} — "
-                  f"recorded, not shown to judge)…")
-            resp = client.messages.create(
-                model=args.model,
-                max_tokens=20000,
-                thinking={"type": "adaptive"},
-                messages=[{"role": "user", "content": prompt}],
-            )
-            text = "".join(b.text for b in resp.content
-                           if getattr(b, "type", "") == "text")
-            report_parts.append(text)
-            report_parts.append(
-                f"\n---\nUNBLINDING (not seen by judge): Commentary A = {mapping['A']}, "
-                f"Commentary B = {mapping['B']}\n")
+            def judge_once(order_label: str):
+                arms = [("old", old_text), ("new", new_text)]
+                if order_label == "new-first":
+                    arms.reverse()
+                elif order_label == "shuffle":
+                    random.Random(f"{args.seed}:{n}").shuffle(arms)
+                mapping = {"A": arms[0][0], "B": arms[1][0]}
+                prompt = JUDGE_PROMPT.format(
+                    psalm_number=n,
+                    psalm_text_block=psalm_text_block(n, args.db_path),
+                    text_a=arms[0][1],
+                    text_b=arms[1][1],
+                )
+                print(f"Psalm {n}: judging [{order_label}] (blind: A={mapping['A']}, "
+                      f"B={mapping['B']} — recorded, not shown to judge)…")
+                resp = client.messages.create(
+                    model=args.model,
+                    max_tokens=20000,
+                    thinking={"type": "adaptive"},
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                text = "".join(b.text for b in resp.content
+                               if getattr(b, "type", "") == "text")
+                parsed = None
+                for line in reversed(text.strip().splitlines()):
+                    line = line.strip().strip("`")
+                    if line.startswith("{") and line.endswith("}"):
+                        try:
+                            parsed = json.loads(line)
+                        except json.JSONDecodeError:
+                            pass
+                        break
+                if parsed:
+                    parsed["A_is"], parsed["B_is"] = mapping["A"], mapping["B"]
+                    w = parsed.get("winner", "?")
+                    parsed["winner_arm"] = mapping.get(w, "TIE" if w == "TIE" else "?")
+                return text, mapping, parsed
 
-            parsed = None
-            for line in reversed(text.strip().splitlines()):
-                line = line.strip().strip("`")
-                if line.startswith("{") and line.endswith("}"):
-                    try:
-                        parsed = json.loads(line)
-                    except json.JSONDecodeError:
-                        pass
-                    break
-            if parsed:
-                parsed["A_is"], parsed["B_is"] = mapping["A"], mapping["B"]
-                w = parsed.get("winner", "?")
-                parsed["winner_arm"] = mapping.get(w, "TIE" if w == "TIE" else "?")
-                summary.update(parsed)
-                print(f"  winner: {parsed['winner_arm']} "
-                      f"(best5 A={parsed.get('best5_A')} B={parsed.get('best5_B')})")
+            def by_arm_val(p, key_a, key_b, arm):
+                if p is None:
+                    return None
+                v = p.get(key_a if p.get("A_is") == arm else key_b)
+                try:
+                    return float(v)
+                except (TypeError, ValueError):
+                    return None
+
+            if args.order == "both":
+                results = {}
+                for order_label in ("old-first", "new-first"):
+                    text, mapping, parsed = judge_once(order_label)
+                    results[order_label] = parsed
+                    report_parts.append(f"\n# Judge pass — presentation order: {order_label}\n")
+                    report_parts.append(text)
+                    report_parts.append(
+                        f"\n---\nUNBLINDING (not seen by judge): Commentary A = "
+                        f"{mapping['A']}, Commentary B = {mapping['B']}\n")
+                    if parsed:
+                        print(f"  [{order_label}] winner: {parsed['winner_arm']}")
+
+                p1, p2 = results["old-first"], results["new-first"]
+                if p1 and p2:
+                    def avg(key_a, key_b, arm):
+                        vals = [by_arm_val(p, key_a, key_b, arm) for p in (p1, p2)]
+                        vals = [v for v in vals if v is not None]
+                        return round(sum(vals) / len(vals), 2) if vals else None
+
+                    deb = {
+                        "psalm": n,
+                        "best5_old": avg("best5_A", "best5_B", "old"),
+                        "best5_new": avg("best5_A", "best5_B", "new"),
+                        "gold_old": avg("gold_A", "gold_B", "old"),
+                        "gold_new": avg("gold_A", "gold_B", "new"),
+                        "bridging_old": avg("bridging_gold_A", "bridging_gold_B", "old"),
+                        "bridging_new": avg("bridging_gold_A", "bridging_gold_B", "new"),
+                        "overreach_old": avg("overreach_A", "overreach_B", "old"),
+                        "overreach_new": avg("overreach_A", "overreach_B", "new"),
+                        "winner_old_first": p1.get("winner_arm"),
+                        "winner_new_first": p2.get("winner_arm"),
+                    }
+                    if p1.get("winner_arm") == p2.get("winner_arm"):
+                        deb["winner_arm"] = p1.get("winner_arm")
+                        deb["order_agreement"] = "AGREE"
+                    else:
+                        bo, bn = deb["best5_old"], deb["best5_new"]
+                        if bo is not None and bn is not None and abs(bn - bo) >= 0.3:
+                            deb["winner_arm"] = "new" if bn > bo else "old"
+                        else:
+                            deb["winner_arm"] = "TIE"
+                        deb["order_agreement"] = "SPLIT (position-sensitive)"
+                    summary.update(deb)
+                    report_parts.append(
+                        "\n# Position-debiased synthesis (mean of both orders)\n\n"
+                        f"- best-5: old {deb['best5_old']} vs new {deb['best5_new']}\n"
+                        f"- gold: old {deb['gold_old']} vs new {deb['gold_new']}\n"
+                        f"- bridging-gold: old {deb['bridging_old']} vs new {deb['bridging_new']}\n"
+                        f"- overreach: old {deb['overreach_old']} vs new {deb['overreach_new']}\n"
+                        f"- per-order winners: old-first → {deb['winner_old_first']}; "
+                        f"new-first → {deb['winner_new_first']} ({deb['order_agreement']})\n"
+                        f"- **debiased winner: {deb['winner_arm']}**\n")
+                    print(f"  debiased winner: {deb['winner_arm']} ({deb['order_agreement']}; "
+                          f"best5 old={deb['best5_old']} new={deb['best5_new']})")
+                else:
+                    summary["winner_arm"] = "PARSE-FAIL"
+                    print("  [warn] could not parse judge JSON in one or both passes")
             else:
-                print("  [warn] could not parse judge JSON summary line")
-                summary["winner_arm"] = "PARSE-FAIL"
+                text, mapping, parsed = judge_once(args.order)
+                report_parts.append(text)
+                report_parts.append(
+                    f"\n---\nUNBLINDING (not seen by judge): Commentary A = {mapping['A']}, "
+                    f"Commentary B = {mapping['B']}\n")
+                if parsed:
+                    summary.update(parsed)
+                    print(f"  winner: {parsed['winner_arm']} "
+                          f"(best5 A={parsed.get('best5_A')} B={parsed.get('best5_B')})")
+                else:
+                    print("  [warn] could not parse judge JSON summary line")
+                    summary["winner_arm"] = "PARSE-FAIL"
 
         out_file = out_dir / f"psalm_{n:03d}_eval.md"
         out_file.write_text("\n".join(report_parts), encoding="utf-8")
@@ -481,19 +551,28 @@ def main() -> int:
     if rows and client is not None:
         def by_arm(r, key_a, key_b, arm):
             return r.get(key_a if r.get("A_is") == arm else key_b, "?")
-        lines = [f"# Novelty A/B — judge summary {stamp} (model={args.model}, seed={args.seed})", ""]
-        lines.append("| psalm | winner | old best5 | new best5 | old gold | new gold "
+
+        def cell(r, debiased_key, key_a, key_b, arm):
+            # "both" mode rows carry debiased keys; single-order rows carry A/B keys.
+            if debiased_key in r:
+                return r.get(debiased_key)
+            return by_arm(r, key_a, key_b, arm)
+
+        mode = f"order={args.order}" + (" (position-debiased means)" if args.order == "both" else "")
+        lines = [f"# Novelty A/B — judge summary {stamp} (model={args.model}, {mode})", ""]
+        lines.append("| psalm | winner | agreement | old best5 | new best5 | old gold | new gold "
                      "| old bridging-gold | new bridging-gold | old overreach | new overreach |")
-        lines.append("|---|---|---|---|---|---|---|---|---|---|")
+        lines.append("|---|---|---|---|---|---|---|---|---|---|---|")
         for r in rows:
             lines.append(
                 f"| {r.get('psalm')} | {r.get('winner_arm','?')} "
-                f"| {by_arm(r,'best5_A','best5_B','old')} | {by_arm(r,'best5_A','best5_B','new')} "
-                f"| {by_arm(r,'gold_A','gold_B','old')} | {by_arm(r,'gold_A','gold_B','new')} "
-                f"| {by_arm(r,'bridging_gold_A','bridging_gold_B','old')} "
-                f"| {by_arm(r,'bridging_gold_A','bridging_gold_B','new')} "
-                f"| {by_arm(r,'overreach_A','overreach_B','old')} "
-                f"| {by_arm(r,'overreach_A','overreach_B','new')} |"
+                f"| {r.get('order_agreement','n/a')} "
+                f"| {cell(r,'best5_old','best5_A','best5_B','old')} | {cell(r,'best5_new','best5_A','best5_B','new')} "
+                f"| {cell(r,'gold_old','gold_A','gold_B','old')} | {cell(r,'gold_new','gold_A','gold_B','new')} "
+                f"| {cell(r,'bridging_old','bridging_gold_A','bridging_gold_B','old')} "
+                f"| {cell(r,'bridging_new','bridging_gold_A','bridging_gold_B','new')} "
+                f"| {cell(r,'overreach_old','overreach_A','overreach_B','old')} "
+                f"| {cell(r,'overreach_new','overreach_A','overreach_B','new')} |"
             )
         summary_file = out_dir / f"_EVAL_SUMMARY_{stamp}.md"
         summary_file.write_text("\n".join(lines), encoding="utf-8")
