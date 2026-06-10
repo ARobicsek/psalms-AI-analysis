@@ -45,6 +45,11 @@ Your mission: Write a definitive commentary on Psalm {psalm_number} that synthes
 
 **Reasoning Phase & Structural Bloat:** Take full advantage of your extended reasoning phase. Before generating your output, explicitly structure your thoughts: evaluate conflicting evidence, outline your narrative arc, define your governing argument, and systematically plan how you will integrate the data. Keep all meta-commentary, pipeline terminology, and over-explanation of the analytical framework INSIDE your reasoning phase. Your final output should be completely free of this "structural bloat" — pure, immersive scholarship.
 
+**GOLD INVENTORY (do this FIRST in your reasoning phase, before any outlining):** Sweep ALL of your inputs — the structural overview, the verse-level notes, every section of the research materials (lexicon, concordance, figurative, commentaries, liturgy, related psalms, deep research, literary echoes), the cross-verse observations if present, and the phonetic transcriptions — and list the 6-10 most surprising, explanatory, or connection-rich finds available to you anywhere in the dossier. A gold find is one a learned reader of Psalms has NOT already made: an anomaly explained, known facts newly linked, a non-obvious liturgical placement, a reworked or truncated formula, an idiom avoided or invoked, a sound-driven word choice, a bridging intertext. For EACH item, decide where it will live (the essay, or a specific verse) — or note explicitly why you are rejecting it. Then hold yourself to the plan:
+- Your essay's HOOK and its closing "ONE THING" must come from this list.
+- A verse that hosts a gold find gets that verse's depth budget (RULE 10); routine phrases around it get one plain sentence each (RULE 7b/8 already permit — indeed require — this).
+- Coverage rules govern the FLOOR of the commentary; the gold inventory governs its CEILING. Completeness is necessary; it is not the achievement. The achievement is that every genuinely novel, well-anchored find in the dossier either appears, developed, in your prose — or was consciously rejected for cause, not lost to the breadth of your obligations.
+
 ---
 
 ## ═══════════════════════════════════════════════════════════════════════════
@@ -514,6 +519,7 @@ Before submitting, verify:
 - NO BLURRY PHOTOGRAPHS: No abstract nouns (density, resonance, dynamics, contours) without concrete verbs.
 - NO FALSE PROFUNDITY (RULE 7b): Take each balanced, antithetical, chiastic, or epigrammatic sentence and strip its rhythm. Does the reader now know something the plain verse did not already tell them — or only the definition of a word, or the same point restated? If the latter, cut it or reduce it to one plain clause. No "X at its minimum / Y at its peak," "not A but B," "not a place — a pattern," or escalating-restatement constructions used to make a thin point sound deep.
 - THE ONE THING: Does the essay end with a single, memorable takeaway?
+- GOLD INVENTORY: Did each item on your gold inventory either land, developed, where you planned it (essay or named verse), or get consciously rejected for cause? If any item simply evaporated during drafting, restore it now. Do your hook and closing takeaway come from the inventory?
 - READER QUESTIONS: Each question from READER QUESTIONS is addressed somewhere in the essay or commentary.
 - FIGURATIVE LANGUAGE: Each verse with figurative language cites at least ONE biblical parallel (Hebrew + English) and generates an insight.
 - TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
@@ -567,6 +573,33 @@ class MasterEditor(MasterEditorV2):
                     section = div.get('section', '')
                     theme = div.get('theme', '')
                     lines.append(f"  - {section}: {theme}")
+
+            # Session 358 (R5): pass the structural analyst's device-function
+            # analysis and raw working notes through to the writer/synthesizer
+            # instead of dropping them (previously these fields reached nothing).
+            devices = analysis.get('poetic_devices', [])
+            if devices:
+                lines.append(f"{NL}**Poetic Devices (with function):**")
+                for d in devices:
+                    if isinstance(d, dict):
+                        name = d.get('device', '')
+                        verses = d.get('verses', '')
+                        desc = d.get('description', '')
+                        func = d.get('function', '')
+                        entry = f"  - {name}" + (f" ({verses})" if verses else "")
+                        detail = "; ".join(x for x in (desc, func) if x)
+                        if detail:
+                            entry += f": {detail}"
+                        lines.append(entry)
+                    else:
+                        lines.append(f"  - {d}")
+
+            working_notes = analysis.get('working_notes', '')
+            if working_notes:
+                lines.append(
+                    f"{NL}**Analyst's Working Notes (ambiguities, interpretive "
+                    f"challenges, raw leads):** {working_notes}"
+                )
 
             questions = analysis.get('research_questions', [])
             if questions:
@@ -874,7 +907,10 @@ class MasterEditor(MasterEditorV2):
                     "presented as conjecture in the prose ('perhaps,' 'may explain,' "
                     "'suggests') — never as established fact. Phrase coverage, RULE 7b "
                     "(no false profundity), RULE 8 (no manufactured significance), and "
-                    "the dinner-party register all still apply with full force.\n\n"
+                    "the dinner-party register all still apply with full force. "
+                    "Treat these observations as CANDIDATES for your GOLD INVENTORY: "
+                    "weigh each against your own finds and adopt, demote, or reject it "
+                    "deliberately — do not let one drop out by mere omission.\n\n"
                     f"{cross_verse}\n\n"
                 )
                 prompt = prompt.replace(anchor, observations_block + anchor)

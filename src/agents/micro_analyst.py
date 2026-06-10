@@ -213,7 +213,7 @@ DISCOVERIES FROM STAGE 1:
 
 ---
 
-GENERATE RESEARCH REQUESTS:
+{macro_questions_block}GENERATE RESEARCH REQUESTS:
 
 1. **BDB LEXICON** - Hebrew words worth deep investigation
    - **BE HIGHLY JUDICIOUS**: Only request words that are genuinely puzzling, rare, or theologically significant
@@ -468,7 +468,7 @@ class MicroAnalystV2:
 
         # Stage 2: Generate research requests
         self.logger.info("\n[STAGE 2] Generating Research Requests from Discoveries")
-        research_request = self._generate_research_requests(discoveries, psalm_number)
+        research_request = self._generate_research_requests(discoveries, psalm_number, macro_analysis)
         self._log_research_requests(research_request)
 
         # Stage 3: Assemble research bundle
@@ -716,9 +716,16 @@ class MicroAnalystV2:
     def _generate_research_requests(
         self,
         discoveries: dict,
-        psalm_number: int
+        psalm_number: int,
+        macro_analysis=None
     ) -> ResearchRequest:
-        """Stage 2: Generate research requests from discoveries."""
+        """Stage 2: Generate research requests from discoveries.
+
+        Session 358 (R6): the macro analyst's research questions are injected so
+        that retrieval is steered by the chapter-level puzzles too, not only by
+        verse-local curiosities. Previously the questions reached the writer as
+        "Open Questions" but steered no lookups.
+        """
         # Select commentary instructions based on mode
         commentary_instructions = (
             COMMENTARY_ALL_VERSES if self.commentary_mode == "all"
@@ -728,9 +735,28 @@ class MicroAnalystV2:
         # Log the commentary mode being used
         self.logger.info(f"  Commentary mode: {self.commentary_mode}")
 
+        # Session 358 (R6): macro research questions steer the request mix.
+        macro_questions_block = ""
+        macro_questions = getattr(macro_analysis, 'research_questions', None) if macro_analysis else None
+        if macro_questions:
+            numbered = "\n".join(f"{i}. {q}" for i, q in enumerate(macro_questions, 1))
+            macro_questions_block = (
+                "MACRO-LEVEL RESEARCH QUESTIONS (from the structural analysis of the whole psalm):\n\n"
+                f"{numbered}\n\n"
+                "These are the chapter-level puzzles the final commentary must eventually answer. "
+                "For each question that LOOKUP can advance, make sure at least ONE of your requests "
+                "below (lexicon, concordance, figurative, or commentary) targets it, and name the "
+                "question in that request's reason/purpose field (e.g. \"... — serves macro Q3\"). "
+                "Fold these into the existing request limits — do NOT exceed the quotas; when in "
+                "tension, a request that serves a macro question outranks one that is merely "
+                "interesting.\n\n---\n\n"
+            )
+            self.logger.info(f"  Injected {len(macro_questions)} macro research question(s) into Stage 2 prompt")
+
         # Build prompt - use string replacement instead of format to avoid conflicts with JSON braces
         prompt = RESEARCH_REQUEST_PROMPT.replace('{discoveries}', json.dumps(discoveries, ensure_ascii=False, indent=2))
         prompt = prompt.replace('{commentary_instructions}', commentary_instructions)
+        prompt = prompt.replace('{macro_questions_block}', macro_questions_block)
 
         # Call model with retry logic
         self.logger.info(f"  Calling {self.model} for research request generation...")
