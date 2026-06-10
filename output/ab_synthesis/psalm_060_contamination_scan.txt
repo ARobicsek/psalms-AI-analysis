@@ -1,0 +1,10 @@
+SPECIAL-INSTRUCTION CONTAMINATION SCAN — Psalm 60
+dossier size: 252,379 chars
+
+== INTERPRETATION terms ==
+  (none)
+
+== OBSERVATION terms ==
+  (none)
+
+VERDICT: CLEAN of the interpretation; the favoritism canary is valid. (Any observation-level hits above are the raw textual fact only.)
