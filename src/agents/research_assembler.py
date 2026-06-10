@@ -26,6 +26,7 @@ from dataclasses import dataclass, field
 import json
 import random
 import hashlib
+import re
 
 # Handle imports for both module and script usage
 if __name__ == '__main__':
@@ -92,7 +93,33 @@ def _canon_order() -> Dict[str, int]:
     return _CANON_ORDER_CACHE
 
 
-def _sample_for_display(results: list, n: int, seed_str: str) -> list:
+_REF_IN_PURPOSE_RE = re.compile(
+    r'\b((?:[1-3IVivx]{1,3}\s*)?[A-Za-z][A-Za-z]{1,14})\.?\s*(\d{1,3})[:.](\d{1,3})\b'
+)
+
+
+def _extract_purpose_refs(text: str) -> list:
+    """Extract (book_token, chapter, verse) triples named in a search's purpose
+    text, e.g. "Cain's נוד (Gen 4:16)" -> ('gen', 4, 16). Conservative: a
+    missed reference just falls back to random sampling; a spurious one pins
+    nothing unless an actual result matches book+chapter+verse."""
+    refs = []
+    for m in _REF_IN_PURPOSE_RE.finditer(text or ""):
+        token = re.sub(r'[^a-z]', '', m.group(1).lower())
+        if len(token) >= 2:
+            refs.append((token, int(m.group(2)), int(m.group(3))))
+    return refs
+
+
+def _result_matches_ref(result, ref) -> bool:
+    token, ch, v = ref
+    if result.chapter != ch or result.verse != v:
+        return False
+    book_norm = re.sub(r'[^a-z]', '', result.book.lower())
+    return book_norm.startswith(token) or token in book_norm
+
+
+def _sample_for_display(results: list, n: int, seed_str: str, pin_text: str = "") -> list:
     """
     Pick up to `n` concordance matches to render, spread across Tanakh.
 
@@ -102,12 +129,38 @@ def _sample_for_display(results: list, n: int, seed_str: str) -> list:
     the query, so a given search is reproducible across runs) and then sort it into
     canonical book order for readability. The full count is reported separately, so this
     only affects which examples are shown, not the tally.
+
+    Session 358 (R3): the sample is PURPOSE-AWARE. When the micro analyst's
+    purpose/insight notes name a specific intertext ("— Cain's נוד, Gen 4:16"),
+    any matching result is PINNED into the shown set (marked `_pinned` for the
+    renderer) instead of being left to the luck of the random draw; the
+    remaining slots are filled randomly as before.
     """
-    if len(results) <= n:
-        chosen = list(results)
+    pinned, rest = [], list(results)
+    refs = _extract_purpose_refs(pin_text)
+    if refs:
+        pinned = [r for r in results if any(_result_matches_ref(r, ref) for ref in refs)]
+        if pinned:
+            pinned_ids = {id(r) for r in pinned}
+            rest = [r for r in results if id(r) not in pinned_ids]
+
+    for r in results:
+        try:
+            r._pinned = False
+        except Exception:
+            pass
+    for r in pinned:
+        try:
+            r._pinned = True
+        except Exception:
+            pass
+
+    slots = max(0, n - len(pinned))
+    if len(rest) <= slots:
+        chosen = pinned + rest
     else:
         rng = random.Random(int(hashlib.md5(seed_str.encode('utf-8')).hexdigest(), 16))
-        chosen = rng.sample(results, n)
+        chosen = pinned + rng.sample(rest, slots)
     order = _canon_order()
     return sorted(chosen, key=lambda r: (order.get(r.book, 999), r.chapter, r.verse))
 
@@ -322,15 +375,26 @@ class ResearchBundle:
                             seen_refs.add(result.reference)
 
                     if unique_results:
-                        shown = _sample_for_display(unique_results, MAX_DISPLAY_RESULTS, primary_bundle.request.query)
+                        # Session 358 (R3): pin any result the micro analyst's purpose/
+                        # insight notes name explicitly, so the intended intertext is
+                        # never sampled out of the displayed subset.
+                        pin_text = " ".join(filter(None,
+                            [b.request.notes for b in bundles]
+                            + [b.request.insight_notes for b in bundles]))
+                        shown = _sample_for_display(unique_results, MAX_DISPLAY_RESULTS, primary_bundle.request.query, pin_text)
+                        any_pinned = False
                         for result in shown:
                             matched = result.matched_phrase if result.is_phrase_match else f"{result.matched_word} (pos {result.word_position})"
                             # Session 350: Hebrew only (no English gloss) — the writer/synthesis
                             # models read Hebrew; the gloss was ~47% of each line's token cost.
-                            md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*\n\n"
+                            pin_mark = " †" if getattr(result, '_pinned', False) else ""
+                            any_pinned = any_pinned or bool(pin_mark)
+                            md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*{pin_mark}\n\n"
 
                         if len(unique_results) > len(shown):
                             md += f"*...and {len(unique_results) - len(shown)} more results (random spread shown)*\n\n"
+                        if any_pinned:
+                            md += "*† = the passage this search was run to confirm (named in the research purpose) — shown deliberately, not randomly*\n\n"
 
                     md += "---\n\n"
                     search_num += 1
@@ -347,14 +411,22 @@ class ResearchBundle:
                         md += f"### {bundle.request.query} ({ext} external results, {bundle.request.scope}, {bundle.request.level})\n\n"
 
                     if bundle.results:
-                        shown = _sample_for_display(bundle.results, MAX_DISPLAY_RESULTS, bundle.request.query)
+                        # Session 358 (R3): purpose-aware pinning — see grouped path above.
+                        pin_text = " ".join(filter(None,
+                            [bundle.request.notes, bundle.request.insight_notes]))
+                        shown = _sample_for_display(bundle.results, MAX_DISPLAY_RESULTS, bundle.request.query, pin_text)
+                        any_pinned = False
                         for result in shown:
                             matched = result.matched_phrase if result.is_phrase_match else f"{result.matched_word} (pos {result.word_position})"
                             # Session 350: Hebrew only (no English gloss) — see grouped path above.
-                            md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*\n\n"
+                            pin_mark = " †" if getattr(result, '_pinned', False) else ""
+                            any_pinned = any_pinned or bool(pin_mark)
+                            md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*{pin_mark}\n\n"
 
                         if len(bundle.results) > len(shown):
                             md += f"*...and {len(bundle.results) - len(shown)} more results (random spread shown)*\n\n"
+                        if any_pinned:
+                            md += "*† = the passage this search was run to confirm (named in the research purpose) — shown deliberately, not randomly*\n\n"
 
                     md += "---\n\n"
 

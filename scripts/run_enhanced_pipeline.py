@@ -299,6 +299,7 @@ def run_enhanced_pipeline(
     question_model: str = "gpt-5.4",
     copy_model: str = "gpt-5.4",
     synthesis_discovery: bool = True,
+    reuse_synthesis_discovery: bool = False,  # Session 358: reuse an existing observations file instead of regenerating (~$2 saved)
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -744,7 +745,10 @@ def run_enhanced_pipeline(
                     research_file=research_file,
                     psalm_number=psalm_number,
                     output_path=output_path,
-                    skip_if_exists=False,  # Force overwrite on every run
+                    # Default: force overwrite on every run. Session 358:
+                    # --reuse-synthesis-discovery keeps an existing observations
+                    # file (writer still receives it), for writer-only reruns.
+                    skip_if_exists=reuse_synthesis_discovery,
                     model=sd_model,
                 )
                 synthesis_discovery_cost = cost_tracker.get_total_cost() - sd_cost_before
@@ -1126,6 +1130,10 @@ if __name__ == "__main__":
                             "Runs by default before the Master Writer; when run it overwrites any "
                             "prior observations file. Output: output/psalm_NNN/psalm_NNN_synthesis_discovery.md")
     parser.add_argument("--synthesis-discovery", action="store_true", help=argparse.SUPPRESS)  # legacy no-op (default-on now)
+    parser.add_argument("--reuse-synthesis-discovery", action="store_true",
+                       help="Reuse an existing psalm_NNN_synthesis_discovery.md in the output dir "
+                            "instead of regenerating it (~$2 saved). The writer still receives the "
+                            "observations. Ignored if the file is missing (fresh generation runs).")
 
     args = parser.parse_args()
 
@@ -1200,4 +1208,5 @@ if __name__ == "__main__":
         question_model=question_mdl,
         copy_model=copy_mdl,
         synthesis_discovery=not args.skip_synthesis_discovery,
+        reuse_synthesis_discovery=args.reuse_synthesis_discovery,
     )

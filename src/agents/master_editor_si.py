@@ -262,9 +262,11 @@ class MasterEditorSI(MasterEditor):
                     "Each observation has already been evidence-honesty-calibrated; "
                     "keep its phrasing strength as you find it (e.g., do not promote "
                     "\"echoes\" to \"verbatim,\" or \"consonantal play\" to \"the same "
-                    "word\"). Phrase coverage, RULE 7b (no false profundity), RULE 8 "
-                    "(no manufactured significance), and the dinner-party register "
-                    "all still apply with full force.\n\n"
+                    "word\"). Observations marked **Confidence: CONJECTURE** must be "
+                    "presented as conjecture in the prose ('perhaps,' 'may explain,' "
+                    "'suggests') — never as established fact. Phrase coverage, RULE 7b "
+                    "(no false profundity), RULE 8 (no manufactured significance), and "
+                    "the dinner-party register all still apply with full force.\n\n"
                     f"{cross_verse}\n\n"
                 )
                 prompt = prompt.replace(anchor, observations_block + anchor)

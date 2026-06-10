@@ -32,7 +32,9 @@ What this agent is NOT
 
 Output
 ------
-A markdown block (one governing observation + tiered survivors, each with
+A markdown block (a flat, UNRANKED list of observations ordered by primary
+verse — Session 358 v2.1 removed the governing/core/additional tiering so
+the Master Writer selects and weights on its own judgment — each with
 Type / Confidence / Anchors / Payoff fields) saved to:
     output/psalm_NNN/psalm_NNN_synthesis_discovery.md
 
@@ -236,11 +238,23 @@ Universal exclusions (both types):
      assonance across a line, a sound pattern that enacts the sense, or a
      word preferred over an available synonym for euphony. Read the phonetic
      transcriptions as primary evidence and tie the sound to the choice.
-   - And the TYPE P sweep across the poem itself: verb system, divine-name
-     distribution, sound architecture, structural hinges, juridical logic,
+   - DISTRIBUTIONAL sweep (one generative move among several — NOT a gate
+     on TYPE P): pick a handful of distributional axes that THIS psalm's
+     own surface suggests (which axes is your discovery), TABULATE them in
+     your reasoning — actual occurrences mapped to actual verses — and
+     inspect the tables for lopsidedness: clusters, migrations, and
+     CONSPICUOUS ABSENCES (a feature withheld for a stretch of verses, a
+     form that never lands on one actor, a name that never appears where
+     it is most expected). Distributional patterns are discovered by
+     counting, not recalled; a table you never build is a pattern you
+     never see. Most tables will be boring — discard them without comment.
+   - And the qualitative TYPE P sweep across the poem itself: verb system,
+     sound architecture, structural hinges, juridical logic,
      superscription-vs-body gap, restraint vs. excess, intertextual
-     self-reading, selah placement, repeated roots and consonantal
-     networks, spatial logic, address shifts, etc.
+     self-reading, repeated roots and consonantal networks, spatial logic,
+     address shifts, image-arcs raised and retracted, etc. These need NO
+     tabulation — patterns of this kind are perceived by reading, and they
+     are no less valuable; find them as you always have.
    Scale the pool to the psalm: at minimum ~15 candidates for a short
    psalm, 25+ for a 20+ verse psalm, spanning BOTH types. If your pool is
    all one type, you have under-generated the other — go back.
@@ -347,23 +361,22 @@ Universal exclusions (both types):
    - HINDSIGHT-INEVITABILITY: once seen, does it feel like it was always
      there? (The best observations feel found, not manufactured.)
    An observation can survive step 5 with perfect honesty and still fail
-   here. Demote such items to ADDITIONAL, or cut them.
+   here. Cut such items — or keep them only if they are real but minor
+   texture, and say so plainly in the Payoff rather than dressing them up.
 
-7. SELECT AND TIER (quality-gated, NOT quota-gated — never discard a
-   survivor merely to hit a count):
-   - ONE GOVERNING OBSERVATION: the single richest observation of either
-     type, strong enough to organize a reader's whole sense of the psalm.
-   - CORE OBSERVATIONS: the strongest survivors, each independently
-     transformative, each distinct from the governing one and from each
-     other. Scale to the psalm's length: roughly one core observation per
-     3-4 verses, floor of 2, NO ceiling. A healthy core list usually mixes
-     TYPE P and TYPE C; if yours is all one type, revisit step 3 once
-     before finalizing.
-   - ADDITIONAL OBSERVATIONS: every other survivor that is real but a
-     notch below. Long psalms in particular will have several — do not
-     throw them away.
-   Output every survivor. If the filters leave only 3 total, output 3; if
-   they leave 11, output 11. Honesty about quantity is the point.
+7. SELECT (quality-gated, NOT quota-gated — never discard a survivor
+   merely to hit a count, and never pad to reach one):
+   - Output EVERY survivor of steps 4-6 as a flat, UNRANKED list, ordered
+     by the primary verse each observation is anchored to (whole-psalm
+     observations first, in any order). Do NOT rank them, do NOT name a
+     "governing" or "central" observation, and do NOT signal which one you
+     consider strongest — selecting and weighting observations is the
+     Master Writer's job, and any salience signal you attach distorts its
+     judgment. Your job ends at: real, calibrated, novel, alive.
+   - A healthy list usually mixes TYPE P and TYPE C; if yours is all one
+     type, revisit step 3 once before finalizing.
+   - If the filters leave only 3 total, output 3; if they leave 14, output
+     14. Honesty about quantity is the point.
 
 ═══════════════════════════════════════════════════════════════════════════
 ## OUTPUT FORMAT (output ONLY this — no preamble, no brainstorm dump)
@@ -371,11 +384,13 @@ Universal exclusions (both types):
 
 ---CROSS-VERSE-OBSERVATIONS-START---
 
-## GOVERNING OBSERVATION
+## OBSERVATION 1
 
 **Type:** <PATTERN | CONNECTION>
 
-**Claim:** <2-3 sentences. The single richest observation in the psalm.>
+**Primary verse(s):** <e.g., "vv. 3-5" or "whole psalm">
+
+**Claim:** <2-3 sentences.>
 
 **Confidence:** <ESTABLISHED | PROBABLE | CONJECTURE> — <1 short clause of
 justification. CONJECTURE items must be worded as conjecture in the Claim
@@ -392,44 +407,13 @@ observation explains or newly illuminates.>
 **Novelty of the linkage (why a learned reader of Psalms has not already
 made this connection):** <1 sentence>
 
-## CORE OBSERVATION 1
-
-**Type:** <PATTERN | CONNECTION>
-
-**Claim:** <2-3 sentences.>
-
-**Confidence:** <ESTABLISHED | PROBABLE | CONJECTURE> — <justification>
-
-**Anchors (every fact this rests on, each with its footing):**
-- <anchor: ...>
-
-**Payoff (what clicks):** <1-2 sentences>
-
-**Novelty of the linkage:** <1 sentence>
-
-## CORE OBSERVATION 2
+## OBSERVATION 2
 
 <same fields>
 
-(...continue CORE OBSERVATION 3, 4, ... — as many as survive the filters
-and the ~1-per-3-4-verses scaling. Do NOT stop at an arbitrary number.)
-
-## ADDITIONAL OBSERVATION 1
-
-**Type:** <PATTERN | CONNECTION>
-
-**Claim:** <1-2 sentences.>
-
-**Confidence:** <ESTABLISHED | PROBABLE | CONJECTURE>
-
-**Anchors:**
-- <anchor: ...>
-
-**Payoff (what clicks):** <1 sentence>
-
-(...continue ADDITIONAL OBSERVATION 2, 3, ... for every remaining survivor.
-Omit this whole section only if there are genuinely no additional
-survivors.)
+(...continue OBSERVATION 3, 4, ... for EVERY survivor, ordered by primary
+verse — whole-psalm observations first. Do NOT stop at an arbitrary number
+and do NOT rank.)
 
 ---CROSS-VERSE-OBSERVATIONS-END---
 """

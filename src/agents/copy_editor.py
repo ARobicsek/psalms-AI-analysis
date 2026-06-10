@@ -76,6 +76,40 @@ the categories below and fix it.
 This stance catches problems that category-level pattern-matching misses:
 arguments that are technically well-formed but substantively unconvincing.
 
+DEMONSTRATION vs. FLAGGED CONJECTURE — apply BEFORE using categories 9(b)
+and 9(c):
+
+This commentary deliberately includes interpretive conjectures that are
+explicitly flagged as such ("perhaps," "may explain," "may reflect,"
+"suggests," "is best read as," "one possible reason," "it is tempting to
+see"). A flagged conjecture is NOT a reasoning error, a non sequitur, or a
+strained argument merely because it goes beyond what the evidence can
+prove — going beyond the provable, honestly labeled, is what the flag is
+for. For a flagged conjecture, verify exactly two things: (a) the FACTS it
+rests on are accurate (its quoted Hebrew, citations, counts, and named
+customs check out — categories 5 and 7 apply with full force), and (b) the
+hedge is honest (the claim does not later harden into certainty elsewhere
+in the text). Do NOT delete a flagged conjecture, do NOT remove or weaken
+its hedge, and do NOT "complete" its logic into a stronger claim than the
+author made. Deleting or de-hedging a correctly flagged conjecture is
+itself an error. (An UNFLAGGED interpretive leap worded as established
+fact remains a category 9 error — but when its underlying facts are sound,
+the fix is to ADD the hedge, not to delete the claim.)
+
+HEDGE-HARDENING CHECK (do this as a dedicated pass): conjectures most often
+lose their hedges at a distance — introduced honestly ("may," "perhaps,"
+"suggests," "is best read as") and then restated later, especially in the
+essay's closing paragraphs or a verse's final flourish, as established fact
+("the genre David founded," "the poet's deliberate choice," "the phonetics
+confirm"). Trace each hedged claim forward through the text: wherever a
+later restatement is stronger than the original hedge warrants, restore the
+hedge in the later statement (or scale the wording down to what the
+evidence supports). This includes claims about authorial intent ("the poet
+chose / heard / wanted"), genre or tradition construction, and unsourced
+attributions of opinion ("commentators have found it hard to justify") —
+if no source is given, soften to what is actually known or remove the
+attribution.
+
 Correct the following categories of error:
 
 1. STRUCTURAL CLAIMS. If the text labels a pattern as chiasmus, verify
@@ -120,13 +154,18 @@ Correct the following categories of error:
 
 6. WEAK CROSS-CULTURAL PARALLELS. If a literary parallel from outside
    the biblical/rabbinic tradition is introduced, the connection must run
-   deeper than a shared word or surface concept. Test: does the parallel
-   illuminate something specific about the psalm? If the two contexts are so different that the comparison
-   requires extensive qualification ("but where X does Y, the psalmist
-   does Z"), the parallel is likely obscuring rather than illuminating.
-   Keep parallels where the connection is substantive and the contrast
-   (if any) genuinely illuminates the psalm's distinctive theological
-   move. Remove or replace parallels that share only a keyword.
+   deeper than a shared word or surface concept. Test the SHARED ELEMENT:
+   is it specific (a shared image, a shared syntactic or rhetorical move,
+   a shared structural choice, the same artistic problem), or only a
+   keyword or generic theme? Note that a parallel developed through
+   CONTRAST — "where X does Y, the psalmist does Z" — is a legitimate and
+   often the strongest form of comparison when the difference itself
+   illuminates the psalm's distinctive move; this commentary's style
+   guide instructs the author to unfold such contrasts, so do NOT remove
+   a parallel merely because it is developed through qualification and
+   contrast. Remove or replace only parallels whose shared element is a
+   bare keyword or so generic that nothing specific about THIS psalm is
+   illuminated.
 
 7. FACTUAL AND TEXTUAL ACCURACY. Verify claims about biblical texts
    against the actual text. If the commentary claims two passages share

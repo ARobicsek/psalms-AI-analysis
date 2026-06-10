@@ -913,7 +913,7 @@ PHRASE BEING ANALYZED:
 {context_description}
 
 YOUR TASK:
-Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this phrase appears in Jewish liturgy. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
+Write a 4-7 sentence scholarly narrative describing WHERE, WHEN, and HOW this phrase appears in Jewish liturgy — the seventh sentence reserved for requirement 9 (the non-obvious-placement flag) when it applies. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
 
 CRITICAL REQUIREMENTS:
 
@@ -991,6 +991,11 @@ CRITICAL REQUIREMENTS:
    - Phrase from Psalm 1
    - CORRECT: "The phrase appears in Psalm 1, recited as an introductory supplement before Shir HaYichud on Yom Kippur night"
    - WRONG: "The phrase appears in Shir HaYichud"
+
+9. **FLAG THE NON-OBVIOUS PLACEMENT** (one sentence, ONLY when genuinely warranted):
+   - If the liturgical placement is NOT self-explanatory — the phrase's plain sense does not obviously fit the occasion or prayer where it appears, the compilers chose THIS phrase where many others would have served equally, or the traditions diverge in a surprising way — add ONE explicit sentence flagging the anomaly, e.g. "Why this phrase of all phrases anchors X is not self-evident: ..." and state the traditionally given reason if one exists.
+   - Do NOT invent an explanation. Naming the anomaly precisely is the deliverable; interpretation belongs to the commentary writer downstream.
+   - If the placement is routine and self-explanatory, omit this sentence entirely. A false anomaly is worse than no flag.
 
 GOOD EXAMPLE (4-6 sentences, narrative, with Hebrew quote):
 
@@ -1199,7 +1204,7 @@ PHRASE BEING ANALYZED:
 {context_description}
 
 YOUR TASK:
-Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this phrase appears in Jewish liturgy. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
+Write a 4-7 sentence scholarly narrative describing WHERE, WHEN, and HOW this phrase appears in Jewish liturgy. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
 
 CRITICAL REQUIREMENTS:
 1. NARRATIVE STYLE - Write in flowing scholarly prose, NO bullet points
@@ -1208,6 +1213,7 @@ CRITICAL REQUIREMENTS:
 4. INCLUDE EXTENDED HEBREW QUOTATIONS - At least ONE 10-15 word quotation with context
 5. USE CANONICAL CLASSIFICATION - L1 Occasion, L2 Service data
 6. DISTINGUISH MAIN PRAYER VS. SUPPLEMENT - Note if phrase is in prelude/conclusion vs. main prayer
+7. FLAG THE NON-OBVIOUS PLACEMENT - If (and only if) the placement is not self-explanatory (the phrase's plain sense does not obviously fit the occasion, or the compilers' choice of THIS phrase is surprising), add ONE sentence naming the anomaly and the traditionally given reason if any. Do NOT invent an explanation; omit entirely when the placement is routine.
 
 OUTPUT FORMAT:
 Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" label.'''
@@ -1432,7 +1438,7 @@ PSALM BEING ANALYZED:
 {context_description}
 
 YOUR TASK:
-Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this psalm is recited in Jewish liturgy. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
+Write a 4-7 sentence scholarly narrative describing WHERE, WHEN, and HOW this psalm is recited in Jewish liturgy — the seventh sentence reserved for requirement 7 (the non-obvious-placement flag) when it applies. This should read like a paragraph from an academic commentary, NOT a list or data compilation.
 
 CRITICAL REQUIREMENTS:
 
@@ -1484,6 +1490,11 @@ CRITICAL REQUIREMENTS:
    - Main Prayer: "Shir HaYichud and Anim Zemirot"
    - CORRECT: "Psalm 1 is recited as an introductory supplement before Shir HaYichud on Yom Kippur night"
    - WRONG: "Psalm 1 is incorporated into Shir HaYichud"
+
+7. **FLAG THE NON-OBVIOUS PLACEMENT** (one sentence, ONLY when genuinely warranted):
+   - If the liturgical placement is NOT self-explanatory — the psalm's plain sense does not obviously fit the occasion where the rite deploys it, the compilers chose THIS psalm where many others would have served equally, or the traditions diverge in a surprising way — add ONE explicit sentence flagging the anomaly, e.g. "Why this psalm of all psalms accompanies X is not self-evident: ..." and state the traditionally given reason if one exists.
+   - Do NOT invent an explanation. Naming the anomaly precisely is the deliverable; interpretation belongs to the commentary writer downstream.
+   - If the placement is routine and self-explanatory, omit this sentence entirely. A false anomaly is worse than no flag.
 
 GOOD EXAMPLE (narrative, informative):
 
@@ -1704,7 +1715,7 @@ PSALM BEING ANALYZED:
 {context_description}
 
 YOUR TASK:
-Write a 4-6 sentence scholarly narrative describing WHERE, WHEN, and HOW this psalm is recited in Jewish liturgy.
+Write a 4-7 sentence scholarly narrative describing WHERE, WHEN, and HOW this psalm is recited in Jewish liturgy.
 
 CRITICAL REQUIREMENTS:
 1. NARRATIVE STYLE - Flowing scholarly prose, NO bullet points
@@ -1713,6 +1724,7 @@ CRITICAL REQUIREMENTS:
 4. USE CANONICAL CLASSIFICATION - L1 Occasions and L2 Services
 5. SYNTHESIS AND SIGNIFICANCE - Explain liturgical context
 6. DISTINGUISH MAIN PRAYER VS. SUPPLEMENT
+7. FLAG THE NON-OBVIOUS PLACEMENT - If (and only if) the placement is not self-explanatory (the psalm's plain sense does not obviously fit the occasion, or the rite's choice of THIS psalm is surprising), add ONE sentence naming the anomaly and the traditionally given reason if any. Do NOT invent an explanation; omit entirely when the placement is routine.
 
 OUTPUT FORMAT:
 Write ONLY the narrative paragraph (4-6 sentences). No preamble, no "Summary:" label.'''

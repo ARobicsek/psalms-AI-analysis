@@ -568,6 +568,33 @@ class MasterEditor(MasterEditorV2):
                     theme = div.get('theme', '')
                     lines.append(f"  - {section}: {theme}")
 
+            # Session 358 (R5): pass the structural analyst's device-function
+            # analysis and raw working notes through to the writer/synthesizer
+            # instead of dropping them (previously these fields reached nothing).
+            devices = analysis.get('poetic_devices', [])
+            if devices:
+                lines.append(f"{NL}**Poetic Devices (with function):**")
+                for d in devices:
+                    if isinstance(d, dict):
+                        name = d.get('device', '')
+                        verses = d.get('verses', '')
+                        desc = d.get('description', '')
+                        func = d.get('function', '')
+                        entry = f"  - {name}" + (f" ({verses})" if verses else "")
+                        detail = "; ".join(x for x in (desc, func) if x)
+                        if detail:
+                            entry += f": {detail}"
+                        lines.append(entry)
+                    else:
+                        lines.append(f"  - {d}")
+
+            working_notes = analysis.get('working_notes', '')
+            if working_notes:
+                lines.append(
+                    f"{NL}**Analyst's Working Notes (ambiguities, interpretive "
+                    f"challenges, raw leads):** {working_notes}"
+                )
+
             questions = analysis.get('research_questions', [])
             if questions:
                 lines.append(f"{NL}**Open Questions:**")
