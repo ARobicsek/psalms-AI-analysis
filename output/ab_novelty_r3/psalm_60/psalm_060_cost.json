@@ -1,0 +1,49 @@
+{
+  "claude-opus-4-8": {
+    "call_count": 2,
+    "input_tokens": 423363,
+    "output_tokens": 36413,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "costs": {
+      "input_cost": 2.116815,
+      "output_cost": 0.910325,
+      "thinking_cost": 0.0,
+      "cache_cost": 0.0,
+      "total_cost": 3.02714
+    }
+  },
+  "gpt-5.1": {
+    "call_count": 1,
+    "input_tokens": 3692,
+    "output_tokens": 2789,
+    "thinking_tokens": 1958,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "costs": {
+      "input_cost": 0.004615,
+      "output_cost": 0.027889999999999998,
+      "thinking_cost": 0.01958,
+      "cache_cost": 0.0,
+      "total_cost": 0.052085
+    }
+  },
+  "gpt-5.4": {
+    "call_count": 1,
+    "input_tokens": 13140,
+    "output_tokens": 28740,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "costs": {
+      "input_cost": 0.032850000000000004,
+      "output_cost": 0.43110000000000004,
+      "thinking_cost": 0.0,
+      "cache_cost": 0.0,
+      "total_cost": 0.46395000000000003
+    }
+  },
+  "total_cost": 3.543175,
+  "events": []
+}
