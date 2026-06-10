@@ -364,7 +364,17 @@ def main() -> int:
     ap.add_argument("--out", default=OUT_DIR_DEFAULT)
     ap.add_argument("--model", default="claude-opus-4-8")
     ap.add_argument("--db-path", default="database/tanakh.db")
-    ap.add_argument("--seed", type=int, default=58, help="Shuffle seed for blinding")
+    ap.add_argument("--seed", type=int, default=58,
+                    help="Blinding seed. The presentation shuffle is derived per "
+                         "psalm from (seed, psalm) so order varies across psalms "
+                         "— a single fixed order across all judgments would "
+                         "confound the verdict with LLM position bias.")
+    ap.add_argument("--order", choices=["shuffle", "old-first", "new-first"],
+                    default="shuffle",
+                    help="Presentation order of the two commentaries. Default "
+                         "'shuffle' (per-psalm seeded). Use the explicit orders "
+                         "for position-bias control runs: judge the same files "
+                         "twice, once per order, and compare verdicts.")
     ap.add_argument("--skip-judge", action="store_true",
                     help="Deterministic metrics only — no LLM call, $0")
     ap.add_argument("--max-arm-chars", type=int, default=300000,
@@ -383,7 +393,6 @@ def main() -> int:
 
     out_dir = (PROJECT_ROOT / args.out).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
-    rng = random.Random(args.seed)
     stamp = _dt.datetime.now().strftime("%Y%m%d_%H%M%S")
     rows = []
 
@@ -413,7 +422,15 @@ def main() -> int:
         summary = {"psalm": n}
         if client is not None:
             arms = [("old", old_text), ("new", new_text)]
-            rng.shuffle(arms)
+            if args.order == "old-first":
+                pass  # already old, new
+            elif args.order == "new-first":
+                arms.reverse()
+            else:
+                # Per-psalm seeding: a fresh Random(seed) per invocation used to
+                # yield the SAME order for every psalm (rounds 1-3 presented
+                # new-first in all nine judgments — a position-bias confound).
+                random.Random(f"{args.seed}:{n}").shuffle(arms)
             mapping = {"A": arms[0][0], "B": arms[1][0]}
             prompt = JUDGE_PROMPT.format(
                 psalm_number=n,
