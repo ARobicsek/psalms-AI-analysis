@@ -1,87 +1,63 @@
-"""
-Synthesis Discovery Agent — "Synthesis Scholar" (Session 347; prompt v2 Session 357)
+# Synthesis Scholar — Prompt v2
 
-Synthesis DISCOVERY pass — a sidecar that produces calibrated observations the
-production one-call Master Writer can weave into its commentary at its own
-discretion. NOT a structural spine: the writer keeps full authorial control.
-See docs/session_tracking/IMPLEMENTATION_LOG.md (Sessions 347, 357) and
-docs/plans/SYNTHESIS_SCHOLAR_PROMPT_V2_DRAFT.md for design rationale; the v2
-prompt was validated against v1 in a blind A/B on Psalms 67/60/49
-(scripts/run_synthesis_ab.py).
+**Status:** ADOPTED (Session 357) after blind A/B vs. v1 on Psalms 67/60/49
+(`scripts/run_synthesis_ab.py`; results reviewed qualitatively — v2 retained
+v1's pattern quality and added the TYPE C bridging class with calibration
+intact). Production prompt: `src/agents/synthesis_discovery.py`, which adds
+one post-A/B strengthening to §2b step 1: reconstruct-and-diff on reworked
+source formulas (omissions, not just alterations — the Ps 67 canary gap).
+**Target file:** `src/agents/synthesis_discovery.py` (replaces `INPUTS_HEADER` + `SYNTHESIS_TASK`)
+**Scope of code change when adopted:** prompt constants only. The START/END
+extraction markers are kept byte-identical, so `_extract_observations_block`
+and the Master-Writer splice in `master_editor.py` need no structural change
+(one optional one-line splice addition; see §4).
 
-What this agent is FOR
-----------------------
-Two species of "aha" observation:
-- TYPE P (pattern): patterns visible only when reading two or more verses
-  together — a root doing double duty across the psalm, a tense/aspect arc
-  that is the plot in disguise.
-- TYPE C (connection): abductive cross-source synthesis — facts the dossier
-  (or standard scholarship) holds separately that explain EACH OTHER: an
-  anomaly and its best explanation, an overdetermined liturgical custom, an
-  idiom invoked/avoided, a lexical choice driven by sound. The novelty lives
-  in the linkage, not the constituent facts.
+---
 
-What this agent is NOT
-----------------------
-- Not an extractor of items already in the research bundle.
-- Not a spine: it does not assign anchor verses or mandate where claims land.
-- Not quota-driven: it outputs only what survives a novelty-of-linkage filter,
-  a hardened evidence-honesty audit, and an "aha" (boredom) audit. Interpretive
-  conjecture is permitted but must be flagged CONJECTURE and pay explanatory
-  rent.
+## 1. Design rationale (summary of the session discussion)
 
-Output
-------
-A markdown block (one governing observation + tiered survivors, each with
-Type / Confidence / Anchors / Payoff fields) saved to:
-    output/psalm_NNN/psalm_NNN_synthesis_discovery.md
+The current agent detects **patterns** ("what becomes visible holding ≥2
+verses together"). The sought-after "aha" insights are **explanations** —
+abductive moves that connect an anomaly to its best explanation, often
+joining facts from *different sections of the dossier* plus a connecting
+concept from general scholarship. Four deliberate changes:
 
-The Master Writer prompt assembly splices this in as a new INPUT block labelled
-"CROSS-VERSE OBSERVATIONS (use where they fit; do NOT structure your commentary
-around them)". Items marked CONJECTURE must be rendered as conjecture in prose.
-"""
+1. **Mission widened from cross-verse to cross-source.** Two observation
+   species: TYPE P (pattern, the current strength — kept intact) and TYPE C
+   (connection/explanation — new). The agent's unique niche is bridging
+   facts the 200–320K-char dossier holds far apart, which the
+   linearly-composing Master Writer reliably misses.
+2. **Anomaly-first generation.** A "surprise inventory" precedes
+   brainstorming: no aha without a prior "why is that?". Then a
+   **synthesis substrate** (compact per-source fact index) forces systematic
+   mining of the whole dossier before connecting, and a **collision pass**
+   deliberately pairs distant items (bisociation).
+3. **Novelty re-attached to the linkage, not the constituents.** The v1
+   filter cut any candidate containing a well-known fact — which kills
+   precisely the insights whose novelty is the *connection between* known
+   facts. v2 tests whether the linkage is standard, not whether the facts
+   are.
+4. **Filters split into two orthogonal axes.** Evidential honesty
+   (a)–(j) stays ferocious — it is scar tissue from real failures. But
+   interpretive ambition is now *licensed* under two conditions: the leap is
+   explicitly flagged as conjecture, and it pays rent in explanatory payoff.
+   A new **aha audit** (boredom cut) demotes true-but-dull survivors.
+   Training-data rule: the connecting *concept* may come from scholarship
+   the model would stake in print; both *anchors* must be quotable from the
+   dossier or the psalm.
 
-from __future__ import annotations
+The risk posture is deliberate: the sidecar's output is advisory input to
+the Master Writer, downstream of which sit the copy editor, the scripture
+verifier, and the author. Generate boldly here; verify hard downstream.
 
-import os
-import time
-from pathlib import Path
-from typing import Any, Dict, Optional
+---
 
-import anthropic
-from dotenv import load_dotenv
+## 2. The complete v2 prompt
 
-from src.utils.cost_tracker import CostTracker
-from src.utils.logger import get_logger
+### 2a. `INPUTS_HEADER` (v2)
 
-
-load_dotenv()
-
-
-DEFAULT_MODEL = "claude-opus-4-8"
-
-
-# =============================================================================
-# Prompt v2 "Synthesis Scholar" (Session 357) — same INPUT BLOCKS the Master
-# Writer sees, so the discovery pass reasons over identical evidence. Changes
-# from v1 (Session 347), validated in a blind A/B on Pss 67/60/49:
-#   - TWO SPECIES: TYPE P (cross-verse pattern, the v1 scope) + TYPE C
-#     (cross-source abductive connection: anomaly→explanation, overdetermined
-#     customs, idiom invoked/avoided, sound-as-motive for lexical choice).
-#   - GENERATION: surprise inventory → per-source synthesis substrate →
-#     deliberate collision pass (replaces the v1 pattern-type menu).
-#   - NOVELTY tested on the LINKAGE, not the constituent facts (v1 cut any
-#     candidate containing a famous fact, which suppressed exactly the
-#     known-facts-newly-connected insights).
-#   - CONJECTURE licensed if flagged and explanatory (filter (g)); the
-#     Session-346-derived evidence-honesty failure modes (a)-(j) are kept.
-#   - AHA AUDIT (boredom cut) + Type/Confidence/Anchors/Payoff output fields.
-# The exact A/B-tested v2 text lives in scripts/synthesis_ab_prompts.py; the
-# production copy below additionally instructs reconstruct-and-diff on
-# reworked source formulas (so omissions, not just alterations, surface).
-# =============================================================================
-
-INPUTS_HEADER = """You are a SYNTHESIS SCHOLAR for Psalm {psalm_number}.
+```
+You are a SYNTHESIS SCHOLAR for Psalm {psalm_number}.
 
 Below is the full research dossier the Master Writer will see when it writes
 the commentary. The dossier was assembled by specialist agents that do not
@@ -128,10 +104,11 @@ you are surfacing material, not dictating structure.
 
 ### ANALYTICAL FRAMEWORK (poetic conventions reference)
 {analytical_framework}
-"""
+```
 
+### 2b. `SYNTHESIS_TASK` (v2)
 
-SYNTHESIS_TASK = """
+```
 ═══════════════════════════════════════════════════════════════════════════
 ## YOUR TASK: SYNTHESIS DISCOVERY (NO PROSE — DO NOT WRITE COMMENTARY)
 ═══════════════════════════════════════════════════════════════════════════
@@ -203,10 +180,7 @@ Universal exclusions (both types):
 1. SURPRISE INVENTORY. Before anything else, list the 6-12 most genuinely
    UNEXPLAINED things about this psalm — the places a careful reader should
    stop and ask "why is that?" Draw from every altitude: a formula quoted
-   with something missing or altered (when the psalm reworks a known source
-   text, reconstruct the source IN FULL from your knowledge and diff it:
-   list what is altered AND what is entirely ABSENT — an omission is often
-   the loudest choice a poet makes); a superscription at odds with the
+   with something missing or altered; a superscription at odds with the
    body; a genre anomaly; a rare form or hapax in a structurally loaded
    position; a reception fact whose standard explanation feels thin ("why
    is THIS psalm used THERE?"); a translation crux; a structural
@@ -219,10 +193,10 @@ Universal exclusions (both types):
 2. SYNTHESIS SUBSTRATE. Distill from EACH section of the dossier (macro,
    micro, lexicon/concordance, commentaries, liturgical/reception, deep
    research, literary echoes, phonetic transcriptions) its 5-15 most
-   load-bearing or pregnant facts — one line each, tagged with the section
-   it came from. Mine the WHOLE archive: the strongest connections
-   typically join facts that sit far apart, which is precisely why no one
-   has made them.
+   load-bearing or pregnant facts
+   — one line each, tagged with the section it came from. Mine the WHOLE
+   archive: the strongest connections typically join facts that sit far
+   apart, which is precisely why no one has made them.
 
 3. COLLISION PASS. Now generate candidates by deliberate pairing, not by
    waiting for inspiration:
@@ -432,173 +406,119 @@ Omit this whole section only if there are genuinely no additional
 survivors.)
 
 ---CROSS-VERSE-OBSERVATIONS-END---
-"""
+```
 
+---
 
-TRANSIENT_ERRORS = (
-    anthropic.APIConnectionError,
-    anthropic.InternalServerError,
-    anthropic.RateLimitError,
-)
+## 3. v1 → v2 change map
 
+| v1 | v2 | Why |
+|---|---|---|
+| Single question: cross-verse patterns | Two questions: patterns (P) + cross-source connections (C) | The aha class is abductive/cross-domain, not structural |
+| Brainstorm from a menu of pattern-types | Surprise inventory → substrate → collision pass | No aha without a prior anomaly; forces whole-dossier mining; bisociation generates the pairings deliberately |
+| Novelty filter cuts known *facts* | Novelty tested on the *linkage* | v1 killed insights built from famous constituents (the precise bug that suppresses overdetermined-custom and meaningful-omission insights) |
+| (g) forbids the interpretive leap outright | (g) licenses *flagged* conjecture that pays explanatory rent; forbids only the unmarked leap | The hedged "perhaps because…" is where the deepest observations live; honesty moves into the labeling |
+| No dullness check | Step 6 aha audit (surprise / economy / hindsight-inevitability) | Aha-ness is the actual target; v1 never measured it |
+| Output: claim/verses/evidence/novelty | Adds Type, Confidence (ESTABLISHED/PROBABLE/CONJECTURE), Anchors-with-footing, Payoff | Lets the Master Writer calibrate prose hedging per item; makes anchors auditable downstream |
+| "CROSS-VERSE SYNTHESIS DISCOVERER" persona | "SYNTHESIS SCHOLAR" + dossier-as-uncommunicating-specialists framing | Tells the model its unique niche: no one else reads the whole archive |
+| Honesty filter (a)-(f), (h)-(j) | Kept essentially verbatim ((d) gains the anchors/connector rule) | Scar tissue from real failures; deliberately untouched |
 
-class SynthesisDiscoveryAgent:
-    """Cross-verse synthesis discovery — sidecar to the Master Writer."""
+Notes on the TYPE C shape-examples: two of the four generalize the author's
+Ps 67 exemplars (idiom-avoidance; overdetermined custom) to content-free
+*moves*. The A/B should be read with that in mind: the prompt teaches the
+move, but WHICH datum to apply it to (which idiom, which omission, which
+second support) is entirely the model's discovery. The other two shapes
+(superscription-narrative; rite↔rare-form) extend coverage beyond the
+exemplars.
 
-    def __init__(
-        self,
-        cost_tracker: Optional[CostTracker] = None,
-        model: str = DEFAULT_MODEL,
-        logger=None,
-    ):
-        self.model = model
-        self.cost_tracker = cost_tracker or CostTracker()
-        self.logger = logger or get_logger("synthesis_discovery")
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key:
-            raise RuntimeError("ANTHROPIC_API_KEY is not set")
-        self.client = anthropic.Anthropic(api_key=api_key)
+---
 
-    def discover(
-        self,
-        psalm_number: int,
-        psalm_text: str,
-        macro_analysis_text: str,
-        micro_analysis_text: str,
-        research_bundle: str,
-        phonetic_section: str,
-        analytical_framework: str,
-        debug_dir: Optional[Path] = None,
-        retries: int = 4,
-    ) -> Dict[str, Any]:
-        """Run the synthesis-discovery pass and return the observations block.
+## 4. Downstream changes when adopted (small, deferred)
 
-        Returns a dict with keys:
-          - observations_markdown: the contents between the START/END markers
-            (or the full response if the markers were not emitted)
-          - full_response: the raw Claude response text
-          - input_tokens, output_tokens, thinking_chars
-        """
-        prompt = INPUTS_HEADER.format(
-            psalm_number=psalm_number,
-            psalm_text=psalm_text,
-            macro_analysis=macro_analysis_text,
-            micro_analysis=micro_analysis_text,
-            research_bundle=research_bundle,
-            phonetic_section=phonetic_section,
-            analytical_framework=analytical_framework,
-        ) + SYNTHESIS_TASK
+1. **Splice caveat** (`master_editor.py`, the "CROSS-VERSE OBSERVATIONS"
+   block framing, ~lines 851-882): add one line — *"Items marked
+   CONFIDENCE: CONJECTURE must be presented as conjecture in the prose
+   ('perhaps', 'may explain'), never as established fact."*
+2. **Module docstring** of `synthesis_discovery.py`: update mission
+   description (pattern + connection species).
+3. Extraction markers, file paths, call signature: **unchanged**.
 
-        if debug_dir is not None:
-            debug_dir = Path(debug_dir)
-            debug_dir.mkdir(parents=True, exist_ok=True)
-            (debug_dir / f"synthesis_discovery_prompt_psalm_{psalm_number}.txt").write_text(
-                prompt, encoding="utf-8"
-            )
+---
 
-        response_text, input_tokens, output_tokens, thinking_chars = self._stream_call(
-            prompt, tag=f"SYNTHESIS-DISCOVERY psalm {psalm_number}", retries=retries
-        )
+## 5. A/B harness — IMPLEMENTED
 
-        if debug_dir is not None:
-            (debug_dir / f"synthesis_discovery_response_psalm_{psalm_number}.txt").write_text(
-                response_text, encoding="utf-8"
-            )
+**Built and ready to run locally** (cannot run in a cloud clone — the
+dossiers, databases, and `ANTHROPIC_API_KEY` live only on your machine):
 
-        self.cost_tracker.add_usage(
-            model=self.model,
-            input_tokens=input_tokens,
-            output_tokens=output_tokens,
-            thinking_tokens=0,
-        )
+- `scripts/synthesis_ab_prompts.py` — the v2 prompt as importable constants
+  (`V2_INPUTS_HEADER`, `V2_SYNTHESIS_TASK`), exact copy of §2. Production
+  `synthesis_discovery.py` is untouched; adopt v2 later by pasting these over
+  the v1 constants (markers + placeholders are identical).
+- `scripts/run_synthesis_ab.py` — runs v1 and v2 over byte-identical inputs.
 
-        observations_markdown = self._extract_observations_block(response_text)
+Run:
+```bash
+source venv/Scripts/activate            # git-bash; PowerShell auto-resolves
+python scripts/run_synthesis_ab.py 67 60 49
+```
+Outputs land in `output/ab_synthesis/`: per psalm, `psalm_NNN_{v1,v2}.md`
+(extracted observations), `_full.txt` (raw incl. reasoning trace length),
+`prompt_{v1,v2}.txt` (exact prompts sent), `contamination_scan.txt`, and a
+run `_SUMMARY`. Flags: `--only v2`, `--model`, `--out`.
 
-        return {
-            "observations_markdown": observations_markdown,
-            "full_response": response_text,
-            "input_tokens": input_tokens,
-            "output_tokens": output_tokens,
-            "thinking_chars": thinking_chars,
-        }
+The harness reuses `MasterEditorSI`'s own loaders + `research_trimmer.
+trim_bundle(max_chars=350000)` + `RAGManager`, and the agent's `_stream_call`,
+so inputs and model config are identical to Step 3.5. The SI is never loaded.
 
-    @staticmethod
-    def _extract_observations_block(response_text: str) -> str:
-        start_marker = "---CROSS-VERSE-OBSERVATIONS-START---"
-        end_marker = "---CROSS-VERSE-OBSERVATIONS-END---"
-        i = response_text.find(start_marker)
-        j = response_text.find(end_marker, i + len(start_marker)) if i != -1 else -1
-        if i == -1 or j == -1:
-            return response_text.strip()
-        return response_text[i + len(start_marker):j].strip()
+### Original requirements (for reference)
 
-    def _stream_call(self, prompt: str, tag: str, retries: int = 4):
-        """One Opus 4.7 streaming call, mirroring the Master Writer config.
+Goal: same dossier, v1 vs. v2 prompt, on Psalm 67 plus 2-3 controls
+(suggest: 60 and 49 — recent runs with full dossiers; optionally one psalm
+never yet run).
 
-        Retries on transient stream drops (the 'incomplete chunked read'
-        family) and on anthropic.* transient errors.
-        """
-        for attempt in range(1, retries + 1):
-            self.logger.info(
-                f"[{tag}] calling {self.model} (effort=max, adaptive thinking) "
-                f"- attempt {attempt}/{retries}"
-            )
-            t0 = time.time()
-            text, think_chars = "", 0
-            input_tokens, output_tokens = 0, 0
+**Contamination — findings from this session's code audit:**
 
-            stream_kwargs = {
-                "model": self.model,
-                "max_tokens": 64000,
-                "thinking": {"type": "adaptive"},
-                "messages": [{"role": "user", "content": prompt}],
-            }
-            if "opus-4-7" in self.model:
-                stream_kwargs["output_config"] = {"effort": "max"}
-            elif "opus-4-8" in self.model:
-                stream_kwargs["output_config"] = {"effort": "high"}
+- The special-instruction text **never reaches the synthesizer by
+  construction.** In `scripts/run_si_pipeline.py` the SI is passed only to
+  the Master Writer (`special_instruction=` at the Step 4 call, line ~754);
+  Step 3.5's `discover_cross_verse_observations(...)` receives only
+  macro/micro/research paths. `master_editor_si.py` likewise injects the SI
+  only into the writer prompt. The SI is also NOT fed to macro, micro, or
+  research assembly anywhere in either pipeline runner.
+- Therefore the only realistic contamination vector for the
+  נשׂיאת-פנים test is **the dossier data itself** — above all
+  `data/deep_research/psalm_067_deep_research.txt` and the research bundle
+  (commentaries/librarian outputs), which may independently discuss the
+  Priestly Blessing's third line. (Not checked in this session: those files
+  are gitignored and absent from the cloud clone — must be scanned on the
+  local machine.)
 
-            try:
-                with self.client.messages.stream(**stream_kwargs) as stream:
-                    for event in stream:
-                        if getattr(event, "type", None) == "content_block_delta":
-                            if hasattr(event.delta, "text"):
-                                text += event.delta.text
-                            elif hasattr(event.delta, "thinking"):
-                                think_chars += len(event.delta.thinking)
-                    final = stream.get_final_message()
-                    input_tokens = final.usage.input_tokens
-                    output_tokens = final.usage.output_tokens
+**Harness spec:**
 
-                dt = time.time() - t0
-                self.logger.info(
-                    f"[{tag}] done in {dt:.0f}s - in={input_tokens:,} out={output_tokens:,} "
-                    f"(~{think_chars // 4:,} thinking) | response {len(text):,} chars"
-                )
-                return text, input_tokens, output_tokens, think_chars
-
-            except TRANSIENT_ERRORS as e:
-                wait = 10 * attempt
-                self.logger.warning(
-                    f"[{tag}] transient API error after {time.time()-t0:.0f}s: "
-                    f"{type(e).__name__}: {e}"
-                )
-                if attempt == retries:
-                    raise
-                self.logger.info(f"[{tag}] retrying in {wait}s")
-                time.sleep(wait)
-            except Exception as e:
-                msg = str(e)
-                if "incomplete chunked read" in msg or "peer closed connection" in msg:
-                    wait = 10 * attempt
-                    self.logger.warning(
-                        f"[{tag}] transient stream drop after {time.time()-t0:.0f}s: {e}"
-                    )
-                    if attempt == retries:
-                        raise
-                    self.logger.info(f"[{tag}] retrying in {wait}s")
-                    time.sleep(wait)
-                    continue
-                raise
-
-        raise RuntimeError(f"[{tag}] exhausted {retries} attempts")
+1. Assemble the synthesizer inputs exactly as
+   `discover_cross_verse_observations` does (same loaders, same
+   `research_trimmer.trim_bundle(max_chars=350000)`, same
+   `_format_analysis_for_prompt`, same RAG analytical framework) — ideally
+   by refactoring that input-assembly into a reusable helper rather than
+   duplicating it. Do NOT pass any SI content.
+2. **Pre-flight contamination scan** of the fully-assembled prompt string
+   (and, for transparency, each source file): report any hits for
+   `נשיאת פנים`, `ישא פניו`, `יִשָּׂא`, `favoritism`, `partiality`,
+   `lift up his face / lifts his face`, `third line/clause/blessing`.
+   Hits are surfaced for manual review (a hit on "the blessing's third
+   line is absent" in deep research = the *observation* is fed, which is
+   acceptable to note; a hit on "favoritism/particularism" = the
+   *interpretation* is fed, which invalidates that psalm as a test of
+   Example 1). The scan REPORTS; a human decides whether to excise.
+3. Run v1 and v2 prompts on identical assembled inputs (same model
+   `claude-opus-4-8`, same effort config), save both outputs side by side
+   under `output/ab_synthesis/psalm_NNN_{v1,v2}.md` plus the assembled
+   prompt and scan report.
+4. Evaluation: (i) blind read by the author; (ii) optional LLM-judge rubric
+   scoring each observation on surprise × explanatory economy × evidential
+   honesty; (iii) the two named target insights as canaries for Ps 67 —
+   does v2 independently produce the favoritism-omission connection and/or
+   the overdetermined-omer connection (without either appearing in the
+   dossier per the scan)?
+5. Cost: ~2 synthesizer calls per psalm (~$2-4 each given 200-320K-char
+   prompts); 4 psalms ≈ $16-32. No Master Writer runs needed for the A/B.

@@ -1,87 +1,20 @@
-"""
-Synthesis Discovery Agent — "Synthesis Scholar" (Session 347; prompt v2 Session 357)
+"""Synthesis Scholar prompt v2 — the EXACT text used in the Session-357 blind
+A/B against the v1 prompt (Psalms 67/60/49). Preserved verbatim for
+reproducibility of that comparison.
 
-Synthesis DISCOVERY pass — a sidecar that produces calibrated observations the
-production one-call Master Writer can weave into its commentary at its own
-discretion. NOT a structural spine: the writer keeps full authorial control.
-See docs/session_tracking/IMPLEMENTATION_LOG.md (Sessions 347, 357) and
-docs/plans/SYNTHESIS_SCHOLAR_PROMPT_V2_DRAFT.md for design rationale; the v2
-prompt was validated against v1 in a blind A/B on Psalms 67/60/49
-(scripts/run_synthesis_ab.py).
+STATUS: ADOPTED (Session 357). The production prompt now lives in
+src/agents/synthesis_discovery.py and is this text PLUS one addition to the
+surprise inventory (reconstruct-and-diff on reworked source formulas, so
+omissions — not just alterations — surface; the gap exposed by the Ps 67
+"third blessing line" canary). The A/B harness (scripts/run_synthesis_ab.py)
+still imports from here, so reruns reproduce the original experiment.
 
-What this agent is FOR
-----------------------
-Two species of "aha" observation:
-- TYPE P (pattern): patterns visible only when reading two or more verses
-  together — a root doing double duty across the psalm, a tense/aspect arc
-  that is the plot in disguise.
-- TYPE C (connection): abductive cross-source synthesis — facts the dossier
-  (or standard scholarship) holds separately that explain EACH OTHER: an
-  anomaly and its best explanation, an overdetermined liturgical custom, an
-  idiom invoked/avoided, a lexical choice driven by sound. The novelty lives
-  in the linkage, not the constituent facts.
-
-What this agent is NOT
-----------------------
-- Not an extractor of items already in the research bundle.
-- Not a spine: it does not assign anchor verses or mandate where claims land.
-- Not quota-driven: it outputs only what survives a novelty-of-linkage filter,
-  a hardened evidence-honesty audit, and an "aha" (boredom) audit. Interpretive
-  conjecture is permitted but must be flagged CONJECTURE and pay explanatory
-  rent.
-
-Output
-------
-A markdown block (one governing observation + tiered survivors, each with
-Type / Confidence / Anchors / Payoff fields) saved to:
-    output/psalm_NNN/psalm_NNN_synthesis_discovery.md
-
-The Master Writer prompt assembly splices this in as a new INPUT block labelled
-"CROSS-VERSE OBSERVATIONS (use where they fit; do NOT structure your commentary
-around them)". Items marked CONJECTURE must be rendered as conjecture in prose.
+Design rationale + A/B spec: docs/plans/SYNTHESIS_SCHOLAR_PROMPT_V2_DRAFT.md
 """
 
-from __future__ import annotations
-
-import os
-import time
-from pathlib import Path
-from typing import Any, Dict, Optional
-
-import anthropic
-from dotenv import load_dotenv
-
-from src.utils.cost_tracker import CostTracker
-from src.utils.logger import get_logger
-
-
-load_dotenv()
-
-
-DEFAULT_MODEL = "claude-opus-4-8"
-
-
-# =============================================================================
-# Prompt v2 "Synthesis Scholar" (Session 357) — same INPUT BLOCKS the Master
-# Writer sees, so the discovery pass reasons over identical evidence. Changes
-# from v1 (Session 347), validated in a blind A/B on Pss 67/60/49:
-#   - TWO SPECIES: TYPE P (cross-verse pattern, the v1 scope) + TYPE C
-#     (cross-source abductive connection: anomaly→explanation, overdetermined
-#     customs, idiom invoked/avoided, sound-as-motive for lexical choice).
-#   - GENERATION: surprise inventory → per-source synthesis substrate →
-#     deliberate collision pass (replaces the v1 pattern-type menu).
-#   - NOVELTY tested on the LINKAGE, not the constituent facts (v1 cut any
-#     candidate containing a famous fact, which suppressed exactly the
-#     known-facts-newly-connected insights).
-#   - CONJECTURE licensed if flagged and explanatory (filter (g)); the
-#     Session-346-derived evidence-honesty failure modes (a)-(j) are kept.
-#   - AHA AUDIT (boredom cut) + Type/Confidence/Anchors/Payoff output fields.
-# The exact A/B-tested v2 text lives in scripts/synthesis_ab_prompts.py; the
-# production copy below additionally instructs reconstruct-and-diff on
-# reworked source formulas (so omissions, not just alterations, surface).
-# =============================================================================
-
-INPUTS_HEADER = """You are a SYNTHESIS SCHOLAR for Psalm {psalm_number}.
+# Placeholders match v1 exactly: psalm_number, psalm_text, macro_analysis,
+# micro_analysis, research_bundle, phonetic_section, analytical_framework.
+V2_INPUTS_HEADER = """You are a SYNTHESIS SCHOLAR for Psalm {psalm_number}.
 
 Below is the full research dossier the Master Writer will see when it writes
 the commentary. The dossier was assembled by specialist agents that do not
@@ -131,7 +64,7 @@ you are surfacing material, not dictating structure.
 """
 
 
-SYNTHESIS_TASK = """
+V2_SYNTHESIS_TASK = """
 ═══════════════════════════════════════════════════════════════════════════
 ## YOUR TASK: SYNTHESIS DISCOVERY (NO PROSE — DO NOT WRITE COMMENTARY)
 ═══════════════════════════════════════════════════════════════════════════
@@ -203,10 +136,7 @@ Universal exclusions (both types):
 1. SURPRISE INVENTORY. Before anything else, list the 6-12 most genuinely
    UNEXPLAINED things about this psalm — the places a careful reader should
    stop and ask "why is that?" Draw from every altitude: a formula quoted
-   with something missing or altered (when the psalm reworks a known source
-   text, reconstruct the source IN FULL from your knowledge and diff it:
-   list what is altered AND what is entirely ABSENT — an omission is often
-   the loudest choice a poet makes); a superscription at odds with the
+   with something missing or altered; a superscription at odds with the
    body; a genre anomaly; a rare form or hapax in a structurally loaded
    position; a reception fact whose standard explanation feels thin ("why
    is THIS psalm used THERE?"); a translation crux; a structural
@@ -433,172 +363,3 @@ survivors.)
 
 ---CROSS-VERSE-OBSERVATIONS-END---
 """
-
-
-TRANSIENT_ERRORS = (
-    anthropic.APIConnectionError,
-    anthropic.InternalServerError,
-    anthropic.RateLimitError,
-)
-
-
-class SynthesisDiscoveryAgent:
-    """Cross-verse synthesis discovery — sidecar to the Master Writer."""
-
-    def __init__(
-        self,
-        cost_tracker: Optional[CostTracker] = None,
-        model: str = DEFAULT_MODEL,
-        logger=None,
-    ):
-        self.model = model
-        self.cost_tracker = cost_tracker or CostTracker()
-        self.logger = logger or get_logger("synthesis_discovery")
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key:
-            raise RuntimeError("ANTHROPIC_API_KEY is not set")
-        self.client = anthropic.Anthropic(api_key=api_key)
-
-    def discover(
-        self,
-        psalm_number: int,
-        psalm_text: str,
-        macro_analysis_text: str,
-        micro_analysis_text: str,
-        research_bundle: str,
-        phonetic_section: str,
-        analytical_framework: str,
-        debug_dir: Optional[Path] = None,
-        retries: int = 4,
-    ) -> Dict[str, Any]:
-        """Run the synthesis-discovery pass and return the observations block.
-
-        Returns a dict with keys:
-          - observations_markdown: the contents between the START/END markers
-            (or the full response if the markers were not emitted)
-          - full_response: the raw Claude response text
-          - input_tokens, output_tokens, thinking_chars
-        """
-        prompt = INPUTS_HEADER.format(
-            psalm_number=psalm_number,
-            psalm_text=psalm_text,
-            macro_analysis=macro_analysis_text,
-            micro_analysis=micro_analysis_text,
-            research_bundle=research_bundle,
-            phonetic_section=phonetic_section,
-            analytical_framework=analytical_framework,
-        ) + SYNTHESIS_TASK
-
-        if debug_dir is not None:
-            debug_dir = Path(debug_dir)
-            debug_dir.mkdir(parents=True, exist_ok=True)
-            (debug_dir / f"synthesis_discovery_prompt_psalm_{psalm_number}.txt").write_text(
-                prompt, encoding="utf-8"
-            )
-
-        response_text, input_tokens, output_tokens, thinking_chars = self._stream_call(
-            prompt, tag=f"SYNTHESIS-DISCOVERY psalm {psalm_number}", retries=retries
-        )
-
-        if debug_dir is not None:
-            (debug_dir / f"synthesis_discovery_response_psalm_{psalm_number}.txt").write_text(
-                response_text, encoding="utf-8"
-            )
-
-        self.cost_tracker.add_usage(
-            model=self.model,
-            input_tokens=input_tokens,
-            output_tokens=output_tokens,
-            thinking_tokens=0,
-        )
-
-        observations_markdown = self._extract_observations_block(response_text)
-
-        return {
-            "observations_markdown": observations_markdown,
-            "full_response": response_text,
-            "input_tokens": input_tokens,
-            "output_tokens": output_tokens,
-            "thinking_chars": thinking_chars,
-        }
-
-    @staticmethod
-    def _extract_observations_block(response_text: str) -> str:
-        start_marker = "---CROSS-VERSE-OBSERVATIONS-START---"
-        end_marker = "---CROSS-VERSE-OBSERVATIONS-END---"
-        i = response_text.find(start_marker)
-        j = response_text.find(end_marker, i + len(start_marker)) if i != -1 else -1
-        if i == -1 or j == -1:
-            return response_text.strip()
-        return response_text[i + len(start_marker):j].strip()
-
-    def _stream_call(self, prompt: str, tag: str, retries: int = 4):
-        """One Opus 4.7 streaming call, mirroring the Master Writer config.
-
-        Retries on transient stream drops (the 'incomplete chunked read'
-        family) and on anthropic.* transient errors.
-        """
-        for attempt in range(1, retries + 1):
-            self.logger.info(
-                f"[{tag}] calling {self.model} (effort=max, adaptive thinking) "
-                f"- attempt {attempt}/{retries}"
-            )
-            t0 = time.time()
-            text, think_chars = "", 0
-            input_tokens, output_tokens = 0, 0
-
-            stream_kwargs = {
-                "model": self.model,
-                "max_tokens": 64000,
-                "thinking": {"type": "adaptive"},
-                "messages": [{"role": "user", "content": prompt}],
-            }
-            if "opus-4-7" in self.model:
-                stream_kwargs["output_config"] = {"effort": "max"}
-            elif "opus-4-8" in self.model:
-                stream_kwargs["output_config"] = {"effort": "high"}
-
-            try:
-                with self.client.messages.stream(**stream_kwargs) as stream:
-                    for event in stream:
-                        if getattr(event, "type", None) == "content_block_delta":
-                            if hasattr(event.delta, "text"):
-                                text += event.delta.text
-                            elif hasattr(event.delta, "thinking"):
-                                think_chars += len(event.delta.thinking)
-                    final = stream.get_final_message()
-                    input_tokens = final.usage.input_tokens
-                    output_tokens = final.usage.output_tokens
-
-                dt = time.time() - t0
-                self.logger.info(
-                    f"[{tag}] done in {dt:.0f}s - in={input_tokens:,} out={output_tokens:,} "
-                    f"(~{think_chars // 4:,} thinking) | response {len(text):,} chars"
-                )
-                return text, input_tokens, output_tokens, think_chars
-
-            except TRANSIENT_ERRORS as e:
-                wait = 10 * attempt
-                self.logger.warning(
-                    f"[{tag}] transient API error after {time.time()-t0:.0f}s: "
-                    f"{type(e).__name__}: {e}"
-                )
-                if attempt == retries:
-                    raise
-                self.logger.info(f"[{tag}] retrying in {wait}s")
-                time.sleep(wait)
-            except Exception as e:
-                msg = str(e)
-                if "incomplete chunked read" in msg or "peer closed connection" in msg:
-                    wait = 10 * attempt
-                    self.logger.warning(
-                        f"[{tag}] transient stream drop after {time.time()-t0:.0f}s: {e}"
-                    )
-                    if attempt == retries:
-                        raise
-                    self.logger.info(f"[{tag}] retrying in {wait}s")
-                    time.sleep(wait)
-                    continue
-                raise
-
-        raise RuntimeError(f"[{tag}] exhausted {retries} attempts")
