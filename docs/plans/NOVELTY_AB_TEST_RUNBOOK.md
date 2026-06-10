@@ -77,6 +77,57 @@ if present, else the published DOCX in `Documents/Psalm study guide/Psalm N.docx
    and formatting — still, read the two best/worst insight tables yourself
    before trusting the bottom-line verdict.
 
+## Round 2 (Session 358, after the round-1 verdict)
+
+**Round-1 result (Pss 58/59/60, judged blind): OLD won 3–0** (best-5 margins
+−1.0 / −1.0 / −0.2). Recurring failure structure, same in all three: the new
+arm matched or beat OLD on best individual finds and bridging-gold, but (a)
+its essay spine was always the sidecar's GOVERNING OBSERVATION, adopted
+uncritically — and that pick was the locus of every overreach complaint
+(58 "organs" strained; 59 "the phonetics confirm" inherited verbatim from the
+sidecar; 60's bow-genre hedge hardened into fact by the close); (b) the
+copy editor under-enforced hedge-hardening. The generation machinery
+(R3→sidecar anchors, R4→snail insight, R1 no-evaporation) demonstrably worked.
+
+**Round-2 changes (writer + copy editor prompts only; upstream untouched):**
+1. `master_editor.py`/`master_editor_si.py` splice block rewritten: the writer
+   explicitly OUTRANKS the discovery pass — RE-RANK (its tiering is opinion;
+   its governing pick has no claim on the essay spine), ADAPT (sharpen /
+   recombine / keep anchors, draw a different conclusion), IGNORE
+   (deliberately), and CALIBRATION IS ONE-WAY (never promote phrasing
+   strength; demoting or cutting overstated wording is encouraged — the old
+   "keep its phrasing strength as you find it" locked sidecar overclaims in).
+2. GOLD INVENTORY: "the inventory is YOURS" — own fresh discoveries expected,
+   upstream rankings carry no authority; new checklist line "HEDGES HOLD TO
+   THE END" (no hedge introduced early may be restated as fact in the close).
+3. `copy_editor.py`: dedicated HEDGE-HARDENING CHECK pass — trace each hedged
+   claim forward; restore the hedge where later restatements (especially
+   closing paragraphs) exceed it; police unsourced attributions
+   ("commentators found it hard to justify") and authorial mind-reading.
+4. **Judge: deliberately UNCHANGED.** The round-1 rubric already scores both
+   arms symmetrically on groundedness/calibration; editing it now would break
+   round-to-round comparability and risk tilting it toward the new arm.
+
+**Round-2 run (lowest cost — writer-and-downstream only, ~$3.7/psalm, ~$11):**
+upstream evidence (macro, micro, research bundle, synthesis-discovery
+observations) is copied byte-identical from the round-1 arm, so the delta
+isolates the two prompt changes. Uses the new
+`--reuse-synthesis-discovery` pipeline flag (writer receives the cached
+observations without paying for regeneration).
+
+```bash
+git pull
+python scripts/run_novelty_ab.py 58 59 60 --reuse-upstream output/ab_novelty --out-root output/ab_novelty_r2
+python scripts/evaluate_novelty_ab.py 58 59 60 --new-dir "output/ab_novelty_r2/psalm_{n}" --out output/ab_novelty_r2/eval
+```
+
+Reading round 2: the question is whether the new arm keeps its round-1 wins
+(bridging gold, best-single-insight quality) while closing the two gaps the
+judge identified (spine quality, overreach count). Since upstream is
+byte-identical to round 1, also worth a direct eyeball: did the r2 essay
+choose a different organizing insight than the sidecar's governing pick where
+round 1's choice was the strained one (58, 60)?
+
 ## Adoption path
 
 If the new arm wins: merge this branch to `main` (R1-R6 + runner + runbook).

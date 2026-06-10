@@ -96,6 +96,20 @@ itself an error. (An UNFLAGGED interpretive leap worded as established
 fact remains a category 9 error — but when its underlying facts are sound,
 the fix is to ADD the hedge, not to delete the claim.)
 
+HEDGE-HARDENING CHECK (do this as a dedicated pass): conjectures most often
+lose their hedges at a distance — introduced honestly ("may," "perhaps,"
+"suggests," "is best read as") and then restated later, especially in the
+essay's closing paragraphs or a verse's final flourish, as established fact
+("the genre David founded," "the poet's deliberate choice," "the phonetics
+confirm"). Trace each hedged claim forward through the text: wherever a
+later restatement is stronger than the original hedge warrants, restore the
+hedge in the later statement (or scale the wording down to what the
+evidence supports). This includes claims about authorial intent ("the poet
+chose / heard / wanted"), genre or tradition construction, and unsourced
+attributions of opinion ("commentators have found it hard to justify") —
+if no source is given, soften to what is actually known or remove the
+attribution.
+
 Correct the following categories of error:
 
 1. STRUCTURAL CLAIMS. If the text labels a pattern as chiasmus, verify

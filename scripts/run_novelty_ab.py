@@ -29,11 +29,26 @@ Usage (local machine, with API keys):
     python scripts/run_novelty_ab.py 58 --dry-run        # print commands only
     python scripts/run_novelty_ab.py 58 --delay 60
 
-Then evaluate (tool lives on main and on this branch):
-    python scripts/evaluate_novelty_ab.py 58 59 60
+ROUND-2 MODE (--reuse-upstream): rerun ONLY the writer-and-downstream chain
+(writer -> print-ready -> scripture verifier -> copy editor -> DOCX) against
+upstream artifacts cached by a previous round. Copies macro, micro, research
+bundle, AND the synthesis-discovery observations from the given root into the
+new arm dir, then passes --skip-macro --skip-micro --skip-lit-echoes
+--reuse-synthesis-discovery. Upstream evidence is byte-identical to the
+previous round, so the delta isolates the writer/copy-editor prompt changes.
+~$3.7/psalm instead of ~$5.5-6.
 
-Approx cost per psalm: ~$5.5-6 (micro+research ~$1-1.5, sidecar ~$2,
-writer ~$3.2, copy editor ~$0.5; macro and echoes skipped).
+    python scripts/run_novelty_ab.py 58 59 60 \\
+        --reuse-upstream output/ab_novelty --out-root output/ab_novelty_r2
+
+Then evaluate (tool lives on main and on this branch):
+    python scripts/evaluate_novelty_ab.py 58 59 60                 # round 1
+    python scripts/evaluate_novelty_ab.py 58 59 60 \\
+        --new-dir "output/ab_novelty_r2/psalm_{n}" --out output/ab_novelty_r2/eval
+
+Approx cost per psalm: ~$5.5-6 full (micro+research ~$1-1.5, sidecar ~$2,
+writer ~$3.2, copy editor ~$0.5; macro and echoes skipped); ~$3.7 in
+round-2 mode.
 """
 from __future__ import annotations
 
@@ -68,6 +83,11 @@ def main() -> int:
     ap.add_argument("--baseline-dir", default=BASELINE_DIR_TEMPLATE,
                     help="Baseline output dir template for the macro copy "
                          f"(default: {BASELINE_DIR_TEMPLATE})")
+    ap.add_argument("--reuse-upstream", default=None, metavar="ROOT",
+                    help="Round-2 mode: copy macro/micro/research/synthesis-discovery "
+                         "from ROOT/psalm_N and rerun only writer + downstream "
+                         "(e.g. --reuse-upstream output/ab_novelty). Combine with "
+                         "--out-root output/ab_novelty_r2.")
     ap.add_argument("--fresh-macro", action="store_true",
                     help="Run macro fresh instead of copying the baseline macro JSON")
     ap.add_argument("--with-lit-echoes", action="store_true",
@@ -101,33 +121,61 @@ def main() -> int:
             print(f"  [warn] no baseline found ({baseline_ce} / published DOCX) — "
                   "the eval tool will have nothing to compare against")
         echoes_file = PROJECT_ROOT / ECHOES_FILE_TEMPLATE.format(n=n)
-        if not args.with_lit_echoes and not echoes_file.exists():
+        if not args.reuse_upstream and not args.with_lit_echoes and not echoes_file.exists():
             print(f"  [warn] {echoes_file} missing — the new arm's bundle will have "
                   "no literary echoes while the baseline did. Consider --with-lit-echoes "
                   "(accepts the overwrite + variance) or restore the file first.")
 
-        # Hold macro constant by copying the baseline macro JSON.
-        skip_macro = False
-        if not args.fresh_macro:
-            src_macro = baseline_dir / f"psalm_{n:03d}_macro.json"
-            dst_macro = arm_dir / f"psalm_{n:03d}_macro.json"
-            if src_macro.exists():
-                if not args.dry_run:
-                    shutil.copy2(src_macro, dst_macro)
-                skip_macro = True
-                print(f"  macro held constant: copied {src_macro.name} from baseline")
-            else:
-                print(f"  [warn] {src_macro} not found — macro will run fresh "
-                      "(adds ~$0.36 and arm-to-arm macro variance)")
+        if args.reuse_upstream:
+            # Round-2 mode: byte-identical upstream evidence from a prior round;
+            # rerun only the writer-and-downstream chain.
+            src_dir = PROJECT_ROOT / args.reuse_upstream / f"psalm_{n}"
+            upstream = [
+                f"psalm_{n:03d}_macro.json",
+                f"psalm_{n:03d}_micro_v2.json",
+                f"psalm_{n:03d}_research_v2.md",
+                f"psalm_{n:03d}_synthesis_discovery.md",
+            ]
+            missing = [f for f in upstream if not (src_dir / f).exists()]
+            if missing:
+                print(f"  [FAIL] --reuse-upstream: missing in {src_dir}: {missing}")
+                failures.append(n)
+                continue
+            if not args.dry_run:
+                for f in upstream:
+                    shutil.copy2(src_dir / f, arm_dir / f)
+            print(f"  upstream reused from {src_dir} ({len(upstream)} files — "
+                  "macro/micro/research/synthesis-discovery held byte-identical)")
 
-        cmd = [sys.executable, "scripts/run_enhanced_pipeline.py", str(n),
-               "--output-dir", str(arm_dir)]
-        if skip_macro:
-            cmd.append("--skip-macro")
-        if not args.with_lit_echoes:
-            cmd.append("--skip-lit-echoes")
-        if args.delay is not None:
-            cmd += ["--delay", str(args.delay)]
+            cmd = [sys.executable, "scripts/run_enhanced_pipeline.py", str(n),
+                   "--output-dir", str(arm_dir),
+                   "--skip-macro", "--skip-micro", "--skip-lit-echoes",
+                   "--reuse-synthesis-discovery"]
+            if args.delay is not None:
+                cmd += ["--delay", str(args.delay)]
+        else:
+            # Hold macro constant by copying the baseline macro JSON.
+            skip_macro = False
+            if not args.fresh_macro:
+                src_macro = baseline_dir / f"psalm_{n:03d}_macro.json"
+                dst_macro = arm_dir / f"psalm_{n:03d}_macro.json"
+                if src_macro.exists():
+                    if not args.dry_run:
+                        shutil.copy2(src_macro, dst_macro)
+                    skip_macro = True
+                    print(f"  macro held constant: copied {src_macro.name} from baseline")
+                else:
+                    print(f"  [warn] {src_macro} not found — macro will run fresh "
+                          "(adds ~$0.36 and arm-to-arm macro variance)")
+
+            cmd = [sys.executable, "scripts/run_enhanced_pipeline.py", str(n),
+                   "--output-dir", str(arm_dir)]
+            if skip_macro:
+                cmd.append("--skip-macro")
+            if not args.with_lit_echoes:
+                cmd.append("--skip-lit-echoes")
+            if args.delay is not None:
+                cmd += ["--delay", str(args.delay)]
 
         print(f"  $ {' '.join(cmd)}")
         if args.dry_run:
@@ -145,7 +193,13 @@ def main() -> int:
     done = [n for n in args.psalms if n not in failures]
     if done and not args.dry_run:
         print("Next step — blind evaluation vs. the baseline:")
-        print(f"  python scripts/evaluate_novelty_ab.py {' '.join(str(n) for n in done)}")
+        nums = ' '.join(str(n) for n in done)
+        if args.out_root.rstrip('/') != OUT_ROOT_DEFAULT:
+            print(f"  python scripts/evaluate_novelty_ab.py {nums} "
+                  f"--new-dir \"{args.out_root.rstrip('/')}/psalm_{{n}}\" "
+                  f"--out {args.out_root.rstrip('/')}/eval")
+        else:
+            print(f"  python scripts/evaluate_novelty_ab.py {nums}")
     return 1 if failures else 0
 
 

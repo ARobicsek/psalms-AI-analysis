@@ -45,7 +45,7 @@ Your mission: Write a definitive commentary on Psalm {psalm_number} that synthes
 
 **Reasoning Phase & Structural Bloat:** Take full advantage of your extended reasoning phase. Before generating your output, explicitly structure your thoughts: evaluate conflicting evidence, outline your narrative arc, define your governing argument, and systematically plan how you will integrate the data. Keep all meta-commentary, pipeline terminology, and over-explanation of the analytical framework INSIDE your reasoning phase. Your final output should be completely free of this "structural bloat" — pure, immersive scholarship.
 
-**GOLD INVENTORY (do this FIRST in your reasoning phase, before any outlining):** Sweep ALL of your inputs — the structural overview, the verse-level notes, every section of the research materials (lexicon, concordance, figurative, commentaries, liturgy, related psalms, deep research, literary echoes), the cross-verse observations if present, and the phonetic transcriptions — and list the 6-10 most surprising, explanatory, or connection-rich finds available to you anywhere in the dossier. A gold find is one a learned reader of Psalms has NOT already made: an anomaly explained, known facts newly linked, a non-obvious liturgical placement, a reworked or truncated formula, an idiom avoided or invoked, a sound-driven word choice, a bridging intertext. For EACH item, decide where it will live (the essay, or a specific verse) — or note explicitly why you are rejecting it. Then hold yourself to the plan:
+**GOLD INVENTORY (do this FIRST in your reasoning phase, before any outlining):** Sweep ALL of your inputs — the structural overview, the verse-level notes, every section of the research materials (lexicon, concordance, figurative, commentaries, liturgy, related psalms, deep research, literary echoes), the cross-verse observations if present, and the phonetic transcriptions — and list the 6-10 most surprising, explanatory, or connection-rich finds available to you anywhere in the dossier. A gold find is one a learned reader of Psalms has NOT already made: an anomaly explained, known facts newly linked, a non-obvious liturgical placement, a reworked or truncated formula, an idiom avoided or invoked, a sound-driven word choice, a bridging intertext. **The inventory is YOURS, not a transcription of anyone else's list**: it may contain your own fresh discoveries (make some — sweep the raw evidence yourself, not just the pre-digested analyses), upstream observations you have re-verified and re-ranked on your own judgment, adaptations that sharpen or redirect an upstream observation, and combinations no single input made. An upstream analysis's own ranking of its material carries no authority here; a strained or overstated item does not earn a place by having been somebody's headline. For EACH item, decide where it will live (the essay, or a specific verse) — or note explicitly why you are rejecting it. Then hold yourself to the plan:
 - Your essay's HOOK and its closing "ONE THING" must come from this list.
 - A verse that hosts a gold find gets that verse's depth budget (RULE 10); routine phrases around it get one plain sentence each (RULE 7b/8 already permit — indeed require — this).
 - Coverage rules govern the FLOOR of the commentary; the gold inventory governs its CEILING. Completeness is necessary; it is not the achievement. The achievement is that every genuinely novel, well-anchored find in the dossier either appears, developed, in your prose — or was consciously rejected for cause, not lost to the breadth of your obligations.
@@ -520,6 +520,7 @@ Before submitting, verify:
 - NO FALSE PROFUNDITY (RULE 7b): Take each balanced, antithetical, chiastic, or epigrammatic sentence and strip its rhythm. Does the reader now know something the plain verse did not already tell them — or only the definition of a word, or the same point restated? If the latter, cut it or reduce it to one plain clause. No "X at its minimum / Y at its peak," "not A but B," "not a place — a pattern," or escalating-restatement constructions used to make a thin point sound deep.
 - THE ONE THING: Does the essay end with a single, memorable takeaway?
 - GOLD INVENTORY: Did each item on your gold inventory either land, developed, where you planned it (essay or named verse), or get consciously rejected for cause? If any item simply evaporated during drafting, restore it now. Do your hook and closing takeaway come from the inventory?
+- HEDGES HOLD TO THE END: Re-read your closing paragraphs against the body. Any claim you introduced with "may," "perhaps," "suggests," or "is best read as" must still be worded as a possibility there — not silently upgraded to established fact for the sake of a stronger ending. A conjecture that has hardened by the close is a calibration failure; restore the hedge or cut the claim.
 - READER QUESTIONS: Each question from READER QUESTIONS is addressed somewhere in the essay or commentary.
 - FIGURATIVE LANGUAGE: Each verse with figurative language cites at least ONE biblical parallel (Hebrew + English) and generates an insight.
 - TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
@@ -894,23 +895,39 @@ class MasterEditor(MasterEditorV2):
             else:
                 observations_block = (
                     "### CROSS-VERSE OBSERVATIONS "
-                    "(use where they fit; do NOT structure your commentary around them)\n"
-                    "These are cross-verse patterns surfaced by a dedicated discovery "
-                    "pass over this same dossier. They are ADDITIONAL INPUT, not "
-                    "overriding instruction. The writer retains full authorial "
-                    "discretion: weave in what serves the prose, demote what does "
-                    "not, and let your own reading of the psalm govern the structure. "
-                    "Each observation has already been evidence-honesty-calibrated; "
-                    "keep its phrasing strength as you find it (e.g., do not promote "
-                    "\"echoes\" to \"verbatim,\" or \"consonantal play\" to \"the same "
-                    "word\"). Observations marked **Confidence: CONJECTURE** must be "
-                    "presented as conjecture in the prose ('perhaps,' 'may explain,' "
-                    "'suggests') — never as established fact. Phrase coverage, RULE 7b "
-                    "(no false profundity), RULE 8 (no manufactured significance), and "
-                    "the dinner-party register all still apply with full force. "
-                    "Treat these observations as CANDIDATES for your GOLD INVENTORY: "
-                    "weigh each against your own finds and adopt, demote, or reject it "
-                    "deliberately — do not let one drop out by mere omission.\n\n"
+                    "(advisory raw material from a discovery pass — your own reading outranks it)\n"
+                    "These are observations surfaced by a dedicated discovery pass "
+                    "over this same dossier. They are ADDITIONAL INPUT, not "
+                    "instruction. You are the author; treat them as candidates for "
+                    "your GOLD INVENTORY and handle them on these terms:\n"
+                    "- RE-RANK. The pass's tiering (GOVERNING / CORE / ADDITIONAL) is "
+                    "its opinion, not yours. Its 'governing' pick has NO special claim "
+                    "on your essay's spine: choose your organizing insight on the "
+                    "merits, whether it comes from this list, from your own reading, "
+                    "or from elsewhere in the dossier. A strained observation does not "
+                    "become your thesis by having been the pass's headline.\n"
+                    "- ADAPT. You may sharpen, narrow, extend, or recombine an "
+                    "observation — or keep only its anchors and draw a different "
+                    "conclusion from them.\n"
+                    "- IGNORE. An observation that does not survive your own scrutiny, "
+                    "or does not serve the commentary, should be dropped without "
+                    "apology — but deliberately, not by mere omission.\n"
+                    "- CALIBRATION IS ONE-WAY. Never present a claim MORE strongly "
+                    "than the observation does (do not promote \"echoes\" to "
+                    "\"verbatim,\" \"consonantal play\" to \"the same word,\" or a "
+                    "PROBABLE to a certainty). You may — and should — present it LESS "
+                    "strongly, or cut it, if your own reading finds it overstated: if "
+                    "an observation's wording overclaims (e.g., \"the phonetics "
+                    "confirm\"), your prose says only what the evidence supports "
+                    "(\"the phonetics are consistent with\").\n"
+                    "- Observations marked **Confidence: CONJECTURE** may appear only "
+                    "as conjecture in the prose ('perhaps,' 'may explain,' "
+                    "'suggests') — never as established fact — and a hedge introduced "
+                    "early must NOT have hardened into certainty by your closing "
+                    "paragraphs.\n"
+                    "Phrase coverage, RULE 7b (no false profundity), RULE 8 (no "
+                    "manufactured significance), and the dinner-party register all "
+                    "still apply with full force.\n\n"
                     f"{cross_verse}\n\n"
                 )
                 prompt = prompt.replace(anchor, observations_block + anchor)
