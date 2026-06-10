@@ -240,14 +240,21 @@ def _count_hedges(text: str) -> dict:
 
 
 def _changes_stats(arm_dir: Path, n: int) -> dict:
-    ce = arm_dir / f"psalm_{n:03d}_copy_edited.md"
-    if not ce.exists():
+    # The copy editor writes its log to a separate file; older runs may have
+    # it appended inside copy_edited.md. Check both.
+    changes = None
+    sep = arm_dir / f"psalm_{n:03d}_copy_edit_changes.md"
+    if sep.exists():
+        changes = sep.read_text(encoding="utf-8")
+    else:
+        ce = arm_dir / f"psalm_{n:03d}_copy_edited.md"
+        if ce.exists():
+            text = ce.read_text(encoding="utf-8")
+            idx = text.find("\n## Changes")
+            if idx != -1:
+                changes = text[idx:]
+    if changes is None:
         return {}
-    text = ce.read_text(encoding="utf-8")
-    idx = text.find("\n## Changes")
-    if idx == -1:
-        return {}
-    changes = text[idx:]
     items = re.findall(r"^\s*\d+\.\s+(.*)$", changes, re.M)
     def hits(pat):
         return sum(1 for it in items if re.search(pat, it, re.I))
