@@ -1,58 +1,19 @@
-# Synthesis Scholar — Prompt v2 (DRAFT for review)
+"""Synthesis Scholar prompt v2 — candidate replacement for the v1 prompt in
+src/agents/synthesis_discovery.py.
 
-**Status:** Draft — not wired into code. Review before any run.
-**Target file:** `src/agents/synthesis_discovery.py` (replaces `INPUTS_HEADER` + `SYNTHESIS_TASK`)
-**Scope of code change when adopted:** prompt constants only. The START/END
-extraction markers are kept byte-identical, so `_extract_observations_block`
-and the Master-Writer splice in `master_editor.py` need no structural change
-(one optional one-line splice addition; see §4).
+Kept as a standalone module so the A/B harness (scripts/run_synthesis_ab.py)
+can run v1 (production) and v2 head-to-head over byte-identical inputs WITHOUT
+touching the production agent. If the A/B validates v2, paste V2_INPUTS_HEADER
+and V2_SYNTHESIS_TASK over INPUTS_HEADER / SYNTHESIS_TASK in
+synthesis_discovery.py (the START/END markers and {placeholders} are identical,
+so no other code changes are required).
 
----
+Source of truth for the prose: docs/plans/SYNTHESIS_SCHOLAR_PROMPT_V2_DRAFT.md
+"""
 
-## 1. Design rationale (summary of the session discussion)
-
-The current agent detects **patterns** ("what becomes visible holding ≥2
-verses together"). The sought-after "aha" insights are **explanations** —
-abductive moves that connect an anomaly to its best explanation, often
-joining facts from *different sections of the dossier* plus a connecting
-concept from general scholarship. Four deliberate changes:
-
-1. **Mission widened from cross-verse to cross-source.** Two observation
-   species: TYPE P (pattern, the current strength — kept intact) and TYPE C
-   (connection/explanation — new). The agent's unique niche is bridging
-   facts the 200–320K-char dossier holds far apart, which the
-   linearly-composing Master Writer reliably misses.
-2. **Anomaly-first generation.** A "surprise inventory" precedes
-   brainstorming: no aha without a prior "why is that?". Then a
-   **synthesis substrate** (compact per-source fact index) forces systematic
-   mining of the whole dossier before connecting, and a **collision pass**
-   deliberately pairs distant items (bisociation).
-3. **Novelty re-attached to the linkage, not the constituents.** The v1
-   filter cut any candidate containing a well-known fact — which kills
-   precisely the insights whose novelty is the *connection between* known
-   facts. v2 tests whether the linkage is standard, not whether the facts
-   are.
-4. **Filters split into two orthogonal axes.** Evidential honesty
-   (a)–(j) stays ferocious — it is scar tissue from real failures. But
-   interpretive ambition is now *licensed* under two conditions: the leap is
-   explicitly flagged as conjecture, and it pays rent in explanatory payoff.
-   A new **aha audit** (boredom cut) demotes true-but-dull survivors.
-   Training-data rule: the connecting *concept* may come from scholarship
-   the model would stake in print; both *anchors* must be quotable from the
-   dossier or the psalm.
-
-The risk posture is deliberate: the sidecar's output is advisory input to
-the Master Writer, downstream of which sit the copy editor, the scripture
-verifier, and the author. Generate boldly here; verify hard downstream.
-
----
-
-## 2. The complete v2 prompt
-
-### 2a. `INPUTS_HEADER` (v2)
-
-```
-You are a SYNTHESIS SCHOLAR for Psalm {psalm_number}.
+# Placeholders match v1 exactly: psalm_number, psalm_text, macro_analysis,
+# micro_analysis, research_bundle, phonetic_section, analytical_framework.
+V2_INPUTS_HEADER = """You are a SYNTHESIS SCHOLAR for Psalm {psalm_number}.
 
 Below is the full research dossier the Master Writer will see when it writes
 the commentary. The dossier was assembled by specialist agents that do not
@@ -99,11 +60,10 @@ you are surfacing material, not dictating structure.
 
 ### ANALYTICAL FRAMEWORK (poetic conventions reference)
 {analytical_framework}
-```
+"""
 
-### 2b. `SYNTHESIS_TASK` (v2)
 
-```
+V2_SYNTHESIS_TASK = """
 ═══════════════════════════════════════════════════════════════════════════
 ## YOUR TASK: SYNTHESIS DISCOVERY (NO PROSE — DO NOT WRITE COMMENTARY)
 ═══════════════════════════════════════════════════════════════════════════
@@ -188,10 +148,10 @@ Universal exclusions (both types):
 2. SYNTHESIS SUBSTRATE. Distill from EACH section of the dossier (macro,
    micro, lexicon/concordance, commentaries, liturgical/reception, deep
    research, literary echoes, phonetic transcriptions) its 5-15 most
-   load-bearing or pregnant facts
-   — one line each, tagged with the section it came from. Mine the WHOLE
-   archive: the strongest connections typically join facts that sit far
-   apart, which is precisely why no one has made them.
+   load-bearing or pregnant facts — one line each, tagged with the section
+   it came from. Mine the WHOLE archive: the strongest connections
+   typically join facts that sit far apart, which is precisely why no one
+   has made them.
 
 3. COLLISION PASS. Now generate candidates by deliberate pairing, not by
    waiting for inspiration:
@@ -401,119 +361,4 @@ Omit this whole section only if there are genuinely no additional
 survivors.)
 
 ---CROSS-VERSE-OBSERVATIONS-END---
-```
-
----
-
-## 3. v1 → v2 change map
-
-| v1 | v2 | Why |
-|---|---|---|
-| Single question: cross-verse patterns | Two questions: patterns (P) + cross-source connections (C) | The aha class is abductive/cross-domain, not structural |
-| Brainstorm from a menu of pattern-types | Surprise inventory → substrate → collision pass | No aha without a prior anomaly; forces whole-dossier mining; bisociation generates the pairings deliberately |
-| Novelty filter cuts known *facts* | Novelty tested on the *linkage* | v1 killed insights built from famous constituents (the precise bug that suppresses overdetermined-custom and meaningful-omission insights) |
-| (g) forbids the interpretive leap outright | (g) licenses *flagged* conjecture that pays explanatory rent; forbids only the unmarked leap | The hedged "perhaps because…" is where the deepest observations live; honesty moves into the labeling |
-| No dullness check | Step 6 aha audit (surprise / economy / hindsight-inevitability) | Aha-ness is the actual target; v1 never measured it |
-| Output: claim/verses/evidence/novelty | Adds Type, Confidence (ESTABLISHED/PROBABLE/CONJECTURE), Anchors-with-footing, Payoff | Lets the Master Writer calibrate prose hedging per item; makes anchors auditable downstream |
-| "CROSS-VERSE SYNTHESIS DISCOVERER" persona | "SYNTHESIS SCHOLAR" + dossier-as-uncommunicating-specialists framing | Tells the model its unique niche: no one else reads the whole archive |
-| Honesty filter (a)-(f), (h)-(j) | Kept essentially verbatim ((d) gains the anchors/connector rule) | Scar tissue from real failures; deliberately untouched |
-
-Notes on the TYPE C shape-examples: two of the four generalize the author's
-Ps 67 exemplars (idiom-avoidance; overdetermined custom) to content-free
-*moves*. The A/B should be read with that in mind: the prompt teaches the
-move, but WHICH datum to apply it to (which idiom, which omission, which
-second support) is entirely the model's discovery. The other two shapes
-(superscription-narrative; rite↔rare-form) extend coverage beyond the
-exemplars.
-
----
-
-## 4. Downstream changes when adopted (small, deferred)
-
-1. **Splice caveat** (`master_editor.py`, the "CROSS-VERSE OBSERVATIONS"
-   block framing, ~lines 851-882): add one line — *"Items marked
-   CONFIDENCE: CONJECTURE must be presented as conjecture in the prose
-   ('perhaps', 'may explain'), never as established fact."*
-2. **Module docstring** of `synthesis_discovery.py`: update mission
-   description (pattern + connection species).
-3. Extraction markers, file paths, call signature: **unchanged**.
-
----
-
-## 5. A/B harness — IMPLEMENTED
-
-**Built and ready to run locally** (cannot run in a cloud clone — the
-dossiers, databases, and `ANTHROPIC_API_KEY` live only on your machine):
-
-- `scripts/synthesis_ab_prompts.py` — the v2 prompt as importable constants
-  (`V2_INPUTS_HEADER`, `V2_SYNTHESIS_TASK`), exact copy of §2. Production
-  `synthesis_discovery.py` is untouched; adopt v2 later by pasting these over
-  the v1 constants (markers + placeholders are identical).
-- `scripts/run_synthesis_ab.py` — runs v1 and v2 over byte-identical inputs.
-
-Run:
-```bash
-source venv/Scripts/activate            # git-bash; PowerShell auto-resolves
-python scripts/run_synthesis_ab.py 67 60 49
-```
-Outputs land in `output/ab_synthesis/`: per psalm, `psalm_NNN_{v1,v2}.md`
-(extracted observations), `_full.txt` (raw incl. reasoning trace length),
-`prompt_{v1,v2}.txt` (exact prompts sent), `contamination_scan.txt`, and a
-run `_SUMMARY`. Flags: `--only v2`, `--model`, `--out`.
-
-The harness reuses `MasterEditorSI`'s own loaders + `research_trimmer.
-trim_bundle(max_chars=350000)` + `RAGManager`, and the agent's `_stream_call`,
-so inputs and model config are identical to Step 3.5. The SI is never loaded.
-
-### Original requirements (for reference)
-
-Goal: same dossier, v1 vs. v2 prompt, on Psalm 67 plus 2-3 controls
-(suggest: 60 and 49 — recent runs with full dossiers; optionally one psalm
-never yet run).
-
-**Contamination — findings from this session's code audit:**
-
-- The special-instruction text **never reaches the synthesizer by
-  construction.** In `scripts/run_si_pipeline.py` the SI is passed only to
-  the Master Writer (`special_instruction=` at the Step 4 call, line ~754);
-  Step 3.5's `discover_cross_verse_observations(...)` receives only
-  macro/micro/research paths. `master_editor_si.py` likewise injects the SI
-  only into the writer prompt. The SI is also NOT fed to macro, micro, or
-  research assembly anywhere in either pipeline runner.
-- Therefore the only realistic contamination vector for the
-  נשׂיאת-פנים test is **the dossier data itself** — above all
-  `data/deep_research/psalm_067_deep_research.txt` and the research bundle
-  (commentaries/librarian outputs), which may independently discuss the
-  Priestly Blessing's third line. (Not checked in this session: those files
-  are gitignored and absent from the cloud clone — must be scanned on the
-  local machine.)
-
-**Harness spec:**
-
-1. Assemble the synthesizer inputs exactly as
-   `discover_cross_verse_observations` does (same loaders, same
-   `research_trimmer.trim_bundle(max_chars=350000)`, same
-   `_format_analysis_for_prompt`, same RAG analytical framework) — ideally
-   by refactoring that input-assembly into a reusable helper rather than
-   duplicating it. Do NOT pass any SI content.
-2. **Pre-flight contamination scan** of the fully-assembled prompt string
-   (and, for transparency, each source file): report any hits for
-   `נשיאת פנים`, `ישא פניו`, `יִשָּׂא`, `favoritism`, `partiality`,
-   `lift up his face / lifts his face`, `third line/clause/blessing`.
-   Hits are surfaced for manual review (a hit on "the blessing's third
-   line is absent" in deep research = the *observation* is fed, which is
-   acceptable to note; a hit on "favoritism/particularism" = the
-   *interpretation* is fed, which invalidates that psalm as a test of
-   Example 1). The scan REPORTS; a human decides whether to excise.
-3. Run v1 and v2 prompts on identical assembled inputs (same model
-   `claude-opus-4-8`, same effort config), save both outputs side by side
-   under `output/ab_synthesis/psalm_NNN_{v1,v2}.md` plus the assembled
-   prompt and scan report.
-4. Evaluation: (i) blind read by the author; (ii) optional LLM-judge rubric
-   scoring each observation on surprise × explanatory economy × evidential
-   honesty; (iii) the two named target insights as canaries for Ps 67 —
-   does v2 independently produce the favoritism-omission connection and/or
-   the overdetermined-omer connection (without either appearing in the
-   dossier per the scan)?
-5. Cost: ~2 synthesizer calls per psalm (~$2-4 each given 200-320K-char
-   prompts); 4 psalms ≈ $16-32. No Master Writer runs needed for the A/B.
+"""
