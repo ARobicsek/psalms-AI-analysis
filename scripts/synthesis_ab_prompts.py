@@ -1,14 +1,15 @@
-"""Synthesis Scholar prompt v2 — candidate replacement for the v1 prompt in
-src/agents/synthesis_discovery.py.
+"""Synthesis Scholar prompt v2 — the EXACT text used in the Session-357 blind
+A/B against the v1 prompt (Psalms 67/60/49). Preserved verbatim for
+reproducibility of that comparison.
 
-Kept as a standalone module so the A/B harness (scripts/run_synthesis_ab.py)
-can run v1 (production) and v2 head-to-head over byte-identical inputs WITHOUT
-touching the production agent. If the A/B validates v2, paste V2_INPUTS_HEADER
-and V2_SYNTHESIS_TASK over INPUTS_HEADER / SYNTHESIS_TASK in
-synthesis_discovery.py (the START/END markers and {placeholders} are identical,
-so no other code changes are required).
+STATUS: ADOPTED (Session 357). The production prompt now lives in
+src/agents/synthesis_discovery.py and is this text PLUS one addition to the
+surprise inventory (reconstruct-and-diff on reworked source formulas, so
+omissions — not just alterations — surface; the gap exposed by the Ps 67
+"third blessing line" canary). The A/B harness (scripts/run_synthesis_ab.py)
+still imports from here, so reruns reproduce the original experiment.
 
-Source of truth for the prose: docs/plans/SYNTHESIS_SCHOLAR_PROMPT_V2_DRAFT.md
+Design rationale + A/B spec: docs/plans/SYNTHESIS_SCHOLAR_PROMPT_V2_DRAFT.md
 """
 
 # Placeholders match v1 exactly: psalm_number, psalm_text, macro_analysis,

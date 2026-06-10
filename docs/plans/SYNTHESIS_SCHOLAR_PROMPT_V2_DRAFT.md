@@ -1,6 +1,11 @@
-# Synthesis Scholar — Prompt v2 (DRAFT for review)
+# Synthesis Scholar — Prompt v2
 
-**Status:** Draft — not wired into code. Review before any run.
+**Status:** ADOPTED (Session 357) after blind A/B vs. v1 on Psalms 67/60/49
+(`scripts/run_synthesis_ab.py`; results reviewed qualitatively — v2 retained
+v1's pattern quality and added the TYPE C bridging class with calibration
+intact). Production prompt: `src/agents/synthesis_discovery.py`, which adds
+one post-A/B strengthening to §2b step 1: reconstruct-and-diff on reworked
+source formulas (omissions, not just alterations — the Ps 67 canary gap).
 **Target file:** `src/agents/synthesis_discovery.py` (replaces `INPUTS_HEADER` + `SYNTHESIS_TASK`)
 **Scope of code change when adopted:** prompt constants only. The START/END
 extraction markers are kept byte-identical, so `_extract_observations_block`
