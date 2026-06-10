@@ -187,6 +187,39 @@ Reading round 3 — three questions, in order:
    with the kept plumbing wins — would already justify adopting the
    non-writer changes.
 
+## Position-bias control (Session 358, after round 3) — THE decisive methodological finding
+
+Re-judging the round-3 files with presentation order reversed flipped all
+three verdicts: **the judge picked the second-presented commentary in 12 of
+12 judgments across all rounds** (rounds 1–3 had presented new-first every
+time due to a fixed-seed shuffle bug; the control presented old-first). All
+single-order verdicts in this test were therefore dominated by position
+bias (magnitude ≈ +1 to +2 best-5 points for the second position).
+
+**Position-debiased round 3** (mean of both orders on identical files):
+
+| psalm | old | new | debiased result |
+|---|---|---|---|
+| 58 | 12.1 | 13.1 | **new +1.0** |
+| 59 | 11.9 | 11.9 | tie |
+| 60 | 12.4 | 12.8 | **new +0.4** |
+
+So the round-3 configuration (R2–R6 + sidecar v2.1 + baseline writer) is at
+parity-to-ahead of the production baseline, with its consistent signature —
+more bridging/reaching-outward gold and the strongest single insights (the
+withheld-"I", Ps 108 back-bracket, צבאות) — on exactly the axis the author's
+brief prioritized. Rounds 1–2's "losses" (old in the favored position all
+nine times) were likely near-ties; their content-level diagnoses (inherited
+overclaims, hedge-hardening, tier-anchored spines) remain valid and round 3's
+fixes for them are kept.
+
+**Tooling fix:** `evaluate_novelty_ab.py --order both` is now the default —
+each psalm is judged twice (old-first and new-first) and the report carries
+both passes plus a position-debiased synthesis (averaged metrics, per-order
+winners, AGREE/SPLIT flag; winner by ≥0.3 debiased best-5 margin, else TIE).
+Single-order modes remain for cheap quick looks but must not be used for
+verdicts.
+
 ## Adoption path
 
 If the new arm wins: merge this branch to `main` (R1-R6 + runner + runbook).
