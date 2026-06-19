@@ -14,19 +14,26 @@ from pathlib import Path
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
 
-# Handle imports for both module and script usage
-if __name__ == '__main__':
-    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-    from src.concordance.hebrew_text_processor import (
-        normalize_for_search, split_words, normalize_word_sequence, is_hebrew_text
-    )
-    from src.data_sources.tanakh_database import TanakhDatabase, TANAKH_BOOKS
-else:
+# Handle imports for both package use and direct-script execution.
+# Try package-relative imports first (when imported as src.concordance.search);
+# fall back to absolute imports when run directly (python src/concordance/search.py).
+# Import every symbol used anywhere in this module here (incl. is_root_match and the
+# *_split helpers) so methods never need lazy relative imports that break in script mode.
+try:
     from .hebrew_text_processor import (
-        normalize_for_search, split_words, normalize_word_sequence, is_hebrew_text
+        normalize_for_search, split_words, normalize_word_sequence, is_hebrew_text,
+        normalize_for_search_split, split_on_maqqef
     )
     from .root_matcher import is_root_match
     from ..data_sources.tanakh_database import TanakhDatabase, TANAKH_BOOKS
+except ImportError:
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+    from src.concordance.hebrew_text_processor import (
+        normalize_for_search, split_words, normalize_word_sequence, is_hebrew_text,
+        normalize_for_search_split, split_on_maqqef
+    )
+    from src.concordance.root_matcher import is_root_match
+    from src.data_sources.tanakh_database import TanakhDatabase, TANAKH_BOOKS
 
 
 @dataclass
@@ -148,7 +155,6 @@ class ConcordanceSearch:
 
         # Normalize the search word (use split normalization if requested)
         if use_split and level == 'consonantal':
-            from .hebrew_text_processor import normalize_for_search_split
             normalized = normalize_for_search_split(word, level)
         else:
             normalized = normalize_for_search(word, level)
@@ -237,7 +243,6 @@ class ConcordanceSearch:
 
         # Split and normalize phrase words (use split normalization if requested)
         if use_split and level == 'consonantal':
-            from .hebrew_text_processor import normalize_for_search_split, split_on_maqqef
             # First split on maqqef, then split into words
             phrase_split = split_on_maqqef(phrase)
             words = split_words(phrase_split)
@@ -250,7 +255,6 @@ class ConcordanceSearch:
 
         # Normalize each word
         if use_split and level == 'consonantal':
-            from .hebrew_text_processor import normalize_for_search_split
             normalized_words = [normalize_for_search_split(w, level) for w in words]
         else:
             normalized_words = normalize_word_sequence(words, level)
@@ -398,7 +402,6 @@ class ConcordanceSearch:
 
         # Split and normalize phrase words
         if use_split and level == 'consonantal':
-            from .hebrew_text_processor import normalize_for_search_split, split_on_maqqef
             phrase_split = split_on_maqqef(phrase)
             words = split_words(phrase_split)
         else:
@@ -409,7 +412,6 @@ class ConcordanceSearch:
 
         # Normalize each word
         if use_split and level == 'consonantal':
-            from .hebrew_text_processor import normalize_for_search_split
             normalized_words = [normalize_for_search_split(w, level) for w in words]
         else:
             normalized_words = normalize_word_sequence(words, level)
@@ -552,7 +554,6 @@ class ConcordanceSearch:
         """
         # Get all suffix variations
         if use_split and level == 'consonantal':
-            from .hebrew_text_processor import normalize_for_search_split
             normalized = normalize_for_search_split(word, level)
         else:
             normalized = normalize_for_search(word, level)
@@ -891,7 +892,6 @@ class ConcordanceSearch:
 
         # Normalize the root (use split normalization if requested)
         if use_split and level == 'consonantal':
-            from .hebrew_text_processor import normalize_for_search_split
             normalized = normalize_for_search_split(root, level)
         else:
             normalized = normalize_for_search(root, level)
