@@ -42,6 +42,8 @@ Shakespeare, Baudelaire, Bob Dylan, Leonard Cohen, Yehuda Amichai, Yehuda Halevi
 
 The following authors remain FULLY BANNED (zero appearances): Homer, Dante, Virgil, Ovid, Kendrick Lamar.
 
+One specific WORK is also BANNED (zero appearances — overused; do not quote, cite, or allude to it in any cluster): Yehuda Amichai's "God Has Pity on Kindergarten Children." Amichai himself stays an Earned Canonical Slot author for his OTHER poems — only this single poem is off-limits.
+
 === TIER-SPECIFICATION: WHERE TO LOOK INSTEAD ===
 
 For each literary tradition, reach one tier past the top-3. This is a palette, not a menu — use it to orient your search, then choose whichever poet best fits the specific verse:
@@ -78,7 +80,7 @@ These are quotas, not suggestions. Verify compliance before submitting.
 ☐ At least 2 comparisons from traditions OUTSIDE the Anglo-European-Hebrew axis (African, East Asian, South Asian, Latin American, Arabic, Persian, Indigenous, Pacific).
 ☐ No author appears more than ONCE in the entire document.
 ☐ At most 2 Earned Canonical Slot authors across Pass 1 + Pass 2 combined (Pass 1 alone may use up to 2).
-☐ Zero Homer, Dante, Virgil, Ovid, Kendrick Lamar.
+☐ Zero Homer, Dante, Virgil, Ovid, Kendrick Lamar; zero Amichai "God Has Pity on Kindergarten Children."
 
 === OFFENSIVE-LANGUAGE FILTER (HARD CONSTRAINT) ===
 
@@ -161,7 +163,7 @@ Jump straight into comparisons. No title, no introduction, no conclusion.
 Before submitting, verify:
 ☐ Every verse cluster has a "Default bypassed:" line naming the canonical reflex you avoided
 ☐ At most 2 Earned Canonical Slot authors appear (Pass 1 + Pass 2 combined; Pass 1 alone may use up to 2)
-☐ Zero Homer, Dante, Virgil, Ovid, Kendrick Lamar
+☐ Zero Homer, Dante, Virgil, Ovid, Kendrick Lamar; zero Amichai "God Has Pity on Kindergarten Children"
 ☐ No quotation contains the severe profanity defined in the Offensive-Language Filter
 ☐ Every comparison has an original-language quotation (not just English)
 ☐ Every comparison is anchored to a specific psalm verse

@@ -8,6 +8,7 @@ The document above follows the Tier-Override Pass 1 rules. Key conventions:
 - Each echo must come from a SECOND-TIER source (major but not most-canonical in its tradition)
 - Certain "Earned Canonical Slot" authors (Shakespeare, Baudelaire, Bob Dylan, Leonard Cohen, Yehuda Amichai, Yehuda Halevi, Kadya Molodowsky, Paul Celan, Haim Nachman Bialik, Emily Dickinson, John Donne, Rainer Maria Rilke, Franz Kafka, Aeschylus) are capped at 2 appearances per document TOTAL across Pass 1 + Pass 2
 - Homer, Dante, Virgil, Ovid, Kendrick Lamar are fully banned
+- One specific WORK is also fully banned (overused): Yehuda Amichai's "God Has Pity on Kindergarten Children." Amichai stays usable as an Earned Canonical Slot author for his OTHER poems; only this poem is off-limits.
 
 TASK: Review the existing echoes and full psalm text. Add 5-10 NEW comparisons per the rules below.
 
@@ -66,7 +67,7 @@ This document is read by an audience that expects the dignified register of bibl
 === HARD CONSTRAINTS ===
 
 ☐ No author who already appears in the existing document may be used again.
-☐ Homer, Dante, Virgil, Ovid, Kendrick Lamar remain BANNED.
+☐ Homer, Dante, Virgil, Ovid, Kendrick Lamar remain BANNED; Amichai's "God Has Pity on Kindergarten Children" remains BANNED.
 ☐ Combined Earned Canonical Slot authors across Pass 1 + Pass 2 must be ≤ 2. If Pass 1 used 2, add none; if Pass 1 used 1, add at most 1; if Pass 1 used 0, add up to 2.
 ☐ Every new comparison must include an original-language quotation (4-8 lines, tight cluster).
 ☐ Every new comparison must be anchored to a specific psalm verse.
@@ -111,7 +112,7 @@ If replacing an existing comparison, begin that entry with:
 ☐ Audit block at top naming which quotas were under-met and which are being filled
 ☐ 5-10 new comparisons added
 ☐ No author duplicated from existing document
-☐ Banned authors (Homer, Dante, Virgil, Ovid, Kendrick Lamar) not used
+☐ Banned authors (Homer, Dante, Virgil, Ovid, Kendrick Lamar) not used; Amichai's "God Has Pity on Kindergarten Children" not used
 ☐ No quotation contains the severe profanity defined in the Offensive-Language Filter
 ☐ At most 2 Earned Canonical Slot authors in the COMBINED document (Pass 1 + Pass 2)
 ☐ Every new comparison has original-language quotation (4-8 lines, tight cluster)
