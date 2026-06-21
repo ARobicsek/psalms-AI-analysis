@@ -1,7 +1,7 @@
 """
 Copy Editor Agent — Psalm Commentary Quality Control
 
-Session 279: Standalone agent that applies a 9-category error taxonomy to existing
+Session 279: Standalone agent that applies a 10-category error taxonomy to existing
 commentary output, making minimal, targeted corrections while preserving all formatting.
 
 Error Categories:
@@ -14,6 +14,7 @@ Error Categories:
   7. Factual/textual accuracy (misquoted texts, wrong grammatical person, inverted logic)
   8. Hebrew grammar bloat (unnecessary stem/tense/person annotations)
   9. Strained arguments (e.g. evidence does not support the claim)
+ 10. Unexplained technical terms (grammar/rhetoric jargon used without a gloss)
 
 Usage:
     from src.agents.copy_editor import CopyEditor
@@ -57,7 +58,9 @@ Preserve parenthetical definitions of technical terms (e.g., defining
 "inclusio," "LXX," "Hiphil," "chiasmus" on first use within a psalm
 commentary). Readers may be reading only one psalm guide. Remove a
 definition only if the same term was already defined earlier in the same
-psalm's commentary.
+psalm's commentary. Conversely, ADDING a brief gloss for an unexplained
+technical term is a sanctioned exception to "do not add material" — see
+category 10.
 
 CRITICAL READING STANCE — apply throughout:
 
@@ -233,6 +236,24 @@ grammatical parsing (esp. stem name)
        remove it.
    Do not remove arguments that can be salvaged; fix them. If the argument
    cannot be salvaged, remove entirely but maintain smooth flow of the text.
+
+10. UNEXPLAINED TECHNICAL TERMS. The reader is an educated non-specialist,
+    NOT a grammarian or literary theorist. A grammar, rhetoric, or
+    literary-critical term most educated adults would not confidently
+    define — e.g. vocative, asyndeton, polysyndeton, apposition, ellipsis,
+    anaphora, epistrophe, litotes, hendiadys, zeugma, deixis, parataxis,
+    enjambment (and chiasmus/inclusio/merism when used without a gloss) —
+    must be made accessible the FIRST time it appears in the commentary.
+    Prefer the lighter of two fixes: (a) GLOSS it inline in plain words in
+    the same breath — "the vocative (direct address — the poet turns and
+    speaks *to* God)," "asyndeton (no connecting word — the bare terms set
+    side by side)"; or (b) if the label is not itself doing analytical
+    work, REPLACE it with the plain description and drop the term. Adding
+    such a gloss is a sanctioned exception to "do not add material." Do NOT
+    delete the surrounding insight, and leave the term alone if it is
+    already glossed nearby or was explained earlier in this same psalm.
+    (Hebrew stem names like Hiphil/Niphal are governed by category 8, not
+    here.)
 
 CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:
 
@@ -1162,7 +1183,7 @@ class CopyEditor:
 
     def _count_changes(self, changes_text: str) -> Dict[str, int]:
         """Count changes by category from the Changes section."""
-        counts = {f"Category {i}": 0 for i in range(1, 10)}
+        counts = {f"Category {i}": 0 for i in range(1, 11)}
         counts['total'] = 0
 
         for line in changes_text.split('\n'):
@@ -1176,7 +1197,7 @@ class CopyEditor:
                 for match in bracket_matches:
                     for num_str in match.split(','):
                         num = int(num_str.strip())
-                        if 1 <= num <= 9:
+                        if 1 <= num <= 10:
                             counts[f'Category {num}'] += 1
 
         return counts
@@ -1193,7 +1214,7 @@ class CopyEditor:
         print(f"  Time: {usage.get('elapsed_seconds', 0):.1f}s")
         print()
         print(f"  Total changes: {changes_count.get('total', 0)}")
-        for i in range(1, 10):
+        for i in range(1, 11):
             cat_labels = {
                 1: "Structural claims",
                 2: "Internal inconsistencies",
@@ -1204,6 +1225,7 @@ class CopyEditor:
                 7: "Factual/textual accuracy",
                 8: "Hebrew grammar bloat",
                 9: "Strained arguments",
+                10: "Unexplained technical terms",
             }
             count = changes_count.get(f'Category {i}', 0)
             if count > 0:
