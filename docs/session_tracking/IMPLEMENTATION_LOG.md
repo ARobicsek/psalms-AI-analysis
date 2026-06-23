@@ -9,6 +9,30 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 360 (2026-06-23): Pipeline cost-reduction review → "A1" dossier prompt-cache designed, cache-TTL blocker found, keepalive fix designed, SHELVED + documented
+
+**Objective**: Review the production pipeline for ways to cut per-psalm cost without sacrificing quality (situations where a model generates output we don't use, or more input than we need to pay for); deliver a menu of options with savings and tradeoffs. User then picked "A1" (dossier prompt-caching) to implement.
+
+**Findings (cost review, grounded in 3 recent cost JSONs — Pss 62/63/64)**:
+- Per-psalm ~$6. Model split: **Opus 4.8 ~$2.61** (Macro + Synthesis Discovery + Master Writer, 3 calls), **GPT-5.4 ~$2.16** (Literary Echoes passes 3&4 + Copy Editor), **Sonnet 4.6 ~$0.64** (Micro), **Gemini 3.1 Pro ~$0.41** (Lit Echoes passes 1&2, thinking ≈ $0.3 of it), **GPT-5.1 ~$0.16** (citation false-positive filter).
+- **Prime waste**: Synthesis Discovery and Master Writer each separately ingest the SAME ~130–180k-token dossier (psalm + macro + micro + ~215KB research bundle + phonetics + framework), and **prompt caching is entirely unused** (`cache_read_tokens`/`cache_write_tokens` = 0 in every cost file).
+- Supporting facts: the `ResearchTrimmer` is a **no-op** (400k-char cap never trips on ~215k bundles → `research_v2.md` == `research_trimmed.md` byte-for-byte); the phonetic analyst is **algorithmic** (no API cost); insights/questions already skipped by default.
+- Delivered a tiered menu: **A1** dossier caching (~$0.30–0.45); **A2** citation filter GPT-5.1→Haiku (~$0.05–0.15, ~16× cheaper, near-zero risk); **A3** reuse lit-echoes/synthesis on reruns (~$1.8/iteration); **B1** make trimmer bind / selective commentary; **B2** copy-editor 5.4→5.1; **B3** Gemini thinking-budget trim; **C1** Synthesis Discovery skip/downsize (~$1.0–1.3, measured-quality tradeoff).
+
+**Problems Identified**:
+- **A1 is EV-negative naively.** Anthropic prompt caching is prefix-based with a **300s (5-min) default TTL**; the cache is written at the *start* of Synthesis Discovery and read when the Master Writer *starts*, but the Writer only begins after Synthesis fully completes. Measured Synthesis durations (logs, last 8 production runs Pss 58–64) are **226–466s, with the current-prompt runs 61–64 consistently 303–330s — past the 300s TTL** → cache expires before the Writer reads it → Writer re-pays full price AND the 0.25× write premium is wasted (≈ break-even to −$0.16/psalm). 1-hour TTL also loses (2.0× write premium for a single read).
+
+**Solutions Designed (NOT implemented — shelved by user)**:
+1. **Keepalive fix (user's idea, validated against cache semantics)**: a cache *read* refreshes the TTL, so a cheap `max_tokens=1` "keepalive" ping of the dossier prefix, fired on a background thread *during* Synthesis (first ping ~120s in to avoid a double-write race, then ~every 250s), keeps the cache alive until the Writer reads it. Three calls (Synthesis = write, ping = read, Writer = read) share one byte-identical cached dossier block. Net **~$0.30–0.45/psalm**, reliable across 250–466s Synthesis durations.
+2. **Shelved** over two user concerns, both documented: (a) prefix caching forces the dossier to LEAD the Master Writer prompt (a reorder of the heavily-tuned `MASTER_WRITER_PROMPT_V4` → small but real voice risk, would need a one-psalm A/B gate); (b) **model-swap fragility** — Anthropic caching only works when Synthesis and Writer run on the *same Claude model*; a future GPT writer (e.g. GPT-5.6) kills the mechanism entirely and leaves the reorder as dead weight. Recommended guard if revived: enable only when `sd_model == writer_model and is-Claude`, else fall back to today's path.
+
+**Files Modified** (documentation only — no code touched):
+- `docs/plans/DOSSIER_CACHE_KEEPALIVE_PLAN.md` — **NEW**: self-contained shelved plan (goal, the TTL blocker with measured durations, the keepalive fix + economics, implementation shape, validation gate, both shelving concerns, context snapshot).
+- `CLAUDE.md` — session 359→360 + date; new Recent-Work entry at top (dropped Session 355); added a pointer to the plan doc in the "Reference Docs" list so it surfaces in the always-loaded index.
+- `docs/session_tracking/IMPLEMENTATION_LOG.md` — this entry.
+
+---
+
 ## Session 359 (2026-06-21): Master-editor voice — grammar-term glossing + gentle scholarly wit + texture variation; Amichai poem banned from literary echoes; live writer A/B on Pss 61–62
 
 **Objective**: The two most recent published commentaries (Pss 61, 62) were excellent but the user flagged four issues: (1) they lean on grammar/rhetoric terms an average adult wouldn't know or remember from college English (e.g. Ps 62 "this single **vocative**"; Ps 61 "the **asyndeton** enacts what it means") without teaching them; (2) the prompt's wit guidance illustrated its target with a Ps 52 example ("one does not easily worship in the mode of X") that the writer then **reused nearly verbatim across psalms** — and even so the recent outputs had no wit at all; (3) the prose reads uniformly section-to-section and psalm-to-psalm; (4) Amichai's *God Has Pity on Kindergarten Children* is overused and keeps getting selected. **Hard constraint from the user**: do NOT increase the net length of the master-editor prompt (long prompts → inferior output).
