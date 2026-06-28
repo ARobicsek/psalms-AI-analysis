@@ -9,6 +9,35 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 361 (2026-06-28): Shimush Tehillim integration — systematic practical-Kabbalah coverage in liturgical section
+
+**Objective**: Make Shimush Tehillim (שימוש תהלים) a standard part of the pipeline so every psalm's deep research covers its prescribed practical-Kabbalistic use and the Master Writer incorporates this into the liturgical section with speculation on why the psalm was selected for that purpose.
+
+**Problems Identified**:
+- Shimush Tehillim content was occasionally surfaced by Gemini Deep Research and incorporated beautifully by the Master Writer, but this was accidental — the deep research prompt didn't name the source, the writer didn't know the category existed, and zero of the 55 existing deep research files contained Shimush Tehillim content.
+
+**Solutions Implemented**:
+1. **Deep research prompt** (`docs/prompts_reference/deep_research_prompt.md`): Added ~22 words explicitly naming Shimush Tehillim in the "ritual and liturgical use" clause, asking what purpose the tradition assigns and why the psalm was selected. Zero cost impact (manual Gemini Deep Research mode).
+2. **Master Writer prompt** (`src/agents/master_editor.py`, Stage 2 "Modern Jewish Liturgical Use"): Added 1 bullet (~55 words) instructing the writer to create a `#### Practical Kabbalah` subsection when Shimush Tehillim content is present in the research bundle. States the prescribed use, then speculates on WHY the psalm was selected — "what in its language, imagery, or traditional, creative or midrashic reading makes the association intelligible." Subsection omitted entirely when no content exists. Cost: ~$0.00075/psalm.
+3. **Deep research README** (`data/deep_research/README.md`): Removed stale inline prompt copy (was divergent from the canonical `docs/prompts_reference/deep_research_prompt.md`), replaced with a pointer to the canonical file. Eliminates confusion from having two prompt versions.
+
+**Design Decisions**:
+- Shimush Tehillim placed within the existing "Modern Jewish Liturgical Use" section (not a new top-level section) because it's ritual use broadly and avoids structural changes to the DOCX output.
+- Gets its own `#### Practical Kabbalah` subsection heading (not woven into prose) per user preference, but only when content exists.
+- Tone left to writer's judgment — "speculate concisely on why" without prescribing a register. The writer has already handled this well when it discovered the material organically.
+- Existing 55 deep research files left as-is — Shimush coverage will appear incrementally on future deep research runs.
+
+**Files Modified**:
+- `docs/prompts_reference/deep_research_prompt.md` — Added Shimush Tehillim to research areas (+22 words)
+- `src/agents/master_editor.py` — Added Practical Kabbalah subsection guidance to Stage 2 (+1 bullet, ~55 words)
+- `data/deep_research/README.md` — Removed stale inline prompt, pointed to canonical prompt file
+
+**Files NOT Modified** (by design):
+- No changes to Liturgical Librarian, macro/micro analysts, copy editor, synthesis writer, or DOCX generator
+- No new agents, pipeline steps, scripts, or databases created
+
+---
+
 ## Session 360 (2026-06-23): Pipeline cost-reduction review → "A1" dossier prompt-cache designed, cache-TTL blocker found, keepalive fix designed, SHELVED + documented
 
 **Objective**: Review the production pipeline for ways to cut per-psalm cost without sacrificing quality (situations where a model generates output we don't use, or more input than we need to pay for); deliver a menu of options with savings and tradeoffs. User then picked "A1" (dossier prompt-caching) to implement.

@@ -354,6 +354,7 @@ Then write the liturgical section using `####` for subsections (Full psalm, Key 
 - **CRITICAL:** Include Hebrew from BOTH the psalm AND the prayers.
 - For phrases used in liturgy, reflect on whether the liturgical use follows the natural ("pshat") reading or whether the compilers have put the text to a novel use.
 - Explain what the liturgical placement reveals about the tradition's understanding.
+- **Shimush Tehillim (שימוש תהלים)**: If the research bundle includes Shimush Tehillim material, add a `#### Practical Kabbalah` subsection. State the prescribed use (protection, healing, etc.), then speculate concisely on WHY this psalm was selected for that purpose — what in its language, imagery, or traditional, creative or midrashic reading makes the association intelligible? Treat this tradition with scholarly respect: it is practical Kabbalah, attributed to Rav Hai Gaon. Omit this subsection entirely when the research bundle contains no Shimush Tehillim content.
 
 **NUSACH DISAMBIGUATION (do not confuse these!):**
 - **Nusach Ashkenaz** = the traditional rite of non-Hasidic Ashkenazi Jewry (Lithuanian, German, etc.)
