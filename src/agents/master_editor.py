@@ -264,6 +264,8 @@ Your tone is one of measured confidence, not breathless praise. Illuminate the t
 
 **Vary your texture.** Uniform rhythm reads as machine-made. Within this register, let sentence length and shape breathe — a short blunt sentence after a long winding one, a question where you'd reflexively assert, sometimes a concrete scene or a homely analogy instead of another abstract gloss. Every verse section still opens with the verse's full Hebrew text (STAGE 3), but vary what follows: don't let the commentary settle into one fixed template (gloss a phrase → name a device → state the payoff). This variation is part of what separates a human teacher from a competent template — but never pursue it at the cost of clarity or the standards above.
 
+**One affective landing.** While planning, locate the psalm's emotional center of gravity — the verse where the human situation is most exposed. Build ONE passage there (essay or that verse's commentary) where the analysis stops carrying the sentences and the human point lands plainly: two or three sentences with no device named, no source cited, no cleverness — just what this feels like from inside, said simply. Then return to work. Restraint is the craft (RULE 7b still governs): the analytical discipline everywhere else is what lets this one place carry feeling. Exactly one per guide — spread it thinner and nothing lands.
+
 **Pipeline voice (FORBIDDEN):**
 "The macro thesis correctly identifies this psalm as a 'liturgical polemic' that appropriates Baal theology, and the evidence supports this reading. The research bundle shows that the concordance data confirms..."
 
@@ -343,7 +345,7 @@ Write a scholarly introduction essay that:
 
 8. **Treats the poet as a craftsman with intentions**: Don't just catalog poetic devices ("this is a chiasm"). Show WHY the poet made this choice. What does the chiasm DO to the reader? What effect does the word order create? What would be lost if the poet had said the same thing in prose? The poet is a character in your essay — someone making deliberate, skilled decisions.
 
-**CLOSING**: End your essay with the ONE insight you most want the reader to carry away — the single observation that makes this psalm impossible to read the same way again. This should feel like a destination your essay has been building toward, not a tacked-on summary. One or two sentences.
+**CLOSING**: End your essay with the ONE thing you most want the reader to carry away — usually the single observation that makes this psalm impossible to read the same way again; where the material supports it, this may be the affective landing itself (see STYLISTIC GUIDANCE) — the human recognition rather than the scholarly point. Either way it should feel like a destination your essay has been building toward, not a tacked-on summary. One or two sentences.
 
 ### STAGE 2: MODERN JEWISH LITURGICAL USE (200-500 words)
 
@@ -423,7 +425,7 @@ For EACH verse:
 
 10. **Interpretation & Reception**: Church fathers, medieval Christian interpretation, modern scholarship, Targum renderings. Cultural afterlife from Deep Web Research.
 
-11. **Historical & Cultural points of interest**: adoption of the psalm or elements of its content in later historical cotexts (e.g. Continental congress, American natives, German leider, R&B music, etc.)
+11. **The Psalm in a Human Mouth**: when the research records a concrete scene of this psalm being *used* — a specific person or community praying, singing, or quoting these words at a specific moment (a deathbed, a siege, the Continental Congress, a civil-rights march, a German lied, an R&B recording) — treat that scene as first-rank material, ahead of one more lexical parallel. Tell it as a scene: who, when, what was at stake, and the psalm's words quoted at the moment of use. Narrated use is direct evidence of what the poem does to people, and it often moves a reader more than anything a commentator can add.
 
 12. **Cross-Cultural Literary Echoes — quote generously and unfold the connection**:
 
@@ -517,6 +519,7 @@ Before submitting, verify:
 - NO BLURRY PHOTOGRAPHS: No abstract nouns (density, resonance, dynamics, contours) without concrete verbs.
 - NO FALSE PROFUNDITY (RULE 7b): Strip the rhythm from each balanced/antithetical/chiastic/epigrammatic sentence. If the reader now knows nothing the plain verse didn't already tell them — only a word's definition or the same point restated — cut it or reduce it to one plain clause. Watch for "X at its minimum / Y at its peak," "not A but B," "not a place — a pattern," and escalating restatement.
 - THE ONE THING: Does the essay end with a single, memorable takeaway?
+- AFFECTIVE LANDING: Is there exactly ONE passage, at the psalm's emotional center of gravity, where analysis pauses and the human point lands plainly — no device named, no source cited, no straining? (Zero is a miss; two is a dilution.)
 - READER QUESTIONS: Each question from READER QUESTIONS is addressed somewhere in the essay or commentary.
 - FIGURATIVE LANGUAGE: Each verse with figurative language cites at least ONE biblical parallel (Hebrew + English) and generates an insight.
 - TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
@@ -753,6 +756,28 @@ class MasterEditor(MasterEditorV2):
             self.logger.warning(f"Could not load analytical framework: {e}")
             analytical_framework = "[Analytical framework not available]"
 
+        # Session 360: deterministic distributional pre-pass — exact SQL counts
+        # (rare forms, repeated forms, inclusio candidates, rare bigrams,
+        # divine-name tallies) so the sidecar's distributional sweep starts
+        # from real tables instead of counting in its head. Zero API cost;
+        # skipped silently when no populated tanakh.db is available.
+        computed_facts = ""
+        try:
+            from src.concordance.distributional_facts import compute_distributional_facts
+            computed_facts = compute_distributional_facts(psalm_number)
+            if computed_facts:
+                self.logger.info(
+                    f"[SYNTHESIS DISCOVERY] computed distributional facts "
+                    f"({len(computed_facts):,} chars)"
+                )
+            else:
+                self.logger.warning(
+                    "[SYNTHESIS DISCOVERY] no populated tanakh.db found — "
+                    "running without computed distributional facts"
+                )
+        except Exception as e:
+            self.logger.warning(f"Distributional facts pre-pass failed: {e}")
+
         agent = SynthesisDiscoveryAgent(
             cost_tracker=self.cost_tracker,
             model=model,
@@ -766,6 +791,7 @@ class MasterEditor(MasterEditorV2):
             research_bundle=research_bundle,
             phonetic_section=phonetic_section,
             analytical_framework=analytical_framework,
+            computed_facts=computed_facts,
             debug_dir=Path("output/debug"),
         )
 
