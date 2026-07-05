@@ -58,9 +58,21 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         lexicon_matches = re.findall(r'^### [^\n]+$', lexicon_section.group(0), re.MULTILINE)
         stats['lexicon_count'] = len(lexicon_matches)
 
-    # Count concordance results by parsing actual query headers: "### <query> (N results, ...)"
-    concordance_result_counts = re.findall(r'^### .+\((\d+) results', markdown_content, re.MULTILINE)
-    stats['concordance_count'] = sum(int(n) for n in concordance_result_counts)
+    # Count concordance results by parsing actual query headers, e.g.
+    # "### <query> (28 external results, auto, consonantal)". Scope to the
+    # Concordance Searches section so figurative/other ### headers can't leak
+    # in, and tolerate an optional word (e.g. "external") between the count and
+    # "results" — the header format the micro analyst emits gained "external"
+    # (honest external counts), which the old bare "(N results" regex missed,
+    # yielding a spurious 0 → "N/A" on resume.
+    concordance_section = re.search(
+        r'## Concordance Searches(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL
+    )
+    if concordance_section:
+        concordance_result_counts = re.findall(
+            r'^### .+?\((\d+)(?:\s+\w+)? results', concordance_section.group(1), re.MULTILINE
+        )
+        stats['concordance_count'] = sum(int(n) for n in concordance_result_counts)
 
     # Count figurative language instances
     curated_section = re.search(r'## Figurative Language Insights \(Curated\)(.*?)(?=\n## [^#]|\Z)', markdown_content, re.DOTALL)

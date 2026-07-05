@@ -9,6 +9,39 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 362 (2026-07-01): Sonnet 5 vs Sonnet 4.6 for the micro agent — investigated, live A/B on Ps 65, NOT adopted
+
+**Objective**: Evaluate the cost (and, after a user concern, the quality) implications of moving the micro analyst (`src/agents/micro_analyst.py` — the pipeline's only Sonnet user; 2 LLM calls/psalm: Stage 1 discovery + Stage 2 research-request generation) from Sonnet 4.6 to the newly released Sonnet 5, assuming "high or greater" thinking.
+
+**Pricing / API facts established**:
+- Sonnet 5 = **$3/$15 per 1M standard**, but **$2/$10 intro through 2026-08-31**. Sonnet 4.6 = $3/$15.
+- Sonnet 5's new tokenizer nominally emits ~30% more tokens for the same text, but this is an average — **empirically input was flat** (+0%) on Ps 65's Hebrew/Greek/structured-text prompt.
+- **Two required migration breaks** (a bare model-string swap fails): (1) Stage 1's `thinking={"type":"enabled","budget_tokens":N}` (Session-294 "reserve 50% for JSON" safeguard) **400s on Sonnet 5** — must go `adaptive` + `output_config.effort`, with **no way to hard-cap thinking**; give extra `max_tokens` (used 128K) so thinking + JSON fit. (2) Stage 2 sends **no** `thinking` config → on 4.6 that means OFF, but on **Sonnet 5 omitting `thinking` defaults to adaptive-ON** (silent output-token cost) — must set `{"type":"disabled"}` explicitly.
+- `effort` levels `low/medium/high/xhigh/max` are **coarse** — nothing between `xhigh` and `max`.
+
+**A/B methodology**: Throwaway runner reused `output/psalm_65/psalm_065_macro.json` (only the micro stage differs), ran Stages 1–2 only (Stage 3 research assembly is not a Sonnet call — ~16 min + non-Sonnet cost, skipped), `commentary_mode="all"` to match the pipeline default, priced via a temporary `claude-sonnet-5` entry in `cost_tracker.py`. Baseline = the Sonnet 4.6 production run for Ps 65 (`psalm_065_cost.json` → `claude-sonnet-4-6`: 2 calls, 27,888 in / 45,758 out, **$0.770**).
+
+**Results** (Ps 65 micro, cost intro / standard):
+| | 4.6 (max, thinking capped 50%) | S5 `xhigh` | S5 `max` |
+|---|--:|--:|--:|
+| Output tokens | 45,758 | 27,753 (−39%) | 92,619 (+102%) |
+| Cost | $0.770 | $0.333 / $0.500 (−57% / −35%) | $0.990 / $1.485 (+29% / +93%) |
+| Lexical insights | 41 | 34 | 51 |
+| Figurative / questions | 13 / 11 | – / 12 | 27 / 15 |
+| Chars per insight | 510 | 288 | 269 |
+
+- **`effort` is a 3.3× output-token lever** (mostly uncapped adaptive thinking): `xhigh` is cheaper but **genuinely thinner** than 4.6 (the user's concern); `max` restores/exceeds breadth (51 insights) but costs **more** than 4.6. **No setting is both cheaper and richer** — the session-start "Sonnet 5 is cheaper" thesis reverses at the density-preserving effort.
+
+**Quality judgment** (manual, verses 2/4/10, S5 `max` vs 4.6): comparable; different profiles. Sonnet 5 **sharper on cross-verse connective insight** — the pipeline's highest-value axis — catching items 4.6 missed (v2 תְּהִלָּה/תְפִלָּה ה↔פ near-rhyme; v4→v7 גָּבְרוּ→גְּבוּרָה contrastive echo; v4 כפר-with-direct-object anomaly; v10 פֶּלֶג אֱלֹהִים superlative construction w/ Ps 80:11, 36:7). 4.6 **deeper per item** — more enumerated interpretive options (3 readings of דֻּמִיָּה vs 1), longer cross-ref chains (Ps 22/66/116). S5 = better *scout*, weaker *essayist*.
+
+**Decision**: **NOT adopted.** No clean win. The `max` premium is tiny in absolute terms (+$0.22/psalm intro, +$0.71/psalm standard; ~$33–107 across all 150) and arguably feeds better raw material to the writer, but it is not the cost win that triggered the investigation. Untested levers for a future revisit: (a) a model-gated nudge to the shared `DISCOVERY_PASS_PROMPT` density block (Sonnet 5 follows length instructions literally, defaults terse) to get 4.6-level depth at `xhigh` cost; (b) full-pipeline DOCX diff + blind position-debiased judge (`evaluate_novelty_ab.py` pattern) instead of a manual read.
+
+**Files**: `docs/plans/SONNET5_MICRO_AB_FINDINGS.md` created (full data + reproduction notes; pointer added to CLAUDE.md Reference Docs). **All code reverted from HEAD** — `src/agents/micro_analyst.py` and `src/utils/cost_tracker.py` byte-identical to session start (`MicroAnalystV2.DEFAULT_MODEL` still `claude-sonnet-4-6`); throwaway runner `archive/development_scripts/compare_micro_sonnet5.py` and A/B artifacts `output/psalm_65/_micro_compare_sonnet5/` removed. **No production code changed.**
+
+**Reproduction gotcha**: `MicroAnalystV2` default `db_path="data/tanakh.db"` is wrong for standalone use — the populated DB is `database/tanakh.db` (87 MB). Passing the wrong path silently auto-creates an empty DB → "Psalm N not found."
+
+---
+
 ## Session 361 (2026-06-28): Shimush Tehillim integration — systematic practical-Kabbalah coverage in liturgical section
 
 **Objective**: Make Shimush Tehillim (שימוש תהלים) a standard part of the pipeline so every psalm's deep research covers its prescribed practical-Kabbalistic use and the Master Writer incorporates this into the liturgical section with speculation on why the psalm was selected for that purpose.
