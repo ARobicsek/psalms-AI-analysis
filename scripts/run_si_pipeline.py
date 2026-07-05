@@ -297,6 +297,7 @@ def run_enhanced_pipeline(
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
+    skip_beta_reader: bool = False,  # Session 362: beta reader runs by default (~$0.08, measurement only)
     special_instruction_file: str = None,
     macro_model: str = "claude-opus-4-8",
     insight_model: str = "gpt-5.4",
@@ -983,6 +984,37 @@ def run_enhanced_pipeline(
         except Exception as e:
             logger.warning(f"Failed to extract copy-edited sections: {e}; using original writer output for DOCX")
 
+    # =====================================================================
+    # STEP 5d: Beta Reader (Session 362) — reader-experience measurement.
+    # NOT an editor: the report feeds no revision pass. Non-fatal on failure.
+    # =====================================================================
+    if not skip_beta_reader and not smoke_test:
+        beta_input = copy_edited_file if copy_edited_file.exists() else print_ready_file
+        if beta_input.exists():
+            logger.info("[STEP 5d] Running Beta Reader (measurement only)...")
+            print(f"\n{'='*80}")
+            print(f"STEP 5d: Beta Reader (reader-experience report)")
+            print(f"{'='*80}\n")
+            try:
+                from src.agents.beta_reader import BetaReader
+                beta_reader = BetaReader(cost_tracker=cost_tracker)
+                br_result = beta_reader.read_commentary(
+                    psalm_number=psalm_number,
+                    input_file=beta_input,
+                    output_dir=output_path,
+                )
+                tracker.track_model_for_step("beta_reader", beta_reader.model)
+                if br_result["scores"]:
+                    logger.info(
+                        "[STEP 5d] Beta-read scores: "
+                        + ", ".join(f"{k} {v}/10" for k, v in br_result["scores"].items())
+                    )
+            except Exception as e:
+                halt_on_quota(e, "STEP 5d: Beta Reader", logger, cost_tracker, output_path, psalm_number)
+                logger.warning(f"Beta Reader failed (non-fatal): {e}")
+    elif skip_beta_reader:
+        logger.info("[STEP 5d] Skipping Beta Reader")
+
     # --- Save stats again after copy editor (so DOCX picks up copy_editor model) ---
     tracker.save_json(str(output_path))
 
@@ -1083,6 +1115,8 @@ if __name__ == "__main__":
                        help="Skip the copy editor step (runs by default)")
     parser.add_argument("--skip-lit-echoes", action="store_true",
                        help="Skip the literary echoes generation step (runs by default, regenerating the file on every pipeline run)")
+    parser.add_argument("--skip-beta-reader", action="store_true",
+                       help="Skip the beta-reader step (Session 362; runs by default, ~$0.08, measurement only)")
     parser.add_argument("--special-instruction", type=str, default=None,
                        help="Path to special instruction file")
     parser.add_argument("--gpt-5-4-all", action="store_true", help="Use GPT-5.4 for all eligible agents")
@@ -1176,6 +1210,7 @@ if __name__ == "__main__":
         exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
         skip_lit_echoes=args.skip_lit_echoes,
+        skip_beta_reader=args.skip_beta_reader,
         special_instruction_file=args.special_instruction,
         macro_model=macro_mdl,
         insight_model=insight_mdl,

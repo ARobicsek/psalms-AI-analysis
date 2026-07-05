@@ -128,6 +128,9 @@ you are surfacing material, not dictating structure.
 ### PHONETIC TRANSCRIPTIONS
 {phonetic_section}
 
+### COMPUTED DISTRIBUTIONAL FACTS (deterministic SQL counts over the full-Tanakh concordance)
+{computed_facts}
+
 ### ANALYTICAL FRAMEWORK (poetic conventions reference)
 {analytical_framework}
 """
@@ -248,6 +251,11 @@ Universal exclusions (both types):
      it is most expected). Distributional patterns are discovered by
      counting, not recalled; a table you never build is a pattern you
      never see. Most tables will be boring — discard them without comment.
+     When the COMPUTED DISTRIBUTIONAL FACTS block is present, start there:
+     its counts are exact and already built — trust them over your own
+     tabulation (and over your memory), and spend your reasoning on which
+     rows are load-bearing, not on counting. Mind its stated limitation:
+     it counts exact consonantal FORMS, not lemmas.
    - And the qualitative TYPE P sweep across the poem itself: verb system,
      sound architecture, structural hinges, juridical logic,
      superscription-vs-body gap, restraint vs. excess, intertextual
@@ -452,6 +460,7 @@ class SynthesisDiscoveryAgent:
         research_bundle: str,
         phonetic_section: str,
         analytical_framework: str,
+        computed_facts: str = "",
         debug_dir: Optional[Path] = None,
         retries: int = 4,
     ) -> Dict[str, Any]:
@@ -470,6 +479,7 @@ class SynthesisDiscoveryAgent:
             micro_analysis=micro_analysis_text,
             research_bundle=research_bundle,
             phonetic_section=phonetic_section,
+            computed_facts=computed_facts or "[not available for this run]",
             analytical_framework=analytical_framework,
         ) + SYNTHESIS_TASK
 

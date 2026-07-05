@@ -312,6 +312,8 @@ def run_enhanced_pipeline(
     copy_model: str = "gpt-5.4",
     synthesis_discovery: bool = True,
     reuse_synthesis_discovery: bool = False,  # Session 358: reuse an existing observations file instead of regenerating (~$2 saved)
+    skip_beta_reader: bool = False,  # Session 362: beta reader runs by default (~$0.08, measurement only)
+    beta_model: str = None,          # Session 362: default lives in BetaReader.DEFAULT_MODEL
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -1022,6 +1024,38 @@ def run_enhanced_pipeline(
         except Exception as e:
             logger.warning(f"Failed to extract copy-edited sections: {e}; using original writer output for DOCX")
 
+    # =====================================================================
+    # STEP 5d: Beta Reader (Session 362) — reader-experience measurement.
+    # NOT an editor: the report feeds no revision pass and no downstream
+    # step consumes it. Non-fatal on failure.
+    # =====================================================================
+    if not skip_beta_reader and not smoke_test:
+        beta_input = copy_edited_file if copy_edited_file.exists() else print_ready_file
+        if beta_input.exists():
+            logger.info("[STEP 5d] Running Beta Reader (measurement only)...")
+            print(f"\n{'='*80}")
+            print(f"STEP 5d: Beta Reader (reader-experience report)")
+            print(f"{'='*80}\n")
+            try:
+                from src.agents.beta_reader import BetaReader
+                beta_reader = BetaReader(cost_tracker=cost_tracker, model=beta_model)
+                br_result = beta_reader.read_commentary(
+                    psalm_number=psalm_number,
+                    input_file=beta_input,
+                    output_dir=output_path,
+                )
+                tracker.track_model_for_step("beta_reader", beta_reader.model)
+                if br_result["scores"]:
+                    logger.info(
+                        "[STEP 5d] Beta-read scores: "
+                        + ", ".join(f"{k} {v}/10" for k, v in br_result["scores"].items())
+                    )
+            except Exception as e:
+                halt_on_quota(e, "STEP 5d: Beta Reader", logger, cost_tracker, output_path, psalm_number)
+                logger.warning(f"Beta Reader failed (non-fatal): {e}")
+    elif skip_beta_reader:
+        logger.info("[STEP 5d] Skipping Beta Reader")
+
     # --- Save stats again after copy editor (so DOCX picks up copy_editor model) ---
     tracker.save_json(str(output_path))
 
@@ -1146,6 +1180,12 @@ if __name__ == "__main__":
                        help="Reuse an existing psalm_NNN_synthesis_discovery.md in the output dir "
                             "instead of regenerating it (~$2 saved). The writer still receives the "
                             "observations. Ignored if the file is missing (fresh generation runs).")
+    parser.add_argument("--skip-beta-reader", action="store_true",
+                       help="Skip the beta-reader step (Session 362). Runs by default after the "
+                            "copy editor (~$0.08): a simulated target-audience read of the finished "
+                            "guide, measurement only — no edits. Output: psalm_NNN_beta_read.md")
+    parser.add_argument("--beta-model", type=str, default=None,
+                       help="Override the beta-reader model (default: claude-sonnet-4-6)")
 
     args = parser.parse_args()
 
@@ -1171,6 +1211,7 @@ if __name__ == "__main__":
     print(f"Master Writer Model: {args.master_editor_model}")
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
     print(f"Synthesis Discovery: {'SKIP' if args.skip_synthesis_discovery else 'ON'}")
+    print(f"Beta Reader: {'SKIP' if args.skip_beta_reader else 'ON'}")
     print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
     print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
     
@@ -1221,4 +1262,6 @@ if __name__ == "__main__":
         copy_model=copy_mdl,
         synthesis_discovery=not args.skip_synthesis_discovery,
         reuse_synthesis_discovery=args.reuse_synthesis_discovery,
+        skip_beta_reader=args.skip_beta_reader,
+        beta_model=args.beta_model,
     )
