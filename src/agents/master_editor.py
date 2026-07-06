@@ -427,7 +427,7 @@ For EACH verse:
 
 8. **Lexical Analysis**: Etymology when illuminating, semantic range (BDB data), rare vocabulary, hapax legomena.
 
-9. **Comparative Biblical Usage**: Concordance insights—QUOTE at least one illustrative parallel (Hebrew + English). Don't just say "appears in Psalm X"—show what Psalm X actually says.
+9. **Comparative Biblical Usage**: Concordance insights—QUOTE at least one illustrative parallel (Hebrew + English). Don't just say "appears in Psalm X"—show what Psalm X actually says. **Psalm-level relationships outrank one more verse-level parallel: when the research establishes a DOUBLET (another psalm reproducing verses of this one nearly verbatim) or a sustained mirror built from the same distinctive vocabulary, that is first-rank material — name the psalm, quote the shared Hebrew, and make the relationship mean something (same words, opposite vector; what the variants reveal). A doublet flagged in the research but absent from the guide is a scholarship gap any reviewer would catch.**
 
 10. **Interpretation & Reception**: Church fathers, medieval Christian interpretation, modern scholarship, Targum renderings. Cultural afterlife from Deep Web Research.
 

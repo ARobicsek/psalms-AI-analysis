@@ -12,8 +12,9 @@ to help the synthesis and editor agents make connections.
 import sys
 import json
 import re
+import difflib
 from pathlib import Path
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Tuple
 from dataclasses import dataclass
 
 # Handle imports for both module and script usage
@@ -22,6 +23,29 @@ if __name__ == '__main__':
     from src.data_sources.tanakh_database import TanakhDatabase
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
+
+
+# --- Doublet detection thresholds (Session 365) ---
+# Two verses whose consonantal token sets overlap at or above this Jaccard
+# ratio count as the same verse appearing in two psalms.
+DOUBLET_VERSE_SIMILARITY = 0.7
+# This many near-duplicate verse pairs make the psalm pair a DOUBLET (e.g.
+# Ps 108 = Ps 57:8-12 + Ps 60:7-14). Below it, a lone pair is flagged as a
+# shared verse only if it clears the higher single-verse bar.
+DOUBLET_MIN_VERSES = 2
+SINGLE_VERSE_SIMILARITY = 0.8
+# Once verses align, a neighboring verse at the same offset joins the doublet
+# at this lower bar. Mid-run verses with heavy redaction (divine-name swaps,
+# plene/defective spelling) score 0.4-0.65 — e.g. 57:10//108:4 where אדני
+# becomes יהוה — and are precisely the variants worth surfacing.
+GAP_FILL_SIMILARITY = 0.4
+# Verses shorter than this many tokens never participate — otherwise every
+# psalm pair sharing a generic superscription (למנצח מזמור לדוד) gets flagged.
+MIN_VERSE_TOKENS = 4
+# Shared roots beyond this many are listed by name only, without verse
+# contexts. The detailed per-root context lines are the bulk of the section
+# and the low-IDF tail of them was never used by any downstream agent.
+MAX_DETAILED_ROOTS = 10
 
 
 @dataclass
@@ -157,19 +181,26 @@ class RelatedPsalmsLibrarian:
         if not related_matches:
             return ""
 
+        # Detect doublets / near-verbatim shared verses deterministically, so
+        # the section can LEAD with the conclusion instead of burying it under
+        # thousands of atom-level matches (the Ps 60/108 failure mode).
+        doublet_map = self._detect_shared_verses(psalm_number, related_matches)
+
         # Build the preamble (this is always included)
-        preamble = self._build_preamble(psalm_number, related_matches)
+        preamble = self._build_preamble(psalm_number, related_matches, doublet_map)
 
         if self.logger:
             self.logger.info(f"Related Psalms formatting for Psalm {psalm_number}: "
                            f"max_size={max_size_chars}, include_full_text={include_full_text}, "
-                           f"preamble_size={len(preamble)} chars")
+                           f"preamble_size={len(preamble)} chars, "
+                           f"doublets={sorted(doublet_map.keys())}")
 
         # If full text not requested, format all matches compactly
         if not include_full_text:
             md = preamble
             for match in related_matches:
-                md += self._format_single_match(psalm_number, match, include_full_text=False)
+                md += self._format_single_match(psalm_number, match, include_full_text=False,
+                                                shared_verse_pairs=doublet_map.get(match.psalm_number))
 
             # Still respect max_size_chars cap
             if len(md) > max_size_chars:
@@ -188,7 +219,8 @@ class RelatedPsalmsLibrarian:
 
             for match in related_matches:
                 has_full_text = match.psalm_number not in psalms_without_full_text
-                md += self._format_single_match(psalm_number, match, include_full_text=has_full_text)
+                md += self._format_single_match(psalm_number, match, include_full_text=has_full_text,
+                                                shared_verse_pairs=doublet_map.get(match.psalm_number))
 
             # Check if under cap
             if len(md) <= max_size_chars:
@@ -217,12 +249,252 @@ class RelatedPsalmsLibrarian:
 
         return md
 
-    def _build_preamble(self, psalm_number: int, related_matches: List[RelatedPsalmMatch]) -> str:
+    def _detect_shared_verses(
+        self,
+        psalm_number: int,
+        related_matches: List[RelatedPsalmMatch]
+    ) -> Dict[int, List[Tuple[int, int, float]]]:
+        """
+        Detect near-verbatim shared verses between the analyzed psalm and each
+        related psalm.
+
+        Returns {related_psalm_number: [(verse_here, verse_there, similarity)]}
+        containing only pairs worth flagging: either a doublet
+        (>= DOUBLET_MIN_VERSES aligned verse pairs) or a single verse clearing
+        SINGLE_VERSE_SIMILARITY. Empty dict when the database has no text for
+        the analyzed psalm.
+        """
+        try:
+            psalm = self.db.get_psalm(psalm_number)
+        except Exception:
+            psalm = None
+        if not psalm:
+            return {}
+
+        analyzed_verses = [{"verse": v.verse, "hebrew": v.hebrew} for v in psalm.verses]
+
+        doublet_map: Dict[int, List[Tuple[int, int, float]]] = {}
+        for match in related_matches:
+            pairs = self._find_shared_verse_pairs(analyzed_verses, match.full_text_hebrew)
+            if len(pairs) >= DOUBLET_MIN_VERSES:
+                doublet_map[match.psalm_number] = pairs
+            elif len(pairs) == 1 and pairs[0][2] >= SINGLE_VERSE_SIMILARITY:
+                doublet_map[match.psalm_number] = pairs
+        return doublet_map
+
+    def _tokenize_verse(self, verse_text: str) -> Tuple[List[str], List[str]]:
+        """
+        Split a pointed Hebrew verse into (display_tokens, consonantal_keys).
+
+        Reads the qere at ketiv/qere sites (drops the parenthesized ketiv,
+        unwraps the bracketed qere — same convention as distributional_facts),
+        splits maqaf-joined words, and drops paragraph markers ({פ}/{ס}).
+        Display tokens keep their pointing; keys are consonantal.
+        """
+        display: List[str] = []
+        keys: List[str] = []
+        if not verse_text:
+            return display, keys
+
+        for raw in verse_text.split():
+            if raw.startswith('{'):
+                continue
+            # Split maqaf-joined words BEFORE consonantal reduction —
+            # _remove_nikud strips the maqaf itself (U+05BE is in its range).
+            for part in raw.replace('־', ' ').split():
+                if part.startswith('(') and part.endswith(')'):
+                    continue  # ketiv — we read the qere
+                if part.startswith('[') and part.endswith(']'):
+                    part = part[1:-1]
+                key = self._remove_nikud(part).strip('()[]')
+                if key:
+                    display.append(part)
+                    keys.append(key)
+        return display, keys
+
+    def _find_shared_verse_pairs(
+        self,
+        verses_a: List[Dict[str, Any]],
+        verses_b: List[Dict[str, Any]]
+    ) -> List[Tuple[int, int, float]]:
+        """
+        Align near-duplicate verses between two psalms.
+
+        Returns [(verse_a, verse_b, similarity)] sorted by verse_a, where
+        similarity is the Jaccard ratio of consonantal token sets. Each verse
+        participates in at most one pair (greedy, best similarity first).
+        """
+        tok_a = {v['verse']: self._tokenize_verse(v.get('hebrew', '')) for v in verses_a}
+        tok_b = {v['verse']: self._tokenize_verse(v.get('hebrew', '')) for v in verses_b}
+
+        candidates = []
+        for va, (_, ka) in tok_a.items():
+            if len(ka) < MIN_VERSE_TOKENS:
+                continue
+            set_a = set(ka)
+            for vb, (_, kb) in tok_b.items():
+                if len(kb) < MIN_VERSE_TOKENS:
+                    continue
+                set_b = set(kb)
+                sim = len(set_a & set_b) / len(set_a | set_b)
+                if sim >= DOUBLET_VERSE_SIMILARITY:
+                    candidates.append((sim, va, vb))
+
+        candidates.sort(reverse=True)
+        used_a, used_b = set(), set()
+        pairs: List[Tuple[int, int, float]] = []
+        for sim, va, vb in candidates:
+            if va in used_a or vb in used_b:
+                continue
+            used_a.add(va)
+            used_b.add(vb)
+            pairs.append((va, vb, sim))
+
+        # Gap-fill: extend aligned runs to neighboring verses at the same
+        # offset that clear the lower GAP_FILL_SIMILARITY bar. Doublets are
+        # contiguous; a verse between (or beside) aligned neighbors that
+        # still shares 40%+ of its words is part of the doublet, just more
+        # heavily redacted — and those redactions are the interesting part.
+        sets_a = {v: set(k) for v, (_, k) in tok_a.items() if k}
+        sets_b = {v: set(k) for v, (_, k) in tok_b.items() if k}
+        changed = bool(pairs)
+        while changed:
+            changed = False
+            for va, vb, _ in list(pairs):
+                for step in (1, -1):
+                    na, nb = va + step, vb + step
+                    if na in used_a or nb in used_b:
+                        continue
+                    if na not in sets_a or nb not in sets_b:
+                        continue
+                    sim = len(sets_a[na] & sets_b[nb]) / len(sets_a[na] | sets_b[nb])
+                    if sim >= GAP_FILL_SIMILARITY:
+                        used_a.add(na)
+                        used_b.add(nb)
+                        pairs.append((na, nb, sim))
+                        changed = True
+
+        pairs.sort()
+        return pairs
+
+    def _compress_pair_runs(
+        self,
+        psalm_a: int,
+        psalm_b: int,
+        pairs: List[Tuple[int, int, float]]
+    ) -> str:
+        """Render aligned verse pairs compactly, e.g. '60:7–14 // 108:7–14'."""
+        runs: List[List[int]] = []
+        for va, vb, _ in pairs:
+            if runs and va == runs[-1][1] + 1 and vb == runs[-1][3] + 1:
+                runs[-1][1] = va
+                runs[-1][3] = vb
+            else:
+                runs.append([va, va, vb, vb])
+
+        parts = []
+        for a0, a1, b0, b1 in runs:
+            if a0 == a1:
+                parts.append(f"{psalm_a}:{a0} // {psalm_b}:{b0}")
+            else:
+                parts.append(f"{psalm_a}:{a0}–{a1} // {psalm_b}:{b0}–{b1}")
+        return ", ".join(parts)
+
+    def _diff_verse_pair(
+        self,
+        disp_a: List[str],
+        keys_a: List[str],
+        disp_b: List[str],
+        keys_b: List[str]
+    ) -> Optional[str]:
+        """
+        Word-level diff of two near-duplicate verses.
+
+        Returns None when consonantally identical; otherwise a compact
+        'text_a ↔ text_b; ...' listing of just the differing spans (pointed).
+        """
+        if keys_a == keys_b:
+            return None
+
+        sm = difflib.SequenceMatcher(None, keys_a, keys_b, autojunk=False)
+        frags = []
+        for tag, i1, i2, j1, j2 in sm.get_opcodes():
+            if tag == 'equal':
+                continue
+            a = " ".join(disp_a[i1:i2]) or "—"
+            b = " ".join(disp_b[j1:j2]) or "—"
+            frags.append(f"{a} ↔ {b}")
+        return "; ".join(frags)
+
+    def _format_doublet_block(
+        self,
+        analyzing_psalm: int,
+        match: RelatedPsalmMatch,
+        pairs: List[Tuple[int, int, float]],
+        is_doublet: bool
+    ) -> str:
+        """
+        Lead a match entry with the computed conclusion: this psalm pair
+        shares whole verses. States the extent, then diffs the variants —
+        the two things the atom-level listings cannot say.
+        """
+        span = self._compress_pair_runs(analyzing_psalm, match.psalm_number, pairs)
+
+        # Re-tokenize the aligned verses for the diffs.
+        try:
+            psalm = self.db.get_psalm(analyzing_psalm)
+            text_a = {v.verse: v.hebrew for v in psalm.verses} if psalm else {}
+        except Exception:
+            text_a = {}
+        text_b = {v['verse']: v.get('hebrew', '') for v in match.full_text_hebrew}
+
+        if is_doublet:
+            md = f"#### ⚠ DOUBLET — {len(pairs)} nearly verbatim shared verses ({span})\n\n"
+            md += (
+                f"Psalm {analyzing_psalm} and Psalm {match.psalm_number} share these verses almost word for word. "
+                "This is the most important intra-Psalter fact about this psalm: the finished guide MUST name the "
+                "doublet explicitly and engage it — why the same text exists twice, and what each psalm's setting "
+                "does to the shared material. The word-level variants below are first-rank material in their own right.\n\n"
+            )
+        else:
+            md = f"#### Near-verbatim shared verse ({span})\n\n"
+
+        md += f"Aligned verses (format: Psalm {analyzing_psalm} text ↔ Psalm {match.psalm_number} text):\n\n"
+        for va, vb, sim in pairs:
+            disp_a, keys_a = self._tokenize_verse(text_a.get(va, ''))
+            disp_b, keys_b = self._tokenize_verse(text_b.get(vb, ''))
+            diff = self._diff_verse_pair(disp_a, keys_a, disp_b, keys_b)
+            if not keys_a or not keys_b:
+                md += f"- {analyzing_psalm}:{va} // {match.psalm_number}:{vb} — {sim:.0%} shared\n"
+            elif diff is None:
+                md += f"- {analyzing_psalm}:{va} // {match.psalm_number}:{vb} — identical\n"
+            else:
+                md += f"- {analyzing_psalm}:{va} // {match.psalm_number}:{vb} — variants: {diff}\n"
+        md += "\n"
+
+        return md
+
+    def _build_preamble(
+        self,
+        psalm_number: int,
+        related_matches: List[RelatedPsalmMatch],
+        doublet_map: Optional[Dict[int, List[Tuple[int, int, float]]]] = None
+    ) -> str:
         """Build the preamble section for the Related Psalms Analysis."""
         psalm_numbers = ", ".join([str(m.psalm_number) for m in related_matches])
 
         md = f"## Related Psalms Analysis\n\n"
         md += f"Psalm {psalm_number} shares word/phrase connections with Psalms {psalm_numbers}.\n\n"
+
+        # Doublets lead the section — a reader (human or model) must not have
+        # to reconstruct "these psalms share whole verses" from atom lists.
+        for match in related_matches:
+            pairs = (doublet_map or {}).get(match.psalm_number)
+            if pairs and len(pairs) >= DOUBLET_MIN_VERSES:
+                span = self._compress_pair_runs(psalm_number, match.psalm_number, pairs)
+                md += (f"**⚠ DOUBLET ALERT**: Psalm {match.psalm_number} shares {len(pairs)} nearly verbatim "
+                       f"verses with this psalm ({span}) — see its entry below. "
+                       "The guide must engage this relationship explicitly.\n\n")
         md += "**Model diptych** — Ps 25 + 34: both omit Vav stanza, add Pe stanza (→ פדה). "
         md += "Plea (25:22 פְּדֵה מִכֹּל צָרוֹתָיו) → Response (34:7 וּמִכׇּל־צָרוֹתָיו הוֹשִׁיעוֹ). "
         md += "Shared מִי־הָאִישׁ formula (25:12, 34:13), shared vocabulary (יִרְאַת ה׳, עֲנָוִים, טוֹב).\n\n"
@@ -289,7 +561,8 @@ class RelatedPsalmsLibrarian:
         self,
         analyzing_psalm: int,
         match: RelatedPsalmMatch,
-        include_full_text: bool = True
+        include_full_text: bool = True,
+        shared_verse_pairs: Optional[List[Tuple[int, int, float]]] = None
     ) -> str:
         """Format a single related psalm match.
 
@@ -297,8 +570,28 @@ class RelatedPsalmsLibrarian:
             analyzing_psalm: The psalm number being analyzed
             match: The related psalm match data
             include_full_text: Whether to include the full Hebrew text (for size control)
+            shared_verse_pairs: Near-verbatim verse alignments from
+                _detect_shared_verses. A doublet (>= DOUBLET_MIN_VERSES pairs)
+                replaces the atom-level listings with a headline + variant
+                diffs; a single shared verse is flagged above the listings.
         """
         md = f"### Psalm {match.psalm_number} (Connection Score: {match.final_score:.2f})\n\n"
+
+        # Doublet: state the conclusion and stop. Listing shared roots and
+        # phrases between a psalm and its own doublet buries the one fact
+        # that matters under thousands of trivially-true matches (this is
+        # exactly how the Ps 60/108 relationship went unmentioned in a
+        # finished guide despite 50K chars of matching atoms).
+        if shared_verse_pairs and len(shared_verse_pairs) >= DOUBLET_MIN_VERSES:
+            md += self._format_doublet_block(analyzing_psalm, match, shared_verse_pairs, is_doublet=True)
+            md += ("*Word/phrase-level shared patterns omitted: these psalms share the verses themselves. "
+                   "Analyze the doublet relationship — its extent, its variants, and what each psalm "
+                   "does differently with the shared material.*\n\n")
+            md += "---\n\n"
+            return md
+
+        if shared_verse_pairs:
+            md += self._format_doublet_block(analyzing_psalm, match, shared_verse_pairs, is_doublet=False)
 
         # Filter roots early so we can check if we have any displayable content
         filtered_roots = [r for r in match.shared_roots if r.get('idf', 0) >= 1]
@@ -398,14 +691,23 @@ class RelatedPsalmsLibrarian:
 
                 md += "\n"
 
-        # Shared roots THIRD (sorted by IDF descending - best matches first)
+        # Shared roots THIRD (sorted by IDF descending - best matches first).
+        # Only the rarest MAX_DETAILED_ROOTS get verse contexts; the common
+        # tail is named in one line. Every root ever used downstream came
+        # from the rare end; the detailed common tail was pure bulk.
         if filtered_roots:
             # Sort by IDF descending
             sorted_roots = sorted(filtered_roots, key=lambda r: r.get('idf', 0), reverse=True)
+            detailed_roots = sorted_roots[:MAX_DETAILED_ROOTS]
+            overflow_roots = sorted_roots[MAX_DETAILED_ROOTS:]
 
-            md += f"**Shared Roots** ({len(sorted_roots)} found, sorted by relevance):\n\n"
+            if overflow_roots:
+                md += (f"**Shared Roots** ({len(sorted_roots)} found; "
+                       f"{len(detailed_roots)} rarest shown with contexts):\n\n")
+            else:
+                md += f"**Shared Roots** ({len(sorted_roots)} found, sorted by relevance):\n\n"
 
-            for root in sorted_roots:
+            for root in detailed_roots:
                 md += f"- Root: `{root.get('root', 'N/A')}`\n"
 
                 # Show matches from analyzed psalm with context (matched word ± 3 words)
@@ -432,6 +734,11 @@ class RelatedPsalmsLibrarian:
 
                 md += "\n"
 
+            if overflow_roots:
+                names = ", ".join(f"`{r.get('root', '?')}`" for r in overflow_roots)
+                md += (f"*Also shared ({len(overflow_roots)} more common roots, "
+                       f"contexts omitted): {names}*\n\n")
+
         # If no patterns found at all (shouldn't happen, but just in case)
         if not filtered_roots and not match.contiguous_phrases and not match.skipgrams:
             md += "*No specific patterns documented, but overall connection score suggests potential relationship.*\n\n"
@@ -444,6 +751,12 @@ class RelatedPsalmsLibrarian:
 def main():
     """Command-line interface for testing."""
     import argparse
+
+    # Windows consoles default to cp1252, which can't print Hebrew.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
 
     parser = argparse.ArgumentParser(description='Find related psalms')
     parser.add_argument('psalm', type=int, help='Psalm number')

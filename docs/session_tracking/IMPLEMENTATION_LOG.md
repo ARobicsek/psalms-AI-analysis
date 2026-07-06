@@ -9,6 +9,30 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 365 (2026-07-06): Related Psalms section — value audit, then doublet detection + noise-floor fixes
+
+**Objective**: Author asked whether the "similar psalms" analysis (the `## Related Psalms Analysis` dossier section from `related_psalms_librarian.py`) is net raising or lowering final-guide quality. Audited 13 recent runs (Pss 55–68), then implemented the three approved fixes. Spend: **$0** (all deterministic + prompt edit).
+
+**Audit findings (evidence in outputs/)**:
+- **Section cost**: 0–23% of dossier chars (median ~8%; Ps 60 was 50.8K chars = 23.4%, truncated at the 50K cap; Ps 67 has no connections entry at all). Read by three paid models per run (GPT-5.4 synthesis, Opus SD sidecar, Opus writer).
+- **Verdict: net positive but inefficient.** Of 38 librarian-suggested psalms, ~13 got any final-guide mention, and only some of those are librarian-attributable. All traced wins came from *distinctive* material (verbatim phrases, rare-root clusters); the low-IDF shared-root tail (קרא, שמע, אם, ולא…) — the bulk of every section — was used exactly zero times in 13 runs. No harm found: no guide ever adopted a spurious connection.
+- **Gold case (Ps 66→81)**: librarian's cluster (רוע אל phrase, שמע…בקול skipgram, roots יכחש+בחן) → SD OBSERVATION 10 ("hearing vector reversed", anchored on "related-psalms section") → writer's v.19 paragraph → beta reader "LEANED IN… exactly the kind of intra-Psalter connection I can't get from footnotes" + cited in Freshness 9/10. Unavailable from any other source. Also real: 64→140 ("Psalm 140 supplies the snake"), 62→49; 65→74/36 produced two excellent SD observations the writer dropped.
+- **Catastrophic miss (Ps 60→108)**: Ps 108 = Ps 57:8-12 + 60:7-14 nearly verbatim. The section spent 50.8K chars on this one connection (score 7454, eleven 6-word verbatim phrases) and **the production guide contains zero mention of Psalm 108** — no "doublet", no "reused", nothing; SD missed it too. Root cause: the format atomizes verse-level duplication into thousands of trivially-true matches and never states the conclusion. Same lesson as distributional facts: state computed conclusions, don't dump atoms.
+
+**Fix 1 — deterministic doublet detection** (`related_psalms_librarian.py`): per related psalm, verses are aligned by consonantal token-set Jaccard (≥0.7; tokenizer splits maqaf, reads qere/drops ketiv per the distributional_facts convention; verses <4 tokens excluded so generic superscriptions can't match), then an iterative gap-fill extends runs to same-offset neighbors at ≥0.4 (mid-run redaction variants — e.g. 57:10//108:4 where אדני→יהוה — score 0.43–0.63 and are the *most* interesting verses). ≥2 pairs = **DOUBLET**: alert line in the preamble + a headline block with per-verse status and word-level diffs (difflib on consonantal keys, pointed text displayed), and the atom listings for that pair are suppressed entirely. A lone pair ≥0.8 gets a "Near-verbatim shared verse" flag above normal listings.
+- **Verified**: 60↔108 full 8-verse run w/ variants surfaced (וְלִי↔לִי, הִתְרוֹעָעִי↔אֶתְרוֹעָע person shift, מָצוֹר↔מִבְצָר, dropped אַתָּה + plene בְּצִבְאוֹתֵינוּ↔בְּצִבְאֹתֵינוּ); 57↔108 offset run 57:8–12//108:2–6 incl. the Elohistic אדני↔יהוה diff; 53↔14 and 70↔40:14–18 caught bidirectionally; bonus legit catch 70:3//35:4. Zero false flags on 55/56/58/59/61/62/63/64/65/66/68.
+- Ps 60's section: **50,758 → 3,451 chars (−93%)**.
+
+**Fix 2 — noise floor**: shared roots keep full verse contexts only for the top `MAX_DETAILED_ROOTS = 10` by IDF; the common tail is named in one line ("*Also shared (17 more common roots, contexts omitted): …*") so clusters stay visible at ~2% of the cost. Skipgrams deliberately untouched — the audit initially proposed cutting 2-word skipgrams, but the 66→81 gold case *used* one (שמע…בקול); they're few and cheap. Section sizes across Pss 55–68: median −24% (57: −66%, 68: −60%, 55: −43%, 66: −34%); 66→81 cluster verified intact post-change. CLI `main()` also got the UTF-8 stdout fix (same as distributional_facts).
+
+**Fix 3 — writer prompt** (`master_editor.py` item 9, Comparative Biblical Usage): psalm-level relationships (doublet / sustained mirror from distinctive shared vocabulary) declared first-rank material — name the psalm, quote the shared Hebrew, make the difference mean something; "a doublet flagged in the research but absent from the guide is a scholarship gap any reviewer would catch." Prompt 49,075 → 49,589 chars (+1.0%); SI inheritance verified (derives via `.replace` on an untouched anchor).
+
+**Verification**: py_compile both files; e2e on the exact production call path (`format_for_research_bundle(psalm, matches, max_size_chars=50000)`) plus full-text mode for Pss 60/66 — doublet block present in both modes, no exceptions. No unit-test file exists for the librarian (none did before).
+
+**Watch next production psalm**: whether SD/writer actually engage a doublet when one fires (next doublet psalms upcoming: 70/40 pair is far off; the flag also benefits reruns of 53/57/60/108), and whether the root-cap tail line ever needs to grow back to 12–15 if SD starts citing capped roots by name.
+
+---
+
 ## Session 364 (2026-07-05): Local validation of Session-363 features — distributional facts vs real DB, wit-exemplar completion, beta-reader meta-evaluation
 
 **Objective**: Execute `docs/plans/NEXT_SESSION_PROMPT_session_364_local_validation.md` (written by the Session-363 cloud instance): (1) smoke-test `distributional_facts.py` against the real tanakh.db; (2) read the last 7 finals and finish `voice_exemplars.md`; (3) run the beta reader on recent outputs and evaluate THE AGENT as an instrument. Spend: **$0.76** (9 beta reads); Tasks 1–2 free.
