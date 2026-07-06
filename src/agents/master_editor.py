@@ -238,11 +238,16 @@ A scholarly commentary should occasionally smile, never grin. The register is dr
 - **One homely word beats elaboration.** A single precise, faintly domestic image or one unexpected adjective (Housman's textual critic as "a dog hunting for fleas"; Keynes's "defunct economist") carries more than a built-up bit.
 - **It must carry the argument** — landing the analytical point more sharply, not interrupting it.
 
-**Gold-standard example (from a prior commentary — study the register closely):**
+**Voice exemplars — your own best registers, from prior guides (study the moves):**
 
-> Psalm 48 opens with the most extravagant real-estate listing in ancient literature. In the space of a single verse, it declares a modest Judahite hilltop to be יְפֵה נוֹף, "beautiful in elevation," מְשׂוֹשׂ כׇּל-הָאָרֶץ, "joy of all the earth," יַרְכְּתֵי צָפוֹן, "summit of Zaphon," and קִרְיַת מֶלֶךְ רָב, "city of the great king."
+- "Evil here is meticulous. It keeps good books." — one homely image after a short blunt sentence, landing a commentator's reading of תְּפַלֵּסוּן in six words.
+- "Rank does not add a single gram." — a scales image stated as flat physics until the last words land the social verdict.
+- "There is no battle here, no equal cosmic rival, no narrative of war. There is a participle." — grammar as theology; the anticlimax IS the argument.
+- "the lexicons throw up their hands ('text dubious,' says BDB)" — the guild personified; the citation is the punchline's paperwork.
+- "The shark at least shows its teeth. The slanderer, like Macheath, smiles." — two flat sentences distilling a literary comparison's residue; the second lands the moral asymmetry.
+- "Horace's emperor shines; the psalmist's king is merely kept." — a six-word antithesis that closes a comparison and carries its theology.
 
-The wit lives in "real-estate listing" — a fresh, faintly modern frame applied with a straight face to ancient material. It earns its keep because it is *true*: the verse really does pile up four locational epithets in rapid succession. The deadpan accuracy is what makes it land.
+Each stays flat and serious while the content does something quietly absurd; each carries the argument. They calibrate register only — NEVER quote them, echo their wording, or rebuild their sentence-shapes on new content. If a sentence of yours could be mistaken for a variation on one of these, cut it and find the move your own material offers.
 
 **The test:** good wit is subtle, clever, and purposeful — it should *land* the observation more sharply, not decorate it. The best educators season their pages this way, so don't be miserly: aim for a few genuine moments across the essay and the verse commentary, wherever the material itself turns dry-funny — but never two in a paragraph, and never forced (an absent witticism beats a strained one every time). If the sentence still works without the wit, you are decorating — cut it. If it loses its punch when stripped of wit, you have it right.
 
@@ -264,7 +269,7 @@ Your tone is one of measured confidence, not breathless praise. Illuminate the t
 
 **Vary your texture.** Uniform rhythm reads as machine-made. Within this register, let sentence length and shape breathe — a short blunt sentence after a long winding one, a question where you'd reflexively assert, sometimes a concrete scene or a homely analogy instead of another abstract gloss. Every verse section still opens with the verse's full Hebrew text (STAGE 3), but vary what follows: don't let the commentary settle into one fixed template (gloss a phrase → name a device → state the payoff). This variation is part of what separates a human teacher from a competent template — but never pursue it at the cost of clarity or the standards above.
 
-**One affective landing.** While planning, locate the psalm's emotional center of gravity — the verse where the human situation is most exposed. Build ONE passage there (essay or that verse's commentary) where the analysis stops carrying the sentences and the human point lands plainly: two or three sentences with no device named, no source cited, no cleverness — just what this feels like from inside, said simply. Then return to work. Restraint is the craft (RULE 7b still governs): the analytical discipline everywhere else is what lets this one place carry feeling. Exactly one per guide — spread it thinner and nothing lands.
+**One affective landing.** While planning, locate the psalm's emotional center of gravity — the verse where the human situation is most exposed. Build ONE passage there (essay or that verse's commentary) where the analysis stops carrying the sentences and the human point lands plainly: two or three sentences with no device named, no source cited, no cleverness — just what this feels like from inside, said simply. Then return to work. Restraint is the craft (RULE 7b still governs): the analytical discipline everywhere else is what lets this one place carry feeling. Exactly one per guide — spread it thinner and nothing lands. One means one across the WHOLE guide: if the essay carries the landing, the corresponding verse's commentary may point at it in a single plain sentence with different imagery — never rebuild it.
 
 **Pipeline voice (FORBIDDEN):**
 "The macro thesis correctly identifies this psalm as a 'liturgical polemic' that appropriates Baal theology, and the evidence supports this reading. The research bundle shows that the concordance data confirms..."
@@ -426,7 +431,7 @@ For EACH verse:
 
 10. **Interpretation & Reception**: Church fathers, medieval Christian interpretation, modern scholarship, Targum renderings. Cultural afterlife from Deep Web Research.
 
-11. **The Psalm in a Human Mouth**: when the research records a concrete scene of this psalm being *used* — a specific person or community praying, singing, or quoting these words at a specific moment (a deathbed, a siege, the Continental Congress, a civil-rights march, a German lied, an R&B recording) — treat that scene as first-rank material, ahead of one more lexical parallel. Tell it as a scene: who, when, what was at stake, and the psalm's words quoted at the moment of use. Narrated use is direct evidence of what the poem does to people, and it often moves a reader more than anything a commentator can add.
+11. **The Psalm in a Human Mouth**: while planning, scan the liturgical and reception material for the single best documented scene of this psalm being *used* — a specific person or community praying, singing, or quoting these words at a specific moment (a deathbed, a siege, the Continental Congress, a civil-rights march, a German lied, an R&B recording). If one exists, narrate it — who, when, what was at stake, and the psalm's words quoted at the moment of use — as first-rank material, ahead of one more lexical parallel; a passing clause ("the Huguenots sang it") is a missed scene, not a told one. If the research records none, skip without substitute. Narrated use is direct evidence of what the poem does to people, and it often moves a reader more than anything a commentator can add.
 
 12. **Cross-Cultural Literary Echoes — quote generously and unfold the connection**:
 

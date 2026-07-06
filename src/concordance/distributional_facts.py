@@ -135,7 +135,20 @@ def _compute(conn: sqlite3.Connection, psalm_number: int) -> str:
     if not rows:
         return ""
 
-    tokens: List[Tuple[int, int, str]] = [(v, p, w) for v, p, w in rows if w]
+    # Ketiv/qere sites are stored as two adjacent tokens: the ketiv in
+    # parentheses, the qere in square brackets (2,138 such tokens DB-wide).
+    # Raw, the punctuation makes every such token spuriously "rare" and
+    # fabricates a ketiv→qere adjacent pair. We read the qere: drop the
+    # ketiv token, unwrap the qere's brackets.
+    tokens: List[Tuple[int, int, str]] = []
+    for v, p, w in rows:
+        if not w:
+            continue
+        if w.startswith("(") and w.endswith(")"):
+            continue
+        if w.startswith("[") and w.endswith("]"):
+            w = w[1:-1]
+        tokens.append((v, p, w))
     verses_here = sorted({v for v, _, _ in tokens})
     first_verse, last_verse = verses_here[0], verses_here[-1]
 
@@ -147,15 +160,17 @@ def _compute(conn: sqlite3.Connection, psalm_number: int) -> str:
     forms = [w for w in here if len(w) >= MIN_FORM_LEN]
 
     # Corpus counts per form (one query per distinct form; indexed column).
+    # Each form also matches its bracketed-qere spelling elsewhere in the DB,
+    # so a form that is someone else's qere still counts those occurrences.
     corpus_counts: Dict[str, Tuple[int, int]] = {}
     for w in forms:
         n_tanakh, n_psalms = cur.execute(
             """
             SELECT COUNT(*),
                    SUM(CASE WHEN book_name = 'Psalms' THEN 1 ELSE 0 END)
-            FROM concordance WHERE word_consonantal = ?
+            FROM concordance WHERE word_consonantal IN (?, ?)
             """,
-            (w,),
+            (w, f"[{w}]"),
         ).fetchone()
         corpus_counts[w] = (n_tanakh or 0, n_psalms or 0)
 
@@ -174,11 +189,11 @@ def _compute(conn: sqlite3.Connection, psalm_number: int) -> str:
             others = cur.execute(
                 """
                 SELECT book_name, chapter, verse FROM concordance
-                WHERE word_consonantal = ?
+                WHERE word_consonantal IN (?, ?)
                   AND NOT (book_name = 'Psalms' AND chapter = ?)
                 ORDER BY book_name, chapter, verse
                 """,
-                (w, psalm_number),
+                (w, f"[{w}]", psalm_number),
             ).fetchall()
             refs = "; ".join(f"{b} {c}:{v}" for b, c, v in others) or "NOWHERE ELSE"
             label = ("unique to this psalm in all Tanakh"
@@ -298,6 +313,12 @@ def _compute(conn: sqlite3.Connection, psalm_number: int) -> str:
 
 if __name__ == "__main__":
     import sys
+
+    # Windows consoles default to cp1252, which can't print Hebrew or '≤'.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
 
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 60
     block = compute_distributional_facts(n)

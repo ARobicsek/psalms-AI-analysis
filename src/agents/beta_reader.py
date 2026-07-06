@@ -83,7 +83,10 @@ category is data.
 Did any single passage make you FEEL something — recognition, ache, awe —
 rather than just interest? Quote it and say what it did. If nothing did, say
 so plainly: "Nothing in this guide moved me." That sentence is one of the most
-useful things you can tell the author.
+useful things you can tell the author. End this section with exactly one line,
+alone on its own line: `LANDING: found` or `LANDING: near-miss` or
+`LANDING: none`. Reserve `found` for a passage that genuinely moved you;
+"interesting and well-made" is a near-miss.
 
 ## 5. Sag points and template feel
 Where did attention flag? Where did consecutive sections feel like the same
@@ -100,7 +103,7 @@ Format each line exactly as `- <Dimension>: N/10 — <one-sentence justification
 - Engagement: how hard was it to stop reading?
 - Clarity: did you ever feel talked past?
 - Freshness: how much did you learn that a good translation + footnotes wouldn't give you?
-- Wit: did it ever genuinely smile? (frequency AND quality)
+- Wit: did it ever genuinely smile? Wit here means DRY DEADPAN that carries the argument — a flat sentence whose content does something quietly absurd. Warmth, eloquence, or a vivid image do NOT count as wit.
 - Emotional impact: did it ever move you?
 
 ## 8. Verdict
