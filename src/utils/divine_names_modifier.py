@@ -22,6 +22,19 @@ import logging
 from typing import Optional
 
 
+# Characters that count as a word boundary around a divine name.
+# Includes markdown formatting chars (*_) and punctuation, since names are
+# matched inside commentary prose, not just bare Hebrew text.
+_BOUNDARY = r'[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]'
+
+# Up to two stacked prefix letters (he/vav/lamed/bet/kaf/mem), each with its
+# own vowel/dagesh marks: הָאֵל, וְאֵל, לָאֵל, בָּאֵל, כְּאֵל, מֵאֵל, וְלָאֵל, מֵהָאֵל.
+_PREFIX = r'(?:[הולבכמ][\u0591-\u05C7]*){0,2}'
+
+# Hebrew vowel points and cantillation marks.
+_MARKS = re.compile(r'[\u0591-\u05C7]')
+
+
 class DivineNamesModifier:
     """Modifies Hebrew divine names to non-sacred format"""
 
@@ -112,30 +125,69 @@ class DivineNamesModifier:
 
         return modified
 
+    @staticmethod
+    def _is_archaic_demonstrative(text: str, start: int, prefix: str) -> bool:
+        """True if a he-prefixed El here is the archaic demonstrative, not a name.
+
+        Biblical Hebrew uses הָאֵל as a rare plural demonstrative ("those/these"),
+        always following the definite plural noun it modifies:
+        Gen 19:8, 19:25; Lev 18:27; Deut 4:42, 7:22, 19:11; 1 Chr 20:8.
+        Commentary quotes these verses, so treat "definite plural noun + form"
+        as the demonstrative and leave it alone.
+        """
+        if not _MARKS.sub('', prefix).endswith('ה'):
+            return False  # only the he-prefixed form is ever demonstrative
+
+        # The noun must sit immediately before it - not merely earlier in the line,
+        # which would misread Hebrew quoted after English prose.
+        preceding = re.search(r'([\u0590-\u05FF]+)[\s\u05BE]*$', text[:start])
+        if not preceding:
+            return False
+
+        prev = _MARKS.sub('', preceding.group(1))
+        if prev.startswith('ו'):
+            prev = prev[1:]  # the noun may carry its own conjunction
+        return prev.startswith('ה') and (prev.endswith('ים') or prev.endswith('ות'))
+
     def _modify_el_tzere(self, text: str) -> str:
-        """Replace אֵל (with tzere) with קֵל, but NOT אֶל (with segol). Also handles אֵלִי (my God)."""
+        """Replace אֵל (with tzere) with קֵל, but NOT אֶל (with segol). Also handles אֵלִי (my God).
+
+        Matches the bare name as well as prefixed forms (הָאֵל, וְאֵל, לָאֵל, בָּאֵל,
+        כְּאֵל, מֵאֵל, וְלָאֵל). The prefix must itself sit on a word boundary, so names
+        ending in -אֵל (יִשְׂרָאֵל, יוֹאֵל) are left untouched. Trailing cantillation on
+        the final letter is tolerated (אֶל־אֵל֮, Ps 43:4).
+        """
         modified = text
-        
-        # Pattern 1: Basic אֵל (El)
-        # Include markdown formatting chars (*_) and punctuation as valid word boundaries
-        pattern_base = r'(^|[\s\-\u05BE*_.,;:!?\"\'()\[\]{}])אֵ([\u0591-\u05C7]*)ל(?=[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]|$)'
+
+        # Pattern 1: Basic El, bare or prefixed
+        pattern_base = (
+            r'(^|' + _BOUNDARY + r')(' + _PREFIX + r')'
+            r'אֵ([\u0591-\u05C7]*)ל(?=[\u0591-\u05C7]*(?:' + _BOUNDARY + r'|$))'
+        )
 
         def replacer_base(match):
-            prefix = match.group(1)
-            cantillation = match.group(2)
-            return f"{prefix}קֵ{cantillation}ל"
+            boundary = match.group(1)
+            prefix = match.group(2)
+            cantillation = match.group(3)
+            if self._is_archaic_demonstrative(match.string, match.start(), prefix):
+                return match.group(0)
+            return f"{boundary}{prefix}קֵ{cantillation}ל"
 
         modified = re.sub(pattern_base, replacer_base, modified)
-        
-        # Pattern 2: אֵלִי (Eli - "my God")
+
+        # Pattern 2: Eli ("my God"), bare or prefixed
         # Exact match for Alef-Tzere-Lamed-Chiriq-Yod to avoid names like Elijah
-        pattern_eli = r'(^|[\s\-\u05BE*_.,;:!?\"\'()\[\]{}])אֵ([\u0591-\u05C7]*)לִ([\u0591-\u05C7]*)י(?=[\s\-\u05BE*_.,;:!?\"\'()\[\]{}]|$)'
-        
+        pattern_eli = (
+            r'(^|' + _BOUNDARY + r')(' + _PREFIX + r')'
+            r'אֵ([\u0591-\u05C7]*)לִ([\u0591-\u05C7]*)י(?=[\u0591-\u05C7]*(?:' + _BOUNDARY + r'|$))'
+        )
+
         def replacer_eli(match):
-            prefix = match.group(1)
-            cantillation1 = match.group(2)
-            cantillation2 = match.group(3)
-            return f"{prefix}קֵ{cantillation1}לִ{cantillation2}י"
+            boundary = match.group(1)
+            prefix = match.group(2)
+            cantillation1 = match.group(3)
+            cantillation2 = match.group(4)
+            return f"{boundary}{prefix}קֵ{cantillation1}לִ{cantillation2}י"
 
         modified = re.sub(pattern_eli, replacer_eli, modified)
 
@@ -167,7 +219,10 @@ class DivineNamesModifier:
         modified = text
 
         # Unvoweled form - only match when preceded/followed by word boundary
-        unvoweled_pattern = r'(^|[\s\-\u05BE.,;:!?])שדי(?=[\u0591-\u05C7]*(?:[\s\-\u05BE.,;:!?]|$))'
+        unvoweled_pattern = (
+            r'(^|' + _BOUNDARY + r')שדי'
+            r'(?=[\u0591-\u05C7]*(?:' + _BOUNDARY + r'|$))'
+        )
         def unvoweled_replacer(match):
             prefix = match.group(1)
             return f"{prefix}שקי"
@@ -181,7 +236,7 @@ class DivineNamesModifier:
         # CRITICAL: Must have PATACH (U+05B7) or KAMATZ (U+05B8) under DALET - NOT CHIRIQ
         #           This distinguishes divine name שַׁדַּי from לְשַׁדִּי (my moisture)
         # Pattern breakdown:
-        # - (^|[\s\-\u05BE.,;:!?]|[וּ]?[\u0591-\u05C7]*) - word boundary or prefix with marks
+        # - (^|_BOUNDARY|[וּ]?[\u0591-\u05C7]*) - word boundary or prefix with marks
         # - ש - shin/sin letter
         # - (?=[\u0591-\u05C7]*[\u05B7\u05B8]) - positive lookahead: shin must have PATACH or KAMATZ
         # - (?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1) - positive lookahead: must contain SHIN dot
@@ -191,8 +246,10 @@ class DivineNamesModifier:
         # - (?=[\u0591-\u05C7]*[\u05B7\u05B8]) - positive lookahead: dalet must have PATACH or KAMATZ
         # - [\u0591-\u05C7]* - cantillation and vowel marks after dalet
         # - י - yod
-        # - (?=[\u0591-\u05C7]*(?:[\s\-\u05BE.,;:!?]|$)) - word boundary after
-        shaddai_pattern = r'(^|[\s\-\u05BE.,;:!?]|[וּ]?[\u0591-\u05C7]*)ש(?=[\u0591-\u05C7]*[\u05B7\u05B8])(?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1)(?![\u0591-\u05C7]*\u05C2)[\u0591-\u05C7]*ד(?=[\u0591-\u05C7]*[\u05B7\u05B8])[\u0591-\u05C7]*י(?=[\u0591-\u05C7]*(?:[\s\-\u05BE.,;:!?]|$))'
+        # - (?=[\u0591-\u05C7]*(?:_BOUNDARY|$)) - word boundary after
+        shaddai_pattern = (
+            r'(^|' + _BOUNDARY + r'|[וּ]?[\u0591-\u05C7]*)ש(?=[\u0591-\u05C7]*[\u05B7\u05B8])(?=[\u0591-\u05C0\u05C3-\u05C7]*\u05C1)(?![\u0591-\u05C7]*\u05C2)[\u0591-\u05C7]*ד(?=[\u0591-\u05C7]*[\u05B7\u05B8])[\u0591-\u05C7]*י(?=[\u0591-\u05C7]*(?:' + _BOUNDARY + r'|$))'
+        )
 
         def shaddai_replacer(match):
             prefix = match.group(1)
@@ -228,10 +285,10 @@ class DivineNamesModifier:
         patterns = [
             r'יהוה',  # Tetragrammaton
             r'אלהים',  # Elohim
-            r'(^|[\s\-\u05BE])אֵ[\u0591-\u05C7]*ל(?=[\s\-\u05BE]|$)',  # El
-            r'(^|[\s\-\u05BE])אֵ[\u0591-\u05C7]*לִ[\u0591-\u05C7]*י(?=[\s\-\u05BE]|$)',  # Eli
+            r'(^|' + _BOUNDARY + r')' + _PREFIX + r'אֵ[\u0591-\u05C7]*ל(?=[\u0591-\u05C7]*(?:' + _BOUNDARY + r'|$))',  # El
+            r'(^|' + _BOUNDARY + r')' + _PREFIX + r'אֵ[\u0591-\u05C7]*לִ[\u0591-\u05C7]*י(?=[\u0591-\u05C7]*(?:' + _BOUNDARY + r'|$))',  # Eli
             r'צבאות',  # Tzevaot
-            r'(^|[\s\-\u05BE.,;:!?])שדי',  # Shaddai
+            r'(^|' + _BOUNDARY + r')שדי',  # Shaddai
             r'אלוה',  # Eloah
         ]
 

@@ -9,6 +9,69 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 366 (2026-07-19): Divine-names converter — prefixed אֵל and three sibling misses
+
+**Objective**: Author read the Ps 68 output and suspected the divine-names converter had missed instances of אֵל. Confirmed, root-caused, fixed four defects in the same family, and verified against the whole corpus. Spend: **$0** (deterministic; no model calls).
+
+---
+
+### The report, confirmed
+
+Ps 68 shipped with **7 unconverted `הָאֵל`** — in `psalm_068_copy_edited.md`, `psalm_068_commentary.docx`, and both `Psalm 68 (OLD/NEW pipeline).docx`. The giveaway is v.21, where a single clause converts one El and not the other:
+
+> הָאֵל לָנוּ **קֵל** לְמוֹשָׁעוֹת
+
+Plus **1 unconverted `שַׁדַּי`** (v.15 discussion, in `אֲנִי־קֵל שַׁדַּי)` — El converted, Shaddai not, in the same phrase).
+
+Corpus-wide scan: **44 prefixed-El misses across 17 psalm outputs** (Ps 42 ×8, Ps 68 ×7, Ps 57 ×5, Ps 69 ×4, then a tail of 1–2).
+
+### Root cause (`src/utils/divine_names_modifier.py`)
+
+`_modify_el_tzere` required whitespace/punctuation **immediately** before אֵ:
+
+```
+r'(^|[\s\-\u05BE*_.,;:!?...])אֵ([\u0591-\u05C7]*)ל(?=...)'
+```
+
+Any attached prefix letter therefore killed the match. Elohim has had a prefixed-forms rule since Session ~200 (Pattern 2b, `[ובכלמ]`); El never got the equivalent. `יִשְׂרָאֵל` was correctly untouched, which is why the gap survived so long — the pattern looked deliberately conservative.
+
+### Four fixes
+
+1. **Prefixed El** — new module-level `_PREFIX` allows up to two stacked prefix letters (ה/ו/ל/ב/כ/מ) with their own vowel/dagesh marks. The prefix must itself sit on a word boundary, so `יִשְׂרָאֵל`, `יוֹאֵל`, `מִיכָאֵל`, `גַּבְרִיאֵל`, `גֹּאֵל` stay untouched. Applied to both the base and the Eli (`אֵלִי`) patterns.
+2. **Shaddai boundary class** — was `[\s\-־.,;:!?]` while El's included parens/quotes/markdown, so `שַׁדַּי)` never converted. Both now share one `_BOUNDARY` constant (also applied to the two doc comments and the `has_divine_names` detection patterns, which had drifted the same way).
+3. **Trailing cantillation on the final letter** blocked the boundary lookahead — `אֶל־אֵל֮` (Ps 43:4), `גַּם־אֵל֮` (Ps 52:7). Lookahead now tolerates marks before the boundary; safe because real letters still block, and regex backtracking preserves the maqaf case.
+4. **Two-letter prefixes** — `וְלָאֵל` (Ps 53).
+
+Fixes 3–4 surfaced while verifying 1–2 and are the same defect the author reported, so they were folded in rather than deferred.
+
+### Demonstrative guard (judgment call — flagged to author)
+
+The corpus A/B caught a **real false positive the prefix fix would have introduced**, in Ps 30:
+
+> וַיַּהֲפֹךְ אֶת הֶעָרִים **הָאֵל**, "He overturned those cities" (Gen 19:25)
+
+That `הָאֵל` is the archaic plural demonstrative *"those"*, not the divine name — same consonants and vowels, no regex can separate them lexically. In **every** biblical instance (Gen 19:8, 19:25; Lev 18:27; Deut 4:42, 7:22, 19:11; 1 Chr 20:8) it follows the definite plural noun it modifies, which makes it guardable: `_is_archaic_demonstrative` skips conversion when the immediately preceding word is a definite plural noun (`ה…ים` / `ה…ות`, optionally carrying its own vav). "Immediately preceding" matters — checking anywhere earlier in the line misreads Hebrew quoted after English prose (verified against the Ps 30 line that quotes Ps 18:33 after a colon, which must still convert).
+
+This is a heuristic on a genuinely ambiguous form. Revisit if it ever suppresses a real name.
+
+### Verification
+
+- **46-case suite** (scratch): all pass. Must-preserve cases include `אֵלַי`, `פְּנֵה־אֵלַי`, `אֵלֵךְ`, `הָאֵלֶּה`, `הַדְּבָרִים הָאֵלֶּה`, the angel names, `שָׂדָֽי` (SIN) and `שְׁדּי` (breasts).
+- **Archived `test_divine_names_shin_sin.py`**: green. One expectation was stale — it asserted `וְאֵל שַׁדַּי` → `וְאֵל שַׁקַּי`, i.e. it encoded the bug. Updated to `וְקֵל שַׁקַּי`. (Run with `PYTHONPATH=.`.)
+- **Corpus A/B**: loaded the HEAD modifier and the patched one side by side, ran both over all `output/psalm_*/psalm_*_copy_edited.md`. **37 word-level changes, all genuine divine names**; the Gen 19:25 demonstrative correctly preserved. Diffing against HEAD (not against the files) was necessary — older psalm finals predate the modifier being applied at this stage, so a naive file-vs-output diff conflates pre-existing behavior with the change.
+
+### Deferred by author
+
+**יָהּ** — the modifier has **no Yah rule at all**. 4 occurrences in Ps 68 alone, including `בְּיָהּ שְׁמוֹ` (v.5) and v.19. This is a design call rather than a regex bug: convention would be `קָהּ` or `י־ה`, and `הַלְלוּיָהּ` needs its own answer. Author chose to leave it.
+
+### Not done — outputs not regenerated
+
+The modifier runs at **DOCX-build time** on the edited markdown (`document_generator.py:1589`, plus the paragraph/table helpers), not at pipeline time. So Ps 68 and the 16 other affected psalms can be corrected by **re-rendering the DOCX at zero AI spend** — no pipeline re-run. Not yet done; offered to the author.
+
+**Files changed**: `src/utils/divine_names_modifier.py` (+81/−24), `archive/development_scripts/root/test_divine_names_shin_sin.py` (1 stale expectation).
+
+---
+
 ## Session 365 (2026-07-06): Related Psalms section — value audit, then doublet detection + noise-floor fixes
 
 **Objective**: Author asked whether the "similar psalms" analysis (the `## Related Psalms Analysis` dossier section from `related_psalms_librarian.py`) is net raising or lowering final-guide quality. Audited 13 recent runs (Pss 55–68), then implemented the three approved fixes. Spend: **$0** (all deterministic + prompt edit).

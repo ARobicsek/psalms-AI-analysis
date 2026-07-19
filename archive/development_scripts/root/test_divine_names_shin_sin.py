@@ -24,7 +24,7 @@ def test_shin_vs_sin():
         ('שַׁדַּי', 'שַׁקַּי', 'Divine name with SHIN+PATACH - should be modified'),
         ('וְשַׁדַּי יְבָרֵךְ אֶתְכֶם', 'וְשַׁקַּי יְבָרֵךְ אֶתְכֶם', 'Divine name with prefix - should be modified'),
         ('שדי', 'שקי', 'Completely unvoweled - should be modified (no shin/sin distinction possible)'),
-        ('וְאֵל שַׁדַּי יְבָרֵךְ', 'וְאֵל שַׁקַּי יְבָרֵךְ', 'El Shaddai phrase - should be modified'),
+        ('וְאֵל שַׁדַּי יְבָרֵךְ', 'וְקֵל שַׁקַּי יְבָרֵךְ', 'El Shaddai phrase - prefixed El now converts too'),
 
         # SHIN + SHEVA cases (should NOT be modified - שְׁדּי = breasts, not divine name)
         ('שְׁדּי', 'שְׁדּי', 'Word with SHIN+SHEVA (shadei=breasts) - should NOT be modified'),
