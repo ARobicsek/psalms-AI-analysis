@@ -9,6 +9,396 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 369 (2026-07-27): Phonetic analyst rewrite — 16 bugs, stress placement 96.85% → 99.54% ($0, deterministic)
+
+**Trigger**: reading the Ps 70 Opus-5 guide, the author flagged two transcriptions as having the stress on the wrong syllable: `yā-shū-**VŪ**` and `**YĀ**-siy-sū` (Ps 70:4 יָ֭שׁוּבוּ, 70:5 יָ֘שִׂ֤ישׂוּ). Both were wrong; both should be penultimate. Correct: `yā-**SHŪ**-vū`, `yā-**SIY**-sū`. The author's ear was calibrated — the same sentence lists five forms and the other three (`yē-**VŌ**-shū`, `yis-**SŌ**-ghū`, `wə-yis-**MḤŪ**`) were right. **Not a model error**: transcriptions are deterministic output of `src/agents/phonetic_analyst.py`, land in `micro_v2.json` as `phonetic_transcription`, and the writer quoted them faithfully.
+
+**Spend: $0.** Everything here is rule-based and validated against `database/tanakh.db` (312,479 verse rows, 262,799 word tokens).
+
+### Root causes of the two reported cases — different bugs, same false premise
+
+The module assumed **accent glyph position = stressed syllable**. True for impositive accents, false for a whole class.
+
+- **Ps 70:4 יָ֭שׁוּבוּ** carries only **dehi** (U+05AD), which is *prepositive* — written on the first letter whatever the stress. The old table excluded it (with a comment reasoning from הָ֭אָדָם, which happens to be ultima-stressed), so no accent was recognised and it fell through to the "default = ultima" branch. But hollow verbs (ע״ו/ע״י) in the imperfect plural are penultimate: all 10 other Tanakh occurrences of יָשׁוּבוּ with a position-reliable accent put it on the shin (Gen 15:16 יָשׁ֣וּבוּ etc.). Same for the class — יָקוּמוּ (6), יָשִׂימוּ (11), יָבִינוּ (9).
+- **Ps 70:5 יָ֘שִׂ֤ישׂוּ** carries U+0598 on the yod plus **mahpakh** (U+05A4) on the sin. The mahpakh is the accent. Unicode names U+0598 "ZARQA" and the table believed it — rated 2 against mahpakh's 1, so `max()` let it win. **Proof of self-inconsistency**: the same word at Job 3:22 יָ֝שִׂ֗ישׂוּ (revia) transcribed correctly as `yā-**SIY**-sū`.
+
+### Accents reclassified from measurement, not from names
+
+Ground truth: the stressed letter of a pointed form, taken from occurrences carrying a single unambiguous impositive accent (~192K accented words, 36,806 seeded forms). Then **every** mark was scored. This overturned two the old table had backwards and would have got wrong from memory:
+
+| class | marks (measured glyph == stressed letter) |
+|---|---|
+| position-reliable | etnahta 99.9%, shalshelet 100%, zaqef qaton 99.8%, zaqef gadol 99.7%, tifcha 99.8%, revia 99.7%, **yetiv 99.4%**, tevir 100%, geresh 99.9%, gershayim 99.5%, qarney para 100%, telisha gedola 97.2%, pazer 99.6%, atnah hafukh 98.2%, munah 97.3%, mahpakh 99.0%, merkha 99.0%, merkha kefula 100%, darga 99.6%, qadma 97.1%, yerach ben yomo 92.5%, iluy 97.0% |
+| postpositive (last letter) | segolta 0.2%, pashta 2.2%, telisha qetana 0.3%, zinor 1.6% — **doubled: inner copy is the stress** (100% / 99.8% / 98.5%) |
+| prepositive (first letter) | **geresh muqdam 8.8%**, **ole 7.0%**, dehi 11.2% — no doubling; position is noise |
+| context-dependent | U+05BD meteg 1.1% (but silluq on the verse-final word); U+0598 49% overall |
+
+- **Geresh muqdam and ole were rated reliable** in the old table (levels 2 and 1). Both are prepositive. Measured 8.8% and 7.0%.
+- **Six marks were absent from the table entirely** and fell through silently: segolta (1,126), qarney para (16), atnah hafukh (195), merkha kefula (14), dehi (2,679), zinor (1,239).
+- **U+05BD rated as a primary accent was the single biggest error source**: in **4,313** Tanakh words it is a meteg sitting away from the main stress, and outranking the real accent it stole the stress; only 48 coincide. Now: meteg is never the stress *except* as the last U+05BD in a word containing sof pasuq, where it is the silluq.
+- **U+0598's 49% was a bimodal mixture**, resolved by inspection: with a **zinor** partner (prose) it is the zarqa and *does* mark the stress (Gen 2:23 וַיֹּ֘אמֶר֮, 22/22 examples); with **mahpakh/merkha** (poetic) it is the tsinnorit helper and marks nothing (129 + 11 of 157 in Psalms). Ranking it below the reliable accents resolves both cases without a books-based special case.
+- **Doubled accents**: the old `cantillation_level >= stress_level` let a later mark at equal level overwrite an earlier one, so a doubled pashta always landed on the postpositive edge copy — guaranteed wrong whenever the doubling existed *because* the stress is not final.
+
+### Algorithm
+
+`_stress_letter()` returns a letter and a provenance tag: **doubled** (inner copy) → **reliable accent** (rightmost; silluq counts) → **tsinnorit** (only when nothing reliable is present) → **lone postpositive** → ultima *by convention* (no second copy was needed because the stress IS final) → otherwise no positional evidence. Validated at letter level before being wired in: accent 99.50%, doubled 99.61%, tsinnorit 99.17%.
+
+`_find_syllable_for_letter()` resolves letter → syllable through the letter's **last** phoneme. The old code guessed a phoneme index as `len(phonemes) + 1`, assuming every letter emits consonant + vowel — wrong for a geminated consonant (two), a mater (one) and a silent shewa (none). The last-phoneme rule is what makes `rab-**BIYM**` land on the second copy of the doubled bet rather than on `RAB`.
+
+### Stress lexicon — the residual, resolved from the MT itself
+
+Prepositive-only words have no recoverable position. Rather than guess, `scripts/build_stress_lexicon.py` reads the stressed letter of every pointed form from verses where its accent *is* unambiguous, giving `src/agents/stress_lexicon.json.gz` (48,721 entries, 0.29 MB). Consulted **only** when the cantillation gives no position, so it can never override a real accent. Stores **letter** indices, not syllable indices, so it survives changes to the syllabifier. Records only stresses read off a real accent (no guess feeds back in) and drops the 122 forms whose readings disagree below 60% agreement — genuine pausal retraction, left to the local accent.
+
+**Hold-out validation** (the in-sample 99.99% is partly circular, since lexicon and ground truth share verses): built from **non-Psalms books only**, scored on Psalms against Psalms-internal ground truth → **125 fixes, 1 regression** (ultima-default 106:1, ultima-by-convention 19:0).
+
+### Eleven more bugs found while working
+
+**Phantom final syllables** — each one unpronounceable, and each able to attract the ultima default onto itself:
+
+| bug | was | now |
+|---|---|---|
+| hiriq/tsere/segol + yod not a mater | `'e-lō-hiy-**M**`, `tā-miy-**DH**` | `'e-lō-**HIYM**`, `tā-**MIYDH**` |
+| word-final consonant cluster | `rō'-sh`, `'ē-lāy-w` | `rō'sh`, `'ē-lāyw` |
+| word-final shewa voiced | `lə-hith-hal-lē-**KHƏ**` | `lə-hith-hal-**LĒKH**` |
+| mappiq geminated | `hal-lū-yāh-h` | `hal-lū-yāh` |
+
+**Gemination** — `is_geminated` for begadkefat was **dead code**: the guard read `if prev_had_vowel and k >= 0 and chars[k] in self.consonant_map`, but the loop that sets `prev_had_vowel` breaks with `chars[k]` on a *vowel*, so the conjunction was never true. Hence `'a-tāh`, `sha-bāth`, `su-kāh`, `tsa-diy-qiym`. Replaced by `_is_dagesh_forte()` (forte unless word-initial, a non-geminating letter א/ה/ח/ע/ר, or a begadkefat not preceded by a voiced vowel — so `mish-pāt` keeps its dagesh lene). Word-initial dagesh no longer doubles (`zzō'th` → `zō'th`; conjunctive dagesh does open words).
+
+**`_is_vocal_shewa` rule order** — rule 3 (short vowel → silent) returned before rule 4 (dagesh forte → vocal), making rule 4 unreachable: `tid-**FEN**-nū` for tid-də-FEN-nū. Reordered, and the missing **"second of two shewas is vocal"** rule added (`wə-yis-**MḤŪ**` → `wə-yis-mə-**ḤŪ**`).
+
+**Vav** — any vav with dagesh was read as a shureq, so a *doubled consonantal* waw collapsed: `ḥa-ūh` for חַוָּה (823 occurrences). Shureq now requires no vowel of its own.
+
+**Verse level** — `{פ}`/`{ס}` section markers became a word and transcribed as a phantom `**F**` (3,552 tokens); the paseq `׀` produced empty word entries, which is what put the stray double spaces in Ps 70 vv.4-6. Both dropped; sof pasuq deliberately kept, since it is how silluq is told from meteg. Also: furtive patah can never be stressed, so the ultima default steps back over it (`rū-**AḤ**` → `**RŪ**-aḥ`); dead `is_qamets_he` removed; `_transcribe_maqqef_compound` used the raw last index, so a compound ending in a stray maqqef got no stress at all — now the last *non-empty* component; the `__main__` demo had a Latin `l` inside לְעוֹlָם and unaccented text (so it exercised nothing), replaced with real accented Ps 145:1 and Ps 70:4-5.
+
+### Results
+
+| | before | after |
+|---|---|---|
+| stress correct vs MT (192,364 scored words) | 96.85% | **99.54%** |
+| stress errors removed | — | **5,173** |
+| word transcriptions changed | — | 79,919 of 262,775 (**30.4%**) — 4,436 in Psalms |
+| exceptions over the whole Tanakh | — | **0** |
+
+Psalms provenance after the fix: `accent` 90.5%, `lexicon` 8.0%, `doubled` 0.1% — **98.6% read off the Masoretic text**, 1.4% (251 words) still on the ultima guess (forms appearing nowhere else with a clear accent).
+
+Ps 70 end to end:
+
+```
+v4  yā-shū-**VŪ** … hā-'ō-mə-**RIY**-m **HE**-'āḥ  he-**'ĀḤ**
+ →  yā-**SHŪ**-vū … hā-'ō-mə-**RIYM** he-**'ĀḤ** he-**'ĀḤ**
+v5  **YĀ**-siy-sū wə-yis-**MḤŪ**  … thā-miy-**DH** … 'e-lō-**HIY**-m
+ →  yā-**SIY**-sū wə-yis-mə-**ḤŪ** … thā-**MIYDH** … 'e-lō-**HIYM**
+v6  … 'e-lō-hiy-**M** ḥū-shāh-**LLIY** … **'A**-tāh … 'al-tə-'a-**ḤAR** **F**
+ →  … 'e-lō-**HIYM** ḥū-shāh-**LIY** … **'AT**-tāh … 'al-tə-'a-**ḤAR**
+```
+
+**Note `**'AT**-tāh`**: the atnach in `אַ֑תָּה` genuinely sits on the alef — pausal stress retraction, confirmed across the corpus (אתה with etnahta: 25 on letter 0 vs 13 on letter 1). The old output's stressed syllable was right; only the gemination was missing.
+
+### Honest limits
+
+- **The residual 0.5% on the `accent` path is mostly not error.** Gen 1:5 קָ֣רָא, Gen 1:11 עֹ֤שֶׂה, Gen 3:6 וַתֹּאכַ֑ל are contextual retraction: the module follows the local MT accent, which is correct, while a majority-vote ground truth cannot model context. True accuracy is somewhat above 99.54%.
+- **`stress_source`** on every word says whether the stress was read off an accent, recovered from a doubled accent/tsinnorit, looked up, or guessed — so an inferred stress is never mistaken for one the Masoretes wrote. `stress_level` redefined accordingly (2 / 1 / 0); nothing outside the module reads it.
+- **No psalm outputs regenerated.** Transcriptions are baked into each `micro_v2.json` and quoted verbatim in finished prose, so existing guides keep the old values until re-run — and since 30% of transcriptions changed, any re-run shows visible phonetic differences. Ps 70's two flagged words remain wrong in the shipped markdown; the author explicitly did not want that text patched.
+
+### Files
+
+- `src/agents/phonetic_analyst.py` — +517/−274. New: `_scan_word` (phoneme generation split from packaging, so the letter→phoneme map is testable), `_stress_letter`, `_find_syllable_for_letter`, `_is_dagesh_forte`, `_previous_consonant`, `_vowel_of`, `_char_index_of_letter`, `lexicon_key`, `_load_stress_lexicon`, `_lexicon_stress_letter`. `PhoneticAnalyst(stress_lexicon=...)` accepts an override; a missing lexicon file degrades to the ultima default rather than raising.
+- `src/agents/stress_lexicon.json.gz` — NEW data, 48,721 entries. (`data/` is wholly gitignored, hence the location beside the module.)
+- `scripts/build_stress_lexicon.py` — NEW, regenerates the above from `tanakh.db`; `--check` reports without writing; verifies the round-trip through the analyst's loader.
+- `tests/test_phonetic_analyst.py` — NEW, 30 assertions, one per bug class. The archived `archive/development_scripts/tests/test_phonetic_analyst.py` had no assertions at all (it printed a JSON dump for eyeballing); it still passes.
+
+**Watch**: the next psalm run is the first with corrected phonetics — check that the writer's sound-play arguments still hold up, since ~30% of the transcriptions it reads have changed.
+
+---
+
+## Session 368 (2026-07-26): Terra overreaches as copy editor — pinned back to gpt-5.4; Ps 71 Opus 4.8/5 A/B
+
+**Objective**: Session 367 item (a) — is the Terra copy editor overstepping? — answered before spending on the Ps 71 writer A/B. Investigation spend: **$1.23**.
+
+**Full findings: [`docs/plans/COPY_EDITOR_TERRA_FINDINGS.md`](../plans/COPY_EDITOR_TERRA_FINDINGS.md) — marked SETTLED; do not re-run this A/B.**
+
+### Method
+
+Four copy-editor runs over one identical input (`output/psalm_70/_writer_ab/claude-opus-5/psalm_070_print_ready.md`, 6,875 words), varying only model and prompt.
+
+| Run | changes | cat-7 | Herbert | fortress figure | closing figure | Ps 40:17 waw |
+|---|---|---|---|---|---|---|
+| `gpt-5.4` | 16 | 6 | untouched | kept | kept | kept |
+| `gpt-5.6-terra` (production) | 25 | — | false rewrite | flattened | flattened | kept |
+| `gpt-5.6-terra` (re-run) | 28 | 8 | minor edit | **deleted** | flattened | kept |
+| `gpt-5.6-terra` + burden-of-proof rules | 28 | **11** | false rewrite | kept | flattened | **falsely deleted** |
+
+### Verdict — Terra is overstepping, but the prompt gap is real and older
+
+**Terra makes ~1.7× the edits of gpt-5.4 on identical input**, concentrated in two classes: (1) **literalizing figurative prose** — the re-run replaced *"a man who needs a fortress can wait inside it; a man who needs extraction cannot wait at all"* (one of the two first-rate arguments justifying Opus 5) with *"suits a psalm whose repeated request is haste"*; every Terra run flattened *"stop asking mid-sentence"*; gpt-5.4 left both intact. (2) **Asserting about outside works with no source in hand** — Terra touched the Herbert paragraph in **3 of 3** runs, gpt-5.4 in 0 of 1.
+
+Two things are **not** Terra's fault: **echo deletion is pre-existing** (under gpt-5.4 the editor removed Lauryn Hill and reframed Vallejo in Ps 62, removed Lorca and Walcott in Ps 67 — sanctioned by category 6); and **the prompt has no scope rule** — category 7 is scoped to *biblical* texts, but the CRITICAL READING STANCE and hedge-hardening pass invite exactly this, and Terra is better at accepting an invitation gpt-5.4 declined.
+
+### The prompt fix that BACKFIRED (documented so it is not retried)
+
+A three-rule "BURDEN OF PROOF ON THE EDITOR" block was added and tested: (a) an outside-world **specificity test**, (b) **never substitute a vaguer contrary claim**, (c) **figures are not claims**. Rule (c) worked. Rules (a) and (b) failed:
+
+- **The specificity test is gameable by confabulation** — Terra satisfied it by inventing *more* specific detail, replacing *chime* answering *rhyme* with "piles up *-ing* rhymes before ending on *chime*." There are no *-ing* rhymes in that stanza and it ends on *ryme*.
+- **The framing raised category-7 aggression** (6 → 8 → 11). *"If you are sure enough to overwrite, you are sure enough to be specific"* reads as a licence to assert.
+- **It caused the worst error observed** — that run deleted Opus 5's *correct* claim that Ps 40:17 lacks the connecting waw, asserting "it has וְיֹאמְרוּ." Per `database/tanakh.db`, Ps 40:17 = `יֹאמְר֣וּ` (no waw), Ps 70:5 = `וְיֹאמְר֣וּ`. That was one of the four doublet variants justifying Opus 5's adoption, destroyed by a fabricated Hebrew reading — inside category 7's real scope, where ground truth is one SQL query away. All three other runs left it alone.
+
+A **materials-only** rule was designed and discarded before testing: it would have been *actively harmful* here, since `literary_echoes/pass_4_final.txt` supplies only *Denial*'s stanzas 1–2 and says Herbert "lets perceived delay shatter meter and rhyme" — which would have **licensed** Terra's false correction. The *chime*/*ryme* observation was Opus 5's own knowledge, and correct.
+
+### Shipped
+
+1. **`FIGURES ARE NOT CLAIMS`** block in `COPY_EDITOR_SYSTEM_PROMPT` (`src/agents/copy_editor.py`), after the hedge-hardening check; rules (a) and (b) reverted. Prompt now 15,542 chars.
+2. **`CopyEditor.DEFAULT_MODEL` → `gpt-5.4`** with an inline pointer comment. Both runners' `copy_mdl` now read `CopyEditor.DEFAULT_MODEL` instead of hardcoding `"gpt-5.6-terra"`, so the pin cannot drift. gpt-5.4 was the only run that damaged none of the four probe cases while still catching real errors (Cranmer's BCP versicle is plural *"make speed to save us"*). Costs ~$0.4 more per psalm ($0.52 vs $0.35) — negligible against a ~$15 run. **Copy-editor only**; Terra stays in production for insight, question curation, figurative curation and echoes 3–4.
+3. **`scripts/ab_finish_arms.py --copy-editor-model`** — it constructed `CopyEditor(cost_tracker=tracker)` with no model, silently pinning both A/B arms to `DEFAULT_MODEL` regardless of the pipeline flag.
+
+### Also noted
+
+- The copy editor's run summary **under-counts changes** (reported 10/11/13 where the change files list 16/28/28). Cosmetic, in the category tally.
+- **The real structural fix is deferred**: the scripture citation verifier runs *before* the copy editor (STEP 5a½) and feeds it as `supplementary_prompt`, but never after — so the editor's own factual assertions are checked by nothing. A post-copy-edit pass (~$0.15/run) would have caught the fabricated waw deterministically.
+
+---
+
+## Psalm 71 — production run + Opus 4.8/5 writer A/B
+
+Production run **$6.6397** (24 verses), citations all verified, `LANDING: found`. `gpt-5.4` shows exactly **1 call** in the cost breakdown, confirming the copy-editor pin took and nothing else moved off Terra. Deliverables: `Documents/Psalm study guide/Psalm 71 (Opus 4.8).docx` and `Psalm 71 (Opus 5).docx`.
+
+### The copy-editor fix validated at full length — 3 texts, 0 regressions
+
+| text | changes | per 1k words | cat-6 echo removals | substantial deletions |
+|---|---|---|---|---|
+| production (4.8 writer) | 18 / 7,472 w | 2.41 | 0 | 0 |
+| A/B arm — Opus 4.8 | 29 / 7,801 w | 3.72 | 0 | 0 |
+| A/B arm — Opus 5 | 19 / 12,494 w | 1.52 | 0 | 0 |
+
+All within the historical gpt-5.4 band (1.7–3.2/1k) against Terra's ~7/1k on Ps 70. **Every edit was in-line — no passage was cut in any of the three.** Category profile is dominated by [8] grammar bloat and [10] jargon glosses: the low-risk, high-value work. Real catches included an internal contradiction (claiming Isa 8:18 is "the one place" a person is a מוֹפֵת while the same paragraph cites Ezek 24:24), an LXX misreading at v.3, an incoherent Taḥanun/Shabbat omission rule, 1 Sam 30's Amalekite slave described as "aging" when the text says only sick, a corrected Talmudic attribution, and a citation fix (Song 8:14 → Song 2:17). The "densest fortress cluster in the Psalter" overclaim was caught **independently in two arms**.
+
+### A/B result — Ps 70's verdict replicates almost exactly
+
+| | Ps 70 | Ps 71 |
+|---|---|---|
+| output tokens | 1.97× | **1.99×** |
+| words | 1.55× | **1.60×** |
+| wall time | 1.87× | **1.86×** |
+
+Opus 5: 12,495 w / $2.1869 / 878s. Opus 4.8: 7,802 w / $1.5993 / 471s. Writer-stage delta **+$0.59**; finishing both arms $1.6906.
+
+**Opus 5 is the better GUIDE.** The librarian failed to flag the Ps 71↔31 relationship (below), yet from the identical dossier Opus 5 engaged every verse-level variant and 4.8 engaged none:
+
+| | 4.8 | Opus 5 |
+|---|---|---|
+| `מָעוֹז` (Ps 31:3's reading) | 0 | 2 |
+| `מְהֵרָה` (dropped in Ps 71) | 0 | 2 |
+| `לְבֵית מְצוּדוֹת` | 0 | 1 |
+| "Psalm 31" mentions | 3 | 11 |
+
+**Zero hallucination, again** — every new cross-reference verified against `tanakh.db`: Deut 26:15, Jer 9:10, Ps 90:1 all verbatim correct, plus *"Psalm 71 drops the מְהֵרָה. It will be back, as חוּשָׁה, in verse 12"* — right, and it reads through a ketiv/qere site to get there (71:12 ketiv `חישה`, qere `[חֽוּשָׁה]`). All four variants **survived the copy edit** in the finished arm.
+
+**4.8 is still the better ESSAY.** `LANDING: found` vs `near-miss`. 4.8's landing: *"This is why an old man wants to live. Not to keep breathing, but to keep the chain unbroken."* The beta reader on Opus 5: both candidates *"approach feeling and then stay on the near side of it — the reader is moved by the precision of the description rather than by the thing itself breaking through."* It also flagged more template feel (Rashi→Radak→Malbim survey). **The `###` intro-header style drift recurred** (2 in Opus 5, 0 in 4.8) — now 2 for 2, so systematic and a concrete target for agenda item (b).
+
+### NEW BUG — doublet detector misses Ps 71 ↔ Ps 31
+
+Ps 71:1–3 is Ps 31:2–4a **redistributed across different verse divisions** (31:2a = 71:1; 31:2b = 71:2a; 31:3a = 71:2b; 31:3b = 71:3a; 31:4a = 71:3b, identical). Ps 31 scored **370.46** — the highest of any related psalm, with a 5-word contiguous phrase — and the section still rendered as the atomized match-lists Session 365 diagnosed on Ps 60↔108.
+
+Measured Jaccard of consonantal token sets (`_find_shared_verse_pairs`):
+
+```
+71:1 vs 31:2 = 0.75   <- clears DOUBLET_VERSE_SIMILARITY (0.70)
+71:2 vs 31:3 = 0.19
+71:3 vs 31:4 = 0.25
+```
+
+Exactly **one** pair clears 0.70, so `len(pairs) == 1` falls to the single-verse branch requiring `SINGLE_VERSE_SIMILARITY = 0.8` — **it misses by 0.05 and is dropped entirely**. No second pair can form because the half-verse offset puts the neighbours far below the `GAP_FILL_SIMILARITY = 0.4` bar, and gap-fill assumes a *constant* offset, which drifts here.
+
+**Root cause is the unit, not the threshold**: the shared material spans 3 verses of Ps 71 but ~2.2 of Ps 31, so whole-verse alignment cannot represent it. Colon/hemistich-level or sliding-window alignment over the token stream would catch it. Do not simply lower `SINGLE_VERSE_SIMILARITY` — 0.8 guards against false positives.
+
+Opus 4.8 recovered anyway at thesis level, making it the guide's spine (*"its opening is Psalm 31, its taunt echoes Psalm 22, its closing line reproduces the end of Psalm 35 … The anthology* is *the offering"*) — but never reached the variants, which is precisely what the flag exists to surface.
+
+### BUG FIXED — A/B arms misattributed the Master Writer in the methodology block
+
+Author spotted it: the last page of *Psalm 71 (Opus 5).docx* read **"Commentary (Master Writer): claude-opus-4-8."** It is generated programmatically, which is exactly why it was wrong.
+
+**Cause**: `ab_finish_arms.py` passed the **production** run's `psalm_NNN_pipeline_stats.json` to both arms. Its `model_usage.master_writer` names whichever model ran in production, so every arm credited its commentary to that model regardless of which one actually wrote it. Two independent readers of that file had to be fixed — `commentary_formatter.py:270` (print-ready methodology) and `document_generator.py:1632` (the DOCX block, which rebuilds it from `model_usage` itself rather than from the markdown). Only the second reaches the Word document.
+
+**Fix**: new `_arm_stats_file()` writes a per-arm copy of the stats with `master_writer` set to the arm's model (and `copy_editor` when `--copy-editor-model` is used), falling back to the production file if anything is unreadable — a wrong methodology line must never cost the arm its document. Both call sites now take the patched copy.
+
+**Blast radius — it also affected Session 367's shipped Ps 70 documents.** All four A/B DOCX were regenerated from existing artifacts at **zero AI cost** (`DocumentGenerator` + corrected stats; no re-run of the writer, verifier or copy editor). Verified by reading `word/document.xml` directly:
+
+| deliverable | writer line | Herbert fix |
+|---|---|---|
+| `Psalm 70 (Opus 4.8).docx` | claude-opus-4-8 | n/a |
+| `Psalm 70 (Opus 5) CORRECTED.docx` | **claude-opus-5** | present |
+| `Psalm 71 (Opus 4.8).docx` | claude-opus-4-8 | n/a |
+| `Psalm 71 (Opus 5).docx` | **claude-opus-5** | n/a |
+
+Session 367's hand-fix to the Herbert passage had been applied to the arm's **markdown**, not only to the DOCX, so regenerating preserved it — checked before overwriting.
+
+Note the two Ps 71 arm DOCX under `output/psalm_71/_writer_ab/` were locked by Word during the fix and remain stale; the `Documents/Psalm study guide/` copies (the actual deliverables) are correct. `Documents/Psalm study guide/Psalm 70 (Opus 5).docx` is the superseded pre-correction copy — false Herbert claim *and* wrong attribution — kept only because deleting an author deliverable is the author's call.
+
+### Session spend
+
+$13.54 — $1.23 investigation, $6.64 Ps 71 pipeline, $3.79 A/B writers, $0.19 beta reads, $1.69 finishing. The DOCX regeneration added $0.
+
+---
+
+## Session 367 (2026-07-25): Model refresh — GPT-5.6 Terra swap, Opus 5 writer A/B, Terra-for-micro probe, two latent bugs
+
+**Objective**: Author asked whether any newer models (Opus 5, GPT-5.5, Gemini 3.6 Flash) were worth adopting — either to cut cost by ≥$1–2/run or to improve quality. Research → one swap shipped, one A/B run with a recommendation, one candidate rejected on evidence, two pre-existing bugs fixed. Spend: **~$9.4** (of which $5.00 was the Ps 70 production run the author was doing anyway).
+
+---
+
+### Baseline: where the money actually goes
+
+Averaged over the last three production runs (Pss 65/67/68) — **$7.41/run**:
+
+| Model | Steps | $/run | Share |
+|---|---|---|---|
+| `claude-opus-4-8` (3 calls) | macro, synthesis discovery, master writer | $3.18 | 43% |
+| `gpt-5.4` (5 calls) | insight, question curator, copy editor, echoes 3–4 | $2.37 | 32% |
+| `claude-sonnet-4-6` (2–3) | micro ×2, beta reader | $0.84 | 11% |
+| `gpt-5.1` (13–30) | scripture verifier | $0.66 | 9% |
+| `gemini-3.1-pro-preview` (2) | echoes 1–2 | $0.36 | 5% |
+
+Ps 65 and 67 ran without the beta reader, so their Sonnet line isolates micro exactly: **output is 88–89% of micro's cost**, which means only output *rate* and output *volume* matter there — input pricing is nearly irrelevant.
+
+---
+
+### SHIPPED: gpt-5.4 → gpt-5.6-terra
+
+GPT-5.6 went GA 2026-07-09 as three "durable capability tiers": **Sol** $5/$30, **Terra** $2.50/$15, **Luna** $1/$6. Terra is priced *identically to gpt-5.4* and is one generation newer, so the swap is **cost-neutral by construction** — replaying Ps 68's exact GPT token volume through both prices gives $2.5334 either way.
+
+Verified before swapping: Terra works with both call shapes the code uses — `chat.completions` + `reasoning_effort="high"` + `max_completion_tokens=65536` (copy editor, insight, question curator) and `responses` + `reasoning={"effort":...}` (echoes pass 3). All `"gpt-5" in model.lower()` routing predicates still match `gpt-5.6-terra`.
+
+Changed: `copy_editor.DEFAULT_MODEL`, `insight_extractor`, `question_curator`, `figurative_curator` (now a `MODEL` class constant instead of four hardcoded literals), `literary_echoes_agent.GPT_VERIFY_MODEL` / `GPT_RECONSTRUCT_MODEL`, and both runners' `insight_model`/`question_model`/`copy_model` defaults. `cost_tracker` gained `gpt-5.6-terra` and `claude-opus-5` entries.
+
+Two deliberate design choices:
+
+- **`--gpt-5-4-*` flags keep their names** and now act as *pin-back-to-gpt-5.4* escape hatches. Before the swap `insight_mdl = "gpt-5.4" if flag else "gpt-5.4"` was a no-op on both branches; now the flag means something and the CLI doesn't break.
+- **Runner step-tracking imports the model constants** from `literary_echoes_agent` rather than repeating string literals, so `track_model_for_step` cannot drift from the models actually used.
+
+`literary_echoes_agent._compute_cost_gpt` returns **0.0 for unknown models** — a silent failure mode. gpt-5.4 is still priced there, and a comment now records that a pass reporting $0.00 means a model constant moved without its price. Pass 4 is the regression risk: the code comments record that gpt-5.1 self-terminated early on the ~30K-char Pass-4 prompt, so if truncation reappears, pin `GPT_RECONSTRUCT_MODEL` back to `"gpt-5.4"` first.
+
+**First production run (Ps 70) clean**: 7 Terra calls, `$4.9954` total.
+
+### Rejected on evidence
+
+- **GPT-5.5** — $5/$30, double gpt-5.4, and already superseded by 5.6.
+- **Sol** — $5/$30, same objection.
+- **Fable 5** — $10/$50 (2× Opus 5), and its migration guide explicitly warns that over-prescriptive prompts *reduce* its output quality. The writer prompt is 49.6K chars of exactly that.
+- **Gemini 3.6 Flash** for echoes 1–2 — $1.50/$7.50 vs 3.1 Pro's $2/$12, but only **−$0.12/run**. Verified working at the existing `thinking_budget=24000`. Deferred as cleanup, not a cost program. (`gemini-3.6-pro` does not exist; Flash is the newest tier available.)
+- **Luna for the scripture verifier** — ~−$0.25/run on paper, but a smoke test showed Luna emitting **374 output tokens vs Terra's 176** on an identical prompt at `reasoning_effort="high"`: a weaker model that reasons longer, which erodes the saving.
+
+**Conclusion: no $1–2/run saving exists via model substitution.** The money is ~$1.98/run of un-cached Opus input tokens (`cache_read_tokens: 0` on every run to date) — i.e. the shelved `DOSSIER_CACHE_KEEPALIVE_PLAN`, now marginally more attractive because Opus 5 halves the cacheable-prefix minimum from 1024 to 512 tokens.
+
+---
+
+### Opus 5 writer A/B (Psalm 70)
+
+Opus 5 carries **the same sticker price as Opus 4.8** ($5/$25), which makes it look free. It is not. A pre-A/B probe on the real Ps 68 synthesis-discovery dossier (write verses 5–8, `effort=high`) measured **2.2× output tokens and 1.53× visible prose** — Anthropic folds thinking into billed output. The full A/B reproduced it almost exactly.
+
+New harness `scripts/ab_writer_models.py` re-reads a completed run's macro / micro / dossier / synthesis-discovery artifacts and runs **only** `write_commentary` once per model, so the model is the sole variable:
+
+| model | effort | cost | out tok | words | secs |
+|---|---|---|---|---|---|
+| claude-opus-4-8 | high | $1.1134 | 15,069 | 4,216 | 281 |
+| claude-opus-5 | high | $1.4796 | 29,716 | 6,527 | 526 |
+
+**1.97× output tokens, 1.55× words, 1.87× latency, +$0.37 on this stage** — roughly **+$1.5/run** if macro and synthesis discovery follow. Both arms ran at `effort=high` deliberately, so the A/B isolates the model rather than the effort setting.
+
+#### Verdict: Opus 5 is the better guide; Opus 4.8 is the better essay
+
+Both independently landed the same core reading (the Ps 40 doublet, the מְבַקְשֵׁי/מְבַקְשֶׁיךָ pun, no divine name in the curse verses, the יִגְדַּל אֱלֹהִים → *Yigdal* redaction fingerprint). Above that floor:
+
+**Opus 5 recovered four doublet variants 4.8 missed** — all confirmed against `tanakh.db`:
+- Ps 35:4 reads **חֹשְׁבֵי** רָעָתִי vs our חֲפֵצֵי → "Psalm 35's enemies calculate. Ours crave." 4.8 quoted 35:4 but truncated before the phrase and mistranslated the line's end.
+- Ps 40:16 has הָאֹמְרִים **לִי** הֶאָח; Ps 70 drops the לִי → "the taunt loses its target and becomes ambient."
+- Ps 40:17 has יֹאמְרוּ (no waw) and **תְּ**שׁוּעָתֶךָ vs our **יְ**שׁוּעָתֶךָ.
+- Ps 40:18 has **עֶזְרָתִי** vs our **עֶזְרִי**. (Opus 5's "agent noun / my *helper*" gloss on this was overreach and the copy editor correctly knocked it down; the variant itself is real.)
+
+**Two first-rate arguments 4.8 lacks entirely**: אַל־תְּאַחַר is *legal* vocabulary reversed (Deut 23:22 vows, Exod 22:28 firstfruits — "the verb for a human being who owes God something and is slow about it… the psalm forbids God to be late"); and the argument from absence — "it never once asks for shelter… a man who needs a fortress can wait inside it; a man who needs extraction cannot wait at all."
+
+**Utilization, not padding**: every addition was checked against the 145K-char dossier — Cassian, Monteverdi, Benedict, Cranmer, Agpeya, Britten, Midrash Tehillim, Malbim all present; all five literary authors were in the echoes file. Opus 5 used **4 of 5** literary echoes vs 4.8's **2**. Zero hallucination. Opus 4.8 left paid-for research on the table.
+
+**4.8 wins on**: compression ("the boldest compositional act in this psalm is a pair of scissors, not a pen" — best sentence in either), the "sorting machine" organizing frame, one sharper catch (Ps 38:23's חוּשָׁה לְעֶזְרָתִי is Ps 70:2's words *in reverse* — a chiasm Opus 5 only noted as a shared formula), and a clearer affective landing.
+
+**Accuracy — correcting an in-session error**: a 14-citation hand-sample suggested Opus 5 was clean and 4.8 had two defects. The exhaustive verifier says otherwise: **4.8 = 1 flagged issue** (1 Chr 16:4 with וּלְהַלֵּל silently dropped), **Opus 5 = 2** (Prov 20:27 quoted with אֱלֹהִים where the verse has יְהוָה; Mic 5:3 with וְעַתָּה for כִּי־עַתָּה). The copy editor caught more in both, including a real Hebrew error in 4.8 the hand-review missed — **עוּשָׁה** for Ps 22:20's **חוּשָׁה**. Both models slip at a comparable low rate; the sampling conclusion was wrong.
+
+**Recommendation: adopt Opus 5 for the writer**, add the migration guide's conciseness instruction, and cap literary echoes at 2–3. 6,527 words for a five-verse psalm is a lot, and Opus 5 also introduced two `###` body headers the production intros do not use.
+
+---
+
+### REJECTED: Terra for the Micro Analyst
+
+Micro is the only Sonnet 4.6 consumer of consequence and the most quality-critical agent in the pipeline, so "is Terra smarter at the same price?" was worth testing — but `micro_analyst.py` is **Anthropic-only** (two `self.client.messages.stream()` sites; the docstring mentions OpenAI, the code never implements it). Rather than build that branch on spec, `scripts/EXPERIMENT_micro_terra_probe.py` rebuilds the **exact** Stage 1 prompt and sends it to Terra, diffing against the saved Sonnet output. **$0.54, 441s, no truncation.**
+
+Comparison is apples-to-apples: `analyze_psalm` builds `micro_v2.json` from Stage 1 discoveries + phonetic data only — Stage 2/3 never feed back into it.
+
+| | Sonnet 4.6 | Terra @ xhigh |
+|---|---|---|
+| verses covered | 37 | 37 |
+| lexical insights | 81 | 78 |
+| figurative elements | 59 | 50 |
+| interesting questions | 10 | 16 |
+| **chars per verse** | 328 | **158** |
+| **chars per lexical insight** | 477 | **333** |
+
+Terra finds nearly as many things and says about half as much about each. Reading the output, the shortfall is *facts*, not verbosity compliance: on v.3 it misses the מׇעֳמָד↔מַעֲמַקֵּי sound-play and the שִׁבֹּלֶת double meaning; on v.22 it hedges the botanical identification and refers to "later passion interpretation" with **no verse citations**, where Sonnet gives Matt 27:34 / Mark 15:23 / John 19:28-30, LXX βρῶμα and χολή, and the 2 Sam 13:5 cognate. Those specifics are exactly what the Synthesis Scholar and Master Writer mine.
+
+**Cost per unit of scholarship is a wash** — 63% of the content for ~60–72% of the cost. This reproduces Session 362's "cheaper = thinner" finding exactly. **Micro stays on Sonnet 4.6 and the OpenAI branch was never built** — $0.54 spent to avoid roughly half a day of plumbing.
+
+Config note for any future attempt: micro runs `thinking={"type":"enabled","budget_tokens":32768}` + `effort="max"` (the Session-294 exhaustion guard). Terra accepts `xhigh` but **rejects `max`**, and GPT has no thinking-budget knob at all — reasoning counts against `max_completion_tokens` with no separate ceiling.
+
+> **Probe gotcha recorded**: `MicroAnalystV2`'s default `db_path` is `"data/tanakh.db"`, a **69KB stub**. The pipeline always overrides it with `database/tanakh.db` (86MB). Using the class default yields a bare "Psalm N not found in database".
+
+---
+
+### Two latent bugs fixed
+
+**1. Reasoning tokens were never recorded.** Six sites read `getattr(response.usage, 'reasoning_tokens', 0)`, which exists on **neither** OpenAI API — it is nested under `usage.completion_tokens_details.reasoning_tokens` (chat.completions) or `usage.output_tokens_details.reasoning_tokens` (responses). Because `getattr` swallowed the miss, every GPT agent logged `thinking_tokens: 0` while `literary_echoes_agent` — the one module reading the nested path — correctly reported ~10.9K reasoning tokens per Ps 68 run.
+
+**The naive fix double-bills.** `completion_tokens` already *contains* the reasoning tokens, and `CostTracker.calculate_cost` **sums** `output_cost + thinking_cost`. Passing the raw completion count as `output_tokens` alongside the reasoning count inflates every GPT figure — on Ps 68's volume, $2.3702 → $2.5334 (+6.9%). New `src/utils/openai_usage.py` therefore exposes `split_output_tokens(usage) -> (non_thinking, reasoning)` whose two values sum to the original count, keeping totals **bit-identical** while making the split correct. Verified: old $2.3702 = new $2.3702, naive $2.5334. Applied to `copy_editor`, `insight_extractor`, `question_curator`, `figurative_curator`, `macro_analyst`, `liturgical_librarian` (×2). `scripture_verifier` already read the nested path and was left alone.
+
+**Historical cost totals were always correct** — only the reported output-vs-thinking split was wrong. Ps 70 is the first run to log real GPT `thinking_tokens` (8,944 on Terra, 325 on gpt-5.1).
+
+**2. Effort-gate drift.** Three copy-pasted `if "opus-4-7" … elif "opus-4-8" …` ladders (`macro_analyst`, `synthesis_discovery`, archived `master_editor_v2._call_claude_writer`). `claude-opus-5` matches none of them and would fall through with **no `output_config` at all**, silently running at the API default with nothing in the logs. Replaced by `src/utils/model_effort.py` (`effort_for` / `apply_effort`), which logs when a model matches no tier. Mapping: 4.7 → `max`, 4.8 → `high`, opus-5 → `high` (deliberately matched to 4.8 so the A/B isolates the model), anything else → omit the parameter (Opus 4.6 and earlier 400 on `output_config`).
+
+`claude-opus-5` was also blocked at the CLI — `--master-editor-model` had `choices=["claude-opus-4-8","claude-opus-4-7","claude-opus-4-6"]` in both runners. Now includes it.
+
+---
+
+### Watch item: the Terra copy editor is overstepping
+
+Finishing both A/B arms through the production path (`scripts/ab_finish_arms.py` — print-ready → citation verification → copy editor → section merge → DOCX) surfaced a **factual regression introduced by the copy editor**.
+
+Opus 5 wrote that Herbert's *Denial* withholds its rhyme in every stanza but the last, then "grants the rhyme at last: *chime* answering *rhyme*." **That is correct** (verified externally: "They and my minde may chime, / And mend my ryme"). Terra overwrote it with *"the final stanza still withholds a final rhyme. Psalm 70 does not use rhyme"* — false — and flattened "a shattered vessel that repairs itself in the last line" into "marks the strain in broken rhymes." Reverted by hand; Opus 5 DOCX rebuilt as `Psalm 70 (Opus 5) CORRECTED.docx`.
+
+It also **deleted 4.8's Anna Akhmatova comparison outright**, taking that arm from two literary echoes to one. Change counts: **26 edits to 4.8, 25 to Opus 5** — many legitimate (real overclaims, unglossed technical terms, the 1 Chr 16:4 and Ps 22:20 citation fixes), but it is confidently "correcting" literary and formal claims outside its competence. This is a live risk in the swap shipped today and is item (a) for Session 368.
+
+---
+
+### Deliverables
+
+- `Documents/Psalm study guide/Psalm 70 (Opus 4.8).docx` — 4,044 words
+- `Documents/Psalm study guide/Psalm 70 (Opus 5) CORRECTED.docx` — 6,344 words
+- Both taken through the identical production path incl. the Session-366 divine-names conversion (`DocumentGenerator` constructs a `DivineNamesModifier` internally).
+- Arms preserve `*_pre_copy_edit.md`, so raw writer output remains inspectable.
+
+### Spend
+
+| Item | $ |
+|---|---|
+| Ps 70 production run (first Terra run) | 4.9954 |
+| Opus 5 vs 4.8 writer A/B (incl. beta reads) | 2.7244 |
+| Finishing both arms through DOCX | 0.6824 |
+| Terra micro probe (Ps 69) | 0.5364 |
+| Opus 5 vs 4.8 pre-A/B verbosity probe | 0.3910 |
+| Smoke tests, token counts, model listings | ~0.05 |
+| **Total** | **~9.38** |
+
+### Verification
+
+Compile check on every touched file; `--help` on all seven CLI entry points; full agent-module import sweep; existing test suite (3 passed). The A/B harness was self-tested end-to-end with a stubbed writer (file I/O, cost plumbing, summary math, and the one-arm-fails path) before any paid call. `openai_usage` has 8 unit cases plus a live `gpt-5.6-terra` check (old code reported 0, fixed code 30).
+
+---
+
 ## Session 366 (2026-07-19): Divine-names converter — prefixed אֵל and three sibling misses
 
 **Objective**: Author read the Ps 68 output and suspected the divine-names converter had missed instances of אֵל. Confirmed, root-caused, fixed four defects in the same family, and verified against the whole corpus. Spend: **$0** (deterministic; no model calls).
