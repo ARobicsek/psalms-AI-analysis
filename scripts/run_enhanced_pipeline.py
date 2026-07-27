@@ -29,7 +29,12 @@ from src.agents.master_editor import MasterEditor
 from src.agents.question_curator import QuestionCurator
 from src.agents.insight_extractor import InsightExtractor
 from src.agents.copy_editor import CopyEditor
-from src.agents.literary_echoes_agent import LiteraryEchoesAgent
+from src.agents.literary_echoes_agent import (
+    LiteraryEchoesAgent,
+    GEMINI_MODEL as LIT_ECHOES_GEMINI_MODEL,
+    GPT_VERIFY_MODEL as LIT_ECHOES_VERIFY_MODEL,
+    GPT_RECONSTRUCT_MODEL as LIT_ECHOES_RECONSTRUCT_MODEL,
+)
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker
@@ -307,9 +312,9 @@ def run_enhanced_pipeline(
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
     macro_model: str = "claude-opus-4-8",
-    insight_model: str = "gpt-5.4",
-    question_model: str = "gpt-5.4",
-    copy_model: str = "gpt-5.4",
+    insight_model: str = "gpt-5.6-terra",
+    question_model: str = "gpt-5.6-terra",
+    copy_model: str = "gpt-5.6-terra",
     synthesis_discovery: bool = True,
     reuse_synthesis_discovery: bool = False,  # Session 358: reuse an existing observations file instead of regenerating (~$2 saved)
     skip_beta_reader: bool = False,  # Session 362: beta reader runs by default (~$0.08, measurement only)
@@ -499,10 +504,10 @@ def run_enhanced_pipeline(
                 psalm_output_dir=output_path,
                 skip_if_exists=False,   # Default overwrite
             )
-            tracker.track_model_for_step("literary_echoes_pass_1", "gemini-3.1-pro-preview")
-            tracker.track_model_for_step("literary_echoes_pass_2", "gemini-3.1-pro-preview")
-            tracker.track_model_for_step("literary_echoes_pass_3", "gpt-5.4")
-            tracker.track_model_for_step("literary_echoes_pass_4", "gpt-5.4")
+            tracker.track_model_for_step("literary_echoes_pass_1", LIT_ECHOES_GEMINI_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_2", LIT_ECHOES_GEMINI_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_3", LIT_ECHOES_VERIFY_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_4", LIT_ECHOES_RECONSTRUCT_MODEL)
             lit_echoes_cost = lit_result.total_cost
             logger.info(
                 f"[STEP 1b] Literary echoes complete — ${lit_result.total_cost:.4f} "
@@ -517,10 +522,10 @@ def run_enhanced_pipeline(
         # If the canonical file exists, assume it was generated with the standard pipeline models
         lit_echoes_file = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
         if lit_echoes_file.exists():
-            tracker.track_model_for_step("literary_echoes_pass_1", "gemini-3.1-pro-preview")
-            tracker.track_model_for_step("literary_echoes_pass_2", "gemini-3.1-pro-preview")
-            tracker.track_model_for_step("literary_echoes_pass_3", "gpt-5.4")
-            tracker.track_model_for_step("literary_echoes_pass_4", "gpt-5.4")
+            tracker.track_model_for_step("literary_echoes_pass_1", LIT_ECHOES_GEMINI_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_2", LIT_ECHOES_GEMINI_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_3", LIT_ECHOES_VERIFY_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_4", LIT_ECHOES_RECONSTRUCT_MODEL)
 
     # =====================================================================
     # STEP 2: Micro Analysis
@@ -1110,7 +1115,7 @@ def run_enhanced_pipeline(
     if lit_echoes_cost > 0:
         print(f"Literary Echoes subtotal (Passes 1-4): ${lit_echoes_cost:.4f}")
         print("  (already included in the grand total above — shown separately "
-              "because pass costs are lumped with other uses of gemini-3.1-pro-preview / gpt-5.4)\n")
+              "because pass costs are lumped with other uses of gemini-3.1-pro-preview / gpt-5.6-terra)\n")
     if synthesis_discovery_cost > 0:
         print(f"Synthesis Discovery subtotal: ${synthesis_discovery_cost:.4f}")
         print("  (already included in the grand total above — shown separately "
@@ -1137,7 +1142,7 @@ if __name__ == "__main__":
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
     parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-8",
-                       choices=["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
+                       choices=["claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
                        help="Model for Master Writer (default: claude-opus-4-8)")
     # Session 280: questions and insights are SKIPPED by default.
     # --include-* flags opt back in; --skip-* flags remain for backward compat.
@@ -1215,10 +1220,16 @@ if __name__ == "__main__":
     print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
     print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
     
+    # Session 367: the GPT default moved gpt-5.4 -> gpt-5.6-terra (same tier,
+    # same price). The --gpt-5-4-* flags keep their names and now act as
+    # "pin back to the pre-367 model" escape hatches.
     macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-8"
-    insight_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_insight) else "gpt-5.4"
-    question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.4"
-    copy_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_copy) else "gpt-5.4"
+    insight_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_insight) else "gpt-5.6-terra"
+    question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.6-terra"
+    # Session 368: the copy editor is the one GPT agent NOT on Terra — Terra
+    # overreaches as an editor (docs/plans/COPY_EDITOR_TERRA_FINDINGS.md), so it
+    # follows CopyEditor.DEFAULT_MODEL rather than the Terra default above.
+    copy_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_copy) else CopyEditor.DEFAULT_MODEL
     
     if args.gpt_5_4_all or args.gpt_5_4_writer:
         args.master_editor_model = "gpt-5.4"

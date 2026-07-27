@@ -41,10 +41,12 @@ if __name__ == '__main__':
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.research_trimmer import ResearchTrimmer
+    from src.utils.model_effort import apply_effort
 else:
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.research_trimmer import ResearchTrimmer
+    from src.utils.model_effort import apply_effort
 
 
 # =============================================================================
@@ -2234,19 +2236,17 @@ class MasterEditorV2:
             output_tokens = 0
 
             # Session 325: Opus 4.7 replaces budget_tokens with an effort parameter
-            # (low/medium/high/xhigh/max). Use max effort for the Master Writer —
-            # quality matters more than latency here. Older models (e.g. Opus 4.6)
-            # don't accept output_config, so gate the param on 4.7.
+            # (low/medium/high/xhigh/max). Session 367 moved the per-model mapping
+            # into src/utils/model_effort.py, shared with the Macro Analyst and
+            # Synthesis Discovery. Older models (e.g. Opus 4.6) don't accept
+            # output_config, so it is omitted for them rather than passed.
             stream_kwargs = {
                 "model": model_id,
                 "max_tokens": 128000,
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": prompt}],
             }
-            if "opus-4-7" in model_id:
-                stream_kwargs["output_config"] = {"effort": "max"}
-            elif "opus-4-8" in model_id:
-                stream_kwargs["output_config"] = {"effort": "high"}
+            apply_effort(stream_kwargs, model_id, self.logger)
 
             with self.anthropic_client.messages.stream(**stream_kwargs) as stream:
                 for event in stream:

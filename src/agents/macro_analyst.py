@@ -34,12 +34,16 @@ if __name__ == '__main__':
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
+    from src.utils.model_effort import apply_effort
+    from src.utils.openai_usage import split_output_tokens
 else:
     from .rag_manager import RAGManager, RAGContext
     from ..schemas.analysis_schemas import MacroAnalysis, StructuralDivision, PoeticDevice
     from ..data_sources.tanakh_database import TanakhDatabase
     from ..utils.logger import get_logger
     from ..utils.cost_tracker import CostTracker
+    from ..utils.model_effort import apply_effort
+    from ..utils.openai_usage import split_output_tokens
 
 
 # System prompt for MacroAnalyst agent
@@ -323,14 +327,17 @@ class MacroAnalyst:
                     response = self.openai_client.chat.completions.create(**kwargs)
                     response_text = response.choices[0].message.content
                     
-                    if hasattr(response.usage, 'reasoning_tokens') and response.usage.reasoning_tokens:
-                        thinking_text = "Reasoning used " + str(response.usage.reasoning_tokens) + " tokens."
-                    
+                    # Split: completion_tokens contains reasoning, and CostTracker
+                    # sums output + thinking, so passing both would double-bill.
+                    visible_out, reason_tokens = split_output_tokens(response.usage)
+                    if reason_tokens:
+                        thinking_text = "Reasoning used " + str(reason_tokens) + " tokens."
+
                     self.cost_tracker.add_usage(
                         model=self.model,
                         input_tokens=getattr(response.usage, 'prompt_tokens', 0),
-                        output_tokens=getattr(response.usage, 'completion_tokens', 0),
-                        thinking_tokens=getattr(response.usage, 'reasoning_tokens', 0) or 0
+                        output_tokens=visible_out,
+                        thinking_tokens=reason_tokens
                     )
                     
                     stop_reason = response.choices[0].finish_reason
@@ -338,10 +345,10 @@ class MacroAnalyst:
                         stop_reason = 'max_tokens'
                 else:
                     # Use streaming to avoid 10-minute timeout for large token requests.
-                    # Effort is model-gated to mirror the Master Writer (master_editor_v2
-                    # ._call_claude_writer): opus-4-7 -> "max", opus-4-8 -> "high". Older
-                    # models (e.g. Opus 4.6) don't accept output_config, so omit it rather
-                    # than passing unconditionally.
+                    # Effort is model-gated via src/utils/model_effort.py, shared with
+                    # the Master Writer and Synthesis Discovery so the three cannot
+                    # drift. Older models (e.g. Opus 4.6) don't accept output_config,
+                    # so it is omitted rather than passed unconditionally.
                     stream_kwargs = {
                         "model": self.model,
                         "max_tokens": max_tokens,
@@ -351,10 +358,7 @@ class MacroAnalyst:
                             "content": prompt
                         }]
                     }
-                    if "opus-4-8" in self.model:
-                        stream_kwargs["output_config"] = {"effort": "high"}
-                    elif "opus-4-7" in self.model:
-                        stream_kwargs["output_config"] = {"effort": "max"}
+                    apply_effort(stream_kwargs, self.model, self.logger)
 
                     stream = self.anthropic_client.messages.stream(**stream_kwargs)
 

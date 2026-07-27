@@ -64,12 +64,15 @@ PASS_3_PROMPT_FILE = PROMPTS_DIR / "literary echoes pass 3.txt"
 PASS_4_PROMPT_FILE = PROMPTS_DIR / "literary echoes pass 4 - tier override.txt"
 
 GEMINI_MODEL = "gemini-3.1-pro-preview"
-GPT_VERIFY_MODEL = "gpt-5.4"
+GPT_VERIFY_MODEL = "gpt-5.6-terra"
 # Note: We tried gpt-5.1 first per the original plan (cheaper "inexpensive GPT")
 # but it self-terminated early at all reasoning levels on the ~30K char Pass-4
-# prompt, emitting only the first cluster. gpt-5.4 produces the full
-# reconstruction reliably. Cost differential is ~$0.04/psalm — acceptable.
-GPT_RECONSTRUCT_MODEL = "gpt-5.4"
+# prompt, emitting only the first cluster. gpt-5.4 produced the full
+# reconstruction reliably. Session 367 moved both passes to gpt-5.6-terra, the
+# same capability tier at the same price ($2.50/$15). If Pass 4 ever regresses
+# to the gpt-5.1 truncation behaviour, pin these back to "gpt-5.4" first —
+# that is the known-good config, and _compute_cost_gpt still prices it.
+GPT_RECONSTRUCT_MODEL = "gpt-5.6-terra"
 
 # High thinking for creative passes; Gemini accepts budgets up to 32768.
 # 24000 gives the model ample budget for "silently list first echoes, push past"
@@ -646,11 +649,14 @@ class LiteraryEchoesAgent:
 
     @staticmethod
     def _compute_cost_gpt(model: str, in_tok: int, out_tok: int, think_tok: int) -> float:
-        if model == "gpt-5.4":
+        if model == "gpt-5.6-terra" or model == "gpt-5.4":
             i, o, t = 2.50, 15.00, 15.00
         elif model == "gpt-5.1" or model == "gpt-5":
             i, o, t = 1.25, 10.00, 10.00
         else:
+            # Unknown model: report 0 rather than guessing. If a pass suddenly
+            # reports $0.00, a model constant above was changed without adding
+            # its price here.
             return 0.0
         # GPT output_tokens already *includes* reasoning/thinking tokens, so
         # attribute the reasoning fraction at thinking-rate and the rest at

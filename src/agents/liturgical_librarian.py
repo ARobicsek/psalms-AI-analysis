@@ -34,6 +34,8 @@ from dataclasses import dataclass
 from collections import defaultdict
 from dotenv import load_dotenv
 
+from src.utils.openai_usage import split_output_tokens
+
 if TYPE_CHECKING:
     from src.utils.cost_tracker import CostTracker
 
@@ -277,8 +279,9 @@ class LiturgicalLibrarian:
 
         summary = response.choices[0].message.content or ""
         input_tokens = getattr(response.usage, 'prompt_tokens', 0) or 0
-        output_tokens = getattr(response.usage, 'completion_tokens', 0) or 0
-        reasoning_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+        # Split: completion_tokens contains reasoning, and CostTracker sums
+        # output + thinking, so passing both would double-bill.
+        output_tokens, reasoning_tokens = split_output_tokens(response.usage)
 
         return summary.strip(), input_tokens, output_tokens, reasoning_tokens
 
@@ -2098,13 +2101,15 @@ Output ONLY the JSON.'''
             result_text = response.choices[0].message.content or ""
             result_text = result_text.strip()
 
-            # Track validation cost
+            # Track validation cost. Split: completion_tokens contains reasoning,
+            # and CostTracker sums output + thinking, so passing both double-bills.
             if response.usage:
+                visible_out, reasoning = split_output_tokens(response.usage)
                 self.cost_tracker.add_usage(
                     model="gpt-5.1",
                     input_tokens=getattr(response.usage, 'prompt_tokens', 0) or 0,
-                    output_tokens=getattr(response.usage, 'completion_tokens', 0) or 0,
-                    thinking_tokens=getattr(response.usage, 'reasoning_tokens', 0) or 0
+                    output_tokens=visible_out,
+                    thinking_tokens=reasoning
                 )
 
             if not result_text:

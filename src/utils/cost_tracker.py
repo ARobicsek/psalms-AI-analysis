@@ -83,6 +83,16 @@ PRICING = {
         "cache_read": 0.50,
         "cache_write": 6.25,
     },
+    # Claude Opus 5 (Session 367) - same per-token price as Opus 4.8, but it
+    # generates ~2.2x the output tokens on our prompts (thinking is folded into
+    # output by Anthropic billing), so expect a HIGHER per-run cost, not parity.
+    "claude-opus-5": {
+        "input": 5.00,
+        "output": 25.00,
+        "thinking": 25.00,
+        "cache_read": 0.50,
+        "cache_write": 6.25,
+    },
     # Claude Sonnet 4.6 (released Feb 2026) - Adaptive thinking, same pricing as Sonnet 4.5
     "claude-sonnet-4-6": {
         "input": 3.00,
@@ -137,6 +147,16 @@ PRICING = {
         "output": 15.00,
         "thinking": 15.00,  # Reasoning tokens charged at output rate
         "cache_read": 0.0,  # Not applicable
+        "cache_write": 0.0,  # Not applicable
+    },
+    # GPT-5.6 Terra (OpenAI, GA 2026-07-09) - the mid "durable capability tier".
+    # Priced IDENTICALLY to gpt-5.4 ($2.50/$15), one generation newer, so the
+    # Session-367 swap is cost-neutral by construction.
+    "gpt-5.6-terra": {
+        "input": 2.50,
+        "output": 15.00,
+        "thinking": 15.00,  # Reasoning tokens charged at output rate
+        "cache_read": 0.25,  # 90% off cached input (not yet wired up)
         "cache_write": 0.0,  # Not applicable
     },
     # Gemini 2.5 Pro (Google)

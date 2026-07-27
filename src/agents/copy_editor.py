@@ -35,9 +35,11 @@ if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
+    from src.utils.openai_usage import split_output_tokens
 else:
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
+    from src.utils.openai_usage import split_output_tokens
 
 import anthropic
 from dotenv import load_dotenv
@@ -112,6 +114,20 @@ chose / heard / wanted"), genre or tradition construction, and unsourced
 attributions of opinion ("commentators have found it hard to justify") —
 if no source is given, soften to what is actually known or remove the
 attribution.
+
+FIGURES ARE NOT CLAIMS — apply before treating any sentence as a factual error:
+
+A metaphor, image, analogy or rhetorical flourish is not a factual assertion
+and is not subject to factual correction. "The prayer breaks off mid-breath" is
+a figure about closure, not a claim about syntax or respiration; "the psalm's
+grief is a room with no door" is a figure about confinement, not an
+architectural statement. Do not literalize such sentences, do not replace them
+with flat paraphrase, and do not "correct" them by observing that they are not
+literally true. A working figure carrying the argument is the prose this
+commentary is trying to produce; flattening one is a loss with no offsetting
+gain in accuracy. Category 9(g) covers analogies that fail on their OWN terms —
+a statement about the physical world that is simply false — and does not
+license flattening a live figure into plain description.
 
 Correct the following categories of error:
 
@@ -301,7 +317,16 @@ If no changes are needed, still append "## Changes\nNo changes required."
 class CopyEditor:
     """Applies the 9-category error taxonomy to existing psalm commentary."""
 
-    # Default model for copy editing (requires high nuance and precision)
+    # Default model for copy editing (requires high nuance and precision).
+    #
+    # Session 368: deliberately NOT gpt-5.6-terra, though Terra is the GPT
+    # default everywhere else in the pipeline. On one identical input Terra made
+    # ~1.7x the edits of gpt-5.4 and spent the difference literalizing figurative
+    # prose and "correcting" claims about non-biblical works from memory — in one
+    # run fabricating a Hebrew reading (Ps 40:17's waw) that gpt-5.4 and two other
+    # Terra runs all left alone. Full A/B, the prompt fix that backfired, and the
+    # four known-good probe cases: docs/plans/COPY_EDITOR_TERRA_FINDINGS.md.
+    # Read that before moving this back to Terra.
     DEFAULT_MODEL = "gpt-5.4"
 
     def __init__(self, model: str = None, logger=None, cost_tracker=None):
@@ -696,13 +721,16 @@ class CopyEditor:
                     response = self.openai_client.chat.completions.create(**kwargs)
                     full_text = response.choices[0].message.content
                     
-                    reasoning_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+                    # completion_tokens already CONTAINS the reasoning tokens, and
+                    # CostTracker sums output_cost + thinking_cost — so report the
+                    # split, never the raw completion count alongside reasoning.
+                    visible_out, reasoning_tokens = split_output_tokens(response.usage)
                     if reasoning_tokens:
                         thinking_text = "Reasoning used " + str(reasoning_tokens) + " tokens."
 
                     usage_data = {
                         'input_tokens': getattr(response.usage, 'prompt_tokens', 0),
-                        'output_tokens': getattr(response.usage, 'completion_tokens', 0),
+                        'output_tokens': visible_out,
                         'thinking_tokens': reasoning_tokens,
                     }
                 else:

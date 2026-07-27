@@ -55,6 +55,7 @@ from dotenv import load_dotenv
 
 from src.utils.cost_tracker import CostTracker
 from src.utils.logger import get_logger
+from src.utils.model_effort import apply_effort
 
 
 load_dotenv()
@@ -547,10 +548,7 @@ class SynthesisDiscoveryAgent:
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": prompt}],
             }
-            if "opus-4-7" in self.model:
-                stream_kwargs["output_config"] = {"effort": "max"}
-            elif "opus-4-8" in self.model:
-                stream_kwargs["output_config"] = {"effort": "high"}
+            apply_effort(stream_kwargs, self.model, self.logger)
 
             try:
                 with self.client.messages.stream(**stream_kwargs) as stream:

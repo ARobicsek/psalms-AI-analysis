@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 
 from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
+from src.utils.openai_usage import split_output_tokens
 
 
 @dataclass
@@ -71,7 +72,9 @@ class FigurativeCurator:
     INITIAL_SEARCH_CAP = 50  # Cap for initial micro analyst searches
     FOLLOWUP_SEARCH_CAP = 30  # Cap for follow-up searches
 
-    # GPT-5.4 pricing (per million tokens)
+    # Model + pricing (per million tokens). Session 367: gpt-5.4 -> gpt-5.6-terra,
+    # same capability tier at identical pricing.
+    MODEL = "gpt-5.6-terra"
     GPT54_INPUT_COST_PER_M = 2.50
     GPT54_OUTPUT_COST_PER_M = 15.00
     GPT54_THINKING_COST_PER_M = 15.00  # Reasoning tokens billed at output rate
@@ -118,7 +121,7 @@ class FigurativeCurator:
                 from openai import OpenAI
                 self.openai_client = OpenAI()
                 if verbose:
-                    print("[INFO] Initialized GPT-5.4 client for Figurative Curator")
+                    print(f"[INFO] Initialized {self.MODEL} client for Figurative Curator")
             except ImportError:
                 raise ImportError("openai package not installed. Run: pip install openai")
 
@@ -127,7 +130,7 @@ class FigurativeCurator:
         """Return the name of the active LLM model."""
         if self.dry_run:
             return "None (Dry Run)"
-        return "gpt-5.4"
+        return self.MODEL
 
     def _get_psalm_text(self, psalm_number: int) -> List[Tuple[int, str, str]]:
         """
@@ -176,12 +179,12 @@ class FigurativeCurator:
             return "[DRY RUN - No LLM response]", {"input": 0, "output": 0}
 
         if self.verbose:
-            print(f"[API] Calling GPT-5.4 (reasoning_effort=high)...")
+            print(f"[API] Calling {self.MODEL} (reasoning_effort=high)...")
 
         start_time = time.time()
 
         response = self.openai_client.chat.completions.create(
-            model="gpt-5.4",
+            model=self.MODEL,
             reasoning_effort="high",
             messages=[
                 {"role": "system", "content": "You are an expert biblical scholar specializing in figurative language analysis across the Hebrew Bible. Return structured JSON when requested."},
@@ -200,8 +203,9 @@ class FigurativeCurator:
         token_usage = {"input": 0, "output": 0, "thinking": 0, "cost": 0.0}
         if response.usage:
             token_usage["input"] = getattr(response.usage, 'prompt_tokens', 0) or 0
-            token_usage["output"] = getattr(response.usage, 'completion_tokens', 0) or 0
-            token_usage["thinking"] = getattr(response.usage, 'reasoning_tokens', 0) or 0
+            # completion_tokens contains reasoning; the cost math below adds
+            # output + thinking, so report the split rather than both totals.
+            token_usage["output"], token_usage["thinking"] = split_output_tokens(response.usage)
 
             # Calculate precise cost
             input_cost = (token_usage["input"] / 1_000_000) * self.GPT54_INPUT_COST_PER_M
@@ -211,7 +215,7 @@ class FigurativeCurator:
 
             if self.cost_tracker is not None:
                 self.cost_tracker.add_usage(
-                    model="gpt-5.4",
+                    model=self.MODEL,
                     input_tokens=token_usage["input"],
                     output_tokens=token_usage["output"],
                     thinking_tokens=token_usage["thinking"],

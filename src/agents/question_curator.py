@@ -30,9 +30,11 @@ if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
+    from src.utils.openai_usage import split_output_tokens
 else:
     from ..utils.logger import get_logger
     from ..utils.cost_tracker import CostTracker
+    from ..utils.openai_usage import split_output_tokens
 
 
 # Prompt for LLM-assisted curation
@@ -94,7 +96,7 @@ class QuestionCurator:
         self,
         api_key: Optional[str] = None,
         logger=None,
-        model: str = "gpt-5.4"
+        model: str = "gpt-5.6-terra"
     ):
         """
         Initialize QuestionCurator.
@@ -102,7 +104,7 @@ class QuestionCurator:
         Args:
             logger: Logger instance
             cost_tracker: CostTracker instance for tracking API costs
-            model: Model identifier to use (default: gpt-5.4)
+            model: Model identifier to use (default: gpt-5.6-terra)
         """
         self.logger = logger or get_logger("question_curator")
         self.cost_tracker = cost_tracker or CostTracker()
@@ -251,8 +253,9 @@ class QuestionCurator:
                 response_text = response.choices[0].message.content
                 
                 prompt_tokens = getattr(response.usage, 'prompt_tokens', 0)
-                completion_tokens = getattr(response.usage, 'completion_tokens', 0)
-                reason_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+                # Split: completion_tokens contains reasoning, and CostTracker
+                # sums output + thinking, so passing both would double-bill.
+                completion_tokens, reason_tokens = split_output_tokens(response.usage)
                 
                 self.cost_tracker.add_usage(
                     model=self.model,

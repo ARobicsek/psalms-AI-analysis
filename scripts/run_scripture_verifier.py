@@ -69,8 +69,8 @@ Examples:
     parser.add_argument(
         "--copy-model",
         type=str,
-        default="gpt-5.4",
-        help="Model for copy editor fix pass (default: gpt-5.4)"
+        default="gpt-5.6-terra",
+        help="Model for copy editor fix pass (default: gpt-5.6-terra)"
     )
     parser.add_argument(
         "--haiku-filter",

@@ -33,10 +33,12 @@ if __name__ == '__main__':
     from src.schemas.analysis_schemas import MicroAnalysis
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
+    from src.utils.openai_usage import split_output_tokens
 else:
     from ..schemas.analysis_schemas import MicroAnalysis
     from ..utils.logger import get_logger
     from ..utils.cost_tracker import CostTracker
+    from ..utils.openai_usage import split_output_tokens
 
 
 # =============================================================================
@@ -139,9 +141,9 @@ class InsightExtractor:
             api_key: Anthropic API key (or set ANTHROPIC_API_KEY env var)
             logger: Optional logger instance
             cost_tracker: CostTracker instance
-            model: Model to use (default: gpt-5.4)
+            model: Model to use (default: gpt-5.6-terra)
         """
-        self.model = model or "gpt-5.4"  # High reasoning model
+        self.model = model or "gpt-5.6-terra"  # High reasoning model
         self.logger = logger or get_logger("insight_extractor")
         self.cost_tracker = cost_tracker or CostTracker()
         
@@ -266,12 +268,12 @@ class InsightExtractor:
                     response = self.openai_client.chat.completions.create(**kwargs)
                     content = response.choices[0].message.content
                     
-                    if hasattr(response.usage, 'reasoning_tokens') and response.usage.reasoning_tokens:
-                        thinking_text = "Reasoning used " + str(response.usage.reasoning_tokens) + " tokens."
-                    
                     prompt_tokens = getattr(response.usage, 'prompt_tokens', 0)
-                    completion_tokens = getattr(response.usage, 'completion_tokens', 0)
-                    reason_tokens = getattr(response.usage, 'reasoning_tokens', 0) or 0
+                    # Split: completion_tokens contains reasoning, and CostTracker
+                    # sums output + thinking, so passing both would double-bill.
+                    completion_tokens, reason_tokens = split_output_tokens(response.usage)
+                    if reason_tokens:
+                        thinking_text = "Reasoning used " + str(reason_tokens) + " tokens."
                     
                     self.cost_tracker.add_usage(
                         model=self.model,
