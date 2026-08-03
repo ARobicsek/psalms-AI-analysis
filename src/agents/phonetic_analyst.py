@@ -257,7 +257,7 @@ class PhoneticAnalyst:
             "transcription": "".join(transcription),
             "syllables": syllables,  # List of syllables (each is list of phonemes)
             "syllable_transcription": syllable_string,  # e.g. "te-hil-lah"
-            "syllable_transcription_stressed": stressed_syllable_string,  # **BOLD CAPS**
+            "syllable_transcription_stressed": stressed_syllable_string,  # CAPS, no bold
             "stressed_syllable_index": stressed_syllable_index,  # 0-indexed
             # 2 = read straight off a position-reliable accent; 1 = recovered
             # from a doubled accent, a tsinnorit, or the lexicon; 0 = inferred by
@@ -815,14 +815,19 @@ class PhoneticAnalyst:
             stressed_syllable_index: Index of the stressed syllable (0-based), or None for no stress
 
         Returns:
-            Hyphenated string with stressed syllable in **BOLD CAPS** (e.g., "mal-**KHŪTH**-khā")
+            Hyphenated string with the stressed syllable in CAPS (e.g., "mal-KHŪTH-khā").
+
+            CAPS only — no markdown bold. Bold inside a transcription is reserved for
+            the WRITER's own analytical emphasis (a rhyme, a sibilant, a shared
+            consonant it is arguing about); marking stress with it too would make the
+            two uses indistinguishable on the page. Caps still carry the stress.
         """
         syllable_strings = []
         for idx, syl in enumerate(syllables):
             syl_text = ''.join(syl)
             if idx == stressed_syllable_index:
-                # Mark stressed syllable with **BOLD CAPS**
-                syl_text = f"**{syl_text.upper()}**"
+                # Mark stressed syllable with CAPS (see docstring: bold is the writer's)
+                syl_text = syl_text.upper()
             syllable_strings.append(syl_text)
         return '-'.join(syllable_strings)
 
@@ -836,7 +841,8 @@ class PhoneticAnalyst:
             stressed_indices: List of stressed syllable indices (0-based), or None/empty for no stress
 
         Returns:
-            Hyphenated string with stressed syllables in **BOLD CAPS** (e.g., "lə-**KHOL**-han-nō-fə-**LIY**-m")
+            Hyphenated string with stressed syllables in CAPS (e.g., "lə-KHOL-han-nō-fə-LIY-m").
+            CAPS only — see _format_syllables_with_stress for why bold is not used here.
         """
         if stressed_indices is None:
             stressed_indices = []
@@ -845,8 +851,8 @@ class PhoneticAnalyst:
         for idx, syl in enumerate(syllables):
             syl_text = ''.join(syl)
             if idx in stressed_indices:
-                # Mark stressed syllable with **BOLD CAPS**
-                syl_text = f"**{syl_text.upper()}**"
+                # Mark stressed syllable with CAPS (bold is the writer's)
+                syl_text = syl_text.upper()
             syllable_strings.append(syl_text)
         return '-'.join(syllable_strings)
 

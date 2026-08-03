@@ -9,6 +9,1013 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 373 (2026-08-02/03): Arm E to production; Hebrew bold never rendered in Word; the copy editor was eating quotation marks; commentators 7 → 6 → 11; PRODUCTION WAS NEVER ON OPUS 5; two pricing rows wrong
+
+### Trigger
+
+The author read `Psalm 71 (Arm E - translation slot).docx` and approved it for production, with four
+follow-ups: (1) *"in the final DOCX there were no bolded letters. should there have been?"*,
+(2) remove Metzudat David from the Sefaria request and every mention of it, recording for posterity
+that *"this commentary is VERY rarely cited"*, (3) two spots where the English after a long Hebrew
+quotation was missing a quotation mark or led with a stray apostrophe, (4) three places where an
+explanation stopped one step short — with the standing instruction *"No need to fix any of these in
+the existing document — I just want you to think about how to ensure that our pipeline produces more
+clear explanations."*
+
+### 1. Arm E is production
+
+`variant_e(MASTER_WRITER_PROMPT_V4)` was verified **byte-identical** to
+`output/psalm_71/_prompt_ab/E_translation/_prompt_template.txt` — the exact template that produced the
+guide the author read — and then applied to `master_editor.py` as a single whole-string replacement
+(−10,186 chars). The SI pipeline derives its prompt from V4, so it inherits the translation slot
+automatically (checked). `variant_d` / `variant_e` are now no-ops **by construction**: both call
+`_cut` on the two `VALIDATION CHECK` blocks, which no longer exist, so they raise during
+`ab_writer_prompts.py`'s pre-flight build — before any writer call is paid for. Verified.
+
+Production then diverges from the tested template by two deliberate, author-requested deltas: the
+Metzudat David removal (−31 chars) and the new RULE 5 (+2,755). **Neither has been A/B'd.**
+
+**Dangling reference, deliberately left:** RULE 8 and RULE 8b still say a handled phrase "satisfies
+PHRASE COVERAGE", a rule arm E deleted. Those two sentences were present in the arm that measured
+well, so removing them is an untested delta and was not taken. Worth cleaning next time the prompt
+is varied.
+
+### 2. THE BOLDED HEBREW LETTERS WERE ALWAYS THERE — WORD WAS IGNORING THEM
+
+Answer to the author's question: **yes, there should have been nine.** The markdown had them, the
+DOCX had them, python-docx reported `run.bold = True` on the right runs, and the runs were split
+correctly (מִ | יַּ | ד). Word rendered none of them.
+
+**Cause:** `w:b` applies to LATIN text only. Every Hebrew run this generator emits carries `w:rtl`,
+and for a complex-script run Word takes bold from **`w:bCs`**, which the document did not contain
+even once (`w:bCs` count: 0, `w:rtl` count: 298). This is the identical failure the codebase already
+knew about for size — `_set_style_complex_size` exists precisely because `font.size` sets `w:sz` and
+not `w:szCs` — and it had simply never been extended to bold.
+
+**What is certain and what is not.** Certain: no delivered DOCX has ever contained a single `w:bCs`,
+so no Hebrew bold has ever been specified the way OOXML specifies it for complex script. Not certain:
+whether that is *why* the author saw no bold — some Word builds fall back to `w:b` for a
+complex-script run, and after the fix shipped the author confirmed *"I DO see the bolded letters now"*
+without our having established which file that was. Either way the markup is now correct rather than
+relying on a fallback, and RULE 3b-2's technique 1 — which the rule ranks as *"the sharpest tool you
+have"* and which Session 371 measured at 5–12 uses per arm — is no longer depending on one.
+
+**Fix:** `_mirror_bold_to_complex_script()`, a post-pass beside `_join_rtl_runs_across_whitespace`.
+Copies `w:b` → `w:bCs` (with `w:val`, so an explicit off stays off) on any run carrying `w:rtl` or
+containing complex-script characters — the character test covers `_add_hebrew_block_paragraph`, whose
+runs take direction from the paragraph's `w:bidi` and carry no `w:rtl`. A post-pass, not a change to
+`_mark_run_hebrew`, because several code paths set `run.bold` *after* marking the run Hebrew and a
+post-pass cannot be defeated by ordering.
+
+**BOLD ONLY — italic is deliberately not mirrored.** The first implementation did both, and a check
+of the output found 2 Hebrew runs that would newly render italic: the lines of a quoted piyyut inside
+a block quote, which `_apply_quote_format` italicises wholesale. Hebrew has no italic form, so Word
+synthesises an oblique. Leaving `w:iCs` unset keeps Hebrew upright, exactly as every guide to date has
+rendered it. Verified in the regenerated file: `w:bCs` 203, `w:iCs` **0**, nine bolded letters all
+carrying `bCs`.
+
+Regression: psalms 41, 65, 68, 23 rebuilt — 0 empty bold runs, 0 italic Hebrew, no other change.
+Runs whose `w:b` is *absent* are untouched, so style inheritance is unaffected.
+
+### 3. THE COPY EDITOR HAS BEEN DELETING QUOTATION MARKS FOR MONTHS
+
+The author's first formatting report — `hoping in You is not because "` with no opening quote — was
+**not** a DOCX bug. `psalm_071_edited_verses_pre_copy_edit.md` reads `היא ג"כ מאתך, "hoping in You…`
+and `psalm_071_edited_verses.md` reads `היא גכ מאתך, hoping in You…`. Two characters gone, and
+**the copy editor's own change list does not mention it.**
+
+**Cause:** `CopyEditor._strip_quotes_around_source_text` exists to remove quotes that *wrap* a pure
+Hebrew/Greek span (they orphan visually when BiDi wraps the line). But rabbinic Hebrew writes geresh
+and gershayim as bare ASCII `'` and `"` glued to a letter — ג"כ, מה', ר"י, הקב"ה, אע"פ. The `"`
+inside ג"כ opened a "quoted span" that ran through the following Hebrew and closed on **the real
+opening quote of the English translation**, deleting both.
+
+**Fix:** two lookarounds — the opening quote must not be preceded by, and the closing quote must not
+be followed by, a source-language character. An abbreviation mark always abuts its letter; a quote
+wrapping a span never does, because a word boundary separates it.
+
+**Scope of the damage, measured over all 114 pre-copy-edit files in `output/`:** the old code
+performed **220** strips, of which **25 were not quotes** — Hebrew abbreviations in Psalms 53, 55, 57,
+61, 68, 70, 71, 134 and others, plus **Sappho's Greek elisions** in Psalm 55 (`δ' ὀλίγω 'πιδεύης`
+→ `δ ὀλίγω πιδεύης`), which the widened guard also catches. The guard covers the whole
+Hebrew block **U+0590–U+05FF including nikud**, which was needed: Psalm 53's הַתִּי"ו and the
+baseline arm's בְּסָמֶ"ךְ carry a vowel point immediately before the mark. Eight unit cases pass,
+including the two behaviours the helper exists for (wrapped Hebrew and wrapped Greek still stripped).
+
+### 4. And a second, unrelated bug at the same shape (this one WAS the DOCX generator)
+
+The author's other report — `', "so Your righteousness` — has a different cause. In
+`_split_long_hebrew_block`, `heb_word` spans `U+0590-U+05FF`, so an ASCII geresh closing the last
+Hebrew word (כולם הם מה') falls outside the match and is pushed into the English continuation, where
+the leading-punctuation strip cannot remove it because it no longer starts with a comma. Fixed by
+absorbing trailing marks back into the Hebrew block, **guarded** so a span that is genuinely *wrapped*
+in quotes keeps its closing quote outside and does not end unbalanced.
+
+Regression over **28,675 paragraph lines** of production markdown: behaviour changes on **2**, both
+improvements of the same artifact class (Ps 67 `", "for they will say` → `"for they will say`;
+Ps 16 `” — because God` → `— because God`).
+
+### 5. Metzudat David removed — and the author's intuition was right by 7x
+
+Measured across the **71 production guides**, dossier entries supplied vs the commentator's name
+appearing in the finished commentary:
+
+| commentator | supplied | cited | rate |
+|---|---|---|---|
+| Radak | 636 | 444 | 70% |
+| Rashi | 470 | 365 | 78% |
+| Ibn Ezra | 627 | 241 | 38% |
+| Malbim | 452 | 210 | 46% |
+| Meiri | 622 | 107 | 17% |
+| Torah Temimah | 163 | 72 | 44% |
+| **Metzudat David** | **610** | **60** | **10%** |
+
+**Third most supplied, least used, by a factor of seven** — under one citation per guide from a supply
+the size of Ibn Ezra's. The reason is structural, not accidental: it is running paraphrase by design,
+which is exactly what RULE 8b's admission test rejects. Removing it drops ~8.6 dead glosses per psalm
+out of the unranked dossier and saves a Sefaria round-trip per verse.
+
+Removed from: `commentary_librarian.py` (the actual request — `COMMENTATORS` is now 6, with the table
+above recorded in a comment at the point of decision), `micro_analyst.py` (both commentary-mode
+templates, "all 7" → "all 6"), `research_assembler.py` (module docstring + the dossier's own
+bibliography line), `synthesis_writer.py` (×2), `beta_reader.py` §5b, `master_editor.py` (×4 — RULE
+8b's "does it by design" sentence and the two FAILED exemplars now say "a commentator", and the
+STAGE-4 read list), five pipeline runners' section-header patterns, `score_prompt_ab.py`'s count list,
+and the four active docs — `DEVELOPER_GUIDE`, `CONTEXT`, `TECHNICAL_ARCHITECTURE_SUMMARY`,
+`HOW_THE_PSALMS_COMMENTARY_PIPELINE_WORKS`, plus `Documents/How Psalms Readers Guide works`. Archives
+and historical log entries left as the record they are.
+
+**`writer_prompt_variants.py` was edited in lockstep with `master_editor.py`.** Not cosmetic: arm B's
+blocks are no-ops only because `_insert_before` finds them *already present* in the prompt. Change one
+copy and not the other and `variant_b` stops recognising the block and silently inserts a stale
+duplicate — the exact hazard that file was written to prevent.
+
+### 6. The clarity item: RULE 5 now asks for the STEP
+
+The author's three examples share one shape, and it is not a shape any existing rule catches:
+
+- **v.6** — "Sotah 45b… cites this verse for the head: *from my mother's innards You cut me*." Nothing
+  in the quoted clause says *head*. A conclusion with no visible route to it.
+- **v.8** — Berakhot 50b's three-way ruling reported in full, then the verse used to explain why a full
+  mouth cannot bless. But the ruling lets *unpleasant* food stay in the mouth, and the guide never said
+  why the verse doesn't rule that out too. A distinction explained on one side only.
+- **v.19** — Malbim set up as contrasting natural deliverance against miraculous, and the commentary
+  never said which one this verse is. A binary raised and left unresolved.
+
+RULE 8 asks for a payoff and each paragraph *has* one. RULE 8b's admission test passes — all three
+genuinely change the reading. RULE 3b-2 is about grammar terms. **Nothing in the prompt asked the
+writer to show how an inference was reached.**
+
+Fixed at RULE 5, which already owns "don't just cite, explain the connection" and was a single
+unillustrated sentence — the weakest profile in the prompt by Session 371's finding. It now carries
+the three real failures as worked BROKEN/FIXED pairs (the arm-B method, and the author caught all
+three, which is the provenance that block asks for), points at the prompt's existing Ḥullin 60a
+exemplar as the model of the move (*"And because 'horns' precede 'hooves' in the verse, they inferred
+the primeval beast emerged from the earth head-first"*), and closes with a **cut** option so it is not
+purely an instruction to add words: a derivation whose step you cannot show in a clause fails RULE
+8b's admission test, because material that would change the reading *if only the reader could follow
+it* does not change the reading.
+
+**Arm E raises the stakes on this.** Freed from coverage duty, the writer now selects purely on
+interest — and the interesting material is disproportionately the *inferential* material (rabbinic
+derivations, commentator reasoning chains), which RULE 8b explicitly protects and tells the writer to
+squeeze LAST. The guide is getting denser in exactly the content that needs a step shown.
+
+**No metric for this one.** It is a semantic property, not a structural count, and inventing a regex
+proxy would repeat the §7 canary mistake. The beta reader could judge it, but it is OFF and its
+counters carry ±6 noise. The measurement is the author reading the next guide.
+
+### 7. Five commentators added — the dossier goes from 6 sources to 11
+
+Author's request, late in the session: add **Minchat Shai**, **Malbim Beur Hamilot**, **Chomat Anakh
+(Chida)**, **Romemot El (Alshich)** and **Metzudat Zion**, with the Chida and the Alshich flagged
+*"use with judiciousness for a different perspective"* — and *"make sure they are listed in the
+methods section at the end of the DOCX."*
+
+**Verified live before wiring anything.** All five resolve on Sefaria under exactly the names given.
+Coverage measured over 36 real verses (all of Ps 71, plus Ps 23:1–6 and Ps 1:1–6):
+
+| source | verses with text | avg Hebrew chars | English on Sefaria |
+|---|---|---|---|
+| Romemot El (Alshich) | **100%** | 763 | no |
+| Minchat Shai (Norzi) | 58% | 598 | no |
+| Metzudat Zion | 50% | 65 | no |
+| Malbim Beur Hamilot | 36% | 119 | no |
+| Chomat Anakh (Chida) | 19% | 838 | no |
+
+Two things in that table drove the implementation. **None of the five carries an English
+translation**, so the writer is reading and rendering them itself — worth knowing before anyone
+debugs a missing gloss. And the two shapes are opposite: **Chomat Anakh and Minchat Shai are
+naturally selective** (they speak only where they have something, so they cost little), while
+**Romemot El is on every verse and long** — roughly 18K Hebrew chars per psalm on its own, which
+makes it the single likeliest source to crowd out better material.
+
+**Metzudat Zion is not a reversal of §5.** The Metzudot are two separate works by the same family:
+Metzudat *David* is the running paraphrase that failed the admission test 90% of the time and was
+dropped; Metzudat *Zion* is the glossary — one hard word, one definition, ~65 chars. A word gloss is
+a different thing from a paraphrase and is cheap. Noted in a comment at the point of decision so a
+future reader does not "fix" the apparent contradiction.
+
+**RULE 8b now says what each source is FOR.** Ranking (step 1 of the budget) is impossible for a work
+the model cannot identify, and five of eleven are now unfamiliar. Each got a characterisation tied to
+its measured shape: Minchat Shai *"is not a commentary at all"* and is **added to the protected
+category** beside Torah Temimah, on the same logic — when a spelling, accent or variant is at issue
+it is the only source in the bundle that can settle it; Metzudat Zion is *"almost never worth a
+citation — use it the way you would use a dictionary, silently"*; Malbim Beur Hamilot is the
+near-synonym specialist; **Romemot El is held HARDER than instinct suggests, explicitly because
+volume is not insight**; and the Chida's scarcity is named as a signal worth respecting. The author's
+"judiciousness" instruction is rendered for both outsider voices as a test rather than a mood: quote
+them **when they see the verse differently from everyone else on the page**, cut them first when they
+merely elaborate what Radak already said. STAGE 4 closes the obvious loophole — *"adding five sources
+did not raise the Tier-1 budget by one quotation; it widened the field you are ranking."*
+
+**The DOCX methods section names the authors, not just the works.** The line is generated from
+`commentary_counts`, so the new sources appear automatically — but as bare keys, and a reader who
+meets "Chomat Anakh (5)" in a bibliography has no way to know that is the Chida. Added
+`COMMENTATOR_DISPLAY` / `display_name()` in the librarian, used by both readers of that data
+(`document_generator.py` and `commentary_formatter.py`) via a defensively-imported helper — the
+methodological summary must never be the reason a document fails to build. Verified by rebuilding
+Ps 71 with all eleven counts:
+
+> Traditional Commentaries Reviewed: 167 (Chomat Anakh (Chida) (5); Ibn Ezra (24); Malbim (16);
+> Malbim Beur Hamilot (9); Meiri (22); Metzudat Zion (Altschuler) (12); Minchat Shai (Norzi) (14);
+> Radak (24); Rashi (13); Romemot El (Alshich) (24); Torah Temimah (Epstein) (4))
+
+**A BUG THE ADDITION WOULD HAVE CREATED, caught before it shipped.** The runners counted commentators
+with a hand-maintained list of unanchored patterns, and `r'### .*Malbim'` also matches
+`### 71:5 — Malbim Beur Hamilot` — so every Malbim entry would have been counted twice and the
+bibliography in every finished DOCX silently inflated. The patterns are now **derived from
+`COMMENTATORS` itself and anchored to the end of the dossier's header line**, in all five runners,
+which also removes the stale `Sforno` entry that had been in the list for years and is never fetched.
+Verified against the real Ps 71 dossier: identical counts to the old code (103 entries), plus a
+synthetic check proving the old pattern reports 3 where the new one correctly reports 2 + 1.
+
+**Cost note, stated plainly:** §5 removed one source to reduce dilution and this adds five, so the
+dossier grows — roughly +64 entries and ~32K Hebrew chars per psalm, most of it Romemot El. The
+research bundle truncates any single entry at 400 chars, which caps the worst of it. Whether the
+wider field improves the guide or just gives RULE 8b more to reject is an open question, and the
+Alshich is the one to watch.
+
+Also updated: `micro_analyst.py` (both commentary-mode templates now say all 11 and name them),
+`research_assembler.py` (the dossier's own bibliography line now carries a one-clause role for each
+of the eleven — the writer cannot rank what it cannot identify), `synthesis_writer.py`,
+`beta_reader.py` §5b, `score_prompt_ab.py` (with "Malbim Beur Hamilot" deliberately excluded from the
+count list, since it contains "Malbim" and would double-count), and the five active docs.
+
+### 8. PRODUCTION HAD NEVER BEEN CUT OVER TO OPUS 5 — and two prices were wrong
+
+The author ran Psalm 72, read the methods block, and asked: *"did it use Opus 5?"* It did not.
+`--master-editor-model` defaulted to `claude-opus-4-8` in both runners, and had since the flag was
+added.
+
+**This is the Session-372 failure in a new place.** Every writer-prompt change from Session 370
+onward — RULE 8b, RULE 3b-2, arm B's exemplars, arm E's translation slot, and this session's RULE 5 —
+was designed and A/B'd on Opus 5, because `ab_writer_prompts.py` has `DEFAULT_MODEL = "claude-opus-5"`.
+Production stayed on 4.8 the whole time. Session 368 recorded *"Opus 5 adoption still open
+(recommendation stands: adopt)"* and nobody actioned it. So Ps 72 is arm E's prompt executed by the
+model it was not written for, and every arm-E metric the author has seen came from a model production
+wasn't running.
+
+**Fixed** — writer default is now `claude-opus-5` in `run_enhanced_pipeline.py` and
+`run_si_pipeline.py` (function default, argparse default, and help text), with a comment at the
+argparse site recording why, so it is not "restored" later.
+
+**THE WRITER ONLY — and that needed a code change, not just a different default.** The author's
+correction: *"we only designed the changes for opus 5 for the writer agent. the synthesis agent
+should still be 4.8 (for cost savings)."* But the runners read
+
+```python
+sd_model = master_editor_model if "claude" in master_editor_model.lower() else "claude-opus-4-8"
+```
+
+— synthesis discovery **followed the writer model**. Flipping the writer alone would have silently
+dragged the discovery sidecar onto Opus 5 too, which is exactly the coupling the author ruled out.
+Now pinned to `synthesis_discovery.DEFAULT_MODEL` with a new `--synthesis-discovery-model` escape
+hatch, and a comment explaining the coupling that used to exist. Macro analysis was already
+independent and stays on 4.8.
+
+Net: **Opus 5 for the writer; Opus 4.8 for macro and synthesis discovery; everything else unchanged.**
+
+### 9. Pricing audit — two of twelve rows were wrong
+
+The author also asked to *"make sure the prices we use are current."* Checked every row in
+`cost_tracker.PRICING` against the vendors' live pricing pages on 2026-08-03. Ten were right; two
+were not, and **both had been wrong in production for a while**:
+
+| model | table said | actual | effect |
+|---|---|---|---|
+| **Haiku 4.5** (`claude-haiku-4-5-20251001`) | $0.80 / $4.00 | **$1.00 / $5.00** | under-reported every citation-verifier run by 20% |
+| **GPT-5.6 Terra** | $2.50 / $15.00 | **$2.00 / $12.00** | over-reported every Terra call by ~25% |
+
+Terra is the heavier of the two — figurative curator, literary echoes passes 3–4, insight and
+question curation. On the Ps 72 run it reported **$1.3273** where the true cost was **~$1.06**. The
+stale comment beside it is instructive: *"Priced IDENTICALLY to gpt-5.4 ($2.50/$15), so the
+Session-367 swap is cost-neutral by construction."* That was true at Terra's GA and quietly stopped
+being true; the comment kept asserting it. Both rows now carry the correction, the date checked, and
+the measured effect.
+
+Verified correct and left alone: Opus 5 / 4.8 / 4.7 / 4.6 at $5/$25, Sonnet 4.6 / 4.5 at $3/$15,
+GPT-5 and GPT-5.1 at $1.25/$10, GPT-5.4 at $2.50/$15, Gemini 3.1 Pro at $2/$12. Also added a
+`claude-haiku-4-5` alias row so a call made under either ID is priced, and a caveat on the Gemini row:
+**Google tiers that model by prompt length** ($2/$12 at ≤200k input, $4/$18 above), and we encode only
+the cheap tier — correct for literary echoes at ~16k input tokens, but a Gemini call that ever crossed
+200k would be under-reported 2× on input.
+
+Cache multipliers were already right (read = 10% of input, write = 1.25× input for the 5-minute TTL).
+
+**Every cost number in the Session 367–373 record was computed with the two wrong rows.** Historical
+totals in this log are as-reported; they are not restated.
+
+
+### 10. The Ps 72 rerun: Opus 5 wrote **2x** the words — and that exposes what arm E's subtraction really did
+
+Writer stage only, identical dossier (same macro, micro, research bundle, synthesis discovery), same
+arm-E prompt. `ab_writer_models.py 72 --models claude-opus-5`, then `ab_finish_arms.py --ab-dir
+_writer_ab`. Production files untouched; the 4.8 guide is preserved for comparison.
+
+| raw writer output (pre-copy-edit both sides) | Opus 4.8 | Opus 5 | ratio |
+|---|---|---|---|
+| intro words | 1,489 | 2,207 | 1.48x |
+| verse words | 4,159 | 8,963 | **2.16x** |
+| total | 5,648 | 11,170 | 1.98x |
+| **words per verse** | **208** | **448** | |
+| writer cost | (in the $6.11 run) | $1.9700 | |
+| writer seconds | — | 707 | |
+
+**This is bigger than the model gap Session 368 measured** (1.60x words on Ps 71, with the OLD
+prompt), and the reason is arm E. Arm D/E deleted `300-500 words per verse` — Session 372 proved that
+target was the length driver, binding across all seven Session-371 arms with the median verse section
+never once below 330 words. Remove it and the two models diverge: **Opus 5 self-regulates to 448
+words/verse (Ps 71 arm E was ~359); Opus 4.8 collapses to 208.**
+
+So the guide the author read was not merely "the right prompt on the wrong model" — it was **roughly
+half the length it should have been**, because a prompt calibrated on a model that needs no floor was
+executed by a model that did. Arm E's subtraction is Opus-5-specific in a way nobody had measured,
+and the 4.8 Ps 72 guide should not be read as evidence about arm E at all.
+
+**Commentator use also splits the way Session 370 predicted.** Verse-commentary mentions: 4.8 = 18,
+Opus 5 = 47. Almost all of the increase is the established sources (Rashi 8->20, Malbim 3->11, Radak
+3->10), not the five new ones — the additions drew ~6 mentions between them, and **Romemot El drew
+none by name** despite being supplied on 20 of 20 verses. That is the Alshich-crowding worry not
+materialising on its first outing, and it is one psalm.
+
+47 mentions on a 20-verse psalm is above the Ps 71 arm-E figure (32 on 24 verses), so RULE 8b's budget
+is under more pressure on Opus 5 here than it was on Ps 71. Worth watching, not yet worth acting on.
+
+**Deliverable:** `Documents/Psalm study guide/Psalm 72 (Opus 5).docx` — alongside the existing 4.8
+guide, both from the same dossier. Verified: methodology block reads `Commentary (Master Writer):
+claude-opus-5`; bibliography lists all eleven commentators with attributions (`Chomat Anakh (Chida)
+(4) ... Romemot El (Alshich) (20)`, 146 entries); `w:bCs` present on 299 runs with `w:iCs` 0, and 5
+bolded Hebrew letters that will actually render.
+
+Finishing cost (copy edit + verification + DOCX): $0.7280. Writer: $1.9700.
+
+
+### 11. What the cutover costs
+
+Sticker price is identical — Opus 4.8 and Opus 5 are both $5 / input MTok and $25 / output MTok
+(verified against the live models overview, 2026-08-03). The entire difference is **output volume**:
+Anthropic folds thinking into billed output, and Opus 5 emits more of it.
+
+Measured on the writer stage only, Psalm 72, identical dossier:
+
+| | input tok | output tok | writer cost |
+|---|---|---|---|
+| Opus 4.8 | 200,441 | 22,544 | **$1.57** |
+| Opus 5 | 201,221 | 38,556 | **$1.97** |
+| delta | — | **1.71x** | **+$0.40** |
+
+A full pipeline run therefore moves from **~$5.85 to ~$6.25** at corrected pricing — about **7%**.
+(The 4.8 output figure is the pipeline's own token estimate; the Opus 5 figure is the API's actual,
+and reconciles exactly to the $1.9700 the harness reported.)
+
+Note this delta is **not a fixed model tax**: Session 368 measured +$0.59 on Ps 71 with 1.99x output
+under the OLD prompt. Arm E's removal of the word floor changed how much each model writes, so the
+gap moves with the prompt. Recorded in a comment on the `claude-opus-5` row in `cost_tracker.py`.
+
+### Deliverable
+
+`Documents/Psalm study guide/Psalm 71 (Arm E - translation slot) v2.docx` — same commentary, rebuilt at
+$0 with all three formatting fixes. Written under a new name because Word held the original open. The
+one quotation mark the copy editor had already eaten was restored by hand in `psalm_071_edited_verses.md`
+and `psalm_071_copy_edited.md` (a mechanical undo of a tool deletion, verified against the
+pre-copy-edit text; it was the only damaged site in the arm).
+
+Verified in the rebuilt file: 9 bolded Hebrew letters carry `w:bCs`; `ג"כ` intact and `"hoping in You`
+opens with its quote; `כולם הם מה'` keeps its geresh and `"so Your righteousness` opens clean.
+
+### Watch
+
+- **Whether bolded Hebrew letters actually READ well is still open.** RULE 3b-2 ranks the technique
+  first, but it has had almost no human review — 9 instances in one guide. Worth a look on the next
+  psalm before leaning on it harder.
+- RULE 5 and the Metzudat David prompt edits are unvalidated deltas from the arm-E template.
+- Arm E's margin still rests on Psalm 71 alone — ten arms have now run on that one psalm. One
+  fresh-psalm confirmation is still owed.
+- Existing guides keep their damaged quotation marks; the fix is forward-only. Re-rendering a DOCX
+  costs $0 but cannot restore what the copy editor deleted from the markdown.
+- **Ps 72 was written by Opus 4.8, not Opus 5** — it is arm E's prompt on the wrong model. A
+  writer-only Opus 5 rerun on the same dossier is the 4.8-vs-5 comparison; read them side by side
+  before drawing any conclusion about arm E on a fresh psalm.
+- Macro analysis is still Opus 4.8 and has never been A/B'd against Opus 5. Deliberate (cost), not
+  an oversight — but it means "we are on Opus 5" is true of the writer only.
+- **The Alshich is the one to watch.** Romemot El is on ~100% of verses at ~763 chars and is the
+  only new source that can crowd the dossier; RULE 8b holds it harder than the others, but that is a
+  prompt instruction, not a measurement. Check its citation share on the next psalm.
+- Five of eleven sources are now unfamiliar AND carry no English on Sefaria — the writer is
+  translating them itself. Worth one look at how it renders Minchat Shai's Masoretic notes, which are
+  terse, technical, and unlike anything else in the bundle.
+
+---
+
+## Session 372 (2026-08-02): The translation slot fixes over-citation; the beta reader is turned OFF after variance calibration invalidates most of its evidence (~$6.0)
+
+### Trigger
+
+*"in this session I'd like to address the worsening of our 'coverage' and 'over-citation' problems
+from B4, and the affect issue. given how hard these issues have been to move the needle on we may
+need to review our prompt(s) from scratch and think creatively. are we tripping ourselves up? are
+we optimally prompting for a SOTA model?"*
+
+Then, mid-session, the author's own design: *"what if we ask the verse by verse commentator to
+include a translation of the verse in question right at the top (perhaps offset in some way) so that
+we KNOW all the words will be covered and then what gets into the commentary is selected based on
+quality of insights and how interesting it is?"*
+
+Full analysis: **`docs/plans/SESSION_372_TRANSLATION_SLOT_AND_JUDGE_VARIANCE.md`**.
+
+### Three things we were doing to ourselves
+
+**1. Production was running the losing half of Session 371.** Arm B's six `WORKED EXAMPLES` blocks —
+the arm that WON — lived only in `scripts/writer_prompt_variants.py` and were never merged into
+`src/agents/master_editor.py`. B4's two edits, which failed both halves they targeted, *were*
+shipped. Production was therefore in a configuration no arm had ever run. Fixed and verified
+byte-identical to the saved `B3_final` template. `variant_b` now raises rather than double-inserting.
+
+**2. `300-500 words per verse` was the length driver, and had never been an A/B variable.**
+`git log -S` dates the line to Session ~130 — written for models that UNDER-produced. It is binding:
+across all seven Session-371 arms the median verse section is 330-437 words and never once falls
+below 330. Deleting it gave **−918 words**; arm C's *instruction* to be concise gave **+373**. Arm C
+backfired because it contradicted a word target sitting 15K chars further down the same prompt.
+
+**3. The last thing the model read was a list of 24 things to add.** Anthropic's current Opus 5
+guidance recommends deleting verification scaffolding outright ("a delete, not a rewrite") and notes
+that self-check phrasing inverts standard practice on this model — while our prompt's final ~6K chars
+were the FINAL VALIDATION CHECKLIST.
+
+### Arms D and E
+
+Both delete the 24-item checklist, both VALIDATION CHECK blocks, and the word target; both loosen the
+affective-landing cap from "exactly one" to "one built passage, plain human sentences unrationed."
+**E adds the author's translation slot** and, because the slot discharges coverage structurally,
+deletes the PHRASE COVERAGE paragraph, the WORD-AND-PHRASE FLOOR, and arm B's "whole verse swept"
+example. Identical otherwise — a clean single-variable comparison.
+
+| | D (no slot) | **E (slot)** | best prior |
+|---|---|---|---|
+| commentator mentions | 50 | **32** | 35 |
+| Tier-1 / verse | 1.96 | **1.21** | 1.00 |
+| commentators / 1k | 5.8 | **3.7** | 3.3 |
+| grammar terms named | 16 | **9** | 7 |
+| redundancy markers | 4 | **0** | 0 |
+| verse words | 8,589 | 8,628 (0.91×) | 8,413 |
+| quoted echo lines | 23 | **49** | 36 |
+| translation guarantee | — | **24/24** | — |
+
+**32 commentator mentions is the lowest ever recorded**, at near-shortest length, with every verse
+carrying a full translation. Freed room went to literary echoes, not paraphrase. This confirms
+Session 370's coverage→citation mechanism and explains B4's failure: the channel is structural, so
+B4's *words* ("a commentator is never the instrument of coverage") could never close it.
+
+Arm D on its own is a warning: shortest-ever prompt, worst-ever citations. Deleting the scaffolding
+without replacing what it structurally guaranteed makes things worse.
+
+**No pipeline changes required.** `document_generator.py` already routes `>` into indented italic
+quote blocks and renders only `verse["commentary"]` (its per-verse `english` field is dead code).
+Grouped verses keep the guarantee: E grouped once (`Verses 10-11`) and interleaved correctly —
+Hebrew 10 → English 10 → Hebrew 11 → English 11 → shared commentary.
+
+**A pre-flight check paid for itself.** `ab_writer_prompts.py --dry-run` caught an arm-E span
+deletion whose end anchor pointed at the *next* exemplar block, which would have silently removed
+the whole of RULE 8b — admission test, ranking instrument, Tier-1 budget, protected-rabbinic clause —
+from a $2 run.
+
+### The measurement was not measuring
+
+New `scripts/beta_reader_variance.py` re-reads ONE FIXED TEXT N times. Nobody had ever done this.
+Four reads per arm, Psalm 71:
+
+| metric | base | E_translation | A_no_scaffolding |
+|---|---|---|---|
+| Wit | 4, 6, 3, 4 | 5, 3, 4, 4 | 7, 7, 6 |
+| Emotional impact | 8, 6, 6, 7 | 6, 6, 7, 7 | 7, 7, 7 |
+| INERT CITATIONS | 8, 9, 6, 6 | 7, 6, 4, 7 | 6, 6, 8, 7 |
+| UNEXPLAINED GRAMMAR | 6, 6, 1, 5 | 7, 9, 4, 7 | 14, 9, 11, 15 |
+| POET'S FEELING | 1, 0, 1, 1 | 1, 0, 1, 2 | 0, 0, 1, 1 |
+
+- Every between-arm gap of 1-3 on these rows in the Session 370-372 record is inside the noise.
+- **Session 371's arm-A finding is INVERTED**: recorded "UNEXPLAINED GRAMMAR 11 → 9, no capability
+  regression" — actually base **4.5**, arm A **12.25**. Deleting the checklist really does hurt
+  grammar explanation; both single samples happened to be off in opposite directions.
+- `POET'S FEELING`, added this session before any intervention, shows no discrimination (0-2).
+- **Wit is the one affect signal that survives**: A 6.7 vs ~4.1 for base and E.
+
+**Author's call: turn the beta reader off** rather than pay 3× to median a judge he doesn't trust.
+`skip_beta_reader` now defaults True in `run_enhanced_pipeline.py` and `run_si_pipeline.py`;
+`--beta-reader` opts back in; `--skip-beta-reader` retained as a no-op so existing invocations work.
+`score_prompt_ab.py` marks beta-sourced rows `†` with their measured noise band.
+
+### Affect: the reported regression did not exist
+
+D and E scored `Emotional impact` 6 against a universal 7, and `Wit` 3 — the finding that prompted
+the author to ask whether the scores could be trusted. They can't: base re-reads gave Emotional
+impact 6 twice and Wit 3-6 on its own text. Reading all three guides end to end confirms it — E has
+seven dry-deadpan moments to base's five, and repairs two of base's own jokes. Base *announces* one
+("there is something faintly comic in the literalism"), which RULE 13 explicitly forbids; E's
+replacement is "Smart's cat needs only a spine." The prompt was working and the score couldn't see it.
+
+### Deliverable and state
+
+`Documents/Psalm study guide/Psalm 71 (Arm E - translation slot).docx`. **Arm E's prompt changes are
+NOT in production** — production sits at the restored B3 configuration pending the author's read.
+
+### Open
+
+- Ship E once the DOCX is read; then validate on a **fresh psalm** — nine arms have now run on Ps 71
+  alone and E's margin may be partly fitted to a doublet-heavy, commentator-dense text.
+- Wonder / the poet's own feeling unaddressed. No exemplars were mined because the register genuinely
+  isn't present in the Pss 65-70 corpus, and fabricating them would break the method that made arm B
+  work. Best available brief, from the new §5d readout: *"a courtroom argument is the form a person
+  uses to manage an overwhelming emotion, not the emotion itself."*
+- Arm A's newly-visible grammar regression is unexplained. E deletes the same checklist but keeps
+  arm B's RULE 3b-2 worked examples and lands near base — the exemplars appear to do the job the
+  checklist item was doing. The deterministic `grammar terms named` count agrees (base 8, A 12, E 9).
+
+---
+
+## Session 371 (2026-08-02): Opus-5 writer-prompt A/B/C on Ps 71 — six arms, $20.5. Positive exemplars WIN, conciseness instruction BACKFIRES, scaffolding-delete is a trade. Word-and-phrase floor shipped; affect audit
+
+### Trigger
+
+The author called in the Session-370 agenda: *"please run ps 71 through an opus 5 A/B/C test. mine
+the outputs of recent (outputs from the past month or so) for good examples. please run the good
+examples by me first."* Deliverable format specified: *"please output each of A/B/C in a full docx,
+which is how I like to consume the outputs."*
+
+Full analysis lives in **`docs/plans/SESSION_371_AB_RESULTS.md`**; the exemplar pool and the mining
+method in **`docs/plans/WRITER_PROMPT_POSITIVE_EXEMPLARS.md`**. This entry records what happened and
+what it cost.
+
+### Design — and why a fourth arm was added
+
+The agenda specified three arms. A **baseline** was added because A/B/C are deltas from a prompt
+carrying the third RULE 8b revision, which had **never been executed**; without it every delta would
+have been measured against run 2 on disk — a *different* prompt (the permissive RULE 8b that
+backfired in Session 370). The author approved the extra ~$2.6.
+
+That baseline also **settled Session 370's carried item (c)**: RULE 8b rev3 is directionally right
+but weak — 9,507 verse words against run 2's 9,846, recovering ~3.4% of the 19% the permissive
+amendment had given away. It did not undo the rebound.
+
+### Exemplar mining (item a)
+
+Source pool: seven beta-read files (Pss 65–71), using their §3 "Moments that landed" AHA / FELT / WIT
+tags as an **independently-judged** candidate set rather than my own taste, per the agenda's sourcing
+note. Every candidate was verified present in the **copy-edited** text, not just writer output.
+
+Two method points worth reusing:
+
+- **RULE 7b exemplars must carry their setup.** A true epigram and a false one are indistinguishable
+  in isolation; the difference is entirely whether the preceding sentences paid for it. Quoting
+  *"Character here is appetite plus voice"* alone would teach the opposite of the rule — so each was
+  quoted with the demonstration that earns it.
+- **Never mine exemplars from the psalm you are testing on.** I initially reported "four of ~20" from
+  Ps 71; a recount gave **nine of twenty** (2 in RULE 8, 3 in RULE 8b, 3 in RULE 3b-2, 1 landing).
+  Arm B reproduced two of them verbatim. All nine were replaced from Pss 65/67/69 before the
+  deliverable run. Cross-psalm exemplars showed **zero** verbatim reuse in any arm — the RULE 13
+  anti-pastiche guard held.
+
+### Results — six arms, all Opus 5, one dossier, writer stage only
+
+| metric | base | A | B | C | B2 | B3 |
+|---|---|---|---|---|---|---|
+| prompt Δchars | 0 | −7,101 | +7,325 | +728 | +7,606 | +10,890 |
+| verse words | 9,507 | 10,759 | **8,507** | 9,880 | 9,853 | 9,101 |
+| word coverage | 77.6% | 79.2% | 69.9% | 82.0% | 78.1% | **85.2%** |
+| INERT CITATIONS | 7 | **6** | 7 | 7 | 7 | 8 |
+| UNEXPLAINED GRAMMAR | 11 | 9 | 6 | 9 | **5** | 11 |
+| Tier-1 quotes / verse | 1.00 | 1.21 | 1.00 | 1.17 | 1.42 | 1.33 |
+| LANDING | found | found | found | found | found | found |
+| cost | $2.18 | $2.17 | $2.08 | $2.28 | $2.48 | $2.17 |
+
+**Arm C — the conciseness instruction — BACKFIRED.** +373 verse words, +8% output tokens, slowest
+run, and the MOST commentator mentions (40) and quoted lines (35) of the first four arms. The
+documented ~20% reduction did not replicate. Root cause is mine: the instruction carried a protective
+clause, *"cut words, never material,"* structurally identical to Session 370's *"spend what you
+save."* **This makes five instances of the same failure** (S368 copy editor, S370 RULE 8b, S371 C /
+B2 / B3): on this prompt, added text intended to produce restraint reliably produces its opposite.
+The narrow conclusion is *reject this C*, not "conciseness instructions cannot work" — a version
+without the protective clause, or one that demonstrates rather than exhorts, is still untested.
+
+**Arm A — deleting the verification scaffolding — is a TRADE.** The documented Opus-5-specific claim
+("no capability regression") held: INERT 7→6, UNEXPLAINED GRAMMAR 11→9, LANDING found, and the beta
+reader scored **wit 3→6 despite the WIT checklist item being one of the 24 deleted**. The cost was
++13% length and a Tier-1 budget breach to 1.21/verse (the item enforcing that budget was also
+deleted). Scoping was deliberate: RULE 11, PHRASE COVERAGE and RULE 8b's flat-gloss test were KEPT,
+because they are rules phrased as questions rather than re-read passes.
+
+**Arm B — positive exemplars — WON, by making the prompt LONGER.** Only arm to shorten the guide
+(−10.5%), only one to move UNEXPLAINED GRAMMAR (11→6), Tier-1 exactly on budget, cheapest, fastest.
+Six `WORKED EXAMPLES` blocks attached in-place to the rules that taught by prohibition alone (RULE 7,
+7b, 8, 8b, 3b-2, affective landing), add-only so as not to conflate with arm A.
+
+**The mechanism worth remembering: prohibitions are discharged by ADDING.** "No orphaned facts" is
+most safely satisfied by attaching a payoff to everything; "define every technical term" by adding a
+gloss. Under prohibition-only instruction the risk-minimising move is always more words. A worked
+instance of "one honest clause" is what licenses *stopping*.
+
+### The coverage regression, and two biases in my own metric
+
+`scripts/check_phrase_coverage.py` was written to audit the author's standing requirement that every
+word be treated at least briefly — the gate any length-reducing change must pass. It caught arm B at
+**69.9%, the worst of eight arms measured**, against baseline's 77.6%. Cause: every RULE 8 exemplar
+demonstrated *brevity* and none demonstrated the *floor*.
+
+Two biases were found by inspection and fixed mid-audit, both of which had penalised B specifically:
+
+1. **Markdown bold split words.** `**בְּ**צִדְקָתְךָ` broke the token, so RULE 3b-2's primary
+   technique — bolding a prefix — scored as a coverage miss, hardest on whichever arm bolds most.
+2. **Prefixed forms were required.** A guide discussing בְכִנּוֹר at length under the bare noun
+   כִּנּוֹר scored a miss. Inseparable prefixes are now stripped from the target.
+
+B moved 61.7 → 63.9 → 69.9% across the two corrections. The residual limitation is that the metric
+measures **Hebrew re-quotation, not conceptual treatment**, so absolute values understate every arm
+equally — the *ranking* is the finding.
+
+### WORD-AND-PHRASE FLOOR (shipped to production)
+
+Author request: *"let's do something to ensure that all words in a verse are explained and/or
+translated, even if briefly."* Added to `master_editor.py` as both a rule and a checklist item.
+
+The phrase is the unit of *analysis*; **the word is the unit of obligation**. Every word either
+translated or accounted for inside a translated phrase. It names the three places words go dark,
+ranked by frequency: the verse's **last clause**; a **word repeated** from an earlier verse (a gloss
+at v.5 does not cover v.17 — the reader is reading v.17; a four-word back-reference discharges it);
+and words **swallowed by a long quotation or literary echo**. Guarded against re-inflation ("the fix
+costs a clause, never a paragraph"; a dull word "gets its English and nothing else") and against
+being traded away ("if you are over length, cut analysis, not glosses").
+
+The piece that made it work was a **worked example of a whole verse swept** — Ps 71:21, four words,
+four handled: one paragraph, one sentence plus a quotation, one translation plus a cross-reference.
+Unequal time, but no silence. Coverage went **69.9 → 78.1 → 85.2%**, the best recorded, while coming
+in *shorter* than baseline (0.96×).
+
+### Coverage and citation-restraint pull against each other
+
+B3 hit the coverage target but drove citations to their worst ever: INERT 8, 44 commentator mentions,
+4.8 per 1k words. The channel had already been documented in `WRITER_PROMPT_RULE_8B_FINDINGS.md` §3 —
+*"PHRASE COVERAGE creates demand, and the cheapest way to make a dull phrase visible is to quote the
+commentator who paraphrases it."* The beta reader's own top finding fits: Radak on v.2, where *"the
+introduction stole this commentator's best moment; by the time we reach v.2 he's repeating what the
+reader already knows."*
+
+**Fix shipped as B4** (both halves in production, **scorecard not yet read**):
+- Floor: *"COVER IN YOUR OWN WORDS — a commentator is never the instrument of coverage… Coverage is a
+  translation duty, not a research duty."*
+- RULE 8b: *"COVERAGE IS NEVER AN ADMISSION TICKET… If the only reason a gloss is in front of you is
+  that its word needed covering, it fails this test by construction."*
+
+Also added to the B block, from the beta reader's own findings, the sharpest single citation rule we
+have: on v.2 the guide quoted Metzudat David **having already written in its own prose that there is
+nothing more to be had from it.** Hence — *if you find yourself writing that a gloss adds little, you
+have already completed the admission test. Delete the quotation. Do not print the verdict and the
+evidence together.*
+
+### Why Opus 5 never writes the anthology essay
+
+The author's favourite Ps 71 insight — that the psalm is an old poet's anthology, and that v.14's vow
+*"I will add upon all Your praise"* is **enacted by that method of composition** — appears in the 4.8
+essay and not in Opus 5's.
+
+It did not originate with 4.8. It is in the dossier three times: the macro's genre line
+(*"anthological composition"*), its poetic-device entry (*"anthological allusion… late-composition
+mosaic"*), and synthesis-discovery **Observation 4**, which states the v.14 connection outright.
+
+Two prompt guards suppressed it, and both were fixed:
+- The observations splice read *"do NOT structure your commentary around them"* → now *"promote the
+  best one if it earns it,"* with the anti-checklist guard kept. An intermediate version capped this
+  at "at most ONE observation" — a suppressor reintroduced while removing one; the author challenged
+  it, and it was replaced with a spine/evidence distinction (only one idea can be the *spine*, which
+  STAGE 1 already governs; there is no quota on how much of the material the essay may use). That run
+  was killed ~3 minutes in and re-run.
+- `Confidence: CONJECTURE` triggered blanket hedging → now marks **the inference, not the facts under
+  it**, with *"a conjectural reading is NOT disqualified from carrying an essay."*
+
+**It still did not work.** Opus 5 left the idea in a hedged verse note, and its essay actively frames
+the borrowing as a deficit — *"more than a collection of borrowed pieties"* — where 4.8 treated it as
+the design. **Five Opus 5 runs, zero compositional theses.** This is a model preference, not a
+suppressed instruction. The honest fix is a split-model run (4.8 essay + Opus 5 verses), untested,
+and it matches Sessions 367/368's independent conclusion.
+
+### Bolding bug — fixed forward (author-reported)
+
+The author spotted Ps 71 v.13 bolding the *stressed* syllable (`yē-**VŌ**-shū`) while arguing about
+the **-ū** rhyme. Not the model and not the prompt. `psalm_071_micro_v2.json` is dated 2026-07-26,
+predating **both** Session 369's stress rewrite and Session 370's CAPS-only change, and holds **350
+`**` markers** that flow straight into the writer prompt — directly contradicting RULE 2's *"bold
+inside a transcription is YOURS."*
+
+`phonetic_analyst.py` was already CAPS-only, so fresh runs were clean; the leak is stale artifacts,
+and ~150 psalms have them. The fix therefore went **at the point of use**: `_format_phonetic_section`
+strips legacy stress-bold and logs how many verses it touched, making artifact age irrelevant. Author
+declined to regenerate old outputs.
+
+### Affect audit (author-prompted, at session close)
+
+*"Do we say enough in the prompt about finding the pathos, wonder, humor, etc in the poem?"*
+
+| | Wit | Emotional impact |
+|---|---|---|
+| Opus 5 arms base / B / B2 / B3 / C | 3 / 5 / 3 / 3 / 3 | 7 / 8 / 7 / 7 / 7 |
+| Opus 5 arm A | **6** | 7 |
+| 4.8-era production Pss 65–68, 70 | 7, 7, 7, 7, 7 | 7, 7, 6, 6, 7 |
+
+- **Pathos capped, not broken.** `LANDING: found` in all six arms; `Emotional impact` is 7/10 in
+  every one. A number that never moves is measuring the ceiling the "exactly one landing" rule sets.
+  The author is explicitly sceptical of that cap.
+- **Wit broken, and Opus-5-specific.** Same RULE 13: 4.8 scores 7, Opus 5 scores 3. Not absence but
+  register — the beta reader calls it *"eloquent and warm rather than deadpan."* Arm A scored 6 with
+  the WIT checklist item deleted: a second signal that asking "is there wit?" produces eloquence.
+- **Wonder unnamed.** The author's correction defines this precisely: **the POET's** sense of wonder
+  or other powerful emotion, NOT the reader's AHA — which he separately calls *"the #1 most essential
+  thing I'm looking for."* No rule, exemplar, or checklist item exists for the former.
+
+### Tooling
+
+- **`scripts/ab_writer_prompts.py`** — sibling of `ab_writer_models.py`: model fixed, prompt varies.
+  Monkeypatches the module constant for the call and restores it in `finally`. Builds and validates
+  **every arm before any spend**, so a stale anchor fails for free; `ab_summary.json` merges across
+  invocations.
+- **`scripts/writer_prompt_variants.py`** — arms as pure `str -> str` transforms, each asserting its
+  anchors are present and unique. A silent no-op would cost a real $2.1 call and masquerade as a null
+  result.
+- **`scripts/score_prompt_ab.py`** — scores the RAW writer output (`_full.md`), never
+  `_edited_verses.md`, which after finishing holds copy-edited text. All metrics structural, never
+  wording matches (the §7 canary lesson).
+- **`scripts/check_phrase_coverage.py`** — the coverage audit described above.
+- **`ab_finish_arms.py`** gained `--ab-dir` and `--writer-model`. Without the latter every
+  prompt-arm DOCX would credit the commentary to an arm id — the Session-368 methodology bug in a new
+  form. Verified on all six DOCX.
+
+### Deliverables
+
+Six DOCX in `Documents/Psalm study guide/`: `Psalm 71 (Baseline).docx`, `(Arm A - no verification
+scaffolding)`, `(Arm B - positive exemplars)`, `(Arm C - conciseness instruction)`, `(Arm B2 -
+exemplars + word floor + essay promotion)`, and **`Psalm 71 (final).docx`** (B3). All verified:
+methodology block credits `claude-opus-5`, zero empty bold runs.
+
+**Cost: ~$20.5** — 7 writer runs (one killed early) ≈ $13.2, 6 beta reads ≈ $0.5, 6 finishing passes
+≈ $5.2, one abandoned run.
+
+### Open
+
+- **B4's scorecard is unread.** Success = coverage holds near 85% AND INERT drops below 7.
+- The affect work (pathos cap / wit register / poet's wonder) is next session's headline item.
+- An Opus 5 vs 4.8 A/B with all the B changes, and whether the answer is a split-model run.
+
+See `docs/plans/NEXT_SESSION_PROMPT_session_372.md`.
+
+---
+
+## Session 370 (2026-08-02): Opus 5's weak content traced to commentator quoting — RULE 8b + RULE 3b-2, 3 DOCX formatting bugs, stress bolding freed (~$4.6)
+
+### Trigger
+
+The author read the Ps 70 and Ps 71 Opus-5 guides and reported a consistent pattern: *"perhaps 5
+points that are made, 3 of which are good, one of which is fine, and then one of which leaves me
+going 'why did you include this — it's obvious, boring, pointless.' Often but not always these
+humdrum points involve mechanically quoting a commentary that really adds nothing to a simple
+translation."* With an explicit constraint: **"I DO want the verse by verse commentary to treat each
+word/phrase at least briefly"** — no fix may buy concision by dropping coverage.
+
+### Diagnosis — the excess is not uniform, it is commentator quotation
+
+Verse commentary only, Opus 5 vs Opus 4.8, same dossier, writer stage only:
+
+| metric | Ps 71 | Ps 70 |
+|---|---|---|
+| words | 1.67× | 1.78× |
+| **commentator citations** | **2.21×** | **2.62×** |
+| LXX / Greek | 0.93× | 0.00× |
+| Talmud / midrash | 1.17× | — |
+| biblical cross-refs | 2.14× | 1.50× |
+
+Commentator citation is the only category outgrowing overall expansion in **both** psalms, and a
+density rise (7.5 vs 5.7 per 1k words). Opus 5 used 47% of the dossier's 158 commentator entries,
+4.8 used 22%. Paragraph stacking: Opus 5 had 16 paragraphs with 2+ distinct commentators, 4.8 had 7.
+
+Hand audit of all 60 citation-sentences in the Ps 71 Opus-5 arm: ~12–13 duds (≈1 in 5, matching the
+author's impression), in three shapes — **paraphrase-grade** (Rashi at v.14 restating the verse
+verbatim; also vv. 5, 6, 19, 22, 23), **consensus stacking** (three commentators for one point at
+v.15; the guide literally writes "Radak the same" and "Meiri says the same"), and **trailing
+ballast** (the quote arrives after the paragraph has landed).
+
+**Opus 5 is not choosing worse — it is choosing more.** At v.14 it keeps Malbim's excellent
+hope-in-tranquility reading *and* adds Rashi's paraphrase. The good content is intact; the filler is
+additive.
+
+### Mechanism
+
+1. **Unranked dump.** `commentary_mode="all"` (`micro_analyst.py:414`) requests all 7 commentators on
+   all verses — ~130 entries for Ps 71, 5.4/verse — rendered uniformly by `research_assembler.py:561`
+   with no quality signal. Much is running paraphrase *by design*; that is what a peshat commentary is.
+2. **The prompt said take it and never said leave it.** `master_editor.py:343` "Quote liberally… from
+   all sources (biblical parallels, liturgy, **traditional commentaries**)"; line 413 "Engage Rashi,
+   Ibn Ezra, Radak… review and **incorporate** these materials"; line 382 even names "a different
+   commentator" as the go-to way to vary a verse. No selection criterion anywhere in 49.6K chars.
+3. **Every anti-padding rule is scoped to the writer's own prose.** RULE 7b hunts *sentences*;
+   RULE 8 governs "observations" (a quotation doesn't read as one); RULE 11's translation test is
+   trivially passed ("they wouldn't know Radak said it"); the checklist version is a **per-verse
+   floor**, never a per-point filter. Meanwhile PHRASE COVERAGE creates demand — the cheapest way to
+   make a dull phrase *visible* is the commentator who paraphrases it.
+
+Nothing downstream can catch it: the copy editor's 19 changes on this text were jargon-glossing,
+overclaim-scaling and one citation fix — zero commentary cuts, because it has no such mandate. The
+beta reader half-saw it ("a move being performed rather than thinking happening in real time") but is
+measurement-only.
+
+### RULE 8b — The Commentator's Burden
+
+Placed directly after RULE 8 (same logic applied to quoted material). Design went through three
+iterations because the first two were wrong in instructive ways:
+
+- **v1 (five gates).** A rubric — disagrees / supplies / risks / compresses / interestingly-wrong.
+  The author then supplied two counter-examples (Ibn Ezra at v.1, Malbim at v.5) that were *true and
+  attributable but inert*, and the rubric admitted them: gate 2 ("supplies what the verse withholds")
+  absorbs almost anything, since a commentator always supplies *some* words.
+- **v2 (single admission test).** *Does the reader read the verse differently than they did thirty
+  seconds ago?* — **cut by default**, five categories demoted to illustrations. This separates the
+  author's four examples cleanly (Meiri's syntactic re-attachment in, the other three out).
+- Plus: **apply the test to the gloss, not your framing verb** (the over-billing verbs "turns it
+  upside down", "reads it as the dawn of theological consciousness" were doing the work the content
+  couldn't); **RULE 7b extended over the sentences around a quote** (both author examples close on a
+  named 7b pattern — "not the psalmist's stamina but God's", "One verse, both directions");
+  **never two commentators for one point**; **two tiers where failing the test is silence, not
+  demotion** (the author's push-back: demoting every dud to a clause yields 60 boring clauses instead
+  of 30 boring block quotes — worse); and a **~1 Tier-1 quote per verse budget**.
+
+The budget is the un-arguable lever: it converts an absolute-quality judgment ("is this interesting
+enough?") into a **ranking** judgment ("is this among the best 24?"), which is a far easier call and
+is self-enforcing.
+
+A **format** finding drove the tiering: any Hebrew gloss of length is promoted to its own RTL block
+paragraph in the DOCX (`document_generator.py:588`), the guide's most expensive format. Both of the
+author's examples were **Tier-2 material given Tier-1 treatment** — the packaging over-billed the
+content, which is precisely the "why did you bother" feeling.
+
+### RULE 3b-2 — Point, Don't Name
+
+Author-reported: Ps 71 says *"What the poet does control is the conjunction"* (v.7) and *"The
+conjunction is doing all the work"* (essay, load-bearing), with no way for the reader to see **which
+letter** of וְאַתָּה is meant. Naming the category fails **twice** — the term is unknown *and* the
+referent unlocatable.
+
+Root cause of the existing rule's failure: the checklist required glossing "every grammar/rhetoric
+term a non-specialist might not know" with examples *vocative, asyndeton, apposition, ellipsis,
+litotes* — all exotic. The model calibrates its threshold off that list, so *conjunction, particle,
+preposition, perfect* read as too basic to qualify. Audit of the Ps 71 arm found 27 grammar-term uses
+including "חָסִיתִי is perfect" (reads as *praise* to a non-specialist) and four empty uses of
+"grammatical".
+
+Techniques ranked: **bold the exact letters** → name the letter in plain words → demonstrate by
+contrast → define-by-showing (the model's own best habit: *"זְרוֹעַ is the standard metonym… the body
+part standing in for what it does"*). Bare-predicate grammar banned. A second pass added **"bolding
+does not license the term"** after run 1 showed the model bolding enthusiastically *and* keeping the
+jargon ("the **בְּ** … is the 'by means of' preposition").
+
+Bolding was render-tested before being recommended: `**וְ**אַתָּה` produces two adjacent RTL runs
+(bold ו carrying its shva, unbolded remainder) in correct order.
+
+### Beta reader — free measurement
+
+New `5b` / `5c` sections, measurement-only, no extra API call: `INERT CITATIONS: N` (with the three
+least worth their space, **judged on what the commentator says, not how the guide introduces it**)
+and `UNEXPLAINED GRAMMAR: N`. Deliberately *not* put in the copy editor — Session 368 documents that
+giving any copy editor deletion latitude cost us Lorca, Walcott, Lauryn Hill and one of the two
+arguments justifying Opus 5.
+
+### Two A/B runs (Ps 71, same dossier, writer stage only)
+
+| | baseline | run 1 | run 2 |
+|---|---|---|---|
+| verse words | 9,994 | 8,251 (−17%) | 9,846 |
+| commentator mentions | 75 | 34 | 42 |
+| Tier-1 quotes / verse | 3.09 | 1.41 | 1.45 |
+| redundancy markers | 8 | 2 | 2 |
+| bolded Hebrew | 0 | 7 | 8 |
+| `INERT CITATIONS` | — | 4 | **7** |
+| `UNEXPLAINED GRAMMAR` | — | 10 | **6** |
+| `LANDING` | near-miss | found | found |
+| cost | — | $2.0774 | $2.1095 |
+
+All four author-flagged duds gone in both runs. The −17% also delivers most of the standing "make
+Opus 5 shorter" agenda item without touching the `###` headers or literary echoes.
+
+**Run 2's RULE 8b amendment backfired.** Two clauses — *"Losing it to stay under budget is a worse
+outcome than going over"* and *"Spend what you save"* — read as permission: length rebounded 19% and
+inert citations rose 4→7. Same shape as Session 368's copy-editor prompt fix. The RULE 3b-2 amendment
+in the same run **worked** (grammar 10→6). Third revision now in the prompt, **unvalidated**: keeps
+ranking and protected rabbinic material, but *"The budget is a ceiling. Nothing in this rule licenses
+exceeding it"* and *"do NOT refill the room — the verse gets SHORTER."*
+
+**Methodology lesson.** My canary regexes, keyed to the baseline's wording, cried "LOST" **four
+times** on content that had survived reworded — including v.4, where Malbim's citation was dropped
+but the insight kept and improved (`מִ**כַּ**ף, with the מ of "from" prefixed to כַּף…` plus a new
+Ps 18 parallel), which is the **ideal** outcome scoring as a loss. Match on the insight, not the
+attribution; trust the beta reader's independent count.
+
+### Three DOCX formatting bugs — two pre-existing, one shipped
+
+1. **Quote spacing** (author-reported, with a screenshot). Three code paths set the 0.5″ indent, none
+   touched spacing, so `Normal`'s 8pt `space_after` opened a gap between *every line* of a quoted
+   poem. New `_apply_quote_format`: single line spacing, 0pt within a block, 8pt only after the last
+   line. **The trap**: markdown separates poem lines with blank lines, which the old collectors read
+   as separate one-line blocks — the naive fix would have changed nothing. `_collect_quote_block`
+   absorbs a blank line when the next non-blank line continues the quote.
+2. **`\$\$` where `\*\*.*?\*\*` belonged** in `_add_paragraph_with_soft_breaks`. `**bold**` fell
+   through to the single-asterisk italic alternative, which matched the bare `**`, split at the right
+   places, and set bold **nowhere**. Dead in all verse-commentary prose (English as well as Hebrew) —
+   latent only because no content had ever bolded there. Fixing it exposed a second latent bug:
+   `'**x**'.startswith('*')` is true, so bold spans came out bold *and* italic.
+3. **Bare `**` delimiter split** in both `_add_nested_formatting*`. Each captured part is the asterisks
+   themselves, and `'**'` satisfies `startswith('**') and endswith('**')` — so bold landed on
+   `part[2:-2] == ''`. **This one shipped**: Psalm 41's DOCX has **12 empty bold runs and 0 bolded
+   stress syllables**; `**BĒR**`, `**SHŪ**`, `**MIY**` all rendered flat. Every guide quoting a
+   phonetic transcription lost its stress emphasis — directly undercutting Session 369's stress work.
+   Re-rendering costs $0.
+
+Final document verified: 10 bolded Hebrew runs, 0 empty bold runs, 27 quote paragraphs all
+single-spaced (22 at 0pt within blocks, 5 at 8pt at block ends = 5 poem blocks). Suite green (33).
+
+### Stress bolding removed (author request)
+
+`phonetic_analyst.py` now emits **CAPS only** (`yā-SHŪ-vū`, `'e-lō-HIYM`, `lə-hith-hal-LĒKH`),
+freeing bold for the writer's own sound arguments. Rationale: bold marking *stress* and bold marking
+*the sound being argued about* would be indistinguishable on the page; caps still carry all of
+Session 369's stress work. Prompt gained worked examples (`**SH**ā-mar`, `**S**ə-thā-riym`,
+`**Ṣ**ad-diyq` — three letters, one sound), with instruction to bold only the letters carrying the
+point. `tests/test_phonetic_analyst.py` updated — the `**` markers *were* the assertion mechanism, so
+50 were removed; caps assert the same placement. 33 pass. **Takes effect on the next micro run**;
+existing `micro_v2.json` still carry `**`.
+
+### Opus 5 prompt-length research (author question)
+
+Checked against current guidance via the `claude-api` skill rather than memory. **The
+"over-prescriptive prompts reduce quality" warning is documented for Fable 5, not Opus 5** —
+Session 367 recorded it correctly, and it is not a reason to shorten our prompt. For Opus 5 the
+guidance runs the *other* way on instruction-following: it "responds well to explicit guidance on how
+to communicate", and every documented fix for its known behaviors is an *added* prompt block.
+
+Three findings that do land, all measured against our prompt:
+
+- **(a) Delete the verification scaffolding.** The one Opus-5-specific *delete*: "verifies its own
+  work without being asked… Removing them reduces over-verification **with no capability
+  regression** — this is a delete, not a rewrite," explicitly **inverting** standard practice. We
+  carry **16 FINAL VALIDATION CHECKLIST items, 3 VALIDATION CHECK blocks, 6 "before finalizing"
+  instructions** — and this session *added* two checklist items.
+- **(b) Examples are 2:1 negative** — 24 (WEAK/BLOATED/AVOID/NEVER/DON'T) vs 13
+  (STRONG/CLEAN/FIXED/TARGET). Positive examples documented to outperform "don't" instructions.
+- **(c) Conciseness is a prompting lever, not `effort`** (~20% measured, and the guidance is explicit
+  that effort does *not* reliably shorten visible output). Cheaper than anything tried for the
+  standing "make Opus 5 shorter" item.
+
+### Files changed
+
+- `src/agents/master_editor.py` — RULE 8b, RULE 3b-2, phonetic-bolding guidance; line 343 and the
+  toolkit's item 4 rescoped; 2 checklist items added. 49,589 → 63,367 chars (~15.8K tokens).
+  Inheritance into `master_editor_si.py` verified; all 9 format placeholders intact.
+- `src/agents/beta_reader.py` — sections `5b` / `5c` with machine-readable counters.
+- `src/agents/phonetic_analyst.py` — stress marking CAPS-only (both formatters).
+- `src/utils/document_generator.py` — `_apply_quote_format`, `_collect_quote_block`, the `$$` split
+  fix, the bold/italic collision fix, both `_add_nested_formatting*` fixes.
+- `tests/test_phonetic_analyst.py` — expectations updated to CAPS-only.
+- `docs/plans/WRITER_PROMPT_RULE_8B_FINDINGS.md`, `docs/plans/NEXT_SESSION_PROMPT_session_371.md` — new.
+
+### Deliverable
+
+`Documents/Psalm study guide/Psalm 71 (Opus 5) rev2.docx` — **run 2's** text, i.e. the permissive end
+of the range; the third revision has never been run. Named rev2 because the prior file was locked
+open in Word. Comparison arms preserved on disk: `_baseline_pre_rule8b/`, `_run1_rule8b/`,
+`claude-opus-5/`.
+
+### Next
+
+`docs/plans/NEXT_SESSION_PROMPT_session_371.md` — the author's stated plan: **(a) mine recent guides
+for great positive examples, (b) run an A/B/C test** on the three findings above. Then (c) validate
+the untested third RULE 8b revision, (d) carried-forward Session-369 items.
+
+---
+
 ## Session 369 (2026-07-27): Phonetic analyst rewrite — 16 bugs, stress placement 96.85% → 99.54% ($0, deterministic)
 
 **Trigger**: reading the Ps 70 Opus-5 guide, the author flagged two transcriptions as having the stress on the wrong syllable: `yā-shū-**VŪ**` and `**YĀ**-siy-sū` (Ps 70:4 יָ֭שׁוּבוּ, 70:5 יָ֘שִׂ֤ישׂוּ). Both were wrong; both should be penultimate. Correct: `yā-**SHŪ**-vū`, `yā-**SIY**-sū`. The author's ear was calibrated — the same sentence lists five forms and the other three (`yē-**VŌ**-shū`, `yis-**SŌ**-ghū`, `wə-yis-**MḤŪ**`) were right. **Not a model error**: transcriptions are deterministic output of `src/agents/phonetic_analyst.py`, land in `micro_v2.json` as `phonetic_transcription`, and the writer quoted them faithfully.

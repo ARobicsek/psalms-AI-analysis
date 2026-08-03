@@ -181,7 +181,7 @@ Return ONLY the JSON object, no additional text.
 
 # Commentary instruction templates
 COMMENTARY_ALL_VERSES = """**REQUEST COMMENTARY FOR EVERY VERSE** in the psalm
-   - All 7 available commentators will be consulted: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah
+   - All 11 available commentators will be consulted: Rashi, Ibn Ezra, Radak, Meiri, Romemot El (Alshich), Minchat Shai, Metzudat Zion, Chomat Anakh (Chida), Malbim, Malbim Beur Hamilot, Torah Temimah
    - Provide a brief reason explaining what aspect of each verse merits traditional commentary perspective
    - This comprehensive approach ensures the Synthesis Writer has classical grounding for every verse
    - Examples of good reasons:
@@ -193,7 +193,7 @@ COMMENTARY_ALL_VERSES = """**REQUEST COMMENTARY FOR EVERY VERSE** in the psalm
 """
 
 COMMENTARY_SELECTIVE = """**REQUEST COMMENTARY ONLY FOR VERSES** that are genuinely puzzling, interesting, complex, or merit traditional interpretation
-   - All 7 available commentators will be consulted: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah
+   - All 11 available commentators will be consulted: Rashi, Ibn Ezra, Radak, Meiri, Romemot El (Alshich), Minchat Shai, Metzudat Zion, Chomat Anakh (Chida), Malbim, Malbim Beur Hamilot, Torah Temimah
    - Be selective and judicious: only request for SOME verses that would most benefit from classical commentary
    - Focus on: interpretive puzzles, rare vocabulary, complex syntax, theologically loaded passages, unusual imagery
    - Provide a brief reason explaining what specific aspect merits traditional commentary

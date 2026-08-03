@@ -87,15 +87,17 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         figurative_matches = re.findall(r'^\*\*[A-Za-z]+ \d+:\d+\*\*', markdown_content, re.MULTILINE)
         stats['figurative_count'] = len(figurative_matches)
 
-    # Count traditional commentaries
-    commentary_patterns = [
-        (r'### .*Rashi', 'Rashi'), (r'### .*Ibn Ezra', 'Ibn Ezra'), (r'### .*Radak', 'Radak'),
-        (r'### .*Metzudat David', 'Metzudat David'), (r'### .*Malbim', 'Malbim'),
-        (r'### .*Sforno', 'Sforno'), (r'### .*Meiri', 'Meiri'),
-        (r'### .*Torah Temimah', 'Torah Temimah'),
-    ]
-    for pattern, name in commentary_patterns:
-        matches = re.findall(pattern, markdown_content)
+    # Count traditional commentaries.
+    #
+    # Patterns are DERIVED from the librarian's own commentator list so this can never
+    # drift out of sync again, and each is ANCHORED to the end of the dossier's header
+    # line (`### 71:5 — Malbim`). Both matter as of Session 373: the old hand-maintained
+    # list still carried `Sforno`, which is never fetched, and its unanchored
+    # `### .*Malbim` now also matches `### 71:5 — Malbim Beur Hamilot`, double-counting
+    # every Malbim entry and silently inflating the bibliography in the finished DOCX.
+    from src.agents.commentary_librarian import COMMENTATORS
+    for name in COMMENTATORS:
+        matches = re.findall(rf'^### .*— {re.escape(name)}\s*$', markdown_content, re.MULTILINE)
         if matches:
             stats['commentary_counts'][name] = len(matches)
 
@@ -295,14 +297,15 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "claude-opus-4-8",
+    master_editor_model: str = "claude-opus-5",
+    synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 4.8)
     skip_insights: bool = True,      # Session 280: skipped by default, use --include-insights
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
     exclude_insights: bool = False,
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
-    skip_beta_reader: bool = False,  # Session 362: beta reader runs by default (~$0.08, measurement only)
+    skip_beta_reader: bool = True,   # Session 372: OFF by default — see --beta-reader below
     special_instruction_file: str = None,
     macro_model: str = "claude-opus-4-8",
     insight_model: str = "gpt-5.6-terra",
@@ -720,7 +723,14 @@ def run_enhanced_pipeline(
             print(f"\n{'='*80}")
             print(f"STEP 3.5: Cross-Verse Synthesis Discovery (Session 347)")
             print(f"{'='*80}\n")
-            sd_model = master_editor_model if "claude" in master_editor_model.lower() else "claude-opus-4-8"
+            # SYNTHESIS DISCOVERY IS PINNED TO ITS OWN DEFAULT (Opus 4.8) and no longer
+            # follows the writer. This line used to read `master_editor_model if "claude"
+            # in ...`, so flipping the writer to Opus 5 in Session 373 would have silently
+            # dragged the discovery sidecar along with it. Author's call: only the WRITER
+            # was designed and A/B'd on Opus 5; discovery stays on 4.8 for cost. Override
+            # with --synthesis-discovery-model if that is ever worth testing.
+            from src.agents.synthesis_discovery import DEFAULT_MODEL as SD_DEFAULT_MODEL
+            sd_model = synthesis_discovery_model or SD_DEFAULT_MODEL
             sd_cost_before = cost_tracker.get_total_cost()
             try:
                 synthesis_discovery_file = master_editor.discover_cross_verse_observations(
@@ -1099,9 +1109,13 @@ if __name__ == "__main__":
     parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
-    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-8",
+    # Session 373: production writer is Opus 5 — see run_enhanced_pipeline.py.
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-5",
                        choices=["claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: claude-opus-4-8)")
+                       help="Model for Master Writer (default: claude-opus-5)")
+    parser.add_argument("--synthesis-discovery-model", type=str, default=None,
+                       help="Model for the cross-verse synthesis sidecar "
+                            "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-4-8).")
     # Session 280: questions and insights are SKIPPED by default.
     # --include-* flags opt back in; --skip-* flags remain for backward compat.
     parser.add_argument("--skip-insights", action="store_true",
@@ -1120,8 +1134,12 @@ if __name__ == "__main__":
                        help="Skip the copy editor step (runs by default)")
     parser.add_argument("--skip-lit-echoes", action="store_true",
                        help="Skip the literary echoes generation step (runs by default, regenerating the file on every pipeline run)")
+    parser.add_argument("--beta-reader", action="store_true",
+                       help="Run the beta-reader step (~$0.08). OFF BY DEFAULT since Session 372: on a "
+                            "FIXED text its scores move by up to 3 points and its UNEXPLAINED GRAMMAR "
+                            "counter by up to 6, so one read carries little information.")
     parser.add_argument("--skip-beta-reader", action="store_true",
-                       help="Skip the beta-reader step (Session 362; runs by default, ~$0.08, measurement only)")
+                       help="Deprecated no-op — already off by default (Session 372).")
     parser.add_argument("--special-instruction", type=str, default=None,
                        help="Path to special instruction file")
     parser.add_argument("--gpt-5-4-all", action="store_true", help="Use GPT-5.4 for all eligible agents")
@@ -1215,13 +1233,14 @@ if __name__ == "__main__":
         smoke_test=args.smoke_test,
         skip_default_commentaries=args.skip_default_commentaries,
         master_editor_model=args.master_editor_model,
+        synthesis_discovery_model=args.synthesis_discovery_model,
         skip_insights=effective_skip_insights,
         skip_questions=effective_skip_questions,
         exclude_insights=args.exclude_insights,
         exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
         skip_lit_echoes=args.skip_lit_echoes,
-        skip_beta_reader=args.skip_beta_reader,
+        skip_beta_reader=not args.beta_reader,
         special_instruction_file=args.special_instruction,
         macro_model=macro_mdl,
         insight_model=insight_mdl,

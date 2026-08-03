@@ -216,10 +216,14 @@ different questions.
 ### The traditional commentators (Commentary Librarian)
 
 This agent fetches the classical Jewish *parshanut* for the requested verses,
-again through Sefaria, in Hebrew with English: **Rashi, Ibn Ezra, Radak,
-Metzudat David, Malbim, Meiri,** and **Torah Temimah** — a deliberate spread
-across the 11th to 20th centuries and across interpretive temperaments
-(*peshat*, grammar, philosophy, *midrash*). When the finished commentary writes
+again through Sefaria, in Hebrew with English where Sefaria has it: **Rashi, Ibn
+Ezra, Radak, Meiri, Romemot El** (the Alshich), **Minchat Shai, Metzudat Zion,
+Chomat Anakh** (the Chida), **Malbim, Malbim Beur Hamilot,** and **Torah
+Temimah** — a deliberate spread across the 11th to 20th centuries and across
+interpretive temperaments (*peshat*, grammar, philosophy, homiletics, Masoretic
+text criticism, *midrash*). Five of the eleven were added in Session 373; the
+last five listed carry no English on Sefaria, so the guide is translating them
+itself. When the finished commentary writes
 "Ibn Ezra notes we exalt God 'by word and by the faithfulness of the heart,'"
 that is a real quotation, retrieved and then woven in.
 

@@ -199,7 +199,7 @@ Output: Scholarly Commentary (.docx + .md)
 
 #### Commentary Librarian
 - **Function**: Fetches traditional Jewish commentaries
-- **Sources**: Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah
+- **Sources** (11): Rashi, Ibn Ezra, Radak, Meiri, Romemot El (Alshich), Minchat Shai, Metzudat Zion, Chomat Anakh (Chida), Malbim, Malbim Beur Hamilot, Torah Temimah
 - **Implementation**: `src/agents/commentary_librarian.py`
 - **Key Features**:
   - Multiple commentary integration

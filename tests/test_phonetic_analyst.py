@@ -37,33 +37,33 @@ class TestStressFromAccents(PhoneticAnalystTestCase):
         # Ps 70:5. U+0598 on the yod is the tsinnorit, a helper tick that marks
         # nothing; the mahpakh on the sin is the accent. Unicode names U+0598
         # "ZARQA", and taking that at face value put the stress on the first
-        # syllable: **YA**-siy-su.
-        self.assertEqual(self.stressed('יָ֘שִׂ֤ישׂוּ'), 'yā-**SIY**-sū')
+        # syllable: YA-siy-su.
+        self.assertEqual(self.stressed('יָ֘שִׂ֤ישׂוּ'), 'yā-SIY-sū')
         self.assertEqual(self.source('יָ֘שִׂ֤ישׂוּ'), 'accent')
 
     def test_tsinnorit_with_a_zinor_partner_is_the_prose_zarqa(self):
         # Gen 2:23. Same codepoint, opposite job: with only a zinor beside it
         # (which is postpositive), U+0598 does carry the stress.
-        self.assertEqual(self.stressed('וַיֹּ֘אמֶר֮'), 'way-**YŌ'"'"'**-mer')
+        self.assertEqual(self.stressed('וַיֹּ֘אמֶר֮'), 'way-YŌ'"'"'-mer')
         self.assertEqual(self.source('וַיֹּ֘אמֶר֮'), 'tsinnorit')
 
     def test_meteg_does_not_steal_the_stress(self):
         # Gen 1:8. U+05BD here is a meteg on the first letter; the tifcha on the
         # qof is the accent. Rating U+05BD as a primary accent moved the stress
         # onto the meteg in 4,313 words of the Tanakh.
-        self.assertEqual(self.stressed('לָֽרָקִ֖יעַ'), 'lā-rā-**QIY**-aʿ')
+        self.assertEqual(self.stressed('לָֽרָקִ֖יעַ'), 'lā-rā-QIY-aʿ')
 
     def test_silluq_is_read_as_the_accent(self):
         # The same U+05BD IS the accent on the verse-final word, which is what
         # the sof pasuq identifies.
-        self.assertEqual(self.stressed('הָאָֽרֶץ׃'), 'hā-**\'Ā**-rets')
+        self.assertEqual(self.stressed('הָאָֽרֶץ׃'), 'hā-\'Ā-rets')
         self.assertEqual(self.source('הָאָֽרֶץ׃'), 'accent')
 
     def test_doubled_postpositive_stresses_the_inner_copy(self):
         # Pashta is written on the last letter and copied onto the stressed
         # syllable when the stress is not final; the old rule took the rightmost
         # mark and so always landed on the last letter.
-        self.assertEqual(self.stressed('הַמֶּ֙לֶךְ֙'), 'ham-**ME**-lekh')
+        self.assertEqual(self.stressed('הַמֶּ֙לֶךְ֙'), 'ham-ME-lekh')
         self.assertEqual(self.source('הַמֶּ֙לֶךְ֙'), 'doubled')
 
     def test_single_postpositive_means_final_stress(self):
@@ -72,7 +72,7 @@ class TestStressFromAccents(PhoneticAnalystTestCase):
         # (with it, this form is resolved by lookup to the same syllable).
         bare = PhoneticAnalyst(stress_lexicon={})
         result = bare._transcribe_word(nfd('וְיַחְפְּרוּ֮'))
-        self.assertEqual(result['syllable_transcription_stressed'], 'wə-yaḥ-pə-**RŪ**')
+        self.assertEqual(result['syllable_transcription_stressed'], 'wə-yaḥ-pə-RŪ')
         self.assertEqual(result['stress_source'], 'ultima-by-convention')
 
 
@@ -83,13 +83,13 @@ class TestStressLexicon(PhoneticAnalystTestCase):
         # Ps 70:4, the case that started this. Dehi sits on the yod whatever the
         # stress, so the analyst used to guess the ultima: ya-shu-VU. Ten other
         # occurrences of the form accent the shin.
-        self.assertEqual(self.stressed('יָ֭שׁוּבוּ'), 'yā-**SHŪ**-vū')
+        self.assertEqual(self.stressed('יָ֭שׁוּבוּ'), 'yā-SHŪ-vū')
         self.assertEqual(self.source('יָ֭שׁוּבוּ'), 'lexicon')
 
     def test_more_dehi_words(self):
-        self.assertEqual(self.stressed('לָ֭מָּה'), '**LĀM**-māh')
-        self.assertEqual(self.stressed('בֹּ֭קֶר'), '**BŌ**-qer')
-        self.assertEqual(self.stressed('תַּ֭חַת'), '**TA**-ḥath')
+        self.assertEqual(self.stressed('לָ֭מָּה'), 'LĀM-māh')
+        self.assertEqual(self.stressed('בֹּ֭קֶר'), 'BŌ-qer')
+        self.assertEqual(self.stressed('תַּ֭חַת'), 'TA-ḥath')
 
     def test_lexicon_never_overrides_a_real_accent(self):
         # A word whose accent settles the position must not be looked up.
@@ -108,8 +108,8 @@ class TestSyllabification(PhoneticAnalystTestCase):
 
     def test_hiriq_yod_is_one_long_vowel(self):
         # Was 'e-lo-hiy-M: the yod became a consonant and the mem a syllable.
-        self.assertEqual(self.stressed('אֱלֹהִ֑ים'), "'e-lō-**HIYM**")
-        self.assertEqual(self.stressed('תָ֭מִיד'), 'thā-**MIYDH**')
+        self.assertEqual(self.stressed('אֱלֹהִ֑ים'), "'e-lō-HIYM")
+        self.assertEqual(self.stressed('תָ֭מִיד'), 'thā-MIYDH')
         self.assertEqual(self.syllables('רַבִּים֮'), 'rab-biym')
 
     def test_tsere_and_segol_yod(self):
@@ -124,11 +124,11 @@ class TestSyllabification(PhoneticAnalystTestCase):
     def test_word_final_shewa_is_silent(self):
         # Was le-hith-hal-le-KHE, which both invented a syllable and moved the
         # stress off the last one.
-        self.assertEqual(self.stressed('לְ֭הִֽתְהַלֵּךְ'), 'lə-hith-hal-**LĒKH**')
+        self.assertEqual(self.stressed('לְ֭הִֽתְהַלֵּךְ'), 'lə-hith-hal-LĒKH')
 
     def test_second_of_two_shewas_is_vocal(self):
         # Was we-yis-MHU, with an unpronounceable onset cluster.
-        self.assertEqual(self.stressed('וְיִשְׂמְח֨וּ'), 'wə-yis-mə-**ḤŪ**')
+        self.assertEqual(self.stressed('וְיִשְׂמְח֨וּ'), 'wə-yis-mə-ḤŪ')
 
     def test_furtive_patah_precedes_its_consonant(self):
         self.assertEqual(self.syllables('רֽוּחַ'), 'rū-aḥ')
@@ -136,7 +136,7 @@ class TestSyllabification(PhoneticAnalystTestCase):
     def test_furtive_patah_is_never_stressed_by_the_default(self):
         bare = PhoneticAnalyst(stress_lexicon={})
         result = bare._transcribe_word(nfd('רוּחַ'))  # unaccented -> default applies
-        self.assertEqual(result['syllable_transcription_stressed'], '**RŪ**-aḥ')
+        self.assertEqual(result['syllable_transcription_stressed'], 'RŪ-aḥ')
 
 
 class TestGemination(PhoneticAnalystTestCase):
@@ -164,7 +164,7 @@ class TestGemination(PhoneticAnalystTestCase):
     def test_shewa_under_a_geminated_letter_is_vocal(self):
         # The dagesh-forte rule has to be tested before the short-vowel rule,
         # which would otherwise call this shewa silent: was tid-FEN-nu.
-        self.assertEqual(self.stressed('תִּדְּפֶ֥נּוּ'), 'tid-də-**FEN**-nū')
+        self.assertEqual(self.stressed('תִּדְּפֶ֥נּוּ'), 'tid-də-FEN-nū')
 
     def test_geminated_waw_is_not_a_shureq(self):
         # Vav + dagesh is a shureq only with no vowel of its own; with one it is
@@ -173,7 +173,7 @@ class TestGemination(PhoneticAnalystTestCase):
 
     def test_stress_on_a_geminated_letter_lands_on_the_second_copy(self):
         # The accent on the bet belongs to the syllable the second copy opens.
-        self.assertEqual(self.stressed('רַבִּ֥ים'), 'rab-**BIYM**')
+        self.assertEqual(self.stressed('רַבִּ֥ים'), 'rab-BIYM')
 
 
 class TestVerseLevel(PhoneticAnalystTestCase):
@@ -193,7 +193,7 @@ class TestVerseLevel(PhoneticAnalystTestCase):
 
     def test_maqqef_compound_is_one_accent_domain(self):
         result = self.analyst._transcribe_word(nfd('עַל־עֵ֣קֶב'))
-        self.assertEqual(result['syllable_transcription_stressed'], 'ʿal-**ʿĒ**-qev')
+        self.assertEqual(result['syllable_transcription_stressed'], 'ʿal-ʿĒ-qev')
 
     def test_full_verse_is_stable(self):
         # Ps 70:4 end to end.
@@ -202,8 +202,8 @@ class TestVerseLevel(PhoneticAnalystTestCase):
                        for w in self.analyst.transcribe_verse(verse)['words'])
         self.assertEqual(
             got,
-            "yā-**SHŪ**-vū ʿal-**ʿĒ**-qev bosh-**TĀM** hā-'ō-mə-**RIYM** "
-            "he-**'ĀḤ** he-**'ĀḤ**")
+            "yā-SHŪ-vū ʿal-ʿĒ-qev bosh-TĀM hā-'ō-mə-RIYM "
+            "he-'ĀḤ he-'ĀḤ")
 
 
 class TestAccentTables(PhoneticAnalystTestCase):

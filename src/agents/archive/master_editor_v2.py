@@ -24,6 +24,7 @@ Date: 2025-12-13 (V2 Restructure)
 
 import sys
 import os
+import re
 import json
 from datetime import datetime
 from pathlib import Path
@@ -2333,6 +2334,18 @@ class MasterEditorV2:
             
         return result
 
+    # Stress used to be marked **BOLD CAPS**. Session 370 freed bold for the writer's
+    # own sound arguments (a rhyme, a sibilant, a shared consonant) and left CAPS
+    # carrying the stress. phonetic_analyst.py emits CAPS-only from that point on —
+    # but transcriptions are BAKED into each psalm_*_micro_v2.json, so every psalm
+    # analysed before 2026-08-02 still holds the old markers, and any resume or re-run
+    # feeds them straight to the writer. That contradicts the writer's own RULE 2
+    # ("bold inside a transcription is YOURS"), and the observed result is the writer
+    # copying stress-bold verbatim and then making a rhyme argument the bolding does
+    # not support (Ps 71 v.13: yē-**VŌ**-shū for a claim about the -ū endings).
+    # Strip at the point of use so the age of the artifact cannot matter.
+    _STRESS_BOLD = re.compile(r'\*\*(.+?)\*\*')
+
     def _format_phonetic_section(self, micro_analysis: Dict) -> str:
         """Format phonetic transcription for inclusion in prompts."""
         lines = ["## PHONETIC TRANSCRIPTIONS\n"]
@@ -2351,11 +2364,22 @@ class MasterEditorV2:
         elif isinstance(micro_analysis, dict):
             verses = micro_analysis.get('verse_commentaries', [])
 
+        stripped = 0
         for vc in verses:
             phonetic = get_value(vc, 'phonetic_transcription')
             verse_num = get_value(vc, 'verse_number') or get_value(vc, 'verse')
             if phonetic:
-                lines.append(f"**Verse {verse_num}**: `{phonetic}`\n")
+                cleaned = self._STRESS_BOLD.sub(r'\1', phonetic)
+                if cleaned != phonetic:
+                    stripped += 1
+                lines.append(f"**Verse {verse_num}**: `{cleaned}`\n")
+
+        if stripped:
+            self.logger.info(
+                f"Stripped legacy stress-bold from {stripped} verse transcription(s) — "
+                f"this micro_v2.json predates the Session-370 CAPS-only change. "
+                f"Stress is carried by CAPS; bold stays free for the writer."
+            )
 
         return "\n".join(lines)
 

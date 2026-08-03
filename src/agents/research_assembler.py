@@ -9,7 +9,8 @@ Librarian Agents Coordinated:
 1. BDB Librarian - Hebrew lexicon entries
 2. Concordance Librarian - Word/phrase searches with variations
 3. Figurative Language Librarian - Figurative instances with hierarchical tags
-4. Commentary Librarian - Traditional Jewish commentaries (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri)
+4. Commentary Librarian - Traditional Jewish commentaries (11 sources: Rashi, Ibn Ezra, Radak,
+   Meiri, Alshich, Minchat Shai, Metzudat Zion, Chida, Malbim x2, Torah Temimah)
 5. Liturgical Librarian - Psalms→Liturgy cross-references from Sefaria (Phase 0 bootstrap)
 6. Sacks Librarian - Rabbi Jonathan Sacks' references to Psalms from his collected works
 7. Sacks Librarian - Rabbi Jonathan Sacks' references to Psalms from his collected works
@@ -559,9 +560,26 @@ class ResearchBundle:
         # Commentary section
         if self.commentary_bundles:
             md += "## Traditional Commentaries\n\n"
-            md += "Rashi (1040–1105), Ibn Ezra (c.1092–1167), Radak (1160–1235), "
-            md += "Meiri (1249–1316), Metzudat David (c.1687–1769), Malbim (1809–1879), "
-            md += "Torah Temimah (1860–1941).\n\n"
+            # One clause each on what the source IS. The writer has to decide what to
+            # quote (RULE 8b) and cannot do that for a work it cannot identify — five of
+            # these were added in Session 373 and none is a household name. Kept to a
+            # phrase apiece: Session ~265 deliberately replaced ~10.7K chars of
+            # biographical essay with a compact reference, and that decision stands.
+            md += "Rashi (1040–1105) — concise plain sense. "
+            md += "Ibn Ezra (c.1092–1167) — grammar and philosophy. "
+            md += "Radak (1160–1235) — expansive linguistic explanation. "
+            md += "Meiri (1249–1316) — philosophical and ethical. "
+            md += "Romemot El / Alshich (c.1508–1593) — homiletical; reads the psalm as a "
+            md += "sustained argument, and is present on nearly every verse. "
+            md += "Minchat Shai / Norzi (1560–1626) — Masoretic text criticism: spelling, "
+            md += "vocalization, accents, variant readings. "
+            md += "Metzudat Zion (c.1687–1769) — bare one-line glossary of hard words. "
+            md += "Chomat Anakh / Chida (1724–1806) — eclectic, kabbalistic-leaning; sparse, "
+            md += "and speaks only where he has something to say. "
+            md += "Malbim (1809–1879) — on the MATTER: structure, synonyms, argument. "
+            md += "Malbim Beur Hamilot (1809–1879) — the same author on the WORDS: short "
+            md += "lexical notes, often a single distinction. "
+            md += "Torah Temimah (1860–1941) — indexes the verse's rabbinic afterlife.\n\n"
 
             for bundle in self.commentary_bundles:
                 if bundle.commentaries:

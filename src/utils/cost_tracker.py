@@ -83,9 +83,14 @@ PRICING = {
         "cache_read": 0.50,
         "cache_write": 6.25,
     },
-    # Claude Opus 5 (Session 367) - same per-token price as Opus 4.8, but it
-    # generates ~2.2x the output tokens on our prompts (thinking is folded into
-    # output by Anthropic billing), so expect a HIGHER per-run cost, not parity.
+    # Claude Opus 5 - PRODUCTION WRITER since Session 373. Same per-token price as
+    # Opus 4.8 ($5/$25, verified 2026-08-03), so the cost difference is entirely
+    # output VOLUME: Anthropic folds thinking into billed output, and Opus 5 emits
+    # more of it. Measured writer-stage-only on Psalm 72, identical dossier:
+    #   Opus 4.8   200,441 in / 22,544 out  = $1.57
+    #   Opus 5     201,221 in / 38,556 out  = $1.97   (1.71x output tokens)
+    # => +$0.40 per psalm, ~7% of a full ~$5.85 run. Session 368 measured +$0.59 on
+    # Ps 71 under the OLD prompt (1.99x output), so the delta moves with the prompt.
     "claude-opus-5": {
         "input": 5.00,
         "output": 25.00,
@@ -117,13 +122,25 @@ PRICING = {
         "cache_read": 0.10,
         "cache_write": 1.25,
     },
-    # Claude Haiku 4.5 (for citation verifier false-positive filter)
+    # Claude Haiku 4.5 (for citation verifier false-positive filter).
+    # Session 373: CORRECTED from $0.80/$4.00 — that was 20% under the real rate and
+    # had been under-reporting every citation-verifier run. Checked against the live
+    # models overview on 2026-08-03: Haiku 4.5 is $1 / input MTok, $5 / output MTok.
+    # The alias and the dated ID are the same model; both are listed so a call made
+    # either way is priced.
     "claude-haiku-4-5-20251001": {
-        "input": 0.80,
-        "output": 4.00,
-        "thinking": 4.00,
-        "cache_read": 0.08,
-        "cache_write": 1.00,
+        "input": 1.00,
+        "output": 5.00,
+        "thinking": 5.00,
+        "cache_read": 0.10,   # 10% of input
+        "cache_write": 1.25,  # 25% markup on input (5-minute TTL)
+    },
+    "claude-haiku-4-5": {
+        "input": 1.00,
+        "output": 5.00,
+        "thinking": 5.00,
+        "cache_read": 0.10,
+        "cache_write": 1.25,
     },
     # GPT-5 (OpenAI)
     "gpt-5": {
@@ -150,13 +167,19 @@ PRICING = {
         "cache_write": 0.0,  # Not applicable
     },
     # GPT-5.6 Terra (OpenAI, GA 2026-07-09) - the mid "durable capability tier".
-    # Priced IDENTICALLY to gpt-5.4 ($2.50/$15), one generation newer, so the
-    # Session-367 swap is cost-neutral by construction.
+    # Session 373: CORRECTED from $2.50/$15.00. The old note claimed Terra was
+    # "priced IDENTICALLY to gpt-5.4, so the Session-367 swap is cost-neutral by
+    # construction" — that was true at GA and is no longer: checked against OpenAI's
+    # live pricing page on 2026-08-03, Terra is $2.00 / $12.00, i.e. 20% cheaper input
+    # and output than gpt-5.4. We had been OVER-reporting every Terra call by ~25%.
+    # Terra is our heaviest non-Anthropic spender (figurative curator + literary echoes
+    # passes 3-4 + insight/question curation), so this moved real numbers: on the Ps 72
+    # run it reported $1.3273 where the true cost was ~$1.06.
     "gpt-5.6-terra": {
-        "input": 2.50,
-        "output": 15.00,
-        "thinking": 15.00,  # Reasoning tokens charged at output rate
-        "cache_read": 0.25,  # 90% off cached input (not yet wired up)
+        "input": 2.00,
+        "output": 12.00,
+        "thinking": 12.00,  # Reasoning tokens charged at output rate
+        "cache_read": 0.20,  # 90% off cached input (not yet wired up)
         "cache_write": 0.0,  # Not applicable
     },
     # Gemini 2.5 Pro (Google)
@@ -167,7 +190,12 @@ PRICING = {
         "cache_read": 0.30,  # 10% of input (approximate)
         "cache_write": 3.75,  # 25% markup (approximate)
     },
-    # Gemini 3.1 Pro (Google)
+    # Gemini 3.1 Pro (Google). Verified against Google's live pricing page 2026-08-03.
+    # CAVEAT — Google tiers this model by PROMPT LENGTH and we only encode the cheap
+    # tier: $2.00/$12.00 for prompts <=200k tokens, $4.00/$18.00 above it. Our only
+    # caller is literary echoes passes 1-2 (~16k input tokens on Ps 72), so the low
+    # tier is correct today; a Gemini call that ever crossed 200k input would be
+    # under-reported by 2x on input and 1.5x on output.
     "gemini-3.1-pro-preview": {
         "input": 2.00,
         "output": 12.00,

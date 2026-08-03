@@ -96,15 +96,17 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         figurative_matches = re.findall(r'^\*\*[A-Za-z]+ \d+:\d+\*\*', markdown_content, re.MULTILINE)
         stats['figurative_count'] = len(figurative_matches)
 
-    # Count traditional commentaries
-    commentary_patterns = [
-        (r'### .*Rashi', 'Rashi'), (r'### .*Ibn Ezra', 'Ibn Ezra'), (r'### .*Radak', 'Radak'),
-        (r'### .*Metzudat David', 'Metzudat David'), (r'### .*Malbim', 'Malbim'),
-        (r'### .*Sforno', 'Sforno'), (r'### .*Meiri', 'Meiri'),
-        (r'### .*Torah Temimah', 'Torah Temimah'),
-    ]
-    for pattern, name in commentary_patterns:
-        matches = re.findall(pattern, markdown_content)
+    # Count traditional commentaries.
+    #
+    # Patterns are DERIVED from the librarian's own commentator list so this can never
+    # drift out of sync again, and each is ANCHORED to the end of the dossier's header
+    # line (`### 71:5 — Malbim`). Both matter as of Session 373: the old hand-maintained
+    # list still carried `Sforno`, which is never fetched, and its unanchored
+    # `### .*Malbim` now also matches `### 71:5 — Malbim Beur Hamilot`, double-counting
+    # every Malbim entry and silently inflating the bibliography in the finished DOCX.
+    from src.agents.commentary_librarian import COMMENTATORS
+    for name in COMMENTATORS:
+        matches = re.findall(rf'^### .*— {re.escape(name)}\s*$', markdown_content, re.MULTILINE)
         if matches:
             stats['commentary_counts'][name] = len(matches)
 
@@ -304,7 +306,8 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "claude-opus-4-8",
+    master_editor_model: str = "claude-opus-5",
+    synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 4.8)
     skip_insights: bool = True,      # Session 280: skipped by default, use --include-insights
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
     exclude_insights: bool = False,
@@ -317,7 +320,7 @@ def run_enhanced_pipeline(
     copy_model: str = "gpt-5.6-terra",
     synthesis_discovery: bool = True,
     reuse_synthesis_discovery: bool = False,  # Session 358: reuse an existing observations file instead of regenerating (~$2 saved)
-    skip_beta_reader: bool = False,  # Session 362: beta reader runs by default (~$0.08, measurement only)
+    skip_beta_reader: bool = True,   # Session 372: OFF by default — see --beta-reader below
     beta_model: str = None,          # Session 362: default lives in BetaReader.DEFAULT_MODEL
 ):
     logger = get_logger("enhanced_pipeline_test")
@@ -755,7 +758,14 @@ def run_enhanced_pipeline(
             print(f"\n{'='*80}")
             print(f"STEP 3.5: Cross-Verse Synthesis Discovery (Session 347)")
             print(f"{'='*80}\n")
-            sd_model = master_editor_model if "claude" in master_editor_model.lower() else "claude-opus-4-8"
+            # SYNTHESIS DISCOVERY IS PINNED TO ITS OWN DEFAULT (Opus 4.8) and no longer
+            # follows the writer. This line used to read `master_editor_model if "claude"
+            # in ...`, so flipping the writer to Opus 5 in Session 373 would have silently
+            # dragged the discovery sidecar along with it. Author's call: only the WRITER
+            # was designed and A/B'd on Opus 5; discovery stays on 4.8 for cost. Override
+            # with --synthesis-discovery-model if that is ever worth testing.
+            from src.agents.synthesis_discovery import DEFAULT_MODEL as SD_DEFAULT_MODEL
+            sd_model = synthesis_discovery_model or SD_DEFAULT_MODEL
             sd_cost_before = cost_tracker.get_total_cost()
             try:
                 synthesis_discovery_file = master_editor.discover_cross_verse_observations(
@@ -1141,9 +1151,18 @@ if __name__ == "__main__":
     parser.add_argument("--skip-combined-doc", action="store_true", help=argparse.SUPPRESS)  # Deprecated V4: no combined doc
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
-    parser.add_argument("--master-editor-model", type=str, default="claude-opus-4-8",
+    # Session 373: PRODUCTION WRITER IS OPUS 5. Every prompt change from Session 370
+    # onward (RULE 8b, RULE 3b-2, arm B's exemplars, arm E's translation slot, RULE 5)
+    # was designed and A/B'd on Opus 5 via ab_writer_prompts.py, whose DEFAULT_MODEL is
+    # claude-opus-5 — while this default silently stayed on 4.8 for six sessions. Ps 72
+    # shipped arm E's prompt on the model it was not written for. Do not "restore" 4.8.
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-5",
                        choices=["claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: claude-opus-4-8)")
+                       help="Model for Master Writer (default: claude-opus-5)")
+    parser.add_argument("--synthesis-discovery-model", type=str, default=None,
+                       help="Model for the cross-verse synthesis sidecar "
+                            "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-4-8). "
+                            "Deliberately independent of --master-editor-model.")
     # Session 280: questions and insights are SKIPPED by default.
     # --include-* flags opt back in; --skip-* flags remain for backward compat.
     parser.add_argument("--skip-insights", action="store_true",
@@ -1185,10 +1204,15 @@ if __name__ == "__main__":
                        help="Reuse an existing psalm_NNN_synthesis_discovery.md in the output dir "
                             "instead of regenerating it (~$2 saved). The writer still receives the "
                             "observations. Ignored if the file is missing (fresh generation runs).")
+    parser.add_argument("--beta-reader", action="store_true",
+                       help="Run the beta-reader step (~$0.08). OFF BY DEFAULT since Session 372: "
+                            "measured against a FIXED text its scores move by up to 3 points and its "
+                            "UNEXPLAINED GRAMMAR counter by up to 6, so a single read carries little "
+                            "information and repeated reads cost more than they are worth. Kept "
+                            "available for deliberate one-off reads. Output: psalm_NNN_beta_read.md")
     parser.add_argument("--skip-beta-reader", action="store_true",
-                       help="Skip the beta-reader step (Session 362). Runs by default after the "
-                            "copy editor (~$0.08): a simulated target-audience read of the finished "
-                            "guide, measurement only — no edits. Output: psalm_NNN_beta_read.md")
+                       help="Deprecated no-op — the beta reader is already off by default "
+                            "(Session 372). Accepted so existing invocations keep working.")
     parser.add_argument("--beta-model", type=str, default=None,
                        help="Override the beta-reader model (default: claude-sonnet-4-6)")
 
@@ -1216,7 +1240,7 @@ if __name__ == "__main__":
     print(f"Master Writer Model: {args.master_editor_model}")
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
     print(f"Synthesis Discovery: {'SKIP' if args.skip_synthesis_discovery else 'ON'}")
-    print(f"Beta Reader: {'SKIP' if args.skip_beta_reader else 'ON'}")
+    print(f"Beta Reader: {'ON' if args.beta_reader else 'OFF (default since S372)'}")
     print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
     print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
     
@@ -1261,6 +1285,7 @@ if __name__ == "__main__":
         smoke_test=args.smoke_test,
         skip_default_commentaries=args.skip_default_commentaries,
         master_editor_model=args.master_editor_model,
+        synthesis_discovery_model=args.synthesis_discovery_model,
         skip_insights=effective_skip_insights,
         skip_questions=effective_skip_questions,
         exclude_insights=args.exclude_insights,
@@ -1273,6 +1298,6 @@ if __name__ == "__main__":
         copy_model=copy_mdl,
         synthesis_discovery=not args.skip_synthesis_discovery,
         reuse_synthesis_discovery=args.reuse_synthesis_discovery,
-        skip_beta_reader=args.skip_beta_reader,
+        skip_beta_reader=not args.beta_reader,
         beta_model=args.beta_model,
     )

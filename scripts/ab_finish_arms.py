@@ -46,11 +46,15 @@ from src.utils.logger import get_logger
 # Reuse the pipeline's own extractor so 5c behaves identically here.
 from scripts.run_enhanced_pipeline import _extract_sections_from_copy_edited
 
-# Human-readable labels for the printed .docx, so the two are distinguishable
-# on paper without opening properties.
+# Human-readable labels for the printed .docx, so the arms are distinguishable
+# on paper without opening properties. Session 371 added prompt-variant arms, whose
+# directory name is an arm id rather than a model — hence --writer-model below.
+from scripts.writer_prompt_variants import LABELS as PROMPT_ARM_LABELS
+
 ARM_LABELS = {
     "claude-opus-4-8": "Opus 4.8",
     "claude-opus-5": "Opus 5",
+    **PROMPT_ARM_LABELS,
 }
 
 
@@ -142,9 +146,14 @@ def _arm_stats_file(pn: int, model: str, arm_dir: Path, stats_file: Path,
 
 def finish_arm(pn: int, model: str, ab_dir: Path, stats_file: Path,
                db_path: str, skip_verify: bool, logger,
-               copy_editor_model: str = None) -> dict:
+               copy_editor_model: str = None, writer_model: str = None) -> dict:
+    """`model` names the arm DIRECTORY. For model A/B arms that is also the writer
+    model; for Session-371 prompt-variant arms it is an arm id, and the real writer
+    model must be passed as `writer_model` or the methodology block will credit the
+    commentary to "A_no_scaffolding"."""
     arm_dir = ab_dir / model
     label = ARM_LABELS.get(model, model)
+    writer_model = writer_model or model
     print(f"\n{'='*70}\nFinishing arm: {model}  ({label})\n{'='*70}")
 
     intro = arm_dir / f"psalm_{pn:03d}_edited_intro.md"
@@ -162,7 +171,7 @@ def finish_arm(pn: int, model: str, ab_dir: Path, stats_file: Path,
     # credit its commentary to whichever model happened to run in production
     # (Session 368: both Ps 70 and Ps 71 Opus-5 documents said
     # "Master Writer: claude-opus-4-8"). Patch a per-arm copy instead.
-    arm_stats = _arm_stats_file(pn, model, arm_dir, stats_file, copy_editor_model, logger)
+    arm_stats = _arm_stats_file(pn, writer_model, arm_dir, stats_file, copy_editor_model, logger)
     print_ready = run_print_ready(pn, arm_dir, arm_stats, db_path, logger)
 
     # STEP 5a½
@@ -237,6 +246,13 @@ def main() -> int:
     ap.add_argument("--skip-verify", action="store_true",
                     help="Skip STEP 5a½ scripture citation verification")
     ap.add_argument("--db-path", default="database/tanakh.db")
+    ap.add_argument("--ab-dir", default="_writer_ab",
+                    help="Subdirectory of output/psalm_<N>/ holding the arms "
+                         "(default: _writer_ab; Session-371 prompt arms live in _prompt_ab)")
+    ap.add_argument("--writer-model", default=None,
+                    help="Writer model to record in the methodology block. Required "
+                         "for prompt-variant arms, whose directory name is an arm id "
+                         "and not a model. Default: the arm directory name.")
     ap.add_argument("--copy-editor-model", default=None,
                     help="Override the copy editor model for both arms "
                          "(e.g. gpt-5.4). Default: CopyEditor.DEFAULT_MODEL.")
@@ -246,7 +262,7 @@ def main() -> int:
     pn = args.psalm
 
     logger = get_logger("ab_finish_arms")
-    ab_dir = ROOT / "output" / f"psalm_{pn}" / "_writer_ab"
+    ab_dir = ROOT / "output" / f"psalm_{pn}" / args.ab_dir
     if not ab_dir.exists():
         print(f"ERROR: no A/B output at {ab_dir.relative_to(ROOT)}. "
               f"Run: python scripts/ab_writer_models.py {pn}", file=sys.stderr)
@@ -267,7 +283,8 @@ def main() -> int:
         try:
             results.append(finish_arm(pn, model, ab_dir, stats_file, args.db_path,
                                       args.skip_verify, logger,
-                                      copy_editor_model=args.copy_editor_model))
+                                      copy_editor_model=args.copy_editor_model,
+                                      writer_model=args.writer_model))
         except Exception as e:
             # One arm failing must not cost you the other arm's finished document.
             logger.error(f"arm {model} failed: {e}", exc_info=True)

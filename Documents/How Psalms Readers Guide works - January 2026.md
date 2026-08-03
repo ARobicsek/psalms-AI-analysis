@@ -50,7 +50,7 @@ Ten specialized Python-based "librarians" retrieve and curate source material:
 
 4. **Figurative Curator** (NEW): An LLM-enhanced agent (Gemini 3 Pro) that transforms raw figurative concordance results into curated scholarly insights. Using a 3-iteration refinement process, it curates 5-15 examples per vehicle with full Hebrew text and synthesizes 4-5 prose insights (100-150 words each) connecting the examples to the psalm's themes.
 
-5. **Commentary Librarian**: Fetches traditional Jewish commentaries—Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, and Torah Temimah
+5. **Commentary Librarian**: Fetches eleven traditional Jewish commentaries—Rashi, Ibn Ezra, Radak, Meiri, Romemot El (Alshich), Minchat Shai, Metzudat Zion, Chomat Anakh (the Chida), Malbim, Malbim Beur Hamilot, and Torah Temimah
 
 6. **Liturgical Librarian**: Identifies where psalm passages appear in Jewish liturgy across three traditions (Ashkenaz, Sefard, Edot HaMizrach), generating intelligent summaries using Gemini 2.5 Pro
 
@@ -113,9 +113,13 @@ Python scripts format the commentary for publication:
 - **Rashi** (11th century France) — concise, focused on plain meaning
 - **Ibn Ezra** (12th century Spain) — grammatical precision, philosophical depth
 - **Radak** (13th century Provence) — expanded explanations, linguistic analysis
-- **Metzudat David** (18th century) — accessible verse-by-verse commentary
-- **Malbim** (19th century) — systematic analysis of synonyms and structure
 - **Meiri** (13th century Provence) — philosophical and ethical interpretation
+- **Romemot El / Alshich** (16th century Safed) — homiletical; reads each psalm as a sustained argument
+- **Minchat Shai / Norzi** (16th–17th century Mantua) — Masoretic text criticism: spelling, vocalization, accents, variant readings
+- **Metzudat Zion** (18th century) — one-line glossary of difficult words
+- **Chomat Anakh / the Chida** (18th century Jerusalem–Livorno) — eclectic, kabbalistic-leaning; sparse and selective
+- **Malbim** (19th century) — systematic analysis of synonyms and structure
+- **Malbim, Beur Hamilot** (19th century) — the same author on the words themselves: short lexical distinctions
 - **Torah Temimah** (19th century) — connects verses to rabbinic literature
 
 ### Modern Scholarship

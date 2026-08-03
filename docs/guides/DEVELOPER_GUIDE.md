@@ -802,7 +802,7 @@ with MacroAnalyst() as analyst:
 
 - **Sefaria API**: https://www.sefaria.org/developers
   - Hebrew lexicons (BDB, Klein)
-  - Traditional commentaries (Rashi, Ibn Ezra, Radak, Metzudat David, Malbim, Meiri, Torah Temimah)
+  - Traditional commentaries, 11 sources (Rashi, Ibn Ezra, Radak, Meiri, Romemot El/Alshich, Minchat Shai, Metzudat Zion, Chomat Anakh/Chida, Malbim, Malbim Beur Hamilot, Torah Temimah)
   - Text retrieval (Tanakh, LXX)
 
 - **Anthropic Claude**: https://www.anthropic.com/api

@@ -32,6 +32,19 @@ else:
     from .divine_names_modifier import DivineNamesModifier
 
 
+def _commentator_label(name: str) -> str:
+    """Bibliography label for a commentator, e.g. "Chomat Anakh" -> "Chomat Anakh (Chida)".
+
+    Imported lazily and defensively: the methodological summary must never be the
+    reason a document fails to build, so an import problem degrades to the raw key
+    rather than raising.
+    """
+    try:
+        from src.agents.commentary_librarian import display_name
+        return display_name(name)
+    except Exception:
+        return name
+
 class CommentaryFormatter:
     """Assembles and formats the final print-ready commentary."""
 
@@ -173,7 +186,7 @@ class CommentaryFormatter:
         commentaries = research_data.get('commentary_counts', {})
         total_commentaries = sum(commentaries.values()) if commentaries else 'N/A'
         if commentaries:
-            commentary_lines = [f"{c} ({n})" for c, n in sorted(commentaries.items())]
+            commentary_lines = [f"{_commentator_label(c)} ({n})" for c, n in sorted(commentaries.items())]
             lines.append(f"- **Traditional Commentaries Reviewed**: {total_commentaries} ({'; '.join(commentary_lines)})")
         elif total_commentaries != 'N/A':
             lines.append(f"- **Traditional Commentaries Reviewed**: {total_commentaries}")

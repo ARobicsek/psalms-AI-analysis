@@ -31,6 +31,20 @@ else:
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
 
 
+
+def _commentator_label(name: str) -> str:
+    """Bibliography label for a commentator, e.g. "Chomat Anakh" -> "Chomat Anakh (Chida)".
+
+    Imported lazily and defensively: the methodological summary must never be the
+    reason a document fails to build, so an import problem degrades to the raw key
+    rather than raising.
+    """
+    try:
+        from src.agents.commentary_librarian import display_name
+        return display_name(name)
+    except Exception:
+        return name
+
 def add_page_number(paragraph):
     """
     Adds a page number field to the given paragraph.
@@ -348,6 +362,64 @@ class DocumentGenerator:
                     for paragraph in cell.paragraphs:
                         process(paragraph)
 
+    def _mirror_bold_to_complex_script(self):
+        """Post-pass: mirror w:b onto w:bCs for every complex-script (Hebrew) run.
+
+        Word applies w:b to LATIN text only. For a run marked w:rtl — which is every
+        Hebrew run this generator emits — bold comes from the *complex script* property
+        w:bCs. python-docx's `run.bold = True` writes only w:b, so RULE 3b-2's whole
+        technique 1 ("bold the exact letters inside the Hebrew") was invisible in Word:
+        the DOCX carried the bold and Word ignored it. Psalm 71 arm E shipped with nine
+        correctly-split, correctly-bolded letters (מִ | יַּ | ד) and not one of them
+        rendered. Same failure mode as w:sz vs w:szCs, which _set_style_complex_size
+        already handles.
+
+        Done as a post-pass rather than inside _mark_run_hebrew because several code
+        paths set run.bold AFTER marking the run Hebrew, and a post-pass cannot be
+        defeated by ordering.
+
+        BOLD ONLY — italic is deliberately NOT mirrored. Hebrew has no italic form, so
+        w:iCs makes Word synthesise an oblique. Quote-block runs are set italic wholesale
+        (_apply_quote_format), and mirroring would slant the Hebrew inside a quoted piyyut
+        for the first time — a visual change nobody asked for. Leaving w:iCs unset keeps
+        Hebrew upright, exactly as every guide to date has rendered it.
+
+        w:val is copied too, so an explicit `<w:b w:val="0"/>` turns bold OFF for the
+        complex script as well rather than leaving it inherited from the style.
+        """
+        # w:rtl covers the inline path; the character test covers _add_hebrew_block_paragraph,
+        # whose runs get their direction from the paragraph's w:bidi and carry no w:rtl.
+        complex_chars = re.compile(r'[֐-׿؀-ۿݐ-ݿיִ-﷿ﹰ-﻿]')
+
+        def process(paragraph):
+            for run in paragraph.runs:
+                rPr = run._element.find(ns.qn('w:rPr'))
+                if rPr is None:
+                    continue
+                if rPr.find(ns.qn('w:rtl')) is None and not complex_chars.search(run.text):
+                    continue
+                for latin, complex_script in (('w:b', 'w:bCs'),):
+                    src = rPr.find(ns.qn(latin))
+                    if src is None:
+                        continue
+                    dst = rPr.find(ns.qn(complex_script))
+                    if dst is None:
+                        dst = OxmlElement(complex_script)
+                        rPr.append(dst)
+                    val = src.get(ns.qn('w:val'))
+                    if val is None:
+                        dst.attrib.pop(ns.qn('w:val'), None)
+                    else:
+                        dst.set(ns.qn('w:val'), val)
+
+        for paragraph in self.document.paragraphs:
+            process(paragraph)
+        for table in self.document.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    for paragraph in cell.paragraphs:
+                        process(paragraph)
+
     def _fix_complex_script_fonts(self):
         """Post-processing pass: fix fonts for Arabic/Persian/Urdu text in all runs.
 
@@ -579,7 +651,25 @@ class DocumentGenerator:
             return None
 
         before = text[:match.start()].rstrip()
-        after = text[match.end():].lstrip()
+        end = match.end()
+
+        # A geresh/gershayim written as a bare ASCII ' or " belongs to the Hebrew word it
+        # is glued to — מה' (= "from God"), ג"כ — but heb_word only spans U+0590-U+05FF,
+        # so a TRAILING one falls outside the match and gets pushed into the English
+        # continuation, which then opens with a stray mark: `', "so Your righteousness…`
+        # (Psalm 71 v.19). Pull it back into the Hebrew block where it belongs.
+        #
+        # Guard: if the span is WRAPPED in quotes, that trailing mark is the closing
+        # half, and absorbing it would leave the block ending in an unmatched quote.
+        # Only an unwrapped span can have an abbreviation mark on its tail.
+        QUOTES = '\'"‘’“”׳״'
+        wrapped = match.start() > 0 and text[match.start() - 1] in QUOTES
+        if not wrapped:
+            while end < len(text) and text[end] in QUOTES:
+                end += 1
+        hebrew = text[match.start():end].strip()
+
+        after = text[end:].lstrip()
         # Strip orphaned leading comma/punctuation from the continuation text
         # (the Hebrew was inline, so the original often had ", translation...")
         after = re.sub(r'^[,;:]\s*', '', after)
@@ -629,6 +719,49 @@ class DocumentGenerator:
             self._set_run_font_xml(run, font_name=font_name, font_size=13)
             if i % 2 == 1:  # Odd indices are the bold-captured groups
                 run.bold = True
+
+    @staticmethod
+    def _collect_quote_block(lines, i):
+        """
+        Collect one block quote starting at lines[i], returning (quote_lines, next_i).
+
+        Markdown here usually separates the lines of a quoted poem with BLANK lines
+        ("> line\\n\\n> line"). Treating each as its own block would give every line
+        a trailing space_after and reintroduce the double-spaced look, so a blank
+        line is absorbed when the next non-blank line is still part of the quote.
+        Empty quote lines are dropped; spacing is handled by _apply_quote_format.
+        """
+        quote_lines = []
+        while i < len(lines):
+            stripped = lines[i].strip()
+            if stripped.startswith('>'):
+                text = stripped[1:].lstrip()
+                if text:
+                    quote_lines.append(text)
+                i += 1
+            elif not stripped and i + 1 < len(lines) and lines[i + 1].strip().startswith('>'):
+                i += 1  # blank line *inside* the quote block
+            else:
+                break
+        return quote_lines, i
+
+    def _apply_quote_format(self, paragraph, last_in_block: bool = False):
+        """
+        Format a block-quote paragraph: keep the indent and offset, tighten the leading.
+
+        Each line of a quoted poem is its own paragraph, so the Normal style's
+        8pt space_after opens a gap between EVERY line of the poem — verse ends up
+        looking double-spaced. Quoted lines get single line spacing and no inter-line
+        space; only the final line of a block keeps space_after so the quote still
+        separates from the prose that follows.
+        """
+        from docx.shared import Inches, Pt
+
+        pf = paragraph.paragraph_format
+        pf.left_indent = Inches(0.5)
+        pf.line_spacing = 1.0
+        pf.space_before = Pt(0)
+        pf.space_after = Pt(8) if last_in_block else Pt(0)
 
     def _add_paragraph_with_markdown(self, text: str, style: str = 'Normal'):
         """Adds a paragraph, parsing basic markdown for bold/italics, including nested formatting."""
@@ -706,8 +839,8 @@ class DocumentGenerator:
 
         # Apply quote formatting if this is a block quote
         if is_quote:
-            from docx.shared import Inches
-            p.paragraph_format.left_indent = Inches(0.5)
+            # Single-line path: no block context, so keep the trailing gap.
+            self._apply_quote_format(p, last_in_block=True)
 
         # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
         self._set_paragraph_ltr(p)
@@ -759,18 +892,12 @@ class DocumentGenerator:
 
             # Handle blockquotes - collect consecutive blockquote lines
             if line.startswith('>'):
-                quote_block = []
-                while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('>'):
-                    quote_text = lines[i].strip()[1:].lstrip()  # Remove ">" and leading spaces
-                    if quote_text:  # Only add non-empty quote lines
-                        quote_block.append(quote_text)
-                    i += 1
+                quote_block, i = self._collect_quote_block(lines, i)
 
                 # Add quote block as indented italic paragraphs
-                from docx.shared import Inches
-                for quote_text in quote_block:
+                for qi, quote_text in enumerate(quote_block):
                     p = self.document.add_paragraph(style=style)
-                    p.paragraph_format.left_indent = Inches(0.5)
+                    self._apply_quote_format(p, last_in_block=(qi == len(quote_block) - 1))
                     self._set_paragraph_ltr(p)
                     self._process_markdown_formatting(p, quote_text, set_font=True)
                     # Make the entire quote italic
@@ -906,23 +1033,17 @@ class DocumentGenerator:
             # Check if this is a block quote
             elif line_stripped.startswith('>'):
                 # Collect consecutive block quote lines
-                quote_block = []
-                while i < len(lines) and lines[i].strip() and lines[i].strip().startswith('>'):
-                    # Remove ">" and any leading spaces after it
-                    quote_text = lines[i].strip()[1:].lstrip()
-                    quote_block.append(quote_text)
-                    i += 1
+                quote_block, i = self._collect_quote_block(lines, i)
 
                 # Add each quote line as a separate paragraph with indentation and italic
-                from docx.shared import Inches
-                for quote_text in quote_block:
+                for qi, quote_text in enumerate(quote_block):
                     if not quote_text:
                         # Empty quote line - add a blank paragraph
                         self.document.add_paragraph()
                     else:
                         # Non-empty quote line
                         p = self.document.add_paragraph(style=style)
-                        p.paragraph_format.left_indent = Inches(0.5)
+                        self._apply_quote_format(p, last_in_block=(qi == len(quote_block) - 1))
                         # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
                         self._set_paragraph_ltr(p)
                         # Process markdown formatting in quote text with explicit font
@@ -1121,15 +1242,27 @@ class DocumentGenerator:
         self._set_paragraph_ltr(p)
 
         # Split the entire text by markdown markers first
-        parts = re.split(r'(\$\$|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
+        # The bold alternative must come FIRST and must be the full `**...**` span.
+        # This slot previously held a literal `\$\$`, which appears in no output, so
+        # `**bold**` fell through to the single-asterisk italic alternative: that matched
+        # the bare `**` as an empty italic, split the text at the right places, and set no
+        # bold anywhere. Bold was therefore silently dead in all verse-commentary prose
+        # (English as well as Hebrew), while _process_markdown_formatting — which has the
+        # correct pattern — kept working in the introduction.
+        parts = re.split(r'(\*\*.*?\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
 
         for part in parts:
             is_bold = (part.startswith('**') and part.endswith('**')) or \
                       (part.startswith('__') and part.endswith('__'))
             is_backtick = part.startswith('`') and part.endswith('`')
-            is_italic = (part.startswith('*') and part.endswith('*')) or \
-                        (part.startswith('_') and part.endswith('_')) or \
-                        is_backtick
+            # `**bold**` also starts and ends with a single '*', so the italic test must
+            # exclude anything already recognised as bold — otherwise bold spans come out
+            # bold AND italic. Latent until the split pattern above began capturing bold.
+            is_italic = (not is_bold) and (
+                (part.startswith('*') and part.endswith('*')) or
+                (part.startswith('_') and part.endswith('_')) or
+                is_backtick
+            )
 
             content = part[2:-2] if is_bold else (part[1:-1] if is_italic else part)
 
@@ -1155,15 +1288,20 @@ class DocumentGenerator:
             text: The text content (e.g., "tə-**HIL**-lāh")
             base_italic: Whether the base text should be italic (True for backtick context)
         """
-        # Split by bold markers
-        parts = re.split(r'(\$\$|\*\*)', text)
+        # Capture the WHOLE `**...**` span. Splitting on a bare `**` delimiter instead
+        # made every captured part the two asterisks themselves — and `'**'` satisfies
+        # startswith('**') and endswith('**'), so the bold landed on part[2:-2] == ''
+        # while the stressed syllable fell through to the plain branch. Stressed
+        # syllables therefore rendered unbolded (e.g. Psalm 41 shipped with 12 empty
+        # bold runs and no bolded stress marks).
+        parts = re.split(r'(\*\*.*?\*\*)', text)
         for part in parts:
-            if part.startswith('**') and part.endswith('**'):
+            if len(part) > 4 and part.startswith('**') and part.endswith('**'):
                 # Bold text (stressed syllable)
                 run = paragraph.add_run(part[2:-2])
                 run.bold = True
                 run.italic = base_italic  # Maintain italic if in backtick context
-            else:
+            elif part:
                 # Regular text
                 run = paragraph.add_run(part)
                 run.italic = base_italic
@@ -1182,14 +1320,15 @@ class DocumentGenerator:
         lines = text.split('\n')
         for i, line in enumerate(lines):
             if line:
-                # Then handle bold within each line
-                parts = re.split(r'(\$\$|\*\*)', line)
+                # Then handle bold within each line — full-span capture, see
+                # _add_nested_formatting for why a bare `**` delimiter loses the bold.
+                parts = re.split(r'(\*\*.*?\*\*)', line)
                 for part in parts:
-                    if part.startswith('**') and part.endswith('**'):
+                    if len(part) > 4 and part.startswith('**') and part.endswith('**'):
                         run = paragraph.add_run(part[2:-2])
                         run.bold = True
                         run.italic = base_italic
-                    else:
+                    elif part:
                         run = paragraph.add_run(part)
                         run.italic = base_italic
             if i < len(lines) - 1:
@@ -1360,7 +1499,9 @@ class DocumentGenerator:
         total_commentaries = sum(commentaries.values()) if commentaries else 'N/A'
         commentary_details = ""
         if commentaries:
-            commentary_lines = [f"{c} ({n})" for c, n in sorted(commentaries.items())]
+            # display_name() so the bibliography names the AUTHOR where the work's title
+            # is not his name — "Chomat Anakh (Chida)", not a bare "Chomat Anakh".
+            commentary_lines = [f"{_commentator_label(c)} ({n})" for c, n in sorted(commentaries.items())]
             commentary_details = f" ({'; '.join(commentary_lines)})"
 
         concordance_results = research_data.get('concordance_results', {}) or {}
@@ -1683,6 +1824,7 @@ Methodological & Bibliographical Summary
 
         # 6. Fix complex-script fonts (Arabic/Persian) and Save Document
         self._join_rtl_runs_across_whitespace()
+        self._mirror_bold_to_complex_script()
         self._fix_complex_script_fonts()
         self.document.save(self.output_path)
         print(f"Successfully generated Word document: {self.output_path}")

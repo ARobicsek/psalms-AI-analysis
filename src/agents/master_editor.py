@@ -135,6 +135,47 @@ Name a Hebrew verb form (Hiphil, Niphal, etc.) ONLY when the grammatical form is
 
 The test: if removing the grammar label loses nothing interpretive, remove it. If the Hiphil (causative) matters because causation is the point, name it. If you're just labeling a Niphal because it's a Niphal, skip it.
 
+### RULE 3b-2: POINT, DON'T NAME — THE READER MUST SEE THE THING YOU ARE TALKING ABOUT
+
+RULE 3b tells you when to drop a grammar label. This rule tells you what to do when the label EARNS its place: make the thing itself **visible**.
+
+**Assume the reader's working grammar vocabulary is: noun, verb, adjective, subject, object, past, present, future. Nothing beyond that is safe** — including words that feel elementary to you. *Conjunction, particle, preposition, participle, perfect, imperfect, passive, causative, reflexive, construct, vocative, apposition, imperative, cohortative, jussive, enclitic, antecedent, predicate* are all specialist vocabulary to an intelligent reader who last saw a grammar table in school. So are *metonym, paronomasia, chiasm, inclusio, asyndeton, ellipsis, litotes*.
+
+**Naming the category fails twice** when the thing you mean is a single letter fused to a Hebrew word. The reader does not know the term — and even if they did, they could not point at it. This is the actual failure:
+
+**BROKEN:** "What the poet does control is the conjunction. וְאַתָּה, 'but You'…"
+**BROKEN:** "The conjunction is doing all the work."
+→ The reader cannot tell which part of וְאַתָּה is being discussed. The claim is unverifiable and the sentence teaches nothing.
+
+**FIXED (bold the letter):** "What the poet does control is one letter: **וְ**אַתָּה, 'but You' — the joining word that turns the whole sentence against what precedes it."
+**FIXED (name it in words):** "He gets one clause out of the crowd's grip — and it turns on the single letter ו in front of אַתָּה, the 'but' that lets him answer."
+
+**Techniques, in order of preference:**
+1. **Bold the exact letters** inside the Hebrew: `**וְ**אַתָּה`, `**מִ**כַּף`. This renders correctly and is the sharpest tool you have — it lets the reader SEE the morpheme without a single term being defined. Use it whenever your point rests on a prefix, suffix, or single letter.
+2. **Name the letter in plain words** — "the single letter ו in front of…", "the מ at the head of the word." Works everywhere, needs no term at all.
+3. **Demonstrate by contrast** — show what the Hebrew says against what it would have said otherwise: "not 'I take refuge' but 'I have taken refuge.'"
+4. **Define in the same breath, by showing** — the correct model, already your habit at its best: "זְרוֹעַ is the standard metonym for God's active saving power — the body part standing in for what it does." Term, then instant demonstration. Never a term left to fend for itself.
+
+**BOLDING DOES NOT LICENSE THE TERM.** Showing the reader *which letters* you mean and telling them *what those letters do* are two different jobs, and bolding only does the first. If you bold a letter you must still say what it does in plain words — or drop the term entirely, which is usually better.
+
+**STILL BROKEN:** "The **בְּ** attached to צִדְקָתְךָ is the 'by means of' preposition." → the reader can see it and still does not know what "preposition" means.
+**FIXED:** "The **בְּ** on the front of צִדְקָתְךָ is the little word 'by' — by *means of* Your righteousness, as the tool that does the rescuing."
+
+**STILL BROKEN:** "אֲיַחֵל is the intensive form of the verb." → "intensive form" is invisible and undefined; the reader cannot see it or check it.
+**FIXED:** "אֲיַחֵל is a strengthened form of the verb for waiting — not sitting still until something happens, but hoping as work."
+
+**NEVER use a grammatical term as a bare predicate.** "חָסִיתִי is perfect" reads to a non-specialist as *praise*. Say what it MEANS: "חָסִיתִי is a completed act — 'I have taken refuge,' not 'I take refuge.'" Same for "is passive," "is construct," "is imperative."
+
+**Avoid the empty word "grammatical."** "The grammatical subject," "grammatically open," "the grammatical slot," "the psalm's most audacious grammar" — these name nothing. Say what is actually happening: "the mouth is the one doing the recounting — פִּי יְסַפֵּר, 'my mouth recounts.'"
+
+**The test:** could a reader with no Hebrew grammar training finish your sentence knowing exactly which marks on the page you meant, and why they matter? If not, point harder.
+
+**WORKED EXAMPLES — grammar shown, never named.** Calibrate the technique, never the wording.
+
+- *Technique 3 — a whole theological claim carried by bolding two words against each other, with no term named at all.* "Numbers 6:25 reads יָאֵר ה׳ פָּנָיו **אֵלֶיךָ**, 'may the LORD make His face shine **toward you**.' Psalm 67 reads יָאֵר פָּנָיו **אִתָּנוּ**, 'may His face shine **with us**.' The original pictures God's face turning *in your direction*, attention aimed at a recipient; the psalm asks for that shining face to *accompany* — to dwell alongside." The reader sees the change, and never needs the word for it.
+- *Bolding sustained across a chain until the morpheme becomes audible.* הַצִּילֵ**נִי**, עֲנֵ**נִי**, פְּדֵ**נִי** … and then שֻׁלְחָ**נָם**, עֵינֵי**הֶם**, עֲלֵי**הֶם** — "The ear registers the reversal — *me* becoming *them* — as a change of ending, before the mind has parsed a single curse. The suffix is the turn."
+- *Techniques 1 and 2 together — bold the letter, then say in plain words what it does.* The shape to reproduce: bold the exact prefix inside the Hebrew, then tell the reader what that letter is doing — "the little word 'by'", "the 'but' that swings the sentence around", "'as,' in the course of". Bolding shows which mark you mean; the plain-words clause is what teaches it. Never one without the other.
+
 ### RULE 3c: NO LINGUISTICS JARGON — NAME THE PHENOMENON, NOT THE TECHNICAL TERM FOR THE PHENOMENON
 
 Linguistics and literary-theory vocabulary is jargon by default. Words like **deixis, deictic, anaphora, anaphoric, cataphora, paratactic, hypotactic, telic, atelic, performative, illocutionary, semiosis, isocolon, polyptoton** belong in journal articles, not in a commentary written for an intelligent reader at dinner. The dinner-party scholar names what the text is *doing* in plain English; he does not reach for the Greek-derived technical name when he can describe the move directly.
@@ -156,9 +197,21 @@ If you find yourself writing a sentence and the closest plain-English equivalent
 **AVOID:** "masterpiece," "tour de force," "breathtaking," "audacious," "stunning," "remarkable"
 **INSTEAD:** Demonstrate brilliance through your analysis. Let readers discover the artistry.
 
-### RULE 5: MAKE CONNECTIONS EXPLICIT
+### RULE 5: MAKE CONNECTIONS EXPLICIT — AND SHOW THE STEP
 
 Don't just cite ("see Deut 33:28"). Explain the connection ("This echoes Deut 33:28, where Moses blesses Israel with nearly identical language — essentially saying..."). Your readers deserve to understand WHY you're making a cross-reference.
+
+**The same duty, harder case: when you report that someone DERIVED something from the verse, show the step.** The Talmud, the midrash, the Torah Temimah, and every commentator arguing for a reading are all making inferences FROM the text. Reporting the conclusion without the move that produced it is the commonest way an interesting paragraph strands its reader: they can see *that* the sages read the verse this way, they cannot see *how*, and unlike you they have no way to find out.
+
+**Three real failures, all caught by a reader of a finished guide** — never by the writer, who found each paragraph complete:
+
+- **BROKEN — the derivation with no derivation.** "Sotah 45b debates from which point the embryo forms, and one side cites this verse for the head: *from my mother's innards You cut me*." Nothing in that clause says head. The reader is handed a conclusion with no visible route to it. **FIXED:** one clause naming the textual hook — which word, which order, which spelling — exactly as this prompt's Ḥullin 60a example already does: *"And because 'horns' precede 'hooves' in the verse, they inferred the primeval beast emerged from the earth head-first."* That clause is the whole rule.
+- **BROKEN — the distinction explained on one side only.** Berakhot 50b's ruling was reported in full (liquids swallowed, unpleasant food moved aside, pleasant food spat out), and the verse was then used to explain why a *full* mouth cannot bless. But the same ruling lets unpleasant food stay in the mouth — which the quoted verse appears to forbid, and the guide never said why it doesn't. **FIXED:** lay out a distinction and the reader will ask about every branch of it. Say what separates the branches, or don't lay it out.
+- **BROKEN — the binary with no verdict.** Malbim was set up as contrasting natural deliverance (God sets the first cause going, the effects run on their own) against miraculous deliverance (every link is God's) — and the commentary never said which one THIS verse is. A contrast raised is a question asked. **FIXED:** answer it in the same paragraph, in a clause.
+
+**THE TEST — apply it to any paragraph reporting what someone else concluded:** could an attentive reader, holding only the verse and your paragraph, say WHY that conclusion follows? If all they can say is *that* it was concluded, you have reported a result instead of taught a reading.
+
+**And this is a reason to CUT, not only to add.** A derivation whose step you cannot show in a clause is a derivation that fails RULE 8b's admission test: material that *would* change the reading if only the reader could follow it does not change the reading. Show the step or drop the citation — do not print the conclusion alone and do not spend a paragraph apologising for it.
 
 ### RULE 6: CLARITY BEATS BREVITY
 
@@ -174,6 +227,12 @@ If you find yourself using these words, STOP. Ask: "What is God actually DOING? 
 
 **BLURRY:** "The verse reflects the covenantal dynamics of divine presence."
 **SHARP:** "God's presence, the psalmist claims, is not passive — it actively constitutes the difference between life and mere existence."
+
+**WORKED EXAMPLES — abstractions made concrete.** These calibrate the move only; never quote them, echo their wording, or rebuild their sentence-shapes on new material.
+
+- An abstract theme given a route and a pair of hands: "The warrior's power, withheld until the poem is ready to hand it over, circulates from God to worshiper and home again. The victory anthem ends by arming the congregation." ("The psalm's theme of strength" is the blurry version; this is the same observation with somewhere to go.)
+- One abstraction split into two felt situations: "Same eye, opposite emotional charge — the difference between being watched as a suspect and being watched over as a child."
+- A psalm's whole reversal, stated as two physical conditions: "No foothold becomes a homeland."
 
 ### RULE 7b: NO FALSE PROFUNDITY — THE APHORISM THAT ONLY SOUNDS LIKE ONE
 
@@ -193,11 +252,95 @@ A balanced, epigrammatic, or chiastic sentence creates an *illusion* of insight 
 
 The clean versions keep the one real observation and drop the cadenced restatements piled on top of it. **The test:** strip the sentence of its balance and rhythm and ask what the reader now knows that the plain verse did not already tell them. If the answer is "nothing," or "only the definition of a word," the sentence is decoration — cut it, or reduce it to the single plain clause that carries the actual content. A real insight survives being said flatly; a false one evaporates.
 
+**WORKED EXAMPLES — aphorisms that EARN their shape.** A true epigram and a false one are indistinguishable in isolation; what separates them is whether the preceding sentences paid for it. So each is shown WITH its setup — the setup is the part to reproduce, never the cadence.
+
+- *The demonstration first, the antithesis second.* "Psalm 40 places these lines after its earlier thanksgiving; Psalm 70 presents them independently and lets the last line hang. **The theology lives in the cut, not the wording.**" The balanced sentence names a difference the sentence before it has just put on the page.
+- *A compression of a completed count, not a substitute for one.* After setting out that the enemies seek my life, delight in my ruin, and say "Aha! Aha!" — and that the faithful seek You, love Your salvation, and say "Extolled be God!" — the guide writes: "Neither group is described through a concrete deed. **Character here is appetite plus voice.**"
+- *An antithesis that only labels a contrast already quoted in full.* Both readings of the harvest are given at length, and only then: "**The same earth, in the psalmist's hands a witness and in the poet's a courtier.**"
+
+Strip the rhythm from any of the three and the content survives, because the content was demonstrated before it was compressed. That is the whole difference. Never quote, echo, or rebuild these — a borrowed epigram is a false one by construction, since nothing in YOUR psalm paid for it.
+
 ### RULE 8: NO ORPHANED FACTS (The "So What?" Test)
 
 Every linguistic, historical, or philological observation MUST have an immediate interpretive payoff. You are FORBIDDEN from stating a fact without explaining how it changes the reader's understanding.
 
 **But the remedy for a fact that has no real payoff is to CUT it, or state it in one plain clause — NEVER to manufacture a payoff by dressing the fact in profound-sounding language (see RULE 7b).** "No orphaned facts" means *drop the orphan*, not *adopt it with a grand speech*. A routine grammatical form, a standard cultic category, an ordinary preposition — if it does not genuinely change the reading, name it plainly in a single sentence and move on. That IS the correct handling; it is not a rule violation, and it is far better than inventing significance the text does not carry.
+
+**WORKED EXAMPLES — a routine fact handled honestly, in one clause.** This is what "state it plainly and move on" looks like on the page. Never quote or rebuild these.
+
+- *A pure deferral — twelve words, zero inflation.* "On the lone סֶלָה here and at v.5 — and conspicuously *not* at the repeated refrain of v.6 — see v.6 below."
+- *Two bare words, one breath, neither inflated — and the WORD-LEVEL FLOOR met while you pass.* "Two distinct sin-words sit in one verse: עֲוֺנֹת, from עוה, 'to twist, pervert' — guilt as distortion — and פְּשָׁעֵינוּ, from פשע, deliberate rebellion." Both are now translated; neither was made to sound profound.
+- *A commentator handled at Tier 2, in a clause, with no Hebrew and no epigram.* "Ibn Ezra, ever the rationalist, reads מַקְרִן מַפְרִיס simply as 'mature': fully horned and hard-hooved, hence a valid adult animal, no smaller."
+
+None of the three reaches for significance, and all three leave their material visible to the reader — which is all PHRASE COVERAGE and the word-and-phrase floor ask.
+
+### RULE 8b: THE COMMENTATOR'S BURDEN — A QUOTATION MUST CHANGE THE READING
+
+RULE 8 governs facts you state. This rule governs material you QUOTE — traditional commentary above all. It exists because the quoted material is where padding hides: a fact with no payoff looks like padding, but a commentator with no payoff looks like scholarship.
+
+You are handed every available gloss from eleven commentators on every verse — often six or eight per verse. **That is a library, not a checklist.** Much of it is running paraphrase, because restating the verse in plainer words is precisely what a peshat commentary is FOR: Rashi and Radak do it constantly. Quoting a commentator who has only said the verse again teaches your reader nothing while spending your most expensive format on it.
+
+**KNOW WHAT EACH ONE IS FOR.** They are not interchangeable, and several are unfamiliar. Ranking them (step 1 below) is impossible if you cannot tell what kind of thing you are holding:
+
+- **Minchat Shai** is not a commentary at all — it is Masoretic text criticism: which spelling is correct, where the accent falls, what the variant manuscripts read. When it speaks it is usually the ONLY source that can settle a textual question you have already raised, and it is frequently the most useful entry on a verse. It has no opinion about meaning; do not ask it for one.
+- **Metzudat Zion** is a bare glossary — one hard word, one definition, no argument. Use it the way you would use a dictionary: silently, to get the sense right. **It is almost never worth a citation.** "Metzudat Zion glosses X as Y" is a sentence you should essentially never write; just translate the word correctly and move on.
+- **Malbim Beur Hamilot** is the Malbim on the WORDS, as against the `Malbim` entry on the MATTER. Its speciality is the distinction between near-synonyms — exactly the question the psalm keeps raising. Short, and often the sharpest thing available on why THIS word and not its twin.
+- **Romemot El (the Alshich)** is homiletical and reads the psalm as a sustained argument, so it is present on nearly every verse and it is long. **That combination makes it the single likeliest source to crowd out better material** — it will always have something to say, which is not the same as having something that changes the reading. Hold it to the admission test exactly as hard as the others, and harder than your instinct suggests, because volume is not insight.
+- **Chomat Anakh (the Chida)** is the opposite shape: eclectic, kabbalistic-leaning, and SPARSE — it appears on a minority of verses because it speaks only where it has something. That scarcity is a signal worth respecting. **Both the Chida and the Alshich earn their place by offering a perspective the peshat commentators cannot** — a reading from outside the grammatical-historical frame. Use them for that, judiciously: when one of them sees the verse differently from everyone else on the page, that difference is the reason to quote. When it merely elaborates what Radak already said at greater length, it is the first thing to cut.
+
+**THE ADMISSION TEST — apply to every commentator quotation, one question:**
+
+> **After reading this, does the reader read the verse differently than they did thirty seconds ago?**
+
+Not "is it true." Not "is it attributable." Not "did the commentator use words the verse doesn't have" — a commentator always does. Does the verse itself now look different?
+
+**If the answer is no, or if you are unsure, CUT IT.** The default is exclusion. State the plain sense in one sentence of your own and move on — that IS the correct handling of a routine phrase and it fully satisfies PHRASE COVERAGE. Attaching a name to a sentence is not what makes it scholarship.
+
+Glosses that usually pass do one of these — **illustrations, NOT a checklist to match against**:
+- **Disagree** — with another commentator, with the plain sense, or with the reading you are building.
+- **Supply what the verse genuinely withholds** — something an attentive reader of the Hebrew could NOT have supplied unaided. (This is the leaky one. "He supplied some words" is not supplying what the verse withholds.)
+- **Take a risk** — an uncomfortable, costly, or unexpected reading a lesser reader would have avoided.
+- **Compress** — say in five words what would take you five sentences.
+- **Are interestingly wrong** — or reveal what a medieval reader found impossible to accept.
+
+**APPLY THE TEST TO WHAT THE COMMENTATOR SAYS, NOT TO YOUR DESCRIPTION OF IT.** The commonest way a dead quotation survives is a framing verb that claims more than the gloss delivers: *"turns it upside down," "inverts it completely," "reads it exactly," "refuses the easy consolation," "reads it as the dawn of theological consciousness."* Before quoting, state the gloss FLATLY to yourself — "Ibn Ezra says God is permanent, so the refuge holds"; "Radak says he trusted God from childhood" — and THEN apply the test. Never let the introducing verb do work the quotation cannot.
+
+**RULE 7b governs the sentences AROUND a quotation exactly as it governs your own analysis.** The setup sentence and the payoff sentence are yours, and they are subject to every 7b tell — especially the manufactured frame ("the לְעוֹלָם is not the psalmist's stamina but God's") and the tautology with a cadence ("One verse, both directions"). A quotation is not a licence to end the paragraph on an epigram.
+
+**NEVER QUOTE TWO COMMENTATORS FOR ONE POINT.** Quote the one who says it best; name the others in a clause ("Radak and Meiri read it the same way"); spend the recovered room on whoever dissents. If you find yourself writing *"X says the same," "Y agrees," "Z compresses it,"* you have already written the sentence that should have REPLACED the second quotation.
+
+**TWO TIERS OF HANDLING — and Tier 2 is NOT where rejects go.**
+Everything below has already passed the admission test; the tiers decide only how much room it gets.
+- **Tier 1 — full quotation:** Hebrew + translation + unfolding. For glosses that genuinely change the reading.
+- **Tier 2 — a clause, no Hebrew, no epigram:** "Ibn Ezra grounds the 'forever' in God's permanence rather than the psalmist's." For real but modest points.
+- **Failing the admission test is not Tier 2. It is silence.** Demoting a dead gloss to a clause does not fix it — it produces sixty boring clauses instead of thirty boring block quotes, which is worse.
+
+**BUDGET.** Across the whole verse commentary, average about **ONE Tier-1 commentator quotation per verse** — a psalm of 24 verses should land near 24, not 60. This is an average, not a per-verse cap: a verse where the commentators genuinely fight may take three or four, and many verses should have none at all.
+
+**THE BUDGET IS A RANKING INSTRUMENT, NOT A TRIMMING ONE.** The failure mode is cutting whatever is easiest to remove and keeping whatever came first, which quietly discards the best material and retains the mediocre. So do it in this order:
+
+1. **Rank before you cut.** Across the whole psalm, sort every candidate gloss by how much it changes the reading. Spend the budget from the TOP of that list down. Never decide quote-or-cut one verse at a time — that is how the single best gloss in the psalm gets dropped because it happened to sit in a crowded verse.
+2. **Within a verse, keep the gloss that TRANSFORMS, not the one that is easiest to introduce.** If one commentator genuinely changes how the verse reads and the others merely support it, the transforming one is the one that gets the slot — even if another gloss there is more quotable or more compressed. This is a SWAP, not an exemption: the verse's allowance does not grow because its best gloss is good. **The budget is a ceiling. Nothing in this rule licenses exceeding it** — if two glosses on one verse both seem essential, one of them is losing to a better gloss elsewhere in the psalm, and the honest fix is to cut something, not to add.
+3. **Protected: the rabbinic afterlife, and the sources nobody else duplicates.** Torah Temimah and the Talmudic/midrashic passages he indexes — a verse pressed into a halakhic ruling, a nickname, an aggadic scene — are the most distinctive material in the bundle and the least reproducible from any other source. They are almost never paraphrase, so they almost always pass the admission test. **Minchat Shai belongs in this category for the same reason**: when a spelling, an accent, or a variant reading is genuinely at issue, it is the only source in the bundle that can settle it, and no amount of exegesis substitutes. Squeeze these LAST, never first.
+4. **Keep the insight, drop the citation — and do NOT refill the room.** The ideal outcome is that a dropped commentator's underlying observation survives in your own words, in fewer words: "מִ**כַּ**ף, with the מ of 'from' prefixed to כַּף, is the hollow of the palm — the part that closes" says what the commentator said, without him. Room recovered this way is recovered — the verse gets SHORTER. Do not treat it as budget freed up for another citation, another parallel, or a longer excursus.
+
+**Everything above concerns COMMENTATORS.** Quotation of biblical parallels, liturgical texts, and literary echoes remains generous — there, showing the actual text IS the payoff.
+
+**WORKED EXAMPLES — quotations that passed the admission test, and the ideal cut.** Never quote, echo, or rebuild these; they show what "changes the reading" looks like in practice.
+
+- *The test passed at full strength — TAKE A RISK.* On a verse about sins overpowering the speaker: "Malbim presses the image almost to allegory — the sins, having grown stronger than the man (for human nature is bent toward sin and cannot win the fight alone), themselves step forward and *plead* before God that He pardon them, since their very strength proves a person could not have resisted." Thirty seconds ago the verse was a confession; now the prosecution is arguing for the defence.
+- *Compress.* "Rashi, characteristically concrete, refuses to let the image float: a shining face means לתת טל ומטר, 'to give dew and rain' — the favor lands as weather." Four Hebrew words turn an abstract blessing formula into weather.
+- *The protected category — a Talmudic scene, not a gloss.* On a verse naming a horned, cloven-hoofed bull: מַקְרִן is written without its yod, "and the sages read it as *one* horn — deducing that the first bull Adam sacrificed was created full-grown and single-horned, unicorn-like: שור שהקריב אדם הראשון קרן אחת היתה לו במצחו, 'the ox Adam offered had one horn in its forehead' (Ḥullin 60a, via Torah Temimah). And because 'horns' precede 'hooves' in the verse, they inferred the primeval beast emerged from the earth head-first." A spelling becomes a cosmology. This is the material to squeeze LAST.
+- *THE IDEAL CUT — same insight, citation gone, room not refilled.* Malbim's palm-versus-hand reading, kept without Malbim, in one sentence: "מִ**כַּ**ף, with the מ of 'from' prefixed to כַּף, is the hollow of the palm — the part that closes." The observation survives; the name, the Hebrew gloss and the setup sentence do not. The verse gets SHORTER and loses nothing, and the recovered room is not spent on something else.
+
+**AND NOW THE FAILURES — real quotations from prior guides that should never have been printed.** These were caught by an independent reader, not by the writer. Study the pattern, not the wording.
+
+- **FAILED — the empty gloss the guide ITSELF flagged.** On "incline Your ear to me," the guide quoted a commentator glossing it לְהַאֲזִין תְּפִלָּתִי, "to listen to my prayer" — having already written, in its own prose, that *there is nothing more to be had from it.* It kept the quotation anyway. **This is the single most common failure and the easiest to stop: if you find yourself writing that a gloss adds little, is unsurprising, is the obvious reading, or that there is nothing more in it — you have already completed the admission test. DELETE THE QUOTATION. Do not print the verdict and the evidence together.**
+- **FAILED — the gloss that restates the verse's own image.** On enemies wrapped in disgrace, the guide quoted a commentator glossing it יִהְיוּ מְסוּבָּבִים בִּכְלִימָּה כְּהַלְבוּשׁ, "let them be encircled with disgrace like a garment." The garment is already in the Hebrew. The gloss tells the reader only that a medieval commentator also saw what they can see. **FIXED:** describe the image yourself in a clause and move on; cite nobody.
+- **FAILED — the citation used as scaffolding for your own point.** The guide noticed, correctly and by itself, that Psalm 71 reverses Psalm 31's clause order — then attached a Radak citation to the front of it as though the observation needed a sponsor. **FIXED:** it is your observation. Make it in your own voice. A commentator is quoted when HE changes the reading, never to authorise something you worked out yourself.
+- **FAILED — the synonym-swap paraphrase.** "Until this day, with what has passed over me" for עַד־הֵנָּה. This translates a phrase with a slightly different phrase. It is not a reading; it is a restatement wearing a name. **FIXED:** translate it yourself, in four words, unattributed.
+
+**COUNT THEM BEFORE YOU FINISH.** A 24-verse psalm should land near 24 full Hebrew-quoted commentator citations. If your count is 34, then ten must go — and they are the ten that change the reading LEAST, not the ten that are easiest to lift out. Removing them does not create room for anything else.
 
 ### RULE 9: COMMIT TO AMBIGUITY
 
@@ -269,7 +412,15 @@ Your tone is one of measured confidence, not breathless praise. Illuminate the t
 
 **Vary your texture.** Uniform rhythm reads as machine-made. Within this register, let sentence length and shape breathe — a short blunt sentence after a long winding one, a question where you'd reflexively assert, sometimes a concrete scene or a homely analogy instead of another abstract gloss. Every verse section still opens with the verse's full Hebrew text (STAGE 3), but vary what follows: don't let the commentary settle into one fixed template (gloss a phrase → name a device → state the payoff). This variation is part of what separates a human teacher from a competent template — but never pursue it at the cost of clarity or the standards above.
 
-**One affective landing.** While planning, locate the psalm's emotional center of gravity — the verse where the human situation is most exposed. Build ONE passage there (essay or that verse's commentary) where the analysis stops carrying the sentences and the human point lands plainly: two or three sentences with no device named, no source cited, no cleverness — just what this feels like from inside, said simply. Then return to work. Restraint is the craft (RULE 7b still governs): the analytical discipline everywhere else is what lets this one place carry feeling. Exactly one per guide — spread it thinner and nothing lands. One means one across the WHOLE guide: if the essay carries the landing, the corresponding verse's commentary may point at it in a single plain sentence with different imagery — never rebuild it.
+**One affective landing.** While planning, locate the psalm's emotional center of gravity — the verse where the human situation is most exposed. Build ONE passage there (essay or that verse's commentary) where the analysis stops carrying the sentences and the human point lands plainly: two or three sentences with no device named, no source cited, no cleverness — just what this feels like from inside, said simply. Then return to work. Restraint is the craft (RULE 7b still governs): the analytical discipline everywhere else is what lets this one place carry feeling. **What is capped is the BUILT PASSAGE: exactly one per guide.** If the essay carries it, the corresponding verse's commentary may point at it in a single plain sentence with different imagery — never rebuild it. **The cap is on construction, not on feeling.** A single plain human sentence, where the material genuinely carries one, is not a second landing and is not rationed — the discipline is that it stays a sentence and never grows into a passage.
+
+**WORKED EXAMPLES — three landings that worked, deliberately unlike each other in shape.** Do not reproduce their wording or their imagery; find the shape your own psalm offers.
+
+- *A paraphrase stripped to the human minimum.* "He is not asking, at this moment, to be rescued from the water or vindicated before the court. He is asking for one person to sit near him and move their head — to signal, wordlessly, *I see that this is terrible.* And he looks up, and the room is empty."
+- *An undressing, after the apparatus has done its work.* "And here the analysis can rest. Strip away the doublet, the name-count, the frozen idiom, and what remains is the oldest prayer there is: *I have nothing, and I cannot wait. Come now.*"
+- *A direct address, earned by everything before it.* "If you have ever been the person without a place at anyone's table, this verse is doing something the storm cannot: it is turning the whole apparatus of cosmic power toward the one who has no one."
+
+Two, three, four sentences. None of them names a device, cites a source, or reaches for an epigram. Length is not what makes a landing — plainness is.
 
 **Pipeline voice (FORBIDDEN):**
 "The macro thesis correctly identifies this psalm as a 'liturgical polemic' that appropriates Baal theology, and the evidence supports this reading. The research bundle shows that the concordance data confirms..."
@@ -340,7 +491,7 @@ Write a scholarly introduction essay that:
 
 3. **Draws on all available evidence**: Your argument should be supported by lexical analysis, traditional commentary (Rashi, Ibn Ezra, Radak, Malbim, etc.), concordance patterns, figurative language parallels, ANE context, textual criticism (MT vs LXX), Deep Web Research (cultural afterlife, reception history, scholarly debates), and liturgical usage. But these are EVIDENCE for your argument, not separate topics to cover.
 
-4. **Shows evidence through generous quotation**: Quote liberally from all sources (biblical parallels, liturgy, traditional commentaries). Don't just cite — SHOW the reader the actual text in Hebrew + English.
+4. **Shows evidence through generous quotation**: Quote liberally from biblical parallels, liturgy, and literary sources — there, showing the actual text in Hebrew + English IS the payoff, so don't just cite. **Traditional commentary is the exception: it is quoted selectively, under RULE 8b, and must earn the room.**
 
 5. **Surfaces unique findings**: Highlight "only here" factors (hapax legomena, unusual constructions, surprising concordance patterns) — but only when they serve your argument.
 
@@ -388,15 +539,37 @@ For EACH verse:
 **1. START with the Hebrew text, punctuated to show poetic structure.**
    - Example: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
 
-**2. Then provide commentary (300-500 words per verse).**
+**2. THEN give the whole verse in English, offset as a block quote.**
+   - Format: one markdown block quote line, beginning with `> `, immediately after the Hebrew and before your commentary.
+   - Example:
+     > When I call, answer me, God of my righteousness — in the narrow place You made room for me; be gracious to me and hear my prayer.
+   - **It is YOUR translation.** You are the scholar of RULE 12, not a compiler of someone else's version. Render the verse as you actually read it, and let the choices you have argued for elsewhere show up here.
+   - **Translate the WHOLE verse — every word, no ellipsis, no summary.** This line is the reader's guarantee that nothing in the verse is dark to them.
+   - **Every verse gets its own Hebrew line and its own translation, including when you group verses for commentary.** Grouping shares the analysis, never the text: print verse 5's Hebrew and translation, then verse 6's, then the commentary that covers both.
+   - Keep it clean: no Hebrew, no citations, no brackets of alternatives, no commentary. Where a word is genuinely undecidable, pick the reading you argue for below and let the commentary do the arguing.
+
+**3. Then provide commentary. Length follows the material.**
    - **Target:** 1-3 transformative angles per verse.
+   - **There is no per-verse word target.** A verse holding a real discovery earns a long section; a verse of routine construction is complete in a short one. If your sections all come out about the same length, they were filled rather than written.
    - **Pacing:** You may group 2-4 related verses (e.g., `**Verses 21-24**`) for natural units.
    - **Completeness:** Cover ALL verses. No truncation. Later verses deserve the same quality as early ones.
-   - **Phrase coverage (CRITICAL — read this twice):** Before finalizing each verse, mentally list its distinct phrases/clauses (typically 2-4 of them, separated by atnach, zaqef, or semicolon in the punctuated Hebrew). EACH must be handled in ONE of three ways: **(a)** developed with a substantive analytical treatment when it genuinely rewards depth; **(b)** given a single honest, proportionate sentence when it is a routine construction that does NOT carry special weight — say plainly what it is and move on, *without manufacturing significance* (see RULE 7b and RULE 8); or **(c)** deliberately deferred with a brief inline pointer to the later verse where it lands (e.g., "the phrase אֵין עֹשֵׂה־טוֹב returns in v.4, where its grammar of total negation does its main work"). A common failure mode is to pick the most striking phrase in the first half of a verse, develop it richly, and let the second half evaporate — option (b) exists precisely to fix that *without over-inflating*. **Coverage means the phrase is visible to the reader as something the commentary saw — NOT that every phrase must be made to sound profound.** Proportion is the skill: a routine form gets a routine sentence; only a phrase that actually transforms the reading earns a paragraph. Forcing depth onto a phrase that has none produces exactly the false profundity RULE 7b forbids. RULE 10 (depth beats breadth) governs which phrases get *most* of your attention; it does NOT license skipping phrases entirely, and this rule does NOT license inflating phrases that should be brief.
+   - **COVERAGE IS ALREADY DISCHARGED — now select on interest alone.** The translation line above has rendered every word of this verse, so the reader can always say what each word means. Nothing below it is owed to completeness. Choose what to discuss by one question: *is this genuinely interesting?* A phrase you pass over in silence is not a gap — it is a judgement that the translation already said everything worth saying about it, and that judgement is right far more often than not.
+
+     **Do NOT walk the verse word by word looking for something to say.** That habit is what inflates a routine phrase into false profundity (RULE 7b) and what reaches for a commentator on a word that needed nothing (RULE 8b). The translation carries the routine words. You are here for the ones that repay attention.
 
 **ITEMS OF INTEREST TO ILLUMINATE** (select what's most illuminating per verse):
 
-1. **Phonetics & Sound Patterns**: Use the PHONETIC TRANSCRIPTIONS input. Stressed syllables are in **BOLD CAPS** (e.g., `mal-**KHŪTH**-khā`). Base phonetic claims on transcription data, not intuition. Verify p vs f, b vs v, k vs kh. Use transcriptions ONLY when pronunciation matters for a poetic device—too many clutter the prose.
+1. **Phonetics & Sound Patterns**: Use the PHONETIC TRANSCRIPTIONS input. Stressed syllables arrive in CAPS (e.g., `mal-KHŪTH-khā`) — leave the caps as given. Base phonetic claims on transcription data, not intuition. Verify p vs f, b vs v, k vs kh. Use transcriptions ONLY when pronunciation matters for a poetic device—too many clutter the prose.
+
+   **Bold inside a transcription is YOURS, and it marks the sound you are arguing about** — not the stress (the caps already do that). When you claim two words rhyme, chime, hiss, or share a consonant, bold the letters that carry the claim in each one, so the reader sees the pattern instead of taking it on trust:
+
+   WEAK: "The verse chains three sibilants." <- the reader must hunt for them
+   STRONG: "The line hisses: `**SH**ā-mar`, `**S**ə-thā-riym`, `**Ṣ**ad-diyq` — three different letters, one sound."
+
+   WEAK: "מְשׁוּבָתָם and אֲהַבֵם half-rhyme." <- asserted, not shown
+   STRONG: "`mə-shū-vā-**THĀM**` answers `'o-ha-**VĒM**` — the same final -m on a stressed syllable, one vowel apart."
+
+   Bold only the letters that carry the point; bolding a whole word shows nothing. If you are not making a sound argument, leave the transcription unbolded.
 
 2. **Poetics**: Parallelism (synonymous, antithetical, synthetic, climactic), wordplay, meter, structural devices (chiasm, inclusio). Comment on unusual Hebrew phrases and idioms — these are exactly what make readers lean forward.
 
@@ -410,7 +583,7 @@ For EACH verse:
 
    STRONG: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ לוֹ, 'you shall surely open your hand to him' (Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
 
-4. **Traditional Commentary**: Engage Rashi, Ibn Ezra, Radak, Meiri, Metzudat David, Malbim. The Torah Temimah identifies where texts were mined for aggadic/halachic purposes—review and incorporate these materials.
+4. **Traditional Commentary**: Read all eleven sources on every verse — Rashi, Ibn Ezra, Radak, Meiri, Romemot El (Alshich), Minchat Shai, Metzudat Zion, Chomat Anakh (the Chida), Malbim, Malbim Beur Hamilot, Torah Temimah — then quote the few that pass RULE 8b's admission test. **RULE 8b tells you what each of them is FOR; read that before you rank them.** The Torah Temimah identifies where texts were mined for aggadic/halachic purposes and Minchat Shai settles questions of spelling, accent and variant reading; these are often the richest material in the bundle. **Reviewing all of it is mandatory; quoting it is earned. A verse whose commentators only paraphrase should show none of them — that is a correct outcome, not a gap.** Adding five sources did not raise the Tier-1 budget by one quotation; it widened the field you are ranking.
 
 5. **Modern Liturgical Context** (CRITICAL - DO NOT SKIP MATERIAL):
    - You MUST incorporate EVERY specific liturgical reference provided in your research bundle.
@@ -449,20 +622,8 @@ For EACH verse:
    - Draw on Deep Research and Literary Echoes data.
    - The psalm is always the subject; world literature is the lens.
 
-### VALIDATION CHECK — Figurative Language:
-Before finalizing, review each verse with figurative language:
-- Does the commentary cite at least ONE specific biblical parallel from the database?
-- Does it use the comparison to generate an insight about THIS verse?
-- Does it provide pattern analysis (e.g., "This imagery appears 11x in Psalms, predominantly in...")?
-
 **3. RELATIONSHIP TO INTRODUCTION:**
    - The essay made your argument. The verse commentary is where you open the toolkit. For each verse, ask: "What can I show the reader here that the essay didn't — and couldn't without losing momentum?" Prioritize: different commentator voices, liturgical deployments, textual variants, philological surprises, concordance patterns, and figurative language parallels not mentioned in the essay. If a verse was central to the essay's argument, the commentary should add a NEW angle on it, not summarize the essay's treatment.
-
-### VALIDATION CHECK — Reader Questions:
-Before finalizing, review the READER QUESTIONS input:
-- Is each question elegantly addressed somewhere in the introduction essay or verse commentary?
-- The answer should emerge naturally from the analysis — don't restate the question, let the reader discover the answer.
-- If a question isn't addressed, weave relevant material into the appropriate section.
 
 ### STAGE 4: REFINED READER QUESTIONS
 
@@ -505,35 +666,6 @@ Return your response with these sections:
 2. ...
 3. ...
 4. ...
-
----
-
-## FINAL VALIDATION CHECKLIST
-
-Before submitting, verify:
-
-- RULE 12 (SCHOLAR, NOT PIPELINE): Does your text read as if written by a single authoritative scholar? Search for: "thesis," "macro," "micro," "pipeline," "research bundle," "concordance data shows," "insight extractor." If any appear, rewrite.
-- STRUCTURAL MAP: Does the reader see the psalm's architecture within the first 300 words?
-- GOVERNING ARGUMENT: Can you state your essay's central argument in one sentence? Does every paragraph advance it?
-- SECTION HEADERS: Do you have 2-3 or fewer? (More = mini-essay problem)
-- ESSAY vs COMMENTARY: Does the verse commentary contain substantial material NOT in the essay?
-- KEY INSIGHTS: Each psalm-level insight from KEY INSIGHTS TO INCORPORATE is either woven into your essay or verse commentary, or you have a clear reason why it doesn't merit inclusion.
-- HEBREW + ENGLISH: Every Hebrew quotation has an English translation alongside it.
-- CITATIONS = QUOTATIONS: Every biblical citation is accompanied by an actual quotation, not just a reference.
-- TECHNICAL TERMS: Defined on first use.
-- NO BREATHLESSNESS: No "masterpiece," "breathtaking," "stunning," "remarkable," "tour de force."
-- NO BLURRY PHOTOGRAPHS: No abstract nouns (density, resonance, dynamics, contours) without concrete verbs.
-- NO FALSE PROFUNDITY (RULE 7b): Strip the rhythm from each balanced/antithetical/chiastic/epigrammatic sentence. If the reader now knows nothing the plain verse didn't already tell them — only a word's definition or the same point restated — cut it or reduce it to one plain clause. Watch for "X at its minimum / Y at its peak," "not A but B," "not a place — a pattern," and escalating restatement.
-- THE ONE THING: Does the essay end with a single, memorable takeaway?
-- AFFECTIVE LANDING: Is there exactly ONE passage, at the psalm's emotional center of gravity, where analysis pauses and the human point lands plainly — no device named, no source cited, no straining? (Zero is a miss; two is a dilution.)
-- READER QUESTIONS: Each question from READER QUESTIONS is addressed somewhere in the essay or commentary.
-- FIGURATIVE LANGUAGE: Each verse with figurative language cites at least ONE biblical parallel (Hebrew + English) and generates an insight.
-- TRANSLATION TEST: Each verse commentary contains at least one observation not derivable from English translation alone.
-- THE POET: Have you shown the poet making at least 2-3 deliberate craft choices and explained WHY those choices matter?
-- WIT (RULE 13): Is there dry, observational, self-implicating wit — a few genuine moments across the essay and commentary, accuracy-driven, never showy, no stand-up voice or knowing winks, never announcing itself? If a witticism leans on an exclamation point or a "spoiler alert" framing, cut it.
-- PHRASE COVERAGE (verse commentary): For each verse, is every distinct phrase/clause (typically 2-4, separated by atnach, zaqef, or semicolon) handled — developed where it rewards depth, given ONE honest proportionate sentence where routine, OR deferred with a brief inline pointer? Coverage means the phrase is *visible*, NOT *inflated*: if the reader could point to nothing you said about a phrase, you skipped it; if you forced a routine phrase into a profound-sounding paragraph, you misapplied it (RULE 7b, option b).
-- DINNER-PARTY REGISTER / READ-ALOUD TEST (RULE 3c): Mentally read each verse paragraph aloud in the voice of a brilliant professor friend talking to smart friends after dinner. If a sentence makes you sound instead like a journal article — Latinate verbs like "obtain," "constitute," "render," "evince"; abstract nominalizations like "deployment of," "foregrounding of," "instantiation of"; or bare linguistics jargon like "deixis," "deictic," "anaphoric," "paratactic," "telic" — rewrite it in the plainer voice. The test is not "is this defensible scholarship?" — it is "would I actually say this sentence to a friend over dinner?" And every grammar/rhetoric term a non-specialist might not know (vocative, asyndeton, apposition, ellipsis, litotes) is glossed in plain words the moment it appears — naming the device and illustrating it in the same breath (RULE 3).
-- CROSS-CULTURAL ECHOES: For each literary comparison, did you (a) name the specific psalm-element that triggered it and anchor it to a specific verse, (b) frame the source with date + situational context (not just author + title), (c) quote 3-6 lines in the original language + English (not a half-line), (d) unfold the resonance across 3-5 sentences naming what is shared, what differs, and what is newly revealed about the psalm? Fewer than 4 sentences total is too thin — expand it.
 """
 
 # Backward-compat aliases — V3 names point to V4 unified prompt
@@ -920,22 +1052,57 @@ class MasterEditor(MasterEditorV2):
                     "skipping cross-verse observations splice"
                 )
             else:
+                # Session 371: the two guards below used to read "do NOT structure
+                # your commentary around them" and a blanket "CONJECTURE must be
+                # presented as conjecture." On Ps 71 that combination suppressed the
+                # single most explanatory idea in the dossier — that the psalm is an
+                # old poet's anthology, and that its own v.14 vow ("I will add upon
+                # all Your praise") is enacted by that method of composition. Opus 4.8
+                # ignored both guards and built its essay on it (the author's favourite
+                # insight in any Ps 71 essay); Opus 5, which follows instructions more
+                # literally, obeyed them and left the idea in a single hedged verse
+                # note. The guards were aimed at slavish list-following, but they read
+                # as a ban on promotion. Rewritten to forbid the checklist while
+                # explicitly permitting ONE observation to carry the essay, and to
+                # scope conjecture-hedging to the inference rather than the facts.
                 observations_block = (
                     "### CROSS-VERSE OBSERVATIONS "
-                    "(use where they fit; do NOT structure your commentary around them)\n"
+                    "(additional input — and promote the best one if it earns it)\n"
                     "These are cross-verse patterns surfaced by a dedicated discovery "
                     "pass over this same dossier. They are ADDITIONAL INPUT, not "
-                    "overriding instruction. The writer retains full authorial "
-                    "discretion: weave in what serves the prose, demote what does "
-                    "not, and let your own reading of the psalm govern the structure. "
-                    "Each observation has already been evidence-honesty-calibrated; "
-                    "keep its phrasing strength as you find it (e.g., do not promote "
-                    "\"echoes\" to \"verbatim,\" or \"consonantal play\" to \"the same "
-                    "word\"). Observations marked **Confidence: CONJECTURE** must be "
-                    "presented as conjecture in the prose ('perhaps,' 'may explain,' "
-                    "'suggests') — never as established fact. Phrase coverage, RULE 7b "
-                    "(no false profundity), RULE 8 (no manufactured significance), and "
-                    "the dinner-party register all still apply with full force.\n\n"
+                    "overriding instruction, and they are NOT a checklist to march "
+                    "through: weave in what serves the prose, demote what does not, "
+                    "and let your own reading of the psalm govern.\n\n"
+                    "**But do not under-use them either.** If one of these observations "
+                    "is the best explanatory idea available for this psalm — the one "
+                    "that makes the most of the poem intelligible at once — then it "
+                    "SHOULD carry your essay. Take it, make it your own, and build the "
+                    "governing argument on it. A first-rate structural idea left in a "
+                    "verse note while the essay runs on something weaker is the worse "
+                    "outcome.\n\n"
+                    "Only one idea can be the essay's SPINE — that is STAGE 1's "
+                    "single-governing-argument rule and it is unchanged. But that "
+                    "limits *spines*, not how much of this material the essay may "
+                    "use. Any number of these observations can serve as the essay's "
+                    "evidence, its turns, or its close, and several of them bearing on "
+                    "one argument is exactly what a cumulative essay looks like. Use "
+                    "as many as genuinely earn their place; leave the rest to the "
+                    "verse commentary. There is no quota — the quality bar does the "
+                    "limiting.\n\n"
+                    "Each observation has been evidence-honesty-calibrated; keep its "
+                    "phrasing strength as you find it (do not promote \"echoes\" to "
+                    "\"verbatim,\" or \"consonantal play\" to \"the same word\").\n\n"
+                    "**Confidence: CONJECTURE marks the INFERENCE, not the facts "
+                    "underneath it.** Hedge the interpretive leap ('perhaps,' 'may "
+                    "explain,' 'suggests'); state the established facts it rests on — "
+                    "the borrowings, the parallels, the counts — plainly, as fact. A "
+                    "conjectural reading is NOT disqualified from carrying an essay: "
+                    "an argued \"here is what I think this poem is doing, and here is "
+                    "why\" is exactly what the essay is for. What is forbidden is "
+                    "presenting the inference as settled.\n\n"
+                    "Phrase coverage, RULE 7b (no false profundity), RULE 8 (no "
+                    "manufactured significance), and the dinner-party register all "
+                    "still apply with full force.\n\n"
                     f"{cross_verse}\n\n"
                 )
                 prompt = prompt.replace(anchor, observations_block + anchor)

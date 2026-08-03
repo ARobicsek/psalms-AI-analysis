@@ -116,17 +116,11 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         stats['figurative_count'] = len(figurative_matches)
 
     # Count traditional commentaries by name
-    commentary_patterns = [
-        (r'### Rashi', 'Rashi'),
-        (r'### Ibn Ezra', 'Ibn Ezra'),
-        (r'### Radak', 'Radak'),
-        (r'### Metzudat David', 'Metzudat David'),
-        (r'### Malbim', 'Malbim'),
-        (r'### Sforno', 'Sforno'),
-        (r'### Meiri', 'Meiri'),
-    ]
-    for pattern, name in commentary_patterns:
-        matches = re.findall(pattern, markdown_content)
+    # Count traditional commentaries — derived from the librarian's list and anchored to
+    # the dossier's header line (`### 71:5 — Malbim`). See run_enhanced_pipeline.py.
+    from src.agents.commentary_librarian import COMMENTATORS
+    for name in COMMENTATORS:
+        matches = re.findall(rf'^### .*— {re.escape(name)}\s*$', markdown_content, re.MULTILINE)
         if matches:
             stats['commentary_counts'][name] = len(matches)
 

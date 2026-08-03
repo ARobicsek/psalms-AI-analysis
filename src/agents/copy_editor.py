@@ -851,15 +851,36 @@ class CopyEditor:
         A quoted span is stripped only when its contents contain at least one
         Hebrew (U+0590-U+05FF) or Greek (U+0370-U+03FF, U+1F00-U+1FFF) letter
         AND contain no ASCII Latin letters. Returns (text, strip_count).
+
+        HEBREW ABBREVIATION MARKS ARE NOT QUOTES. Rabbinic Hebrew writes geresh and
+        gershayim as bare ASCII ' and " glued to a letter — ג"כ, מה', ר"י. Without
+        the lookarounds below, the " inside ג"כ opened a "quoted span" that ran on
+        through the Hebrew after it and closed on the REAL opening quote of the English
+        translation, deleting both:
+
+            היא ג"כ מאתך, "hoping in You…   ->   היא גכ מאתך, hoping in You…
+
+        — an abbreviation mangled and a translation left with no opening quote, and
+        reported as no change at all. (Psalm 71 arm E v.14; the same shape recurs
+        wherever a commentator abbreviates next to a translation.) An abbreviation mark
+        always ABUTS a Hebrew letter; a quote wrapping a Hebrew span never does, because
+        a space or a word boundary separates it. That is the whole distinction, and it
+        is what the lookarounds test.
         """
         # Opening quote → matching closing quote, content has no Latin letters
         # and contains at least one Hebrew/Greek letter.
         pattern = re.compile(
+            # not a source-language mark glued to its letter: a Hebrew abbreviation's
+            # gershayim/geresh (ג"כ, מה') or a Greek elision (δ', ἐπ')
+            r'(?<![֐-׿Ͱ-Ͽἀ-῿])'
             r'(?P<open>["\u201C\u201D\u2018\u2019\'])'
             r'(?P<body>[^"\u201C\u201D\u2018\u2019\'A-Za-z\n]*'
             r'[\u0590-\u05FF\u0370-\u03FF\u1F00-\u1FFF]'
             r'[^"\u201C\u201D\u2018\u2019\'A-Za-z\n]*)'
             r'(?P<close>["\u201C\u201D\u2018\u2019\'])'
+            # nor one glued to the letter that FOLLOWS it: an abbreviation's second
+            # half (ר"י) or a Greek aphaeresis ('πιδεύης)
+            r'(?![֐-׿Ͱ-Ͽἀ-῿])'
         )
         count = 0
 

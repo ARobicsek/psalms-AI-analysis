@@ -8,10 +8,14 @@ Supported Commentators:
 - Rashi (Rabbi Shlomo Yitzchaki, 11th century, France)
 - Ibn Ezra (Rabbi Abraham ibn Ezra, 12th century, Spain)
 - Radak (Rabbi David Kimchi, 12th-13th century, Provence)
-- Metzudat David (18th century, Italy)
 - Malbim (Rabbi Meir Leibush ben Yehiel Michel Wisser, 19th century, Ukraine)
 - Meiri (Rabbi Menachem ben Solomon Meiri, 13th-14th century, Provence)
 - Torah Temimah (Rabbi Baruch Epstein, 19th-20th century, Lithuania/Belarus)
+- Romemot El (Alshich, Rabbi Moshe Alshich, 16th century, Safed) — homiletical
+- Minchat Shai (Rabbi Yedidiah Shlomo Norzi, 16th-17th century, Mantua) — Masoretic text criticism
+- Metzudat Zion (Altschuler, 18th century, Prague/Jaworów) — one-line word glossary
+- Chomat Anakh (Chida, Rabbi Chaim Yosef David Azulai, 18th century, Jerusalem/Livorno)
+- Malbim Beur Hamilot (the Malbim's word-level half, as distinct from `Malbim` above)
 
 Usage:
     from src.agents.commentary_librarian import CommentaryLibrarian
@@ -55,11 +59,77 @@ COMMENTATORS = {
     "Rashi": "Rashi on Psalms",
     "Ibn Ezra": "Ibn Ezra on Psalms",
     "Radak": "Radak on Psalms",
-    "Metzudat David": "Metzudat David on Psalms",
+    # METZUDAT DAVID WAS DROPPED IN SESSION 373 (author's call), and the corpus backs
+    # it. Measured over the 71 production guides, dossier entries SUPPLIED vs names
+    # actually cited in the finished commentary:
+    #
+    #     Radak           636 supplied -> 444 cited (70%)
+    #     Rashi           470            -> 365 (78%)
+    #     Ibn Ezra        627            -> 241 (38%)
+    #     Malbim          452            -> 210 (46%)
+    #     Meiri           622            -> 107 (17%)
+    #     Torah Temimah   163            ->  72 (44%)
+    #     Metzudat David  610            ->  60 (10%)   <- least used, by 7x
+    #
+    # It was the THIRD most supplied commentator and the least used one — under one
+    # citation per guide from a supply the size of Ibn Ezra's. The reason is
+    # structural, not accidental: Metzudat David is running paraphrase by design —
+    # the thing RULE 8b exists to reject — so it almost never clears the admission
+    # test. (RULE 8b used to name it as the example; that naming is gone too.) Fetching it
+    # cost a Sefaria round-trip per verse and put ~8.6 dead glosses per psalm into an
+    # unranked dossier the writer has to read past — the exact dilution Session 370
+    # traced from coverage pressure to inert citation.
+    #
+    # NOT A CONTRADICTION with Metzudat Zion below: the Metzudot are two separate
+    # works by the same family. Metzudat DAVID is the running paraphrase (dropped);
+    # Metzudat ZION is the glossary — a bare definition of one hard word, ~65 chars,
+    # on half the verses. The paraphrase is what failed the admission test; a word
+    # gloss is a different thing and is cheap.
     "Malbim": "Malbim on Psalms",
     "Meiri": "Meiri on Psalms",
-    "Torah Temimah": "Torah Temimah on Psalms"
+    "Torah Temimah": "Torah Temimah on Psalms",
+
+    # --- Added Session 373 (author's request) ----------------------------------
+    # Sefaria index names verified live before wiring; coverage measured over 36
+    # verses (all of Ps 71, plus Ps 23:1-6 and Ps 1:1-6). All Hebrew-only — none
+    # of these five carries an English translation on Sefaria, so the writer is
+    # reading and rendering them itself.
+    #
+    #   Romemot El           100% of verses, ~763 Hebrew chars  (the big one)
+    #   Minchat Shai          58%,           ~598
+    #   Metzudat Zion         50%,            ~65
+    #   Malbim Beur Hamilot   36%,           ~119
+    #   Chomat Anakh          19%,           ~838
+    #
+    # Note the shape: Chomat Anakh and Minchat Shai are naturally SELECTIVE — they
+    # speak only where they have something to say, which is why they cost little.
+    # Romemot El is the opposite and is on every verse; it is the one that can
+    # crowd a dossier, which is why RULE 8b now characterises it explicitly.
+    "Romemot El": "Romemot El on Psalms",              # Alshich — homiletical/derash
+    "Minchat Shai": "Minchat Shai on Psalms",          # Masoretic spelling, vocalization, accents
+    "Metzudat Zion": "Metzudat Zion on Psalms",        # bare lexical glosses (the Metzudot's glossary half)
+    "Chomat Anakh": "Chomat Anakh on Psalms",          # Chida — eclectic, kabbalistic-leaning
+    "Malbim Beur Hamilot": "Malbim Beur Hamilot on Psalms",  # Malbim on the WORDS; `Malbim` above is on the matter
 }
+
+
+# How each source is NAMED in the finished guide's methodological summary.
+# `commentary_counts` is keyed by the short lookup name above, which is fine for
+# Rashi and Radak and useless for the rest: a reader who meets "Chomat Anakh (5)"
+# in the bibliography has no way to know that is the Chida. Works whose title is
+# not their author's name get the author appended; everything else is left alone.
+COMMENTATOR_DISPLAY = {
+    "Romemot El": "Romemot El (Alshich)",
+    "Chomat Anakh": "Chomat Anakh (Chida)",
+    "Minchat Shai": "Minchat Shai (Norzi)",
+    "Metzudat Zion": "Metzudat Zion (Altschuler)",
+    "Torah Temimah": "Torah Temimah (Epstein)",
+}
+
+
+def display_name(commentator: str) -> str:
+    """Bibliography label for a commentator key (see COMMENTATOR_DISPLAY)."""
+    return COMMENTATOR_DISPLAY.get(commentator, commentator)
 
 
 def clean_html_text(text: str) -> str:

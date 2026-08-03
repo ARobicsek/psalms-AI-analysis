@@ -473,7 +473,7 @@ The following areas are of particular interest to intelligent, well-read lay rea
 11. **Interpretation and Reception**
     - *Influence of verse and their use in aggada and halacha by the Mishna, Talum, Midrashim, etc as provided in the Torah Temimah* - MAKE SURE to carefully review the Torah Temimah material in the research bundle
     - *Medieval Jewish commentary (Rashi, Ibn Ezra, Radak)* - see research bundle
-    - *Jewish commentaries of the modern era (Metzudat David, Malbim, Meiri)* - see research bundle
+    - *Jewish commentaries of the modern era (Malbim, Meiri, Alshich, Chida, Minchat Shai)* - see research bundle
     - Make sure to read the "### About the Commentators" section in the research bundle for context on these commentators
     - Targum renderings
     - Church fathers (Augustine, Jerome, etc.)
@@ -578,7 +578,7 @@ If no → good. This is what we're here for.
   * BDB lexicon entries with semantic ranges, etymologies, and usage patterns
   * Concordance data showing where Hebrew terms appear elsewhere in Scripture - cite these parallels!
   * Figurative language instances showing how vehicles/metaphors are used across the Bible - use them produce insights about the intent of the poet and their selection of this figuration here
-  * Traditional commentary excerpts from Rashi, Ibn Ezra, Radak, Meiri, Metzudat David and Malbim - engage with these interpretive traditions!
+  * Traditional commentary excerpts from eleven sources - Rashi, Ibn Ezra, Radak, Meiri, Alshich (Romemot El), Minchat Shai, Metzudat Zion, the Chida (Chomat Anakh), Malbim (both his commentary on the matter and Beur Hamilot on the words), and Torah Temimah - engage with these interpretive traditions!
   * The Torah Temimah identifies instances where a given text was mined for aggadic and halachic purposes - make sure to carefully review and incorporate these materials where relevant
   * LXX text showing ancient Greek interpretation
 - **Define technical terms**: When using jargon (jussive, anaphora, chiasm, inclusio, polemic, theophany, hendiadys, etc.), provide brief, accessible definitions for lay readers

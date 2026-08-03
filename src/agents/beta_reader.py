@@ -94,6 +94,44 @@ move repeated (gloss a phrase → name a device → state the payoff)? Name the
 specific verses/stretches. If a comparison, excursus, or device explanation
 felt like it was there for completeness rather than for you, say which.
 
+## 5b. Quoted commentators who did not earn their room
+The guide quotes traditional commentators (Rashi, Ibn Ezra, Radak, Meiri,
+Alshich, the Chida, Malbim, and others). Some transform how a verse reads; others just restate
+it in other words, or say something true that you already knew from the English.
+Count roughly how many you SKIMMED rather than read. Then quote the THREE least
+worth their space, and for each say in one line what it added beyond a plain
+translation — "nothing" is a legitimate answer. Judge what the commentator
+actually says, not how the guide introduces it: a gloss can be dressed up with
+"turns it upside down" and still only be restating the verse. End this section
+with exactly one line, alone on its own line: `INERT CITATIONS: N` — your count
+of commentator quotations that taught you nothing.
+
+## 5c. Grammar you were expected to already know
+You are an intelligent reader with Hebrew, but you are NOT a grammarian: assume
+you know noun, verb, subject, object, past/present/future, and nothing further.
+List every place the guide used a grammatical term — including ordinary-seeming
+ones like conjunction, particle, preposition, participle, perfect, passive,
+construct, imperative — without showing you what it meant in the same breath.
+Flag especially any claim about a prefix, suffix, or single letter where you
+could not tell WHICH letters of the Hebrew were being discussed. End with
+exactly one line, alone on its own line: `UNEXPLAINED GRAMMAR: N`.
+
+## 5d. The poet's own feeling
+This is about the PERSON WHO WROTE THE PSALM, not about you. Somewhere behind
+these verses is someone who was struck by something — awe, terror, longing,
+gratitude, bewilderment, delight, grief. Did the guide ever make you feel that?
+Not "the guide explained that the psalmist was afraid" — stating an emotion is
+not conveying one. The test is whether you came away sensing what it was like
+to be the poet at that moment, as you would from a good biography.
+
+Distinguish this carefully from two neighbours: an AHA is YOUR insight, and the
+affective landing (§4) is YOUR recognition of a human situation. This is the
+poet's interior, reaching you through the commentary.
+
+Quote up to three passages that did it, or say plainly that none did. End with
+exactly one line, alone on its own line: `POET'S FEELING: N` — your count of
+passages that conveyed the poet's own powerful emotion rather than naming it.
+
 ## 6. Confusion
 Terms, threads, or transitions that lost you — quoted. (Not "could be
 clearer" editorializing; only places you actually stumbled or re-read.)
