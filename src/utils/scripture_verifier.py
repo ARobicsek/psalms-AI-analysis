@@ -1678,6 +1678,21 @@ def verify_citations_tooluse(
 
     messages = [{"role": "user", "content": user_msg_blocks}]
 
+    # ROLLING CACHE BREAKPOINT.
+    # The two breakpoints above are static: they cover the system prompt and the
+    # commentary, which is the bulk of the prefix and never changes. But the
+    # tool-use loop below runs up to MAX_TURNS turns, and everything it appends
+    # (assistant tool_use blocks + tool_result blocks) lands AFTER the last static
+    # breakpoint -- so every turn re-paid full input price on the entire
+    # accumulated lookup history, which grows with each batch of verse lookups.
+    # Marking the newest tool_result block advances the breakpoint each turn, so
+    # turn N reads turns 1..N-1 at 0.1x and writes only its own delta at 1.25x.
+    # Exactly one rolling marker is live at a time (the previous one is stripped
+    # before the next is set), which keeps us at 3 of the 4 breakpoints the API
+    # allows -- room the automatic top-level `cache_control` field would also have
+    # used, had we wanted to depend on a newer SDK for this.
+    rolling_bp_block = None
+
     total_input_tokens = 0
     total_output_tokens = 0
     total_cache_read_tokens = 0
@@ -1752,6 +1767,15 @@ def verify_citations_tooluse(
                     "tool_use_id": block.id,
                     "content": "Citations received. Programmatic comparison will follow.",
                 })
+
+        # Advance the rolling breakpoint onto the newest tool_result -- but only if
+        # another turn is actually coming. Marking the final turn's results would
+        # pay a cache write for an entry no request ever reads.
+        if tool_results and report_result is None:
+            if rolling_bp_block is not None:
+                rolling_bp_block.pop("cache_control", None)
+            rolling_bp_block = tool_results[-1]
+            rolling_bp_block["cache_control"] = {"type": "ephemeral"}
 
         messages.append({"role": "assistant", "content": response.content})
         messages.append({"role": "user", "content": tool_results})

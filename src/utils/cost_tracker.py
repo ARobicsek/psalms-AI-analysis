@@ -28,8 +28,9 @@ class ModelUsage:
     input_tokens: int = 0
     output_tokens: int = 0
     thinking_tokens: int = 0  # Only for Claude models with extended thinking
-    cache_read_tokens: int = 0  # Anthropic cache reads
-    cache_write_tokens: int = 0  # Anthropic cache writes
+    cache_read_tokens: int = 0  # Anthropic cache reads (0.1x input, either TTL)
+    cache_write_tokens: int = 0  # Anthropic 5-minute cache writes (1.25x input)
+    cache_write_1h_tokens: int = 0  # Anthropic 1-hour cache writes (2x input)
     call_count: int = 0
 
     def add_usage(
@@ -38,7 +39,8 @@ class ModelUsage:
         output_tokens: int = 0,
         thinking_tokens: int = 0,
         cache_read_tokens: int = 0,
-        cache_write_tokens: int = 0
+        cache_write_tokens: int = 0,
+        cache_write_1h_tokens: int = 0
     ):
         """Add usage from a single API call."""
         self.input_tokens += input_tokens
@@ -46,10 +48,25 @@ class ModelUsage:
         self.thinking_tokens += thinking_tokens
         self.cache_read_tokens += cache_read_tokens
         self.cache_write_tokens += cache_write_tokens
+        self.cache_write_1h_tokens += cache_write_1h_tokens
         self.call_count += 1
 
 
 # Pricing as of November 2025 (per million tokens)
+#
+# CACHE ROWS (Anthropic): prompt caching has two TTLs and they are priced
+# differently, so there are two write rows:
+#   "cache_write"     5-minute TTL, 1.25x base input
+#   "cache_write_1h"  1-hour TTL,   2.00x base input
+#   "cache_read"      either TTL,   0.10x base input  (a read also refreshes the
+#                                                      TTL at no extra charge)
+# Nothing in the pipeline requests the 1-hour TTL today, so "cache_write_1h" is
+# unused-but-correct. It exists because the table previously carried ONLY the
+# 5-minute rate: any future caller passing ttl="1h" would have been billed 2x and
+# reported at 1.25x, a silent 60% under-report of the write. Sizing note for
+# whoever wires up caching: the 1-hour TTL only pays off from THREE reuses of the
+# cached prefix onward -- for a single downstream read it is a net loss
+# (2.0 + 0.1 = 2.1x vs 2.0x uncached).
 PRICING = {
     # Claude Opus 4.5 (released Nov 24, 2025)
     "claude-opus-4-5": {
@@ -58,6 +75,7 @@ PRICING = {
         "thinking": 25.00,  # Thinking tokens charged at output rate
         "cache_read": 0.50,  # 10% of input price
         "cache_write": 6.25,  # 25% markup on input
+        "cache_write_1h": 10.00,
     },
     # Claude Opus 4.6 (released Feb 2026) - Adaptive thinking model
     "claude-opus-4-6": {
@@ -66,6 +84,7 @@ PRICING = {
         "thinking": 25.00,  # Adaptive thinking charged at output rate
         "cache_read": 0.50,  # 10% of input price
         "cache_write": 6.25,  # 25% markup on input
+        "cache_write_1h": 10.00,
     },
     # Claude Opus 4.7 (released Apr 2026) - New tokenizer, same per-token pricing
     "claude-opus-4-7": {
@@ -74,6 +93,7 @@ PRICING = {
         "thinking": 25.00,  # Thinking tokens charged at output rate
         "cache_read": 0.50,  # 10% of input price
         "cache_write": 6.25,  # 25% markup on input
+        "cache_write_1h": 10.00,
     },
     # Claude Opus 4.8
     "claude-opus-4-8": {
@@ -82,6 +102,7 @@ PRICING = {
         "thinking": 25.00,
         "cache_read": 0.50,
         "cache_write": 6.25,
+        "cache_write_1h": 10.00,
     },
     # Claude Opus 5 - PRODUCTION WRITER since Session 373. Same per-token price as
     # Opus 4.8 ($5/$25, verified 2026-08-03), so the cost difference is entirely
@@ -97,6 +118,7 @@ PRICING = {
         "thinking": 25.00,
         "cache_read": 0.50,
         "cache_write": 6.25,
+        "cache_write_1h": 10.00,
     },
     # Claude Sonnet 4.6 (released Feb 2026) - Adaptive thinking, same pricing as Sonnet 4.5
     "claude-sonnet-4-6": {
@@ -105,6 +127,7 @@ PRICING = {
         "thinking": 15.00,  # Thinking tokens charged at output rate
         "cache_read": 0.30,  # 10% of input price
         "cache_write": 3.75,  # 25% markup on input
+        "cache_write_1h": 6.00,
     },
     # Claude Sonnet 4.5
     "claude-sonnet-4-5": {
@@ -113,6 +136,7 @@ PRICING = {
         "thinking": 15.00,  # Thinking tokens charged at output rate
         "cache_read": 0.30,  # 10% of input price
         "cache_write": 3.75,  # 25% markup on input
+        "cache_write_1h": 6.00,
     },
     # Claude Haiku 4 (for liturgical librarian fallback)
     "claude-haiku-4": {
@@ -121,6 +145,7 @@ PRICING = {
         "thinking": 5.00,
         "cache_read": 0.10,
         "cache_write": 1.25,
+        "cache_write_1h": 2.00,
     },
     # Claude Haiku 4.5 (for citation verifier false-positive filter).
     # Session 373: CORRECTED from $0.80/$4.00 — that was 20% under the real rate and
@@ -134,6 +159,7 @@ PRICING = {
         "thinking": 5.00,
         "cache_read": 0.10,   # 10% of input
         "cache_write": 1.25,  # 25% markup on input (5-minute TTL)
+        "cache_write_1h": 2.00,
     },
     "claude-haiku-4-5": {
         "input": 1.00,
@@ -141,6 +167,7 @@ PRICING = {
         "thinking": 5.00,
         "cache_read": 0.10,
         "cache_write": 1.25,
+        "cache_write_1h": 2.00,
     },
     # GPT-5 (OpenAI)
     "gpt-5": {
@@ -149,6 +176,7 @@ PRICING = {
         "thinking": 10.00,  # Reasoning tokens charged at output rate
         "cache_read": 0.0,  # Not applicable
         "cache_write": 0.0,  # Not applicable
+        "cache_write_1h": 0.00,
     },
     # GPT-5.1 (OpenAI) - Same pricing as GPT-5
     "gpt-5.1": {
@@ -157,6 +185,7 @@ PRICING = {
         "thinking": 10.00,  # Reasoning tokens charged at output rate
         "cache_read": 0.0,  # Not applicable
         "cache_write": 0.0,  # Not applicable
+        "cache_write_1h": 0.00,
     },
     # GPT-5.4 (OpenAI)
     "gpt-5.4": {
@@ -165,6 +194,7 @@ PRICING = {
         "thinking": 15.00,  # Reasoning tokens charged at output rate
         "cache_read": 0.0,  # Not applicable
         "cache_write": 0.0,  # Not applicable
+        "cache_write_1h": 0.00,
     },
     # GPT-5.6 Terra (OpenAI, GA 2026-07-09) - the mid "durable capability tier".
     # Session 373: CORRECTED from $2.50/$15.00. The old note claimed Terra was
@@ -181,6 +211,7 @@ PRICING = {
         "thinking": 12.00,  # Reasoning tokens charged at output rate
         "cache_read": 0.20,  # 90% off cached input (not yet wired up)
         "cache_write": 0.0,  # Not applicable
+        "cache_write_1h": 0.00,
     },
     # Gemini 2.5 Pro (Google)
     "gemini-2.5-pro": {
@@ -189,6 +220,9 @@ PRICING = {
         "thinking": 12.00,  # Extended thinking charged at output rate
         "cache_read": 0.30,  # 10% of input (approximate)
         "cache_write": 3.75,  # 25% markup (approximate)
+        # 0, not 2x input: Google prices context caching by storage-time, not by a
+        # write multiplier, so the Anthropic 1-hour row has no Gemini analogue.
+        "cache_write_1h": 0.00,
     },
     # Gemini 3.1 Pro (Google). Verified against Google's live pricing page 2026-08-03.
     # CAVEAT — Google tiers this model by PROMPT LENGTH and we only encode the cheap
@@ -202,6 +236,7 @@ PRICING = {
         "thinking": 12.00,  # Thinking tokens charged at output rate
         "cache_read": 0.0,  # Not applicable yet
         "cache_write": 0.0,  # Not applicable yet
+        "cache_write_1h": 0.00,
     },
 }
 
@@ -236,7 +271,8 @@ class CostTracker:
         output_tokens: int = 0,
         thinking_tokens: int = 0,
         cache_read_tokens: int = 0,
-        cache_write_tokens: int = 0
+        cache_write_tokens: int = 0,
+        cache_write_1h_tokens: int = 0
     ):
         """
         Add usage from a single API call.
@@ -247,7 +283,17 @@ class CostTracker:
             output_tokens: Number of output tokens
             thinking_tokens: Number of extended thinking tokens (Claude/Gemini)
             cache_read_tokens: Number of cache read tokens (Anthropic only)
-            cache_write_tokens: Number of cache write tokens (Anthropic only)
+            cache_write_tokens: Number of 5-MINUTE cache write tokens (Anthropic only)
+            cache_write_1h_tokens: Number of 1-HOUR cache write tokens (Anthropic only)
+
+        NOTE on splitting the two write figures: Anthropic's
+        `usage.cache_creation_input_tokens` is the SUM of both TTLs. If a caller
+        ever requests ttl="1h", read the split off
+        `usage.cache_creation.ephemeral_5m_input_tokens` /
+        `.ephemeral_1h_input_tokens` and pass them separately -- passing the summed
+        field as `cache_write_tokens` would price 1-hour writes at the 5-minute
+        rate. Callers that never request the 1-hour TTL can keep passing the summed
+        field, which is what every caller does today.
         """
         if model not in self.usage_by_model:
             self.usage_by_model[model] = ModelUsage(model_name=model)
@@ -257,7 +303,8 @@ class CostTracker:
             output_tokens=output_tokens,
             thinking_tokens=thinking_tokens,
             cache_read_tokens=cache_read_tokens,
-            cache_write_tokens=cache_write_tokens
+            cache_write_tokens=cache_write_tokens,
+            cache_write_1h_tokens=cache_write_1h_tokens
         )
 
     def calculate_cost(self, model: str) -> Dict[str, float]:
@@ -287,8 +334,14 @@ class CostTracker:
             "output": 0.0,
             "thinking": 0.0,
             "cache_read": 0.0,
-            "cache_write": 0.0
+            "cache_write": 0.0,
+            "cache_write_1h": 0.0
         })
+
+        # A model row that predates the 1-hour rate falls back to the documented
+        # 2x-input multiplier rather than to zero -- an unpriced write is exactly
+        # the silent under-report this row was added to prevent.
+        cache_write_1h_rate = pricing.get("cache_write_1h", 2.0 * pricing.get("input", 0.0))
 
         # Calculate costs (pricing is per million tokens)
         input_cost = (usage.input_tokens / 1_000_000) * pricing["input"]
@@ -296,7 +349,8 @@ class CostTracker:
         thinking_cost = (usage.thinking_tokens / 1_000_000) * pricing["thinking"]
         cache_cost = (
             (usage.cache_read_tokens / 1_000_000) * pricing["cache_read"] +
-            (usage.cache_write_tokens / 1_000_000) * pricing["cache_write"]
+            (usage.cache_write_tokens / 1_000_000) * pricing["cache_write"] +
+            (usage.cache_write_1h_tokens / 1_000_000) * cache_write_1h_rate
         )
 
         return {
@@ -344,9 +398,12 @@ class CostTracker:
             if usage.thinking_tokens > 0:
                 lines.append(f"  Thinking Tokens: {usage.thinking_tokens:,}")
 
-            if usage.cache_read_tokens > 0 or usage.cache_write_tokens > 0:
+            if (usage.cache_read_tokens > 0 or usage.cache_write_tokens > 0
+                    or usage.cache_write_1h_tokens > 0):
                 lines.append(f"  Cache Read Tokens: {usage.cache_read_tokens:,}")
-                lines.append(f"  Cache Write Tokens: {usage.cache_write_tokens:,}")
+                lines.append(f"  Cache Write Tokens (5m): {usage.cache_write_tokens:,}")
+                if usage.cache_write_1h_tokens > 0:
+                    lines.append(f"  Cache Write Tokens (1h): {usage.cache_write_1h_tokens:,}")
 
             lines.append(f"  Input Cost: ${costs['input_cost']:.4f}")
             lines.append(f"  Output Cost: ${costs['output_cost']:.4f}")
@@ -386,6 +443,7 @@ class CostTracker:
                 "thinking_tokens": usage.thinking_tokens,
                 "cache_read_tokens": usage.cache_read_tokens,
                 "cache_write_tokens": usage.cache_write_tokens,
+                "cache_write_1h_tokens": usage.cache_write_1h_tokens,
                 "costs": costs
             }
         result["total_cost"] = self.get_total_cost()
