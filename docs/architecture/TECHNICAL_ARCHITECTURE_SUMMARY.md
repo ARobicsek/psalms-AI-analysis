@@ -2,7 +2,7 @@
 
 **Date**: 2026-03-02
 **Version**: Enhanced Pipeline V6.5 (Phase 4, Sessions 200-280)
-**Status**: Production System with Unified Writer V4, Copy Editor, Insight Extractor, Figurative Curator, SI Pipeline, Gemini Fallback
+**Status**: Production System with Unified Writer V4, Copy Editor, Synthesis Discovery, Figurative Curator, SI Pipeline, Gemini Fallback
 
 ---
 
@@ -19,7 +19,7 @@ The Psalms Commentary Pipeline is a sophisticated AI-powered system that generat
 - **Gemini 3.1 Pro Migration**: Upgraded models and preserved reasoning configurations (Session 275)
 - **Unified Writer V4**: Single prompt merging Main and College depth and clarity, halving pipeline cost (Session 269)
 - **Cross-Cultural Literary Echoes**: Integration of Gemini Deep Research for cross-cultural comparisons (Session 259)
-- **Insight Extractor**: Dedicated agent to curate "aha!" moments before synthesis (Session 241/250)
+- **Insight Extractor**: ~~Dedicated agent to curate "aha!" moments before synthesis (Session 241/250)~~ **REMOVED in Session 374** — see below. The live cross-verse "aha" agent is **Synthesis Discovery** (Session 347)
 - **Questions for the Reader**: LLM-curated questions appearing before the introduction (Session 230)
 - **Figurative Curator**: LLM-enhanced agent using Gemini 3.1 Pro to curate figurative language insights (Sessions 224-227)
 
@@ -45,8 +45,8 @@ Input: Psalm Number
     [2b] Question Curation (Claude Opus 4.6)
     → LLM-curated engaging questions (Optional / Auto-skipped by default)
     ↓
-    [2c] Insight Extraction (Claude Opus 4.6)
-    → High-value curated "aha!" moments (Optional / Auto-skipped by default)
+    [2c] Research Trimming
+    → Writes psalm_NNN_research_trimmed.md (Insight Extraction REMOVED, Session 374)
     ↓
 [3] Master Writer V4 (Claude Opus 4.7 or GPT-5.1)
     → Unified prompt merging Main + College depth and pedagogical clarity
@@ -121,15 +121,20 @@ Output: Scholarly Commentary (.docx + .md)
   - Curation of 4-6 engaging scholarly questions
   - Auto-skipped by default, enabled via `--include-questions`
 
-#### InsightExtractor (Pass 2c)
-- **Model**: Claude Opus 4.6 (`claude-opus-4-6`) with adaptive thinking
-- **Purpose**: Curates the massive research bundle for high-value insights
-- **Input**: Full `ResearchBundle`, `MacroAnalysis`, Psalm text
-- **Output**: Extracted "aha!" moments passed to the Master Writer
-- **Key Features**:
-  - Focuses on transformative insights that wouldn't exist without AI
-  - Protects the Master Writer's context window from fluff
-  - Auto-skipped by default, enabled via `--include-insights`
+#### InsightExtractor (Pass 2c) — REMOVED, Session 374
+- **Status**: archived to `src/agents/archive/insight_extractor.py`; step 2c is now
+  research trimming only.
+- **Why**: its stated purpose was to stop the **Synthesis Writer** from being
+  overwhelmed and "defaulting to summary". The Synthesis Writer was retired in V4,
+  so the agent was protecting a stage that no longer exists. It had been
+  auto-skipped since Session 280 and last produced real output on Psalm 30
+  (2026-03-08); the 13 runs from Psalm 60 to Psalm 72 wrote no insights file at all.
+- **What was deliberately NOT changed**: the `{curated_insights}` slot remains in
+  `MASTER_WRITER_PROMPT_V4`, rendering the constant `[No curated insights provided]`.
+  That is byte-identical to every production run since Psalm 60, so the arm-E
+  template is untouched. Removing the slot would be an un-A/B'd prompt delta.
+- **Do not confuse with** `synthesis_discovery.py` (step 3.5), the cross-verse
+  TYPE P / TYPE C observation sidecar, which is ON by default and actively used.
 
 #### Master Editor / Unified Writer V4 (Pass 4)
 - **Model Options**:
@@ -404,8 +409,7 @@ def normalize_hebrew(text: str, level: int) -> str:
 - **`--skip-college`**: *(Deprecated V4)* Silent no-op
 - **`--skip-copy-editor`**: Skip the copy editor pass (enabled by default)
 - **`--include-questions`**: Run Question Curator (skipped by default)
-- **`--include-insights`**: Run Insight Extractor (skipped by default)
-- **`--exclude-insights`**: Do not regenerate and omit existing file from writer
+- **`--include-insights`** / **`--exclude-insights`** / **`--skip-insights`** / **`--gpt-5-4-insight`**: *(Session 374)* accepted for backward compatibility, no effect. `--include-insights` prints a warning.
 - **`--exclude-questions`**: Do not regenerate and omit existing file from writer
 - **`--skip-print-ready`**: Skip print-ready formatting step
 - **`--skip-word-doc`**: Skip .docx generation step
@@ -544,7 +548,7 @@ python scripts/tribal_blessings_analyzer.py --list
 - **Implementation**: `src/utils/cost_tracker.py`
 - **Models Tracked**:
   - Claude Opus 4.7 (MasterWriter default)
-  - Claude Opus 4.6 (MacroAnalyst, InsightExtractor, QuestionCurator, CopyEditor)
+  - Claude Opus 4.6 (MacroAnalyst, QuestionCurator, CopyEditor)
   - Claude Sonnet 4.6 (MicroAnalyst)
   - Gemini 3.1 Pro Preview (Figurative Curator)
   - Gemini 2.5 Pro (SynthesisWriter fallback, Liturgical Librarian primary)

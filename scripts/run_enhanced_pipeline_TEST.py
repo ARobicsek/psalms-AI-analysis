@@ -31,7 +31,7 @@ from src.agents.micro_analyst import MicroAnalystV2
 # === CHANGE 1: Import MasterEditor from consolidated file ===
 from src.agents.master_editor import MasterEditor
 from src.agents.question_curator import QuestionCurator
-from src.agents.insight_extractor import InsightExtractor
+from src.agents.archive.insight_extractor import InsightExtractor  # Session 374: agent archived; this runner is legacy
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker

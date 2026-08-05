@@ -14,7 +14,7 @@ This file is a stable reference for the project's current architecture and capab
 | Phase 2: Macro Analysis | Complete | All psalms analyzed for themes and structure |
 | Phase 3: Micro Analysis | Complete | Verse-by-verse phrase extraction complete |
 | Phase 3b: Question Curation | Complete | LLM-curated reader questions from analysis |
-| Phase 3c: Insight Extraction | Complete | Curates high-value insights from research bundle (Step 2c) |
+| Phase 3c: Insight Extraction | **REMOVED (S374)** | Retired. Step 2c is now research trimming only — see Active Features |
 | Phase 4: Research Assembly | Complete | Optimizing figurative language search and trimming |
 | Phase 5: Synthesis Generation | Complete | Commentary generation with Gemini fallback |
 | Phase 6: Editing and Publication | Complete | Unified Writer V4, DOCX generation (RTL/Arabic supported) |
@@ -22,8 +22,8 @@ This file is a stable reference for the project's current architecture and capab
 ## Active Features
 
 - **Unified Writer V4**: Single prompt merging Main + College editions; halves pipeline cost
-- **Insight Extractor**: Dedicated agent (gpt-5.4) to curate "aha!" moments from research
-- **Research Trimmer**: Intelligent context window management
+- **Synthesis Discovery** (STEP 3.5): cross-verse "aha" sidecar (TYPE P patterns / TYPE C connections), ON by default. This is the live "aha" agent — do not confuse it with the removed Insight Extractor below
+- **Research Trimmer**: Intelligent context window management (STEP 2c; effectively a no-op — the 400k cap never trips on ~215k bundles — but `converse_with_editor.py` reads the file it writes)
 - **Gemini 2.5 Pro Fallback**: Handles large psalms (51+ verses) without content loss
 - **Deep Web Research Integration**: Supports Gemini Deep Research outputs
 - **Strategic Verse Grouping**: Prevents truncation in long psalms
@@ -40,7 +40,7 @@ This file is a stable reference for the project's current architecture and capab
 - Large psalms may require Gemini fallback (additional cost)
 - Deep research must be manually prepared via Gemini browser interface
 - Figurative Curator adds ~$0.30-0.50 per psalm
-- Insight Extractor adds ~$0.50-1.00 per psalm
+- ~~Insight Extractor adds ~$0.50-1.00 per psalm~~ — removed in Session 374. No saving was realised: it had already been skipped by default since Session 280, so production was not paying this
 
 ## Database Status
 

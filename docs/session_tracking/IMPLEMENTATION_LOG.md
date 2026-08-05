@@ -9,6 +9,161 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 374 (2026-08-05): Literary echoes review — PASS 4 HAD BEEN DELETING 40-84% OF VERIFIED ECHOES; per-entry verification; corpus-wide author ledger; the second generator is measured and OFF
+
+### Trigger
+
+The author asked for a review of the literary-echoes components: *"we developed those a couple months
+ago and the world of LLMs has changed since then. Is there a way we could get better results and/or
+less expensive high-quality output?"* Then, after the findings: *"let's do all four"*, with the
+refinement *"perhaps for the second pass 1 generator we could use one of the less expensive opus
+models, like 4.8."* Then: run Psalm 1 and compare against the pre-change run.
+
+### 1. PASS 4 WAS SILENTLY EATING FINISHED WORK — the headline
+
+Counting `####` author blocks in and out of the old LLM "reconstruction" pass, across all 26 runs:
+
+| Psalm | echoes in | rejected by Pass 3 | echoes out | kept | Pass-4 output ends |
+|---|---|---|---|---|---|
+| 69 | 25 | 1 | 4 | **16%** | `...ain't got no place to go. \n> ...` |
+| 70 | 19 | 2 | 7 | **37%** | `...You got a lotta nerve \n> To say` |
+| 71 | 19 | 1 | 9 | **47%** | `...And their eyes are` |
+| 72 | 18 | 1 | 11 | **61%** | `...Wasting time in the unemployment lines \n> Sitting` |
+
+Every one stops **mid-quotation**. None hit `max_completion_tokens=32000` — Ps 71 emitted 2,784
+tokens of a 32,000 budget. The model self-terminated, which is exactly the gpt-5.1 behaviour the
+module's own comment documented and assumed gpt-5.4/terra did not have. `finish_reason` was never
+checked: `response.choices[0].message.content` was read unconditionally.
+
+**Psalm 71 is the psalm every writer-prompt A/B since Session 370 has run on**, and its dossier was
+missing half its verified echoes the whole time. Session 372's "arm E produced 49 quoted lines,
+highest ever" was scored against a file with 9 of 19 echoes. Overall retention across all 26 runs
+was 81%.
+
+**Fix: Pass 4 is gone.** Pass 3 now returns a structured per-entry verdict and the document is
+rebuilt by string manipulation in the new `src/agents/literary_echoes_parser.py`, which cannot stop
+early. A second benefit: Pass 4's instruction 7 was *"do not substantively alter surviving ones"*,
+unenforceable when a model regenerates the whole document. It is now enforced by construction —
+analysis prose is copied byte-for-byte and only a heading or quotation block the verifier explicitly
+corrected is ever substituted. Verified on the live Psalm 1 run: **20/20 analysis paragraphs
+byte-identical** to their source pass.
+
+### 2. Three more silent failures found in the same audit
+
+- **Empty generations were swallowed.** `response.text or ""` turned a failed Gemini call into an
+  empty string and the pipeline carried on. 3 of 26 runs lost a whole pass (Ps 1 and 68 lost Pass 1,
+  Ps 55 lost Pass 2); Ps 1 shipped a 6,831-byte file against a ~15K norm. Every call now validates
+  that it produced at least one author block, retries, then raises.
+- **The pricing table was a stale duplicate.** The module carried its own copy with terra at
+  $2.50/$15.00, six weeks after Session 373 corrected `cost_tracker.PRICING` to $2.00/$12.00 — the
+  docstring said *"Keep in sync"* and it was not. Now reads `cost_tracker.PRICING`, the one table.
+- **Reasoning tokens were double-counted and cached input was billed as fresh.** `src/utils/openai_usage.py`
+  exists to document exactly this trap and literary echoes had never been migrated to it. Pass 3's
+  prompt is ~11k tokens but billed ~125k input, because the web-search loop resends context each
+  round and nearly all of it is cache hits. On a representative call the reported cost drops **53%**
+  from the three fixes combined.
+
+### 3. Per-entry verification (Pass 3)
+
+One call per entry instead of one call per document, fanned out over 6 threads, returning
+`{verdict, corrected_heading, corrected_quotation_block, reason}` keyed to a parser-assigned ID.
+**Every ambiguous case fails safe toward KEEPING the entry** — a malformed verdict, an unparseable
+response, or a dead verifier leaves the echo in place and logs it. That direction is deliberate: the
+bug this rewrite exists to fix was silent content loss.
+
+On Psalm 1 it caught a real fabrication — Anna Margolin, where the verifier established the cited
+poem is real but *"its full text contains neither these Yiddish lines nor this translation"* — and
+applied 7 precise textual corrections (a wrong Hebrew word in Ibn Ezra's line 2, an omitted Natan
+Zach line, a Devanagari transcription fix). Wall clock **178s → 74s**.
+
+**Honest cost note:** the fan-out is NOT cheaper per entry. Batched verification scaled sublinearly
+(~6.2k input tokens/entry across the 23 healthy runs); per-entry is ~12.1k, because the fixed prompt
+overhead is paid once per entry. 35% of that is served from cache. The savings come from Pass 4's
+removal and the pricing fixes, not from the fan-out — which buys the speedup, the structured
+verdicts, and the deterministic rebuild.
+
+### 4. Corpus-wide author ledger
+
+`EXCLUSION_WINDOW = 4` could only prevent *adjacent* repetition, but the Second Echo Principle is a
+claim about the whole 150-psalm series. New `AuthorLedger` rebuilds from the canonical files every
+run (so a hand-edited file can never leave it stale) and bans two ways: used in the last 4 psalms,
+or used in ≥3 psalms ever. On Psalm 1 it saw **289 authors** and banned 100, where the old scan saw
+31. Author keys are accent-folded, so Kamo no Chōmei matches an earlier "Chomei".
+
+Worth recording: the current tier-override prompts are working well. Across the 24 API-pipeline
+psalms there is **zero** banned-author leakage, only 4 psalms exceed the ≤2 canonical-slot cap (by
+1–2), and max reuse is 4× over 230 unique authors. The ugly corpus numbers (Shakespeare 14×, Homer
+and Dante present) are all from **legacy pre-tier-override files**. The ledger is insurance for
+scale, not a fix for a present failure.
+
+### 5. The second generator: built, measured, and OFF by default
+
+The idea is sound and the merge worked — on Psalm 1, Sonnet 5 supplied **11 authors Gemini never
+reached, with 2 overlaps out of 13**. But it does not work on any Anthropic model with the current
+Pass-1 prompt:
+
+| model | effort | max_tokens | result |
+|---|---|---|---|
+| opus-4-8 | high | 32k | content-filter block (×3, live run) |
+| opus-4-8 | high | 32k | block (softened profanity section) |
+| opus-4-8 | high | 32k | block (no-modern-lyrics restriction) |
+| opus-4-8 | medium | 32k | block |
+| opus-4-8 | medium/high | 64k | block, block |
+| sonnet-5 | high | 32k | no block, but **0 visible chars** — all 32k spent thinking |
+| sonnet-5 | medium | 64k | block |
+| sonnet-5 | **low** | 64k | **runs**, but writes its deliberation into the document |
+
+That last one produced `#### Gwendolyn Brooks — not eligible (American, but let me choose properly)`
+followed by *"I'll replace with a verified fit:"*, and a quotation block whose attribution line read
+*"Actually let me choose a securely recalled Waits passage instead."* Parsed naively that puts a
+fabricated author into the writer's dossier, so `drop_malformed` now rejects any entry lacking a
+quotation block or analysis — whatever model emitted it.
+
+Two diagnostic errors worth recording so they are not repeated: probe 1 capped `max_tokens` at 4,000
+and every variant returned 0 chars, which proved nothing (thinking ate the budget); and Sonnet 5's
+first "PASS" was read as model-specific immunity when it had simply produced no output — it blocked
+as soon as it had room to write. **Not attempted, and the obvious next step:** a non-Anthropic second
+generator. `gpt-5.6-terra` is already wired for Pass 3, so the key and cost model exist.
+
+`apply_effort` was also the wrong tool here — it is the single source of truth for the three
+deep-reasoning agents, and inheriting their `high` is what starved Sonnet 5 of output room. Pass 1b
+now sets effort explicitly.
+
+### 6. Psalm 1: before vs after (the author's requested comparison)
+
+Ps 1 was one of the three broken runs, so the old baseline is a crippled document.
+
+| | before | after |
+|---|---|---|
+| echoes delivered | 6 | **20** |
+| document bytes | 5,893 | 22,015 |
+| verses covered | 4 of 6 | **6 of 6** |
+| Pass 3 wall clock | 178s | **74s** |
+| cost (re-priced correctly) | $0.65 | $1.14 |
+| **cost per delivered echo** | $0.109 | **$0.057** |
+
+Projected steady state on a healthy psalm, from re-pricing the 23 good runs: **$0.90 (−8%)** with the
+second generator off, against ~19% more echoes surviving. Old artifacts preserved at
+`output/psalm_1/literary_echoes_PRE_S374/`.
+
+### Watch
+
+Psalm 1 is **one psalm, and a broken baseline** — the −8% steady-state figure is a projection from
+re-pricing, not a second live comparison; re-running a psalm that worked before (72) would settle it.
+The four psalms whose dossiers were truncated (69-72) still hold their damaged files and would need
+re-running to recover the lost echoes. `LIFETIME_BAN_AT = 3` is a guess that has never been exercised
+at scale — if generators start failing quotas, raise it.
+
+### Files
+
+New: `src/agents/literary_echoes_parser.py`, `tests/test_literary_echoes_parser.py` (41 tests),
+`docs/prompts_reference/literary echoes pass 3 - per entry.txt`. Rewritten:
+`src/agents/literary_echoes_agent.py`, `scripts/run_literary_echoes.py`. Touched for the removed
+Pass 4 / renamed methodology labels: both pipeline runners, `document_generator.py`,
+`combined_document_generator.py`, `commentary_formatter.py`. 105 tests pass repo-wide.
+
+---
+
 ## Session 373 (2026-08-02/03): Arm E to production; Hebrew bold never rendered in Word; the copy editor was eating quotation marks; commentators 7 → 6 → 11; PRODUCTION WAS NEVER ON OPUS 5; two pricing rows wrong
 
 ### Trigger

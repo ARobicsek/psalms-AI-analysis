@@ -43,7 +43,7 @@ from src.agents.synthesis_writer import SynthesisWriter
 from src.agents.master_editor import MasterEditorV2 as MasterEditor
 from src.agents.master_editor_old import MasterEditor as MasterEditorOld
 from src.agents.question_curator import QuestionCurator
-from src.agents.insight_extractor import InsightExtractor
+from src.agents.archive.insight_extractor import InsightExtractor  # Session 374: agent archived; this runner is legacy
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
 from src.utils.pipeline_summary import PipelineSummaryTracker

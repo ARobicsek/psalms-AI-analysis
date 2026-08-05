@@ -1780,9 +1780,11 @@ Methodological & Bibliographical Summary
                     summary_text += f"\n**Copy Editor**: {model_usage.get('copy_editor', 'N/A')}"
 
                 if 'literary_echoes_pass_1' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Passes 1 & 2 — Generation)**: {model_usage.get('literary_echoes_pass_1', 'N/A')}"
+                    summary_text += f"\n**Literary Echoes (Passes 1-2 — Generation)**: {model_usage.get('literary_echoes_pass_1', 'N/A')}"
+                if 'literary_echoes_pass_1b' in model_usage:
+                    summary_text += f"\n**Literary Echoes (Pass 1b — Second Generator)**: {model_usage.get('literary_echoes_pass_1b', 'N/A')}"
                 if 'literary_echoes_pass_3' in model_usage:
-                    summary_text += f"\n**Literary Echoes (Passes 3 & 4 — Verify + Reconstruct)**: {model_usage.get('literary_echoes_pass_3', 'N/A')}"
+                    summary_text += f"\n**Literary Echoes (Pass 3 — Source Verification)**: {model_usage.get('literary_echoes_pass_3', 'N/A')}"
             else:
                 summary_text += "\nModel attribution data not available."
 

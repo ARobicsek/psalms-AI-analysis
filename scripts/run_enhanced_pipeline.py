@@ -27,13 +27,17 @@ from src.agents.micro_analyst import MicroAnalystV2
 # SynthesisWriter REMOVED
 from src.agents.master_editor import MasterEditor
 from src.agents.question_curator import QuestionCurator
-from src.agents.insight_extractor import InsightExtractor
+# InsightExtractor REMOVED (Session 374): the agent existed to keep the
+# Synthesis Writer from drowning in research, and the Synthesis Writer was
+# removed in V4. Unused in production since Psalm 30 (2026-03-08); the last 13
+# runs (Pss 60-72) produced no insights file at all. Archived to
+# src/agents/archive/insight_extractor.py. Not to be confused with the
+# synthesis-discovery sidecar (STEP 3.5), which is very much alive.
 from src.agents.copy_editor import CopyEditor
 from src.agents.literary_echoes_agent import (
     LiteraryEchoesAgent,
     GEMINI_MODEL as LIT_ECHOES_GEMINI_MODEL,
     GPT_VERIFY_MODEL as LIT_ECHOES_VERIFY_MODEL,
-    GPT_RECONSTRUCT_MODEL as LIT_ECHOES_RECONSTRUCT_MODEL,
 )
 from src.schemas.analysis_schemas import MacroAnalysis, MicroAnalysis, VerseCommentary, StructuralDivision, load_macro_analysis
 from src.utils.logger import get_logger
@@ -134,12 +138,17 @@ def _parse_research_stats_from_markdown(markdown_content: str) -> dict:
         model_matches = re.findall(r'- \*\*(.*?)\*\*: (.*?)(?:\n|$)', section_text)
         for agent, model in model_matches:
             if "Literary Echoes" in agent:
-                if "Passes 1 & 2" in agent:
+                # Both label vocabularies are accepted. Session 374 removed Pass 4
+                # (reconstruction is deterministic now) and added Pass 1b, but
+                # bundles written before that still say "Passes 3 & 4" and resume
+                # must keep reading them.
+                if "1b" in agent:
+                    models_used['literary_echoes_pass_1b'] = model.strip()
+                elif "Passes 1" in agent:
                     models_used['literary_echoes_pass_1'] = model.strip()
                     models_used['literary_echoes_pass_2'] = model.strip()
-                elif "Passes 3 & 4" in agent:
+                elif "Pass 3" in agent or "Passes 3" in agent:
                     models_used['literary_echoes_pass_3'] = model.strip()
-                    models_used['literary_echoes_pass_4'] = model.strip()
             else:
                 agent_key = agent.lower().replace(' ', '_')
                 models_used[agent_key] = model.strip()
@@ -308,14 +317,11 @@ def run_enhanced_pipeline(
     skip_default_commentaries: bool = False,
     master_editor_model: str = "claude-opus-5",
     synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 4.8)
-    skip_insights: bool = True,      # Session 280: skipped by default, use --include-insights
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
-    exclude_insights: bool = False,
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
     macro_model: str = "claude-opus-4-8",
-    insight_model: str = "gpt-5.6-terra",
     question_model: str = "gpt-5.6-terra",
     copy_model: str = "gpt-5.6-terra",
     synthesis_discovery: bool = True,
@@ -334,7 +340,13 @@ def run_enhanced_pipeline(
     output_path = Path(output_dir)
     summary_json_file = output_path / f"psalm_{psalm_number:03d}_pipeline_stats.json"
     
-    is_resuming = any([skip_macro, skip_micro, skip_insights, skip_writer, skip_print_ready, skip_word_doc]) and not smoke_test
+    # A now-deleted `skip_insights` used to be in this list. Session 280 had made
+    # insights opt-in, so it defaulted to True -- which made EVERY plain run look
+    # like a resume and load the psalm's previous stats file. That was not
+    # harmless: track_research_requests APPENDS, so a fresh run inherited and then
+    # duplicated the old run's request lists. --resume is what actually means
+    # resume; the skip_* flags are the manual partial-rerun form of the same thing.
+    is_resuming = any([resume, skip_macro, skip_micro, skip_writer, skip_print_ready, skip_word_doc]) and not smoke_test
     
     initial_data = None
     if is_resuming and summary_json_file.exists():
@@ -387,35 +399,31 @@ def run_enhanced_pipeline(
     # docx_output_combined_file = output_path / f"psalm_{psalm_number:03d}_commentary_combined.docx"
     
     reader_questions_file = output_path / f"psalm_{psalm_number:03d}_reader_questions.json"
-    insights_file = output_path / f"psalm_{psalm_number:03d}_insights.json"
 
     # Resume logic
     if resume and not smoke_test:
         logger.info("RESUME MODE: Auto-detecting last completed step...")
-        
+
         # Check if literary echoes is already completed
         lit_echoes_file = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
         if lit_echoes_file.exists():
             skip_lit_echoes = True
 
+        # Session 374: the insights tier was removed from this ladder along with
+        # STEP 2c. It sat between research and the writer and set the same two
+        # skips the research branch already sets, so collapsing it loses nothing.
         if not edited_intro_file.exists():
-             if not insights_file.exists():
-                 if not research_file.exists():
-                     if not macro_file.exists():
-                         logger.info("No existing files found. Starting from beginning.")
-                     else:
-                         skip_macro = True
+             if not research_file.exists():
+                 if not macro_file.exists():
+                     logger.info("No existing files found. Starting from beginning.")
                  else:
                      skip_macro = True
-                     skip_micro = True
              else:
                  skip_macro = True
                  skip_micro = True
-                 skip_insights = True
         else:
              skip_macro = True
              skip_micro = True
-             skip_insights = True
              skip_writer = True
              logger.info("Writer output exists. Moving to downstream steps.")
         resume = False
@@ -492,9 +500,12 @@ def run_enhanced_pipeline(
     # Non-fatal on failure — downstream research_assembler tolerates missing file.
     # =====================================================================
     if not skip_lit_echoes and not smoke_test:
-        logger.info("\n[STEP 1b] Generating Literary Echoes (4-pass workflow)...")
+        logger.info("\n[STEP 1b] Generating Literary Echoes...")
         print(f"\n{'='*80}")
-        print(f"STEP 1b: Literary Echoes (Gemini 3.1 Pro → GPT-5.4 verify → GPT-5.4 reconstruct)")
+        print(
+            f"STEP 1b: Literary Echoes ({LIT_ECHOES_GEMINI_MODEL} generates → "
+            f"{LIT_ECHOES_VERIFY_MODEL} verifies per entry → deterministic rebuild)"
+        )
         print(f"{'='*80}\n")
         try:
             lit_echoes_agent = LiteraryEchoesAgent(
@@ -507,10 +518,9 @@ def run_enhanced_pipeline(
                 psalm_output_dir=output_path,
                 skip_if_exists=False,   # Default overwrite
             )
-            tracker.track_model_for_step("literary_echoes_pass_1", LIT_ECHOES_GEMINI_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_1a", LIT_ECHOES_GEMINI_MODEL)
             tracker.track_model_for_step("literary_echoes_pass_2", LIT_ECHOES_GEMINI_MODEL)
             tracker.track_model_for_step("literary_echoes_pass_3", LIT_ECHOES_VERIFY_MODEL)
-            tracker.track_model_for_step("literary_echoes_pass_4", LIT_ECHOES_RECONSTRUCT_MODEL)
             lit_echoes_cost = lit_result.total_cost
             logger.info(
                 f"[STEP 1b] Literary echoes complete — ${lit_result.total_cost:.4f} "
@@ -525,10 +535,9 @@ def run_enhanced_pipeline(
         # If the canonical file exists, assume it was generated with the standard pipeline models
         lit_echoes_file = Path("data") / "literary_echoes" / f"psalm_{psalm_number:03d}_literary_echoes.txt"
         if lit_echoes_file.exists():
-            tracker.track_model_for_step("literary_echoes_pass_1", LIT_ECHOES_GEMINI_MODEL)
+            tracker.track_model_for_step("literary_echoes_pass_1a", LIT_ECHOES_GEMINI_MODEL)
             tracker.track_model_for_step("literary_echoes_pass_2", LIT_ECHOES_GEMINI_MODEL)
             tracker.track_model_for_step("literary_echoes_pass_3", LIT_ECHOES_VERIFY_MODEL)
-            tracker.track_model_for_step("literary_echoes_pass_4", LIT_ECHOES_RECONSTRUCT_MODEL)
 
     # =====================================================================
     # STEP 2: Micro Analysis
@@ -645,85 +654,28 @@ def run_enhanced_pipeline(
             logger.warning(f"Question curation failed: {e}")
 
     # =====================================================================
-    # STEP 2c: Insight Extraction
+    # STEP 2c: Research Trimming
+    #
+    # Session 374: this step used to be "Insight Extraction" and the trimming
+    # was a preamble to it. The InsightExtractor is gone (see the import at the
+    # top of this file) but the trimming stays: converse_with_editor.py prefers
+    # psalm_NNN_research_trimmed.md over research_v2.md when it exists.
+    # NB the ResearchTrimmer is currently a no-op in practice -- the 400k cap
+    # never trips on our ~215k bundles, so the two files come out identical.
     # =====================================================================
-    curated_insights = None
-    # Always trim research first, as other steps (or the user) may rely on it
-    trimmed = None
     if not smoke_test:
         if 'research_bundle_content' not in locals():
             if research_file.exists():
                 with open(research_file, 'r', encoding='utf-8') as f: research_bundle_content = f.read()
             else:
                 research_bundle_content = ""
-                
+
         if research_bundle_content:
             trimmed, _, _ = research_trimmer.trim_bundle(research_bundle_content, max_chars=400000)
             trimmed_research_file = output_path / f"psalm_{psalm_number:03d}_research_trimmed.md"
             with open(trimmed_research_file, 'w', encoding='utf-8') as f:
                 f.write(trimmed)
-
-    if smoke_test:
-        logger.info("[STEP 2c] SMOKE TEST Insights")
-        curated_insights = {"psalm_level_insights": [], "verse_insights": {}}
-        with open(insights_file, 'w') as f: json.dump(curated_insights, f)
-    elif not skip_insights:
-        logger.info("[STEP 2c] Extracting Insights...")
-        try:
-            extractor = InsightExtractor(cost_tracker=cost_tracker, model=insight_model)
-
-            # Get rich psalm text from micro_analysis for prompt
-            p_text = ""
-            verses = []
-            if hasattr(micro_analysis, 'verse_commentaries'):
-                verses = micro_analysis.verse_commentaries
-            elif isinstance(micro_analysis, dict):
-                verses = micro_analysis.get('verse_commentaries', [])
-
-            # Build psalm text from database (hebrew_text/english_text don't exist in micro JSON)
-            # and add phonetics from micro analysis
-            if verses:
-                # Handle Pydantic object or dict
-                def get_attr(obj, name, default=''):
-                    if isinstance(obj, dict): return obj.get(name, default)
-                    return getattr(obj, name, default)
-
-                # Build phonetic lookup from micro analysis
-                phonetic_map = {}
-                for v in verses:
-                    v_num = get_attr(v, 'verse_number') or get_attr(v, 'verse', 0)
-                    phon = get_attr(v, 'phonetic_transcription', '')
-                    if phon:
-                        phonetic_map[v_num] = phon
-
-                # Get actual text from database
-                db = TanakhDatabase(Path(db_path))
-                p = db.get_psalm(psalm_number)
-                if p:
-                    verse_texts = []
-                    for pv in p.verses:
-                        phon = phonetic_map.get(pv.verse, '')
-                        verse_block = f"Verse {pv.verse}:\nHebrew: {pv.hebrew}\nEnglish: {pv.english}"
-                        if phon:
-                            verse_block += f"\nPhonetic: {phon}"
-                        verse_texts.append(verse_block)
-                    p_text = "\n\n".join(verse_texts)
-
-            if not p_text:
-                db = TanakhDatabase(Path(db_path))
-                p = db.get_psalm(psalm_number)
-                p_text = "\n".join([f"{v.verse}: {v.hebrew}" for v in p.verses]) if p else ""
-
-            curated_insights = extractor.extract_insights(psalm_number, p_text, micro_analysis, macro_analysis, trimmed)
-            tracker.track_model_for_step("insight_extractor", extractor.model)
-            extractor.save_insights(curated_insights, insights_file)
-        except Exception as e:
-            halt_on_quota(e, "STEP 2c: Insight Extractor", logger, cost_tracker, output_path, psalm_number)
-            logger.warning(f"Insight extraction failed: {e}")
-    else:
-        # skip_insights is True — still track the model if insights file exists
-        if insights_file.exists():
-            tracker.track_model_for_step("insight_extractor", insight_model)
+            logger.info(f"[STEP 2c] Saved trimmed research bundle ({len(trimmed):,} chars)")
 
     # =====================================================================
     # STEP 3: Synthesis (REMOVED)
@@ -802,7 +754,12 @@ def run_enhanced_pipeline(
                 macro_file=macro_file,
                 micro_file=micro_file,
                 research_file=research_file,
-                insights_file=None if exclude_insights else (insights_file if insights_file.exists() else None),
+                # Session 374: always None. The {curated_insights} slot in
+                # MASTER_WRITER_PROMPT_V4 is deliberately LEFT IN PLACE and
+                # renders the constant "[No curated insights provided]", which is
+                # byte-identical to what every run since Ps 60 has sent. Removing
+                # the slot would be an un-A/B'd delta to the arm-E template.
+                insights_file=None,
                 psalm_number=psalm_number,
                 reader_questions_file=None if (exclude_questions or skip_questions) else (reader_questions_file if reader_questions_file.exists() else None),
                 suppress_questions=(exclude_questions or skip_questions),
@@ -1163,27 +1120,29 @@ if __name__ == "__main__":
                        help="Model for the cross-verse synthesis sidecar "
                             "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-4-8). "
                             "Deliberately independent of --master-editor-model.")
-    # Session 280: questions and insights are SKIPPED by default.
-    # --include-* flags opt back in; --skip-* flags remain for backward compat.
-    parser.add_argument("--skip-insights", action="store_true",
-                       help="(Default behavior) Skip insights generation; use existing file if present")
+    # Session 280: questions are SKIPPED by default.
+    # --include-* opts back in; --skip-* remains for backward compat.
     parser.add_argument("--skip-questions", action="store_true",
                        help="(Default behavior) Skip question curation; use existing file if present")
-    parser.add_argument("--include-insights", action="store_true",
-                       help="Enable insights generation (overrides default skip)")
     parser.add_argument("--include-questions", action="store_true",
                        help="Enable question curation (overrides default skip)")
-    parser.add_argument("--exclude-insights", action="store_true",
-                       help="Skip insights generation and exclude from writer even if file exists")
     parser.add_argument("--exclude-questions", action="store_true",
                        help="Skip question curation and exclude from writer/doc even if file exists")
+    # Session 374: the Insight Extractor was removed from the pipeline. These are
+    # accepted so existing invocations and scripts keep working; --skip/--exclude
+    # are now the only behaviour, so they are silent no-ops. --include-insights
+    # WARNS rather than passing silently -- quietly ignoring a request for
+    # insights would be worse than saying they no longer exist.
+    parser.add_argument("--skip-insights", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--exclude-insights", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--include-insights", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--skip-copy-editor", action="store_true",
                        help="Skip the copy editor step (runs by default)")
     parser.add_argument("--skip-lit-echoes", action="store_true",
                        help="Skip the literary echoes generation step (runs by default, regenerating the file on every pipeline run)")
     parser.add_argument("--gpt-5-4-all", action="store_true", help="Use GPT-5.4 for all eligible agents")
     parser.add_argument("--gpt-5-4-macro", action="store_true", help="Use GPT-5.4 for Macro Analyst")
-    parser.add_argument("--gpt-5-4-insight", action="store_true", help="Use GPT-5.4 for Insight Extractor")
+    parser.add_argument("--gpt-5-4-insight", action="store_true", help=argparse.SUPPRESS)  # Session 374: insight extractor removed; accepted, ignored
     parser.add_argument("--gpt-5-4-question", action="store_true", help="Use GPT-5.4 for Question Curator")
     parser.add_argument("--gpt-5-4-copy", action="store_true", help="Use GPT-5.4 for Copy Editor")
     parser.add_argument("--gpt-5-4-writer", action="store_true", help="Use GPT-5.4 for Master Writer")
@@ -1223,8 +1182,12 @@ if __name__ == "__main__":
         args.output_dir = f"output/psalm_{args.psalm_number}"
 
     # Resolve include/skip logic: --include-* overrides the default skip
-    effective_skip_insights = not args.include_insights  # default: True (skipped)
     effective_skip_questions = not args.include_questions  # default: True (skipped)
+
+    # Session 374: the Insight Extractor is gone. Say so instead of ignoring it.
+    if args.include_insights:
+        print("WARNING: --include-insights has no effect. The Insight Extractor was "
+              "removed in Session 374 (unused in production since Psalm 30, 2026-03-08).")
 
     # Ensure UTF-8 encoding on Windows
     if sys.platform == 'win32':
@@ -1241,14 +1204,12 @@ if __name__ == "__main__":
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
     print(f"Synthesis Discovery: {'SKIP' if args.skip_synthesis_discovery else 'ON'}")
     print(f"Beta Reader: {'ON' if args.beta_reader else 'OFF (default since S372)'}")
-    print(f"Insights: {'ON' if args.include_insights else 'SKIP (default)'}")
     print(f"Questions: {'ON' if args.include_questions else 'SKIP (default)'}")
     
     # Session 367: the GPT default moved gpt-5.4 -> gpt-5.6-terra (same tier,
     # same price). The --gpt-5-4-* flags keep their names and now act as
     # "pin back to the pre-367 model" escape hatches.
     macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-8"
-    insight_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_insight) else "gpt-5.6-terra"
     question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.6-terra"
     # Session 368: the copy editor is the one GPT agent NOT on Terra — Terra
     # overreaches as an editor (docs/plans/COPY_EDITOR_TERRA_FINDINGS.md), so it
@@ -1261,8 +1222,6 @@ if __name__ == "__main__":
         print(f"Override: Master Writer using GPT-5.4")
     if args.gpt_5_4_all or args.gpt_5_4_macro:
         print(f"Override: Macro Analyst using GPT-5.4")
-    if args.gpt_5_4_all or args.gpt_5_4_insight:
-        print(f"Override: Insight Extractor using GPT-5.4")
     if args.gpt_5_4_all or args.gpt_5_4_question:
         print(f"Override: Question Curator using GPT-5.4")
     if args.gpt_5_4_all or args.gpt_5_4_copy:
@@ -1286,14 +1245,11 @@ if __name__ == "__main__":
         skip_default_commentaries=args.skip_default_commentaries,
         master_editor_model=args.master_editor_model,
         synthesis_discovery_model=args.synthesis_discovery_model,
-        skip_insights=effective_skip_insights,
         skip_questions=effective_skip_questions,
-        exclude_insights=args.exclude_insights,
         exclude_questions=args.exclude_questions,
         skip_copy_editor=args.skip_copy_editor,
         skip_lit_echoes=args.skip_lit_echoes,
         macro_model=macro_mdl,
-        insight_model=insight_mdl,
         question_model=question_mdl,
         copy_model=copy_mdl,
         synthesis_discovery=not args.skip_synthesis_discovery,

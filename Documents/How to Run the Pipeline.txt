@@ -44,7 +44,7 @@ python scripts/run_si_pipeline.py 19 --special-instruction my_notes.txt
 python scripts/run_enhanced_pipeline.py 100 --master-editor-model claude-opus-4-6
 
 # skip everything
-python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-insights --skip-synthesis --skip-writer [skips main writer, not college] --skip-college --skip-print-ready --skip-word-doc --skip-combined-doc
+python scripts/run_enhanced_pipeline.py 23 --skip-macro --skip-micro --skip-writer --skip-print-ready --skip-word-doc
 
 # resume for where the pipeline left off
 python scripts/run_enhanced_pipeline.py 9 --resume
@@ -59,7 +59,17 @@ python scripts/run_copy_editor.py 41
 # New default behavior (March 2, 2026):
 
 Copy editor runs by default → --skip-copy-editor to disable
-Questions/insights skipped by default → --include-questions / --include-insights to enable
+Questions skipped by default → --include-questions to enable
+
+# Session 374 (Aug 5, 2026): INSIGHTS REMOVED from the pipeline.
+# The Insight Extractor (step 2c) is gone. It was built to keep the old Synthesis
+# Writer from drowning in research; that writer was retired in V4, and the agent
+# had not run in production since Psalm 30 (Mar 8, 2026).
+# --skip-insights / --exclude-insights / --include-insights / --gpt-5-4-insight are
+# still ACCEPTED so old command lines don't break, but they do nothing.
+# --include-insights prints a warning rather than silently doing nothing.
+# NOT to be confused with Synthesis Discovery (step 3.5), the cross-verse "aha"
+# sidecar, which is ON by default and is what --skip-synthesis-discovery controls.
 
 #special commands
 --skip_default_commentaries (this will ensure that only traditional commentaries requested by the Micro agent are requested)
@@ -74,10 +84,9 @@ Questions/insights skipped by default → --include-questions / --include-insigh
 
 
 Flag			Regenerate?	Use existing file?
---skip-insights		No		Yes
---exclude-insights	No		No
 --skip-questions	No		Yes
 --exclude-questions	No		No
+(the --*-insights flags are accepted but inert as of Session 374)
 
 
 #running Chrome in debug mode (where selenium works)

@@ -27,18 +27,20 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Handle imports for both module and script usage
+# Handle imports for both module and script usage.
+# Session 374: moved from src/agents/ to src/agents/archive/, so the relative
+# imports gained a level (..utils -> ...utils). __main__ path also went one deeper.
 if __name__ == '__main__':
-    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
     from src.schemas.analysis_schemas import MicroAnalysis
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.openai_usage import split_output_tokens
 else:
-    from ..schemas.analysis_schemas import MicroAnalysis
-    from ..utils.logger import get_logger
-    from ..utils.cost_tracker import CostTracker
-    from ..utils.openai_usage import split_output_tokens
+    from ...schemas.analysis_schemas import MicroAnalysis
+    from ...utils.logger import get_logger
+    from ...utils.cost_tracker import CostTracker
+    from ...utils.openai_usage import split_output_tokens
 
 
 # =============================================================================

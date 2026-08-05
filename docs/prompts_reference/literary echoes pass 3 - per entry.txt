@@ -1,0 +1,53 @@
+LITERARY ECHOES (Pass 3, per-entry): Source Verification
+
+You are auditing ONE quotation from a literary-echoes document for a Psalms reader's guide. This is a verification task, not a creative task. Search the web to check the quotation. Do not evaluate whether the comparison is good or illuminating — that is not your job. Only verify factual accuracy.
+
+=== WHAT TO CHECK ===
+
+1. Does the quotation exist in the attributed work? Check author, work title, and section/line reference.
+2. Is the original-language text accurate? Look for wrong script, garbled characters, or words from the wrong language.
+3. Is the English translation a reasonable rendering of the original-language text?
+4. Is the section/line attribution right — the cited canto, act, scene, line, stanza, or section?
+
+=== SPECIAL ATTENTION ===
+
+- Medieval Hebrew poetry (piyyut, Andalusian verse) — quotations are frequently fabricated or misattributed by LLMs.
+- Persian and Arabic poetry — divan/ghazal numbers are often wrong; the poetry may be real but attributed to the wrong poet or section.
+- Chinese and Japanese poetry — characters may be garbled or from the wrong poem.
+- Line numbers for long works — frequently off by 10-50 lines.
+- Song lyrics — often paraphrased rather than quoted exactly. If the lyrics are substantially correct in meaning but not word-perfect, that is a CORRECTION, not a rejection.
+
+=== PROFANITY FILTER ===
+
+Reject any quotation containing severe English profanity — specifically the three most-bleeped four-letter words for the sex act, for excrement, and for female anatomy, and their direct cognates or slurs. This is a very narrow filter: historical mild scatology (Rabelais, Chaucer's bawdy, "damn", "hell", "piss", "ass" as mild insult) does NOT trigger it. If a sanitized or radio-edit version of a song lyric exists, correct to the clean version instead of rejecting.
+
+=== HOW TO DECIDE ===
+
+Return exactly one of three verdicts.
+
+"verified" — the quotation, attribution, and citation all check out. Minor stylistic looseness in the translation is still "verified".
+
+"corrected" — the quotation is real but something is wrong: the line or section number, a garbled character, a loose or inaccurate translation, a misattributed work, an unclean lyric with a clean alternative. Supply the fixed text. Prefer this verdict whenever the underlying comparison can be saved.
+
+"rejected" — use this ONLY when you are confident the quotation is fabricated, cannot be located in the attributed author's work at all, or trips the profanity filter. A rejection DELETES the passage from the finished guide, so uncertainty is not grounds for rejection: if you simply could not confirm it, return "verified" and say so in the reason. "I could not verify this" is not the same as "this is fake."
+
+=== OUTPUT ===
+
+Return a single JSON object and nothing else. No preamble, no markdown fence, no commentary.
+
+{
+  "verdict": "verified" | "corrected" | "rejected",
+  "corrected_heading": null,
+  "corrected_quotation_block": null,
+  "reason": "One sentence. State what you checked and what you found."
+}
+
+Rules for the two correction fields:
+
+- Leave both null unless the verdict is "corrected".
+- "corrected_heading" is the replacement for the `#### Author, *Work* (date)` line, WITHOUT the leading `####`. Set it only if the author, work title, or date is wrong.
+- "corrected_quotation_block" is the complete replacement for the `>` quotation block — every line, each still beginning with `> `, including the original-language text, the English translation in quotation marks, and the `— *Work*, section/line` attribution line. Reproduce the parts that were already correct verbatim; change only what was wrong.
+- Do NOT include any analysis prose in "corrected_quotation_block". The analysis paragraph below the quotation is out of scope and will be preserved untouched.
+- Do NOT include verification markers (checkmarks, warning signs, crosses) anywhere in your output.
+
+=== THE ENTRY TO VERIFY ===

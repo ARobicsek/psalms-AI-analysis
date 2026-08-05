@@ -19,8 +19,28 @@ import sys
 import json
 from pathlib import Path
 from typing import Dict, List, Optional, Any
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from datetime import datetime
+
+
+def _known_fields_only(cls, data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Drop keys that `cls` no longer declares, so an old stats JSON can still be
+    loaded after a field is removed from the dataclass.
+
+    A stats file is written by whatever version of the pipeline produced it and
+    is then read back months later on resume. `cls(**data)` raises TypeError on
+    the first stale key -- e.g. `ugaritic_parallels`, removed from ResearchStats
+    but still present in 72 of the psalm stats files on disk. Filtering makes
+    the reader tolerant of schema drift in the only direction that matters:
+    fields that went away. New fields keep their dataclass defaults.
+    """
+    known = {f.name for f in fields(cls)}
+    dropped = sorted(set(data) - known)
+    if dropped:
+        print(f"[pipeline_summary] Ignoring {len(dropped)} obsolete "
+              f"{cls.__name__} field(s) from stats file: {', '.join(dropped)}")
+    return {k: v for k, v in data.items() if k in known}
 
 
 @dataclass
@@ -139,9 +159,15 @@ class PipelineSummaryTracker:
                     completion_date=step_data.get('completion_date')
                 )
 
-            # Reconstruct ResearchStats and AnalysisStats objects
-            self.research = ResearchStats(**initial_data.get('research', {}))
-            self.analysis = AnalysisStats(**initial_data.get('analysis', {}))
+            # Reconstruct ResearchStats and AnalysisStats objects.
+            # Filtered, not splatted directly: stats files predating a field
+            # removal must still load rather than crash the run at startup.
+            self.research = ResearchStats(
+                **_known_fields_only(ResearchStats, initial_data.get('research', {}))
+            )
+            self.analysis = AnalysisStats(
+                **_known_fields_only(AnalysisStats, initial_data.get('analysis', {}))
+            )
 
             # Load other top-level fields
             self.pipeline_start = datetime.fromisoformat(initial_data.get('pipeline_start')) if initial_data.get('pipeline_start') else datetime.now()
