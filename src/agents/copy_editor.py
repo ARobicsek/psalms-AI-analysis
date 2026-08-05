@@ -15,6 +15,7 @@ Error Categories:
   8. Hebrew grammar bloat (unnecessary stem/tense/person annotations)
   9. Strained arguments (e.g. evidence does not support the claim)
  10. Unexplained technical terms (grammar/rhetoric jargon used without a gloss)
+ 11. Banned house-style phrases (see src/utils/banned_phrases.py)
 
 Usage:
     from src.agents.copy_editor import CopyEditor
@@ -36,10 +37,12 @@ if __name__ == '__main__':
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.openai_usage import split_output_tokens
+    from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
 else:
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.openai_usage import split_output_tokens
+    from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
 
 import anthropic
 from dotenv import load_dotenv
@@ -310,6 +313,26 @@ If no changes are needed, still append "## Changes\nNo changes required."
 """
 
 
+# Category 11 is GENERATED from src/utils/banned_phrases.py rather than written
+# out here, so the rule the copy editor is given and the list
+# scripts/check_banned_phrases.py audits against can never drift apart. Editing
+# the list in one place is the whole point; a second hand-maintained copy is the
+# failure mode Session 373 hit with writer_prompt_variants.py.
+_BANNED_ANCHOR = "CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:"
+_banned_rule = banned_prompt_block()
+if _banned_rule:
+    if _BANNED_ANCHOR not in COPY_EDITOR_SYSTEM_PROMPT:
+        # Fail at import, not silently at run time: a moved anchor would drop the
+        # rule from the prompt while every psalm kept processing normally.
+        raise RuntimeError(
+            "COPY_EDITOR_SYSTEM_PROMPT anchor for the banned-phrase rule has moved; "
+            f"expected to find {_BANNED_ANCHOR!r}. Re-point _BANNED_ANCHOR."
+        )
+    COPY_EDITOR_SYSTEM_PROMPT = COPY_EDITOR_SYSTEM_PROMPT.replace(
+        _BANNED_ANCHOR, f"{_banned_rule}\n\n{_BANNED_ANCHOR}", 1
+    )
+
+
 # =============================================================================
 # COPY EDITOR CLASS
 # =============================================================================
@@ -419,6 +442,26 @@ class CopyEditor:
             self.logger.info(
                 f"Stripped {stripped_count} redundant quote pair(s) around Hebrew/Greek text"
             )
+
+        # 7c. Banned-phrase audit. Category 11 asks the model to rewrite these;
+        #     this reports what it missed. Deliberately a REPORT and not a
+        #     substitution — the right repair differs per site and two of the
+        #     measured "load-bearing" instances sit inside live architectural
+        #     metaphors that a swapped synonym would wreck. Survivors are logged
+        #     loudly so nothing reaches the author silently, and
+        #     scripts/check_banned_phrases.py re-runs the same check standalone.
+        banned_hits = find_banned(full_edited)
+        if banned_hits:
+            self.logger.warning(
+                f"BANNED PHRASES: {len(banned_hits)} survived the copy editor "
+                f"— these need a hand rewrite before this guide ships:"
+            )
+            for hit in banned_hits:
+                self.logger.warning(
+                    f'  line {hit.line_no}: "{hit.matched}" — {self._truncate(hit.context, 120)}'
+                )
+        else:
+            self.logger.info("BANNED PHRASES: none")
 
         # 8. Save output files
         prefix = f"psalm_{psalm_number:03d}"

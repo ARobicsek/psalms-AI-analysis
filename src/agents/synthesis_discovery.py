@@ -225,7 +225,7 @@ Universal exclusions (both types):
 2. SYNTHESIS SUBSTRATE. Distill from EACH section of the dossier (macro,
    micro, lexicon/concordance, commentaries, liturgical/reception, deep
    research, literary echoes, phonetic transcriptions) its 5-15 most
-   load-bearing or pregnant facts — one line each, tagged with the section
+   consequential or pregnant facts — one line each, tagged with the section
    it came from. Mine the WHOLE archive: the strongest connections
    typically join facts that sit far apart, which is precisely why no one
    has made them.
@@ -255,7 +255,7 @@ Universal exclusions (both types):
      When the COMPUTED DISTRIBUTIONAL FACTS block is present, start there:
      its counts are exact and already built — trust them over your own
      tabulation (and over your memory), and spend your reasoning on which
-     rows are load-bearing, not on counting. Mind its stated limitation:
+     rows actually carry weight, not on counting. Mind its stated limitation:
      it counts exact consonantal FORMS, not lemmas.
    - And the qualitative TYPE P sweep across the poem itself: verb system,
      sound architecture, structural hinges, juridical logic,
@@ -355,8 +355,8 @@ Universal exclusions (both types):
    The point of all this: your observations will be read by the Master
    Writer as input it can use. Any overclaim you ship here propagates
    straight into the prose, where the copy editor will catch it — but the
-   writer will have already wasted craft on a load-bearing claim that gets
-   cut. Honest calibration is what makes ambition affordable: a bold
+   writer will have already wasted craft on a structurally central claim
+   that gets cut. Honest calibration is what makes ambition affordable: a bold
    conjecture honestly flagged is welcome; a medium claim dressed as a
    certainty is not.
 
