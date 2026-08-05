@@ -87,11 +87,45 @@ def test_prompt_block_is_empty_when_list_is_empty(monkeypatch):
     assert prompt_block() == ""
 
 
+def _copy_editor_prompt():
+    pytest.importorskip("anthropic")
+    from src.agents.copy_editor import COPY_EDITOR_SYSTEM_PROMPT
+
+    return COPY_EDITOR_SYSTEM_PROMPT
+
+
 def test_copy_editor_prompt_carries_the_generated_rule():
     """The rule must reach the model, and land inside the error taxonomy."""
-    pytest.importorskip("anthropic")
-    from src.agents.copy_editor import COPY_EDITOR_SYSTEM_PROMPT as prompt
-
+    prompt = _copy_editor_prompt()
     assert prompt.count("11. BANNED HOUSE-STYLE PHRASES") == 1
     assert prompt.index("10. UNEXPLAINED") < prompt.index("11. BANNED")
     assert prompt.index("11. BANNED") < prompt.index("CRITICAL FORMATTING RULES")
+
+
+def test_style_carve_out_follows_the_rule_it_overrides():
+    """Category 11 is a style rule; "do not rewrite for style" would veto it."""
+    prompt = _copy_editor_prompt()
+    veto = prompt.index("Do not rewrite for\nstyle or voice")
+    carve_out = prompt.index("One deliberate exception runs the other way")
+    assert veto < carve_out
+    # Must qualify the preamble, not sit orphaned down in the taxonomy.
+    assert carve_out < prompt.index("Correct the follo")
+
+
+def test_figures_carve_out_follows_the_rule_it_overrides():
+    """FIGURES ARE NOT CLAIMS protects exactly the metaphors most needing recast."""
+    prompt = _copy_editor_prompt()
+    veto = prompt.index("FIGURES ARE NOT CLAIMS")
+    carve_out = prompt.index("Nor does category 11 license flattening one")
+    assert veto < carve_out
+
+
+def test_carve_outs_do_not_name_individual_phrases():
+    """They must reference the CATEGORY, so they cannot drift as the list changes."""
+    prompt = _copy_editor_prompt()
+    for marker in ("One deliberate exception runs the other way",
+                   "Nor does category 11 license flattening one"):
+        para = prompt[prompt.index(marker):]
+        para = para[:para.index("\n\n")]
+        for banned in BANNED_PHRASES:
+            assert banned.label not in para

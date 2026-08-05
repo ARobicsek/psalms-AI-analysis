@@ -318,19 +318,63 @@ If no changes are needed, still append "## Changes\nNo changes required."
 # scripts/check_banned_phrases.py audits against can never drift apart. Editing
 # the list in one place is the whole point; a second hand-maintained copy is the
 # failure mode Session 373 hit with writer_prompt_variants.py.
-_BANNED_ANCHOR = "CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:"
+# Three insertions, not one. The rule itself is necessary but NOT sufficient:
+# category 11 is the only rule in this taxonomy that objects to STYLE rather
+# than to an error of fact, logic or accessibility, and two of the prompt's
+# standing instructions tell the model to leave exactly this alone —
+#
+#   - the opening "Do not rewrite for style or voice", which describes
+#     category 11's whole job; and
+#   - "FIGURES ARE NOT CLAIMS", which protects metaphor from correction and
+#     bites hardest on the architectural instances ("the load-bearing wall of
+#     the whole edifice") that most need recasting.
+#
+# Without the carve-outs a model weighing the conflict sees emphatic, repeated
+# language on the leave-it-alone side and one paragraph on the other. Both
+# carve-outs follow the convention this prompt already uses for category 10's
+# glosses ("a sanctioned exception to 'do not add material'"). They name the
+# CATEGORY, never a phrase, so nothing here drifts when the list changes.
+_BANNED_INSERTIONS = [
+    (
+        "only correct content that is demonstrably wrong, empty, or\n"
+        "self-contradicting.",
+        "\n\nOne deliberate exception runs the other way: the BANNED PHRASES of "
+        "category 11 must be rewritten even though the objection to them is one "
+        "of style rather than accuracy. The author has ruled those words out of "
+        "the finished guide, so leaving one in place is an error however sound "
+        "the surrounding sentence is. This is a sanctioned exception to \"do not "
+        "rewrite for style or voice\" — and it is the ONLY one. It licenses "
+        "nothing else stylistic.",
+    ),
+    (
+        "license flattening a live figure into plain description.",
+        "\n\nNor does category 11 license flattening one. A figure built on a "
+        "banned phrase still has to be recast, but the thing to change is the "
+        "WORDING, never the image: keep the architecture, the weight, the "
+        "pressure the sentence was describing, and find the guide's own words "
+        "for it. Replacing a live figure with flat paraphrase fails category 11 "
+        "just as it fails here.",
+    ),
+    ("CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:", None),  # rule block
+]
+
 _banned_rule = banned_prompt_block()
 if _banned_rule:
-    if _BANNED_ANCHOR not in COPY_EDITOR_SYSTEM_PROMPT:
-        # Fail at import, not silently at run time: a moved anchor would drop the
-        # rule from the prompt while every psalm kept processing normally.
-        raise RuntimeError(
-            "COPY_EDITOR_SYSTEM_PROMPT anchor for the banned-phrase rule has moved; "
-            f"expected to find {_BANNED_ANCHOR!r}. Re-point _BANNED_ANCHOR."
+    for _anchor, _addition in _BANNED_INSERTIONS:
+        if _anchor not in COPY_EDITOR_SYSTEM_PROMPT:
+            # Fail at import, not silently at run time: a moved anchor would drop
+            # part of the rule while every psalm kept processing normally.
+            raise RuntimeError(
+                "COPY_EDITOR_SYSTEM_PROMPT anchor for the banned-phrase rule has "
+                f"moved; expected to find {_anchor!r}. Re-point _BANNED_INSERTIONS."
+            )
+        replacement = (
+            f"{_anchor}{_addition}" if _addition
+            else f"{_banned_rule}\n\n{_anchor}"
         )
-    COPY_EDITOR_SYSTEM_PROMPT = COPY_EDITOR_SYSTEM_PROMPT.replace(
-        _BANNED_ANCHOR, f"{_banned_rule}\n\n{_BANNED_ANCHOR}", 1
-    )
+        COPY_EDITOR_SYSTEM_PROMPT = COPY_EDITOR_SYSTEM_PROMPT.replace(
+            _anchor, replacement, 1
+        )
 
 
 # =============================================================================
