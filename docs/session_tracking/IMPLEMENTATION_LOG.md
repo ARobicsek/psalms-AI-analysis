@@ -9,6 +9,181 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 375 (2026-08-05): Quoted poems rendered as prose — three renderer bugs, a dossier-driven lineation backfill, and the LXX budget (median 44% of verses)
+
+### Trigger
+
+The author read the Session-374 Psalm 1 output and raised three items, with screenshots: (1) three
+passages whose argument is hard to follow; (2) *"the format of the English translation of poems could
+definitely be better/easier to read/easier to see as poetry"*; (3) *"the Yiddish poem's typeface was
+too small. Hebrew letters should always be 13 pt."* Then, separately: *"there's a LOT of LXX. I like
+its use, esp when it differs or adds nuance… but it's too much! maybe no LXX in more than 2/5 of
+verses, and then the writer chooses the most interesting examples?"*
+
+Instruction was explicit: fix (2) and (3) and rerender, then give thoughts on (1).
+
+### 1. HEBREW IN BLOCK QUOTES HAS ALWAYS BEEN A POINT TOO SMALL
+
+`_add_inline_runs` passed the **Latin** point size into `_mark_run_hebrew`, which writes it to
+`w:szCs`. Everywhere else in the document Hebrew is set 1pt over the Latin body (13 vs 12) — the
+convention `_set_style_complex_size` applies to the `Normal` and `BodySans` styles, because Times New
+Roman Hebrew reads visually smaller than Aptos at the same size. But the two `set_font=True` callers
+are **bullets and block quotes**, and block quotes are exactly where poems live.
+
+Audit of the Ps 1 DOCX: 4 Hebrew runs at `szCs=24`, all four the Manger quatrain; everything else 26
+or inheriting 26. Fixed to `font_size + 1`, which preserves the deliberate 9pt/10pt methods-section
+pair. **Reported to the author**: the bibliography's Hebrew stays at 10pt by design and is the one
+place "always 13pt" does not hold.
+
+### 2. THE TRANSLATION OF A POEM WAS BEING RENDERED AS BODY PROSE
+
+Two different shapes in the corpus, and the renderer mishandled both:
+
+- **Translation inside the block** (21 of 60 multi-line quote blocks — Ps 53's Lorca, Akhmatova, and
+  the Shabbat zemer): the writer separates original from translation with a bare `>`, which
+  `_collect_quote_block` **dropped**, and then set the whole block italic. Original and translation
+  ran together as one undifferentiated slab — 18 identical italic lines.
+- **Translation left in the prose** (12 spans, incl. all three Ps 1 poems): rendered as body text
+  glued to the commentary, so the reader never sees it as the poem's other half.
+
+Three renderer changes, all in `document_generator.py`:
+
+1. **`_lift_following_translation`** pulls a prose translation into the quote block. Narrow by
+   design (multi-line block, no translation already present, quoted span ≥40 chars): over the 26
+   finished guides it fires on **12 spans, all genuine translations**, never on the short quoted
+   phrases ordinary commentary opens with.
+2. **`_classify_quote_lines` / `_render_quote_block`** tag each line original / translation /
+   attribution / break. The translation is set **UPRIGHT against the italic original**; the seam
+   always gets a 6pt gap whether or not the writer marked it (some guides use a bare `>`, some a
+   blank markdown line which is absorbed as invisible, some nothing). A block whose FIRST line is
+   quoted is an ordinary English quotation, not a translation pair, and stays italic.
+3. **` / ` renders as a real line break** inside quoted verse. This was the surprise: the writer
+   already lineates with slashes, inherited from the echoes dossier, and **24 quote lines carry the
+   mark** — they were printing literal slashes mid-verse. Guarded: 23 of the 24 are verse; the
+   exception is Ps 43's chiasm DIAGRAM (`**A** — deceit / **B** — darkness`) whose pairing is the
+   point, and the bold markers identify it, so `lineate` is withheld from any line containing `**`.
+
+**Regression**: rendered all 40 finished guides under the pre-change and post-change generator and
+diffed paragraph text plus per-run italic/`szCs`/indent — **7,540 paragraphs compared, 16 psalms
+changed, every change one of the three above**. Ps 55's four translations are the largest win: they
+had been unindented body prose with literal slashes.
+
+### 3. LINEATION BACKFILL — the line breaks were recoverable, from the dossier
+
+Ps 1's three translations had no slashes at all. But the echoes dossier lineates every translation it
+supplies, and it held all three poems at **4 lines each**, matching the originals. The writer had
+flattened *and* lightly reworded them (dossier "granted me at once" → guide "gave me at once"), so
+the breaks could not be transplanted by string offset.
+
+New `scripts/lineate_poem_translations.py` aligns the two token streams with difflib. The mapping
+detail that matters: a break inside an EQUAL run carries its offset over exactly, and a break inside
+a **rewritten** span is placed at the START of the rewrite rather than past it — a first attempt
+using `get_matching_blocks` put the Borges break after "gave" instead of before it, and Parmenides
+one token late. A second refinement pulls a break back past a comma or dash when it left a one- or
+two-word fragment dangling.
+
+**Safety**: every insertion is round-tripped — stripping the inserted marks must reproduce the
+guide character for character — so the script can reflow a translation but cannot alter a word of
+one. **Line breaks come from the dossier, never from a model.**
+
+Ps 1: 3 translations, 4 lines each against 4-line originals. Corpus-wide it touches **nothing else**,
+correctly: the others already carry the mark, or aren't in the dossier, or are prose quotations
+(Ps 62's Simone Weil) that should not be lineated.
+
+`RULE 12` gained a `HOW TO SET A QUOTED POEM` format spec with the Lorca shape as the worked example,
+so new psalms emit the lineated form and this script stays a backfill.
+
+### 4. THE LXX BUDGET — the RULE 8b problem in a second place
+
+Measured before changing anything, splitting each guide on `**Verse N**` and counting a verse once if
+it cites the Greek at all:
+
+| | |
+|---|---|
+| median fraction of verses carrying the LXX | **44%** |
+| psalms over the author's 2/5 line | **23 of 42** |
+| worst | Pss 55, 134 at **100%**; 61 at 89%; 53 at 86%; **Ps 1 at 83%** (5 of 6) |
+| lowest | Ps 72 at 5% |
+
+**The mechanism is identical to the commentator problem RULE 8b was written for.** The Greek is
+supplied on every verse of every psalm, so like the unranked commentator dossier it is always to hand
+and always usable, and the "Textual Criticism" angle carried no budget and no selection criterion.
+
+Crucially — and this is stated in the rule — **this is not a quality failure**. The author's own
+reading was that the instances individually do differ or add nuance; that is exactly why the volume
+grew, and why no admission test would have caught it. It is a failure of proportion.
+
+The budget therefore lives inside RULE 8b as an explicit carve-out from its *"quotation of biblical
+parallels remains generous"* clause: **at most 2 verses in 5**, a ceiling over the whole psalm, and a
+RANKING instrument in the sense of RULE 8b's four steps — rank on (1) Vorlage evidence, (2) the Greek
+settling what the Hebrew leaves open, (3) a word choice carrying a theology the Hebrew never states
+(βουλῇ for both councils; μελετήσει for the murmuring); cut first the Greek that merely confirms, and
+the second Greek observation on a verse that already has one. Ends with *"keep the insight, drop the
+citation, and do NOT refill the room"* — **ceiling language only**, no "spend what you save", per the
+Session-370 amendment that backfired. The angles list points at it.
+
+New `scripts/check_lxx_density.py` scores any guide against it. Structural presence only, never
+wording (§7 canary lesson).
+
+### 5. ITEM 1 — analysed, implemented, then REVERTED at the author's request
+
+The three flagged passages resolved into two mechanisms:
+
+- **v.5's "the article says the readers know" and the Sanhedrin 109b gapped verb are the same
+  failure**: the load-bearing feature is not on the page. `בְּ + הַ` collapses into `בַּ`, so the
+  definite article is a vowel, not a letter; a gapped verb is an absence by definition. **RULE 3b-2
+  exists for exactly this** ("point, don't name") but ranks **"bold the exact letters" first**, and
+  in both cases there is nothing to bold — the technique ranking dead-ends and the model falls back
+  to naming. Proposed fix was techniques 5 and 6 (*show the form the word would otherwise have had*;
+  *print the gap*) — `בְּמִשְׁפָּט` set against `בַּמִּשְׁפָּט`, and `וְחַטָּאִים ______ בַּעֲדַת צַדִּיקִים`.
+- **The אַשְׁרֵי line is a different animal**: *"The righteous get the middle; the wicked get the edges
+  and the final syllable."* Not a missing step — a closing sentence that fuses three separate
+  framings (first-and-last words; the רְשָׁעִים bracket, which sits *inside* both verses; the closing
+  syllable) into a fourth assertion none of them supports. The author's own objection kills it:
+  if the first word is אַשְׁרֵי, the wicked do not have that edge.
+
+Both were implemented, then **removed at the author's call**: *"I don't think the extra characters
+are worth it."* Prompt went 73,705 → 79,333 → **75,777** (+2.8% net: the LXX budget and RULE 12's
+poem spec). The analysis is deliberately **not** preserved elsewhere — the author declined the offer.
+
+**Recorded because it will recur**: RULE 3b-2's technique ranking assumes a locatable letter, and
+this is now the second time (after Ps 71's "the conjunction is doing all the work") that an
+author-reported failure has landed in that rule's blind spot.
+
+### 6. A PHRASING LESSON — the prompt's own RULE 7b would have caught me
+
+The RULE 5 addition originally closed on *"A closing line is a claim, not a cadence."* The author
+asked what it meant. Checking it against the prompt: RULE 7b is titled "THE APHORISM THAT ONLY SOUNDS
+LIKE ONE", already uses "cadence" three times in that sense, and already bans the "X, not Y"
+manufactured frame — so the line was redundant, was an instance of the shape it warned against, and
+**misfiled the failure**: RULE 7b's test is "strip the balance and ask what the reader now knows",
+and the אַשְׁרֵי sentence *passes* it. The sentence is not empty. It is false. It was replaced with a
+mechanism and a check before the whole block was reverted.
+
+**Standing note**: apply RULE 7b's own test to prompt edits. Two aphorisms this session were doing
+rhythm rather than work, one of them inside a rule about that exact failure.
+
+### Files changed
+
+- `src/utils/document_generator.py` — Hebrew size fix; `_collect_quote_block` keeps the bare `>`;
+  new `_classify_quote_lines`, `_render_quote_block`, `_add_quote_text`, `_lift_following_translation`;
+  both quote-block callers rewired to the shared renderer.
+- `src/agents/master_editor.py` — RULE 12 poem format spec; RULE 8b Septuagint budget; angles item 7
+  pointer. (RULE 3b-2 and RULE 5 additions were reverted; both rules are byte-identical to Session 373.)
+- `scripts/lineate_poem_translations.py`, `scripts/check_lxx_density.py` — new.
+
+### Watch
+
+- **The LXX budget takes effect only on the next writer run.** Ps 1's 83% is baked into the existing
+  text, as are the two item-1 passages. `check_lxx_density.py` is the gate.
+- **Ps 1's guide text is unchanged** — this session fixed formatting only. A writer rerun on the
+  existing dossier (~$2) is what would apply the budget and the item-1 material to Ps 1 itself.
+- `_lift_following_translation`'s 40-char floor is tuned on 26 guides; a future guide could open a
+  paragraph with a long non-translation quotation right after a poem.
+- The RULE 12 poem spec is un-A/B'd, like every writer-prompt change since Session 373.
+
+---
+
 ## Session 374 (2026-08-05): Literary echoes review — PASS 4 HAD BEEN DELETING 40-84% OF VERIFIED ECHOES; per-entry verification; corpus-wide author ledger; the second generator is measured and OFF
 
 ### Trigger

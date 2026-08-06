@@ -206,7 +206,15 @@ class DocumentGenerator:
             run.bold = bold
             run.italic = italic
             if is_heb:
-                self._mark_run_hebrew(run, font_size=font_size if set_font else None)
+                # Hebrew sits 1pt OVER the Latin size everywhere in this document (13pt
+                # against the 12pt body) because Times New Roman Hebrew reads visually
+                # smaller than Aptos at the same point size — the same convention
+                # _set_style_complex_size applies to the Normal / BodySans styles. Passing
+                # the LATIN size straight through wrote szCs=24 on every Hebrew run in a
+                # block quote or bullet (the two set_font=True callers), so a Hebrew or
+                # Yiddish poem rendered a point smaller than the Hebrew in the prose
+                # around it — Psalm 1's Manger quatrain was the reported case.
+                self._mark_run_hebrew(run, font_size=(font_size + 1) if set_font else None)
             elif set_font:
                 run.font.name = font_name
                 run.font.size = Pt(font_size)
@@ -729,20 +737,29 @@ class DocumentGenerator:
         ("> line\\n\\n> line"). Treating each as its own block would give every line
         a trailing space_after and reintroduce the double-spaced look, so a blank
         line is absorbed when the next non-blank line is still part of the quote.
-        Empty quote lines are dropped; spacing is handled by _apply_quote_format.
+
+        A BARE `>` line is different from a blank markdown line: the writer uses it to
+        separate the original-language stanza from its English translation (see the
+        literary-echoes quotation format). It is kept as an empty string so
+        _render_quote_block can turn it into a stanza gap; dropping it — as this used
+        to — ran the original and the translation together as one undifferentiated
+        slab of italics.
         """
         quote_lines = []
         while i < len(lines):
             stripped = lines[i].strip()
             if stripped.startswith('>'):
-                text = stripped[1:].lstrip()
-                if text:
-                    quote_lines.append(text)
+                quote_lines.append(stripped[1:].lstrip())
                 i += 1
             elif not stripped and i + 1 < len(lines) and lines[i + 1].strip().startswith('>'):
                 i += 1  # blank line *inside* the quote block
             else:
                 break
+        # Leading/trailing separators carry no meaning — only interior ones do.
+        while quote_lines and not quote_lines[0]:
+            quote_lines.pop(0)
+        while quote_lines and not quote_lines[-1]:
+            quote_lines.pop()
         return quote_lines, i
 
     def _apply_quote_format(self, paragraph, last_in_block: bool = False):
@@ -762,6 +779,145 @@ class DocumentGenerator:
         pf.line_spacing = 1.0
         pf.space_before = Pt(0)
         pf.space_after = Pt(8) if last_in_block else Pt(0)
+
+    # ------------------------------------------------------------------
+    # Quoted poems: original, translation, attribution
+    #
+    # A quoted poem in these guides has up to four parts, in this order:
+    #   the original-language lines, a bare `>` separator, the English
+    #   translation, and sometimes an attribution opening with an em dash.
+    # They are one visual unit — shared 0.5" indent, single leading — but the
+    # TRANSLATION IS SET UPRIGHT against the italic original, so the reader can
+    # see at a glance which is which instead of meeting eighteen identical lines
+    # of italics. Rendering them all the same way was the reported problem.
+    # ------------------------------------------------------------------
+    _QUOTE_OPENERS = ('"', '“', '«')
+    _ATTRIB_OPENERS = ('—', '–', '--')
+
+    @classmethod
+    def _classify_quote_lines(cls, quote_lines: List[str]) -> List[str]:
+        """Tag each collected quote line 'original' | 'translation' | 'attribution' | 'break'.
+
+        The translation begins at the first line that OPENS with a double quote and
+        has at least one original line before it, and runs to the end of the block or
+        to an attribution line. A block whose very first line is quoted is an ordinary
+        English quotation, not an original-plus-translation pair, and stays italic.
+        """
+        tags: List[str] = []
+        seen_original = False
+        in_translation = False
+        for line in quote_lines:
+            s = line.strip()
+            if not s:
+                tags.append('break')
+                continue
+            if s.startswith(cls._ATTRIB_OPENERS):
+                in_translation = False
+                tags.append('attribution')
+                continue
+            if not in_translation and seen_original and s.startswith(cls._QUOTE_OPENERS):
+                in_translation = True
+            if in_translation:
+                tags.append('translation')
+            else:
+                seen_original = True
+                tags.append('original')
+        return tags
+
+    def _lift_following_translation(self, lines: List[str], i: int, quote_block: List[str]) -> List[str]:
+        """Pull a translation that the writer left in the prose INTO the quote block.
+
+        The literary-echoes format asks for the translation inside the block quote, and
+        about two thirds of the guides do that. The rest print the poem and then open the
+        next paragraph with the whole translation in quotation marks — which renders as
+        body prose glued to the commentary, so the reader never sees it as the poem's
+        other half. Those get lifted here: the quoted span becomes the block's final,
+        upright lines and the commentary after it starts a fresh paragraph.
+
+        Deliberately narrow (a multi-line block, no translation already present, a quoted
+        span of 40+ characters immediately after): over the 26 finished guides this fires
+        on 12 spans, all of them genuine translations, and never on the short quoted
+        phrases that ordinary commentary opens with.
+
+        `lines` is mutated in place — the caller re-reads it for the remaining prose.
+        """
+        if len([q for q in quote_block if q.strip()]) < 2:
+            return quote_block
+        if 'translation' in self._classify_quote_lines(quote_block):
+            return quote_block
+
+        k = i
+        while k < len(lines) and not lines[k].strip():
+            k += 1
+        if k >= len(lines):
+            return quote_block
+
+        candidate = lines[k].strip()
+        match = re.match(r'^["“]([^"“”]{40,})["”]', candidate)
+        if not match:
+            return quote_block
+
+        translation = match.group(1).strip()
+        lines[k] = candidate[match.end():].lstrip()
+        return quote_block + ['', f'"{translation}"']
+
+    def _add_quote_text(self, paragraph, text: str, lineate: bool):
+        """Add one quote line's text, honouring the writer's own line-break marks.
+
+        Inside a quoted poem, ' / ' is a line break, not a slash: it is how the literary
+        echoes dossier lineates verse that has been written onto a single line, and the
+        writer carries the convention through to both the original and the translation.
+        Rendered literally it drops a stray slash into the middle of a line of verse.
+
+        Over the finished guides 24 quote lines carry the mark and 23 are verse. The
+        exception is a chiasm DIAGRAM whose pairing is the point (`**A** — deceit /
+        **B** — darkness`), which the bold markers identify: a line of verse does not
+        carry them, so `lineate` is withheld from any line containing `**`.
+        """
+        parts = re.split(r'\s+/\s+', text) if lineate else [text]
+        for idx, part in enumerate(parts):
+            if part:
+                self._process_markdown_formatting(paragraph, part, set_font=True)
+            if idx < len(parts) - 1:
+                paragraph.add_run().add_break()
+
+    def _render_quote_block(self, quote_lines: List[str], style: str = 'Normal'):
+        """Render one collected block quote as a single visual unit."""
+        from docx.shared import Pt as _Pt
+
+        tags = self._classify_quote_lines(quote_lines)
+        renderable = [k for k, t in enumerate(tags) if t != 'break']
+        if not renderable:
+            return
+        last_k = renderable[-1]
+
+        pending_gap = False
+        prev_tag = None
+        for k, (line, tag) in enumerate(zip(quote_lines, tags)):
+            if tag == 'break':
+                # A stanza separator is 6pt of air, NOT an empty paragraph — an empty
+                # paragraph adds a full line height plus the style's 8pt space_after.
+                pending_gap = True
+                continue
+            # The original -> translation seam always gets the gap, whether or not the
+            # writer marked it: some guides separate the two with a bare `>`, some with
+            # a blank markdown line (which is absorbed as invisible), some with nothing.
+            if tag == 'translation' and prev_tag == 'original':
+                pending_gap = True
+            prev_tag = tag
+            p = self.document.add_paragraph(style=style)
+            self._apply_quote_format(p, last_in_block=(k == last_k))
+            if pending_gap:
+                p.paragraph_format.space_before = _Pt(6)
+                pending_gap = False
+            self._set_paragraph_ltr(p)
+            self._add_quote_text(
+                p, line,
+                lineate=(tag in ('original', 'translation') and '**' not in line),
+            )
+            if tag != 'translation':
+                for run in p.runs:
+                    run.italic = True
 
     def _add_paragraph_with_markdown(self, text: str, style: str = 'Normal'):
         """Adds a paragraph, parsing basic markdown for bold/italics, including nested formatting."""
@@ -893,16 +1049,8 @@ class DocumentGenerator:
             # Handle blockquotes - collect consecutive blockquote lines
             if line.startswith('>'):
                 quote_block, i = self._collect_quote_block(lines, i)
-
-                # Add quote block as indented italic paragraphs
-                for qi, quote_text in enumerate(quote_block):
-                    p = self.document.add_paragraph(style=style)
-                    self._apply_quote_format(p, last_in_block=(qi == len(quote_block) - 1))
-                    self._set_paragraph_ltr(p)
-                    self._process_markdown_formatting(p, quote_text, set_font=True)
-                    # Make the entire quote italic
-                    for run in p.runs:
-                        run.italic = True
+                quote_block = self._lift_following_translation(lines, i, quote_block)
+                self._render_quote_block(quote_block, style=style)
                 continue
 
             # Handle regular paragraphs
@@ -1034,23 +1182,8 @@ class DocumentGenerator:
             elif line_stripped.startswith('>'):
                 # Collect consecutive block quote lines
                 quote_block, i = self._collect_quote_block(lines, i)
-
-                # Add each quote line as a separate paragraph with indentation and italic
-                for qi, quote_text in enumerate(quote_block):
-                    if not quote_text:
-                        # Empty quote line - add a blank paragraph
-                        self.document.add_paragraph()
-                    else:
-                        # Non-empty quote line
-                        p = self.document.add_paragraph(style=style)
-                        self._apply_quote_format(p, last_in_block=(qi == len(quote_block) - 1))
-                        # Explicitly set paragraph to LTR to prevent Word's bidi algorithm from reordering runs
-                        self._set_paragraph_ltr(p)
-                        # Process markdown formatting in quote text with explicit font
-                        self._process_markdown_formatting(p, quote_text, set_font=True)
-                        # Make the entire quote italic
-                        for run in p.runs:
-                            run.italic = True
+                quote_block = self._lift_following_translation(lines, i, quote_block)
+                self._render_quote_block(quote_block, style=style)
             else:
                 # Collect consecutive non-bullet, non-quote, non-empty lines until we hit an empty line or special formatting
                 text_block = []

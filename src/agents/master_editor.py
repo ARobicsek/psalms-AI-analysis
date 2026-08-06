@@ -326,6 +326,14 @@ Everything below has already passed the admission test; the tiers decide only ho
 
 **Everything above concerns COMMENTATORS.** Quotation of biblical parallels, liturgical texts, and literary echoes remains generous — there, showing the actual text IS the payoff.
 
+**ONE EXCEPTION TO THAT GENEROSITY: THE SEPTUAGINT.** The Greek is supplied for every verse, so like the commentator dossier it is always to hand and always usable — and it behaves the same way. Across the finished guides the LXX appears in a median **44%** of verses, several psalms above 80%. **This is not a quality failure.** Nearly every instance genuinely differs from the Hebrew or adds a nuance; that is precisely why the volume grew, and it is why no admission test will fix it. It is a failure of proportion. A guide where the Greek turns up at every second verse has quietly become a book about the Septuagint.
+
+**BUDGET: the Greek appears in AT MOST 2 VERSES IN 5** — a psalm of 20 verses gets it in no more than 8, and fewer is usually better. This is a ceiling over the whole psalm and a RANKING instrument in the sense of the four steps above: sort every Greek observation in the psalm by how much it changes the reading, spend from the top down, and accept that real material is going to be cut. If two Greek readings in one verse both seem essential, one of them is losing to a better one elsewhere in the psalm.
+
+**Rank on these, in order:** (1) the Greek betrays a different Hebrew text in front of the translator; (2) the Greek settles something the Hebrew deliberately leaves open, and the choice has consequences; (3) the Greek's word choice carries a theology the Hebrew never states — βουλῇ used for both councils so that the antithesis becomes explicit; μελετήσει putting the murmuring into the vocabulary of athletic training. **Cut first:** the Greek that merely confirms the Hebrew, the rendering noted for completeness, and — the commonest — a second Greek observation on a verse that already has one.
+
+**Keep the insight, drop the citation, and do NOT refill the room.** Exactly as with commentators: room recovered here is recovered. The verse gets shorter.
+
 **WORKED EXAMPLES — quotations that passed the admission test, and the ideal cut.** Never quote, echo, or rebuild these; they show what "changes the reading" looks like in practice.
 
 - *The test passed at full strength — TAKE A RISK.* On a verse about sins overpowering the speaker: "Malbim presses the image almost to allegory — the sins, having grown stronger than the man (for human nature is bent toward sin and cannot win the fight alone), themselves step forward and *plead* before God that He pardon them, since their very strength proves a person could not have resisted." Thirty seconds ago the verse was a confession; now the prosecution is arguing for the defence.
@@ -596,7 +604,7 @@ For EACH verse:
 
 6. **Comparative Religion**: ANE parallels (Ugaritic, Akkadian, Egyptian), polemic, transformation of motifs. Cite specific texts (KTU numbers, Enuma Elish, etc.).
 
-7. **Textual Criticism**: MT vs LXX. What LXX choices reveal about the Vorlage. Textual variants and implications.
+7. **Textual Criticism**: MT vs LXX. What LXX choices reveal about the Vorlage. Textual variants and implications. **Subject to the Septuagint budget in RULE 8b — at most 2 verses in 5, ranked across the whole psalm.** This angle being available on every verse is exactly why it must be rationed.
 
 8. **Lexical Analysis**: Etymology when illuminating, semantic range (BDB data), rare vocabulary, hapax legomena.
 
@@ -617,6 +625,18 @@ For EACH verse:
    - **Frame the source itself for the reader.** Naming a poet and a work title is not enough; the reader may have never opened either. Give one or two sentences of context BEFORE OR ALONGSIDE the quotation: when the work was written, under what historical or biographical circumstances if relevant (Akhmatova writing during the Stalinist purges; Hardy on the eve of WWI; Auden's "Shield of Achilles" reimagining Homer's shield as a vision of modern atrocity; Lorca's *cante jondo* as a flamenco-derived "deep song" form), and what the source work is doing in broad strokes. Treat the source poet as a character whose situation matters — not just a name attached to lines. The reader should know enough about the source to feel why these particular lines, by this particular poet, in this particular moment, illuminate the psalm.
    - **Unfold the resonance after the quotation.** Not one sentence — three to five. Be specific about the formal or rhetorical feature being shared. What is genuinely parallel? What differs, and what does the difference reveal about each poet's project? Why does the comparison enrich the reader's hearing of the psalm?
    - **Length permission**: a well-handled literary echo may add 4-8 sentences to a verse's commentary. That is fine — and preferable to three rushed echoes the reader cannot feel. Echoes are one of the few places where a little breadth genuinely earns its keep.
+
+   **HOW TO SET A QUOTED POEM.** Verse is lineated on the page or it stops being verse. Put the original AND the translation inside the block quote, one `> ` line per line of poetry, translation lineated to mirror the original, the two separated by a bare `>`:
+
+   > Empieza el llanto
+   > de la guitarra.
+   > Es inútil callarla.
+   >
+   > "The weeping of the guitar
+   > begins.
+   > It is useless to silence it."
+
+   Then start the commentary as a new paragraph. Do NOT run the translation into the prose that follows the poem ("...*callarla.*" / `"The weeping of the guitar begins. It is useless to silence it." Lorca's anaphora enacts...`) — set that way it reads as your commentary, not as the poem's other half, and the line breaks the poet chose are gone. Prose quotations — a letter, a novel, an essay — are not lineated and take the ordinary single-line block quote.
 
    - These literary echoes can add richness, points of interest, variation, emotional resonance, and (sometimes) gentle amusement to your commentary.
    - Draw on Deep Research and Literary Echoes data.
