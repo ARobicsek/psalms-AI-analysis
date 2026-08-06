@@ -9,6 +9,138 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 376 (2026-08-06): The writer's reasoning has been generated, paid for, and discarded since the Opus 4.7 migration
+
+### Trigger
+
+The author, on two connected worries. First, that the guides still leave things unexplained —
+*"especially Talmudic ideas"* — despite Session 373 having rewritten RULE 5 specifically to demand
+the inferential step, and Session 375 having built and then reverted a further attempt at the same
+failure. Second, that the writer prompt at 75,777 characters may be self-defeating: *"I wonder
+whether we're inadvertently getting in our own way by providing instructions that when the writer
+encounters them are somewhat conflicting."* Which led to the session's question:
+
+> *"Is there a way to actually watch the inner workings of the writer model as it goes about its
+> thinking and writing? My thinking is that this might allow us to see if it's getting tripped up in
+> knots somewhere along the way. This may not be possible."*
+
+### The finding: the instrument existed, and had gone dark
+
+`MasterEditorV2._call_claude_writer` has sent `thinking={"type": "adaptive"}` on every Claude writer
+call for many sessions, and has iterated stream events catching `thinking_delta` since **Session 327**,
+which added the capture explicitly as "Master Writer thinking visibility". But it kept only
+`len(event.delta.thinking)` in a `thinking_chars` counter, and it **never set `thinking.display`**.
+
+On Opus 4.7 and later — including Opus 4.8 and Opus 5 — `display` defaults to `"omitted"`, which
+streams thinking blocks whose text is the **empty string**. The counter was therefore measuring a
+quantity that had become structurally zero, and its only output was a log line guarded by
+`if thinking_chars:` — so it simply stopped printing.
+
+**It worked when it was written.** Session 327 was built against Opus 4.6, whose default *was*
+`"summarized"`. Opus 4.7 flipped the default and introduced the `display` parameter; production cut
+over to Opus 5 in Session 373. No error was ever raised at any point in that chain.
+
+This is the **third instrument in four sessions found to have been failing silently**, and the shape
+is identical each time: literary-echoes Pass 4 truncating finished dossiers (S374), the copy editor
+deleting quotation marks around Hebrew abbreviations (S373), and now this. In all three the failure
+produced no exception, no empty-output check, and no metric that moved.
+
+### Verified live before shipping
+
+Two calls to `claude-opus-5`, ~$0.015 total, same stream/accumulate shape as the production path:
+
+| `thinking` config | thinking chars returned |
+| --- | --- |
+| `{"type": "adaptive", "display": "summarized"}` | **560** |
+| `{"type": "adaptive"}` — the production default | **0** |
+
+The bug is reproduced, not inferred from documentation.
+
+### The fix
+
+Two edits, both in `src/agents/archive/master_editor_v2.py` — the base-class writer call that **both**
+the enhanced and SI pipelines reach (production `master_editor.py` overrides `_call_claude_writer`
+only to add content-filter retries, then delegates via `super()`). Verified there are exactly two
+definitions of that method in the tree, so there is no third path that bypasses this.
+
+1. **`THINKING_DISPLAY_MODELS`** (module level, after the imports) — the models whose `display`
+   defaults to `"omitted"`: `opus-4-7`, `opus-4-8`, `opus-5`, `sonnet-5`, `fable-5`, `mythos-5`.
+   `display` is sent **only** for these. Opus 4.6 and Sonnet 4.6 are deliberately absent: they already
+   default to `"summarized"` and do not accept the parameter, so passing it unconditionally would
+   400 any Opus 4.6 A/B arm. This mirrors how `apply_effort` omits `output_config` for old models.
+   Substring matching was checked against nine model IDs — `opus-4-5` does not false-match `opus-5`,
+   and `sonnet-4-5` does not false-match `sonnet-5`.
+
+2. **`_call_claude_writer`** — `thinking_chars` (an `int`) becomes `thinking_text` (a `str`); the
+   deltas are accumulated rather than counted; and the text is written to
+   `output/debug/{debug_prefix}_thinking_psalm_{N}.txt`, beside the existing response file. The
+   token-count log line is preserved, now derived from the accumulated text so there is one source.
+
+**Cost: $0.** `display` controls visibility only — the thinking happens and is billed into
+`output_tokens` under every setting. This reasoning was already being paid for on every writer run
+and thrown away.
+
+**The instrument now reports its own death.** If `display` was requested and no thinking comes back,
+an `elif` branch logs a WARNING naming the model. Session 327's real failure was not the missing
+parameter but that an empty counter is indistinguishable from a quiet run; a warning is not.
+
+### What this can and cannot answer
+
+Stated plainly, because the author's question was about seeing the model's "inner workings":
+
+- **Available**: a model-generated **summary** of the reasoning. The raw chain of thought is never
+  returned on Opus 5 under any setting. A summary can rationalise after the fact, so this is a
+  **hypothesis generator** — confirmation remains `ab_writer_prompts.py` (prompt varies, model fixed).
+- **Not available**: activations, attention over the prompt, which rule fired when. That is
+  mechanistic interpretability and requires open weights. No proxy was substituted for it.
+
+On the Talmudic item specifically, the capture does separate two diagnoses that call for **opposite**
+fixes: the writer weighing the inferential step and cutting it (something competes with RULE 5 — the
+fix is subtractive) versus the step never arising at all (RULE 5 is not reaching the behaviour — the
+fix is a demonstration, not more rule text). Three sessions have now attempted this failure without
+being able to tell those apart.
+
+### On the "70,000 characters is getting in our own way" hypothesis
+
+Half right, and the project's own record says which half. **Length is not the variable**: arm B WON
+while making the prompt **7,325 characters longer** (S371), and arm A's deletion of the 24-item
+checklist made the guide **13% longer**, not better. The standing five-instance prior (S368 copy
+editor, S370 RULE 8b, S371 arms C/B2/B3) is about a **kind** of instruction — exhortation, added text
+intended to produce restraint — not about a character count. The right experiment is therefore a
+**conflict audit** of the prompt (read it cold, list every place two rules pull opposite ways, check
+whether the Talmudic failure sits on one), **not a shortening pass. Not run this session.**
+
+### Also committed (not this session's work)
+
+An intro-recovery fix was already sitting uncommitted in the working tree from a prior session, in
+the same file, and is included in this commit rather than left dirty. `_parse_writer_response` now
+falls back to "everything before the VERSE COMMENTARY header" when the writer omits
+`### INTRODUCTION ESSAY`, stripping a leading `# <title>` line. On Psalm 1 (S374, Opus 5) the writer
+opened with its own essay title instead of the expected header, and the pipeline wrote a
+**zero-byte introduction** that the copy editor then ran on — the same silent-loss shape again.
+**This session neither wrote nor tested that change.**
+
+### Files changed
+
+- `src/agents/archive/master_editor_v2.py` — `THINKING_DISPLAY_MODELS`; thinking capture in
+  `_call_claude_writer`; (pre-existing) intro recovery in `_parse_writer_response`
+- `CLAUDE.md`, `docs/session_tracking/IMPLEMENTATION_LOG.md` — session documentation
+
+No scripts were created or changed, so `scriptReferences.md` is untouched. The smoke test was written
+to the session scratchpad, not the repo — it is a one-shot verification, not a maintained tool.
+
+### Watch
+
+- **No writer run has yet exercised the capture.** The author will read the first thinking file on
+  his next psalm. Until then the feature is verified only by the standalone smoke test above.
+- The `elif "display" in thinking_cfg` warning branch is **unexercised in the live pipeline**.
+- The RULE 5 / Talmudic question is **diagnosed only when that file is read** — nothing about the
+  writer's behaviour has changed this session, only the visibility into it.
+- The prompt conflict audit is the open agenda item, alongside the carried-forward
+  `NEXT_SESSION_PROMPT_session_372.md` items (affect work, B4's unread scorecard, Opus 5 vs 4.8).
+
+---
+
 ## Session 375 (2026-08-05): Quoted poems rendered as prose — three renderer bugs, a dossier-driven lineation backfill, and the LXX budget (median 44% of verses)
 
 ### Trigger

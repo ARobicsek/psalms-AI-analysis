@@ -50,6 +50,25 @@ else:
     from src.utils.model_effort import apply_effort
 
 
+# Models whose `thinking.display` defaults to "omitted" — they stream thinking
+# blocks whose text is an EMPTY STRING unless "summarized" is asked for.
+#
+# Session 376: this is why the Session-327 thinking instrument went dark. It was
+# written against Opus 4.6, where the default WAS "summarized", so it worked;
+# Opus 4.7 silently flipped the default and added the `display` parameter, and
+# production cut over to Opus 5 in Session 373. Nothing failed — the counter just
+# stayed at 0 and its log line stopped printing, which is invisible by design.
+#
+# Pre-4.7 models (Opus 4.6, Sonnet 4.6) already default to "summarized" and do
+# not accept `display`, so they are deliberately absent: for them the right move
+# is to pass nothing, exactly as `apply_effort` omits `output_config`.
+# Substring match is safe against the older IDs — "opus-4-5" does not contain
+# "opus-5", and "sonnet-4-5" does not contain "sonnet-5".
+THINKING_DISPLAY_MODELS = (
+    "opus-4-7", "opus-4-8", "opus-5", "sonnet-5", "fable-5", "mythos-5",
+)
+
+
 # =============================================================================
 # MASTER EDITOR V2 PROMPT - RESTRUCTURED
 # =============================================================================
@@ -2232,7 +2251,7 @@ class MasterEditorV2:
             
             # Use streaming API as required for long-thinking models (e.g. Opus 4.6)
             response_text = ""
-            thinking_chars = 0
+            thinking_text = ""
             input_tokens = 0
             output_tokens = 0
 
@@ -2241,10 +2260,20 @@ class MasterEditorV2:
             # into src/utils/model_effort.py, shared with the Macro Analyst and
             # Synthesis Discovery. Older models (e.g. Opus 4.6) don't accept
             # output_config, so it is omitted for them rather than passed.
+            thinking_cfg = {"type": "adaptive"}
+            if any(m in model_id for m in THINKING_DISPLAY_MODELS):
+                # Session 376: ask for the reasoning we are ALREADY PAYING FOR.
+                # `display` controls visibility only — the thinking happens and is
+                # billed into output_tokens either way, so this costs $0 and the
+                # deliberation stops being discarded. What comes back is a SUMMARY,
+                # never the raw chain of thought; read it as evidence about what the
+                # writer weighed, not as a verbatim trace.
+                thinking_cfg["display"] = "summarized"
+
             stream_kwargs = {
                 "model": model_id,
                 "max_tokens": 128000,
-                "thinking": {"type": "adaptive"},
+                "thinking": thinking_cfg,
                 "messages": [{"role": "user", "content": prompt}],
             }
             apply_effort(stream_kwargs, model_id, self.logger)
@@ -2255,17 +2284,36 @@ class MasterEditorV2:
                         if hasattr(event.delta, 'text'):
                             response_text += event.delta.text
                         elif hasattr(event.delta, 'thinking'):
-                            thinking_chars += len(event.delta.thinking)
+                            thinking_text += event.delta.thinking
 
                 # Get final message usage
                 final_message = stream.get_final_message()
                 input_tokens = final_message.usage.input_tokens
                 output_tokens = final_message.usage.output_tokens
 
-            if thinking_chars:
+            # Session 376: WRITE THE THINKING DOWN. Session 327 captured it and kept
+            # only a character count, so when the text went empty there was nothing
+            # to notice. Persisting it beside the response makes the instrument
+            # self-reporting: an empty file is a visible failure, not a silent one.
+            if thinking_text:
+                thinking_file = Path(
+                    f"output/debug/{debug_prefix}_thinking_psalm_{psalm_number}.txt"
+                )
+                thinking_file.parent.mkdir(parents=True, exist_ok=True)
+                thinking_file.write_text(thinking_text, encoding='utf-8')
                 self.logger.info(
-                    f"Master Writer used ~{thinking_chars // 4:,} thinking tokens "
-                    f"(included in the {output_tokens:,} output total)"
+                    f"Master Writer used ~{len(thinking_text) // 4:,} thinking tokens "
+                    f"(included in the {output_tokens:,} output total); "
+                    f"reasoning saved to {thinking_file}"
+                )
+            elif "display" in thinking_cfg:
+                # Asked for summarized thinking and got none. Either the default
+                # moved again or this model stopped honouring `display` — say so
+                # loudly rather than repeating the Session-327 silence.
+                self.logger.warning(
+                    f"Requested summarized thinking from {model_id} but received "
+                    "NO thinking text. The reasoning capture is dark — check whether "
+                    "`thinking.display` is still supported on this model."
                 )
 
             # Track usage — thinking_tokens=0 intentional: Anthropic billing already
@@ -2305,15 +2353,6 @@ class MasterEditorV2:
             'psalm_number': psalm_number
         }
         
-        # 1. Introduction (including Liturgical section)
-        # Look for start of intro until start of verses
-        intro_match = re.search(
-            r'###?\s*INTRODUCTION ESSAY\s*\n(.*?)(?=###?\s*VERSE COMMENTARY|$)',
-            response_text, re.DOTALL | re.IGNORECASE
-        )
-        if intro_match:
-            result['introduction'] = intro_match.group(1).strip()
-            
         # 2. Verse Commentary
         # Look for start of verses until Reader Questions (or end)
         verse_match = re.search(
@@ -2322,7 +2361,37 @@ class MasterEditorV2:
         )
         if verse_match:
             result['verse_commentary'] = verse_match.group(1).strip()
-            
+
+        # 1. Introduction (including Liturgical section)
+        # Look for start of intro until start of verses
+        intro_match = re.search(
+            r'###?\s*INTRODUCTION ESSAY\s*\n(.*?)(?=###?\s*VERSE COMMENTARY|$)',
+            response_text, re.DOTALL | re.IGNORECASE
+        )
+        if intro_match:
+            result['introduction'] = intro_match.group(1).strip()
+        elif verse_match:
+            # THE HEADER IS THE MODEL'S TO OMIT, AND IT DOES.
+            #
+            # Psalm 1 (Session 374, Opus 5): the writer opened with `# PSALM 1` and
+            # its own essay title instead of the `### INTRODUCTION ESSAY` the OUTPUT
+            # FORMAT asks for, wrote a complete 1,300-word essay, and this method
+            # returned '' for it. The pipeline then wrote a ZERO-BYTE intro file,
+            # the copy editor ran on a guide with no introduction, and nothing
+            # failed -- the same silent-loss shape as the literary-echoes Pass 4.
+            #
+            # The VERSE COMMENTARY header is the reliable landmark (the verses are
+            # unmistakably delimited), so everything before it is the introduction
+            # by construction. Strip a leading `# <document title>` line: it is the
+            # model titling the whole guide, and the DOCX supplies its own title.
+            head = response_text[:verse_match.start()]
+            head = re.sub(r'\A\s*#\s+[^\n]*\n', '', head)
+            result['introduction'] = head.strip()
+            self.logger.warning(
+                "Writer response had no '### INTRODUCTION ESSAY' header; recovered "
+                f"{len(result['introduction']):,} chars preceding 'VERSE COMMENTARY'"
+            )
+
         # 3. Reader Questions
         # Look for refined reader questions
         rq_match = re.search(
@@ -2331,7 +2400,18 @@ class MasterEditorV2:
         )
         if rq_match:
             result['reader_questions'] = rq_match.group(1).strip()
-            
+
+        # An empty section here means the guide loses a whole part of itself, so
+        # say so loudly rather than letting a 0-byte file reach the copy editor.
+        for section in ('introduction', 'verse_commentary'):
+            if not result[section]:
+                self.logger.error(
+                    f"Writer response parsed to an EMPTY {section} "
+                    f"({len(response_text):,} chars of response). "
+                    "The guide will be incomplete -- check "
+                    f"output/debug/master_writer_v4_response_psalm_{psalm_number}.txt"
+                )
+
         return result
 
     # Stress used to be marked **BOLD CAPS**. Session 370 freed bold for the writer's
