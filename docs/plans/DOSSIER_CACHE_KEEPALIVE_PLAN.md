@@ -1,6 +1,7 @@
-# Dossier Prompt-Cache + Keepalive Plan (SHELVED)
+# Dossier Prompt-Cache + Keepalive Plan (SHELVED — RE-SHELVED SESSION 377)
 
 **Created**: Session 359 (2026-06-23)
+**Re-examined and re-shelved**: Session 377 (2026-08-07) — by author decision, after measurement. **Read "Session 377: measured, and the premise has expired" below before reviving any of this.** The plan's own predicted failure mode has since occurred, and the two calls it was designed to bridge no longer run on the same model.
 **Status**: 🟡 **SHELVED — analyzed, designed, validated-on-paper, NOT implemented.** Shelved by user decision over two concerns (see "Why shelved"). This doc has everything needed to pick it up later without re-deriving anything.
 **Theme**: Cost reduction — "A1" from the Session-359 cost-reduction menu.
 **Touches**: `src/agents/master_editor.py`, `src/agents/synthesis_discovery.py` only.
@@ -71,6 +72,60 @@ Three calls share **one byte-identical cached dossier block** (content block 1, 
    - Net: the win is real today (both on `claude-opus-4-8`) but brittle against the model-routing flexibility the pipeline otherwise preserves (`--gpt-5-4-writer`, `--master-editor-model`, future GPT writers).
 
 **Implication if revived:** gate the whole thing behind a runtime check — only enable caching + the keepalive when **Synthesis model == Writer model AND both are Anthropic Claude**; otherwise fall back to the current (un-reordered, un-cached) path. Consider keeping the dossier-first prompt structure behind a flag so a non-Claude writer can use the original ordering.
+
+---
+
+## Session 377: measured, and the premise has expired
+
+Session 377 audited the Psalm 73 run and revisited this plan **with measurements instead of estimates**. The conclusion is to keep it shelved, but the *reasons* have changed, and one of them is decisive.
+
+### 1. The model-swap fragility this doc predicted has ACTUALLY HAPPENED
+
+Section "Why shelved" item 2 warned: *"Synthesis and Writer must be pinned to the **same** Claude model for the prefix to be shared; any divergence silently disables the cache."* That divergence shipped in **Session 373**: the Master Writer moved to `claude-opus-5` while Synthesis Discovery was deliberately pinned to `claude-opus-4-8` (`synthesis_discovery.DEFAULT_MODEL`, with a new `--synthesis-discovery-model` escape hatch). Anthropic caches are **model-scoped**, so as written this plan **cannot work at all today** — not "works worse", cannot work. The doc's own guard rail (`enable only when sd_model == writer_model`) would evaluate false on every production run.
+
+### 2. The dossier is a shared MIDDLE, not a shared PREFIX
+
+Measured on the real Ps 73 prompts (`output/debug/master_writer_v4_prompt_psalm_73.txt` vs `synthesis_discovery_prompt_psalm_73.txt`):
+
+| Measurement | Value |
+|---|---|
+| Writer prompt | 437,851 chars |
+| Synthesis Discovery prompt | 362,947 chars |
+| **Common leading prefix** | **10 chars** (`"You are a "`) |
+| Longest shared block anywhere | **315,731 chars** — 72% of the writer prompt, 87% of SD's |
+| Its offsets | writer 67,478 · SD 17,325 |
+
+So the shared material is real and enormous (~178k tokens at this run's ~1.77 chars/token — a proportional estimate, not `count_tokens`). What defeats caching is purely **placement**: each agent front-loads its own instruction block, so an identical 316k-char body begins at two different offsets. Caching is prefix-only. This is exactly the reorder the plan calls for in "Two things to get right" #2 — and it confirms the reorder is *mandatory*, not an optimization detail.
+
+### 3. Corrected economics — the original $0.30–0.45 estimate was in the right range
+
+If both the model split and the ordering were fixed, on Ps 73's numbers: ~$1.78 → ~$1.20 per psalm, **≈$0.58 saved**. The Session-359 figure was sound. But the cost of getting there is now **three coupled changes**, not one: (a) put SD and the Writer back on the same model, (b) reorder *both* prompt builders dossier-first, (c) keepalive/TTL discipline. And (a) is not free — Opus 4.8 and Opus 5 carry identical sticker prices ($5/$25), so moving SD to Opus 5 costs nothing on input but raises its output bill by roughly the 1.7× thinking-volume factor Session 373 measured, plausibly eating half the saving. Each change is un-A/B'd against the most heavily tuned prompt in the project.
+
+### 4. Caching a single call is a LOSS — worth stating so nobody tries it
+
+The Master Writer is **one call per run** (`call_count: 1` in every `psalm_*_cost.json`). A cache write with no subsequent read costs 1.25× and returns nothing: **+$0.31/psalm** on Ps 73's 247,515 input tokens. There is no "just cache the writer" shortcut.
+
+### 5. Where the win actually lives: the A/B harness, not the pipeline
+
+`scripts/ab_writer_prompts.py` runs N writer arms against **one shared dossier on one model** — the textbook "shared prefix, varying suffix" shape, and it needs **no model decision at all** because every arm is the same model by construction. Today the prompt leads and the dossier follows, so arms share nothing.
+
+Dossier-first ordering, 1-hour TTL (a writer call runs ~700s, well outside the 5-minute window), 5 arms × 247,515 input tokens:
+
+- Now: `5 × 247,515 × $5/M` = **$6.19**
+- Cached: write `247,515 × $10/M` = $2.48 + 4 reads `× $0.50/M` = $0.50 → **$2.98**
+- **Saves ~$3.21 per 5-arm A/B (~52%)**, and makes the content-filter retry in `_call_claude_writer` (`MAX_RETRIES = 2`, identical prompt re-sent) nearly free instead of re-paying $1.24.
+
+**The catch, stated plainly:** the reorder is itself a prompt change, and this project has learned prompt changes need validation — so you would need an A/B to justify the change that makes A/Bs cheap. It does cut *with* vendor guidance (long-context best practice is documents-first, instructions-last), not against it.
+
+### If this is ever revived — design notes that survive a model switch
+
+Caching is structurally safer than the Session-376 thinking work, and these are the reasons:
+
+1. **No model gate needed.** `cache_control` is accepted by every current Claude model — unlike `thinking.display`, which 400s on pre-4.7 and required `THINKING_DISPLAY_MODELS`. A model swap needs zero code change.
+2. **A swap degrades, never breaks.** Caches are model-scoped, so switching costs one cold write and then self-heals.
+3. **One helper, one place to change** — the same lesson as the single pricing table (three duplicates found and removed across Sessions 373/374/377).
+4. **The one model-dependent number is the minimum cacheable prefix, and it is non-monotonic**: 512 (Opus 5) / 1024 (Opus 4.8, Sonnet 5, Sonnet 4.6) / 2048 (Opus 4.7) / 4096 (Opus 4.6, Haiku 4.5). Our blocks are ~100k+ tokens so it never bites — but anyone who later caches a *small* block would find it silently stops caching on an older model. Assert it, don't just comment it.
+5. **Make it report its own death.** After each call, if caching was requested and `cache_read_input_tokens == 0` where a hit was expected, log a WARNING. The failure mode of caching is silent — no error, just a bigger bill — which is the S327/S373/S374/S376 pattern exactly. `CostTracker` already carries the cache fields and, as of Session 377, every cache rate in the table is correct, so feeding `cache_creation_input_tokens`/`cache_read_input_tokens` into `add_usage` makes a regression visible in the cost report rather than invisible.
 
 ---
 

@@ -38,11 +38,13 @@ if __name__ == '__main__':
     from src.utils.cost_tracker import CostTracker
     from src.utils.openai_usage import split_output_tokens
     from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
+    from src.utils.debug_paths import thinking_file as copy_editor_thinking_path
 else:
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.openai_usage import split_output_tokens
     from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
+    from src.utils.debug_paths import thinking_file as copy_editor_thinking_path
 
 import anthropic
 from dotenv import load_dotenv
@@ -885,12 +887,15 @@ class CopyEditor:
                 usage_data['cost'] = cost
                 usage_data['elapsed_seconds'] = elapsed
 
-                # Save debug files
+                # Session 377: the THINKING moves to the psalm's own folder, beside
+                # the writer's, so one psalm's reasoning is not split across two
+                # directories. The raw response stays in output/debug — it is a
+                # transient artifact of the call, not something anyone reads back.
+                thinking_path = copy_editor_thinking_path(psalm_number, "copy_editor")
+                thinking_path.write_text(thinking_text, encoding='utf-8')
+
                 debug_dir = Path("output/debug")
                 debug_dir.mkdir(parents=True, exist_ok=True)
-                (debug_dir / f"copy_editor_thinking_psalm_{psalm_number}.txt").write_text(
-                    thinking_text, encoding='utf-8'
-                )
                 (debug_dir / f"copy_editor_response_psalm_{psalm_number}.txt").write_text(
                     full_text, encoding='utf-8'
                 )

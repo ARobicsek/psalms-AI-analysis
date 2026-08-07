@@ -43,11 +43,13 @@ if __name__ == '__main__':
     from src.utils.cost_tracker import CostTracker
     from src.utils.research_trimmer import ResearchTrimmer
     from src.utils.model_effort import apply_effort
+    from src.utils.debug_paths import thinking_file as writer_thinking_path
 else:
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.research_trimmer import ResearchTrimmer
     from src.utils.model_effort import apply_effort
+    from src.utils.debug_paths import thinking_file as writer_thinking_path
 
 
 # Models whose `thinking.display` defaults to "omitted" — they stream thinking
@@ -2295,11 +2297,12 @@ class MasterEditorV2:
             # only a character count, so when the text went empty there was nothing
             # to notice. Persisting it beside the response makes the instrument
             # self-reporting: an empty file is a visible failure, not a silent one.
+            # Session 377: this now lands in the PSALM'S OWN folder rather than the
+            # shared output/debug/ dump, so everything about one psalm is in one
+            # place. Forward-only — captures written before this session stay where
+            # they were, exactly like the S373 quotation-mark fix.
             if thinking_text:
-                thinking_file = Path(
-                    f"output/debug/{debug_prefix}_thinking_psalm_{psalm_number}.txt"
-                )
-                thinking_file.parent.mkdir(parents=True, exist_ok=True)
+                thinking_file = writer_thinking_path(psalm_number, debug_prefix)
                 thinking_file.write_text(thinking_text, encoding='utf-8')
                 self.logger.info(
                     f"Master Writer used ~{len(thinking_text) // 4:,} thinking tokens "

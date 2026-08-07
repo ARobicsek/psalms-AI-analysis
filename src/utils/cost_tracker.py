@@ -17,8 +17,12 @@ Author: Claude (Anthropic)
 Date: 2025-11-25
 """
 
+import logging
+from datetime import date
 from typing import Dict, Optional
 from dataclasses import dataclass, field
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -120,6 +124,33 @@ PRICING = {
         "cache_write": 6.25,
         "cache_write_1h": 10.00,
     },
+    # Claude Sonnet 5. NOT USED IN PRODUCTION -- added in Session 377 because its
+    # ABSENCE was the bug: `calculate_cost` falls back to an all-zeros row for an
+    # unknown model, so the shelved Sonnet-5 micro A/B (SONNET5_MICRO_AB_FINDINGS.md)
+    # would have scored its cost arm at $0.00 and nothing would have said so.
+    # These are the DURABLE rates; see INTRO_PRICING below for the promo now in
+    # effect ($2/$10 through 2026-08-31). Note for whoever revisits that A/B: the
+    # promo makes Sonnet 5 output 33% cheaper than Sonnet 4.6, which is the axis the
+    # micro analyst spends 89% of its money on -- but it expires, so a decision made
+    # on promo economics is a decision that unmakes itself on 2026-09-01.
+    "claude-sonnet-5": {
+        "input": 3.00,
+        "output": 15.00,
+        "thinking": 15.00,
+        "cache_read": 0.30,
+        "cache_write": 3.75,
+        "cache_write_1h": 6.00,
+    },
+    # Claude Fable 5. NOT USED IN PRODUCTION -- present for the same reason as the
+    # Sonnet 5 row: an unpriced model must never report $0.
+    "claude-fable-5": {
+        "input": 10.00,
+        "output": 50.00,
+        "thinking": 50.00,
+        "cache_read": 1.00,
+        "cache_write": 12.50,
+        "cache_write_1h": 20.00,
+    },
     # Claude Sonnet 4.6 (released Feb 2026) - Adaptive thinking, same pricing as Sonnet 4.5
     "claude-sonnet-4-6": {
         "input": 3.00,
@@ -169,31 +200,50 @@ PRICING = {
         "cache_write": 1.25,
         "cache_write_1h": 2.00,
     },
-    # GPT-5 (OpenAI)
+    # GPT-5 (OpenAI). Legacy row -- nothing in the pipeline selects this model today.
+    # Session 377: cache_read CORRECTED from 0.0 along with gpt-5.1/gpt-5.4.
     "gpt-5": {
         "input": 1.25,
         "output": 10.00,
         "thinking": 10.00,  # Reasoning tokens charged at output rate
-        "cache_read": 0.0,  # Not applicable
-        "cache_write": 0.0,  # Not applicable
+        "cache_read": 0.125,  # 10% of input
+        "cache_write": 0.0,  # OpenAI does not charge for cache writes
         "cache_write_1h": 0.00,
     },
-    # GPT-5.1 (OpenAI) - Same pricing as GPT-5
+    # GPT-5.1 (OpenAI) - Same pricing as GPT-5.
+    # Session 377: cache_read CORRECTED from 0.0. OpenAI caches automatically on any
+    # prompt prefix >= 1024 tokens and bills the hit at 10% of input; the old 0.0
+    # with its "Not applicable" comment would have priced a cached token at ZERO the
+    # moment a caller started passing cache_read_tokens -- silent under-report, the
+    # opposite direction from the Session-373 audit but the same shape.
+    # NO long-context tier on this model (verified on OpenAI's pricing page
+    # 2026-08-07): gpt-5.1 is short-context-only pricing.
     "gpt-5.1": {
         "input": 1.25,
         "output": 10.00,
         "thinking": 10.00,  # Reasoning tokens charged at output rate
-        "cache_read": 0.0,  # Not applicable
-        "cache_write": 0.0,  # Not applicable
+        "cache_read": 0.125,  # 10% of input (OpenAI automatic prefix caching)
+        "cache_write": 0.0,  # OpenAI does not charge for cache writes
         "cache_write_1h": 0.00,
     },
-    # GPT-5.4 (OpenAI)
+    # GPT-5.4 (OpenAI) - the copy editor, pinned here by COPY_EDITOR_TERRA_FINDINGS.
+    # Session 377: cache_read CORRECTED from 0.0 (see the gpt-5.1 note above).
+    # CAVEAT -- OpenAI now tiers this model by PROMPT LENGTH and we encode only the
+    # cheap tier, exactly like the gemini-3.1-pro row below:
+    #     short context  $2.50 in / $0.25 cached / $15.00 out   <- encoded
+    #     long context   $5.00 in / $0.50 cached / $22.50 out   <- NOT encoded
+    # The boundary is not stated on OpenAI's pricing page; the model is listed with a
+    # "<272K context length" note, and the tier almost certainly trips well below
+    # that. Our only caller is the copy editor at ~29K input tokens (Ps 73), so the
+    # cheap tier is correct today. CostTracker accumulates per-model TOTALS and has
+    # no per-call prompt length, so a tier cannot be applied here without pricing at
+    # the call site -- if a caller ever approaches the boundary, that is the work.
     "gpt-5.4": {
         "input": 2.50,
         "output": 15.00,
         "thinking": 15.00,  # Reasoning tokens charged at output rate
-        "cache_read": 0.0,  # Not applicable
-        "cache_write": 0.0,  # Not applicable
+        "cache_read": 0.25,  # 10% of input
+        "cache_write": 0.0,  # OpenAI does not charge for cache writes
         "cache_write_1h": 0.00,
     },
     # GPT-5.6 Terra (OpenAI, GA 2026-07-09) - the mid "durable capability tier".
@@ -205,12 +255,24 @@ PRICING = {
     # Terra is our heaviest non-Anthropic spender (figurative curator + literary echoes
     # passes 3-4 + insight/question curation), so this moved real numbers: on the Ps 72
     # run it reported $1.3273 where the true cost was ~$1.06.
+    # Session 377 -- two updates to this row:
+    #  (a) the "not yet wired up" note on cache_read was STALE. It has been wired
+    #      since Session 374: literary_echoes_agent._record passes cached tokens and
+    #      the Ps 73 run priced 96,347 of them at $0.0193.
+    #  (b) CAVEAT, same shape as gpt-5.4 and gemini-3.1-pro -- Terra now has a
+    #      long-context tier and we encode only the cheap one:
+    #          short context  $2.00 in / $0.20 cached / $12.00 out   <- encoded
+    #          long context   $4.00 in / $0.40 cached / $18.00 out   <- NOT encoded
+    #      Terra is our heaviest non-Anthropic spender, but it spends across MANY
+    #      SMALL calls, not one big one: echoes Pass 3 is one call per entry (~14K
+    #      input each, 350K summed over 20 calls on Ps 73). The tier is per REQUEST,
+    #      so summed volume never trips it -- only a single oversized prompt would.
     "gpt-5.6-terra": {
         "input": 2.00,
         "output": 12.00,
         "thinking": 12.00,  # Reasoning tokens charged at output rate
-        "cache_read": 0.20,  # 90% off cached input (not yet wired up)
-        "cache_write": 0.0,  # Not applicable
+        "cache_read": 0.20,  # 10% of input; wired up since Session 374
+        "cache_write": 0.0,  # OpenAI does not charge for cache writes
         "cache_write_1h": 0.00,
     },
     # Gemini 2.5 Pro (Google)
@@ -230,15 +292,111 @@ PRICING = {
     # caller is literary echoes passes 1-2 (~16k input tokens on Ps 72), so the low
     # tier is correct today; a Gemini call that ever crossed 200k input would be
     # under-reported by 2x on input and 1.5x on output.
+    # Session 377: cache_read CORRECTED from 0.0 -- Google prices a cached-input hit
+    # at $0.20/MTok (10% of input), and 0.0 would have priced it free.
     "gemini-3.1-pro-preview": {
         "input": 2.00,
         "output": 12.00,
         "thinking": 12.00,  # Thinking tokens charged at output rate
-        "cache_read": 0.0,  # Not applicable yet
-        "cache_write": 0.0,  # Not applicable yet
+        "cache_read": 0.20,  # 10% of input (implicit/explicit context caching)
+        "cache_write": 0.0,  # Google bills caching by storage-time, not a write multiplier
         "cache_write_1h": 0.00,
     },
 }
+
+
+# ---------------------------------------------------------------------------
+# Time-limited introductory pricing
+# ---------------------------------------------------------------------------
+# A row above holds the DURABLE rates -- what the model costs once any promotional
+# period is over. A model currently on introductory pricing gets an entry here with
+# the temporary rates and the last date they apply.
+#
+# Why this direction and not the other: encode the promo rate in the row and the
+# table silently goes wrong on the day the promo ends, and stays wrong until someone
+# notices -- which is precisely how "priced IDENTICALLY to gpt-5.4... cost-neutral by
+# construction" survived six weeks in Session 373. Encode the durable rate and the
+# override simply STOPS APPLYING on its own. The failure mode is self-healing.
+INTRO_PRICING = {
+    # Claude Sonnet 5: $2/$10 introductory through 2026-08-31, $3/$15 from 2026-09-01.
+    # Verified against Anthropic's pricing page 2026-08-07.
+    "claude-sonnet-5": {
+        "through": date(2026, 8, 31),
+        "rates": {
+            "input": 2.00,
+            "output": 10.00,
+            "thinking": 10.00,
+            "cache_read": 0.20,
+            "cache_write": 2.50,
+            "cache_write_1h": 4.00,
+        },
+    },
+}
+
+
+_ZERO_ROW = {
+    "input": 0.0,
+    "output": 0.0,
+    "thinking": 0.0,
+    "cache_read": 0.0,
+    "cache_write": 0.0,
+    "cache_write_1h": 0.0,
+}
+
+
+def resolve_pricing(model: str, on_date: Optional[date] = None) -> Optional[Dict[str, float]]:
+    """Rates for `model` on `on_date` (default: today), or None if unpriced.
+
+    Returning None rather than a zero row is deliberate. `PRICING.get(model, zeros)`
+    used to swallow an unknown model and report $0.00 for it -- the same silent-loss
+    shape as the discarded writer thinking (S376), the truncated echoes dossiers
+    (S374), and the eaten quotation marks (S373). The caller is now forced to decide
+    what to do about a model it cannot price.
+    """
+    row = PRICING.get(model)
+    if row is None:
+        return None
+    promo = INTRO_PRICING.get(model)
+    if promo and (on_date or date.today()) <= promo["through"]:
+        return {**row, **promo["rates"]}
+    return row
+
+
+def price_tokens(
+    model: str,
+    input_tokens: int = 0,
+    output_tokens: int = 0,
+    thinking_tokens: int = 0,
+    cached_input_tokens: int = 0,
+    on_date: Optional[date] = None,
+) -> float:
+    """Cost of one call, priced from the single table above.
+
+    TOKEN CONTRACT -- every argument is DISJOINT, matching what `CostTracker`
+    expects, because costs are SUMMED:
+        input_tokens         fresh (uncached) input only
+        cached_input_tokens  input served from cache, priced at cache_read
+        output_tokens        visible output, EXCLUDING reasoning
+        thinking_tokens      reasoning only
+    See `src/utils/openai_usage.py` for why the OpenAI split is not optional.
+
+    Exists so that no module has to keep its own copy of the NUMBERS. Session 374
+    removed one such duplicate from literary_echoes_agent.py; Session 377 removed a
+    second from figurative_curator.py, which had been carrying gpt-5.4's $2.50/$15.00
+    for a model that costs $2.00/$12.00.
+    """
+    rates = resolve_pricing(model, on_date)
+    if rates is None:
+        raise KeyError(
+            f"{model!r} has no row in cost_tracker.PRICING -- add one before "
+            f"pricing calls against it (an unpriced model must not report $0)"
+        )
+    return (
+        input_tokens / 1_000_000 * rates["input"]
+        + output_tokens / 1_000_000 * rates["output"]
+        + thinking_tokens / 1_000_000 * rates["thinking"]
+        + cached_input_tokens / 1_000_000 * rates["cache_read"]
+    )
 
 
 class CostTracker:
@@ -255,6 +413,8 @@ class CostTracker:
     def __init__(self):
         self.usage_by_model: Dict[str, ModelUsage] = {}
         self.events: List[Dict[str, str]] = []
+        # Models seen that have no row in PRICING. Non-empty => every total is a floor.
+        self.unpriced_models: set = set()
 
     def log_event(self, agent_name: str, event_type: str, message: str):
         """Log a pipeline event (e.g., error, retry)."""
@@ -329,14 +489,20 @@ class CostTracker:
             }
 
         usage = self.usage_by_model[model]
-        pricing = PRICING.get(model, {
-            "input": 0.0,
-            "output": 0.0,
-            "thinking": 0.0,
-            "cache_read": 0.0,
-            "cache_write": 0.0,
-            "cache_write_1h": 0.0
-        })
+        # An unknown model used to fall back to an all-zeros row and report $0.00 in
+        # silence. It now still returns zeros -- raising here would destroy the cost
+        # report of a run that has already been paid for -- but it says so, loudly
+        # and in the summary, so the instrument reports its own death.
+        pricing = resolve_pricing(model)
+        if pricing is None:
+            if model not in self.unpriced_models:
+                self.unpriced_models.add(model)
+                logger.warning(
+                    "UNPRICED MODEL %r -- no row in cost_tracker.PRICING. Its tokens "
+                    "are being reported at $0.00, so every total below is a FLOOR, "
+                    "not the real cost. Add a row.", model
+                )
+            pricing = _ZERO_ROW
 
         # A model row that predates the 1-hour rate falls back to the documented
         # 2x-input multiplier rather than to zero -- an unpriced write is exactly
@@ -418,7 +584,15 @@ class CostTracker:
             grand_total += costs['total_cost']
 
         lines.append("\n" + "=" * 80)
-        lines.append(f"GRAND TOTAL: ${grand_total:.4f}")
+        if self.unpriced_models:
+            lines.append(f"GRAND TOTAL: ${grand_total:.4f}   *** FLOOR, NOT ACTUAL ***")
+            lines.append(
+                "  UNPRICED MODELS (reported at $0.00): "
+                + ", ".join(sorted(self.unpriced_models))
+            )
+            lines.append("  Add a row to cost_tracker.PRICING for each.")
+        else:
+            lines.append(f"GRAND TOTAL: ${grand_total:.4f}")
         lines.append("=" * 80 + "\n")
 
         if self.events:
@@ -448,4 +622,8 @@ class CostTracker:
             }
         result["total_cost"] = self.get_total_cost()
         result["events"] = self.events
+        # Only emitted when non-empty, so every existing cost JSON keeps its shape.
+        # Its presence means total_cost is a floor: some model was billed at $0.00.
+        if self.unpriced_models:
+            result["unpriced_models"] = sorted(self.unpriced_models)
         return result

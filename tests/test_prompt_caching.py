@@ -17,10 +17,17 @@ Session 374. Two independent things are covered here:
 import copy
 import sys
 import types
+from datetime import date
 
 import pytest
 
-from src.utils.cost_tracker import PRICING, CostTracker
+from src.utils.cost_tracker import (
+    INTRO_PRICING,
+    PRICING,
+    CostTracker,
+    price_tokens,
+    resolve_pricing,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -84,6 +91,93 @@ def test_new_field_is_reported():
     t.add_usage("claude-opus-5", cache_write_1h_tokens=1234)
     assert t.to_dict()["claude-opus-5"]["cache_write_1h_tokens"] == 1234
     assert "Cache Write Tokens (1h): 1,234" in t.get_summary()
+
+
+# ---------------------------------------------------------------------------
+# 1b. Session 377 pricing audit
+# ---------------------------------------------------------------------------
+
+def test_every_model_the_pipeline_can_select_is_priced():
+    """The models named as a DEFAULT_MODEL anywhere in the pipeline, plus the two
+    swap candidates the A/B docs discuss. A missing row reports $0.00, not an error."""
+    for model in ("claude-opus-5", "claude-opus-4-8", "claude-sonnet-4-6",
+                  "claude-sonnet-5", "claude-fable-5", "claude-haiku-4-5",
+                  "gpt-5.1", "gpt-5.4", "gpt-5.6-terra", "gemini-3.1-pro-preview"):
+        assert resolve_pricing(model) is not None, f"{model} would be billed at $0.00"
+
+
+def test_cached_input_is_never_free():
+    """Session 377: gpt-5.1, gpt-5.4 and gemini-3.1-pro carried cache_read = 0.0 with
+    a 'Not applicable' comment. All three vendors bill a cache hit at 10% of input,
+    so 0.0 would price a cached token at nothing the moment a caller wired it up."""
+    for name, row in PRICING.items():
+        if row["input"] == 0:
+            continue
+        assert row["cache_read"] == pytest.approx(0.10 * row["input"]), (
+            f"{name}: cache_read {row['cache_read']} is not 10% of input {row['input']}"
+        )
+
+
+def test_unpriced_model_is_reported_not_swallowed():
+    t = CostTracker()
+    t.add_usage("claude-opus-9-imaginary", input_tokens=1_000_000, output_tokens=500_000)
+    assert t.get_total_cost() == 0.0            # still zero -- but now it SAYS so
+    assert "claude-opus-9-imaginary" in t.unpriced_models
+    assert "*** FLOOR, NOT ACTUAL ***" in t.get_summary()
+    assert t.to_dict()["unpriced_models"] == ["claude-opus-9-imaginary"]
+
+
+def test_priced_run_carries_no_unpriced_marker():
+    """The key is absent on a normal run, so every existing cost JSON keeps its shape."""
+    t = CostTracker()
+    t.add_usage("claude-opus-5", input_tokens=1000, output_tokens=100)
+    assert "unpriced_models" not in t.to_dict()
+    assert "FLOOR" not in t.get_summary()
+
+
+def test_sonnet_5_intro_pricing_expires_on_its_own():
+    """The row holds the DURABLE rates and INTRO_PRICING overrides them until the
+    promo ends. Encoding it the other way round is what goes silently stale."""
+    promo_end = INTRO_PRICING["claude-sonnet-5"]["through"]
+    during = resolve_pricing("claude-sonnet-5", on_date=promo_end)
+    after = resolve_pricing("claude-sonnet-5", on_date=date(promo_end.year, 9, 1))
+    assert (during["input"], during["output"]) == (2.00, 10.00)
+    assert (after["input"], after["output"]) == (3.00, 15.00)
+    assert after == PRICING["claude-sonnet-5"]   # no override left to apply
+
+
+def test_intro_rates_keep_the_anthropic_cache_multipliers():
+    for name, promo in INTRO_PRICING.items():
+        r = promo["rates"]
+        assert r["cache_write"] == pytest.approx(1.25 * r["input"]), name
+        assert r["cache_write_1h"] == pytest.approx(2.00 * r["input"]), name
+        assert r["cache_read"] == pytest.approx(0.10 * r["input"]), name
+
+
+def test_price_tokens_matches_the_tracker_on_the_same_call():
+    """The helper that replaced figurative_curator's private table must agree with
+    the run total, which is the whole point of there being one table."""
+    args = dict(input_tokens=12_345, output_tokens=678, thinking_tokens=910)
+    t = CostTracker()
+    t.add_usage("gpt-5.6-terra", **args)
+    assert price_tokens("gpt-5.6-terra", **args) == pytest.approx(t.get_total_cost())
+
+
+def test_price_tokens_refuses_an_unpriced_model():
+    """Unlike the tracker (which must not destroy a paid-for run's report), the
+    single-call helper has no reason to return a wrong number."""
+    with pytest.raises(KeyError):
+        price_tokens("gpt-9-imaginary", input_tokens=100)
+
+
+def test_figurative_curator_no_longer_carries_its_own_rates():
+    """Session 377 removed a duplicate table that said $2.50/$15.00 for a model
+    costing $2.00/$12.00. Re-adding one is how this bug came back twice already."""
+    import inspect
+    import src.agents.figurative_curator as fc
+    source = inspect.getsource(fc)
+    assert "GPT54_INPUT_COST_PER_M" not in source
+    assert "COST_PER_M = " not in source
 
 
 # ---------------------------------------------------------------------------

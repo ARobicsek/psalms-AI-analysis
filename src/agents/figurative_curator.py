@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 
 from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
+from src.utils.cost_tracker import price_tokens
 from src.utils.openai_usage import split_output_tokens
 
 
@@ -72,12 +73,15 @@ class FigurativeCurator:
     INITIAL_SEARCH_CAP = 50  # Cap for initial micro analyst searches
     FOLLOWUP_SEARCH_CAP = 30  # Cap for follow-up searches
 
-    # Model + pricing (per million tokens). Session 367: gpt-5.4 -> gpt-5.6-terra,
-    # same capability tier at identical pricing.
+    # Session 377: the GPT54_* pricing constants that used to live here are GONE.
+    # They said $2.50/$15.00 -- gpt-5.4's price -- while MODEL had been gpt-5.6-terra
+    # ($2.00/$12.00) since Session 367, so this class over-reported its own cost by
+    # ~25% for months. The stale comment ("same capability tier at identical pricing")
+    # was true when written and quietly stopped being true, which is the exact bug
+    # Session 373 found in cost_tracker and Session 374 found in
+    # literary_echoes_agent. This is its third and hopefully last home.
+    # Costs now come from `cost_tracker.PRICING` via `price_tokens`, the one table.
     MODEL = "gpt-5.6-terra"
-    GPT54_INPUT_COST_PER_M = 2.50
-    GPT54_OUTPUT_COST_PER_M = 15.00
-    GPT54_THINKING_COST_PER_M = 15.00  # Reasoning tokens billed at output rate
 
     def __init__(
         self,
@@ -207,11 +211,14 @@ class FigurativeCurator:
             # output + thinking, so report the split rather than both totals.
             token_usage["output"], token_usage["thinking"] = split_output_tokens(response.usage)
 
-            # Calculate precise cost
-            input_cost = (token_usage["input"] / 1_000_000) * self.GPT54_INPUT_COST_PER_M
-            output_cost = (token_usage["output"] / 1_000_000) * self.GPT54_OUTPUT_COST_PER_M
-            thinking_cost = (token_usage["thinking"] / 1_000_000) * self.GPT54_THINKING_COST_PER_M
-            token_usage["cost"] = input_cost + output_cost + thinking_cost
+            # Priced from cost_tracker.PRICING so this figure can never drift away
+            # from the run total again.
+            token_usage["cost"] = price_tokens(
+                self.MODEL,
+                input_tokens=token_usage["input"],
+                output_tokens=token_usage["output"],
+                thinking_tokens=token_usage["thinking"],
+            )
 
             if self.cost_tracker is not None:
                 self.cost_tracker.add_usage(

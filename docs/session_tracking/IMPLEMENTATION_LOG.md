@@ -9,6 +9,172 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 377 (2026-08-07): A cost audit of the Psalm 73 run — five pricing defects, a third duplicate rate table, and the dossier-cache plan re-shelved on measurement rather than estimate
+
+### Trigger
+
+The author, on the Ps 73 cost summary: *"please have a look at all the costs that were incurred in
+the most recent run. 1. did we get all the pricing right based on current prices? 2. are you seeing
+any obvious inefficiencies such as an opportunity to use a less costly model?"* Then, after the
+audit: *"shelve the plan to cache; document reasons. also please move where we store the model
+thinking to the psalm's output folder."*
+
+### The headline: the $8.5571 total was CORRECT, and five rows were still wrong
+
+Every rate the Ps 73 run actually touched priced correctly — re-pricing the saved
+`psalm_073_cost.json` under the corrected table returns **$8.5571 to four decimal places**, so
+nothing in the historical record moves. The defects are all latent: they misprice paths that exist
+but were not exercised, which is the hardest kind to notice and the reason this audit was worth
+doing at all.
+
+Verified against the vendors' live pages on 2026-08-07 — Anthropic, OpenAI, Google:
+
+| Row | Table said | Truth | Status |
+|---|---|---|---|
+| claude-opus-5 / 4.8 | $5 / $25 | $5 / $25 | ✅ |
+| claude-sonnet-4-6 | $3 / $15 | $3 / $15 | ✅ |
+| claude-haiku-4-5 | $1 / $5 | $1 / $5 | ✅ |
+| gpt-5.1 | $1.25 / $10 | $1.25 / $10 | ✅ |
+| gpt-5.4 | $2.50 / $15 | $2.50 / $15 (short ctx) | ✅ rate, ⚠️ tier |
+| gpt-5.6-terra | $2.00 / $12 | $2.00 / $12 (short ctx) | ✅ rate, ⚠️ tier |
+| gemini-3.1-pro | $2 / $12 | $2 / $12 (≤200k) | ✅ |
+
+**1. `cache_read` was 0.0 on four rows, commented "Not applicable."** It is very applicable:
+gpt-5 / gpt-5.1 ($0.125), gpt-5.4 ($0.25) and gemini-3.1-pro ($0.20) all bill a cache hit at 10% of
+input. A cached token would have priced at **zero** the moment any caller wired it up — the same
+silent-under-report shape as the Session-373 audit, pointing the other way. The new
+`test_cached_input_is_never_free` asserts every row's `cache_read == 0.10 × input` and immediately
+caught a fifth row (legacy `gpt-5`) that the manual pass had missed.
+
+**2. OpenAI has added LONG-CONTEXT TIERS to two models we use, and neither is encoded.** gpt-5.4 is
+$5.00 / $22.50 and gpt-5.6-terra $4.00 / $18.00 above the boundary. Recorded as caveat comments
+rather than code, because `CostTracker` accumulates per-model **totals** and has no per-call prompt
+length — a tier cannot be applied without pricing at the call site. Did not bite Ps 73: the tier is
+per *request*, and Terra's 395k input tokens arrive as ~26 small calls (echoes Pass 3 is one call
+per entry at ~14k each), never as one oversized prompt. OpenAI's page does not state the threshold.
+
+**3. `claude-sonnet-5` and `claude-fable-5` had no rows at all, and the fallback was silent zeros.**
+`PRICING.get(model, {all zeros})` meant an unknown model reported **$0.00** with nothing said. The
+shelved Sonnet-5 micro A/B (`SONNET5_MICRO_AB_FINDINGS.md`) would have scored its cost arm at zero.
+Fixed twice over: both rows added, and `resolve_pricing()` now returns `None` for an unpriced model
+so the caller must decide. `CostTracker` warns and stamps `*** FLOOR, NOT ACTUAL ***` on the grand
+total plus an `unpriced_models` key in the JSON (emitted only when non-empty, so every existing cost
+file keeps its shape); `price_tokens()` raises. The split is deliberate — the tracker must not
+destroy the report of a run already paid for; a single-call helper has no reason to return a wrong
+number.
+
+**4. Sonnet 5's introductory pricing is encoded so that it EXPIRES ON ITS OWN.** The row holds the
+durable $3/$15 and a separate `INTRO_PRICING` override supplies $2/$10 through 2026-08-31. Encoding
+the promo rate in the row and a comment saying "changes on 2026-09-01" is exactly how *"priced
+IDENTICALLY to gpt-5.4… cost-neutral by construction"* survived six weeks in Session 373. This way
+the override simply stops applying; the failure mode is self-healing.
+
+**5. A THIRD duplicate pricing table, in `figurative_curator.py`.** `GPT54_INPUT_COST_PER_M = 2.50`
+/ `OUTPUT = 15.00` — gpt-5.4's price — while `MODEL` had been `gpt-5.6-terra` ($2.00/$12.00) since
+Session 367, under a comment reading *"same capability tier at identical pricing"* that was true
+when written. It inflated the curator's own reported cost by **25%** (verified: $0.3700 → $0.2960 on
+a representative call). The run total was never affected, because `add_usage` passes raw tokens and
+the tracker prices them. Session 373 found this bug in `cost_tracker`, Session 374 in
+`literary_echoes_agent`; this is its third home. Constants deleted; the curator now calls the new
+shared `price_tokens()`, and a test greps the module to make sure a fourth copy is not added.
+
+### Where the $8.56 went, and what is actually inefficient
+
+No per-agent attribution exists in the cost JSON, so this was reconstructed from `DEFAULT_MODEL`
+constants and call counts: Master Writer (opus-5, 1 call) **$2.4972**; Macro + Synthesis Discovery
+(opus-4-8, 2) **$1.8867**; literary echoes **$1.3996**; Micro analyst (sonnet-4-6, 2) **$1.0962**;
+copy editor (gpt-5.4, 1) **$0.8195**; figurative + question curators (terra, 6) **$0.5146**;
+liturgical librarian (gpt-5.1, 8) **$0.3433**. By token class: **output+thinking $5.10 (60%)**,
+input $3.44, cache credits −$0.02.
+
+- **A Gemini generation returned NOTHING and cost $0.16 (1.9% of the run).** The tracker recorded 3
+  Gemini calls; the echoes report records 2 passes. The ghost call: 6,785 input (identical to
+  pass_1a's), **0 output**, 12,254 thinking tokens. That is the Session-374 empty-generation retry
+  firing on Ps 73. The retry is right — losing a whole pass silently was worse — but it is a
+  recurring tax. Note the echoes report is honest on **cost** (it reads the ledger, which counts
+  retries) and not on **tokens** (which count only calls that returned); that asymmetry is what made
+  the ghost call findable.
+- **Echoes Pass 3 caches only 19% of its prompt.** 20 calls, 350,855 total prompt tokens, 65,925
+  cache hits. OpenAI auto-caches any prefix ≥1024 tokens, so 20 calls sharing a large invariant
+  preamble should hit far higher; if the per-entry payload precedes the shared instructions the
+  prefix differs on every call. Reordering is worth **~$0.35/psalm at no quality risk** — identical
+  tokens, different order within one message. **Inferred from the hit rate, not from reading the
+  prompt builder; NOT DONE.**
+- **The cheap model swaps are all argued against by the project's own evidence.** Copy editor →
+  Terra: settled no (`COPY_EDITOR_TERRA_FINDINGS.md`). Micro → Sonnet 5: shelved on quality, and
+  while Sonnet 5's promo makes output 33% cheaper than Sonnet 4.6 — the axis the micro analyst spends
+  89% of its money on — that promo expires 2026-08-31, so a decision made on it unmakes itself.
+
+### THE DOSSIER CACHE PLAN: re-shelved, and its own predicted failure has occurred
+
+`DOSSIER_CACHE_KEEPALIVE_PLAN.md` (Session 359) warned that the optimization was *"coupled to both
+Opus calls running on the same Anthropic model"* and that *"any divergence silently disables the
+cache."* **That divergence shipped in Session 373**: the writer moved to `claude-opus-5` while
+Synthesis Discovery was deliberately pinned to `claude-opus-4-8`. Anthropic caches are model-scoped,
+so the plan cannot work today — not "works worse", cannot work. Its own guard rail
+(`enable only when sd_model == writer_model`) evaluates false on every production run.
+
+Measured on the real Ps 73 prompts rather than estimated:
+
+| Measurement | Value |
+|---|---|
+| Writer prompt | 437,851 chars |
+| Synthesis Discovery prompt | 362,947 chars |
+| **Common leading prefix** | **10 chars** (`"You are a "`) |
+| Longest shared block anywhere | **315,731 chars** — 72% of the writer prompt, 87% of SD's |
+| Its offsets | writer 67,478 · SD 17,325 |
+
+The shared material is enormous (~178k tokens); what defeats caching is purely **placement**. Each
+agent front-loads its own instructions, so an identical 316k-char body starts at two different
+offsets, and caching is prefix-only. **An earlier estimate of $0.30–0.65/psalm given to the author
+mid-session was withdrawn and corrected on this evidence** — the number is roughly right (~$0.58)
+but requires three coupled, un-A/B'd changes, and moving SD to Opus 5 would raise its output bill by
+about the 1.7× thinking-volume factor Session 373 measured, plausibly eating half of it.
+
+Also worth stating so nobody tries it: **the writer is ONE call per run**, so caching it alone is a
+pure 1.25× write with no read — **+$0.31/psalm, a loss.**
+
+**Where the win actually lives: `ab_writer_prompts.py`** — N arms, one shared dossier, one model by
+construction, no model decision required. Dossier-first ordering + 1-hour TTL (a writer call runs
+~700s, outside the 5-minute window) on 5 arms × 247,515 tokens: **$6.19 → ~$2.98, saving ~$3.21
+(~52%)**, and it makes the content-filter retry nearly free. The catch is honest: the reorder is
+itself a prompt change, so you need an A/B to justify the change that makes A/Bs cheap. **Author's
+call: shelve. Documented, not implemented.**
+
+### Model thinking moved to the psalm's own folder
+
+New `src/utils/debug_paths.py`. Captures now land at
+`output/psalm_NN/psalm_0NN_{agent}_thinking.txt` instead of the flat shared `output/debug/`, so one
+psalm's artifacts are in one place. The helper exists because two naming facts would otherwise have
+to be remembered independently at each call site: the **directory is unpadded** (`psalm_73`) while
+the **files inside it are zero-padded** (`psalm_073_*`), and **both directory forms exist on disk**
+— an existing directory always wins, so a psalm built under the older padded convention does not
+silently grow a second folder. Applied to the Master Writer and, for consistency, the copy editor;
+the copy editor's raw *response* stays in `output/debug` (a transient artifact of the call, not
+something anyone reads back). Agent prefixes keep `master_writer_v4` / `college_writer` /
+`copy_editor` apart so an SI or college run cannot overwrite the production capture.
+**Forward-only** — existing captures stay where they are, like the S373 quotation-mark fix.
+
+### Verification
+
+- **121 tests pass** (114 before, 7 new in `test_debug_paths.py`, 9 new pricing tests).
+- Re-pricing the saved Ps 73 cost JSON under the corrected table returns **$8.5571**, identical.
+- Ps 73's writer thinking file exists at 23,706 chars — the Session-376 capture fired on its first
+  production psalm, and the `elif "display" in thinking_cfg` warning branch stayed quiet.
+
+### Watch
+
+- The echoes Pass-3 prefix reorder (~$0.35/psalm) is **identified and not done**, and the diagnosis
+  is inferred from a cache-hit rate rather than from reading `_build_pass_3_prompt`.
+- The long-context tiers are **documented, not enforced** — a single oversized OpenAI prompt would
+  still under-report.
+- `INTRO_PRICING` has never been exercised across its own expiry date in production; the test proves
+  the mechanism, not the calendar.
+- The moved thinking path has **not been exercised by a live run** — no psalm has been written since
+  the change. Same shape as Session 376's caveat about its own capture.
+
+---
+
 ## Session 376 (2026-08-06): The writer's reasoning has been generated, paid for, and discarded since the Opus 4.7 migration
 
 ### Trigger
