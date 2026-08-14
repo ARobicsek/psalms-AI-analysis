@@ -1,0 +1,22 @@
+{
+  "psalm": 27,
+  "arms": [
+    {
+      "arm": "F_no_framework",
+      "label": "no analytical framework",
+      "model": "claude-opus-5",
+      "effort": "high",
+      "prompt_chars": 75697,
+      "prompt_delta_chars": -80,
+      "elapsed_s": 633.0,
+      "cost_usd": 1.9594,
+      "intro_words": 1986,
+      "verse_words": 6056,
+      "total_words": 8042,
+      "full_file": "output\\psalm_27\\_prompt_ab\\F_no_framework\\psalm_027_full.md",
+      "input_tokens": 221090,
+      "output_tokens": 34158,
+      "call_count": 1
+    }
+  ]
+}

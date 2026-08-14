@@ -51,6 +51,12 @@ Cost is **not** the reason ($0.023/psalm). The reasons are prompt hygiene:
 **Honest framing for the log:** the A/B shows removal costs nothing. It does not show
 removal gains anything. Ship it for hygiene, not for measured improvement.
 
+**The evidence is on disk**: `archive/psalm_27_S378_abrun2_full_pipeline/` holds both
+arms' raw writer output, both prompt templates (diff them — 80 chars), the shared
+synthesis-discovery block, arm F's thinking capture, and a README. Run 1 is at
+`archive/psalm_27_S378_abrun1_writeronly/`. `output/` is gitignored, so these archives
+are the only surviving record.
+
 ---
 
 ## THE WORK
