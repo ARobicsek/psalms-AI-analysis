@@ -9,6 +9,89 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 378 (2026-08-14): The analytical framework earns nothing — measured twice on Psalm 27; a pipeline shipped a DOCX whose commentary was the copy editor's refusal; the splice anchor was a one-variable trap
+
+### Trigger
+
+The author: *"when we built this pipeline months ago I created a section that was to be included in every research bundle. I forget what we called it but it was a dense primer on reading biblical poetry including the poetic mechanisms to look out for. is that still in there? does it need to be? the writer models have come a long way since we built that…"*
+
+Then: run an A/B on Psalm 27 with *"the minimum API re-run… i.e. just the writer"*, *"don't use any of the old outputs"*, both arms as DOCX, caching if easy. Then, on learning how much had been reused: *"what should be running is everything that would run from: python scripts/run_enhanced_pipeline.py 27"*.
+
+### The document, and where it had been
+
+`docs/architecture/analytical_framework_for_RAG.md` — "Framework: Telescopic Analysis of Biblical Poetry", 10,691 chars: parallelism (synonymous / antithetic / synthetic), terseness and ellipsis, concrete imagery, paronomasia, alliteration and assonance, metaphor and simile, merism, personification, chiasmus, inclusio, refrain, meter.
+
+The author's memory was correct in both halves. Its history:
+
+| session | date | what happened |
+|---|---|---|
+| S66 | 2025-11-02 | added to the **research bundle** as `## Analytical Framework for Biblical Poetry`, 27,678-char prose version |
+| S256 | 2026-02-12 | rewritten telegraphically, **−61%** (old version archived) |
+| S257 | 2026-02-12 | **deleted from the bundle** as a *"duplication bug"* — the writer had been reading the whole thing **twice** |
+
+**56 research bundles on disk still carry the inline prose copy** (psalms 1–34 plus legacy test/rerun dirs). What survives in production is the `{analytical_framework}` block in the writer's INPUTS (`master_editor.py:466`), reaching the Master Writer only — micro opts out explicitly (`include_framework=False`), macro's `include_full_framework` defaults `False` and no runner passes `True`.
+
+Both prior cuts were **cost** decisions. Nobody had asked whether the writer should have it.
+
+### The A/B, run twice
+
+**Run 1 — thin dossier (Jan-2026 artifacts, writer-only re-run), $4.50.** Ps 27's bundle still carried the legacy 27,730-char copy at line 1408; left alone both arms would have received the framework via the dossier and the A/B would have measured nothing. Stripped from the bundle for **both** arms, making Ps 27 behave like a current-production psalm.
+
+**Run 2 — full fresh pipeline, $9.90.** `run_enhanced_pipeline.py 27` rebuilt everything ($6.6231, incl. literary echoes $1.1517 and synthesis discovery $1.5037); the fresh bundle (339,370 chars) has a real `## Cross-Cultural Literary Echoes` section and no framework section, confirming S257's removal on a live run.
+
+| metric | run 1 base → F | run 2 base → F |
+|---|---|---|
+| words | 7,562 → 7,547 | 8,838 → 8,014 |
+| verse coverage | 14/14 → 14/14 | 14/14 → 14/14 |
+| **device vocabulary** | **18 → 16** | **5 → 5** |
+| commentator citations | 29 → 30 | 23 → 21 |
+| LXX blocks | 23% → 25% | 71% → 43% |
+| framework size | 5,370 tok ≈ $0.027 | 4,601 tok ≈ $0.023 |
+
+**No capability difference either time.** The decisive evidence is convergence, not counts: on the full dossier both arms independently produced the six hapax `־נִי` verbs, the סתר reversal, Psalm 31 as the control case, the twice-only `אֲבַקֵּשׁ`, the Rabia al-Adawiyya echo and the Proverbs `יָפִיחַ` formula. Arm F's thinking capture — no poetics reference in its prompt — used *parallel* ×6, *inclusio*, *wordplay* ×2, *metaphor* ×3, and its v.1 turned on the `אוֹרִי`/`אִירָא` near-anagram, the framework's own §III.1 Paronomasia.
+
+**Stated honestly**: the A/B shows removal **costs** nothing; it does not show removal **gains** anything. The case for cutting is hygiene — no rule invokes it (the only other uses of "framework" in the prompt are a warning to keep it out of the output and an entry in BLURRY WORDS TO WATCH); it teaches Lowth's taxonomy under an Alter banner, whose *"synonymous = 2nd colon restates the 1st"* is the reading Alter and Kugel wrote against; and it carries 33 dangling `[Ref##]` markers from an uncleaned Deep Research export.
+
+### The pipeline shipped a guide whose commentary was the copy editor's refusal
+
+`run_enhanced_pipeline.py 27` exited **0** having produced a 41,790-byte DOCX whose introduction and verse commentary both read *"I don't see the Psalm 27 commentary text in your message. Please paste the full commentary…"*.
+
+The writer was fine — 51,486 chars saved to debug. `_parse_writer_response`'s patterns are `###?`, which matches `##` or `###` but **not** a single `#`, and this run emitted `# INTRODUCTION ESSAY` / `# VERSE COMMENTARY` as H1. Both sections parsed empty, which **also disabled the Session-374 fallback** (it is guarded on `verse_match`), print-ready was built from nothing, and the copy editor answered the only way it could.
+
+Heading level is the model's to choose and varies run to run on identical input — the same class as S374's Pass 4, S373's quotation marks and S376's thinking display. Fixed to `#{1,4}` in all three patterns; the real commentary (11,171-char intro + 40,271-char verses) was recovered from the saved response at **$0**.
+
+### The splice anchor was a two-variable trap
+
+`### ANALYTICAL FRAMEWORK (poetic conventions reference)` doubles as the splice anchor for the S347 cross-verse observations block, and a missing anchor **only logged a warning**. The fresh dossier has a synthesis-discovery file (the Jan-2026 one did not), so arm F would have lost the framework **and** the entire 17,318-char observations block — ~$1.50/psalm — while presenting as a one-variable arm. Caught one minute into a paid run and killed.
+
+`master_editor.py` now resolves the anchor through a **fallback chain** (framework header → `### READER QUESTIONS (initial questions)`): both land the block in the same position relative to every block present in both variants, and framework-carrying prompts stay byte-identical. Verified live — *"Spliced cross-verse observations block (17,318 chars) into writer prompt before '### READER QUESTIONS (initial questions)'"*. **`master_editor_si.py:247` still carries the old single anchor.**
+
+### A completed pipeline run's writer pass IS the base arm
+
+Verified the pipeline and `ab_writer_prompts.py` feed the writer identically: `insights_file=None` in both (S374 comment), `reader_questions_file=None` in both when no such file exists (a fresh run produces none), same synthesis-discovery file, same template. New `scripts/ab_seed_base_from_pipeline.py` recovers base from the saved response — **$1.95 saved**, growing with arm count.
+
+It refuses to seed when the comparison would be invalid: a reader-questions file present, a dossier newer than the response, or **another arm already holding writer output at least as new as the response**. That last guard came from the script's own self-test, which seeded `base` with arm F's text — `output/debug/master_writer_v4_response_psalm_N.txt` is a single slot overwritten by every writer call.
+
+### Caching: evaluated, declined, not built
+
+The arms share a ~95% prefix and diverge *after* the research bundle, so no reordering is needed — unlike the shelved dossier-cache plan, which concerned a shared *middle*. But a writer call runs ~10–12 min against a 5-minute default TTL, and the 1-hour TTL costs 2× on write: at two arms, 2.0× + 0.1× versus 2.0× uncached is a **loss**. At five arms it is 2.4× versus 5.0×. Worth building at N≥3; documented in the next-session plan, not implemented.
+
+### Deliverables
+
+- `Documents/Psalm study guide/Psalm 27 (Baseline).docx` — 68,771 bytes, 299 paragraphs
+- `Documents/Psalm study guide/Psalm 27 (no analytical framework).docx` — 65,565 bytes, 263 paragraphs
+
+Both carry full modern methodology blocks (Literary Echoes: Yes · Synthesis Discovery: claude-opus-4-8 · Master Writer: claude-opus-5 · Copy Editor: gpt-5.4). `output/psalm_27/` holds base's finished artifacts at the production paths. Prior state preserved at `archive/psalm_27_PRE_S378/` (Jan-2026 originals, previously untracked) and `archive/psalm_27_S378_abrun1_writeronly/` (run 1).
+
+**Session spend ~$14.40.**
+
+### Also found, not fixed
+
+- **The LXX budget is not biting.** `check_lxx_density.py 27` scores the delivered guide at **64% — OVER by 4 verses** against RULE 8b's ≤40% ceiling, on the first fresh full-pipeline psalm measured since S375 set it.
+- **The thinking capture collides across A/B arms.** `writer_thinking_path()` has no arm in the path; both runs lost the base arm's reasoning.
+
+---
+
 ## Session 377 (2026-08-07): A cost audit of the Psalm 73 run — five pricing defects, a third duplicate rate table, and the dossier-cache plan re-shelved on measurement rather than estimate
 
 ### Trigger

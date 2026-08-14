@@ -2358,8 +2358,16 @@ class MasterEditorV2:
         
         # 2. Verse Commentary
         # Look for start of verses until Reader Questions (or end)
+        # Session 378: the heading LEVEL is the model's to choose, and it varies run
+        # to run on identical input. `###?` matched only `##`/`###`; Psalm 27 came
+        # back with `# INTRODUCTION ESSAY` / `# VERSE COMMENTARY` (H1) and BOTH
+        # sections parsed empty — which also disabled the Session-374 fallback below,
+        # since that requires verse_match. The copy editor then received a guide with
+        # no commentary in it and answered "I don't see the Psalm 27 commentary text
+        # in your message", and THAT reply was written out as the psalm's intro and
+        # verses and rendered into the DOCX. The pipeline exited 0. Match any level.
         verse_match = re.search(
-            r'###?\s*VERSE COMMENTARY\s*\n(.*?)(?=###?\s*REFINED READER QUESTIONS|$)',
+            r'#{1,4}\s*VERSE COMMENTARY\s*\n(.*?)(?=#{1,4}\s*REFINED READER QUESTIONS|$)',
             response_text, re.DOTALL | re.IGNORECASE
         )
         if verse_match:
@@ -2368,7 +2376,7 @@ class MasterEditorV2:
         # 1. Introduction (including Liturgical section)
         # Look for start of intro until start of verses
         intro_match = re.search(
-            r'###?\s*INTRODUCTION ESSAY\s*\n(.*?)(?=###?\s*VERSE COMMENTARY|$)',
+            r'#{1,4}\s*INTRODUCTION ESSAY\s*\n(.*?)(?=#{1,4}\s*VERSE COMMENTARY|$)',
             response_text, re.DOTALL | re.IGNORECASE
         )
         if intro_match:
@@ -2398,7 +2406,7 @@ class MasterEditorV2:
         # 3. Reader Questions
         # Look for refined reader questions
         rq_match = re.search(
-            r'###?\s*REFINED READER QUESTIONS\s*\n(.*?)$',
+            r'#{1,4}\s*REFINED READER QUESTIONS\s*\n(.*?)$',
             response_text, re.DOTALL | re.IGNORECASE
         )
         if rq_match:

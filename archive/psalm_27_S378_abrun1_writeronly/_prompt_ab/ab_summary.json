@@ -1,0 +1,39 @@
+{
+  "psalm": 27,
+  "arms": [
+    {
+      "arm": "base",
+      "label": "Baseline",
+      "model": "claude-opus-5",
+      "effort": "high",
+      "prompt_chars": 75777,
+      "prompt_delta_chars": 0,
+      "elapsed_s": 549.1,
+      "cost_usd": 1.7517,
+      "intro_words": 1814,
+      "verse_words": 5748,
+      "total_words": 7562,
+      "full_file": "output\\psalm_27\\_prompt_ab\\base\\psalm_027_full.md",
+      "input_tokens": 194049,
+      "output_tokens": 31259,
+      "call_count": 1
+    },
+    {
+      "arm": "F_no_framework",
+      "label": "no analytical framework",
+      "model": "claude-opus-5",
+      "effort": "high",
+      "prompt_chars": 75697,
+      "prompt_delta_chars": -80,
+      "elapsed_s": 583.0,
+      "cost_usd": 1.7427,
+      "intro_words": 1743,
+      "verse_words": 5804,
+      "total_words": 7547,
+      "full_file": "output\\psalm_27\\_prompt_ab\\F_no_framework\\psalm_027_full.md",
+      "input_tokens": 188679,
+      "output_tokens": 31971,
+      "call_count": 1
+    }
+  ]
+}

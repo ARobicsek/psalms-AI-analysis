@@ -473,6 +473,40 @@ def variant_e(prompt: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# arm F — delete the analytical framework (Session 378)
+# ---------------------------------------------------------------------------
+
+# docs/architecture/analytical_framework_for_RAG.md, 10,691 chars of standard
+# Alter/Kugel/Lowth material (parallelism, terseness, paronomasia, merism,
+# chiasmus, inclusio, refrain, meter), written for Opus 4.6-era models and cut
+# twice on COST grounds — never once on merit:
+#   S66  (2025-11-02) added it to the research bundle, 27,678-char prose version
+#   S256 (2026-02-12) rewrote it telegraphically, -61%
+#   S257 (2026-02-12) deleted the bundle copy as a "duplication bug" — the writer
+#                     had been reading the whole thing TWICE
+# What survives is the `{analytical_framework}` block in the writer's INPUTS. No
+# rule in the 75,777-char prompt ever invokes it; the only two other appearances of
+# the word are a warning to keep "over-explanation of the analytical framework"
+# inside the reasoning phase, and "framework" listed as a BLURRY WORD TO WATCH.
+#
+# The header doubles as the splice anchor for the Session-347 synthesis-discovery
+# block, so this arm cuts it TOO — safe here because Ps 27 has no
+# psalm_027_synthesis_discovery.md and the splice cannot fire. ADOPTING THIS IN
+# PRODUCTION WOULD REQUIRE MOVING THAT ANCHOR FIRST: master_editor.py only logs a
+# warning when it goes missing, so the ~$2/psalm sidecar would vanish silently.
+_F_FRAMEWORK_BLOCK = (
+    "### ANALYTICAL FRAMEWORK (poetic conventions reference)\n"
+    "{analytical_framework}\n"
+    "\n"
+)
+
+
+def variant_f(prompt: str) -> str:
+    """Arm F: remove the analytical framework input block entirely."""
+    return _cut(prompt, _F_FRAMEWORK_BLOCK, "ANALYTICAL FRAMEWORK input block")
+
+
+# ---------------------------------------------------------------------------
 # registry
 # ---------------------------------------------------------------------------
 
@@ -502,6 +536,8 @@ VARIANTS: Dict[str, Callable[[str], str]] = {
     # B4's two edits, so these are deltas from the B3 configuration.
     "D_subtract": variant_d,
     "E_translation": variant_e,
+    # Session 378. Delta from production (arm E + the S373/S375 author edits).
+    "F_no_framework": variant_f,
 }
 
 # Session 373: the author read arm E and moved it to production. `master_editor.py`
@@ -526,4 +562,5 @@ LABELS: Dict[str, str] = {
     "B4_final": "final",
     "D_subtract": "Arm D - subtract",
     "E_translation": "Arm E - translation slot",
+    "F_no_framework": "no analytical framework",
 }

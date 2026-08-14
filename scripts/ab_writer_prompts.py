@@ -273,6 +273,22 @@ def main() -> int:
     psalm = args.psalm
 
     files = _upstream_files(psalm)
+    # Session 378: the synthesis-discovery sidecar arrived in Session 347, so psalms
+    # written before it have no such file. `write_commentary` already treats it as
+    # optional — the splice "only fires when write_commentary received
+    # synthesis_discovery_file pointing at content" and the prompt is byte-identical
+    # otherwise — so a hard pre-flight failure here blocked writer-only re-runs of
+    # older psalms for no reason. Dropped from the arg dict rather than passed as a
+    # missing path, and it is absent from EVERY arm equally, so it cannot bias a
+    # comparison.
+    if not files["synthesis_discovery_file"].exists():
+        logger.warning(
+            f"No synthesis_discovery file for psalm {psalm} — running without the "
+            "cross-verse observations block (pre-Session-347 psalm). All arms are "
+            "affected equally."
+        )
+        files.pop("synthesis_discovery_file")
+
     missing = [str(p.relative_to(ROOT)) for p in files.values() if not p.exists()]
     if missing:
         print(f"ERROR: Psalm {psalm} is missing upstream artifacts:", file=sys.stderr)
