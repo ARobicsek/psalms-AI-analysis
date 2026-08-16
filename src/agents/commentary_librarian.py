@@ -54,6 +54,51 @@ SEFARIA_API_BASE = "https://www.sefaria.org/api"
 RATE_LIMIT_DELAY = 0.5  # seconds between requests
 REQUEST_TIMEOUT = 10  # seconds
 
+# ---------------------------------------------------------------------------
+# Session 380: per-entry ceiling on a commentary quotation as rendered into the
+# research bundle.
+#
+# This lives HERE, next to CommentaryEntry, rather than in research_assembler,
+# because the dependency runs assembler -> librarian and both modules render
+# these entries. A second hand-maintained copy is exactly the failure this
+# project has now hit three times (S377's third duplicate pricing table, S379's
+# hand-copied splice that had drifted for eight sessions). One definition.
+#
+# The cap was 400 chars and silently cut 23% of every commentary entry in the
+# corpus (1,119 of 4,907). Measured against Sefaria on Psalm 73: 19,273
+# characters discarded across 67 entries, median 222, worst 2,395 — Malbim on
+# 73:17, the sanctuary pivot, i.e. the psalm's structural hinge.
+#
+# Tokens were never the argument. Restoring everything grows the median bundle
+# by 2,877 chars and the worst by 19,273, and NO bundle in the corpus crosses
+# the writer's 350,000-char trim ceiling as a result. The real cost was that
+# the writer READ the fragments and threw them away: the Psalm 73 thinking
+# capture shows it rating Malbim on v.15 and Torah Temimah on v.17 as Tier 1
+# and then discarding both as "cut off mid-thought". We paid for the fetch,
+# paid input tokens on the fragment, and paid thinking tokens on the writer
+# working out that it was broken.
+#
+# 2,000 recovers 66 of Psalm 73's 67 truncated entries whole while still
+# bounding the pathological case (a Torah Temimah entry can quote an entire
+# Talmudic sugya). Raise it if real entries are seen hitting the ceiling — the
+# marker is what makes that visible.
+COMMENTARY_ENTRY_MAX_CHARS = 2000
+
+# A bare "..." is indistinguishable from an ellipsis the commentator wrote, so
+# the writer had to INFER that the text was cut rather than being told. Say it.
+COMMENTARY_TRUNCATION_MARKER = " […truncated]"
+
+
+def truncate_commentary(text: str, max_chars: int = COMMENTARY_ENTRY_MAX_CHARS) -> str:
+    """Cap one commentary quotation, marking the cut so the reader knows it happened.
+
+    Returns `text` unchanged when it fits (including when it is empty or None-ish).
+    The marker is deliberately explicit: see COMMENTARY_TRUNCATION_MARKER.
+    """
+    if not text or len(text) <= max_chars:
+        return text
+    return text[:max_chars].rstrip() + COMMENTARY_TRUNCATION_MARKER
+
 # Supported commentators (Sefaria text names)
 COMMENTATORS = {
     "Rashi": "Rashi on Psalms",
@@ -204,10 +249,15 @@ class CommentaryBundle:
             ""
         ]
 
+        # Session 380: this path is NOT the production bundle — that is
+        # ResearchAssembler._generate_markdown, which owns
+        # COMMENTARY_ENTRY_MAX_CHARS. `format_bundle_as_markdown` has no callers
+        # outside this module's own main(). Kept in step with the live cap
+        # anyway so a debug dump does not misrepresent what the writer sees.
         for comm in self.commentaries:
             lines.append(f"#### {comm.commentator}")
-            lines.append(f"**Hebrew**: {comm.hebrew[:300]}..." if len(comm.hebrew) > 300 else f"**Hebrew**: {comm.hebrew}")
-            lines.append(f"**English**: {comm.english[:300]}..." if len(comm.english) > 300 else f"**English**: {comm.english}")
+            lines.append(f"**Hebrew**: {truncate_commentary(comm.hebrew)}")
+            lines.append(f"**English**: {truncate_commentary(comm.english)}")
             lines.append("")
 
         return "\n".join(lines)

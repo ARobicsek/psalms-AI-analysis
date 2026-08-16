@@ -9,6 +9,201 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 380 (2026-08-15): The research bundle had been cutting 23% of every commentary entry at 400 chars — and the superlative tic turned out to be three failures, not one
+
+**Trigger**: the author, reviewing the Psalm 73 output, with two items. (1) *"I'm seeing multiple examples of an 'LLM verbal tic' — describing something as 'the most' something. Caldereon's quote is the "the most famous soliloquy in Spanish". (really?) "Leaven is the one thing barred from the altar." (really??) "The second half is the most argued clause in the psalm" (how can you know that???) How might we approach this? in the writer? the copy editor? directly? subtly?"* (2) *"reading the thinking output there are a couple places where it mentions a commentary being cut off. what's happening there?"*
+
+---
+
+## Item 2: the truncation
+
+### The bug
+
+`ResearchAssembler._generate_markdown` capped every traditional-commentary quotation at **400 characters** and appended a bare `...`:
+
+```python
+hebrew_text = comm.hebrew if len(comm.hebrew) <= 400 else f"{comm.hebrew[:400]}..."
+english_text = comm.english if len(comm.english) <= 400 else f"{comm.english[:400]}..."
+```
+
+Two lines, unchanged for the life of the project. Nothing ever raised, because a truncated quotation is still a valid quotation.
+
+### Scale, measured not estimated
+
+- **Corpus-wide: 1,119 of 4,907 commentary entries truncated (23%).**
+- **Psalm 73: 67 of 198 (34%)** — the worst of the recent psalms.
+- Re-fetching all 67 from Sefaria (the librarian is pure Python, no LLM — **$0**) measured **19,273 characters discarded**: 40 Hebrew entries over cap (median loss 222, max 2,395) and 24 English (median 108, max 346).
+- The single worst entry is **Malbim on 73:17 — 2,795 chars, 2,395 of them cut.** Verse 17 is the sanctuary pivot, the structural hinge of the psalm, tagged in the dossier as serving macro Q2 and Q3.
+- Most frequent casualties: **Romemot El**, which the bundle's own header describes as *"present on nearly every verse"*, and **Radak**, *"expansive linguistic explanation"*. Exactly the two commentators whose value is that they say more than a line.
+
+### The tokens were never the argument
+
+Restoring everything grows the **median bundle by 2,877 chars** and the worst (Psalm 73) by 19,273. Checked against every ceiling in the tree across all 86 bundles: **not one bundle newly crosses 300k, 350k or 400k.** The live writer ceiling is `master_editor.py`'s 350,000; `synthesis_writer.py`'s tighter 300,000 is dead code (`SynthesisWriter` is REMOVED from `run_enhanced_pipeline.py`). Cost is roughly **$0.05–0.12/psalm** across the writer and synthesis-discovery calls, against an $8.56 run.
+
+**The real cost was that the writer read the fragments and threw them away.** From the Session-376 thinking capture on Psalm 73:
+
+> "The Malbim's reading of עמו as 'of heaven's people' is interesting … and his comment on v.15 about publishing the question causing heresy **is cut off mid-thought**."
+
+> "The Torah Temimah reference to a Chagigah/Bava Metzia story **appears to be cut off**."
+
+Both were rated **Tier 1** and then discarded. We paid for the Sefaria fetch, paid input tokens on the fragment, and paid thinking tokens on the writer working out that the material was broken — and got nothing.
+
+**This is the first bug the thinking capture has found on its own.** Session 376 shipped it as a hypothesis generator whose output needed A/B confirmation; here it pointed straight at a defect that four sessions of work on this same psalm had walked past, and the confirmation cost $0.
+
+### The fix
+
+- Cap **400 → 2,000**. Recovers 66 of Psalm 73's 67 truncated entries whole, while still bounding the pathological case — a Torah Temimah entry can quote an entire Talmudic sugya.
+- Marker `...` → **` […truncated]`**. A bare ellipsis is indistinguishable from one the commentator wrote, which is precisely why the writer had to *infer* the damage rather than being told about it. The house marker in `research_trimmer` is `[...]`; this one says the word.
+- **Exactly one definition**, `truncate_commentary` / `COMMENTARY_ENTRY_MAX_CHARS` / `COMMENTARY_TRUNCATION_MARKER` in `commentary_librarian.py`, next to `CommentaryEntry`. It lives there and not in `research_assembler` because the dependency runs assembler → librarian; the assembler imports it. A test reads the module source and asserts no second copy has grown back. This project has now lost time to a duplicated constant three times (S373's `writer_prompt_variants` drift, S377's third pricing table, S379's hand-copied splice that had been wrong for eight sessions).
+- Also fixed the librarian's own **300-char** variant of the same bug in `CommentaryBundle.to_markdown`. That path has no callers outside the module's own `main()`, but a debug dump that misrepresents what the writer sees is worse than useless.
+
+---
+
+## Item 1: the superlative tic
+
+### It is three different failures wearing one surface form
+
+- **"the most famous soliloquy in Spanish"** — an appeal to external reputation the model cannot check and the guide never sources.
+- **"Leaven is the one thing barred from the altar"** — **false, and refuted by the words quoted in the same sentence.** The guide cites Lev 2:11 as *"no leaven **and no honey** shall you burn as an offering to YHWH"* and then claims leaven is the one thing. The writer had the correct text on screen and overrode it.
+- **"The second half is the most argued clause in the psalm"** — a claim about scholarly consensus, unknowable in principle.
+
+Shared mechanism: **a superlative is a free intensifier.** It costs no evidence and adds rhetorical torque, so it gets reached for exactly where an argument needs force it has not earned. The leaven case is the tell — the superlative was doing the argumentative work, pivoting to *"a leavened heart may not come near"* — and the point survives its removal intact.
+
+Notably, the third case had a *better* line available from the dossier: Minchat Shai plus four disagreeing commentators are right there on the page, so "commentators divide here" is both true and stronger than an unverifiable ranking.
+
+### The hard part is not catching superlatives, it is not catching the wrong ones
+
+Census over the 44 finished guides: **529 raw hits, 1.62 per 1,000 words.** But hand-classifying all 20 hits in Psalm 73:
+
+| | count | example |
+|---|---|---|
+| false positives | 6 | "the Most High" (translating עֶלְיוֹן), "the greatest good" (inside the Calderón translation), "the nearest antecedent" (a grammatical term) |
+| **verifiable, dossier-backed** | 8 | "דּוֹר בָּנֶיךָ occurs nowhere else in the Bible", "the poem's single Tetragrammaton" |
+| the actual tic | 6 | the author's three, plus "its most famous consolation", "the Bible's seat of the deepest interior", "the sharpest of these reassignments" |
+
+The middle row is the point. Those eight are the **entire payoff of the concordance pipeline**, and a blanket ban on superlatives would delete them. The discriminator is semantic, not lexical.
+
+### Why the copy editor and not the writer
+
+1. All four instances **passed the copy editor untouched** — verified by grepping the pre- and post-copy-edit Psalm 73 text. This is a gap in the ruleset, not a rule firing weakly. (`copy_editor.py`'s item 9(g) already contains a superlative example — "the most countable thing on the human body" — but framed as a wrong *analogy*, so it never generalised.)
+2. It is a local, sentence-level failure. That is the copy editor's job description; it is not a compositional failure needing the writer to plan differently.
+3. The standing five-instance prior: text added to `master_editor.py` intending to produce restraint reliably produces its opposite, and any addition there is an un-A/B'd delta on the arm-E prompt.
+4. **`RULE 9` of the writer prompt says "Do not hedge."** Any "soften your superlatives" instruction collides with it head-on. The repair had to be **cut or ground, never hedge** — and the rule text says so explicitly, because "perhaps the most famous" keeps the unsupported ranking and adds evasion on top.
+
+### What shipped
+
+**`src/utils/superlatives.py`** — patterns, detector and rule text in one module, on the `banned_phrases.py` model so the rule the copy editor is given and the list audited against cannot drift. Two tiers:
+
+- **RECEPTION** (high precision, gates): fame, scholarly consensus, circulation. A guide that cites its sources for everything else cannot source these.
+- **CANDIDATE** (low precision, review only): the broad ranking/uniqueness family. Deliberately **not** wired into the copy editor's warning channel — at a ~70% false-positive rate it would cry wolf and train the author to ignore it.
+
+**Copy editor category 9(h)**, spliced into `COPY_EDITOR_SYSTEM_PROMPT` with the same fail-at-import anchor discipline as the banned-phrase rule, positioned inside category 9 so it inherits *"Do not remove arguments that can be salvaged; fix them."* The rule text names three shapes: reception claims (cut or ground), uniqueness the evidence contradicts (scale to the evidence), and an explicit **LEAVE ALONE** clause for textual-distribution claims and divine titles.
+
+**`scripts/check_superlatives.py`** — backstop, on the `check_banned_phrases.py` model. Exit 1 on reception claims; `--all` for the review tier; `--delivered` for the whole guide folder.
+
+### The dangerous false positive, caught by measuring before shipping
+
+The first draft of the `fame` pattern included `read`, which matched:
+
+- *"The unmarked entry of divine speech … is **better read as** the requested answer"* (Psalm 60)
+- *"It is **best read as** a capstone"* (Psalm 71)
+- *"most read Job as parodying Ps 8"* (Psalm 8)
+
+**`COPY_EDITOR_SYSTEM_PROMPT` lists "is best read as" twice as a sanctioned flagged conjecture the editor is explicitly forbidden to delete or weaken.** Shipping that pattern would have pointed the audit at the exact constructions the prompt protects. Removed, and `test_no_reception_pattern_matches_a_verb_of_interpretation` now blocks re-adding any interpretive verb structurally rather than by example.
+
+A second pattern was narrowed for the same reason: `canonicity` was `the most <any adjective> <text-noun>`, which caught *"the most honest line in the psalm"* — the author judging the text in front of him, not a claim about the world. It now requires an explicit word of circulation.
+
+**Result: 62 → 51 hits across the 89 delivered guides, and all 51 matched spans are genuine reception vocabulary** ("most famous" ×19, "most contested" ×6, "most debated" ×5, "most cited" ×3, …).
+
+### Live validation on Psalm 73
+
+Re-ran the copy editor on the same `psalm_073_print_ready.md` the original run consumed, output isolated to `output/psalm_73/_superlative_test/` so the shipped artifacts are untouched. **$0.6912**, 385.8s, gpt-5.4.
+
+Reception claims **3 → 1**. Five 9(h) fixes, self-tagged in the changes log:
+
+| verse | before | after |
+|---|---|---|
+| 3 | "the Bible's most reserved divine attribute" | "a divine attribute the Bible guards closely" |
+| 20 | "the most famous soliloquy in Spanish" | "a soliloquy" |
+| 21 | "Leaven is **the one thing** barred from the altar" | "Leaven is barred from the altar" |
+| 24 | "the most argued clause in the psalm" | "a debated clause in the psalm" |
+| 26 | "the best-documented moment of actual use" | "a well-documented moment" |
+
+**Verses 3 and 26 were never in the detector** — the model generalised from the rule text. And the leaven note reads *"The original was contradicted by the very verse it quoted, which also bars honey (Lev 2:11)"*: it reached the self-contradiction by reasoning against the quoted evidence, which is exactly the case that a regex cannot decide.
+
+**All seven protected concordance claims survived intact** ("occurs nowhere else in the Bible", "single Tetragrammaton", "the first word of Lamentations", "appears here and nowhere else in the psalm", "the construct phrase is unique in the Bible", "the last one is the only one that lasts", "the first time in the poem God is addressed"). Word count 13,590 → 13,510, so no collateral rewriting.
+
+One genuine miss survived: *"Lamentations, in the middle of its most famous consolation."* Same shape as the two it caught. The new audit logs survivors at WARNING so it will not ship silently.
+
+---
+
+### Verification
+
+- **156 tests pass** (133 existing + 23 new), via `pytest tests` — running `pytest` at the repo root still executes stray debug scripts (Session 379's warning stands).
+- `tests/test_commentary_truncation.py` (10): cap behaviour including the inclusive-boundary off-by-one, empty/None input (`comm.english` is routinely empty — most Hebrew commentators have no Sefaria translation, and the old call sites indexed it unconditionally), the marker is not a bare ellipsis, the cap still recovers the Psalm 73 entries, and a source-level grep proving no second definition and no surviving `comm.hebrew[:N]` slice in either render path.
+- `tests/test_superlatives.py` (13): the author's three examples are caught; the sanctioned "best read as" hedge and all five protected concordance forms are not; one hit per site not one per pattern; the splice lands inside category 9 and is idempotent on module reload.
+
+### Watch
+
+- **No psalm has been generated on the restored bundle.** Every truncation figure is measured on bundles and against Sefaria, not on output. The writer has still never seen a complete Malbim on 73:17.
+- **The 9(h) rule is validated on one psalm, one arm, with no beta-reader read.** It has not been A/B'd for whether removing these superlatives costs anything in reader experience — same honest framing as Session 378's framework removal: it fixes a defect the author reported, it is not shown to improve the guide.
+- **The copy editor has no access to the research bundle.** `edit_commentary` receives the print-ready text plus an optional `supplementary_prompt` and nothing else. 9(h) therefore tests uniqueness claims against evidence quoted on the page and against the model's own knowledge. That was enough for the leaven case only because `RULE 8`/`8b` force the guide to show its evidence. Wiring the real bundle in through the existing `supplementary_prompt` channel is possible but is ~270k chars against a currently ~29k-token input — **not done, not priced beyond that estimate.**
+- The broad candidate tier is review-only by design. Do not promote it to a gate.
+
+---
+
+## Session 379 (2026-08-14): The analytical framework is out of both writer prompts — and the SI pipeline's hand-copied splice had drifted twice
+
+**Trigger**: the author — *"please pick up the leftover work from the previous session"*, i.e. the agenda in `docs/plans/NEXT_SESSION_PROMPT_session_378.md`, whose decision (*"the framework goes"*) was already made on Session 378's two-dossier Psalm 27 A/B.
+
+### What shipped
+
+**The `{analytical_framework}` INPUT block is gone from `MASTER_WRITER_PROMPT_V4`.** 75,777 → **75,697 chars**, exactly the predicted −80. Because `MASTER_WRITER_PROMPT_SI` is derived from V4 by a `.replace()` that inserts the SI directive before `## YOUR INPUTS` and never touches the INPUTS, the one template edit covered both pipelines: SI went 76,202 → 76,122.
+
+**The SI splice anchor — Session 378's named hard blocker — is fixed.** `master_editor_si.py` had its own copy of the cross-verse splice with the old single anchor (`### ANALYTICAL FRAMEWORK …`) and a missing anchor only logged a warning, so removing that header would have silently dropped the whole Session-347 synthesis-discovery block: **~$1.50/psalm of analysis, on a run that still exits 0**.
+
+### The blocker was a symptom; the duplication was the disease
+
+Fixing the anchor by hand would have left two hand-maintained copies of the same splice. Measuring the built prompts caught what that had already cost: the SI writer prompt came out **777 chars SHORTER** than the normal one despite carrying an extra directive section. The gap was the observations block itself — **the SI copy was still the pre-Session-371 text**, opening `(use where they fit; do NOT structure your commentary around them)` with blanket conjecture-hedging. That is the exact wording Session 371 measured as suppressing the single best idea in the Ps 71 dossier under Opus 5 (the old-poet's-anthology reading, the author's favourite insight in any Ps 71 essay). Session 371 rewrote it in `master_editor.py` and **never mirrored it** — while the SI comment claimed *"Mirrors the splice in MasterEditor."* The comment had been false for eight sessions.
+
+So the splice was **hoisted into one shared method**, `MasterEditor._splice_cross_verse_observations(prompt, label=...)`, which SI now inherits. Same trick the prompt template already uses. Two drifts, one of them silent and behavioural, were repaired by deletion.
+
+### The agenda's cleanup list named the wrong sites — two of three would have broken things
+
+The plan listed four plumbing sites per file. Tracing them found that only one class was actually dead:
+
+- **`master_editor.py:912`/`951` (the `load_analytical_framework()` call and its kwarg) are NOT writer plumbing.** They sit in `run_synthesis_discovery()` and feed `SynthesisDiscoveryAgent.discover(analytical_framework=...)` — a **different agent, with its own prompt, still using it**. Arm F only ever cut the block from the writer prompt string. Removing these would have been an un-A/B'd change to a $1.50/psalm agent. **Left in place.**
+- **The `analytical_framework: str` parameter cannot be removed either.** `MasterEditor.write_commentary` delegates to `MasterEditorV2.write_commentary` (in `src/agents/archive/`), which loads the framework and passes it **by keyword** into `self._perform_writer_synthesis(...)`. Dropping the parameter raises `TypeError` on every production run. Both overrides keep it, now commented `UNUSED`. (A first pass gave it a default, which forced a default onto `reader_questions` too; reverted — every caller passes both.)
+- Genuinely removed: the `.format(analytical_framework=…)` kwarg in both files, and SI's own `RAGManager` load, which fed nothing but itself.
+
+`str.format()` ignores extra kwargs, so none of this would have raised — the half-done removal the plan warned about is invisible by construction, which is why it was traced rather than pattern-matched.
+
+### The legacy-bundle trap, closed at the load path
+
+**54 bundle files on disk still carry the framework inline** as a `## Analytical Framework for Biblical Poetry` section (34 canonical `psalm_NNN_research_v2.md` dossiers, psalms 1–34, plus trimmed copies and legacy test/rerun dirs) — the old prose version, uniformly **25,794 chars**, i.e. **2.6× the block just removed from the prompt**. A full pipeline re-run regenerates the bundle without it (S257), but a **writer-only** re-run feeds it straight back through the dossier. Session 378 hit this on Ps 27 and had to strip it by hand before its A/B measured anything.
+
+New `ResearchTrimmer.strip_analytical_framework()` removes the section from the heading to the next top-level (`#`/`##`) heading. **It had to be called before `trim_bundle`'s early size return**, which fires on every real bundle (~226k against a 350k ceiling) — anything placed after it would never have run. Validated across all 86 bundles on disk: 34 stripped with every other heading preserved in order, **52 modern bundles byte-identical**, zero problems. The synthesis-discovery agent still gets a clean copy via its own parameter, so this also ends the double-read for old psalms.
+
+### Verified
+
+- **133 tests pass** (121 + 12 new in `tests/test_analytical_framework_removal.py`).
+- `MASTER_WRITER_PROMPT_V4` is **75,697** chars; SI is now exactly V4 + `SI_SECTION` (asserted in a test — if that ever stops holding, one template edit no longer covers both pipelines).
+- **The check that would have caught the S378 confound**: built the real writer prompt for both pipelines on Ps 27's live 17,318-char synthesis-discovery file, model call stubbed, $0. Both splice correctly against the READER QUESTIONS anchor, observations precede reader questions, no unrendered placeholders, and the framework value does not leak in via any other path. The no-observations control leaves the prompt byte-identical.
+- `python scripts/ab_writer_prompts.py <N> --arms F_no_framework` now **raises in pre-flight** (`_cut` on a block that is gone) — the intended end state, matching `variant_b`/`d`/`e`. Left in the registry as the audit trail.
+- `docs/architecture/analytical_framework_for_RAG.md` is **still on disk and still loading** (9,239 chars): `RAGManager._verify_files()` raises without it and `get_rag_context()` loads it unconditionally for macro, micro and research_assembler.
+
+### Honest framing
+
+The A/B showed removal **costs** nothing. It did not show removal **gains** anything. This shipped for hygiene — no rule invokes it, it taught Lowth's taxonomy under an Alter banner, and it carried 33 dangling `[Ref##]` markers. **No psalm has been generated on the new prompt**; the deltas above are measured on built prompts, not on output.
+
+### Watch
+
+- **Running `pytest` at the repo root executes stray debug scripts** — one made a live OpenAI call and rewrote the tracked `test_api_out.txt` (reverted). The 5 "errors" at root are this, not test failures. **Use `pytest tests`.**
+- The SI pipeline's *behaviour* changes with this session beyond the framework removal: it now gets the Session-371 observations guidance for the first time. That text is production-validated on the normal pipeline but has **never run through the SI pipeline**.
+- Still open from the S378 agenda's non-blocking list: the **LXX budget is not biting** (Ps 27 at 64% against a 40% ceiling), the **thinking capture collides across A/B arms**, and **prompt caching for A/Bs** (worth building at N≥3 arms, a loss at 2).
+
+---
+
 ## Session 378 (2026-08-14): The analytical framework earns nothing — measured twice on Psalm 27; a pipeline shipped a DOCX whose commentary was the copy editor's refusal; the splice anchor was a one-variable trap
 
 ### Trigger

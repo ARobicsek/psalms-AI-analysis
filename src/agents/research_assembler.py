@@ -35,7 +35,7 @@ if __name__ == '__main__':
     from src.agents.bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from src.agents.concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from src.agents.figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
-    from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle
+    from src.agents.commentary_librarian import CommentaryLibrarian, CommentaryBundle, truncate_commentary
     from src.agents.liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from src.agents.liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
     from src.agents.sacks_librarian import SacksLibrarian, SacksReference
@@ -48,7 +48,7 @@ else:
     from .bdb_librarian import BDBLibrarian, LexiconRequest, LexiconBundle
     from .concordance_librarian import ConcordanceLibrarian, ConcordanceRequest, ConcordanceBundle
     from .figurative_librarian import FigurativeLibrarian, FigurativeRequest, FigurativeBundle
-    from .commentary_librarian import CommentaryLibrarian, CommentaryBundle
+    from .commentary_librarian import CommentaryLibrarian, CommentaryBundle, truncate_commentary
     from .liturgical_librarian_sefaria import SefariaLiturgicalLibrarian, SefariaLiturgicalLink
     from .liturgical_librarian import LiturgicalLibrarian, PhraseUsageMatch
     from .sacks_librarian import SacksLibrarian, SacksReference
@@ -75,6 +75,11 @@ def _truncate_bdb_entry(text: str, max_chars: int = 500) -> str:
 
 # Session 350: how many concordance matches to render per search in the bundle.
 MAX_DISPLAY_RESULTS = 10
+
+# Session 380: the per-entry commentary cap (was a bare 400 here, silently
+# cutting 23% of every commentary entry in the corpus) is owned by
+# commentary_librarian.truncate_commentary — imported above, NOT redefined.
+# See that module for the measurement and for why there is exactly one copy.
 
 _CANON_ORDER_CACHE: Dict[str, int] = {}
 
@@ -588,12 +593,10 @@ class ResearchBundle:
                         md += f"*{bundle.reason}*\n"
 
                         if comm.hebrew:
-                            hebrew_text = comm.hebrew if len(comm.hebrew) <= 400 else f"{comm.hebrew[:400]}..."
-                            md += f"{hebrew_text}\n"
+                            md += f"{truncate_commentary(comm.hebrew)}\n"
 
                         if comm.english:
-                            english_text = comm.english if len(comm.english) <= 400 else f"{comm.english[:400]}..."
-                            md += f"{english_text}\n\n"
+                            md += f"{truncate_commentary(comm.english)}\n\n"
                 else:
                     md += f"### {bundle.psalm}:{bundle.verse}\n"
                     md += "*No commentaries available.*\n\n"

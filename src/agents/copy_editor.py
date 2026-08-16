@@ -39,12 +39,20 @@ if __name__ == '__main__':
     from src.utils.openai_usage import split_output_tokens
     from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
     from src.utils.debug_paths import thinking_file as copy_editor_thinking_path
+    from src.utils.superlatives import (
+        find_reception_claims,
+        prompt_block as superlative_prompt_block,
+    )
 else:
     from src.utils.logger import get_logger
     from src.utils.cost_tracker import CostTracker
     from src.utils.openai_usage import split_output_tokens
     from src.utils.banned_phrases import find_banned, prompt_block as banned_prompt_block
     from src.utils.debug_paths import thinking_file as copy_editor_thinking_path
+    from src.utils.superlatives import (
+        find_reception_claims,
+        prompt_block as superlative_prompt_block,
+    )
 
 import anthropic
 from dotenv import load_dotenv
@@ -360,6 +368,24 @@ _BANNED_INSERTIONS = [
     ("CRITICAL FORMATTING RULES — YOU MUST OBEY THESE:", None),  # rule block
 ]
 
+# Session 380: the ungrounded-superlative rule is spliced in as sub-item (h) of
+# the argument-failure category, so it inherits that category's closing
+# instruction ("Do not remove arguments that can be salvaged; fix them") rather
+# than restating it. Same hard-fail-at-import discipline as the banned-phrase
+# splice below: a moved anchor must break the build, not silently ship a copy
+# editor missing the rule while every psalm keeps processing normally.
+_SUPERLATIVE_ANCHOR = "   Do not remove arguments that can be salvaged; fix them."
+if _SUPERLATIVE_ANCHOR not in COPY_EDITOR_SYSTEM_PROMPT:
+    raise RuntimeError(
+        "COPY_EDITOR_SYSTEM_PROMPT anchor for the ungrounded-superlative rule "
+        f"has moved; expected to find {_SUPERLATIVE_ANCHOR!r}. Re-point it."
+    )
+COPY_EDITOR_SYSTEM_PROMPT = COPY_EDITOR_SYSTEM_PROMPT.replace(
+    _SUPERLATIVE_ANCHOR,
+    f"{superlative_prompt_block()}\n{_SUPERLATIVE_ANCHOR}",
+    1,
+)
+
 _banned_rule = banned_prompt_block()
 if _banned_rule:
     for _anchor, _addition in _BANNED_INSERTIONS:
@@ -508,6 +534,42 @@ class CopyEditor:
                 )
         else:
             self.logger.info("BANNED PHRASES: none")
+
+        # 7d. Ungrounded-superlative audit (Session 380). Category 9(h) asks the
+        #     model to cut or ground these; this reports what it missed.
+        #     RECEPTION CLAIMS ONLY — appeals to fame or scholarly consensus,
+        #     which a guide that cites its sources cannot support and which
+        #     measured 4/4 true positives on Psalm 73. The BROADER superlative
+        #     family is deliberately NOT checked here: hand-classifying all 20
+        #     hits in Psalm 73 put only ~30% in the tic bucket, and eight were
+        #     verifiable concordance findings ("occurs nowhere else in the
+        #     Bible") that are among the best lines in the guide. Warning on
+        #     those would cry wolf and train the author to ignore the channel.
+        #     `scripts/check_superlatives.py --all` surfaces them for review.
+        superlative_hits = find_reception_claims(full_edited)
+        if superlative_hits:
+            self.logger.warning(
+                f"UNGROUNDED SUPERLATIVES: {len(superlative_hits)} reception claim(s) "
+                f"survived the copy editor — each asserts fame or scholarly "
+                f"consensus the guide cannot source:"
+            )
+            for hit in superlative_hits:
+                # Centre the excerpt on the hit. `_truncate` takes the head of
+                # the line, and these land mid-paragraph in a guide whose
+                # paragraphs are one long line — the first run of this audit
+                # printed 120 chars about verse 14 for a hit that was nowhere
+                # near it.
+                start = max(0, hit.col - 60)
+                excerpt = (
+                    ("..." if start else "")
+                    + hit.context[start:start + 130]
+                    + ("..." if start + 130 < len(hit.context) else "")
+                )
+                self.logger.warning(
+                    f'  line {hit.line_no}: "{hit.matched}" [{hit.label}] — {excerpt}'
+                )
+        else:
+            self.logger.info("UNGROUNDED SUPERLATIVES: none")
 
         # 8. Save output files
         prefix = f"psalm_{psalm_number:03d}"
