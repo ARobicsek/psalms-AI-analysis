@@ -463,9 +463,6 @@ Two, three, four sentences. None of them names a device, cites a source, or reac
 ### KEY INSIGHTS TO INCORPORATE
 {curated_insights}
 
-### ANALYTICAL FRAMEWORK (poetic conventions reference)
-{analytical_framework}
-
 ### READER QUESTIONS (initial questions)
 {reader_questions}
 
@@ -1017,6 +1014,107 @@ class MasterEditor(MasterEditorV2):
 
         return "\n".join(lines)
 
+    def _splice_cross_verse_observations(self, prompt: str, label: str = "writer") -> str:
+        """Splice the Session-347 synthesis-discovery sidecar into a writer prompt.
+
+        Shared by MasterEditor and MasterEditorSI. Session 379 hoisted it here after
+        finding that the SI copy had drifted TWICE from this one: it kept the old
+        single splice anchor (the Session-378 blocker) and it still carried the
+        pre-Session-371 guidance that suppressed the best idea in the Ps 71 dossier.
+        The two duplicates were never going to stay in step by hand — the prompt
+        template already avoids this by deriving SI from V4 with a .replace(), and
+        this is the same trick for the code path.
+
+        Only fires when write_commentary received a synthesis_discovery_file pointing
+        at content; otherwise the prompt is returned unchanged, byte-identical.
+        """
+        cross_verse = getattr(self, '_cross_verse_observations', None)
+        if not cross_verse:
+            return prompt
+
+        # Session 378: the anchor is a FALLBACK CHAIN. It used to be the ANALYTICAL
+        # FRAMEWORK header alone, and a missing anchor only logged a warning — so any
+        # prompt variant that removed that header silently dropped this whole block
+        # (~$1.50/psalm of synthesis discovery on Ps 27) while looking like it had
+        # only removed the framework. That is a two-variable arm masquerading as one.
+        # Session 379 removed that header from both live templates, so READER QUESTIONS
+        # is now the anchor that actually fires. The framework anchor is kept for the
+        # archived V2/V3 prompts and for any A/B arm built from an older template —
+        # note it is the WRITER-PROMPT header, unrelated to the '## Analytical Framework
+        # for Biblical Poetry' section that ResearchTrimmer strips out of old bundles.
+        anchors = (
+            "### ANALYTICAL FRAMEWORK (poetic conventions reference)",
+            "### READER QUESTIONS (initial questions)",
+        )
+        anchor = next((a for a in anchors if a in prompt), None)
+        if anchor is None:
+            self.logger.warning(
+                f"Found none of the cross-verse splice anchors in the {label} "
+                f"prompt ({', '.join(a[:32] for a in anchors)}) — skipping "
+                "cross-verse observations splice"
+            )
+            return prompt
+
+        # Session 371: the two guards below used to read "do NOT structure
+        # your commentary around them" and a blanket "CONJECTURE must be
+        # presented as conjecture." On Ps 71 that combination suppressed the
+        # single most explanatory idea in the dossier — that the psalm is an
+        # old poet's anthology, and that its own v.14 vow ("I will add upon
+        # all Your praise") is enacted by that method of composition. Opus 4.8
+        # ignored both guards and built its essay on it (the author's favourite
+        # insight in any Ps 71 essay); Opus 5, which follows instructions more
+        # literally, obeyed them and left the idea in a single hedged verse
+        # note. The guards were aimed at slavish list-following, but they read
+        # as a ban on promotion. Rewritten to forbid the checklist while
+        # explicitly permitting ONE observation to carry the essay, and to
+        # scope conjecture-hedging to the inference rather than the facts.
+        observations_block = (
+            "### CROSS-VERSE OBSERVATIONS "
+            "(additional input — and promote the best one if it earns it)\n"
+            "These are cross-verse patterns surfaced by a dedicated discovery "
+            "pass over this same dossier. They are ADDITIONAL INPUT, not "
+            "overriding instruction, and they are NOT a checklist to march "
+            "through: weave in what serves the prose, demote what does not, "
+            "and let your own reading of the psalm govern.\n\n"
+            "**But do not under-use them either.** If one of these observations "
+            "is the best explanatory idea available for this psalm — the one "
+            "that makes the most of the poem intelligible at once — then it "
+            "SHOULD carry your essay. Take it, make it your own, and build the "
+            "governing argument on it. A first-rate structural idea left in a "
+            "verse note while the essay runs on something weaker is the worse "
+            "outcome.\n\n"
+            "Only one idea can be the essay's SPINE — that is STAGE 1's "
+            "single-governing-argument rule and it is unchanged. But that "
+            "limits *spines*, not how much of this material the essay may "
+            "use. Any number of these observations can serve as the essay's "
+            "evidence, its turns, or its close, and several of them bearing on "
+            "one argument is exactly what a cumulative essay looks like. Use "
+            "as many as genuinely earn their place; leave the rest to the "
+            "verse commentary. There is no quota — the quality bar does the "
+            "limiting.\n\n"
+            "Each observation has been evidence-honesty-calibrated; keep its "
+            "phrasing strength as you find it (do not promote \"echoes\" to "
+            "\"verbatim,\" or \"consonantal play\" to \"the same word\").\n\n"
+            "**Confidence: CONJECTURE marks the INFERENCE, not the facts "
+            "underneath it.** Hedge the interpretive leap ('perhaps,' 'may "
+            "explain,' 'suggests'); state the established facts it rests on — "
+            "the borrowings, the parallels, the counts — plainly, as fact. A "
+            "conjectural reading is NOT disqualified from carrying an essay: "
+            "an argued \"here is what I think this poem is doing, and here is "
+            "why\" is exactly what the essay is for. What is forbidden is "
+            "presenting the inference as settled.\n\n"
+            "Phrase coverage, RULE 7b (no false profundity), RULE 8 (no "
+            "manufactured significance), and the dinner-party register all "
+            "still apply with full force.\n\n"
+            f"{cross_verse}\n\n"
+        )
+        prompt = prompt.replace(anchor, observations_block + anchor)
+        self.logger.info(
+            f"Spliced cross-verse observations block ({len(cross_verse):,} chars) "
+            f"into {label} prompt before '{anchor}'"
+        )
+        return prompt
+
     def _perform_writer_synthesis(
         self,
         psalm_number: int,
@@ -1026,6 +1124,11 @@ class MasterEditor(MasterEditorV2):
         psalm_text: str,
         phonetic_section: str,
         curated_insights: Dict,
+        # Session 379: UNUSED. The {analytical_framework} INPUT block was removed
+        # from the writer prompt after two A/Bs on Ps 27 showed no capability
+        # difference. The parameter stays because MasterEditorV2.write_commentary
+        # (the inherited caller) still passes it by keyword, and it feeds the V2/V3
+        # prompts in src/agents/archive/. Do not read it here.
         analytical_framework: str,
         reader_questions: str,
         is_college: bool = False  # Kept for backward compat — ignored in V4
@@ -1055,95 +1158,10 @@ class MasterEditor(MasterEditorV2):
             research_bundle=research_bundle,
             phonetic_section=phonetic_section,
             curated_insights=insights_text,
-            analytical_framework=analytical_framework,
             reader_questions=reader_questions
         )
 
-        # Splice cross-verse observations (Session 347 synthesis-discovery sidecar)
-        # as a new INPUT block right before ANALYTICAL FRAMEWORK. Only fires when
-        # write_commentary received synthesis_discovery_file pointing at content.
-        # Default path (flag off / file missing) leaves the prompt byte-identical.
-        cross_verse = getattr(self, '_cross_verse_observations', None)
-        if cross_verse:
-            # Session 378: the anchor is now a FALLBACK CHAIN. It used to be the
-            # ANALYTICAL FRAMEWORK header alone, and a missing anchor only logged a
-            # warning — so any prompt variant that removed that header silently
-            # dropped this whole block (~$1.50/psalm of synthesis discovery on Ps 27)
-            # while looking like it had only removed the framework. That is a
-            # two-variable arm masquerading as one. READER QUESTIONS immediately
-            # follows the framework, so both anchors put the observations in the same
-            # place relative to every block that exists in both variants, and prompts
-            # that still carry the framework header are byte-identical to before.
-            anchors = (
-                "### ANALYTICAL FRAMEWORK (poetic conventions reference)",
-                "### READER QUESTIONS (initial questions)",
-            )
-            anchor = next((a for a in anchors if a in prompt), None)
-            if anchor is None:
-                self.logger.warning(
-                    "Found none of the cross-verse splice anchors in the writer "
-                    f"prompt ({', '.join(a[:32] for a in anchors)}) — skipping "
-                    "cross-verse observations splice"
-                )
-            else:
-                # Session 371: the two guards below used to read "do NOT structure
-                # your commentary around them" and a blanket "CONJECTURE must be
-                # presented as conjecture." On Ps 71 that combination suppressed the
-                # single most explanatory idea in the dossier — that the psalm is an
-                # old poet's anthology, and that its own v.14 vow ("I will add upon
-                # all Your praise") is enacted by that method of composition. Opus 4.8
-                # ignored both guards and built its essay on it (the author's favourite
-                # insight in any Ps 71 essay); Opus 5, which follows instructions more
-                # literally, obeyed them and left the idea in a single hedged verse
-                # note. The guards were aimed at slavish list-following, but they read
-                # as a ban on promotion. Rewritten to forbid the checklist while
-                # explicitly permitting ONE observation to carry the essay, and to
-                # scope conjecture-hedging to the inference rather than the facts.
-                observations_block = (
-                    "### CROSS-VERSE OBSERVATIONS "
-                    "(additional input — and promote the best one if it earns it)\n"
-                    "These are cross-verse patterns surfaced by a dedicated discovery "
-                    "pass over this same dossier. They are ADDITIONAL INPUT, not "
-                    "overriding instruction, and they are NOT a checklist to march "
-                    "through: weave in what serves the prose, demote what does not, "
-                    "and let your own reading of the psalm govern.\n\n"
-                    "**But do not under-use them either.** If one of these observations "
-                    "is the best explanatory idea available for this psalm — the one "
-                    "that makes the most of the poem intelligible at once — then it "
-                    "SHOULD carry your essay. Take it, make it your own, and build the "
-                    "governing argument on it. A first-rate structural idea left in a "
-                    "verse note while the essay runs on something weaker is the worse "
-                    "outcome.\n\n"
-                    "Only one idea can be the essay's SPINE — that is STAGE 1's "
-                    "single-governing-argument rule and it is unchanged. But that "
-                    "limits *spines*, not how much of this material the essay may "
-                    "use. Any number of these observations can serve as the essay's "
-                    "evidence, its turns, or its close, and several of them bearing on "
-                    "one argument is exactly what a cumulative essay looks like. Use "
-                    "as many as genuinely earn their place; leave the rest to the "
-                    "verse commentary. There is no quota — the quality bar does the "
-                    "limiting.\n\n"
-                    "Each observation has been evidence-honesty-calibrated; keep its "
-                    "phrasing strength as you find it (do not promote \"echoes\" to "
-                    "\"verbatim,\" or \"consonantal play\" to \"the same word\").\n\n"
-                    "**Confidence: CONJECTURE marks the INFERENCE, not the facts "
-                    "underneath it.** Hedge the interpretive leap ('perhaps,' 'may "
-                    "explain,' 'suggests'); state the established facts it rests on — "
-                    "the borrowings, the parallels, the counts — plainly, as fact. A "
-                    "conjectural reading is NOT disqualified from carrying an essay: "
-                    "an argued \"here is what I think this poem is doing, and here is "
-                    "why\" is exactly what the essay is for. What is forbidden is "
-                    "presenting the inference as settled.\n\n"
-                    "Phrase coverage, RULE 7b (no false profundity), RULE 8 (no "
-                    "manufactured significance), and the dinner-party register all "
-                    "still apply with full force.\n\n"
-                    f"{cross_verse}\n\n"
-                )
-                prompt = prompt.replace(anchor, observations_block + anchor)
-                self.logger.info(
-                    f"Spliced cross-verse observations block ({len(cross_verse):,} chars) "
-                    f"into writer prompt before '{anchor}'"
-                )
+        prompt = self._splice_cross_verse_observations(prompt)
 
         # Strip all question-related sections when no questions are provided
         if reader_questions == "[No reader questions provided]" or not reader_questions.strip():

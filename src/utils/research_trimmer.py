@@ -29,6 +29,44 @@ class ResearchTrimmer:
         """Return list of sections removed during last trim operation."""
         return self._sections_removed
 
+    # Session 66 put a prose "Analytical Framework for Biblical Poetry" section into
+    # every research bundle; Session 257 stopped generating it, having found the writer
+    # was reading the whole thing twice. But 54 bundle files already on disk still carry
+    # the old ~26k-char copy — 34 of them canonical psalm_NNN_research_v2.md dossiers
+    # (psalms 1-34), the rest trimmed copies and legacy test/rerun dirs — so a WRITER-ONLY
+    # re-run on one of those feeds it straight back in through the dossier — 2.6x the
+    # size of the block Session 379 removed from the prompt, and invisible unless you
+    # read the bundle. Session 378 hit this on Ps 27 and had to strip it by hand before
+    # its A/B measured anything. A full pipeline re-run regenerates the bundle without
+    # it; this makes the old bundles behave the same way.
+    ANALYTICAL_FRAMEWORK_HEADING = "## Analytical Framework for Biblical Poetry"
+
+    def strip_analytical_framework(self, research_bundle: str) -> str:
+        """Remove the legacy inline analytical-framework section from a bundle.
+
+        Strips from the heading up to the next top-level (``#`` or ``##``) heading,
+        or to the end of the bundle if it is the last section. Bundles generated
+        since Session 257 do not contain it and are returned unchanged.
+        """
+        start = research_bundle.find(self.ANALYTICAL_FRAMEWORK_HEADING)
+        if start == -1:
+            return research_bundle
+
+        # Next top-level heading. '#{1,2} ' cannot match '### ' (third char is '#'),
+        # so sub-headings inside the framework section do not end it.
+        match = re.compile(r"^#{1,2} ", re.M).search(
+            research_bundle, start + len(self.ANALYTICAL_FRAMEWORK_HEADING)
+        )
+        end = match.start() if match else len(research_bundle)
+
+        stripped = research_bundle[:start] + research_bundle[end:]
+        self.logger.info(
+            f"Stripped legacy analytical framework section from research bundle "
+            f"({end - start:,} chars) — it is supplied to the agents that want it "
+            f"via RAGManager, and the writer prompt no longer carries it at all"
+        )
+        return stripped
+
     def trim_bundle(self, research_bundle: str, max_chars: int = 400000) -> Tuple[str, bool, bool]:
         """
         Intelligently trim research bundle to fit within token limits.
@@ -51,8 +89,15 @@ class ResearchTrimmer:
         self._sections_removed = []
         deep_research_removed = False
         needs_gemini_fallback = False
+
+        # Session 379: strip the legacy analytical-framework section BEFORE the size
+        # check below, which returns early on any bundle under the limit — i.e. on
+        # every real bundle (~226k against a 350k ceiling), so anything placed after
+        # it would never run.
+        research_bundle = self.strip_analytical_framework(research_bundle)
+
         original_size = len(research_bundle)
-        
+
         if original_size <= max_chars:
             return research_bundle, deep_research_removed, needs_gemini_fallback
             

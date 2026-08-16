@@ -161,13 +161,6 @@ class MasterEditorSI(MasterEditor):
         if insights_file and insights_file.exists():
             curated_insights = self._load_json_file(insights_file)
 
-        try:
-            from src.agents.rag_manager import RAGManager
-            rag_manager = RAGManager("docs")
-            analytical_framework = rag_manager.load_analytical_framework()
-        except Exception:
-            analytical_framework = "[Analytical framework not available]"
-
         phonetic_section = self._format_phonetic_section(micro_analysis)
 
         reader_questions = "[No reader questions provided]"
@@ -197,7 +190,9 @@ class MasterEditorSI(MasterEditor):
             psalm_text=psalm_text,
             phonetic_section=phonetic_section,
             curated_insights=curated_insights,
-            analytical_framework=analytical_framework,
+            # Session 379: the framework block is gone from the writer prompt and
+            # this override ignores the value, so nothing is loaded for it any more.
+            analytical_framework="",
             reader_questions=reader_questions,
             is_college=False
         )
@@ -211,6 +206,10 @@ class MasterEditorSI(MasterEditor):
         psalm_text: str,
         phonetic_section: str,
         curated_insights: Dict,
+        # Session 379: UNUSED — see MasterEditor._perform_writer_synthesis. The SI
+        # prompt is derived from V4 by a .replace() that does not touch the INPUTS,
+        # so removing the block from V4 removed it here too. Still accepted because
+        # MasterEditorV2.write_college_commentary passes it by keyword.
         analytical_framework: str,
         reader_questions: str,
         is_college: bool = False  # Kept for backward compat — ignored in V4
@@ -235,45 +234,15 @@ class MasterEditorSI(MasterEditor):
             research_bundle=research_bundle,
             phonetic_section=phonetic_section,
             curated_insights=insights_text,
-            analytical_framework=analytical_framework,
             reader_questions=reader_questions,
             special_instruction=self.special_instruction or "[No special instruction provided]"
         )
 
-        # Splice cross-verse observations (Session 347 synthesis-discovery sidecar)
-        # Mirrors the splice in MasterEditor._perform_writer_synthesis.
-        cross_verse = getattr(self, '_cross_verse_observations', None)
-        if cross_verse:
-            anchor = "### ANALYTICAL FRAMEWORK (poetic conventions reference)"
-            if anchor not in prompt:
-                self.logger.warning(
-                    "Could not find ANALYTICAL FRAMEWORK anchor in SI writer prompt — "
-                    "skipping cross-verse observations splice"
-                )
-            else:
-                observations_block = (
-                    "### CROSS-VERSE OBSERVATIONS "
-                    "(use where they fit; do NOT structure your commentary around them)\n"
-                    "These are cross-verse patterns surfaced by a dedicated discovery "
-                    "pass over this same dossier. They are ADDITIONAL INPUT, not "
-                    "overriding instruction. The writer retains full authorial "
-                    "discretion: weave in what serves the prose, demote what does "
-                    "not, and let your own reading of the psalm govern the structure. "
-                    "Each observation has already been evidence-honesty-calibrated; "
-                    "keep its phrasing strength as you find it (e.g., do not promote "
-                    "\"echoes\" to \"verbatim,\" or \"consonantal play\" to \"the same "
-                    "word\"). Observations marked **Confidence: CONJECTURE** must be "
-                    "presented as conjecture in the prose ('perhaps,' 'may explain,' "
-                    "'suggests') — never as established fact. Phrase coverage, RULE 7b "
-                    "(no false profundity), RULE 8 (no manufactured significance), and "
-                    "the dinner-party register all still apply with full force.\n\n"
-                    f"{cross_verse}\n\n"
-                )
-                prompt = prompt.replace(anchor, observations_block + anchor)
-                self.logger.info(
-                    f"Spliced cross-verse observations block ({len(cross_verse):,} chars) "
-                    "into SI writer prompt before ANALYTICAL FRAMEWORK"
-                )
+        # Splice cross-verse observations (Session 347 synthesis-discovery sidecar).
+        # Session 379: this used to be a hand-copied duplicate of the MasterEditor
+        # splice and had drifted from it twice — the old single anchor, and the
+        # pre-Session-371 guidance. Now inherited, so one edit covers both pipelines.
+        prompt = self._splice_cross_verse_observations(prompt, label="SI writer")
 
         # Save prompt for debugging
         prompt_file = Path(f"output/debug/{debug_prefix}_prompt_psalm_{psalm_number}.txt")
