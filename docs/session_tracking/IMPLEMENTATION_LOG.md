@@ -9,6 +9,86 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 381 (2026-09-10): Every quoted Hebrew line had been printing its own full stop at the head of the sentence
+
+**Trigger**: the author, on the Psalm 74 DOCX — *"have a look at the docx output for ps 74. for quotations, the hebrew punctuation is usually at the beginning rather than the end of the sentence. please fix."*
+
+**Session cost: $0. No API call was made.**
+
+---
+
+### The bug
+
+`DocumentGenerator._segment_by_script` walks text character by character and puts every non-Hebrew character into an LTR run. On a line that is *nothing but* quoted Hebrew — a poem line, a piyyut colon, a liturgical clause — that splits the sentence's own terminal `.` / `,` / `;` / `?` off into its own LTR run.
+
+Word's bidi engine then resolves that mark at the **paragraph's LTR level** and draws it at the **right edge** of the RTL island. The right edge of an RTL island is where its **first** word sits. So the mark prints against the head of the sentence and reads as if it opened it.
+
+`_add_primarily_hebrew_line` has documented this exact hazard since it was written — *"segmenting it in an LTR paragraph would split the punctuation into its own LTR run and make Word reorder the cola as separate islands"* — but it only fires on lines carrying a **sof-pasuq**, and **not one** of the affected lines has one. The guard existed and the traffic went around it.
+
+### Word's own measurement API lies about bidi order
+
+The first two rounds of diagnosis used Word COM's `Range.Information(wdHorizontalPositionRelativeToTextBoundary)` against the delivered `Documents/Psalm study guide/Psalm 74.docx`. It is a **caret** position, not a glyph position:
+
+- it reported the comma on the **correct** (left) side of a Hebrew word in a case the rendering proves is drawn on the right;
+- it reported the **first character of every paragraph** at the left margin regardless of direction;
+- in a controlled two-variant probe it gave near-identical numbers for two variants that in fact render on opposite sides.
+
+Screenshots of the rendered page were tried next and were **not decisive** either — Hebrew glyph order cannot be read reliably off an image at page zoom.
+
+**Ground truth came from the PDF.** `ExportAsFixedFormat` the DOCX through Word, inflate the content streams with `zlib`, and read the `Tm` / `Td` / `TJ` operators directly (~40 lines of pure Python, $0). Hebrew and Latin runs carry different font resources, so "which side is the mark on" becomes a coordinate comparison rather than a judgement:
+
+| Psalm 74 p.18 y=416.76 | Hebrew run | the period |
+|---|---|---|
+| before | `/F4` x=108.05 | `/F9` **x=155.83** — a separate run, to the RIGHT |
+| after  | `/F4` x=108.05 | glyph `0011`, the run's **leading** glyph |
+
+That is Amichai's `בְּעֶרֶב שַׁבָּת.`: the period was printing after `בְּעֶרֶב`, the first word, not after `שַׁבָּת`, the last. The same read found the other four: p.18 y=386.28 (`?` at x=207.91), p.26 y=249.43 and y=234.07 (`,`), p.26 y=218.47 (`.`).
+
+### The first draft was broader than the bug and broke ordinary prose
+
+The rule *"Hebrew present, no Latin letters → one RTL run"* is right about a **line** and wrong about a **markdown fragment**. `_process_markdown_formatting` splits on emphasis before anything else, so a line of ordinary English prose that glosses a Hebrew term inside parentheses yields a Latin-free fragment consisting of the parenthesised Hebrew plus the English sentence's following comma. Treating *that* as a quoted Hebrew line drags the English comma inside the RTL run, where it renders in front of the opening parenthesis. A clean regression on a real bug, introduced by the fix for it.
+
+It was caught by instrumenting `_segment_by_script` and **building all 75 rebuildable guides for real** ($0), then diffing old-vs-new over the **13,892 unique fragments** the build actually passes it.
+
+A first regression harness that fed **raw markdown lines** to the segmenter reported **1,674 changed lines** and was simply wrong: it swallowed the `>` and `*` markers that `_collect_quote_block` and `_process_markdown_formatting` strip before the segmenter ever sees them. **Roughly 6x too many.** The lesson is that the harness must call the code the way production calls it.
+
+### The fix
+
+New `DocumentGenerator._is_hebrew_only_line(text)` — Hebrew present, not one Latin letter. Markdown emphasis markers and the Hebrew's own punctuation are not Latin letters, so a fully italicised quote line still answers True.
+
+The verdict is taken **once per line** and handed down as `hebrew_line=` through `_add_inline_runs` and `_add_formatted_content` to `_segment_by_script`, which then emits the fragment as one RTL run with the punctuation inside it (leading and trailing whitespace stay outside).
+
+`_add_paragraph_with_soft_breaks` needed separate care: it splits on emphasis **before** it splits on newlines, so the loop variable named `line` is a fragment, not a line. The verdict is taken at the top of the method instead, and a test asserts the fragment-level call does not reappear there.
+
+**Mixed prose is deliberately out of scope.** There the mark after a Hebrew term belongs to the **English** sentence — 139 such spots in Psalm 74 alone — and the island's right edge is exactly where an English reader expects it. Those runs come out byte-identical.
+
+### Verification — a matched A/B, not a before/after against the delivered file
+
+The delivered `Psalm 74.docx` (17 Aug) predates the current markdown; its intro wording already differs. It is **not a control**. The control was built from the same inputs with the generator patched so `_is_hebrew_only_line` always returns False, which exactly reproduces the pre-session behaviour.
+
+Both exported to PDF and diffed at the text-operator level:
+
+- **31 pages both** — no reflow.
+- **Only pages 18 and 26 differ** — the two pages carrying quoted Hebrew blocks.
+- **6 lines repaired** on those pages (5 terminal marks plus an ellipsis that had been drawn in a symbol font at the right edge).
+- Every other delta on those two pages is a **~1-2pt vertical shift**, from the punctuation joining the 13pt Hebrew run instead of a 12pt Latin one.
+- The inline-prose case (p.18 y=564.41, the Malbim gloss) is **byte-identical**.
+
+Corpus-wide, from the instrumented 75-guide build: **271 lines repaired across 28 guides**. Worst: Ps 18 (24), Ps 17 (23), Ps 14 (21), Ps 13 (18). Psalm 74: 6.
+
+**169 tests pass** (156 + 13 new in `tests/test_hebrew_line_punctuation.py`). Three of the new tests are structural: they read the source to assert the verdict is taken before the emphasis split, that the soft-break path never asks it of a fragment, and that a hardcoded true verdict appears at **no** call site.
+
+`output/psalm_74/psalm_074_commentary.docx` regenerated via `run_docx_only.py 74` ($0).
+
+### Watch
+
+- **The delivered guides in `Documents/Psalm study guide/` are stale** — 28 of them would change. `run_docx_only.py N` re-renders at $0. The delivered `Psalm 74.docx` was **left alone on purpose** (it may carry the author's annotations); only the pipeline's own `output/psalm_74/` copy was regenerated.
+- The verdict keys on **Latin letters**, so a quoted Hebrew line carrying a siglum (`MT`, `LXX`, `4QPs`) falls back to the old behaviour. None in the corpus today.
+- `combined_document_generator.py` does **not** have this fix. It is already documented (S353) as retired and still on the legacy reverse+LRO bidi path; if it is ever revived this belongs in the port list.
+- Inline Hebrew inside English prose is unchanged by design. If the author wants those marks moved to the far side of the Hebrew too, that is a **different rule** — it puts the comma next to the preceding English word, and it would touch 139 spots in Ps 74 alone.
+
+---
+
 ## Session 380 (2026-08-15): The research bundle had been cutting 23% of every commentary entry at 400 chars — and the superlative tic turned out to be three failures, not one
 
 **Trigger**: the author, reviewing the Psalm 73 output, with two items. (1) *"I'm seeing multiple examples of an 'LLM verbal tic' — describing something as 'the most' something. Caldereon's quote is the "the most famous soliloquy in Spanish". (really?) "Leaven is the one thing barred from the altar." (really??) "The second half is the most argued clause in the psalm" (how can you know that???) How might we approach this? in the writer? the copy editor? directly? subtly?"* (2) *"reading the thinking output there are a couple places where it mentions a commentary being cut off. what's happening there?"*

@@ -137,14 +137,56 @@ class DocumentGenerator:
     # Hebrew run carries w:rtl — exactly how the verse table and Arabic already work.
     # ------------------------------------------------------------------
     @staticmethod
-    def _segment_by_script(text: str) -> List[tuple]:
+    def _is_hebrew_only_line(text: str) -> bool:
+        """True when a whole LINE is quoted Hebrew — Hebrew letters and not one Latin one.
+
+        Markdown emphasis markers (`*`, `_`, backtick) and the punctuation the Hebrew
+        brought with it are not Latin letters, so a fully italicised quote line still
+        answers True. Callers must pass the WHOLE line: the test is meaningless on a
+        markdown fragment, because splitting `the lot (גּוֹרָל), and` on its emphasis
+        markers yields a Latin-free fragment out of a line that is ordinary English prose.
+        """
+        return bool(re.search(r'[֐-׿]', text)) and not re.search(r'[A-Za-z]', text)
+
+    @staticmethod
+    def _segment_by_script(text: str, hebrew_line: bool = False) -> List[tuple]:
         """Split text (kept in LOGICAL order — NOT reversed) into [(segment, is_hebrew), ...].
 
         Whitespace / maqqef / ASCII-hyphen that sits *between* two Hebrew words is glued
         into the Hebrew segment, so a multi-word Hebrew phrase becomes a single RTL run
-        (and a trailing space before English correctly stays with the English run)."""
+        (and a trailing space before English correctly stays with the English run).
+
+        `hebrew_line` says the caller's whole LINE is quoted Hebrew (see
+        `_is_hebrew_only_line`), and then the fragment is emitted as ONE RTL run with its
+        own punctuation inside it. Splitting the trailing `.` / `,` / `;` / `?` into its
+        own LTR run — which is what the character walk below does — makes Word's bidi
+        engine resolve that mark at the paragraph's LTR level and park it at the RIGHT edge
+        of the island, hard against the line's FIRST word, so it reads as if it OPENED the
+        sentence instead of closing it. Measured in Word's own PDF output: Amichai's
+        `בְּעֶרֶב שַׁבָּת.` drew its Hebrew at x=108.05 and its period at x=155.83 — after
+        `בְּעֶרֶב`, not after `שַׁבָּת`. 502 such lines across 38 finished guides.
+
+        Same reasoning `_add_primarily_hebrew_line` already documents for verse headers;
+        that path only fires on lines carrying a sof-pasuq, and not one of the 502 has one.
+        MIXED prose is deliberately left alone: there the mark after a Hebrew term is the
+        ENGLISH sentence's own (`אֱלֹקִים, "God"`), and the island's right edge is exactly
+        where an English reader expects it."""
         def is_heb(c: str) -> bool:
             return '֐' <= c <= '׿'
+
+        if hebrew_line:
+            stripped = text.strip()
+            if stripped and DocumentGenerator._is_hebrew_only_line(stripped):
+                lead = text[:len(text) - len(text.lstrip())]
+                trail = text[len(text.rstrip()):]
+                segs: List[tuple] = []
+                if lead:
+                    segs.append((lead, False))
+                segs.append((stripped, True))
+                if trail:
+                    segs.append((trail, False))
+                return segs
+
         GLUE = {' ', ' ', '־', '-'}  # space, nbsp, maqqef, ASCII hyphen
         APOS = {"'", "’"}  # ASCII / curly apostrophe used as a Hebrew abbreviation mark
         n = len(text)
@@ -192,14 +234,16 @@ class DocumentGenerator:
             szCs.set(ns.qn('w:val'), str(int(font_size * 2)))
 
     def _add_inline_runs(self, paragraph, text: str, *, bold: bool = False, italic: bool = False,
-                          set_font: bool = False, font_name: str = 'Aptos', font_size: int = 12):
+                          set_font: bool = False, font_name: str = 'Aptos', font_size: int = 12,
+                          hebrew_line: bool = False):
         """Add `text` to `paragraph`, emitting Hebrew as native RTL runs (logical order)
         and everything else as ordinary LTR runs.
 
         This is the single funnel that all prose/markdown code paths use for mixed
         Hebrew/English text. `text` must already have divine-name modification applied.
+        `hebrew_line` is the caller's whole-line verdict — see `_segment_by_script`.
         """
-        for seg_text, is_heb in self._segment_by_script(text):
+        for seg_text, is_heb in self._segment_by_script(text, hebrew_line=hebrew_line):
             if not seg_text:
                 continue
             run = paragraph.add_run(seg_text)
@@ -1248,6 +1292,10 @@ class DocumentGenerator:
             set_font: If True, explicitly set Aptos 12pt font on all runs (for bullet lists)
         """
         modified_text = self.modifier.modify_text(text)
+        # The whole-line verdict is taken HERE, before the emphasis split, and handed down.
+        # Taking it per fragment instead would fire on the Latin-free `(גּוֹרָל), ` that
+        # falls out of splitting a line of ordinary English prose.
+        hebrew_line = self._is_hebrew_only_line(modified_text)
         # Match bold (**...**) and italic (*...*) patterns
         # Order matters: match ** before * to avoid incorrect splits
         parts = re.split(r'(\*\*.*?\*\*|__.*?__|\*.*?\*|_.*?_|`.*?`)', modified_text)
@@ -1258,23 +1306,27 @@ class DocumentGenerator:
             if part.startswith('**') and part.endswith('**'):
                 # Bold text - recursively process inner content for nested formatting
                 inner_content = part[2:-2]
-                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
+                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False,
+                                            set_font=set_font, hebrew_line=hebrew_line)
             elif part.startswith('__') and part.endswith('__'):
                 # Bold text - recursively process inner content for nested formatting
                 inner_content = part[2:-2]
-                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False, set_font=set_font)
+                self._add_formatted_content(paragraph, inner_content, bold=True, italic=False,
+                                            set_font=set_font, hebrew_line=hebrew_line)
             elif (part.startswith('*') and part.endswith('*')) or \
                  (part.startswith('_') and part.endswith('_')):
-                self._add_inline_runs(paragraph, part[1:-1], italic=True, set_font=set_font)
+                self._add_inline_runs(paragraph, part[1:-1], italic=True, set_font=set_font,
+                                      hebrew_line=hebrew_line)
             elif part.startswith('`') and part.endswith('`'):
                 inner_content = part[1:-1]
                 self._add_nested_formatting(paragraph, inner_content, base_italic=True)
                 # Note: nested formatting handles its own font settings
             else:
                 # Mixed Hebrew/English prose: native RTL runs (logical order, no reversal).
-                self._add_inline_runs(paragraph, part, set_font=set_font)
+                self._add_inline_runs(paragraph, part, set_font=set_font, hebrew_line=hebrew_line)
 
-    def _add_formatted_content(self, paragraph, text, bold=False, italic=False, set_font=False):
+    def _add_formatted_content(self, paragraph, text, bold=False, italic=False, set_font=False,
+                               hebrew_line=False):
         """
         Add text content with specified formatting, recursively processing any nested markdown.
         This handles cases like **bold (*italic inside bold*)**.
@@ -1285,6 +1337,7 @@ class DocumentGenerator:
             bold: Whether the text should be bold
             italic: Whether the text should be italic
             set_font: If True, explicitly set Aptos 12pt font
+            hebrew_line: The caller's whole-line verdict — see _segment_by_script
         """
         # Check if there's nested formatting to process
         if '*' in text or '_' in text or '`' in text:
@@ -1295,10 +1348,12 @@ class DocumentGenerator:
                     continue
                 if part.startswith('*') and part.endswith('*') and not part.startswith('**'):
                     # Nested italic
-                    self._add_inline_runs(paragraph, part[1:-1], bold=bold, italic=True, set_font=set_font)
+                    self._add_inline_runs(paragraph, part[1:-1], bold=bold, italic=True, set_font=set_font,
+                                          hebrew_line=hebrew_line)
                 elif part.startswith('_') and part.endswith('_') and not part.startswith('__'):
                     # Nested italic
-                    self._add_inline_runs(paragraph, part[1:-1], bold=bold, italic=True, set_font=set_font)
+                    self._add_inline_runs(paragraph, part[1:-1], bold=bold, italic=True, set_font=set_font,
+                                          hebrew_line=hebrew_line)
                 elif part.startswith('`') and part.endswith('`'):
                     # Nested backtick - process with _add_nested_formatting but apply bold too
                     inner_content = part[1:-1]
@@ -1318,14 +1373,19 @@ class DocumentGenerator:
                             run.font.size = Pt(12)
                 else:
                     # Regular text with base formatting (native RTL runs, logical order).
-                    self._add_inline_runs(paragraph, part, bold=bold, italic=italic, set_font=set_font)
+                    self._add_inline_runs(paragraph, part, bold=bold, italic=italic, set_font=set_font,
+                                          hebrew_line=hebrew_line)
         else:
             # No nested formatting - native RTL runs (logical order).
-            self._add_inline_runs(paragraph, text, bold=bold, italic=italic, set_font=set_font)
+            self._add_inline_runs(paragraph, text, bold=bold, italic=italic, set_font=set_font,
+                                  hebrew_line=hebrew_line)
 
     def _add_paragraph_with_soft_breaks(self, text: str, style: str = 'Normal', is_verse_header: bool = False):
         """Adds a single paragraph, treating newlines as soft breaks, with nested formatting support."""
         modified_text = self.modifier.modify_text(text)
+        # One verdict for the whole paragraph — see the call site far below for why it
+        # cannot be taken per fragment here.
+        hebrew_line = self._is_hebrew_only_line(modified_text)
 
         # Check for long bare Hebrew segments — render as standalone RTL block
         split = self._split_long_hebrew_block(modified_text)
@@ -1407,7 +1467,13 @@ class DocumentGenerator:
                 lines = content.split('\n')
                 for i, line in enumerate(lines):
                     if line:
-                        self._add_inline_runs(p, line, bold=is_bold, italic=is_italic)
+                        # `line` here is a MARKDOWN FRAGMENT of a soft-break line, not a
+                        # line, because this method splits on emphasis before it splits on
+                        # newlines — so the verdict is taken once on the whole paragraph
+                        # above. Asking it of the fragment would answer True for the
+                        # Latin-free ` (בְּרִנָּה)` in `- B': with *rinah* (בְּרִנָּה)`.
+                        self._add_inline_runs(p, line, bold=is_bold, italic=is_italic,
+                                              hebrew_line=hebrew_line)
                     if i < len(lines) - 1:
                         p.add_run().add_break()
 
@@ -1791,7 +1857,8 @@ Methodological & Bibliographical Summary
                             sep.font.name = 'Aptos'
                 else:
                     # Fallback: couldn't parse pairs — render the raw Hebrew value as-is.
-                    self._add_inline_runs(p2, value.strip())
+                    self._add_inline_runs(p2, value.strip(),
+                                          hebrew_line=self._is_hebrew_only_line(value))
                 return
 
             p = self.document.add_paragraph(style='SummaryText')
