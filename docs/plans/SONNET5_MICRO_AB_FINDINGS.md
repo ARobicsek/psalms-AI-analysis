@@ -4,14 +4,56 @@
 was reverted; `MicroAnalystV2.DEFAULT_MODEL` remains `claude-sonnet-4-6`. This doc preserves the
 data so the decision doesn't have to be re-derived.
 
+> ## Session 382 (2026-09-17) — RE-TESTED ON PS 76. VERDICT UNCHANGED, TWO NUMBERS BELOW ARE DEAD.
+>
+> Re-opened not because anyone doubted this A/B but because its **pricing basis expired**: on
+> **2026-08-10 Anthropic made Sonnet 5's $2/$10 permanent and cancelled the 2026-09-01 increase to
+> $3/$15**. Every "standard $3/$15" figure in this doc is now **unreachable** — read only the intro
+> column, which is simply the price.
+>
+> **The Ps 65 cost deltas do NOT generalise, and that is the headline.** This doc's Decision section
+> puts the `max` premium at "+$0.22/psalm (intro)". On **Ps 76 it was +$0.68** at that same rate
+> (+128%, $0.5298 -> $1.2079). Do not quote a per-psalm premium from one psalm again.
+>
+> | Ps 76 | 4.6 | S5 `max` | S5 `xhigh` |
+> |---|--:|--:|--:|
+> | cost | $0.5298 | $1.2079 `+128%` | $0.3447 `-35%` |
+> | wall clock | — | 26.6 min | 6.4 min |
+> | output tokens | 30,841 | 114,932 `+273%` | 29,604 `-4%` |
+> | **JSON bytes** | **37,045** | **36,951 `-0%`** | **27,523 `-26%`** |
+> | lexical insights | 29 | 51 `+76%` | 43 `+48%` |
+> | lexical detail (ch) | 16,637 | 15,826 `-5%` | 11,277 `-32%` |
+> | figurative flags | 27 | 26 `-4%` | **11 `-59%`** |
+>
+> Three things Ps 65 could not show:
+> 1. **`max` buys thinking, not content.** 114,932 output tokens produced a *marginally smaller*
+>    JSON than 30,841 did. `budget_tokens` is gone, so at `max` adaptive thinking is uncappable —
+>    a 0% content return on a +273% token spend.
+> 2. **The insight count is re-cutting, not new ground.** Classified against 4.6's phrase coverage,
+>    **73% of `max`'s 51 insights re-cut ground 4.6 already covered** (81% at `xhigh`). That is why
+>    insights rise 76% while lexical detail falls 5%. It confirms this doc's own diagnosis that
+>    Sonnet 5 "defaults terse": more entries, each thinner.
+> 3. **`xhigh` collapses the FIGURATIVE axis, 27 -> 11.** The table below has `—` in that cell, so
+>    this is new. It is structural, not a parse failure: per-verse counts are
+>    `[0,1,1,1,1,1,1,0,1,1,1,1,1]` — floor-level compliance at one flag per verse, against 4.6's 2–3.
+>
+> **Ps 65's headline did NOT replicate**: `max` doubled figurative flags there (13 -> 27), flat here
+> (27 -> 26). Treat this doc's *quality* deltas as Ps-65-specific too, not just its costs.
+>
+> Full record, both arms, scripts and the per-find quality read:
+> `archive/psalm_76_S382_micro_sonnet5_ab/`. Session spend $1.5526.
+
 ## Question
 Should the micro agent (`src/agents/micro_analyst.py`, the only Sonnet user in the pipeline —
 2 LLM calls/psalm: Stage 1 discovery + Stage 2 research-request generation) move from
 Sonnet 4.6 to Sonnet 5, assuming "high or greater" thinking?
 
-## Pricing facts (as of 2026-07-01)
-- **Sonnet 4.6**: $3 / $15 per 1M (input/output). Same as Sonnet 4.5.
-- **Sonnet 5**: **$3 / $15 standard**, but **intro $2 / $10 through 2026-08-31**. New tokenizer
+## Pricing facts (as of 2026-07-01 — SUPERSEDED, see the Session 382 box above)
+- **Sonnet 4.6**: $3 / $15 per 1M (input/output). Same as Sonnet 4.5. *(still correct)*
+- **Sonnet 5**: **$3 / $15 standard**, but **intro $2 / $10 through 2026-08-31**.
+  **WRONG AS OF 2026-08-10**: $2 / $10 is now the permanent standard price and the scheduled
+  increase was cancelled, so Sonnet 5 is permanently 33% cheaper on output than Sonnet 4.6.
+  Every "@ standard ($3/$15)" row below is unreachable. New tokenizer
   (Opus-4.7 family) emits ~30% more tokens for the same text *on average* — but see the empirical
   result below: on this Hebrew/Greek/structured-text workload, **input was essentially flat**, not +30%.
 
@@ -70,13 +112,21 @@ Baseline = the Sonnet 4.6 last production run (`output/psalm_65/psalm_065_cost.j
 - Net: S5-`max` is a better **scout** (breadth + connections), a slightly weaker **essayist** (per-item depth).
 
 ## Decision & recommendation
-- **Not adopted.** No clear win: the cheap setting (`xhigh`) is thinner; the rich setting (`max`)
-  is pricier than 4.6. The `max` premium is small in absolute terms — **+$0.22/psalm (intro) or
-  +$0.71/psalm (standard)**, ~$33–107 across all 150 (one-time corpus) — and arguably feeds better
-  raw material to the writer, but it is *not* a cost win, which is what triggered the investigation.
+- **Not adopted**, and Session 382 re-confirmed it on Ps 76 under permanent pricing. No clear win:
+  the cheap setting (`xhigh`) is thinner; the rich setting (`max`) is pricier than 4.6.
+  **The per-psalm premium quoted here is Ps-65-only — do not reuse it.** It was measured at
+  **+$0.22/psalm (intro)**; on Ps 76 the same setting at the same rate cost **+$0.68/psalm**, 3x
+  more. The `+$0.71/psalm (standard)` figure is dead pricing. What survives across both psalms is
+  the *shape*: `max` is not a cost win, which is what triggered the investigation.
 - **If revisited**, two untested levers could get 4.6-level per-item depth at `xhigh`'s lower cost:
   1. A model-gated nudge to the shared `DISCOVERY_PASS_PROMPT` WRITING-DENSITY block (Sonnet 5
      follows length instructions literally and defaults terse) — must be gated so 4.6/production is unchanged.
+     **Session 382 strengthened this to the single most promising untested lever.** Every Ps 76
+     failure is terseness, not incapacity: `xhigh` still found 6 of `max`'s 14 new phrase targets —
+     including the LXX-only `πρός τὸν Ἀσσύριον`, the earliest datable link of Ps 76 to Sennacherib's
+     701 campaign, which 4.6 missed entirely — while emitting exactly one figurative flag per verse.
+     If a density instruction buys 4.6-level depth at `xhigh`'s **-35%** and 4x faster wall clock,
+     that is the win this investigation was originally looking for.
   2. Validate end-to-end: run Ps 65 full-pipeline on S5-`max` micro and diff the **published DOCX**
      (the micro stage only feeds the writer; a blind position-debiased judge à la `evaluate_novelty_ab.py`
      would give a less subjective verdict than the manual read above).

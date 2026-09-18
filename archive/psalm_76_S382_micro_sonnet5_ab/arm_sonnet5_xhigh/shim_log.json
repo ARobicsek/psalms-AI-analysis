@@ -1,0 +1,22 @@
+[
+  {
+    "stage": 1,
+    "was": {
+      "type": "enabled",
+      "budget_tokens": 32768
+    },
+    "effort_was": "max",
+    "now": {
+      "type": "adaptive"
+    },
+    "max_tokens": 128000,
+    "effort_now": "xhigh"
+  },
+  {
+    "stage": 2,
+    "was": null,
+    "now": {
+      "type": "disabled"
+    }
+  }
+]

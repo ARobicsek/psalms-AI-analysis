@@ -124,22 +124,34 @@ PRICING = {
         "cache_write": 6.25,
         "cache_write_1h": 10.00,
     },
-    # Claude Sonnet 5. NOT USED IN PRODUCTION -- added in Session 377 because its
-    # ABSENCE was the bug: `calculate_cost` falls back to an all-zeros row for an
-    # unknown model, so the shelved Sonnet-5 micro A/B (SONNET5_MICRO_AB_FINDINGS.md)
-    # would have scored its cost arm at $0.00 and nothing would have said so.
-    # These are the DURABLE rates; see INTRO_PRICING below for the promo now in
-    # effect ($2/$10 through 2026-08-31). Note for whoever revisits that A/B: the
-    # promo makes Sonnet 5 output 33% cheaper than Sonnet 4.6, which is the axis the
-    # micro analyst spends 89% of its money on -- but it expires, so a decision made
-    # on promo economics is a decision that unmakes itself on 2026-09-01.
+    # Claude Sonnet 5. WIRED BUT NOT FIRING: literary_echoes_agent.SECOND_GEN_MODEL
+    # names it and the second generator is off by default (that module documents the
+    # nine configurations that do not work). It appears in NO saved cost JSON across
+    # 33 runs. The row exists because its ABSENCE was the Session-377 bug: an unknown
+    # model fell back to an all-zeros row, so the shelved Sonnet-5 micro A/B
+    # (SONNET5_MICRO_AB_FINDINGS.md) would have scored its cost arm at $0.00.
+    #
+    # Session 382: CORRECTED from $3.00/$15.00, and this one was WRONG ON THE DAY IT
+    # WAS READ, not merely latent. The $2/$10 launch price, announced as introductory
+    # through 2026-08-31, was made PERMANENT on 2026-08-10 and the scheduled
+    # 2026-09-01 increase was CANCELLED -- Anthropic's platform pricing page carries
+    # an explicit note saying so (verified 2026-09-17). This row held the durable
+    # $3/$15 behind an INTRO_PRICING override that expired 2026-08-31, so from
+    # 2026-09-01 until this fix resolve_pricing() returned $3/$15: a 50% over-report
+    # on both axes. See INTRO_PRICING below for why "self-healing" failed here.
+    #
+    # For whoever revisits that A/B: Sonnet 5 is now PERMANENTLY 33% cheaper on output
+    # than Sonnet 4.6 ($10 vs $15), which is the axis the micro analyst spends 89% of
+    # its money on. The old comment here warned that a decision made on promo
+    # economics "unmakes itself on 2026-09-01". That is no longer true -- the promo
+    # became the price, so the cost argument for that swap is now permanent.
     "claude-sonnet-5": {
-        "input": 3.00,
-        "output": 15.00,
-        "thinking": 15.00,
-        "cache_read": 0.30,
-        "cache_write": 3.75,
-        "cache_write_1h": 6.00,
+        "input": 2.00,
+        "output": 10.00,
+        "thinking": 10.00,
+        "cache_read": 0.20,
+        "cache_write": 2.50,
+        "cache_write_1h": 4.00,
     },
     # Claude Fable 5. NOT USED IN PRODUCTION -- present for the same reason as the
     # Sonnet 5 row: an unpriced model must never report $0.
@@ -147,7 +159,26 @@ PRICING = {
         "input": 10.00,
         "output": 50.00,
         "thinking": 50.00,
-        "cache_read": 1.00,
+        "cache_read": 1.00,  # 10% of input -- Fable 5, unlike Fable 5.1 below
+        "cache_write": 12.50,
+        "cache_write_1h": 20.00,
+    },
+    # Claude Fable 5.1. NOT USED IN PRODUCTION -- added in Session 382 for the same
+    # reason as the two rows above: an unpriced model must never report $0.
+    #
+    # THE CACHE READ IS THE TRAP, AND IT BREAKS A RULE THIS FILE ENCODES EVERYWHERE
+    # ELSE. Fable 5.1 and Mythos 5.1 are the ONLY models that do not price a cache hit
+    # at 0.1x input: theirs is 0.025x, i.e. $0.25/MTok against a $10 input, and
+    # Anthropic's pricing page carries it as an explicit footnote. Session 377's
+    # test_cached_input_is_never_free asserts cache_read == 0.10 * input on EVERY row,
+    # so writing this row CORRECTLY makes that test fail. The fix belongs in the test
+    # (a named exception set), never in the row -- a $1.00 here would be a 4x
+    # over-report dressed up as passing. Verified 2026-09-17.
+    "claude-fable-5-1": {
+        "input": 10.00,
+        "output": 50.00,
+        "thinking": 50.00,
+        "cache_read": 0.25,  # 0.025x input -- NOT 10%. See above.
         "cache_write": 12.50,
         "cache_write_1h": 20.00,
     },
@@ -232,10 +263,13 @@ PRICING = {
     # cheap tier, exactly like the gemini-3.1-pro row below:
     #     short context  $2.50 in / $0.25 cached / $15.00 out   <- encoded
     #     long context   $5.00 in / $0.50 cached / $22.50 out   <- NOT encoded
-    # The boundary is not stated on OpenAI's pricing page; the model is listed with a
-    # "<272K context length" note, and the tier almost certainly trips well below
-    # that. Our only caller is the copy editor at ~29K input tokens (Ps 73), so the
-    # cheap tier is correct today. CostTracker accumulates per-model TOTALS and has
+    # Session 382 -- THE BOUNDARY IS NOW KNOWN and the old guess here was wrong in the
+    # cautious direction. The threshold is the 272K context figure itself, not "well
+    # below" it: past 272K input on a single request the input rate doubles AND the
+    # output rate goes 1.5x for the whole session. The encoded long-context figures
+    # above are confirmed correct. Our only caller is the copy editor at ~29K input
+    # tokens (Ps 73), an order of magnitude under the boundary, so the cheap tier is
+    # correct today with a wide margin. CostTracker accumulates per-model TOTALS and has
     # no per-call prompt length, so a tier cannot be applied here without pricing at
     # the call site -- if a caller ever approaches the boundary, that is the work.
     "gpt-5.4": {
@@ -275,15 +309,28 @@ PRICING = {
         "cache_write": 0.0,  # OpenAI does not charge for cache writes
         "cache_write_1h": 0.00,
     },
-    # Gemini 2.5 Pro (Google)
+    # Gemini 2.5 Pro (Google). Session 382: CORRECTED from $3.00/$12.00 with
+    # cache_read $0.30 and cache_write $3.75. Those were never Google's rates -- the
+    # two marked "(approximate)" were Anthropic-shaped guesses (10% and a 25% write
+    # markup) applied to a vendor that prices neither way. The real input rate is 40%
+    # of what we carried, i.e. the row OVER-stated input by 140%. Verified against
+    # Google's live pricing page 2026-09-17.
+    #
+    # LATENT: the only caller is synthesis_writer's liturgical-librarian path, and the
+    # model appears in NO saved cost JSON across 33 runs, so no reported figure moves.
+    # CAVEAT -- tiered by prompt length, cheap tier encoded (same shape as the
+    # gemini-3.1-pro row below):
+    #     <= 200k tokens   $1.25 in / $0.125 cached / $10.00 out   <- encoded
+    #     >  200k tokens   $2.50 in / $0.25  cached / $15.00 out   <- NOT encoded
     "gemini-2.5-pro": {
-        "input": 3.00,
-        "output": 12.00,
-        "thinking": 12.00,  # Extended thinking charged at output rate
-        "cache_read": 0.30,  # 10% of input (approximate)
-        "cache_write": 3.75,  # 25% markup (approximate)
-        # 0, not 2x input: Google prices context caching by storage-time, not by a
-        # write multiplier, so the Anthropic 1-hour row has no Gemini analogue.
+        "input": 1.25,
+        "output": 10.00,
+        "thinking": 10.00,  # Extended thinking charged at output rate
+        "cache_read": 0.125,  # 10% of input
+        # 0, not a markup: Google prices context caching by storage-time, not by a
+        # per-token write multiplier, so NEITHER Anthropic cache-write row has a
+        # Gemini analogue. Matches how gemini-3.1-pro-preview is encoded below.
+        "cache_write": 0.00,
         "cache_write_1h": 0.00,
     },
     # Gemini 3.1 Pro (Google). Verified against Google's live pricing page 2026-08-03.
@@ -318,19 +365,26 @@ PRICING = {
 # construction" survived six weeks in Session 373. Encode the durable rate and the
 # override simply STOPS APPLYING on its own. The failure mode is self-healing.
 INTRO_PRICING = {
-    # Claude Sonnet 5: $2/$10 introductory through 2026-08-31, $3/$15 from 2026-09-01.
-    # Verified against Anthropic's pricing page 2026-08-07.
-    "claude-sonnet-5": {
-        "through": date(2026, 8, 31),
-        "rates": {
-            "input": 2.00,
-            "output": 10.00,
-            "thinking": 10.00,
-            "cache_read": 0.20,
-            "cache_write": 2.50,
-            "cache_write_1h": 4.00,
-        },
-    },
+    # EMPTY as of Session 382, and the emptiness is the finding.
+    #
+    # Claude Sonnet 5's $2/$10 was announced as introductory through 2026-08-31. On
+    # 2026-08-10 Anthropic made it the STANDARD price and cancelled the scheduled
+    # 2026-09-01 increase, so the promo rate is now simply the row above and there is
+    # nothing left to override. Verified 2026-09-17: no Claude model is on
+    # introductory pricing today.
+    #
+    # KEEP THIS MECHANISM, BUT KNOW WHAT IT MISSED. The design note above reasons
+    # about ONE failure mode -- "the promo ends and the table stays cheap" -- which an
+    # expiry date heals by itself. The event that actually occurred was the mirror
+    # image: THE PROMO BECAME THE PRICE. Against that, the self-healing direction
+    # heals INTO the wrong number and then sits there silently, which is exactly what
+    # happened between 2026-09-01 and this fix, when resolve_pricing("claude-sonnet-5")
+    # returned the stale durable $3/$15.
+    #
+    # So an expiring override is only half a safeguard. The other half is a calendar
+    # obligation: WHEN AN EXPIRY PASSES, RE-CHECK THE DURABLE ROW -- do not assume the
+    # listed price resumed. An expiry that fires unattended is indistinguishable from
+    # one that fired correctly.
 }
 
 

@@ -640,7 +640,7 @@ For EACH verse:
    - The psalm is always the subject; world literature is the lens.
 
 **3. RELATIONSHIP TO INTRODUCTION:**
-   - The essay made your argument. The verse commentary is where you open the toolkit. For each verse, ask: "What can I show the reader here that the essay didn't — and couldn't without losing momentum?" Prioritize: different commentator voices, liturgical deployments, textual variants, philological surprises, concordance patterns, and figurative language parallels not mentioned in the essay. If a verse was central to the essay's argument, the commentary should add a NEW angle on it, not summarize the essay's treatment.
+   - The essay made your argument. The verse commentary is where you open the toolkit. For each verse, ask: "What can I show the reader here that the essay didn't — and couldn't without losing momentum?" Prioritize: different commentator voices, liturgical deployments, textual variants, philological surprises, concordance patterns, and figurative language parallels not mentioned in the essay. If a verse was central to the essay's argument — if its crux WAS your hinge — do not re-establish what the essay established: point back to it in a single sentence and spend the whole note on what the essay could not use. COVERAGE IS ALREADY DISCHARGED by the translation line, so passing over an argument the reader has just finished reading is not a gap; and a note that arrives at the essay's own conclusion by a second route has written the essay twice, however fresh its wording.
 
 ### STAGE 4: REFINED READER QUESTIONS
 

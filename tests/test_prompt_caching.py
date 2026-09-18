@@ -106,16 +106,51 @@ def test_every_model_the_pipeline_can_select_is_priced():
         assert resolve_pricing(model) is not None, f"{model} would be billed at $0.00"
 
 
+# Models whose cache hit is NOT 0.1x input. Anthropic prices a hit on Fable 5.1 and
+# Mythos 5.1 at 0.025x ($0.25/MTok against a $10 input) and footnotes it explicitly as
+# the sole exception; every other model on every vendor we use is 0.1x.
+#
+# This is an EXCEPTION SET, not a relaxed assertion, and the distinction is the point.
+# Session 377 wrote the 10% rule as a universal law because it was one at the time;
+# Session 382 added a correct claude-fable-5-1 row and the test failed. The tempting
+# fix -- drop the assert to "cache_read > 0" -- would have restored green while giving
+# up the check that caught the original bug. So the multiplier stays asserted exactly,
+# and a model that departs from it has to be NAMED here with its real multiplier.
+CACHE_READ_MULTIPLIER_EXCEPTIONS = {
+    "claude-fable-5-1": 0.025,
+}
+
+
 def test_cached_input_is_never_free():
     """Session 377: gpt-5.1, gpt-5.4 and gemini-3.1-pro carried cache_read = 0.0 with
-    a 'Not applicable' comment. All three vendors bill a cache hit at 10% of input,
-    so 0.0 would price a cached token at nothing the moment a caller wired it up."""
+    a 'Not applicable' comment. All three vendors bill a cache hit at a fraction of
+    input, so 0.0 would price a cached token at nothing the moment a caller wired it
+    up. Session 382: the fraction is 0.10 everywhere except the models named in
+    CACHE_READ_MULTIPLIER_EXCEPTIONS above."""
     for name, row in PRICING.items():
         if row["input"] == 0:
             continue
-        assert row["cache_read"] == pytest.approx(0.10 * row["input"]), (
-            f"{name}: cache_read {row['cache_read']} is not 10% of input {row['input']}"
+        mult = CACHE_READ_MULTIPLIER_EXCEPTIONS.get(name, 0.10)
+        assert row["cache_read"] == pytest.approx(mult * row["input"]), (
+            f"{name}: cache_read {row['cache_read']} is not {mult:.3%} of input "
+            f"{row['input']}"
         )
+
+
+def test_no_model_is_on_expired_introductory_pricing():
+    """Session 382: the Sonnet 5 promo was made PERMANENT rather than expiring, so the
+    durable row went stale and resolve_pricing() silently returned $3/$15 for 17 days.
+    An override that has already expired can no longer affect any price, so its only
+    remaining effect is to make a stale durable row LOOK deliberate. Leaving one in the
+    table is therefore never correct -- either it still applies, or the durable row it
+    was hiding has to be re-verified and the entry removed."""
+    today = date.today()
+    stale = {m: p["through"] for m, p in INTRO_PRICING.items() if p["through"] < today}
+    assert not stale, (
+        f"expired introductory pricing still in the table: {stale}. Re-verify each "
+        f"model's DURABLE row against the vendor's live pricing page before deleting "
+        f"the entry -- the promo may have become the standard price."
+    )
 
 
 def test_unpriced_model_is_reported_not_swallowed():
@@ -135,15 +170,47 @@ def test_priced_run_carries_no_unpriced_marker():
     assert "FLOOR" not in t.get_summary()
 
 
-def test_sonnet_5_intro_pricing_expires_on_its_own():
-    """The row holds the DURABLE rates and INTRO_PRICING overrides them until the
-    promo ends. Encoding it the other way round is what goes silently stale."""
-    promo_end = INTRO_PRICING["claude-sonnet-5"]["through"]
-    during = resolve_pricing("claude-sonnet-5", on_date=promo_end)
-    after = resolve_pricing("claude-sonnet-5", on_date=date(promo_end.year, 9, 1))
+def test_intro_pricing_override_expires_on_its_own(monkeypatch):
+    """Session 377's test of this mechanism was written against the live Sonnet 5
+    promo. Session 382 removed that entry -- the promo was made permanent rather than
+    expiring -- so the test is now run against a SYNTHETIC model.
+
+    That is the durable shape. A test that reaches into INTRO_PRICING for a specific
+    real model asserts two things at once: that the override mechanism works, and that
+    a particular promotion is still running. The second is a fact about Anthropic's
+    price list, it changes without warning, and when it changed this test failed for a
+    reason that had nothing to do with the mechanism it was written to protect."""
+    model = "claude-testmodel-1"
+    promo_end = date(2026, 8, 31)
+    monkeypatch.setitem(PRICING, model, {
+        "input": 3.00, "output": 15.00, "thinking": 15.00,
+        "cache_read": 0.30, "cache_write": 3.75, "cache_write_1h": 6.00,
+    })
+    monkeypatch.setitem(INTRO_PRICING, model, {
+        "through": promo_end,
+        "rates": {"input": 2.00, "output": 10.00, "thinking": 10.00,
+                  "cache_read": 0.20, "cache_write": 2.50, "cache_write_1h": 4.00},
+    })
+
+    during = resolve_pricing(model, on_date=promo_end)
+    after = resolve_pricing(model, on_date=date(2026, 9, 1))
     assert (during["input"], during["output"]) == (2.00, 10.00)
     assert (after["input"], after["output"]) == (3.00, 15.00)
-    assert after == PRICING["claude-sonnet-5"]   # no override left to apply
+    assert after == PRICING[model]   # no override left to apply
+
+
+def test_sonnet_5_is_priced_at_its_permanent_rate():
+    """Session 382, regression. Sonnet 5's $2/$10 stopped being a promotion on
+    2026-08-10 and became the standard price; the scheduled $3/$15 increase was
+    cancelled. Between 2026-09-01 and the fix, this table returned the stale durable
+    $3/$15 on every date. Pinned on a date AFTER the old expiry so that reintroducing
+    an override, or restoring the old durable row, fails here."""
+    r = resolve_pricing("claude-sonnet-5", on_date=date(2026, 9, 1))
+    assert (r["input"], r["output"]) == (2.00, 10.00)
+    assert r == PRICING["claude-sonnet-5"], "no override should apply to Sonnet 5"
+    # The cost argument that outlived the promo: cheaper on output than Sonnet 4.6,
+    # which is the axis the micro analyst spends 89% of its money on.
+    assert r["output"] < PRICING["claude-sonnet-4-6"]["output"]
 
 
 def test_intro_rates_keep_the_anthropic_cache_multipliers():

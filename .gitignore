@@ -65,6 +65,12 @@ test_results*.txt
 *_output.txt
 psalm*_*.json
 !output/psalm_*/psalm_*.json
+# Session 382: this pattern was silently swallowing ARCHIVED experiment records.
+# archive/ exists precisely because output/ is gitignored -- an A/B's evidence has to
+# survive in the repo or the next session re-derives (or re-BUYS) the finding. The
+# broad pattern above dropped the Ps 76 micro A/B's three micro_v2.json files from a
+# `git add` of the archive directory without a word.
+!archive/**/psalm_*.json
 
 # Output (may want to keep these, adjust as needed)
 # output/*.docx

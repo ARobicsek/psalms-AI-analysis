@@ -1,0 +1,556 @@
+{
+  "psalm_number": 76,
+  "verse_commentaries": [
+    {
+      "verse_number": 1,
+      "commentary": "LXX superscription adds 'πρός τὸν Ἀσσύριον' (concerning the Assyrian), a major plus entirely absent from MT — earliest evidence the psalm was historicized to Sennacherib's defeat (2 Kgs 19//Isa 37). בִּנְגִינֹת ('with strings') shares its noun with נְגִינָה = 'mocking song/taunt' (Job 30:9; Lam 3:14), a possible latent pun given the psalm's theme of enemy humiliation.",
+      "lexical_insights": [
+        {
+          "phrase": "לַמְנַצֵּ֥חַ",
+          "variants": [
+            "מְנַצֵּחַ",
+            "נִצֵּחַ",
+            "לְנַצֵּחַ"
+          ],
+          "notes": "Root נצח = 'oversee/direct' (piel ptc, standard superscription formula, 55x Psalter); same root = 'perpetuity/glory/victory' (netzach, 1 Sam 15:29 netzach Yisrael) — faint resonance w/ psalm's victory-theme"
+        },
+        {
+          "phrase": "בִּנְגִינֹ֑ת",
+          "variants": [
+            "נְגִינָה",
+            "נְגִינֹתָי",
+            "נְגִינוֹת"
+          ],
+          "notes": "Root נגן 'play strings'; but same noun נְגִינָה also = mocking-song/object of scorn (Job 30:9; Lam 3:14; Ps 69:13) — double-entendre potential given psalm's enemy-humiliation theme"
+        },
+        {
+          "phrase": "מִזְמ֖וֹר...שִֽׁיר",
+          "variants": [],
+          "notes": "Double genre-label mizmor+shir (cf. Pss 65-68,83,87-88,92,108); Asaph-attribution לְאָסָף interposed BETWEEN the two genre terms — same interrupted pattern in Ps 65:1, likely fixed convention not unique disruption"
+        },
+        {
+          "phrase": "לְאָסָ֣ף",
+          "variants": [
+            "אָסָף"
+          ],
+          "notes": "Asaphite corpus (Pss 50, 73-83), justice/judgment emphasis; root אסף 'gather/ingather' (cf. asif harvest-festival) — speculative faint echo w/ v.13's grape-harvest wordplay (יִבְצֹר)"
+        },
+        {
+          "phrase": "πρός τὸν Ἀσσύριον",
+          "variants": [],
+          "notes": "LXX-only plus, no MT counterpart; earliest datable link of Ps 76 to Sennacherib's 701 BCE campaign; possibly reflects variant Vorlage, exegetical gloss, or association via shared lion-den/prey vocabulary w/ Nah 2:12-13's Assyria oracle (see vv.3,5)"
+        }
+      ],
+      "figurative_analysis": [
+        "superscription is non-figurative rubric; LXX plus reframes whole psalm as historical war-narrative"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "lam-nats-TSĒ-aḥ bin-ghiy-NŌTH miz-MŌR lə-'ā-SĀF SHIYR"
+    },
+    {
+      "verse_number": 2,
+      "commentary": "נוֹדָע (Niphal, reflexive-passive) makes God's renown self-generated, naming no revealing agent. בִּיהוּדָה's consonants nearly spell out יהוה (+ד); the praise-root cluster (ידע/ידה) launched here resurfaces climactically in v.11's תּוֹדֶךָּ, suggesting a whole-psalm sound-inclusio.",
+      "lexical_insights": [
+        {
+          "phrase": "נוֹדָ֣ע",
+          "variants": [
+            "יִוָּדַע",
+            "נוֹדַ֣עְתִּי",
+            "נוֹדְעוּ",
+            "תִּוָּדַע"
+          ],
+          "notes": "Niphal perfect 3ms ידע — 'he made himself known/became known,' reflexive-passive avoiding external agent; theological self-disclosure; cf. Ps 48:4 'Elohim be-armenoteha noda le-misgav' (same verb-form, fellow Zion-hymn)"
+        },
+        {
+          "phrase": "בִּיהוּדָ֣ה",
+          "variants": [
+            "יְהוּדָה"
+          ],
+          "notes": "Consonants י-ה-ו-ד-ה near-embed Tetragrammaton יהוה(+ד); folk-etymology Gen 29:35 links שם יהודה to אוֹדֶה-YHWH ('I will praise'); pre-echoes ידה-root wordplay resumed v.11 תּוֹדֶךָּ"
+        },
+        {
+          "phrase": "בִּיהוּדָ֣ה...בְּ֝יִשְׂרָאֵ֗ל",
+          "variants": [],
+          "notes": "Judah named BEFORE Israel (reverses common order) — southern/Zion-centric perspective privileging Judah as revelation-site, broadened to whole-nation merism"
+        },
+        {
+          "phrase": "גָּד֥וֹל שְׁמֽוֹ",
+          "variants": [
+            "שְׁמִי גָּדוֹל",
+            "גָּדוֹל שִׁמְךָ"
+          ],
+          "notes": "Name-theology formula; cf. Mal 1:11 'gadol shemi ba-goyim' — reputation-language that by v.13 expands to 'kings of the earth'"
+        }
+      ],
+      "figurative_analysis": [
+        "Merism: Judah // Israel = totality of covenant people",
+        "Name (shem) as extension/manifestation of divine presence"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "nō-DHĀʿ biy-hū-DHĀH 'e-lō-HIYM bə-yis-rā-'ĒL gā-DHŌL shə-MŌ"
+    },
+    {
+      "verse_number": 3,
+      "commentary": "LXX renders the archaic Jerusalem-toponym שָׁלֵם (Gen 14:18, 'king of Salem') as the common noun 'peace' (ἐν εἰρήνῃ), effacing the place-name entirely. סוּכּוֹ ('booth,' evoking fragile Sukkot-shelter) and מְעוֹנָתוֹ ('lion's den,' cf. Amos 3:4) yoke vulnerability and predatory ferocity in the same divine dwelling.",
+      "lexical_insights": [
+        {
+          "phrase": "בְשָׁלֵ֣ם",
+          "variants": [
+            "שָׁלֵם"
+          ],
+          "notes": "Archaic Jerusalem name (Gen 14:18, Melchizedek 'king of Salem' — royal-priestly resonance); paronomasia w/ שָׁלוֹם 'peace'; LXX ἐν εἰρήνῃ translates AS 'peace,' erases toponym — major interpretive divergence, possibly deliberate universalizing"
+        },
+        {
+          "phrase": "סוּכּ֑וֹ",
+          "variants": [
+            "סֻכָּה",
+            "סֻכָּתוֹ",
+            "סֻכּוֹת"
+          ],
+          "notes": "Root סכך 'cover/screen'; evokes fragile Sukkot-booth (wilderness/festival associations) — surprising pairing beside predatory מְעוֹנָה in same verse; tension of vulnerability vs. ferocity in dwelling-imagery"
+        },
+        {
+          "phrase": "וּמְע֖וֹנָת֣וֹ",
+          "variants": [
+            "מְעוֹנָה",
+            "מְעוֹנוֹת",
+            "מְעוֹנוֹתָיו"
+          ],
+          "notes": "Fem. מְעוֹנָה specifically = lion's den (Amos 3:4 kefir...mi-me'onato; Nah 2:13 me'onotav terefah; Song 4:8 me'onot arayot); masc. cognate מָעוֹן also = God's HEAVENLY abode (Deut 26:15 mi-me'on qodshecha min-ha-shamayim) — same root spans earthly lion-lair and heaven, pre-figuring v.9's mi-shamayim"
+        },
+        {
+          "phrase": "וַיְהִ֣י",
+          "variants": [
+            "הָיָה",
+            "יִהְיֶה",
+            "יְהִי"
+          ],
+          "notes": "Vav-consecutive narrative form (wayyiqtol) — unusual amid hymn's timeless perfects/participles; implies specific 'coming-to-pass,' historicizing tone (echo of Davidic capture of Jebusite Zion, 2 Sam 5, as election-event)"
+        }
+      ],
+      "figurative_analysis": [
+        "Zion as lion's den/lair — predator imagery",
+        "Zion as fragile 'booth' (Sukkot) — vulnerability in tension with den"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "way-HIY və-shā-LĒM sū-KŌ ū-mə-ʿō-nā-THŌ və-tsiy-YŌN"
+    },
+    {
+      "verse_number": 4,
+      "commentary": "רִשְׁפֵי־קֶשֶׁת ('Resheph-arrows') likely demotes the Canaanite plague/war-deity Resheph (Hab 3:5; Deut 32:24) into mere fire-imagery for YHWH's own weapons. The weapons-list climaxes with an abstraction — 'war' itself is 'broken' alongside literal shield and sword, a zeugma abolishing warfare as a category.",
+      "lexical_insights": [
+        {
+          "phrase": "רִשְׁפֵי־קָ֑שֶׁת",
+          "variants": [
+            "רֶשֶׁף",
+            "רְשָׁפִים",
+            "רִשְׁפֵי"
+          ],
+          "notes": "רֶשֶׁף = Canaanite plague/lightning/war deity, personified attendant of theophany in Hab 3:5 ('lefanav yelech dever ve-yetze resheph le-raglav') and afflicting-agent Deut 32:24; here demoted to common noun 'flame/bolt' for arrows shot BY Israel's God — demythologizing trajectory. LXX renders generic κράτος 'might,' losing fire/deity nuance"
+        },
+        {
+          "phrase": "שָׁ֭מָּה",
+          "variants": [
+            "שָׁם"
+          ],
+          "notes": "Locative 'there' (+directional ה), anchors theophany at Zion (v.3); phonetic pre-echo of מִשָּׁמַיִם (v.9 'from heaven') — שם/שמים share no root but strong consonantal resemblance, sonically bridging earthly/heavenly loci; alliterates w/ following שִׁבַּר"
+        },
+        {
+          "phrase": "מָגֵ֬ן וְחֶ֖רֶב וּמִלְחָמָ֣ה",
+          "variants": [],
+          "notes": "Triad shield+sword+'war'(abstract) — zeugma: שִׁבַּר ('broke') governs both concrete weapons and abstract concept 'war,' escalating from destroyed objects to abolished warfare itself; cf. Ps 46:10 mashbit milchamot ad-qtzeh ha-aretz"
+        },
+        {
+          "phrase": "סֶֽלָה",
+          "variants": [],
+          "notes": "First of two Selahs (v.4, v.10), structural marker closing opening victory-strophe (vv.2-4)"
+        }
+      ],
+      "figurative_analysis": [
+        "Fiery/Resheph-arrows = demythologized plague-deity repurposed as divine weaponry",
+        "Abstract 'war' reified as breakable object"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "SHĀM-māh shib-BAR rish-fēy-QĀ-sheth mā-GHĒN wə-ḤE-rev ū-mil-ḥā-MĀH SE-lāh"
+    },
+    {
+      "verse_number": 5,
+      "commentary": "מֵהַרְרֵי־טָרֶף ('mountains of prey') is a major MT/LXX crux: LXX's singular 'eternal mountain' (ὄρους αἰωνίου) likely assimilates to the stock idiom הַרְרֵי־עַד (Hab 3:6), softening MT's wild predator-imagery. נָאוֹר ('resplendent,' v.5) and נוֹרָא ('awesome,' v.8) are near consonantal transpositions of each other — possible deliberate sound-rhyme bracketing the theophany.",
+      "lexical_insights": [
+        {
+          "phrase": "נָ֭אוֹר אַתָּ֥ה",
+          "variants": [
+            "נָאוֹר"
+          ],
+          "notes": "Rare/near-hapax Niphal ptc of אור 'light' ('resplendent'); consonants (נ-א-ו-ר) near-transpose v.8's נוֹרָא (נ-ו-ר-א, root ירא 'fear/awe') — coincidental homophony or deliberate rhyme linking luminosity and awesomeness; LXX φωτίζω ('I shine') confirms translators read אור-root cleanly, unaware of any pun"
+        },
+        {
+          "phrase": "מֵֽהַרְרֵי־טָֽרֶף",
+          "variants": [
+            "הַר",
+            "הָרִים",
+            "הַרְרֵי"
+          ],
+          "notes": "טֶרֶף 'prey/torn flesh' (root טרף, Gen 49:27) continues v.3's lion-den motif. הַרְרֵי (rare elongated poetic construct plural) recurs in הַרְרֵי־אֵל (Ps 36:7 'mighty mountains'), הַרְרֵי־עַד (Hab 3:6 'ancient mountains'), הַרְרֵי־קֶדֶם (Deut 33:15). Song 4:8 nearly duplicates the syntax: 'מִמְּעֹנוֹת אֲרָיוֹת מֵהַרְרֵי נְמֵרִים' (dens of lions, mountains of leopards) — same 'me-harerei+predator' pattern, supporting MT's reading over LXX"
+        },
+        {
+          "phrase": "ὄρους αἰωνίου (LXX)",
+          "variants": [],
+          "notes": "Diverges from MT in BOTH lexeme ('prey' vs 'eternal') and number (pl. mountains vs sg. mountain) — possibly reflects Vorlage הַרְרֵי־עַד, or theological smoothing toward Zion-as-eternal-mountain doctrine (cf. Ps 48) over wild predator-terrain"
+        },
+        {
+          "phrase": "אַדִּ֗יר",
+          "variants": [
+            "אַדִּירִים",
+            "אַדִּירֵי"
+          ],
+          "notes": "Majesty-term also of mighty waters/sea (Ps 93:4) and nobles (Judg 5:13,25); hyperbaton sandwiches 'atta' between two divine epithets (adj-pronoun-adj)"
+        }
+      ],
+      "figurative_analysis": [
+        "Light/resplendence theophany",
+        "'Mountains of prey' — continuation of lion/predator motif from v.3",
+        "possible sonic pun: naor (light) / nora (awesome)"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "nā-'ŌR 'at-TĀH 'ad-DIYR mē-har-rēy-TĀ-ref"
+    },
+    {
+      "verse_number": 6,
+      "commentary": "אֶשְׁתּוֹלְלוּ, a rare Aramaic-flavored verb stem of שלל ('plunder'), stages bitter irony: professional plunderers become plunder. LXX's חַיִל→πλοῦτος ('wealth,' not 'valor') exploits the word's genuine dual meaning, shifting paralyzed WARRIORS into paralyzed RICH MEN.",
+      "lexical_insights": [
+        {
+          "phrase": "אֶשְׁתּֽוֹלְל֨וּ",
+          "variants": [
+            "שָׁלְלוּ (Qal)",
+            "נִשְׁלְלוּ (Niphal)"
+          ],
+          "notes": "Rare stem (Hitpalpel/Aramaic-style 'Eshtaphal,' cf. אֶשְׁתּוֹמֵם Dan 8:27) of שלל 'plunder' — reflexive/passive 'made spoil of themselves'; root-irony: those who plunder become the plundered"
+        },
+        {
+          "phrase": "אַבִּ֣ירֵי לֵ֭ב",
+          "variants": [
+            "אַבִּיר לֵב",
+            "אַבִּירֵי"
+          ],
+          "notes": "אַבִּיר 'mighty/strong' (of bulls Ps 22:13; angels Ps 78:25; divine epithet אֲבִיר יַעֲקֹב Gen 49:24, Ps 132:2,5) — human 'mighty ones' humbled, subordinate to the True Mighty One implicit in v.7's אֱלֹהֵי יַעֲקֹב"
+        },
+        {
+          "phrase": "נָמ֣וּ שְׁנָתָ֑ם",
+          "variants": [
+            "נָם שְׁנָתוֹ",
+            "יָנוּמוּ"
+          ],
+          "notes": "Cognate accusative 'slept their sleep'; cf. Jer 51:39,57 've-yashenu shenat-olam ve-lo yakitzu' (judgment on Babylon = eternal death-sleep) — possible allusion elevating 'sleep' beyond fatigue to death-motif"
+        },
+        {
+          "phrase": "וְלֹֽא־מָצְא֖וּ...יְדֵיהֶֽם",
+          "variants": [
+            "לֹא מָצָא יָדוֹ",
+            "לֹא תִמְצֶאנָה יְדֵיהֶן"
+          ],
+          "notes": "Idiom for total helplessness, possibly unique phrasing — warriors cannot even locate own hands; contrast general 'hands grow feeble' idiom (Isa 13:7; Ezek 7:17, 21:12)"
+        },
+        {
+          "phrase": "כׇל־אַנְשֵׁי־חַ֣יִל",
+          "variants": [
+            "אִישׁ חַיִל"
+          ],
+          "notes": "חַיִל genuinely ambiguous: 'valor/military strength' OR 'wealth/riches' (cf. eshet chayil Prov 31:10); LXX picks πλοῦτος 'wealth,' also rendering אבירי לב as ἀσύνετος τῇ καρδίᾳ ('senseless/foolish of heart') — inverting MT's 'brave-hearted' into 'witless'"
+        }
+      ],
+      "figurative_analysis": [
+        "Warriors 'plundered' by their own plunder-verb — role-reversal irony",
+        "Sleep/stupor as death-adjacent paralysis",
+        "Hands 'not found' — disembodiment image"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'esh-tō-lə-LŪ 'ab-BIY-rēy LĒV nā-MŪ shə-nā-THĀM wə-lō'-mā-tsə-'Ū khol-'an-shēy-ḤA-yil yə-dhēy-HEM"
+    },
+    {
+      "verse_number": 7,
+      "commentary": "מִגַּעֲרָתְךָ...אַפֶּךָ (vv.7-8) reuses the exact rare word-pair of Ps 18:16 almost verbatim, where it described primordial waters recoiling — Ps 76 redeploys Chaoskampf rebuke-language onto historical cavalry and chariotry.",
+      "lexical_insights": [
+        {
+          "phrase": "מִ֭גַּעֲרָ֣תְךָ",
+          "variants": [
+            "גְּעָרָה",
+            "גַּעֲרָתִי",
+            "גָּעַר"
+          ],
+          "notes": "Divine 'rebuke/roar' that stills chaos — exact match Ps 18:16 מִגַּעֲרָתְךָ יְהוָה (there also paired with אַפֶּךָ, matching v.8 here); cf. Ps 104:7 min-ga'aratcha yenusun; Nah 1:4 go'er ba-yam — Chaoskampf language redirected from cosmic sea onto war-cavalry"
+        },
+        {
+          "phrase": "נִ֝רְדָּ֗ם",
+          "variants": [
+            "תַּרְדֵּמָה",
+            "וַיֵּרָדַם",
+            "נִרְדָּמוּ"
+          ],
+          "notes": "Root רדם = deep trance-sleep, shared w/ Adam's rib-surgery sleep (Gen 2:21), Abram's covenant-vision sleep (Gen 15:12), Jonah's storm-sleep (Jon 1:5-6) — liminal/numinous contexts; synonym-doubling w/ v.6's נָמוּ intensifies death-sleep motif"
+        },
+        {
+          "phrase": "וְרֶ֣כֶב וָסֽוּס",
+          "variants": [
+            "סוּס וָרֶכֶב"
+          ],
+          "notes": "Reversed order (chariot-then-horse) vs. typical 'סוּס וְרֹכְבוֹ' (Exod 15:1); LXX collapses merism into single image 'those mounted on horses,' apparently reading רֶכֶב as participle 'rider' not noun 'chariot'"
+        },
+        {
+          "phrase": "אֱלֹהֵ֣י יַעֲקֹ֑ב",
+          "variants": [],
+          "notes": "Only patriarchal epithet in psalm; identical refrain Ps 46:8,12 (fellow Korahite Zion-hymn) — strong intertextual bond; related epithet אֲבִיר יַעֲקֹב (Gen 49:24) uses different noun for same referent"
+        }
+      ],
+      "figurative_analysis": [
+        "Divine rebuke = Chaoskampf storm/sea-quelling roar redirected at cavalry",
+        "Chariot+horse personified/stunned as living sleepers"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "mig-ga-ʿa-RĀ-thə-khā 'e-lō-HĒY ya-ʿa-QŌV nir-DĀM wə-RE-khev wā-SŪS"
+    },
+    {
+      "verse_number": 8,
+      "commentary": "Doubled אַתָּה...אַתָּה frames נוֹרָא in a rare emphatic envelope; the rhetorical question מִי־יַעֲמֹד לְפָנֶיךָ nearly quotes Nah 1:6 מִי יַעֲמוֹד לִפְנֵי זַעְמוֹ, which shares BOTH the 'who can stand' formula and the אַף/anger vocabulary — a fixed Divine-Warrior idiom-cluster.",
+      "lexical_insights": [
+        {
+          "phrase": "אַתָּ֤ה ׀ נ֥וֹרָא אַ֗תָּה",
+          "variants": [
+            "אַתָּה נוֹרָא"
+          ],
+          "notes": "Doubled 2ms pronoun envelope (rare syntax), emphatic/exclamatory, possibly liturgical antiphon; cf. doubled 1cs 'אֲנִי אֲנִי הוּא' (Isa 43:25;51:12); resumes 'atta' from v.5, bracketing theophany unit (vv.5-8)"
+        },
+        {
+          "phrase": "וּמִֽי־יַעֲמֹ֥ד לְפָנֶ֗יךָ",
+          "variants": [
+            "מִי יַעֲמוֹד לְפָנָיו",
+            "לֹא־יַעֲמֹד"
+          ],
+          "notes": "Rhetorical Q virtually identical to Nah 1:6 'מִי יַעֲמוֹד לִפְנֵי זַעְמוֹ' — same verse ALSO has 'בַּחֲרוֹן אַפּוֹ' matching this verse's own אַפֶּךָ — double-vocabulary overlap suggests shared stock Divine-Warrior formula; cf. Mal 3:2, Ps 130:3"
+        },
+        {
+          "phrase": "מֵאָ֥ז אַפֶּֽךָ",
+          "variants": [],
+          "notes": "Elliptical/compressed clause 'from/since then, your anger' — syntactic crux; LXX equally wooden ἀπὸ τότε ἡ ὀργή σου; אַפֶּךָ ('nose/nostril'=anger, anthropomorphic idiom) identical form to Ps 18:16's אַפֶּךָ (see v.7)"
+        }
+      ],
+      "figurative_analysis": [
+        "Anthropomorphic wrath: אף 'nose/nostril' = anger",
+        "Rhetorical question as posture of divine incomparability"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "'at-TĀH NŌ-rā' 'AT-tāh ū-miy-ya-ʿa-MŌDH lə-fā-NEY-khā mē-'ĀZ 'ap-PE-khā"
+    },
+    {
+      "verse_number": 9,
+      "commentary": "מִשָּׁמַיִם/הִשְׁמַעְתָּ pile up ש-מ consonance that sonically echoes v.4's שָׁמָּה ('there,' Zion), though the words are etymologically unrelated — sound enacting the shift from earthly to heavenly jurisdiction. שָׁקָטָה ('grew still') ironically inverts the normally peaceful 'the land had rest' formula (Judg 3:11) into terror-paralysis.",
+      "lexical_insights": [
+        {
+          "phrase": "מִ֭שָּׁמַיִם",
+          "variants": [
+            "בַּשָּׁמַיִם",
+            "מִן־הַשָּׁמַיִם"
+          ],
+          "notes": "Spatial pivot: local 'there' (Zion, v.4 שָׁמָּה) → cosmic 'from heaven'; phonetic paronomasia despite unrelated roots; cf. Deut 26:15 'מִמְּעוֹן קָדְשְׁךָ מִן־הַשָּׁמַיִם' pairing מָעוֹן (cf. v.3 מְעוֹנָתוֹ) directly with שָׁמַיִם"
+        },
+        {
+          "phrase": "הִשְׁמַ֣עְתָּ דִּ֑ין",
+          "variants": [
+            "תַּשְׁמִיעַ דִּין",
+            "יַשְׁמִיעַ דִּין"
+          ],
+          "notes": "Hiphil שמע 'caused to be heard' + דִּין (legal verdict, cf. Deut 32:36, Gen 15:14); triple ש-מ consonance across מִ-שָּׁמַ-יִם/הִ-שְׁמַ-עְתָּ — deliberate alliterative overload; דִּין here vs. מִשְׁפָּט (v.10) may distinguish pronounced sentence from its execution"
+        },
+        {
+          "phrase": "אֶ֖רֶץ יָֽרְאָ֣ה וְשָׁקָֽטָה",
+          "variants": [
+            "הָאָרֶץ יָרְאָה"
+          ],
+          "notes": "Personification; שָׁקַט normally POSITIVE 'rest/quiet' (Judg 3:11 refrain va-tishkot ha-aretz = peaceful rest after deliverance) — here repurposed for terror-paralysis, not peace; striking subversion of stock formula"
+        }
+      ],
+      "figurative_analysis": [
+        "Earth personified — fears, falls silent/paralyzed",
+        "Heaven as courtroom pronouncing verdict"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "mish-shā-MA-yim hish-MAʿ-tā DIYN 'E-rets yā-rə-'ĀH wə-shā-QĀ-tāh"
+    },
+    {
+      "verse_number": 10,
+      "commentary": "לְהוֹשִׁיעַ כׇּל־עַנְוֵי־אֶרֶץ nearly quotes Isa 11:4's messianic-justice oracle verbatim — cosmic judgment's stated purpose is rescue of the powerless. בְּקוּם echoes the fixed Divine-Warrior 'arising' formula of Ps 68:2/Num 10:35.",
+      "lexical_insights": [
+        {
+          "phrase": "בְּקוּם־לַמִּשְׁפָּ֥ט",
+          "variants": [
+            "קָם לַמִּשְׁפָּט",
+            "יָקוּם לַמִּשְׁפָּט",
+            "בְּקוּמוֹ"
+          ],
+          "notes": "Infinitival temporal clause; Divine-Warrior 'arising' formula, cf. Num 10:35 'קוּמָה יְהוָה וְיָפֻצוּ אֹיְבֶיךָ'; Ps 68:2 'יָקוּם אֱלֹהִים יָפוּצוּ אוֹיְבָיו' — near-identical theophanic battle-arousal idiom"
+        },
+        {
+          "phrase": "לְהוֹשִׁ֖יעַ כׇּל־עַנְוֵי־אֶ֣רֶץ",
+          "variants": [
+            "הוֹשִׁיעַ עַנְוֵי אֶרֶץ",
+            "לְהוֹשִׁיעַ עָנִי"
+          ],
+          "notes": "Near-verbatim to Isa 11:4 'וְשָׁפַט בְּצֶדֶק דַּלִּים...לְעַנְוֵי־אָרֶץ' (messianic justice); judgment's TELOS = salvation of vulnerable, core Asaphite theology (cf. Ps 82:3-4); LXX πραΰς 'meek' selects gentleness-nuance over affliction-nuance"
+        },
+        {
+          "phrase": "סֶֽלָה",
+          "variants": [],
+          "notes": "Closes second major unit (vv.5-10), paired w/ v.4 Selah (closing vv.2-4) — bipartite liturgical structure"
+        },
+        {
+          "phrase": "אֶ֣רֶץ",
+          "variants": [],
+          "notes": "'Eretz' recurs 3x across vv.9-10,13 (yare'ah, anvei-, malkhei-) — sustained oscillation between 'the land' (local/national) and 'the earth' (cosmic/universal)"
+        }
+      ],
+      "figurative_analysis": [
+        "God 'rising' — judicial/martial theophany gesture",
+        "'Lowly of the earth' — oppressed as object of cosmic rescue"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "bə-qūm-lam-mish-PĀT 'e-lō-HIYM lə-hō-SHIY-aʿ kol-ʿan-wēy-'E-rets SE-lāh"
+    },
+    {
+      "verse_number": 11,
+      "commentary": "Notorious crux: שְׁאֵרִית (normally 'remnant of a surviving PEOPLE') is applied to leftover 'fury,' which is 'girded on' (תַּחְגֹּר) — subject grammatically ambiguous between God (2ms) and the fury itself (3fs). LXX's ἑορτάσει ('shall keep festival') suggests the Greek translator derived תַּחְגֹּר from חגג ('festival'), not חגר ('gird') — an entirely different root-reading.",
+      "lexical_insights": [
+        {
+          "phrase": "כִּֽי־חֲמַ֣ת אָדָ֣ם תּוֹדֶ֑ךָּ",
+          "variants": [
+            "אָדָם יוֹדוּךָ"
+          ],
+          "notes": "Paradox — human חֵמָה ('wrath/fury') is grammatical subject of תּוֹדֶךָּ (Hiphil ידה, 'praise/confess'); root ידה phonetically mirrors v.2's נוֹדָע (ידע 'known') — recognition (da'at) yields acclamation (hoda'ah), whole-psalm sound-inclusio; personifies hostile emotion as worshipper"
+        },
+        {
+          "phrase": "שְׁאֵרִ֖ית חֵמֹ֣ת תַּחְגֹּֽר",
+          "variants": [
+            "תַּחְגְּרוּ",
+            "חָגְרָה"
+          ],
+          "notes": "NJPS flags meaning uncertain. שְׁאֵרִית usually = eschatological surviving remnant OF A PEOPLE, oddly transferred to 'remnant of wrath(s)' (חֵמֹת, rare plural of abstract noun); תַּחְגֹּר 'gird' = military dressing idiom (sword/loins) applied to abstract fury; ת-prefix ambiguous 2ms ('You gird [it on]') vs 3fs ('it girds itself,' agreeing w/ fem שְׁאֵרִית) — resolves to very different theologies"
+        },
+        {
+          "phrase": "ἐγκατάλειμμα ἐνθυμίου ἑορτάσει σοι (LXX)",
+          "variants": [],
+          "notes": "ἑορτάσει implies LXX read תַּחְגֹּר as root חגג (festival) not חגר (gird); ἐνθύμιος ('passionate/feeling,' from θυμός) softens חֵמָה from hostile 'wrath' toward generic intense feeling, defusing paradox of 'wrath that praises'"
+        }
+      ],
+      "figurative_analysis": [
+        "Wrath personified as worshipper who 'acknowledges/praises'",
+        "Divine (or self-) 'girding' of residual fury — militarized, ambiguous metaphor"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "kiy-ḥa-MATH 'ā-DHĀM tō-DHEKH-khā shə-'ē-RIYTH ḥē-MŌTH taḥ-GŌR"
+    },
+    {
+      "verse_number": 12,
+      "commentary": "לַיהֹוָה is the ONLY Tetragrammaton occurrence in this Elohistic psalm, breaking the pattern precisely at the climactic summons to worship. כׇּל־סְבִיבָיו is verbatim from Ps 89:8, where it also collocates with נוֹרָא — shared cultic-hymnic formula language.",
+      "lexical_insights": [
+        {
+          "phrase": "נִ֥דְר֣וּ וְשַׁלְּמוּ֮",
+          "variants": [
+            "נְדוֹר וְשַׁלֵּם",
+            "יִדֹּר וִישַׁלֵּם"
+          ],
+          "notes": "Standard vow-fulfillment pairing (Eccl 5:3-4 'tov asher lo tidor'; Ps 50:14 'shalem le-Elyon nedarekha' — another Asaph psalm, same vow-theology)"
+        },
+        {
+          "phrase": "לַיהֹוָ֢ה אֱֽלֹהֵ֫יכֶ֥ם",
+          "variants": [
+            "לַיהֹוָה אֱלֹהֵינוּ",
+            "לַיהֹוָה אֱלֹהֶיךָ"
+          ],
+          "notes": "SOLE Tetragrammaton in Ps 76 (Elohistic Psalter Pss 42-83 normally substitutes אֱלֹהִים); possibly fossilized liturgical formula resistant to redaction, or deliberate emphasis at moment of universal summons"
+        },
+        {
+          "phrase": "כׇּל־סְבִיבָ֑יו",
+          "variants": [
+            "סְבִיבוֹתָיו",
+            "סְבִיבַי",
+            "סְבִיבֶיךָ"
+          ],
+          "notes": "Verbatim match Ps 89:8 'וְנוֹרָא עַל־כׇּל־סְבִיבָיו' (awesome above all around him) — collocated w/ נורא there exactly as here split v.12/v.13; strong intertextual link; referent ambiguous (surrounding nations? divine-council entourage?)"
+        },
+        {
+          "phrase": "יֹבִ֥ילוּ שַׁ֝֗י",
+          "variants": [
+            "יוּבַל שַׁי"
+          ],
+          "notes": "Near-verbatim echo Ps 68:30 'יוֹבִילוּ מְלָכִים שָׁי' (kings shall bring tribute) — shared Zion/Divine-Warrior tribute-vocabulary; שַׁי rare noun (~3x Tanakh: here, Ps 68:30, Isa 18:7 yuval-shai)"
+        },
+        {
+          "phrase": "לַמּוֹרָֽא",
+          "variants": [
+            "מוֹרָא",
+            "נוֹרָא"
+          ],
+          "notes": "מוֹרָא (m-preformative abstract noun 'dread') nominalized w/ article as divine EPITHET; elsewhere always abstract common noun describing an EFFECT (Deut 4:34; 26:8 u-vemora gadol), never direct divine title — possibly the ONLY biblical instance functioning as a name for God; cf. פַּחַד יִצְחָק (Gen 31:42,53), ANE naming-by-terror pattern"
+        }
+      ],
+      "figurative_analysis": [
+        "Deity named by the emotion (dread/awe) he provokes — 'the Awesome/Dreaded One'"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "nidh-RŪ wə-shal-lə-MŪ lay-hō-WĀH 'e-lō-hēy-KHEM kol-sə-viy-VĀYW yō-VIY-lū SHAY lam-mō-RĀ'"
+    },
+    {
+      "verse_number": 13,
+      "commentary": "יִבְצֹר exploits genuine double meaning — 'restrain' (Gen 11:6) vs. 'harvest grapes' (בָּצִיר) — figuring divine curbing of royal pride as vintage-pruning; LXX's ἀφαιρῶν ('removing') flattens the pun. מַלְכֵי־אָרֶץ antithetically mirrors v.10's עַנְוֵי־אֶרֶץ: the psalm closes on inversion — low saved, high awed.",
+      "lexical_insights": [
+        {
+          "phrase": "יִ֭בְצֹר ר֣וּחַ נְגִידִ֑ים",
+          "variants": [
+            "בָּצַר",
+            "יִבְצְרוּ",
+            "בְּצִיר"
+          ],
+          "notes": "Root בצר double sense: (1) restrain/withhold/thwart (Gen 11:6 'lo yibbatzer mehem'; Job 42:2 'lo yibbatzer mimcha mezimah') (2) harvest/gather grapes (בָּצִיר 'vintage,' Lev 26:5) — deliberate agricultural pun: princes' רוּחַ (spirit/pride/breath) 'pruned' like vines, eschatological harvest-judgment image (cf. Joel 4:13 'shilchu magal ki vashal qatzir'); LXX ἀφαιρῶν 'removing' flattens pun entirely"
+        },
+        {
+          "phrase": "נ֝וֹרָ֗א לְמַלְכֵי־אָֽרֶץ",
+          "variants": [
+            "נוֹרָא עַל מַלְכֵי אֶרֶץ"
+          ],
+          "notes": "נוֹרָא closes fear-root inclusio opened v.8 (אַתָּה נוֹרָא אַתָּה); 'מַלְכֵי־אֶרֶץ' antithetically parallels v.10's 'עַנְוֵי־אֶרֶץ' — chiastic reversal: LOW lifted/saved (v.10), HIGH humbled/awed (v.13), sharing 'X-of-eretz' construct pattern"
+        },
+        {
+          "phrase": "{פ}",
+          "variants": [],
+          "notes": "Masoretic petuchah (open paragraph) marker closing psalm — paratextual scribal sense of major structural closure"
+        }
+      ],
+      "figurative_analysis": [
+        "Princes' spirit/pride figured as vine pruned/harvested — agricultural judgment metaphor",
+        "Kings 'awed' into universal submission posture"
+      ],
+      "thesis_connection": "",
+      "phonetic_transcription": "yiv-TSŌR RŪ-aḥ nə-ghiy-DHIYM nō-RĀ' lə-mal-khēy-'Ā-rets"
+    }
+  ],
+  "thematic_threads": [],
+  "interesting_questions": [
+    "Why does LXX append 'πρός τὸν Ἀσσύριον' (concerning the Assyrian) to the superscription, absent from MT — variant Vorlage, exegetical gloss, or reception-historical link to Sennacherib (2 Kgs 19//Isa 37) — and how does this shape the psalm's historical reading?",
+    "Is נָאוֹר (v.5, 'resplendent,' root אור) a deliberate consonantal near-transposition of v.8's נוֹרָא ('awesome,' root ירא) — intentional sonic rhyme bracketing the theophany (vv.5-8), or coincidence?",
+    "Why does LXX translate בְשָׁלֵם (v.3, the toponym Salem/Jerusalem, Gen 14:18) as 'ἐν εἰρήνῃ' ('in peace') — misidentification of an archaic place-name, or deliberate paronomastic theology on shalom?",
+    "Does רִשְׁפֵי־קֶשֶׁת (v.4, 'Resheph-arrows') consciously demythologize the Canaanite plague/war-deity Resheph (cf. Hab 3:5; Deut 32:24) into mere descriptive vocabulary for YHWH's own weaponry?",
+    "Is MT's מֵהַרְרֵי־טָרֶף (v.5, 'mountains of prey') original, or does LXX's ὄρους αἰωνίου ('eternal mountain') reflect a variant/assimilated reading toward the idiom הַרְרֵי־עַד (Hab 3:6)? What theology hinges on the choice?",
+    "What does the rare, Aramaic-flavored verb stem אֶשְׁתּוֹלְלוּ (v.6, from שלל 'plunder') contribute — is the irony of 'plunderers plundered' a deliberate root-play?",
+    "Does the shared vocabulary-cluster מִגַּעֲרָתְךָ...אַפֶּךָ (vv.7-8) constitute direct literary dependence on Ps 18:16, redistributing a single verse's Chaoskampf language across two verses here?",
+    "In v.11's תַּחְגֹּר, is the grammatical subject God (2ms, 'You gird [wrath] on') or the 'remnant of fury' itself (3fs, 'it girds itself') — how radically does the theology of divine violence shift depending on the parsing?",
+    "Why does לַיהֹוָה (v.12) break the Elohistic Psalter's near-total avoidance of the Tetragrammaton — a preserved liturgical fossil, or deliberate rhetorical emphasis at the psalm's summons-climax?",
+    "What is the function of the wordplay embedded in יִבְצֹר (v.13) between 'restrain' and 'harvest grapes' (בָּצִיר) — does the psalm figure divine curbing of royal pride as a vintage/harvest of judgment (cf. Joel 4:13)?",
+    "Why does the psalm shift from perfect-tense narration of a COMPLETED divine victory (vv.2-10) to imperfect/imperative forms (vv.11-13) — does this signal a pivot from hymnic report to prophetic summons?",
+    "Does the polysemy of מְעוֹנָה/מָעוֹן (v.3, 'lion's den' but also, in construct, God's 'heavenly abode,' cf. Deut 26:15) encode in one root the psalm's own spatial shift from Zion (v.4 שָׁמָּה) to heaven (v.9 מִשָּׁמַיִם)?",
+    "Does the verbatim shared phrase כׇּל־סְבִיבָיו + נוֹרָא (Ps 76:12-13 // Ps 89:8) indicate a fixed hymnic-liturgical formula for the divine court's periphery, and what does it imply about the two psalms' relationship?",
+    "Why pair the fragile 'booth' (סוּכּוֹ, v.3, evoking Sukkot/wilderness vulnerability) with the fierce 'lion's den' (מְעוֹנָתוֹ) for the SAME divine dwelling — is Zion imagined as simultaneously vulnerable and lethally guarded?",
+    "Given that Nahum 2:12-13's oracle against Nineveh clusters the identical lion-den/prey vocabulary (מְעוֹנָה, טֶרֶף) found in Ps 76:3,5, and LXX explicitly names 'the Assyrian' — is Ps 76 (at least in reception) turning Assyria's own predator-imagery back upon it?",
+    "Why does מוֹרָא (v.12, 'The Awesome One') stand beside נוֹרָא (v.13, same root ירא, different noun-pattern) as near-synonymous divine epithets in successive verses — stylistic variatio, or distinct nuance for each?"
+  ],
+  "synthesis_notes": "",
+  "model_used": "claude-sonnet-5"
+}

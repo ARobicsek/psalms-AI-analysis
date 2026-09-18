@@ -9,6 +9,186 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 382 (2026-09-17): A promo that became permanent walked past the safeguard built to catch the opposite failure
+
+**Trigger**: the author, three items in one message — (1) *"I recently read the output of ps 74. a concern - nearly all of the v7 commentary recapitulated what had already been stated in the essay. what happened there?"*, corrected one turn later to *"I MEANT that the repeat between v7 and the essay was in ps 75, not 74. sorry! 75 seems much more egregious."*; (2) *"have the running costs of any of the models changed since we last hard coded their costs into our cost calculator?"*; (3) *"are there any zero-cost opportunities to move to more capable models that we have NOT already tested?"*
+
+**Session cost: $1.5526** — one live A/B, two arms. A third run died before any API call at $0.
+
+---
+
+### 1. The pricing audit
+
+Checked every row in `src/utils/cost_tracker.py` against the live Anthropic, OpenAI and Google pricing pages. **No model that has ever billed in a saved run is mispriced** — all nine (`claude-opus-5/4-8/4-7/4-6`, `claude-sonnet-4-6`, `gpt-5.1`, `gpt-5.4`, `gpt-5.6-terra`, `gemini-3.1-pro-preview`) still match. Two rows were wrong, and one of them was wrong *that day*.
+
+#### `claude-sonnet-5` — wrong at read time, not merely latent
+
+The row held the durable $3/$15 behind an `INTRO_PRICING` override carrying $2/$10 "through 2026-08-31". The override's own design note explains the direction:
+
+> Encode the promo rate in the row and the table silently goes wrong on the day the promo ends... Encode the durable rate and the override simply STOPS APPLYING on its own. The failure mode is self-healing.
+
+That reasoning covers exactly one failure mode. **The event that occurred was its mirror image: on 2026-08-10 Anthropic made $2/$10 the standard price and cancelled the scheduled 2026-09-01 increase.** Anthropic's platform pricing page now carries an explicit note saying so. Against *that*, the self-healing direction heals **into** the wrong number and then sits there silently — from 2026-09-01 until this fix, `resolve_pricing("claude-sonnet-5")` returned $3/$15, a **50% over-report on both axes**, verified by running it.
+
+Corrected all six fields (input 3.00→2.00, output/thinking 15.00→10.00, cache_read 0.30→0.20, cache_write 3.75→2.50, cache_write_1h 6.00→4.00) and emptied `INTRO_PRICING`, keeping the mechanism and recording the lesson in place: **an expiring override is only half a safeguard; when an expiry passes, the durable row has to be re-verified.** An expiry that fires unattended is indistinguishable from one that fired correctly.
+
+Blast radius is zero dollars — `claude-sonnet-5` appears in no saved cost JSON across 33 runs — but it is one flag from live as `literary_echoes_agent.SECOND_GEN_MODEL`, and it falsifies the row's own comment that a decision made on promo economics *"unmakes itself on 2026-09-01"*. Sonnet 5 is now permanently 33% cheaper on output than Sonnet 4.6.
+
+#### `gemini-2.5-pro` — 140% over-stated on input
+
+$3.00/$12.00 against a real $1.25/$10.00 (≤200k tier). The two fields commented *"(approximate)"* were **Anthropic-shaped guesses** — a 10% cache read and a 25% write markup — applied to a vendor that prices neither way. Google bills context caching by storage-time, so `cache_write` is now 0.00, matching how `gemini-3.1-pro-preview` was already encoded. Latent: the only caller is `synthesis_writer`'s liturgical-librarian path.
+
+#### `claude-fable-5-1` — the row that correctly breaks a test
+
+Added, and its cache read is **$0.25/MTok = 0.025× input**. Fable 5.1 and Mythos 5.1 are the only models on any vendor we use that are not 0.1×; Anthropic footnotes it explicitly. Session 377's `test_cached_input_is_never_free` asserts `cache_read == 0.10 * input` on **every** row, so writing this row honestly makes that test fail.
+
+Fixed in the test, via a named `CACHE_READ_MULTIPLIER_EXCEPTIONS` set — not in the row. Relaxing the assertion to `cache_read > 0` would have restored green while discarding the precise check that caught the original Session-377 bug.
+
+#### Verification
+
+Re-priced all **33** saved cost JSONs under the old and the new table: **0 disagreements**, so no historical figure moves. Four files' stored totals do not reconstruct under *either* table — Ps 70–72 carry the pre-Session-373 terra over-report that Session 377 documented and deliberately chose not to retro-edit. **171 tests pass** (169 + 3 new, 1 rewritten).
+
+Two comments were also upgraded from caveat to measurement: `gpt-5.4`'s long-context boundary, which Session 377 called *"not stated on OpenAI's pricing page"*, is **272K**, with input 2× and output 1.5× for the whole session past it. The encoded $5.00/$22.50 figures were correct, and the copy editor at ~29K input has an order of magnitude of margin. Terra's $4.00/$0.40/$18.00 long-context tier is confirmed too.
+
+Session 377's test that pinned the live Sonnet 5 promo (`test_sonnet_5_intro_pricing_expires_on_its_own`) was rewritten against a **synthetic** model. A test that reaches into `INTRO_PRICING` for a real model asserts two things at once — that the mechanism works, and that a particular promotion is still running — and when the second changed, it failed for a reason unrelated to what it was protecting.
+
+---
+
+### 2. Psalm 75 verse 7 — and why Psalm 74 verse 7 is a different problem
+
+The author first reported this on Ps 74, then corrected to Ps 75. Both were examined, and they fail for **opposite reasons** — only one is a real defect.
+
+**Ps 74 v7 was starved.** It has **5** commentator entries, the fewest of any verse in that psalm (others run 6–10), and of those five, two are masoretic minutiae and two argue the same word-order transposition. The writer's thinking capture shows it working through them and discarding: *"Alshich on שלחו באש in verse 7 (they struck with a spear while it burned) feels thin, so I'll skip it. Minchat Shai notes on verse 7 about the unusual lamed... are masoretic minutiae—skip those too."* The result is 245 words, second-shortest of 20 notes. Its three paragraphs each carry genuinely new evidence (Judges 1:8, the miqdash/mishkan pair, Lam 4:11 / 2:4) but all three land on the essay's thesis sentence.
+
+**Ps 75 v7 is the inverse: it had material and the essay spent it first.** 8 commentator entries, at the psalm's median. The essay carries a labelled section — **"The crux that is the hinge"** — that is entirely verse 7 and does the evidence-room job there: the kamatz argument, Norzi/*Minchat Shai*, the Tanchuma, and the missing-north/Zaphon observation with Ps 48:3. The writer planned it that way; from the thinking capture:
+
+> ...mapping the structural pattern of actor migration and the absence in verses 9-10, **using verse 7 as the hinge with support from Minchat Shai and Tanchuma**, examining the הלל quarantine...
+
+Four of the note's six paragraphs then restate the essay, two near-verbatim:
+
+| essay | verse-7 note |
+|---|---|
+| "A rabbinic reading and a Masoretic vowel arrive at the same verdict from opposite directions." | "Two independent instruments, a vowel point and a midrash, returning the same verdict." |
+| "The consonants keep the landscape in view… the fourth item on the list turns out not to be a place at all." | "the consonants keep the mountains standing there… The fourth item looks like one more landscape and turns out to be the thing the landscapes were supposed to supply." |
+
+**The Tanchuma is quoted identically in both** — כל הרים שבמקרא הרים חוץ מזה שהוא רוממות. Only Ibn Ezra's anti-astrology reading and Ezekiel 26:7 are new. The essay also runs **4** bold section headers against the prompt's "no more than 2-3" (Ps 74's has 1).
+
+#### Three detectors, three null results — reported, not buried
+
+Built and ran corpus-wide over 865 verse notes across 65 guides:
+
+| detector | Ps 75 v7 | corpus |
+|---|--:|--:|
+| English 4-gram overlap with its own essay | 2.1% | median 0%, top-25 runs 8–17% |
+| shared Hebrew quotations (unpointed) | 1 | — |
+| shared named sources | 5 | — |
+
+**Ps 75 v7 does not crack the corpus top 12 on any of them.** Every sentence was reworded, so the repetition lives at the level of *argument structure*. No regex or n-gram gate will find this — the same conclusion Session 380 reached about superlatives.
+
+#### The fix, after one rejected proposal
+
+My first proposal was a copy-editor category, on the reasoning that the copy editor already receives `intro_body` and `verses_body` concatenated in a single call (`copy_editor.py:769`), so it would cost no extra API call. **The author rejected it and was right**: *"the copy editor won't (and shouldn't) rewrite an entire verse's commentary."* A note that re-argues its own essay needs **replacing**, and minimal local change is the copy editor's entire discipline.
+
+The author's counter-proposal — tell the writer not to repeat — turned out to be **already in the prompt three times, all three of which lost on Ps 75**:
+
+- **line 536** is a *test* ("not a rehash of the essay"), and the note passed it on the letter: it did contain new material.
+- **line 538** offers *"either skip it or approach it from a completely different angle"*. **Neither remedy exists at a crux.** You cannot skip v7 — the reader arrives wanting to know what הָרִים means — and there is no other angle, because the essay took the vowel *and* the midrash, the only two witnesses there are.
+- **line 643** says *"add a NEW angle on it"*. Phrased as **add**. The writer added.
+
+**Every existing rule is about what to ADD. None grants permission to DECLINE to re-establish** — and the counter-pressure is strong, because leaving a verse's crux unexplained reads as a coverage failure. A fourth prohibition would be the fifth instance of a rule already losing, against the standing prior that additions to `master_editor.py` produce the opposite of restraint.
+
+The prompt already contained both missing pieces and never connected them: **line 561** (*"COVERAGE IS ALREADY DISCHARGED... A phrase you pass over in silence is not a gap"*) is the premise that makes deferral safe, but is scoped to phrases within a verse; **line 271**'s *"pure deferral"* worked example is scoped to routine facts with no payoff, which no writer would apply to the psalm's central crux.
+
+Fix **(a)**, the author's choice of the two offered — two sentences replacing line 643's final clause:
+
+> If a verse was central to the essay's argument — if its crux WAS your hinge — do not re-establish what the essay established: point back to it in a single sentence and spend the whole note on what the essay could not use. COVERAGE IS ALREADY DISCHARGED by the translation line, so passing over an argument the reader has just finished reading is not a gap; and a note that arrives at the essay's own conclusion by a second route has written the essay twice, however fresh its wording.
+
+**75,697 → 76,052 chars (+355).** SI derives correctly (`SI − V4 = 425 = len(SI_SECTION)`), so one template edit covers both pipelines. **Un-A/B'd — no psalm has been generated on it.** Ps 75 is the natural test case; its production run seeds the `base` arm at $0 via `ab_seed_base_from_pipeline.py`, one arm ~$2. If an exemplar is ever added, `WRITER_PROMPT_POSITIVE_EXEMPLARS.md` warns it must not be mined from the psalm being tested on.
+
+---
+
+### 3. Zero-cost model upgrades
+
+| move | rate | status |
+|---|---|---|
+| **beta reader** Sonnet 4.6 → Sonnet 5 | −33% both axes | **free, untested** |
+| micro Sonnet 4.6 → Sonnet 5 | −33% both axes | tested twice, not adopted (below) |
+| macro + SD Opus 4.8 → Opus 5 | same *rate* | **not** same cost |
+| copy editor gpt-5.4 | — | nothing available |
+| literary echoes Gemini 3.1 Pro | — | still Google's GA flagship |
+
+The **beta reader** is the only genuinely free untested move. One trap: it passes no `thinking` config, which means OFF on 4.6 but **adaptive ON** on Sonnet 5 — it needs an explicit `thinking={"type":"disabled"}`.
+
+**Macro + Synthesis Discovery → Opus 5** is same-rate but not same-cost: Opus 5 emits ~1.71× the output tokens (measured on the writer), and sizing that against real runs gives **+$0.48–0.59/psalm, 6–8% of a run**. Still the author's open agenda item (c) from Session 371; worth an A/B, not free.
+
+The **copy editor** has no zero-cost upgrade. Its only cheaper-and-newer option was terra, settled and rejected on quality (`COPY_EDITOR_TERRA_FINDINGS.md`); above gpt-5.4 ($2.50/$15) the lineup jumps to gpt-5.6-sol ($5/$30) or gpt-6-astra ($10/$50), and gpt-5.6-luna ($0.20/$1.20) is the small tier, not an upgrade.
+
+---
+
+### 4. The Psalm 76 micro A/B
+
+Baseline is the production Sonnet 4.6 run already on disk, so only the arms cost money. Stages 1–2 only (Stage 3 is not a Sonnet call). Full record: `archive/psalm_76_S382_micro_sonnet5_ab/`.
+
+| | Sonnet 4.6 | S5 `max` | S5 `xhigh` |
+|---|--:|--:|--:|
+| **cost** | **$0.5298** | $1.2079 `+128%` | **$0.3447 `−35%`** |
+| wall clock | not recorded | 26.6 min | 6.4 min |
+| input tokens | 22,402 | 29,289 `+31%` | 24,331 `+9%` |
+| output tokens | 30,841 | 114,932 `+273%` | 29,604 `−4%` |
+| **JSON bytes** | **37,045** | 36,951 `−0%` | 27,523 `−26%` |
+| lexical insights | 29 | 51 `+76%` | 43 `+48%` |
+| lexical detail (chars) | 16,637 | 15,826 `−5%` | 11,277 `−32%` |
+| **figurative flags** | **27** | 26 `−4%` | **11 `−59%`** |
+| interesting questions | 10 | 16 `+60%` | 12 `+20%` |
+
+**Verdict: keep Sonnet 4.6.** This replicates Session 362's conclusion — *"you cannot get cheaper AND richer at once"* — on a second psalm, under permanent pricing.
+
+#### My own estimate was 3× wrong, and the doc now says so
+
+I quoted the author **+$0.22/psalm** for `max`, taken from the Ps 65 record's intro-pricing column. On Ps 76 the same setting at the same rate cost **+$0.68** (+128%). The per-psalm premium does not generalise across psalms, and `SONNET5_MICRO_AB_FINDINGS.md` now carries an explicit warning not to quote one from a single psalm again.
+
+#### Three things Ps 65 could not show
+
+1. **`max` buys thinking, not content.** 114,932 output tokens produced a *marginally smaller* JSON (36,951 B) than 30,841 did (37,045 B). `budget_tokens` is removed on Sonnet 5, so at `max` adaptive thinking is uncappable — a 0% content return on a +273% token spend.
+2. **The insight count is re-cutting, not new ground.** Classifying all 51 against the baseline's phrase coverage under consonantal normalisation: **73% re-cut ground 4.6 already covered** (81% at `xhigh`). Where 4.6 writes one dense entry on מְעוֹנָה carrying three proof texts, Sonnet 5 writes three thinner ones. That is why insights rise 76% while lexical detail falls 5% — and it confirms the Session-362 doc's own diagnosis that Sonnet 5 *"follows length instructions literally and defaults terse."*
+3. **`xhigh` collapses the figurative axis, 27 → 11.** Session 362's table has `—` in that cell, so this is new. It is structural, not a parse failure: per-verse counts are `[0,1,1,1,1,1,1,0,1,1,1,1,1]` — floor-level compliance at one flag per verse, against 4.6's 2–3.
+
+**Ps 65's quality headline did not replicate either**: `max` doubled figurative flags there (13 → 27); flat here (27 → 26).
+
+#### Two checks that came back clean — do not re-investigate
+
+- **Cantillation is not a regression.** `max` emits te'amim in **84%** of `phrase` fields against 4.6's **0%** (`xhigh` does not). Tested rather than assumed: `hebrew_text_processor.normalize_for_search` neutralises it at both the `voweled` and `consonantal` levels, which are the levels the concordance searches. Cosmetic only.
+- The `figurative` drop was verified per-verse before being reported, precisely because a 59% fall is the shape of a parse failure.
+
+#### What genuinely improved
+
+~8 of `max`'s 14 new phrase targets are real finds, 4 of them LXX-grade, and `xhigh` keeps 6 of the 14 — including **πρός τὸν Ἀσσύριον** (v1), an LXX-only superscription plus and the earliest datable link of Ps 76 to Sennacherib's 701 BCE campaign, which 4.6 missed entirely. Also **ἑορτάσει** (v11, LXX read תַּחְגֹּר as חגג not חגר, defusing "wrath that praises"), **וּמִי־יַעֲמֹד לְפָנֶיךָ** (v8, double-vocabulary overlap with Nah 1:6), **וַיְהִי** (v3, wayyiqtol amid timeless perfects), and **כׇּל־סְבִיבָיו** (v12, verbatim Ps 89:8). Filler in the remainder: `סֶלָה` twice, `{פ}` the petuchah.
+
+**Caveat:** four of the eight are LXX, and the LXX budget is still **not** biting (RULE 8b caps it at ≤2 verses in 5; Ps 27 measured 64%). Richer LXX raw material may push that the wrong way.
+
+#### The lever still worth pulling
+
+Session 362's own *"if revisited"* item 1 — a **model-gated density nudge** to `DISCOVERY_PASS_PROMPT`'s WRITING-DENSITY block — is now the single most promising untested option. Every Ps 76 failure is terseness, not incapacity: `xhigh` found 6 of the best new targets while emitting one figurative flag per verse. If a density instruction buys 4.6-level depth at `xhigh`'s −35% and 4× faster wall clock, that is the win the investigation was originally after. Must be model-gated so 4.6/production stays byte-identical.
+
+#### Method note
+
+The A/B runner does **not** modify production code. It shims `client.messages.stream` to apply the two Sonnet 5 migration changes the Session-362 doc documents, and each arm's `shim_log.json` records that they fired exactly once: Stage 1's `thinking={"type":"enabled","budget_tokens":32768}` → `{"type":"adaptive"}` with `max_tokens` raised to 128000, and Stage 2's absent `thinking` → `{"type":"disabled"}`. The `xhigh` log also shows `effort_was: max` → `effort_now: xhigh`, proving the arms differ only in effort.
+
+**A gotcha already documented and hit anyway:** `MicroAnalystV2`'s default `db_path` is `data/tanakh.db` while the populated 87 MB DB is at `database/tanakh.db`. The Session-362 doc's reproduction notes state this exactly; I ran before reading it. The run failed before any API call, so it cost $0 — but it cost a cycle, and it is an argument for that doc's existence.
+
+---
+
+### Files changed
+
+- `src/utils/cost_tracker.py` — Sonnet 5 corrected, Gemini 2.5 Pro corrected, Fable 5.1 added, `INTRO_PRICING` emptied with the lesson recorded, gpt-5.4 long-context boundary measured
+- `tests/test_prompt_caching.py` — `CACHE_READ_MULTIPLIER_EXCEPTIONS`; `test_no_model_is_on_expired_introductory_pricing`; `test_sonnet_5_is_priced_at_its_permanent_rate`; the promo-mechanism test rewritten against a synthetic model
+- `src/agents/master_editor.py` — `RULE 3 RELATIONSHIP TO INTRODUCTION` crux-deferral clause (+355 chars)
+- `docs/plans/SONNET5_MICRO_AB_FINDINGS.md` — Session 382 replication box, pricing basis marked superseded, per-psalm premium warning, lever 1 strengthened
+- `archive/psalm_76_S382_micro_sonnet5_ab/` — both arms, baseline, costs, shim logs, scripts, README
+
+**171 tests pass.**
+
+---
+
 ## Session 381 (2026-09-10): Every quoted Hebrew line had been printing its own full stop at the head of the sentence
 
 **Trigger**: the author, on the Psalm 74 DOCX — *"have a look at the docx output for ps 74. for quotations, the hebrew punctuation is usually at the beginning rather than the end of the sentence. please fix."*
