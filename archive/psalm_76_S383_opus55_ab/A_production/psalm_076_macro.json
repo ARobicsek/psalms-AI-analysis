@@ -1,0 +1,109 @@
+{
+  "psalm_number": 76,
+  "thesis_statement": "Psalm 76 is a Zion victory-hymn celebrating YHWH as Divine Warrior whose self-revelation at Jerusalem shatters enemy weapons and paralyzes the mightiest warriors, transforming battlefield terror into universal recognition of divine kingship. Its deeper argument: God's cosmic judgment from heaven (vv.9-10) reframes local military deliverance as an eschatological act saving 'the lowly of earth' and compelling even hostile kings to bring tribute—fear (yir'ah/mora) becomes worship.",
+  "genre": "Zion Hymn / Divine-Warrior Victory Song (subtype: Songs of Zion, cf. Pss 46, 48, 87)",
+  "historical_context": "Setting: Jerusalem cult celebrating YHWH's defense of Zion. LXX superscription πρός τὸν Ἀσσύριον → early tradition links to Sennacherib's 701 BCE defeat (2 Kgs 19 // Isa 37). Zion theology: inviolable holy city, YHWH enthroned repels nations. ANE Divine-Warrior/Chaoskampf pattern; Ugaritic Baal breaks weapons, dwells on holy mount. Theophany-as-judgment motif. Asaphite collection (Pss 73-83) emphasizing divine justice + judgment on nations.",
+  "structural_outline": [
+    {
+      "section": "v.1",
+      "theme": "Superscription",
+      "notes": "Liturgical rubric: lamnatzeach + neginot (stringed instruments) + mizmor + shir. Asaph. Cultic performance frame."
+    },
+    {
+      "section": "vv.2-4",
+      "theme": "God known in Zion; weapons shattered",
+      "notes": "Judah//Israel merism (v2). Salem//Zion // (v3) = Jerusalem; sukko/me'onato = lair/den → lion imagery, God as predator-king in his lair. v4 shammah 'there' locates victory at Zion; shibbar 'broke' rishpei-qeshet (fiery arrows), shield+sword+war merism = total disarmament. Selah₁ closes unit."
+    },
+    {
+      "section": "vv.5-7",
+      "theme": "Theophany; warriors stunned",
+      "notes": "Direct address atta (v5) 'resplendent, glorious' me-harerei-taref 'mountains of prey' → continues lion-den predator imagery. v6 tricolon: stout-hearted despoiled, sleep-stupor, brave men powerless. v7 mig'aratekha 'at your blast/rebuke' → horse+chariot stunned. Death-sleep motif (namu/nirdam). God of Jacob epithet."
+    },
+    {
+      "section": "vv.8-10",
+      "theme": "Cosmic judgment from heaven",
+      "notes": "PIVOT: local battle → cosmic tribunal. v8 emphatic atta...atta + rhetorical Q 'who can stand?' + af 'wrath.' v9 din pronounced mi-shamayim 'from heaven'; earth personified: feared+stilled. v10 mishpat + purpose: hoshia' anvei-eretz 'deliver lowly of earth' = judgment serves salvation of oppressed. Selah₂ closes."
+    },
+    {
+      "section": "vv.11-13",
+      "theme": "Human response: acknowledgment + tribute",
+      "notes": "v11 crux: chamat adam todekka 'wrath of man praises you' + she'erit chemot tachgor 'gird remnant of fury.' vv12-13 imperatives nidru+shalemu 'vow+pay'; tribute (shai) to ha-Mora 'the Awesome One'; v13 God curbs (yivtzor) spirit of princes, nora to kings of earth. Universal submission climax."
+    }
+  ],
+  "poetic_devices": [
+    {
+      "device": "inclusio / thematic bracket (fear-root)",
+      "description": "yare'/nora'/mora' root frames + saturates 2nd half: nora' v8, yar'ah v9, mora' v12, nora' v13",
+      "verses": "vv.8-13",
+      "function": "Terror→awe→worship progression; makes divine 'awesomeness' the psalm's telos"
+    },
+    {
+      "device": "synonymous parallelism + merism",
+      "description": "Judah//Israel (v2); Salem//Zion, sukko//me'onato (v3); magen+cherev+milchamah (v4); rechev+sus (v7)",
+      "verses": "vv.2-4, 7",
+      "function": "Totality: full nation, full weaponry, complete disarmament of enemy"
+    },
+    {
+      "device": "lion-den / predator imagery",
+      "description": "sukko 'lair' + me'onato 'den' (v3) + harerei-taref 'mountains of prey' (v5)",
+      "verses": "vv.3, 5",
+      "function": "God as royal predator in Zion-lair; ANE Divine-Warrior; enemies=prey"
+    },
+    {
+      "device": "emphatic direct address (atta) + rhetorical question",
+      "description": "atta v5; doubled atta...atta v8 + mi-ya'amod 'who can stand?'",
+      "verses": "vv.5, 8",
+      "function": "Shifts report→doxological confrontation; asserts incomparability"
+    },
+    {
+      "device": "personification",
+      "description": "eretz 'earth' fears + falls still (v9); chamat adam 'wrath of man' praises (v11)",
+      "verses": "vv.9, 11",
+      "function": "Cosmic scope; hostile human rage co-opted into praise"
+    },
+    {
+      "device": "death-sleep / paralysis motif",
+      "description": "namu shenatam 'slept their sleep' (v6); nirdam 'stunned/deep-sleep' (v7); lo-matz'u yedeihem 'found not their hands'",
+      "verses": "vv.6-7",
+      "function": "Enemy incapacitation = divine victory without human agency"
+    },
+    {
+      "device": "spatial axis (there / from heaven)",
+      "description": "shammah 'there'=Zion (v4) ↔ mi-shamayim 'from heaven' (v9)",
+      "verses": "vv.4, 9",
+      "function": "Links earthly Zion-victory to heavenly tribunal; vertical cosmology"
+    },
+    {
+      "device": "Selah structural markers",
+      "description": "Selah closes v4 + v10",
+      "verses": "vv.4, 10",
+      "function": "Liturgical caesura dividing units; marks two victory/judgment strophes"
+    },
+    {
+      "device": "divine epithet variation",
+      "description": "Elohim (v2), Elohei Yaakov (v7), YHWH Eloheikhem (v12), ha-Mora (v12), nora (v13)",
+      "verses": "vv.2,7,12,13",
+      "function": "Elohistic Psalter; culminates in 'Awesome One' title, tying to fear-inclusio"
+    },
+    {
+      "device": "imperative volitives (call to response)",
+      "description": "nidru+shalemu 'vow+pay'; yovilu shai 'bring tribute'",
+      "verses": "v.12",
+      "function": "Cultic-liturgical turn; audience/nations summoned to submission"
+    }
+  ],
+  "research_questions": [
+    "harerei-taref 'mountains of prey' v5 — MT vs LXX 'eternal mountains' (harerei-'ad); which reading + lion-den ANE parallels?",
+    "sukko + me'onato v3 — lion-lair semantics; cf. me'onah as lion den (Amos 3:4, Nah 2:12); Zion=divine lair theology?",
+    "chamat adam todekka v11 — 'wrath of man praises you' crux; how does human rage yield praise? residue she'erit chemot tachgor meaning?",
+    "yare'/nora'/mora' root cluster vv8-13 — concordance of fear-lexeme; theological arc terror→worship?",
+    "mig'aratekha 'rebuke/blast' v7 — Divine-Warrior rebuke motif; Ugaritic/Chaoskampf parallels (Ps 18:16, 104:7)?",
+    "anvei-eretz v10 'lowly of earth' — social-justice dimension; judgment-for-salvation; Asaphite justice theme?",
+    "LXX πρός τὸν Ἀσσύριον superscription — Sennacherib 701 BCE historicization; how does it shape reception?",
+    "rishpei-qeshet v4 — Resheph (plague/war deity) allusion in 'fiery arrows'? demythologization?",
+    "din (v9) vs mishpat (v10) — heavenly sentence vs execution of judgment; forensic-cosmic tribunal structure?",
+    "yivtzor ruach negidim v13 — 'curbs/cuts off spirit of princes'; vintage-metaphor btzr 'prune/gather grapes'? wordplay?"
+  ],
+  "working_notes": "Two-panel structure: earthly Zion-victory (vv2-7) // heavenly cosmic-judgment (vv8-13); Selah₁(v4)+Selah₂(v10) mark subunits. Predator/lion imagery underappreciated — sukko/me'onato/harerei-taref = coherent lion-lair metaphor, God as royal predator. Vertical axis shammah(Zion)↔mishamayim(heaven) central. Fear-root (yr'/nr'/mr') = organizing thread of 2nd half, climaxing ha-Mora. Death-sleep of enemies = passive victory, no Israelite army mentioned = pure divine agency. v11 chamat adam is major crux — need LXX comparison (ἐνθύμιος ἄνθρωπος). Cf. Ps 46,48 (Zion inviolability); Isa 37 (Sennacherib); Asaph cluster 73-83 (theodicy/nations-judgment). Elohistic Psalter (Elohim-dominant, YHWH only v12). Universal horizon: kings/princes of earth submit — proto-eschatological nations-pilgrimage motif (cf. Ps 68:30, 72:10).",
+  "model_used": "claude-opus-4-8"
+}

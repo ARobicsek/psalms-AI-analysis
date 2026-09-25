@@ -16,6 +16,10 @@ Effort rationale:
                         isolates the model, not the effort setting. Anthropic's
                         migration guidance suggests sweeping xhigh/high/medium
                         once the like-for-like comparison is settled.)
+  opus-5-5  -> "high"  (Session 383; matched to Opus 5 for the Ps 76 A/B. Listed
+                        explicitly because Opus 5.5's API DEFAULT is "medium", one
+                        level below Opus 5's -- a missed match here would silently
+                        downgrade it, not merely leave it at the old default.)
   anything else -> None (older models such as Opus 4.6 reject output_config)
 """
 
@@ -25,6 +29,7 @@ from typing import Optional
 _EFFORT_BY_MODEL_SUBSTRING = (
     ("opus-4-7", "max"),
     ("opus-4-8", "high"),
+    ("opus-5-5", "high"),
     ("opus-5", "high"),
 )
 

@@ -1,0 +1,98 @@
+I'm weighing possible governing arguments for Psalm 76 — the grammatical shift from perfect to imperfect tenses around the Selah, the lion-lair imagery of Zion, and the arc from terror to worship — trying to decide which gives the strongest structural spine for the analysis.
+
+The most explanatory oddity seems to be that the poem has no human agent in its battle scene at all: God alone acts while the enemy simply freezes and sleeps. Then abruptly the poem shifts to a congregation of purely human actors commanded to vow and bring tribute, with the fear-root binding both halves together — fear as the enemy's paralysis, the earth's stillness, and finally the worshiper's reverent offering to הַמּוֹרָא.
+
+This yields a real antithesis: the warriors "could not find their hands" (v.6) against the congregation who "will bring tribute" with theirs (v.12) — the same terror that empties one set of hands fills another. So the psalm's real argument is that fear before God has only two possible resolutions, paralysis or tribute, and its grammar enacts this: perfects for the frozen past, imperatives for the demanded response, with Selah as the hinge that forecloses paralysis as a live option.
+
+For the essay I'll build outward from the lion-den imagery in v.3 (paired oddly with Sukkot's flimsy booth) as the hook, use the aspect-shift and the climactic naming of God "at the terror" as structural proof, and bring in the justice-for-the-poor verse as the turn explaining why this terror is actually good news.
+
+The map itself: superscription, then vv.2-4 (God known, weapons shattered at Zion, Selah), vv.5-7 (theophany, enemy asleep), vv.8-10 (heavenly verdict, judgment for the lowly, Selah), vv.11-13 (human response: vows, tribute, princes curbed). I want to trace how the poem moves from no human army, to perfect-tense verbs, to the hands motif, through the Selah pause, into the purpose clause about judgment rescuing the lowly, then the fear-chain that finally lets God be named at the peak of terror, and back to the hands motif in the closing tribute.
+
+The most exposed human moment is v.10 — after all the terror, the psalm names exactly who it's for: the lowly of the earth. That's where I want my one crafted emotional passage, either in the essay's turn or as a plain, differently-imaged sentence in the commentary at v.10, so the two don't duplicate each other.
+
+Now I'm rationing quotations across thirteen verses, aiming for roughly one strong Tier-1 citation per verse. Rashi on v.4's רִשְׁפֵי stands out — a real philological fight over the un-dageshed peh distinguishing it from Song 8:6, with Minchat Shai backing the Masoretic point, giving me a genuine disagreement to fold in briefly.
+
+For v.5 I'm weighing two candidates that actually clash: Rashi reads נָאוֹר as "destroy" (from Lamentations' נִאֵר) rather than "light," while Ibn Ezra reports both readings, and Malbim transforms the word into "night will not darken for You," picturing God emerging from Zion like a night-lion. Since these genuinely fight each other, I could justify spending two citations on this one verse if I trim elsewhere in the budget.
+
+For v.6, Rashi's reading of אֶשְׁתּוֹלְלוּ as "driven mad" (from שולל in Job) rather than "despoiled" is another real fork worth flagging as Tier 1.
+
+For v.9, the Talmudic material from Shabbat 88a and Avodah Zarah 3a — Hezekiah's paradox about the earth's fear and stillness, tied to Israel's acceptance of Torah — counts as protected content that genuinely reshapes the verse, so that's Tier 1 as well.
+
+For v.11, Rashi's citation of the Mishnaic sense of חגר (the nick in a blade catching a fingernail) to derive "restrain," attributed to R. Elazar the Gaon, is a striking lexical shift that also earns Tier 1.
+
+Malbim's Beur Hamilot offers a genuine syntactic fork here too — reading תחגר as תעצור with the feminine subject as human wrath, restraining what remains of God's own wrath, a mechanism no human could replicate. Since this crux verse carries three distinct readings, I'll present Rashi at Tier 1 and fold Malbim's reading into a compressed Tier-1 treatment alongside it.
+
+For v.13, Rashi's gloss on יִבְצֹר as "lessen" (citing Genesis) matches Metzudat Zion and deserves only Tier 2, since Radak's reading of יִקְטֹף as "he will pluck," evoking a grape harvest, is the more distinctive contribution worth highlighting.
+
+For v.3, Radak's midrash on Shem and Abraham naming — Yireh plus Shalem forming Yerushalayim, with God refusing to let either name go — is delightful and reshapes how one hears בְשָׁלֵם, so it earns Tier 1. The Chida's more daring reading, stripping the yir'ah from Yireh to leave Shalem, is startling but kabbalistically sparse, so I'm weighing whether it merits a Tier 2 mention alongside it.
+
+For v.2, the Malbim's distinction between שֵׁם as mere fame and נוֹדַע as genuine knowledge reframes the parallelism as graded rather than synonymous — Judah knows His essence while Israel only knows His renown. That's a strong Tier 1 pick that meaningfully alters the verse's meaning.
+
+Rashi's note on the vav in v.7 is more syntactic housekeeping, at best a Tier 2 clause. Ibn Ezra's take on the doubled "אַתָּה" in v.8 — that it emphasizes "You alone" are awesome, comparable to Ps 90:1 — is a nice compact Tier 1. And the Malbim's v.12 point that Assyria's terror is only a fragment of God's own fear, so tribute should go to the source rather than the reflection, is a genuine argument worth Tier 1.
+
+For v.10, Malbim frames the earth's stillness theologically: divine judgment isn't meant to empower oppressors but to rescue the afflicted under their hand — a crisp, quotable line I'll use directly in the commentary rather than duplicating it in the essay's landing, which I'll keep in my own voice. Then at v.1, Malbim attributes the psalm's composition to Asaph during Hezekiah's reign.
+
+Checking v.9, Rashi's take that Isaiah prophesied Sennacherib's downfall and calmed the land feels like a weaker Tier 2 option — I'll skip it since the Talmudic source covers that ground better. Tallying up my Tier 1 picks across the psalm, I count fourteen entries spanning thirteen verses, so I'm running slightly over and need to trim.
+
+I decide to demote v.8 Ibn Ezra to Tier 2 rather than cutting the Chida, since the Chida's voice is rarer and more transformative. That brings me to a clean thirteen Tier-1 citations, and I'm counting Torah Temimah's Talmudic material as protected too. For the LXX budget, I set a cap of roughly two citations across every five of the thirteen verses.
+
+Ranking candidates: the superscription in v.1 addressing the Assyrian is huge for reception history, so it's in. The v.11 reading that settles the crux by choosing a different verb entirely is in. The v.5 "eternal mountain" reading that kills the predator theology with a single consonant shift is in. And the v.3 reading of "peace" that erases the Salem wordplay makes four. I skip the odd wealth-of-hand variant in v.6 and find nothing worth taking in v.10 — four total, comfortably under budget.
+
+Now I'm picking literary echoes to weave in: Da Ponte's Don Giovanni line for the vivid "did not find their hands" moment at v.6, Jarrell's ball turret gunner poem for the sleep-to-sudden-death arc at v.7, and Yannai's midnight deliverance piyyut paired with Malbim's night reading for v.5-6. I'm also considering Khaqani's ruins poem for v.13.
+
+For v.10 I'm weighing Fannie Lou Hamer against Tukaram but worry it competes with my ending, so I decide to hold off there. For the essay's hook at the lair, I settle on Ted Hughes's jaguar image — "his stride is wildernesses of freedom" — as the single echo there, keeping the balance at four echoes in commentary and one in the essay.
+
+The prompt calls for only 2-3 echoes in commentary though, so four is too many — I trim down to three: Yannai, Da Ponte, and Khaqani, cutting Jarrell rather than trying to squeeze him in at v.7.
+
+For the "psalm in a human mouth" scene I settle on the Covenanters singing Pont's metrical Psalm 76 before Drumclog in 1679, best placed at v.13 where "he shall cut off the spirit of princes" reads as an anti-monarchical mandate — I want to narrate that moment with the actual 1650 Scottish metrical text.
+
+I'll quote the well-known opening quatrain confidently and paraphrase the more uncertain v.12/13 wording rather than risk a misquote.
+
+Then for the liturgical section I want to note this psalm's role on Sukkot day 1 in Sephardic and Vilna Gaon customs, and its appearance on the 7th day of Passover in some communities.
+
+Working through v.1's superscription: LXX renders it "toward the Assyrian," and בנגינות (strings) suggests a weapons-shattering hymn set to gentle strings — a striking tonal dissonance worth flagging. I'm also noting the rubric-mates (Pss 4, 6, 54, 55, 61, 67), Malbim's Hezekiah dating, and the exact match between this rubric and Psalm 67:1's לַמְנַצֵּחַ בִּנְגִינֹת... שִׁיר — an identical combination worth pursuing.
+
+For v.2, I'm considering Malbim's graded parallelism (נודע escalating to שמו), Judah preceding Israel, the Niphal as self-disclosure, and the parallel in Ps 48:2 (גָּדוֹל יְהוָה...), plus the liturgical connection to Simchat Torah hakafot.
+
+For v.3, I'm tracking the Salem/Shalom rendering in LXX, Radak's midrash linking Shem to Abraham, and the lair imagery paralleled in Jeremiah 25:38, Psalm 10:9, and Amos 3.
+
+I'm deciding to keep the full concordance quotes for the lair imagery in the commentary section since the essay will only gesture at it briefly — the essay's hook needs the Sukkot irony plus the Hughes reference, so I'll save the detailed textual citations (Jer 25:38, Nah 2:12) for the commentary while the essay just notes that סֻכּוֹ and מְעוֹנָתוֹ are lion-den vocabulary with maybe one brief quote.
+
+Moving to v.4, I'm mapping out angles: the שָׁמָּה deixis, Rashi and Minchat Shai on רשפי and the rafeh peh, Resheph as the deity, the tricolon building to מִלְחָמָה, the Ps 46:10 parallel, and Selah — this verse is dense enough for two or three angles. For v.5 I'm noting נָאוֹר's form, Rashi's נאר reading, Malbim's night-lion image, the LXX's הררי עד, and a Yannai echo — clearly the richest verse of the set. Now moving into v.6 with אֶשְׁתּוֹלְ...
+
+Continuing v.6: Rashi's madness-versus-spoil distinction, אַבִּירֵי לֵב alongside Isa 46:12, נָמוּ tied to the Nahum 3:18 Assyrian dirge (a good Obs 6 candidate), and the hands idiom with Da Ponte — plenty of material there. For v.7 I'm tracking מִגַּעֲרָתְךָ against the exact Ps 18:16 form and the sea-rebuke concordance for Obs 8, framing it as demythologization, plus the striking juxtaposition of אֱלֹהֵי יַעֲקֹב and the chariot-before-horse reversal — two solid angles: the gaarah/sea link and the ancestral epithet. Then v.8 opens with the doubled אַתָּה and paseq, Ibn Ezra's clause reading, מֵאָז, and a Yom Kippur connection to explore.
+
+For the piyyut ומי יעמוד לפניך, I want to quote it generously as the "human mouth" for liturgy, alongside Ps 24:3's מי יקום. For v.9 I'm pulling in Talmud Shabbat 88a and Avodah Zarah 3a on the earth's stillness, and deciding to place the מִשָּׁמַיִם/שָׁמָּה sound-pair discussion here too, with transcriptions, rather than at v.4. For v.10, I'm debating whether the din/mishpat formula with Isa 10:2 and Ps 140:13 belongs in the essay as the key insight that judgment equals rescue, while reserving Malbim and עַנְוֵי אֶרֶץ for the verse commentary itself.
+
+Now I'm noting that עַנְוֵי אֶרֶץ occurs only three times total — here, Isa 11:4, and Zeph 2:3 — which makes for a strong standalone angle, plus I want to flag the second Selah and add one plain sentence pointing at the human dimension. For v.11, the real crux: I'm weighing the LXX's ἑορτάσει, Rashi's Mishnaic reading of חגר as snag/restrain, the subject ambiguity between 2ms and 3fs, and Ibn Ezra's take, and forcing myself to commit to one interpretation — leaning toward God girding on the remnant of wrath as His own weapon, choosing among that reading, enemies forced to confess, or simple restraint.
+
+I'm settling on the girding reading: human fury splits in two, one part converted into praise, the leftover strapped onto God as a belt — a coherent, violent image — while naming Rashi's restraint-reading as the tradition flinching from that violence. Then for v.12 I'm turning to YHWH's single appearance alongside לַמּוֹרָא, and tracing שַׁי across its three occurrences including the parallel in Isa 18:7.
+
+I connect this to Malbim's reading of it as a source-of-fear, then to the vow-payment formula in Ps 50:14 — noting that Ps 50 is the other Asaph psalm, sharing the vocabulary of נדר, שלם, סביביו, and סלה.
+
+For v.13, I'm weighing the double sense of יִבְצֹר, Radak's rendering as יקטוף, and the zemirot pun on בָּצְרָה that corroborates the conjecture, alongside the Rosh Hashanah yotzer, the Covenanters/Armada scene, and the Khaqani echo, all converging on the closing נוֹרָא inclusio and the ארץ thread — the final verse needs to land well without overloading it.
+
+I'm also working through v.3's וַיְהִי בְשָׁלֵם סוּכּוֹ, deciding to render it as "And His covert came to be in Salem" while keeping in mind that the translations need to cover full verses.
+
+Now I'm drafting the psalm verses one by one — the opening dedication, God's renown in Judah and Israel, His dwelling in Salem/Zion, His shattering of weapons of war, and the description of mighty warriors left despoiled and asleep with no strength in their hands. For אֶשְׁתּוֹלְלוּ I'm settling on "were despoiled" as my primary rendering, while planning to note Rashi's alternative reading in the commentary.
+
+I'm continuing through the following verses: the stunning of chariot and horse by God's roar, the terror inspired by His anger, the heavens announcing judgment while the earth trembles into stillness, His rising to save the lowly, and the closing exhortation to vow and pay tribute to the LORD as "the Fear."
+
+Now I'm thinking about formatting rules — keeping Hebrew and English paired, avoiding floating parentheticals, and bolding key morphemes where meaning hinges on a single letter. I'm considering where bolding matters most, like the מ in מֵהַרְרֵי that shifts the sense from locative to comparative ("from/than the mountains of prey"), and planning to flag that letter explicitly.
+
+I'm also weighing whether a similar bolding move is needed for מִגַּעֲרָתְךָ (where מ signals "because of/at"), but deciding one clear example is enough rather than doubling up. For the transcription notes, I'm bolding the phonetic clusters that carry the sound argument — the sh/m repetitions in SHĀM-māh and mish-shā-MA-yim — to visually tie the sound-play claim to the letters actually doing the work.
+
+I want to extend the same treatment to the -rā chain (NŌ-rā', mō-RĀ', nō-RĀ') across the fear-related verses, bolding the rā syllable to make that pattern visible too. The piece is going to run long — a substantial essay around 1200 words with dense commentary — so I'm keeping in mind to avoid weak filler glosses and redundant citations as I draft.
+
+I'm starting the essay itself now, opening with Sukkot: this psalm is read on the first day in Sephardic rite and per the Vilna Gaon's custom, and the reason traces to one word in v.3, סוּכּוֹ — which here isn't a garden booth but, paired with מְעוֹנָתוֹ, belongs to the vocabulary of a lion's den, which I want to support with the Amos 3:4 parallel.
+
+I'm also mapping the fuller argument I want to trace: pairing that with Jer 25:38's "עָזַב כַּכְּפִיר סֻכּוֹ" to show Zion isn't a palace but a predator's lair; then bringing in the Hughes poem; then a structural map of the psalm; then the core argument that no human army is present since all the collapse verbs are perfect tense, until Selah flips the whole verb system; then tracing the hands imagery, the din/mishpat formula pointing to the lowly, and the fear-chain culminating in YHWH as הַמּוֹרָא, closing again on hands. I want to double check the exact wording of the Hughes "Jaguar" lines I'm quoting for accuracy.
+
+The closing lines about the jaguar's freedom despite the cage seem right from memory, so I'll quote about 3-5 lines. I'm targeting roughly 1250 words for the essay, planning to place the one built affective passage at the anvei-eretz turn as three plain sentences. For v.9 I want to bring in Shabbat 88a and Hezekiah's derashah on the sequencing of fear and quiet in the verse.
+
+Comparing to the Avodah Zarah 3a version, the earth's fear there is fear for its own existence since creation was made conditional on Israel accepting Torah, and its stillness comes when Israel answers na'aseh ve-nishma — a real derivation with a visible logical route since the earth is a stakeholder in the giving of Torah. Now for v.11 I'm committing to the reading that God dons the leftover garment, and I want to work out why tachgor takes a direct object with a second-person subject.
+
+I note the garment matches the you-address of the previous colon (todecha has "You" as object), and the figurative parallels — Isaiah's belt of righteousness, violence as a garment in Psalms — support this reading over the Rashi/Malbim alternative where human wrath restrains God's remaining fury; I'm committing to God wearing it. The LXX's "shall keep festival to You" reading of tachog is telling — the Greek translator resolved the crux by having the leftover fury celebrate, a pilgrimage feast, which fits nicely since this psalm is itself a Sukkot psalm.
+
+Now I'm ready to actually write this out — tracking the earth/land thread across verses 9, 10, and 13 to mention briefly, avoiding jargon like "deixis," and aiming for a dry register with some wit worked in: a line about shields being broken to the score of harps, something dry on Rashi's Resheph, maybe a nod to the Covenanters, and BDB's admission that the phrase at v.11 is simply "difficult."
+

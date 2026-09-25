@@ -116,8 +116,12 @@ def test_every_model_the_pipeline_can_select_is_priced():
 # fix -- drop the assert to "cache_read > 0" -- would have restored green while giving
 # up the check that caught the original bug. So the multiplier stays asserted exactly,
 # and a model that departs from it has to be NAMED here with its real multiplier.
+#
+# Session 383: Opus 5.5 is the second exception -- a hit is 0.05x ($0.20 against $4),
+# also footnoted on the pricing page. "The sole exception" above was true for 29 days.
 CACHE_READ_MULTIPLIER_EXCEPTIONS = {
     "claude-fable-5-1": 0.025,
+    "claude-opus-5-5": 0.05,
 }
 
 

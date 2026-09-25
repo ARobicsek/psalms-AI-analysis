@@ -124,6 +124,20 @@ PRICING = {
         "cache_write": 6.25,
         "cache_write_1h": 10.00,
     },
+    # Claude Opus 5.5. Session 383: added for the Ps 76 all-Opus A/B; NOT production.
+    # 20% cheaper than Opus 5 on both axes ($4/$20, verified on Anthropic's pricing
+    # page 2026-09-24). Its CACHE READ IS A SECOND EXCEPTION to the 0.1x rule:
+    # $0.20/MTok = 0.05x input, footnoted by Anthropic -- so it is named in
+    # test_prompt_caching.CACHE_READ_MULTIPLIER_EXCEPTIONS alongside Fable 5.1.
+    # Writes are the standard 1.25x / 2x.
+    "claude-opus-5-5": {
+        "input": 4.00,
+        "output": 20.00,
+        "thinking": 20.00,
+        "cache_read": 0.20,
+        "cache_write": 5.00,
+        "cache_write_1h": 8.00,
+    },
     # Claude Sonnet 5. WIRED BUT NOT FIRING: literary_echoes_agent.SECOND_GEN_MODEL
     # names it and the second generator is off by default (that module documents the
     # nine configurations that do not work). It appears in NO saved cost JSON across

@@ -1,0 +1,345 @@
+### INTRODUCTION ESSAY
+
+In Sephardic rites, and in the custom of the Vilna Gaon, the psalm appointed for the first day of Sukkot is this one — a war hymn. The reason is a single word. Verse 3 says וַיְהִי בְשָׁלֵם סוּכּוֹ, "and His covert came to be in Salem," and a festival named for booths will take its psalm wherever it can find the noun.
+
+But סוּכּוֹ here is not a garden shelter, and the poet has paired it with a word that gives the game away. מְעוֹנָתוֹ is a den — specifically, in biblical Hebrew, the den of a big cat. Amos asks הֲיִתֵּן כְּפִיר קוֹלוֹ מִמְּעֹנָתוֹ בִּלְתִּי אִם־לָכָד, "does a young lion give voice from his den unless he has made a catch?" Jeremiah writes of a lion that עָזַב כַּכְּפִיר סֻכּוֹ, "has left his covert like a young lion." Both of the psalm's dwelling-words belong to the same bestiary. Zion, in verse 3, is not a throne room. It is a lair, and something is in residence there the way a predator is in residence.
+
+Ted Hughes, writing in 1957 about a jaguar pacing a zoo enclosure, found the paradox that this verse depends on — that confinement can be the least interesting fact about a dangerous animal:
+
+> He spins from the bars, but there's no cage to him
+> More than to the visionary his cell:
+> His stride is wildernesses of freedom:
+> The world rolls under the long thrust of his heel.
+
+The psalmist is doing something comparable with a city. Locating God in a specific piece of Judean hill country ought to shrink Him. Instead the geography becomes the coiled point from which everything else in the poem is struck.
+
+**The floor plan.** After the superscription (v. 1), the psalm falls into two panels of roughly equal weight, each closed by סֶלָה: God is known at Zion and the enemy's weapons are shattered there (vv. 2–4); a blaze of light, and the invading army falls asleep (vv. 5–7); a verdict issued from heaven, the earth frozen, and judgment declared to be for the rescue of the lowly (vv. 8–10); and then, abruptly, a congregation being given orders — vow, pay, bring tribute — and the spirit of princes cropped like a vine (vv. 11–13).
+
+What is strange about the first two-thirds is what it lacks. There is no Israelite army in this poem. Nobody musters, nobody charges, no hero is named. God breaks the bow, God roars, and the enemy lies down. The only human beings on the field are the ones losing, and they are not described as wounded — they are described as *asleep*: נָמוּ שְׁנָתָם, "they slumbered their sleep" (v. 6), then נִרְדָּם, the deep unconsciousness of surgery and storm, in v. 7.
+
+And every finite verb in that collapse is a perfect — a completed act, closed and done. שִׁבַּר, "He shattered." אֶשְׁתּוֹלְלוּ, "they were despoiled." נָמוּ, "they slumbered." לֹא־מָצְאוּ, "they did not find." נִרְדָּם, "he lay stunned." Even the earth's reaction is finished business: יָרְאָה וְשָׁקָטָה, "it was afraid and grew still." Then comes the second סֶלָה, and the verb system flips wholesale. From verse 11 to the end there is not one perfect: תּוֹדֶךָּ, "shall praise You"; תַּחְגֹּר, "You gird on"; נִדְרוּ וְשַׁלְּמוּ, "vow and pay"; יֹבִילוּ, "let them bear"; יִבְצֹר, "He crops." The battle is over and unrepeatable. The submission it compels has not finished happening. The psalm's architecture is not merely thematic; it is grammatical, and the hinge is audible in the liturgical pause.
+
+Which raises the question the poem exists to answer: if the enemy has already been flattened, why is the last third all commands?
+
+Verse 10 supplies the logic, and it does so by activating a legal formula that most readers will walk straight past. Verse 9 has God pronouncing דִּין from heaven; verse 10 has Him rising לַמִּשְׁפָּט. The pair דִּין // מִשְׁפָּט is a fixed courtroom idiom in biblical Hebrew, and everywhere else it appears its object is the same class of person. Isaiah condemns those who legislate לְהַטּוֹת מִדִּין דַּלִּים וְלִגְזֹל מִשְׁפַּט עֲנִיֵּי עַמִּי, "to turn aside the plea of the poor and rob the case of the needy of My people." Jeremiah's corrupt officials דִּין יָתוֹם, "the orphan's plea," they do not plead, וּמִשְׁפַּט אֶבְיוֹנִים לֹא שָׁפָטוּ, "and the case of the destitute they have not judged." A psalmist declares יַעֲשֶׂה יְהוָה דִּין עָנִי מִשְׁפַּט אֶבְיֹנִים, "the LORD will make the plea of the poor, the case of the destitute." The formula is the language of a village gate where someone with no leverage is trying to get a hearing.
+
+Psalm 76 takes that formula and moves it to the sky. And it keeps the object: לְהוֹשִׁיעַ כָּל־עַנְוֵי־אֶרֶץ, "to save all the lowly of the earth." The cosmic tribunal is doing what the local one was supposed to do and did not.
+
+That is what the accumulated terror of the first nine verses has been for. Not for the nation's pride — the nation is never once said to fight. If you have ever watched a case go to someone who could afford it, or been the person whose complaint everyone was politely too busy to hear, this verse is doing something the broken shields cannot: it is saying that the whole apparatus of divine violence was mustered on behalf of the people with no standing. The psalm's answer to imperial power is not a stronger empire. It is a court that finally sits.
+
+And so the fear that lands on everyone in the poem turns out to be reversible. From verse 8 onward the poet saturates the text with one root: נוֹרָא, "awesome," in v. 8; יָרְאָה, "it was afraid," in v. 9; לַמּוֹרָא, "to the Fear," in v. 12; נוֹרָא again in v. 13. Four times the same sound closes the line. God is finally *named after the emotion He produces* — הַמּוֹרָא is an abstract noun, "dread" itself, pressed into service as a title. And exactly there, at that word and nowhere else in the psalm, the covenant name is released: לַיהוָה אֱלֹהֵיכֶם, "to the LORD your God." Eleven verses of an Elohistic hymn withhold it; it arrives in the same breath as the terror-title, welded to the one line in the poem addressed to a worshiping congregation in the second person plural.
+
+Which brings us back to the hands. The high point of the enemy's humiliation is not death but paralysis: וְלֹא־מָצְאוּ כָל־אַנְשֵׁי־חַיִל יְדֵיהֶם, "and none of the men of valor could find their hands" (v. 6). Hands are agency, weapon-grip, the capacity to act. Fear took them away. Six verses later a different group is standing in the same presence with the same fear, and the verb given to them is יֹבִילוּ שַׁי, "let them bear tribute" — a phrase that requires, precisely, the use of one's hands.
+
+The poem's whole argument is compressed in that contrast. Terror in the face of God is not optional and not survivable on its own terms; what remains open is whether it leaves you unable to lift a hand, or carrying something.
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+
+Psalm 76 is the **psalm of the day (שִׁיר שֶׁל יוֹם) for the first day of Sukkot** in Sephardic and Mizrachi rites and in the custom of the Vilna Gaon. The textual hook is verse 3, וַיְהִי בְשָׁלֵם סוּכּוֹ, "and His covert came to be in Salem" — the only place in the Psalter where God's own סֻכָּה is located in Jerusalem. The choice is more than a pun: Sukkot is the festival at which seventy bullocks were offered for the seventy nations, and this psalm ends with the surrounding peoples bearing tribute (v. 12) and warfare abolished (v. 4). It is the pilgrimage festival's universalism, set to a battle hymn.
+
+In some Ashkenazi and Hasidic communities the psalm is also read on the **seventh day of Passover**, keyed to v. 7, נִרְדָּם וְרֶכֶב וָסוּס, "chariot and horse lay in dead sleep" — Pharaoh's cavalry read into the psalm's stunned army.
+
+#### Key verses and phrases
+
+**v. 2 — נוֹדָע בִּיהוּדָה אֱלֹהִים בְּיִשְׂרָאֵל גָּדוֹל שְׁמוֹ.** In the **Hasidic rite (Nusach Sefard)**, this verse is embedded in the **Simchat Torah hakafot**, evening and morning, within an extended kabbalistic petition recited as the scrolls are carried: וְתִבְנֶה בֵּית הַמִּקְדָּשׁ בִּמְהֵרָה בְיָמֵינוּ… נוֹדָע בִּיהוּדָה אֱלֹהִים בְּיִשְׂרָאֵל גָּדוֹל שְׁמוֹ, "and may You build the Temple speedily in our days… God is known in Judah, in Israel His name is great." The plain sense of the verse is a report of accomplished renown; the procession converts it into a caption for what the congregation is at that moment doing with its feet.
+
+The same phrase, reworked, opens an alphabetical **selichah for the first Monday of the pre–Rosh Hashanah penitential cycle** in the Hasidic rite: אֱלֹהִים בְּיִשְׂרָאֵל גָּדוֹל נוֹדָעְתָּ. אַתָּה יְהֹוָה אָבִינוּ אָתָּה, "God, in Israel You have been known as great; You, LORD, are our Father." The poet has turned the psalm's third-person נוֹדָע, "He is known," into a second-person נוֹדָעְתָּ, "You have been known" — the grammar of report becomes the grammar of address, which is exactly the move the psalm itself makes at v. 5.
+
+**v. 8 — וּמִי־יַעֲמֹד לְפָנֶיךָ.** In the **Edot HaMizrach** machzor, the psalm's rhetorical question is absorbed into the Yom Kippur night selichot piyyut לְךָ אֵלִי תְּשׁוּקָתִי, attributed to Ibn Ezra: וְאֶעֱמֹד נֶגְדְּךָ עֵרוֹם וּמַה־תִּהְיֶה תְּשׁוּבָתִי… וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, "and I shall stand before You naked — and what will my answer be?… and who can stand before You, and who will be my substitute?" In the psalm the question is asked about invading armies. Here it is asked about the man saying it, standing immediately before the confession. The battlefield has become a conscience.
+
+**v. 13 — יִבְצֹר רוּחַ נְגִידִים.** Two very different afterlives. In the **Ashkenazi** Rosh Hashanah Yotzer מֶלֶךְ אָזוּר גְּבוּרָה, inserted into the first blessing before the Shema, the phrase lands in a catalogue of royal epithets: מֶלֶךְ חֲמוּץ בְּגָדִים בְּדָרְכוֹ בוֹגְדִים יִבְצֹר רוּחַ נְגִידִים, "a King crimson-garbed, treading down traitors, who crops the spirit of princes." And in the **Hasidic** Shabbat zemirot, a messianic stanza sets the phrase inside Isaiah 63's winepress: בְּבוֹאוֹ מֵאֱדוֹם חֲמוּץ בְּגָדִים. זֶבַח לוֹ בְּבָצְרָה וְטֶבַח לוֹ בְּבוֹגְדִים… בְּכֹחוֹ הַגָּדוֹל יִבְצוֹר רוּחַ נְגִידִים, "when He comes from Edom, crimson-garbed — a sacrifice for Him in Botzrah and a slaughter for Him among traitors… in His great strength He will crop the spirit of princes." The poet has heard the harvest sense of בצר in the verb and chimed it against the place-name בָּצְרָה, which shares its three consonants. See verse 13 below.
+
+#### Practical Kabbalah
+
+*Shimush Tehillim* assigns Psalm 76 a single purpose: **לְהִנָּצֵל מֵאֵשׁ וּמִמַּיִם**, "to be saved from fire and from water" — recorded also in the early printed manuals as an amulet against sudden conflagration and shipwreck.
+
+The fire is easy to locate. Verse 4 has God shattering רִשְׁפֵי־קָשֶׁת, "fire-bolts of the bow," and רֶשֶׁף elsewhere is plainly burning: רְשָׁפֶיהָ רִשְׁפֵּי אֵשׁ, "its flames are flames of fire" (Song 8:6). Whoever snaps the flame-shafts can be asked to snap a housefire.
+
+The water is subtler, and it sits in verse 7. גַּעֲרָה, God's roar, has one dominant object across the Bible, and it is the sea: מִגַּעֲרָתְךָ יְהוָה, "at Your roar, LORD," the channels of the deep are laid bare (Ps 18:16); גּוֹעֵר בַּיָּם וַיַּבְּשֵׁהוּ, "He roars at the sea and dries it" (Nah 1:4); וַיִּגְעַר בְּיַם־סוּף וַיֶּחֱרָב, "He roared at the Sea of Reeds and it dried up" (Ps 106:9). A traveler reciting this psalm against drowning was reciting the one verb in Hebrew that makes water flinch. And if the danger was bandits rather than weather, vv. 6–7 were ready to hand: let the attackers slumber their sleep and fail to find their hands.
+
+### VERSE COMMENTARY
+
+**Verse 1**
+
+לַמְנַצֵּ֥חַ בִּנְגִינֹ֑ת מִזְמ֖וֹר לְאָסָ֣ף שִֽׁיר׃
+
+> For the leader, with stringed music. A psalm of Asaph. A song.
+
+Two things in this heading repay attention, and the first is an instruction about instruments. בִּנְגִינֹת, "with stringed music," from נְגִינָה — the plucked lyre or harp. The rubric appears in five other psalms (4, 6, 54, 55, 67), and one of them shares this heading word for word: Psalm 67 opens לַמְנַצֵּחַ בִּנְגִינֹת מִזְמוֹר שִׁיר, "for the leader, with stringed music, a psalm, a song." A hymn about the snapping of shields and swords, and it is scored for harps. No shofar, no trumpet, no drum. Whatever this poem is, it is not a march.
+
+The second is what the Greek does with the heading. The Septuagint (Ps 75 in its numbering) adds a phrase the Hebrew has no trace of: ᾠδὴ πρὸς τὸν Ἀσσύριον, "a song against the Assyrian." Someone in the Greek tradition read this psalm, saw the nocturnal collapse of an army before Jerusalem and the tribute-bearing kings, and wrote Sennacherib into the title. That gloss then governed reception for two thousand years. Rashi states it flatly at v. 4 — כָּל הַמִּזְמוֹר הַזֶּה מְדַבֵּר בְּמַפֶּלֶת סַנְחֵרִיב, "this entire psalm speaks of the downfall of Sennacherib" — and adds a wonderfully practical argument for it: שֶׁלֹּא מָצִינוּ אוֹיֵב נוֹפֵל בִּירוּשָׁלַיִם אֶלָּא הוּא, "for we find no enemy falling at Jerusalem but him." The identification rests on elimination. Malbim, following the same line, dates the composition to Hezekiah's reign; Radak, having proposed Sennacherib in an earlier work, changes his mind by the end of this psalm and reassigns it to the war of Gog and Magog. The heading's guess became the field's default, and the commentators spent centuries arguing about which war.
+
+**Verse 2**
+
+נוֹדָ֣ע בִּיהוּדָ֣ה אֱלֹהִ֑ים; בְּ֝יִשְׂרָאֵ֗ל גָּד֥וֹל שְׁמֽוֹ׃
+
+> Known in Judah is God; in Israel His name is great.
+
+The verse looks like straightforward doubling — Judah matched with Israel, God matched with His name, one thought said twice. Malbim's lexical notes refuse the symmetry, and the refusal is worth having:
+
+שֶׁשְּׁמוֹ מוֹרֶה עַל הַפִּרְסוּם וְהוּא מַדְרֵגָה קְטַנָּה מִן נוֹדַע אֱלֹהִים, שֶׁהוּא יְדִיעַת עַצְמוֹ — "for 'His name' indicates public fame, and that is a lesser grade than 'God is known,' which is knowledge of Himself."
+
+On this reading the two halves are not equals but a descending pair: in Judah, where the Presence dwells, God Himself is known; in the rest of the tribes only the reputation reaches. The parallelism becomes a ranking, and the order of the line — Judah first, against the older tribal precedence of the north in archaic poetry — stops being a stylistic accident and becomes the point. Meiri offers the courtlier explanation, that Judah leads לִכְבוֹד הַמַּלְכוּת, "for the honor of the kingship." Malbim's is sharper: Judah leads because Judah has the better of the two verbs.
+
+The verb itself is worth a moment. נוֹדָע is not "they discovered Him." It is the reflexive-passive: God has been made known, and the agent of the disclosure is God. The poem's first statement about its hero is that He does His own revealing — which is why the entire battle report can follow with no human actor in it.
+
+**Verse 3**
+
+וַיְהִ֣י בְשָׁלֵ֣ם סוּכּ֑וֹ; וּמְע֖וֹנָת֣וֹ בְצִיּֽוֹן׃
+
+> And His covert came to be in Salem, His lair in Zion.
+
+The lion-den vocabulary is the reason the introduction spent its opening on this verse; here are the passages themselves. סֻכָּה as a predator's crouching-place: יֵשְׁבוּ בַסֻּכָּה לְמוֹ־אָרֶב, "they lie in the thicket, in ambush" (Job 38:40, of lions); יֶאֱרֹב בַּמִּסְתָּר כְּאַרְיֵה בְסֻכֹּה, "he lurks in hiding like a lion in his covert" (Ps 10:9). And מְעוֹנָה: אַיֵּה מְעוֹן אֲרָיוֹת, "where is the lions' den?" — Nahum's taunt over Nineveh (2:12), the imperial capital figured as a lair heaped with טֶרֶף, torn prey. Both of the psalm's residence-words are at home in that bestiary, which is why Zion's holiness in this poem has teeth rather than walls.
+
+What the medieval commentators do with שָׁלֵם is a different pleasure. Radak reports the midrash on the city's name:
+
+וְאַבְרָהָם קָרָא לְבֵית הַמִּקְדָּשׁ יִרְאֶה, אָמַר הַקָּדוֹשׁ בָּרוּךְ הוּא: אִם אֶקְרָא אוֹתוֹ כְּמוֹ שֶׁקְּרָאוֹ שֵׁם אֲבַטֵּל דִּבְרֵי אַבְרָהָם, וְאִם אֶקְרָא אוֹתוֹ כְּמוֹ שֶׁקְּרָאוֹ אַבְרָהָם אֲבַטֵּל דִּבְרֵי שֵׁם — קָרָא אוֹתוֹ יְרוּשָׁלַיִם — "Abraham called the Temple site Yireh; the Holy One said: if I call it as Shem called it I nullify Abraham's word, and if I call it as Abraham called it I nullify Shem's — so He called it Yerushalayim."
+
+The derivation is mechanical and delightful: יִרְאֶה + שָׁלֵם, spliced, gives you the city's real name, and the splice is an act of divine diplomacy between two ancestors. Note what it implies about our verse — the poet's archaic שָׁלֵם is half of Jerusalem, Shem's half, and it is the half that means *whole* or *at peace*.
+
+The Chida pushes this into something stranger. Citing the *Migdal David*, he reads the two halves of the city's name as separable, and the verse as recording a subtraction: יְרוּשָׁלַם הוּא יִרְאֶה שָׁלֵם וְסִלֵּק הַיִּרְאָה וְנִשְׁאַר שָׁלֵם, וּבֵית הַמִּקְדָּשׁ סִלֵּק הַקְּדֻשָּׁה וְנִשְׁאַר סוּכּוֹ — "Jerusalem is Yireh-Shalem; He removed the *Yireh* and *Shalem* remained; and from the Temple He removed the holiness and a mere booth remained." On this reading וַיְהִי בְשָׁלֵם סוּכּוֹ is not a foundation notice but a demolition report: the city minus its fear, the sanctuary reduced to a hut. It is a reading no grammarian would produce and it inverts the verse completely — and in a psalm whose second half turns on the word יִרְאָה, the suggestion that Jerusalem's name contains that very word, removable, is hard to unhear.
+
+One textual footnote, which matters for what the psalm is allowed to be about. The Septuagint reads ἐν εἰρήνῃ, "in peace," having vocalized the consonants as שָׁלוֹם rather than שָׁלֵם. One vowel, and the geography evaporates: not "His covert came to be in Salem" but "His place came to be in peace." The entire Zion theology — this city, this hill, this lair — depends on the Masoretic pointing.
+
+**Verse 4**
+
+שָׁ֭מָּה שִׁבַּ֣ר רִשְׁפֵי־קָ֑שֶׁת; מָגֵ֬ן וְחֶ֖רֶב וּמִלְחָמָ֣ה סֶֽלָה׃
+
+> There He shattered the fire-bolts of the bow — shield and sword and war itself. Selah.
+
+The verse opens with an unannounced "there" — שָׁמָּה — pointing back to the lair of v. 3 with no verb of motion, no scene-setting, nothing. The place is the argument: this happened *at that spot*.
+
+רִשְׁפֵי preserves, as a common noun, the name of Resheph, the West Semitic god of plague and burning arrows attested at Ugarit and in Egyptian records. In biblical Hebrew he has been demoted to ordinary vocabulary — a fire-bolt, a flame, a pestilence (Deut 32:24; Hab 3:5; Song 8:6, רְשָׁפֶיהָ רִשְׁפֵּי אֵשׁ, "its flames are flames of fire"). Whether the poet still heard the god in the word is unknowable; what is certain is that the Greek translator did not want to find out. The Septuagint gives κράτος τόξου, "the power of the bow," flattening the fire and the divine name together into a bland abstraction.
+
+Rashi, meanwhile, fights for a reading that has nothing to do with fire at all, and his argument is pure philology:
+
+אֵין רִשְׁפֵי קֶשֶׁת לְשׁוֹן רִשְׁפֵּי אֵשׁ… וְזֶה רָפֵי וְרִשְׁפֵּי אֵשׁ דָּגוּשׁ — "'the *rishpei* of the bow' is not the same word as 'the *rishpei* of fire'… this one is soft and 'flames of fire' is hard."
+
+The claim rests on a single dot. In Song 8:6 the pe of רִשְׁפֵּי carries a dagesh and is pronounced *p*; here the Masoretes wrote it without, so it is *f* — two different words that happen to share consonants. Norzi confirms the tradition: הַפ"א רָפֶה עַל פִּי הַמְּסוֹרֶת, "the pe is soft according to the Masorah." Freed from fire, Rashi routes the word instead through Job's בְּנֵי רֶשֶׁף yagbihu uf, flying things, and lands on: חִצִּים שֶׁהַקֶּשֶׁת מְעוֹפֵף, "arrows which the bow sends flying." A vanished Canaanite plague-god, argued out of the verse on the evidence of one missing dot.
+
+The second half of the line does something the English can barely hold. מָגֵן וְחֶרֶב וּמִלְחָמָה is a rising list — shield, then sword, then *war*. The first two are objects you can snap over a knee. The third is not an object at all. The poet climbs from defensive gear to offensive gear and then, where a third weapon should stand, puts the category itself. Compare the same move in Zion's sister psalm: קֶשֶׁת יְשַׁבֵּר וְקִצֵּץ חֲנִית עֲגָלוֹת יִשְׂרֹף בָּאֵשׁ, "the bow He breaks and snaps the spear, the wagons He burns with fire" (Ps 46:10) — which stays concrete throughout. Psalm 76 breaks the hardware and then breaks the practice.
+
+**Verse 5**
+
+נָ֭אוֹר אַתָּ֥ה; אַדִּ֗יר מֵֽהַרְרֵי־טָֽרֶף׃
+
+> Luminous are You — mightier than the mountains of prey.
+
+Here the poem stops talking *about* God and turns to face Him: אַתָּה, the first "You" in the psalm. Three verses of battle report, and then direct address, with no transition.
+
+נָאוֹר is a rare form, from the root of אוֹר, light — "radiant," "illumined." Rashi will have none of it. He derives the word instead from נאר, "to destroy," on the strength of Lamentations 2:7, נִאֵר מִקְדָּשׁוֹ, "He rejected/wrecked His sanctuary," and glosses: מְנָאֵר אֶת אוֹיְבֶיךָ וְקָמֶיךָ וּמְטַאטְאָן מִן הָעוֹלָם, "You wreck Your enemies and those who rise against You, and sweep them from the world." He then adds a category note that deserves attention: the word is an epithet formed from an activity, כְּמוֹ חַנּוּן וְרַחוּם וְקַנּוֹא, "like *gracious*, *merciful*, *zealous*" — God named for what He habitually does. So on Rashi's reading v. 5 does not say God shines; it says God is, by title, the Demolisher. Ibn Ezra reports both options and prefers light; Radak, Meiri and Malbim all take light.
+
+Malbim takes light and then makes something of it, and his reading reorganizes the whole strophe. The fall of Sennacherib's camp happened at night (2 Kgs 19:35), and the enemy in the next two verses is *asleep*. So:
+
+מִפֶּלֶת סַנְחֵרִיב הָיְתָה בַלַּיְלָה… יַמְלִיץ אֶת ה' הַיּוֹצֵא מֵהַר צִיּוֹן לְהַכּוֹת בְּמַחֲנֵה אַשּׁוּר כְּאַרְיֵה וּכְכָפִיר הַיּוֹצֵא בַלַּיְלָה מֵהַרְרֵי טֶרֶף… וּקְרָאוֹ בְּשֵׁם נָאוֹר, כְּאוֹמֵר שֶׁלֹּא יֶחְשַׁךְ לְךָ בַלַּיְלָה בְּלֶכְתְּךָ אֶל מַחֲנֵה הָאוֹיֵב — "He depicts the LORD going out from Mount Zion to strike the camp of Assyria like a lion, like a young lion that comes out at night from the mountains of prey… and he calls Him *Luminous*, as if to say: for You the night is not dark as You go toward the enemy camp."
+
+The lair of v. 3, the mountains of prey here, the sleeping men in v. 6 — one nocturnal hunt, and the strange light-word is the hunter's night vision.
+
+Now the letter that decides the picture. **מֵ**הַרְרֵי־טָרֶף begins with the מ that can mean either "from" or "more than." Read it as "from," and God comes down out of the hunting highlands, as Malbim has Him do. Read it as "than," and the line is a comparison: more majestic than those mountains. The Greek settles a different question entirely and in doing so destroys the image: ἀπὸ ὀρέων αἰωνίων, "from the eternal mountains," which presupposes a Hebrew text reading הַרְרֵי עַד. One consonant apart from הַרְרֵי טֶרֶף — ט against ע — and the difference is whether this psalm has a predator in it. The Masoretic reading is the harder and the more coherent: it alone connects to סוּכּוֹ and מְעוֹנָתוֹ two verses back and to the prey-warriors two verses on. Keep the טֶרֶף.
+
+That the great deliverances come by night, while the powerful sleep, became its own liturgical theme. Yannai, the sixth-century Palestinian poet whose piyyutim were sung in the synagogues of Byzantine Palestine, built an entire composition on it — the poem still recited at the Passover seder, whose every line ends with the word *night*:
+
+> גֵּר צֶדֶק נִצַּחְתּוֹ כְּנֶחְלַק לוֹ לַיְלָה.
+> דַּנְתָּ מֶלֶךְ גְּרָר בַּחֲלוֹם הַלַּיְלָה.
+> הִפְחַדְתָּ אֲרַמִּי בְּאֶמֶשׁ לַיְלָה.
+>
+> "You gave the righteous convert victory when night was divided for him.
+> You judged the king of Gerar in a dream of the night.
+> You terrified the Aramean in the dark of night."
+
+Yannai's anaphora — the same word hammering at the end of line after line — turns night into the medium of divine action rather than its cover. Abraham's ambush at Dan, Abimelech warned in a dream, Laban cautioned in the dark: in every case the human party is unconscious or off-guard, and the intervention arrives where no army could reach. Psalm 76 supplies the scene Yannai's list is built from, and adds the detail Yannai leaves implicit — that while the powerful sleep, the one who does not sleep is *luminous*. Two poets, seven centuries apart, on the same theology: God's most decisive work happens in the hours when human competence is switched off.
+
+**Verse 6**
+
+אֶשְׁתּֽוֹלְל֨וּ ׀ אַבִּ֣ירֵי לֵ֭ב; נָמ֣וּ שְׁנָתָ֑ם; וְלֹֽא־מָצְא֖וּ כׇל־אַנְשֵׁי־חַ֣יִל יְדֵיהֶֽם׃
+
+> Despoiled were the stout-hearted; they slumbered their sleep; and none of the men of valor could find their hands.
+
+Three clauses, three stages of undoing: stripped, unconscious, disarmed.
+
+אֶשְׁתּוֹלְלוּ is a reflexive form of שׁלל, "to plunder" — so, "they were made spoil of themselves." No plunderer is named. The men who came to loot become the loot, without anyone taking it. Rashi rejects the whole plunder line and derives the verb instead from שׁוֹלָל in Job 12:17, מוֹלִיךְ יוֹעֲצִים שׁוֹלָל, "He leads counselors away stripped/deranged," glossing our word as כְּשׁוֹטִים שׁוֹגִים, "like fools going astray." He also explains the odd spelling: וְהַתָּי"ו נוֹפֶלֶת בִּלְשׁוֹן הַמִּתְפַּעֵל בְּאֶמְצַע הַתֵּיבָה בְּכָל תֵּיבָה שֶׁתְּחִלָּתָהּ שִׁי"ן — in the reflexive of any root beginning with shin, the tav migrates into the middle of the word. Correct, and it explains why אֶשְׁתּוֹלְלוּ looks like nothing else on the page. Between "despoiled" and "driven witless" the Hebrew genuinely allows both; the Greek chose derangement (ἀσύνετος καρδία, "senseless of heart"), and Radak chose spoil. I take spoil, because the poem is keeping score of reversals, and the looters becoming loot is the reversal it wants.
+
+אַבִּירֵי לֵב, "stout-hearted," is a fixed phrase, and it occurs elsewhere exactly once — in Isaiah's taunt over Babylon's idols being carted away: שִׁמְעוּ אֵלַי אַבִּירֵי לֵב הָרְחוֹקִים מִצְּדָקָה, "listen to me, you stout-hearted, far from righteousness" (Isa 46:12). The Bible's only other "stout-hearted" are arrogant men indicted in an anti-imperial oracle. The idiom arrives pre-loaded.
+
+Then נָמוּ שְׁנָתָם — literally "they slumbered their sleep," the verb taking its own noun as object, which in Hebrew has the effect of total absorption: sleep all the way down. And נָמוּ in this form appears in only one other verse in the Bible. It is a dirge: נָמוּ רֹעֶיךָ מֶלֶךְ אַשּׁוּר יִשְׁכְּנוּ אַדִּירֶיךָ, "your shepherds slumber, O king of Assyria; your nobles lie down" (Nah 3:18). The psalm's rarest word of collapse is shared, essentially alone, with the Bible's great lament over Assyria — and the line before ours has just used the root of אַדִּיר. The Greek title that reads this psalm "against the Assyrian" was not working from thin air; the vocabulary had already pointed that way.
+
+The last clause is the one that hurts. לֹא־מָצְאוּ… יְדֵיהֶם, "they did not find their hands" — an idiom for total incapacity, with hands standing for the ability to do anything at all. These men are not wounded. They are elite, armed, and neurologically switched off.
+
+Lorenzo Da Ponte dramatized this exact failure, and it is worth watching him do it, because the psalm's idiom becomes literal on stage. In the final scene of *Don Giovanni* (1787), the murdered Commendatore's funerary statue arrives for dinner, and Don Giovanni — a man whose entire character is nerve — is invited to shake hands on it:
+
+> COMMENDATORE: Dammi la mano in pegno!
+> DON GIOVANNI: Eccola! … Ohimè!
+> Che gelo è questo mai!
+> COMMENDATORE: Pentiti, cangia vita,
+> È l'ultimo momento!
+> DON GIOVANNI: No, no, ch'io non mi pento,
+> Vanne lontan da me!
+>
+> "COMMENDATORE: Give me your hand as a pledge!
+> DON GIOVANNI: Here it is! … Alas!
+> What ice is this!
+> COMMENDATORE: Repent, change your life —
+> this is the final moment!
+> DON GIOVANNI: No, no, I do not repent.
+> Get away from me!"
+
+Da Ponte's stroke is to make the reckoning arrive through the hand, and to freeze it. Don Giovanni has faced swords all evening without flinching; what defeats him is a grip he cannot pull out of and a cold he has no vocabulary for. No blow is struck, there is no fight, and the bravest man in the room is finished — from the inside. That is the psalm's mechanism precisely: the men of valor are not beaten, they are *unable*, and the collapse is registered in their hands rather than their bodies. The difference between the two texts is the theology of the last exchange. Da Ponte's libertine is offered repentance and refuses it, which is why he goes down. The psalm's soldiers are offered nothing at all; they simply sleep. And six verses later a congregation will be shown a use for hands that these men no longer have.
+
+**Verse 7**
+
+מִ֭גַּעֲרָ֣תְךָ אֱלֹהֵ֣י יַעֲקֹ֑ב; נִ֝רְדָּ֗ם וְרֶ֣כֶב וָסֽוּס׃
+
+> From Your roar, O God of Jacob, chariot and horse lay in dead sleep.
+
+The sleep deepens. Verse 6 had נָמוּ, dozing; here it is נִרְדָּם, the coma of Adam under the knife (Gen 2:21) and of Jonah below decks while the ship comes apart (Jon 1:5). Malbim's lexical note catches the escalation exactly: תְּנוּמָה קַלָּה מִשֵּׁנָה וְתַרְדֵּמָה הִיא הַשֵּׁנָה הָעֲמֻקָּה, "dozing is lighter than sleep, and *tardemah* is the deep sleep" — they nodded off, and then the roar pushed them under. Note which way the causation runs: ordinarily a shout wakes a man. This one does the opposite.
+
+גַּעֲרָה is the Divine Warrior's roar or blast, and the exact form here, מִ**גַּ**עֲרָתְךָ, "from Your roar," with the מ of "from" fixed to the front, occurs in only one other verse in the Bible — and there its object is the ocean: וַיֵּרָאוּ אֲפִיקֵי מַיִם וַיִּגָּלוּ מוֹסְדוֹת תֵּבֵל מִגַּעֲרָתְךָ יְהוָה מִנִּשְׁמַת רוּחַ אַפֶּךָ, "the channels of water were seen and the foundations of the world laid bare at Your roar, LORD, at the blast of the breath of Your nostrils" (Ps 18:16). The pattern holds wherever the verb appears: מִגַּעֲרָתְךָ יְנוּסוּן, waters flee (Ps 104:7); גּוֹעֵר בַּיָּם וַיַּבְּשֵׁהוּ, "He roars at the sea and dries it" (Nah 1:4); וַיִּגְעַר בְּיַם־סוּף, "He roared at the Sea of Reeds" (Ps 106:9). This is Chaoskampf vocabulary — the language of a god shouting down primordial water.
+
+Psalm 76 aims it at cavalry. And it keeps Psalm 18's other half too: one line later comes מֵאָז אַפֶּךָ, the same nostril-anger idiom. The mythic sea-battle has been retooled into a rout of chariots, with the tackle intact. There is no dragon in this poem. There is a war ministry, and it gets the treatment the dragon used to get.
+
+Two further details. First, the epithet: אֱלֹהֵי יַעֲקֹב, "God of Jacob," is the intimate, tribal, grandfather-name — and it is dropped into the middle of the most cosmic sentence in the psalm. The voice that dries seas is identified by whose family it belongs to. Second, the pairing is backwards. Biblical Hebrew says סוּס וָרֶכֶב, horse then chariot (Exod 14:23; Isa 43:17). Here it is רֶכֶב וָסוּס, the machine first — and the singular verb נִרְדָּם governs both, which means the vehicle is being described as comatose along with the animal. Rashi solves the awkward syntax by declaring the vav superfluous, comparing the stray vav in Genesis 36:24. The poet may simply have wanted the technology to fall asleep.
+
+**Verse 8**
+
+אַתָּ֤ה ׀ נ֥וֹרָא אַ֗תָּה; וּמִֽי־יַעֲמֹ֥ד לְפָנֶ֗יךָ מֵאָ֥ז אַפֶּֽךָ׃
+
+> You — awesome are You. And who can stand before You from the moment of Your anger?
+
+The Masoretes put a vertical stroke — a *paseq*, a mandatory breath-pause — between the first אַתָּה and נוֹרָא. The line as cantillated is therefore: "You — [pause] — awesome are You." The word "You" brackets the word "awesome," and the reader is forced to stop in the middle. Ibn Ezra, characteristically impatient with redundancy, reads the doubling as emphasis: אַתָּה לְבַדְּךָ נוֹרָא, "You alone are awesome," noting that one אַתָּה would have sufficed. It would have. The stammer is the effect.
+
+מִי יַעֲמֹד, "who can stand," borrows from two rooms at once. It is the courtroom — one stands before a judge — and it is the battlefield, where to stand is to hold the line. Psalm 24 asks the same question about the sanctuary: מִי יַעֲלֶה בְהַר יְהוָה וּמִי יָקוּם בִּמְקוֹם קָדְשׁוֹ, "who may go up the mountain of the LORD, and who may stand in His holy place?" There the question screens pilgrims. Here it screens armies.
+
+מֵאָז אַפֶּךָ is compressed to the point of strain: "from-then Your anger." Rashi takes it as a clock reading rather than an era — מִשָּׁעָה שֶׁאַתָּה כּוֹעֵס, "from the hour when You grow angry" — which makes the question mean: from the instant the anger starts, nobody is left standing. Not "no one has ever withstood You." Something closer to: there is no interval.
+
+For the afterlife of this half-verse in the Yom Kippur night liturgy, where the question stops being about armies and becomes a man's question about himself, see the liturgical section above.
+
+**Verse 9**
+
+מִ֭שָּׁמַיִם הִשְׁמַ֣עְתָּ דִּ֑ין; אֶ֖רֶץ יָֽרְאָ֣ה וְשָׁקָֽטָה׃
+
+> From heaven You made the verdict heard; earth was afraid and grew still —
+
+The psalm has one vertical axis, and it is fastened at both ends by words that sound alike. Verse 4 opened its unit with שָׁמָּה, "there," pointing at Zion; this verse opens its unit with מִשָּׁמַיִם, "from heaven." Listen to them: `**SH**ĀM-**m**āh` against `mi**sh**-**sh**ā-**MA**-yim`. Same consonant cluster, š-m-m, each standing first in its strophe. The earthly pole and the heavenly pole rhyme — the word for the spot on the ground already contains the sound of the sky.
+
+דִּין is the pronouncement of sentence, distinct from מִשְׁפָּט in the next verse, which is its execution: the verdict is issued, then the judge rises. Two stages, two verses, one Selah closing them.
+
+And then the earth's reaction, which puzzled the rabbis. אֶרֶץ יָרְאָה וְשָׁקָטָה, "earth was afraid and grew still." Hezekiah's question, preserved in the Talmud:
+
+אָמַר חִזְקִיָּה: מַאי דִּכְתִיב מִשָּׁמַיִם הִשְׁמַעְתָּ דִּין אֶרֶץ יָרְאָה וְשָׁקָטָה? אִם יָרְאָה לָמָּה שָׁקְטָה, וְאִם שָׁקְטָה לָמָּה יָרְאָה? אֶלָּא בַּתְּחִלָּה יָרְאָה וּלְבַסּוֹף שָׁקְטָה — "If it feared, why was it stilled? And if it was stilled, why did it fear? Rather: at first it feared, and at the end it was stilled" (Shabbat 88a).
+
+The reasoning is precise: fear and calm are incompatible states, so the verse cannot be describing one moment; it must be describing a sequence with something between. What the something is emerges in the parallel passage (Avodah Zarah 3a), where the earth is a stakeholder in the drama. God made creation conditional at the outset — אִם יִשְׂרָאֵל מְקַבְּלִין אֶת תּוֹרָתִי מוּטָב וְאִם לָאו אֲנִי אַחֲזִיר אֶתְכֶם לְתֹהוּ וָבֹהוּ, "if Israel accept My Torah, well and good; if not, I return you to formlessness and void." So when the earth hears דִּין from heaven, it is hearing its own case argued, and its terror is terror for its existence. The stillness is the verdict landing the right way.
+
+Read like that, verse 9 is the whole second half of the psalm in miniature. Fear, then settled quiet — which is exactly the arc from נוֹרָא in verse 8 to the tribute-bearing worshipers of verse 12. The Chida, characteristically, worries at the gap: the sages named only the beginning and the end, he says, because between the great fear and the final quiet there necessarily lay a stretch of ordinary dread, which the verse did not trouble to mention.
+
+**Verse 10**
+
+בְּקוּם־לַמִּשְׁפָּ֥ט אֱלֹהִ֑ים; לְהוֹשִׁ֖יעַ כׇּל־עַנְוֵי־אֶ֣רֶץ סֶֽלָה׃
+
+> — when God rose to judgment, to save all the lowly of the earth. Selah.
+
+The verb is a gesture from a courtroom: קוּם, the judge rising, which in biblical usage marks the shift from hearing a case to acting on it. Verse 9 issued the sentence; here the bench stands up.
+
+And then the purpose clause, which reverses what anyone would expect judgment to be for. Malbim states the theology in a single sentence and it is the best thing any commentator says about this psalm:
+
+הַמִּשְׁפָּט הָאֱלֹהִי לֹא יָבֹא לָתֵת תֹּקֶף לְהַעֲרִיץ הָעוֹשֵׁק וְחוֹמֵס, רַק לְהוֹשִׁיעַ אֶת הָעֲנָוִים הַנִּדְכָּאִים תַּחַת יָדוֹ — "the divine judgment does not come to lend force to the terrorizing of the extortioner and the plunderer, but only to save the humble crushed beneath his hand."
+
+That is also his answer to why the earth calmed down in the previous verse: וְלָכֵן עֵת שֶׁשָּׁמְעָה שֶׁבָּא ה' לְמִשְׁפָּט שָׁקְטָה מִיִּרְאָתָהּ, "and therefore, when it heard that the LORD was coming to judgment, it grew quiet from its fear." Judgment is frightening until you learn who it is for.
+
+The phrase עַנְוֵי־אֶרֶץ, "the lowly of the earth," appears only three times in the Bible, and its two companions are worth setting beside this one. Isaiah's ideal king וְהוֹכִיחַ בְּמִישׁוֹר לְעַנְוֵי־אָרֶץ, "shall decide with equity for the lowly of the earth" (11:4). Zephaniah addresses them directly: בַּקְּשׁוּ אֶת יְהוָה כָּל עַנְוֵי הָאָרֶץ אֲשֶׁר מִשְׁפָּטוֹ פָּעָלוּ, "seek the LORD, all you lowly of the earth who have done His justice" (2:3). All three verses stand in contexts of judgment, and in all three the lowly are the beneficiaries rather than the defendants.
+
+This is the verse where the psalm tells you what nine verses of terror were for, and it names the beneficiaries as the people with no leverage.
+
+Note what the second סֶלָה does. Both liturgical pauses in this psalm fall after a statement of completion — the first after the weapons are gone, the second after the purpose is disclosed. And everything after this mark is in a different grammatical world: from here to the end there is not a single completed-action verb. The battle is finished; the bringing of tribute is not.
+
+**Verse 11**
+
+כִּֽי־חֲמַ֣ת אָדָ֣ם תּוֹדֶ֑ךָּ; שְׁאֵרִ֖ית חֵמֹ֣ת תַּחְגֹּֽר׃
+
+> For the fury of man shall praise You; the remnant of furies You gird on.
+
+The hardest line in the psalm, and the lexicon does not pretend otherwise: BDB, after dutifully listing two scholars' proposed emendations, gives up and calls שְׁאֵרִית חֵמֹת simply "difficult."
+
+Take the two halves in order. חֲמַת אָדָם תּוֹדֶךָּ says that human rage acknowledges — praises, confesses, gives thanks to — God, and the verb is from the same root as תּוֹדָה, the thanksgiving offering. Hostile fury ends up performing a cultic act. Rashi explains the mechanism with a specific case: כַּעֲסָן שֶׁל רְשָׁעִים גּוֹרֵם שֶׁהַבְּרִיּוֹת מוֹדִים לְהַקָּדוֹשׁ בָּרוּךְ הוּא, "the rage of the wicked causes creatures to acknowledge the Holy One," and points to Nebuchadnezzar, who threw three men into a furnace and came out of it saying יְהֵא שְׁמֵיהּ דֶּאֱלָהָא מְבָרַךְ, "may the name of God be blessed" (Dan 3:28). The fury does not convert; it fails, publicly, and the failure is the testimony.
+
+A small philological footnote with a large afterlife: the form תּוֹדֶךָּ occurs in only one other verse in the Bible, and it is Hezekiah's, written after his recovery from illness: כִּי לֹא שְׁאוֹל תּוֹדֶךָּ, "for Sheol shall not praise You" (Isa 38:18). Given that Malbim and the Greek tradition both put this psalm in Hezekiah's reign, the coincidence is at least a fingerprint.
+
+The second half is where readers split, and the fault line is a single grammatical fact: תַּחְגֹּר can be "You [masculine] gird," addressed to God, or "she girds," with חֲמַת אָדָם from the previous clause as its subject. Rashi takes the second and reads חגר in its Mishnaic sense — not "to belt" but "to catch, to snag." He cites the rule about a defective slaughtering knife, whose nick must be deep enough שֶׁתַּחְגֹּר בּוֹ הַצִּפֹּרֶן, "for the fingernail to catch in it" — and notes that he heard R. Elazar the Gaon adduce our verse as proof for that Mishnah. On this reading the line means: human rage snags and arrests whatever fury is left over, so that the remaining wicked are הִמְעֻכָּבִים וְנִמְנָעִים מִלְּהַרְאוֹת גַּאֲוָתָם, "held back and prevented from displaying their arrogance." Wrath as a brake.
+
+I take the other reading: God is the one girding, and the remnant of furies is what He puts on. Two reasons. The first colon already addresses God directly — תּוֹדֶךָּ has Him as its object — so a second-person verb in the second colon is the natural continuation. And the image the verb supplies is one the Bible uses constantly for abstractions made visible and operative: וְהָיָה צֶדֶק אֵזוֹר מָתְנָיו וְהָאֱמוּנָה אֵזוֹר חֲלָצָיו, "righteousness shall be the belt of his waist and faithfulness the belt of his loins" (Isa 11:5); כֹּהֲנֶיךָ יִלְבְּשׁוּ־צֶדֶק, "let Your priests be clothed in righteousness" (Ps 132:9). A belt is what you fasten on before doing something.
+
+So: human rage comes at God; part of it is converted into praise, and the part that will not convert is not discarded. It is worn. God straps the leftover fury around Himself and keeps it. Rashi, offering this as his alternative, catches the audacity: לְךָ נָאֶה לַחֲגֹר חֵמָה וְלַעֲטוֹת קִנְאָה כִּי הַכֹּחַ וְהַיְּכֹלֶת שֶׁלְּךָ, "to You it is fitting to gird wrath and wrap Yourself in zeal, for the power and the capacity are Yours."
+
+The Greek translator, confronted with the same crux, went a third way, and the result is lovely. He read the consonants as תָּחֹג, from חגג, "to keep a festival," and rendered ἑορτάσει σοι — "the remnant of wrath shall keep festival to You." The leftover fury does not get belted on; it goes on pilgrimage. Which is, given where this psalm ended up in the Jewish calendar, a reading that turned out to be prophetic about its own liturgy.
+
+**Verse 12**
+
+נִ֥דְר֣וּ וְשַׁלְּמוּ֮ לַיהֹוָ֢ה אֱֽלֹהֵ֫יכֶ֥ם; כׇּל־סְבִיבָ֑יו יֹבִ֥ילוּ שַׁ֝֗י לַמּוֹרָֽא׃
+
+> Vow and pay to the LORD your God, all you who are around Him; let them bear tribute to the Fear.
+
+After eleven verses of report and address, the poem turns and gives orders — נִדְרוּ וְשַׁלְּמוּ, "vow and pay," second person plural, to a congregation that has not been mentioned before. The couplet is standard cultic language; the other Asaph psalm uses it in the same shape: זְבַח לֵאלֹהִים תּוֹדָה וְשַׁלֵּם לְעֶלְיוֹן נְדָרֶיךָ, "sacrifice thanksgiving to God and pay your vows to the Most High" (Ps 50:14). The two psalms also share סְבִיבָיו, "those around Him" — Psalm 50's theophany has וּסְבִיבָיו נִשְׂעֲרָה מְאֹד, "around Him it storms mightily" (50:3). In the Asaphite collection, the people standing in the ring around God are a recurring cast.
+
+שַׁי, "tribute," is nearly a hapax: three occurrences in the Bible, and the one closest to ours does something uncanny. Isaiah, describing the end of an era, writes: בָּעֵת הַהִיא יוּבַל־שַׁי לַיהוָה צְבָאוֹת עַם מְמֻשָּׁךְ וּמוֹרָט… מֵעַם נוֹרָא… אֶל־מְקוֹם שֵׁם־יְהוָה צְבָאוֹת הַר־צִיּוֹן, "at that time tribute shall be borne to the LORD of Hosts by a people tall and smooth… from a people feared… to the place of the name of the LORD of Hosts, Mount Zion" (Isa 18:7). Tribute, the fear-root, and Mount Zion — the same three elements that make up the close of Psalm 76, in the single verse that shares its rarest noun. The third instance keeps the pattern: לְךָ יוֹבִילוּ מְלָכִים שָׁי, "to You shall kings bear tribute" (Ps 68:30). This is not generic royal vocabulary. It is a specific Zion-pilgrimage motif, and the psalm is using its technical term.
+
+Two things happen at the end of this verse at once. The covenant name appears — לַיהוָה, its only occurrence in the psalm, held back through eleven verses of an Elohistic collection. And God receives a title that is not a name at all: לַמּוֹרָא, "to the Fear." מוֹרָא is an abstract noun for dread; elsewhere it denotes the terror Israel's God inspires (Deut 11:25) or the awe owed to a father (Mal 1:6). With the definite article and used as an address, it makes God the Dread itself — named for the effect He has on other people.
+
+Malbim presses that into an argument about political theology, and it changes how the verse reads:
+
+אַחַר שֶׁעִקָּר מְקוֹר הַיִּרְאָה הוּא בַּה'… שֶׁכֹּחוֹ שֶׁל אַשּׁוּר וּמַה שֶּׁהִתְיָרְאוּ כֻּלָּם מִפָּנָיו הָיָה עַל יְדֵי שֶׁה' חָלַק לוֹ חֵלֶק מִיִּרְאָתוֹ… וְאִם כֵּן לָמָּה תּוֹבִילוּ שַׁי לְאַשּׁוּר? הוֹבִילוּ שַׁי אֶל מָקוֹר שֶׁמִּשָּׁם בָּא הַיִּרְאָה — "since the source of fear is in the LORD… for Assyria's power, and everyone's terror of him, came about only because the LORD apportioned him a share of His own fear… then why bring tribute to Assyria? Bring the tribute to the wellspring from which the fear came."
+
+The verse stops being a call to worship and becomes a piece of advice about where to send the annual payment. Every vassal state in the ancient Near East had a tribute line in its budget; Malbim reads the psalm as instructing them to redirect it upstream, past the emperor, to the only entity with an original claim on their terror. Assyria was a licensee.
+
+Listen to the fear-words as they arrive: `NŌ-**rā**'` in v. 8, `mō-**RĀ**'` here, `nō-**RĀ**'` in v. 13 — the same syllable closing three lines, with יָרְאָה of v. 9 between them. And the covenant name is released precisely where that chain reaches its title. The most intimate word in the psalm and the most terrifying one land in the same breath.
+
+**Verse 13**
+
+יִ֭בְצֹר ר֣וּחַ נְגִידִ֑ים; נ֝וֹרָ֗א לְמַלְכֵי־אָֽרֶץ׃
+
+> He crops the spirit of princes; He is awesome to the kings of the earth.
+
+The last verb is a pun, or close to one. Two distinct roots spelled בצר converge: one means "to restrain, cut off, withhold" — Rashi reads it that way, glossing יְמַעֵט, "He diminishes," and citing Genesis 11:6, לֹא יִבָּצֵר מֵהֶם, "nothing will be withheld from them" — and the other means to harvest grapes. Radak commits to the second with one word: יִקְטֹף, "He will pluck." Malbim's lexical note lays both on the table and lets them stand.
+
+Whether the poet heard the vineyard is a conjecture; that later Jewish poets heard it is documented. The Shabbat zemirah of the Hasidic rite embeds this very half-verse inside Isaiah's winepress of wrath:
+
+> בְּבוֹאוֹ מֵאֱדוֹם חֲמוּץ בְּגָדִים.
+> זֶבַח לוֹ בְּבָצְרָה וְטֶבַח לוֹ בְּבוֹגְדִים.
+> וְיֵז נִצְחָם מַלְבּוּשָׁיו לְהַאֲדִּים.
+> בְּכֹחוֹ הַגָּדוֹל יִבְצוֹר רוּחַ נְגִידִים.
+>
+> "When He comes from Edom, crimson-garbed —
+> a sacrifice for Him in Botzrah, a slaughter for Him among traitors,
+> and their lifeblood spatters His garments red —
+> in His great strength He will crop the spirit of princes."
+
+The poet has set יִבְצוֹר two lines away from בְּבָצְרָה, the Edomite city whose name shares its three consonants and whose prophetic scene (Isa 63:3, דָּרַכְתִּי פוּרָה, "I have trodden the winepress") is a vintage of blood. He heard the grapes in the verb and rhymed them against the place. A modern philologist's tentative double meaning, confirmed by a medieval liturgist who was not being tentative at all.
+
+The nouns escalate: נְגִידִים are appointed leaders, officials — men who hold office — while מַלְכֵי אָרֶץ are kings by birth. And what is cropped is not their armies but their רוּחַ: spirit, breath, nerve, the animating confidence that makes a ruler willing to try something. This has been the psalm's method throughout. It never once describes a corpse. It describes hands that cannot be found, chariots asleep, and now the courage pruned off a prince like fruit from a vine.
+
+Persian poetry found the same theology in architecture. Khaqani of Shirvan, riding past the wrecked palace of the Sasanian kings at Ctesiphon in the twelfth century, wrote what became one of the great Persian meditations on fallen power — and made the ruins do the talking:
+
+> هان ای دل عبرت‌بین از دیده عِبَر کن هان
+> ایوان مدائن را آیینهٔ عبرت دان
+> …
+> دندانهٔ هر قصری پندی دهدت نو نو
+> پند سر دندانه بشنو ز بن دندان
+>
+> "Take heed, O heart that looks for warning — take warning from what you see!
+> Know the arch of Madain as a mirror of admonition.
+> …
+> The battlements of every palace offer you fresh counsel;
+> hear the counsel of the battlement-tops from the roots of your teeth."
+
+Khaqani's method is the reverse of the psalm's: he lets ruin speak, and the ruin's lesson is arithmetic — everything standing will fall, therefore be warned. The psalmist does not wait for the rubble. He claims the pruning is happening now, in the present tense of יִבְצֹר, and that the awe which formerly ran from king to subject now runs from God to king. Khaqani's counsel comes from battlements; the psalmist's comes from a den on a hill.
+
+And the psalm closes on the word it has been circling. נוֹרָא, "awesome," rings the second half shut — נוֹרָא (v. 8), יָרְאָה (v. 9), מוֹרָא (v. 12), נוֹרָא. Alongside it the other closing word: אֶרֶץ, "earth," appearing for the third time in five verses. The earth feared (v. 9); the earth's lowly were saved (v. 10); the earth's kings are now the audience. The poem began in Judah and Israel and ends with no borders in it at all.
+
+**Coda: the psalm in a human mouth.** When the Spanish Armada broke up in the storms off Scotland in 1588, Elizabeth I's church appointed a national thanksgiving, and Psalm 76 was among the psalms read in the parishes — a fleet immobilized by weather read as vv. 6–7, chariot and horse in dead sleep. A century later the Scottish Covenanters put the same text to precisely the opposite political use. Hunted field-preachers and their congregations, gathering armed on the moors, sang the metrical Psalm 76 of the Scottish Psalter before battle at Drumclog in 1679:
+
+> In Judah's land God is well known,
+> his name's in Israel great:
+> In Salem is his tabernacle,
+> in Zion is his seat.
+
+What they wanted from the psalm was its last verse — that God "shall cut off the spirit of princes" — read as a standing limit on the authority of Stuart kings. The same thirteen verses served an English queen giving thanks for her survival and Scottish rebels denying her successors' legitimacy. Both were reading correctly. A poem whose final claim is that the awe of kings belongs to somebody else will always be available to whoever is currently short of a king.

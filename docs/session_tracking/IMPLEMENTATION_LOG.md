@@ -9,6 +9,106 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 383 (2026-09-24): Opus 5.5 A/B on Psalm 76 — the lift came from synthesis discovery, and the price cut is outrun by output volume
+
+**Trigger**: the author — *"Opus 5.5 is out! I'd love to do an A/B on ps 76, the last psalm we ran, where we swap out the places where opus is in used with 5.5, high thinking. I'd like to compare the output with the current output in terms of style, quality of writing, compellingness of writing, originality of content, etc etc. Please run only those elements of the pipleine that NEED to be run to re-run the opus elements. please generate a 'B' complete DOCX. don't overwrite anything."* Mid-turn: *"also compare cost"*. Follow-up: *"can you append the psalm_076_master_writer_v4_thinking (for the B run) to the docx? also, please format the docx elegantly so that it requires less paper to print"*.
+
+**Session cost: ~$5.79** — arm B pipeline $5.7833 plus a $0.008 access smoke call. The print edition was $0.
+
+---
+
+### 1. Design of arm B
+
+| Stage | Arm A (production, 2026-09-17) | Arm B |
+|---|---|---|
+| Macro | `claude-opus-4-8`, effort high | `claude-opus-5-5`, effort high |
+| Synthesis discovery | `claude-opus-4-8`, effort high | `claude-opus-5-5`, effort high |
+| Master writer | `claude-opus-5`, effort high | `claude-opus-5-5`, effort high |
+
+**What had to re-run.** The macro feeds the micro analyst, which issues the research requests, so changing the macro forces a new micro pass and a new research bundle, then SD → writer → print-ready → citation filter → copy editor → DOCX. **Literary echoes do not depend on anything upstream**, and its step writes the *canonical* `data/literary_echoes/psalm_076_literary_echoes.txt` — so B skipped it and read A's.
+
+**Opus 5.5 API differences checked before spending anything** (from the claude-api skill's migration guide):
+- **Default effort is `medium`**, one level below Opus 5's `high`. `model_effort.py`'s substring ladder already mapped `opus-5-5` → `high` via `"opus-5"`, but it is now listed explicitly: a miss here would *downgrade* the model, not leave it at its old behaviour.
+- Thinking **cannot be disabled** (`disabled` and `budget_tokens` both 400); forced `tool_choice` 400s. Macro, SD and writer all send `{"type": "adaptive"}` and no tools — no change needed.
+- `THINKING_DISPLAY_MODELS` already matched via `"opus-5"`; the summarized-thinking capture worked (52K chars).
+- A live smoke call (`adaptive` + `display: summarized` + effort high) confirmed account access before the $5 run.
+
+**Pricing verified live** on Anthropic's pricing page: **$4 / $20**, 5-min write $5, 1-h write $8, **cache read $0.20 = 0.05× input**. That is a second exception to the 0.1× rule (after Fable 5.1's 0.025×), so the correct row fails `test_cached_input_is_never_free` and the model is named in `CACHE_READ_MULTIPLIER_EXCEPTIONS` — the Session-382 discipline, reapplied.
+
+### 2. "Don't overwrite anything" took more than `--output-dir`
+
+Three writers ignore the output directory:
+1. `debug_paths.thinking_file()` always resolves to `output/psalm_76/` — the writer **and** copy-editor thinking captures would have overwritten A's. The driver patches `debug_paths.psalm_output_dir` at runtime (it is looked up at call time by `thinking_file`, so the patch takes).
+2. `output/debug/{master_writer_v4,synthesis_discovery}_{prompt,response}_psalm_76.txt` and `copy_editor_response_psalm_76.txt` are single shared slots. Backed up before, copied into `_opus55_B/_debug/` after, and restored, with md5 verification.
+3. Literary echoes (skipped, above).
+
+A **7,178-file md5 manifest** over `output data Documents docs src scripts tests database logs` before and after the run showed exactly the five expected debug slots changed plus new log files — `tanakh.db` included, despite the `Database schema created` log line.
+
+### 3. Cost
+
+| Stage | A in / out | A $ | B in / out | B $ |
+|---|---|---|---|---|
+| Macro | 4,926 / 4,261 | 0.13 | 4,928 / 10,459 | 0.23 |
+| Synthesis discovery | 164,932 / 24,508 | 1.44 | 178,827 / 46,330 | 1.64 |
+| Writer | 187,958 / 34,770 | 1.81 | 208,573 / 54,930 | 1.93 |
+| **Opus subtotal** | | **3.38** | | **3.80** |
+
+- **Output tokens +76%** (63,539 → 111,719) against a **20% per-token cut**. At Opus 5 rates B's volume would have cost $4.76.
+- Input +10% on SD/writer from a bigger bundle and a bigger observations block (SD file 18.7K → 32.0K chars).
+- Downstream re-runs: micro (Sonnet 4.6) $0.53 → $0.66, because a larger macro produced more research requests (concordance entries 529 → 828); liturgical $0.18 → $0.14; copy editor $0.65 → $0.62.
+- Full run: B $5.78 without literary echoes, which puts it near $6.9 production-equivalent against A's $6.42 — **≈ +$0.5/psalm (+7–8%)**. A's figurative-curator cost was not logged separately, so the echoes share is estimated.
+- Wall-clock is not slower: B's SD took 440 s and its writer ~8.7 min (A's writer ~10.7 min).
+
+### 4. Quality — read in full, both arms
+
+Honest framing: one reader, one psalm, and a whole-pipeline swap (B has its own macro and bundle), so the comparison cannot attribute a gain to the writer alone. See `SESSION_372_TRANSLATION_SLOT_AND_JUDGE_VARIANCE.md` on single-judge readings.
+
+**Originality — B, clearly.** Verified parallels in B that A lacks: Hosea 2:20 (the same bow/sword/war list broken, followed by *sleep*, with Israel sleeping there and the invader here); the Song at the Sea reversed (Exod 15:3 *"man of war"* → the breaker of מִלְחָמָה; also explains the 7th-of-Pesach custom); Isa 37:33 (*there*, arrow, shield, turned from negative to positive); Josh 14:15 *"the land had rest from war"* split across the two panels (מִלְחָמָה before the first Selah, אֶרֶץ… שָׁקָטָה at v. 9); Deut 4:36 as the diction behind the Talmud's Sinai reading of v. 9; Ps 10:9's lion in its covert seizing the poor, inverted (*"the one lair whose lion hunts the hunters"*); Pss 9–10 answered point by point; Song 4:8 as evidence for the MT's טֶרֶף; the Minchat Shai masoretic list filing סֻכּוֹ beside a lion's lair and a torn-down booth; Zech 14 and Ezek 38–39 as the actual Sukkot haftarah logic (A explained the custom by pun alone); the ד/ר single-letter frame נוֹדָע → נוֹרָא.
+
+**Architecture — B.** One controlling thesis — *no one in the psalm ever says "we"* — runs from the first paragraph through "who holds the verbs" to the Covenanters coda (*"They sang a poem in which no human being fights, and then they fought"*). A's essay has more threads and a weaker spine.
+
+**Prose — A.** Longer, more rhythmic periods; more pathos; better aphorisms (*"Assyria was a licensee"*; the hands that cannot be found becoming the hands that bear tribute). B is more didactic — three H2 subheads inside the essay, ~9 bulleted lists, inline glosses for lay readers — clearer, less literary.
+
+**Length flat**: 7,692 vs 7,525 English words; B's intro shorter (1,529 vs 1,771), verses longer (5,976 vs 5,567).
+
+**Accuracy**: B has one overclaim (*"Every other lion in a covert hunts the helpless"* — Jer 25:38's lion is God) and one properly flagged conjecture (Gen 49:24). Concordance spot-checks against `tanakh.db` confirmed מִגַּעֲרָתְךָ ×2 and the רִשְׁפֵי form claim.
+
+### 5. The lift is upstream of the writer
+
+Grepping both arms' synthesis-discovery files for B's distinctive finds: Hosea (A_SD 0 / B_SD 6), Exod 15 (0/7), Isa 37:33 (0/2), Josh 14:15 (0/2), Pss 9–10 (1/8), Deut 4:36 (0/3), Zech 14 (0/6), Song 4:8 (0/4), the absent "we" (0/4), Gen 49:24 (0/4). **Nearly all of them originate in B's SD output**; the writer added only a few (Ps 121:4, 1 Sam 26:12). A's own distinctive dîn//mišpāṭ legal-formula finding likewise came from A's SD. SD is the stage the pipeline deliberately pins to Opus 4.8 "for cost". **Next arm: SD-only on 5.5, A's macro and bundle held fixed (~$2).**
+
+### 6. Pipeline defects surfaced (not model defects)
+
+1. **`CopyEditor._reassemble` misfiles liturgical labels.** It splits the corrected text into intro/verses at the first `^\*\*Verses?\s+\d+`. B's writer labelled its liturgical key verses `**Verse 2.** In Nusach Sefard…` (Opus 5 used `**v. 2 — …**`), which matches, so Key-verses and Practical Kabbalah were filed under verse commentary in `copy_edited.md`. The copy editor's own displacement warning fired, and `_extract_sections_from_copy_edited`'s RECOVERY moved 3,280 chars back, so **the DOCX was correct**. Fix: anchor the pattern to a header alone on its line. Queued as a separate task, not done here.
+2. **The gpt-5.4 copy editor introduced four defects into B**: it changed the writer's correct *"the only other occurrence of the form רִשְׁפֵי is Song 8:6"* into the false *"the only other plural use of the noun"* (Ps 78:48 לָרְשָׁפִים is plural), mangled two quotation marks, and added a redundant sentence at v. 5. The raw writer text had none of these. A shows the same quote-mangling pattern, so it is a copy-editor behaviour, not an arm difference.
+
+### 7. Print edition of the B guide ($0)
+
+`Documents/Psalm study guide/Psalm 76 (B - Opus 5.5).docx` was rebuilt through a `DocumentGenerator` subclass (`archive/psalm_76_S383_opus55_ab/build_compact_B.py`), so Hebrew/RTL, divine-name handling and quote blocks are the production code paths; **nothing in `src/` changed**.
+- Letter, margins 0.75″ sides / 0.7″ top / 0.65″ bottom; body 10.5pt Aptos with Hebrew at +1pt (the house ratio); explicit run sizes scaled by 10.5/12; paragraph spacing halved; quote indent 0.5″ → 0.35″; psalm table widened to the text block.
+- The two forced page breaks were removed (after the psalm table, and before the methodology).
+- H2 gets a grey hairline rule; headings keep with their next paragraph.
+- Appendix: *"The Master Writer's Reasoning"*, with a one-line caveat that it is a summary, not a trace, and predates the copy edit. 126 paragraphs at 9pt in two columns, closed by a continuous section break so Word balances the last page.
+- **Guide 25 → 15 pages; with the appendix, 25 total.** Verified by Word `ExportAsFixedFormat` + `pdftoppm` renders of pages 1, 2, 6, 15, 16 and 25.
+- Pre-existing and left alone: the concordance-entries line in the methodology renders Hebrew/Latin in scrambled bidi order (in the original too).
+
+### Files
+
+- `src/utils/cost_tracker.py` — `claude-opus-5-5` row.
+- `src/utils/model_effort.py` — explicit `opus-5-5 → high`, with the `medium`-default rationale.
+- `tests/test_prompt_caching.py` — `claude-opus-5-5: 0.05` in `CACHE_READ_MULTIPLIER_EXCEPTIONS`. **171 tests pass.**
+- `archive/psalm_76_S383_opus55_ab/` — README, both drivers, and both arms' macro, SD, raw writer response, thinking, copy-edited guide, copy-edit changes, cost and stats JSON.
+- Outputs (gitignored): `output/psalm_76/_opus55_B/`. Deliverable (untracked, like the other guides): `Documents/Psalm study guide/Psalm 76 (B - Opus 5.5).docx`.
+
+### Watch
+
+- **No production default moved.** The author is reading both guides before deciding.
+- If 5.5 is adopted anywhere, **pass effort explicitly**, and budget for output volume rather than the per-token cut.
+- The thinking-capture and `output/debug/` collision across A/B arms is still **unfixed in `src/`** — worked around only in the driver.
+- The copy editor's damage to a correct concordance claim is worth a look independently of the model question.
+
+---
+
 ## Session 382 (2026-09-17): A promo that became permanent walked past the safeguard built to catch the opposite failure
 
 **Trigger**: the author, three items in one message — (1) *"I recently read the output of ps 74. a concern - nearly all of the v7 commentary recapitulated what had already been stated in the essay. what happened there?"*, corrected one turn later to *"I MEANT that the repeat between v7 and the essay was in ps 75, not 74. sorry! 75 seems much more egregious."*; (2) *"have the running costs of any of the models changed since we last hard coded their costs into our cost calculator?"*; (3) *"are there any zero-cost opportunities to move to more capable models that we have NOT already tested?"*

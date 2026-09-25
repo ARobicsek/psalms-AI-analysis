@@ -1,0 +1,84 @@
+{
+  "claude-opus-5-5": {
+    "call_count": 3,
+    "input_tokens": 392328,
+    "output_tokens": 111719,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 1.569312,
+      "output_cost": 2.23438,
+      "thinking_cost": 0.0,
+      "cache_cost": 0.0,
+      "total_cost": 3.803692
+    }
+  },
+  "claude-sonnet-4-6": {
+    "call_count": 2,
+    "input_tokens": 28547,
+    "output_tokens": 38032,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.085641,
+      "output_cost": 0.5704800000000001,
+      "thinking_cost": 0.0,
+      "cache_cost": 0.0,
+      "total_cost": 0.6561210000000001
+    }
+  },
+  "gpt-5.6-terra": {
+    "call_count": 2,
+    "input_tokens": 91493,
+    "output_tokens": 29486,
+    "thinking_tokens": 2179,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.182986,
+      "output_cost": 0.353832,
+      "thinking_cost": 0.026147999999999998,
+      "cache_cost": 0.0,
+      "total_cost": 0.562966
+    }
+  },
+  "gpt-5.1": {
+    "call_count": 5,
+    "input_tokens": 13842,
+    "output_tokens": 2970,
+    "thinking_tokens": 9678,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.0173025,
+      "output_cost": 0.0297,
+      "thinking_cost": 0.09678,
+      "cache_cost": 0.0,
+      "total_cost": 0.1437825
+    }
+  },
+  "gpt-5.4": {
+    "call_count": 1,
+    "input_tokens": 20465,
+    "output_tokens": 17141,
+    "thinking_tokens": 20563,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cache_write_1h_tokens": 0,
+    "costs": {
+      "input_cost": 0.0511625,
+      "output_cost": 0.257115,
+      "thinking_cost": 0.308445,
+      "cache_cost": 0.0,
+      "total_cost": 0.6167225000000001
+    }
+  },
+  "total_cost": 5.783284,
+  "events": []
+}

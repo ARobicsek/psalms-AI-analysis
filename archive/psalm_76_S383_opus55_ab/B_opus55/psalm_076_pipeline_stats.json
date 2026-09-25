@@ -1,0 +1,138 @@
+{
+  "psalm_number": 76,
+  "pipeline_start": "2026-09-24T19:59:19.408430",
+  "pipeline_end": "2026-09-24T20:52:04.808983",
+  "steps": {
+    "macro_analysis": {
+      "input_char_count": 1892,
+      "input_token_estimate": 630,
+      "output_char_count": 13081,
+      "output_token_estimate": 4360,
+      "duration_seconds": null,
+      "completion_date": null,
+      "timestamp": "2026-09-24T19:59:19.413098"
+    },
+    "micro_analysis": {
+      "input_char_count": 13081,
+      "input_token_estimate": 4360,
+      "output_char_count": 33827,
+      "output_token_estimate": 11275,
+      "duration_seconds": null,
+      "completion_date": null,
+      "timestamp": "2026-09-24T20:01:45.252013"
+    },
+    "master_editor": {
+      "input_char_count": 359640,
+      "input_token_estimate": 208573,
+      "output_char_count": 49345,
+      "output_token_estimate": 54930,
+      "duration_seconds": null,
+      "completion_date": "2026-09-24T20:52:04.808983",
+      "timestamp": "2026-09-24T20:45:44.184641"
+    }
+  },
+  "research": {
+    "lexicon_requests": [],
+    "concordance_requests": [],
+    "figurative_requests": [],
+    "commentary_requests": [],
+    "lexicon_entries_count": 48,
+    "concordance_results": {
+      "גערה": 26,
+      "רשף": 6,
+      "בצר": 74,
+      "תרדמה": 39,
+      "שלל": 40,
+      "סוך": 43,
+      "נום": 5,
+      "רכב סוס": 50,
+      "ענו": 67,
+      "אלהי יעקב": 50,
+      "חגר": 40,
+      "שבר קשת": 5,
+      "מוֹרָא": 1,
+      "ידוע": 3,
+      "נגינה": 13,
+      "ומעונתו": 15,
+      "אביר": 21,
+      "אדיר": 24,
+      "שקטה": 40,
+      "חמת": 39,
+      "טרף": 39,
+      "דין": 43,
+      "מזמור": 49,
+      "מגן": 47,
+      "נצח": 49
+    },
+    "figurative_results": {
+      "total_instances_used": 585
+    },
+    "figurative_parallels_reviewed": {
+      "lion": 50,
+      "shelter": 50,
+      "arrow": 50,
+      "sleep": 50,
+      "breath": 50,
+      "courtroom": 50,
+      "trophy": 50,
+      "harvest": 50,
+      "glory": 30,
+      "king": 30,
+      "booth": 5,
+      "house": 30,
+      "temple": 24,
+      "den": 6,
+      "prey": 30,
+      "refuge": 30
+    },
+    "commentary_counts": {
+      "Ibn Ezra": 12,
+      "Malbim": 10,
+      "Meiri": 13,
+      "Romemot El": 12,
+      "Radak": 12,
+      "Chomat Anakh": 3,
+      "Malbim Beur Hamilot": 7,
+      "Minchat Shai": 3,
+      "Metzudat Zion": 9,
+      "Rashi": 10,
+      "Torah Temimah": 1
+    },
+    "sacks_references_count": 0,
+    "related_psalms_count": 4,
+    "related_psalms_list": [
+      93,
+      50,
+      18,
+      78
+    ],
+    "research_bundle_chars": 0,
+    "research_bundle_tokens": 0,
+    "deep_research_available": true,
+    "deep_research_included": true,
+    "deep_research_removed_for_space": false,
+    "deep_research_chars": 14698,
+    "literary_echoes_available": true,
+    "literary_echoes_included": true,
+    "literary_echoes_chars": 18840,
+    "sections_trimmed": []
+  },
+  "analysis": {
+    "macro_questions": [],
+    "micro_questions": [],
+    "verse_count": 13
+  },
+  "model_usage": {
+    "macro_analysis": "claude-opus-5-5",
+    "literary_echoes_pass_1a": "gemini-3.1-pro-preview",
+    "literary_echoes_pass_2": "gemini-3.1-pro-preview",
+    "literary_echoes_pass_3": "gpt-5.6-terra",
+    "micro_analysis": "claude-sonnet-4-6",
+    "liturgical_librarian": "gpt-5.1",
+    "figurative_curator": "gpt-5.6-terra",
+    "literary_echoes_pass_1": "gemini-3.1-pro-preview",
+    "synthesis_discovery": "claude-opus-5-5",
+    "master_writer": "claude-opus-5-5",
+    "copy_editor": "gpt-5.4"
+  }
+}

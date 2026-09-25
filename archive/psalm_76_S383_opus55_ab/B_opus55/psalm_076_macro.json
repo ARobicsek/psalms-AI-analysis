@@ -1,0 +1,144 @@
+{
+  "psalm_number": 76,
+  "thesis_statement": "Psalm 76 portrays Zion as the lair of a divine Lion-Warrior whose single rebuke (גערה) disarms war itself. God's victory at 'Salem' (peace) involves no human combatant, and the punchline recasts a local deliverance (Judah/Israel, vv.2-3) as a universal, repeatable pattern in which human fury becomes praise and the kings of the earth bring tribute (vv.11-13). The Zion song works as a liturgy of disarmament: shalom is achieved not by Israel's arms but by God's shattering of all arms, and the 'lowly of the earth' (v.10), not merely Israel, are its beneficiaries.",
+  "genre": "Song of Zion (cf. Pss 46, 48, 84, 87, 122) with Divine Warrior victory hymn + Völkerkampf (assault-of-nations) motif; Asaphite/Elohistic collection; closing liturgical imperative (vows/tribute) → hymnic-cultic coda",
+  "historical_context": "Asaph collection (Pss 50, 73-83), Elohistic Psalter: אלהים dominant, יהוה only v.12. LXX superscription πρὸς τὸν Ἀσσύριον → early reading as Sennacherib's 701 BCE withdrawal (2 Kgs 19:35; Isa 37:36: army 'dead' by morning ~ 'slept their sleep' v.6). Motif is not tied to one event: nations-attack-Zion-and-are-repulsed (Völkerkampf) shared w/ Pss 46:9-10, 48:5-8; Isa 17:12-14, 29:5-8. Exodus substratum: 'horse and chariot' v.7 ↔ Exod 15:1, 21; גערה at sea (Ps 106:9, 18:16, 104:7; Nah 1:4) → Reed Sea combat relocated to Zion. Judg 4-5 echo: נרדם/תרדמה of Sisera, heaven fighting (Judg 5:20 ↔ v.9 'from heaven'). Judah // Israel + 'God of Jacob' (v.7): Asaphite northern traditions (Jacob/Joseph) recentred on Jerusalem, plausibly post-722 unification theology. ANE: divine warrior thunder-voice (Baal's qôl shaking earth, KTU 1.4 VII); lion-deities (Sekhmet, Ishtar/Anat) → YHWH as lion in thicket; רשפי קשת evokes Resheph, Canaanite plague/archer god (Ugaritic ršp; Phoenician 'Resheph of the arrow' ršp ḥṣ); cf. Hab 3:5, Deut 32:24 → Resheph demythologized/subjugated, his arrows broken. Cultic setting: pilgrimage festival at Zion (vows paid, tribute brought v.12); סֻכּוֹ ('his booth/lair') may hint at Sukkot.",
+  "structural_outline": [
+    {
+      "section": "v.1",
+      "theme": "Superscription: לַמְנַצֵּחַ בִּנְגִינֹת, מזמור לאסף שיר",
+      "notes": "Asaph attribution; 'with stringed instruments' cf. Pss 4, 6, 54, 55, 61, 67. LXX adds πρὸς τὸν Ἀσσύριον = earliest historicizing interpretation."
+    },
+    {
+      "section": "vv.2-4",
+      "theme": "God known and enthroned in Judah/Zion; there He shattered weapons and war",
+      "notes": "3rd-person hymnic report. Geographic narrowing Judah/Israel → Salem/Zion → שָׁמָּה 'there' (v.4) = spatial zoom to sanctuary. Surprise: dwelling terms סֻכּוֹ / מְעוֹנָתוֹ = lion's thicket/den (Jer 25:38; Job 38:40; Nah 2:12-13; Amos 3:4) → Zion as predator's lair, not a peaceful shrine. Salem/שלם ↔ שבר (peace via breaking). v.4b object list climaxes in abstraction: shield → sword → WAR itself (cf. Ps 46:10). Selah closes the summary statement."
+    },
+    {
+      "section": "vv.5-7",
+      "theme": "Direct address: radiant Warrior; enemy heroes plundered, frozen in death-sleep by divine rebuke",
+      "notes": "Shift to 2nd person (אַתָּה v.5) = hymnic apostrophe. 'Mountains of prey' continues lion image: predators (אבירי לב, אנשי חיל) become prey. Sleep sequence נמו שנתם → נרדם = stupor → death (Jer 51:39, 57). Idiom 'did not find their hands' = total paralysis. Unexpected: no battle narrated. Victory = one divine 'blast' (v.7), Exodus diction (horse + chariot). Zero Israelite agency."
+    },
+    {
+      "section": "vv.8-10",
+      "theme": "Awesome One as cosmic Judge: sentence from heaven, earth stilled, lowly of all earth saved",
+      "notes": "Emphatic triple pronoun אתה (v.5, v.8 ×2). Rhetorical question 'who can stand?' (cf. Nah 1:6; Mal 3:2; Ps 130:3). Venue expands from Zion lair (v.3) to heaven (v.9): Zion/heaven dual locus. Battle reframed as משפט/דין (lawcourt). Pivot of psalm: purpose clause v.10 'to save all the lowly of the earth' universalizes beneficiaries beyond Israel. ענוי ארץ ↔ אבירי לב / אנשי חיל = reversal of power. שקטה = post-war rest formula (Judg 3:11, 5:31). Second Selah."
+    },
+    {
+      "section": "vv.11-13",
+      "theme": "Coda: human fury converted to praise; call to vows and tribute; God humbles princes, awes kings of earth",
+      "notes": "Tense shift perfects/wayyiqtol → imperfects (תודך, תחגר, יבילו, יבצר) → past event becomes ongoing paradigm. v.11 crux: enemy wrath 'girded' as divine belt/trophy, or emend (Edom/Hamath; LXX ἑορτάσει = תָּחֹגֶּךָּ 'keep festival'). Only imperatives v.12 → congregation (+ nations 'around Him') drawn into cult. Only יהוה v.12. יבצר = grape-harvest verb: God 'vintages' princes' spirit (cf. Isa 63:1-3; Bozrah pun?). Ends on kings' fear, not Israel's joy. Inclusio v.2 (known in Judah) ↔ v.13 (awesome to kings of earth) = local → global."
+    },
+    {
+      "section": "macro-shape",
+      "theme": "Concentric/escalating design",
+      "notes": "A vv.2-3 God's presence in Judah/Zion (local) / B v.4 weapons broken / C vv.5-7 warriors stunned by rebuke / C' vv.8-10 cosmos stilled by judgment / B' v.11 human wrath → praise (weapons' energy repurposed) / A' vv.12-13 tribute + kings of earth (universal). Selahs (vv.4, 10) mark event-summary + expanded hymnic account; vv.11-13 unmarked coda. What poem is really ABOUT: redefinition of power. The only 'weapon' left is God's word/breath (גערה, השמעת דין); human רוח (v.13) and חמה (v.11) are harvested and absorbed."
+    }
+  ],
+  "poetic_devices": [
+    {
+      "device": "Leitwort / root repetition ירא",
+      "description": "נוֹרָא v.8, v.13; יָרְאָה v.9; מוֹרָא v.12 (divine title 'the Awesome One', cf. Isa 8:12-13)",
+      "verses": "vv.8, 9, 12, 13",
+      "function": "Thematic spine: fear moves from earth (v.9) to cultic title (v.12) to kings (v.13). Awe replaces warfare as the governing relation between God and nations."
+    },
+    {
+      "device": "Inclusio / geographic expansion",
+      "description": "Judah/Israel (v.2) → Salem/Zion (v.3) → heaven (v.9) → 'all the lowly of the earth' (v.10) → 'kings of the earth' (v.13); ארץ ×3 (vv.9, 10, 13)",
+      "verses": "v.2 ↔ v.13; vv.9-13",
+      "function": "Local deliverance universalized. God 'known' (נודע) in Judah becomes 'awesome' (נורא) to all kings."
+    },
+    {
+      "device": "Extended metaphor: God as lion",
+      "description": "סֻכּוֹ thicket/lair, מְעוֹנָתוֹ den, הַרְרֵי טָרֶף mountains of prey; enemies = prey, 'despoiled' (אשתוללו)",
+      "verses": "vv.3, 5, 6",
+      "function": "Subverts serene-Zion expectation: Temple = predator's den. Inverts predator/prey (mighty warriors become the kill). Cf. Amos 1:2, 3:8; Hos 5:14; Jer 25:38."
+    },
+    {
+      "device": "Sound play šem / šām / šāmayim / hišmaʿtā",
+      "description": "שְׁמוֹ 'His name' v.2, שָׁמָּה 'there' v.4, שָּׁמַיִם 'heaven' v.9, הִשְׁמַעְתָּ 'you proclaimed' v.9; also שָׁלֵם v.3 / שִׁבַּר v.4 / שַׁלְּמוּ v.12",
+      "verses": "vv.2, 3, 4, 9, 12",
+      "function": "Binds Name theology, sacred place, and heavenly verdict. Salem (peace) ↔ šallemû (pay vows) = shalom answered by cultic payment."
+    },
+    {
+      "device": "Metathesis / near-homophony נָאוֹר ↔ נוֹרָא",
+      "description": "'Resplendent' v.5 echoes 'awesome' vv.8, 13; many emend v.5 to נורא. Also אַדִּיר (God) v.5 ↔ אַבִּירֵי לֵב (enemies) v.6",
+      "verses": "vv.5, 6, 8, 13",
+      "function": "Divine radiance vs human might set side by side through sound. True 'mighty one' contrasted with self-styled mighty."
+    },
+    {
+      "device": "Climactic list / abstraction",
+      "description": "רשפי קשת, מגן, חרב, ומלחמה: concrete weapons → abstract 'war'",
+      "verses": "v.4",
+      "function": "God abolishes war as institution, not just an army. Parallels Ps 46:10; Isa 2:4; Hos 2:20."
+    },
+    {
+      "device": "Demythologization (Resheph)",
+      "description": "רִשְׁפֵי־קָשֶׁת 'flames/Reshephs of the bow': archer-plague deity's arrows broken",
+      "verses": "v.4",
+      "function": "Divine rival reduced to broken ordnance. Possible plague nuance (cf. 2 Kgs 19:35) is subordinated to YHWH."
+    },
+    {
+      "device": "Sleep-to-death imagery (semantic chain)",
+      "description": "נָמוּ שְׁנָתָם → נִרְדָּם (tardemah) → 'did not find their hands'",
+      "verses": "vv.6-7",
+      "function": "Euphemistic, ironic depiction of annihilation without battle. Heroes immobilized, not defeated in fight."
+    },
+    {
+      "device": "Emphatic pronoun anaphora / apostrophe",
+      "description": "אַתָּה v.5; אַתָּה נוֹרָא אַתָּה v.8 (framing), plus vocative אלהי יעקב v.7",
+      "verses": "vv.5, 7, 8",
+      "function": "Shifts from report to doxological encounter. Frames divine identity as the sole actor."
+    },
+    {
+      "device": "Person/voice shifts",
+      "description": "3rd person (vv.2-4) → 2nd person address (vv.5-11) → imperative plural (v.12a) → 3rd person (vv.12b-13)",
+      "verses": "vv.2-13",
+      "function": "Moves from proclamation to worship to summons. Audience expands from Israel to 'all around Him'."
+    },
+    {
+      "device": "Tense shift (perfect → imperfect)",
+      "description": "שִׁבַּר, הִשְׁמַעְתָּ, וַיְהִי (event) vs תּוֹדֶךָּ, תַּחְגֹּר, יֹבִילוּ, יִבְצֹר (ongoing/future)",
+      "verses": "vv.3-10 vs vv.11-13",
+      "function": "Historical victory becomes timeless paradigm and eschatological expectation."
+    },
+    {
+      "device": "Paronomasia on חֵמָה",
+      "description": "חֲמַת אָדָם / שְׁאֵרִית חֵמֹת; possible puns Edom (אדם) / Hamath (חמת)",
+      "verses": "v.11",
+      "function": "Human rage converted into praise and divine attire. Irony of reversal: enemy's fury ends as God's belt/trophy."
+    },
+    {
+      "device": "Agricultural metaphor (vintage)",
+      "description": "יִבְצֹר 'cuts off/gathers grapes': princes' רוּחַ harvested",
+      "verses": "v.13",
+      "function": "Final image of effortless divine reaping. Human רוח vs divine גערה (breath/blast)."
+    },
+    {
+      "device": "Legal-military fusion",
+      "description": "Battle vocabulary (vv.4-7) recast as court: דִּין, מִשְׁפָּט, קוּם 'rise' (judge rising to pronounce)",
+      "verses": "vv.9-10",
+      "function": "Warfare reinterpreted as just verdict. Violence is subordinated to salvation of ענוים."
+    },
+    {
+      "device": "Parallelism (synonymous + staircase-like expansion)",
+      "description": "v.2 Judah//Israel, known//great name; v.3 Salem//Zion, lair//den; v.6 tricolon of incapacitation; v.13 princes//kings",
+      "verses": "vv.2, 3, 6, 13",
+      "function": "Parallel pairs create sacred-geography equivalences (Salem = Zion; Judah = Israel). Tricola mark climaxes (vv.4, 6, 8)."
+    }
+  ],
+  "research_questions": [
+    "Do סֹךְ/סֻכָּה and מְעוֹנָה elsewhere (Jer 25:38; Job 38:40; Nah 2:12-13; Ps 10:9; Amos 3:4) confirm a lion-lair reading? Does סֻכּוֹ also evoke Sukkot/booth (cf. Ps 27:5) → festival setting?",
+    "Does רִשְׁפֵי־קָשֶׁת allude to the deity Resheph (Ugaritic ršp; Hab 3:5; Deut 32:24; Job 5:7; Song 8:6)? How does breaking Resheph's arrows relate to plague traditions of 701 BCE?",
+    "Text-critical: v.5 נָאוֹר vs נוֹרָא; הַרְרֵי טָרֶף vs LXX ὀρέων αἰωνίων (הררי עד). Which reading best fits the lion imagery and the ירא Leitwort?",
+    "v.11 crux: meaning of 'wrath of man shall praise You' and 'gird on remainder of wraths'. Evaluate emendations (אֱדֹם / חֲמָת place names; LXX ἑορτάσει = חגג). Is girding a trophy-belt (cf. Isa 59:17; Ps 65:7, 93:1)?",
+    "גְּעָרָה as combat-myth term (Pss 18:16, 104:7, 106:9; Nah 1:4; Isa 50:2): how does it link v.7's 'horse and chariot' to Exod 14-15 and Chaoskampf?",
+    "Sleep/stupor vocabulary (נום, שנה, רדם; Judg 4:21; Jer 51:39, 57; Nah 3:18): does it signal death-sleep? Does it correlate with 2 Kgs 19:35?",
+    "Hapax-like form אֶשְׁתּוֹלְלוּ (Aramaizing Hitpolel of שׁלל): morphology, dating implications, and irony of plunderers plundered (cf. Isa 10:6, 33:1).",
+    "Scope of ענוי ארץ (v.10) and כָּל־סְבִיבָיו (v.12): Israel only, or nations? Compare Zeph 2:3; Isa 11:4; Pss 68:30, 96:8; Isa 18:7 (tribute to Zion).",
+    "יִבְצֹר v.13: vintage imagery vs 'cut off/restrain'. Possible Bozrah wordplay (Isa 63:1)? Relation to רוּחַ as breath/pride.",
+    "Relation to Pss 46 and 48 (shared weapon-breaking, kings' terror, Zion inviolability): literary dependence, shared cult tradition, or Asaphite adaptation? How does the Asaphite 'God of Jacob' epithet function in a Judah-Zion psalm?"
+  ],
+  "working_notes": "Core insight: psalm about abolition of war, not about a battle. No fighting is narrated, no Israelite army appears, no human king is mentioned (divine kingship only). The only effective force is divine speech/breath (גערה v.7, השמעת דין v.9) vs human רוח (v.13) and חמה (v.11). LXX reads Salem as ἐν εἰρήνῃ ('in peace'): peace-city as site of weapon-breaking = programmatic pun. Irony chain: mighty-hearted (אבירי לב) plundered; men of valor lose their hands; predators on prey-mountains become prey; fury becomes praise; princes harvested like grapes. Tension: God dwells in Zion lair (v.3) yet judges from heaven (v.9) → Zion as earthly point of heavenly throne (cf. Ps 11:4; 1 Kgs 8). Judgment (משפט) defined by its purpose, salvation of ענוים (v.10): divine violence is justified only as protection of the lowly; cf. Ps 72:4, 12. Closing movement mirrors pilgrimage: vows (Israel) + tribute (nations) converge at Zion (Isa 2:2-4; 18:7; 60; Ps 68:30-32). Exodus layering: horse/chariot, rebuke, 'who can stand'. Zion becomes the new Reed Sea. Possible chiastic centre vv.7-8: rebuke → 'who can stand?' Selah placement suggests liturgical pause after event (v.4) and after universal salvation (v.10). Divine-name distribution: אלהים vv.2, 10; אלהי יעקב v.7; יהוה אלהיכם v.12 (only covenant name, placed in cultic imperative) → covenant name reserved for worship obligation. Compare Ps 75 (preceding Asaph psalm: God judges, cuts off horns of wicked, cup of wrath) for sequential reading 75→76: promised judgment → enacted judgment. Downstream: check whether v.13 נגידים/מלכי ארץ echoes Ps 2:2, 48:5; check Targum/rabbinic application (Sennacherib, eschatological Gog).",
+  "model_used": "claude-opus-5-5"
+}
