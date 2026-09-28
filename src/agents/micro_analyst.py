@@ -1331,7 +1331,9 @@ class MicroAnalystV2:
         # Session 351: rank by TRUE lemma frequency (all inflections counted as one),
         # not surface frequency. This is the real distinctiveness signal the
         # "prefer 3-letter forms" heuristic only approximated.
-        freq_fn = librarian.lemma_frequency
+        # Session 384: rank and dedupe with lemmas resolved IN THIS PSALM, so a homograph
+        # (בצר / צר, רדם / רדה) is judged by the word the verse actually uses.
+        freq_fn = lambda w: librarian.lemma_frequency(w, source_psalm=psalm_number)
 
         # --- (B) cap existing collocation queries at 2 words ---
         for req in research_request.concordance_requests:
@@ -1363,12 +1365,12 @@ class MicroAnalystV2:
             if len(_split_words(req.query)) != 1:
                 return set()
             out = set()
-            main = search._resolve_lemma(req.query)
+            main = search._resolve_lemma(req.query, psalm_number)
             if main:
                 out.add(main)
             for alt in (req.alternate_queries or []):
                 if len(_split_words(alt)) == 1:
-                    al = search._resolve_lemma(alt)
+                    al = search._resolve_lemma(alt, psalm_number)
                     if al:
                         out.add(al)
             return out
@@ -1394,7 +1396,7 @@ class MicroAnalystV2:
                 if not phrase:
                     continue
                 for root, freq in select_distinctive_roots(phrase, variants, freq_fn, top_n=1):
-                    lemma = search._resolve_lemma(root)
+                    lemma = search._resolve_lemma(root, psalm_number)
                     if lemma:
                         if lemma in existing_lemmas or lemma in seen_lemmas:
                             continue

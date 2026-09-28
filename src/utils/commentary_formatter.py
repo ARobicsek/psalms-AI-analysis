@@ -26,10 +26,12 @@ if __name__ == '__main__':
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.logger import get_logger
     from src.utils.divine_names_modifier import DivineNamesModifier
+    from src.utils.pipeline_summary import concordance_methods_summary
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .logger import get_logger
     from .divine_names_modifier import DivineNamesModifier
+    from .pipeline_summary import concordance_methods_summary
 
 
 def _commentator_label(name: str) -> str:
@@ -191,17 +193,8 @@ class CommentaryFormatter:
         elif total_commentaries != 'N/A':
             lines.append(f"- **Traditional Commentaries Reviewed**: {total_commentaries}")
 
-        concordance_results = research_data.get('concordance_results', {}) or {}
-        concordance_total = sum(concordance_results.values())
-
-        # Concordance entries breakdown (query -> count)
-        concordance_breakdown_str = ""
-        # Filter out the legacy 'total_results' key to get per-query entries
-        concordance_per_query = {k: v for k, v in concordance_results.items() if k != 'total_results'}
-        if concordance_per_query:
-            items = [f"{self.modifier.modify_text(q)} ({c})" for q, c in sorted(concordance_per_query.items())]
-            concordance_breakdown_str = f" ({'; '.join(items)})"
-        lines.append(f"- **Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}{concordance_breakdown_str}")
+        # Session 384: one shared description (pipeline_summary.concordance_methods_summary)
+        lines.append(f"- **Concordance Searches**: {concordance_methods_summary(research_data, self.modifier.modify_text)}")
 
         # The key is 'figurative_results' which contains a dict like {'total_instances_used': 15}
         figurative_results = research_data.get('figurative_results', {}) or {}

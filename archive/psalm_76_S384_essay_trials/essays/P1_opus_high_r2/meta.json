@@ -1,0 +1,16 @@
+{
+  "arm": "P1_opus_high_r2",
+  "prompt": "p1",
+  "model": "claude-opus-5-5",
+  "effort": "high",
+  "usage": {
+    "input": 4391,
+    "cache_write_1h": 0,
+    "cache_write": 0,
+    "cache_read": 181208,
+    "output": 8850
+  },
+  "cost_usd": 0.2308,
+  "stop_reason": "end_turn",
+  "words": 1898
+}

@@ -73,6 +73,7 @@ class ResearchStats:
     # Returns
     lexicon_entries_count: int = 0
     concordance_results: Dict[str, int] = field(default_factory=dict)  # query -> count
+    shared_vocabulary_count: int = 0  # Session 384: intertext-radar passages in the bundle
     figurative_results: Dict[str, int] = field(default_factory=dict)  # verse -> count
     figurative_parallels_reviewed: Dict[str, int] = field(default_factory=dict)  # vehicle -> count (for curated output)
     commentary_counts: Dict[str, int] = field(default_factory=dict)  # commentator -> count
@@ -273,6 +274,7 @@ class PipelineSummaryTracker:
             query = bundle.request.query
             count = len(bundle.results)
             self.research.concordance_results[query] = count
+        self.research.shared_vocabulary_count = getattr(research_bundle, 'shared_vocabulary_count', 0) or 0
 
         # Figurative language results - Count all instances from all bundles
         # This ensures we count from the full, untrimmed bundle that the MasterEditor sees.
@@ -768,3 +770,43 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+def concordance_methods_summary(research_data: Dict[str, Any], modify=None) -> str:
+    """
+    The guide's methods-section description of the concordance work (Session 384).
+
+    ONE implementation, used by all three document generators, which each used to
+    carry their own copy of a line headed "Concordance Entries Reviewed" that summed
+    the result counts of every search. That number measured nothing stable: it moved
+    with whichever words the micro analyst happened to search, the counts were capped at
+    ~50 in alphabetical-book order, and the writer only ever saw a handful per search.
+
+    Now: how many searches, how many matching verses they found (true totals since
+    Session 384; older runs report their capped counts), how many were actually shown to
+    the writer, and the shared-vocabulary parallels computed over the whole Bible.
+    `modify` renders divine names in the per-query breakdown.
+    """
+    try:
+        from src.concordance.search import DISPLAY_RESULTS_PER_SEARCH
+    except ImportError:
+        from ..concordance.search import DISPLAY_RESULTS_PER_SEARCH
+    per_query = {k: v for k, v in (research_data.get('concordance_results') or {}).items()
+                 if k != 'total_results'}
+    radar = research_data.get('shared_vocabulary_count', 0) or 0
+    if not per_query and not radar:
+        return 'N/A'
+    parts = []
+    if per_query:
+        total = sum(per_query.values())
+        shown = sum(min(v, DISPLAY_RESULTS_PER_SEARCH) for v in per_query.values())
+        parts.append(f"{len(per_query)} word searches finding {total:,} matching verses, "
+                     f"{shown:,} of them quoted to the writer")
+    if radar:
+        parts.append(f"{radar} shared-vocabulary parallels computed across every verse of the Bible")
+    text = "; ".join(parts)
+    if per_query:
+        mod = modify or (lambda s: s)
+        items = [f"{mod(q)} ({c})" for q, c in sorted(per_query.items())]
+        text += f" ({'; '.join(items)})"
+    return text

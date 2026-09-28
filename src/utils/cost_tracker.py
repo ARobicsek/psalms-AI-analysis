@@ -323,6 +323,22 @@ PRICING = {
         "cache_write": 0.0,  # OpenAI does not charge for cache writes
         "cache_write_1h": 0.00,
     },
+    # GPT-6 Sol (OpenAI, launched 2026-09-22). Session 384: added for the writer-prompt
+    # essay trials. THE $2/$10 LAUNCH PRICE IS A PROMO, encoded in INTRO_PRICING below
+    # ("guaranteed at least through 2026-11-21"). THIS DURABLE ROW IS AN ASSUMPTION,
+    # NOT A VERIFIED PRICE: OpenAI described the promo as half of GPT-5.6 Sol's
+    # $4/$20, so that is what is encoded here. Session 382's lesson applies with full
+    # force -- when the promo expires, RE-CHECK this row; the promo may become the
+    # price, as Sonnet 5's did. Long-context tier (> 272K input tokens: $4 / $15 on the
+    # promo) NOT encoded; the Ps 76 writer inputs are ~129K o200k tokens.
+    "gpt-6-sol": {
+        "input": 4.00,
+        "output": 20.00,
+        "thinking": 20.00,  # reasoning tokens billed as output
+        "cache_read": 0.40,  # 10% of input
+        "cache_write": 0.0,  # OpenAI does not charge for cache writes
+        "cache_write_1h": 0.00,
+    },
     # Gemini 2.5 Pro (Google). Session 382: CORRECTED from $3.00/$12.00 with
     # cache_read $0.30 and cache_write $3.75. Those were never Google's rates -- the
     # two marked "(approximate)" were Anthropic-shaped guesses (10% and a 25% write
@@ -379,7 +395,14 @@ PRICING = {
 # construction" survived six weeks in Session 373. Encode the durable rate and the
 # override simply STOPS APPLYING on its own. The failure mode is self-healing.
 INTRO_PRICING = {
-    # EMPTY as of Session 382, and the emptiness is the finding.
+    # GPT-6 Sol launch promo (Session 384): $2 / $0.20 cached / $10, "guaranteed at
+    # least through 2026-11-21" (OpenAI launch coverage, checked 2026-09-28). When this
+    # expires, RE-CHECK the durable row -- see the note at the bottom of this dict.
+    "gpt-6-sol": {
+        "through": date(2026, 11, 21),
+        "rates": {"input": 2.00, "output": 10.00, "thinking": 10.00, "cache_read": 0.20},
+    },
+    # WAS EMPTY from Session 382 until Session 384, and that emptiness was a finding.
     #
     # Claude Sonnet 5's $2/$10 was announced as introductory through 2026-08-31. On
     # 2026-08-10 Anthropic made it the STANDARD price and cancelled the scheduled

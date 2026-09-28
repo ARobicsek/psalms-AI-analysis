@@ -1,0 +1,122 @@
+{
+  "P0_opus_high": {
+    "words": 1435,
+    "headings": 2,
+    "bullet_lines": 4,
+    "bible_refs_distinct": 6,
+    "commentator_mentions": 3,
+    "dossier_echoes_used": [
+      "Da Ponte"
+    ],
+    "block_quote_lines": 7,
+    "selah_mentions": 2
+  },
+  "P0_sol_high": {
+    "words": 1014,
+    "headings": 0,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 7,
+    "commentator_mentions": 2,
+    "dossier_echoes_used": [],
+    "block_quote_lines": 0,
+    "selah_mentions": 0
+  },
+  "P1_opus_high_r1": {
+    "words": 1987,
+    "headings": 4,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 0,
+    "commentator_mentions": 6,
+    "dossier_echoes_used": [],
+    "block_quote_lines": 7,
+    "selah_mentions": 4
+  },
+  "P1_sol_high_r1": {
+    "words": 1591,
+    "headings": 0,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 4,
+    "commentator_mentions": 3,
+    "dossier_echoes_used": [
+      "Paz"
+    ],
+    "block_quote_lines": 13,
+    "selah_mentions": 2
+  },
+  "P1_opus_high_r2": {
+    "words": 1898,
+    "headings": 4,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 3,
+    "commentator_mentions": 8,
+    "dossier_echoes_used": [],
+    "block_quote_lines": 7,
+    "selah_mentions": 2
+  },
+  "P1_sol_high_r2": {
+    "words": 1668,
+    "headings": 0,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 6,
+    "commentator_mentions": 0,
+    "dossier_echoes_used": [
+      "Trakl"
+    ],
+    "block_quote_lines": 13,
+    "selah_mentions": 4
+  },
+  "P1_sol_xhigh": {
+    "words": 1542,
+    "headings": 0,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 3,
+    "commentator_mentions": 1,
+    "dossier_echoes_used": [
+      "Su Shi"
+    ],
+    "block_quote_lines": 7,
+    "selah_mentions": 4
+  },
+  "P2_opus_high": {
+    "words": 2055,
+    "headings": 5,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 4,
+    "commentator_mentions": 8,
+    "dossier_echoes_used": [],
+    "block_quote_lines": 6,
+    "selah_mentions": 3
+  },
+  "P2_sol_high": {
+    "words": 1412,
+    "headings": 0,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 4,
+    "commentator_mentions": 1,
+    "dossier_echoes_used": [],
+    "block_quote_lines": 4,
+    "selah_mentions": 4
+  },
+  "REF-A (production, Opus 5)": {
+    "words": 1185,
+    "headings": 0,
+    "bullet_lines": 0,
+    "bible_refs_distinct": 0,
+    "commentator_mentions": 0,
+    "dossier_echoes_used": [
+      "Hughes"
+    ],
+    "block_quote_lines": 4,
+    "selah_mentions": 2
+  },
+  "REF-B (all-Opus-5.5 run)": {
+    "words": 1446,
+    "headings": 3,
+    "bullet_lines": 12,
+    "bible_refs_distinct": 7,
+    "commentator_mentions": 5,
+    "dossier_echoes_used": [],
+    "block_quote_lines": 0,
+    "selah_mentions": 3
+  }
+}

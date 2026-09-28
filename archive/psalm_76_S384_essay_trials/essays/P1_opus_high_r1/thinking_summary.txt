@@ -1,0 +1,40 @@
+I need to write a 1,200–2,000 word essay on Psalm 76, so I'm reviewing the psalm's content first: God's dwelling in Zion, his shattering of weapons of war, the terror that falls on the stouthearted, and his rebuke that stills chariot and horse.
+
+I'm noticing the structure — there's no battle shown, only the aftermath: broken weapons, sleeping soldiers, a world gone still after God's single rebuke. This gives me a governing idea: the psalm is a war song with no war in it, walking through the morning after to show that force belongs only to God, while humans can only fail and fall silent.
+
+I'm also drawn to the absence of "we" throughout — the saved aren't cast as a first-person community but as "all the lowly of the earth," which widens who this speaks to: the besieged, the powerless before empire, but also a warning to the powerful. Byron's "The Destruction of Sennacherib" offers a striking parallel from the other side of such an event, especially his image of the dead horse's nostril no longer carrying "the breath of his pride" — an echo of the psalm's language about the spirit of princes and human breath.
+
+And Sennacherib's own account confirms Hezekiah "shut up like a bird in a cage" and paid tribute — 30 talents of gold, 800 of silver — flowing to Nineveh, contrasting with the psalm's tribute flowing to "the Fear" in Zion. Sennacherib's inscriptions also invoke the Assyrian melammu/puluḫtu, that terrifying divine radiance projected by the king.
+
+I should note the Lachish reliefs too, as visual corroboration of the siege, though I want to avoid overstating the psalm's direct link to 701 BCE—better to frame it as tradition. And Herodotus's account of mice gnawing the Assyrians' bowstrings and shield-handles at Pelusium is a striking parallel to verses about broken arrows and bows and hands that "could not be found"—that's worth drawing out.
+
+Some commentaries do link Herodotus to 2 Kings 19, which strengthens the tie to Psalm 76:4's "hands." I'm also weighing other resonances—Isaiah 37:33's "no arrow, no shield" language parallels the breaking of weapons theme, and there's a passing thought about ritual weapon-breaking traditions and Exodus 15's "man of war" imagery, though these feel more tangential.
+
+For the literary quotes, I'm narrowing toward Byron paired with Herodotus as sufficient—keeping it to one or two strong echoes rather than piling on Kaminsky, Paz, or the Yannai piyyut, since the instructions call for restraint (one to three references only).
+
+I'm fairly confident in that quote, so I'll cite it. I also want to bring in Malbim's comment on the horses line — noting it's unusual since horses typically stay awake at night — and his point in Beur Hamilot that God's rebuke lulls to sleep, the reverse of a human rebuke which wakes someone up.
+
+On verse 11, I'm considering עכבה as "restrain," tied to Nebuchadnezzar's praise, and noting Radak's shift in interpretation from Assyria to Gog. Torah Temimah's reading of Sinai — fear first, then stillness — and Chomat Anakh's split of Jerusalem into יראה and שלם, with the psalm naming only Shalem, seem worth folding in briefly, maybe alongside Obadiah 7.
+
+I'm sketching the essay's shape: verses 2-4 on the setting and disarmament, 5-7 on the sleeping army, 8-10 on the divine court and the lowly, 11-13 as a coda where fury turns to praise, tribute is paid, and princes are cut down, with a shift into future tense. For the opening, I'm thinking of starting with Sennacherib's prism inscription — the image of the king trapped like a bird in a cage, overwhelmed by imperial splendor — as a contrasting frame.
+
+I want to open instead with the core image: a victory song where nobody fights, then move through the psalm's shape, its sensory moments, its grammar, its refusal of "we," then bring in Assyrian melammu, Herodotus, Byron, and Hosea's sleep inversion alongside Exodus 15, ending on what's left for the reader — stopping, giving thanks, fury turning to praise. I'm also holding onto the central image in verse 6, "could not find their hands" — the experience of reaching for strength and finding nothing, or waking to find the thing you feared has fallen asleep.
+
+I'm double-checking Sennacherib's Prism inscription against Luckenbill's translation to make sure the Hezekiah passage — the "bird in a cage," the tribute of gold and silver sent to Nineveh — is accurate before I use it.
+
+I'm also verifying Herodotus 2.141, the story of mice gnawing bowstrings and shield-handles that left the Assyrian army defenseless overnight, plus the temple statue of Sethos holding a mouse with its inscription, and confirming the Byron reference to Hebrew Melodies (1815).
+
+Then I pull up stanzas 3 and 4 of "The Destruction of Sennacherib," noting how they describe the Angel of Death's breath stilling the sleepers and the fallen steed's cold, foam-flecked breath—echoing the psalm's imagery of the blast, the stillness of sleep, and the "breath of pride," even though Byron is working from 2 Kings rather than the psalm directly.
+
+I'm also mapping out the verb patterns: God's actions (שִׁבַּר, קום, להושיע) versus what happens to the enemy (אשתוללו, נמו, נרדם, יראה ושקטה) versus the human response afterward (תודך, נדרו ושלמו). Byron's poem ends with visible corpses and wailing widows, while the psalm skips the corpse imagery entirely, ending instead with the lowly being saved and wrath turned into praise—and I'm comparing this to how Psalm 46 uses similar divine-warrior language but frames God's presence differently than Psalm 76 does.
+
+Rashi identifies the lowly as Hezekiah's company, Radak as Israel generally. I'm also noting how Hosea 2:20 flips the sleep imagery—there Israel lies down safely, while in Psalm 76 it's the enemy who sleeps—and how this contrasts with Exodus 15:3's "man of war" epithet. Then there's Rashi's reading of תחגר as restraint, the Malbim's point about horses staying alert at night, and the lovely observation that human rebuke wakes people while God's rebuke puts them to sleep—plus how the Selah right after "war" creates a dramatic pause in the line.
+
+I'm noting the tense shift from perfect (vv3-10) to imperfect (11-13), turning history into pattern, and that Radak revised his own view here. Aiming for roughly 1,700 words with two or three section headings—something like "A morning after" and "The grammar of disarmament"—with all Hebrew phrases translated inline rather than quoted directly.
+
+For the opening, I want to start with the physical image of the six-sided clay prisms from Nineveh (one in the British Museum, one in Chicago) that preserve Sennacherib's own account of his campaign, then pivot to noting that Psalm 76 isn't necessarily about that specific campaign, even though Greek translators assumed so and titled it accordingly.
+
+I'm structuring the poem's arc: the sleepers who "could not find their hands," then the turn to direct address in v.8 ("You are awesome, You"), and finally moving into the imagery of heaven and judgment, following the sequence of arrival, war, silence, and verdict.
+
+I'm now tracing the closing movement — the earth falling still, the purpose of saving the lowly, and the shift from fury to future-tense praise, while also thinking about grammar (the sequence of human verbs — fail, fall silent, give thanks), the Assyrian melammu and tribute-reversal motifs with Herodotus and Byron echoes, and brief Hosea/Exodus inversions before writing the actual coda.
+

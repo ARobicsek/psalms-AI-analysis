@@ -29,10 +29,12 @@ if __name__ == '__main__' and __package__ is None:
     from src.data_sources.tanakh_database import TanakhDatabase
     from src.utils.divine_names_modifier import DivineNamesModifier
     from src.data_sources.sefaria_client import strip_sefaria_footnotes
+    from src.utils.pipeline_summary import concordance_methods_summary
 else:
     from ..data_sources.tanakh_database import TanakhDatabase
     from .divine_names_modifier import DivineNamesModifier
     from ..data_sources.sefaria_client import strip_sefaria_footnotes
+    from .pipeline_summary import concordance_methods_summary
 
 
 def add_page_number(paragraph):
@@ -1208,16 +1210,8 @@ class CombinedDocumentGenerator:
             commentary_lines = [f"{c} ({n})" for c, n in sorted(commentaries.items())]
             commentary_details = f" ({'; '.join(commentary_lines)})"
 
-        concordance_results = research_data.get('concordance_results', {}) or {}
-        concordance_total = sum(concordance_results.values())
-
-        # Concordance entries breakdown (query -> count)
-        concordance_breakdown_str = ""
-        # Filter out the legacy 'total_results' key to get per-query entries
-        concordance_per_query = {k: v for k, v in concordance_results.items() if k != 'total_results'}
-        if concordance_per_query:
-            items = [f"{self.modifier.modify_text(q)} ({c})" for q, c in sorted(concordance_per_query.items())]
-            concordance_breakdown_str = f" ({'; '.join(items)})"
+        # Session 384: one shared description (pipeline_summary.concordance_methods_summary)
+        concordance_summary = concordance_methods_summary(research_data, self.modifier.modify_text)
 
         figurative_results = research_data.get('figurative_results', {}) or {}
         figurative_total = figurative_results.get('total_instances_used', 0) if isinstance(figurative_results, dict) else 0
@@ -1286,7 +1280,7 @@ Methodological & Bibliographical Summary
 **Phonetic Transcriptions Generated**: {verse_count}
 **Lexicon Entries (BDB\\Klein) Reviewed**: {lexicon_count}
 **Traditional Commentaries Reviewed**: {total_commentaries}{commentary_details}
-**Concordance Entries Reviewed**: {concordance_total if concordance_total > 0 else 'N/A'}{concordance_breakdown_str}
+**Concordance Searches**: {concordance_summary}
 **Figurative Concordance Matches Reviewed**: {figurative_total if figurative_total > 0 else 'N/A'}{figurative_breakdown_str}
 **Rabbi Jonathan Sacks References Reviewed**: {sacks_count if sacks_count > 0 else 'N/A'}
 **Similar Psalms Analyzed**: {related_psalms_str}

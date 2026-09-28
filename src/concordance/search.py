@@ -36,6 +36,29 @@ except ImportError:
     from src.data_sources.tanakh_database import TanakhDatabase, TANAKH_BOOKS
 
 
+# Session 384: canonical book order (Torah, Prophets, Writings as TANAKH_BOOKS lists
+# them) and the section each book belongs to. The concordance SQL orders by book NAME,
+# which is alphabetical and meaningless; anything that orders or samples results must
+# use these instead.
+CANON_INDEX: Dict[str, int] = {}
+BOOK_SECTION: Dict[str, str] = {}
+for _section in ('Torah', 'Prophets', 'Writings'):
+    for _entry in TANAKH_BOOKS.get(_section, []):
+        CANON_INDEX[_entry[0]] = len(CANON_INDEX)
+        BOOK_SECTION[_entry[0]] = 'Psalms' if _entry[0] == 'Psalms' else _section
+
+
+# How many matches of each concordance search are rendered into the research bundle.
+# Session 384: defined ONCE here, read by research_assembler (which renders them) and
+# by pipeline_summary (which reports the number in the guide's methods section).
+DISPLAY_RESULTS_PER_SEARCH = 10
+
+
+def sort_canonically(results: List["SearchResult"]) -> List["SearchResult"]:
+    """Order results by canonical book position, then chapter and verse."""
+    return sorted(results, key=lambda r: (CANON_INDEX.get(r.book, 999), r.chapter, r.verse))
+
+
 @dataclass
 class SearchResult:
     """A single concordance search result."""
@@ -959,15 +982,75 @@ class ConcordanceSearch:
     # suffixes, conjugation and word order — replacing the brittle surface string
     # expansion + is_root_match heuristics for the Session-350 search population.
 
-    def _resolve_lemma(self, word: str) -> Optional[str]:
+    # Session 384: prefixes that can sit on a psalm token without changing its lemma,
+    # stripped (longest combination first) when matching a query against the psalm.
+    _CONTEXT_PREFIXES = ('ו', 'ה', 'ב', 'כ', 'ל', 'מ', 'ש')
+
+    def _context_tokens(self, source_psalm: int) -> List[tuple]:
+        """(surface_consonantal_split, lemma) for every token of Psalm `source_psalm`. Cached."""
+        if not hasattr(self, '_context_cache'):
+            self._context_cache = {}
+        if source_psalm not in self._context_cache:
+            cursor = self.db.conn.cursor()
+            rows = cursor.execute(
+                """SELECT word_consonantal_split, lemma FROM concordance
+                   WHERE book_name = 'Psalms' AND chapter = ?
+                   ORDER BY verse, position""",
+                (source_psalm,)
+            ).fetchall()
+            self._context_cache[source_psalm] = [
+                (r[0], r[1]) for r in rows if r[0]
+            ]
+        return self._context_cache[source_psalm]
+
+    def _resolve_lemma_in_context(self, norm: str, source_psalm: int) -> Optional[str]:
+        """
+        Session 384: resolve `norm` against the words of the psalm it was lifted from.
+
+        The Bible-wide "most common lemma for this spelling" rule picks the wrong word
+        for homographs, and the analyst's query almost always names a word IN the
+        psalm. Measured on Ps 76: בצר resolved to צר (foe / Tyre) instead of the verse's
+        יִבְצֹר; רדם to רדה (rule) instead of נִרְדָּם; חמת to Hamath instead of חֵמָה;
+        ענו to ענה (answer) instead of עַנְוֵי. The psalm's own tokens already carry the
+        right BHSA lemma, so ask them first:
+          1. a token whose surface form IS the query  -> that token's lemma
+          2. a token whose lemma IS the query          -> the query
+          3. a token that is the query plus prefixes   -> that token's lemma
+        Returns None when nothing in the psalm matches (or the matching token has no
+        lemma), and the caller falls back to the Bible-wide rule.
+        """
+        tokens = self._context_tokens(source_psalm)
+        exact = [lem for surf, lem in tokens if surf == norm and lem]
+        if exact:
+            return max(set(exact), key=exact.count)
+        if any(lem == norm for _, lem in tokens):
+            return norm
+        prefixed = []
+        for surf, lem in tokens:
+            if not lem or len(surf) <= len(norm) or not surf.endswith(norm):
+                continue
+            head = surf[:len(surf) - len(norm)]
+            if len(head) <= 3 and all(ch in self._CONTEXT_PREFIXES for ch in head):
+                prefixed.append(lem)
+        if prefixed:
+            return max(set(prefixed), key=prefixed.count)
+        return None
+
+    def _resolve_lemma(self, word: str, source_psalm: Optional[int] = None) -> Optional[str]:
         """
         Resolve a Hebrew query word to its lemma as stored in `concordance.lemma`.
 
-        Strategy: the most common lemma among concordance tokens whose surface
-        consonantal form equals the (normalized) query. If no surface token matches
-        but the query is itself a stored lemma, use it directly. Returns None when no
-        lemma is known — the caller then falls back to surface search. Cached per
-        instance (the same root recurs across a psalm's insights).
+        Session 384: when `source_psalm` is given, the psalm's own tokens are consulted
+        FIRST (see _resolve_lemma_in_context) — that is the word the analyst meant.
+        Otherwise, or when nothing in the psalm matches: the most common lemma among
+        concordance tokens whose surface consonantal form equals the (normalized)
+        query. If no surface token matches but the query is itself a stored lemma,
+        use it directly. Returns None when no lemma is known — the caller then falls
+        back to surface search. Cached per instance and per source psalm.
+
+        Known limit: the lemma column is consonantal with no homonym markers, so true
+        homonyms share one lemma (שם "name" and שם "there"; צר "foe" and צר "Tyre").
+        Context resolution picks the right LEMMA; it cannot split one lemma in two.
         """
         if not word or not is_hebrew_text(word):
             return None
@@ -976,8 +1059,17 @@ class ConcordanceSearch:
             return None
         if not hasattr(self, '_lemma_cache'):
             self._lemma_cache = {}
-        if norm in self._lemma_cache:
-            return self._lemma_cache[norm]
+        key = (norm, source_psalm)
+        if key in self._lemma_cache:
+            return self._lemma_cache[key]
+        if source_psalm is not None:
+            lemma = self._resolve_lemma_in_context(norm, source_psalm)
+            if lemma:
+                self._lemma_cache[key] = lemma
+                return lemma
+        if (norm, None) in self._lemma_cache:
+            self._lemma_cache[key] = self._lemma_cache[(norm, None)]
+            return self._lemma_cache[key]
         cursor = self.db.conn.cursor()
         row = cursor.execute(
             """SELECT lemma, COUNT(*) AS c
@@ -994,7 +1086,8 @@ class ConcordanceSearch:
             ).fetchone()
             if r2:
                 lemma = norm
-        self._lemma_cache[norm] = lemma
+        self._lemma_cache[(norm, None)] = lemma
+        self._lemma_cache[key] = lemma
         return lemma
 
     def search_lemma(self,

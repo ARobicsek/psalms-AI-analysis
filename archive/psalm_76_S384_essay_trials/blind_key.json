@@ -1,0 +1,13 @@
+{
+  "A": "P1_sol_high_r1",
+  "B": "REF-A (production, Opus 5)",
+  "C": "P2_opus_high",
+  "D": "P1_opus_high_r2",
+  "E": "P0_sol_high",
+  "F": "P1_opus_high_r1",
+  "G": "P1_sol_high_r2",
+  "H": "P2_sol_high",
+  "I": "P0_opus_high",
+  "J": "P1_sol_xhigh",
+  "K": "REF-B (all-Opus-5.5 run)"
+}

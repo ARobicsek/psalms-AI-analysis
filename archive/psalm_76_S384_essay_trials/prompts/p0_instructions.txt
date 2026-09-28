@@ -1,0 +1,286 @@
+e Rosh Hashanah yotzer "Melekh Azur Gevurah" and a Shabbat zemer that also names "בָּצְרָה" and "מֵאֱדוֹם." They were hearing a real cluster. Isa 63:1–6 shares with Ps 76:8–13:
+- לְהוֹשִׁיעַ (63:1 "רַב לְהוֹשִׁיעַ"; v. 10).
+- חֵמָה repeatedly (63:3, 5, 6; v. 11 twice) together with אַף (63:3, 6; v. 8).
+- A clothing image (לְבוּשׁ, בְּגָדִים ↔ v. 11's girding verb תַּחְגֹּר).
+- Vintage (winepress ↔ יִבְצֹר).
+- A consonantal near-match of Edom with v. 11's אָדָם, the basis of the "wrath of Edom" emendation.
+- A victory with no human ally (63:5 "וְאֵין עֹזֵר"), matching the psalm's absence of human combatants.
+
+**Confidence:** PROBABLE for the cluster and its liturgical reception. CONJECTURE for any literary dependence.
+
+**Anchors (every fact this rests on, each with its footing):**
+- Yotzer text: "מֶֽלֶךְ זֶה הָדוּר בִּלְבוּשׁוֹ… מֶֽלֶךְ חֲמוּץ בְּגָדִים. בְּדָרְכוֹ בוֹגְדִים. יִבְצֹר רֽוּחַ נְגִידִים" (Liturgical Use).
+- Zemer: "בְּבוֹאוֹ מֵאֱדוֹם חֲמוּץ בְּגָדִים, זֶֽבַח לוֹ בְּבָצְרָה… יִבְצוֹר רוּחַ נְגִידִים" (Liturgical Use).
+- Micro v. 13 Bozrah conjecture; Micro v. 11 Edom emendation.
+- Isa 63:1 (Concordance, בצר); Isa 63:3, 5, 6 wording (general knowledge).
+
+**Payoff (what clicks):** The coda's cruxes are illuminated together by one prophetic text: "wrath of man/Edom," "girding," and "vintaging princes." The poets' juxtapositions look like reading, not decoration.
+
+**Novelty of the linkage (why a learned reader of Psalms has not already made this connection):** The dossier holds the Bozrah conjecture (micro) and the liturgical juxtapositions (librarian) eighty pages apart without noticing that the second confirms and enlarges the first.
+
+## OBSERVATION 17
+
+**Type:** CONNECTION
+
+**Primary verse(s):** v. 11 (with vv. 3, 12; Zech 14:16)
+
+**Claim:** The LXX's reading of v. 11, "the remnant of wrath(s) shall keep festival (תָּחֹג) to you," is best explained by Zech 14:16 rather than as random smoothing. There "כָּל־הַנּוֹתָר מִכָּל־הַגּוֹיִם הַבָּאִים עַל־יְרוּשָׁלִַם" go up yearly "לָחֹג אֶת־חַג הַסֻּכּוֹת": the leftover attackers become Sukkot pilgrims. Zech 14 is the haftarah for the first day of Sukkot, the day on which Ps 76 serves as psalm of the day in Sephardic usage and the Gra's custom. The Sukkot choice therefore rests on several supports at once: סֻכּוֹ (v. 3), the pilgrims' vows and tribute (v. 12), the LXX's festival verb in v. 11, and the day's haftarah.
+
+**Confidence:** PROBABLE that the liturgical pairing and the Zech 14:16 script fit. CONJECTURE whether the LXX translator had Zechariah in mind. Zech uses הַנּוֹתָר, not שְׁאֵרִית.
+
+**Anchors (every fact this rests on, each with its footing):**
+- LXX ἑορτάσει / Vorlage תחג (Micro v. 11; Deep Research).
+- Ps 76 as first-day Sukkot psalm; rationale via סֻכּוֹ and nations' tribute (Deep Research, Liturgical Usage).
+- Zech 14:16 wording; Zech 14 as first-day Sukkot haftarah (general knowledge).
+- Zech 14:20 horses' bells "קֹדֶשׁ לַיהוָה," a converted counterpart to v. 7's stunned horse (Figurative, Temple).
+- v. 2 recited in the Simchat Torah hakafot (Liturgical Use), so the psalm frames the festival at both ends.
+
+**Payoff (what clicks):** The standard explanation of the custom (the word סֻכּוֹ) is real but only half the story. The festival's own prophetic reading dramatizes the LXX's version of v. 11: fury's remnant ends as festival.
+
+**Novelty of the linkage (why a learned reader of Psalms has not already made this connection):** The dossier notes the LXX variant and the Sukkot custom separately and never brings Zech 14:16 or the haftarah into either.
+
+## OBSERVATION 18
+
+**Type:** CONNECTION
+
+**Primary verse(s):** vv. 12–13 (with Ps 89:8)
+
+**Claim:** On the open question of the scope of כָּל־סְבִיבָיו (v. 12): the closest collocation, Ps 89:8 "וְנוֹרָא עַל־כָּל־סְבִיבָיו," pairs נוֹרָא with "all around him" for the heavenly council ("בְּסוֹד־קְדֹשִׁים"). Ps 76 uses the same two elements (כָּל־סְבִיבָיו… לַמּוֹרָא… נוֹרָא) but sets them parallel to "מַלְכֵי־אָרֶץ." Perhaps the earth's rulers take the slot the divine council fills in Ps 89. This fits the psalm's broader move from heaven (v. 9) to earth (vv. 9, 10, 13).
+
+**Confidence:** CONJECTURE for the intended transposition. The collocation itself is established.
+
+**Anchors (every fact this rests on, each with its footing):**
+- Ps 89:8 "אֵל נַעֲרָץ בְּסוֹד־קְדֹשִׁים רַבָּה וְנוֹרָא עַל־כָּל־סְבִיבָיו" (general knowledge).
+- Micro v. 12, three candidate referents for כל סביביו, including "cosmic assembly around the heavenly throne."
+- Radak on v. 12: nations surrounding the land; Alshich reads סביביו via Ps 50:3 (Traditional Commentaries).
+- נורא 2× in the psalm (vv. 8, 13) (Computed Distributional Facts).
+
+**Payoff (what clicks):** The phrase's divine-council background explains why the ambiguity in the dossier exists. Ps 76 seems to take council language and apply it to the tributary kings.
+
+**Novelty of the linkage (why a learned reader of Psalms has not already made this connection):** The dossier lists the scope options without citing Ps 89:8, the collocation that puts נורא and כל סביביו together.
+
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## YOUR TASK: WRITE THE COMMENTARY
+## ═══════════════════════════════════════════════════════════════════════════
+
+You will write THREE sections.
+
+### STAGE 1: INTRODUCTION ESSAY (800-1400 words)
+
+**HOOK FIRST**: Open with something surprising, counterintuitive, or puzzling about this psalm. Avoid bland summary openings.
+
+**STRUCTURAL MAP (within first 300 words)**: After your hook, give the reader a clear, concise map of how the psalm moves — its sections, its arc, its logic. Think of this as the legend on a museum guide: before the reader enters the detailed rooms, they need to see the floor plan. This should be brief (a short paragraph or a compact list) but decisive — it should make the psalm's architecture visible at a glance. The rest of your essay will then develop the most interesting aspects of this structure.
+
+**THE CENTRAL TASK — RESOLVE THE PSALM INTO A COHERENT WORK**:
+
+Many psalms, on a casual reading, seem like a collection of pious sentiments — beautiful phrases strung together without an obvious argument or narrative. Your most important job is to show the reader that this is not the case. Show how the psalm is a coherent, intentional work of poetic craft: how its parts relate to each other, why its sequence matters, what the poet is building toward, and what holds it together.
+
+This does NOT require "debunking a misconception." Some psalms simply need a skilled guide to make their internal logic visible. Others have genuine structural puzzles or theological tensions that reward careful attention. In either case, the reader should finish your essay thinking: "I had no idea this psalm was doing all that."
+
+Ask yourself: "What is this psalm actually ABOUT — not as a list of themes, but as a single act of communication? What is the poet trying to DO to the reader or to God? Why does it begin where it begins and end where it ends?"
+
+Write a scholarly introduction essay that:
+
+1. **Develops a governing argument about the psalm**: The STRUCTURAL OVERVIEW section below offers one reading. You may adopt it, revise it, or propose an entirely different reading based on the evidence. Either way, YOUR essay must present a coherent, original argument — not a response to someone else's analysis.
+
+2. **Builds cumulatively toward a single conclusion**: Your essay should have ONE governing insight or question that every paragraph advances. Do NOT write a series of mini-essays on separate topics (structure, then imagery, then liturgy, then theology). Instead, weave these strands into a single argument. Use no more than 2-3 section headers. If you find yourself writing a new header every 200 words, you are listing observations, not building an argument.
+
+3. **Draws on all available evidence**: Your argument should be supported by lexical analysis, traditional commentary (Rashi, Ibn Ezra, Radak, Malbim, etc.), concordance patterns, figurative language parallels, ANE context, textual criticism (MT vs LXX), Deep Web Research (cultural afterlife, reception history, scholarly debates), and liturgical usage. But these are EVIDENCE for your argument, not separate topics to cover.
+
+4. **Shows evidence through generous quotation**: Quote liberally from biblical parallels, liturgy, and literary sources — there, showing the actual text in Hebrew + English IS the payoff, so don't just cite. **Traditional commentary is the exception: it is quoted selectively, under RULE 8b, and must earn the room.**
+
+5. **Surfaces unique findings**: Highlight "only here" factors (hapax legomena, unusual constructions, surprising concordance patterns) — but only when they serve your argument.
+
+6. **Names the human experience**: The best commentary connects the psalm to recognizable human situations — loneliness, gratitude, bewilderment at injustice, the terror of mortality, the vertigo of unmerited grace. Where appropriate, name the experience the psalmist is articulating and show how the poetic craft serves that experience. This is not sentimentality; it is the reason these poems have survived three millennia.
+
+7. **Cross-cultural resonance**: When a work of world literature — a Shakespeare soliloquy, a Chinese poem, a political speech — illuminates the psalm's craft or emotional logic, bring it into the essay where it serves the argument: as a hook, a turn, or a closing insight. One to three in the essay is a natural range when strong ones exist. Always quote the source text in the original language (with English translation if not English), and quote enough to be felt (item 12 below). Most echoes live in the verse commentary; item 12 sets the budget across the whole guide.
+
+8. **Treats the poet as a craftsman with intentions**: Don't just catalog poetic devices ("this is a chiasm"). Show WHY the poet made this choice. What does the chiasm DO to the reader? What effect does the word order create? What would be lost if the poet had said the same thing in prose? The poet is a character in your essay — someone making deliberate, skilled decisions.
+
+**CLOSING**: End your essay with the ONE thing you most want the reader to carry away — usually the single observation that makes this psalm impossible to read the same way again; where the material supports it, this may be the affective landing itself (see STYLISTIC GUIDANCE) — the human recognition rather than the scholarly point. Either way it should feel like a destination your essay has been building toward, not a tacked-on summary. One or two sentences.
+
+### STAGE 2: MODERN JEWISH LITURGICAL USE (200-500 words)
+
+After the essay, add this EXACT marker on its own line: `---LITURGICAL-SECTION-START---`
+Then write the liturgical section using `####` for subsections (Full psalm, Key verses, Phrases).
+- Distinguish between **full recitations** of the psalm vs. **individual verses/phrases** quoted in prayers.
+- Use specific prayer names, services (Shacharit/Mincha/Maariv), occasions (Weekday/Shabbat/Festivals), and traditions (Ashkenaz/Sefard/Edot HaMizrach).
+- **CRITICAL:** Include Hebrew from BOTH the psalm AND the prayers.
+- For phrases used in liturgy, reflect on whether the liturgical use follows the natural ("pshat") reading or whether the compilers have put the text to a novel use.
+- Explain what the liturgical placement reveals about the tradition's understanding.
+- **Shimush Tehillim (שימוש תהלים)**: If the research bundle includes Shimush Tehillim material, add a `#### Practical Kabbalah` subsection. State the prescribed use (protection, healing, etc.), then speculate concisely on WHY this psalm was selected for that purpose — what in its language, imagery, or traditional, creative or midrashic reading makes the association intelligible? Treat this tradition with scholarly respect: it is practical Kabbalah, attributed to Rav Hai Gaon. Omit this subsection entirely when the research bundle contains no Shimush Tehillim content.
+
+**NUSACH DISAMBIGUATION (do not confuse these!):**
+- **Nusach Ashkenaz** = the traditional rite of non-Hasidic Ashkenazi Jewry (Lithuanian, German, etc.)
+- **Nusach Sefard** = the HASIDIC rite. Despite containing "Sefard," this is used by ASHKENAZI (Hasidic) Jews — Lubavitch, Breslov, Satmar, etc. The name derives from the Ari's (R. Isaac Luria) preference for Sephardic prayer arrangements, NOT from Spanish Jewry. NEVER call this "Sephardic" or "the Sephardic rite."
+- **Edot HaMizrach** = the rites of Mizrachi/Sephardic communities (Yemenite, Iraqi, Moroccan, Syrian, Persian, etc.). These are the actual Sephardic and Middle Eastern traditions. They vary considerably among themselves.
+When the research data says "Sefard" or "Siddur Sefard," it means the HASIDIC rite. When something appears in all three nusachot, say "across all major rites" or "in Ashkenazi, Hasidic, and Mizrachi/Sephardic traditions."
+
+### THE ESSAY/COMMENTARY RELATIONSHIP
+
+The introduction essay and the verse commentary serve fundamentally different purposes:
+
+- **The ESSAY** is where you make your ARGUMENT. It presents your governing insight, develops it with selected evidence, and leaves the reader with a clear framework for understanding the psalm. It should be readable on its own.
+
+- **The VERSE COMMENTARY** is the EVIDENCE ROOM. This is where you provide the detailed philological, textual, liturgical, and comparative analysis that supports, complicates, or enriches the essay's argument. It's also where you add discoveries that would have derailed the essay's momentum — a fascinating textual variant, an illuminating Rashi comment, a surprising concordance pattern, an ANE parallel.
+
+**The test:** A reader who reads only the essay should understand the psalm's significance. A reader who also reads the verse commentary should feel they've been given a scholar's toolkit — and should encounter genuinely new material, not a rehash of the essay in verse-by-verse form.
+
+**Practical rule:** Before writing each verse's commentary, ask: "Did the essay already say this?" If yes, either skip it or approach it from a completely different angle (a different commentator, a different parallel, a textual variant, a liturgical deployment).
+
+### STAGE 3: VERSE-BY-VERSE COMMENTARY
+
+For EACH verse:
+
+**1. START with the Hebrew text, punctuated to show poetic structure.**
+   - Example: "בְּקׇרְאִי עֲנֵנִי אֱלֹקֵי צִדְקִי; בַּצָּר הִרְחַבְתָּ לִּי; חׇנֵּנִי וּשְׁמַע תְּפִלָּתִי."
+
+**2. THEN give the whole verse in English, offset as a block quote.**
+   - Format: one markdown block quote line, beginning with `> `, immediately after the Hebrew and before your commentary.
+   - Example:
+     > When I call, answer me, God of my righteousness — in the narrow place You made room for me; be gracious to me and hear my prayer.
+   - **It is YOUR translation.** You are the scholar of RULE 12, not a compiler of someone else's version. Render the verse as you actually read it, and let the choices you have argued for elsewhere show up here.
+   - **Translate the WHOLE verse — every word, no ellipsis, no summary.** This line is the reader's guarantee that nothing in the verse is dark to them.
+   - **Every verse gets its own Hebrew line and its own translation, including when you group verses for commentary.** Grouping shares the analysis, never the text: print verse 5's Hebrew and translation, then verse 6's, then the commentary that covers both.
+   - Keep it clean: no Hebrew, no citations, no brackets of alternatives, no commentary. Where a word is genuinely undecidable, pick the reading you argue for below and let the commentary do the arguing.
+
+**3. Then provide commentary. Length follows the material.**
+   - **Target:** 1-3 transformative angles per verse.
+   - **There is no per-verse word target.** A verse holding a real discovery earns a long section; a verse of routine construction is complete in a short one. If your sections all come out about the same length, they were filled rather than written.
+   - **Pacing:** You may group 2-4 related verses (e.g., `**Verses 21-24**`) for natural units.
+   - **Completeness:** Cover ALL verses. No truncation. Later verses deserve the same quality as early ones.
+   - **COVERAGE IS ALREADY DISCHARGED — now select on interest alone.** The translation line above has rendered every word of this verse, so the reader can always say what each word means. Nothing below it is owed to completeness. Choose what to discuss by one question: *is this genuinely interesting?* A phrase you pass over in silence is not a gap — it is a judgement that the translation already said everything worth saying about it, and that judgement is right far more often than not.
+
+     **Do NOT walk the verse word by word looking for something to say.** That habit is what inflates a routine phrase into false profundity (RULE 7b) and what reaches for a commentator on a word that needed nothing (RULE 8b). The translation carries the routine words. You are here for the ones that repay attention.
+
+**ITEMS OF INTEREST TO ILLUMINATE** (select what's most illuminating per verse):
+
+1. **Phonetics & Sound Patterns**: Use the PHONETIC TRANSCRIPTIONS input. Stressed syllables arrive in CAPS (e.g., `mal-KHŪTH-khā`) — leave the caps as given. Base phonetic claims on transcription data, not intuition. Verify p vs f, b vs v, k vs kh. Use transcriptions ONLY when pronunciation matters for a poetic device—too many clutter the prose.
+
+   **Bold inside a transcription is YOURS, and it marks the sound you are arguing about** — not the stress (the caps already do that). When you claim two words rhyme, chime, hiss, or share a consonant, bold the letters that carry the claim in each one, so the reader sees the pattern instead of taking it on trust:
+
+   WEAK: "The verse chains three sibilants." <- the reader must hunt for them
+   STRONG: "The line hisses: `**SH**ā-mar`, `**S**ə-thā-riym`, `**Ṣ**ad-diyq` — three different letters, one sound."
+
+   WEAK: "מְשׁוּבָתָם and אֲהַבֵם half-rhyme." <- asserted, not shown
+   STRONG: "`mə-shū-vā-**THĀM**` answers `'o-ha-**VĒM**` — the same final -m on a stressed syllable, one vowel apart."
+
+   Bold only the letters that carry the point; bolding a whole word shows nothing. If you are not making a sound argument, leave the transcription unbolded.
+
+2. **Poetics**: Parallelism (synonymous, antithetical, synthetic, climactic), wordplay, meter, structural devices (chiasm, inclusio). Comment on unusual Hebrew phrases and idioms — these are exactly what make readers lean forward.
+
+3. **Figurative Language** (CRITICAL):
+   - Identify the image and explain its meaning in this context.
+   - **QUOTE** compelling parallel uses from the research (at least 1-2 passages in Hebrew + English).
+   - Analyze the pattern: How common? How typically used across Scripture?
+   - Note distinctive features: How does this psalm's use differ?
+
+   WEAK: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture as an idiom for generosity (Deut 15:8, 11)." <- just cites, doesn't quote
+
+   STRONG: "The 'opened hand' imagery (v. 16) appears 23 times in Scripture. In Deuteronomy, it's a covenantal command: כִּֽי־פָתֹ֧חַ תִּפְתַּ֛ח אֶת־יָדְךָ֖ לוֹ, 'you shall surely open your hand to him' (Deut 15:8). Psalm 145 transforms this obligation into cosmic theology—the opened hand becomes God's."
+
+4. **Traditional Commentary**: Read all eleven sources on every verse — Rashi, Ibn Ezra, Radak, Meiri, Romemot El (Alshich), Minchat Shai, Metzudat Zion, Chomat Anakh (the Chida), Malbim, Malbim Beur Hamilot, Torah Temimah — then quote the few that pass RULE 8b's admission test. **RULE 8b tells you what each of them is FOR; read that before you rank them.** The Torah Temimah identifies where texts were mined for aggadic/halachic purposes and Minchat Shai settles questions of spelling, accent and variant reading; these are often the richest material in the bundle. **Reviewing all of it is mandatory; quoting it is earned. A verse whose commentators only paraphrase should show none of them — that is a correct outcome, not a gap.** Adding five sources did not raise the Tier-1 budget by one quotation; it widened the field you are ranking.
+
+5. **Modern Liturgical Context** (CRITICAL - DO NOT SKIP MATERIAL):
+   - You MUST incorporate EVERY specific liturgical reference provided in your research bundle.
+   - When a verse appears in liturgy, comment on its usage and what it reveals.
+   - **QUOTE** the liturgical texts in Hebrew + English. Be specific about prayer name, service, occasion, and tradition.
+
+   WEAK: "The placement of this verse in the daily Amidah suggests the tradition understood it as expressing fundamental covenantal theology..." <- no quotation
+
+   STRONG: "This verse appears in the Shabbat Musaf Amidah: וְהִקְרִיבוּ לְךָ עוֹלוֹת תְּמִימִים זִבְחֵי צֶדֶק, 'and they shall offer You whole burnt-offerings, righteous sacrifices,' suggesting the tradition read this psalm's call for righteous sacrifices as..."
+
+6. **Comparative Religion**: ANE parallels (Ugaritic, Akkadian, Egyptian), polemic, transformation of motifs. Cite specific texts (KTU numbers, Enuma Elish, etc.).
+
+7. **Textual Criticism**: MT vs LXX. What LXX choices reveal about the Vorlage. Textual variants and implications. **Subject to the Septuagint budget in RULE 8b — at most 2 verses in 5, ranked across the whole psalm.** This angle being available on every verse is exactly why it must be rationed.
+
+8. **Lexical Analysis**: Etymology when illuminating, semantic range (BDB data), rare vocabulary, hapax legomena.
+
+9. **Comparative Biblical Usage**: Concordance insights—QUOTE at least one illustrative parallel (Hebrew + English). Don't just say "appears in Psalm X"—show what Psalm X actually says. **Psalm-level relationships outrank one more verse-level parallel: when the research establishes a DOUBLET (another psalm reproducing verses of this one nearly verbatim) or a sustained mirror built from the same distinctive vocabulary, that is first-rank material — name the psalm, quote the shared Hebrew, and make the relationship mean something (same words, opposite vector; what the variants reveal). A doublet flagged in the research but absent from the guide is a scholarship gap any reviewer would catch.**
+
+10. **Interpretation & Reception**: Church fathers, medieval Christian interpretation, modern scholarship, Targum renderings. Cultural afterlife from Deep Web Research.
+
+11. **The Psalm in a Human Mouth**: while planning, scan the liturgical and reception material for the single best documented scene of this psalm being *used* — a specific person or community praying, singing, or quoting these words at a specific moment (a deathbed, a siege, the Continental Congress, a civil-rights march, a German lied, an R&B recording). If one exists, narrate it — who, when, what was at stake, and the psalm's words quoted at the moment of use — as first-rank material, ahead of one more lexical parallel; a passing clause ("the Huguenots sang it") is a missed scene, not a told one. If the research records none, skip without substitute. Narrated use is direct evidence of what the poem does to people, and it often moves a reader more than anything a commentator can add.
+
+12. **Cross-Cultural Literary Echoes — use the good ones, quote them fully, and unfold the connection**:
+
+   Avoid cheap universalism. DO NOT ignore high-quality literary parallels provided in the Cross-Cultural Literary Echoes section that are interesting, beautiful, or amusing. Treat these as valid "Depth" analysis — for this reader they are one of the main pleasures of the guide, not a garnish.
+
+   **BUDGET: about three echoes for every four verses, across the whole guide (essay + verse commentary).** A 13-verse psalm should carry about 10; a 24-verse psalm about 18. This is a level to reach with GOOD echoes, not a quota to fill with weak ones: rank the dossier's echoes (and any you know that fit better), spend from the top, and place each where it illuminates most. If the dossier holds fewer strong ones, use fewer. What you must not do is ration them to two or three because they feel like a luxury.
+
+   **QUOTE FULSOMELY.** Every quotation in the Literary Echoes research was gathered from published, openly available sources, and this guide is a private study text written for one reader's own education; quotation in the service of commentary is its whole purpose. Do not trim a passage below what the comparison needs out of caution:
+   - Quote the lines that carry the echo — typically **3–8 lines of verse** (or 2–4 sentences of prose) — in the original language with English translation.
+   - For public-domain works (ancient, medieval, and anything published before about 1930) quote as much as illuminates; a whole short poem or stanza is fine.
+   - For modern works, the passage the dossier supplies is the passage to use.
+
+   **A common failure mode is to introduce a literary echo too economically — naming the author, citing a sliver of a line, and immediately concluding before the reader can feel the resonance.** Resist this. When you surface an echo, give it room:
+
+   - **Quote enough of the source that the reader can feel the echo** (see QUOTE FULSOMELY above). A single half-line is rarely enough. Use what the Literary Echoes data provides; where the data is sparse, expand from your knowledge of the work, but only where you can do so accurately — never invent.
+   - **Set up the echo before quoting it.** A sentence or two orienting the reader: which line of the psalm triggered the comparison, and what specifically you noticed (a shared image, a parallel rhetorical move, a structural mirror, a contrasting solution to the same artistic problem).
+   - **Frame the source itself for the reader.** Naming a poet and a work title is not enough; the reader may have never opened either. Give one or two sentences of context BEFORE OR ALONGSIDE the quotation: when the work was written, under what historical or biographical circumstances if relevant (Akhmatova writing during the Stalinist purges; Hardy on the eve of WWI; Auden's "Shield of Achilles" reimagining Homer's shield as a vision of modern atrocity; Lorca's *cante jondo* as a flamenco-derived "deep song" form), and what the source work is doing in broad strokes. Treat the source poet as a character whose situation matters — not just a name attached to lines. The reader should know enough about the source to feel why these particular lines, by this particular poet, in this particular moment, illuminate the psalm.
+   - **Unfold the resonance after the quotation.** Not one sentence — three to five. Be specific about the formal or rhetorical feature being shared. What is genuinely parallel? What differs, and what does the difference reveal about each poet's project? Why does the comparison enrich the reader's hearing of the psalm?
+   - **Length permission**: a well-handled literary echo may add 4-8 sentences to a verse's commentary. That is fine — and preferable to three rushed echoes the reader cannot feel. Echoes are one of the few places where a little breadth genuinely earns its keep.
+
+   **HOW TO SET A QUOTED POEM.** Verse is lineated on the page or it stops being verse. Put the original AND the translation inside the block quote, one `> ` line per line of poetry, translation lineated to mirror the original, the two separated by a bare `>`:
+
+   > Empieza el llanto
+   > de la guitarra.
+   > Es inútil callarla.
+   >
+   > "The weeping of the guitar
+   > begins.
+   > It is useless to silence it."
+
+   Then start the commentary as a new paragraph. Do NOT run the translation into the prose that follows the poem ("...*callarla.*" / `"The weeping of the guitar begins. It is useless to silence it." Lorca's anaphora enacts...`) — set that way it reads as your commentary, not as the poem's other half, and the line breaks the poet chose are gone. Prose quotations — a letter, a novel, an essay — are not lineated and take the ordinary single-line block quote.
+
+   - These literary echoes can add richness, points of interest, variation, emotional resonance, and (sometimes) gentle amusement to your commentary.
+   - Draw on Deep Research and Literary Echoes data.
+   - The psalm is always the subject; world literature is the lens.
+
+**3. RELATIONSHIP TO INTRODUCTION:**
+   - The essay made your argument. The verse commentary is where you open the toolkit. For each verse, ask: "What can I show the reader here that the essay didn't — and couldn't without losing momentum?" Prioritize: different commentator voices, liturgical deployments, textual variants, philological surprises, concordance patterns, and figurative language parallels not mentioned in the essay. If a verse was central to the essay's argument — if its crux WAS your hinge — do not re-establish what the essay established: point back to it in a single sentence and spend the whole note on what the essay could not use. COVERAGE IS ALREADY DISCHARGED by the translation line, so passing over an argument the reader has just finished reading is not a gap; and a note that arrives at the essay's own conclusion by a second route has written the essay twice, however fresh its wording.
+
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════════
+## OUTPUT FORMAT
+## ═══════════════════════════════════════════════════════════════════════════
+
+Return your response with these sections:
+
+### INTRODUCTION ESSAY
+[Essay text (800-1400 words)]
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+...
+#### Key verses
+...
+
+### VERSE COMMENTARY
+**Verse 1**
+[Hebrew text punctuated]
+[Commentary]
+
+**Verse 2**
+[Hebrew text punctuated]
+[Commentary]
+
+...
+
+
+
+---
+
+## FOR THIS RUN — ESSAY ONLY
+
+Write ONLY STAGE 1, the INTRODUCTION ESSAY. Do not write the liturgical section, the
+verse-by-verse commentary, or the reader questions. Return exactly:
+
+### INTRODUCTION ESSAY
+[the essay]

@@ -2164,6 +2164,15 @@ class MasterEditorV2:
 
     def _call_gpt_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
         """Call GPT for writer mode."""
+        # Session 384: GPT-6 models would fall through to the chat.completions branch
+        # below with max_tokens=16000 and NO reasoning effort (its guard is
+        # `"gpt-5" in model`) -- a silently crippled writer run. Refuse loudly until a
+        # Responses-API path is written (see scripts/S384 essay-trial harness for one).
+        if model.startswith("gpt-6"):
+            raise NotImplementedError(
+                f"{model} is not wired as a production writer: it needs the Responses API "
+                "with explicit reasoning effort. Do not route it through chat.completions."
+            )
         try:
             if model == "gpt-5.5-pro":
                 # The GPT-5.5 Pro model uses the new Responses API

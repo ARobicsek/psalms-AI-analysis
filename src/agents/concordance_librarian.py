@@ -29,11 +29,11 @@ import json
 # Handle imports for both module and script usage
 if __name__ == '__main__':
     sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-    from src.concordance.search import ConcordanceSearch, SearchResult
+    from src.concordance.search import ConcordanceSearch, SearchResult, sort_canonically
     from src.concordance.hebrew_text_processor import normalize_for_search, split_words, normalize_word_sequence
     from src.data_sources.tanakh_database import TanakhDatabase
 else:
-    from ..concordance.search import ConcordanceSearch, SearchResult
+    from ..concordance.search import ConcordanceSearch, SearchResult, sort_canonically
     from ..concordance.hebrew_text_processor import normalize_for_search, split_words, normalize_word_sequence
     from ..data_sources.tanakh_database import TanakhDatabase
 
@@ -616,8 +616,10 @@ class ConcordanceLibrarian:
 
         Search Behavior:
             1. Always searches full Tanakh first to get accurate result counts
-            2. If results > auto_scope_threshold, applies intelligent filtering
-               prioritizing key books (Torah, Psalms, Prophets, etc.)
+            2. Keeps EVERY external match, in canonical order (Session 384 — the old
+               truncation to max_results kept the alphabetically-first books and cut
+               Psalms). `max_results` and `auto_scope_threshold` are no longer applied
+               here; the display layer samples, and reports the true total.
             3. If explicit scope requested (not 'auto'), filters to that scope
                after counting all results
         """
@@ -664,7 +666,7 @@ class ConcordanceLibrarian:
         colloc_lemmas = None
         if request.level == 'consonantal':
             if not is_phrase:
-                sl = self.search._resolve_lemma(original_query)
+                sl = self.search._resolve_lemma(original_query, request.source_psalm)
                 if sl:
                     lemma_mode = 'single'
                     # Also trace analyst-supplied sibling roots (single-word alternates)
@@ -672,11 +674,11 @@ class ConcordanceLibrarian:
                     queries = [sl]
                     for alt in (request.alternate_queries or []):
                         if len(split_words(alt)) == 1:
-                            al = self.search._resolve_lemma(alt)
+                            al = self.search._resolve_lemma(alt, request.source_psalm)
                             if al and al not in queries:
                                 queries.append(al)
             elif len(words) == 2:
-                ls = [self.search._resolve_lemma(w) for w in words]
+                ls = [self.search._resolve_lemma(w, request.source_psalm) for w in words]
                 if all(ls):
                     lemma_mode = 'colloc'
                     # rarest lemma first → fewest candidate verses to scan
@@ -756,15 +758,20 @@ class ConcordanceLibrarian:
             if self.logger and (i == 1 or i % 500 == 0 or i == total_variations):
                 self.logger.info(f"Searching variation {i}/{total_variations}: '{query[:30]}{'...' if len(query) > 30 else ''}'")
 
+            # Session 384: NO limit on the lemma paths. The SQL orders by book NAME, so a
+            # LIMIT here kept the alphabetically-first hits (Amos, Chronicles, Daniel,
+            # Deuteronomy...) and silently cut Psalms and every book after "P" from any
+            # lemma with more than max_results hits — before the display sampler could see
+            # them. Retrieval is indexed; the full set is cheap.
             if lemma_mode == 'colloc':
                 # `query` is the original phrase; retrieval is by the resolved lemmas
                 results = self.search.search_lemmas_in_verse(
-                    colloc_lemmas, scope=initial_scope, limit=request.max_results
+                    colloc_lemmas, scope=initial_scope, limit=None
                 )
             elif lemma_mode == 'single':
                 # `query` is an already-resolved lemma
                 results = self.search.search_lemma(
-                    query, scope=initial_scope, limit=request.max_results
+                    query, scope=initial_scope, limit=None
                 )
             elif is_phrase:
                 # Phrase search - try strict matching first
@@ -787,8 +794,9 @@ class ConcordanceLibrarian:
             if self.logger and (i <= 5 or i == total_variations):
                 self.logger.info(f"  Found {len(results)} results")
 
-            # Add results, deduplicating by verse reference
-            for result in results[:request.max_results]:
+            # Add results, deduplicating by verse reference (Session 384: no per-variation
+            # slice — the slice was the same alphabetical truncation in another place)
+            for result in results:
                 verse_key = (result.book, result.chapter, result.verse)
                 if verse_key not in seen_verses:
                     seen_verses.add(verse_key)
@@ -798,55 +806,14 @@ class ConcordanceLibrarian:
             if query == original_query or query == queries[0]:  # First variation is usually the original
                 phrase_results_count = len(results)
 
-        # POST-SEARCH FILTERING FOR COMMON PHRASES AND WORDS
-        # If we found too many results, apply intelligent filtering
-        # This applies to ALL searches now since we always search full Tanakh first
-        if use_post_search_filtering and phrase_results_count > request.auto_scope_threshold:
-            if self.logger:
-                search_type = "Phrase" if is_phrase else "Word"
-                self.logger.info(f"{search_type} '{original_query}' found {phrase_results_count} results (threshold: {request.auto_scope_threshold})")
-                self.logger.info("Applying intelligent filtering to prioritize key books")
-
-            # Priority book ordering for common phrases
-            priority_books = [
-                # Torah (Foundational books)
-                'Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy',
-                # Psalms and Wisdom (Primary poetic/theological books)
-                'Psalms', 'Proverbs', 'Job',
-                # Major Prophets
-                'Isaiah', 'Jeremiah', 'Ezekiel',
-                # Historical books
-                'Joshua', 'Judges', '1 Samuel', '2 Samuel', '1 Kings', '2 Kings',
-                # Minor Prophets (key themes)
-                'Hosea', 'Joel', 'Amos', 'Jonah', 'Micah',
-                # Other Writings
-                'Song of Songs', 'Ruth', 'Lamentations', 'Ecclesiastes', 'Esther', 'Daniel',
-                # Post-exilic
-                'Ezra', 'Nehemiah', '1 Chronicles', '2 Chronicles',
-                # Remaining Minor Prophets
-                'Obadiah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah', 'Malachi'
-            ]
-
-            # Filter results maintaining priority order
-            filtered_results = []
-            seen_priority_books = set()
-
-            # First pass: get results from priority books in order
-            for result in all_results:
-                if result.book in priority_books and len(filtered_results) < request.max_results:
-                    filtered_results.append(result)
-                    seen_priority_books.add(result.book)
-
-            # Second pass: if still under max_results, add from remaining books
-            for result in all_results:
-                if len(filtered_results) >= request.max_results:
-                    break
-                if result.book not in seen_priority_books:
-                    filtered_results.append(result)
-
-            all_results = filtered_results
-            if self.logger:
-                self.logger.info(f"Filtered to {len(all_results)} results using priority book ordering")
+        # Session 384: the old "post-search filtering" here truncated to max_results by
+        # walking `all_results` in its existing (alphabetical-by-book) order, so it was a
+        # second copy of the truncation bug. The full external set is now kept, in
+        # CANONICAL order; the display layer samples it (research_assembler
+        # ._sample_for_display, stratified by section) and reports the true total and its
+        # distribution. Over-common single words are still gated downstream on this true
+        # yield (ResearchAssembler COMMON_CAP). The canonical sort happens once, just
+        # before self-match filtering below, so the phrase fallback is sorted too.
 
         # APPLY EXPLICIT SCOPE FILTERING (if requested)
         # If user requested a specific scope (not 'auto'), filter to that scope
@@ -875,7 +842,7 @@ class ConcordanceLibrarian:
                 phrase=original_query,
                 level=request.level,
                 scope=initial_scope,
-                limit=request.max_results,
+                limit=None,  # Session 384: no alphabetical truncation here either
                 use_split=True
             )
             for result in fallback_results:
@@ -915,6 +882,8 @@ class ConcordanceLibrarian:
                 self.logger.info(
                     f"Final validation filtered results to ensure all words are present"
                 )
+
+        all_results = sort_canonically(all_results)
 
         # SELF-MATCH FILTERING (Session 350, change C)
         # A search lifted from a verse will always match that verse. Reporting the
@@ -970,7 +939,7 @@ class ConcordanceLibrarian:
         self._freq_cache[word] = freq
         return freq
 
-    def lemma_frequency(self, word: str) -> int:
+    def lemma_frequency(self, word: str, source_psalm: Optional[int] = None) -> int:
         """
         Count Tanakh occurrences of a word's *lemma* (Session 351).
 
@@ -978,12 +947,15 @@ class ConcordanceLibrarian:
         approximated: it counts all inflected/affixed forms of the lexeme as one. Used
         by root selection (src/concordance/root_selection.py) to pick the rarest root
         worth tracing. Falls back to surface frequency when no lemma resolves. Cached.
+        Session 384: `source_psalm` resolves the lemma in the psalm's own context, so a
+        homograph is ranked by the frequency of the word the verse actually uses.
         """
         if not hasattr(self, '_lemfreq_cache'):
             self._lemfreq_cache = {}
-        if word in self._lemfreq_cache:
-            return self._lemfreq_cache[word]
-        lemma = self.search._resolve_lemma(word)
+        key = (word, source_psalm)
+        if key in self._lemfreq_cache:
+            return self._lemfreq_cache[key]
+        lemma = self.search._resolve_lemma(word, source_psalm)
         if not lemma:
             freq = self.tanakh_frequency(word)
         else:
@@ -995,7 +967,7 @@ class ConcordanceLibrarian:
                 freq = row[0] if row else 0
             except Exception:
                 freq = 0
-        self._lemfreq_cache[word] = freq
+        self._lemfreq_cache[key] = freq
         return freq
 
     def _book_in_scope(self, book: str, scope: str) -> bool:

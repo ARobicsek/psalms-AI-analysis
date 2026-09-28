@@ -218,11 +218,19 @@ def test_sonnet_5_is_priced_at_its_permanent_rate():
 
 
 def test_intro_rates_keep_the_anthropic_cache_multipliers():
+    """Session 384: vendor-aware. The first non-Anthropic promo (GPT-6 Sol) broke the
+    old assumption that every promo carries Anthropic's 1.25x / 2x write markups --
+    OpenAI does not charge for cache writes at all. The write multipliers are checked
+    on Claude promos only; the 10% cache read on every promo."""
     for name, promo in INTRO_PRICING.items():
-        r = promo["rates"]
-        assert r["cache_write"] == pytest.approx(1.25 * r["input"]), name
-        assert r["cache_write_1h"] == pytest.approx(2.00 * r["input"]), name
-        assert r["cache_read"] == pytest.approx(0.10 * r["input"]), name
+        r = {**PRICING[name], **promo["rates"]}
+        if name.startswith("claude-"):
+            assert r["cache_write"] == pytest.approx(1.25 * r["input"]), name
+            assert r["cache_write_1h"] == pytest.approx(2.00 * r["input"]), name
+        else:
+            assert r["cache_write"] == 0.0 and r["cache_write_1h"] == 0.0, name
+        mult = CACHE_READ_MULTIPLIER_EXCEPTIONS.get(name, 0.10)
+        assert r["cache_read"] == pytest.approx(mult * r["input"]), name
 
 
 def test_price_tokens_matches_the_tracker_on_the_same_call():

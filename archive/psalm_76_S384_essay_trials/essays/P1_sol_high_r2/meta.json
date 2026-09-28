@@ -1,0 +1,15 @@
+{
+  "arm": "P1_sol_high_r2",
+  "prompt": "p1",
+  "model": "gpt-6-sol",
+  "effort": "high",
+  "usage": {
+    "input": 3,
+    "cache_read": 132410,
+    "output": 5427,
+    "reasoning_included": 2588
+  },
+  "cost_usd": 0.0808,
+  "stop_reason": "completed",
+  "words": 1668
+}

@@ -9,6 +9,71 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 384 (2026-09-28): the concordance was searching the wrong words and cutting Psalms out; echoes budget; overnight "forest" essay trials
+
+**Trigger**: the author's review of Ps 76 arm B (Opus 5.5): (1) concordance counts differed between A and B, "have a look… could it use some renovation… are we selecting items that make good use of the concordance affordances?"; (2) literary echoes with SOTA models (later DEFERRED); (3) the writer skimped on echoes (~0.75/verse welcome, if good); (4) the writer "loses the forest for the trees" — plan prompt and model tests (Opus 5.5, GPT-6 Sol), run autonomously overnight. Follow-ups: implement the concordance and echo fixes; Opus 5.5 + GPT-6 Sol only (Fable/Astra too expensive); judges should describe, not rate; essays only, on B's materials.
+
+**Session cost: ~$11.47** — essay trials $11.45 (of which **$5.23 was two Opus-5.5-max attempts that wrote nothing**), plus ~$0.02 of preflight calls. The concordance work, radar, packets and all measurements were $0.
+
+### 1. Concordance
+- **Why counts differ**: "Concordance Entries Reviewed" summed capped hit counts over whatever the micro analyst chose to search. Only 7 of ~25 queries were string-identical across A and B.
+- **`בצר` (48 vs 74), the case the author spotted**: A's 48 were ALL lemma צר (foe / distress / Tyre); B's 74 = the same 48 + ~26 correct בצר verses (Gen 11:6, Deut 24:21, Judg 9:27), admitted only because B's micro listed `יבצר` as an alternate, which resolved to the right lemma.
+- **D1, wrong-lemma resolution**: `_resolve_lemma` took the Bible-wide most frequent lemma for a spelling. Ps 76: בצר→צר, רדם→רדה, חמת→חמת (Hamath/wineskin), ענו→ענה, plus תודה for תּוֹדֶךָּ. **Fixed**: resolve against the source psalm's tokens first (exact surface → token whose lemma IS the query → prefixed form with ≤3 of ו ה ב כ ל מ ש), then fall back. Threaded through the librarian, `lemma_frequency`, and micro's root selection/dedupe.
+- **D2, alphabetical truncation**: `ORDER BY c.book_name` + `LIMIT max_results` before sampling. מגן kept 4 of 19 Psalms verses; נצח 12/73; ענה 0/53; ירא 0/73; `רכב+סוס` lost Ps 20:8. The same truncation existed a second time in the librarian's "post-search filtering" (it walked the alphabetical list up to max_results). **Fixed**: no limits, `sort_canonically`, and a section-stratified display sample (`_allocate_slots`: Psalms floor 3, ≥1 per other non-empty section, rest proportional; pins kept). Each search header now has a "Where it occurs: Torah · Prophets · Psalms · Writings" line.
+- **Consequence to know**: the ResearchAssembler COMMON_CAP (>120 external hits drops a single-word search) now sees TRUE totals and actually fires. `חמת`→חמה (122) is now dropped, instead of A's 39 verses of Hamath.
+- **Validation** (`archive/psalm_76_S384_planning/validate_concordance.py` + output): A's and B's searches re-run through the fixed librarian (alternates unavailable, so counts are not strictly comparable where alternates mattered).
+- **Methods line**: one helper, `pipeline_summary.concordance_methods_summary`, replaces three copy-pasted blocks in `document_generator`, `combined_document_generator` and `commentary_formatter`.
+- **Affordances**: the finds that made B original are CLUSTERS of shared vocabulary; the LLM finds them only by guessing the right pair. **New `src/concordance/intertext_radar.py`** finds them exhaustively. It found, among others, Hos 1:7, Isa 43:17, Gen 49:17/24 and **Isaiah 31** ("Assyria shall fall by a sword not of man"), none of which either guide used. It is wired into every bundle.
+- **Tests**: `tests/test_concordance_retrieval.py`, 21 tests.
+- **Known limits**: homonyms share one lemma (no BHSA homonym markers); ~3% of tokens lack a lemma (סוּכּוֹ in 76:3, so `סוך` still resolves to "anoint").
+- **Not done**: micro naming a word by verse position (mostly unnecessary now); semantic-field searches.
+
+### 2. Literary echoes — diagnosed, deferred by the author
+- **The pipeline optimizes novelty, not aptness.** The "Second Echo Principle" makes Gemini record the obvious echo as "Default bypassed" and then drops it. For Ps 76 it dropped Byron's *Destruction of Sennacherib*, the Iliad's "sleep of bronze" (Homer is fully banned), Rev 8:1, Ozymandias and the Magnificat.
+- **Quality and cost**: 12 of 18 quotations were corrected by Pass 3, because the generator quotes from memory. Pass 3 is 69% of the $1.18.
+- **The writer's usage**: 4 of 18 echoes, 0.3 per verse.
+- Ranked ideas are in `docs/plans/SESSION_384_PLAN_concordance_echoes_writer.md` §2.3.
+
+### 3. Echo budget (SHIPPED)
+- **Why**: B's thinking self-capped echoes at "two or three in the commentary plus one in the essay" and trimmed public-domain poems (Trakl, Darío) to "a couple lines" over copyright.
+- **Items 7 and 12 now say**: ~3 echoes per 4 verses across the guide, "a level to reach with GOOD echoes, not a quota"; 3–8 lines; public-domain works generously; modern works as the dossier supplies them; plus a context statement (published sources, private study).
+- **Size**: 76,052 → 77,184 chars; SI derives correctly (+425).
+- **Stated limit**: no prompt text was written to push a model into reproducing long in-copyright works verbatim.
+
+### 4. Writer-prompt diagnosis
+- **Where the prompt spends its words** (by section): commentator handling ~19.5K (26%; RULE 8b 15.4K is the largest single section); formatting and grammar presentation ~14K; prose anti-patterns ~11K; the essay's "what is the psalm doing" ~1.5K (2%); cross-domain insight 0.
+- **Where the writer spends its thinking**: 55% (A) and 60% (B) of the summary text sits in paragraphs about commentators. B ran a psalm-wide Tier-1 ranking (paragraphs 7–30) and then re-ranked verse by verse while drafting (78–125), exactly as RULE 8b's "rank before you cut… COUNT THEM" instructs.
+- **Where its reading goes**: the 205K bundle is 26.5% commentaries, 22% figurative, 19% concordance. No input is an experiential reading of the poem.
+
+### 5. Overnight essay trials ($11.45, 52 min)
+- **Harness**: `scripts/s384_essay_trials.py` (dry-run verified that the rules section is byte-identical to B's, and that the P0 task delta is exactly +1,132 = the echo edit; B's reader-question stripping preserved).
+- **Arms**: P0 (production, essay only), P1 (the "forest" rewrite, `P1_INSTRUCTIONS`), P2 (P1 + two research-free first readings + the radar). Opus 5.5 high ×2 on P1, max ×1; GPT-6 Sol high ×2 on P1, xhigh ×1; P0 and P2 once per model at high.
+- **Outputs**: descriptive notes from both models on blind letters, an ideas map, and counts. Packet: `Documents/Psalm study guide/Psalm 76 - Essay trials (S384).docx` (64 pp) + reasoning companion (10 pp).
+- **Observations (descriptive; the author judges)**:
+  - P1/P2 essays introduced material no P0 essay had: Sennacherib's prism and the Assyrian royal-radiance claim, Herodotus 2.141, the Black Obelisk, Aeschylus' *Eumenides*, J. L. Austin, combat-freeze psychology.
+  - Byron's poem (discarded by the echoes pipeline) appeared in 4 essays from the models' own knowledge.
+  - Both first readings found the silence structure independently.
+  - The radar's best finds did not appear in any P2 essay.
+- **Model facts**:
+  - **Opus 5.5 at effort MAX wrote nothing**: 2 × 128,000 output tokens of reasoning, ~19 min and $2.61 each; a third attempt was content-filtered.
+  - GPT-6 Sol at high reasons only ~2.5–5K tokens and writes 1,000–1,700 words (Opus ~1,900–2,050); at xhigh it reasons ~7.5K.
+  - Cached extra essay: ~$0.24 Opus, ~$0.08 Sol.
+  - GPT-6 tokenizes B's inputs at ~129K tokens vs Opus's ~181K.
+  - One Sol call returned `incomplete` with zero usage and succeeded on retry.
+
+### 6. Other code
+- **Pricing**: `gpt-6-sol` row (the durable $4/$20 is an ASSUMPTION) + an `INTRO_PRICING` promo ($2/$10) through 2026-11-21.
+- **Writer guard**: `MasterEditorV2._call_gpt_writer` refuses `gpt-6-*`, because chat.completions with `max_tokens=16000` and no reasoning effort would silently cripple it.
+- **Test**: `test_intro_rates_keep_the_anthropic_cache_multipliers` made vendor-aware.
+- **192 tests pass.**
+
+### Watch
+- No guide has been generated on the fixed concordance, the radar, or the echo budget.
+- The "forest" prompt lives only in the trial script, essay-only.
+- Next decisions are the author's, after reading the packet.
+
+---
+
 ## Session 383 (2026-09-24): Opus 5.5 A/B on Psalm 76 — the lift came from synthesis discovery, and the price cut is outrun by output volume
 
 **Trigger**: the author — *"Opus 5.5 is out! I'd love to do an A/B on ps 76, the last psalm we ran, where we swap out the places where opus is in used with 5.5, high thinking. I'd like to compare the output with the current output in terms of style, quality of writing, compellingness of writing, originality of content, etc etc. Please run only those elements of the pipleine that NEED to be run to re-run the opus elements. please generate a 'B' complete DOCX. don't overwrite anything."* Mid-turn: *"also compare cost"*. Follow-up: *"can you append the psalm_076_master_writer_v4_thinking (for the B run) to the docx? also, please format the docx elegantly so that it requires less paper to print"*.

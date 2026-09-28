@@ -1,0 +1,45 @@
+ 23.9  Ps76:1      Psalms 67:1    shared: נגינה מזמור נצח שיר
+ 21.1  Ps76:1      Psalms 75:1    shared: מזמור נצח שיר אסף
+ 20.0  Ps76:4      I Chronicles 5:18   shared: מגן קשת מלחמה חרב
+ 18.9  Ps76:5-6    Nahum 3:18   shared: נום אדיר הר
+ 18.8  Ps76:1      Psalms 4:1    shared: נגינה מזמור נצח
+ 18.8  Ps76:1      Psalms 6:1    shared: נגינה מזמור נצח
+ 18.7  Ps76:4      Hosea 2:20   shared: קשת שבר מלחמה חרב
+ 16.5  Ps76:1      Psalms 66:1    shared: מזמור נצח שיר
+ 16.5  Ps76:1      Psalms 88:1    shared: מזמור נצח שיר
+ 16.5  Ps76:1      Psalms 65:1    shared: מזמור נצח שיר
+ 16.5  Ps76:1      Psalms 68:1    shared: מזמור נצח שיר
+ 16.0  Ps76:1      Psalms 77:1    shared: מזמור נצח אסף
+ 16.0  Ps76:1      Psalms 80:1    shared: מזמור נצח אסף
+ 15.7  Ps76:1      Psalms 83:1    shared: מזמור שיר אסף
+ 15.3  Ps76:6-7    Psalms 132:5    shared: אביר יעקב מצא
+ 15.2  Ps76:7-8    Exodus 15:1    shared: סוס אז רכב
+ 15.1  Ps76:9-10   Jeremiah 30:10   shared: שקט ישע ירא
+ 15.1  Ps76:9-10   Jeremiah 46:27   shared: שקט ישע ירא
+ 15.1  Ps76:3-4    Jeremiah 6:23   shared: קשת ציון מלחמה
+ 14.8  Ps76:4      Psalms 46:10   shared: קשת שבר מלחמה
+ 14.7  Ps76:3-4    Zechariah 9:13   shared: קשת ציון חרב
+ 14.7  Ps76:12-13  Psalms 22:26   shared: נדר שלם ירא
+ 14.6  Ps76:8-9    Isaiah 7:4    shared: שקט ירא אף
+ 14.4  Ps76:6-7    II Kings 6:14   shared: סוס רכב חיל
+ 14.4  Ps76:6-7    II Kings 7:6    shared: סוס רכב חיל
+ 14.4  Ps76:6-7    I Kings 20:25   shared: סוס רכב חיל
+ 14.4  Ps76:6-7    Deuteronomy 11:4    shared: סוס רכב חיל
+ 14.4  Ps76:6-7    Exodus 14:9    shared: סוס רכב חיל
+ 14.4  Ps76:6-7    II Kings 6:15   shared: סוס רכב חיל
+ 14.4  Ps76:6-7    I Kings 20:1    shared: סוס רכב חיל
+ 14.4  Ps76:6-7    Ezekiel 38:15   shared: סוס רכב חיל
+ 14.4  Ps76:6-7    Isaiah 43:17   shared: סוס רכב חיל
+ 14.4  Ps76:4      Psalms 37:15   shared: קשת שבר חרב
+ 14.3  Ps76:7-8    Isaiah 58:14   shared: אז רכב יעקב
+ 14.2  Ps76:7-8    Deuteronomy 20:1    shared: סוס רכב ירא
+ 14.1  Ps76:7-8    Habakkuk 3:8    shared: סוס רכב אף
+ 14.0  Ps76:4      Isaiah 21:15   shared: קשת מלחמה חרב
+ 14.0  Ps76:4      Hosea 1:7    shared: קשת מלחמה חרב
+ 13.9  Ps76:9-10   Deuteronomy 17:8    shared: דין משפט קום
+ 13.8  Ps76:7-8    Zechariah 1:8    shared: סוס רכב עמד
+ 13.8  Ps76:7-8    Amos 2:15   shared: סוס רכב עמד
+ 13.8  Ps76:7-8    II Kings 5:9    shared: סוס רכב עמד
+ 13.6  Ps76:6      II Chronicles 24:23   shared: שלל חיל שנה
+ 13.0  Ps76:10-11  Psalms 119:62   shared: ידה משפט קום
+ 12.8  Ps76:1      Psalms 54:1    shared: נגינה נצח

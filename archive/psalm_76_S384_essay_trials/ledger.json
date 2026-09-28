@@ -1,0 +1,540 @@
+{
+  "calls": [
+    {
+      "label": "first_reading_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 4215,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 5193
+      },
+      "cost_usd": 0.1207,
+      "seconds": 61,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "P0_sol_high",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 0,
+        "cache_read": 0,
+        "output": 0,
+        "reasoning_included": 0
+      },
+      "cost_usd": 0.0,
+      "seconds": 66,
+      "status": "incomplete"
+    },
+    {
+      "label": "first_reading_sol",
+      "model": "gpt-6-sol",
+      "effort": "xhigh",
+      "usage": {
+        "input": 2912,
+        "cache_read": 0,
+        "output": 4528,
+        "reasoning_included": 3371
+      },
+      "cost_usd": 0.0511,
+      "seconds": 88,
+      "status": "completed"
+    },
+    {
+      "label": "P0_opus_high",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 209055,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 9576
+      },
+      "cost_usd": 1.0277,
+      "seconds": 98,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "P1_sol_high_r1",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 132413,
+        "cache_read": 0,
+        "output": 5691,
+        "reasoning_included": 3106
+      },
+      "cost_usd": 0.3217,
+      "seconds": 103,
+      "status": "completed"
+    },
+    {
+      "label": "P1_opus_high_r1",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 4391,
+        "cache_write_1h": 181208,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 10198
+      },
+      "cost_usd": 1.6712,
+      "seconds": 114,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "P0_sol_high",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 3,
+        "cache_read": 147632,
+        "output": 4451,
+        "reasoning_included": 2576
+      },
+      "cost_usd": 0.074,
+      "seconds": 62,
+      "status": "completed"
+    },
+    {
+      "label": "P2_opus_high",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 15047,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 181208,
+        "output": 8101
+      },
+      "cost_usd": 0.2584,
+      "seconds": 84,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "P1_sol_high_r2",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 3,
+        "cache_read": 132410,
+        "output": 5427,
+        "reasoning_included": 2588
+      },
+      "cost_usd": 0.0808,
+      "seconds": 91,
+      "status": "completed"
+    },
+    {
+      "label": "P1_opus_high_r2",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 4391,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 181208,
+        "output": 8850
+      },
+      "cost_usd": 0.2308,
+      "seconds": 95,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "P2_sol_high",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 140435,
+        "cache_read": 0,
+        "output": 7333,
+        "reasoning_included": 5178
+      },
+      "cost_usd": 0.3542,
+      "seconds": 125,
+      "status": "completed"
+    },
+    {
+      "label": "P1_sol_xhigh",
+      "model": "gpt-6-sol",
+      "effort": "xhigh",
+      "usage": {
+        "input": 132413,
+        "cache_read": 0,
+        "output": 10132,
+        "reasoning_included": 7459
+      },
+      "cost_usd": 0.3661,
+      "seconds": 163,
+      "status": "completed"
+    },
+    {
+      "label": "P1_opus_max",
+      "model": "claude-opus-5-5",
+      "effort": "max",
+      "usage": {
+        "input": 4391,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 181208,
+        "output": 128000
+      },
+      "cost_usd": 2.6138,
+      "seconds": 1147,
+      "stop_reason": "max_tokens"
+    },
+    {
+      "label": "P1_opus_max",
+      "model": "claude-opus-5-5",
+      "effort": "max",
+      "usage": {
+        "input": 4391,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 181208,
+        "output": 128000
+      },
+      "cost_usd": 2.6138,
+      "seconds": 1139,
+      "stop_reason": "max_tokens"
+    },
+    {
+      "label": "notes_E_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 6785,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 2967
+      },
+      "cost_usd": 0.0865,
+      "seconds": 28,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_F_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 8533,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 2793
+      },
+      "cost_usd": 0.09,
+      "seconds": 29,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_I_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 7530,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 3055
+      },
+      "cost_usd": 0.0912,
+      "seconds": 30,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_E_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 4737,
+        "cache_read": 0,
+        "output": 2026,
+        "reasoning_included": 1552
+      },
+      "cost_usd": 0.0297,
+      "seconds": 35,
+      "status": "completed"
+    },
+    {
+      "label": "notes_I_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5329,
+        "cache_read": 0,
+        "output": 3599,
+        "reasoning_included": 3106
+      },
+      "cost_usd": 0.0466,
+      "seconds": 44,
+      "status": "completed"
+    },
+    {
+      "label": "notes_A_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 7786,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 2318
+      },
+      "cost_usd": 0.0775,
+      "seconds": 23,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_F_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5991,
+        "cache_read": 0,
+        "output": 3551,
+        "reasoning_included": 3050
+      },
+      "cost_usd": 0.0475,
+      "seconds": 64,
+      "status": "completed"
+    },
+    {
+      "label": "notes_A_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5447,
+        "cache_read": 0,
+        "output": 2001,
+        "reasoning_included": 1552
+      },
+      "cost_usd": 0.0309,
+      "seconds": 37,
+      "status": "completed"
+    },
+    {
+      "label": "notes_D_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 8192,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 4069
+      },
+      "cost_usd": 0.1141,
+      "seconds": 40,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_G_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 8184,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 3102
+      },
+      "cost_usd": 0.0948,
+      "seconds": 30,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_D_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5765,
+        "cache_read": 0,
+        "output": 3240,
+        "reasoning_included": 2758
+      },
+      "cost_usd": 0.0439,
+      "seconds": 44,
+      "status": "completed"
+    },
+    {
+      "label": "notes_J_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 7932,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 2514
+      },
+      "cost_usd": 0.082,
+      "seconds": 30,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_G_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5701,
+        "cache_read": 0,
+        "output": 3092,
+        "reasoning_included": 2588
+      },
+      "cost_usd": 0.0423,
+      "seconds": 47,
+      "status": "completed"
+    },
+    {
+      "label": "notes_C_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 8529,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 3569
+      },
+      "cost_usd": 0.1055,
+      "seconds": 35,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_H_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 7249,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 2919
+      },
+      "cost_usd": 0.0874,
+      "seconds": 30,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_J_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5535,
+        "cache_read": 0,
+        "output": 2980,
+        "reasoning_included": 2511
+      },
+      "cost_usd": 0.0409,
+      "seconds": 50,
+      "status": "completed"
+    },
+    {
+      "label": "notes_H_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5017,
+        "cache_read": 0,
+        "output": 2278,
+        "reasoning_included": 1807
+      },
+      "cost_usd": 0.0328,
+      "seconds": 43,
+      "status": "completed"
+    },
+    {
+      "label": "notes_B_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 6872,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 3289
+      },
+      "cost_usd": 0.0933,
+      "seconds": 39,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_K_opus",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "usage": {
+        "input": 7648,
+        "cache_write_1h": 0,
+        "cache_write": 0,
+        "cache_read": 0,
+        "output": 3086
+      },
+      "cost_usd": 0.0923,
+      "seconds": 30,
+      "stop_reason": "end_turn"
+    },
+    {
+      "label": "notes_B_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 4866,
+        "cache_read": 0,
+        "output": 2603,
+        "reasoning_included": 2056
+      },
+      "cost_usd": 0.0358,
+      "seconds": 48,
+      "status": "completed"
+    },
+    {
+      "label": "notes_K_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 5428,
+        "cache_read": 0,
+        "output": 2026,
+        "reasoning_included": 1552
+      },
+      "cost_usd": 0.0311,
+      "seconds": 38,
+      "status": "completed"
+    },
+    {
+      "label": "notes_C_sol",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 6009,
+        "cache_read": 0,
+        "output": 6172,
+        "reasoning_included": 5696
+      },
+      "cost_usd": 0.0737,
+      "seconds": 98,
+      "status": "completed"
+    },
+    {
+      "label": "ideas_map",
+      "model": "gpt-6-sol",
+      "effort": "high",
+      "usage": {
+        "input": 28518,
+        "cache_read": 0,
+        "output": 13845,
+        "reasoning_included": 9840
+      },
+      "cost_usd": 0.1955,
+      "seconds": 189,
+      "status": "completed"
+    }
+  ]
+}

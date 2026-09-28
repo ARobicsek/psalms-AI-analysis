@@ -74,7 +74,12 @@ def _truncate_bdb_entry(text: str, max_chars: int = 500) -> str:
 
 
 # Session 350: how many concordance matches to render per search in the bundle.
-MAX_DISPLAY_RESULTS = 10
+# Session 384: the value lives in concordance.search (one definition, also read by
+# pipeline_summary for the methods section).
+try:
+    from ..concordance.search import DISPLAY_RESULTS_PER_SEARCH as MAX_DISPLAY_RESULTS
+except ImportError:
+    from src.concordance.search import DISPLAY_RESULTS_PER_SEARCH as MAX_DISPLAY_RESULTS
 
 # Session 380: the per-entry commentary cap (was a bare 400 here, silently
 # cutting 23% of every commentary entry in the corpus) is owned by
@@ -125,22 +130,86 @@ def _result_matches_ref(result, ref) -> bool:
     return book_norm.startswith(token) or token in book_norm
 
 
+# Session 384: the four sections a concordance hit is sorted into for display.
+_SECTION_ORDER = ('Torah', 'Prophets', 'Psalms', 'Writings')
+# Psalms is the home corpus, so it is guaranteed up to this many display slots before
+# the rest are shared out in proportion to where the hits actually fall.
+_PSALMS_DISPLAY_FLOOR = 3
+
+
+def _section_of(book: str) -> str:
+    """'Torah' / 'Prophets' / 'Psalms' / 'Writings' (the Writings other than Psalms)."""
+    try:
+        from ..concordance.search import BOOK_SECTION
+    except ImportError:
+        from src.concordance.search import BOOK_SECTION
+    return BOOK_SECTION.get(book, 'Writings')
+
+
+def _distribution_line(results: list) -> str:
+    """'Torah 12 · Prophets 61 · Psalms 38 · Writings 32' over the FULL result set,
+    so the writer can tell 'rare, concentrated in the Prophets' from 'everywhere'."""
+    counts = {s: 0 for s in _SECTION_ORDER}
+    for r in results:
+        counts[_section_of(r.book)] += 1
+    return " · ".join(f"{s} {counts[s]}" for s in _SECTION_ORDER if counts[s])
+
+
+def _allocate_slots(sizes: Dict[str, int], slots: int) -> Dict[str, int]:
+    """Share `slots` across sections: Psalms first, up to _PSALMS_DISPLAY_FLOOR; then one
+    for each other non-empty section while slots last; then the remainder in proportion
+    to how many hits each section still holds (largest remainder). Never allocates more
+    than a section holds."""
+    quota = {s: 0 for s in sizes}
+    left = slots
+    if sizes.get('Psalms'):
+        quota['Psalms'] = min(sizes['Psalms'], _PSALMS_DISPLAY_FLOOR, left)
+        left -= quota['Psalms']
+    for s in _SECTION_ORDER:
+        if left and s != 'Psalms' and sizes.get(s):
+            quota[s] += 1
+            left -= 1
+    while left > 0:
+        spare = {s: sizes[s] - quota[s] for s in sizes if sizes[s] > quota[s]}
+        if not spare:
+            break
+        total = sum(spare.values())
+        shares = {s: left * spare[s] / total for s in spare}
+        granted = 0
+        for s in spare:
+            g = min(spare[s], int(shares[s]))
+            quota[s] += g
+            granted += g
+        left -= granted
+        if granted == 0:
+            # Fewer slots than sections with room: one each, largest share first.
+            for s in sorted(spare, key=lambda x: (-shares[x], _SECTION_ORDER.index(x))):
+                if left == 0:
+                    break
+                quota[s] += 1
+                left -= 1
+    return quota
+
+
 def _sample_for_display(results: list, n: int, seed_str: str, pin_text: str = "") -> list:
     """
     Pick up to `n` concordance matches to render, spread across Tanakh.
 
-    The librarian returns matches in a deterministic, non-representative order (by
-    surface-variation, then alphabetical book name), so a naive `[:n]` slice clusters
-    and over-represents whatever sorts first. Instead we take a RANDOM sample (seeded by
-    the query, so a given search is reproducible across runs) and then sort it into
-    canonical book order for readability. The full count is reported separately, so this
-    only affects which examples are shown, not the tally.
+    Session 384: `results` is now the FULL external set (the librarian no longer
+    truncates to the alphabetically-first books before we see it — which had cut
+    Psalms out of every lemma with more than 50 hits), and the sample is STRATIFIED by
+    section rather than uniformly random: Psalms gets up to _PSALMS_DISPLAY_FLOOR
+    slots, every other section with hits gets at least one, and the rest follow the
+    real distribution. Within a section the pick is random, seeded by the query so a
+    given search is reproducible across runs. The chosen set is sorted into canonical
+    order for readability. The full count is reported separately, so this only affects
+    which examples are shown, not the tally.
 
     Session 358 (R3): the sample is PURPOSE-AWARE. When the micro analyst's
     purpose/insight notes name a specific intertext ("— Cain's נוד, Gen 4:16"),
     any matching result is PINNED into the shown set (marked `_pinned` for the
-    renderer) instead of being left to the luck of the random draw; the
-    remaining slots are filled randomly as before.
+    renderer) instead of being left to the luck of the draw; the remaining slots
+    are filled as above.
     """
     pinned, rest = [], list(results)
     refs = _extract_purpose_refs(pin_text)
@@ -166,7 +235,14 @@ def _sample_for_display(results: list, n: int, seed_str: str, pin_text: str = ""
         chosen = pinned + rest
     else:
         rng = random.Random(int(hashlib.md5(seed_str.encode('utf-8')).hexdigest(), 16))
-        chosen = pinned + rng.sample(rest, slots)
+        groups: Dict[str, list] = {s: [] for s in _SECTION_ORDER}
+        for r in rest:
+            groups[_section_of(r.book)].append(r)
+        quota = _allocate_slots({s: len(g) for s, g in groups.items()}, slots)
+        chosen = list(pinned)
+        for s in _SECTION_ORDER:
+            if quota.get(s):
+                chosen += rng.sample(groups[s], quota[s])
     order = _canon_order()
     return sorted(chosen, key=lambda r: (order.get(r.book, 999), r.chapter, r.verse))
 
@@ -247,6 +323,9 @@ class ResearchBundle:
     
     # Track models used by sub-agents
     models_used: Dict[str, str] = field(default_factory=dict)
+    # Session 384: deterministic shared-vocabulary parallels (intertext radar)
+    shared_vocabulary_markdown: Optional[str] = None
+    shared_vocabulary_count: int = 0
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -363,6 +442,15 @@ class ResearchBundle:
 
                     if all_variants:
                         md += f"Variants: {', '.join(sorted(all_variants))}\n"
+                    _grouped_all = []
+                    _grouped_refs = set()
+                    for b in bundles:
+                        for r in b.results:
+                            if r.reference not in _grouped_refs:
+                                _grouped_refs.add(r.reference)
+                                _grouped_all.append(r)
+                    if _grouped_all:
+                        md += f"*Where it occurs: {_distribution_line(_grouped_all)}*\n"
                     md += "\n"
 
                     # Show results from all bundles in the group
@@ -398,7 +486,7 @@ class ResearchBundle:
                             md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*{pin_mark}\n\n"
 
                         if len(unique_results) > len(shown):
-                            md += f"*...and {len(unique_results) - len(shown)} more results (random spread shown)*\n\n"
+                            md += f"*...and {len(unique_results) - len(shown)} more results (spread across sections shown)*\n\n"
                         if any_pinned:
                             md += "*† = the passage this search was run to confirm (named in the research purpose) — shown deliberately, not randomly*\n\n"
 
@@ -414,7 +502,10 @@ class ResearchBundle:
                     if ext == 0 and getattr(bundle, 'only_self', False):
                         md += f"### {bundle.request.query} (0 external parallels — appears only in this psalm, {bundle.request.scope}, {bundle.request.level})\n\n"
                     else:
-                        md += f"### {bundle.request.query} ({ext} external results, {bundle.request.scope}, {bundle.request.level})\n\n"
+                        md += f"### {bundle.request.query} ({ext} external results, {bundle.request.scope}, {bundle.request.level})\n"
+                        if bundle.results:
+                            md += f"*Where it occurs: {_distribution_line(bundle.results)}*\n"
+                        md += "\n"
 
                     if bundle.results:
                         # Session 358 (R3): purpose-aware pinning — see grouped path above.
@@ -430,11 +521,18 @@ class ResearchBundle:
                             md += f"**{result.reference}** | {result.hebrew_text} | *{matched}*{pin_mark}\n\n"
 
                         if len(bundle.results) > len(shown):
-                            md += f"*...and {len(bundle.results) - len(shown)} more results (random spread shown)*\n\n"
+                            md += f"*...and {len(bundle.results) - len(shown)} more results (spread across sections shown)*\n\n"
                         if any_pinned:
                             md += "*† = the passage this search was run to confirm (named in the research purpose) — shown deliberately, not randomly*\n\n"
 
                     md += "---\n\n"
+
+        # Session 384: shared-vocabulary parallels, computed over every verse of the
+        # Bible (src/concordance/intertext_radar.py). Placed straight after the
+        # LLM-chosen concordance searches, which it complements.
+        if self.shared_vocabulary_markdown:
+            md += self.shared_vocabulary_markdown
+            md += "---\n\n"
 
         # Figurative language section
         # If curator output is available, use that instead of raw instances
@@ -975,6 +1073,24 @@ class ResearchAssembler:
                 kept_bundles.append(b)
             concordance_bundles = kept_bundles
 
+        # Session 384: shared-vocabulary parallels (intertext radar). Deterministic, $0,
+        # ~1s. It finds the vocabulary CLUSTERS the LLM-chosen searches only hit by luck
+        # (Hos 2:20, Isa 31, Isa 43:17 for Ps 76). Never fatal.
+        shared_vocabulary_markdown, shared_vocabulary_count = "", 0
+        try:
+            try:
+                from ..concordance.intertext_radar import compute_shared_vocabulary_parallels
+            except ImportError:
+                from src.concordance.intertext_radar import compute_shared_vocabulary_parallels
+            shared_vocabulary_markdown, shared_vocabulary_count = \
+                compute_shared_vocabulary_parallels(request.psalm_chapter)
+            if self.logger:
+                self.logger.info(f"Shared-vocabulary parallels: {shared_vocabulary_count} passages, "
+                                 f"{len(shared_vocabulary_markdown):,} chars")
+        except Exception as e:
+            if self.logger:
+                self.logger.warning(f"Shared-vocabulary parallels skipped: {e}")
+
         # Fetch figurative language instances
         figurative_bundles = []
         if request.figurative_requests:
@@ -1130,7 +1246,9 @@ class ResearchAssembler:
             literary_echoes_included=bool(literary_echoes_content),
             # Figurative curator - LLM-enhanced insights (Session 226)
             figurative_curator_output=figurative_curator_output,
-            models_used=models_used
+            models_used=models_used,
+            shared_vocabulary_markdown=shared_vocabulary_markdown or None,
+            shared_vocabulary_count=shared_vocabulary_count,
         )
 
     def assemble_from_json(self, json_str: str) -> ResearchBundle:
