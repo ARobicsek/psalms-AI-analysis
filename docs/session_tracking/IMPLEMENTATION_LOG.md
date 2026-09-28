@@ -9,6 +9,40 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 385 (2026-09-28): the author's blind read of the essay trials; the two-call forest writer (built, not run); the copy editor and fact-checking
+
+**Author's verdict (blind)**: best F, C; middle I=J<K<H<D; weaker A, E, B, G. Key and analysis:
+`archive/psalm_76_S384_essay_trials/AUTHOR_READING_S385.md`. The three forest essays by Opus 5.5 (F, C, D) took the top three
+places. Same model, effort and inputs as I (P0), so the instructions made the difference, with one confound: P1's word band
+is 1,200–2,000 vs P0's 800–1,400. Every Sol essay is middle or below. None of the top three used a dossier echo, while all
+five that did are in the lower half; the top three's outside material (Sennacherib's prism, Herodotus 2.141, Byron) is
+about the same night. Commentator mentions rose (3 → 6–8) under the demoted-commentator prompt, and F slipped on Rashi 76:11:
+it presents one continuous reading (fury → praise, *and thereby* the rest restrained, Mishnaic תחגר) as two alternatives and
+drops Rashi's real alternative (girding). F's thinking had it right. P2's first readings passed Opus's material to Sol
+(H's Byron); the radar showed no effect in essays. Both Opus arms thought similarly (8.1–10.2K output tokens at `high`).
+
+**One call or two**: two. They cost ≈ $2.15 with a 5-minute cache vs ≈ $1.90 for one (1-hour ≈ $2.70; uncached ≈ $2.60);
+the case is quality. The Opus 5.5 facts used were checked against the bundled claude-api reference: preserved thinking
+(Opus 5.5 reads its own replayed blocks; edits to earlier turns invalidate them); a cache entry lives from the START of the
+request that wrote or read it; cache reads 0.05×, 5-minute write 1.25×, 1-hour write 2×; `max_tokens: 0` keep-alive with
+the same thinking and effort, no stream.
+
+**Built**: `scripts/s385_two_call_writer.py`, with `VERSE_INSTRUCTIONS` (8,377 chars), variants **new** (replays call 1's
+thinking) and **F** (text only), a structure check (it catches the S383 `**Verse 2.**` liturgy line on K), metrics vs K
+(verses 6,261 words, notes 240–670), and a compact reading DOCX through the production `DocumentGenerator` with
+`TanakhDatabase` stubbed from the inputs block. $0 tests: `--dry-run` (the prefix is identical across calls; estimate
+≈ $3.1) and `--selftest-docx` (K renders with all sections, divine names modified, and the appendix). **Not run: the
+container had no `ANTHROPIC_API_KEY`.** LibreOffice here would not load any DOCX, so there was no visual render check.
+
+**Copy editor**: GPT-6 Sol vs gpt-5.4 is about ±$0.2/psalm. The Terra findings argue against switching on price.
+Lookups are possible three ways: the bundle, our own function tools, web search. Proposed, not built: a separate
+fact-check pass with evidence, the copy editor correcting facts only from it, and the $0 citation verifier re-run after the
+copy edit. Plan and probe cases: `docs/plans/S385_two_call_writer_and_fact_check.md`. Next: `NEXT_SESSION_PROMPT_session_386.md`.
+
+**Spend**: $0.
+
+---
+
 ## Session 384 (2026-09-28): the concordance was searching the wrong words and cutting Psalms out; echoes budget; overnight "forest" essay trials
 
 **Trigger**: the author's review of Ps 76 arm B (Opus 5.5): (1) concordance counts differed between A and B, "have a look… could it use some renovation… are we selecting items that make good use of the concordance affordances?"; (2) literary echoes with SOTA models (later DEFERRED); (3) the writer skimped on echoes (~0.75/verse welcome, if good); (4) the writer "loses the forest for the trees" — plan prompt and model tests (Opus 5.5, GPT-6 Sol), run autonomously overnight. Follow-ups: implement the concordance and echo fixes; Opus 5.5 + GPT-6 Sol only (Fable/Astra too expensive); judges should describe, not rate; essays only, on B's materials.
