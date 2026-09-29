@@ -12,7 +12,10 @@
   2. **The fact-check step and copy-editor change**, built by a child cloud session. It lives in
      `src/agents/fact_checker.py` and `scripts/run_fact_checker.py`, with the copy editor taking the report through
      `supplementary_prompt` and `--fact-check` in `run_enhanced_pipeline.py` (default OFF). Handoff, commands and PASS
-     criteria: **`docs/plans/S385_FACT_CHECK_RESULTS.md`**.
+     criteria: **`docs/plans/S385_FACT_CHECK_RESULTS.md`**. Its $0.23 smoke test already caught the S383 plural
+     error with evidence; $1.18 of its $12 cap is spent (partly estimated).
+- **Cloud keys, for the record**: the fact-check child DID see `OPENAI_API_KEY`, so cloud environment variables work.
+  The writer child could not see `PSALMS_ANTHROPIC_API_KEY`, so it was most likely saved under another name.
 - **All of this is on branch `claude/exciting-mendel-77ecwv`, not on main.**
 
 ## Do this first (locally)
