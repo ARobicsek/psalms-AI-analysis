@@ -39,6 +39,16 @@ Lookups are possible three ways: the bundle, our own function tools, web search.
 fact-check pass with evidence, the copy editor correcting facts only from it, and the $0 citation verifier re-run after the
 copy edit. Plan and probe cases: `docs/plans/S385_two_call_writer_and_fact_check.md`. Next: `NEXT_SESSION_PROMPT_session_386.md`.
 
+**Orchestration, and why nothing ran**: the author added the keys to the cloud environment. A child session started to
+run the writer could not see `PSALMS_ANTHROPIC_API_KEY` and stopped before any paid call; it was archived. A second
+child session built the fact check. It was then redirected, through a trigger fired into it, to finish as a no-spend
+handoff, and it pushed `src/agents/fact_checker.py`, `scripts/run_fact_checker.py`, the copy-editor
+`supplementary_prompt` path (the prompt is byte-identical with no report, tested), the S383 `_reassemble` split fix,
+`--fact-check` in `run_enhanced_pipeline.py` (default OFF, with the $0 citation re-check after the copy edit) and tests
+(`pytest tests/`: 199 passed, 14 skipped at commit 30646cc, re-run in the parent session), plus `docs/plans/S385_FACT_CHECK_RESULTS.md`. The author continues LOCALLY (VS Code;
+`.env` keys). The writer runner now loads `.env` and reads `PSALMS_ANTHROPIC_API_KEY` first: in a cloud session a plain
+`ANTHROPIC_API_KEY` would also be visible to Claude Code itself.
+
 **Spend**: $0.
 
 ---

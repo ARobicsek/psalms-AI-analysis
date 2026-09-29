@@ -274,6 +274,11 @@ def client():
         import os
 
         import anthropic
+        try:  # local runs: the project's .env supplies ANTHROPIC_API_KEY
+            from dotenv import load_dotenv
+            load_dotenv(ROOT / ".env")
+        except ImportError:
+            pass
         key = os.environ.get("PSALMS_ANTHROPIC_API_KEY")
         kw = {"api_key": key} if key else {}
         _client = anthropic.Anthropic(max_retries=4, timeout=3600.0, **kw)
