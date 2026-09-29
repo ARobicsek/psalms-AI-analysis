@@ -1,0 +1,16 @@
+{
+ "cap_usd": 12.0,
+ "entries": [
+  {
+   "step": "smoke test: fact checker on a 2-claim snippet (gpt-6-sol, no bundle)",
+   "cost_usd": 0.2282,
+   "web_searches": 8
+  },
+  {
+   "step": "Probe A attempt 1, ABORTED after 2 rounds of chunk 1 (an empty tanakh.db left by a pytest collection would have answered counts with zero; fixed with usable_db)",
+   "cost_usd": 0.45,
+   "estimated": true,
+   "note": "no usage returned before the kill; estimate = ~140K uncached + ~150K cached input + ~5K reasoning at gpt-6-sol promo rates, rounded up"
+  }
+ ]
+}
