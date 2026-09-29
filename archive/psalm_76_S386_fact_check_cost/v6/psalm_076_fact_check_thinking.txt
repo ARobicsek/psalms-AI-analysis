@@ -1,0 +1,101 @@
+## local 1/5 [Introduction … Practical Kabbalah] (gpt-6-sol)
+
+**Verifying liturgical sources**
+
+I need to check the sources on liturgy for accuracy. I'm particularly focused on whether the "straight" research is sufficient. It's important to ensure that the information is credible and reliable. I wonder what specific aspects of the liturgy I should look for as well. Maybe I'll need to find primary texts or well-regarded scholarly articles to back this up. I'll also need to verify the context for better understanding.
+
+**Verifying Psalm 76 Origins**
+
+I need to note that Psalm 76 mentions being sung in Jerusalem by its people. However, the text refers to Asaph in a factual context, which might raise questions about its performance. If there's doubt about specifics, I could flag it as unverifiable since the provenance isn't entirely clear. It seems like I have enough tokens available for this output, around 6,000.
+
+## local 2/5 [Verse 1 … Verse 4] (gpt-6-sol)
+
+**Considering search claims**
+
+I need to check a bunch of claims linked to various searches around psalm headings, liturgy, the LXX, Hughes, and Ugaritic texts. I'm thinking about my time budget—how much time do I have for this? I guess I should aim for around 7,000 tokens. Using parallel processing seems like a good option to cover all these areas efficiently. It’s a bit of a complex task, but I’ll sort it out!
+
+## local 3/5 [Verse 5 … Verse 8] (gpt-6-sol)
+
+**Investigating piyyut lines**
+
+I'm trying to address a search issue where it fails due to intervening words. There’s a notable claim about every line ending in "לילה", especially in piyyut. Common phrases include "ויהי בחצי הלילה", which appears in several stanzas. So, I've confirmed that some lines end with "לילה" and the variants exist too. Now I'm questioning if the attributed piyyut by Yannai, specifically "ויהי בחצי הלילה", is genuinely his work. I'll double-check that!
+
+**Exploring historical roots**
+
+I'm trying to piece together some letters and their meanings, particularly focusing on "נ-א-ר" and "נ-ר-א." There's a connection to "Asaph" in the Chronicles, where I'm exploring his lineage linked to Joseph. I’m considering if Asaph could relate to the northern Ephraim tradition. I need to check verses like 1 Chronicles 6:24-28 and 1 Chronicles 6:39 to clarify. There’s a lot here to unpack!
+
+**Investigating genealogical roots**
+
+I'm noticing a contradiction in the genealogy related to Asaph and Joseph's tribes. If the statement claims that the guild has roots in Joseph's tribes, it needs clarity because it doesn't seem consistent with 1 Chronicles. I feel I need to dive deeper into the literature to understand the exact context and details surrounding this statement, so more research is definitely necessary to clear things up!
+
+## local 4/5 [Verse 9 … Verse 12] (gpt-6-sol)
+
+**Researching sources**
+
+I need to verify targeted sources like Malbim 9,13 and Ibn Ezra 11, along with the Talmud and LXX. It seems like there’s a lot to cover here! I’m also considering looking into liturgical customs and counts. Hmm, I wonder about the time budget I have for this search. Should I do this all in parallel? I’ll need to organize my time efficiently to get through everything!
+
+**Looking into Sukkot psalms**
+
+I’m trying to remember if I need to find a specific psalm for Sukkot. It seems like the "Shir Shel Yom" for the first day of Sukkot might be Psalm 76, but I'm not entirely sure. I should check and bundle any relevant information about it so I can have everything I need for the celebrations. Let's confirm and explore this further!
+
+## local 5/5 [Verse 13] (gpt-6-sol)
+
+**Researching liturgical claims**
+
+I’m focusing on gathering specific research about liturgical history and verses related to claims in verses 7, 10, 11, and 3. Okay, this might involve cross-referencing counts from different sources, like those regarding the Earth and Isaiah. It seems like I’ll be working in batches to piece everything together. There’s a lot to untangle here, so I’ll make sure to stay organized while I sort through all the details!
+
+## gather 1/3 (gpt-6-luna)
+
+**Planning for fact-checking**
+
+I need to conduct a search for each claim, with a focus on one search per claim to keep it efficient. I'll structure the output in a precise JSON format to include fields like fact_check, sources, title, URL, quote, and note. It seems like I should aim for eight searches total, possibly grouping some search queries in a single web call while ensuring each claim is covered thoroughly. Targeting primary sources will be key to getting accurate information.
+
+**Searching for claims**
+
+I have 4 query batches, but I need 8 separate searches, one for each claim. It seems that my existing queries may have covered some claims broadly, but now I need to focus on targeted searches for specific claims. I can search for claims 1, 3, 4, and 6/8 to gather exact sources. For instance, I need to find specific references for Passover customs in Psalm 76, the Edot Mizrach schedule, and community-related information. A targeted search should clarify this!
+
+**Searching for sources**
+
+The search results are looking useful, and I need to find 8 specific claims with their exact quote URLs. For the first claim, there might be nothing significant. The second source mentions Psalm 76 on day 1, but only under certain calendar conditions. Claim three provides a header confirming tradition, but it doesn’t clarify Sephardic or Mizrachi practices. I should consider a source from an online siddur, maybe Sefaria. I'll have to ensure that each claim is well-supported.
+
+**Examining sources for claims**
+
+I might need to directly quote a source that contradicts the attribution and identifies Ashkenazi customs. An appropriate reference might detail the Sephardic custom as "custom of Sephardim." However, my broad search might have missed this. Maybe I could use the Jewish Encyclopedia? It’s important not to exceed one search per claim, and I already searched. 
+
+Claim four mentions some Ashkenazi and Hasidic communities observing Pesach differently, but I couldn't find an exact source. For claims five and six, the original academic archive provides detailed text and cites URLs. It looks like I'll need to clarify the sequence of text for claim five.
+
+**Analyzing source layout**
+
+I’m considering if the layout of the source book indicates that an item belongs to the fourth hakafah, with the fifth starting after. The preceding section includes a quote, and the phrase "אחרי הקפה חמישית" suggests it's mentioned before the fifth. This might mean the recitation occurs before the fifth circuit, which could be a potential claim. I need to examine this carefully to ensure clarity and accuracy in what I’m presenting.
+
+## gather 2/3 (gpt-6-luna)
+
+**Structuring fact-checking requests**
+
+I need to ensure I'm creating an exact JSON format for the fact-checking process. That means I should limit it to one search per claim, with a maximum of eight searches. It seems I'll need to find primary text passages verbatim and include their URLs. Each claim needs a search, and I should think about batching the queries to count each one. Overall, it sounds like a straightforward plan!
+
+## gather 3/3 (gpt-6-luna)
+
+**Finding piyyut information**
+
+I need to locate exact source lines for the piyyut info headers and the schedule line. I should find the relevant pages for Lecha and the psalm schedule. It might help to search directly for piyyut info. I’m curious if the NLI piyyut page only contains commentary and not the actual poem. I’ll need to inspect the earlier lines to clarify what I’ve found so far.
+
+**Evaluating source discrepancies**
+
+I can cite a 1650 Scottish source on Hymnary that mentions "in Zion," while another source quotes "in Sion." This discrepancy is worth noting. The full New Scottish Psalter PDF shows "Sion," but the Hymnary page confirms it as "Zion." The inquiry refers to the "Scottish metrical version," which may align with older wording from the original psalter. To address this accurately, I’ll look for the exact line from the 1650 Scottish Psalter and compare it. Opening the PDF should help clarify the text.
+
+## judge 1/2 (gpt-6-sol)
+
+**Investigating text sources**
+
+I need to look into relevant text using my tools. I’m trying to understand the token budget and ensure my JSON matches its requirements. I want to explore various sources for references on Sefaria. It seems I can only use get_text and get_verse for precise searches, so I’ll focus on those for texts related to Siddur and liturgical rites. I need to be careful about verifying claims and supporting information as well. Let’s keep it responsible!
+
+**Analyzing prayer book sources**
+
+I’m investigating claims about Ashkenazi prayer books and how they relate to Nusach Sefard. The first source states that most Ashkenazi prayer arrangements don't necessarily exclude Nusach Sefard, which raises questions about its verification. There's a quote regarding Nusach Sefard zemer that suggests a connection with Ashkenazi texts. I’ll need to clarify the classifications further, as they seem ambiguous. Looking into Sefaria could provide more precise details. Let's see what I can uncover!
+
+## judge 2/2 (gpt-6-sol)
+
+**Researching tools for output**
+
+I need to use the research tools to gather text about practical liturgies and their potential earliest forms. I want this to be structured in JSON format, with claims in mind. I'm thinking about the time budget, wondering what it will be — around 11? I’ll have to manage that with the limit of tokens, which might be around 10k currently, but possibly it's about 13k? Let's try to narrow down to a relevant batch for this.

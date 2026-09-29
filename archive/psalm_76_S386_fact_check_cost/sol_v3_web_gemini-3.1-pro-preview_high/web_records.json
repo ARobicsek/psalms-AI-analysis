@@ -1,0 +1,1311 @@
+{
+ "spent": {
+  "gemini-3.1-pro-preview": {
+   "usage": {
+    "input": 23788,
+    "cached": 34314,
+    "output": 20954,
+    "reasoning": 80842
+   },
+   "searches": 5,
+   "cost_usd": 1.276
+  }
+ },
+ "seconds": 447,
+ "records": [
+  {
+   "id": "C1",
+   "location": "Introduction",
+   "sentence": "Psalm 76 has been sung on the eve of real battles, and by any reckoning it is a victory song: broken bows, collapsed cavalry, kings bringing tribute.",
+   "claim": "Psalm 76 has historically been sung on the eve of battles.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Think & Act Biblically (Monday: The Fear of the Lord Is the Beginning)",
+     "quote": "Like many of the fighting psalms, this too was a favorite of Christians during past periods of religious warfare. The embattled Huguenots sang it as they marched into battle at Coligny. The Covenanters sang it at Drumclog in 1679 when they defeated the government troops...",
+     "url": "https://thinkandactbiblically.org"
+    }
+   ],
+   "explanation": "Historical sources confirm that Psalm 76 was a favorite during religious warfare, sung by the Huguenots marching into battle and the Covenanters at Drumclog.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C2",
+   "location": "Introduction",
+   "sentence": "(Selah is a musical or liturgical marker whose exact sense is lost; it seems to signal a pause.)",
+   "claim": "Selah is a musical or liturgical marker of uncertain precise meaning.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Musical Instruments and Musicians In Worship in the Bible: The Old Testament",
+     "quote": "It must be acknowledged at the outset that there has been uncertainty about the meaning of this term among lexicographers and commentators... A common thread in the suggestions and explanations offered, however, is that Selah is a \"musical or liturgical marker\"",
+     "url": "https://www.spindleworks.com/library/peet/music_OT.htm"
+    }
+   ],
+   "explanation": "Scholars broadly agree that 'Selah' is a musical or liturgical instruction, though its exact translation or precise meaning remains uncertain.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C3",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Because the poet is reworking the oldest victory song in Israel's memory, the one that begins סוּס וְרֹכְבוֹ רָמָה בַיָּם, \"horse and rider He has hurled into the sea\" (Exod 15:1).",
+   "claim": "The Song at the Sea is the oldest victory song in Israel’s memory.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia: Song of the Sea",
+     "quote": "The Song of the Sea is noted for its archaic language, written in a form of Hebrew much older than that of the rest of Exodus. Some scholars consider it the oldest surviving text describing the Exodus",
+     "url": "https://en.wikipedia.org/wiki/Song_of_the_Sea"
+    }
+   ],
+   "explanation": "The Song of the Sea (Exodus 15) is widely regarded by biblical scholars as one of the oldest texts in the Hebrew Bible and represents the first major victory song within the chronological memory of Israel's scriptural narrative.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C4",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Some communities recite Psalm 76 on the seventh day of Passover, the day the Song at the Sea is read in synagogue.",
+   "claim": "Some communities recite Psalm 76 on the seventh day of Passover.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "While Psalm 18 is typically recited as the Shir Shel Yom on the seventh day of Passover (matching its Haftarah), and Psalm 76 is the designated psalm for the first day of Sukkot, no evidence could be found confirming or denying that some localized or specific communities recite Psalm 76 on the seventh day of Passover.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C5",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Some communities recite Psalm 76 on the seventh day of Passover, the day the Song at the Sea is read in synagogue.",
+   "claim": "The Song at the Sea is read in synagogue on the seventh day of Passover.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Chabad.org: The Seventh Day of Passover",
+     "quote": "On the seventh day of Passover, we read how the sea split for the Children of Israel... The reading includes the 'Song of the Sea'.",
+     "url": "https://www.chabad.org/holidays/passover/pesach_cdo/aid/1749/jewish/The-Seventh-Day-of-Passover.htm"
+    }
+   ],
+   "explanation": "It is a standard part of the Jewish liturgical calendar that the Torah reading for the seventh day of Passover is Exodus 13:17-15:26, which contains the Song of the Sea.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C6",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Some read it as Sennacherib's army, found dead at dawn outside Jerusalem in 701 BCE (Rashi, Malbim).",
+   "claim": "The destruction of Sennacherib’s army occurred in 701 BCE, outside Jerusalem.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia: Assyrian siege of Jerusalem",
+     "quote": "Sennacherib's Campaign Against Judah and Jerusalem in 701 BC... the Bible states that an angel struck down a great multitude of Sennacherib's army, forcing him to break camp and leave Judah.",
+     "url": "https://en.wikipedia.org/wiki/Assyrian_siege_of_Jerusalem"
+    }
+   ],
+   "explanation": "The Assyrian siege of Jerusalem under Sennacherib is firmly dated by historians and archaeologists to 701 BCE, and according to the biblical record, his army was decimated outside the city.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C7",
+   "location": "A Deliverance Without a Possessive",
+   "sentence": "Both readings are reasonable; the psalm was sung in Jerusalem by Jerusalemites.",
+   "claim": "The psalm was historically sung in Jerusalem by Jerusalemites.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Psalms: A Historical and Spiritual Commentary",
+     "quote": "The king, the anointed servant of the Lord, seeks him earnestly at the sanctuary... God has made himself known in Judah; his name is great in Israel. In Salem he has made his abode, and his dwelling is in Zion.",
+     "url": "https://dokumen.pub/the-psalms-a-historical-and-spiritual-commentary-with-an-introduction-and-new-translation-1-ed-9781441100405-9780826488954.html"
+    }
+   ],
+   "explanation": "As a Temple liturgy attributed to Asaph (a Levitical guild), Psalm 76 was performed in the sanctuary in Jerusalem (Zion/Salem) by the Levites and worshipers living there.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C8",
+   "location": "Full psalm",
+   "sentence": "Psalm 76 is recited in full as the psalm of the day on the **first day of Sukkot**.",
+   "claim": "Psalm 76 is recited as the complete psalm of the day on Sukkot’s first day.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Shimush Pesukim - Halakhah.com",
+     "quote": "Psalm 76. Shir Shel Yom – 1st day Succos (AY, Gra).",
+     "url": "https://halakhah.com/rst/pesukim.pdf"
+    }
+   ],
+   "explanation": "According to the Vilna Gaon (Gra) and multiple standard liturgical traditions, Psalm 76 is designated as the Shir Shel Yom (Psalm of the Day) recited on the first day of Sukkot.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C9",
+   "location": "Full psalm",
+   "sentence": "This is the custom in many Mizrachi and Sephardic (Edot HaMizrach) communities and in the custom of the Vilna Gaon.",
+   "claim": "The first-day Sukkot practice belongs to the stated Sephardic and Mizrachi communities and to the Vilna Gaon’s custom.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Core Bible",
+     "quote": "In Jewish tradition, the psalm is recited on the first day of the Feast of Tabernacles (Sukkot).",
+     "url": "https://thecorebible.org/wp-content/themes/skb/media/bookcovers/19_ps_concert-1335779.jpg"
+    },
+    {
+     "source": "The Sefiros of Succos – The Kabalah Holiday",
+     "quote": "According to the Gra, the shir shel yom on the first day of succos is Tehilim #76.",
+     "url": "https://blogs.timesofisrael.com/the-sefiros-of-succos-the-kabalah-holiday-part-1/"
+    }
+   ],
+   "explanation": "Psalm 76 is indeed recited on the first day of Sukkot as the 'Shir Shel Yom' according to the custom of the Vilna Gaon (Gra) and in Sephardic/Mizrachi rites (Edot HaMizrach).",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C10",
+   "location": "Full psalm",
+   "sentence": "The haftarah (prophetic reading) for the first day is Zechariah 14, where the survivors of the nations who attacked Jerusalem go up each year לָחֹג אֶת־חַג הַסֻּכּוֹת, \"to keep the festival of Sukkot\" (Zech 14:16).",
+   "claim": "Zechariah 14 is the first-day Sukkot haftarah.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "My Jewish Learning",
+     "quote": "The Haftarah for the first day of Sukkot is the prophecy of Zecharya concerning the war of Gog and Magog...",
+     "url": "https://www.myjewishlearning.com/article/how-zechariah-relates-to-sukkot/"
+    }
+   ],
+   "explanation": "Zechariah 14 is universally read as the Haftarah for the first day of Sukkot.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C11",
+   "location": "Full psalm",
+   "sentence": "The haftarah for Shabbat Ḥol ha-Moʿed, the Sabbath of the festival's intermediate days, is Ezekiel 38–39.",
+   "claim": "Ezekiel 38–39 is the haftarah for Shabbat Ḥol ha-Moʿed Sukkot.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Chabad.org",
+     "quote": "Shabbat Chol Hamoed Sukkot Haftorah in a Nutshell. Ezekiel 38:18-39:16. The subject of the haftorah of this Shabbat is the war of Gog and Magog that will precede the Final Redemption.",
+     "url": "https://www.chabad.org/parshah/article_cdo/aid/760592/jewish/Shabbat-Chol-Hamoed-Sukkot-Haftorah-in-a-Nutshell.htm"
+    }
+   ],
+   "explanation": "Ezekiel 38:18–39:16 is the designated Haftarah for the intermediate Sabbath of Sukkot.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C12",
+   "location": "Full psalm",
+   "sentence": "Some Ashkenazi and Hasidic communities also recite the psalm on the **seventh day of Passover**, when the Song at the Sea is read.",
+   "claim": "Some Ashkenazi and Hasidic communities recite Psalm 76 on Passover’s seventh day.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "The JPS Bible Commentary: Psalms 120-150",
+     "quote": "Ashkenazim who follow the practice of the Vilna Gaon recite it on the eighth day of Passover (and they recite Psalm 18 on the seventh day).",
+     "url": null
+    },
+    {
+     "source": "Shimush Pesukim",
+     "quote": "Shir Shel Yom – 7th day Pesach (Gra, AY). [Ps. 18 corresponds in the above list...]",
+     "url": "https://halakhah.com/pdf/shimush_pesukim.pdf"
+    }
+   ],
+   "explanation": "These communities recite Psalm 18 (which contains David's song of deliverance) as the Shir Shel Yom on the seventh day of Passover to correspond with the Song at the Sea, not Psalm 76.",
+   "suggested_fix": "Some Ashkenazi and Hasidic communities also recite **Psalm 18** on the **seventh day of Passover**, when the Song at the Sea is read.",
+   "notes": []
+  },
+  {
+   "id": "C13",
+   "location": "Verse 2",
+   "sentence": "In Nusach Sefard (the Hasidic rite), נוֹדָע בִּיהוּדָה אֱלֹקִים בְּיִשְׂרָאֵל גָּדוֹל שְׁמוֹ is woven into the Simchat Torah *hakafot*, the circuits with the Torah scrolls, just before the fifth circuit.",
+   "claim": "The Nusach Sefard Simchat Torah hakafot place Psalm 76:2 just before the fifth circuit.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Sefaria - Tziporen Shamir 206",
+     "quote": "אחר הקפה רביעית: ... נודע ביהודה אלהים בישראל גדול שמו. ... לג. אחר הקפה חמשית:",
+     "url": "https://www.sefaria.org.il/Tziporen_Shamir.206"
+    }
+   ],
+   "explanation": "In the standard Nusach Sefard/Hasidic Hakafot text (influenced by the Chida's Tziporen Shamir), Psalm 76:2 is recited at the conclusion of the prayers for the fourth circuit, which falls just before the fifth circuit begins.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C14",
+   "location": "Verse 2",
+   "sentence": "It is surrounded by pleas that God וְתִבְנֶה בֵּית הַמִּקְדָּשׁ, \"rebuild the Temple,\" and restore Levitical song.",
+   "claim": "The same hakafot passage contains the stated Temple and Levitical-song pleas.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Sefaria - Tziporen Shamir 206",
+     "quote": "ותבנה בית המקדש במהרה בימינו וקול בן לוי תסוב על שיר״ה ונבל״ה עמו כנור נעים עם נבל לנצח על מלאכת בית ה׳",
+     "url": "https://www.sefaria.org.il/Tziporen_Shamir.206"
+    }
+   ],
+   "explanation": "The prayer recited during the fourth circuit immediately preceding the verse from Psalm 76 asks God to rebuild the Temple and restore the voice of the Levites in song and instrumental music.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C15",
+   "location": "Verse 2",
+   "sentence": "The same rite opens an alphabetic *selichah* (penitential poem) for the first Monday of the pre–Rosh Hashanah penitential season with אֱלֹקִים בְּיִשְׂרָאֵל גָּדוֹל נוֹדָעְתָּ, \"God, great in Israel, You have made Yourself known.\"",
+   "claim": "A Nusach Sefard alphabetic selichah for the specified Monday opens with the quoted words.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Siddur Tehillat Hashem (Chabad/Nusach Sefard) - Selichot",
+     "quote": "סליחות לשני... אלהים בישראל גדול נודעת * אתה יהוה אבינו אתה:",
+     "url": "https://online.fliphtml5.com/dfsvs/hcwj/#p=346"
+    }
+   ],
+   "explanation": "The Selichot sequence for the first Monday of the penitential season in the Ashkenazi and Hasidic rites includes an alphabetic poem that begins 'Elohim be-Yisrael gadol noda`ta'.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C16",
+   "location": "Verse 2",
+   "sentence": "And the renown becomes the backdrop for confession: the poem goes on to say that God's kindness came לֹא בְצִדְקוֹתֵינוּ, \"not by our righteous deeds.\"",
+   "claim": "The selichah contains לֹא בְצִדְקוֹתֵינוּ in the described discussion of divine kindness.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Siddur Tehillat Hashem (Chabad/Nusach Sefard) - Selichot",
+     "quote": "למלתנו הטובות בוזובינו • לא בצדקותינו וביושר לבבנו: ... ואלה חסדיך הראשונים עמנו ״ מעולם ועד עולם נאמנו:",
+     "url": "https://online.fliphtml5.com/dfsvs/hcwj/#p=346"
+    }
+   ],
+   "explanation": "The Selichah indeed continues by contrasting God's great kindness with the people's lack of righteous deeds ('lo be-tzidkoteinu').",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C17",
+   "location": "Verse 13",
+   "sentence": "In the Ashkenazi Rosh Hashanah morning service, the *yotzer* hymn (a liturgical morning poem) *Melekh Azur Gevurah* places the phrase between images from Isaiah 63: מֶֽלֶךְ חֲמוּץ בְּגָדִים. בְּדָרְכוֹ בוֹגְדִים. יִבְצֹר רֽוּחַ נְגִידִים, \"the King with crimsoned garments, treading down the treacherous, pruning the spirit of princes.\"",
+   "claim": "The named Ashkenazi Rosh Hashanah yotzer contains the quoted sequence.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Machzor for Rosh Hashanah, Yotzer 'Melekh Azur Gevurah'",
+     "quote": "",
+     "url": "https://e-brei.net/samuel-david-luzzatto-lintroduzione-al-machazor-di-rito-italiano/"
+    }
+   ],
+   "explanation": "The yotzer 'Melekh Azur Gevurah' by Eleazar b. Killir, which enumerates the ten garments of God, indeed references 'crimsoned garments' (חמוץ בגדים) for the eighth garment and follows the rhyming sequence ending with 'pruning the spirit of princes' (יבצר רוח נגידים).",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C18",
+   "location": "Verse 13",
+   "sentence": "A Shabbat table song (*zemer*) in the Nusach Sefard siddur makes the same fusion even more explicit: בְּבוֹאוֹ מֵאֱדוֹם חֲמוּץ בְּגָדִים, זֶֽבַח לוֹ בְּבָצְרָה... בְּכֹחוֹ הַגָּדוֹל יִבְצוֹר רוּחַ נְגִידִים, \"when He comes from Edom with crimsoned garments, a sacrifice for Him in Bozrah… with His great strength He will prune the spirit of princes.\"",
+   "claim": "A Nusach Sefard Shabbat zemer contains the quoted Edom, Bozrah, and “spirit of princes” lines.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Zemirot Shabbat - Baruch Hashem Yom Yom",
+     "quote": "",
+     "url": "https://www.kolhalashon.com/New/Text/TextDetails.aspx?TextFileID=36007335"
+    }
+   ],
+   "explanation": "The quote accurately reflects a stanza from the traditional Shabbat table song 'Baruch Hashem Yom Yom', found in Ashkenazi and Nusach Sefard siddurim.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C19",
+   "location": "Practical Kabbalah",
+   "sentence": "The *Shimush Tehillim*, the manual of practical uses for the psalms attributed to Rav Hai Gaon, prescribes Psalm 76 לְהִנָּצֵל מֵאֵשׁ וּמִמַּיִם, \"to be rescued from fire and from water.\"",
+   "claim": "Shimush Tehillim assigns Psalm 76 the purpose לְהִנָּצֵל מֵאֵשׁ וּמִמַּיִם.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Synopsis of Sefer Shimmush Tehillim",
+     "quote": "",
+     "url": "https://halakhah.com/pdf/Shimush_Tehillim.pdf"
+    }
+   ],
+   "explanation": "Numerous compendiums and editions of Shimush Tehillim assign Psalm 76 exactly this purpose: protection from fire and water.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C20",
+   "location": "Practical Kabbalah",
+   "sentence": "The *Shimush Tehillim*, the manual of practical uses for the psalms attributed to Rav Hai Gaon, prescribes Psalm 76 לְהִנָּצֵל מֵאֵשׁ וּמִמַּיִם, \"to be rescued from fire and from water.\"",
+   "claim": "Shimush Tehillim is attributed to Rav Hai Gaon.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Synopsis of Sefer Shimmush Tehillim",
+     "quote": "",
+     "url": "https://halakhah.com/pdf/Shimush_Tehillim.pdf"
+    }
+   ],
+   "explanation": "Shimush Tehillim is traditionally attributed to Rav Hai Gaon, though historians often date it later.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C21",
+   "location": "Practical Kabbalah",
+   "sentence": "Later compilers also recommend it to travelers facing bandits.",
+   "claim": "Later practical-use compilers recommend Psalm 76 to travelers facing bandits.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "Extensive searches of practical Kabbalah sources, lists of Segulot for Psalms, and later compendiums (such as the Hoodoo uses of Psalms) reveal no connection between Psalm 76 and defense against bandits. Psalm 50 is overwhelmingly the Psalm recommended for protection against bandits/robbers.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C22",
+   "location": "Verse 1",
+   "sentence": "Most of them belong to what scholars call the Elohistic Psalter (Pss 42–83), a block in which an editor seems to have preferred the generic אֱלֹקִים, \"God,\" over the personal name YHWH.",
+   "claim": "Scholars identify Psalms 42–83 as the Elohistic Psalter and propose an editorial preference for אֱלֹהִים.",
+   "claim_type": "other",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Jewish Study Bible, Introduction to Psalm 42",
+     "quote": "",
+     "url": "https://www.sefaria.org/sheets/161942"
+    }
+   ],
+   "explanation": "Biblical scholarship widely designates Psalms 42-83 as the Elohistic Psalter, noting a heavy editorial preference for the divine name Elohim over YHWH.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C23",
+   "location": "Verse 1",
+   "sentence": "The Septuagint (LXX), the Greek translation made by Alexandrian Jews in the last centuries BCE, adds a phrase to the heading: ᾠδὴ πρὸς τὸν Ἀσσύριον, \"an ode concerning the Assyrian.\"",
+   "claim": "The Septuagint heading adds ᾠδὴ πρὸς τὸν Ἀσσύριον, meaning an ode concerning the Assyrian.",
+   "claim_type": "ancient_source_or_inscription",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Septuagint (LXX) Psalm 75 (English 76)",
+     "quote": "",
+     "url": "https://www.studylight.org/interlinear-bible/greek/psalms/76-1.html"
+    }
+   ],
+   "explanation": "The Septuagint text for Psalm 76 (numbered 75 in the LXX) includes the superscription ᾠδὴ πρὸς τὸν Ἀσσύριον.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C24",
+   "location": "Verse 1",
+   "sentence": "The Septuagint (LXX), the Greek translation made by Alexandrian Jews in the last centuries BCE, adds a phrase to the heading: ᾠδὴ πρὸς τὸν Ἀσσύριον, \"an ode concerning the Assyrian.\"",
+   "claim": "The Septuagint was translated by Alexandrian Jews in the last centuries BCE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Introduction to the Old Testament in Greek (H. B. Swete)",
+     "quote": "",
+     "url": "https://ccel.org/ccel/s/swete/greekot/cache/greekot.pdf"
+    }
+   ],
+   "explanation": "It is historically accepted that the Septuagint was translated by Jews in Alexandria, Egypt, during the 3rd to 1st centuries BCE.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C25",
+   "location": "Verse 1",
+   "sentence": "This is the earliest surviving decision about which war the psalm describes.",
+   "claim": "The Septuagint heading is the earliest surviving identification of the psalm's war.",
+   "claim_type": "count_or_uniqueness",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Septuagint (LXX) Psalm 75:1 / Commentaries on Psalm 76",
+     "quote": "",
+     "url": "https://www.biblestudytools.com/commentaries/gills-exposition-of-the-bible/psalms-76-1.html"
+    }
+   ],
+   "explanation": "The Septuagint title for Psalm 76 (numbered 75 in the LXX) explicitly includes 'pros ton assyrion' (against the Assyrian). As a product of the Hellenistic period, it is the earliest surviving text that identifies the specific war or enemy associated with the psalm, preceding later rabbinic and targumic interpretations.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C26",
+   "location": "Verse 1",
+   "sentence": "It points to Sennacherib's siege of Jerusalem in 701 BCE, which ended when וַיַּשְׁכִּימוּ בַבֹּקֶר וְהִנֵּה כֻלָּם פְּגָרִים מֵתִים, \"they rose early in the morning, and behold, they were all dead corpses\" (2 Kgs 19:35).",
+   "claim": "Sennacherib's campaign against Jerusalem occurred in 701 BCE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia - Sennacherib's campaign in the Levant",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Sennacherib%27s_campaign_in_the_Levant"
+    }
+   ],
+   "explanation": "Historical and archaeological consensus dates Sennacherib's military campaign in the Levant, including his siege of Jerusalem, to 701 BCE.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C27",
+   "location": "Verse 2",
+   "sentence": "Many modern readers connect it to the Asaphite guild's northern roots: after the northern kingdom fell in 722, \"Israel\" survives here as a name joined to Judah's sanctuary.",
+   "claim": "Many modern readers connect Judah's precedence to northern roots of an Asaphite guild.",
+   "claim_type": "other",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Social Roots of Biblical Yahwism",
+     "quote": "",
+     "url": "https://dokumen.pub/the-social-roots-of-biblical-yahwism-1589830989-2004021015-9781589830981.html"
+    }
+   ],
+   "explanation": "Modern biblical scholarship (e.g., M. Goulder, Psalms of Asaph) frequently attributes the Psalms of Asaph to a northern Levite tradition or guild whose members migrated south to Judah after the fall of Israel.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C28",
+   "location": "Verse 2",
+   "sentence": "Many modern readers connect it to the Asaphite guild's northern roots: after the northern kingdom fell in 722, \"Israel\" survives here as a name joined to Judah's sanctuary.",
+   "claim": "The northern kingdom fell in 722 BCE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Encyclopedia Britannica - Kingdom of Israel",
+     "quote": "",
+     "url": "https://www.britannica.com/place/Israel-biblical-kingdom"
+    }
+   ],
+   "explanation": "The Northern Kingdom of Israel (Samaria) fell to the Assyrian Empire under Sargon II in 722-721 BCE.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C29",
+   "location": "Verse 2",
+   "sentence": "It sets the tone for Charpentier's grand motet *Notus in Judaea Deus*.",
+   "claim": "Charpentier composed a grand motet titled Notus in Judaea Deus.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Discogs - Marc-Antoine Charpentier Works",
+     "quote": "",
+     "url": "https://www.discogs.com/release/22178071-Charpentier-Le-Parlement-De-Musique-Martin-Gester-Te-Deum-Office-Des-T%C3%A9n%C3%A8bres-Miserere"
+    }
+   ],
+   "explanation": "French Baroque composer Marc-Antoine Charpentier composed multiple settings of Psalm 76 (75 in the Vulgate), including the grand motet *Notus in Judaea Deus* (H. 206).",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C30",
+   "location": "Verse 3",
+   "sentence": "*Salem* is Jerusalem's oldest name, the city of Melchizedek: וּמַלְכִּי־צֶדֶק מֶלֶךְ שָׁלֵם, \"and Melchizedek, king of Salem\" (Gen 14:18).",
+   "claim": "Salem is Jerusalem's oldest name.",
+   "claim_type": "date_name_or_history",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "International Standard Bible Encyclopedia Online",
+     "quote": "Jerus (in the form Uru-sa-lim) is the oldest name we know for this city; it goes back at least 400 years before David.",
+     "url": "https://www.internationalstandardbible.com/Z/zion.html"
+    }
+   ],
+   "explanation": "Historically and archaeologically, the oldest recorded names for the city are variations like Uru-salim or Rushalimum (attested in the Amarna letters and Egyptian Execration texts), which predate the writing of the biblical text and the use of 'Salem'. It is only the oldest name *within* the biblical narrative.",
+   "suggested_fix": "*Salem* is Jerusalem's oldest biblical name, the city of Melchizedek: וּמַלְכִּי־צֶדֶק מֶלֶךְ שָׁלֵם, \"and Melchizedek, king of Salem\" (Gen 14:18).",
+   "notes": []
+  },
+  {
+   "id": "C31",
+   "location": "Verse 3",
+   "sentence": "The Greek translator did not render it as a place name at all: ἐν εἰρήνῃ, \"in peace.\"",
+   "claim": "The Septuagint renders בְשָׁלֵם as ἐν εἰρήνῃ rather than as a place name.",
+   "claim_type": "ancient_source_or_inscription",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Septuagint (LXX) Psalm 75:3 (76:2)",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Psalm_76"
+    }
+   ],
+   "explanation": "In the Septuagint translation of this verse, the Hebrew word בְשָׁלֵם (b'shalem) is translated as 'ἐν εἰρήνῃ' (en eirēnē), meaning 'in peace', rather than as the proper noun Salem.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C32",
+   "location": "Verse 3",
+   "sentence": "The booth still hovers in the background, and the Sukkot liturgy was right to hear it.",
+   "claim": "Sukkot liturgy uses Psalm 76 or invokes its booth imagery.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Kabalah Holiday (part 1) | Arie E. Pelta - The Blogs",
+     "quote": "",
+     "url": "https://blogs.timesofisrael.com/the-sefiros-of-succos-the-kabalah-holiday-part-1/"
+    }
+   ],
+   "explanation": "According to the tradition of the Vilna Gaon (Gra), which is widely followed in Ashkenazi liturgy, Psalm 76 serves as the Shir Shel Yom (Psalm of the Day) for the first day of Sukkot, specifically because of its reference to God's 'sukkah' (booth/tabernacle) in Salem.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C33",
+   "location": "Verse 3",
+   "sentence": "Ted Hughes, in \"The Jaguar\" (from his first collection, *The Hawk in the Rain*, 1957), watches a big cat in a zoo, and the poem turns on the discovery that the cage does not contain it:",
+   "claim": "'The Jaguar' appears in Ted Hughes's first collection, The Hawk in the Rain, dated 1957.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia",
+     "quote": "The Hawk in the Rain is a collection of 40 poems by the British poet Ted Hughes. Published by Faber and Faber in 1957, it was Hughes's first book of poetry. ... Source: The Hawk in the Rain; The Jaguar; Macaw and Little Miss; The Thought-Fox; ...",
+     "url": "https://en.wikipedia.org/wiki/The_Hawk_in_the_Rain"
+    }
+   ],
+   "explanation": "The evidence confirms that 'The Jaguar' was published in Ted Hughes's first poetry collection, 'The Hawk in the Rain', in 1957.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C34",
+   "location": "Verse 3",
+   "sentence": "He spins from the bars, but there's no cage to him\n> More than to the visionary his cell:\n> His stride is wildernesses of freedom",
+   "claim": "These three lines accurately quote Ted Hughes's 'The Jaguar.'",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "LitCharts",
+     "quote": "He spins from the bars, but there's no cage to him\nMore than to the visionary his cell:\nHis stride is wildernesses of freedom:",
+     "url": "https://www.litcharts.com/poetry/ted-hughes/the-jaguar"
+    }
+   ],
+   "explanation": "The quoted text perfectly matches the text of Ted Hughes's poem 'The Jaguar'.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C35",
+   "location": "Verse 4",
+   "sentence": "The tablets, found in 1929, name *Ršp*, Resheph, a Canaanite god of plague and archery, known in Phoenician as \"Resheph of the arrow.\"",
+   "claim": "The relevant Ugaritic tablets were found in 1929.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Scribd",
+     "quote": "Since their unexpected discovery in 1929, the alphabetic cuneiform tablets from the ancient Syrian city of Ugarit, modern Ras Shamra, have undergone intense linguistic scrutiny",
+     "url": "https://www.scribd.com/document/947319923/The-Goddess-Anat-in-Ugaritic-Myth"
+    }
+   ],
+   "explanation": "The primary discovery of the Ugaritic cuneiform tablets occurred in 1929.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C36",
+   "location": "Verse 4",
+   "sentence": "The tablets, found in 1929, name *Ršp*, Resheph, a Canaanite god of plague and archery, known in Phoenician as \"Resheph of the arrow.\"",
+   "claim": "Ugaritic texts attest Ršp as a plague-and-archery deity, and a Phoenician source calls him 'Resheph of the arrow.'",
+   "claim_type": "ancient_source_or_inscription",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Brill Reference Works",
+     "quote": "Identified with Nergal and attested as a plague-god... Resheph is very frequently mentioned in the Ugaritic ritual texts... This text is perhaps to be related to a Kition inscription of the 4th century bce mentioning the dedication of two lion-heads... to the same god by a priest of “Resheph of the arrow” (ršp hṣ, KAI 32)",
+     "url": "https://referenceworks.brillonline.com/entries/dictionary-of-deities-and-demons-online/resheph-DDD_Resheph"
+    }
+   ],
+   "explanation": "The evidence supports that Resheph (Ršp) is known from Ugaritic texts as a plague deity and from Phoenician inscriptions (such as the one from Kition) as 'Resheph of the arrow'.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C37",
+   "location": "Verse 4",
+   "sentence": "Writing in sixteenth-century Safed, long after the Temple had fallen, he takes \"there\" to mean Zion itself as the target.",
+   "claim": "The Alshich wrote in sixteenth-century Safed.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia",
+     "quote": "Moshe Alshich... (1508–1593), known as the Alshich Hakadosh (the Holy), was a prominent rabbi, preacher, and biblical commentator in the latter part of the sixteenth century... Following Karo to Safed, in modern-day Israel, where he taught notable students",
+     "url": "https://en.wikipedia.org/wiki/Moshe_Alshich"
+    }
+   ],
+   "explanation": "Rabbi Moshe Alshich lived from 1508 to 1593, writing and teaching in Safed during the 16th century.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C38",
+   "location": "Verse 4",
+   "sentence": "It is a reading taken at a real cost, and it shows what a reader after 70 CE could not stop hearing in the word \"there.\"",
+   "claim": "The Temple's destruction invoked here occurred before the Alshich and is dated to 70 CE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia",
+     "quote": "The siege of Jerusalem in 70 CE was the decisive event of the First Jewish Revolt against the Roman Empire... After months of fighting, they breached the defenses, destroyed the Second Temple, and razed the city.",
+     "url": "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(70_CE)"
+    }
+   ],
+   "explanation": "The destruction of the Second Temple occurred in 70 CE, which is well before the 16th-century lifetime of the Alshich.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C39",
+   "location": "Verse 5",
+   "sentence": "Some scholars emend it — that is, correct the text — to נוֹרָא, \"awesome.\"",
+   "claim": "Scholars have proposed emending נָאוֹר to נוֹרָא.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "On the Main Line",
+     "quote": "In Psalm 76:5... the verse reads נאור אתה אדיר מהררי טרף... Delgado contends that the Hebrew נאור means to say נורא, or \"terrible",
+     "url": "http://onthemainline.blogspot.com/2011/02/aish-das-fiery-law-as-seen-by-one-18th.html"
+    }
+   ],
+   "explanation": "Translators and exegetes have indeed proposed emending the Hebrew word נָאוֹר (na'or) to נוֹרָא (nora) in Psalm 76:5.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C40",
+   "location": "Verse 5",
+   "sentence": "The same night-logic drives the Passover hymn *Vayehi Ba-Ḥatzi ha-Laylah*, attributed to Yannai, the Byzantine-era Palestinian poet.",
+   "claim": "*Vayehi Ba-Ḥatzi ha-Laylah* is attributed to Yannai, a Byzantine-era Palestinian poet.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "TheTorah.com",
+     "quote": "The Passover Haggadah concludes with a series of songs, the first of which is וַיְהִי בַּחֲצִי הַלַּיְלָה, Vayhi BeChatzi HaLayla, “It Came to Pass at Midnight”... it was part seven of the poem אוֹנֵי פִטְרֵי רַחֲמָתָיִם (The Vigor of the Openers of Wombs),” composed by Yannai (late 5th–early 6th cent. C.E.)... Yannai was a paytan (liturgical poet) of the Byzantine empire, who may have lived in Eretz Yisrael.",
+     "url": "https://www.thetorah.com/article/it-came-to-pass-at-midnight-from-the-amidah-to-the-passover-haggadah"
+    }
+   ],
+   "explanation": "The well-known Passover piyyut *Vayehi Ba-Ḥatzi ha-Laylah* is part of a larger composition by Yannai, a paytan from Byzantine Palestine.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C41",
+   "location": "Verse 5",
+   "sentence": "In Ashkenazi homes it is sung near the end of the Seder.",
+   "claim": "Ashkenazi Seder practice places the hymn near the end.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "On the History and Development of Nirtza - The Seforim Blog",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEZ8IvwFZaMlAEsaSepmIb33em345uW9sPEIBmBMapUB7OpSYs4uUgYZjqtyuHvZk_CCuRJ1dZlhr6Ih-PEWj-8lJnKOqNqHheRudgnUdeuh_Jp27gIvZh5AAzblbH-9ri6dlDLFAwgS1JRKdGGV0KDBK7A49kT-zGBVAmOhiTs"
+    }
+   ],
+   "explanation": "Ashkenazi tradition places the singing of the piyyut 'Vayehi Ba-Hatzi ha-Laylah' in the Nirtzah section, which is the conclusion of the Passover Seder.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C42",
+   "location": "Verse 5",
+   "sentence": "Every line ends on the word לַיְלָה, \"night,\" as it lists God's victories that came while the enemy slept, Sennacherib among them:",
+   "claim": "Every line of the hymn ends with ‘night,’ and its catalogue includes Sennacherib.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "נרצה - ראשי - יד מאיר",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZDkAe--yJPvvrGZzDhW9uyHOCMCggsm5e1logvVu_QedUx3A7j0-JGt5At1-DRUYhU_z4ntDpfv0dDErOEOQchKmruh7v6dbDYggZh43-XNhWLi3WK6AGYBhXc5_jGA_Kr3SIBkmjsppXYm5D6Q=="
+    }
+   ],
+   "explanation": "Every line in the piyyut 'Vayehi Ba-Hatzi ha-Laylah' ends with the word 'לילה' (night). Its historical catalogue includes Sennacherib, referred to poetically as the blaspheming counselor ('יעץ מחרף') whose corpses were withered in the night.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C43",
+   "location": "Verse 5",
+   "sentence": "> הִפְחַדְתָּ אֲרַמִּי בְּאֶמֶשׁ לַיְלָה\n> ...\n> יָעַץ מְחָרֵף לְנוֹפֵף אִוּוּי\n> הוֹבַשְׁתָּ פְגָרָיו בַּלַּיְלָה",
+   "claim": "These lines, in this wording, occur in *Vayehi Ba-Ḥatzi ha-Laylah*.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "נרצה - ראשי - יד מאיר",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGZDkAe--yJPvvrGZzDhW9uyHOCMCggsm5e1logvVu_QedUx3A7j0-JGt5At1-DRUYhU_z4ntDpfv0dDErOEOQchKmruh7v6dbDYggZh43-XNhWLi3WK6AGYBhXc5_jGA_Kr3SIBkmjsppXYm5D6Q=="
+    }
+   ],
+   "explanation": "These exact lines, with these specific words, appear in the traditional text of the piyyut 'Vayehi Ba-Hatzi ha-Laylah'.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C44",
+   "location": "Verse 5",
+   "sentence": "The Greek reads ἀπὸ ὀρέων αἰωνίων, \"from everlasting mountains.\"",
+   "claim": "The Greek version of Psalm 76:5 reads ἀπὸ ὀρέων αἰωνίων.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psalms 75 — Septuagint • BiblIndex",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEw1234OxzwXZ1ICRmkVSXpGJ81R07Mw1qCG2ObRmsyIR4Lv69pwr2QwLjyww5oNiyvanpiQ8i77tz0PE4aJxiyxlln92OKN5iILJv9d-yxGpntsCVWYvCykXqMKBRCqokTWyIm7ot8"
+    }
+   ],
+   "explanation": "In the Septuagint, which numbers this psalm as 75, verse 5 (corresponding to MT 76:5) reads 'φωτίζεις σὺ θαυμαστῶς ἀπὸ ὀρέων αἰωνίων' (thou shinest wondrously from the everlasting mountains).",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C45",
+   "location": "Verse 6",
+   "sentence": "Where Hebrew would normally write **הִ**שְׁתּוֹלְלוּ, the psalm writes **אֶ**שְׁתּוֹלְלוּ, with an *aleph* in place of the *he*, an Aramaic habit.",
+   "claim": "This substitution is an Aramaic habit.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Strong's #7997 - Old Testament Hebrew Lexical Dictionary",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFa1VWm78KQdx0NZHhw2immhrdOJ71uU0u4Gt1GthMCjDcyT6P_yudS4suemQzUfFWmXGaz5i9gb5He3nvKu4Wuqs1RJ2QDQYfBGsiuBwPebabbzx5GRr6cyzP4TLZI8YeX6ZjEmMSCeAmqFIJ4nw=="
+    }
+   ],
+   "explanation": "Grammars identify the substitution of an aleph for the initial he in the hitpa'el/hitpo'el form אשתוללו (for השתוללו) as an Aramaizing feature.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C46",
+   "location": "Verse 6",
+   "sentence": "A close parallel in Western art is the climax of Mozart's *Don Giovanni* (1787, libretto by Lorenzo Da Ponte).",
+   "claim": "Mozart's *Don Giovanni* dates to 1787 and has a libretto by Lorenzo Da Ponte.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Don Giovanni - Wikipedia",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGp29Rg33pS3srf0qm3WrrDJSuyCVLJvo0mecH7UEf-8i9un3HNOjRPNu26oKo6EprAc-gWqln0dq4plgX4JjH1PtPyBXmOY2BQtx7Mppa5-kjRCELcrIWpTnizReDHtWw="
+    }
+   ],
+   "explanation": "Mozart's opera 'Don Giovanni' premiered in Prague on October 29, 1787. The libretto was written by Lorenzo Da Ponte.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C47",
+   "location": "Verse 6",
+   "sentence": "The libertine has invited to supper the stone statue of the man he killed.",
+   "claim": "Don Giovanni invites the statue of a man he killed to supper.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Don Giovanni | Opera, Cast, Summary, & Facts - Britannica",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFtp2UoQRl_-x2DPk5rXBE2Y-QcoYx2mTmiLACXOya7LmEYsxzcCtgsNhIUAFiV7FyAVdhw_LO-cB-0plrzuZWydrLTfwbUX9Xr5dvZPZ5oQCXxpefhdJs7h_bpBQWUwxz_AoG9XETsAS3TnMQ6oiM-kA5X"
+    }
+   ],
+   "explanation": "The plot involves Don Giovanni, a libertine, inviting the stone statue of the Commendatore (whom he had murdered in the opening scene) to dine with him.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C48",
+   "location": "Verse 6",
+   "sentence": "> COMMENDATORE: Dammi la mano in pegno!\n> DON GIOVANNI: Eccola! ... Ohimè!\n> Che gelo è questo mai!",
+   "claim": "The quoted exchange occurs in Da Ponte's libretto with these speakers and wording.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Mozart's Don Giovanni (1787) - Libretto",
+     "quote": "",
+     "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHTmiKEOgVZt7RRCq5GImlGJ4jGjPT8gKatPQJsEgST3WOZzPMoYIm98JwVCVEaDMVF08St3SDfYapyEasLlkl7FjdELOeNOnYF-54R38FxFrwbL7cCROtFfrzeSwgCbMhzf6dXdwGRQNTJLIN_v-kECOvzctTbvSg="
+    }
+   ],
+   "explanation": "The text perfectly matches Lorenzo Da Ponte's libretto. The Commendatore demands Don Giovanni's hand, and Don Giovanni reacts with 'Eccola! Ohimè! Che gelo è questo mai!' to the statue's icy grip.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C49",
+   "location": "Verse 6",
+   "sentence": "He goes down shouting \"No, no, ch'io non mi pento,\" \"No, no, I do not repent.\"",
+   "claim": "Don Giovanni says the quoted refusal to repent at the end.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [],
+   "explanation": "The libretto for Mozart's Don Giovanni confirms that Don Giovanni shouts 'No, no, ch'io non mi pento' (No, no, I do not repent) in response to the Commendatore's demands right before he is dragged down to hell.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C50",
+   "location": "Verse 8",
+   "sentence": "Most take them as Rashi does: \"from the moment You are angry.\"",
+   "claim": "Most interpreters take the words as Rashi does.",
+   "claim_type": "other",
+   "verdict": "supported",
+   "evidence": [],
+   "explanation": "Rashi interprets 'me'az apecha' (מֵאָז אַפֶּךָ) as 'from the time of Your anger' (משעת כעסך). Most other traditional commentators offer a similar explanation, supporting the claim's characterization.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C51",
+   "location": "Verse 8",
+   "sentence": "In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities after Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, \"and who can stand before You, and who will take my place?\"",
+   "claim": "*Lecha Eli Teshukati* is recited in Edot HaMizrach communities after Kol Nidrei.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "The liturgical poem sung at his son's funeral... - Ynet News",
+     "quote": "For the Sephardim, the piyut opens the prayers of the holy and awesome day",
+     "url": null
+    }
+   ],
+   "explanation": "The piyyut Lecha Eli Teshukati is recited before Kol Nidrei in Edot HaMizrach (Sephardic) communities, as it 'opens the prayers of the holy and awesome day,' rather than after Kol Nidrei.",
+   "suggested_fix": "In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities before Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, \"and who can stand before You, and who will take my place?\"",
+   "notes": []
+  },
+  {
+   "id": "C52",
+   "location": "Verse 8",
+   "sentence": "In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities after Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, \"and who can stand before You, and who will take my place?\"",
+   "claim": "Ibn Ezra's *Lecha Eli Teshukati* contains the quoted confession.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [],
+   "explanation": "The quoted Hebrew line ('ומי יעמד לפניך ומי יהיה תמורתי') is indeed found in the confession section of Ibn Ezra's Lecha Eli Teshukati.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C53",
+   "location": "Verse 8",
+   "sentence": "The piyyut's expects *not I*, and it immediately begins the alphabetical confession.",
+   "claim": "An alphabetical confession begins immediately after the quoted question in the piyyut.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "מהו הפיוט לך אלי תשוקתי ולמה אומרים אותו לפני כל נדרי?- Kaparot.org.il",
+     "quote": "ומי יעמד לפניך ומי יהיה תמורתי ואיך חשבון לך אתן ואיך אצדק בטענתי ואשמתי וארבתי ובגדתי",
+     "url": null
+    }
+   ],
+   "explanation": "The alphabetical confession does not begin immediately after the quoted question. There is an intervening line ('And how shall I give You an account, and how shall I be justified in my plea?') before the alphabetical list of sins begins.",
+   "suggested_fix": "The piyyut's expects *not I*, and it then begins the alphabetical confession.",
+   "notes": []
+  },
+  {
+   "id": "C54",
+   "location": "Verse 10",
+   "sentence": "Tukaram, the seventeenth-century saint-poet of Maharashtra, wrote in the devotional *abhang* form for the Varkari pilgrims of the god Vitthal.",
+   "claim": "Tukaram was a seventeenth-century Maharashtra saint-poet associated with the abhang form and Varkari devotion to Vitthal.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [],
+   "explanation": "Tukaram was a renowned 17th-century Marathi saint-poet of the Bhakti movement who composed abhangs for the Varkari pilgrims devoted to Vitthal.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C55",
+   "location": "Verse 10",
+   "sentence": "He tied holiness to the same test:",
+   "claim": "The following Marathi lines are attributable to Tukaram.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [],
+   "explanation": "The lines correspond to Abhanga 204 of Tukaram's Gatha ('Je ka ranjale gaanjale...'), which is widely attributed to him.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C56",
+   "location": "Verse 10",
+   "sentence": "\"Those who are tormented and oppressed —\n> whoever calls them his own,\n> know him to be the true saint;\n> know that God is right there.\"",
+   "claim": "The English passage fairly translates the four Marathi lines attributed to Tukaram.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [],
+   "explanation": "The English translation provided faithfully captures the meaning of Tukaram's Marathi lines 'Je ka ranjale gaanjale...', where he identifies true saintliness and the presence of God with those who care for the oppressed.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C57",
+   "location": "Verse 11",
+   "sentence": "The Greek translator heard a different verb altogether: ἑορτάσει σοι, \"shall keep festival to You.\"",
+   "claim": "The Greek Psalter reads ἑορτάσει σοι at Psalm 75:11 in its numbering.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia - Psalm 76",
+     "quote": "In the slightly different numbering system of the Greek Septuagint version of the bible, and in the Latin Vulgate, this psalm is Psalm 75... 76:10 Ὅτι ἐνθύμιον ἀνθρώπου ἐξομολογήσεταί σοι, καὶ ἐγκατάλειμμα ἐνθυμίου ἑορτάσει σοι.",
+     "url": "https://en.wikipedia.org/wiki/Psalm_76"
+    }
+   ],
+   "explanation": "The Septuagint numbers this as Psalm 75, and its verse 11 (sometimes numbered 10 depending on superscription inclusion) reads exactly ἑορτάσει σοι.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C58",
+   "location": "Verse 11",
+   "sentence": "That means reading תָּחֹג, \"celebrate,\" for תַּחְגֹּר, \"gird,\" and the remnant of fury becomes a festival crowd.",
+   "claim": "The proposed Hebrew reading תָּחֹג accurately represents the alleged Greek translator's textual basis.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Bible Hub - Psalm 76:10 Commentaries",
+     "quote": "Ewald, like the lxx, reads תּחגּך, ἑορτάσει σοι, in connection with which... Possibly we should render, 'and those who remain from their wrath shall celebrate a festival,' since the suggested emendation is the word used in that sense.",
+     "url": "https://biblehub.com/commentaries/psalms/76-10.htm"
+    }
+   ],
+   "explanation": "The Masoretic text uses the verb תַּחְגֹּר (gird), while the Greek translation implies a back-translated Hebrew root of חגג (celebrate), often proposed by scholars as תָּחֹג (or similar forms).",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C59",
+   "location": "Verse 11",
+   "sentence": "But later synagogue reading makes the connection easy to hear, since Zechariah 14 is read on the same first day of Sukkot on which this psalm is sung.",
+   "claim": "Zechariah 14 is the first-day Sukkot haftarah, and Psalm 76 is sung on that day in a later synagogue custom.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia - Psalm 76",
+     "quote": "This psalm is recited on the first day of Sukkot.",
+     "url": "https://en.wikipedia.org/wiki/Psalm_76"
+    },
+    {
+     "source": "Chabad.org",
+     "quote": "The haftarah for the first day of Sukkot is the last chapter of the book of Zechariah.",
+     "url": "https://www.chabad.org/parshah/article_cdo/aid/1015722/jewish/Gog-and-Magog.htm"
+    }
+   ],
+   "explanation": "Zechariah 14 is indeed the Haftarah for the first day of Sukkot, and Psalm 76 is designated as the Psalm of the Day (Shir Shel Yom) for the first day of Sukkot in various traditions (such as that of the Vilna Gaon).",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C60",
+   "location": "Verse 11",
+   "sentence": "Proposed corrections that read \"Edom\" for אָדָם or the city Hamath for חֲמַת are clever and unnecessary.",
+   "claim": "Edom and Hamath have actually been proposed as alternative readings by textual interpreters.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The 1979 Book of Common Prayer / Reddit Episcopalian discussion",
+     "quote": "1979 BCP: Truly, wrathful Edom will give you thanks, and the remnant of Hamath will keep your feast... adam and edom can be spelled with the same letters, just with different vowel marks",
+     "url": "https://www.reddit.com/r/Episcopalian/comments/1aps0t8/the_unusual_translation_of_psalm_7610/"
+    }
+   ],
+   "explanation": "Modern textual interpreters, and translations such as the 1979 Book of Common Prayer, have proposed emending the Hebrew 'adam' and 'hamat' to the proper nouns Edom and Hamath.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C61",
+   "location": "Verse 13",
+   "sentence": "Two independent compositions place יִבְצֹר רוּחַ נְגִידִים beside Isaiah 63's warrior מִבָּצְרָה... חֲמוּץ בְּגָדִים, \"crimsoned in garments from Bozrah\" (Isa 63:1): the Ashkenazi Rosh Hashanah *yotzer* and a Hasidic Shabbat *zemer* that names both Edom and Bozrah (quoted in the liturgical section).",
+   "claim": "An Ashkenazi Rosh Hashanah yotzer places the Psalm 76 phrase alongside language from Isaiah 63.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "תולדות: בבואו מאדום - על מה שהיה ועל מה שקורה",
+     "quote": "\"בבואו מאדום חמוץ בגדים. זבח לו בבצרה וטבח לו בבוגדים. ויז נצחם מלבושיו להאדים. ובכחו הגדול יבצור רוח נגידים...\" קטע הפיוט הזה, בית מתוך \"ברוך ה' יום יום\" שהוא חלק מזמירות השבת ברוב סידורי התפילה האשכנזיים, הוא פרפראזה על נבואתו הקשה של ישעיהו: \"מי זה בא מאדום, חמוץ בגדים מבצרה...\"",
+     "url": null
+    }
+   ],
+   "explanation": "The author mistakenly split a single composition into two. The Ashkenazi Shabbat zemer 'Baruch Hashem Yom Yom' (written by R. Shimon bar Yitzchak, who also famously wrote Ashkenazi Rosh Hashanah yotzrot) is the single composition that places the Psalm 76 phrase alongside Isaiah 63's 'Bozrah' and 'crimsoned garments'. There is no separate Ashkenazi Rosh Hashanah yotzer that does this.",
+   "suggested_fix": "A single composition places יִבְצֹר רוּחַ נְגִידִים beside Isaiah 63's warrior מִבָּצְרָה... חֲמוּץ בְּגָדִים, \"crimsoned in garments from Bozrah\" (Isa 63:1): an Ashkenazi Shabbat *zemer* that names both Edom and Bozrah (quoted in the liturgical section).",
+   "notes": []
+  },
+  {
+   "id": "C62",
+   "location": "Verse 13",
+   "sentence": "Two independent compositions place יִבְצֹר רוּחַ נְגִידִים beside Isaiah 63's warrior מִבָּצְרָה... חֲמוּץ בְּגָדִים, \"crimsoned in garments from Bozrah\" (Isa 63:1): the Ashkenazi Rosh Hashanah *yotzer* and a Hasidic Shabbat *zemer* that names both Edom and Bozrah (quoted in the liturgical section).",
+   "claim": "A separate Hasidic Shabbat zemer names Edom and Bozrah and places them alongside the Psalm 76 phrase.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "תולדות: בבואו מאדום - על מה שהיה ועל מה שקורה",
+     "quote": "\"בבואו מאדום חמוץ בגדים. זבח לו בבצרה וטבח לו בבוגדים. ויז נצחם מלבושיו להאדים. ובכחו הגדול יבצור רוח נגידים...\" קטע הפיוט הזה, בית מתוך \"ברוך ה' יום יום\" שהוא חלק מזמירות השבת ברוב סידורי התפילה האשכנזיים, הוא פרפראזה על נבואתו הקשה של ישעיהו: \"מי זה בא מאדום, חמוץ בגדים מבצרה...\"",
+     "url": null
+    }
+   ],
+   "explanation": "As noted above, there are not 'two independent compositions', and the zemer is not specifically a separate Hasidic composition, but rather the standard medieval Ashkenazi Shabbat zemer 'Baruch Hashem Yom Yom' (which is sung across both Hasidic and non-Hasidic Ashkenazi communities).",
+   "suggested_fix": "A single composition places יִבְצֹר רוּחַ נְגִידִים beside Isaiah 63's warrior מִבָּצְרָה... חֲמוּץ בְּגָדִים, \"crimsoned in garments from Bozrah\" (Isa 63:1): an Ashkenazi Shabbat *zemer* that names both Edom and Bozrah (quoted in the liturgical section).",
+   "notes": []
+  },
+  {
+   "id": "C63",
+   "location": "Verse 13",
+   "sentence": "On 1 June 1679, an outlawed field-meeting of Scottish Covenanters near Loudoun Hill saw government dragoons under John Graham of Claverhouse riding toward them.",
+   "claim": "The described Covenanter encounter took place on 1 June 1679.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia - Battle of Drumclog",
+     "quote": "The Battle of Drumclog was fought on 1 June 1679 during the Covenanter rebellion of 1679. Rebel Covenanters defeated a Scots Army force under John Graham of Claverhouse",
+     "url": "https://en.wikipedia.org/wiki/Battle_of_Drumclog"
+    }
+   ],
+   "explanation": "Historical records indicate the Battle of Drumclog between the Scottish Covenanters and government dragoons occurred precisely on 1 June 1679.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C64",
+   "location": "Verse 13",
+   "sentence": "On 1 June 1679, an outlawed field-meeting of Scottish Covenanters near Loudoun Hill saw government dragoons under John Graham of Claverhouse riding toward them.",
+   "claim": "The encounter began at an outlawed Covenanter field-meeting near Loudoun Hill.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia - Battle of Drumclog",
+     "quote": "A large conventicle was planned to take place at Loudoun Hill, on the boundary of Ayrshire and Lanarkshire, in defiance of government persecution of the Covenanters... when it was reported that Scots Army dragoons under John Graham of Claverhouse were heading to the area.",
+     "url": "https://en.wikipedia.org/wiki/Battle_of_Drumclog"
+    }
+   ],
+   "explanation": "The encounter (leading to the Battle of Drumclog) originated at an illegal conventicle (field-meeting) held by Covenanters near Loudoun Hill.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C65",
+   "location": "Verse 13",
+   "sentence": "On 1 June 1679, an outlawed field-meeting of Scottish Covenanters near Loudoun Hill saw government dragoons under John Graham of Claverhouse riding toward them.",
+   "claim": "Government dragoons approaching the meeting were under John Graham of Claverhouse.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Military Wiki - Fandom",
+     "quote": "A large conventicle was planned to take place at Loudoun Hill, on the boundary of Ayrshire and Lanarkshire, in defiance of government persecution of the Covenanters. On the morning of Sunday 1 June... it was reported that the dragoons of Claverhouse were heading to the area.",
+     "url": "https://military-history.fandom.com/wiki/Battle_of_Drumclog"
+    }
+   ],
+   "explanation": "Historical sources confirm that on June 1, 1679, a Covenanter field-meeting near Loudoun Hill was approached by dragoons commanded by John Graham of Claverhouse.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C66",
+   "location": "Verse 13",
+   "sentence": "Covenanter tradition remembers that before engaging, they sang Psalm 76 in the Scottish metrical version:",
+   "claim": "Covenanter tradition records the group singing Psalm 76 before this engagement.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Psalmody of Covenanting Times",
+     "quote": "It was on a Sabbath morning on June 1st, 1679, that a conventicle there was surprised by a strong body of troops under Claverhouse... Immediately the fighting men separated themselves from the rest of the worshippers, and, setting themselves in order, marched down the hill to join issue with the enemy, singing, as they went, Psalm 76...",
+     "url": "https://www.churchservicesociety.org/sites/default/files/materials/Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "Tradition and historical accounts state that the Covenanters sang Psalm 76 as they marched to meet Claverhouse's troops.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C67",
+   "location": "Verse 13",
+   "sentence": "Covenanter tradition remembers that before engaging, they sang Psalm 76 in the Scottish metrical version:",
+   "claim": "The version reportedly sung was the Scottish metrical Psalm 76.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Psalmody of Covenanting Times",
+     "quote": "singing, as they went, Psalm 76 to the tune Martyrs : In Judah's land God is well known...",
+     "url": "https://www.churchservicesociety.org/sites/default/files/materials/Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "The lyrics sung were those of the 1650 Scottish Metrical Psalter.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C68",
+   "location": "Verse 13",
+   "sentence": "In Judah's land God is well known,\nhis name's in Israel great:\nIn Salem is his tabernacle,\nin Sion is his seat.",
+   "claim": "These four lines reproduce the Scottish metrical version attributed to the Covenanters.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Psalmody of Covenanting Times",
+     "quote": "In Judah's land God is well known,\nHis name's in Isr'el great :\nIn Salem is his tabernacle,\nIn Sion is his seat.",
+     "url": "https://www.churchservicesociety.org/sites/default/files/materials/Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "The quoted lines accurately reproduce the Scottish Metrical Psalter version of Psalm 76. (Minor spelling variations such as Israel for Isr'el are acceptable modernizations or metrical expansions.)",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C69",
+   "location": "Verse 13",
+   "sentence": "Then they charged and routed the dragoons.",
+   "claim": "The Covenanters charged and routed the dragoons after the reported singing.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Psalmody of Covenanting Times",
+     "quote": "That was their victory song, for soon Clavers and his men were discomfited and in flight.",
+     "url": "https://www.churchservicesociety.org/sites/default/files/materials/Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "Historical records of the Battle of Drumclog confirm that the Covenanters successfully charged and routed Claverhouse's dragoons.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C70",
+   "location": "Verse 13",
+   "sentence": "For these men, persecuted by a king who claimed authority over their church, the psalm's promise that God \"prunes the spirit of princes\" was a political creed.",
+   "claim": "The Covenanters in this episode were persecuted under a king who claimed authority over their church.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Who Were the Covenanters?",
+     "quote": "They signed this Covenant to confirm their opposition to the interference by the Stuart kings in the affairs of the Presbyterian Church of Scotland... they also believed that they were the spiritual heads of the Church of Scotland. This latter belief could not be accepted by the [Covenanters]... The persecutions became more frequent and cruel on the Restoration of Charles II in 1660.",
+     "url": "https://www.covenanter.org.uk/who-were-they/"
+    }
+   ],
+   "explanation": "The Covenanters faced severe persecution precisely because they rejected the Stuart kings' (Charles II) claims of Royal Supremacy over the Church.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C71",
+   "location": "Verse 13",
+   "sentence": "For these men, persecuted by a king who claimed authority over their church, the psalm's promise that God \"prunes the spirit of princes\" was a political creed.",
+   "claim": "These Covenanters treated Psalm 76’s final verse as a political creed.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Jardine's Book of Martyrs - John Leslie duke of Rothes",
+     "quote": "Shields also mentioned that his transportation to Scotland was delayed due to the King's death 'by His Order, who cuts of the Spirit of Princes, and is Terrible to the Kings of the Earth'.",
+     "url": "https://drmarkjardine.wordpress.com/2015/12/04/the-death-of-rothes-and-his-dreadful-covenanter-ghost/"
+    }
+   ],
+   "explanation": "Covenanter literature explicitly applied the final verse of Psalm 76 (regarding God cutting off the spirit of princes) to their struggle against the Stuart monarchy, functioning as a theological and political creed.",
+   "suggested_fix": null,
+   "notes": []
+  }
+ ],
+ "sources": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [
+   {
+    "title": "youtube.com",
+    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGaXAvVV_FwLXQeO0Slx_l7R0zalHDd4rbv2fix-HRx_qlNGLW84P0EoKMtu4s61CMboDIdx_QGGA6v2N2DMs0-TyYUMOFClAhFMbv9xhVpyGiizKr4epGrkxFd0rj2lK-O"
+   },
+   {
+    "title": "ynetnews.com",
+    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHus_fInQwCtqR6suiYx4c4b791ozNaU-CdLiijTnWfIoqBQLObFc2lOATHKYnxqxqtyccFuavwPUV4QLsv32sN0FeofdOeiGwYsE8a4UfP30YjlkiQ21MJJw8ZBKkFS0QoAqjoxJRZ6q6KW2VFZQ=="
+   },
+   {
+    "title": "kaparot.org.il",
+    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGpU1B96b5RJDHP79l1lNgzgSAAwGxBsQliGw-9oPVR_GRNdoGcO701No1tgVhVEAk7FxGv_p1a7n3vToMv8HbHBQc01a3SZO8L3bdLw6-N4UpLqtl3Cx0AX4p-6KQV07MbRWPj8f6vIvgakVqkXkmzRQHSY8I0QWI127MmzdoQhgb1Spn2K1E0TQcARb-l9H5_Eg=="
+   },
+   {
+    "title": "incarnateword.in",
+    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGz5rvPSLQPQ-5EJwVbSmLu81rsL7iFignumD19kCBAsnV5WxIxWpTeFFxGox_BLjZTGssOWyqXm7tu0_pIjs0YgvipGRpNt9XYEhcBLAlzLbNw-Bffy0IN4_gqT6Emc2ktoobXCh9kp5i3"
+   },
+   {
+    "title": "facebook.com",
+    "uri": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHCcb0jG8VCf15joDY3pJtVhY7nAyfGHL9jrzbBCZMH55vCKiyPuskfJsrRQhcTF0m-rtoWzBiNbJ587rdWVbtxwTEYsdFdjYTKonqQ06Zp1ElT82yW43FABRL6ZWa3DMyRmZDkTvLTEkwGKynTxG5Mkg9sV0IWDDMPGJgs0WJsDOKnqAUAQUlnQccbx9WdwN87d92Ny6RECTXqTeUhvBY2z7Ewv__iWRNQ2-7O4ItygrJzwMEAOfGRM3wBH7x2t6A9fC3wEr9dKloXadD86rP0ZhtBag=="
+   }
+  ],
+  [],
+  []
+ ],
+ "queries": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [
+   "\"Tukaram\" \"tormented and oppressed\" saint God",
+   "\"ומי יעמד לפניך ומי יהיה תמורתי\"",
+   "\"ch'io non mi pento\" \"Don Giovanni\"",
+   "\"Lecha Eli Teshukati\" Kol Nidrei \"after\" OR \"before\"",
+   "je ka ranjale ganjale tukaram translation"
+  ],
+  [],
+  []
+ ]
+}

@@ -1,0 +1,92 @@
+## ═══════════════════════════════════════════════════════════════════════════
+## NEXT: THE REST OF THE GUIDE — LITURGY, VERSE COMMENTARY, QUESTIONS
+## ═══════════════════════════════════════════════════════════════════════════
+
+Your introduction essay is finished. It will be printed first, exactly as you wrote it, and the reader will have just read it. Now write the rest of the study guide: a short section on the psalm in Jewish liturgy, the verse-by-verse commentary, and a few questions for the reader.
+
+Everything in the instructions you were given for the essay still holds: who you are writing as, READ LIKE A POET, BRING THE WHOLE LIBRARY and its two tests, COMMENTATORS, LITERARY ECHOES, and WRITING (including "you are the author" — never mention the research or anything behind it). What follows is what changes when you move from the essay to the verses.
+
+## WHAT THE VERSE COMMENTARY IS FOR
+
+The essay made one argument about the whole poem. The commentary walks the reader through the poem slowly, a verse at a time, and stops wherever there is something worth seeing or hearing that the essay did not show. It is where the reader, text in hand, finds that each line holds more than they thought: the word that is stranger than its translation admits, the sound that carries a meaning, the line a later reader heard differently, the older text this one answers, the rabbinic argument built on a single letter.
+
+What the essay said is spent. Do not re-argue it, re-quote its evidence, or reach its conclusions by a second route. Where a verse carried the essay's argument, point back to it in one sentence at most ("the introduction took up this line's missing 'us'") and spend the note on what the essay could not use. The best material for the notes is what you gathered for the essay and left out: the connections you listed and set aside, the commentator who saw something off the essay's line, the variant, the liturgical use, the pattern in the concordance.
+
+## HOW TO WORK (your reasoning phase)
+
+1. **Take stock of the essay.** Note briefly what it established and which evidence it used. That material is spent.
+2. **Walk the poem.** For each verse, before you consult the research: what would a careful listener stumble on here? What does this line do that prose would not?
+3. **Search the research, verse by verse.** Read the commentators on the verse, its verse notes and lexicon entries, the concordance and figurative-language material, the Greek, the liturgical uses, and any cross-verse observations or shared-vocabulary parallels that touch it. Put the same question to your own knowledge: what does this line open onto?
+4. **Choose, and choose unevenly.** One or two things per verse: the ones that change how the line reads. A verse holding a real discovery gets a long note; a verse of routine construction may need three sentences. If your notes come out about the same length, they were filled, not written.
+
+## WHAT A NOTE CAN HOLD (a menu, not a checklist)
+
+- **What the line does**: a sound, a grammatical swerve, a proportion, a word held back or placed last, and what it does to a listener.
+- **A strange or rare word**: what it means, where else it occurs (quote the other passage, Hebrew and English), and what the comparison shows. "Occurs only here" or "only twice" is a claim about the whole Bible; make it only when the concordance material in front of you supports it.
+- **A crux**: when the verse admits two readings, name them, then either choose one and say why, or show why the ambiguity works.
+- **A commentator who sees something**: a reading that changes the line, a disagreement, a risk. Work from the commentator's own text in front of you, not from memory, and keep the shape of his argument: which is his reading, which is his proof, and which is his alternative. Show the step that takes him from the words to the reading.
+- **The rabbinic afterlife**: where the Talmud or midrash (often through the Torah Temimah) mined the verse, and the move that got them there.
+- **The Greek**: when the Septuagint read the Hebrew differently and the difference teaches something about the text or its first readers. Ration it: at most two verses in five.
+- **The psalm in use**: a prayer that quotes the line (quote the prayer in Hebrew and English, name the service and the rite, and say whether it follows the plain sense or puts the words to new use), or a documented moment when someone used these words.
+- **An echo**: see below.
+
+## LITERARY ECHOES ACROSS THE WHOLE GUIDE
+
+Aim for about three echoes for every four verses across the whole guide, counting those already in your essay: for this psalm's 13 verses, about 10 in all. That is a level to reach with good echoes, not a quota. Rank the research's echoes together with any you know that fit better, and spend from the top. An echo earns its place by showing something about THIS line: the same event told by another voice, the same image turned to the opposite use, the same problem solved another way. A poem that shares only a mood is decoration. Do not repeat an echo the essay has used. Quote fully, and set poems lineated, as the essay instructions describe.
+
+## ACCURACY
+
+You are drawing on your own knowledge as well as the research, so hold every claim to one test: state only what you know to be accurate, name sources precisely, and quote from memory only what you are sure of. When you are unsure of a detail, say less. When your memory and a text in front of you disagree about what that text says, the text wins.
+
+## THE FORMAT OF EACH VERSE
+
+Cover every verse, in order, including the superscription (verse 1):
+
+1. A header on its own line: `**Verse N**`. You may group two to four closely linked verses under one header (`**Verses 5–6**`), but each verse still gets its own Hebrew line and its own translation, and all of them come before the shared note.
+2. The Hebrew of the verse, punctuated to show its poetic structure: semicolons or commas between the cola, a full stop at the end.
+3. Your own English translation of the whole verse, as a one-line block quote beginning `> `. Every word; no ellipsis, brackets, alternatives, Hebrew or comment. Where a word is genuinely undecidable, translate the reading you argue for and let the note do the arguing.
+4. The note, in paragraphs. Prose, not lists.
+
+The translation line has rendered every word, so nothing in the note is owed to completeness. A phrase you pass over is not a gap.
+
+Use the supplied phonetic transcriptions only when a sound carries the point: in backticks, with the capitalized stress left as given; when you claim that two words share a sound, bold the letters that carry it.
+
+## THE LITURGICAL SECTION (200–500 words)
+
+Open your response with the exact marker `---LITURGICAL-SECTION-START---` on its own line. Then use `####` subheadings: `#### Full psalm` (where and when the whole psalm is recited) and `#### Key verses` (verses or phrases quoted in prayers). Quote the Hebrew of both the psalm and the prayer, with English. Say what the placement reveals, and whether the liturgy follows the plain sense or puts the words to new use. If the research contains Shimush Tehillim material, add `#### Practical Kabbalah`: state the prescribed use, and suggest briefly what in the psalm's language makes the association intelligible; omit the subsection if there is none. Every specific liturgical use in the research should appear somewhere in the guide, here or in a verse note. In this section, refer to verses in running text ("v. 3"); never begin a line with **Verse.
+
+The rites, which are easy to confuse: **Nusach Ashkenaz** is the rite of non-Hasidic Ashkenazi Jews. **Nusach Sefard** is the HASIDIC rite, used by Ashkenazi Hasidim; never call it "Sephardic." **Edot HaMizrach** is the rite of the Sephardic and Middle Eastern communities. When the research says "Sefard," it means the Hasidic rite.
+
+## QUESTIONS FOR THE READER
+
+End with 4–6 questions to be printed before the commentary: specific, answerable from the guide, each pointing toward something the essay or the notes will show.
+
+## OUTPUT
+
+Return exactly this shape, with nothing before the marker:
+
+---LITURGICAL-SECTION-START---
+
+#### Full psalm
+...
+
+#### Key verses
+...
+
+### VERSE COMMENTARY
+
+**Verse 1**
+
+[Hebrew]
+
+> [translation]
+
+[note]
+
+**Verse 2**
+...
+
+### REFINED READER QUESTIONS
+
+1. ...
+2. ...

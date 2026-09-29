@@ -9,8 +9,9 @@ evidence, and write a report the copy editor can take as supplementary context.
     python scripts/run_copy_editor.py 76 --fact-check-report DIR/psalm_076_fact_check.json
 
 Writes psalm_NNN_fact_check.json (records + cost), .md (readable) and
-_copy_editor_prompt.txt (the block the copy editor receives). gpt-6-sol with web
-search; roughly $2–4 for a full guide. See src/agents/fact_checker.py.
+_copy_editor_prompt.txt (the block the copy editor receives). Staged (Session 386):
+gpt-6-luna on local evidence, gpt-6-sol with web search on what needs the web, and
+gpt-6-sol reviewing every contradiction. See src/agents/fact_checker.py.
 """
 
 import argparse
@@ -26,8 +27,8 @@ from dotenv import load_dotenv  # noqa: E402
 load_dotenv(ROOT / ".env")  # OPENAI_API_KEY, before any client is created
 
 from src.agents.fact_checker import (  # noqa: E402
-    DEFAULT_EFFORT, DEFAULT_MODEL, FactChecker, checkable_text, split_guide_for_checking,
-    write_outputs,
+    DEFAULT_EFFORT, DEFAULT_MODEL, DEFAULT_REVIEW_MODEL, DEFAULT_WEB_MODEL, FactChecker,
+    checkable_text, split_guide_for_checking, write_outputs,
 )
 
 
@@ -49,6 +50,8 @@ def main() -> int:
     ap.add_argument("--prefix", default="", help="filename prefix for the outputs")
     ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--effort", default=DEFAULT_EFFORT)
+    ap.add_argument("--web-model", default=DEFAULT_WEB_MODEL)
+    ap.add_argument("--review-model", default=DEFAULT_REVIEW_MODEL, help="'none' to skip the review stage")
     ap.add_argument("--db-path", type=Path, default=ROOT / "database" / "tanakh.db")
     ap.add_argument("--no-web-search", action="store_true")
     ap.add_argument("--chunk-chars", type=int, default=None)
@@ -75,13 +78,19 @@ def main() -> int:
 
     out_dir = a.output_dir or inp.parent
     out_dir.mkdir(parents=True, exist_ok=True)
-    fc = FactChecker(model=a.model, effort=a.effort, db_path=a.db_path, web_search=not a.no_web_search, **kw)
+    fc = FactChecker(model=a.model, effort=a.effort, db_path=a.db_path, web_search=not a.no_web_search,
+                     web_model=a.web_model,
+                     review_model=None if a.review_model.lower() == "none" else a.review_model, **kw)
     res = fc.check(guide, a.psalm, bundle, thinking_out=out_dir / f"{a.prefix}psalm_{a.psalm:03d}_fact_check_thinking.txt")
     paths = write_outputs(res, a.psalm, out_dir, a.prefix)
     m = res.meta(a.psalm)
     print(f"\nClaims: {len(res.records)}  {m['verdicts']}")
     print(f"Web searches: {res.web_searches}  lookups: {res.function_calls}  "
           f"cost: ${res.cost_usd:.4f} (tokens ${res.token_cost_usd:.4f} + searches ${res.search_cost_usd:.4f})")
+    for m, v in (m_ := res.meta(a.psalm))["stages"].get("per_stage", {}).items():
+        print(f"  {m} ({v['model']}): ${v['cost_usd']:.4f}; {v['searches']} searches; tools {v['tools']}; "
+              f"tokens {v['usage']}")
+    print(f"  stage 1: {m_['stages']['local']}")
     for p in paths.values():
         print(f"  {p}")
     return 0

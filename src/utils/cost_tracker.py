@@ -339,6 +339,33 @@ PRICING = {
         "cache_write": 0.0,  # OpenAI does not charge for cache writes
         "cache_write_1h": 0.00,
     },
+    # GPT-6 Luna (OpenAI). Session 386: added for the fact checker's cost work. Verified
+    # on OpenAI's pricing page 2026-09-28 as STANDARD pricing (no promo note): $0.10
+    # input / $0.01 cached / $0.50 output; long-context tier $0.20 / $0.02 / $0.75 NOT
+    # encoded (same threshold shape as gpt-6-sol). Web search is billed on top at
+    # $10 / 1k calls + search content tokens at these rates.
+    "gpt-6-luna": {
+        "input": 0.10,
+        "output": 0.50,
+        "thinking": 0.50,  # reasoning tokens billed as output
+        "cache_read": 0.01,  # 10% of input
+        "cache_write": 0.0,  # OpenAI does not charge for cache writes
+        "cache_write_1h": 0.00,
+    },
+    # Gemini 3.8 Flash (Google). Session 386: the fact checker's web-evidence gatherer.
+    # Verified on Google's pricing page 2026-09-28: "$0.75 through December 31, 2026.
+    # $1.50 starting January 1, 2027" input, "$3.75 ... $7.50" output (thinking included),
+    # context caching "$0.075 ... $0.15". THIS ROW IS THE 2027 PRICE; the 2026 price is an
+    # INTRO_PRICING override below. Grounding with Google Search: 5,000 free requests a
+    # month across Gemini 3.x, then $14 / 1,000; retrieved content is NOT billed as input.
+    "gemini-3.8-flash": {
+        "input": 1.50,
+        "output": 7.50,
+        "thinking": 7.50,  # "Output price (including thinking tokens)"
+        "cache_read": 0.15,  # 10% of input
+        "cache_write": 0.0,  # Google bills caching by storage-time, not a write multiplier
+        "cache_write_1h": 0.00,
+    },
     # Gemini 2.5 Pro (Google). Session 382: CORRECTED from $3.00/$12.00 with
     # cache_read $0.30 and cache_write $3.75. Those were never Google's rates -- the
     # two marked "(approximate)" were Anthropic-shaped guesses (10% and a 25% write
@@ -395,6 +422,12 @@ PRICING = {
 # construction" survived six weeks in Session 373. Encode the durable rate and the
 # override simply STOPS APPLYING on its own. The failure mode is self-healing.
 INTRO_PRICING = {
+    # Gemini 3.8 Flash (Session 386): the 2026 price, per Google's page read 2026-09-28
+    # ("through December 31, 2026"). When it expires, RE-CHECK the durable row.
+    "gemini-3.8-flash": {
+        "through": date(2026, 12, 31),
+        "rates": {"input": 0.75, "output": 3.75, "thinking": 3.75, "cache_read": 0.075},
+    },
     # GPT-6 Sol launch promo (Session 384): $2 / $0.20 cached / $10, "guaranteed at
     # least through 2026-11-21" (OpenAI launch coverage, checked 2026-09-28). When this
     # expires, RE-CHECK the durable row -- see the note at the bottom of this dict.

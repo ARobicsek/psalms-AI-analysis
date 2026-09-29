@@ -18,6 +18,28 @@
    "estimated": true,
    "web_searches": 5,
    "note": "no usage returned before the stop; estimate as for attempt 1 plus 5 web searches"
+  },
+  {
+   "step": "Probe A: fact check of the S383 B copy-edited guide (gpt-6-sol, web search, bundle)",
+   "model": "gpt-6-sol",
+   "cost_usd": 4.8748,
+   "token_cost_usd": 4.1048,
+   "search_cost_usd": 0.77,
+   "web_searches": 77,
+   "function_calls": 171,
+   "usage": {
+    "input": 1245174,
+    "cached": 3236278,
+    "output": 65968,
+    "reasoning": 30756
+   },
+   "seconds": 992,
+   "verdicts": {
+    "supported": 264,
+    "contradicted": 25,
+    "unverifiable": 7
+   },
+   "claims": 296
   }
  ]
 }

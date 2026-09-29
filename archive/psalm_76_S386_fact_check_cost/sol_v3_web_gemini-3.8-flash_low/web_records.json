@@ -1,0 +1,2391 @@
+{
+ "spent": {
+  "gemini-3.8-flash": {
+   "usage": {
+    "input": 4568,
+    "cached": 5934,
+    "output": 19002,
+    "reasoning": 0
+   },
+   "searches": 0,
+   "cost_usd": 0.0751
+  },
+  "gpt-6-sol": {
+   "usage": {
+    "input": 59668,
+    "cached": 84378,
+    "output": 15941,
+    "reasoning": 12407
+   },
+   "searches": 0,
+   "cost_usd": 0.4197
+  }
+ },
+ "seconds": 284,
+ "records": [
+  {
+   "id": "C1",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C2",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C3",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C4",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C5",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C6",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C7",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C8",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C9",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C10",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C11",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C12",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C13",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C14",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C15",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C16",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C17",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C18",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C19",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C20",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C21",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C22",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C23",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C24",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C25",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C26",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C27",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C28",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C29",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C30",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C31",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C32",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C33",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C34",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C35",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C36",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C37",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C38",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C39",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C40",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C41",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C42",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C43",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C44",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C45",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C46",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C47",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C48",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C49",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C50",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C51",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C52",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C53",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C54",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C55",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C56",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C57",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C58",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C59",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C60",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C61",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C62",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C63",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C64",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C65",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C66",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C67",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C68",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C69",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C70",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C71",
+   "location": "",
+   "sentence": "",
+   "claim": "",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "",
+   "suggested_fix": null,
+   "notes": [
+    "invalid verdict '' → unverifiable"
+   ]
+  },
+  {
+   "id": "C72",
+   "location": "Introduction",
+   "sentence": "Psalm 76 has been sung on the eve of real battles, and by any reckoning it is a victory song: broken bows, collapsed cavalry, kings bringing tribute.",
+   "claim": "Psalm 76 has historically been sung on the eve of battles.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Monday: The Fear of the Lord Is the Beginning | Think & Act Biblically",
+     "quote": "",
+     "url": "https://www.alliancenet.org/think-act-biblically/monday-the-fear-of-the-lord-is-the-beginning"
+    }
+   ],
+   "explanation": "The source describes groups singing the psalm as they marched into battle or faced an imminent attack.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C73",
+   "location": "Introduction",
+   "sentence": "(Selah is a musical or liturgical marker whose exact sense is lost; it seems to signal a pause.)",
+   "claim": "Selah is a musical or liturgical marker of uncertain precise meaning.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "What is the meaning of the word Selah in the Bible? - NeverThirsty",
+     "quote": "",
+     "url": "https://www.neverthirsty.org/bible-qa/qa-archives/question/what-is-the-meaning-of-the-word-selah-in-the-bible/"
+    }
+   ],
+   "explanation": "The source identifies it as a likely musical or liturgical marker of uncertain meaning.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C74",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Because the poet is reworking the oldest victory song in Israel's memory, the one that begins סוּס וְרֹכְבוֹ רָמָה בַיָּם, \"horse and rider He has hurled into the sea\" (Exod 15:1).",
+   "claim": "The Song at the Sea is the oldest victory song in Israel’s memory.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The LORD Shall Reign Forever: Redemption, Holy War, and Worship (Exodus 15:1–19)",
+     "quote": "",
+     "url": "https://scriptureincontext.org/the-lord-shall-reign-forever-redemption-holy-war-and-worship-exodus-15-1-19"
+    },
+    {
+     "source": "Song of the Sea - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Song_of_the_Sea"
+    }
+   ],
+   "explanation": "The sources describe it as the oldest extended Hebrew victory song in scripture and note its archaic language.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C75",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Some communities recite Psalm 76 on the seventh day of Passover, the day the Song at the Sea is read in synagogue.",
+   "claim": "Some communities recite Psalm 76 on the seventh day of Passover.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "No supplied source establishes this practice. The researcher’s note about other liturgical assignments does not rule out a practice in some communities.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C76",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Some communities recite Psalm 76 on the seventh day of Passover, the day the Song at the Sea is read in synagogue.",
+   "claim": "The Song at the Sea is read in synagogue on the seventh day of Passover.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Summary of the Passover Torah Readings - Chabad.org",
+     "quote": "",
+     "url": "https://www.chabad.org/holidays/passover/pesach_cdo/aid/1798/jewish/Torah-Readings.htm"
+    }
+   ],
+   "explanation": "The source assigns the Torah reading containing the Song at the Sea to that day.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C77",
+   "location": "The Song of the Sea, Run Backwards",
+   "sentence": "Some read it as Sennacherib's army, found dead at dawn outside Jerusalem in 701 BCE (Rashi, Malbim).",
+   "claim": "The destruction of Sennacherib’s army occurred in 701 BCE, outside Jerusalem.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Assyrian siege of Jerusalem - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Assyrian_siege_of_Jerusalem"
+    }
+   ],
+   "explanation": "The source dates the siege to about 701 BCE and describes the biblical account as placing the army’s destruction near Jerusalem’s gates.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C78",
+   "location": "A Deliverance Without a Possessive",
+   "sentence": "Both readings are reasonable; the psalm was sung in Jerusalem by Jerusalemites.",
+   "claim": "The psalm was historically sung in Jerusalem by Jerusalemites.",
+   "claim_type": "date_name_or_history",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "No supplied source establishes who historically sang the psalm or where they sang it.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C79",
+   "location": "Full psalm",
+   "sentence": "Psalm 76 is recited in full as the psalm of the day on the **first day of Sukkot**.",
+   "claim": "Psalm 76 is recited as the complete psalm of the day on Sukkot’s first day.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psalms 130:1 with Tractate Soferim | The Sefaria Library",
+     "quote": "",
+     "url": "https://www.sefaria.org/Psalms.130.1?with=Tractate%20Soferim&lang=bi"
+    },
+    {
+     "source": "00 Shimush Pesukim - Link Verses Days PDF | Scribd",
+     "quote": "",
+     "url": "https://www.scribd.com/document/401451128/00-Shimush-Pesukim-Link-Verses-Days-PDF"
+    }
+   ],
+   "explanation": "The sources assign Psalm 76 as a Sukkot psalm of the day, with the second specifying the first day. Neither indicates an excerpt rather than the psalm.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C80",
+   "location": "Full psalm",
+   "sentence": "This is the custom in many Mizrachi and Sephardic (Edot HaMizrach) communities and in the custom of the Vilna Gaon.",
+   "claim": "The first-day Sukkot practice belongs to the stated Sephardic and Mizrachi communities and to the Vilna Gaon’s custom.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "00 Shimush Pesukim - Link Verses Days PDF | Scribd",
+     "quote": "",
+     "url": "https://www.scribd.com/document/401451128/00-Shimush-Pesukim-Link-Verses-Days-PDF"
+    }
+   ],
+   "explanation": "A supplied source identifies the Vilna Gaon’s custom, but the passages do not establish the claim about many Mizrachi and Sephardic communities.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C81",
+   "location": "Full psalm",
+   "sentence": "The haftarah (prophetic reading) for the first day is Zechariah 14, where the survivors of the nations who attacked Jerusalem go up each year לָחֹג אֶת־חַג הַסֻּכּוֹת, \"to keep the festival of Sukkot\" (Zech 14:16).",
+   "claim": "Zechariah 14 is the first-day Sukkot haftarah.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Zechariah 14:1-21: Haftarah (Intermediate – From Familiar to Fluent voice)",
+     "quote": "",
+     "url": "https://www.sefaria.org/sheets/581177"
+    }
+   ],
+   "explanation": "The source identifies Zechariah 14:1–21 as the first-day Sukkot haftarah.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C82",
+   "location": "Full psalm",
+   "sentence": "The haftarah for Shabbat Ḥol ha-Moʿed, the Sabbath of the festival's intermediate days, is Ezekiel 38–39.",
+   "claim": "Ezekiel 38–39 is the haftarah for Shabbat Ḥol ha-Moʿed Sukkot.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Shabbat Chol Hamoed Sukkot Haftarah | Voices on Sefaria",
+     "quote": "",
+     "url": "https://www.sefaria.org/sheets/434552"
+    }
+   ],
+   "explanation": "The cited reading is Ezekiel 38:18–39:16, within the two chapters the guide names.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C83",
+   "location": "Full psalm",
+   "sentence": "Some Ashkenazi and Hasidic communities also recite the psalm on the **seventh day of Passover**, when the Song at the Sea is read.",
+   "claim": "Some Ashkenazi and Hasidic communities recite Psalm 76 on Passover’s seventh day.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "The supplied page excerpt merely names the seventh and eighth days of Passover; it does not link Psalm 76 to either day or identify an Ashkenazi or Hasidic custom.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C84",
+   "location": "Verse 2",
+   "sentence": "In Nusach Sefard (the Hasidic rite), נוֹדָע בִּיהוּדָה אֱלֹקִים בְּיִשְׂרָאֵל גָּדוֹל שְׁמוֹ is woven into the Simchat Torah *hakafot*, the circuits with the Torah scrolls, just before the fifth circuit.",
+   "claim": "The Nusach Sefard Simchat Torah hakafot place Psalm 76:2 just before the fifth circuit.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "צפורן שמיר ר״ו",
+     "quote": "",
+     "url": "https://www.sefaria.org.il/Tziporen_Shamir.206"
+    }
+   ],
+   "explanation": "The verse appears in the passage marked after the fourth circuit and before the passage marked after the fifth.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C85",
+   "location": "Verse 2",
+   "sentence": "It is surrounded by pleas that God וְתִבְנֶה בֵּית הַמִּקְדָּשׁ, \"rebuild the Temple,\" and restore Levitical song.",
+   "claim": "The same hakafot passage contains the stated Temple and Levitical-song pleas.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "צפורן שמיר ר״ו",
+     "quote": "",
+     "url": "https://www.sefaria.org.il/Tziporen_Shamir.206"
+    }
+   ],
+   "explanation": "Both pleas precede the cited psalm verse in the passage.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C86",
+   "location": "Verse 2",
+   "sentence": "The same rite opens an alphabetic *selichah* (penitential poem) for the first Monday of the pre–Rosh Hashanah penitential season with אֱלֹקִים בְּיִשְׂרָאֵל גָּדוֹל נוֹדָעְתָּ, \"God, great in Israel, You have made Yourself known.\"",
+   "claim": "A Nusach Sefard alphabetic selichah for the specified Monday opens with the quoted words.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "סידור תהלת השם על פי נוסח האר״י ז״ל - חב״ד",
+     "quote": "",
+     "url": "https://online.fliphtml5.com/dfsvs/hcwj/#p=346"
+    }
+   ],
+   "explanation": "The supplied passage establishes the opening words, but does not identify the poem as assigned to the specified Monday.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C87",
+   "location": "Verse 2",
+   "sentence": "And the renown becomes the backdrop for confession: the poem goes on to say that God's kindness came לֹא בְצִדְקוֹתֵינוּ, \"not by our righteous deeds.\"",
+   "claim": "The selichah contains לֹא בְצִדְקוֹתֵינוּ in the described discussion of divine kindness.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "סידור תהלת השם על פי נוסח האר״י ז״ל - חב״ד",
+     "quote": "",
+     "url": "https://online.fliphtml5.com/dfsvs/hcwj/#p=346"
+    }
+   ],
+   "explanation": "The supplied lines connect divine good bestowed on the speakers with the statement that it was not by their righteousness.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C88",
+   "location": "Verse 13",
+   "sentence": "In the Ashkenazi Rosh Hashanah morning service, the *yotzer* hymn (a liturgical morning poem) *Melekh Azur Gevurah* places the phrase between images from Isaiah 63: מֶֽלֶךְ חֲמוּץ בְּגָדִים. בְּדָרְכוֹ בוֹגְדִים. יִבְצֹר רֽוּחַ נְגִידִים, \"the King with crimsoned garments, treading down the treacherous, pruning the spirit of princes.\"",
+   "claim": "The named Ashkenazi Rosh Hashanah yotzer contains the quoted sequence.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "No passage from the named hymn was supplied. The researcher's note disputes the attribution, but provides no sourced passage by which to verify it.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C89",
+   "location": "Verse 13",
+   "sentence": "A Shabbat table song (*zemer*) in the Nusach Sefard siddur makes the same fusion even more explicit: בְּבוֹאוֹ מֵאֱדוֹם חֲמוּץ בְּגָדִים, זֶֽבַח לוֹ בְּבָצְרָה... בְּכֹחוֹ הַגָּדוֹל יִבְצוֹר רוּחַ נְגִידִים, \"when He comes from Edom with crimsoned garments, a sacrifice for Him in Bozrah… with His great strength He will prune the spirit of princes.\"",
+   "claim": "A Nusach Sefard Shabbat zemer contains the quoted Edom, Bozrah, and “spirit of princes” lines.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "בבואו מאדום (ברוך ה' יום יום) – הספרייה הלאומית",
+     "quote": "",
+     "url": "https://www.nli.org.il/he/items/NNL_MUSIC_AL990025219460205171/NLI"
+    },
+    {
+     "source": "מחזור ויטרי, סדר שבת קצ״ד",
+     "quote": "",
+     "url": "https://www.sefaria.org.il/Machzor_Vitry%2C_Order_of_Shabbat.194"
+    }
+   ],
+   "explanation": "The supplied text of the Shabbat song contains the cited sequence.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C90",
+   "location": "Practical Kabbalah",
+   "sentence": "The *Shimush Tehillim*, the manual of practical uses for the psalms attributed to Rav Hai Gaon, prescribes Psalm 76 לְהִנָּצֵל מֵאֵשׁ וּמִמַּיִם, \"to be rescued from fire and from water.\"",
+   "claim": "Shimush Tehillim assigns Psalm 76 the purpose לְהִנָּצֵל מֵאֵשׁ וּמִמַּיִם.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "סגולות בספר תהילים | מוסדות ברסלב 148",
+     "quote": "",
+     "url": "https://www.breslevmeir.com/segulot-sefer-tehilim/"
+    },
+    {
+     "source": "Shimush Tehillim - Halakhah.com",
+     "quote": "",
+     "url": "http://halakhah.com/rst/Shimush%20Tehillim.pdf"
+    }
+   ],
+   "explanation": "The sources associate Psalm 76 with protection from both fire and water or flooding.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C91",
+   "location": "Practical Kabbalah",
+   "sentence": "The *Shimush Tehillim*, the manual of practical uses for the psalms attributed to Rav Hai Gaon, prescribes Psalm 76 לְהִנָּצֵל מֵאֵשׁ וּמִמַּיִם, \"to be rescued from fire and from water.\"",
+   "claim": "Shimush Tehillim is attributed to Rav Hai Gaon.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Shimush Tehillim - Halakhah.com",
+     "quote": "",
+     "url": "http://halakhah.com/rst/Shimush%20Tehillim.pdf"
+    }
+   ],
+   "explanation": "The source explicitly describes the attribution; the guide does not assert that Rav Hai Gaon wrote the work.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C92",
+   "location": "Practical Kabbalah",
+   "sentence": "Later compilers also recommend it to travelers facing bandits.",
+   "claim": "Later practical-use compilers recommend Psalm 76 to travelers facing bandits.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "No source was supplied for the travelers-and-bandits recommendation.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C93",
+   "location": "Verse 1",
+   "sentence": "Most of them belong to what scholars call the Elohistic Psalter (Pss 42–83), a block in which an editor seems to have preferred the generic אֱלֹקִים, \"God,\" over the personal name YHWH.",
+   "claim": "Scholars identify Psalms 42–83 as the Elohistic Psalter and propose an editorial preference for אֱלֹהִים.",
+   "claim_type": "other",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psalms Meditations on God and Humanity 3 Psalms about 'God' (Pss 42-43) - Sefaria",
+     "quote": "",
+     "url": "https://www.sefaria.org/sheets/113054"
+    }
+   ],
+   "explanation": "The source gives both the range and the proposed editorial explanation.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C94",
+   "location": "Verse 1",
+   "sentence": "The Septuagint (LXX), the Greek translation made by Alexandrian Jews in the last centuries BCE, adds a phrase to the heading: ᾠδὴ πρὸς τὸν Ἀσσύριον, \"an ode concerning the Assyrian.\"",
+   "claim": "The Septuagint heading adds ᾠδὴ πρὸς τὸν Ἀσσύριον, meaning an ode concerning the Assyrian.",
+   "claim_type": "ancient_source_or_inscription",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Septuaginta. Psalterium",
+     "quote": "",
+     "url": "https://www.bibelwissenschaft.de/online-bibeln/septuaginta-lxx/lesen-im-bibeltext/bibel/text/lesen/stelle/19/750001/759999/ch/f7f98d249f33bfbb2e391b1625f385c7/"
+    }
+   ],
+   "explanation": "The phrase appears in the Greek heading, under the Septuagint's Psalm 75 numbering.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C95",
+   "location": "Verse 1",
+   "sentence": "The Septuagint (LXX), the Greek translation made by Alexandrian Jews in the last centuries BCE, adds a phrase to the heading: ᾠδὴ πρὸς τὸν Ἀσσύριον, \"an ode concerning the Assyrian.\"",
+   "claim": "The Septuagint was translated by Alexandrian Jews in the last centuries BCE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Die Sprache der Septuaginta: The Language of the Septuagint",
+     "quote": "",
+     "url": "https://dokumen.pub/die-sprache-der-septuaginta-the-language-of-the-septuagint-9783641310950.html"
+    },
+    {
+     "source": "The Septuagint - The Society for Old Testament Study",
+     "quote": "",
+     "url": "https://www.sots.ac.uk/wiki/the-septuagint/"
+    }
+   ],
+   "explanation": "The sources support Alexandria and the last centuries BCE as a broad description, while noting that not every book's place of translation is certain.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C96",
+   "location": "Verse 1",
+   "sentence": "This is the earliest surviving decision about which war the psalm describes.",
+   "claim": "The Septuagint heading is the earliest surviving identification of the psalm's war.",
+   "claim_type": "count_or_uniqueness",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "Psalm 76 Polyglot - Greek Documents",
+     "quote": "",
+     "url": "https://www.ellopos.net/elpenor/greek-texts/septuagint/chapter.asp?book=24&page=76"
+    }
+   ],
+   "explanation": "The source confirms that the Greek heading identifies the Assyrian, but does not establish that this is the earliest surviving identification.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C97",
+   "location": "Verse 1",
+   "sentence": "It points to Sennacherib's siege of Jerusalem in 701 BCE, which ended when וַיַּשְׁכִּימוּ בַבֹּקֶר וְהִנֵּה כֻלָּם פְּגָרִים מֵתִים, \"they rose early in the morning, and behold, they were all dead corpses\" (2 Kgs 19:35).",
+   "claim": "Sennacherib's campaign against Jerusalem occurred in 701 BCE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Assyrian siege of Jerusalem - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Assyrian_siege_of_Jerusalem"
+    }
+   ],
+   "explanation": "The source dates Sennacherib’s siege of Jerusalem to approximately 701 BCE.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C98",
+   "location": "Verse 2",
+   "sentence": "Many modern readers connect it to the Asaphite guild's northern roots: after the northern kingdom fell in 722, \"Israel\" survives here as a name joined to Judah's sanctuary.",
+   "claim": "Many modern readers connect Judah's precedence to northern roots of an Asaphite guild.",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "Social Identity in Crisis: Toward a Theology of the Psalms of Asaph",
+     "quote": "",
+     "url": "https://themelios.thegospelcoalition.org/article/social-identity-in-crisis-toward-a-theology-of-the-psalms-of-asaph/"
+    }
+   ],
+   "explanation": "The passage discusses Israel and Judah in Psalm 76 and a possible role for Asaphite psalms among northern refugees. It does not establish northern roots for the guild or show that many readers explain Judah’s precedence that way.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C99",
+   "location": "Verse 2",
+   "sentence": "Many modern readers connect it to the Asaphite guild's northern roots: after the northern kingdom fell in 722, \"Israel\" survives here as a name joined to Judah's sanctuary.",
+   "claim": "The northern kingdom fell in 722 BCE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Fall of Samaria and Deportation of Israelites | ESV.org",
+     "quote": "",
+     "url": "https://www.esv.org/resources/esv-global-study-bible/chart-12-04/"
+    }
+   ],
+   "explanation": "The source dates Samaria’s fall to 722 BCE.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C100",
+   "location": "Verse 2",
+   "sentence": "It sets the tone for Charpentier's grand motet *Notus in Judaea Deus*.",
+   "claim": "Charpentier composed a grand motet titled Notus in Judaea Deus.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psaume 76 (75) - Wikipédia",
+     "quote": "",
+     "url": "https://fr.wikipedia.org/wiki/Psaume_76_(75)"
+    },
+    {
+     "source": "Choral Repertoire - Shrock | PDF - Scribd",
+     "quote": "",
+     "url": "https://www.scribd.com/document/777717158/Choral-Repertoire-Shrock"
+    }
+   ],
+   "explanation": "The sources identify Charpentier settings with this title, including one scored for soloists, chorus and instruments.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C101",
+   "location": "Verse 3",
+   "sentence": "*Salem* is Jerusalem's oldest name, the city of Melchizedek: וּמַלְכִּי־צֶדֶק מֶלֶךְ שָׁלֵם, \"and Melchizedek, king of Salem\" (Gen 14:18).",
+   "claim": "Salem is Jerusalem's oldest name.",
+   "claim_type": "date_name_or_history",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "2 Samuel 5 Commentary - Precept Austin",
+     "quote": "Jerus (in the form Uru-sa-lim) is the oldest name we know for this city; it goes back at least 400 years before David.",
+     "url": "https://www.preceptaustin.org/2_samuel_5_commentary"
+    }
+   ],
+   "explanation": "Although another supplied source calls Salem the oldest name, this source identifies Uru-sa-lim as the oldest known name. The unqualified historical claim is therefore misleading.",
+   "suggested_fix": "*Salem* is an ancient name for Jerusalem, the city of Melchizedek: וּמַלְכִּי־צֶדֶק מֶלֶךְ שָׁלֵם, \"and Melchizedek, king of Salem\" (Gen 14:18).",
+   "notes": []
+  },
+  {
+   "id": "C102",
+   "location": "Verse 3",
+   "sentence": "The Greek translator did not render it as a place name at all: ἐν εἰρήνῃ, \"in peace.\"",
+   "claim": "The Septuagint renders בְשָׁלֵם as ἐν εἰρήνῃ rather than as a place name.",
+   "claim_type": "ancient_source_or_inscription",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psalm 76 Polyglot - Greek Documents",
+     "quote": "",
+     "url": "https://www.ellopos.net/elpenor/greek-texts/septuagint/chapter.asp?book=24&page=76"
+    }
+   ],
+   "explanation": "The supplied Greek text reads ἐν εἰρήνῃ.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C103",
+   "location": "Verse 3",
+   "sentence": "The booth still hovers in the background, and the Sukkot liturgy was right to hear it.",
+   "claim": "Sukkot liturgy uses Psalm 76 or invokes its booth imagery.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psaume 76 (75) - Wikipédia",
+     "quote": "",
+     "url": "https://fr.wikipedia.org/wiki/Psaume_76_(75)"
+    }
+   ],
+   "explanation": "The source says Psalm 76 is recited on the first day of Sukkot.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C104",
+   "location": "Verse 3",
+   "sentence": "Ted Hughes, in \"The Jaguar\" (from his first collection, *The Hawk in the Rain*, 1957), watches a big cat in a zoo, and the poem turns on the discovery that the cage does not contain it:",
+   "claim": "'The Jaguar' appears in Ted Hughes's first collection, The Hawk in the Rain, dated 1957.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Hawk in the Rain — The Ted Hughes Society",
+     "quote": "",
+     "url": "https://thetedhughessociety.org/the-hawk-in-the-rain"
+    },
+    {
+     "source": "The Hawk in the Rain - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/The_Hawk_in_the_Rain"
+    }
+   ],
+   "explanation": "The sources place the poem in Hughes’s first poetry collection, published in 1957.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C105",
+   "location": "Verse 3",
+   "sentence": "He spins from the bars, but there's no cage to him\n> More than to the visionary his cell:\n> His stride is wildernesses of freedom",
+   "claim": "These three lines accurately quote Ted Hughes's 'The Jaguar.'",
+   "claim_type": "literary_quotation",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "Ted Hughes - Voetica Poetry Spoken",
+     "quote": "He spins from the bars, but there's no cage to him\nMore than to the visionary his cell:\nHis stride is wildernesses of freedom:",
+     "url": "https://voetica.com/poem/4430"
+    }
+   ],
+   "explanation": "The quoted third line omits its closing colon.",
+   "suggested_fix": "He spins from the bars, but there's no cage to him\n> More than to the visionary his cell:\n> His stride is wildernesses of freedom:",
+   "notes": []
+  },
+  {
+   "id": "C106",
+   "location": "Verse 4",
+   "sentence": "The tablets, found in 1929, name *Ršp*, Resheph, a Canaanite god of plague and archery, known in Phoenician as \"Resheph of the arrow.\"",
+   "claim": "The relevant Ugaritic tablets were found in 1929.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Ras Shamra Tablet Inventory",
+     "quote": "",
+     "url": "https://ochre.lib.uchicago.edu/rsti/"
+    }
+   ],
+   "explanation": "The source distinguishes the 1928 discovery that prompted investigation from the discovery of tablets at Ras Shamra the following year.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C107",
+   "location": "Verse 4",
+   "sentence": "The tablets, found in 1929, name *Ršp*, Resheph, a Canaanite god of plague and archery, known in Phoenician as \"Resheph of the arrow.\"",
+   "claim": "Ugaritic texts attest Ršp as a plague-and-archery deity, and a Phoenician source calls him 'Resheph of the arrow.'",
+   "claim_type": "ancient_source_or_inscription",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Names of the Gods in Ancient Mediterranean Religions",
+     "quote": "",
+     "url": "https://dokumen.pub/the-names-of-the-gods-in-ancient-mediterranean-religions-classical-scholarship-in-translation-1009394827-9781009394826.html"
+    },
+    {
+     "source": "Resheph רשף - Brill Reference Works",
+     "quote": "",
+     "url": "https://referenceworks.brillonline.com/entries/dictionary-of-deities-and-demons-online/resheph-SIM_000067"
+    }
+   ],
+   "explanation": "The supplied passages associate Resheph’s arrows with epidemics in Ugaritic poems and attest the epithet “Resheph of the arrow” at Kition.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C108",
+   "location": "Verse 4",
+   "sentence": "Writing in sixteenth-century Safed, long after the Temple had fallen, he takes \"there\" to mean Zion itself as the target.",
+   "claim": "The Alshich wrote in sixteenth-century Safed.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Jewish Encyclopedia, “ALSHECH”",
+     "quote": "",
+     "url": "https://www.jewishencyclopedia.com/articles/1309-alshech"
+    }
+   ],
+   "explanation": "The source places him in Safed in the second half of the sixteenth century.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C109",
+   "location": "Verse 4",
+   "sentence": "It is a reading taken at a real cost, and it shows what a reader after 70 CE could not stop hearing in the word \"there.\"",
+   "claim": "The Temple's destruction invoked here occurred before the Alshich and is dated to 70 CE.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "EBSCO, “Roman Destruction of the Temple of Jerusalem”",
+     "quote": "",
+     "url": "https://www.ebsco.com/research-starters/anthropology/roman-destruction-temple-jerusalem"
+    },
+    {
+     "source": "Jewish Encyclopedia, “ALSHECH”",
+     "quote": "",
+     "url": "https://www.jewishencyclopedia.com/articles/1309-alshech"
+    }
+   ],
+   "explanation": "The sources date the Second Temple’s destruction to 70 CE and the Alshich to the sixteenth century.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C110",
+   "location": "Verse 5",
+   "sentence": "Some scholars emend it — that is, correct the text — to נוֹרָא, \"awesome.\"",
+   "claim": "Scholars have proposed emending נָאוֹר to נוֹרָא.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "On the Main Line, discussion of Delgado",
+     "quote": "Delgado contends that the Hebrew נאור means to say נורא",
+     "url": "https://onthemainline.blogspot.com/2011/02/aish-das-fiery-law-as-seen-by-one-18th.html"
+    },
+    {
+     "source": "Sefaria sheet, “משמיע ישועה”",
+     "quote": "נאור הוא כמו 'נורא', והוא גם כן מלשון 'אור'",
+     "url": "https://www.sefaria.org.il/sheets/480287?lang=bi"
+    }
+   ],
+   "explanation": "The passages associate נאור with נורא, but do not establish that a scholar proposes changing the written text rather than interpreting it.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C111",
+   "location": "Verse 5",
+   "sentence": "The same night-logic drives the Passover hymn *Vayehi Ba-Ḥatzi ha-Laylah*, attributed to Yannai, the Byzantine-era Palestinian poet.",
+   "claim": "*Vayehi Ba-Ḥatzi ha-Laylah* is attributed to Yannai, a Byzantine-era Palestinian poet.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Hebrew Wikipedia, “ובכן ויהי בחצי הלילה”",
+     "quote": "",
+     "url": "https://he.wikipedia.org/wiki/%D7%95%D7%91%D7%9B%D7%9F_%D7%95%D7%99%D7%94%D7%99_%D7%91%D7%97%D7%A6%D7%99_%D7%94%D7%9C%D7%99%D7%9C%D7%94"
+    }
+   ],
+   "explanation": "The source attributes the hymn to Yannai and identifies him as a fifth- or sixth-century Palestinian poet.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C112",
+   "location": "Verse 5",
+   "sentence": "In Ashkenazi homes it is sung near the end of the Seder.",
+   "claim": "Ashkenazi Seder practice places the hymn near the end.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Sefaria, Pesach Haggadah, Nirtzah",
+     "quote": "",
+     "url": "https://www.sefaria.org/Pesach_Haggadah,_Barech,_Birkat_Hamazon.1?lang=bi"
+    }
+   ],
+   "explanation": "The Haggadah places the hymn in Nirtzah, near the end of the Seder.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C113",
+   "location": "Verse 5",
+   "sentence": "Every line ends on the word לַיְלָה, \"night,\" as it lists God's victories that came while the enemy slept, Sennacherib among them:",
+   "claim": "Every line of the hymn ends with ‘night,’ and its catalogue includes Sennacherib.",
+   "claim_type": "literary_quotation",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "Sefaria, Pesach Haggadah, Nirtzah, “And It Happened at Midnight”",
+     "quote": "יָעַץ מְחָרֵף לְנוֹפֵף אִוּוּי, הוֹבַשְׁתָּ פְגָרָיו בַּלַּיְלָה",
+     "url": "https://www.sefaria.org/Pesach_Haggadah,_Nirtzah,_And_It_Happened_at_Midnight.2?lang=bi"
+    }
+   ],
+   "explanation": "Sennacherib is included, but the quoted line ending אִוּוּי does not end with “night,” so “every line” is false.",
+   "suggested_fix": "Line after line returns to לַיְלָה, \"night,\" as it lists God's victories that came while the enemy slept, Sennacherib among them:",
+   "notes": []
+  },
+  {
+   "id": "C114",
+   "location": "Verse 5",
+   "sentence": "> הִפְחַדְתָּ אֲרַמִּי בְּאֶמֶשׁ לַיְלָה\n> ...\n> יָעַץ מְחָרֵף לְנוֹפֵף אִוּוּי\n> הוֹבַשְׁתָּ פְגָרָיו בַּלַּיְלָה",
+   "claim": "These lines, in this wording, occur in *Vayehi Ba-Ḥatzi ha-Laylah*.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Sefaria, Pesach Haggadah, Nirtzah, “And It Happened at Midnight”",
+     "quote": "",
+     "url": "https://www.sefaria.org/Pesach_Haggadah,_Nirtzah,_And_It_Happened_at_Midnight.2?lang=bi"
+    }
+   ],
+   "explanation": "The cited text contains both quoted passages in that wording.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C115",
+   "location": "Verse 5",
+   "sentence": "The Greek reads ἀπὸ ὀρέων αἰωνίων, \"from everlasting mountains.\"",
+   "claim": "The Greek version of Psalm 76:5 reads ἀπὸ ὀρέων αἰωνίων.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Septuagint, Psalm 75:5",
+     "quote": "",
+     "url": "https://www.septuagint.bible/psalms/-/asset_publisher/vA6C/content/-almos-75"
+    }
+   ],
+   "explanation": "The phrase appears in the Greek verse; the Septuagint numbers this psalm 75.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C116",
+   "location": "Verse 6",
+   "sentence": "Where Hebrew would normally write **הִ**שְׁתּוֹלְלוּ, the psalm writes **אֶ**שְׁתּוֹלְלוּ, with an *aleph* in place of the *he*, an Aramaic habit.",
+   "claim": "This substitution is an Aramaic habit.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Calvin, Commentary on Psalms",
+     "quote": "",
+     "url": "https://www.ccel.org/ccel/calvin/calcom10.vi.i.html"
+    }
+   ],
+   "explanation": "The cited commentary explicitly describes the aleph-for-he substitution as following Chaldaic usage.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C117",
+   "location": "Verse 6",
+   "sentence": "A close parallel in Western art is the climax of Mozart's *Don Giovanni* (1787, libretto by Lorenzo Da Ponte).",
+   "claim": "Mozart's *Don Giovanni* dates to 1787 and has a libretto by Lorenzo Da Ponte.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Wikipedia, “Don Giovanni”",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Don_Giovanni"
+    }
+   ],
+   "explanation": "The source names Da Ponte as librettist and dates the premiere to 1787.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C118",
+   "location": "Verse 6",
+   "sentence": "The libertine has invited to supper the stone statue of the man he killed.",
+   "claim": "Don Giovanni invites the statue of a man he killed to supper.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "University of Michigan School of Music, Theatre & Dance, “Don Giovanni”",
+     "quote": "",
+     "url": "https://smtd.umich.edu/performances-events/archives/2012-2013-production-archive/don-giovanni/"
+    }
+   ],
+   "explanation": "The synopsis identifies the statue as the slain Commendatore and says Giovanni invites it to supper.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C119",
+   "location": "Verse 6",
+   "sentence": "> COMMENDATORE: Dammi la mano in pegno!\n> DON GIOVANNI: Eccola! ... Ohimè!\n> Che gelo è questo mai!",
+   "claim": "The quoted exchange occurs in Da Ponte's libretto with these speakers and wording.",
+   "claim_type": "literary_quotation",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "UniCA, Don Giovanni libretto",
+     "quote": "DON GIOVANNI. Ohimè! COMMENDATORE. Cos'hai? DON GIOVANNI. Che gelo è questo mai!",
+     "url": "https://web.unica.it/unica/it/service/filestore/stream.page?name=don_giovanni_libretto.pdf"
+    }
+   ],
+   "explanation": "The displayed exchange omits the Commendatore’s intervening “Cos'hai?” without marking an omission there.",
+   "suggested_fix": "> COMMENDATORE: Dammi la mano in pegno!\n> DON GIOVANNI: Eccola! ... Ohimè!\n> COMMENDATORE: Cos'hai?\n> DON GIOVANNI: Che gelo è questo mai!",
+   "notes": []
+  },
+  {
+   "id": "C120",
+   "location": "Verse 6",
+   "sentence": "He goes down shouting \"No, no, ch'io non mi pento,\" \"No, no, I do not repent.\"",
+   "claim": "Don Giovanni says the quoted refusal to repent at the end.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Don Giovanni/Atto secondo - Wikisource",
+     "quote": "",
+     "url": "https://it.wikisource.org/wiki/Don_Giovanni/Atto_secondo"
+    }
+   ],
+   "explanation": "The libretto gives Don Giovanni this refusal in the final confrontation.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C121",
+   "location": "Verse 8",
+   "sentence": "Most take them as Rashi does: \"from the moment You are angry.\"",
+   "claim": "Most interpreters take the words as Rashi does.",
+   "claim_type": "other",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "קטגוריה:תהלים עו ח - ויקיטקסט",
+     "quote": "",
+     "url": "https://he.wikisource.org/wiki/%D7%A7%D7%98%D7%92%D7%95%D7%A8%D7%99%D7%94:%D7%AA%D7%94%D7%9C%D7%99%D7%9D_%D7%A2%D7%95_%D7%97"
+    },
+    {
+     "source": "Radak on Psalms 76:8 | The Sefaria Library",
+     "quote": "",
+     "url": "https://www.sefaria.org/Radak_on_Psalms.76.8.1"
+    }
+   ],
+   "explanation": "Rashi and Radak give this reading, but the sources do not establish what most interpreters say.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C122",
+   "location": "Verse 8",
+   "sentence": "In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities after Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, \"and who can stand before You, and who will take my place?\"",
+   "claim": "*Lecha Eli Teshukati* is recited in Edot HaMizrach communities after Kol Nidrei.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "Machzor Yom Kippur Edot HaMizrach | The Sefaria Library",
+     "quote": "Arvit. Prayer Before the ServiceLecha Eli TeshukatiKol NidreiKabbalat ShabbatPrayer Before Yom Kippur ServicesBarechuShema and its BlessingsAmidahSlichotArvit Finale",
+     "url": "https://www.sefaria.org/Machzor_Yom_Kippur_Edot_HaMizrach"
+    }
+   ],
+   "explanation": "The machzor places the piyyut before Kol Nidrei, not after it.",
+   "suggested_fix": "In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities before Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, \"and who can stand before You, and who will take my place?\"",
+   "notes": []
+  },
+  {
+   "id": "C123",
+   "location": "Verse 8",
+   "sentence": "In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities after Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, \"and who can stand before You, and who will take my place?\"",
+   "claim": "Ibn Ezra's *Lecha Eli Teshukati* contains the quoted confession.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Machzor Yom Kippur Edot HaMizrach, Lecha Eli Teshukati | The Sefaria Library",
+     "quote": "",
+     "url": "https://www.sefaria.org/Machzor_Yom_Kippur_Edot_HaMizrach,_Arvit,_Lecha_Eli_Teshukati"
+    }
+   ],
+   "explanation": "The piyyut is attributed there to Ibn Ezra and contains the quoted words. This claim concerns the quotation, not its placement relative to Kol Nidrei.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C124",
+   "location": "Verse 8",
+   "sentence": "The piyyut's expects *not I*, and it immediately begins the alphabetical confession.",
+   "claim": "An alphabetical confession begins immediately after the quoted question in the piyyut.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "מהו הפיוט לך אלי תשוקתי ולמה אומרים אותו לפני כל נדרי?- Kaparot.org.il",
+     "quote": "ומי יעמד לפניך ומי יהיה תמורתי ואיך חשבון לך אתן ואיך אצדק בטענתי ואשמתי וארבתי ובגדתי ובזיתי",
+     "url": "https://kaparot.org.il/why-recite-lecha-eli-teshukati-before-kol-nidrei/"
+    }
+   ],
+   "explanation": "Another question intervenes before the alphabetical confession starts with ואשמתי.",
+   "suggested_fix": "The piyyut expects *not I*, and after another question it begins the alphabetical confession.",
+   "notes": []
+  },
+  {
+   "id": "C125",
+   "location": "Verse 10",
+   "sentence": "Tukaram, the seventeenth-century saint-poet of Maharashtra, wrote in the devotional *abhang* form for the Varkari pilgrims of the god Vitthal.",
+   "claim": "Tukaram was a seventeenth-century Maharashtra saint-poet associated with the abhang form and Varkari devotion to Vitthal.",
+   "claim_type": "date_name_or_history",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "The Great Saints & Their work - Ram Krushna Hari",
+     "quote": "",
+     "url": "http://varkari.weebly.com/the-great-saints--their-work.html"
+    }
+   ],
+   "explanation": "The source supports the date, Maharashtra connection, abhang form, and a Warkari association, but does not identify Vitthal or establish that he wrote for Varkari pilgrims.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C126",
+   "location": "Verse 10",
+   "sentence": "He tied holiness to the same test:",
+   "claim": "The following Marathi lines are attributable to Tukaram.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "जे का रंजले गांजले - वारकरी अभंग",
+     "quote": "",
+     "url": "https://vaarkarichalee.blogspot.com/2020/07/je-ka-ranjale-ganjale-abhang-lyrics.html"
+    }
+   ],
+   "explanation": "The cited abhang contains the lines and identifies Tukaram in its closing stanza.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C127",
+   "location": "Verse 10",
+   "sentence": "\"Those who are tormented and oppressed —\n> whoever calls them his own,\n> know him to be the true saint;\n> know that God is right there.\"",
+   "claim": "The English passage fairly translates the four Marathi lines attributed to Tukaram.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "जे का रंजले गांजले - वारकरी अभंग",
+     "quote": "",
+     "url": "https://vaarkarichalee.blogspot.com/2020/07/je-ka-ranjale-ganjale-abhang-lyrics.html"
+    },
+    {
+     "source": "The Great Saints & Their work - Ram Krushna Hari",
+     "quote": "",
+     "url": "http://varkari.weebly.com/the-great-saints--their-work.html"
+    }
+   ],
+   "explanation": "The English follows the sense of the four Marathi lines.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C128",
+   "location": "Verse 11",
+   "sentence": "The Greek translator heard a different verb altogether: ἑορτάσει σοι, \"shall keep festival to You.\"",
+   "claim": "The Greek Psalter reads ἑορτάσει σοι at Psalm 75:11 in its numbering.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psalm 76 - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Psalm_76"
+    }
+   ],
+   "explanation": "The cited Greek text has ἑορτάσει σοι in the corresponding verse.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C129",
+   "location": "Verse 11",
+   "sentence": "That means reading תָּחֹג, \"celebrate,\" for תַּחְגֹּר, \"gird,\" and the remnant of fury becomes a festival crowd.",
+   "claim": "The proposed Hebrew reading תָּחֹג accurately represents the alleged Greek translator's textual basis.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "Biblical commentary the Old Testament/Volume IV. Poetical Books/Psalms LXII to CL",
+     "quote": "Ewald, like the lxx, reads תּחגּך, ἑορτάσει σοι",
+     "url": "https://en.wikisource.org/wiki/Biblical_commentary_the_Old_Testament/Volume_IV._Poetical_Books/Psalms_LXII_to_CL"
+    }
+   ],
+   "explanation": "The cited proposal gives a Hebrew reading with a suffix, not the exact form תָּחֹג, and presents it as Ewald’s reading alongside the Greek rather than an established Hebrew text used by the translator.",
+   "suggested_fix": "That can be reflected by reading תּחגּך, \"celebrate You,\" for תַּחְגֹּר, \"gird,\" and the remnant of fury becomes a festival crowd.",
+   "notes": []
+  },
+  {
+   "id": "C130",
+   "location": "Verse 11",
+   "sentence": "But later synagogue reading makes the connection easy to hear, since Zechariah 14 is read on the same first day of Sukkot on which this psalm is sung.",
+   "claim": "Zechariah 14 is the first-day Sukkot haftarah, and Psalm 76 is sung on that day in a later synagogue custom.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Psalm 76 - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Psalm_76"
+    },
+    {
+     "source": "Mixed Linguistic Features in a Judeo-Arabic Text from Algeria: The Šarḥ to the Hafṭarot from Constantine - Academia.edu",
+     "quote": "",
+     "url": "https://www.academia.edu/35688537/Mixed_Linguistic_Features_in_a_Judeo_Arabic_Text_from_Algeria_The_%C5%A0ar%E1%B8%A5_to_the_Haf%E1%B9%ADarot_from_Constantine"
+    }
+   ],
+   "explanation": "The sources place the psalm’s recitation and the Zechariah 14 haftarah on the first day of Sukkot.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C131",
+   "location": "Verse 11",
+   "sentence": "Proposed corrections that read \"Edom\" for אָדָם or the city Hamath for חֲמַת are clever and unnecessary.",
+   "claim": "Edom and Hamath have actually been proposed as alternative readings by textual interpreters.",
+   "claim_type": "grammar_or_textual",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "PSALMS 76 - Free Bible Commentary",
+     "quote": "",
+     "url": "https://freebiblecommentary.org/old_testament_studies/VOL05BOT/VOL05B_08.html"
+    },
+    {
+     "source": "Psalms - The New American Bible - IntraText",
+     "quote": "",
+     "url": "https://www.intratext.com/IXT/ENG0832/_PRR.HTM"
+    }
+   ],
+   "explanation": "The commentary reports both proposed place-name readings, and the cited Bible translation uses them.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C132",
+   "location": "Verse 13",
+   "sentence": "Two independent compositions place יִבְצֹר רוּחַ נְגִידִים beside Isaiah 63's warrior מִבָּצְרָה... חֲמוּץ בְּגָדִים, \"crimsoned in garments from Bozrah\" (Isa 63:1): the Ashkenazi Rosh Hashanah *yotzer* and a Hasidic Shabbat *zemer* that names both Edom and Bozrah (quoted in the liturgical section).",
+   "claim": "An Ashkenazi Rosh Hashanah yotzer places the Psalm 76 phrase alongside language from Isaiah 63.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "No source was provided for the Rosh Hashanah yotzer or its wording.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C133",
+   "location": "Verse 13",
+   "sentence": "Two independent compositions place יִבְצֹר רוּחַ נְגִידִים beside Isaiah 63's warrior מִבָּצְרָה... חֲמוּץ בְּגָדִים, \"crimsoned in garments from Bozrah\" (Isa 63:1): the Ashkenazi Rosh Hashanah *yotzer* and a Hasidic Shabbat *zemer* that names both Edom and Bozrah (quoted in the liturgical section).",
+   "claim": "A separate Hasidic Shabbat zemer names Edom and Bozrah and places them alongside the Psalm 76 phrase.",
+   "claim_type": "rabbinic_or_liturgical",
+   "verdict": "contradicted",
+   "evidence": [
+    {
+     "source": "תולדות: בבואו מאדום - על מה שהיה ועל מה שקורה",
+     "quote": "\"בבואו מאדום חמוץ בגדים. זבח לו בבצרה וטבח לו בבוגדים. ויז נצחם מלבושיו להאדים. ובכחו הגדול יבצור רוח נגידים. הגה ברוחו הקשה ביום קדים\". קטע הפיוט הזה, בית מתוך \"ברוך ה' יום יום\" שהוא חלק מזמירות השבת ברוב סידורי התפילה האשכנזיים",
+     "url": "https://e-mago.co.il/magazine/toldot-6/"
+    }
+   ],
+   "explanation": "The stanza and its juxtaposition are documented, but the source identifies the song with Ashkenazi Shabbat zemirot, not as a Hasidic composition. The researcher’s note likewise identifies it as an early Ashkenazi composition.",
+   "suggested_fix": "Two independent compositions place יִבְצֹר רוּחַ נְגִידִים beside Isaiah 63's warrior מִבָּצְרָה... חֲמוּץ בְּגָדִים, \"crimsoned in garments from Bozrah\" (Isa 63:1): the Ashkenazi Rosh Hashanah *yotzer* and an Ashkenazi Shabbat *zemer* that names both Edom and Bozrah (quoted in the liturgical section).",
+   "notes": []
+  },
+  {
+   "id": "C134",
+   "location": "Verse 13",
+   "sentence": "On 1 June 1679, an outlawed field-meeting of Scottish Covenanters near Loudoun Hill saw government dragoons under John Graham of Claverhouse riding toward them.",
+   "claim": "The described Covenanter encounter took place on 1 June 1679.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Battle of Drumclog - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Battle_of_Drumclog"
+    },
+    {
+     "source": "Battle of Bothwell Bridge - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Battle_of_Bothwell_Bridge"
+    }
+   ],
+   "explanation": "Both sources date the encounter to 1 June 1679.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C135",
+   "location": "Verse 13",
+   "sentence": "On 1 June 1679, an outlawed field-meeting of Scottish Covenanters near Loudoun Hill saw government dragoons under John Graham of Claverhouse riding toward them.",
+   "claim": "The encounter began at an outlawed Covenanter field-meeting near Loudoun Hill.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Battle of Drumclog - Wikipedia",
+     "quote": "",
+     "url": "https://en.wikipedia.org/wiki/Battle_of_Drumclog"
+    },
+    {
+     "source": "Robert the Bruce and the REAL Loudoun Hill | East Ayrshire Council News",
+     "quote": "",
+     "url": "https://www.east-ayrshire.gov.uk/CouncilAndGovernment/AboutTheCouncil/News/Newsarticle.aspx?p=20563"
+    }
+   ],
+   "explanation": "The sources describe a Covenanter religious gathering at Loudoun Hill held in defiance of government persecution.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C136",
+   "location": "Verse 13",
+   "sentence": "On 1 June 1679, an outlawed field-meeting of Scottish Covenanters near Loudoun Hill saw government dragoons under John Graham of Claverhouse riding toward them.",
+   "claim": "Government dragoons approaching the meeting were under John Graham of Claverhouse.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "Drumclog - Reformation History",
+     "quote": "",
+     "url": "https://reformationhistory.org/drumclog.html"
+    },
+    {
+     "source": "The Psalmody of Covenanting Times. - the Church Service Society",
+     "quote": "",
+     "url": "https://www.churchservicesociety.org/sites/default/files/The%20Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "The sources identify the approaching troops as dragoons under Claverhouse.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C137",
+   "location": "Verse 13",
+   "sentence": "Covenanter tradition remembers that before engaging, they sang Psalm 76 in the Scottish metrical version:",
+   "claim": "Covenanter tradition records the group singing Psalm 76 before this engagement.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Psalmody of Covenanting Times. - the Church Service Society",
+     "quote": "",
+     "url": "https://www.churchservicesociety.org/sites/default/files/The%20Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "The account says they sang Psalm 76 while marching to engage the enemy.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C138",
+   "location": "Verse 13",
+   "sentence": "Covenanter tradition remembers that before engaging, they sang Psalm 76 in the Scottish metrical version:",
+   "claim": "The version reportedly sung was the Scottish metrical Psalm 76.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "BWB - T3 CBR 482 | PDF | Religious Leader | Ecclesiastical Titles - Scribd",
+     "quote": "",
+     "url": "https://www.scribd.com/document/2401205/BWB-T3-CBR-482"
+    },
+    {
+     "source": "The Psalmody of Covenanting Times. - the Church Service Society",
+     "quote": "",
+     "url": "https://www.churchservicesociety.org/sites/default/files/The%20Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "The accounts identify Psalm 76 and give lines of its Scottish metrical version.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C139",
+   "location": "Verse 13",
+   "sentence": "In Judah's land God is well known,\nhis name's in Israel great:\nIn Salem is his tabernacle,\nin Sion is his seat.",
+   "claim": "These four lines reproduce the Scottish metrical version attributed to the Covenanters.",
+   "claim_type": "literary_quotation",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The MacMillan Homestead - The Cedarville Herald, Volume 40, Numbers 1-26",
+     "quote": "",
+     "url": "https://publications.cedarville.edu/archives/mcmillan/homestead/files/assets/basic-html/page-17.html"
+    },
+    {
+     "source": "The Psalmody of Covenanting Times. - the Church Service Society",
+     "quote": "",
+     "url": "https://www.churchservicesociety.org/sites/default/files/The%20Psalmody%20of%20Covenanting%20Times.pdf"
+    }
+   ],
+   "explanation": "The lines agree with the cited versions apart from inconsequential capitalization, punctuation and the elision of “Israel” as “Isr'el” in one source.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C140",
+   "location": "Verse 13",
+   "sentence": "Then they charged and routed the dragoons.",
+   "claim": "The Covenanters charged and routed the dragoons after the reported singing.",
+   "claim_type": "date_name_or_history",
+   "verdict": "supported",
+   "evidence": [
+    {
+     "source": "The Psalmody of Covenanting Times. - the Church Service Society",
+     "quote": "",
+     "url": "https://www.churchservicesociety.org/sites/default/files/The%20Psalmody%20of%20Covenanting%20Times.pdf"
+    },
+    {
+     "source": "Drumclog - Reformation History",
+     "quote": "",
+     "url": "https://reformationhistory.org/drumclog.html"
+    }
+   ],
+   "explanation": "The reported singing accompanied their march to engage the troops; the accounts say the Covenanters won the ensuing fight.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C141",
+   "location": "Verse 13",
+   "sentence": "For these men, persecuted by a king who claimed authority over their church, the psalm's promise that God \"prunes the spirit of princes\" was a political creed.",
+   "claim": "The Covenanters in this episode were persecuted under a king who claimed authority over their church.",
+   "claim_type": "date_name_or_history",
+   "verdict": "unverifiable",
+   "evidence": [
+    {
+     "source": "The MacMillan Homestead - The Cedarville Herald, Volume 40, Numbers 1-26",
+     "quote": "This devotion to Christ as “King,” as well as “Saviour,” doubtless grew out of their conflict with earthly kings in their struggle for religious liberty.",
+     "url": "https://publications.cedarville.edu/archives/mcmillan/homestead/files/assets/basic-html/page-17.html"
+    }
+   ],
+   "explanation": "The passage establishes conflict with kings over religious liberty, but does not establish the specific assertion that the king claimed authority over their church.",
+   "suggested_fix": null,
+   "notes": []
+  },
+  {
+   "id": "C142",
+   "location": "Verse 13",
+   "sentence": "For these men, persecuted by a king who claimed authority over their church, the psalm's promise that God \"prunes the spirit of princes\" was a political creed.",
+   "claim": "These Covenanters treated Psalm 76’s final verse as a political creed.",
+   "claim_type": "date_name_or_history",
+   "verdict": "unverifiable",
+   "evidence": [],
+   "explanation": "No source establishes how these Covenanters understood or used the psalm’s final verse.",
+   "suggested_fix": null,
+   "notes": []
+  }
+ ],
+ "sources": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  null,
+  null,
+  null,
+  null,
+  null,
+  null
+ ],
+ "queries": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  null,
+  null,
+  null,
+  null,
+  null,
+  null
+ ]
+}

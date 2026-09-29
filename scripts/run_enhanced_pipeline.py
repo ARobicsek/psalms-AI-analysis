@@ -950,7 +950,7 @@ def run_enhanced_pipeline(
     # =====================================================================
     fact_check_prompt = None
     if fact_check and not smoke_test and print_ready_file.exists():
-        logger.info("[STEP 5a¾] Fact check (gpt-6-sol, web search)...")
+        logger.info("[STEP 5a¾] Fact check (staged: gpt-6-luna local, gpt-6-sol web + review)...")
         print(f"\n{'='*80}")
         print(f"STEP 5a¾: Fact Check (Session 385)")
         print(f"{'='*80}\n")

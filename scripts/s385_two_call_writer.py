@@ -3,8 +3,8 @@ Session 385 — the two-call "forest" writer on Psalm 76 (experimental; archive 
 
   Call 1  the INTRODUCTION ESSAY, under the S384 P1 ("forest") instructions, byte-identical
           to the trials.
-  Call 2  the rest of the guide (liturgical section, verse-by-verse commentary, reader
-          questions), as a second turn of the same conversation: the essay is the assistant
+  Call 2  the rest of the guide (liturgical section, verse-by-verse commentary; no reader
+          questions, which the pipeline retired), as a second turn of the same conversation: the essay is the assistant
           turn, the new instructions (VERSE_INSTRUCTIONS below) are the next user turn.
 
 Every call sends the same first user turn, [B's inputs block][P1 instructions], with a
@@ -74,10 +74,10 @@ LIT_MARKER = "---LITURGICAL-SECTION-START---"
 # ---------------------------------------------------------------------------
 
 VERSE_INSTRUCTIONS = """## ═══════════════════════════════════════════════════════════════════════════
-## NEXT: THE REST OF THE GUIDE — LITURGY, VERSE COMMENTARY, QUESTIONS
+## NEXT: THE REST OF THE GUIDE — LITURGY AND VERSE COMMENTARY
 ## ═══════════════════════════════════════════════════════════════════════════
 
-Your introduction essay is finished. It will be printed first, exactly as you wrote it, and the reader will have just read it. Now write the rest of the study guide: a short section on the psalm in Jewish liturgy, the verse-by-verse commentary, and a few questions for the reader.
+Your introduction essay is finished. It will be printed first, exactly as you wrote it, and the reader will have just read it. Now write the rest of the study guide: a short section on the psalm in Jewish liturgy, then the verse-by-verse commentary.
 
 Everything in the instructions you were given for the essay still holds: who you are writing as, READ LIKE A POET, BRING THE WHOLE LIBRARY and its two tests, COMMENTATORS, LITERARY ECHOES, and WRITING (including "you are the author" — never mention the research or anything behind it). What follows is what changes when you move from the essay to the verses.
 
@@ -132,10 +132,6 @@ Open your response with the exact marker `---LITURGICAL-SECTION-START---` on its
 
 The rites, which are easy to confuse: **Nusach Ashkenaz** is the rite of non-Hasidic Ashkenazi Jews. **Nusach Sefard** is the HASIDIC rite, used by Ashkenazi Hasidim; never call it "Sephardic." **Edot HaMizrach** is the rite of the Sephardic and Middle Eastern communities. When the research says "Sefard," it means the Hasidic rite.
 
-## QUESTIONS FOR THE READER
-
-End with 4–6 questions to be printed before the commentary: specific, answerable from the guide, each pointing toward something the essay or the notes will show.
-
 ## OUTPUT
 
 Return exactly this shape, with nothing before the marker:
@@ -160,11 +156,6 @@ Return exactly this shape, with nothing before the marker:
 
 **Verse 2**
 ...
-
-### REFINED READER QUESTIONS
-
-1. ...
-2. ...
 """
 
 
@@ -389,11 +380,10 @@ def check_structure(rest: str, n_verses: int) -> list:
             problems.append(f"verse(s) {lo}-{hi}: fewer '> ' lines than verses")
     if sorted(covered) != list(range(1, n_verses + 1)):
         problems.append(f"verses covered {sorted(covered)} != 1..{n_verses}")
-    m = re.search(r"(?ms)^#{1,4}\s*REFINED READER QUESTIONS\s*$(.*)", rest)
-    if not m:
-        problems.append("no REFINED READER QUESTIONS")
-    elif len(re.findall(r"(?m)^\s*\d+\.\s+\S", m.group(1))) < 4:
-        problems.append("fewer than 4 reader questions")
+    # Reader questions were retired from the pipeline long ago; production strips them whenever
+    # none are supplied. A stray section here means the model added one unasked.
+    if re.search(r"(?mi)^#{1,4}\s*(REFINED )?READER QUESTIONS", rest):
+        problems.append("contains a reader-questions section (retired; should not be there)")
     return problems
 
 
@@ -418,10 +408,6 @@ def write_guide_files(vdir: Path, essay_text: str, rest: str) -> dict:
     g = parse_guide(full)
     (vdir / f"psalm_{PSALM:03d}_edited_intro.md").write_text(g["introduction"], encoding="utf-8")
     (vdir / f"psalm_{PSALM:03d}_edited_verses.md").write_text(g["verse_commentary"], encoding="utf-8")
-    qs = [m.group(1).strip() for m in re.finditer(r"(?m)^\s*\d+\.\s+(.+)$", g["reader_questions"])]
-    (vdir / f"psalm_{PSALM:03d}_reader_questions.json").write_text(
-        json.dumps({"psalm_number": PSALM, "curated_questions": qs, "source": "s385_two_call"},
-                   ensure_ascii=False, indent=2), encoding="utf-8")
     return g
 
 
@@ -633,9 +619,9 @@ def build_docx(vdir: Path, title_note: str, thinking_parts: list, out_path: Path
     saved_db = dg.TanakhDatabase
     dg.TanakhDatabase = _StubDB
     try:
-        qfile = vdir / f"psalm_{PSALM:03d}_reader_questions.json"
+        # No reader questions: the pipeline retired them.
         Compact(PSALM, vdir / f"psalm_{PSALM:03d}_edited_intro.md", vdir / f"psalm_{PSALM:03d}_edited_verses.md",
-                STATS_FILE, out_path, qfile if qfile.exists() else None).generate()
+                STATS_FILE, out_path, None).generate()
     finally:
         dg.TanakhDatabase = saved_db
     print(f"  DOCX: {out_path.relative_to(ROOT)}")
@@ -644,7 +630,7 @@ def build_docx(vdir: Path, title_note: str, thinking_parts: list, out_path: Path
 
 THINKING_NOTE = ("The summarized reasoning Claude Opus 5.5 returned while writing this guide (the API's "
                  "thinking display, not a verbatim trace), in two parts: the essay call and the call that "
-                 "wrote the liturgy, verse commentary and questions. This guide has NOT been copy edited.")
+                 "wrote the liturgy and verse commentary. This guide has NOT been copy edited.")
 
 
 def docx_for_variant(v: str) -> Path | None:

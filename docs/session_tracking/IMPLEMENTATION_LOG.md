@@ -9,6 +9,71 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 386 (2026-09-29): the two-call writer ran; the fact checker from $4.87 to $1.83
+
+**Repo.** S385 had run in the cloud on `claude/exciting-mendel-77ecwv`. Local `main` equalled `origin/main`, so it was
+fast-forwarded to the branch (10 commits) and pushed at the end of this session.
+
+**Two-call forest writer on Ps 76** (`scripts/s385_two_call_writer.py`): **$2.2471** (essay $1.0924, 97 s, cache write
+185,595; verses_new $0.5253, 217 s; verses_F $0.6294, 274 s; both verse calls cache_read 185,595 / write 0). No keep-alive
+needed. Structure OK. Metrics against K (S383 one-call guide): essay 1,446 / 2,158 (new) / 1,987 (F) words; liturgy 752 /
+640 / 652; verses 6,261 / 5,029 / 5,666; notes 240–670 / 225–425 / 209–504; essay↔verse 6-grams 24 / 36 / 18; Greek in
+4 / 3 / 1 of 13 notes. DOCXs copied to `Documents/Psalm study guide/`. The author: *"all quite good. I'm satisfied with our
+approach"*, with one fix: **the reader-questions section**, retired from the pipeline long ago (production strips it when
+no questions are supplied, `master_editor.py` ~1174) and re-added by S385's `VERSE_INSTRUCTIONS`. Removed from the
+instructions, the output shape, `write_guide_files`, and the DOCX; `check_structure` now reports a questions section as a
+problem. DOCXs rebuilt at $0 and re-copied; verified no questions paragraph remains.
+
+**Probe A** (the S385 checker on the S383 guide): **$4.8748**, 992 s, 296 claims (264 / 25 / 7), 77 searches, 171 lookups.
+PASS: the רשף plural sentence contradicted with Ps 78:48 לָרְשָׁפִים; Minchat Shai's undotted פ supported. A duplicate
+record also marked the same sentence supported (its second half). Of 25 contradictions ~11 are real (Shabbat 88a's Ḥizkiya
+as "King Hezekiah"; Lecha Eli before Kol Nidrei; נודע/נורא two letters; the piyyut quotation missing יָד לְ; "straight into"
+the confession; Malbim's anger ≠ a proper name; Salem; Resheph "of the arrow"; the Targum has both light and fear…), some
+pedantic (Edom's vowels, the metrical "Isr'el"), and **two false positives on the guide's deliberate אֱלֹקִים**. Cost:
+uncached input $2.49 (1.25M), cached $0.65 (3.24M), output $0.97, search fees $0.77.
+
+**The cost work** (all on Probe A; `archive/psalm_76_S386_fact_check_cost/`; table and reasoning in
+`docs/plans/S386_FACT_CHECK_COST.md`):
+- luna_baseline $0.59 (17 contradicted, 4 divine-name false alarms; misses web and rabbinic errors).
+- staged_v1 (luna local → sol web → sol review) $1.39; 8 contradicted; luna marked 284 claims supported, trusted the
+  bundle's liturgy summaries, never listed the Shabbat 88a sentence.
+- sol_v2 (sol local, no bundle in context, bundle via tools) **$5.11**: 560 lookups, each output replayed on every later
+  round; 70 claims to the web (103 searches). Best recall so far: Asaph's guild is Levite (Chronicles), not Josephite;
+  Josh 14:15 is the Caleb story, the conquest refrain is 11:23; the Vilna Gaon and Edot HaMizrach Sukkot customs
+  conflated; the selichah is BaHaB, not pre-Rosh-Hashanah; the zemer is a 10th-century composition, not Hasidic; Don
+  Giovanni's line precedes the sinking.
+- sol_v3 (a 72K-char shared evidence block: all 92 commentator entries, 52K chars, + 56 cited verses) **$5.86**: local
+  $2.07 (3.15M cached replay), web $3.79 (122 searches; 959K tokens of search results at Sol's input rate).
+- Gemini 3.1 Pro as web judge (grounded, `high`): $1.28, **5 searches for 71 claims**, the rest from memory; reversed the
+  Kol Nidrei catch. Gemini 3.8 Flash as gatherer: $0.08 but **no grounding metadata at all**, passages from memory;
+  probe: 3.8 Flash/3.5 Flash/3.1 Pro (low) do not search, `gemini-3-flash-preview` does (4 queries). Gather-only probe with
+  the new page check: 33/71 claims with a passage really on its page; `RECITATION` blocked batches.
+- v4 (per-chunk evidence, triage, compact supported, luna gather + page check + sol judge) $3.16: local $1.59, gather
+  $1.12 ($1.01 of it the fee on 101 searches), judge $0.45. 18 contradicted.
+- **v5 (shipped) $1.8293**: strict triage (24 to the web), ≤ 1 search per claim (13 searches), smaller lookups. Local
+  $1.56, gather $0.15, judge $0.12. 22 contradicted, ~17 real; passed "King Hezekiah" this run (caught by three others).
+- v6 (v5 at `medium`) $1.42: 12 contradicted, half the catches, one false alarm (Hebrew vs English verse numbers).
+
+**Code.** `src/agents/fact_checker.py`: staged `check()`; `LOCAL_INSTRUCTIONS` / `GATHER_INSTRUCTIONS` /
+`WEB_JUDGE_INSTRUCTIONS` / `REVIEW_INSTRUCTIONS` / `WEB_INSTRUCTIONS` (direct gpt web path); `DIVINE_NAMES_NOTE`,
+`MATERIALITY_NOTE`; `LOCAL_SCHEMA` (adds `needs_web`), `FINAL_SCHEMA`, `GATHER_SCHEMA(_STRICT)`; `merge_stage_results`
+(an unreviewed or unmatched claim never keeps a stage-1 contradicted), `claims_block`, `commentary_entries(verses)`,
+`chunk_verses`, `cited_refs`, `shared_evidence`, `search_bundle` (Hebrew on consonants), `lookup_text`, `quote_on_page`,
+`fetch_page_text` (pypdf for PDFs), `verify_sources`; `_gemini_web` (kept, behind the page check); per-stage and per-tool
+accounting in `meta.stages`. `validate_records(allowed=…)`. `cost_tracker.py`: `gpt-6-luna`, `gemini-3.8-flash` (+ its 2026
+promo in `INTRO_PRICING`). `run_fact_checker.py`: `--web-model`, `--review-model`, per-stage print.
+`run_enhanced_pipeline.py`: STEP 5a¾ log line. `pypdf` installed in the venv. **223 tests pass** (10 new).
+
+**Spend ≈ $28.5**: writer $2.25; Probe A $4.87; luna $0.59; staged $1.39; v2 $5.11; v3 $5.86; Gemini Pro web $1.28;
+Flash web+judge $0.49; probes ≈ $0.3; v4 $3.16; v5 $1.83; v6 $1.42.
+
+**Open.** `--fact-check` still default OFF. Essay-F test and the with/without-report copy-edit comparison not run. Web-search
+fees are outside CostTracker. GPT-6 Sol's durable price is an assumption (OpenAI's page lists $2/$10 as standard). Next
+(author): the whole updated pipeline on Ps 77 with an editors' telemetry report and full cost tracking —
+`docs/plans/NEXT_SESSION_PROMPT_session_387.md`.
+
+---
+
 ## Session 385 (2026-09-28): the author's blind read of the essay trials; the two-call forest writer (built, not run); the copy editor and fact-checking
 
 **Author's verdict (blind)**: best F, C; middle I=J<K<H<D; weaker A, E, B, G. Key and analysis:

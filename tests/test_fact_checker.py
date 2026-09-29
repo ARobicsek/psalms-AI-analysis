@@ -350,3 +350,105 @@ def test_an_empty_or_missing_db_is_never_used(tmp_path):
     assert usable_db(empty)
     r = search_tanakh("לרשפים", empty)
     assert r["count"] == 1 and r["refs"] == ["Psalms 78:48"]
+
+
+# ---------------------------------------------------------------------------
+# Session 386: the staged checker (luna local → sol web / sol review)
+# ---------------------------------------------------------------------------
+
+def _srec(sentence, verdict, claim="c", **kw):
+    return dict({"location": "Verse 1", "sentence": sentence, "claim": claim, "claim_type": "other",
+                 "verdict": verdict, "evidence": [{"source": "x", "quote": "q", "url": None}],
+                 "explanation": "", "suggested_fix": None}, **kw)
+
+
+def test_needs_web_is_a_stage_one_verdict_only():
+    from src.agents.fact_checker import LOCAL_SCHEMA, FINAL_SCHEMA
+    enum = lambda s: s["properties"]["claims"]["items"]["properties"]["verdict"]["enum"]  # noqa: E731
+    assert "needs_web" in enum(LOCAL_SCHEMA)
+    assert "needs_web" not in enum(FINAL_SCHEMA)
+    # validate_records normalises a stray needs_web to unverifiable unless it is allowed
+    assert validate_records([_srec("s", "needs_web")])[0]["verdict"] == "unverifiable"
+    from src.agents.fact_checker import VERDICTS
+    assert validate_records([_srec("s", "needs_web")], allowed=VERDICTS + ("needs_web",))[0]["verdict"] == "needs_web"
+
+
+def test_merge_replaces_needs_web_and_contradicted_in_guide_order():
+    from src.agents.fact_checker import merge_stage_results
+    local = [_srec("A.", "supported"), _srec("B.", "needs_web"), _srec("C.", "contradicted"), _srec("D.", "unverifiable")]
+    web = [_srec("B.", "supported")]
+    review = [_srec("C.", "supported", explanation="pedantic")]
+    out = merge_stage_results(local, web, review)
+    assert [r["sentence"] for r in out] == ["A.", "B.", "C.", "D."]
+    assert [r["verdict"] for r in out] == ["supported", "supported", "supported", "unverifiable"]
+    assert [r["stage"] for r in out] == ["local", "web", "review", "local"]
+    assert out[2]["first_verdict"] == "contradicted"
+
+
+def test_an_unreviewed_contradiction_never_reaches_the_copy_editor():
+    """If stage 3 returns nothing for a claim, it must NOT keep stage 1's contradicted verdict."""
+    from src.agents.fact_checker import merge_stage_results
+    out = merge_stage_results([_srec("C.", "contradicted"), _srec("B.", "needs_web")], [], [])
+    assert [r["verdict"] for r in out] == ["unverifiable", "unverifiable"]
+    assert "CONTRADICTED: none." in format_copy_editor_prompt(out)
+
+
+def test_every_stage_is_told_the_divine_name_convention():
+    from src.agents import fact_checker as fc
+    for name in ("LOCAL_INSTRUCTIONS", "WEB_INSTRUCTIONS", "REVIEW_INSTRUCTIONS"):
+        assert "{divine_names}" in getattr(fc, name) and "{materiality}" in getattr(fc, name), name
+    for form in ("ה׳", "אֱלֹקִים", "קֵל", "צְבָקוֹת", "שַׁקַּי", "אֱלוֹקַּ"):
+        assert form in fc.DIVINE_NAMES_NOTE, form
+
+
+def test_claims_block_carries_evidence_only_for_review():
+    import json as _json
+    from src.agents.fact_checker import claims_block
+    r = _srec("S.", "contradicted", explanation="because")
+    plain = _json.loads(claims_block([r]))[0]
+    rev = _json.loads(claims_block([r], with_evidence=True))[0]
+    assert "first_checker_evidence" not in plain and plain["n"] == 1
+    assert rev["first_checker_finding"] == "because" and rev["first_checker_evidence"]
+
+
+def test_search_bundle_matches_hebrew_on_consonants_and_names_the_section():
+    from src.agents.fact_checker import search_bundle
+    bundle = "## Lexicon\n### רֶשֶׁף [BDB]\nflame, bolt\n\n### Liturgy\nLecha Eli is said on Yom Kippur.\n"
+    heb = search_bundle(bundle, "רשף")
+    assert heb["matches"] == 1 and heb["passages"][0]["section"].startswith("רֶשֶׁף")
+    eng = search_bundle(bundle, "lecha eli")
+    assert eng["matches"] == 1 and eng["passages"][0]["section"] == "Liturgy"
+    assert "error" in search_bundle("", "x") and "error" in search_bundle(bundle, " ")
+
+
+def test_chunk_verses_reads_single_and_range_headers():
+    from src.agents.fact_checker import chunk_verses
+    assert chunk_verses("**Verse 3**\ntext\n**Verses 5–6**\nmore") == {3, 5, 6}
+    assert chunk_verses("## Introduction\nNo headers here; **Verse 2.** in prose does not count.") == set()
+
+
+def test_commentary_entries_can_be_scoped_to_verses():
+    from src.agents.fact_checker import commentary_entries
+    b = "### 76:3 — Rashi\nA\n\n### 76:4 — Rashi\nB\n\n### 76:4 — Malbim\nC\n## Next\n"
+    assert "76:3" in commentary_entries(b) and "76:4 — Malbim" in commentary_entries(b)
+    only4 = commentary_entries(b, {4})
+    assert "76:3" not in only4 and "B" in only4 and "C" in only4
+
+
+def test_quote_on_page_tolerates_pointing_and_punctuation_but_not_invention():
+    from src.agents.fact_checker import quote_on_page
+    page = "<p>וּמִי יַעֲמֹד לְפָנֶיךָ, וּמִי יִהְיֶה תְמוּרָתִי; וְאֵיךְ חֶשְׁבּוֹן לְךָ אֶתֵּן</p>"
+    assert quote_on_page("ומי יעמד לפניך ומי יהיה תמורתי", page)
+    assert quote_on_page("He spins from the bars, but there’s no cage to him",
+                         "He spins from the bars, but there's no cage to him")
+    assert not quote_on_page("ומי יעמד לפניך ומיד מתחיל הווידוי אשמנו בגדנו", page)
+    # under five words: exact (normalised) match only, no shingle tolerance
+    assert quote_on_page("a short", "this is a short page")
+    assert not quote_on_page("a shorter one", "this is a short page")
+
+
+def test_gather_schema_asks_for_sources_not_verdicts():
+    from src.agents.fact_checker import GATHER_SCHEMA_STRICT, GATHER_INSTRUCTIONS
+    item = GATHER_SCHEMA_STRICT["properties"]["claims"]["items"]["properties"]
+    assert "verdict" not in item and "sources" in item
+    assert "do NOT give verdicts" in GATHER_INSTRUCTIONS

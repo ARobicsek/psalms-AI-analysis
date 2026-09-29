@@ -16,18 +16,24 @@ claim, verifies each against evidence, and returns verdicts WITH the evidence.
 The copy editor is then told to correct facts ONLY where this report says
 `contradicted` (see `format_copy_editor_prompt`). Its system prompt is untouched.
 
-Model: gpt-6-sol on the OpenAI Responses API, reasoning effort `high`, a
-different family from the writer so it does not share the writer's false
-memories. Tools:
-  - OpenAI's built-in web search (outside-the-Bible claims);
+Models (Session 386, staged for cost; the note above DIVINE_NAMES_NOTE has the
+measurements), all on the OpenAI Responses API, a different family from the writer
+so they do not share the writer's false memories:
+  stage 1  gpt-6-luna, research bundle + $0 lookups, no web: every claim the
+           materials, the Bible and the commentators can settle;
+  stage 2  gpt-6-sol + web search: only the claims stage 1 hands on as needs_web;
+  stage 3  gpt-6-sol: re-judges every stage-1 `contradicted` before it can reach
+           the copy editor.
+$0 lookup tools:
   - get_verse(ref)          tanakh.db when present, else Sefaria;
   - get_commentary(c, ref)  the research bundle first, else Sefaria;
   - search_tanakh(hebrew)   occurrence lists for "only here" claims
-                            (tanakh.db when present, else Sefaria's search).
+                            (tanakh.db when present, else Sefaria's search);
+  - get_text(ref)           any Sefaria text (Talmud, midrash, siddur).
+Biblical-quotation WORDING is not checked here: verify_citations does it at $0.
 
-The guide is checked in section-aligned CHUNKS, each call carrying the whole
-research bundle as a cached prefix (bundle + instructions first, excerpt last),
-so every chunk after the first reads the ~130K-token bundle at the cache rate.
+Stage 1 checks the guide in section-aligned CHUNKS, each call carrying the whole
+research bundle as a cached prefix (bundle + instructions first, excerpt last).
 
 Pure functions (chunking, ref parsing, bundle lookup, JSON validation, report
 and prompt formatting) are unit-tested in tests/test_fact_checker.py.
@@ -55,8 +61,17 @@ try:  # the project's .env (OPENAI_API_KEY) wherever the checker is imported fro
 except ImportError:  # pragma: no cover
     pass
 
-DEFAULT_MODEL = "gpt-6-sol"
+# Stage models (Session 386; see the note above DIVINE_NAMES_NOTE).
+DEFAULT_MODEL = "gpt-6-sol"           # stage 1, local evidence (no web)
 DEFAULT_EFFORT = "high"
+DEFAULT_WEB_MODEL = "gpt-6-luna"         # stage 2a: GATHERS sources with OpenAI web search (no verdicts)
+DEFAULT_WEB_EFFORT = "medium"
+DEFAULT_WEB_JUDGE_MODEL = "gpt-6-sol"    # stage 2b: judges the claims from the gathered quotes
+DEFAULT_REVIEW_MODEL = None           # stage 3: only when stage 1 runs on a weaker model (luna)
+DEFAULT_REVIEW_EFFORT = "high"
+WEB_CONTEXT_SIZE = "low"              # search content is ~all of the web stage's input tokens
+WEB_BATCH = 8
+REVIEW_BATCH = 12
 VERDICTS = ("supported", "contradicted", "unverifiable")
 CLAIM_TYPES = (
     "biblical_quotation",
@@ -75,6 +90,15 @@ CLAIM_TYPES = (
 # model rates." The content tokens arrive inside the response's input_tokens, so
 # they are already priced by price_tokens(); only the per-call fee is added here.
 WEB_SEARCH_USD_PER_CALL = 10.00 / 1000
+# Gemini API pricing page (ai.google.dev/gemini-api/docs/pricing, read 2026-09-28), Gemini
+# 3.x: "5,000 free search requests per month (shared across all Gemini 3.x models), then
+# $14 per 1,000 requests", and "Retrieved context (text or images) provided by Grounding
+# with Google Search is not charged as input tokens." That second sentence is the whole
+# reason the web stage moved to Gemini in Session 386: on OpenAI the search content
+# (~7.9K tokens a search, billed as input) was ~half of the web stage's cost. Queries are
+# counted and reported; cost_usd counts them as FREE (inside the monthly allowance), and
+# `gemini_search_cost_if_paid` says what they would cost past it.
+GEMINI_SEARCH_USD_PER_QUERY_PAID = 14.00 / 1000
 
 SEFARIA = "https://www.sefaria.org"
 REPORT_MARKER = "FACT-CHECK REPORT (evidence-based"
@@ -367,7 +391,7 @@ def sentence_in_guide(sentence: str, guide: str) -> bool:
     return a2 in b2 or (len(a2) > 60 and a2[:60] in b2)
 
 
-def validate_records(raw: List[Dict], guide: str = "") -> List[Dict]:
+def validate_records(raw: List[Dict], guide: str = "", allowed: Tuple[str, ...] = VERDICTS) -> List[Dict]:
     """Normalise model records and enforce the evidence rule: a `contradicted`
     verdict with no quoted evidence is DOWNGRADED to `unverifiable` and marked,
     never passed to the copy editor as a licence to change the text."""
@@ -386,7 +410,7 @@ def validate_records(raw: List[Dict], guide: str = "") -> List[Dict]:
             "suggested_fix": (r.get("suggested_fix") or None),
             "notes": [],
         }
-        if rec["verdict"] not in VERDICTS:
+        if rec["verdict"] not in allowed:
             rec["notes"].append(f"invalid verdict {rec['verdict']!r} → unverifiable")
             rec["verdict"] = "unverifiable"
         if rec["verdict"] == "contradicted" and not any((e.get("quote") or "").strip() for e in rec["evidence"]):
@@ -539,63 +563,6 @@ def format_copy_editor_prompt(records: List[Dict]) -> str:
 # The model call
 # =============================================================================
 
-INSTRUCTIONS = """## YOUR TASK: FACT-CHECK AN EXCERPT OF THE GUIDE
-
-You are the fact-checker for a study guide on Psalm {psalm}, written for an educated general
-audience by an AI writer who worked from the research materials above AND from its own memory.
-Find the checkable factual claims in the EXCERPT below and verify each against evidence. You do
-not edit prose, judge style, or assess interpretations.
-
-### What to list (every one; skip common knowledge)
-- QUOTATIONS: biblical verses (Hebrew or English), rabbinic texts, commentators, liturgy, poems,
-  inscriptions, classical authors. Check the wording AND the attribution (who; which work,
-  verse, section, line).
-- WHAT A COMMENTATOR SAYS, AND THE SHAPE OF HIS ARGUMENT: his reading, his proof text, whether
-  he gives one reading or two, which is his main reading and which his alternative, and
-  whether the guide splits, merges, reorders or drops his readings. Read the commentator's
-  whole entry before judging. Presenting one reading's two steps as two alternatives, or
-  dropping his stated alternative while describing "his readings", is a misrepresentation
-  (contradicted).
-- COUNTS AND UNIQUENESS: "only here", "the only other occurrence", "twice", "N times". Verify
-  with search_tanakh, then confirm the exact forms with get_verse. Say exactly what word, form
-  or lemma you counted: "the only other occurrence of the FORM X" and "the only other PLURAL
-  use of the NOUN" are different claims.
-- TEXTUAL AND GRAMMATICAL FACTS stated as fact: a form, a dagesh, a ketiv/qere, what the LXX
-  or Targum reads, a psalm heading.
-- DATES, NAMES, PLACES, NUMBERS, historical events, titles and dates of works.
-- Anything that looks quoted from memory.
-Do NOT list interpretations, figures of speech, the guide's own arguments, or claims about what
-the poem "does". For a flagged conjecture ("perhaps", "may"), list only the facts it rests on.
-
-### How to verify (cheapest source first)
-1. The RESEARCH MATERIALS above: the psalm text, commentators' full entries, lexicons,
-   concordance results, the literary-echoes dossier.
-2. get_verse(ref) for any biblical verse; search_tanakh(hebrew) for occurrences;
-   get_commentary(commentator, ref) for a commentary entry not in the materials.
-3. Web search for claims outside the Bible and the commentators (classical authors,
-   inscriptions, poems, history, dates). Prefer primary texts and standard references.
-Batch your tool calls: request several lookups at once when you can.
-
-### Verdicts
-- supported: the evidence says what the guide says. Quote it.
-- contradicted: the evidence says something materially different. You MUST quote the source
-  text that contradicts the claim and name the source (ref or URL). If you cannot quote such
-  evidence, the verdict is unverifiable. Give a suggested_fix: the smallest change to the
-  guide's sentence that makes it true, keeping its style, figures and argument.
-- unverifiable: you found no evidence either way. Never mark a claim contradicted because it
-  is unfamiliar to you or on memory alone.
-Be exacting about near-misses that matter (a wrong verse number, a misattributed line, a count
-off by one, a reading presented backwards or split in two). Be relaxed about ones that don't: a
-translation worded differently from a published one that renders the original fairly is
-supported (say so), and a paraphrase presented as paraphrase is fine.
-
-### Output
-Return JSON matching the schema. `sentence` is the full sentence containing the claim, copied
-EXACTLY from the excerpt. One record per distinct claim; a sentence with two claims gets two
-records. `location` is the section the claim is in (e.g. "Introduction", "Liturgy",
-"Verse 11"). For supported and unverifiable claims set suggested_fix to null.
-"""
-
 RECORD_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
@@ -636,6 +603,329 @@ RECORD_SCHEMA = {
 }
 
 
+# Session 386: the call section is STAGED for cost. Session 385's single pass ran
+# gpt-6-sol with web search over every claim, with the ~130K-token research bundle
+# replayed on every tool round: $4.87 on Ps 76 (Probe A), 51% of it uncached input,
+# 16% web-search fees. Measured on the same guide, gpt-6-luna ran the SAME pass for
+# $0.59 and matched Sol on the claims the local evidence settles, but missed nearly
+# every claim that needed the web and over-flagged spelling technicalities. So:
+#   stage 1  LOCAL   gpt-6-luna, bundle + $0 lookups, NO web. Settles what the
+#                    materials, the Bible and the commentators can settle; hands the
+#                    rest on as `needs_web`.
+#   stage 2  WEB     gpt-6-sol + web search, ONLY the needs_web claims, no bundle.
+#   stage 3  REVIEW  gpt-6-sol, $0 lookups, re-judges every stage-1 `contradicted`
+#                    before the copy editor may act on it (Luna's false alarms).
+# Biblical-quotation WORDING is not the checker's job at all: the pipeline's $0
+# verify_citations checks it against tanakh.db (divine-name aware).
+
+DIVINE_NAMES_NOTE = """### The guide's spelling of divine names (never an error)
+The guide deliberately writes divine names in a reverential form, in its own prose AND inside
+quotations: ה׳ for the Tetragrammaton, אֱלֹקִים / אֱלֹקֵי (etc.) for אֱלֹהִים, קֵל for אֵל, צְבָקוֹת for
+צְבָאוֹת, שַׁקַּי for שַׁדַּי, אֱלוֹקַּ for אֱלוֹהַּ. Treat each as identical to the Masoretic form. Never
+list, flag or "correct" these spellings."""
+
+MATERIALITY_NOTE = """### What counts as contradicted
+Contradicted means a careful reader would come away believing something false: a wrong source,
+verse, speaker, date, count or reading; a commentator's argument split, merged, reversed or
+misattributed; a quotation whose words are wrong. It does NOT cover technicalities that leave the
+point true: a root or consonantal skeleton given without its vowel letters (ו, י) or suffixes when
+the sentence is not about spelling; a fair English rendering worded differently from a published
+one; a paraphrase presented as a paraphrase; a broad but defensible description ("the past-tense
+story"). A paraphrase of a commentator is fine; a change in the SHAPE of his argument (which is
+his reading, which his proof, which his alternative, what he gives as his reason) is not."""
+
+LOCAL_INSTRUCTIONS = """## YOUR TASK: FACT-CHECK AN EXCERPT OF THE GUIDE
+
+You are the fact-checker for a study guide on Psalm {psalm}, written for an educated general
+audience by an AI writer who worked from a research bundle AND from its own memory. Find the
+checkable factual claims in the EXCERPT below and verify each against evidence. You do not edit
+prose, judge style, or assess interpretations.
+
+### What to list (every one; skip common knowledge)
+Go through the excerpt sentence by sentence. Most errors hide in confident, specific sentences:
+who said something, in which source, in what order, how many times.
+- QUOTATIONS other than biblical verses: rabbinic texts, commentators, liturgy, poems,
+  inscriptions, classical authors. Check the wording AND the attribution (who; which work,
+  section, line).
+- Do NOT list the WORDING of a quoted biblical verse: that is verified separately against the
+  Masoretic text. Do list claims ABOUT verses: what a verse says or means literally, which
+  verse says it, which word or form it uses, where else a word occurs.
+- WHAT A COMMENTATOR SAYS, AND THE SHAPE OF HIS ARGUMENT: his reading, his proof text, whether
+  he gives one reading or two, which is his main reading and which his alternative, and
+  whether the guide splits, merges, reorders or drops his readings. Read the commentator's
+  whole entry before judging. Presenting one reading's two steps as two alternatives, or
+  dropping his stated alternative while describing "his readings", is a misrepresentation
+  (contradicted).
+- COUNTS AND UNIQUENESS: "only here", "the only other occurrence", "twice", "N times". Verify
+  with search_tanakh, then confirm the exact forms with get_verse. Say exactly what word, form
+  or lemma you counted: "the only other occurrence of the FORM X" and "the only other PLURAL
+  use of the NOUN" are different claims.
+- TEXTUAL AND GRAMMATICAL FACTS stated as fact: a form, a dagesh, a ketiv/qere, what the LXX
+  or Targum reads, a psalm heading.
+- DATES, NAMES, PLACES, NUMBERS, historical events, titles and dates of works.
+Do NOT list interpretations, figures of speech, the guide's own arguments, or claims about what
+the poem "does". For a flagged conjecture ("perhaps", "may"), list only the facts it rests on.
+
+{divine_names}
+
+### How to verify
+0. ABOVE, you already have the commentators' full entries on the verses this excerpt covers
+   (on every verse, for the introduction) and the text of every biblical verse the excerpt
+   cites. Use them first; do not look up what is already there. Every lookup costs time and
+   money: make one only when a specific claim needs it.
+1. get_commentary(commentator, ref) fetches an entry that is not above. search_research(query) searches the writer's research bundle (lexicons, concordance,
+   liturgical notes, the literary-echoes dossier) for a word or phrase. The bundle's
+   SUMMARIES of liturgy, literature and history were written by other AI agents and can be
+   wrong: they show what the writer relied on, not what is true. For those claims, verify
+   against the text itself (get_text) or hand the claim on (step 3).
+2. get_verse(ref) for a biblical verse; search_tanakh(hebrew) for occurrences;
+   get_commentary(commentator, ref) for a commentary entry; get_text(ref) for any other text
+   Sefaria holds (Talmud, midrash, halakhic works, the siddur), e.g. "Shabbat 88a".
+3. You have NO web search. For a claim that can only be settled outside these sources (a
+   classical or Near Eastern text, an inscription, a poem or other literature, a historical fact
+   or date, a liturgical custom the materials do not document):
+   - give it the verdict `needs_web` (empty evidence) when its exact wording, attribution,
+     order, date, number or custom is the point of the sentence AND you have a specific doubt
+     about it: something you half-remember differently, a detail that seems too neat, a
+     quotation you cannot place. A second checker searches the web for these, at a cost per
+     claim, so hand on the doubtful ones only: typically one claim in ten or fewer;
+   - otherwise, if you know it to be right (a famous date, a well-known work, a standard fact),
+     mark it supported with the explanation "known".
+   Never mark such a claim contradicted from memory. A claim the Hebrew Bible, a commentator or a
+   Sefaria text can settle (a genealogy in Chronicles, a Talmudic attribution) is never needs_web:
+   check it yourself with the tools.
+Batch your tool calls: request several lookups at once.
+
+### Verdicts
+- supported: the evidence says what the guide says. Keep the record SHORT, because there are
+  many: `sentence` is only the FIRST SIX WORDS of the sentence, `claim` at most eight words,
+  evidence [], explanation "" (or "known").
+- contradicted: the evidence says something materially different. You MUST quote the source
+  text that contradicts the claim and name the source. If you cannot quote such evidence, the
+  verdict is unverifiable (or needs_web). Give a suggested_fix: the smallest change to the
+  guide's sentence that makes it true, keeping its style, figures and argument.
+- unverifiable: the sources above should settle it but do not. Never mark a claim
+  contradicted because it is unfamiliar to you or on memory alone.
+- needs_web: see "How to verify", step 3.
+
+{materiality}
+
+### Output
+Return JSON matching the schema. `sentence` is the full sentence containing the claim, copied
+EXACTLY from the excerpt. One record per distinct claim; a sentence with two claims gets two
+records. `location` is the section the claim is in (e.g. "Introduction", "Liturgy",
+"Verse 11"). For anything but contradicted, set suggested_fix to null.
+"""
+
+WEB_INSTRUCTIONS = """## YOUR TASK: VERIFY CLAIMS THAT NEED OUTSIDE SOURCES
+
+These claims come from a study guide on Psalm {psalm}, written for an educated general audience by
+an AI writer drawing partly on its own memory. A first checker, working from the Hebrew Bible and
+the traditional commentators, could not settle them. Verify each one against evidence.
+
+Tools: web search (prefer primary texts and standard references: a translation of the ancient
+text itself, a museum or library catalogue, a scholarly edition); get_text(ref) for anything on
+Sefaria (Talmud, midrash, the siddur, piyyut); get_verse(ref) for a biblical verse. Search for
+each claim once, twice at most; batch lookups; do not search for what the sentence does not
+claim.
+
+{divine_names}
+
+### Verdicts
+- supported: the evidence says what the guide says. Give its URL or ref, with no quotation.
+- contradicted: the evidence says something materially different. You MUST quote the source and
+  give its URL or ref, and a suggested_fix: the smallest change to the sentence that makes it
+  true, keeping its style, figures and argument.
+- unverifiable: you found no evidence either way. Never mark a claim contradicted on memory
+  alone or because it is unfamiliar.
+
+{materiality}
+
+### Output
+Return JSON matching the schema: one record per claim below, in the same order, with `location`,
+`sentence` and `claim` copied unchanged. For anything but contradicted, set suggested_fix to null.
+
+## CLAIMS
+{claims}
+"""
+
+GATHER_INSTRUCTIONS = """## YOUR TASK: FIND THE SOURCES THAT SETTLE THESE CLAIMS
+
+These claims come from a study guide on Psalm {psalm}. A fact-checker will judge them from what
+you find, so your job is RETRIEVAL, not judgment.
+
+For EACH claim: search the web for the primary source or a standard reference that settles it,
+and copy the passages that bear on it VERBATIM, with the page's URL. Prefer the text itself (a
+translation of the ancient work, the poem, the prayer or piyyut, on sefaria.org, wikisource, a
+library, museum or university site), then a scholarly reference. Search for every claim; one
+search may serve several claims about the same source. Use AT MOST ONE search per claim: each
+search is paid for. Copy enough of each passage to show what
+it says about the claim's specific point (the wording, the order, the attribution, the date,
+the custom), including anything that disagrees with the claim.
+
+Do NOT answer from memory and do NOT give verdicts. A claim for which you retrieved nothing gets
+"sources": []. `note` is one line, only if the sources disagree with each other or say something
+the claim does not.
+
+Return JSON: one item per claim below, with its `n`.
+
+## CLAIMS
+{claims}
+"""
+
+GATHER_SCHEMA = {
+    "type": "object",
+    "properties": {"claims": {"type": "array", "items": {
+        "type": "object",
+        "properties": {
+            "n": {"type": "integer"},
+            "sources": {"type": "array", "items": {
+                "type": "object",
+                "properties": {"title": {"type": "string"}, "url": {"type": "string"},
+                               "quote": {"type": "string"}},
+                "required": ["title", "url", "quote"]}},
+            "note": {"type": "string"}},
+        "required": ["n", "sources", "note"]}}},
+    "required": ["claims"],
+}
+
+GATHER_SCHEMA_STRICT = {
+    "type": "object", "additionalProperties": False, "required": ["claims"],
+    "properties": {"claims": {"type": "array", "items": {
+        "type": "object", "additionalProperties": False, "required": ["n", "sources", "note"],
+        "properties": {
+            "n": {"type": "integer"},
+            "sources": {"type": "array", "items": {
+                "type": "object", "additionalProperties": False, "required": ["title", "url", "quote"],
+                "properties": {"title": {"type": "string"}, "url": {"type": "string"},
+                               "quote": {"type": "string"}}}},
+            "note": {"type": "string"}}}}},
+}
+
+WEB_JUDGE_INSTRUCTIONS = """## YOUR TASK: JUDGE CLAIMS AGAINST THE SOURCES GATHERED FOR THEM
+
+These claims come from a study guide on Psalm {psalm}, written by an AI writer drawing partly on
+its own memory. A researcher looked for sources on each one and copied passages with URLs
+(`sources`). Each passage was then checked against its live page (`check`):
+- "quote found on the page": evidence, for any verdict.
+- "page could not be fetched or read" (a PDF, a blocked site): the page came from a real search
+  but the passage could not be re-checked. It may SUPPORT a claim; it may NOT establish a
+  contradiction.
+- "quote NOT found on the page": the passage may be misquoted or invented. It is not evidence.
+Judge each claim from that evidence. You may also use get_text (Sefaria:
+Talmud, midrash, siddur, piyyut) and get_verse. You have no web search.
+
+{divine_names}
+
+### Verdicts
+- supported: the verified passages (or your Sefaria lookups) say what the guide says. Give the
+  URL or ref, with no quotation.
+- contradicted: a passage FOUND ON ITS PAGE (or a Sefaria lookup) says something materially different. You
+  MUST quote it and give its URL or ref, and a suggested_fix: the smallest change to the sentence
+  that makes it true, keeping its style, figures and argument.
+- unverifiable: no verified passage settles it. Never decide from memory.
+
+{materiality}
+
+### Output
+Return JSON matching the schema: one record per claim below, in the same order, with `location`,
+`sentence` and `claim` copied unchanged. For anything but contradicted, set suggested_fix to null.
+
+## CLAIMS, WITH THE SOURCES FOUND FOR EACH
+{claims}
+"""
+
+REVIEW_INSTRUCTIONS = """## YOUR TASK: REVIEW CLAIMS A FIRST CHECKER MARKED CONTRADICTED
+
+These claims come from a study guide on Psalm {psalm}. A first, fast checker marked each one
+contradicted and gave its evidence. A contradicted verdict licenses the copy editor to change the
+guide, and a wrong "correction" is worse than a missed error, so re-judge each one yourself.
+
+For each claim: read the sentence as a careful reader would, re-check the evidence with the tools
+(get_verse, search_tanakh, get_commentary for a commentator's full entry, get_text for Talmud,
+midrash, siddur), and decide.
+
+{divine_names}
+
+{materiality}
+
+### Verdicts
+- contradicted: confirmed. Quote the source that shows the sentence is false, name it, and give
+  a suggested_fix: the smallest change to the sentence that makes it true, keeping its style,
+  figures and argument.
+- supported: the first checker was wrong or pedantic; say why in one sentence.
+- unverifiable: the evidence does not settle it either way.
+
+### Output
+Return JSON matching the schema: one record per claim below, in the same order, with `location`,
+`sentence` and `claim` copied unchanged. For anything but contradicted, set suggested_fix to null.
+
+## CLAIMS
+{claims}
+"""
+
+
+def _schema(verdicts) -> Dict:
+    s = json.loads(json.dumps(RECORD_SCHEMA))
+    s["properties"]["claims"]["items"]["properties"]["verdict"]["enum"] = list(verdicts)
+    return s
+
+
+LOCAL_SCHEMA = _schema(VERDICTS + ("needs_web",))
+FINAL_SCHEMA = _schema(VERDICTS)
+
+
+def claims_block(records: List[Dict], with_evidence: bool = False) -> str:
+    """The claims handed to stage 2/3, as numbered JSON (pure)."""
+    items = []
+    for i, r in enumerate(records, 1):
+        it = {"n": i, "location": r.get("location", ""), "sentence": r.get("sentence", ""),
+              "claim": r.get("claim", ""), "claim_type": r.get("claim_type", "other")}
+        if with_evidence:
+            it["first_checker_finding"] = r.get("explanation", "")
+            it["first_checker_evidence"] = r.get("evidence", [])
+        items.append(it)
+    return json.dumps(items, ensure_ascii=False, indent=1)
+
+
+def merge_stage_results(local: List[Dict], web: List[Dict], review: List[Dict],
+                        reviewed: bool = True) -> List[Dict]:
+    """Stage-1 records, with every `needs_web` replaced by its stage-2 record and every
+    `contradicted` by its stage-3 record (when `reviewed`; otherwise stage 1's verdict
+    stands, as when stage 1 already ran on gpt-6-sol), in the guide's order (pure). A stage-2/3 batch
+    that returned the wrong number of records is matched by sentence; an unmatched
+    claim falls back to `unverifiable`, never to its stage-1 contradicted verdict."""
+    web_q, rev_q = list(web), list(review)
+
+    def take(queue: List[Dict], rec: Dict, stage: str) -> Dict:
+        for j, cand in enumerate(queue):
+            if _norm_ws(cand.get("sentence", "")) == _norm_ws(rec.get("sentence", "")) \
+                    and _norm_ws(cand.get("claim", "")) == _norm_ws(rec.get("claim", "")):
+                out = dict(queue.pop(j))
+                out["stage"] = stage
+                return out
+        for j, cand in enumerate(queue):
+            if _norm_ws(cand.get("sentence", "")) == _norm_ws(rec.get("sentence", "")):
+                out = dict(queue.pop(j))
+                out["stage"] = stage
+                return out
+        out = dict(rec, verdict="unverifiable", evidence=rec.get("evidence", []), suggested_fix=None,
+                   stage=stage, explanation=(rec.get("explanation", "") + f" [no {stage} result]").strip())
+        return out
+
+    merged = []
+    for r in local:
+        if r.get("verdict") == "needs_web":
+            merged.append(take(web_q, r, "web"))
+        elif r.get("verdict") == "contradicted" and reviewed:
+            rec = take(rev_q, r, "review")
+            rec["first_verdict"] = "contradicted"
+            merged.append(rec)
+        else:
+            merged.append(dict(r, stage="local"))
+    return merged
+
+
 def _fn(name: str, desc: str, props: Dict, required: List[str]) -> Dict:
     return {"type": "function", "name": name, "description": desc, "strict": True,
             "parameters": {"type": "object", "properties": props, "required": required,
@@ -652,7 +942,216 @@ FUNCTION_TOOLS = [
     _fn("search_tanakh", "Verses in the Hebrew Bible containing a Hebrew word or short phrase "
         "(consonants are enough). Returns the list of references; confirm exact forms with get_verse.",
         {"hebrew": {"type": "string"}}, ["hebrew"]),
+    _fn("search_research", "Search the writer's research bundle (lexicons, concordance, liturgical notes, "
+        "literary echoes, commentators) for a word or phrase, Hebrew or English. Returns the matching passages.",
+        {"query": {"type": "string"}}, ["query"]),
+    _fn("get_text", "Any text Sefaria holds, by its Sefaria reference: Talmud ('Shabbat 88a'), midrash "
+        "('Bereishit Rabbah 56:10'), halakhic works, the siddur, piyyut. Hebrew and English where available.",
+        {"ref": {"type": "string"}}, ["ref"]),
 ]
+
+
+_COMMENTARY_SECTION = re.compile(r"^### (\d+):(\d+) — (.+?)\s*$\n(.*?)(?=^### |^## |\Z)", re.M | re.S)
+# "(Ps 78:48)", "Isa 10:5", "Song 8:6-7", "2 Kgs 19:35", "Deut 32:24" in running text.
+_CITED_REF = re.compile(r"(?<![\w:])((?:[1-3I]{1,3}\s)?[A-Z][a-z]+\.?)\s+(\d{1,3}):(\d{1,3})(?:\s*[–\-]\s*(\d{1,3}))?")
+
+
+def commentary_entries(bundle: str, verses: Optional[set] = None) -> str:
+    """Every `### ch:v — Commentator` entry of the bundle, verbatim (pure); only those on
+    `verses` when given. ~52K chars for all of Ps 76, against a 284K bundle: the rest is
+    concordance, lexicon and notes."""
+    parts = [f"### {m.group(1)}:{m.group(2)} — {m.group(3)}\n{m.group(4).strip()}"
+             for m in _COMMENTARY_SECTION.finditer(bundle or "")
+             if verses is None or int(m.group(2)) in verses]
+    return "\n\n".join(parts)
+
+
+def chunk_verses(chunk_text: str) -> set:
+    """The psalm verses a chunk's `**Verse N**` / `**Verses N–M**` headers cover (pure).
+    Empty for the introduction and liturgy, which range over the whole psalm."""
+    out = set()
+    for m in re.finditer(r"^\*\*Verses?\s+(\d+)(?:\s*[–\-]\s*(\d+))?\*\*\s*$", chunk_text, re.M):
+        lo, hi = int(m.group(1)), int(m.group(2) or m.group(1))
+        out.update(range(lo, hi + 1))
+    return out
+
+
+def cited_refs(text: str) -> List[str]:
+    """Biblical references cited in the guide, in order of first mention, deduplicated,
+    unknown book names dropped (pure except for the book-name table)."""
+    seen, out = set(), []
+    for m in _CITED_REF.finditer(text or ""):
+        ref = f"{m.group(1).rstrip('.')} {m.group(2)}:{m.group(3)}" + (f"-{m.group(4)}" if m.group(4) else "")
+        parsed = parse_ref(ref)
+        if not parsed:
+            continue
+        key = parsed
+        if key not in seen:
+            seen.add(key)
+            out.append(ref)
+    return out
+
+
+def shared_evidence(guide_text: str, bundle: str, db_path: Optional[Path], max_verses: int = 150,
+                    verses: Optional[set] = None) -> str:
+    """The evidence a stage-1 call starts with: the commentators' entries (all of them, or
+    those on `verses`) and the text of every verse `guide_text` cites (tanakh.db, else
+    Sefaria). Session 386: handing these over up front replaced ~560 lookups whose outputs
+    were each paid for on every later round; scoping them to the chunk keeps the prefix
+    that every round replays small."""
+    out = []
+    comm = commentary_entries(bundle, verses)
+    if comm:
+        out += ["## THE COMMENTATORS' ENTRIES ON THIS PSALM (full text, as the writer had them)", "", comm, ""]
+    verses = []
+    for ref in cited_refs(guide_text)[:max_verses]:
+        v = lookup_verse(ref, db_path)
+        if v.get("error"):
+            continue
+        verses.append(f"**{v.get('ref', ref)}**\n{v.get('hebrew', '')}\n{v.get('english', '')}")
+    if verses:
+        out += ["## EVERY BIBLICAL VERSE THE GUIDE CITES (Masoretic text and a translation)", "",
+                "\n\n".join(verses), ""]
+    return "\n".join(out)
+
+
+def search_bundle(bundle: str, query: str, max_hits: int = 3, window: int = 500) -> Dict:
+    """Passages of the research bundle around each match of `query` (pure). Hebrew is
+    matched on consonants, so pointing and cantillation on either side do not matter."""
+    q = (query or "").strip()
+    if not bundle:
+        return {"error": "no research bundle"}
+    if not q:
+        return {"error": "empty query"}
+    if re.search(r"[א-ת]", q):
+        qc = _consonants(q)
+        # A consonants-and-single-spaces copy of the bundle, with each position mapped back.
+        flat_chars, idx_map, prev_space = [], [], True
+        for i, ch in enumerate(unicodedata.normalize("NFC", bundle)):
+            if "א" <= ch <= "ת":
+                flat_chars.append(ch)
+                idx_map.append(i)
+                prev_space = False
+            elif ch in " \n\t־" and not prev_space:
+                flat_chars.append(" ")
+                idx_map.append(i)
+                prev_space = True
+        flat = "".join(flat_chars)
+        starts = [idx_map[m.start()] for m in re.finditer(re.escape(qc), flat)] if qc else []
+    else:
+        starts = [m.start() for m in re.finditer(re.escape(q), bundle, re.I)]
+    hits, last_end = [], -1
+    for st in starts:
+        if st < last_end:
+            continue
+        a, b = max(0, st - window // 2), min(len(bundle), st + window)
+        head = bundle.rfind("\n#", 0, st)
+        section = bundle[head + 1: bundle.find("\n", head + 1)].strip("# ").strip() if head >= 0 else ""
+        hits.append({"section": section, "text": bundle[a:b]})
+        last_end = b
+        if len(hits) >= max_hits:
+            break
+    return {"query": q, "matches": len(starts), "passages": hits}
+
+
+# -- quote verification ($0) ---------------------------------------------------------
+# Session 386: with Google Search switched on, Gemini 3.8 Flash, 3.5 Flash and 3.1 Pro (at
+# low thinking) returned "verbatim" passages and URLs WITHOUT searching -- no grounding
+# metadata, a few hundred input tokens. Whether a model searches is its own choice, so the
+# guard is not a model: every gathered passage is checked against the live page, and only
+# a passage found there counts as evidence.
+
+_VERIFY_UA = {"User-Agent": "Mozilla/5.0 (fact-check; psalms study guides)"}
+
+
+def _norm_for_match(s: str) -> str:
+    s = unicodedata.normalize("NFKD", s or "")
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))          # accents, nikud, te'amim
+    s = s.translate(str.maketrans({"’": "'", "‘": "'", "“": '"', "”": '"', "־": " ", "–": "-", "—": "-"}))
+    s = re.sub(r"[^\w\s]", " ", s.lower())
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def quote_on_page(quote: str, page_text: str, min_share: float = 0.6) -> bool:
+    """True if the quote is on the page (pure): exact after normalisation, or at least
+    `min_share` of its 5-word shingles appear (tolerates an ellipsis, a line break, a
+    variant spelling). A quote of fewer than five words must match exactly."""
+    q, t = _norm_for_match(quote), _norm_for_match(page_text)
+    if not q or not t:
+        return False
+    if q in t:
+        return True
+    w = q.split()
+    if len(w) < 5:
+        return False
+    shingles = [" ".join(w[i:i + 5]) for i in range(len(w) - 4)]
+    return sum(1 for sh in shingles if sh in t) / len(shingles) >= min_share
+
+
+def fetch_page_text(url: str, timeout: int = 20) -> Optional[str]:
+    """Visible text of a web page, or None (network error, non-HTML, PDF text not
+    extractable). Plain requests: no JavaScript."""
+    try:
+        r = requests.get(url, timeout=timeout, headers=_VERIFY_UA, allow_redirects=True)
+        if r.status_code >= 400:
+            return None
+        ctype = r.headers.get("content-type", "")
+        if "pdf" in ctype or url.lower().endswith(".pdf"):
+            try:
+                import io
+                import logging
+                logging.getLogger("pypdf").setLevel(logging.ERROR)
+                from pypdf import PdfReader
+                return " ".join((pg.extract_text() or "") for pg in PdfReader(io.BytesIO(r.content)).pages[:200])
+            except Exception:
+                return None
+        r.encoding = r.encoding or r.apparent_encoding
+        html = r.text
+        html = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", html)
+        text = re.sub(r"(?s)<[^>]+>", " ", html)
+        import html as _html
+        return _html.unescape(text)
+    except Exception:
+        return None
+
+
+def verify_sources(items: List[Dict], parallel: int = 8) -> Dict[str, int]:
+    """Mark every gathered source `verified` True/False in place by fetching its URL
+    once and looking for its quote. Returns counts."""
+    urls = sorted({src.get("url", "") for it in items for src in it.get("sources", []) if src.get("url")})
+    with ThreadPoolExecutor(max_workers=parallel) as ex:
+        pages = dict(zip(urls, ex.map(fetch_page_text, urls)))
+    counts = {"sources": 0, "verified": 0, "page_unreadable": 0}
+    for it in items:
+        for src in it.get("sources", []):
+            counts["sources"] += 1
+            page = pages.get(src.get("url", ""))
+            if page is None:
+                src["verified"] = False
+                src["check"] = "page could not be fetched or read"
+                counts["page_unreadable"] += 1
+            elif quote_on_page(src.get("quote", ""), page):
+                src["verified"] = True
+                src["check"] = "quote found on the page"
+                counts["verified"] += 1
+            else:
+                src["verified"] = False
+                src["check"] = "quote NOT found on the page"
+    return counts
+
+
+def lookup_text(ref: str) -> Dict[str, str]:
+    try:
+        out = _sefaria_text(ref.strip())
+        if not (out.get("hebrew") or out.get("english")):
+            return {"error": f"Sefaria has no text for {ref!r}; check the reference's spelling"}
+        out["source"] = "Sefaria"
+        for k in ("hebrew", "english"):
+            if len(out.get(k, "")) > 2500:
+                out[k] = out[k][:2500] + " […truncated]"
+        return out
+    except Exception as e:
+        return {"error": f"lookup failed for {ref!r}: {e}"}
 
 
 @dataclass
@@ -668,6 +1167,7 @@ class FactCheckResult:
     seconds: float = 0.0
     model: str = DEFAULT_MODEL
     effort: str = DEFAULT_EFFORT
+    stages: Dict[str, Dict] = field(default_factory=dict)
 
     def meta(self, psalm: int) -> Dict:
         return {"psalm": psalm, "model": self.model, "effort": self.effort,
@@ -675,7 +1175,11 @@ class FactCheckResult:
                 "cost_usd": self.cost_usd, "token_cost_usd": self.token_cost_usd,
                 "search_cost_usd": self.search_cost_usd, "usage": self.usage,
                 "seconds": round(self.seconds), "chunks": [c["label"] for c in self.chunks],
-                "verdicts": verdict_counts(self.records)}
+                "stages": self.stages, "verdicts": verdict_counts(self.records)}
+
+
+def _empty_usage() -> Dict[str, int]:
+    return {"input": 0, "cached": 0, "output": 0, "reasoning": 0}
 
 
 class FactChecker:
@@ -683,10 +1187,26 @@ class FactChecker:
                  db_path: Optional[Path] = Path("database/tanakh.db"), logger=None,
                  cost_tracker=None, client=None, chunk_chars: int = DEFAULT_CHUNK_CHARS,
                  web_search: bool = True, parallel: int = 3,
-                 budget_check: Optional[Callable[[float], None]] = None):
-        if not model.startswith("gpt-"):
-            raise ValueError("FactChecker runs on the OpenAI Responses API; use a gpt-* model")
+                 budget_check: Optional[Callable[[float], None]] = None,
+                 web_model: str = DEFAULT_WEB_MODEL, web_effort: str = DEFAULT_WEB_EFFORT,
+                 web_judge_model: str = DEFAULT_WEB_JUDGE_MODEL, web_judge_effort: str = "high",
+                 review_model: Optional[str] = DEFAULT_REVIEW_MODEL,
+                 review_effort: str = DEFAULT_REVIEW_EFFORT,
+                 web_batch: int = WEB_BATCH, review_batch: int = REVIEW_BATCH,
+                 bundle_in_context: bool = False):
+        for m in (model, review_model, web_judge_model):
+            if m and not m.startswith("gpt-"):
+                raise ValueError("stages 1 and 3 run on the OpenAI Responses API; use gpt-* models")
+        if web_model and not web_model.startswith(("gpt-", "gemini-")):
+            raise ValueError("the web stage runs on gpt-* (OpenAI web search) or gemini-* (Google Search)")
         self.model, self.effort = model, effort
+        self.web_model, self.web_effort = web_model, web_effort
+        self.web_judge_model, self.web_judge_effort = web_judge_model, web_judge_effort
+        self.review_model, self.review_effort = review_model, review_effort
+        self.web_batch, self.review_batch = max(1, web_batch), max(1, review_batch)
+        # Session 386: OFF. Replaying the ~130K-token bundle on every tool round was most of
+        # Session 385's $4.87; the model now pulls what it needs through the tools.
+        self.bundle_in_context = bundle_in_context
         self.db_path = Path(db_path) if db_path else None
         self.logger = logger
         self.cost_tracker = cost_tracker
@@ -694,10 +1214,12 @@ class FactChecker:
         self.web_search = web_search
         self.parallel = max(1, parallel)
         self.budget_check = budget_check
+        self._spent: Dict[str, Dict] = {}   # per model: usage + searches, for budget_check
         if client is None:
             from openai import OpenAI
             client = OpenAI(timeout=1800, max_retries=2)
         self.client = client
+        self._gemini_client = None
 
     def _log(self, msg: str):
         if self.logger:
@@ -713,27 +1235,23 @@ class FactChecker:
             return lookup_commentary(args.get("commentator", ""), args.get("ref", ""), bundle)
         if name == "search_tanakh":
             return search_tanakh(args.get("hebrew", ""), self.db_path)
+        if name == "get_text":
+            return lookup_text(args.get("ref", ""))
+        if name == "search_research":
+            return search_bundle(bundle, args.get("query", ""))
         return {"error": f"unknown tool {name}"}
 
-    def _tools(self) -> List[Dict]:
-        return ([{"type": "web_search"}] if self.web_search else []) + FUNCTION_TOOLS
-
-    # -- one chunk -------------------------------------------------------------
-    def _check_chunk(self, psalm: int, chunk: Dict, bundle: str, idx: int, n: int) -> Dict:
-        label = f"chunk {idx}/{n} [{chunk['label']}]"
-        content = []
-        if bundle:
-            content.append({"type": "input_text", "text": bundle})
-        content.append({"type": "input_text", "text": INSTRUCTIONS.format(psalm=psalm)})
-        content.append({"type": "input_text",
-                        "text": f"## EXCERPT ({chunk['label']})\n\n{chunk['text']}"})
-        common = dict(model=self.model, tools=self._tools(),
-                      reasoning={"effort": self.effort, "summary": "auto"},
+    # -- one tool loop ---------------------------------------------------------
+    def _loop(self, label: str, model: str, effort: str, content: List[Dict], tools: List[Dict],
+              schema: Dict, bundle: str, cache_key: str) -> Dict:
+        common = dict(model=model, tools=tools,
+                      reasoning={"effort": effort, "summary": "auto"},
                       text={"format": {"type": "json_schema", "name": "fact_check",
-                                       "schema": RECORD_SCHEMA, "strict": True}},
-                      max_output_tokens=64000, prompt_cache_key=f"fact-check-ps{psalm}")
-        usage = {"input": 0, "cached": 0, "output": 0, "reasoning": 0}
+                                       "schema": schema, "strict": True}},
+                      max_output_tokens=64000, prompt_cache_key=cache_key)
+        usage = _empty_usage()
         searches = fcalls = 0
+        tool_counts: Dict[str, int] = {}
         summaries: List[str] = []
         t0 = time.time()
         resp = self._create(input=[{"role": "user", "content": content}], **common)
@@ -741,25 +1259,27 @@ class FactChecker:
             u = resp.usage
             cached = getattr(getattr(u, "input_tokens_details", None), "cached_tokens", 0) or 0
             rsn = getattr(getattr(u, "output_tokens_details", None), "reasoning_tokens", 0) or 0
-            usage["input"] += u.input_tokens - cached
-            usage["cached"] += cached
-            usage["output"] += u.output_tokens - rsn
-            usage["reasoning"] += rsn
+            step = {"input": u.input_tokens - cached, "cached": cached,
+                    "output": u.output_tokens - rsn, "reasoning": rsn}
+            for k in usage:
+                usage[k] += step[k]
             calls = []
+            step_searches = 0
             for it in resp.output:
                 if it.type == "web_search_call":
-                    searches += 1
+                    step_searches += 1
                 elif it.type == "function_call":
                     calls.append(it)
                 elif it.type == "reasoning":
                     summaries += [s.text for s in (it.summary or [])]
-            if self.budget_check:
-                self.budget_check(self._price(usage, searches))
+            searches += step_searches
+            self._account(model, step, step_searches)
             if not calls:
                 break
             fcalls += len(calls)
             outputs = []
             for c in calls:
+                tool_counts[c.name] = tool_counts.get(c.name, 0) + 1
                 try:
                     args = json.loads(c.arguments or "{}")
                 except json.JSONDecodeError:
@@ -773,10 +1293,19 @@ class FactChecker:
         text = resp.output_text or ""
         status = getattr(resp, "status", "completed")
         records = parse_fact_check_json(text) if text.strip() else []
-        self._log(f"  {label}: {len(records)} claims, {searches} searches, {fcalls} lookups, "
+        self._log(f"  {label}: {len(records)} records, {searches} searches, {fcalls} lookups, "
                   f"{time.time() - t0:.0f}s, status={status}")
         return {"records": records, "usage": usage, "searches": searches, "fcalls": fcalls,
-                "status": status, "thinking": "\n\n".join(summaries), "label": chunk["label"]}
+                "tool_counts": tool_counts, "status": status, "thinking": "\n\n".join(summaries),
+                "label": label, "model": model}
+
+    def _account(self, model: str, step: Dict, searches: int) -> None:
+        s = self._spent.setdefault(model, {"usage": _empty_usage(), "searches": 0})
+        for k in s["usage"]:
+            s["usage"][k] += step[k]
+        s["searches"] += searches
+        if self.budget_check:
+            self.budget_check(sum(self._price(m, v["usage"], v["searches"]) for m, v in self._spent.items()))
 
     def _create(self, **kw):
         last = None
@@ -793,10 +1322,150 @@ class FactChecker:
                 time.sleep(10 * (attempt + 1))
         raise RuntimeError(f"fact-check call failed: {last}")
 
-    def _price(self, usage: Dict, searches: int) -> float:
-        return price_tokens(self.model, input_tokens=usage["input"], output_tokens=usage["output"],
-                            thinking_tokens=usage["reasoning"], cached_input_tokens=usage["cached"]) \
-            + searches * WEB_SEARCH_USD_PER_CALL
+    @staticmethod
+    def _price(model: str, usage: Dict, searches: int) -> float:
+        fee = 0.0 if model.startswith("gemini-") else searches * WEB_SEARCH_USD_PER_CALL
+        return price_tokens(model, input_tokens=usage["input"], output_tokens=usage["output"],
+                            thinking_tokens=usage["reasoning"], cached_input_tokens=usage["cached"]) + fee
+
+    # -- the web stage on Gemini ----------------------------------------------------
+    def _gemini(self):
+        if self._gemini_client is None:
+            import os
+            from google import genai
+            key = os.environ.get("GEMINI_API_KEY")
+            if not key:
+                raise ValueError("GEMINI_API_KEY not set")
+            self._gemini_client = genai.Client(api_key=key)
+        return self._gemini_client
+
+    def _gemini_web(self, label: str, model: str, effort: str, text: str,
+                    schema: Optional[Dict] = None) -> Dict:
+        """One grounded Gemini call over a batch of claims. Google runs the searches inside
+        the call, so there is no tool loop and nothing is replayed."""
+        from google.genai import types
+        cfg = dict(tools=[types.Tool(google_search=types.GoogleSearch())],
+                   thinking_config=types.ThinkingConfig(thinking_level=effort, include_thoughts=True),
+                   response_mime_type="application/json", response_json_schema=schema or FINAL_SCHEMA)
+        t0, last, resp = time.time(), None, None
+        for attempt in range(3):
+            try:
+                resp = self._gemini().models.generate_content(
+                    model=model, contents=text, config=types.GenerateContentConfig(**cfg))
+                if (resp.text or "").strip():
+                    break
+                last = RuntimeError(f"empty response (finish={getattr(resp.candidates[0], 'finish_reason', '?') if resp.candidates else '?'})")
+            except Exception as e:  # 429 / 503 / transient
+                last = e
+            self._log(f"  {label}: attempt {attempt + 1} failed: {str(last)[:200]}")
+            time.sleep(10 * (attempt + 1))
+        if resp is None or not (resp.text or "").strip():
+            raise RuntimeError(f"{label}: Gemini web check failed: {last}")
+        um = resp.usage_metadata
+        cached = getattr(um, "cached_content_token_count", 0) or 0
+        usage = {"input": (um.prompt_token_count or 0) - cached, "cached": cached,
+                 "output": um.candidates_token_count or 0, "reasoning": um.thoughts_token_count or 0}
+        gm = getattr(resp.candidates[0], "grounding_metadata", None) if resp.candidates else None
+        queries = list(getattr(gm, "web_search_queries", None) or [])
+        sources = [{"title": getattr(c.web, "title", ""), "uri": getattr(c.web, "uri", "")}
+                   for c in (getattr(gm, "grounding_chunks", None) or []) if getattr(c, "web", None)]
+        self._account(model, usage, len(queries))
+        thoughts = [pt.text for pt in resp.candidates[0].content.parts
+                    if getattr(pt, "thought", False) and pt.text] if resp.candidates else []
+        records = parse_fact_check_json(resp.text)
+        self._log(f"  {label}: {len(records)} records, {len(queries)} Google searches, "
+                  f"{time.time() - t0:.0f}s")
+        return {"records": records, "usage": usage, "searches": len(queries), "fcalls": 0,
+                "tool_counts": {}, "status": "completed", "thinking": "\n\n".join(thoughts),
+                "label": label, "model": model, "queries": queries, "sources": sources}
+
+    # -- the three stages ----------------------------------------------------
+    def _local_chunk(self, psalm: int, chunk: Dict, bundle: str, idx: int, n: int,
+                     evidence: str = "") -> Dict:
+        content = []
+        if bundle and self.bundle_in_context:
+            content.append({"type": "input_text", "text": bundle})
+        if evidence:
+            content.append({"type": "input_text", "text": evidence})
+        content.append({"type": "input_text", "text": LOCAL_INSTRUCTIONS.format(
+            psalm=psalm, divine_names=DIVINE_NAMES_NOTE, materiality=MATERIALITY_NOTE)})
+        content.append({"type": "input_text", "text": f"## EXCERPT ({chunk['label']})\n\n{chunk['text']}"})
+        return self._loop(f"local {idx}/{n} [{chunk['label']}]", self.model, self.effort, content,
+                          FUNCTION_TOOLS, LOCAL_SCHEMA, bundle, f"fact-check-ps{psalm}")
+
+    def _gather_then_judge(self, psalm: int, claims: List[Dict], bundle: str) -> List[Dict]:
+        """Stage 2: a cheap model GATHERS passages with web search (no verdicts), every
+        passage is checked against its live page ($0), and the judge model rules from the
+        checked passages without searching. Session 386 measurements on Ps 76's 71 web
+        claims: Sol searching and judging itself cost $3.79; Gemini (Google Search content
+        is not billed) mostly did NOT search when asked -- 3.8 Flash returned passages from
+        memory, 33 of 71 claims with a passage that was really on its page, and its
+        copyright filter blocked whole batches -- so the default gatherer is gpt-6-luna,
+        whose search is real and whose rates make the ~8K tokens of results a search
+        nearly free (the $0.01 fee per search remains)."""
+        size = self.web_batch
+        batches = [claims[i:i + size] for i in range(0, len(claims), size)]
+
+        def gather(i: int) -> Dict:
+            text = GATHER_INSTRUCTIONS.format(psalm=psalm, claims=claims_block(batches[i]))
+            label = f"gather {i + 1}/{len(batches)}"
+            if self.web_model.startswith("gemini-"):
+                return self._gemini_web(label, self.web_model, self.web_effort, text, GATHER_SCHEMA)
+            tools = [{"type": "web_search", "search_context_size": WEB_CONTEXT_SIZE}]
+            return self._loop(label, self.web_model, self.web_effort, [{"type": "input_text", "text": text}],
+                              tools, GATHER_SCHEMA_STRICT, bundle, f"fact-check-gather-ps{psalm}")
+
+        with ThreadPoolExecutor(max_workers=max(self.parallel, len(batches))) as ex:
+            gathered = list(ex.map(gather, range(len(batches))))
+        items = []
+        for bi, run in enumerate(gathered):
+            by_n = {g.get("n"): g for g in run["records"] if isinstance(g, dict)}
+            for j, rec in enumerate(batches[bi], 1):
+                g = by_n.get(j, {})
+                items.append({"location": rec.get("location", ""), "sentence": rec.get("sentence", ""),
+                              "claim": rec.get("claim", ""), "claim_type": rec.get("claim_type", "other"),
+                              "sources": g.get("sources", []), "researcher_note": g.get("note", "")})
+        vc = verify_sources(items)
+        self._log(f"  gathered sources checked against their pages: {vc}")
+        self._verify_counts = vc
+        jb = self.review_batch
+        jbatches = [items[i:i + jb] for i in range(0, len(items), jb)]
+
+        def judge(i: int) -> Dict:
+            block = json.dumps([dict(it, n=k) for k, it in enumerate(jbatches[i], 1)], ensure_ascii=False, indent=1)
+            text = WEB_JUDGE_INSTRUCTIONS.format(psalm=psalm, divine_names=DIVINE_NAMES_NOTE,
+                                                 materiality=MATERIALITY_NOTE, claims=block)
+            return self._loop(f"judge {i + 1}/{len(jbatches)}", self.web_judge_model, self.web_judge_effort,
+                              [{"type": "input_text", "text": text}], FUNCTION_TOOLS, FINAL_SCHEMA, bundle,
+                              f"fact-check-judge-ps{psalm}")
+
+        with ThreadPoolExecutor(max_workers=self.parallel) as ex:
+            judged = list(ex.map(judge, range(len(jbatches))))
+        return gathered + judged
+
+    def _claims_stage(self, stage: str, psalm: int, claims: List[Dict], bundle: str) -> List[Dict]:
+        """Stage 2 (web) or 3 (review) over `claims`, in parallel batches."""
+        if stage == "web" and self.web_judge_model:
+            return self._gather_then_judge(psalm, claims, bundle)
+        if stage == "web":
+            model, effort, size = self.web_model, self.web_effort, self.web_batch
+            tools = [{"type": "web_search", "search_context_size": WEB_CONTEXT_SIZE}] + FUNCTION_TOOLS
+            template, with_ev = WEB_INSTRUCTIONS, False
+        else:
+            model, effort, size = self.review_model, self.review_effort, self.review_batch
+            tools, template, with_ev = FUNCTION_TOOLS, REVIEW_INSTRUCTIONS, True
+        batches = [claims[i:i + size] for i in range(0, len(claims), size)]
+
+        def run(i: int) -> Dict:
+            text = template.format(psalm=psalm, divine_names=DIVINE_NAMES_NOTE,
+                                   materiality=MATERIALITY_NOTE,
+                                   claims=claims_block(batches[i], with_evidence=with_ev))
+            return self._loop(f"{stage} {i + 1}/{len(batches)}", model, effort,
+                              [{"type": "input_text", "text": text}], tools, FINAL_SCHEMA, bundle,
+                              f"fact-check-{stage}-ps{psalm}")
+
+        with ThreadPoolExecutor(max_workers=self.parallel) as ex:
+            return list(ex.map(run, range(len(batches))))
 
     # -- public ---------------------------------------------------------------
     def check(self, guide_markdown: str, psalm_number: int, bundle_text: str = "",
@@ -804,41 +1473,88 @@ class FactChecker:
         text = checkable_text(guide_markdown)
         chunks = split_guide_for_checking(text, self.chunk_chars)
         self._log(f"Fact check — Psalm {psalm_number}: {len(text):,} chars in {len(chunks)} chunk(s); "
-                  f"bundle {len(bundle_text):,} chars; model {self.model} ({self.effort})")
+                  f"bundle {len(bundle_text):,} chars; local {self.model} ({self.effort}), "
+                  f"web {self.web_model if self.web_search else 'OFF'}, review {self.review_model or 'OFF'}")
         t0 = time.time()
-        results: List[Optional[Dict]] = [None] * len(chunks)
-        # First chunk alone, to write the bundle into the cache; the rest in parallel.
-        results[0] = self._check_chunk(psalm_number, chunks[0], bundle_text, 1, len(chunks))
-        if len(chunks) > 1:
-            with ThreadPoolExecutor(max_workers=self.parallel) as ex:
-                futs = {ex.submit(self._check_chunk, psalm_number, ch, bundle_text, i + 1, len(chunks)): i
-                        for i, ch in enumerate(chunks) if i > 0}
-                for f, i in futs.items():
-                    results[i] = f.result()
-        usage = {"input": 0, "cached": 0, "output": 0, "reasoning": 0}
-        raw, searches, fcalls = [], 0, 0
-        for r in results:
-            for k in usage:
-                usage[k] += r["usage"][k]
-            searches += r["searches"]
-            fcalls += r["fcalls"]
-            raw += r["records"]
-        records = validate_records(raw, text)
+        self._spent = {}
+        # Stage 1: the first chunk alone, to write the bundle into the cache; the rest in parallel.
+        local: List[Optional[Dict]] = [None] * len(chunks)
+        evid = [shared_evidence(ch["text"], bundle_text, self.db_path, verses=chunk_verses(ch["text"]) or None)
+                for ch in chunks]
+        self._log("  evidence per chunk: " + ", ".join(f"{len(e):,}" for e in evid) + " chars")
+        with ThreadPoolExecutor(max_workers=max(self.parallel, len(chunks))) as ex:
+            futs = {ex.submit(self._local_chunk, psalm_number, ch, bundle_text, i + 1, len(chunks), evid[i]): i
+                    for i, ch in enumerate(chunks)}
+            for f, i in futs.items():
+                local[i] = f.result()
+        local_recs = validate_records([r for res in local for r in res["records"]], text,
+                                      allowed=VERDICTS + ("needs_web",))
+        runs = list(local)
+
+        need_web = [r for r in local_recs if r["verdict"] == "needs_web"]
+        contra = [r for r in local_recs if r["verdict"] == "contradicted"]
+        web_recs: List[Dict] = []
+        if need_web and self.web_search and self.web_model:
+            web_runs = self._claims_stage("web", psalm_number, need_web, bundle_text)
+            runs += web_runs
+            web_recs = validate_records([r for res in web_runs if not res["label"].startswith("gather")
+                                         for r in res["records"]], text)
+        elif need_web:
+            web_recs = [dict(r, verdict="unverifiable") for r in need_web]
+        rev_recs: List[Dict] = []
+        if contra and self.review_model:
+            rev_runs = self._claims_stage("review", psalm_number, contra, bundle_text)
+            runs += rev_runs
+            rev_recs = validate_records([r for res in rev_runs for r in res["records"]], text)
+        records = merge_stage_results(local_recs, web_recs, rev_recs,
+                                      reviewed=bool(contra and self.review_model))
         for i, rec in enumerate(records, 1):
             rec["id"] = f"C{i}"
-        token_cost = price_tokens(self.model, input_tokens=usage["input"], output_tokens=usage["output"],
-                                  thinking_tokens=usage["reasoning"], cached_input_tokens=usage["cached"])
-        search_cost = searches * WEB_SEARCH_USD_PER_CALL
-        if self.cost_tracker is not None:
-            self.cost_tracker.add_usage(self.model, input_tokens=usage["input"], output_tokens=usage["output"],
-                                        thinking_tokens=usage["reasoning"], cache_read_tokens=usage["cached"])
+
+        usage, token_cost, searches, fcalls = _empty_usage(), 0.0, 0, 0
+        for m, v in self._spent.items():
+            for k in usage:
+                usage[k] += v["usage"][k]
+            token_cost += price_tokens(m, input_tokens=v["usage"]["input"], output_tokens=v["usage"]["output"],
+                                       thinking_tokens=v["usage"]["reasoning"],
+                                       cached_input_tokens=v["usage"]["cached"])
+            searches += v["searches"]
+            if self.cost_tracker is not None:
+                self.cost_tracker.add_usage(m, input_tokens=v["usage"]["input"],
+                                            output_tokens=v["usage"]["output"],
+                                            thinking_tokens=v["usage"]["reasoning"],
+                                            cache_read_tokens=v["usage"]["cached"])
+        fcalls = sum(r["fcalls"] for r in runs)
+        per_stage: Dict[str, Dict] = {}
+        for r in runs:
+            st = per_stage.setdefault(r["label"].split()[0], {"model": r["model"], "usage": _empty_usage(),
+                                                               "searches": 0, "tools": {}})
+            for k in st["usage"]:
+                st["usage"][k] += r["usage"][k]
+            st["searches"] += r["searches"]
+            for name, c in r.get("tool_counts", {}).items():
+                st["tools"][name] = st["tools"].get(name, 0) + c
+        for st in per_stage.values():
+            st["cost_usd"] = round(self._price(st["model"], st["usage"], st["searches"]), 4)
+        stages = {
+            "local": {"claims": len(local_recs), "needs_web": len(need_web), "contradicted": len(contra)},
+            "per_stage": per_stage,
+            "per_model": {m: {"usage": v["usage"], "searches": v["searches"],
+                              "cost_usd": round(self._price(m, v["usage"], v["searches"]), 4)}
+                          for m, v in self._spent.items()},
+        }
+        gem_q = sum(v["searches"] for m, v in self._spent.items() if m.startswith("gemini-"))
+        stages["gemini_search_queries"] = gem_q
+        stages["gemini_search_cost_if_paid"] = round(gem_q * GEMINI_SEARCH_USD_PER_QUERY_PAID, 4)
+        search_cost = (searches - gem_q) * WEB_SEARCH_USD_PER_CALL
         if thinking_out:
-            thinking_out.write_text("\n\n".join(f"## {r['label']}\n\n{r['thinking']}" for r in results),
-                                    encoding="utf-8")
+            thinking_out.write_text("\n\n".join(f"## {r['label']} ({r['model']})\n\n{r['thinking']}"
+                                                for r in runs), encoding="utf-8")
         return FactCheckResult(records=records, chunks=chunks, usage=usage, web_searches=searches,
                                function_calls=fcalls, cost_usd=token_cost + search_cost,
                                token_cost_usd=token_cost, search_cost_usd=search_cost,
-                               seconds=time.time() - t0, model=self.model, effort=self.effort)
+                               seconds=time.time() - t0, model=self.model, effort=self.effort,
+                               stages=stages)
 
 
 def write_outputs(result: FactCheckResult, psalm_number: int, out_dir: Path, prefix: str = "") -> Dict[str, Path]:

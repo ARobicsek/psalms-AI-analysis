@@ -1,0 +1,299 @@
+{
+  "K (S383 one call)": {
+    "words_total": 6261,
+    "per_verse": [
+      {
+        "verses": "v1",
+        "words": 240,
+        "greek": true,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v2",
+        "words": 319,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v3",
+        "words": 630,
+        "greek": true,
+        "block_quote_lines": 4
+      },
+      {
+        "verses": "v4",
+        "words": 529,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v5",
+        "words": 400,
+        "greek": true,
+        "block_quote_lines": 9
+      },
+      {
+        "verses": "v6",
+        "words": 505,
+        "greek": false,
+        "block_quote_lines": 8
+      },
+      {
+        "verses": "v7",
+        "words": 442,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v8",
+        "words": 339,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v9",
+        "words": 430,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v10",
+        "words": 482,
+        "greek": false,
+        "block_quote_lines": 10
+      },
+      {
+        "verses": "v11",
+        "words": 457,
+        "greek": true,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v12",
+        "words": 404,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v13",
+        "words": 670,
+        "greek": false,
+        "block_quote_lines": 5
+      }
+    ],
+    "commentator_mentions": {
+      "Rashi": 14,
+      "Ibn Ezra": 4,
+      "Radak": 8,
+      "Meiri": 3,
+      "Alshich": 2,
+      "Romemot El": 1,
+      "Minchat Shai": 2,
+      "Chida": 1,
+      "Chomat Anakh": 1,
+      "Malbim": 12,
+      "Torah Temimah": 1,
+      "Talmud": 1
+    },
+    "verses_with_greek": "4 of 13",
+    "essay_words": 1446,
+    "liturgy_words": 752,
+    "essay_verse_shared_6grams": 24
+  },
+  "two-call new": {
+    "words_total": 5029,
+    "per_verse": [
+      {
+        "verses": "v1",
+        "words": 266,
+        "greek": true,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v2",
+        "words": 295,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v3",
+        "words": 362,
+        "greek": false,
+        "block_quote_lines": 6
+      },
+      {
+        "verses": "v4",
+        "words": 425,
+        "greek": false,
+        "block_quote_lines": 2
+      },
+      {
+        "verses": "v5",
+        "words": 306,
+        "greek": true,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v6",
+        "words": 348,
+        "greek": false,
+        "block_quote_lines": 13
+      },
+      {
+        "verses": "v7",
+        "words": 308,
+        "greek": false,
+        "block_quote_lines": 6
+      },
+      {
+        "verses": "v8",
+        "words": 225,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v9",
+        "words": 423,
+        "greek": false,
+        "block_quote_lines": 14
+      },
+      {
+        "verses": "v10",
+        "words": 293,
+        "greek": false,
+        "block_quote_lines": 8
+      },
+      {
+        "verses": "v11",
+        "words": 364,
+        "greek": true,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v12",
+        "words": 365,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v13",
+        "words": 378,
+        "greek": false,
+        "block_quote_lines": 14
+      }
+    ],
+    "commentator_mentions": {
+      "Rashi": 16,
+      "Ibn Ezra": 11,
+      "Radak": 7,
+      "Meiri": 4,
+      "Alshich": 3,
+      "Minchat Shai": 3,
+      "Chida": 1,
+      "Malbim": 10,
+      "Talmud": 2
+    },
+    "verses_with_greek": "3 of 13",
+    "essay_words": 2158,
+    "liturgy_words": 640,
+    "essay_verse_shared_6grams": 36
+  },
+  "two-call F": {
+    "words_total": 5666,
+    "per_verse": [
+      {
+        "verses": "v1",
+        "words": 209,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v2",
+        "words": 374,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v3",
+        "words": 504,
+        "greek": false,
+        "block_quote_lines": 6
+      },
+      {
+        "verses": "v4",
+        "words": 417,
+        "greek": false,
+        "block_quote_lines": 16
+      },
+      {
+        "verses": "v5",
+        "words": 371,
+        "greek": true,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v6",
+        "words": 436,
+        "greek": false,
+        "block_quote_lines": 8
+      },
+      {
+        "verses": "v7",
+        "words": 403,
+        "greek": false,
+        "block_quote_lines": 8
+      },
+      {
+        "verses": "v8",
+        "words": 302,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v9",
+        "words": 381,
+        "greek": false,
+        "block_quote_lines": 14
+      },
+      {
+        "verses": "v10",
+        "words": 381,
+        "greek": false,
+        "block_quote_lines": 8
+      },
+      {
+        "verses": "v11",
+        "words": 360,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v12",
+        "words": 366,
+        "greek": false,
+        "block_quote_lines": 1
+      },
+      {
+        "verses": "v13",
+        "words": 367,
+        "greek": false,
+        "block_quote_lines": 25
+      }
+    ],
+    "commentator_mentions": {
+      "Rashi": 11,
+      "Ibn Ezra": 7,
+      "Radak": 8,
+      "Meiri": 4,
+      "Alshich": 5,
+      "Minchat Shai": 1,
+      "Chida": 1,
+      "Malbim": 11,
+      "Talmud": 1
+    },
+    "verses_with_greek": "1 of 13",
+    "essay_words": 1987,
+    "liturgy_words": 652,
+    "essay_verse_shared_6grams": 18
+  }
+}

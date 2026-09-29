@@ -1,0 +1,412 @@
+
+FACT-CHECK REPORT (evidence-based — this governs every factual correction you make):
+
+A separate fact-check pass listed the checkable claims in this guide and verified each
+one against sources: the research materials, the biblical text, the commentators' own
+texts, and web search. For FACTUAL claims, follow these rules instead of your own memory:
+
+1. Correct a factual claim ONLY where an item below is marked CONTRADICTED, and only as
+   far as its quoted evidence supports. Make the smallest change that makes the sentence
+   true; keep the author's wording, figures and argument around it. The suggested fix is
+   a starting point, not a script. Prefix each such change-log entry with [FACT-CHECK].
+2. Do NOT correct any other factual claim from memory. If you doubt a claim that is not
+   listed as contradicted, leave the text unchanged and list the doubt at the end of your
+   ## Changes section under a line reading `### UNVERIFIED` (one line each: location,
+   the claim, why you doubt it). Those lines are notes for the author, not edits.
+3. Leave claims marked SUPPORTED or UNVERIFIABLE alone as matters of fact.
+
+Your other categories (style of argument, clarity, Hebrew script, glosses, banned phrases)
+are unaffected.
+
+CONTRADICTED (18):
+1. The Song of the Sea, Run Backwards: "Through v. 10 the poem speaks in completed past actions: He shattered, You made heard, God rose."
+   Claim: All actions through verse 10 have completed-past verbal forms.
+   Finding: Verse 8 describes God in direct present address; בְּקוּם in verse 10 is an infinitive construction, not a completed-past verb. The three examples do not establish an exclusively past-tense section.
+   Evidence — Psalms 76:8, 10, Masoretic text: "אַתָּה ׀ נוֹרָא אַתָּה ... בְּקוּם־לַמִּשְׁפָּט אֱלֹהִים לְהוֹשִׁיעַ"
+   Suggested fix: Through v. 10 the poem recounts a deliverance with past actions, present address, and God's rising to judge.
+
+2. Practical Kabbalah: "Almost everywhere else, that word names God's rebuke of the sea."
+   Claim: Elsewhere גְּעָרָה almost always refers to God rebuking sea.
+   Finding: The noun also denotes human reproof, an enemy’s shout, and rebuke directed at Jerusalem’s people. Sea-rebuke is a significant parallel, not almost the whole usage.
+   Evidence — Proverbs 13:1; 17:10: "וְלֵץ לֹא־שָׁמַע גְּעָרָה׃ ... תֵּחַת גְּעָרָה בְמֵבִין"
+   Evidence — Isaiah 30:17; 51:20: "אֶלֶף אֶחָד מִפְּנֵי גַּעֲרַת אֶחָד ... בָּנַיִךְ עֻלְּפוּ ... גַּעֲרַת אֱלֹהָיִךְ׃"
+   Suggested fix: Elsewhere, the word can name God's rebuke of the sea.
+
+3. Practical Kabbalah: "The only other plural use of the noun is Song 8:6, and the very next verse says מַיִם רַבִּים לֹא יוּכְלוּ לְכַבּוֹת, "many waters cannot quench" it."
+   Claim: Song 8:6 is the only other plural of רֶשֶׁף.
+   Finding: לָרְשָׁפִים is another plural of the noun. Song 8:6 is the other occurrence of the specific construct form רִשְׁפֵי, not the only other plural use.
+   Evidence — Psalms 78:48, Masoretic text: "וּמִקְנֵיהֶם לָרְשָׁפִים׃"
+   Suggested fix: The only other occurrence of the form רִשְׁפֵי is Song 8:6, and the very next verse says מַיִם רַבִּים לֹא יוּכְלוּ לְכַבּוֹת, "many waters cannot quench" it.
+
+4. Verse 3: "He spins from the bars, but there's no cage to him > More than to the visionary his cell: > His stride is wildernesses of freedom"
+   Claim: These three lines quote Hughes’s ‘The Jaguar’ exactly.
+   Finding: The cited text ends the third line with a colon, which the guide omits despite presenting the lines as an exact quotation.
+   Evidence — Cambridge International AS & A Level Literature in English 9695/31, May/June 2015 (https://www.cienotes.com/wp-content/uploads/2018/07/9695_s15_qp_31.pdf): "He spins from the bars, but there’s no cage to him More than to the visionary his cell: His stride is wildernesses of freedom:"
+   Suggested fix: Add a colon after “freedom” in the quoted third line.
+
+5. Verse 4: "Rashi instead ties the word to Deut 32:24 and Job 5:7, which the Aramaic translation renders "fowl," and concludes:"
+   Claim: Rashi says the Aramaic renders both cited expressions ‘fowl.’
+   Finding: Rashi attributes the Aramaic rendering to the Deuteronomy expression; he then cites Job’s own Hebrew עוף. He does not say that an Aramaic translation renders both passages ‘fowl.’
+   Evidence — Rashi on Psalms 76:4: "וּלְחוּמֵי רֶשֶׁף (דברים לב:כד) דִּמְתַרְגְּמִינָן ״עוֹף״, ״וּבְנֵי רֶשֶׁף יַגְבִּיהוּ עוּף״ (איוב ה:ז)."
+   Suggested fix: Rashi instead ties the word to Deut 32:24, which he says the Aramaic renders ‘fowl,’ and to Job 5:7, and concludes:
+
+6. Verse 5: "The Hebrew has "light," the Targum has "fear," and the poem has room for both."
+   Claim: The Targum has fear instead of light.
+   Finding: The Targum includes both נְהִיר, “shining,” and דְחִיל, “feared.”
+   Evidence — Aramaic Targum to Psalms 76:5 (https://www.sefaria.org/Targum_Psalms_76:5): "נְהִיר דְחִיל אַתְּ אֱלָהָא"
+   Suggested fix: The Hebrew has “light,” the Targum has both “light” and “fear,” and the poem has room for both.
+
+7. Verse 5: "> הִפְחַדְתָּ אֲרַמִּי בְּאֶמֶשׁ לַיְלָה > ... > יָעַץ מְחָרֵף לְנוֹפֵף אִוּוּי > הוֹבַשְׁתָּ פְגָרָיו בַּלַּיְלָה > > "You terrified the Aramean in the dark of night… > The blasphemer plotted to shake his fist at the Desired [city]; > You withered his corpses in the night.""
+   Claim: The quoted Hebrew lines occur in the attributed hymn.
+   Finding: The purported Hebrew quotation omits יָד לְ and splits what the cited edition prints as one line.
+   Evidence — Project Ben-Yehuda, אוֹנֵי פִטְרִי (https://benyehuda.org/read/35887): "יָעַץ מְחָרֵף לְנוֹפֵף יָד לְאִוּוּי וְהוֹבַשְׁתָּ פְגָרָיו בַּלָּיְלָה"
+   Suggested fix: Replace the last two quoted Hebrew lines with one line: > יָעַץ מְחָרֵף לְנוֹפֵף יָד לְאִוּוּי וְהוֹבַשְׁתָּ פְגָרָיו בַּלָּיְלָה
+
+8. Verse 7: "Still, the Asaph guild had roots in the Joseph tribes, and for such a guild the echo would not have been hard to hear."
+   Claim: The Asaph guild had roots in the Joseph tribes.
+   Finding: Chronicles traces Asaph’s ancestry through Gershom to Levi, not through the Joseph tribes. Asaphite psalms do, however, invoke Joseph and his tribes.
+   Evidence — I Chronicles 6:24–28: "וְאָחִיו אָסָף ... אָסָף בֶּן־בֶּרֶכְיָהוּ ... בֶּן־יַחַת בֶּן־גֵּרְשֹׁם בֶּן־לֵוִי"
+   Suggested fix: Still, Asaphite songs evoke the Joseph tribes, and for such a guild the echo would not have been hard to hear.
+
+9. Verse 8: "Malbim takes a real risk and reads "Your anger" as a proper name, Assyria, which Isaiah calls הוֹי אַשּׁוּר שֵׁבֶט אַפִּי, "Woe, Assyria, rod of My anger" (Isa 10:5):"
+   Claim: Malbim reads “Your anger” as Assyria’s proper name.
+   Finding: Malbim calls Assyria the rod or instrument of divine anger, not the proper name of that anger.
+   Evidence — Malbim on Psalms 76:8: "ר"ל שאשור שהיה שבט אפו של ה', כמ"ש הוי אשור שבט אפי, מאז ששלח ה' את אפו על הארץ"
+   Evidence — Isaiah 10:5: "הוֹי אַשּׁוּר שֵׁבֶט אַפִּי"
+   Suggested fix: Malbim takes a real risk and reads Assyria as the instrument of “Your anger,” which Isaiah calls הוֹי אַשּׁוּר שֵׁבֶט אַפִּי, “Woe, Assyria, rod of My anger” (Isa 10:5):
+
+10. Verse 8: "In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities after Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, "and who can stand before You, and who will take my place?""
+   Claim: Edot HaMizrach communities recite the piyyut after Kol Nidrei.
+   Finding: The verified source places the piyyut before, not after, Kol Nidrei.
+   Evidence — Kaparot.org.il, מהו הפיוט לך אלי תשוקתי ולמה אומרים אותו לפני כל נדרי? (https://kaparot.org.il/%D7%9C%D7%9A-%D7%90%D7%9C%D7%99-%D7%AA%D7%A9%D7%95%D7%A7%D7%AA%D7%99/): "מנהג עדות המזרח לומר את הפיוט ‘לך אלי תשוקתי’ לפני תפילת כל נדרי, מיד לאחר סעודת המפסקת ולפני כניסת יום הכיפורים."
+   Suggested fix: In his piyyut *Lecha Eli Teshukati*, recited in Edot HaMizrach communities before Kol Nidrei, the worshiper confesses: וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי, "and who can stand before You, and who will take my place?"
+
+11. Verse 8: "The piyyut's expects *not I*, and it immediately begins the alphabetical confession."
+   Claim: The alphabetical confession immediately follows the quoted question.
+   Finding: Two further lines intervene between the quoted question and the alphabetical confession.
+   Evidence — Project Ben-Yehuda, לְךָ אֵלִי תְּשׁוּקָתִי (https://benyehuda.org/read/2564): "וּמִי יַעֲמֹד לְפָנֶיךָ / וּמִי יִהְיֶה תְמוּרָתִי / וְאֵיךְ חֶשְׁבּוֹן לְךָ אֶתֵן / וְאֵיךְ אֶצְדַּק בְּטַעֲנָתִי / וְאָשַׁמְתִּי וְאָרַבְתִּי / וּבָגַדְתִּי וּבָזִיתִי"
+   Suggested fix: The piyyut expects *not I*, and after two further lines begins the alphabetical confession.
+
+12. Verse 9: "King Hezekiah asks: אם יראה למה שקטה ואם שקטה למה יראה, "if it feared, why was it still? And if it was still, why did it fear?""
+   Claim: The Talmud identifies the speaker as King Hezekiah.
+   Finding: The passage attributes the question to the rabbinic sage Ḥizkiya, not to King Hezekiah.
+   Evidence — Shabbat 88a (https://www.sefaria.org/Shabbat_88a): "אָמַר חִזְקִיָּה, מַאי דִּכְתִיב ... אִם יָרְאָה — לָמָּה שָׁקְטָה? וְאִם שָׁקְטָה — לָמָּה יָרְאָה?"
+   Suggested fix: Change “King Hezekiah asks” to “The sage Ḥizkiya asks”.
+
+13. Verse 11: "That means reading תָּחֹג, "celebrate," for תַּחְגֹּר, "gird," and the remnant of fury becomes a festival crowd."
+   Claim: A Hebrew חגג form is the basis of the proposed Greek reading.
+   Finding: The connection with חגג is sound, but the sentence specifies an unsuffixed reading, תָּחֹג. The cited proposal is תחגך, accounting for the Greek “to You” and making the remnant the festival-goer.
+   Evidence — Commentary on Psalm 76 (https://biblicalscholarship.wordpress.com/2024/04/20/commentary-on-psalm-76/): "LXX reads the verb as ἑορτάσει, which is a translation of תחגך rather than תודך, and is translated: “The remnant of wraths will keep a pilgrim-festival to you.”"
+   Suggested fix: That means reading תחגך, "shall celebrate You," in place of the Masoretic "gird," and the remnant of fury keeps festival for You.
+
+14. Verse 12: "The psalm redirects it to the source of the empire's power, and Nineveh loses its income along with its army."
+   Claim: Nineveh actually lost tribute income along with an army.
+   Finding: The cited account says tribute was delivered to Nineveh after Sennacherib’s departure, not that Nineveh lost that income. The later sack of Nineveh is a different event.
+   Evidence — Sennacherib and Jerusalem (https://www.metmuseum.org/exhibitions/listings/2014/assyria-to-iberia/blog/posts/sennacherib-and-jerusalem): "but not before the king exacted an enormous and humiliating annual payment of tribute: “As for him, Hezekiah, fear of my lordly brilliance overwhelmed him and, after my (departure), he had the auxiliary forces (and) his elite troops ... brought into Nineveh, my capital city, and he sent a mounted messenger of his to me to deliver (this) payment and to do obeisance.”"
+   Suggested fix: The psalm redirects it to the source of the empire's power, though Nineveh still received tribute after its army's defeat.
+
+15. Verse 13: "- Edom, whose name sits one vowel from אָדָם in v. 11;"
+   Claim: אֱדוֹם and אָדָם differ by only one vowel.
+   Finding: Both vowel sounds differ: Edom is pronounced e-dom, and אָדָם is a-dam. The Hebrew spelling of Edom also contains ו.
+   Evidence — Isaiah 63:1; Psalm 76:11: "מֵאֱד֗וֹם ... כִּֽי־חֲמַ֣ת אָדָ֣ם"
+   Suggested fix: - Edom, whose name echoes אָדָם in v. 11;
+
+16. Verse 13: "Meiri, facing the same fork, lets the reciter choose: the speaker, he says, may interpret it as he wishes."
+   Claim: Meiri leaves the two readings to the reciter without preference.
+   Finding: Meiri permits the speaker to choose but explicitly calls the Gog reading the correct one because of the preceding psalm. Omitting that preference makes his choice sound unqualified.
+   Evidence — Meiri on Psalm 76:13: "ויתכן לפרשו על מלחמת גוג ומגוג לעתיד והוא הנכון לסמיכותו למזמור שלפניו יפרשם המדבר כרצונו."
+   Suggested fix: Meiri, facing the same fork, favors Gog because of the preceding psalm, though he lets the reciter choose: the speaker, he says, may interpret it as he wishes.
+
+17. Verse 13: "The two words differ by a single letter, ד against ר, and the distance between them is the whole psalm's widening from one tribe to the world."
+   Claim: נוֹדָע and נוֹרָא differ by only ד versus ר.
+   Finding: The words also differ in their final consonants: ע versus א.
+   Evidence — Psalm 76:2, 13: "נוֹדָ֣ע בִּיהוּדָ֣ה ... נ֝וֹרָ֗א לְמַלְכֵי־אָֽרֶץ"
+   Suggested fix: The two words differ in their last two letters, ד־ע against ר־א, and the distance between them is the whole psalm's widening from one tribe to the world.
+
+18. Verse 13: "Covenanter tradition remembers that before engaging, they sang Psalm 76 in the Scottish metrical version: > In Judah's land God is well known, > his name's in Israel great: > In Salem is his tabernacle, > in Sion is his seat."
+   Claim: The quoted stanza is word-for-word from the Scottish metrical Psalm 76.
+   Finding: The verified Scottish Psalter text has “Isr'el,” not “Israel.” That matters to the claim that the quotation is word-for-word.
+   Evidence — Scottish Psalter 1650 — full text (https://ccrpcorg.s3.amazonaws.com/Psalms/Scottish%20Psalter%201650.pdf): "1 In Judah's land God is well known, his name's in Isr'el great: 2 In Salem is his tabernacle, in Sion is his seat."
+   Suggested fix: Covenanter tradition remembers that before engaging, they sang Psalm 76 in the Scottish metrical version:
+> In Judah's land God is well known,
+> his name's in Isr'el great:
+> In Salem is his tabernacle,
+> in Sion is his seat.
+
+SUPPORTED (253) — verified; do not change these facts:
+- Introduction: Psalm 76 has been sung before actual battles.
+- Introduction: Psalm 76 names no king.
+- Introduction: Psalm 76 contains no first-person plural speaker.
+- Introduction: Psalm 76 contains none of those first-person pronouns.
+- Introduction: The cited refrain occurs at Psalm 46:8 and 12.
+- Introduction: Psalm 76:7 uses the title without Psalm 46’s possessives.
+- Introduction: Psalm 76:1 is its heading.
+- Introduction: Verses 2–4 locate God and list those things broken.
+- Introduction: Psalm 76:4 ends in Selah.
+- Introduction: Selah’s precise meaning is uncertain; a pause is possible.
+- Introduction: Verse 5 uses radiant and mountains-of-prey language.
+- Introduction: Verses 6–7 mention sleep, unfound hands, cavalry and rebuke.
+- Introduction: Verses 9–10 connect heavenly judgment and saving the lowly.
+- Introduction: A second Selah ends verse 10.
+- Who Holds the Verbs: Verse 4 uses שִׁבַּר of God.
+- Who Holds the Verbs: Verse 9 uses הִשְׁמַעְתָּ for making judgment heard.
+- Who Holds the Verbs: Verse 10 uses rising and saving language.
+- Who Holds the Verbs: Verse 11 addresses God with תַּחְגֹּר.
+- Who Holds the Verbs: Verse 13 uses יִבְצֹר of curbing princes’ spirit.
+- Who Holds the Verbs: The psalm’s occurrence of stand is the question in verse 8.
+- Who Holds the Verbs: Verse 11 makes human fury the subject of תּוֹדֶךָּ.
+- Who Holds the Verbs: Verse 12 commands vowing and paying.
+- Who Holds the Verbs: Verse 12 says those around God bring tribute.
+- Who Holds the Verbs: Hosea 2:20 combines a beast covenant with breaking war.
+- Who Holds the Verbs: Hosea and Psalm 76 use the same break-root and war-list.
+- Who Holds the Verbs: Hosea’s lying down and Psalm 76’s sleep follow weapon-breaking.
+- Who Holds the Verbs: Hosea promises safety and lying down to Israel.
+- Who Holds the Verbs: Verse 7’s נִרְדָּם belongs to the deep-sleep root.
+- Who Holds the Verbs: Jeremiah 25:38 uses סֻכּוֹ for a lion’s lair.
+- Who Holds the Verbs: Salem is an old name for Jerusalem with a peace-sound.
+- The Song of the Sea, Run Backwards: The Song at the Sea contains the cited horse-and-rider phrase.
+- The Song of the Sea, Run Backwards: The Song at the Sea is Israel’s oldest victory song.
+- The Song of the Sea, Run Backwards: Both passages refer to a horse.
+- The Song of the Sea, Run Backwards: The cited Exodus and Psalm forms share the אד״ר root.
+- The Song of the Sea, Run Backwards: Exodus 15:11 and Psalm 76:8, 13 use נוֹרָא.
+- The Song of the Sea, Run Backwards: Exodus 15:3 and Psalm 76:2 end their name-lines with שְׁמוֹ.
+- The Song of the Sea, Run Backwards: Exodus 15:16–17 places still nations before the sanctuary.
+- The Song of the Sea, Run Backwards: The Song at the Sea is read on Passover’s seventh day.
+- The Song of the Sea, Run Backwards: Verses 11–13 use imperfect verbs and commands.
+- The Song of the Sea, Run Backwards: Rashi and Malbim read the psalm against Sennacherib.
+- The Song of the Sea, Run Backwards: The biblical account has Assyria’s camp found dead next morning.
+- The Song of the Sea, Run Backwards: Sennacherib’s Jerusalem campaign is dated to 701 BCE.
+- The Song of the Sea, Run Backwards: Radak’s preferred reading identifies the war with Gog.
+- A Deliverance Without a Possessive: Verse 10 calls the beneficiaries earth’s lowly, not Israel.
+- A Deliverance Without a Possessive: Rashi identifies those saved as Hezekiah and his company.
+- A Deliverance Without a Possessive: Radak identifies the saved lowly as Israel.
+- A Deliverance Without a Possessive: Verse 12 is the psalm’s only direct address to people.
+- Liturgy — Full psalm: Zechariah 14 is the first-day Sukkot haftarah.
+- Liturgy — Full psalm: Zechariah 14:16 describes surviving attackers observing Sukkot.
+- Liturgy — Full psalm: Ezekiel’s Gog account is the Sukkot intermediate-Sabbath haftarah.
+- Liturgy — Full psalm: Ezekiel 39:3, 9 mentions bow, hands, arrows and burned shields.
+- Liturgy — Full psalm: Tradition relates Sukkot’s seventy bulls to seventy nations.
+- Liturgy — Verse 2: Nusach Sefard places this verse before the fifth hakafah.
+- Liturgy — Verse 2: The surrounding hakafot text requests Temple restoration and Levitical song.
+- Liturgy — Verse 2: The selichah contains לֹא בְצִדְקוֹתֵינוּ in this context.
+- Liturgy — Verse 8: The attributed piyyut contains that line in this service.
+- Liturgy — Verse 13: A Nusach Sefard Shabbat zemer contains this sequence.
+- Practical Kabbalah: This practical-psalms manual is attributed to Rav Hai Gaon.
+- Practical Kabbalah: רִשְׁפֵי in verse 4 can suggest fiery bolts.
+- Practical Kabbalah: The exact form occurs only in Psalms 76:7 and 18:16.
+- Practical Kabbalah: Psalm 18:16 connects that rebuke with exposed water channels.
+- Practical Kabbalah: Song 8:7 follows Song 8:6 with many waters unable to quench love.
+- Practical Kabbalah: Psalm 76:6 describes sleeping fighters unable to find hands.
+- Verse 1: Asaph served among David’s Levite musicians.
+- Verse 1: Twelve psalm headings name Asaph: 50 and 73–83.
+- Verse 1: Most Asaph psalms fall within Psalms 42–83.
+- Verse 1: Scholars call Psalms 42–83 the Elohistic Psalter.
+- Verse 1: Verse 12 alone uses YHWH in Psalm 76.
+- Verse 1: The cited five headings contain בִּנְגִינֹת.
+- Verse 1: The Greek heading adds ᾠδὴ πρὸς τὸν Ἀσσύριον.
+- Verse 1: Alexandrian Jews translated this Greek psalm in the last centuries BCE.
+- Verse 1: Sennacherib’s Jerusalem campaign occurred in 701 BCE.
+- Verse 1: Second Kings 19:35 reports the Assyrian camp’s overnight deaths.
+- Verse 1: Malbim places its composition in Hezekiah’s time.
+- Verse 1: Hezekiah’s Levites include sons of Asaph in 2 Chronicles 29:13.
+- Verse 1: Meiri says David prophesied Sennacherib’s defeat and praised God beforehand.
+- Verse 2: נוֹדָע is a singular passive or reflexive form, not plural.
+- Verse 2: Malbim’s Beur Hamilot distinguishes knowing God from knowing His name.
+- Verse 2: Malbim assigns knowledge of God Himself to Judah because Presence dwells there.
+- Verse 2: Malbim assigns knowledge of God’s reputation to the other tribes.
+- Verse 2: Meiri explains Judah’s precedence as respect for kingship.
+- Verse 2: Modern readers attribute northern roots to the Asaphite guild.
+- Verse 2: The northern kingdom fell in 722 BCE.
+- Verse 2: Psalms 48:2 and 48:4 contain the cited phrases.
+- Verse 2: Ezekiel 38:23 uses both גדל and ידע.
+- Verse 2: Radak identifies the psalm’s war as the war of Gog.
+- Verse 2: Radak describes vengeance against nations gathered at Jerusalem.
+- Verse 2: Charpentier composed a grand motet titled Notus in Judaea Deus.
+- Verse 2: Psalm 76:2 appears in the Sefard-rite Simchat Torah hakafot.
+- Verse 3: Genesis 14:18 calls Melchizedek king of Salem.
+- Verse 3: Psalm 76:12 uses שַׁלְּמוּ for paying vows.
+- Verse 3: Chomat Anakh attributes this explanation to an earlier work.
+- Verse 3: Radak recounts the midrash combining Yir’eh and Shalem.
+- Verse 3: The midrash identifies Shem with Salem’s namer, Melchizedek.
+- Verse 3: Genesis 22:14 and the midrash associate Abraham with Yir’eh.
+- Verse 3: Radak’s midrash joins the two names to avoid slighting either man.
+- Verse 3: The four cited verses contain the listed ירא forms.
+- Verse 3: Psalm 76:9 has יראה, meaning ‘feared.’
+- Verse 3: Minchat Shai cites a Masoretic note on סוכו.
+- Verse 3: The cited Masoretic note groups three sukko readings.
+- Verse 3: Psalm 76:3 spells סוכו with a vav.
+- Verse 3: Lamentations 2:6 spells the noun with sin.
+- Verse 3: The Masoretic note groups Psalms 76:3 with Jeremiah 25:38 and Lamentations 2:6.
+- Verse 3: Amos 3:4 applies מְעֹנָתוֹ to a lion’s den.
+- Verse 3: Malbim’s word-notes mention the den of fearsome predatory beasts.
+- Verse 3: Psalm 76:5 contains ‘mountains of prey.’
+- Verse 3: Sukkot liturgy uses Psalm 76.
+- Verse 3: Psalm 10:9 likens the wicked’s ambush to a lion in a covert.
+- Verse 3: Radak construes וַיְהִי as ואז יהיה in his future-war reading.
+- Verse 4: Isaiah 37:33 and II Kings 19:32 address Assyria’s king.
+- Verse 4: The oracle and psalm share ‘there,’ arrows, and shield.
+- Verse 4: Rashi rejects interpreting רִשְׁפֵי־קָשֶׁת as sparks.
+- Verse 4: Rashi objects that sparks do not suit a bow.
+- Verse 4: Rashi contrasts undotted פ here with dotted פ in Song 8:6.
+- Verse 4: Minchat Shai confirms that this פ is undotted.
+- Verse 4: Rashi cites both Deuteronomy 32:24 and Job 5:7.
+- Verse 4: Rashi identifies רִשְׁפֵי־קָשֶׁת as flying arrows.
+- Verse 4: Resheph was a Canaanite god associated with plague and archery.
+- Verse 4: A Phoenician designation means ‘Resheph of the arrow.’
+- Verse 4: Habakkuk 3:5 places רֶשֶׁף at God’s feet.
+- Verse 4: Romemot El reads the breaking as directed against Zion.
+- Verse 4: Alshich wrote in sixteenth-century Safed.
+- Verse 4: Alshich makes Zion the place struck by destructive wrath.
+- Verse 4: Alshich says God directed anger and wrath against Zion to exhaust them.
+- Verse 4: Alshich compares Zion’s suffering for Israel to a shield.
+- Verse 4: Jerusalem’s Second Temple fell in 70 CE.
+- Verse 4: Psalm 76:4 places סֶלָה immediately after וּמִלְחָמָה.
+- Verse 5: נָאוֹר is read as resplendent and resembles נוֹרָא.
+- Verse 5: Scholars have proposed emending נָאוֹר to נוֹרָא.
+- Verse 5: Alshich reports the Targum’s rendering דחיל.
+- Verse 5: The biblical account places the blow against Assyria at night.
+- Verse 5: Malbim depicts a nocturnal lion and explains נָאוֹר this way.
+- Verse 5: Vayehi Ba-Ḥatzi ha-Laylah is attributed to Yannai.
+- Verse 5: Yannai was a Byzantine-era Palestinian poet.
+- Verse 5: Ashkenazi Seder custom places this hymn near the end.
+- Verse 5: Every line of the hymn ends with night.
+- Verse 5: The hymn includes a victory over Sennacherib.
+- Verse 5: The Greek version reads ἀπὸ ὀρέων αἰωνίων.
+- Verse 5: Habakkuk 3:6 contains הַרְרֵי־עַד.
+- Verse 5: The exact form מֵהַרְרֵי occurs three times.
+- Verse 5: Numbers 23:7 uses מֵהַרְרֵי־קֶדֶם.
+- Verse 5: Song of Songs 4:8 pairs lions’ dens with leopards’ mountains.
+- Verse 5: Psalm 76:3 uses מְעוֹנָתוֹ; verse 5 mentions mountains of prey.
+- Verse 6: The form אֶשְׁתּוֹלְלוּ occurs only in Psalm 76:6.
+- Verse 6: Commentators identify initial aleph in place of reflexive he.
+- Verse 6: Rashi compares the form in II Chronicles 20:35.
+- Verse 6: Radak derives אשתוללו from שלל and describes their becoming spoil.
+- Verse 6: Rashi cites Job 12:17 and likens them to erring fools.
+- Verse 6: Nahum 3:18 uses נָמוּ while addressing Assyria’s king.
+- Verse 6: Nahum 1:4 describes God rebuking the sea.
+- Verse 6: Nahum 2:12 asks where the lions’ den is.
+- Verse 6: Nahum 3:18 calls Assyria’s nobles by a plural form of אַדִּיר.
+- Verse 6: Psalm 121:4 says Israel’s guardian neither slumbers nor sleeps.
+- Verse 6: Jeremiah 51:39 describes an everlasting sleep without waking.
+- Verse 6: The idiom of warriors not finding their hands is unique.
+- Verse 6: Mozart’s Don Giovanni premiered in 1787, with Da Ponte’s libretto.
+- Verse 6: Don Giovanni says “No, no, ch'io non mi pento.”
+- Verse 6: Psalm 76 assigns no spoken words to an enemy.
+- Verse 7: Psalm 106:9 and Isaiah 50:2 link divine rebuke to drying seas.
+- Verse 7: The exact form מִגַּעֲרָתְךָ occurs elsewhere only in Psalm 18:16.
+- Verse 7: Malbim’s word-notes order three progressively deeper sleep terms.
+- Verse 7: Malbim contrasts the divine rebuke with a human waking rebuke.
+- Verse 7: Malbim’s main commentary remarks that even the horses succumb.
+- Verse 7: I Samuel 26:12 describes David taking Saul’s spear amid divinely caused sleep.
+- Verse 7: Ibn Ezra connects the Jacob epithet to verse 2’s Israel.
+- Verse 7: Genesis 49:24 mentions Joseph’s bow, arms, hands, and אֲבִיר יַעֲקֹב.
+- Verse 7: Psalm 76:4 mentions a broken bow; verse 6 links אַבִּירֵי and missing hands.
+- Verse 7: Genesis 49:24’s אֲבִיר and Psalm 76:6’s אַבִּירֵי differ in vocalization.
+- Verse 8: Ibn Ezra interprets the repeated pronoun as “You alone.”
+- Verse 8: Rashi explains מֵאָז אַפֶּךָ as from the time You become angry.
+- Verse 8: The displayed Hebrew and its account of Malbim match his entry.
+- Verse 8: Assyrian conquests affected multiple states in the eighth century BCE.
+- Verse 8: Lecha Eli Teshukati is attributed to Abraham ibn Ezra.
+- Verse 8: The piyyut contains וּמִי יַעֲמֹד לְפָנֶיךָ וּמִי יִהְיֶה תְמוּרָתִי.
+- Verse 9: Torah Temimah cites both Talmudic passages.
+- Verse 9: Ḥizkiya gives fear-then-stillness as his answer.
+- Verse 9: Only the sixth creation-day designation has the definite article.
+- Verse 9: The rabbinic reading identifies the sixth with Torah-giving on Sivan 6.
+- Verse 9: Resh Lakish makes creation conditional on Israel accepting Torah.
+- Verse 9: The Talmud explains the earth's fear and calm by Torah acceptance.
+- Verse 9: Deuteronomy 4:36 shares the verb and heaven–earth wording.
+- Verse 9: Joshua 14:15 says the land rested from war.
+- Verse 9: Psalm 76:4 ends its list of broken weapons with war.
+- Verse 9: Rashi identifies the fearful, calmed land as Eretz Israel.
+- Verse 9: Radak identifies the land with nations ceasing war against Israel.
+- Verse 10: The Hebrew quotation and its attribution to Malbim are accurate.
+- Verse 10: Malbim explains the earth's stillness as relief from fear.
+- Verse 10: Psalms 9–10 contain an acrostic sequence.
+- Verse 10: Psalm 9:17 pairs God's being known with executing judgment.
+- Verse 10: Psalm 9:20 contains the appeal קוּמָה.
+- Verse 10: Psalm 9:21 asks God to put fear into them.
+- Verse 10: Psalm 9:12 calls God the dweller in Zion.
+- Verse 10: Psalm 10:9 depicts a lionlike ambusher of the poor.
+- Verse 10: Psalm 10:17–18 joins the lowly's plea to ending human terror.
+- Verse 10: Malbim on Psalm 76:13 cites Psalm 10:18.
+- Verse 10: Zephaniah 2:3 addresses all the lowly of the land.
+- Verse 10: Isaiah 11:4 describes equitable judgment for the lowly.
+- Verse 10: The following Marathi lines are attributable to Tukaram.
+- Verse 10: The English fairly renders the attributed Marathi lines.
+- Verse 11: Daniel depicts Nebuchadnezzar heating the furnace, then blessing their God.
+- Verse 11: Rashi uses Nebuchadnezzar to explain human fury becoming praise.
+- Verse 11: Rashi offers both restraint and literal girding readings.
+- Verse 11: Rashi's first reading uses the rabbinic sense of restraint.
+- Verse 11: Rashi cites the fingernail-catching knife-nick formulation.
+- Verse 11: Rashi's first reading restrains the remaining wicked.
+- Verse 11: Rashi reports Rabbi Eleazar the Gaon's use of this verse.
+- Verse 11: Rashi's alternative interprets literal girding.
+- Verse 11: Rashi reserves the girding of wrath for God in his alternative.
+- Verse 11: Ibn Ezra says God retains and can release the remaining wrath.
+- Verse 11: Malbim's word-notes give this as an alternative grammatical reading.
+- Verse 11: The Greek Psalter reads ἑορτάσει σοι here.
+- Verse 11: Zechariah 14:16 has surviving nations ascend to celebrate Sukkot.
+- Verse 11: Zechariah 14:16 uses הַנּוֹתָר rather than שְׁאֵרִית.
+- Verse 11: Zechariah 14 is the first-day Sukkot haftarah.
+- Verse 11: Psalm 76 is sung on the first day of Sukkot.
+- Verse 11: Psalm 93:1 says God girds Himself with strength.
+- Verse 11: Scholars have proposed both Edom and Hamath emendations.
+- Verse 12: YHWH appears only in verse 12 of Psalm 76.
+- Verse 12: Deuteronomy 23:22 associates vowing with YHWH your God.
+- Verse 12: Verse 12 alone directly addresses a plural human audience.
+- Verse 12: Psalm 50:14 commands payment of vows to the Most High.
+- Verse 12: Radak identifies those around God with neighboring nations.
+- Verse 12: Rashi adduces Isaiah 19:18's Egyptian cities.
+- Verse 12: Psalm 89:8 associates God's surrounding assembly with awe.
+- Verse 12: Psalm 76:12–13 contains surrounding worshipers, awe, and earthly kings.
+- Verse 12: The tribute noun שַׁי occurs three times in the Hebrew Bible.
+- Verse 12: Isaiah 18:7 and Psalms 68:30; 76:12 direct שַׁי to God.
+- Verse 12: Malbim's word-notes explain prefixed מ as designating a place.
+- Verse 12: The quotation accurately gives Malbim's Assyria-and-tribute argument.
+- Verse 12: Assyria historically received the tribute described here.
+- Verse 13: Rashi reads 'lessen,' cites Genesis 11:6, and identifies arrogance.
+- Verse 13: Ibn Ezra derives the verb from grape-harvesting.
+- Verse 13: Deuteronomy 24:21 uses תִבְצֹר for gathering vineyard grapes.
+- Verse 13: An independent Hasidic Shabbat zemer juxtaposes both passages and names Edom and Bozrah.
+- Verse 13: Isaiah 63:1 and Psalm 76:10 both use לְהוֹשִׁיעַ.
+- Verse 13: Isaiah 63:3–6 and Psalm 76:8, 11 use these anger terms.
+- Verse 13: Psalm 76:11 uses a verb meaning 'gird.'
+- Verse 13: Isaiah 63 depicts treading grapes in a winepress.
+- Verse 13: Isaiah 63:5 says the speaker looked and found no helper.
+- Verse 13: Radak reports an earlier Assyrian reading and now favors Gog.
+- Verse 13: Radak says his earlier Assyrian reading appeared under חגר in Mikhlol.
+- Verse 13: Radak cites the preceding psalm as his reason for reconsidering.
+- Verse 13: Psalm 75 speaks of God's appointed judgment.
+- Verse 13: Radak bases his Gog reading on Psalm 76's preceding psalm.
+- Verse 13: Radak explains Psalm 76:3's וַיְהִי with future יהיה.
+- Verse 13: Psalm 76 contains past-tense narrative forms and later future-form verbs.
+- Verse 13: These phrases appear near the opening and at Psalm 76's close.
+- Verse 13: אָרֶץ appears in verses 9, 10, and 13.
+- Verse 13: The described Covenanter encounter occurred on 1 June 1679 near Loudoun Hill.
+- Verse 13: John Graham of Claverhouse commanded the approaching government dragoons.
+- Verse 13: Covenanters sang Psalm 76 before this engagement.
+- Verse 13: The Covenanters charged after singing and routed the dragoons.
+- Verse 13: These Covenanters faced persecution by a king claiming authority over their church.
+
+UNVERIFIABLE (21) — no evidence either way; do not change on factual grounds:
+- The Song of the Sea, Run Backwards: Some communities recite Psalm 76 on Passover’s seventh day.
+- A Deliverance Without a Possessive: The psalm was historically performed in Jerusalem by Jerusalemites.
+- Liturgy — Full psalm: Psalm 76 is a first-day Sukkot psalm-of-the-day custom.
+- Liturgy — Full psalm: These specific communities and the Vilna Gaon follow that custom.
+- Liturgy — Full psalm: Some Ashkenazi and Hasidic rites recite it that day.
+- Liturgy — Verse 2: That first-Monday selichah opens with the quoted Hebrew line.
+- Liturgy — Verse 8: The quoted confession follows the question without intervening lines.
+- Liturgy — Verse 13: That Rosh Hashanah yotzer contains the quoted sequence.
+- Practical Kabbalah: Shimush Tehillim assigns Psalm 76 rescue from fire and water.
+- Practical Kabbalah: Later compilers prescribe Psalm 76 against bandits.
+- Verse 1: The Greek heading is the earliest surviving identification of the war.
+- Verse 2: The verse becomes a penitential acrostic’s first line.
+- Verse 3: Salem is Jerusalem’s oldest name.
+- Verse 3: The Greek translation renders Salem as ἐν εἰρήνῃ.
+- Verse 3: ‘The Jaguar’ appears in Hughes’s first collection, published in 1957.
+- Verse 4: Tablets naming Ršp were found in 1929.
+- Verse 6: Don Giovanni invites his victim’s stone statue to supper.
+- Verse 6: Da Ponte gives these lines to the Commendatore and Don Giovanni.
+- Verse 10: Tukaram's date, location, poetic form, and devotional setting.
+- Verse 13: An Ashkenazi Rosh Hashanah yotzer juxtaposes both passages.
+- Verse 13: Mikhlol's entry itself names Sennacherib.
