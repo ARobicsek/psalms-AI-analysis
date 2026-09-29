@@ -34,6 +34,7 @@ from src.agents.question_curator import QuestionCurator
 # src/agents/archive/insight_extractor.py. Not to be confused with the
 # synthesis-discovery sidecar (STEP 3.5), which is very much alive.
 from src.agents.copy_editor import CopyEditor
+from src.agents.fact_checker import combine_supplementary
 from src.agents.literary_echoes_agent import (
     LiteraryEchoesAgent,
     GEMINI_MODEL as LIT_ECHOES_GEMINI_MODEL,
@@ -328,6 +329,7 @@ def run_enhanced_pipeline(
     reuse_synthesis_discovery: bool = False,  # Session 358: reuse an existing observations file instead of regenerating (~$2 saved)
     skip_beta_reader: bool = True,   # Session 372: OFF by default — see --beta-reader below
     beta_model: str = None,          # Session 362: default lives in BetaReader.DEFAULT_MODEL
+    fact_check: bool = False,        # Session 385: OFF until the author approves -- see STEP 5a¾
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -939,6 +941,44 @@ def run_enhanced_pipeline(
             logger.warning(f"[STEP 5a½] Citation verification failed (non-fatal): {e}")
 
     # =====================================================================
+    # STEP 5a¾: Evidence-based fact check (Session 385) — OFF by default.
+    # gpt-6-sol + web search + verse/commentary/concordance lookups verifies the
+    # guide's checkable claims and returns verdicts WITH evidence. Its report
+    # rides into the copy editor beside the citation report, and the copy editor
+    # corrects facts only where it says `contradicted`. The copy editor's system
+    # prompt is untouched. docs/plans/S385_FACT_CHECK_RESULTS.md.
+    # =====================================================================
+    fact_check_prompt = None
+    if fact_check and not smoke_test and print_ready_file.exists():
+        logger.info("[STEP 5a¾] Fact check (gpt-6-sol, web search)...")
+        print(f"\n{'='*80}")
+        print(f"STEP 5a¾: Fact Check (Session 385)")
+        print(f"{'='*80}\n")
+        try:
+            from src.agents.fact_checker import FactChecker, write_outputs, format_copy_editor_prompt
+            bundle_file = next((f for f in (
+                output_path / f"psalm_{psalm_number:03d}_research_trimmed.md", research_file,
+            ) if f.exists()), None)
+            fc = FactChecker(db_path=Path(db_path), logger=logger, cost_tracker=cost_tracker)
+            fc_result = fc.check(
+                print_ready_file.read_text(encoding='utf-8'), psalm_number,
+                bundle_file.read_text(encoding='utf-8') if bundle_file else "",
+                thinking_out=output_path / f"psalm_{psalm_number:03d}_fact_check_thinking.txt",
+            )
+            fc_paths = write_outputs(fc_result, psalm_number, output_path)
+            fact_check_prompt = format_copy_editor_prompt(fc_result.records) or None
+            tracker.track_model_for_step("fact_check", fc.model)
+            logger.info(
+                f"[STEP 5a¾] {len(fc_result.records)} claims {fc_result.meta(psalm_number)['verdicts']}; "
+                f"{fc_result.web_searches} web searches; ${fc_result.cost_usd:.4f} "
+                f"(web-search fees ${fc_result.search_cost_usd:.4f} are NOT in the cost tracker) "
+                f"— see {fc_paths['md'].name}"
+            )
+        except Exception as e:
+            halt_on_quota(e, "STEP 5a¾: Fact Check", logger, cost_tracker, output_path, psalm_number)
+            logger.warning(f"[STEP 5a¾] Fact check failed (non-fatal; copy editor runs without it): {e}")
+
+    # =====================================================================
     # STEP 5b: Copy Editor (Session 280)
     # =====================================================================
     copy_edited_file = output_path / f"psalm_{psalm_number:03d}_copy_edited.md"
@@ -953,10 +993,37 @@ def run_enhanced_pipeline(
                 psalm_number=psalm_number,
                 input_file=print_ready_file,
                 output_dir=output_path,
-                supplementary_prompt=citation_fix_prompt,
+                supplementary_prompt=(
+                    combine_supplementary(citation_fix_prompt, fact_check_prompt)
+                    if fact_check else citation_fix_prompt
+                ),
             )
             tracker.track_model_for_step("copy_editor", copy_editor.model)
             logger.info(f"Copy Editor complete: {ce_result['edited_file']}")
+
+            # STEP 5b½ (Session 385, with --fact-check): re-run the $0 citation
+            # verifier on the COPY-EDITED text and report mismatches the copy
+            # editor introduced. Nothing checked its own assertions before
+            # (COPY_EDITOR_TERRA_FINDINGS.md, "Open"). Report only; no rewrite.
+            if fact_check and Path(db_path).exists():
+                from src.utils.scripture_verifier import (
+                    verify_citations, new_citation_issues, format_verification_report,
+                )
+                before = verify_citations(print_ready_file.read_text(encoding='utf-8'),
+                                          db_path=db_path, psalm_number=psalm_number)
+                after = verify_citations(Path(ce_result['edited_file']).read_text(encoding='utf-8'),
+                                         db_path=db_path, psalm_number=psalm_number)
+                introduced = new_citation_issues(before, after)
+                post_path = output_path / f"psalm_{psalm_number:03d}_post_copy_edit_citations.md"
+                post_path.write_text(
+                    format_verification_report(introduced, psalm_number=psalm_number), encoding='utf-8')
+                if introduced:
+                    logger.warning(f"[STEP 5b½] The copy editor introduced {len(introduced)} citation "
+                                   f"mismatch(es) — see {post_path.name}")
+                    for i in introduced:
+                        logger.warning(f"  {i.issue_type}: {i.citation_ref} at {i.location_hint}")
+                else:
+                    logger.info("[STEP 5b½] No citation mismatches introduced by the copy editor")
         except Exception as e:
             halt_on_quota(e, "STEP 5b: Copy Editor", logger, cost_tracker, output_path, psalm_number)
             logger.error(f"Copy Editor failed: {e}", exc_info=True)
@@ -1175,6 +1242,12 @@ if __name__ == "__main__":
     parser.add_argument("--beta-model", type=str, default=None,
                        help="Override the beta-reader model (default: claude-sonnet-4-6)")
 
+    parser.add_argument("--fact-check", action="store_true",
+                        help="Session 385 (experimental, OFF by default): evidence-based fact check "
+                             "(gpt-6-sol + web search, ~$2-4) before the copy editor, which then "
+                             "corrects facts only from its report; plus a $0 citation re-check "
+                             "of the copy-edited text where tanakh.db exists")
+
     args = parser.parse_args()
 
     # Set output directory with psalm-specific subdirectory
@@ -1256,4 +1329,5 @@ if __name__ == "__main__":
         reuse_synthesis_discovery=args.reuse_synthesis_discovery,
         skip_beta_reader=not args.beta_reader,
         beta_model=args.beta_model,
+        fact_check=args.fact_check,
     )

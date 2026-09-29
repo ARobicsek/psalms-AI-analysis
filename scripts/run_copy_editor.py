@@ -71,10 +71,22 @@ Examples:
         "--model",
         type=str,
         default=None,
-        help="Override the model (default: gpt-5.6-terra)"
+        help="Override the model (default: CopyEditor.DEFAULT_MODEL, gpt-5.4)"
+    )
+
+    parser.add_argument(
+        "--fact-check-report",
+        type=Path,
+        help="Session 385: a psalm_NNN_fact_check.json from scripts/run_fact_checker.py. "
+             "Sent as supplementary context: facts are corrected only where it says "
+             "'contradicted'. The system prompt is unchanged."
     )
 
     args = parser.parse_args()
+    supplementary = None
+    if args.fact_check_report:
+        from src.agents.fact_checker import load_copy_editor_prompt
+        supplementary = load_copy_editor_prompt(args.fact_check_report) or None
     logger = get_logger("run_copy_editor")
 
     # Validate psalm numbers
@@ -129,6 +141,7 @@ Examples:
                 psalm_number=psalm_num,
                 input_file=input_file,
                 output_dir=args.output_dir,
+                supplementary_prompt=supplementary,
             )
             results.append((psalm_num, result))
         except Exception as e:

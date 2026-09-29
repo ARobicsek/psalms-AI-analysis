@@ -1939,3 +1939,21 @@ def verify_citations_tooluse(
     }
 
     return issues, stats
+
+
+# ---------------------------------------------------------------------------
+# Session 385: what the copy editor broke
+# ---------------------------------------------------------------------------
+
+def _issue_key(issue: CitationIssue) -> tuple:
+    q = issue.normalized_quoted or _strip_to_consonants(_normalize_hebrew(issue.quoted_hebrew or ""))
+    return (issue.issue_type, (issue.citation_ref or "").strip("() ").lower(), q)
+
+
+def new_citation_issues(before: List[CitationIssue], after: List[CitationIssue]) -> List[CitationIssue]:
+    """Issues present in `after` (the copy-edited text) but not in `before` (the
+    text the copy editor received) — i.e. mismatches the copy editor introduced.
+    Nothing checked the copy editor's own assertions before Session 385; the
+    fabricated Ps 40:17 waw (COPY_EDITOR_TERRA_FINDINGS.md) is the class this catches."""
+    seen = {_issue_key(i) for i in before}
+    return [i for i in after if _issue_key(i) not in seen]

@@ -424,6 +424,12 @@ class CopyEditor:
     # Read that before moving this back to Terra.
     DEFAULT_MODEL = "gpt-5.4"
 
+    # A verse-commentary header alone on its line. Same shape as the recovery
+    # regex in run_enhanced_pipeline._extract_sections_from_copy_edited.
+    STANDALONE_VERSE_HEADER = re.compile(
+        r'^\*\*Verses?\s+\d+(?:\s*[-–]\s*\d+)?\*\*\s*$', re.MULTILINE
+    )
+
     def __init__(self, model: str = None, logger=None, cost_tracker=None):
         self.model = model or self.DEFAULT_MODEL
         self.logger = logger or get_logger("copy_editor")
@@ -787,10 +793,17 @@ class CopyEditor:
         original_editables = {z['label']: z['content'] for z in zones if z['type'] == 'editable'}
 
         if len(editable_labels) == 2 and 'intro_body' in editable_labels and 'verses_body' in editable_labels:
-            # Split the corrected text back into intro_body and verses_body
-            # The verses_body starts with **Verse 1** or **Verse** pattern
-            verse_start_pattern = re.compile(r'^\*\*Verse[s]?\s+\d+', re.MULTILINE)
-            match = verse_start_pattern.search(corrected_text)
+            # Split the corrected text back into intro_body and verses_body at
+            # the first verse header that stands ALONE on its line (**Verse 1**,
+            # **Verses 3–4**). Session 385: the old anchor, `^\*\*Verses?\s+\d+`
+            # with nothing after it, also matched a liturgical key-verse line
+            # like `**Verse 2.** In Nusach Sefard…`, so in Session 383 the
+            # key-verses block and Practical Kabbalah landed in verses_body.
+            # The loose pattern stays only as a fallback, for a response whose
+            # headers the model reformatted.
+            match = self.STANDALONE_VERSE_HEADER.search(corrected_text)
+            if not match:
+                match = re.compile(r'^\*\*Verse[s]?\s+\d+', re.MULTILINE).search(corrected_text)
 
             if match:
                 split_pos = match.start()
@@ -828,18 +841,27 @@ class CopyEditor:
     # LLM call
     # -------------------------------------------------------------------------
 
+    @staticmethod
+    def build_user_message(editable_content: str, psalm_number: int,
+                           supplementary_prompt: Optional[str] = None) -> str:
+        """The user turn. Supplementary context (the citation report, the
+        Session-385 fact-check report) is APPENDED here and never spliced into
+        COPY_EDITOR_SYSTEM_PROMPT; with none supplied, the message is exactly
+        what it was before Session 385 (tests pin both)."""
+        user_message = f"""Here is the commentary for Psalm {psalm_number}. Apply the copy editing rules from your system prompt. Return the FULL corrected text followed by a ## Changes section.
+
+{editable_content}"""
+        if supplementary_prompt:
+            user_message += f"\n\n{supplementary_prompt}"
+        return user_message
+
     def _call_editor(self, editable_content: str, psalm_number: int,
                      supplementary_prompt: Optional[str] = None) -> Tuple[str, str, dict]:
         """Call Claude Opus 4.6 with the copy editor prompt. Retries on connection errors."""
         self.logger.info(f"Calling {self.model} with adaptive thinking...")
 
-        user_message = f"""Here is the commentary for Psalm {psalm_number}. Apply the copy editing rules from your system prompt. Return the FULL corrected text followed by a ## Changes section.
-
-{editable_content}"""
-
-        # Append supplementary context (e.g., citation verification report)
+        user_message = self.build_user_message(editable_content, psalm_number, supplementary_prompt)
         if supplementary_prompt:
-            user_message += f"\n\n{supplementary_prompt}"
             self.logger.info(f"Appended supplementary prompt ({len(supplementary_prompt):,} chars)")
 
         max_retries = 3
@@ -855,7 +877,28 @@ class CopyEditor:
                 last_progress_time = time.time()
                 progress_interval = 5  # seconds between progress updates
 
-                if self.openai_client:
+                if self.openai_client and self.model.startswith("gpt-6"):
+                    # GPT-6 is served on the Responses API only well: on
+                    # chat.completions the branch below would run it with
+                    # max_tokens=16000 and no reasoning effort (the same trap the
+                    # writer refuses since Session 384). Same system prompt.
+                    response = self.openai_client.responses.create(
+                        model=self.model,
+                        instructions=COPY_EDITOR_SYSTEM_PROMPT,
+                        input=user_message,
+                        reasoning={"effort": "high"},
+                        max_output_tokens=65536,
+                    )
+                    full_text = response.output_text or ""
+                    visible_out, reasoning_tokens = split_output_tokens(response.usage)
+                    if reasoning_tokens:
+                        thinking_text = "Reasoning used " + str(reasoning_tokens) + " tokens."
+                    usage_data = {
+                        'input_tokens': getattr(response.usage, 'input_tokens', 0),
+                        'output_tokens': visible_out,
+                        'thinking_tokens': reasoning_tokens,
+                    }
+                elif self.openai_client:
                     kwargs = {
                         "model": self.model,
                         "messages": [
@@ -1058,11 +1101,12 @@ class CopyEditor:
 
     @staticmethod
     def _strip_echoed_supplementary(text: str) -> str:
-        """Remove any echoed citation-check instructions the LLM copied into its output."""
-        marker = "SCRIPTURE CITATION CHECK (automated"
-        idx = text.find(marker)
-        if idx == -1:
+        """Remove any echoed citation-check or fact-check instructions the LLM copied into its output."""
+        found = [i for i in (text.find("SCRIPTURE CITATION CHECK (automated"),
+                             text.find("FACT-CHECK REPORT (evidence-based")) if i != -1]
+        if not found:
             return text
+        idx = min(found)
         # Find the end: the block ends at the last numbered issue line + blank,
         # or at the next major section (## Changes, or a verse/intro header).
         # Safest: cut from marker to the next "## " header or end of text.
