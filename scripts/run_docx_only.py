@@ -5,11 +5,15 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.utils.document_generator import DocumentGenerator
+from src.utils.document_generator import DocumentGenerator, export_pdf, writer_reasoning_parts
 
 def main():
     parser = argparse.ArgumentParser(description="Regenerate DOCX for a specific Psalm")
     parser.add_argument("psalm", type=int, help="Psalm number")
+    parser.add_argument("--standard", action="store_true",
+                        help="the pre-Session-387 layout (12pt, 1-inch margins, page breaks) instead of compact")
+    parser.add_argument("--no-appendix", action="store_true", help="omit the writer's-reasoning appendix")
+    parser.add_argument("--pdf", action="store_true", help="also save a PDF through Word (Windows)")
     args = parser.parse_args()
 
     psalm_number = args.psalm
@@ -63,10 +67,14 @@ def main():
             edited_verses_file, 
             summary_json_file, 
             docx_output_file, 
-            q_file
+            q_file,
+            appendix_parts=None if args.no_appendix else writer_reasoning_parts(psalm_number),
+            compact=not args.standard,
         )
         gen.generate()
         print(f"Success! Saved to {docx_output_file}")
+        if args.pdf:
+            print(f"PDF: {export_pdf(docx_output_file)}")
     except Exception as e:
         print(f"Error generating Word document: {e}")
 

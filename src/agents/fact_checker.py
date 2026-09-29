@@ -391,6 +391,25 @@ def sentence_in_guide(sentence: str, guide: str) -> bool:
     return a2 in b2 or (len(a2) > 60 and a2[:60] in b2)
 
 
+def expand_sentence(sentence: str, guide: str) -> str:
+    """The full guide sentence that `sentence` opens (pure). Stage 1 writes only the FIRST SIX
+    WORDS of a supported claim's sentence, and a claim it hands to the web keeps that stub
+    through the judge, so a contradicted record could reach the copy editor as "In 1773, on
+    the edge of" (Ps 77, Session 387). Returns `sentence` unchanged when it is already whole
+    or cannot be found."""
+    s = (sentence or "").strip()
+    if not s or re.search(r"[.!?:\"”’)]\s*$", s):
+        return sentence
+    g = (guide or "").replace("\r\n", "\n")
+    i = g.find(s)
+    if i < 0:
+        return sentence
+    m = re.search(r"[.!?:](?=[\"”’)]?(?:\s|$))[\"”’)]?|\n\s*\n", g[i + len(s):])
+    end = i + len(s) + (m.end() if m else len(g) - i - len(s))
+    full = " ".join(g[i:end].split())
+    return full if len(full) <= 1200 else sentence
+
+
 def validate_records(raw: List[Dict], guide: str = "", allowed: Tuple[str, ...] = VERDICTS) -> List[Dict]:
     """Normalise model records and enforce the evidence rule: a `contradicted`
     verdict with no quoted evidence is DOWNGRADED to `unverifiable` and marked,
@@ -435,6 +454,28 @@ def parse_fact_check_json(text: str) -> List[Dict]:
     if isinstance(data, dict):
         data = data.get("claims", [])
     return list(data)
+
+
+def salvage_records(text: str) -> List[Dict]:
+    """The complete records at the head of a TRUNCATED `{"claims": [ ... ` response (pure).
+    Session 387: Ps 77's verses 10-15 chunk ended mid-string at char 21,448, and the
+    json.loads error took the whole fact check down with it."""
+    t = text or ""
+    m = re.search(r'"claims"\s*:\s*\[', t)
+    i = m.end() if m else (t.find("[") + 1 if "[" in t else 0)
+    dec, out = json.JSONDecoder(), []
+    while True:
+        while i < len(t) and t[i] in " \t\r\n,":
+            i += 1
+        if i >= len(t) or t[i] != "{":
+            break
+        try:
+            obj, i = dec.raw_decode(t, i)
+        except json.JSONDecodeError:
+            break
+        if isinstance(obj, dict):
+            out.append(obj)
+    return out
 
 
 def verdict_counts(records: List[Dict]) -> Dict[str, int]:
@@ -1140,6 +1181,52 @@ def verify_sources(items: List[Dict], parallel: int = 8) -> Dict[str, int]:
     return counts
 
 
+def summarize_tool_result(name: str, result: Dict, n: int = 240) -> str:
+    """One line on what a $0 lookup returned, for the telemetry report (pure)."""
+    if not isinstance(result, dict):
+        return _clip(str(result), n)
+    if result.get("error"):
+        return "ERROR: " + _clip(str(result["error"]), n)
+    if name == "search_tanakh":
+        refs = result.get("refs") or result.get("results") or result.get("verses") or []
+        total = result.get("count", result.get("total", len(refs) if isinstance(refs, list) else "?"))
+        shown = ", ".join(str(r if not isinstance(r, dict) else r.get("ref", r)) for r in list(refs)[:12]) \
+            if isinstance(refs, list) else ""
+        return f"{total} verse(s)" + (f": {shown}" + (" …" if isinstance(refs, list) and len(refs) > 12 else "")
+                                      if shown else "")
+    if name == "search_research":
+        hits = result.get("passages") or []
+        where = "; ".join(dict.fromkeys(h.get("section", "") for h in hits if h.get("section")))
+        first = _norm_ws(hits[0].get("text", "")) if hits else ""
+        return (f"{result.get('matches', len(hits))} match(es) in the research bundle"
+                + (f" (in: {_clip(where, 120)})" if where else "")
+                + (f"; first: {_clip(first, n)}" if first else ""))
+    parts = []
+    for k in ("ref", "source", "commentator"):
+        if result.get(k):
+            parts.append(f"{k}={result[k]}")
+    for k in ("hebrew", "english", "text"):
+        if result.get(k):
+            # a bundle entry opens with the analyst's italic reason for requesting it; skip it
+            body = re.sub(r"^\*[^\n]*\n", "", str(result[k]).lstrip())
+            parts.append(f"{k}: {_clip(_norm_ws(body), n)}")
+    return "; ".join(parts) or _clip(json.dumps(result, ensure_ascii=False), n)
+
+
+def _web_action(item) -> Dict:
+    """What an OpenAI web_search_call did: a search (query), an open_page (url), a find."""
+    a = getattr(item, "action", None)
+    if a is None:
+        return {"type": "search", "query": ""}
+    get = (lambda k: a.get(k)) if isinstance(a, dict) else (lambda k: getattr(a, k, None))
+    out = {"type": get("type") or "search"}
+    for k in ("query", "queries", "url", "pattern"):
+        v = get(k)
+        if v:
+            out[k] = v if isinstance(v, (str, list)) else str(v)
+    return out
+
+
 def lookup_text(ref: str) -> Dict[str, str]:
     try:
         out = _sefaria_text(ref.strip())
@@ -1168,6 +1255,9 @@ class FactCheckResult:
     model: str = DEFAULT_MODEL
     effort: str = DEFAULT_EFFORT
     stages: Dict[str, Dict] = field(default_factory=dict)
+    # Session 387: what each call looked up and found, the gathered web passages and their
+    # page checks, and the evidence handed over up front. Written to *_telemetry.json.
+    telemetry: Dict = field(default_factory=dict)
 
     def meta(self, psalm: int) -> Dict:
         return {"psalm": psalm, "model": self.model, "effort": self.effort,
@@ -1215,6 +1305,8 @@ class FactChecker:
         self.parallel = max(1, parallel)
         self.budget_check = budget_check
         self._spent: Dict[str, Dict] = {}   # per model: usage + searches, for budget_check
+        self._trace: List[Dict] = []         # every lookup and web action, for the telemetry report
+        self._gathered: List[Dict] = []
         if client is None:
             from openai import OpenAI
             client = OpenAI(timeout=1800, max_retries=2)
@@ -1267,7 +1359,10 @@ class FactChecker:
             step_searches = 0
             for it in resp.output:
                 if it.type == "web_search_call":
-                    step_searches += 1
+                    act = _web_action(it)
+                    if act.get("type", "search") == "search":
+                        step_searches += 1
+                    self._trace.append({"run": label, "model": model, "kind": "web", **act})
                 elif it.type == "function_call":
                     calls.append(it)
                 elif it.type == "reasoning":
@@ -1285,6 +1380,8 @@ class FactChecker:
                 except json.JSONDecodeError:
                     args = {}
                 result = self._run_tool(c.name, args, bundle)
+                self._trace.append({"run": label, "model": model, "kind": "lookup", "tool": c.name,
+                                    "args": args, "found": summarize_tool_result(c.name, result)})
                 outputs.append({"type": "function_call_output", "call_id": c.call_id,
                                 "output": json.dumps(result, ensure_ascii=False)[:20000]})
             self._log(f"  {label}: round {rnd + 1}, {len(calls)} lookup(s), {searches} search(es) so far")
@@ -1292,12 +1389,21 @@ class FactChecker:
             resp = self._create(previous_response_id=resp.id, input=outputs, **common, **extra)
         text = resp.output_text or ""
         status = getattr(resp, "status", "completed")
-        records = parse_fact_check_json(text) if text.strip() else []
+        truncated = False
+        try:
+            records = parse_fact_check_json(text) if text.strip() else []
+        except (json.JSONDecodeError, ValueError) as e:
+            records, truncated = salvage_records(text), True
+            self._log(f"  {label}: final answer is not valid JSON ({str(e)[:80]}; status={status}, "
+                      f"{len(text):,} chars); salvaged {len(records)} complete record(s)")
+        if status == "incomplete":
+            truncated = True
         self._log(f"  {label}: {len(records)} records, {searches} searches, {fcalls} lookups, "
                   f"{time.time() - t0:.0f}s, status={status}")
         return {"records": records, "usage": usage, "searches": searches, "fcalls": fcalls,
                 "tool_counts": tool_counts, "status": status, "thinking": "\n\n".join(summaries),
-                "label": label, "model": model}
+                "label": label, "model": model, "effort": effort, "seconds": round(time.time() - t0),
+                "truncated": truncated}
 
     def _account(self, model: str, step: Dict, searches: int) -> None:
         s = self._spent.setdefault(model, {"usage": _empty_usage(), "searches": 0})
@@ -1393,6 +1499,27 @@ class FactChecker:
         return self._loop(f"local {idx}/{n} [{chunk['label']}]", self.model, self.effort, content,
                           FUNCTION_TOOLS, LOCAL_SCHEMA, bundle, f"fact-check-ps{psalm}")
 
+    def _local_chunk_safe(self, psalm: int, chunk: Dict, bundle: str, idx: int, n: int,
+                          evidence: str = "") -> List[Dict]:
+        """_local_chunk, re-run in halves (split at verse headers) when its answer was cut off:
+        a shorter excerpt means a shorter answer. The truncated run's salvaged records are
+        kept only if the halves fail too. Returns every run made, for the accounting."""
+        first = self._local_chunk(psalm, chunk, bundle, idx, n, evidence)
+        if not first.get("truncated"):
+            return [first]
+        halves = split_guide_for_checking(chunk["text"], max(2000, len(chunk["text"]) // 2 + 1))
+        if len(halves) < 2:
+            return [first]
+        self._log(f"  local {idx}/{n}: answer truncated; re-checking in {len(halves)} parts")
+        runs = []
+        for j, h in enumerate(halves, 1):
+            ev = shared_evidence(h["text"], bundle, self.db_path, verses=chunk_verses(h["text"]) or None)
+            runs.append(self._local_chunk(psalm, h, bundle, f"{idx}.{j}", n, ev))
+        if any(r.get("truncated") for r in runs):
+            return [first] + runs          # keep what was salvaged from every attempt
+        first = dict(first, records=[], superseded=True)   # billed, but its records are replaced
+        return [first] + runs
+
     def _gather_then_judge(self, psalm: int, claims: List[Dict], bundle: str) -> List[Dict]:
         """Stage 2: a cheap model GATHERS passages with web search (no verdicts), every
         passage is checked against its live page ($0), and the judge model rules from the
@@ -1428,6 +1555,7 @@ class FactChecker:
         vc = verify_sources(items)
         self._log(f"  gathered sources checked against their pages: {vc}")
         self._verify_counts = vc
+        self._gathered = items
         jb = self.review_batch
         jbatches = [items[i:i + jb] for i in range(0, len(items), jb)]
 
@@ -1468,7 +1596,37 @@ class FactChecker:
             return list(ex.map(run, range(len(batches))))
 
     # -- public ---------------------------------------------------------------
+    def _bill_tracker(self) -> None:
+        """Hand everything spent so far to the cost tracker, once: tokens per model and the
+        web-search fee. Session 387: this used to happen only at the end of a successful
+        check, so a check that raised (Ps 77, first attempt) left its spend out of the run's
+        cost file entirely."""
+        if self.cost_tracker is None or getattr(self, "_billed", False):
+            return
+        self._billed = True
+        fee_searches = 0
+        for m, v in self._spent.items():
+            self.cost_tracker.add_usage(m, input_tokens=v["usage"]["input"], output_tokens=v["usage"]["output"],
+                                        thinking_tokens=v["usage"]["reasoning"],
+                                        cache_read_tokens=v["usage"]["cached"])
+            if not m.startswith("gemini-"):
+                fee_searches += v["searches"]
+        if fee_searches:
+            # The per-search fee is money too; before Session 387 it lived only in this report.
+            self.cost_tracker.add_charge("web search (OpenAI, $10 per 1,000)",
+                                         fee_searches * WEB_SEARCH_USD_PER_CALL,
+                                         model=self.web_model, detail=f"{fee_searches} searches")
+
     def check(self, guide_markdown: str, psalm_number: int, bundle_text: str = "",
+              thinking_out: Optional[Path] = None) -> FactCheckResult:
+        self._billed = False
+        try:
+            return self._check(guide_markdown, psalm_number, bundle_text, thinking_out)
+        except Exception:
+            self._bill_tracker()   # a failed check was still paid for
+            raise
+
+    def _check(self, guide_markdown: str, psalm_number: int, bundle_text: str = "",
               thinking_out: Optional[Path] = None) -> FactCheckResult:
         text = checkable_text(guide_markdown)
         chunks = split_guide_for_checking(text, self.chunk_chars)
@@ -1476,20 +1634,26 @@ class FactChecker:
                   f"bundle {len(bundle_text):,} chars; local {self.model} ({self.effort}), "
                   f"web {self.web_model if self.web_search else 'OFF'}, review {self.review_model or 'OFF'}")
         t0 = time.time()
-        self._spent = {}
+        self._spent, self._trace, self._gathered, self._verify_counts = {}, [], [], {}
+        self._failed_chunks: List[Dict] = []
         # Stage 1: the first chunk alone, to write the bundle into the cache; the rest in parallel.
-        local: List[Optional[Dict]] = [None] * len(chunks)
+        local: List[Optional[List[Dict]]] = [None] * len(chunks)
         evid = [shared_evidence(ch["text"], bundle_text, self.db_path, verses=chunk_verses(ch["text"]) or None)
                 for ch in chunks]
         self._log("  evidence per chunk: " + ", ".join(f"{len(e):,}" for e in evid) + " chars")
         with ThreadPoolExecutor(max_workers=max(self.parallel, len(chunks))) as ex:
-            futs = {ex.submit(self._local_chunk, psalm_number, ch, bundle_text, i + 1, len(chunks), evid[i]): i
-                    for i, ch in enumerate(chunks)}
+            futs = {ex.submit(self._local_chunk_safe, psalm_number, ch, bundle_text, i + 1, len(chunks),
+                              evid[i]): i for i, ch in enumerate(chunks)}
             for f, i in futs.items():
-                local[i] = f.result()
-        local_recs = validate_records([r for res in local for r in res["records"]], text,
+                try:
+                    local[i] = f.result()
+                except Exception as e:  # one chunk must never sink the rest (Session 387)
+                    self._log(f"  local {i + 1}/{len(chunks)} [{chunks[i]['label']}] FAILED: {str(e)[:200]}")
+                    self._failed_chunks.append({"chunk": chunks[i]["label"], "error": str(e)[:300]})
+                    local[i] = []
+        runs = [r for rs in local for r in rs]
+        local_recs = validate_records([r for res in runs for r in res["records"]], text,
                                       allowed=VERDICTS + ("needs_web",))
-        runs = list(local)
 
         need_web = [r for r in local_recs if r["verdict"] == "needs_web"]
         contra = [r for r in local_recs if r["verdict"] == "contradicted"]
@@ -1508,8 +1672,18 @@ class FactChecker:
             rev_recs = validate_records([r for res in rev_runs for r in res["records"]], text)
         records = merge_stage_results(local_recs, web_recs, rev_recs,
                                       reviewed=bool(contra and self.review_model))
+        checked_by = {"local": f"{self.model} ({self.effort}), no web",
+                      "web": (f"{self.web_judge_model} ({self.web_judge_effort}) judging passages gathered "
+                              f"by {self.web_model} ({self.web_effort}) with web search"
+                              if self.web_judge_model else f"{self.web_model} ({self.web_effort}) with web search"),
+                      "review": f"{self.review_model} ({self.review_effort})"}
         for i, rec in enumerate(records, 1):
             rec["id"] = f"C{i}"
+            rec["checked_by"] = checked_by.get(rec.get("stage", "local"), "")
+            if rec.get("verdict") != "supported":   # the copy editor needs the whole sentence
+                full = expand_sentence(rec.get("sentence", ""), text)
+                if full != rec.get("sentence"):
+                    rec["sentence"], rec["sentence_expanded"] = full, True
 
         usage, token_cost, searches, fcalls = _empty_usage(), 0.0, 0, 0
         for m, v in self._spent.items():
@@ -1519,11 +1693,6 @@ class FactChecker:
                                        thinking_tokens=v["usage"]["reasoning"],
                                        cached_input_tokens=v["usage"]["cached"])
             searches += v["searches"]
-            if self.cost_tracker is not None:
-                self.cost_tracker.add_usage(m, input_tokens=v["usage"]["input"],
-                                            output_tokens=v["usage"]["output"],
-                                            thinking_tokens=v["usage"]["reasoning"],
-                                            cache_read_tokens=v["usage"]["cached"])
         fcalls = sum(r["fcalls"] for r in runs)
         per_stage: Dict[str, Dict] = {}
         for r in runs:
@@ -1547,6 +1716,26 @@ class FactChecker:
         stages["gemini_search_queries"] = gem_q
         stages["gemini_search_cost_if_paid"] = round(gem_q * GEMINI_SEARCH_USD_PER_QUERY_PAID, 4)
         search_cost = (searches - gem_q) * WEB_SEARCH_USD_PER_CALL
+        self._bill_tracker()
+        telemetry = {
+            "failed_chunks": self._failed_chunks,
+            "runs": [{k: r.get(k) for k in ("label", "model", "effort", "seconds", "status", "usage",
+                                             "searches", "fcalls", "tool_counts", "truncated", "superseded")}
+                     | {"records": len(r["records"]),
+                        "cost_usd": round(self._price(r["model"], r["usage"], r["searches"]), 4)}
+                     for r in runs],
+            "trace": self._trace,
+            "gathered": self._gathered,
+            "page_check": getattr(self, "_verify_counts", {}),
+            "prefetched_evidence": [
+                {"chunk": ch["label"], "chars": len(evid[i]),
+                 "commentator_entries": len(_COMMENTARY_SECTION.findall(evid[i])),
+                 "cited_verses": cited_refs(ch["text"])}
+                for i, ch in enumerate(chunks)],
+            "models": {"local": [self.model, self.effort], "web_gather": [self.web_model, self.web_effort],
+                       "web_judge": [self.web_judge_model, self.web_judge_effort],
+                       "review": [self.review_model, self.review_effort]},
+        }
         if thinking_out:
             thinking_out.write_text("\n\n".join(f"## {r['label']} ({r['model']})\n\n{r['thinking']}"
                                                 for r in runs), encoding="utf-8")
@@ -1554,7 +1743,7 @@ class FactChecker:
                                function_calls=fcalls, cost_usd=token_cost + search_cost,
                                token_cost_usd=token_cost, search_cost_usd=search_cost,
                                seconds=time.time() - t0, model=self.model, effort=self.effort,
-                               stages=stages)
+                               stages=stages, telemetry=telemetry)
 
 
 def write_outputs(result: FactCheckResult, psalm_number: int, out_dir: Path, prefix: str = "") -> Dict[str, Path]:
@@ -1563,7 +1752,9 @@ def write_outputs(result: FactCheckResult, psalm_number: int, out_dir: Path, pre
     stem = f"{prefix}psalm_{psalm_number:03d}_fact_check"
     meta = result.meta(psalm_number)
     paths = {"json": out_dir / f"{stem}.json", "md": out_dir / f"{stem}.md",
-             "prompt": out_dir / f"{stem}_copy_editor_prompt.txt"}
+             "prompt": out_dir / f"{stem}_copy_editor_prompt.txt",
+             "telemetry": out_dir / f"{stem}_telemetry.json"}
+    paths["telemetry"].write_text(json.dumps(result.telemetry, ensure_ascii=False, indent=1), encoding="utf-8")
     paths["json"].write_text(json.dumps({"meta": meta, "claims": result.records}, ensure_ascii=False, indent=2),
                              encoding="utf-8")
     paths["md"].write_text(format_report_markdown(result.records, meta), encoding="utf-8")

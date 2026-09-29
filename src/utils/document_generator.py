@@ -79,7 +79,24 @@ class DocumentGenerator:
     # full Hebrew + nikud coverage and matches the surrounding serif body text.
     HEBREW_FONT = 'Times New Roman'
 
-    def __init__(self, psalm_num: int, intro_path: Path, verses_path: Path, stats_path: Path, output_path: Path, reader_questions_path: Optional[Path] = None):
+    # Session 387: the writer's summarized reasoning, appended after the methods page.
+    APPENDIX_NOTE = (
+        "The summarized reasoning the writer (Claude) returned while writing this guide: the API's "
+        "thinking display, a summary and not a verbatim trace. It shows what the writer weighed and set "
+        "aside. The guide above was afterwards fact-checked and copy edited, so where the two differ, "
+        "the guide is the later text.")
+
+    # Session 387: the compact print layout is the default (the author: the old layout "takes more space
+    # on the page than needed"). Same fonts and structure; smaller body, tighter spacing, no forced page
+    # breaks, the methods page and the appendix in two columns. compact=False restores the old layout.
+    COMPACT_BODY_PT = 10.5
+    COMPACT_SMALL_PT = 8      # methods summary and appendix
+
+    def __init__(self, psalm_num: int, intro_path: Path, verses_path: Path, stats_path: Path, output_path: Path,
+                 reader_questions_path: Optional[Path] = None, appendix_parts: Optional[List[tuple]] = None,
+                 compact: bool = True):
+        self.appendix_parts = [(h, x) for h, x in (appendix_parts or []) if x and x.strip()]
+        self.compact = compact
         self.psalm_num = psalm_num
         self.intro_path = intro_path
         self.verses_path = verses_path
@@ -355,6 +372,87 @@ class DocumentGenerator:
             section.bottom_margin = Pt(72)
             section.left_margin = Pt(72)
             section.right_margin = Pt(72)
+
+        if getattr(self, 'compact', False):
+            self._apply_compact_styles()
+
+    def _apply_compact_styles(self):
+        """The compact print layout's styles (Session 387; first built for the S383 Ps 76 print copy,
+        which it took from 25 pages to 15)."""
+        st = self.document.styles
+        body = self.COMPACT_BODY_PT
+        for name in ('Normal', 'BodySans'):
+            st[name].font.size = Pt(body)
+            self._set_style_complex_size(st[name], body + 1)
+            st[name].paragraph_format.space_after = Pt(4)
+        st['SummaryText'].font.size = Pt(self.COMPACT_SMALL_PT)
+        self._set_style_complex_size(st['SummaryText'], self.COMPACT_SMALL_PT + 1)
+        st['SummaryText'].paragraph_format.space_after = Pt(1.5)
+        for name, size, before, after in (('Heading 1', 16, 0, 4), ('Heading 2', 12.5, 10, 3),
+                                          ('Heading 3', 11, 6, 1), ('Heading 4', body, 5, 1)):
+            h = st[name]
+            h.font.size = Pt(size)
+            h.paragraph_format.space_before = Pt(before)
+            h.paragraph_format.space_after = Pt(after)
+            h.paragraph_format.keep_with_next = True
+        # A hairline under the section heads carries the structure the page breaks used to.
+        ppr = st['Heading 2'].element.get_or_add_pPr()
+        bdr = OxmlElement('w:pBdr')
+        bottom = OxmlElement('w:bottom')
+        for k, v in (('w:val', 'single'), ('w:sz', '4'), ('w:space', '1'), ('w:color', 'A6A6A6')):
+            bottom.set(ns.qn(k), v)
+        bdr.append(bottom)
+        ppr.append(bdr)
+        for s in self.document.sections:
+            s.left_margin = s.right_margin = Pt(0.75 * 72)
+            s.top_margin = Pt(0.7 * 72)
+            s.bottom_margin = Pt(0.65 * 72)
+            s.footer_distance = Pt(0.35 * 72)
+
+    def _compact_body(self, start: int = 0):
+        """Scale the explicit run sizes the renderers wrote (they assume a 12pt body), halve explicit
+        paragraph spacing, narrow block-quote indents, and fit tables to the narrower text block."""
+        body = self.document.element.body
+        scale = self.COMPACT_BODY_PT / 12
+        for el in list(body)[start:]:
+            for tag in ('w:sz', 'w:szCs'):
+                for sz in el.iter(ns.qn(tag)):
+                    sz.set(ns.qn('w:val'), str(max(15, int(round(int(sz.get(ns.qn('w:val'))) * scale)))))
+            for sp in el.iter(ns.qn('w:spacing')):
+                for k in ('w:before', 'w:after'):
+                    if sp.get(ns.qn(k)) is not None:
+                        sp.set(ns.qn(k), str(int(sp.get(ns.qn(k))) // 2))
+            for ind in el.iter(ns.qn('w:ind')):
+                for k in ('w:left', 'w:start', 'w:right', 'w:end'):
+                    if ind.get(ns.qn(k)) == '720':
+                        ind.set(ns.qn(k), '504')
+            for tbl in el.iter(ns.qn('w:tbl')):
+                cols = list(tbl.iter(ns.qn('w:gridCol')))
+                width = 10080 // max(1, len(cols))   # a 7-inch text block
+                for gc in cols:
+                    gc.set(ns.qn('w:w'), str(width))
+                for tcw in tbl.iter(ns.qn('w:tcW')):
+                    tcw.set(ns.qn('w:type'), 'dxa')
+                    tcw.set(ns.qn('w:w'), str(width))
+
+    def _columns(self, n: int, gap_twips: int = 288):
+        """Start a continuous section with `n` columns; returns the body index where it starts."""
+        from docx.enum.section import WD_SECTION
+        sec = self.document.add_section(WD_SECTION.CONTINUOUS)
+        cols = sec._sectPr.find(ns.qn('w:cols'))
+        if cols is None:
+            cols = OxmlElement('w:cols')
+            sec._sectPr.append(cols)
+        cols.set(ns.qn('w:num'), str(n))
+        cols.set(ns.qn('w:space'), str(gap_twips))
+        return len(self.document.element.body)
+
+    def _set_sizes(self, start: int, pt: float):
+        for el in list(self.document.element.body)[start:]:
+            for sz in el.iter(ns.qn('w:sz')):
+                sz.set(ns.qn('w:val'), str(int(round(pt * 2))))
+            for sz in el.iter(ns.qn('w:szCs')):
+                sz.set(ns.qn('w:val'), str(int(round((pt + 1) * 2))))
 
     @staticmethod
     def _split_text_by_script(text: str, arabic_pattern) -> List[dict]:
@@ -1865,6 +1963,47 @@ Methodological & Bibliographical Summary
         for run in p.runs:
             run.font.name = 'Aptos'
 
+    def _append_writer_reasoning(self):
+        """The writer's thinking as a two-column appendix: 8pt justified with near-zero paragraph gaps
+        and small-caps run-in labels in the compact layout (9pt, 3pt gaps otherwise)."""
+        from docx.enum.text import WD_ALIGN_PARAGRAPH
+        doc = self.document
+        styles = doc.styles
+        size_pt = self.COMPACT_SMALL_PT if self.compact else 9
+        if 'AppendixText' not in [s.name for s in styles]:
+            st = styles.add_style('AppendixText', 1)
+            st.base_style = styles['BodySans']
+            st.font.size = Pt(size_pt)
+            self._set_style_complex_size(st, size_pt + 1)
+            st.paragraph_format.space_before = Pt(0)
+            st.paragraph_format.space_after = Pt(1.5 if self.compact else 3)
+            if self.compact:
+                st.paragraph_format.line_spacing = 1.0
+                st.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        if not self.compact:
+            doc.add_page_break()
+        h = doc.add_heading("Appendix: The Writer's Reasoning", level=2)
+        for r in h.runs:
+            r.font.name = 'Aptos'
+        note = doc.add_paragraph(style='AppendixText')
+        run = note.add_run(self.APPENDIX_NOTE)
+        run.italic = True
+        run.font.color.rgb = RGBColor(0x59, 0x59, 0x59)
+
+        start = self._columns(2, 288 if self.compact else 360)
+        for heading, text in self.appendix_parts:
+            label = doc.add_paragraph(style='AppendixText')
+            label.paragraph_format.space_before = Pt(4)
+            label.paragraph_format.keep_with_next = True
+            lr = label.add_run(heading)
+            lr.bold = True
+            lr.font.small_caps = True
+            for para in [x.strip() for x in re.split(r"\n\s*\n", text) if x.strip()]:
+                self._add_paragraph_with_markdown(" ".join(para.split("\n")), style='AppendixText')
+        # Runs carry explicit sizes from the markdown renderer; shrink them to the appendix size.
+        self._set_sizes(start, size_pt)
+        self._columns(1)
+
     def generate(self):
         """Main method to generate the .docx file, mirroring print_ready.md structure."""
         # Fetch psalm text data from the database first
@@ -1884,9 +2023,10 @@ Methodological & Bibliographical Summary
         # 2. Add Full Psalm Text
         self._format_psalm_text(self.psalm_num, psalm_text_data)
 
-        # Add a page break after the psalm text table
-        self.document.add_paragraph() # Add a paragraph to attach the break to
-        self.document.add_page_break()
+        # Add a page break after the psalm text table (the compact layout runs straight on)
+        if not self.compact:
+            self.document.add_paragraph() # Add a paragraph to attach the break to
+            self.document.add_page_break()
 
         # 2b. Add Questions for the Reader (if available)
         if self.reader_questions_path and self.reader_questions_path.exists():
@@ -1930,9 +2070,14 @@ Methodological & Bibliographical Summary
             # Commentary now includes the verse text with punctuation from the LLM
             self._add_commentary_with_bullets(verse["commentary"], style='BodySans', is_verse_commentary=True)
 
+        if self.compact:
+            self._compact_body()
+
         # 5. Add Methodological Summary
+        summary_start = None
         if self.stats_path.exists():
-            self.document.add_page_break()
+            if not self.compact:
+                self.document.add_page_break()
             p = self.document.add_heading('Methodological & Bibliographical Summary', level=2)
             for r in p.runs:
                 r.font.name = 'Aptos'
@@ -1969,6 +2114,9 @@ Methodological & Bibliographical Summary
 
                 if 'citation_filter' in model_usage:
                     summary_text += f"\n**Citation Verifier Filter**: {model_usage.get('citation_filter', 'N/A')}"
+
+                if 'fact_check' in model_usage:
+                    summary_text += f"\n**Fact Check**: {model_usage.get('fact_check', 'N/A')}"
 
                 if 'copy_editor' in model_usage:
                     summary_text += f"\n**Copy Editor**: {model_usage.get('copy_editor', 'N/A')}"
@@ -2010,7 +2158,16 @@ Methodological & Bibliographical Summary
                 elif "Methodological & Bibliographical Summary" in stripped_line:
                     continue  # Skip the redundant title line
                 else:
+                    if self.compact and summary_start is None:
+                        summary_start = self._columns(2)   # the heading stays full width
                     self._add_summary_paragraph(stripped_line.lstrip('- '))
+            if summary_start is not None:
+                self._set_sizes(summary_start, self.COMPACT_SMALL_PT)
+                self._columns(1)
+
+        # 5b. Appendix: the writer's reasoning (Session 387), in two columns at 9pt
+        if self.appendix_parts:
+            self._append_writer_reasoning()
 
         # 6. Add Page Numbers to Footer
         section = self.document.sections[0]
@@ -2024,6 +2181,47 @@ Methodological & Bibliographical Summary
         self._fix_complex_script_fonts()
         self.document.save(self.output_path)
         print(f"Successfully generated Word document: {self.output_path}")
+
+
+def writer_reasoning_parts(psalm_number: int) -> list:
+    """[(heading, text)] for the DOCX appendix: the forest writer's two calls when their captures
+    exist (Session 387), else the one-call writer's capture, else nothing."""
+    try:
+        from src.utils.debug_paths import thinking_file
+    except ImportError:  # pragma: no cover
+        from .debug_paths import thinking_file
+    parts = []
+    for key, heading in (("master_writer_v4_forest_essay", "The essay call"),
+                         ("master_writer_v4_forest_verses", "The liturgy and verse-commentary call")):
+        f = thinking_file(psalm_number, key, create_dir=False)
+        if f.exists() and f.read_text(encoding="utf-8").strip():
+            parts.append((heading, f.read_text(encoding="utf-8")))
+    if not parts:
+        f = thinking_file(psalm_number, "master_writer_v4", create_dir=False)
+        if f.exists() and f.read_text(encoding="utf-8").strip():
+            parts.append(("The writer", f.read_text(encoding="utf-8")))
+    return parts
+
+
+def export_pdf(docx_path: Path, pdf_path: Optional[Path] = None, timeout: int = 300) -> Optional[Path]:
+    """Save a PDF of `docx_path` through Microsoft Word (Windows, via PowerShell COM). Returns the
+    PDF path, or None where Word is unavailable; never raises. Word renders the Hebrew exactly as
+    the DOCX does, which is why this uses Word rather than a converter."""
+    import subprocess
+    docx_path = Path(docx_path).resolve()
+    pdf_path = Path(pdf_path).resolve() if pdf_path else docx_path.with_suffix('.pdf')
+    if sys.platform != 'win32':
+        return None
+    ps = (f"$w = New-Object -ComObject Word.Application; $w.Visible = $false; "
+          f"try {{ $d = $w.Documents.Open('{docx_path}', $false, $true); "
+          f"$d.ExportAsFixedFormat('{pdf_path}', 17); $d.Close(0) }} finally {{ $w.Quit() }}")
+    try:
+        subprocess.run(['powershell', '-NoProfile', '-NonInteractive', '-Command', ps],
+                       check=True, capture_output=True, timeout=timeout)
+        return pdf_path if pdf_path.exists() else None
+    except Exception as e:
+        print(f"PDF export skipped ({str(e)[:160]})")
+        return None
 
 
 def main():

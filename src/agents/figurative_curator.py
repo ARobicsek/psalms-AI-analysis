@@ -123,7 +123,10 @@ class FigurativeCurator:
         if not dry_run:
             try:
                 from openai import OpenAI
-                self.openai_client = OpenAI()
+                # Session 387: the SDK default (600 s, 2 retries) cut off Ps 77's phase-2 synthesis
+                # three times running: a non-streamed high-effort call that needs 11 minutes times
+                # out at 10, and every retry restarts it from scratch. Allow 30 minutes, retry once.
+                self.openai_client = OpenAI(timeout=1800.0, max_retries=1)
                 if verbose:
                     print(f"[INFO] Initialized {self.MODEL} client for Figurative Curator")
             except ImportError:

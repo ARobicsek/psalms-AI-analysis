@@ -316,13 +316,13 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "claude-opus-5",
-    synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 4.8)
+    master_editor_model: str = "claude-opus-5-5",
+    synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 5.5 since S387)
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
-    macro_model: str = "claude-opus-4-8",
+    macro_model: str = "claude-opus-5-5",
     question_model: str = "gpt-5.6-terra",
     copy_model: str = "gpt-5.6-terra",
     synthesis_discovery: bool = True,
@@ -330,6 +330,7 @@ def run_enhanced_pipeline(
     skip_beta_reader: bool = True,   # Session 372: OFF by default — see --beta-reader below
     beta_model: str = None,          # Session 362: default lives in BetaReader.DEFAULT_MODEL
     fact_check: bool = False,        # Session 385: OFF until the author approves -- see STEP 5a¾
+    writer_prompt: str = "forest",   # Session 387: two-call forest writer; "v4" = the old one-call prompt
 ):
     logger = get_logger("enhanced_pipeline_test")
     logger.info(f"=" * 80)
@@ -373,10 +374,30 @@ def run_enhanced_pipeline(
     logger.info("Pipeline summary tracking enabled.")
 
     cost_tracker = CostTracker()
+    # Session 387: a resumed or partial re-run CONTINUES the psalm's cost file instead of
+    # overwriting it with only the steps it re-ran.
+    _prior_cost = Path(output_dir) / f"psalm_{psalm_number:03d}_cost.json"
+    if is_resuming and _prior_cost.exists():
+        try:
+            cost_tracker.load_dict(json.loads(_prior_cost.read_text(encoding="utf-8")))
+            logger.info(f"Continuing the cost record in {_prior_cost.name} "
+                        f"(${cost_tracker.get_total_cost():.4f} already spent)")
+        except Exception as e:
+            logger.warning(f"Could not load {_prior_cost.name}; costs start from zero: {e}")
     research_trimmer = ResearchTrimmer(logger=logger)
     output_path.mkdir(parents=True, exist_ok=True)
     lit_echoes_cost = 0.0  # Populated by STEP 1b; printed in the final tally
     synthesis_discovery_cost = 0.0  # Populated by STEP 3.5; printed in the final tally
+
+    # Session 387: per-stage cost. CostTracker aggregates by MODEL, and several stages
+    # share a model (Opus 5.5: macro, discovery, writer; gpt-6-sol: two fact-check
+    # stages), so each paid step is bracketed by a snapshot and recorded as a stage in
+    # psalm_NNN_cost.json -> "stages".
+    def _record_stage(name: str, snap: dict) -> None:
+        st = cost_tracker.record_stage(name, snap)
+        if st["models"] or st["charges"]:
+            logger.info(f"[COST] {name}: ${st['cost_usd']:.4f} "
+                        f"({', '.join(st['models']) or 'charges only'})")
 
     # File paths
     macro_file = output_path / f"psalm_{psalm_number:03d}_macro.json"
@@ -462,8 +483,10 @@ def run_enhanced_pipeline(
             tracker.track_step_input("macro_analysis", psalm_text)
             tracker.track_verse_count(len(psalm.verses))
 
+        _snap = cost_tracker.snapshot()
         macro_analyst = MacroAnalyst(cost_tracker=cost_tracker, model=macro_model)
         macro_analysis = macro_analyst.analyze_psalm(psalm_number)
+        _record_stage("macro analysis", _snap)
         from src.schemas.analysis_schemas import save_analysis
         save_analysis(macro_analysis, str(macro_file), format="json")
         
@@ -509,6 +532,7 @@ def run_enhanced_pipeline(
             f"{LIT_ECHOES_VERIFY_MODEL} verifies per entry → deterministic rebuild)"
         )
         print(f"{'='*80}\n")
+        _snap = cost_tracker.snapshot()
         try:
             lit_echoes_agent = LiteraryEchoesAgent(
                 cost_tracker=cost_tracker,
@@ -526,12 +550,13 @@ def run_enhanced_pipeline(
             lit_echoes_cost = lit_result.total_cost
             logger.info(
                 f"[STEP 1b] Literary echoes complete — ${lit_result.total_cost:.4f} "
-                f"({len(lit_result.exclusion_authors)} authors excluded from last "
-                f"{len(lit_result.exclusion_source_files)} files)"
+                f"({len(lit_result.exclusion_authors)} recently used authors excluded, "
+                f"{len(lit_result.overused_authors)} overused)"
             )
         except Exception as e:
             halt_on_quota(e, "STEP 1b: Literary Echoes", logger, cost_tracker, output_path, psalm_number)
             logger.warning(f"[STEP 1b] Literary echoes failed (non-fatal): {e}", exc_info=True)
+        _record_stage("literary echoes", _snap)
     elif skip_lit_echoes:
         logger.info("[STEP 1b] Skipping literary echoes (--skip-lit-echoes)")
         # If the canonical file exists, assume it was generated with the standard pipeline models
@@ -566,8 +591,10 @@ def run_enhanced_pipeline(
         print(f"{'='*80}\n")
         tracker.track_step_input("micro_analysis", macro_analysis.to_markdown())
         
+        _snap = cost_tracker.snapshot()
         micro_analyst = MicroAnalystV2(db_path=db_path, commentary_mode="all" if not skip_default_commentaries else "selective", cost_tracker=cost_tracker)
         micro_analysis, research_bundle = micro_analyst.analyze_psalm(psalm_number, macro_analysis)
+        _record_stage("micro analysis + research bundle", _snap)
         
         from src.schemas.analysis_schemas import save_analysis
         save_analysis(micro_analysis, str(micro_file), format="json")
@@ -699,7 +726,8 @@ def run_enhanced_pipeline(
         print(f"STEP 4: Master Writer ({master_editor_model})")
         print(f"{'='*80}\n")
 
-        master_editor = MasterEditor(main_model=master_editor_model, cost_tracker=cost_tracker)
+        master_editor = MasterEditor(main_model=master_editor_model, cost_tracker=cost_tracker,
+                                     writer_mode=writer_prompt)
 
         # STEP 3.5 (Session 347): Cross-verse synthesis discovery sidecar.
         # Produces a calibrated observation list that gets spliced into the writer
@@ -712,15 +740,16 @@ def run_enhanced_pipeline(
             print(f"\n{'='*80}")
             print(f"STEP 3.5: Cross-Verse Synthesis Discovery (Session 347)")
             print(f"{'='*80}\n")
-            # SYNTHESIS DISCOVERY IS PINNED TO ITS OWN DEFAULT (Opus 4.8) and no longer
-            # follows the writer. This line used to read `master_editor_model if "claude"
-            # in ...`, so flipping the writer to Opus 5 in Session 373 would have silently
-            # dragged the discovery sidecar along with it. Author's call: only the WRITER
-            # was designed and A/B'd on Opus 5; discovery stays on 4.8 for cost. Override
-            # with --synthesis-discovery-model if that is ever worth testing.
+            # SYNTHESIS DISCOVERY IS PINNED TO ITS OWN DEFAULT and does not follow the
+            # writer. This line used to read `master_editor_model if "claude" in ...`, so
+            # flipping the writer to Opus 5 in Session 373 would have silently dragged the
+            # discovery sidecar along with it. Session 387: its default is now Opus 5.5
+            # (S383 traced the Ps 76 originality lift to this stage); it is still set in
+            # synthesis_discovery.DEFAULT_MODEL, independent of --master-editor-model.
             from src.agents.synthesis_discovery import DEFAULT_MODEL as SD_DEFAULT_MODEL
             sd_model = synthesis_discovery_model or SD_DEFAULT_MODEL
             sd_cost_before = cost_tracker.get_total_cost()
+            _snap = cost_tracker.snapshot()
             try:
                 synthesis_discovery_file = master_editor.discover_cross_verse_observations(
                     macro_file=macro_file,
@@ -735,6 +764,7 @@ def run_enhanced_pipeline(
                     model=sd_model,
                 )
                 synthesis_discovery_cost = cost_tracker.get_total_cost() - sd_cost_before
+                _record_stage("synthesis discovery", _snap)
                 tracker.track_model_for_step("synthesis_discovery", sd_model)
                 logger.info(
                     f"[STEP 3.5] Synthesis discovery complete — ${synthesis_discovery_cost:.4f}"
@@ -751,6 +781,7 @@ def run_enhanced_pipeline(
         else:
             logger.info("[STEP 3.5] Skipping Cross-Verse Synthesis Discovery (--skip-synthesis-discovery)")
 
+        _snap = cost_tracker.snapshot()
         try:
             result = master_editor.write_commentary(
                 macro_file=macro_file,
@@ -768,6 +799,9 @@ def run_enhanced_pipeline(
                 synthesis_discovery_file=synthesis_discovery_file,
             )
             
+            _record_stage("master writer" + (" (forest: essay call + verse call)"
+                                             if result.get("writer_telemetry") else ""), _snap)
+
             # Save outputs
             with open(edited_intro_file, 'w', encoding='utf-8') as f:
                 f.write(result['introduction'])
@@ -863,6 +897,7 @@ def run_enhanced_pipeline(
     citation_fix_prompt = None
     if not smoke_test and print_ready_file.exists():
         logger.info("[STEP 5a½] Scripture Citation Verification...")
+        _snap = cost_tracker.snapshot()
         try:
             from src.utils.scripture_verifier import (
                 verify_citations, format_verification_report, format_fix_prompt,
@@ -939,6 +974,7 @@ def run_enhanced_pipeline(
         except Exception as e:
             halt_on_quota(e, "STEP 5a½: Scripture Verifier", logger, cost_tracker, output_path, psalm_number)
             logger.warning(f"[STEP 5a½] Citation verification failed (non-fatal): {e}")
+        _record_stage("citation verification (SQL check $0; false-positive filter)", _snap)
 
     # =====================================================================
     # STEP 5a¾: Evidence-based fact check (Session 385) — OFF by default.
@@ -950,10 +986,11 @@ def run_enhanced_pipeline(
     # =====================================================================
     fact_check_prompt = None
     if fact_check and not smoke_test and print_ready_file.exists():
-        logger.info("[STEP 5a¾] Fact check (staged: gpt-6-luna local, gpt-6-sol web + review)...")
+        logger.info("[STEP 5a¾] Fact check (staged: gpt-6-sol local; gpt-6-luna gathers, pages checked, gpt-6-sol judges)...")
         print(f"\n{'='*80}")
         print(f"STEP 5a¾: Fact Check (Session 385)")
         print(f"{'='*80}\n")
+        _snap = cost_tracker.snapshot()
         try:
             from src.agents.fact_checker import FactChecker, write_outputs, format_copy_editor_prompt
             bundle_file = next((f for f in (
@@ -971,12 +1008,13 @@ def run_enhanced_pipeline(
             logger.info(
                 f"[STEP 5a¾] {len(fc_result.records)} claims {fc_result.meta(psalm_number)['verdicts']}; "
                 f"{fc_result.web_searches} web searches; ${fc_result.cost_usd:.4f} "
-                f"(web-search fees ${fc_result.search_cost_usd:.4f} are NOT in the cost tracker) "
-                f"— see {fc_paths['md'].name}"
+                f"(incl. web-search fees ${fc_result.search_cost_usd:.4f}, billed to the cost tracker "
+                f"as a charge) — see {fc_paths['md'].name}"
             )
         except Exception as e:
             halt_on_quota(e, "STEP 5a¾: Fact Check", logger, cost_tracker, output_path, psalm_number)
             logger.warning(f"[STEP 5a¾] Fact check failed (non-fatal; copy editor runs without it): {e}")
+        _record_stage("fact check", _snap)
 
     # =====================================================================
     # STEP 5b: Copy Editor (Session 280)
@@ -987,6 +1025,7 @@ def run_enhanced_pipeline(
         print(f"\n{'='*80}")
         print(f"STEP 5b: Copy Editor")
         print(f"{'='*80}\n")
+        _snap = cost_tracker.snapshot()
         try:
             copy_editor = CopyEditor(cost_tracker=cost_tracker, model=copy_model)
             ce_result = copy_editor.edit_commentary(
@@ -1029,6 +1068,7 @@ def run_enhanced_pipeline(
             halt_on_quota(e, "STEP 5b: Copy Editor", logger, cost_tracker, output_path, psalm_number)
             logger.error(f"Copy Editor failed: {e}", exc_info=True)
             print(f"Copy Editor error (non-fatal): {e}")
+        _record_stage("copy editor", _snap)
     elif skip_copy_editor:
         logger.info("[STEP 5b] Skipping Copy Editor")
         # Still track model if copy-edited file exists from a previous run
@@ -1076,6 +1116,7 @@ def run_enhanced_pipeline(
             print(f"\n{'='*80}")
             print(f"STEP 5d: Beta Reader (reader-experience report)")
             print(f"{'='*80}\n")
+            _snap = cost_tracker.snapshot()
             try:
                 from src.agents.beta_reader import BetaReader
                 beta_reader = BetaReader(cost_tracker=cost_tracker, model=beta_model)
@@ -1093,6 +1134,7 @@ def run_enhanced_pipeline(
             except Exception as e:
                 halt_on_quota(e, "STEP 5d: Beta Reader", logger, cost_tracker, output_path, psalm_number)
                 logger.warning(f"Beta Reader failed (non-fatal): {e}")
+            _record_stage("beta reader", _snap)
     elif skip_beta_reader:
         logger.info("[STEP 5d] Skipping Beta Reader")
 
@@ -1107,7 +1149,7 @@ def run_enhanced_pipeline(
         print(f"\n{'='*80}")
         print(f"STEP 6: Word Document Generation (.docx)")
         print(f"{'='*80}\n")
-        from src.utils.document_generator import DocumentGenerator
+        from src.utils.document_generator import DocumentGenerator, export_pdf, writer_reasoning_parts
         
         try:
             if exclude_questions or skip_questions:
@@ -1116,8 +1158,14 @@ def run_enhanced_pipeline(
                 refined_q = output_path / f"psalm_{psalm_number:03d}_reader_questions_refined.json"
                 q_file = refined_q if refined_q.exists() else (reader_questions_file if reader_questions_file.exists() else None)
 
-            gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file, docx_output_file, q_file)
+            gen = DocumentGenerator(psalm_number, edited_intro_file, edited_verses_file, summary_json_file,
+                                    docx_output_file, q_file,
+                                    appendix_parts=writer_reasoning_parts(psalm_number))
             gen.generate()
+            # Session 387: a print-ready PDF beside the DOCX (Word via COM; skipped where unavailable)
+            pdf = export_pdf(docx_output_file)
+            if pdf:
+                print(f"  PDF: {pdf}")
         except Exception as e:
             halt_on_quota(e, "STEP 6: DOCX Generation", logger, cost_tracker, output_path, psalm_number)
             logger.error(f"Doc gen failed: {e}", exc_info=True)
@@ -1147,6 +1195,15 @@ def run_enhanced_pipeline(
     )
     logger.info(f"Cost data saved to {cost_file.name}")
     print(cost_tracker.get_summary())
+
+    # Session 387: what the editors did, and what every stage cost, as one readable DOCX.
+    if not smoke_test and copy_edited_file.exists():
+        try:
+            from src.utils.editors_report import build_editors_report
+            rep = build_editors_report(psalm_number, output_path)
+            print(f"Editors' report: {rep}")
+        except Exception as e:
+            logger.warning(f"Editors' report failed (non-fatal): {e}", exc_info=True)
     if lit_echoes_cost > 0:
         print(f"Literary Echoes subtotal (Passes 1-4): ${lit_echoes_cost:.4f}")
         print("  (already included in the grand total above — shown separately "
@@ -1181,12 +1238,16 @@ if __name__ == "__main__":
     # was designed and A/B'd on Opus 5 via ab_writer_prompts.py, whose DEFAULT_MODEL is
     # claude-opus-5 — while this default silently stayed on 4.8 for six sessions. Ps 72
     # shipped arm E's prompt on the model it was not written for. Do not "restore" 4.8.
-    parser.add_argument("--master-editor-model", type=str, default="claude-opus-5",
-                       choices=["claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: claude-opus-5)")
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-5-5",
+                       choices=["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
+                       help="Model for Master Writer (default: claude-opus-5-5)")
+    parser.add_argument("--writer-prompt", choices=["forest", "v4"], default="forest",
+                       help="Session 387: 'forest' (default) = the two-call writer (essay, then liturgy + "
+                            "verses) on the S384 forest instructions; 'v4' = the old one-call "
+                            "MASTER_WRITER_PROMPT_V4")
     parser.add_argument("--synthesis-discovery-model", type=str, default=None,
                        help="Model for the cross-verse synthesis sidecar "
-                            "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-4-8). "
+                            "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-5-5). "
                             "Deliberately independent of --master-editor-model.")
     # Session 280: questions are SKIPPED by default.
     # --include-* opts back in; --skip-* remains for backward compat.
@@ -1274,7 +1335,7 @@ if __name__ == "__main__":
     print(f"Output Directory: {args.output_dir}")
     print(f"Database: {args.db_path}")
     print(f"Rate Limit Delay: {args.delay} seconds")
-    print(f"Master Writer Model: {args.master_editor_model}")
+    print(f"Master Writer Model: {args.master_editor_model} ({args.writer_prompt} prompt)")
     print(f"Copy Editor: {'SKIP' if args.skip_copy_editor else 'ON'}")
     print(f"Synthesis Discovery: {'SKIP' if args.skip_synthesis_discovery else 'ON'}")
     print(f"Beta Reader: {'ON' if args.beta_reader else 'OFF (default since S372)'}")
@@ -1283,7 +1344,7 @@ if __name__ == "__main__":
     # Session 367: the GPT default moved gpt-5.4 -> gpt-5.6-terra (same tier,
     # same price). The --gpt-5-4-* flags keep their names and now act as
     # "pin back to the pre-367 model" escape hatches.
-    macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-8"
+    macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else MacroAnalyst.DEFAULT_MODEL
     question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.6-terra"
     # Session 368: the copy editor is the one GPT agent NOT on Terra — Terra
     # overreaches as an editor (docs/plans/COPY_EDITOR_TERRA_FINDINGS.md), so it
@@ -1331,4 +1392,5 @@ if __name__ == "__main__":
         skip_beta_reader=not args.beta_reader,
         beta_model=args.beta_model,
         fact_check=args.fact_check,
+        writer_prompt=args.writer_prompt,
     )

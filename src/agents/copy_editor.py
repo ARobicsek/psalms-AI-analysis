@@ -440,7 +440,11 @@ class CopyEditor:
         
         if "gpt" in self.model.lower() or self.model.startswith("o"):
             from openai import OpenAI
-            self.openai_client = OpenAI()
+            # Session 387: the SDK default (600 s read timeout, 2 retries) cannot fit a high-effort,
+            # non-streamed edit of a long guide: Ps 77 (~10,600 words) timed out on every attempt, and
+            # _call_editor's own loop retried each timeout 3 more times (9 attempts, ~90 minutes).
+            # 30 minutes per attempt; the retries are left to _call_editor's loop alone.
+            self.openai_client = OpenAI(timeout=1800.0, max_retries=0)
         else:
             self.anthropic_client = anthropic.Anthropic()
 

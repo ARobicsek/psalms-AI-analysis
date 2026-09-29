@@ -100,7 +100,7 @@ def test_new_field_is_reported():
 def test_every_model_the_pipeline_can_select_is_priced():
     """The models named as a DEFAULT_MODEL anywhere in the pipeline, plus the two
     swap candidates the A/B docs discuss. A missing row reports $0.00, not an error."""
-    for model in ("claude-opus-5", "claude-opus-4-8", "claude-sonnet-4-6",
+    for model in ("claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-sonnet-4-6",
                   "claude-sonnet-5", "claude-fable-5", "claude-haiku-4-5",
                   "gpt-5.1", "gpt-5.4", "gpt-5.6-terra", "gemini-3.1-pro-preview"):
         assert resolve_pricing(model) is not None, f"{model} would be billed at $0.00"

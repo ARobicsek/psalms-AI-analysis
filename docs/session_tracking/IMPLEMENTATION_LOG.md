@@ -9,6 +9,101 @@ This file contains detailed session history for sessions 300 and later.
 
 ---
 
+## Session 387 (2026-09-29): Opus 5.5 everywhere, the forest writer in production, Ps 77 end to end with an editors' report
+
+**The ask.** (1) Codify Opus 5.5 in every position that used an older Opus; (2) make the S384–S386 "forest" prompt
+the master writer; (3) run Ps 77 on the updated pipeline with the S386 fact check + copy edit, with detailed telemetry
+(every fact evaluated, which model ruled, what was looked up and found, what was checked for free, what it cost).
+Deliverables: (a) a DOCX of the guide with the writer's thinking as an appendix; (b) a separate readable
+fact-check/copy-edit report. Mid-run the author asked for a more economical print layout ("it can be a PDF").
+
+**Opus 5.5.** `MacroAnalyst.DEFAULT_MODEL`, `synthesis_discovery.DEFAULT_MODEL`, the writer default in both runners
+(`--master-editor-model` choices gain `claude-opus-5-5`), and the runners' `macro_mdl` now follows
+`MacroAnalyst.DEFAULT_MODEL` rather than a literal. `MasterEditor.discover_cross_verse_observations` took a hard-coded
+`"claude-opus-4-8"` default; it now resolves SD's own default. Effort `high` from `model_effort.py` (S383 had already
+verified the macro/SD call shapes on 5.5). `test_every_model_the_pipeline_can_select_is_priced` lists 5.5.
+
+**The forest writer, ported** — `src/agents/forest_writer.py` (pure: texts, `extract_inputs_block`,
+`essay_instructions`, `verse_instructions`, `first_turn`, `replayable`, `check_structure`, `check_essay`, `assemble`)
+and `MasterEditor._call_forest_writer` (calls, keep-alive, retries, cost, captures). One code path: the V4 prompt is
+built exactly as before and only its INPUTS block (the S384 cut) is sent. The approved texts were lifted from the trial
+scripts with `ast` (no retyping) and three Ps-76 tokens made variables (psalm number; the commentator count, twice);
+for Ps 76 both texts reproduce the archived prompts byte for byte, and tests pin that. `writer_mode` on `MasterEditor`
+(`--writer-prompt forest|v4`). Call 1's full content is saved (`psalm_NNN_forest_essay_call.json`, keyed by a hash of
+the first turn) so a failed call 2 never pays for the essay twice; a finished run marks it done so a deliberate re-run
+gets a new essay. Captures: `…_master_writer_v4_thinking.txt` (both parts, headed) plus
+`…_forest_essay_thinking.txt` / `…_forest_verses_thinking.txt`; telemetry in `psalm_NNN_writer_calls.json`. Effort `max`
+is refused. `MasterEditorSI` overrides `_perform_writer_synthesis`, so SI stays one-call (on 5.5).
+
+**Telemetry and cost.** Fact checker: every function call is traced with its args and a one-line summary of what came
+back (`summarize_tool_result`), every web action with its query (`_web_action`), the gathered passages with their page
+checks, the evidence pre-fetched per chunk, per-call usage/cost/status; written to `psalm_NNN_fact_check_telemetry.json`.
+Every record gets `checked_by`. `CostTracker`: `add_charge` (non-token fees in every total; web search now billed),
+`snapshot`/`record_stage` (per-stage rows with promo vs durable cost), `load_dict` (continue a saved cost file),
+`notes`; `to_dict` emits the new keys only when present. The runner brackets every paid step. New
+`src/utils/editors_report.py` builds `psalm_NNN_editors_report.{md,docx}` at $0: an at-a-glance table, the editors'
+roles, the cost tables (per stage, inside the writer, inside the fact check, promo prices), every contradicted claim
+with evidence, suggested fix, ruling model and whether/how the copy editor acted (exact whole-sentence test, closest
+final sentence, matched log entry), the web claims with page checks, the unverifiable list, the copy editor's full log
+with untagged factual edits and UNVERIFIED notes flagged, the $0 checks, the supported claims, and an appendix of every
+lookup. Rendered through `DocumentGenerator`'s Hebrew-aware paragraph code plus tables.
+
+**Compact layout (the author's paper request).** `DocumentGenerator(compact=True)` is the default: body 10.5 pt
+(Hebrew +1), 0.75″ margins, explicit spacing halved, block-quote indents narrowed, tables fitted, no forced page
+breaks, a hairline under H2, the methods block in two 8-pt columns, and the writer's-reasoning appendix in two 8-pt
+justified columns with small-caps run-in labels. Ps 76 test: 25 → 16 pages. `export_pdf()` saves a PDF through Word
+via PowerShell COM (no pywin32/docx2pdf here); the pipeline writes one beside the DOCX. `run_docx_only.py` gains
+`--standard`, `--no-appendix`, `--pdf`. `writer_reasoning_parts()` lives in `document_generator.py`.
+
+**Ps 77, run 1** (`--fact-check --delay 30`): macro $0.2993; literary echoes $1.4141 (a stale
+`exclusion_source_files` log line made the step LOOK failed after the dossier was written — fixed in both runners; one
+Tchernichovsky entry kept unverified after an incomplete verifier response); micro + bundle $1.2576, **but the
+figurative curator's phase 2 timed out three times** (gpt-5.6-terra, high, non-streamed, SDK default 600 s) and the
+bundle fell back to uncurated figurative output; Sefaria timed out on Ibn Ezra 77:9. Synthesis discovery $2.1934 —
+**in=228,354, out=64,000: it hit `max_tokens` and ended inside observation 15**. Writer $2.1951: essay 135 s, $1.3792
+(cache write 230,824, out 11,253); verses 364 s, $0.8159 (cache read 230,824, write 0, out 35,693); structure clean;
+essay 1,963 words, liturgy 670, verses 7,974. Citation check $0.0759. **Fact check crashed**: chunk 4/6 (vv. 10–15)
+returned JSON cut off at char 21,448; `json.loads` raised out of `_loop`, the other five chunks' 273 records were
+lost, and — because the checker billed the tracker only at the end — so was its spend (est. $1.5–2.5). The copy editor
+then ran without the report and timed out at 600 s; `_call_editor`'s own loop retries timeouts 3×, each with 2 SDK
+retries (up to ~90 min). Run 1 was stopped; its cost file rebuilt from the exact per-stage `[COST]` lines (writer and
+SD token-exact from `writer_calls.json` and SD's log line; macro/echoes/micro/citations dollars only) with notes.
+
+**Fixes.** Curator client `timeout=1800, max_retries=1`; copy editor `timeout=1800, max_retries=0`; SD
+`max_tokens=128000` + ERROR on `stop_reason == "max_tokens"`, and its log no longer claims `effort=max`. Fact checker:
+`salvage_records` (complete records from a truncated answer), `_local_chunk_safe` (a truncated chunk re-checked in
+halves; the superseded run stays billed), a failed chunk no longer sinks the others (`failed_chunks` in telemetry),
+`check()` → `_check()` with `_bill_tracker()` on success AND failure, `expand_sentence` (non-supported records get the
+full guide sentence — stage 1 writes six-word stubs for supported claims and a web-bound claim kept its stub through
+the judge, so C2 reached the copy editor as "In 1773, on the edge of"). Resumed runs continue the cost file.
+
+**Ps 77, run 2** (`--fact-check --skip-macro --skip-micro --skip-writer --skip-print-ready --skip-lit-echoes --delay 5`):
+citations $0.1014 (1 issue: the Ps 57:9 fragment in v.7); fact check $1.5678, 7 min — 316 claims (278 / 28 / 10), all
+six chunks clean this time, 315 lookups (research search 136, verse 95, Sefaria text 51, Bible word search 23,
+commentator 10), 19 claims to the web, 4 searches, 25 passages, 20 found on their pages, 2 pages unreadable; copy editor
+$0.5554, 542 s (just under the old limit) — 29 changes, 26 tagged [FACT-CHECK], 0 untagged factual edits, 0 UNVERIFIED,
+27 of 28 contradicted sentences changed (left: C175, v.10 בְּאַף "spelled exactly like" אַף), no citation mismatch
+introduced. Contradictions included: Cowper "then severely depressed" (the hymn was written in prospect of the 1773
+relapse), הָמָה as lions' growl (bears), אָשִׂיחָה "fourth" appearance (third), Rashi and the LXX on חַלּוֹתִי conflated,
+Ibn Ezra's two readings of v.7 merged into one, Ps 42 and 77 "beside" each other in the Tikkun HaKlali (Ps 59 between),
+"no fixed festival recitation" (Parshat HaChodesh; Sukkot days 3–6), the exact Italian of Iago's Credo.
+**Measured total $9.66** (report shows $11.17 at an assumed durable GPT-6 Sol price).
+
+**Report fixes after reading it.** A two-tag change-log entry (`[CITATION FIX] [FACT-CHECK] [7]`) was mis-parsed;
+the rationale-on-its-own-line format had no "Why:"; web items were matched by (stub) sentence; tool names with
+underscores rendered as italics; bundle commentary summaries showed the analyst's request line instead of the text
+(the 10 commentator lookups in this run's telemetry were re-summarised at $0); list items rendered at 12 pt.
+
+**Deliverables** (`Documents/Psalm study guide/`): `Psalm 77.docx` / `.pdf` (23 pp) and
+`Psalm 77 - What the editors did.docx` / `.pdf` (60 pp). **Tests: 250 pass** (223 + 27 in `tests/test_forest_writer.py`).
+
+**Open.** This guide lacks the curated figurative insights and SD observations 15+ (~$4.4 to redo SD + writer); the
+methods page reads "Concordance Searches: N/A" after a `--skip-micro` resume; `liturgical_librarian`,
+`question_curator` and macro's GPT path still use `OpenAI()` defaults; no with/without-report copy-edit comparison
+(run 1's no-report arm timed out); the ab_writer_prompts A/B scripts vary V4, which production no longer uses.
+
+---
+
 ## Session 386 (2026-09-29): the two-call writer ran; the fact checker from $4.87 to $1.83
 
 **Repo.** S385 had run in the cloud on `claude/exciting-mendel-77ecwv`. Local `main` equalled `origin/main`, so it was

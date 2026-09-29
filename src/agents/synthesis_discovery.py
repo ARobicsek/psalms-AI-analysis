@@ -55,13 +55,15 @@ from dotenv import load_dotenv
 
 from src.utils.cost_tracker import CostTracker
 from src.utils.logger import get_logger
-from src.utils.model_effort import apply_effort
+from src.utils.model_effort import apply_effort, effort_for
 
 
 load_dotenv()
 
 
-DEFAULT_MODEL = "claude-opus-4-8"
+# Session 387: Opus 5.5 (effort high, set in model_effort.py). S383 traced the Ps 76
+# originality lift to THIS stage on 5.5; the author adopted 5.5 for every Opus stage.
+DEFAULT_MODEL = "claude-opus-5-5"
 
 
 # =============================================================================
@@ -535,7 +537,7 @@ class SynthesisDiscoveryAgent:
         """
         for attempt in range(1, retries + 1):
             self.logger.info(
-                f"[{tag}] calling {self.model} (effort=max, adaptive thinking) "
+                f"[{tag}] calling {self.model} (effort={effort_for(self.model) or 'API default'}, adaptive thinking) "
                 f"- attempt {attempt}/{retries}"
             )
             t0 = time.time()
@@ -544,7 +546,9 @@ class SynthesisDiscoveryAgent:
 
             stream_kwargs = {
                 "model": self.model,
-                "max_tokens": 64000,
+                # Session 387: 64000 cut Ps 77 off mid-observation on Opus 5.5, which writes
+                # ~75% more than Opus 4.8 did (S383). 128K is Opus 5.5's output ceiling.
+                "max_tokens": 128000,
                 "thinking": {"type": "adaptive"},
                 "messages": [{"role": "user", "content": prompt}],
             }
@@ -561,6 +565,10 @@ class SynthesisDiscoveryAgent:
                     final = stream.get_final_message()
                     input_tokens = final.usage.input_tokens
                     output_tokens = final.usage.output_tokens
+                    if final.stop_reason == "max_tokens":
+                        self.logger.error(
+                            f"[{tag}] OUTPUT CUT OFF at max_tokens={stream_kwargs['max_tokens']:,}: "
+                            "the last observation is incomplete and any after it are missing")
 
                 dt = time.time() - t0
                 self.logger.info(

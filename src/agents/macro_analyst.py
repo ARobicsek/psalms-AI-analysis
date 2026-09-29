@@ -187,7 +187,7 @@ Take your time. Think deeply. Produce a thesis that will guide meaningful verse-
 
 class MacroAnalyst:
     """
-    Pass 1: Macro Analysis Agent using Claude Opus 4.8.
+    Pass 1: Macro Analysis Agent using Claude Opus 5.5 (Session 387).
 
     Produces chapter-level thesis and structural framework for a psalm,
     leveraging RAG context and analytical framework.
@@ -199,8 +199,9 @@ class MacroAnalyst:
         >>> print(analysis.to_markdown())
     """
 
-    # Class-level constant for the default model (single source of truth)
-    DEFAULT_MODEL = "claude-opus-4-8"
+    # Class-level constant for the default model (single source of truth).
+    # Session 387: Opus 5.5 at effort high (model_effort.py), after the S383 A/B on Ps 76.
+    DEFAULT_MODEL = "claude-opus-5-5"
 
     def __init__(
         self,
@@ -220,7 +221,7 @@ class MacroAnalyst:
             docs_dir: Path to docs directory (for RAG documents)
             logger: Logger instance (or will create default)
             cost_tracker: CostTracker instance for tracking API costs
-            model: Model to use (default: claude-opus-4-8)
+            model: Model to use (default: DEFAULT_MODEL, claude-opus-5-5)
         """
         self.model = model or self.DEFAULT_MODEL  # Use class constant for single source of truth
         self.logger = logger or get_logger("macro_analyst")

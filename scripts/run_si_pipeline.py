@@ -304,15 +304,15 @@ def run_enhanced_pipeline(
     skip_combined_doc: bool = False,  # DEPRECATED V4: no combined doc
     smoke_test: bool = False,
     skip_default_commentaries: bool = False,
-    master_editor_model: str = "claude-opus-5",
-    synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 4.8)
+    master_editor_model: str = "claude-opus-5-5",
+    synthesis_discovery_model: str = None,   # None -> synthesis_discovery.DEFAULT_MODEL (Opus 5.5 since S387)
     skip_questions: bool = True,     # Session 280: skipped by default, use --include-questions
     exclude_questions: bool = False,
     skip_copy_editor: bool = False,  # Session 280: copy editor runs by default
     skip_lit_echoes: bool = False,   # Session 338: literary echoes runs by default (regenerates on every run)
     skip_beta_reader: bool = True,   # Session 372: OFF by default — see --beta-reader below
     special_instruction_file: str = None,
-    macro_model: str = "claude-opus-4-8",
+    macro_model: str = "claude-opus-5-5",
     question_model: str = "gpt-5.6-terra",
     copy_model: str = "gpt-5.6-terra",
     synthesis_discovery: bool = True,
@@ -512,8 +512,8 @@ def run_enhanced_pipeline(
             lit_echoes_cost = lit_result.total_cost
             logger.info(
                 f"[STEP 1b] Literary echoes complete — ${lit_result.total_cost:.4f} "
-                f"({len(lit_result.exclusion_authors)} authors excluded from last "
-                f"{len(lit_result.exclusion_source_files)} files)"
+                f"({len(lit_result.exclusion_authors)} recently used authors excluded, "
+                f"{len(lit_result.overused_authors)} overused)"
             )
         except Exception as e:
             halt_on_quota(e, "STEP 1b: Literary Echoes", logger, cost_tracker, output_path, psalm_number)
@@ -673,7 +673,7 @@ def run_enhanced_pipeline(
             print(f"\n{'='*80}")
             print(f"STEP 3.5: Cross-Verse Synthesis Discovery (Session 347)")
             print(f"{'='*80}\n")
-            # SYNTHESIS DISCOVERY IS PINNED TO ITS OWN DEFAULT (Opus 4.8) and no longer
+            # SYNTHESIS DISCOVERY IS PINNED TO ITS OWN DEFAULT (Opus 5.5 since S387) and no longer
             # follows the writer. This line used to read `master_editor_model if "claude"
             # in ...`, so flipping the writer to Opus 5 in Session 373 would have silently
             # dragged the discovery sidecar along with it. Author's call: only the WRITER
@@ -1064,12 +1064,12 @@ if __name__ == "__main__":
     parser.add_argument("--smoke-test", action="store_true")
     parser.add_argument("--skip-default-commentaries", action="store_true")
     # Session 373: production writer is Opus 5 — see run_enhanced_pipeline.py.
-    parser.add_argument("--master-editor-model", type=str, default="claude-opus-5",
-                       choices=["claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
-                       help="Model for Master Writer (default: claude-opus-5)")
+    parser.add_argument("--master-editor-model", type=str, default="claude-opus-5-5",
+                       choices=["claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6"],
+                       help="Model for Master Writer (default: claude-opus-5-5)")
     parser.add_argument("--synthesis-discovery-model", type=str, default=None,
                        help="Model for the cross-verse synthesis sidecar "
-                            "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-4-8).")
+                            "(default: synthesis_discovery.DEFAULT_MODEL, currently claude-opus-5-5).")
     # Session 280: questions are SKIPPED by default.
     # --include-* flags opt back in; --skip-* flags remain for backward compat.
     parser.add_argument("--skip-questions", action="store_true",
@@ -1151,7 +1151,7 @@ if __name__ == "__main__":
     # Session 367: the GPT default moved gpt-5.4 -> gpt-5.6-terra (same tier,
     # same price). The --gpt-5-4-* flags keep their names and now act as
     # "pin back to the pre-367 model" escape hatches.
-    macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else "claude-opus-4-8"
+    macro_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_macro) else MacroAnalyst.DEFAULT_MODEL
     question_mdl = "gpt-5.4" if (args.gpt_5_4_all or args.gpt_5_4_question) else "gpt-5.6-terra"
     # Session 368: the copy editor is the one GPT agent NOT on Terra — Terra
     # overreaches as an editor (docs/plans/COPY_EDITOR_TERRA_FINDINGS.md), so it

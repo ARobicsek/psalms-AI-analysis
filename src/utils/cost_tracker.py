@@ -19,7 +19,7 @@ Date: 2025-11-25
 
 import logging
 from datetime import date
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from dataclasses import dataclass, field
 
 logger = logging.getLogger(__name__)
@@ -523,6 +523,15 @@ def price_tokens(
     )
 
 
+def _price_usage(model: str, d: Dict[str, int], on_date: Optional[date] = None) -> float:
+    """Cost of a usage delta (CostTracker field names) at the rates of `on_date`."""
+    p = resolve_pricing(model, on_date) or _ZERO_ROW
+    return (d.get("input_tokens", 0) * p["input"] + d.get("output_tokens", 0) * p["output"]
+            + d.get("thinking_tokens", 0) * p["thinking"] + d.get("cache_read_tokens", 0) * p["cache_read"]
+            + d.get("cache_write_tokens", 0) * p["cache_write"]
+            + d.get("cache_write_1h_tokens", 0) * p.get("cache_write_1h", 2.0 * p["input"])) / 1_000_000
+
+
 class CostTracker:
     """
     Track API usage and costs across all models in the pipeline.
@@ -539,6 +548,67 @@ class CostTracker:
         self.events: List[Dict[str, str]] = []
         # Models seen that have no row in PRICING. Non-empty => every total is a floor.
         self.unpriced_models: set = set()
+        # Session 387: money that is not tokens (OpenAI's $10 per 1,000 web searches),
+        # and per-stage deltas recorded by the pipeline. Both are in every total.
+        self.charges: List[Dict] = []
+        self.stages: List[Dict] = []
+        self.notes: List[str] = []   # free-text caveats for the cost report (e.g. unrecorded spend)
+        self._attempt = 1
+
+    # -- non-token charges and per-stage accounting (Session 387) ----------------
+    def load_dict(self, d: Dict) -> None:
+        """Continue a saved psalm_NNN_cost.json (a resumed or partial re-run). Earlier stages
+        keep their records and are marked with the attempt they belonged to, so a stage that
+        runs again is shown twice rather than silently replacing the money already spent."""
+        for model, row in d.items():
+            if not isinstance(row, dict) or "input_tokens" not in row:
+                continue
+            u = self.usage_by_model.setdefault(model, ModelUsage(model_name=model))
+            for f in self._USAGE_FIELDS:
+                setattr(u, f, getattr(u, f) + int(row.get(f, 0) or 0))
+        self.events += list(d.get("events", []))
+        self.charges += list(d.get("charges", []))
+        prev = max([s.get("attempt", 1) for s in d.get("stages", [])] or [0])
+        self._attempt = prev + 1
+        self.stages += [dict(s, attempt=s.get("attempt", 1)) for s in d.get("stages", [])]
+        self.notes += list(d.get("notes", []))
+
+    def add_charge(self, label: str, usd: float, model: Optional[str] = None, detail: str = ""):
+        """A fee billed per call rather than per token, e.g. web search. Counted in
+        get_total_cost(), so a stage's cost delta includes it."""
+        self.charges.append({"label": label, "usd": float(usd), "model": model, "detail": detail})
+
+    _USAGE_FIELDS = ("call_count", "input_tokens", "output_tokens", "thinking_tokens",
+                     "cache_read_tokens", "cache_write_tokens", "cache_write_1h_tokens")
+
+    def snapshot(self) -> Dict:
+        """The tracker's state now, for record_stage()."""
+        return {"usage": {m: {f: getattr(u, f) for f in self._USAGE_FIELDS}
+                          for m, u in self.usage_by_model.items()},
+                "n_charges": len(self.charges)}
+
+    def record_stage(self, name: str, since: Dict) -> Dict:
+        """Record what was spent since `since` (a snapshot()) as one pipeline stage: per
+        model, the token counts and the cost at today's rates, plus the cost at the
+        DURABLE rates wherever an introductory price was applied (INTRO_PRICING)."""
+        models = {}
+        for m, u in self.usage_by_model.items():
+            before = since["usage"].get(m, {})
+            d = {f: getattr(u, f) - before.get(f, 0) for f in self._USAGE_FIELDS}
+            if not any(d.values()):
+                continue
+            row = dict(d, cost_usd=round(_price_usage(m, d), 6))
+            promo = INTRO_PRICING.get(m)
+            if promo and date.today() <= promo["through"]:
+                row["promo_through"] = promo["through"].isoformat()
+                row["cost_usd_at_durable_rates"] = round(_price_usage(m, d, date.max), 6)
+            models[m] = row
+        charges = self.charges[since["n_charges"]:]
+        stage = {"stage": name, "attempt": self._attempt, "models": models, "charges": charges,
+                 "cost_usd": round(sum(r["cost_usd"] for r in models.values())
+                                   + sum(c["usd"] for c in charges), 6)}
+        self.stages.append(stage)
+        return stage
 
     def log_event(self, agent_name: str, event_type: str, message: str):
         """Log a pipeline event (e.g., error, retry)."""
@@ -652,11 +722,11 @@ class CostTracker:
         }
 
     def get_total_cost(self) -> float:
-        """Calculate total cost across all models."""
+        """Calculate total cost across all models, plus non-token charges."""
         total = 0.0
         for model in self.usage_by_model.keys():
             total += self.calculate_cost(model)["total_cost"]
-        return total
+        return total + sum(c["usd"] for c in self.charges)
 
     def get_summary(self) -> str:
         """
@@ -707,6 +777,16 @@ class CostTracker:
             lines.append(f"  TOTAL: ${costs['total_cost']:.4f}")
             grand_total += costs['total_cost']
 
+        if self.charges:
+            lines.append("\nNON-TOKEN CHARGES")
+            lines.append("-" * 80)
+            by_label: Dict[str, float] = {}
+            for c in self.charges:
+                by_label[c["label"]] = by_label.get(c["label"], 0.0) + c["usd"]
+            for label, usd in sorted(by_label.items()):
+                lines.append(f"  {label}: ${usd:.4f}")
+                grand_total += usd
+
         lines.append("\n" + "=" * 80)
         if self.unpriced_models:
             lines.append(f"GRAND TOTAL: ${grand_total:.4f}   *** FLOOR, NOT ACTUAL ***")
@@ -750,4 +830,11 @@ class CostTracker:
         # Its presence means total_cost is a floor: some model was billed at $0.00.
         if self.unpriced_models:
             result["unpriced_models"] = sorted(self.unpriced_models)
+        # Session 387, same rule: only when present, so older cost JSONs keep their shape.
+        if self.charges:
+            result["charges"] = self.charges
+        if self.stages:
+            result["stages"] = self.stages
+        if self.notes:
+            result["notes"] = self.notes
         return result

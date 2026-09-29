@@ -707,8 +707,21 @@ class MasterEditor(MasterEditorV2):
 
     Inherits all machinery from MasterEditorV2 (archived) and overrides:
     - _format_analysis_for_prompt()  -> new labels (no pipeline terminology)
-    - _perform_writer_synthesis()    -> single V4 prompt (ignores is_college)
+    - _perform_writer_synthesis()    -> builds the V4 prompt (ignores is_college), then
+                                        runs the two-call forest writer (Session 387) or,
+                                        with writer_mode="v4", the old one-call prompt
+
+    MasterEditorSI overrides _perform_writer_synthesis with its own template, so the SI
+    pipeline still runs the one-call V4-SI prompt.
     """
+
+    WRITER_MODES = ("forest", "v4")
+
+    def __init__(self, *args, writer_mode: str = "forest", **kwargs):
+        if writer_mode not in self.WRITER_MODES:
+            raise ValueError(f"writer_mode must be one of {self.WRITER_MODES}, not {writer_mode!r}")
+        super().__init__(*args, **kwargs)
+        self.writer_mode = writer_mode
 
     def _format_analysis_for_prompt(self, analysis: Dict, analysis_type: str) -> str:
         """Override to use v4 labels and include lexical insights for micro.
@@ -871,7 +884,7 @@ class MasterEditor(MasterEditorV2):
         psalm_number: int,
         output_path: Path,
         skip_if_exists: bool = True,
-        model: str = "claude-opus-4-8",
+        model: Optional[str] = None,
     ) -> Path:
         """Run the SynthesisDiscoveryAgent and save observations to disk.
 
@@ -885,7 +898,7 @@ class MasterEditor(MasterEditorV2):
         When skip_if_exists is True and the file already exists with content,
         this returns immediately without calling the API.
         """
-        from src.agents.synthesis_discovery import SynthesisDiscoveryAgent
+        from src.agents.synthesis_discovery import SynthesisDiscoveryAgent, DEFAULT_MODEL as SD_DEFAULT_MODEL
 
         output_path = Path(output_path)
         output_path.mkdir(parents=True, exist_ok=True)
@@ -942,7 +955,7 @@ class MasterEditor(MasterEditorV2):
 
         agent = SynthesisDiscoveryAgent(
             cost_tracker=self.cost_tracker,
-            model=model,
+            model=model or SD_DEFAULT_MODEL,
             logger=self.logger,
         )
         result = agent.discover(
@@ -1225,9 +1238,218 @@ class MasterEditor(MasterEditorV2):
 
         # Call model (inherited methods handle the actual API call)
         if "claude" in model.lower():
+            # Session 387: the two-call forest writer is production. It takes only the
+            # INPUTS block of the prompt built above; the V4 rules and task are not sent.
+            if getattr(self, "writer_mode", "forest") == "forest":
+                return self._call_forest_writer(model, prompt, psalm_number, debug_prefix)
             return self._call_claude_writer(model, prompt, psalm_number, debug_prefix)
         else:
+            if getattr(self, "writer_mode", "forest") == "forest":
+                self.logger.warning(f"The forest writer is Claude-only; {model} runs the one-call V4 prompt")
             return self._call_gpt_writer(model, prompt, psalm_number, debug_prefix)
+
+    # -------------------------------------------------------------------------
+    # The two-call forest writer (Session 387). Prompts and checks: forest_writer.py
+    # -------------------------------------------------------------------------
+
+    @staticmethod
+    def _forest_usage(us) -> Dict[str, int]:
+        cc = getattr(us, "cache_creation", None)
+        if cc is not None:
+            w5 = getattr(cc, "ephemeral_5m_input_tokens", 0) or 0
+            w1h = getattr(cc, "ephemeral_1h_input_tokens", 0) or 0
+        else:
+            w5, w1h = getattr(us, "cache_creation_input_tokens", 0) or 0, 0
+        return {"input": us.input_tokens or 0, "cache_write": w5, "cache_write_1h": w1h,
+                "cache_read": getattr(us, "cache_read_input_tokens", 0) or 0,
+                "output": us.output_tokens or 0}
+
+    def _forest_record(self, model: str, label: str, u: Dict[str, int], seconds: float,
+                       stop_reason: str) -> Dict:
+        """Bill one call to the cost tracker and return its telemetry row."""
+        from src.utils.cost_tracker import resolve_pricing
+        self.cost_tracker.add_usage(
+            model=model, input_tokens=u["input"], output_tokens=u["output"], thinking_tokens=0,
+            cache_read_tokens=u["cache_read"], cache_write_tokens=u["cache_write"],
+            cache_write_1h_tokens=u["cache_write_1h"])
+        p = resolve_pricing(model) or {}
+        cost = (u["input"] * p.get("input", 0) + u["cache_write"] * p.get("cache_write", 0)
+                + u["cache_write_1h"] * p.get("cache_write_1h", 0) + u["cache_read"] * p.get("cache_read", 0)
+                + u["output"] * p.get("output", 0)) / 1_000_000
+        row = {"label": label, "model": model, "usage": u, "cost_usd": round(cost, 4),
+               "seconds": round(seconds), "stop_reason": stop_reason}
+        self._forest_calls.append(row)
+        return row
+
+    def _forest_keepalive(self, base_kwargs: Dict, turn1: List[Dict]) -> None:
+        """Re-read the cached first turn so the 5-minute entry outlives a long essay call.
+        max_tokens=0: nothing is generated; same thinking and effort, which are part of
+        the cached prefix."""
+        import time
+        try:
+            t0 = time.time()
+            kw = dict(base_kwargs, max_tokens=0, messages=[{"role": "user", "content": turn1}])
+            msg = self.anthropic_client.messages.create(**kw)
+            u = self._forest_usage(msg.usage)
+            self._forest_record(kw["model"], "essay_keepalive", u, time.time() - t0, msg.stop_reason)
+            self.logger.info(f"[forest] cache keep-alive: read {u['cache_read']:,}, wrote {u['cache_write']:,}")
+        except Exception as e:  # a failed keep-alive costs at most a cache miss later
+            self.logger.warning(f"[forest] cache keep-alive failed ({str(e)[:160]}); "
+                                "call 2 may pay a fresh cache write")
+
+    def _forest_stream(self, base_kwargs: Dict, messages: List[Dict], label: str,
+                       keepalive_turn: Optional[List[Dict]] = None) -> Dict:
+        """One streamed call, retried on transient errors and content-filter blocks."""
+        import threading
+        import time
+
+        import anthropic
+
+        from src.agents.forest_writer import KEEPALIVE_AFTER_S
+
+        last_err = None
+        for attempt in range(3):
+            timer = None
+            if keepalive_turn is not None:
+                timer = threading.Timer(KEEPALIVE_AFTER_S, self._forest_keepalive,
+                                        args=(base_kwargs, keepalive_turn))
+                timer.daemon = True
+                timer.start()
+            try:
+                t0 = time.time()
+                with self.anthropic_client.messages.stream(**base_kwargs, messages=messages) as stream:
+                    msg = stream.get_final_message()
+                u = self._forest_usage(msg.usage)
+                row = self._forest_record(base_kwargs["model"], label, u, time.time() - t0, msg.stop_reason)
+                text = "".join(b.text for b in msg.content if b.type == "text")
+                thinking = "\n\n".join(b.thinking for b in msg.content if b.type == "thinking" and b.thinking)
+                if msg.stop_reason == "refusal":
+                    raise RuntimeError(f"refusal: {getattr(msg, 'stop_details', None)}")
+                if msg.stop_reason != "end_turn" or not text.strip():
+                    raise RuntimeError(f"stop_reason={msg.stop_reason}, text chars={len(text)}")
+                self.logger.info(
+                    f"[forest] {label}: {row['seconds']}s, ${row['cost_usd']:.4f}; in {u['input']:,} + "
+                    f"cache read {u['cache_read']:,} + cache write {u['cache_write']:,}; out {u['output']:,}")
+                return {"text": text, "thinking": thinking, "content": [b.to_dict() for b in msg.content]}
+            except anthropic.BadRequestError as e:
+                if "content filtering" not in str(e).lower():
+                    raise  # a malformed request will not fix itself
+                last_err = e
+            except Exception as e:
+                last_err = e
+            finally:
+                if timer is not None:
+                    timer.cancel()
+            self.logger.warning(f"[forest] {label}: attempt {attempt + 1} failed: {str(last_err)[:200]}")
+            time.sleep(15 * (attempt + 1))
+        raise RuntimeError(f"forest writer {label}: all attempts failed: {last_err}")
+
+    def _call_forest_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
+        """Call 1 writes the essay; call 2, the next turn of the same conversation, writes
+        the liturgical section and the verse commentary. See forest_writer.py.
+
+        Resumable: call 1's full content (thinking signatures included) is saved beside the
+        psalm's outputs with a hash of the first turn. If call 2 fails, the next run on the
+        same first turn reuses that essay instead of paying for it twice; once call 2 has
+        finished, the file is marked done and never reused."""
+        import hashlib
+        import json
+
+        from src.agents import forest_writer as fw
+        from src.utils.debug_paths import psalm_output_dir
+        from src.utils.debug_paths import thinking_file as writer_thinking_path
+        from src.utils.model_effort import apply_effort, effort_for
+
+        if effort_for(model) == "max":
+            raise ValueError("the forest writer must not run at effort max: on Opus 5.5 it spent all "
+                             "128K output tokens thinking and wrote nothing (S384)")
+        inputs = fw.extract_inputs_block(prompt)
+        essay_instr = fw.essay_instructions(psalm_number, inputs)
+        verses = fw.psalm_verse_numbers(inputs)
+        verse_instr = fw.verse_instructions(len(verses))
+        turn1 = fw.first_turn(inputs, essay_instr)
+        self._forest_calls: List[Dict] = []
+
+        out_dir = psalm_output_dir(psalm_number, create=True)
+        stem = f"psalm_{psalm_number:03d}"
+        sent = Path(f"output/debug/{debug_prefix}_forest_prompt_psalm_{psalm_number}.txt")
+        sent.write_text(inputs + essay_instr + "\n\n=== CALL 2: NEXT USER TURN (after the essay) ===\n\n"
+                        + verse_instr, encoding="utf-8")
+        self.logger.info(f"[forest] inputs {len(inputs):,} chars, essay instructions {len(essay_instr):,}, "
+                         f"verse instructions {len(verse_instr):,}; {len(verses)} verses, "
+                         f"{len(fw.commentator_names(inputs))} commentators; sent prompt saved to {sent}")
+
+        thinking_cfg = {"type": "adaptive"}
+        from src.agents.archive.master_editor_v2 import THINKING_DISPLAY_MODELS
+        if any(m in model for m in THINKING_DISPLAY_MODELS):
+            thinking_cfg["display"] = "summarized"
+        base = {"model": model, "max_tokens": 128000, "thinking": thinking_cfg}
+        apply_effort(base, model, self.logger)
+
+        # Call 1: the essay (writes the cache entry on the first turn).
+        turn1_hash = hashlib.sha256(json.dumps(turn1, ensure_ascii=False).encode("utf-8")).hexdigest()
+        saved = out_dir / f"{stem}_forest_essay_call.json"
+        essay = None
+        if saved.exists():
+            data = json.loads(saved.read_text(encoding="utf-8"))
+            # Only an essay whose verse call never finished: a deliberate re-run of the
+            # writer on the same inputs must get a new essay, not the old one.
+            if data.get("turn1_sha256") == turn1_hash and not data.get("verse_call_done"):
+                essay = data["result"]
+                self.logger.info(f"[forest] reusing the saved essay call ({saved.name}); "
+                                 "call 2 will pay a fresh cache write")
+        if essay is None:
+            self.logger.info("[forest] call 1: the introduction essay ...")
+            essay = self._forest_stream(base, [{"role": "user", "content": turn1}], "essay",
+                                        keepalive_turn=turn1)
+            saved.write_text(json.dumps({"turn1_sha256": turn1_hash, "result": essay}, ensure_ascii=False),
+                             encoding="utf-8")
+        essay_problems = fw.check_essay(essay["text"])
+        for p in essay_problems:
+            self.logger.error(f"[forest] essay: {p}")
+
+        # Call 2: liturgy + verses, replaying call 1's thinking unchanged.
+        self.logger.info("[forest] call 2: liturgy and verse commentary ...")
+        messages = [{"role": "user", "content": turn1},
+                    {"role": "assistant", "content": fw.replayable(essay["content"])},
+                    {"role": "user", "content": [{"type": "text", "text": verse_instr}]}]
+        rest = self._forest_stream(base, messages, "verses")
+        saved.write_text(json.dumps({"turn1_sha256": turn1_hash, "result": essay, "verse_call_done": True},
+                                    ensure_ascii=False), encoding="utf-8")
+        problems = fw.check_structure(rest["text"], verses)
+        for p in problems:
+            self.logger.error(f"[forest] verse call: {p}")
+
+        full = fw.assemble(essay["text"], rest["text"])
+        Path(f"output/debug/{debug_prefix}_response_psalm_{psalm_number}.txt").write_text(full, encoding="utf-8")
+
+        # Thinking capture: the standard file (both parts, headed) plus one file per call,
+        # which the DOCX appendix reads.
+        parts = [("Essay call", essay["thinking"]), ("Verse-commentary call", rest["thinking"])]
+        writer_thinking_path(psalm_number, debug_prefix).write_text(
+            "\n\n".join(f"## {h}\n\n{t}" for h, t in parts if t), encoding="utf-8")
+        for key, (_, t) in zip(("forest_essay", "forest_verses"), parts):
+            writer_thinking_path(psalm_number, f"{debug_prefix}_{key}").write_text(t or "", encoding="utf-8")
+            if not t:
+                self.logger.warning(f"[forest] no summarized thinking came back for the {key} call")
+
+        telemetry = {"model": model, "effort": effort_for(model), "calls": self._forest_calls,
+                     "total_cost_usd": round(sum(c["cost_usd"] for c in self._forest_calls), 4),
+                     "verses": len(verses), "essay_problems": essay_problems,
+                     "structure_problems": problems,
+                     "chars": {"inputs": len(inputs), "essay_instructions": len(essay_instr),
+                               "verse_instructions": len(verse_instr), "essay": len(essay["text"]),
+                               "rest": len(rest["text"])}}
+        (out_dir / f"{stem}_writer_calls.json").write_text(json.dumps(telemetry, indent=2), encoding="utf-8")
+
+        result = self._parse_writer_response(full, psalm_number)
+        result["input_char_count"] = len(inputs) + len(essay_instr) + len(verse_instr)
+        result["input_token_count"] = sum(c["usage"]["input"] + c["usage"]["cache_read"]
+                                          + c["usage"]["cache_write"] + c["usage"]["cache_write_1h"]
+                                          for c in self._forest_calls if c["label"] != "essay_keepalive")
+        result["output_token_count"] = sum(c["usage"]["output"] for c in self._forest_calls)
+        result["writer_telemetry"] = telemetry
+        return result
 
     def _call_claude_writer(self, model: str, prompt: str, psalm_number: int, debug_prefix: str) -> Dict[str, str]:
         """Override V2 to add automatic retry on content-filter blocks.
